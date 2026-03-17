@@ -4,63 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BFF2FB5EBB
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 05:07:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A765FB5EAF
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 05:07:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEA758409B;
-	Tue, 17 Mar 2026 06:07:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2A3F68407D;
+	Tue, 17 Mar 2026 06:07:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="uIZ8bq13";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="RcwlPD/4";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="oSvdAOPX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46A1384067; Tue, 17 Mar 2026 06:07:16 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id B2DE48401A; Tue, 17 Mar 2026 06:07:17 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 016BF8401A
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 06:07:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D25998405A
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 06:07:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4fZg1X63Y3z9tRk;
- Tue, 17 Mar 2026 06:07:12 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4fZg1b4KpXz9tvd;
+ Tue, 17 Mar 2026 06:07:15 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1773724032;
+ s=mail20150812; t=1773724035;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Hy18M6TBcDjMyW4ewxdkTftF3q/zxh3BVTLPrPoNSj4=;
- b=uIZ8bq13Hoau0Ry/cMw73UjhObhtn2K6R4iF7XoFO3+XTi7fZ3fiChgfQbdcVSOBodfStd
- BWirP9bwPqORpjdmjlSKz5TI0vc87FK3AbTdH4CErXW4pjAsyTrFZEVY+ANs7XsopHsLOr
- q11ebRTJDw3TnoTZ1e37WV0BrVBhRgo8sSK1YJGDz3by7qWwIjRwPrKJYaNMrUdoUrob80
- DlNfZkGhSSk/zIF6jtDtlLg78JWhxqRpjfvzs2RKoa/9GgyVf5k24/ZDhHD2FaAm0ifDOb
- uVj6u+c3lDvQQnw1h5ys79lyrB7SklnPvxFEuVQO0OKInEFbtu1CvpcMWBDd1A==
-Message-ID: <533317d3-76f5-4e6f-a8f1-d879fc642de2@mailbox.org>
-Date: Tue, 17 Mar 2026 03:32:16 +0100
+ bh=DGdCp0rQs1OwwcsmCewJgkIPUCam9GqZcHzQQJH2bl8=;
+ b=RcwlPD/4qJePinLQqB8vXznPrprfiPnDu6dB/nQzSjeaALTtpXyrnp7KMw4Z4TuQPGi5UX
+ D6whkXx0jAcWJIC75uvhHnM8AGZHz//MbA3OlB3REMxATQ7poSN3W+g0DbixaPF6yjpy0u
+ 8EZS4x80VZTZIx+KGdP+H/kHjsgp3lEsmSN5V+exbFcp9fm0DDS0qMv/pzapYnxdhLgYtH
+ hTi2riaSg0puxH06MJX/TTmgKf3Q6PpDNOUWeX5iRp3KzB9wXyRI4OdytYdiy8E02MCWct
+ DIdVHThJSop2x6rsP0vXul7N9oHChD4YxcZxtgLj/26u7yLO71hWMSasv1Yugg==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=oSvdAOPX;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::202 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <ed88ec35-7d53-48df-a65b-7da1298e265b@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1773724034;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=DGdCp0rQs1OwwcsmCewJgkIPUCam9GqZcHzQQJH2bl8=;
+ b=oSvdAOPXvlM3QSek88F8n16O2dNjkcYvigzBJnI2Njv1ks8wzdRh5RSv0mTrGGawo6LicE
+ FYK63bTLjLJAs6cUpQLERkssbPz1SOh67nWmBb7Q4Nt8qNjG+fx7KX/CLXMHl5WrDe929E
+ E4vQfG9GD8vn5ChtAAUYxTGyx8XenkkrGsI9F6NaOfCMueA0C2uRzPSxi8ubthkXICxy/o
+ SVnW65gyvVepIBxjUqRlPEVXUuWpPW24MCOp84IFRGyc1ISk2uxA9Raiow8fQ+vDZjqOZo
+ +q++41oDfALsbFTWn5nfnAnJXXmT6pmKGXA59+J1uOxGkhTT8LhOmRtiOYshQA==
+Date: Tue, 17 Mar 2026 03:33:57 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH] optee: Correct dependencies for BOOTM_OPTEE
+Subject: Re: [PATCH] reset: Correct dependencies for RESET_RZG2L_USBPHY_CTRL
 To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Fabio Estevam <festevam@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@dh-electronics.com
-References: <20260317012452.4162719-1-trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+References: <20260317012443.4162600-1-trini@konsulko.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260317012452.4162719-1-trini@konsulko.com>
+In-Reply-To: <20260317012443.4162600-1-trini@konsulko.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: bb6f26afb73c0256547
-X-MBO-RS-META: qhhyxqwubsijwdz5nz5ex97ezxz9c3z5
+X-MBO-RS-ID: be0fe9826742d2f2596
+X-MBO-RS-META: buy33d9k9ume3oa34mdswbs5km4mozap
+X-Rspamd-Queue-Id: 4fZg1b4KpXz9tvd
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,45 +95,32 @@ X-Virus-Status: Clean
 
 On 3/17/26 2:24 AM, Tom Rini wrote:
 > As exposed by "make randconfig", we have an issue with the dependencies
-> for BOOTM_OPTEE. This symbol needs to select BOOTM_LINUX and in turn
-> that is only valid for CMD_BOOTM or CMD_BOOTZ. Add this dependency.
+> for RESET_RZG2L_USBPHY_CTRL. As REGULATOR_RZG2L_USBPHY depends on
+> DM_REGULATOR this symbol must also depend on it as well.
 > 
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
-> I am looking for feedback on this, so I've added the board maintainers
-> for the platforms which enable this option. It looks like this is only
-> valid on 32bit ARM platforms, to start with and not 64bit, is that
-> correct? That's why I excluded CMD_BOOTI from the list. I suspect that
-> this should really depend on CMD_BOOT{M,Z} and BOOTM_LINUX, and not
-> select it. If someone can confirm, I can do that instead, or someone can
-> just do the replacement patch for this. Thanks!
-> 
-> Cc: "Bryan O'Donoghue" <bryan.odonoghue@linaro.org>
-> Cc: Fabio Estevam <festevam@gmail.com>
-> Cc: Marek Vasut <marek.vasut@mailbox.org>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: u-boot@dh-electronics.com
+> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
->   lib/optee/Kconfig | 1 +
->   1 file changed, 1 insertion(+)
+>   drivers/reset/Kconfig | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/lib/optee/Kconfig b/lib/optee/Kconfig
-> index 34b9d8afe675..9251faf73cd7 100644
-> --- a/lib/optee/Kconfig
-> +++ b/lib/optee/Kconfig
-> @@ -40,6 +40,7 @@ config OPTEE_TZDRAM_SIZE
+> diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
+> index 66911199c8ba..3f0ec50510c0 100644
+> --- a/drivers/reset/Kconfig
+> +++ b/drivers/reset/Kconfig
+> @@ -239,7 +239,7 @@ config RESET_AT91
 >   
->   config BOOTM_OPTEE
->   	bool "Support OPTEE bootm command"
-> +	depends on CMD_BOOTM || CMD_BOOTZ
-ARM32 SPL arch/arm/lib/spl.c has this piece of code, which does not 
-depend on "bootm" command. This is used by falcon boot to jump into 
-optee-os , with the optee-os return address being Linux kernel entry 
-point. So I don't think depending on CMD_BOOT{M,Z,I} is enough ?
+>   config RESET_RZG2L_USBPHY_CTRL
+>   	bool "Enable support for Renesas RZ/G2L USB 2.0 PHY control"
+> -	depends on DM_RESET
+> +	depends on DM_RESET && DM_REGULATOR
+>   	select REGULATOR_RZG2L_USBPHY
+But this already selects REGULATOR_RZG2L_USBPHY , which according to 
+drivers/power/regulator/Kconfig contains:
 
-77 #if defined(CONFIG_BOOTM_OPTEE) && defined(CONFIG_ARM) && 
-!defined(CONFIG_ARM64)
-78         if (spl_image->optee_addr)
-79                 boot_jump_linux_via_optee((void 
-*)(spl_image->entry_point),
+508 config REGULATOR_RZG2L_USBPHY
+509         bool "Enable driver for RZ/G2L USB PHY VBUS supply"
+510         depends on DM_REGULATOR
+
+which does depend on DM_REGULATOR transitively ?
