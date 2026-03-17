@@ -4,97 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2B04FD877E
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:21:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 578EEFD877D
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:24:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47D2484332;
-	Tue, 17 Mar 2026 15:21:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C9B998435B;
+	Tue, 17 Mar 2026 15:24:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="i6X9s1BY";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="DTPQPqpV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36B348433B; Tue, 17 Mar 2026 15:21:38 +0100 (CET)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
+ id DC6928435B; Tue, 17 Mar 2026 15:24:17 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E14B884011
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:21:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AEA9384332
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:24:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-4042fe53946so2208795fac.3
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:21:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4852e09e23dso49670905e9.0
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:24:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773757294; x=1774362094;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773757455; x=1774362255;
  darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=oOeKMQh4wGO20fsss9Z+8h5pJKR8hh7tKES9RQAvAx4=;
- b=i6X9s1BYONxvMEuvhEYB/vT+qofgzEr02aeRggjsJ7SWnTCem/QmgrpFkADjG89vI9
- OWltnm79uoDl/cApyAcZMxRFEDXh8hgIfxND5bhSw7NqLF8YkhABFVHAsgJXns3TaPkc
- I8Vkzss3EfEKiB4RW7iTp3j1sFdBi+fODXV4P1s4NfUd11QLFQNFjshxlIl9QNMUfi9I
- GAuPQUJutBwuTLIdd4fxZUVzUKTj63v62jhzcVCECgy8yZdONMAMIS7hOmMhTbi/3KXW
- VYiVtn41BGjYmzq9Xna7I8jFQ5yg/8Lltkk+2KM9c3cQOxS0cB6PRZ9DQst4hfKRofQq
- E8ng==
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZTJBWF7wDqtAefJqlDpSephy2XVmWIkEFcuMtgxG8Fo=;
+ b=DTPQPqpV89b3gKHN7jD3aE4UV9Exz/x/kr1+vgpPtaeyoRalRc6M8E2ENbUHmqDZDF
+ yOaVMcmIBGADwblRv5uJapTCeArkq5iGstevJ1kaw5BQUDPsm95A5nIIApkJMcLgWBW6
+ TWi6tuG7kmfaDMQVAAMWVOt90k/jDPIt4w9C7xRytG7cwP6Z6JYZcye7LHnviEEWw0se
+ t5CFPA6wgylJWmfKO2BdVsk6t/Yjx//0zKq9IV8OVr0hGHcWUiLikttUVrFQs+QGZkVE
+ qMdsQo5YGF69Myg1DuyJ9mRw4HaOBPIiXxADwB3eNyt3rgJBzxjKEN5N7PBSb8AuGhub
+ HvRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773757294; x=1774362094;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=oOeKMQh4wGO20fsss9Z+8h5pJKR8hh7tKES9RQAvAx4=;
- b=a2UP990kuPzMq+OGo4KK7zrmXtICyPPs9OYJIDt42216NJIHw5E6Ha5BdQyLWF6GV/
- A0659kDuVx+e0gEBEKJ4VA5XbEmahnm/jMCcWXp98iuhwtL49vt95RsVEnqmyOygu52u
- utnHWQXoVq8Thet92TtGMuT9KiIuU8/WT2qN6radQ4N3f2iY9vfXZiki8nQE97wynWxl
- Wy7ABSh0MkvtqUg6xkYoHOCD3Al7HaQujn5g6pXrxJzaMBcT2JJGOm8L5p7iiH6WVcwf
- OxsjRNLAHrw1XUQwOZLIePQKGrIgKeAdPJCSjYrJA2S9aRj2FKTu+ByMh6CmVT98fp7I
- 4eQw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVYofNhkYNb4XjfZj7QF3B7Kesz24B0BalZ+ui92z0FKXkiXw39coL7r5NgF4RBclyVX+Q4pcI=@lists.denx.de
-X-Gm-Message-State: AOJu0YxxmQcgJ0Fob2FKyucNAYSK0a+0fPsElQRGH3FuC+cFKcihwvuy
- u8+jMzJnpsn9tGUiTrZFqLmrMrcIX/uUkQil2VLCUniAjIttu9HVUgIG6FTidSl4pOI=
-X-Gm-Gg: ATEYQzwENDWnaDhh2wm8wXBE2IBgzWBmRDh4A2TpzoBCkg0UTQ7YBZM0k3RT1ZHMLr8
- OE7M15Qx/2/pme6ilYkYwTdk9FuFsEgV0trmADChMgCLB8iR6BXv2RsKKqFtlg70Cs1wP2uPMBG
- xPH2Bl6hasM0gge49GfuK9s9lU7iAyqSeUdPbtbSIY4YoNSBnGyEtI66zni10HhAHJ5Xa9Y/Dx9
- anaBP9NBiiLUBsXqQJM62j8XpqF/SkqA7JUCf5ZlyawuMLNFg4vTW5DIWp+3RAk7IcuAxauphhv
- /6GfZ3Qqnf5GzQz3yqqzU1FFX7Tv4PrV3Z5rtOYY78M0TPXR0P3MLAE8uP3Uc/YMRkqdr8Skjf0
- fdfFpnc9SNyWq/lmP4SF5BcBBUq9vR3seKvWPJgbxHhHwodVl3uoKef5giZ69C3c5E0HrHzwM6F
- frEPQ7jKbj+Jo+c9nlFS65RguhkqxnibEbjITOnSnqPsDfILzc4y+Wuz9Wb5gGQ5hR3ObmGeKxz
- 5417HHT+Q==
-X-Received: by 2002:a05:6870:aa9a:b0:417:2daf:6aa1 with SMTP id
- 586e51a60fabf-417b93d6d49mr11519671fac.37.1773757294371; 
- Tue, 17 Mar 2026 07:21:34 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:6995:28aa:eeda:102?
- ([2600:8803:e7e4:500:6995:28aa:eeda:102])
+ d=1e100.net; s=20251104; t=1773757455; x=1774362255;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZTJBWF7wDqtAefJqlDpSephy2XVmWIkEFcuMtgxG8Fo=;
+ b=I1XxvTGv62s/JWfhBChmuIFytTO4PGVCiPn8GyAAzbmF77lTJnbArdm1n9PI7IvpiR
+ xxxqBX7SClOppOBy0Tqvmu8NvQN2tFDV+IH2/8dTgRQQTw8mavzpL37vAsDtaALVGVQZ
+ 4rPNNygpAN5uIuBNATrJBD19t1tf1fS3knDjzAkfCe3dn/B0+BiUWgpHICA5MEzfIR8u
+ eqZQaoha0/t6sU5H24onIt06HDFLqJl4JrYvAWPOyOrkBg1LUjs3d9JgxPkwZRfMaWzI
+ ozueDC5sxdUtqzEevPyMXuWx+mVZGxXgPWxQwNFEL5zSPZNnIn9+CSYpSTYzHrP5f/AQ
+ D0Yw==
+X-Gm-Message-State: AOJu0Yx63c58omV02mSuZdWhnSHElC3T5t6bS4vBgfAiHrvdsij+ZNkx
+ qPjfBsT3Hak/8e3VppcHcb1CEjhnbrNXLK2HVbAGFYWPvuv59e5wf+jNy0R6EVDM6YU=
+X-Gm-Gg: ATEYQzxdWogjJKAQHWf7HYkP9M9kAWYPuIIec6iVMSbimlMEfTzSVFqCw4c38QiBw3C
+ nYFiuXZCT67dTlO0rhCHH6717Gb16SV7/nhG2a/ydLU2SY1/O9Dg1y+gVA09lgYSdjTcDiVyyHN
+ ARKGeegtPmmFAneULbrVBtiZoiuiDdeBncIxZXAWsK/NN9o5NbEWXqSYqwMPYSBkat75a1Fig03
+ LdnglKy90rO7g1+Po9/lU0CwHCkIkHXBbuMPykbYWywqA86eMQurdooayHyaGwLTyMhGIhkZ3tc
+ FiW6995aykybm1K/n+ADNVSHthc9QpUaRbFzvhSen9sjxB6Mo8Hi08gRtVytqd/gdwgwDWCNPKv
+ 3cPaSfNT61o+ytfXLOw1AJKnF1RiEKTdEVRxF+upTgPgW6kwReAJoS+CzecHHFHE7DahddAj3/j
+ sZg5T4/wq+VouN+Vr0hin9S6ar84U+5DP11fXdxWQt6jcI+LqWx6pYCrjhhbfr66R1e9WGznUoA
+ xxaPNEHLJmvtPUMQ8fErRvixy6TrOFF2eQpVUhDqCMzqZpz/2EP4dlvCiqFNnFaz+yYSQfkDEJl
+ ovDp9QA=
+X-Received: by 2002:a05:600c:4f54:b0:485:3b5b:eb8 with SMTP id
+ 5b1f17b1804b1-485567052b8mr291039845e9.26.1773757454978; 
+ Tue, 17 Mar 2026 07:24:14 -0700 (PDT)
+Received: from [192.168.1.100]
+ (2a02-842a-d52e-6101-b535-6f9c-731f-0b89.rev.sfr.net.
+ [2a02:842a:d52e:6101:b535:6f9c:731f:b89])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4177e25f037sm19148083fac.5.2026.03.17.07.21.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Mar 2026 07:21:33 -0700 (PDT)
-Message-ID: <67054ce9-c839-45f4-b73f-ec46899379e1@baylibre.com>
-Date: Tue, 17 Mar 2026 09:21:32 -0500
+ 5b1f17b1804b1-48556400f76sm125425675e9.1.2026.03.17.07.24.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Mar 2026 07:24:14 -0700 (PDT)
+From: Julien Stephan <jstephan@baylibre.com>
+Subject: [PATCH 00/11] MT8195: add ufs support
+Date: Tue, 17 Mar 2026 15:24:18 +0100
+Message-Id: <20260317-mt8195-add-ufs-support-v1-0-7d731ec438ae@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] drivers: mmc: mtk-sd: disable dma for MT8188 and MT8195
-To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>,
- "ht.lin" <ht.lin@mediatek.com>
-References: <20260317-mt8188-mt8195-disable-mmc-disable-dma-v1-1-220da4144920@baylibre.com>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260317-mt8188-mt8195-disable-mmc-disable-dma-v1-1-220da4144920@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/y3MQQqDMBCF4avIrDtgEiK1VyldmGa0s1DTmaQUx
+ Ls3VJffg/dvoCRMCrdmA6EPK69Lhbk08HwNy0TIsRpsa7vWGYNzvpre4xAjllFRS0qrZPTOU6A
+ YgrMO6jkJjfz9h++Pw0LvUvv5HPf9B+8HvQV9AAAA
+X-Change-ID: 20260311-mt8195-add-ufs-support-535ebedbb323
+To: u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
+ Tom Rini <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>, 
+ Julien Masson <jmasson@baylibre.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Chris-QJ Chen <chris-qj.chen@mediatek.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Julien Stephan <jstephan@baylibre.com>
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,76 +119,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/17/26 8:31 AM, Julien Stephan wrote:
-> MT8188 and MT8195 SoC should be fully compatible with MT8183, but
-> currently dma is not working on these SoC. For now, disable dma.
-> Investigation needed.
-> 
-> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-> ---
->  drivers/mmc/mtk-sd.c | 26 ++++++++++++++++++++++++++
->  1 file changed, 26 insertions(+)
-> 
-> diff --git a/drivers/mmc/mtk-sd.c b/drivers/mmc/mtk-sd.c
-> index 7a4bdee7496..8f93e51599f 100644
-> --- a/drivers/mmc/mtk-sd.c
-> +++ b/drivers/mmc/mtk-sd.c
-> @@ -1989,6 +1989,30 @@ static const struct msdc_compatible mt8189_compat = {
->  	.enhance_rx = true,
->  };
->  
-> +/* MT8188 and MT8195 should be fully compatible with MT8183
-> + * but currently dma is not working on these SoC.
-> + * For now, disable dma. Investigation needed.
-> + */
-> +static const struct msdc_compatible mt8188_compat = {
-> +	.clk_div_bits = 12,
-> +	.pad_tune0 = true,
-> +	.async_fifo = true,
-> +	.data_tune = true,
-> +	.busy_check = true,
-> +	.stop_clk_fix = true,
-> +	.enhance_rx = true,
-> +};
-> +
-> +static const struct msdc_compatible mt8195_compat = {
-> +	.clk_div_bits = 12,
-> +	.pad_tune0 = true,
-> +	.async_fifo = true,
-> +	.data_tune = true,
-> +	.busy_check = true,
-> +	.stop_clk_fix = true,
-> +	.enhance_rx = true,
-> +};
+This series adds ufs support MT8195.
+I also include in this series some cleanup on phy-mtk-ufs.c phy driver
+and ufs-mediatek.c mediatek ufs driver, and pmic support for MT8195.
 
-These are identical to mt8189_compat, so we could reuse that instead of
-duplicating it two more times. MT8189 is in the same situation that it
-should work, but needs investigation.
+UFS boot has been tested on a MT8395_EVK board.
+To enable ufs boot, we first need to erase mmc partitions.
 
-And actually mt8189_compat is also duplicate of mt7986_compat, so I probably
-shouldn't have added that one and just reused mt7986_compat.
+The configs in config mt8395_evk_ufs are the minimum configs needed to
+enable UFS. This has been validating with the following commands on
+u-boot (extra configs needed for non generic configuration):
 
-Another approach could be to revert the change that enabled DMA in mt8183_compat
-and add a new .compatible = "mediatek,mt8365-mmc" that has DMA enabled since
-that is the only board that has been tested where DMA is actually working.
+=> scsi reset
 
-> +
->  static const struct udevice_id msdc_ids[] = {
->  	{ .compatible = "mediatek,mt7620-mmc", .data = (ulong)&mt7620_compat },
->  	{ .compatible = "mediatek,mt7621-mmc", .data = (ulong)&mt7621_compat },
-> @@ -2001,6 +2025,8 @@ static const struct udevice_id msdc_ids[] = {
->  	{ .compatible = "mediatek,mt8516-mmc", .data = (ulong)&mt8516_compat },
->  	{ .compatible = "mediatek,mt8183-mmc", .data = (ulong)&mt8183_compat },
->  	{ .compatible = "mediatek,mt8189-mmc", .data = (ulong)&mt8189_compat },
-> +	{ .compatible = "mediatek,mt8188-mmc", .data = (ulong)&mt8188_compat },
-> +	{ .compatible = "mediatek,mt8195-mmc", .data = (ulong)&mt8195_compat },
->  	{}
->  };
->  
-> 
-> ---
-> base-commit: d31f96cac1e25153779c44f1fe014978f9b06032
-> change-id: 20260317-mt8188-mt8195-disable-mmc-disable-dma-b64499a6a47a
-> 
-> Best regards,
+Reset SCSI
+scanning bus for devices...
+mediatek-ufshci ufshci@11270000: Failed to get PHY: -19.
+mediatek-ufshci ufshci@11270000: [RX, TX]: gear=[3, 3], lane[1, 1], pwr[FAST MODE, FAST MODE], rate = 2
+  Device 0: (0:0) Vendor: MICRON Prod.: MT064GASAO2U21 Rev: 0203
+            Type: Hard Disk
+            Capacity: 4.0 MB = 0.0 GB (1024 x 4096)
+  Device 1: (0:1) Vendor: MICRON Prod.: MT064GASAO2U21 Rev: 0203
+            Type: Hard Disk
+            Capacity: 4.0 MB = 0.0 GB (1024 x 4096)
+  Device 2: (0:2) Vendor: MICRON Prod.: MT064GASAO2U21 Rev: 0203
+            Type: Hard Disk
+            Capacity: 61016.0 MB = 59.5 GB (15620096 x 4096)
+
+=> part list scsi 2
+
+Partition Map for scsi device 2  --   Partition Type: EFI
+
+Part    Start LBA       End LBA         Name
+        Attributes
+        Type GUID
+        Partition GUID
+  1     0x00000080      0x0000047f      "bootloaders"
+        attrs:  0x0000000000000000
+        type:   ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
+        guid:   1614eda4-a234-4789-a6e8-328dcb7c46e8
+  2     0x00000480      0x0000087f      "bootloaders_b"
+        attrs:  0x0000000000000000
+        type:   ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
+        guid:   20435df4-5b1e-4361-8157-6ce997561c6a
+  3     0x00000880      0x0000287f      "firmware"
+        attrs:  0x0000000000000000
+        type:   ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
+        guid:   24dad941-6425-492e-9d1c-118a52af67ba
+  4     0x00002880      0x0000487f      "firmware_b"
+        attrs:  0x0000000000000000
+        type:   ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
+        guid:   547e79be-8019-45a9-8d28-b127607a5019
+  5     0x00004880      0x000048ff      "dramk"
+        attrs:  0x0000000000000000
+        type:   ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
+        guid:   d267a4ba-68b3-415d-92d5-f977848c8c6e
+  6     0x00004900      0x000049ff      "misc"
+        attrs:  0x0000000000000000
+        type:   ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
+        guid:   ce1e2472-6342-4220-9f8c-b9bfac4827cf
+  7     0x00004a00      0x000069ff      "bootassets"
+        attrs:  0x0000000000000000
+        type:   ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
+        guid:   60581d1e-088a-4137-8be2-f3d2ee6cd187
+  8     0x00006a00      0x0000cdff      "EFI_system_partition"
+        attrs:  0x0000000000000000
+        type:   c12a7328-f81f-11d2-ba4b-00a0c93ec93b
+        guid:   08ddd30a-cbce-49ae-b5c1-ded897018d2e
+  9     0x0000ce00      0x0000edff      "kernel"
+        attrs:  0x0000000000000000
+        type:   ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
+        guid:   0334e60c-ce99-4652-a8f0-1088b4716b65
+ 10     0x0000ee00      0x00068587      "rootfs"
+        attrs:  0x0000000000000004
+        type:   b921b045-1df0-41c3-af44-4c6f280d3fae
+        guid:   6244fcea-b124-44f5-94a4-c1c38946bd90
+
+=> scsi dev 2
+
+Device 2: (0:2) Vendor: MICRON Prod.: MT064GASAO2U21 Rev: 0203
+            Type: Hard Disk
+            Capacity: 61016.0 MB = 59.5 GB (15620096 x 4096)
+... is now current device
+
+=> load scsi 2:a ${scriptaddr} /boot/fitImage
+21005248 bytes read in 47 ms (426.2 MiB/s)
+
+=> source ${scriptaddr}
+
+Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+---
+Julien Stephan (11):
+      power: pmic: mtk-pwrap: add MT8195 support
+      power: pmic: mtk-pwrap: use tabs for alignment
+      drivers: phy: phy-mtk-ufs: cleanup headers
+      drivers: phy: phy-mtk-ufs: use tab to indent defines
+      drivers: phy: phy-mtk-ufs: use clk_bulk functions
+      drivers: phy: phy-mtk-ufs: disable clk in power_off
+      drivers: phy: phy-mtk-ufs: do not alloc priv with priv_auto
+      drivers: ufs: ufs-mediatek: fix phy handling
+      drivers: ufs: ufs-mediatek: implement clocking
+      drivers: ufs: ufs-mediatek: add MT8195 compatible
+      configs: add new defconfig for mt8395_evk_ufs
+
+ board/mediatek/MAINTAINERS       |   3 +-
+ configs/mt8395_evk_ufs_defconfig |  33 ++++++++++
+ drivers/phy/phy-mtk-ufs.c        | 128 ++++++++++++++++-----------------------
+ drivers/power/pmic/mtk-pwrap.c   |  59 +++++++++++++-----
+ drivers/ufs/ufs-mediatek.c       |  38 ++++++++----
+ drivers/ufs/ufs-mediatek.h       |   2 +-
+ 6 files changed, 160 insertions(+), 103 deletions(-)
+---
+base-commit: d31f96cac1e25153779c44f1fe014978f9b06032
+change-id: 20260311-mt8195-add-ufs-support-535ebedbb323
+
+Best regards,
+-- 
+Julien Stephan <jstephan@baylibre.com>
 
