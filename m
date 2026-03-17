@@ -4,95 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89B66FED9E4
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 15:37:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F08AFED9E7
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 15:41:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BDC6843FA;
-	Tue, 17 Mar 2026 16:36:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 158B184383;
+	Tue, 17 Mar 2026 16:41:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lPI6nnOx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="d6HRC/rU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05F35843AD; Tue, 17 Mar 2026 16:36:42 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id D8DE784390; Tue, 17 Mar 2026 16:41:42 +0100 (CET)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC791843B9
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 16:36:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A832D84366
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 16:41:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-48557c8ad47so36779695e9.0
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 08:36:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7d756f2a06dso787879a34.1
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 08:41:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1773761799; x=1774366599; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=+1jxtjk1+yKKThtEA+DWmyaB+7uwGlWzTjYzkNoAJ1A=;
- b=lPI6nnOx2Bn1V3yvkC7mwesK1vif/J7fhFAJXHy2ErCBME9G5y9Rnwi5/Hou3gJ8tk
- rUEUFnG8JmtfuYrZTdldz51yUTVLoy/D79hCBvIcwFxuVGhZqSSFnenx36jPpPHIV+NR
- yn4XoZPzIQUYlnOkt5a+gBSFe2XNDCkBuENmoi252tmWMUbNmgsg4/uYd4CUFstc/OS5
- fELET/z9UYxuNRy9oNqD5HfQLYqYxCJkiCPbmw3JlP1BldqPcGb4BpjqGsCwzA1mMqbW
- 1ZJrz7Ct4PHCYJEvkpsc34NG/XQ8ai8THwCxJyATQbMwQ4PC43BajPwFiEu22t0p9JPs
- Oldg==
+ d=konsulko.com; s=google; t=1773762099; x=1774366899; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=BIm8zES9uYPcuNxddOWLFR6bbCXoVrBm241zQYhq9EM=;
+ b=d6HRC/rU8iZygULEnwlzzmUq8xPyENtgcZwjkbcVnTmAXwltUN7ZnKrLiLrbARLSZ/
+ lsx3iLDspF5yjCuT9O3xqu+33kqTf4szsTVnai2XnJFoHurAJX2HbEHO1r0yW0SdIHj1
+ R9ZV+9LyF/+fJvhz6PxwHIadLBnY+YvFy4zso=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773761799; x=1774366599;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=+1jxtjk1+yKKThtEA+DWmyaB+7uwGlWzTjYzkNoAJ1A=;
- b=aoPC3/JoHC598//qWx9cC0KNVLnaUVp9S5I/hPp/wdLOuNZlxgNWVLgccOHyNrgQNg
- /7HqxwHFljZ7UxFSAaaglnteOVoDutxlbKXEJYXxZVaLDqf83PRqkUCIH0psZVmsYG8+
- gSJCuCsZUpVy1HYjknl3vn12l8QVEiWTVYBLWWzvr9vwwGhdmGsWrgOWjZ31nH7LPhNK
- RHWmpX5f4eUJ6wsmgyxf1FZkrPHS2QSU9umJ8pRoyk7ApH0BmWHnsWasIuCL/hGJWTaH
- wX6RYgw1sJhrz0jXiYZ/eMA9KIUxBTJ0FGrYnsUOEGgL5IvqxU2tywO88r1WnZBxYRH/
- jNqw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWKIVR4TnYVzigpUyGJ33uA2AK2TtwudguVyPsjyDuX2tyr8iBKLHwapuvM13xZ5WVLb/CBMms=@lists.denx.de
-X-Gm-Message-State: AOJu0YxOpk/iWabgLk98DsWzNGNbbQA4Og9sCEhOjxaG7I1h8qoOUDK9
- y1ReKIeDrgAsoNmsGsKnNqLjcxfqhgncqsAmjh9100TDEguCs1K2/zJa
-X-Gm-Gg: ATEYQzxFtuZVP0YvGpEjGv+bR6CnvW86xvhatO3QJKfgEOLFDVw2sp7rzVFVKfMFMn7
- 5jqtl5NExSjYLfnweYVoKov71ZHtWEMqVHIKnBRmZ7jg7DBKvYqIoKuGFrzZs6OOqW4Mlxobnfp
- xYKfOtPZPxEGHvTGRTtjXbpN/wuAl2ibytcSqU/Oggu7A5hJWPNWdMGNVkVO2b8ohgKstVGT8mL
- 3wPwFAydXW6CwadvqgTtwepopkxHhb15bd+0yhICBeLonHj7MItSw7ZSayS+bo7sashK2sGFcva
- itMKY0fIxWbJ9a9xxfqKGCumlEo3WRnpzQOziOfiUP97bz1IXhLztRLDD1TaH8L3LIuS89Zg1x4
- MUpQEVGr6dWxZ+O4kwyEB/oKEnc8VLP/kSB5QTQDP6v09t0doDO71S0uM9uJL9jqAGBnYhhMPtD
- IRWxZMJ5Myfn0T1LHZCQ/Tt1LYXyaAvlLKFUn7j5zS8zM1Y4l7bBKFkgg=
-X-Received: by 2002:a05:600c:34c4:b0:485:3b9e:caa7 with SMTP id
- 5b1f17b1804b1-4855670e6d0mr262082355e9.23.1773761799080; 
- Tue, 17 Mar 2026 08:36:39 -0700 (PDT)
-Received: from Ansuel-XPS24 (93-34-88-122.ip49.fastwebnet.it. [93.34.88.122])
- by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-48556414295sm200870485e9.3.2026.03.17.08.36.37
+ d=1e100.net; s=20251104; t=1773762099; x=1774366899;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=BIm8zES9uYPcuNxddOWLFR6bbCXoVrBm241zQYhq9EM=;
+ b=plmqMq5zzjjGAxfJN6XfeMU5slp2yEMmcDiEUOQbIspeQNUnnF/9/e5S5adv9ZUuH+
+ p6jjlS2kLq1cJy94gtqcXE9EDFwMnxMO4rXu42wnu9OtPItjJ8Rtnk+IsnH1DHKdVNeZ
+ zbN8byGT1p9iRhmEcef0sJFEZtpFilT+rpig2XpmLCBCdZEBQX7PCqrACeLot1+HTXuD
+ NACfLkzuROz8mDyN5bo/gIzQ/B14cF7OHyWwOpNB3GKbs4cvzmBaCceI5/9M3N5r9C4O
+ G8JOIOQ5nemZYnC0oREzp/gx8CBKR+hr7JtkxErHnPy2IUVE+if657vH7s97X+Y7WQ2d
+ 5o9w==
+X-Gm-Message-State: AOJu0YyLJn2267IimlhqqgYFCMCWjHIJHz9Pvo06FnscyQV+vn6wpyJQ
+ XIiEv3xtgt+syMyaLeThYieDyv8eriUJXvc8Hn/SgZG4L2JifR/Jqp5yHckRh7sDKEw4SF4+PES
+ id49vE5Q=
+X-Gm-Gg: ATEYQzxcBweArjEraRMhqk1CoAtyncjq3SFCabflQdYbj5Ef4XTO3jaGj0Zwe6IIomR
+ tpBEL4R/P6MxDDZx5XOadXDTDvkEsmlg3s2C0GlkNXY3Zlp68CQ0czLYhXB4saUjfQd2oZJf4O/
+ oefMv+v3l7YdPwfDRu//2VS9sMgxpnfwudZoq17r7O4LeMYyfcDPayD4/asFhqZNCX5rESS+GK/
+ kAi8ALK48mbdU5giyzk8DLyn3WWd4bLhsU1aMhwrsE54vIiT0inphfys+sTYqFzZoJpigT4QhLo
+ VxemGqVchdunluQgeEuBhDPJic8TB9rM71RZYMru7vJjxmwp5/gutm2H+VqzHFAXG/CqbN1hA1z
+ emmVGme7ukK7bG1jMjn50qIfOPbaEIoTrlBeuYV9pHQIQnzfymB1Y3NLIpl82FIqU74MS4KCnQw
+ M/AOjFQB3ZQRrJULmGj8tg6Jeb7Z6L4z2iRcocx0v6M1PyUYoeOkzuJxc12vQjAeitMa+7Ckj9B
+ PbcDv//EQIZMCUO8HDqFtpDC07BaaQazwHFJXbbz035sfJ3M4lVUhEp1DI=
+X-Received: by 2002:a05:6830:6acc:b0:7d7:43a3:bb58 with SMTP id
+ 46e09a7af769-7d7bb7e32b4mr2019493a34.13.1773762099297; 
+ Tue, 17 Mar 2026 08:41:39 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d76ae6a361sm14673916a34.20.2026.03.17.08.41.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Mar 2026 08:36:38 -0700 (PDT)
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Peng Fan <peng.fan@nxp.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>,
- Jamie Gibbons <jamie.gibbons@microchip.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Justin Klaassen <justin@tidylabs.net>, Harsha Vardhan V M <h-vm@ti.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- "Lucien.Jheng" <lucienzx159@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH v3 5/5] misc: fw_loader: implement request_firmware_size() OP
-Date: Tue, 17 Mar 2026 16:36:09 +0100
-Message-ID: <20260317153614.18409-6-ansuelsmth@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260317153614.18409-1-ansuelsmth@gmail.com>
-References: <20260317153614.18409-1-ansuelsmth@gmail.com>
+ Tue, 17 Mar 2026 08:41:38 -0700 (PDT)
+Date: Tue, 17 Mar 2026 09:41:36 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] microblaze: Rework TARGET_MICROBLAZE_GENERIC
+ implementation
+Message-ID: <20260317154136.GD502704@bill-the-cat>
+References: <20260317012412.4162279-1-trini@konsulko.com>
+ <92a3aa0d-4d2f-4845-9ac2-6bcb976bced8@amd.com>
+ <20260317144955.GC502704@bill-the-cat>
+ <0f352388-4e79-483a-a4ca-2f14f4bea6c8@amd.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="GHCFdaWFoiVxainm"
+Content-Disposition: inline
+In-Reply-To: <0f352388-4e79-483a-a4ca-2f14f4bea6c8@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,237 +101,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It might be useful to get the firmware size before reading it to allocate
-the correct size. This is needed for case where the firmware size change
-across different firmware version and is not always the same. In such case
-the only way to handle this scenario is to allocate a big-enough buffer to
-read the firmware.
 
-To better handle this, introduce the request_firmware_size() OP to get the
-firmware size before reading it. This way proper buffer can be allocated
-and dynamic firmware size can be better supported.
+--GHCFdaWFoiVxainm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Both FS and FIP lodaer are updated to handle the new .get_size() handler.
+On Tue, Mar 17, 2026 at 04:35:30PM +0100, Michal Simek wrote:
+>=20
+>=20
+> On 3/17/26 15:49, Tom Rini wrote:
+> > On Tue, Mar 17, 2026 at 01:06:15PM +0100, Michal Simek wrote:
+> > >=20
+> > >=20
+> > > On 3/17/26 02:24, Tom Rini wrote:
+> > > > As exposed by "make randconfig", some symbols such as
+> > > > XILINX_MICROBLAZE0_PVR can be set without TARGET_MICROBLAZE_GENERIC=
+ but
+> > > > have a transitive dependency on it. The easiest path of resolution =
+here
+> > > > is that since there is only one valid microblaze "board", rework th=
+at
+> > > > symbol to be non-optional.
+> > > >=20
+> > > > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > > > ---
+> > > > Cc: Michal Simek <michal.simek@amd.com>
+> > > > ---
+> > > >    arch/microblaze/Kconfig | 10 +++-------
+> > > >    1 file changed, 3 insertions(+), 7 deletions(-)
+> > > >=20
+> > > > diff --git a/arch/microblaze/Kconfig b/arch/microblaze/Kconfig
+> > > > index 4261e5009fdc..16c55ddfd95c 100644
+> > > > --- a/arch/microblaze/Kconfig
+> > > > +++ b/arch/microblaze/Kconfig
+> > > > @@ -7,12 +7,8 @@ config SYS_ARCH
+> > > >    config STATIC_RELA
+> > > >    	def_bool y
+> > > > -choice
+> > > > -	prompt "Target select"
+> > > > -	optional
+> > > > -
+> > > >    config TARGET_MICROBLAZE_GENERIC
+> > > > -	bool "Support microblaze-generic"
+> > > > +	def_bool y
+> > > >    	select BOARD_LATE_INIT
+> > > >    	select DM
+> > > >    	select DM_SERIAL
+> > > > @@ -26,8 +22,8 @@ config TARGET_MICROBLAZE_GENERIC
+> > > >    	select MTD
+> > > >    	select SPI
+> > > >    	imply CMD_DM
+> > > > -
+> > > > -endchoice
+> > > > +	help
+> > > > +	  Support microblaze-generic
+> > > >    source "board/xilinx/Kconfig"
+> > > >    source "board/xilinx/microblaze-generic/Kconfig"
+> > >=20
+> > > Applied.
+> >=20
+> > Please drop this for now, I need to do a v2 and I've found another
+> > randconfig that gives me:
+> > WARNING: unmet direct dependencies detected for XILINX_MICROBLAZE0_PVR
+> >    Depends on [n]: MICROBLAZE [=3Dy] && TARGET_MICROBLAZE_GENERIC [=3Dn]
+> >    Selected by [y]:
+> >    - CPU_MICROBLAZE [=3Dy] && CPU [=3Dy] && MICROBLAZE [=3Dy]
+> >=20
+>=20
+> I expect this is from cpuinfo driver.
 
-Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
----
- drivers/misc/fw_loader/fip_loader.c | 29 ++++++++++++
- drivers/misc/fw_loader/fs_loader.c  | 70 ++++++++++++++++++++++++-----
- drivers/misc/fw_loader/fw_loader.c  | 20 +++++++++
- drivers/misc/fw_loader/internal.h   |  1 +
- include/fw_loader.h                 |  9 ++++
- 5 files changed, 118 insertions(+), 11 deletions(-)
+Yes, it is. But it's one of the problems randconfig exposes since it
+does funny things when generating a valid .config, and seeing what blows
+up. What I have in progress now is removing TARGET_MICROBLAZE_GENERIC
+entirely and using MICROBLAZE in the few tests.
 
-diff --git a/drivers/misc/fw_loader/fip_loader.c b/drivers/misc/fw_loader/fip_loader.c
-index 5c01013276d7..b50c89c892d6 100644
---- a/drivers/misc/fw_loader/fip_loader.c
-+++ b/drivers/misc/fw_loader/fip_loader.c
-@@ -495,6 +495,34 @@ static int fw_get_fip_firmware(struct udevice *dev)
- 	return ret;
- }
- 
-+/**
-+ * fw_get_fip_firmware_size - get firmware size.
-+ * @dev: An instance of a driver.
-+ *
-+ * Return: Size of firmware, negative value when error.
-+ */
-+static int fw_get_fip_firmware_size(struct udevice *dev)
-+{
-+	struct fip_toc_entry ent;
-+	struct fip_storage_info info = { };
-+	int ret;
-+
-+	ret = fw_parse_storage_info(dev, &info);
-+	if (ret)
-+		return ret;
-+
-+	struct firmware *firmwarep = dev_get_priv(dev);
-+
-+	if (!firmwarep)
-+		return -EINVAL;
-+
-+	ret = parse_fip_firmware(firmwarep, &info, &ent);
-+	if (ret)
-+		return ret;
-+
-+	return ent.size;
-+}
-+
- static int fip_loader_probe(struct udevice *dev)
- {
- 	struct device_plat *plat = dev_get_plat(dev);
-@@ -505,6 +533,7 @@ static int fip_loader_probe(struct udevice *dev)
- 		return ret;
- 
- 	plat->get_firmware = fw_get_fip_firmware;
-+	plat->get_size = fw_get_fip_firmware_size;
- 
- 	return 0;
- };
-diff --git a/drivers/misc/fw_loader/fs_loader.c b/drivers/misc/fw_loader/fs_loader.c
-index 429abc4f60cd..434e0afbfe2a 100644
---- a/drivers/misc/fw_loader/fs_loader.c
-+++ b/drivers/misc/fw_loader/fs_loader.c
-@@ -92,15 +92,8 @@ static int select_fs_dev(struct device_plat *plat)
- 	return ret;
- }
- 
--/**
-- * fw_get_filesystem_firmware - load firmware into an allocated buffer.
-- * @dev: An instance of a driver.
-- *
-- * Return: Size of total read, negative value when error.
-- */
--static int fw_get_filesystem_firmware(struct udevice *dev)
-+static int __fw_get_filesystem_firmware_prepare(struct udevice *dev)
- {
--	loff_t actread = 0;
- 	char *storage_interface, *dev_part, *ubi_mtdpart, *ubi_volume;
- 	int ret;
- 
-@@ -125,6 +118,28 @@ static int fw_get_filesystem_firmware(struct udevice *dev)
- 		ret = select_fs_dev(dev_get_plat(dev));
- 	}
- 
-+	return ret;
-+}
-+
-+static void __fw_get_filesystem_firmware_release(struct udevice *dev)
-+{
-+#ifdef CONFIG_CMD_UBIFS
-+	umount_ubifs();
-+#endif
-+}
-+
-+/**
-+ * fw_get_filesystem_firmware - load firmware into an allocated buffer.
-+ * @dev: An instance of a driver.
-+ *
-+ * Return: Size of total read, negative value when error.
-+ */
-+static int fw_get_filesystem_firmware(struct udevice *dev)
-+{
-+	loff_t actread = 0;
-+	int ret;
-+
-+	ret = __fw_get_filesystem_firmware_prepare(dev);
- 	if (ret)
- 		goto out;
- 
-@@ -146,9 +161,41 @@ static int fw_get_filesystem_firmware(struct udevice *dev)
- 	}
- 
- out:
--#ifdef CONFIG_CMD_UBIFS
--	umount_ubifs();
--#endif
-+	__fw_get_filesystem_firmware_release(dev);
-+	return ret;
-+}
-+
-+/**
-+ * fw_get_filesystem_firmware_size - get firmware size.
-+ * @dev: An instance of a driver.
-+ *
-+ * Return: Size of firmware, negative value when error.
-+ */
-+static int fw_get_filesystem_firmware_size(struct udevice *dev)
-+{
-+	loff_t size = 0;
-+	int ret;
-+
-+	ret = __fw_get_filesystem_firmware_prepare(dev);
-+	if (ret)
-+		goto out;
-+
-+	struct firmware *firmwarep = dev_get_priv(dev);
-+
-+	if (!firmwarep)
-+		return -ENOMEM;
-+
-+	ret = fs_size(firmwarep->name, &size);
-+
-+	if (ret) {
-+		debug("Error: %d Failed to get size for %s.\n",
-+		      ret, firmwarep->name);
-+	} else {
-+		ret = size;
-+	}
-+
-+out:
-+	__fw_get_filesystem_firmware_release(dev);
- 	return ret;
- }
- 
-@@ -162,6 +209,7 @@ static int fs_loader_probe(struct udevice *dev)
- 		return ret;
- 
- 	plat->get_firmware = fw_get_filesystem_firmware;
-+	plat->get_size = fw_get_filesystem_firmware_size;
- 
- 	return 0;
- };
-diff --git a/drivers/misc/fw_loader/fw_loader.c b/drivers/misc/fw_loader/fw_loader.c
-index 26c2ce406ac9..c761fb1ff281 100644
---- a/drivers/misc/fw_loader/fw_loader.c
-+++ b/drivers/misc/fw_loader/fw_loader.c
-@@ -185,3 +185,23 @@ int request_firmware_into_buf(struct udevice *dev,
- 
- 	return plat->get_firmware(dev);
- }
-+
-+int request_firmware_size(struct udevice *dev, const char *name)
-+{
-+	struct device_plat *plat;
-+	int ret;
-+
-+	if (!dev)
-+		return -EINVAL;
-+
-+	ret = _request_firmware_prepare(dev, name, NULL, 0, 0);
-+	if (ret < 0) /* error */
-+		return ret;
-+
-+	plat = dev_get_plat(dev);
-+
-+	if (!plat->get_size)
-+		return -EOPNOTSUPP;
-+
-+	return plat->get_size(dev);
-+}
-diff --git a/drivers/misc/fw_loader/internal.h b/drivers/misc/fw_loader/internal.h
-index 9e7585a92808..d823d56e53f5 100644
---- a/drivers/misc/fw_loader/internal.h
-+++ b/drivers/misc/fw_loader/internal.h
-@@ -36,6 +36,7 @@ struct device_plat {
- 	char *ubivol;
- 
- 	int (*get_firmware)(struct udevice *dev);
-+	int (*get_size)(struct udevice *dev);
- };
- 
- /**
-diff --git a/include/fw_loader.h b/include/fw_loader.h
-index 7053c7bc6f05..1af3db385161 100644
---- a/include/fw_loader.h
-+++ b/include/fw_loader.h
-@@ -39,6 +39,15 @@ int request_firmware_into_buf(struct udevice *dev,
- 			      const char *name,
- 			      void *buf, size_t size, u32 offset);
- 
-+/**
-+ * request_firmware_size - Get firmware size.
-+ * @dev: An instance of a driver.
-+ * @name: Name of firmware file.
-+ *
-+ * Return: Size of firmware, negative value when error.
-+ */
-+int request_firmware_size(struct udevice *dev, const char *name);
-+
- /**
-  * request_firmware_into_buf_via_script() -
-  * Load firmware using a U-Boot script and copy to buffer
--- 
-2.53.0
+--=20
+Tom
 
+--GHCFdaWFoiVxainm
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabl2LQAKCRAr4qD1Cr/k
+CvadAP9xU74oe49GQAZ2SvwTEcLCH2Qtja/nuwcZoNlR/kC6gAD/ZWVVf3H7MtQD
+pLoBVPpbkAoglxyh+BrW/hucbGjkZgg=
+=Ir1A
+-----END PGP SIGNATURE-----
+
+--GHCFdaWFoiVxainm--
