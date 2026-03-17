@@ -4,89 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D400FD877B
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:09:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2B04FD877E
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:21:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D29184358;
-	Tue, 17 Mar 2026 15:09:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 47D2484332;
+	Tue, 17 Mar 2026 15:21:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F8ri/6cH";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="i6X9s1BY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50AC084006; Tue, 17 Mar 2026 15:09:25 +0100 (CET)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 36B348433B; Tue, 17 Mar 2026 15:21:38 +0100 (CET)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2FDC84358
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:09:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E14B884011
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:21:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-4042fe53946so2202353fac.3
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:09:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-4042fe53946so2208795fac.3
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:21:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773756561; x=1774361361; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=PthJ0R2DWYbi+x/lqWtia45XLwN5P4Db/fehjfOJBjA=;
- b=F8ri/6cH15zmc4cw1NpuEb7zM3bQrd0nPGhB6Xbgbark3oPYo1txEvHtfbYJOmFX8X
- wgaWVFTfxxW13vQ6rno3AeJ2zn2+7aWFSz0Qc9z0n2VlkIW5SVPr8RFnCtAHqLqmiiVI
- PT8c9MOFPDUHH16bj5SpzSAUOVAe/UwIqgBuo=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773757294; x=1774362094;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=oOeKMQh4wGO20fsss9Z+8h5pJKR8hh7tKES9RQAvAx4=;
+ b=i6X9s1BYONxvMEuvhEYB/vT+qofgzEr02aeRggjsJ7SWnTCem/QmgrpFkADjG89vI9
+ OWltnm79uoDl/cApyAcZMxRFEDXh8hgIfxND5bhSw7NqLF8YkhABFVHAsgJXns3TaPkc
+ I8Vkzss3EfEKiB4RW7iTp3j1sFdBi+fODXV4P1s4NfUd11QLFQNFjshxlIl9QNMUfi9I
+ GAuPQUJutBwuTLIdd4fxZUVzUKTj63v62jhzcVCECgy8yZdONMAMIS7hOmMhTbi/3KXW
+ VYiVtn41BGjYmzq9Xna7I8jFQ5yg/8Lltkk+2KM9c3cQOxS0cB6PRZ9DQst4hfKRofQq
+ E8ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773756561; x=1774361361;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PthJ0R2DWYbi+x/lqWtia45XLwN5P4Db/fehjfOJBjA=;
- b=HVkwbXMzkDYdhq5bjzmMuI29c+e0xzAE17aNBLvoa6vUrpyHoAG0DFDnUFGw1EuH4g
- plufop5083kb7l4P7M/V3Oeuk231TuuNERMFnM8S9/3K0RP5rZskmZ1vffkZ/0jHxACC
- eq8ETEzOrX9bybESVeKu7tged+bf7yUJKcoawzNVpMeQng3q1/jPdgSUba8xGWufM6bN
- qW6z2RGmxprqEYwvKMAghY82Mp0rZuCuLsW17BARwG2+9YVqV5liEPfR2uwl//BgTDp5
- OFbeOHomtQqGZ6rFwEZ98mfNdfYl0ysFmRfYBkRJeepOtMLD8ZAFLI+KqUto92AN14FE
- q4mw==
+ d=1e100.net; s=20251104; t=1773757294; x=1774362094;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=oOeKMQh4wGO20fsss9Z+8h5pJKR8hh7tKES9RQAvAx4=;
+ b=a2UP990kuPzMq+OGo4KK7zrmXtICyPPs9OYJIDt42216NJIHw5E6Ha5BdQyLWF6GV/
+ A0659kDuVx+e0gEBEKJ4VA5XbEmahnm/jMCcWXp98iuhwtL49vt95RsVEnqmyOygu52u
+ utnHWQXoVq8Thet92TtGMuT9KiIuU8/WT2qN6radQ4N3f2iY9vfXZiki8nQE97wynWxl
+ Wy7ABSh0MkvtqUg6xkYoHOCD3Al7HaQujn5g6pXrxJzaMBcT2JJGOm8L5p7iiH6WVcwf
+ OxsjRNLAHrw1XUQwOZLIePQKGrIgKeAdPJCSjYrJA2S9aRj2FKTu+ByMh6CmVT98fp7I
+ 4eQw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVO/0DVlzoWTI4j7AgSjnc5cgTEgydWLmmt+xH11mEDUVL7OHtrEXapKbMwveQ/u4Nl9frc4bQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzmM3F24UVzJldH5F/fKFXAV/3KS6BO2JTgV8eCY0e/pHLYg1yF
- uXT9m/wcFqlmSr30zM6KixdbbAv18RZ4J9jf1N3H5RXkYGgeIe7ZLUc6lJSOgsIUyHM=
-X-Gm-Gg: ATEYQzyEQN49FniQH2BHxySY4I1+ZLkf9qMh670R0oyXMJJEJQe5Jf3p8R72JmaHuIM
- CtSF3VFkCpZaAnfoTSuvBR9A8h+uclCg2kSeyJHYbf/I/5yu7yNzbafMojRXG100atAPhUo/RIk
- +F86YJjjyHj9m16o1bBh0XMfRIQrHvLZEwqop/O2SN0mywgKS9KgkRP3DWKb8IEjDPXwykVmAg4
- +Gacy67BxDI7UArfIiDSD3PdkQAADgsOGBuFvYEov47hvQePDR9Gb/MsP3KhJLlo2GeklvzNbg8
- 71Q2N+5LRi7O64G9d+483+qh9VQyx1w4z+rYNocEMGZQtCU+HFL3igyRXOOtWowtGGytFnzeFte
- ep3qifEirH8ZDisDbQWLR5FrFZSZAadfMjsK+25/jvnOTbh1JhblV+BnaKZRlXq7jUYDGoJYhRn
- 4Z4zox0dU7O3/ongHTnw9FiHY+W2iAcP/DxiXGLbJ6Iv19rzY5HgPD0awbuL+GfmnsSb5ELyxuz
- 9KrxmGzrm7qM6OJHztALu6581yG3m59ndA1d+HeVCt0QJNr
-X-Received: by 2002:a05:6870:7d84:b0:417:7d3:fdcf with SMTP id
- 586e51a60fabf-417b943b454mr9792475fac.46.1773756561175; 
- Tue, 17 Mar 2026 07:09:21 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4177e6ae0e3sm20339737fac.16.2026.03.17.07.09.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Mar 2026 07:09:20 -0700 (PDT)
-Date: Tue, 17 Mar 2026 08:09:18 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Marek Vasut <marex@nabladev.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Subject: Re: [PATCH v2] binman: add CST backend selection for i.MX8M signing
-Message-ID: <20260317140918.GZ502704@bill-the-cat>
-References: <20260213192838.157084-1-marex@nabladev.com>
- <CAFLszTjHZ+a17+bZh17DMOJGny6VaWCe4EftpYRE1Bq+RAty4Q@mail.gmail.com>
- <c3d59858-9855-47fd-aa5a-0b861c4e44e8@nabladev.com>
- <CAFLszTgNA1xmMNH=qtaKurDZdFW3dscMwwKyQ7iU-7EMMDOAuQ@mail.gmail.com>
+ AJvYcCVYofNhkYNb4XjfZj7QF3B7Kesz24B0BalZ+ui92z0FKXkiXw39coL7r5NgF4RBclyVX+Q4pcI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxxmQcgJ0Fob2FKyucNAYSK0a+0fPsElQRGH3FuC+cFKcihwvuy
+ u8+jMzJnpsn9tGUiTrZFqLmrMrcIX/uUkQil2VLCUniAjIttu9HVUgIG6FTidSl4pOI=
+X-Gm-Gg: ATEYQzwENDWnaDhh2wm8wXBE2IBgzWBmRDh4A2TpzoBCkg0UTQ7YBZM0k3RT1ZHMLr8
+ OE7M15Qx/2/pme6ilYkYwTdk9FuFsEgV0trmADChMgCLB8iR6BXv2RsKKqFtlg70Cs1wP2uPMBG
+ xPH2Bl6hasM0gge49GfuK9s9lU7iAyqSeUdPbtbSIY4YoNSBnGyEtI66zni10HhAHJ5Xa9Y/Dx9
+ anaBP9NBiiLUBsXqQJM62j8XpqF/SkqA7JUCf5ZlyawuMLNFg4vTW5DIWp+3RAk7IcuAxauphhv
+ /6GfZ3Qqnf5GzQz3yqqzU1FFX7Tv4PrV3Z5rtOYY78M0TPXR0P3MLAE8uP3Uc/YMRkqdr8Skjf0
+ fdfFpnc9SNyWq/lmP4SF5BcBBUq9vR3seKvWPJgbxHhHwodVl3uoKef5giZ69C3c5E0HrHzwM6F
+ frEPQ7jKbj+Jo+c9nlFS65RguhkqxnibEbjITOnSnqPsDfILzc4y+Wuz9Wb5gGQ5hR3ObmGeKxz
+ 5417HHT+Q==
+X-Received: by 2002:a05:6870:aa9a:b0:417:2daf:6aa1 with SMTP id
+ 586e51a60fabf-417b93d6d49mr11519671fac.37.1773757294371; 
+ Tue, 17 Mar 2026 07:21:34 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:6995:28aa:eeda:102?
+ ([2600:8803:e7e4:500:6995:28aa:eeda:102])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4177e25f037sm19148083fac.5.2026.03.17.07.21.33
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 17 Mar 2026 07:21:33 -0700 (PDT)
+Message-ID: <67054ce9-c839-45f4-b73f-ec46899379e1@baylibre.com>
+Date: Tue, 17 Mar 2026 09:21:32 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vao2tt4/RMym3zpG"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTgNA1xmMNH=qtaKurDZdFW3dscMwwKyQ7iU-7EMMDOAuQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] drivers: mmc: mtk-sd: disable dma for MT8188 and MT8195
+To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>,
+ "ht.lin" <ht.lin@mediatek.com>
+References: <20260317-mt8188-mt8195-disable-mmc-disable-dma-v1-1-220da4144920@baylibre.com>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <20260317-mt8188-mt8195-disable-mmc-disable-dma-v1-1-220da4144920@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,166 +111,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 3/17/26 8:31 AM, Julien Stephan wrote:
+> MT8188 and MT8195 SoC should be fully compatible with MT8183, but
+> currently dma is not working on these SoC. For now, disable dma.
+> Investigation needed.
+> 
+> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+> ---
+>  drivers/mmc/mtk-sd.c | 26 ++++++++++++++++++++++++++
+>  1 file changed, 26 insertions(+)
+> 
+> diff --git a/drivers/mmc/mtk-sd.c b/drivers/mmc/mtk-sd.c
+> index 7a4bdee7496..8f93e51599f 100644
+> --- a/drivers/mmc/mtk-sd.c
+> +++ b/drivers/mmc/mtk-sd.c
+> @@ -1989,6 +1989,30 @@ static const struct msdc_compatible mt8189_compat = {
+>  	.enhance_rx = true,
+>  };
+>  
+> +/* MT8188 and MT8195 should be fully compatible with MT8183
+> + * but currently dma is not working on these SoC.
+> + * For now, disable dma. Investigation needed.
+> + */
+> +static const struct msdc_compatible mt8188_compat = {
+> +	.clk_div_bits = 12,
+> +	.pad_tune0 = true,
+> +	.async_fifo = true,
+> +	.data_tune = true,
+> +	.busy_check = true,
+> +	.stop_clk_fix = true,
+> +	.enhance_rx = true,
+> +};
+> +
+> +static const struct msdc_compatible mt8195_compat = {
+> +	.clk_div_bits = 12,
+> +	.pad_tune0 = true,
+> +	.async_fifo = true,
+> +	.data_tune = true,
+> +	.busy_check = true,
+> +	.stop_clk_fix = true,
+> +	.enhance_rx = true,
+> +};
 
---vao2tt4/RMym3zpG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+These are identical to mt8189_compat, so we could reuse that instead of
+duplicating it two more times. MT8189 is in the same situation that it
+should work, but needs investigation.
 
-On Tue, Mar 17, 2026 at 06:28:47AM -0600, Simon Glass wrote:
-> +Heinrich Schuchardt
->=20
-> Hi Marek,
->=20
-> On Fri, 13 Feb 2026 at 19:51, Marek Vasut <marex@nabladev.com> wrote:
-> >
-> > On 2/13/26 9:20 PM, Simon Glass wrote:
-> >
-> > Hello Simon,
-> >
-> > >> diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt b/doc/imx=
-/habv4/guides/mx8m_spl_secure_boot.txt
-> > >> index 1bea091344d..a3ebd397d82 100644
-> > >> --- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> > >> +++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> > >> @@ -167,17 +167,25 @@ The nxp-imx8mcst etype is configurable using e=
-ither DT properties or environment
-> > >>   variables. The following DT properties and environment variables a=
-re supported.
-> > >>   Note that environment variables override DT properties.
-> > >>
-> > >> -+--------------------+-----------+---------------------------------=
----------------------------------+
-> > >> -| DT property        | Variable  | Description                     =
-                                 |
-> > >> -+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D+
-> > >> -| nxp,loader-address |           | SPL base address                =
-                                 |
-> > >> -+--------------------+-----------+---------------------------------=
----------------------------------+
-> > >> -| nxp,srk-table      | SRK_TABLE | full path to SRK_1_2_3_4_table.b=
-in                               |
-> > >> -+--------------------+-----------+---------------------------------=
----------------------------------+
-> > >> -| nxp,csf-crt        | CSF_KEY   | full path to the CSF Key CSF1_1_=
-sha256_4096_65537_v3_usr_crt.pem |
-> > >> -+--------------------+-----------+---------------------------------=
----------------------------------+
-> > >> -| nxp,img-crt        | IMG_KEY   | full path to the IMG Key IMG1_1_=
-sha256_4096_65537_v3_usr_crt.pem |
-> > >> -+--------------------+-----------+---------------------------------=
----------------------------------+
-> > >> ++--------------------+-------------+-------------------------------=
------------------------------------+
-> > >> +| DT property        | Variable    | Description                   =
-                                   |
-> > >> ++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D+
-> > >> +| nxp,loader-address |             | SPL base address              =
-                                   |
-> > >> ++--------------------+-------------+-------------------------------=
------------------------------------+
-> > >> +| nxp,srk-table      | SRK_TABLE   | full path to SRK_1_2_3_4_table=
-=2Ebin                               |
-> > >> ++--------------------+-------------+-------------------------------=
------------------------------------+
-> > >> +| nxp,csf-crt        | CSF_KEY     | full path to the CSF Key CSF1_=
-1_sha256_4096_65537_v3_usr_crt.pem |
-> > >> ++--------------------+-------------+-------------------------------=
------------------------------------+
-> > >> +| nxp,img-crt        | IMG_KEY     | full path to the IMG Key IMG1_=
-1_sha256_4096_65537_v3_usr_crt.pem |
-> > >> ++--------------------+-------------+-------------------------------=
------------------------------------+
-> > >> +| nxp,fast-auth      |             | enable fast authentication met=
-hod                                |
-> > >> ++--------------------+-------------+-------------------------------=
------------------------------------+
-> > >> +| nxp,srk-crt        | SRK_KEY     | full path to the SRK Key SRK1_=
-sha256_4096_65537_v3_ca_crt.pem    |
-> > >> ++--------------------+-------------+-------------------------------=
------------------------------------+
-> > >> +| nxp,unlock         |             | unlock CAAM in SPL            =
-                                   |
-> > >> ++--------------------+-------------+-------------------------------=
------------------------------------+
-> > >> +| nxp,cst-backend    | CST_BACKEND | CST tool backend, default is '=
-ssl', or selectable 'pkcs11'       |
-> > >> ++--------------------+-------------+-------------------------------=
------------------------------------+
-> > >
-> > > Perhaps point to an example?
->=20
-> Sorry I missed this earlier.
->=20
-> >
-> > Example of what ? Two lines below, there is an example of using those
-> > env vars, see the entire file.
->=20
-> Yes I see it, but it doesn't have CST_BACKEND right?
->=20
-> >
-> > >>   Environment variables can be set as follows to point the build pro=
-cess
-> > >>   to external key material:
-> > >> diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
-> > >> index 8922d6cd070..29bc778d0e5 100644
-> > >> --- a/tools/binman/entries.rst
-> > >> +++ b/tools/binman/entries.rst
-> > >> @@ -1664,6 +1664,13 @@ Entry: nxp-imx8mcst: NXP i.MX8M CST .cfg file=
- generator and cst invoker
-> > >>
-> > >>   Properties / Entry arguments:
-> > >>       - nxp,loader-address - loader address (SPL text base)
-> > >> +    - nxp,srk-table - full path to SRK_1_2_3_4_table.bin
-> > >> +    - nxp,csf-crt - full path to the CSF Key CSF1_1_sha256_4096_655=
-37_v3_usr_crt.pem
-> > >> +    - nxp,img-crt - full path to the IMG Key IMG1_1_sha256_4096_655=
-37_v3_usr_crt.pem
-> > >> +    - nxp,fast-auth - enable fast authentication method
-> > >> +    - nxp,srk-crt - full path to the SRK Key SRK1_sha256_4096_65537=
-_v3_ca_crt.pem
-> > >> +    - nxp,unlock - unlock CAAM in SPL
-> > >> +    - nxp,cst-backend - CST tool backend, default is 'ssl', or sele=
-ctable 'pkcs11'
-> > >>
-> > >
-> > > The way it works is you add this as a comment in nxp_imx8mcst.py and
-> > > then run 'binman entry-docs' to generate entries.rst - see here:
-> > >
-> > > https://docs.u-boot.org/en/latest/develop/package/binman.html#entry-d=
-ocumentation
-> > Why is there this entries.rst then ? Should the entries be removed from
-> > here and moved into the py file or what is this inconsistency ?
->=20
-> The entries.rst file is there so that the documentation can be build,
-> containing it. It might be possible to update 'make htmldocs' to run
-> binman to update the generated docs.
->=20
-> Heinrich, what do you think about that?
+And actually mt8189_compat is also duplicate of mt7986_compat, so I probably
+shouldn't have added that one and just reused mt7986_compat.
 
-That won't work for readthedocs, it needs to be generated, if it can, as
-part of the normal sphix build doc process.
+Another approach could be to revert the change that enabled DMA in mt8183_compat
+and add a new .compatible = "mediatek,mt8365-mmc" that has DMA enabled since
+that is the only board that has been tested where DMA is actually working.
 
---=20
-Tom
+> +
+>  static const struct udevice_id msdc_ids[] = {
+>  	{ .compatible = "mediatek,mt7620-mmc", .data = (ulong)&mt7620_compat },
+>  	{ .compatible = "mediatek,mt7621-mmc", .data = (ulong)&mt7621_compat },
+> @@ -2001,6 +2025,8 @@ static const struct udevice_id msdc_ids[] = {
+>  	{ .compatible = "mediatek,mt8516-mmc", .data = (ulong)&mt8516_compat },
+>  	{ .compatible = "mediatek,mt8183-mmc", .data = (ulong)&mt8183_compat },
+>  	{ .compatible = "mediatek,mt8189-mmc", .data = (ulong)&mt8189_compat },
+> +	{ .compatible = "mediatek,mt8188-mmc", .data = (ulong)&mt8188_compat },
+> +	{ .compatible = "mediatek,mt8195-mmc", .data = (ulong)&mt8195_compat },
+>  	{}
+>  };
+>  
+> 
+> ---
+> base-commit: d31f96cac1e25153779c44f1fe014978f9b06032
+> change-id: 20260317-mt8188-mt8195-disable-mmc-disable-dma-b64499a6a47a
+> 
+> Best regards,
 
---vao2tt4/RMym3zpG
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCablgjgAKCRAr4qD1Cr/k
-CtzRAQCcixgAkYI218co1ui5WdstQS3842Pjuuh9CTs6fCnULQEAyWf7domBQaVv
-W/6OoYrLjK5qqlzuNGGItyeNjSn2FgA=
-=P5qn
------END PGP SIGNATURE-----
-
---vao2tt4/RMym3zpG--
