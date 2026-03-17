@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94D04FB5EA0
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 01:24:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 717E9FB5EA0
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 01:24:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A882840C1;
-	Tue, 17 Mar 2026 02:24:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C3DFF84101;
+	Tue, 17 Mar 2026 02:24:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JV2cmVJ4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Zf4q99yX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59F9E83BC8; Tue, 17 Mar 2026 02:24:25 +0100 (CET)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 7C7298407F; Tue, 17 Mar 2026 02:24:26 +0100 (CET)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01C2783BC8
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 02:24:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 07F9D84011
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 02:24:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7d75371d873so5446627a34.3
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 18:24:20 -0700 (PDT)
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-463f00cda04so3104662b6e.2
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 18:24:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773710660; x=1774315460; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=3JLgRnVNURgoB/4fnm3Cs7SiJV0YCd2OkncUaG/YT5c=;
- b=JV2cmVJ4fqFHuewK/M2RkwtgPTz6MdLtZ+/E9ygoCy138sa4dbuyXt0z1oB1MriBMO
- CTsSOUSJ0pBwUSXgh06AkY2DGXCI8GyvLGNiefXSFWq7hRuJ7DlDjUvoSUTSJnKHyc1C
- Mhy54AJB9z6fy7gko4LL0fXk6QK3XlEMnBalM=
+ d=konsulko.com; s=google; t=1773710661; x=1774315461; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=gd4AGbK3BowJAFwFdb+BvxyC3l5ChIAOmpBAJ1EwixY=;
+ b=Zf4q99yXaAIosXHuGyABUaO5GK9XjHOcb+dcnUJT7yrjy3MXdOAxcfXoRVsmMPxv4i
+ v9xxK3t4KiUrIUNkRfKAPojh39HptBjETusx1Cp+nmMlvi0ySq9ChxicBcBa5+eP2WMB
+ nLvRBqXqli4rGGBaJpGL0HAz41pRD+QTM+tQw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773710660; x=1774315460;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3JLgRnVNURgoB/4fnm3Cs7SiJV0YCd2OkncUaG/YT5c=;
- b=ht0TEY1S9SPH8Co0U28m2xqbKCSKw6UjDuc2IgKXxSm8UdAB4kkwHFpbntIMaiKAcB
- m0ushRcam496AWvBe/JF2mJ6t/YKRhxgMF6nNb7Mv8QbJa4Ydc/IbRChJH0dojXD1ohy
- tjS2uLnXzNLo3Bc4kiITgVfS7AKf0iFt7JbAuUELa8O0+6aEzzADiqvhRL3qa6ZGRSnp
- ceq3CbRQlwlzg2yTrIsrrO3vCRUTMCuJVSfRqDUr5l4orf0MHqngKIduBhYF/3mq89Yc
- zzL2qxgYFUjXfRaRYeo9LQzT2ecE5YK8rVTfCOKTZe6hP10q/KIMkoMR1Lp4fht//0By
- RIgQ==
-X-Gm-Message-State: AOJu0Ywt8G66XroP3piyTmsRkEdWxJYf5e9+toHtxuxakaYfOAREqrXR
- o/Piwcq3+p9jP1B22MKBi6v4Y121q9x7gm7ZMp9GmeFiqW3FUd5ygH9hV8IU0SmtBXYMdeGzazS
- /0e/jkn0=
-X-Gm-Gg: ATEYQzxf7sbrbt9zdEPhYt64TXG8MpYd0DpxaXFhN1QK7RJL8Q3J6btkO0rWBcyDbat
- 7FZpl4S6zVQLkiMxVXab7h/DSuHAe8JJ+VWsNAe4rmf0EFWKdRVvrPMnoiEFPltpN2eOhumx9Dc
- cwHNOlVorP+F27XRxXgVTuU7/FwyuRlhQV58tZ1hAOmmaGCPHZqitQ1/lSi63vXkMNrF8SoZZLK
- t0HMrAxdvStf7pXJLh0g3ERBjR0npzL2++J/sTnSXvbyB/2nLEHjxJmBi3x9rWg5XMa1OyFavqv
- m7MH0PRUxhWrqsD1Mj/+f1/FdeFU6oSgvUgSaE2LnY0WlAfAMERRgE8WQdCKKpC2jng7CkXp3xz
- V8r0QPrev8Cl9GDkG01fIGg1DcL3tONDfEq+cADMWgTWmhvt8CjzaGHUIKUve4ilzsILs/Re4pV
- PZz5yJR707HwAPFxYAd656RGcsIIczjUoNa0pKLsO2traOYeJAF2oFcQ4oy9dmSWhx4gM+Vi41j
- R/5yGdwoZoUF1GXiPfVeBLNk2Lju3XAAjOS6D7vcQCxgQ7DPIE=
-X-Received: by 2002:a05:6830:6abb:b0:7d7:5959:946f with SMTP id
- 46e09a7af769-7d78242a0b5mr10736992a34.7.1773710659705; 
- Mon, 16 Mar 2026 18:24:19 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1773710661; x=1774315461;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=gd4AGbK3BowJAFwFdb+BvxyC3l5ChIAOmpBAJ1EwixY=;
+ b=JNuWwDcDX4QsRLwnqLo90TAFSJrRSIJMoDZf4A5JO2bca1bB7XJw41XjCbwENvQn3J
+ 0sD2HWgwtJBgINi7+khXW+fFg0OwUSWCfsZ/zX2a2tBLPHVaa0su8+l+Lrs6UFLE/Obw
+ gLxYR2S+rV6HWdcEDuVzsYcrB1MFZhukQ8/VriTOJWvLThkq8s3CUA0oDQIKkgW8xPGr
+ 5QwskIOKD7qpgRcjmKTt5dh4r8/g18PLyqDMYlkD97XatY+4tGVFWiuq4VXzkVtBb3rH
+ kgSBVUeep9X4GMR7yhq6CRAzoUdNFK8V9ExdaaLUY7VxypbIyEzjAbPNM8LzP6QtUGQR
+ 74Lw==
+X-Gm-Message-State: AOJu0YxG1ysTEblsQG+47B6+y46LM9ZiF8OWpbI0jzvHsecWKPOgzcuv
+ Qxm6dq7I9+dyolPaXmlaSTHU4JI0EVNAex4vPOfyDtPGyT7NQ63Kplu6UJIxpr5CSPvaWE58HRg
+ sPpv6sWY=
+X-Gm-Gg: ATEYQzxaHmkRoSnE8mDCvhxT7wdyF6wPkydoyoIyUzBONpnb87CyDLJvZiQln/muu+H
+ 26BhqpGAnvfl4LmtIKGc0sKf14D9yw87581b6w5ClMQNCEYWwatVxPhmJuc8aReWwrpQRSTvjc5
+ OPRsMJQEqhUQLNFRkfg4nTFechAkPRrR2FoSOZu71fonTjVO/bOUIUHh2fFQfmP+241MElEzhOX
+ rIH4R5Yq/eklh8gzaVP+aW8+liexrWAK3JZtlQz890NsUBmxivY6OOy+YekmxH8U6SfhIyxaic3
+ uoPMPwHGb3vVWOBRtmVx8cupUKDuZ41GR+5UPUX3DmLM4wnQURJ125YHgXqCJRJINJII+eYcJ9V
+ 7gFB3Fui/wpW9ONVawglUiKATKwq7LAGjvEZEdiy2f76pVKlA47UPzPIM1gRkHr510syBoCP1v2
+ MXT/VgkaLnAg008AXFDR7LBdNXy4N0YPr+pFSkAA19hfnDfw/yZGlt4lFg8kn/8Ot/KOr+mmlYc
+ mztgThbe/ceu425FUPTmZREp2sDnRr/xTfYFbN6KoQl8gvbdUs=
+X-Received: by 2002:a05:6808:a59a:20b0:467:91:fb32 with SMTP id
+ 5614622812f47-467575390acmr6250102b6e.39.1773710661524; 
+ Mon, 16 Mar 2026 18:24:21 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d77c961e79sm10315912a34.7.2026.03.16.18.24.17
+ 5614622812f47-4674de9eee9sm7991208b6e.13.2026.03.16.18.24.20
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Mar 2026 18:24:17 -0700 (PDT)
+ Mon, 16 Mar 2026 18:24:20 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+usb@mailbox.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
-Subject: [PATCH] usb: isp1760: Correct dependencies for USB_ISP1760
-Date: Mon, 16 Mar 2026 19:24:16 -0600
-Message-ID: <20260317012416.4162318-1-trini@konsulko.com>
+Subject: [PATCH] core: Rework REGMAP symbols implementation
+Date: Mon, 16 Mar 2026 19:24:19 -0600
+Message-ID: <20260317012419.4162359-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -96,40 +94,254 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 As exposed by "make randconfig", we have an issue with the dependencies
-for USB_ISP1760. It depends on DM && OF_CONTROL being set and
-functionally requires REGMAP. As part of fixing that issue, we change
-"tristate" to "bool" and remove mentions of module support as that's not
-a thing in U-Boot.
+for REGMAP (and xPL variants). As this is a library function, it should
+always be selected and not depended on by other functionality. This is
+largely done correctly today, so just correct the few outliers.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Marek Vasut <marek.vasut+usb@mailbox.org>
-Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-Cc: Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
----
- drivers/usb/isp1760/Kconfig | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ arch/arm/mach-airoha/Kconfig       |  1 +
+ arch/arm/mach-aspeed/Kconfig       |  1 +
+ arch/powerpc/cpu/mpc83xx/Kconfig   |  1 +
+ configs/imx8m_data_modul.config    |  1 -
+ configs/imx95_evk.config           |  1 -
+ configs/imx_dhsom.config           |  1 -
+ configs/kontron-osm-s-mx8mp.config |  1 -
+ configs/kontron-osm-s-mx93.config  |  1 -
+ configs/renesas_rcar64.config      |  1 -
+ drivers/clk/microchip/Kconfig      |  1 -
+ drivers/core/Kconfig               | 19 +++++++++++--------
+ drivers/misc/Kconfig               |  3 ++-
+ drivers/mmc/Kconfig                |  3 ++-
+ 13 files changed, 18 insertions(+), 17 deletions(-)
 
-diff --git a/drivers/usb/isp1760/Kconfig b/drivers/usb/isp1760/Kconfig
-index 993d71e74cd2..d1c5a687d9e7 100644
---- a/drivers/usb/isp1760/Kconfig
-+++ b/drivers/usb/isp1760/Kconfig
-@@ -1,11 +1,13 @@
- # SPDX-License-Identifier: GPL-2.0
- 
- config USB_ISP1760
--	tristate "NXP ISP 1760/1761/1763 support"
-+	bool "NXP ISP 1760/1761/1763 support"
-+	depends on DM && OF_CONTROL
- 	select DM_USB
+diff --git a/arch/arm/mach-airoha/Kconfig b/arch/arm/mach-airoha/Kconfig
+index b9cd0a413e10..4b0374001d0c 100644
+--- a/arch/arm/mach-airoha/Kconfig
++++ b/arch/arm/mach-airoha/Kconfig
+@@ -10,6 +10,7 @@ config TARGET_EN7523
+ 	bool "Airoha EN7523 SoC"
+ 	select CPU_V7A
+ 	select ARMV7_SET_CORTEX_SMPEN
 +	select REGMAP
- 	select USB_HOST
  	help
--	  Say Y or M here if your system as an ISP1760/1761/1763 USB host
-+	  Say Y here if your system as an ISP1760/1761/1763 USB host
- 	  controller.
+ 	  The Airoha EN7523 family (en7523/en7529/en7562) is an ARM-based
+ 	  SoCs with a dual-core CPU. It comes with Wi-Fi 5/6 support and
+diff --git a/arch/arm/mach-aspeed/Kconfig b/arch/arm/mach-aspeed/Kconfig
+index 9cf60378c118..c88b1e59366e 100644
+--- a/arch/arm/mach-aspeed/Kconfig
++++ b/arch/arm/mach-aspeed/Kconfig
+@@ -18,6 +18,7 @@ config ASPEED_AST2500
+ 	bool "Support Aspeed AST2500 SoC"
+ 	select CPU_ARM1176
+ 	select DM_RESET
++	select REGMAP
+ 	help
+ 	  The Aspeed AST2500 is a ARM-based SoC with arm1176 CPU.
+ 	  It is used as Board Management Controller on many server boards,
+diff --git a/arch/powerpc/cpu/mpc83xx/Kconfig b/arch/powerpc/cpu/mpc83xx/Kconfig
+index 8ac83420ee22..0dc72c874237 100644
+--- a/arch/powerpc/cpu/mpc83xx/Kconfig
++++ b/arch/powerpc/cpu/mpc83xx/Kconfig
+@@ -73,6 +73,7 @@ config TARGET_KMTEPR2
+ config TARGET_GAZERBEAM
+ 	bool "Support gazerbeam"
+ 	select ARCH_MPC8308
++	select REGMAP
+ 	select SYS_FSL_ERRATUM_ESDHC111
+ 	imply ENV_IS_IN_FLASH
+ 	help
+diff --git a/configs/imx8m_data_modul.config b/configs/imx8m_data_modul.config
+index 4634a0972f09..18c7bb536fa0 100644
+--- a/configs/imx8m_data_modul.config
++++ b/configs/imx8m_data_modul.config
+@@ -149,7 +149,6 @@ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_IMX8M=y
+ CONFIG_POWER_DOMAIN=y
+ CONFIG_PROT_TCP_SACK=y
+-CONFIG_REGMAP=y
+ CONFIG_RGMII=y
+ CONFIG_RTC_M41T62=y
+ CONFIG_SF_DEFAULT_SPEED=50000000
+diff --git a/configs/imx95_evk.config b/configs/imx95_evk.config
+index 3db583cce597..e7832d86fe91 100644
+--- a/configs/imx95_evk.config
++++ b/configs/imx95_evk.config
+@@ -92,7 +92,6 @@ CONFIG_ETHPRIME="eth0"
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SYS_RX_ETH_BUFFER=8
+ CONFIG_SPL_DM=y
+-CONFIG_REGMAP=y
+ CONFIG_SYSCON=y
+ CONFIG_SPL_OF_TRANSLATE=y
+ CONFIG_CLK=y
+diff --git a/configs/imx_dhsom.config b/configs/imx_dhsom.config
+index 4a3ddc7e90b7..a0d67c8a0688 100644
+--- a/configs/imx_dhsom.config
++++ b/configs/imx_dhsom.config
+@@ -28,7 +28,6 @@ CONFIG_ENV_SECT_SIZE_AUTO=y
+ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
  
- 	  This USB controller is usually attached to a non-DMA-Master
+-CONFIG_REGMAP=y
+ CONFIG_SYSCON=y
+ 
+ CONFIG_DM_GPIO=y
+diff --git a/configs/kontron-osm-s-mx8mp.config b/configs/kontron-osm-s-mx8mp.config
+index a8881726e079..786fd3e7a6de 100644
+--- a/configs/kontron-osm-s-mx8mp.config
++++ b/configs/kontron-osm-s-mx8mp.config
+@@ -117,7 +117,6 @@ CONFIG_TFTP_TSIZE=y
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SPL_DM=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+-CONFIG_REGMAP=y
+ CONFIG_SYSCON=y
+ CONFIG_BOOTCOUNT_LIMIT=y
+ CONFIG_BOOTCOUNT_ENV=y
+diff --git a/configs/kontron-osm-s-mx93.config b/configs/kontron-osm-s-mx93.config
+index a6d316de3d87..c2d4de4efa8a 100644
+--- a/configs/kontron-osm-s-mx93.config
++++ b/configs/kontron-osm-s-mx93.config
+@@ -115,7 +115,6 @@ CONFIG_TFTP_TSIZE=y
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SPL_DM=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+-CONFIG_REGMAP=y
+ CONFIG_SYSCON=y
+ CONFIG_ADC=y
+ CONFIG_ADC_IMX93=y
+diff --git a/configs/renesas_rcar64.config b/configs/renesas_rcar64.config
+index c2cb88dc157f..da4b262fc6a5 100644
+--- a/configs/renesas_rcar64.config
++++ b/configs/renesas_rcar64.config
+@@ -6,7 +6,6 @@ CONFIG_CMD_TEMPERATURE=y
+ CONFIG_DM_THERMAL=y
+ CONFIG_PHY_ANEG_TIMEOUT=20000
+ CONFIG_RCAR_GEN3_THERMAL=y
+-CONFIG_REGMAP=y
+ CONFIG_REMAKE_ELF=y
+ CONFIG_RENESAS_RPC_SPI=y
+ CONFIG_SUPPORT_RAW_INITRD=y
+diff --git a/drivers/clk/microchip/Kconfig b/drivers/clk/microchip/Kconfig
+index 62072e100b18..6ac7c9c56547 100644
+--- a/drivers/clk/microchip/Kconfig
++++ b/drivers/clk/microchip/Kconfig
+@@ -2,6 +2,5 @@ config CLK_MPFS
+ 	bool "Clock support for Microchip PolarFire SoC"
+ 	depends on CLK && CLK_CCF
+ 	depends on SYSCON
+-	depends on REGMAP
+ 	help
+ 	  This enables support clock driver for Microchip PolarFire SoC platform.
+diff --git a/drivers/core/Kconfig b/drivers/core/Kconfig
+index c9253099e6ea..5419bf65b5d6 100644
+--- a/drivers/core/Kconfig
++++ b/drivers/core/Kconfig
+@@ -195,7 +195,7 @@ config DM_DMA
+ 	  the physical address space.
+ 
+ config REGMAP
+-	bool "Support register maps"
++	bool
+ 	depends on DM
+ 	select DEVRES
+ 	help
+@@ -206,7 +206,7 @@ config REGMAP
+ 	  direct memory access.
+ 
+ config SPL_REGMAP
+-	bool "Support register maps in SPL"
++	bool
+ 	depends on SPL_DM
+ 	help
+ 	  Hardware peripherals tend to have one or more sets of registers
+@@ -216,7 +216,7 @@ config SPL_REGMAP
+ 	  direct memory access.
+ 
+ config TPL_REGMAP
+-	bool "Support register maps in TPL"
++	bool
+ 	depends on TPL_DM
+ 	help
+ 	  Hardware peripherals tend to have one or more sets of registers
+@@ -226,7 +226,7 @@ config TPL_REGMAP
+ 	  direct memory access.
+ 
+ config VPL_REGMAP
+-	bool "Support register maps in VPL"
++	bool
+ 	depends on VPL_DM
+ 	help
+ 	  Hardware peripherals tend to have one or more sets of registers
+@@ -237,7 +237,7 @@ config VPL_REGMAP
+ 
+ config SYSCON
+ 	bool "Support system controllers"
+-	depends on REGMAP
++	select REGMAP
+ 	help
+ 	  Many SoCs have a number of system controllers which are dealt with
+ 	  as a group by a single driver. Some common functionality is provided
+@@ -246,7 +246,8 @@ config SYSCON
+ 
+ config SPL_SYSCON
+ 	bool "Support system controllers in SPL"
+-	depends on SPL_REGMAP
++	depends on SPL_DM
++	select SPL_REGMAP
+ 	help
+ 	  Many SoCs have a number of system controllers which are dealt with
+ 	  as a group by a single driver. Some common functionality is provided
+@@ -255,7 +256,8 @@ config SPL_SYSCON
+ 
+ config TPL_SYSCON
+ 	bool "Support system controllers in TPL"
+-	depends on TPL_REGMAP
++	depends on TPL_DM
++	select TPL_REGMAP
+ 	help
+ 	  Many SoCs have a number of system controllers which are dealt with
+ 	  as a group by a single driver. Some common functionality is provided
+@@ -264,7 +266,8 @@ config TPL_SYSCON
+ 
+ config VPL_SYSCON
+ 	bool "Support system controllers in VPL"
+-	depends on VPL_REGMAP
++	depends on VPL_DM
++	select VPL_REGMAP
+ 	help
+ 	  Many SoCs have a number of system controllers which are dealt with
+ 	  as a group by a single driver. Some common functionality is provided
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index a0aa290480eb..798f1dbf26cf 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -350,7 +350,8 @@ config MXS_OCOTP
+ 
+ config NPCM_HOST
+ 	bool "Enable support espi or LPC for Host"
+-	depends on REGMAP && SYSCON
++	depends on SYSCON
++	select REGMAP
+ 	help
+ 	  Enable NPCM BMC espi or LPC support for Host reading and writing.
+ 
+diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+index 39caf2eff1b7..22bd3a972bdf 100644
+--- a/drivers/mmc/Kconfig
++++ b/drivers/mmc/Kconfig
+@@ -627,8 +627,9 @@ config MMC_SDHCI_AM654
+ 	depends on ARCH_K3
+ 	depends on MMC_SDHCI
+ 	depends on OF_CONTROL
+-	depends on REGMAP
+ 	select MMC_SDHCI_IO_ACCESSORS
++	select REGMAP
++	select SPL_REGMAP if SPL_MMC
+ 	help
+ 	  Support for Secure Digital Host Controller Interface (SDHCI)
+ 	  controllers present on TI's AM654 SOCs.
 -- 
 2.43.0
 
