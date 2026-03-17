@@ -4,115 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2185F33801
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 06:21:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A0FFF33806
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 06:41:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53AAA83FA3;
-	Tue, 17 Mar 2026 07:21:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 78C4F83FED;
+	Tue, 17 Mar 2026 07:41:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="M9HqYuWl";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="uh8SiEjC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D77B83FB6; Tue, 17 Mar 2026 07:21:39 +0100 (CET)
-Received: from BN8PR05CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::3])
+ id 5ACE084020; Tue, 17 Mar 2026 07:41:46 +0100 (CET)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0AA4283DB6
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:21:37 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+ by phobos.denx.de (Postfix) with ESMTPS id C9E1D83FE9
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:41:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CleES+nSepyL2MF0Akkd3nDl6AjPQxoQZrFvG93ul1Mkl319dSQADaojXCU/kHYMvo4Qn3bEIY1YL1jt+0p16DeXJUP7mIxCt/Ad/IOKbdLGtb7sE48GZBzzwg8KKrbq05TAEVbH1AIzPqJC1RJPfsVb+HpTOJJobBVv8fSryTiDTpFNc9CQ4Kih7JwuO7ClS4ac0A9hUKHtkmfTYiIQMqI05zWHvGsuwBjR4QLuNfoDyymnbcY7pSfTGhVqfvF5gmaydYOklJ4MAaD4AhXDDFurr/tkj3r0uTHTVFrbXsGjjA9MWZ8UpmVhNvaAlthgAow3Cg2Febyr8OBVQMfG8Q==
+ b=OXj7j71GLlQ+FOx/8iIjc24EBfT+zHajD19xqr0TKrPuW7IkCjDOzaiSa0mXzlWt375gvKeeY3wkWZJF+1SbgUeKvrQQYlCvTYCQ6b38bNrWEx/OY0GJ9U2OZ7PGlQmj/TH87zmBJW5BFBT6Cmv3gGWjC1NkxSuEJv8HVTP7vI8GgvP4KUVMzYpN12dI3fH4LmehMkrQ+7sz0Kb1X+tlL3F3DGjEQSJ9xCTr5mp8bzE0CggCXJTm2J21j1JiYXsA9zW5YOsb3LbmzhLneUAefWqu0GVPYUbpESWC75foFvnsomyrE8/P3WoGDjwgztrQp4szoUGpNT1L+gAM5eInEg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NthdqgyaG9IKBcNLmjorCTvjVtcaNAN+gh+KHsAuU3o=;
- b=iR4mfAd3b9Jjn053onHAi48NCWFxGNGBnxAfryVnqy9fSNp5ThRTAlaHw4jbXbAm6xMv3o14cUaXllJaPfp6WKBSkqe4OY9SStTmYVXPpg07+xgkYTXQNwN9zPUy/TS/1CYWfOXRsmLzO6lOitieSX/CBf78LYKsOskMZNVyMverg1eFpNx02l115Wq15g8PHqQSX+nUeybQiVY1JFYj30sg03FN8C5rTwWSakkXdOPIUBTPLGL3FLQKdaXQ5Jc4+YbDmyaQ+U0YpvZhWwG3DchdCmsFtpmN49bkaXiBEdskgOe5yeX2LGYxwBGHTcbLvVPKbI2EEfJYN8Y5x7tWlg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=w7YPim+UMkoETWpqEQVlvoeHDkrC9+QAgBdH1hOLMV8=;
+ b=IUayJSJddVFe1BB424LO/+ZfSJHc1BggFQdzzGtJtrn47utVshoJ44mVRtWLcaWNvPwDogD2Ty4zriWtUIps+J6/geuuZU3RyCSsbEEl0/7IkHpP6bGcRmslJncI8QuoygtINNhXxfLUE+WSD5ybbozYIPkNkZJrNnXFm5B6zcWJAkDYTsHvdt+OMV96Ww7jeZ0/WntdK46L7zro0xgKCo4VG2flrDHQcNTY8Rv+Z4XOAVNskJXYB5YIARvSCkbhMO2tDOrON3NrZahgN3PliDOwSwAkwq/ElZm2zhJejSqKtyWOqNYTPxXBKteLM5ai8TBpNWzcF2wW7fgiC8vr7w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
+ dkim=pass header.d=phytec.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NthdqgyaG9IKBcNLmjorCTvjVtcaNAN+gh+KHsAuU3o=;
- b=M9HqYuWlNfGf1diwa2mJfXE+n4q3Z2oX77AJmlXc+CdJjrUQu+3HaroRfblKxQ76IAhWTu9C8RJ7O523D2lwdx18nNKlWqpR00JNV+vzf7rEr9tQ0YLB+eyrTlguv7fjHWrvopnwZv3zoXbsXHmJau2gxtwKFeWvX4NjlzN/kcM=
-Received: from DSZP220CA0001.NAMP220.PROD.OUTLOOK.COM (2603:10b6:5:280::15) by
- PH8PR10MB6575.namprd10.prod.outlook.com (2603:10b6:510:225::8) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9700.18; Tue, 17 Mar 2026 06:21:34 +0000
-Received: from DS2PEPF000061C2.namprd02.prod.outlook.com
- (2603:10b6:5:280:cafe::1) by DSZP220CA0001.outlook.office365.com
- (2603:10b6:5:280::15) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9700.27 via Frontend Transport; Tue,
- 17 Mar 2026 06:21:34 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- DS2PEPF000061C2.mail.protection.outlook.com (10.167.23.69) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9700.17 via Frontend Transport; Tue, 17 Mar 2026 06:21:33 +0000
-Received: from DFLE211.ent.ti.com (10.64.6.69) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 17 Mar
- 2026 01:21:25 -0500
-Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE211.ent.ti.com
- (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 17 Mar
- 2026 01:21:24 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 17 Mar 2026 01:21:24 -0500
-Received: from localhost (ada0543016.dhcp.ti.com [172.24.233.9])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62H6LNbF2655121;
- Tue, 17 Mar 2026 01:21:24 -0500
+ bh=w7YPim+UMkoETWpqEQVlvoeHDkrC9+QAgBdH1hOLMV8=;
+ b=uh8SiEjCznMRRtQwYtzKC5SPErCikkTW+EJocAN+fcsUsXmkGX4xnDrgAk/0Bl3KNbij07Nn0JELIo497f+IoLrwdWXRQRwOrasPVXMo30PHz9r4oQO25zhuWSixupUDR/kyoEqMdXmYLXpLnhjS7jBXdM6TAKJT+90XW+aK9Y1+TYIbAIAUDe7OtQya2OwIdiJw5B1UH1o+++rSoXlWWEIzGANdriSOHj88ZJE0YsrriO0EPFCJ6Edzt+/u2+uWDyZ8v7UEZnUrKU42pKRTP7LSTDUcV0YNwxmGSNd/ejwepc0BNHLkF4VGx3QbAFg4G29IWbxyDwri+0FgEOqm7A==
+Received: from VI2P195MB2491.EURP195.PROD.OUTLOOK.COM (2603:10a6:800:22f::14)
+ by DB9P195MB1828.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:39f::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.19; Tue, 17 Mar
+ 2026 06:41:35 +0000
+Received: from VI2P195MB2491.EURP195.PROD.OUTLOOK.COM
+ ([fe80::1f1b:2a8e:8507:efa7]) by VI2P195MB2491.EURP195.PROD.OUTLOOK.COM
+ ([fe80::1f1b:2a8e:8507:efa7%4]) with mapi id 15.20.9723.014; Tue, 17 Mar 2026
+ 06:41:35 +0000
+From: Yannic Moog <Y.Moog@phytec.de>
+To: Fabio Estevam <festevam@gmail.com>, "Peng Fan (OSS)"
+ <peng.fan@oss.nxp.com>, Ye Li <ye.li@nxp.com>
+CC: U-Boot-Denx <u-boot@lists.denx.de>, Alice Guo <alice.guo@nxp.com>, Tom
+ Rini <trini@konsulko.com>, Francesco Dolcini <francesco.dolcini@toradex.com>
+Subject: Re: OPTEE on i.MX8MP
+Thread-Topic: OPTEE on i.MX8MP
+Thread-Index: AQHctbLnUrshubmV60aSzY4elLVg57WyRsCA
+Date: Tue, 17 Mar 2026 06:41:35 +0000
+Message-ID: <4e42b1c5ea6ea728c84ba1a8d48f48ae55780332.camel@phytec.de>
+References: <CAOMZO5D3yqFaDgriO2x3fnCrwGm0oV-chLsy3eOR2O3yg_MvNw@mail.gmail.com>
+In-Reply-To: <CAOMZO5D3yqFaDgriO2x3fnCrwGm0oV-chLsy3eOR2O3yg_MvNw@mail.gmail.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: VI2P195MB2491:EE_|DB9P195MB1828:EE_
+x-ms-office365-filtering-correlation-id: 652c31a6-85ae-48b3-3587-08de83f03c04
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|38070700021|22082099003|56012099003|18002099003;
+x-microsoft-antispam-message-info: nAQHeFWA4Bu8DLvV5JSuCIxqVqDwpZPj0tCBvmqBPtUqKRnJx2CG05/FKH7bcwVQ7u5nf1qkCAwCDFapDoRsv3LbfFHmA6Wbhk9ZAB+4ucxjQurfQJeta+l5DjaUrY0yL8dBDWjTrNHlTLRxbpJ1AVabmc+TeMZUgsmKU7M1yRNQjTxa7jv5iES3Jn53V4lTkmivgzAGen2i030RLe1Wu2kR5L7lbvaktmU0D0Pb/FM5W2KQasBvDcC8ilKi8xZOUg8jrUfRXYwnd+9tZUqrnsRAHvB2Rk+La6cexVkXCX8szlG5+rKIHvBIw+wjjKysgDE6ub+rQ2J9zP7XZaawOH69Ef+2zVgbRmpS0Opm1oI1/ZOWqgXkkDQ2H7MJIPq1HuOAgQU/eUm1xIBfXlNRFiALMR6fcsx0AgwsXwG5copG8jq5KPyl8gH5K5v+7Uq5FYdkWNJl+5KLVv6Mv55Ow2wxi5yoIh2+rDdEitcHM5JRPvaW8JiDWYHg1rPsGSaU2h4q9e2ZTt7gw2CJLWtHc/sH2qa6FXjw8EQVauzuaaYQBQzRFHclA0AsOxORfjlKjU8UO41m2jvB/h5T2Y5wODlEZuVufqGzt7xbRJBbHVMo+v7FFxRpfRfMww3ENKNs+eoxXK3Qphnk4yCfG67ZfKOYPNOImLqcoPNR07rxlZmL+pQ7tJaTnKz3PQC7wBl5v3XW/zOPNuphn0kotlfKE2LDu+aOfsoLW4GiSLc5Ox3larH7+i35duo67qdvTtM0
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:VI2P195MB2491.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(38070700021)(22082099003)(56012099003)(18002099003);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?N0tDWThDdWVZUlBWN3pmd2g5b3ZsdVk0elhOdU5yZGFLRGQ1QVdIQTdWZHNM?=
+ =?utf-8?B?TmdOY2hTM2o5YTZma21iMStiOEdDQ1Y1WnV2dllZZnVnOGRpYzVScHN0b0Fw?=
+ =?utf-8?B?dEdoOW9mVG1Na1diTkZlTDlLUWVVcEtVSUJadjBnWlpCTUpUdlIyb2dBZ0lV?=
+ =?utf-8?B?Q0UvKzJoQkJuM0lWYzNlMWxHRUFDK0pBSEh5TTVvQWZWYWRLMXJIVWhVeCti?=
+ =?utf-8?B?SFhBSVVjcExSWU8vaVhBdEZtak1zTWtxMFRqKzRZWWlGWHBOakRYaURkd2Qr?=
+ =?utf-8?B?SEZhTWM1aVN5amYrV29KOU9zWCtFNUhOQ3B1RWZhNlpvV3B6VkVuWGFpMkdW?=
+ =?utf-8?B?VjhIdjIxMFNQT3NqQWxzZkV0MG45enpuR25kRWZldXZ0eXA0b1Jzdm1YN3Ft?=
+ =?utf-8?B?OE4rUGxvWlliTjNQU1oxaVpnb3RzdW5EQjV3aHEzY0NHZ1hSTG5yVGljY3dN?=
+ =?utf-8?B?VlZDVmd5bXIzWldGYkVPaWdUdHJzNHdqb21PMHQ4YlRPZUJZaWgvY0dHWHM2?=
+ =?utf-8?B?TjVvenBOZi9IU05qMW5lb2Y3dng1L1gyaDJaWTNDTTA4QVhVT09hWUhUQ3VH?=
+ =?utf-8?B?V055SGpKSllMa3czaHlBcUtvTUFyT094dWRLNTBQYWtRTFNPSHAvYVM5RTVZ?=
+ =?utf-8?B?ZDB6UjJMeFJvTUJjVm81WmVxcHNGNDg1ZitlRHdHbjJ0cWtmRmkwNjBFQWlE?=
+ =?utf-8?B?MG54aUs1SkEzaklZcFlxSDBGUkNwQ2ZURmVJMFVlVkU5SnZpKzJ0VkN0Q05x?=
+ =?utf-8?B?ZWp3QXQvS0ZKYjVTbXdzNDg2YzFSTEJ4WE10KzZveTdSNnRvbHUwblJ5dXhO?=
+ =?utf-8?B?TTc3VStveUNHOHhHNGVaMk1PVTlURWNTd0QrWkJvTzNPQlM0ZjFuMkJqRXVJ?=
+ =?utf-8?B?dmtSTGxYWW5LTVR6ZVRrZmxDMWxhU05zOEFSaTA3RHhnUlJtVzdiRzJNYUpw?=
+ =?utf-8?B?TmxUL1Voeno5V21vUzZibFIrcnpON0FQK3hxZUFFcU1Pd0Q0d2N1VDRYUXEv?=
+ =?utf-8?B?WEozd2JwQTJoVEZJMkFJR2RzVU80UndwNHZ1K1ZsUGFlRVFoMDNibkVEdkNX?=
+ =?utf-8?B?S2ZNVnVjOWlFUTIwN2E0TWpobDFWa2tHQW5pZHBaclBLN0VXS2JHSHJhTGxs?=
+ =?utf-8?B?ODlwVE5Pamp5Y3BtQ28vSFdFbzl5K1NibkxoN0w4ZjJBb0hpRFYyZlpDdlJ3?=
+ =?utf-8?B?d1BiN2Zvbld4WjI0djFZT3gyU0J3a29qTTB1ZzliL2Vlb3l5NlZGbHYvUkFN?=
+ =?utf-8?B?M0RQRGNoRm90a0ZYa20vQXg0M1pnbFpYSUJSZzlHMVZreVZ6Tlo3R2JuUVE4?=
+ =?utf-8?B?bmlyN0pDbjQzdzRGcjVDQ1gwV3dWbXdwcTdqU0s2bllJRnpNVFd4RVRoazVX?=
+ =?utf-8?B?NE40Rk5kcHY2OThoZG1EWDBGVXZ2eE9Felg0VVQ5WkxqZ2kvOWVLQmNteHBC?=
+ =?utf-8?B?OC95azdZYkYxUFJCV2VVNURnTHRLRC9BNTdOMnlaWWduVHoxL1ZjMWJDSWti?=
+ =?utf-8?B?QnN1QTM2aTR5cTIzSWxjKzA2YjhZREF5bmpyTDBrQmtDL2RDNjcrYzBxSUdj?=
+ =?utf-8?B?SXk1dzRsQU1JL1M1eWM0WmpPTDVuUUhzek0vYWwyUUVDWXVKb3dYUzN2UUYy?=
+ =?utf-8?B?dDFka2xzaXVoQSttUTFwOU13TmFWMDFpQ1VoM09TZWt4WmpNOGNtODd3MDFi?=
+ =?utf-8?B?V29oeWVPT3dMbC9SZE1ic2F2QjRMbHA3YU5lZHRtdmhIcEp6WUNnZy94a3BO?=
+ =?utf-8?B?eHhIMCttN00rV2VNMDhWdTFPVkN5aVpYUUJUSDdrMkU0RGRTT0xTRkt6K0gy?=
+ =?utf-8?B?VDliSjRINjlmUHZ0b3p3aEVmMnZhcktjVmp3b3VPc3BZT1h3N1RpdWUrUjRV?=
+ =?utf-8?B?ZXNycW1oU2xOYjBMdGdZdkhWVTB3WFdHRGtYcVRONkFuN3dxelFQRFBCSlNY?=
+ =?utf-8?B?YXllajBpRjZ1WFVreDdzUkNleThLV2cwZG1FWm1RUGZna1JXamFNanBtcXdR?=
+ =?utf-8?B?V0FSNS9Sa3VEVW9MU3VJeSt2NnluWlNxd2NabFVRazhEdWNoSGtaL2szWTly?=
+ =?utf-8?B?ZWVJalVsR05aQUMzSU1RQ0JKTEVRdDh6M1ZGOVFLdkVIQk85ZTE0TTBBWnV3?=
+ =?utf-8?B?VldEcENrQXc4dWZONkU5bVN2YmZud2Rpa091cVBHcHE1aHJKZ2hiVlhGVVZQ?=
+ =?utf-8?B?aUJ2UVNiOVBNczNaM05wMjltbnVQMlgyK24zUyttUi8vei8rYnpXNHVkajB6?=
+ =?utf-8?B?eU5kWlpwcVc1M1BGUk9ON0RMUGptNDFvb0hvVmVqUk1OUUxic3VNcWtia1Ba?=
+ =?utf-8?Q?rKooXr5ZPiFRvBx9UL?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <5F18CB44AF25A04894836BA7573B1231@EURP195.PROD.OUTLOOK.COM>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Tue, 17 Mar 2026 11:51:23 +0530
-Message-ID: <DH4U9SAX4CR6.36CGITXOROQTA@ti.com>
-Subject: Re: [PATCH] core: Rework REGMAP symbols implementation
-From: Anshul Dalal <anshuld@ti.com>
-To: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260317012419.4162359-1-trini@konsulko.com>
-In-Reply-To: <20260317012419.4162359-1-trini@konsulko.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF000061C2:EE_|PH8PR10MB6575:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8feba3f9-bb3e-4703-e113-08de83ed6f7a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700016|376014|1800799024|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: TpARgeURC+WwjcuXp9MlLf2GuOCDxiBgkx7BWKuqNQ5xE72OMDJwirBE4e32nUX+nnhMvrwyOJgXxIM8EwoOD5fVH+dfTIHVxpJyucCloP+YcBzs24YHmq4gSeIyHlYhKW5IEnTdwHEbUqM54TKl2N8CvJM6PtvmGU4lECSuS0lJyKz+Y8XFCb/tQa2RV01eYTBLP+gge+qBafBo7Op8vZPC5KvEw9ExG0q0XBi/vUa304H8M/q4dLjz9NLufSUwxmDz2bKSXbI5aa+UWfoRjmvldEd55JgusOkUj0SFFVHKZWQA41zfE26ddoqR45IsWpDVH3Hl2mgIt1K3m1vZhfSrb4qauImRAFqkNZaqOGGUa+TgF7dFd3L/GNsr6fY29Phi3Q6RKPjdvDk3dkD/8ii844ZG1utQmX3j8XTQK3NGC7qJT6/gEP/Yj5h8+82LjJ5XNst3BxD1ksrfaLaC8ALhEEoorFQUSjN0HGmjSbLsuuZGykUly2W4iS9NPmrAXEvw4+9sjKdHNeFo9eiWIRJ31TpfZiAAfAx0wdWO3C9K5LocLG1r7ERP2QDEuawvBKwvFU+8yNTQX4ip6lpscjp/za6jl7rW3EuGvzR/mb2x1dw5jd8u6BQXnqprzQcT5Lsz7yCJod2/R5+XGL3AACHIHIZYoxltJXzLmfilVfEdH2djDb3VTgZL1tjxWsarYGyOcBS6r4L+epWePw8DIUN7mNVD7+uYtik0utMhmXvz6v9yIET42GoCHPPiUAHO2W1nqPtJ4H2X8YpnPcbzDA==
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(56012099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: Zy+ojp8KPLhW532XhoJourv1OxlWblZuhTRHZShk+ysLdL1OjRKsAsl1oY0lxq3KquTKsedwjMtyxBY+TnyZ6XpmWzADoyAVqACB76RQXY3IMm0f0h+Got2AWgwNzvrTI4NgjBlRS11zZdeUqSkQGPHZ3mf7AhLJDVVcdgdK5hdF5rhsLU6HaO+4T6+aqdnT3KKQUamfVjwV47U9rVjve27KjtsCIPeiYoCxV/Ym16kVGtsOC7wR8v4EpTcrWjOkGb54MyVRinh0eUp4GOMyamMqMTC+DaNZS7VQjVGvSzJ86bUKg4M5b7k2yj5jRkeAJ5fgtMqqznBXIYz2e4gQzE5jqqMR8J4Bshk8n9ANFm6l23e/KdlsEwTs1HpjiZSOfOa3iEqCMRJdGvbDgx6IaZaGWzWKcY/89GeFNm6IBFl4nyDrPjm3cU7g0yOSWAQG
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2026 06:21:33.3059 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8feba3f9-bb3e-4703-e113-08de83ed6f7a
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF000061C2.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR10MB6575
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: VI2P195MB2491.EURP195.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 652c31a6-85ae-48b3-3587-08de83f03c04
+X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Mar 2026 06:41:35.5239 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: TABMXriojxpeD0ZtxCtiY03nXUheljWranpdRUCpcXpRW0d2iKckvUjvJpSX2ZxF7jjHAz71SThBzYr62RzFMg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9P195MB1828
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,267 +149,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue Mar 17, 2026 at 6:54 AM IST, Tom Rini wrote:
-> As exposed by "make randconfig", we have an issue with the dependencies
-> for REGMAP (and xPL variants). As this is a library function, it should
-> always be selected and not depended on by other functionality. This is
-> largely done correctly today, so just correct the few outliers.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
->  arch/arm/mach-airoha/Kconfig       |  1 +
->  arch/arm/mach-aspeed/Kconfig       |  1 +
->  arch/powerpc/cpu/mpc83xx/Kconfig   |  1 +
->  configs/imx8m_data_modul.config    |  1 -
->  configs/imx95_evk.config           |  1 -
->  configs/imx_dhsom.config           |  1 -
->  configs/kontron-osm-s-mx8mp.config |  1 -
->  configs/kontron-osm-s-mx93.config  |  1 -
->  configs/renesas_rcar64.config      |  1 -
->  drivers/clk/microchip/Kconfig      |  1 -
->  drivers/core/Kconfig               | 19 +++++++++++--------
->  drivers/misc/Kconfig               |  3 ++-
->  drivers/mmc/Kconfig                |  3 ++-
->  13 files changed, 18 insertions(+), 17 deletions(-)
->
-> diff --git a/arch/arm/mach-airoha/Kconfig b/arch/arm/mach-airoha/Kconfig
-> index b9cd0a413e10..4b0374001d0c 100644
-> --- a/arch/arm/mach-airoha/Kconfig
-> +++ b/arch/arm/mach-airoha/Kconfig
-> @@ -10,6 +10,7 @@ config TARGET_EN7523
->  	bool "Airoha EN7523 SoC"
->  	select CPU_V7A
->  	select ARMV7_SET_CORTEX_SMPEN
-> +	select REGMAP
->  	help
->  	  The Airoha EN7523 family (en7523/en7529/en7562) is an ARM-based
->  	  SoCs with a dual-core CPU. It comes with Wi-Fi 5/6 support and
-> diff --git a/arch/arm/mach-aspeed/Kconfig b/arch/arm/mach-aspeed/Kconfig
-> index 9cf60378c118..c88b1e59366e 100644
-> --- a/arch/arm/mach-aspeed/Kconfig
-> +++ b/arch/arm/mach-aspeed/Kconfig
-> @@ -18,6 +18,7 @@ config ASPEED_AST2500
->  	bool "Support Aspeed AST2500 SoC"
->  	select CPU_ARM1176
->  	select DM_RESET
-> +	select REGMAP
->  	help
->  	  The Aspeed AST2500 is a ARM-based SoC with arm1176 CPU.
->  	  It is used as Board Management Controller on many server boards,
-> diff --git a/arch/powerpc/cpu/mpc83xx/Kconfig b/arch/powerpc/cpu/mpc83xx/=
-Kconfig
-> index 8ac83420ee22..0dc72c874237 100644
-> --- a/arch/powerpc/cpu/mpc83xx/Kconfig
-> +++ b/arch/powerpc/cpu/mpc83xx/Kconfig
-> @@ -73,6 +73,7 @@ config TARGET_KMTEPR2
->  config TARGET_GAZERBEAM
->  	bool "Support gazerbeam"
->  	select ARCH_MPC8308
-> +	select REGMAP
->  	select SYS_FSL_ERRATUM_ESDHC111
->  	imply ENV_IS_IN_FLASH
->  	help
-> diff --git a/configs/imx8m_data_modul.config b/configs/imx8m_data_modul.c=
-onfig
-> index 4634a0972f09..18c7bb536fa0 100644
-> --- a/configs/imx8m_data_modul.config
-> +++ b/configs/imx8m_data_modul.config
-> @@ -149,7 +149,6 @@ CONFIG_PINCTRL=3Dy
->  CONFIG_PINCTRL_IMX8M=3Dy
->  CONFIG_POWER_DOMAIN=3Dy
->  CONFIG_PROT_TCP_SACK=3Dy
-> -CONFIG_REGMAP=3Dy
->  CONFIG_RGMII=3Dy
->  CONFIG_RTC_M41T62=3Dy
->  CONFIG_SF_DEFAULT_SPEED=3D50000000
-> diff --git a/configs/imx95_evk.config b/configs/imx95_evk.config
-> index 3db583cce597..e7832d86fe91 100644
-> --- a/configs/imx95_evk.config
-> +++ b/configs/imx95_evk.config
-> @@ -92,7 +92,6 @@ CONFIG_ETHPRIME=3D"eth0"
->  CONFIG_NET_RANDOM_ETHADDR=3Dy
->  CONFIG_SYS_RX_ETH_BUFFER=3D8
->  CONFIG_SPL_DM=3Dy
-> -CONFIG_REGMAP=3Dy
->  CONFIG_SYSCON=3Dy
->  CONFIG_SPL_OF_TRANSLATE=3Dy
->  CONFIG_CLK=3Dy
-> diff --git a/configs/imx_dhsom.config b/configs/imx_dhsom.config
-> index 4a3ddc7e90b7..a0d67c8a0688 100644
-> --- a/configs/imx_dhsom.config
-> +++ b/configs/imx_dhsom.config
-> @@ -28,7 +28,6 @@ CONFIG_ENV_SECT_SIZE_AUTO=3Dy
->  CONFIG_ENV_REDUNDANT=3Dy
->  CONFIG_ENV_RELOC_GD_ENV_ADDR=3Dy
-> =20
-> -CONFIG_REGMAP=3Dy
->  CONFIG_SYSCON=3Dy
-> =20
->  CONFIG_DM_GPIO=3Dy
-> diff --git a/configs/kontron-osm-s-mx8mp.config b/configs/kontron-osm-s-m=
-x8mp.config
-> index a8881726e079..786fd3e7a6de 100644
-> --- a/configs/kontron-osm-s-mx8mp.config
-> +++ b/configs/kontron-osm-s-mx8mp.config
-> @@ -117,7 +117,6 @@ CONFIG_TFTP_TSIZE=3Dy
->  CONFIG_NET_RANDOM_ETHADDR=3Dy
->  CONFIG_SPL_DM=3Dy
->  CONFIG_SPL_DM_SEQ_ALIAS=3Dy
-> -CONFIG_REGMAP=3Dy
->  CONFIG_SYSCON=3Dy
->  CONFIG_BOOTCOUNT_LIMIT=3Dy
->  CONFIG_BOOTCOUNT_ENV=3Dy
-> diff --git a/configs/kontron-osm-s-mx93.config b/configs/kontron-osm-s-mx=
-93.config
-> index a6d316de3d87..c2d4de4efa8a 100644
-> --- a/configs/kontron-osm-s-mx93.config
-> +++ b/configs/kontron-osm-s-mx93.config
-> @@ -115,7 +115,6 @@ CONFIG_TFTP_TSIZE=3Dy
->  CONFIG_NET_RANDOM_ETHADDR=3Dy
->  CONFIG_SPL_DM=3Dy
->  CONFIG_SPL_DM_SEQ_ALIAS=3Dy
-> -CONFIG_REGMAP=3Dy
->  CONFIG_SYSCON=3Dy
->  CONFIG_ADC=3Dy
->  CONFIG_ADC_IMX93=3Dy
-> diff --git a/configs/renesas_rcar64.config b/configs/renesas_rcar64.confi=
-g
-> index c2cb88dc157f..da4b262fc6a5 100644
-> --- a/configs/renesas_rcar64.config
-> +++ b/configs/renesas_rcar64.config
-> @@ -6,7 +6,6 @@ CONFIG_CMD_TEMPERATURE=3Dy
->  CONFIG_DM_THERMAL=3Dy
->  CONFIG_PHY_ANEG_TIMEOUT=3D20000
->  CONFIG_RCAR_GEN3_THERMAL=3Dy
-> -CONFIG_REGMAP=3Dy
->  CONFIG_REMAKE_ELF=3Dy
->  CONFIG_RENESAS_RPC_SPI=3Dy
->  CONFIG_SUPPORT_RAW_INITRD=3Dy
-> diff --git a/drivers/clk/microchip/Kconfig b/drivers/clk/microchip/Kconfi=
-g
-> index 62072e100b18..6ac7c9c56547 100644
-> --- a/drivers/clk/microchip/Kconfig
-> +++ b/drivers/clk/microchip/Kconfig
-> @@ -2,6 +2,5 @@ config CLK_MPFS
->  	bool "Clock support for Microchip PolarFire SoC"
->  	depends on CLK && CLK_CCF
->  	depends on SYSCON
-> -	depends on REGMAP
->  	help
->  	  This enables support clock driver for Microchip PolarFire SoC platfor=
-m.
-> diff --git a/drivers/core/Kconfig b/drivers/core/Kconfig
-> index c9253099e6ea..5419bf65b5d6 100644
-> --- a/drivers/core/Kconfig
-> +++ b/drivers/core/Kconfig
-> @@ -195,7 +195,7 @@ config DM_DMA
->  	  the physical address space.
-> =20
->  config REGMAP
-> -	bool "Support register maps"
-> +	bool
->  	depends on DM
->  	select DEVRES
->  	help
-> @@ -206,7 +206,7 @@ config REGMAP
->  	  direct memory access.
-> =20
->  config SPL_REGMAP
-> -	bool "Support register maps in SPL"
-> +	bool
->  	depends on SPL_DM
->  	help
->  	  Hardware peripherals tend to have one or more sets of registers
-> @@ -216,7 +216,7 @@ config SPL_REGMAP
->  	  direct memory access.
-> =20
->  config TPL_REGMAP
-> -	bool "Support register maps in TPL"
-> +	bool
->  	depends on TPL_DM
->  	help
->  	  Hardware peripherals tend to have one or more sets of registers
-> @@ -226,7 +226,7 @@ config TPL_REGMAP
->  	  direct memory access.
-> =20
->  config VPL_REGMAP
-> -	bool "Support register maps in VPL"
-> +	bool
->  	depends on VPL_DM
->  	help
->  	  Hardware peripherals tend to have one or more sets of registers
-> @@ -237,7 +237,7 @@ config VPL_REGMAP
-> =20
->  config SYSCON
->  	bool "Support system controllers"
-> -	depends on REGMAP
-> +	select REGMAP
->  	help
->  	  Many SoCs have a number of system controllers which are dealt with
->  	  as a group by a single driver. Some common functionality is provided
-> @@ -246,7 +246,8 @@ config SYSCON
-> =20
->  config SPL_SYSCON
->  	bool "Support system controllers in SPL"
-> -	depends on SPL_REGMAP
-> +	depends on SPL_DM
-> +	select SPL_REGMAP
->  	help
->  	  Many SoCs have a number of system controllers which are dealt with
->  	  as a group by a single driver. Some common functionality is provided
-> @@ -255,7 +256,8 @@ config SPL_SYSCON
-> =20
->  config TPL_SYSCON
->  	bool "Support system controllers in TPL"
-> -	depends on TPL_REGMAP
-> +	depends on TPL_DM
-> +	select TPL_REGMAP
->  	help
->  	  Many SoCs have a number of system controllers which are dealt with
->  	  as a group by a single driver. Some common functionality is provided
-> @@ -264,7 +266,8 @@ config TPL_SYSCON
-> =20
->  config VPL_SYSCON
->  	bool "Support system controllers in VPL"
-> -	depends on VPL_REGMAP
-> +	depends on VPL_DM
-> +	select VPL_REGMAP
->  	help
->  	  Many SoCs have a number of system controllers which are dealt with
->  	  as a group by a single driver. Some common functionality is provided
-> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-> index a0aa290480eb..798f1dbf26cf 100644
-> --- a/drivers/misc/Kconfig
-> +++ b/drivers/misc/Kconfig
-> @@ -350,7 +350,8 @@ config MXS_OCOTP
-> =20
->  config NPCM_HOST
->  	bool "Enable support espi or LPC for Host"
-> -	depends on REGMAP && SYSCON
-> +	depends on SYSCON
-> +	select REGMAP
->  	help
->  	  Enable NPCM BMC espi or LPC support for Host reading and writing.
-> =20
-> diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-> index 39caf2eff1b7..22bd3a972bdf 100644
-> --- a/drivers/mmc/Kconfig
-> +++ b/drivers/mmc/Kconfig
-> @@ -627,8 +627,9 @@ config MMC_SDHCI_AM654
->  	depends on ARCH_K3
->  	depends on MMC_SDHCI
->  	depends on OF_CONTROL
-> -	depends on REGMAP
->  	select MMC_SDHCI_IO_ACCESSORS
-> +	select REGMAP
-> +	select SPL_REGMAP if SPL_MMC
-
-With this there should be no need to explicitly set REGMAP configs like
-we do in most of K3 defconfigs for using MMC.
-
-Acked-by: Anshul Dalal <anshuld@ti.com>
-
->  	help
->  	  Support for Secure Digital Host Controller Interface (SDHCI)
->  	  controllers present on TI's AM654 SOCs.
-
+SGkgRmFiaW8sCgpPbiBNb24sIDIwMjYtMDMtMTYgYXQgMjM6MDcgLTAzMDAsIEZhYmlvIEVzdGV2
+YW0gd3JvdGU6Cj4gSGksCj4gCj4gSSdtIHRyeWluZyB0byBib290IHRoZSBpbXg4bXAtZXZrIGJv
+YXJkIHdpdGggT3B0ZWUgc3VwcG9ydC4KPiAKPiBURi1BIHYyLjE0Cj4gbWFrZSAtajEyIENST1NT
+X0NPTVBJTEU9YWFyY2g2NC1saW51eC1nbnUtIFBMQVQ9aW14OG1wIFNQRD1vcHRlZWQgYmwzMQo+
+IAo+IE9wdGVlLU9TIDQuOS4wCj4gbWFrZSAtajEyIENST1NTX0NPTVBJTEU9YWFyY2g2NC1saW51
+eC1nbnUtIE89b3V0L2FybSBQTEFURk9STT1pbXgtbXg4bXBldmsKPiAKPiBUaGVuIEkgY29waWVk
+IHRoZSBibDMxLmJpbiBhbmQgdGVlLmJpbiB0byB0aGUgVS1Cb290IGRpcmVjdG9yeToKCk15IGd1
+ZXNzIGlzIHRoYXQgeW91IGNvcGllZCB0ZWUuYmluLCBub3QgdGVlLXJhdy5iaW4gWzFdIHRvIHRo
+ZSBVLUJvb3QgZGlyZWN0b3J5LgpXZSBuZWVkIHRlZS1yYXcuYmluLgoKWWFubmljCgpbMV0gaHR0
+cHM6Ly9vcHRlZS5yZWFkdGhlZG9jcy5pby9lbi9sYXRlc3QvYXJjaGl0ZWN0dXJlL3BvcnRpbmdf
+Z3VpZGVsaW5lcy5odG1sI2lkNQoKPiAKPiBVLUJvb3QgU1BMIDIwMjYuMDQtcmM0LTAwMDA2LWdl
+ZWZiODIyZmI1NzQgKE1hciAxNiAyMDI2IC0gMjI6NTE6MDUgLTAzMDApCj4gV0RUOsKgwqAgU3Rh
+cnRlZCB3YXRjaGRvZ0AzMDI4MDAwMCB3aXRoIHNlcnZpY2luZyBldmVyeSAxMDAwbXMgKDYwcyB0
+aW1lb3V0KQo+IFNFQzA6wqAgUk5HIGluc3RhbnRpYXRlZAo+IE5vcm1hbCBCb290Cj4gVHJ5aW5n
+IHRvIGJvb3QgZnJvbSBCT09UUk9NCj4gQm9vdCBTdGFnZTogUHJpbWFyeSBib290Cj4gaW1hZ2Ug
+b2Zmc2V0IDB4ODAwMCwg77+9Cj4gVS1Cb290IFNQTCAyMDI2LjA0LXJjNC0wMDAwNi1nZWVmYjgy
+MmZiNTc0IChNYXIgMTYgMjAyNiAtIDIyOjUzOjMwIC0wMzAwKQo+IFdEVDrCoMKgIFN0YXJ0ZWQg
+d2F0Y2hkb2dAMzAyODAwMDAgd2l0aCBzZXJ2aWNpbmcgZXZlcnkgMTAwMG1zICg2MHMgdGltZW91
+dCkKPiBTRUMwOsKgIFJORyBpbnN0YW50aWF0ZWQKPiBOb3JtYWwgQm9vdAo+IFRyeWluZyB0byBi
+b290IGZyb20gQk9PVFJPTQo+IEJvb3QgU3RhZ2U6IFByaW1hcnkgYm9vdAo+IGltYWdlIG9mZnNl
+dCAweDgwMDAsIHBhZ2VzaXplIDB4MjAwLCBpdnQgb2Zmc2V0IDB4MAo+IGxvYWRfc2ltcGxlX2Zp
+dDogU2tpcCBsb2FkICd0ZWUnOiBpbWFnZSBzaXplIGlzIDAhCj4gKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKiogVGVlIGltYWdlIGlzIG5vdCBmb3VuZAo+IE5PVElDRTrCoCBEbyBub3QgcmVs
+ZWFzZSBKUjAgdG8gTlMgYXMgaXQgY2FuIGJlIHVzZWQgYnkgSEFCCj4gTk9USUNFOsKgIEJMMzE6
+IHYyLjE0LjAocmVsZWFzZSk6c2FuZGJveC92Mi4xNAo+IE5PVElDRTrCoCBCTDMxOiBCdWlsdCA6
+IDIyOjE5OjIxLCBNYXIgMTYgMjAyNgo+IEVSUk9SOsKgwqAgRXJyb3IgaW5pdGlhbGl6aW5nIHJ1
+bnRpbWUgc2VydmljZSBvcHRlZWRfZmFzdAo+IAo+IAo+IFUtQm9vdCAyMDI2LjA0LXJjNC0wMDAw
+Ni1nZWVmYjgyMmZiNTc0IChNYXIgMTYgMjAyNiAtIDIyOjUzOjMwIC0wMzAwKQo+IAo+IENQVTrC
+oMKgIE5YUCBpLk1YOE1QWzhdIFJldjEuMCBBNTMgYXQgMTIwMCBNSHoKPiBNb2RlbDogTlhQIGku
+TVg4TVBsdXMgRVZLIGJvYXJkCj4gRFJBTTrCoCA2IEdpQgo+IG9wdGVlIG9wdGVlOiBPUC1URUUg
+YXBpIHVpZCBtaXNtYXRjaMKgICoqKioqKioqKioqKioqKioqKioqKioqKiogVUlEIG1pc21hdGNo
+Cj4gLi4uLgo+IAo+IEFueSBpZGVhcyBhcyB0byB3aHkgT3B0ZWUgZmFpbHM/Cj4gCj4gRG9lcyBh
+bnlvbmUgaGF2ZSBPcHRlZSB3b3JraW5nIG9uIGlteDhtcD8KPiAKPiBUaGFua3MsCj4gCj4gRmFi
+aW8gRXN0ZXZhbQo=
