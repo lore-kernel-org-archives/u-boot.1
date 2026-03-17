@@ -4,95 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDB6DFD875C
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 12:29:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C260FD875C
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 12:29:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EED238426C;
-	Tue, 17 Mar 2026 13:29:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 45C558429E;
+	Tue, 17 Mar 2026 13:29:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W02FTqRr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IEzuuSAB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED6B084286; Tue, 17 Mar 2026 13:29:02 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 9008B842A4; Tue, 17 Mar 2026 13:29:16 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22FF28425F
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 13:29:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DFF4C84297
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 13:29:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-667952fd262so46003a12.2
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 05:29:00 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773750539; cv=none;
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-b8f9568e074so791565766b.0
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 05:29:13 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773750553; cv=none;
  d=google.com; s=arc-20240605;
- b=it5FRcV3ac6+JA5Ga+ZDJurhRR5Y9qom3vT28FmOPOKUHzxL3cS6AFBaF/SxMCZ9Qs
- Px/sZRYc6Zra2XUjO9VvLjD/JJBbT0oQQ51jou7WZpNmSNygBiT9xYLZ8Lb9XoV7L47h
- wh8JhAhsOoGel3+x0mRUs6UKJEUoryfQqV+065wNLWuKvhI5oJvekC7QzTDRwpc7E9fg
- jWXdgXhMJ+gAs1YYrtoivL0tXoF7FjfAok+gEO2TRTU+qhFGd0+qQ5HG4X7dZe7alArX
- 2nko7u6k8XlWK6M5YmLI9IY/ZRSwetjpHSgBT/FBw9PzWPKc9rugoBhrZ0KpEk+OXPm9
- me0Q==
+ b=HRlf3sMr+PNCA/0MwciGfR5QtkfJIph0JQQs2Gc3VQbGouTWjWxaJ/y3NRNo8yorSi
+ DYXxH7wnrVt/ORyz0G0zUQAq7CEzNfCr+FJJn+om05+l8C1Ml21kzOKEC9s96xny3OUF
+ yDCCyfj+76oy2vknPYJE9HiLx8eZ/MWlhscmZiWZBhTXpPkNusx11t4IY5dzpqsQGGOU
+ gGypPFrFgZSLfqglmQstKeYVex8XwKY/1r1WN4oXogq1Dt4iifFUtMCCkukQDrQLF3uY
+ +GJVOFnk9oKaoAIZhxL5NZdkx9+gOogLzYUInKntMxbWJ/zrPHvt7u1rPtjCjz7Q+X5i
+ 3rOg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=b4sfjXJcKGe+/+P4XfN7RaHEPhjf9oS/MxVoEIvcEnk=;
- fh=fhia8wkl5xGUmglYw1Css8upJsuw2Nw8UF3lTjP1QAY=;
- b=Rl0ojlX91zR9ebcAXeYlk4MtE3uBKw/lKwuPDyiT3tTdAHkk+cV3mO6PLOWmC5fhef
- peh612/lUdJMhP3zSLiMc8323mMCMtx68GoOsZCAIGjuav/c4jFl6pL3hmSINVSTIgiR
- WprGbRj17Rd41xymTrWmulyK7apm/XWxyS8vNfb/IR11LYCsrD96mPn/u/M4BMYtc4zY
- q1c/E6gyH1lyibUcL0YuQZe35OgmpM4wqerVrTooRAVxTOr0gEQ03IglGjWXUF6/Gxwp
- 5xBw9oKgflefvOc8jH9vcNVKm62outchptiNQw3XRz13x3Lz74S8uZIAcjBs5ZL0HOPr
- ZL8A==; darn=lists.denx.de
+ bh=1NQUU8sUIhU5Xj3GkE9Z/5WFRG/SdZKcQ1ssF/Novd4=;
+ fh=77GWSjT2mlmLf3PtBjW8TPqEIXbpJQfI8TB2+BGo2u8=;
+ b=WnXd+fMlHgKrNY6ceUtZ8nJcHaAFxEubu1st9uJi788SBK3iXADkWe/0olOT+TGwqQ
+ PKJtBOlr6E2TKcMTYjl3Ins0Q6OVeFbIciS99opCImCUsfw7ELo+HR8OFT3GwnberooA
+ 5m4Xsyb7nxl8I1SQ90Y6MqaWlxmZZu9mZ1ZAkDBg/IMEw8SC50HfSk5pjGz0+ZW0dUE4
+ yMrT9xeKnIBuieqa1+UcPzkAA7PAFA0d62t56OMQ3eoO7QXjTruEMcpUzhoOFtuRV6VD
+ QSKAKAiiVQNK+EhtEtPSfPGqF1lmfeE7Od+NzOAHGH+wNaChKTVFsKzUlU2Z9SR4TzTH
+ upQw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1773750539; x=1774355339; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1773750553; x=1774355353; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=b4sfjXJcKGe+/+P4XfN7RaHEPhjf9oS/MxVoEIvcEnk=;
- b=W02FTqRrklFewj8AykAcCEt0RpSjhEV9IFxbo+pCuhh0zPbr61+aFwYJBG3odhHbje
- qgA4I2bvJ5COI1us7M88ZSO/zdbjBG0CEBJOyHTD085RIgyqSzyYaKsNB7zRewxwbVd1
- qoqpfxDNJtaJXgG8XXWGcm/0vkHNTJkPZP4HI=
+ bh=1NQUU8sUIhU5Xj3GkE9Z/5WFRG/SdZKcQ1ssF/Novd4=;
+ b=IEzuuSABpgfj5oFx7/JRoyncpCkpn/FeDjcLrtiRqyAtMLR/+7Q3pwsP+WxPYjcGAk
+ svT5OKp/lLyn/4lPUjM+xYYXiEoonLy0pcHWkBPLRJC019aArNhpT1TkW1GeoSZniiBx
+ x1i8wTTlbNWVpQUnmmSY7Zi3Fpr1l/GeXr5Q8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773750539; x=1774355339;
+ d=1e100.net; s=20251104; t=1773750553; x=1774355353;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=b4sfjXJcKGe+/+P4XfN7RaHEPhjf9oS/MxVoEIvcEnk=;
- b=RjrUN7xeWPf7GQMX0KOeqL2FNLUX0kbVijQL2IVROp+YZuyNUDucesWG6pOYbMU1e3
- 8aY5KcETatcKy0Bwl/8jLc13X/67UMrq5fg7vlctJUfuscVngtbg1gZvG5qMDd97yATA
- IGCT5RYFPUVJ+HUWXox2NH0JHLCNCFliOB6Hl8Dzl5GLlzc6nty0cU3NNo7yfN4FXovM
- vWrzIz0v0HpFTn1SL6lARIA69Od+59qZsB8yPXvYEHX2h2nP88tLszFVHPYZNUYFhZM7
- LqgCZ8KzHwgI2RVmMa/rVFlrajSK/pqFvW+YGCBRneTMKdEqM0pOoQ66YXVg2DEyXXlf
- SYmA==
-X-Gm-Message-State: AOJu0YyvIkAIwA+FzSEq+Q/hJxlPk5bmeMp4dxRDSmLMoEXcBT/eE8J8
- 4WH4mUNSebSpm8vkLOkT99Es1Q2FuqkX+pjgCn/7VSQ4SyOCN9l6aIBvN2RmZ17dC+i/y/m+j8n
- x6WGGxDfed+pkHQJa+x+/+jW9BstDO7VFzbHfMIZX
-X-Gm-Gg: ATEYQzywaQOa/vSNIlQ3BA1Wl7C+OsQULqSKUV5LHGSxHQnNOqOhVwFGgFymtisoQPJ
- G+87Pj+orQcwr+1ZMQUx7doyn7qf87bkPmPryVNR4O8ty/pOU+FFJSXAO/J1qTftSqf9vRQPIv0
- E18jtgmMJcBWqrXamTEozy3sXHJ3R0HYRjIcd4ZIt1nifkdp3Fh5rmtW+d7PdxFJc+8WPyxgxyh
- nNobrID0MOzuSrblPIo+/ck24hbP5cncdBZkGS/hVlDeXm6OH6txIGTE5TYuqp2wwRlIdSmMlyl
- w3/CSw==
-X-Received: by 2002:a17:907:1b21:b0:b8f:a5c8:f75 with SMTP id
- a640c23a62f3a-b97653bbab0mr1013012166b.52.1773750539376; Tue, 17 Mar 2026
- 05:28:59 -0700 (PDT)
+ bh=1NQUU8sUIhU5Xj3GkE9Z/5WFRG/SdZKcQ1ssF/Novd4=;
+ b=b06Tc7+7pSMtiA293AIr2N/sX1K0BrsM6jf0+x3j9RFTjiCgzjkzkx1bEwgiAorOEu
+ 1dNXtWPcTYjiW0RlIa6ZNa8HC0OU2IKfu2eexaTZQVAGI2K+08G8gy+6DImT2TZ6tA6r
+ D058Mfo3ZMiZzwjPuaeWq/HmzrUvh/4adZykzD6M3KQqADCwk1jGLMFi7qalXUMDtXtF
+ DLTEtWpkKnAFwuGFVDqKe3ZUBzpfFtYXVcXFKyhJ4L014Gr/vIitMPeMYCBLBjUPFn2K
+ y/1xCoYi/Nrt4HM5yodV3pU8JoycTW/9BkvJs5IIRCniG9x5/NbuQFHuz0tHJHYszefB
+ JSNA==
+X-Gm-Message-State: AOJu0YzqdPShbJ1Mk9oqcJ1y2piWn6MBed4AyiflXImOOMHegSldDO7l
+ rzF1OVwxKXCuqMzrfDRnTCWj9qhffJWLfBi3APGDzIW6ucMMFGtQ6kCOXtBNyz8JNIIklYJv/ku
+ +DIC/6OG0NqbaC4+6zrQz7EqflBU1hwJ120q6QmmuYy8AkXgt8OM=
+X-Gm-Gg: ATEYQzwBIvii1p/nnWx0lyl5spiOgW6u6hwejKg5IGDztK23oNE2xP+FeZCeauDp6a4
+ vaew/kyuzRI3cx7gt/R813jDXSfUz8IsU6EiK4csdpwBcjhiaXGTWlITj4CdS8FfcL/Ha75hqRZ
+ jS9vEs/excyAyDp08UNBELzwm1Pk96lM9bpczOt8QXBDfGNScLkGSMIexUkTJQhdLKIeqP+fgb1
+ BaZ7iwUflgBfglfW5NeixnjnyBRizm0LWXND1vKRCibezph1SpN/LD/vL/SciEiYZ0V7fQuvbZm
+ v9plPg==
+X-Received: by 2002:a17:907:a42:b0:b97:17b7:d8eb with SMTP id
+ a640c23a62f3a-b9765392026mr1096857066b.38.1773750553220; Tue, 17 Mar 2026
+ 05:29:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260213192838.157084-1-marex@nabladev.com>
- <CAFLszTjHZ+a17+bZh17DMOJGny6VaWCe4EftpYRE1Bq+RAty4Q@mail.gmail.com>
- <c3d59858-9855-47fd-aa5a-0b861c4e44e8@nabladev.com>
-In-Reply-To: <c3d59858-9855-47fd-aa5a-0b861c4e44e8@nabladev.com>
+References: <20260311120910.3934114-1-ravi@prevas.dk>
+ <20260311120910.3934114-3-ravi@prevas.dk>
+ <CAFLszTjObK850TKYL7PmwFqrQRtdTtSAftVZpLUGSDwo8mApZA@mail.gmail.com>
+ <87ldfsp4sr.fsf@prevas.dk>
+In-Reply-To: <87ldfsp4sr.fsf@prevas.dk>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 17 Mar 2026 06:28:47 -0600
-X-Gm-Features: AaiRm53b_CYSWkCqHFqk-jkfofgHf3HS4kZ5dG-v0xdqrzv3nNbtyeBeoyGHCfM
-Message-ID: <CAFLszTgNA1xmMNH=qtaKurDZdFW3dscMwwKyQ7iU-7EMMDOAuQ@mail.gmail.com>
-Subject: Re: [PATCH v2] binman: add CST backend selection for i.MX8M signing
-To: Marek Vasut <marex@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Tom Rini <trini@konsulko.com>
+Date: Tue, 17 Mar 2026 06:28:57 -0600
+X-Gm-Features: AaiRm513lddp8ArENjHhE_KFWc4fz9Ad1MTSTWvnnNX1Kt8QtUFOpmI_rYtgugE
+Message-ID: <CAFLszThvNq_KXzoyvOULU74EVWDRYcu2OYz0GS6N+D+mT-BD4w@mail.gmail.com>
+Subject: Re: [PATCH 2/3] test: add tests for left-bracket alias for 'test'
+ command
+To: Rasmus Villemoes <ravi@prevas.dk>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,100 +111,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+Heinrich Schuchardt
+Hi Rasmus,
 
-Hi Marek,
-
-On Fri, 13 Feb 2026 at 19:51, Marek Vasut <marex@nabladev.com> wrote:
+On Mon, 16 Mar 2026 at 02:17, Rasmus Villemoes <ravi@prevas.dk> wrote:
 >
-> On 2/13/26 9:20 PM, Simon Glass wrote:
+> On Sun, Mar 15 2026, Simon Glass <sjg@chromium.org> wrote:
 >
-> Hello Simon,
->
-> >> diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> >> index 1bea091344d..a3ebd397d82 100644
-> >> --- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> >> +++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> >> @@ -167,17 +167,25 @@ The nxp-imx8mcst etype is configurable using either DT properties or environment
-> >>   variables. The following DT properties and environment variables are supported.
-> >>   Note that environment variables override DT properties.
-> >>
-> >> -+--------------------+-----------+------------------------------------------------------------------+
-> >> -| DT property        | Variable  | Description                                                      |
-> >> -+====================+===========+==================================================================+
-> >> -| nxp,loader-address |           | SPL base address                                                 |
-> >> -+--------------------+-----------+------------------------------------------------------------------+
-> >> -| nxp,srk-table      | SRK_TABLE | full path to SRK_1_2_3_4_table.bin                               |
-> >> -+--------------------+-----------+------------------------------------------------------------------+
-> >> -| nxp,csf-crt        | CSF_KEY   | full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem |
-> >> -+--------------------+-----------+------------------------------------------------------------------+
-> >> -| nxp,img-crt        | IMG_KEY   | full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
-> >> -+--------------------+-----------+------------------------------------------------------------------+
-> >> ++--------------------+-------------+------------------------------------------------------------------+
-> >> +| DT property        | Variable    | Description                                                      |
-> >> ++====================+=============+==================================================================+
-> >> +| nxp,loader-address |             | SPL base address                                                 |
-> >> ++--------------------+-------------+------------------------------------------------------------------+
-> >> +| nxp,srk-table      | SRK_TABLE   | full path to SRK_1_2_3_4_table.bin                               |
-> >> ++--------------------+-------------+------------------------------------------------------------------+
-> >> +| nxp,csf-crt        | CSF_KEY     | full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem |
-> >> ++--------------------+-------------+------------------------------------------------------------------+
-> >> +| nxp,img-crt        | IMG_KEY     | full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
-> >> ++--------------------+-------------+------------------------------------------------------------------+
-> >> +| nxp,fast-auth      |             | enable fast authentication method                                |
-> >> ++--------------------+-------------+------------------------------------------------------------------+
-> >> +| nxp,srk-crt        | SRK_KEY     | full path to the SRK Key SRK1_sha256_4096_65537_v3_ca_crt.pem    |
-> >> ++--------------------+-------------+------------------------------------------------------------------+
-> >> +| nxp,unlock         |             | unlock CAAM in SPL                                               |
-> >> ++--------------------+-------------+------------------------------------------------------------------+
-> >> +| nxp,cst-backend    | CST_BACKEND | CST tool backend, default is 'ssl', or selectable 'pkcs11'       |
-> >> ++--------------------+-------------+------------------------------------------------------------------+
+> > Hi Rasmus,
 > >
-> > Perhaps point to an example?
-
-Sorry I missed this earlier.
-
->
-> Example of what ? Two lines below, there is an example of using those
-> env vars, see the entire file.
-
-Yes I see it, but it doesn't have CST_BACKEND right?
-
->
-> >>   Environment variables can be set as follows to point the build process
-> >>   to external key material:
-> >> diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
-> >> index 8922d6cd070..29bc778d0e5 100644
-> >> --- a/tools/binman/entries.rst
-> >> +++ b/tools/binman/entries.rst
-> >> @@ -1664,6 +1664,13 @@ Entry: nxp-imx8mcst: NXP i.MX8M CST .cfg file generator and cst invoker
+> > On Wed, 11 Mar 2026 at 06:09, Rasmus Villemoes <ravi@prevas.dk> wrote:
 > >>
-> >>   Properties / Entry arguments:
-> >>       - nxp,loader-address - loader address (SPL text base)
-> >> +    - nxp,srk-table - full path to SRK_1_2_3_4_table.bin
-> >> +    - nxp,csf-crt - full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem
-> >> +    - nxp,img-crt - full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem
-> >> +    - nxp,fast-auth - enable fast authentication method
-> >> +    - nxp,srk-crt - full path to the SRK Key SRK1_sha256_4096_65537_v3_ca_crt.pem
-> >> +    - nxp,unlock - unlock CAAM in SPL
-> >> +    - nxp,cst-backend - CST tool backend, default is 'ssl', or selectable 'pkcs11'
+> >> Duplicate a few of the existing test cases, using the [ spelling, and
+> >> also ensure that the presence of a matching ] as a separate and last
+> >> argument is enforced.
 > >>
+> >> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+> >> ---
+> >>  test/hush/if.c | 31 +++++++++++++++++++++++++++++++
+> >>  1 file changed, 31 insertions(+)
+> >>
+> >> diff --git a/test/hush/if.c b/test/hush/if.c
+> >> index ea615b246a9..148e9a53e90 100644
+> >> --- a/test/hush/if.c
+> >> +++ b/test/hush/if.c
+> >> @@ -315,3 +315,34 @@ static int hush_test_if_z_operator(struct unit_test_state *uts)
+> >>         return 0;
+> >>  }
+> >>  HUSH_TEST(hush_test_if_z_operator, 0);
+> >> +
+> >> +static int hush_test_lbracket_alias(struct unit_test_state *uts)
+> >> +{
+> >> +       char if_formatted[128];
+> >> +       const char *missing_rbracket_error = "[: missing terminating ]";
+> >> +
+> >> +       sprintf(if_formatted, if_format, "[ aaa = aaa ]");
+> >> +       ut_assertok(run_command(if_formatted, 0));
 > >
-> > The way it works is you add this as a comment in nxp_imx8mcst.py and
-> > then run 'binman entry-docs' to generate entries.rst - see here:
+> > How about using run_commandf() so you can do this in one line? Looks
+> > good apart from that.
 > >
-> > https://docs.u-boot.org/en/latest/develop/package/binman.html#entry-documentation
-> Why is there this entries.rst then ? Should the entries be removed from
-> here and moved into the py file or what is this inconsistency ?
+>
+> I did cringe a little when I saw that repeated sprintf()/run_command()
+> pattern all over that file, but I preferred to stay consistent with the
+> existing style.
+>
+> If anything, one should do a whole-sale conversion of that file, but
+> then I'd not use run_commandf() directly, as one would still pass in
+> that if_format argument every time, so rather create a local macro that
+> wraps run_commandf() and provides that if_format as a literal string,
+> which would also enable format checking.
 
-The entries.rst file is there so that the documentation can be build,
-containing it. It might be possible to update 'make htmldocs' to run
-binman to update the generated docs.
+Well you could have a helper function which takes the string argument
+and does the assert. The duplication makes it a bit harder to
+maintain.
 
-Heinrich, what do you think about that?
+sprintf(if_formatted, if_format, "test aaa != aaa");
+ut_asserteq(1, run_command(if_formatted, 0));
 
-Anyway, if you update the comments in the code, then you can run
-binman as above to regenerate the documentation.
+could be something like:
+
+ut_asserteq(1, check_operation("test aaa != aaa"));
+
+If you had the energy to adjust the rest of the file, that seems good too.
 
 Regards,
 Simon
