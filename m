@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4966F3381B
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 08:48:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4760BF33817
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 08:50:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 09BC984159;
-	Tue, 17 Mar 2026 09:48:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BAD9284172;
+	Tue, 17 Mar 2026 09:50:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B70BA8415D; Tue, 17 Mar 2026 09:48:33 +0100 (CET)
-Received: from Atcsqr.andestech.com (unknown [60.248.187.195])
+ id 5DB0484175; Tue, 17 Mar 2026 09:50:08 +0100 (CET)
+Received: from Atcsqr.andestech.com (exmail.andestech.com [60.248.187.195])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02C428414E
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 09:48:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 96E918416C
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 09:50:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTP id 62H8mJDJ057297;
- Tue, 17 Mar 2026 16:48:19 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 62H8ntd3058348;
+ Tue, 17 Mar 2026 16:49:55 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 17 Mar
- 2026 16:48:19 +0800
-Date: Tue, 17 Mar 2026 16:48:16 +0800
+ 2026 16:49:55 +0800
+Date: Tue, 17 Mar 2026 16:49:52 +0800
 From: Leo Liang <ycliang@andestech.com>
 To: Uros Stajic <uros.stajic@htecgroup.com>
 CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Djordje Todorovic
  <Djordje.Todorovic@htecgroup.com>, Chao-ying Fu <cfu@mips.com>
-Subject: Re: [PATCH v5 2/8] board: boston-riscv: Add initial support for
- P8700 Boston board
-Message-ID: <abkVUL17gV6cAZwl@swlinux02>
+Subject: Re: [PATCH v5 6/8] net: pch_gbe: Add PHY reset and MAC address
+ fallback for RISC-V
+Message-ID: <abkVsH2JESBRsnvD@swlinux02>
 References: <20251224154449.946780-1-uros.stajic@htecgroup.com>
- <20251224154449.946780-3-uros.stajic@htecgroup.com>
+ <20251224154449.946780-7-uros.stajic@htecgroup.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20251224154449.946780-3-uros.stajic@htecgroup.com>
+In-Reply-To: <20251224154449.946780-7-uros.stajic@htecgroup.com>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
  ATCPCS34.andestech.com (10.0.1.134)
 X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 62H8mJDJ057297
+X-MAIL: Atcsqr.andestech.com 62H8ntd3058348
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,201 +67,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Dec 24, 2025 at 03:45:47PM +0000, Uros Stajic wrote:
+On Wed, Dec 24, 2025 at 03:47:02PM +0000, Uros Stajic wrote:
 > From: Chao-ying Fu <cfu@mips.com>
 > 
-> Implement initial board-level support for the P8700 Boston SoC.
+> Add optional PHY reset support via GPIO defined in the device tree.
+> 
+> Improve robustness by handling probe errors and falling back to the
+> environment-provided MAC address if no hardware MAC is found.
 > 
 > Signed-off-by: Chao-ying Fu <cfu@mips.com>
 > Signed-off-by: Uros Stajic <uros.stajic@htecgroup.com>
-> Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
 > ---
->  arch/riscv/Kconfig                      |  11 +
->  arch/riscv/dts/Makefile                 |   1 +
->  arch/riscv/dts/boston-p8700.dts         | 264 ++++++++++++++++++++++++
->  board/mips/boston-riscv/Kconfig         |  43 ++++
->  board/mips/boston-riscv/MAINTAINERS     |   9 +
->  board/mips/boston-riscv/Makefile        |   8 +
->  board/mips/boston-riscv/boston-lcd.h    |  20 ++
->  board/mips/boston-riscv/boston-regs.h   |  38 ++++
->  board/mips/boston-riscv/boston-riscv.c  |  30 +++
->  board/mips/boston-riscv/checkboard.c    |  43 ++++
->  board/mips/boston-riscv/config.mk       |  15 ++
->  board/mips/boston-riscv/lowlevel_init.S |  18 ++
->  board/mips/boston-riscv/reset.c         |  15 ++
->  configs/boston-p8700_defconfig          |  98 +++++++++
->  drivers/clk/Kconfig                     |   2 +-
->  include/configs/boston-riscv.h          |   9 +
->  16 files changed, 623 insertions(+), 1 deletion(-)
->  create mode 100644 arch/riscv/dts/boston-p8700.dts
->  create mode 100644 board/mips/boston-riscv/Kconfig
->  create mode 100644 board/mips/boston-riscv/MAINTAINERS
->  create mode 100644 board/mips/boston-riscv/Makefile
->  create mode 100644 board/mips/boston-riscv/boston-lcd.h
->  create mode 100644 board/mips/boston-riscv/boston-regs.h
->  create mode 100644 board/mips/boston-riscv/boston-riscv.c
->  create mode 100644 board/mips/boston-riscv/checkboard.c
->  create mode 100644 board/mips/boston-riscv/config.mk
->  create mode 100644 board/mips/boston-riscv/lowlevel_init.S
->  create mode 100644 board/mips/boston-riscv/reset.c
->  create mode 100644 configs/boston-p8700_defconfig
->  create mode 100644 include/configs/boston-riscv.h
+>  board/mips/boston-riscv/Kconfig |  4 ++++
+>  drivers/net/pch_gbe.c           | 37 +++++++++++++++++++++++++++++++--
+>  drivers/net/pch_gbe.h           |  1 +
+>  3 files changed, 40 insertions(+), 2 deletions(-)
 > 
-> ...
 > diff --git a/board/mips/boston-riscv/Kconfig b/board/mips/boston-riscv/Kconfig
-> new file mode 100644
-> index 00000000000..68c5fc50489
-> --- /dev/null
+> index 68c5fc50489..4d55d96603e 100644
+> --- a/board/mips/boston-riscv/Kconfig
 > +++ b/board/mips/boston-riscv/Kconfig
-> @@ -0,0 +1,43 @@
-> +if TARGET_MIPS_BOSTON
+> @@ -40,4 +40,8 @@ config PHY_REALTEK
+>      bool
+>      default y
+>  
+> +config TFTP_FILE_NAME_MAX_LEN
+> +    int "Maximum length of TFTP file name"
+> +    default 256
 > +
-> +config SYS_BOARD
-> +	default "boston-riscv"
-> +
-> +config SYS_VENDOR
-> +	default "mips"
-> +
-> +config SYS_CONFIG_NAME
-> +	default "boston-riscv"
-> +
-> +config SYS_CPU
-> +	default "p8700"
-> +
-> +config BOARD_SPECIFIC_OPTIONS
-> +    def_bool y
-> +    select P8700_RISCV
-> +    imply SYS_NS16550
-> +
-> +config SYS_CACHELINE_SIZE
-> +    default 64
-> +
-> +config SYS_SDRAM_BASE
-> +    hex
-> +    default 0x80000000
-> +
-> +config SYS_INIT_SP_ADDR
-> +    hex
-> +    default 0x80200000
-> +
-> +config STANDALONE_LOAD_ADDR
-> +    hex
-> +    default 0x80200000
-> +
-> +config SYS_MAX_FLASH_BANKS_DETECT
-> +    bool
-> +    default y
-> +
-> +config PHY_REALTEK
-> +    bool
-> +    default y
-> +
+>  endif
+> diff --git a/drivers/net/pch_gbe.c b/drivers/net/pch_gbe.c
+> index adeca3d040d..dea8ab828ac 100644
+> --- a/drivers/net/pch_gbe.c
+> +++ b/drivers/net/pch_gbe.c
+> @@ -7,6 +7,7 @@
+>  
+>  #include <cpu_func.h>
+>  #include <dm.h>
+> +#include <env.h>
+>  #include <errno.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> @@ -15,6 +16,7 @@
+>  #include <miiphy.h>
+>  #include <linux/delay.h>
+>  #include "pch_gbe.h"
+> +#include <asm/gpio.h>
 
-Use tab instead of space.
+This should be <asm-generic/gpio.h>, right?
 
-> +endif
-> diff --git a/board/mips/boston-riscv/MAINTAINERS b/board/mips/boston-riscv/MAINTAINERS
-> new file mode 100644
-> index 00000000000..e350121395e
-> --- /dev/null
-> +++ b/board/mips/boston-riscv/MAINTAINERS
-> @@ -0,0 +1,9 @@
-> +BOSTON-RISCV BOARD
-> +M:	Chao-ying Fu <cfu@mips.com>
-> +S:	Maintained
-> +F:	board/mips/boston-riscv/
-> +F:	include/configs/boston-riscv.h
-> +F:  arch/riscv/cpu/p8700/
-> +F:  arch/riscv/include/asm/arch-p8700/
-> +F:  configs/boston-p8700_defconfig
-> +F:  arch/riscv/dts/boston-p8700.dts
-
-Ditto.
-
-> diff --git a/board/mips/boston-riscv/Makefile b/board/mips/boston-riscv/Makefile
-> new file mode 100644
-> index 00000000000..0615c677d23
-> --- /dev/null
-> +++ b/board/mips/boston-riscv/Makefile
-> @@ -0,0 +1,8 @@
-> +# SPDX-License-Identifier: GPL-2.0
-> +#
-> +# Copyright (C) 2016 Imagination Technologies
+>  
+>  #if !defined(CONFIG_PHYLIB)
+>  # error "PCH Gigabit Ethernet driver requires PHYLIB - missing CONFIG_PHYLIB"
+> @@ -33,6 +35,13 @@ static void pch_gbe_mac_read(struct pch_gbe_regs *mac_regs, u8 *addr)
+>  	macid_lo = readl(&mac_regs->mac_adr[0].low) & 0xffff;
+>  	debug("pch_gbe: macid_hi %#x macid_lo %#x\n", macid_hi, macid_lo);
+>  
+> +	if (!macid_lo && !macid_hi) {
+> +		if (eth_env_get_enetaddr("ethaddr", addr))
+> +			return;
 > +
-> +obj-y += boston-riscv.o
-> +obj-y += checkboard.o
-> +obj-y += lowlevel_init.o
-> +obj-y += reset.o
-> diff --git a/board/mips/boston-riscv/boston-lcd.h b/board/mips/boston-riscv/boston-lcd.h
-> new file mode 100644
-> index 00000000000..5f5cd0fe126
-> --- /dev/null
-> +++ b/board/mips/boston-riscv/boston-lcd.h
-> @@ -0,0 +1,20 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +/*
-> + * Copyright (C) 2016 Imagination Technologies
-> + */
+> +		printf("No MAC found in either EG20T H/W or environment");
+> +	}
 > +
-> +#ifndef __BOARD_BOSTON_LCD_H__
-> +#define __BOARD_BOSTON_LCD_H__
+>  	addr[0] = (u8)(macid_hi & 0xff);
+>  	addr[1] = (u8)((macid_hi >> 8) & 0xff);
+>  	addr[2] = (u8)((macid_hi >> 16) & 0xff);
+> @@ -74,6 +83,14 @@ static int pch_gbe_reset(struct udevice *dev)
+>  	priv->rx_idx = 0;
+>  	priv->tx_idx = 0;
+>  
+> +	if (dm_gpio_is_valid(&priv->gpio_phy_reset)) {
+> +		/* Reset the PHY */
+> +		dm_gpio_set_value(&priv->gpio_phy_reset, 1);
+> +		udelay(15000);
+> +		dm_gpio_set_value(&priv->gpio_phy_reset, 0);
+> +		udelay(5000);
+> +	}
 > +
-> +/**
-> + * lowlevel_display() - Display a message on Boston's LCD
-> + * @msg: The string to display
-> + *
-> + * Display the string @msg on the 7 character LCD display of the Boston board.
-> + * This is typically used for debug or to present some form of status
-> + * indication to the user, allowing faults to be identified when things go
-> + * wrong early enough that the UART isn't up.
-> + */
-> +void lowlevel_display(const char msg[static 8]);
+>  	writel(PCH_GBE_ALL_RST, &mac_regs->reset);
+>  
+>  	/*
+> @@ -450,6 +467,11 @@ static int pch_gbe_probe(struct udevice *dev)
+>  	plat->iobase = (ulong)iobase;
+>  	priv->mac_regs = (struct pch_gbe_regs *)iobase;
+>  
+> +	err = gpio_request_by_name(dev, "phy-reset-gpios", 0,
+> +				   &priv->gpio_phy_reset, GPIOD_IS_OUT);
+> +	if (err && (err != -ENOENT))
+> +		return err;
 > +
-> +#endif /* __BOARD_BOSTON_LCD_H__ */
-> diff --git a/board/mips/boston-riscv/boston-regs.h b/board/mips/boston-riscv/boston-regs.h
-> new file mode 100644
-> index 00000000000..4d5ea8833ab
-> --- /dev/null
-> +++ b/board/mips/boston-riscv/boston-regs.h
-> @@ -0,0 +1,38 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +/*
-> + * Copyright (C) 2016 Imagination Technologies
-> + */
+>  	/* Read MAC address from SROM and initialize dev->enetaddr with it */
+>  	pch_gbe_mac_read(priv->mac_regs, plat->enetaddr);
+>  
+> @@ -459,9 +481,17 @@ static int pch_gbe_probe(struct udevice *dev)
+>  
+>  	err = pch_gbe_reset(dev);
+>  	if (err)
+> -		return err;
+> +		goto out_err;
 > +
-> +#ifndef __BOARD_BOSTON_REGS_H__
-> +#define __BOARD_BOSTON_REGS_H__
+> +	err = pch_gbe_phy_init(dev);
+> +	if (err)
+> +		goto out_err;
+>  
+> -	return pch_gbe_phy_init(dev);
+> +	return 0;
+> +out_err:
+> +	if (dm_gpio_is_valid(&priv->gpio_phy_reset))
+> +		dm_gpio_free(dev, &priv->gpio_phy_reset);
+> +	return err;
+>  }
+>  
+>  static int pch_gbe_remove(struct udevice *dev)
+> @@ -472,6 +502,9 @@ static int pch_gbe_remove(struct udevice *dev)
+>  	mdio_unregister(priv->bus);
+>  	mdio_free(priv->bus);
+>  
+> +	if (dm_gpio_is_valid(&priv->gpio_phy_reset))
+> +		dm_gpio_free(dev, &priv->gpio_phy_reset);
 > +
-> +#ifndef BOSTON_PLAT_BASE
-> +#define BOSTON_PLAT_BASE		(0x17ffd000)
-> +#endif
-
-This causes redefinition error.
-
-> +#define BOSTON_LCD_BASE			(0x17fff000)
-> +
-> +/*
-> + * Platform Register Definitions
-> + */
-> +#define BOSTON_PLAT_CORE_CL		(BOSTON_PLAT_BASE + 0x04)
-> +
-> +#define BOSTON_PLAT_SOFT_RST		(BOSTON_PLAT_BASE + 0x10)
-> +#define BOSTON_PLAT_SOFT_RST_SYSTEM	(0x1 << 4)
-> +
-> +#define BOSTON_PLAT_DDR3STAT		(BOSTON_PLAT_BASE + 0x14)
-> +#define BOSTON_PLAT_DDR3STAT_CALIB	(0x1 << 2)
-> +
-> +#define BOSTON_PLAT_BUILDCFG0           (BOSTON_PLAT_BASE + 0x34)
-> +#define BOSTON_PLAT_BUILDCFG0_IOCU     (0x1 << 0)
-> +#define BOSTON_PLAT_BUILDCFG0_PCIE0    (0x1 << 1)
-> +#define BOSTON_PLAT_BUILDCFG0_PCIE1    (0x1 << 2)
-> +#define BOSTON_PLAT_BUILDCFG0_PCIE2    (0x1 << 3)
-> +#define BOSTON_PLAT_BUILDCFG0_CFG_LTR  (0xf << 4)
-> +#define BOSTON_PLAT_BUILDCFG0_CFG_NUM  (0xff << 8)
-> +#define BOSTON_PLAT_BUILDCFG0_DP       (0x1 << 24)
-> +#define BOSTON_PLAT_BUILDCFG0_DP_MULT  (0xf << 28)
-> +
-> +#define BOSTON_PLAT_DDRCONF0		(BOSTON_PLAT_BASE + 0x38)
-> +#define BOSTON_PLAT_DDRCONF0_SIZE	(0xf << 0)
-> +
-> ...
+>  	return 0;
+>  }
+>  
+> diff --git a/drivers/net/pch_gbe.h b/drivers/net/pch_gbe.h
+> index 7e0fdbfd5a3..dcbb94094bc 100644
+> --- a/drivers/net/pch_gbe.h
+> +++ b/drivers/net/pch_gbe.h
+> @@ -292,6 +292,7 @@ struct pch_gbe_priv {
+>  	struct udevice *dev;
+>  	int rx_idx;
+>  	int tx_idx;
+> +	struct gpio_desc gpio_phy_reset;
+>  };
+>  
+>  #endif /* _PCH_GBE_H_ */
