@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A3DAFD877B
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:06:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D789DFD8770
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:08:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9D628432E;
-	Tue, 17 Mar 2026 15:06:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 589508433B;
+	Tue, 17 Mar 2026 15:08:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BkFO85kA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nY23uMy2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52D3084333; Tue, 17 Mar 2026 15:06:28 +0100 (CET)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id DA5D084347; Tue, 17 Mar 2026 15:08:02 +0100 (CET)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFB268421C
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:06:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 31CD184337
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:08:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-464ba2bb3aeso583920b6e.1
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:06:25 -0700 (PDT)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7d55b97f358so4028981a34.3
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:08:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773756384; x=1774361184; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773756479; x=1774361279; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QpyqL9sYsZf1CiprK9irO6c+LLvF/4kM7R2MtezwGtk=;
- b=BkFO85kAXaFHqKsIvgP0a2oTpDaqvqjKvB08ipLN0MO86+pMUjnZi3N/LAMx0jWGnF
- 6VzWDnpLM2AEbp1ed4As0UW16g8FzRQgxxiTrU8Vk1pcWyx95AKmZDqlpZLYjsxSeSyD
- CrTsyjFSCWxakY3rkjHxUovESHg4K/ih5XK10=
+ bh=RTmiXsIKoIu5sLhkmRIgmfC+TcKOaibaRqinFWl+n14=;
+ b=nY23uMy2GVa/RZBTE7hwDUsv7zhzikFL2+QBGj0sedJ7KXfJxV0eW373JmiEJS++NF
+ YJAubK7/Kw4x2RD6ECi7QkPy579ArwR/UaDSO0LTv95X36qPBa8II+eDPwMxFt9IGq+E
+ JIVtLrndwuCKw1M/N7WLOz5pgfVfshIDj2tX0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773756384; x=1774361184;
+ d=1e100.net; s=20251104; t=1773756479; x=1774361279;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QpyqL9sYsZf1CiprK9irO6c+LLvF/4kM7R2MtezwGtk=;
- b=tITrvKyt3mIQ3lknuJR1nO55u2ZdSZ7PTdF6A1dCnHjAXARny7ctwK1FjlOZPjP0r/
- 1cx6BJ6eYHHpGP7Ch4nRf58GcPnyB0K/98AaL/2FRWYbUYVDbjoWNehM7s/7P1WRhlpg
- V+iXQJCLZNAKq/Rxdv/kL/syAi1IBXwhjCnyuKHq+q5QhN9PDbnNl8FP0W23p8sOEFJx
- SNyWS97eTT6g41yDlxtqn7rbqUgsja2xdDUM1rkkVBIu8vkGPG91Uf3JIP/Icpm4W0ph
- V+turuPTJJ8ntTmX0zve+TNGBzd+aMKvWGdpOTKe/I2bMUCppTgfhoTLefyzkjqRbY8j
- f0bw==
-X-Gm-Message-State: AOJu0YyXpMlKnQ5oTIJovFVNyZE6OnYjJ4wR/f54CYt2r8uhB4kZPlqd
- xpKQ2fgGNATQBEfQ1Mi1sURo0OALoDV8oyt6Y+xFU9vEF8y/SjtBbyIuDp0NIGi+In8=
-X-Gm-Gg: ATEYQzyzLh3+3XCPjnfNPdbPs0tsJ9H43WmaV8mKS6qOsGNFds7AjvAsMNaOdlXA6zE
- rMFPPrgtiBicwrVmU99Qb5IRwc8DPgc8m07vnSPB0q3VLK0feCD1OtIxT3REJLS7mV6BScmLraX
- q1ob1piW0dBSHvFdjy37Hbb27H82ty13aBdxrSpx1119ip8Z05azgQF2gggcXfhjaUAMeB1LIW+
- hpOoXEMRLxtYCqGOUS7YVafnN8zMPYa6FsBs8UPutCt6enB9Ka1Jh/dH0HXC65YY5kPZ/akX0Yf
- xneZLx59hE1yaY3JuDnXCDSeSk2Oizy/GjM80GsreGvUlAwmR789I06mkmUtDmKwngvRJmqViOp
- Hf71Gkk4To8GAp1tjrIwQFI2X2aMlA+b4ipDJw4QeTtE6lXGpxu540G7MwLfp6zvelZkoOfs/F8
- 8VFNe9dfwoniwECWxteI8dXVM/o24V1rqQDRtRlU7XoO9A0F8NmIN5chf7xdhj67apKAtyHJBdw
- P2Ivj0OPYKPGv0D2MRSibeYfPNfVufHpbxEQgiSiGCSKm06
-X-Received: by 2002:a05:6808:2389:b0:45a:6adf:4d44 with SMTP id
- 5614622812f47-467a7f63c8dmr2053885b6e.12.1773756384509; 
- Tue, 17 Mar 2026 07:06:24 -0700 (PDT)
+ bh=RTmiXsIKoIu5sLhkmRIgmfC+TcKOaibaRqinFWl+n14=;
+ b=UTd6hv5EQpRIK4tm8QqwIjehpqIVLGmXfDvDrxa1udxMTcXj7+OoDU/QeaZh6VHhLD
+ JiW3/eQPHtngIHIpMaoQQ+5bjT4rJI5WSdBJlhbHaCjpmiT24ZKuqh3xUXvJvOvNKp93
+ 11vs/bTReHQds0T6vkrj1Tsrvfq0MVmVSriVwR0lKNcr8lbYFeMcsS9ohi4/oVdd0xWh
+ fCP53ps6pIC3/iVbqapvfWpQ0tsNDHdl8+lEEL6jPnDv50c6AQaVdCFE5kO74cuRmnyl
+ ZEi++I2RPxclHHP+gUid7pzWrw5aehV2rsWiWSIuRX5Cl2YV/O46+wSkqiMbdRq1sMJ7
+ wR1Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVY+nFys3EGB9rFrgiiDuB1gSoffSajM1ul2KLjhazfVOYH650rdZ/yFa3JmTdWNcuJOKCzKqE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxndLmf6qY9Y1zPBlhGdoySyxplTYece5bnxgWDsWdigtyUJS4Y
+ Ee43Kk1uXM5cMDg44DIHuq0SQT90a1Fl3uIe9jtYbXGh7BXcIa+V52w3PcfYSfT6ybk=
+X-Gm-Gg: ATEYQzzqgBkLikret0vOXyNKlPi7W15M8127MGKEyEdyVFthNP9RRQeMl+IatRs6zHS
+ zQl7MomUBFOReHGW62j4zwDPInalDCiSI4pO5X6rGKo5p3EvR948ThwjtmlyzvBEC5b68BOquaR
+ XBl/iLF5BLlNpW3NjF7JPF81pkUwIe6YHN+xPXVf3L7r+6lqv0qYayEl1KWZFZGodR+q1WjGM2C
+ GYLZrM364VGdtFz4DJh9WxZhxyOCoFLXHX6xFJ5m2v/bdAKBSVJmz3kxXvcfZP3qptuPG4w4y1N
+ p3XngBwefnmNvD3kCoqTCkgi8dLTJgdHqCIYSWPCZixe07MH4fLUwDCFu/bNdWsALu/+AlHANcw
+ ON9ujrhPLFfNn/0Xh3IBxv6JoVWv61kRfNyTKQ0Gl7ivnyJJ4GE5BexVB8ocEQuI285yYluWQaH
+ 1zvfBDYkhfoa8JLGuvhQOpJCH7uKvjyIg20P7GA9vIm9XgoyRJeNOyplCunoDq/Rsq/52fmnc1v
+ YLQPLG/K9D9at3xMxADE8pf1Zote/cnyvCVK/7WyBVYTHr/6UJD36zIq2A=
+X-Received: by 2002:a05:6830:81d2:b0:7d1:4f21:ff79 with SMTP id
+ 46e09a7af769-7d78251bf33mr10781630a34.22.1773756478781; 
+ Tue, 17 Mar 2026 07:07:58 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4177e6e82cdsm19933805fac.18.2026.03.17.07.06.23
+ 46e09a7af769-7d7ba4aa1c9sm2489401a34.25.2026.03.17.07.07.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Mar 2026 07:06:23 -0700 (PDT)
-Date: Tue, 17 Mar 2026 08:06:21 -0600
+ Tue, 17 Mar 2026 07:07:58 -0700 (PDT)
+Date: Tue, 17 Mar 2026 08:07:55 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Raymond Mao <raymondmaoca@gmail.com>
-Subject: Re: [PATCH] CI: Update sjg lab to match currently actively boards
-Message-ID: <20260317140621.GX502704@bill-the-cat>
-References: <20260317131839.2418655-1-sjg@chromium.org>
+To: Shiva Tripathi <s-tripathi1@ti.com>
+Cc: vigneshr@ti.com, bb@ti.com, u-boot@lists.denx.de, u-kumar1@ti.com,
+ praneeth@ti.com, kamlesh@ti.com, vishalm@ti.com,
+ k-malarvizhi@ti.com, afd@ti.com, anshuld@ti.com
+Subject: Re: [PATCH v2] arm: k3: Kconfig: Enable fTPM and RPMB support
+Message-ID: <20260317140755.GY502704@bill-the-cat>
+References: <20260225112438.1035185-1-s-tripathi1@ti.com>
+ <177317553318.23044.13643896894203476698.b4-ty@konsulko.com>
+ <5e6a045c-5d5d-46e2-a7a1-1fd89ae64e3b@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="x74Y0chJkqlwL3fz"
+ protocol="application/pgp-signature"; boundary="6IfvNIa1v8p2f+ZD"
 Content-Disposition: inline
-In-Reply-To: <20260317131839.2418655-1-sjg@chromium.org>
+In-Reply-To: <5e6a045c-5d5d-46e2-a7a1-1fd89ae64e3b@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,43 +103,79 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---x74Y0chJkqlwL3fz
+--6IfvNIa1v8p2f+ZD
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 17, 2026 at 07:18:35AM -0600, Simon Glass wrote:
-> Various updates:
-> - c4 lack signing so does not currently build
-> - samus hardware is non-functional
-> - colibrimx8, rockpro64, rock3a, rock5b, rpi5, tk1 and play are new
+On Tue, Mar 17, 2026 at 05:04:29PM +0530, Shiva Tripathi wrote:
 >=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
 >=20
-> ---
-> A sample run is here:
+> On 3/11/26 02:15, Tom Rini wrote:
+> > On Wed, 25 Feb 2026 16:54:38 +0530, Shiva Tripathi wrote:
+> >=20
+> >> Enable firmware TPM (fTPM) support via OP-TEE for K3 platforms with
+> >> MMC hardware. This provides TPM 2.0 functionality through
+> >> Microsoft's fTPM Trusted Application running in OP-TEE secure world,
+> >> using eMMC RPMB as persistent storage.
+> >>
+> >> fTPM support in U-Boot provides the foundation for measured boot
+> >> and disk encryption use cases.
+> >>
+> >> [...]
+> >=20
+> > Applied to u-boot/next, thanks!
 >=20
-> https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/29552
+> Hi Tom,
 >=20
-> At present, coral, play, rpi5, snow and vf2 appear to be genuinely
-> broken on -next
+> Thanks for applying the patch. Following are the steps to test these
+> (I'll soon update the relevant docs for this):
+>=20
+> a. First step is to generate fTPM TA binary using ms-tpm-20-ref [1] and
+> optee_ftpm [2]. I have been using yocto to generate this fTPM TA Binary,
+> for reference, the binary I used [3].
+>=20
+> b. Second step is to use above fTPM TA and build optee-os with RPMB and
+> early TA enabled:
+>   make -j$(nproc) \
+>        CROSS_COMPILE=3Darm-linux-gnueabihf- \
+>        CROSS_COMPILE64=3Daarch64-linux-gnu- \
+>        PLATFORM=3Dk3 \
+>        PLATFORM_FLAVOR=3Dam62x \
+>        CFG_ARM64_core=3Dy \
+>        CFG_RPMB_FS=3Dy \
+>        CFG_REE_FS=3Dn \
+>        CFG_EARLY_TA=3Dy \
+>        CFG_RPMB_ANNOUNCE_PROBE_CAP=3Dn \
+>=20
+> EARLY_TA_PATHS=3D/path/to/bc50d971-d4c9-42c4-82cb-343fb7f37896.stripped.e=
+lf
+>=20
+> c. The optee binary can then be used to built final u-boot images,
+> testing logs for reference [4]
+>=20
+> [1]: https://github.com/microsoft/ms-tpm-20-ref.git
+> [2]: https://github.com/OP-TEE/optee_ftpm.git
+> [3]:
+> https://github.com/shiva-ti/ftpm-binaries/blob/main/bc50d971-d4c9-42c4-82=
+cb-343fb7f37896.stripped.elf
+> [4]: https://gist.github.com/shiva-ti/8ac6aded2bf0a3c9bd99627a45b50f6b
 
-Assuming "play" means beagleplay, it's working fine here. No link
-because I'm still working on merging physical labs to be visible to CI
-in a single job.
+I will try this manually when I have a chance, thanks. Please update the
+generic TI K3 documents to include this as well, too.
 
 --=20
 Tom
 
---x74Y0chJkqlwL3fz
+--6IfvNIa1v8p2f+ZD
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCablf3QAKCRAr4qD1Cr/k
-Cud5AQDUkv6g4arB3UyRl9+DGQcLclOPP0H96DuDWjfn377xsQD/fvH4gg7U6VbC
-X5fytC5tR+6OZTvhQbdq5pS3TNSMMwY=
-=oUyV
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCablgOwAKCRAr4qD1Cr/k
+CuZDAQCozlJ75Ixa6JzpioNw7JvqO74RFyyMjRzPhGDyTBsJJwD/bxJxvieEmzCZ
+hXvlsJnLDUzswdhifh930Gr0D7unPAw=
+=dUPk
 -----END PGP SIGNATURE-----
 
---x74Y0chJkqlwL3fz--
+--6IfvNIa1v8p2f+ZD--
