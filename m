@@ -4,104 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58356FF6E7F
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 20:59:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C685BFF6E7C
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 21:08:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8519E8407E;
-	Tue, 17 Mar 2026 21:59:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 38EA38409B;
+	Tue, 17 Mar 2026 22:08:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="sMqt6Axj";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="BfrAMtLn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85F138409B; Tue, 17 Mar 2026 21:59:10 +0100 (CET)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id B53C5840BE; Tue, 17 Mar 2026 22:08:31 +0100 (CET)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 237B38405E
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 21:59:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E5EF8407E
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 22:08:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-46704177543so66056b6e.2
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 13:59:08 -0700 (PDT)
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-466ebbf7ff7so2093300b6e.1
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 14:08:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773781147; x=1774385947;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773781708; x=1774386508;
  darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=2cShVYUEsbh66U88/u3opim8EZIhdKMLODlV8+riNds=;
- b=sMqt6AxjUG5XjC+Wu7mcFW+MdPss6scBmYBE/BIr5nTxZexe7/dxrcMLDUny14I/cV
- BfxWWZjXjCNITkn65XO9y0IgCw/kqY3KRG+b2Q3O/qV6xjXeXNbgSGdo6YCiS8AbxO62
- ie/0WM2da9ECqmtYOrmb0pYP4HqRY2OrsWvnuJ3NpAuc4b3dsDRLRZ4x5xvyjFouuOQM
- 71qLvMHlWEdddN3qcqfeuaWilYCnJxkIgxZyrBWh/ZyhrpHIyWfj6L/M0RNEPJAwEhG3
- 0xVs+sN/XK2Q4wvt5AYsLsvPu6L9uUUL3vlSAbvnl+uDGc+XJuKoEHfG9/8kB6vWRdbq
- NzBg==
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vTO/qa+gQjcc4VWwLufLb7R/5sqsFlPeniqM7kzd2nQ=;
+ b=BfrAMtLnYzwS+SntmGarY3Z8oCDag+/Rhrt0fvTeAthEh7i2rePdtVJYuB4rBPZAFL
+ J6BzuR7MQqoh7wUm2zTWCLEK9eW0hC5t9bfAeaReBLyIgYFRzfLeki3VfUsrxGsXV50f
+ qYd37kzMbnOF1FPrhIRLs1S3yK1hvrZItl2JvbEf+BCoQIQOX+z8YmkqMsimcKodSNfw
+ tzomTVf8Tk/z9vqw5sVrpYKIbz+ChBI7jwC6R+2ct9Jm9R2pgMRBfh9kGbq0JA03uPc7
+ NmtZxcIz/ZLFSqATEdwbO4QCsbzkpR/SsbHOWPp82hQVw9MFcTT39ivpNfYWAgRCBHSZ
+ NQrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773781147; x=1774385947;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2cShVYUEsbh66U88/u3opim8EZIhdKMLODlV8+riNds=;
- b=C8ioU/wWcsjgNekJcnuN8S2MlylsNOYiRe7f8lBcHC48U9hRCnT6CbcVOaJKS8O3w1
- nSm8vhyz1xDCb9oI6N+UqksUNnBNs0/cgLDUZhmzcK/yUqxaIKk8fS484gvVORcynQSE
- Uvfx3mCMtm1t0sug/iEe1We4cbjXsonbnJcxXDvRKGLMIa7uyXdtvoOllqjp0dqegevz
- c3k3Oy0zZyaNb1eTjbfadN0MMmsOCq1EH8lfIobM0wTp86+4SLTUGFkMM6tf6sL2i0q+
- G0dxhi2cYukPTIpOesO0wFJ+aYPecgWHIArnItXCRUCx7IUpNasWKDa5VCsmTlwzo6cv
- xsYQ==
+ d=1e100.net; s=20251104; t=1773781708; x=1774386508;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=vTO/qa+gQjcc4VWwLufLb7R/5sqsFlPeniqM7kzd2nQ=;
+ b=WdWyiNw0Mh+l3BNF7klG2ncDjrVVCUnOBxLfPw4hIlXTEDhiKbvV+7Veop6lB9CvY9
+ Evnj6tira/ayRqeZGMmiSIH5LNQocFBZYcdYizo46Wt01dXbhsuYFo08Xavxle3d6nJ9
+ 2zVSoehmgesZQ+uAsCA9+9wvTCuu6/T9s0HAUX1J5k86GGruGnxec7oWUtxxOUQ13EyP
+ QcyoUoT4VRWAlcdYFPjn5nEGF1ObvnW51Oo9VGgGjeuVAFQFUMdqJfJYw2n0FdK1oZN+
+ WBiGkb5dKLT7ysGHwAfOtPSXcy2uC0QWJpCtgfaVVc1aROK2xqwGaHU+V0dPQ7viohzB
+ uJyg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXlW5vrOTIZgV0Ii38xiEgg0pqzD5JRs25x1J5jYBummT4P5nEKHl2OP+3RWwfXBvY5ljVUM6s=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx9SgEZwqnDp16jwI2/FdmqD4bhClrcLJFiDXH78KZQpp7nM9/A
- 9Zf0hXeX107dqrlihr2mqyoKLBARmJvujScTKNIwNHyC860HHixS4MMbCxBiZTjhw/Q=
-X-Gm-Gg: ATEYQzwfpGIU5Vc9eklbG15y9YFmqST6ksaoApQmV2J9L3csCNHuxcebmiBee2dAQtL
- 3vOiICRNNIRT+XCnQ43/idN8LrN4GZz8+f4eqEx48bX/fvjgWevQ+wlkpZtLHkTAcZi2HpnKMK6
- Di3Q4DR1XnR9M4eSMT6/8mNPuuutv/jnLZCMMQBTAmJby5NdtCEja/hRtmFvY/9t3mmkM4sDuLv
- ql5kHZOLBbsouC11TiUCAMkNS7vhfmk47ym6t2Thc/Bmbr0BsuCAZlZd7CLJcbWevzo42fJ3vAO
- GzhKeasKzg1YtNhi0ZnpPEzgIuddlYZsIbiHfkcvG1C2cSOeAHwOzkGQwrM6anVaNmfN+FO4hBB
- EMrMNka9gqArhWXCU0MwUjoNbjyzEd2msxWZDEzNeEuHeAQJUmtcPcIyZj48uTKF/p7EfSKlAnq
- 0sU5Qhd2NH3HMnFPSJq5ua6VbLMdLVy1RfmwsOVjGBw4Q1N6TtKwVvr1eOzO6XobWrw4zNFNc=
-X-Received: by 2002:a05:6808:e85:b0:44f:6a19:433e with SMTP id
- 5614622812f47-467ba1ea603mr575374b6e.15.1773781146692; 
- Tue, 17 Mar 2026 13:59:06 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:6995:28aa:eeda:102?
- ([2600:8803:e7e4:500:6995:28aa:eeda:102])
+ AJvYcCWeGsaFSBsjDNmYp2mc/clCz6JsfNccnfejNjDMslgg7BK/X+Hd6rwrLmk55qMxOVTebcvCsrY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz7cTPGtk5e4l/QQRI6GUx6395+uzeLy5HEcCanOmTqc/frgGSM
+ bq6VXBaVVlNHEEkYt9Foyq1oE5X+o57SZwMXshm+QbR6vX7TMFKY6pBEicXkMPpmCx8=
+X-Gm-Gg: ATEYQzyxgsBX/F9VWC5uTIgz1ojk9Wb7New0b3NElocT9U/uhRfsXyzIH2SXLtv2PoZ
+ HE+kLg71LTqfHuQ7BgMFy8G5/+VWfXrUkgMYkZBQ6nBx+PAP0YJV7Syz+YXK4lkjVWgCjVXqqc5
+ l03l1xeJgRKAo84sUuIqE4IRJ5sTQMxJDwqIIt9UvB+K3DJPUANGluTsM8HugkRcOaQP6IHVXu6
+ DxBzHogMMO8Gn4iJwb0XrgT4s2JfDzkT0Gjhnc8CCwzRSce41XMvUzI8AzdHCgyeIVI+TjEBR+j
+ D1e9UCpy6qUzv6ZNyudu686xxb04ZsyRalVelusSXOWoiTj3lHwC6VYTdgqXKRu9E7BKsei5/WR
+ H6Ze1mWSZi4QfsCcyQSqgUdy8ahvDGB8R90/ph/TGQfaYxvdHLTmnIWCFUPv3m3OzI4V9RLTt/7
+ ADPkJw1SDqgARftu3eOqFklDfJ7r4=
+X-Received: by 2002:a05:6808:17a6:b0:467:ed9:ffaf with SMTP id
+ 5614622812f47-467b9fcd262mr618867b6e.0.1773781708035; 
+ Tue, 17 Mar 2026 14:08:28 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:6995:28aa:eeda:102])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41bd2c30b0fsm700729fac.10.2026.03.17.13.59.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Mar 2026 13:59:06 -0700 (PDT)
-Message-ID: <3e77f9b8-9971-480a-9a0e-38ba44838fa8@baylibre.com>
-Date: Tue, 17 Mar 2026 15:59:05 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/11] power: pmic: mtk-pwrap: add MT8195 support
+ 5614622812f47-467ba8d309bsm378256b6e.6.2026.03.17.14.08.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Mar 2026 14:08:27 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>,
- Julien Masson <jmasson@baylibre.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Chris-QJ Chen <chris-qj.chen@mediatek.com>,
- Sam Protsenko <semen.protsenko@linaro.org>
-References: <20260317-mt8195-add-ufs-support-v1-0-7d731ec438ae@baylibre.com>
- <20260317-mt8195-add-ufs-support-v1-1-7d731ec438ae@baylibre.com>
- <d1e9afe8-4dc5-4994-b278-dca8384d8bb0@baylibre.com>
-Content-Language: en-US
-In-Reply-To: <d1e9afe8-4dc5-4994-b278-dca8384d8bb0@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
+To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>, Julien Masson <jmasson@baylibre.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>, 
+ David Lechner <dlechner@baylibre.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+In-Reply-To: <20260305-clk-mtk-fix-mt8188-rates-v2-1-0ce2b5212775@baylibre.com>
+References: <20260305-clk-mtk-fix-mt8188-rates-v2-1-0ce2b5212775@baylibre.com>
+Subject: Re: [PATCH v2] clk: mediatek: mt8188: fix CLK_TOP_CLK{13,26}M
+ rates
+Message-Id: <177378168788.529399.17509341539541813601.b4-ty@b4>
+Date: Tue, 17 Mar 2026 16:08:07 -0500
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.15-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=334; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=8Qyb7eWuo4O2wkMVB/dUWpdSE1hvAl3Ab8oaiLndC3k=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpucLCM4FjrMe+8Pe5kEcuKaJjjGLONCVVMFcbX
+ vL4EG6kuDOJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabnCwhYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Av8kH/ApwkuUV2DvlznTdwAiwqt6oy1i+E7+P+1Tdjgf
+ 1V+VayTr8bFMCZaDfvoYSfI3Tv2S6J2pA9Pb36WMDjmzxqmo+Xr8scI59I4CcVq3dd6rOXiLXz0
+ sTizSewbGt0PjTMprnQJb/tPATUYZRs1ATMPck0skjhs2PKDcfCUUKzJ/gHMnAluhjwpm8Vc1j/
+ 4kFnQYVfPt0CPfwzzz/gGKVc5X4VNWqxOL0OCFsGKBB68EBGUQiYGasWpF+QcNdkUbcCS8+M9Ge
+ IRLTVRgQJUfbckAn+lMGeTWk8x5FG8J1NAd4zws0eyFf/HWaeQHKnXP5Tk4T1/mdGqWcS9WnUXe
+ ed4k=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,75 +122,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/17/26 3:24 PM, David Lechner wrote:
-> On 3/17/26 9:24 AM, Julien Stephan wrote:
->> Add mt8195 support.
->> Support comes directly from commit e88edc977b00 ("soc: mediatek: pwrap:
->> add pwrap driver for MT8195 SoC") from the Linux Kernel
->>
->> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
->> ---
->>  drivers/power/pmic/mtk-pwrap.c | 31 +++++++++++++++++++++++++++++++
->>  1 file changed, 31 insertions(+)
->>
->> diff --git a/drivers/power/pmic/mtk-pwrap.c b/drivers/power/pmic/mtk-pwrap.c
->> index 3e3a691d9e8..8ff6458a5f2 100644
->> --- a/drivers/power/pmic/mtk-pwrap.c
->> +++ b/drivers/power/pmic/mtk-pwrap.c
->> @@ -276,6 +276,23 @@ static int mt8189_regs[] = {
->>  	[PWRAP_WACS2_RDATA] =		0x8A8,
->>  };
->>  
->> +static int mt8195_regs[] = {
->> +	[PWRAP_INIT_DONE2] =		0x0,
->> +	[PWRAP_STAUPD_CTRL] =		0x4C,
->> +	[PWRAP_TIMER_EN] =		0x3E4,
->> +	[PWRAP_INT_EN] =		0x420,
->> +	[PWRAP_INT_FLG] =		0x428,
->> +	[PWRAP_INT_CLR] =		0x42C,
->> +	[PWRAP_INT1_EN] =		0x450,
->> +	[PWRAP_INT1_FLG] =		0x458,
->> +	[PWRAP_INT1_CLR] =		0x45C,
->> +	[PWRAP_WACS2_CMD] =		0x880,
->> +	[PWRAP_SWINF_2_WDATA_31_0] =	0x884,
->> +	[PWRAP_SWINF_2_RDATA_31_0] =	0x894,
->> +	[PWRAP_WACS2_VLDCLR] =		0x8A4,
->> +	[PWRAP_WACS2_RDATA] =		0x8A8,
->> +};
-> 
-> I think we need to take a harder look at the driver here. There are many
-> registers that are accessed unconditionally in the code that aren't defined
-> here. (It looks like the Linux driver has similar issues as well. And we
-> have the same problem with mt8188 and mt8189 here in U-Boot.)
-> 
-> So either the code is broken and should have more conditionals or the
-> register tables are incomplete.
-> 
-> Most of this is in pwrap_init() which is conditional on an earlier bootloader
-> doing the initialization. If that is the case, we could avoid the issue
-> by adding a capability flag PWRAP_CAP_INIT and use that to avoid calling
-> pwrap_init() when we don't have the registers defined and raise an error
-> instead.
-> 
-> 
-> 	/*
-> 	 * The PMIC could already be initialized by the bootloader.
-> 	 * Skip initialization here in this case.
-> 	 */
-> 	if (!pwrap_readl(wrp, PWRAP_INIT_DONE2)) {
-> +		if (!HAS_CAP(wrp->master->caps, PWRAP_CAP_INIT)) {
-> +			dev_err(dev, "PMIC is not initialized\n");
-> +			return -EINVAL;
-> +		}
-> +
-> 		ret = pwrap_init(wrp);
-> 		if (ret) {
-> 			dev_err(dev, "init failed with %d\n", ret);
-> 			return ret;
-> 		}
-> 	}
-> 
-FYI, I've prepared a patch and tested this on Genio 720 (mt8189 in this
-context), so it seems OK to do this at least on that platform. An earlier
-bootloader is initializing the PMIC already. I'll wait to send it though
-until we get feedback on the other issues.
+On Thu, 05 Mar 2026 18:45:11 -0600, David Lechner wrote:
+> clk: mediatek: mt8188: fix CLK_TOP_CLK{13,26}M rates
+
+Applied to mediatek-for-next, thanks!
+
+[1/1] clk: mediatek: mt8188: fix CLK_TOP_CLK{13,26}M rates
+      commit: 4f821825c82c9a44ba3b94772a10820d8990129c
+
+Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
+
