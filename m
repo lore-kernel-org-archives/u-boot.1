@@ -4,87 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D789DFD8770
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:08:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D400FD877B
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:09:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 589508433B;
-	Tue, 17 Mar 2026 15:08:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0D29184358;
+	Tue, 17 Mar 2026 15:09:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nY23uMy2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F8ri/6cH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA5D084347; Tue, 17 Mar 2026 15:08:02 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 50AC084006; Tue, 17 Mar 2026 15:09:25 +0100 (CET)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31CD184337
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:08:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A2FDC84358
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:09:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7d55b97f358so4028981a34.3
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:08:00 -0700 (PDT)
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-4042fe53946so2202353fac.3
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:09:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773756479; x=1774361279; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773756561; x=1774361361; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RTmiXsIKoIu5sLhkmRIgmfC+TcKOaibaRqinFWl+n14=;
- b=nY23uMy2GVa/RZBTE7hwDUsv7zhzikFL2+QBGj0sedJ7KXfJxV0eW373JmiEJS++NF
- YJAubK7/Kw4x2RD6ECi7QkPy579ArwR/UaDSO0LTv95X36qPBa8II+eDPwMxFt9IGq+E
- JIVtLrndwuCKw1M/N7WLOz5pgfVfshIDj2tX0=
+ bh=PthJ0R2DWYbi+x/lqWtia45XLwN5P4Db/fehjfOJBjA=;
+ b=F8ri/6cH15zmc4cw1NpuEb7zM3bQrd0nPGhB6Xbgbark3oPYo1txEvHtfbYJOmFX8X
+ wgaWVFTfxxW13vQ6rno3AeJ2zn2+7aWFSz0Qc9z0n2VlkIW5SVPr8RFnCtAHqLqmiiVI
+ PT8c9MOFPDUHH16bj5SpzSAUOVAe/UwIqgBuo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773756479; x=1774361279;
+ d=1e100.net; s=20251104; t=1773756561; x=1774361361;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RTmiXsIKoIu5sLhkmRIgmfC+TcKOaibaRqinFWl+n14=;
- b=UTd6hv5EQpRIK4tm8QqwIjehpqIVLGmXfDvDrxa1udxMTcXj7+OoDU/QeaZh6VHhLD
- JiW3/eQPHtngIHIpMaoQQ+5bjT4rJI5WSdBJlhbHaCjpmiT24ZKuqh3xUXvJvOvNKp93
- 11vs/bTReHQds0T6vkrj1Tsrvfq0MVmVSriVwR0lKNcr8lbYFeMcsS9ohi4/oVdd0xWh
- fCP53ps6pIC3/iVbqapvfWpQ0tsNDHdl8+lEEL6jPnDv50c6AQaVdCFE5kO74cuRmnyl
- ZEi++I2RPxclHHP+gUid7pzWrw5aehV2rsWiWSIuRX5Cl2YV/O46+wSkqiMbdRq1sMJ7
- wR1Q==
+ bh=PthJ0R2DWYbi+x/lqWtia45XLwN5P4Db/fehjfOJBjA=;
+ b=HVkwbXMzkDYdhq5bjzmMuI29c+e0xzAE17aNBLvoa6vUrpyHoAG0DFDnUFGw1EuH4g
+ plufop5083kb7l4P7M/V3Oeuk231TuuNERMFnM8S9/3K0RP5rZskmZ1vffkZ/0jHxACC
+ eq8ETEzOrX9bybESVeKu7tged+bf7yUJKcoawzNVpMeQng3q1/jPdgSUba8xGWufM6bN
+ qW6z2RGmxprqEYwvKMAghY82Mp0rZuCuLsW17BARwG2+9YVqV5liEPfR2uwl//BgTDp5
+ OFbeOHomtQqGZ6rFwEZ98mfNdfYl0ysFmRfYBkRJeepOtMLD8ZAFLI+KqUto92AN14FE
+ q4mw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVY+nFys3EGB9rFrgiiDuB1gSoffSajM1ul2KLjhazfVOYH650rdZ/yFa3JmTdWNcuJOKCzKqE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxndLmf6qY9Y1zPBlhGdoySyxplTYece5bnxgWDsWdigtyUJS4Y
- Ee43Kk1uXM5cMDg44DIHuq0SQT90a1Fl3uIe9jtYbXGh7BXcIa+V52w3PcfYSfT6ybk=
-X-Gm-Gg: ATEYQzzqgBkLikret0vOXyNKlPi7W15M8127MGKEyEdyVFthNP9RRQeMl+IatRs6zHS
- zQl7MomUBFOReHGW62j4zwDPInalDCiSI4pO5X6rGKo5p3EvR948ThwjtmlyzvBEC5b68BOquaR
- XBl/iLF5BLlNpW3NjF7JPF81pkUwIe6YHN+xPXVf3L7r+6lqv0qYayEl1KWZFZGodR+q1WjGM2C
- GYLZrM364VGdtFz4DJh9WxZhxyOCoFLXHX6xFJ5m2v/bdAKBSVJmz3kxXvcfZP3qptuPG4w4y1N
- p3XngBwefnmNvD3kCoqTCkgi8dLTJgdHqCIYSWPCZixe07MH4fLUwDCFu/bNdWsALu/+AlHANcw
- ON9ujrhPLFfNn/0Xh3IBxv6JoVWv61kRfNyTKQ0Gl7ivnyJJ4GE5BexVB8ocEQuI285yYluWQaH
- 1zvfBDYkhfoa8JLGuvhQOpJCH7uKvjyIg20P7GA9vIm9XgoyRJeNOyplCunoDq/Rsq/52fmnc1v
- YLQPLG/K9D9at3xMxADE8pf1Zote/cnyvCVK/7WyBVYTHr/6UJD36zIq2A=
-X-Received: by 2002:a05:6830:81d2:b0:7d1:4f21:ff79 with SMTP id
- 46e09a7af769-7d78251bf33mr10781630a34.22.1773756478781; 
- Tue, 17 Mar 2026 07:07:58 -0700 (PDT)
+ AJvYcCVO/0DVlzoWTI4j7AgSjnc5cgTEgydWLmmt+xH11mEDUVL7OHtrEXapKbMwveQ/u4Nl9frc4bQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzmM3F24UVzJldH5F/fKFXAV/3KS6BO2JTgV8eCY0e/pHLYg1yF
+ uXT9m/wcFqlmSr30zM6KixdbbAv18RZ4J9jf1N3H5RXkYGgeIe7ZLUc6lJSOgsIUyHM=
+X-Gm-Gg: ATEYQzyEQN49FniQH2BHxySY4I1+ZLkf9qMh670R0oyXMJJEJQe5Jf3p8R72JmaHuIM
+ CtSF3VFkCpZaAnfoTSuvBR9A8h+uclCg2kSeyJHYbf/I/5yu7yNzbafMojRXG100atAPhUo/RIk
+ +F86YJjjyHj9m16o1bBh0XMfRIQrHvLZEwqop/O2SN0mywgKS9KgkRP3DWKb8IEjDPXwykVmAg4
+ +Gacy67BxDI7UArfIiDSD3PdkQAADgsOGBuFvYEov47hvQePDR9Gb/MsP3KhJLlo2GeklvzNbg8
+ 71Q2N+5LRi7O64G9d+483+qh9VQyx1w4z+rYNocEMGZQtCU+HFL3igyRXOOtWowtGGytFnzeFte
+ ep3qifEirH8ZDisDbQWLR5FrFZSZAadfMjsK+25/jvnOTbh1JhblV+BnaKZRlXq7jUYDGoJYhRn
+ 4Z4zox0dU7O3/ongHTnw9FiHY+W2iAcP/DxiXGLbJ6Iv19rzY5HgPD0awbuL+GfmnsSb5ELyxuz
+ 9KrxmGzrm7qM6OJHztALu6581yG3m59ndA1d+HeVCt0QJNr
+X-Received: by 2002:a05:6870:7d84:b0:417:7d3:fdcf with SMTP id
+ 586e51a60fabf-417b943b454mr9792475fac.46.1773756561175; 
+ Tue, 17 Mar 2026 07:09:21 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7ba4aa1c9sm2489401a34.25.2026.03.17.07.07.57
+ 586e51a60fabf-4177e6ae0e3sm20339737fac.16.2026.03.17.07.09.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Mar 2026 07:07:58 -0700 (PDT)
-Date: Tue, 17 Mar 2026 08:07:55 -0600
+ Tue, 17 Mar 2026 07:09:20 -0700 (PDT)
+Date: Tue, 17 Mar 2026 08:09:18 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Shiva Tripathi <s-tripathi1@ti.com>
-Cc: vigneshr@ti.com, bb@ti.com, u-boot@lists.denx.de, u-kumar1@ti.com,
- praneeth@ti.com, kamlesh@ti.com, vishalm@ti.com,
- k-malarvizhi@ti.com, afd@ti.com, anshuld@ti.com
-Subject: Re: [PATCH v2] arm: k3: Kconfig: Enable fTPM and RPMB support
-Message-ID: <20260317140755.GY502704@bill-the-cat>
-References: <20260225112438.1035185-1-s-tripathi1@ti.com>
- <177317553318.23044.13643896894203476698.b4-ty@konsulko.com>
- <5e6a045c-5d5d-46e2-a7a1-1fd89ae64e3b@ti.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Marek Vasut <marex@nabladev.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Subject: Re: [PATCH v2] binman: add CST backend selection for i.MX8M signing
+Message-ID: <20260317140918.GZ502704@bill-the-cat>
+References: <20260213192838.157084-1-marex@nabladev.com>
+ <CAFLszTjHZ+a17+bZh17DMOJGny6VaWCe4EftpYRE1Bq+RAty4Q@mail.gmail.com>
+ <c3d59858-9855-47fd-aa5a-0b861c4e44e8@nabladev.com>
+ <CAFLszTgNA1xmMNH=qtaKurDZdFW3dscMwwKyQ7iU-7EMMDOAuQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="6IfvNIa1v8p2f+ZD"
+ protocol="application/pgp-signature"; boundary="vao2tt4/RMym3zpG"
 Content-Disposition: inline
-In-Reply-To: <5e6a045c-5d5d-46e2-a7a1-1fd89ae64e3b@ti.com>
+In-Reply-To: <CAFLszTgNA1xmMNH=qtaKurDZdFW3dscMwwKyQ7iU-7EMMDOAuQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,79 +104,165 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---6IfvNIa1v8p2f+ZD
+--vao2tt4/RMym3zpG
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 17, 2026 at 05:04:29PM +0530, Shiva Tripathi wrote:
+On Tue, Mar 17, 2026 at 06:28:47AM -0600, Simon Glass wrote:
+> +Heinrich Schuchardt
 >=20
+> Hi Marek,
 >=20
-> On 3/11/26 02:15, Tom Rini wrote:
-> > On Wed, 25 Feb 2026 16:54:38 +0530, Shiva Tripathi wrote:
-> >=20
-> >> Enable firmware TPM (fTPM) support via OP-TEE for K3 platforms with
-> >> MMC hardware. This provides TPM 2.0 functionality through
-> >> Microsoft's fTPM Trusted Application running in OP-TEE secure world,
-> >> using eMMC RPMB as persistent storage.
-> >>
-> >> fTPM support in U-Boot provides the foundation for measured boot
-> >> and disk encryption use cases.
-> >>
-> >> [...]
-> >=20
-> > Applied to u-boot/next, thanks!
+> On Fri, 13 Feb 2026 at 19:51, Marek Vasut <marex@nabladev.com> wrote:
+> >
+> > On 2/13/26 9:20 PM, Simon Glass wrote:
+> >
+> > Hello Simon,
+> >
+> > >> diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt b/doc/imx=
+/habv4/guides/mx8m_spl_secure_boot.txt
+> > >> index 1bea091344d..a3ebd397d82 100644
+> > >> --- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+> > >> +++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+> > >> @@ -167,17 +167,25 @@ The nxp-imx8mcst etype is configurable using e=
+ither DT properties or environment
+> > >>   variables. The following DT properties and environment variables a=
+re supported.
+> > >>   Note that environment variables override DT properties.
+> > >>
+> > >> -+--------------------+-----------+---------------------------------=
+---------------------------------+
+> > >> -| DT property        | Variable  | Description                     =
+                                 |
+> > >> -+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D+
+> > >> -| nxp,loader-address |           | SPL base address                =
+                                 |
+> > >> -+--------------------+-----------+---------------------------------=
+---------------------------------+
+> > >> -| nxp,srk-table      | SRK_TABLE | full path to SRK_1_2_3_4_table.b=
+in                               |
+> > >> -+--------------------+-----------+---------------------------------=
+---------------------------------+
+> > >> -| nxp,csf-crt        | CSF_KEY   | full path to the CSF Key CSF1_1_=
+sha256_4096_65537_v3_usr_crt.pem |
+> > >> -+--------------------+-----------+---------------------------------=
+---------------------------------+
+> > >> -| nxp,img-crt        | IMG_KEY   | full path to the IMG Key IMG1_1_=
+sha256_4096_65537_v3_usr_crt.pem |
+> > >> -+--------------------+-----------+---------------------------------=
+---------------------------------+
+> > >> ++--------------------+-------------+-------------------------------=
+-----------------------------------+
+> > >> +| DT property        | Variable    | Description                   =
+                                   |
+> > >> ++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D+
+> > >> +| nxp,loader-address |             | SPL base address              =
+                                   |
+> > >> ++--------------------+-------------+-------------------------------=
+-----------------------------------+
+> > >> +| nxp,srk-table      | SRK_TABLE   | full path to SRK_1_2_3_4_table=
+=2Ebin                               |
+> > >> ++--------------------+-------------+-------------------------------=
+-----------------------------------+
+> > >> +| nxp,csf-crt        | CSF_KEY     | full path to the CSF Key CSF1_=
+1_sha256_4096_65537_v3_usr_crt.pem |
+> > >> ++--------------------+-------------+-------------------------------=
+-----------------------------------+
+> > >> +| nxp,img-crt        | IMG_KEY     | full path to the IMG Key IMG1_=
+1_sha256_4096_65537_v3_usr_crt.pem |
+> > >> ++--------------------+-------------+-------------------------------=
+-----------------------------------+
+> > >> +| nxp,fast-auth      |             | enable fast authentication met=
+hod                                |
+> > >> ++--------------------+-------------+-------------------------------=
+-----------------------------------+
+> > >> +| nxp,srk-crt        | SRK_KEY     | full path to the SRK Key SRK1_=
+sha256_4096_65537_v3_ca_crt.pem    |
+> > >> ++--------------------+-------------+-------------------------------=
+-----------------------------------+
+> > >> +| nxp,unlock         |             | unlock CAAM in SPL            =
+                                   |
+> > >> ++--------------------+-------------+-------------------------------=
+-----------------------------------+
+> > >> +| nxp,cst-backend    | CST_BACKEND | CST tool backend, default is '=
+ssl', or selectable 'pkcs11'       |
+> > >> ++--------------------+-------------+-------------------------------=
+-----------------------------------+
+> > >
+> > > Perhaps point to an example?
 >=20
-> Hi Tom,
+> Sorry I missed this earlier.
 >=20
-> Thanks for applying the patch. Following are the steps to test these
-> (I'll soon update the relevant docs for this):
+> >
+> > Example of what ? Two lines below, there is an example of using those
+> > env vars, see the entire file.
 >=20
-> a. First step is to generate fTPM TA binary using ms-tpm-20-ref [1] and
-> optee_ftpm [2]. I have been using yocto to generate this fTPM TA Binary,
-> for reference, the binary I used [3].
+> Yes I see it, but it doesn't have CST_BACKEND right?
 >=20
-> b. Second step is to use above fTPM TA and build optee-os with RPMB and
-> early TA enabled:
->   make -j$(nproc) \
->        CROSS_COMPILE=3Darm-linux-gnueabihf- \
->        CROSS_COMPILE64=3Daarch64-linux-gnu- \
->        PLATFORM=3Dk3 \
->        PLATFORM_FLAVOR=3Dam62x \
->        CFG_ARM64_core=3Dy \
->        CFG_RPMB_FS=3Dy \
->        CFG_REE_FS=3Dn \
->        CFG_EARLY_TA=3Dy \
->        CFG_RPMB_ANNOUNCE_PROBE_CAP=3Dn \
+> >
+> > >>   Environment variables can be set as follows to point the build pro=
+cess
+> > >>   to external key material:
+> > >> diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
+> > >> index 8922d6cd070..29bc778d0e5 100644
+> > >> --- a/tools/binman/entries.rst
+> > >> +++ b/tools/binman/entries.rst
+> > >> @@ -1664,6 +1664,13 @@ Entry: nxp-imx8mcst: NXP i.MX8M CST .cfg file=
+ generator and cst invoker
+> > >>
+> > >>   Properties / Entry arguments:
+> > >>       - nxp,loader-address - loader address (SPL text base)
+> > >> +    - nxp,srk-table - full path to SRK_1_2_3_4_table.bin
+> > >> +    - nxp,csf-crt - full path to the CSF Key CSF1_1_sha256_4096_655=
+37_v3_usr_crt.pem
+> > >> +    - nxp,img-crt - full path to the IMG Key IMG1_1_sha256_4096_655=
+37_v3_usr_crt.pem
+> > >> +    - nxp,fast-auth - enable fast authentication method
+> > >> +    - nxp,srk-crt - full path to the SRK Key SRK1_sha256_4096_65537=
+_v3_ca_crt.pem
+> > >> +    - nxp,unlock - unlock CAAM in SPL
+> > >> +    - nxp,cst-backend - CST tool backend, default is 'ssl', or sele=
+ctable 'pkcs11'
+> > >>
+> > >
+> > > The way it works is you add this as a comment in nxp_imx8mcst.py and
+> > > then run 'binman entry-docs' to generate entries.rst - see here:
+> > >
+> > > https://docs.u-boot.org/en/latest/develop/package/binman.html#entry-d=
+ocumentation
+> > Why is there this entries.rst then ? Should the entries be removed from
+> > here and moved into the py file or what is this inconsistency ?
 >=20
-> EARLY_TA_PATHS=3D/path/to/bc50d971-d4c9-42c4-82cb-343fb7f37896.stripped.e=
-lf
+> The entries.rst file is there so that the documentation can be build,
+> containing it. It might be possible to update 'make htmldocs' to run
+> binman to update the generated docs.
 >=20
-> c. The optee binary can then be used to built final u-boot images,
-> testing logs for reference [4]
->=20
-> [1]: https://github.com/microsoft/ms-tpm-20-ref.git
-> [2]: https://github.com/OP-TEE/optee_ftpm.git
-> [3]:
-> https://github.com/shiva-ti/ftpm-binaries/blob/main/bc50d971-d4c9-42c4-82=
-cb-343fb7f37896.stripped.elf
-> [4]: https://gist.github.com/shiva-ti/8ac6aded2bf0a3c9bd99627a45b50f6b
+> Heinrich, what do you think about that?
 
-I will try this manually when I have a chance, thanks. Please update the
-generic TI K3 documents to include this as well, too.
+That won't work for readthedocs, it needs to be generated, if it can, as
+part of the normal sphix build doc process.
 
 --=20
 Tom
 
---6IfvNIa1v8p2f+ZD
+--vao2tt4/RMym3zpG
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCablgOwAKCRAr4qD1Cr/k
-CuZDAQCozlJ75Ixa6JzpioNw7JvqO74RFyyMjRzPhGDyTBsJJwD/bxJxvieEmzCZ
-hXvlsJnLDUzswdhifh930Gr0D7unPAw=
-=dUPk
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCablgjgAKCRAr4qD1Cr/k
+CtzRAQCcixgAkYI218co1ui5WdstQS3842Pjuuh9CTs6fCnULQEAyWf7domBQaVv
+W/6OoYrLjK5qqlzuNGGItyeNjSn2FgA=
+=P5qn
 -----END PGP SIGNATURE-----
 
---6IfvNIa1v8p2f+ZD--
+--vao2tt4/RMym3zpG--
