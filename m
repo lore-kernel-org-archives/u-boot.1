@@ -4,77 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6B76FB5EA6
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 02:18:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87A69FB5EBB
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 05:04:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1676D83FA3;
-	Tue, 17 Mar 2026 03:18:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 892588401A;
+	Tue, 17 Mar 2026 06:04:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NqsLaTBl";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="qrVXERbj";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="cd4GFdAn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8844283FC5; Tue, 17 Mar 2026 03:18:06 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 05BBF84027; Tue, 17 Mar 2026 06:04:25 +0100 (CET)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E6A983F86
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 03:18:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B47A83FDE
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 06:04:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4fZbGK4llLz9tZ3;
- Tue, 17 Mar 2026 03:18:01 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1773713881;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=NiqC2p10ysaaiKrB2pS0OjxApi0KCBGpKbWvll0zm6k=;
- b=NqsLaTBlMObgHaDLqLgtOyea8mNwoncj6g880xOTa225Brf7QZ9rCVqCp+Zu0IWQRy43ru
- fPUW1BlYhyGnPZBb4ID2GdbM+chsQq8qbX41IUIClAw9NlD9VF1uD6mUplOWatenSvf92O
- UuO5ji/2DLDc+QzbcyEFMJxLiBr3UnVA3TTf+8HlAW5r3IKEK8S8+DnN17LfSeUT/PxZw7
- nS6+1Ic0xOzDKB9+xSrcHrNo+W8qsJKR+oqzxAWSl3yRrWt7YD9VoSOQ9aYSk1bYbrc5Ia
- lQot+z29PyxjJOUA7K2LX4hZRxDV0IBYie4B9O50eU865203ehCHzuSUWWzH/Q==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=qrVXERbj;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1773713880;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=NiqC2p10ysaaiKrB2pS0OjxApi0KCBGpKbWvll0zm6k=;
- b=qrVXERbjNnyOcXCcXpVPMenANqWGvDKBUZ2tbGdZOpGv4v46vzaNw3F3GyYNMXWuF8sChT
- 7NUb7g+INEaEY0mjALRZEi0U0EpQ2gbK23Ng/Q4/8EgJCHzdXCb9VrxOPnSlHtoWEoKqZ3
- TvND/TsyQdkln+2ul4ge+9YtBs8nTFz3c5Ib8k9rZRb/cSlQnGJyTb9xWMGlTtXNEYmJRp
- Sm7CFcKkEW3Yw7R31rfDwLpSpNX80vR4vxBSEuE80KeDY8VxnSi23FSHYFadgt+jbAqTEI
- CS2GZFOfryX1s5gkcYggXzFFLBn6QxIl36gJBpqQv/3yPIfvg4uO/Fy6NzRbPg==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2] console: Prefer currently selected serial console as stdio
- device
-Date: Tue, 17 Mar 2026 03:17:40 +0100
-Message-ID: <20260317021756.196402-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=pqU2JIIV4n3qYsWwE6JaEsWo7CLvRLrWiALOqQb6T7F4FMC8Fkefg2dc/RUbmDFUFKrXYPbMDBbTh8WM4+YIBcFd/lPgy6Koh9sGIsFHHzdMVoJ4T2BBbfaT+X0PR6zU7/wH9tm4JAtDmD1bh1BPO/cztUQzmpeM8NQlbioI80FuTXITmBH0TvrIFpCVVY4nOGAY0T3p68WVSkEIy09vBDMj1izzo+WTzSlxcgfaZ9uymbUCTRX/P5AD5PnaZJq1TZ0Cf79cWpkUZpx3r8eQxecZGQZDPlkxFVvWZoOezAlsAlI38ZGmeoWxaL7EpxfkBFzhzMVQdA1x4N1bmXSpLQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3B0qD7fY5njdBYP9zH79rit6xWttXP+fiAMVwnqRIN0=;
+ b=WprpTaBBfAW5sSENm4YBNtwljp6izjwuzMrsE61xkLHP/IpNElh2Yf0KHcKuugQmXjwt1E2RliYTDTwFfZvhTKNSQLb/MI+gQXJG7b3qqKzet3VXo4ym9JmCMv0fXHVtBcP4jxLIxdNOVIBzYvJ/CKL/NuSp3iREOG3xEYJzwJbe1FxtYHdVvLFBHJjS/7D7XR4rD7CSr/+US47ykpqHBMhgcEjSaKrH4BhlDFGOnbLJAnfTVzHWZOyBbz94v8Jn/MV2d9vDNcYgFUejtax3k3wCSkCSoBbaG9RApEqP9wZXemwh1Elz3iVoZgX6oI2Tmd0GSGgfPlFzScLgyFMePw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3B0qD7fY5njdBYP9zH79rit6xWttXP+fiAMVwnqRIN0=;
+ b=cd4GFdAnksXdSezUatGYl4oyHfKgnxUOnZHJE73wjy8h7aiZIufejGwW9AzqIJmxmsaO3JaSO3TKYy+vI1Myehw6NRHPrs+sv5SkdRFgnikfuess+iV66ouGgsw57eRmih0Bdw+V9EGvR5wRcCYGegW8jhCU80YmOJKKPID3QqAfqZ2bvpQZCzR6y/FK8ji/dP2nLXLNBiZjMXDGL2bi1jgm12z2tALpSezMwjw0sNRvYpinhLAI9WkqLW9fySmreWtgCUFXvragDnCNoO4FOEIwJ8ReJMjp3qviYCUd/bGX5iXB0agECWsDaI6DJgsPrqFYNMc7hWePT72JHVJJkA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by FRWPR04MB11175.eurprd04.prod.outlook.com (2603:10a6:d10:171::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.25; Tue, 17 Mar
+ 2026 05:04:18 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e%7]) with mapi id 15.20.9700.022; Tue, 17 Mar 2026
+ 05:04:19 +0000
+Date: Tue, 17 Mar 2026 13:06:24 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Ye Li <ye.li@nxp.com>, U-Boot-Denx <u-boot@lists.denx.de>,
+ Alice Guo <alice.guo@nxp.com>, Yannic Moog <y.moog@phytec.de>,
+ Tom Rini <trini@konsulko.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>
+Subject: Re: OPTEE on i.MX8MP
+Message-ID: <abjhUDlPRbB1SHrv@shlinux89>
+References: <CAOMZO5D3yqFaDgriO2x3fnCrwGm0oV-chLsy3eOR2O3yg_MvNw@mail.gmail.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAOMZO5D3yqFaDgriO2x3fnCrwGm0oV-chLsy3eOR2O3yg_MvNw@mail.gmail.com>
+X-ClientProxiedBy: SG2PR04CA0191.apcprd04.prod.outlook.com
+ (2603:1096:4:14::29) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 0fe8165ce5a6889aa2a
-X-MBO-RS-META: ycp51f6ozfdi4zwjezi7xc819atgq1n7
-X-Rspamd-Queue-Id: 4fZbGK4llLz9tZ3
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|FRWPR04MB11175:EE_
+X-MS-Office365-Filtering-Correlation-Id: ecc82320-d769-44f9-9192-08de83e2a501
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|52116014|366016|19092799006|1800799024|38350700014|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: OtqnyTfYmnvLjZCXHRfEyzdZ1znP5Zi1m2B0Y/uTdfUdJ9WFbjYzvCULkw53+wgK/xsZpKL2906M1Bm+JjcxtMqr8msI9NId6K8HTCBSkwA1LXM1dDFoRp3DG5WdboHYq4dnCR/iQ//5uP1pZgrENAfMgttA+Y4sTxSn4MZX5nDMsX1obfoGO0bvI5/F5SpGa6HRTUzc+dQZ3RCEh/BW4pN//Jk8WtXAlFIJJ72yHYeVwyH/dn/6uCFjqyZgDiZa7z8jLaRc4Tw56+R1dY32HLJhsk9pjTFA3JNNkHKn7E7kahF3SONpRnDeBDIel17MxXm0LEq7DF1a142xzjqN+aPKE+gx7HAbTXlhAA85UV4gTay217/bKrRZwarYqJACNZcpy6wjndc2p9T2pTC9Wy5XuZFoNzjOts+yjH73poD0zKVMfx25ACT3BYcuUdfSu2CG5MFzmiA4Eo9DRKx8NELRXnDgINE1qXQ0kqDWRBTfBKPya8GaVQcpJkPLB/oo4aQ5dcRpN6u3N0+MY2CjxcxWsLBiRWzT5u5rEwvrRc12QJC27jtnntTJFDpyt+2PpYcChI6SkwKzdWWeJf15LeC2cNF3fvmtap/o9dPD+Z9XslLdIPNyRDRtr/boM0rYKgXgnnVL0sMreilwDsd6LYyIQA5vUaxGB2JUAJqkKacqXp1RM9WhwELylQSa6TVl0yWYrX9QYwTuLE8vH8P52w+MPhZbhIh1CSpNMY3qTiP4rNvlE2kVui/QIp8BS2enIVJbXYvjpgvuO8LHUmwlgqyddonu3wKj+/m9Y3aK+w0=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(52116014)(366016)(19092799006)(1800799024)(38350700014)(56012099003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?/9gT8LOmamV19h8XNoRyAv0UNKThrTSN3uWgw1fSLytIP5Td15bwSzl843V6?=
+ =?us-ascii?Q?FS+WuWbVYTjUVVgi/F+fsbneMfp4dop98ce9pfb4OoUs6BPfnmH5m4epTOfy?=
+ =?us-ascii?Q?aqDpuyL2eEg/+TSW8Z6qqpn5OjM4GaMwN1LKh+fx2uSYQPiYn3uh1LWTKB/Q?=
+ =?us-ascii?Q?sNe35Ccuc0viojs/2Z9NxmkROcuF2Mxay3j0ztyNfjI35uQSV/dFaOhX37Uo?=
+ =?us-ascii?Q?CqSfffxYwq0RIncBGoixlEEu2rbHx7+Qeo59bsT2xnYZHzlajsEjhmscoQKB?=
+ =?us-ascii?Q?b8BsUpTjTAUKAu4SLCEs2XNjWfceAJUgWumCqSp4k/n2jwfo+MXnkKF/pTPF?=
+ =?us-ascii?Q?l3O1B70u9g8hgpVAvochlGLEzCXwTZ2/peAZUzg4sJ4wSstNZguNY0XOkqn/?=
+ =?us-ascii?Q?1/PA7ctWT8aEzVTd3ecahZri199cEmJEXK2PyfJgBbb4zn6DFJSN9m8B5XTE?=
+ =?us-ascii?Q?WPUmjPHVOTmsSEO/JBYvPFx0+8AawV5WYy9Qi6yZXQypUDYaZANqd+amNpWP?=
+ =?us-ascii?Q?8mt0AvwiyUloIgOgKmh/g/KCFP8T41VpncHtHEpX6tEd/Kac26LnUjcUNXSB?=
+ =?us-ascii?Q?IjXIk0buzhMKAyRYSHYCSxbPWPPb+h0z+4zN2FkyfNWT76qeYeKheDYDWgGE?=
+ =?us-ascii?Q?0cj8Ps8Aps2c7ZVPfHcMsQSSRT1xgInGs5P68SWpg0cWCMhQpZn35K1na2Zu?=
+ =?us-ascii?Q?6QFtBfDSjERLDcwRXt+dexZmhIWgOXbMxP7XSRiF2ZuTsfyAWTyIHliM1Xku?=
+ =?us-ascii?Q?0rVKQqichZJM4HdA9uk/ghltykGfsbS8CaKTfpSwbBYpdsJoD2lqKMo0EJkN?=
+ =?us-ascii?Q?+MhqqLI5Z+vHvM+yiHfOEEyyZGNfXHycc2uVMWlvkqtTU58k16zi/t1iiKkR?=
+ =?us-ascii?Q?JQ5FxofPbZz1b/dQvpcWsXum6D4ybcBRzGM+x1TMaoMJTV6wxbthdS6DNTm+?=
+ =?us-ascii?Q?r2xhTm8D80y5uFeWP+qe7KXv3Ao5Z4N8xHpFyaleK1zpbyEfOmtjdqDKQSq4?=
+ =?us-ascii?Q?cFmFGlvnYYM+glTmysl/JIpU0RFt6cMloH99qS1NYVHVpzC/Ruh2g8kD/2/7?=
+ =?us-ascii?Q?3SdkvMawEGQymxoaFRlVWGRE2QWcHgtt6r5AE9TuI8DHAbdm+Pjk1+6WPxlj?=
+ =?us-ascii?Q?FKZpyA+n5yemfGWi2YqW431bUdQqZA2JigdG56nyKcwa15E5eUbIHkDhkuWO?=
+ =?us-ascii?Q?01kHjqGeqgIEthwN2U6VpArENl1WBFia4lTPqMXC85VLNp0kX1sp6H3lP0mV?=
+ =?us-ascii?Q?IAD1Db8Ap30rUhn2O/1DAsFoBwEbcWq9jgCVOp5vC4rYbmSWmuN4PsAL7yLk?=
+ =?us-ascii?Q?7065azotq1yb7bB2Od1ZD36OCKD1GAyH4jg6z++hXhYziIKx0MAqAJ2eWB6J?=
+ =?us-ascii?Q?X5RqZkrgqrFyBdGsyTIKvzveU0Qe1t3Gv+xsXMGM9aZUcZkNWyph2Ppz+M8v?=
+ =?us-ascii?Q?jb0NRfrGU1Bm+o4oZczu05IcIwtBmsqS11lLAJlEYXcZIUo4aRezDUvKIeC3?=
+ =?us-ascii?Q?BjxqKGE0jh10o4oMnSrYCpNS3m0re0TR+3x1M4ewtZ3xIdT04OXwem0jmDdw?=
+ =?us-ascii?Q?omnFYX/OPcEuIpsSuDCr3jHA/hr1vJM0rNXTsKNS0B7BBF/SQYPAihjGXv4c?=
+ =?us-ascii?Q?SPcoQ1cDd8GkAlmqmpsaWt6urXOjhcQvuWatuMFKQxgCO/Bd1/8LwnmphYPv?=
+ =?us-ascii?Q?OeSn8jYVmyiQDztkAhAhp4/3M3sImlk+O6lPM4Wd+i0+0W5GUxdiUjuv23JP?=
+ =?us-ascii?Q?e++DInnWhA=3D=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ecc82320-d769-44f9-9192-08de83e2a501
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2026 05:04:19.5120 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: A3/G7XnaSFyQW5LrzqcijT6eyIbiUZtoaS+z/TBrAyf5S+cOxVnRW54AOVpngndfBSvJfmY/xQy0CWTx/KDrWg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: FRWPR04MB11175
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,68 +142,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adjust the scan for default console stdio device to prefer the
-currently selected serial device. This is useful in combination
-with CONFIG_SERIAL_PROBE_ALL=y, in which case the system would
-instantiate all serial devices as stdio devices in the order in
-which they are listed in control DT. The currently selected serial
-device may not be the first device listed in DT, in which case the
-current console_init_r() implementation unexpectedly switches to
-another serial console after listing stderr using "Err:" line, and
-just before showing U-Boot shell, which is not the desired behavior.
+Hi Fabio,
 
-The scan now iterates over the entire list of stdio devices. If the
-current iterator stdio device is the current serial device, or there
-is no input or output stdio device assigned to the input or output
-stream yet, then the current iterator stdio device is assigned to that
-stream. This way, the first suitable stdio device is assigned to the
-stream, but the current serial console stdio device can override that
-assignment.
+On Mon, Mar 16, 2026 at 11:07:54PM -0300, Fabio Estevam wrote:
+>load_simple_fit: Skip load 'tee': image size is 0!
 
-As a small optimization, if the current iterator stdio device is the
-current serial device and both input and output streams as assigned,
-then the loop can terminate, because the current serial device has a
-chance to be used as a stdio device at this point.
+Not found tee?
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-Cc: Andre Przywara <andre.przywara@arm.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
-V2: Merge the two loops into one
----
- common/console.c | 13 ++++++++-----
- 1 file changed, 8 insertions(+), 5 deletions(-)
+>***************************** Tee image is not found
+>NOTICE:  Do not release JR0 to NS as it can be used by HAB
+>NOTICE:  BL31: v2.14.0(release):sandbox/v2.14
+>NOTICE:  BL31: Built : 22:19:21, Mar 16 2026
+>ERROR:   Error initializing runtime service opteed_fast
 
-diff --git a/common/console.c b/common/console.c
-index 48586fd2166..22e554cf203 100644
---- a/common/console.c
-+++ b/common/console.c
-@@ -1212,13 +1212,16 @@ int console_init_r(void)
- 	list_for_each(pos, list) {
- 		dev = list_entry(pos, struct stdio_dev, list);
- 
--		if ((dev->flags & DEV_FLAGS_INPUT) && (inputdev == NULL)) {
-+		if ((dev->flags & DEV_FLAGS_INPUT) &&
-+		    (dev->priv == gd->cur_serial_dev || !inputdev))
- 			inputdev = dev;
--		}
--		if ((dev->flags & DEV_FLAGS_OUTPUT) && (outputdev == NULL)) {
-+
-+		if ((dev->flags & DEV_FLAGS_OUTPUT) &&
-+		    (dev->priv == gd->cur_serial_dev || !outputdev))
- 			outputdev = dev;
--		}
--		if(inputdev && outputdev)
-+
-+		/* The current serial console is the preferred stdio. */
-+		if (dev->priv == gd->cur_serial_dev && inputdev && outputdev)
- 			break;
- 	}
- 
--- 
-2.51.0
+optee initialization failure.
 
+>
+>
+>U-Boot 2026.04-rc4-00006-geefb822fb574 (Mar 16 2026 - 22:53:30 -0300)
+>
+>CPU:   NXP i.MX8MP[8] Rev1.0 A53 at 1200 MHz
+>Model: NXP i.MX8MPlus EVK board
+>DRAM:  6 GiB
+>optee optee: OP-TEE api uid mismatch  ************************* UID mismatch
+>....
+>
+>Any ideas as to why Optee fails?
+>
+>Does anyone have Optee working on imx8mp?
+
+Are you using upstream ATF, upstream OP-TEE?
+
+Regards
+Peng
+
+>
+>Thanks,
+>
+>Fabio Estevam
