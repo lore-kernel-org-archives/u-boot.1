@@ -4,89 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94093FED9E4
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 16:02:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EF0CFED9EB
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 16:08:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCD7884383;
-	Tue, 17 Mar 2026 17:02:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7255784383;
+	Tue, 17 Mar 2026 17:08:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dVMVHLX8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZZkMhnfY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71A4784390; Tue, 17 Mar 2026 17:02:55 +0100 (CET)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 7BA9C84399; Tue, 17 Mar 2026 17:08:36 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0050A84359
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 17:02:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D1C5841F2
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 17:08:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7d7412cfb9eso5359343a34.1
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 09:02:52 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-661be3380adso10788612a12.3
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 09:08:34 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773763714; cv=none;
+ d=google.com; s=arc-20240605;
+ b=HprPQq6Cc5+BmlQrypGB5Gwn/3o8UybA7BKwn0NN9ofG94L7aKapJu8aFeT0rWKbLd
+ ilhMgD/xtkbFbNJoOTCEd12L22EwLJ+3jnaT/uJaVkpDhG9m/xqG/gIAZU8qC3Duz/2F
+ xPW4ZItgKXO5yQUeBoi1r9xhMi9+WyxCLliQ7efI4uRNjcMbZeYydjrte2nlhe7nnkFO
+ DQ9fCA4XjS9/yGFnG9K9Knpe85+dccQSqNVpZfwbwLwr46qN2TNKH4aSXbKekCh1Ontv
+ 86Z8Z2b3RTTH+mhH8wpZdPxH5H7b/U2UFn3jjBkdibg4k/rGJSSJV8t8aJBJUHlKXpfR
+ 4gWA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=1Ktv5AyMtmUiXwmnLpC+rs+i6YZLsUsJ/hQ5G5HF7Bw=;
+ fh=zN4vWXJ6FaAWWZrs2FhdOzeUvaDqwQTt2jKQ+KjfPL8=;
+ b=Z3vfURIt0/P7w6IKLrUbN+UFXVbmf69ZBGNxJQRTofN3zjXTRIHwUxEYzqK+Oa2Xa7
+ ZFgy/iPYAN+rUayv3IoUjOcqbklT+aEBiWHsDErPAC341FpHvVurFFGjAHByj8BnjHRS
+ h1YOjNEOdNT4k2dRKfMvyEkQ4fctLJS7ybupPXteAjdLZrIE+W9gxrwHIA7Y6H8U1ZTv
+ TmA/xeg1csdB8cx2qe9s2EkCQpcsrx9SBrjYTq991gGA40Rt+GlkRv01AEhZs8+/4uvA
+ Dt+iCpu+Yw/c3NqQyIY93Kzky0YwpsYuf1eGviHyHurctoSRP/6JT3tc5qhh06kYOwXC
+ /cDg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773763371; x=1774368171; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Lfd49rjZLVveP+V9wA07wnX0fBBRr7fqrSXje32RLnk=;
- b=dVMVHLX8QKxJoFPqtDpgm39BdkdPApjC991+GB7Z0kwTpKqW9Y9qpKUcI1Hj2uzScN
- cmUXzSnoU5Uyuv4dpcudxBPShe4tFGXSh6FFOXvnXxwcs12koqY4wdmIT0OsUor+SJyn
- XZx9yr+g/wClrUhqNiYkL+bskoX6bErTI+uPk=
+ d=gmail.com; s=20230601; t=1773763714; x=1774368514; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1Ktv5AyMtmUiXwmnLpC+rs+i6YZLsUsJ/hQ5G5HF7Bw=;
+ b=ZZkMhnfY5hWEYOZzPfbWLzj+TO66tHP76OiB6SXxhKe70HbWAi+5BZtwDKHcb8AREb
+ cgeMWZdzULtVqHEiL1UmezeqYko4vV45UFetNpHAWvuUO+CqcO+F0JY/WBPNUsZLKft9
+ F89a+PzKWQ+ULdwkzqOgvaUh3JH3NfN+XhFddhYxMVpOdR6n4ZYawMHf25Xjz/OkfY9+
+ 4Fh6QClIBw9GrWrmvqgnWEwWTmMcZ93qu8Bg5I0Ps9R9/xEbtrkCjKpTIpSLjX/3QS9M
+ ZC171zX2kupnr4JXZSl+U5Hjukf8cP7mzuopkqznLinGcDWbaeT/e1zTXax3e75Pey2Y
+ JsGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773763371; x=1774368171;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Lfd49rjZLVveP+V9wA07wnX0fBBRr7fqrSXje32RLnk=;
- b=DbPdt8z/t6Q/5gKdNeCOnAv1vR2f3T+H1HpQMl9r0KTQPw3hyb7NWvewM7US3pAr5x
- GkuNbbPbZKgLdlgxin1UgtwOtIfxQybIP71dhcncUlz6U0QSBZEZlhakr3ODw/eqtWN9
- GoCRWExVdk0vyalatHRXxG1/PghK8OmuEOgd0vbPEEzAb93vg11pKEDXljF2+tqFMft4
- jTJKGUyw1QxTMITepJeDvPH5pb2UyuyW0ZdlcsEoIe/z5NI224ipmHfPKEnizaXbKUDf
- hjysZ+gsYFqrMhl9rnWd9yIu3IDPJZeVK/mk8qk1hGv9N8z3kj8+EGWJ5pl2PRr79hrb
- rVTw==
-X-Gm-Message-State: AOJu0YyDdUWa5CMfhldly38UNjkRgyOrSuV6IB/q6MshmdbRMxaXochp
- 148vazwvyWReBBV9TmA90ZHu4goCu4SPiC5SEnA28pN1wXAIub5X2hFbAq8zTDSIvCcQMB5b5ro
- g0227sTY=
-X-Gm-Gg: ATEYQzwcb2cmw4YEjPpWg52OdyIvrzSgZz2cBQZXnEhg6iEyJPYZszI/dzIfHHDBE4Q
- +lNCkVmx5Pz+1JgpC/zHy5kPsojzv4PADCb3Kz44R98Vi41MGnWpnMCqeD5uXqaBhZiOIGkrjQ3
- 4+5XH/BNu56oLoXzna9jdFuViVvpTa3YVcv5XawC23gcCHR9DugUqM/V4vMM6L63YnpT82Q0l8X
- jPacZRng9gpGCSC5uUbAKESbujL9QqdsBmd9h+OSqXU1CYMFzwTo4IMgznjr9EZXXkOJDNgC3wl
- bJX6F/fThItBfUsYSSTDlo9Db5f/qL81DpPsZi1Djm/fNpZxKA0jDVZJctWT0xz7CPPi4F88+G8
- 8X09KfnfDOnqVygTcXLzxhkpYTyP1zrXMGcd5iLur8xFPEDltwXwIyJ2ejYc5eV2EYAJCn9Ag8x
- blF9sVyHbx/YVBArsnOmpJjEg1kE5kfKzvuJ1IM5dGqRd4YC3VdzCZTG+6+Hb5AtvfPNLmliQRR
- iRyaOCRdqDc/AkPv0RDPONjzedR62Gb32MKSSeHfTXgKpBS3YztF5Wn2RY=
-X-Received: by 2002:a05:6830:6a94:b0:7d7:b846:1ad4 with SMTP id
- 46e09a7af769-7d7b8461c9amr3080096a34.7.1773763371235; 
- Tue, 17 Mar 2026 09:02:51 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7c9b39e11sm29272a34.18.2026.03.17.09.02.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Mar 2026 09:02:49 -0700 (PDT)
-Date: Tue, 17 Mar 2026 10:02:47 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] microblaze: Rework TARGET_MICROBLAZE_GENERIC
- implementation
-Message-ID: <20260317160247.GE502704@bill-the-cat>
-References: <20260317012412.4162279-1-trini@konsulko.com>
- <92a3aa0d-4d2f-4845-9ac2-6bcb976bced8@amd.com>
- <20260317144955.GC502704@bill-the-cat>
- <0f352388-4e79-483a-a4ca-2f14f4bea6c8@amd.com>
- <20260317154136.GD502704@bill-the-cat>
- <e239e4da-635f-448e-b6d3-c3721e66b8e6@amd.com>
+ d=1e100.net; s=20251104; t=1773763714; x=1774368514;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=1Ktv5AyMtmUiXwmnLpC+rs+i6YZLsUsJ/hQ5G5HF7Bw=;
+ b=Y+UXlOgL+TAvYRsmB6AGo/XfOXMz4RspF4SfoE69Rx8NuQ+OPMh6kGQCwgD408rrcB
+ 2t3Ma/wfunRefgrWATiHuZ47Jpt7WsejeRY2e7DF6GLcpibiUjksicOXLvWqzG+5M4IU
+ d5ReyXBdtSbyx+0FhDGP7UtC3WX12xoim/wsk8yh8ABY8laCy0TdLzq4Kx8cWkVBYN5H
+ 3kfrAYe58uHT0X2ESJVTKOp7ckIQAXQOkCCGC4GMkNps/WzfqP8yBJFhLGm/wvIedTvr
+ l1v0+ibRkgH37a7tLnMuIBSuDXH0TSrWZgSOJy/Gkw4sM03OjZxg9f5ovKCHqZAyWVQ0
+ wAUg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVTmTzZ/vZltDp3hGdaoGcCU9U2bMRHIJbvlKwdO7mw5P9ojcrPj884RkMaCmF+d87TpfIbEbM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw7ECoKvn05Pk8ii9tADbbQoSed1L6f78P0uTlFsRB7/QuyYTLq
+ uFrfeJZLQRlBNhsq2t+pVVdmCCJWlxXggyxJnonjIAS4mgo6WDJfg7N/JdMErdxLOeEJ/LaUuJ3
+ jt2uOb5Ehq+oNJWqS359d9T/w0eqDha4=
+X-Gm-Gg: ATEYQzwLsZaTaqcD0M3rC9KyXYM6OXFHmy1FQqvM1F9+6i8j1dmX7R0FTyXAadu8DPb
+ dgnNcoz0Q0AsWY+0ay2MeKZ0MsmLCqbr6Z0fxe/xJZKF/VLP4WfzJWhI1MYRxauTex6YxKAyh/R
+ sIMVa0OwGF55RE4jyW8UOXKcTz/b1Xc7R/U2hm0gRKCD6rVmOTuQhk5/Yfah46rFRZKDXdwBtJ6
+ pYFnt4Vz5+rnM7Rf8nN+tGPIdP9dIlSE09LpffFTgvE83Hf5V9WDLGxPCbhJfs+JLw8qkDZVBlQ
+ zZDm2Jou0f4L/iHwjZ+ZOKp0+zm73aLVdtaYPxJEM3zR+9WKMrCgneqHvh7B8f1AoGHlex3YeQQ
+ 7PkFy021Zj95vLfuhc/rE8pruJl04oft2VslkIJD6M2iCZfvqUuM=
+X-Received: by 2002:a05:6402:1476:b0:663:b689:ca74 with SMTP id
+ 4fb4d7f45d1cf-667b2c1e685mr114896a12.19.1773763713716; Tue, 17 Mar 2026
+ 09:08:33 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TWuh6Pq7dLAWWVov"
-Content-Disposition: inline
-In-Reply-To: <e239e4da-635f-448e-b6d3-c3721e66b8e6@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260317012449.4162666-1-trini@konsulko.com>
+ <CAC_iWj+WHh14nTdYu2BUTqvSwrtHiJBJVncArPwrBqWb6kXnTA@mail.gmail.com>
+ <9F36DE37-16FF-4519-9F66-A4A79F618794@gmx.de>
+ <20260317134427.GU502704@bill-the-cat>
+In-Reply-To: <20260317134427.GU502704@bill-the-cat>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Tue, 17 Mar 2026 16:08:22 +0000
+X-Gm-Features: AaiRm50RTDp-uQt-DZTmRWnrtcqBwY5n4DS98A_nl0ojDS71RNxudQqUT5Efxf8
+Message-ID: <CALeDE9MVgs--ABnZZ4RJDOnTLM-+imKxG6iJBGmQFHHXivLMxw@mail.gmail.com>
+Subject: Re: [PATCH] EFI Loader: Correct dependencies for EFI_HTTP_BOOT
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,122 +120,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 17 Mar 2026 at 13:51, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Mar 17, 2026 at 08:42:39AM +0100, Heinrich Schuchardt wrote:
+> > Am 17. M=C3=A4rz 2026 08:03:47 MEZ schrieb Ilias Apalodimas <ilias.apal=
+odimas@linaro.org>:
+> > >Hi Tom,
+> > >
+> > >On Tue, 17 Mar 2026 at 03:24, Tom Rini <trini@konsulko.com> wrote:
+> > >>
+> > >> As exposed by "make randconfig", we have an issue with the dependenc=
+ies
+> > >> for EFI_HTTP_BOOT. As this is implemeneted by running commands (as s=
+een
+> > >> by what it selects) it must depend on CMDLINE as well.
+> > >>
+> > >> Signed-off-by: Tom Rini <trini@konsulko.com>
+> > >
+> > >In theory, you can configure UEFI with a set of prebuilt boot options.
+> > >If one of them is http(s) the device will boot even if CMDLINE is not
+> > >selected. I am not against this patch, but we will remove the
+> > >possibility to build a firmware without cmdline that just boots to
+> > >whatever is was preconfigured
+> > >
+> > >Cheers
+> > >/Ilias
+> > >> ---
+> > >> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > >> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > >> ---
+> > >>  lib/efi_loader/Kconfig | 1 +
+> > >>  1 file changed, 1 insertion(+)
+> > >>
+> > >> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> > >> index b5f81e0ff530..a9b2f813e1d5 100644
+> > >> --- a/lib/efi_loader/Kconfig
+> > >> +++ b/lib/efi_loader/Kconfig
+> > >> @@ -600,6 +600,7 @@ config EFI_BOOTMGR
+> > >>  config EFI_HTTP_BOOT
+> > >>         bool "EFI HTTP Boot support"
+> > >>         depends on NET || NET_LWIP
+> > >> +       depends on CMDLINE
+> > >>         select CMD_NET
+> > >>         select CMD_DHCP
+> > >>         select CMD_DNS
+> >
+> > Having to select commands here to get network is what needs to change. =
+The network commands and EFI_HTTP_BOOT both should depend on configuration =
+symbols for the protocol implementations.
+>
+> Yes. And this is about fixing missing dependencies, today.
+>
+> > @Tom: Do we have a target release when to finish the move to the LWIP s=
+tack?
+>
+> We do not. I'm not yet sure if all the various use cases of the legacy
+> stack are fully supported now (I don't recall off-hand the NFS series
+> state right now for example).
 
---TWuh6Pq7dLAWWVov
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I did see NFS patches go through the list.
 
-On Tue, Mar 17, 2026 at 04:51:12PM +0100, Michal Simek wrote:
->=20
->=20
-> On 3/17/26 16:41, Tom Rini wrote:
-> > On Tue, Mar 17, 2026 at 04:35:30PM +0100, Michal Simek wrote:
-> > >=20
-> > >=20
-> > > On 3/17/26 15:49, Tom Rini wrote:
-> > > > On Tue, Mar 17, 2026 at 01:06:15PM +0100, Michal Simek wrote:
-> > > > >=20
-> > > > >=20
-> > > > > On 3/17/26 02:24, Tom Rini wrote:
-> > > > > > As exposed by "make randconfig", some symbols such as
-> > > > > > XILINX_MICROBLAZE0_PVR can be set without TARGET_MICROBLAZE_GEN=
-ERIC but
-> > > > > > have a transitive dependency on it. The easiest path of resolut=
-ion here
-> > > > > > is that since there is only one valid microblaze "board", rewor=
-k that
-> > > > > > symbol to be non-optional.
-> > > > > >=20
-> > > > > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > > > > ---
-> > > > > > Cc: Michal Simek <michal.simek@amd.com>
-> > > > > > ---
-> > > > > >     arch/microblaze/Kconfig | 10 +++-------
-> > > > > >     1 file changed, 3 insertions(+), 7 deletions(-)
-> > > > > >=20
-> > > > > > diff --git a/arch/microblaze/Kconfig b/arch/microblaze/Kconfig
-> > > > > > index 4261e5009fdc..16c55ddfd95c 100644
-> > > > > > --- a/arch/microblaze/Kconfig
-> > > > > > +++ b/arch/microblaze/Kconfig
-> > > > > > @@ -7,12 +7,8 @@ config SYS_ARCH
-> > > > > >     config STATIC_RELA
-> > > > > >     	def_bool y
-> > > > > > -choice
-> > > > > > -	prompt "Target select"
-> > > > > > -	optional
-> > > > > > -
-> > > > > >     config TARGET_MICROBLAZE_GENERIC
-> > > > > > -	bool "Support microblaze-generic"
-> > > > > > +	def_bool y
-> > > > > >     	select BOARD_LATE_INIT
-> > > > > >     	select DM
-> > > > > >     	select DM_SERIAL
-> > > > > > @@ -26,8 +22,8 @@ config TARGET_MICROBLAZE_GENERIC
-> > > > > >     	select MTD
-> > > > > >     	select SPI
-> > > > > >     	imply CMD_DM
-> > > > > > -
-> > > > > > -endchoice
-> > > > > > +	help
-> > > > > > +	  Support microblaze-generic
-> > > > > >     source "board/xilinx/Kconfig"
-> > > > > >     source "board/xilinx/microblaze-generic/Kconfig"
-> > > > >=20
-> > > > > Applied.
-> > > >=20
-> > > > Please drop this for now, I need to do a v2 and I've found another
-> > > > randconfig that gives me:
-> > > > WARNING: unmet direct dependencies detected for XILINX_MICROBLAZE0_=
-PVR
-> > > >     Depends on [n]: MICROBLAZE [=3Dy] && TARGET_MICROBLAZE_GENERIC =
-[=3Dn]
-> > > >     Selected by [y]:
-> > > >     - CPU_MICROBLAZE [=3Dy] && CPU [=3Dy] && MICROBLAZE [=3Dy]
-> > > >=20
-> > >=20
-> > > I expect this is from cpuinfo driver.
-> >=20
-> > Yes, it is. But it's one of the problems randconfig exposes since it
-> > does funny things when generating a valid .config, and seeing what blows
-> > up. What I have in progress now is removing TARGET_MICROBLAZE_GENERIC
-> > entirely and using MICROBLAZE in the few tests.
-> >=20
->=20
-> it should be fine to mark it as dependency.
->=20
-> M
->=20
-> diff --git a/drivers/cpu/Kconfig b/drivers/cpu/Kconfig
-> index 6a96be94de49..c805c0bbfa19 100644
-> --- a/drivers/cpu/Kconfig
-> +++ b/drivers/cpu/Kconfig
-> @@ -35,9 +35,8 @@ config CPU_ARMV8
->=20
->  config CPU_MICROBLAZE
->         bool "Enable Microblaze CPU driver"
-> -       depends on CPU && MICROBLAZE
-> +       depends on CPU && MICROBLAZE && XILINX_MICROBLAZE0_PVR
->         select DM_EVENT
-> -       select XILINX_MICROBLAZE0_PVR
->         help
->           Support CPU cores for Microblaze architecture.
+I think there's also likely some legacy usecases where non parity is
+likely fine too.
 
-That's another way to go yes, if you want to post that I'll drop this
-part of my current WIP branches, thanks!
-
---=20
-Tom
-
---TWuh6Pq7dLAWWVov
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabl7IwAKCRAr4qD1Cr/k
-CmbpAQCXJBeHnf0C8Bp0H5MGxe41H4oAFb/Nk6qbn0lgi1l1wAD7Bggry11rnRqz
-bu50eLM8rjhYG7sEXV60iZqPFk1ISwE=
-=XbNC
------END PGP SIGNATURE-----
-
---TWuh6Pq7dLAWWVov--
+Peter
