@@ -4,104 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BC0EFF6E89
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 22:03:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF372FF6E87
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 22:04:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A95D3840C1;
-	Tue, 17 Mar 2026 23:03:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 4F5AB8410C;
+	Tue, 17 Mar 2026 23:04:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="qXEw62ht";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="F+cHJFe0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C2F78410A; Tue, 17 Mar 2026 23:03:40 +0100 (CET)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 16DC6842DF; Tue, 17 Mar 2026 18:25:23 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8AA1840BE
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 23:03:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C4DE84201
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 18:25:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-67ba6e63922so3681621eaf.2
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:03:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773785016; x=1774389816;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=MUJYAsy2UyBFgUUx5TeTVXc7erVdYB6xVNhFzLACPNs=;
- b=qXEw62htiNNTtASkn3Md9jm5oGzqDkJyV68Pfo5diVGYSH9aPJmvm+ey2CABUk3u4s
- 71dYwIdpcmjx6dh6b6oV63fk7d1ADzMT+bmsEne04UXAdM3rAp4eijDw8LVi7JYAYnCa
- CtucNmEyRJ8C66w/HKxR5uVqupBo3cbEAvCm4O0DG6pSUVUzna2Kj6aheAZh8ZsTuRV9
- R9Vp4tqkoX5uP6R6AiatEr5w8WI2e3U236ZccRql7qYf6VYWk+xlmfJWbVi0uAU3cdPW
- ncdn0YwfE1QmS2Bq1eSgzYJyH45ED+sprGKzFMuG3FxWVaWWf8Rw8kCcG00TSMkD3LRc
- tx2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773785016; x=1774389816;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=MUJYAsy2UyBFgUUx5TeTVXc7erVdYB6xVNhFzLACPNs=;
- b=mruFTDLGA5sdlR7Th3SvLCQzDlnuhNndrZDVIQqxdNjbDYajGk3IJUcMLbZqbzRqZX
- aAs4Nqc/o+rDPpJndff5thujG7d9OosvjIvmj6JX5WVjgyssikqqqTpLvW6Ny8qrHiPd
- GQD0flR5RxjibbDzcmxAL4pMOuyMbKBDL871Iew3oKJJoQ5wsdDZV3HMJyv7EYfDC6NU
- suoJc7+b+pdhPaan2dfyoLchCW9TpwJOOBQLZsnsXppRFHTwCBpxeAxAa7kA5APN4kPw
- me3qS7tKBpC91jK4M0FcF1ZT5nx+Cv8qTPj3qd/Ugh3sTqLC9fZH07o4Y6vA2DEG0r1N
- IZfg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWtM82cCb1errr+K4VINCuGBgHYYdd/Udz65M0cbZnWWJPOBM9XmdbQLSOLz58qFxVbCqY8wrM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy5JvTJuO+yEY6WltzXIGwHJffEG2EY/ixYw48/x1aRFxQD4RQ+
- 8gDXGF2fiJt1GhPyS6lRJZzxKieqxiFXSjkuYLjLbM2gbxds7pjQ9PJ21Fm+/78cyAk=
-X-Gm-Gg: ATEYQzxFf5/7Oq8CqTvFU1/GE1pSg4ZdiF8iPoGX17pqdtf2o9vCo6Ke6hEr4qVP8YD
- Gu2JWCN5RWMweFOh+j/gbwKwvMDUAsFWc2w+kHO4xJwl3DjOZ2VigqzhXAY5Ew3btFU1VdJDI8V
- 3asfK3daC77hwS7yzf404vJlnP3/IEpwc7WVIXM/MRqOYblXhPfOvbUXqbua8JMZnQzLQhH0VOC
- jHdnIQQBezhWUll7kyaPODzW/1v+ppg5tO0qZTclVYxsmybfz8eIbULS1sYiw/aLbxq3WqFkVU5
- hINkYGurYf3RxLIg/Uq73Zt422Zi/C/uVaEpOL31Qw1EWxRK8BBY6wA2iiJetWn6Kh/GUPfZIni
- huMbosE913vITAHAOf+bDIxclOLoFWlLGtt5NkUR1zHHPhqT9/ojEbAJB8LU8XyYTYGOMGjEiYo
- NQHP4GotfPGU2NtwXM56pagJGV7S364ijGUB6NIHQrfSNjPQGc6cAxYTEpjytU0j6/qHMN
-X-Received: by 2002:a05:6820:1628:b0:67b:df0f:64eb with SMTP id
- 006d021491bc7-67c0daff25amr669481eaf.45.1773785016380; 
- Tue, 17 Mar 2026 15:03:36 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:2fe3:965c:6248:c9?
- ([2600:8803:e7e4:500:2fe3:965c:6248:c9])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-67c0d7e5ca8sm540148eaf.1.2026.03.17.15.03.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Mar 2026 15:03:34 -0700 (PDT)
-Message-ID: <2a4f651d-bdb4-4c3b-be58-e2b882556e7f@baylibre.com>
-Date: Tue, 17 Mar 2026 17:03:33 -0500
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 6843110DC12; Tue, 17 Mar 2026 18:25:18 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1773768319;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=sv7gvjC0FfwwFlHaMmJ7lv0lFHl3S9kMxptilBXrMzY=;
+ b=F+cHJFe0/HGfMXBWR9pCODrtx5hVcdA5rzsKuZ073r77aplTPTK6ZY/4EPHi8BD0r9jpfr
+ RqPo2eoZxUbjkUcdMd3lVp6BuOhydI9hFzHKZJraPAILwbzstck4UUk/5AAlUGPu9geVvM
+ PgrnJeVpxRbKtz+dyyPsN+9kk+fCT/q3a+0DpwRlmxmSam/CMWRHDvKtxtnwjMKYEcPlh4
+ rwUUbz7US6DggNngVP6FaAhpyUxut+xFM5/ziFvhWigVBbFNXlZXuOEdGosXZjF1RhXmLY
+ AJkiMgLPQym6P3SrPMNchETs80/RA1MSYsjiO7TgEtXqGz3Vwsb+07urPO9fkg==
+Message-ID: <e1f9f624-4a08-4e23-9ed0-0a180b812a9c@nabladev.com>
+Date: Tue, 17 Mar 2026 13:45:58 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 11/11] configs: add new defconfig for mt8395_evk_ufs
-To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>,
- Julien Masson <jmasson@baylibre.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Chris-QJ Chen <chris-qj.chen@mediatek.com>,
- Sam Protsenko <semen.protsenko@linaro.org>
-References: <20260317-mt8195-add-ufs-support-v1-0-7d731ec438ae@baylibre.com>
- <20260317-mt8195-add-ufs-support-v1-11-7d731ec438ae@baylibre.com>
+Subject: Re: [PATCH v2 1/5] imx9: Add support for saving DDR training data to
+ NVM
+To: Simona Toaca <simona.toaca@oss.nxp.com>
+Cc: uboot-imx@nxp.com, u-boot@lists.denx.de,
+ Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com, peng.fan@nxp.com,
+ alice.guo@nxp.com, simona.toaca@nxp.com, ye.li@nxp.com,
+ viorel.suman@nxp.com, ping.bai@nxp.com, sebastien.szymanski@armadeus.com,
+ ravi@prevas.dk, joao.goncalves@toradex.com, ji.luo@nxp.com,
+ tharvey@gateworks.com, qijian.guo@nxp.com
+References: <cover.1773648510.git.simona.toaca@nxp.com>
+ <5a7a3063ce3a429c67396c1d0bae95444ac3f996.1773648510.git.simona.toaca@nxp.com>
+ <04ea62f9-f82a-4c10-9866-0ce78ea90b05@nabladev.com>
+ <zlimv4bpiwiz45sbjesa6d7k76rpaeubqx3dtcbfdvjs5uqzbl@chaau67obpch>
 Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260317-mt8195-add-ufs-support-v1-11-7d731ec438ae@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
+From: Marek Vasut <marex@nabladev.com>
+In-Reply-To: <zlimv4bpiwiz45sbjesa6d7k76rpaeubqx3dtcbfdvjs5uqzbl@chaau67obpch>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
+X-Mailman-Approved-At: Tue, 17 Mar 2026 23:04:49 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,79 +77,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/17/26 9:24 AM, Julien Stephan wrote:
-> This new defconfig is based on mt8395_evk, where we remove the mmc
+On 3/17/26 1:36 PM, Simona Toaca wrote:
 
-We will still want MMC enabled here for the SD card slot. The
-target OS could be on an SD card even when booting from UFS.
+Hi,
 
-> configs and add all the ufs related ones.
+>>> @@ -100,6 +100,56 @@ struct dram_timing_info {
+>>>    extern struct dram_timing_info dram_timing;
+>>> +#if IS_ENABLED(CONFIG_IMX95) || IS_ENABLED(CONFIG_IMX94) /* CONFIG_IMX95 || CONFIG_IMX94 */
+>>> +#if IS_ENABLED(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN)
+>>
+>> These are only macros and structure definitions, do they need to be
+>> conditionally compiled ?
+>>
 > 
-> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-> ---
->  board/mediatek/MAINTAINERS       |  3 ++-
->  configs/mt8395_evk_ufs_defconfig | 33 +++++++++++++++++++++++++++++++++
->  2 files changed, 35 insertions(+), 1 deletion(-)
+> I agree that this might be redundant, especially since IMX_SNPS_DDR_PHY_QB_GEN
+> depends on IMX94 || IMX95. I would leave the IMX_SNPS_DDR_PHY_QB_GEN
+> ifdef so that it is clear in which context this structure is used,
+> if it is also ok with you. If not, I will remove it.
+
+Remove it, it is superfluous. If you need to denote context, add code 
+comment.
+
+>>> +/* Quick Boot related */
+>>> +#define DDRPHY_QB_CSR_SIZE	5168
+>>> +#define DDRPHY_QB_ACSM_SIZE	4 * 1024
+>>
+>> (4 * 1024) to avoid side effects
+>>
+>>> +#define DDRPHY_QB_MSB_SIZE	0x200
+>>> +#define DDRPHY_QB_PSTATES	0
+>>> +#define DDRPHY_QB_PST_SIZE	DDRPHY_QB_PSTATES * 4 * 1024
+>>
+>> Add ( )
 > 
-> diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
-> index 4f371592059..dba620e57d5 100644
-> --- a/board/mediatek/MAINTAINERS
-> +++ b/board/mediatek/MAINTAINERS
-> @@ -21,7 +21,8 @@ M:	Macpaul Lin <Macpaul.Lin@mediatek.com>
->  S:	Maintained
->  F:	configs/mt8390_evk_defconfig
->  
-> -MT8395 EVK
-> +MT8395 EVK (UFS)
+> Should I add () to all the numbers so it is consistent, or
+> just to the macros that contain computations?
 
-I think saying "(UFS)" here is a bit confusing. It is still the same
-board (just different dip switch setting). I would not change this line.
+The ones which contain more than plain integer and can have side effect 
+if used in the wrong place.
 
->  M:	Macpaul Lin <Macpaul.Lin@mediatek.com>
->  S:	Maintained
->  F:	configs/mt8395_evk_defconfig
-> +F:	configs/mt8395_evk_ufs_defconfig
-> diff --git a/configs/mt8395_evk_ufs_defconfig b/configs/mt8395_evk_ufs_defconfig
-> new file mode 100644
-> index 00000000000..9a9de689953
-> --- /dev/null
-> +++ b/configs/mt8395_evk_ufs_defconfig
-> @@ -0,0 +1,33 @@
-> +CONFIG_ARM=y
-> +CONFIG_COUNTER_FREQUENCY=13000000
-> +CONFIG_POSITION_INDEPENDENT=y
-> +CONFIG_ARCH_MEDIATEK=y
-> +CONFIG_TEXT_BASE=0x4c000000
-> +CONFIG_NR_DRAM_BANKS=1
-> +CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt8395-genio-1200-evk-ufs"
-> +CONFIG_TARGET_MT8195=y
-> +CONFIG_SYS_LOAD_ADDR=0x60000000
-> +CONFIG_IDENT_STRING=" mt8395-evk"
-> +# CONFIG_BOARD_INIT is not set
-> +CONFIG_CMD_CLK=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_PART=y
-> +CONFIG_CMD_UFS=y
-> +CONFIG_OF_UPSTREAM=y
-> +CONFIG_CLK=y
-> +CONFIG_PHY=y
-> +CONFIG_PINCTRL=y
-> +CONFIG_PINCONF=y
-> +CONFIG_PINCTRL_MT8195=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_DM_PMIC_MTK_PWRAP=y
-> +CONFIG_DM_REGULATOR=y
-> +CONFIG_DM_REGULATOR_MT6359=y
-> +CONFIG_SCSI=y
-> +CONFIG_BAUDRATE=921600
-> +CONFIG_DM_SERIAL=y
-> +CONFIG_MTK_SERIAL=y
-> +CONFIG_UFS=y
-> +CONFIG_UFS_MEDIATEK=y
-> +CONFIG_WDT=y
-> +CONFIG_WDT_MTK=y
+> [ ... ]
 > 
+>>> +static int do_qb_mmc(int dev, bool save, bool is_bootdev)
+>>> +{
+>>> +	struct mmc *mmc;
+>>> +	int ret = 0, mmc_dev;
+>>> +	bool has_hw_part;
+>>> +	u8 orig_part, part;
+>>> +	u32 offset;
+>>> +	void *buf;
+>>> +
+>>> +	mmc_dev = mmc_get_device_index(dev);
+>>> +	if (mmc_dev < 0)
+>>> +		return mmc_dev;
+>>> +
+>>> +	ret = mmc_find_device(&mmc, mmc_dev);
+>>> +	if (ret)
+>>> +		return ret;
+>>> +
+>>> +	if (!mmc->has_init)
+>>> +		ret = mmc_init(mmc);
+>>
+>> mmc_init() already handles the mmc->has_init conditional, drop it.
+>>
+>>> +	if (ret)
+>>> +		return ret;
+>>> +
+>>> +	has_hw_part = !IS_SD(mmc) && mmc->part_config != MMCPART_NOAVAILABLE;
+>>> +
+>>> +	if (has_hw_part) {
+>>> +		orig_part = mmc_get_blk_desc(mmc)->hwpart;
+>>> +		part = EXT_CSD_EXTRACT_BOOT_PART(mmc->part_config);
+>>> +
+>>> +		/* Select the partition */
+>>> +		ret = mmc_switch_part(mmc, part);
+>>> +		if (ret)
+>>> +			return ret;
+>>> +	}
+>>> +
+>>> +	ret = get_qbdata_offset(mmc, MMC_DEV, &offset, is_bootdev);
+>>> +	if (ret)
+>>> +		return ret;
+>>> +
+>>> +	if (save) {
+>>> +		/* QB data is stored in DDR -> can use it as buf */
+>>> +		buf = (void *)CONFIG_SAVED_QB_STATE_BASE;
+>>> +		ret = blk_dwrite(mmc_get_blk_desc(mmc),
+>>> +				 offset / mmc->write_bl_len,
+>>> +				 QB_STATE_LOAD_SIZE / mmc->write_bl_len,
+>>> +				 (const void *)buf);
+>>> +	} else {
+>>> +		/* erase */
+>>> +		ret = blk_derase(mmc_get_blk_desc(mmc),
+>>> +				 offset / mmc->write_bl_len,
+>>> +				 QB_STATE_LOAD_SIZE / mmc->write_bl_len);
+>>> +	}
+>>> +
+>>> +	ret = (ret > 0) ? 0 : -1;
+>>
+>> Use CMD_RET_SUCCESS and co.
+>>
+> 
+> I am using these enum values in cmd_qb. However, here I would have
+> do this 'if' at every return statement, since the other methods
+> return 0 or an errno code. Should I still change this?
 
-Can we make a .config file and #include it here so that we aren't
-duplicating so much of mt8395_evk_defconfig?
+If this function does not implement a command, then it should be renamed 
+to something less confusing.
 
+>>> +	/* Return to original partition */
+>>> +	if (has_hw_part)
+>>> +		ret |= mmc_switch_part(mmc, orig_part);
+> 
+> [ ... ]
+> 
+>>> diff --git a/arch/arm/mach-imx/imx9/scmi/soc.c b/arch/arm/mach-imx/imx9/scmi/soc.c
+>>> index 17269ddd2fc..eb9bfe19a69 100644
+>>> --- a/arch/arm/mach-imx/imx9/scmi/soc.c
+>>> +++ b/arch/arm/mach-imx/imx9/scmi/soc.c
+>>> @@ -281,6 +281,15 @@ static struct mm_region imx9_mem_map[] = {
+>>>    			 PTE_BLOCK_NON_SHARE |
+>>>    			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+>>>    	}, {
+>>> +#if IS_ENABLED(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN)
+>>> +		/* QB data */
+>>
+>> Is the ifdeffery necessary ?
+>>
+>> Where are the QB data located in this case, DRAM or SRAM ?
+>>
+> 
+> It is necessary because CONFIG_SAVED_QB_STATE_BASE is only
+> defined when CONFIG_IMX_SNPS_DDR_PHY_QB_GEN is enabled. So it
+> throws a compilation error without this. And this is DRAM.
+
+Are there going to be any users that will actually want ot disable this 
+functionality ? Why would they do that ?
+
+>>> +		.virt = CONFIG_SAVED_QB_STATE_BASE,
+>>> +		.phys = CONFIG_SAVED_QB_STATE_BASE,
+>>> +		.size = 0x200000UL,	/* 2M */
+>>> +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+>>> +			 PTE_BLOCK_OUTER_SHARE
+>>> +	}, {
+
+[...]
