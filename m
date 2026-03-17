@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38FD5FB5E8B
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 01:24:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BE59FB5EA0
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 01:25:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1243684083;
-	Tue, 17 Mar 2026 02:24:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4BD9584159;
+	Tue, 17 Mar 2026 02:24:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cxzyygh1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="c8QbU5xm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 781248407F; Tue, 17 Mar 2026 02:24:28 +0100 (CET)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
+ id E73F88407E; Tue, 17 Mar 2026 02:24:29 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BF7B8405A
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 02:24:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DA5FE83BC8
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 02:24:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-415c8a4d2e6so1997029fac.0
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 18:24:24 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7d73e0e0a36so2280108a34.1
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 18:24:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773710663; x=1774315463; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=2RbfsA5E6hBJ/TeC/Lu9nrZcsQDQy6nmB0A4+P40RgM=;
- b=cxzyygh1D04hOQ9VVviN79EaLxbNNON3JCfN6haT6V9UrQs5I+6W1EcLr4jx0fQlzC
- zATXp8fy5I60hiNyUYxJDYUibHayKl+jRRs3cNbabdu12i6Gx6z1J8Wg4qJSOrhJ8IIo
- YuJjd/76+y03r1hGtta+LD0uUOqQRH0SCqR1s=
+ d=konsulko.com; s=google; t=1773710664; x=1774315464; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=JBlgmIxhFy9Q8CmhARNR+JjUpi6ITjzkLOky7LULoMc=;
+ b=c8QbU5xms3OrdVq2A5HdG4WSDjUpJK1W+aT/to0zEiin+SDHc6ERYTh6ZkoUIglLq1
+ iT++PY+i19W7coULIOuKoOPVEc3NswyypTxV2rBEvrSNRx49gsGGk1Th3xkCPkOxdtPY
+ HfOOyJAg/7NnrHYOItXakdvPSXe9ZmH3Dti3s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773710663; x=1774315463;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2RbfsA5E6hBJ/TeC/Lu9nrZcsQDQy6nmB0A4+P40RgM=;
- b=cOzKWX5Vwfk1qL4Ia68Jgmn7ryLu66y+Tj2EPk+GLD0wLRDNOLWj4kMFb+F2V5BniK
- oc095+21ZVBXFUNLpPzjVC+1Ic4d5LjXDtes4wvt6qtts2m+Ryc/twIv2MFv3VG/Pkeh
- BIOxNqkQNuModjngR9d6qhIPHPjxyZ3lQosHYchAVXa958wJRXz0WlvUNzY7cbk7moJm
- dQbD4yJMiq2IByT3fxdexzFHvn7sqLttmPrHcmKs0ceHaZ8VRZPpkQFOlMTkomn8iTNK
- LfhsMxl9Zbyp8GZsk519c55bd1GfeuuDsF6+im8l5eT1cwhSNVpTIzdP9o1VQ8SaJXkK
- 4a3Q==
-X-Gm-Message-State: AOJu0YybeyCBi4jhfHOaF+NWMPB30cRjNoRGfxgZI9mBtnf2EcI81UzH
- qWN7IR0HhUYBeriuTTRXwdSeJP34c+A7n/cHGsy/5RtlEb8N/aSYdBagPSF0xDiibdat9pVMBtg
- yeJRyPVE=
-X-Gm-Gg: ATEYQzwArkHvW5ai88KJ3XU+777bGEQw1zH3YP5s96lCYbzoxTERI/gQANGeULIkjFt
- pLStXdHJgeqkU7I45R2xXXohFU83QPDwz8EB/0iMvBkQ2L2f9zxNjYHLWMwOM8hSFINqtjiirBM
- JSiE8hXg2dVokNsRf3nKwK5BSziD5xGeApFfNCM0ii2tuydJXMRN+Sv68OeS2BXC5uG3Jt8mQoy
- m/xMmy1dZoA5w4S0k5wsgrh0+RymxG/L7eSEQZYwB06OT/whbdcRFV+JvEKw/8371ttdUK99hk5
- ICemlYa8WY7YtiV+ScuM99lz3DqyyCicjuOVHj+bXEF2xI7Sz3lEyz4aWq0XRW6gFpoePh/3DDK
- LEHCQoj6Bfyr3PWBnKw2lvzG5u8F6xuq0U+z771z3I06SNDaZVHVNDnRVtFcwuZJ4WUINeOss7h
- blHBwCu1EjyfCPwBjG6/whRjn72JaXcOkx3uMxCYtzvBFqu+kczkCHXP2OdSrHGTITUhR6rEsjg
- PtoUElB3w0ep1/FglwJapfmDWV9iMp4ChP9PSAT5jgcEjqB4pk=
-X-Received: by 2002:a05:6870:2184:b0:417:4f81:638e with SMTP id
- 586e51a60fabf-417b9060a56mr7601625fac.6.1773710663034; 
- Mon, 16 Mar 2026 18:24:23 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1773710664; x=1774315464;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JBlgmIxhFy9Q8CmhARNR+JjUpi6ITjzkLOky7LULoMc=;
+ b=BhZDk6DjoTXTX6BiwrnEb/F/8DpncDMJ5eWTi9fAz9pCFnYrXtiqq/z+8PLO2Wl36l
+ BujalQdrzD6GM4w6FGp1g9tWpgjtsTSHGnkV9tZ/CAYhlUFQ5l5PaTKndsqrAWd3B9EK
+ dV3dQutFvnM5rL5SLyZ/H5EBEr0wkScgcYkzx9oM1uk2O95oZuQ47x/QyFxndlABdKJZ
+ spOLlq0kk9IZgG/aLpDr/YEXhQU7oAfUuVcefHdQo8na7efCR0yr4c2ERHuSXwW2SkFT
+ YT6IM8qcHSKD+P8IlgzqiF6WRLkTKCbiDqFtjM9VNnO6ZjyBgaAL35h9jvpm2fO/35cU
+ JrHQ==
+X-Gm-Message-State: AOJu0YwPshBSkoacc2lbMtphOr5is4xdF4MYrG9ooZcEGL1KMngV31Vj
+ hO27Z4hAyQkLmc0SLHq5rZ9paGZPqfEgryuwli5CFsa11RvCQCRpXSQYOJ/KhN18vB0ei8iFyz0
+ UWv0K1SE=
+X-Gm-Gg: ATEYQzwYQeHTJwf4hZvJ1Ur4ZdZnwiiodaJKEASJNYFMbGfdpZ19l86n74seQ1BAPHw
+ MelqEMWpOHWKQaLSkAiUlpSZuIS6iaZDS+p8RBET2hCHU4Jh22ao6jif6oQBukIooFDPUesmThG
+ AxDnTW57+SmpUXoecoQQBRBWOXKFYhPsZt6yNrR2kohlEkbPt+XfeqrHSUoacoIea9TYUmFVXPe
+ VPHIQr2YBKtpTQtP4NUCXAWBEqkpqVFrtyWQtrmrdgFeo9qYr9hsE4Ph3aIprH+RHaxzi48+z+r
+ Pw+mGOH0z8uvl+27vjO2HMmz/30nt9imCR4VubiuYcM9qKx5+Z1Wen5mQME+4QTUpE6K8vDkBCq
+ gvFDe1Q0bqBGaJEtssOwhoI66Ra2+XToVDpZWXrYsGf0D7PwEigqSSqGZiITWyeMfzuu1q+KfCR
+ 7mdLfQRRJA9UWdSg3grlANUnbTaw96CJMIJ1ODYSTyUERZFRq6GcB3ZDFsS67fDh+pRqD1WNukK
+ AD6CcfyINiqWPSUnSxkJmdbgnz1maEwBT3B9xK7hmuiIejDkqk=
+X-Received: by 2002:a05:6830:15:b0:7d7:b680:8e73 with SMTP id
+ 46e09a7af769-7d7b6809441mr1398721a34.7.1773710664586; 
+ Mon, 16 Mar 2026 18:24:24 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4177e1fb6efsm19557968fac.3.2026.03.16.18.24.22
- for <u-boot@lists.denx.de>
+ 46e09a7af769-7d76ac8e5b4sm13946112a34.12.2026.03.16.18.24.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Mar 2026 18:24:22 -0700 (PDT)
+ Mon, 16 Mar 2026 18:24:24 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] xPL FIT: Rework SPL_FIT dependencies
-Date: Mon, 16 Mar 2026 19:24:21 -0600
-Message-ID: <20260317012421.4162392-1-trini@konsulko.com>
+Cc: Jerome Forissier <jerome.forissier@arm.com>
+Subject: [PATCH] net: Rework some symbol dependencies
+Date: Mon, 16 Mar 2026 19:24:23 -0600
+Message-ID: <20260317012423.4162427-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -93,36 +93,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As exposed by "make randconfig", we have xPL_FIT select'ing
-xPL_OF_CONTROL, and that in turn requires xPL_LIBGENERIC_SUPPORT. The
-most reasonable solution here is to have xPL_FIT select
-xPL_LIBGENERIC_SUPPORT.
+As exposed by "make randconfig", we have a few dependency issues with
+some network drivers:
+- Both HIFEMAC_ETH and HIGMACV300_ETH functionally require both DM and
+  OF_CONTROL. Further, HIFEMAC_ETH needs DM_CLK not just CLK to be
+  selected.
+- BNXT_ETH deals with it's PCI requirement in a backwards way. The
+  symbol PCI_INIT_R is board specific, PCI alone is required to build.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- boot/Kconfig | 2 ++
- 1 file changed, 2 insertions(+)
+Cc: Jerome Forissier <jerome.forissier@arm.com>
+---
+ drivers/net/Kconfig      | 3 +++
+ drivers/net/bnxt/Kconfig | 2 +-
+ 2 files changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index d81e56e8528c..7849928fc37d 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -183,6 +183,7 @@ config SPL_FIT
- 	bool "Support Flattened Image Tree within SPL"
- 	depends on SPL
- 	select SPL_HASH
-+	select SPL_LIBGENERIC_SUPPORT
- 	select SPL_OF_LIBFDT
+diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+index cd07b117a5f0..02063ce3aa91 100644
+--- a/drivers/net/Kconfig
++++ b/drivers/net/Kconfig
+@@ -979,7 +979,9 @@ source "drivers/net/mtk_eth/Kconfig"
  
- config SPL_FIT_PRINT
-@@ -315,6 +316,7 @@ config TPL_FIT
- 	bool "Support Flattened Image Tree within TPL"
- 	depends on TPL
- 	select TPL_HASH
-+	select TPL_LIBGENERIC_SUPPORT
- 	select TPL_OF_LIBFDT
+ config HIFEMAC_ETH
+ 	bool "HiSilicon Fast Ethernet Controller"
++	depends on DM && OF_CONTROL
+ 	select CLK
++	select DM_CLK
+ 	select DM_RESET
+ 	select PHYLIB
+ 	help
+@@ -996,6 +998,7 @@ config HIFEMAC_MDIO
  
- config TPL_LOAD_FIT
+ config HIGMACV300_ETH
+ 	bool "HiSilicon Gigabit Ethernet Controller"
++	depends on DM && OF_CONTROL
+ 	select DM_RESET
+ 	select PHYLIB
+ 	help
+diff --git a/drivers/net/bnxt/Kconfig b/drivers/net/bnxt/Kconfig
+index 6ff3ffa137be..e25ed479678e 100644
+--- a/drivers/net/bnxt/Kconfig
++++ b/drivers/net/bnxt/Kconfig
+@@ -1,6 +1,6 @@
+ config BNXT_ETH
+ 	bool "BNXT PCI support"
+-	select PCI_INIT_R
++	depends on PCI
+ 	help
+ 	  This driver implements support for bnxt pci controller
+ 	  driver of ethernet class.
 -- 
 2.43.0
 
