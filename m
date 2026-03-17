@@ -4,104 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57D82F013FA
-	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 21:56:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D63A1FB5E93
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 00:34:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE1448423C;
-	Mon, 16 Mar 2026 22:55:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id DBFC884228;
+	Tue, 17 Mar 2026 01:34:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="k9cqW3xK";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="pD0UHQcJ";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="lO9c9dX8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70FEA8422D; Mon, 16 Mar 2026 22:55:52 +0100 (CET)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A5BA984248; Tue, 17 Mar 2026 01:34:10 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4788D8414E
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 22:55:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D268C84221
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 01:34:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-40f1ffba6a0so3003804fac.0
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 14:55:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773698149; x=1774302949;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=jiDPpvqRfGQbwA7xH/eLjfFPTUqjKarTJ5M0ShRh+g4=;
- b=k9cqW3xKNaSZeQzmKVopPguH3DHFz6T2dJrQTAK0tO3lZcfcxJxAv29XAHguzkTpo9
- +3bmrnU++X56lZ9uzQq79smO0jvI91D575ZKW1OgKc2ZQf8TY6ouCDzNaF/wFbrKVAqa
- mwj8uSDAcs9NjCsUYE3VkHsD5gfg3BURmiAEey4m3xvaUWaMBPKXAAzgU1r2Z7tGls07
- r3dDi8a9jAqHXn5x6iJeQvr1wShNXGYio204SackOZ1xnFmr5ace2Ak9pntr3ggExW5u
- a1GD2g2cEbXRxsLeHB1KxcjXnQ/0Z0t6WpYj0uskjp4BlVjxiHfC/Wh2oNM0atHGrQu9
- m3oQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773698149; x=1774302949;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=jiDPpvqRfGQbwA7xH/eLjfFPTUqjKarTJ5M0ShRh+g4=;
- b=RgQxnm9wke2T68MXkfnmecNI7RdcU5tAO/PrOOFnSSnX3Ja9sZduKtKh7BfjCkfZ2I
- L1kQiNOvQeJc5e4aZQqDVgDNrqbnqit57/5Ltn7pGSnlKcc5v//JqelYxm4LC3+dfU+v
- no3KtAzzg/gdTnuaKO6QGzcQ15Dn7A7pLS4osb4B/siL4HCRHUbiiZaUijkZxxn2N0W6
- 0wbwvJpZNlQDbVbbPNyBkyb7M6nyZ+kmNDiuKusQJ6zlX2HTm+/5kWe3wv+rbmgWYDTX
- twbJCwaOM2W5c+O23J12ZxiKFPUMwHUEgbJcXtuN4IMjrAl5D20+zgX/yMnOKnYudyw3
- MNxQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWGYxpDfuU4LY0bL5tqzqyjJ+5MPHoOhdKcNjMdorv9cOrQeZ5oNP4zGYYESpr2HhfL2MPZcao=@lists.denx.de
-X-Gm-Message-State: AOJu0YxaIgVRPkMy7suph0Lu9p4pey+1Az1lxEsuKMkI4mn9S6pLw+qy
- WYxmKHPNtBsmvBMJIxWD++TlrcGlC/vXo8lWA9wpNualOjpS65gnpsA+oUKElOHSsEQ=
-X-Gm-Gg: ATEYQzwvM0rVx5ID93yn6Iaw+i95aN90QISV5wpLpBiWDzi5O04w9Ao7K/N8L05VQhv
- t3FBjqpi25xzJ6uq614syVrhcTDV7BRMsBSlL8rMJ4/8fmG59gKaMnaBk5LIbRk18WUdSExbozh
- H1P5IlQc3zQUvvBQVVnGJfkqPGXcAnns2gZv90ws8eZEV7lCQmCHbyQb9gqULhEs2GrJs2FOWeL
- UKN/f8e0r6IM9Zpc0S1Drd4AT6OU4UTsmecRFwBqLF1Pev33bCccAk1o+5Zryi1W/Rx578hknDG
- mb1nghN2CR7BykZIK0o8lhg1ZpoUJWPHCtCOpSzka9Fsjg+FtfSLua5LX6V1Kkc7A5O84tmR5iQ
- u8lfmR8XvLx6ykssoTHT0tISckgn/ziZFOJuJ+8mFP5K0DAn72DoI7EjyFdJF78GnJ1xiX48rkR
- Tt4Kx1azpLOeAFcGg+aveH2h0CnO4=
-X-Received: by 2002:a05:6870:ad0c:b0:3fa:aa1:5b1c with SMTP id
- 586e51a60fabf-417b9399102mr9754769fac.30.1773698148914; 
- Mon, 16 Mar 2026 14:55:48 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:6995:28aa:eeda:102])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41791432d87sm17978547fac.1.2026.03.16.14.55.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Mar 2026 14:55:48 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-Date: Mon, 16 Mar 2026 16:55:16 -0500
-Subject: [PATCH 3/3] configs: mt8189: enable GPIO support
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4fZXyQ2Zvsz9vBD;
+ Tue, 17 Mar 2026 01:34:06 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1773707646;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Tx7LZJvVVqGC4Q3e47yfsMlfwj5FiOV//fU1ZmoxoVk=;
+ b=pD0UHQcJKXYnI3jrb/6vmMyf7ixjQOT6A1gyM/k1u0GAtFO9XNDrnMpGq+9hAliNmTDxaO
+ X72R05Od7c8oXEqWzqJL9avf8JgbsWI7oCuFT+wOv2zTHo8DtDY2t0LPZAVbNC0n5wQMii
+ b+xsnfSzn6hy+K4M2/Ud0iBbRK40Lz1acwLOTLXW61j9ZHY/kAN6kpLRU1cevs0RXfUMCw
+ dKrLkZDhyaeiAsmSnhT+xBpnZJxONQ8Km7Z3In0bHRwYu6AZIRFicJKUyi4/U7c9nTEjMz
+ IuJdgXlgwoJlb+QRm+79h81G8U2BHQTAaZl8cJ3edrH/fkE5owI9rzPh3KAFKA==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1773707644;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Tx7LZJvVVqGC4Q3e47yfsMlfwj5FiOV//fU1ZmoxoVk=;
+ b=lO9c9dX8qrB5QIw1atj0xGw+/HIbSdBwdkVFBFF/qIcOkVrstQy2qJpeBhb6dc5tPQgQeX
+ Ayg9lHKXIRUwnMhdxYmdXVdoBbBNi4CLXUgvZRZrZZaQ18uf4UhMqAzk3qOuSj8ywgE0Ph
+ NYo1Zv2S60pzsI4q3BFbHS2a3D5ktlPS9x1aCXv0ZxfjeS5KTylfYMmOdsnd7bPKczS+pz
+ EBTcMNUGb15FHAvpC6FRmm78QkrZYTPq+ht4RyAo6Six3Ur0JeEGHzYAA7eO3KIGgyQKCG
+ q14f0kkZ+J4jF59/dDT9sHpo8XQqK4BiNCQz7+eWwYW547t25hx7pl/QA4pOZA==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] ram: renesas: dbsc: Use macro in renesas_dbsc5_board_config
+ channel count
+Date: Tue, 17 Mar 2026 01:33:54 +0100
+Message-ID: <20260317003402.177486-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260316-mtk-ext-mmc-boot-v1-3-1aae51a44705@baylibre.com>
-References: <20260316-mtk-ext-mmc-boot-v1-0-1aae51a44705@baylibre.com>
-In-Reply-To: <20260316-mtk-ext-mmc-boot-v1-0-1aae51a44705@baylibre.com>
-To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=869; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=SM+Zfs3KwXnTf8HYY3IsVjIHrgQuQlWM27/gjjL/deU=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpuHxbYnHUkVG/mpGk9QCKbbuxJ1ogKNOIU4GfX
- 9fX6LbzfG2JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabh8WxYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Ayq8H+wbpPsJIvYEZ7xYkQ6+3981Nud0Db0wLxQskoCp
- DcZQowlxRH5e09V/H78j8oaKefJo4kWS0ZLVL53sKIsL72oieKiQkPb+S5i7jVeOP8sKjWzJ3y2
- kdinoaQrXOUxhJgXnvZyFR8EoqZJDe99ry7wiSsvp5EsDAwNsAOtM9blGeHdVIG4wQR96GqQuYP
- WHxgULmS+4ENOTVoCniIHPB288H+3vOg3vkfQkM0dzlPdEIQavPofNvxj8uiPnQySRbCUrEGA+A
- qj58E2EqNqAnTH22Bw5Dnvfmrx5hshgaG+3+vGrC/hPfZYfS4o8VznQ0I5DwxB8fOxtklkA2kHX
- +m8E=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 9cfb90022700748dc53
+X-MBO-RS-META: pw96w4xx51rdffbach1qmgc46b3zm6z7
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,35 +83,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable GPIO support for mt8189-based boards. This is needed for U-Boot
-to be able to use the SD card slot on the board (for the CD pin).
+Use DRAM_CH_CNT macro in renesas_dbsc5_board_config channel count.
+The macro is defined in the same file a few lines above. This way,
+the maximum channel count in the structure and the macro can not
+diverge.
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- configs/mt8189.config | 2 ++
- 1 file changed, 2 insertions(+)
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ include/dbsc5.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/configs/mt8189.config b/configs/mt8189.config
-index 966d05d1a03..0c158cd9430 100644
---- a/configs/mt8189.config
-+++ b/configs/mt8189.config
-@@ -5,6 +5,7 @@ CONFIG_ARCH_MEDIATEK=y
- CONFIG_TEXT_BASE=0x4c000000
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_DM_GPIO=y
- CONFIG_TARGET_MT8189=y
- CONFIG_MTK_MEM_MAP_DDR_SIZE=0x200000000
- CONFIG_SYS_LOAD_ADDR=0x4c000000
-@@ -12,6 +13,7 @@ CONFIG_FIT=y
- CONFIG_BOOTSTD_FULL=y
- # CONFIG_BOARD_INIT is not set
- CONFIG_CMD_CLK=y
-+CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_PMIC=y
-
+diff --git a/include/dbsc5.h b/include/dbsc5.h
+index cec937d89e7..b9b8703141a 100644
+--- a/include/dbsc5.h
++++ b/include/dbsc5.h
+@@ -50,7 +50,7 @@ struct renesas_dbsc5_board_config {
+ 		u8 bdcfg_dm_swap[SLICE_CNT];
+ 		/* SoC ckeX([1][0]) -> MEM csY */
+ 		u8 bdcfg_cs_swap;
+-	} ch[4];
++	} ch[DRAM_CH_CNT];
+ };
+ 
+ #endif	/* __INCLUDE_DBSC5_H__ */
 -- 
-2.43.0
+2.51.0
 
