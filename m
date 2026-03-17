@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C00CDFB5EA0
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 01:26:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D04A7FB5E8B
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 01:26:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D43B684277;
-	Tue, 17 Mar 2026 02:24:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2D0788429E;
+	Tue, 17 Mar 2026 02:24:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SR4gy7cO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fQzPRwSZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E0C48425F; Tue, 17 Mar 2026 02:24:42 +0100 (CET)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id 455948413A; Tue, 17 Mar 2026 02:24:44 +0100 (CET)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89F6684129
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 02:24:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2898984246
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 02:24:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-67bac077116so2708472eaf.1
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 18:24:40 -0700 (PDT)
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-466ebbf7ff7so1722949b6e.1
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 18:24:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773710679; x=1774315479; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773710681; x=1774315481; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=+w0r5kYSvfX8G0xPqP2ymHKtdssFmtU1w79fA1kFmb8=;
- b=SR4gy7cO5zs128+0XIOA5/Bt7N7VyPDRA8HEqzBGoMNUz/S8Nz6zZw8OCGh6OSO1xt
- okTEpRFytjTN0mCP5/os9sh1F6TkZFMljxJel8HQTTWuDspcdUet/G3xNzcybWDxhWYV
- IqTdVaXuwMBIthIIxovB0fBC5P8rPFnMGL4zM=
+ bh=NxuW+MO+OILDPs2edPWhzGsE9G7EPqelqer+/vm1W4A=;
+ b=fQzPRwSZFiIJZAP5JwM8rtld4//sqOiEryWYtAmlV4QJk1WeXjijYg5Pv/qCt39JFc
+ 4EfGhL1kOO0skin/c5c8ZcJ0IFdcdQ2OwGDIRormiDeiNGexCHvUWBO2x9PHiNF2FNE+
+ pxvXBBSrYbAQw2aEdvkQlADx0TFt3iMnPDBZ0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773710679; x=1774315479;
+ d=1e100.net; s=20251104; t=1773710681; x=1774315481;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+w0r5kYSvfX8G0xPqP2ymHKtdssFmtU1w79fA1kFmb8=;
- b=BuD9Eobv5BkP/rVg7WPtbYbQkgpsbI4eYZBeVFlOj1IUcg3YRNbhY9aj9pM/67gZAh
- J7jpKn7VgFYzq3lDL/ei+wzKUS4OQ+BBGdHRZZ0CTOHjehoeUInya4/IwgvoToYNnoFD
- bdRARCDACb+ck3y6qwfsjXs3N847fpXS4+H0RWd4aZ+NRxrYG/+npGDJQm+t4uVfuEcm
- 8iVsZpDvkQY/Iew2BAFJXG43Xa3YJuhheyaPULEGbPV/EnLMAjAE4171fSVjiHd4XwTU
- D6swsS5UaUPxfWDiB3I0wH69dHeWmvb1ImHYsdQ2Uy6LmhsTaCMJo+d+3n7+rpTLjDzg
- z71g==
-X-Gm-Message-State: AOJu0YzoYAX8g+GUlF534HjDlWozZhq3pphm/KsFFFBzR1y8lZjY1mhn
- Ce0ZPjPHVvdiFxq7BJR/E/FAp1qDUcISN8VFifvoQ5De2MzD+SrF2+SOwmfBV0+l+0YjE2KJm65
- X7H02TXo=
-X-Gm-Gg: ATEYQzwRf9L7nWHoBw+R1j7/CPq6X1F6+H575f0TJECy/cd+dXeKgBhsMJLVSWw9MIa
- 9JLobYR7FsiW7SyQx1cXehrMsz/TfE5Vwc2ulSqit/QcG4eJcSRAf/8Eit2NGI1eE1UqK0oezjp
- nJpvAOF8YWqJjMqc/b8xBrQVf8/QhbUtnQ6pULIOPI/242AIqog2ROVZvHAJawvD4ji2mHgI1MZ
- 2Dp6lMu3TsnCps2cmDL4uBPzTpH8GUMHqzUmP4O6IHEHpF737PHvjOulonSLfWYK70RyxiYZsIx
- SnzPhJmAz8aFgJkhS5+PiSlRju8AuXM0LQLhMATvC1JuC+c7I1S320c75MZa5UbfLVfW0iRVvWw
- LMsS1FbTA5+4H6D1DPUoI+0pYsZv5nya1y+D/laM4HS6nOX69CTG63s5hmUqBav7j2fxEGftSGe
- ybM4wMaImlx7jVInxsrZR1altjss8Oalvs6op01DzoiKQb9C4MQqqyKkQGs+OmLgv4MFATStEIT
- nNkmJ6CdBygQGtpR6GbOlbyxlrnnkJ/ukar1FdTyKCfW9bYTG8=
-X-Received: by 2002:a05:6820:169e:b0:67b:cf34:e38f with SMTP id
- 006d021491bc7-67bdaa79c75mr10276377eaf.54.1773710679265; 
- Mon, 16 Mar 2026 18:24:39 -0700 (PDT)
+ bh=NxuW+MO+OILDPs2edPWhzGsE9G7EPqelqer+/vm1W4A=;
+ b=qNUN/NzJy/lt5BKsRuRxfCwS9vwJSbF8ij+kIC3N1AcD3g5/V8tZkp2cuN8ndG+MFD
+ t0YNCTIKH/0QvPy1WGN9yXH82TPUBa4ticBlXqVB6nHp5uZX5PO8SdYBpltWtfWg9CHr
+ hJOUMgiwiW094ATmYr824MIOR2D4sIV+PD2C9iyyzOxakl54GEzXDX6XFZt7nmXQNhFj
+ ab5FzHAvdW92OtWlLqX7S2SkTib7vFAvZuY8CblwMvFGKsHq1RiiPDBaEi0eDOa4eOWU
+ jXHhl8nRgQqP5zaLgV10M9hWc+Uw8GX5CX8EnP9hthr7b+MdVt1wASg93OkkxEeux8WE
+ y0Jw==
+X-Gm-Message-State: AOJu0YxVsTjr+IJq1hH7uqCa3Yl50vYtifRHgrYwyulUsruu3/jYY+NE
+ 0lS5EmLAp0GbYxByi8ujBwVAU+hWqVnnQckad5NU9fIEEnIsWdBx4N+LO03UtRf5jYlEwiwGHgB
+ bVLvJyck=
+X-Gm-Gg: ATEYQzwC5fLcNJN92+RTb8KzDrlJ+lb8eT28ok+F3VoS+qnN5AEmWaKRCx5aJvt/RbA
+ OnGo+mpcmE7s3Sy6dtGkP4CYiULh6AbrWw1PvKd/fuSqCGDgmP4IYtV5R2Ll5gPWpE4zva5ty6Y
+ qcDBNmyMo22DGNOQiuNBmw4LOkLF5xBzJdj28zQtxqKzTPOh7xxB5V+BY6yxHP2QLRJbYU5b3jN
+ fXbP8VAQrRK4KIo56XLV1A4HD4s9vfxGPSYBU+wg212ZxZ+C2harlpqzq9+zVxUe0oJ7jTKPsWa
+ 1d4fCmvXmBUWFAIS85W3lASR7Tz14DBzbW5OwXXzr7GLzmh9OariEuRzO21f9xnD/tzlylvQmS3
+ EQsjH10S4ZdSABPW0CG9hRKH5mmQuS6a0wTBzz3EdjUTskl0i32M72rnvB/bI1/8hpHafmEhnG0
+ jhDrT6ATxV7SQdnn0ZIz+XfDvuukC7tRWCcXoFi2M20Zo8s2tZNbuoLeaCd95pfCCczEz53DWtY
+ e4vCsJAJx4ikoXoZ469BqLjdMC/SczQkvkDIkmpzW24NGWp1aI=
+X-Received: by 2002:a05:6808:344c:b0:467:1c9e:2121 with SMTP id
+ 5614622812f47-46757037223mr8234054b6e.1.1773710680848; 
+ Mon, 16 Mar 2026 18:24:40 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-67bc9332686sm10978789eaf.13.2026.03.16.18.24.38
+ 5614622812f47-46734160cebsm10440463b6e.7.2026.03.16.18.24.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Mar 2026 18:24:38 -0700 (PDT)
+ Mon, 16 Mar 2026 18:24:40 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Casey Connolly <casey.connolly@linaro.org>
-Subject: [PATCH] input: Correct dependencies for BUTTON_KEYBOARD
-Date: Mon, 16 Mar 2026 19:24:37 -0600
-Message-ID: <20260317012437.4162554-1-trini@konsulko.com>
+Subject: [PATCH] misc: Correct dependencies on QCOM_GENI
+Date: Mon, 16 Mar 2026 19:24:39 -0600
+Message-ID: <20260317012439.4162568-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -94,31 +94,29 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 As exposed by "make randconfig", we have an issue with the dependencies
-for BUTTON_KEYBOARD. This needs to also depend on DM_GPIO, and then
-select BUTTON as well as BUTTON_GPIO, in order to meet all its
-requirements.
+for QCOM_GENI. The symbol PARTITION_TYPE_GUID depends on EFI_PARTITION
+and this driver cannot function without both being set, so select that
+as well.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/input/Kconfig | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ drivers/misc/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/input/Kconfig b/drivers/input/Kconfig
-index 47ce0ea690fd..5bf122c55051 100644
---- a/drivers/input/Kconfig
-+++ b/drivers/input/Kconfig
-@@ -48,7 +48,8 @@ config APPLE_SPI_KEYB
- 
- config BUTTON_KEYBOARD
- 	bool "Buttons as keyboard"
--	depends on DM_KEYBOARD
-+	depends on DM_KEYBOARD && DM_GPIO
-+	select BUTTON
- 	select BUTTON_GPIO
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index 798f1dbf26cf..b2dfc7f5b663 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -86,6 +86,7 @@ config GATEWORKS_SC
+ config QCOM_GENI
+ 	bool "Qualcomm Generic Interface (GENI) driver"
+ 	depends on MISC
++	select EFI_PARTITION
+ 	select PARTITION_TYPE_GUID
  	help
- 	  Enable support for mapping buttons to keycode events. Use linux,code button driver
+ 	  Enable support for Qualcomm GENI and it's peripherals. GENI is responseible
 -- 
 2.43.0
 
