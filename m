@@ -4,117 +4,181 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCEA0FD875F
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 12:42:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50BD0FD875F
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 12:43:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65C2E842DB;
-	Tue, 17 Mar 2026 13:42:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id D115A842E6;
+	Tue, 17 Mar 2026 13:43:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ittctm1G";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="fW5Dqj6K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 022B9842EB; Tue, 17 Mar 2026 13:42:27 +0100 (CET)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
+ id 5833C842E7; Tue, 17 Mar 2026 13:43:42 +0100 (CET)
+Received: from CY3PR05CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38715842C4
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 13:42:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 003D9842DB
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 13:43:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
+ spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PsKuN8eX1JVbAhFj+T/HvSUdDwI9UTQLHHaEAyJwABejOJGJezPXkAVpGanY354Kwp12uJVmB+xJvwdUGtpkLFJnhzp3tAxK4kvkSFEJiptsizsIxI++DsPThqdvO09fUgM+cFpZ1a+20xlOVmp41ectlrUOMM7jFY3Qn0JOuXIBf8Xcd2Xuxm0BXZIG0GUPF5ZkZsau8YaXKNcsTAv5zHOiWygTqIm8Tjpp8HjV4Rmqs4fTbDkj3WeL0WyxpWF0Lr+iRXnRNvVZtXTFGzeRGo6WYVeC24Mj/sXXIGprN6mVA6/VtA8nK7RtgTIEyK80/Cn1eIU4Eoz98HYx3MphRw==
+ b=yuc6kGx0zkRKEg75VWw0F7w+tuR7KjgxJh4C9OVIV72ncC7p0wXiwZ2ADL3NKNtctF/vp1361dorrQuzr81mMapH/S04ticR4g2GQKl718ac2wutAkKmtLXWI4iGT1NWMsqI3cEr9Lhpy/gRRQ5AyJAosJElZXG61r3Pz6ugjUoDfRrKo3zoXQPqen+7QZiJ0DliZvvwmoBFC/+LvdITT15c5RpzN6nROMu/keF+0WXmouY9FiZJEqefGJjYmAU/BFIMLD643WXWDsiDfr2lfF3WsLl9gMw7sIp+HkZQKUE6CZ7Yceulm/1R2CllmMyt1F9sBNz6RaFhQY+yPDgx4A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nVngTnGoDlyWEGzLeo6p04KBUiT29qssiyjWsiod5pQ=;
- b=otdV05r3gq/jwhK0eMKZXPX/A48WPUtDw4z4lvyQoVLn8kGYK++fZzreya1Qir5n/VrWKrypCsphfl2+Ri6e11ZU54U6cB2RYPW9hIW2TDmc9dBVfXzIWad/OuUferYMBZYcBVcjXsgEHT91sTUI2m5aoDl5kgRK9ettg7sBZTSl0hLn+6cO5MPdwChM6/gBG0KOkLjScbdP7PlZl5ouIgZOg5lJHEEpE3IXYUHovqqgQyl86Tgaqm5iwpbPKHFjlcbkvHAtByMrBK6jnEvdrrmpfjf1GkO8DQ6NylsqNK4otdwwYmB4fTm8LrRy3x4bYUEJng9575vUYNPuP8e+Kg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=konsulko.com smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
+ bh=XGiz7HJTJNDhVgeDB2xFyXQEHt3OLUBcUQHVbetxD/U=;
+ b=VdJe1GKxSDcqammT8nXh86h8N81xtokpETGTyOpyehAHaZWmNeOC9Fug+/0tVMle5aaUEJzAJyKffgvIQ3lRIA0cE6/QNZvV3jIp0h1PF71vWA7Q+WwLZIoyaTmkuHjEF2btS49DvLqJNzhGQ/jthRIGwUcq+2/LRDO4a65GztYfr8vhM46dbiAjJZUyyKjcRuTFQlog5FEc3383X2oDzgumKeCQecXl74pu0IhY4h0zxqykP1MmWbJVMg8EXoyC0+jPZvyqXK1PICcjp110dHYkrGMhfpICB2MR57iTAN0mkJcjFDiTsP7r+2F5nmfpLFIIwuObvLuxWTTtfFeotQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nVngTnGoDlyWEGzLeo6p04KBUiT29qssiyjWsiod5pQ=;
- b=ittctm1GX/IGMFDODKQuRAcwAMJ+w/3jNB18eGgaM0jrZc16L64h4njesjEY5EPLKslrGa/xT5vbTn0Y/cA6/5iK6NOkylItR0DlZiUuvLIlRh0wlWPPd+zBVyqcPXO/tHLH8+iY75nobw4dBcBXuG7lfbpHlx38jj/wVhTs7aEMY2i0ROmk4HFrna4hAo/XeH1gk9JpOPDiZwpEPJ/KThFZgL9nFq0ZYTJWaBgPahz1nApuQRttXjId+9sk4n9L3OKJmwj4BYI8wmID8bnpOToOXMYnXBQXvEApYv9UpIKmG7cdOd11I4O+ivmG4daCdSXEppoazkWsg5uMmEcaug==
-Received: from DU6P191CA0038.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:53f::22)
- by AS2PR10MB7345.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:607::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.21; Tue, 17 Mar
- 2026 12:42:22 +0000
-Received: from DB1PEPF000509F0.eurprd03.prod.outlook.com
- (2603:10a6:10:53f:cafe::8b) by DU6P191CA0038.outlook.office365.com
- (2603:10a6:10:53f::22) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9700.27 via Frontend Transport; Tue,
- 17 Mar 2026 12:42:18 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- DB1PEPF000509F0.mail.protection.outlook.com (10.167.242.74) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9700.17 via Frontend Transport; Tue, 17 Mar 2026 12:42:22 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Tue, 17 Mar
- 2026 13:44:55 +0100
-Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Tue, 17 Mar
- 2026 13:42:21 +0100
-Message-ID: <8add8b77-dc8b-45ce-8d72-1fb21cd391c8@foss.st.com>
-Date: Tue, 17 Mar 2026 13:42:20 +0100
-MIME-Version: 1.0
+ bh=XGiz7HJTJNDhVgeDB2xFyXQEHt3OLUBcUQHVbetxD/U=;
+ b=fW5Dqj6K50YHhGEX3+dxO71kwjEcR7Swyi67kAI6xPOQ90sO8uchi8j+DiB+BIhcD/PS/ECKAfaJ8DzFW1K7OfxV/dwiZs6ouu4gcTvYqS7YSeAb77uZL+LVBs0D58C80NOCmo+okh41lTA4S/tYJLFPaxdXyK39MZbwTj5kSJE=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
+ by SJ1PR12MB6337.namprd12.prod.outlook.com (2603:10b6:a03:456::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.19; Tue, 17 Mar
+ 2026 12:43:35 +0000
+Received: from LV5PR12MB9779.namprd12.prod.outlook.com
+ ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
+ ([fe80::8ac8:e862:8ae9:9287%4]) with mapi id 15.20.9723.018; Tue, 17 Mar 2026
+ 12:43:34 +0000
+Message-ID: <2df69237-7ba7-47fa-8980-35bb5aed75fb@amd.com>
+Date: Tue, 17 Mar 2026 13:43:25 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] scmi: Rework SCMI_FIRMWARE implementation
-To: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
-CC: Marek Vasut <marek.vasut+renesas@mailbox.org>, Michal Simek
- <michal.simek@amd.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, "Patrick
- Delaunay" <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, "Simon
- Glass" <sjg@chromium.org>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20260317012414.4162304-1-trini@konsulko.com>
+Subject: Re: [PATCH 1/2] event: Introduce EVT_POST_PREBOOT event
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, git@amd.com, xypron.glpk@gmx.de,
+ ilias.apalodimas@linaro.org, Casey Connolly <casey.connolly@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+References: <cover.1773154765.git.michal.simek@amd.com>
+ <af02d5e56fa0fe48548da2a52d08710f3d7d5213.1773154765.git.michal.simek@amd.com>
+ <CAFLszTju9o3O23vYBEx1R529b6iBdJL7PB0okd4p4L8m1pZzVQ@mail.gmail.com>
 Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20260317012414.4162304-1-trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ mpwx1d8=
+In-Reply-To: <CAFLszTju9o3O23vYBEx1R529b6iBdJL7PB0okd4p4L8m1pZzVQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: VIYP296CA0006.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:29d::11) To LV5PR12MB9779.namprd12.prod.outlook.com
+ (2603:10b6:408:301::14)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509F0:EE_|AS2PR10MB7345:EE_
-X-MS-Office365-Filtering-Correlation-Id: 276252d8-f50a-4bf8-8b5a-08de8422a2a6
+X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|SJ1PR12MB6337:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5d1e04e7-4037-47dc-70c2-08de8422cd40
+X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|1800799024|376014|82310400026|56012099003|18002099003|22082099003|7053199007;
-X-Microsoft-Antispam-Message-Info: 4VYboZZmjhHpcY8z9zYGf2OEXrqddA2873hTcVod/jlORkppq7JbFnPIGX6HIuw6XYeZhTnpeIaqaQEdiwivpItxDgeXFsH9RGcwNiRTifYYYRyc/FllWm3zrpMnKp1/QkiPJni/dNr8mczh4PmHip4E73UnsYveLER+mOQ5OQLhQt2spfFesii42hM/qXCFRsLIgT+1HQq5qEX69GeuAwGGzTgFy9+Rh2ZbidXqv4kOzjXBvqovLPYK0v6+L8Yk9Qz822+6Wq2M8wT9DXyss22K56FZTVOe/gewPeMrGgEE4vkzL17JNebVrp3bJJNOtEPWzewOJ6/zDXwccvMGxE6Nz7zbngvws1aQf2mhQpuWmpN03nXM2D9H8rkechs9oCXcNyY6KfuNanWPwLSQ6L6aFDpIcfAMmdYwglse0ARK8N/SD4akwgl0FnwR/Yj7/NG7KBYLemes49ZqzZUhue/EEpFKVSoCwkNGioG1uy2XSJrbqf1sibFWGQicHBdHpbm35hJGkgFqkj16MgOtssajdw976hCyqSdrd1b94eicK1zjkKfJQNIPfFHZf3V34L+1JmhN4okjo2PsqO/5C8WNUCkZq9D5GUMod96JF5I23Lb1g73HFsbQT9DwbDHfnkFN0fJblh5UnuVtYB9M8gnHkYd+j4SZJLQd6CEE8pPHjZbXUYUUlToi2VlkhP6BHsc1ZvnQl4+e1VFZBwX53QNekEpi+7/MD6GEEh9KIPubv+2lmHJmVQsCnDcoRXCi/H8AMNlV3N16SXa2EFfh5A==
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(1800799024)(376014)(82310400026)(56012099003)(18002099003)(22082099003)(7053199007);
+ ARA:13230040|376014|366016|1800799024|22082099003|56012099003|18002099003; 
+X-Microsoft-Antispam-Message-Info: SO6AHPFGesX0jFDsIxIX2Np8QIz8B3DF6spAyh2klwefZR7lbcx3/7srZnnXvVJv9ir1Pd1Y38gRa18tGUlKeb0a17FCOK13lRfFfGOS408YUQ0uqcjsZsfWZISyetaKNtjszeMMwdqPyJfYfO4+0z0jJXh980Bk6qNWPjnd2aSHuXdcUzIu6GcpnpJTklhBF7k0IzbSrLWIC8deQsLNhFy6uZfLoBYQOPZqAZ4ket4zzVP66a721iubBNEVvXcLRiJW9lmWNC5n/BoKWbUyI0w+QYrKSpU9jaKfJFQaa+VnZU12g/gdOYngcVGfMD6z1PYT/DJx26bYWXK+MzdbR2UFPGQ2zlRCmMKZUezXYIULgL6Yhv27/wenXpvl2TsGhUR9Hv71jz74tMfgYXIeGQYqNCNXxoj7VHpb3JcORie49I+9lSkZ5QJyQAbJcIH3lNWynd3pLR7ZZgn25n2aCKoFrjJSy7CEWfLiF+8BJ7CbUgMt5JyuObg6zoI7Nr582cWtf2xMrfGfusl0B9Xm+2KuVW8+amf+rQEx2lRVlEKnMdmbcav7TG+VLlB1ZyVMFkC3pBTPrLYa8FfiCBXw4dfgSLAuyvKpKcelCgGV47a5nC/irHMdulUX6Xo0cJIPeuvjqhLArvx85UK0R74e4Ytm1QsltBXG2GTeRodsyQ8lmmON6UHxDgQh366E5w/2kpitKH6rG4juzxRRp9H/76sqFpyc7lRYHBbqengHecU=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024)(22082099003)(56012099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: v7L1N1sgf9KraYq0lO3RoMVRrL03DbSSQFYhsYbhNNqmCZl6Q0SdEiks4clMw/qOtEpk+icK8n7eXaz4N+vdXW9bbuwCXvMZE4F5jxjj2eT2/gtC+hMFD2JRJqNEYo2t8HiHWFIYsFsEJpl1+BYiMvSfc3s9P0uXht+uBdm/PyGEfNZxlMkVjaxFzmIXC6MJVmyOYXY0iVbHqOEw8Y+Hhdpniudv2AZli47FrUA3FqXA8iTwfr8Ryo456OF4ZyZlWPGz58OxZn8x/PqzkCqWiV8K1uPpHL9mQkpeEPk6T8p4fWRyxTOx9fsHGmSc2CBiF6ZSYdm5kHb5hnDbqIRb6RFKtohkATo9+mxN4YmY3cDi/GRo9MypG72fgoVuCq/RFGtRPuhOHaEGYNGrJvv3pMUYfI1rNZBvdyfX/bB+t+4o8dm0xHSDS4SofgI4y7hw
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2026 12:42:22.4605 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 276252d8-f50a-4bf8-8b5a-08de8422a2a6
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509F0.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB7345
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RGFzdjZiODN5S0Yrd0FNZWVkR2phWmE4MlZLdEhhN3J5a3VVS3k4ajZTMlZX?=
+ =?utf-8?B?SDZUUjc1eG41RkdhY0lmMTl0TFFpYzc3bmgvYWg4S3V0OE9LeXNyWUN5ZWx6?=
+ =?utf-8?B?MnNuaHhBY2RVeHpJa0Yrclc3WGxnQWNPNDFQNHpWN29VQkN4V2NuVWh3TGg1?=
+ =?utf-8?B?WmFmUS9sWVFackF0YUZabGExZlRnUW9KTGhERTRjREJ1TWc5OFNpYjB3VEpi?=
+ =?utf-8?B?SmM2WEphemcvNzFKcDBkTS9pZldaZjN5OFpvdEZGQ2lKUWtLVXpodHJudDlH?=
+ =?utf-8?B?RE1VYTJYZ3ZROTRDckw3UVZPZGZNMGRaTFl3MUtOQ1VWVFZqV1QvU2pNbDNk?=
+ =?utf-8?B?a04zWlZkeExkUmxFdUlZVmlqbWdkV0p1ZXFFSXpZRTRXZXU2QjdHdnlHZVJu?=
+ =?utf-8?B?Wm5jMnREMExVMnNPcmpBQVEvRDVpb29JT2RFMmhNQzh3a3B3TkVKc3FjaTN3?=
+ =?utf-8?B?ZmNTU1U5bVVJSVh2emVqejJKaWhJUUNCcDV0UFpwSFZONnpJOVZJazhMV2pC?=
+ =?utf-8?B?UitEWUE1dUNVNTlpQmJBM3RxYS9lZFkvOE4vMkoxcDVRVXZQTWdIQ0Y3RnZZ?=
+ =?utf-8?B?cmZsZEZoSkU1TVV5VDk1NThPT2RVWS92Y1RmeFhMd2Zvdjh6QldOMWVZdEk3?=
+ =?utf-8?B?YW9ONjNXSU9kZlN5cTY1b3RZUmF4K0FnR0pYUWlkOFdPYllmK1V2UHpSa0dT?=
+ =?utf-8?B?dDN0Qk5OelBrOWYvVmlhLy8wbzdvRFB2ZkxCNkJ5aENFREpCbWNFeDVrQnFN?=
+ =?utf-8?B?ajhDMmt2Vk1uQVBFd3N3Y05maU1lSysrQXhXZlVOaWtTNmJWclN6L3NBR0d0?=
+ =?utf-8?B?Y1pBUFozM2FUNFFMTEpoNFFLczRKVnovd2g4L1A3cHNIbWRMZ2Q2cW5GU0xy?=
+ =?utf-8?B?WGs5S0E0d29rZWxlTUE3ZkFFVTdOL1EweHBHQXBEeForL3BicHV2VzMyTzR3?=
+ =?utf-8?B?TE14V2h2aXpjZVdpbHJGVCtZME1kcGc0VFloeExBWDI4MHNDSE9RWCtDZ0Q1?=
+ =?utf-8?B?VXIrRmtlY2x5djgrcHFMbjg2ejlpN0FRZEMvZ1R0SGR1bHlHOWJQbGdvcEJ3?=
+ =?utf-8?B?YkY1ajlJR3c1dEtMcHhrRlBya29TZFBoeldvTlN0c0NYV3FKTGdTdG9zNEg2?=
+ =?utf-8?B?c1lNYkg2a28xQlZNR2tDUlhMMVMwNThSQTMrT0xOZjRuMGMvZHNPTFBOWG9n?=
+ =?utf-8?B?V1JMN2dkbEhTY3V1dzEyeGZOUXZHRERwOTk5K3hYNkdxeGRVS2IwYXlQMCtk?=
+ =?utf-8?B?RUlMTm5GaWsvSTlkTTdpL0hQS0NITVkwaEV1NmppOFljTEpjQ2srRVBoV2Nz?=
+ =?utf-8?B?aUtZSGU0aGFqYll2R1lGWjBoMWY3ZFNLUFpQU3RPZStVRHFXS2E4eW5uQkd4?=
+ =?utf-8?B?VVJxVTVvUzA5SThPRjRNbUUwRVVqakdkRWdSaDlBSWhEK1BmdGxkWjVDVVcv?=
+ =?utf-8?B?b3VTSkVOR3ZOVUNXTCt4elN3blBDcWtKb2cxZUw2YkdLanBJQ1hWRzF5ZlNP?=
+ =?utf-8?B?Vmk4N3FZdUNQR3hqMGNGbm1BekduVUtYbzEwa0JmZEdIdVgrbHliU2FLUURr?=
+ =?utf-8?B?SEtzaXM4M0htNXZadGdHeUFxb2dmK0tiR1d1RVBCVjYwWGNldzYwWXA5ejg4?=
+ =?utf-8?B?bGg2c21sTEQrdC9uVTN5VGVDNUhMUUVDYlFBMHRlVFRTd0V4d1VERVVXYUgv?=
+ =?utf-8?B?WUlYQzFUakxpV2RIRzl5cGMzRVJVc0w3OE5ZZndGeWNuWEQ4N0R6dFV4Nmw2?=
+ =?utf-8?B?cnNuSWlyYng1SjNVelBOeVFmU0ZCaFJFaXNNY3FqZDBDQzQ3bm9CRldwdkdu?=
+ =?utf-8?B?Vm9TSDJldG5RUm4vOEpVTEdOaWUybzdqdU1lOE5UV3ovZ3RoWXNQOUtTRmx0?=
+ =?utf-8?B?cENCRVRQMVZMSWRZcGdNWVpFM2pIdzJtRFN6ZUVmaHBBOU5oc2diNXdMbkl1?=
+ =?utf-8?B?K1FLRjJ2Rkh2UmJwcnZJMFo5TzJtK0I5MG9FZDlQUThsSmU0WnFabkNzaVlp?=
+ =?utf-8?B?S29iTC9FdFpqdjhVZXNlckE3RkhabEd4emtSUnpNKy8rLzFtSzkyQ2xaSXo3?=
+ =?utf-8?B?M2hheFhuaUVSRTkvVW1zSm41YnlPRVZMNU5ZdFRsVjM2RzNZUUpHeUNkU1M4?=
+ =?utf-8?B?dlRoYkV5Y0lGdkt3QTRFU1YxOUlEZzRTUjJCaGFTaURZV0FDeXBnQ0lWRllk?=
+ =?utf-8?B?VkZkY09QKzRZNTFHbDBJL0NQdFlwZzk2YVkyNWZXZnhkaDBiUjhYUEJETlNQ?=
+ =?utf-8?B?RE9pd0tiVXYwVmQrNktXdU9kTnNsRUhWT0tFQkRJaHRTdkoyelJwVzNWcHBW?=
+ =?utf-8?B?aVl2MDB0ZUxLQi9xdnNEU1ZLaTdxUEhuSDNhTUpMTnc3SU44WlBHZz09?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5d1e04e7-4037-47dc-70c2-08de8422cd40
+X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2026 12:43:34.2370 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: qqMklrqtNh8zfVNoqEgh0b+qtbnZIRoQonjI3fcgli+PDANe8CfwNUbx4bqTDxRX
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6337
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,187 +197,44 @@ X-Virus-Status: Clean
 
 
 
-On 3/17/26 02:24, Tom Rini wrote:
-> As exposed by "make randconfig", how we have SCMI_FIRMWARE today is
-> incomplete, and in one case, used incorrectly. First, SCMI_FIRMWARE has
-> a build-time dependency on OF_CONTROL being enabled, so add that.
-> Second, RESET_SCMI depends on SCMI_FIRMWARE being enabled, it should not
-> select that symbol. In turn, a number of platforms need to now enable
-> SCMI_FIRMWARE explicitly and not rely on RESET_SCMI to enable it for
-> them.
+On 3/17/26 13:29, Simon Glass wrote:
+> Hi Michal,
 > 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Cc: Michal Simek <michal.simek@amd.com>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  configs/amd_versal2_virt_defconfig  | 1 +
->  configs/r8a78000_ironhide_defconfig | 1 +
->  configs/sandbox_defconfig           | 1 +
->  configs/stm32mp13_defconfig         | 1 +
->  configs/stm32mp15-odyssey_defconfig | 1 +
->  configs/stm32mp15_defconfig         | 1 +
->  configs/stm32mp15_trusted_defconfig | 1 +
->  configs/stm32mp21_defconfig         | 1 +
->  configs/stm32mp23_defconfig         | 1 +
->  configs/stm32mp25_defconfig         | 1 +
->  drivers/firmware/scmi/Kconfig       | 1 +
->  drivers/reset/Kconfig               | 2 +-
->  12 files changed, 12 insertions(+), 1 deletion(-)
+> On Tue, 10 Mar 2026 at 08:59, Michal Simek <michal.simek@amd.com> wrote:
+>>
+>> Add a new EVT_POST_PREBOOT event type which is fired in main_loop()
+>> after the preboot command has been executed.
+>>
+>> Signed-off-by: Michal Simek <michal.simek@amd.com>
+>> ---
+>>
+>>   common/main.c   | 3 +++
+>>   include/event.h | 9 +++++++++
+>>   2 files changed, 12 insertions(+)
+>>
+>> diff --git a/common/main.c b/common/main.c
+>> index b0b6e74f5d3d..e8b23f3ff293 100644
+>> --- a/common/main.c
+>> +++ b/common/main.c
+>> @@ -19,6 +19,7 @@
+>>   #include <net.h>
+>>   #include <version_string.h>
+>>   #include <efi_loader.h>
+>> +#include <event.h>
+>>
+>>   static void run_preboot_environment_command(void)
+>>   {
+>> @@ -53,6 +54,8 @@ void main_loop(void)
+>>          if (IS_ENABLED(CONFIG_USE_PREBOOT))
+>>                  run_preboot_environment_command();
+>>
+>> +       event_notify_null(EVT_POST_PREBOOT);
 > 
-> diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
-> index 94dce5c191c4..8cc210946539 100644
-> --- a/configs/amd_versal2_virt_defconfig
-> +++ b/configs/amd_versal2_virt_defconfig
-> @@ -80,6 +80,7 @@ CONFIG_CLK_SCMI=y
->  CONFIG_CLK_VERSAL=y
->  CONFIG_DFU_RAM=y
->  CONFIG_ARM_FFA_TRANSPORT=y
-> +CONFIG_SCMI_FIRMWARE=y
->  CONFIG_FPGA_XILINX=y
->  CONFIG_FPGA_VERSALPL=y
->  CONFIG_DM_I2C=y
-> diff --git a/configs/r8a78000_ironhide_defconfig b/configs/r8a78000_ironhide_defconfig
-> index 180704e75af8..64e2c278a7e0 100644
-> --- a/configs/r8a78000_ironhide_defconfig
-> +++ b/configs/r8a78000_ironhide_defconfig
-> @@ -29,6 +29,7 @@ CONFIG_FIRMWARE=y
->  CONFIG_NR_DRAM_BANKS=16
->  CONFIG_POWER_DOMAIN=y
->  CONFIG_RCAR_MFIS_MBOX=y
-> +CONFIG_SCMI_FIRMWARE=y
->  CONFIG_RESET_SCMI=y
->  CONFIG_SCMI_AGENT_MAILBOX=y
->  CONFIG_SCMI_FIRMWARE=y
-> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-> index 36bf37827e91..b681b91c3f99 100644
-> --- a/configs/sandbox_defconfig
-> +++ b/configs/sandbox_defconfig
-> @@ -209,6 +209,7 @@ CONFIG_SANDBOX_DMA=y
->  CONFIG_FASTBOOT_FLASH=y
->  CONFIG_FASTBOOT_FLASH_MMC_DEV=0
->  CONFIG_ARM_FFA_TRANSPORT=y
-> +CONFIG_SCMI_FIRMWARE=y
->  CONFIG_FPGA_ALTERA=y
->  CONFIG_FPGA_STRATIX_II=y
->  CONFIG_FPGA_STRATIX_V=y
-> diff --git a/configs/stm32mp13_defconfig b/configs/stm32mp13_defconfig
-> index 6bd139441122..620a6da2efe3 100644
-> --- a/configs/stm32mp13_defconfig
-> +++ b/configs/stm32mp13_defconfig
-> @@ -70,6 +70,7 @@ CONFIG_FASTBOOT_FLASH=y
->  CONFIG_FASTBOOT_FLASH_MMC_DEV=0
->  CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
->  CONFIG_FASTBOOT_CMD_OEM_PARTCONF=y
-> +CONFIG_SCMI_FIRMWARE=y
->  CONFIG_GPIO_HOG=y
->  CONFIG_DM_I2C=y
->  CONFIG_SYS_I2C_STM32F7=y
-> diff --git a/configs/stm32mp15-odyssey_defconfig b/configs/stm32mp15-odyssey_defconfig
-> index 868ba1915f71..5d1c01c99fb3 100644
-> --- a/configs/stm32mp15-odyssey_defconfig
-> +++ b/configs/stm32mp15-odyssey_defconfig
-> @@ -86,6 +86,7 @@ CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
->  CONFIG_FASTBOOT_MMC_USER_NAME="mmc1"
->  CONFIG_FASTBOOT_CMD_OEM_PARTCONF=y
->  CONFIG_FASTBOOT_CMD_OEM_BOOTBUS=y
-> +CONFIG_SCMI_FIRMWARE=y
->  CONFIG_GPIO_HOG=y
->  CONFIG_DM_HWSPINLOCK=y
->  CONFIG_HWSPINLOCK_STM32=y
-> diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
-> index af2efc7bceb0..c26602b63b6f 100644
-> --- a/configs/stm32mp15_defconfig
-> +++ b/configs/stm32mp15_defconfig
-> @@ -88,6 +88,7 @@ CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
->  CONFIG_FASTBOOT_MMC_USER_NAME="mmc1"
->  CONFIG_FASTBOOT_CMD_OEM_PARTCONF=y
->  CONFIG_FASTBOOT_CMD_OEM_BOOTBUS=y
-> +CONFIG_SCMI_FIRMWARE=y
->  CONFIG_GPIO_HOG=y
->  CONFIG_DM_HWSPINLOCK=y
->  CONFIG_HWSPINLOCK_STM32=y
-> diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
-> index 226d83357843..d7501612a797 100644
-> --- a/configs/stm32mp15_trusted_defconfig
-> +++ b/configs/stm32mp15_trusted_defconfig
-> @@ -89,6 +89,7 @@ CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
->  CONFIG_FASTBOOT_MMC_USER_NAME="mmc1"
->  CONFIG_FASTBOOT_CMD_OEM_PARTCONF=y
->  CONFIG_FASTBOOT_CMD_OEM_BOOTBUS=y
-> +CONFIG_SCMI_FIRMWARE=y
->  CONFIG_GPIO_HOG=y
->  CONFIG_DM_HWSPINLOCK=y
->  CONFIG_HWSPINLOCK_STM32=y
-> diff --git a/configs/stm32mp21_defconfig b/configs/stm32mp21_defconfig
-> index 8ad31292579c..6a74a435f8d5 100644
-> --- a/configs/stm32mp21_defconfig
-> +++ b/configs/stm32mp21_defconfig
-> @@ -51,6 +51,7 @@ CONFIG_NO_NET=y
->  CONFIG_SYS_64BIT_LBA=y
->  CONFIG_BUTTON=y
->  CONFIG_BUTTON_GPIO=y
-> +CONFIG_SCMI_FIRMWARE=y
->  CONFIG_GPIO_HOG=y
->  CONFIG_DM_I2C=y
->  CONFIG_SYS_I2C_STM32F7=y
-> diff --git a/configs/stm32mp23_defconfig b/configs/stm32mp23_defconfig
-> index 49f47becba64..ed6fdd9662ef 100644
-> --- a/configs/stm32mp23_defconfig
-> +++ b/configs/stm32mp23_defconfig
-> @@ -51,6 +51,7 @@ CONFIG_NO_NET=y
->  CONFIG_SYS_64BIT_LBA=y
->  CONFIG_BUTTON=y
->  CONFIG_BUTTON_GPIO=y
-> +CONFIG_SCMI_FIRMWARE=y
->  CONFIG_GPIO_HOG=y
->  CONFIG_DM_I2C=y
->  CONFIG_SYS_I2C_STM32F7=y
-> diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
-> index 99b22a68fda6..42335aafeaf3 100644
-> --- a/configs/stm32mp25_defconfig
-> +++ b/configs/stm32mp25_defconfig
-> @@ -58,6 +58,7 @@ CONFIG_NO_NET=y
->  CONFIG_SYS_64BIT_LBA=y
->  CONFIG_BUTTON=y
->  CONFIG_BUTTON_GPIO=y
-> +CONFIG_SCMI_FIRMWARE=y
->  CONFIG_GPIO_HOG=y
->  CONFIG_DM_I2C=y
->  CONFIG_SYS_I2C_STM32F7=y
-> diff --git a/drivers/firmware/scmi/Kconfig b/drivers/firmware/scmi/Kconfig
-> index 33e089c460ba..cd912ebe4096 100644
-> --- a/drivers/firmware/scmi/Kconfig
-> +++ b/drivers/firmware/scmi/Kconfig
-> @@ -3,6 +3,7 @@ config SCMI_FIRMWARE
->  	select FIRMWARE
->  	select OF_TRANSLATE
->  	depends on SANDBOX || DM_MAILBOX || ARM_SMCCC || OPTEE
-> +	depends on OF_CONTROL
->  	help
->  	  System Control and Management Interface (SCMI) is a communication
->  	  protocol that defines standard interfaces for power, performance
-> diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
-> index 2fd91d6299cc..66911199c8ba 100644
-> --- a/drivers/reset/Kconfig
-> +++ b/drivers/reset/Kconfig
-> @@ -208,7 +208,7 @@ config RESET_RASPBERRYPI
->  
->  config RESET_SCMI
->  	bool "Enable SCMI reset domain driver"
-> -	select SCMI_FIRMWARE
-> +	depends on SCMI_FIRMWARE
->  	help
->  	  Enable this option if you want to support reset controller
->  	  devices exposed by a SCMI agent based on SCMI reset domain
+> This needs error checking if you wish to honour your comment below
+> (which I agree with).
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+ok. I will also fix this one which should check it too.
 
-Thanks
-Patrice
+event_notify_null(EVT_MAIN_LOOP);
+
+M
