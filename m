@@ -4,127 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04020FCD0A5
-	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 04:11:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6715DFCD0A7
+	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 04:11:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EE9D84118;
+	by phobos.denx.de (Postfix) with ESMTP id 71C71841D5;
 	Wed, 18 Mar 2026 05:11:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="vPvTvzqN";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="PiqUO0eu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC354841D5; Wed, 18 Mar 2026 03:59:30 +0100 (CET)
-Received: from CH1PR05CU001.outbound.protection.outlook.com
- (mail-northcentralusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::1])
+ id 99E7C8422F; Wed, 18 Mar 2026 04:02:34 +0100 (CET)
+Received: from SN4PR0501CU005.outbound.protection.outlook.com
+ (mail-southcentralusazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13612840F1
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 03:59:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D2CC840F1
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 04:02:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=chen.huei.lok@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UhF2zRwtiLkTmPsZKazDunmYNfrzqpz/K/yt4a+XetMyZDasN3YUFeNGys28WczZX82RgkhIMpGTtWjJ0plBpYk6jYxBTSifEWnumk5afMIavaR7P3O+MrVjiDuMMPiQeX3ItCIwTW0G21cQaYGibOmwC2wYQ4l92gCpS0YqdWnBb3q90bpjZb40NA7+FAqZL7+lfPCpbxml06FNuhjVk46No0BzxInkmPeeTZ4rWr6NrWBS/xcwe34mnE/3MglTN/bT1T6aeLmzZ8L99f22GjoGu8wOuxfgRgZA5IVmsss5nwYMliXoEW70E+XKyTocPNDjmG5VS6VBE+mrfH30+w==
+ b=IHEU6mPN904Ax8LnRZ2xKJEIEO8KCA1ELiMpIh5lfdOx/5NjSJxH5Qt4fzqIpHLZxCfz/lxvxKyKAVtE7g9nU2GubNDH8y0dpz/4rZ30iMZkxSNG6qcw0SQRtG6R06psS4qzGv5oxg8mcQ+gu9dV3hVXUDxn0Ker7DpQaENhwuM7NU4YJd2J5UGy7tvu2KEG+sGkfJskzeE/KzZcU73cdkpXL7EbEsKZ2JcWncXT+3mSpQzLisJJ36oD3qlLcfYSqn+P0XXnEM+AKT5D4n9FwdiftQClWggU8rkmpIA8ZkLXePDI7Pop/HiYFHMU4cPNMD5UrpHnplwOkkeyCIYvTw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2sn5bq5/31iDRseebcXz81GK+ydpWShTQdhJGS7SQds=;
- b=uF33htlNKrizf06l2pweIBms1ihqVSsYd9SkjtbR10vhaRxlb6r7SPCJGqnLNt6BfYMCNvBDlyxegdJGDxgeZI2U305CE8PUUwrCGbh3al83WK8pxzYfTALoLeXKBHW61S/Z/EhikPhQj5rycqaA1vsqz9n7DJyzvrgsTVInEsDR4z82PB6gE/hX8pcla1wGfyHSpYQSoDSBLxNp4xSwmjsT2i8HzzCibP7CQInv6j64HyFFjhtgSsJLUtpXjN2uSRSC6DyNf7XLJ5sutNfFMOzSn7PPtWp+RFWMhaF6pgHrnsMneL6VzkHhK7D/QD9P+s5MpcYx7p/+jWKFTJQyyA==
+ bh=jqimzOFU9f+vGuTfAFf9yk4Wz8QseK6x5x+ZsTeefGE=;
+ b=G9+9entqmNcMtnAVxpLCspDucaXRfbeOngPc697oOaqjXfgOsayiQ968oModePT7ZZbya2+wuHdMkfnkY/qzHkh+bsPnhZ1pyv9Bor0+8RuiUJaD7MIZeIgC9ywzru2iC/xrwkLQqLBvE8jkV0LZxQz6gmsH0FLJfXm2kV6nutueMD1zY7H9RzEo7BGh4TG++sYtPbPKqj5Nhvxi63B3heHWQgKl8JkMNuiA2zFWI/P/Zve6nJ1t56SacXmPBBNvFpTBBORiWvDcXJ6quFh4e1ScDEagIBttYj9dolUCuKjxIwE5/rBCru8fo+qdN0cI9a/3/YHTPcGlB3pmkOGBKA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2sn5bq5/31iDRseebcXz81GK+ydpWShTQdhJGS7SQds=;
- b=vPvTvzqNwKOrhf5RoAHsC5F+T/j0OgjCsx6TgW1sS3zm3wzSjO1FvWdCI40zAjdOrZKeIo2Ah9gZ0KklXnq9gkvasu9Apv27NOMvZ07IOqZ3gLsJYO/VqkJOFWwRRlN3kDXBHidFH6/j74TAEgyspwPZDXG3wQyBmxxDwbToceHrkeYSAoBoF20P7v0XNm7JtlMVBIb5TCaqd9fVnn0AioVNdXmvSuSnKMY8PBy4aRIMOk2djaFDzROA0Tqoxxr+tOjkZmHXHqyFtGoK9l+EM0jB1gHlV/SnwEO0a2ksYD8X1071XSZBORaBN3CcvIsuAd/W4kZQ+vwGje1mqxErtg==
+ bh=jqimzOFU9f+vGuTfAFf9yk4Wz8QseK6x5x+ZsTeefGE=;
+ b=PiqUO0euYHlmCqLMu1vUqU3UrMjdsqHNziLlA6LnwBi8dzGFgnHezyfWtTknc2m3ECHI3rT9PhlwZrD15vkktIyTvWTb4lpumG87ueHhOnPRSSvsTryZZSDcymigbZYeBDrVhHzP9BPsJt2ccsA4kbcvrQ6JTEBSMeTMxbjzEZ7jNTYW0Cx9YYU1OOvm4M/yzMHRS3mzIoRocYzlto5gazZYQed/qxEpyHuraEW23qoiM9NCxDVT3oDWYJFt/aGNkLeo7ejIhtvNH7YC5gYzndzUaQNjy3qUE5oqNWc3qHUpdd02AIbs9AVh3otrvbmqlG2R3tHCvkCYfzfI/6JxSQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from IA3PR03MB8021.namprd03.prod.outlook.com (2603:10b6:208:502::17)
  by BN8PR03MB5092.namprd03.prod.outlook.com (2603:10b6:408:da::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.19; Wed, 18 Mar
- 2026 02:59:24 +0000
+ 2026 03:00:54 +0000
 Received: from IA3PR03MB8021.namprd03.prod.outlook.com
  ([fe80::3016:b672:c683:f7ad]) by IA3PR03MB8021.namprd03.prod.outlook.com
  ([fe80::3016:b672:c683:f7ad%4]) with mapi id 15.20.9723.018; Wed, 18 Mar 2026
- 02:59:24 +0000
+ 03:00:54 +0000
 From: Chen Huei Lok <chen.huei.lok@altera.com>
 To: u-boot@lists.denx.de
-Cc: Vignesh R <vigneshr@ti.com>, Tudor Ambarus <tudor.ambarus@linaro.org>,
- Tom Rini <trini@konsulko.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
+Cc: Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
  Chen Huei Lok <chen.huei.lok@altera.com>,
  Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>,
  Boon Khai Ng <boon.khai.ng@altera.com>,
  Kok Kiang Hea <kok.kiang.hea@altera.com>
-Subject: [PATCH v1] mtd: spi-nor-ids: Add support for IS25WP01GG SPI NOR flash
-Date: Wed, 18 Mar 2026 10:59:05 +0800
-Message-ID: <20260318025905.13304-1-chen.huei.lok@altera.com>
+Subject: [PATCH v1 1/8] configs: socfpga: n5x: replace defconfig with ATF
+ variant and simplify VAB
+Date: Wed, 18 Mar 2026 11:00:27 +0800
+Message-ID: <20260318030034.25889-2-chen.huei.lok@altera.com>
 X-Mailer: git-send-email 2.43.7
+In-Reply-To: <20260318030034.25889-1-chen.huei.lok@altera.com>
+References: <20260318030034.25889-1-chen.huei.lok@altera.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR05CA0040.namprd05.prod.outlook.com
- (2603:10b6:a03:33f::15) To IA3PR03MB8021.namprd03.prod.outlook.com
+X-ClientProxiedBy: BYAPR07CA0099.namprd07.prod.outlook.com
+ (2603:10b6:a03:12b::40) To IA3PR03MB8021.namprd03.prod.outlook.com
  (2603:10b6:208:502::17)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: IA3PR03MB8021:EE_|BN8PR03MB5092:EE_
-X-MS-Office365-Filtering-Correlation-Id: b2e780a8-1e38-426a-ec6d-08de849a5c1d
+X-MS-Office365-Filtering-Correlation-Id: eb79fb97-b3c6-41bf-95b5-08de849a91c5
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|366016|1800799024|55112099003|18002099003|56012099003; 
-X-Microsoft-Antispam-Message-Info: GyofsfdNgyhMRHDulONMsIz5l89b7/NTLg3/kazG+0KE/va3kh0x20y3tbaGdll0z4AWEteJANgnKwIk5Smp8+AzGVf4rF7GuK5U2xbrpKCWS8x2ENdoFmiib8gbZxyzGW79jwzGFwfyW0IyosYOfUMtmbk6Lw8uSo83zBsTImQq5YpHerqobEixr4Qh63EarBZobS6Vw4044tYDfhtkgxznw54ODa++Q+TJfrgh/WAs+sMgrMjyRS8IxBsImftjdRDDmdwUo1GHh+2OKdJwUaLRnvY6XDFG7RtBTuOJly4+XUyRv4Dot6J93KHOnOglWe6oNzjMxnDiXspGS3PkknoQy7kTtdu8lVaqzfHCWxOo+2R++qvT4ueeUlLAMvyqqOtmRyl3bbfYG41rhCoIehrKNdZpvwFUhs6LzIPNLk9AtGsZijWt0uESmnsQeOGcSkCAkOkzVmm7ZI2lik+bAy9WbxIyC9OUa1CcdCVVtKUVnozLKTD6EPtlFqIBftXvriLQFPKhhoGsytLvOd7ts4n8tAMwec06XBhxP27rFsFC1w0ExYFU5mPapvaths4KXJJJO18SX/vugsJ4zh69lF52CFwir7p3qHnRLtjBToRWw8vDbIoWseSjMu8IaWqc7j6tU/xI3IgxQCVkIFzLixdAyYFytOQKdFeQI6VJIoCzdYBFPrlMjNS5WjNqjd6NFPTZpQm6zkk+tJpFKCn23cvqKPn2Ocl2Tn2J/N4MpO4=
+ ARA:13230040|376014|366016|1800799024|55112099003|18002099003|56012099003|22082099003;
+X-Microsoft-Antispam-Message-Info: GUI33q2W1rogEMQ/ARgPZCS0HIPspuQ3yf3YvodhRJichjyVAzT/F193RnuXmLFBmD95Xiymtdd6Jm8ZRoXlKnqa+4bGLEt7BnsvXfp2aGUyLaZ0X4MeS3PfIUuFOeXXqLqriTsJtlvd0zhlBHW91fjZlHR46UW12iWc1RAfVCeau+KBrv7rsGZ7gaZ3+L+OsCTMZGwR40LmJNeyWXFzeUOuFQFbqY/jrk4+xL2ZWRs2VRn7ZWhgtt4+UgPQI9wI7hTs7ByYRNUGz1DP2kxKLM5Xf6W1X3c0oojqsfLpsa149QbWdPBrwpjwVNZXfDXQFjnZ55+mYICpkdJi7xSWg1uf2byBOVx10GeNgu2C4afzFJxQyQB5kN9O8EDWGsHZ/8Gyw6qi3EUcBF/aOEEvpDdw9RSe4154YREk1SKKa37HdyYHw9BoWa40cxRfJSxOY2qgntuZpC1vwr4rMD6NQURerYYuCgkrK0qR4MEQHqLcyWoxBFY86lJcu+63goOKoh5RpO4FrqFROVpHJ8NW4BLjmbU+jcvW69/cfJQx3RUa7AtMVNiXEE6vbE9eY+5NkIfMsXwk0puuKOfWzY8zniSdG8tTYfQXaOZYNKVzf8aaiY5/58x/TGyorZfyZfGK3tX8xjTuAdZ6YiVtC46EXCpnI8eN1ZOgkS3B/g7TupBs4V0Qgw9gDK/kVce1tx7QhrKX9976bK2dYl015Go+prY+K2XR601lfm5qdu/ueBE=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:IA3PR03MB8021.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024)(55112099003)(18002099003)(56012099003);
+ SFS:(13230040)(376014)(366016)(1800799024)(55112099003)(18002099003)(56012099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?obws3xdFa2tq1adv991R0LVnstCrxKU5kv3SU5XA17avand0b4xhyDG5o1Y4?=
- =?us-ascii?Q?0bDFL5nY4FZOr1SX3fFY0vJ7bPWOFLbf7amarEataFIziiz8wosezTlNsSu6?=
- =?us-ascii?Q?UWEtBkZWxnQhCgOqVQXCXcUz3PqsJGZwLXv4jZ/TR7IwEicp90ds38T/czsd?=
- =?us-ascii?Q?JQUXJrxI3RFwgTIg3qYdBCn+i25hkslULJ6zu+oqzuHUUvdH5ncf4xXePeUD?=
- =?us-ascii?Q?Je37hLeMFVxKlz6mJ2Hn/SkQjJTpBtV5L9MytsWBl5bW8bTpYwGrulwE0zQ7?=
- =?us-ascii?Q?nH7LsDTYk5VONel8q/fA2TiPyyHMOwB17PminhCKIm6lF48Kxi94g2zpGNg/?=
- =?us-ascii?Q?XU4EXAQfJtrKep1aaMBC6GOEdabV1I4HhEZknu31rfmZCnTm/cTdnImClOyF?=
- =?us-ascii?Q?IQJRwoqtfGsA38RYIgFtxTV7eECqkXnsGU7/IkgncPi5IEZCWjpGOatrF6Br?=
- =?us-ascii?Q?aWUEZo1MRnUgQFjr57mS10taDQGT/XirlONJkb+ZZm5nZewZ7b1TOuxZS09H?=
- =?us-ascii?Q?/8HO19QuPUx8k21r+zgPJ64PHfGrr6z6EkNNSwVuVYtGZ2f69IFVGqT8Bfl1?=
- =?us-ascii?Q?2M82RqAg8wGGSGP66IF2sRCxFm7xigNKDgMrU4u3GTOrkM1DPXBeLioQtAx+?=
- =?us-ascii?Q?uHO+INXINpCuipYnmyNcKLMXd1bBhcsR4phU+GetzsxJnEwN9/Agjw9/S2lB?=
- =?us-ascii?Q?/baAooSTbbTsdatX4ntsZs1vGANlaByw0dbet2lE40yUZ4Bj9N7p/bMbUZbs?=
- =?us-ascii?Q?Zm+Bd3blXJw/u9M8u5KsApw0gspo35zfvHJqVPyZB8zQ/R03zEpFlaiTFORy?=
- =?us-ascii?Q?/paxA08pZsJUWWW15Fc5prjGBxCGgCsoF5fXSJ+HkoPFRaqGN8LmCuX3BtdD?=
- =?us-ascii?Q?Z2eL1oz41vCorKkibrckCQQxnoafbDN1C2Y5a48RaOlgrpKvqSiNrhAt4AaC?=
- =?us-ascii?Q?VjdYaKKcWvK1024aHNSGA6RISFEOdAvWwThFcwxDQvxmCQzeWTVlkcnWAdiw?=
- =?us-ascii?Q?6dzAb4YN6vLl3iJUp+zix9Qzb7gpeo+2sr2Kct7cMxY2DwifQezFYfjBmAvf?=
- =?us-ascii?Q?pHy/V92Cf5DMD2TPwxo0GVAqQQELx/uSeGRgcoBzWZGdUPBld4S5pFPeoxcg?=
- =?us-ascii?Q?pLQ15RAnPlEBI9fldVdTQF/5D5eHwq9d5r5299dYXgd13Vp/7IyhWDFuSUbl?=
- =?us-ascii?Q?SM0zbxnLcUO/r6RS94jK+uT5tLVqDN3dwEPf3R/EAl4kUdl+TvFILTz531fn?=
- =?us-ascii?Q?zuOZdw4GvcKadiI4fxFl/jMv8u9da89BkZy/uzF3H3wL4m3+/NQBS/yGfTNR?=
- =?us-ascii?Q?ebxyzUAs3iwH4ZF9VDkzKrwWIrMD0jsjp1JPWqqNOIJ1GDOQpqeTXV9zJTCu?=
- =?us-ascii?Q?VuWdRPQcfIyuEZ34z8P1Z6kl+Qgkh6K0YInfnKkUqrV5N0ySjQ+m7PQBX4Ii?=
- =?us-ascii?Q?p6CjEmUjo8fUARfiPRVNHj47RYLlQR0XRTTKnN+sK9gxal6lyaB1tSXPWNBQ?=
- =?us-ascii?Q?Mf+l99U51H7x98WckTZMZWffqWtxqcV+fruWjM4MDjJsxuLgpp24yC9lpETR?=
- =?us-ascii?Q?cYqL64iX7FbGAnloe1tsPtNx4gxPWPLfiLqRLAbeQ+fs6g715guRyLDcnVoL?=
- =?us-ascii?Q?PdotIIp6gLeiapJXsSooZ2YqtClu9ED3DEbh50jxxu+hqGG4AcmGxJUwPOAU?=
- =?us-ascii?Q?DxDoMMzmjgqSA7xoBGwiW35t2bB9LFCs6yuHO+tCYi+7OsLUAV8E8Dyx0Z60?=
- =?us-ascii?Q?PP47s5SrgJ5t+nbXWho/7O/EgAjp8q8=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?CgXo5NDzHVev/kSsX7bJ2vv+IgYN7xwyLwS42P0VwMLx0DUczUQnKYus2Q9B?=
+ =?us-ascii?Q?0zQiz6qvjit0X8YXD7rCPBEOT1PfLt8cUq662M+m2Z7llO1M88KGCBNt5/th?=
+ =?us-ascii?Q?w73sA7sYIdqzoKV9K0KsrDmUUJaGS6g7pXqwTZ5PxNhs8oP1iUwkjm+ADj3X?=
+ =?us-ascii?Q?AxcAcopc/C/np/DoVdEoRD6qypNjkh4hRPfT59dpTkD+3Z0MIkV0moWOH7Ch?=
+ =?us-ascii?Q?ckjPz0X5aDmjNSDxy3khx28WYJoxI5o/QNU10/gxP6WHC4m5NYVrKFmbjWNV?=
+ =?us-ascii?Q?NRvQYYhp5GdOO044bo3WSrR+0jA2uKrlgJw4CRl2jVEvxr72f5l3FCFbTKHE?=
+ =?us-ascii?Q?lnbddHc3jkEbDqFOk18sGlUPv1iLGTgYesPg0ybcY/iW+hJoSp25SWxppTKy?=
+ =?us-ascii?Q?tdULWYpmZpQsbgF4n4dxn4ms1ULHntmD+sMXM2CxUjJgd871Pthp1yMJU7Md?=
+ =?us-ascii?Q?7WskwZoZBurLN/4+pwtUC/E4h5HRCW41y2vtglgg7wkD50UzjEhn+6TTfuXn?=
+ =?us-ascii?Q?M7RYL58B8aNMpNuRquVJFr01ideGZJDBDUmprZyu/5PGIyrg9ash+zCjvkWo?=
+ =?us-ascii?Q?HfDXARCM0STzC6O+U/vgMQt+K9LUKw2DhjNSRpytXwwZGqmOFyiBGdA157+s?=
+ =?us-ascii?Q?3D/fPfVKFeNGtvHZromAHuV7Y1r85ZFG74fKF+hi/ZjV5dX0j+o235wH0UM6?=
+ =?us-ascii?Q?FJwV4U2K1pLaqh6soXXUamdlu4P/hMH7pJRQo14gsOBjmdn21LCIO5vamTgE?=
+ =?us-ascii?Q?UKoKm4bOjxZJ51SwA2sb5oz/6eNaHJMeFYiVXlONNoQ+2lY8xncb7TdmUno1?=
+ =?us-ascii?Q?72czfMV1ynliYEkzkV7RaUhmvc8qt5aHry7hHJc3vS5zI5sKtdHM6H9826Bk?=
+ =?us-ascii?Q?46RxgArrSVzWWE5gtnhEQSGbdQD2hrSHKlWiSNZUsSWQNIDwYo838mLb2xjW?=
+ =?us-ascii?Q?F+1AKusABpC6SBY7/SVuF2obBDRgbMTV974uVuXnKFnQPlo/qGokzfYVGDB+?=
+ =?us-ascii?Q?1zDS6N/+IY0Qq333Ue3sVTiOy75lQ5ZZOyIMSXQSkOhprgY7KYdsUjV8VL+b?=
+ =?us-ascii?Q?FfDpaF1A6Rv/P5Zeer6ciaQeeQAUxbyPvaXyp/KKXYYzA5Ihh/bVHQmwCTPI?=
+ =?us-ascii?Q?s5HjvKbh/c5ZKBYS9JsrCzVdbPrLTAG+sBC9/w1RSF28oHJZlM0MMR/fzn43?=
+ =?us-ascii?Q?XV/kJcF8Mc0ZabOJ/j9wjmt2SOXHZZJGAwiptjrWX5fLY8CcUt3az/tdmxx8?=
+ =?us-ascii?Q?pGpPAAwFNbV8kAZq3mmWMGZ+54DEbSA2wXE4Keyyj8HCA96/qYVmUQZX0Pfa?=
+ =?us-ascii?Q?kVvbMuyDa1l2eUgxsAKCfgUcym2hc8RUSTMlsLp47ZSOtaNVmu5DVG97yP7W?=
+ =?us-ascii?Q?kUUKFc8cyYUzBzic0XFvR+5CvPp5ky1eZEHaEC3uiB4BsIYRh7b+0JRMNcdu?=
+ =?us-ascii?Q?W70DVu8D4tVYJVYrMrf4nMAV8du4iGcc2PhIW4+MS8u98umQCs+6wH/eI8zT?=
+ =?us-ascii?Q?fqPZcwWevCvkYwTp2mvJPeXMDqY43a2sONwCTxuxrx+boOiE9x6rIz2mfXw6?=
+ =?us-ascii?Q?W5va2/PKeSjgAjwbHBteEYVswQCPPZ1xIj2BqudRTv3USuHR0Otdt5WDBEbY?=
+ =?us-ascii?Q?H+oMi0pm5xefdtw+4f+PxCf2Yck0TX7to7en6RZUisU3aNE7boxCJpW4q1gS?=
+ =?us-ascii?Q?VLWdxdti0yqprpVl7/khD6cXjBTkETLMtyo8XlqiJsBVCPJ1Sc5cvu+9EVxw?=
+ =?us-ascii?Q?ZRy9Fb85wi+P3JHQgUNU+Je+nnJgTRo=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b2e780a8-1e38-426a-ec6d-08de849a5c1d
+X-MS-Exchange-CrossTenant-Network-Message-Id: eb79fb97-b3c6-41bf-95b5-08de849a91c5
 X-MS-Exchange-CrossTenant-AuthSource: IA3PR03MB8021.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Mar 2026 02:59:24.1663 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Mar 2026 03:00:54.1933 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vLluEnU1kk2Hc25KcegX1QsTgAOeeW61OWyP78ipf35JKp9aQL9v93v3h9nPAEYpfGj4gN76lVJLsBRODEWaAsArn6HWda7szJ+rfiKNeEs=
+X-MS-Exchange-CrossTenant-UserPrincipalName: CBRkQ3AEBfOuZfxGlfCiGFGZxNta5RqVXFVyIFUrX4CAftufQ3SpEjnAru2iKOR+9Ht9VoB0AvzM9BXzfzzTtzX9XAHDaS/5vVj4nkJNbD4=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8PR03MB5092
 X-Mailman-Approved-At: Wed, 18 Mar 2026 05:11:17 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -143,31 +147,289 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new entry for the IS25WP01GG SPI NOR flash (ID 0x9d7021,
-64KB sectors, 2KB page size) with 4K sectors, dual and quad read
-support. This flash is used and tested on N5X boards.
+Replace socfpga_n5x_defconfig with the configuration from
+socfpga_n5x_atf_defconfig and remove the latter, making the
+ATF-based configuration the default for N5X.
 
-Datasheet :
-https://www.issi.com/WW/pdf/25LP-WP01GG.pdf
+Add # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set to disable raw image
+support in SPL.
+
+Add # CONFIG_TOOLS_MKEFICAPSULE is not set to disable building the
+mkeficapsule tool and prevent build errors on hosts without GnuTLS.
+
+Also simplify socfpga_n5x_vab_defconfig to include
+socfpga_n5x_defconfig and only enable
+CONFIG_SOCFPGA_SECURE_VAB_AUTH.
 
 Signed-off-by: Chen Huei Lok <chen.huei.lok@altera.com>
 ---
- drivers/mtd/spi/spi-nor-ids.c | 2 ++
- 1 file changed, 2 insertions(+)
+ configs/socfpga_n5x_atf_defconfig | 90 ------------------------------
+ configs/socfpga_n5x_defconfig     | 21 ++++---
+ configs/socfpga_n5x_vab_defconfig | 91 +------------------------------
+ 3 files changed, 15 insertions(+), 187 deletions(-)
+ delete mode 100644 configs/socfpga_n5x_atf_defconfig
 
-diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index b6a07fa9063..3e82058e9df 100644
---- a/drivers/mtd/spi/spi-nor-ids.c
-+++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -237,6 +237,8 @@ const struct flash_info spi_nor_ids[] = {
- 			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
- 	{ INFO("is25wp01g",  0x9d701b, 0, 64 * 1024, 2048,
- 			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("is25wp01gg",  0x9d7021, 0, 64 * 1024, 2048,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
- 	{ INFO("is25wx256",  0x9d5b19, 0, 128 * 1024, 256,
- 			SECT_4K | USE_FSR | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES) },
- 	{ INFO("is25lx512",  0x9d5a1a, 0, 64 * 1024, 1024,
+diff --git a/configs/socfpga_n5x_atf_defconfig b/configs/socfpga_n5x_atf_defconfig
+deleted file mode 100644
+index 1ef20ba97a8..00000000000
+--- a/configs/socfpga_n5x_atf_defconfig
++++ /dev/null
+@@ -1,90 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_COUNTER_FREQUENCY=400000000
+-CONFIG_ARCH_SOCFPGA=y
+-CONFIG_TEXT_BASE=0x200000
+-CONFIG_SYS_MALLOC_LEN=0x500000
+-CONFIG_NR_DRAM_BANKS=2
+-CONFIG_SPL_LDSCRIPT="arch/arm/mach-socfpga/u-boot-spl-soc64.lds"
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+-CONFIG_SF_DEFAULT_MODE=0x2003
+-CONFIG_ENV_SIZE=0x1000
+-CONFIG_ENV_OFFSET=0x200
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="socfpga_n5x_socdk"
+-CONFIG_DM_RESET=y
+-CONFIG_SPL_STACK=0xffe3f000
+-CONFIG_SPL_TEXT_BASE=0xFFE00000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x3ff00000
+-CONFIG_SPL_BSS_MAX_SIZE=0x100000
+-CONFIG_SYS_BOOTM_LEN=0x2000000
+-CONFIG_TARGET_SOCFPGA_N5X_SOCDK=y
+-CONFIG_IDENT_STRING="socfpga_n5x"
+-CONFIG_SPL_FS_FAT=y
+-CONFIG_REMAKE_ELF=y
+-CONFIG_FIT=y
+-CONFIG_SPL_FIT_SIGNATURE=y
+-CONFIG_SPL_LOAD_FIT=y
+-CONFIG_SPL_LOAD_FIT_ADDRESS=0x02000000
+-CONFIG_BOOTDELAY=5
+-CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="earlycon panic=-1 earlyprintk=ttyS0,115200"
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="run fatscript; run mmcfitload; run mmcfitboot"
+-CONFIG_SYS_PBSIZE=2079
+-CONFIG_SPL_MAX_SIZE=0x40000
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_HAVE_INIT_STACK=y
+-CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x3fa00000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x500000
+-CONFIG_SPL_CACHE=y
+-CONFIG_SPL_SPI_LOAD=y
+-CONFIG_SYS_SPI_U_BOOT_OFFS=0x02000000
+-CONFIG_SPL_ATF=y
+-CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+-CONFIG_SPL_TARGET="spl/u-boot-spl-dtb.hex"
+-CONFIG_HUSH_PARSER=y
+-CONFIG_SYS_PROMPT="SOCFPGA_N5X # "
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_SPI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_WDT=y
+-CONFIG_CMD_DHCP=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-CONFIG_CMD_CACHE=y
+-CONFIG_CMD_EXT4=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_FS_GENERIC=y
+-CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_SPL_DM_SEQ_ALIAS=y
+-CONFIG_DWAPB_GPIO=y
+-CONFIG_DM_I2C=y
+-CONFIG_SYS_I2C_DW=y
+-CONFIG_SYS_MMC_MAX_BLK_COUNT=256
+-CONFIG_MMC_DW=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_PHY_MICREL=y
+-CONFIG_PHY_MICREL_KSZ90X1=y
+-CONFIG_ETH_DESIGNWARE=y
+-CONFIG_MII=y
+-CONFIG_SYS_NS16550_MEM32=y
+-CONFIG_SPI=y
+-CONFIG_CADENCE_QSPI=y
+-CONFIG_DESIGNWARE_SPI=y
+-CONFIG_USB=y
+-CONFIG_USB_DWC2=y
+-CONFIG_USB_STORAGE=y
+-CONFIG_DESIGNWARE_WATCHDOG=y
+-CONFIG_WDT=y
+-# CONFIG_SPL_USE_TINY_PRINTF is not set
+-CONFIG_PANIC_HANG=y
+-CONFIG_SPL_CRC32=y
+diff --git a/configs/socfpga_n5x_defconfig b/configs/socfpga_n5x_defconfig
+index c9fa50b3aa9..e32eaacf0ad 100644
+--- a/configs/socfpga_n5x_defconfig
++++ b/configs/socfpga_n5x_defconfig
+@@ -1,11 +1,12 @@
+ CONFIG_ARM=y
+ CONFIG_COUNTER_FREQUENCY=400000000
+ CONFIG_ARCH_SOCFPGA=y
+-CONFIG_TEXT_BASE=0x1000
++CONFIG_TEXT_BASE=0x200000
+ CONFIG_SYS_MALLOC_LEN=0x500000
+ CONFIG_NR_DRAM_BANKS=2
++CONFIG_SPL_LDSCRIPT="arch/arm/mach-socfpga/u-boot-spl-soc64.lds"
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x101000
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_SF_DEFAULT_MODE=0x2003
+ CONFIG_ENV_SIZE=0x1000
+ CONFIG_ENV_OFFSET=0x200
+@@ -21,15 +22,19 @@ CONFIG_SYS_BOOTM_LEN=0x2000000
+ CONFIG_TARGET_SOCFPGA_N5X_SOCDK=y
+ CONFIG_IDENT_STRING="socfpga_n5x"
+ CONFIG_SPL_FS_FAT=y
+-# CONFIG_PSCI_RESET is not set
+ CONFIG_REMAKE_ELF=y
++CONFIG_FIT=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x02000000
+ CONFIG_BOOTDELAY=5
+ CONFIG_USE_BOOTARGS=y
+ CONFIG_BOOTARGS="earlycon panic=-1 earlyprintk=ttyS0,115200"
+ CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="run fatscript; run mmcload; run linux_qspi_enable; run mmcboot"
++CONFIG_BOOTCOMMAND="run fatscript; run mmcfitload; run mmcfitboot"
+ CONFIG_SYS_PBSIZE=2079
+ CONFIG_SPL_MAX_SIZE=0x40000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+ CONFIG_SPL_HAVE_INIT_STACK=y
+ CONFIG_SPL_SYS_MALLOC=y
+@@ -38,7 +43,9 @@ CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x3fa00000
+ CONFIG_SPL_SYS_MALLOC_SIZE=0x500000
+ CONFIG_SPL_CACHE=y
+ CONFIG_SPL_SPI_LOAD=y
+-CONFIG_SYS_SPI_U_BOOT_OFFS=0x3c00000
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x02000000
++CONFIG_SPL_ATF=y
++CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_SPL_TARGET="spl/u-boot-spl-dtb.hex"
+ CONFIG_HUSH_PARSER=y
+ CONFIG_SYS_PROMPT="SOCFPGA_N5X # "
+@@ -56,10 +63,7 @@ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_EXT4=y
+ CONFIG_CMD_FAT=y
+ CONFIG_CMD_FS_GENERIC=y
+-# CONFIG_CMD_MTDPARTS is not set
+ CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="Image"
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_DWAPB_GPIO=y
+@@ -85,3 +89,4 @@ CONFIG_WDT=y
+ # CONFIG_SPL_USE_TINY_PRINTF is not set
+ CONFIG_PANIC_HANG=y
+ CONFIG_SPL_CRC32=y
++# CONFIG_TOOLS_MKEFICAPSULE is not set
+diff --git a/configs/socfpga_n5x_vab_defconfig b/configs/socfpga_n5x_vab_defconfig
+index a4798e2f953..3fe74846d01 100644
+--- a/configs/socfpga_n5x_vab_defconfig
++++ b/configs/socfpga_n5x_vab_defconfig
+@@ -1,90 +1,3 @@
+-CONFIG_ARM=y
+-CONFIG_COUNTER_FREQUENCY=400000000
+-CONFIG_ARCH_SOCFPGA=y
+-CONFIG_TEXT_BASE=0x200000
+-CONFIG_SYS_MALLOC_LEN=0x500000
+-CONFIG_NR_DRAM_BANKS=2
+-CONFIG_SPL_LDSCRIPT="arch/arm/mach-socfpga/u-boot-spl-soc64.lds"
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+-CONFIG_SF_DEFAULT_MODE=0x2003
+-CONFIG_ENV_SIZE=0x1000
+-CONFIG_ENV_OFFSET=0x200
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="socfpga_n5x_socdk"
+-CONFIG_DM_RESET=y
+-CONFIG_SPL_STACK=0xffe3f000
+-CONFIG_SPL_TEXT_BASE=0xFFE00000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x3ff00000
+-CONFIG_SPL_BSS_MAX_SIZE=0x100000
++#include <configs/socfpga_n5x_defconfig>
++
+ CONFIG_SOCFPGA_SECURE_VAB_AUTH=y
+-CONFIG_TARGET_SOCFPGA_N5X_SOCDK=y
+-CONFIG_IDENT_STRING="socfpga_n5x"
+-CONFIG_SPL_FS_FAT=y
+-CONFIG_REMAKE_ELF=y
+-CONFIG_FIT=y
+-CONFIG_SPL_FIT_SIGNATURE=y
+-CONFIG_SPL_LOAD_FIT=y
+-CONFIG_SPL_LOAD_FIT_ADDRESS=0x02000000
+-CONFIG_BOOTDELAY=5
+-CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="earlycon panic=-1 earlyprintk=ttyS0,115200"
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="run fatscript; run mmcfitload; run mmcfitboot"
+-CONFIG_SYS_PBSIZE=2079
+-CONFIG_SPL_MAX_SIZE=0x40000
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_HAVE_INIT_STACK=y
+-CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x3fa00000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x500000
+-CONFIG_SPL_CACHE=y
+-CONFIG_SPL_SPI_LOAD=y
+-CONFIG_SYS_SPI_U_BOOT_OFFS=0x02000000
+-CONFIG_SPL_ATF=y
+-CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+-CONFIG_SPL_TARGET="spl/u-boot-spl-dtb.hex"
+-CONFIG_HUSH_PARSER=y
+-CONFIG_SYS_PROMPT="SOCFPGA_N5X # "
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_SPI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_WDT=y
+-CONFIG_CMD_DHCP=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-CONFIG_CMD_CACHE=y
+-CONFIG_CMD_EXT4=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_FS_GENERIC=y
+-CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_SPL_DM_SEQ_ALIAS=y
+-CONFIG_DWAPB_GPIO=y
+-CONFIG_DM_I2C=y
+-CONFIG_SYS_I2C_DW=y
+-CONFIG_SYS_MMC_MAX_BLK_COUNT=256
+-CONFIG_MMC_DW=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_PHY_MICREL=y
+-CONFIG_PHY_MICREL_KSZ90X1=y
+-CONFIG_ETH_DESIGNWARE=y
+-CONFIG_MII=y
+-CONFIG_SYS_NS16550_MEM32=y
+-CONFIG_SPI=y
+-CONFIG_CADENCE_QSPI=y
+-CONFIG_DESIGNWARE_SPI=y
+-CONFIG_USB=y
+-CONFIG_USB_DWC2=y
+-CONFIG_USB_STORAGE=y
+-CONFIG_DESIGNWARE_WATCHDOG=y
+-CONFIG_WDT=y
+-# CONFIG_SPL_USE_TINY_PRINTF is not set
+-CONFIG_PANIC_HANG=y
+-CONFIG_SPL_CRC32=y
 --
 2.19.0
 
