@@ -4,85 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9298103E192
-	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 14:53:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99C07103E193
+	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 14:56:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CAD0839A8;
-	Wed, 18 Mar 2026 15:53:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id F0F1A83952;
+	Wed, 18 Mar 2026 15:56:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="D2eS1EQn";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Qp6F8zM/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E63D83CE3; Wed, 18 Mar 2026 15:53:17 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 95DC4839A8; Wed, 18 Mar 2026 15:56:42 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E39F6838FA
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 15:53:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 12FA880325
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 15:56:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7d75371d873so7447538a34.3
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 07:53:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773845593; x=1774450393; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0K3TZj6aWH2ODcgqnITLKMD9mVezwawzafBoerqGfdo=;
- b=D2eS1EQnS2oUUQY8s73bvNgZlK+ig+uinNkYJ4BKZFRadcelg08wFxKlwMQfdVJg7F
- v+NgsfzzlvkvPPLDOyNr/XWHbHB+NXdufEq/Uo2HSUxsKlYqgrA+AftpzytBz1k5LYfc
- Sbdhmcf/ll1ebC9y1p90h7Jk9xfa8OL7O4rRY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773845593; x=1774450393;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0K3TZj6aWH2ODcgqnITLKMD9mVezwawzafBoerqGfdo=;
- b=pJQgf3YaBE8095SzxKZX9+n48D6Z6FEOBfRu41TjcJ3Xl5P8UeLK8gzg07mgUl7ciG
- WCKDT+aasQoDY2jsxCVYCzH5xl8fjCRTWkXyQmTe4C5Ent5XCUveIQFDX/VnOkvBZh+4
- VLle6Qjt+gm3J/MDqYXTuGlB8CXJuDtMWCT5sHYBT9d2x5GW32ejiKhASp5+oQAYBIN1
- ITs55UVodW1dX0TjWjjX6LyPesZ2cS2r6AHGDxr04qA9ZKVwRgSlBMv2NlEasfGL0OS4
- GnCnpVCeDPgHdvC0Jw1D20FD1/Y3/svRNrASunCZ1eg47lWpFyQAyRh3hVEahH5ug/8E
- YQBw==
-X-Gm-Message-State: AOJu0YwrZfeZmFRsmTz65GDpvCGwmLnQ2pKpghbPzfRXoo4kJSgaHFMd
- ytqHx4jcVPb2xDy1EXGm2bu+28ZfD33HbC6dx9w64XALXbnky+edOeLB80LDn4jE6v4=
-X-Gm-Gg: ATEYQzzf2xlsRLLQE7wIppU9fbV8ABl2T3c6kZ8MIaF0PoTPkExMZcUEkiQD7Gzt430
- VhhZxPkosUyq4ur+CrgLIoO8WIqaYqIrkHixqhQ802O/xl0N06dpMPqKylwMKheXhA7VTEV0wwp
- ZRwlut3tcib8BrcpD77hBsfFwvNrny9BAXT4Lasy/zlXjgm/sOsaQyQjvWv76jIk8OhFhMpqvH1
- wykdNZDhL1UmraS8JU1A4OfL+I8MHQ6kUA6wKkERMjKu3TA7ilv3Lm3/ZRoAR1GfILdINTqun7K
- 4jrkQRMPcxFjOPvNdwIZUAwzZ/XV31nVj/Z69THmkSU3nBRvqvwUlur9H1MYpzeCsGzyX1Vdf/l
- nJ9HSt3fNSj7nl8KUthhHMB+9c7jBTPqRJhK+1H3ms3sz1I1qG6y8EJtCJ/j5/Ok64lt1wSMWLZ
- brOm7d0NAvRrXT1TiuTZfvAGN9sP3HMMKU3TDeMztGiiqhTlP+esx8XWfPNMez5KhxxoiKvNDmV
- L6DJPbxOLOrvB/WeAiGMfGpicQJmnOH3tu9aTi+qm8Qi6yy
-X-Received: by 2002:a05:6830:64c8:b0:7d7:4d85:eb05 with SMTP id
- 46e09a7af769-7d7ca775284mr2181667a34.22.1773845593537; 
- Wed, 18 Mar 2026 07:53:13 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7cf2b8325sm1489620a34.9.2026.03.18.07.53.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Mar 2026 07:53:12 -0700 (PDT)
-Date: Wed, 18 Mar 2026 08:53:10 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH] EFI Loader: Correct dependencies for EFI_HTTP_BOOT
-Message-ID: <20260318145310.GK502704@bill-the-cat>
-References: <20260317012449.4162666-1-trini@konsulko.com>
- <CAC_iWj+WHh14nTdYu2BUTqvSwrtHiJBJVncArPwrBqWb6kXnTA@mail.gmail.com>
- <20260317134256.GT502704@bill-the-cat>
- <CAC_iWjL+OUcUhZQ9hD9Vsp2zOfxdr3wu2fCX03HshXxrvR_EoQ@mail.gmail.com>
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 2CAE1600AE;
+ Wed, 18 Mar 2026 14:56:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5850DC2BC87;
+ Wed, 18 Mar 2026 14:56:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1773845798;
+ bh=KwzCzXUilMDfQ7gfGfRyvV0QpLmyxBCM9qB++60j9uk=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=Qp6F8zM/jRrpp8SMm3/XfwRZM8lwcvRv+fKS1568eCh8Od6YYhjtYQCskGJwfqOOP
+ QIffYZ4lmJqEgxcq2VhyLYEm+CY9edq1HBaS4PybOcI4WTWRUAByan4czCqUprQQKD
+ FMQFAzW6irgKQNim8aQYfTB+M57C42bg7PMpQZGYISjXX5Af8YVDUt6TEfNvNyHUqK
+ M11pVsNCABBaJWKisChB1JqpLuMNe1f+5Fhv6ClqlsjIwGxID3hapLfaQUImDUXkXw
+ BrmpzDuS48SN00q20zsjHzJeS5ckaIJqFAdZPTFIwv/dy0If5qNbqUYSIaZHtwGQwT
+ 1QTd095oU1yFA==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Ryder Lee
+ <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, Chunfeng
+ Yun <chunfeng.yun@mediatek.com>, Igor Belwon
+ <igor.belwon@mentallysanemainliners.org>, Tom Rini <trini@konsulko.com>,
+ Macpaul Lin <Macpaul.Lin@mediatek.com>, David Lechner
+ <dlechner@baylibre.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Julien Masson <jmasson@baylibre.com>, Peng Fan <peng.fan@nxp.com>, Sam
+ Protsenko <semen.protsenko@linaro.org>, Julien Stephan
+ <jstephan@baylibre.com>
+Subject: Re: [PATCH] configs: mediatek: rename genio boards defconfigs to
+ match the device tree name
+In-Reply-To: <20260318-rename-genio-defconfigs-v1-1-1440312442f0@baylibre.com>
+References: <20260318-rename-genio-defconfigs-v1-1-1440312442f0@baylibre.com>
+Date: Wed, 18 Mar 2026 15:56:36 +0100
+Message-ID: <87pl51rxsr.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5EU26ozmzhz9LioF"
-Content-Disposition: inline
-In-Reply-To: <CAC_iWjL+OUcUhZQ9hD9Vsp2zOfxdr3wu2fCX03HshXxrvR_EoQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,78 +76,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, Mar 18, 2026 at 13:41, Julien Stephan <jstephan@baylibre.com> wrote:
 
---5EU26ozmzhz9LioF
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Rename defconfig for genio boards to match the device tree name:
+> mt8370_evk_defconfig --> mt8370_genio_510_evk_defconfig
+> mt8390_evk_defconfig --> mt8390_genio_700_evk_defconfig
+> mt8395_evk_defconfig --> mt8395_genio_1200_evk_defconfig
+>
+> While at it, we also
+> - update the CONFIG_IDENT_STRING to be consistent.
+> - create a mt8188.config file shared by mt8370_genio_510_evk_defconfig
+>   and mt8390_genio_700_evk_defconfig files
+> - refactor MT8188/MT8370/MT8390 under the same entry in
+>   boards/mediatek/MAINTAINERS
+> - add myself as maintainer for these boards
+> - remove useless CONFIG_SYS_BOARD for MT8390
 
-On Wed, Mar 18, 2026 at 09:09:17AM +0200, Ilias Apalodimas wrote:
-> On Tue, 17 Mar 2026 at 15:42, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Mar 17, 2026 at 09:03:47AM +0200, Ilias Apalodimas wrote:
-> > > Hi Tom,
-> > >
-> > > On Tue, 17 Mar 2026 at 03:24, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > As exposed by "make randconfig", we have an issue with the dependen=
-cies
-> > > > for EFI_HTTP_BOOT. As this is implemeneted by running commands (as =
-seen
-> > > > by what it selects) it must depend on CMDLINE as well.
-> > > >
-> > > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > >
-> > > In theory, you can configure UEFI with a set of prebuilt boot options.
-> > > If one of them is http(s) the device will boot even if CMDLINE is not
-> > > selected. I am not against this patch, but we will remove the
-> > > possibility to build a firmware without cmdline that just boots to
-> > > whatever is was preconfigured
-> > >
-> > > Cheers
-> > > /Ilias
-> > > > ---
-> > > > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > > > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > > ---
-> > > >  lib/efi_loader/Kconfig | 1 +
-> > > >  1 file changed, 1 insertion(+)
-> > > >
-> > > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> > > > index b5f81e0ff530..a9b2f813e1d5 100644
-> > > > --- a/lib/efi_loader/Kconfig
-> > > > +++ b/lib/efi_loader/Kconfig
-> > > > @@ -600,6 +600,7 @@ config EFI_BOOTMGR
-> > > >  config EFI_HTTP_BOOT
-> > > >         bool "EFI HTTP Boot support"
-> > > >         depends on NET || NET_LWIP
-> > > > +       depends on CMDLINE
-> > > >         select CMD_NET
-> > > >         select CMD_DHCP
-> > > >         select CMD_DNS
-> >
-> > The select lines here mean that you cannot do that, today :)
->=20
-> Fair enough. I was just thinking "lets not limit it more".
-> Heinrich is right though. This needs an overhaul and depend on the
-> protocols instead of the commands. Either way I don't mind merging it
-> now, but maybe add a TODO with fixing it in the future?
+Seems this patch is doing multiple things (multiple logical changes)
+The doc says to split those out [1]
 
-Sure:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/issues/24
+Can we split this a bit, please?
 
---=20
-Tom
+For example:
+1. remove useless CONFIG_SYS_BOARD for MT8390
+2. create a mt8188.config file shared by mt8370_genio_510_evk_defconfig
+   and mt8390_genio_700_evk_defconfig files
+3. refactor MT8188/MT8370/MT8390 under the same entry in
+   boards/mediatek/MAINTAINERS
+4. Do the rename
+5. add myself as maintainer for these boards
 
---5EU26ozmzhz9LioF
-Content-Type: application/pgp-signature; name="signature.asc"
+This is just an example, feel free to split this however you'd like but
+please, one logical change per patch
 
------BEGIN PGP SIGNATURE-----
+[1] https://docs.u-boot.org/en/latest/develop/sending_patches.html#general-patch-submission-rules
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabq8UwAKCRAr4qD1Cr/k
-CitNAQCuAE/LAp6otBhTaw/eEJAlAOj3nyG+RFwednCsQ6qWpgEAz38PXHyislD5
-SYzcHxss5PrAVKjTwSwEw8xfPxTh4Ag=
-=aGdk
------END PGP SIGNATURE-----
-
---5EU26ozmzhz9LioF--
+>
+> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+> ---
+>  board/mediatek/MAINTAINERS                         | 18 +++++++-------
+>  configs/{mt8390_evk_defconfig => mt8188.config}    |  3 ---
+>  configs/mt8370_evk_defconfig                       | 28 ----------------------
+>  configs/mt8370_genio_510_evk_defconfig             |  5 ++++
+>  configs/mt8390_genio_700_evk_defconfig             |  4 ++++
+>  ...k_defconfig => mt8395_genio_1200_evk_defconfig} |  2 +-
+>  6 files changed, 18 insertions(+), 42 deletions(-)
+>
+> diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
+> index 446a9e8e53c..08cbd2ce49f 100644
+> --- a/board/mediatek/MAINTAINERS
+> +++ b/board/mediatek/MAINTAINERS
+> @@ -3,18 +3,16 @@ M:	Julien Masson <jmasson@baylibre.com>
+>  S:	Maintained
+>  F:	configs/mt8365_evk_defconfig
+>  
+> -MT8370 EVK
+> +MT8188/MT8370/MT8390
+>  M:	Macpaul Lin <Macpaul.Lin@mediatek.com>
+> +M:	Julien Stephan <jstephan@baylibre.com>
+>  S:	Maintained
+> -F:	configs/mt8370_evk_defconfig
+> +F:	configs/mt8188.config
+> +F:	configs/mt8370_genio_510_evk_defconfig
+> +F:	configs/mt8390_genio_700_evk_defconfig
+>  
+> -MT8390 EVK
+> -M:	Julien Masson <jmasson@baylibre.com>
+> -M:	Macpaul Lin <Macpaul.Lin@mediatek.com>
+> -S:	Maintained
+> -F:	configs/mt8390_evk_defconfig
+> -
+> -MT8395 EVK
+> +MT8395
+>  M:	Macpaul Lin <Macpaul.Lin@mediatek.com>
+> +M:	Julien Stephan <jstephan@baylibre.com>
+>  S:	Maintained
+> -F:	configs/mt8395_evk_defconfig
+> +F:	configs/mt8395_genio_1200_evk_defconfig
+> diff --git a/configs/mt8390_evk_defconfig b/configs/mt8188.config
+> similarity index 81%
+> rename from configs/mt8390_evk_defconfig
+> rename to configs/mt8188.config
+> index 06437be625e..9dfba6bf99f 100644
+> --- a/configs/mt8390_evk_defconfig
+> +++ b/configs/mt8188.config
+> @@ -1,14 +1,11 @@
+>  CONFIG_ARM=y
+> -CONFIG_SYS_BOARD="mt8390_evk"
+>  CONFIG_COUNTER_FREQUENCY=13000000
+>  CONFIG_POSITION_INDEPENDENT=y
+>  CONFIG_ARCH_MEDIATEK=y
+>  CONFIG_TEXT_BASE=0x4c000000
+>  CONFIG_NR_DRAM_BANKS=1
+> -CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt8390-genio-700-evk"
+>  CONFIG_TARGET_MT8188=y
+>  CONFIG_SYS_LOAD_ADDR=0x4c000000
+> -CONFIG_IDENT_STRING="mt8390-evk"
+>  # CONFIG_BOARD_INIT is not set
+>  CONFIG_CMD_CLK=y
+>  CONFIG_CMD_GPT=y
+> diff --git a/configs/mt8370_evk_defconfig b/configs/mt8370_evk_defconfig
+> deleted file mode 100644
+> index 48d3f64a42e..00000000000
+> --- a/configs/mt8370_evk_defconfig
+> +++ /dev/null
+> @@ -1,28 +0,0 @@
+> -CONFIG_ARM=y
+> -CONFIG_COUNTER_FREQUENCY=13000000
+> -CONFIG_POSITION_INDEPENDENT=y
+> -CONFIG_ARCH_MEDIATEK=y
+> -CONFIG_TEXT_BASE=0x4c000000
+> -CONFIG_NR_DRAM_BANKS=1
+> -CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt8370-genio-510-evk"
+> -CONFIG_TARGET_MT8188=y
+> -CONFIG_MTK_MEM_MAP_DDR_SIZE=0x100000000
+> -CONFIG_SYS_LOAD_ADDR=0x4c000000
+> -CONFIG_IDENT_STRING="mt8370-evk"
+> -# CONFIG_BOARD_INIT is not set
+> -CONFIG_CMD_CLK=y
+> -CONFIG_CMD_GPT=y
+> -CONFIG_CMD_MMC=y
+> -CONFIG_CMD_PART=y
+> -CONFIG_OF_UPSTREAM=y
+> -CONFIG_CLK=y
+> -CONFIG_MMC_MTK=y
+> -CONFIG_PINCTRL=y
+> -CONFIG_PINCONF=y
+> -CONFIG_PINCTRL_MT8188=y
+> -CONFIG_BAUDRATE=921600
+> -CONFIG_DM_SERIAL=y
+> -CONFIG_MTK_SERIAL=y
+> -CONFIG_WDT=y
+> -CONFIG_WDT_MTK=y
+> -# CONFIG_RANDOM_UUID is not set
+> diff --git a/configs/mt8370_genio_510_evk_defconfig b/configs/mt8370_genio_510_evk_defconfig
+> new file mode 100644
+> index 00000000000..e3530571cc4
+> --- /dev/null
+> +++ b/configs/mt8370_genio_510_evk_defconfig
+> @@ -0,0 +1,5 @@
+> +#include <configs/mt8188.config>
+> +
+> +CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt8370-genio-510-evk"
+> +CONFIG_MTK_MEM_MAP_DDR_SIZE=0x100000000
+> +CONFIG_IDENT_STRING="mt8370-genio-510-evk"
+> diff --git a/configs/mt8390_genio_700_evk_defconfig b/configs/mt8390_genio_700_evk_defconfig
+> new file mode 100644
+> index 00000000000..0b07e3be2c4
+> --- /dev/null
+> +++ b/configs/mt8390_genio_700_evk_defconfig
+> @@ -0,0 +1,4 @@
+> +#include <configs/mt8188.config>
+> +
+> +CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt8390-genio-700-evk"
+> +CONFIG_IDENT_STRING="mt8390-genio-700-evk"
+> diff --git a/configs/mt8395_evk_defconfig b/configs/mt8395_genio_1200_evk_defconfig
+> similarity index 92%
+> rename from configs/mt8395_evk_defconfig
+> rename to configs/mt8395_genio_1200_evk_defconfig
+> index 2edf3cb3e35..2d73af353f7 100644
+> --- a/configs/mt8395_evk_defconfig
+> +++ b/configs/mt8395_genio_1200_evk_defconfig
+> @@ -7,7 +7,7 @@ CONFIG_NR_DRAM_BANKS=1
+>  CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt8395-genio-1200-evk"
+>  CONFIG_TARGET_MT8195=y
+>  CONFIG_SYS_LOAD_ADDR=0x60000000
+> -CONFIG_IDENT_STRING=" mt8395-evk"
+> +CONFIG_IDENT_STRING="mt8395-genio-1200-evk"
+>  # CONFIG_BOARD_INIT is not set
+>  CONFIG_CMD_CLK=y
+>  CONFIG_CMD_GPT=y
+>
+> ---
+> base-commit: 142c805d470cd02470146d6d70aa9c522d4da16c
+> change-id: 20260318-rename-genio-defconfigs-bc4070c90e9e
+>
+> Best regards,
+> -- 
+> Julien Stephan <jstephan@baylibre.com>
