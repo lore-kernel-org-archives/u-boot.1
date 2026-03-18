@@ -4,115 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67D4AFCD0DA
-	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 08:59:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BAC8103E160
+	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 11:00:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E421C84090;
-	Wed, 18 Mar 2026 09:59:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 834518405F;
+	Wed, 18 Mar 2026 12:00:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="3ZKmgWMb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mHdi2cqN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4E5F840AB; Wed, 18 Mar 2026 09:59:18 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id CDD3D840B0; Wed, 18 Mar 2026 12:00:29 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF5F983FDC
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 09:59:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 06B4884083
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 12:00:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-660a293515fso12632097a12.1
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 01:59:15 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773824355; cv=none;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-b97a0f18a3aso524228566b.1
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 04:00:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773831626; cv=none;
  d=google.com; s=arc-20240605;
- b=AYper5I87fpDSv8909XeNXPNDzoVDkI/X6gxEGZN89gfE0LCcBsvvyj8O4u5HoS5co
- TTWQXPh9ocVYjO1kEERYo6gKRFBTALcyRuU2s3B+36MnZRP5utNgj0Z1hXbCwH+HX5Ue
- t9Z/1mqg14xdoPlyBe8gNX7Uyiq3VpDq8U5T11HAzB/F4E0ogEDFhY8487qAQmwQ518z
- FxHsarJOke3eZaXv9YwndypUV6xYtDbs3XFpjOtm0idNXazV192lt7Y1njV/RkMBO2Wg
- bgCKHvble08N/pbWQfacYPuNDs78qm6y5RB7ejAwY0M688aPmVMKmmaS7c8Q4hi77pjm
- DPwg==
+ b=auXKlwFEU2quYckXTjNO1ET/Vzym9vAFcrSm6QJuPZPlk724VYlIxJLgUBRKbYv6QN
+ qBmghWGXRVD1A8JFO0k0naF+XjWo03lzCZGzHsbiKjxlKkX1Dm9UJevWBRgT4VHC2iJg
+ 0TPtIjmZ6qLAIAAxzdP1CQUNBBUsjlAhDH8ZguDwmR4MF1cNYgn2Sb8/211mJ3lnjRBh
+ cMm9/wg2CNLsYSKdkgrei6TmZnVrATcmngJ1p8T2973DPOgY5V8GEbtcgGh1oqIOJcm7
+ OVEY5tWVB1DLnl+RzVjbkxqQ5v8v+qmv/KLu+IIGZ5cOGaKQlsC1zetpLJniySGKy1pE
+ 0ZIg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=y38RjA/Nw3SozUqtnp9y5s3Extt8dkrLSM+qR9/1nw8=;
- fh=5HYY23vYipIMF7hOGNxafhnbmK/+rcN0f4EY0x2BRcw=;
- b=ZyDWkDqnxALt+zrorSdYW/ElN2XPwAAB4WeJ+Unj5tHpSloqC0NAMPbzzt6N1slGa+
- X/XaEvDB68YbtkAbTbBTBi2KFutfnW+Unm0Eh9ZuZXcJS9I90usKGIwU6a+lb9CCcnmI
- j05aC6kZXpljs5q2kamo8EbF4N6/WuLKQTyc0nAbZzPhI3kHciblWZOPPjD0kDSpBYaJ
- WVqsN47zsZ3ezZ8A2Uub4ixIuw9Y4g080qKUApLgSAhHxjtcLq/4R+uEdXnu6Huj2ZDu
- QX0kNwlcglMuFQiZk01/TtY/jXdIz6RazeP2w8jsKodFXuBIr8pWPEzNeOP7c7oR5s0z
- 7FKA==; darn=lists.denx.de
+ bh=TDEIhN0z60pqbLTCWMme1xYmcsUKmkkYYFHXxY9XEiM=;
+ fh=Ocm9gqAOloMldLKW+/XS3lUBvYVERM3emlAYwEVY6VA=;
+ b=cmmChzhFITfa2oklG/Q2epoXnfsd8rPscH2IgLKzoEIxM2mtBe/Yxxt/stlFBcmg8k
+ P2IQIf5KqT5rsCiMmeMYa4Z88XwSi0EJCYKCDx6GEE6Kjjyg+DqeTu/OOuL6FRDf+Bg/
+ 5JVtlHxAnslKkUTrRh2XAn/Ii5bQnpZSd+9LVMTDKv+6srptbzW97ztXS9qBLkt+Rq4+
+ 4hZhwF4xpmaE7MGgmQvk50SH0FC4wwe+XIDXWMyi1Z8RWUyddCBC4aH/tR/pHJ4YU7zN
+ 2OeKTJWcSNv+nkvmxJzlboxaWlmjwbozjcE6L+lJ9V9bfH/69JfVc5eek4BF7fjLEr2s
+ 5fog==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773824355; x=1774429155;
- darn=lists.denx.de; 
+ d=gmail.com; s=20230601; t=1773831626; x=1774436426; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=y38RjA/Nw3SozUqtnp9y5s3Extt8dkrLSM+qR9/1nw8=;
- b=3ZKmgWMbF5BQLd9E3dAt6ZKxuoMSIeau2pdD7DR0EzJYHkfu2WnuxOsKNO9zWlChrn
- tv95YryDxmG9vQyISnueosiIQ9VSjuvEoyrYkB9Sqjat7UHgWYZEj1nmhCx0z44aKvYx
- N+qa3lUL2dmHHEtjWrhYHaVZVV12/wFyG2yh82zPM/pwYXEsamQ2fOK2Va6WW7wJEBiL
- jBqqzlgUCUVUedXn1wY0G/nnU80v0NbYW0rhxWjzN64xPTFHm70n9ysCazDu98fJuRfy
- Mv+B3OH9KmmZU36XEpXDm+ancfHCoo+k5fMvU6XcDbMpOtDBu+QDrv7Y1TYwpHcGKGHR
- 2yqg==
+ bh=TDEIhN0z60pqbLTCWMme1xYmcsUKmkkYYFHXxY9XEiM=;
+ b=mHdi2cqNMQGnv7geEamd2NwG6SJTP0KpX17lIrzP35+Knnt0i7pon4A05I8+juIpwt
+ mo0xPLb0kSKAvMda+39iqjzt2MPm7AeAZS71IrgN/FYrvxSL+t5Q6W4xxuLZCW+9zpKC
+ Nvp6k7lIuHuqeXCcfalOCZdZ/5r6NeQD8hp3R+WGrOMae62vI6AR/OadAMMIOfq+hziy
+ fOYewLR9ajmDX/NcU8zJcTEJ+f3WKaz52d7YS+4ALhxLKGDDTlSFMlNTXayM0UydDwhV
+ 3x3dL5T2frFTs+QWdfQ3/9l1renQ1JVU3LyO4AUsKzxjpo1MHeVSBknZSCjCaKSgBvk+
+ FsFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773824355; x=1774429155;
+ d=1e100.net; s=20251104; t=1773831626; x=1774436426;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=y38RjA/Nw3SozUqtnp9y5s3Extt8dkrLSM+qR9/1nw8=;
- b=mcSm1E2WYxailvh2HeL6igNmW37qHRYRMrOC4aQvlgc+1f6qIZsb/4q3BguxTQeonC
- tvziyM3VBJ1sWHE4g6DZ5euroj0Kphlx9kjFyvI1dyvreotuJv/te9MO4QIKtkLWcT8A
- iEfID3zlt29Kq3m23mgOa005BrsdLxmyXpGfK5cgllOw3ont24PgZP3KSG5KDralQkQ8
- yJwZeovBeQ8CmT6QWArjA979Z4/aLBFPhPnxUV0TUVIAiHOQ6GxunTcgIbpMb429OZiA
- pDp6r0t2LSMFQtcHJYKL+uglA4DU5P8tQlOYwIwR1TiZNU9uwVHuajBIzIf7uiqs/HN9
- BCSw==
-X-Gm-Message-State: AOJu0Yx1XKFx9tWVl7wox/5sb41KnAti0dRf9LowtVNHTDxor8xNVUyQ
- Na5MVyiYmNqub4OzNKFmyuRuf5olEqdma4Od/Ne6Bu5cQXjWscRl67glTwILE/aevEnTrFblilT
- G28YZSwu//UfIAyqF0ImKtS/wa7Oo6JAiWmP+2VWZTw==
-X-Gm-Gg: ATEYQzznLn95mKvWfaBUCRKBQYXxwx63ghrLJVTOvk7PSjmJzvloqEfHZGaMhZ27cpD
- jXo+2PS+z1idrRSOx/MHmbpLleUPL9Po/5yWOXVlrIIlIMVTKsWwLTDPowo1OPhx9cOx0BGbtui
- xlYuGWa47F+ccPxQkCreXsynPXh0PiVDjtjNghzbO0on7aheJmmpp2byyGab5mBfXB/HLAIMbYm
- YU7AmiwB0D9EvtqnAktExIDwB93b/8fiWFAj6breUxLALkbnFJCmUfA9qyHmXqYZ6hXB+JVV0Uj
- 37CjFsGt+aEILFKzRNm4AR+bLZFb4QXt6OkCpEUBxY+l+gyDqfOBPoMH1tO94fb1v6lT3FfVRte
- rYmWkQcJEJXO+rm5aSgSk/okNAw==
-X-Received: by 2002:a17:907:3fa2:b0:b8e:64e:1ed with SMTP id
- a640c23a62f3a-b97f4a162a0mr157493166b.50.1773824355245; Wed, 18 Mar 2026
- 01:59:15 -0700 (PDT)
+ bh=TDEIhN0z60pqbLTCWMme1xYmcsUKmkkYYFHXxY9XEiM=;
+ b=kQ93R0rwlEX8/bctj8epA34SPtAiII4MZ6hOo9Z/tjdIDohNzxxMOqS0/nlALVIRAn
+ eAo8p3W1I2wCqxdEFSjo6vv224HhuoisTDxUORxQaEXKU75auj3b3y+bT/nZTBgpGdUb
+ UUXxOD4zN7YQGuYzZtr9u3EPUb1H7FfUkSF5JJVsp/Y1cYIMdXHAmu6KuLB/VWgB2HIV
+ j0dBr1cDoX6ALDGPYOkl8n1CDZYF2xlDhIoXrSmdF1xK8suJJB7uTk9AMWOt+er7k0Th
+ Xd4vmJ0KPckXmv3ziqnh4/Nvf/3aunz70EYQx8H6HbYR3aW9A0Q2n2ncv+IdgeuwI1qs
+ Wstg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVa3bG22Ty2baLQbob5ITBj+T2V1IZs+akmHTCC7OoXK4F6nN2b22Q+ViXxu72r1KSb3veBYt4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz/lg1xzMvSVrT8cqh76kuq4t+CyLmjucdggqflpnG2a5RSU3Fv
+ WpYpng2WehhfJbjD+O6PwnsnzENRK1bAxierqIaPrI3IfWh7hJBXybVRC3uEjnnFOrAiU1AU3/2
+ V1Wze4eFuWZrevw+VLQdS+bOpGYdQ4gZDbSqJ
+X-Gm-Gg: ATEYQzym94yNpGedFlwtqfiwvuzQzX1132h5VgiYvTvAEJuHJllnVPsFVtX5Gsdtg60
+ lS878bgljnn9XXbiNUTukwBff5PDG0vBv6aPPCwPkzbeWx+nw48EeQOnMsLapzuqIk3LTtQANfw
+ pb0ji5D73/gAUfgkaygSDiBTI5NO3ilNnCxOi5LRhx7fIh5m0V8OQEWYBHvzHArddvkw7VlVYse
+ N38RYyprVk0DvaAiUERLtjZCiMruCq9XD6wRZyY8BeNVubLJ6fYP7OP9Dh+4ZZJj0Y9A7y7uvIK
+ uWtbL8EoakhDM+X+ZtKShOlELy71tU2zKe5wj38kGlv5a8tNSWcAKPLaH0ZolJcikeB4+3xS9/7
+ jXQoVb8c/2/Yt1C2K+B3Cr3c8NABL+uA7v4W9RUDDUOpFm7ZKh2k=
+X-Received: by 2002:a17:907:96a3:b0:b8f:e46f:8079 with SMTP id
+ a640c23a62f3a-b97f4939261mr153612666b.22.1773831626053; Wed, 18 Mar 2026
+ 04:00:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260317-mt8195-add-ufs-support-v1-0-7d731ec438ae@baylibre.com>
- <20260317-mt8195-add-ufs-support-v1-11-7d731ec438ae@baylibre.com>
- <2a4f651d-bdb4-4c3b-be58-e2b882556e7f@baylibre.com>
-In-Reply-To: <2a4f651d-bdb4-4c3b-be58-e2b882556e7f@baylibre.com>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Wed, 18 Mar 2026 09:59:06 +0100
-X-Gm-Features: AaiRm51ilHKcSnuXLh1jEOv_ddk1Kb4HdC6VOsUr0uv0ggPTeNxqTaFkaB8YmGY
-Message-ID: <CAEHHSvZrTL7Lc+cuLeb1+WLzkGX6M375kD--zO7QTv7icB15GA@mail.gmail.com>
-Subject: Re: [PATCH 11/11] configs: add new defconfig for mt8395_evk_ufs
-To: David Lechner <dlechner@baylibre.com>
-Cc: u-boot@lists.denx.de, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- Tom Rini <trini@konsulko.com>, 
- Macpaul Lin <macpaul.lin@mediatek.com>, Julien Masson <jmasson@baylibre.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Chris-QJ Chen <chris-qj.chen@mediatek.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>
+References: <20260317012449.4162666-1-trini@konsulko.com>
+ <CAC_iWj+WHh14nTdYu2BUTqvSwrtHiJBJVncArPwrBqWb6kXnTA@mail.gmail.com>
+ <9F36DE37-16FF-4519-9F66-A4A79F618794@gmx.de>
+ <20260317134427.GU502704@bill-the-cat>
+ <CALeDE9MVgs--ABnZZ4RJDOnTLM-+imKxG6iJBGmQFHHXivLMxw@mail.gmail.com>
+ <20260318014701.GJ502704@bill-the-cat>
+In-Reply-To: <20260318014701.GJ502704@bill-the-cat>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Wed, 18 Mar 2026 11:00:14 +0000
+X-Gm-Features: AaiRm519xxk1N2Mo8km2XTJGrwqvAD2xhurKFnYzNZe25CA4rOBrW1oX12ZpBqY
+Message-ID: <CALeDE9O=y6fGKd50eiW3Och7vQWKvj_DzuB9UeNLnvj0rqezmg@mail.gmail.com>
+Subject: Re: [PATCH] EFI Loader: Correct dependencies for EFI_HTTP_BOOT
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -131,87 +122,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le mar. 17 mars 2026 =C3=A0 23:03, David Lechner <dlechner@baylibre.com> a =
-=C3=A9crit :
+On Wed, 18 Mar 2026 at 01:47, Tom Rini <trini@konsulko.com> wrote:
 >
-> On 3/17/26 9:24 AM, Julien Stephan wrote:
-> > This new defconfig is based on mt8395_evk, where we remove the mmc
+> On Tue, Mar 17, 2026 at 04:08:22PM +0000, Peter Robinson wrote:
+> > On Tue, 17 Mar 2026 at 13:51, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Mar 17, 2026 at 08:42:39AM +0100, Heinrich Schuchardt wrote:
+> > > > Am 17. M=C3=A4rz 2026 08:03:47 MEZ schrieb Ilias Apalodimas <ilias.=
+apalodimas@linaro.org>:
+> > > > >Hi Tom,
+> > > > >
+> > > > >On Tue, 17 Mar 2026 at 03:24, Tom Rini <trini@konsulko.com> wrote:
+> > > > >>
+> > > > >> As exposed by "make randconfig", we have an issue with the depen=
+dencies
+> > > > >> for EFI_HTTP_BOOT. As this is implemeneted by running commands (=
+as seen
+> > > > >> by what it selects) it must depend on CMDLINE as well.
+> > > > >>
+> > > > >> Signed-off-by: Tom Rini <trini@konsulko.com>
+> > > > >
+> > > > >In theory, you can configure UEFI with a set of prebuilt boot opti=
+ons.
+> > > > >If one of them is http(s) the device will boot even if CMDLINE is =
+not
+> > > > >selected. I am not against this patch, but we will remove the
+> > > > >possibility to build a firmware without cmdline that just boots to
+> > > > >whatever is was preconfigured
+> > > > >
+> > > > >Cheers
+> > > > >/Ilias
+> > > > >> ---
+> > > > >> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > > > >> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > > >> ---
+> > > > >>  lib/efi_loader/Kconfig | 1 +
+> > > > >>  1 file changed, 1 insertion(+)
+> > > > >>
+> > > > >> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> > > > >> index b5f81e0ff530..a9b2f813e1d5 100644
+> > > > >> --- a/lib/efi_loader/Kconfig
+> > > > >> +++ b/lib/efi_loader/Kconfig
+> > > > >> @@ -600,6 +600,7 @@ config EFI_BOOTMGR
+> > > > >>  config EFI_HTTP_BOOT
+> > > > >>         bool "EFI HTTP Boot support"
+> > > > >>         depends on NET || NET_LWIP
+> > > > >> +       depends on CMDLINE
+> > > > >>         select CMD_NET
+> > > > >>         select CMD_DHCP
+> > > > >>         select CMD_DNS
+> > > >
+> > > > Having to select commands here to get network is what needs to chan=
+ge. The network commands and EFI_HTTP_BOOT both should depend on configurat=
+ion symbols for the protocol implementations.
+> > >
+> > > Yes. And this is about fixing missing dependencies, today.
+> > >
+> > > > @Tom: Do we have a target release when to finish the move to the LW=
+IP stack?
+> > >
+> > > We do not. I'm not yet sure if all the various use cases of the legac=
+y
+> > > stack are fully supported now (I don't recall off-hand the NFS series
+> > > state right now for example).
+> >
+> > I did see NFS patches go through the list.
 >
-> We will still want MMC enabled here for the SD card slot. The
-> target OS could be on an SD card even when booting from UFS.
+> I saw the NFS support as well shortly after hitting send, as part of a
+> randconfig build.
 >
-fair enough
+> > I think there's also likely some legacy usecases where non parity is
+> > likely fine too.
+>
+> Perhaps the question really is, for the distribution folks, what are the
+> use cases you know of where lwIP doesn't have support yet? That's the
+> first big hurdle towards, likely, saying EFI_LOADER implies NET_LWIP
+> maybe, since I know there's cases there lwIP is better for.
 
-> > configs and add all the ufs related ones.
-> >
-> > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-> > ---
-> >  board/mediatek/MAINTAINERS       |  3 ++-
-> >  configs/mt8395_evk_ufs_defconfig | 33 ++++++++++++++++++++++++++++++++=
-+
-> >  2 files changed, 35 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
-> > index 4f371592059..dba620e57d5 100644
-> > --- a/board/mediatek/MAINTAINERS
-> > +++ b/board/mediatek/MAINTAINERS
-> > @@ -21,7 +21,8 @@ M:  Macpaul Lin <Macpaul.Lin@mediatek.com>
-> >  S:   Maintained
-> >  F:   configs/mt8390_evk_defconfig
-> >
-> > -MT8395 EVK
-> > +MT8395 EVK (UFS)
->
-> I think saying "(UFS)" here is a bit confusing. It is still the same
-> board (just different dip switch setting). I would not change this line.
->
-> >  M:   Macpaul Lin <Macpaul.Lin@mediatek.com>
-> >  S:   Maintained
-> >  F:   configs/mt8395_evk_defconfig
-> > +F:   configs/mt8395_evk_ufs_defconfig
-> > diff --git a/configs/mt8395_evk_ufs_defconfig b/configs/mt8395_evk_ufs_=
-defconfig
-> > new file mode 100644
-> > index 00000000000..9a9de689953
-> > --- /dev/null
-> > +++ b/configs/mt8395_evk_ufs_defconfig
-> > @@ -0,0 +1,33 @@
-> > +CONFIG_ARM=3Dy
-> > +CONFIG_COUNTER_FREQUENCY=3D13000000
-> > +CONFIG_POSITION_INDEPENDENT=3Dy
-> > +CONFIG_ARCH_MEDIATEK=3Dy
-> > +CONFIG_TEXT_BASE=3D0x4c000000
-> > +CONFIG_NR_DRAM_BANKS=3D1
-> > +CONFIG_DEFAULT_DEVICE_TREE=3D"mediatek/mt8395-genio-1200-evk-ufs"
-> > +CONFIG_TARGET_MT8195=3Dy
-> > +CONFIG_SYS_LOAD_ADDR=3D0x60000000
-> > +CONFIG_IDENT_STRING=3D" mt8395-evk"
-> > +# CONFIG_BOARD_INIT is not set
-> > +CONFIG_CMD_CLK=3Dy
-> > +CONFIG_CMD_GPT=3Dy
-> > +CONFIG_CMD_PART=3Dy
-> > +CONFIG_CMD_UFS=3Dy
-> > +CONFIG_OF_UPSTREAM=3Dy
-> > +CONFIG_CLK=3Dy
-> > +CONFIG_PHY=3Dy
-> > +CONFIG_PINCTRL=3Dy
-> > +CONFIG_PINCONF=3Dy
-> > +CONFIG_PINCTRL_MT8195=3Dy
-> > +CONFIG_DM_PMIC=3Dy
-> > +CONFIG_DM_PMIC_MTK_PWRAP=3Dy
-> > +CONFIG_DM_REGULATOR=3Dy
-> > +CONFIG_DM_REGULATOR_MT6359=3Dy
-> > +CONFIG_SCSI=3Dy
-> > +CONFIG_BAUDRATE=3D921600
-> > +CONFIG_DM_SERIAL=3Dy
-> > +CONFIG_MTK_SERIAL=3Dy
-> > +CONFIG_UFS=3Dy
-> > +CONFIG_UFS_MEDIATEK=3Dy
-> > +CONFIG_WDT=3Dy
-> > +CONFIG_WDT_MTK=3Dy
-> >
->
-> Can we make a .config file and #include it here so that we aren't
-> duplicating so much of mt8395_evk_defconfig?
->
-Sure!
+I don't know of any problems or missing features, I turned in on by
+default in Fedora across all devices for Fedora 43 (The 2025.07
+builds) because I wanted UEFI HTTP boot and haven't had any bug
+reports, and I suspect the features like UEFI HTTP is more useful for
+most distros than loss of other features because a lot of vendors are
+moving away from legacy tech like BOOTP/TFTP because of lack of
+security and the fact most of those technologies are not usable on the
+Edge/outside of the data centre.
+
+I know of one device which has tight SPI flash space (Jetson p3450)
+which I need to look at closer to see what I can trim, but that's a
+side point on that device.
