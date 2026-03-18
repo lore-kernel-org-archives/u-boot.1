@@ -4,91 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1556103E190
-	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 14:57:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 272D9103E197
+	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 15:20:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76F3183F6D;
-	Wed, 18 Mar 2026 15:57:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 604FC83981;
+	Wed, 18 Mar 2026 16:20:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q+JzcBBH";
+	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="etFiMtrS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DEF383FA3; Wed, 18 Mar 2026 15:57:29 +0100 (CET)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
+ id D99E683981; Wed, 18 Mar 2026 16:07:22 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C9BE83952
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 15:57:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B735F838FA
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 16:07:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=fairphone.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-404254ffe8aso628770fac.0
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 07:57:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=luca.weiss@fairphone.com
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b97b30fa5e5so619193966b.3
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 08:07:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773845846; x=1774450646; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CY2hnsscBctaFGkE8MILLzbH5zKyPT5KreUQv4Z2tNI=;
- b=Q+JzcBBHl67uDl3cvBcpY5mT1KWFvaR2v5Uwi8WnxpdQTSQ3eEWi5YgoKtykjqJWdg
- mmh9lMKW/lhFruIWYEtYN9GSSR22iWYHcrQexsJBW2+nw2qirw0iXAKURRyo21GGVUVB
- B8kqZbF2ngpjLsLjj7s0mi4Fs6LRxf6lD47iM=
+ d=fairphone.com; s=fair; t=1773846440; x=1774451240; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=p6o9IrQmE+M9cSnqmQsPhz10Jxi9/+kueG/Z5747lAU=;
+ b=etFiMtrSIWtkZFQ0jFvxilSilsuTU5F3M8Bt5+0fd2eM+ZYwFSFkFuwido2cGmg7qZ
+ gb+iL0cZgGr+9LIwwJrwWiM4G+1Bjxq1AoY0jtAWrVXw2bIM6zIzI9B0IVV7gt17sElS
+ AgXsOezM4WoEzP5g/07WATXRspAi4elOX1HdSm1vMbwt193Sv+MRSdBUTDpharEpltu1
+ oQ7R/HaPGZNGfGkEIhyxmRims/gNz5mm6FcG+8cf8NJ5yNThi5ZYkE0KSQknCdIa+RLQ
+ CQOMpJ49w1Y5ZKOJIwmZNUyFf+t5CbR3fYUIpYR2UBmSaG1ztX9pg30jdLNzjLWnp34f
+ uwCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773845846; x=1774450646;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CY2hnsscBctaFGkE8MILLzbH5zKyPT5KreUQv4Z2tNI=;
- b=DwWJIO6fSNTPiHEEKvbr5sqn7/jxFSSpNWbFzr/UTKwrb/PEUk6rVB+HLGJH0DRSbH
- vNgaLQ8vgGmnQ3vZbJA6QDlVhaY6No/Xo+COnA6j+DKeClvfULgPGtRm6X11hgGisTV9
- df8UNhZcI/3XI01mhjdo/hA297LxapLFtq86d5XArSeVdSWGVgThdK1d6do+zh+BE2QG
- ISuWYnU3ndOn7OPMSnNE/9JEG8zgjSCSksExSd/vbGaEUcLGp+QURlHyeu1YldurALqR
- GMg/CwrMZ0krmronNDOxjMP7SCnCyDFi49YLMl4JSnD/Hw4nuJdhuOIh0E5ghK4JZRph
- XxxQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUzQsFAD5eGxLlx6N5AUyd5EVNrnihWWJtlU9X7IsuXsc2XVriWqKu87JBRBtZKzJRWb5UblvA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwdztrtBBJVlhMEf1UJml2/OQQUBcf/tcDjvDnGJ6pmUDqIfX63
- WeqKP5Kz83q4KYcT9CRgE1Wh5zXnjfdvO0zj9diXoyBo2o3w5SduaZ+jYh+3r69yDdk=
-X-Gm-Gg: ATEYQzwvShTDjhr9V8QpOYbT8BpGk5Xc+fQwjAlB76R04e5rVtAWh1AWW51KTgoWkiF
- RmOQPzUqvDqpjtBOsr0kkwtKPCXH3vP0GDgC4xiJEFXvzG/vXJOIXaE7r4rUP70nLC7sbrpVe/q
- NbQSfcHsmllkkrwtDFqrwpVMUl0mPYdPEPf3XUN1HbjlhzAL2CcFYHCI/cA4HOWMHlUJtMevtE2
- 4AHLtFFNdLSlhTJqdWH1Dfx7pnI6IxbFt4gWsgHqIbj9OGnkI2xCdfl+gyReWZBhcZdZ2d2Ul2o
- ljSw5G8llWo0JsmJulM5pK6FeX72SWEAIcV4lhz6gwgqy4Avb/xMykRzAAW3TIh/QWTrmjDpI6m
- fdEgh+5b2y3bhvtcjYym48OylVixGzqEb+2OehEO2zt1yZss7AuYlXCB5FOxosZnIFyZxD4RvGR
- g5OXK2Rg2BBgk8SWHDYpcuX0lsVvTvNOQUqzZAjTquopu5IEul4aqzuqXez/pnY4oiD1xcSNZrt
- psoY/Dh9hnZQuqLWRm0IjNO/jou65SkOf3d6akzGTWfphAD
-X-Received: by 2002:a05:6870:4409:b0:417:1037:76a0 with SMTP id
- 586e51a60fabf-41bb0881ca7mr3878238fac.23.1773845845601; 
- Wed, 18 Mar 2026 07:57:25 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41bd2c3111dsm2733191fac.12.2026.03.18.07.57.24
+ d=1e100.net; s=20251104; t=1773846440; x=1774451240;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=p6o9IrQmE+M9cSnqmQsPhz10Jxi9/+kueG/Z5747lAU=;
+ b=YRhkDfdNLzlJ8fb9iJXqM7o619zKuGoH0uBRFjje71hxtik5BwQZN8oMGVmlJGyD+9
+ 7tWZWPmg5eM6fm1xH46MavPZfdzhS0uVDd7VrfiOEtPCY/bxAB/8FEJjOQ/4LnbgtWYz
+ fIBDJ0ekQzUPdwBLjkhh14xtZ6xAS40m8iHHxsUkM5SDQ2QlNJ40/ABsJ2cgshTIp3L/
+ Hd2yk4M98BsHxeqZ3Ge5ylJvSJO8lz2XxmPm4B5YdMf435/HOKivcJaeqtfrOAa4iVlu
+ vQ9kdP1dHVKHkCN4Y8tLPxXIwDZjYJYL13VkQZZc2NyJBFFK9B1qVPmdqgqkdZjoFs7Z
+ YpcA==
+X-Gm-Message-State: AOJu0Yxjt3bV/C3JTU07c9BuVjDqnZN+mCTTYvWkZDoslmd84oyGesig
+ sEgQ6DI1JnwqDXoXt/O6PWtBOtgEbja7OTQWsaL1I98C7+qErjejda27hvdVElJ7XA77SqZr3UW
+ KjHWD
+X-Gm-Gg: ATEYQzx+jx+50OygHRmKcFX2jHXXe1mYQBDhXFIrW2TURGuSa0Z4iurCTEfkpc1zm7j
+ vFjHXwe5I67aLuRkQafIQl2fL00DlbbtpFPeIDHkdMrd/9s3fct7ZIVQii6BmmcTbgPC/jovr5K
+ 3/J1gfbqEjIG+GStX7NGntyEsD2HKj5PyU9mIkqYmK22cdtvWzLTDpsd0fFNsgCAsB+DsUqQMPj
+ UWxtEOAEnPurCM6P2vYsj9NO6oWH5lfJKXPWRieuYTt51xzFYr4c0oyY0MZDePP+xGaEdfGm5dm
+ Zq/QSFzyQpNKojLFjMn2iPCy9D2vnX4t/cUVnPbaZRR3g1/A9qW/RcE5vF19/7FzpLeYoIT4UI6
+ MWzAkEupCHBv04IgK6eJL5VbCo+CQP1q2nuKrARhUmnP6JGeAeo6V9dG9nd9ZoXcXLYhOm8Xolw
+ +cgmM59MVXa35+uJNpDgFMo9lB/x5QqfScYwppDVmz1cJf9iP8VDHsTuwKaN6ASXUs6YFffM0tS
+ WPK0A==
+X-Received: by 2002:a17:906:2756:b0:b97:a2e9:3c1e with SMTP id
+ a640c23a62f3a-b97f48c05d1mr224060666b.8.1773846439751; 
+ Wed, 18 Mar 2026 08:07:19 -0700 (PDT)
+Received: from [172.16.220.101] (144-178-202-139.static.ef-service.nl.
+ [144.178.202.139]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b97f173a3e3sm222787466b.61.2026.03.18.08.07.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Mar 2026 07:57:25 -0700 (PDT)
-Date: Wed, 18 Mar 2026 08:57:23 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] EFI Loader: Correct dependencies for EFI_HTTP_BOOT
-Message-ID: <20260318145723.GL502704@bill-the-cat>
-References: <20260317012449.4162666-1-trini@konsulko.com>
- <CAC_iWj+WHh14nTdYu2BUTqvSwrtHiJBJVncArPwrBqWb6kXnTA@mail.gmail.com>
- <9F36DE37-16FF-4519-9F66-A4A79F618794@gmx.de>
- <20260317134427.GU502704@bill-the-cat>
- <CALeDE9MVgs--ABnZZ4RJDOnTLM-+imKxG6iJBGmQFHHXivLMxw@mail.gmail.com>
- <20260318014701.GJ502704@bill-the-cat>
- <CALeDE9O=y6fGKd50eiW3Och7vQWKvj_DzuB9UeNLnvj0rqezmg@mail.gmail.com>
+ Wed, 18 Mar 2026 08:07:19 -0700 (PDT)
+From: Luca Weiss <luca.weiss@fairphone.com>
+Date: Wed, 18 Mar 2026 16:07:17 +0100
+Subject: [PATCH] video: simplefb: Map framebuffer region on probe on ARM64
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5zzHdHWObabZI0+/"
-Content-Disposition: inline
-In-Reply-To: <CALeDE9O=y6fGKd50eiW3Och7vQWKvj_DzuB9UeNLnvj0rqezmg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260318-simplefb-map-v1-1-edec1ee81df1@fairphone.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQqAIBBA0avIrBPUIKqrRIsxxxpIE4UIpLsnL
+ d/i/wqFMlOBWVTIdHPhKzboTsB2YNxJsmsGo8ygej3KwiGd5K0MmCRaOzmLishpaEnK5Pn5d8v
+ 6vh9+YiFGXgAAAA==
+X-Change-ID: 20260318-simplefb-map-abb9dba0eed1
+To: u-boot@lists.denx.de, u-boot-qcom@groups.io
+Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Luca Weiss <luca.weiss@fairphone.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1773846438; l=1782;
+ i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
+ bh=jSBVbhXFqcKpt6gzYHG13HcssChKBGYSXYbH74D2bz8=;
+ b=Q5RsIDbYYsY1otQ4JsWXWL7TXaI2iTsIarbvaV082nuyXaaZnOKNlUBS/3l9IT5jeeriIHjds
+ XzJlsLMZ09dBwo4JbYExaH7dBZJbRpHGpGcsRDBQ9qD3hNf0lI0Vb6A
+X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
+ pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
+X-Mailman-Approved-At: Wed, 18 Mar 2026 16:20:44 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,122 +114,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The framebuffer buffer might not be mapped on some devices.
 
---5zzHdHWObabZI0+/
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This is #ifdef'ed for ARM64 since mmu_map_region() is not defined for
+any other architecture.
 
-On Wed, Mar 18, 2026 at 11:00:14AM +0000, Peter Robinson wrote:
-> On Wed, 18 Mar 2026 at 01:47, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Mar 17, 2026 at 04:08:22PM +0000, Peter Robinson wrote:
-> > > On Tue, 17 Mar 2026 at 13:51, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Tue, Mar 17, 2026 at 08:42:39AM +0100, Heinrich Schuchardt wrote:
-> > > > > Am 17. M=E4rz 2026 08:03:47 MEZ schrieb Ilias Apalodimas <ilias.a=
-palodimas@linaro.org>:
-> > > > > >Hi Tom,
-> > > > > >
-> > > > > >On Tue, 17 Mar 2026 at 03:24, Tom Rini <trini@konsulko.com> wrot=
-e:
-> > > > > >>
-> > > > > >> As exposed by "make randconfig", we have an issue with the dep=
-endencies
-> > > > > >> for EFI_HTTP_BOOT. As this is implemeneted by running commands=
- (as seen
-> > > > > >> by what it selects) it must depend on CMDLINE as well.
-> > > > > >>
-> > > > > >> Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > > > >
-> > > > > >In theory, you can configure UEFI with a set of prebuilt boot op=
-tions.
-> > > > > >If one of them is http(s) the device will boot even if CMDLINE i=
-s not
-> > > > > >selected. I am not against this patch, but we will remove the
-> > > > > >possibility to build a firmware without cmdline that just boots =
-to
-> > > > > >whatever is was preconfigured
-> > > > > >
-> > > > > >Cheers
-> > > > > >/Ilias
-> > > > > >> ---
-> > > > > >> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > > > > >> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > > > >> ---
-> > > > > >>  lib/efi_loader/Kconfig | 1 +
-> > > > > >>  1 file changed, 1 insertion(+)
-> > > > > >>
-> > > > > >> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> > > > > >> index b5f81e0ff530..a9b2f813e1d5 100644
-> > > > > >> --- a/lib/efi_loader/Kconfig
-> > > > > >> +++ b/lib/efi_loader/Kconfig
-> > > > > >> @@ -600,6 +600,7 @@ config EFI_BOOTMGR
-> > > > > >>  config EFI_HTTP_BOOT
-> > > > > >>         bool "EFI HTTP Boot support"
-> > > > > >>         depends on NET || NET_LWIP
-> > > > > >> +       depends on CMDLINE
-> > > > > >>         select CMD_NET
-> > > > > >>         select CMD_DHCP
-> > > > > >>         select CMD_DNS
-> > > > >
-> > > > > Having to select commands here to get network is what needs to ch=
-ange. The network commands and EFI_HTTP_BOOT both should depend on configur=
-ation symbols for the protocol implementations.
-> > > >
-> > > > Yes. And this is about fixing missing dependencies, today.
-> > > >
-> > > > > @Tom: Do we have a target release when to finish the move to the =
-LWIP stack?
-> > > >
-> > > > We do not. I'm not yet sure if all the various use cases of the leg=
-acy
-> > > > stack are fully supported now (I don't recall off-hand the NFS seri=
-es
-> > > > state right now for example).
-> > >
-> > > I did see NFS patches go through the list.
-> >
-> > I saw the NFS support as well shortly after hitting send, as part of a
-> > randconfig build.
-> >
-> > > I think there's also likely some legacy usecases where non parity is
-> > > likely fine too.
-> >
-> > Perhaps the question really is, for the distribution folks, what are the
-> > use cases you know of where lwIP doesn't have support yet? That's the
-> > first big hurdle towards, likely, saying EFI_LOADER implies NET_LWIP
-> > maybe, since I know there's cases there lwIP is better for.
->=20
-> I don't know of any problems or missing features, I turned in on by
-> default in Fedora across all devices for Fedora 43 (The 2025.07
-> builds) because I wanted UEFI HTTP boot and haven't had any bug
-> reports, and I suspect the features like UEFI HTTP is more useful for
-> most distros than loss of other features because a lot of vendors are
-> moving away from legacy tech like BOOTP/TFTP because of lack of
-> security and the fact most of those technologies are not usable on the
-> Edge/outside of the data centre.
->=20
-> I know of one device which has tight SPI flash space (Jetson p3450)
-> which I need to look at closer to see what I can trim, but that's a
-> side point on that device.
+Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
+---
+Map 0x1000 extra due to unknown reason, but otherwise it's not enough
+and we still get a "Synchronous Abort" when drawing at the bottom of the
+framebuffer.
 
-OK. I know the NFS for lwIP request came from somewhere and wasn't just
-a fun side project. Pretty sure anyhow. So I wonder if there's other
-things like that that someone knows of.
+For milos-fairphone-fp6 the framebuffer is reg=0xe3940000
+size=0xa932c0 (2484*1116*4).
 
---=20
-Tom
+When just calling mmu_map_region with plat->size, then it's crashing at
+0xe43d3000 even though everything up to 0xe43d32c0 should be mapped.
+With size+0x800 (or less) it was also still crashing, only size+0x1000
+then worked.
 
---5zzHdHWObabZI0+/
-Content-Type: application/pgp-signature; name="signature.asc"
+Possible I just don't know enough about memory mapping things, so
+suggestions welcome! :)
+---
+ drivers/video/simplefb.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
------BEGIN PGP SIGNATURE-----
+diff --git a/drivers/video/simplefb.c b/drivers/video/simplefb.c
+index 8d0772d4e51..e144fde697b 100644
+--- a/drivers/video/simplefb.c
++++ b/drivers/video/simplefb.c
+@@ -9,6 +9,7 @@
+ #include <log.h>
+ #include <video.h>
+ #include <asm/global_data.h>
++#include <asm/system.h>
+ 
+ static int simple_video_probe(struct udevice *dev)
+ {
+@@ -37,6 +38,11 @@ static int simple_video_probe(struct udevice *dev)
+ 	plat->base = base;
+ 	plat->size = size;
+ 
++#ifdef CONFIG_ARM64
++	/* The framebuffer buffer might not be mapped on some devices */
++	mmu_map_region((phys_addr_t)plat->base, (phys_addr_t)plat->size + 0x1000, false);
++#endif
++
+ 	video_set_flush_dcache(dev, true);
+ 
+ 	debug("%s: Query resolution...\n", __func__);
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabq9UgAKCRAr4qD1Cr/k
-CrqvAP9XSBzy7YBCMkkqgaQyNJcX9tJJnhlebR1EJ1xFqyxipwEA5rO+ohAGC70+
-N0MY5wtTtIZESo+r96Lt2qNihGgMcQQ=
-=0l5U
------END PGP SIGNATURE-----
+---
+base-commit: ba7bf918dafcd093ad733b07ba490baeb20cf5da
+change-id: 20260318-simplefb-map-abb9dba0eed1
 
---5zzHdHWObabZI0+/--
+Best regards,
+-- 
+Luca Weiss <luca.weiss@fairphone.com>
+
