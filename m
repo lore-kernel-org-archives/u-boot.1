@@ -4,76 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0A461077608
-	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 18:59:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D512B1077609
+	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 18:59:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBCDF83952;
-	Wed, 18 Mar 2026 19:59:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1A55F8063E;
+	Wed, 18 Mar 2026 19:59:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dPrsN+E4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q4YCur0P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72E59836D3; Wed, 18 Mar 2026 19:59:44 +0100 (CET)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id 1E1C8839DF; Wed, 18 Mar 2026 19:59:46 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 509D6805D7
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 19:59:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E5009807C0
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 19:59:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7d751ef36ccso120924a34.0
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 11:59:42 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7d74aa6bcdbso123349a34.2
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 11:59:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773860381; x=1774465181; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773860382; x=1774465182; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=nkvtm6TMXGms3U5bsQAjLnlK/YuZhogak/aErsVhHYU=;
- b=dPrsN+E4Lpc8zJqhZriZDSb/4wG9c1e9aSMyDUDkcVz8gMGoBOl/exfAeXWNSsp8PY
- JPOUmhVDMBG9/jFVHTPhHb/yI2ZtgTMqoZMjidmOCf20pYtUi9mOkinPiCi4tnquNAIo
- ez1FCbnIvqEfZc102Ni7uLNqm593WUTJPCoPY=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gZarir8cXAt5WniLaeg1D/CBk8BUkrYO2Pf8HTsF6Jo=;
+ b=Q4YCur0PemsrSoo/egzi62lQC56FHacYdPe91xYKU/Y06JqiQD710AfA4rcR/n7du0
+ FQR/k8nr9Vd4Kc6x3zGcZUKjSqBKmYOHG3qXGb3K4Z0RvHn5WWPtAbPL91sQxjm6Jmp2
+ oPxZId5P/UXCDBfvoCWtIwAt5hY08vqnvd4qI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773860381; x=1774465181;
+ d=1e100.net; s=20251104; t=1773860382; x=1774465182;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=nkvtm6TMXGms3U5bsQAjLnlK/YuZhogak/aErsVhHYU=;
- b=SRMT/r6R1kZPvuJAY9+HMMpIBnskHMXdwhYh3F9SGo6f19y8hQne8wz+vsfphusw5s
- 3LJh/fsaTAb+fDrGwBrL9LxfvORCjzLls0ajf1RuWmQZeoZRRo7X8eEig72meFuCXQHN
- rBZs1SIwi8K5WS/H98D7w51wLc3howSrq7ztSQLxOAeiyrK+3vsW58+2C9l7I8aklJta
- +AObJtikT/u7K8aoTKJv1Jo42CA+1LYne6F/G6zNx6qrZw+/mTBVHU2AyS1FVxVoapGX
- 86QJAQuzNAB5BPgXOKJiosYHMSe1waHSlzHP768Kd4rLl4S4w6kYYPeEmVzyx4kLCCvs
- 2i/A==
-X-Gm-Message-State: AOJu0YyogO7n7l2YAxI+H1WCNlk5WxoKs/BN34rgtPUPXpZRDM0SUOoK
- wSXot1eeF6MFg6ZA4PktJ/NYSzhqqiY2MHt9+JBbncVWi6/OmquZNS3XqNhl7qrW5+M=
-X-Gm-Gg: ATEYQzyC0B9pD1jvDMSDqMJMhgSNe1jQnkhUjBxZXwBUTkIEmAnLOxlaOVE8FZHdPd5
- DHyQsC4MES2teQ2nxVsGN4HviTZoKvKXF99PNI9KPrBdZe28hIda1C5boUxbok/BK/vlnNlqwFO
- x0sR5+084Qg+/SdmBu1cMuW+pDnkrsO17LTExpnZRcPphPWELIL9jZ0pdPCRvGo4Q5r1I8CCMz8
- rAQdJLzwCyfDq3b8wvnKbPWnIPWewIMA9VxXKi83dRoi7PZ7v49odnc8f9kKRHj0CsABQ+S6qKv
- Eri3Z8evBhhS+8Jl9X1Pk/FAf5O5QkwDDdM50jDrI5pvH8TtQJL1gWbdJ6WMED/kzEVW3VRyMRz
- xU4Kw68OsRrH7ELpJALamrCRV0yBiK6U9EPGu8odspWSisDk0q5QhA+3IsZgGUgB2d7yseZNBSc
- 7f1rJmL+2iR1ezUu1rfokJVRyINU3TDcHV8kii7YOMwbYnzJMYAYLrp+Bn8Aax0wUjh28RYNp3Y
- LnEqbFP29GwJblTwMJe47t0FeuUErpJ1vwkXB2dAMns6M4=
-X-Received: by 2002:a05:6830:6581:b0:7d7:d1e1:6982 with SMTP id
- 46e09a7af769-7d7d1e17407mr1490239a34.29.1773860380915; 
- Wed, 18 Mar 2026 11:59:40 -0700 (PDT)
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=gZarir8cXAt5WniLaeg1D/CBk8BUkrYO2Pf8HTsF6Jo=;
+ b=koHZ4f4zvLXlnpDmcARDIIEJaGnVOK9tb5RyVfsuTa6ds9pm+Sdk63aEp1wjRBnsU/
+ ncTYtjU3fFd/WodxZxtEY4mv+RDgTcJNOVTamrJaTHAp7ANrtrzuTYsIFmJL7fHXvlUD
+ s8KrzRrFkp5e8GQ5v30KEzkB4o/zS7DH1VUmNcBSRWX7J9yS9v5FQ3cvVcCQkllz4XKq
+ c8XioPm+TMYjPzPgsrOnet4H9Lh+cI8W8l909FkVsqc5GEngWRAT/bhpi74ozYivXTfb
+ fhOA/TBTDUEz8EQCuzg/fM8rHgBOMxSxjDW7R4Q4T2CsXi9uPLmI3JpDvRDPPxvpIGlW
+ 6A1A==
+X-Gm-Message-State: AOJu0Yyr8isq6C4jKAoT5XhmHK7ozqHFkD8boJf2nbuBGyVSm61wRRcF
+ 78a5H8BITqBDlXEFaoIevCdSESsd6vzGo4eX4gHDtveWLDd/WrqASgIsZycaui+LayU=
+X-Gm-Gg: ATEYQzy7/jrGcHepWpqhILZ6aA7JMcejm6aUkczye+9T5MHG0WG0h+CMIRMfFrfHH7/
+ nrMXS6e/PyxTuBFS2uABur3/z4skIvrno5mNPRYy8gCE0zmglz4IlJz4X8P0N2FuXv7Xi19X6nB
+ AmjsQREzwgEPNpGZgRwaiNC/YfgKFLT82+nWxNJ3MxYWK6REbHtcE3vu7zSz0iSs4MZ3otDeIo6
+ lmuOtB0M8K06CbNd2UtWyfxcpEK4KPi5njt5nxZ0BI/K9+w4EmbucfgAz66lFtEhfHTuuik/cCs
+ +Jm6QHsCik4xshJMY4xrJzUqQ1A/W15e+xXGWuDxj2PGoIfpDWPJdv3qgWArezD3/Sc0fE8wFRq
+ 0gQwW8WqXl2Ur/s2MLiNrHHBXnouPsCcP0G0ZRJ4SLp64ahRZJlwvWLmvw7FQ6W5YzfNYPMmlv5
+ GulLe1SnTyySHvGDN8aiJvliUUpKBeZMQUjMjXaMwhnJMyP44nDzXNVo3Kds81d+JwoSwzh0iU8
+ zE9Z4q4hWm5WijWgjQ69HQsHqHWdaKMv+y9qPQoUug+Lx/+lSLaVpTPsQ==
+X-Received: by 2002:a05:6830:6add:b0:7d7:d0bf:7045 with SMTP id
+ 46e09a7af769-7d7d0bf716bmr1624716a34.8.1773860382621; 
+ Wed, 18 Mar 2026 11:59:42 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7c9985c1dsm2807715a34.11.2026.03.18.11.59.40
+ 46e09a7af769-7d7c9985c1dsm2807715a34.11.2026.03.18.11.59.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Mar 2026 11:59:40 -0700 (PDT)
+ Wed, 18 Mar 2026 11:59:42 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
-In-Reply-To: <20260304075100.3637609-1-hayashi.kunihiko@socionext.com>
-References: <20260304075100.3637609-1-hayashi.kunihiko@socionext.com>
-Subject: Re: [PATCH] image-fit: Fix mismatched parameter type in comment
-Message-Id: <177386037998.1227559.9700813575131573397.b4-ty@konsulko.com>
-Date: Wed, 18 Mar 2026 12:59:39 -0600
+To: u-boot@lists.denx.de, Quentin Schulz <foss+uboot@0leil.net>
+Cc: Greg Malysa <malysagreg@gmail.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
+ Utsav Agarwal <utsav.agarwal@analog.com>, 
+ Arturs Artamonovs <arturs.artamonovs@analog.com>, 
+ Simon Glass <sjg@chromium.org>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Peng Fan <peng.fan@nxp.com>, Kuan-Wei Chiu <visitorckw@gmail.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260303-pwm-led-orphan-v1-0-54d14a430cb7@cherry.de>
+References: <20260303-pwm-led-orphan-v1-0-54d14a430cb7@cherry.de>
+Subject: Re: [PATCH 0/2] update MAINTAINERS for PWM LED
+Message-Id: <177386038114.1227559.6501657983528937805.b4-ty@konsulko.com>
+Date: Wed, 18 Mar 2026 12:59:41 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,17 +108,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 04 Mar 2026 16:51:00 +0900, Kunihiko Hayashi wrote:
+On Tue, 03 Mar 2026 12:16:19 +0100, Quentin Schulz wrote:
 
-> The functions use 'ulong', however, the comments said 'uint32_t'.
-> Update the comments to match the prototype.
+> The entry is named LED while it only matches PWM LED binding and driver,
+> so rename it to PWM LED.
+> 
+> Ivan's email is bouncing, so mark the PWM LED entry as orphaned.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] image-fit: Fix mismatched parameter type in comment
-      commit: eeca6ed86ff65cb8213d0d960a0733c7d8ddde5d
+[1/2] MAINTAINERS: rename LED into PWM LED
+      commit: a5533e7417b7c7ab50bd7be8ff3f8224bb70461f
+[2/2] MAINTAINERS: make PWM LED orphan
+      commit: b28b77caacc7dbc4e8e27dfdb94471313bb9396e
 -- 
 Tom
 
