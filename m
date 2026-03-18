@@ -4,88 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2883A1088E58
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 00:46:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D24831088E58
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 00:46:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E35D838FA;
+	by phobos.denx.de (Postfix) with ESMTP id 66BA383A1B;
 	Thu, 19 Mar 2026 01:46:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=xuku.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=xuku.com header.i=@xuku.com header.b="r5yXyiQN";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="gyBg4g8x";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="Cms/qtfU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85A4F83952; Wed, 18 Mar 2026 22:15:30 +0100 (CET)
-Received: from fhigh-a1-smtp.messagingengine.com
- (fhigh-a1-smtp.messagingengine.com [103.168.172.152])
+ id 597D6836D3; Thu, 19 Mar 2026 01:36:52 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8187E8352B
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 22:15:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6187880050
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 01:36:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=xuku.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=neil@xuku.com
-Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
- by mailfhigh.phl.internal (Postfix) with ESMTP id 5BCB5140006E;
- Wed, 18 Mar 2026 17:15:26 -0400 (EDT)
-Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-02.internal (MEProxy); Wed, 18 Mar 2026 17:15:26 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xuku.com; h=cc
- :cc:content-transfer-encoding:content-type:date:date:from:from
- :in-reply-to:message-id:mime-version:reply-to:subject:subject:to
- :to; s=fm2; t=1773868526; x=1773954926; bh=j3bkGaRSHKQfKxPUTNSOI
- SHoVYKiOrAIKUFWFZshe0Y=; b=r5yXyiQNu2+4Aa8feS1DSM3REj0QgecKRmB1S
- MhoV0xseTCOjvk1Qrwhip5+fA+hivxgMAO5zbx+NkW1IlZ7tphxl+WbTJWQSn20j
- 773bIFIon7UPMUSjIQi1tAch05wndmWzQDuQD4dInEBI8+lwOlyr4yNE/KXWAa2V
- E8x0Nf3MXM2ZbpeEU7MqbEDrRkBYOhRxPcuk5dj+oVILmj3wBLjXYFSWD777/Paq
- ijeBuBxRdeI0H2u+QGrDB7aSAe8pI4TaXxhzzdQHjjFmEWkC46qao3V75R3ZwM+r
- FJIk2jjEjD6Zx1C+nONwK6mFoKOgZpDohnv32RIykB5M25i7Q==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:date:date:feedback-id:feedback-id:from:from
- :in-reply-to:message-id:mime-version:reply-to:subject:subject:to
- :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
- 1773868526; x=1773954926; bh=j3bkGaRSHKQfKxPUTNSOISHoVYKiOrAIKUF
- WFZshe0Y=; b=gyBg4g8xqGiv2uiQZOKrcvJS3PrYFgJas+5m5bj/1Fh2UhmdQQ2
- P1jPKCof2vPzVqPX5RnjVo2zhb4sQt8k+GWjwd7n9NtzYfHlTI6HT0yNzxXKwzOf
- IoSqIXhUJD9C+I9ROGiBDSLRwNZxYovRQsts2cDWFvdqCIMJaneuw+PM5u2ZJqCs
- MotBdTNcIox1clQDC6XFmKV8IVzq3L2KYfbF2N86D7aSCNtjjiUc5Vj5e4DcWVMP
- SaNrZXPad9kxIEJ8X7cstGX8qAOU6c2wIkCjljKG5e8euS3Q7kBzQFxi0ujjBko/
- fkHb9Kz1PzEa2Nuv3OyVF7sRSgE3fx70Eow==
-X-ME-Sender: <xms:7RW7aVk9KFjZsV2A9qKuDZ0T042YKdd4TtIUAukjWOzQo49ybcYE8Q>
- <xme:7RW7aYQMHh5ltOZbdN6a_Oz2hzzcwOyy1goomD01y4Dacjl7Q-mBf9eFKnabxSQuE
- FI4HIyEyxN28YtPPPDUboC1EherESfasH8IsU1yJ4YR7YuqDVw>
-X-ME-Received: <xmr:7RW7aZD0NwhFeCfXLAECDiEoCFkoDAP2wDCnXVcx78c40kbgVAOaoK9FUxLNo7oKSZ6GzTt8XIw65a0b2ydbUkw9qv7iNkoS1kPo0z2gVSq8d4gQa5w>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgdeftdehudekucetufdoteggodetrf
- dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
- rghilhhouhhtmecufedttdenucenucfjughrpefhvfevufffkffoggfgsedtkeertdertd
- dtnecuhfhrohhmpefpvghilhcuuegvrhhkmhgrnhcuoehnvghilhesgihukhhurdgtohhm
- qeenucggtffrrghtthgvrhhnpeeiudefteefgfdtvddtveevieffudevteeljeegjedvve
- euveeltdfhkeelkeeuieenucffohhmrghinhepghhithhhuhgsrdgtohhmnecuvehluhhs
- thgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepnhgvihhlseiguhhkuh
- drtghomhdpnhgspghrtghpthhtohepfedpmhhouggvpehsmhhtphhouhhtpdhrtghpthht
- ohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggvpdhrtghpthhtohepthhrihhnih
- eskhhonhhsuhhlkhhordgtohhmpdhrtghpthhtohepnhgvihhlseiguhhkuhdrtghomh
-X-ME-Proxy: <xmx:7RW7afQEFwP2ybWeaXLYTb37m5ubU3izc3wVzd6M7wSOilews5nxAQ>
- <xmx:7hW7aXrPkZKRafGbZ0SRiZUDw1uXhwesr5kD2G6IdorZ5pPRkt0dpQ>
- <xmx:7hW7aRx0hoM90o9WR071XfUoZ2J1AL5G1zRwZDiVIDaGYNR-6yu84w>
- <xmx:7hW7acKhM4wcL2FHMRvDwu5NGKJA-3p3oxZo4OrVFQtwSGMKLzb4fw>
- <xmx:7hW7aflKEptXtc8jWMiQmfVb-6OeLZ9pGITfS3PoLB6EiSyDrQHVqiK4>
-Feedback-ID: ibe734310:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 18 Mar 2026 17:15:25 -0400 (EDT)
-From: Neil Berkman <neil@xuku.com>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com,
-	Neil Berkman <neil@xuku.com>
-Subject: [PATCH] env: flash: add catch-all for unrecognized flags in
- env_flash_init()
-Date: Wed, 18 Mar 2026 14:15:15 -0700
-Message-ID: <20260318211515.35246-1-neil@xuku.com>
-X-Mailer: git-send-email 2.53.0
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 7033710E8FA; Thu, 19 Mar 2026 01:36:47 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1773880609;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=Xul0pVCjxQ1w7Sp1lU+boeLs9tgsJHKriVotf7y5ZpE=;
+ b=Cms/qtfUnLv030IPZQ4UoDIy1mEepRnxImGEVZJsFmskOWJSe4tkYkIB75degb+x9PyJg+
+ F8FjOTT8bv/mXzJF97Fb+Ub/Th5AOIJp3lbhjcyUvur3IK/2acoI1CNad/JNX/WTEXyMXn
+ H4jXtcFXH/6OO1sLWkfY7GKGMOET2Y4f+A9+3cEMqqCRCmJzVQawDHZRd8ETp0MOXtVWL/
+ l3t3V8iFhROfC+Ux1XzHqzaYdGotil3vQ3AqNePSFghxyvpBqlY2oql7J5YrZ95x2s96uZ
+ 8t0wrnvABjiqIKutOpH11b5RJBo1a27DO5e6pge/uwg6hTDn09L9KLAIuwuAhA==
+Message-ID: <78c40910-a90c-4cef-ba72-4e4cdfd5abe2@nabladev.com>
+Date: Wed, 18 Mar 2026 21:32:33 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 5/5] doc: board: nxp: Add Quickboot documentation
+To: Simona Toaca <simona.toaca@oss.nxp.com>
+Cc: uboot-imx@nxp.com, u-boot@lists.denx.de,
+ Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com, peng.fan@nxp.com,
+ alice.guo@nxp.com, simona.toaca@nxp.com, ye.li@nxp.com,
+ viorel.suman@nxp.com, ping.bai@nxp.com, sebastien.szymanski@armadeus.com,
+ ravi@prevas.dk, joao.goncalves@toradex.com, ji.luo@nxp.com,
+ tharvey@gateworks.com, qijian.guo@nxp.com
+References: <cover.1773648510.git.simona.toaca@nxp.com>
+ <be6b07edb38e4e0dc86e65f8bac7b6b3b0e29d01.1773648510.git.simona.toaca@nxp.com>
+ <d3b42af1-65a8-401f-9dda-1f79cb0dde9a@nabladev.com>
+ <yuwvhik6p6eordghidde6l4ey6fclwwuxnzuqpttcoicxqa2r4@jpp2t42tl2wx>
+ <541a05c0-e0f0-43ce-b944-d7656da585e1@nabladev.com>
+ <becryuzd7ohecs7vq2goxhfv5fsrjh6a3ctav77y4uxrszzecd@wsnoc3muqoit>
+Content-Language: en-US
+From: Marek Vasut <marex@nabladev.com>
+In-Reply-To: <becryuzd7ohecs7vq2goxhfv5fsrjh6a3ctav77y4uxrszzecd@wsnoc3muqoit>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-Mailman-Approved-At: Thu, 19 Mar 2026 01:46:15 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,74 +78,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When both environment copies have valid CRCs but the flag bytes do not
-match any recognized pair, env_flash_init() falls through without
-setting gd->env_addr or gd->env_valid. This is a problem because:
+On 3/18/26 3:20 PM, Simona Toaca wrote:
 
-1. env_init() then sets gd->env_addr = &default_environment (in RAM).
+>>>> Can QB data be saved to arbitrary SPI NOR ?
+>>>>
+>>>
+>>> No, this SPI NOR refers to the SPI controller selected by
+>>> the CONFIG_SF_DEFAULT_BUS and CONFIG_SF_DEFAULT_CS options.
+>>
+>> Maybe the user would want to make a backup of the QB data to another SPI NOR
+>> (e.g. if the device has two, which is not unheard of) ? They should not be
+>> prevented from doing so.
+>>
+>>> The point is that the device we save the data to is also an
+>>> option to boot from, otherwise the qb data is useless.
+>>
+>> The QB data could be stored for backup purposes, that is not useless.
+>>
+> There is one thing that might make this clearer, and I forgot to
+> mention it explicitly:
+> 
+> The get_qbdata_offset method searches for a 64KB hole in the bootloader,
+> so it can save the data there. OEI knows that's where the data
+> should be saved. On an arbitrary non-boot device, or, on a filesystem
+> partition, the hole would not exist. It is mkimage that puts that
+> hole in the bootloader, and U-Boot explicitly checks for container
+> header tags.
 
-2. In env_flash_load(), the pointer comparison
-   gd->env_addr != &flash_addr->data evaluates true (RAM != flash),
-   triggering the pointer swap that selects the secondary copy.
+Uh, is there any danger that this might accidentally corrupt the 
+surrounding bootloader ?
 
-3. The repair logic writes OBSOLETE (0x00) to the non-active flag but
-   cannot promote the other flag from 0x00 to ACTIVE (0x01) because
-   NOR flash requires a sector erase to set bits. Both copies end up
-   with flag=0x00.
+> If one wants to store the data elsewhere, they could use
+> the generic fs methods to make the backup wherever they want, and re-load
+> it themselves to the QB_SAVED_STATE_BASE address, so that U-Boot can save
+> it from there.
 
-4. On every subsequent boot, flag1 == flag2 triggers the ENV_REDUND
-   path, printing a spurious "recovered successfully" warning until
-   an explicit saveenv erases and rewrites the sectors.
+It would be good to document this mechanism, esp. how to locate the QB 
+data in RAM and how much data have to be saved into backup storage.
 
-The recognized flag values are ACTIVE (0x01), OBSOLETE (0x00), and
-erased (0xFF). Of the 256 possible flag values, the existing chain of
-if/else-if handles only three: 253 of 256 values fall through without
-setting gd->env_addr. Combined with 0x00 (already stuck on NOR),
-254 of 256 values eventually reach the persistent-warning state.
-
-Other env backends (SPI flash, NAND, MMC) handle this through
-env_check_redund() in env/common.c, which uses a numeric comparison
-of the flags as a serial counter and always reaches a decision. The
-CFI flash backend is the only one that uses its own flag-matching
-logic.
-
-Add a catch-all else clause that defaults to the primary copy with
-ENV_REDUND status, matching the existing behavior for the flag1==flag2
-case. This ensures gd->env_addr is always set, preventing the
-unintended pointer swap. The condition is recoverable via saveenv.
-
-Signed-off-by: Neil Berkman <neil@xuku.com>
-
-Reproducer: https://gist.github.com/neilberkman/4155612a7942d3f510f204eb85e61943
-
-The SPI flash backend (env/sf.c) has a related but distinct issue:
-it retained legacy boolean save semantics but its load path now uses
-the common serial-number logic in env_check_redund(), creating an
-inconsistency under interrupted updates. That has wider implications
-for fw_env.c and would need separate discussion.
----
- env/flash.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
-
-diff --git a/env/flash.c b/env/flash.c
-index 0f7393d8..31dd1656 100644
---- a/env/flash.c
-+++ b/env/flash.c
-@@ -108,6 +108,14 @@ static int env_flash_init(void)
- 	} else if (flag2 == 0xFF) {
- 		gd->env_addr	= addr2;
- 		gd->env_valid	= ENV_REDUND;
-+	} else {
-+		/*
-+		 * Unrecognized flag pair (e.g. bit-flip on NOR flash).
-+		 * Default to primary copy to prevent unintended pointer
-+		 * swap in env_flash_load().
-+		 */
-+		gd->env_addr	= addr1;
-+		gd->env_valid	= ENV_REDUND;
- 	}
- 
- 	return 0;
--- 
-2.43.0
-
+>>> And the
+>>> board will boot from the selected configs if one boots from spi.
+>> Please see above.
+>>
+>>>> Looking at this, why can this QB not use the same interface to select
+>>>> arbitrary block storage device/partition/... that e.g. FS_GENERIC does use ?
+>>>
+>>> There is a limited list of boot devices. By keeping things the way they are
+>>> we limit the usage of this command to the actually useful boot devices (and
+>>> that we also test this command on).
+>>
+>> I would argue that it is better to use generic code instead of hand-writing
+>> local ad-hoc implementation which is a limited version of the same.
+> 
+> In the above context, using filesystem methods might not
+> be feasible.
+Look at cmd/blk_common.c , that is not filesystem, that is generic 
+interface for block devices.
