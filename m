@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EB8D10775E1
-	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 16:45:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3841910775E6
+	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 16:46:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01F368352B;
+	by phobos.denx.de (Postfix) with ESMTP id 3ED1783A1B;
 	Wed, 18 Mar 2026 17:45:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="sTbP+b4e";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Xbcs5vJi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9724A83B03; Wed, 18 Mar 2026 17:45:25 +0100 (CET)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id DB38783BC7; Wed, 18 Mar 2026 17:45:25 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 000ED836D3
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 17:45:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E247583015
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 17:45:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-43b3f91a7abso9628f8f.1
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 09:45:22 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-48628ce9ab5so573515e9.2
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 09:45:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773852322; x=1774457122;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773852323; x=1774457123;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=lrbSIBpctXkGISb/yjYw+2OsKTOpBgX6bsKq33kMLfQ=;
- b=sTbP+b4epGBSOlvC8W47phs4ClRct/fdiNWIlNFlF4lqoN8Htj0iZJxeVoKIF3kNTu
- AP1+o2YMQsRczgDl5eay9wZqE4WzMIz/bMH4hV/kly3MhesPVacB9JZepgocY5pDZTPl
- gV/OIS9Evpdjb90O6tW/72YuxWD5hECTnHUs8DWpCvnOdgcp3kCqj/+hCbMiJ2VFbp+K
- 7bwhfxAmJQolGrOh1mssHUB9LHBtAQi+DANhfpO1E5oHyJ6gwjzeK+DIJwHtNKx46XQY
- BfZatDMxyVusu2le1v93ZUwtvGs4OljWRf95Zn+YoIFkrMC3wPIo0k6uxk23WqtPd4XV
- C0nw==
+ :reply-to; bh=LPmYUe74yJNM3j3SfFBi3JrYJDd3cJE7GJxFiLu5FtM=;
+ b=Xbcs5vJibrf3qhRkdgPe0K3MkSOVsUYg0rQ72Amep1phR6+4lYGj2uO7r43uKmy87c
+ d4UTdgPNHL83OPhdrJUAovlgLiEwjnV8WciifWiZ/6HTJN4ikUtI0TvDGqNgpGoo80lK
+ wZyK9HFADf2bl3pfFqcOek3om/+6T2OsFroRyt3k3FV9khigjdi8lEUIT5zexvQWEzkM
+ 9PorWZ+bqJ5l0/ISmQgP39upP+DT5cPJRg7k8SnfzJNEJ3RB2sHosUeu40oQOFlllLUx
+ EsFy+ly4meRdFT+eQZO19EcoSbH1Kjtn0Inz2LkYCO1k308sO09ACEa9Y4pKXUeH4MYn
+ 5uNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773852322; x=1774457122;
+ d=1e100.net; s=20251104; t=1773852323; x=1774457123;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=lrbSIBpctXkGISb/yjYw+2OsKTOpBgX6bsKq33kMLfQ=;
- b=EnxebNCFnM8zqQztNjSmb6xDgOWx1dzpNUrkN01OlqiD4hB2nTYBcdt3HAr6kWshO2
- hJGvRI+sWJQb8ynEPNmVphVPbxg/ifHhQPjrjZo5FKg7jZy6PtX6QlZmvfjr3XA64RRq
- /4mjmOQALQ8so4K2vz9MKCv92U/j5mWDXYH28I+h5JHX9UZfPRsmYLrwAuPwWiFMHhwq
- ceRqK9N0n7KgW0MzWjGslGgZTm8DtsnRRyxpyKJjBFwQxlORxEbKJ64A4SeMmNJ8mRx1
- ArPDT6mbIu2x/wD2nhAF5QmhoaYCcHtYnVbN3bVIXc88aLrJFRoG78Z3lus1mtP5ca1v
- DstQ==
-X-Gm-Message-State: AOJu0YwrQUvmqyLIe8RSVp7zgnRXeevyOs6yE/G3ci+K59XLsvVdskqZ
- 4X8/DR8Ivc7L3Qh0zwy/DCaBNM3vMmNzBn0RwQSmBW8Y3UZUaQvz4sUxYDU0vcbcjG8=
-X-Gm-Gg: ATEYQzyivL5o3vaAcRxLhLxRe4eQmDxjAS14tCy+1gaux4sWGAdzEupxIRk9LQESuj2
- HCx1ouVZCE+hbKJm6FPZ+ISQMxoB8BWjXjC4LjTFRK6AB39cXkwTtFaypS74CeAnNXPCHKC82KZ
- FxmqXNCj03X6arPp2uI3oMW+F0aS9ecrRi6+fKRVTIIX98uUD52vvxph7q235RVGf2APMx8yA+l
- QwZZNl00JRljsHU3vnMMwRwKpv+h+YwIsa4PjIcqENvA8qh8qy6iPqtYsgRRg5L9VCifhzr7O3d
- pwHx15+c9P3IbPNv578wrqJiMJyTsByfAV4Rf/XE0wF0oqTkyYcUmSpcMXt7HQv7irOQLfkr+I5
- i9u+8c3bHM6VVm+7p+ruzAaPrF+yZAelfhloaL6EyTPahfAJ4OWT9P4O0j9IMHz6qaZnuo3g+qj
- PME3b6KmmB403TW/8cpWAX2/GQ5Ws5H0cu1ou1aT9m7EtcDGbBo07zikkv7MHSZgWwk36LIqqZ+
- 9UxRf0ouloVe6GssBvZoFCiV/z8tRqof/zbULSJ4/AbwPwEtXRTLTf+zNiXHQu0W2zRPFvrmhfx
- 33IvMDAnuweM3uFv+A==
-X-Received: by 2002:a5d:588a:0:b0:43a:4e5:73b0 with SMTP id
- ffacd0b85a97d-43b527a925emr7261952f8f.17.1773852322323; 
- Wed, 18 Mar 2026 09:45:22 -0700 (PDT)
+ bh=LPmYUe74yJNM3j3SfFBi3JrYJDd3cJE7GJxFiLu5FtM=;
+ b=rZkh2ck3P7zsKEjv2S/dkNxYbXvgTzl/7cZwUaVHRaQlYWCss0pn2P0Negv78OGIvN
+ DgrLxDQWQ1BlGoswb/yfhjAfv+v/Q1F65HKz1c9DJR9C87a/PaRZxHKuxM3LA+Q5oTPb
+ qr+PYxqRO3x2yZ/Vo0mNlPefy8/IY4JZ1W7U7eyC4Pa9iqEM6uN7xoptjFB/dTVgvf7o
+ cS+oMxjTt7SaYR/5y78m0/rCXBpc5Fg4AGNdoS5Hqi7EjY6pHGU04CHSPLYtOOlRGZEz
+ dDb6fcMBfhxIcLcQRVhoqVVp2vTSxKTBOgyf/w7I1/zjsbojUscLwpyzIFJmcpz9yY00
+ lstw==
+X-Gm-Message-State: AOJu0YwphYTKBI81W68Ccytk1WpV3keOzMUEvixjpmbfZDubMMkxTCB3
+ ptqL5oPZFEkjJ37UT5yBIz/JsF0D7suHqZYe2qGQ2e5YBQmAGMTTdO1HY7USf4NGoM8=
+X-Gm-Gg: ATEYQzy91upu1wYGQXcxtZxiz+d6XSzPAhWIoL7Dxic5sUI4Wz0ez7p18tRiMxh71Is
+ Rhz1ODFUUAK47IubnlDqxqLyBQi2SskZFuuK1IPnifO/Aad2hUa3lJKGpzzzje9Gb4kt7l2yMoO
+ lGTufTuuT5t/L9cTSC1yWY2V5cbR9cPA9IqJqnIQqOe3sRvAqFKO49eER6JUnw9bk+gYQFcj5zK
+ qfo6/3Kw+OjQrDy/TRng4cu+QIjk4nJXteMHRzib5l1qeIFJIUZfFaFkQAuA966Kwb37GefuPIj
+ U/jI0Y9HCODYQeXcux5lRMViG9v/kWaInarGV5R0aMvoXA/Lv1+tG5BAD62ln3nHTS6F4EPbd4T
+ r7hHmfBr1R39o0u/P0Gk75qbMX/AwQ/VaH7LpRIA5FxBwuOL9C6iDowlCrAS8Rl/E0T77/vjB3x
+ 5c+8tIWg7NeUle3zvYVsESVIQbg81pam6YPN4V+Rjx1Q3X0VFwMh9iQhOIKxROLZ+m88zIua9ls
+ yWW1PrVTsbarRgrgMpDwgTa9JRAQGrgIUn+IRB5nFUxqR1lZT1cOV9E5wohspGszuyLgUpOK0LV
+ 7u78WEk=
+X-Received: by 2002:a5d:5f86:0:b0:439:fd78:188d with SMTP id
+ ffacd0b85a97d-43b527aaa6bmr7330947f8f.17.1773852323251; 
+ Wed, 18 Mar 2026 09:45:23 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-b535-6f9c-731f-0b89.rev.sfr.net.
  [2a02:842a:d52e:6101:b535:6f9c:731f:b89])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b51852a64sm8612085f8f.14.2026.03.18.09.45.21
+ ffacd0b85a97d-43b51852a64sm8612085f8f.14.2026.03.18.09.45.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 18 Mar 2026 09:45:22 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Wed, 18 Mar 2026 17:45:24 +0100
-Subject: [PATCH v2 2/6] configs: mt8395_evk: rename to
- mt8395_genio_1200_evk_defconfig
+Date: Wed, 18 Mar 2026 17:45:25 +0100
+Subject: [PATCH v2 3/6] configs: mt8370_evk: rename to
+ mt8370_genio_510_evk_defconfig
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260318-rename-genio-defconfigs-v2-2-1f77580d72f3@baylibre.com>
+Message-Id: <20260318-rename-genio-defconfigs-v2-3-1f77580d72f3@baylibre.com>
 References: <20260318-rename-genio-defconfigs-v2-0-1f77580d72f3@baylibre.com>
 In-Reply-To: <20260318-rename-genio-defconfigs-v2-0-1f77580d72f3@baylibre.com>
 To: u-boot@lists.denx.de
@@ -112,44 +112,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename mt8395_evk to match the name of the device tree which is
-mt8395-genio-1200-evk.dts
+Rename mt8370_evk to match the name of the device tree which is
+mt8370-genio-510-evk.dts
 
 Also update CONFIG_IDENT_STRING to be consistent.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- board/mediatek/MAINTAINERS                                        | 4 ++--
- configs/{mt8395_evk_defconfig => mt8395_genio_1200_evk_defconfig} | 2 +-
+ board/mediatek/MAINTAINERS                                       | 4 ++--
+ configs/{mt8370_evk_defconfig => mt8370_genio_510_evk_defconfig} | 2 +-
  2 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
-index 446a9e8e53c..5ae23b1628c 100644
+index 5ae23b1628c..01698cb57cb 100644
 --- a/board/mediatek/MAINTAINERS
 +++ b/board/mediatek/MAINTAINERS
-@@ -14,7 +14,7 @@ M:	Macpaul Lin <Macpaul.Lin@mediatek.com>
+@@ -3,10 +3,10 @@ M:	Julien Masson <jmasson@baylibre.com>
  S:	Maintained
- F:	configs/mt8390_evk_defconfig
+ F:	configs/mt8365_evk_defconfig
  
--MT8395 EVK
-+MT8395
+-MT8370 EVK
++MT8370
  M:	Macpaul Lin <Macpaul.Lin@mediatek.com>
  S:	Maintained
--F:	configs/mt8395_evk_defconfig
-+F:	configs/mt8395_genio_1200_evk_defconfig
-diff --git a/configs/mt8395_evk_defconfig b/configs/mt8395_genio_1200_evk_defconfig
-similarity index 92%
-rename from configs/mt8395_evk_defconfig
-rename to configs/mt8395_genio_1200_evk_defconfig
-index 2edf3cb3e35..2d73af353f7 100644
---- a/configs/mt8395_evk_defconfig
-+++ b/configs/mt8395_genio_1200_evk_defconfig
-@@ -7,7 +7,7 @@ CONFIG_NR_DRAM_BANKS=1
- CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt8395-genio-1200-evk"
- CONFIG_TARGET_MT8195=y
- CONFIG_SYS_LOAD_ADDR=0x60000000
--CONFIG_IDENT_STRING=" mt8395-evk"
-+CONFIG_IDENT_STRING="mt8395-genio-1200-evk"
+-F:	configs/mt8370_evk_defconfig
++F:	configs/mt8370_genio_510_evk_defconfig
+ 
+ MT8390 EVK
+ M:	Julien Masson <jmasson@baylibre.com>
+diff --git a/configs/mt8370_evk_defconfig b/configs/mt8370_genio_510_evk_defconfig
+similarity index 93%
+rename from configs/mt8370_evk_defconfig
+rename to configs/mt8370_genio_510_evk_defconfig
+index 48d3f64a42e..53ef067af22 100644
+--- a/configs/mt8370_evk_defconfig
++++ b/configs/mt8370_genio_510_evk_defconfig
+@@ -8,7 +8,7 @@ CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt8370-genio-510-evk"
+ CONFIG_TARGET_MT8188=y
+ CONFIG_MTK_MEM_MAP_DDR_SIZE=0x100000000
+ CONFIG_SYS_LOAD_ADDR=0x4c000000
+-CONFIG_IDENT_STRING="mt8370-evk"
++CONFIG_IDENT_STRING="mt8370-genio-510-evk"
  # CONFIG_BOARD_INIT is not set
  CONFIG_CMD_CLK=y
  CONFIG_CMD_GPT=y
