@@ -4,90 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 013A31077610
-	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 20:12:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2CE31088E4B
+	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 22:46:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D6FB83642;
-	Wed, 18 Mar 2026 21:11:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 09847836D3;
+	Wed, 18 Mar 2026 23:46:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WSyScVnK";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="IAipHNZE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D027807C0; Wed, 18 Mar 2026 19:46:06 +0100 (CET)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id C004583952; Wed, 18 Mar 2026 23:46:13 +0100 (CET)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD7DD80050
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 19:46:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BB678352B
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 23:46:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=filip.kokosinski@gmail.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-43b4f48c47cso98275f8f.0
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 11:46:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-464bc03efd8so275078b6e.2
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 15:46:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1773859563; x=1774464363; darn=lists.denx.de;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773873970; x=1774478770;
+ darn=lists.denx.de; 
  h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=w5l69KoVokzEULlBiO/NHuPrRFdLf4EAlVJiHKzc2gg=;
- b=WSyScVnKZVxdYToccstjkCwwL+Pw3z5xv4DIuJfZsILlsv/zEEsIdDK7idFjU7pJZF
- BmACdoeQWijzgyRUQ9l4pTLf+CX2KWUP7YBhuXfIfyoUdDMRTRGlzd7kRZQSRCppYMDS
- L5N9VFP/5ThRKEvNsQDXJYKH34lPM1V14a/xcGJnv4HIBgNedP2SOqmla8kmGjU33bjN
- 2Ebfxp9kOtnPBOsEt4gOSDZKr206RL+OLaNuTy6ejRH/tM9YZEhdzE8ojUNSxjLz7XPd
- jGenFQtE8gfEIwPL6NM/dUL9NstMPfg0wIrP+oDPRaDGvDwiIWVqsuyMheNlDfnpVxlW
- juxg==
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Glco6c0DU4OkSLyMsvJv8gTSlxTZSawaLH+mM1i3zRM=;
+ b=IAipHNZEtZj1Wmcqk+2ATzYRUBHYGpI2jlsBQ4gILAlGYeqdXoFrHmx2cbJbf7Td6J
+ aCffmI4t3+NhnPZ9ZjUNK9YWP4bPvIoLWF+aOy8Wp9sf57vdYB0Wsk7+MGmQ2xsixpu8
+ ZGDAOGGmymly6uQuFn2icEiCobEPYl5BsYfYebIU7gLobXUQdjiXQ/s2vxEjN0yYWFm5
+ 9mWmkUfMVh0jHUiG9soVFcWjKBhyMreV/NcEGZudQbf4Nx8tq1qPHKfRXrySkB8/OPX9
+ FIpgpJiqc00Iqe54IGFNaadhJ41n6AtgOh3sqGmPTpZnRTeuA5UJskaGq4Yiaki1arls
+ XiNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773859563; x=1774464363;
+ d=1e100.net; s=20251104; t=1773873970; x=1774478770;
  h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=w5l69KoVokzEULlBiO/NHuPrRFdLf4EAlVJiHKzc2gg=;
- b=obXaHRkAHeYA/IhFj+zWIRS3qVQlzi0U6ceNIS7KqL9+wt5U9dfqfuuLNz8W4qmv1I
- m1VrhfSnL8YEMT4fkr/rsuDVVh5ztnChU2j4w/PvImQdwXQIvcKBVxEmZt1pvva8CpiF
- C76stFld/9ro6zqepvh2RL0mtOZVa6+TUTpBiW20mzJ6JIKkiLm1yvMqyLk/PEeWqDvz
- biqYgnsq0n74CR9NxxDfZAFSVXbOQS/l2k7PPyncAgBSqhGo7JBHmp4QlpdkQKGfrwR+
- l9iB6gGUQFbguiq2gOkaI+j2AWdINJUUsK7cYn5cZn/KgZtQT6mw+linp2ltfQOIwQIV
- x+vg==
+ bh=Glco6c0DU4OkSLyMsvJv8gTSlxTZSawaLH+mM1i3zRM=;
+ b=c3+8YwUkosa4j7usJ4Ay226i+BPZ46XhERTXcAaTN80WpGy1VpFAcCm/UTkpQNC/IY
+ 05J9GpXP6+N5XBDYdnApux/KxxmzeFL2nOB6HV7SrdPFZZ0LrdzXb6Axy3xEIBp6PoLj
+ FhroYAstEQFhONVz3Ro1M9WAHLXbiTtXcNhj7RQJl94H43NGfTWn7rYGGjgGlxSG6pqi
+ JQX5swuH37VEKRKFMB+GcfEhgUoILUz9vINJVAdnwaHcOBhC3WU8iRRCBoRmcvqo5D7p
+ zUlA+50wayAE5V7QnKjR44/MY2O1zZu3d7jvdpmXwltIVGQ3mF/sgqBJ6OJTCgpwiEnr
+ oYrA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW3JMfA5Bt6tsOvPwg4baZC5t2VYU+ZPCMRjVfosMz6XXrckWhpxxBD8AoZes+rK0Kun/1S06A=@lists.denx.de
-X-Gm-Message-State: AOJu0YwIqnu2qGi3Vj1aU0Nlx/GTUz8Ah+vy1dRjmy3MEKWsKDobyC0i
- MRBG7kBAf8Fx0Vpt9q+OyrKkIsr8pnuBtQ3NGwCQQSiqrGmq6rynGk0a
-X-Gm-Gg: ATEYQzxotvmCkBk9jRw+U55tU96FrB3WJeoCuKNOMq+jx6RXIxQLCa3tp56CDLBWtYh
- l0V/xD4eSEVIdjlruq3XCkRUgaDCaS1Jvgi9I4bzon4+uyS8a8SqlaDYn3Wf7tdj2iUf6/nY2MD
- z6jhLtsL4bguRSVAd7Y1ZafHH08U7yKitKU1iJHwbrbxrjqKVqzkAs/naLcU/7qnZ9KYyufUBod
- iG3Dz1t75LeDQ5dqZmPOpKyT8ZrQ9fxNIoNLJ4GmiqOpDKDbowRaRlttzbuE72Y8beS4xmDkQM4
- xD9q3lX/w9yEah3D4SOeUx2VB9+NOKdvX6A/IezXmG9wJcSyZQVIyWV/nZZBZDOnA15j7eSoxnJ
- HJTe1Fp6GljObBtmVcC5he6wRoGFepLDB2h8m+WONi3B3WNmt0UpjlWRA1QTTF4ILO1lme7afNc
- 4PG6mWI5HrM125r3WffnMTQpwryE3u/Gk8GuUJmsV4ARz5HDwcwuaIJr6aVaYjFJCpqLehpyLoc
- 3FT
-X-Received: by 2002:a05:600c:83c5:b0:480:6bef:63a0 with SMTP id
- 5b1f17b1804b1-486f4456f1fmr73149575e9.21.1773859562541; 
- Wed, 18 Mar 2026 11:46:02 -0700 (PDT)
-Received: from [192.168.1.21] (83.25.184.223.ipv4.supernova.orange.pl.
- [83.25.184.223]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-486f8aacc73sm10448725e9.0.2026.03.18.11.46.02
+ AJvYcCUw6Bdm6JI92I7TD4G5hjruwdxcqugkzDJ2xcDgaeR3ToWDxp2RXGaKAWfNIssHnrZgrwBfMro=@lists.denx.de
+X-Gm-Message-State: AOJu0YxCNuHXIEhAP+v7WhZlJ+OMvzaiZukY1axRXg4sUYrfWJXIBozR
+ 3mkQTePS0f5zgqebajiZmHGGtczVmvnXSzp5hau2Uo+msRYaH45BbHS5gDehXgShuyE=
+X-Gm-Gg: ATEYQzwIWqxz2DmmBTybT85tSKrKWbn4RR7gm44EnYeSSMI/K0+puog/8GzSXI4GET6
+ X9Wwc5Bt6dw23UoT9JjHyalI0NYKrp0wmZ/aez3ILf/8gHrk0Yj5l75tqgi1a6mzs5TGLrFjWV7
+ WIHqJIwsXPOCpdgIDcgdrNO+WHu+U6Ye8KpVcL2b5Ab2fQzOo9ZZLxkNQce5iny1o78f0yX2/BV
+ vj7MDQGAOKrvcf2SOgkqr0D9eNwFi5KlJoHQRF5IMLYmRctsx68bzfoT1lm6qggkTQJgCTR2bvq
+ Yxa/fH0SSFezfCvK6OsFpSCcOPv5Z5KM2zqQvMEEWwCAT6keSFF7WVq6n61FuwQdudZ+VUTPgd6
+ z0vds7WGd2XmWS7CVrMcqcFw/LGoxv367dSyPJIy5adl9w5g8PD92rQaLMFg4VWeerKN4THWHIV
+ YuZ1fmyqEwt3ow6cZQ4b+e7HzCg/8rE1r72ufD7bOvDx7hpu4RwpbtELlWKvXODimS8/si38BfN
+ C9qlHDwyOCB
+X-Received: by 2002:a05:6808:4f62:b0:467:2926:1252 with SMTP id
+ 5614622812f47-467ba241d27mr3121366b6e.30.1773873969811; 
+ Wed, 18 Mar 2026 15:46:09 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:244c:fc8c:8216:1344?
+ ([2600:8803:e7e4:500:244c:fc8c:8216:1344])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-467cb465136sm1015140b6e.0.2026.03.18.15.46.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Mar 2026 11:46:02 -0700 (PDT)
-Message-ID: <af790887-96b5-4839-aeb5-6bf6d1d4cf22@gmail.com>
-Date: Wed, 18 Mar 2026 19:46:01 +0100
+ Wed, 18 Mar 2026 15:46:08 -0700 (PDT)
+Message-ID: <f2545bf9-3709-40fd-8d0b-b68f4d841d02@baylibre.com>
+Date: Wed, 18 Mar 2026 17:46:07 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rpi: Update the naming for bcm2712 SoC RevD naming
-To: Peter Robinson <pbrobinson@gmail.com>,
- Matthias Brugger <mbrugger@suse.com>, u-boot@lists.denx.de
-References: <20260313170839.2720191-1-pbrobinson@gmail.com>
+Subject: Re: [PATCH v2 2/6] arm: mediatek: add support of MT8189 SoC family
+To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Macpaul Lin <macpaul.lin@mediatek.com>, Lukasz Majewski <lukma@denx.de>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de,
+ Chris-QJ Chen <chris-qj.chen@mediatek.com>
+References: <20260310-mtk-mt8391-initial-support-v2-0-1dc862d58532@baylibre.com>
+ <20260310-mtk-mt8391-initial-support-v2-2-1dc862d58532@baylibre.com>
 Content-Language: en-US
-From: =?UTF-8?Q?Filip_Kokosi=C5=84ski?= <filip.kokosinski@gmail.com>
-In-Reply-To: <20260313170839.2720191-1-pbrobinson@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 18 Mar 2026 21:11:58 +0100
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <20260310-mtk-mt8391-initial-support-v2-2-1dc862d58532@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,90 +112,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter!
+On 3/10/26 7:16 PM, David Lechner wrote:
+> From: Chris-QJ Chen <chris-qj.chen@mediatek.com>
+> 
+> Add TARGET_MT8189 for MT8189 and similar SoCs.
+> 
+> Signed-off-by: Chris-QJ Chen <chris-qj.chen@mediatek.com>
+> Signed-off-by: Macpaul Lin <macpaul.lin@mediatek.com>
+> Reviewed-by: Macpaul Lin <macpaul.lin@mediatek.com>
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
+> ---
+>  arch/arm/mach-mediatek/Kconfig         | 11 ++++++-
+>  arch/arm/mach-mediatek/Makefile        |  1 +
+>  arch/arm/mach-mediatek/mt8189/Makefile |  3 ++
+>  arch/arm/mach-mediatek/mt8189/init.c   | 58 ++++++++++++++++++++++++++++++++++
+>  4 files changed, 72 insertions(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/mach-mediatek/Kconfig b/arch/arm/mach-mediatek/Kconfig
+> index 671a6cb1cad..b5b06f4e5b2 100644
+> --- a/arch/arm/mach-mediatek/Kconfig
+> +++ b/arch/arm/mach-mediatek/Kconfig
+> @@ -93,6 +93,15 @@ config TARGET_MT8188
+>            USB3.0 dual role, SD and MMC cards, UFS, PWM, I2C, I2S, S/PDIF, and
+>            several LPDDR3 and LPDDR4 options.
+>  
+> +config TARGET_MT8189
+> +	bool "MediaTek MT8189 SoC"
+> +	select ARM64
+> +	help
+> +	  The MediaTek MT8189 is a ARM64-based SoC with a dual-core Cortex-A78 and
+> +	  a six-core Cortex-A55. It is including UART, SPI, USB3.0 dual role,
+> +	  SD and MMC cards, UFS, PWM, I2C, I2S, S/PDIF, and several LPDDR4x
+> +	  and LPDDR5x options.
+> +
+>  config TARGET_MT8195
+>  	bool "MediaTek MT8195 SoC"
+>  	select ARM64
+> @@ -201,7 +210,7 @@ config SYS_CONFIG_NAME
+>  config MTK_BROM_HEADER_INFO
+>  	string
+>  	default "media=nor" if TARGET_MT8518 || TARGET_MT8512 || TARGET_MT7629
+> -	default "media=emmc" if TARGET_MT8516 || TARGET_MT8365 || TARGET_MT8183 || TARGET_MT8188 || TARGET_MT8195
+> +	default "media=emmc" if TARGET_MT8516 || TARGET_MT8365 || TARGET_MT8183 || TARGET_MT8188 || TARGET_MT8189 || TARGET_MT8195
+>  	default "lk=1" if TARGET_MT7623
+>  
+>  config MTK_TZ_MOVABLE
+> diff --git a/arch/arm/mach-mediatek/Makefile b/arch/arm/mach-mediatek/Makefile
+> index d1f64d61ab9..35f748a70d6 100644
+> --- a/arch/arm/mach-mediatek/Makefile
+> +++ b/arch/arm/mach-mediatek/Makefile
+> @@ -14,6 +14,7 @@ obj-$(CONFIG_TARGET_MT7987) += mt7987/
+>  obj-$(CONFIG_TARGET_MT7988) += mt7988/
+>  obj-$(CONFIG_TARGET_MT8183) += mt8183/
+>  obj-$(CONFIG_TARGET_MT8188) += mt8188/
+> +obj-$(CONFIG_TARGET_MT8189) += mt8189/
+>  obj-$(CONFIG_TARGET_MT8195) += mt8195/
+>  obj-$(CONFIG_TARGET_MT8365) += mt8365/
+>  obj-$(CONFIG_TARGET_MT8512) += mt8512/
+> diff --git a/arch/arm/mach-mediatek/mt8189/Makefile b/arch/arm/mach-mediatek/mt8189/Makefile
+> new file mode 100644
+> index 00000000000..886ab7e4eb9
+> --- /dev/null
+> +++ b/arch/arm/mach-mediatek/mt8189/Makefile
+> @@ -0,0 +1,3 @@
+> +# SPDX-License-Identifier:	GPL-2.0
+> +
+> +obj-y += init.o
+> diff --git a/arch/arm/mach-mediatek/mt8189/init.c b/arch/arm/mach-mediatek/mt8189/init.c
+> new file mode 100644
+> index 00000000000..80910810668
+> --- /dev/null
+> +++ b/arch/arm/mach-mediatek/mt8189/init.c
+> @@ -0,0 +1,58 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Copyright (C) 2026 MediaTek Inc.
+> + * Author: Chris-QJ Chen <chris-qj.chen@mediatek.com>
+> + */
+> +
+> +#include <fdtdec.h>
+> +#include <stdio.h>
+> +#include <asm/global_data.h>
+> +#include <asm/system.h>
+> +#include <linux/sizes.h>
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+> +int dram_init(void)
+> +{
+> +	int ret;
+> +
+> +	ret = fdtdec_setup_memory_banksize();
 
-I've taken a look at this, and unfortunately - with fdtfile set to
-broadcom/bcm2712-d-rpi-5-b.dtb the kernel panics on pinctrl-related symbols:
+Enabling debug messages shows that this is setting
+gd->bd->bi_dram[0].start and gd->bd->bi_dram[0].size with
+junk values.
 
-[    0.236580] SError Interrupt on CPU2, code 0x00000000be000011 -- SError
-[    0.236586] CPU: 2 UID: 0 PID: 1 Comm: swapper/0 Tainted: G   M       
-        6.12.47 #1-NixOS
-[    0.236590] Tainted: [M]=MACHINE_CHECK
-[    0.236591] Hardware name: Raspberry Pi 5 Model B Rev 1.1 (DT)
-[    0.236592] pstate: 804000c9 (Nzcv daIF +PAN -UAO -TCO -DIT -SSBS 
-BTYPE=--)
-[    0.236595] pc : bcm2712_pull_config_set+0x78/0x120
-[    0.236602] lr : bcm2712_pinconf_set+0x6c/0xe0
-[    0.236605] sp : ffffc00080033ae0
-[    0.236606] x29: ffffc00080033ae0 x28: 0000000000000000 x27: 
-0000000000000000
-[    0.236609] x26: 0000000000000000 x25: ffffd06fcffb1060 x24: 
-ffff800104c62a98
-[    0.236611] x23: 0000000000000018 x22: 0000000000000000 x21: 
-0000000000000122
-[    0.236613] x20: 0000000000000000 x19: ffff800104ced480 x18: 
-ffffffffffffffff
-[    0.236616] x17: 00000000105916e2 x16: 00000000acf0c9e7 x15: 
-ffff800101736948
-[    0.236618] x14: ffffc000800337e0 x13: ffff80010173694a x12: 
-3030306330356437
-[    0.236620] x11: 0000000000000040 x10: ffff800104d13c20 x9 : 
-ffffd06fcebb4ffc
-[    0.236622] x8 : ffff8001024024a8 x7 : 0000000000000000 x6 : 
-0000000000000000
-[    0.236624] x5 : ffff800102402480 x4 : 0000000000000001 x3 : 
-0000000000000018
-[    0.236626] x2 : 0000000000000024 x1 : 0000000000000000 x0 : 
-0000000000000000
-[    0.236628] Kernel panic - not syncing: Asynchronous SError Interrupt
+```
+setup_memory_banksize: DRAM Bank #0: start = 0xe51ff004, size = 0xe51ff004
+```
 
+I believe gd->bd has not be assigned yet at this point. And we are
+setting these values later in dram_init_banksize() anyway. So we should
+be able to drop this call.
 
-The `bcm2712d0-rpi-5-b.dts` from downstream kernel seems to change the 
-pinctrl
-node compat to "brcm,bcm2712d0-pinctrl"[1], which then in turn causes the
-pinctrl driver to use a different register layout[2]. There are also 
-other more
-minor differences between these two dtses.
+> +	if (ret)
+> +		return ret;
+> +
+> +	fdtdec_setup_mem_size_base();
 
-I haven't had the time to do more thorough digging, but I've managed to 
-get my
-setup working using the following overlay:
+Should check return value here.
 
-     /dts-v1/;
-     /plugin/;
+> +
+> +	/*
+> +	 * Limit gd->ram_top not exceeding SZ_4G.
+> +	 * Because some periphals like mmc requires DMA buffer
+> +	 * allocated below SZ_4G.
+> +	 *
+> +	 * Note: SZ_1M is for adjusting gd->relocaddr,
+> +	 *       the reserved memory for u-boot itself.
+> +	 */
+> +	if (gd->ram_base + gd->ram_size >= SZ_4G)
+> +		gd->mon_len = (gd->ram_base + gd->ram_size + SZ_1M) - SZ_4G;
 
-     / {
-         compatible = "brcm,bcm2712";
+It looks like this code is not actually acting as the comment says
+that it should.
 
-         fragment@0 {
-             target = <&pinctrl>;
-             __overlay__ {
-                   compatible = "brcm,bcm2712d0-pinctrl";
-               reg = <0x7d504100 0x20>;
-             };
-         };
+> +
+> +	return 0;
+> +}
 
-         fragment@1 {
-             target = <&pinctrl_aon>;
-             __overlay__ {
-                 compatible = "brcm,bcm2712d0-aon-pinctrl";
-               reg = <0x7d510700 0x1c>;
-             };
-         };
+The solution should be to replace it with:
 
-         fragment@2 {
-             target = <&uart10>;
-             __overlay__ {
-               interrupts = <0x0 120 0x4>; /* <GIC_SPI 120 
-IRQ_TYPE_LEVEL_HIGH> /*
-             };
-         };
-     };
+phys_size_t get_effective_memsize(void) {
+	/*
+	 * Limit gd->ram_top not exceeding SZ_4G. Because some peripherals like
+	 * mmc requires DMA buffer allocated below SZ_4G.
+	 */
+	return SZ_4G - gd->ram_base;
+}
 
-1: 
-https://github.com/raspberrypi/linux/blob/rpi-6.12.y/arch/arm64/boot/dts/broadcom/bcm2712d0-rpi-5-b.dts#L80
-2: 
-https://github.com/raspberrypi/linux/blob/rpi-6.12.y/drivers/pinctrl/bcm/pinctrl-bcm2712.c#L390
+> +
+> +int dram_init_banksize(void)
+> +{
+> +	gd->bd->bi_dram[0].start = gd->ram_base;
+> +	gd->bd->bi_dram[0].size = gd->ram_size;
+> +
+> +	return 0;
+> +}
+> +
+> +void reset_cpu(ulong addr)
+> +{
+> +	if (!CONFIG_IS_ENABLED(SYSRESET))
+> +		psci_system_reset();
+> +}
+> +
+> +int print_cpuinfo(void)
+> +{
+> +	printf("CPU:   MediaTek MT8189\n");
+> +
+> +	return 0;
+> +}
+> 
 
-Best
-FK
