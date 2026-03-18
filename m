@@ -4,90 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D512B1077609
-	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 18:59:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94C7E1077608
+	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 19:00:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A55F8063E;
+	by phobos.denx.de (Postfix) with ESMTP id 5157483A1B;
 	Wed, 18 Mar 2026 19:59:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q4YCur0P";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tZ4fTB6s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E1C8839DF; Wed, 18 Mar 2026 19:59:46 +0100 (CET)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 61924807C0; Wed, 18 Mar 2026 19:59:47 +0100 (CET)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5009807C0
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 19:59:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B6983805D7
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 19:59:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7d74aa6bcdbso123349a34.2
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 11:59:43 -0700 (PDT)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7d773a4af0aso102176a34.0
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 11:59:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773860382; x=1774465182; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773860383; x=1774465183; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gZarir8cXAt5WniLaeg1D/CBk8BUkrYO2Pf8HTsF6Jo=;
- b=Q4YCur0PemsrSoo/egzi62lQC56FHacYdPe91xYKU/Y06JqiQD710AfA4rcR/n7du0
- FQR/k8nr9Vd4Kc6x3zGcZUKjSqBKmYOHG3qXGb3K4Z0RvHn5WWPtAbPL91sQxjm6Jmp2
- oPxZId5P/UXCDBfvoCWtIwAt5hY08vqnvd4qI=
+ bh=HPT6G/1DNfZw00jrJhu5T7LB2RdJn+d+le4YOQA99uk=;
+ b=tZ4fTB6sgo7ZpNbLd5TD1LMRc9ncLOPh+PNAipu5xN+YguDqMa8bBlpCvt4cyvKc/Q
+ 86RyDei6JJu2ZYKXAOrVVErG/UMhjMwIbP+WU/cdLXC9XDzCWqndjtR6xfGT4mIMqDG3
+ +yHelvU/iRTb7nTiHEsW07+SXuy8neKsLWva0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773860382; x=1774465182;
+ d=1e100.net; s=20251104; t=1773860383; x=1774465183;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=gZarir8cXAt5WniLaeg1D/CBk8BUkrYO2Pf8HTsF6Jo=;
- b=koHZ4f4zvLXlnpDmcARDIIEJaGnVOK9tb5RyVfsuTa6ds9pm+Sdk63aEp1wjRBnsU/
- ncTYtjU3fFd/WodxZxtEY4mv+RDgTcJNOVTamrJaTHAp7ANrtrzuTYsIFmJL7fHXvlUD
- s8KrzRrFkp5e8GQ5v30KEzkB4o/zS7DH1VUmNcBSRWX7J9yS9v5FQ3cvVcCQkllz4XKq
- c8XioPm+TMYjPzPgsrOnet4H9Lh+cI8W8l909FkVsqc5GEngWRAT/bhpi74ozYivXTfb
- fhOA/TBTDUEz8EQCuzg/fM8rHgBOMxSxjDW7R4Q4T2CsXi9uPLmI3JpDvRDPPxvpIGlW
- 6A1A==
-X-Gm-Message-State: AOJu0Yyr8isq6C4jKAoT5XhmHK7ozqHFkD8boJf2nbuBGyVSm61wRRcF
- 78a5H8BITqBDlXEFaoIevCdSESsd6vzGo4eX4gHDtveWLDd/WrqASgIsZycaui+LayU=
-X-Gm-Gg: ATEYQzy7/jrGcHepWpqhILZ6aA7JMcejm6aUkczye+9T5MHG0WG0h+CMIRMfFrfHH7/
- nrMXS6e/PyxTuBFS2uABur3/z4skIvrno5mNPRYy8gCE0zmglz4IlJz4X8P0N2FuXv7Xi19X6nB
- AmjsQREzwgEPNpGZgRwaiNC/YfgKFLT82+nWxNJ3MxYWK6REbHtcE3vu7zSz0iSs4MZ3otDeIo6
- lmuOtB0M8K06CbNd2UtWyfxcpEK4KPi5njt5nxZ0BI/K9+w4EmbucfgAz66lFtEhfHTuuik/cCs
- +Jm6QHsCik4xshJMY4xrJzUqQ1A/W15e+xXGWuDxj2PGoIfpDWPJdv3qgWArezD3/Sc0fE8wFRq
- 0gQwW8WqXl2Ur/s2MLiNrHHBXnouPsCcP0G0ZRJ4SLp64ahRZJlwvWLmvw7FQ6W5YzfNYPMmlv5
- GulLe1SnTyySHvGDN8aiJvliUUpKBeZMQUjMjXaMwhnJMyP44nDzXNVo3Kds81d+JwoSwzh0iU8
- zE9Z4q4hWm5WijWgjQ69HQsHqHWdaKMv+y9qPQoUug+Lx/+lSLaVpTPsQ==
-X-Received: by 2002:a05:6830:6add:b0:7d7:d0bf:7045 with SMTP id
- 46e09a7af769-7d7d0bf716bmr1624716a34.8.1773860382621; 
- Wed, 18 Mar 2026 11:59:42 -0700 (PDT)
+ bh=HPT6G/1DNfZw00jrJhu5T7LB2RdJn+d+le4YOQA99uk=;
+ b=jATDnwDuYuguc4npDjUvVdcgQd1m+NEX+UC8B0ID0di3i2ECghOjKSIeivOBVF+cT6
+ 8zzYJChs7u3/trx7e2Dn4cgE2bDNV7SmolFJ1YYTa4fwNuMIzNKHP7+4eRNj7YcQ96cm
+ SRVqeXhsdfQ5BTRBsOyWyMcYMmufM4r4bZ2gDVcEIcZmgTJEbQ6bwETyM+MTZYCm9XqZ
+ Z5sW+quMFLiL7kfNWvbQnwXde3rKNMFdm+vPsxCBHF/aPHAQx8fdcCpEDO9QyJUpdlIO
+ x565Of/qGa2zvUXF370UynsmAQbHKGJoy/n5YJARR8ERMoAnXeQyrkjWxjda5XEURRAp
+ JqEw==
+X-Gm-Message-State: AOJu0YzzVa4f+qbJ1eGs9iuUBZ8gp1PzuaEuycQ3AVhKmfw7Z5eqktnr
+ 5+eBMWk+VmpAysiqrxxY7cmKOQQkhKiH6I4y4mH6SASB4v7ytVgx3d7ZyxbLzQvPvBIHatUjftO
+ 26wJVjQc=
+X-Gm-Gg: ATEYQzwDP77lro58vcbTIdMye6W6mDQVIKkDZVt5W6f3vYZSZhD/uYfY0IKvREyioix
+ kkNMe56fXqcYu9E8/rUqbqO7Q/HRxBFIxIOM87AvE+ZbaVcs+62qr/5AFf4XoccEIktfl3k1MQy
+ ijILAmYgfgVqIS4zgtS1aEGPH8N1l8/Jc/ZvOHeb5gMOKozpBwfqdvCmhlTp+6ukwDN0w/Ljksn
+ 8KXh9vFrk8GanOEi4Nlto1AH0YSDijoLr1Rckhm12llIf86iCYm7Tvan1zNM/VaJQ87b8Ll5QCc
+ jU3tYF1JePMTc+yuPZVQVBOZ9cn1LsZIx3Kg7UlBSCLOQZ3xpvjWX7lRfdKZWpLAaNwwDNBN+4u
+ Q4iHJb1ZykHZn34xidmmLcH0jk+Bp9gLe9SH1dF3YsmPfH9kVpd4b5eiWsYUdPq3F0ju9oGC+7g
+ LcBaLWUU8Yrru3A/h8zJrHqUtJVim6w1Jf95wvydfdTnj+8ZdjAIhPlnSI0xAuwcqI45NAN//OC
+ mYSDthQreZxmLuN02yLnULtm1OqhDIdHa+rKb77v3+cUkU=
+X-Received: by 2002:a05:6830:3590:b0:7d7:40c1:ef58 with SMTP id
+ 46e09a7af769-7d7ca53a8eamr2935314a34.3.1773860383386; 
+ Wed, 18 Mar 2026 11:59:43 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7c9985c1dsm2807715a34.11.2026.03.18.11.59.41
+ 46e09a7af769-7d7c9985c1dsm2807715a34.11.2026.03.18.11.59.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Mar 2026 11:59:42 -0700 (PDT)
+ Wed, 18 Mar 2026 11:59:43 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Quentin Schulz <foss+uboot@0leil.net>
-Cc: Greg Malysa <malysagreg@gmail.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
- Utsav Agarwal <utsav.agarwal@analog.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Simon Glass <sjg@chromium.org>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Peng Fan <peng.fan@nxp.com>, Kuan-Wei Chiu <visitorckw@gmail.com>, 
- Jerome Forissier <jerome.forissier@arm.com>, 
- Raymond Mao <raymond.mao@riscstar.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Stefan Roese <stefan.roese@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260303-pwm-led-orphan-v1-0-54d14a430cb7@cherry.de>
-References: <20260303-pwm-led-orphan-v1-0-54d14a430cb7@cherry.de>
-Subject: Re: [PATCH 0/2] update MAINTAINERS for PWM LED
-Message-Id: <177386038114.1227559.6501657983528937805.b4-ty@konsulko.com>
-Date: Wed, 18 Mar 2026 12:59:41 -0600
+To: David Lechner <dlechner@baylibre.com>
+Cc: u-boot@lists.denx.de, Julien Stephan <jstephan@baylibre.com>
+In-Reply-To: <20260317230020.903607-1-dlechner@baylibre.com>
+References: <20260317230020.903607-1-dlechner@baylibre.com>
+Subject: Re: [GIT PULL] Please pull mediatek-for-master-2026-03-17 into master
+Message-Id: <177386038275.1227559.6440073315209833571.b4-ty@konsulko.com>
+Date: Wed, 18 Mar 2026 12:59:42 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -108,21 +97,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 03 Mar 2026 12:16:19 +0100, Quentin Schulz wrote:
+On Tue, 17 Mar 2026 17:59:51 -0500, David Lechner wrote:
 
-> The entry is named LED while it only matches PWM LED binding and driver,
-> so rename it to PWM LED.
+> The following changes since commit ba7bf918dafcd093ad733b07ba490baeb20cf5da:
 > 
-> Ivan's email is bouncing, so mark the PWM LED entry as orphaned.
+>   Prepare v2026.04-rc4 (2026-03-09 13:52:04 -0600)
 > 
+> are available in the Git repository at:
 > 
+>   https://source.denx.de/u-boot/custodians/u-boot-mediatek.git tags/mediatek-for-master-2026-03-17
+> 
+> [...]
 
-Applied to u-boot/master, thanks!
+Merged into u-boot/master, thanks!
 
-[1/2] MAINTAINERS: rename LED into PWM LED
-      commit: a5533e7417b7c7ab50bd7be8ff3f8224bb70461f
-[2/2] MAINTAINERS: make PWM LED orphan
-      commit: b28b77caacc7dbc4e8e27dfdb94471313bb9396e
 -- 
 Tom
 
