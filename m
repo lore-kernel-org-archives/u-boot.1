@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4167A103E173
-	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 13:23:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC843103E173
+	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 13:24:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A84378419E;
-	Wed, 18 Mar 2026 14:23:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2B9E484221;
+	Wed, 18 Mar 2026 14:24:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N2uUF4oQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PZzTfaWh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABA5F841F7; Wed, 18 Mar 2026 14:23:03 +0100 (CET)
-Received: from mail-oa1-x41.google.com (mail-oa1-x41.google.com
- [IPv6:2001:4860:4864:20::41])
+ id 745FA8419E; Wed, 18 Mar 2026 14:24:43 +0100 (CET)
+Received: from mail-ot1-x344.google.com (mail-ot1-x344.google.com
+ [IPv6:2607:f8b0:4864:20::344])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADBF783F8A
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 14:23:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1108A8419E
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 14:24:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x41.google.com with SMTP id
- 586e51a60fabf-41576c5c01cso4272395fac.3
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 06:23:00 -0700 (PDT)
+Received: by mail-ot1-x344.google.com with SMTP id
+ 46e09a7af769-7d7851e2cc4so597856a34.3
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 06:24:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1773840178; x=1774444978; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1773840279; x=1774445079; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
  bh=lW3sMLa26U/692vMW5x57XWDXjmLDZFDPl2fsphLdj4=;
- b=N2uUF4oQqgk566PuvquC8t/JlC9XWRhNDwoZvf2o0ZOTnpjaXKlj4May+rwWpG1n+z
- uWsfX3Wjknwd8yTudEFttSyi0iU3w6RPAFYReFW0NhbscTBlWml3eNVpDopSOECIMSkx
- aexhqJb7nQV7KCPyvVH2BMoQlTrZQ/pAr2l+s=
+ b=PZzTfaWhE+Dxowyk3BGBds68oP6T2/Npr2e6qMim3LffPy2ePQIcOiF4jM01+bnrCF
+ LZdmUtPu5dN9CgNmfkLfCiK0yKZ6qoNXrZIOO5jDnHJ99t0zLSlBNY2j0EOwl/tO+0O8
+ kMihH4Ba7pe3r0bWDjh1fc+sk1KXhBT+QsBGc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773840178; x=1774444978;
+ d=1e100.net; s=20251104; t=1773840279; x=1774445079;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
  bh=lW3sMLa26U/692vMW5x57XWDXjmLDZFDPl2fsphLdj4=;
- b=Go3Pq91AHGvelt6ryrPbMR2cGZvS40ciHInM0m6X3sMtn94e1xu5/5rOkxL6auhDbX
- ZUdfOp1h1G8jA3EHRy4dulh2KPoh7GA62ZUeE+qP32uyLwO4yviMZCpSmnd3Ci6L+1nE
- zisIolDIaqGkC0PNqvD9J/JdN8enKqm8SDpIzMmmqwF8vgFppLN7FD1GlaILC4HGg0B9
- fbEkvuVBPFXkV1QpEICg5Gwy3NodwVv07yd6ecJbdkhiLyHTsyvPcvyylnCAizkUGB2m
- h9qQPCmYYL4TIJmEa5FswNIgt9u3Xn2RluhPhq9A2R9fIj3IiOKA2UFjfipYkHn5472e
- dNhQ==
-X-Gm-Message-State: AOJu0YyArm1bjVnzNblKX7RptS/f4uwHf6ldfd4USpeKpMFflr8O1k2i
- ki/NUTD/Gxofe6OUnEDaSzRaWk1/CVHU8ibfiKeC4jhO3G4nfkyQKo1AnGeDmGS4j8QNOTBe9Kl
- UeFnQlX2K
-X-Gm-Gg: ATEYQzy3B3aY/ky9dr1L8SVT+1zXCX34o5WzSEQMp3izRZJViDFEF16a3SJzlQnXPa0
- EgWRAaY7D+/CrXPxTcBVdxNAxxtOrOfwm/iuPezbCyXWVMlva+106k/DQl1l8oTUy0svRLSLOqX
- AO5nUKxHCj/yKlX/GcFzc2rkxW/OD0fov3EDzwtyCNcFkv8QZa4OT3Cx8219Sc8yErnbjFb89Wr
- A14GeBZ4VKkEvw+Q/+rKeaVUdiTttFoI1MvI4Z9dG0Eq1zk2twGe5+/i9AGYIRGF3WOHd+Q+sO6
- G2uxdE+Mp5kfagglJrNiDgtVw+9kvXyQd4kCfzwBMAFq+2kSONGRWeVNmLy/XiyXx9vzZZfTvhL
- OiHU36OXXPf0uuj6A2k6Uhb8lY7KeJFjZ4LTb0OF6LBbpRfMfob9dJYrNboAR2KT546Ym1uBOwc
- 7UOTxeqD6lKg0gJvyPdg==
-X-Received: by 2002:a05:6870:fb92:b0:409:5c31:b6be with SMTP id
- 586e51a60fabf-41bd3f53d8fmr2008972fac.19.1773840178165; 
- Wed, 18 Mar 2026 06:22:58 -0700 (PDT)
+ b=qp72R9fzLoTEu05oGuYGAiukrGkdkDmfny6HFx8SmpHnCuX9ewwenY1bVcXUSVay2q
+ PFN06A5dXaHDyW7nXVr42thCKPx4rCVJ2jSZ2eL5eoiJJXpCXiS9dteA8iWcsCZ1lUqp
+ D95QuG59fnG3j/Uc7DyZAxMLjJBAKEb86l6mQ5vsyxkGYd4kHbtdbhwrCad5z3rlDqFA
+ dPvXyhyIpWskVHZQ0JWLfwSN3kinydKaFYRf/UqVyRmTHWTkWBNUOOJoX+FA0thUm8k1
+ JszZ6aR7w8MUJNriTuDfxM/qgs+Gc8P6bKup8aAOZepJt44uF6U+c+Huu9Y/KQwz3TqD
+ arwA==
+X-Gm-Message-State: AOJu0Yw3pZ2nmSMRKAJR6poFd4Tdbm5K9JbR81cp6AVRH8Bm2Q+1pj4S
+ hNbDqW6YMbo0DFb+jFJ/Mf6WfHHxOU6TYM7EjACHr2ZiOSuNLgNPOHKEgf9rjLsuAr0nmuvpoQt
+ STjPxoHg9
+X-Gm-Gg: ATEYQzxRMmI8Y96te5aGmqdze1Aa2MuOTqnzTJJ77eRjtSkzEXM8edaRR9hhrKG9MfL
+ llvWTjCw/3lsYaHq+0u7zZRmMbr3b243SbLzr9/oNt15ICTZ/0UfP3MGuseh3Wg5RtvHl/I5K/m
+ Z56ZDSbZUxWdVgROg8xKIfTZjmtuLcQFp+zeD25eAJ2/zN3IhwyXxqUM6kXGsCnfLQHTh898Gfn
+ WTxAoeJcwg8oMQcvM0Y7z4Nvr+eqVRalkw0Lwp9jxADD2l9CFnqPp1rZ4OFuc3TjyCX5zs91YM+
+ AX6jmAgQcJXhwnLQ1zdiyNL7hESGBxcqdYtXQnjlP9Q4eRqQod7HlO/M5A1P/TjL02wXVsA6uEX
+ Cd67AEI9ux0SvNyJtQ4zmGAnYqWODL932XBKszVDgB0XWiPASgS1YLpIDDsAzuvvhBmV3GD2muF
+ AOYEsru5/nlmlu3IJjRFU1+n6rFEee
+X-Received: by 2002:a05:6830:6d12:b0:7d7:c763:c903 with SMTP id
+ 46e09a7af769-7d7ca75b2ddmr1876211a34.25.1773840279080; 
+ Wed, 18 Mar 2026 06:24:39 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41bd2c30b0fsm2565004fac.10.2026.03.18.06.22.56
+ 46e09a7af769-7d7c9b38fbbsm2038492a34.13.2026.03.18.06.24.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Mar 2026 06:22:57 -0700 (PDT)
+ Wed, 18 Mar 2026 06:24:38 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
@@ -78,8 +78,8 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
  Yannic Moog <y.moog@phytec.de>
 Subject: [PATCH 0/2] Auto-generate binman entry and bintool documentation
-Date: Wed, 18 Mar 2026 07:22:40 -0600
-Message-ID: <20260318132246.1855445-1-sjg@chromium.org>
+Date: Wed, 18 Mar 2026 07:23:55 -0600
+Message-ID: <20260318132400.1856600-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
