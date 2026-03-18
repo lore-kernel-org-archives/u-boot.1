@@ -4,84 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26C7E10775E4
-	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 17:07:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0A461077608
+	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 18:59:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B460483BC7;
-	Wed, 18 Mar 2026 18:06:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BBCDF83952;
+	Wed, 18 Mar 2026 19:59:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gAobw9X6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dPrsN+E4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19D4483DA6; Wed, 18 Mar 2026 18:06:59 +0100 (CET)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id 72E59836D3; Wed, 18 Mar 2026 19:59:44 +0100 (CET)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB25E83A41
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 18:06:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 509D6805D7
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 19:59:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-4138136f02eso115299fac.2
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 10:06:55 -0700 (PDT)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7d751ef36ccso120924a34.0
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 11:59:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773853614; x=1774458414; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=BZ0dwZTWCLUjeTGLQnNUrpEZyPgab8wV8W+8/XubfJw=;
- b=gAobw9X6lZX3pbMqg/Y7LcwNAaI6WtwIyxXzc487MdUup6MkEgn0D6SuNJyo4gija+
- eYOLzvNTAPrairuTwFWegFSj/kNyZwRnZiynCG8A1K6dut/2/hwdEN6qSZk9alndRxnR
- h0Zoo18UK8y5Q6zvc3ZL60yCq3Iq4U9jMkpTU=
+ d=konsulko.com; s=google; t=1773860381; x=1774465181; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=nkvtm6TMXGms3U5bsQAjLnlK/YuZhogak/aErsVhHYU=;
+ b=dPrsN+E4Lpc8zJqhZriZDSb/4wG9c1e9aSMyDUDkcVz8gMGoBOl/exfAeXWNSsp8PY
+ JPOUmhVDMBG9/jFVHTPhHb/yI2ZtgTMqoZMjidmOCf20pYtUi9mOkinPiCi4tnquNAIo
+ ez1FCbnIvqEfZc102Ni7uLNqm593WUTJPCoPY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773853614; x=1774458414;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=BZ0dwZTWCLUjeTGLQnNUrpEZyPgab8wV8W+8/XubfJw=;
- b=o+MklH3kpp/7WEAZzaymMCGeg0KNFGHCXtvztnLzqZZ3EYMaHJI2p/suAdOBw/WWt4
- 6pT0QnuBEUReAyZ/CImGeJ9eCTIBtBJ6irpbdyJHYGQi3ZKna2hKxg2yNIqKRJpDuWBP
- TMCRZfnCEPhIzGSFUIAuZ1CtxVwK/U44ki5L93PXf+0LfB7bsXjWrtfngTg6ilGCuzm/
- lga2b/SJs29ulMElhAudUjCdmNbxD147/iXGBFTWYFmBgwwPZ8lGQLCOm7xEcOMgJkMN
- qTpi6ExTJ4lDmxsUq43r/Nldzb3iKWX1lJqU13LixH/K/3kEIvxWDL9lPoPUF21+bs2c
- 3ZSA==
-X-Gm-Message-State: AOJu0Yz//k1V2pCEoXd1qb3aZMnOxU8wJ21mlbC9b+q0Osfnwwt+uvpf
- ddjGe/LcsczPO7ERhMYlWVmRw0jZEEWKQ7bI0uXgXV81TNKowyITwPaRTqwU8G4QduU=
-X-Gm-Gg: ATEYQzxKYABRw+QSbdi7dsA1YXtfFJFpXHeQAa9XB/oJmlpPQa/IPF8ibIMrneBtcEU
- tJUJTK2oxm4rFLpZy/9IooKrpLmDQ7xdOSiedjM4RP5LTcQibqqS3mV47dp9jHsFolUsrzAJyCm
- iDXRZXboAR4Z4Li94pKwDUklheDZHgNPZQwcG7aK2VvlE6iyzOhiTXqvF+RJJFnA6eYRdll9RTe
- S0JAAGfEr4ylV6M3BKBfXviz6TdQXAeqBGS2UEDyfQmpS0yqHgMS5+vhsfWRb7N3ScdScRs8lK5
- 5J6eTjmaIh8s2fZjVFhaNTnIsHC/sVhTqQwrh+/lz5yZOje5QPwUu1eZzXd3+q3AouLIjH+iwQK
- x+Y6OEYnwV93nsWLewZel2PsZZewLNHDIy5/q9WUK4i+x4nPSCxhQe8DIb++PGIlZRnXTCcIL13
- Ju/F+12WPUO0wiyivPssl+K1TQzknobgtMriAWw1fQUjTPrCKpjZ5ARXwW03mF8VSTRiCazSxvR
- kIY5ckTdkJZ8NgQOB6Yg8pPqxI9pol0fyVqwKdpSJ0K7V/t4rtc2KsuKNw=
-X-Received: by 2002:a05:6871:340b:b0:3e8:970e:d4f7 with SMTP id
- 586e51a60fabf-41bd3c95403mr2701704fac.11.1773853614342; 
- Wed, 18 Mar 2026 10:06:54 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
+ d=1e100.net; s=20251104; t=1773860381; x=1774465181;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=nkvtm6TMXGms3U5bsQAjLnlK/YuZhogak/aErsVhHYU=;
+ b=SRMT/r6R1kZPvuJAY9+HMMpIBnskHMXdwhYh3F9SGo6f19y8hQne8wz+vsfphusw5s
+ 3LJh/fsaTAb+fDrGwBrL9LxfvORCjzLls0ajf1RuWmQZeoZRRo7X8eEig72meFuCXQHN
+ rBZs1SIwi8K5WS/H98D7w51wLc3howSrq7ztSQLxOAeiyrK+3vsW58+2C9l7I8aklJta
+ +AObJtikT/u7K8aoTKJv1Jo42CA+1LYne6F/G6zNx6qrZw+/mTBVHU2AyS1FVxVoapGX
+ 86QJAQuzNAB5BPgXOKJiosYHMSe1waHSlzHP768Kd4rLl4S4w6kYYPeEmVzyx4kLCCvs
+ 2i/A==
+X-Gm-Message-State: AOJu0YyogO7n7l2YAxI+H1WCNlk5WxoKs/BN34rgtPUPXpZRDM0SUOoK
+ wSXot1eeF6MFg6ZA4PktJ/NYSzhqqiY2MHt9+JBbncVWi6/OmquZNS3XqNhl7qrW5+M=
+X-Gm-Gg: ATEYQzyC0B9pD1jvDMSDqMJMhgSNe1jQnkhUjBxZXwBUTkIEmAnLOxlaOVE8FZHdPd5
+ DHyQsC4MES2teQ2nxVsGN4HviTZoKvKXF99PNI9KPrBdZe28hIda1C5boUxbok/BK/vlnNlqwFO
+ x0sR5+084Qg+/SdmBu1cMuW+pDnkrsO17LTExpnZRcPphPWELIL9jZ0pdPCRvGo4Q5r1I8CCMz8
+ rAQdJLzwCyfDq3b8wvnKbPWnIPWewIMA9VxXKi83dRoi7PZ7v49odnc8f9kKRHj0CsABQ+S6qKv
+ Eri3Z8evBhhS+8Jl9X1Pk/FAf5O5QkwDDdM50jDrI5pvH8TtQJL1gWbdJ6WMED/kzEVW3VRyMRz
+ xU4Kw68OsRrH7ELpJALamrCRV0yBiK6U9EPGu8odspWSisDk0q5QhA+3IsZgGUgB2d7yseZNBSc
+ 7f1rJmL+2iR1ezUu1rfokJVRyINU3TDcHV8kii7YOMwbYnzJMYAYLrp+Bn8Aax0wUjh28RYNp3Y
+ LnEqbFP29GwJblTwMJe47t0FeuUErpJ1vwkXB2dAMns6M4=
+X-Received: by 2002:a05:6830:6581:b0:7d7:d1e1:6982 with SMTP id
+ 46e09a7af769-7d7d1e17407mr1490239a34.29.1773860380915; 
+ Wed, 18 Mar 2026 11:59:40 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41bd288d791sm3401617fac.7.2026.03.18.10.06.53
+ 46e09a7af769-7d7c9985c1dsm2807715a34.11.2026.03.18.11.59.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Mar 2026 10:06:53 -0700 (PDT)
-Date: Wed, 18 Mar 2026 11:06:51 -0600
+ Wed, 18 Mar 2026 11:59:40 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
- Paul Kocialkowski <contact@paulk.fr>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: Pull request: u-boot-sunxi/master for next
-Message-ID: <20260318170651.GM502704@bill-the-cat>
-References: <20260318115702.1637000-1-andre.przywara@arm.com>
+To: u-boot@lists.denx.de, Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
+In-Reply-To: <20260304075100.3637609-1-hayashi.kunihiko@socionext.com>
+References: <20260304075100.3637609-1-hayashi.kunihiko@socionext.com>
+Subject: Re: [PATCH] image-fit: Fix mismatched parameter type in comment
+Message-Id: <177386037998.1227559.9700813575131573397.b4-ty@konsulko.com>
+Date: Wed, 18 Mar 2026 12:59:39 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uA9gXr/A5JhsEIB0"
-Content-Disposition: inline
-In-Reply-To: <20260318115702.1637000-1-andre.przywara@arm.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,62 +94,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, 04 Mar 2026 16:51:00 +0900, Kunihiko Hayashi wrote:
 
---uA9gXr/A5JhsEIB0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> The functions use 'ulong', however, the comments said 'uint32_t'.
+> Update the comments to match the prototype.
+> 
+> 
 
-On Wed, Mar 18, 2026 at 12:57:02PM +0100, Andre Przywara wrote:
+Applied to u-boot/master, thanks!
 
-> Hi Tom,
->=20
-> please pull these sunxi changes into next:
-> For once, replacing the legacy LED API with a more lean alternative,
-> just for sunxi's SPL. IIUC, this would be one step closer to dropping
-> this deprecated subsystem altogether.
-> Also adding two DRAM cleanups for the A133 SoC. There is a third patch
-> which requires some changes, will care about that later.
->=20
-> Gitlab CI passed, and I booted that briefly on an A133 board and some
-> board with a GPIO controlled power LED.
->=20
-> Thanks,
-> Andre
->=20
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> The following changes since commit a27980786cfb3c430aa1c05da8e79180c584d2=
-21:
->=20
->   kbuild: strip sub_make_done from test-script environment (2026-03-16 10=
-:41:40 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-sunxi.git sunxi/master
->=20
-> for you to fetch changes up to 98429b7be6f45d393cc905b2cf9844eed7b09b8a:
->=20
->   sunxi: a133: dram: Align parameters terminology with Allwinner (2026-03=
--17 23:27:24 +0100)
->=20
-
-Applied to u-boot/next, thanks!
-
---=20
+[1/1] image-fit: Fix mismatched parameter type in comment
+      commit: eeca6ed86ff65cb8213d0d960a0733c7d8ddde5d
+-- 
 Tom
 
---uA9gXr/A5JhsEIB0
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabrbqAAKCRAr4qD1Cr/k
-CttlAQDRuDpdiDTIdYHt9pI0rHwU6k9GHOFAn92VpkoJEjYs4gEA7GQvdvKRK4cv
-1wpoqvaWiolUrixhiV4tasAi0J6WjgE=
-=igfv
------END PGP SIGNATURE-----
-
---uA9gXr/A5JhsEIB0--
