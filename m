@@ -4,162 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D340FF6E8C
-	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 08:37:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67D4AFCD0DA
+	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 08:59:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A47F28410A;
-	Wed, 18 Mar 2026 09:37:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id E421C84090;
+	Wed, 18 Mar 2026 09:59:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="OodhUyCG";
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="OodhUyCG";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="3ZKmgWMb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F6C18413A; Wed, 18 Mar 2026 09:37:56 +0100 (CET)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C4E5F840AB; Wed, 18 Mar 2026 09:59:18 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFEFB840F1
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 09:37:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EF5F983FDC
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 09:59:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Jerome.Forissier@arm.com
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=T87OZPYiueiX0iLVCIfMJtFcLP+BRpjihHpHifCA2HJnRdVujHKq519H0SSy0QRJjcc1Ja3aPxIKSpU+Yz4hj1xQ7AOmSWhTEoWVq7sBs9Tke+Ve0WlLUn5CyNXiFx0Gh9WtAg62VcbJB8dTT4F9mKizk3de3315LTU6j1t1RLTCcwBK+iuF2Ca0wChZLxbcsAVwsxqECRkYX1GwNzkZkhQ1/ovkXITJgyQyH7ML8f++qTAxCAODG5kcgOa7SfZIORZnni62v7YsXBtWhSm2V6ukwj2ZXcTjgBTQGvSX9De1HErryX2G7AiijK0BHpUHoVDIP22A6oPWWGS3MboUmw==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SPQ3fbh8+tQPXqb7fh9lkTNAJdIJkn2lSXZWLt5/TrM=;
- b=B+XxhCXB/Izves5I9dfKwcQeepXBM8PJBTFX/VpejdE2Mp1RQ3dpNrZHeIfs1dVCM9XtMDVMwcexznLEluAYjHQYMaU17t5ii6TQn5kXyQdXPvrpVK1OZzkgbd87rspbnztx68xUINCYp+DfkBpW5Gl8XsdBfX7kxFHNle8OFrXUTOtHaOlKAjeg+nCxaQbdEWOY+pBfFffwZa/ow/f2fHZAhmSwMDvBH20N0hL2X38fZkaGzATCc4tDVNAVw7W2JtlJcxaPRdZ5s/zEKVXOeKc1U+gxSO7FmA4c/4b4U+5lLn5Qhqmjx54tdqzVBiAKbOM+jstkigtVDfjagJrRDw==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 4.158.2.129) smtp.rcpttodomain=altera.com smtp.mailfrom=arm.com; dmarc=pass
- (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
- (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SPQ3fbh8+tQPXqb7fh9lkTNAJdIJkn2lSXZWLt5/TrM=;
- b=OodhUyCGYhcUc/zxZI3RJT6YxrNzOV0LxNbrUvPtpSQDfU1qiGh9COtjiQqSqAktsRras933P5sJiE5P4jOE3bjv5NKEqh7kcJcpL4QXqBe7nGWCKjW2odqLOvAV2SaZ4y9Z50bfFnhfHQdMml3KeKdgtHcQb01xQuVYYVG80lo=
-Received: from DB9PR05CA0002.eurprd05.prod.outlook.com (2603:10a6:10:1da::7)
- by GVXPR08MB10785.eurprd08.prod.outlook.com (2603:10a6:150:156::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.19; Wed, 18 Mar
- 2026 08:37:45 +0000
-Received: from DU2PEPF00028D01.eurprd03.prod.outlook.com
- (2603:10a6:10:1da:cafe::9f) by DB9PR05CA0002.outlook.office365.com
- (2603:10a6:10:1da::7) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9700.25 via Frontend Transport; Wed,
- 18 Mar 2026 08:37:35 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
- client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
-Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- DU2PEPF00028D01.mail.protection.outlook.com (10.167.242.185) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.18
- via Frontend Transport; Wed, 18 Mar 2026 08:37:45 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RgGIRhHDBzGDbxDdQxlFFksFG/tj+CuanzXHxfLuLuZ92ULlaLgtQa8yE8OXuVbpw+BummsR3uMx6fK+dRwDA2AR3yu4dH5KH6D4gPkrtfKfRtlDuEu6GdYZpbtDJcvJCs14X/YWNTEOEuvEzwqQ4k0spo6CMlJvYhDh3zoPSSo0cT+b/t/V2oLsS0u9mGrntVuPRBMgwfKOczucE86mg+tnjAZDLgG/UfUZTAXe6kIanTD7D8QKYR0kkfYXaI0tfOsFtQKAXWyqj7Nc/MWLArq/leWevC150AKIsqBUgdBrnslcWD/fTGhhOlWRhoXTdHA6uq1HonnICU/2u0GfVA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SPQ3fbh8+tQPXqb7fh9lkTNAJdIJkn2lSXZWLt5/TrM=;
- b=Nc+a1mFMrJ7kdOHAEok+3uCj4v111dYL0HipG53VJ2OkjGcAbi9pXf2Ux6lKkfJiSU9Pjt3eH+jSx8cC3F6Gw3IcpUMJrswZPURNbtX6ayO8GACEFCxoW8Mo9YgKeK1zGfgGcQdhJ4O7KZMAdKgGmVvCFnF92HD61uL0vtJd5t1HikvzrJtVReYCpTRrv7jnB2rUCDhZK3XvLmLozT1773L7/ofbjiP4V4ktuBrzUnJdoyJMFNu9rHCRs3YURB4Zbgaq+QZmx1QWu/Naj7V0Z7VMoCx+s2qARDC/IQ+7JP/swFeHUXaQxMdGZprV3ZTWm3enUJBpQVWpuZ3ze0oqGQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SPQ3fbh8+tQPXqb7fh9lkTNAJdIJkn2lSXZWLt5/TrM=;
- b=OodhUyCGYhcUc/zxZI3RJT6YxrNzOV0LxNbrUvPtpSQDfU1qiGh9COtjiQqSqAktsRras933P5sJiE5P4jOE3bjv5NKEqh7kcJcpL4QXqBe7nGWCKjW2odqLOvAV2SaZ4y9Z50bfFnhfHQdMml3KeKdgtHcQb01xQuVYYVG80lo=
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
- (2603:10a6:20b:740::16) by AM0PR08MB11832.eurprd08.prod.outlook.com
- (2603:10a6:20b:747::24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.27; Wed, 18 Mar
- 2026 08:36:43 +0000
-Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
- ([fe80::29d7:e9ba:ff69:a0c3]) by AM0PR08MB11733.eurprd08.prod.outlook.com
- ([fe80::29d7:e9ba:ff69:a0c3%6]) with mapi id 15.20.9700.025; Wed, 18 Mar 2026
- 08:36:43 +0000
-Message-ID: <7c2b19c5-56fa-4e7c-a5f2-4cd923312a93@arm.com>
-Date: Wed, 18 Mar 2026 09:36:42 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/2] phy: micrel: ksz90x1: Issue PHY soft reset during
- configuration
-To: Boon Khai Ng <boon.khai.ng@altera.com>,
- U-boot Openlist <u-boot@lists.denx.de>
-Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
- Nikunj Kela <nikunj.kela@sima.ai>, Tien Fong Chee
- <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>,
- Kok Kiang Hea <kok.kiang.hea@altera.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Markus Niebel <Markus.Niebel@ew.tq-group.com>,
- Max Merchel <Max.Merchel@ew.tq-group.com>,
- Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, nd@arm.com
-References: <20260312112247.30570-1-boon.khai.ng@altera.com>
- <20260312112247.30570-2-boon.khai.ng@altera.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@arm.com>
-In-Reply-To: <20260312112247.30570-2-boon.khai.ng@altera.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P123CA0505.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:272::15) To AM0PR08MB11733.eurprd08.prod.outlook.com
- (2603:10a6:20b:740::16)
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-660a293515fso12632097a12.1
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 01:59:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773824355; cv=none;
+ d=google.com; s=arc-20240605;
+ b=AYper5I87fpDSv8909XeNXPNDzoVDkI/X6gxEGZN89gfE0LCcBsvvyj8O4u5HoS5co
+ TTWQXPh9ocVYjO1kEERYo6gKRFBTALcyRuU2s3B+36MnZRP5utNgj0Z1hXbCwH+HX5Ue
+ t9Z/1mqg14xdoPlyBe8gNX7Uyiq3VpDq8U5T11HAzB/F4E0ogEDFhY8487qAQmwQ518z
+ FxHsarJOke3eZaXv9YwndypUV6xYtDbs3XFpjOtm0idNXazV192lt7Y1njV/RkMBO2Wg
+ bgCKHvble08N/pbWQfacYPuNDs78qm6y5RB7ejAwY0M688aPmVMKmmaS7c8Q4hi77pjm
+ DPwg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=y38RjA/Nw3SozUqtnp9y5s3Extt8dkrLSM+qR9/1nw8=;
+ fh=5HYY23vYipIMF7hOGNxafhnbmK/+rcN0f4EY0x2BRcw=;
+ b=ZyDWkDqnxALt+zrorSdYW/ElN2XPwAAB4WeJ+Unj5tHpSloqC0NAMPbzzt6N1slGa+
+ X/XaEvDB68YbtkAbTbBTBi2KFutfnW+Unm0Eh9ZuZXcJS9I90usKGIwU6a+lb9CCcnmI
+ j05aC6kZXpljs5q2kamo8EbF4N6/WuLKQTyc0nAbZzPhI3kHciblWZOPPjD0kDSpBYaJ
+ WVqsN47zsZ3ezZ8A2Uub4ixIuw9Y4g080qKUApLgSAhHxjtcLq/4R+uEdXnu6Huj2ZDu
+ QX0kNwlcglMuFQiZk01/TtY/jXdIz6RazeP2w8jsKodFXuBIr8pWPEzNeOP7c7oR5s0z
+ 7FKA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773824355; x=1774429155;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=y38RjA/Nw3SozUqtnp9y5s3Extt8dkrLSM+qR9/1nw8=;
+ b=3ZKmgWMbF5BQLd9E3dAt6ZKxuoMSIeau2pdD7DR0EzJYHkfu2WnuxOsKNO9zWlChrn
+ tv95YryDxmG9vQyISnueosiIQ9VSjuvEoyrYkB9Sqjat7UHgWYZEj1nmhCx0z44aKvYx
+ N+qa3lUL2dmHHEtjWrhYHaVZVV12/wFyG2yh82zPM/pwYXEsamQ2fOK2Va6WW7wJEBiL
+ jBqqzlgUCUVUedXn1wY0G/nnU80v0NbYW0rhxWjzN64xPTFHm70n9ysCazDu98fJuRfy
+ Mv+B3OH9KmmZU36XEpXDm+ancfHCoo+k5fMvU6XcDbMpOtDBu+QDrv7Y1TYwpHcGKGHR
+ 2yqg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1773824355; x=1774429155;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=y38RjA/Nw3SozUqtnp9y5s3Extt8dkrLSM+qR9/1nw8=;
+ b=mcSm1E2WYxailvh2HeL6igNmW37qHRYRMrOC4aQvlgc+1f6qIZsb/4q3BguxTQeonC
+ tvziyM3VBJ1sWHE4g6DZ5euroj0Kphlx9kjFyvI1dyvreotuJv/te9MO4QIKtkLWcT8A
+ iEfID3zlt29Kq3m23mgOa005BrsdLxmyXpGfK5cgllOw3ont24PgZP3KSG5KDralQkQ8
+ yJwZeovBeQ8CmT6QWArjA979Z4/aLBFPhPnxUV0TUVIAiHOQ6GxunTcgIbpMb429OZiA
+ pDp6r0t2LSMFQtcHJYKL+uglA4DU5P8tQlOYwIwR1TiZNU9uwVHuajBIzIf7uiqs/HN9
+ BCSw==
+X-Gm-Message-State: AOJu0Yx1XKFx9tWVl7wox/5sb41KnAti0dRf9LowtVNHTDxor8xNVUyQ
+ Na5MVyiYmNqub4OzNKFmyuRuf5olEqdma4Od/Ne6Bu5cQXjWscRl67glTwILE/aevEnTrFblilT
+ G28YZSwu//UfIAyqF0ImKtS/wa7Oo6JAiWmP+2VWZTw==
+X-Gm-Gg: ATEYQzznLn95mKvWfaBUCRKBQYXxwx63ghrLJVTOvk7PSjmJzvloqEfHZGaMhZ27cpD
+ jXo+2PS+z1idrRSOx/MHmbpLleUPL9Po/5yWOXVlrIIlIMVTKsWwLTDPowo1OPhx9cOx0BGbtui
+ xlYuGWa47F+ccPxQkCreXsynPXh0PiVDjtjNghzbO0on7aheJmmpp2byyGab5mBfXB/HLAIMbYm
+ YU7AmiwB0D9EvtqnAktExIDwB93b/8fiWFAj6breUxLALkbnFJCmUfA9qyHmXqYZ6hXB+JVV0Uj
+ 37CjFsGt+aEILFKzRNm4AR+bLZFb4QXt6OkCpEUBxY+l+gyDqfOBPoMH1tO94fb1v6lT3FfVRte
+ rYmWkQcJEJXO+rm5aSgSk/okNAw==
+X-Received: by 2002:a17:907:3fa2:b0:b8e:64e:1ed with SMTP id
+ a640c23a62f3a-b97f4a162a0mr157493166b.50.1773824355245; Wed, 18 Mar 2026
+ 01:59:15 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|AM0PR08MB11832:EE_|DU2PEPF00028D01:EE_|GVXPR08MB10785:EE_
-X-MS-Office365-Filtering-Correlation-Id: ed489228-9e04-413b-a785-08de84c9a0d9
-x-checkrecipientrouted: true
-NoDisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
- ARA:13230040|376014|7416014|366016|1800799024|22082099003|56012099003|18002099003|7053199007;
-X-Microsoft-Antispam-Message-Info-Original: TRSf4nd8sqCbbDm852GgTBa/RpJ3fGDfpWIH7rymTJ/+8083Tl561X3n7GO9SD02YjmpDPhAafmJKGVDDKAE6e1vOGfUXhaGtU/aAqfW7K+v2UvotNC9d9GG7DzMZ9oZABajarYq8C1gZ58qHmEiwQz4zWFnNBKYiDHLNiBYAW6oJE33KAFJA8XpOAEYS35Ax29Jqn/6gOiGe+PNKW/X2llo/Xw3NpFHdzttzrQIikD4uB2k55YyEc2UGNVvF2Qjbhk8JxjqamB2ho3UYiz80uu3gEy8ATBPdETWrBfvxfdFUgyMMbFA5LD+Vh7v/bOJMIV8Bv8LXARYhMIVP0TDGLEDQCVbYkAJkv8xO2sGgZp+/80gRh6BFHaWwMlTrKMLT974sSXNXeRsUGQtJf7S48NV9pgI5YIpdEydTFtciUX04pJzLpua6A5xqY64XUzm2SdperHG0BqOXvduh8MZ2m7JZVeE5d2OhyL380uNkoj7ZhswUSoZUHAV5Wu2yvv0WS/wTKNzP/krZ1m+XUh3BgbTwc9rLWrWGcEAfpCqCJzCVs82UkPyH1T7njZVmk662ATBU9WlRRyO/UH+pTUNmYkEIj7JptfyREDeJ5KEJlfmx3E0t4KmR4x3KCnHoRQB+Rw9N3sK7++9i0wniwnZ9L8+6R9ADVzFDp0tFyXcfOn9bP3ERYdHB+c8VO4mqnLCXuSsdAzYp0Dt5pZcVzEstHnzy1YLXZlL4HcBKr4wbrk=
-X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
- SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM0PR08MB11733.eurprd08.prod.outlook.com;
- PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(366016)(1800799024)(22082099003)(56012099003)(18002099003)(7053199007);
- DIR:OUT; SFP:1101; 
-X-Exchange-RoutingPolicyChecked: dMiprSDlsfXdu+FsdMeRsd0iPohNqMt69jC+fOYnzn0zCbbbpQJY2rsDunwuxI4/4jY/u7kcwTOcj3Q4FEum7rBjNJSRQAdwWAB4/SkSg1vqiFctnI2pewzP5TULvUp7IKNXghqIkwABr9a0f/R1v47430SNpE496rIx0rrbXtdikxgihKadD0RjV7OvyVM19O88B1UO+fJKQY4IbaC/ZHDAP+G9XNLrneq4Bwvcd+LxYe5vBfb7zyo+lHuJAb2gvZYEkrAQKWzMLcxut+HYu7Bo7sLzVEOitrnErI+8+dxcJSMP8Q8CzE/W0WCv7TpXanAMuvq9HtqV2hWcRMLtsQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR08MB11832
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: DU2PEPF00028D01.eurprd03.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 342ec63d-3ce0-45b0-8b43-08de84c97bd1
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|14060799003|1800799024|82310400026|36860700016|35042699022|7416014|376014|7053199007|18002099003|56012099003|22082099003;
-X-Microsoft-Antispam-Message-Info: UvbYxtylAkWUtIPxgnTWXVlEU1N0zYI/2tVeGMfSsw6NNkHd66POsLyvzMDPwMMCqd0Mh6wpAHhTP0uZpc5GqNvh+2I2OXdyUAIAjvSh9TE2opGnnw7y+7nBr8wICGN1HeXPd8NyIs05pDFoHj3L8CiEj4lFAwjI3UntxVXckNPrJNvp8ExFDeVfCdlWUn0PXGafQwy3MgV5A8lTnDjPxLJGKug6OeNChZxVkT3NJ+rdbFQlMm0ftHf8O1DRHz9m1PsH9nOSLuY/oI+EcBxEOnFJxUzwlB7yZD7Rn15R29jrSY08edwIc1/EXD71USqeSDZwkoL12qg3LKztEpp0Jfkq+qIjjrqnYrZSCX/Ic9XTTUtYNZKxjIXuOmDQZbYF6Go+f3yRy2CkIp2hSYgXPpgc4CdFEhOdW/S2NVxna0MOsqalAwjWXDGIbRshezs+begItaVXGXV1o/3XHHR6Ej7eaGpC80rGeHMvB/uY5/YI84sQEO/KW3dRAXqE5oX09JdcQ9tkK0ZkH9NeocDK4nFDEKh6DWm0pd7qZhaZKdIYfpnxYpkGyOOvhiIEc5vHt05XoQyypNXv+HkCb8BNvRZsPkQPc53PUm5J7o/C9mZeHs4ZtJiZY3/0DRwtm7ZSpg9RhQhzLxtAS7x6oTPyHvAUAE+0bmCpdPnyWC+XmKbIJOOZVbB8IDtp13MfS6yIljwLLmnLt+JJf5E8VNuKa6t0Vj92anPaQXag+kwkbE5KP1F3OvAGKa3/31Na44KhOsPOxTjIt5jZ9XcJECuIXQ==
-X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
- PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(14060799003)(1800799024)(82310400026)(36860700016)(35042699022)(7416014)(376014)(7053199007)(18002099003)(56012099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 59X3H1hn+K03m7fRn1eZcMe1OCdGfVEalTOh957SxVp7Vul80+IimGsfi90upFeR+frqw0cmi/MG1YQ606a62y5oJyr3MiANLyQf2zgSFZLs5fcHLJ7DtSpj9vYj5VHQ5PGXE4mAhTeJu23E56URnfMVH2SWguVM/0s24JfZ9zg5i66+JIVRAGYXhaEsRr6Rtw6FibwKaPwkcO2Tx8TTEw8a/UlJISCe3yd52zlXXR86GjMSrQi9wpL+omD5OkC9LDxlbtNabjAfRf/NGwWrBTxXfqLBxpFc8LZvbnvJxvk/8cC9rD38thHe59QBxAd/TAb5fAVqPnVIKwk8S2hF8q+FiVCsMjwiPympG4fislQev+O+yLgsBrZ37y+hkIwRrOhN8CYJE3IarBiwB0Kj7K2/2kKQW1Xli2fCivlnIDq5tuS1o5eC07gVmuW/fRsD
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Mar 2026 08:37:45.4112 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ed489228-9e04-413b-a785-08de84c9a0d9
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
- Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028D01.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR08MB10785
+References: <20260317-mt8195-add-ufs-support-v1-0-7d731ec438ae@baylibre.com>
+ <20260317-mt8195-add-ufs-support-v1-11-7d731ec438ae@baylibre.com>
+ <2a4f651d-bdb4-4c3b-be58-e2b882556e7f@baylibre.com>
+In-Reply-To: <2a4f651d-bdb4-4c3b-be58-e2b882556e7f@baylibre.com>
+From: Julien Stephan <jstephan@baylibre.com>
+Date: Wed, 18 Mar 2026 09:59:06 +0100
+X-Gm-Features: AaiRm51ilHKcSnuXLh1jEOv_ddk1Kb4HdC6VOsUr0uv0ggPTeNxqTaFkaB8YmGY
+Message-ID: <CAEHHSvZrTL7Lc+cuLeb1+WLzkGX6M375kD--zO7QTv7icB15GA@mail.gmail.com>
+Subject: Re: [PATCH 11/11] configs: add new defconfig for mt8395_evk_ufs
+To: David Lechner <dlechner@baylibre.com>
+Cc: u-boot@lists.denx.de, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>, Julien Masson <jmasson@baylibre.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Chris-QJ Chen <chris-qj.chen@mediatek.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -176,35 +131,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/03/2026 12:22, Boon Khai Ng wrote:
-> - Add a call to phy_reset() in ksz9031_config() to ensure the PHY is
->   properly reset during initialization.
-> - This clears the power-down bit and ensures the PHY recovers correctly
->   after Linux reboot.
-> 
-> Tested on Agilex5 hardware with KSZ90X1 PHY.
-> 
-> Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
-> ---
->  drivers/net/phy/micrel_ksz90x1.c | 3 +++
->  1 file changed, 3 insertions(+)
-> 
-> diff --git a/drivers/net/phy/micrel_ksz90x1.c b/drivers/net/phy/micrel_ksz90x1.c
-> index f357e0f1c77..1a7116f4ddd 100644
-> --- a/drivers/net/phy/micrel_ksz90x1.c
-> +++ b/drivers/net/phy/micrel_ksz90x1.c
-> @@ -407,6 +407,9 @@ static int ksz9031_config(struct phy_device *phydev)
->  	if (ret)
->  		return ret;
->  
-> +	/* soft reset */
-> +	phy_reset(phydev);
-> +
->  	ksz90x1_workaround_asymmetric_pause(phydev);
->  
->  	/* add an option to disable the gigabit feature of this PHY */
+Le mar. 17 mars 2026 =C3=A0 23:03, David Lechner <dlechner@baylibre.com> a =
+=C3=A9crit :
+>
+> On 3/17/26 9:24 AM, Julien Stephan wrote:
+> > This new defconfig is based on mt8395_evk, where we remove the mmc
+>
+> We will still want MMC enabled here for the SD card slot. The
+> target OS could be on an SD card even when booting from UFS.
+>
+fair enough
 
-Queued for net-next, thanks!
-
--- 
-Jerome
+> > configs and add all the ufs related ones.
+> >
+> > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+> > ---
+> >  board/mediatek/MAINTAINERS       |  3 ++-
+> >  configs/mt8395_evk_ufs_defconfig | 33 ++++++++++++++++++++++++++++++++=
++
+> >  2 files changed, 35 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
+> > index 4f371592059..dba620e57d5 100644
+> > --- a/board/mediatek/MAINTAINERS
+> > +++ b/board/mediatek/MAINTAINERS
+> > @@ -21,7 +21,8 @@ M:  Macpaul Lin <Macpaul.Lin@mediatek.com>
+> >  S:   Maintained
+> >  F:   configs/mt8390_evk_defconfig
+> >
+> > -MT8395 EVK
+> > +MT8395 EVK (UFS)
+>
+> I think saying "(UFS)" here is a bit confusing. It is still the same
+> board (just different dip switch setting). I would not change this line.
+>
+> >  M:   Macpaul Lin <Macpaul.Lin@mediatek.com>
+> >  S:   Maintained
+> >  F:   configs/mt8395_evk_defconfig
+> > +F:   configs/mt8395_evk_ufs_defconfig
+> > diff --git a/configs/mt8395_evk_ufs_defconfig b/configs/mt8395_evk_ufs_=
+defconfig
+> > new file mode 100644
+> > index 00000000000..9a9de689953
+> > --- /dev/null
+> > +++ b/configs/mt8395_evk_ufs_defconfig
+> > @@ -0,0 +1,33 @@
+> > +CONFIG_ARM=3Dy
+> > +CONFIG_COUNTER_FREQUENCY=3D13000000
+> > +CONFIG_POSITION_INDEPENDENT=3Dy
+> > +CONFIG_ARCH_MEDIATEK=3Dy
+> > +CONFIG_TEXT_BASE=3D0x4c000000
+> > +CONFIG_NR_DRAM_BANKS=3D1
+> > +CONFIG_DEFAULT_DEVICE_TREE=3D"mediatek/mt8395-genio-1200-evk-ufs"
+> > +CONFIG_TARGET_MT8195=3Dy
+> > +CONFIG_SYS_LOAD_ADDR=3D0x60000000
+> > +CONFIG_IDENT_STRING=3D" mt8395-evk"
+> > +# CONFIG_BOARD_INIT is not set
+> > +CONFIG_CMD_CLK=3Dy
+> > +CONFIG_CMD_GPT=3Dy
+> > +CONFIG_CMD_PART=3Dy
+> > +CONFIG_CMD_UFS=3Dy
+> > +CONFIG_OF_UPSTREAM=3Dy
+> > +CONFIG_CLK=3Dy
+> > +CONFIG_PHY=3Dy
+> > +CONFIG_PINCTRL=3Dy
+> > +CONFIG_PINCONF=3Dy
+> > +CONFIG_PINCTRL_MT8195=3Dy
+> > +CONFIG_DM_PMIC=3Dy
+> > +CONFIG_DM_PMIC_MTK_PWRAP=3Dy
+> > +CONFIG_DM_REGULATOR=3Dy
+> > +CONFIG_DM_REGULATOR_MT6359=3Dy
+> > +CONFIG_SCSI=3Dy
+> > +CONFIG_BAUDRATE=3D921600
+> > +CONFIG_DM_SERIAL=3Dy
+> > +CONFIG_MTK_SERIAL=3Dy
+> > +CONFIG_UFS=3Dy
+> > +CONFIG_UFS_MEDIATEK=3Dy
+> > +CONFIG_WDT=3Dy
+> > +CONFIG_WDT_MTK=3Dy
+> >
+>
+> Can we make a .config file and #include it here so that we aren't
+> duplicating so much of mt8395_evk_defconfig?
+>
+Sure!
