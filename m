@@ -4,108 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BAC8103E160
-	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 11:00:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1D49103E160
+	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 11:01:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 834518405F;
-	Wed, 18 Mar 2026 12:00:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 02B4D84118;
+	Wed, 18 Mar 2026 12:01:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mHdi2cqN";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TFkwN4bc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDD3D840B0; Wed, 18 Mar 2026 12:00:29 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7627784118; Wed, 18 Mar 2026 12:01:33 +0100 (CET)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06B4884083
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 12:00:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F5B78405F
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 12:01:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-b97a0f18a3aso524228566b.1
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 04:00:27 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773831626; cv=none;
- d=google.com; s=arc-20240605;
- b=auXKlwFEU2quYckXTjNO1ET/Vzym9vAFcrSm6QJuPZPlk724VYlIxJLgUBRKbYv6QN
- qBmghWGXRVD1A8JFO0k0naF+XjWo03lzCZGzHsbiKjxlKkX1Dm9UJevWBRgT4VHC2iJg
- 0TPtIjmZ6qLAIAAxzdP1CQUNBBUsjlAhDH8ZguDwmR4MF1cNYgn2Sb8/211mJ3lnjRBh
- cMm9/wg2CNLsYSKdkgrei6TmZnVrATcmngJ1p8T2973DPOgY5V8GEbtcgGh1oqIOJcm7
- OVEY5tWVB1DLnl+RzVjbkxqQ5v8v+qmv/KLu+IIGZ5cOGaKQlsC1zetpLJniySGKy1pE
- 0ZIg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=TDEIhN0z60pqbLTCWMme1xYmcsUKmkkYYFHXxY9XEiM=;
- fh=Ocm9gqAOloMldLKW+/XS3lUBvYVERM3emlAYwEVY6VA=;
- b=cmmChzhFITfa2oklG/Q2epoXnfsd8rPscH2IgLKzoEIxM2mtBe/Yxxt/stlFBcmg8k
- P2IQIf5KqT5rsCiMmeMYa4Z88XwSi0EJCYKCDx6GEE6Kjjyg+DqeTu/OOuL6FRDf+Bg/
- 5JVtlHxAnslKkUTrRh2XAn/Ii5bQnpZSd+9LVMTDKv+6srptbzW97ztXS9qBLkt+Rq4+
- 4hZhwF4xpmaE7MGgmQvk50SH0FC4wwe+XIDXWMyi1Z8RWUyddCBC4aH/tR/pHJ4YU7zN
- 2OeKTJWcSNv+nkvmxJzlboxaWlmjwbozjcE6L+lJ9V9bfH/69JfVc5eek4BF7fjLEr2s
- 5fog==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1773831626; x=1774436426; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TDEIhN0z60pqbLTCWMme1xYmcsUKmkkYYFHXxY9XEiM=;
- b=mHdi2cqNMQGnv7geEamd2NwG6SJTP0KpX17lIrzP35+Knnt0i7pon4A05I8+juIpwt
- mo0xPLb0kSKAvMda+39iqjzt2MPm7AeAZS71IrgN/FYrvxSL+t5Q6W4xxuLZCW+9zpKC
- Nvp6k7lIuHuqeXCcfalOCZdZ/5r6NeQD8hp3R+WGrOMae62vI6AR/OadAMMIOfq+hziy
- fOYewLR9ajmDX/NcU8zJcTEJ+f3WKaz52d7YS+4ALhxLKGDDTlSFMlNTXayM0UydDwhV
- 3x3dL5T2frFTs+QWdfQ3/9l1renQ1JVU3LyO4AUsKzxjpo1MHeVSBknZSCjCaKSgBvk+
- FsFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773831626; x=1774436426;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=TDEIhN0z60pqbLTCWMme1xYmcsUKmkkYYFHXxY9XEiM=;
- b=kQ93R0rwlEX8/bctj8epA34SPtAiII4MZ6hOo9Z/tjdIDohNzxxMOqS0/nlALVIRAn
- eAo8p3W1I2wCqxdEFSjo6vv224HhuoisTDxUORxQaEXKU75auj3b3y+bT/nZTBgpGdUb
- UUXxOD4zN7YQGuYzZtr9u3EPUb1H7FfUkSF5JJVsp/Y1cYIMdXHAmu6KuLB/VWgB2HIV
- j0dBr1cDoX6ALDGPYOkl8n1CDZYF2xlDhIoXrSmdF1xK8suJJB7uTk9AMWOt+er7k0Th
- Xd4vmJ0KPckXmv3ziqnh4/Nvf/3aunz70EYQx8H6HbYR3aW9A0Q2n2ncv+IdgeuwI1qs
- Wstg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVa3bG22Ty2baLQbob5ITBj+T2V1IZs+akmHTCC7OoXK4F6nN2b22Q+ViXxu72r1KSb3veBYt4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz/lg1xzMvSVrT8cqh76kuq4t+CyLmjucdggqflpnG2a5RSU3Fv
- WpYpng2WehhfJbjD+O6PwnsnzENRK1bAxierqIaPrI3IfWh7hJBXybVRC3uEjnnFOrAiU1AU3/2
- V1Wze4eFuWZrevw+VLQdS+bOpGYdQ4gZDbSqJ
-X-Gm-Gg: ATEYQzym94yNpGedFlwtqfiwvuzQzX1132h5VgiYvTvAEJuHJllnVPsFVtX5Gsdtg60
- lS878bgljnn9XXbiNUTukwBff5PDG0vBv6aPPCwPkzbeWx+nw48EeQOnMsLapzuqIk3LTtQANfw
- pb0ji5D73/gAUfgkaygSDiBTI5NO3ilNnCxOi5LRhx7fIh5m0V8OQEWYBHvzHArddvkw7VlVYse
- N38RYyprVk0DvaAiUERLtjZCiMruCq9XD6wRZyY8BeNVubLJ6fYP7OP9Dh+4ZZJj0Y9A7y7uvIK
- uWtbL8EoakhDM+X+ZtKShOlELy71tU2zKe5wj38kGlv5a8tNSWcAKPLaH0ZolJcikeB4+3xS9/7
- jXQoVb8c/2/Yt1C2K+B3Cr3c8NABL+uA7v4W9RUDDUOpFm7ZKh2k=
-X-Received: by 2002:a17:907:96a3:b0:b8f:e46f:8079 with SMTP id
- a640c23a62f3a-b97f4939261mr153612666b.22.1773831626053; Wed, 18 Mar 2026
- 04:00:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=s-tripathi1@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=oe8izJovuKHyETc5i3EZzDVlBBhDOnwpbwNn9Stb63v/DYEh2qhMhgKT+JstV0nqLXXuDrV+fcKrJp90Vt5K/C8nNn5tYFvXrV6AzxDxgwxyKVQ5sJ+pLWWRIrC8DbqQpe1IMBP3S4ogPKvY3+B+YnZOueVVGALoUPIlJQdXxj0jJJOqOvCvJn+uZYUMJKctmNDzNWuGLNj16+kE7hvHncbrj69FDN509jjImSURMC4MBERVqlqng8Es6dLmy4NOztJk8v2EumikE/2qUvzVKLI6blmodGeosr9dIARszC3ma5jNT+L1REBcHZF/CTK/jP8+YUnJlYpH4FsAgDkDCg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wrKm3Dtgh4mQSJFFbEcb5r3mWhdosLynUp4fosX+Swo=;
+ b=SQ9Jq6t3z3E6NOEYKelCeucSxicXuBdn9CRD6k8z//xiyndlLDYuPKyyuK4pMhJgevG7MVwJK7rv6QwgvTbhScf2Vr35dGUp9+dFz7lvnyKeHePDvN/t1bbWiHU/sufze/pkvLW5tn6pKZ3EB46ddTl56zIS2hovJJ9FjjI1rqvf0XpkLqz5MZt0Hh6/HrnzZHNOmugj5Gq8+Ua6+QFepTi909eUzeze8Tfbn97K4Idh73R4L7b1Lkorf7OhSiHi9e/kyaMxd7cM65Tb6OPrNCUQ9CfBKMw5H7vmc0w6oMdQR6qk6+ZIHjoQzbgZakLuj/nmTk4tX1cbS+V0cRM1kw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wrKm3Dtgh4mQSJFFbEcb5r3mWhdosLynUp4fosX+Swo=;
+ b=TFkwN4bc9JyrA2yI3lJJh3UqP38ZtA8wEnUoY82VA3FW2WvwjMGnuW9Sex3sLO1pyZ/0VZnYiHbu3WufHIB6+XlTMhEbzy++dDxy2pQhxTKeDOm/zmIjTQfDn7CWtCv1mGmRSK2Tq5C4F9SPHg1+DZ70hOdw5rrEK9UuXbkNXEQ=
+Received: from MN2PR07CA0004.namprd07.prod.outlook.com (2603:10b6:208:1a0::14)
+ by SJ0PR10MB6421.namprd10.prod.outlook.com (2603:10b6:a03:44b::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.24; Wed, 18 Mar
+ 2026 11:01:27 +0000
+Received: from MN1PEPF0000ECD6.namprd02.prod.outlook.com
+ (2603:10b6:208:1a0:cafe::71) by MN2PR07CA0004.outlook.office365.com
+ (2603:10b6:208:1a0::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9700.27 via Frontend Transport; Wed,
+ 18 Mar 2026 11:01:17 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ MN1PEPF0000ECD6.mail.protection.outlook.com (10.167.242.135) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9700.17 via Frontend Transport; Wed, 18 Mar 2026 11:01:25 +0000
+Received: from DFLE213.ent.ti.com (10.64.6.71) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 18 Mar
+ 2026 06:01:24 -0500
+Received: from DFLE212.ent.ti.com (10.64.6.70) by DFLE213.ent.ti.com
+ (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 18 Mar
+ 2026 06:01:23 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE212.ent.ti.com
+ (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 18 Mar 2026 06:01:23 -0500
+Received: from [10.24.68.200] (hp-z2-tower-g9.dhcp.ti.com [10.24.68.200])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62IB1K66228593;
+ Wed, 18 Mar 2026 06:01:20 -0500
+Message-ID: <29730316-cdce-4ddf-852b-74b839459c2b@ti.com>
+Date: Wed, 18 Mar 2026 16:31:19 +0530
 MIME-Version: 1.0
-References: <20260317012449.4162666-1-trini@konsulko.com>
- <CAC_iWj+WHh14nTdYu2BUTqvSwrtHiJBJVncArPwrBqWb6kXnTA@mail.gmail.com>
- <9F36DE37-16FF-4519-9F66-A4A79F618794@gmx.de>
- <20260317134427.GU502704@bill-the-cat>
- <CALeDE9MVgs--ABnZZ4RJDOnTLM-+imKxG6iJBGmQFHHXivLMxw@mail.gmail.com>
- <20260318014701.GJ502704@bill-the-cat>
-In-Reply-To: <20260318014701.GJ502704@bill-the-cat>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 18 Mar 2026 11:00:14 +0000
-X-Gm-Features: AaiRm519xxk1N2Mo8km2XTJGrwqvAD2xhurKFnYzNZe25CA4rOBrW1oX12ZpBqY
-Message-ID: <CALeDE9O=y6fGKd50eiW3Och7vQWKvj_DzuB9UeNLnvj0rqezmg@mail.gmail.com>
-Subject: Re: [PATCH] EFI Loader: Correct dependencies for EFI_HTTP_BOOT
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] arm: k3: Kconfig: Enable fTPM and RPMB support
 To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+CC: <vigneshr@ti.com>, <bb@ti.com>, <u-boot@lists.denx.de>, <u-kumar1@ti.com>, 
+ <praneeth@ti.com>, <kamlesh@ti.com>, <vishalm@ti.com>,
+ <k-malarvizhi@ti.com>, <afd@ti.com>, <anshuld@ti.com>
+References: <20260225112438.1035185-1-s-tripathi1@ti.com>
+ <177317553318.23044.13643896894203476698.b4-ty@konsulko.com>
+ <5e6a045c-5d5d-46e2-a7a1-1fd89ae64e3b@ti.com>
+ <20260317140755.GY502704@bill-the-cat>
+Content-Language: en-US
+From: Shiva Tripathi <s-tripathi1@ti.com>
+In-Reply-To: <20260317140755.GY502704@bill-the-cat>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECD6:EE_|SJ0PR10MB6421:EE_
+X-MS-Office365-Filtering-Correlation-Id: a42ab10b-f321-4e91-4cb6-08de84ddb29b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|36860700016|82310400026|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: I+ukJyqU5LCaZHBnTfBUzlNyDK6Owe/05gjv2WkuaLn11zukPYHK6TiS8aH3mZCzcGonJ4k+jqHvtX/imPOQfFmR7nHGmUitGV/xHQ0BRFTxRJarrf3JVSQwCJM7rpAVaLbevRTVmHdlizx5k8b6MnAsAUZoFKa8yYpZtFO29Qc3inc19YdgSFrui3JuMU07DW3wE9Iu2T6wbXGt+3evulotuWKUFBwvGN4m/wFFhxNZOJ/pGxLrtI9NnQzYfD1rnJtiw3SigEhoE0+zqMQDgDG4egeXjATpkOByW/n4gu6fMt3HaADaVpJtgVLkNyTk9PMK76y/CWcwUz6JlPSJZlH4Acdi4falhkq58o6D4Q1X7BlU8qvywIepO0Ufmz3ZxiphyqFymWlVq8EObIqM+9UBRomxc4Uq3Fba3VTD77ZYMpdiksuIVFB2ZmuWNll/l4Dl1NFQUMPJozJ4wShtF1/MyHdDswY4sZm3ro1YW2iBfntp/7XnOSnoc6Je8QtwSF54X31QW3XluziqYWfS90rYRci3Nyf1hn/iHXWUK8VsZBDtxT7Xn2AiXMYZNCdvCL0lxHZNQ0A2xchTqWSapgvJWR8+jTnLEe+sz1QUTCz211rIGkZ9h1IefWWj3oEb12maG2C6RFFD8EStK9VCGrGJnj2JSPbOm5vFgulsfX4owIhF+ZZgGggoeBA/whJA248ofoTGHBNjVI4Pij2TcKwPjACYZgT4dXLJvMiiRuU=
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(36860700016)(82310400026)(56012099003)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: HrTMq43+cBLRLMcRf78dx17yi20Rk1jPsEXKP6X5JbVXlJ8zvByLwQeMt1wobzveEXSizCZUDOCgEL7lSEaYf/v3N9ledl2wpVY1fPfdS7D8s9fAl6elnz9+N6gdslCE5xQJ7komnlUQ2VD+VV4jCrdLrsRWWDskBOYb0ziO6qWdZdhLVCNQXNVclw0XsccDNITl8rDrHlbnONPX/PWupC8H3wEF/HuO90n4FwIMB9eNu2zTwEy3xOg40Zn1h+O05gF7TD+QNulQ7dqAK3PZ7nM52Lri8ITBX7aj+F1UB0QhORRvEgolFZLyvz9HS31c4ZIOKjNrz3jJxnvAKAbjWDdDpRjZ7gXSpMgXRVPBnnTAR6SB03wnQUKW3T2i06HQnbm4FfFAbCAPaNjPJGCEv0/IAxc+2BNiYsS5pYZ6bkw36AjlvtTvpiKyjo8xnHa9
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Mar 2026 11:01:25.1157 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a42ab10b-f321-4e91-4cb6-08de84ddb29b
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000ECD6.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB6421
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,92 +137,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 18 Mar 2026 at 01:47, Tom Rini <trini@konsulko.com> wrote:
->
-> On Tue, Mar 17, 2026 at 04:08:22PM +0000, Peter Robinson wrote:
-> > On Tue, 17 Mar 2026 at 13:51, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Mar 17, 2026 at 08:42:39AM +0100, Heinrich Schuchardt wrote:
-> > > > Am 17. M=C3=A4rz 2026 08:03:47 MEZ schrieb Ilias Apalodimas <ilias.=
-apalodimas@linaro.org>:
-> > > > >Hi Tom,
-> > > > >
-> > > > >On Tue, 17 Mar 2026 at 03:24, Tom Rini <trini@konsulko.com> wrote:
-> > > > >>
-> > > > >> As exposed by "make randconfig", we have an issue with the depen=
-dencies
-> > > > >> for EFI_HTTP_BOOT. As this is implemeneted by running commands (=
-as seen
-> > > > >> by what it selects) it must depend on CMDLINE as well.
-> > > > >>
-> > > > >> Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > > >
-> > > > >In theory, you can configure UEFI with a set of prebuilt boot opti=
-ons.
-> > > > >If one of them is http(s) the device will boot even if CMDLINE is =
-not
-> > > > >selected. I am not against this patch, but we will remove the
-> > > > >possibility to build a firmware without cmdline that just boots to
-> > > > >whatever is was preconfigured
-> > > > >
-> > > > >Cheers
-> > > > >/Ilias
-> > > > >> ---
-> > > > >> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > > > >> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > > >> ---
-> > > > >>  lib/efi_loader/Kconfig | 1 +
-> > > > >>  1 file changed, 1 insertion(+)
-> > > > >>
-> > > > >> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> > > > >> index b5f81e0ff530..a9b2f813e1d5 100644
-> > > > >> --- a/lib/efi_loader/Kconfig
-> > > > >> +++ b/lib/efi_loader/Kconfig
-> > > > >> @@ -600,6 +600,7 @@ config EFI_BOOTMGR
-> > > > >>  config EFI_HTTP_BOOT
-> > > > >>         bool "EFI HTTP Boot support"
-> > > > >>         depends on NET || NET_LWIP
-> > > > >> +       depends on CMDLINE
-> > > > >>         select CMD_NET
-> > > > >>         select CMD_DHCP
-> > > > >>         select CMD_DNS
-> > > >
-> > > > Having to select commands here to get network is what needs to chan=
-ge. The network commands and EFI_HTTP_BOOT both should depend on configurat=
-ion symbols for the protocol implementations.
-> > >
-> > > Yes. And this is about fixing missing dependencies, today.
-> > >
-> > > > @Tom: Do we have a target release when to finish the move to the LW=
-IP stack?
-> > >
-> > > We do not. I'm not yet sure if all the various use cases of the legac=
-y
-> > > stack are fully supported now (I don't recall off-hand the NFS series
-> > > state right now for example).
-> >
-> > I did see NFS patches go through the list.
->
-> I saw the NFS support as well shortly after hitting send, as part of a
-> randconfig build.
->
-> > I think there's also likely some legacy usecases where non parity is
-> > likely fine too.
->
-> Perhaps the question really is, for the distribution folks, what are the
-> use cases you know of where lwIP doesn't have support yet? That's the
-> first big hurdle towards, likely, saying EFI_LOADER implies NET_LWIP
-> maybe, since I know there's cases there lwIP is better for.
 
-I don't know of any problems or missing features, I turned in on by
-default in Fedora across all devices for Fedora 43 (The 2025.07
-builds) because I wanted UEFI HTTP boot and haven't had any bug
-reports, and I suspect the features like UEFI HTTP is more useful for
-most distros than loss of other features because a lot of vendors are
-moving away from legacy tech like BOOTP/TFTP because of lack of
-security and the fact most of those technologies are not usable on the
-Edge/outside of the data centre.
 
-I know of one device which has tight SPI flash space (Jetson p3450)
-which I need to look at closer to see what I can trim, but that's a
-side point on that device.
+On 3/17/26 19:37, Tom Rini wrote:
+> On Tue, Mar 17, 2026 at 05:04:29PM +0530, Shiva Tripathi wrote:
+>>
+>>
+>> On 3/11/26 02:15, Tom Rini wrote:
+>>> On Wed, 25 Feb 2026 16:54:38 +0530, Shiva Tripathi wrote:
+>>>
+>>>> Enable firmware TPM (fTPM) support via OP-TEE for K3 platforms with
+>>>> MMC hardware. This provides TPM 2.0 functionality through
+>>>> Microsoft's fTPM Trusted Application running in OP-TEE secure world,
+>>>> using eMMC RPMB as persistent storage.
+>>>>
+>>>> fTPM support in U-Boot provides the foundation for measured boot
+>>>> and disk encryption use cases.
+>>>>
+>>>> [...]
+>>>
+>>> Applied to u-boot/next, thanks!
+>>
+>> Hi Tom,
+>>
+>> Thanks for applying the patch. Following are the steps to test these
+>> (I'll soon update the relevant docs for this):
+>>
+>> a. First step is to generate fTPM TA binary using ms-tpm-20-ref [1] and
+>> optee_ftpm [2]. I have been using yocto to generate this fTPM TA Binary,
+>> for reference, the binary I used [3].
+>>
+>> b. Second step is to use above fTPM TA and build optee-os with RPMB and
+>> early TA enabled:
+>>   make -j$(nproc) \
+>>        CROSS_COMPILE=arm-linux-gnueabihf- \
+>>        CROSS_COMPILE64=aarch64-linux-gnu- \
+>>        PLATFORM=k3 \
+>>        PLATFORM_FLAVOR=am62x \
+>>        CFG_ARM64_core=y \
+>>        CFG_RPMB_FS=y \
+>>        CFG_REE_FS=n \
+>>        CFG_EARLY_TA=y \
+>>        CFG_RPMB_ANNOUNCE_PROBE_CAP=n \
+>>
+>> EARLY_TA_PATHS=/path/to/bc50d971-d4c9-42c4-82cb-343fb7f37896.stripped.elf
+>>
+>> c. The optee binary can then be used to built final u-boot images,
+>> testing logs for reference [4]
+>>
+>> [1]: https://github.com/microsoft/ms-tpm-20-ref.git
+>> [2]: https://github.com/OP-TEE/optee_ftpm.git
+>> [3]:
+>> https://github.com/shiva-ti/ftpm-binaries/blob/main/bc50d971-d4c9-42c4-82cb-343fb7f37896.stripped.elf
+>> [4]: https://gist.github.com/shiva-ti/8ac6aded2bf0a3c9bd99627a45b50f6b
+> 
+> I will try this manually when I have a chance, thanks. Please update the
+> generic TI K3 documents to include this as well, too.
+> 
+
+Yes, I'll update the TI K3 docs.
+
+In the above steps, I missed mentioning the eMMC RPMB must have
+authenticated keys programmed for fTPM to work since it uses the RPMB
+persistence storage. "CFG_RPMB_WRITE_KEY=y" while building optee-os
+enables OP-TEE to program the eMMC RPMB with authentication key on first
+boot. This key is derived from the HUK (Hardware Unique Key).
+Programming the RPMB key is a one-time, non-reversible operation.
+
+Thanks,
+Shiva
+
