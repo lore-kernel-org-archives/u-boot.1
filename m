@@ -4,86 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BFC3103E17A
-	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 14:44:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 791D2103E18F
+	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 14:44:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F268C83F6D;
-	Wed, 18 Mar 2026 15:44:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 38D2283FC0;
+	Wed, 18 Mar 2026 15:44:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="suhC4mnZ";
+	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="MCwyLiOx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 722D684213; Wed, 18 Mar 2026 13:46:58 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 541988415D; Wed, 18 Mar 2026 13:46:59 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2646A84142
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 13:46:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CAE58419E
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 13:46:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=fairphone.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=luca.weiss@fairphone.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-b980b35534eso22615766b.1
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 05:46:56 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-b8f97c626aaso118361466b.2
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 05:46:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=fairphone.com; s=fair; t=1773838015; x=1774442815; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=iZtAzRx2igqlQKgI/5iG4feZ8AQMSBPVE+NLwwlSrvA=;
- b=suhC4mnZSuUqC+QqPqSaYc1cE5m0F0QHdYp6Kn5Nsrg5R7sf10Hu3n9Vk8jTr/6SIA
- K9yXfbxcM3X/mLYt1bXmqGGQpAc6wJQm3/fPOzaDCGygyYCB/ZSIbYor3ypjTxJq/cqs
- KSWWQapVCZp9AUAc7z9pUerwWl+ihH29nooqTIr2PCyte1jnynkvpHsp/i7T0qIT4Dhh
- tdSyc3zKLSD4rRnnurDmG8fiZRq1NsU21LrApgwAVvTIo2ur6h6vQcb63nunpIvIxuYR
- sJdK9YRP76CQMKN4cVR82rlgZWhyav8F32mWDzUOdLnOtiLmWHrlLXGuDIkciMHr9OM2
- f2Dw==
+ d=fairphone.com; s=fair; t=1773838016; x=1774442816; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=fiZzficzMAxK6ed/r9yudHR5B+pCBXaQdEmiO0CXx7U=;
+ b=MCwyLiOxN59VQGrsv7LmiFyox72dxncwSM1Ldtd+elajCmChhTVCqeU3za7GRiqZgo
+ qwPvBvI7mRfGGEWmRid33jteqpRNW2BHjllIcmUab6yBDe2oMtCCJeSRub32YcSmKyr4
+ yvY6P8b6s2uztCS7PyHypeESMHqmg4W03uzbwamoytj1fGWcEuUiLSTFPRfMtxkrA1uV
+ DzXf6Qfgts4O0ugKBaiExJRETBKtNU62pDlPaKFYmF3u4EiJdPuCZw/bNCdTgJcYdHKr
+ Vl5cfOprJAiaVBjvYl9iEXOyPPvSbMsxp1I6+cxpkZ9X3ngWhUfbprRmwXCzWjGgfKng
+ AzAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773838015; x=1774442815;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=iZtAzRx2igqlQKgI/5iG4feZ8AQMSBPVE+NLwwlSrvA=;
- b=gTZpLmiPAHH5FEW/YFDYeRgOukb851k0pDs9LmpqWPc9S3iz5ruHMLc2UmQwJ4YHQT
- 9iLR1xeP6mw7ndt2oCsNcHqgojDj/o9S/4PmnCgId9yuYl3h32BEtQYXBXFWlBpe6XvA
- tgO4GPQJNF0+iCBqZcE5weCNi+OmerVXNz8LU4Y8e/RuA03Tn1WlsLeM/IwDb22Al9+q
- HHq4N2oX7o6W+7gC0rhemxkzI1KwJ3Qz58DGpbbz5oll+x5d7t2QZ9T+Cb3XfS9wHY2s
- jysUlh3w3X8TjBroPjYzaY6Adj6fD61IJcdAciXyWG0AecW3A6EhwANr9JrpD/TTFjtx
- x/Xg==
+ d=1e100.net; s=20251104; t=1773838016; x=1774442816;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=fiZzficzMAxK6ed/r9yudHR5B+pCBXaQdEmiO0CXx7U=;
+ b=jvln734XNLaRyNU3CY7IjCBXFey5DKOZGtFCjAOur+kdJD8//dNskTWn83eEyRvP7k
+ FDvRJ93Esp2dcG+GUaEX/2QuMV6BLC4jo2qqFaIhP1d8kN6bG2082qoCgg0hkuJ0ius7
+ 7B8F0TCMkoslpWyvFotY8/ofrp8BKUWquE+Jc08386lCJu57JS6xCS7dhfP7fmtxQxFj
+ M23PR51rJO0pVb79uRwxdAhLzunC11nAAeWry/BwAJHdceMZtmf4fwfYFuY7kIadHaI0
+ VP8ML4+lFkj9/99lGqyWp7VBMYxZa7nZ1/y1EQfhNevPYhG5fkmHD1LJdx2Lz47TWzyz
+ Z86A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX24ILEmasTIO1y8574Xv8gU830Ju4pP/rZp7pbGj1B67sS3apU6+VTwBrwBhJ0vcHyVhmGQf8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzXIdD1aaeVQ7SrHb0nlixH/93KC3xNKt5mduVXDGSds9yJ17G/
- WsaZ9Q85nHNeDP/RhjTmoTTwclBvTzTwZSgX6jgGk3rq64DbsdQz0cH24n+zXr9VGYs=
-X-Gm-Gg: ATEYQzx3Uf4rAsllpWBzyb9ncaLY7MXJ5f4ku8wAYaeZQk89GbrFA89EqTJ94qn3fSK
- +oaE/QGI+9Jz+aNuqpXyF2NXxf2RL/Mnhhkgbt2CjQEmJHZBA+TTONK/IInbSa4lOUXlo3FbSBW
- an0l1hcYwrS0MiSM/Tgq/ChUcNMTXS1KQuTiu/a1zE1SPpKFDlGatwMastl1dZQ2rSzng0jZGdD
- kR2O6RWrNChlBSBn8IXKYC7ILF/PPbmVEWkRL08zCRK/Y8wyMm8HJutISrME4UTmKibF92wA3qE
- ghA7SlWDgGlnoiWZlaTr3QJ5lqw+CydEd014iq1XUOMfSNFna1IFIcx1h6gR/4Qz8d3RLYVG9dU
- O+cp3LPs6+azvfRKlWofbQQAF2ZNT4uCErun40bQAi/Uv32sAVWBjFfEBw0iymo6DpOR9fYWypW
- 2p1GA5yxXcaPykfHlgJVNbbmtaSyn06TtU3cA0N9UW4/vIMWPsq49LlFozxyLblJ8O6NSifrWXV
- 4ks0g==
-X-Received: by 2002:a17:907:3d03:b0:b94:231f:26ca with SMTP id
- a640c23a62f3a-b97d6d99d0fmr491603366b.20.1773838015438; 
- Wed, 18 Mar 2026 05:46:55 -0700 (PDT)
+ AJvYcCWXnbFLcVLShfJbj+uQwZwz9pkytItiobrkRzSdoVlMjDP5ZTJn5bBbgznq37ApAy3oVWVHrTc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxwZ+8ByxljhtVDCBCSn5hFMLpnHdnC+1ZTFt/gWLmW0jes36lK
+ 4PDbGQfAZa4kxPcFxQLNwmmyxy+2X2YcXSWWLCCQmeaMLc6JSuYQ4ULMDeR67acISfA=
+X-Gm-Gg: ATEYQzyo+60yH1CL0k7OVFufck8B1PJIsnI0zPQZ35/s5k45izxC2mF6QEMgzhSk1GQ
+ ISfeDTNuHwwXLNcpSswUyGrv2Kp4OuhnjRf/JvQwC00Hxxr2/9KbdJUSRNPj5nzURJTXOldDSMs
+ RPjjRLwftvn6ThNcvQa3vAx/vR1m/ff3ToAOQUAdfoMRFU5qYmcOlEDIKIJo5mjiVKNMgVsVc+h
+ IrhCKAV5Az2eNSsQW8tOahQDU4L1FacGu+BW3w2jNK3Ez4nCcO48hrqfWdRmEikIUvXB2FJsNUn
+ xlvDPi8CUI1Rv6DIyIGdR9zA62XY5SBIQK3FfwI3K+Hy3XrB2jy2wD8D+MuuHnJf9VcFwiBVL1B
+ XMHyEXIPuok2PMto4yUrbdRQ4ZBLrVb2ppqeS4GkmPD3f8UtLjxTUhiKQCVlEyWjb82N82EHNAU
+ I4bErgeehXmSZ1t87sz7rPWcCN2RN3FUMGzLYburcfAqd63OCqfYher9bbUCQWQhn2Nnq9Rs0uV
+ HDRjw==
+X-Received: by 2002:a17:907:1608:b0:b97:554:f100 with SMTP id
+ a640c23a62f3a-b97f49407bemr199182966b.20.1773838016391; 
+ Wed, 18 Mar 2026 05:46:56 -0700 (PDT)
 Received: from [172.16.220.101] (144-178-202-139.static.ef-service.nl.
  [144.178.202.139]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b97f142cf16sm206080366b.20.2026.03.18.05.46.54
+ a640c23a62f3a-b97f142cf16sm206080366b.20.2026.03.18.05.46.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 18 Mar 2026 05:46:55 -0700 (PDT)
 From: Luca Weiss <luca.weiss@fairphone.com>
-Subject: [PATCH v2 0/7] Qualcomm Milos SoC bringup
-Date: Wed, 18 Mar 2026 13:46:26 +0100
-Message-Id: <20260318-milos-bringup-v2-0-650b91dd75d8@fairphone.com>
+Date: Wed, 18 Mar 2026 13:46:27 +0100
+Subject: [PATCH v2 1/7] drivers: pinctrl: Add Qualcomm Milos TLMM driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WOQQ6CMBBFr0JmbUmLFZCV9zAsaJnCJNJiC0RDu
- LsF1i7fz/z3Z4WAnjBAlazgcaFAzkbILgnovrEdMmojQ8aznF+FYAO9XGDKk+3mkWFbKm7aoim
- lhtgZPRr6HL5nfbLH9xy10xmCagIy7YaBpipZdm3KJfNawn7fU5ic/x7vLOIo/FleBOMM1Z3ft
- MwLI/jDNOTH3llMox7qbdt+VHmVGt4AAAA=
-X-Change-ID: 20260311-milos-bringup-ed8b0fd7a84c
+Message-Id: <20260318-milos-bringup-v2-1-650b91dd75d8@fairphone.com>
+References: <20260318-milos-bringup-v2-0-650b91dd75d8@fairphone.com>
+In-Reply-To: <20260318-milos-bringup-v2-0-650b91dd75d8@fairphone.com>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de, 
  u-boot-qcom@groups.io
 Cc: Tom Rini <trini@konsulko.com>, 
@@ -103,11 +100,11 @@ Cc: Tom Rini <trini@konsulko.com>,
  Luca Weiss <luca.weiss@fairphone.com>, 
  Sumit Garg <sumit.garg@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1773838014; l=2097;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1773838014; l=4825;
  i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
- bh=8BfBoFY2vkPbZ4+Qz41Eis0lzA/qQYpBfGmn2M4Ft3c=;
- b=vMsDkdQvFurv4zl37cdk9hvxpmIrNqKRDC27DyJzoVhNVrWiAyP6x2uA/RGqDs63LHu/bmp9k
- CzMzwVcaDQcC5BJ/XEaEmuYHtiBr6PvQWs99K/4LkMy0RNEFp+Aa4D8
+ bh=F+2IyTcgXAMZacfzUdn+mHeq8A8Yf+yGEYWB5AfAQR0=;
+ b=O75HEmmNVvxA1Zx2L8FKn+xttWZFS+0cv5kKvPh2bw+fsbqtwesPcp4Gl2bbagyfJ2eteHbkL
+ 262qJsm9sS8A1y9uUXV5f0gOdtdBVxwqC8cpXgBIO+KztsHB/UDoqnk
 X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
  pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
 X-Mailman-Approved-At: Wed, 18 Mar 2026 15:44:14 +0100
@@ -127,58 +124,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add pinctrl, clock drivers, UFS PHY configuration, PM7550 regulators and
-GPIOs to support the Milos SoC in U-Boot.
+Add support for TLMM pin controller block (Top Level Mode Multiplexer)
+on Milos SoC, with support for special pins.
 
-The milos.dtsi is part of Linux since v7.0-rc1. UFS is still on the
-mailing lists but parts are slowly getting picked up, so hopefully v7.1
-will contain that fully.
+Correct pin configuration is required for working debug UART and eMMC/SD
+cards.
 
-Working features, as tested on Fairphone (Gen. 6):
-* Earlycon
-* UART
-* Framebuffer (with additional patches, both dts and u-boot simplefb.c)
-* Power + Volume buttons
-* USB
-* UFS
-* SD card
-
+Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 ---
-Changes in v2:
-- Drop irrelevant BCRs and GDSCs from clock driver
-- Extend rpmh-regulator and UFS commit messages with Linux tag where
-  it's imported from
-- Pick up tags
-- Link to v1: https://lore.kernel.org/r/20260311-milos-bringup-v1-0-eb905c467f10@fairphone.com
+ drivers/pinctrl/qcom/Kconfig         |   8 +++
+ drivers/pinctrl/qcom/Makefile        |   1 +
+ drivers/pinctrl/qcom/pinctrl-milos.c | 103 +++++++++++++++++++++++++++++++++++
+ 3 files changed, 112 insertions(+)
 
----
-Luca Weiss (7):
-      drivers: pinctrl: Add Qualcomm Milos TLMM driver
-      clk/qcom: Add Milos clock driver
-      phy: qcom: Add Milos to QMP UFS PHY driver
-      regulator: qcom-rpmh-regulator: add support for PM7550 regulators
-      gpio: qcom: Support GPIOs on PM7550 PMIC
-      qcom_defconfig: Enable Milos clock driver
-      board/qualcomm: add debug config fragment for Milos
+diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
+index 580308621b1..11e6763b5f3 100644
+--- a/drivers/pinctrl/qcom/Kconfig
++++ b/drivers/pinctrl/qcom/Kconfig
+@@ -54,6 +54,14 @@ config PINCTRL_QCOM_IPQ9574
+ 	  Say Y here to enable support for pinctrl on the IPQ9574 SoC,
+ 	  as well as the associated GPIO driver.
+ 
++config PINCTRL_QCOM_MILOS
++	bool "Qualcomm Milos Pinctrl"
++	default y if PINCTRL_QCOM_GENERIC
++	select PINCTRL_QCOM
++	help
++	  Say Y here to enable support for pinctrl on the Snapdragon Milos SoC,
++	  as well as the associated GPIO driver.
++
+ config PINCTRL_QCOM_QCM2290
+ 	bool "Qualcomm QCM2290 Pinctrl"
+ 	default y if PINCTRL_QCOM_GENERIC
+diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
+index b5a111605ed..4096c1aa491 100644
+--- a/drivers/pinctrl/qcom/Makefile
++++ b/drivers/pinctrl/qcom/Makefile
+@@ -8,6 +8,7 @@ obj-$(CONFIG_PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
+ obj-$(CONFIG_PINCTRL_QCOM_IPQ5424) += pinctrl-ipq5424.o
+ obj-$(CONFIG_PINCTRL_QCOM_IPQ9574) += pinctrl-ipq9574.o
+ obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
++obj-$(CONFIG_PINCTRL_QCOM_MILOS) += pinctrl-milos.o
+ obj-$(CONFIG_PINCTRL_QCOM_QCM2290) += pinctrl-qcm2290.o
+ obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
+ obj-$(CONFIG_PINCTRL_QCOM_QCS615) += pinctrl-qcs615.o
+diff --git a/drivers/pinctrl/qcom/pinctrl-milos.c b/drivers/pinctrl/qcom/pinctrl-milos.c
+new file mode 100644
+index 00000000000..4f958fbfbf3
+--- /dev/null
++++ b/drivers/pinctrl/qcom/pinctrl-milos.c
+@@ -0,0 +1,103 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Qualcomm Milos pinctrl
++ *
++ * (C) Copyright 2024 Linaro Ltd.
++ * (C) Copyright 2026 Luca Weiss <luca.weiss@fairphone.com>
++ *
++ */
++
++#include <dm.h>
++
++#include "pinctrl-qcom.h"
++
++#define MAX_PIN_NAME_LEN 32
++static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
++
++static const struct pinctrl_function msm_pinctrl_functions[] = {
++	{"qup0_se5", 1},
++	{"sdc2_clk", 1},
++	{"sdc2_cmd", 1},
++	{"sdc2_data", 1},
++	{"gpio", 0},
++};
++
++#define SDC_QDSD_PINGROUP(pg_name, ctl, pull, drv)	\
++	{					        \
++		.name = pg_name,			\
++		.ctl_reg = ctl,				\
++		.io_reg = 0,				\
++		.pull_bit = pull,			\
++		.drv_bit = drv,				\
++		.oe_bit = -1,				\
++		.in_bit = -1,				\
++		.out_bit = -1,				\
++	}
++
++#define UFS_RESET(pg_name, ctl, io)			\
++	{					        \
++		.name = pg_name,			\
++		.ctl_reg = ctl,				\
++		.io_reg = io,				\
++		.pull_bit = 3,				\
++		.drv_bit = 0,				\
++		.oe_bit = -1,				\
++		.in_bit = -1,				\
++		.out_bit = 0,				\
++	}
++
++static const struct msm_special_pin_data msm_special_pins_data[] = {
++	[0] = UFS_RESET("ufs_reset", 0xb4004, 0xb5000),
++	[1] = SDC_QDSD_PINGROUP("sdc2_clk", 0xab000, 0, 6),
++	[2] = SDC_QDSD_PINGROUP("sdc2_cmd", 0xab000, 12, 3),
++	[3] = SDC_QDSD_PINGROUP("sdc2_data", 0xab000, 9, 0),
++};
++
++static const char *milos_get_function_name(struct udevice *dev,
++					   unsigned int selector)
++{
++	return msm_pinctrl_functions[selector].name;
++}
++
++static const char *milos_get_pin_name(struct udevice *dev,
++				      unsigned int selector)
++{
++	if (selector >= 167 && selector <= 170)
++		snprintf(pin_name, MAX_PIN_NAME_LEN,
++			 msm_special_pins_data[selector - 167].name);
++	else
++		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
++
++	return pin_name;
++}
++
++static int milos_get_function_mux(__maybe_unused unsigned int pin,
++				  unsigned int selector)
++{
++	return msm_pinctrl_functions[selector].val;
++}
++
++static struct msm_pinctrl_data milos_data = {
++	.pin_data = {
++		.pin_count = 171,
++		.special_pins_start = 167,
++		.special_pins_data = msm_special_pins_data,
++	},
++	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
++	.get_function_name = milos_get_function_name,
++	.get_function_mux = milos_get_function_mux,
++	.get_pin_name = milos_get_pin_name,
++};
++
++static const struct udevice_id msm_pinctrl_ids[] = {
++	{ .compatible = "qcom,milos-tlmm", .data = (ulong)&milos_data },
++	{ /* Sentinel */ }
++};
++
++U_BOOT_DRIVER(pinctrl_milos) = {
++	.name		= "pinctrl_milos",
++	.id		= UCLASS_NOP,
++	.of_match	= msm_pinctrl_ids,
++	.ops		= &msm_pinctrl_ops,
++	.bind		= msm_pinctrl_bind,
++};
 
- board/qualcomm/debug-milos.config             |   5 +
- configs/qcom_defconfig                        |   1 +
- drivers/clk/qcom/Kconfig                      |   8 ++
- drivers/clk/qcom/Makefile                     |   1 +
- drivers/clk/qcom/clock-milos.c                | 196 ++++++++++++++++++++++++++
- drivers/gpio/qcom_spmi_gpio.c                 |   1 +
- drivers/phy/qcom/phy-qcom-qmp-ufs.c           |  88 ++++++++++++
- drivers/pinctrl/qcom/Kconfig                  |   8 ++
- drivers/pinctrl/qcom/Makefile                 |   1 +
- drivers/pinctrl/qcom/pinctrl-milos.c          | 103 ++++++++++++++
- drivers/power/regulator/qcom-rpmh-regulator.c |  33 +++++
- 11 files changed, 445 insertions(+)
----
-base-commit: 79126f765ff9fa390ced0c1f7a94b30c6c36f09a
-change-id: 20260311-milos-bringup-ed8b0fd7a84c
-
-Best regards,
 -- 
-Luca Weiss <luca.weiss@fairphone.com>
+2.53.0
 
