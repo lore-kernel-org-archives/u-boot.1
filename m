@@ -4,129 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED9EA103E18F
-	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 14:44:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BFC3103E17A
+	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 14:44:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7902383DA7;
-	Wed, 18 Mar 2026 15:44:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id F268C83F6D;
+	Wed, 18 Mar 2026 15:44:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="kQ7Ahk2S";
+	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="suhC4mnZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C977B84083; Wed, 18 Mar 2026 11:41:50 +0100 (CET)
-Received: from SA9PR02CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170130001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10c::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 722D684213; Wed, 18 Mar 2026 13:46:58 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B61C8405B
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 11:41:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2646A84142
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 13:46:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=fairphone.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=boon.khai.ng@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=O/+YiwvhioIpIkHt79C6tW6EJJp9sOfJm+drcebG4MXCmkmsmZJATjEYSTABLteBSQTn1H3ilhwcpw5CEbb1Q/PIKmdvtNajViWu1lfslyyXkOZAF+3TMJLyQnJ8t2aqJVoXjCnOARrmzfHq5X7cakWMI/hnP0GfPuiwlR/jIo3I+8FK4AHhlmuNSD83WVz01d++Sg3fnTpZrIy/wM8vOM/QZg0H3Tai63ZBPrWq5tEW1bqup9b4I5H6PicwvRYmLl3rixUONGCxk3Sxr8vRQMpyeiBfd8NHomSZfl7M5fAccMp7vSEUbS49abmwOtD9s2SbAh6Xy7EhnDehyyScmQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iddaiJ2+Xg7ka0hyl+2E/dCkyzjtylidu9pOMwYyOLc=;
- b=IUUwn1E6nTjAjYekYmeU85p+kr2AAZt/3iunM+tgD5NHwQoJV+2u8Zs524eQXg92svCIZkZUZeH9DjAP28lJks94f+hH8203qqSOxoz+zbl0lYsLtq52RxUk7MS0dXqzJ6Jlwe5xaHWHSX6niv63oZRllORfd6rEQSADQ3tPXIdgXhLyPCBWrGxUNsE2g59Zxn8EiS8oUlnNYUmUD9leL5Kp0727fflx3GWK5vTxPCon6grQaRHBw04P8DeR+J5f+dL9otUJf2/+w9Zlm0eMZ10LgZikWOfEqAFXF7z2Cn3yN/4LaejQOuH1Jw5swzx/sjGB72WaoEID6I1uzDjq+g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iddaiJ2+Xg7ka0hyl+2E/dCkyzjtylidu9pOMwYyOLc=;
- b=kQ7Ahk2SuX0k3VxQeuQr19eGGGqbRCtJiBMrnCwejegLQ437kL1DArGrhUgrXdOs4BPPowt/8NP2VofgrqbEfCt3dyf5XjRvfjV2n1yeqHVJlekWBNEVCTTKvt+R5MGZL64vGhgjvz20uw6l9psR5twAh3nhQEDk6Je/OstdK0mtqkdfh9DJYCCidZybZL/vN/XEBFlr29IJHV+blia5I4PRu5jUFI+ibll3yzVyqX8XQapU/HIhUHpeN/IavOx2s/qhWT9NfiFf6UEhqMUGBccokEa8b2Cu9opVUsnstlvbbVA1qvgIIoz83/fUrZwCi9NqYOqP2Lj+2zNn7TAVaw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from SA3PR03MB7187.namprd03.prod.outlook.com (2603:10b6:806:2f6::11)
- by MN2PR03MB5341.namprd03.prod.outlook.com (2603:10b6:208:19f::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.19; Wed, 18 Mar
- 2026 10:41:42 +0000
-Received: from SA3PR03MB7187.namprd03.prod.outlook.com
- ([fe80::7000:d55:b39c:2e53]) by SA3PR03MB7187.namprd03.prod.outlook.com
- ([fe80::7000:d55:b39c:2e53%7]) with mapi id 15.20.9723.018; Wed, 18 Mar 2026
- 10:41:43 +0000
-From: Boon Khai Ng <boon.khai.ng@altera.com>
-To: U-boot Openlist <u-boot@lists.denx.de>
-Cc: Boon Khai Ng <boon.khai.ng@altera.com>, Brian Sune <briansune@gmail.com>,
- Chin-Liang See <clsee@altera.com>, Dinh Nguyen <dinguyen@kernel.org>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>,
- Kok Kiang Hea <kok.kiang.hea@altera.com>
-Subject: [PATCH v1] configs: socfpga: Add QSPI support for Cyclone 5
-Date: Wed, 18 Mar 2026 18:40:18 +0800
-Message-ID: <20260318104018.2261-1-boon.khai.ng@altera.com>
-X-Mailer: git-send-email 2.43.7
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BYAPR02CA0044.namprd02.prod.outlook.com
- (2603:10b6:a03:54::21) To SA3PR03MB7187.namprd03.prod.outlook.com
- (2603:10b6:806:2f6::11)
+ spf=pass smtp.mailfrom=luca.weiss@fairphone.com
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b980b35534eso22615766b.1
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 05:46:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=fairphone.com; s=fair; t=1773838015; x=1774442815; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=iZtAzRx2igqlQKgI/5iG4feZ8AQMSBPVE+NLwwlSrvA=;
+ b=suhC4mnZSuUqC+QqPqSaYc1cE5m0F0QHdYp6Kn5Nsrg5R7sf10Hu3n9Vk8jTr/6SIA
+ K9yXfbxcM3X/mLYt1bXmqGGQpAc6wJQm3/fPOzaDCGygyYCB/ZSIbYor3ypjTxJq/cqs
+ KSWWQapVCZp9AUAc7z9pUerwWl+ihH29nooqTIr2PCyte1jnynkvpHsp/i7T0qIT4Dhh
+ tdSyc3zKLSD4rRnnurDmG8fiZRq1NsU21LrApgwAVvTIo2ur6h6vQcb63nunpIvIxuYR
+ sJdK9YRP76CQMKN4cVR82rlgZWhyav8F32mWDzUOdLnOtiLmWHrlLXGuDIkciMHr9OM2
+ f2Dw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1773838015; x=1774442815;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=iZtAzRx2igqlQKgI/5iG4feZ8AQMSBPVE+NLwwlSrvA=;
+ b=gTZpLmiPAHH5FEW/YFDYeRgOukb851k0pDs9LmpqWPc9S3iz5ruHMLc2UmQwJ4YHQT
+ 9iLR1xeP6mw7ndt2oCsNcHqgojDj/o9S/4PmnCgId9yuYl3h32BEtQYXBXFWlBpe6XvA
+ tgO4GPQJNF0+iCBqZcE5weCNi+OmerVXNz8LU4Y8e/RuA03Tn1WlsLeM/IwDb22Al9+q
+ HHq4N2oX7o6W+7gC0rhemxkzI1KwJ3Qz58DGpbbz5oll+x5d7t2QZ9T+Cb3XfS9wHY2s
+ jysUlh3w3X8TjBroPjYzaY6Adj6fD61IJcdAciXyWG0AecW3A6EhwANr9JrpD/TTFjtx
+ x/Xg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX24ILEmasTIO1y8574Xv8gU830Ju4pP/rZp7pbGj1B67sS3apU6+VTwBrwBhJ0vcHyVhmGQf8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzXIdD1aaeVQ7SrHb0nlixH/93KC3xNKt5mduVXDGSds9yJ17G/
+ WsaZ9Q85nHNeDP/RhjTmoTTwclBvTzTwZSgX6jgGk3rq64DbsdQz0cH24n+zXr9VGYs=
+X-Gm-Gg: ATEYQzx3Uf4rAsllpWBzyb9ncaLY7MXJ5f4ku8wAYaeZQk89GbrFA89EqTJ94qn3fSK
+ +oaE/QGI+9Jz+aNuqpXyF2NXxf2RL/Mnhhkgbt2CjQEmJHZBA+TTONK/IInbSa4lOUXlo3FbSBW
+ an0l1hcYwrS0MiSM/Tgq/ChUcNMTXS1KQuTiu/a1zE1SPpKFDlGatwMastl1dZQ2rSzng0jZGdD
+ kR2O6RWrNChlBSBn8IXKYC7ILF/PPbmVEWkRL08zCRK/Y8wyMm8HJutISrME4UTmKibF92wA3qE
+ ghA7SlWDgGlnoiWZlaTr3QJ5lqw+CydEd014iq1XUOMfSNFna1IFIcx1h6gR/4Qz8d3RLYVG9dU
+ O+cp3LPs6+azvfRKlWofbQQAF2ZNT4uCErun40bQAi/Uv32sAVWBjFfEBw0iymo6DpOR9fYWypW
+ 2p1GA5yxXcaPykfHlgJVNbbmtaSyn06TtU3cA0N9UW4/vIMWPsq49LlFozxyLblJ8O6NSifrWXV
+ 4ks0g==
+X-Received: by 2002:a17:907:3d03:b0:b94:231f:26ca with SMTP id
+ a640c23a62f3a-b97d6d99d0fmr491603366b.20.1773838015438; 
+ Wed, 18 Mar 2026 05:46:55 -0700 (PDT)
+Received: from [172.16.220.101] (144-178-202-139.static.ef-service.nl.
+ [144.178.202.139]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b97f142cf16sm206080366b.20.2026.03.18.05.46.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Mar 2026 05:46:55 -0700 (PDT)
+From: Luca Weiss <luca.weiss@fairphone.com>
+Subject: [PATCH v2 0/7] Qualcomm Milos SoC bringup
+Date: Wed, 18 Mar 2026 13:46:26 +0100
+Message-Id: <20260318-milos-bringup-v2-0-650b91dd75d8@fairphone.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA3PR03MB7187:EE_|MN2PR03MB5341:EE_
-X-MS-Office365-Filtering-Correlation-Id: d213d4e4-ef08-48b7-b382-08de84daf1bd
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|366016|55112099003|56012099003|18002099003; 
-X-Microsoft-Antispam-Message-Info: OOEK2yEx40PJ8lExQqMJuOkyLMEN6Hf5b6/njNaw8DuYV52dpMaE6qP9rXAcJtZEn1RDZjdfW8jkRvBK3ppk4OfsEys6WqxB6ZXMBZavvVmJgNq43YJJPfHPkjDaWQhACOBjQp03Qjw1L6ib5Zur/dx00r0nz0Y1/MVehBJXErjpz8nFcou9VV0BONXSreISFAEcSU1Iu0gOQrBIcGuv0dGRd25AZsnpciO8C+4V8DmJGJXukF9vf1RrZefb0MQ8BzcWmduy8EqFlE4Fa7GM8YmzL+vhgJB3FmyijcA1vrOOwkhyQUDdczCMa0cmQvYzMGpXWl1njczYaAgytjJ3ttqf/kw1PY+05OtQMB47mNJMwpz2saeUUpO9oOeXVQAaBOVdKyeTzdaBQRK8MXhqqKdE0M85ndADJEQ7iZkhQrhlyt1RlbJLbFvluzAb5Y5UGuM253wc5wrBB8AE2gV52kGGTbi3X3dOxj0dnIG+RdEiARYjKQa4XCiYzQrA25HWoojLxrtkfnqbSpyzDHEwbIoTXTinPlVFpweacv/tYFZ0F9tJfDSmOD1BXMHQ0aD7jmjuOGOGOhKlYv8P3yPRBGF6YuWuKExuVPiRBJV6MQF05a9PeE2Og3AuSe9VIILmEawnu5x424ItIODvw06EUENeN3pxcipqQQVeOmQp4lkHKjQT3hEU25zO0kQ0BgJfwf8ZHSGR73tEc2YufbJQW533R22dscwW19/EFHzabuM=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA3PR03MB7187.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(55112099003)(56012099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?I4+xiUiChS6Cdbj/FE0FVQjqMTBpXyYoPj0JY2Q5soPRmAkke5SfHC6OQWM+?=
- =?us-ascii?Q?t+MiA9KJmTHwJZko8rz05UkwMgQeiOZwJs1NE5aUit+gYh51akwd2qVj5Xc4?=
- =?us-ascii?Q?uTpvXA/nL8MHPni5Z0SdHxMBDidOdUH4ou8jfFzRrJyY3YIjxfPE6sKtbpmt?=
- =?us-ascii?Q?IA3UmtCxUhCA7fFWvFYhwNYyyTPYBVS4XmiiFhCBmKDB0UulKnCeYEDO9i83?=
- =?us-ascii?Q?/kJ6EqxGIgkRjTZm+MoKyS0Ve7ftqpNcdHb6NXOFhMriDvsUcwhv4+ggarGf?=
- =?us-ascii?Q?XoyA4u6tYzWw0j4MGBAIesTCbKXrXfpuV1CHbucSJCswtDKiFznjpliCGQI1?=
- =?us-ascii?Q?oU+Y1HY1G685dpQNNj/fuXtPTYRStfh5nqFS3eqS4jpelfvkOFCw4HAse48/?=
- =?us-ascii?Q?Z2zwdBH3AViNmIEyZ+WdVDGw8iJ4AcA6aWDstO8KriFJgaEWjpnHZz74I20y?=
- =?us-ascii?Q?0xd8i+tMq3aV0m42xzTT8E8EvZdGuKhebVSlsgSSu72OCLMPODpm2bwzQFVp?=
- =?us-ascii?Q?1V3WwRtu7n/WwRctKxaUfmYUfltCOLFVpVD4DeFmHKScvh3h/Cr9VsQk3fg+?=
- =?us-ascii?Q?2dg/ICQqv5Sm1boL/2DfkKG+Ns9sE1z2JoSCG7Gq7d3GUYMBfdOX0mYeBrZQ?=
- =?us-ascii?Q?5s5NafS62iZpeA+1oReb5l7S7jg0b44TH7WY+dsOvE2MixOHAoe5ijxSLWkf?=
- =?us-ascii?Q?72Qm0k6gNkrvl8r0tNkSuXF/W5StmFhBc5kHvf5wTFp5FjWk1cmafYf1O1wk?=
- =?us-ascii?Q?RP29eeDTxGydu5toRFNiZn9tzrNRP3gGhtSlbD2hm4tUq7P40q5Bbj0k74hL?=
- =?us-ascii?Q?Zgcbn7ED2otXYMUwTGgMihk26ARh/eXZO3Sy6/zdGj4BswH16G8B+ltfzzIJ?=
- =?us-ascii?Q?k8rmcI13/r051DBE1YECLJ34ytZTe9akBTJyrfquARFulAW4OASl1I680hs/?=
- =?us-ascii?Q?AmZhAplMz8LhzgGos+7UYzzvGmBBtDDSpKPIsG6xDIyHY90mbhTrPlaGlH8a?=
- =?us-ascii?Q?hwaLublxXZV2i7jkaBdl1A7TtupXtQkCIcY7uvAjdZJAn/CxPQTpMG3jQfKI?=
- =?us-ascii?Q?M15XYlzbcZ1WsbXidalaKxVm0lNeHRPXphiWb1VRAGJy4ifgSuUKI8C8vsPK?=
- =?us-ascii?Q?RtEsKTKQvoaZszMEKFpZD6lZGtCfskq1RJXIbBkSIx3+pe9XYNeWBRbEoW0Z?=
- =?us-ascii?Q?uYtOowfAzAJBibNAcbnWRLrcGArDiQQ5ZB94PAPUzmZcs5W5Vf5I9Jy/Lj79?=
- =?us-ascii?Q?bquuYzZJYUzb3VTNHbflunaXK0PspJQ9fA0zerQAn08x8oHuekQomSovJonM?=
- =?us-ascii?Q?9qJM748tY89ACrs3fsFLqRUEET71vrBizqRxhIP1Fzy3AE+HVR4AiDGdSNxC?=
- =?us-ascii?Q?kO1JgjupVIcLI0kbZupfuY+I6/nymZkuao/vt7gxOErBudwBxhHP0DutzPt/?=
- =?us-ascii?Q?W0otdTsfOuXhAid6X00usBNiasXYs4UbPbWw8HzO/XcnWWJNw9lDHTuH6N4G?=
- =?us-ascii?Q?1dgaZZJYjywoyv8NRI9sRmJgygvqHr434V0D87X+4cJx5QsYPwG35jFXhC9m?=
- =?us-ascii?Q?8/ZcUiogVpDpnNiXkBPE++ZTv5N5BVl2jGISJXthwbFBNCxM/eeTf58Whorw?=
- =?us-ascii?Q?Tj3fyZrKeQQjr78KGNO/0E6S+yu6ij/rnUbET7X6LkGplstlctQ3gTPBR7H8?=
- =?us-ascii?Q?CtpibhK9lxZwO/syH4WdKVUi6OPXFpew9gFurf/IjJdNuf+oyJf2xz4niUH1?=
- =?us-ascii?Q?aMBgdZ3YHA=3D=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d213d4e4-ef08-48b7-b382-08de84daf1bd
-X-MS-Exchange-CrossTenant-AuthSource: SA3PR03MB7187.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Mar 2026 10:41:43.1140 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /JayPoUwqSnwdyX0zyqDSfQOdxahkjghJB4mHY43WpX3Ic064P6xBrlqTsYWq5OFERYnjpGxQkqK62lM3RSdeg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR03MB5341
-X-Mailman-Approved-At: Wed, 18 Mar 2026 15:44:01 +0100
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WOQQ6CMBBFr0JmbUmLFZCV9zAsaJnCJNJiC0RDu
+ LsF1i7fz/z3Z4WAnjBAlazgcaFAzkbILgnovrEdMmojQ8aznF+FYAO9XGDKk+3mkWFbKm7aoim
+ lhtgZPRr6HL5nfbLH9xy10xmCagIy7YaBpipZdm3KJfNawn7fU5ic/x7vLOIo/FleBOMM1Z3ft
+ MwLI/jDNOTH3llMox7qbdt+VHmVGt4AAAA=
+X-Change-ID: 20260311-milos-bringup-ed8b0fd7a84c
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de, 
+ u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Varadarajan Narayanan <quic_varada@quicinc.com>, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
+ Danila Tikhonov <danila@jiaxyga.com>, 
+ David Wronek <david.wronek@mainlining.org>, 
+ Alexey Minnekhanov <alexeymin@postmarketos.org>, 
+ Lukasz Majewski <lukma@denx.de>, Aelin Reidel <aelin@mainlining.org>, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
+ Rui Miguel Silva <rui.silva@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Sam Day <me@samcday.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Luca Weiss <luca.weiss@fairphone.com>, 
+ Sumit Garg <sumit.garg@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1773838014; l=2097;
+ i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
+ bh=8BfBoFY2vkPbZ4+Qz41Eis0lzA/qQYpBfGmn2M4Ft3c=;
+ b=vMsDkdQvFurv4zl37cdk9hvxpmIrNqKRDC27DyJzoVhNVrWiAyP6x2uA/RGqDs63LHu/bmp9k
+ CzMzwVcaDQcC5BJ/XEaEmuYHtiBr6PvQWs99K/4LkMy0RNEFp+Aa4D8
+X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
+ pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
+X-Mailman-Approved-At: Wed, 18 Mar 2026 15:44:14 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -143,88 +127,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add QSPI boot support to boot target devices list.
-Platform can provide their own boot settings through
-OCFPGA_BOOT_SETTINGS macro if needed.
+Add pinctrl, clock drivers, UFS PHY configuration, PM7550 regulators and
+GPIOs to support the Milos SoC in U-Boot.
 
-Add SOCFPGA_BOOT_SETTINGS for Cyclone 5.
+The milos.dtsi is part of Linux since v7.0-rc1. UFS is still on the
+mailing lists but parts are slowly getting picked up, so hopefully v7.1
+will contain that fully.
 
-Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
+Working features, as tested on Fairphone (Gen. 6):
+* Earlycon
+* UART
+* Framebuffer (with additional patches, both dts and u-boot simplefb.c)
+* Power + Volume buttons
+* USB
+* UFS
+* SD card
+
+Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 ---
- include/configs/socfpga_common.h         | 18 ++++++++++++++++++
- include/configs/socfpga_cyclone5_socdk.h | 18 ++++++++++++++++++
- 2 files changed, 36 insertions(+)
+Changes in v2:
+- Drop irrelevant BCRs and GDSCs from clock driver
+- Extend rpmh-regulator and UFS commit messages with Linux tag where
+  it's imported from
+- Pick up tags
+- Link to v1: https://lore.kernel.org/r/20260311-milos-bringup-v1-0-eb905c467f10@fairphone.com
 
-diff --git a/include/configs/socfpga_common.h b/include/configs/socfpga_common.h
-index 36d6bfb3d03..5d98d662ea7 100644
---- a/include/configs/socfpga_common.h
-+++ b/include/configs/socfpga_common.h
-@@ -137,11 +137,28 @@
- #define BOOT_TARGET_DEVICES_MMC(func)
- #endif
- 
-+#ifdef CONFIG_CMD_SF
-+#define BOOT_TARGET_DEVICES_QSPI(func) func(QSPI, qspi, na)
-+#else
-+#define BOOT_TARGET_DEVICES_QSPI(func)
-+#endif
-+
-+#define BOOTENV_DEV_QSPI(devtypeu, devtypel, instance) \
-+	"bootcmd_qspi=run qspiload; run qspiboot\0"
-+
-+#define BOOTENV_DEV_NAME_QSPI(devtypeu, devtypel, instance) \
-+	"qspi "
-+
- #define BOOT_TARGET_DEVICES(func) \
- 	BOOT_TARGET_DEVICES_MMC(func) \
-+	BOOT_TARGET_DEVICES_QSPI(func) \
- 	BOOT_TARGET_DEVICES_PXE(func) \
- 	BOOT_TARGET_DEVICES_DHCP(func)
- 
-+#ifndef SOCFPGA_BOOT_SETTINGS
-+#define SOCFPGA_BOOT_SETTINGS
-+#endif
-+
- #include <config_distro_bootcmd.h>
- 
- #ifndef CFG_EXTRA_ENV_SETTINGS
-@@ -154,6 +171,7 @@
- 	"pxefile_addr_r=0x02200000\0" \
- 	"ramdisk_addr_r=0x02300000\0" \
- 	"socfpga_legacy_reset_compat=1\0" \
-+	SOCFPGA_BOOT_SETTINGS \
- 	BOOTENV
- 
- #endif
-diff --git a/include/configs/socfpga_cyclone5_socdk.h b/include/configs/socfpga_cyclone5_socdk.h
-index c23ba2325b8..3ebb7b18020 100644
---- a/include/configs/socfpga_cyclone5_socdk.h
-+++ b/include/configs/socfpga_cyclone5_socdk.h
-@@ -10,6 +10,24 @@
- /* Memory configurations */
- #define PHYS_SDRAM_1_SIZE		0x40000000	/* 1GiB on SoCDK */
- 
-+/* QSPI boot */
-+#define FDT_SIZE		__stringify(0x00010000)
-+#define KERNEL_SIZE		__stringify(0x005d0000)
-+#define QSPI_FDT_ADDR		__stringify(0x00220000)
-+#define QSPI_KERNEL_ADDR	__stringify(0x00230000)
-+
-+#define SOCFPGA_BOOT_SETTINGS \
-+	"fdt_size=" FDT_SIZE "\0" \
-+	"kernel_size=" KERNEL_SIZE "\0" \
-+	"qspi_fdt_addr=" QSPI_FDT_ADDR "\0" \
-+	"qspi_kernel_addr=" QSPI_KERNEL_ADDR "\0" \
-+	"qspiboot=setenv bootargs earlycon " \
-+		"root=/dev/mtdblock1 rw rootfstype=jffs2; " \
-+		"bootz ${kernel_addr_r} - ${fdt_addr_r}\0" \
-+	"qspiload=sf probe; " \
-+		"sf read ${kernel_addr_r} ${qspi_kernel_addr} ${kernel_size}; " \
-+		"sf read ${fdt_addr_r} ${qspi_fdt_addr} ${fdt_size}\0"
-+
- /* The rest of the configuration is shared */
- #include <configs/socfpga_common.h>
- 
+---
+Luca Weiss (7):
+      drivers: pinctrl: Add Qualcomm Milos TLMM driver
+      clk/qcom: Add Milos clock driver
+      phy: qcom: Add Milos to QMP UFS PHY driver
+      regulator: qcom-rpmh-regulator: add support for PM7550 regulators
+      gpio: qcom: Support GPIOs on PM7550 PMIC
+      qcom_defconfig: Enable Milos clock driver
+      board/qualcomm: add debug config fragment for Milos
+
+ board/qualcomm/debug-milos.config             |   5 +
+ configs/qcom_defconfig                        |   1 +
+ drivers/clk/qcom/Kconfig                      |   8 ++
+ drivers/clk/qcom/Makefile                     |   1 +
+ drivers/clk/qcom/clock-milos.c                | 196 ++++++++++++++++++++++++++
+ drivers/gpio/qcom_spmi_gpio.c                 |   1 +
+ drivers/phy/qcom/phy-qcom-qmp-ufs.c           |  88 ++++++++++++
+ drivers/pinctrl/qcom/Kconfig                  |   8 ++
+ drivers/pinctrl/qcom/Makefile                 |   1 +
+ drivers/pinctrl/qcom/pinctrl-milos.c          | 103 ++++++++++++++
+ drivers/power/regulator/qcom-rpmh-regulator.c |  33 +++++
+ 11 files changed, 445 insertions(+)
+---
+base-commit: 79126f765ff9fa390ced0c1f7a94b30c6c36f09a
+change-id: 20260311-milos-bringup-ed8b0fd7a84c
+
+Best regards,
 -- 
-2.43.7
+Luca Weiss <luca.weiss@fairphone.com>
 
