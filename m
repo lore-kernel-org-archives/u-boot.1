@@ -4,89 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B72910775E1
-	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 16:51:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51E1010775E6
+	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 16:51:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5871283E16;
-	Wed, 18 Mar 2026 17:50:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BD37683F8A;
+	Wed, 18 Mar 2026 17:50:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="KayHYGbN";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="rfjXZEn4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D5A68352B; Wed, 18 Mar 2026 17:50:55 +0100 (CET)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id C808183F6D; Wed, 18 Mar 2026 17:50:56 +0100 (CET)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C77BF8352B
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 17:50:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2716083A1B
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 17:50:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-439b94a19fdso7512f8f.0
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 09:50:51 -0700 (PDT)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-439af7d77f0so28659f8f.0
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 09:50:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773852651; x=1774457451;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773852653; x=1774457453;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=BcsoXayVDioZfQ0j+ptf/V43ESEi7dX/W0uXk2YH0B8=;
- b=KayHYGbNrqIA/YLgZJrUwAUlpEhcYvLxoNFdOcQ9WzIj9kURf9aqkFEhB5YxMCgqUf
- 8NvxzRsxsWF4SMYMdH6AG6MQ7JeMmE+c/bE1A9fmhXr43GUrpX27JeIXIC+K7dVKCFEy
- qXpqqm7I/ZyN3dnGQWv95+HNiTWd08SxUquW3SxMXjsn0alSnC4FlnEZlQIcpVexYylh
- 9gOfS1yY554Co+V7YGiTq7R7W2qWOY22tPU8fVn6ZNV9+WPnfkxIeV8NL1/hYXdR/8Sq
- Y0eSIyrPmPSwmfd157w25gZwQqVvkWFo2pWuRIcSQwyUxSQk8uK5JqLD+/l63wQfGLUy
- NCtg==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=dqyJfW4irwvcQgLHhb4f7SDswpFhY98S3wmSHMzyXco=;
+ b=rfjXZEn4ZxPcnKu0lh4WDUWhH/2RNQJr5z+XoHQvw03610ZEWkg9SQ7ZWhlxTHCUWN
+ Adfzup7/AUAurIEgrSIrIk+N1GtxiinDxaEJ90YsSTu0bm5lAy6KkRFUneTM5MseiEBK
+ BGsd9SQaEFUqwccn4I06tw1eBz7em8ph7TkrXb93+w2hmtV7VP9iGqAeZDdHzgVGNX3D
+ gTezr2J0zjOlP6mS1wRI0r2P8yH7kj6GnIJ9ioi2XisvA4V956yKnqt7e/y6lZEum+R2
+ 77f0lHW0+XDQYyxyc8ja2UpG9cOhQei3CCi3xtZG8IRhsvNForQLt+KRBlt+5iSZV4Vf
+ siaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773852651; x=1774457451;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BcsoXayVDioZfQ0j+ptf/V43ESEi7dX/W0uXk2YH0B8=;
- b=bBIT57rV5WSQePEkC9ALqgokOKTeTUKe/H2v8yx94pQjDcbkiEPcor7DLOn6kl2AAV
- +RDvSg2GmSgD4fHyN3OMonj8g4MkK9jmBwGtGsN/pCXoPpg+xI65FME9LZaaH3eGQsxo
- XiaJCzmbs0ifQEnTGOp4BoUZ5O1JfCZXu1VVNfmRkP2f1/tzszNn33m84/8FouyP3og+
- 0wE3fvKjLtD3GYE0+qhQ72em/Ss9tXAxo+UEBIPaZ5Cs8OqkDS4bYoIB0dWVHQKm+75a
- 44MgM09b2CtaGa+YEjBW//z8r93Rh1eUB4bVaKDZrDSM43m7FwRIhmREwXRbMIoRUzUq
- Bs9g==
-X-Gm-Message-State: AOJu0YxYOFXs76FlG3ibZxyljWZu9mbW/ZsLewvA6fm4MB0hokzBoVf+
- 1lq4ODGvpz4h2lx022LVox+SyS/Gboqt7yIclsAuT3N4oPVdEnb5QBfMj2xifc3no+g=
-X-Gm-Gg: ATEYQzxigpdXc810YK5CBTxP/617ztoQUZGB0iFUG1EnHc+/NFrYE7vRUrGR0SdXupD
- QeUUlqnjECHaOYBTr44RjPnip/Xtbi6Dv2cMvPvMu6KwefHLsEoJWsJtIu7fxYSGU8S37PJ8VMr
- ZHKpHqMlP785aCa3filo8U1901mVKfU+MN2v9gE3homlLsUtttyhwLKOL2Alo39qYAcSjOjSgsT
- nEtubjnlIjfyOv5fTcVgNuZmpnMwbAD3nROKh2BpZnwaOlJMbjdgEFGGYuOmW+qLonkukIkSNx6
- NomfZv+CbKnwNSVVGmS1IxPAd/ON7/KTK3N+jwNxZb2uobOT0Z7teVf0cj7WUU7IDMqseWxpILl
- zRX7gNOlSZph1TkoOfW43eB/L5GOyW5T9fop3FxI3AniooHpqw+KHTL2rfKPairvy1ToJdMdFLu
- vDk02amtb7Xr5mgfT1ORsMxUO1lIrbIn4Suk+lYAut9pmM6T14sFMkBiPe1S+xoy2jFe7ysKxZP
- 2A730enCdGhqRjKtmSuiQw5KKmHyk0R9vXjURvn8fsjVyY9oPSxgSDUnoQ/byd+MR58sbLCYGC7
- JMVtBSk=
-X-Received: by 2002:a5d:64c3:0:b0:43b:47bc:c147 with SMTP id
- ffacd0b85a97d-43b527cc553mr7235366f8f.45.1773852651259; 
- Wed, 18 Mar 2026 09:50:51 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1773852653; x=1774457453;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=dqyJfW4irwvcQgLHhb4f7SDswpFhY98S3wmSHMzyXco=;
+ b=p3RbayZoteyHyZ+QJdqvwF+9hONact3nlh/24WbBJoaC60mwj2XQm6f11MUS8bn//A
+ Ff7WvJfeEVRFP3/Jeq3eTRqMaBFdWbBDCFpZp1w07Jc5FhBkDO2dcthfh/v8FKA/+eq8
+ 5pOnCFejcPppKr5NWAc0vUxyIqRbY3GBeh754WBQFMDrPYkrxfJH45lci5cjophXrTUb
+ 0h74aCQPpPMln9tODXJphRKhoaTlc0UWZPSFSnr+sTjU8brXa7cGmvMWN5t2Mc8JQJYn
+ mK0rtL14iCgPss8rZnYV0LYazEDxRxvHtFdXpeg5UXY2zFN7lKunIHjTIZ4V0QqPpH7f
+ ZCTA==
+X-Gm-Message-State: AOJu0Yw+bfPij2tUjwGAfzqQ3QCNSyh7VzqCoU21z5UYt4gzwpf1zXa9
+ Hr3FV/wrED3MvJh0OuCNrYGb9D7Xv2H5i1D2h2yN6QLrSQEm+GKgpWipV1IB3nRn0yU=
+X-Gm-Gg: ATEYQzzjuEimnZh+bQuwl+1w8l0vdYaB+1l4Lh8YAF5g63Am6faH/MUfnIumwxfRtce
+ UdFPUluSBrSqP63wTj1GfntrWXeCxGhAoJmL8xEXQp/MrdL7HmBvoIpZ9/2zxsWz97ci6Gxcz8P
+ Kn9HNmXVvGQj9xTaj+9vv99Zl19JegsXNVA5qR2pYouu1oONUKB7sS1xIByzf89c5jb3Dli+sQQ
+ zCT2C2AmbMd/yGgnKphZ6+V04Xa+2iJuA3ZHx6H6NBt1U7dOtQt3H7LyBMeEcAOKiI+aNW60PAV
+ 1oMkYbZ53ysW2NfYQ+1ZnvC5ui2DUm3w/pNujX5idFVqareDmCKkuSe4upDKPM5A4TVt2hdpvrb
+ ezGlwh1e9c8WO4LncKPqhRNLX91OEGRTnLqx2+2u5LhT9Oz6kmm8GwQyg1+ULhLz+sZtwD4vY0P
+ k1VVSwhN8CIlQzhwH398OAYpiAPiv1gHFZEN638UF+nQ2LxN3dZeGM5ZqmNctoPVcWXLhaWvypG
+ ktkToMDU20B+JA9PLYo5EWZOkExvyaXtZWYM9/mv33kVK9oUS88L5/FZlEqDGBIpWgCK/UdxPT3
+ UjlpmZM=
+X-Received: by 2002:a05:6000:608:b0:439:ddf9:a205 with SMTP id
+ ffacd0b85a97d-43b527a0afbmr6498293f8f.10.1773852653504; 
+ Wed, 18 Mar 2026 09:50:53 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-b535-6f9c-731f-0b89.rev.sfr.net.
  [2a02:842a:d52e:6101:b535:6f9c:731f:b89])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b51892290sm8639527f8f.20.2026.03.18.09.50.50
+ ffacd0b85a97d-43b51892290sm8639527f8f.20.2026.03.18.09.50.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Mar 2026 09:50:50 -0700 (PDT)
+ Wed, 18 Mar 2026 09:50:53 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Subject: [PATCH v2 0/9] MT8195: add ufs support
-Date: Wed, 18 Mar 2026 17:50:52 +0100
-Message-Id: <20260318-mt8195-add-ufs-support-v2-0-f18eeeeb0e72@baylibre.com>
+Date: Wed, 18 Mar 2026 17:50:54 +0100
+Subject: [PATCH v2 2/9] drivers: phy: phy-mtk-ufs: use tab to indent
+ defines
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WQy2rEMAxFfyV4XRW/8phQSv+jzMK2lIyhjlM7C
- R2G/Hs9mdl0UbQQV0hHV7qxTMlTZn11Y4k2n32cipAvFXMXM40EHotmksuGKyEgLJ041WAQYR0
- y5HWeY1qgVjVZQmuVVKwMz4kG/3OAP88Pneh7LfzlUWTWZAIXQ/BLXwktXcdr1C13yGVJQjfYY
- MuNOblaStRoROPu6EA5m8NYX709fXWQaDKBYKTJR0AaXJwGP2bYBJTQujRJreXAP6y5fnmb6LU
- sf2d3cxefl5iuxxM2cbh7ctv/7i1YDi22SpDTqjP0B8vO+77/AjMTjbRcAQAA
-X-Change-ID: 20260311-mt8195-add-ufs-support-535ebedbb323
+Message-Id: <20260318-mt8195-add-ufs-support-v2-2-f18eeeeb0e72@baylibre.com>
+References: <20260318-mt8195-add-ufs-support-v2-0-f18eeeeb0e72@baylibre.com>
+In-Reply-To: <20260318-mt8195-add-ufs-support-v2-0-f18eeeeb0e72@baylibre.com>
 To: u-boot@lists.denx.de
 Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
  Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
@@ -122,138 +119,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds ufs support MT8195.
-I also include in this series some cleanup on phy-mtk-ufs.c phy driver
-and ufs-mediatek.c mediatek ufs driver, and pmic support for MT8195.
+Use tabs instead of spaces to indent defines
 
-UFS boot has been tested on a MT8395_EVK board.
-To enable ufs boot, we first need to erase mmc partitions.
-
-The configs in config mt8395_evk_ufs are the minimum configs needed to
-enable UFS. This has been validating with the following commands on
-u-boot (extra configs needed for non generic configuration):
-
-=> scsi reset
-
-Reset SCSI
-scanning bus for devices...
-mediatek-ufshci ufshci@11270000: Failed to get PHY: -19.
-mediatek-ufshci ufshci@11270000: [RX, TX]: gear=[3, 3], lane[1, 1], pwr[FAST MODE, FAST MODE], rate = 2
-  Device 0: (0:0) Vendor: MICRON Prod.: MT064GASAO2U21 Rev: 0203
-            Type: Hard Disk
-            Capacity: 4.0 MB = 0.0 GB (1024 x 4096)
-  Device 1: (0:1) Vendor: MICRON Prod.: MT064GASAO2U21 Rev: 0203
-            Type: Hard Disk
-            Capacity: 4.0 MB = 0.0 GB (1024 x 4096)
-  Device 2: (0:2) Vendor: MICRON Prod.: MT064GASAO2U21 Rev: 0203
-            Type: Hard Disk
-            Capacity: 61016.0 MB = 59.5 GB (15620096 x 4096)
-
-=> part list scsi 2
-
-Partition Map for scsi device 2  --   Partition Type: EFI
-
-Part    Start LBA       End LBA         Name
-        Attributes
-        Type GUID
-        Partition GUID
-  1     0x00000080      0x0000047f      "bootloaders"
-        attrs:  0x0000000000000000
-        type:   ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
-        guid:   1614eda4-a234-4789-a6e8-328dcb7c46e8
-  2     0x00000480      0x0000087f      "bootloaders_b"
-        attrs:  0x0000000000000000
-        type:   ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
-        guid:   20435df4-5b1e-4361-8157-6ce997561c6a
-  3     0x00000880      0x0000287f      "firmware"
-        attrs:  0x0000000000000000
-        type:   ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
-        guid:   24dad941-6425-492e-9d1c-118a52af67ba
-  4     0x00002880      0x0000487f      "firmware_b"
-        attrs:  0x0000000000000000
-        type:   ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
-        guid:   547e79be-8019-45a9-8d28-b127607a5019
-  5     0x00004880      0x000048ff      "dramk"
-        attrs:  0x0000000000000000
-        type:   ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
-        guid:   d267a4ba-68b3-415d-92d5-f977848c8c6e
-  6     0x00004900      0x000049ff      "misc"
-        attrs:  0x0000000000000000
-        type:   ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
-        guid:   ce1e2472-6342-4220-9f8c-b9bfac4827cf
-  7     0x00004a00      0x000069ff      "bootassets"
-        attrs:  0x0000000000000000
-        type:   ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
-        guid:   60581d1e-088a-4137-8be2-f3d2ee6cd187
-  8     0x00006a00      0x0000cdff      "EFI_system_partition"
-        attrs:  0x0000000000000000
-        type:   c12a7328-f81f-11d2-ba4b-00a0c93ec93b
-        guid:   08ddd30a-cbce-49ae-b5c1-ded897018d2e
-  9     0x0000ce00      0x0000edff      "kernel"
-        attrs:  0x0000000000000000
-        type:   ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
-        guid:   0334e60c-ce99-4652-a8f0-1088b4716b65
- 10     0x0000ee00      0x00068587      "rootfs"
-        attrs:  0x0000000000000004
-        type:   b921b045-1df0-41c3-af44-4c6f280d3fae
-        guid:   6244fcea-b124-44f5-94a4-c1c38946bd90
-
-=> scsi dev 2
-
-Device 2: (0:2) Vendor: MICRON Prod.: MT064GASAO2U21 Rev: 0203
-            Type: Hard Disk
-            Capacity: 61016.0 MB = 59.5 GB (15620096 x 4096)
-... is now current device
-
-=> load scsi 2:a ${scriptaddr} /boot/fitImage
-21005248 bytes read in 47 ms (426.2 MiB/s)
-
-=> source ${scriptaddr}
-
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
-Changes in v2:
-- Add dependency on [1] that rename the genio defconfig
-- rename mt8395_evk_ufs_defconfig to the new name
-  mt8395_genio_1200_evk_ufs_defconfig
-- introduce mt8195.config to avoid duplicating mt8395_genio_1200_evk defconfig
-- Added new reviewed-by by tag
-- add missing clk_enable in ufs driver and fix error path
-- remove pmic commits from this series. As suggested by David, this
-  driver need some rework and deserve it's own series. UFS still
-  works, since previous bootloader stage is already doing some
-  initialization
-- Link to v1: https://lore.kernel.org/r/20260317-mt8195-add-ufs-support-v1-0-7d731ec438ae@baylibre.com
+ drivers/phy/phy-mtk-ufs.c | 38 ++++++++++++++++++--------------------
+ 1 file changed, 18 insertions(+), 20 deletions(-)
 
-[1]:  https://patchwork.ozlabs.org/project/uboot/patch/20260318-rename-genio-defconfigs-v1-1-1440312442f0@baylibre.com/
+diff --git a/drivers/phy/phy-mtk-ufs.c b/drivers/phy/phy-mtk-ufs.c
+index 14a90cf2064..321151172d9 100644
+--- a/drivers/phy/phy-mtk-ufs.c
++++ b/drivers/phy/phy-mtk-ufs.c
+@@ -17,26 +17,24 @@
+ #include <mapmem.h>
+ 
+ /* mphy register and offsets */
+-#define MP_GLB_DIG_8C               0x008C
+-#define FRC_PLL_ISO_EN              BIT(8)
+-#define PLL_ISO_EN                  BIT(9)
+-#define FRC_FRC_PWR_ON              BIT(10)
+-#define PLL_PWR_ON                  BIT(11)
+-
+-#define MP_LN_DIG_RX_9C             0xA09C
+-#define FSM_DIFZ_FRC                BIT(18)
+-
+-#define MP_LN_DIG_RX_AC             0xA0AC
+-#define FRC_RX_SQ_EN                BIT(0)
+-#define RX_SQ_EN                    BIT(1)
+-
+-#define MP_LN_RX_44                 0xB044
+-#define FRC_CDR_PWR_ON              BIT(17)
+-#define CDR_PWR_ON                  BIT(18)
+-#define FRC_CDR_ISO_EN              BIT(19)
+-#define CDR_ISO_EN                  BIT(20)
+-
+-#define UFSPHY_CLKS_CNT    2
++#define MP_GLB_DIG_8C		0x008C
++#define FRC_PLL_ISO_EN		BIT(8)
++#define PLL_ISO_EN		BIT(9)
++#define FRC_FRC_PWR_ON		BIT(10)
++#define PLL_PWR_ON		BIT(11)
++
++#define MP_LN_DIG_RX_9C		0xA09C
++#define FSM_DIFZ_FRC		BIT(18)
++
++#define MP_LN_DIG_RX_AC		0xA0AC
++#define FRC_RX_SQ_EN		BIT(0)
++#define RX_SQ_EN		BIT(1)
++
++#define MP_LN_RX_44		0xB044
++#define FRC_CDR_PWR_ON		BIT(17)
++#define CDR_PWR_ON		BIT(18)
++#define FRC_CDR_ISO_EN		BIT(19)
++#define CDR_ISO_EN		BIT(20)
+ 
+ struct mtk_ufs_phy {
+ 	struct udevice *dev;
 
----
-Julien Stephan (9):
-      drivers: phy: phy-mtk-ufs: cleanup headers
-      drivers: phy: phy-mtk-ufs: use tab to indent defines
-      drivers: phy: phy-mtk-ufs: use clk_bulk functions
-      drivers: phy: phy-mtk-ufs: disable clk in power_off
-      drivers: phy: phy-mtk-ufs: do not alloc priv with priv_auto
-      drivers: ufs: ufs-mediatek: fix phy handling
-      drivers: ufs: ufs-mediatek: implement clocking
-      drivers: ufs: ufs-mediatek: add MT8195 compatible
-      configs: add new defconfig for mt8395_genio_1200_evk_ufs
-
- board/mediatek/MAINTAINERS                  |   4 +-
- configs/mt8195.config                       |  24 ++++++
- configs/mt8395_genio_1200_evk_defconfig     |  26 +-----
- configs/mt8395_genio_1200_evk_ufs_defconfig |  13 +++
- drivers/phy/phy-mtk-ufs.c                   | 128 ++++++++++++----------------
- drivers/ufs/ufs-mediatek.c                  |  40 ++++++---
- drivers/ufs/ufs-mediatek.h                  |   2 +-
- 7 files changed, 123 insertions(+), 114 deletions(-)
----
-base-commit: 142c805d470cd02470146d6d70aa9c522d4da16c
-change-id: 20260311-mt8195-add-ufs-support-535ebedbb323
-prerequisite-message-id: <20260318-rename-genio-defconfigs-v1-1-1440312442f0@baylibre.com>
-prerequisite-patch-id: 76f64e540256592f97d1b274e6072dde36fee2f9
-
-Best regards,
 -- 
-Julien Stephan <jstephan@baylibre.com>
+2.52.0
 
