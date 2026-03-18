@@ -4,110 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2495103E18F
-	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 14:45:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9298103E192
+	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 14:53:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC00184132;
-	Wed, 18 Mar 2026 15:44:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
+	by phobos.denx.de (Postfix) with ESMTP id 6CAD0839A8;
+	Wed, 18 Mar 2026 15:53:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="s6Ydjrrl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="D2eS1EQn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65C8A84142; Wed, 18 Mar 2026 13:47:06 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 6E63D83CE3; Wed, 18 Mar 2026 15:53:17 +0100 (CET)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42827841FF
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 13:47:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=fairphone.com
+ by phobos.denx.de (Postfix) with ESMTPS id E39F6838FA
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 15:53:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=luca.weiss@fairphone.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-661be3380adso12695322a12.3
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 05:47:01 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7d75371d873so7447538a34.3
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 07:53:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=fairphone.com; s=fair; t=1773838021; x=1774442821; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=31ui1/O4MEohzRcm+qGZXZUTtz80RnSkAlAH1s+78NA=;
- b=s6YdjrrlGfBrAGWWSYRZMHTRf4vtv4gXtNZTI6BuNuk+5sHoe+OKEOEyy/BP7lpUHH
- of4q+hRvhqfzP9y5tPC6WXax9RdvR0U1AXaqCbJAlOSJtHyptCULycVn08nDEbBdKkVo
- t1DkjaEz5KYwN7jwC6jBANx0pUSbNhJFBcM5H/NdMkAbXRvAZ+RyJg8gVr00rZqkDGK6
- vVKFTNcm7gS5/DyJTZ8kKAGNCZV3JsSuordixVS4IDwBbm1Kw5ASDJhduDUO/wwGVztY
- OYENGc5Xc41hd8mF25eYbWwIfHnuAAVVwgzaFODhEZnk42ZYg/+U5taPleUbb+LIm2Gd
- ukdQ==
+ d=konsulko.com; s=google; t=1773845593; x=1774450393; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=0K3TZj6aWH2ODcgqnITLKMD9mVezwawzafBoerqGfdo=;
+ b=D2eS1EQnS2oUUQY8s73bvNgZlK+ig+uinNkYJ4BKZFRadcelg08wFxKlwMQfdVJg7F
+ v+NgsfzzlvkvPPLDOyNr/XWHbHB+NXdufEq/Uo2HSUxsKlYqgrA+AftpzytBz1k5LYfc
+ Sbdhmcf/ll1ebC9y1p90h7Jk9xfa8OL7O4rRY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773838021; x=1774442821;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=31ui1/O4MEohzRcm+qGZXZUTtz80RnSkAlAH1s+78NA=;
- b=P9p1BnpOLTOlyav6kUuvIVOYGXUqbgpk4bMHR7TjUtbiBMjr/z0YyJEMKdL/1KeZbP
- URHSvVSW+jVBJM8YqmB8XHt2uzLGrL/fYWN+wbwrQx9VoGsFtSqNQ2S/OnUpy7Ea8OhX
- RtiOIECgBVz2zl6K2Nl3znTV1WCARbKF0HUYIoxU8a+px8m7MMoteAiIp9X8v3Zg3Xu3
- 38dE+GNIFdrb7Bmznh50flqCfZrNMl89syk3/f/ngmCG3sRGnVmoulq9uJguXitHl7Ve
- cwk19kwyutSYWBtgGsQQVWxICYbGtprQgDrHy8TcFYHzml/8UNUir68AkuMu6PULkRoq
- GaBA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW9eeyUfgwslnItawVnanUyqaMZmRbzm4p+kOcme+7SU6P5DRa8iKwXZ9SiN0IZh9G75KTLYe4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwfBEts1d/k57OF01gdqKK50VvM/7Je4imOphuimdIisgdFqp7v
- B7QtZHhnEzjMLliQ0HEW2lnL+CN2/v9AANxGEKtfW47nE0t2TjEKuJhKxtTVKDsfIks=
-X-Gm-Gg: ATEYQzz/rVxjdbpEHRovTlrBfyIV1Z6x/bDzfMim9DWL6npbK5oenlRVcO1pjPLGOAE
- ZFjoCC2bxhF9GpA2r1GtwCZvgEPBD/x1Gv/QFOah59NxT17jl2aeZg31wkPdYe3dhZwVkJqjDDD
- jRqLQmFxFrlXqEFfrodjysyoi5PHlsgg732JV+IDfVaSs+DdAQGknRfHS51P4yg+j8+Rs/YSEJJ
- NAbVMXjpvDL942CPrxVxN8iQcJq0n+jF4qZkfTRJm5+nPbbszt7dnryvFHWmxFEIsNbGWRwKFTF
- Hdm779QKkx+CoycYSPNK+TNcXkz3pEzrD/huGMMs5M8Zfvaez+YkHa2yn5K26Xdj43/MsijCoWb
- OB50vG+fCnAoP8+IwtVsuDuggCPhY5PpW+neizYE4ynMGRvjWs6orknSSuiRXo6ZIeDoH5Xd9JU
- dnOVtEdhnbFCYXZ/6xYi2Xf/lKRxP5sdP9MfDLvX/x+TWy8SqMabJ+EzV8cYopt/tDwpOlMM6Av
- Coc6Q==
-X-Received: by 2002:a17:907:2da7:b0:b97:a5a2:cec8 with SMTP id
- a640c23a62f3a-b97f4863c2dmr240530966b.11.1773838020576; 
- Wed, 18 Mar 2026 05:47:00 -0700 (PDT)
-Received: from [172.16.220.101] (144-178-202-139.static.ef-service.nl.
- [144.178.202.139]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b97f142cf16sm206080366b.20.2026.03.18.05.46.59
+ d=1e100.net; s=20251104; t=1773845593; x=1774450393;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0K3TZj6aWH2ODcgqnITLKMD9mVezwawzafBoerqGfdo=;
+ b=pJQgf3YaBE8095SzxKZX9+n48D6Z6FEOBfRu41TjcJ3Xl5P8UeLK8gzg07mgUl7ciG
+ WCKDT+aasQoDY2jsxCVYCzH5xl8fjCRTWkXyQmTe4C5Ent5XCUveIQFDX/VnOkvBZh+4
+ VLle6Qjt+gm3J/MDqYXTuGlB8CXJuDtMWCT5sHYBT9d2x5GW32ejiKhASp5+oQAYBIN1
+ ITs55UVodW1dX0TjWjjX6LyPesZ2cS2r6AHGDxr04qA9ZKVwRgSlBMv2NlEasfGL0OS4
+ GnCnpVCeDPgHdvC0Jw1D20FD1/Y3/svRNrASunCZ1eg47lWpFyQAyRh3hVEahH5ug/8E
+ YQBw==
+X-Gm-Message-State: AOJu0YwrZfeZmFRsmTz65GDpvCGwmLnQ2pKpghbPzfRXoo4kJSgaHFMd
+ ytqHx4jcVPb2xDy1EXGm2bu+28ZfD33HbC6dx9w64XALXbnky+edOeLB80LDn4jE6v4=
+X-Gm-Gg: ATEYQzzf2xlsRLLQE7wIppU9fbV8ABl2T3c6kZ8MIaF0PoTPkExMZcUEkiQD7Gzt430
+ VhhZxPkosUyq4ur+CrgLIoO8WIqaYqIrkHixqhQ802O/xl0N06dpMPqKylwMKheXhA7VTEV0wwp
+ ZRwlut3tcib8BrcpD77hBsfFwvNrny9BAXT4Lasy/zlXjgm/sOsaQyQjvWv76jIk8OhFhMpqvH1
+ wykdNZDhL1UmraS8JU1A4OfL+I8MHQ6kUA6wKkERMjKu3TA7ilv3Lm3/ZRoAR1GfILdINTqun7K
+ 4jrkQRMPcxFjOPvNdwIZUAwzZ/XV31nVj/Z69THmkSU3nBRvqvwUlur9H1MYpzeCsGzyX1Vdf/l
+ nJ9HSt3fNSj7nl8KUthhHMB+9c7jBTPqRJhK+1H3ms3sz1I1qG6y8EJtCJ/j5/Ok64lt1wSMWLZ
+ brOm7d0NAvRrXT1TiuTZfvAGN9sP3HMMKU3TDeMztGiiqhTlP+esx8XWfPNMez5KhxxoiKvNDmV
+ L6DJPbxOLOrvB/WeAiGMfGpicQJmnOH3tu9aTi+qm8Qi6yy
+X-Received: by 2002:a05:6830:64c8:b0:7d7:4d85:eb05 with SMTP id
+ 46e09a7af769-7d7ca775284mr2181667a34.22.1773845593537; 
+ Wed, 18 Mar 2026 07:53:13 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d7cf2b8325sm1489620a34.9.2026.03.18.07.53.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Mar 2026 05:47:00 -0700 (PDT)
-From: Luca Weiss <luca.weiss@fairphone.com>
-Date: Wed, 18 Mar 2026 13:46:31 +0100
-Subject: [PATCH v2 5/7] gpio: qcom: Support GPIOs on PM7550 PMIC
+ Wed, 18 Mar 2026 07:53:12 -0700 (PDT)
+Date: Wed, 18 Mar 2026 08:53:10 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH] EFI Loader: Correct dependencies for EFI_HTTP_BOOT
+Message-ID: <20260318145310.GK502704@bill-the-cat>
+References: <20260317012449.4162666-1-trini@konsulko.com>
+ <CAC_iWj+WHh14nTdYu2BUTqvSwrtHiJBJVncArPwrBqWb6kXnTA@mail.gmail.com>
+ <20260317134256.GT502704@bill-the-cat>
+ <CAC_iWjL+OUcUhZQ9hD9Vsp2zOfxdr3wu2fCX03HshXxrvR_EoQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260318-milos-bringup-v2-5-650b91dd75d8@fairphone.com>
-References: <20260318-milos-bringup-v2-0-650b91dd75d8@fairphone.com>
-In-Reply-To: <20260318-milos-bringup-v2-0-650b91dd75d8@fairphone.com>
-To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de, 
- u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Varadarajan Narayanan <quic_varada@quicinc.com>, 
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
- Danila Tikhonov <danila@jiaxyga.com>, 
- David Wronek <david.wronek@mainlining.org>, 
- Alexey Minnekhanov <alexeymin@postmarketos.org>, 
- Lukasz Majewski <lukma@denx.de>, Aelin Reidel <aelin@mainlining.org>, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
- Rui Miguel Silva <rui.silva@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Sam Day <me@samcday.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Luca Weiss <luca.weiss@fairphone.com>, 
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1773838014; l=912;
- i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
- bh=FaJUH3hfjmoc0nLsN/nxQANSPNgiu/9B1oV/scZlj+o=;
- b=0ugL5pG+mi78eQWIO2a226a2F1LN0Vbk9rTqiQyewo5S0BwJRZeLhuKa4Xl8IR9Ya2B17K4G2
- pHijdi5YA7QBn/jUcsCBOrsdwH7Yyfs/S2hKoH7wbEhbWDMEOvz8jUB
-X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
- pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
-X-Mailman-Approved-At: Wed, 18 Mar 2026 15:44:14 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="5EU26ozmzhz9LioF"
+Content-Disposition: inline
+In-Reply-To: <CAC_iWjL+OUcUhZQ9hD9Vsp2zOfxdr3wu2fCX03HshXxrvR_EoQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,29 +99,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The GPIOs on PM7550 work fine using the qcom_spmi_gpio driver and
-enables the use of the Volume Up button on the Fairphone (Gen. 6)
-smartphone.
 
-Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
----
- drivers/gpio/qcom_spmi_gpio.c | 1 +
- 1 file changed, 1 insertion(+)
+--5EU26ozmzhz9LioF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/gpio/qcom_spmi_gpio.c b/drivers/gpio/qcom_spmi_gpio.c
-index 1a7c7c48dfc..77a69140213 100644
---- a/drivers/gpio/qcom_spmi_gpio.c
-+++ b/drivers/gpio/qcom_spmi_gpio.c
-@@ -747,6 +747,7 @@ static const struct udevice_id qcom_spmi_pmic_gpio_ids[] = {
- 	{ .compatible = "qcom,pm6350-gpio" },
- 	{ .compatible = "qcom,pm660l-gpio" },
- 	{ .compatible = "qcom,pm7325-gpio" },
-+	{ .compatible = "qcom,pm7550-gpio" },
- 	{ .compatible = "qcom,pm8550-gpio" },
- 	{ .compatible = "qcom,pm8550b-gpio" },
- 	{ .compatible = "qcom,pm8550ve-gpio" },
+On Wed, Mar 18, 2026 at 09:09:17AM +0200, Ilias Apalodimas wrote:
+> On Tue, 17 Mar 2026 at 15:42, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Tue, Mar 17, 2026 at 09:03:47AM +0200, Ilias Apalodimas wrote:
+> > > Hi Tom,
+> > >
+> > > On Tue, 17 Mar 2026 at 03:24, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > As exposed by "make randconfig", we have an issue with the dependen=
+cies
+> > > > for EFI_HTTP_BOOT. As this is implemeneted by running commands (as =
+seen
+> > > > by what it selects) it must depend on CMDLINE as well.
+> > > >
+> > > > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > >
+> > > In theory, you can configure UEFI with a set of prebuilt boot options.
+> > > If one of them is http(s) the device will boot even if CMDLINE is not
+> > > selected. I am not against this patch, but we will remove the
+> > > possibility to build a firmware without cmdline that just boots to
+> > > whatever is was preconfigured
+> > >
+> > > Cheers
+> > > /Ilias
+> > > > ---
+> > > > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > > > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > > ---
+> > > >  lib/efi_loader/Kconfig | 1 +
+> > > >  1 file changed, 1 insertion(+)
+> > > >
+> > > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> > > > index b5f81e0ff530..a9b2f813e1d5 100644
+> > > > --- a/lib/efi_loader/Kconfig
+> > > > +++ b/lib/efi_loader/Kconfig
+> > > > @@ -600,6 +600,7 @@ config EFI_BOOTMGR
+> > > >  config EFI_HTTP_BOOT
+> > > >         bool "EFI HTTP Boot support"
+> > > >         depends on NET || NET_LWIP
+> > > > +       depends on CMDLINE
+> > > >         select CMD_NET
+> > > >         select CMD_DHCP
+> > > >         select CMD_DNS
+> >
+> > The select lines here mean that you cannot do that, today :)
+>=20
+> Fair enough. I was just thinking "lets not limit it more".
+> Heinrich is right though. This needs an overhaul and depend on the
+> protocols instead of the commands. Either way I don't mind merging it
+> now, but maybe add a TODO with fixing it in the future?
 
--- 
-2.53.0
+Sure:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/issues/24
 
+--=20
+Tom
+
+--5EU26ozmzhz9LioF
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabq8UwAKCRAr4qD1Cr/k
+CitNAQCuAE/LAp6otBhTaw/eEJAlAOj3nyG+RFwednCsQ6qWpgEAz38PXHyislD5
+SYzcHxss5PrAVKjTwSwEw8xfPxTh4Ag=
+=aGdk
+-----END PGP SIGNATURE-----
+
+--5EU26ozmzhz9LioF--
