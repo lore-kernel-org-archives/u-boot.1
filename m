@@ -4,134 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9537103E17A
-	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 14:08:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 938A7103E18F
+	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 14:25:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B1A284132;
-	Wed, 18 Mar 2026 15:08:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id ECDEC84132;
+	Wed, 18 Mar 2026 15:25:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="N6PTn+fv";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="UPHAwWiz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C311841A2; Wed, 18 Mar 2026 15:08:55 +0100 (CET)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
+ id F1CFE8415D; Wed, 18 Mar 2026 15:25:04 +0100 (CET)
+Received: from MW6PR02CU001.outbound.protection.outlook.com
+ (mail-westus2azlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c007::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E7C083E4C
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 15:08:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AB7684090
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 15:25:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=simona.toaca@oss.nxp.com
+ spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QKJMCjySlH3frWQgGSNW5yu3XCcSxX+Sd044vHpYUbjGWUIputVHn/vD99L9WZyaJMIcagAQygpovfbA4SwnhWnvhnf8e52sKam2uyO0w4N5A/jUmph4Zd/RQHu5/6Wr5ug5OJ5dfK/OiGQNxXyNFLYGnZRTDTAwBvDNvCq+g2aYls6UnGaIQvVSQ3oSuWc76DjykuOvWGBqC5W5RDOEmn2bzXZymf5oGbMgnCsm9BdLhmRvDfddoBB7pvN6x/At2ohmVog1Z80sjFEZdU3Ri3Jw8GK1IVYYQl//N1dajqYo6BGDMmedLaAwE59L95WE82wVJ+J3g82q31UOVky7gA==
+ b=Af5sJs3rsf4sXJW1nJcANscv2e1KTGxTfoT603h0WTw6Q0quYqFC9VRORhanda68C5HLzkDRrgH6fZPtsf2bSxjlqMvaIsvlFUd4WXzyKEo64REm0+CO/sCXY2c+Csgw0e+Jf+UNcfZaMsigljPfiHlcA43TPqdq6ILvkOFTPqSfU6y1uBrQ+lQQFazKjI4lqC3QbN1DxoQcOcQ56O9xpLRaecV3iWxZJp84MGfitJbyAu28tXDAzkxDgOInZxZSExKfCQzTFX5LYPbyDvnMuFUcIOyJ2zkTxehow6a83gz+Uhrf0X/uYyKUKAaO0g3mI5fjUTHp1gY6RgSPIeRQzQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WULjl6BsaBTWhp9X6UPGtBgIXsQTbHkQW4xGZSvTUQE=;
- b=KGvmorZmojMvVBbxiOW8VpQG4dC4XRKqEj7FNExYKgCC9oZB1CsZVsOSFjB6TsCSqFoWj/RwFHAqkDQ8UxRA6AjcCr18LPNOrluKjyVivTfaHp9rT8PguMZcCdt9mJKCt1uZf67XZurElM8KmxLsv6gyR8bb8AbP5ycakCU6uXpqMN43pYNhIOYokXsiJEWf/mmbU35EtX3cWMY70Mj3H1/kARDYVbvIre7tgEa7BBA1znxIu0yOxCLdWxjvrSxyB9TrDU49ZCORgkpjVZ9VDIPgewUIDdr1LUqP3f3e8UHq5EgBEjpmd5t442c+ZILxy8JSRaUnzgE5XWd2v8xigA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
+ bh=d0Awe1gt0QbwhsjbN5OV8TQ+nMeNpBolEx9Q/mBtb8k=;
+ b=glu+fIolq8TC1CB2GyFWRa3jS0KLqJ4gI9hBmG07RExpE+hdIiEhj4GM4lT46yjh9CO1M3nATz9WMBxWyoTrr+xkR9bse7aulewJeZT+V3aY8NYOe9yYDitiim6oah0FZUA0Xbi352EiPPLREq89RttDv1+kFUkdO1m4OQjIXeBKLcfuSBHNHejF5RVrxhr2mD0IbyDH59UDMDnUW5iHlGgUnYNJWE8TxjtErha6YbzgBI6bphMm08ydVg96F3jSkNuNTIVC8EXSuummE8bzXU9zRunKy8FSSYTIl+w9JwTBHYmOV95AXhB4jlG2N8p4GaymcMxFH1rzEa+Bm8s/Yg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WULjl6BsaBTWhp9X6UPGtBgIXsQTbHkQW4xGZSvTUQE=;
- b=N6PTn+fvp/jCwgauKmNZwrrJ9OX2kglY7/0Kd/zzsQbDaVN7bJNjEKgBDyulV1TYiQeXY7iaKftFOJmCyUmAhuAfhOMNVIJOlIGXOZSdQ9ml/YFJsPXUhcK8JUafbh4o6pr/+29JU4uCXF9bxTLCc8eC8mNpJ0o5C+8Nvvt7y+6Iok79U4MgKSHpy+K+wzavQ6ZhoF5/cMVT+tFCV+hJ8NBdVfT03LDp7ajlTNupTYKRYDi7mhntw07ktzxkPKFAmLb+rrkR/gRtH5eweWg9AQf0T5396BCM5Z+T6ruIyHvg2GK6pHyQzwFDYtxif9nhk0SHErvtVPtiWW6VXbMrDQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from VI0PR04MB11917.eurprd04.prod.outlook.com (2603:10a6:800:306::9)
- by AM9PR04MB7505.eurprd04.prod.outlook.com (2603:10a6:20b:285::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.19; Wed, 18 Mar
- 2026 14:08:48 +0000
-Received: from VI0PR04MB11917.eurprd04.prod.outlook.com
- ([fe80::a506:3460:d2bc:26e7]) by VI0PR04MB11917.eurprd04.prod.outlook.com
- ([fe80::a506:3460:d2bc:26e7%4]) with mapi id 15.20.9723.018; Wed, 18 Mar 2026
- 14:08:47 +0000
-Date: Wed, 18 Mar 2026 16:20:38 +0200
-From: Simona Toaca <simona.toaca@oss.nxp.com>
-To: Marek Vasut <marex@nabladev.com>
-Cc: uboot-imx@nxp.com, u-boot@lists.denx.de, 
- Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com, peng.fan@nxp.com,
- alice.guo@nxp.com, 
- simona.toaca@nxp.com, ye.li@nxp.com, viorel.suman@nxp.com, ping.bai@nxp.com, 
- sebastien.szymanski@armadeus.com, ravi@prevas.dk, joao.goncalves@toradex.com,
- ji.luo@nxp.com, tharvey@gateworks.com, qijian.guo@nxp.com
-Subject: Re: [PATCH v2 5/5] doc: board: nxp: Add Quickboot documentation
-Message-ID: <becryuzd7ohecs7vq2goxhfv5fsrjh6a3ctav77y4uxrszzecd@wsnoc3muqoit>
-References: <cover.1773648510.git.simona.toaca@nxp.com>
- <be6b07edb38e4e0dc86e65f8bac7b6b3b0e29d01.1773648510.git.simona.toaca@nxp.com>
- <d3b42af1-65a8-401f-9dda-1f79cb0dde9a@nabladev.com>
- <yuwvhik6p6eordghidde6l4ey6fclwwuxnzuqpttcoicxqa2r4@jpp2t42tl2wx>
- <541a05c0-e0f0-43ce-b944-d7656da585e1@nabladev.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <541a05c0-e0f0-43ce-b944-d7656da585e1@nabladev.com>
-X-ClientProxiedBy: FR2P281CA0178.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:9f::7) To VI0PR04MB11917.eurprd04.prod.outlook.com
- (2603:10a6:800:306::9)
+ bh=d0Awe1gt0QbwhsjbN5OV8TQ+nMeNpBolEx9Q/mBtb8k=;
+ b=UPHAwWizBkPmIz/0xHuT0PX6B35m8yUV2hNY7WApfDMHt4p2NCb5nSbOtIUvxLLSK+v+6S/G/mB/eTI8QVbJYI2Rn5AfTigFBml1rvtV9MDuecyyEnpkk2bMvwrTWHUtdKqfvi5Otg7BF25Yxl2rqJhJ968Sk+UM9oijxMeEyso=
+Received: from BN9PR03CA0321.namprd03.prod.outlook.com (2603:10b6:408:112::26)
+ by BN7PPF28614436A.namprd12.prod.outlook.com
+ (2603:10b6:40f:fc02::6c9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.8; Wed, 18 Mar
+ 2026 14:24:57 +0000
+Received: from BN2PEPF000044A6.namprd04.prod.outlook.com
+ (2603:10b6:408:112:cafe::f0) by BN9PR03CA0321.outlook.office365.com
+ (2603:10b6:408:112::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9700.27 via Frontend Transport; Wed,
+ 18 Mar 2026 14:24:38 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ BN2PEPF000044A6.mail.protection.outlook.com (10.167.243.100) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9723.19 via Frontend Transport; Wed, 18 Mar 2026 14:24:57 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 18 Mar
+ 2026 09:24:56 -0500
+Received: from localhost (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Wed, 18 Mar 2026 09:24:55 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@amd.com>, <ilias.apalodimas@linaro.org>,
+ <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>
+CC: Casey Connolly <casey.connolly@linaro.org>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Jonathan Humphreys <j-humphreys@ti.com>, Shantur
+ Rathore <i@shantur.com>, Wadim Egorov <w.egorov@phytec.de>, "Ying-Chun Liu
+ (PaulLiu)" <paul.liu@linaro.org>
+Subject: [PATCH v2] efi_loader: Allow disabling ANSI console queries via
+ Kconfig
+Date: Wed, 18 Mar 2026 15:24:52 +0100
+Message-ID: <85854708c4d707d9db8ec84c11e1686a32198d91.1773843890.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2423; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=mkQkvB4l7070dBWyioV7/KB2AJzLIUZMPCacX/5q8FI=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWTu2rq16UW7/eKUHS+vJXGYlPjMPbHDU86xIfIKz3fL0
+ 748m7PDOkpZGMQ4GGTFFFmmM+k4rPl2banY8sh8mDmsTCBDGLg4BWAi95oZGXrLQn2bd7697s9h
+ 3517QnOyX555T+wdmz0bq3eHBi+1MGFk6Hu0gvW4VUzMcpuPf22b131Pn70jr7B644YWh5UO7Mu
+ qmQA=
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VI0PR04MB11917:EE_|AM9PR04MB7505:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0b032d4d-b9b7-446a-8284-08de84f7df07
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044A6:EE_|BN7PPF28614436A:EE_
+X-MS-Office365-Filtering-Correlation-Id: a67ff7ec-3b42-4279-51de-08de84fa219f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|19092799006|366016|1800799024|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: rwJF0bjJ7YFoz+XjJ2YBi0gvKx94Bnu5xy337mNs2aL+Y8HoXGjasvvRTY+z7iYagsJsBtRdNLan84fPVpJUiE4lzM6+c7KCETktZ4/lorbZAI5bjPzqtWETBj0ydkx5UGpyimPOe1Wbe7V9L2EsB34kTXt52+DamJGUlVFYitnkjUQe1iJy9VWRVTK+Mc05NCR+sEOngsB69tm7DUUNZOTuBRmNj4/H/cyjKstfoxHIz4+gw+5LSVLqBW2BYVb3ZLKY/XFCFNltSUr+rngH0dnL+HyzthfQ/1vIj+sHxUDRyiYJcWvT77zAbHM92u4hhd3M6hYgdEyMSRjHhzoVoWEojzHkVlJ8hK5nwbqEU2vU8I8nac7TLgvmQIFqvPrG0eJmaSpPVFORxXy6FPkjstUmMhtfizZUvSPpyf1aIoWLW+QGoHioCL08X3acdbCW80iPUj+uxINO8i5rJg0He3XZBOBYins8OMDjSezFSjiTSytSRdr8jktdSwPVVlD28qtxZwRSPD4WhyPxu9CUeXhDRBLXfo72U9X5vIS9BOyAPWCxQ5cqEWJYWevqE4kPgCTefgGDOXHrGO4OUgv+FMOSI7SPbBTcEqy+vW2TnbV/dRfINQgVHjwq7n/OlM7qncifsx2G3Eu4EMzVs95afmeGqGysUPPN19HrK/pt9WVZQtb3qjL+QkFrZqGHbsjhu86I8scw9IPO+CO2R2Mi21HDX/YO9mDjvTCDz43Z84U=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:VI0PR04MB11917.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(19092799006)(366016)(1800799024)(56012099003)(18002099003)(22082099003);
+ ARA:13230040|1800799024|36860700016|7416014|376014|82310400026|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: qpP0N+gpYP7TtZYxjD0bsiIeaN7Q0h7fYkVgdQUC7isp94JMj8sFS2lgT2W0OJmI4Mo0Zpb0SsNMGh4Wtg1fI130/RDezCt0UbTgTJ3inbnJ3n0bRqLcC4Lm5GHce0YsWEfGWn6Sm5Rh46NUs96H7sxT79JsCPq7ZVHV7CHatjZcPp6+bv+EQ7jUwKPpAGQJ5Pkq+u5S8DGT5oUpdx+4fO5ufZnP/l2wYiWONBJQoEhBJF9g/4DqXgko6VtF0ro1qPb3mHHcPtsz4iKeqe2DUHvBcbyRMyfh428l5rMuUbFC4VafsTITlm4dPB20BkVGTRhfqqRPFAd+XMatbr9hgOJ/Fo6lqHWe0vcX5UStd7mTrJyvIzEP8AOmFij7tKlQcG9aww6jDEgDUMklQZmqamFQugTKVzm0YhkTwzFXnyeFXTr7AnSjlxH0G7u0mJ2sSUEWTZYUurEDV6YdIvbRgzOjuf5CSwXjqJffFqPH/vmHvnpsjRSQEU/3Z0AR44nq1E265DPP3Owy2Zm8wozDKhRXxtVFvPp7I9UPP+4yLmkDKLVgZxFRTbnbGhD/wT/JOFxsdj+xJn2S7tTg5VKeWG+LVdJbf+ACShduyOimoMRm8sZbu4AREwPv3ZwmmqfjfCzsWRxoojfx5AQ0Qa0Hw0GR9qe439DiXifFq0Skvjsoy2vJJ/U2lnM44jxZeWm/XuJx66GKNThF4vj0rDyLMnz/jWa7BKLd3rADSf+mpIZBB+/r3PcStsUVN4dAs2013T2JpUGfNBxiWsIo1YBGhw==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700016)(7416014)(376014)(82310400026)(18002099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?zKO6t4DZp83nKVDYI6Qrt+RKIXd2cMfg6flrZAASh69Ti+f/5lX75YCrlJLo?=
- =?us-ascii?Q?7V5px5BO3LCvW6eu+xHRamhW4gaIm6nx3WHUFrUWOv+jMpJJWX0pKT23OdkH?=
- =?us-ascii?Q?/DbosO3ttOALcsrQRBbwuy2cOahXCEHrVnd6CoCve26Yeh/fNVcBQAbOoohJ?=
- =?us-ascii?Q?sxS0hHT/EWmzOEawdyqzKRHCW0e8uEWfYmXaq8oiPZ1cKvF3PCGp4afl4QuL?=
- =?us-ascii?Q?tXEbBzYJ2M0xwYYq0jWE8RBTsJRraL1ZJwhaCvcJfN9mINHwAY5iKaEdokhw?=
- =?us-ascii?Q?yRtIQUfJludkeEdmbfu2hfn3sLOCOTVZ+lq3rcCX2vmVBAmio5memigRzYp0?=
- =?us-ascii?Q?WgFahCNr1Dtbs96tR/9NLOu4tSu1ZlWJ4CBoRNHnp8URed5GSmO12uD0UBWA?=
- =?us-ascii?Q?kDmzt5c/E4zqyEayIGEMJfd5AikHz/cxU2549sSwyRXZdKCRISwVgJZuWMvj?=
- =?us-ascii?Q?qzM/Y+2uLDJB15Lq6nhojw1r7bCkzz41zz0xmvGiga/Y8lQNrW//hZqJFjg/?=
- =?us-ascii?Q?m49tpQVIJjQIJebbs7lpph1NX7twWPZtmS1YSfS8k2bl7+QKN9c4KJjbdNNz?=
- =?us-ascii?Q?l3oBj8hBzvzI5sLYdkdSVYE5BmfJJ+OWB9TUzDjrdDgV3zeg/vCDrsyfLkmU?=
- =?us-ascii?Q?x8GERy7+me+5HuCt1rPWVWW0WFjXQcLhwv6TSpjdDkKTEmv6SteVV+eR+KNP?=
- =?us-ascii?Q?oxsiRbGIkLPK9UfcNKwRcuU4IPnTHBGMVFN6iZ9mFyVX/LYvxsdHV/FzPQg+?=
- =?us-ascii?Q?BmIHy+n4yp4DozowDxKa60hHB3hgmtKoBe+rWUVPjsZ4xApCGX3u7CoodBDd?=
- =?us-ascii?Q?nFUJbLoVdGfqOJX2ZLbddTH840ijtXOMUd8twRYPuFm9++HyucpyWK02RsLa?=
- =?us-ascii?Q?SU7bSxT5AjCuMN6L/YbSu6cKIb74VBcV94TjDrJfMmZko/XeuoYszL2zSObj?=
- =?us-ascii?Q?ontiiwPy12KFn8Oc388UEnM9KciURZReXODgdgT/mFE+GIt1PJk2JlwVVDU9?=
- =?us-ascii?Q?rJ/XNhfahHYOYYE9yj8fgRbTMQz7TsNgyKe6bjzfeBV7ylIJ1IJy6hD6JLLn?=
- =?us-ascii?Q?kYYU7MjnDbTDe2goA4bskNDi3gki2GX1i3dkiIinZG5hU0+fMFeL6p1nBDIu?=
- =?us-ascii?Q?Rto7Nj5kZz85ECnJzzXgk0Iz1T/aOwSBfRhWK6cZsWwo03f9xWU+uLlgUQdw?=
- =?us-ascii?Q?o3vOPdXr0CPpDi16pp2qBi3k6sBFtm3kSaAiUrkjdBBdJNdDkrl7LTDmuL+L?=
- =?us-ascii?Q?etuqnhVgcA9j887dYqdI2CLKHAxakAElzvcoOAEnW3MYI9aDGBKQE6kTZWaN?=
- =?us-ascii?Q?86wkgQyFsh2YlVQO7vVYo21xBwnx5UdMSxPeSMZhpGF422HATbGTqOZ7Jbum?=
- =?us-ascii?Q?XGz9YGAmC5dOnOYHkFN+Ks0WGkmgLnN8WwAwiSbo5dnNOeLeOYxrPIhujoGY?=
- =?us-ascii?Q?X4+doAILuCoF8E97sINOxwh8so0p/x40IuCqY1655cxjonnKxf4LT64Dm4Qb?=
- =?us-ascii?Q?n0w2RaNnkswnXNEr54Yfnl9z5yEbJ5ciMhI9xanDD4om90jxm7Xo3hlEidUS?=
- =?us-ascii?Q?3q1YmnGBZ15dOJ9t3hUDID3oLhVuQqmWiI6WVLSJbu32AmWV0dC0qRsDEJ+3?=
- =?us-ascii?Q?oQiKzn/IRQRxP1XIThdlVoag/5/Yiu3m7Xr8uEJeDLUyN64k2IwZwD016jVI?=
- =?us-ascii?Q?QaX7kT164SvNG10O7cX76zNRM8mOXe8K3J44IURqf1btp6f1Ik0SG/U2A18n?=
- =?us-ascii?Q?fgZe8sfa6w=3D=3D?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0b032d4d-b9b7-446a-8284-08de84f7df07
-X-MS-Exchange-CrossTenant-AuthSource: VI0PR04MB11917.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Mar 2026 14:08:47.0091 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: lkLuf3RDLmgbMEth1OA+WaFZ4C/+jFyrhaqjCOmf5AbNp+7Bw63aGjVqGc34z0xHcDYON6QzI4IPC4EinTFJcg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB7505
+X-MS-Exchange-AntiSpam-MessageData-0: CpkO2skPArjEKMAMT4dzOHZOSiw+z5KfTLDacsenNbcEKYHfGoq/ySohn96zd0JjAZhAYcN48vCC3R1J7hJF2yHmGHvVlLKUxsvrbCgm3nmuavlFI4ZLtX+SHLYfQkGe5Yah1gZ/HT0e81KkHHEQRQBrp4D+lXkYYx5u2QVXCS1iUKUqIJbDGg+0TcJSY2wPGjuHGAC8OdoWdELubtkpXR6DtvSb4vJ9FcKS1/1eCf898/gq/iJ2KNH7UGQJioUCNsbQcvAG4qF2TKbnHvglWk1ONz3zduVHOZXrc0swVanMqS7Tka/grXOV9MZWOE052T86KpQukrlls9Hd++ecMZOKyKHnmzxtkqPg7FtNz/lL+ZSghNZr9w+aMoMsPykhf2M6BadkwSNgPf/DG7yEFxaHii3zzHObyH9yWTaq939XSGV2XrfxkCWqrqeQBgpA
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Mar 2026 14:24:57.3541 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a67ff7ec-3b42-4279-51de-08de84fa219f
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A6.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN7PPF28614436A
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,91 +135,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Commit 4cb724364030 ("efi_loader: Disable ANSI output for tests")
+introduced efi_console_set_ansi() to suppress ANSI escape sequences
+during unit tests. Extend this mechanism to be configurable via a new
+Kconfig option CONFIG_EFI_CONSOLE_DISABLE_ANSI.
 
-On Tue, Mar 17, 2026 at 06:10:47PM +0100, Marek Vasut wrote:
-> On 3/17/26 1:53 PM, Simona Toaca wrote:
-> > On Mon, Mar 16, 2026 at 01:32:48PM +0100, Marek Vasut wrote:
-> > > On 3/16/26 9:15 AM, Simona Toaca (OSS) wrote:
-> > > 
-> > > > +After successful saving, U-Boot clears the data in volatile memory so
-> > > > +that qb check fails at next reboot and the NVM isn't accessed again.
-> > > > +
-> > > > +There are 2 ways to save this data (both can be enabled):
-> > > 
-> > > Replace () with , .
-> > > 
-> > > > +1. automatically, in SPL (by enabling CONFIG_SPL_IMX_QB)
-> > > > +
-> > > > +- this will save the data on the current boot device (e.g. SD)
-> > > > +- other configs specific to the boot device need to be enabled (CONFIG_SPL_MMC_WRITE for saving to eMMC/SD)
-> > > > +- use for: automating qb save / saving qb data if using Falcon mode (skipping U-Boot proper)
-> > > > +
-> > > > +2. using qb command in U-Boot console (by enabling CONFIG_CMD_IMX_QB)
-> > > > +
-> > > > +- supports saving on the current boot device, or on another, specified device.
-> > > > +- if flashing via uuu, the command can be added in an uuu script (boot device needs to be specified)
-> > > > +- use for: saving the qb data during flashing / controlling the NVM to save to
-> > > > +
-> > > > +::
-> > > > +
-> > > > +        # To save/erase on current boot device
-> > > > +        => qb save/erase
-> > > > +
-> > > > +        # To save/erase on other boot device
-> > > > +        => qb save/erase mmc 0 # eMMC
-> > > > +        => qb save/erase mmc 1 # SD
-> > > > +        => qb save/erase spi   # NOR SPI
-> > > 
-> > > Can QB data be saved to arbitrary SPI NOR ?
-> > > 
-> > 
-> > No, this SPI NOR refers to the SPI controller selected by
-> > the CONFIG_SF_DEFAULT_BUS and CONFIG_SF_DEFAULT_CS options.
-> 
-> Maybe the user would want to make a backup of the QB data to another SPI NOR
-> (e.g. if the device has two, which is not unheard of) ? They should not be
-> prevented from doing so.
-> 
-> > The point is that the device we save the data to is also an
-> > option to boot from, otherwise the qb data is useless.
-> 
-> The QB data could be stored for backup purposes, that is not useless.
-> 
-There is one thing that might make this clearer, and I forgot to
-mention it explicitly:
+When CONFIG_EFI_CONSOLE_DISABLE_ANSI is enabled,
+efi_console_set_ansi(false) is called at the start of
+efi_setup_console_size(). This prevents query_console_serial() from
+sending ANSI escape sequences to the terminal, using default 25x80
+dimensions instead. This is useful for platforms where the serial
+console cannot handle ANSI queries.
 
-The get_qbdata_offset method searches for a 64KB hole in the bootloader,
-so it can save the data there. OEI knows that's where the data
-should be saved. On an arbitrary non-boot device, or, on a filesystem
-partition, the hole would not exist. It is mkimage that puts that
-hole in the bootloader, and U-Boot explicitly checks for container
-header tags.
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-If one wants to store the data elsewhere, they could use
-the generic fs methods to make the backup wherever they want, and re-load
-it themselves to the QB_SAVED_STATE_BASE address, so that U-Boot can save
-it from there.
+Changes in v2:
+- Replace runtime 'no_ansi' env variable with compile-time
+  CONFIG_EFI_CONSOLE_DISABLE_ANSI Kconfig option (Ilias, Peter)
 
-> > And the
-> > board will boot from the selected configs if one boots from spi.
-> Please see above.
-> 
-> > > Looking at this, why can this QB not use the same interface to select
-> > > arbitrary block storage device/partition/... that e.g. FS_GENERIC does use ?
-> > 
-> > There is a limited list of boot devices. By keeping things the way they are
-> > we limit the usage of this command to the actually useful boot devices (and
-> > that we also test this command on).
-> 
-> I would argue that it is better to use generic code instead of hand-writing
-> local ad-hoc implementation which is a limited version of the same.
+ lib/efi_loader/Kconfig       | 11 +++++++++++
+ lib/efi_loader/efi_console.c |  3 +++
+ 2 files changed, 14 insertions(+)
 
-In the above context, using filesystem methods might not
-be feasible.
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index b5f81e0ff530..bae98e07d238 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -576,6 +576,17 @@ config EFI_EBBR_2_1_CONFORMANCE
+ 	help
+ 	  Enabling this option adds the EBBRv2.1 conformance entry to the ECPT UEFI table.
+ 
++config EFI_CONSOLE_DISABLE_ANSI
++	bool "Disable ANSI escape sequence queries for console size"
++	help
++	  Select this option to disable ANSI escape sequence queries for
++	  detecting serial console size. When enabled,
++	  efi_setup_console_size() will not send ANSI escape sequences to
++	  the terminal and will use default 25x80 dimensions instead.
++	  This is useful for platforms where the serial console cannot
++	  properly handle ANSI queries, causing boot delays or garbled
++	  output.
++
+ config EFI_SCROLL_ON_CLEAR_SCREEN
+ 	bool "Avoid overwriting previous output on clear screen"
+ 	help
+diff --git a/lib/efi_loader/efi_console.c b/lib/efi_loader/efi_console.c
+index 068d1a0a7b74..a798d5604a31 100644
+--- a/lib/efi_loader/efi_console.c
++++ b/lib/efi_loader/efi_console.c
+@@ -365,6 +365,9 @@ void efi_setup_console_size(void)
+ 	int rows = 25, cols = 80;
+ 	int ret = -ENODEV;
+ 
++	if (IS_ENABLED(CONFIG_EFI_CONSOLE_DISABLE_ANSI))
++		efi_console_set_ansi(false);
++
+ 	if (IS_ENABLED(CONFIG_VIDEO))
+ 		ret = query_vidconsole(&rows, &cols);
+ 	if (ret) {
+-- 
+2.43.0
 
-To not spam you with replies, I want to thank you here for your review on
-all the patches. I will fix the issues in the next version.
-
-Best regards,
-Simona
+base-commit: 0d7293676b1e644b9b9ee2e45fb1ed10337cef31
+branch: debian-sent3
