@@ -4,99 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1302FF6E9F
-	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 00:11:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EE62FD8779
+	for <u-boot@archiver.kernel.org>; Wed, 18 Mar 2026 00:11:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46EBE83FA3;
-	Wed, 18 Mar 2026 01:10:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A51F184106;
+	Wed, 18 Mar 2026 01:11:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R4dVYa5H";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m2llKA0R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 007CE83FD3; Wed, 18 Mar 2026 01:10:58 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 83AFC84132; Wed, 18 Mar 2026 01:11:48 +0100 (CET)
+Received: from mail-ej1-x643.google.com (mail-ej1-x643.google.com
+ [IPv6:2a00:1450:4864:20::643])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E12983F6D
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 01:10:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 15A2C83FA3
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 01:11:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-667de793310so92642a12.0
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 17:10:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773792655; cv=none;
+Received: by mail-ej1-x643.google.com with SMTP id
+ a640c23a62f3a-b97e6e48b24so169202966b.2
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 17:11:45 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773792704; cv=none;
  d=google.com; s=arc-20240605;
- b=ZvO1cqkQHJ4/QxdA2ZB8snQrSvgxAWOPUzJ0pphl8YD4z7LjndCwq2GxICem/BtucU
- BTo0FjQFTEMr/txkoBfKnsPDW/iKhVa4VO6EhoyvRMuJYg1Yz6r2EXpZ6dtukYrIh+Tl
- n+SEUZePWoop4qrP5kFkNdj2LsU6d1vYlOkp3dtY6ufjxQ+ET85Yhr/8drxVUp4k4Cq7
- XBv2UnorPGxEr9M4YMVY3XfGg2D5SjYLNMZ2/n8N+OQEA8WPoN3hA04XBi2t5w/XXQw4
- gjMM1mO5/fUMYlrmaTL/9FN4wVTbuOVgji0Jmg8j48lsvB5ZUChbmf/3MXiG19mUruWY
- ZGJQ==
+ b=J7nl/eHV6blNzM0iBRw7quAj7s21QBN2P1fM4WMpZjFCilFc9RqrEfG/LrQ45jtGOF
+ MeBSOK3UJ6Kg/dOMrsZsIUZzZdYg9DTxbE0w6Y9BWJugnCeS2mxJJCighC91XFimqc1f
+ /BrPW0YI95fsV7phFQxPF1eyemaiMKpSj8TBojiEiy9C0b7mMt2nKPCbez6g/SnRPnfM
+ nQdI5Hqpbrm45M7ctQVAYy5fmc2enCVOkhQ4xYMo1oeATHc5EDmSDKuSQsRmVXcyH25E
+ 8b0iC9pyRUnsEn+Arvz2GgmounyYKMjoTC6ICrRuRya1cc0xqMhcIM1SgqmeCba8puBR
+ iwkw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=oPFGv7G+KvOSwp9n+12e6L8uPF73mFKhqqaph2NStzc=;
- fh=bLtfC09wmpDLVvWK0+lJ91PLbYUC+rpgLlo6ttgQvHU=;
- b=d2WApWCndMqVrnWZdsUFVvjF/3Btnq/0Y2BHiMbLwoKzJ9lTW65B79DQd/LwShUYHG
- 2MAffBjOGpD7QIDybKQ4Av84Y6sERytbo/Qrk2uibx11TROLMuIY66zqRcz0D9M8KXDg
- Fzxs+cR8q+lKxSJr665GSXcNlOx+WdVhtpRotNOzEt76TiEoOMoCjiujSNZnGR7tLiRW
- Kii6+IDn7XagGLwutwAmeyhoB8yR4nT6MXQ6r+tU0qvkGF0eGo3aevwR/a0wRFZJ1FCf
- RFf+VZEz1k8yKkf2GvSWd/3PhhTM7obINseNUQOLl3mA46Kq/QhEHJNA1TEW8KnoBeCB
- GQDg==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
+ bh=EdIQihi1LkbDUR7sbDB6hq9Yi2To0vTgWdupK8GAtQw=;
+ fh=AoVEW340XNpvidYYnA4aNiS4cNS3eTFSgS3pBmJ/70w=;
+ b=cSJeCWNzvXzhm3ylW4bgLH3mep3qt7zq0VSEweP+xCqZCYyaa57HH+91bo3AMQg02x
+ TDNWBy/kbFofD90COtZghgcFMfbpu9yycyl6cWI4bq/UcYCimXVujXPQq/An8fDdiUm8
+ nHs3IA1GOUQxXVWwrnwpsdCDW1iQh9nmXm6irACnlkN3KTg2o8IgmSNKbQN3ebsMOFOc
+ clALEntL1lhU4phF+vRDwqQnWVST7Kw26oWFNE+AfyjHJXDCHH+Z1ZaRQo+umqpX0rrT
+ zbQzFBmIpE+sbRboZyzkive1qEzT73X2F06k3fpyT4eLNQlphLTFjDL2Tk8SHukKcS8g
+ KZ/Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1773792655; x=1774397455; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oPFGv7G+KvOSwp9n+12e6L8uPF73mFKhqqaph2NStzc=;
- b=R4dVYa5HDhg8W1aZffbeFJYkE1W85tCWxqvEyRKmtds8F8tyFC/s77Du2PAn5Cx9e9
- xiLdobdhwhDS73zlJvxgG5SQivWdBoAjmzUEDhzIHa+pn55kv3ghLKImRemMYrwiBNkY
- uaMwMAYUpnIy/RtDujDTARXmFZEKL4uZGDGWk=
+ d=chromium.org; s=google; t=1773792704; x=1774397504; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=EdIQihi1LkbDUR7sbDB6hq9Yi2To0vTgWdupK8GAtQw=;
+ b=m2llKA0Rf/3/Z2TTmC+LDjt8/SlrT5kuWoW9cs2N7t24/R4iTd3QkSkuWv5ru1Flyb
+ 5BcIlV5MvsW/J6lULnL19e9X1eU7698hEUCJQHarYDg/8BCZKAqZ7PltP/vZEL2kaTsS
+ HhYwnOlBh6+4qD/N22gmQ4lYLrFulzhYIE/mY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773792655; x=1774397455;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oPFGv7G+KvOSwp9n+12e6L8uPF73mFKhqqaph2NStzc=;
- b=UpZ/Ha1bmpT9j9Hfpw+q4dlAzAgKMUdxNb5gUlpnyIGjE44S8PkUPQRhZX3DOdQlBc
- +p8/i7lXcc+UHB25LmjPq1wJg7U2zOi4gQkZ5Ky6E1ORvTjUvmFriEit0gFvcXH91X9j
- hlakBBjVW7gQIsQWtYcRSJ0I6op3B/qDtwhQjH80NtgLT5uEuH6KVIA5aUOTP1q3TR3a
- dsuY/+oRtm//hk2aanaYsxhnicc+7cA8LIUQ/E627G+WdHV7yEU6lEhPZ7xx+5neNXU9
- hkG0eIQHV7n6Tqu1KfhNBrCyREdabvRuQBGyr7AXZ9nQ+UgumZ/IBkQcdfjmFQb2g/Zf
- hxQg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWIEUuTDDU+bTLxDdhZkgWqyXOPzRx3MK7bpiJ8uz0r9clZxo3oHJZnVZOaX5Y0OrEVyZfdDsA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwTVuefyW8KRiYUYf45KXmKasQ15IzcBeB6MltwO8gQpr/UuzP7
- uFskvB/HRmC10O3/Z5HtyQIYnPyGDm2sD6dflyIb0SADQgM/laCYBryfKUamOEGISlBdQpli/ww
- rkb18XkuCi+x1pphhepiXS8ko2TZnGe51vEWizbn9
-X-Gm-Gg: ATEYQzwFPThCtqsd6SiZALimqO9aOkq8xLUWRfpy35YBKgmNmcvjx5Mxu6kW5nmt337
- AvW6v0MsE99mmZyd/sK3q535eCUxAlsOgn+sCtzeTQar+10A2PLQJ7emzYC4x6KB2CwC4LrteK1
- aif0+rcM2HZqk7DXVy2wSpca/7HAEUH/zoPWbomaD/5IZlqNZ24kkJZU1kEHJ46TxPptMbmaTPY
- ElijCaX1RSirnNbkNtJX3cYZP6zFzkuXqrBzYtBzX8GlpQXexrjXLphWrUfRqaQ55+HR44KUgbP
- 1fntR07XARHW9OF/dyEgonqJ+y/F44BpPgqQnsMF
-X-Received: by 2002:a17:906:99c2:b0:b97:73ae:e2c with SMTP id
- a640c23a62f3a-b97f481a65amr70321166b.18.1773792654739; Tue, 17 Mar 2026
- 17:10:54 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1773792704; x=1774397504;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=EdIQihi1LkbDUR7sbDB6hq9Yi2To0vTgWdupK8GAtQw=;
+ b=EW/dtkjsIRUwfZPGlxDe/ZnkepGVOqvyjbiM4WciXatPFZp1gKiWLZkc/MO+jNMIs1
+ 7MN1L2PCbQk7jqDYvvh6VKOudyc2a5sbwtb9zEUOYsFVtOB+oqMUBSE2rCQfH8pmEIOm
+ 1wKxxXged1HXwCqVfzyehTsPYzI7UV61IKlfUREnjSpiXntTiM6b4jEXWM4yw0C6UneG
+ y2YH1Jo0C/hJfi0NgnFFVzSEE5zFxzbnq+4kqyEV4HKjPSW9zZqfkB8cuerBuS7AuTNx
+ PzGQ+wDTzyMydJZgZrIIM+YjiVz0zAaiW+COjVPKA7d+RB9UISwr33HSAUvWTZUv70a0
+ A8aQ==
+X-Gm-Message-State: AOJu0Yz6J5zPsHQ93gbZWQ9eMhQofQXbAnI5Noz9xjITzYgACjvvTfB0
+ b6sfpqEAPMrDylCcY5Kxj5FmrvJnQXQxUKSVn/Txxt2kkFu7PXWaotRIGErL7uYjCLIlt0YQ8ER
+ sCU0We7JaKlVg1cYOsbn+0KE4PHaRiX3hdq7hVWgHai6iMnH26zJEsfdB
+X-Gm-Gg: ATEYQzx4Ftnvqhy4dikuGjqpE67bLP5RjoU/myrgCuB9r4LoRu/P1U87xLj0M3MGGtZ
+ 4AqI4qDoluQvKTdcrRkhx9IixOq3aqE7SDDTustIBIiAvwk3WIC2a8YBkOySmmM4Jkly1pXJ1Ko
+ /OuResivLdkU1dXfreL0fIb18XRKjhmoQ86zWNr/ScKkOXi4N/WylFKrlnTWfaYOjYUVRkpc703
+ s2zS/opq9LwYsSUUZY1lh8QrtTK2GYBHEc8mzTyi43+ceRy56RdID444UM18jhwMcFZdDeFLvHg
+ fgBskbjX4j1xpU/gQYYhX7FsVIfv5fswhpBw08GH
+X-Received: by 2002:a17:907:3fa2:b0:b96:eb7e:bc3b with SMTP id
+ a640c23a62f3a-b97f4a0bbbfmr77914766b.49.1773792703507; Tue, 17 Mar 2026
+ 17:11:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260213192838.157084-1-marex@nabladev.com>
- <CAFLszTjHZ+a17+bZh17DMOJGny6VaWCe4EftpYRE1Bq+RAty4Q@mail.gmail.com>
- <c3d59858-9855-47fd-aa5a-0b861c4e44e8@nabladev.com>
- <CAFLszTgNA1xmMNH=qtaKurDZdFW3dscMwwKyQ7iU-7EMMDOAuQ@mail.gmail.com>
- <20260317140918.GZ502704@bill-the-cat>
-In-Reply-To: <20260317140918.GZ502704@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 17 Mar 2026 18:10:39 -0600
-X-Gm-Features: AaiRm50efw_WRVXmsqcgiK1NpmacZWYlB_TVxit9HAf51Hrln_hqBdMjAan3kJA
-Message-ID: <CAFLszTha9TbXVyRt8yS8i4_Xm6WZ8MQVF3aTB6W-uq99Xn6S3w@mail.gmail.com>
-Subject: Re: [PATCH v2] binman: add CST backend selection for i.MX8M signing
-To: Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marex@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Date: Tue, 17 Mar 2026 18:11:28 -0600
+X-Gm-Features: AaiRm525AgdDGzefXa5VZ7Jq0T7zxI5Ph0PO0UB56Fmek2yBoLgXp4LtiacaUEo
+Message-ID: <CAFLszTji9OgwrDfXOif9rExEKM=Op66qQ0MYjcRPnY_V_XsVNw@mail.gmail.com>
+Subject: Please pull dm
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -116,107 +105,1025 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Tue, 17 Mar 2026 at 08:09, Tom Rini <trini@konsulko.com> wrote:
->
-> On Tue, Mar 17, 2026 at 06:28:47AM -0600, Simon Glass wrote:
-> > +Heinrich Schuchardt
-> >
-> > Hi Marek,
-> >
-> > On Fri, 13 Feb 2026 at 19:51, Marek Vasut <marex@nabladev.com> wrote:
-> > >
-> > > On 2/13/26 9:20 PM, Simon Glass wrote:
-> > >
-> > > Hello Simon,
-> > >
-> > > >> diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> > > >> index 1bea091344d..a3ebd397d82 100644
-> > > >> --- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> > > >> +++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> > > >> @@ -167,17 +167,25 @@ The nxp-imx8mcst etype is configurable using either DT properties or environment
-> > > >>   variables. The following DT properties and environment variables are supported.
-> > > >>   Note that environment variables override DT properties.
-> > > >>
-> > > >> -+--------------------+-----------+------------------------------------------------------------------+
-> > > >> -| DT property        | Variable  | Description                                                      |
-> > > >> -+====================+===========+==================================================================+
-> > > >> -| nxp,loader-address |           | SPL base address                                                 |
-> > > >> -+--------------------+-----------+------------------------------------------------------------------+
-> > > >> -| nxp,srk-table      | SRK_TABLE | full path to SRK_1_2_3_4_table.bin                               |
-> > > >> -+--------------------+-----------+------------------------------------------------------------------+
-> > > >> -| nxp,csf-crt        | CSF_KEY   | full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem |
-> > > >> -+--------------------+-----------+------------------------------------------------------------------+
-> > > >> -| nxp,img-crt        | IMG_KEY   | full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
-> > > >> -+--------------------+-----------+------------------------------------------------------------------+
-> > > >> ++--------------------+-------------+------------------------------------------------------------------+
-> > > >> +| DT property        | Variable    | Description                                                      |
-> > > >> ++====================+=============+==================================================================+
-> > > >> +| nxp,loader-address |             | SPL base address                                                 |
-> > > >> ++--------------------+-------------+------------------------------------------------------------------+
-> > > >> +| nxp,srk-table      | SRK_TABLE   | full path to SRK_1_2_3_4_table.bin                               |
-> > > >> ++--------------------+-------------+------------------------------------------------------------------+
-> > > >> +| nxp,csf-crt        | CSF_KEY     | full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem |
-> > > >> ++--------------------+-------------+------------------------------------------------------------------+
-> > > >> +| nxp,img-crt        | IMG_KEY     | full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
-> > > >> ++--------------------+-------------+------------------------------------------------------------------+
-> > > >> +| nxp,fast-auth      |             | enable fast authentication method                                |
-> > > >> ++--------------------+-------------+------------------------------------------------------------------+
-> > > >> +| nxp,srk-crt        | SRK_KEY     | full path to the SRK Key SRK1_sha256_4096_65537_v3_ca_crt.pem    |
-> > > >> ++--------------------+-------------+------------------------------------------------------------------+
-> > > >> +| nxp,unlock         |             | unlock CAAM in SPL                                               |
-> > > >> ++--------------------+-------------+------------------------------------------------------------------+
-> > > >> +| nxp,cst-backend    | CST_BACKEND | CST tool backend, default is 'ssl', or selectable 'pkcs11'       |
-> > > >> ++--------------------+-------------+------------------------------------------------------------------+
-> > > >
-> > > > Perhaps point to an example?
-> >
-> > Sorry I missed this earlier.
-> >
-> > >
-> > > Example of what ? Two lines below, there is an example of using those
-> > > env vars, see the entire file.
-> >
-> > Yes I see it, but it doesn't have CST_BACKEND right?
-> >
-> > >
-> > > >>   Environment variables can be set as follows to point the build process
-> > > >>   to external key material:
-> > > >> diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
-> > > >> index 8922d6cd070..29bc778d0e5 100644
-> > > >> --- a/tools/binman/entries.rst
-> > > >> +++ b/tools/binman/entries.rst
-> > > >> @@ -1664,6 +1664,13 @@ Entry: nxp-imx8mcst: NXP i.MX8M CST .cfg file generator and cst invoker
-> > > >>
-> > > >>   Properties / Entry arguments:
-> > > >>       - nxp,loader-address - loader address (SPL text base)
-> > > >> +    - nxp,srk-table - full path to SRK_1_2_3_4_table.bin
-> > > >> +    - nxp,csf-crt - full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem
-> > > >> +    - nxp,img-crt - full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem
-> > > >> +    - nxp,fast-auth - enable fast authentication method
-> > > >> +    - nxp,srk-crt - full path to the SRK Key SRK1_sha256_4096_65537_v3_ca_crt.pem
-> > > >> +    - nxp,unlock - unlock CAAM in SPL
-> > > >> +    - nxp,cst-backend - CST tool backend, default is 'ssl', or selectable 'pkcs11'
-> > > >>
-> > > >
-> > > > The way it works is you add this as a comment in nxp_imx8mcst.py and
-> > > > then run 'binman entry-docs' to generate entries.rst - see here:
-> > > >
-> > > > https://docs.u-boot.org/en/latest/develop/package/binman.html#entry-documentation
-> > > Why is there this entries.rst then ? Should the entries be removed from
-> > > here and moved into the py file or what is this inconsistency ?
-> >
-> > The entries.rst file is there so that the documentation can be build,
-> > containing it. It might be possible to update 'make htmldocs' to run
-> > binman to update the generated docs.
-> >
-> > Heinrich, what do you think about that?
->
-> That won't work for readthedocs, it needs to be generated, if it can, as
-> part of the normal sphix build doc process.
+https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/29554
 
-Hmm that's a bit of a pain. We don't really want to run binman from
-sphinx. I could create an Sphinx extension to create the entry and
-bintools docs, perhaps?
+
+The following changes since commit eefb822fb574e28d49fc9f358328854e17fc8406:
+
+  Merge tag 'rpi-2026.04-rc4' of
+https://source.denx.de/u-boot/custodians/u-boot-raspberrypi
+(2026-03-12 16:10:46 -0600)
+
+are available in the Git repository at:
+
+  git://git.denx.de/u-boot-dm.git tags/dm-17mar26
+
+for you to fetch changes up to fb275d2abf38736626c6c5d8e46e6273f73f59f3:
+
+  test: binman: Add test for pkcs11 signed capsule (2026-03-17 07:41:52 -0600)
+
+----------------------------------------------------------------
+Binman test-file reorganisation
+Binman EFI-capsule PKCS11 support
+
+----------------------------------------------------------------
+Simon Glass (23):
+      binman: test: Capture output from tests with warnings
+      binman: test: Move pack/layout test files to test/pack/
+      binman: test: Move U-Boot variant test files to test/xpl/
+      binman: test: Move x86 and Intel test files to test/x86/
+      binman: test: Move FIT image test files to test/fit/
+      binman: test: Move FDT/fdtmap test files to test/fdt/
+      binman: test: Move blob test files to test/blob/
+      binman: test: Move security test files to test/security/
+      binman: test: Move CBFS test files to test/cbfs/
+      binman: test: Move ChromeOS test files to test/cros/
+      binman: test: Move mkimage test files to test/mkimage/
+      binman: test: Move FIP/TF-A test files to test/fip/
+      binman: test: Move UEFI capsule test files to test/capsule/
+      binman: test: Move vendor-specific test files to test/vendor/
+      binman: test: Move symbol test files to test/symbols/
+      binman: test: Move remaining test files to test/entry/
+      binman: test: Move x86 binary test data to test/x86/
+      binman: test: Move FIT signing test data to test/fit/
+      binman: test: Move shared key files to test/security/
+      binman: test: Fix code coverage for iMX8 and cst bintool
+      binman: Remove the coverage allow_failures list
+      binman: Drop the allow_failures parameter from run_test_coverage()
+      binman: doc: Update binman_tests.rst for subdirectory layout
+
+Wojciech Dubowik (6):
+      tools: mkeficapsule: Add support for pkcs11
+      binman: Accept pkcs11 URI tokens for capsule updates
+      tools: mkeficapsule: Fix dump signature long option
+      binman: Add dump signature option to mkeficapsule
+      binman: DTS: Add dump-signature option for capsules
+      test: binman: Add test for pkcs11 signed capsule
+
+ doc/develop/binman_tests.rst                       |   46 +-
+ doc/mkeficapsule.1                                 |    4 +-
+ tools/binman/btool/mkeficapsule.py                 |    8 +-
+ tools/binman/btool/p11_kit.py                      |   21 +
+ tools/binman/btool/pkcs11_tool.py                  |   21 +
+ tools/binman/entries.rst                           |    4 +
+ tools/binman/entry_test.py                         |    2 +-
+ tools/binman/etype/efi_capsule.py                  |   17 +-
+ tools/binman/fdt_test.py                           |    4 +-
+ tools/binman/ftest.py                              | 1155 ++++++++++++--------
+ tools/binman/main.py                               |    7 +-
+ tools/binman/test/214_no_alt_format.dts            |   13 -
+ tools/binman/test/Makefile                         |    2 +-
+ tools/binman/test/{023_blob.dts => blob/blob.dts}  |    0
+ .../binman/test/{157_blob_ext.dts => blob/ext.dts} |    0
+ .../{215_blob_ext_list.dts => blob/ext_list.dts}   |    0
+ .../ext_list_fake.dts}                             |    0
+ .../ext_list_missing.dts}                          |    0
+ .../ext_missing.dts}                               |    0
+ .../ext_missing_sect.dts}                          |    0
+ .../{266_blob_ext_opt.dts => blob/ext_opt.dts}     |    0
+ .../test/{217_fake_blob.dts => blob/fake.dts}      |    0
+ .../{173_missing_blob.dts => blob/missing.dts}     |    0
+ .../named_by_arg.dts}                              |    0
+ .../test/{273_blob_symbol.dts => blob/symbol.dts}  |    0
+ .../{319_capsule_accept.dts => capsule/accept.dts} |    0
+ .../accept_missing_guid.dts}                       |    0
+ .../accept_revert_missing.dts}                     |    0
+ .../test/{311_capsule.dts => capsule/capsule.dts}  |    0
+ .../empty_type_missing.dts}                        |    0
+ .../missing_guid.dts}                              |    0
+ .../missing_index.dts}                             |    0
+ .../missing_key.dts}                               |    0
+ .../oemflags.dts}                                  |    0
+ .../{320_capsule_revert.dts => capsule/revert.dts} |    0
+ .../{312_capsule_signed.dts => capsule/signed.dts} |    0
+ tools/binman/test/capsule/signed_pkcs11.dts        |   22 +
+ .../signed_ver.dts}                                |    0
+ .../version.dts}                                   |    0
+ .../{106_cbfs_bad_arch.dts => cbfs/bad_arch.dts}   |    0
+ .../bad_compress.dts}                              |    0
+ .../{126_cbfs_bad_type.dts => cbfs/bad_type.dts}   |    0
+ .../test/{110_cbfs_name.dts => cbfs/name.dts}      |    0
+ .../no_contents.dts}                               |    0
+ .../{107_cbfs_no_size.dts => cbfs/no_size.dts}     |    0
+ .../test/{114_cbfs_offset.dts => cbfs/offset.dts}  |    0
+ .../binman/test/{102_cbfs_raw.dts => cbfs/raw.dts} |    0
+ .../raw_compress.dts}                              |    0
+ .../{103_cbfs_raw_ppc.dts => cbfs/raw_ppc.dts}     |    0
+ .../{142_replace_cbfs.dts => cbfs/replace.dts}     |    0
+ .../test/{104_cbfs_stage.dts => cbfs/stage.dts}    |    0
+ .../test/{125_cbfs_update.dts => cbfs/update.dts}  |    0
+ tools/binman/test/{067_fmap.dts => cros/fmap.dts}  |    0
+ tools/binman/test/{071_gbb.dts => cros/gbb.dts}    |    0
+ .../{073_gbb_no_size.dts => cros/gbb_no_size.dts}  |    0
+ .../gbb_too_small.dts}                             |    0
+ .../test/{074_vblock.dts => cros/vblock.dts}       |    0
+ .../vblock_bad_entry.dts}                          |    0
+ .../vblock_bad_phandle.dts}                        |    0
+ .../vblock_content.dts}                            |    0
+ .../vblock_no_content.dts}                         |    0
+ .../test/{262_absent.dts => entry/absent.dts}      |    0
+ .../{198_collection.dts => entry/collection.dts}   |    0
+ .../collection_other.dts}                          |    0
+ .../collection_section.dts}                        |    0
+ .../test/{083_compress.dts => entry/compress.dts}  |    0
+ .../compress_extra.dts}                            |    0
+ .../compress_image.dts}                            |    0
+ .../compress_image_less.dts}                       |    0
+ .../compress_section.dts}                          |    0
+ .../compress_section_size.dts}                     |    0
+ tools/binman/test/{096_elf.dts => entry/elf.dts}   |    0
+ .../{097_elf_strip.dts => entry/elf_strip.dts}     |    0
+ .../{062_entry_args.dts => entry/entry_args.dts}   |    0
+ .../entry_args_missing.dts}                        |    0
+ .../entry_args_required.dts}                       |    0
+ .../entry_args_unknown_datatype.dts}               |    0
+ tools/binman/test/{174_env.dts => entry/env.dts}   |    0
+ .../{175_env_no_size.dts => entry/env_no_size.dts} |    0
+ .../env_too_small.dts}                             |    0
+ .../binman/test/{084_files.dts => entry/files.dts} |    0
+ .../{190_files_align.dts => entry/files_align.dts} |    0
+ .../files_compress.dts}                            |    0
+ .../files_no_pattern.dts}                          |    0
+ .../{086_files_none.dts => entry/files_none.dts}   |    0
+ tools/binman/test/{069_fill.dts => entry/fill.dts} |    0
+ .../{080_fill_empty.dts => entry/fill_empty.dts}   |    0
+ .../fill_no_size.dts}                              |    0
+ .../image_entryarg.dts}                            |    0
+ tools/binman/test/{127_list.dts => entry/list.dts} |    0
+ .../{056_name_prefix.dts => entry/name_prefix.dts} |    0
+ tools/binman/test/{268_null.dts => entry/null.dts} |    0
+ .../offset_from_elf.dts}                           |    0
+ .../test/{269_overlap.dts => entry/overlap.dts}    |    0
+ .../{271_overlap_bad.dts => entry/overlap_bad.dts} |    0
+ .../overlap_no_size.dts}                           |    0
+ .../overlap_null.dts}                              |    0
+ .../{045_prop_test.dts => entry/prop_test.dts}     |    0
+ .../read_image_skip.dts}                           |    0
+ .../remove_template.dts}                           |    0
+ .../test/{132_replace.dts => entry/replace.dts}    |    0
+ .../{143_replace_all.dts => entry/replace_all.dts} |    0
+ .../replace_multi.dts}                             |    0
+ .../replace_repack.dts}                            |    0
+ .../replace_section_deep.dts}                      |    0
+ .../replace_section_simple.dts}                    |    0
+ .../replace_with_bintool.dts}                      |    0
+ .../section_fname.dts}                             |    0
+ .../section_timeout.dts}                           |    0
+ .../test/{055_sections.dts => entry/sections.dts}  |    0
+ .../test/{259_symlink.dts => entry/symlink.dts}    |    0
+ .../test/{222_tee_os.dts => entry/tee_os.dts}      |    0
+ .../{263_tee_os_opt.dts => entry/tee_os_opt.dts}   |    0
+ .../test/{286_template.dts => entry/template.dts}  |    0
+ .../template_multi.dts}                            |    0
+ .../template_phandle.dts}                          |    0
+ .../template_phandle_dup.dts}                      |    0
+ .../template_section.dts}                          |    0
+ tools/binman/test/{066_text.dts => entry/text.dts} |    0
+ .../unique_names.dts}                              |    0
+ .../unique_names_multi.dts}                        |    0
+ .../unknown_contents.dts}                          |    0
+ .../unknown_pos_size.dts}                          |    0
+ .../alternates_fdt.dts}                            |    0
+ .../alternates_fdtgrep.dts}                        |    0
+ .../alternates_inval.dts}                          |    0
+ .../alternates_spl.dts}                            |    0
+ .../alternates_vpl.dts}                            |    0
+ .../{347_bootph_prop.dts => fdt/bootph_prop.dts}   |    0
+ .../{124_compress_dtb.dts => fdt/compress_dtb.dts} |    0
+ .../compress_dtb_invalid.dts}                      |    0
+ .../compress_dtb_prepend_invalid.dts}              |    0
+ .../compress_dtb_prepend_length.dts}               |    0
+ .../compress_dtb_zstd.dts}                         |    0
+ .../{128_decode_image.dts => fdt/decode_image.dts} |    0
+ .../decode_image_nohdr.dts}                        |    0
+ .../binman/test/{115_fdtmap.dts => fdt/fdtmap.dts} |    0
+ .../fdtmap_alt_format.dts}                         |    0
+ .../{116_fdtmap_hdr.dts => fdt/fdtmap_hdr.dts}     |    0
+ .../fdtmap_hdr_endbad.dts}                         |    0
+ .../fdtmap_hdr_middle.dts}                         |    0
+ .../fdtmap_hdr_missing.dts}                        |    0
+ .../fdtmap_hdr_nosize.dts}                         |    0
+ .../fdtmap_hdr_pos.dts}                            |    0
+ .../fdtmap_hdr_start.dts}                          |    0
+ .../fdtmap_hdr_startbad.dts}                       |    0
+ .../hdr_no_location.dts}                           |    0
+ .../binman/test/{194_fdt_incl.dts => fdt/incl.dts} |    0
+ .../{195_fdt_incl_tpl.dts => fdt/incl_tpl.dts}     |    0
+ .../{257_fdt_incl_vpl.dts => fdt/incl_vpl.dts}     |    0
+ .../{130_list_fdtmap.dts => fdt/list_fdtmap.dts}   |    0
+ .../test/{060_fdt_update.dts => fdt/update.dts}    |    0
+ .../{082_fdt_update_all.dts => fdt/update_all.dts} |    0
+ .../update_all_repack.dts}                         |    0
+ .../{061_fdt_update_bad.dts => fdt/update_bad.dts} |    0
+ .../test/{169_atf_bl31.dts => fip/atf_bl31.dts}    |    0
+ .../{211_fip_bad_align.dts => fip/bad_align.dts}   |    0
+ tools/binman/test/{347_bl1.dts => fip/bl1.dts}     |    0
+ .../{212_fip_collection.dts => fip/collection.dts} |    0
+ tools/binman/test/{203_fip.dts => fip/fip.dts}     |    0
+ tools/binman/test/{207_fip_ls.dts => fip/ls.dts}   |    0
+ .../test/{209_fip_missing.dts => fip/missing.dts}  |    0
+ .../test/{205_fip_no_type.dts => fip/no_type.dts}  |    0
+ .../test/{201_opensbi.dts => fip/opensbi.dts}      |    0
+ .../test/{204_fip_other.dts => fip/other.dts}      |    0
+ .../test/{208_fip_replace.dts => fip/replace.dts}  |    0
+ tools/binman/test/{172_scp.dts => fip/scp.dts}     |    0
+ .../binman/test/{210_fip_size.dts => fip/size.dts} |    0
+ .../binman/test/{206_fip_uuid.dts => fip/uuid.dts} |    0
+ tools/binman/test/{ => fit}/aes256.bin             |  Bin
+ .../test/{275_fit_align.dts => fit/align.dts}      |    0
+ .../test/{227_fit_bad_dir.dts => fit/bad_dir.dts}  |    2 +-
+ .../bad_dir_config.dts}                            |    2 +-
+ .../{224_fit_bad_oper.dts => fit/bad_oper.dts}     |    0
+ tools/binman/test/{ => fit}/dummy-rsa-engine.c     |    0
+ .../dummy-rsa4096.crt}                             |    0
+ .../encrypt_data.dts}                              |    0
+ .../encrypt_data_no_key.dts}                       |    0
+ .../{162_fit_external.dts => fit/external.dts}     |    0
+ .../extract_replace.dts}                           |    0
+ tools/binman/test/{170_fit_fdt.dts => fit/fdt.dts} |    0
+ .../{334_fit_fdt_compat.dts => fit/fdt_compat.dts} |    0
+ .../test/{333_fit_fdt_dir.dts => fit/fdt_dir.dts}  |    0
+ .../{284_fit_fdt_list.dts => fit/fdt_list.dts}     |    0
+ .../fdt_missing_prop.dts}                          |    0
+ .../{345_fit_fdt_name.dts => fit/fdt_name.dts}     |    0
+ .../{223_fit_fdt_oper.dts => fit/fdt_oper.dts}     |    0
+ .../{335_fit_fdt_phase.dts => fit/fdt_phase.dts}   |    0
+ .../firmware_loadables.dts}                        |    0
+ tools/binman/test/{161_fit.dts => fit/fit.dts}     |    0
+ .../test/{219_fit_gennode.dts => fit/gennode.dts}  |    0
+ .../image_subentry_alignment.dts}                  |    0
+ .../key_name_hint_dir_signature.dts}               |    0
+ .../missing_blob.dts}                              |    0
+ .../test/{340_openssl.conf => fit/openssl.conf}    |    0
+ .../replace_sibling.dts}                           |    0
+ .../test/{340_rsa2048.key => fit/rsa2048.key}      |    0
+ .../binman/test/{280_fit_sign.dts => fit/sign.dts} |    0
+ .../{340_fit_signature.dts => fit/signature.dts}   |    0
+ .../signature_engine.dts}                          |    0
+ .../signature_engine_encrypt.dts}                  |    0
+ .../signature_engine_pkcs11.dts}                   |    0
+ .../signature_engine_pkcs11_object.dts}            |    0
+ .../signature_multi_key.dts}                       |    0
+ .../signature_no_nodes.dts}                        |    0
+ .../test/{340_softhsm2.conf => fit/softhsm2.conf}  |    0
+ .../{226_fit_split_elf.dts => fit/split_elf.dts}   |    0
+ .../subentry_bintool.dts}                          |    0
+ .../subentry_hash.dts}                             |    0
+ .../{264_tee_os_opt_fit.dts => fit/tee_os_opt.dts} |    0
+ .../tee_os_opt_bad.dts}                            |    0
+ .../{288_template_fit.dts => fit/template.dts}     |    0
+ .../{247_mkimage_coll.dts => mkimage/coll.dts}     |    0
+ .../filename.dts}                                  |    0
+ .../{243_mkimage_image.dts => mkimage/image.dts}   |    0
+ .../image_bad.dts}                                 |    0
+ .../image_no_content.dts}                          |    0
+ .../missing.dts}                                   |    0
+ .../missing_multiple.dts}                          |    0
+ .../test/{156_mkimage.dts => mkimage/mkimage.dts}  |    0
+ .../mult_data.dts}                                 |    0
+ .../mult_no_content.dts}                           |    0
+ .../{242_mkimage_name.dts => mkimage/name.dts}     |    0
+ .../special.dts}                                   |    0
+ .../test/{290_mkimage_sym.dts => mkimage/sym.dts}  |    0
+ .../4gb_and_skip_at_start_together.dts}            |    0
+ .../align_default.dts}                             |    0
+ .../{326_assume_size.dts => pack/assume_size.dts}  |    0
+ .../assume_size_ok.dts}                            |    0
+ .../test/{007_bad_align.dts => pack/bad_align.dts} |    0
+ .../{059_change_size.dts => pack/change_size.dts}  |    0
+ .../{006_dual_image.dts => pack/dual_image.dts}    |    0
+ .../binman/test/{003_empty.dts => pack/empty.dts}  |    0
+ .../entry_extend.dts}                              |    0
+ .../entry_extend_section.dts}                      |    0
+ .../entry_extend_twice.dts}                        |    0
+ .../entry_shrink.dts}                              |    0
+ .../expand_size_bad.dts}                           |    0
+ .../{088_extend_size.dts => pack/extend_size.dts}  |    0
+ .../extend_size_bad.dts}                           |    0
+ .../{022_image_name.dts => pack/image_name.dts}    |    0
+ .../test/{021_image_pad.dts => pack/image_pad.dts} |    0
+ .../test/{001_invalid.dts => pack/invalid.dts}     |    0
+ .../invalid_entry.dts}                             |    0
+ .../missing_node.dts}                              |    0
+ tools/binman/test/{008_pack.dts => pack/pack.dts}  |    0
+ .../pack_4gb_no_size.dts}                          |    0
+ .../pack_4gb_outside.dts}                          |    0
+ .../pack_align_power2.dts}                         |    0
+ .../pack_align_section.dts}                        |    0
+ .../pack_align_size_power2.dts}                    |    0
+ .../{009_pack_extra.dts => pack/pack_extra.dts}    |    0
+ .../pack_image_align.dts}                          |    0
+ .../pack_image_overflow.dts}                       |    0
+ .../pack_image_size.dts}                           |    0
+ .../pack_inv_align.dts}                            |    0
+ .../pack_inv_image_align.dts}                      |    0
+ .../pack_inv_image_align_power2.dts}               |    0
+ .../pack_inv_size_align.dts}                       |    0
+ .../pack_overflow.dts}                             |    0
+ .../pack_overlap.dts}                              |    0
+ .../pack_overlap_zero.dts}                         |    0
+ .../pack_zero_size.dts}                            |    0
+ .../pad_in_sections.dts}                           |    0
+ .../section_align.dts}                             |    0
+ .../section_inner.dts}                             |    0
+ .../{180_section_pad.dts => pack/section_pad.dts}  |    0
+ .../sections_offset.dts}                           |    0
+ .../test/{005_simple.dts => pack/simple.dts}       |    0
+ .../skip_at_start.dts}                             |    0
+ .../skip_at_start_pad.dts}                         |    0
+ .../skip_at_start_section_pad.dts}                 |    0
+ .../test/{024_sorted.dts => pack/sorted.dts}       |    0
+ .../unit_address.dts}                              |    0
+ .../test/{079_uses_pos.dts => pack/uses_pos.dts}   |    0
+ .../encrypted_invalid_iv_file.dts}                 |    0
+ .../encrypted_key_file.dts}                        |    0
+ .../encrypted_key_source.dts}                      |    0
+ .../encrypted_missing_key.dts}                     |    0
+ .../encrypted_no_algo.dts}                         |    0
+ .../test/{090_hash.dts => security/hash.dts}       |    0
+ .../hash_bad_algo.dts}                             |    0
+ .../hash_no_algo.dts}                              |    0
+ .../hash_section.dts}                              |    0
+ tools/binman/test/{ => security}/key.key           |    0
+ tools/binman/test/{ => security}/key.pem           |    0
+ .../key_name_hint_dir_spl_pubkey_dtb.dts}          |    0
+ .../{230_pre_load.dts => security/pre_load.dts}    |    0
+ .../pre_load_invalid_algo.dts}                     |    0
+ .../pre_load_invalid_key.dts}                      |    0
+ .../pre_load_invalid_padding.dts}                  |    0
+ .../pre_load_invalid_sha.dts}                      |    0
+ .../pre_load_pkcs.dts}                             |    0
+ .../pre_load_pss.dts}                              |    0
+ .../section_ignore_hash_signature.dts}             |    0
+ .../sign_non_fit.dts}                              |    0
+ .../spl_pubkey_dtb.dts}                            |    0
+ .../{279_x509_cert.dts => security/x509_cert.dts}  |    0
+ .../xilinx_bootgen_sign.dts}                       |    0
+ .../xilinx_bootgen_sign_enc.dts}                   |    0
+ .../{336_symbols_base.dts => symbols/base.dts}     |    0
+ .../base_expand.dts}                               |    0
+ .../{338_symbols_comp.dts => symbols/comp.dts}     |    0
+ .../disable.dts}                                   |    0
+ .../test/{260_symbols_elf.dts => symbols/elf.dts}  |    0
+ .../{197_symbols_expand.dts => symbols/expand.dts} |    0
+ .../{196_symbols_nodtb.dts => symbols/nodtb.dts}   |    0
+ .../test/{187_symbols_sub.dts => symbols/sub.dts}  |    0
+ .../test/{053_symbols.dts => symbols/symbols.dts}  |    0
+ .../test/{149_symbols_tpl.dts => symbols/tpl.dts}  |    0
+ .../nxp_ddrfw_imx95.dts}                           |    0
+ .../test/{339_nxp_imx8.dts => vendor/nxp_imx8.dts} |    3 +
+ tools/binman/test/vendor/nxp_imx8_csf.dts          |   26 +
+ .../binman/test/vendor/nxp_imx8_csf_fast_auth.dts  |   21 +
+ tools/binman/test/vendor/nxp_imx8_imagename.dts    |   27 +
+ .../{350_nxp_imx95.dts => vendor/nxp_imx95.dts}    |    0
+ .../powerpc_mpc85xx_bootpg_resetvec.dts}           |    0
+ .../renesas_rcar4_sa0.dts}                         |    0
+ .../renesas_rcar4_sa0_size.dts}                    |    0
+ .../rockchip_tpl.dts}                              |    0
+ .../ti_board_cfg.dts}                              |    0
+ .../ti_board_cfg_combined.dts}                     |    0
+ .../ti_board_cfg_no_type.dts}                      |    0
+ .../ti_board_cfg_phony.dts}                        |    0
+ .../test/{225_ti_dm.dts => vendor/ti_dm.dts}       |    0
+ .../{296_ti_secure.dts => vendor/ti_secure.dts}    |    0
+ .../ti_secure_firewall.dts}                        |    0
+ .../ti_secure_firewall_missing_property.dts}       |    0
+ .../ti_secure_rom.dts}                             |    0
+ .../ti_secure_rom_a.dts}                           |    0
+ .../ti_secure_rom_b.dts}                           |    0
+ .../ti_secure_rom_combined.dts}                    |    0
+ tools/binman/test/{ => x86}/descriptor.bin         |  Bin
+ .../descriptor_offset.dts}                         |    0
+ tools/binman/test/{ => x86}/fitimage.bin.gz        |  Bin
+ .../binman/test/{094_fmap_x86.dts => x86/fmap.dts} |    0
+ .../fmap_section.dts}                              |    0
+ tools/binman/test/{ => x86}/ifwi.bin.gz            |  Bin
+ .../test/{043_intel_cmc.dts => x86/intel_cmc.dts}  |    0
+ .../test/{147_intel_fit.dts => x86/intel_fit.dts}  |    0
+ .../intel_fit_missing.dts}                         |    0
+ .../test/{042_intel_fsp.dts => x86/intel_fsp.dts}  |    0
+ .../{152_intel_fsp_m.dts => x86/intel_fsp_m.dts}   |    0
+ .../{153_intel_fsp_s.dts => x86/intel_fsp_s.dts}   |    0
+ .../{154_intel_fsp_t.dts => x86/intel_fsp_t.dts}   |    0
+ .../test/{050_intel_mrc.dts => x86/intel_mrc.dts}  |    0
+ .../intel_refcode.dts}                             |    0
+ .../test/{046_intel_vbt.dts => x86/intel_vbt.dts}  |    0
+ .../test/{032_intel_vga.dts => x86/intel_vga.dts}  |    0
+ .../{037_x86_no_ucode.dts => x86/no_ucode.dts}     |    0
+ .../optional_ucode.dts}                            |    0
+ .../test/{144_x86_reset16.dts => x86/reset16.dts}  |    0
+ .../reset16_spl.dts}                               |    0
+ .../reset16_tpl.dts}                               |    0
+ tools/binman/test/{029_x86_rom.dts => x86/rom.dts} |    0
+ .../{111_x86_rom_ifwi.dts => x86/rom_ifwi.dts}     |    0
+ .../rom_ifwi_nodata.dts}                           |    0
+ .../rom_ifwi_nodesc.dts}                           |    0
+ .../rom_ifwi_section.dts}                          |    0
+ .../test/{031_x86_rom_me.dts => x86/rom_me.dts}    |    0
+ .../rom_me_empty.dts}                              |    0
+ .../rom_me_missing.dts}                            |    0
+ .../rom_me_no_desc.dts}                            |    0
+ .../single_ucode.dts}                              |    0
+ .../test/{033_x86_start16.dts => x86/start16.dts}  |    0
+ .../start16_spl.dts}                               |    0
+ .../start16_tpl.dts}                               |    0
+ .../symbols_tpl.dts}                               |    0
+ .../{093_x86_tpl_ucode.dts => x86/tpl_ucode.dts}   |    0
+ .../test/{034_x86_ucode.dts => x86/ucode.dts}      |    0
+ .../ucode_missing_node.dts}                        |    0
+ .../ucode_missing_node2.dts}                       |    0
+ .../ucode_not_in_image.dts}                        |    0
+ .../{049_x86_ucode_spl.dts => x86/ucode_spl.dts}   |    0
+ .../ucode_spl_needs_retry.dts}                     |    0
+ .../{026_pack_u_boot_dtb.dts => xpl/pack_dtb.dts}  |    0
+ .../{047_spl_bss_pad.dts => xpl/spl_bss_pad.dts}   |    0
+ .../test/{078_u_boot_tpl.dts => xpl/tpl.dts}       |    0
+ .../{193_tpl_bss_pad.dts => xpl/tpl_bss_pad.dts}   |    0
+ .../{036_u_boot_img.dts => xpl/u-boot-img.dts}     |    0
+ .../u-boot-spl-dtb.dts}                            |    0
+ .../u-boot-spl-nodtb.dts}                          |    0
+ .../{285_spl_expand.dts => xpl/u-boot-spl.dts}     |    0
+ .../u-boot-tpl-nodtb.dts}                          |    0
+ .../u-boot-vpl-nodtb.dts}                          |    0
+ .../test/{255_u_boot_vpl.dts => xpl/vpl.dts}       |    0
+ .../{258_vpl_bss_pad.dts => xpl/vpl_bss_pad.dts}   |    0
+ tools/mkeficapsule.c                               |  113 +-
+ tools/u_boot_pylib/test_util.py                    |   15 +-
+ 389 files changed, 945 insertions(+), 590 deletions(-)
+ create mode 100644 tools/binman/btool/p11_kit.py
+ create mode 100644 tools/binman/btool/pkcs11_tool.py
+ delete mode 100644 tools/binman/test/214_no_alt_format.dts
+ rename tools/binman/test/{023_blob.dts => blob/blob.dts} (100%)
+ rename tools/binman/test/{157_blob_ext.dts => blob/ext.dts} (100%)
+ rename tools/binman/test/{215_blob_ext_list.dts => blob/ext_list.dts} (100%)
+ rename tools/binman/test/{218_blob_ext_list_fake.dts =>
+blob/ext_list_fake.dts} (100%)
+ rename tools/binman/test/{216_blob_ext_list_missing.dts =>
+blob/ext_list_missing.dts} (100%)
+ rename tools/binman/test/{158_blob_ext_missing.dts =>
+blob/ext_missing.dts} (100%)
+ rename tools/binman/test/{159_blob_ext_missing_sect.dts =>
+blob/ext_missing_sect.dts} (100%)
+ rename tools/binman/test/{266_blob_ext_opt.dts => blob/ext_opt.dts} (100%)
+ rename tools/binman/test/{217_fake_blob.dts => blob/fake.dts} (100%)
+ rename tools/binman/test/{173_missing_blob.dts => blob/missing.dts} (100%)
+ rename tools/binman/test/{068_blob_named_by_arg.dts =>
+blob/named_by_arg.dts} (100%)
+ rename tools/binman/test/{273_blob_symbol.dts => blob/symbol.dts} (100%)
+ rename tools/binman/test/{319_capsule_accept.dts => capsule/accept.dts} (100%)
+ rename tools/binman/test/{321_capsule_accept_missing_guid.dts =>
+capsule/accept_missing_guid.dts} (100%)
+ rename tools/binman/test/{323_capsule_accept_revert_missing.dts =>
+capsule/accept_revert_missing.dts} (100%)
+ rename tools/binman/test/{311_capsule.dts => capsule/capsule.dts} (100%)
+ rename tools/binman/test/{322_empty_capsule_type_missing.dts =>
+capsule/empty_type_missing.dts} (100%)
+ rename tools/binman/test/{318_capsule_missing_guid.dts =>
+capsule/missing_guid.dts} (100%)
+ rename tools/binman/test/{317_capsule_missing_index.dts =>
+capsule/missing_index.dts} (100%)
+ rename tools/binman/test/{316_capsule_missing_key.dts =>
+capsule/missing_key.dts} (100%)
+ rename tools/binman/test/{315_capsule_oemflags.dts =>
+capsule/oemflags.dts} (100%)
+ rename tools/binman/test/{320_capsule_revert.dts => capsule/revert.dts} (100%)
+ rename tools/binman/test/{312_capsule_signed.dts => capsule/signed.dts} (100%)
+ create mode 100644 tools/binman/test/capsule/signed_pkcs11.dts
+ rename tools/binman/test/{314_capsule_signed_ver.dts =>
+capsule/signed_ver.dts} (100%)
+ rename tools/binman/test/{313_capsule_version.dts =>
+capsule/version.dts} (100%)
+ rename tools/binman/test/{106_cbfs_bad_arch.dts => cbfs/bad_arch.dts} (100%)
+ rename tools/binman/test/{109_cbfs_bad_compress.dts =>
+cbfs/bad_compress.dts} (100%)
+ rename tools/binman/test/{126_cbfs_bad_type.dts => cbfs/bad_type.dts} (100%)
+ rename tools/binman/test/{110_cbfs_name.dts => cbfs/name.dts} (100%)
+ rename tools/binman/test/{108_cbfs_no_contents.dts =>
+cbfs/no_contents.dts} (100%)
+ rename tools/binman/test/{107_cbfs_no_size.dts => cbfs/no_size.dts} (100%)
+ rename tools/binman/test/{114_cbfs_offset.dts => cbfs/offset.dts} (100%)
+ rename tools/binman/test/{102_cbfs_raw.dts => cbfs/raw.dts} (100%)
+ rename tools/binman/test/{105_cbfs_raw_compress.dts =>
+cbfs/raw_compress.dts} (100%)
+ rename tools/binman/test/{103_cbfs_raw_ppc.dts => cbfs/raw_ppc.dts} (100%)
+ rename tools/binman/test/{142_replace_cbfs.dts => cbfs/replace.dts} (100%)
+ rename tools/binman/test/{104_cbfs_stage.dts => cbfs/stage.dts} (100%)
+ rename tools/binman/test/{125_cbfs_update.dts => cbfs/update.dts} (100%)
+ rename tools/binman/test/{067_fmap.dts => cros/fmap.dts} (100%)
+ rename tools/binman/test/{071_gbb.dts => cros/gbb.dts} (100%)
+ rename tools/binman/test/{073_gbb_no_size.dts => cros/gbb_no_size.dts} (100%)
+ rename tools/binman/test/{072_gbb_too_small.dts =>
+cros/gbb_too_small.dts} (100%)
+ rename tools/binman/test/{074_vblock.dts => cros/vblock.dts} (100%)
+ rename tools/binman/test/{077_vblock_bad_entry.dts =>
+cros/vblock_bad_entry.dts} (100%)
+ rename tools/binman/test/{076_vblock_bad_phandle.dts =>
+cros/vblock_bad_phandle.dts} (100%)
+ rename tools/binman/test/{189_vblock_content.dts =>
+cros/vblock_content.dts} (100%)
+ rename tools/binman/test/{075_vblock_no_content.dts =>
+cros/vblock_no_content.dts} (100%)
+ rename tools/binman/test/{262_absent.dts => entry/absent.dts} (100%)
+ rename tools/binman/test/{198_collection.dts => entry/collection.dts} (100%)
+ rename tools/binman/test/{246_collection_other.dts =>
+entry/collection_other.dts} (100%)
+ rename tools/binman/test/{199_collection_section.dts =>
+entry/collection_section.dts} (100%)
+ rename tools/binman/test/{083_compress.dts => entry/compress.dts} (100%)
+ rename tools/binman/test/{186_compress_extra.dts =>
+entry/compress_extra.dts} (100%)
+ rename tools/binman/test/{182_compress_image.dts =>
+entry/compress_image.dts} (100%)
+ rename tools/binman/test/{183_compress_image_less.dts =>
+entry/compress_image_less.dts} (100%)
+ rename tools/binman/test/{185_compress_section.dts =>
+entry/compress_section.dts} (100%)
+ rename tools/binman/test/{184_compress_section_size.dts =>
+entry/compress_section_size.dts} (100%)
+ rename tools/binman/test/{096_elf.dts => entry/elf.dts} (100%)
+ rename tools/binman/test/{097_elf_strip.dts => entry/elf_strip.dts} (100%)
+ rename tools/binman/test/{062_entry_args.dts => entry/entry_args.dts} (100%)
+ rename tools/binman/test/{063_entry_args_missing.dts =>
+entry/entry_args_missing.dts} (100%)
+ rename tools/binman/test/{064_entry_args_required.dts =>
+entry/entry_args_required.dts} (100%)
+ rename tools/binman/test/{065_entry_args_unknown_datatype.dts =>
+entry/entry_args_unknown_datatype.dts} (100%)
+ rename tools/binman/test/{174_env.dts => entry/env.dts} (100%)
+ rename tools/binman/test/{175_env_no_size.dts => entry/env_no_size.dts} (100%)
+ rename tools/binman/test/{176_env_too_small.dts =>
+entry/env_too_small.dts} (100%)
+ rename tools/binman/test/{084_files.dts => entry/files.dts} (100%)
+ rename tools/binman/test/{190_files_align.dts => entry/files_align.dts} (100%)
+ rename tools/binman/test/{085_files_compress.dts =>
+entry/files_compress.dts} (100%)
+ rename tools/binman/test/{087_files_no_pattern.dts =>
+entry/files_no_pattern.dts} (100%)
+ rename tools/binman/test/{086_files_none.dts => entry/files_none.dts} (100%)
+ rename tools/binman/test/{069_fill.dts => entry/fill.dts} (100%)
+ rename tools/binman/test/{080_fill_empty.dts => entry/fill_empty.dts} (100%)
+ rename tools/binman/test/{070_fill_no_size.dts =>
+entry/fill_no_size.dts} (100%)
+ rename tools/binman/test/{188_image_entryarg.dts =>
+entry/image_entryarg.dts} (100%)
+ rename tools/binman/test/{127_list.dts => entry/list.dts} (100%)
+ rename tools/binman/test/{056_name_prefix.dts => entry/name_prefix.dts} (100%)
+ rename tools/binman/test/{268_null.dts => entry/null.dts} (100%)
+ rename tools/binman/test/{274_offset_from_elf.dts =>
+entry/offset_from_elf.dts} (100%)
+ rename tools/binman/test/{269_overlap.dts => entry/overlap.dts} (100%)
+ rename tools/binman/test/{271_overlap_bad.dts => entry/overlap_bad.dts} (100%)
+ rename tools/binman/test/{272_overlap_no_size.dts =>
+entry/overlap_no_size.dts} (100%)
+ rename tools/binman/test/{270_overlap_null.dts =>
+entry/overlap_null.dts} (100%)
+ rename tools/binman/test/{045_prop_test.dts => entry/prop_test.dts} (100%)
+ rename tools/binman/test/{191_read_image_skip.dts =>
+entry/read_image_skip.dts} (100%)
+ rename tools/binman/test/{346_remove_template.dts =>
+entry/remove_template.dts} (100%)
+ rename tools/binman/test/{132_replace.dts => entry/replace.dts} (100%)
+ rename tools/binman/test/{143_replace_all.dts => entry/replace_all.dts} (100%)
+ rename tools/binman/test/{133_replace_multi.dts =>
+entry/replace_multi.dts} (100%)
+ rename tools/binman/test/{139_replace_repack.dts =>
+entry/replace_repack.dts} (100%)
+ rename tools/binman/test/{278_replace_section_deep.dts =>
+entry/replace_section_deep.dts} (100%)
+ rename tools/binman/test/{241_replace_section_simple.dts =>
+entry/replace_section_simple.dts} (100%)
+ rename tools/binman/test/{239_replace_with_bintool.dts =>
+entry/replace_with_bintool.dts} (100%)
+ rename tools/binman/test/{261_section_fname.dts =>
+entry/section_fname.dts} (100%)
+ rename tools/binman/test/{202_section_timeout.dts =>
+entry/section_timeout.dts} (100%)
+ rename tools/binman/test/{055_sections.dts => entry/sections.dts} (100%)
+ rename tools/binman/test/{259_symlink.dts => entry/symlink.dts} (100%)
+ rename tools/binman/test/{222_tee_os.dts => entry/tee_os.dts} (100%)
+ rename tools/binman/test/{263_tee_os_opt.dts => entry/tee_os_opt.dts} (100%)
+ rename tools/binman/test/{286_template.dts => entry/template.dts} (100%)
+ rename tools/binman/test/{287_template_multi.dts =>
+entry/template_multi.dts} (100%)
+ rename tools/binman/test/{309_template_phandle.dts =>
+entry/template_phandle.dts} (100%)
+ rename tools/binman/test/{310_template_phandle_dup.dts =>
+entry/template_phandle_dup.dts} (100%)
+ rename tools/binman/test/{289_template_section.dts =>
+entry/template_section.dts} (100%)
+ rename tools/binman/test/{066_text.dts => entry/text.dts} (100%)
+ rename tools/binman/test/{237_unique_names.dts =>
+entry/unique_names.dts} (100%)
+ rename tools/binman/test/{238_unique_names_multi.dts =>
+entry/unique_names_multi.dts} (100%)
+ rename tools/binman/test/{057_unknown_contents.dts =>
+entry/unknown_contents.dts} (100%)
+ rename tools/binman/test/{041_unknown_pos_size.dts =>
+entry/unknown_pos_size.dts} (100%)
+ rename tools/binman/test/{328_alternates_fdt.dts =>
+fdt/alternates_fdt.dts} (100%)
+ rename tools/binman/test/{329_alternates_fdtgrep.dts =>
+fdt/alternates_fdtgrep.dts} (100%)
+ rename tools/binman/test/{332_alternates_inval.dts =>
+fdt/alternates_inval.dts} (100%)
+ rename tools/binman/test/{331_alternates_spl.dts =>
+fdt/alternates_spl.dts} (100%)
+ rename tools/binman/test/{330_alternates_vpl.dts =>
+fdt/alternates_vpl.dts} (100%)
+ rename tools/binman/test/{347_bootph_prop.dts => fdt/bootph_prop.dts} (100%)
+ rename tools/binman/test/{124_compress_dtb.dts => fdt/compress_dtb.dts} (100%)
+ rename tools/binman/test/{250_compress_dtb_invalid.dts =>
+fdt/compress_dtb_invalid.dts} (100%)
+ rename tools/binman/test/{248_compress_dtb_prepend_invalid.dts =>
+fdt/compress_dtb_prepend_invalid.dts} (100%)
+ rename tools/binman/test/{249_compress_dtb_prepend_length.dts =>
+fdt/compress_dtb_prepend_length.dts} (100%)
+ rename tools/binman/test/{251_compress_dtb_zstd.dts =>
+fdt/compress_dtb_zstd.dts} (100%)
+ rename tools/binman/test/{128_decode_image.dts => fdt/decode_image.dts} (100%)
+ rename tools/binman/test/{129_decode_image_nohdr.dts =>
+fdt/decode_image_nohdr.dts} (100%)
+ rename tools/binman/test/{115_fdtmap.dts => fdt/fdtmap.dts} (100%)
+ rename tools/binman/test/{213_fdtmap_alt_format.dts =>
+fdt/fdtmap_alt_format.dts} (100%)
+ rename tools/binman/test/{116_fdtmap_hdr.dts => fdt/fdtmap_hdr.dts} (100%)
+ rename tools/binman/test/{137_fdtmap_hdr_endbad.dts =>
+fdt/fdtmap_hdr_endbad.dts} (100%)
+ rename tools/binman/test/{135_fdtmap_hdr_middle.dts =>
+fdt/fdtmap_hdr_middle.dts} (100%)
+ rename tools/binman/test/{119_fdtmap_hdr_missing.dts =>
+fdt/fdtmap_hdr_missing.dts} (100%)
+ rename tools/binman/test/{138_fdtmap_hdr_nosize.dts =>
+fdt/fdtmap_hdr_nosize.dts} (100%)
+ rename tools/binman/test/{118_fdtmap_hdr_pos.dts =>
+fdt/fdtmap_hdr_pos.dts} (100%)
+ rename tools/binman/test/{117_fdtmap_hdr_start.dts =>
+fdt/fdtmap_hdr_start.dts} (100%)
+ rename tools/binman/test/{136_fdtmap_hdr_startbad.dts =>
+fdt/fdtmap_hdr_startbad.dts} (100%)
+ rename tools/binman/test/{120_hdr_no_location.dts =>
+fdt/hdr_no_location.dts} (100%)
+ rename tools/binman/test/{194_fdt_incl.dts => fdt/incl.dts} (100%)
+ rename tools/binman/test/{195_fdt_incl_tpl.dts => fdt/incl_tpl.dts} (100%)
+ rename tools/binman/test/{257_fdt_incl_vpl.dts => fdt/incl_vpl.dts} (100%)
+ rename tools/binman/test/{130_list_fdtmap.dts => fdt/list_fdtmap.dts} (100%)
+ rename tools/binman/test/{060_fdt_update.dts => fdt/update.dts} (100%)
+ rename tools/binman/test/{082_fdt_update_all.dts => fdt/update_all.dts} (100%)
+ rename tools/binman/test/{134_fdt_update_all_repack.dts =>
+fdt/update_all_repack.dts} (100%)
+ rename tools/binman/test/{061_fdt_update_bad.dts => fdt/update_bad.dts} (100%)
+ rename tools/binman/test/{169_atf_bl31.dts => fip/atf_bl31.dts} (100%)
+ rename tools/binman/test/{211_fip_bad_align.dts => fip/bad_align.dts} (100%)
+ rename tools/binman/test/{347_bl1.dts => fip/bl1.dts} (100%)
+ rename tools/binman/test/{212_fip_collection.dts => fip/collection.dts} (100%)
+ rename tools/binman/test/{203_fip.dts => fip/fip.dts} (100%)
+ rename tools/binman/test/{207_fip_ls.dts => fip/ls.dts} (100%)
+ rename tools/binman/test/{209_fip_missing.dts => fip/missing.dts} (100%)
+ rename tools/binman/test/{205_fip_no_type.dts => fip/no_type.dts} (100%)
+ rename tools/binman/test/{201_opensbi.dts => fip/opensbi.dts} (100%)
+ rename tools/binman/test/{204_fip_other.dts => fip/other.dts} (100%)
+ rename tools/binman/test/{208_fip_replace.dts => fip/replace.dts} (100%)
+ rename tools/binman/test/{172_scp.dts => fip/scp.dts} (100%)
+ rename tools/binman/test/{210_fip_size.dts => fip/size.dts} (100%)
+ rename tools/binman/test/{206_fip_uuid.dts => fip/uuid.dts} (100%)
+ rename tools/binman/test/{ => fit}/aes256.bin (100%)
+ rename tools/binman/test/{275_fit_align.dts => fit/align.dts} (100%)
+ rename tools/binman/test/{227_fit_bad_dir.dts => fit/bad_dir.dts} (71%)
+ rename tools/binman/test/{228_fit_bad_dir_config.dts =>
+fit/bad_dir_config.dts} (71%)
+ rename tools/binman/test/{224_fit_bad_oper.dts => fit/bad_oper.dts} (100%)
+ rename tools/binman/test/{ => fit}/dummy-rsa-engine.c (100%)
+ rename tools/binman/test/{340_dummy-rsa4096.crt =>
+fit/dummy-rsa4096.crt} (100%)
+ rename tools/binman/test/{343_fit_encrypt_data.dts =>
+fit/encrypt_data.dts} (100%)
+ rename tools/binman/test/{344_fit_encrypt_data_no_key.dts =>
+fit/encrypt_data_no_key.dts} (100%)
+ rename tools/binman/test/{162_fit_external.dts => fit/external.dts} (100%)
+ rename tools/binman/test/{240_fit_extract_replace.dts =>
+fit/extract_replace.dts} (100%)
+ rename tools/binman/test/{170_fit_fdt.dts => fit/fdt.dts} (100%)
+ rename tools/binman/test/{334_fit_fdt_compat.dts => fit/fdt_compat.dts} (100%)
+ rename tools/binman/test/{333_fit_fdt_dir.dts => fit/fdt_dir.dts} (100%)
+ rename tools/binman/test/{284_fit_fdt_list.dts => fit/fdt_list.dts} (100%)
+ rename tools/binman/test/{171_fit_fdt_missing_prop.dts =>
+fit/fdt_missing_prop.dts} (100%)
+ rename tools/binman/test/{345_fit_fdt_name.dts => fit/fdt_name.dts} (100%)
+ rename tools/binman/test/{223_fit_fdt_oper.dts => fit/fdt_oper.dts} (100%)
+ rename tools/binman/test/{335_fit_fdt_phase.dts => fit/fdt_phase.dts} (100%)
+ rename tools/binman/test/{276_fit_firmware_loadables.dts =>
+fit/firmware_loadables.dts} (100%)
+ rename tools/binman/test/{161_fit.dts => fit/fit.dts} (100%)
+ rename tools/binman/test/{219_fit_gennode.dts => fit/gennode.dts} (100%)
+ rename tools/binman/test/{167_fit_image_subentry_alignment.dts =>
+fit/image_subentry_alignment.dts} (100%)
+ rename tools/binman/test/{347_key_name_hint_dir_fit_signature.dts =>
+fit/key_name_hint_dir_signature.dts} (100%)
+ rename tools/binman/test/{168_fit_missing_blob.dts =>
+fit/missing_blob.dts} (100%)
+ rename tools/binman/test/{340_openssl.conf => fit/openssl.conf} (100%)
+ rename tools/binman/test/{277_replace_fit_sibling.dts =>
+fit/replace_sibling.dts} (100%)
+ rename tools/binman/test/{340_rsa2048.key => fit/rsa2048.key} (100%)
+ rename tools/binman/test/{280_fit_sign.dts => fit/sign.dts} (100%)
+ rename tools/binman/test/{340_fit_signature.dts => fit/signature.dts} (100%)
+ rename tools/binman/test/{340_fit_signature_engine.dts =>
+fit/signature_engine.dts} (100%)
+ rename tools/binman/test/{340_fit_signature_engine_encrypt.dts =>
+fit/signature_engine_encrypt.dts} (100%)
+ rename tools/binman/test/{340_fit_signature_engine_pkcs11.dts =>
+fit/signature_engine_pkcs11.dts} (100%)
+ rename tools/binman/test/{340_fit_signature_engine_pkcs11_object.dts
+=> fit/signature_engine_pkcs11_object.dts} (100%)
+ rename tools/binman/test/{341_fit_signature.dts =>
+fit/signature_multi_key.dts} (100%)
+ rename tools/binman/test/{342_fit_signature.dts =>
+fit/signature_no_nodes.dts} (100%)
+ rename tools/binman/test/{340_softhsm2.conf => fit/softhsm2.conf} (100%)
+ rename tools/binman/test/{226_fit_split_elf.dts => fit/split_elf.dts} (100%)
+ rename tools/binman/test/{220_fit_subentry_bintool.dts =>
+fit/subentry_bintool.dts} (100%)
+ rename tools/binman/test/{221_fit_subentry_hash.dts =>
+fit/subentry_hash.dts} (100%)
+ rename tools/binman/test/{264_tee_os_opt_fit.dts => fit/tee_os_opt.dts} (100%)
+ rename tools/binman/test/{265_tee_os_opt_fit_bad.dts =>
+fit/tee_os_opt_bad.dts} (100%)
+ rename tools/binman/test/{288_template_fit.dts => fit/template.dts} (100%)
+ rename tools/binman/test/{247_mkimage_coll.dts => mkimage/coll.dts} (100%)
+ rename tools/binman/test/{254_mkimage_filename.dts =>
+mkimage/filename.dts} (100%)
+ rename tools/binman/test/{243_mkimage_image.dts => mkimage/image.dts} (100%)
+ rename tools/binman/test/{245_mkimage_image_bad.dts =>
+mkimage/image_bad.dts} (100%)
+ rename tools/binman/test/{244_mkimage_image_no_content.dts =>
+mkimage/image_no_content.dts} (100%)
+ rename tools/binman/test/{229_mkimage_missing.dts =>
+mkimage/missing.dts} (100%)
+ rename tools/binman/test/{292_mkimage_missing_multiple.dts =>
+mkimage/missing_multiple.dts} (100%)
+ rename tools/binman/test/{156_mkimage.dts => mkimage/mkimage.dts} (100%)
+ rename tools/binman/test/{252_mkimage_mult_data.dts =>
+mkimage/mult_data.dts} (100%)
+ rename tools/binman/test/{253_mkimage_mult_no_content.dts =>
+mkimage/mult_no_content.dts} (100%)
+ rename tools/binman/test/{242_mkimage_name.dts => mkimage/name.dts} (100%)
+ rename tools/binman/test/{283_mkimage_special.dts =>
+mkimage/special.dts} (100%)
+ rename tools/binman/test/{290_mkimage_sym.dts => mkimage/sym.dts} (100%)
+ rename tools/binman/test/{098_4gb_and_skip_at_start_together.dts =>
+pack/4gb_and_skip_at_start_together.dts} (100%)
+ rename tools/binman/test/{200_align_default.dts =>
+pack/align_default.dts} (100%)
+ rename tools/binman/test/{326_assume_size.dts => pack/assume_size.dts} (100%)
+ rename tools/binman/test/{327_assume_size_ok.dts =>
+pack/assume_size_ok.dts} (100%)
+ rename tools/binman/test/{007_bad_align.dts => pack/bad_align.dts} (100%)
+ rename tools/binman/test/{059_change_size.dts => pack/change_size.dts} (100%)
+ rename tools/binman/test/{006_dual_image.dts => pack/dual_image.dts} (100%)
+ rename tools/binman/test/{003_empty.dts => pack/empty.dts} (100%)
+ rename tools/binman/test/{121_entry_extend.dts => pack/entry_extend.dts} (100%)
+ rename tools/binman/test/{123_entry_extend_section.dts =>
+pack/entry_extend_section.dts} (100%)
+ rename tools/binman/test/{122_entry_extend_twice.dts =>
+pack/entry_extend_twice.dts} (100%)
+ rename tools/binman/test/{140_entry_shrink.dts => pack/entry_shrink.dts} (100%)
+ rename tools/binman/test/{225_expand_size_bad.dts =>
+pack/expand_size_bad.dts} (100%)
+ rename tools/binman/test/{088_extend_size.dts => pack/extend_size.dts} (100%)
+ rename tools/binman/test/{089_extend_size_bad.dts =>
+pack/extend_size_bad.dts} (100%)
+ rename tools/binman/test/{022_image_name.dts => pack/image_name.dts} (100%)
+ rename tools/binman/test/{021_image_pad.dts => pack/image_pad.dts} (100%)
+ rename tools/binman/test/{001_invalid.dts => pack/invalid.dts} (100%)
+ rename tools/binman/test/{004_invalid_entry.dts =>
+pack/invalid_entry.dts} (100%)
+ rename tools/binman/test/{002_missing_node.dts => pack/missing_node.dts} (100%)
+ rename tools/binman/test/{008_pack.dts => pack/pack.dts} (100%)
+ rename tools/binman/test/{027_pack_4gb_no_size.dts =>
+pack/pack_4gb_no_size.dts} (100%)
+ rename tools/binman/test/{028_pack_4gb_outside.dts =>
+pack/pack_4gb_outside.dts} (100%)
+ rename tools/binman/test/{010_pack_align_power2.dts =>
+pack/pack_align_power2.dts} (100%)
+ rename tools/binman/test/{131_pack_align_section.dts =>
+pack/pack_align_section.dts} (100%)
+ rename tools/binman/test/{011_pack_align_size_power2.dts =>
+pack/pack_align_size_power2.dts} (100%)
+ rename tools/binman/test/{009_pack_extra.dts => pack/pack_extra.dts} (100%)
+ rename tools/binman/test/{018_pack_image_align.dts =>
+pack/pack_image_align.dts} (100%)
+ rename tools/binman/test/{016_pack_image_overflow.dts =>
+pack/pack_image_overflow.dts} (100%)
+ rename tools/binman/test/{017_pack_image_size.dts =>
+pack/pack_image_size.dts} (100%)
+ rename tools/binman/test/{012_pack_inv_align.dts =>
+pack/pack_inv_align.dts} (100%)
+ rename tools/binman/test/{019_pack_inv_image_align.dts =>
+pack/pack_inv_image_align.dts} (100%)
+ rename tools/binman/test/{020_pack_inv_image_align_power2.dts =>
+pack/pack_inv_image_align_power2.dts} (100%)
+ rename tools/binman/test/{013_pack_inv_size_align.dts =>
+pack/pack_inv_size_align.dts} (100%)
+ rename tools/binman/test/{015_pack_overflow.dts =>
+pack/pack_overflow.dts} (100%)
+ rename tools/binman/test/{014_pack_overlap.dts => pack/pack_overlap.dts} (100%)
+ rename tools/binman/test/{160_pack_overlap_zero.dts =>
+pack/pack_overlap_zero.dts} (100%)
+ rename tools/binman/test/{025_pack_zero_size.dts =>
+pack/pack_zero_size.dts} (100%)
+ rename tools/binman/test/{166_pad_in_sections.dts =>
+pack/pad_in_sections.dts} (100%)
+ rename tools/binman/test/{181_section_align.dts =>
+pack/section_align.dts} (100%)
+ rename tools/binman/test/{267_section_inner.dts =>
+pack/section_inner.dts} (100%)
+ rename tools/binman/test/{180_section_pad.dts => pack/section_pad.dts} (100%)
+ rename tools/binman/test/{101_sections_offset.dts =>
+pack/sections_offset.dts} (100%)
+ rename tools/binman/test/{005_simple.dts => pack/simple.dts} (100%)
+ rename tools/binman/test/{177_skip_at_start.dts =>
+pack/skip_at_start.dts} (100%)
+ rename tools/binman/test/{178_skip_at_start_pad.dts =>
+pack/skip_at_start_pad.dts} (100%)
+ rename tools/binman/test/{179_skip_at_start_section_pad.dts =>
+pack/skip_at_start_section_pad.dts} (100%)
+ rename tools/binman/test/{024_sorted.dts => pack/sorted.dts} (100%)
+ rename tools/binman/test/{054_unit_address.dts => pack/unit_address.dts} (100%)
+ rename tools/binman/test/{079_uses_pos.dts => pack/uses_pos.dts} (100%)
+ rename tools/binman/test/{302_encrypted_invalid_iv_file.dts =>
+security/encrypted_invalid_iv_file.dts} (100%)
+ rename tools/binman/test/{305_encrypted_key_file.dts =>
+security/encrypted_key_file.dts} (100%)
+ rename tools/binman/test/{304_encrypted_key_source.dts =>
+security/encrypted_key_source.dts} (100%)
+ rename tools/binman/test/{303_encrypted_missing_key.dts =>
+security/encrypted_missing_key.dts} (100%)
+ rename tools/binman/test/{301_encrypted_no_algo.dts =>
+security/encrypted_no_algo.dts} (100%)
+ rename tools/binman/test/{090_hash.dts => security/hash.dts} (100%)
+ rename tools/binman/test/{092_hash_bad_algo.dts =>
+security/hash_bad_algo.dts} (100%)
+ rename tools/binman/test/{091_hash_no_algo.dts =>
+security/hash_no_algo.dts} (100%)
+ rename tools/binman/test/{099_hash_section.dts =>
+security/hash_section.dts} (100%)
+ rename tools/binman/test/{ => security}/key.key (100%)
+ rename tools/binman/test/{ => security}/key.pem (100%)
+ rename tools/binman/test/{348_key_name_hint_dir_spl_pubkey_dtb.dts =>
+security/key_name_hint_dir_spl_pubkey_dtb.dts} (100%)
+ rename tools/binman/test/{230_pre_load.dts => security/pre_load.dts} (100%)
+ rename tools/binman/test/{235_pre_load_invalid_algo.dts =>
+security/pre_load_invalid_algo.dts} (100%)
+ rename tools/binman/test/{236_pre_load_invalid_key.dts =>
+security/pre_load_invalid_key.dts} (100%)
+ rename tools/binman/test/{233_pre_load_invalid_padding.dts =>
+security/pre_load_invalid_padding.dts} (100%)
+ rename tools/binman/test/{234_pre_load_invalid_sha.dts =>
+security/pre_load_invalid_sha.dts} (100%)
+ rename tools/binman/test/{231_pre_load_pkcs.dts =>
+security/pre_load_pkcs.dts} (100%)
+ rename tools/binman/test/{232_pre_load_pss.dts =>
+security/pre_load_pss.dts} (100%)
+ rename tools/binman/test/{165_section_ignore_hash_signature.dts =>
+security/section_ignore_hash_signature.dts} (100%)
+ rename tools/binman/test/{281_sign_non_fit.dts =>
+security/sign_non_fit.dts} (100%)
+ rename tools/binman/test/{306_spl_pubkey_dtb.dts =>
+security/spl_pubkey_dtb.dts} (100%)
+ rename tools/binman/test/{279_x509_cert.dts => security/x509_cert.dts} (100%)
+ rename tools/binman/test/{307_xilinx_bootgen_sign.dts =>
+security/xilinx_bootgen_sign.dts} (100%)
+ rename tools/binman/test/{308_xilinx_bootgen_sign_enc.dts =>
+security/xilinx_bootgen_sign_enc.dts} (100%)
+ rename tools/binman/test/{336_symbols_base.dts => symbols/base.dts} (100%)
+ rename tools/binman/test/{337_symbols_base_expand.dts =>
+symbols/base_expand.dts} (100%)
+ rename tools/binman/test/{338_symbols_comp.dts => symbols/comp.dts} (100%)
+ rename tools/binman/test/{282_symbols_disable.dts =>
+symbols/disable.dts} (100%)
+ rename tools/binman/test/{260_symbols_elf.dts => symbols/elf.dts} (100%)
+ rename tools/binman/test/{197_symbols_expand.dts => symbols/expand.dts} (100%)
+ rename tools/binman/test/{196_symbols_nodtb.dts => symbols/nodtb.dts} (100%)
+ rename tools/binman/test/{187_symbols_sub.dts => symbols/sub.dts} (100%)
+ rename tools/binman/test/{053_symbols.dts => symbols/symbols.dts} (100%)
+ rename tools/binman/test/{149_symbols_tpl.dts => symbols/tpl.dts} (100%)
+ rename tools/binman/test/{346_nxp_ddrfw_imx95.dts =>
+vendor/nxp_ddrfw_imx95.dts} (100%)
+ rename tools/binman/test/{339_nxp_imx8.dts => vendor/nxp_imx8.dts} (93%)
+ create mode 100644 tools/binman/test/vendor/nxp_imx8_csf.dts
+ create mode 100644 tools/binman/test/vendor/nxp_imx8_csf_fast_auth.dts
+ create mode 100644 tools/binman/test/vendor/nxp_imx8_imagename.dts
+ rename tools/binman/test/{350_nxp_imx95.dts => vendor/nxp_imx95.dts} (100%)
+ rename tools/binman/test/{150_powerpc_mpc85xx_bootpg_resetvec.dts =>
+vendor/powerpc_mpc85xx_bootpg_resetvec.dts} (100%)
+ rename tools/binman/test/{348_renesas_rcar4_sa0.dts =>
+vendor/renesas_rcar4_sa0.dts} (100%)
+ rename tools/binman/test/{349_renesas_rcar4_sa0_size.dts =>
+vendor/renesas_rcar4_sa0_size.dts} (100%)
+ rename tools/binman/test/{291_rockchip_tpl.dts =>
+vendor/rockchip_tpl.dts} (100%)
+ rename tools/binman/test/{293_ti_board_cfg.dts =>
+vendor/ti_board_cfg.dts} (100%)
+ rename tools/binman/test/{294_ti_board_cfg_combined.dts =>
+vendor/ti_board_cfg_combined.dts} (100%)
+ rename tools/binman/test/{295_ti_board_cfg_no_type.dts =>
+vendor/ti_board_cfg_no_type.dts} (100%)
+ rename tools/binman/test/{323_ti_board_cfg_phony.dts =>
+vendor/ti_board_cfg_phony.dts} (100%)
+ rename tools/binman/test/{225_ti_dm.dts => vendor/ti_dm.dts} (100%)
+ rename tools/binman/test/{296_ti_secure.dts => vendor/ti_secure.dts} (100%)
+ rename tools/binman/test/{324_ti_secure_firewall.dts =>
+vendor/ti_secure_firewall.dts} (100%)
+ rename tools/binman/test/{325_ti_secure_firewall_missing_property.dts
+=> vendor/ti_secure_firewall_missing_property.dts} (100%)
+ rename tools/binman/test/{297_ti_secure_rom.dts =>
+vendor/ti_secure_rom.dts} (100%)
+ rename tools/binman/test/{299_ti_secure_rom_a.dts =>
+vendor/ti_secure_rom_a.dts} (100%)
+ rename tools/binman/test/{300_ti_secure_rom_b.dts =>
+vendor/ti_secure_rom_b.dts} (100%)
+ rename tools/binman/test/{298_ti_secure_rom_combined.dts =>
+vendor/ti_secure_rom_combined.dts} (100%)
+ rename tools/binman/test/{ => x86}/descriptor.bin (100%)
+ rename tools/binman/test/{141_descriptor_offset.dts =>
+x86/descriptor_offset.dts} (100%)
+ rename tools/binman/test/{ => x86}/fitimage.bin.gz (100%)
+ rename tools/binman/test/{094_fmap_x86.dts => x86/fmap.dts} (100%)
+ rename tools/binman/test/{095_fmap_x86_section.dts =>
+x86/fmap_section.dts} (100%)
+ rename tools/binman/test/{ => x86}/ifwi.bin.gz (100%)
+ rename tools/binman/test/{043_intel_cmc.dts => x86/intel_cmc.dts} (100%)
+ rename tools/binman/test/{147_intel_fit.dts => x86/intel_fit.dts} (100%)
+ rename tools/binman/test/{148_intel_fit_missing.dts =>
+x86/intel_fit_missing.dts} (100%)
+ rename tools/binman/test/{042_intel_fsp.dts => x86/intel_fsp.dts} (100%)
+ rename tools/binman/test/{152_intel_fsp_m.dts => x86/intel_fsp_m.dts} (100%)
+ rename tools/binman/test/{153_intel_fsp_s.dts => x86/intel_fsp_s.dts} (100%)
+ rename tools/binman/test/{154_intel_fsp_t.dts => x86/intel_fsp_t.dts} (100%)
+ rename tools/binman/test/{050_intel_mrc.dts => x86/intel_mrc.dts} (100%)
+ rename tools/binman/test/{100_intel_refcode.dts =>
+x86/intel_refcode.dts} (100%)
+ rename tools/binman/test/{046_intel_vbt.dts => x86/intel_vbt.dts} (100%)
+ rename tools/binman/test/{032_intel_vga.dts => x86/intel_vga.dts} (100%)
+ rename tools/binman/test/{037_x86_no_ucode.dts => x86/no_ucode.dts} (100%)
+ rename tools/binman/test/{044_x86_optional_ucode.dts =>
+x86/optional_ucode.dts} (100%)
+ rename tools/binman/test/{144_x86_reset16.dts => x86/reset16.dts} (100%)
+ rename tools/binman/test/{145_x86_reset16_spl.dts =>
+x86/reset16_spl.dts} (100%)
+ rename tools/binman/test/{146_x86_reset16_tpl.dts =>
+x86/reset16_tpl.dts} (100%)
+ rename tools/binman/test/{029_x86_rom.dts => x86/rom.dts} (100%)
+ rename tools/binman/test/{111_x86_rom_ifwi.dts => x86/rom_ifwi.dts} (100%)
+ rename tools/binman/test/{113_x86_rom_ifwi_nodata.dts =>
+x86/rom_ifwi_nodata.dts} (100%)
+ rename tools/binman/test/{112_x86_rom_ifwi_nodesc.dts =>
+x86/rom_ifwi_nodesc.dts} (100%)
+ rename tools/binman/test/{151_x86_rom_ifwi_section.dts =>
+x86/rom_ifwi_section.dts} (100%)
+ rename tools/binman/test/{031_x86_rom_me.dts => x86/rom_me.dts} (100%)
+ rename tools/binman/test/{163_x86_rom_me_empty.dts =>
+x86/rom_me_empty.dts} (100%)
+ rename tools/binman/test/{164_x86_rom_me_missing.dts =>
+x86/rom_me_missing.dts} (100%)
+ rename tools/binman/test/{030_x86_rom_me_no_desc.dts =>
+x86/rom_me_no_desc.dts} (100%)
+ rename tools/binman/test/{035_x86_single_ucode.dts =>
+x86/single_ucode.dts} (100%)
+ rename tools/binman/test/{033_x86_start16.dts => x86/start16.dts} (100%)
+ rename tools/binman/test/{048_x86_start16_spl.dts =>
+x86/start16_spl.dts} (100%)
+ rename tools/binman/test/{081_x86_start16_tpl.dts =>
+x86/start16_tpl.dts} (100%)
+ rename tools/binman/test/{155_symbols_tpl_x86.dts =>
+x86/symbols_tpl.dts} (100%)
+ rename tools/binman/test/{093_x86_tpl_ucode.dts => x86/tpl_ucode.dts} (100%)
+ rename tools/binman/test/{034_x86_ucode.dts => x86/ucode.dts} (100%)
+ rename tools/binman/test/{038_x86_ucode_missing_node.dts =>
+x86/ucode_missing_node.dts} (100%)
+ rename tools/binman/test/{039_x86_ucode_missing_node2.dts =>
+x86/ucode_missing_node2.dts} (100%)
+ rename tools/binman/test/{040_x86_ucode_not_in_image.dts =>
+x86/ucode_not_in_image.dts} (100%)
+ rename tools/binman/test/{049_x86_ucode_spl.dts => x86/ucode_spl.dts} (100%)
+ rename tools/binman/test/{058_x86_ucode_spl_needs_retry.dts =>
+x86/ucode_spl_needs_retry.dts} (100%)
+ rename tools/binman/test/{026_pack_u_boot_dtb.dts => xpl/pack_dtb.dts} (100%)
+ rename tools/binman/test/{047_spl_bss_pad.dts => xpl/spl_bss_pad.dts} (100%)
+ rename tools/binman/test/{078_u_boot_tpl.dts => xpl/tpl.dts} (100%)
+ rename tools/binman/test/{193_tpl_bss_pad.dts => xpl/tpl_bss_pad.dts} (100%)
+ rename tools/binman/test/{036_u_boot_img.dts => xpl/u-boot-img.dts} (100%)
+ rename tools/binman/test/{051_u_boot_spl_dtb.dts =>
+xpl/u-boot-spl-dtb.dts} (100%)
+ rename tools/binman/test/{052_u_boot_spl_nodtb.dts =>
+xpl/u-boot-spl-nodtb.dts} (100%)
+ rename tools/binman/test/{285_spl_expand.dts => xpl/u-boot-spl.dts} (100%)
+ rename tools/binman/test/{192_u_boot_tpl_nodtb.dts =>
+xpl/u-boot-tpl-nodtb.dts} (100%)
+ rename tools/binman/test/{256_u_boot_vpl_nodtb.dts =>
+xpl/u-boot-vpl-nodtb.dts} (100%)
+ rename tools/binman/test/{255_u_boot_vpl.dts => xpl/vpl.dts} (100%)
+ rename tools/binman/test/{258_vpl_bss_pad.dts => xpl/vpl_bss_pad.dts} (100%)
 
 Regards,
-Simon
+SImon
