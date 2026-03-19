@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8904109192C
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:05:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 834611091930
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:06:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35C1284285;
+	by phobos.denx.de (Postfix) with ESMTP id 7D8DD842A4;
 	Fri, 20 Mar 2026 00:01:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aqURvq5e";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fqcQ5Dnn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58FBA83FDE; Thu, 19 Mar 2026 21:58:41 +0100 (CET)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 747A783FC5; Thu, 19 Mar 2026 21:58:45 +0100 (CET)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1019183F8A
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:58:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 089AC83F8A
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:58:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-43b40003d13so893296f8f.2
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:58:39 -0700 (PDT)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-43b3f91a7abso774452f8f.1
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:58:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773953918; x=1774558718; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1773953922; x=1774558722; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=hQumiPbp80hZWkFmcR45v5xw5x/cMV2c5oqDMRtP4WA=;
- b=aqURvq5escQ8Uh/j/63QBtSGq0DD0JHOWjQd+UhkyUB5RsCtJAiuc239mrG3O1/6dc
- drCzEhbBDLMWIx/85rwncyv34jzTXPuqmKglgX+Sd3rUsFaKLFjt6f8zkjMlP2/siwKI
- UzRdZwZ4jCCYHr4gaVnhKVRd7YaXpaQ+iODpfhamP41CFj6hsb3D4MkUHdSyMy/eOycz
- VGHDaQRMgJb88o48PSo59v/HDdlA/EUMh87SVgRRztewCgHV6GUjJj+SMwcM3dVUWAii
- J9iOVO4yGF5M2/d/EVrZtt6B1G8oXmg9T7SBAQ+KosqD+5hqGLi0B8JXNiGJKGzbvs/q
- jbBw==
+ :reply-to; bh=SQ5hNGwzZKOOoHPheDCQ+BMmkBCQHsp6Shs7hnz6gBo=;
+ b=fqcQ5Dnn2ZGzLsvZeve4u3IeQy7sz6NXixXFxi/CXMZKZYR+fCuJ+aFA55pDgFdyIG
+ U+TJBtcnpsADE1loQAHlo4c+2XyINip+dAQYBQQbG7D0BB7Fb91wcPEelukx/e5wIvkC
+ 4qI4YxfA2xVhHwP5lG3FYnaDotkpT2pZ+p4UD3/szziq2WUzYvg9oggzCizvQQzhuktd
+ SpQq/Mdn126sUQ6VLCTdNxHIrL36fwtwrp/10eUwZYJ1YbSGS0rlSZTD7/ZP9Zwit1NS
+ mq1ipsph2A5/lquaUJf6XTfsrFlrNnYRWYKTpxGaPeTlZQB0BpUwCFN90huFMWCswLa6
+ dJ7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773953918; x=1774558718;
+ d=1e100.net; s=20251104; t=1773953922; x=1774558722;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=hQumiPbp80hZWkFmcR45v5xw5x/cMV2c5oqDMRtP4WA=;
- b=FNmbfYZosUMYO3OwUAxwMETUnNAo7VHPktuw6D24TZM9i6Oqvqz6HKCPQkwFBWlXNb
- wj+eTkWKpCARI2wGjYUE+UbWpnbEEbbUdsYPtOO9EquHqoLGA46i2BalNoIRopeUr8y0
- TNCX/C8sqjiEMkBW2AIeu6j0HJ2iTz/0FsDKtOQrOx50koucQinrlB7QebkyYJO45BFq
- O4rFJ2IpajQzAQWizgoJjiwBvEfsHAMdONitDup0bRDIGZfeR9/yA6hi2LgQrXLfAw8L
- K8BvwYzD2keiiBQIHGF561h/AZeSoiwmjlbyXAMWpWdrRDROvwEyfN42dGObJ/bdmOLc
- Jwow==
-X-Gm-Message-State: AOJu0YyYowlghVgWVKjLhI/KTxXmMGzl/DOg0bfPKMRfqlQb7kip8xPv
- zgev3D03l5GOsoHR1Z04/Yey4IKN0Ncg5+tc9HmHIxXYDtpPeOnyYWqJPvhZD1VnMfE=
-X-Gm-Gg: ATEYQzwLvZkC+SOeo5iCiaGNYoIuzSdzKt+Wss5NmQvK1dv0LUyNzbCjQ8k4SHiUfkK
- 5mgN/9XypjNjJh0XyoMH+zaQUXTflC+BjpkFUNSP0NTUoWgHlRqSAZpkfaKCiitXXMkcsYwvvnd
- BGYIMFKCsDFNBHr8ld7vaVVK6WeBX99QxiWszf3H/jbaqA6f6hT00t6VdlcFFp6YdMKExIy15rl
- NpbpD4oqCVLQU58pL1OTDWftbJVbdmMtv0P5QY2pRGF551HreHRt8RQb++ywnWpFELEvezr2fXE
- MsfaRk7DREi8HvqScw3TEi2NaKX+7cmmF7LbipMB6Go313ev1kza2IxcPAxeWGhmpBKtXvSuXjj
- g3/PeomJ4q8Dpy9yhUUC+qD6BlrvrzHZiVYjXcs56Uu5yZLz7xLrQvyDWpaTWpmzP1+AovdUv10
- bE61KFDQIEpJxCKsbY6i6DW0WTNDK1TwdXJ9T9LKYe0WsptDFtXiPS6T477VfbLMDq2Zg=
-X-Received: by 2002:a05:6000:2203:b0:43b:45a0:9df8 with SMTP id
- ffacd0b85a97d-43b642781a8mr1368024f8f.35.1773953918329; 
- Thu, 19 Mar 2026 13:58:38 -0700 (PDT)
+ bh=SQ5hNGwzZKOOoHPheDCQ+BMmkBCQHsp6Shs7hnz6gBo=;
+ b=gc0MBrw36Ne+ZgMN3mQI8dEaWH4pDxjFAqUV2o+BiSJmMjX6GmGAgGyr/5lqCJFPnG
+ TtTbl0gOVApO1PDLsL+e81sTN26Fhq8UHOxoNj1vLzt0vE77o7zGPw7ruEzCSPBSFCcO
+ rgDWoHkqmnRxtcrTTf7Mr2QYwKGDSYU0wfSDS8tt2Wsct1ZnED6gpfKOx08r/Fl7Ondi
+ aTbgXjMO4rOKoWjCbrMyBacDfGGyH9OT1v0JTsZxE9ZQCz3PrdsftRZYkmISxUj6qVZq
+ yGiT0vJctr+ubItGOsOksgXA/Vm04eG7Djl+boQ7j6kVJm8SWD8qbQk6ZwQeyzHvk/5I
+ 2zEA==
+X-Gm-Message-State: AOJu0YwqOj1ODOjkbmBuP80pSo4H4BG6wSc73WvZkGW/aB3p7F3jKj+S
+ l/e2siaHilhjA+SGl2g/ALnspKqXCEapyXbC7SA5rgitsWQpragTdwwZ0QS8YYAr6+M=
+X-Gm-Gg: ATEYQzzpBazTavcOc+kGKDu2EZFBcr8+Nwixjvv0UVTfbyU4dKJdM1SMBoKJZeZsj1V
+ Ter9FAtQJ/u3uu7K8X97+8Z/rQ9F148/eZXDM/keRAPvekoifa0OLp53RdRGthzDgX+ss9vjkYt
+ jK63dygzXA3CeOVzx22/40MwwmjIPwbdcyfCTSXoKKFZzrDodyrjyFA1DanVZ72dJ6vkwmXHLqF
+ TrAjug3WnZbUkkv++ioIx8ON7QcQW9kLLoyprJ97SBS980bumgy0euiNIlhGhM6yY3KRdglAPzW
+ 56uyCeOy/v87MYW9U2xBOg2JmbURkCyGyR/VFhNenUyidn40/OfdoFVI0Ezet1y+ZJ4SrTIWynr
+ xt/0x46lii0aGhN7GYxCE1VVwXJWEgiZ3OwDZ7l1fb4zLKYV403Pa7yL27KnrmWgmUlGQAZt5eY
+ v236DbTmPp/e/onu/STX7s0Dra+0fmlkGXssGW6iu4O6XyidJALAGmUUFImCVKLdJC6Zo=
+X-Received: by 2002:a05:6000:2086:b0:43b:48e3:fbee with SMTP id
+ ffacd0b85a97d-43b64286faemr1463540f8f.37.1773953922222; 
+ Thu, 19 Mar 2026 13:58:42 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd39.dip0.t-ipconnect.de.
  [79.195.221.57]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.58.34
+ ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.58.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:58:37 -0700 (PDT)
+ Thu, 19 Mar 2026 13:58:41 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 19 Mar 2026 21:56:48 +0100
-Subject: [PATCH RFC 26/40] clk/clk-uclass: adapt for CCF_FULL
+Date: Thu, 19 Mar 2026 21:56:49 +0100
+Subject: [PATCH RFC 27/40] RFC: clk/ccf: add UCLASS_CLK compat shim
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260319-casey-ccf-upstream-v1-26-4df2ee2226da@linaro.org>
+Message-Id: <20260319-casey-ccf-upstream-v1-27-4df2ee2226da@linaro.org>
 References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
@@ -160,13 +160,13 @@ Cc: Tom Rini <trini@konsulko.com>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>, 
  Paul Sajna <sajattack@postmarketos.org>, Marek Vasut <marex@denx.de>
 X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=10143;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=9183;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=VQ+UwRkFHsmDi4X2J1U5vDc1dvKFNcSZwLk2BRRq0g4=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yQKsz67p7ikwPL0wb62c2JLLgau+fbWKdv6W91TlO
- P/rpmTDjlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCRLwsY/kd3RyZPDuZ4N3WN
- uOJRwf0RfgIqHA/1vzVM25gsVlyUNo/hf12zKrelG0vhhn+nJvRs5v2y3d72wnGObcvv/7P8EbP
- 0wHUA
+ bh=6OFVGLUuDBpI47iCgfFJPpTCiQFHLj/akAdomSUFFRk=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yQKKN2+zTsjmTdzru/1c3Zf9BXlXeZv5NzEzrFJla
+ /kecOF8RykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZjIKhlGhj7hd8GzLdRVz27u
+ unH9SQR3qXf/qoV66wq5F5isil/hp8Hw32m1pvqd0Gncn/fExs1Yr760c2bFRYEbSty7ppw/sOR
+ G9E0A
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Fri, 20 Mar 2026 00:01:15 +0100
@@ -186,428 +186,322 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When building U-Boot with CCF_FULL support, most clk operations
-are implemented in clk/ccf/clk.c, so we can remove the conflicting
-definitions in clk-uclass.c.
+When CCF_FULL is enabled, UCLASS_CLK drivers no longer work normally
+since they're entirely invisible to CCF.
 
-Additionally, registering clock consumers works quite differently, so we
-adapt clk_get_by_name() and similar functions to call into CCF. Notably
-while in Linux the struct clk handle is allocated inside CCF (since
-it's an opaque cookie), in U-Boot struct clk is public and typically
-allocated by the consumer driver, so we need a small adjustment to allow
-CCF to populate an already-allocated struct clk.
+This compat shim attempts to bridge the gap by registering a clock
+provider with CCF and register clk_hw's on-demand, mapping them
+to individual clk IDs of the underlying UCLASS_CLK device. It then
+translates between clk_ops and clk_ops_uboot so that clk functions work
+as expected.
+
+It's not clear if there is a need for this shim, or if platforms would
+instead adjust all of their clock drivers at once. It hasn't been
+extensively tested but is provided as-is in case it's useful.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/clk/clk-uclass.c | 297 +++++++++++++++++++++++++++--------------------
- 1 file changed, 172 insertions(+), 125 deletions(-)
+ drivers/clk/ccf/Kconfig  |   7 ++
+ drivers/clk/ccf/Makefile |   1 +
+ drivers/clk/ccf/clk.h    |   6 ++
+ drivers/clk/ccf/compat.c | 227 +++++++++++++++++++++++++++++++++++++++++++++++
+ drivers/clk/clk-uclass.c |   3 +
+ 5 files changed, 244 insertions(+)
 
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index 095329e25f15..d54d76745560 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -23,8 +23,11 @@
- #include <linux/bug.h>
- #include <linux/clk-provider.h>
- #include <linux/err.h>
+diff --git a/drivers/clk/ccf/Kconfig b/drivers/clk/ccf/Kconfig
+index ec5d2d91b870..4ae131c843a9 100644
+--- a/drivers/clk/ccf/Kconfig
++++ b/drivers/clk/ccf/Kconfig
+@@ -5,4 +5,11 @@ config CLK_CCF_FULL
+ 	  Enable this option if you want to use the full Linux kernel's Common
+ 	  Clock Framework [CCF] code in U-Boot. This is a full API compatible
+ 	  port as opposed to U-Boot "uCCF", drivers must register clocks at
+ 	  runtime and should not use UCLASS_CLK.
++
++config CLK_CCF_FULL_COMPAT
++	bool "U-Boot clk compat shim for Common Clock Framework [CCF] clocks"
++	depends on CLK_CCF_FULL
++	help
++	  Enable this option if you want to use U-Boot UCLASS_CLK clocks together
++	  with Linux CCF clocks
+diff --git a/drivers/clk/ccf/Makefile b/drivers/clk/ccf/Makefile
+index a337b9f29d7a..39879b34e645 100644
+--- a/drivers/clk/ccf/Makefile
++++ b/drivers/clk/ccf/Makefile
+@@ -14,4 +14,5 @@ obj-y += clk.o \
+ 	clk-fixed-rate.o
  
+ obj-$(CONFIG_CLK_COMPOSITE_CCF) += clk-composite.o
+ 
++obj-$(CONFIG_CLK_CCF_FULL_COMPAT) += compat.o
+diff --git a/drivers/clk/ccf/clk.h b/drivers/clk/ccf/clk.h
+index 72607020ed8e..f4cdc51459b5 100644
+--- a/drivers/clk/ccf/clk.h
++++ b/drivers/clk/ccf/clk.h
+@@ -38,8 +38,14 @@ int clk_hw_create_clk_uboot(struct clk *clk, struct clk_hw *hw)
+ }
+ void __clk_put(struct clk *clk) { }
+ #endif
+ 
++#if CONFIG_IS_ENABLED(CLK_CCF_FULL_COMPAT)
++void clk_ccf_full_setup_compat(struct udevice *dev);
++#else
++static inline void clk_ccf_full_setup_compat(struct udevice *dev) { }
++#endif
++
+ // Linux compat
+ 
+ #define clk_prepare_lock()
+ #define clk_prepare_unlock()
+diff --git a/drivers/clk/ccf/compat.c b/drivers/clk/ccf/compat.c
+new file mode 100644
+index 000000000000..3059de04f6ef
+--- /dev/null
++++ b/drivers/clk/ccf/compat.c
+@@ -0,0 +1,227 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2026 Linaro Ltd.
++ *
++ * CCF compat for U-Boot UCLASS_CLK type clocks
++ */
++
++#define pr_fmt(fmt) "[CCF Compat] "fmt
++
++#include <dm/devres.h>
++#include <dm/ofnode.h>
++#include <linux/clk-provider.h>
 +#include <linux/clk/clk-conf.h>
-+#include "ccf/clk.h"
++#include <linux/compat.h>
++#include <linux/device.h>
++#include <linux/printk.h>
 +
- static inline const struct clk_ops_uboot *clk_dev_ops(struct udevice *dev)
- {
- 	return (const struct clk_ops_uboot *)dev->driver->ops;
- }
-@@ -74,9 +77,9 @@ static int clk_of_xlate_default(struct clk *clk,
- 
- 	return 0;
- }
- 
--static int clk_get_by_index_tail(int ret, ofnode node,
-+static int __maybe_unused clk_get_by_index_tail(int ret, ofnode node,
- 				 struct ofnode_phandle_args *args,
- 				 const char *list_name, int index,
- 				 struct clk *clk)
- {
-@@ -115,47 +118,30 @@ err:
- 
- 	return log_msg_ret("prop", ret);
- }
- 
--static int clk_get_by_indexed_prop(struct udevice *dev, const char *prop_name,
--				   int index, struct clk *clk)
--{
--	int ret;
--	struct ofnode_phandle_args args;
--
--	debug("%s(dev=%s, index=%d, clk=%p)\n", __func__, dev_read_name(dev),
--	      index, clk);
--
--	assert(clk);
--	clk->dev = NULL;
--
--	ret = dev_read_phandle_with_args(dev, prop_name, "#clock-cells", 0,
--					 index, &args);
--	if (ret) {
--		debug("%s: fdtdec_parse_phandle_with_args failed: err=%d\n",
--		      __func__, ret);
--		return log_ret(ret);
--	}
--
--	return clk_get_by_index_tail(ret, dev_ofnode(dev), &args, "clocks",
--				     index, clk);
--}
--
- int clk_get_by_index(struct udevice *dev, int index, struct clk *clk)
- {
- 	return clk_get_by_index_nodev(dev_ofnode(dev), index, clk);
- }
- 
- int clk_get_by_index_nodev(ofnode node, int index, struct clk *clk)
- {
-+#if CONFIG_IS_ENABLED(CLK_CCF_FULL)
-+	struct clk_hw *hw;
++#include "clk.h"
 +
-+	hw = of_clk_get_hw(node, index, NULL);
-+	return clk_hw_create_clk_uboot(clk, hw);
-+#else
- 	struct ofnode_phandle_args args;
- 	int ret;
- 
- 	ret = ofnode_parse_phandle_with_args(node, "clocks", "#clock-cells", 0,
- 					     index, &args);
- 
- 	return clk_get_by_index_tail(ret, node, &args, "clocks",
- 				     index, clk);
-+#endif
- }
- 
- int clk_get_bulk(struct udevice *dev, struct clk_bulk *bulk)
- {
-@@ -189,8 +175,86 @@ bulk_get_err:
- 
- 	return ret;
- }
- 
-+int clk_get_by_name(struct udevice *dev, const char *name, struct clk *clk)
++struct ccf_compat_hw {
++	struct clk_hw hw;
++	ulong id;
++	ulong data;
++};
++
++struct ccf_compat_data {
++	struct udevice *dev;
++	int num_clks;
++	struct ccf_compat_hw hws[];
++};
++
++static inline struct clk hw_to_clk(struct clk_hw *hw)
 +{
-+#if CONFIG_IS_ENABLED(CLK_CCF_FULL)
-+	struct clk_hw *hw;
++	struct clk clk;
++	struct ccf_compat_hw *ccf_hw = container_of(hw, struct ccf_compat_hw, hw);
 +
-+	hw = of_clk_get_hw(dev_ofnode(dev), 0, name);
-+	return clk_hw_create_clk_uboot(clk, hw);
-+#else
-+	return clk_get_by_name_nodev(dev_ofnode(dev), name, clk);
-+#endif
-+}
-+#endif /* OF_REAL */
++	clk.dev = hw->clk->dev;
++	clk.id = ccf_hw->id;
++	clk.data = ccf_hw->data;
 +
-+int clk_get_by_name_nodev(ofnode node, const char *name, struct clk *clk)
-+{
-+	int index = 0;
-+
-+	debug("%s(node=%s, name=%s, clk=%p)\n", __func__,
-+		ofnode_get_name(node), name, clk);
-+	clk->dev = NULL;
-+
-+	if (name) {
-+		index = ofnode_stringlist_search(node, "clock-names", name);
-+		if (index < 0) {
-+			debug("fdt_stringlist_search() failed: %d\n", index);
-+			return index;
-+		}
-+	}
-+
-+	return clk_get_by_index_nodev(node, index, clk);
++	return clk;
 +}
 +
-+int clk_release_all(struct clk *clk, unsigned int count)
++static inline const struct clk_ops_uboot *clk_dev_ops(struct udevice *dev)
 +{
-+	unsigned int i;
++	return (const struct clk_ops_uboot *)dev->driver->ops;
++}
++
++
++static int ccf_compat_clk_enable(struct clk_hw *hw)
++{
++	struct clk clk = hw_to_clk(hw);
++	const struct clk_ops_uboot *ops = clk_dev_ops(clk.dev);
++
++	return ops->enable(&clk);
++}
++
++static void ccf_compat_clk_disable(struct clk_hw *hw)
++{
++	struct clk clk = hw_to_clk(hw);
++	const struct clk_ops_uboot *ops = clk_dev_ops(clk.dev);
 +	int ret;
 +
-+	for (i = 0; i < count; i++) {
-+		debug("%s(clk[%u]=%p)\n", __func__, i, &clk[i]);
++	ret = ops->disable(&clk);
++	if (ret < 0)
++		pr_err("Couldn't disable clk %s: %d\n", clk_hw_get_name(hw), ret);
++}
 +
-+		/* check if clock has been previously requested */
-+		if (!clk[i].dev)
-+			continue;
++static long ccf_compat_clk_round_rate(struct clk_hw *hw, unsigned long rate,
++				     unsigned long *parent_rate)
++{
++	struct clk clk = hw_to_clk(hw);
++	const struct clk_ops_uboot *ops = clk_dev_ops(clk.dev);
++	long _rate;
 +
-+		ret = clk_disable(&clk[i]);
-+		if (ret && ret != -ENOSYS)
-+			return ret;
-+	}
++	if (!rate && *parent_rate)
++		rate = *parent_rate;
++
++	_rate = ops->round_rate(&clk, rate);
++	if (rate > 0)
++		*parent_rate = _rate;
++
++	return _rate;
++}
++
++static int ccf_compat_clk_determine_rate(struct clk_hw *hw, struct clk_rate_request *req)
++{
++	struct clk clk = hw_to_clk(hw);
++	const struct clk_ops_uboot *ops = clk_dev_ops(clk.dev);
++
++	req->rate = ops->get_rate(&clk);
 +
 +	return 0;
 +}
 +
-+/* Full CCF has its own versions of these functions */
-+#if !CONFIG_IS_ENABLED(CLK_CCF_FULL)
-+static int clk_get_by_indexed_prop(struct udevice *dev, const char *prop_name,
-+				   int index, struct clk *clk)
++static int ccf_compat_clk_set_rate(struct clk_hw *hw, unsigned long rate,
++				     unsigned long parent_rate)
 +{
++	struct clk clk = hw_to_clk(hw);
++	const struct clk_ops_uboot *ops = clk_dev_ops(clk.dev);
++	long _rate;
++
++	_rate = ops->set_rate(&clk, rate);
++
++	return _rate < 0 ? _rate : 0;
++}
++
++static int ccf_compat_clk_init(struct clk_hw *hw)
++{
++	struct clk clk = hw_to_clk(hw);
++	const struct clk_ops_uboot *ops = clk_dev_ops(clk.dev);
++
++	return ops->request(&clk);
++}
++
++static struct clk_ops ccf_compat_ops = {
++	.enable = ccf_compat_clk_enable,
++	.disable = ccf_compat_clk_disable,
++	.round_rate = ccf_compat_clk_round_rate,
++	.determine_rate = ccf_compat_clk_determine_rate,
++	.set_rate = ccf_compat_clk_set_rate,
++	.init = ccf_compat_clk_init,
++};
++
++/* Find or allocate a new ccf_compat_hw */
++static struct ccf_compat_hw *ccf_compat_find_hw(struct ccf_compat_data *compat, ulong id,
++						ulong data)
++{
++	struct ccf_compat_hw *ccf_hw;
++	struct clk_init_data *init;
 +	int ret;
-+	struct ofnode_phandle_args args;
 +
-+	debug("%s(dev=%s, index=%d, clk=%p)\n", __func__, dev_read_name(dev),
-+	      index, clk);
-+
-+	assert(clk);
-+	clk->dev = NULL;
-+
-+	ret = dev_read_phandle_with_args(dev, prop_name, "#clock-cells", 0,
-+					 index, &args);
-+	if (ret) {
-+		debug("%s: fdtdec_parse_phandle_with_args failed: err=%d\n",
-+		      __func__, ret);
-+		return log_ret(ret);
++	for (int i = 0; i < compat->num_clks; i++) {
++		ccf_hw = &compat->hws[i];
++		if (ccf_hw->id == id && ccf_hw->data == data)
++			return ccf_hw;
 +	}
 +
-+	return clk_get_by_index_tail(ret, dev_ofnode(dev), &args, "clocks",
-+				     index, clk);
-+}
++	/* We haven't been requested this clock before so we need to allocate it */
 +
- static struct clk *clk_set_default_get_by_id(struct clk *clk)
- {
- 	struct clk *c = clk;
- 
-@@ -371,62 +435,8 @@ fail:
- 	free(rates);
- 	return ret;
- }
- 
--int clk_set_defaults(struct udevice *dev, enum clk_defaults_stage stage)
--{
--	int ret;
--
--	if (!dev_has_ofnode(dev))
--		return 0;
--
--	/*
--	 * To avoid setting defaults twice, don't set them before relocation.
--	 * However, still set them for SPL. And still set them if explicitly
--	 * asked.
--	 */
--	if (!(IS_ENABLED(CONFIG_XPL_BUILD) || (gd->flags & GD_FLG_RELOC)))
--		if (stage != CLK_DEFAULTS_POST_FORCE)
--			return 0;
--
--	debug("%s(%s)\n", __func__, dev_read_name(dev));
--
--	ret = clk_set_default_parents(dev, stage);
--	if (ret)
--		return ret;
--
--	ret = clk_set_default_rates(dev, stage);
--	if (ret < 0)
--		return ret;
--
--	return 0;
--}
--
--int clk_get_by_name(struct udevice *dev, const char *name, struct clk *clk)
--{
--	return clk_get_by_name_nodev(dev_ofnode(dev), name, clk);
--}
--#endif /* OF_REAL */
--
--int clk_get_by_name_nodev(ofnode node, const char *name, struct clk *clk)
--{
--	int index = 0;
--
--	debug("%s(node=%s, name=%s, clk=%p)\n", __func__,
--		ofnode_get_name(node), name, clk);
--	clk->dev = NULL;
--
--	if (name) {
--		index = ofnode_stringlist_search(node, "clock-names", name);
--		if (index < 0) {
--			debug("fdt_stringlist_search() failed: %d\n", index);
--			return index;
--		}
--	}
--
--	return clk_get_by_index_nodev(node, index, clk);
--}
--
- const char *
- clk_resolve_parent_clk(struct udevice *dev, const char *name)
- {
- 	struct udevice *parent;
-@@ -443,28 +453,8 @@ clk_resolve_parent_clk(struct udevice *dev, const char *name)
- 
- 	return clk.dev->name;
- }
- 
--int clk_release_all(struct clk *clk, unsigned int count)
--{
--	unsigned int i;
--	int ret;
--
--	for (i = 0; i < count; i++) {
--		debug("%s(clk[%u]=%p)\n", __func__, i, &clk[i]);
--
--		/* check if clock has been previously requested */
--		if (!clk[i].dev)
--			continue;
--
--		ret = clk_disable(&clk[i]);
--		if (ret && ret != -ENOSYS)
--			return ret;
--	}
--
--	return 0;
--}
--
- int clk_request(struct udevice *dev, struct clk *clk)
- {
- 	const struct clk_ops_uboot *ops;
- 
-@@ -704,21 +694,8 @@ int clk_enable(struct clk *clk)
- 
- 	return 0;
- }
- 
--int clk_enable_bulk(struct clk_bulk *bulk)
--{
--	int i, ret;
--
--	for (i = 0; i < bulk->count; i++) {
--		ret = clk_enable(&bulk->clks[i]);
--		if (ret < 0 && ret != -ENOSYS)
--			return ret;
--	}
--
--	return 0;
--}
--
- int clk_disable(struct clk *clk)
- {
- 	const struct clk_ops_uboot *ops;
- 	struct clk *clkp = NULL;
-@@ -769,21 +746,8 @@ int clk_disable(struct clk *clk)
- 
- 	return 0;
- }
- 
--int clk_disable_bulk(struct clk_bulk *bulk)
--{
--	int i, ret;
--
--	for (i = 0; i < bulk->count; i++) {
--		ret = clk_disable(&bulk->clks[i]);
--		if (ret < 0 && ret != -ENOSYS)
--			return ret;
--	}
--
--	return 0;
--}
--
- int clk_get_by_id(ulong id, struct clk **clkp)
- {
- 	struct udevice *dev;
- 	struct uclass *uc;
-@@ -820,8 +784,65 @@ bool clk_is_match(const struct clk *p, const struct clk *q)
- 		return true;
- 
- 	return false;
- }
-+#else
-+long clk_get_parent_rate(struct clk *clk)
-+{
-+	struct clk *pclk;
++	compat->num_clks += 1;
++	compat = devm_krealloc(compat->dev, compat->hws,
++			       sizeof(struct ccf_compat_data) +
++			       sizeof(struct ccf_compat_hw) * compat->num_clks, GFP_KERNEL);
 +
-+	if (!clk)
-+		return -EINVAL;
++	ccf_hw = &compat->hws[compat->num_clks - 1];
++	ccf_hw->id = id;
++	ccf_hw->data = data;
 +
-+	pclk = clk_get_parent(clk);
-+	return clk_get_rate(pclk);
-+}
++	/* Allocate init data for this clock */
++	init = devm_kzalloc(compat->dev, sizeof(struct clk_init_data) + 64, GFP_KERNEL);
++	init->ops = &ccf_compat_ops;
++	init->name = (char *)init + sizeof(struct clk_init_data);
++	snprintf((char *)init->name, 64, "compat-%s.%lu.%lu", compat->dev->name, id, data);
 +
-+static int clk_set_default_parents(struct udevice *dev,
-+				   enum clk_defaults_stage stage)
-+{
-+	return -ENOSYS;
-+}
-+
-+static int clk_set_default_rates(struct udevice *dev,
-+				 enum clk_defaults_stage stage)
-+{
-+	return -ENOSYS;
-+}
-+#endif
-+
-+int clk_set_defaults(struct udevice *dev, enum clk_defaults_stage stage)
-+{
-+	int ret;
-+
-+	if (!dev_has_ofnode(dev))
-+		return 0;
++	ccf_hw->hw.init = init;
 +
 +	/*
-+	 * To avoid setting defaults twice, don't set them before relocation.
-+	 * However, still set them for SPL. And still set them if explicitly
-+	 * asked.
++	 * Register the new clock we just created so CCF will be able to find the clk_core for the
++	 * clk_hw we just created.
 +	 */
-+	if (!(IS_ENABLED(CONFIG_XPL_BUILD) || (gd->flags & GD_FLG_RELOC)))
-+		if (stage != CLK_DEFAULTS_POST_FORCE)
-+			return 0;
-+
-+	debug("%s(%s)\n", __func__, dev_read_name(dev));
-+
-+	if (CONFIG_IS_ENABLED(CLK_CCF_FULL)) {
-+		return of_clk_set_defaults(dev_ofnode(dev), false);
-+	} else {
-+		ret = clk_set_default_parents(dev, stage);
-+		if (ret)
-+			return ret;
-+
-+		ret = clk_set_default_rates(dev, stage);
-+		if (ret < 0)
-+			return ret;
++	ret = devm_clk_hw_register(compat->dev, &ccf_hw->hw);
++	if (ret) {
++		printf("Failed to register hw clock %s, err=%d\n", init->name, ret);
++		ccf_hw = NULL;
 +	}
 +
-+	return 0;
++	devm_kfree(compat->dev, init);
++	return ccf_hw;
 +}
++
++static struct clk_hw *ccf_compat_get_hw(struct ofnode_phandle_args *clkspec, void *_data)
++{
++	struct ccf_compat_data *compat = _data;
++	struct ccf_compat_hw *ccf_hw;
++	struct udevice *dev = compat->dev, *consumer;
++	const struct clk_ops_uboot *uboot_ops = dev->driver->ops;
++	struct clk clk = { 0 };
++	ulong id, data = 0;
++	int ret;
++
++	/* Determine the clk ID and extra data */
++	if (uboot_ops->of_xlate) {
++		ret = device_get_global_by_ofnode(clkspec->node, &consumer);
++		if (ret) {
++			pr_err("%s: couldn't find consumer device, err %d\n",
++			       dev->name, ret);
++			return ERR_PTR(ret);
++		}
++		clk.dev = consumer;
++
++		ret = uboot_ops->of_xlate(&clk, clkspec);
++		if (ret) {
++			pr_err("%s: of_xlate() failed err %d\n", dev->name, ret);
++			return ERR_PTR(ret);
++		}
++
++		id = clk.id;
++		data = clk.data;
++	} else {
++		id = clkspec->args[0];
++	}
++
++	/* Find or create a new ccf_compat_hw for this specific clk */
++	ccf_hw = ccf_compat_find_hw(compat, id, data);
++	if (!ccf_hw)
++		return ERR_PTR(-ENOENT);
++
++	return &ccf_hw->hw;
++}
++
++/**
++ * Shim UCLASS_CLK providers into CCF_FULL so that CCF clocks
++ * can work alongside non-CCF clocks.
++ *
++ * This is ONLY compatible with CONFIG_CLK_CCF_FULL!
++ */
++void clk_ccf_full_setup_compat(struct udevice *dev)
++{
++	struct ccf_compat_data *compat;
++
++	compat = devm_kzalloc(dev, sizeof(*compat), GFP_KERNEL);
++	compat->dev = dev;
++
++	/* Register a clock provider with CCF */
++	devm_of_clk_add_hw_provider(dev, ccf_compat_get_hw, compat);
++}
+diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+index d54d76745560..065c80e8c2b4 100644
+--- a/drivers/clk/clk-uclass.c
++++ b/drivers/clk/clk-uclass.c
+@@ -894,8 +894,11 @@ int clk_uclass_post_probe(struct udevice *dev)
+ 	 * using assigned-clocks
+ 	 */
+ 	clk_set_defaults(dev, CLK_DEFAULTS_POST);
  
- struct clk *devm_clk_get(struct udevice *dev, const char *id)
- {
- 	int rc;
-@@ -837,8 +858,34 @@ struct clk *devm_clk_get(struct udevice *dev, const char *id)
- 
- 	return clk;
++	if (CONFIG_IS_ENABLED(CLK_CCF_FULL))
++		clk_ccf_full_setup_compat(dev);
++
+ 	return 0;
  }
  
-+int clk_enable_bulk(struct clk_bulk *bulk)
-+{
-+	int i, ret;
-+
-+	for (i = 0; i < bulk->count; i++) {
-+		ret = clk_enable(&bulk->clks[i]);
-+		if (ret < 0 && ret != -ENOSYS)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+int clk_disable_bulk(struct clk_bulk *bulk)
-+{
-+	int i, ret;
-+
-+	for (i = 0; i < bulk->count; i++) {
-+		ret = clk_disable(&bulk->clks[i]);
-+		if (ret < 0 && ret != -ENOSYS)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
- int clk_uclass_post_probe(struct udevice *dev)
- {
- 	/*
- 	 * when a clock provider is probed. Call clk_set_defaults()
+ UCLASS_DRIVER(clk) = {
 
 -- 
 2.51.0
