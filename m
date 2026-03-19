@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F8421091927
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 21:37:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1FB41091926
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 21:37:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9EA484113;
-	Thu, 19 Mar 2026 22:36:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0AEDE84132;
+	Thu, 19 Mar 2026 22:37:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RDTcB7ni";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bEy5Sy/t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A943838FA; Thu, 19 Mar 2026 22:36:54 +0100 (CET)
+ id 3C635840AE; Thu, 19 Mar 2026 22:36:55 +0100 (CET)
 Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
  [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C845840CF
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 22:36:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 09F628405B
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 22:36:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7d4c12ff3d5so1025464a34.2
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 14:36:51 -0700 (PDT)
+ 46e09a7af769-7d7653db148so619855a34.2
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 14:36:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1773956209; x=1774561009; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1773956211; x=1774561011; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qWMygFCcaAcGGeCEQBeF/e75DdaB60YdLR6r5LIdjDo=;
- b=RDTcB7ni1+3mpWA2m1smLYgx99PGDGi3MyE6WccTcwPE4x6qtjkX6/xvXuz7ptv+Xp
- JLawAHGy0xozrGrjjHPg9SUi7WeHNBQxzoZnH1Oece/ZbEnrBXHuBKU4M+nUUMw1JYHx
- CLe4uUJwbj491PEga3wT6mFfQDEufrOQDUvM0=
+ bh=EWFuA7SsfTDy17lMTo6TdUjylAXBJJhgqo5rqGW1CRw=;
+ b=bEy5Sy/tERp/KOwlXKQvTtoOtwxe9hBsZe+jOPGeBV2Uhzl2WdlI4lqEJ9q7JH/aP1
+ VOaB9aV46scS5PxqPxuqDSXgsdUXxk9XcPduAcglM26iknrUm9bFS+sImTh7yJqat/TS
+ 5asgSstj3LDzoTDHhiX0OSR6th1HN4FkLEyOw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773956209; x=1774561009;
+ d=1e100.net; s=20251104; t=1773956211; x=1774561011;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=qWMygFCcaAcGGeCEQBeF/e75DdaB60YdLR6r5LIdjDo=;
- b=grzb1wyzVstrwdneStYXvS7BmJ2mErMkudvBEHsOpwYyYE51Sd9k2skYmwADioepTf
- px8/4hq4a5SZMgZocL2Tpop8RMG50zAGoT1oUA5J6YstqKGrAsgNbkhPhXDjb0R51wqX
- bTPlspW2lVepAnLfZZ63XtIMwZ3Kt6HZpTwI2XF+IiWaWEyDg+6v1/KIdVbBAbM8CzfV
- OXb7ti5BNHfkZnTmnoxSAsXH9znpG1ajSJWKX4brr0O0aBhaVv/sKD+WAAa3JS62nzOH
- ycNrm3yaP59qKx0n4ziRg8pGjmxWQECRV/RCp4iTPDVvRep8RmXlr1P6Qqz9gDq7EFgF
- +0Tw==
-X-Gm-Message-State: AOJu0YxGAdOB6gu5zoov8QDXbSlGeMOYUBbOeqivSxsiaCcnA6rVAtcT
- XeZEgwxXni5MyFL1kwb9diFUWveCuJmep+z5TS/CHgKczTJ6Vt0Yx9rSS0x7QTa/ocMNjnRCKbR
- /tlIIKw==
-X-Gm-Gg: ATEYQzyZDK5pBMhIZksKnV8hjAoZ+lM4QhkYrAPCuOe9WyejzkN7TfH5NZWMSUoXMPg
- JfOjyzeP008JPWfsV/9xXUWNz+P0j0GPRaZuKA0+mJcoCLi2P18XpidffqzcU9vipq49fjC0OWf
- q5De4QylPLRw19VpPcTmC/+Udux1B1vxUmz0o0rQRD27ruXtGLBTD826McSV8hA4sqgdjwCTLAe
- ruZGKad+Qgt8igcqp6tZD9NgtjXIcTl1AqMSbggWEw9PiyEzpA3v/W5Y8naHZHFCqgTvyq6EYCo
- p4OiTKoa1dhcduJvrTLwaY1sAt6erAxIWdwYqjqh6Cu1jUGLav6S8bGKIEAB00hO8sv79FFM4aC
- K0m8N/eiBuCQ+tkyuhyIxP+WiGNMizjdHH3L5wmwhLNc7dTChaXhcXNz7RiuIJi7aGoUfzAzXg3
- SSR87PzTvAe03I2ljX4IqoX8qOoij3
-X-Received: by 2002:a05:6830:7306:b0:7d7:bf57:49b6 with SMTP id
- 46e09a7af769-7d7eafd912bmr554102a34.29.1773956209455; 
- Thu, 19 Mar 2026 14:36:49 -0700 (PDT)
+ bh=EWFuA7SsfTDy17lMTo6TdUjylAXBJJhgqo5rqGW1CRw=;
+ b=gWPPsMd9snXm6Uy+7ziYEoq4ijKQ80StalZzZ9vfT6/lO21TOavVyLhvBqn5B8kLYq
+ OZlXuOxKyFtEMSrMXPFjDkFu/d11SMIoAgKIPFT+XiNy6tqHpoSbDqD+H+3Etq03O38N
+ b5RAt4s1XvDYG4F7kf+XTqasz+2ybkJKN2QXe53dDNxh4NM1Z5+7PH5erVp8zKPY8q47
+ j2c7Az7lDMoJGbFMYJ63ltRjY+bYNvhVmbS0sAv51lT6xrkub/iEG+fINNG00Ic0v9J/
+ 8EG5pSR0MCZmdSNsy6OK9HSC4FL4Rqqp3ycmnX5nyXlDA1T5xUmYnuF0a/KIhkvKpWS8
+ jaWA==
+X-Gm-Message-State: AOJu0Yx6R8KgdQB4tIeqrsSx8D2jzuKv+bCg2gm/i1HOntICZHMXZPqu
+ FQ/Yx5tDtnfpKN2QqIo1BeeRdj8zo92Xbk0KvoFy1Lv9a+iAJpR9PP+ipoDqqbAYQ+SC3wZvtaJ
+ dloNtFw==
+X-Gm-Gg: ATEYQzyZxMtuvTW8LL9H7ASdCJ3hKgayL+7Cb96V/O7kA9c/cDLLHFPcuSSWHZj62pi
+ KEPKOjWJn1aVmgXOjQhYh4qszPn4veOagw3nfQgVGeCEXHvJJzdwQ9qabv0F9n9BKj753Febz5N
+ ebVey6PydJjZjO7z3sFr5mxplLgO9mFubEybR2OZmRt354zm2nHoQT3MqBy7CdCOWayVfZP/WOc
+ SzCJsTUa5CtB9XTy7G1BYmrwsdDKC+Eh3RX8L5sS3xw9Q1qghIHR6XF9Fu1A+9fWBYY+hu48B9F
+ 9TE63KDNDtACQQTvroxRtN/eTj626dfEQF5pcIKcX1ql18whxZlpjK4Bi66JEXYTEhP/w7cXqvw
+ lS3JCltr0JZ3j/+JNq8tJKt1vAAwxOfFnMULfkR99aZhNvCBrUTGBeNE5rKDRiUv7RMYV04Mryu
+ bi1JB7QDKKsfeRPml+w25TPpJvGuPc
+X-Received: by 2002:a05:6830:4491:b0:7d7:d332:7af8 with SMTP id
+ 46e09a7af769-7d7eaecce1amr542115a34.13.1773956211114; 
+ Thu, 19 Mar 2026 14:36:51 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7eac17b0asm545724a34.9.2026.03.19.14.36.47
+ 46e09a7af769-7d7eac17b0asm545724a34.9.2026.03.19.14.36.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 14:36:48 -0700 (PDT)
+ Thu, 19 Mar 2026 14:36:50 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Casey Connolly <casey.connolly@linaro.org>,
  Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>,
  Pavel Herrmann <morpheus.ibis@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [RFC PATCH 10/15] dm: core: Add uclass-ID-keyed accessors for priv
- and plat
-Date: Thu, 19 Mar 2026 15:35:40 -0600
-Message-ID: <20260319213551.267031-11-sjg@chromium.org>
+Subject: [RFC PATCH 11/15] dm: core: Add static adjunct declarations for
+ drivers
+Date: Thu, 19 Mar 2026 15:35:41 -0600
+Message-ID: <20260319213551.267031-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260319213551.267031-1-sjg@chromium.org>
 References: <20260319213551.267031-1-sjg@chromium.org>
@@ -96,141 +96,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add device_get_uclass_priv_by_id() and device_get_uclass_plat_by_id()
-which search both primary and adjunct memberships for the matching
-uclass ID. This allows subsystem code to retrieve the correct
-per-device uclass data regardless of whether the device was found
-via its primary uclass or an adjunct.
+Add struct driver_adjunct and a .adjuncts field to struct driver,
+allowing drivers to declare adjunct uclass memberships at compile time.
+The core registers these automatically during probe via
+device_bind_static_adjs(), before the driver's probe() runs.
 
-When DM_UC_ADJUNCT is disabled, these map to dev_get_uclass_priv()
-and dev_get_uclass_plat() respectively, with no overhead.
+This removes the need for custom probe functions that only call
+device_add_uclass_adj(). The dynamic API remains available for cases
+where adjuncts are conditional.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- drivers/core/adjunct.c | 23 +++++++++++++++++++++++
- drivers/core/device.c  | 16 ++++------------
- include/dm/device.h    | 34 ++++++++++++++++++++++++++++++++++
- 3 files changed, 61 insertions(+), 12 deletions(-)
+ drivers/core/adjunct.c       | 17 +++++++++++++++++
+ drivers/core/device.c        |  4 ++++
+ include/dm/device-internal.h | 16 ++++++++++++++++
+ include/dm/device.h          | 21 +++++++++++++++++++++
+ 4 files changed, 58 insertions(+)
 
 diff --git a/drivers/core/adjunct.c b/drivers/core/adjunct.c
-index 07fd0917050..802d2761e6b 100644
+index 802d2761e6b..0e247bd4cb9 100644
 --- a/drivers/core/adjunct.c
 +++ b/drivers/core/adjunct.c
-@@ -76,6 +76,19 @@ int device_add_uclass_adj(struct udevice *dev, enum uclass_id id,
- 	return ret;
+@@ -150,6 +150,23 @@ void *device_get_uclass_plat(struct udevice *dev, enum uclass_id id)
+ 	return device_get_adj_uclass_plat(dev, id);
  }
  
-+const void *device_get_uclass_ops(struct udevice *dev, enum uclass_id id)
++int device_bind_static_adjs(struct udevice *dev)
 +{
-+	struct uclass_member *ucm;
++	const struct driver_adjunct *adj = dev->driver->adjuncts;
++	int ret;
 +
-+	/* Walk primary + adjunct memberships for matching uclass */
-+	list_for_each_entry(ucm, &dev->adj_head, adj_node) {
-+		if (ucm->uc->uc_drv->id == id)
-+			return ucm->ops;
++	if (!adj)
++		return 0;
++
++	for (; adj->id; adj++) {
++		ret = device_bind_adj_(dev, adj->id, adj->ops);
++		if (ret)
++			return ret;
 +	}
 +
-+	return NULL;
-+}
-+
- void *device_get_adj_uclass_priv(struct udevice *dev, enum uclass_id id)
- {
- 	struct uclass_member *ucm;
-@@ -127,6 +140,16 @@ int ucm_alloc_priv(struct uclass_member *ucm)
- 	return 0;
- }
- 
-+void *device_get_uclass_priv(struct udevice *dev, enum uclass_id id)
-+{
-+	return device_get_adj_uclass_priv(dev, id);
-+}
-+
-+void *device_get_uclass_plat(struct udevice *dev, enum uclass_id id)
-+{
-+	return device_get_adj_uclass_plat(dev, id);
++	return 0;
 +}
 +
  int device_probe_adjs_(struct udevice *dev)
  {
  	struct uclass_driver *uc_drv;
 diff --git a/drivers/core/device.c b/drivers/core/device.c
-index ba3c5b9a28e..2b7b3528e4c 100644
+index 2b7b3528e4c..fb35488e70c 100644
 --- a/drivers/core/device.c
 +++ b/drivers/core/device.c
-@@ -1193,23 +1193,15 @@ void dev_int_set_seq(struct udevice *dev, int seq)
- 	dev->ucm.seq = seq;
- }
+@@ -168,6 +168,10 @@ static int device_bind_common(struct udevice *parent, const struct driver *drv,
+ 	if (ret)
+ 		goto fail_uclass_bind;
  
-+#if !CONFIG_IS_ENABLED(DM_UC_ADJUNCT)
- const void *device_get_uclass_ops(struct udevice *dev, enum uclass_id id)
- {
--	if (CONFIG_IS_ENABLED(DM_UC_ADJUNCT)) {
--		struct uclass_member *ucm;
--
--		/* Walk primary + adjunct memberships for matching uclass */
--		list_for_each_entry(ucm, &dev->adj_head, adj_node) {
--			if (ucm->uc->uc_drv->id == id)
--				return ucm->ops;
--		}
--	} else {
--		if (dev->ucm.uc->uc_drv->id == id)
--			return dev->driver->ops;
--	}
-+	if (dev->ucm.uc->uc_drv->id == id)
-+		return dev->driver->ops;
- 
- 	return NULL;
- }
-+#endif
- 
- #if CONFIG_IS_ENABLED(OF_REAL)
- bool device_is_compatible(const struct udevice *dev, const char *compat)
-diff --git a/include/dm/device.h b/include/dm/device.h
-index 2a78911b942..d93690d7a8b 100644
---- a/include/dm/device.h
-+++ b/include/dm/device.h
-@@ -462,6 +462,40 @@ static inline int device_add_uclass_adj(struct udevice *dev,
- }
- #endif
- 
-+/**
-+ * device_get_uclass_priv() - Get uclass private data by uclass ID
-+ *
-+ * Return the per-device uclass private data for the given uclass ID,
-+ * searching both primary and adjunct memberships. When DM_UC_ADJUNCT is
-+ * not enabled, this simply returns the primary uclass private data.
-+ *
-+ * @dev: Device to query
-+ * @id: Uclass ID to look up private data for
-+ * Return: private data pointer, or NULL if not found
-+ */
-+#if CONFIG_IS_ENABLED(DM_UC_ADJUNCT)
-+void *device_get_uclass_priv(struct udevice *dev, enum uclass_id id);
-+#else
-+#define device_get_uclass_priv(dev, id)	dev_get_uclass_priv(dev)
-+#endif
++	ret = device_bind_static_adjs(dev);
++	if (ret)
++		goto fail_uclass_bind;
 +
+ 	/* if we fail to bind we remove device from successors and free it */
+ 	if (drv->bind) {
+ 		ret = drv->bind(dev);
+diff --git a/include/dm/device-internal.h b/include/dm/device-internal.h
+index a129ddecf87..fdba288d55c 100644
+--- a/include/dm/device-internal.h
++++ b/include/dm/device-internal.h
+@@ -519,6 +519,17 @@ void *device_get_adj_uclass_priv(struct udevice *dev, enum uclass_id id);
+  */
+ void *device_get_adj_uclass_plat(struct udevice *dev, enum uclass_id id);
+ 
 +/**
-+ * device_get_uclass_plat() - Get uclass platform data by uclass ID
++ * device_bind_static_adjs() - Register statically declared adjuncts
 + *
-+ * Return the per-device uclass platform data for the given uclass ID,
-+ * searching both primary and adjunct memberships. When DM_UC_ADJUNCT is
-+ * not enabled, this simply returns the primary uclass platform data.
++ * Called during bind to register any adjuncts declared in the driver's
++ * adjuncts array.
 + *
-+ * @dev: Device to query
-+ * @id: Uclass ID to look up platform data for
-+ * Return: platform data pointer, or NULL if not found
++ * @dev: Device to register static adjuncts for
++ * Return: 0 if OK, -ve on error
 + */
-+#if CONFIG_IS_ENABLED(DM_UC_ADJUNCT)
-+void *device_get_uclass_plat(struct udevice *dev, enum uclass_id id);
-+#else
-+#define device_get_uclass_plat(dev, id)	dev_get_uclass_plat(dev)
-+#endif
++int device_bind_static_adjs(struct udevice *dev);
 +
  /**
-  * U_BOOT_DRIVER() - Declare a new U-Boot driver
-  * @__name: name of the driver
+  * device_probe_adjs_() - Allocate private data for adjunct uclasses
+  *
+@@ -581,6 +592,11 @@ static inline void *device_get_adj_uclass_plat(struct udevice *dev,
+ 	return NULL;
+ }
+ 
++static inline int device_bind_static_adjs(struct udevice *dev)
++{
++	return 0;
++}
++
+ static inline int device_probe_adjs_(struct udevice *dev)
+ {
+ 	return 0;
+diff --git a/include/dm/device.h b/include/dm/device.h
+index d93690d7a8b..4832a1ff634 100644
+--- a/include/dm/device.h
++++ b/include/dm/device.h
+@@ -354,6 +354,20 @@ struct udevice_id {
+ #define of_match_ptr(_ptr)	NULL
+ #endif /* CONFIG_IS_ENABLED(OF_CONTROL) */
+ 
++/**
++ * struct driver_adjunct - Static adjunct declaration for a driver
++ *
++ * Allows a driver to declare membership in additional uclasses at compile
++ * time, rather than calling device_add_uclass_adj() dynamically.
++ *
++ * @id: Uclass ID for this adjunct membership
++ * @ops: Operations provided by this driver for the adjunct uclass
++ */
++struct driver_adjunct {
++	enum uclass_id id;
++	const void *ops;
++};
++
+ /**
+  * struct driver - A driver for a feature or peripheral
+  *
+@@ -399,6 +413,10 @@ struct udevice_id {
+  * pointers defined by the driver, to implement driver functions required by
+  * the uclass.
+  * @flags: driver flags - see `DM_FLAG_...`
++ * @adjuncts: Sentinel-terminated array of static adjunct declarations, or
++ * NULL if the driver does not statically declare any adjuncts. Each entry
++ * specifies a uclass ID and ops pointer. The core registers these during
++ * probe, before calling the driver's probe function.
+  * @acpi_ops: Advanced Configuration and Power Interface (ACPI) operations,
+  * allowing the device to add things to the ACPI tables passed to Linux
+  */
+@@ -420,6 +438,9 @@ struct driver {
+ 	int per_child_plat_auto;
+ 	const void *ops;	/* driver-specific operations */
+ 	uint32_t flags;
++#if CONFIG_IS_ENABLED(DM_UC_ADJUNCT)
++	const struct driver_adjunct *adjuncts;
++#endif
+ #if CONFIG_IS_ENABLED(ACPIGEN)
+ 	struct acpi_ops *acpi_ops;
+ #endif
 -- 
 2.43.0
 
