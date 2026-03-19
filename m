@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A048F1091927
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 21:36:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 373CD1091926
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 21:36:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F326A8400F;
-	Thu, 19 Mar 2026 22:36:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 430E584006;
+	Thu, 19 Mar 2026 22:36:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fGdmWFmS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RmYtgKjg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2601B83FED; Thu, 19 Mar 2026 22:36:35 +0100 (CET)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 012AB84008; Thu, 19 Mar 2026 22:36:38 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45DEC838FA
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 22:36:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B24E983BC8
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 22:36:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7d74c1157a4so935113a34.1
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 14:36:32 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7d7d50516e9so887407a34.1
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 14:36:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1773956190; x=1774560990; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1773956192; x=1774560992; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XTOWYrCEIqjo8l2Idhkg4Q1Lomw90K4EqjkzAaGeBfY=;
- b=fGdmWFmS6wQx4AAS9TAOTBtbQCBYxLrLGnbOnCcCFgMVbu3P83s2mWg6E5q3H3K9Fj
- Zwz3pyPbZqnzjA0UcuRg2/pxojmc3chmyTaXEXxSw7nSurha0Xs/2Z8Sv7C62kbeOfZ3
- WQ2W5VozH2Yqo+dGxw0gSjWCRo5X2I1eVKgxw=
+ bh=+LWCI1Kds40oirghFAPDOuEj2brwQVpAsrKvT7MXF8M=;
+ b=RmYtgKjgsendlhiiGn2frBU4iPKsrjazHG1FDAAvcZDGUVjVCNVFD6u3PzTvQo42oj
+ XP598beCIwl0NK8vxiPc3rfrONwHuENooVhyOcbHiJMaWI3AsekVA3jdZjFOWamAUIR6
+ n6y76HtcAmEmMkDhTuWvEiYYmzi6cGwpo362g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773956190; x=1774560990;
+ d=1e100.net; s=20251104; t=1773956192; x=1774560992;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=XTOWYrCEIqjo8l2Idhkg4Q1Lomw90K4EqjkzAaGeBfY=;
- b=QQrpVoAdbr/k58/05wbq40hJmCCcBn2d0gEdnGmRtI6Fzoe/SGdVGW11Mi7x66g65j
- 75680+GSOUR+cn219hbtkiyTdkFqc0ckEhjr4VwAGSbXzOWkhAPtUtd8VKoQSViGDeuC
- GaeDP0ZXrZ+NErzuhZnJivDpxgBsdNPmbN1/YIzuhz5ifmjwsqpIyFzpxidKye4GaUo7
- Zl3NYuktfeAM7g4bEZOeaKpbn10dZJDQ+pZE+bKZmdsgizNB8ETzl56iq+WNVijlGV8b
- lXOU/q+rUWgt/HmZd/UrONsnYyDEtCG4lnEoZ/SKVCV8d/n9j556f5TghYuuyvKDm/eF
- 2B4w==
-X-Gm-Message-State: AOJu0YzMreYy4c+2esf71N+KgpqVxPvQ+Z+BNoI4fp54cVoUfClPHGRT
- XnNwB7ivZf95FSTOOwrTqPwXEviO/R4X5GStfK8OLIiQvIgIBa+D6LhcVWEml9JIWe3PY9OKrKd
- bMAQ6LQ==
-X-Gm-Gg: ATEYQzwOTwYwcxaT5B7q0iENUHei/YLXQhm+OrXMDdoazJui81Jyi9DmUbVkplrsTtS
- V1NjbktUhy+G1lWQIxLayipR1xABDlYD0dDDylcl39C4ubTlvYP7/Hd026Ptrwnass8YzEOrk4f
- xSfU+Kw7HLYK+QnXhXUUvR+nIO0MfLx5ZTibz2B0JUNEKyc+7W1SOASXa4pjIYcEu+LKtjgpof+
- 4LwK23L59krMBLnhcNSkSqMza+ggFzuYp9RqDK+xZPYyEpV4hS/wJSdP1tImndk+UFMevXnqx3j
- VxQDtqnxZDx4uQGJ8DSWFiwxvloxSsnonklnedT4MK+EAx3hARppcp+6vJClMVf7euCfGGA+Y2p
- agTxDwjBKckt/slmigoci50jYcEXA2duPCefHo2wIkhoXHmWYvb2x8MOaVwI1N7DbWhg/EObme4
- fONwLOxTjFQ0NG3vbq9w==
-X-Received: by 2002:a05:6830:67f7:b0:7d7:e029:a1be with SMTP id
- 46e09a7af769-7d7eae5b487mr520014a34.5.1773956190446; 
- Thu, 19 Mar 2026 14:36:30 -0700 (PDT)
+ bh=+LWCI1Kds40oirghFAPDOuEj2brwQVpAsrKvT7MXF8M=;
+ b=WmTR8XvtQaFbRqB4/2r+rtprMK31I/DsieMRzxg8K+nhT4eKpQGz3LJMp0mrpGmK/T
+ oAkugN9e78GmE6PbmacR40hb10+k8a5NfSPFVDFdQ5Z/GkOqCpcAc5gUOSBJK1W0TuxF
+ fSYUtxmTPzju9by6XpYsZQ+LCvsZlj6MaFHyhU9mxxQMZKVjhrxtwvermI+imvphlmdb
+ 65UIUz7hPhPU/j33BpWB3qw0hOg6tPdvHhcrxo5OImmucAW5UQSa9E2QPDZAIW8CQSpT
+ 0Wrnxbn1fgPqDJ+zoNHXhHdmik8zPDX4aFO6x2E0vqKkXAJqb2dExTKNLkEfD6ujyTq2
+ fG4A==
+X-Gm-Message-State: AOJu0YzH9eNieHKMH/SbiCyj/qtcZk6NEzGqQQICM04FhXzfN7n2Aqfy
+ VEgzg38vwCL9qVt4LUJiTCdAQ3PoUxqzpQ5x6z1VR9REzYbmjf8/ImlFCLLjDG0hCpWQpQlC/C1
+ 9Ozc4OQ==
+X-Gm-Gg: ATEYQzyP21WwTah67//dkeiwwgBrkh8PxyWaRPDQYSL3zSgM1fJTt5Y3g5FLFR6Y+z6
+ vny40i1cmULtc37OldkSzORprOaENigNfl1ZY/F9Iev9ck1eeCqOsW09NM50fIGy57+Xxv3plil
+ auNsFCoxaqIsHk4LHCr+v9EzV1GFATb3kv4Zf9pu+gepHr1ICkl0pu923V517GxkDfCitK0AO5r
+ zQpqSp0SwcG5sl7k7ip6+BJX6GNFvRdcwAsYmwxP6zzOVyLg86lQde8Q5Srl0q+cuEAQgoS4LOC
+ hDY7R/YrtHBqH9EHgo3PrjZdZsQQfs9A6Mmc8HnIFNWnAI5OKi8377+QamPBrqFYKWvMV1EcfCD
+ ejpzSIRYz3r8r5obE/+0FNPayxT8o/opNs69YQEszLyoL4OawCtOzi+7Ymwm9ZKMmoYseqOmMxw
+ 5Xo8l3hmfTTPJ51km7Pg==
+X-Received: by 2002:a05:6830:81c9:b0:7d7:cc49:9ad6 with SMTP id
+ 46e09a7af769-7d7eaf765afmr490863a34.22.1773956191924; 
+ Thu, 19 Mar 2026 14:36:31 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7eac17b0asm545724a34.9.2026.03.19.14.36.29
+ 46e09a7af769-7d7eac17b0asm545724a34.9.2026.03.19.14.36.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 14:36:29 -0700 (PDT)
+ Thu, 19 Mar 2026 14:36:31 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <simon.glass@canonical.com>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marex@denx.de>, Pavel Herrmann <morpheus.ibis@gmail.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [RFC PATCH 01/15] dm: Fix linker list alignment for ll_entry_get()
-Date: Thu, 19 Mar 2026 15:35:31 -0600
-Message-ID: <20260319213551.267031-2-sjg@chromium.org>
+Subject: [RFC PATCH 02/15] linker_lists: Fix end-marker alignment to prevent
+ padding
+Date: Thu, 19 Mar 2026 15:35:32 -0600
+Message-ID: <20260319213551.267031-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260319213551.267031-1-sjg@chromium.org>
 References: <20260319213551.267031-1-sjg@chromium.org>
@@ -97,42 +97,82 @@ X-Virus-Status: Clean
 
 From: Simon Glass <simon.glass@canonical.com>
 
-The extern declaration in ll_entry_get() lacks the __aligned(4)
-attribute present in ll_entry_declare(). When the compiler sees an
-unaligned extern reference to a linker list entry in the same
-compilation unit as its definition, it may increase the section
-alignment beyond the expected struct size. This causes gaps in the
-linker list array, which the alignment checker reports as failures.
+Change the alignment of end markers in ll_entry_end() and ll_end_decl()
+from __aligned(4) and __aligned(CONFIG_LINKER_LIST_ALIGN) respectively
+to __aligned(1).
 
-For example, sandbox_dir is both defined and referenced via
-DM_DRIVER_GET() in sandboxfs.c. The compiler applies 32-byte
-alignment to its section instead of the 4-byte alignment from the
-definition, creating an 8-byte gap before it in the driver list.
+The linker places zero-size end markers at aligned boundaries based on
+what follows them. When the next list's start marker has a high alignment
+requirement (e.g., 32 bytes), padding gets inserted before the end marker.
+This causes the byte span (end - start) to not be an exact multiple of
+the struct size.
 
-Add __aligned(4) to the extern declaration in ll_entry_get() to
-match ll_entry_declare()
+The compiler optimizes pointer subtraction (end - start) using magic-number
+multiplication for division. This optimization only produces correct results
+when the byte span is an exact multiple of the struct size. With padding,
+the result is garbage (e.g., -858993444 instead of 15).
 
+By using __aligned(1), the end marker is placed immediately after the last
+entry with no padding, ensuring (end - start) equals exactly n * sizeof
+where n is the number of entries. This makes ll_entry_count() and direct
+pointer arithmetic work correctly.
+
+Fixes: 0b2fa98aa5e5 ("linker_lists: Fix alignment issue")
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/linker_lists.h | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ include/linker_lists.h | 22 ++++++++++++++++++++--
+ 1 file changed, 20 insertions(+), 2 deletions(-)
 
 diff --git a/include/linker_lists.h b/include/linker_lists.h
-index 0f4a2d686e2..2bc5326f681 100644
+index 2bc5326f681..470dcfc621a 100644
 --- a/include/linker_lists.h
 +++ b/include/linker_lists.h
-@@ -266,7 +266,8 @@
+@@ -145,6 +145,20 @@
+  * Since this macro defines an array end symbol, its leftmost index
+  * must be 2 and its rightmost index must be 3.
+  *
++ * The end symbol uses __aligned(1) to ensure it is placed immediately after
++ * the last entry without any padding. This is critical for ll_entry_count()
++ * to work correctly.
++ *
++ * If the end marker had a higher alignment (e.g., 4 or 32 bytes), the linker
++ * might insert padding between the last entry and the end marker to satisfy
++ * alignment requirements of the following section. This would cause pointer
++ * subtraction (end - start) to produce incorrect results because the compiler
++ * optimizes pointer division using magic-number multiplication, which only
++ * works correctly when the byte span is an exact multiple of the struct size.
++ *
++ * With __aligned(1), the end marker is placed at exactly (start + n * sizeof)
++ * where n is the number of entries, ensuring correct pointer arithmetic.
++ *
+  * Example:
+  *
+  * ::
+@@ -153,7 +167,7 @@
   */
- #define ll_entry_get(_type, _name, _list)				\
- 	({								\
--		extern _type _u_boot_list_2_##_list##_2_##_name;	\
-+		extern _type _u_boot_list_2_##_list##_2_##_name		\
-+			__aligned(4);					\
- 		_type *_ll_result =					\
- 			&_u_boot_list_2_##_list##_2_##_name;		\
- 		_ll_result;						\
+ #define ll_entry_end(_type, _list)					\
+ ({									\
+-	static char end[0] __aligned(4) __attribute__((unused))		\
++	static char end[0] __aligned(1) __attribute__((unused))		\
+ 		__section("__u_boot_list_2_"#_list"_3");			\
+ 	_type * tmp = (_type *)&end;					\
+ 	asm("":"+r"(tmp));						\
+@@ -239,8 +253,12 @@
+ 	static _type _sym[0] __aligned(CONFIG_LINKER_LIST_ALIGN)	\
+ 		__maybe_unused __section("__u_boot_list_2_" #_list "_1")
+ 
++/*
++ * ll_end_decl uses __aligned(1) to avoid padding before the end marker.
++ * See the comment for ll_entry_end() for a full explanation.
++ */
+ #define ll_end_decl(_sym, _type, _list)					\
+-	static _type _sym[0] __aligned(CONFIG_LINKER_LIST_ALIGN)	\
++	static _type _sym[0] __aligned(1)				\
+ 		__maybe_unused __section("__u_boot_list_2_" #_list "_3")
+ 
+ /**
 -- 
 2.43.0
 
