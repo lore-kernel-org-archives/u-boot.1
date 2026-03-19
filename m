@@ -4,61 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE9CD1093163
-	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 00:59:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B7A21093172
+	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 03:59:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2BD583F8A;
-	Fri, 20 Mar 2026 01:59:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
+	by phobos.denx.de (Postfix) with ESMTP id 21E9F83F2E;
+	Fri, 20 Mar 2026 04:59:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="ksNpiCAE";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Stk9Tp5t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D04DE83E36; Fri, 20 Mar 2026 00:56:40 +0100 (CET)
-Received: from out-185.mta0.migadu.com (out-185.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::b9])
+ id 70F6383E36; Fri, 20 Mar 2026 04:59:08 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5363E83CEA
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 00:56:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=postmarketos.org
+ by phobos.denx.de (Postfix) with ESMTPS id 4CE5683D71
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 04:59:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kcxt@postmarketos.org
-Message-ID: <bb3d0a9a-d1d6-4dc7-a583-205602181572@postmarketos.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1773964596;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4fcTMV22NRz9tk3;
+ Fri, 20 Mar 2026 04:59:02 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1773979142;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=BqjhBH3U/EXxaqZCrXxg9ZMHS1AxQaJ5i1Fd5a39+ZY=;
- b=ksNpiCAEL1qW7u8NhQorp5J3e249fcz7QDfsLaW4AfC0eNi1Q9Y3WH7p44xMgQNKG5abOM
- bYPkQXMexGozjQpJYZbae7OvW2TI5XUfrmFVq41RQktE9XrGaVIGPKJ0ljnsqGbcM6tK71
- HZgVFIawtX1BdrgumMGrLboaGBn62jyYGjOrq33Rax9cyYYrIk30PYq2o2eNN0nplCNcc7
- JD075cxppuFI0bXEXHQwEy1NFlyLbl0dWikRnNq7y5g6gX8VMZab6Wc4423k5Q1mnUAqBQ
- cW3Wmh8Mw7bqb3AWcVUXCv6CfqbvjFptLM6R/tVMnXyFlCY2ONQwVznyNNDy3Q==
-Date: Fri, 20 Mar 2026 00:56:33 +0100
+ bh=GYwh/vRf+jmCohfUesHpvX2kA3MufPwBRxmEFmiGsLk=;
+ b=Stk9Tp5tYSyWwUTm5SVU87FjyqVv9aMU/mchG9UjsbSGwxqpotRjcVwOuBkFMNcelXLSLO
+ /ZrlTCKHXqGdEHXd4EFQ1+3fi92lMloeBP04HhwJBfwQWto3hid5VvGW/Tn8tYCuaFwFpd
+ USjjhs6KwrTXW22N4VUZHsP8Gioy+WDylT/QPx91nChQlh9dlrnAe0CvQBN13TBcyZOTY2
+ jfGTfitKqZLXQrcZdv6gG9cB2sd3DQs7Xbqqrj4raL+ToFU2rnWEwM5ENit+jUsWp7jYfZ
+ GHD9QXrcs0+7KEYaHEBjMmQCkE4Seca09BuiCD/AwI3eBsxTbmtP0DmTmNFHTA==
+Message-ID: <b48f3f6c-0403-4528-8de6-0b24caa810ef@mailbox.org>
+Date: Thu, 19 Mar 2026 18:57:21 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 0/3] fwu: Call EFI stack initialization after preboot
+Subject: Re: [PATCH] usb: gadget: Move USB_GADGET_DUALSPEED to be slightly
+ more visible
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
+References: <20260317012433.4162524-1-trini@konsulko.com>
+ <bcaede64-7918-4eaf-9695-a155b1395e50@mailbox.org>
+ <20260317134107.GR502704@bill-the-cat>
+ <bbdd71c7-3276-402e-a9f8-98afffd10538@mailbox.org>
+ <20260318012649.GG502704@bill-the-cat>
+ <bf3bb11e-e891-4703-ad47-04d53e21d7af@mailbox.org>
+ <20260319133952.GO502704@bill-the-cat>
 Content-Language: en-US
-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@amd.com,
- xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org
-Cc: Kory Maincent <kory.maincent@bootlin.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Padmarao Begari <padmarao.begari@amd.com>,
- Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>,
- Weijie Gao <weijie.gao@mediatek.com>, Yao Zi <me@ziyao.cc>
-References: <cover.1773840306.git.michal.simek@amd.com>
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Casey Connolly <kcxt@postmarketos.org>
-In-Reply-To: <cover.1773840306.git.michal.simek@amd.com>
-Content-Type: text/plain; charset=UTF-8
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260319133952.GO502704@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Migadu-Flow: FLOW_OUT
-X-Mailman-Approved-At: Fri, 20 Mar 2026 01:58:58 +0100
+X-MBO-RS-ID: 7d72d1e1c9eb7973e07
+X-MBO-RS-META: peiiwcbsr77wwqdoea7nzr18s8mp8e7i
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,54 +81,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
-
-On 18/03/2026 14:25, Michal Simek wrote:
-> Hi,
+On 3/19/26 2:39 PM, Tom Rini wrote:
+> On Thu, Mar 19, 2026 at 01:50:56AM +0100, Marek Vasut wrote:
+>> On 3/18/26 2:26 AM, Tom Rini wrote:
+>>> On Tue, Mar 17, 2026 at 08:42:06PM +0100, Marek Vasut wrote:
+>>>> On 3/17/26 2:41 PM, Tom Rini wrote:
+>>>>> On Tue, Mar 17, 2026 at 03:34:36AM +0100, Marek Vasut wrote:
+>>>>>> On 3/17/26 2:24 AM, Tom Rini wrote:
+>>>>>>> As exposed by "make randconfig", we have an issue around
+>>>>>>> USB_GADGET_DUALSPEED. It is possible to select this symbol (via
+>>>>>>> SPL_USB_CDNS3_GADGET for example) and so have an unmet dependency. As
+>>>>>>> this is a hidden symbol, move it up within the menu.
+>>>>>> What is the issue this is fixing ?
+>>>>>
+>>>>> Valid configs causing the kconfig part of the build system to note
+>>>>> unmet dependencies.
+>>>> Lemme rephrase, is this actually a fix, or is this some readability/ordering
+>>>> improvement patch ?
+>>>
+>>> Yes, it's a fix because randconfig finds problems that users may stumble
+>>> on to while trying to make a valid config for a platform.
+>>
+>> Is the commit message telling me, that "config USB_GADGET_DUALSPEED" is
+>> moved outside of the "if USB_GADGET" block ?
+>>
+>> Because if this is something else, and the symbols are simply reordered,
+>> that I do not understand how this could be fixing anything.
 > 
-> the whole series is trying to address issues we have on platforms where usb
-> and ufs init are not done before efi initialization. This is happenin on
-> platforms where A/B update is enabled. FWU code is called early and do EFI
-> initialization before usb and ufs started that's why they are not visible.
+> I'm unclear what else you need to know to take this bugfix. The symbol
+> is not placed correctly, leading to possibly unmet dependency errors.
 
-I guess I'm missing something here (but I'd very much appreciate an
-explanation!) but isn't it actually necessary to set up the EFI
-subsystem /before/ register block devices?
+Why do you think the symbol is placed incorrectly ?
 
-Since EFI sets up an event listener to react to new UCLASS_BLK devices
-and create EFI device handles to represent them, it doesn't create
-device handles for block devices that existed before the EFI subsystem
-is up.
+What this change does, is it moves "config USB_GADGET_DUALSPEED" outside 
+of the "if USB_GADGET" block in drivers/usb/gadget/Kconfig , which the 
+commit message should clearly spell out.
 
-I ran into this issue when I wrote this patch:
-https://gitlab.com/LinaroLtd/qcom-eco/u-boot/-/commit/e3616009a441358bf96bd2885d77fd46df710a9a
+However , I believe that is not the correct fix. The 
+USB_GADGET_DUALSPEED has to be available only if USB_GADGET or 
+SPL_USB_GADGET is selected, the former is already satisfied, the later 
+is not and the SPL_USB_CDNS3_GADGET triggers a problem here. I think 
+this is the correct fix:
 
-Kind regards,
+"
+diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+index ebb306852a6..87d17780c45 100644
+--- a/drivers/usb/gadget/Kconfig
++++ b/drivers/usb/gadget/Kconfig
+@@ -178,10 +178,6 @@ config SDP_LOADADDR
+         hex "Default load address at SDP_WRITE and SDP_JUMP"
+         default 0x0
 
-> 
-> We are workarounding it by starting usb/ufs from board file but this should
-> be more generic approach.
-> 
-> Thanks,
-> Michal
-> 
-> Changes in v2:
-> - new patch in series
-> - check return value
-> 
-> Michal Simek (3):
->   event: Check return value from event_notify_null()
->   event: Introduce EVT_POST_PREBOOT event
->   fwu: Move boottime checks to EVT_POST_PREBOOT
-> 
->  common/board_r.c      | 6 +++++-
->  common/main.c         | 4 ++++
->  include/event.h       | 9 +++++++++
->  lib/fwu_updates/fwu.c | 2 +-
->  test/dm/fwu_mdata.c   | 4 ++--
->  5 files changed, 21 insertions(+), 4 deletions(-)
-> 
+-# Selected by UDC drivers that support high-speed operation.
+-config USB_GADGET_DUALSPEED
+-       bool
+-
+  config USB_GADGET_DOWNLOAD
+         bool "Enable USB download gadget"
+         help
+@@ -371,3 +367,11 @@ config SPL_SDP_USB_DEV
+           so it can be used in compiled environment.
 
--- 
-// Casey (she/her)
+  endif # SPL_USB_GADGET
++
++if USB_GADGET || SPL_USB_GADGET
++
++# Selected by UDC drivers that support high-speed operation.
++config USB_GADGET_DUALSPEED
++       bool
++
++endif
+"
 
+> Yes, the error is discovered by randconfig which makes it harder to
+> describe how exactly to reproduce it (but I believe it does), but that
+> doesn't make it any less valid.
+This part is not relevant.
