@@ -4,105 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDD771090253
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 16:49:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AD321091912
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 19:51:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C882B83DC9;
-	Thu, 19 Mar 2026 17:49:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 5A11B83F00;
+	Thu, 19 Mar 2026 20:51:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="EhIbnwEX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nPtW89gW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FD3683F00; Thu, 19 Mar 2026 17:49:45 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 87E8483F2E; Thu, 19 Mar 2026 20:51:45 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98DF583DA6
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 17:49:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 37E9083E36
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 20:51:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-b976536806cso171956766b.0
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 09:49:43 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773938983; cv=none;
- d=google.com; s=arc-20240605;
- b=BSpTep8WbrIFvg/B2iMsxtAcc1ut3fM4yB4K5AoIr5HW7Njx8dzF9VePCSF3F2O5Z1
- y0VqpIVsVH/jqDxus3jBa6Z2Bkuo3Pm9psBDH2aEULl+Bqv8cw0eyqdkITBcBw3xX9MM
- 4gyS4OYormAMoWKTP2Cp7DrlnXjSsXTTmN1SIfLXyKIWiEy0xVFNAj9y3N1F/NO4y3Ia
- Qu/qtMBak0Rnk6foYWcBJvyIZiQnpppkwiWmKw7swqgBQCTzMueAL/pIXPHvakrulniq
- jbayfjiA4VKsL6e/Ty26Y834FteIIZrDhHDtHl7XD2upOhNwP8kK2OvoY2IMMsIui/lL
- cxww==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=Lnb9j2EY4aUmY+6Iu82mbxIAZJET6sBRqcYPJFCdgHY=;
- fh=OI3hGuGcYo5GkzEArp9tydlJN9SkUG+StzJs5H1SHB8=;
- b=A08fw5vKkEY473I2XnTxVkDnHoudHItnIgCWL57q3rB9JsrbI9/3qDVSFPkm6znd9Z
- v1+05SB7SgXZ9PY0SmzVwKIVdosoTDInWWbDQ7wESq97Ms8gAcfqRpR9PPGcWooyCY8S
- zL0OmbNak0Hu0O1iw8adeXrqwhjGqcLReSMtenLWMwGJ9yX5TL1GdBOLTm4AntfbHxL5
- GtIvN/2P7/ewfbG7pp6RKNzA4GFsDuoaGoNRc2NnKRy9GsJ9fBk44xjdVweVSj5GZ024
- PSoUWJchKpBx8sW0he5CDVbe4JE0e5aKkpK59aFeeCgFoEDli/JNIPl06ldobkaxYoqU
- ev5A==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-4852c9b4158so9672855e9.0
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 12:51:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773938983; x=1774543783;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Lnb9j2EY4aUmY+6Iu82mbxIAZJET6sBRqcYPJFCdgHY=;
- b=EhIbnwEXA2nyu3aDSfe9qLE91ootststbItzcBO6yUHEw6d27bUWeibZwSG6d1ZT5s
- ojelX6GLeLTa0HmQl1Ug3XmsoTg2ILETJL8eRb3bFSYV5wjOwbZAwuHW5jmFKXmtirsP
- MM+dhL5YcdS1hwJ4k6FsIVl4PMQy3wd64b8WtsRrtpQ7eKVBwrN5zhO6MvkMF6BAWmAc
- Q42kPSqqM0P6UeXYjtLwtEYwXAfI1rd80/+9B1Ne89H95DYCcl1d5NSukp5oVen0wHSl
- AbXAFXnhlafI7WXdatHqKKnIcvZO4jqhFJl0aP+6pWhuiCEmwe4IuzTGNUkB1bK12rNA
- Knww==
+ d=linaro.org; s=google; t=1773949902; x=1774554702; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=yHV2oZiVmPbUngfY0rE4aQTkS1Nu2OCbdhsnflpnkT8=;
+ b=nPtW89gW1XCeQ77tTojK0DmqetoxhSoYpZ+hJby+ySVse5skB3bXsekcvsLbOdI/Q/
+ DH+0mU0nf3lbkN09Vz4w3sV46/1vmdOpYY8kZYGwmo8XnYSwYDkJJSNdWa+TjQ4H0FTn
+ QjSOX2D1qsQpEgddp0mQnSCbLySq2vruykZohfq/0N5obMVOQFHnNWTsof1W3+irBGav
+ PgKLQfkhvMZvfA3rdgOwVLqeI1GiK9vdc1/oIbfePYWkhOyiaL/k6HgOxX7gXEYgIOZd
+ /12YrfBJIuX0P2si6VPTOZxRuFluR1VCZALMJuIQL9EgVfN/HOyDIf7qIdG3SWhg4sT/
+ vGJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773938983; x=1774543783;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Lnb9j2EY4aUmY+6Iu82mbxIAZJET6sBRqcYPJFCdgHY=;
- b=ZbfIABxZ5CFlRH4tIdDo39BqlkTUipuBuUnlnnVzNdP/NrrZQ7DFd7xTweA0bupxBd
- V8KBB6YE9R2zPjbYrUO0XhEc4ZvuDrfwLPbYA9wVCcZoJp+sqOAPQEb/z5IN5zGfhaCz
- EzQwNexuJabQUT1YUy5zsfRPRe+mdqZ+zjRu9aay0veoTQcQ9+vebYumQiudGh+18cPt
- KkzIkpnzTejGS2hJc1sxYMUtDm3FOlxjswrhww1y0h/zCviPfAFIzWzGgMJPi8nfDyaU
- mclxsOWX2H7aKi3hY07kYM5hOidjBnrczfXmXlxWLXdKQ7WMemxS0YIuvqyoOyLIBVAz
- mdrA==
-X-Gm-Message-State: AOJu0Yy3//M0/WMMjj6JlplaDcdnww+jZ7LuzZQzKLNjqEmXBOo4njGr
- y7gmey8pXY3XYjhlmlKzINGLsZYyZi43fD7Mc8NpK4h9h7/kK247NBuZqpl4IYQcfHLNpmbTk3A
- 5hK6X6fTMU7xs3YBxxBu5BPX35OvuYyCkyYB2stI9kA==
-X-Gm-Gg: ATEYQzxC6DxwZ+osBcRKhuBSbx9kt860vlLPLXAI0R8qh84TIMzxZU5CKfml5aD14qm
- skhos56srZAvpW0prKcvYuCVaEdkJGQUeL0xYFJCl6jzoVl6nM3UJqcmDswOfpMg0ObOspt6IGG
- l8OkLKkf4T/pUghvuQGWLbuWM8HzHYiimyg6aN7mRyGhVDRcKJGXjFBANFvhGVIt1MUh7qc7Iy7
- J8eGcU0y2TTJjclSuLzbtzrn2h5f9CBQbq/VTQW9W855dVCEFP5rrI5RuvfLIRiwOttRmjTlonv
- FZxMPwsmyjgUSM8Sh1g4738QcxjhHPKlxnUHv5Syweb43rgUUtgb8HuurLZAjh0wKrX12Ngb2ui
- bCD2ZgIds3UwYL9X88e5R8+ldSQ==
-X-Received: by 2002:a17:907:75ec:b0:b98:2732:3dd1 with SMTP id
- a640c23a62f3a-b982f3b712amr1793466b.42.1773938982960; Thu, 19 Mar 2026
- 09:49:42 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1773949902; x=1774554702;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yHV2oZiVmPbUngfY0rE4aQTkS1Nu2OCbdhsnflpnkT8=;
+ b=HEhO3Gpqi60l1tF27ogKaXHPm4XgU0BOQMdWZBdD+I4UVwl2XbUCvKbRyucL7T6bye
+ 0MOHXNOjsyiAS9mFT9OmyUJp20e6nXvaHe6OTiDuqNlsOJfHnTUXsQRdXyLg32X/MJuG
+ sUQ+B9iIAv7lz4SaDi+chl/SyBtWj/kolUHDkVnp+aw5VzXNSKCDP3ue3k7VvXQhp1nT
+ W04Ezn3o39Yoo0Oz2uBRgTZyp71XS9iBwDi35MqulDoODxCs9YkkJEtFyK2qgrOK+1Ev
+ sqHgVVJe4lGy28R+rZv4YKcSd+R0fMbINvUiy1olXACqOMZqOS/ZWUiUvzxpjTFqnBAp
+ 82Nw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWDxAsdwHi4pm2zECXMQ6GqByFHMzKEIXKmbABnwL14HY5B5/VMdwQ4PfNYsK8MRcZsj66Gfp0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yym6wNUN25y7ZF4qjnRooRALrl3XNIjsNcIbEQ7lS/86Md0IVgd
+ Kbaz+pq1xvFnVpheHwRFyS7j7dj5Bte89TCff9R0BeHt+7DxXXsDA8hE8ZMeItxRf5I4XBHDl42
+ t27s1
+X-Gm-Gg: ATEYQzzSh6FiaK1sIPx0QtP1WZMBwktWt7VT1Bun5mibOHKxSObxh5FmpiZmF6Gjn8Q
+ x4BcPRJ5hWVJLPEQ6bIy4A8MrK0Z0Fo1mQPX069WqLDU5Dz5pDXorFlfRM57jpffIP3O7gEN+HD
+ gasJjkLZWcAYCwAY4Qa+L/DhhP1u5pnTz3N0FWA+WwdmMXFDLZdBnLBfKxmsIGuIhZkj+xgEh27
+ cIv8XokdFt3bX1mq6BrqcHg0dVFteiATPQemlJeJ6DJjoctRfM9uFXAbWDUmv6kbTs7Oj1vkVtb
+ GXHJ8TIeV1ix+dftty1TzofBckN5zCZ7//H5FwCeCtkqpTG1FDILCFKZD4uy9y95ddf4DIFuH6J
+ I87ZfJkdeO1PcOaDVC/600LfCLUP0CfOANlHrM7sDzgMfwkPhM+QTsCuKYmTpNwX5CUKIIk0iQQ
+ iyPZganjSpUAHRHCOU6n5+npfbUcbQr5u2owKBn7ktyt+RUE1lfv5qsIAOAdXISZX6
+X-Received: by 2002:a05:600c:c173:b0:485:5981:1411 with SMTP id
+ 5b1f17b1804b1-486fee1a26bmr4748235e9.23.1773949902470; 
+ Thu, 19 Mar 2026 12:51:42 -0700 (PDT)
+Received: from [192.168.1.36] (p4fc3dd39.dip0.t-ipconnect.de. [79.195.221.57])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-486ff1e6029sm1374795e9.9.2026.03.19.12.51.41
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 19 Mar 2026 12:51:41 -0700 (PDT)
+Message-ID: <c162837f-2443-4642-b994-704b35c3c24c@linaro.org>
+Date: Thu, 19 Mar 2026 20:51:41 +0100
 MIME-Version: 1.0
-References: <20260319-merge_configs-support-include-directive-v1-1-dcfb1c7f934c@baylibre.com>
- <20260319162134.GV502704@bill-the-cat>
-In-Reply-To: <20260319162134.GV502704@bill-the-cat>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Thu, 19 Mar 2026 17:49:35 +0100
-X-Gm-Features: AaiRm51drfLWJZDIaaNU1GkYd46-AyA4z68Oqe4k-tCKKJzsR4v8D87V5sBQ8w4
-Message-ID: <CAEHHSvaHEpiakXc1QOXeJP49gSs9yf4M29Fw5OsQLqtBV-y75w@mail.gmail.com>
-Subject: Re: [PATCH] scripts: merge_config.sh: support include directives in
- fragments
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- dlechner@baylibre.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] misc: Correct dependencies on QCOM_GENI
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20260317012439.4162568-1-trini@konsulko.com>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260317012439.4162568-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,55 +102,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le jeu. 19 mars 2026 =C3=A0 17:21, Tom Rini <trini@konsulko.com> a =C3=A9cr=
-it :
->
-> On Thu, Mar 19, 2026 at 05:14:05PM +0100, Julien Stephan wrote:
->
-> > Many defconfig files rely on include directives to factor out common
-> > configuration. When running "make some_board_defconfig", these files ar=
-e
-> > preprocessed and the includes are resolved automatically. However,
-> > merge_config.sh script currently does not handle include directives in
-> > configuration fragments.
-> >
-> > Add a preprocessing step to resolve include directives in all fragments
-> > before merging them.
-> >
-> > By default, the include search path consists of:
-> >   - the current working directory
-> >   - the fragment's directory
-> >   - the default U-Boot configs/ directory
-> >
-> > This ensures that existing defconfig files work out of the box. Additio=
-nal
-> > include directories can be specified using the -I option:
-> >
-> >   ./scripts/kconfig/merge_config.sh -I <additional include dir>  config=
-s/some_board_defconfig frag1.cfg frag2.cfg
-> >
-> > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-> > ---
-> >  scripts/kconfig/merge_config.sh | 56 +++++++++++++++++++++++++++++++++=
-++++----
-> >  1 file changed, 51 insertions(+), 5 deletions(-)
->
-> This forks us from the upstream version of the script, and I don't think
-> upstream will want this.
 
-I understand. Would that help if I submit this to the kernel first?
-and see their reaction?
 
->
-> When I make use of this locally I do a two step:
-> - make foo_defconfig savedefconfig
-> - merge_config.sh defconfig frag1 ... fragN
->
+On 17/03/2026 02:24, Tom Rini wrote:
+> As exposed by "make randconfig", we have an issue with the dependencies
+> for QCOM_GENI. The symbol PARTITION_TYPE_GUID depends on EFI_PARTITION
+> and this driver cannot function without both being set, so select that
+> as well.
+> 
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 
-That works well for defconfig inside configs/ but if you manage some
-configs outside of u-boot and they have include it won't work.
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
 
-> So, I am hesistant to start with to change this tool more.
->
-> --
-> Tom
+> ---
+> Cc: Casey Connolly <casey.connolly@linaro.org>
+> ---
+>  drivers/misc/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+> index 798f1dbf26cf..b2dfc7f5b663 100644
+> --- a/drivers/misc/Kconfig
+> +++ b/drivers/misc/Kconfig
+> @@ -86,6 +86,7 @@ config GATEWORKS_SC
+>  config QCOM_GENI
+>  	bool "Qualcomm Generic Interface (GENI) driver"
+>  	depends on MISC
+> +	select EFI_PARTITION
+>  	select PARTITION_TYPE_GUID
+>  	help
+>  	  Enable support for Qualcomm GENI and it's peripherals. GENI is responseible
+
+-- 
+// Casey (she/her)
+
