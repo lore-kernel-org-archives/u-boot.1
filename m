@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B57A1091916
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 20:02:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B57831091916
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 20:02:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 831D384008;
+	by phobos.denx.de (Postfix) with ESMTP id C0E4384035;
 	Thu, 19 Mar 2026 21:02:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="uLcP6Dxs";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="eErn9Kq+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AF1E83FDB; Thu, 19 Mar 2026 21:02:12 +0100 (CET)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
+ id A214083FE9; Thu, 19 Mar 2026 21:02:13 +0100 (CET)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A08C83FC0
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:02:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 22F1983E36
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:02:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-67bac077116so616560eaf.1
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:02:09 -0700 (PDT)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7d4c383f2fcso1011914a34.0
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:02:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773950528; x=1774555328;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773950530; x=1774555330;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=0WHK25gYVi4/IFRVx39IWUPwtsMKimMWPdtsrJiL/3I=;
- b=uLcP6DxsKd29v86pwlaDKOHbQKuCRjHePymJ5jNpRrCenySDxN1XJh0g/uti+K/2/A
- b/71fDngDnfihPYcUztNIWrjUrdtDXSa2VJFRfHUf9mge30MqLfWLWtkneW/AOc/bB2E
- iaIbDppp1+Dgi/7TTLY/o8AVhwUVM9mOIjCzRmypTVr0xow5YYrFwUBxG4B3eNjwfFkZ
- aT9klF21/vg265KR0ltQJLEh/MSe6j/Z43/f+pY+H+v0PU324oNRyoWVyFKFPoDwxnS4
- RRIY2sTMzPwpvZQZLshgsMQEiUnHnUHGcWQTm6rQV1D74apyJZhC8P2838PbRnrC95ae
- 4GaQ==
+ :reply-to; bh=x8i/wWklJMQx/xz0ZRWwjA4a/5DJ9qfezP4fqFs3hDk=;
+ b=eErn9Kq+9es+uG4WwGJ75Fc6QwJeqv9KGHDB187Fdt7BVDEA/99k1hp0HUvvSpYJPC
+ +UwEXlrCNa/IRzYOt+ZcYw9uj+i7byPqf+E6cW20LwpyPS7d6ry23Td6iWEYNfNEgQgT
+ 7k8Piph0CodAUYyQN/UGWjfb8zglwo5qIcyn/bHo8+ZgeUft7NwESqBN6tpKdwUWa+Xr
+ nKJLNhnu4GtA4kj46BXmD14upz+VMH5YThJB3u80ta49XcdRbCNwQYhsfXeF1ixcwcvy
+ 9x/1uipTsoeK/3RG7drEu2tgAAZK44ucdV9158WJRK2bEXVow+AuVPls8Np8qinnrmjl
+ 7/5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773950528; x=1774555328;
+ d=1e100.net; s=20251104; t=1773950530; x=1774555330;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=0WHK25gYVi4/IFRVx39IWUPwtsMKimMWPdtsrJiL/3I=;
- b=mOVXNvB9EtQMPUkFS84ohJ5ZjHfDWw10Gmi/Vtcx5M33a6Ecve7+0sqT53SfHcIr6a
- F7Qs/HipfG8aVb+3wmAzIGuGMpknr7enz8g/6rGg6CVJW+0yKjHGWccGcnJR1n2f1+ST
- mgPvAXLj1H98Vn/pKkAjxotOWQeraebROmeXZVX5jSquI3GWy/P4OKB/6iThlB+2J71E
- qfp9MD78a7GsHqMpRiRRHqIPyuHhJUH0Cq6UM1gcaMOXL88Ubcos0jbT16HwKTndQ2lv
- rG/ShpcmhU4M0G4hqKSQVGRQHLcGjjmZx8NXkxgErJwTIp5ML1QSJnvkt1bjLddPKxrv
- BQZg==
+ bh=x8i/wWklJMQx/xz0ZRWwjA4a/5DJ9qfezP4fqFs3hDk=;
+ b=RxE9WGCEqXS8RFXUk1P4kVvJgPVgrxxLxR575IZzNRUmqkwZ/sys4d9vGM+DFbkrzH
+ LoUxncOX83HCsIVSG5oaNjQ6IK201clepIG4FnLKEVApBjJnArHLozb2/d1INAQHLYAw
+ GVpp9pkBv8i0X9dzFT2l/MBAHWaMk1/G+1CurMMqDRRUTIXtL8Cy+5EeYYiIHV73K9ND
+ fesqj2WWMIxoIg53cLN030rwdDFxE7Y9Wqmh38/el6eUjCCBoAbANxQE/JbToHWvYSBX
+ 5tLWoBfkSM9kdI5xzRejR6SrUZ1A+f1fRFIULXapQ3hdJ8gTiFj3M/9nBtD6xA3rpGHh
+ UXKQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU+kp0Trn4WsWRguBU0x9RKsQxaviHulTme8VnMSvDzpfbBonY8s3bQvTilxx/sAnqRg1o1JP0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwBKPk/bNKI2+qJIwYDvq3PYdQ0zp5b6gqE5N5p3btiw6R2HnO2
- ppCDzKf3IxMKfQKhPE969UyEqtiajLYQMYsw6fYiqImMld2VjgIVImxFi1qoNr5CDI0=
-X-Gm-Gg: ATEYQzxNHmAIEd09jwbqvMfOa4CE5ZuH2Bqz4pN47Q5kc/D1fVmSzWbbpDYp8EpTEVB
- /wkoHVfKoS3VnXv+PWNL5Q/Tv51wfGQBEQzmxpPIBx5RWaa07f9rL+De6JH63O69URVku9hKBwM
- PIEiEqpRhAnYAyHd69jL+vkeNMQxVizu6rQONxDJ3/5dXprOyZaHA+zp25ftVXQp8D0b1kxB3dy
- dW0nGzQbA60TU/8AHtIlRyrrzn17fFIJMwb4vHDCT5Dd5+fhp6JeYilMuZnlZmyU+wjU3FBt4mJ
- Jbmz274+gZMhUBiz9JjaDog105KHInLy7NJPw/M8RwsgoLEdZzORJokZT281BwLo75LLdUqDWyl
- josohDdqmUhcMw/wCy7VveQ//ZdYDMVFWewTQzjgtsBNwgFZuD52+8mBdU680gIeOMvDBIcSsxx
- zlK5J52br7LknuTlEkamXeQrQgzQfV
-X-Received: by 2002:a05:6820:1349:b0:67c:1deb:4f69 with SMTP id
- 006d021491bc7-67c22bb5697mr530847eaf.14.1773950528558; 
- Thu, 19 Mar 2026 13:02:08 -0700 (PDT)
+ AJvYcCWM1oy0jwN15Xxk21yhej3enRyZVWN6ERofXEj44P+AQt5kSDldkesqDO52smaM3aBcFs3QK5w=@lists.denx.de
+X-Gm-Message-State: AOJu0YzAKB4gVUcMxwIQqH0XLTcnyH4yt1DZnU6t1p15DnS3vjc9hAFB
+ U8EE8FutA32vQyAWDACc03N9AS5HR5HrSf5qRIM3zfu1WidAOv/3svKuepJ/UWtYYW8=
+X-Gm-Gg: ATEYQzwtASYgJUFizPP1e/pbHsnLW+Y705cYAH3IASzvW/3yomtH99RNbZYjw3SQ+B7
+ +UsgKm5Nu0weZZcVbKzbzlke83fL9aw8eTwp59SRYdvPKdrd0AEB1qwHO5K22OPxqgiYVIN3Xbo
+ fykuAT2WB8Bc6ZyaRgnBWneukFxRBxFcar6p833Sv+BcwqtfLuvRl1xu6Frr/4yNDrLUN39sbcZ
+ LZIF13yb83kJLC13K5I1tmdUrrjosI4Ekwy+6i8VjmYZGrflIeXYHept5LsB1DFH97pl5x15CP2
+ NS9zJd6t0yZGdVT17N12GUaSMiVqynSLap8gQzma0LfeYhOUb9+UxI20E2znS8BCu0zKIEnu90W
+ 3ijUph/pa7LKDOOv4h4GL8ua2JHJrcePe2HYY2bOg1UvsXqHJenN4XG8xow/QX+ZvqthXUY3y/e
+ Xf47lMtExJJY70WUa9pOeHPqyybYtD
+X-Received: by 2002:a05:6820:2216:b0:67c:1d14:fcff with SMTP id
+ 006d021491bc7-67c22f5feb7mr449549eaf.29.1773950529667; 
+ Thu, 19 Mar 2026 13:02:09 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:244c:fc8c:8216:1344])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-67c252acd32sm2826eaf.3.2026.03.19.13.02.06
+ 006d021491bc7-67c252acd32sm2826eaf.3.2026.03.19.13.02.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:02:07 -0700 (PDT)
+ Thu, 19 Mar 2026 13:02:09 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Thu, 19 Mar 2026 15:00:04 -0500
-Subject: [PATCH 01/17] arm: mediatek: mt7987: drop dram_init_banksize()
+Date: Thu, 19 Mar 2026 15:00:05 -0500
+Subject: [PATCH 02/17] arm: mediatek: mt7988: drop dram_init_banksize()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260319-mtk-init-fix-dram-v1-1-6171ec141f40@baylibre.com>
+Message-Id: <20260319-mtk-init-fix-dram-v1-2-6171ec141f40@baylibre.com>
 References: <20260319-mtk-init-fix-dram-v1-0-6171ec141f40@baylibre.com>
 In-Reply-To: <20260319-mtk-init-fix-dram-v1-0-6171ec141f40@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
@@ -91,15 +91,15 @@ Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de,
 X-Mailer: b4 0.15-dev
 X-Developer-Signature: v=1; a=openpgp-sha256; l=803; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=QnRE/FP+AtVi+Ldcw5EAOYToJaXxSEoG3ygBF9guRKc=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpvFXNGqKUnH9TDHfIb8/YFw3Q5p4EoNq1R05W+
- X4Q9GeiFRKJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabxVzRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Af0sH/RV548ozgwfZ8QNgyY6qKJC2U+Z9XeHorGeqRL1
- +cFAODly+jbX+3DJlSQvRRmrk8YmQRtU1TBs5CUyRya/QMe+j7NfrRhN/chAQGTTEu6CgBvMHK9
- A+YKS896MmPAtDATWauOIiWTaDkmrwSdEYiqCmhPxdq6q5kkdV0ndTEECwYI/ruuRDyIMTcJwLR
- w+tJ0vdpOoJsQgPMnZQv0gkb4OSiOCQFMIqgxwBzymeE2QkWfXkBpbRumzPS9aEA4zVII6CiI0r
- xs68R9e7ACdpD71zNmX8KxdXaeUNpELnG5EnStcQrWNBKzOQToe+Bl63YUxD4aDEBddqpTtkgnO
- vaAo=
+ bh=5YxYwBj+GLcJ+SKV1LOxkYDzDzwZMU7xomshW6GAxMs=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpvFXUuhuGi/vJO5qJYrulDOYbzgAfRemElS897
+ ZVQEEtuZw6JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabxV1BYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AIpEH/iC4aR7ADgDUmFMnQ6utW7TgVTYITUgcUzWwK6i
+ LkUjUExZdYpC+0U5ZgsVmP0EzGvn32a7hCJtPfUv4Z4fGHQ8n+X8o9kEU3MrJB6OOHD0GiirquA
+ IfGEOgdVphcfK6RoLsmcEal7wQz1MQOTStjnBnqgpxxFYgMIsSRYdDwfTkx6yfe1Xvx2gdwebCW
+ QdXOeH4xHnZqfnnmNCJJhp7DXlcn9GbYTYZYdFD781GwEq6Kolo8Gt6+n+VyfkAJ+OnwVfxiq83
+ iXXBajRmqKvfdyeULda+P4YcUeZU34XUgd9x3+isaWoYNpNp616FP4lY4IAuATRZ9XxRcgTxJZm
+ 0EJ8=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -118,20 +118,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop override of dram_init_banksize() weak function for mt7987. This is
+Drop override of dram_init_banksize() weak function for mt7988. This is
 effectively the same as the default implementation, so we do not need
 to override it.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- arch/arm/mach-mediatek/mt7987/init.c | 8 --------
+ arch/arm/mach-mediatek/mt7988/init.c | 8 --------
  1 file changed, 8 deletions(-)
 
-diff --git a/arch/arm/mach-mediatek/mt7987/init.c b/arch/arm/mach-mediatek/mt7987/init.c
-index 6364ab497f7..f16a25843a9 100644
---- a/arch/arm/mach-mediatek/mt7987/init.c
-+++ b/arch/arm/mach-mediatek/mt7987/init.c
-@@ -27,14 +27,6 @@ int dram_init(void)
+diff --git a/arch/arm/mach-mediatek/mt7988/init.c b/arch/arm/mach-mediatek/mt7988/init.c
+index 7ff843585ec..7f4d934bfe9 100644
+--- a/arch/arm/mach-mediatek/mt7988/init.c
++++ b/arch/arm/mach-mediatek/mt7988/init.c
+@@ -26,14 +26,6 @@ int dram_init(void)
  	return 0;
  }
  
