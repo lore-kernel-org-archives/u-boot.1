@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2850109192C
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:03:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADE47109192C
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:03:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C41D88419A;
-	Fri, 20 Mar 2026 00:01:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 08B2D841A2;
+	Fri, 20 Mar 2026 00:01:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EYaZapsv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oFDMUr+s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E63583FC5; Thu, 19 Mar 2026 21:57:45 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 6358283FDE; Thu, 19 Mar 2026 21:57:48 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC4A183F8A
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:57:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 59D6B83F8A
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:57:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-439b97a8a8cso1335864f8f.1
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:57:42 -0700 (PDT)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-485445e80bdso11991515e9.0
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:57:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773953862; x=1774558662; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1773953866; x=1774558666; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=D76RHHt3ck1rSasR55eeHf8+THJxMze9S85PZjvQ1eY=;
- b=EYaZapsvye4NU1sPMvQQO80ihu23SlW8CtZv+sOL1q4ULM0fEAC7eOgbaN/6BsUjOu
- vSix18oP24ctFmEYfAtzXqI03FnHTyrT2xADtNEN0XpUnKp+9F7E/LKFkN79MbCZo45O
- BduOeH4BAf2IlWK8nOz+YLNIGuCNX0Hf21yOmEN/S4zxboUwu/bstKcOflXOoc8HKFoU
- 5mg6SD8g/yLRlAHltplRbSg4MbDJO7P0D9XeRm2tZo4zhzsUXThpts0yAdIL41wkcq/d
- NPg1fl7bL502xZ47SDtRJkjlbULeYOBuDkkl4o95CXz1Wkz6pGWhF5Jp4hKq4AdQtoha
- 3dhw==
+ :reply-to; bh=dZJd8jcJ2QufDdsWwRqWjudJvGT1Zn2bs8g3ffveHCw=;
+ b=oFDMUr+sBOYawpHv4f4ALn3jvg8r4nobBUbzP1DREbQwbZ/wbNsctoinJ7PB2LvMyd
+ uBgDIlZoJ125YheR38IYI3ATyWUQwpWtTD7r2lRQ0nfq0Ubv/V+pEh28hX5Z02f1Nocg
+ x5gSB07W9biifRUhjA9xfHG/rMQCU6dpaAc5kBAn4vMLg1fnMPUgDeWwUzxjLZMwW9aY
+ Yz4jpi7aYJUneiHHbbcxCxJ4aUuO31QPoubczyzl53NqskGqkFzpZcGAqfQ55WW+/eOB
+ 83YcYem+fkJWzG/beviJCON3aVd1dOsijekeeCmhBYwCqEjkN4iQN5AC5hEJBUDhJBSy
+ YoNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773953862; x=1774558662;
+ d=1e100.net; s=20251104; t=1773953866; x=1774558666;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=D76RHHt3ck1rSasR55eeHf8+THJxMze9S85PZjvQ1eY=;
- b=NKAVxq/IAYLaHsxpTtkE/Z834CEnqnj1OzHpEPBXpWC2ebs0ZvbH39iXSWaQPPDHGo
- Wgrb+3kNaiS71KivF8MjEOLb4vc/DymbqtaUse31dNVyOiCk9s2I7rNI4qVjtqQrR8bX
- 8UM0Orjv+BwTWCfvukIxTJ4gARo3ta1b5Th6MbrP3B7rOvBzF1HFOeANU9ggagZh2IiI
- Wc6IlVB5M8Mc4DXnGpiOV2hbhWARrHa9HMzYWZeV6ewh1rkYW2AiYrAR7fR6S0efCi9+
- 2KYA63jZrQcCJPgq1QDzGfBk3f0IxjpBX4/LSMN94E+E2mysXi7qlul6jXNA5mEwPgDr
- n26g==
-X-Gm-Message-State: AOJu0YyvWfo5l2KVmR1c3HPA833SCQDM/+g/3wpIfBniJv/85xx1m/lj
- Ve+GkPeDD2OAgaPjaWNJu4eezsgI5NEknY/83YbZOaQTWohsXPn6pJjxnyptnxTxoqs=
-X-Gm-Gg: ATEYQzykdb6FTjqN+yzHlDpydemNs+YKTdWDRCJ/uqSNmKm6rbN8LB9VxRZOEhpjjAj
- 8rQhL61Q3cjt08G7G3hRB9cF+X7LMsbNHf3XvMR4+up0qHELhv7ENM1OsaqbCpT00RJ5IF3K/pe
- dPEivF49vIthhsAlcbRF0oQ7VK6vm5kpa4vJGSrXfixI8Xw4ueWCuFxNULejO8Zr93InU7OuKgv
- RpXNkLp6wmq/UbbT2qqFvn0Zxz2A0BytLOBjHmCPl49xRCNtQKjI4iTpXOc/B/omAL2pJ+hJFE4
- 7w0RrNM3H4kXdFspoknu2jNylzgyUKYsWZJd8cPeV2EgWP3B1eP00tftfPhVZD1R8uLS8bkN5ap
- fbOfHVgM0yuu/MFjJ6U4ODIb5fdPKLxi6ohTTXeJ1qmf4LIMB+sFWbWtMs68iPQTWctG4FVj9JB
- 5xhDeGp9DdxOOImlbke22oWRqNVAR1KXNLJEWv3pHTd59ahcCFilwjoJUbV20wqGTye6Q=
-X-Received: by 2002:a05:6000:26c3:b0:43b:3d44:662a with SMTP id
- ffacd0b85a97d-43b64233db1mr1315823f8f.3.1773953862112; 
- Thu, 19 Mar 2026 13:57:42 -0700 (PDT)
+ bh=dZJd8jcJ2QufDdsWwRqWjudJvGT1Zn2bs8g3ffveHCw=;
+ b=n9tDye8u8DfjnOq2m0jbX+Pm0TW/+YpH6ashF6Q6A1XBp95GFAHUctzWR5a9aoQvPm
+ 6QVOLsQ7q7pQmhzx5T9XZc+J7y5j8ICEdIpTFrav1YRuceu26L0SfGnWhbe69WUyBtJA
+ 0WpenhE/LgFs7R6r7yfbvAAZ45SyIUx+l+xAEwjX5KJB6EGj1q78fl6341LZEJKk4aeD
+ fxjGmfx/YhhnDFmaG5Hp4xKlC8Z06Dfe7TvuGgQT9SIwd/g7F/LyFbVNA0yscSn+89KZ
+ R3V2nsm8IWsdiKEhRDSn7mGILC62byA4wcI0PI+wdcjl9fDmyqngDiVBAmA12fW+fKTx
+ Ai3g==
+X-Gm-Message-State: AOJu0Yy9V0l/dnR0DWGBm1VMX6sgRSY8KE5uzFfQoUg7FzMMqgwrm541
+ bWZpiyi1I+YpJy3PY/eTT1f0wiquP5A2GggmprQe+LilBv3MhjSDp6F99R0rJF3gz7w=
+X-Gm-Gg: ATEYQzyM6F6zSYrY0cOFkZGk3qI85QnRLmp83+deYPWLI+qoO3/Adk3Qh1Ul7UPcHL3
+ MsFL4B0KsL0PLku4soUHqcj7sAODrRvCvphCShVsIi5LG4J4piAuFINkXyV9rami9PByl0eJh1y
+ xReb7jKUP113SQgHZg/nsuDDsA7qY43nqcQrsp9uhJ3zP6FycqSx4xPMrhhYCDdz8whC9dL4qFr
+ XFh7CtvDSSCWusxsy5SXKQcjiEQ+RbBynwv7jsPRWW+cX3z2nJUBOBVp4Dn5kT2jE4zC687FwVu
+ 79tlz+4JrIiZrr1s+6cj2tvGiskJdf2t7hwDdq8gKEB9hqYuryZ7LPtLz7jl3eNGCJioe08mEb/
+ hA6+9c/6T9LmD/BK6iuYH/Evakiagte7xA3qQ/lrwusJVSlnk+pIbBuotzJZYd/oAPHdfREhtC7
+ /Iwus190HzLMkHOYpfCP9LY+fitgS/Hue6blNXvVf76kSJ5++6lBdicGpYz7pk82TCQWo=
+X-Received: by 2002:a05:600c:3b8c:b0:483:b505:9db7 with SMTP id
+ 5b1f17b1804b1-486ff03f4d3mr9099525e9.32.1773953865712; 
+ Thu, 19 Mar 2026 13:57:45 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd39.dip0.t-ipconnect.de.
  [79.195.221.57]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.38
+ ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:57:41 -0700 (PDT)
+ Thu, 19 Mar 2026 13:57:45 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 19 Mar 2026 21:56:34 +0100
-Subject: [PATCH RFC 12/40] regmap: add regmap_assign_bits
+Date: Thu, 19 Mar 2026 21:56:35 +0100
+Subject: [PATCH RFC 13/40] compat: regulator: add enable/disable macros
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260319-casey-ccf-upstream-v1-12-4df2ee2226da@linaro.org>
+Message-Id: <20260319-casey-ccf-upstream-v1-13-4df2ee2226da@linaro.org>
 References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
@@ -160,13 +160,13 @@ Cc: Tom Rini <trini@konsulko.com>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>, 
  Paul Sajna <sajattack@postmarketos.org>, Marek Vasut <marex@denx.de>
 X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=959;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=850;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=R70v3bfUMa8es6EMn7gwODOUxcvSL29PsRM99C/5PHE=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yXx3DRP5WHuv7Ftr6rGGb23/b8P1G5cJ5u5Tj0ktO
- 77hp6FdRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZgI+11Ghq1tvl6x9z9qqTqs
- v31NV1oz7oVeVqW++Ssbu20K381sghn+h8wuKc33aBCb+179iHaPiYLOSxne+dc33DNpfaK0sD3
- zMgA=
+ bh=w43IAJ/GgxcdhAfepdgBnfs8T9pBTj4C8IelGrdXjr4=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yXx3d9WLR28weh6QZiNrfLJjt13W2W77ozGr5ebou
+ VQkvw/uKGVhEORgkBVTZBE/scyyae1le43tCy7AzGFlAhnCwMUpABPxjWX4n1D6qHqu97OLAmw3
+ hYs5j+tKWrozHuyWS3+v/OZC6xf+LQy/mH7bxl3I3+Mufnm/3a9OpbnObXM/sDzdHaQbeSN09ct
+ OfwA=
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Fri, 20 Mar 2026 00:01:15 +0100
@@ -186,36 +186,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a simple wrapper around set/clear bits used by drivers in Linux.
-Add it here so it can be used by Qualcomm CCF clk drivers.
+These just wrap regulator_set_enable() and provide a closer analogue to
+the Linux API.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- include/regmap.h | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ include/power/regulator.h | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/include/regmap.h b/include/regmap.h
-index 8c6f7c1c9b1a..eeae843bfb74 100644
---- a/include/regmap.h
-+++ b/include/regmap.h
-@@ -388,8 +388,17 @@ static inline int regmap_clear_bits(struct regmap *map, uint offset, uint bits)
- {
- 	return regmap_update_bits(map, offset, bits, 0);
- }
+diff --git a/include/power/regulator.h b/include/power/regulator.h
+index 8a914dfc74f4..4011fb1d254b 100644
+--- a/include/power/regulator.h
++++ b/include/power/regulator.h
+@@ -358,8 +358,11 @@ int regulator_get_enable(struct udevice *dev);
+  * Return: - 0 on success or -errno val if fails
+  */
+ int regulator_set_enable(struct udevice *dev, bool enable);
  
-+static inline int regmap_assign_bits(struct regmap *map, unsigned int reg,
-+				     unsigned int bits, bool value)
-+{
-+	if (value)
-+		return regmap_set_bits(map, reg, bits);
-+	else
-+		return regmap_clear_bits(map, reg, bits);
-+}
++#define regulator_enable(dev) regulator_set_enable(dev, true)
++#define regulator_disable(dev) regulator_set_enable(dev, false)
 +
  /**
-  * regmap_init_mem() - Set up a new register map that uses memory access
+  * regulator_set_enable_if_allowed: set regulator enable state if allowed by
+  *					regulator
   *
-  * @node:	Device node that uses this map
 
 -- 
 2.51.0
