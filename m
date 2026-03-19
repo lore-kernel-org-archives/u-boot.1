@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73379109192C
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:06:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEB821091930
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:06:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95F73841DA;
+	by phobos.denx.de (Postfix) with ESMTP id DF321842EF;
 	Fri, 20 Mar 2026 00:01:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ICLNcyRD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ws5tPLLY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A76C083FDE; Thu, 19 Mar 2026 21:58:56 +0100 (CET)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id A349F83FC5; Thu, 19 Mar 2026 21:59:00 +0100 (CET)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97C8683F8A
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:58:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 937A983FC0
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:58:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-43b3f91a7abso774538f8f.1
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:58:54 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-439b2965d4bso1032563f8f.2
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:58:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773953934; x=1774558734; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1773953938; x=1774558738; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=wMQa1ttISfPeBgePfdbUE+BNee4MFSE9e0gD8HsJuBk=;
- b=ICLNcyRDSIvK8ZXUe+vSHKj+tEFV2hZPSqeSn3nT/Jbm8coEOmOpkTx7fTaJfsBt/0
- 9AE9LdMki+O6fAeDQ+RprYmqxQb4ZAQIzp6EAUbJvEUuCdSTeHqqztlgdqXo8GLQm2h6
- 9sWwKeVKFpS3BA4CgDWNZZLT+4BWF008MjjArFDVldD/TYuSpk/ulVjKMlgkGYAnNU0F
- KGqG7a5x9MDFVH1sizV9J7JlfNq+BkEDcSh8PkXuzmB/LVCNVcQdDNEnj/ZMOy5r8ViB
- YivTZgF6USlsqOC5URnINWHGWxKM3wuKY0uVaiQKC5oC5e1+S4rcOCX+YhrAjqMRcD26
- VD8A==
+ :reply-to; bh=pNVimY15oqCrAYHxDzYtB5OTchEi1mxLeVPqbmrztJA=;
+ b=Ws5tPLLYZnzALy0UqML+vmSXS3EihyMJQpX71WfZ/mo0J/qrddp/2lIRf6r9cKyo+A
+ BJUO7uvBKQ9V+/U5ED7XBGVOmblcUGMGOKURtjsZv5TRptXH518wl/rf+E4nUdBdDjyZ
+ atNm9gcoG1A+lEBIzzzprD317/oEZTzJaMyL83dWOyjkJuBudVtr5BtcpC0krE4MrBWu
+ DE31WU4ZVHCfCfmgpmNBrOpywWXVosTN8O22G86XuAkbD/dhRZkFP9oeKxRTizyHIbLW
+ eUUUgsZiE2EyWsFpKlzchliGT+4FTp5QbnqKc90rDmWYQ0Cqfq/8mmzcywCWW2vfHdsq
+ SWvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773953934; x=1774558734;
+ d=1e100.net; s=20251104; t=1773953938; x=1774558738;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=wMQa1ttISfPeBgePfdbUE+BNee4MFSE9e0gD8HsJuBk=;
- b=f6I8DhhshldWufvClnoOacAinL6NPpgamH3S1tjfVxZsl2Nr+V7qNk5kWZggxshfZ+
- wVXZT1xGGA+8zPXGIILBmugaJAa9NANr8JbjXXzsDD2rvIeQqhbtG8JABtwgp00Wx9fz
- tBB59mfFCCqAEVN7jEOgum3pe4ut53tSY5W4ABLRkUr/W/YEGoO60WykvnqncOxx/cSV
- H7/oS14Y7yzKNLrI8eqxout7INDy29JWI5do7yZ5U9wDcmRt/LHn4aPsN0tqzfV5sIf4
- 18GEfxbIRialNcOfdW2FZUZeVPGie+BeA1AOQOdTdEy1JWNsPLHMQRjiztTU8RIC4ZyO
- aPbA==
-X-Gm-Message-State: AOJu0YxJ4KXbOnYlWZ9akSWKDrmTqc0T8BQ//iRgPZn5SWgWX/tr2Zui
- gfqpt1kec+SE3jklBy+a4xGC/3XoQHbNLlnJrerj3kwh/y4Xy1g2YYP26o+wSbeKreY=
-X-Gm-Gg: ATEYQzxjngNFWP9+qHjI0Aqm4IgF+Juw3tS/8Jq8PRQKSh7WpQjBHLMsCux73xp5G6S
- zSrqQR+qam2ccWMp5yk26MUW8Ywpf7nxj+i5d7npI48lUDloSnXeU42OR5y+KvKp+8xqF7ClHVg
- g1hZde3ufxvFxPdekhAYBZbbiOKcpbmYfwxEvIfMID+Wwu2fvr5VomjfTgur355+vHMwYded5k8
- gmIbfqRyZEW7owWxIn306MEFv1yOk8KJLBHNhfgYKB15cRc9Lr7B94Gc93fJe2XYQyHl1TZd4Aw
- qn4SsOcGithoXrb9Ww1RXcxBIWM4XMS+4RnbRZhlz5ggIajal++4D2re77l1QG3UenKFodfXBv+
- BMMzGMW21dZz53ZsqBMVAhHLVuZlGt24uG2m7WXMnBiJrjSf0KNyKCOo2KrMyOsILpZrC0o7dL+
- 8aG3NBidIAg17oNU1EWnQ/jDsMvnBgDw8r7YiHcIpT9etzt3LJ03BOLhn5YlOE4PMIkcQ=
-X-Received: by 2002:a05:6000:1845:b0:439:c799:dbe3 with SMTP id
- ffacd0b85a97d-43b6427d9cdmr1299608f8f.25.1773953933829; 
- Thu, 19 Mar 2026 13:58:53 -0700 (PDT)
+ bh=pNVimY15oqCrAYHxDzYtB5OTchEi1mxLeVPqbmrztJA=;
+ b=OWW6WHBwwQsnDY/UKV/KIdpzGtke1W13CtgeOVcLIh29FTQRi9KU7TNeOZwSw9vZGQ
+ /tWPRldIiUagfqMr/NLthBO8yOqJ35hLnXh13/24lxv8nMl7J/irnpYPN5uxz+3i2Kuh
+ 1l+H5ikHlVYAZFozGOAcyRYt65+bED8yjyl4zLVRw4nOxiEkwXqQiIWKdB23kRuxp9jb
+ HVmZgg8FrFYmudktywX1Q1L0VM3pDm8Bi/sBZAEEe065kkLwJk6am2+JrQCEqQU9otTH
+ b3wPK0xGIfLqSo9v9NY433wuZhMc+LPIQY3E73+s8o2V3S/dwQeFLmtdnzKFsO9jpxvr
+ 2WmQ==
+X-Gm-Message-State: AOJu0Yz4Bf7h0jroSHk/8EzEj76SPokyiS5zMzEr8VUCWilguxLlFy2e
+ cTmvCcl1AdWMk6KzJqixNGSsluQImYCOApWEYPXL3Xs73eRudWdGfXEIs+ZQGliTcqw=
+X-Gm-Gg: ATEYQzxEHuD0l4J9nSqhRR8ciSd5Lfj1Aokkpg3bLYROka22S83lo0sPjXcEepSmCF4
+ q1UP1M/Dif0MZIj79+5NeOx3McrY6z4HinpYdwSrPxp8YMs/zLKkH3dAvkObulEN7dr9NE2Ok7Q
+ mM+7AojUNGaSY3bH/2oHOcifAK1vApi8bSU7OYETx1f5DyqWozqYMLUcpvUH3GYtvbJTULxApGl
+ uzE0IeoU31UW8lFIv9lxTWkllYN12HFwBbhf9oTwEFOoa27QNyqLSWAfnMZVTcgaoIGHOaJ0Owo
+ KWTRCPJPRmXtyMwuQwq5lCHf7WBrpkxz8r51wgDJoX004Ng9w4GWSdPzTHNdfzHLOtBKApi0hRl
+ PO5KjDW8C1Z/2z134ebSfijAwHF0tT4Of5ZUw86q8mmeu3XNCwpz9OtrPPM7WFSxwaCE+XzfOxy
+ dmsc3JWw8OiMPaEFvfq6a1x0HH7tykOWe6CgKhOcAWi6fNqsXWosTv/tnwGvIWh+Ejn/Y=
+X-Received: by 2002:a05:6000:2f84:b0:43b:4469:d31b with SMTP id
+ ffacd0b85a97d-43b6424e354mr1215926f8f.15.1773953937711; 
+ Thu, 19 Mar 2026 13:58:57 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd39.dip0.t-ipconnect.de.
  [79.195.221.57]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.58.50
+ ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.58.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:58:53 -0700 (PDT)
+ Thu, 19 Mar 2026 13:58:57 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 19 Mar 2026 21:56:52 +0100
-Subject: [PATCH RFC 30/40] configs: add sandbox CCF_FULL defconfig
+Date: Thu, 19 Mar 2026 21:56:53 +0100
+Subject: [PATCH RFC 31/40] cmd/clk: add CCF_FULL support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260319-casey-ccf-upstream-v1-30-4df2ee2226da@linaro.org>
+Message-Id: <20260319-casey-ccf-upstream-v1-31-4df2ee2226da@linaro.org>
 References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
@@ -160,13 +160,13 @@ Cc: Tom Rini <trini@konsulko.com>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>, 
  Paul Sajna <sajattack@postmarketos.org>, Marek Vasut <marex@denx.de>
 X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=593;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1281;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=sZ1m8A6gA/0GkrIXmr2c1FMysUneDUMTheSJV+osWuk=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yQKqKr7np1hFasy78+pq04t164NDHT+Wt8rL1dXPf
- vU3Oqy7o5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAEyE6QLDfwdzrY9FgUtdtzxa
- 8m+VSVnihMmZ26ML7l/R818jrLB75kFGhmmbbC2i+A5H1W23ez1F2z9qX5hsldHEx6U/uqrXdBr
- /7gIA
+ bh=wSWRPGBCtLo+xli0XQv87b9CkhsJCfTj3P+Ywiou4TY=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yQJ//4v/L9Cs6X99tvWc/vyw1UJ60+QPOB5RW7R2h
+ 7DfJhHLjlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjAR3gUM//0jpJw8Y4pmnJtd
+ pmR88OtPr/07V881THkZpJr0rGHzvGOMDDP6wksmXWT4ecF41ZkNPu/vfEqVtk6/srp2QanTz9d
+ mh3cBAA==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Fri, 20 Mar 2026 00:01:15 +0100
@@ -186,25 +186,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This extends test coverage to include CCF_FULL which is supported by the
-clk_ccf tests.
+This functionality can be expanded later, for now just support calling
+clk_summary_show() to dump CCF state.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- configs/sandbox64_ccf_full_defconfig | 5 +++++
- 1 file changed, 5 insertions(+)
+ cmd/clk.c | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
-diff --git a/configs/sandbox64_ccf_full_defconfig b/configs/sandbox64_ccf_full_defconfig
-new file mode 100644
-index 000000000000..0cec3257a30f
---- /dev/null
-+++ b/configs/sandbox64_ccf_full_defconfig
-@@ -0,0 +1,5 @@
-+#include "sandbox64_defconfig"
+diff --git a/cmd/clk.c b/cmd/clk.c
+index 1210a84ca2aa..1f1888b8fd94 100644
+--- a/cmd/clk.c
++++ b/cmd/clk.c
+@@ -9,8 +9,9 @@
+ #include <dm/root.h>
+ #include <dm/device-internal.h>
+ #include <linux/clk-provider.h>
+ 
++#if !CONFIG_IS_ENABLED(CLK_CCF_FULL)
+ static void show_clks(struct udevice *dev, int depth, int last_flag)
+ {
+ 	int i, is_last;
+ 	struct udevice *child;
+@@ -119,8 +120,26 @@ static int do_clk_setfreq(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 	printf("set_rate returns %u\n", freq);
+ 	return 0;
+ }
++#else
 +
-+CONFIG_ARCH_SANDBOX=y
-+CONFIG_CLK_CCF_FULL=y
-+CONFIG_CLK_CCF_FULL_COMPAT=y
++void clk_summary_show(void);
++
++static int do_clk_dump(struct cmd_tbl *cmdtp, int flag, int argc,
++		       char *const argv[])
++{
++	clk_summary_show();
++	return 0;
++}
++
++static int do_clk_setfreq(struct cmd_tbl *cmdtp, int flag, int argc,
++			  char *const argv[])
++{
++	return 0;
++}
++
++#endif
+ 
+ static struct cmd_tbl cmd_clk_sub[] = {
+ 	U_BOOT_CMD_MKENT(dump, 1, 1, do_clk_dump, "", ""),
+ 	U_BOOT_CMD_MKENT(setfreq, 3, 1, do_clk_setfreq, "", ""),
 
 -- 
 2.51.0
