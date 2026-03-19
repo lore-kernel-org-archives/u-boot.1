@@ -4,93 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF003109024C
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 16:14:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 154C0109024C
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 16:16:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F13083DC9;
-	Thu, 19 Mar 2026 17:14:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 8F6AA83DA6;
+	Thu, 19 Mar 2026 17:16:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="OqjQwUtx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oBgRa3hJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70C7E83F2D; Thu, 19 Mar 2026 17:14:06 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 3C56483DC9; Thu, 19 Mar 2026 17:16:16 +0100 (CET)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8E2383DA6
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 17:14:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BF99E80517
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 17:16:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-439b97a8a8cso1095295f8f.1
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 09:14:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-4043b909ed4so560137fac.3
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 09:16:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773936843; x=1774541643;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Mzbl859JHjDKq30DERYoV125UiquN8pv65J81zT8Akg=;
- b=OqjQwUtxOkhyIBn7FGQJPhaTAN8ubZ8bJ8Ip6aVyHdXgwvHyvonF678cNDbxLzi9+e
- ItFh7W16AyvPo7AnMwfBdLXQ/nGRssHmOS09OZKHypwGgkjzQOql6GOZtfwZRgqAaDOV
- euGES23R6d3UO9Dqs112BjhQSnP3WXXCullw/z119Qr6fbmNPwS2AGJhUOorPirTFFAt
- v9qRQHUlB2OPOl3QBtZ/x9RfrCNJiPpEpZatVnHXHu/Ealkj8nEuUJ6lURBb0/V3TrKb
- OyYmMj5PqWHzXERG2Kj8fC4zoIMg6uIR3xjWP8IydQiulDJcKkls18KZLOzsmoFFahsL
- ns7A==
+ d=konsulko.com; s=google; t=1773936972; x=1774541772; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=sLt4nhDjMx3P+c9XWAUIwIwuNnVGt3QIGufiJi6dLzI=;
+ b=oBgRa3hJPdpX6147hScPbb6+fiIpQLjTrxA/hlbT+9NeBmsgDA8VbwSa8QXboovXOL
+ beDT05TAydrsatODiMoEk3fL7CTRfQo+ZfZHp/lhh57zGuQsyRbaimiBxV9h+6/GoYJS
+ fwemTexGmcTW4zX4iDInRuQCkoWoHBZzme9kc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773936843; x=1774541643;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Mzbl859JHjDKq30DERYoV125UiquN8pv65J81zT8Akg=;
- b=Jq4N6hwm2iQW8VeMde1hBoGmXznlOanvlcN39RMno8FSpQndNotFhtqZENR20ovoMj
- 7Fc75Q2XvHKZvr43Pt7HI17c71DoNuB6m9Vkc/2qA32AASuofFFfJoshGwS1umNFKYIR
- flEfsGprAUeE4FIspTQg/sNowc8yabidFQpK+xzK9Nu5uZx8F/7vR8Z5fYonPSEV4SFO
- VxmfzJ8Xx/m26fVU0mcBmvfJNKIlhqSBHJweQYxtrUu34Y0akNeETT/0P8Ii1TAt7frk
- 7JugMjje61Z2bhKU4bW/pDU4pmqqpu/YDYQesi0gDpro2z6jZkUVnCIEEo+cHFk5J1j6
- EZLw==
-X-Gm-Message-State: AOJu0Ywh5Wsw1i2/C4jstMaKq1+Au4htZ9BnHOmRXW2+bWGclhMwREAp
- 6QnFlckjjBHbpSlCEkv0NuLXTpN6C7rNZvndYI2oI99eyeB48NOziNnVCJocFInrHwk=
-X-Gm-Gg: ATEYQzzoBpTYMwpxKTN96wrSEErntsO8MPGDtL88ZygQ9Cfe/0/rL0dCYR7admuOXu6
- qCcuI5b8WyLecCyiQa/Q4HnDrPMGCd4e5eGmPfMSs+SCQdeCrwVClU2uIkfkDNGko/D1b+JnkeA
- C6gbm1adDOSEsuq4F4w1atdPJmOmBIAMYeywjJ7DxuoV5uvuKRXQACLDP26G1FVqY6k1cdmopZA
- hlizgg9iLjDSkf5ncEfTV2xTSmO1O2O9iCQklEVhRY4udya7hWmW5EHwV2VarX/MyfjUZN8Y3b9
- 3Xsjv8iqZxPYOsHG8pD2tT0+lcXxCnOdRkOzbn/eGN8kRw79aNUkoAret8vSo/7X1pwkI8wCgAb
- NBVu1iWLuY8o0RSn5/QQxhNauNZQrBxyld7l+nRE67KaeIeHdgLkVpKZlwyzDGcD88r/hx+M0+p
- oO66k30LMJXaL1FiIdwPu0MRYjmcSEkucc3qejmuQL00Q3TuY6Tubi7fJuyqbuE7pRKTKu3GS3h
- JxeJFhTq8hMmFQR0jMk8tdzdXhNRRTK0/6FYs8IrjSi1b+NWH6y1hULtGA23F/wIljld2sBFDdT
- UMEVqRs=
-X-Received: by 2002:a05:600c:b8a:b0:485:34b3:8589 with SMTP id
- 5b1f17b1804b1-486f4570873mr137760055e9.31.1773936843286; 
- Thu, 19 Mar 2026 09:14:03 -0700 (PDT)
-Received: from [192.168.1.100]
- (2a02-842a-d52e-6101-b535-6f9c-731f-0b89.rev.sfr.net.
- [2a02:842a:d52e:6101:b535:6f9c:731f:b89])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-486f460e990sm57313055e9.1.2026.03.19.09.14.02
+ d=1e100.net; s=20251104; t=1773936972; x=1774541772;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=sLt4nhDjMx3P+c9XWAUIwIwuNnVGt3QIGufiJi6dLzI=;
+ b=npRcCVmHHWHu6g/BcwHngwgCjRZ5XS5jQesOgJi6Z6zDRnxmZUJHyg5derNtrR53r+
+ LDBg5pbP9yd0GEDI9aAvxThc/9YyfvSDMexOW1BF55pT+4Mi+I6mPXg8PYN1KQrw3dIg
+ Gds6gtuoEGr7gTJzPrU7r27mb83g75cbO0N1f++r7QScv3qmDVVNSzzcYME3WzWxQXz1
+ eSmrdy69pwD1v1GdbV5zrJeTzgOQS6M21jJh6jtYI6fc3ZQsIvRQfAE2TZb2Tk4wCLh0
+ HBI+lgtVq/DWhGvvYywYp1zn27DJKhUq8KsjBksfpm/4neMrCkb0SlkYosjRKhpU4AAJ
+ s6Pg==
+X-Gm-Message-State: AOJu0Yxzgw/ReSvC+ftUL97aHHZvB06B2tAA4EaloF4VvQgW+OK/ktuY
+ 61+zPU8rOqgULrQBLlhDiY6cGZ3dTqNCeLiuuPpvPc2fzFNzKj8cRGF85ggTxPK4tPk=
+X-Gm-Gg: ATEYQzyP/NqzFRR7wokizMsJlf41Gy/zklL1u8VUrynJkVdO2SDPlzTaSW62XMbiMAS
+ /Y8TEdthvrhZkYWZ13gFEVy3dnxsSUiOEFUEKwGs/WItSgZkqcKkoEy0ChpySVK+7ZOsfOdtOnP
+ XEOHnOor0nf6Nyj3i6ZHdqDxyth/1YTJjITOosu0yzwzjsP2ia87sZPIU7HpyKBawIMg7XIZ1b2
+ o3Mv9PUTiQkVCZjNWZfDunjfQRfFp5dJT9+M6t1xfe4By4IzT3cQsUVY6zvNpUDNJFdymC2uozW
+ GtL85Nt718lPIT2mYOBVlxRWsJcTe8B3lOVhFrY+O3+51SXWCv3ejewZY9gDiIirgZxGfxytMVT
+ 2z0EiR+cvep3qoLEB2PT41Z62LvyC5JNQXolq4240PNESveozoQTFAgKTUlE2r8ZbifD7S3X8Hk
+ L0F5F+3edxQysqIu3qDnNqEvmif28LMQdGMcGVzo1DuMqoWfoIZUfMXJ14ZXcdVLdTJ7MUagP0s
+ yAVhfOUXxDmWti7xq1I2OIXf/ugG3JP9vaqKyjdYZhIiE3c+kRZyRphH6o=
+X-Received: by 2002:a05:6870:e0cd:b0:408:694d:ff34 with SMTP id
+ 586e51a60fabf-41bd3ea1239mr4981458fac.9.1773936972068; 
+ Thu, 19 Mar 2026 09:16:12 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-41bd22dee78sm6283192fac.0.2026.03.19.09.16.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 09:14:02 -0700 (PDT)
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Thu, 19 Mar 2026 17:14:05 +0100
-Subject: [PATCH] scripts: merge_config.sh: support include directives in
- fragments
+ Thu, 19 Mar 2026 09:16:11 -0700 (PDT)
+Date: Thu, 19 Mar 2026 10:16:09 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "NG, BOON KHAI" <boon.khai.ng@altera.com>
+Cc: U-boot Openlist <u-boot@lists.denx.de>,
+ Chin-Liang See <chin.liang.see@intel.com>,
+ Dinh Nguyen <dinh.nguyen@intel.com>, Marek Vasut <marex@denx.de>,
+ Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ "Chee, Tien Fong" <tien.fong.chee@altera.com>,
+ "MANIYAM, DINESH" <dinesh.maniyam@altera.com>,
+ "YUSLAIMI, ALIF ZAKUAN" <alif.zakuan.yuslaimi@altera.com>,
+ "LOK, CHEN HUEI" <chen.huei.lok@altera.com>,
+ "Hea, Kok Kiang" <kok.kiang.hea@altera.com>
+Subject: Re: [PATCH v1] configs: socfpga: stratix10: Disable mkeficapsule
+ tool build
+Message-ID: <20260319161609.GU502704@bill-the-cat>
+References: <20260319112717.7805-1-boon.khai.ng@altera.com>
+ <20260319134809.GR502704@bill-the-cat>
+ <SA3PR03MB7187764E2EBF3FACEF2619DDB44FA@SA3PR03MB7187.namprd03.prod.outlook.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260319-merge_configs-support-include-directive-v1-1-dcfb1c7f934c@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3NWwrCMBBG4a2UeXYglyLoVkREkr9xQJMwaYtQu
- veGPn4v52zUoIJG92EjxSpNSu6wl4HC550TWGI3OeOuxtsb/6AJr1DyJKlxW2otOrPk8F0iOIo
- izLKC4WN0o7ejsZZ6rSom+Z+nx3PfDwluILt5AAAA
-X-Change-ID: 20260319-merge_configs-support-include-directive-e3dd24314011
-To: u-boot@lists.denx.de
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, dlechner@baylibre.com, 
- Julien Stephan <jstephan@baylibre.com>
-X-Mailer: b4 0.14.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="eB778krYkv6KzVyl"
+Content-Disposition: inline
+In-Reply-To: <SA3PR03MB7187764E2EBF3FACEF2619DDB44FA@SA3PR03MB7187.namprd03.prod.outlook.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,151 +108,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Many defconfig files rely on include directives to factor out common
-configuration. When running "make some_board_defconfig", these files are
-preprocessed and the includes are resolved automatically. However,
-merge_config.sh script currently does not handle include directives in
-configuration fragments.
 
-Add a preprocessing step to resolve include directives in all fragments
-before merging them.
+--eB778krYkv6KzVyl
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-By default, the include search path consists of:
-  - the current working directory
-  - the fragment's directory
-  - the default U-Boot configs/ directory
+On Thu, Mar 19, 2026 at 04:11:09PM +0000, NG, BOON KHAI wrote:
+> Hi Tom,
+>=20
+> > Why / how is this failing to compile?
+>=20
+> When compile without disabling the mkeficapsule tool
+> will hit into this error:
+>=20
+> tools/mkeficapsule.c:20:10: fatal error: gnutls/gnutls.h: No such file or=
+ directory
+>  #include <gnutls/gnutls.h>
+>           ^~~~~~~~~~~~~~~~~
+> compilation terminated.
+> make[1]: *** [scripts/Makefile.host:113: tools/mkeficapsule.o] Error 1
+> make[1]: *** Waiting for unfinished jobs....
+> make: *** [Makefile:2201: tools] Error 2
+>=20
+> We are not using that tools, I think we should just disable it.
 
-This ensures that existing defconfig files work out of the box. Additional
-include directories can be specified using the -I option:
+That's a documented host dependency. We generally don't want to disable
+general tools even if, sigh, I see a few other boards are also doing
+this now.
 
-  ./scripts/kconfig/merge_config.sh -I <additional include dir>  configs/some_board_defconfig frag1.cfg frag2.cfg
+--=20
+Tom
 
-Signed-off-by: Julien Stephan <jstephan@baylibre.com>
----
- scripts/kconfig/merge_config.sh | 56 +++++++++++++++++++++++++++++++++++++----
- 1 file changed, 51 insertions(+), 5 deletions(-)
+--eB778krYkv6KzVyl
+Content-Type: application/pgp-signature; name="signature.asc"
 
-diff --git a/scripts/kconfig/merge_config.sh b/scripts/kconfig/merge_config.sh
-index 0ef90649964..a78cfa5da02 100755
---- a/scripts/kconfig/merge_config.sh
-+++ b/scripts/kconfig/merge_config.sh
-@@ -21,7 +21,7 @@
- #  See the GNU General Public License for more details.
- 
- clean_up() {
--	rm -f $TMP_FILE
-+	rm -f $TMP_FILE $TMP_PREPROCESSED
- 	exit
- }
- trap clean_up HUP INT TERM
-@@ -33,6 +33,7 @@ usage() {
- 	echo "  -n    use allnoconfig instead of alldefconfig"
- 	echo "  -r    list redundant entries when merging fragments"
- 	echo "  -O    dir to put generated output files.  Consider setting \$KCONFIG_CONFIG instead."
-+	echo "  -I    include dir to search for includes. Defaults to pwd, u-boot configs and directory containing the fragment."
- 	echo
- 	echo "Used prefix: '$CONFIG_PREFIX'. You can redefine it with \$CONFIG_ environment variable."
- }
-@@ -42,6 +43,7 @@ ALLTARGET=alldefconfig
- WARNREDUN=false
- OUTPUT=.
- CONFIG_PREFIX=${CONFIG_-CONFIG_}
-+INCLUDE_DIR="-I $(pwd) -I $(pwd)/configs"
- 
- while true; do
- 	case $1 in
-@@ -74,6 +76,16 @@ while true; do
- 		shift 2
- 		continue
- 		;;
-+	"-I")
-+		if [ -d $2 ];then
-+			INCLUDE_DIR="$INCLUDE_DIR -I $2"
-+		else
-+			echo "include directory $2 does not exist" 1>&2
-+			exit 1
-+		fi
-+		shift 2
-+		continue
-+		;;
- 	*)
- 		break
- 		;;
-@@ -106,9 +118,39 @@ SED_CONFIG_EXP1="s/^\(${CONFIG_PREFIX}[a-zA-Z0-9_]*\)=.*/\1/p"
- SED_CONFIG_EXP2="s/^# \(${CONFIG_PREFIX}[a-zA-Z0-9_]*\) is not set$/\1/p"
- 
- TMP_FILE=$(mktemp ./.tmp.config.XXXXXXXXXX)
-+TMP_PREPROCESSED=$(mktemp ./.tmp.config.preprocessed.XXXXXXXXXX)
-+
-+# Function to preprocess config file with cpp to expand #include directives
-+preprocess_config() {
-+	local input_file="$1"
-+	local output_file="$2"
-+
-+	# Get the directory of the input file for include path
-+	local include_dir=$(dirname "$input_file")
-+
-+	# Use cpp to preprocess the file, similar to how "make board_defconfig"
-+	# does (./scripts/kconfig/Makefile):
-+	#
-+	#   %_defconfig: $(obj)/conf
-+        #      $(Q)$(CPP) -nostdinc -P -I $(srctree) -undef -x assembler-with-cpp $(srctree)/arch/$(SRCARCH)/configs/$@ -o generated_defconfig
-+        #      $(Q)sed -i -e 's/^[[:space:]]//' generated_defconfig
-+
-+	cpp -nostdinc -P -undef -x assembler-with-cpp \
-+		-I "$include_dir" $INCLUDE_DIR  \
-+		"$input_file" -o "$output_file"
-+
-+	if [ $? -ne 0 ]; then
-+		# If cpp fails, fall back to just copying the file
-+		echo "Warning: C preprocessor failed for $input_file, using file as-is" >&2
-+		cp "$input_file" "$output_file"
-+	else
-+		# Clean up any leading spaces that cpp might have added
-+		sed -i 's/^[[:space:]]//' "$output_file"
-+	fi
-+}
- 
- echo "Using $INITFILE as base"
--cat $INITFILE > $TMP_FILE
-+preprocess_config "$INITFILE" "$TMP_FILE"
- 
- # Merge files, printing warnings on overridden values
- for MERGE_FILE in $MERGE_LIST ; do
-@@ -117,12 +159,16 @@ for MERGE_FILE in $MERGE_LIST ; do
- 		echo "The merge file '$MERGE_FILE' does not exist.  Exit." >&2
- 		exit 1
- 	fi
--	CFG_LIST=$(sed -n -e "$SED_CONFIG_EXP1" -e "$SED_CONFIG_EXP2" $MERGE_FILE)
-+
-+	# Preprocess the fragment to expand includes
-+	preprocess_config "$MERGE_FILE" "$TMP_PREPROCESSED"
-+
-+	CFG_LIST=$(sed -n -e "$SED_CONFIG_EXP1" -e "$SED_CONFIG_EXP2" $TMP_PREPROCESSED)
- 
- 	for CFG in $CFG_LIST ; do
- 		grep -q -w $CFG $TMP_FILE || continue
- 		PREV_VAL=$(grep -w $CFG $TMP_FILE)
--		NEW_VAL=$(grep -w $CFG $MERGE_FILE)
-+		NEW_VAL=$(grep -w $CFG $TMP_PREPROCESSED)
- 		if [ "x$PREV_VAL" != "x$NEW_VAL" ] ; then
- 			echo Value of $CFG is redefined by fragment $MERGE_FILE:
- 			echo Previous  value: $PREV_VAL
-@@ -133,7 +179,7 @@ for MERGE_FILE in $MERGE_LIST ; do
- 		fi
- 		sed -i "/$CFG[ =]/d" $TMP_FILE
- 	done
--	cat $MERGE_FILE >> $TMP_FILE
-+	cat $TMP_PREPROCESSED >> $TMP_FILE
- done
- 
- if [ "$RUNMAKE" = "false" ]; then
+-----BEGIN PGP SIGNATURE-----
 
----
-base-commit: 142c805d470cd02470146d6d70aa9c522d4da16c
-change-id: 20260319-merge_configs-support-include-directive-e3dd24314011
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabwhRQAKCRAr4qD1Cr/k
+CtwjAP9n+LBnf+dR0qD/oOCVchH6kHRuXLmVq5SSJ9bDs5jggwEA1p4NF2pNQe2p
+o4bQo6df5W4GDphqKkzs6EH9NKuQsAU=
+=M4er
+-----END PGP SIGNATURE-----
 
-Best regards,
--- 
-Julien Stephan <jstephan@baylibre.com>
-
+--eB778krYkv6KzVyl--
