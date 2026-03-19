@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D3DE109192C
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:02:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B0911091930
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:03:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C1FC8414B;
+	by phobos.denx.de (Postfix) with ESMTP id 512F384159;
 	Fri, 20 Mar 2026 00:01:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ceATfIck";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JP+73iS1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2631A83FC5; Thu, 19 Mar 2026 21:57:33 +0100 (CET)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id DDF6F83FDE; Thu, 19 Mar 2026 21:57:36 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8A4D83FC0
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:57:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BB27B83FC0
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:57:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-43b45bb7548so913719f8f.1
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:57:30 -0700 (PDT)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-486fd3a577eso6976615e9.1
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:57:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773953850; x=1774558650; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1773953854; x=1774558654; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=JxcERJ3UaiRl1vXO0KA5cEnHfc4xtMelhah9KPin2lI=;
- b=ceATfIck787KPK7J3uSYhSz66pzYFIhlyQTFYH033OLzp4dlZSiM49Vh/k+Wa4W9iG
- nypaw+r+2xnqFbn5zJXFenhmsnzC/kvgsjXi8uI8RrInj5Q1zxDFa/SKNlPLMTNCEBJg
- HkYjYjULSDwns6HG6E1XaeLko6tt+TaqWlnpnK9xHB+b+UpAQ0mieiFdWvf5BH9wrYth
- MAEH3zwm8dbkPYcIFXFVfTHOxZZ5QA8ftVEgEmGwNVI+y0axWNiWR8IgnnCD2+b8QhFh
- 4KQatNDz4xWmVf2VH3Mi7uarkEF7ke+lfERYf00pAFhv2WhOWqDArN5eEpaKhmRJiDuE
- 0Jzg==
+ :reply-to; bh=ta7Tj8NqXyER4Q7mkz0A0OEdacbDVtJaec0R0jQ3J34=;
+ b=JP+73iS1OfApXkGxdQfUgavurEKpsi1UiJwJXgyD9CuzKkOLv92UoskgrIysfmeue2
+ Vbz9bA64e8JszRQKwzKgKy2Q3OF88f/tPrsXINv1ec3u7RMrP4ngmDFCORJPFrYvsorY
+ Tw//ZKMhpkVvYeRDSvSprNuMzK/wv0vvVHK8FlAdsOiwoafFPf91Y5ammPgQjt8wkivL
+ Zwc8129h+5mc8i23XmyPrtHaWNNk4WErnibNnn5MpJCVAvUos7FOSHxHAAdRp2gt9e+U
+ ndVe2NH5dfjMv+FoDwh5yNlY3WZyKqg7PCrb+Uuz59CyGjEUksgRrr9cuLfptPyYfka4
+ JGVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773953850; x=1774558650;
+ d=1e100.net; s=20251104; t=1773953854; x=1774558654;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=JxcERJ3UaiRl1vXO0KA5cEnHfc4xtMelhah9KPin2lI=;
- b=AZG46L0L9l+zEeSGnry1zbVSu09J1u4qJLpaVMIxBwrVpAr8X1KQP/I9teSVTcrS+X
- fwqdBxXB/ecikfcZxCNhF0PvAuys3FPD1ZDy838i2Iv4P6AcvzqLjjyeoh2mzfrwlyty
- Z7FoXsZ0dqH21rGaUcXXVOokXlQ28Vf7YxzmwUURDAnnKFK2b/mX+OG1HFwU33ZpMUll
- 6Dl4IQzGIT7Gg2NvCBqWVlDgu+TyYzElNL5sEK62gaY9p6jma7FPh/fCMYy3HJZSHHr7
- XterOYlBaWmjnIlZWbLXlvP0Iks+NbXdm76Yyl7LA01MsBoBVt/ZXu1CLnchkkdFuDGZ
- Bwiw==
-X-Gm-Message-State: AOJu0YxJEr9GRwWtF/q+PA0nxL7XkVGOCp2I40LzOlPXZ6TSymHg2i/w
- cqqohjbbNbGUBp/u6xUCNb66Hjbii2JvHN59tZDueJ8aB96spFB6XD8E1uUEj1Fl6hk=
-X-Gm-Gg: ATEYQzx0yxQjmXO9p//ZEipUNjCp1MIOONDyBjlmjRYDlQHN56YUE5GosnWravpmDlX
- KiC0uW5eFs3oviM8vzq67bsWubzPCSuqY0XNqiktRPfzi1JucZz+XpfB6dBorpL0DuAwvYeYFUK
- bFaqUBJEnSuFR3ejCQhpDriT2O/P1cBAC4owjKxM7+2ekkDgKH7FECvrTWjrUDBuyRSZ06RaR2t
- ZiHjh8+IBTlncYuF/rg4BtSyvFc99WHhCW246QitOCK6PE0gTm/sXl9QHgsdvE9ds/CL7AOBIWa
- ccBcJ8KT1Yovzw6dxu3kIPrWpgbwyPKcGlT3qIxJhcXMl6EhF7LhkCy7z7kjaTOcSWXC12JvE+H
- 7+V4EtzVwJfllUABPltHRkOf7svmXYOfynETNbJRc+nZngob+0+q7y3zsbPIP8ACbbj1RtmIiYj
- ppCnqzBYXyIoiF8hZHQCI5jY7iBsCPnWQ59JWp2YRHRGrFJQYJo0P/QWcfKz6I2CD0V+4=
-X-Received: by 2002:a05:6000:2203:b0:43b:45a0:9df8 with SMTP id
- ffacd0b85a97d-43b642781a8mr1365023f8f.35.1773953850186; 
- Thu, 19 Mar 2026 13:57:30 -0700 (PDT)
+ bh=ta7Tj8NqXyER4Q7mkz0A0OEdacbDVtJaec0R0jQ3J34=;
+ b=jcaCEjYzU49O5PKDDmTJUYbkZN7sJuJSRTd1JNbvRATNWJ/fITpucj4+uKTfeX23qn
+ W6BJoi0VAGKieh8UAVW03mE8AYy+zLpOFA0l8sQ+UDdPAwT8IZUAPaisjjz0i1QQgWB5
+ BhBlyhfVFcUHaGCaHRuWkM7w4G90dFvcZ+gAC00AL1+k2G1sYs+PlQtAvSMDAFvLMFT2
+ ZlQfzGOnPsHYqF+J2Mb3iQb7uDuy1PV0eq1rMjxKkiwjYZiS8IJA767dEZ29iGiVOC1Z
+ WzytzfWrNjiXY/2U6FXl/wNelfE/hyDKTkro/9DD+mrMF7FNxGa6NlyeLp5u6m6NMsGQ
+ +reQ==
+X-Gm-Message-State: AOJu0Yw6yankS6fUZhowjGatwQQwd7ENHt7+Piom6hMasldkWZP2fi9m
+ NWrddSg5MALNhtm9gnz13bm5L6Vh+7rFIg/wnsNwCoAUKvsuHgPW8w/1NUDG27EL9VM=
+X-Gm-Gg: ATEYQzylw7MwH5mUjhP+kAYejQP+bx2RNcG9YaG7Echf7J7GaYDmSclP/27I+ykTE/0
+ MZ4I5CCk9iikVnNWphirlxHLeuC0gXgn3/YMm4sWaVXrYAQ+/Ef57J4ZzrjJrOe9bQMCSoAxO9M
+ uv6ZkkULpiA25v/IcQKUXaX48x8TeL2MLqw63QROohEB0pMa5NEK9pEVkGDwlyplrjO56VQq1H1
+ sxcZ6Fzi0t+pPZoaA7VHN+mu1nMBXmgZXoftXkWy3eTQn85EJGZlp4ZEtgP/OWP7ks5b+bQJf9Q
+ xwRGenjfZ8HbLEOeneSreJGQk0tdfMLzPoa86YkkPMQ6eooQFPlELUknMkn7vrwBBB54Oc6hOF9
+ ifF1/rrxXPQMkzz/gvsChe638OV5wJTdax2AMwSioOE0cqMTpVZW779XTY61VxjhjZWl0YyAcXJ
+ qwKumxJTPYLSXVqXvjdyCmDRO9y6tRtYNaDvCRnBmznVFJvci7MO+VLroPBXeICs+wn6s=
+X-Received: by 2002:a05:600c:1d15:b0:485:2ce2:4c75 with SMTP id
+ 5b1f17b1804b1-486febbc648mr7851015e9.1.1773953853998; 
+ Thu, 19 Mar 2026 13:57:33 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd39.dip0.t-ipconnect.de.
  [79.195.221.57]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.26
+ ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:57:29 -0700 (PDT)
+ Thu, 19 Mar 2026 13:57:33 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 19 Mar 2026 21:56:31 +0100
-Subject: [PATCH RFC 09/40] compat: add dev_name()
+Date: Thu, 19 Mar 2026 21:56:32 +0100
+Subject: [PATCH RFC 10/40] compat: add linux/regmap.h symlink
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260319-casey-ccf-upstream-v1-9-4df2ee2226da@linaro.org>
+Message-Id: <20260319-casey-ccf-upstream-v1-10-4df2ee2226da@linaro.org>
 References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
@@ -160,13 +160,13 @@ Cc: Tom Rini <trini@konsulko.com>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>, 
  Paul Sajna <sajattack@postmarketos.org>, Marek Vasut <marex@denx.de>
 X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1165;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=517;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=1W3i+V3HK8nbQuiQS6Y9/UsTMCP1WFM11jOshCSCYko=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yXx++tcuZc354bJZ5Pj/dr+zG5dt4w62dlwpuo5rl
- 3bR1RVVHaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAiu64x/BUvODnfNVK99+/t
- ZkVrppuKq1bcOvvY4k3fqZB59avVZ8Yz/LPNfb2uYPmCtYmlHa5W+y+J/K9Yd2TeicBrX2MXPrx
- SmnMDAA==
+ bh=NdKEp6PPPnqzQwS5HXhBfSnvR7crR5H9OW0VElgSIaM=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yXzROgpafHf79v4zv5Bw8Z/S98/5VzOC7rQUPXAvL
+ tp+6te0jlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCR0w8YGToquDZ/PDqRe45c
+ AKvO4XWncx7y55c7eKxw/XLu2TPus/wM/2M2SzBK1mvPUpByT2089qHwyc2WT2s05rTJMzNrF/+
+ 9FQ0A
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Fri, 20 Mar 2026 00:01:15 +0100
@@ -186,48 +186,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function just wraps udevice->name.
+Add a symlink to the Linux regmap.h path so that drivers ported from
+Linux don't all need additional changes to include the U-Boot specific
+path.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- include/linux/device.h | 29 +++++++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
+ include/linux/regmap.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/include/linux/device.h b/include/linux/device.h
-new file mode 100644
-index 000000000000..e76635cfde9e
+diff --git a/include/linux/regmap.h b/include/linux/regmap.h
+new file mode 120000
+index 000000000000..8a3780b5cebd
 --- /dev/null
-+++ b/include/linux/device.h
-@@ -0,0 +1,29 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * device.h - generic, centralized driver model
-+ *
-+ * U-Boot: compat header derived from Linux
-+ *
-+ * Copyright (c) 2001-2003 Patrick Mochel <mochel@osdl.org>
-+ * Copyright (c) 2004-2009 Greg Kroah-Hartman <gregkh@suse.de>
-+ * Copyright (c) 2008-2009 Novell Inc.
-+ *
-+ * See Documentation/driver-api/driver-model/ for more information.
-+ */
-+
-+#ifndef _DEVICE_H_
-+#define _DEVICE_H_
-+
-+#include <dm/device.h>
-+
-+/**
-+ * dev_name - Return a device's name.
-+ * @dev: Device with name to get.
-+ * Return: The kobject name of the device, or its initial name if unavailable.
-+ */
-+static inline const char *dev_name(const struct udevice *dev)
-+{
-+	return dev->name;
-+}
-+
-+#endif /* _DEVICE_H_ */
++++ b/include/linux/regmap.h
+@@ -0,0 +1 @@
++../regmap.h
+\ No newline at end of file
 
 -- 
 2.51.0
