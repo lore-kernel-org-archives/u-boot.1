@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FA1F1091927
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 21:37:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B45F21091926
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 21:37:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D2F483FF5;
+	by phobos.denx.de (Postfix) with ESMTP id 6AF5C84114;
 	Thu, 19 Mar 2026 22:36:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e8/DZ9Lo";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gKzLGair";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 086C98409B; Thu, 19 Mar 2026 22:36:52 +0100 (CET)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 227BA83FEC; Thu, 19 Mar 2026 22:36:53 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89BFD83FEC
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 22:36:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 398F6840CC
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 22:36:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7d7653db148so619825a34.2
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 14:36:47 -0700 (PDT)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7d1872504cbso1183719a34.0
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 14:36:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1773956206; x=1774561006; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1773956207; x=1774561007; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/C3QJ9qasIh+TfKLmtsKFdTAoHOe3YJCNedu0MBCPPo=;
- b=e8/DZ9LohaBfYHslkgs+cAqacwyxm9QpUPV4YhK3GpHbzBccYNLH7JqL3r7o4RSiAd
- z5i5k0uHaX+afd02gh7KjU2Js0HRsnNLt0WWk56qBt0qwlYEXZ/EirNPNSEW5kNkOHto
- rOqIXxCbe0J3lP+e6Tc1tubuuoGHkJfJ5aiV0=
+ bh=ES2pUClqRLNWJJ+yFZ3Ax+7t/ErUxpLTkqO+7ZIqRVo=;
+ b=gKzLGairrjV0i2yqTMD67jzMbbGQzxuW3rBb92q+DP8CHHucZaJpZO7WCFPV9pAQdj
+ 8DluG2RlTjzFEGmLT9VHOUKjXNsfJIk+iklg9a6XXFNCSWojNrNRGrAu5f7YM56EHh+j
+ 4UILUooyhN2/SBPvVAdLxvawUb0xbHgiqJbT0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773956206; x=1774561006;
+ d=1e100.net; s=20251104; t=1773956207; x=1774561007;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=/C3QJ9qasIh+TfKLmtsKFdTAoHOe3YJCNedu0MBCPPo=;
- b=YUcvqswGswbSTvguKKj96T7jzQsZ3hrgoj10GR6DNYBkPqo7DS7UNon8bPKGjQHbFZ
- DKV4LOOYE2+3LHQu3VNNRJ0ozg3ZPcsyA1ZQQ4zB0Xn516DpUfTiFTz1QjtZ6wTYN8qd
- Cxk74kZWCyW3R1+eAZ1R0tnaoTNwd0eZ7GLhGj0+/osupxoTidnYUeNUoesXdtjAf8Qm
- ZHO8+kdxozl9yzIORP6ZY5Qg5NRQ5+tFMm0uebr9WE43VYoM5Xh+zxsTmHrxsD2/jk4/
- 1sZu/5qJ56/pRiXwbHahQ9q+z9ucwVCpv63llMiw7Ui1lt+3oX6o2W/jDJQS1JTAV1iC
- Jzig==
-X-Gm-Message-State: AOJu0YwIFUx33R6AgPPd94cnE/YBuNvoNbP/4nPw8XHhDg37nudRtXBv
- fnbcffENXdpX90BOIpPfP2deduUCr3Y73LItB5kcJepwVBH4WWZN6A45lFDF3uBxSXm5G5wtjHb
- 8Pz08Yw==
-X-Gm-Gg: ATEYQzznh+v7ip60GfvsCaud1VlfPB+emI1GST//WziIf5oNe6k89dZMVaHZQt/7G0F
- UKW9xmV+5cwFfnOVVcblcojrMzaFcM+VFEwdJRXg6eIehRSzMsx0nSPdZ3AA6IrO3DVY5hW/7mz
- GEWqqDBJoGqAOh7ShwlI5eAhdTIAg2kpDn7lgFfLz7gYrQAXSYzcP6hFvTQlwqZRp0z9lBalV5Y
- RFnscV8zJLqFlfDFKiY9tmXaO2k1iRNOtkqVV+razM+dpXkCsT7pKZl+G8R4wh3XXEX9s7IZFXu
- PgJxR/Gxjl88NCJgHLaTrbW8th0MfPv+XsBusYDRY8hJStUpVeptIsiJ3X23JqrzwNuQutPXzv9
- g0LqiPF6VK+H+tk9avYbHIwNBNpuH9fKLIX0Ghur9y7ZakvpPJ8EFv3T9iXE4QDzGwxmBr80rmo
- Hl5PtWrGuZDeE64pcGow==
-X-Received: by 2002:a05:6830:668f:b0:7d7:e7f9:6b35 with SMTP id
- 46e09a7af769-7d7eafb18c4mr518667a34.25.1773956205555; 
- Thu, 19 Mar 2026 14:36:45 -0700 (PDT)
+ bh=ES2pUClqRLNWJJ+yFZ3Ax+7t/ErUxpLTkqO+7ZIqRVo=;
+ b=V75ZSlrT766nP1LMj+MUEhR5fv59/oLyBAszWDGkleC3GzxyuYeOF3PNBu4DdmZxgU
+ ZJu+rdDIEY0HEkPWzBJPGvvzs08qBR5tpsVH6WEeehpOanrMU+MxUl8GhLZSI8Cfk1Pt
+ GXs2C+nZPUjdwRtVkdSrCZhoDduimn3yx+t4aXG0k6k5OY+fsgo+sBo49sstPj2xqRvd
+ d05uVMynTn8GKGKEgo2I1tn+dsp0Yg9S/EpCl3nNggvYmL+n75nQUsQrUXrNg54K9e+Y
+ nQUpA0k+m2vvfbIN+1bxTdas24KkwiwwdE+Y9ly7o3TdZAibteaRoRzsgsO/kpRvJo8S
+ yrEw==
+X-Gm-Message-State: AOJu0Yy6532tLUxrSI1AY4KHCJP108GH2WLBAi3SrCQ1ShnlyWrcoRDO
+ h8aDOEDyQ8z3y+ogm9dRnmpfBpPZRh83g5hYfXm3CVQXSKCsAlzy+qbwmyY6e3z4I1zWB+Y0NoY
+ BSOi5Gg==
+X-Gm-Gg: ATEYQzx7yPO7W8A4cD3ziksG/yAOajvEbN70g0oD6aqm5bQYzL9FjO6Icl6YhUwehaU
+ 0kjbjaU+cCKc+Bi2XaKo1lRXkAh5xQcngPEBW7vUW19GYSJ2DnVBKuTzdsz+huRC0zr9tjidUfh
+ RMPO5QeounS10C9hnbrD9fzOxVn5S2F++GlVj4kcA2tyxSLtT5ISuWV77e/alUVDWpawgm/l7Bu
+ EgWpMPNq44jFHIzCXEn2ncTEZdC7UziRfzG1kLr7KE13PP55kl3E3IvqrEOPsr92R88RLHll748
+ ro1MB9T6VcsNaxTBo4U8Gi1LD6y/N2efubNPSOhCSAiGySOmNEKr8bot+zu3yX4XC9AVGJiSM5g
+ sE5F/HAORj/wH9886ngUa8RJvlnHVmYIrdISY4Ay4fBdh132oaxGYN/4b36FYfUAAosKqZtxIBT
+ pOp+uqowTPLPYg5HfBNw==
+X-Received: by 2002:a05:6830:6d26:b0:7d7:e3d7:e200 with SMTP id
+ 46e09a7af769-7d7ea9f0564mr633007a34.6.1773956207143; 
+ Thu, 19 Mar 2026 14:36:47 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7eac17b0asm545724a34.9.2026.03.19.14.36.44
+ 46e09a7af769-7d7eac17b0asm545724a34.9.2026.03.19.14.36.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 14:36:44 -0700 (PDT)
+ Thu, 19 Mar 2026 14:36:46 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Casey Connolly <casey.connolly@linaro.org>,
- Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>,
+Cc: Simon Glass <sjg@chromium.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Marek Vasut <marex@denx.de>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
  Pavel Herrmann <morpheus.ibis@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [RFC PATCH 08/15] dm: core: Add a uclass-adjunct API
-Date: Thu, 19 Mar 2026 15:35:38 -0600
-Message-ID: <20260319213551.267031-9-sjg@chromium.org>
+Subject: [RFC PATCH 09/15] dm: core: Integrate adjuncts into existing code
+ paths
+Date: Thu, 19 Mar 2026 15:35:39 -0600
+Message-ID: <20260319213551.267031-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260319213551.267031-1-sjg@chromium.org>
 References: <20260319213551.267031-1-sjg@chromium.org>
@@ -95,535 +97,810 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the adjunct API and its implementation, allowing a device to
-register in additional uclasses beyond its primary one.
+Wire adjunct support into the existing driver-model lifecycle and
+uclass iteration.
 
-Most of the code lives in a new adjunct.c file, with its functions
-called from elsewhere in driver model.
+Use the shared ucm_alloc_plat() and ucm_alloc_priv() helpers in the
+primary bind and probe paths. Call device_init_adj() at bind,
+device_probe_adjs() at probe, device_free_adjs() at remove and
+device_unbind_adjs() at unbind.
 
-Add shared ucm_alloc_plat() and ucm_alloc_priv() helpers used by both
-the primary bind/probe path and adjuncts, to avoid duplicating the
-allocation logic.
+Update uclass0iteration to handle the combined dev_head list, which now
+contains both primary and adjunct entries. Function-based iterators use
+ucm->dev
 
-Add a new device_get_uclass_ops() function to look up ops by uclass ID;
-this maps to device_get_ops() when DM_UC_ADJUNCT is disabled to avoid
-adding to code size.
+Some iterators use container_of() so cannot handle adjuncts.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- drivers/core/Makefile        |   1 +
- drivers/core/adjunct.c       | 209 +++++++++++++++++++++++++++++++++++
- drivers/core/device.c        |  20 +++-
- include/dm/device-internal.h | 165 +++++++++++++++++++++++++++
- include/dm/device.h          |  40 +++++++
- 5 files changed, 434 insertions(+), 1 deletion(-)
- create mode 100644 drivers/core/adjunct.c
+ drivers/core/device-remove.c |   9 +-
+ drivers/core/device.c        |   9 +-
+ drivers/core/uclass.c        | 286 ++++++++++++++++++++++++++++++++---
+ include/dm/uclass-internal.h |   8 +
+ include/dm/uclass.h          | 210 ++++++++++++++++++++++---
+ 5 files changed, 483 insertions(+), 39 deletions(-)
 
-diff --git a/drivers/core/Makefile b/drivers/core/Makefile
-index a549890c22b..4733e05e3d3 100644
---- a/drivers/core/Makefile
-+++ b/drivers/core/Makefile
-@@ -6,6 +6,7 @@ obj-y	+= device.o fdtaddr.o lists.o root.o uclass.o util.o tag.o
- obj-$(CONFIG_$(PHASE_)ACPIGEN) += acpi.o
- obj-$(CONFIG_$(PHASE_)DEVRES) += devres.o
- obj-$(CONFIG_$(PHASE_)DM_DEVICE_REMOVE)	+= device-remove.o
-+obj-$(CONFIG_$(PHASE_)DM_UC_ADJUNCT)	+= adjunct.o
- obj-$(CONFIG_$(PHASE_)SIMPLE_BUS)	+= simple-bus.o
- obj-$(CONFIG_SIMPLE_PM_BUS)	+= simple-pm-bus.o
- obj-$(CONFIG_DM)	+= dump.o
-diff --git a/drivers/core/adjunct.c b/drivers/core/adjunct.c
-new file mode 100644
-index 00000000000..07fd0917050
---- /dev/null
-+++ b/drivers/core/adjunct.c
-@@ -0,0 +1,209 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Uclass adjunct support
-+ *
-+ * Copyright 2026 Canonical Ltd.
-+ * Simon Glass <simon.glass@canonical.com>
-+ */
+diff --git a/drivers/core/device-remove.c b/drivers/core/device-remove.c
+index 2a3253b34a5..7d07317f344 100644
+--- a/drivers/core/device-remove.c
++++ b/drivers/core/device-remove.c
+@@ -109,6 +109,10 @@ int device_unbind(struct udevice *dev)
+ 		free(dev_get_parent_plat(dev));
+ 		dev_set_parent_plat(dev, NULL);
+ 	}
++	ret = device_unbind_adjs(dev);
++	if (ret)
++		return log_msg_ret("adj", ret);
 +
-+#include <dm.h>
-+#include <malloc.h>
-+#include <dm/device-internal.h>
-+#include <dm/uclass-internal.h>
+ 	ret = uclass_unbind_device(dev);
+ 	if (ret)
+ 		return log_msg_ret("uc", ret);
+@@ -131,12 +135,15 @@ int device_unbind(struct udevice *dev)
+  */
+ void device_free(struct udevice *dev)
+ {
+-	int size;
++	int size, ret;
+ 
+ 	if (dev->driver->priv_auto) {
+ 		free(dev_get_priv(dev));
+ 		dev_set_priv(dev, NULL);
+ 	}
++	ret = device_remove_adjs(dev);
++	if (ret)
++		log_debug("Failed to remove adjuncts: %d\n", ret);
+ 	size = dev->ucm.uc->uc_drv->per_device_auto;
+ 	if (size) {
+ 		free(dev_get_uclass_priv(dev));
+diff --git a/drivers/core/device.c b/drivers/core/device.c
+index 1de392238f8..ba3c5b9a28e 100644
+--- a/drivers/core/device.c
++++ b/drivers/core/device.c
+@@ -80,7 +80,9 @@ static int device_bind_common(struct udevice *parent, const struct driver *drv,
+ 	dev_set_ofnode(dev, node);
+ 	dev->parent = parent;
+ 	dev->driver = drv;
++	device_init_adj(dev);
+ 	ucm->uc = uc;
++	ucm->dev = dev;
+ 
+ 	ucm->seq = -1;
+ 	if (CONFIG_IS_ENABLED(DM_SEQ_ALIAS) &&
+@@ -351,6 +353,7 @@ static int device_alloc_priv(struct udevice *dev)
+ 	const struct driver *drv;
+ 	void *ptr;
+ 	int size;
++	int ret;
+ 
+ 	drv = dev->driver;
+ 	assert(drv);
+@@ -363,7 +366,7 @@ static int device_alloc_priv(struct udevice *dev)
+ 		dev_set_priv(dev, ptr);
+ 	}
+ 
+-	/* Allocate private data if requested and not reentered */
++	/* Allocate uclass-private data if requested and not reentered */
+ 	size = dev->ucm.uc->uc_drv->per_device_auto;
+ 	if (size && !dev_get_uclass_priv(dev)) {
+ 		ptr = alloc_priv(size, dev->ucm.uc->uc_drv->flags);
+@@ -372,6 +375,10 @@ static int device_alloc_priv(struct udevice *dev)
+ 		dev_set_uclass_priv(dev, ptr);
+ 	}
+ 
++	ret = device_probe_adjs_(dev);
++	if (ret)
++		return ret;
 +
-+void device_init_adj(struct udevice *dev)
-+{
-+	INIT_LIST_HEAD(&dev->adj_head);
-+	dev->ucm.ops = dev->driver->ops;
-+	list_add(&dev->ucm.adj_node, &dev->adj_head);
+ 	/* Allocate parent data for this child */
+ 	if (dev->parent) {
+ 		size = dev->parent->driver->per_child_auto;
+diff --git a/drivers/core/uclass.c b/drivers/core/uclass.c
+index 276aec855a0..9abca7a530f 100644
+--- a/drivers/core/uclass.c
++++ b/drivers/core/uclass.c
+@@ -114,6 +114,9 @@ int uclass_destroy(struct uclass *uc)
+ 	struct udevice *dev;
+ 	int ret;
+ 
++	/* Remove adjunct entries first, leaving only primary devices */
++	uclass_destroy_adjs(uc);
++
+ 	/*
+ 	 * We cannot use list_for_each_entry_safe() here. If a device in this
+ 	 * uclass has a child device also in this uclass, it will be also be
+@@ -253,10 +256,23 @@ int uclass_find_first_device(enum uclass_id id, struct udevice **devp)
+ 	ret = uclass_get(id, &uc);
+ 	if (ret)
+ 		return ret;
+-	if (list_empty(&uc->dev_head))
+-		return 0;
+ 
+-	*devp = list_first_entry(&uc->dev_head, struct udevice, ucm.uc_node);
++	if (CONFIG_IS_ENABLED(DM_UC_ADJUNCT)) {
++		struct uclass_member *ucm;
++
++		/* Skip adjunct entries - only return primary devices */
++		list_for_each_entry(ucm, &uc->dev_head, uc_node) {
++			if (ucm_is_primary(ucm)) {
++				*devp = ucm->dev;
++				return 0;
++			}
++		}
++	} else {
++		if (!list_empty(&uc->dev_head))
++			*devp = list_first_entry(&uc->dev_head,
++						 struct udevice,
++						 ucm.uc_node);
++	}
+ 
+ 	return 0;
+ }
+@@ -266,11 +282,215 @@ void uclass_find_next_device(struct udevice **devp)
+ 	struct udevice *dev = *devp;
+ 
+ 	*devp = NULL;
+-	if (!list_is_last(&dev->ucm.uc_node, &dev->ucm.uc->dev_head))
+-		*devp = list_entry(dev->ucm.uc_node.next, struct udevice,
+-				   ucm.uc_node);
++
++	if (CONFIG_IS_ENABLED(DM_UC_ADJUNCT)) {
++		struct uclass_member *ucm;
++
++		/* Skip adjunct entries - only return primary devices */
++		ucm = &dev->ucm;
++		while (ucm->uc_node.next != &ucm->uc->dev_head) {
++			ucm = list_next_entry(ucm, uc_node);
++			if (ucm_is_primary(ucm)) {
++				*devp = ucm->dev;
++				return;
++			}
++		}
++	} else {
++		if (!list_is_last(&dev->ucm.uc_node,
++				  &dev->ucm.uc->dev_head))
++			*devp = list_entry(dev->ucm.uc_node.next,
++					   struct udevice, ucm.uc_node);
++	}
 +}
 +
-+int device_bind_adj_(struct udevice *dev, enum uclass_id id, const void *ops)
++#if CONFIG_IS_ENABLED(DM_UC_ADJUNCT)
++int ucm_find_first(enum uclass_id id, struct uclass_member **ucmp)
 +{
-+	struct uclass_member *ucm;
 +	struct uclass *uc;
 +	int ret;
 +
++	*ucmp = NULL;
 +	ret = uclass_get(id, &uc);
 +	if (ret)
 +		return ret;
 +
-+	ucm = calloc(1, sizeof(*ucm));
-+	if (!ucm)
-+		return -ENOMEM;
-+
-+	ucm->dev = dev;
-+	ucm->uc = uc;
-+	ucm->ops = ops;
-+	ucm->seq = uclass_find_next_free_seq(uc);
-+
-+	ret = ucm_alloc_plat(ucm);
-+	if (ret)
-+		goto err_ucm;
-+
-+	list_add_tail(&ucm->adj_node, &dev->adj_head);
-+	list_add_tail(&ucm->uc_node, &uc->dev_head);
-+
-+	if (uc->uc_drv->post_bind) {
-+		ret = uc->uc_drv->post_bind(dev);
-+		if (ret)
-+			goto err_list;
-+	}
++	if (!list_empty(&uc->dev_head))
++		*ucmp = list_first_entry(&uc->dev_head,
++					 struct uclass_member, uc_node);
 +
 +	return 0;
-+
-+err_list:
-+	list_del(&ucm->uc_node);
-+	list_del(&ucm->adj_node);
-+	free(ucm->uc_plat);
-+err_ucm:
-+	free(ucm);
-+	return ret;
 +}
 +
-+int device_add_uclass_adj(struct udevice *dev, enum uclass_id id,
-+			  const void *ops)
++void ucm_find_next(struct uclass_member **ucmp)
++{
++	struct uclass_member *ucm = *ucmp;
++
++	if (ucm->uc_node.next == &ucm->uc->dev_head)
++		*ucmp = NULL;
++	else
++		*ucmp = list_next_entry(ucm, uc_node);
++}
++
++struct uclass_member *_ucm_first_primary(struct uclass *uc)
++{
++	struct uclass_member *ucm;
++
++	list_for_each_entry(ucm, &uc->dev_head, uc_node) {
++		if (ucm_is_primary(ucm))
++			return ucm;
++	}
++
++	return NULL;
++}
++
++void _ucm_next_primary(struct uclass_member **ucmp)
++{
++	struct uclass_member *ucm = *ucmp;
++
++	while (ucm->uc_node.next != &ucm->uc->dev_head) {
++		ucm = list_next_entry(ucm, uc_node);
++		if (ucm_is_primary(ucm)) {
++			*ucmp = ucm;
++			return;
++		}
++	}
++	*ucmp = NULL;
++}
++
++/*
++ * Starting from the given member @ucm, return the first member whose device
++ * probes successfully.
++ */
++static struct uclass_member *_ucm_next(struct uclass_member *ucm)
++{
++	for (; ucm; ucm_find_next(&ucm)) {
++		if (!device_probe(ucm->dev))
++			break;
++	}
++
++	return ucm;
++}
++
++struct uclass_member *ucm_first(enum uclass_id id)
++{
++	struct uclass_member *ucm;
++
++	ucm_find_first(id, &ucm);
++
++	return _ucm_next(ucm);
++}
++
++struct uclass_member *ucm_next(struct uclass_member *ucm)
++{
++	ucm_find_next(&ucm);
++
++	return _ucm_next(ucm);
++}
++
++int ucm_first_check(enum uclass_id id, struct uclass_member **ucmp)
 +{
 +	int ret;
 +
-+	ret = device_bind_adj_(dev, id, ops);
++	*ucmp = NULL;
++	ret = ucm_find_first(id, ucmp);
++	if (ret)
++		return ret;
++	if (!*ucmp)
++		return 0;
++
++	return device_probe((*ucmp)->dev);
++}
++
++int ucm_next_check(struct uclass_member **ucmp)
++{
++	ucm_find_next(ucmp);
++
++	if (!*ucmp)
++		return 0;
++
++	return device_probe((*ucmp)->dev);
++}
++
++int ucm_first_drvdata(enum uclass_id id, ulong driver_data,
++		      struct uclass_member **ucmp)
++{
++	struct uclass_member *ucm;
++	int ret;
++
++	ret = ucm_find_first(id, &ucm);
 +	if (ret)
 +		return ret;
 +
-+	if (device_active(dev))
-+		ret = device_probe_adjs_(dev);
++	for (; ucm; ucm_find_next(&ucm)) {
++		if (dev_get_driver_data(ucm->dev) == driver_data) {
++			*ucmp = ucm;
 +
-+	return ret;
-+}
-+
-+void *device_get_adj_uclass_priv(struct udevice *dev, enum uclass_id id)
-+{
-+	struct uclass_member *ucm;
-+
-+	list_for_each_entry(ucm, &dev->adj_head, adj_node) {
-+		if (ucm->uc->uc_drv->id == id)
-+			return ucm->uc_priv;
-+	}
-+
-+	return NULL;
-+}
-+
-+void *device_get_adj_uclass_plat(struct udevice *dev, enum uclass_id id)
-+{
-+	struct uclass_member *ucm;
-+
-+	list_for_each_entry(ucm, &dev->adj_head, adj_node) {
-+		if (ucm->uc->uc_drv->id == id)
-+			return ucm->uc_plat;
-+	}
-+
-+	return NULL;
-+}
-+
-+int ucm_alloc_plat(struct uclass_member *ucm)
-+{
-+	int size = ucm->uc->uc_drv->per_device_plat_auto;
-+
-+	if (size) {
-+		ucm->uc_plat = calloc(1, size);
-+		if (!ucm->uc_plat)
-+			return -ENOMEM;
-+	}
-+
-+	return 0;
-+}
-+
-+int ucm_alloc_priv(struct uclass_member *ucm)
-+{
-+	struct uclass_driver *uc_drv = ucm->uc->uc_drv;
-+
-+	if (uc_drv->per_device_auto && !ucm->uc_priv) {
-+		ucm->uc_priv = alloc_priv(uc_drv->per_device_auto,
-+					  uc_drv->flags);
-+		if (!ucm->uc_priv)
-+			return -ENOMEM;
-+	}
-+
-+	return 0;
-+}
-+
-+int device_probe_adjs_(struct udevice *dev)
-+{
-+	struct uclass_driver *uc_drv;
-+	struct uclass_member *ucm;
-+	int ret;
-+
-+	list_for_each_entry(ucm, &dev->adj_head, adj_node) {
-+		if (ucm_is_primary(ucm))
-+			continue;
-+		if (ucm_alloc_priv(ucm))
-+			return -ENOMEM;
-+
-+		uc_drv = ucm->uc->uc_drv;
-+		if (uc_drv->post_probe) {
-+			ret = uc_drv->post_probe(dev);
-+			if (ret)
-+				return ret;
++			return device_probe(ucm->dev);
 +		}
 +	}
 +
-+	return 0;
-+}
-+
-+static void ucm_free(struct uclass_member *ucm)
-+{
-+	list_del(&ucm->uc_node);
-+	list_del(&ucm->adj_node);
-+	free(ucm->uc_priv);
-+	free(ucm->uc_plat);
-+	free(ucm);
-+}
-+
-+int device_remove_adjs(struct udevice *dev)
-+{
-+	struct uclass_member *ucm;
-+	int ret;
-+
-+	list_for_each_entry(ucm, &dev->adj_head, adj_node) {
-+		if (!ucm_is_primary(ucm)) {
-+			if (ucm->uc->uc_drv->pre_remove) {
-+				ret = ucm->uc->uc_drv->pre_remove(dev);
-+				if (ret)
-+					return ret;
-+			}
-+			free(ucm->uc_priv);
-+			ucm->uc_priv = NULL;
-+		}
-+	}
-+
-+	return 0;
-+}
-+
-+int device_unbind_adjs(struct udevice *dev)
-+{
-+	struct uclass_member *ucm, *tmp;
-+	int ret;
-+
-+	list_for_each_entry_safe(ucm, tmp, &dev->adj_head, adj_node) {
-+		if (!ucm_is_primary(ucm)) {
-+			if (ucm->uc->uc_drv->pre_unbind) {
-+				ret = ucm->uc->uc_drv->pre_unbind(dev);
-+				if (ret)
-+					return ret;
-+			}
-+			ucm_free(ucm);
-+		}
-+	}
-+
-+	return 0;
-+}
-+
-+void uclass_destroy_adjs(struct uclass *uc)
-+{
-+	struct uclass_member *ucm, *tmp;
-+
-+	list_for_each_entry_safe(ucm, tmp, &uc->dev_head, uc_node) {
-+		if (!ucm_is_primary(ucm))
-+			ucm_free(ucm);
-+	}
-+}
-diff --git a/drivers/core/device.c b/drivers/core/device.c
-index f90c436e0a9..1de392238f8 100644
---- a/drivers/core/device.c
-+++ b/drivers/core/device.c
-@@ -301,7 +301,7 @@ int device_reparent(struct udevice *dev, struct udevice *new_parent)
- 	return 0;
++	return -ENODEV;
  }
  
--static void *alloc_priv(int size, uint flags)
-+void *alloc_priv(int size, uint flags)
- {
- 	void *priv;
- 
-@@ -1186,6 +1186,24 @@ void dev_int_set_seq(struct udevice *dev, int seq)
- 	dev->ucm.seq = seq;
- }
- 
-+const void *device_get_uclass_ops(struct udevice *dev, enum uclass_id id)
++struct uclass_member *ucm_try_first(enum uclass_id id)
 +{
-+	if (CONFIG_IS_ENABLED(DM_UC_ADJUNCT)) {
-+		struct uclass_member *ucm;
++	struct uclass *uc;
 +
-+		/* Walk primary + adjunct memberships for matching uclass */
-+		list_for_each_entry(ucm, &dev->adj_head, adj_node) {
-+			if (ucm->uc->uc_drv->id == id)
-+				return ucm->ops;
++	uc = uclass_find(id);
++	if (!uc || list_empty(&uc->dev_head))
++		return NULL;
++
++	return list_first_entry(&uc->dev_head, struct uclass_member, uc_node);
++}
++
++int ucm_find_by_ofnode(enum uclass_id id, ofnode node,
++		       struct uclass_member **ucmp)
++{
++	struct uclass_member *ucm;
++	int ret;
++
++	*ucmp = NULL;
++	if (!ofnode_valid(node))
++		return -ENODEV;
++
++	ret = ucm_find_first(id, &ucm);
++	if (ret)
++		return ret;
++
++	for (; ucm; ucm_find_next(&ucm)) {
++		if (ofnode_equal(dev_ofnode(ucm->dev), node)) {
++			*ucmp = ucm;
++			return 0;
 +		}
-+	} else {
-+		if (dev->ucm.uc->uc_drv->id == id)
-+			return dev->driver->ops;
 +	}
 +
-+	return NULL;
++	return -ENODEV;
 +}
 +
- #if CONFIG_IS_ENABLED(OF_REAL)
- bool device_is_compatible(const struct udevice *dev, const char *compat)
- {
-diff --git a/include/dm/device-internal.h b/include/dm/device-internal.h
-index 9382c6c23de..a129ddecf87 100644
---- a/include/dm/device-internal.h
-+++ b/include/dm/device-internal.h
-@@ -16,6 +16,8 @@
- 
- struct device_node;
- struct driver_info;
-+struct uclass;
-+struct uclass_member;
- struct udevice;
- 
- /*
-@@ -440,4 +442,167 @@ static inline int device_notify(const struct udevice *dev, enum event_t type)
- 
- void dev_int_set_seq(struct udevice *dev, int seq);
- 
-+/**
-+ * alloc_priv() - Allocate private data with optional DMA alignment
-+ *
-+ * @size: Size of the allocation
-+ * @flags: Driver flags (DM_FLAG_ALLOC_PRIV_DMA for DMA-aligned allocation)
-+ * Return: pointer to allocated memory, or NULL on failure
-+ */
-+void *alloc_priv(int size, uint flags);
-+
-+/**
-+ * ucm_alloc_plat() - Allocate uclass platform data for a uclass member
-+ *
-+ * Uses per_device_plat_auto from the uclass driver to allocate uc_plat.
-+ * Called at bind time for both primary and adjunct memberships.
-+ *
-+ * @ucm: uclass member to allocate for
-+ * Return: 0 if OK, -ENOMEM if out of memory
-+ */
-+int ucm_alloc_plat(struct uclass_member *ucm);
-+
-+/**
-+ * ucm_alloc_priv() - Allocate uclass private data for a uclass member
-+ *
-+ * Uses per_device_auto from the uclass driver to allocate uc_priv.
-+ * Called at probe time for both primary and adjunct memberships.
-+ *
-+ * @ucm: uclass member to allocate for
-+ * Return: 0 if OK, -ENOMEM if out of memory
-+ */
-+int ucm_alloc_priv(struct uclass_member *ucm);
-+
-+/**
-+ * ucm_is_primary() - Check if a uclass member is the primary membership
-+ *
-+ * Each device has an embedded uclass_member for its primary uclass.
-+ * Adjunct memberships are separately allocated. This macro distinguishes
-+ * between the two.
-+ *
-+ * @ucm: uclass member to check
-+ * Return: true if @ucm is the device's primary uclass membership
-+ */
-+#define ucm_is_primary(_ucm)	((_ucm) == &(_ucm)->dev->ucm)
-+
-+#if CONFIG_IS_ENABLED(DM_UC_ADJUNCT)
-+/**
-+ * device_bind_adj_() - Bind an adjunct uclass for a device
-+ *
-+ * Allocates a uclass_member, assigns ops, allocates uclass platform data
-+ * and adds the device to the adjunct uclass's member list. Uclass private
-+ * data is allocated later by device_probe_adjs_() at probe time.
-+ *
-+ * @dev: Device to add the adjunct to
-+ * @id: Uclass ID for the adjunct uclass
-+ * @ops: Operations pointer for the adjunct uclass
-+ * Return: 0 if OK, -ve on error
-+ */
-+int device_bind_adj_(struct udevice *dev, enum uclass_id id,
-+		     const void *ops);
-+
-+/**
-+ * device_get_adj_uclass_priv() - Get uclass private data for an adjunct
-+ *
-+ * @dev: Device to query
-+ * @id: Uclass ID of the adjunct uclass
-+ * Return: private data pointer, or NULL if not found
-+ */
-+void *device_get_adj_uclass_priv(struct udevice *dev, enum uclass_id id);
-+
-+/**
-+ * device_get_adj_uclass_plat() - Get uclass platform data for an adjunct
-+ *
-+ * @dev: Device to query
-+ * @id: Uclass ID of the adjunct uclass
-+ * Return: platform data pointer, or NULL if not found
-+ */
-+void *device_get_adj_uclass_plat(struct udevice *dev, enum uclass_id id);
-+
-+/**
-+ * device_probe_adjs_() - Allocate private data for adjunct uclasses
-+ *
-+ * Called during probe to allocate per_device_auto data for each adjunct.
-+ *
-+ * @dev: Device to probe adjuncts for
-+ * Return: 0 if OK, -ve on error
-+ */
-+int device_probe_adjs_(struct udevice *dev);
-+
-+/**
-+ * device_remove_adjs() - Remove adjunct uclasses from a device
-+ *
-+ * Called during remove to free per_device_auto data for each adjunct.
-+ * The adjuncts remain bound.
-+ *
-+ * @dev: Device to remove adjunct private data for
-+ * Return: 0 if OK, -ve on error
-+ */
-+int device_remove_adjs(struct udevice *dev);
-+
-+/**
-+ * device_unbind_adjs() - Unbind all adjuncts from a device
-+ *
-+ * @dev: Device to unbind adjuncts from
-+ * Return: 0 if OK, -ve on error
-+ */
-+int device_unbind_adjs(struct udevice *dev);
-+
-+/**
-+ * device_init_adj() - Initialise the adjunct list for a device
-+ *
-+ * @dev: Device to initialise
-+ */
-+void device_init_adj(struct udevice *dev);
-+
-+/**
-+ * uclass_destroy_adjs() - Destroy all adjuncts in a uclass
-+ *
-+ * @uc: Uclass to clean up
-+ */
-+void uclass_destroy_adjs(struct uclass *uc);
-+#else
-+static inline int device_bind_adj_(struct udevice *dev,
-+				   enum uclass_id id,
-+				   const void *ops)
++int ucm_find_seq(enum uclass_id id, int seq, struct uclass_member **ucmp)
 +{
-+	return -ENOSYS;
-+}
++	struct uclass_member *ucm;
++	int ret;
 +
-+static inline void *device_get_adj_uclass_priv(struct udevice *dev,
-+					       enum uclass_id id)
-+{
-+	return NULL;
-+}
++	*ucmp = NULL;
++	if (seq == -1)
++		return -ENODEV;
 +
-+static inline void *device_get_adj_uclass_plat(struct udevice *dev,
-+					       enum uclass_id id)
-+{
-+	return NULL;
-+}
++	ret = ucm_find_first(id, &ucm);
++	if (ret)
++		return ret;
 +
-+static inline int device_probe_adjs_(struct udevice *dev)
-+{
-+	return 0;
-+}
++	for (; ucm; ucm_find_next(&ucm)) {
++		if (ucm->seq == seq) {
++			*ucmp = ucm;
++			return 0;
++		}
++	}
 +
-+static inline int device_remove_adjs(struct udevice *dev)
-+{
-+	return 0;
-+}
-+
-+static inline int device_unbind_adjs(struct udevice *dev)
-+{
-+	return 0;
-+}
-+
-+static inline void device_init_adj(struct udevice *dev)
-+{
-+}
-+
-+static inline void uclass_destroy_adjs(struct uclass *uc)
-+{
++	return -ENODEV;
 +}
 +#endif /* DM_UC_ADJUNCT */
 +
- #endif
-diff --git a/include/dm/device.h b/include/dm/device.h
-index ebc253397a4..2a78911b942 100644
---- a/include/dm/device.h
-+++ b/include/dm/device.h
-@@ -203,6 +203,9 @@ struct udevice {
- 	struct udevice *parent;
- 	void *priv_;
- 	struct uclass_member ucm;
-+#if CONFIG_IS_ENABLED(DM_UC_ADJUNCT)
-+	struct list_head adj_head;
-+#endif
- 	void *parent_priv_;
- 	struct list_head child_head;
- 	struct list_head sibling_node;
-@@ -422,6 +425,43 @@ struct driver {
- #endif
- };
+ int uclass_find_device_by_namelen(enum uclass_id id, const char *name, int len,
+ 				  struct udevice **devp)
+ {
+@@ -310,12 +530,15 @@ struct udevice *uclass_try_first_device(enum uclass_id id)
+ 	if (!uc || list_empty(&uc->dev_head))
+ 		return NULL;
  
-+/**
-+ * device_get_uclass_ops() - Get the ops for a device in a given uclass
-+ *
-+ * If the device's driver provides ops for the given uclass (either as its
-+ * primary uclass or via an adjunct registration), return them.
-+ *
-+ * @dev: Device to query
-+ * @id: Uclass ID to look up ops for
-+ * Return: ops pointer, or NULL if not found
-+ */
-+const void *device_get_uclass_ops(struct udevice *dev, enum uclass_id id);
++	if (CONFIG_IS_ENABLED(DM_UC_ADJUNCT))
++		return list_first_entry(&uc->dev_head,
++					struct uclass_member, uc_node)->dev;
 +
+ 	return list_first_entry(&uc->dev_head, struct udevice, ucm.uc_node);
+ }
+ 
+ int uclass_find_next_free_seq(struct uclass *uc)
+ {
+-	struct udevice *dev;
+ 	int max = -1;
+ 
+ 	/* If using aliases, start with the highest alias value */
+@@ -323,11 +546,23 @@ int uclass_find_next_free_seq(struct uclass *uc)
+ 	    (uc->uc_drv->flags & DM_UC_FLAG_SEQ_ALIAS))
+ 		max = dev_read_alias_highest_id(uc->uc_drv->name);
+ 
+-	/* Avoid conflict with existing devices */
+-	list_for_each_entry(dev, &uc->dev_head, ucm.uc_node) {
+-		if (dev->ucm.seq > max)
+-			max = dev->ucm.seq;
++	/* Avoid conflict with existing devices and adjuncts */
++	if (CONFIG_IS_ENABLED(DM_UC_ADJUNCT)) {
++		struct uclass_member *ucm;
++
++		list_for_each_entry(ucm, &uc->dev_head, uc_node) {
++			if (ucm->seq > max)
++				max = ucm->seq;
++		}
++	} else {
++		struct udevice *dev;
++
++		list_for_each_entry(dev, &uc->dev_head, ucm.uc_node) {
++			if (dev->ucm.seq > max)
++				max = dev->ucm.seq;
++		}
+ 	}
++
+ 	/*
+ 	 * At this point, max will be -1 if there are no existing aliases or
+ 	 * devices
+@@ -339,7 +574,6 @@ int uclass_find_next_free_seq(struct uclass *uc)
+ int uclass_find_device_by_seq(enum uclass_id id, int seq, struct udevice **devp)
+ {
+ 	struct uclass *uc;
+-	struct udevice *dev;
+ 	int ret;
+ 
+ 	*devp = NULL;
+@@ -350,12 +584,27 @@ int uclass_find_device_by_seq(enum uclass_id id, int seq, struct udevice **devp)
+ 	if (ret)
+ 		return ret;
+ 
+-	uclass_foreach_dev(dev, uc) {
+-		log_debug("   - %d '%s'\n", dev->ucm.seq, dev->name);
+-		if (dev->ucm.seq == seq) {
+-			*devp = dev;
+-			log_debug("   - found\n");
+-			return 0;
++	if (CONFIG_IS_ENABLED(DM_UC_ADJUNCT)) {
++		struct uclass_member *ucm;
++
++		list_for_each_entry(ucm, &uc->dev_head, uc_node) {
++			log_debug("   - %d '%s'\n", ucm->seq, ucm->dev->name);
++			if (ucm->seq == seq) {
++				*devp = ucm->dev;
++				log_debug("   - found\n");
++				return 0;
++			}
++		}
++	} else {
++		struct udevice *dev;
++
++		uclass_foreach_dev(dev, uc) {
++			log_debug("   - %d '%s'\n", dev->ucm.seq, dev->name);
++			if (dev->ucm.seq == seq) {
++				*devp = dev;
++				log_debug("   - found\n");
++				return 0;
++			}
+ 		}
+ 	}
+ 	log_debug("   - not found\n");
+@@ -410,6 +659,7 @@ int uclass_find_device_by_ofnode(enum uclass_id id, ofnode node,
+ 			goto done;
+ 		}
+ 	}
++
+ 	ret = -ENODEV;
+ 
+ done:
+diff --git a/include/dm/uclass-internal.h b/include/dm/uclass-internal.h
+index 9cb3f090271..4328419f6e6 100644
+--- a/include/dm/uclass-internal.h
++++ b/include/dm/uclass-internal.h
+@@ -138,6 +138,10 @@ int uclass_find_device(enum uclass_id id, int index, struct udevice **devp);
+  * The device is not prepared for use - this is an internal function.
+  * The function uclass_get_device_tail() can be used to probe the device.
+  *
++ * Note: this skips adjunct members because it uses struct udevice * as
++ * the cursor. Use uclass_foreach_dev() or ucm_find_first() to include
++ * adjuncts.
++ *
+  * Return: 0 if OK (found or not found), -ve on error
+  */
+ int uclass_find_first_device(enum uclass_id id, struct udevice **devp);
+@@ -149,6 +153,10 @@ int uclass_find_first_device(enum uclass_id id, struct udevice **devp);
+  *
+  * The device is not prepared for use - this is an internal function.
+  * The function uclass_get_device_tail() can be used to probe the device.
++ *
++ * Note: this skips adjunct members because it uses struct udevice * as
++ * the cursor. Use uclass_foreach_dev() or ucm_find_next() to include
++ * adjuncts.
+  */
+ void uclass_find_next_device(struct udevice **devp);
+ 
+diff --git a/include/dm/uclass.h b/include/dm/uclass.h
+index ad49d675570..d99b76c9404 100644
+--- a/include/dm/uclass.h
++++ b/include/dm/uclass.h
+@@ -362,12 +362,15 @@ int uclass_get_device_by_endpoint(enum uclass_id class_id, struct udevice *dev,
+ /**
+  * uclass_first_device() - Get the first device in a uclass
+  *
+- * The device returned is probed if necessary, and ready for use
+- * Devices that fail to probe are skipped
++ * The device returned is probed if necessary, and ready for use.
++ * Devices that fail to probe are skipped.
+  *
+  * This function is useful to start iterating through a list of devices which
+  * are functioning correctly and can be probed.
+  *
++ * Note: this skips adjunct members. Use uclass_foreach_dev_probe() or
++ * ucm_first() to include adjuncts.
++ *
+  * @id: Uclass ID to look up
+  * @devp: Returns pointer to the first device in that uclass if no error
+  * occurred, or NULL if there is no usable device
+@@ -377,12 +380,15 @@ void uclass_first_device(enum uclass_id id, struct udevice **devp);
+ /**
+  * uclass_next_device() - Get the next device in a uclass
+  *
+- * The device returned is probed if necessary, and ready for use
+- * Devices that fail to probe are skipped
++ * The device returned is probed if necessary, and ready for use.
++ * Devices that fail to probe are skipped.
+  *
+  * This function is useful to iterate through a list of devices which
+  * are functioning correctly and can be probed.
+  *
++ * Note: this skips adjunct members. Use uclass_foreach_dev_probe() or
++ * ucm_next() to include adjuncts.
++ *
+  * @devp: On entry, pointer to device to lookup. On exit, returns pointer
+  * to the next device in the uclass if no error occurred, or NULL if there is
+  * no next device
+@@ -393,7 +399,10 @@ void uclass_next_device(struct udevice **devp);
+  * uclass_first_device_err() - Get the first device in a uclass
+  *
+  * The device returned is probed if necessary, and ready for use if no error is
+- * returned
++ * returned.
++ *
++ * Note: this skips adjunct members. Use ucm_first_check() to include
++ * adjuncts.
+  *
+  * @id: Uclass ID to look up
+  * @devp: Returns pointer to the first device in that uclass, or NULL if none
+@@ -405,7 +414,10 @@ int uclass_first_device_err(enum uclass_id id, struct udevice **devp);
+  * uclass_next_device_err() - Get the next device in a uclass
+  *
+  * The device returned is probed if necessary, and ready for use if no error is
+- * returned
++ * returned.
++ *
++ * Note: this skips adjunct members. Use ucm_next_check() to include
++ * adjuncts.
+  *
+  * @devp: On entry, pointer to device to lookup. On exit, returns pointer
+  * to the next device in the uclass if no error occurred, or NULL if
+@@ -418,11 +430,14 @@ int uclass_next_device_err(struct udevice **devp);
+  * uclass_first_device_check() - Get the first device in a uclass
+  *
+  * The device returned is probed if necessary, and ready for use if no error is
+- * returned
++ * returned.
+  *
+  * This function is useful to start iterating through a list of devices which
+  * are functioning correctly and can be probed.
+  *
++ * Note: this skips adjunct members. Use ucm_first_check() to include
++ * adjuncts.
++ *
+  * @id: Uclass ID to look up
+  * @devp: Returns pointer to the first device in that uclass, or NULL if there
+  * is no first device
+@@ -435,11 +450,14 @@ int uclass_first_device_check(enum uclass_id id, struct udevice **devp);
+  * uclass_next_device_check() - Get the next device in a uclass
+  *
+  * The device returned is probed if necessary, and ready for use if no error is
+- * returned
++ * returned.
+  *
+  * This function is useful to start iterating through a list of devices which
+  * are functioning correctly and can be probed.
+  *
++ * Note: this skips adjunct members. Use ucm_next_check() to include
++ * adjuncts.
++ *
+  * @devp: On entry, pointer to device to lookup. On exit, returns pointer
+  * to the next device in the uclass if any
+  * Return: 0 if OK (found or not found), other -ve on error. If an error occurs
+@@ -461,6 +479,120 @@ int uclass_next_device_check(struct udevice **devp);
+ int uclass_first_device_drvdata(enum uclass_id id, ulong driver_data,
+ 				struct udevice **devp);
+ 
++#if CONFIG_IS_ENABLED(DM_UC_ADJUNCT)
 +/**
-+ * device_add_uclass_adj() - Add an adjunct uclass for a device
++ * ucm_find_first() - Find the first uclass member in a uclass
 + *
-+ * Binds the adjunct and, if the device is already probed, also allocates
-+ * uclass private data. This is the main entry point for drivers that need
-+ * to register an adjunct dynamically: it does the right thing regardless of
-+ * whether it is called from bind() or probe()
++ * This returns the first entry in the uclass's member list, including
++ * adjunct registrations. Use ucm->dev to get the device. Unlike
++ * uclass_find_first_device(), this sees adjuncts and provides a cursor
++ * that ucm_find_next() can advance correctly.
 + *
-+ * @dev: Device to add the adjunct to
-+ * @id: Uclass ID for the adjunct uclass
-+ * @ops: Operations pointer for the adjunct uclass
++ * @id: Uclass ID to look up
++ * @ucmp: Returns pointer to the first uclass member, or NULL if none
 + * Return: 0 if OK, -ve on error
 + */
-+#if CONFIG_IS_ENABLED(DM_UC_ADJUNCT)
-+int device_add_uclass_adj(struct udevice *dev, enum uclass_id id,
-+			  const void *ops);
-+#else
-+static inline int device_add_uclass_adj(struct udevice *dev,
-+					enum uclass_id id,
-+					const void *ops)
-+{
-+	return -ENOSYS;
-+}
-+#endif
++int ucm_find_first(enum uclass_id id, struct uclass_member **ucmp);
++
++/**
++ * ucm_find_next() - Advance to the next uclass member
++ *
++ * @ucmp: On entry, pointer to current member. On exit, pointer to next
++ * member, or NULL if at end
++ */
++void ucm_find_next(struct uclass_member **ucmp);
++
++/**
++ * ucm_first() - Get the first probed member of a uclass
++ *
++ * Members that fail to probe are skipped.
++ *
++ * @id: Uclass ID to look up
++ * Return: Pointer to the first usable member, or NULL if none
++ */
++struct uclass_member *ucm_first(enum uclass_id id);
++
++/**
++ * ucm_next() - Get the next probed member of a uclass
++ *
++ * Members that fail to probe are skipped.
++ *
++ * @ucm: Current member
++ * Return: Pointer to the next usable member, or NULL if at end
++ */
++struct uclass_member *ucm_next(struct uclass_member *ucm);
++
++/**
++ * ucm_first_check() - Get the first probed member of a uclass
++ *
++ * The device is probed if necessary. On probe error the caller can still
++ * advance to the next member with ucm_next_check().
++ *
++ * @id: Uclass ID to look up
++ * @ucmp: Returns pointer to the first member, or NULL if none
++ * Return: 0 if OK (found or not found), other -ve on error
++ */
++int ucm_first_check(enum uclass_id id, struct uclass_member **ucmp);
++
++/**
++ * ucm_next_check() - Get the next probed member of a uclass
++ *
++ * @ucmp: On entry, pointer to current member. On exit, pointer to next
++ * member, or NULL if at end
++ * Return: 0 if OK (found or not found), other -ve on error
++ */
++int ucm_next_check(struct uclass_member **ucmp);
++
++/**
++ * ucm_first_drvdata() - Find the first member with given driver data
++ *
++ * @id: Uclass ID to look up
++ * @driver_data: Driver data to search for
++ * @ucmp: Returns pointer to the first matching member, if found
++ * Return: 0 if found, -ENODEV if not found, other -ve on error
++ */
++int ucm_first_drvdata(enum uclass_id id, ulong driver_data,
++		      struct uclass_member **ucmp);
++
++/**
++ * ucm_try_first() - See if there is a member for a uclass
++ *
++ * Returns the first member without probing. If the uclass does not exist,
++ * returns NULL.
++ *
++ * @id: Uclass ID to check
++ * Return: Pointer to first member, or NULL if none
++ */
++struct uclass_member *ucm_try_first(enum uclass_id id);
++
++/**
++ * ucm_find_seq() - Find a uclass member by sequence number
++ *
++ * Searches through all members of the given uclass (including adjuncts)
++ * for one with the specified sequence number.
++ *
++ * @id: Uclass ID to look up
++ * @seq: Sequence number to find
++ * @ucmp: Returns pointer to the matching member, or NULL if not found
++ * Return: 0 if found, -ENODEV if not found, other -ve on error
++ */
++int ucm_find_seq(enum uclass_id id, int seq, struct uclass_member **ucmp);
++
++/**
++ * ucm_find_by_ofnode() - Find a uclass member by device-tree node
++ *
++ * Searches through all members of the given uclass (including adjuncts)
++ * for one whose device matches the specified ofnode.
++ *
++ * @id: Uclass ID to look up
++ * @node: Device-tree node to find
++ * @ucmp: Returns pointer to the matching member, or NULL if not found
++ * Return: 0 if found, -ENODEV if not found, other -ve on error
++ */
++int ucm_find_by_ofnode(enum uclass_id id, ofnode node,
++		       struct uclass_member **ucmp);
++#endif /* DM_UC_ADJUNCT */
 +
  /**
-  * U_BOOT_DRIVER() - Declare a new U-Boot driver
-  * @__name: name of the driver
+  * uclass_try_first_device()- See if there is a device for a uclass
+  *
+@@ -478,6 +610,9 @@ struct udevice *uclass_try_first_device(enum uclass_id id);
+  * This function probes all devices associated with a uclass by
+  * looking for its ID.
+  *
++ * Note: this skips adjunct members. Use uclass_foreach_dev_probe() to
++ * include adjuncts.
++ *
+  * @id: uclass ID to look up
+  * Return: 0 if OK, other -ve on error
+  */
+@@ -506,49 +641,86 @@ int uclass_id_count(enum uclass_id id);
+  */
+ #define uclass_id_foreach_dev(id, pos, uc) \
+ 	if (!uclass_get(id, &uc)) \
+-		list_for_each_entry(pos, &uc->dev_head, ucm.uc_node)
++		uclass_foreach_dev(pos, uc)
++
++#if CONFIG_IS_ENABLED(DM_UC_ADJUNCT)
++/* Get the first uclass_member from a uclass, or NULL if empty */
++#define _ucm_first(uc)							\
++	(list_empty(&(uc)->dev_head) ? NULL :				\
++	 list_first_entry(&(uc)->dev_head, struct uclass_member, uc_node))
++
++/* Get the device from a uclass_member pointer, or NULL */
++#define _ucm_to_dev(_ucm)	((_ucm) ? (_ucm)->dev : NULL)
++
++/* Get the first primary uclass_member, skipping adjuncts */
++struct uclass_member *_ucm_first_primary(struct uclass *uc);
++
++/* Advance to the next primary uclass_member, skipping adjuncts */
++void _ucm_next_primary(struct uclass_member **ucmp);
+ 
+ /**
+  * uclass_foreach_dev() - iterate through devices of a given uclass
+  *
+  * This creates a for() loop which works through the available devices in
+- * a uclass in order from start to end.
++ * a uclass in order from start to end, including adjunct memberships.
+  *
+  * @pos: struct udevice * to hold the current device. Set to NULL when there
+  * are no more devices.
+  * @uc: uclass to scan (`struct uclass *`)
+  */
+-#define uclass_foreach_dev(pos, uc)	\
+-	list_for_each_entry(pos, &uc->dev_head, ucm.uc_node)
++#define uclass_foreach_dev(pos, uc)					\
++	for (struct uclass_member *_ucm = _ucm_first(uc);		\
++	     (pos) = _ucm_to_dev(_ucm), pos;				\
++	     ucm_find_next(&_ucm))
+ 
+ /**
+  * uclass_foreach_dev_safe() - safely iterate through devices of a given uclass
+  *
+  * This creates a for() loop which works through the available devices in
+- * a uclass in order from start to end. Inside the loop, it is safe to remove
+- * @pos if required.
++ * a uclass in order from start to end, including adjunct memberships.
++ * Inside the loop, it is safe to remove @pos if required.
+  *
+  * @pos: struct udevice * to hold the current device. Set to NULL when there
+  * are no more devices.
+- * @next: struct udevice * to hold the next next
++ * @next: struct udevice * to hold the next device
+  * @uc: uclass to scan (`struct uclass *`)
+  */
+-#define uclass_foreach_dev_safe(pos, next, uc)	\
+-	list_for_each_entry_safe(pos, next, &uc->dev_head, ucm.uc_node)
++#define uclass_foreach_dev_safe(pos, next, uc)				\
++	for (struct uclass_member *_ucm = _ucm_first(uc), *_ucm_n;	\
++	     (pos) = _ucm_to_dev(_ucm),				\
++	     (next) = pos ? (_ucm_n = _ucm, ucm_find_next(&_ucm_n),	\
++			     _ucm_to_dev(_ucm_n)) : NULL,		\
++	     pos;							\
++	     _ucm = _ucm_n)
+ 
+ /**
+  * uclass_foreach_dev_probe() - iterate through devices of a given uclass ID
+  *
+  * This creates a for() loop which works through the available devices in
+- * a uclass in order from start to end. Devices are probed if necessary,
+- * and ready for use.
++ * a uclass in order from start to end, including adjunct memberships.
++ * Devices are probed if necessary, and ready for use.
+  *
+  * @id: Uclass ID
+  * @dev: struct udevice * to hold the current device. Set to NULL when there
+  * are no more devices.
+  */
++#define uclass_foreach_dev_probe(id, dev)				\
++	for (struct uclass_member *_ucm = ucm_first(id);		\
++	     (dev) = _ucm_to_dev(_ucm), dev;				\
++	     _ucm = ucm_next(_ucm))
++
++#else /* !DM_UC_ADJUNCT */
++
++#define uclass_foreach_dev(pos, uc)	\
++	list_for_each_entry(pos, &(uc)->dev_head, ucm.uc_node)
++
++#define uclass_foreach_dev_safe(pos, next, uc)	\
++	list_for_each_entry_safe(pos, next, &(uc)->dev_head, ucm.uc_node)
++
+ #define uclass_foreach_dev_probe(id, dev)	\
+ 	for (uclass_first_device(id, &dev); dev; \
+ 	     uclass_next_device(&dev))
+ 
++#endif /* DM_UC_ADJUNCT */
++
+ #endif
 -- 
 2.43.0
 
