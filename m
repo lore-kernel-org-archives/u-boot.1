@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 438581091930
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:04:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77A65109192C
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:04:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9DF28421C;
-	Fri, 20 Mar 2026 00:01:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3C92E84223;
+	Fri, 20 Mar 2026 00:01:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MoirSXu7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IATjc6t+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA2C483FC0; Thu, 19 Mar 2026 21:58:16 +0100 (CET)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id 5208683FDE; Thu, 19 Mar 2026 21:58:27 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C825C83F8A
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:58:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CE2C83FC0
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:58:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-43b48ac2727so992094f8f.3
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:58:14 -0700 (PDT)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-486b96760easo15182555e9.2
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:58:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773953894; x=1774558694; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1773953903; x=1774558703; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=pMnsXnuvD55VljGKPUuKjkZRHIGIxyT6zTMvwS8mH4I=;
- b=MoirSXu7AUDfCC9aSrLvdt2lX6aJq1+ZeRqZ4pUPPEMc5efQbvLxrLr0WH7YEX2r62
- xO0y8kJ7gOayOX+CXvFWWGdTLv4hnYtQ3isggCIwcfASnuS5mBcwPk6zxlsQ8z3Ae8lZ
- B6GkfF75n95EmL4TF6OqusDOcVXIPXJw0ze/9WENr/F15TQ352yM34M2iSRpPRZBRRLD
- iR+pVi9IguA993F2E5KtNYaK4XcZ/XXUL0uiRdPmWGEoIaKt0upQBSia/K6qcdUMmay7
- MUxqiVR7dh10f4rsxnWVHgzjJdgNnLMV0h3kROcSEZJenENzoklkNDiw8wZCw2iRxTZL
- dQlA==
+ :reply-to; bh=Y7YG64DnCuy2McZZ3OS1s5OitYK10LkBi72/Tt+MRRY=;
+ b=IATjc6t+hy9lHoLYQNZKV6c00JP2A8J7WhVWGO/SfgTjwLBBGPTyVZam38SSMDzHt3
+ oJYd5pvaF8WpcmG5ghiZnBXsMqKGye8Wx34ekSpoCM8hZrdvuTfCn7cKZMBNCmD9zkSP
+ iFTSN/9GyzdXWA8uF+aly1RVXe4+icfauT0WToyN6kp+OjF7UFKgQKzjX/1n6oxf9DCt
+ jrKvAkFt5xZ6tmyo3w59styGp/BTrw1Fsqlon08ISFjwt9QTgkpEc4uQPK1a6n+jJXQf
+ GCbjJvBnqcPwpOwQEWWMgAdwrTMr8Mcc69n7eDmU6dSGEuNVSpbi6RTy4QjVBEInYmXo
+ Bcuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773953894; x=1774558694;
+ d=1e100.net; s=20251104; t=1773953903; x=1774558703;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=pMnsXnuvD55VljGKPUuKjkZRHIGIxyT6zTMvwS8mH4I=;
- b=WeDnaG/JSXt+Nitz+Z01LgTvVt6zwbl/teXR1dmrLEKzBA10l4F3xSeUr+sAAxJxbE
- LC19YT5sEHqpiKHwqDhgE3VqIFNatLOnsGd3WEh3M6287vkf6AisE7EZe6pIPFx4V3KZ
- wr00UyrBBdJd2hUF2j5FoX99+dD646UeGZD52UQRNVIumvqS+ec8z9NlOQ/tkrO+gitK
- NOe83MyPL+j3SDG4Uqcg1sSxgAS72TJI4eb8uTVf0R8K+F8mT4e9II4xKf84eWCD6f7/
- z6BpvcWmHqM8POEtIf4dXJ9SWWIaxzYVZ5SoyI8p3c+U6RHnjpgZI9XaDA4zTpVjQsh2
- qHXw==
-X-Gm-Message-State: AOJu0Yxl7qyptawPWAO6lglthXeWAx0F6KcUCbWECTu7b+wAxU4urld6
- OBe090OtGpQhygIlWTdO9uQJRYeKc6giJeW/4A343BJ26SpX845Fy/tlVRQq4BVPIoY=
-X-Gm-Gg: ATEYQzwhPKRS3TTs4rtjaRZyKdIJhIK2XbUmPmGB7xJ5F1Q3MUF6YNA5yP613LukcZ4
- JwO7dE/WsQLUVkoyO8e8GygGejme/p3Zw3/CeUevMJlmzpdAaherj0PbUrcCWOpGZVCMTv9HjLd
- 1e2HxKbyImI+kNMaWOAdbet6ejshTj9Vq2vEB3LJc4AMIuzME4rWhWHp5Rh3abNhy+e9dCCKryb
- HAnnO8ASdtqnzdQ4DV1ewkzCQsRfNMi3ZImrR9gPCXqY6VPEtpQuzp4tNGexUO5Org4LLsIXKFY
- MXlzErHJfvanDm3uhti90uBJohdavJM6EsKhPXo4ktIwmxXSTLzaHJLscyHCoL61StGhgQZyBSY
- fNexHFaHMr3i9Qrp3kUJi9SZYakInZsfBR+0bFypV35vktf7eSU1F5FPI4NSe8Um20K7laM+Rcu
- 1E+Ophlxmp4nPlI08NYnttTZSGXQ16Y6aib/w90MxiY+uc9PfbgN1k4LtUVbovNoCzQ64=
-X-Received: by 2002:a5d:584c:0:b0:43b:498f:dcf0 with SMTP id
- ffacd0b85a97d-43b642430ddmr1291132f8f.9.1773953893945; 
- Thu, 19 Mar 2026 13:58:13 -0700 (PDT)
+ bh=Y7YG64DnCuy2McZZ3OS1s5OitYK10LkBi72/Tt+MRRY=;
+ b=Q8LVtN1HTib+I9/aMymxF4a5EzCrZ9/J8mZxwhl69ssWDG7MgsQmjlUHoB3taOAozu
+ sqWxswhXHBMUPFt6BT2WsG1/eyD1Qc8Mhs4GTZw9NNtFqqthhrpKPg1QlrQcn9CSXt/G
+ HIT0kLP0AK3n8xYOs6BPX/2EEP6rUkWU+jWC2GKg8De6Hg/IhBtkFf6Wk77wKPG/0Z3m
+ TUB1LOe0v1WsQWsA04TG8tSevBplXtenGNa9l/GESZotJWvpTvB75FXpH+19aQDMhDUP
+ MGzyWauDGNomkkc87A/PpiUGLZv4fn72BgTgDqfKBYocrxJ1kD+8JnBQ5o7W8rDeJLmb
+ BhAg==
+X-Gm-Message-State: AOJu0YxDnueerjDOEX2YZOtP++F61/2TdOVqsygHdGMF9VhCjCIUXRzB
+ Oxb/uThVxxY3/5n+Q2Unzs6VMEZDpc0q0AT0DReX+z5BCGPWdgnPkHsmLQtWKQDa+FU=
+X-Gm-Gg: ATEYQzy+bP6s5lqRLDON/U+YYnSYJUsxfQIdOmW70auv8wNbfY/+8AFYLjCPMgsiK3r
+ vY0VzrGgFM0oAjl73n8gH2Kf+ZyygY9uC0julpcYXrJUOzgHGwHloLJDCPjWyqfX6mWchsobAiE
+ nVEMyF4pCG96xTWQT673eAYkMInQo9KBZUWVppCECJCpg9dqshNvzcq5kolF2yi20oAjLd9AHZn
+ gPQWY3mNcOJlOTgj0j7JxcGUo+sszHbyKaw8Bm62H43ofBq6AIvS//iqAVd1UjqKSn6xU7tsOQU
+ rqoYgtK31ap40zrfZrtkgZ9M8Z2jsSws03iIqXhXDcjyLXTtJyshJd9Eb0ExP69DSzW6trETIaZ
+ TDZrk0d2WefdZLniHBWRakXfOr0G0v4p7nJNj3x1GC/tF8WZBUSvBZ1VxbfAJ0/ox1FfVyV1dvE
+ ng61Ag9ug0aKRHq45bMYNY2n/UlcFuoqAxiCd9G/DOMcKfa1UdjGVE79HRn1IayRFB3p4=
+X-Received: by 2002:a05:600c:8b31:b0:485:9a50:3369 with SMTP id
+ 5b1f17b1804b1-486fee304c4mr7491445e9.29.1773953902485; 
+ Thu, 19 Mar 2026 13:58:22 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd39.dip0.t-ipconnect.de.
  [79.195.221.57]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.58.10
+ ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.58.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:58:13 -0700 (PDT)
+ Thu, 19 Mar 2026 13:58:21 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 19 Mar 2026 21:56:42 +0100
-Subject: [PATCH RFC 20/40] clk: make clk_get_parent_rate return signed long
+Date: Thu, 19 Mar 2026 21:56:44 +0100
+Subject: [PATCH RFC 22/40] clk: move clock flags to common clk-provider.h
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260319-casey-ccf-upstream-v1-20-4df2ee2226da@linaro.org>
+Message-Id: <20260319-casey-ccf-upstream-v1-22-4df2ee2226da@linaro.org>
 References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
@@ -160,13 +160,13 @@ Cc: Tom Rini <trini@konsulko.com>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>, 
  Paul Sajna <sajattack@postmarketos.org>, Marek Vasut <marex@denx.de>
 X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1290;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5656;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=FTNIXLG8hV/CteP0oaof3lhlj3wmvNeIdcnwzCFT8d4=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yfw7mCbc33ZCx3/3ocMsxyR03Sw8WPiemt5qSp2zq
- vw546vPHaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAimnMYGXYc/3noRGfbFP3l
- v1XnL+WqEd45d2/0FAa7Ncr3V3/52lDE8E+3+cgsRSbdb08K3F9kZc+QvJgiUb7YuzByqtTzk3O
- /3isGAA==
+ bh=pyXAUexLV67NxbGLlNdz7O544IZi4ffGh3W9T1xKaV0=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yfzx1pPc5kyeEqS2Ry9LVzppW71iUWWD4oLmxp0ln
+ +2KysQ6SlkYBDkYZMUUWcRPLLNsWnvZXmP7ggswc1iZQIYwcHEKwESMKxh+MTksTxGIUHi72dUm
+ 3aPboKi5sKs96wML69Jz3cl/J1qkMzLsevraySBDSj1gmsaX6iqr1oiimabzFXznXEq3avsw6Xo
+ RAA==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Fri, 20 Mar 2026 00:01:15 +0100
@@ -186,45 +186,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function can return negative values, update its prototype to
-reflect this and avoid potential underflow issues with error conditions.
+These are the same between uccf and ccf_full, move them out to
+clk-provider.h so we can ensure they stay in sync.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/clk/clk-uclass.c | 2 +-
- include/clk.h            | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ include/linux/clk-provider-ccf_full.h | 24 ------------------------
+ include/linux/clk-provider-uccf.h     | 24 ------------------------
+ include/linux/clk-provider.h          | 24 ++++++++++++++++++++++++
+ 3 files changed, 24 insertions(+), 48 deletions(-)
 
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index db4f056e4816..095329e25f15 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -514,9 +514,9 @@ struct clk *clk_get_parent(struct clk *clk)
+diff --git a/include/linux/clk-provider-ccf_full.h b/include/linux/clk-provider-ccf_full.h
+index dfc2049feee5..0e160b13b3b2 100644
+--- a/include/linux/clk-provider-ccf_full.h
++++ b/include/linux/clk-provider-ccf_full.h
+@@ -9,32 +9,8 @@
+ #include <linux/bitops.h>
+ #include <linux/err.h>
+ #include <clk-uclass.h>
  
- 	return pclk;
+-/*
+- * flags used across common struct clk.  these flags should only affect the
+- * top-level framework.  custom flags for dealing with hardware specifics
+- * belong in struct clk_foo
+- *
+- * Please update clk_flags[] in drivers/clk/clk.c when making changes here!
+- */
+-#define CLK_SET_RATE_GATE	BIT(0) /* must be gated across rate change */
+-#define CLK_SET_PARENT_GATE	BIT(1) /* must be gated across re-parent */
+-#define CLK_SET_RATE_PARENT	BIT(2) /* propagate rate change up one level */
+-#define CLK_IGNORE_UNUSED	BIT(3) /* do not gate even if unused */
+-				/* unused */
+-				/* unused */
+-#define CLK_GET_RATE_NOCACHE	BIT(6) /* do not use the cached clk rate */
+-#define CLK_SET_RATE_NO_REPARENT BIT(7) /* don't re-parent on rate change */
+-#define CLK_GET_ACCURACY_NOCACHE BIT(8) /* do not use the cached clk accuracy */
+-#define CLK_RECALC_NEW_RATES	BIT(9) /* recalc rates after notifications */
+-#define CLK_SET_RATE_UNGATE	BIT(10) /* clock needs to run to set rate */
+-#define CLK_IS_CRITICAL		BIT(11) /* do not gate, ever */
+-/* parents need enable during gate/ungate, set rate and re-parent */
+-#define CLK_OPS_PARENT_ENABLE	BIT(12)
+-/* duty cycle call may be forwarded to the parent clock */
+-#define CLK_DUTY_CYCLE_PARENT	BIT(13)
+-
+ struct clk;
+ struct clk_hw;
+ struct clk_core;
+ struct dentry;
+diff --git a/include/linux/clk-provider-uccf.h b/include/linux/clk-provider-uccf.h
+index bfd16fbdfc67..63b8df663a7a 100644
+--- a/include/linux/clk-provider-uccf.h
++++ b/include/linux/clk-provider-uccf.h
+@@ -27,32 +27,8 @@ static inline void clk_dm(ulong id, struct clk *clk)
+ 	if (!IS_ERR(clk))
+ 		clk->id = CLK_ID(clk->dev, id);
  }
  
--ulong clk_get_parent_rate(struct clk *clk)
-+long clk_get_parent_rate(struct clk *clk)
- {
- 	const struct clk_ops_uboot *ops;
- 	struct clk *pclk;
- 
-diff --git a/include/clk.h b/include/clk.h
-index 3cd080b43264..0520032f692c 100644
---- a/include/clk.h
-+++ b/include/clk.h
-@@ -468,9 +468,9 @@ struct clk *clk_get_parent(struct clk *clk);
-  *		clk_request/get_by_*().
-  *
-  * Return: clock rate in Hz, or -ve error code.
+-/*
+- * flags used across common struct clk.  these flags should only affect the
+- * top-level framework.  custom flags for dealing with hardware specifics
+- * belong in struct clk_foo
+- *
+- * Please update clk_flags[] in drivers/clk/clk.c when making changes here!
+- */
+-#define CLK_SET_RATE_GATE	BIT(0) /* must be gated across rate change */
+-#define CLK_SET_PARENT_GATE	BIT(1) /* must be gated across re-parent */
+-#define CLK_SET_RATE_PARENT	BIT(2) /* propagate rate change up one level */
+-#define CLK_IGNORE_UNUSED	BIT(3) /* do not gate even if unused */
+-				/* unused */
+-#define CLK_IS_BASIC		BIT(5) /* Basic clk, can't do a to_clk_foo() */
+-#define CLK_GET_RATE_NOCACHE	BIT(6) /* do not use the cached clk rate */
+-#define CLK_SET_RATE_NO_REPARENT BIT(7) /* don't re-parent on rate change */
+-#define CLK_GET_ACCURACY_NOCACHE BIT(8) /* do not use the cached clk accuracy */
+-#define CLK_RECALC_NEW_RATES	BIT(9) /* recalc rates after notifications */
+-#define CLK_SET_RATE_UNGATE	BIT(10) /* clock needs to run to set rate */
+-#define CLK_IS_CRITICAL		BIT(11) /* do not gate, ever */
+-/* parents need enable during gate/ungate, set rate and re-parent */
+-#define CLK_OPS_PARENT_ENABLE	BIT(12)
+-/* duty cycle call may be forwarded to the parent clock */
+-#define CLK_DUTY_CYCLE_PARENT	BIT(13)
+-
+ #define CLK_MUX_INDEX_ONE		BIT(0)
+ #define CLK_MUX_INDEX_BIT		BIT(1)
+ #define CLK_MUX_HIWORD_MASK		BIT(2)
+ #define CLK_MUX_READ_ONLY		BIT(3) /* mux can't be changed */
+diff --git a/include/linux/clk-provider.h b/include/linux/clk-provider.h
+index 1140c2b10ac2..4fcdb5a86799 100644
+--- a/include/linux/clk-provider.h
++++ b/include/linux/clk-provider.h
+@@ -8,8 +8,32 @@
   */
--ulong clk_get_parent_rate(struct clk *clk);
-+long clk_get_parent_rate(struct clk *clk);
+ #ifndef __LINUX_CLK_PROVIDER_H
+ #define __LINUX_CLK_PROVIDER_H
  
- /**
-  * clk_round_rate() - Adjust a rate to the exact rate a clock can provide
-  * @clk: A clock struct that was previously successfully requested by
++/*
++ * flags used across common struct clk.  these flags should only affect the
++ * top-level framework.  custom flags for dealing with hardware specifics
++ * belong in struct clk_foo
++ *
++ * Please update clk_flags[] in drivers/clk/clk.c when making changes here!
++ */
++#define CLK_SET_RATE_GATE	BIT(0) /* must be gated across rate change */
++#define CLK_SET_PARENT_GATE	BIT(1) /* must be gated across re-parent */
++#define CLK_SET_RATE_PARENT	BIT(2) /* propagate rate change up one level */
++#define CLK_IGNORE_UNUSED	BIT(3) /* do not gate even if unused */
++				/* unused */
++				/* unused */
++#define CLK_GET_RATE_NOCACHE	BIT(6) /* do not use the cached clk rate */
++#define CLK_SET_RATE_NO_REPARENT BIT(7) /* don't re-parent on rate change */
++#define CLK_GET_ACCURACY_NOCACHE BIT(8) /* do not use the cached clk accuracy */
++#define CLK_RECALC_NEW_RATES	BIT(9) /* recalc rates after notifications */
++#define CLK_SET_RATE_UNGATE	BIT(10) /* clock needs to run to set rate */
++#define CLK_IS_CRITICAL		BIT(11) /* do not gate, ever */
++/* parents need enable during gate/ungate, set rate and re-parent */
++#define CLK_OPS_PARENT_ENABLE	BIT(12)
++/* duty cycle call may be forwarded to the parent clock */
++#define CLK_DUTY_CYCLE_PARENT	BIT(13)
++
+ /*
+  * U-Boot: for compatibility include the correct clk-provider.h
+  * for either uccf (U-Boot CCF) or ccf_full (Linux CCF)
+  */
 
 -- 
 2.51.0
