@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30BC61091930
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:06:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73379109192C
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:06:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 247EB842CE;
-	Fri, 20 Mar 2026 00:01:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 95F73841DA;
+	Fri, 20 Mar 2026 00:01:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U2wlMhs6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ICLNcyRD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DE7383FC5; Thu, 19 Mar 2026 21:58:53 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id A76C083FDE; Thu, 19 Mar 2026 21:58:56 +0100 (CET)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C162983F8A
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:58:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 97C8683F8A
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:58:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-43b40fb7f95so1259795f8f.3
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:58:50 -0700 (PDT)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-43b3f91a7abso774538f8f.1
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:58:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773953930; x=1774558730; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1773953934; x=1774558734; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=W/j2uMnTg/v+H0o2+8/3nG9oiYMW5737YbRaZ6agcA0=;
- b=U2wlMhs6gd7rKWjzRxDbQu3jmIqwNd8ZeT1ZlqZYf1lbQB0+OG4rd/YuYXtgACwtqB
- zOp1QQ9kOVvStdov2LlOrnMCLBCB4sqXNhF5l1cRdLg5uNjxzgDQiFNsFU8bAaw8hJqb
- 3NeggtTbHGTsM5pNu8XXPuq8A6/l4kbZVia/QzfLgBxDPifQG1h3ihqT8pVAC98DvmUn
- 6WejEvD8xw3uuF8LqWFtmwdAkvKXdm9o/IKL/ZpD37XKbKSRqP2WV7VDL0Gwhg1GbbGr
- HrBaboICAbN78QYd4AaQtsTRnujigsCtoOxoaeL5oeS44/gyu+0TTUP5O/Q1fXT/OeQT
- i7CA==
+ :reply-to; bh=wMQa1ttISfPeBgePfdbUE+BNee4MFSE9e0gD8HsJuBk=;
+ b=ICLNcyRDSIvK8ZXUe+vSHKj+tEFV2hZPSqeSn3nT/Jbm8coEOmOpkTx7fTaJfsBt/0
+ 9AE9LdMki+O6fAeDQ+RprYmqxQb4ZAQIzp6EAUbJvEUuCdSTeHqqztlgdqXo8GLQm2h6
+ 9sWwKeVKFpS3BA4CgDWNZZLT+4BWF008MjjArFDVldD/TYuSpk/ulVjKMlgkGYAnNU0F
+ KGqG7a5x9MDFVH1sizV9J7JlfNq+BkEDcSh8PkXuzmB/LVCNVcQdDNEnj/ZMOy5r8ViB
+ YivTZgF6USlsqOC5URnINWHGWxKM3wuKY0uVaiQKC5oC5e1+S4rcOCX+YhrAjqMRcD26
+ VD8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773953930; x=1774558730;
+ d=1e100.net; s=20251104; t=1773953934; x=1774558734;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=W/j2uMnTg/v+H0o2+8/3nG9oiYMW5737YbRaZ6agcA0=;
- b=qksOV+cN5MdLcdSivuiLOErz5gEpsiOY0pajdnDH9T8eKeYiY0rYqhp23Z46ER0v+I
- tgUptCMSo/yIXwDG1+iHmibCp+koDBpF6HwQqBwbDJ5MU1hsMF6Y3HZGNF1MXZi3MzkX
- xaYD3rWQ92227yP24VmWb0vZYZJSrhMq/AlHlJW2H/BQSvpAIuOBPIZwQJH/8R7DgXPo
- tNEOcyd/EzdcU7BVEVjjJUWjWV12kZ3TT83zwbd6+JKAmZ0mvdyNz3eCP8LdkqqK6wzb
- dlYh2mUXpqi2kN70nPKoIBIbCtTVQjkcHb0/MpWnm9HqXyNZyvkjbYMPi53SOUDy1XJE
- cqLw==
-X-Gm-Message-State: AOJu0Yzh2WSRkWJp6n9Yz8jlTRtjUJI4Sy5gIIO/g0Q/XJ/n/24/BZ7m
- 5m5++P0ytHhSBQo7voDTrtzLcq1+6+CNINHHW5RBffQ+rL1A1zB458zT5MKgLVuzxyo=
-X-Gm-Gg: ATEYQzxv8KCc4b7CwHid0px7kIaFgprxDi2RyhfI3TYMk0/tAuymyz4Gjyd2IKC3fMp
- 32G7zXrk3ez10LdLDsnD2bDnTpw335WpBZnbZNz/BK53KzMZLY8r9vukfV6dwd7piHxoASkX4AJ
- znudz4bGPhGMSjH+pSxxf9FBGozc2ZKVPjEYqnx4VcIxv3Lr2RDRsuBx4wXbBuH+eaOTQiqYr3d
- fzAiKwiYET/hFcXBGqT0GS2qBQqus/k6QQ5QqKuJjsugorG/0XWFzt+GxVD1/tOg7KU1vi8x3Ek
- JOL8KIysSr54xHVTVxZn/dgc+9qHSK7pWPDv1SyR3gvHOiGVik9ke+kHToVlkPRAvYaGMqcd/zT
- edUEAXAP9W9vd1lyEuH5ZJKG67uIHJkpRzx+hGsWKh+r+OASlqx1vNMKgE6aCEmOwwM4QJZqjTU
- Fp/GEu16FczzAS9DOOkbKUNjjE2SeFXc1ltkFDZVOkPU9m69P0fQ0F2oyoq5/554+ojqI=
-X-Received: by 2002:a05:6000:26c3:b0:43b:45d1:f438 with SMTP id
- ffacd0b85a97d-43b64234722mr1313859f8f.3.1773953929883; 
- Thu, 19 Mar 2026 13:58:49 -0700 (PDT)
+ bh=wMQa1ttISfPeBgePfdbUE+BNee4MFSE9e0gD8HsJuBk=;
+ b=f6I8DhhshldWufvClnoOacAinL6NPpgamH3S1tjfVxZsl2Nr+V7qNk5kWZggxshfZ+
+ wVXZT1xGGA+8zPXGIILBmugaJAa9NANr8JbjXXzsDD2rvIeQqhbtG8JABtwgp00Wx9fz
+ tBB59mfFCCqAEVN7jEOgum3pe4ut53tSY5W4ABLRkUr/W/YEGoO60WykvnqncOxx/cSV
+ H7/oS14Y7yzKNLrI8eqxout7INDy29JWI5do7yZ5U9wDcmRt/LHn4aPsN0tqzfV5sIf4
+ 18GEfxbIRialNcOfdW2FZUZeVPGie+BeA1AOQOdTdEy1JWNsPLHMQRjiztTU8RIC4ZyO
+ aPbA==
+X-Gm-Message-State: AOJu0YxJ4KXbOnYlWZ9akSWKDrmTqc0T8BQ//iRgPZn5SWgWX/tr2Zui
+ gfqpt1kec+SE3jklBy+a4xGC/3XoQHbNLlnJrerj3kwh/y4Xy1g2YYP26o+wSbeKreY=
+X-Gm-Gg: ATEYQzxjngNFWP9+qHjI0Aqm4IgF+Juw3tS/8Jq8PRQKSh7WpQjBHLMsCux73xp5G6S
+ zSrqQR+qam2ccWMp5yk26MUW8Ywpf7nxj+i5d7npI48lUDloSnXeU42OR5y+KvKp+8xqF7ClHVg
+ g1hZde3ufxvFxPdekhAYBZbbiOKcpbmYfwxEvIfMID+Wwu2fvr5VomjfTgur355+vHMwYded5k8
+ gmIbfqRyZEW7owWxIn306MEFv1yOk8KJLBHNhfgYKB15cRc9Lr7B94Gc93fJe2XYQyHl1TZd4Aw
+ qn4SsOcGithoXrb9Ww1RXcxBIWM4XMS+4RnbRZhlz5ggIajal++4D2re77l1QG3UenKFodfXBv+
+ BMMzGMW21dZz53ZsqBMVAhHLVuZlGt24uG2m7WXMnBiJrjSf0KNyKCOo2KrMyOsILpZrC0o7dL+
+ 8aG3NBidIAg17oNU1EWnQ/jDsMvnBgDw8r7YiHcIpT9etzt3LJ03BOLhn5YlOE4PMIkcQ=
+X-Received: by 2002:a05:6000:1845:b0:439:c799:dbe3 with SMTP id
+ ffacd0b85a97d-43b6427d9cdmr1299608f8f.25.1773953933829; 
+ Thu, 19 Mar 2026 13:58:53 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd39.dip0.t-ipconnect.de.
  [79.195.221.57]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.58.46
+ ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.58.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:58:49 -0700 (PDT)
+ Thu, 19 Mar 2026 13:58:53 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 19 Mar 2026 21:56:51 +0100
-Subject: [PATCH RFC 29/40] WIP: test: adjust tests for CCF_FULL
+Date: Thu, 19 Mar 2026 21:56:52 +0100
+Subject: [PATCH RFC 30/40] configs: add sandbox CCF_FULL defconfig
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260319-casey-ccf-upstream-v1-29-4df2ee2226da@linaro.org>
+Message-Id: <20260319-casey-ccf-upstream-v1-30-4df2ee2226da@linaro.org>
 References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
@@ -160,13 +160,13 @@ Cc: Tom Rini <trini@konsulko.com>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>, 
  Paul Sajna <sajattack@postmarketos.org>, Marek Vasut <marex@denx.de>
 X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=10750;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=593;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=yQOymD7Bi9DtSSGA1Jc/8sTtbts241l5JbyUZEYHm9A=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yQJbXtwOXsgwh2f+vMmPJxmz26bXsR/V2uXNO1ukc
- Zuz+JucjlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjARd2+GPxwp33n9Aj4UbPXY
- NONJ7Cv/KJ7Ztz5tPWGt95uvXjn9fwPDf88XIdoLn0SVT7uQtF5Td3q2T0WQ4Ofjc1/rz+jhan1
- aoAcA
+ bh=sZ1m8A6gA/0GkrIXmr2c1FMysUneDUMTheSJV+osWuk=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yQKqKr7np1hFasy78+pq04t164NDHT+Wt8rL1dXPf
+ vU3Oqy7o5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAEyE6QLDfwdzrY9FgUtdtzxa
+ 8m+VSVnihMmZ26ML7l/R818jrLB75kFGhmmbbC2i+A5H1W23ez1F2z9qX5hsldHEx6U/uqrXdBr
+ /7gIA
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Fri, 20 Mar 2026 00:01:15 +0100
@@ -186,343 +186,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fairly minimal changes are needed for the clk_ccf tests to pass, mostly
-just disabling the tests related to uCCF implementation details like the
-CLK_ID lookups, this is accomplished with a generic wrapper function to
-perform the intended lookup through CCF.
-
-The UCLASS_CLK tests are disabled when using CCF_FULL, since it bypasses
-UCLASS_CLK entirely.
+This extends test coverage to include CCF_FULL which is supported by the
+clk_ccf tests.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- test/dm/Makefile  |   5 ++-
- test/dm/clk_ccf.c | 117 +++++++++++++++++++++++++++++++++++++++---------------
- test/test-main.c  |   6 +++
- 3 files changed, 96 insertions(+), 32 deletions(-)
+ configs/sandbox64_ccf_full_defconfig | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/test/dm/Makefile b/test/dm/Makefile
-index 771b703b737d..3bee90aba097 100644
---- a/test/dm/Makefile
-+++ b/test/dm/Makefile
-@@ -36,9 +36,12 @@ obj-$(CONFIG_BLK) += blk.o
- obj-$(CONFIG_BLKMAP) += blkmap.o
- obj-$(CONFIG_BUTTON) += button.o
- obj-$(CONFIG_DM_BOOTCOUNT) += bootcount.o
- obj-$(CONFIG_DM_REBOOT_MODE) += reboot-mode.o
--obj-$(CONFIG_CLK) += clk.o clk_ccf.o
-+ifndef CONFIG_CLK_CCF_FULL
-+obj-$(CONFIG_CLK) += clk.o
-+endif
-+obj-$(CONFIG_CLK) += clk_ccf.o
- obj-$(CONFIG_CPU) += cpu.o
- obj-$(CONFIG_CROS_EC) += cros_ec.o
- obj-$(CONFIG_PWM_CROS_EC) += cros_ec_pwm.o
- obj-$(CONFIG_$(PHASE_)DEVRES) += devres.o
-diff --git a/test/dm/clk_ccf.c b/test/dm/clk_ccf.c
-index 9c06aadb7ed3..f5f4f2891c59 100644
---- a/test/dm/clk_ccf.c
-+++ b/test/dm/clk_ccf.c
-@@ -13,92 +13,143 @@
- #include <test/test.h>
- #include <test/ut.h>
- #include <sandbox-clk.h>
- 
-+#if CONFIG_IS_ENABLED(CLK_CCF_FULL)
-+/* clk_get_by_id() is nonsensical for CCF_FULL */
-+static int clk_get_by_dev_id(struct udevice *dev, ulong id, struct clk **clk)
-+{
-+	struct clk_hw *hw;
-+	struct ofnode_phandle_args clkspec = {
-+		.node = dev_ofnode(dev),
-+		.args_count = 1,
-+		.args = {
-+			id,
-+		}
-+	};
-+	hw = of_clk_get_hw_from_clkspec(&clkspec);
-+	if (IS_ERR_OR_NULL(hw))
-+		return PTR_ERR(hw);
-+	*clk = hw->clk;
-+	return 0;
-+}
+diff --git a/configs/sandbox64_ccf_full_defconfig b/configs/sandbox64_ccf_full_defconfig
+new file mode 100644
+index 000000000000..0cec3257a30f
+--- /dev/null
++++ b/configs/sandbox64_ccf_full_defconfig
+@@ -0,0 +1,5 @@
++#include "sandbox64_defconfig"
 +
-+void __clk_mark_critical(struct clk *clk, bool critical);
-+#else
-+
-+const char *__clk_get_name(struct clk *clk)
-+{
-+	return clk->dev->name;
-+}
-+
-+static int clk_get_by_dev_id(struct udevice *dev, ulong id, struct clk **clk)
-+{
-+	return clk_get_by_id(CLK_ID(dev, id), clk);
-+}
-+
-+void __clk_mark_critical(struct clk *clk, bool critical)
-+{
-+	if (critical)
-+		clk->flags |= CLK_IS_CRITICAL;
-+	else
-+	 	clk->flags &= ~CLK_IS_CRITICAL;
-+}
-+#endif
-+
-+
- /* Tests for Common Clock Framework driver */
- static int dm_test_clk_ccf(struct unit_test_state *uts)
- {
- 	struct clk *clk, *pclk;
- 	struct udevice *dev, *test_dev;
- 	long long rate;
- 	int ret;
--#if CONFIG_IS_ENABLED(CLK_CCF)
-+	enum uclass_id clk_uc = UCLASS_CLK;
-+#if CONFIG_IS_ENABLED(CLK_CCF) || CONFIG_IS_ENABLED(CLK_CCF_FULL)
- 	struct clk clk_ccf;
- 	const char *clkname;
- 	int clkid, i;
- #endif
- 
-+	/* CCF clocks use UCLASS_NOP to differentiate */
-+	if (CONFIG_IS_ENABLED(CLK_CCF_FULL))
-+		clk_uc = UCLASS_NOP;
-+
- 	/* Get the device using the clk device */
--	ut_assertok(uclass_get_device_by_name(UCLASS_CLK, "clk-ccf", &dev));
-+	ut_assertok(uclass_get_device_by_name(clk_uc, "clk-ccf", &dev));
- 	ut_assertok(uclass_get_device_by_name(UCLASS_MISC, "clk-test", &test_dev));
- 
- 	/* Test for clk_get_by_id() */
--	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_ECSPI_ROOT), &clk);
-+	ret = clk_get_by_dev_id(dev, SANDBOX_CLK_ECSPI_ROOT, &clk);
- 	ut_assertok(ret);
--	ut_asserteq_str("ecspi_root", clk->dev->name);
-+	ut_asserteq_str("ecspi_root", __clk_get_name(clk));
- 	ut_asserteq(CLK_SET_RATE_PARENT, clk->flags);
- 
- 	/* Test for clk_get_parent_rate() */
--	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_ECSPI1), &clk);
-+	ret = clk_get_by_dev_id(dev, SANDBOX_CLK_ECSPI1, &clk);
- 	ut_assertok(ret);
--	ut_asserteq_str("ecspi1", clk->dev->name);
-+	ut_asserteq_str("ecspi1", __clk_get_name(clk));
- 	ut_asserteq(CLK_SET_RATE_PARENT, clk->flags);
- 
- 	rate = clk_get_parent_rate(clk);
- 	ut_asserteq_64(20000000, rate);
- 
- 	/* test the gate of CCF */
--	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_ECSPI0), &clk);
-+	ret = clk_get_by_dev_id(dev, SANDBOX_CLK_ECSPI0, &clk);
- 	ut_assertok(ret);
--	ut_asserteq_str("ecspi0", clk->dev->name);
-+	ut_asserteq_str("ecspi0", __clk_get_name(clk));
- 	ut_asserteq(CLK_SET_RATE_PARENT, clk->flags);
- 
- 	rate = clk_get_parent_rate(clk);
- 	ut_asserteq_64(20000000, rate);
- 
- 	/* Test the mux of CCF */
--	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_USDHC1_SEL), &clk);
-+	ret = clk_get_by_dev_id(dev, SANDBOX_CLK_USDHC1_SEL, &clk);
- 	ut_assertok(ret);
--	ut_asserteq_str("usdhc1_sel", clk->dev->name);
-+	ut_asserteq_str("usdhc1_sel", __clk_get_name(clk));
- 	ut_asserteq(CLK_SET_RATE_NO_REPARENT, clk->flags);
- 
- 	rate = clk_get_parent_rate(clk);
- 	ut_asserteq_64(60000000, rate);
- 
- 	rate = clk_set_rate(clk, 60000000);
-+#if !CONFIG_IS_ENABLED(CLK_CCF_FULL)
- 	ut_asserteq_64((u64)-ENOSYS, rate);
-+#endif
- 
- 	rate = clk_get_rate(clk);
- 	ut_asserteq_64(60000000, rate);
- 
--	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_PLL3_80M), &pclk);
-+	ret = clk_get_by_dev_id(dev, SANDBOX_CLK_PLL3_80M, &pclk);
- 	ut_assertok(ret);
- 
- 	ret = clk_set_parent(clk, pclk);
- 	ut_assertok(ret);
- 
- 	rate = clk_get_rate(clk);
- 	ut_asserteq_64(80000000, rate);
- 
--	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_USDHC2_SEL), &clk);
-+	ret = clk_get_by_dev_id(dev, SANDBOX_CLK_USDHC2_SEL, &clk);
- 	ut_assertok(ret);
--	ut_asserteq_str("usdhc2_sel", clk->dev->name);
-+	ut_asserteq_str("usdhc2_sel", __clk_get_name(clk));
- 	ut_asserteq(CLK_SET_RATE_NO_REPARENT, clk->flags);
- 
- 	rate = clk_get_parent_rate(clk);
- 	ut_asserteq_64(80000000, rate);
- 
- 	pclk = clk_get_parent(clk);
--	ut_asserteq_str("pll3_80m", pclk->dev->name);
-+	ut_asserteq_str("pll3_80m", __clk_get_name(pclk));
- 	ut_asserteq(CLK_SET_RATE_PARENT, pclk->flags);
- 
- 	rate = clk_set_rate(clk, 80000000);
-+#if !CONFIG_IS_ENABLED(CLK_CCF_FULL)
- 	ut_asserteq_64((u64)-ENOSYS, rate);
-+#endif
- 
- 	rate = clk_get_rate(clk);
- 	ut_asserteq_64(80000000, rate);
- 
--	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_PLL3_60M), &pclk);
-+	ret = clk_get_by_dev_id(dev, SANDBOX_CLK_PLL3_60M, &pclk);
- 	ut_assertok(ret);
- 
- 	ret = clk_set_parent(clk, pclk);
- 	ut_assertok(ret);
-@@ -106,39 +157,43 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
- 	rate = clk_get_rate(clk);
- 	ut_asserteq_64(60000000, rate);
- 
- 	/* Test the composite of CCF */
--	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_I2C), &clk);
-+	ret = clk_get_by_dev_id(dev, SANDBOX_CLK_I2C, &clk);
- 	ut_assertok(ret);
--	ut_asserteq_str("i2c", clk->dev->name);
-+	ut_asserteq_str("i2c", __clk_get_name(clk));
- 	ut_asserteq(CLK_SET_RATE_UNGATE, clk->flags);
- 
- 	rate = clk_get_rate(clk);
--	ut_asserteq_64(60000000, rate);
-+	// ut_asserteq_64(60000000, rate);
- 
- 	rate = clk_set_rate(clk, 60000000);
- 	ut_asserteq_64(60000000, rate);
- 
--#if CONFIG_IS_ENABLED(CLK_CCF)
-+#if CONFIG_IS_ENABLED(CLK_CCF) || CONFIG_IS_ENABLED(CLK_CCF_FULL)
- 	/* Test clk tree enable/disable */
- 
- 	ret = clk_get_by_index(test_dev, SANDBOX_CLK_TEST_ID_I2C_ROOT, &clk_ccf);
- 	ut_assertok(ret);
- 	ut_asserteq_str("clk-ccf", clk_ccf.dev->name);
-+#if !CONFIG_IS_ENABLED(CLK_CCF_FULL)
- 	ut_asserteq(CLK_ID(clk_ccf.dev, SANDBOX_CLK_I2C_ROOT), clk_ccf.id);
-+#endif
- 
--	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_I2C_ROOT), &clk);
-+	ret = clk_get_by_dev_id(dev, SANDBOX_CLK_I2C_ROOT, &clk);
- 	ut_assertok(ret);
--	ut_asserteq_str("i2c_root", clk->dev->name);
-+	ut_asserteq_str("i2c_root", __clk_get_name(clk));
-+#if !CONFIG_IS_ENABLED(CLK_CCF_FULL)
- 	ut_asserteq(SANDBOX_CLK_I2C_ROOT, clk_get_id(clk));
-+#endif
- 
- 	ret = clk_enable(&clk_ccf);
- 	ut_assertok(ret);
- 
- 	ret = sandbox_clk_enable_count(clk);
- 	ut_asserteq(1, ret);
- 
--	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_I2C), &pclk);
-+	ret = clk_get_by_dev_id(dev, SANDBOX_CLK_I2C, &pclk);
- 	ut_assertok(ret);
- 
- 	ret = sandbox_clk_enable_count(pclk);
- 	ut_asserteq(1, ret);
-@@ -152,34 +207,34 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
- 	ret = sandbox_clk_enable_count(pclk);
- 	ut_asserteq(0, ret);
- 
- 	/* Test clock re-parenting. */
--	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_USDHC1_SEL), &clk);
-+	ret = clk_get_by_dev_id(dev, SANDBOX_CLK_USDHC1_SEL, &clk);
- 	ut_assertok(ret);
--	ut_asserteq_str("usdhc1_sel", clk->dev->name);
-+	ut_asserteq_str("usdhc1_sel", __clk_get_name(clk));
- 
- 	pclk = clk_get_parent(clk);
- 	ut_assertok_ptr(pclk);
--	if (!strcmp(pclk->dev->name, "pll3_60m")) {
-+	if (!strcmp(__clk_get_name(pclk), "pll3_60m")) {
- 		clkname = "pll3_80m";
- 		clkid = SANDBOX_CLK_PLL3_80M;
- 	} else {
- 		clkname = "pll3_60m";
- 		clkid = SANDBOX_CLK_PLL3_60M;
- 	}
- 
--	ret = clk_get_by_id(CLK_ID(dev, clkid), &pclk);
-+	ret = clk_get_by_dev_id(dev, clkid, &pclk);
- 	ut_assertok(ret);
- 	ret = clk_set_parent(clk, pclk);
- 	ut_assertok(ret);
- 	pclk = clk_get_parent(clk);
- 	ut_assertok_ptr(pclk);
--	ut_asserteq_str(clkname, pclk->dev->name);
-+	ut_asserteq_str(clkname, __clk_get_name(pclk));
- 
- 	/* Test disabling critical clock. */
--	ret = clk_get_by_id(CLK_ID(dev, SANDBOX_CLK_I2C_ROOT), &clk);
-+	ret = clk_get_by_dev_id(dev, SANDBOX_CLK_I2C_ROOT, &clk);
- 	ut_assertok(ret);
--	ut_asserteq_str("i2c_root", clk->dev->name);
-+	ut_asserteq_str("i2c_root", __clk_get_name(clk));
- 
- 	/* Disable it, if any. */
- 	ret = sandbox_clk_enable_count(clk);
- 	for (i = 0; i < ret; i++) {
-@@ -189,17 +244,17 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
- 
- 	ret = sandbox_clk_enable_count(clk);
- 	ut_asserteq(0, ret);
- 
--	clk->flags = CLK_IS_CRITICAL;
-+	__clk_mark_critical(clk, true);
- 	ret = clk_enable(clk);
- 	ut_assertok(ret);
- 
- 	ret = clk_disable(clk);
- 	ut_assertok(ret);
- 	ret = sandbox_clk_enable_count(clk);
- 	ut_asserteq(1, ret);
--	clk->flags &= ~CLK_IS_CRITICAL;
-+	__clk_mark_critical(clk, false);
- 
- 	ret = clk_disable(clk);
- 	ut_assertok(ret);
- 	ret = sandbox_clk_enable_count(clk);
-diff --git a/test/test-main.c b/test/test-main.c
-index 3254325e8b15..2508ea39deb0 100644
---- a/test/test-main.c
-+++ b/test/test-main.c
-@@ -299,8 +299,10 @@ static int dm_test_restore(struct device_node *of_root)
- 
- 	return 0;
- }
- 
-+void clk_ccf_reset(void);
-+
- /**
-  * test_pre_run() - Handle any preparation needed to run a test
-  *
-  * @uts: Test state
-@@ -349,8 +351,12 @@ static int test_pre_run(struct unit_test_state *uts, struct unit_test *test)
- 	 * UTF_DM and non-UTF_DM tests to coexist happily.
- 	 */
- 	usb_kbd_remove_for_test();
- 
-+#if CONFIG_IS_ENABLED(CLK_CCF_FULL)
-+		clk_ccf_reset();
-+#endif
-+
- 	if (test->flags & UTF_DM)
- 		ut_assertok(dm_test_pre_run(uts));
- 
- 	ut_set_skip_delays(uts, false);
++CONFIG_ARCH_SANDBOX=y
++CONFIG_CLK_CCF_FULL=y
++CONFIG_CLK_CCF_FULL_COMPAT=y
 
 -- 
 2.51.0
