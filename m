@@ -4,109 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 714B61090233
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 14:18:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CCD91090233
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 14:18:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA30A83E36;
-	Thu, 19 Mar 2026 15:18:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 03C7B83FC0;
+	Thu, 19 Mar 2026 15:18:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jTP+hot7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FR2pGdOc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA6C783F2E; Thu, 19 Mar 2026 14:52:05 +0100 (CET)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id 01B8983DC9; Thu, 19 Mar 2026 14:52:09 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC45783DC9
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 14:52:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7149383DC9
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 14:52:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7d76a331ebbso390002a34.0
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 06:52:03 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7d7e55fdddfso227660a34.1
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 06:52:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773928322; x=1774533122; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773928325; x=1774533125; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bgm8Cef6KMThkSFmEwutmhspDt4xgNWSL7zwEiMTenc=;
- b=jTP+hot7ofc/YRfsKwzmCL0scvmaevRQ3Vs8q5agbAwS7ykUHOnFCsB6fNUFXbEHYY
- qJpOMhFWGQZiqxwYv8yiJ76CSVtAw7+x/XIGcJp243kKxVyeiAWMIUQ0JCA8xLcFOg08
- RbUD07u3JZNz+7nKSUNt/YvD46fOoLEc9lBpI=
+ bh=mC5PUZ9xJa25iZqkL7+HvuxsFoS7UZOQqqhfOyVK5+Q=;
+ b=FR2pGdOc6gHo98Rcsx+bPeao2RPVEZiXyNS3kk+FrOzwp9eARlfHPPEANOZZkegzaB
+ hOGBExL5XDz6BMjnBFrlYgX2/yGSAFQdcc1849NejBygMjypv538+twkclbsK5ugrX+l
+ 6RAuuL+uZEct1Wxm6qzJz7LImGbwj4tTPm+p4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773928322; x=1774533122;
+ d=1e100.net; s=20251104; t=1773928325; x=1774533125;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=bgm8Cef6KMThkSFmEwutmhspDt4xgNWSL7zwEiMTenc=;
- b=KCEPZQetaut31f5NjZMwl9+tCIUAe6UHxY0fr8usm1Fy5st7RN5/g0KYVqmodNStIF
- e1WXQ5A1g+ZPAEJ6INOMEBpxnFn5erVNlFuH4QBD4NLyvPCNDl1sY4UUs2cYrn5iKa97
- LlP8/BdMFkei2lIyKRyYDnDwhW/VsnsSRDjVvWtCplm+L2RIhCvYTOlVDnxMFw6ezBs4
- yQbg7cF6p/iOXoalTLkQ5inVaI1s0sYEBRYEfQIe0TtNUtny0PNlpzBoux9KUvcYyfyO
- 96P2TMjRGZbfj6z+5muth9vld7FabFeo3Y4M6DCLVr7SkQ9qY1IyQ87acjy75Npx/iHE
- JahA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUCsvsOzrQ8EsbkG7foj0/1Gd1FDuBeh9IpaUagOB4dBZg+IbVArzFhWySGF2VmvToC0PpkOOA=@lists.denx.de
-X-Gm-Message-State: AOJu0YzkcFDJBqUumyYHwdzgVCoXbZEwGvVDvOlqOFOuxJ+SHPCVMjyl
- MZ5TduhbYKtuecerfAmYe6qj5IAiNqKSFaGRZjNNqGF6fgq9fRS0jgtEPx5JDv4gh8o=
-X-Gm-Gg: ATEYQzw2GJzbLOXQ/D0hjBwHoy3ietFd0gdLmsKPOtcM4ctP6OAQNQT2fm0ql1yZg9g
- 68QilL1QCmj/ltGRQQ5wh06pZc3qlIMuxP0FKmYcYvM0ZjN6X+ZOXaydzCdDCv8XzmGfX/U+vrx
- 6BdSWBDxH1J+JpYqeZl8aHJEkZ14rQEKrxOdVYeNpD8p9QNZVl8B9VVRuIqorrqglSVmrZPsNxT
- qH6ovgSvHVRlU04zm3Bv+fcTBRBfRvt91HPHSwnYJWx/auMM5kvObn+UN7N7vpcxg63xRTtw3N2
- mZ8wnQKCWDmn9J0GbUCStIARnWVKLqAzdxORkJA3sFWUK86UQyUFt9I8yBowViDcgMGnqN6hCuG
- D5clVPkl5R2J5diqUfJSSFcLL0zHzjVCvS6h78tNRWO90pts66QWg2b+hbXKDPQjT+StgHcisLB
- EvSS/Qq1uwYiDDKI1HTNyB27xMjViH7gfhOCDu1H89VItZhEock+kE0sLgMtbFJ7Dc33sRC7bX0
- G0DjNPyz6YkysdgYmlAuEwgTh8/kIT4ZzFXirdpukmCEJQ=
-X-Received: by 2002:a05:6830:3144:b0:7d7:433e:49cc with SMTP id
- 46e09a7af769-7d7ca74739amr4775278a34.27.1773928322208; 
- Thu, 19 Mar 2026 06:52:02 -0700 (PDT)
+ bh=mC5PUZ9xJa25iZqkL7+HvuxsFoS7UZOQqqhfOyVK5+Q=;
+ b=QS8nKC4ydbyls75tN/sQ7yLWyhrfYlo6IO78mNjV4l1bLlCFFL3+7dE8+wVJTShP1R
+ OnWsf1YEIiToyPA8GtWMYlvF+PKhbBG1JKq2nclpfppKvW/MBBxwpJXKqwDdp4E4UU2/
+ sPJmdQk4SKqimf7dTX6in6/av6qB/x5fd0cH75Ylo1gyiKop7D5KefDKIuQxLA5U6rtw
+ hbdvwFzlJ5BhThEAMGnJti12QJTz33saBe6NO5dyLt0EDrktx32VNOgoc7FTj+3WkMnB
+ /0tFsdpBLm7p6h7YDvMd6OdeFDDtUlMFhYGBFXkaaSalaTbBkHBB21gyowQB85aSgUK5
+ 0QsA==
+X-Gm-Message-State: AOJu0YzpplB/5H9yVsG5mD5rvJ2c3p8yFwFoTEXlXgSW0RTPMavgMmhD
+ mtlynNRk2TBIqejBRfIJ1TKlFOiGswx7HTU+7QimBXjdGkfURPjPWASEnvHz1ePzJnA=
+X-Gm-Gg: ATEYQzzw6Ogr92nx0evFq3WE0Op3hep+kwLqrebuyN5R1AORQEQ0b63Q6MI7lpibUSM
+ oUNz9pi+1WIBWNnpDw/4azxvnOVg2bG9pcMKJyx8hxWm9Z+jwrSrHWgNyh81pCYhqLEoCIXazEe
+ jnM41eber/fH7NGMcVvN7wB2sYWHqSmo98WQW4BVUgVkatOm1mcqCfMJvkUlfABS060jhCB+0E8
+ vesMUZc/EuJwel5nPhmCapa9ud9ZMD3XK7YrzgdCeRQoLx9yM18m4D5VjiFBgOV1zD5vr1G5PLZ
+ qDL+nttNd3eYJ2pwjJgUEYN9czkNZ8E8PpxFHIG9p/hVeatGQxUbSVl9msqWgRXoQ7s7twJVlvZ
+ 4Xs/0w79puinjyzgAj2nrPs1Uf9ozzsrMLGgczeoBLmbedazJog00fXhtPMt8Mr6spZmOiG1J9j
+ HjwkP3l8Yy7T9kr7PGih3SxnOD43+eo/vvMqbpuodbM9LTAHcYCpOqY6Cl5HkG3cydtdUz507Zy
+ GD7cDA89g4bPIyCw0v3h8J4+T9HLjWhEOaySimKLAHKN+w=
+X-Received: by 2002:a05:6830:4986:b0:7d7:da43:387 with SMTP id
+ 46e09a7af769-7d7da430437mr2941681a34.16.1773928324984; 
+ Thu, 19 Mar 2026 06:52:04 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7c9952114sm4536778a34.3.2026.03.19.06.51.59
+ 46e09a7af769-7d7c9952114sm4536778a34.3.2026.03.19.06.52.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 06:52:01 -0700 (PDT)
+ Thu, 19 Mar 2026 06:52:04 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
- Quentin Schulz <foss+uboot@0leil.net>
-Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
- Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Sean Edmond <seanedmond@microsoft.com>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>, 
- Max Merchel <Max.Merchel@ew.tq-group.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Huan Wang <alison.wang@nxp.com>, 
+To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+Cc: Albert Aribaud <albert.u.boot@aribaud.net>, 
+ Alexey Brodkin <alexey.brodkin@synopsys.com>, 
+ Alison Wang <alison.wang@nxp.com>, Andy Fleming <afleming@gmail.com>, 
  Angelo Dureghello <angelo@kernel-space.org>, 
- Enric Balletbo i Serra <eballetbo@gmail.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Angelo Dureghello <angelo@sysam.it>, Aristo Chen <jj251510319013@gmail.com>, 
+ Benjamin ROBIN <dev@benjarobin.fr>, Bin Meng <bmeng.cn@gmail.com>, 
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, 
+ Guillaume Ranquet <ranquet.guillaume@gmail.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Philip Molloy <philip.molloy@analog.com>, 
- Mayuresh Chitale <mchitale@ventanamicro.com>, 
- Maxim Moskalets <maximmosk4@gmail.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Peter Robinson <pbrobinson@gmail.com>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>, 
- Michal Simek <michal.simek@amd.com>, Raymond Mao <raymondmaoca@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, 
- Jesse Taube <mr.bossman075@gmail.com>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Yegor Yefremov <yegorslists@googlemail.com>, 
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Leo <ycliang@andestech.com>, 
+ Marek Vasut <marek.vasut@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Mario Six <mario.six@gdsys.cc>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
  Patrice Chotard <patrice.chotard@foss.st.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Jamie Gibbons <jamie.gibbons@microchip.com>, 
- Harsha Vardhan V M <h-vm@ti.com>, briansune <briansune@gmail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Yao Zi <me@ziyao.cc>
-In-Reply-To: <20251120-legacy-led-removal-v1-0-369d44338358@cherry.de>
-References: <20251120-legacy-led-removal-v1-0-369d44338358@cherry.de>
-Subject: Re: [PATCH 0/2] led: remove legacy API
-Message-Id: <177392831989.1606269.12794108785048510603.b4-ty@konsulko.com>
-Date: Thu, 19 Mar 2026 07:51:59 -0600
+ Pavel Herrmann <morpheus.ibis@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Priyanka Jain <priyanka.jain@nxp.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Rick Chen <rick@andestech.com>, 
+ Scott McNutt <smcnutt@psyent.com>, Stefan Roese <stefan.roese@mailbox.org>, 
+ Sughosh Ganu <sughosh.ganu@arm.com>, Thomas Chou <thomas@wytron.com.tw>, 
+ Vishnu Singh <v-singh1@ti.com>, Wolfgang Denk <wd@denx.de>, 
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>, Yao Zi <me@ziyao.cc>, 
+ uboot-snps-arc@synopsys.com, Michal Simek <michal.simek@amd.com>
+In-Reply-To: <20260306023638.2678886-1-sjg@chromium.org>
+References: <20260306023638.2678886-1-sjg@chromium.org>
+Subject: Re: [PATCH v4 00/17] bootm: Clean up arch-specific, pre-OS
+ clean-up
+Message-Id: <177392832249.1606269.9429399152918005381.b4-ty@konsulko.com>
+Date: Thu, 19 Mar 2026 07:52:02 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -128,23 +122,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 20 Nov 2025 13:48:04 +0100, Quentin Schulz wrote:
+On Thu, 05 Mar 2026 19:36:09 -0700, Simon Glass wrote:
 
-> This migrates the last user of the legacy LED API, IMX233-OLinuXino and
-> net/bootp.c, to the modern LED framework.
+> Each arch does something slightly different before booting the OS. Some
+> archs even do different things depending on the CPU type.
 > 
-> I do have concern about being able to use BOOTP in SPL? In which case, I
-> should probably add an additional check on CONFIG_IS_ENABLED(LED) in
-> addition to IS_ENABLED(CONFIG_LED_BOOT)?
+> It is quite hard to know what actually happens in the final milliseconds
+> before the OS boot.
+> 
+> This series attempts to start cleaning up U-Boot in this area.
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/2] led: migrate last legacy LED user (olinuxino+net) to modern LED framework
-      commit: 765a126a2f1f5eff82276e9fecbb0745e9fce77b
-[2/2] led: remove legacy API
-      commit: fcbf81694c9399a71ac100b4de15089c3e09dd8c
+[01/17] dm: Move flags_remove() check before child removal
+        commit: 714dd2252dacfaabf0a72b31b9b7e22a8d816460
+[02/17] dm: Remove children when parent is removed by flags
+        commit: 3632b5d63c8099c59c936c3653ece5bd04d8f6c7
+[03/17] bootstage: Add some missing dummy functions
+        commit: 5cc969caf0ba247d8464af1fd87110e73309e37d
+[04/17] bootm: Create bootm_final() for pre-boot cleanup
+        commit: 1ec3ee670de6b2f8f96cd7c15f7e22e89a06bb2d
+[05/17] x86: Call bootm_final()
+        commit: 8240a482290960e49a7c2a537b7100120ef4ec20
+[06/17] riscv: Call bootm_final()
+        commit: aa5ada5447369849c82310073270ed64df1efd9b
+[07/17] bootm: Stash bootstage data in bootm_final()
+        commit: 5759155b023e93c24268911a8a40110ec4b13dd9
+[08/17] arm: Call bootm_final()
+        commit: ba992d3eacd0a3ac72ff83a022a5c545bb609e76
+[09/17] arc: Call bootm_final()
+        commit: 47545a6411da58eb865561a4d026da55781d60ef
+[10/17] microblaze: Call bootm_final()
+        commit: b8806785c15fa0c5541f9fded66644fbcbcddfc8
+[11/17] mips: Call bootm_final()
+        commit: 96216ef50701f8219610d0b0cfdb26624ef13baa
+[12/17] powerpc: Call bootm_final()
+        commit: 15e58f975aa42ffbc9170ac226cc480962c6df59
+[13/17] m68k: Call bootm_final()
+        commit: 3b4bd773e093e777d35f2d951d1868de1a3cc2f3
+[14/17] nios2: Call bootm_final()
+        commit: 81334489c0f3e3982c46e9ff5986097d43adaec9
+[15/17] sh: Call bootm_final()
+        commit: 7fec6d005bdb55e27f1de3d6784dfe8815691bd4
+[16/17] xtensa: Call bootm_final()
+        commit: 9c4edbddce767fae54a4ba1519cc15e55dd198ec
+[17/17] sandbox: Call bootm_final()
+        commit: dc88ac7681084b2aff8c3c4e1bb3e861451489a3
 -- 
 Tom
 
