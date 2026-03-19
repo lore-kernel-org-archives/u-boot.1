@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25C981091930
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:02:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D3DE109192C
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:02:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF9BB84142;
-	Fri, 20 Mar 2026 00:01:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0C1FC8414B;
+	Fri, 20 Mar 2026 00:01:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CheRAX2c";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ceATfIck";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EDDA83F8A; Thu, 19 Mar 2026 21:57:29 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 2631A83FC5; Thu, 19 Mar 2026 21:57:33 +0100 (CET)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA2B784006
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:57:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E8A4D83FC0
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:57:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4852c9b4158so10150915e9.0
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:57:26 -0700 (PDT)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-43b45bb7548so913719f8f.1
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:57:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773953846; x=1774558646; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1773953850; x=1774558650; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=LclK/WFnKQsMrtdNvHDrf15plVujXWqfACmvsP31Zb4=;
- b=CheRAX2ce9xjvazJw1ayTEW6fmTBwFDemQUsy2npArF9UF1ghT2czzxNsC9LSfeGld
- cBgM48QEUNeKyhZcg4sXlFekvFF6J3s7lz+g8V1YZW9vj1KvuIPSfzj/D7EHPKgiXf1r
- S8WDe4KfP/TIOLGUpQbegor23zQVvyDGan6/LjNDNpKSleFj/jhYGFabRlRzut4WEteP
- 49gE9ZQ2LG2nfRjSWkOqIiYUkieiLJyiIE90cM1YgJ9foBMj8W3dRWY+ylKx8WuJ0JzS
- lktq+kFuKa88QOyH7AQymFrh0cjEoZmPseIykj8Pe6wkcJ23TBjeBpma+T/ub16g35QM
- BIbQ==
+ :reply-to; bh=JxcERJ3UaiRl1vXO0KA5cEnHfc4xtMelhah9KPin2lI=;
+ b=ceATfIck787KPK7J3uSYhSz66pzYFIhlyQTFYH033OLzp4dlZSiM49Vh/k+Wa4W9iG
+ nypaw+r+2xnqFbn5zJXFenhmsnzC/kvgsjXi8uI8RrInj5Q1zxDFa/SKNlPLMTNCEBJg
+ HkYjYjULSDwns6HG6E1XaeLko6tt+TaqWlnpnK9xHB+b+UpAQ0mieiFdWvf5BH9wrYth
+ MAEH3zwm8dbkPYcIFXFVfTHOxZZ5QA8ftVEgEmGwNVI+y0axWNiWR8IgnnCD2+b8QhFh
+ 4KQatNDz4xWmVf2VH3Mi7uarkEF7ke+lfERYf00pAFhv2WhOWqDArN5eEpaKhmRJiDuE
+ 0Jzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773953846; x=1774558646;
+ d=1e100.net; s=20251104; t=1773953850; x=1774558650;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=LclK/WFnKQsMrtdNvHDrf15plVujXWqfACmvsP31Zb4=;
- b=cKuGllMotGQJVj3yzhLc554rp+xBryQOj3Fx2BhrGJOBdzw2XLV94Femw2o5ghok6e
- pfXRRcAWuxSUDODiVvH0661VI/oXCEJoQTOH/aELjmTBXw9GsDlY/q5v0aJj5M0klRmA
- 8sQH5tarpkkSFEso2FAHo2pu1IGe8FW1auDspxy3EHseJNa9NvBm9kJBfIvVuXy0jX7A
- W5yFnvTW+lT2z5Qs/FwCyAl/TK32lguG8IYq9xIiDDwE+39nPnptYkKWZIA3egt+aFc2
- aEvFbqI9sClLkGOeKmFaAssYq/azjsgYCV8hoLTmkhvxYW4jxjDJPjs64/UH8dRHCofg
- hvsg==
-X-Gm-Message-State: AOJu0YzMbZgKkAZrZebukSGRlhN4ivVvQPjAq3kSKzX373apDCu1TOG1
- Wr0g5JFUtALTJM93wtndd9LWV6z1yggFKL5SLJvon53kbVPzmw/qr3WgdV5jEo5wLbc=
-X-Gm-Gg: ATEYQzz27GZn8JePQn+pdjqSIzG3j/D4FWPcGIJMxLJUjmCzbXAJPssTZZgT78FuCW+
- QOjPXFRnPQRSgJ4gBTC2W1suBAl5bpb32dbeAY7nnHuoUyPYPuMBFmoZC8nbWC/w9KTffPkF87M
- 323QGtSasgSQz8mlF5kw8weZ56i3v5uvPZZwATsJmvWHSO2u8zCKpNfELlAUFXWpULXPqi1gKhA
- 4RNDlGT1vTthNWWRTp/8nMrde2M4H0tYnxuMlVjmvYx/Yu8WIlx7XLXl5PADptJHN+wHiqjY/lj
- jh/CbvC+E5Mjr9odjY6u+NWWY4WTJiaj7HYZFWUNy9ePV6LBjsDPGKo83bTJYXbya4RDk8qVGt8
- UlG3OJwXj/IsTnP7+SDb8IfFBMl1giw1Yj0r1XS57/ickZvM5y2IPNzrE2P+Ll/aqzSVgYGC+Aq
- Rc/qW/XdMRcB2rd6nvDQzVzTDUb0y0jatwtcrcHBkDJRvF8l/Sfs9IKjYCPpfKk9RIASY=
-X-Received: by 2002:a05:600c:810c:b0:485:3e00:9440 with SMTP id
- 5b1f17b1804b1-486fee1af0bmr6999785e9.24.1773953846113; 
- Thu, 19 Mar 2026 13:57:26 -0700 (PDT)
+ bh=JxcERJ3UaiRl1vXO0KA5cEnHfc4xtMelhah9KPin2lI=;
+ b=AZG46L0L9l+zEeSGnry1zbVSu09J1u4qJLpaVMIxBwrVpAr8X1KQP/I9teSVTcrS+X
+ fwqdBxXB/ecikfcZxCNhF0PvAuys3FPD1ZDy838i2Iv4P6AcvzqLjjyeoh2mzfrwlyty
+ Z7FoXsZ0dqH21rGaUcXXVOokXlQ28Vf7YxzmwUURDAnnKFK2b/mX+OG1HFwU33ZpMUll
+ 6Dl4IQzGIT7Gg2NvCBqWVlDgu+TyYzElNL5sEK62gaY9p6jma7FPh/fCMYy3HJZSHHr7
+ XterOYlBaWmjnIlZWbLXlvP0Iks+NbXdm76Yyl7LA01MsBoBVt/ZXu1CLnchkkdFuDGZ
+ Bwiw==
+X-Gm-Message-State: AOJu0YxJEr9GRwWtF/q+PA0nxL7XkVGOCp2I40LzOlPXZ6TSymHg2i/w
+ cqqohjbbNbGUBp/u6xUCNb66Hjbii2JvHN59tZDueJ8aB96spFB6XD8E1uUEj1Fl6hk=
+X-Gm-Gg: ATEYQzx0yxQjmXO9p//ZEipUNjCp1MIOONDyBjlmjRYDlQHN56YUE5GosnWravpmDlX
+ KiC0uW5eFs3oviM8vzq67bsWubzPCSuqY0XNqiktRPfzi1JucZz+XpfB6dBorpL0DuAwvYeYFUK
+ bFaqUBJEnSuFR3ejCQhpDriT2O/P1cBAC4owjKxM7+2ekkDgKH7FECvrTWjrUDBuyRSZ06RaR2t
+ ZiHjh8+IBTlncYuF/rg4BtSyvFc99WHhCW246QitOCK6PE0gTm/sXl9QHgsdvE9ds/CL7AOBIWa
+ ccBcJ8KT1Yovzw6dxu3kIPrWpgbwyPKcGlT3qIxJhcXMl6EhF7LhkCy7z7kjaTOcSWXC12JvE+H
+ 7+V4EtzVwJfllUABPltHRkOf7svmXYOfynETNbJRc+nZngob+0+q7y3zsbPIP8ACbbj1RtmIiYj
+ ppCnqzBYXyIoiF8hZHQCI5jY7iBsCPnWQ59JWp2YRHRGrFJQYJo0P/QWcfKz6I2CD0V+4=
+X-Received: by 2002:a05:6000:2203:b0:43b:45a0:9df8 with SMTP id
+ ffacd0b85a97d-43b642781a8mr1365023f8f.35.1773953850186; 
+ Thu, 19 Mar 2026 13:57:30 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd39.dip0.t-ipconnect.de.
  [79.195.221.57]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.22
+ ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:57:25 -0700 (PDT)
+ Thu, 19 Mar 2026 13:57:29 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 19 Mar 2026 21:56:30 +0100
-Subject: [PATCH RFC 08/40] compat: add kref implementation
+Date: Thu, 19 Mar 2026 21:56:31 +0100
+Subject: [PATCH RFC 09/40] compat: add dev_name()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260319-casey-ccf-upstream-v1-8-4df2ee2226da@linaro.org>
+Message-Id: <20260319-casey-ccf-upstream-v1-9-4df2ee2226da@linaro.org>
 References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
@@ -160,13 +160,13 @@ Cc: Tom Rini <trini@konsulko.com>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>, 
  Paul Sajna <sajattack@postmarketos.org>, Marek Vasut <marex@denx.de>
 X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4465;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1165;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=IsUyr94uAbhBQSS9jsTFSHJPICURKHi5YxAKX4Vf8eI=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yXy5y5tOcrYem5L3KWG3osXTpDXskYqipYIBGazNl
- 66J/o/oKGVhEORgkBVTZBE/scyyae1le43tCy7AzGFlAhnCwMUpABPxuMnIsJjNYE1YT8rRht/B
- iaabPVzeHzxb8nBHy5roHxz3ItauPsbwV+QhZ1PalOcfmM99MD7zIHuKzKrIe+LcoT92tka6xfm
- 0JgAA
+ bh=1W3i+V3HK8nbQuiQS6Y9/UsTMCP1WFM11jOshCSCYko=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yXx++tcuZc354bJZ5Pj/dr+zG5dt4w62dlwpuo5rl
+ 3bR1RVVHaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAiu64x/BUvODnfNVK99+/t
+ ZkVrppuKq1bcOvvY4k3fqZB59avVZ8Yz/LPNfb2uYPmCtYmlHa5W+y+J/K9Yd2TeicBrX2MXPrx
+ SmnMDAA==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Fri, 20 Mar 2026 00:01:15 +0100
@@ -186,145 +186,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a very basic port of Linux' kref, we don't actually need atomics
-so we just use a simple counter. This is used by CCF to free unused
-clocks.
+This function just wraps udevice->name.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- include/linux/kref.h | 124 +++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 124 insertions(+)
+ include/linux/device.h | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
 
-diff --git a/include/linux/kref.h b/include/linux/kref.h
+diff --git a/include/linux/device.h b/include/linux/device.h
 new file mode 100644
-index 000000000000..30927047d549
+index 000000000000..e76635cfde9e
 --- /dev/null
-+++ b/include/linux/kref.h
-@@ -0,0 +1,124 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
++++ b/include/linux/device.h
+@@ -0,0 +1,29 @@
++// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * kref.h - library routines for handling generic reference counted objects
++ * device.h - generic, centralized driver model
 + *
-+ * Copyright (C) 2004 Greg Kroah-Hartman <greg@kroah.com>
-+ * Copyright (C) 2004 IBM Corp.
++ * U-Boot: compat header derived from Linux
 + *
-+ * based on kobject.h which was:
-+ * Copyright (C) 2002-2003 Patrick Mochel <mochel@osdl.org>
-+ * Copyright (C) 2002-2003 Open Source Development Labs
++ * Copyright (c) 2001-2003 Patrick Mochel <mochel@osdl.org>
++ * Copyright (c) 2004-2009 Greg Kroah-Hartman <gregkh@suse.de>
++ * Copyright (c) 2008-2009 Novell Inc.
++ *
++ * See Documentation/driver-api/driver-model/ for more information.
 + */
 +
-+#ifndef _KREF_H_
-+#define _KREF_H_
++#ifndef _DEVICE_H_
++#define _DEVICE_H_
 +
-+#include <linux/compat.h>
-+
-+struct kref {
-+	long refcount;
-+};
-+
-+#define KREF_INIT(n)	{ .refcount = REFCOUNT_INIT(n), }
++#include <dm/device.h>
 +
 +/**
-+ * kref_init - initialize object.
-+ * @kref: object in question.
++ * dev_name - Return a device's name.
++ * @dev: Device with name to get.
++ * Return: The kobject name of the device, or its initial name if unavailable.
 + */
-+static inline void kref_init(struct kref *kref)
++static inline const char *dev_name(const struct udevice *dev)
 +{
-+	kref->refcount = 1;
++	return dev->name;
 +}
 +
-+static inline unsigned int kref_read(const struct kref *kref)
-+{
-+	return kref->refcount;
-+}
-+
-+/**
-+ * kref_get - increment refcount for object.
-+ * @kref: object.
-+ */
-+static inline void kref_get(struct kref *kref)
-+{
-+	kref->refcount++;
-+}
-+
-+/**
-+ * kref_put - Decrement refcount for object
-+ * @kref: Object
-+ * @release: Pointer to the function that will clean up the object when the
-+ *	     last reference to the object is released.
-+ *
-+ * Decrement the refcount, and if 0, call @release.  The caller may not
-+ * pass NULL or kfree() as the release function.
-+ *
-+ * Return: 1 if this call removed the object, otherwise return 0.  Beware,
-+ * if this function returns 0, another caller may have removed the object
-+ * by the time this function returns.  The return value is only certain
-+ * if you want to see if the object is definitely released.
-+ */
-+static inline int kref_put(struct kref *kref, void (*release)(struct kref *kref))
-+{
-+	if (--kref->refcount == 0) {
-+		release(kref);
-+		return 1;
-+	}
-+	return 0;
-+}
-+
-+/**
-+ * kref_put_mutex - Decrement refcount for object
-+ * @kref: Object
-+ * @release: Pointer to the function that will clean up the object when the
-+ *	     last reference to the object is released.
-+ * @mutex: Mutex which protects the release function.
-+ *
-+ * This variant of kref_lock() calls the @release function with the @mutex
-+ * held.  The @release function will release the mutex.
-+ */
-+static inline int kref_put_mutex(struct kref *kref,
-+				 void (*release)(struct kref *kref),
-+				 struct mutex *mutex)
-+{
-+	return kref_put(kref, release);
-+}
-+
-+/**
-+ * kref_put_lock - Decrement refcount for object
-+ * @kref: Object
-+ * @release: Pointer to the function that will clean up the object when the
-+ *	     last reference to the object is released.
-+ * @lock: Spinlock which protects the release function.
-+ *
-+ * This variant of kref_lock() calls the @release function with the @lock
-+ * held.  The @release function will release the lock.
-+ */
-+static inline int kref_put_lock(struct kref *kref,
-+				void (*release)(struct kref *kref),
-+				spinlock_t *lock)
-+{
-+	return kref_put(kref, release);
-+}
-+
-+/**
-+ * kref_get_unless_zero - Increment refcount for object unless it is zero.
-+ * @kref: object.
-+ *
-+ * This function is intended to simplify locking around refcounting for
-+ * objects that can be looked up from a lookup structure, and which are
-+ * removed from that lookup structure in the object destructor.
-+ * Operations on such objects require at least a read lock around
-+ * lookup + kref_get, and a write lock around kref_put + remove from lookup
-+ * structure. Furthermore, RCU implementations become extremely tricky.
-+ * With a lookup followed by a kref_get_unless_zero *with return value check*
-+ * locking in the kref_put path can be deferred to the actual removal from
-+ * the lookup structure and RCU lookups become trivial.
-+ *
-+ * Return: non-zero if the increment succeeded. Otherwise return 0.
-+ */
-+static inline int kref_get_unless_zero(struct kref *kref)
-+{
-+	return kref->refcount ? kref->refcount++ : 0;
-+}
-+#endif /* _KREF_H_ */
++#endif /* _DEVICE_H_ */
 
 -- 
 2.51.0
