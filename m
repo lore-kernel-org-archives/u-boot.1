@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6CF31091930
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:03:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2850109192C
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:03:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89E7B84197;
+	by phobos.denx.de (Postfix) with ESMTP id C41D88419A;
 	Fri, 20 Mar 2026 00:01:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="csiQklC8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EYaZapsv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC0AF83F8A; Thu, 19 Mar 2026 21:57:40 +0100 (CET)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id 5E63583FC5; Thu, 19 Mar 2026 21:57:45 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4DFD83FC0
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:57:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BC4A183F8A
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:57:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-439bc14dcf4so1723102f8f.1
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:57:38 -0700 (PDT)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-439b97a8a8cso1335864f8f.1
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:57:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773953858; x=1774558658; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1773953862; x=1774558662; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=IPZTkPmihzuAvcfZWVkcBaG4BgUinpIqzcMgHogzs9Y=;
- b=csiQklC8SYFw5YWCseyxukQ9+KjqurUB5TfT/hKKBsFFKamXELP98AsEDUBfM2uFAU
- MLQnNBRzLKkdcPm3aPkxvyN4zEq85652Zrq44RbZO2fahJxPUkv/nlUE6X2NM98tuoOq
- J237rKUn/epfdHDmJKC9T6dSwg3qHyzMu5QRcO2LsxPWI7kUKg3+gp2CIwiO5LT9SfUo
- VF8tnD1LI5vffDlNVBKz9W05zRr0Eh4gLSIuoTDQiaxCMZUWSNZOn4HRVwGmKtTY+btP
- ZE1y3mhhCg5Fcxnmbl88ILSav9CJ9i4lTQBxzlbsj2pC2Kz1NQqPREvpDHR3tiHTiDnt
- Z+Rg==
+ :reply-to; bh=D76RHHt3ck1rSasR55eeHf8+THJxMze9S85PZjvQ1eY=;
+ b=EYaZapsvye4NU1sPMvQQO80ihu23SlW8CtZv+sOL1q4ULM0fEAC7eOgbaN/6BsUjOu
+ vSix18oP24ctFmEYfAtzXqI03FnHTyrT2xADtNEN0XpUnKp+9F7E/LKFkN79MbCZo45O
+ BduOeH4BAf2IlWK8nOz+YLNIGuCNX0Hf21yOmEN/S4zxboUwu/bstKcOflXOoc8HKFoU
+ 5mg6SD8g/yLRlAHltplRbSg4MbDJO7P0D9XeRm2tZo4zhzsUXThpts0yAdIL41wkcq/d
+ NPg1fl7bL502xZ47SDtRJkjlbULeYOBuDkkl4o95CXz1Wkz6pGWhF5Jp4hKq4AdQtoha
+ 3dhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773953858; x=1774558658;
+ d=1e100.net; s=20251104; t=1773953862; x=1774558662;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=IPZTkPmihzuAvcfZWVkcBaG4BgUinpIqzcMgHogzs9Y=;
- b=IyPydsx5iepWWrfeAWExwa/cq30dP8uTJvefKTMbXfS1kbailh/RCV1VoZ4yZfbILB
- Fwx+ppX0SP1je5d32vwt/3WEShZUiecYuSPFRuJQwRsuDpcEQKvz928PogHHCAavZz/2
- EER3uPXuNS9aVGL47gHBDJ2HClqdUjjyrM+QIgDlExsMrp7wQGL9iV6n0TTClbTprPWG
- ThI/+ND1LIAMYih0D25qHtoPVVCIDeAl+TdgQ1+nkmV3WoBw0LTUGuLJa8RhnFGrwui8
- iIE4tN4Rh65yzU6iZk9wX/mCtPyuSaIV7e9o5/p3BzbgYr0wX7eSpG5Jd9t8qcBcEkQK
- gIjw==
-X-Gm-Message-State: AOJu0YzniZH2b4oQO4g4f1QwME7r4g2DLVR9ym3YuHaTYRrrIg8vaqRU
- x+n3oBUkCl41hzdBEMO79CQI3og1fD764JRqM7UznxrQHW+0XdGRnZlQqcjhK8FRaNY=
-X-Gm-Gg: ATEYQzz4wY8r88GcsbiN7yRuNfIVc6tx7Ioy9JrfcMRP6KwefIFbmr95ln+n6A6HZs3
- WlOp3YYu3vCUdrQRN3T0rWUyDqhmrgh/Qgh5D26ay1u4YAifG1SYkKrRJbd3mKbBie7CYvSxedd
- YRR3HERgYuMbdh6XTHo1xXqCeXIusIMwJx/Og9F3xAMWFCMFLpBEcvSYnuRtvPcss1KYnEOYW/Y
- qVVDXUlO3H0NgJqbcQoAMU8d8NX35MsdnyOneuNMXhHcVASI/c5rQujpzNluLff6E4yz23xT4Ur
- 9k33rIpcqSy2S3D/Brkmel/UoTw/znwbVMkCB8d/UInpyRoTReGT4P6jRbBNpqD20SRyVG5icfY
- 8JzbvgnDlsenRXqnmiLaVOTxZqEiLUWUfb+FRcM62jxJsYaglwsvddzuy/mzPkWe28phY4bxyQz
- 3XsV/LYfn3ESyokcXD+uWwKSiRkGTgDV6+EsFHtpnHqo7t494Bvgv6XkvCMZNt4hUwJHA=
-X-Received: by 2002:a05:6000:2409:b0:439:c078:9a57 with SMTP id
- ffacd0b85a97d-43b6428769cmr1505763f8f.25.1773953858002; 
- Thu, 19 Mar 2026 13:57:38 -0700 (PDT)
+ bh=D76RHHt3ck1rSasR55eeHf8+THJxMze9S85PZjvQ1eY=;
+ b=NKAVxq/IAYLaHsxpTtkE/Z834CEnqnj1OzHpEPBXpWC2ebs0ZvbH39iXSWaQPPDHGo
+ Wgrb+3kNaiS71KivF8MjEOLb4vc/DymbqtaUse31dNVyOiCk9s2I7rNI4qVjtqQrR8bX
+ 8UM0Orjv+BwTWCfvukIxTJ4gARo3ta1b5Th6MbrP3B7rOvBzF1HFOeANU9ggagZh2IiI
+ Wc6IlVB5M8Mc4DXnGpiOV2hbhWARrHa9HMzYWZeV6ewh1rkYW2AiYrAR7fR6S0efCi9+
+ 2KYA63jZrQcCJPgq1QDzGfBk3f0IxjpBX4/LSMN94E+E2mysXi7qlul6jXNA5mEwPgDr
+ n26g==
+X-Gm-Message-State: AOJu0YyvWfo5l2KVmR1c3HPA833SCQDM/+g/3wpIfBniJv/85xx1m/lj
+ Ve+GkPeDD2OAgaPjaWNJu4eezsgI5NEknY/83YbZOaQTWohsXPn6pJjxnyptnxTxoqs=
+X-Gm-Gg: ATEYQzykdb6FTjqN+yzHlDpydemNs+YKTdWDRCJ/uqSNmKm6rbN8LB9VxRZOEhpjjAj
+ 8rQhL61Q3cjt08G7G3hRB9cF+X7LMsbNHf3XvMR4+up0qHELhv7ENM1OsaqbCpT00RJ5IF3K/pe
+ dPEivF49vIthhsAlcbRF0oQ7VK6vm5kpa4vJGSrXfixI8Xw4ueWCuFxNULejO8Zr93InU7OuKgv
+ RpXNkLp6wmq/UbbT2qqFvn0Zxz2A0BytLOBjHmCPl49xRCNtQKjI4iTpXOc/B/omAL2pJ+hJFE4
+ 7w0RrNM3H4kXdFspoknu2jNylzgyUKYsWZJd8cPeV2EgWP3B1eP00tftfPhVZD1R8uLS8bkN5ap
+ fbOfHVgM0yuu/MFjJ6U4ODIb5fdPKLxi6ohTTXeJ1qmf4LIMB+sFWbWtMs68iPQTWctG4FVj9JB
+ 5xhDeGp9DdxOOImlbke22oWRqNVAR1KXNLJEWv3pHTd59ahcCFilwjoJUbV20wqGTye6Q=
+X-Received: by 2002:a05:6000:26c3:b0:43b:3d44:662a with SMTP id
+ ffacd0b85a97d-43b64233db1mr1315823f8f.3.1773953862112; 
+ Thu, 19 Mar 2026 13:57:42 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd39.dip0.t-ipconnect.de.
  [79.195.221.57]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.34
+ ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:57:37 -0700 (PDT)
+ Thu, 19 Mar 2026 13:57:41 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 19 Mar 2026 21:56:33 +0100
-Subject: [PATCH RFC 11/40] devres: add devm_krealloc
+Date: Thu, 19 Mar 2026 21:56:34 +0100
+Subject: [PATCH RFC 12/40] regmap: add regmap_assign_bits
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260319-casey-ccf-upstream-v1-11-4df2ee2226da@linaro.org>
+Message-Id: <20260319-casey-ccf-upstream-v1-12-4df2ee2226da@linaro.org>
 References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
@@ -160,13 +160,13 @@ Cc: Tom Rini <trini@konsulko.com>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>, 
  Paul Sajna <sajattack@postmarketos.org>, Marek Vasut <marex@denx.de>
 X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5758;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=959;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=0b2jzjydfkPAun+KPQliO692FtVj2RfqfyBqbUj4Fxw=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yXwen+ZN4K7YuPvskmBOs37ptUcvOZ87um/WobB9D
- D/CfdxbO0pZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBElvow/JUT0tG7f3+lYNfT
- nq4auRUfO174lGbeSDpwKevBWaXCzYkM/7SMeGs37pq5cRN37IXe+423/6XmfAz/t9Tkpp2aUu6
- PqfUA
+ bh=R70v3bfUMa8es6EMn7gwODOUxcvSL29PsRM99C/5PHE=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yXx3DRP5WHuv7Ftr6rGGb23/b8P1G5cJ5u5Tj0ktO
+ 77hp6FdRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZgI+11Ghq1tvl6x9z9qqTqs
+ v31NV1oz7oVeVqW++Ssbu20K381sghn+h8wuKc33aBCb+179iHaPiYLOSxne+dc33DNpfaK0sD3
+ zMgA=
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Fri, 20 Mar 2026 00:01:15 +0100
@@ -186,185 +186,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Loosely based on the Linux version, this makes it possible to krealloc()
-devm managed memory. Currently it depends on tracking the allocation
-size in struct devres even when DEBUG_DEVRES is disabled, but it's a
-relatively small tradeoff for the additional functionality.
+This is a simple wrapper around set/clear bits used by drivers in Linux.
+Add it here so it can be used by Qualcomm CCF clk drivers.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/core/devres.c | 83 ++++++++++++++++++++++++++++++++++++++++++++-------
- include/dm/devres.h   | 10 +++++++
- 2 files changed, 83 insertions(+), 10 deletions(-)
+ include/regmap.h | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/drivers/core/devres.c b/drivers/core/devres.c
-index 8df08b91021c..88f7c832f43e 100644
---- a/drivers/core/devres.c
-+++ b/drivers/core/devres.c
-@@ -45,18 +45,17 @@ struct devres {
- 	dr_release_t			release;
- 	enum devres_phase		phase;
- #ifdef CONFIG_DEBUG_DEVRES
- 	const char			*name;
--	size_t				size;
- #endif
-+	size_t				size;
- 	unsigned long long		data[];
- };
- 
- #ifdef CONFIG_DEBUG_DEVRES
--static void set_node_dbginfo(struct devres *dr, const char *name, size_t size)
-+static void set_node_dbginfo(struct devres *dr, const char *name)
+diff --git a/include/regmap.h b/include/regmap.h
+index 8c6f7c1c9b1a..eeae843bfb74 100644
+--- a/include/regmap.h
++++ b/include/regmap.h
+@@ -388,8 +388,17 @@ static inline int regmap_clear_bits(struct regmap *map, uint offset, uint bits)
  {
- 	dr->name = name;
--	dr->size = size;
+ 	return regmap_update_bits(map, offset, bits, 0);
  }
  
- static void devres_log(struct udevice *dev, struct devres *dr,
- 		       const char *op)
-@@ -64,9 +63,9 @@ static void devres_log(struct udevice *dev, struct devres *dr,
- 	log_debug("%s: DEVRES %3s %p %s (%lu bytes)\n", dev->name, op, dr,
- 		  dr->name, (unsigned long)dr->size);
- }
- #else /* CONFIG_DEBUG_DEVRES */
--#define set_node_dbginfo(dr, n, s)	do {} while (0)
-+#define set_node_dbginfo(dr, n)	do {} while (0)
- #define devres_log(dev, dr, op)		do {} while (0)
- #endif
- 
- #if CONFIG_DEBUG_DEVRES
-@@ -84,9 +83,10 @@ void *_devres_alloc(dr_release_t release, size_t size, gfp_t gfp)
- 		return NULL;
- 
- 	INIT_LIST_HEAD(&dr->entry);
- 	dr->release = release;
--	set_node_dbginfo(dr, name, size);
-+	dr->size = size;
-+	set_node_dbginfo(dr, name);
- 
- 	return dr->data;
- }
- 
-@@ -99,23 +99,35 @@ void devres_free(void *res)
- 		kfree(dr);
- 	}
- }
- 
--void devres_add(struct udevice *dev, void *res)
-+static void devres_set_phase(struct udevice *dev, struct devres *dr)
- {
--	struct devres *dr = container_of(res, struct devres, data);
--
--	devres_log(dev, dr, "ADD");
--	assert_noisy(list_empty(&dr->entry));
- 	if (dev_get_flags(dev) & DM_FLAG_PLATDATA_VALID)
- 		dr->phase = DEVRES_PHASE_PROBE;
- 	else if (dev_get_flags(dev) & DM_FLAG_BOUND)
- 		dr->phase = DEVRES_PHASE_OFDATA;
- 	else
- 		dr->phase = DEVRES_PHASE_BIND;
-+}
-+
-+void devres_add(struct udevice *dev, void *res)
++static inline int regmap_assign_bits(struct regmap *map, unsigned int reg,
++				     unsigned int bits, bool value)
 +{
-+	struct devres *dr = container_of(res, struct devres, data);
-+
-+	devres_log(dev, dr, "ADD");
-+	assert_noisy(list_empty(&dr->entry));
-+	devres_set_phase(dev, dr);
- 	list_add_tail(&dr->entry, &dev->devres_head);
- }
- 
-+static void devres_replace(struct udevice *dev, struct devres *old, struct devres *new)
-+{
-+	devres_log(dev, old, "REPLACE");
-+	devres_set_phase(dev, new);
-+	list_replace(&old->entry, &new->entry);
-+}
-+
- void *devres_find(struct udevice *dev, dr_release_t release,
- 		  dr_match_t match, void *match_data)
- {
- 	struct devres *dr;
-@@ -290,4 +302,55 @@ void devm_kfree(struct udevice *dev, void *p)
- 
- 	rc = devres_destroy(dev, devm_kmalloc_release, devm_kmalloc_match, p);
- 	assert_noisy(!rc);
- }
-+
-+/**
-+ * devm_krealloc - Resource-managed krealloc()
-+ * @dev: Device to re-allocate memory for
-+ * @ptr: Pointer to the memory chunk to re-allocate
-+ * @new_size: New allocation size
-+ * @gfp: Allocation gfp flags
-+ *
-+ * Managed krealloc(). Resizes the memory chunk allocated with devm_kmalloc().
-+ * Behaves similarly to regular krealloc(): if @ptr is NULL or ZERO_SIZE_PTR,
-+ * it's the equivalent of devm_kmalloc(). If new_size is zero, it frees the
-+ * previously allocated memory and returns ZERO_SIZE_PTR. This function doesn't
-+ * change the order in which the release callback for the re-alloc'ed devres
-+ * will be called (except when falling back to devm_kmalloc() or when freeing
-+ * resources when new_size is zero). The contents of the memory are preserved
-+ * up to the lesser of new and old sizes.
-+ */
-+void *devm_krealloc(struct udevice *dev, void *ptr, size_t new_size, gfp_t gfp)
-+{
-+	struct devres *old_dr, *new_dr;
-+
-+	if (unlikely(!new_size)) {
-+		devm_kfree(dev, ptr);
-+		return NULL;
-+	}
-+
-+	if (unlikely(!ptr))
-+		return devm_kmalloc(dev, new_size, gfp);
-+
-+	old_dr = devres_find(dev, devm_kmalloc_release, devm_kmalloc_match, ptr);
-+	if (!old_dr) {
-+		printf("Devres realloc failed, memory chunk not managed or managed by a different device\n");
-+		return NULL;
-+	}
-+
-+	/* No need to realloc to shrink */
-+	if (old_dr->size < new_size)
-+		return old_dr->data;
-+
-+	new_dr = _devres_alloc(devm_kmalloc_release, new_size, gfp);
-+	if (!new_dr)
-+		return NULL;
-+
-+	devres_replace(dev, old_dr, new_dr);
-+	memcpy(new_dr->data, old_dr->data,
-+	       old_dr->size);
-+
-+	devres_free(old_dr->data);
-+
-+	return new_dr->data;
-+}
-diff --git a/include/dm/devres.h b/include/dm/devres.h
-index 406d18686f4d..13d7d0eec43a 100644
---- a/include/dm/devres.h
-+++ b/include/dm/devres.h
-@@ -194,8 +194,18 @@ static inline void *devm_kcalloc(struct udevice *dev,
- {
- 	return devm_kmalloc_array(dev, n, size, flags | __GFP_ZERO);
- }
- 
-+void *devm_krealloc(struct udevice *dev, void *ptr, size_t new_size, gfp_t gfp);
-+
-+static inline void *devm_krealloc_array(struct udevice *dev, void *p, size_t new_n, size_t new_size, gfp_t flags)
-+{
-+	if (new_size != 0 && new_n > SIZE_MAX / new_size)
-+		return NULL;
-+
-+	return devm_krealloc(dev, p, new_n * new_size, flags);
++	if (value)
++		return regmap_set_bits(map, reg, bits);
++	else
++		return regmap_clear_bits(map, reg, bits);
 +}
 +
  /**
-  * devm_kfree() - Resource-managed kfree
-  * @dev: Device this memory belongs to
-  * @ptr: Memory to free
+  * regmap_init_mem() - Set up a new register map that uses memory access
+  *
+  * @node:	Device node that uses this map
 
 -- 
 2.51.0
