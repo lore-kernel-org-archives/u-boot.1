@@ -4,86 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA3E11091926
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 21:38:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37E961091916
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 21:53:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BBAE8415D;
-	Thu, 19 Mar 2026 22:37:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 7C48783FD9;
+	Thu, 19 Mar 2026 22:53:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YtMFN5hW";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="XQJfx/V9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1F9B838FA; Thu, 19 Mar 2026 22:37:03 +0100 (CET)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id 1390783FDE; Thu, 19 Mar 2026 22:53:24 +0100 (CET)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C76258410D
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 22:36:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CBFE83FC5
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 22:53:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7d556c1a79eso1453810a34.3
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 14:36:59 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-463a0e14abfso713620b6e.2
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 14:53:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1773956218; x=1774561018; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1BtvRs7r92OFA8T8WnbvY0teXccjgAuOpzUgrtc6nF0=;
- b=YtMFN5hWJFGsNS6r4LvGdOq8PpJ1yBbZeh5pxAac+zUJoBsNWfAhWxP0DulbwlJUJ4
- H2bKQlWSHsdvA4aUvQO8g079C1rgsoJjIkUcGJ0Nf87VaO+NxGcMEc/UNY8SURtVFqqa
- wELkeWEZYSTYik76sXlqpgDr87yoW9pQMAX0A=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773957197; x=1774561997;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=B+IPCbWAr42D/URPnR4vsfl+4N3uNPFJW9X1ma6fJg4=;
+ b=XQJfx/V9ctZLPInV0yrVtV6htnafMKuu3guK0744kcaI9aLCVa36OQEexnBYvIShb4
+ Y6T2C0BV239VAWjLPRZDPtsLKhiJ11zIQSb5YI30zUMNfJq64/MDDZk/j8V9Pl6W+ZHv
+ F2+K1jzCK489BH3IQ6YyvUwQgc691b9N+vL2xjuiMq5F/ttgFhPL0i7qeh7BAxUZGLTX
+ SPAsNRydizbM2uwgZ3nQXp7/k+Yef4vynijaNm1arczgDKK3b/LdmYtgNMYw/bqY2NJm
+ pDdyCtBQdaYTrRI3j3j9Tx5a2rpzS+925vy47JknHQ9BY74FmUpL1a6ZBpB4OnFXLli9
+ rlhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773956218; x=1774561018;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=1BtvRs7r92OFA8T8WnbvY0teXccjgAuOpzUgrtc6nF0=;
- b=f/SrFro+99MZJA97qRYKWALVWB1Xho+hiZFbkNUhUAGRPtnaRRipzLl/iObVMio2bv
- Vmly7Q1UQ95SyxqAAezggRu4bA6HcMBVPMjnQUbLp+rG8PdvaL61fNsyxrGZsnrzg4SP
- b65xcppLIPEUgjFXPldfTM2gyeHsbGSMsGogUMggchGAwuJ6ihLHkqzskcjNIBTroS8p
- GxMeJ3nGmcyXGdK3axY/+jvZiLSn0AGFKOQmHMmm432a//IA1LHOjkbjo4DUm75JkO5H
- hP+hx2VSQgMNWNvMEO9JZKfYPo1CAvmmNAJEXzij+MaLFqpzn0FmErpNGLlFWzUr/bZb
- 0xPg==
-X-Gm-Message-State: AOJu0YzeN72lHRrVMIHolsqzRsyC1mSP9IpOorPq9EgLIhZDtM3nPqy/
- Lihok4SyRAqlJNpePhfcXEmJw1zpP04jVKodttpu1QzQs9aYB3L/fwjtt9W5FRVrMJb9m/tIL5C
- ejzLCkg==
-X-Gm-Gg: ATEYQzxufGj5lRWA5G+p8Bqmvxr7Cuu+v/2uL0yw1k+HK8FbP1hs+zoRumdzyTIAUCy
- bLYnhwg7CxKvK5aLgLIeDYhgu9By6YDDr2j/nl/jOr7IGHWMsyyOD3rR4Yw3taNLkCF25VpG3M5
- T81vFHEIgbKJAKl3B4V7FF6Kh/q7Bj3nHARF/eXf2w39lOkSB/qdReb+58Opf6o7NTFQ6QoBOCl
- 0gGhG0f58ZM3uvpMKOi79Xbt4HQ0ebCeaw7pQZPnqB0LmmslNEgBNbAZ66m2Vvglgr06moYVLXJ
- 2fTqHL+xIXqbQUIoo4CsLQE5dG9SKsrb5Ka9KyJCBu5Yp+yaaPKtrOY/78Zx/THzqB61GuNekp4
- Tjl1KyWLWP2Euh+2JCNTYQYiytCo4PZIWGsbYLDu1Q9WLWQs3ilyou/Yg9QNUpiKXx34BZEJHfe
- 0I/gjNbQ4/Ty0fgL+afArZbRPhz771
-X-Received: by 2002:a05:6830:410f:b0:7d7:3adf:a722 with SMTP id
- 46e09a7af769-7d7eafe1fefmr589762a34.29.1773956217943; 
- Thu, 19 Mar 2026 14:36:57 -0700 (PDT)
-Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7eac17b0asm545724a34.9.2026.03.19.14.36.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 14:36:57 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Brian Sune <briansune@gmail.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Kuan-Wei Chiu <visitorckw@gmail.com>,
- Lukasz Majewski <l.majewski@samsung.com>,
- Michal Simek <michal.simek@amd.com>, Peng Fan <peng.fan@nxp.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>
-Subject: [RFC PATCH 15/15] power: pmic: raa215300: Convert sysreset to uclass
- adjunct
-Date: Thu, 19 Mar 2026 15:35:45 -0600
-Message-ID: <20260319213551.267031-16-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260319213551.267031-1-sjg@chromium.org>
-References: <20260319213551.267031-1-sjg@chromium.org>
+ d=1e100.net; s=20251104; t=1773957197; x=1774561997;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=B+IPCbWAr42D/URPnR4vsfl+4N3uNPFJW9X1ma6fJg4=;
+ b=s3bh6b7GO8DzhzaMuq5FhdF1QeBDtx3w2YWPNWeHpeJcHoWn1TrWHI3mlrI1om0dLM
+ uD1pBLKRDT4J0ZZ7Ze8/mRHNhziV7MBTgbjtqKBaN6uJ0L3uY116vDf3C6rW0MC7p7my
+ XrZKL3QYUY14OjY09tCYMWmmVKc2DMLUKhaisxwL4Gjy+7s9sqZPncU/KCK2WGSU1jrf
+ 4MRmp8gyNVnNZ3I0MWYVZ/emSraRr6djSq7PT8FWgmN/cjMwkeXG4Uus4pTfTFX14ku9
+ TJAA/IJXdBCtjX7j43CqKUNO0812y+eEt6RSotldFWPm1+w7gfkWGyZDEX+7fW4K6LEp
+ THZw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUFJ8bSteEXdzAzggoCyfphw3UZF4QB2u5E+FYSttvRvF2Yed4+ASXvmuYOUt9hwuDRgjTVNCo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxhVJMeUtnIh7Wazz92xjunlX6+2m2nyvqBrSCe2M7IeJaH3utI
+ 3Wr51P8q/l92sdodINukUZFKSiBNPl86sn5jffrr3tMmeUsxTFC4bzyo1UbMR+rJjDY=
+X-Gm-Gg: ATEYQzxUhqVee1dyYvHw37oj7iRj/NWTb6tynVyRrzPnpQj1qOFvDY+Iq64P6Gla5qE
+ la5ZQ+lPpcQPjNWCZH57egnw3SG4BP3Ajbd07k+FfravlNF7xmwwNrO86Jpull9TgXKAoFQEfQv
+ /aSWR5b6cRUNzR/6Wno736kCmNDGqgIzwQ2cJ+soWxl34cxbJL08DPEsWAC9D5dp16FMUXXtBAb
+ FB1MHzo5UzrhD09Nv10CAXX96eMot8Hl3A1IqIsXu53ocOSMZgdhcbd9n0MOi4Z6CPYb3ZPchM1
+ SI8n1xaIjBYKNoqOun5x6dioVY2RWzWcOz8U7/A+7gKp+EMALelx6A87SoiAl3EDo8sAFp74uir
+ zgZb9Qsk3+k1c8kPKDotM9VkeGRF3bZw0dtoapHbgtCXdHtQoOyne3SoErc0KVrqb2bPBwfyYo3
+ l/X9aKm6eOWWEofdmtFAPy0uoD89m3KtgRyceGD3z9zEuJmvOt5ZDVfKyRWFW8srWUOMOkptA=
+X-Received: by 2002:a05:6808:6551:20b0:467:e5a2:a9ef with SMTP id
+ 5614622812f47-467e5f62dfamr328436b6e.38.1773957196714; 
+ Thu, 19 Mar 2026 14:53:16 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:6a3c:6fc:3be2:208d?
+ ([2600:8803:e7e4:500:6a3c:6fc:3be2:208d])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-467e7d1a68fsm156531b6e.3.2026.03.19.14.53.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 19 Mar 2026 14:53:15 -0700 (PDT)
+Message-ID: <78ade2f9-57e5-449a-b57d-89982b1449d5@baylibre.com>
+Date: Thu, 19 Mar 2026 16:53:13 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 9/9] configs: add new defconfig for
+ mt8395_genio_1200_evk_ufs
+To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Chris-QJ Chen <chris-qj.chen@mediatek.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Bo-Chen Chen <rex-bc.chen@mediatek.com>
+References: <20260318-mt8195-add-ufs-support-v2-0-f18eeeeb0e72@baylibre.com>
+ <20260318-mt8195-add-ufs-support-v2-9-f18eeeeb0e72@baylibre.com>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <20260318-mt8195-add-ufs-support-v2-9-f18eeeeb0e72@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,210 +120,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Convert the RAA215300 PMIC's sysreset support from the child-device
-pattern to use uclass adjuncts. Previously the PMIC driver's bind
-function created a separate child device with a dedicated sysreset
-driver. Now the PMIC driver registers itself as a sysreset adjunct
-during probe, keeping all the functionality in a single device.
+On 3/18/26 11:51 AM, Julien Stephan wrote:
+> This new defconfig is based on mt8395_genio_1200_evk_defconfig, with
+> additional configs for UFS.  In order to avoid duplicating defconfig, we
+> introduce configs/mt8195.config.
+> 
 
-The key change is that raa215300_sysreset_request() no longer needs
-dev_get_parent() to reach the PMIC, since the device itself is the
-PMIC.
+...
 
-Remove the now-unused sysreset_raa215300.c driver.
+> diff --git a/configs/mt8395_genio_1200_evk_ufs_defconfig b/configs/mt8395_genio_1200_evk_ufs_defconfig
+> new file mode 100644
+> index 00000000000..c18d7de4df2
+> --- /dev/null
+> +++ b/configs/mt8395_genio_1200_evk_ufs_defconfig
+> @@ -0,0 +1,13 @@
+> +#include <configs/mt8195.config>
+> +
+> +CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt8395-genio-1200-evk-ufs"
+> +CONFIG_IDENT_STRING=" mt8395-genio-1200-evk-ufs"
+> +CONFIG_CMD_UFS=y
+> +CONFIG_PHY=y
+> +CONFIG_DM_PMIC=y
+> +CONFIG_DM_PMIC_MTK_PWRAP=y
+> +CONFIG_DM_REGULATOR=y
+> +CONFIG_DM_REGULATOR_MT6359=y
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+I thing PMIC and regulator should be in the commmon .config.
+It is used by more than just UFS.
 
- drivers/power/pmic/raa215300.c        | 60 ++++++++++++++++++++++-----
- drivers/sysreset/Kconfig              |  3 ++
- drivers/sysreset/Makefile             |  1 -
- drivers/sysreset/sysreset_raa215300.c | 58 --------------------------
- 4 files changed, 52 insertions(+), 70 deletions(-)
- delete mode 100644 drivers/sysreset/sysreset_raa215300.c
-
-diff --git a/drivers/power/pmic/raa215300.c b/drivers/power/pmic/raa215300.c
-index a581a1f6dc1..279dbd29756 100644
---- a/drivers/power/pmic/raa215300.c
-+++ b/drivers/power/pmic/raa215300.c
-@@ -5,11 +5,14 @@
- 
- #include <dm.h>
- #include <dm/device-internal.h>
--#include <dm/lists.h>
- #include <i2c.h>
- #include <power/pmic.h>
-+#include <sysreset.h>
- 
--#define RAA215300_REG_COUNT 0x80
-+#define RAA215300_REG_COUNT	0x80
-+#define RAA215300_REG_SWRESET	0x6D
-+#define RAA215300_COLD_RESET	BIT(0)
-+#define RAA215300_WARM_RESET	BIT(1)
- 
- static int raa215300_reg_count(struct udevice *dev)
- {
-@@ -27,24 +30,59 @@ static const struct udevice_id raa215300_ids[] = {
- 	{ /* sentinel */ }
- };
- 
--static int raa215300_bind(struct udevice *dev)
-+#if IS_ENABLED(CONFIG_SYSRESET_RAA215300)
-+static int raa215300_sysreset_request(struct udevice *dev,
-+				      enum sysreset_t type)
- {
--	if (IS_ENABLED(CONFIG_SYSRESET_RAA215300)) {
--		struct driver *drv = lists_driver_lookup_name("raa215300_sysreset");
--		if (!drv)
--			return -ENOENT;
-+	int ret;
-+	u8 val;
- 
--		return device_bind(dev, drv, dev->name, NULL, dev_ofnode(dev),
--				   NULL);
-+	/*
-+	 * The RAA215300 documentation names the available reset types
-+	 * differently to U-Boot:
-+	 *
-+	 *   - A "warm" reset via the RAA215300 PMIC will fully reset the SoC
-+	 *     (CPU & GPIOs), so this corresponds to SYSRESET_COLD.
-+	 *
-+	 *   - A "cold" reset via the RAA215300 PMIC will cycle all power supply
-+	 *     rails, so this corresponds to SYSRESET_POWER.
-+	 */
-+	switch (type) {
-+	case SYSRESET_COLD:
-+		val = RAA215300_WARM_RESET;
-+		break;
-+
-+	case SYSRESET_POWER:
-+		val = RAA215300_COLD_RESET;
-+		break;
-+
-+	default:
-+		return -EPROTONOSUPPORT;
- 	}
- 
--	return 0;
-+	ret = pmic_reg_write(dev, RAA215300_REG_SWRESET, val);
-+	if (ret)
-+		return ret;
-+
-+	return -EINPROGRESS;
- }
- 
-+static struct sysreset_ops raa215300_sysreset_ops = {
-+	.request = raa215300_sysreset_request,
-+};
-+
-+static const struct driver_adjunct raa215300_adjuncts[] = {
-+	{ UCLASS_SYSRESET, &raa215300_sysreset_ops },
-+	{ }
-+};
-+#endif
-+
- U_BOOT_DRIVER(raa215300_pmic) = {
- 	.name = "raa215300_pmic",
- 	.id = UCLASS_PMIC,
- 	.of_match = raa215300_ids,
--	.bind = raa215300_bind,
- 	.ops = &raa215300_ops,
-+#if IS_ENABLED(CONFIG_SYSRESET_RAA215300)
-+	.adjuncts = raa215300_adjuncts,
-+#endif
- };
-diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
-index 16ef434a8d9..737327b8197 100644
---- a/drivers/sysreset/Kconfig
-+++ b/drivers/sysreset/Kconfig
-@@ -290,8 +290,11 @@ config SYSRESET_MPC83XX
- config SYSRESET_RAA215300
- 	bool "Support sysreset via Renesas RAA215300 PMIC"
- 	depends on PMIC_RAA215300
-+	select DM_UC_ADJUNCT
- 	help
- 	  Add support for the system reboot via the Renesas RAA215300 PMIC.
-+	  Uses the uclass adjunct feature to register the PMIC as a
-+	  sysreset device without creating a separate child device.
- 
- config SYSRESET_QCOM_PSHOLD
- 	bool "Support sysreset for Qualcomm SoCs via PSHOLD"
-diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
-index d18a5d52360..0226eecca4d 100644
---- a/drivers/sysreset/Makefile
-+++ b/drivers/sysreset/Makefile
-@@ -29,7 +29,6 @@ obj-$(CONFIG_SYSRESET_WATCHDOG) += sysreset_watchdog.o
- obj-$(CONFIG_SYSRESET_RESETCTL) += sysreset_resetctl.o
- obj-$(CONFIG_$(PHASE_)SYSRESET_AT91) += sysreset_at91.o
- obj-$(CONFIG_$(PHASE_)SYSRESET_X86) += sysreset_x86.o
--obj-$(CONFIG_SYSRESET_RAA215300) += sysreset_raa215300.o
- obj-$(CONFIG_SYSRESET_QCOM_PSHOLD) += sysreset_qcom-pshold.o
- obj-$(CONFIG_TARGET_XTFPGA) += sysreset_xtfpga.o
- obj-$(CONFIG_SYSRESET_QEMU_VIRT_CTRL) += sysreset_qemu_virt_ctrl.o
-diff --git a/drivers/sysreset/sysreset_raa215300.c b/drivers/sysreset/sysreset_raa215300.c
-deleted file mode 100644
-index 32dfcb0aec8..00000000000
---- a/drivers/sysreset/sysreset_raa215300.c
-+++ /dev/null
-@@ -1,58 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * Copyright (C) 2023 Renesas Electronics Corporation
-- */
--
--#include <dm.h>
--#include <power/pmic.h>
--#include <sysreset.h>
--
--#define RAA215300_REG_SWRESET	0x6D
--#define RAA215300_COLD_RESET	BIT(0)
--#define RAA215300_WARM_RESET	BIT(1)
--
--static int raa215300_sysreset_request(struct udevice *dev, enum sysreset_t type)
--{
--	struct udevice *pmic = dev_get_parent(dev);
--	int ret;
--	u8 val;
--
--	/*
--	 * The RAA215300 documentation names the available reset types
--	 * differently to u-boot:
--	 *
--	 *   - A "warm" reset via the RAA215300 PMIC will fully reset the SoC
--	 *     (CPU & GPIOs), so this corresponds to SYSRESET_COLD.
--	 *
--	 *   - A "cold" reset via the RAA215300 PMIC will cycle all power supply
--	 *     rails, so this corresponds to SYSRESET_POWER.
--	 */
--	switch (type) {
--	case SYSRESET_COLD:
--		val = RAA215300_WARM_RESET;
--		break;
--
--	case SYSRESET_POWER:
--		val = RAA215300_COLD_RESET;
--		break;
--
--	default:
--		return -EPROTONOSUPPORT;
--	}
--
--	ret = pmic_reg_write(pmic, RAA215300_REG_SWRESET, val);
--	if (ret)
--		return ret;
--
--	return -EINPROGRESS;
--}
--
--static struct sysreset_ops raa215300_sysreset_ops = {
--	.request = raa215300_sysreset_request,
--};
--
--U_BOOT_DRIVER(raa215300_sysreset) = {
--	.name = "raa215300_sysreset",
--	.id = UCLASS_SYSRESET,
--	.ops = &raa215300_sysreset_ops,
--};
--- 
-2.43.0
+> +CONFIG_SCSI=y
+> +CONFIG_UFS=y
+> +CONFIG_UFS_MEDIATEK=y
+> 
 
