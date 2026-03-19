@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DAA71091915
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 20:03:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59D7F1091915
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 20:04:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 117ED83FC0;
+	by phobos.denx.de (Postfix) with ESMTP id AC34A8405A;
 	Thu, 19 Mar 2026 21:02:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="hYT5Hbho";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="CKuxWOQu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82A1484065; Thu, 19 Mar 2026 21:02:28 +0100 (CET)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id 78C8384006; Thu, 19 Mar 2026 21:02:30 +0100 (CET)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FFF78405A
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:02:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BA4184088
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:02:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-467d9ca391cso424275b6e.3
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:02:24 -0700 (PDT)
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-67bb5e4cf7eso640956eaf.2
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:02:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773950543; x=1774555343;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773950541; x=1774555341;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=xVlcPkturgyeHzuofVMleT0D1Ry9PjMI9RnEZ1VdR7Q=;
- b=hYT5HbhoRWcWvQGlnunEkFj1IkoB9eR6QTN5MXdZg+DotS1zj7z9mBoykHiKQWkvs4
- UNGZiJYCwLX8VwLfAVXPefPBA0nA8A4KDp/CgjBsMKFshWips4u9Cow31JXLmnynHKMh
- gXzUTLCxBg3eJQxkl3nQZwXeSqBrAD4IEQIASVGewsagF3rGPEib7iwGJC/8kN5wt0ja
- 9YimHb34uRxoSNKPv/OiP+2B8Z6PT5pJ/GYR7M1DV+hyETg+dQSa+SRIVYJqLZVIHZ/W
- BeT8o0sckgO1O85ajSZEMAcJEmp63/ubLvS189EYe2qa9is/+UDfLkx7QQ1hU+UvfHqF
- gr1w==
+ :reply-to; bh=1NlR+cCwL/WZA9sOCSgSwS+K30cq3WOE5tkyF5OtrkQ=;
+ b=CKuxWOQukSI9DKWkEvNxHFxqrVxtweQmMNGnAsKfAhm3UNK+Bo82ti2AHxlNxWIGBW
+ 73bfLf4N2rce4QxEUAGlOR0Zyv7cEcV2eexGJHTdMV/6WJciJT7yU/izfqadgg/aCtfH
+ gcmvsqXr6Djra8CXFleDujjjMEpU+uRxQuzw94ZqAyzYgM2Hye/miu2FJG5QbrQt8V0p
+ vNKwrVIpl4/4Vg4fFmXq4cfdRPF1xf8COSLoUuZDF5zC8I4u0KJlMkcyaVLEXTMeNVdI
+ dseJvXRcu9QuOADeKYOd2zgET5xYcZm9BFkon3YDDnGp4YMUoP4+c4s15rnatqf2m54f
+ idxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773950543; x=1774555343;
+ d=1e100.net; s=20251104; t=1773950541; x=1774555341;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=xVlcPkturgyeHzuofVMleT0D1Ry9PjMI9RnEZ1VdR7Q=;
- b=ArHBxdbyL1+afmGgFDWN4X2A+Cgu94ZZiUcLjF2lcbBdfFlN7bapsKHPCBAisqvxTU
- ayYXlUyWnDRLE7z7c0oLhAZMpWU7jG5B+VR2GoKhzv2PzPimx6VeUKczt10SPrevCSQZ
- WGyJokPVfQCQolotT5CI6H7pygBWuOVr70E8UX4vtwDN6MD3nLIVRgY9ojcf1uzNgR19
- KonCsDb4mz0Z+Rp+KU/4NGEJqfFX6JPBJih1ZYC45tn8RWaNov1B38ZXIFhqJ5stttun
- e7eoZjVE2zUdxAKKWqoulC6WBmkmV/5jE5ISz8b5gxdbkXHYVswrnC0CwBLsVdxZzLvE
- xTEw==
+ bh=1NlR+cCwL/WZA9sOCSgSwS+K30cq3WOE5tkyF5OtrkQ=;
+ b=FJqDknI25zKSnuw2/ZWDrETq1uli3MEjCcUmTDC4IfnKHYyHD64Mk+32/faSbg6ccD
+ JoyaNypCGKcWcr1xEdT991TtuF1kBj+Rij7KKzdGRP98XfGuk1yFvN1riOKhixEbKcDs
+ VsbnYZWH2eZybvj7ymXZkWv5IEI/CKH0wYvCIhuqY7OAU7u+gmfrYJYUi4jsVp7XUBQ5
+ j0iPaVMjjixpetn0W7wsRuVdqwKfPlePx56e1uURB65VLHvfVhw1R8+yiaD0METddjTr
+ D5e1wmSWzvGxguvLAV0lXA8I/zXcilMXkcEYVL6idEusIyaHzOMgMqNhrsbtmdkgGHdZ
+ YtHw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW7GhoYL464BuU0vkQZKRphW5KFvU2mnRzuCGPGVCKxqCEH9iPKUzijWUL08CyKBJa7DWt4pIE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx7FJrgsk5W91mlH9007fS17RJtw2JhL3BqtxdyAoAZnNRO5CFl
- DjmCPlyZFdrU6Sh1eS0MG86SPCOEyg0qo1dTsOShb4LgncdzfO27g1CsZRxJmbsL+/A=
-X-Gm-Gg: ATEYQzy9eTuT9m+0Pm6+zArrwfofiROIdhPYCam6JrSWLXEP0Am1Je368EudsCwai9G
- HUh0z0ob3vTCWYfcLUKNx3FcqiRZnTJzUaYHVqWdN/0khuNgxNCVGv3AXTlIeUI0wML/Ehgq2yb
- notJ8qTabKlDVpagA74UgDWaS4YdugdUjz77302reb6LMnkpWlhD4brMgCTB/qPCnNlIkH6Zs9l
- oJ+Wt6tojLO071zOIr95b4vy0lnKW/XEVGc8UefFe7s4uBFxX6yNuNIOE5Cs1xbvKiZUtTpRXdZ
- vvt11tTS/nFRuJkGPdJ42x+cmu0gvUfziStWXIVzNNqqIH+9noCRg99TKZky3N9rl3+nb+YfpxY
- Ecxe1xXGrObkcB8+DWyrndcG+wAhJevX27WI0w957a9tW80pNiTCQoLWZ4DJMZvpi/OqN2b/Al3
- ebTS8BBOO2LRntWtn6lDBUQxY+5isG
-X-Received: by 2002:a4a:e84b:0:b0:67c:1ea0:2c4 with SMTP id
- 006d021491bc7-67c22ef416bmr542511eaf.6.1773950542687; 
- Thu, 19 Mar 2026 13:02:22 -0700 (PDT)
+ AJvYcCUT/XXAYkTruD31VTKjRxamVBLfEAMCpz7eAb8H+2rqfNzx3KR52awpegORfiiqNFN06gI3zPs=@lists.denx.de
+X-Gm-Message-State: AOJu0YxOusuThm2UxI5dzkQFCiVBZQNrLE3u5F/D/SK6fmagyPeiJkfM
+ iCyzr8MQcE7IFNA/gosRz5oKikAzxuPYtgLX5O3k4fNLmDoAPMuIrjYJIOBbiUuUQ0E=
+X-Gm-Gg: ATEYQzyKdBz/NmYwV/iYxdYHXtgLZ/xwjUDAPLioam0yobC5XwzfsR5l2zjHJPVG6YY
+ z/GGEBMXNhFiI5vORPEMJfMuPfEjPUkqzm9QDswYqIoR+2ZF15eW3fqW9sLSrYK9rsfpResKCYO
+ iZPWDqr2zFnYvL3Yp9AMxxICOJBbtSBVa8lR1XX8Hqaq07FbxNz211YfJVrHkFozmljJ+oKfdsE
+ 16mfS2oJRhFESgQJ3AaXBatUa+jMiD/KLKI6E8IK3ob39Ot3QRnBRqWNCn81IrFYekoElv354WY
+ XAPKutPbXCc2nKmb6QeNsVzwWpyd20BdMniwpSKM/MYYAMMnyE8aDNQ9O6jG7A+NtOxZLW2CQbh
+ +T5Jc8CvzSVp1SEmxNEEVthMXb+eSMbq30J3FB7ap4HrLddasSgOqUYQO2VcU9djdEdyUdNLAME
+ UP/ZHY+4rr3oqO0kwnuIiqDtrZcfcWOCk9hi1ZO1I=
+X-Received: by 2002:a05:6820:1f06:b0:67b:da68:955d with SMTP id
+ 006d021491bc7-67c22ff5bf9mr532930eaf.66.1773950540668; 
+ Thu, 19 Mar 2026 13:02:20 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:244c:fc8c:8216:1344])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-67c252acd32sm2826eaf.3.2026.03.19.13.02.21
+ 006d021491bc7-67c252acd32sm2826eaf.3.2026.03.19.13.02.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:02:22 -0700 (PDT)
+ Thu, 19 Mar 2026 13:02:20 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Thu, 19 Mar 2026 15:00:17 -0500
-Subject: [PATCH 14/17] arm: mediatek: mt8512: drop dram_init_banksize()
+Date: Thu, 19 Mar 2026 15:00:15 -0500
+Subject: [PATCH 12/17] arm: mediatek: mt8195: fix gd->ram_top limit
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260319-mtk-init-fix-dram-v1-14-6171ec141f40@baylibre.com>
+Message-Id: <20260319-mtk-init-fix-dram-v1-12-6171ec141f40@baylibre.com>
 References: <20260319-mtk-init-fix-dram-v1-0-6171ec141f40@baylibre.com>
 In-Reply-To: <20260319-mtk-init-fix-dram-v1-0-6171ec141f40@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
@@ -89,17 +89,17 @@ To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=864; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2129; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=18lUawDdxpR9HyWMFmBKHmJsRnez+pZWdd1y2nM3b8s=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpvFYiiM5ZXzBXhW/fIyDytBtCUWqPXgoNyrZR9
- N4qwlMSCuiJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabxWIhYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AtlsH/Au/euYbrZbzErEhoamPMd4syuewpXBFBic10Yv
- MiK/MqkyxmS18wZ5Bkgqyr60iT+Z07e/yrJUoVKOzseJfDOoULKKtScLXd5Qa7673mQFOVhSKfY
- LEUkWetGttPXsSxvYnD4jKLAg5hGuBXROsILVj8Azbtg6DTwY4sO+I3vRFpIepSXaPPWcpybWNk
- fxBG4QJa3S26xtZFlp1kw+5dv3lw/tG6dEe29HkmwEJPWIaP0L8tIX3aZodjw1U2WpDib2lsckD
- W2aksw86yS9//qcJNbr9VOH6R+ejhlX3zNcuEUOS2FBRqw/KD5ovyYU4I1EP2RFJJW07SLl6MdX
- UFbI=
+ bh=PFMy6+sMDobNF+3R33TkIp5uwaPgZJN1yyEC72jKDRs=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpvFYVyqV3lCV6lw/0OdHC1dvgbBQxNCsIjyezw
+ mc5p/egPSmJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabxWFRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A2XYH/jztRHDojNOMQkU4imBEarDycZQwVbMUZdo8ZPR
+ Vea4yUdW2Hs/hut/GSIVSFlxKMfEUMbONlrH8TqNucGYsQHVVmLVaI/TOTk2F2xrytj/bdX/yDV
+ ddx4I5WHDY1xT1Qqsqf605sImuBG3EppstlPBYAnbybcYhTifSglhOJFPS7UAeZkOey2mKSLJmn
+ Id56VlViJD1I155C0BOFhem6zQbAxEI/TzF3e/n6HuS5MYxJ3swjOnXKf4QgdujD6LBCDayFZkU
+ xuoGHZYPixffX5CFzirCVMMZF6a5pup5HOIg8uXt0PMuPpN3v6jIO2GB/N5ZIGdC34du2n/OzwQ
+ jrfQ=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -118,34 +118,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop override of dram_init_banksize() weak function for mt8512. This is
-exactly the same as the default implementation, so we do not need to
-override it.
+Fix the implementation of the gd->ram_top limit for mt8195.
+
+The intention of the comment about MMC/DMA is correct, but the
+implementation was wrong. gd->mon_len is set to the code size of U-Boot,
+so trying to set it to limit gd->ram_top does not make sense.
+
+Instead, there is already a get_effective_memsize() weak function that
+we can override to implement the required limit on the usable memory
+size. This is used to set gd->ram_top in setup_dest_addr().
+
+The comment about the extra SZ_1M needing to be reserved is not correct
+as U-Boot already takes care of this (with the actual size of U-Boot) in
+the various board_f functions, so it is removed.
+
+This fixes DMA not working on MMC on mt8195.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- arch/arm/mach-mediatek/mt8512/init.c | 8 --------
- 1 file changed, 8 deletions(-)
+ arch/arm/mach-mediatek/mt8195/init.c | 22 ++++++++--------------
+ 1 file changed, 8 insertions(+), 14 deletions(-)
 
-diff --git a/arch/arm/mach-mediatek/mt8512/init.c b/arch/arm/mach-mediatek/mt8512/init.c
-index 361c589cbc2..bc1d515fcca 100644
---- a/arch/arm/mach-mediatek/mt8512/init.c
-+++ b/arch/arm/mach-mediatek/mt8512/init.c
-@@ -35,14 +35,6 @@ phys_size_t  get_effective_memsize(void)
- 	return gd->ram_size - 6 * SZ_1M;
- }
+diff --git a/arch/arm/mach-mediatek/mt8195/init.c b/arch/arm/mach-mediatek/mt8195/init.c
+index 6b47ca4b059..e31d4eec0fb 100644
+--- a/arch/arm/mach-mediatek/mt8195/init.c
++++ b/arch/arm/mach-mediatek/mt8195/init.c
+@@ -9,6 +9,7 @@
+ #include <asm/armv8/mmu.h>
+ #include <asm/system.h>
+ #include <dm/uclass.h>
++#include <linux/kernel.h>
+ #include <linux/sizes.h>
+ #include <wdt.h>
  
--int dram_init_banksize(void)
--{
--	gd->bd->bi_dram[0].start = gd->ram_base;
--	gd->bd->bi_dram[0].size = get_effective_memsize();
+@@ -16,23 +17,16 @@ DECLARE_GLOBAL_DATA_PTR;
+ 
+ int dram_init(void)
+ {
+-	int ret;
+-
+-	ret = fdtdec_setup_mem_size_base();
+-	if (ret)
+-		return ret;
++	return fdtdec_setup_mem_size_base();
++}
+ 
++phys_size_t get_effective_memsize(void)
++{
+ 	/*
+-	 * Limit gd->ram_top not exceeding SZ_4G.  Some periphals like mmc
+-	 * requires DMA buffer allocated below SZ_4G.
+-	 *
+-	 * Note: SZ_1M is for adjusting gd->relocaddr, the reserved memory for
+-	 * u-boot itself.
++	 * Limit gd->ram_top not exceeding SZ_4G. Because some peripherals like
++	 * MMC requires DMA buffer allocated below SZ_4G.
+ 	 */
+-	if (gd->ram_base + gd->ram_size >= SZ_4G)
+-		gd->mon_len = (gd->ram_base + gd->ram_size + SZ_1M) - SZ_4G;
 -
 -	return 0;
--}
--
- void reset_cpu(void)
- {
- 	struct udevice *watchdog_dev = NULL;
++	return min(SZ_4G - gd->ram_base, gd->ram_size);
+ }
+ 
+ int mtk_soc_early_init(void)
 
 -- 
 2.43.0
