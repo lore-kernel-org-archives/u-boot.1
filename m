@@ -4,94 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2335A1088E58
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 01:41:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CB301088E77
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 04:42:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 588E6838FA;
-	Thu, 19 Mar 2026 02:41:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A023D83AAB;
+	Thu, 19 Mar 2026 05:41:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eyvCqR4m";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="x3SLjQ7G";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="TrSLASRK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1EEDA83952; Thu, 19 Mar 2026 02:41:08 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 501E883C51; Thu, 19 Mar 2026 05:41:57 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 852DF836D3
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 02:41:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 705F783B03
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 05:41:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7d7deaf61bfso45630a34.3
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 18:41:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773884464; x=1774489264; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lwjo9UdnF2MNKcisRQJHiwyEQcrWdpnQPbLQFhynSRc=;
- b=eyvCqR4mNawTClT1XwrRFCIifucrgyyZWAvQzfneL4KGE3MPh0Y9WxVFNmyReWjMR7
- /aAxVICyWOr62F1Cqi1sZm2fXnC/gWS3HMS+l6Ki/fFIxtQnCnt++HES4j6KF3rnRkkA
- TrOETRpZhJoLYzKxTBD1XYmmyfGzyZR4l+EfU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773884464; x=1774489264;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lwjo9UdnF2MNKcisRQJHiwyEQcrWdpnQPbLQFhynSRc=;
- b=pT9x8mh6Jn8X185Al/ECpTWKYlT29kFbJxRvtzZUMyNTZVGoJojvnoqVon8mc0iX7m
- YtOwpHuBCUuFvIf7PBPV0k2+6YRSodJvSbC7zHnrQTOujt/v/QE8esQ/dvW926qSXinL
- JZ44SdPlqBX7oTtLlXvZqabWBQ/2r+lDggjFvRtvjx+jl0oR4NUtwMCKoo0xa7B5MOuO
- MdPHuk0J/mmJCKioFP7T52u/A/Fb68MiSSqmXkdc4Uu6MkWPaT/E1LQq1PrNwJdlddnu
- DPEGpAvI/335L3YXp5Ud6cDedPxPCbpqS1kIqZY9PMpYId76HYBXK3oBF7K+z8oSwFRF
- sxfQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVuYjKDwn89DzFp/Y2s/NxBwXdFlu73OYVVrbtTh7eRBUd/Gt2x6+/mPHL9pRxkRfq9fngoHjs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxM4B/hz2A8MYjhEiEkgYpooKVM1VkiR+RKw4yNjY9x/Fi1fv/W
- DF72KKB4ahSlgCC43i2USw9tmrUA4ghkRzivLnIuUg5VyTYAZ42PBR9jAfAHSdTSZYs=
-X-Gm-Gg: ATEYQzw06h5MeEKRQ5bpQiwP9UkB5dGzOcH8TQ2kQLZ7jMtS75kH7RJ/lgI8O8yYB07
- Xd8uRyO/1ca9geosUGmpCakkkZrbDDclUClVGx3fuWBBCZRZjsvUVKBqW/OM89CFlaOYC/RynLy
- sXMeemU6EhndLZDw5I38F54raZj30Zhaoc87yqFM52ok/jB0vxRNBEl+DB4/kIwfsAtCu1Q95sg
- WGk9IbQNtEM2x6C+9WVIIQ+IyrcBUAQJQ69yIMRDT5JYdyb3NULJ5jcJqOgPV3F8uZKCTEDhuUa
- zBDcvyeKhcrCM5MEvJA2I9c+QAElnQZTEJwr1+CnqD+6myOqbnqWXEADLSZeUpcoEsAHDOMW79I
- 4mnSX+IOg3KF9l8RfJy2pkMkXUx02N8GQzaBLAgCtynKF2eDnRNPasconS80iG3GLhT2lZD9eTz
- tMAmrTYEKVokYcjKwURE2BZlXMzRZ1nrRmvVqX7hkr/94vENp11v0za8y+XP7NR121jtEjJzv7W
- 2FolNEraVzrxqcjO9NdnNUB2FtkBwhFPIoE9M+ePqrBOdYl
-X-Received: by 2002:a05:6830:6a89:b0:7d7:d1f0:300e with SMTP id
- 46e09a7af769-7d7d1f030d9mr2551122a34.24.1773884464001; 
- Wed, 18 Mar 2026 18:41:04 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7c9bbf132sm3357862a34.25.2026.03.18.18.41.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Mar 2026 18:41:03 -0700 (PDT)
-Date: Wed, 18 Mar 2026 19:41:00 -0600
-From: Tom Rini <trini@konsulko.com>
-To: E Shattow <e@freeshell.de>
-Cc: Peter Robinson <pbrobinson@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] EFI Loader: Correct dependencies for EFI_HTTP_BOOT
-Message-ID: <20260319014100.GN502704@bill-the-cat>
-References: <20260317012449.4162666-1-trini@konsulko.com>
- <CAC_iWj+WHh14nTdYu2BUTqvSwrtHiJBJVncArPwrBqWb6kXnTA@mail.gmail.com>
- <9F36DE37-16FF-4519-9F66-A4A79F618794@gmx.de>
- <20260317134427.GU502704@bill-the-cat>
- <CALeDE9MVgs--ABnZZ4RJDOnTLM-+imKxG6iJBGmQFHHXivLMxw@mail.gmail.com>
- <20260318014701.GJ502704@bill-the-cat>
- <CALeDE9O=y6fGKd50eiW3Och7vQWKvj_DzuB9UeNLnvj0rqezmg@mail.gmail.com>
- <20260318145723.GL502704@bill-the-cat>
- <24f7f483-b02e-46dc-ad87-bc033324d277@freeshell.de>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4fbtMQ0Dhtz9vBF;
+ Thu, 19 Mar 2026 05:41:54 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1773895314;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=4Y1U/jSs2f6UiJdrCxIEUARASAsRrCw78Nw60oRNvW4=;
+ b=x3SLjQ7GFXcsYR9rh85Gif4O9Lvdtc4xQLSkSuQd0YZGmeYh5B6bWCeZIX5JNyroNNfhI+
+ 79FXszyxck99p/bKA0goGzAoDRWURqG7yvlokhhzmEtl73wwtJhHyyt6fzZVBI9xvpBsl3
+ EZE0Sp+0oH/y3qv3ickFFajABEIycScDXP3tMlNBYn5cdf7M5EBECoulx0b31sWwCEk5AT
+ CoyFWCLXTUdJ0vn3KK2k1XZQtWOmlFWeDKQ4CU4EKnfY1a+9qSWSg81MjMTdLCoo4stnmO
+ X5mgbyuQtmHiNTJ9TJ6HDi1pqvctJ1AZ6CFWdpIoZwnbPqIQ6dZpW+KWaVOCrg==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=TrSLASRK;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::1 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <bf3bb11e-e891-4703-ad47-04d53e21d7af@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1773895312;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=4Y1U/jSs2f6UiJdrCxIEUARASAsRrCw78Nw60oRNvW4=;
+ b=TrSLASRKmocdBdVrWkV20kt0GpbCrpLSs6doueXUxeVnuqOGrRnP3rgn9L499QOcCGjVlC
+ k3x7z8jCSVXHPkYLX5egMUG3LGNUda3Bql7lj5nfaQOhWsP8Smw+vzTFpRbwV1LyHGiLdY
+ 90+VRNFpZfLeN4TXFa+tAv0jsDY4K9C7hve2Yo5+QYKxLeyi42YfbxamqFrqEiRO4VKWQb
+ p+L8GbN6eZjb1DDyhWv4L2ysUZa/xSisB+m1vGa428Mzbu1WlMUcKq7/1xGd/k20nRnCx2
+ fnsLryQfiZz6BsijHyaVtsN51FpLCSjaZZj8mFFs5YdxvHaobD0D0uDTt4N7+g==
+Date: Thu, 19 Mar 2026 01:50:56 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0tXCmrcs/OIr5fyG"
-Content-Disposition: inline
-In-Reply-To: <24f7f483-b02e-46dc-ad87-bc033324d277@freeshell.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH] usb: gadget: Move USB_GADGET_DUALSPEED to be slightly
+ more visible
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Marek Vasut <marek.vasut+usb@mailbox.org>
+References: <20260317012433.4162524-1-trini@konsulko.com>
+ <bcaede64-7918-4eaf-9695-a155b1395e50@mailbox.org>
+ <20260317134107.GR502704@bill-the-cat>
+ <bbdd71c7-3276-402e-a9f8-98afffd10538@mailbox.org>
+ <20260318012649.GG502704@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260318012649.GG502704@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: 9aapiwp3ukkx99wpak91x7uc8im8addz
+X-MBO-RS-ID: 98a99650e0f817f4921
+X-Rspamd-Queue-Id: 4fbtMQ0Dhtz9vBF
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,135 +99,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 3/18/26 2:26 AM, Tom Rini wrote:
+> On Tue, Mar 17, 2026 at 08:42:06PM +0100, Marek Vasut wrote:
+>> On 3/17/26 2:41 PM, Tom Rini wrote:
+>>> On Tue, Mar 17, 2026 at 03:34:36AM +0100, Marek Vasut wrote:
+>>>> On 3/17/26 2:24 AM, Tom Rini wrote:
+>>>>> As exposed by "make randconfig", we have an issue around
+>>>>> USB_GADGET_DUALSPEED. It is possible to select this symbol (via
+>>>>> SPL_USB_CDNS3_GADGET for example) and so have an unmet dependency. As
+>>>>> this is a hidden symbol, move it up within the menu.
+>>>> What is the issue this is fixing ?
+>>>
+>>> Valid configs causing the kconfig part of the build system to note
+>>> unmet dependencies.
+>> Lemme rephrase, is this actually a fix, or is this some readability/ordering
+>> improvement patch ?
+> 
+> Yes, it's a fix because randconfig finds problems that users may stumble
+> on to while trying to make a valid config for a platform.
 
---0tXCmrcs/OIr5fyG
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Is the commit message telling me, that "config USB_GADGET_DUALSPEED" is 
+moved outside of the "if USB_GADGET" block ?
 
-On Wed, Mar 18, 2026 at 06:18:26PM -0700, E Shattow wrote:
->=20
-> On 3/18/26 07:57, Tom Rini wrote:
-> > On Wed, Mar 18, 2026 at 11:00:14AM +0000, Peter Robinson wrote:
-> >> On Wed, 18 Mar 2026 at 01:47, Tom Rini <trini@konsulko.com> wrote:
-> >>>
-> >>> On Tue, Mar 17, 2026 at 04:08:22PM +0000, Peter Robinson wrote:
-> >>>> On Tue, 17 Mar 2026 at 13:51, Tom Rini <trini@konsulko.com> wrote:
-> >>>>>
-> >>>>> On Tue, Mar 17, 2026 at 08:42:39AM +0100, Heinrich Schuchardt wrote:
-> >>>>>> Am 17. M=E4rz 2026 08:03:47 MEZ schrieb Ilias Apalodimas <ilias.ap=
-alodimas@linaro.org>:
-> >>>>>>> Hi Tom,
-> >>>>>>>
-> >>>>>>> On Tue, 17 Mar 2026 at 03:24, Tom Rini <trini@konsulko.com> wrote:
-> >>>>>>>>
-> >>>>>>>> As exposed by "make randconfig", we have an issue with the depen=
-dencies
-> >>>>>>>> for EFI_HTTP_BOOT. As this is implemeneted by running commands (=
-as seen
-> >>>>>>>> by what it selects) it must depend on CMDLINE as well.
-> >>>>>>>>
-> >>>>>>>> Signed-off-by: Tom Rini <trini@konsulko.com>
-> >>>>>>>
-> >>>>>>> In theory, you can configure UEFI with a set of prebuilt boot opt=
-ions.
-> >>>>>>> If one of them is http(s) the device will boot even if CMDLINE is=
- not
-> >>>>>>> selected. I am not against this patch, but we will remove the
-> >>>>>>> possibility to build a firmware without cmdline that just boots to
-> >>>>>>> whatever is was preconfigured
-> >>>>>>>
-> >>>>>>> Cheers
-> >>>>>>> /Ilias
-> >>>>>>>> ---
-> >>>>>>>> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> >>>>>>>> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> >>>>>>>> ---
-> >>>>>>>>  lib/efi_loader/Kconfig | 1 +
-> >>>>>>>>  1 file changed, 1 insertion(+)
-> >>>>>>>>
-> >>>>>>>> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> >>>>>>>> index b5f81e0ff530..a9b2f813e1d5 100644
-> >>>>>>>> --- a/lib/efi_loader/Kconfig
-> >>>>>>>> +++ b/lib/efi_loader/Kconfig
-> >>>>>>>> @@ -600,6 +600,7 @@ config EFI_BOOTMGR
-> >>>>>>>>  config EFI_HTTP_BOOT
-> >>>>>>>>         bool "EFI HTTP Boot support"
-> >>>>>>>>         depends on NET || NET_LWIP
-> >>>>>>>> +       depends on CMDLINE
-> >>>>>>>>         select CMD_NET
-> >>>>>>>>         select CMD_DHCP
-> >>>>>>>>         select CMD_DNS
-> >>>>>>
-> >>>>>> Having to select commands here to get network is what needs to cha=
-nge. The network commands and EFI_HTTP_BOOT both should depend on configura=
-tion symbols for the protocol implementations.
-> >>>>>
-> >>>>> Yes. And this is about fixing missing dependencies, today.
-> >>>>>
-> >>>>>> @Tom: Do we have a target release when to finish the move to the L=
-WIP stack?
-> >>>>>
-> >>>>> We do not. I'm not yet sure if all the various use cases of the leg=
-acy
-> >>>>> stack are fully supported now (I don't recall off-hand the NFS seri=
-es
-> >>>>> state right now for example).
-> >>>>
-> >>>> I did see NFS patches go through the list.
-> >>>
-> >>> I saw the NFS support as well shortly after hitting send, as part of a
-> >>> randconfig build.
-> >>>
-> >>>> I think there's also likely some legacy usecases where non parity is
-> >>>> likely fine too.
-> >>>
-> >>> Perhaps the question really is, for the distribution folks, what are =
-the
-> >>> use cases you know of where lwIP doesn't have support yet? That's the
-> >>> first big hurdle towards, likely, saying EFI_LOADER implies NET_LWIP
-> >>> maybe, since I know there's cases there lwIP is better for.
-> >>
-> >> I don't know of any problems or missing features, I turned in on by
-> >> default in Fedora across all devices for Fedora 43 (The 2025.07
-> >> builds) because I wanted UEFI HTTP boot and haven't had any bug
-> >> reports, and I suspect the features like UEFI HTTP is more useful for
-> >> most distros than loss of other features because a lot of vendors are
-> >> moving away from legacy tech like BOOTP/TFTP because of lack of
-> >> security and the fact most of those technologies are not usable on the
-> >> Edge/outside of the data centre.
-> >>
-> >> I know of one device which has tight SPI flash space (Jetson p3450)
-> >> which I need to look at closer to see what I can trim, but that's a
-> >> side point on that device.
-> >=20
-> > OK. I know the NFS for lwIP request came from somewhere and wasn't just
-> > a fun side project. Pretty sure anyhow. So I wonder if there's other
-> > things like that that someone knows of.
-> >=20
->=20
-> The ability to push data from memory to a remote file is missing from
-> LwIP (no tftpput). I have suggested previously that an simple U-Boot
-> HTTP server configured to respond with data from a memory address and
-> range, and/or to serve files from a filesystem, would be interesting
-> although not exactly replacing the functionality missing from the lack
-> of tftpput.
-
-Oh yeah. And since lwIP already has tftpget, I would hope adding "put"
-isn't too much work.
-
---=20
-Tom
-
---0tXCmrcs/OIr5fyG
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabtUKAAKCRAr4qD1Cr/k
-Ci2yAQCuemqhLT/DRDbXFfbG3g0vUqRq5CuHRq7q0zCuQ1ZPkQEAyIiiFnSSUWHe
-5KL8NsD+AQ93Dp5i96D36vLFhfUX8QI=
-=dE6+
------END PGP SIGNATURE-----
-
---0tXCmrcs/OIr5fyG--
+Because if this is something else, and the symbols are simply reordered, 
+that I do not understand how this could be fixing anything.
