@@ -4,153 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7DC91075286
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 09:38:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E66E81075289
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 10:03:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEE4E83FF9;
-	Thu, 19 Mar 2026 10:38:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 3155883F2D;
+	Thu, 19 Mar 2026 11:03:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="oGbIi/y3";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="eOY4kfBn";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="I99tLD1g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6712983FF9; Thu, 19 Mar 2026 10:38:18 +0100 (CET)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id E18C083F8A; Thu, 19 Mar 2026 11:03:24 +0100 (CET)
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 417F683FFF
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 10:38:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 62J73xIg3771136
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 09:38:14 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- oIsBW2uIK934HPdwY3FYvAwKoqOkWjg/0ksVmr06dM4=; b=oGbIi/y3cz3RzWNQ
- B0822BX6SCftDmIdSHSeqYELbvAF4/CvKlvA45OB8jkGocXoyvLl+Oca4FTtFvHO
- NhJJRRmKGxM8eR2RuvE7yUYvtVU394xNRzoX1JTfh48I/AElyEUll1KorrUFA1Lr
- uugXJSahe4ohGshRbHW0b6YZdLhT+DZPAOnSZC/VtmLDBZv2jKOHEYo1nC/i3keO
- F9PhTwNmD6F6bUUiVbZjl2wbPn0GZpOSCU3QZUvITV/demiVNj/Co1XFl0k0u0FY
- //vBoCLhqf7XcbKpLVPMAflkErgNgHlA096YfssqEu6n0uUZUf8xwSfN3HJ/2G9m
- SOuPag==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4d083r980h-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 09:38:14 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-3594620fe97so4309121a91.1
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 02:38:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1773913094; x=1774517894; darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=oIsBW2uIK934HPdwY3FYvAwKoqOkWjg/0ksVmr06dM4=;
- b=eOY4kfBnh1Xf1qmZVhyOmn8ugfGN/1UJ6SxGh/e136jndQ5xyH1hQtBd5yHM7tWOk4
- nwOK34VE1zGMndy9yTGnVOMQcALxmK2O3OIIkCGlnSPvvRkns4nNMYVBd51zlhO4pzZ8
- Z7ZMEGVK9Scb6IO9N8RJOIVLqU1uX9OKPuqyoRVyI+9eBXyb4+Ew4z6LRuiScE3jfXOV
- d6KHOh1Hza4/epYW1j7viBUiUfIT0IiGIK7bsFRztbtKaM1Ej23VmogK1i7qmQK4oBx0
- +Cv0jtcIZnxU1e8hVUviWFamVviHM46OCtXRtRFlFITt7loDSoEO2NxmOV66SayxzE4t
- UePw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773913094; x=1774517894;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=oIsBW2uIK934HPdwY3FYvAwKoqOkWjg/0ksVmr06dM4=;
- b=TXp6aGg+i69oyRD2BDBMY1oPeAwI8GYK/Ij6Di3lhcuDsFus+9BBl9B7YEVxdB5sMY
- +VTd9ee/+fDUbV7l68D7u31rmZc/XwdezAefdpHNX/V9cksIwQh6Hk0SUrz5Fw+CqNdJ
- TrzLdR7w2WusZkyBSgGvUO5sIG0U+5M1DrA5+YMIba7yLEl3dGhci7yH09dTg+eGV3Xj
- E0txh2zN+0uIaLNmQsirB0owAp+NKH+J8P6lSelrIo2QKXIpkjRM/AOjLhuotWMiOkc3
- O3kNE0ILqfV5uSHxwTl7Axluwad9Gm/ZjKZ01MGnEDxnHKhW1/GuM+PEXLqeoXBeAb3m
- OaGg==
-X-Gm-Message-State: AOJu0YzSbrDl1/THM5vL30nRTUDTPzhWhHP8rfOm4lMwNLcXn5TOBMln
- Mc/U6s6ebo0yF+3XP57QWiTib6MtWHRFEMUfM+oAqcRz2//5VYaxWM4S56e8cdh39LuiRgxtuh1
- iUXEQ+ExHG56dF98CSLAvDh3Ai9jmwojnn7LU0lsHpX9yDNlWa+tkgEA5
-X-Gm-Gg: ATEYQzz0KN7rxuceFOF+tV+3zT+Gx5HCeXoY2hL1CWR7m0ceexUSWQrg3i3tyU7oBqC
- TuY9EuIIFK3LwDhSfh64LjzYtwl5K92s/EaJVro9aW99JarUOhNNPAzVj6OxS66USV786MKdNk/
- 8pbRIyRjVNOsfjGxi/1TRR3UrwbdvAeJDuk1Acg6l6YNKZE14unRMgMu373NeUVr62Bb36zX2WU
- 6vwgJhtZS8j/kYAr5q8RJ5WLrRRlPNmpXFOZnAmdfzcDEaQzL0gnmXi/NbY6y7NE119sh7T4nRM
- nGmlD7QYfypa7hA9SEGGz/KcjL7arCxbwBfJ6khSiNr5hvVojhGza0HaE5YPL+be9qWTaL21b9b
- QARWv5P5b0VX5Rtfh8Cwdbs7QhAOktRwqx3mQD/pLidPVU+4uVd9aW0HWpUQEevVa2QWSd8oUZL
- mMZIrDuT1MtCt0eL09/17z9OGovtqxB4EVDO9ix//RmdPy1NJoQg==
-X-Received: by 2002:a17:902:f64f:b0:2ae:5104:571e with SMTP id
- d9443c01a7336-2b06e323a6fmr62786925ad.9.1773913093672; 
- Thu, 19 Mar 2026 02:38:13 -0700 (PDT)
-X-Received: by 2002:a17:902:f64f:b0:2ae:5104:571e with SMTP id
- d9443c01a7336-2b06e323a6fmr62786635ad.9.1773913093217; 
- Thu, 19 Mar 2026 02:38:13 -0700 (PDT)
-Received: from hu-bselvana-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b06e441374sm52098825ad.29.2026.03.19.02.38.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 02:38:12 -0700 (PDT)
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Thu, 19 Mar 2026 15:07:42 +0530
-Subject: [PATCH 5/5] drivers: ufs: qcom: Initialize and enable clocks
- before hardware access
+ by phobos.denx.de (Postfix) with ESMTPS id 7D1CF83F00
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 11:03:21 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=boon.khai.ng@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=QDf6ymoaz+xvSGLXgAHOdlHhn+d16y+CzKnHQ4tlaNHDxoo632GLc7BjhBxNnikEvvKrDyZ0Zn1c1UAGrI4eYBP2aD+RMgxwBCC0rUfdSDPMdYhLjc46zjm9On+80TymgyrEM3y8Z4XNcyjrFLAwawPg/6q1vi8NwWLAR5VLTxqvUW8DN6gEiA1w7BjdgLqZ7ROM/zwqgQf5G+Cuykx+F+7swg5RzngyX6im80yeFHsfPXhvgr5nLE2TlntfS7R0jJAH8GsPB/Ma3c4e4kMRwfJSQDHzV34FMp2FOc2lmbHTgXpRORAlvlRkCPW266rs9Cd/iHPa/0mrKBTXwHcIfw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Mb3cIPLINb2kC95WjoppV7mzALCFD1SaYyN948V9ejI=;
+ b=Pl4hBueTmisMABLYIu6kzlTgFe0743NDZavV9QItByWSYQ+hIuUKgW1yTMwPVTqr3Z2HT70Sc6haiMfnHrrU094UwjL2H35238AIET8auiUJNSxPHgfMpc0wzcg0ldE4zI734eAY52igJ4rZ4mJgP0ii88BWiXQw7du3mmTH1nqBWKlQgi8ez1LTGkAu1mSvs7zQXu5Dp3GKajDgrHwbQtA+d1LnN31NAfWEo8MV5NB7OIU3hIyG6JDFVLDYrbJsy0MRJ4V94FC9qTFbxSy/FYErNE0wsmJRb0eTowY0G2JJB/wFnZ1Ja0d5iUw0psgLkKunTGx1hF8uWGOzmis+gw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Mb3cIPLINb2kC95WjoppV7mzALCFD1SaYyN948V9ejI=;
+ b=I99tLD1gxyXKD/5uhu8SV/EXdjokh59R+ZE+1w1l7Jt0mUgYkAU72+w4NAhCfyOdTknUcUpHrEmrWIJugwsHfiVug/Otq1p7qd1ESdDuKLCXdJo4SqO75TkngxBeTqejE8oW5/Q+4R+6ncx3/+IkJusmCcmzxF5Ew++PT0riMHhpRyJLtbWMyiB+A/RmW0j9n5Dy7ukOMAxBgEd10VtXkb1qkev+cLG3V6SAu5RAViLaAkpVY9Hc5qrJqm2TjP7pwnN/pvNnTR5lcYJfilH5owXSooF/B5mt0207LFV6hEoE3Mfng/OhQ/ribUMsaXcFB80FSo4slG4eaZ4ucoxHog==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from SA3PR03MB7187.namprd03.prod.outlook.com (2603:10b6:806:2f6::11)
+ by DS2PR03MB8135.namprd03.prod.outlook.com (2603:10b6:8:27a::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.19; Thu, 19 Mar
+ 2026 10:03:18 +0000
+Received: from SA3PR03MB7187.namprd03.prod.outlook.com
+ ([fe80::7000:d55:b39c:2e53]) by SA3PR03MB7187.namprd03.prod.outlook.com
+ ([fe80::7000:d55:b39c:2e53%7]) with mapi id 15.20.9723.018; Thu, 19 Mar 2026
+ 10:03:11 +0000
+From: Boon Khai Ng <boon.khai.ng@altera.com>
+To: U-boot Openlist <u-boot@lists.denx.de>
+Cc: "Lucien . Jheng" <lucienzx159@gmail.com>,
+ Boon Khai Ng <boon.khai.ng@altera.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
+ Sky Huang <SkyLake.Huang@mediatek.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
+ Weijie Gao <weijie.gao@mediatek.com>, Yao Zi <me@ziyao.cc>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Chen Huei Lok <chen.huei.lok@altera.com>,
+ Kok Kiang Hea <kok.kiang.hea@altera.com>
+Subject: [PATCH v1] misc: fs_loader: Add QSPI RAW partition loading support
+Date: Thu, 19 Mar 2026 18:02:56 +0800
+Message-ID: <20260319100256.965-1-boon.khai.ng@altera.com>
+X-Mailer: git-send-email 2.43.7
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SJ2PR07CA0014.namprd07.prod.outlook.com
+ (2603:10b6:a03:505::7) To SA3PR03MB7187.namprd03.prod.outlook.com
+ (2603:10b6:806:2f6::11)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260319-ufs_probe_clk-v1-5-08c085d6b15d@oss.qualcomm.com>
-References: <20260319-ufs_probe_clk-v1-0-08c085d6b15d@oss.qualcomm.com>
-In-Reply-To: <20260319-ufs_probe_clk-v1-0-08c085d6b15d@oss.qualcomm.com>
-To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io
-Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- David Wronek <david.wronek@mainlining.org>,
- Luca Weiss <luca.weiss@fairphone.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
- Swathi Tamilselvan <swathi.tamilselvan@oss.qualcomm.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Julien Stephan <jstephan@baylibre.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1773913061; l=2846;
- i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=bNIRyjqnztUOtSHvAm6syshHIdbouPiqlCxq8QyU5kk=;
- b=Bd/UCq3BIvNVSDwdT1m9XjMlNFz8spTkv/roeue8o57eB3+VeQpj5Ka2sqLQbv1Z1gh6yM+jf
- RcQ8t0hdFZBDyNPsPQf79xziCvZQykFUGfwcg0MmHWrqXeeq26gKejE
-X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
- pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-GUID: DqpGFmnvgJlDxj0fHwDh7FLrI_kv8jxm
-X-Proofpoint-ORIG-GUID: DqpGFmnvgJlDxj0fHwDh7FLrI_kv8jxm
-X-Authority-Analysis: v=2.4 cv=ApTjHe9P c=1 sm=1 tr=0 ts=69bbc406 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=C-Lt6vKPNbzZJwMf3fAA:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzE5MDA3NiBTYWx0ZWRfX5MubxnAKBIxM
- ajko6Zxz9DZcnYYBYOeo5HO/r+LjvcJbJRuZDu+ifjevi8pCjJJ4bjTFi/+hLwPUq4Na10SsexN
- 1f26bBMBNKEh5pWMPMRjwrtP4imnd0ycZib5IHvERg6mgu+DixgkDW2muNncZ1w0WKNcGA/TSwS
- qS19Eff0T1byVjWqQsgQJ9wqXdXSpH8s9QAHYsmaJCoMOEAUPS/jHgz1peCt8GQeBW6U3d5qVPj
- KF1C49/ne3iCtQnfUAHC/9XTRtSaZGGVHT94pdHmNQm3tOVW9Ffg/EXLWx0Y2B4ZkUoWGMYGXNc
- m5s/ih/XngjKlXqZv4PV4hF1dh15ASRW0N6vYCJ5qFYUqxkuOqn2gsREQc4mGrwchSqxk5G3de0
- ONO+Y6BVzyQQVXUTwjxvStgAfcgGXpprRthwVIBMGgFfRpZGrGXREdJ+N78hhqydWGNZfRHR8dQ
- g6RIORLzRZSMWgYM9xA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-03-19_01,2026-03-17_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 adultscore=0 malwarescore=0 suspectscore=0
- clxscore=1015 impostorscore=0 priorityscore=1501 spamscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603190076
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA3PR03MB7187:EE_|DS2PR03MB8135:EE_
+X-MS-Office365-Filtering-Correlation-Id: db366487-0c12-4710-2102-08de859eba92
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|366016|1800799024|56012099003|18002099003|55112099003; 
+X-Microsoft-Antispam-Message-Info: hJzrOwdckBk53KZXXGhDfUeSA6Rj1wqqBfFrBK29/mgfL8B0uRxdbuLmVLR++WJpwGlr/H2CNhUJPBsrKt/Mm/NSOu/AKzNAGMSn9bXAcAp8VtMBH7pvikU7AwdPGImcoKyf2snIVkJXRFUqsBRs+izMqcTfBkAckEszE+yFPe1Zw9CBIgok0ogCSRJtvDMfXNhlBHIYgGDYX4ip2qkGlvH3w5hJcEA6VIHR1SLu8QHP6geoJ0Tp9tb4tD1vHB2keRT6Q+lH6MaPIRQ+oVt0GDrUCdJ9dR02f/B7PfBA5snOffOJC/kvusA2tHV8su7yTb0jqxKaLgOed2sKqr9SYu9Nk80WGJhZkq7bV+mS6g3VtFSyywRrNptALsWSIYl0KXf7FAql1NYB7UssNqf9avSIVfDcmyCwHp8UtYY8s21ntf8nF1q6ie91Orj82WnobehYx39hgRmfLW8gDjSTUrvFeIK4pYPCk1CKbAhjiK85L2oIkSnRClqct6+5mO+GJZguKquYfbu6wot+CTSvcyHNOKs95OCZhRX4o8lljWFT1mkFBISd2wXpCEGI+sjBC3H4dlL8TcxEkHfObuMJcrMWt+2070CAWt4XqSkmMQEP5P3K83El1T7W2WIrCDDa9+9trkSx2wpK36XWiIIjQaGSTyfBgpNFNFACdmiMix/s67TfsltKx3Q9ZMk+xWjutRNr2x7c29WCFMMhMHXPzxENrN6QX6QwC57NQFguCXM=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SA3PR03MB7187.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024)(56012099003)(18002099003)(55112099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?mfeWepmqyosP9zXYqi5JdjADQfm2ANIuEvMSAJyia/PUQVgDw96Mk+bBO9Gw?=
+ =?us-ascii?Q?uLJPoVOCY7LFGsSWEDAIzEfCzaQoLFcVG/HaGedJ8r3WE7QHOD0kjAymc1bN?=
+ =?us-ascii?Q?T1vjKRJcV2+VQMsLJ/F400z7HoaqFQnsoXxvbTS6ES0aP6f4F5+y3lEeaCo4?=
+ =?us-ascii?Q?7d+k9MAcQZd5/Rs+4speV3xBIttcHnuQq2sa/f0oB5Z20002NORhknKBtv0m?=
+ =?us-ascii?Q?etTC46HMf46JawDQMy9LzOjteouzlV286lL2XEzxb8rRCtWldH+pVwKd9oT6?=
+ =?us-ascii?Q?GeYLXJlgKv/kArZ3aySquGbrrFP9CL17hXjZ2uCEni2/qpEvfWlY/SmIq/ys?=
+ =?us-ascii?Q?NmQnCJNXdiSZ6cpSk2+HKPpbOSeN1Qac2uuka8ebby7IFYrCWnKhbURCU3gO?=
+ =?us-ascii?Q?6I467RbktxECuRyO84/0MU9wVXf+4pagMgQbI4OLYkThIJgXF9MIZ7H5jNkN?=
+ =?us-ascii?Q?haCyslF1Y6KR/tlmJHy31N8DG1ftWF577gK52A0J3b3DI97xv1zgK+ZTN9Ms?=
+ =?us-ascii?Q?98Yt2OJsbyV7TEsOZfZ+YK+F4hvfuDWA5gv53dyHQBLcNeJT3Wk+AA9VP2BM?=
+ =?us-ascii?Q?XD4U0jpWocKWgZXuX4X/ZwVnYNAD1iseB66pEuYJxixd8bhifB7uYU9ntDN/?=
+ =?us-ascii?Q?jGHML9/fRSWWx8dHbLNXGCOiXM4uOoXSPk4r6bTMqdEU4eg+zG7wHN54obJM?=
+ =?us-ascii?Q?7DQXGnvu2k+wHlbEbp/UH3ha5WqGQrhA9c9uehxSWfHE/1Jh84xZ1miyJdI5?=
+ =?us-ascii?Q?BMtzsLrSyOJpAV2ims9Xr1m3JINL8EASMrgHt96FrJPK+jjKaFDbJ8ESRylN?=
+ =?us-ascii?Q?pJZ97Xjpb+FBQy/p5wX+etqsQ3UpTzAdlIfFDo0akGsdSWnBY0nMnd4kboMw?=
+ =?us-ascii?Q?YDewx6j2DXuwfhXuRRQveY4+DdpN9CCIQ0v9z8wa7lD0pOpyw2LsN+jMYByT?=
+ =?us-ascii?Q?Zxy1f0UVDR1Uad8riPLEQDT9kTtWilSUfYhiiaF2vOVm6hbLhu3VNl1sneOl?=
+ =?us-ascii?Q?KZ1nUMlAXCnZ794z69RrstQTnKcQHvhz/oDrjjMhdOMeNpsHZbR3IZOvMso1?=
+ =?us-ascii?Q?fz06mESI8zeXh/sr28duufn24n41wuxB87yTuMsCBD9VAiBJ8nDoovCk99pZ?=
+ =?us-ascii?Q?LmHkO58JBlfKf3+zeHQ8xtzSgRyVHXQpdDm8F03iVIZL9Xo4JSmNrZo1xteV?=
+ =?us-ascii?Q?WFXq7iwH9NIDqPpRWQF5eT86AdGubp9kcIu0ajhS0uriBbAayjI/hdggg8Wo?=
+ =?us-ascii?Q?cZnS4ij3755DS1MrRLMCtpd1qxq7OPeKmCF/73lIULpC1sKR8X9Iu6zkf97z?=
+ =?us-ascii?Q?a7OMNdBt4fLptoZER0R/63/z9XJHqk3Gv5x60/FoIgq/tUzLLLF4vAQ4FV/Z?=
+ =?us-ascii?Q?9ajhSvsntQURAXsOwvw888331Q0fspw2t2Ahct4MQr0exOL8on0W0NTGELRZ?=
+ =?us-ascii?Q?PgsK9GMWNqr8Zk5IrP+rBq6aZ2j0ZAGqbBn6O8HQuySakCfAdneXZsjqqMhG?=
+ =?us-ascii?Q?iBzWzJnFA23CMd3L3g9vdeERWMJrZs69/Y0NrbI/Qr54xzr2KboNKKIOqi1a?=
+ =?us-ascii?Q?nhk3hxIu6dUhmGfx7rMl66qgK1/yxRiZMeI+Pz4OsxSSOqQM7lqVqN3w4fXS?=
+ =?us-ascii?Q?PnCixxWir2tvQfqTuTwwGzxW+Ucwk5phK4K/MX5Y4yUmOTQSOvHrbtmbthTU?=
+ =?us-ascii?Q?ODGrEJldbdmRQzLHZvXJRcW/GIkg7VAl9os+4lQlimcFD67szt8BME0DYV+k?=
+ =?us-ascii?Q?hqdG1E2sVw=3D=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: db366487-0c12-4710-2102-08de859eba92
+X-MS-Exchange-CrossTenant-AuthSource: SA3PR03MB7187.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Mar 2026 10:03:11.9394 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: YIaoPr3k0qIyZxglr/wDbE4o8NYsmXXTLMfGNn8ilyZ7hVPPNRbM0UQfLdolqXy+ch3MdX2q1ZNaTLxTxlXsKw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS2PR03MB8135
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -167,103 +145,268 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move UFS clock initialization and enabling before hardware setup
-to ensure clocks are running when accessing UFS registers.
+Enhanced the generic firmware loader to support QSPI RAW partition
+loading. This would enable FPGA configuration bitstream loading
+from QSPI RAW partition to program FPGA.
 
-Previously, U-Boot depended on earlier bootloader stages to
-initialize UFS clocks. When these bootloaders failed to do so,
-UFS registers became inaccessible, causing initialization to fail.
-This change makes U-Boot initialize and enable UFS clocks early
-in the init sequence, removing the dependency on previous
-bootloaders.
-
-Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Signed-off-by: Tien Fong Chee <tien.fong.chee@altera.com>
+Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
 ---
- drivers/ufs/ufs-qcom.c | 45 +++++++++++++++++++++++++++++++++++++--------
- 1 file changed, 37 insertions(+), 8 deletions(-)
+ drivers/misc/fs_loader.c | 111 +++++++++++++++++++++++++++++++--------
+ include/fs_loader.h      |  35 ++++++++++++
+ 2 files changed, 123 insertions(+), 23 deletions(-)
 
-diff --git a/drivers/ufs/ufs-qcom.c b/drivers/ufs/ufs-qcom.c
-index dc40ee62daf..c63e550c881 100644
---- a/drivers/ufs/ufs-qcom.c
-+++ b/drivers/ufs/ufs-qcom.c
-@@ -30,6 +30,7 @@
- #define UFS_CPU_MAX_BANDWIDTH	819200
+diff --git a/drivers/misc/fs_loader.c b/drivers/misc/fs_loader.c
+index 6af4c7f15e7..a425f317614 100644
+--- a/drivers/misc/fs_loader.c
++++ b/drivers/misc/fs_loader.c
+@@ -19,6 +19,7 @@
+ #include <mapmem.h>
+ #include <malloc.h>
+ #include <spl.h>
++#include <spi_flash.h>
  
- static void ufs_qcom_dev_ref_clk_ctrl(struct ufs_hba *hba, bool enable);
-+static u32 ufs_qcom_get_core_clk_unipro_max_freq(struct ufs_hba *hba);
+ #ifdef CONFIG_CMD_UBIFS
+ #include <ubi_uboot.h>
+@@ -67,6 +68,11 @@ static int mount_ubifs(char *mtdpart, char *ubivol)
+ }
+ #endif
  
- static int ufs_qcom_enable_clks(struct ufs_qcom_priv *priv)
++__weak struct blk_desc *blk_get_by_device(struct udevice *dev)
++{
++	return NULL;
++}
++
+ static int select_fs_dev(struct device_plat *plat)
  {
-@@ -49,12 +50,34 @@ static int ufs_qcom_enable_clks(struct ufs_qcom_priv *priv)
- 
- static int ufs_qcom_init_clks(struct ufs_qcom_priv *priv)
+ 	int ret;
+@@ -121,16 +127,26 @@ static int _request_firmware_prepare(struct udevice *dev,
+ 				    const char *name, void *dbuf,
+ 				    size_t size, u32 offset)
  {
--	int err;
- 	struct udevice *dev = priv->hba->dev;
-+	struct clk clk;
-+	int err;
-+	long rate;
-+	u32 max_freq;
+-	if (!name || name[0] == '\0')
+-		return -EINVAL;
+-
+ 	struct firmware *firmwarep = dev_get_priv(dev);
++	struct device_plat *plat = dev_get_plat(dev);
++	char *endptr;
++	u32 fw_offset;
+ 
+ 	if (!firmwarep)
+ 		return -ENOMEM;
+ 
+ 	firmwarep->name = name;
+-	firmwarep->offset = offset;
 +
-+	/* Get maximum frequency for core_clk_unipro from device tree */
-+	max_freq = ufs_qcom_get_core_clk_unipro_max_freq(priv->hba);
++	if (plat->data_type == DATA_RAW) {
++		fw_offset = simple_strtoul(firmwarep->name, &endptr, 16);
++		if (firmwarep->name == endptr || *endptr != '\0')
++			return -EINVAL;
 +
-+	/* Get and configure core_clk_unipro */
-+	err = clk_get_by_name(dev, "core_clk_unipro", &clk);
-+	if (err) {
-+		dev_err(dev, "Failed to get core_clk_unipro: %d\n", err);
-+		return err;
++		firmwarep->offset = fw_offset + offset;
++	} else {
++		firmwarep->offset = offset;
 +	}
 +
-+	rate = clk_set_rate(&clk, max_freq);
-+
-+	if (rate < 0) {
-+		dev_err(dev, "Failed to set core_clk_unipro rate to %u Hz: %ld\n",
-+			max_freq, rate);
+ 	firmwarep->data = dbuf;
+ 	firmwarep->size = size;
+ 
+@@ -147,7 +163,8 @@ static int fw_get_filesystem_firmware(struct udevice *dev)
+ {
+ 	loff_t actread = 0;
+ 	char *storage_interface, *dev_part, *ubi_mtdpart, *ubi_volume;
+-	int ret;
++	int ret = 0;
++	struct device_plat *plat = dev_get_plat(dev);
+ 
+ 	storage_interface = env_get("storage_interface");
+ 	dev_part = env_get("fw_dev_part");
+@@ -167,7 +184,8 @@ static int fw_get_filesystem_firmware(struct udevice *dev)
+ 		else
+ 			ret = -ENODEV;
+ 	} else {
+-		ret = select_fs_dev(dev_get_plat(dev));
++		if (plat->data_type == DATA_FS)
++			ret = select_fs_dev(dev_get_plat(dev));
+ 	}
+ 
+ 	if (ret)
+@@ -178,8 +196,19 @@ static int fw_get_filesystem_firmware(struct udevice *dev)
+ 	if (!firmwarep)
+ 		return -ENOMEM;
+ 
+-	ret = fs_read(firmwarep->name, (ulong)map_to_sysmem(firmwarep->data),
+-			firmwarep->offset, firmwarep->size, &actread);
++	if (plat->data_type == DATA_FS)
++		ret = fs_read(firmwarep->name,
++			      (ulong)map_to_sysmem(firmwarep->data),
++			      firmwarep->offset, firmwarep->size, &actread);
++	else if (plat->data_type == DATA_RAW) {
++		if (IS_ENABLED(CONFIG_SPI_FLASH)) {
++			ret = spi_flash_read_dm(plat->flash,
++						firmwarep->offset,
++						firmwarep->size,
++						(void *)map_to_sysmem(firmwarep->data));
++			actread = firmwarep->size;
++		}
 +	}
  
- 	err = clk_get_bulk(dev, &priv->clks);
--	if (err)
-+	if (err) {
-+		dev_err(dev, "clk_get_bulk failed: %d\n", err);
- 		return err;
-+	}
+ 	if (ret) {
+ 		debug("Error: %d Failed to read %s from flash %lld != %zu.\n",
+@@ -228,6 +257,7 @@ int request_firmware_into_buf(struct udevice *dev,
+ static int fs_loader_of_to_plat(struct udevice *dev)
+ {
+ 	u32 phandlepart[2];
++	u32 sfconfig[4];
+ 
+ 	ofnode fs_loader_node = dev_ofnode(dev);
+ 
+@@ -247,6 +277,18 @@ static int fs_loader_of_to_plat(struct udevice *dev)
+ 
+ 		plat->ubivol = (char *)ofnode_read_string(
+ 				 fs_loader_node, "ubivol");
++
++		if (!ofnode_read_u32_array(fs_loader_node,
++					   "sfconfig",
++					   sfconfig, 4)) {
++			plat->data_type = DATA_RAW;
++			plat->sfconfig.bus = sfconfig[0];
++			plat->sfconfig.cs = sfconfig[1];
++			plat->sfconfig.speed = sfconfig[2];
++			plat->sfconfig.mode = sfconfig[3];
++		} else {
++			plat->data_type = DATA_FS;
++		}
+ 	}
  
  	return 0;
- }
-@@ -561,6 +584,18 @@ static int ufs_qcom_init(struct ufs_hba *hba)
+@@ -254,30 +296,53 @@ static int fs_loader_of_to_plat(struct udevice *dev)
  
- 	priv->hba = hba;
+ static int fs_loader_probe(struct udevice *dev)
+ {
+-#if CONFIG_IS_ENABLED(DM) && CONFIG_IS_ENABLED(BLK)
+-	int ret;
++	int ret = 0;
+ 	struct device_plat *plat = dev_get_plat(dev);
  
-+	err = ufs_qcom_init_clks(priv);
-+	if (err) {
-+		dev_err(hba->dev, "failed to initialize clocks, err:%d\n", err);
-+		return err;
-+	}
+-	if (plat->phandlepart.phandle) {
+-		ofnode node = ofnode_get_by_phandle(plat->phandlepart.phandle);
+-		struct udevice *parent_dev = NULL;
++	if (IS_ENABLED(CONFIG_SPI_FLASH)) {
++		if (!plat->flash) {
++			debug("bus = %d\ncs = %d\nspeed= %d\nmode = %d\n",
++			      plat->sfconfig.bus, plat->sfconfig.cs,
++			      plat->sfconfig.speed, plat->sfconfig.mode);
 +
-+	err = ufs_qcom_enable_clks(priv);
-+	if (err) {
-+		dev_err(hba->dev, "failed to enable clocks, err:%d\n", err);
-+		return err;
++			ret = spi_flash_probe_bus_cs(plat->sfconfig.bus,
++						     plat->sfconfig.cs,
++						     plat->sfconfig.speed,
++						     plat->sfconfig.mode,
++						     &plat->flash);
++			if (ret) {
++				debug("fs_loader: Failed to initialize SPI flash at ");
++				debug("%u:%u (error %d)\n", plat->sfconfig.bus,
++				      plat->sfconfig.cs, ret);
++				return -ENODEV;
++			}
+ 
+-		ret = device_get_global_by_ofnode(node, &parent_dev);
+-		if (!ret) {
+-			struct udevice *dev;
++			if (!plat->flash)
++				return -EINVAL;
++		}
 +	}
+ 
+-			ret = blk_get_from_parent(parent_dev, &dev);
+-			if (ret) {
+-				debug("fs_loader: No block device: %d\n",
+-					ret);
++	if (IS_ENABLED(CONFIG_IS_ENABLED(DM)) && IS_ENABLED(CONFIG_IS_ENABLED(BLK))) {
++		if (plat->phandlepart.phandle) {
++			ofnode node = ofnode_get_by_phandle(plat->phandlepart.phandle);
++			struct udevice *parent_dev = NULL;
 +
- 	/* setup clocks */
- 	ufs_qcom_setup_clocks(hba, true, PRE_CHANGE);
++			ret = device_get_global_by_ofnode(node, &parent_dev);
++			if (!ret) {
++				struct udevice *dev;
  
-@@ -579,12 +614,6 @@ static int ufs_qcom_init(struct ufs_hba *hba)
- 		 priv->hw_ver.minor,
- 		 priv->hw_ver.step);
+-				return ret;
++				ret = blk_get_from_parent(parent_dev, &dev);
++				if (ret) {
++					debug("fs_loader: No block device: %d\n",
++					      ret);
++
++					return ret;
++				}
+ 			}
+ 		}
+ 	}
+-#endif
  
--	err = ufs_qcom_init_clks(priv);
--	if (err) {
--		dev_err(hba->dev, "failed to initialize clocks, err:%d\n", err);
--		return err;
--	}
--
- 	ufs_qcom_advertise_quirks(hba);
- 	ufs_qcom_setup_clocks(hba, true, POST_CHANGE);
+-	return 0;
++	return ret;
+ };
  
-
+ static const struct udevice_id fs_loader_ids[] = {
+diff --git a/include/fs_loader.h b/include/fs_loader.h
+index 7e16e0f7030..c6ad5785f07 100644
+--- a/include/fs_loader.h
++++ b/include/fs_loader.h
+@@ -22,6 +22,35 @@ struct phandle_part {
+ 	u32 partition;
+ };
+ 
++/**
++ * struct sf_config - A place for storing serial flash configuration
++ *
++ * This holds information about bus, chip-select, and speed and mode of a serial
++ * flash configuration.
++ *
++ * @bus: SPI bus number.
++ * @cs: SPI chip selection.
++ * @speed: Speed selection.
++ * @mode: SPI mode.
++ */
++struct sf_config {
++	u32 bus;
++	u32 cs;
++	u32 speed;
++	u32 mode;
++};
++
++/**
++ * enum data_flags - Flag to indicate data as RAW or as filesystem
++ *
++ * DATA_RAW: Data stored as RAW.
++ * DATA_FS: DATA stored as filesystem.
++ */
++enum data_flags {
++	DATA_RAW, /* Stored in raw */
++	DATA_FS,  /* Stored within a file system */
++};
++
+ /**
+  * struct phandle_part - A place for storing all supported storage devices
+  *
+@@ -30,11 +59,17 @@ struct phandle_part {
+  * @phandlepart: Attribute data for block device.
+  * @mtdpart: MTD partition for ubi partition.
+  * @ubivol: UBI volume-name for ubifsmount.
++ * @enum data_flags: Data type (RAW or filesystem).
++ * @struct sf_config: Serial flash configuration.
++ * @struct spi_flash: Information about a SPI flash.
+  */
+ struct device_plat {
+ 	struct phandle_part phandlepart;
+ 	char *mtdpart;
+ 	char *ubivol;
++	enum data_flags data_type;
++	struct sf_config sfconfig;
++	struct udevice *flash;
+ };
+ 
+ /**
 -- 
-2.34.1
+2.43.7
 
