@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B28AE1091930
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:03:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6027D1091930
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:04:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F98B841DD;
+	by phobos.denx.de (Postfix) with ESMTP id BD6EB841F2;
 	Fri, 20 Mar 2026 00:01:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PiJSh+wP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fw2YILTx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4611083FC5; Thu, 19 Mar 2026 21:57:56 +0100 (CET)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 1312983FC5; Thu, 19 Mar 2026 21:58:01 +0100 (CET)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35E8A83FC0
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:57:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AA8D383F8A
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:57:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-439b9b1900bso872469f8f.1
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:57:54 -0700 (PDT)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-439cd6b09f8so991841f8f.3
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:57:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773953874; x=1774558674; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1773953878; x=1774558678; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=NHMCT0l4Jf8/yJh3+wXTuLS4ZMIPSdrQseiOyewPPU0=;
- b=PiJSh+wPG5p7ZFGZqQ3bdcw9PLYr64bfIQmcIuJAxcIOXto7yuKea6Gv2Iz9XZhzBF
- MRG19CAdfhFPyAX/KVfq1f/iN496o91Pm8gJ+4v8N78+LtOhppHBuLFjuFWI708BVsho
- KdSo4qU5WqtMDAVqY6fVxlAb3XxtyTjfBFuisosA3cEnk+2cxI8JY/F+OTr7aWuNpLAJ
- aOtfiBImql0HkLgd91f1H88lL+kwjeO2Xkebhd6bfVXH/xltTdkUdN3INUC7Y3diCAgU
- T0timicV+z9ONO/kpEETYc6HCZsGPoAJS66+sr77ts/jtv0NaI+RYLIVTVpaxl98glfA
- RgEA==
+ :reply-to; bh=OCnS3ZlhvvW3XbeEgO9yZIoCnqN7iRGngRVh2eKOPzw=;
+ b=fw2YILTx8WrZdsFNOh7uMFTSxKsMJDxW6R2ZvVwJTiyzwp6TDmHnxUcgA+DCAryMG1
+ 56oTXdPkj2T16cexcVl9XzHch+Yq3ZkDAAJvCuvOOhhQ0mtUJZy8Gm5PLw4Wb+DkihD/
+ /muGYBRDOODmiuKqaNHxswTnZ1I74Is7YxoPqtt0r8NwNQ0nDdaehWneDAhBXBF0te6N
+ lb/ungXiBTP4aFLF7fZKPEb7OWrh7RZ67OyazWVpNLN4LOfgeub8IQBNHTqHdsIzfaug
+ vkTwQA6VpMwki5/K1jqMeBv7xlTXGAfn1YB7T1nuYNBITeDmN2NOzdbbSme5IlA9NHU1
+ C0UQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773953874; x=1774558674;
+ d=1e100.net; s=20251104; t=1773953878; x=1774558678;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=NHMCT0l4Jf8/yJh3+wXTuLS4ZMIPSdrQseiOyewPPU0=;
- b=TOfoFLe0ZxKN5jLnB58bvnQOup4otL1W/qQDmAO4/qJwVR8/+1TXkk4LK6FbsdVJgU
- TKzUKkjUqXT0Y3vp6d+DS+ytu8yG+ccqLlDRjwS77tWI5rsKFNyv9RQm/o3BJZkxzuat
- vTPMLJ6ZBTfNpbk/KMLDpiFkhpCgmaSaV3ouF0siVTA9cl4HzUvtgP5YOjVBa37xQ9u+
- CPJPFHJkvX+UA5GUXKyuAT89uJIrN0w2oAuykvC0Ry3N2LeuzHpcP//OguShLHVcwjSk
- NMdwYDqBC/eCmI+TgMmsbowZnGYaZth2Vz5hXUHVG34rTnKchxdo76MKO7pDigo4JZbE
- mj0A==
-X-Gm-Message-State: AOJu0Yx99v8S50O8yEL1Bs1CB3huyHMTWJmXh1jqtr4F3J76DUCjLEsW
- znsT+Ds9iYs1vm8/nm/zAbZ2WgNFoNTDQaYHefNvFfDf8MRWQ+x2Gstk2eDIteJtz4s=
-X-Gm-Gg: ATEYQzwQDric1IFoIWCF2KAj9UDYCRXEWJvCMYGAW7uACWACUhPtktEGz/zPz/mRTD7
- Z4PDotfyb01pHwL7jDOltbdrKK813yUTePareXohLxizgb8Ie94+x/RXIck6xBINJpVZZi765EJ
- BShmfq2ISKk8V4oHwMlITXmGEXzwLZDCxLMevfjJLk/MSWHOfAvVt01PmpjYq0mAK5mFM2HYcfW
- CcV0ozpGEeDg92q2Oy1SdS2GFHEAKh/Nj8/7sk73NTyTdCLgu2nkFLzPMJgo/qtSGqe+YPhjhPV
- GqiDrgHgKYtKBeeXL0oWwo4YB31smGKUIOYqoqb937WRo8XNKBB+1bmVRNoc//cXNeOum2k4CrW
- AJwaUVIRzrJuwDHkgyobXKw60qWW9ABZ6m9c6W2sV0Z0xX6CxFpHnIFxC8tQ4U0IqXshWdED0yE
- bpZqa7/QZW8ZjZZ90dcLgqHanIoeCZ6U/S5YnryzWK8hhtLG4xFIN6qvfhvQ68zMmJ4UQ=
-X-Received: by 2002:a5d:5d86:0:b0:43b:3e0b:721e with SMTP id
- ffacd0b85a97d-43b64281744mr1233471f8f.40.1773953873449; 
- Thu, 19 Mar 2026 13:57:53 -0700 (PDT)
+ bh=OCnS3ZlhvvW3XbeEgO9yZIoCnqN7iRGngRVh2eKOPzw=;
+ b=m0Yogc2pd/ftKRDGsTpgeMl9ZHgrdn0yRNiprE4V63T+Yt+svtve3L8lTFTlOPm5be
+ xKpMtEoBQzUcUjvbz3yz4EBK/btZ+ug8Q4RkuLKDnOqWwjG56geMaWwbnn0KuFnhVkju
+ 9sqVpg9D2WU10tGHD49f1PzGj2HeQV7AG+IClJtSWgXHI0F6Ms0HA//FNm2TAekXBz4v
+ U5fbRjyyWHxOXAqJFkFW2QqOSSO/7dOEbP2kGP1rRpd2/3TLuXj1VIONwDZFKxCHBtqx
+ PKC+uNhlBbOCphesXhFK4PfZsEqzoQVbe9rHC7qrDE76pxqhPfEmrrONZmfwvyxKh/T/
+ xqoA==
+X-Gm-Message-State: AOJu0YxKFsLQ8VJE3wR1gw4FOBDlNDMEPp6vhGcNW6fs+JPiYrKsgJ6W
+ rxAu0nRquovZnCwRNA3uI+JKhtTO2TTs6ypeQYXAjm8ZXavrzfSd4PN6HqIq+oWy/vQ=
+X-Gm-Gg: ATEYQzzrHYDMezG1rjbAYOntRmbUNrUwCXC6xXJ8N0AmyljJgCa4/mb/iFbNWVo20XR
+ ZeluS6lLIeYIA0DeXYKiW5/Q2gHVwZLmRwjzLUzCnyt+Rxzf08JDVwhrjOzNMIKW3CJGFkXmvGO
+ xHe0R7uRyw+PiTMn6lNkcrG2L6XZZqAYdY7sInBW4yV2lxekjRGd1hohp+M5J3ya5//6btwE0hT
+ 2pj9AKot3CyI4RRZf9yFSDn4BNw0FzwMij0LHq3nghVKfcwGJr0V6uSuWfrc9BOxqCcy0cql0O5
+ EFnHIMFO7fTvXbenLUTnUwS6kM+OLPdcBzaVbGwYEMOet1jWpFIgOCHG8aHmZh7wD0se9AweEtC
+ rGrQG4Atw74O9ceBdiTrPYAF7Wvg9elTAc3YAOz0epulGnANCapyZz3pKNYxVAwxk+qiwywZMJx
+ NvcFylceLt8qIzRnqlC7E2HhceTR9iIub81Ge0sAQ9L/jKdwmPPegyANHsJewo9rgM/B0=
+X-Received: by 2002:a5d:5d13:0:b0:43b:3bed:f3b with SMTP id
+ ffacd0b85a97d-43b64277fafmr1203947f8f.34.1773953877871; 
+ Thu, 19 Mar 2026 13:57:57 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd39.dip0.t-ipconnect.de.
  [79.195.221.57]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.49
+ ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.57.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:57:52 -0700 (PDT)
+ Thu, 19 Mar 2026 13:57:56 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 19 Mar 2026 21:56:37 +0100
-Subject: [PATCH RFC 15/40] clk: restrict clk/imx to MACH_IMX
+Date: Thu, 19 Mar 2026 21:56:38 +0100
+Subject: [PATCH RFC 16/40] clk: move U-Boot CCF to clk/uccf
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260319-casey-ccf-upstream-v1-15-4df2ee2226da@linaro.org>
+Message-Id: <20260319-casey-ccf-upstream-v1-16-4df2ee2226da@linaro.org>
 References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
@@ -160,13 +160,13 @@ Cc: Tom Rini <trini@konsulko.com>,
  Dinesh Maniyam <dinesh.maniyam@altera.com>, 
  Paul Sajna <sajattack@postmarketos.org>, Marek Vasut <marex@denx.de>
 X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=740;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=9240;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=P+s1PrmAiVVmjoxgBNQcFmgXXPk98ex7zsSP+SOdMU0=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yfwC7y58feP78p++9rmTwo9faK85uSEk5PL+2PwjK
- 3guMfi86ChlYRDkYJAVU2QRP7HMsmntZXuN7QsuwMxhZQIZwsDFKQATqRJiZFj5+lK76CX+0AWP
- ytoyPZOiVaKFik+ped09HjPPWudP9xmG/5mz8+3vH323/qWP7Ml5jDr2NYF7a+6zTn70LfSz3jy
- vnFIA
+ bh=/RAbNGoLPbHbhn8quS6iAUljDwLpWmzJA+HtFCQI1Qk=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9yfyZVdPqjzFeKtZ8mTDnwHx7Z6XTvTMnHtj3IueMe
+ +we5ckHOkpZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBETrEz/HdbJnz0g/15OyUN
+ od6cNzMZXlwrM7SV3vos7GfQr97sCzKMDJNcO6I3lwU9tX/o22d0c8WeuDOuvH4/oys1fVls6hz
+ 4JgIA
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Fri, 20 Mar 2026 00:01:15 +0100
@@ -186,29 +186,245 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Only build IMX clocks when MACH_IMX is enabled, otherwise IMX clock
-drivers get compiled for all platforms with CLK_CCF enabled.
+Prepare for the introduction of full CCF support by moving the existing
+U-Boot CCF support to a uccf subdirectory.
+
+Due to a number of incompatibilities it won't be possible to support
+existing U-Boot CCF clocks with the full CCF, this allows us to support
+both. While it may make sense to remove U-Boot CCF in the future, it may
+be necessary to continue supporting it to meet space/memory requirements
+in SPL for some platforms.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/clk/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/clk/Kconfig                                | 51 +++++++---------------
+ drivers/clk/Makefile                               |  7 ++-
+ drivers/clk/uccf/Kconfig                           | 22 ++++++++++
+ drivers/clk/uccf/Makefile                          | 11 +++++
+ drivers/clk/{ => uccf}/clk-composite.c             |  0
+ drivers/clk/{ => uccf}/clk-divider.c               |  0
+ drivers/clk/{ => uccf}/clk-fixed-factor.c          |  0
+ drivers/clk/{ => uccf}/clk-gate.c                  |  0
+ drivers/clk/{ => uccf}/clk-mux.c                   |  0
+ drivers/clk/{ => uccf}/clk.c                       |  0
+ .../{clk_sandbox_ccf.c => uccf/clk_sandbox_uccf.c} |  2 +-
+ include/sandbox-clk.h                              |  2 +-
+ 12 files changed, 54 insertions(+), 41 deletions(-)
 
+diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+index c88931c8ec4d..5cc76cd55cc8 100644
+--- a/drivers/clk/Kconfig
++++ b/drivers/clk/Kconfig
+@@ -10,8 +10,24 @@ config CLK
+ 	  a particular clock rate and check on available clocks. Clocks can
+ 	  feed into other clocks in a tree structure, with multiplexers to
+ 	  choose the source for each clock.
+ 
++source "drivers/clk/uccf/Kconfig"
++
++config SANDBOX_CLK_CCF
++	bool "Sandbox U-Boot Common Clock Framework [uCCF] support"
++	depends on SANDBOX && (CLK_CCF || CLK_CCF_FULL)
++	help
++	  Enable this option if you want to test the Linux kernel's Common
++	  Clock Framework [CCF] code in U-Boot's Sandbox clock driver.
++
++config CLK_COMPOSITE_CCF
++	bool "Common Clock Framework [CCF] composite clk support"
++	depends on CLK_CCF || CLK_CCF_FULL
++	help
++	  Enable this option if you want to (re-)use the Linux kernel's Common
++	  Clock Framework [CCF] composite code in U-Boot's clock driver.
++
+ config CLK_AUTO_ID
+ 	bool "Enable support of an unique clock id with several provider"
+ 	depends on CLK
+ 	help
+@@ -66,35 +82,8 @@ config CLK_BOSTON
+ 	select SYSCON
+ 	help
+ 	  Enable this to support the clocks
+ 
+-config SPL_CLK_CCF
+-	bool "SPL Common Clock Framework [CCF] support"
+-	depends on SPL
+-	help
+-	  Enable this option if you want to (re-)use the Linux kernel's Common
+-	  Clock Framework [CCF] code in U-Boot's SPL.
+-
+-config SPL_CLK_COMPOSITE_CCF
+-	bool "SPL Common Clock Framework [CCF] composite clk support"
+-	depends on SPL_CLK_CCF
+-	help
+-	  Enable this option if you want to (re-)use the Linux kernel's Common
+-	  Clock Framework [CCF] composite code in U-Boot's SPL.
+-
+-config CLK_CCF
+-	bool "Common Clock Framework [CCF] support"
+-	help
+-	  Enable this option if you want to (re-)use the Linux kernel's Common
+-	  Clock Framework [CCF] code in U-Boot's clock driver.
+-
+-config CLK_COMPOSITE_CCF
+-	bool "Common Clock Framework [CCF] composite clk support"
+-	depends on CLK_CCF
+-	help
+-	  Enable this option if you want to (re-)use the Linux kernel's Common
+-	  Clock Framework [CCF] composite code in U-Boot's clock driver.
+-
+ config CLK_GPIO
+ 	bool "GPIO-controlled clock gate driver"
+ 	depends on CLK
+ 	help
+@@ -180,16 +169,8 @@ config CLK_OCTEON
+ 	default y
+ 	help
+ 	  Enable this to support the clocks on Octeon MIPS platforms.
+ 
+-config SANDBOX_CLK_CCF
+-	bool "Sandbox Common Clock Framework [CCF] support"
+-	depends on SANDBOX
+-	select CLK_CCF
+-	help
+-	  Enable this option if you want to test the Linux kernel's Common
+-	  Clock Framework [CCF] code in U-Boot's Sandbox clock driver.
+-
+ config CLK_SCMI
+ 	bool "Enable SCMI clock driver"
+ 	depends on CLK
+ 	depends on SCMI_FIRMWARE
 diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
-index 5f0c0d8a5c28..f96d57a3223a 100644
+index f96d57a3223a..30991e9f55d7 100644
 --- a/drivers/clk/Makefile
 +++ b/drivers/clk/Makefile
-@@ -15,9 +15,9 @@ obj-$(CONFIG_$(PHASE_)CLK_STUB) += clk-stub.o
+@@ -6,14 +6,14 @@
  
+ obj-$(CONFIG_$(PHASE_)CLK) += clk-uclass.o
+ obj-$(CONFIG_$(PHASE_)CLK) += clk_fixed_rate.o
+ obj-$(CONFIG_$(PHASE_)CLK) += clk_fixed_factor.o
+-obj-$(CONFIG_$(PHASE_)CLK_CCF) += clk.o clk-divider.o clk-mux.o clk-gate.o
+-obj-$(CONFIG_$(PHASE_)CLK_CCF) += clk-fixed-factor.o
+-obj-$(CONFIG_$(PHASE_)CLK_COMPOSITE_CCF) += clk-composite.o
+ obj-$(CONFIG_$(PHASE_)CLK_GPIO) += clk-gpio.o
+ obj-$(CONFIG_$(PHASE_)CLK_STUB) += clk-stub.o
+ 
++# U-Boot/IMX "micro" CCF port
++obj-$(CONFIG_$(PHASE_)CLK_CCF) += uccf/
++
  obj-y += adi/
  obj-y += airoha/
  obj-y += analogbits/
--obj-y += imx/
-+obj-$(CONFIG_$(PHASE_)MACH_IMX) += imx/
- obj-$(CONFIG_CLK_JH7110) += starfive/
- obj-y += tegra/
- obj-y += ti/
- obj-$(CONFIG_CLK_THEAD) += thead/
+ obj-$(CONFIG_$(PHASE_)MACH_IMX) += imx/
+@@ -57,7 +57,6 @@ obj-$(CONFIG_CLK_XLNX_CLKWZRD) += clk-xlnx-clock-wizard.o
+ obj-$(CONFIG_CLK_ZYNQ) += clk_zynq.o
+ obj-$(CONFIG_CLK_ZYNQMP) += clk_zynqmp.o
+ obj-$(CONFIG_CLK_ICS8N3QV01) += ics8n3qv01.o
+ obj-$(CONFIG_MACH_PIC32) += clk_pic32.o
+-obj-$(CONFIG_SANDBOX_CLK_CCF) += clk_sandbox_ccf.o
+ obj-$(CONFIG_SANDBOX) += clk_sandbox.o
+ obj-$(CONFIG_SANDBOX) += clk_sandbox_test.o
+diff --git a/drivers/clk/uccf/Kconfig b/drivers/clk/uccf/Kconfig
+new file mode 100644
+index 000000000000..bf4a634a403f
+--- /dev/null
++++ b/drivers/clk/uccf/Kconfig
+@@ -0,0 +1,22 @@
++
++
++config SPL_CLK_CCF
++	bool "SPL U-Boot Common Clock Framework [uCCF] support"
++	depends on SPL
++	help
++	  Enable this option if you want to (re-)use the Linux kernel's Common
++	  Clock Framework [CCF] code in U-Boot's SPL.
++
++config SPL_CLK_COMPOSITE_CCF
++	bool "SPL U-Boot Common Clock Framework [uCCF] composite clk support"
++	depends on SPL_CLK_CCF
++	help
++	  Enable this option if you want to (re-)use the Linux kernel's Common
++	  Clock Framework [CCF] composite code in U-Boot's SPL.
++
++config CLK_CCF
++	bool "U-Boot Common Clock Framework [uCCF] support"
++	help
++	  Enable this option if you want to (re-)use the Linux kernel's Common
++	  Clock Framework [CCF] code in U-Boot's clock driver.
++
+diff --git a/drivers/clk/uccf/Makefile b/drivers/clk/uccf/Makefile
+new file mode 100644
+index 000000000000..02440b5e322c
+--- /dev/null
++++ b/drivers/clk/uccf/Makefile
+@@ -0,0 +1,11 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (c) 2015 Google, Inc
++# Wolfgang Denk, DENX Software Engineering, wd@denx.de.
++#
++
++obj-$(CONFIG_$(PHASE_)CLK_CCF) += clk.o clk-divider.o clk-mux.o clk-gate.o
++obj-$(CONFIG_$(PHASE_)CLK_CCF) += clk-fixed-factor.o
++obj-$(CONFIG_$(PHASE_)CLK_COMPOSITE_CCF) += clk-composite.o
++
++obj-$(CONFIG_SANDBOX_CLK_CCF) += clk_sandbox_uccf.o
+diff --git a/drivers/clk/clk-composite.c b/drivers/clk/uccf/clk-composite.c
+similarity index 100%
+rename from drivers/clk/clk-composite.c
+rename to drivers/clk/uccf/clk-composite.c
+diff --git a/drivers/clk/clk-divider.c b/drivers/clk/uccf/clk-divider.c
+similarity index 100%
+rename from drivers/clk/clk-divider.c
+rename to drivers/clk/uccf/clk-divider.c
+diff --git a/drivers/clk/clk-fixed-factor.c b/drivers/clk/uccf/clk-fixed-factor.c
+similarity index 100%
+rename from drivers/clk/clk-fixed-factor.c
+rename to drivers/clk/uccf/clk-fixed-factor.c
+diff --git a/drivers/clk/clk-gate.c b/drivers/clk/uccf/clk-gate.c
+similarity index 100%
+rename from drivers/clk/clk-gate.c
+rename to drivers/clk/uccf/clk-gate.c
+diff --git a/drivers/clk/clk-mux.c b/drivers/clk/uccf/clk-mux.c
+similarity index 100%
+rename from drivers/clk/clk-mux.c
+rename to drivers/clk/uccf/clk-mux.c
+diff --git a/drivers/clk/clk.c b/drivers/clk/uccf/clk.c
+similarity index 100%
+rename from drivers/clk/clk.c
+rename to drivers/clk/uccf/clk.c
+diff --git a/drivers/clk/clk_sandbox_ccf.c b/drivers/clk/uccf/clk_sandbox_uccf.c
+similarity index 98%
+rename from drivers/clk/clk_sandbox_ccf.c
+rename to drivers/clk/uccf/clk_sandbox_uccf.c
+index 9b8036d41aac..9c74ed940acd 100644
+--- a/drivers/clk/clk_sandbox_ccf.c
++++ b/drivers/clk/uccf/clk_sandbox_uccf.c
+@@ -112,9 +112,9 @@ static const struct clk_ops clk_gate2_ops = {
+ 	.disable = clk_gate2_disable,
+ 	.get_rate = clk_generic_get_rate,
+ };
+ 
+-struct clk *sandbox_clk_register_gate2(struct device *dev, const char *name,
++struct clk *sandbox_clk_register_gate2(struct udevice *dev, const char *name,
+ 				       const char *parent_name,
+ 				       unsigned long flags, void __iomem *reg,
+ 				       u8 bit_idx, u8 cgr_val,
+ 				       u8 clk_gate2_flags)
+diff --git a/include/sandbox-clk.h b/include/sandbox-clk.h
+index c2616c27a44a..eb02a474c741 100644
+--- a/include/sandbox-clk.h
++++ b/include/sandbox-clk.h
+@@ -57,9 +57,9 @@ static inline struct clk *sandbox_clk_gate(const char *name, const char *parent,
+ 	return clk_register_gate(NULL, name, parent, CLK_SET_RATE_PARENT,
+ 				 reg, bit_idx, clk_gate_flags, NULL);
+ }
+ 
+-struct clk *sandbox_clk_register_gate2(struct device *dev, const char *name,
++struct clk *sandbox_clk_register_gate2(struct udevice *dev, const char *name,
+ 				       const char *parent_name,
+ 				       unsigned long flags,
+ 				       void __iomem *reg, u8 bit_idx,
+ 				       u8 cgr_val, u8 clk_gate_flags);
 
 -- 
 2.51.0
