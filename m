@@ -4,80 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D90B8109024D
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 16:33:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDD771090253
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 16:49:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BF1283FC5;
-	Thu, 19 Mar 2026 17:33:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C882B83DC9;
+	Thu, 19 Mar 2026 17:49:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dxrgSZ0g";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="EhIbnwEX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D3D183FC0; Thu, 19 Mar 2026 17:33:50 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 9FD3683F00; Thu, 19 Mar 2026 17:49:45 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DBC583FC0
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 17:33:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 98DF583DA6
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 17:49:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7d74dbfe84cso772882a34.1
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 09:33:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-b976536806cso171956766b.0
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 09:49:43 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773938983; cv=none;
+ d=google.com; s=arc-20240605;
+ b=BSpTep8WbrIFvg/B2iMsxtAcc1ut3fM4yB4K5AoIr5HW7Njx8dzF9VePCSF3F2O5Z1
+ y0VqpIVsVH/jqDxus3jBa6Z2Bkuo3Pm9psBDH2aEULl+Bqv8cw0eyqdkITBcBw3xX9MM
+ 4gyS4OYormAMoWKTP2Cp7DrlnXjSsXTTmN1SIfLXyKIWiEy0xVFNAj9y3N1F/NO4y3Ia
+ Qu/qtMBak0Rnk6foYWcBJvyIZiQnpppkwiWmKw7swqgBQCTzMueAL/pIXPHvakrulniq
+ jbayfjiA4VKsL6e/Ty26Y834FteIIZrDhHDtHl7XD2upOhNwP8kK2OvoY2IMMsIui/lL
+ cxww==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=Lnb9j2EY4aUmY+6Iu82mbxIAZJET6sBRqcYPJFCdgHY=;
+ fh=OI3hGuGcYo5GkzEArp9tydlJN9SkUG+StzJs5H1SHB8=;
+ b=A08fw5vKkEY473I2XnTxVkDnHoudHItnIgCWL57q3rB9JsrbI9/3qDVSFPkm6znd9Z
+ v1+05SB7SgXZ9PY0SmzVwKIVdosoTDInWWbDQ7wESq97Ms8gAcfqRpR9PPGcWooyCY8S
+ zL0OmbNak0Hu0O1iw8adeXrqwhjGqcLReSMtenLWMwGJ9yX5TL1GdBOLTm4AntfbHxL5
+ GtIvN/2P7/ewfbG7pp6RKNzA4GFsDuoaGoNRc2NnKRy9GsJ9fBk44xjdVweVSj5GZ024
+ PSoUWJchKpBx8sW0he5CDVbe4JE0e5aKkpK59aFeeCgFoEDli/JNIPl06ldobkaxYoqU
+ ev5A==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773938025; x=1774542825; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DLoaJz9do0jr/wdBMEqniDk8ErotERZa5k5Ry/kFP8Y=;
- b=dxrgSZ0g0zTpT+H4YuljQbrmZcu02fugd5SUTLYblXuO8Sf0dUvwlNcLie8ijtny73
- HzMWNhHq4Pli91bgMCI6+es8twkJSbrDjTeXd6Se2Glib+vV+1LSQKHudF8ubdoloolw
- QIa9ZoaIFdlo9YtBtYmvadxybKe0S3fE6QXK8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773938025; x=1774542825;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773938983; x=1774543783;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DLoaJz9do0jr/wdBMEqniDk8ErotERZa5k5Ry/kFP8Y=;
- b=rrF+NcJand5mr8+JjPIAtsCMKuvJD0EXrNm4rdlctqS4SPd0SgXqhCeU6qWQpNP7Fv
- lkIpSAe7ZuYUYF4wx8jgg3X1iP4sZaE4mqqHM14RsC/t+S+I6h32W2/QfrUrkLbtIwzb
- g6WWnim+iNXg49HyaxwOh0s+iq67X9hgFphV2ZsojI97AVfbKb6Ui8pUnqsGcaTowhUe
- 2zGH3qIgqzoFzkX3Cz9uiKhkKw6ydk8/vWBqbz+p4V7uTyVqtxgXWtyUOetGYlluFhsh
- 3WPumvUXZXV/EBz583sRP2XpER4USJskIRU31VxN7l6JLpR1QxWf3BPz4hS6h/eVexnj
- /cDQ==
-X-Gm-Message-State: AOJu0YyKmeWCbf9lkQgMGKH7ihinnQnqyu1V+RTSXFp3avhEU8uzt87s
- eMveAgiFsiy3ttToRU0RSc/fTDkFfqRVbbp04QxqibJMc1gi9qc8X38phTv2YOslBTW57i3MGrs
- JMZNZdRo=
-X-Gm-Gg: ATEYQzwS3FPu9mCQsqbWv/F2IOJqDvJewCKdHIZKOEWsOGsBA9t4vnI6MDALdk02oJx
- llceXnpQ7c5sGtrGptfAP+zO5UHK8rsmtyPyuSi1WhF4Nlt/YVIVLu5D7SYVhFS5C4uOaQ5TeYJ
- HUqeVr/wcQVIRBcPIQ7bjoxV27h2xTJF0N4X5w4ZOAcSJHAFu4PnBREjqtbBJd8pJ0Ccittg9rL
- wAVIXvDSdCJawR/LJSyfjLWYOZYuudElYD9Rk2FRUw4TQuF3sbl8o2EizwNTpetDPdR7DVoU596
- LpPTl4xx+aFmE0ep3LVK2kPl0cUJIrhTbnWGgSGDPePENORZcPGpNdiod+gttam7q0CxF3ILtlr
- LuURupti0Wi1EuCwXUIiYTOvWYl/oleFhTM8d3AVc66jwRKo0TB+Hc/EIPBYiNvPbZ+VFg/7QJk
- O3CO2HGBzo7+aiw7V7FqDJAwlEuj8BpGBhIhcXajx/6L5ORGn92H79hVOR7Zw0pys9YwlKzcsAI
- 2mi/nN7U67NA1MIU6PyHvb6x0kXz7dAa3tNs/NND7/aZomp/0Y=
-X-Received: by 2002:a05:6830:6ac7:b0:7d7:e709:3a7f with SMTP id
- 46e09a7af769-7d7e7094379mr883604a34.23.1773938024858; 
- Thu, 19 Mar 2026 09:33:44 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7cb5af492sm4230651a34.24.2026.03.19.09.33.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 09:33:44 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Michael Walle <mwalle@kernel.org>, Vladimir Oltean <olteanv@gmail.com>,
- Ashish Kumar <Ashish.kumar@nxp.com>, Kuldeep Singh <kuldeep.singh@nxp.com>
-Subject: [PATCH] serial: Enable SYS_NS16550 on incorrectly migrated platforms
-Date: Thu, 19 Mar 2026 10:33:43 -0600
-Message-ID: <20260319163343.1679919-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ bh=Lnb9j2EY4aUmY+6Iu82mbxIAZJET6sBRqcYPJFCdgHY=;
+ b=EhIbnwEXA2nyu3aDSfe9qLE91ootststbItzcBO6yUHEw6d27bUWeibZwSG6d1ZT5s
+ ojelX6GLeLTa0HmQl1Ug3XmsoTg2ILETJL8eRb3bFSYV5wjOwbZAwuHW5jmFKXmtirsP
+ MM+dhL5YcdS1hwJ4k6FsIVl4PMQy3wd64b8WtsRrtpQ7eKVBwrN5zhO6MvkMF6BAWmAc
+ Q42kPSqqM0P6UeXYjtLwtEYwXAfI1rd80/+9B1Ne89H95DYCcl1d5NSukp5oVen0wHSl
+ AbXAFXnhlafI7WXdatHqKKnIcvZO4jqhFJl0aP+6pWhuiCEmwe4IuzTGNUkB1bK12rNA
+ Knww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1773938983; x=1774543783;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=Lnb9j2EY4aUmY+6Iu82mbxIAZJET6sBRqcYPJFCdgHY=;
+ b=ZbfIABxZ5CFlRH4tIdDo39BqlkTUipuBuUnlnnVzNdP/NrrZQ7DFd7xTweA0bupxBd
+ V8KBB6YE9R2zPjbYrUO0XhEc4ZvuDrfwLPbYA9wVCcZoJp+sqOAPQEb/z5IN5zGfhaCz
+ EzQwNexuJabQUT1YUy5zsfRPRe+mdqZ+zjRu9aay0veoTQcQ9+vebYumQiudGh+18cPt
+ KkzIkpnzTejGS2hJc1sxYMUtDm3FOlxjswrhww1y0h/zCviPfAFIzWzGgMJPi8nfDyaU
+ mclxsOWX2H7aKi3hY07kYM5hOidjBnrczfXmXlxWLXdKQ7WMemxS0YIuvqyoOyLIBVAz
+ mdrA==
+X-Gm-Message-State: AOJu0Yy3//M0/WMMjj6JlplaDcdnww+jZ7LuzZQzKLNjqEmXBOo4njGr
+ y7gmey8pXY3XYjhlmlKzINGLsZYyZi43fD7Mc8NpK4h9h7/kK247NBuZqpl4IYQcfHLNpmbTk3A
+ 5hK6X6fTMU7xs3YBxxBu5BPX35OvuYyCkyYB2stI9kA==
+X-Gm-Gg: ATEYQzxC6DxwZ+osBcRKhuBSbx9kt860vlLPLXAI0R8qh84TIMzxZU5CKfml5aD14qm
+ skhos56srZAvpW0prKcvYuCVaEdkJGQUeL0xYFJCl6jzoVl6nM3UJqcmDswOfpMg0ObOspt6IGG
+ l8OkLKkf4T/pUghvuQGWLbuWM8HzHYiimyg6aN7mRyGhVDRcKJGXjFBANFvhGVIt1MUh7qc7Iy7
+ J8eGcU0y2TTJjclSuLzbtzrn2h5f9CBQbq/VTQW9W855dVCEFP5rrI5RuvfLIRiwOttRmjTlonv
+ FZxMPwsmyjgUSM8Sh1g4738QcxjhHPKlxnUHv5Syweb43rgUUtgb8HuurLZAjh0wKrX12Ngb2ui
+ bCD2ZgIds3UwYL9X88e5R8+ldSQ==
+X-Received: by 2002:a17:907:75ec:b0:b98:2732:3dd1 with SMTP id
+ a640c23a62f3a-b982f3b712amr1793466b.42.1773938982960; Thu, 19 Mar 2026
+ 09:49:42 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260319-merge_configs-support-include-directive-v1-1-dcfb1c7f934c@baylibre.com>
+ <20260319162134.GV502704@bill-the-cat>
+In-Reply-To: <20260319162134.GV502704@bill-the-cat>
+From: Julien Stephan <jstephan@baylibre.com>
+Date: Thu, 19 Mar 2026 17:49:35 +0100
+X-Gm-Features: AaiRm51drfLWJZDIaaNU1GkYd46-AyA4z68Oqe4k-tCKKJzsR4v8D87V5sBQ8w4
+Message-ID: <CAEHHSvaHEpiakXc1QOXeJP49gSs9yf4M29Fw5OsQLqtBV-y75w@mail.gmail.com>
+Subject: Re: [PATCH] scripts: merge_config.sh: support include directives in
+ fragments
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ dlechner@baylibre.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,520 +119,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the migration to DM_SERIAL in commit 191b10ac70d7 ("PowerPC /
-Layerscape: Finish migration to DM_SERIAL") a number of platforms were
-incorrectly migrated and did not enable SYS_NS16550 despite previously
-having enabled the non-DM NS16650 serial driver. Enable these now.
+Le jeu. 19 mars 2026 =C3=A0 17:21, Tom Rini <trini@konsulko.com> a =C3=A9cr=
+it :
+>
+> On Thu, Mar 19, 2026 at 05:14:05PM +0100, Julien Stephan wrote:
+>
+> > Many defconfig files rely on include directives to factor out common
+> > configuration. When running "make some_board_defconfig", these files ar=
+e
+> > preprocessed and the includes are resolved automatically. However,
+> > merge_config.sh script currently does not handle include directives in
+> > configuration fragments.
+> >
+> > Add a preprocessing step to resolve include directives in all fragments
+> > before merging them.
+> >
+> > By default, the include search path consists of:
+> >   - the current working directory
+> >   - the fragment's directory
+> >   - the default U-Boot configs/ directory
+> >
+> > This ensures that existing defconfig files work out of the box. Additio=
+nal
+> > include directories can be specified using the -I option:
+> >
+> >   ./scripts/kconfig/merge_config.sh -I <additional include dir>  config=
+s/some_board_defconfig frag1.cfg frag2.cfg
+> >
+> > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+> > ---
+> >  scripts/kconfig/merge_config.sh | 56 +++++++++++++++++++++++++++++++++=
+++++----
+> >  1 file changed, 51 insertions(+), 5 deletions(-)
+>
+> This forks us from the upstream version of the script, and I don't think
+> upstream will want this.
 
-Fixes: 191b10ac70d7 ("PowerPC / Layerscape: Finish migration to DM_SERIAL")
-Reported-by: Michael Walle <mwalle@kernel.org>
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Cc: Vladimir Oltean <olteanv@gmail.com>
-Cc: Ashish Kumar <Ashish.kumar@nxp.com>,
-Cc: Kuldeep Singh <kuldeep.singh@nxp.com>
----
- configs/MPC8548CDS_36BIT_defconfig                  | 1 +
- configs/MPC8548CDS_defconfig                        | 1 +
- configs/MPC8548CDS_legacy_defconfig                 | 1 +
- configs/P1010RDB-PA_36BIT_NOR_defconfig             | 1 +
- configs/P1010RDB-PA_NOR_defconfig                   | 1 +
- configs/P1010RDB-PB_36BIT_NOR_defconfig             | 1 +
- configs/P1010RDB-PB_NOR_defconfig                   | 1 +
- configs/P1020RDB-PC_36BIT_defconfig                 | 1 +
- configs/P1020RDB-PC_defconfig                       | 1 +
- configs/P1020RDB-PD_defconfig                       | 1 +
- configs/P2020RDB-PC_36BIT_defconfig                 | 1 +
- configs/P2020RDB-PC_defconfig                       | 1 +
- configs/P2041RDB_NAND_defconfig                     | 1 +
- configs/P2041RDB_SDCARD_defconfig                   | 1 +
- configs/P2041RDB_SPIFLASH_defconfig                 | 1 +
- configs/P2041RDB_defconfig                          | 1 +
- configs/T2080QDS_SECURE_BOOT_defconfig              | 1 +
- configs/T2080QDS_SRIO_PCIE_BOOT_defconfig           | 1 +
- configs/T2080QDS_defconfig                          | 1 +
- configs/ls1012a2g5rdb_tfa_defconfig                 | 1 +
- configs/ls1012afrdm_tfa_defconfig                   | 1 +
- configs/ls1012afrwy_tfa_SECURE_BOOT_defconfig       | 1 +
- configs/ls1012afrwy_tfa_defconfig                   | 1 +
- configs/ls1012aqds_tfa_SECURE_BOOT_defconfig        | 1 +
- configs/ls1012aqds_tfa_defconfig                    | 1 +
- configs/ls1012ardb_tfa_SECURE_BOOT_defconfig        | 1 +
- configs/ls1012ardb_tfa_defconfig                    | 1 +
- configs/ls1021aiot_qspi_defconfig                   | 1 +
- configs/ls1021aqds_nor_SECURE_BOOT_defconfig        | 1 +
- configs/ls1021aqds_qspi_defconfig                   | 1 +
- configs/ls1021atsn_qspi_defconfig                   | 1 +
- configs/ls1021atwr_nor_SECURE_BOOT_defconfig        | 1 +
- configs/ls1021atwr_qspi_defconfig                   | 1 +
- configs/ls1021atwr_sdcard_ifc_SECURE_BOOT_defconfig | 1 +
- configs/ls1043aqds_tfa_SECURE_BOOT_defconfig        | 1 +
- configs/ls1043aqds_tfa_defconfig                    | 1 +
- configs/ls1046aqds_tfa_SECURE_BOOT_defconfig        | 1 +
- configs/ls1046aqds_tfa_defconfig                    | 1 +
- configs/ls2080aqds_qspi_defconfig                   | 1 +
- 39 files changed, 39 insertions(+)
+I understand. Would that help if I submit this to the kernel first?
+and see their reaction?
 
-diff --git a/configs/MPC8548CDS_36BIT_defconfig b/configs/MPC8548CDS_36BIT_defconfig
-index e9e4fe28f9af..bc42068a3e0e 100644
---- a/configs/MPC8548CDS_36BIT_defconfig
-+++ b/configs/MPC8548CDS_36BIT_defconfig
-@@ -104,4 +104,5 @@ CONFIG_TSEC_ENET=y
- CONFIG_DM_PCI_COMPAT=y
- CONFIG_PCIE_FSL=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_ADDR_MAP=y
-diff --git a/configs/MPC8548CDS_defconfig b/configs/MPC8548CDS_defconfig
-index 182b395462f6..bf1d82b37056 100644
---- a/configs/MPC8548CDS_defconfig
-+++ b/configs/MPC8548CDS_defconfig
-@@ -103,3 +103,4 @@ CONFIG_TSEC_ENET=y
- CONFIG_DM_PCI_COMPAT=y
- CONFIG_PCIE_FSL=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
-diff --git a/configs/MPC8548CDS_legacy_defconfig b/configs/MPC8548CDS_legacy_defconfig
-index 65ebb6c341c9..05937a986214 100644
---- a/configs/MPC8548CDS_legacy_defconfig
-+++ b/configs/MPC8548CDS_legacy_defconfig
-@@ -103,3 +103,4 @@ CONFIG_TSEC_ENET=y
- CONFIG_DM_PCI_COMPAT=y
- CONFIG_PCIE_FSL=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
-diff --git a/configs/P1010RDB-PA_36BIT_NOR_defconfig b/configs/P1010RDB-PA_36BIT_NOR_defconfig
-index 4797994a0726..98006672dd4a 100644
---- a/configs/P1010RDB-PA_36BIT_NOR_defconfig
-+++ b/configs/P1010RDB-PA_36BIT_NOR_defconfig
-@@ -97,6 +97,7 @@ CONFIG_PCIE_FSL=y
- CONFIG_DM_RTC=y
- CONFIG_RTC_PT7C4338=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_ESPI=y
-diff --git a/configs/P1010RDB-PA_NOR_defconfig b/configs/P1010RDB-PA_NOR_defconfig
-index e5ccb437398f..299c39983e79 100644
---- a/configs/P1010RDB-PA_NOR_defconfig
-+++ b/configs/P1010RDB-PA_NOR_defconfig
-@@ -96,6 +96,7 @@ CONFIG_PCIE_FSL=y
- CONFIG_DM_RTC=y
- CONFIG_RTC_PT7C4338=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_ESPI=y
-diff --git a/configs/P1010RDB-PB_36BIT_NOR_defconfig b/configs/P1010RDB-PB_36BIT_NOR_defconfig
-index 60e1cea9f8aa..bcdf6bbc5381 100644
---- a/configs/P1010RDB-PB_36BIT_NOR_defconfig
-+++ b/configs/P1010RDB-PB_36BIT_NOR_defconfig
-@@ -99,6 +99,7 @@ CONFIG_PCIE_FSL=y
- CONFIG_DM_RTC=y
- CONFIG_RTC_PT7C4338=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_ESPI=y
-diff --git a/configs/P1010RDB-PB_NOR_defconfig b/configs/P1010RDB-PB_NOR_defconfig
-index 819d54b1b35a..2035703b8585 100644
---- a/configs/P1010RDB-PB_NOR_defconfig
-+++ b/configs/P1010RDB-PB_NOR_defconfig
-@@ -98,6 +98,7 @@ CONFIG_PCIE_FSL=y
- CONFIG_DM_RTC=y
- CONFIG_RTC_PT7C4338=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_ESPI=y
-diff --git a/configs/P1020RDB-PC_36BIT_defconfig b/configs/P1020RDB-PC_36BIT_defconfig
-index eb8e4e5d0c9d..45a9deae440f 100644
---- a/configs/P1020RDB-PC_36BIT_defconfig
-+++ b/configs/P1020RDB-PC_36BIT_defconfig
-@@ -110,6 +110,7 @@ CONFIG_PCIE_FSL=y
- CONFIG_DM_RTC=y
- CONFIG_RTC_PT7C4338=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_ESPI=y
-diff --git a/configs/P1020RDB-PC_defconfig b/configs/P1020RDB-PC_defconfig
-index e7740064d2bb..760e6a6a1c48 100644
---- a/configs/P1020RDB-PC_defconfig
-+++ b/configs/P1020RDB-PC_defconfig
-@@ -109,6 +109,7 @@ CONFIG_PCIE_FSL=y
- CONFIG_DM_RTC=y
- CONFIG_RTC_PT7C4338=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_ESPI=y
-diff --git a/configs/P1020RDB-PD_defconfig b/configs/P1020RDB-PD_defconfig
-index a24aae421036..e65511258481 100644
---- a/configs/P1020RDB-PD_defconfig
-+++ b/configs/P1020RDB-PD_defconfig
-@@ -112,6 +112,7 @@ CONFIG_PCIE_FSL=y
- CONFIG_DM_RTC=y
- CONFIG_RTC_PT7C4338=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_ESPI=y
-diff --git a/configs/P2020RDB-PC_36BIT_defconfig b/configs/P2020RDB-PC_36BIT_defconfig
-index 8be6d91e5fdf..77eca7dd8512 100644
---- a/configs/P2020RDB-PC_36BIT_defconfig
-+++ b/configs/P2020RDB-PC_36BIT_defconfig
-@@ -115,6 +115,7 @@ CONFIG_PCIE_FSL=y
- CONFIG_DM_RTC=y
- CONFIG_RTC_PT7C4338=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_ESPI=y
-diff --git a/configs/P2020RDB-PC_defconfig b/configs/P2020RDB-PC_defconfig
-index 95e004b4b446..46bf6f18b725 100644
---- a/configs/P2020RDB-PC_defconfig
-+++ b/configs/P2020RDB-PC_defconfig
-@@ -114,6 +114,7 @@ CONFIG_PCIE_FSL=y
- CONFIG_DM_RTC=y
- CONFIG_RTC_PT7C4338=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_ESPI=y
-diff --git a/configs/P2041RDB_NAND_defconfig b/configs/P2041RDB_NAND_defconfig
-index a23570e84b7c..1bef841990fe 100644
---- a/configs/P2041RDB_NAND_defconfig
-+++ b/configs/P2041RDB_NAND_defconfig
-@@ -104,6 +104,7 @@ CONFIG_MII=y
- CONFIG_PCIE_FSL=y
- CONFIG_SYS_QE_FMAN_FW_IN_NAND=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_ESPI=y
-diff --git a/configs/P2041RDB_SDCARD_defconfig b/configs/P2041RDB_SDCARD_defconfig
-index 1ed3a8f72fd0..ad04e2a1172e 100644
---- a/configs/P2041RDB_SDCARD_defconfig
-+++ b/configs/P2041RDB_SDCARD_defconfig
-@@ -99,6 +99,7 @@ CONFIG_MII=y
- CONFIG_PCIE_FSL=y
- CONFIG_SYS_QE_FMAN_FW_IN_MMC=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_ESPI=y
-diff --git a/configs/P2041RDB_SPIFLASH_defconfig b/configs/P2041RDB_SPIFLASH_defconfig
-index 3d47b002b5b1..1b7389178be3 100644
---- a/configs/P2041RDB_SPIFLASH_defconfig
-+++ b/configs/P2041RDB_SPIFLASH_defconfig
-@@ -101,6 +101,7 @@ CONFIG_MII=y
- CONFIG_PCIE_FSL=y
- CONFIG_SYS_QE_FMAN_FW_IN_SPIFLASH=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_ESPI=y
-diff --git a/configs/P2041RDB_defconfig b/configs/P2041RDB_defconfig
-index 1511fd7710c1..b6c28db4f10f 100644
---- a/configs/P2041RDB_defconfig
-+++ b/configs/P2041RDB_defconfig
-@@ -96,6 +96,7 @@ CONFIG_MII=y
- CONFIG_PCIE_FSL=y
- CONFIG_SYS_QE_FMAN_FW_IN_NOR=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_ESPI=y
-diff --git a/configs/T2080QDS_SECURE_BOOT_defconfig b/configs/T2080QDS_SECURE_BOOT_defconfig
-index 631789b05858..d1785f5e21f1 100644
---- a/configs/T2080QDS_SECURE_BOOT_defconfig
-+++ b/configs/T2080QDS_SECURE_BOOT_defconfig
-@@ -110,6 +110,7 @@ CONFIG_DM_PCI_COMPAT=y
- CONFIG_PCIE_FSL=y
- CONFIG_SYS_QE_FMAN_FW_IN_NOR=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_ESPI=y
-diff --git a/configs/T2080QDS_SRIO_PCIE_BOOT_defconfig b/configs/T2080QDS_SRIO_PCIE_BOOT_defconfig
-index 841f72ed73dc..440adb1663be 100644
---- a/configs/T2080QDS_SRIO_PCIE_BOOT_defconfig
-+++ b/configs/T2080QDS_SRIO_PCIE_BOOT_defconfig
-@@ -98,6 +98,7 @@ CONFIG_DM_PCI_COMPAT=y
- CONFIG_PCIE_FSL=y
- CONFIG_SYS_QE_FMAN_FW_IN_REMOTE=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_ESPI=y
-diff --git a/configs/T2080QDS_defconfig b/configs/T2080QDS_defconfig
-index 1eadcce3ba77..e5d141449e26 100644
---- a/configs/T2080QDS_defconfig
-+++ b/configs/T2080QDS_defconfig
-@@ -111,6 +111,7 @@ CONFIG_DM_PCI_COMPAT=y
- CONFIG_PCIE_FSL=y
- CONFIG_SYS_QE_FMAN_FW_IN_NOR=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_ESPI=y
-diff --git a/configs/ls1012a2g5rdb_tfa_defconfig b/configs/ls1012a2g5rdb_tfa_defconfig
-index 32d95162e9b0..660dcffca724 100644
---- a/configs/ls1012a2g5rdb_tfa_defconfig
-+++ b/configs/ls1012a2g5rdb_tfa_defconfig
-@@ -56,6 +56,7 @@ CONFIG_SPI_FLASH_SPANSION=y
- CONFIG_FSL_PFE=y
- CONFIG_DM_RTC=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_QSPI=y
-diff --git a/configs/ls1012afrdm_tfa_defconfig b/configs/ls1012afrdm_tfa_defconfig
-index a0081d9f0555..98cdbb46c2d1 100644
---- a/configs/ls1012afrdm_tfa_defconfig
-+++ b/configs/ls1012afrdm_tfa_defconfig
-@@ -55,6 +55,7 @@ CONFIG_NVME_PCI=y
- CONFIG_PCIE_LAYERSCAPE_RC=y
- CONFIG_DM_RTC=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_QSPI=y
-diff --git a/configs/ls1012afrwy_tfa_SECURE_BOOT_defconfig b/configs/ls1012afrwy_tfa_SECURE_BOOT_defconfig
-index 9ccd35ac2236..24ddbf783b29 100644
---- a/configs/ls1012afrwy_tfa_SECURE_BOOT_defconfig
-+++ b/configs/ls1012afrwy_tfa_SECURE_BOOT_defconfig
-@@ -57,6 +57,7 @@ CONFIG_NVME_PCI=y
- CONFIG_PCIE_LAYERSCAPE_RC=y
- CONFIG_DM_RTC=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_QSPI=y
-diff --git a/configs/ls1012afrwy_tfa_defconfig b/configs/ls1012afrwy_tfa_defconfig
-index 70f051f76e8a..985d3e2b8f0f 100644
---- a/configs/ls1012afrwy_tfa_defconfig
-+++ b/configs/ls1012afrwy_tfa_defconfig
-@@ -60,6 +60,7 @@ CONFIG_NVME_PCI=y
- CONFIG_PCIE_LAYERSCAPE_RC=y
- CONFIG_DM_RTC=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_QSPI=y
-diff --git a/configs/ls1012aqds_tfa_SECURE_BOOT_defconfig b/configs/ls1012aqds_tfa_SECURE_BOOT_defconfig
-index 643814577ca8..84bd67e5a689 100644
---- a/configs/ls1012aqds_tfa_SECURE_BOOT_defconfig
-+++ b/configs/ls1012aqds_tfa_SECURE_BOOT_defconfig
-@@ -73,6 +73,7 @@ CONFIG_DM_RTC=y
- CONFIG_RTC_PCF8563=y
- CONFIG_SCSI=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_DSPI=y
-diff --git a/configs/ls1012aqds_tfa_defconfig b/configs/ls1012aqds_tfa_defconfig
-index e7f7031f42df..2fd6dff8452a 100644
---- a/configs/ls1012aqds_tfa_defconfig
-+++ b/configs/ls1012aqds_tfa_defconfig
-@@ -82,6 +82,7 @@ CONFIG_DM_RTC=y
- CONFIG_RTC_PCF8563=y
- CONFIG_SCSI=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_DSPI=y
-diff --git a/configs/ls1012ardb_tfa_SECURE_BOOT_defconfig b/configs/ls1012ardb_tfa_SECURE_BOOT_defconfig
-index bb9cf573cc2e..f0ec4cb3afca 100644
---- a/configs/ls1012ardb_tfa_SECURE_BOOT_defconfig
-+++ b/configs/ls1012ardb_tfa_SECURE_BOOT_defconfig
-@@ -61,6 +61,7 @@ CONFIG_NVME_PCI=y
- CONFIG_PCIE_LAYERSCAPE_RC=y
- CONFIG_DM_RTC=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_DSPI=y
-diff --git a/configs/ls1012ardb_tfa_defconfig b/configs/ls1012ardb_tfa_defconfig
-index 428fc58e2f31..c147f3a2b315 100644
---- a/configs/ls1012ardb_tfa_defconfig
-+++ b/configs/ls1012ardb_tfa_defconfig
-@@ -62,6 +62,7 @@ CONFIG_NVME_PCI=y
- CONFIG_PCIE_LAYERSCAPE_RC=y
- CONFIG_DM_RTC=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_DSPI=y
-diff --git a/configs/ls1021aiot_qspi_defconfig b/configs/ls1021aiot_qspi_defconfig
-index 9353979a2e7c..8907227448ae 100644
---- a/configs/ls1021aiot_qspi_defconfig
-+++ b/configs/ls1021aiot_qspi_defconfig
-@@ -67,6 +67,7 @@ CONFIG_NVME_PCI=y
- CONFIG_DM_PCI_COMPAT=y
- CONFIG_PCIE_LAYERSCAPE_RC=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_DSPI=y
-diff --git a/configs/ls1021aqds_nor_SECURE_BOOT_defconfig b/configs/ls1021aqds_nor_SECURE_BOOT_defconfig
-index 3934d2598875..12b6e2e0e535 100644
---- a/configs/ls1021aqds_nor_SECURE_BOOT_defconfig
-+++ b/configs/ls1021aqds_nor_SECURE_BOOT_defconfig
-@@ -95,6 +95,7 @@ CONFIG_DM_PCI_COMPAT=y
- CONFIG_PCIE_LAYERSCAPE_RC=y
- CONFIG_SYS_QE_FW_ADDR=0x60940000
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/ls1021aqds_qspi_defconfig b/configs/ls1021aqds_qspi_defconfig
-index 5b28997dbaa5..6306d04c43fa 100644
---- a/configs/ls1021aqds_qspi_defconfig
-+++ b/configs/ls1021aqds_qspi_defconfig
-@@ -83,6 +83,7 @@ CONFIG_NVME_PCI=y
- CONFIG_DM_PCI_COMPAT=y
- CONFIG_PCIE_LAYERSCAPE_RC=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_DSPI=y
-diff --git a/configs/ls1021atsn_qspi_defconfig b/configs/ls1021atsn_qspi_defconfig
-index e36d336d84b1..37629d88c48a 100644
---- a/configs/ls1021atsn_qspi_defconfig
-+++ b/configs/ls1021atsn_qspi_defconfig
-@@ -68,6 +68,7 @@ CONFIG_TSEC_ENET=y
- CONFIG_NVME_PCI=y
- CONFIG_PCIE_LAYERSCAPE_RC=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_DSPI=y
-diff --git a/configs/ls1021atwr_nor_SECURE_BOOT_defconfig b/configs/ls1021atwr_nor_SECURE_BOOT_defconfig
-index 503afd1847b4..09924a5a08b3 100644
---- a/configs/ls1021atwr_nor_SECURE_BOOT_defconfig
-+++ b/configs/ls1021atwr_nor_SECURE_BOOT_defconfig
-@@ -79,6 +79,7 @@ CONFIG_NVME_PCI=y
- CONFIG_PCIE_LAYERSCAPE_RC=y
- CONFIG_SYS_QE_FW_ADDR=0x60940000
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/ls1021atwr_qspi_defconfig b/configs/ls1021atwr_qspi_defconfig
-index f8c6d82887bb..5527659ef782 100644
---- a/configs/ls1021atwr_qspi_defconfig
-+++ b/configs/ls1021atwr_qspi_defconfig
-@@ -76,6 +76,7 @@ CONFIG_TSEC_ENET=y
- CONFIG_NVME_PCI=y
- CONFIG_PCIE_LAYERSCAPE_RC=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_DSPI=y
-diff --git a/configs/ls1021atwr_sdcard_ifc_SECURE_BOOT_defconfig b/configs/ls1021atwr_sdcard_ifc_SECURE_BOOT_defconfig
-index af4bb562b870..fdb44503ce19 100644
---- a/configs/ls1021atwr_sdcard_ifc_SECURE_BOOT_defconfig
-+++ b/configs/ls1021atwr_sdcard_ifc_SECURE_BOOT_defconfig
-@@ -113,6 +113,7 @@ CONFIG_PCIE_LAYERSCAPE_RC=y
- CONFIG_U_QE=y
- CONFIG_SYS_QE_FW_ADDR=0x940000
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/ls1043aqds_tfa_SECURE_BOOT_defconfig b/configs/ls1043aqds_tfa_SECURE_BOOT_defconfig
-index 3d38f5841500..7384eb490f5a 100644
---- a/configs/ls1043aqds_tfa_SECURE_BOOT_defconfig
-+++ b/configs/ls1043aqds_tfa_SECURE_BOOT_defconfig
-@@ -97,6 +97,7 @@ CONFIG_NVME_PCI=y
- CONFIG_DM_PCI_COMPAT=y
- CONFIG_PCIE_LAYERSCAPE_RC=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_QSPI=y
-diff --git a/configs/ls1043aqds_tfa_defconfig b/configs/ls1043aqds_tfa_defconfig
-index e3fcdd37a40c..7a6a8c3fe2ad 100644
---- a/configs/ls1043aqds_tfa_defconfig
-+++ b/configs/ls1043aqds_tfa_defconfig
-@@ -105,6 +105,7 @@ CONFIG_NVME_PCI=y
- CONFIG_DM_PCI_COMPAT=y
- CONFIG_PCIE_LAYERSCAPE_RC=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_QSPI=y
-diff --git a/configs/ls1046aqds_tfa_SECURE_BOOT_defconfig b/configs/ls1046aqds_tfa_SECURE_BOOT_defconfig
-index 941224b5ac21..ff59d504ddee 100644
---- a/configs/ls1046aqds_tfa_SECURE_BOOT_defconfig
-+++ b/configs/ls1046aqds_tfa_SECURE_BOOT_defconfig
-@@ -98,6 +98,7 @@ CONFIG_DM_PCI_COMPAT=y
- CONFIG_PCIE_LAYERSCAPE_RC=y
- CONFIG_PCIE_LAYERSCAPE_EP=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_DSPI=y
-diff --git a/configs/ls1046aqds_tfa_defconfig b/configs/ls1046aqds_tfa_defconfig
-index 191ab45aec03..77f8d6b53d4b 100644
---- a/configs/ls1046aqds_tfa_defconfig
-+++ b/configs/ls1046aqds_tfa_defconfig
-@@ -107,6 +107,7 @@ CONFIG_DM_PCI_COMPAT=y
- CONFIG_PCIE_LAYERSCAPE_RC=y
- CONFIG_PCIE_LAYERSCAPE_EP=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_DSPI=y
-diff --git a/configs/ls2080aqds_qspi_defconfig b/configs/ls2080aqds_qspi_defconfig
-index d07ca3217a2b..9141340b1638 100644
---- a/configs/ls2080aqds_qspi_defconfig
-+++ b/configs/ls2080aqds_qspi_defconfig
-@@ -91,6 +91,7 @@ CONFIG_PCIE_LAYERSCAPE_RC=y
- CONFIG_RTC_ENABLE_32KHZ_OUTPUT=y
- CONFIG_RTC_DS3231=y
- CONFIG_DM_SERIAL=y
-+CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_QSPI=y
--- 
-2.43.0
+>
+> When I make use of this locally I do a two step:
+> - make foo_defconfig savedefconfig
+> - merge_config.sh defconfig frag1 ... fragN
+>
 
+That works well for defconfig inside configs/ but if you manage some
+configs outside of u-boot and they have include it won't work.
+
+> So, I am hesistant to start with to change this tool more.
+>
+> --
+> Tom
