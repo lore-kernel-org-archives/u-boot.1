@@ -4,165 +4,175 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D73EE109192C
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:01:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07E62109192C
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 23:01:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50AC483FC0;
-	Fri, 20 Mar 2026 00:01:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=ibm.com
+	by phobos.denx.de (Postfix) with ESMTP id 0524983FEC;
+	Fri, 20 Mar 2026 00:01:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ibm.com header.i=@ibm.com header.b="EJYrYpCJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZKf6kQ0m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C170383DC9; Thu, 19 Mar 2026 18:38:58 +0100 (CET)
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
- [148.163.156.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C156B83FC0; Thu, 19 Mar 2026 21:56:58 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5571B83D71
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 18:38:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ED5BC80517
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:56:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=ibm.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Daniel.Frink@ibm.com
-Received: from pps.filterd (m0353729.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 62J8dBcq3853770
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 17:38:54 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
- :content-type:date:from:message-id:mime-version:subject:to; s=
- pp1; bh=KjhhBbakLjSUq4AE6pX+KCL2m/SQa77d3gAVt+L+dvY=; b=EJYrYpCJ
- Z5bFJORwK4w7OR3dzdt/KEnOQuZIlsnREQThVbPicNTWHsbfujACfsbnmaSVcYwP
- 63L5133Qj5bjC+hVlq8Vg3VnJWXldP2JqEUTmiZiqrp/WpJepzhedb4Y4MBniJcJ
- DqXG0+Y9/BQAlQ+Vut0IDlIb3h0kLo0yVrco7+0FmVrUFuvkcG9SokIFqvLk/u2h
- j7+nqJGqdky2o4WV2xkx4vju8vELsaVb7PgO5xKO92pU8RWxIqJsa8tr3rCaeqR3
- yu9G3K8pnprW18mPhN7DsfMnGufDqCuha/6KVkK4j/ZJYteoKWctLcUH2KSONmPO
- 7zNVnPgZVn6Jeg==
-Received: from bn8pr05cu002.outbound.protection.outlook.com
- (mail-eastus2azon11011067.outbound.protection.outlook.com [52.101.57.67])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4cvybsg5db-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 17:38:54 +0000 (GMT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lTQtqdwePpd44qJFFOZttn59vS75dKRLC96dUesoXIeu6BlLPfWB6EpNRmHCJf+rwJj9zXcP+4izPEHXA3LK9lFowZfExYagBpDYQW51O58c+THCIUMM5PjsMayOoKqD5zYXB0zBCH8mma4ckm9kXU1k3PnSxjt04e5RaPsDKeWHzNwCk63UerWdhA7xs8/7ph2+l4+HJrHt5W8zGgQy/FBm2CoFzEFLg9ZvM32Dvr0+nMirITalb53sXAimwUNLJ/Yge5O+1+C1E38FIL90oJW6D/1mkuIH+wdaEwKNweib2dWMRDriodM6VAhVDsReQWzIrtJR2xDQ7vXe+MQL/A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KjhhBbakLjSUq4AE6pX+KCL2m/SQa77d3gAVt+L+dvY=;
- b=GzXji/VpaQcNTXdHcJFOecZaEQaw2cdH1pNMgS38nkwETUErNKSbZ1w6m1ybKHYmjIWRZ1F9PyrvxjxUvCl6VAIA85yby7qvK1t2GUgVkv7c/TDrnPSXKvT3NW8pYXv+9X86sAq0d745o4b4CiLM5ig4B+5uJojSJ90bgp0kncGGIxGU9Hzc88ZVd2zmGqD64azUdweDRDqJOTN6qqIU/weIr4kdyKVxKPj8IxQy3ofV0hvlsGyWCflCrJOBBwpvLRPkIdIfN+CyRODRXJ4/1+gQdPUY8smmsbqa5d/lUg/xfH4IhguUteboaV0bAiZK/QurWa0tV65HKpvUQcOUnQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=ibm.com; dmarc=pass action=none header.from=ibm.com; dkim=pass
- header.d=ibm.com; arc=none
-Received: from LV8PR15MB6416.namprd15.prod.outlook.com (2603:10b6:408:1eb::13)
- by SJ0PR15MB4487.namprd15.prod.outlook.com (2603:10b6:a03:374::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.10; Thu, 19 Mar
- 2026 17:38:49 +0000
-Received: from LV8PR15MB6416.namprd15.prod.outlook.com
- ([fe80::c4e:1092:4441:53cb]) by LV8PR15MB6416.namprd15.prod.outlook.com
- ([fe80::c4e:1092:4441:53cb%4]) with mapi id 15.20.9745.007; Thu, 19 Mar 2026
- 17:38:49 +0000
-From: Daniel Frink <Daniel.Frink@ibm.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: George Wilson <gcwilson@us.ibm.com>, Chris Engel <cjengel@us.ibm.com>,
- NAYNA JAIN <naynjain@ibm.com>
-Subject: RFC: Remote signing support for mkimage
-Thread-Topic: RFC: Remote signing support for mkimage
-Thread-Index: AQHct77beMUtibAM8UCS7jFnDIT0HA==
-Date: Thu, 19 Mar 2026 17:38:49 +0000
-Message-ID: <LV8PR15MB6416D60889EA3D73880A85688E4FA@LV8PR15MB6416.namprd15.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-reactions: allow
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: LV8PR15MB6416:EE_|SJ0PR15MB4487:EE_
-x-ms-office365-filtering-correlation-id: a2db66d5-eb64-46e3-89ab-08de85de614d
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|1800799024|366016|8096899003|38070700021|18002099003|56012099003;
-x-microsoft-antispam-message-info: AkVKQW/LKpA70wFiJlrrJjpSvL9NOMpvUnGaLlI2rFX/JjtOKXVoAxB1WtZ19YVw6NRs1BnXmK2W4NSimNkN70MvzfBO9QkaW9CAR6qkbagOVQKWZVNQpP5+uVYJVPYViMW0L/vbn5cOkCneSrrKS7rqkxL4Du1YPQHiL7v1NGxjqwid3PdEepDP5Tcu/dRJz+50fIVX8XTNZNO4gRnlCiBEvJSP1m4NLPsznYDWPID09rLq6FlQGKPp1wpFiz6NrKLhCTA8JTuv4NRS2FpbvyyVG4mwxQLVoNqWBrHC+t4JneX+tvn1FpiLYggEILLLpQg7hf2Nl8TU+U4qDTsXTni7VeXUIp9/ff6+2FKsQA6uZ+LR8MNEBKCxXVmH4cJzFOjOJGQCXWzee78rv82amIVHCRfnIlhEaUxmOeH4R4nlnNhmT67OKjYPcKl7qTiH14zaXzHDbzICADNA43FOgxPQB7IzkOa2748Re1A2+Wn5pueyGRzaPUNrHnxTQn+0nppqEb63SevYkXdh5jVLlG9+XZsY8lZYdAmOEG9EQHOJnnWPaZG5CMla6Gsm5OfYO/iAKeTnm3ubf+IuGZqYaUAG2DGcnJ1y77TidIgZRa83I8fK/gwPeByCAQcX1JtbQCOkPUpIznN8HJvEVaYgF9UB9kNSZwrStTMDNTdlk1hb6PQCMc+lwCd/JPrvqtF4UFLf4btA8mnHidvvacL7ZyWL+mEKDyTxH8Y3kgyDynnLWPIwYiT0dLIk3+cNRsLzg65UFG832B7dUYYTdwvh10tWT6en35fGA35qRY/Nc/k=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV8PR15MB6416.namprd15.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(8096899003)(38070700021)(18002099003)(56012099003);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?Windows-1252?Q?0o+KqJOq9MVjSOe8oBJPxcZAYXBCfF1hYIUySVuy0jiS3B5tr0MPnev8?=
- =?Windows-1252?Q?/w/vuCzTnJC9FKpHy5H1UKGjjLPlWLn0O+cbzAZq/QFlFub2YOfdGFQn?=
- =?Windows-1252?Q?GzQVx29nZvthZLDuiuPEybkboE6mmJkcgOKrorHLCZgFlolOk12GvxxO?=
- =?Windows-1252?Q?tQlw1faXUHi34jC1p5HETl33C6scwkXP0sFnX+TKDZGTNp++FgL/ktAE?=
- =?Windows-1252?Q?6W7rxNLvX3CmQpBddIsJwBjxUmM08DxKPNb3ZubHn2MreuQIVBz4HGgS?=
- =?Windows-1252?Q?3cd3dkDTpJhunHgqlQ4+HSS3uBiqS6s2cVEOUbAvsJGNe2SSCF99Mtds?=
- =?Windows-1252?Q?vvR0gL4ppoGMR6m7rkulDV6WQco0KzGFfpZJOuG599KIevTHWgG+lWBn?=
- =?Windows-1252?Q?fBANt+vERG6tBWsyPwwpnCUxrzT1NqwItfoXoXE1Hm3MlHGnJXGiBv5z?=
- =?Windows-1252?Q?lRaDYPJielDQYGWkpe2bMqm+cKHVdL3/CcShKnjivPrA+dSWrjVxvBXz?=
- =?Windows-1252?Q?dcevMI0FUXrr7//qo2IPV1XWgVo+5P4SGeQaDD0lWBcXVEgwdd3f+Goz?=
- =?Windows-1252?Q?vUd4uEpAmDZiqCf7vUP3Wtv04cfHAIylnagKo59h7OtH3lq5yUtvS/uR?=
- =?Windows-1252?Q?kolsruT0thZWPOmHKQspIMNahuOJSuCVkgv13P1qWGx5wF2bhvLMKHgU?=
- =?Windows-1252?Q?UFnY8KTmMj+aZgerQQGC88hfNKtDtCxuS9LJg4CCiyaHW8QEO4tgp/YK?=
- =?Windows-1252?Q?lzfj+rgtwovDLgg1p8TqAQIAFmDlWnWigXCezMeaZt4qzURgWmpSalXe?=
- =?Windows-1252?Q?reAEqTn7nVqdfSHTxj2kQLr5TVtyqGEeXaWip+7jTRBipLnlf9C/i0Vm?=
- =?Windows-1252?Q?d5Diov+E6YHcjk0SJXfOoCHsWni3Vc9VFTOVQ1X8Ew/q8R/TdF9FoSU/?=
- =?Windows-1252?Q?qgQvTQ1t0kl85ZplApmJnwtiWDGfjJChEfh2TARWzjApbtrXMEX+TjgT?=
- =?Windows-1252?Q?C4y1axx0VlCfDK8fpYEDO9W4rsi97YYqm7vAtCOWgG0YJ0adbkEBs45D?=
- =?Windows-1252?Q?JhC5shOvCVxnTQXiVfOiabd+uWUwGpO5lfuoccLnhEvxQEMdq7Wpdtjw?=
- =?Windows-1252?Q?ip9dnkEl28l+1rm5Zr/5lP14DRfzWqchl8J6PtgTroq/koeGTlsBqLER?=
- =?Windows-1252?Q?2ckq2MRmkj5Mf9mVmi4xKakqzIlAldn5NztdfRiF5XbMZpfSb1jYMwV9?=
- =?Windows-1252?Q?GNBGj/ui3QKw09p2orrVM1lNdlHw4sJUn6WhovZmJRc+rypgE1xwnu6Y?=
- =?Windows-1252?Q?n45PehUuAnKH9VlgDrdjWKOrjoiSnT8yX7o7Y13XWwDMPxtE0zqe5QtI?=
- =?Windows-1252?Q?Qxuzp1ahFELN74tcfhUXS/hjTBqRSBOzbzIi3AEMS3AM1jmWjH8UgZVB?=
- =?Windows-1252?Q?n8riMSCpD2alsuVZxqKWdCFaSjIswt7vgQQblOAmfj8Ewax9mkwHES7T?=
- =?Windows-1252?Q?9LYeLdQ2scnw2zQjpjHNNV+Bw9R1tOPfD2dNwdGDpZrCpFAd6iyTZtvb?=
- =?Windows-1252?Q?qJEr1Jw3vlAAXevBVENW/w7p7j1e/tBoStQ2wqCxvRDCTTEiDGTo52P+?=
- =?Windows-1252?Q?GG03A7Oi3NNwlUgl9XuJkoql5PMQ/DovXjoV9lIKrhCQZPVH/eM1ShqE?=
- =?Windows-1252?Q?3GHvdO86BBmMdGfGj6UgB0We7gev1/UdkpyvlK682cycn+k5+AjFavnJ?=
- =?Windows-1252?Q?7nW9Nr5Q/ybTQiFygMO7rnrmXcdCxmSDgphSGAthFRwYYF5GFMF+cCvl?=
- =?Windows-1252?Q?umMQFIR1ngH4NplJStsrfx0HFdqGXKBKAd6EFS5zoLFuBA1bCAlqjSZY?=
- =?Windows-1252?Q?08roDCGYRZatTg=3D=3D?=
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-439b9b1900bso872149f8f.1
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:56:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1773953814; x=1774558614; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=P535AG/2k8ItRv7CW2LNXmHzd331bBJoGHddWlJiKB0=;
+ b=ZKf6kQ0m1ciwXSgfmUnczek79NCHulhMtlwv+Pie7gvT4uMtoL+iizw9m6s+b1fCw4
+ YKJ8quPKADU988wBR0gsrlsMvay1HIFNoSpYq+YvWqD6QLwkVh4qOQOkrO8rrCbM7mSy
+ AzIq0BVf/RqE7DF9wOPdu6Bc7y2y4+VKXY+ps8apbBvcmzbsVIMvsqhbRCGKIvrrq86+
+ L0P+8b2DbdGyNNWiumPZu7cQ/c7HvT+BAInqwLAq7LS1wQM2+zKLPClEzQgx0d/35JR/
+ R5YaOOhJPb7DCSTU3mJD6IRIbBTZ5CxVCgDMeWVcMZYMFYGmpWonOV+kV13NR2TENoCM
+ 5iUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1773953814; x=1774558614;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=P535AG/2k8ItRv7CW2LNXmHzd331bBJoGHddWlJiKB0=;
+ b=jXypS6qoCN5WibIB+PJLmrgoVJWTWUZnYgAlifZjuHAzRI2nC/gJj5O7isdQK2jw5a
+ 35+e+teCxbTllcW7koHDTOg7YnxWeoe3pkfSPOrWsXXI5Frt498YRNF3MZZQ69ZoDZPc
+ WaiqZusR12jzhgwgDU+ucY1NoVYQLXHeFFvoQ2iN4LCeXYjszIjIS1jTbQZjyCh0lCn6
+ aH+jGNo7G08eK1+D93oeM15z2NPk/ES5HbZW304UXTSR8dwDQoFr6OvMzfJlLrXQOFA3
+ zEQlib8cluNvpw8pPRCFMf9GILvy6Wfj9czoEPZPpyrHN7PcJhTMmTySvjFKHOOOGf5E
+ A7rg==
+X-Gm-Message-State: AOJu0YyrhJxYBgKJC+LSO4433Eg4QEsoOngku2XdVIPWybSkzN3NbElX
+ FpC0Ny+kNqPHcqEhvNkCeseGJn/kqBrSG0N9EuPi3vWhpfI//TikjJWQVf2F4Jzy+5w=
+X-Gm-Gg: ATEYQzz+eWyrZSVcCgRdgdFgYBP8wqqg3/loyNMC80n0BACQYrg8H/G3sm6F06BQytB
+ U8QRXVbiSXtc1l0i+df1OBizwEMI58ryc3YFDwP8uYD2Nw/E3vs6pSmh78yNl8yqyJWGOgXNURk
+ vOIq2WwB7B1gwmZCs+3aNAebex3gBW0XXwDj6bab8V8yaRuL4y8NyUEF1zpKZPm0IMzhnEcUMJj
+ ZdPZXMcR5OACD27aBsiiW2v3x3EGj0U/4vFG5eys9tzgVC99fv4zWh4TVGC7HdioHyDFvh7T+6x
+ E3IZEAPN0yByGBIKj9X7WrEGDbTLF3FDDdXoHe2B/6fNJ25MSr2B7OugeeQIEQMPCN17hSGQUIV
+ 0gNgZVE4tUgTn5LqZqSq15HNa3UPcvE21rL4p+AuNOVa/rb3Mu1ussdvYRgQ64qzRRIWDSiHhYQ
+ upg/Jf1gmeFBPbHho48Dcg2QOgTiJVHmCmBSh1YP7dhhVbban3hh9TsIq46smZd8umyxc=
+X-Received: by 2002:a05:6000:1886:b0:43b:3cdc:941f with SMTP id
+ ffacd0b85a97d-43b6424a832mr1292002f8f.17.1773953813877; 
+ Thu, 19 Mar 2026 13:56:53 -0700 (PDT)
+Received: from lion.localdomain (p4fc3dd39.dip0.t-ipconnect.de.
+ [79.195.221.57]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43b64714e2esm1191396f8f.32.2026.03.19.13.56.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Mar 2026 13:56:53 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+Subject: [PATCH RFC 00/40] clk: port full Linux Common Clock Framework to
+ U-Boot
+Date: Thu, 19 Mar 2026 21:56:22 +0100
+Message-Id: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: nTARRRgZ69XgIhQiKrdvrPJ0VeJLtUSgedOknCJ4C9rSCZtTXEaCRTgGutB8aC2Hd48m+lrUsGyJiWbMENvCwNVijY916Vhw6NUWRxtdrOX8RemUpR5/RllNSWXC9jc6a3xiEXlS6l9R30+uBU5W7yqRChJ9JxfWieZGtmsBD/rqxz8nEoQ/kGwDC2wRKr7f7X1OWA27lac/Ildh1Se4z+xOD5QFhNuMhrpHx9JtjuIV7rgqBp+dIojubgF1vYPVomrO9mQFOwuZgFHMAfJR0OeuVsbGxasHI46PIQ2s53Tx0mdPgCxNV/5evVsBoqs2i+Md/aiuSo4p0nemYsHDbg==
-X-OriginatorOrg: ibm.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR15MB6416.namprd15.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a2db66d5-eb64-46e3-89ab-08de85de614d
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Mar 2026 17:38:49.4255 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: fcf67057-50c9-4ad4-98f3-ffca64add9e9
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: KmeEj/auCEgtS9Qhn3MqladctddoP2AxgzDqzPJ9/ziPyNZ2DIPIMFEHb7ojupEuCqBpXXHlEafdDMeGlexCBA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR15MB4487
-X-Authority-Analysis: v=2.4 cv=MMttWcZl c=1 sm=1 tr=0 ts=69bc34ae cx=c_pps
- a=mt+QW+PagoHSMqpqf5GGBw==:117 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
- a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=Yq5XynenixoA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=RnoormkPH1_aCDwRdu11:22 a=uAbxVGIbfxUO_5tXvNgY:22
- a=VnNF1IyMAAAA:8 a=AwUmBXpErqFXrdjOMcYA:9 a=pILNOxqGKmIA:10
- a=TSwInww0fiNdrA1B:21 a=_W_S_7VecoQA:10
-X-Proofpoint-ORIG-GUID: -I_ND6wYuhjE-K40_0c2MuohdPr2082b
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzE5MDEzNyBTYWx0ZWRfX1BXmsXQx/MKD
- /RJPxbVXPI54aB67q8T+XBICHU0sqGvAxuICMFb6CH9jIg+Hl1nhfRCcizsYYkKx4Su5o7v5ocp
- T6GQRnmn2cJj9Ucn9EA397FLrBc7CmE7XSBe18KgQ6P57sb5P6SPh++YFVrqSDcmOBoe59oDqNs
- LhxEQ0ncm8ZEjZaQAm05h+UBFq/SzUZh4eVLTq0UgAwiERdDF5MK6quF6qbYiC6rnuR1O/yjmqN
- m5FbgU1UegZ4nBNPNivJ80rJm95fAPaxhr3iGRd++UOU2XUAln8UZTzCU6c2zHiz3jFUCvYG3kG
- TbGLLHSFPpMTnE0yHPm8xpUepkZsr0d/UblPFFKYyJK2JiitgHK5QGaEOPBuVEVw4uapdwkrU8N
- IWInV+B2jeKkINx5zpGGN6nl+qe2lpA7CNUCQCn1FFOKal2O2WysLqq66IhwDXFM1XPgqYvM5Mf
- 39YGCONjhJe7IkcnTcw==
-X-Proofpoint-GUID: -I_ND6wYuhjE-K40_0c2MuohdPr2082b
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-03-19_02,2026-03-19_05,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 lowpriorityscore=0 malwarescore=0 spamscore=0
- priorityscore=1501 impostorscore=0 adultscore=0 phishscore=0 clxscore=1011
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2603050001
- definitions=main-2603190137
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAPdivGkC/yWMwQrCQAwFf6XkbCC7gqhXwQ/wWjxs01eNYC2bV
+ pTSf3fV4wzMzOTIBqd9NVPG09wefYGwqkivqb+ArS1MUeJG1mHHmhxvVu14GnzMSHdGktBKIxp
+ lSyUcMjp7/aY1nY4HOv+lT80NOn53tCwfGs8/EXsAAAA=
+X-Change-ID: 20260319-casey-ccf-upstream-ea01d0b0c208
+To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
+ u-boot-qcom@groups.io, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
+ Joel Stanley <joel@jms.id.au>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Paul Barker <paul@pbarker.dev>, Dai Okamura <okamura.dai@socionext.com>, 
+ linux@analog.com, uboot-snps-arc@synopsys.com, u-boot-amlogic@groups.io, 
+ uboot-stm32@st-md-mailman.stormreply.com, 
+ Sumit Garg <sumit.garg@kernel.org>
+Cc: Tom Rini <trini@konsulko.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Stephen Boyd <swboyd@chromium.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, 
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Yannick Fertre <yannick.fertre@foss.st.com>, 
+ Romain Gantois <romain.gantois@bootlin.com>, 
+ Raymond Mao <raymondmaoca@gmail.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
+ Yao Zi <me@ziyao.cc>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Peter Korsgaard <peter@korsgaard.com>, Greg Malysa <malysagreg@gmail.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
+ Arturs Artamonovs <arturs.artamonovs@analog.com>, 
+ Ryan Chen <ryan_chen@aspeedtech.com>, 
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, 
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, 
+ Sean Anderson <seanga2@gmail.com>, Liviu Dudau <liviu.dudau@foss.arm.com>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>, 
+ Robert Marko <robert.marko@sartura.hr>, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Minda Chen <minda.chen@starfivetech.com>, 
+ Hal Feng <hal.feng@starfivetech.com>, Thierry Reding <treding@nvidia.com>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
+ Philip Molloy <philip.molloy@analog.com>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Ryan Wanner <Ryan.Wanner@microchip.com>, 
+ Varshini Rajendran <varshini.rajendran@microchip.com>, 
+ Manikandan Muralidharan <manikandan.m@microchip.com>, 
+ Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>, 
+ Luca Weiss <luca.weiss@fairphone.com>, Jens Reidel <adrian@mainlining.org>, 
+ David Wronek <david.wronek@mainlining.org>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ David Lechner <dlechner@baylibre.com>, Nishanth Menon <nm@ti.com>, 
+ Alice Guo <alice.guo@nxp.com>, Valentin Caron <valentin.caron@foss.st.com>, 
+ Senthil Nathan Thangaraj <senthilnathan.thangaraj@amd.com>, 
+ Naman Trivedi <naman.trivedimanojbhai@amd.com>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, 
+ Padmarao Begari <padmarao.begari@amd.com>, 
+ Jonathan Currier <dullfire@yahoo.com>, Sam Shih <sam.shih@mediatek.com>, 
+ Conor Dooley <conor.dooley@microchip.com>, 
+ Stephan Gerhold <stephan.gerhold@linaro.org>, 
+ Varadarajan Narayanan <quic_varada@quicinc.com>, 
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, Sam Day <me@samcday.com>, 
+ Rui Miguel Silva <rui.silva@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Shmuel Leib Melamud <smelamud@redhat.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Finley Xiao <finley.xiao@rock-chips.com>, 
+ Joseph Chen <chenjh@rock-chips.com>, 
+ Elaine Zhang <zhangqing@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>, 
+ Gabriel Fernandez <gabriel.fernandez@foss.st.com>, 
+ Andrew Davis <afd@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, 
+ Udit Kumar <u-kumar1@ti.com>, Heiko Schocher <hs@nabladev.com>, 
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, 
+ Paul Sajna <sajattack@postmarketos.org>, Marek Vasut <marex@denx.de>
+X-Mailer: b4 0.15-dev-47773
+X-Developer-Signature: v=1; a=openpgp-sha256; l=26382;
+ i=casey.connolly@linaro.org; h=from:subject:message-id;
+ bh=tjnK4RoAZ/HTyna9IlTHnXHrkoe2WzZCvGkqj2ScAbw=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw9ybzPT9jdWX94uunfkx7PlN9X5s3VaNXbvKFAsKame
+ 6/R1rrlHaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAiTkcZ/gpc0E3ecaonLe+q
+ 1IzpiyOibl4LCznOxKj19aJ22fO/d0KAKrq8fybrLpu4prhF+PHB9b5MxUVbWPO/PU37+nP75Mk
+ e/wE=
+X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Fri, 20 Mar 2026 00:01:15 +0100
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -179,40 +189,482 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+This RFC provides a proof of concept for using the full Linux CCF in
+U-Boot and consequently porting full Linux clock drivers with extremely
+minimal changes.
 
-I wanted to check whether a patch I'd like to submit to mkimage to better s=
-upport remote secure signing servers would be acceptable for upstream.
+== Overview ==
 
-Currently, we support this capability via a custom PKCS#11 module via an Op=
-enSSL engine. The migration to OpenSSL 3 (and the need to upgrade our libp1=
-1 dependency) is going to force major changes on our end, as newer releases=
- of libp11 no longer reliably support signing with our OpenSSL engine/custo=
-m PKCS#11 module. The libp11 maintainers have explicitly stated they only s=
-upport OpenSSL engines on a best-effort basis.
+This RFC is pretty long but can be separated into a few chunks. The
+first patches relate to Linux API compatibility and just contain small
+self contained changes, these can go upstream regardless of CCF.
 
-It seems to me that the ideal solution would be support for a 3-step signin=
-g flow in mkimage:
+The next group of changes prepare for importing CCF from Linux, the
+standalone fixed clock drivers are moved to clk/basic, the existing
+U-Boot CCF drivers are moved to clk/uccf, and struct clk_ops is renamed
+to clk_ops_uboot.
 
-1. mkimage --emit-hashes =97 emits all hashes that need to be signed
-2. External signing tooling produces signatures
-3. mkimage --inject-signatures =97 signatures for each hash are provided, v=
-alidated against a provided public key, and injected back into the image
+Additionally, clk_set_rate() is changed so that it returns a signed
+long, since it can return negative values. This is also done to align
+with CCF but it's a standalone improvement nonetheless.
 
-We're aware the OpenSSL provider system is a potential uplift path, but we =
-believe a tooling-agnostic signing interface would be more accessible to or=
-ganizations with diverse signing infrastructure, avoiding the need to imple=
-ment and maintain custom OpenSSL plugin code entirely. We'd also prefer not=
- to resort to workarounds such as signing with a throwaway key and manually=
- extracting/re-injecting signatures.
+The next changes import CCF from Linux 6.19 and then adjust it to
+compile and work with U-Boot. These commits are split up mostly to
+try and reduce the size. Finally clk-uclass is adjusted for CCF, this
+definitely will need some additional passes to be a bit cleaner.
 
-If this direction seems acceptable, or if you're open to the idea but have =
-concerns about the approach, I'd welcome your feedback before investing tim=
-e in a full patch.
+With CCF done, sandbox clk-ccf driver gets a CCF_FULL port, the clk_ccf
+tests are adjusted to pass.
 
-Thanks,
+Lastly, a PoC port of Qualcomms Linux clock drivers is done, this
+only has sm8650 clocks but they serve the desired purpose. The changes
+necessary to the Linux drivers are mostly to deal with U-Boots driver
+model, the actual platform specific clock drivers require essentially
+zero changes!
 
-Daniel Frink
-Firmware Engineer - PowerVM Security
-IBM Rochester, MN
-Email: daniel.frink@ibm.com
+=== Feedback ===
+
+I'd like to get feedback on the overall architecture and ideas, feel
+free to point out any dead code or printf's I forgot about, but I'll for
+sure do a more detailed cleanup before the next revision.
+
+I would definitely like to input on how to deal with clk-uclass, since
+it's now supporting 3 different clock frameworks, but I'm now sure how
+best to separate the code out without duplicating code.
+
+In terms of overall architecture, CCF is a departure from the uclass
+model that U-Boot has stuck too for so long. If this is a success then
+I think it could make a lot of sense to make similar changes for power
+domains and resets. I think this change offers a lot of additional
+flexibility which has been sorely missed.
+
+== Motivation ==
+
+There were quite a few motivating factors behind this effort which I
+think provide useful context for this series:
+
+1. Existing UCLASS_CLK support in U-Boot (even with U-Boots minimal CCF)
+   doesn't provide a fully cohesive API nor implement the necessary
+   functionality to support complex modern platforms without a lot of
+   additional effort.
+
+2. While trying to enable display support on Qualcomm, it became clear
+   that U-Boots clock framework was a severe limiting factor,
+   particularly for more complicated setups like "bonded" dual-DSI.
+
+3. The current state of Qualcomm clock drivers in U-Boot is pretty poor,
+   as the old very basic driver code is being expected to support more
+   and more complicated usecases. Clock support is generally the most
+   complicated part of bringing up any new Qualcomm platform, so being
+   able to properly reuse Linux drivers with the familiar API greatly
+   reduces the amount of friction when working on U-Boot support for
+   complicated peripherals like the display.
+
+Consequently, My aim with this effort was primarily to provide API
+compatibility with Linux as much as possible, minimising the changes
+that have to be made to clock drivers to port them from Linux, and
+reducing the chance of introducing U-Boot specific bugs.
+
+=== clk_ops/UCLASS_CLK ===
+
+CCF_FULL drivers should NOT use UCLASS_CLK, since CCF uses a totally
+independent clock API. If the clocks are provided by another device like
+a phy, they can simply be registered with the clk core the same way they
+are in Linux. Standalone clock drivers should use UCLASS_NOP.
+
+Clocks must all be registered during driver probe, the CCF will ensure
+that a given clock provider is probed (via a global ofnode -> device
+lookup) before checking the of_providers, thus making sure the clocks
+are registered so that the consumer can use them. There is currently no
+special handling for cyclical dependencies.
+
+=== struct clk ===
+
+It's definitely debatable if it makes sense to have 3 different structs
+for each clk (clk_hw, clk_core and clk). I do think clk_hw and clk_core
+are justified, since clk_hw is more tied to the hardware description and
+typically nested in a clk-specific descriptor while clk_core contains
+the internal runtime state of the clk which should remain private to
+CCF core.
+
+It could make sense to merge clk and clk_core, but since struct clk is
+public in U-Boot, where it's an opaque pointer in Linux this would be
+a substantial effort. In Linux struct clk objects are allocated inside
+CCF, but in U-Boot they're allocated by the driver, this would need to
+be resolved before we investigate combining these structs.
+
+=== Memory/perf overhead ===
+
+The memory and size overhead of CCF is undoubtably bigger than uCCF,
+although I suspect the difference is less than it might seem at
+first glance. In particular: clk_core is only ~50 bytes larger than
+struct udevice on ARM64, and an additional 120 bytes is saved for each
+U_BOOT_DRIVER used by uCCF.
+
+On the other hand, the CPU overhead is probably more significant,
+but not an unreasonable cost to ensure correctness and propagate rate
+changes across the clock tree.
+
+Just comparing the binary size of sandbox64_defconfig with uCCF vs
+CCF_FULL, CCF_FULL results in a 135k size increase in the binary. I
+haven't done any more detailed analysis here (still haven't got buildman
+to play nice...).
+
+=== SPL ===
+
+This RFC doesn't have any SPL specific support, I think this role is
+better fulfilled by UCLASS_CLK.
+
+=== U-Boot's old CCF port ===
+
+The original CCF port done for IMX platforms is vastly different in API,
+scope, and function to CCF_FULL, to differentiate I refer to it
+as "uCCF".
+
+I have kept support for this in and made it mutually exclusive with
+CCF_FULL. uCCF drivers have been moved to drivers/clk/uccf, with the new
+CCF port in drivers/clk/ccf.
+
+Included near the end of this series is a port of Sandbox's clk-ccf
+driver from uCCF over to CCF_FULL, this might be a useful reference for
+other drivers (although it's probably better to just adapt the Linux
+drivers).
+
+=== Compat shim ===
+
+Lastly, this series includes a compat shim which allows UCLASS_CLK
+drivers to somewhat work with CCF, I would imagine this being useful
+if some generic peripheral device provides a clock for example, but in
+almost all cases I think it's better to implement a proper CCF clock
+device. Unless there is a particular usecase for this I would probably
+not include it in the next revision.
+
+== TODO/Outstanding issues ==
+
+* Clean up clk-uclass.c, does it make sense to somewhow split it in two?
+* Assess test coverage, have basic sandbox tests, would like to mostly
+  use integration tests (i.e. diff the clk summary) once more platforms
+  are supported.
+* pre-relocation support is currently missing, on Qualcomm at least I
+  would prefer to completely skip FDT scanning pre-reloc, there is a
+  patch in this series which does that. It is very non-trivial to try
+  and handle clocks pre-reloc.
+
+---
+Casey Connolly (40):
+      vsprintf: add %pOF
+      common: add an option to skip DM pre-relocation
+      serial: msm-geni: allow invalid clock
+      qcom: rpmh: don't error for SLEEP requests
+      string: add strdup_const and kstrdup_const
+      ofnode: add read_u64_array and count_elems_of_size
+      linux/compat: add PTR_ERR_OR_ZERO
+      compat: add kref implementation
+      compat: add dev_name()
+      compat: add linux/regmap.h symlink
+      devres: add devm_krealloc
+      regmap: add regmap_assign_bits
+      compat: regulator: add enable/disable macros
+      compat: math64: add abs_diff()
+      clk: restrict clk/imx to MACH_IMX
+      clk: move U-Boot CCF to clk/uccf
+      clk: rename clk_ops to clk_ops_uboot
+      clk: move fixed clocks to clk/basic
+      clk: make clk_set_rate() return signed long
+      clk: make clk_get_parent_rate return signed long
+      clk: import full CCF from Linux
+      clk: move clock flags to common clk-provider.h
+      clk/ccf: adapt clk-conf for U-Boot
+      clk/ccf: adapt CCF core for U-Boot
+      clk/ccf: adapt CCF generic clocks for U-Boot
+      clk/clk-uclass: adapt for CCF_FULL
+      RFC: clk/ccf: add UCLASS_CLK compat shim
+      clk/sandbox: add a CCF_FULL port of clk_sandbox
+      WIP: test: adjust tests for CCF_FULL
+      configs: add sandbox CCF_FULL defconfig
+      cmd/clk: add CCF_FULL support
+      clk/qcom: move existing clock drivers to clk/qcom/basic
+      clk/qcom: drop in Linux Qualcomm CCF drivers
+      clk/qcom/ccf: drop in Linux rpmh clock driver
+      clk/qcom/ccf: add sm8650 GCC, dispcc and tcsrcc.
+      clk/qcom/ccf: add uboot common code
+      clk/qcom/ccf: adapt common, gdsc, and reset code for U-Boot
+      clk/qcom/ccf: adapt clocks for U-Boot
+      clk/qcom/ccf: adjust sm8650 clock drivers for U-Boot
+      TEST: configs: qcom_sm8650_ccf_defconfig: add a CCF sm8650 defconfig
+
+ Kconfig                                            |   12 +
+ arch/arm/cpu/armv7/bcm281xx/clk-core.c             |    8 +-
+ arch/arm/cpu/armv7/bcm281xx/clk-core.h             |   14 +-
+ arch/arm/dts/sm8650-hdk-u-boot.dtsi                |   26 +
+ arch/sandbox/dts/test.dts                          |    4 +-
+ arch/sandbox/include/asm/clk.h                     |    2 +-
+ cmd/clk.c                                          |   21 +-
+ common/board_f.c                                   |   11 +-
+ configs/qcom_sm8650_ccf_defconfig                  |   24 +
+ configs/sandbox64_ccf_full_defconfig               |    5 +
+ drivers/clk/Kconfig                                |   52 +-
+ drivers/clk/Makefile                               |   20 +-
+ drivers/clk/adi/clk-adi-pll.c                      |    2 +-
+ drivers/clk/adi/clk-shared.c                       |    4 +-
+ drivers/clk/adi/clk.h                              |    2 +-
+ drivers/clk/airoha/clk-airoha.c                    |    4 +-
+ drivers/clk/altera/clk-agilex.c                    |    2 +-
+ drivers/clk/altera/clk-agilex5.c                   |    2 +-
+ drivers/clk/altera/clk-arria10.c                   |    2 +-
+ drivers/clk/altera/clk-mem-n5x.c                   |    2 +-
+ drivers/clk/altera/clk-n5x.c                       |    2 +-
+ drivers/clk/aspeed/clk_ast2500.c                   |    4 +-
+ drivers/clk/aspeed/clk_ast2600.c                   |    4 +-
+ drivers/clk/at91/clk-generic.c                     |    4 +-
+ drivers/clk/at91/clk-main.c                        |    8 +-
+ drivers/clk/at91/clk-master.c                      |    8 +-
+ drivers/clk/at91/clk-peripheral.c                  |    6 +-
+ drivers/clk/at91/clk-programmable.c                |    4 +-
+ drivers/clk/at91/clk-sam9x60-pll.c                 |   10 +-
+ drivers/clk/at91/clk-sam9x60-usb.c                 |    4 +-
+ drivers/clk/at91/clk-system.c                      |    2 +-
+ drivers/clk/at91/clk-utmi.c                        |    4 +-
+ drivers/clk/at91/compat.c                          |   30 +-
+ drivers/clk/at91/pmc.c                             |    2 +-
+ drivers/clk/at91/pmc.h                             |    2 +-
+ drivers/clk/at91/sckc.c                            |    4 +-
+ drivers/clk/basic/Makefile                         |    7 +
+ drivers/clk/{ => basic}/clk_fixed_factor.c         |    2 +-
+ drivers/clk/{ => basic}/clk_fixed_rate.c           |    4 +-
+ drivers/clk/ccf/Kconfig                            |   15 +
+ drivers/clk/ccf/Makefile                           |   19 +
+ drivers/clk/ccf/clk-composite.c                    |  495 +++
+ drivers/clk/ccf/clk-conf.c                         |  189 +
+ drivers/clk/ccf/clk-divider.c                      |  663 ++++
+ drivers/clk/ccf/clk-fixed-factor.c                 |  409 +++
+ drivers/clk/ccf/clk-fixed-rate.c                   |  217 ++
+ drivers/clk/ccf/clk-gate.c                         |  260 ++
+ drivers/clk/ccf/clk-mux.c                          |  282 ++
+ drivers/clk/ccf/clk.c                              | 3208 ++++++++++++++++
+ drivers/clk/ccf/clk.h                              |   59 +
+ drivers/clk/ccf/clk_sandbox_ccf_full.c             |  220 ++
+ drivers/clk/ccf/compat.c                           |  227 ++
+ drivers/clk/clk-cdce9xx.c                          |    4 +-
+ drivers/clk/clk-gpio.c                             |    2 +-
+ drivers/clk/clk-hsdk-cgu.c                         |    4 +-
+ drivers/clk/clk-stub.c                             |    4 +-
+ drivers/clk/clk-uclass.c                           |  326 +-
+ drivers/clk/clk-xlnx-clock-wizard.c                |    4 +-
+ drivers/clk/clk_bcm6345.c                          |    2 +-
+ drivers/clk/clk_boston.c                           |    2 +-
+ drivers/clk/clk_k210.c                             |    8 +-
+ drivers/clk/clk_octeon.c                           |    2 +-
+ drivers/clk/clk_pic32.c                            |    4 +-
+ drivers/clk/clk_sandbox.c                          |   47 +-
+ drivers/clk/clk_sandbox_test.c                     |    2 +-
+ drivers/clk/clk_scmi.c                             |    6 +-
+ drivers/clk/clk_versaclock.c                       |   22 +-
+ drivers/clk/clk_versal.c                           |    4 +-
+ drivers/clk/clk_vexpress_osc.c                     |    4 +-
+ drivers/clk/clk_zynq.c                             |    8 +-
+ drivers/clk/clk_zynqmp.c                           |    6 +-
+ drivers/clk/exynos/clk-exynos7420.c                |    6 +-
+ drivers/clk/exynos/clk-pll.c                       |    4 +-
+ drivers/clk/exynos/clk.h                           |    2 +-
+ drivers/clk/ics8n3qv01.c                           |    4 +-
+ drivers/clk/imx/clk-composite-8m.c                 |    6 +-
+ drivers/clk/imx/clk-composite-93.c                 |    2 +-
+ drivers/clk/imx/clk-fracn-gppll.c                  |    4 +-
+ drivers/clk/imx/clk-gate-93.c                      |    4 +-
+ drivers/clk/imx/clk-gate2.c                        |    4 +-
+ drivers/clk/imx/clk-imx6q.c                        |    2 +-
+ drivers/clk/imx/clk-imx6ul.c                       |    2 +-
+ drivers/clk/imx/clk-imx8.c                         |    4 +-
+ drivers/clk/imx/clk-imx8.h                         |    2 +-
+ drivers/clk/imx/clk-imx8qm.c                       |    2 +-
+ drivers/clk/imx/clk-imx8qxp.c                      |    2 +-
+ drivers/clk/imx/clk-imxrt1020.c                    |    2 +-
+ drivers/clk/imx/clk-imxrt1170.c                    |    4 +-
+ drivers/clk/imx/clk-pfd.c                          |    4 +-
+ drivers/clk/imx/clk-pll14xx.c                      |    8 +-
+ drivers/clk/imx/clk-pllv3.c                        |   18 +-
+ drivers/clk/intel/clk_intel.c                      |    2 +-
+ drivers/clk/mediatek/clk-mtk.c                     |   14 +-
+ drivers/clk/mediatek/clk-mtk.h                     |   10 +-
+ drivers/clk/meson/a1.c                             |    8 +-
+ drivers/clk/meson/axg-ao.c                         |    2 +-
+ drivers/clk/meson/axg.c                            |    2 +-
+ drivers/clk/meson/clk-measure.c                    |    2 +-
+ drivers/clk/meson/g12a-ao.c                        |    2 +-
+ drivers/clk/meson/g12a.c                           |   10 +-
+ drivers/clk/meson/gxbb.c                           |    8 +-
+ drivers/clk/microchip/mpfs_clk_cfg.c               |    4 +-
+ drivers/clk/microchip/mpfs_clk_msspll.c            |    2 +-
+ drivers/clk/microchip/mpfs_clk_periph.c            |    2 +-
+ drivers/clk/mpc83xx_clk.c                          |    2 +-
+ drivers/clk/mtmips/clk-mt7620.c                    |    2 +-
+ drivers/clk/mtmips/clk-mt7621.c                    |    2 +-
+ drivers/clk/mtmips/clk-mt7628.c                    |    2 +-
+ drivers/clk/mvebu/armada-37xx-periph.c             |    4 +-
+ drivers/clk/mvebu/armada-37xx-tbg.c                |    2 +-
+ drivers/clk/nuvoton/clk_npcm.c                     |    4 +-
+ drivers/clk/nuvoton/clk_npcm.h                     |    2 +-
+ drivers/clk/owl/clk_owl.c                          |    6 +-
+ drivers/clk/qcom/Kconfig                           |    1 +
+ drivers/clk/qcom/Makefile                          |   28 +-
+ drivers/clk/qcom/basic/Makefile                    |   25 +
+ drivers/clk/qcom/{ => basic}/clock-apq8016.c       |    2 +-
+ drivers/clk/qcom/{ => basic}/clock-apq8096.c       |    2 +-
+ drivers/clk/qcom/{ => basic}/clock-ipq4019.c       |    2 +-
+ drivers/clk/qcom/{ => basic}/clock-ipq5424.c       |    2 +-
+ drivers/clk/qcom/{ => basic}/clock-ipq9574.c       |    2 +-
+ drivers/clk/qcom/{ => basic}/clock-qcm2290.c       |    2 +-
+ drivers/clk/qcom/{ => basic}/clock-qcom.c          |    4 +-
+ drivers/clk/qcom/{ => basic}/clock-qcom.h          |    2 +-
+ drivers/clk/qcom/{ => basic}/clock-qcs404.c        |    2 +-
+ drivers/clk/qcom/{ => basic}/clock-qcs615.c        |    2 +-
+ drivers/clk/qcom/{ => basic}/clock-qcs8300.c       |    2 +-
+ drivers/clk/qcom/{ => basic}/clock-sa8775p.c       |    2 +-
+ drivers/clk/qcom/{ => basic}/clock-sc7280.c        |    2 +-
+ drivers/clk/qcom/{ => basic}/clock-sdm845.c        |    4 +-
+ drivers/clk/qcom/{ => basic}/clock-sm6115.c        |    2 +-
+ drivers/clk/qcom/{ => basic}/clock-sm6350.c        |    2 +-
+ drivers/clk/qcom/{ => basic}/clock-sm7150.c        |    2 +-
+ drivers/clk/qcom/{ => basic}/clock-sm8150.c        |    2 +-
+ drivers/clk/qcom/{ => basic}/clock-sm8250.c        |    2 +-
+ drivers/clk/qcom/{ => basic}/clock-sm8550.c        |    4 +-
+ drivers/clk/qcom/{ => basic}/clock-sm8650.c        |    4 +-
+ drivers/clk/qcom/{ => basic}/clock-x1e80100.c      |    4 +-
+ drivers/clk/qcom/ccf/Makefile                      |   21 +
+ drivers/clk/qcom/ccf/clk-alpha-pll.c               | 3196 ++++++++++++++++
+ drivers/clk/qcom/ccf/clk-alpha-pll.h               |  251 ++
+ drivers/clk/qcom/ccf/clk-branch.c                  |  203 ++
+ drivers/clk/qcom/ccf/clk-branch.h                  |  125 +
+ drivers/clk/qcom/ccf/clk-rcg.h                     |  217 ++
+ drivers/clk/qcom/ccf/clk-rcg2.c                    | 1765 +++++++++
+ drivers/clk/qcom/ccf/clk-regmap-divider.c          |   90 +
+ drivers/clk/qcom/ccf/clk-regmap-divider.h          |   22 +
+ drivers/clk/qcom/ccf/clk-regmap-mux-div.c          |  232 ++
+ drivers/clk/qcom/ccf/clk-regmap-mux-div.h          |   44 +
+ drivers/clk/qcom/ccf/clk-regmap-mux.c              |   57 +
+ drivers/clk/qcom/ccf/clk-regmap-mux.h              |   23 +
+ drivers/clk/qcom/ccf/clk-regmap-phy-mux.c          |   62 +
+ drivers/clk/qcom/ccf/clk-regmap-phy-mux.h          |   33 +
+ drivers/clk/qcom/ccf/clk-regmap.c                  |  104 +
+ drivers/clk/qcom/ccf/clk-regmap.h                  |   38 +
+ drivers/clk/qcom/ccf/clk-rpmh.c                    | 1030 ++++++
+ drivers/clk/qcom/ccf/common-uboot.c                |  188 +
+ drivers/clk/qcom/ccf/common-uboot.h                |   38 +
+ drivers/clk/qcom/ccf/common.c                      |  252 ++
+ drivers/clk/qcom/ccf/common.h                      |  106 +
+ drivers/clk/qcom/ccf/dispcc-sm8550.c               | 1825 ++++++++++
+ drivers/clk/qcom/ccf/gcc-sm8650.c                  | 3846 ++++++++++++++++++++
+ drivers/clk/qcom/ccf/gdsc.c                        |  545 +++
+ drivers/clk/qcom/ccf/gdsc.h                        |  103 +
+ drivers/clk/qcom/ccf/reset.c                       |  112 +
+ drivers/clk/qcom/ccf/reset.h                       |   29 +
+ drivers/clk/qcom/ccf/tcsrcc-sm8650.c               |  174 +
+ drivers/clk/renesas/clk-rcar-gen2.c                |    4 +-
+ drivers/clk/renesas/clk-rcar-gen3.c                |    4 +-
+ drivers/clk/renesas/compound-clock.c               |    4 +-
+ drivers/clk/renesas/r9a06g032-clocks.c             |    6 +-
+ drivers/clk/renesas/rcar-gen2-cpg.h                |    2 +-
+ drivers/clk/renesas/rcar-gen3-cpg.h                |    2 +-
+ drivers/clk/renesas/rzg2l-cpg.c                    |    8 +-
+ drivers/clk/rockchip/clk_px30.c                    |   12 +-
+ drivers/clk/rockchip/clk_rk3036.c                  |    4 +-
+ drivers/clk/rockchip/clk_rk3066.c                  |    4 +-
+ drivers/clk/rockchip/clk_rk3128.c                  |    4 +-
+ drivers/clk/rockchip/clk_rk3188.c                  |    4 +-
+ drivers/clk/rockchip/clk_rk322x.c                  |    4 +-
+ drivers/clk/rockchip/clk_rk3288.c                  |    4 +-
+ drivers/clk/rockchip/clk_rk3308.c                  |    4 +-
+ drivers/clk/rockchip/clk_rk3328.c                  |    4 +-
+ drivers/clk/rockchip/clk_rk3368.c                  |    4 +-
+ drivers/clk/rockchip/clk_rk3399.c                  |    8 +-
+ drivers/clk/rockchip/clk_rk3528.c                  |   10 +-
+ drivers/clk/rockchip/clk_rk3568.c                  |   14 +-
+ drivers/clk/rockchip/clk_rk3576.c                  |    8 +-
+ drivers/clk/rockchip/clk_rk3588.c                  |   12 +-
+ drivers/clk/rockchip/clk_rv1108.c                  |    4 +-
+ drivers/clk/rockchip/clk_rv1126.c                  |   12 +-
+ drivers/clk/sifive/sifive-prci.c                   |    4 +-
+ drivers/clk/sophgo/clk-cv1800b.c                   |    4 +-
+ drivers/clk/sophgo/clk-ip.c                        |   30 +-
+ drivers/clk/sophgo/clk-ip.h                        |   18 +-
+ drivers/clk/sophgo/clk-pll.c                       |    8 +-
+ drivers/clk/sophgo/clk-pll.h                       |    4 +-
+ drivers/clk/starfive/clk-jh7110-pll.c              |    4 +-
+ drivers/clk/starfive/clk.h                         |    2 +-
+ drivers/clk/stm32/clk-stm32-core.c                 |   22 +-
+ drivers/clk/stm32/clk-stm32-core.h                 |    2 +-
+ drivers/clk/stm32/clk-stm32f.c                     |    4 +-
+ drivers/clk/stm32/clk-stm32h7.c                    |    2 +-
+ drivers/clk/stm32/clk-stm32mp1.c                   |    4 +-
+ drivers/clk/sunxi/clk_sun6i_rtc.c                  |    2 +-
+ drivers/clk/sunxi/clk_sunxi.c                      |    2 +-
+ drivers/clk/tegra/tegra-car-clk.c                  |    4 +-
+ drivers/clk/tegra/tegra186-clk.c                   |    4 +-
+ drivers/clk/thead/clk-th1520-ap.c                  |    8 +-
+ drivers/clk/ti/clk-am3-dpll-x2.c                   |    2 +-
+ drivers/clk/ti/clk-am3-dpll.c                      |    4 +-
+ drivers/clk/ti/clk-ctrl.c                          |    2 +-
+ drivers/clk/ti/clk-divider.c                       |    4 +-
+ drivers/clk/ti/clk-gate.c                          |    2 +-
+ drivers/clk/ti/clk-k3-pll.c                        |    4 +-
+ drivers/clk/ti/clk-k3.c                            |    6 +-
+ drivers/clk/ti/clk-mux.c                           |    4 +-
+ drivers/clk/ti/clk-sci.c                           |    4 +-
+ drivers/clk/uccf/Kconfig                           |   22 +
+ drivers/clk/uccf/Makefile                          |   11 +
+ drivers/clk/{ => uccf}/clk-composite.c             |   20 +-
+ drivers/clk/{ => uccf}/clk-divider.c               |    4 +-
+ drivers/clk/{ => uccf}/clk-fixed-factor.c          |    2 +-
+ drivers/clk/{ => uccf}/clk-gate.c                  |    2 +-
+ drivers/clk/{ => uccf}/clk-mux.c                   |    2 +-
+ drivers/clk/{ => uccf}/clk.c                       |    4 +-
+ .../{clk_sandbox_ccf.c => uccf/clk_sandbox_uccf.c} |    8 +-
+ drivers/clk/uniphier/clk-uniphier-core.c           |    6 +-
+ drivers/core/devres.c                              |   83 +-
+ drivers/core/of_access.c                           |   52 +
+ drivers/core/ofnode.c                              |   48 +
+ drivers/phy/cadence/phy-cadence-sierra.c           |    2 +-
+ drivers/phy/cadence/phy-cadence-torrent.c          |    2 +-
+ drivers/phy/phy-stm32-usbphyc.c                    |    2 +-
+ drivers/phy/phy-ti-am654.c                         |    2 +-
+ drivers/phy/rockchip/phy-rockchip-inno-usb2.c      |    2 +-
+ drivers/phy/ti/phy-j721e-wiz.c                     |    6 +-
+ drivers/power/domain/imx8mp-hsiomix.c              |    2 +-
+ drivers/serial/serial_msm_geni.c                   |   15 +-
+ drivers/soc/qcom/rpmh-rsc.c                        |    8 +-
+ drivers/soc/qcom/rpmh.c                            |    4 +-
+ include/asm-generic/sections.h                     |   19 +
+ include/clk-uclass.h                               |    6 +-
+ include/clk.h                                      |   34 +-
+ include/clk/sunxi.h                                |    2 +-
+ include/dm/devres.h                                |   10 +
+ include/dm/of_access.h                             |   20 +
+ include/dm/ofnode.h                                |   50 +
+ include/fdtdec.h                                   |   16 +
+ include/linux/clk-provider-ccf_full.h              | 1461 ++++++++
+ include/linux/clk-provider-uccf.h                  |  251 ++
+ include/linux/clk-provider.h                       |  247 +-
+ include/linux/clk/clk-conf.h                       |   22 +
+ include/linux/compat.h                             |   13 +
+ include/linux/device.h                             |   29 +
+ include/linux/err.h                                |   25 +
+ include/linux/kref.h                               |  124 +
+ include/linux/math64.h                             |   19 +
+ include/linux/regmap.h                             |    1 +
+ include/linux/string.h                             |    2 +
+ include/power/regulator.h                          |    3 +
+ include/regmap.h                                   |    9 +
+ include/sandbox-clk.h                              |    5 +-
+ lib/fdtdec.c                                       |   18 +
+ lib/string.c                                       |   31 +
+ lib/vsprintf.c                                     |   37 +
+ test/dm/Makefile                                   |    5 +-
+ test/dm/clk_ccf.c                                  |  117 +-
+ test/test-main.c                                   |    6 +
+ 269 files changed, 24338 insertions(+), 932 deletions(-)
+---
+base-commit: ba7bf918dafcd093ad733b07ba490baeb20cf5da
+
+// Casey (she/they)
+
