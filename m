@@ -4,66 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E5F41091926
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 21:30:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A048F1091927
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 21:36:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFD4183FC0;
-	Thu, 19 Mar 2026 22:30:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
+	by phobos.denx.de (Postfix) with ESMTP id F326A8400F;
+	Thu, 19 Mar 2026 22:36:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="ZIzfDroT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fGdmWFmS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EDB083FC5; Thu, 19 Mar 2026 22:30:33 +0100 (CET)
-Received: from out-172.mta0.migadu.com (out-172.mta0.migadu.com
- [91.218.175.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2601B83FED; Thu, 19 Mar 2026 22:36:35 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7462483F9B
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 22:30:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=postmarketos.org
+ by phobos.denx.de (Postfix) with ESMTPS id 45DEC838FA
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 22:36:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=funderscore@postmarketos.org
-Date: Thu, 19 Mar 2026 21:25:14 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1773955825;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=8gsU8+14tCdDaf1sLrt3CPQIm6pFdSHpcqyO8iv77JI=;
- b=ZIzfDroT7vwNskZzudrKJWgnD34kUGUDK44RZFkmSeVhVU5hPfjfF8tNBixOVcOgwMnzHU
- ogX1fGKuObRmZHjchIRGM50Tc9xfgGd0fI+T71QrbrWfJd3u6MzI0P5B34DmvEWi4aejLH
- DMk8hh3JOb+Jzs0IoCn9lYHq7ox//fOJPX6lQMuxOK9zjef00yCNz48M8nyBsQcNWCmiMP
- 5yFN7ZynxzqK7sNDdclrqjizQWrBHrPwBonKYn7kzKeUkdjIENa6BKS/C5c9CBiRVMfgNc
- m0n1o1fv+nY4UyrUQ7gti7aDdo605jIi7ZjBtqV1W+9NbeLDh5mac2bgY+gCDg==
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Ferass El Hafidi <funderscore@postmarketos.org>
-To: u-boot-qcom@groups.io, u-boot@lists.denx.de,
- Lukasz Majewski <lukma@denx.de>, Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
- Joel Stanley <joel@jms.id.au>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Paul Barker <paul@pbarker.dev>, Dai Okamura <okamura.dai@socionext.com>,
- linux@analog.com, uboot-snps-arc@synopsys.com, u-boot-amlogic@groups.io,
- uboot-stm32@st-md-mailman.stormreply.com, Sumit Garg <sumit.garg@kernel.org>
-Cc: Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Stephen Boyd <swboyd@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
- Paul Sajna <sajattack@postmarketos.org>, Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH RFC 15/40] clk: restrict clk/imx to MACH_IMX
-References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
- <20260319-casey-ccf-upstream-v1-15-4df2ee2226da@linaro.org>
-In-Reply-To: <20260319-casey-ccf-upstream-v1-15-4df2ee2226da@linaro.org>
-Message-ID: <tc612f.1958x6s93grqj@postmarketos.org>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7d74c1157a4so935113a34.1
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 14:36:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1773956190; x=1774560990; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XTOWYrCEIqjo8l2Idhkg4Q1Lomw90K4EqjkzAaGeBfY=;
+ b=fGdmWFmS6wQx4AAS9TAOTBtbQCBYxLrLGnbOnCcCFgMVbu3P83s2mWg6E5q3H3K9Fj
+ Zwz3pyPbZqnzjA0UcuRg2/pxojmc3chmyTaXEXxSw7nSurha0Xs/2Z8Sv7C62kbeOfZ3
+ WQ2W5VozH2Yqo+dGxw0gSjWCRo5X2I1eVKgxw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1773956190; x=1774560990;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=XTOWYrCEIqjo8l2Idhkg4Q1Lomw90K4EqjkzAaGeBfY=;
+ b=QQrpVoAdbr/k58/05wbq40hJmCCcBn2d0gEdnGmRtI6Fzoe/SGdVGW11Mi7x66g65j
+ 75680+GSOUR+cn219hbtkiyTdkFqc0ckEhjr4VwAGSbXzOWkhAPtUtd8VKoQSViGDeuC
+ GaeDP0ZXrZ+NErzuhZnJivDpxgBsdNPmbN1/YIzuhz5ifmjwsqpIyFzpxidKye4GaUo7
+ Zl3NYuktfeAM7g4bEZOeaKpbn10dZJDQ+pZE+bKZmdsgizNB8ETzl56iq+WNVijlGV8b
+ lXOU/q+rUWgt/HmZd/UrONsnYyDEtCG4lnEoZ/SKVCV8d/n9j556f5TghYuuyvKDm/eF
+ 2B4w==
+X-Gm-Message-State: AOJu0YzMreYy4c+2esf71N+KgpqVxPvQ+Z+BNoI4fp54cVoUfClPHGRT
+ XnNwB7ivZf95FSTOOwrTqPwXEviO/R4X5GStfK8OLIiQvIgIBa+D6LhcVWEml9JIWe3PY9OKrKd
+ bMAQ6LQ==
+X-Gm-Gg: ATEYQzwOTwYwcxaT5B7q0iENUHei/YLXQhm+OrXMDdoazJui81Jyi9DmUbVkplrsTtS
+ V1NjbktUhy+G1lWQIxLayipR1xABDlYD0dDDylcl39C4ubTlvYP7/Hd026Ptrwnass8YzEOrk4f
+ xSfU+Kw7HLYK+QnXhXUUvR+nIO0MfLx5ZTibz2B0JUNEKyc+7W1SOASXa4pjIYcEu+LKtjgpof+
+ 4LwK23L59krMBLnhcNSkSqMza+ggFzuYp9RqDK+xZPYyEpV4hS/wJSdP1tImndk+UFMevXnqx3j
+ VxQDtqnxZDx4uQGJ8DSWFiwxvloxSsnonklnedT4MK+EAx3hARppcp+6vJClMVf7euCfGGA+Y2p
+ agTxDwjBKckt/slmigoci50jYcEXA2duPCefHo2wIkhoXHmWYvb2x8MOaVwI1N7DbWhg/EObme4
+ fONwLOxTjFQ0NG3vbq9w==
+X-Received: by 2002:a05:6830:67f7:b0:7d7:e029:a1be with SMTP id
+ 46e09a7af769-7d7eae5b487mr520014a34.5.1773956190446; 
+ Thu, 19 Mar 2026 14:36:30 -0700 (PDT)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d7eac17b0asm545724a34.9.2026.03.19.14.36.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Mar 2026 14:36:29 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <simon.glass@canonical.com>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>, Pavel Herrmann <morpheus.ibis@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [RFC PATCH 01/15] dm: Fix linker list alignment for ll_entry_get()
+Date: Thu, 19 Mar 2026 15:35:31 -0600
+Message-ID: <20260319213551.267031-2-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260319213551.267031-1-sjg@chromium.org>
+References: <20260319213551.267031-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset=utf-8; format=flowed
-X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,52 +95,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 19 Mar 2026 20:56, "Casey Connolly via groups.io" <casey.connolly=linaro.org@groups.io> wrote:
->Only build IMX clocks when MACH_IMX is enabled, otherwise IMX clock
->drivers get compiled for all platforms with CLK_CCF enabled.
->
->Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
->---
-> drivers/clk/Makefile | 2 +-
-> 1 file changed, 1 insertion(+), 1 deletion(-)
->
->diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
->index 5f0c0d8a5c28..f96d57a3223a 100644
->--- a/drivers/clk/Makefile
->+++ b/drivers/clk/Makefile
->@@ -15,9 +15,9 @@ obj-$(CONFIG_$(PHASE_)CLK_STUB) += clk-stub.o
-> 
-> obj-y += adi/
-> obj-y += airoha/
-> obj-y += analogbits/
->-obj-y += imx/
->+obj-$(CONFIG_$(PHASE_)MACH_IMX) += imx/
+From: Simon Glass <simon.glass@canonical.com>
 
-I think this is not necessary. drivers/clk/imx/Makefile already requires
-that imx config options be enabled for the driver to be compiled in.
+The extern declaration in ll_entry_get() lacks the __aligned(4)
+attribute present in ll_entry_declare(). When the compiler sees an
+unaligned extern reference to a linker list entry in the same
+compilation unit as its definition, it may increase the section
+alignment beyond the expected struct size. This causes gaps in the
+linker list array, which the alignment checker reports as failures.
 
-Best regards,
-Ferass
+For example, sandbox_dir is both defined and referenced via
+DM_DRIVER_GET() in sandboxfs.c. The compiler applies 32-byte
+alignment to its section instead of the 4-byte alignment from the
+definition, creating an 8-byte gap before it in the driver list.
 
-[PS: had to remove a few people from CC, because my email provider does
-     not let me CC that many people, sorry!]
+Add __aligned(4) to the extern declaration in ll_entry_get() to
+match ll_entry_declare()
 
-> obj-$(CONFIG_CLK_JH7110) += starfive/
-> obj-y += tegra/
-> obj-y += ti/
-> obj-$(CONFIG_CLK_THEAD) += thead/
->
->-- 
->2.51.0
->
->
->
->-=-=-=-=-=-=-=-=-=-=-=-
->Groups.io Links: You receive all messages sent to this group.
->View/Reply Online (#2906): https://groups.io/g/u-boot-qcom/message/2906
->Mute This Topic: https://groups.io/mt/118408050/8399868
->Group Owner: u-boot-qcom+owner@groups.io
->Unsubscribe: https://groups.io/g/u-boot-qcom/leave/13198341/8399868/797498721/xyzzy [funderscore@postmarketos.org]
->-=-=-=-=-=-=-=-=-=-=-=-
->
->
+Signed-off-by: Simon Glass <simon.glass@canonical.com>
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
+
+ include/linker_lists.h | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/include/linker_lists.h b/include/linker_lists.h
+index 0f4a2d686e2..2bc5326f681 100644
+--- a/include/linker_lists.h
++++ b/include/linker_lists.h
+@@ -266,7 +266,8 @@
+  */
+ #define ll_entry_get(_type, _name, _list)				\
+ 	({								\
+-		extern _type _u_boot_list_2_##_list##_2_##_name;	\
++		extern _type _u_boot_list_2_##_list##_2_##_name		\
++			__aligned(4);					\
+ 		_type *_ll_result =					\
+ 			&_u_boot_list_2_##_list##_2_##_name;		\
+ 		_ll_result;						\
+-- 
+2.43.0
+
