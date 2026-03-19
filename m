@@ -4,103 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A8671075289
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 09:38:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9515B1075289
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 09:38:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CA9983F00;
-	Thu, 19 Mar 2026 10:38:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7614783FDE;
+	Thu, 19 Mar 2026 10:38:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZKLZyagD";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="e3uTlLbw";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="orEbOZjF";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CFl9zXl2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9722583FED; Thu, 19 Mar 2026 10:38:08 +0100 (CET)
+ id 499F183BC8; Thu, 19 Mar 2026 10:38:13 +0100 (CET)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A102D83FDB
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 10:38:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B3BE83FDE
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 10:38:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 62J742t51027199
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 09:38:04 GMT
+ 62J74HE23369997
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 09:38:09 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- mCCzqzKBAxYLIDeDEgqh0xmS0Qts8gDosxTbonnKd9s=; b=ZKLZyagDY8Z8k6dO
- zbsolYSvb1XFIL4dOiM85lZxwfIFpDizi2uIhWlIokLafbieFbOWXkyg+2NkLeZT
- CFpiy5RH9ZvF316ZLLirocxyQ4gPzHaOkpYnQJbdDVMlgwkEfh/ddrFCn/64ElPH
- QEjjMrA6SDx/EHV3D1C7VObl3ZojkK9FrfwTur8CHPrEUS5TbWK8HLZ7b7IUTy2C
- IxG4ETAfUqDCaf1Pjiv1cQq2TPizQo+nNBNmQK6e4LMSSxibogY4IuozzrT//0CJ
- 7YpLmWxA5QMfaCMpVu+Ya4fV7FYxlN9ZfCm1lVR4I6AboU13xCAOKvZtQRasvnXW
- qXqcZw==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
- [209.85.214.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4d0032js17-1
+ hBev++fbyl4QADdxo4Dh0Vz2S4z+nIFJCjVwfyv1abI=; b=orEbOZjFnyUhgDLM
+ Dx78/XzHjF8EnU6TMLPIuS1BG/Rv4POqx05bScTJwuFyKmoH14wfWVGekeHyKdrA
+ GU13It1DUA7A0/p8ah6QZ/LUDGoHWeJM+7RIAlPAFBivktLPef/qxzahvsV43s/5
+ gWmhx4nHWI4plLkjI3ZlX/uPKFjtWfZnRtvMq0fI6bIlUHybVssEPk2gIq912BJX
+ TKjPpJCZpArOjyI4jj5yZzRTAxj/9Sv8PkYa0fGexgCXBJWI66UJG6s3XOAZp6rH
+ RJjF4us2duLALia/R0UUkRrCdkOTBY84s/pG+J9FecIm3e+WnG/jhqIIeErsnNlm
+ vVX8sw==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4d00f9jn1k-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 09:38:04 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id
- d9443c01a7336-2aec07e8aafso5877105ad.1
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 02:38:03 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 09:38:09 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-2b05d170cadso16891765ad.0
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 02:38:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1773913083; x=1774517883; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1773913088; x=1774517888; darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=mCCzqzKBAxYLIDeDEgqh0xmS0Qts8gDosxTbonnKd9s=;
- b=e3uTlLbw0grPTFHCCNKzzWzS7fVbcPMX9myWrw+EkgIM0HTpHOMKGBzS+omaFGKv0S
- hHSMK1MfB2JzypwieGVLJ7Y7zDWVHf/E1Pd55CsgPIQxpbpo7J+qd4qyCqBwI4TpK6u2
- 3Mv92ehOWDa2w76j1lW9aliVHyFHOnGXZjdA0yPF+WdmOP4L+yqyYLJnSu3B5A66aHWc
- l/RJnGU9DlIfEnOO5x4FXeYWzEp4jUDrr5N8bsyaScsw7vq//o0yn8pQd7k/HIW8YDyG
- z9/FCusBSYBI2VBKDBWq8ECDbvL2uqsgFHo8Zrm79rfRrAOeODqxU9cSbuppj+8NLAw2
- 4d7w==
+ :reply-to; bh=hBev++fbyl4QADdxo4Dh0Vz2S4z+nIFJCjVwfyv1abI=;
+ b=CFl9zXl2NvrX/mLiWxiBjp6g3PdrVUuiviq33kNCSkwq+/Q6OzI1caFMtyPM+tAq+p
+ Fdm3ZZX0hlL4Yf6z0w6BtVXH5lS0OxR3HiTIuhS9VhXs+SqPFUjO8964wW2mK7QCuf4i
+ a86cJ02YABDxrA6b5vzllKAn3AXogz6iOkD9695szEj9aImFT3IxgyOYP9zuBPHyWzAS
+ QqnYzVpNXy02f5cHmhE+DEfj8qcDKo7iKKSH6ByNVdD4ix+bi3iC95xRJ76dIB5gdy+o
+ GqtOJUCX4VfHFfYoNkj5uFHKs4+pVXOZ/MCMmiKOQhG0r9ZjPyDKWLDM5WbBZ8CL5JCJ
+ OpfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773913083; x=1774517883;
+ d=1e100.net; s=20251104; t=1773913088; x=1774517888;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=mCCzqzKBAxYLIDeDEgqh0xmS0Qts8gDosxTbonnKd9s=;
- b=WVUT+sLrMPYID4gv1sFCW49firv3Q3Oykv2IGCLeqX4IY1XqLs6UsZiXPUnY821lEX
- qDXZErR5qQ0keJRYZujJ3aE9q/CUSL+CJafkSx7bGVRjE29CZdlgNR2jQOw+EqdPYuBm
- mx+kRKJANQn+gBFin40My01JOEx90v3hM9H+RejFaK61dB7T+dEfsIqQ6ieIDz4NkQv7
- IPuafpeAfi3/I72V/O+V3Ah+YOVoq1eBeXDwE0DF92Vf2X4PooCLLmCFppXXntCqFPq0
- muanzb6Hp2d6AdSEWS1r+C2YtCX8CyvS/9U/v3mWXvmrRudPl1gpnZYs1rWEv1uq7Km4
- hWKQ==
-X-Gm-Message-State: AOJu0YzAqyvBRCkEzmX0ki11ebMcPYG9E35vmwa+vCbyA/W7Nw8652Cr
- 449aQtcSiZUw3uJOX4TMkIRdRXCH7QjFr+BYy5QTzTTR/5VzjXLvj5y916eOR0zVZyzyioVkzhb
- MmL+L1saDXDGPSGYVhDkPMKWw+6G10nNGkgext3BsQJ7qOZoHgQq9j+Rv
-X-Gm-Gg: ATEYQzyeUfDI1VVB7HcW/qTfoUf91VOKrwg3bTChy9sJLShAq5LWUlQAF4PxAfnWfRk
- 29m+wLcrJp+kxCa5IPmUXNBJmA4xHrZwDMrbAvwwfXuSsrCcNy4T1aNyb/UJoweDPuVkyYREtSW
- u+IcJR3s4KrDfL7JCozS1PdrdixIUjkTWmjJBTCZyE/gft4CMgST88wmi0Cy+uRtQfHXb6MZwJI
- fwidOnEw+0ldtn2cw1N31mfO6nLyIhpYoaFQOtGlSuF9jSgL7sPoTnBqE8mvYdfAHgdm2GARD1c
- YKjphl8SSwMUDBElL6JZhO+Q2dVkn5pIR/Km0vApYt+wClge6G1jgYXAWBfifGb1L46OMUcrHC9
- HwHiO39qvaPWihttP6wgIBChDbA6Hv8A4+mM0bX4hr9UNm7Uu+1ddugo7ArNPdzPRtXE5lVDx0W
- xlqG/k9+mU5BkeLfhFF+/P48WAoyHA4Vnhace5ZWYf0WUu2bhM0Q==
-X-Received: by 2002:a17:902:e752:b0:2b0:6885:f1d4 with SMTP id
- d9443c01a7336-2b06e402a26mr70267775ad.39.1773913083029; 
- Thu, 19 Mar 2026 02:38:03 -0700 (PDT)
-X-Received: by 2002:a17:902:e752:b0:2b0:6885:f1d4 with SMTP id
- d9443c01a7336-2b06e402a26mr70267365ad.39.1773913082519; 
- Thu, 19 Mar 2026 02:38:02 -0700 (PDT)
+ bh=hBev++fbyl4QADdxo4Dh0Vz2S4z+nIFJCjVwfyv1abI=;
+ b=SCYijJt4nDtE0XrO9ZyVO2IWOG/UDuAq/rhQ00Yxbh9uZkcZoHxgaw+meHP+svKDRx
+ gozYqS/o+YybYY1+XgJuWPttlJwXVwiUdIZG7AbiI9sd+cuTlny+XG9B00j5Vfgxmvmt
+ NMg1+9cKaF+D+g8dTdTfJxR9dPTBNUeqITI+PPer1JwsPfMFp8hxzNd6xygu2v43kCpC
+ UQWDlJ+uC/x9GSV8k6dl2VS60zf3fdJ1wY6BpyfKgCWcePuhMLr2GlsSt2wUi1VxFUqq
+ VXggZYclpvJ6NfEjHJZ3KxARwYaSe2JM/Y7Y1vlaRGCONgcbitux9vmkXj7nDpcEB0oM
+ ZV0g==
+X-Gm-Message-State: AOJu0YwRxcTsMHQSn6pqxgRUVoU3kGO1I+1tv2smU7hn8RaPpaRF1AGv
+ kVEXUSoXd8ob5GfrC0eLigBfxFtqn41aWfJXEloAJJQj4Cgrfsgpw36cTyIQPVLae3+bqYEGvQc
+ DMaCkNZ75C15ScP8qlEbCddDekpsXyI9ECogpthvRCYJf+pKqegmYzoMp
+X-Gm-Gg: ATEYQzwFKrahESg+jsdkh1h4XBP2aKIrh9rWKqzSbZCzw3gHqNUj2xnmMqxqai6o9eZ
+ cdNddDvxXxKes1y9xwOl2Wly+RzqTdhaxrV1pwVwyC3LpaWaHDQknrfVQtHBy38sQThvwb1CEhL
+ QzEy0rwKU7KsAuD1p1jCFV9A33cX3bb8SF8pXhkA78z7nDaukAuR7j275dXGAYEgVF+gZIGxipW
+ Y+YypxeeiA4bGDlj0iq8Z9K7ZGEh50G6OivHMAuSHCsGLYFMeQw9w/vGhe17u+qhWBqdBSARJzf
+ CEzcIJ5e6VaONhUYIau+o/2ya8IQ3nT522mOb4HL0MVJWwuteKW1RiSRCy+08SVSkLRL6ZFeQJ7
+ U9crxmHAJlI3HvZEnkdusvBDnIL2aAr7LnL6yjniJELFlTL1t7/zSQlSyXOBHgaw0jAGLPxNmUr
+ Q9VWdE/VzEjQTWmWLODQ2ejdWgLK47GQTXHEItzBGs/IoFGTrfNw==
+X-Received: by 2002:a17:903:984:b0:2ae:5e75:3821 with SMTP id
+ d9443c01a7336-2b06e32be1dmr62780905ad.18.1773913088373; 
+ Thu, 19 Mar 2026 02:38:08 -0700 (PDT)
+X-Received: by 2002:a17:903:984:b0:2ae:5e75:3821 with SMTP id
+ d9443c01a7336-2b06e32be1dmr62780755ad.18.1773913087859; 
+ Thu, 19 Mar 2026 02:38:07 -0700 (PDT)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b06e441374sm52098825ad.29.2026.03.19.02.37.57
+ d9443c01a7336-2b06e441374sm52098825ad.29.2026.03.19.02.38.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 02:38:02 -0700 (PDT)
+ Thu, 19 Mar 2026 02:38:07 -0700 (PDT)
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Thu, 19 Mar 2026 15:07:40 +0530
-Subject: [PATCH 3/5] clk: qcom: qcs615: Add UFS clock support
+Date: Thu, 19 Mar 2026 15:07:41 +0530
+Subject: [PATCH 4/5] clk: qcom: sc7280: Add UFS clock support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260319-ufs_probe_clk-v1-3-08c085d6b15d@oss.qualcomm.com>
+Message-Id: <20260319-ufs_probe_clk-v1-4-08c085d6b15d@oss.qualcomm.com>
 References: <20260319-ufs_probe_clk-v1-0-08c085d6b15d@oss.qualcomm.com>
 In-Reply-To: <20260319-ufs_probe_clk-v1-0-08c085d6b15d@oss.qualcomm.com>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
@@ -119,38 +119,37 @@ Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
  Julien Stephan <jstephan@baylibre.com>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1773913061; l=4376;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1773913061; l=3788;
  i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=3yMdIArcRrz729wc8i1yA1WEoCULzkjpZmzZ/VfSdDs=;
- b=T16oGmBEEq63bu5qcx43B5vdpdYdSaL/7fRCZxU+cUsLvAEgrHZ6my5n7tT+8Ef6wBqNKN9Ax
- wCAGjFkasaOD05yncohQhB6PgIg2d53pJIflddRxBC5e2zBQiyK+g4z
+ bh=ME1E2apw089MKHnpuwuntfSkatQhRv5WY8AL2SrYswk=;
+ b=F7d6LIwyv36pT7dhWYpqs6a/7QFIHksFHE2i21JzNgfCf+4+sjlj47INEOyqeIu4j0EwgleZI
+ SbF6V5X6nAHBcIQLx+I8UZ9GqfnHzkM+iQTJ9yfE+f8fGoFkyspJh+b
 X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
  pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-ORIG-GUID: 9gSFV1RIYXxx4M_tEtHfOMwDPHPFTQ5B
-X-Proofpoint-GUID: 9gSFV1RIYXxx4M_tEtHfOMwDPHPFTQ5B
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzE5MDA3NiBTYWx0ZWRfX3IN3+ouAPEYr
- w67pUdi1ApVCliX7dw8uRj/ta+8ea/ikaVqIPH7Q4TrqP5sPa5XnfMKiP1hwyGDat/cLhhvTNKU
- PTRx4cG7JSA/uKshflFiy6B6xWo+ojYmldPi9AarTIqrIhxhGDaCEzuTdD++XIMrjjTKY/pY3xV
- wQpUIwQv1W1EVb+uH5vKINO370L3A6rDQUjlBoJ5E6otZ/OKGKegxxZnIQgefOkdyfyapqexJ5E
- 8r3jqqGy7106ud26RBuJXaEDM4UwgwhRFjfWGD+bAfzOaZp17lSuHXuDCbnJ7OnO/R9F3ABbYT8
- sgzWXaH8mJrNuQ9JNYgyE23sU+SzsVmuCj2ksj4yx42qAgAcxDmhBOgz9a3/zcl6wC4jy8K1A7l
- VFyAYuU9gYPHuRzlcwCeXE/YLRtM7vTlpO6lPwRnXULSu+78HDSl+Ur0dEnFnGLbws0ssDtNjY0
- 5kvbfoveFTKx6DXdr1A==
-X-Authority-Analysis: v=2.4 cv=WO9yn3sR c=1 sm=1 tr=0 ts=69bbc3fc cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzE5MDA3NiBTYWx0ZWRfX18iPJCClwq0H
+ 2uH3sJv2FHAvaQAIgepfZEu9U9okm4qCI7QVflOrqco9aVIOfdIREp1qLIeW+IYq9WHsdkeYe41
+ CR3UMBWdJVewUsVm7fJtYz9mKLITD2O7B+xUz3bTv5KYA6w46qklTvr8JWB0X9TklHHh/qreyIP
+ wnkuxBx8NPHbJQmqTEfeyVWOCALL/Au4m8erEUrPXxtHFApnY/BFwrZACOp9zRUWDnQROj7brbm
+ +nT/Q1qic7XdVdzeoH4L/LW9x07ZMt8PSeVuglXxh/1an0XVASIKSG6GnHQ/aEJwXnk5ETHjJGn
+ ceK3zsBu1eKPLF5v2X1TI5Qia/pUHfIdE7VIe5PwMLYkVgRdl9dzYdJTOIFlGtvG06uiFgyGKUR
+ s5Ro9381R3LlzVSOogiMxeUNS3RBd2SYYBOmoS4KLHe2lov7dzIS15f28aSjwgmsK16MbpW9WEu
+ JRbGi/LxyrFuvY0hVLw==
+X-Proofpoint-GUID: oUvoyN4rDsygHOc7jDidn1OcSJghAM0k
+X-Proofpoint-ORIG-GUID: oUvoyN4rDsygHOc7jDidn1OcSJghAM0k
+X-Authority-Analysis: v=2.4 cv=MJttWcZl c=1 sm=1 tr=0 ts=69bbc401 cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=4zqVPMvxyRdUz9D30doA:9 a=QEXdDO2ut3YA:10
- a=324X-CrmTo6CU4MGRt3R:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=lctD2BjJw215xePkaksA:9 a=QEXdDO2ut3YA:10
+ a=GvdueXVYPmCkWapjIL-Q:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-03-19_01,2026-03-17_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 lowpriorityscore=0 impostorscore=0
- adultscore=0 clxscore=1015 spamscore=0 malwarescore=0 phishscore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2603050001
- definitions=main-2603190076
+ clxscore=1015 phishscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501
+ suspectscore=0 bulkscore=0 malwarescore=0 impostorscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603190076
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -167,80 +166,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add UFS clock support for qcs615 including register definitions,
+Add UFS clock support for sc7280 including register definitions,
 rate configuration, and gate clocks.
 
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
- drivers/clk/qcom/clock-qcs615.c | 63 ++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 62 insertions(+), 1 deletion(-)
+ drivers/clk/qcom/clock-sc7280.c | 52 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 52 insertions(+)
 
-diff --git a/drivers/clk/qcom/clock-qcs615.c b/drivers/clk/qcom/clock-qcs615.c
-index 4700baba8c9..cd097a3cf36 100644
---- a/drivers/clk/qcom/clock-qcs615.c
-+++ b/drivers/clk/qcom/clock-qcs615.c
-@@ -19,6 +19,11 @@
- #define USB30_PRIM_MASTER_CLK_CMD_RCGR		0xf01c
- #define USB3_PRIM_PHY_AUX_CMD_RCGR		0xf060
+diff --git a/drivers/clk/qcom/clock-sc7280.c b/drivers/clk/qcom/clock-sc7280.c
+index 7b6ed826023..2c73c26484f 100644
+--- a/drivers/clk/qcom/clock-sc7280.c
++++ b/drivers/clk/qcom/clock-sc7280.c
+@@ -23,6 +23,10 @@
+ #define PCIE_1_AUX_CLK_CMD_RCGR 0x8d058
+ #define PCIE1_PHY_RCHNG_CMD_RCGR 0x8d03c
+ #define PCIE_1_PIPE_CLK_PHY_MUX 0x8d054
++#define UFS_PHY_AXI_CLK_CMD_RCGR 0x77024
++#define UFS_PHY_ICE_CORE_CLK_CMD_RCGR 0x7706c
++#define UFS_PHY_PHY_AUX_CLK_CMD_RCGR 0x770a0
++#define UFS_PHY_UNIPRO_CORE_CLK_CMD_RCGR 0x77084
  
-+#define UFS_PHY_AXI_CLK_CMD_RCGR		0x77020
-+#define UFS_PHY_ICE_CORE_CLK_CMD_RCGR		0x77048
-+#define UFS_PHY_UNIPRO_CORE_CLK_CMD_RCGR	0x77060
-+#define UFS_PHY_PHY_AUX_CLK_CMD_RCGR		0x7707c
-+
- #define GCC_QUPV3_WRAP0_S0_CLK_ENA_BIT BIT(10)
- #define GCC_QUPV3_WRAP0_S1_CLK_ENA_BIT BIT(11)
- #define GCC_QUPV3_WRAP0_S2_CLK_ENA_BIT BIT(12)
-@@ -33,9 +38,37 @@
- #define GCC_QUPV3_WRAP1_S4_CLK_ENA_BIT BIT(26)
- #define GCC_QUPV3_WRAP1_S5_CLK_ENA_BIT BIT(27)
+ static const struct freq_tbl ftbl_gcc_usb30_prim_master_clk_src[] = {
+ 	F(66666667, CFG_CLK_SRC_GPLL0_EVEN, 4.5, 0, 0),
+@@ -54,6 +58,33 @@ static const struct freq_tbl ftbl_gcc_qupv3_wrap0_s2_clk_src[] = {
+ 	{ }
+ };
  
-+/* UFS PHY AXI clock frequency table */
 +static const struct freq_tbl ftbl_gcc_ufs_phy_axi_clk_src[] = {
 +	F(25000000, CFG_CLK_SRC_GPLL0_EVEN, 12, 0, 0),
-+	F(50000000, CFG_CLK_SRC_GPLL0_EVEN, 6, 0, 0),
-+	F(100000000, CFG_CLK_SRC_GPLL0, 6, 0, 0),
-+	F(200000000, CFG_CLK_SRC_GPLL0, 3, 0, 0),
-+	F(240000000, CFG_CLK_SRC_GPLL0, 2.5, 0, 0),
-+	{ }
-+};
-+
-+/* UFS PHY ICE CORE clock frequency table */
-+static const struct freq_tbl ftbl_gcc_ufs_phy_ice_core_clk_src[] = {
-+	F(37500000, CFG_CLK_SRC_GPLL0_EVEN, 8, 0, 0),
 +	F(75000000, CFG_CLK_SRC_GPLL0_EVEN, 4, 0, 0),
-+	F(150000000, CFG_CLK_SRC_GPLL0, 4, 0, 0),
-+	F(300000000, CFG_CLK_SRC_GPLL0, 2, 0, 0),
++	F(150000000, CFG_CLK_SRC_GPLL0_EVEN, 2, 0, 0),
++	F(300000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 0, 0),
 +	{ }
 +};
 +
-+/* UFS PHY UNIPRO CORE clock frequency table */
++static const struct freq_tbl ftbl_gcc_ufs_phy_ice_core_clk_src[] = {
++	F(75000000, CFG_CLK_SRC_GPLL0_EVEN, 4, 0, 0),
++	F(150000000, CFG_CLK_SRC_GPLL0_EVEN, 2, 0, 0),
++	F(300000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 0, 0),
++	{ }
++};
++
++static const struct freq_tbl ftbl_gcc_ufs_phy_phy_aux_clk_src[] = {
++	F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
++	{ }
++};
++
 +static const struct freq_tbl ftbl_gcc_ufs_phy_unipro_core_clk_src[] = {
-+	F(37500000, CFG_CLK_SRC_GPLL0_EVEN, 8, 0, 0),
-+	F(75000000, CFG_CLK_SRC_GPLL0, 8, 0, 0),
-+	F(150000000, CFG_CLK_SRC_GPLL0, 4, 0, 0),
++	F(75000000, CFG_CLK_SRC_GPLL0_EVEN, 4, 0, 0),
++	F(150000000, CFG_CLK_SRC_GPLL0_EVEN, 2, 0, 0),
++	F(300000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 0, 0),
 +	{ }
 +};
 +
- static ulong qcs615_set_rate(struct clk *clk, ulong rate)
+ static ulong sc7280_set_rate(struct clk *clk, ulong rate)
  {
  	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-+	const struct freq_tbl *freq;
- 
- 	if (clk->id < priv->data->num_clks)
- 		debug("%s: %s, requested rate=%ld\n", __func__,
-@@ -52,6 +85,24 @@ static ulong qcs615_set_rate(struct clk *clk, ulong rate)
- 				     5, 0, 0, CFG_CLK_SRC_GPLL0, 8);
- 		clk_rcg_set_rate(priv->base, USB3_PRIM_PHY_AUX_CMD_RCGR, 0, 0);
- 		return rate;
+@@ -103,6 +134,26 @@ static ulong sc7280_set_rate(struct clk *clk, ulong rate)
+ 	case GCC_PCIE1_PHY_RCHNG_CLK:
+ 		clk_rcg_set_rate(priv->base, PCIE1_PHY_RCHNG_CMD_RCGR, 5, CFG_CLK_SRC_GPLL0_EVEN);
+ 		return 100000000;
 +	case GCC_UFS_PHY_AXI_CLK:
 +		freq = qcom_find_freq(ftbl_gcc_ufs_phy_axi_clk_src, rate);
 +		clk_rcg_set_rate_mnd(priv->base, UFS_PHY_AXI_CLK_CMD_RCGR,
-+				     freq->pre_div, freq->m, freq->n, freq->src, 8);
-+		return freq->freq;
-+	case GCC_UFS_PHY_UNIPRO_CORE_CLK:
-+		freq = qcom_find_freq(ftbl_gcc_ufs_phy_unipro_core_clk_src, rate);
-+		clk_rcg_set_rate_mnd(priv->base, UFS_PHY_UNIPRO_CORE_CLK_CMD_RCGR,
 +				     freq->pre_div, freq->m, freq->n, freq->src, 8);
 +		return freq->freq;
 +	case GCC_UFS_PHY_ICE_CORE_CLK:
@@ -249,30 +238,26 @@ index 4700baba8c9..cd097a3cf36 100644
 +				     freq->pre_div, freq->m, freq->n, freq->src, 8);
 +		return freq->freq;
 +	case GCC_UFS_PHY_PHY_AUX_CLK:
-+		clk_rcg_set_rate(priv->base, UFS_PHY_PHY_AUX_CLK_CMD_RCGR, 0, CFG_CLK_SRC_CXO);
-+		return 19200000;
++		freq = qcom_find_freq(ftbl_gcc_ufs_phy_phy_aux_clk_src, rate);
++		clk_rcg_set_rate_mnd(priv->base, UFS_PHY_PHY_AUX_CLK_CMD_RCGR,
++				     freq->pre_div, freq->m, freq->n, freq->src, 8);
++		return freq->freq;
++	case GCC_UFS_PHY_UNIPRO_CORE_CLK:
++		freq = qcom_find_freq(ftbl_gcc_ufs_phy_unipro_core_clk_src, rate);
++		clk_rcg_set_rate_mnd(priv->base, UFS_PHY_UNIPRO_CORE_CLK_CMD_RCGR,
++				     freq->pre_div, freq->m, freq->n, freq->src, 8);
++		return freq->freq;
  	default:
- 		return 0;
+ 		return rate;
  	}
-@@ -79,7 +130,17 @@ static const struct gate_clk qcs615_clks[] = {
- 	GATE_CLK(GCC_QUPV3_WRAP1_S4_CLK, 0x5200c, GCC_QUPV3_WRAP1_S4_CLK_ENA_BIT),
- 	GATE_CLK(GCC_QUPV3_WRAP1_S5_CLK, 0x5200c, GCC_QUPV3_WRAP1_S5_CLK_ENA_BIT),
- 	GATE_CLK(GCC_DISP_HF_AXI_CLK, 0xb038, BIT(0)),
--	GATE_CLK(GCC_DISP_AHB_CLK, 0xb032, BIT(0))
-+	GATE_CLK(GCC_DISP_AHB_CLK, 0xb032, BIT(0)),
-+	/* UFS clocks */
-+	GATE_CLK(GCC_UFS_PHY_AXI_CLK, 0x77010, BIT(0)),
-+	GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_CLK, 0x770c0, BIT(0)),
-+	GATE_CLK(GCC_UFS_PHY_AHB_CLK, 0x77014, BIT(0)),
-+	GATE_CLK(GCC_UFS_PHY_UNIPRO_CORE_CLK, 0x77040, BIT(0)),
-+	GATE_CLK(GCC_UFS_PHY_ICE_CORE_CLK, 0x77044, BIT(0)),
-+	GATE_CLK(GCC_UFS_PHY_TX_SYMBOL_0_CLK, 0x77018, BIT(0)),
-+	GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_0_CLK, 0x7701c, BIT(0)),
-+	GATE_CLK(GCC_UFS_PHY_PHY_AUX_CLK, 0x77078, BIT(0)),
-+	GATE_CLK(GCC_UFS_MEM_CLKREF_CLK, 0x8c000, BIT(0)),
- };
- 
- static int qcs615_enable(struct clk *clk)
+@@ -147,6 +198,7 @@ static const struct gate_clk sc7280_clks[] = {
+ 	GATE_CLK(GCC_UFS_PHY_AXI_CLK, 0x77010, BIT(0)),
+ 	GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_CLK, 0x770cc, BIT(0)),
+ 	GATE_CLK(GCC_UFS_PHY_AHB_CLK, 0x77018, BIT(0)),
++	GATE_CLK(GCC_UFS_PHY_ICE_CORE_CLK, 0x77064, BIT(0)),
+ 	GATE_CLK(GCC_UFS_PHY_UNIPRO_CORE_CLK, 0x7705c, BIT(0)),
+ 	GATE_CLK(GCC_UFS_PHY_PHY_AUX_CLK, 0x7709c, BIT(0)),
+ 	GATE_CLK(GCC_UFS_PHY_TX_SYMBOL_0_CLK, 0x7701c, BIT(0)),
 
 -- 
 2.34.1
