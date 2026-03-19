@@ -4,76 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B85D1088E77
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 04:42:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B8C51075260
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 06:45:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0734583C51;
-	Thu, 19 Mar 2026 05:41:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 31C1D83AC5;
+	Thu, 19 Mar 2026 07:45:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="IOtxmSEW";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="g6cNAlUB";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 690B583B03; Thu, 19 Mar 2026 05:41:57 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id 6DE3583BC8; Thu, 19 Mar 2026 07:45:17 +0100 (CET)
+Received: from Atcsqr.andestech.com (unknown [60.248.187.195])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E96583A41
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 05:41:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 74E278341A
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 07:45:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4fbtMQ5mWrz9tRc;
- Thu, 19 Mar 2026 05:41:54 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1773895314;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=oMLYoRYM2yhI643mrbUdE/oitc56ogDINZGS0UqiaeE=;
- b=IOtxmSEWN+cs6gp1o6V8xO9pZ8/Wy8UABm0GIYmw0tsQ1cPlDnAPNY8GJU0Q+MdkZ/4wxX
- CqINYUuJvV3mQUEsiBitXH/9mN6DMc3fXumbYOYWxyakSZzil8ZgGLy3e3Bj9CtCJD0/C/
- KhG82aN/qa8+LrkfWTTC8sLTKr/xdEp8KZkckL2A/2gWonNvoEuqqSGighpAySBooss8lK
- +5tyVsLskkH9SO4+V+S9DAWed9S9m/qd5Zrh9GBkXtf0FVOIKpWeB0zvepfXzARR1H5Nyu
- E5XLMaXyMU3BF/ZnoH7NRfMP1ebBGex2tUF28+jSET9mUl48fA5Q37j28uyq7g==
-Message-ID: <34a0c151-f8ff-4b91-92b3-d6f63097440e@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1773895313;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=oMLYoRYM2yhI643mrbUdE/oitc56ogDINZGS0UqiaeE=;
- b=g6cNAlUBOkstGRZOXBqZWpdA/N61UJRgIR0ri5Q5UP1lGWGSsTuEq+JWkc2nKw0RrSDjYH
- QRIt803TXGa/KCwTRny2SbHKmG2aBsWdNi57KgZ5f7TE9mY7D1pZ6Hqs8LFYZVA6YQihZ4
- 5BRIEFHosXgPVRaZUli33d1xC9p8WHLIfmQG5bgLWHfwXuIivZgSIiLlDkpvT9wD1Q7Kp1
- lXOxNJblAUaWwQozqUi+GLDYN0vHEUyBd5r4B1zaMgpsStfN8CrT83xb/BZwdHARk3qHoA
- V5ypjaco2FDfH61Wk+hWZ7RgL7/I8j5G4iCj8gKBHewYCOFK+XSdGxKMal4exg==
-Date: Thu, 19 Mar 2026 01:52:15 +0100
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
+ by Atcsqr.andestech.com with ESMTP id 62J6iCx3061597;
+ Thu, 19 Mar 2026 14:44:12 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 19 Mar
+ 2026 14:44:11 +0800
+Date: Thu, 19 Mar 2026 14:44:08 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: Raymond Mao <raymondmaoca@gmail.com>
+CC: <u-boot@lists.denx.de>, <uboot@riscstar.com>, <u-boot-spacemit@groups.io>, 
+ <raymond.mao@riscstar.com>, <rick@andestech.com>, <trini@konsulko.com>,
+ <lukma@denx.de>, <hs@nabladev.com>, <jh80.chung@samsung.com>,
+ <peng.fan@nxp.com>, <xypron.glpk@gmx.de>, <randolph@andestech.com>,
+ <dlan@gentoo.org>, <junhui.liu@pigmoral.tech>,
+ <neil.armstrong@linaro.org>, <quentin.schulz@cherry.de>,
+ <samuel@sholland.org>
+Subject: Re: [PATCH v2 01/16] spacemit: k1: support multi-board infrastructure
+Message-ID: <abubOI6SAnAszlWh@swlinux02>
+References: <20260210151459.2348758-1-raymondmaoca@gmail.com>
+ <20260210151459.2348758-2-raymondmaoca@gmail.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH] reset: Correct dependencies for RESET_RZG2L_USBPHY_CTRL
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-References: <20260317012443.4162600-1-trini@konsulko.com>
- <ed88ec35-7d53-48df-a65b-7da1298e265b@mailbox.org>
- <20260317134008.GQ502704@bill-the-cat>
- <58699be1-5414-4749-9975-7fdf0064b1a3@mailbox.org>
- <20260318012557.GF502704@bill-the-cat>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260318012557.GF502704@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: jkpszyhakccymzrkemzoa9nx1ud6ttkq
-X-MBO-RS-ID: e6db4187b55622d9265
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20260210151459.2348758-2-raymondmaoca@gmail.com>
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
+ ATCPCS34.andestech.com (10.0.1.134)
+X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 62J6iCx3061597
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,55 +71,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/18/26 2:25 AM, Tom Rini wrote:
-> On Tue, Mar 17, 2026 at 08:41:26PM +0100, Marek Vasut wrote:
->> On 3/17/26 2:40 PM, Tom Rini wrote:
->>> On Tue, Mar 17, 2026 at 03:33:57AM +0100, Marek Vasut wrote:
->>>> On 3/17/26 2:24 AM, Tom Rini wrote:
->>>>> As exposed by "make randconfig", we have an issue with the dependencies
->>>>> for RESET_RZG2L_USBPHY_CTRL. As REGULATOR_RZG2L_USBPHY depends on
->>>>> DM_REGULATOR this symbol must also depend on it as well.
->>>>>
->>>>> Signed-off-by: Tom Rini <trini@konsulko.com>
->>>>> ---
->>>>> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
->>>>> ---
->>>>>     drivers/reset/Kconfig | 2 +-
->>>>>     1 file changed, 1 insertion(+), 1 deletion(-)
->>>>>
->>>>> diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
->>>>> index 66911199c8ba..3f0ec50510c0 100644
->>>>> --- a/drivers/reset/Kconfig
->>>>> +++ b/drivers/reset/Kconfig
->>>>> @@ -239,7 +239,7 @@ config RESET_AT91
->>>>>     config RESET_RZG2L_USBPHY_CTRL
->>>>>     	bool "Enable support for Renesas RZ/G2L USB 2.0 PHY control"
->>>>> -	depends on DM_RESET
->>>>> +	depends on DM_RESET && DM_REGULATOR
->>>>>     	select REGULATOR_RZG2L_USBPHY
->>>> But this already selects REGULATOR_RZG2L_USBPHY , which according to
->>>> drivers/power/regulator/Kconfig contains:
->>>>
->>>> 508 config REGULATOR_RZG2L_USBPHY
->>>> 509         bool "Enable driver for RZ/G2L USB PHY VBUS supply"
->>>> 510         depends on DM_REGULATOR
->>>>
->>>> which does depend on DM_REGULATOR transitively ?
->>>
->>> That's why Kconfig complains about the unmet dependency. "randconfig"
->>> does some fun and apparently valid things.
->> That's the thing -- if RESET_RZG2L_USBPHY_CTRL depends on
->> REGULATOR_RZG2L_USBPHY which depends on DM_REGULATOR, how can DM_REGULATOR
->> be unset, while RESET_RZG2L_USBPHY_CTRL is set ?
+Hi Raymond,
+
+On Tue, Feb 10, 2026 at 10:14:44AM -0500, Raymond Mao wrote:
+> From: Raymond Mao <raymond.mao@riscstar.com>
 > 
-> Using "randconfig" will find some odd problems, yes, because it makes a
-> (based on what all of the Kconfig files say) possible config and then
-> forces it to be validated against the expressed logic.
+> Restructure K1 SoC support to handle multiple boards through a single
+> configuration:
 > 
-> So I think the answer is if you fire up menuconfig, and turn off
-> RESET_RZG2L_USBPHY_CTRL and REGULATOR_RZG2L_USBPHY and DM_REGULATOR and
-> then enable RESET_RZG2L_USBPHY_CTRL things will become mad because
-> RESET_RZG2L_USBPHY_CTRL has select'd REGULATOR_RZG2L_USBPHY but we don't
-> have DM_REGULATOR.
-How is it possible to enable RESET_RZG2L_USBPHY_CTRL without enabling 
-its dependencies ? This is what I do not understand.
+> 1. Rename bananapi-f3_defconfig to k1_defconfig.
+> 2. Move all K1 board files to k1 directory.
+> 
+> Eliminates the need for board-specific defconfigs while maintaining
+> hardware compatibility.
+> 
+> Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
+> ---
+>  arch/riscv/Kconfig                                    | 10 ++++++----
+>  arch/riscv/cpu/k1/Kconfig                             |  4 ++++
+>  board/spacemit/{bananapi-f3 => k1}/Kconfig            | 11 ++++++++---
+>  board/spacemit/{bananapi-f3 => k1}/MAINTAINERS        |  4 ++--
+>  board/spacemit/{bananapi-f3 => k1}/Makefile           |  0
+>  board/spacemit/{bananapi-f3 => k1}/board.c            |  0
+>  .../{bananapi-f3_defconfig => spacemit_k1_defconfig}  |  3 ++-
+>  doc/board/spacemit/bananapi-f3.rst                    |  2 +-
+>  include/configs/{bananapi-f3.h => k1.h}               |  0
+>  9 files changed, 23 insertions(+), 11 deletions(-)
+>  rename board/spacemit/{bananapi-f3 => k1}/Kconfig (63%)
+>  rename board/spacemit/{bananapi-f3 => k1}/MAINTAINERS (61%)
+>  rename board/spacemit/{bananapi-f3 => k1}/Makefile (100%)
+>  rename board/spacemit/{bananapi-f3 => k1}/board.c (100%)
+>  rename configs/{bananapi-f3_defconfig => spacemit_k1_defconfig} (97%)
+>  rename include/configs/{bananapi-f3.h => k1.h} (100%)
+
+This patch seems to cause recursive dependency error.
+https://source.denx.de/u-boot/custodians/u-boot-riscv/-/jobs/1405503
+Could you fix this and respin the patchset again?
+
+Best regards,
+Leo
