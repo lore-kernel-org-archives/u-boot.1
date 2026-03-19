@@ -4,95 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2B66109192A
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 22:09:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 066DC109192A
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 22:09:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2820383FDE;
-	Thu, 19 Mar 2026 23:09:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6B40884008;
+	Thu, 19 Mar 2026 23:09:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BwivFXJr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bLzgObK3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5213883FE1; Thu, 19 Mar 2026 23:09:17 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 9728183FF5; Thu, 19 Mar 2026 23:09:21 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAC3C83FD9
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 23:09:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A0D5783FF5
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 23:09:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-b97f9587e6eso168284766b.3
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 15:09:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773958154; cv=none;
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-b9795ca4e6dso174183266b.2
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 15:09:19 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773958159; cv=none;
  d=google.com; s=arc-20240605;
- b=TNyU05cjCw3aQqF4/3p76bH5rzXiS5BihCiIr4/ERRwlYpGb8fYjFs6cYWJvbSM2/W
- qFcdUhOwZ5x1P8xwDdkzhyjBTn1KI1bS9mw2+YrBiXYJlkRVaeSc07u+8Iu70Vw/PNTo
- bG7/GHJXvb2vRuQ9/PmOL8wVT2YbPWKtJKlvVowaGFSiFvM0s/pbJqDE51ccnWnWmzH4
- VTuS+wxQrt7kmidCaWDOXs+1DxtO51AG7QOTBD4t27Q/xAh/rInmXFV1Ff4GoueeXUlX
- WFEKtnsSZmCrSy5sM6TfqekS1ipO0QJocN+dFkhhx9vj0gv1ZKTlvdX4jmXrlpfMiv/J
- QO+g==
+ b=II+fVOvMiheH8/o8weOxqiNdXMDIse3HX3ImQXOw3nUX76bMJnOrD0LwSNM7O/Wb6A
+ qUKgF/v+DDWnYyolo0WkvzaRPnAav8cpgXVI5TT+ttru8JFjK1ZaIU3himOFjuu3Tb8X
+ wrOfJN+PlsqqeklaYH1I2kLAWEjTG7+WNRa2I83uEBCVtg4Cw9FRJxiPaUWz586Yl3mY
+ Z0hxZzHlr0LjEJw4cXendVlYUc2MxDoTwb73cRSoJls7f1e4/vHad26T4ba+Cwq8M8hI
+ gXyIgDdbYz/A8j0vXakfk087u4AKxm6JnvkCd7AJsW1kV0c1Dsh3FeLlIYQoiYHXxg+j
+ 2T8A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=TW2be1FCHCTaf4M0uj1ULUdtjj+XnPi78+/apcfXSJk=;
- fh=ouzfjbKpnG0Ece5Ipm6O35Zwg/8RWpznJgqNQWh9d8A=;
- b=Gi2UlovUiKnTdd8FXdGJ7rmfQZ7O4E6fC6SfNjkdnRrqmq4XUE4l/PEzylrMNeuyLj
- zpGORoJpP3ANqD+ZNdCVyb0ceMIxMYyWYSp9vKTR+N1oPXCoXtvrX3f8H5EL9uLT4KtO
- su08fDk0ic4z1zaaCV7mpbXyoul73qu49PJLCXMP9jMv4R+yQxZaP0m1IuUIWsgma2zC
- i4DQp18lK/v5zIitfhqq6Vf7xL3noo9tp1qQqGRTRGbdI/4ta6ld6C1MV4SF4lM7bOyx
- tDKo2QLbfNxeHREY9UFVu+lfTKBgXgu6X1/5lJsRfDHaqlCNZW3t1XJ4b9jha6fGxqMy
- 6d6Q==; darn=lists.denx.de
+ bh=xHTNhQprnxfVBU95i3jTbBSgDx/Au2zJ/BjH5xatp7U=;
+ fh=e9kas99NLc6oCzp9c+m5GZrXy2MmkVdQq4dho8NMlnk=;
+ b=dllBxYmbdgZ8ThtcgpgNue0TwF7Dm804Qtp+hH+MhDXWN1efUG9GOMgJLjZ7yuQdne
+ aMwH9zw/EDoT2LMba1TFvtl9h9cWGNlsBT0egXmZw/8tFr4hurcsgb6BR8hq6T18tOW6
+ xG1Am5ybJbKsmxfPXCzQGzUzAEF1j5zhoGrbROw9ca16CFajvO/PSSwT4O22KTChAQ1l
+ B9koYG5AYY5lr95+o/Sf13x0MNpVRA1RPUEF8QoieFDHx6Fovl0nomwU5+EQk5WK3mJ5
+ 4YZOf/whSLbMg5jYJp9Qn6IjcLrTgGvroLX/sSugPt94lPF11QalUUU/6mDWq3tdQLRP
+ S9Yw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1773958154; x=1774562954; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1773958159; x=1774562959; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TW2be1FCHCTaf4M0uj1ULUdtjj+XnPi78+/apcfXSJk=;
- b=BwivFXJrJudK8Hrt8RatfgOkAoqE9DcZDAX8KrM5akXxSKHob6YhHNjfbtnfChqAfg
- FDTJc0u3Ri+yFUl7WAdwzHTAaXc5VL1ehsP78l7U2DfiGrDVl8+uDdg0Mm3lWLwuKqrC
- loupe+40Pc2MkE1msGr5B7F/AU598PptsTrs4=
+ bh=xHTNhQprnxfVBU95i3jTbBSgDx/Au2zJ/BjH5xatp7U=;
+ b=bLzgObK3xtn2tISB5daQJ27bcf5+T0lNOxWDkIz1XIqkbJuKELMRl9Re/9A1TovO5o
+ XJ12yvgRCjLruD0mUR/hV2Ctja+WAqFi7H6sIm6yW0z0n4+DeeYd/YdGlQfaoKzSd8rc
+ CPsYiAw7hKD/x1upkkUhtO8FugVdM0IEFPAow=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773958154; x=1774562954;
+ d=1e100.net; s=20251104; t=1773958159; x=1774562959;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TW2be1FCHCTaf4M0uj1ULUdtjj+XnPi78+/apcfXSJk=;
- b=VHVII1q0J7svvtIOR8k66wRGzzKyskwTmZvO06tI9mN/5BRRSu1x8hQJ4uqyn4mQj1
- kRTFWJRiGMbnwgb3bUtSphWQNWav2+82Owhn49k/EaMSgDgXQOyxd28dMYxzpLKJvOkX
- 6i/OKtNREFbF0Z5Ci2IaGgLtZyswnx8izN8TU01vxTebb+tQhSFzPb9KpCThtjVprfwP
- UyIBLWpkiB8LsPW/C/OU43wgyAR9Vv89lM2Nt5C/dMNmlY8ZY5EjJHKk1gNWpwoW1chU
- p2Kl7X8tS7nl5dWEVW1DbBYRsfwVmpjQ2YKsZfhoqSJU1xdwDk5mf2+1Z2t4zNzYuTt7
- eqJw==
-X-Gm-Message-State: AOJu0YxOZE8PQ+fstKT8hpkhUdUIwOOhI9AYmu3lrqZFzzG3xATZv1iV
- J9tUJgT/JaGdxAKY4VefAKNnxbY2qJqvNniu+wrcCOyDfs6BgwnMujzOSR8MIDnLIDb7taNTWt1
- PlKoUObWj9QDlCZifHuKYp93el4bDFMlorzbNM2Xm
-X-Gm-Gg: ATEYQzx7V72pgXpLGC+Pp7QnvMb5JaPGT1LcG2eNSLnzqsl9y95F09FWGCi501uA0DN
- HomNe6NUjw9mw5mze0OER7hDZJK3lvGDPdaJZwfzJb79KvqTLEropD4tU/sf3ZHokz18WQugXsY
- Icp1bGpZXZjFsc786I3dqY+CzYc2mQYvp63SC/q8lhxBLKHhrhkYyCTFrKUobW10lIZuoR7tmNs
- HLqvUCPJ08WBXWrVRd1slKoDVRK1SBvFMr4gGn1HUwZXrtb9MKg+QjwW8VK+NNX0XkZuz7K0ryr
- 4IS9E/o8
-X-Received: by 2002:a17:907:7638:b0:b87:1eaf:377c with SMTP id
- a640c23a62f3a-b982f35e715mr45637766b.38.1773958154287; Thu, 19 Mar 2026
- 15:09:14 -0700 (PDT)
+ bh=xHTNhQprnxfVBU95i3jTbBSgDx/Au2zJ/BjH5xatp7U=;
+ b=ptS7rsU95+bfl8kKBATrPf1nO9+i1m6nXtFK0zg8J98geZwmqJlVi2RvL9t1/xlU46
+ Z8FUHwjd+UrSawr0rA8QtSQ8ze0Kv4Jt0jG3WJaCkWQltvot6mElL0svFj8tHbo86VxH
+ hC0DVg9sub6SWyTOTxChabbiH80x9AO05lXnlMEJc543mMOIFvcpecCm3Nukk2FRVjyZ
+ /LOPXq6pn6yXn/j7sDO7QGvEpyVpdXHYKFixCphwoRu7bQol0JxP/LxJtqQousiyla3k
+ oEpguEhrEVCEoFiUrEVgqPZw4r9aFxI+dKd8/3X6Lnb4mOciic5ZpHj14TpANn4xY8ij
+ tbPA==
+X-Gm-Message-State: AOJu0YxFmCnpYTe3r615+eM48kR6OLcipHJLVCKm7NLYbnxpKHTDDG2j
+ r1dUc+Tkxtv6XzSqERnNSrvemcgvNnViwdRmigS5kbPowTIrhiouMLAl+1mxUG6hx7zSl1IOJYQ
+ Ca/+FnXmU6ySn1zXav04xWSQ4x7zPjfgqFp6PI6/X
+X-Gm-Gg: ATEYQzwFeG83pA9u6uHvcgrgDDImJBksCHU8fVbCnbTOBiQZFb/o4w6gMde+NYPSmtg
+ kSEdk0gpC8zNupOwM70N45KJxSHTrW58dmFOwpvzOp5paC3GM+GlotzCG/CXWTynoOMmml8UAEZ
+ qC7Vk7nx5DhidxN+ZPSODUeShsvmK1FkyauQanVMaH2DVPnIj1R23YuzcsTzh22La7aljYQvMHH
+ vBl8rdAgFpqooWVE9E4KT+mWbgOQzpke6MBNW8eWfCezuzTOE54yg/E+8yipQQ2+eeRfoolsPZ3
+ yTKxBm9+
+X-Received: by 2002:a17:907:cc1c:b0:b8f:f08a:4b80 with SMTP id
+ a640c23a62f3a-b982f0baeaemr41016566b.3.1773958159040; Thu, 19 Mar 2026
+ 15:09:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1773840306.git.michal.simek@amd.com>
- <44aa0bf04c8e2517b51c37cce5069cbc24c69f16.1773840306.git.michal.simek@amd.com>
-In-Reply-To: <44aa0bf04c8e2517b51c37cce5069cbc24c69f16.1773840306.git.michal.simek@amd.com>
+ <b1f57ff8f3a45d0118e01f33280b48d92b3b2397.1773840306.git.michal.simek@amd.com>
+In-Reply-To: <b1f57ff8f3a45d0118e01f33280b48d92b3b2397.1773840306.git.michal.simek@amd.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Mar 2026 16:09:02 -0600
-X-Gm-Features: AaiRm50FxfmI0pUfUnnwovDEZnMZ5304pStTcyDiNE9ju9cKdBB1uT0N0oFrC50
-Message-ID: <CAFLszTitBnkcWRTyLc=4x+=CJQO4+==Na1UVtdN6Y3CNknYqug@mail.gmail.com>
-Subject: Re: [PATCH v2 2/3] event: Introduce EVT_POST_PREBOOT event
+Date: Thu, 19 Mar 2026 16:09:05 -0600
+X-Gm-Features: AaiRm50aSMyIjyIilRQie9HRItwmQzQObyhMiBEKvWu__Dn056euyo0znXJpKZw
+Message-ID: <CAFLszTiU02q_cPp=xY-NVxkd0f8yk+LcCpN1oNCdygpcyi3WwA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] event: Check return value from event_notify_null()
 To: Michal Simek <michal.simek@amd.com>
 Cc: u-boot@lists.denx.de, git@amd.com, xypron.glpk@gmx.de, 
- ilias.apalodimas@linaro.org, Casey Connolly <casey.connolly@linaro.org>, 
- Tom Rini <trini@konsulko.com>
+ ilias.apalodimas@linaro.org, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Tom Rini <trini@konsulko.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Yao Zi <me@ziyao.cc>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -112,65 +113,67 @@ X-Virus-Status: Clean
 
 On Wed, 18 Mar 2026 at 07:25, Michal Simek <michal.simek@amd.com> wrote:
 >
-> Add a new EVT_POST_PREBOOT event type which is fired in main_loop()
-> after the preboot command has been executed.
+> event_notify_null() returns int but its return value is not
+> checked in run_main_loop() and in fwu_mdata tests.
+> Add proper error checking to all unchecked call sites.
 >
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
 >
 > Changes in v2:
-> - check return value
+> - new patch in series
 >
->  common/main.c   | 4 ++++
->  include/event.h | 9 +++++++++
->  2 files changed, 13 insertions(+)
+>  common/board_r.c    | 6 +++++-
+>  test/dm/fwu_mdata.c | 4 ++--
+>  2 files changed, 7 insertions(+), 3 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
 
 >
-> diff --git a/common/main.c b/common/main.c
-> index b0b6e74f5d3d..4b4504557f6e 100644
-> --- a/common/main.c
-> +++ b/common/main.c
-> @@ -19,6 +19,7 @@
->  #include <net.h>
->  #include <version_string.h>
->  #include <efi_loader.h>
-> +#include <event.h>
+> diff --git a/common/board_r.c b/common/board_r.c
+> index 76f9fc090fbe..00f29385d80a 100644
+> --- a/common/board_r.c
+> +++ b/common/board_r.c
+> @@ -579,11 +579,15 @@ static int dm_announce(void)
 >
->  static void run_preboot_environment_command(void)
+>  static int run_main_loop(void)
 >  {
-> @@ -53,6 +54,9 @@ void main_loop(void)
->         if (IS_ENABLED(CONFIG_USE_PREBOOT))
->                 run_preboot_environment_command();
->
-> +       if (event_notify_null(EVT_POST_PREBOOT))
-> +               return;
+> +       int ret;
 > +
->         if (IS_ENABLED(CONFIG_UPDATE_TFTP))
->                 update_tftp(0UL, NULL, NULL);
+>  #ifdef CONFIG_SANDBOX
+>         sandbox_main_loop_init();
+>  #endif
 >
-> diff --git a/include/event.h b/include/event.h
-> index 1d267f1d1054..3ce5f992b04e 100644
-> --- a/include/event.h
-> +++ b/include/event.h
-> @@ -153,6 +153,15 @@ enum event_t {
+> -       event_notify_null(EVT_MAIN_LOOP);
+> +       ret = event_notify_null(EVT_MAIN_LOOP);
+> +       if (ret)
+> +               return ret;
+>
+>         /* main_loop() can return to retry autoboot, if so just run it again */
+>         for (;;)
+> diff --git a/test/dm/fwu_mdata.c b/test/dm/fwu_mdata.c
+> index b7680632f95f..643b647af0a9 100644
+> --- a/test/dm/fwu_mdata.c
+> +++ b/test/dm/fwu_mdata.c
+> @@ -100,7 +100,7 @@ static int dm_test_fwu_mdata_read(struct unit_test_state *uts)
+>          * Trigger lib/fwu_updates/fwu.c fwu_boottime_checks()
+>          * to populate g_dev global pointer in that library.
 >          */
->         EVT_MAIN_LOOP,
+> -       event_notify_null(EVT_MAIN_LOOP);
+> +       ut_assertok(event_notify_null(EVT_MAIN_LOOP));
 >
-> +       /**
-> +        * @EVT_POST_PREBOOT:
-> +        * This event is triggered in main_loop() after the preboot command
-> +        * has run, so that devices initialised by preboot (e.g. USB, UFS)
-> +        * are available to event handlers. Its parameter is NULL.
-> +        * A non-zero return value causes the boot to fail.
-> +        */
-> +       EVT_POST_PREBOOT,
-> +
->         /**
->          * @EVT_OF_LIVE_BUILT:
->          * This event is triggered immediately after the live device tree has been
+>         ut_assertok(uclass_first_device_err(UCLASS_FWU_MDATA, &dev));
+>         ut_assertok(fwu_init());
+> @@ -127,7 +127,7 @@ static int dm_test_fwu_mdata_write(struct unit_test_state *uts)
+>          * Trigger lib/fwu_updates/fwu.c fwu_boottime_checks()
+>          * to populate g_dev global pointer in that library.
+>          */
+> -       event_notify_null(EVT_MAIN_LOOP);
+> +       ut_assertok(event_notify_null(EVT_MAIN_LOOP));
+>
+>         ut_assertok(uclass_first_device_err(UCLASS_FWU_MDATA, &dev));
+>
 > --
 > 2.43.0
 >
