@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 535771091916
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 20:04:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AF461091915
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 20:04:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9BB9840E0;
-	Thu, 19 Mar 2026 21:02:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1F35183F00;
+	Thu, 19 Mar 2026 21:02:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Ha1F6+CM";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="ttsyclCk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A711C83FC5; Thu, 19 Mar 2026 21:02:35 +0100 (CET)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id EE94C84068; Thu, 19 Mar 2026 21:02:36 +0100 (CET)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F5AF840CC
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:02:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2893C84068
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 21:02:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7d751ef36ccso737402a34.0
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:02:28 -0700 (PDT)
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-67bbea1e090so769676eaf.3
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 13:02:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773950547; x=1774555347;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773950545; x=1774555345;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=/BXhUFXgVQoEp5M9kAXrMRFM+Y9gHQvgAZpZhqNZamI=;
- b=Ha1F6+CMLrn4qUg2hXkjOLwYVy7Jnzld3BMSMoeXNcwHmPvRyKw6rP8ZiuVT/rcc8w
- Z/qgV6Hjzp33qOlduhZL+tpulhEZXaecaURdEYz0GAmWPBJbsJ5nV0AVDYLfo0+QClKR
- fRJbEaBixmFuieArvczX1GnpvbSzG0NkVi+Zx0Twi+GHw6PrNz2nROH6rQPoz1WITD74
- STr4By6MvigFxSw6kusRkDCw6bLvKawbL7Yx+1Wu8JWmpbgPEYaP8uqVQ7bHFwbHfZUe
- l/edrKnsiQG5H0DvZF8pXxP5LJaFulhv4EkNtF/zPLm3SZ4F9UhVKNHLY27UuVet0HbO
- fe0w==
+ :reply-to; bh=CgtOhp9OAh8OfQJCOhAPHcKm/LFDQ4M8HEuweJuLJyI=;
+ b=ttsyclCkVo0IkGtRw7Ju4j7e0SZP7cgA/6JYImOtDMXVHUed5JtAI3UN6M9AyCEDtk
+ L6CkdoCkc3cSjBo/pM6hy9LJqOzpQET++fR9siqdNLykEvZZS7ndUY2WVF65qO5Y/LUk
+ ExjToqD3gGexBgLYMd/hV74VfqozFbeJhf4d91I5tqlMfvAdJMqgiCGJZjrTtiQQUVUp
+ tnIX/FXk+fp5G3Sh9yv8jMASEuaA+gAdJ4pwjmF8cKXJSPDuzNtI/ohvr6ykjIggjRsz
+ tMAxtFfX8c7VzmG8iE1bbzvBtq88BTQXSh9D/PETPOMJcLFmiqrzmxvr5v0r4a6rDZOt
+ N5mQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773950547; x=1774555347;
+ d=1e100.net; s=20251104; t=1773950545; x=1774555345;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=/BXhUFXgVQoEp5M9kAXrMRFM+Y9gHQvgAZpZhqNZamI=;
- b=G9UHkEslJ7+UdbSi3wtDCnFMnBptrwcT8X4D6A/vyiZK42lKOxG8ZTJN0YmA/gjHhD
- H7flT0o8096djxCmL4fW2fw1WvBTm9fPdkP/WaLQBBWZUIiH45zLhdbHCRDq5uEuDEYW
- uHO+RWJlZTWSEprTbzy1IvvAnN5xOJlP4yBa/qrGH9IDFxlQA/Q2WGm8C2BwhPTD5XcF
- nN88VG3imx1OyKjsJnWzvE8Lqus/h+RHUQYOCE3ZrwKCTH6+PuCghjpgMsxtI2yE38w1
- S8b8rCE4/15HIxi9guxvB+tVhceVTMVozj3chkh8l2eG1Tet7OCK03q7NkzyKRgazoBC
- zJIw==
+ bh=CgtOhp9OAh8OfQJCOhAPHcKm/LFDQ4M8HEuweJuLJyI=;
+ b=h3jwEYA/KPt5b7swZcloMc+Dpvm44+LuInqXOWdJ8SsEOg2mebV/y3q3r4+hE0Y30y
+ EhTikociYWhkl2YS4BtcOzkN1paukGdWGR/FlX/uc9cBGWieAKsp6YPkGSPGbQxnODFL
+ HpKCxdWYD+OvHpNOJEH4pCJJnq1sq1NvHhRRu0OxwvCK4ftDpcCtRdMaVx4iKMN/wkIu
+ 2qbdprYETZKyWxCZXNuiZoqyI27IISqOFZu4cDq/wBGKfwJRoN42OBfRS40Q9pFW8yvi
+ uTneVn0jo+9ZN68ylD8sc3cY/QS2bc60C2JGV5c/mGj02O5fth0X3C7Ux1ky+JEhUZ34
+ fF5Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWOaN47gRVQQxx8YMmA9wyFGyRFeYPb6f2UJFvtoUv0l+p4umNV1iRLCLzFe0yzuYe81pBZDHg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy0mFWx9Q2WKZLrl1qrnQeXcYvAmeINVrkiMY8zQT/hpv51GxB5
- tw20B5ud424TYLrNTLjZ/sRoDWyJlwEUWEOa9wumfx5JwWzF4yFPyKl5eUpWkeT9lb8=
-X-Gm-Gg: ATEYQzyoz5elr6GkE/Curxogvop+Ad6qHfL2q/c9iO5efA0/kkg4XhLjH0bU0qtXn5V
- Hb9uwJ5wE4eYmdTccig/F55YqrG7G7CdZ2WTGdtnqYhh6MqkercYH17pg2EJSdXaZqOo+kSntwP
- DdaydZglXAg71fd1wndKSJ/gZc/zId9u+9slDlFwVhvoWKq7Q6dZTgQ4jpUw0t3+KIdF7pRk02w
- SRGO9Pyk1I0sqq9tV2LUgFCnxqna5DTUYNOeEjKFc2mZR1gZKpCJkiLC0//qGPPWOLlsdQcmLPT
- syD5D8Wud53Ep5yYWLDaFBeulv0Wx0WOmQ2xD05G3XuSoUS+kRB9Ga+DLwwEDQmtp7R033TFWYb
- zAi1r4HFMvhsqom9OT7dRzKa0ND/QJ5PRKLyAjENEz69Q3xZ7BtiLUohuRVeJuZLKm3lGK8n+4L
- lgDWNSyNjx8QnxYBS1IngUxW8rdXbh76o2WV/O+2Y=
-X-Received: by 2002:a05:6820:81c5:b0:67b:ae35:afa5 with SMTP id
- 006d021491bc7-67c22ee5124mr556462eaf.27.1773950546815; 
- Thu, 19 Mar 2026 13:02:26 -0700 (PDT)
+ AJvYcCUWdOInbAJyf1ESS0UHmrVmHYh5hQNhrsaz9s3IH4jj1ZxYRGwwWLOAy17aGrkrD2c+Y8I0qxs=@lists.denx.de
+X-Gm-Message-State: AOJu0YyElBWjPM5oPghm5jzd8Nm3KG4rGAUQpThINabhx7noJGwTSwVr
+ oV+oQMmN3M2ODgyXDN7DNexD79y2ENSQUHx+RTks8vBgISprkpENNcbefZ2KtUjf/g4=
+X-Gm-Gg: ATEYQzy611oY05evEjNgM+BKA3VNhExaV5UizVoTRErtgsa+I5RciWK7VqofKnP+aSM
+ J64sjA3MLx8NCPSa+n0LZ+G/Gv0h0ynxDk0Rd00OX+9Blf5YlerHGGmVTf9uPT8i02OAv250hm1
+ WBU0prL+oU57ZqyxUWqlDtu3KA55wi45DO1pAKPvGoz0mW4Nwt2a1ehh7a69lLVsb4YzsRun39g
+ dbWAR1gYbgvYTu3Foj+31EDhcELU9WkTn4KnBBJmCcafYEEnJ2ISg0Cw5Z4OStq94GDZglmJll3
+ ZXAhF43HjMl6gcqpEdRvqzk+OlSOLOhFIhjf/eheLZ2fx6TYzVLTyLGzS5k3c1+QYiUnCcn4wvO
+ Ej3NDQ4gaLFA7lW3Fzn3paXx0hBTI+wn62B8eRg2o3hiMrVo1cMhWSG7DZOFjiID20D01hwVJdq
+ oWwWSiLvBNd9igWm8TgoJ6B0aMBA13vPBPcLlMycU=
+X-Received: by 2002:a05:6820:1624:b0:67b:dc97:1183 with SMTP id
+ 006d021491bc7-67c22fbd2b6mr512068eaf.46.1773950544758; 
+ Thu, 19 Mar 2026 13:02:24 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:244c:fc8c:8216:1344])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-67c252acd32sm2826eaf.3.2026.03.19.13.02.25
+ 006d021491bc7-67c252acd32sm2826eaf.3.2026.03.19.13.02.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 13:02:26 -0700 (PDT)
+ Thu, 19 Mar 2026 13:02:23 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Thu, 19 Mar 2026 15:00:20 -0500
-Subject: [PATCH 17/17] arm: mediatek: mt8518: remove call to
- fdtdec_setup_memory_banksize()
+Date: Thu, 19 Mar 2026 15:00:18 -0500
+Subject: [PATCH 15/17] arm: mediatek: mt8516: drop dram_init_banksize()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260319-mtk-init-fix-dram-v1-17-6171ec141f40@baylibre.com>
+Message-Id: <20260319-mtk-init-fix-dram-v1-15-6171ec141f40@baylibre.com>
 References: <20260319-mtk-init-fix-dram-v1-0-6171ec141f40@baylibre.com>
 In-Reply-To: <20260319-mtk-init-fix-dram-v1-0-6171ec141f40@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
@@ -90,17 +89,17 @@ To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1117; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=848; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=Yo0LIsYeYQYOtd1tOXDBDaTiU5biwAZM9gUuPrwsaGg=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpvFY3UXVUmJz5aesWIqI3dPp1MOS2DLbjNUDLq
- l+s10Flho+JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabxWNxYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ARXcIAIx1gUyowKIpfH56tx6d7W1OoFv0OovwQI57Lp5
- iSVCZKYrd6+rjj+VVT3wMdtuWCnypyYkm3v8BjnRNIDBaqq6bomIOkF6n13oh+2xlv3T7QYNyfB
- sijtUIG54RQDgfh0HeFqES/KZeiR4/fK8XXtBfE+DV1QeKM5wE3ozJQ3fokH1JMF9/5eySv41oL
- a3YMibVdQiFlhFC89IOktpMlSvv5z3wls3E5ItEJRwagkOO1ML4qiBNmZE5FQyv1CqE2ODl4teP
- sTfddqgT80+b+m4Y5Fgz2zMPqfT59XfnKk0jYKUE7vEzzsROxAZfNVdX99/ZjzEthTNO9Hvl6oA
- iDoA=
+ bh=KOfRNjhWfOBeHkK8YgnrR0bVg+2EUM4q7diwj4Up/MU=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpvFYpn8xt8AzVEL3GVDfKt9YXW8bFEDd+dJkFN
+ X0e/x/snauJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabxWKRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ALUIH/ioImX2SDSj67r8nAUCDVxQQUKI1n4dWkfc2Nwn
+ 2kmmHMYSmpiTzWU6JJU2WduRPVa13d/anomniEtl+EqWnludFR9wBUR1/gXTRcfq035DUneh8WO
+ hQgUCqDK5GaLmVZeOoS2BfW0x7wEYcA2TQ320tVQYsgadRANPtecJCa8KMA71JWolEcSMKO2sjy
+ N3KT8eTj/W7BAmaEzQw1KELAPujKwiSO0bwV5AEcPUORB0aV8suMxOKEy9+iECd6EFjn2fdTxPj
+ TsaL7CoX1XHMr7NSkHUQk78ui98OfXXTAblkIG71/iEPYck0jFULhaCfVhRSF+6rE6KeJcSoG8p
+ NgjQ=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -119,40 +118,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove an incorrect call to fdtdec_setup_memory_banksize() in
-dram_init() for mt8518.
-
-fdtdec_setup_memory_banksize() populates gd->bd->bi_dram[bank].start
-and gd->bd->bi_dram[bank].size base on the "memory" node in the device
-tree. However, calling it from dram_init() is too early because gd->bd
-has not been allocated yet.
-
-gd->bd->bi_dram[0].start and gd->bd->bi_dram[0].size are already
-correctly initialized later in dram_init_banksize(), so we do not need
-to replace the removed function call with anything else.
+Drop override of dram_init_banksize() weak function for mt8516. This is
+effectively the same as the default implementation, so we do not need
+to override it.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- arch/arm/mach-mediatek/mt8518/init.c | 6 ------
- 1 file changed, 6 deletions(-)
+ arch/arm/mach-mediatek/mt8516/init.c | 8 --------
+ 1 file changed, 8 deletions(-)
 
-diff --git a/arch/arm/mach-mediatek/mt8518/init.c b/arch/arm/mach-mediatek/mt8518/init.c
-index ca64f5d4767..9cedf337743 100644
---- a/arch/arm/mach-mediatek/mt8518/init.c
-+++ b/arch/arm/mach-mediatek/mt8518/init.c
-@@ -24,12 +24,6 @@ DECLARE_GLOBAL_DATA_PTR;
- 
- int dram_init(void)
- {
--	int ret;
--
--	ret = fdtdec_setup_memory_banksize();
--	if (ret)
--		return ret;
--
+diff --git a/arch/arm/mach-mediatek/mt8516/init.c b/arch/arm/mach-mediatek/mt8516/init.c
+index 1d925dd478a..b470910da7f 100644
+--- a/arch/arm/mach-mediatek/mt8516/init.c
++++ b/arch/arm/mach-mediatek/mt8516/init.c
+@@ -32,14 +32,6 @@ int dram_init(void)
  	return fdtdec_setup_mem_size_base();
  }
  
+-int dram_init_banksize(void)
+-{
+-	gd->bd->bi_dram[0].start = gd->ram_base;
+-	gd->bd->bi_dram[0].size = gd->ram_size;
+-
+-	return 0;
+-}
+-
+ static int mtk_pll_early_init(void)
+ {
+ 	unsigned long pll_rates[] = {
 
 -- 
 2.43.0
