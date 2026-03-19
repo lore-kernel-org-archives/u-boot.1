@@ -4,87 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 265BC109022C
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 14:19:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A1651090234
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 14:25:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A424783E36;
-	Thu, 19 Mar 2026 15:19:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7758F83FC0;
+	Thu, 19 Mar 2026 15:25:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NplHuHW5";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D57B83F9B; Thu, 19 Mar 2026 15:19:25 +0100 (CET)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 160B883FE1; Thu, 19 Mar 2026 15:24:59 +0100 (CET)
+Received: from mail.3ffe.de (0001.3ffe.de [159.69.201.130])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52A30838FA
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 15:19:23 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=olteanv@gmail.com
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-439b1cf1212so45483f8f.1
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 07:19:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1773929963; x=1774534763; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=W48drN7sQQKSr629pomvY6LgAaAeeqqYcuWYY2x1oZA=;
- b=NplHuHW553XBm/IqMSu4lJluq+/rUq+owfHNt5HlsOomuy1ydt5I1bMjMSyVv0n2Fk
- EzfUGSWlR+m/cXEBn7SW0LkFwHxNiy4gTIkzAxZ/TmvVNRKvbJ4zzvz3qO0ckZTEKhXb
- 2AUoMKqpjzk4xYjoK6Lg3scGBoeGicbpkMYNb1sIo3eDKQMMLwc2Di+RcABLIBnlVoet
- js86zSlDbHTc+aY1no65OMkrV5HTXwLiL+DFIRHdz8BIVG/VAfZx+2E2bdXzB+/vHhIM
- xdU1SjA5woYVf9pYj6J88+1Us7qJioUBEPPktVw9LdrHaYxCWKItP8BuFpz+xcDZPmUH
- dhrQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773929963; x=1774534763;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=W48drN7sQQKSr629pomvY6LgAaAeeqqYcuWYY2x1oZA=;
- b=at3hPHmxD85ZzOtfOqsN6W3kIQdr384XOBTwKzwDqF17DrtnJSPpLGEUFCtml6rB9C
- YEV03fmp6mzNlQQCEfFAnaHJcRDq/2gIIPbZccueFcA4B955Vy6fCH0fjgWqKFFtUCr2
- QOor1G5yQ5wicBDsac0hr195rrQX8oY4ohH73yNxR9z8Jy3qVnNZwff7yuLOLcvHSVXn
- CakZ2RCkHpJopmqjKLgOCy3lPiM85dMeMFCmx8385FM5xA7fclxvc3z/vliSgHJYM+Mm
- r2fBnVYACtnvwmf9NQdp9FD1hBz1wLNRUjVjVgj/w5jRZHJcfbaMv2qQCodrnO4pH2BY
- RIDA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWDrRo9cshzmEphtF8KeqO4sFoj++64q7PFaCf+L6eB+wG9bNSTT0HfiNtJoZ/gugwQ/uB+d4o=@lists.denx.de
-X-Gm-Message-State: AOJu0YwprcSyd1paom4z+81y3QQ0TFXN9V7vS4vnzOxrFuwg00s051ee
- UNq+MRljonU9VNq/GrnsW/LEXChSKoxZpqXN9SoMiSmdtK3maXt8ifLE
-X-Gm-Gg: ATEYQzwPG6wq1XfQgLrgp9YAejLe4jlwBLTG024PF5706frttvwkRP10p/j6Nv96N+s
- aXv0JaOaGYiGLukrCj7mcv6QtP5/oF644b4rNdjQsYq+wL3+S4rDQ2XQ4gj3IUXFYOqmaAkWSIb
- 8taJW98jRoxTlnOHXDaYOMlDU0rjZ0hDOTp47XXM3cSe6FFl3m0mMG3AwopTB+jK+ouwjpgO9Nv
- NhszH6rPWirvadhYEbp8rvyO64b1eDsRQ8vjegJ2+PVA4khl12fyu71TjT3/gUjwBAkkK6cZQY+
- 3+7zkwFeU+ysjPhxaTgFf2CrKXkax8CcdoZRBHFR4KzFA40WvOdEUxdabLm/IbNa/ibe39rSH5c
- cjH+DKFbeqFN/LWimg+xf+J+A2Sq2PIG9c0F/H4EY2C9fFPoog09j2HhWNRnR9eMkVY5DRxZNMm
- YpOA6hFWDGtYvHQ9Y=
-X-Received: by 2002:adf:b64b:0:b0:439:c122:4fe3 with SMTP id
- ffacd0b85a97d-43b5279e6bfmr6089383f8f.1.1773929962432; 
- Thu, 19 Mar 2026 07:19:22 -0700 (PDT)
-Received: from skbuf ([2a02:2f04:d50a:b400:5ed6:aea5:dd72:edea])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b51892290sm15929010f8f.20.2026.03.19.07.19.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 07:19:21 -0700 (PDT)
-Date: Thu, 19 Mar 2026 16:19:19 +0200
-From: Vladimir Oltean <olteanv@gmail.com>
-To: Michael Walle <mwalle@kernel.org>
-Cc: Tom Rini <trini@konsulko.com>, Ashish Kumar <Ashish.kumar@nxp.com>,
- Priyanka Jain <priyanka.jain@nxp.com>,
- Kuldeep Singh <kuldeep.singh@nxp.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/3] configs: ls1021atsn: enable serial driver
-Message-ID: <20260319141919.7i4lvuivexnek2ni@skbuf>
+ by phobos.denx.de (Postfix) with ESMTPS id DA31A83EEF
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 15:24:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=michael@walle.cc
+Received: from localhost (ip-109-41-243-10.web.vodafone.de [109.41.243.10])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mail.3ffe.de (Postfix) with ESMTPSA id 2B54034A;
+ Thu, 19 Mar 2026 15:24:55 +0100 (CET)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Thu, 19 Mar 2026 15:24:54 +0100
+Message-Id: <DH6TT2ZV6049.33QOAOWOYSDWL@kernel.org>
+Subject: Re: [PATCH 3/3] armv7: ls102xa: fix SPI flash clock
+Cc: "Tom Rini" <trini@konsulko.com>, "Ashish Kumar" <Ashish.kumar@nxp.com>,
+ "Priyanka Jain" <priyanka.jain@nxp.com>, "Kuldeep Singh"
+ <kuldeep.singh@nxp.com>, <u-boot@lists.denx.de>
+From: "Michael Walle" <mwalle@kernel.org>
+To: "Vladimir Oltean" <olteanv@gmail.com>
+X-Mailer: aerc 0.20.0
 References: <20260318142949.2479033-1-mwalle@kernel.org>
- <20260318142949.2479033-3-mwalle@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260318142949.2479033-3-mwalle@kernel.org>
+ <20260318142949.2479033-4-mwalle@kernel.org>
+ <20260319141112.3mcbxhhuh5ougbjb@skbuf>
+In-Reply-To: <20260319141112.3mcbxhhuh5ougbjb@skbuf>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,33 +59,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Mar 18, 2026 at 03:29:16PM +0100, Michael Walle wrote:
-> Switching to DM_SERIAL disabled any serial driver. Re-enable it again.
-> 
-> Fixes: 191b10ac70d7 ("PowerPC / Layerscape: Finish migration to DM_SERIAL")
-> Signed-off-by: Michael Walle <mwalle@kernel.org>
-> ---
->  configs/ls1021atsn_qspi_defconfig | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/configs/ls1021atsn_qspi_defconfig b/configs/ls1021atsn_qspi_defconfig
-> index e36d336d84b..37629d88c48 100644
-> --- a/configs/ls1021atsn_qspi_defconfig
-> +++ b/configs/ls1021atsn_qspi_defconfig
-> @@ -68,6 +68,7 @@ CONFIG_TSEC_ENET=y
->  CONFIG_NVME_PCI=y
->  CONFIG_PCIE_LAYERSCAPE_RC=y
->  CONFIG_DM_SERIAL=y
-> +CONFIG_SYS_NS16550=y
->  CONFIG_SPI=y
->  CONFIG_DM_SPI=y
->  CONFIG_FSL_DSPI=y
-> -- 
-> 2.47.3
-> 
+Hi,
 
-Ok, in ls1021atsn_sdcard_defconfig it is selected by
-CONFIG_SPL_SYS_NS16550_SERIAL=y. In ls1021atsn_qspi_defconfig it isn't
-selected.
+On Thu Mar 19, 2026 at 3:11 PM CET, Vladimir Oltean wrote:
+> Reviewed-by: Vladimir Oltean <olteanv@gmail.com>
 
-Reviewed-by: Vladimir Oltean <olteanv@gmail.com>
+Thanks!
+
+> I think we have a problem in the RCW as well.
+> https://github.com/nxp-qoriq/rcw/blob/devel/ls1021atsn/SSR_PNS_30/rcw_120=
+0_qspiboot.rcw#L8
+> Those values should be interpreted as bit reversed (so 0x00000803 is
+> 0xC0100000, i.e. the same value as U-Boot used to write prior to commit
+> bb6f3c0f7634 ("armv7: ls102xa: Update SCFG_QSPI_CLKSEL value")).
+>
+> They are reversed because we write to SCFG_QSPI_CFG prior to writing to
+> SCFG_SCFGREVCR. In fact the documentation says about the SCFG bit
+> reverse register "This register must be written 0xFFFF_FFFF as a part of
+> initialization sequence before writing to any other SCFG register."
+>
+> So it seems the QSPI clock frequency might be already out of range
+> before U-Boot brings it in range with your patch still.
+
+Yes, I've noticed that too. But we have our own repo of the RCWs for
+our boards. But yeah, we've basically copied NXPs values. So the
+60MHz speed is still lurking there. But instead of the 75MHz, 60MHz
+seems to at least work (and nobody noticed).
+
+> I can take additional RCW patches if you're willing to send them.
+
+As said above, we have our own repo that isn't a fork of NXPs.
+
+> Plus, I see since commit ba89878d7029 ("armv7: ls102xa: make QSPI clock
+> selection optional during SoC init") that SYS_FSL_QSPI_SKIP_CLKSEL is an
+> option too, maybe that's of interest.
+
+I've seen that, but haven't looked further why there is that option.
+Probably, to keep any custom clksel value ;)
+
+-michael
