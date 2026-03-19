@@ -4,86 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAAAD1090220
-	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 13:41:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 282B51090229
+	for <u-boot@archiver.kernel.org>; Thu, 19 Mar 2026 13:48:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55A4283DC9;
-	Thu, 19 Mar 2026 14:41:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9113483F2E;
+	Thu, 19 Mar 2026 14:48:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XoexI4M7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hiGyfDeY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A494183EEF; Thu, 19 Mar 2026 14:41:35 +0100 (CET)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
+ id D6BDC83F8A; Thu, 19 Mar 2026 14:48:16 +0100 (CET)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53C9383D71
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 14:41:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A535383DC9
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 14:48:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-4138136f02eso735376fac.2
- for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 06:41:33 -0700 (PDT)
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-466f00535cfso477348b6e.1
+ for <u-boot@lists.denx.de>; Thu, 19 Mar 2026 06:48:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773927692; x=1774532492; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773928093; x=1774532893; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/sH5gR3ZgQDv8X0PpzS6jPkM0Cp4bt8czdZLpKJ4qHo=;
- b=XoexI4M7fcRtWDPEAfyLYc9axzy68adUEFttybrvJYIP/AnPYg7+sVe1S2TXhJg7nv
- LS/YxNUiB9FouBYHVG7mN1Ru63yOUKGT8L1LYqV3wafwEI6DYaNQJHzg1bnMbcYaMukY
- 3CpmpEutoPPP7hJlpaJCdW9yDHTHbwOk19tfs=
+ bh=hvrkfYodLxD2BiOTVU20kvC1V6yNyp4kd5DhvvPy9PY=;
+ b=hiGyfDeYg3Y/qscfRHz+r9Lwsujho5oZ0WUBnCCSrDGoJ4w+U9jLUvKFSa8UHmEeeH
+ SRqc685kSD1/I53zQxqkJE4HvDoYaAXMzaXJUCMLQLA7WxwEejxW5+Xi+XOR3+KZzxMb
+ jf02nVtJFoHzaEAXeckaT8squT0LuGew/MPW8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773927692; x=1774532492;
+ d=1e100.net; s=20251104; t=1773928093; x=1774532893;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/sH5gR3ZgQDv8X0PpzS6jPkM0Cp4bt8czdZLpKJ4qHo=;
- b=Zjr42vAqBg2yBpKWra5cYSDDoukDlheGC9Mlgu+jse9tM48swTyzW758a8FoPwQVmR
- BCtyaJ5tK+cP4rgXnmXcpOZYCAv4i77NfEZF2Tzx4LT44an29vK+X2t5rvttBT9NrqJz
- Gsdl7z2Gr4NpDPVhIGBeCUFd0lH8x28zoXq24Ny2aegPfjwh7owcSp+2Y7cdqjkeTvIP
- 2vSngr22nM0aLnt/07ngNDIrpOng5NA3kJ9lLxlIV5WgSy8mZsZfzFTbPJQxT9NOEl83
- nIHq2JodpbANbX80HSxm3zRXQvBOTNNE3XpBIX56VZ9z1U0DH7PBagCi10Bmq8jIWa6B
- Ew7Q==
-X-Gm-Message-State: AOJu0YytYZW/XxoRG6eCjC0JR8GRS1dvYviCpATozeVJi9K2ujhJiGi1
- WJ2eZecJGy5OUDB0LOk9R/qRvKU/NVnWy67VUdJ9k4aU5r1yYwCks8OZY6WzasAt+lM=
-X-Gm-Gg: ATEYQzyMkmMFd1RW99V5n8s5v/zro+nQZnhLy2XalKuRR340Vb11pUtKQdXtwldoFqA
- idrUltwK26QjzrDKsK20CtEgiUiX0T48uSHX1jfPPcoDt6s2E6o8tyrPaiBl7qpHhe5KlUzeoJ1
- nABuggJgbz/L118OlFfwfgjkDrbR+uWpyuaBQ1plVUIYnuqqymiTPLWkOCmMJBLvkbpRXJ4Y/DJ
- siYD6W1lJrHy/LUzRgN1mwb2xQlFILBqZEunf9pu5sbBcYJKpkVuVX6052O0RL4TuPFUhL/EpZ8
- ufn0mrGLuWbv4sVVerFZwYIrcTX7zTaFDpp2VKWuLTix1hvMii8AHzD1z3lH/sN2bOC2T7P+1BS
- aX46Yy51Ba2N23XsENhHGAdjDQqrLgJYI6ypZ69aCPTjvID5Bdq0wMssk2QM9UO3GiJkgys3D+x
- RPXzALLNJSSI9jsVFnoqpvLnbnQ4Yus3zgT9Xonyn8JHTBGpegqFldXgnR9NskTPyWeo6kLk7El
- yjG4vWSFe7VgpojheoNUQmaM88ax3krM0VQrrLofOO6kQ5O
-X-Received: by 2002:a05:6870:4191:b0:3ec:4a8d:420b with SMTP id
- 586e51a60fabf-41bd3fe8becmr5250479fac.42.1773927691789; 
- Thu, 19 Mar 2026 06:41:31 -0700 (PDT)
+ bh=hvrkfYodLxD2BiOTVU20kvC1V6yNyp4kd5DhvvPy9PY=;
+ b=pcFHJa60AWtbDxXQOmccnDrRvGxYVpSURfKSXbA7kLJYM+axuBlE0NTHfKbAcKnsK+
+ lcDZ80Dqq8Sgj3ppTWmEXU/sU4KSiv/mTCi51/clPhJ9dPtLQJ0+P4VgFBNpQFecLUSJ
+ ZZNUw9d0VFFupAex42rHNeNLbS+GoDrVvDy/33397j65tB+iOE/js76g9B+UsOYMkDjf
+ vbBwoHwu1VNUc2VeJeHAKQy5yunQ6K28FeWFwZdbV7qN1ZFHb7g9NVHVq9FTmzOBaoeK
+ 4FgbeA0vbTrQGqnB2XLCZhI0u61sjrBYrvrwTrfs4DwYAWAYzkloPRyFrzt0YzKarJ3n
+ +zCw==
+X-Gm-Message-State: AOJu0Yxy6XHh3PGHoJb6dwgNNnZaNzRws/9lDVqGOoBerWyG9jF6Xwby
+ kH1D5NmnUk70UYAdB0A2Camyw9hFG1EcNxjBZg3lMqHD1Mn0tF+XOF69TZylU38lQx+TJl40iZn
+ 5YB1qJCM=
+X-Gm-Gg: ATEYQzztna86KdtVKOwiAim0vKLF6tBT1Z+AhBrYT6SdPjI/QDICqR8mhMIm24euON7
+ 5jt3YNivklf6UeIAiewXpwD5obUVJwkQ904Badb7MQRMRAmVUxInYXoTu7v5vxdIAtKmm0JTX8q
+ yd6GBJ4o1LExg1jboP0VY5Ozf82SEpVKbuULUuNbcFHRqFNMuaXur3Rw33XEkvptc497GE1rFs3
+ yFs5+0bXdL4qVrB43nHuW2+am1FZf7jRmINEyf38NbdWIDhv6hoHQq9p1M3hOGUab9Vwz/2NLXS
+ 2RPfVpK2q2GXq40jTpDLS0ljlYZOZzroMnaC1BSR8waopAkxI5zZ1wdGoJzTgeKkGdOx6hPamcp
+ jW8w505zzvPUy2ivm4qbbZBOON7V5El/moDw6Z2iu3cqjQLGQSjTsq5eml6D3e0jFxXAFnwFLIL
+ bPB7Smc7G8NqrXHAfi2G4vWdJy7BEar4/swTOMQdpnmXDcou/VGxN0hfADJbhbdZdzkUT4xStZD
+ y2Hcs/I/GP1H1RbHz99O/D/n6h+9TBs5DGsois04CsLE6Qs
+X-Received: by 2002:a05:6808:6b89:b0:45f:59e:1e06 with SMTP id
+ 5614622812f47-467ba10a4b8mr3693235b6e.4.1773928093249; 
+ Thu, 19 Mar 2026 06:48:13 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41bd288c5e3sm5949325fac.8.2026.03.19.06.41.30
+ 5614622812f47-467bab032cdsm3747147b6e.18.2026.03.19.06.48.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Mar 2026 06:41:30 -0700 (PDT)
-Date: Thu, 19 Mar 2026 07:41:28 -0600
+ Thu, 19 Mar 2026 06:48:12 -0700 (PDT)
+Date: Thu, 19 Mar 2026 07:48:09 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] reset: Correct dependencies for RESET_RZG2L_USBPHY_CTRL
-Message-ID: <20260319134128.GP502704@bill-the-cat>
-References: <20260317012443.4162600-1-trini@konsulko.com>
- <ed88ec35-7d53-48df-a65b-7da1298e265b@mailbox.org>
- <20260317134008.GQ502704@bill-the-cat>
- <58699be1-5414-4749-9975-7fdf0064b1a3@mailbox.org>
- <20260318012557.GF502704@bill-the-cat>
- <34a0c151-f8ff-4b91-92b3-d6f63097440e@mailbox.org>
+To: Boon Khai Ng <boon.khai.ng@altera.com>
+Cc: U-boot Openlist <u-boot@lists.denx.de>,
+ Chin-Liang See <chin.liang.see@intel.com>,
+ Dinh Nguyen <dinh.nguyen@intel.com>, Marek Vasut <marex@denx.de>,
+ Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Chen Huei Lok <chen.huei.lok@altera.com>,
+ Kok Kiang Hea <kok.kiang.hea@altera.com>
+Subject: Re: [PATCH v1] configs: socfpga: stratix10: Disable mkeficapsule
+ tool build
+Message-ID: <20260319134809.GR502704@bill-the-cat>
+References: <20260319112717.7805-1-boon.khai.ng@altera.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9MMKKT9+laijWOMJ"
+ protocol="application/pgp-signature"; boundary="8BhUICQ6KxSDM8GB"
 Content-Disposition: inline
-In-Reply-To: <34a0c151-f8ff-4b91-92b3-d6f63097440e@mailbox.org>
+In-Reply-To: <20260319112717.7805-1-boon.khai.ng@altera.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,88 +108,35 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---9MMKKT9+laijWOMJ
+--8BhUICQ6KxSDM8GB
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 19, 2026 at 01:52:15AM +0100, Marek Vasut wrote:
-> On 3/18/26 2:25 AM, Tom Rini wrote:
-> > On Tue, Mar 17, 2026 at 08:41:26PM +0100, Marek Vasut wrote:
-> > > On 3/17/26 2:40 PM, Tom Rini wrote:
-> > > > On Tue, Mar 17, 2026 at 03:33:57AM +0100, Marek Vasut wrote:
-> > > > > On 3/17/26 2:24 AM, Tom Rini wrote:
-> > > > > > As exposed by "make randconfig", we have an issue with the depe=
-ndencies
-> > > > > > for RESET_RZG2L_USBPHY_CTRL. As REGULATOR_RZG2L_USBPHY depends =
-on
-> > > > > > DM_REGULATOR this symbol must also depend on it as well.
-> > > > > >=20
-> > > > > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > > > > ---
-> > > > > > Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> > > > > > ---
-> > > > > >     drivers/reset/Kconfig | 2 +-
-> > > > > >     1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > > >=20
-> > > > > > diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
-> > > > > > index 66911199c8ba..3f0ec50510c0 100644
-> > > > > > --- a/drivers/reset/Kconfig
-> > > > > > +++ b/drivers/reset/Kconfig
-> > > > > > @@ -239,7 +239,7 @@ config RESET_AT91
-> > > > > >     config RESET_RZG2L_USBPHY_CTRL
-> > > > > >     	bool "Enable support for Renesas RZ/G2L USB 2.0 PHY contro=
-l"
-> > > > > > -	depends on DM_RESET
-> > > > > > +	depends on DM_RESET && DM_REGULATOR
-> > > > > >     	select REGULATOR_RZG2L_USBPHY
-> > > > > But this already selects REGULATOR_RZG2L_USBPHY , which according=
- to
-> > > > > drivers/power/regulator/Kconfig contains:
-> > > > >=20
-> > > > > 508 config REGULATOR_RZG2L_USBPHY
-> > > > > 509         bool "Enable driver for RZ/G2L USB PHY VBUS supply"
-> > > > > 510         depends on DM_REGULATOR
-> > > > >=20
-> > > > > which does depend on DM_REGULATOR transitively ?
-> > > >=20
-> > > > That's why Kconfig complains about the unmet dependency. "randconfi=
-g"
-> > > > does some fun and apparently valid things.
-> > > That's the thing -- if RESET_RZG2L_USBPHY_CTRL depends on
-> > > REGULATOR_RZG2L_USBPHY which depends on DM_REGULATOR, how can DM_REGU=
-LATOR
-> > > be unset, while RESET_RZG2L_USBPHY_CTRL is set ?
-> >=20
-> > Using "randconfig" will find some odd problems, yes, because it makes a
-> > (based on what all of the Kconfig files say) possible config and then
-> > forces it to be validated against the expressed logic.
-> >=20
-> > So I think the answer is if you fire up menuconfig, and turn off
-> > RESET_RZG2L_USBPHY_CTRL and REGULATOR_RZG2L_USBPHY and DM_REGULATOR and
-> > then enable RESET_RZG2L_USBPHY_CTRL things will become mad because
-> > RESET_RZG2L_USBPHY_CTRL has select'd REGULATOR_RZG2L_USBPHY but we don't
-> > have DM_REGULATOR.
-> How is it possible to enable RESET_RZG2L_USBPHY_CTRL without enabling its
-> dependencies ? This is what I do not understand.
+On Thu, Mar 19, 2026 at 07:27:17PM +0800, Boon Khai Ng wrote:
 
-The way I said in the part you quoted? If you don't like the way I'm
-solving the problem with the dependency graph here please propose an
-alternate. But it is possible to encounter this problem, or randconfig
-wouldn't expose it.
+> mkeficapsule tool will be built by default if EFI_LOADER is set due to
+> external changes for U-Boot v2024.10 commit b7a625b1ce49 ("tools: Build
+> mkeficapsule tool by default if EFI_LOADER is set")
+>=20
+> This will cause compilation error on all our SoCFPGA devices, hence we wi=
+ll
+> be disabling this config for now as we do not utilize this tool.
+
+Why / how is this failing to compile?
 
 --=20
 Tom
 
---9MMKKT9+laijWOMJ
+--8BhUICQ6KxSDM8GB
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabv9CAAKCRAr4qD1Cr/k
-Cio/AQDDd1qU6cbdqdFeqkgQeMLZnwi39hO5e7eFiYqlPjvr7wEA6XQbUwaW1rK7
-b8U4s1cPnmQgyuWND1oW0csfsWDWNwY=
-=kVWu
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabv+mQAKCRAr4qD1Cr/k
+CrayAQCRGNoAkctuPgsJFS9FpHz5IMAoZbghDVNOVr3Pc6BVxgD/TMOSR+GENlX3
+ydNy+FeqQO6H0qShbnrboiDF5InfLAo=
+=/SKF
 -----END PGP SIGNATURE-----
 
---9MMKKT9+laijWOMJ--
+--8BhUICQ6KxSDM8GB--
