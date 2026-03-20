@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 761EC1098782
-	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 13:06:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C26DF1098782
+	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 13:07:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9B3384006;
-	Fri, 20 Mar 2026 14:06:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1121A84035;
+	Fri, 20 Mar 2026 14:06:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LoPXD9jT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NGfA/ejQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F80883D71; Fri, 20 Mar 2026 13:52:43 +0100 (CET)
+ id 24C8783CF5; Fri, 20 Mar 2026 13:52:47 +0100 (CET)
 Received: from mail-qv1-xf43.google.com (mail-qv1-xf43.google.com
  [IPv6:2607:f8b0:4864:20::f43])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70FEF83CEA
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 13:52:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DDBEE83CEA
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 13:52:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jcethrid@gmail.com
 Received: by mail-qv1-xf43.google.com with SMTP id
- 6a1803df08f44-89c52ef3c2fso19839996d6.0
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 05:52:41 -0700 (PDT)
+ 6a1803df08f44-899ee491af3so21848926d6.1
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 05:52:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1774011160; x=1774615960; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1774011164; x=1774615964; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AvcRbLmmrEx0P9y75/j9jQM1yG49umTKclsFYZLeKW0=;
- b=LoPXD9jT+GXBacFUmHn7fX/Delg3JM16lcbMEfMd+akK32Yb5PxiPH8GrMu0UroGcV
- u6N1Q/ldx0re4pFwRnuYD9fVahUObCFnOOc7tuEKIi1oSjS4VcFSt6GXufXhMcq+Jltb
- 7j8xmV3AxP7IUEXcpYiwkSOc7OQPeRoGDhh120LZ1hkPjKD77KunTFFpIyryh0nYsIA6
- VLk5Uh7hchr4e5/2y5aoHRlhylfP4au87hpTNdKHUeBbLKisfFS/WuCa2279EAgC33bl
- gbc25lPatAu17Ftid0YOblVYRG3lzaf/LVS/ejIFckO371sky/cxuF9K2ieRaWcmVNxN
- EzTg==
+ bh=z36/pBdP+0WyCp4eyCgU4weNUeh3cpEIhILICmbnPa4=;
+ b=NGfA/ejQi0nNDHk9L9oov3e9410V7Ltjqb9oRXMWulIhSaA1L6oI9xnfoyB6JxV94W
+ +kz/roPYWisDOvYInmCLPaHdnXTIBJbl9bwurddNHK2xNpe9PYOGHJrDpG18XMa884Qr
+ FVtHdRTaB9BfBCA85zixu/z3tEVi0OuKi5iF02n6UxQjeOQC0OP8KGwyV5MuDZRVqvRC
+ PkVo9BFmgVPX4yv9U1jesp6WUpyVLLon2JO4g4QyGei3X+97bAg9ki7GNkJYRa3prFln
+ expMu4JYgBXebh0GAY83D0BOhP1OkKH3IFACofIEf5Offhji/8z7jMVSj1D83INlcuXo
+ +TrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774011160; x=1774615960;
+ d=1e100.net; s=20251104; t=1774011164; x=1774615964;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=AvcRbLmmrEx0P9y75/j9jQM1yG49umTKclsFYZLeKW0=;
- b=KbP8t/z7ABWzIbQjv2vCGzpsz1M70vW1AkanoEtQPWtCC7Da3L0OyDwj91nI2LIyMd
- 5km54qh87DKAQ5J3/Pk4OuzDudxjWDUaFBQFDbSsc++Rgk2zc+yNS+n+GclLCrmx1PX0
- k1WFr5Ec+iZr9PvBjhORJvxPSednc5gdXsmz0RNAPZgTig4WcS0z0BqMGirsqAoKcelO
- WxuXfXSPVjX+kE4S4JtcXKFBNCA18cj0uTrSlYPqA5Ri3eGMi/W2Up/g04vBpkQWjVYG
- wpCwh0zdLvr9oq5xVr5vCVZrzyunRYeXUGHLXvXEJJLkg9dB2CRdASdrq1Z1KL+j4uPD
- 358Q==
-X-Gm-Message-State: AOJu0YyVhgQBdUNCRREOJjb+SfzZ4QeRnOs2inhwRmhwAa4vjOwlpNkf
- tA6g+2EB5tyhLn4JVMLInF9O4+7vh7zvOogwoQ9Yhc/aA87636c2+GiNUwRbebMkCD3YBw==
-X-Gm-Gg: ATEYQzxKcz6lVotYp7cWRBQYk5EbqKSMjft2YLnorR8/4psiSI1D6N7fiFz0BzjED5h
- uJVJe+95CZruTDJ4nUj5mKOcKHFRP85LBhl16bIUiYSo4iDqzd0CdDjKiPTs2YiBVfnUhMv170a
- QQ6pCVUqBNlIMg8Oc8UmLptgS8dghE9HPXzeo85Qf6S/jognoKewMmOkGW+GvA8jfmXDYcgsiqz
- 0v0py3VglpM7xcNusX6fMdaJpoUZi9C1WhqTE9Ny55rhISVNkd/m5vdHpVjGqwgc9jP9DLQLNCG
- N4Kw+hWm6bN+SuSRmsO95zZnkI35ka1Rba05hSpe78QwF6BQgcKa1s7WFfeou/W6IBDH5ma9RZ3
- sJykV7/C2vkYCwwjHBJ5IOm8Cwceziqb4Q5+4j52tvlEE/WlVYz4kEDbXGkD/efZ5DKnD7b+h1N
- uufw7+4VKqLrhRGMw/oCT38J9OqCBp7lCtIQ==
-X-Received: by 2002:a05:6214:6016:b0:89a:f10:996e with SMTP id
- 6a1803df08f44-89c859aa866mr35391916d6.6.1774011159976; 
- Fri, 20 Mar 2026 05:52:39 -0700 (PDT)
+ bh=z36/pBdP+0WyCp4eyCgU4weNUeh3cpEIhILICmbnPa4=;
+ b=QW206pQKXVGZ9Rv0OZqpI96SZa6NhA/EmXAQXU0OxX6RjB88gMkNRIUsxVZKzo3wWt
+ UyY1ym7vbPuludsvXzbNl49lDFCKPUD/fnutgQtsoKw3sOItMzNipRBpPYA3U18Z4uQU
+ Ph8wyt5LKcUqekP3ne/+w91tmQqFU12YuVdlKKpATE6jxZzaAd8O8zKe7Z+udnkAuT6Z
+ Me+VH5oRsvHDNn84cirJMMUBRukb8WSC0aFLDiaRFF0CleN0WeDZ1+tbv4KDoa1SP1xq
+ UhmpDjgJ22dOHw7iQQK/3xI3+ciXIdtVCwA1OCVOsO4bg4CBOZaiEo1joE9d5woIrP/Z
+ FvpA==
+X-Gm-Message-State: AOJu0Yx/pyOBMzJwQ49V9lYB9P+exAsLgAJhKRuMMTJqhoNneaWXp9wF
+ jeWtrFfkzyOqvBL55TKmf2ns3CWXc//D8/4k/X1F8YREM6IvazmGC089txMcpOiljcK8Mw==
+X-Gm-Gg: ATEYQzw36D/LF9eR7w8WCSgyOI40X43cTG2SVkk4CAKp1mSQNSMnjYcKm8ALEIJhFEn
+ tzn1mPrrZQ5Tc7ljTSkm8RSUQ2TBTh9KjCcCcP0m5Ys+7dYIyQ+thVNT/paDsXYvEumFZvIwnDT
+ f9Ix5/Pyvbv9ztylWDJi5soWHjVPTkS/LMGWqhJuu7h3YhuekoiQmghq456Hefk35fhE6r7SCGD
+ 2CtnV9guwFSP4kBRAZSC7XqcMzlePX4QzHa+a0lXqb6SvYOD8SuuhmWLiU+gwaS7q78tNMBsR3G
+ JQRTVCY4AY7RnBMUn3kJG2kFIKtxZkLEJEU0BfUHOGwxosUh3ZGf8iCdMUE7cSHhV3AyF7bFMtC
+ hAYuVzjsgAF0nBUmvnOy/UIkuArYkrZGSuhgKRoBk1WLcUpfquU514xDlkrUEN8g26C5rqscODk
+ PBQTyzAIkNTOx/7ZXa/fUAIwac+j4k6Bnr2A==
+X-Received: by 2002:a05:6214:3019:b0:89a:249:d2c1 with SMTP id
+ 6a1803df08f44-89c85a620e3mr38138696d6.51.1774011163647; 
+ Fri, 20 Mar 2026 05:52:43 -0700 (PDT)
 Received: from cethr-l01.localdomain ([136.56.120.109])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-89c8537c3b5sm19168166d6.47.2026.03.20.05.52.39
+ 6a1803df08f44-89c8537c3b5sm19168166d6.47.2026.03.20.05.52.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Mar 2026 05:52:39 -0700 (PDT)
+ Fri, 20 Mar 2026 05:52:43 -0700 (PDT)
 From: Caleb Ethridge <jcethrid@gmail.com>
 To: u-boot@lists.denx.de
 Cc: malysagreg@gmail.com, philip@philipmolloy.com, trini@konsulko.com,
  linux@analog.com, Caleb Ethridge <caleb.ethridge@analog.com>
-Subject: [PATCH 04/11] mach-sc5xx: Switch from tftp to wget
-Date: Fri, 20 Mar 2026 08:50:19 -0400
-Message-Id: <1e5fefaa837efb9bbb55182ea7c8e4c602742d72.1774008927.git.jcethrid@gmail.com>
+Subject: [PATCH 05/11] mach-sc5xx: Add USB boot command
+Date: Fri, 20 Mar 2026 08:50:20 -0400
+Message-Id: <9a01a335c3eb2d8e3a471da81496cf619aec65ff.1774008927.git.jcethrid@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1774008927.git.jcethrid@gmail.com>
 References: <cover.1774008927.git.jcethrid@gmail.com>
@@ -101,152 +101,89 @@ X-Virus-Status: Clean
 
 From: Caleb Ethridge <caleb.ethridge@analog.com>
 
-Switch the nfsboot and other relevant commands to use
-wget instead of tftp. This also includes the addition of
-the httpdstp variable for selecting the wget port.
+Add the USB boot command to the environments
+of the boards that support it.
 
 Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
 ---
- board/adi/sc573-ezkit/sc573-ezkit.env           |  1 +
- board/adi/sc584-ezkit/sc584-ezkit.env           |  1 +
- board/adi/sc589-ezkit/sc589-ezkit.env           |  1 +
- board/adi/sc589-mini/sc589-mini.env             |  1 +
- board/adi/sc594-som-ezkit/sc594-som-ezkit.env   |  1 +
- board/adi/sc594-som-ezlite/sc594-som-ezlite.env |  1 +
- board/adi/sc598-som-ezkit/sc598-som-ezkit.env   |  1 +
- board/adi/sc598-som-ezlite/sc598-som-ezlite.env |  1 +
- include/env/adi/adi_boot.env                    | 10 ++++------
- 9 files changed, 12 insertions(+), 6 deletions(-)
+ board/adi/sc573-ezkit/sc573-ezkit.env         | 1 +
+ board/adi/sc589-ezkit/sc589-ezkit.env         | 1 +
+ board/adi/sc589-mini/sc589-mini.env           | 1 +
+ board/adi/sc594-som-ezkit/sc594-som-ezkit.env | 1 +
+ board/adi/sc598-som-ezkit/sc598-som-ezkit.env | 1 +
+ include/env/adi/adi_boot.env                  | 7 +++++++
+ 6 files changed, 12 insertions(+)
 
 diff --git a/board/adi/sc573-ezkit/sc573-ezkit.env b/board/adi/sc573-ezkit/sc573-ezkit.env
-index 9562b9a68a8..88766870c1a 100644
+index 88766870c1a..74eaa23a1c3 100644
 --- a/board/adi/sc573-ezkit/sc573-ezkit.env
 +++ b/board/adi/sc573-ezkit/sc573-ezkit.env
-@@ -6,6 +6,7 @@
+@@ -13,5 +13,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
+ #define USE_SPI
+ #define USE_RAM
+ #define USE_MMC
++#define USE_USB
  
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc573-ezkit.jffs2
- adi_image_offset=0xe0000
-+httpdstp=8000
- loadaddr=CONFIG_SC5XX_LOADADDR
- 
- #define USE_NFS
-diff --git a/board/adi/sc584-ezkit/sc584-ezkit.env b/board/adi/sc584-ezkit/sc584-ezkit.env
-index da64ebe093c..e2365a343f0 100644
---- a/board/adi/sc584-ezkit/sc584-ezkit.env
-+++ b/board/adi/sc584-ezkit/sc584-ezkit.env
-@@ -6,6 +6,7 @@
- 
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc584-ezkit.jffs2
- adi_image_offset=0xe0000
-+httpdstp=8000
- loadaddr=CONFIG_SC5XX_LOADADDR
- 
- #define USE_NFS
+ #include <env/adi/adi_boot.env>
 diff --git a/board/adi/sc589-ezkit/sc589-ezkit.env b/board/adi/sc589-ezkit/sc589-ezkit.env
-index 43f5d7a5565..f49d30e88e2 100644
+index f49d30e88e2..a15a446eb71 100644
 --- a/board/adi/sc589-ezkit/sc589-ezkit.env
 +++ b/board/adi/sc589-ezkit/sc589-ezkit.env
-@@ -6,6 +6,7 @@
+@@ -13,5 +13,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
+ #define USE_RAM
+ #define USE_MMC
+ #define USE_SPI
++#define USE_USB
  
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc589-ezkit.jffs2
- adi_image_offset=0xe0000
-+httpdstp=8000
- loadaddr=CONFIG_SC5XX_LOADADDR
- 
- #define USE_NFS
+ #include <env/adi/adi_boot.env>
 diff --git a/board/adi/sc589-mini/sc589-mini.env b/board/adi/sc589-mini/sc589-mini.env
-index 7726939946d..c741896601a 100644
+index c741896601a..c6f7e491f32 100644
 --- a/board/adi/sc589-mini/sc589-mini.env
 +++ b/board/adi/sc589-mini/sc589-mini.env
-@@ -6,6 +6,7 @@
+@@ -13,5 +13,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
+ #define USE_RAM
+ #define USE_SPI
+ #define USE_MMC
++#define USE_USB
  
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc589-mini.jffs2
- adi_image_offset=0xe0000
-+httpdstp=8000
- loadaddr=CONFIG_SC5XX_LOADADDR
- 
- #define USE_NFS
+ #include <env/adi/adi_boot.env>
 diff --git a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-index e3f25043856..d314e1117b5 100644
+index d314e1117b5..a15793a279f 100644
 --- a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
 +++ b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-@@ -6,6 +6,7 @@
+@@ -14,5 +14,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
+ #define USE_OSPI
+ #define USE_RAM
+ #define USE_MMC
++#define USE_USB
  
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc594-som-ezkit.jffs2
- adi_image_offset=0x110000
-+httpdstp=8000
- loadaddr=CONFIG_SC5XX_LOADADDR
- 
- #define USE_NFS
-diff --git a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
-index 2fd2295e1e0..d9109149ec9 100644
---- a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
-+++ b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
-@@ -6,6 +6,7 @@
- 
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc594-som-ezlite.jffs2
- adi_image_offset=0x110000
-+httpdstp=8000
- loadaddr=CONFIG_SC5XX_LOADADDR
- 
- #define USE_NFS
+ #include <env/adi/adi_boot.env>
 diff --git a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-index 1da4a585b1c..525e0f3547b 100644
+index 525e0f3547b..17a6d19c306 100644
 --- a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
 +++ b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-@@ -6,6 +6,7 @@
+@@ -14,5 +14,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
+ #define USE_OSPI
+ #define USE_RAM
+ #define USE_MMC
++#define USE_USB
  
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc598-som-ezkit.jffs2
- adi_image_offset=0x110000
-+httpdstp=8000
- loadaddr=CONFIG_SC5XX_LOADADDR
- 
- #define USE_NFS
-diff --git a/board/adi/sc598-som-ezlite/sc598-som-ezlite.env b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
-index f8c5b8472d1..8b23dc6e7d8 100644
---- a/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
-+++ b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
-@@ -5,6 +5,7 @@
-  */
- 
- adi_image_offset=0x100000
-+httpdstp=8000
- loadaddr=CONFIG_SC5XX_LOADADDR
- jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc598-som-ezlite.jffs2
- 
+ #include <env/adi/adi_boot.env>
 diff --git a/include/env/adi/adi_boot.env b/include/env/adi/adi_boot.env
-index 3c196e40603..4d4a76729dc 100644
+index 4d4a76729dc..b04bd1ba20e 100644
 --- a/include/env/adi/adi_boot.env
 +++ b/include/env/adi/adi_boot.env
-@@ -27,15 +27,14 @@ adi_bootargs=EARLY_PRINTK console=ttySC0,CONFIG_BAUDRATE vmalloc=512M
- ramargs=setenv bootargs ${adi_bootargs}
- 
- addip=setenv bootargs ${bootargs} ip=${ipaddr}:${serverip}:${gatewayip}:${netmask}:${hostname}:eth0:off
-+rootpath=/romfs
- 
- /* Boot modes are selectable and should be defined in the board env before including */
- #if defined(USE_NFS)
--// rootpath is set by CONFIG_ROOTPATH
- nfsargs=setenv bootargs root=/dev/nfs rw nfsroot=${serverip}:${rootpath},tcp,nfsvers=3 ${adi_bootargs}
--nfsboot=run init_ethernet;
--	tftp ${loadaddr} ${tftp_dir_prefix}${imagefile};
--	run nfsargs;
-+nfsboot= run nfsargs;
- 	run addip;
-+	wget ${loadaddr} ${serverip}:/fitImage;
- 	bootm ${loadaddr}
- #endif
- 
-@@ -64,8 +63,7 @@ ospiboot=run ospiargs;
- #endif
- 
- #if defined(USE_RAM)
--ramboot=run init_ethernet;
--	tftp ${loadaddr} ${tfpt_dir_prefix}${imagefile};
-+ramboot= wget ${loadaddr} ${serverip}:/fitImage;
+@@ -67,3 +67,10 @@ ramboot= wget ${loadaddr} ${serverip}:/fitImage;
  	run ramargs;
  	bootm ${loadaddr}
  #endif
++
++#if defined(USE_USB)
++usbargs=setenv bootargs root=/dev/sda2 rw rootfstype=ext4 rootwait ${adi_bootargs}
++usbboot=usb start;
++	ext4load usb 0:1 ${loadaddr} /fitImage; run usbargs;
++	bootm ${loadaddr}
++#endif
 -- 
 2.34.1
 
