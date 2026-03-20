@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6523D1099B37
-	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 20:55:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF7111099B37
+	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 20:56:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 105CD84132;
+	by phobos.denx.de (Postfix) with ESMTP id 5B8FD8413A;
 	Fri, 20 Mar 2026 21:53:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a+GB3dJK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eOLGUXvE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FB8984129; Fri, 20 Mar 2026 21:53:50 +0100 (CET)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
+ id A48FE84082; Fri, 20 Mar 2026 21:53:51 +0100 (CET)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F5CD8394E
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 21:53:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 815928410D
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 21:53:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-679b072ed3aso509464eaf.1
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 13:53:47 -0700 (PDT)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7d75ed779bfso1862854a34.2
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 13:53:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774040027; x=1774644827; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1774040028; x=1774644828; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=RWstvQJOWRG1EulCKHbKvK2yFlCD74MRGA+CfuXRmxU=;
- b=a+GB3dJKAN1Ei1IGxjRTYrvWfIwkndt59m3giL4TTxbDNvbz+kGEkM6Va3L6LdmfJ4
- bi1f1dOGv1/NMpVED3Fp+eWtXNH84UH8P4R78DX5F+i30W73eaQb46LNRrvGH7W26Sg/
- 7HJ3xiiKEC7gvHJqsFRMYqnkTKAckqzQfzj+M=
+ bh=48qAtqSUoNnZGK5UW5Cs8pwJ+KePIL1y6v64xjcsiws=;
+ b=eOLGUXvEtywZ0K7gAidjfXjedD7fThSiTRKSSL8wO2TUxnLypmy1px789DD9F7aGXr
+ /UFgOrxuOZ3u/On+XnK4D2e8DDEQjIh9fSkThlOYWM5sszb1JBnubzKsJ2h+teA1e2NF
+ RQfNjHVY8ZriNUhDluCO0vHfMV7qnKIgtz2b4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774040027; x=1774644827;
+ d=1e100.net; s=20251104; t=1774040028; x=1774644828;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=RWstvQJOWRG1EulCKHbKvK2yFlCD74MRGA+CfuXRmxU=;
- b=dU/OHWgS2dx4Hqp7upBM5FX9wKb6B3oIU3kKh6U2d8+tmY+q534HqU2F0LkJqMVlqF
- XimeF6IAyumJgFhNZqQqylZh4LmAuSZzFN4RuJHNwLjhr8mAy/gdJlRP9x07nt87lXuv
- 7UNj7i1q+LeuDmfbx6iIWy1B+Pg0E/PHcemB9vLr7W+5SH58GWnchL/c733thZQMFFg5
- 0pkqTWSbXeqfEhw5X81NVRwTqcSnjT8AnVAcwQi34n4WIyF4ShddwbyLej3zpAw8pNc/
- ifvZT1F7ngsB9+BvaxI5dDPS4r99ceBKOJXq7+4OnQDiIpxF2X3/hbNrGcFsNsfu/g7y
- pZVA==
-X-Gm-Message-State: AOJu0Yz1StqLp21A0dZdAEPG/yepupjuavvEOuf/Vo6m7xAkjdY729xA
- IbD8GPRPZ5aj8wyIHCen+kdm3TUViHnwcVAytK/ASvLq8aDfuHzeXnPstMAuBmNF38YxOSkBLRz
- z/os5aaQ=
-X-Gm-Gg: ATEYQzzrD/1ry4AA8VZNIarOfAbTWQ50VdzwCUGpXMezdx4ATQzY2um3JZNX8GuwYUm
- dazWQOkpcFpWY7wNShKpE5IjGnbD3IJ1NpMMZ3sDU64vnc/5JZVG2UZ6umzLHpLFVsSf8QATSDv
- AFQ9mHIAa4LZAPIAjX4pWJDschywrfU6ZmQ4n9wyeJc6fxKQOxHPPhKtKXmmycdOEVzxf+OFemo
- vNmlmz1uF1MNzoGgbrf00uNOOqs3lshtY8Hh2PGai/X3PclBAT6tccKYxw/799m0vXRj8NS7CTu
- VZgm9DVJNGQGnC1QAhwVctDID3Wrh5p5H+rGyNyPnRPhJlqPsC1CrY26HQteD/DOUXFucLHRdQd
- sZGVT1NYBLtD/smWtfi5uGplrR6GNcT58QiorKaEhytI7TRN3cvvFyfKJ11tE9ie17C11/buiQe
- b1KaAwiaULGbfm8qjM2QT+fbCLQTtd9MEkm/4F4DHnVJrhPUv/dr81SKhm+1VtTxyxNA+6K05H2
- KaKP1/i7oS2fgqknX/QIntQz8CGZtJRhcsky6nndD0mHX0VUujsEQyHuXissQ==
-X-Received: by 2002:a05:6820:1b0b:b0:677:48f4:3c66 with SMTP id
- 006d021491bc7-67c22ff695fmr3063022eaf.67.1774040026725; 
- Fri, 20 Mar 2026 13:53:46 -0700 (PDT)
+ bh=48qAtqSUoNnZGK5UW5Cs8pwJ+KePIL1y6v64xjcsiws=;
+ b=EoowIoobwLRajxfydooZeX9DQvqVVxpNSAOqrKEh2Mzps2lOXz9ln6teIKtmLEUQRQ
+ sFI7W3R1n6pTM89U+3y0l1LvvhtFELhuzCJa49UgRToVG5+/d4M+g7oTrR+lyVRLiHmp
+ TKaP5kVf1KGx7J0SjZJRi3lLISf4r8Jx4kXCysaQ5MFS5uU0RgAkKMOHMqcZ2Aj67JMv
+ nVve6lgFLTjbi+FTLx6J9BBwl2XXuXpMFzC1PN5URreZwblajIdihRFTJfVuyBCC4zx1
+ /Wcepvme3BDEY1QhaOV9LI9dAnzob7+EZ5r7M5g4SlLWLkhAkzQuV9CTNlkaVQwxkLiN
+ tT0w==
+X-Gm-Message-State: AOJu0YwKzKFDKx/jjfeqVYVbFM8YB9g/+Q+CU/ZGAdL0MwWRrYSh/tld
+ rLDVkwPxj6HoRllwsWnMY3zVUZDWPJWLUOE95TlvQ1uG6Wge4xIJMw11ALOkYjCiSNjrBamBiKE
+ f3evfolo=
+X-Gm-Gg: ATEYQzwz9HCCSpvMLsU0JXUpci0H9b/Lvtx4+oNr4HDTMDigJ6HAk8LrXIoUqFT9gh7
+ +fsjLat2p2j3C81/LqnVTURK+B1P4kW5V92AiQWTaMhazD2D0xl1GpUdqzULqU+M8iqZKPTLrdN
+ ZXMensSNgZgNAOcZ6z1moQSQwX1/Xglvbqw8ThtWnf4aq9mpASzOsYS05S9N7D55zRRTmMp8OYx
+ efSzozzBpDJx2Iv4UzuN8oJTReZ5Epj26Iz3nx01kyt6DzJe6BxKTYfnhbgVG8gbYHJYnMIgIsv
+ Cg9gJSNe8qiINRsVJhPjKq7zefWVfJ8jXc89bXcbdGNXi+L9Gi31655Zgr65Ffy21jujZeRUGdf
+ 2VzulkWbSOi89E+4EKpToxkBPyTcdIlZ47xPhacsx5A8dESeE7El23qHuf5DYhmAHe6lF8RwUep
+ WYo0ihC7g/QcVo6cHLbJ7AxiOaZUFJX45HZufcxo7MBXkVBCj3C5SU1qGzdRPCYXbkKi+4JVKxg
+ Qcn0XFB8OZ2CUbd1c6nC1HhLXRG4/anE7Us90SZKDN2jnmfTMI=
+X-Received: by 2002:a05:6830:6f83:b0:7d7:cc53:c457 with SMTP id
+ 46e09a7af769-7d7eafa6482mr3003771a34.17.1774040028265; 
+ Fri, 20 Mar 2026 13:53:48 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-67c253fceddsm1881456eaf.15.2026.03.20.13.53.46
+ 46e09a7af769-7d7eac1747csm3052081a34.8.2026.03.20.13.53.47
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Mar 2026 13:53:46 -0700 (PDT)
+ Fri, 20 Mar 2026 13:53:47 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] cmd: Add missing dependency to CMD_PMC
-Date: Fri, 20 Mar 2026 14:53:45 -0600
-Message-ID: <20260320205345.3789046-1-trini@konsulko.com>
+Subject: [PATCH] clk: Add missing dependency for SANDBOX_CLK_CCF
+Date: Fri, 20 Mar 2026 14:53:46 -0600
+Message-ID: <20260320205347.3789062-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -93,25 +93,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We cannot build CMD_PMC without ACPI_PMC, so add that as a dependency.
+In order to build SANDBOX_CLK_CCF we need for CLK_CCF to be enabled, add
+that as a select similar to other drivers.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- cmd/Kconfig | 1 +
+ drivers/clk/Kconfig | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index e96b76cc8a86..bf47b440756c 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -223,6 +223,7 @@ config CMD_LICENSE
- 
- config CMD_PMC
- 	bool "pmc"
-+	depends on ACPI_PMC
+diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+index c88931c8ec4d..c2da7b3938b6 100644
+--- a/drivers/clk/Kconfig
++++ b/drivers/clk/Kconfig
+@@ -185,6 +185,7 @@ config SANDBOX_CLK_CCF
+ 	bool "Sandbox Common Clock Framework [CCF] support"
+ 	depends on SANDBOX
+ 	select CLK_CCF
++	select CLK_COMPOSITE_CCF
  	help
- 	  Provides access to the Intel Power-Management Controller (PMC) so
- 	  that its state can be examined. This does not currently support
+ 	  Enable this option if you want to test the Linux kernel's Common
+ 	  Clock Framework [CCF] code in U-Boot's Sandbox clock driver.
 -- 
 2.43.0
 
