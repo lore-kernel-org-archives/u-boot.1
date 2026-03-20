@@ -4,81 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 764831098787
-	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 14:13:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A61461098792
+	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 14:35:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB2A783CF3;
-	Fri, 20 Mar 2026 15:13:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E69B283FED;
+	Fri, 20 Mar 2026 15:35:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gWi8zY2e";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JCB1OVS5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51A5C83CF5; Fri, 20 Mar 2026 15:13:15 +0100 (CET)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id 4A88A83FF9; Fri, 20 Mar 2026 15:35:47 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15DE783CEA
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 15:13:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DE4683FC5
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 15:35:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-4648447e29bso214940b6e.0
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 07:13:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=jbx6244@gmail.com
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-6634197cd98so217645a12.0
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 07:35:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774015992; x=1774620792; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ckPL+cB0nqQZORWeSM+yG7mfoApFI2kETR938X8ks20=;
- b=gWi8zY2emfvmtVHvid+SF8AQxSVCb3cEDrW7CFhFeXHz3gdt//Xa6l+TGk5u0DQ+cJ
- fsfBI82lz+iSGeEM2hErCaIobwZXC2YCRZKOmJMcnu+NN4T31Rt8ab5kbYP+N2LR6Pum
- SVScYYb5Y08e4e0fDIBXH3MGXpRu3I/2Xri/0=
+ d=gmail.com; s=20230601; t=1774017345; x=1774622145; darn=lists.denx.de;
+ h=content-transfer-encoding:content-language:cc:to:subject:from
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=N22LYZ+yto0xXnQu6D7FeAryH9ddGoaU1033Y3MB9Es=;
+ b=JCB1OVS5j2R9KnVzb82oCOOqn/NV40Yli9bgQonNAnzi2J7FwWTTlEunSGfnSFCqkQ
+ edVOx2DoqYGR+5UtJLoSapPqJIH3FYeP9+yxvSBK1B/pS9LHB1fDYHtr78nm7qgQLRwy
+ ZycUArMY88plfbZ+uEv3jjQ5wGy7BOvm4TFyKiPUM/bAhmCcbA4Sed+TiTeV9En1PIGk
+ gvC8e7S4V77Kdzg2LavwT9NwcpcUBdxDa/p9BCmFGgiBBUCtMjmsvMO13aFtOJNmzz4t
+ e0eBX/MZ/YV6CW957Llf5J+kkQdxT92c5OgHpWC3bOrtn8RDS/inPTufAiGoda1rIkL6
+ ao6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774015992; x=1774620792;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=ckPL+cB0nqQZORWeSM+yG7mfoApFI2kETR938X8ks20=;
- b=EdD3B1dy4B6kvCPn4hm5Wq4xi8aung4w6Bfgr61w1r9BVuYOy1lvUwpWI2i6q4rYPT
- 66DxMImQ61whqRlaLPRz59B0fYmkNibzVGkNXp6kk9OMmfUAXNHTZt5CeuYlSr7fv77r
- fRl5OPO5yM2DmjD6MXe3EQlyH3Ie9No0H7CISjVtr2c4EMbbeLBgdGPHdTBi7RsDnDzQ
- py1T3U5QYRQ4h1Q+bY2L/8wYuGQkDhhIXLLHEYF48LLwPutwVCHuMVH3yCdy31gAp8yk
- LcufUloqJ2gtr+87T+AbX33N08FNIbn4H59xQXK9NUb1XjYRMolJc7pdj/EUq1fHsLXW
- IKEQ==
-X-Gm-Message-State: AOJu0YxX5gp4XM7/Dn9d0a2fiVi3ivSrrPsj4CNnNPnNWyQ39w8jm1Xg
- Lv1sezTChaLN0ijWUL3biRfX4H1QVQSL3L4nt5CMkpjH7SnLEaHEzNHnGpZJCDfWDgEtQHQpWWe
- V936EpAw=
-X-Gm-Gg: ATEYQzwMtzEiRj8/IrrbXyx6BWOBX+srCCamjvu6dfme5Cv1PZBVz0Zj3JkHR419gV8
- mFp3+2d8cYkbaxP20BIXM0jA/KcyasVDYIu9hvmYgkDOJeYZMh2de0oz+iHmQwupb9Z8iDWYJH4
- fxM2i03YiPbwldGFHfQBdjUFavhhdMmq6/f5/LIY/b2oUgvDuzOxB9d1lAsEsnL2I8sZqOoNNPB
- AKKlmvGoWe3eD4V/npCK56Rrzo4W81P/Wov5YZMp1ytSZeL8TXQTZCf+ev3mWO5kx3euHgxVytB
- 9hwPcYsnq1UC6c3TD8iz67JXhilkhflQ5Tet3zQi3Zgqaxn+weMszl/sJfDClWQbe31TFIsC24B
- qC0WsuwmT1XKPHSZP2dtOgfH2GqGqtzkYWAhsoVmTICZFTucqrAK8ka7KxcdL7BPhkqOrZjoKpg
- war45695abYljkOK+h8qBhjAiTPp8EiTX9V2YmFTypvEnQ0SSVI5V8efYh2AUSqgEIrT7Nuk3Xe
- U0EpenbX8uGB/+rVipDJpLeOu37xyGCUaspxPV3en5Ng9jD/Rw=
-X-Received: by 2002:a05:6808:1390:b0:467:25da:d44a with SMTP id
- 5614622812f47-467e5fd8790mr1685837b6e.54.1774015991655; 
- Fri, 20 Mar 2026 07:13:11 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-467e7efa5e2sm1372113b6e.14.2026.03.20.07.13.10
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Mar 2026 07:13:10 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH v2] sandbox: Add missing select's to the architecture symbol
-Date: Fri, 20 Mar 2026 08:13:09 -0600
-Message-ID: <20260320141309.3541047-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260317012426.4162458-1-trini@konsulko.com>
-References: <20260317012426.4162458-1-trini@konsulko.com>
+ d=1e100.net; s=20251104; t=1774017345; x=1774622145;
+ h=content-transfer-encoding:content-language:cc:to:subject:from
+ :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=N22LYZ+yto0xXnQu6D7FeAryH9ddGoaU1033Y3MB9Es=;
+ b=rrwFJw7ATllXUkq8jiJ9y8J8AFXIAOVNH4CMzFniSVWNMIKVfe4XX30t5Ujq/esxVQ
+ luBOPBuWO0cKaaMqBLTQf50HpQ7FgtNEurdXNzWGY+zjFvjOUYYrigUNEwtFGWliKuYI
+ J5dxW0mig6SZLPLDM7IR3CQ7Yx3VTcnTWnQB3qGGXmNssCwQgmxMG+BfP4QIvojY6wXy
+ vrFvSfsgZLUYOXjV4FUBjvK9Y8Rk95PoQkQ+mZqjdyC28PywZwbqvh6Er3ckc3GGmdsd
+ k9zDKJkZrJN5IFFHmpG4nWJJlSr97ybdKjoselYAnZvHCiXQbHFxrbcc8aQDA9yrpG2u
+ dC8A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVqag6UXj8oE9yQsNSNBMgR9ThQ0Tn/eVeXIzTHlBhVk0MqS+j8lmlVY701U3sEvbkARAG5msM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw8jg54Dgg7bCozU3CrZGtnR0RzlmYg+ls/eY3O9A2qlXY16kGO
+ PNH60uQfjJYn394tGTyQdBIZwOhyyACn/uFxuT+Uenzi2r0epit2G2XCh6TT5Q==
+X-Gm-Gg: ATEYQzzYiADXyycFUAx8HWqeZaTvhr0MvBLsbO8TJLBfn/hZ1YYhxhFHOKjrp3W30yA
+ EafPnt50WHPZr9QlgR+6KguIFVcPWW1nsz4SRWkrw2uoNLj+ommbqb+23TWqVKXkkCGrpIdmlGA
+ srkCCPfRidtyWR1cvtToV6MKQqK7ZXVr/4DyUDITifX8DD6h8Zx9W2u+vFIp9qGoB0gzcN0XV6w
+ dZKes5VktTUMbAj8cnjatU2MqJdZlMMzH+I5mIkhDNcFULmRKIGEtiIfVtL64gxqO681zkb+gTu
+ Szbqk+gHJECIsMqq1DdhdUB/4ThA3RHPT6LEkLeS5A9U5W2phBhhAYLNJHj40zSNnrsy5yr9cng
+ IC8LPQ7FRpTlOgNHHIzyi3uHsevmMFXlpqiawIAB3C03eEiK7z16eEIZMrctt1qnjS3enJNfEqj
+ NwxfHxCn6WVFg3g9WyDclAezpbpxYtXfe1N+rbskhng6GJm6YprQdwIpnTfCxnUw==
+X-Received: by 2002:a17:907:868b:b0:b97:d398:7f41 with SMTP id
+ a640c23a62f3a-b982f0b3214mr102281166b.2.1774017344395; 
+ Fri, 20 Mar 2026 07:35:44 -0700 (PDT)
+Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
+ ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b9832f43a65sm168059566b.7.2026.03.20.07.35.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 20 Mar 2026 07:35:43 -0700 (PDT)
+Message-ID: <0ca86716-5e46-4f16-a579-d04dbeaa15d3@gmail.com>
+Date: Fri, 20 Mar 2026 15:35:43 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+From: Johan Jonker <jbx6244@gmail.com>
+Subject: [PATCH v1 0/3] rockchip: Switch remaining boards to upstream
+ devicetree
+To: andy.yan@rock-chips.com
+Cc: philipp.tomsich@vrull.eu, sjg@chromium.org, trini@konsulko.com,
+ afaerber@suse.de, u-boot@lists.denx.de
+Content-Language: en-US, ar-EG
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,71 +102,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As exposed by "make randconfig", we have an issues around a number of
-symbols that we select without making sure to also select their
-prerequisite symbols. Add these missing symbols.
+Switch remaining boards to upstream devicetree.
+Remove rk3368-sheep board due to lack of upstream support.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Changes in v2:
-- Add even more missing symbols
----
- arch/Kconfig | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
+Johan Jonker (3):
+  rockchip: Switch rk3128 boards to upstream devicetree
+  rockchip: Switch rk3229 boards to upstream devicetree
+  rockchip: Switch rk3368 boards to upstream devicetree
 
-diff --git a/arch/Kconfig b/arch/Kconfig
-index 9c48510a0646..4c4c070df87b 100644
---- a/arch/Kconfig
-+++ b/arch/Kconfig
-@@ -190,33 +190,47 @@ config SANDBOX
- 	select HAVE_SETJMP
- 	select HAVE_INITJMP
- 	select ARCH_SUPPORTS_LTO
-+	select AXI
- 	select BOARD_LATE_INIT
- 	select BZIP2
- 	select CMD_POWEROFF if CMDLINE
- 	select DM
- 	select DM_EVENT
- 	select DM_FUZZING_ENGINE
--	select DM_GPIO if GPIO
-+	select DM_GPIO
- 	select DM_I2C
- 	select DM_KEYBOARD
-+	select DM_MAILBOX
-+	select DM_RESET
- 	select DM_SERIAL
- 	select DM_SPI
- 	select DM_SPI_FLASH
-+	select GPIO
- 	select GZIP_COMPRESSED
-+	select I2C
- 	select LZO
- 	select MMC
- 	select MTD
- 	select OF_BOARD_SETUP
-+	select OF_CONTROL
- 	select PCI_ENDPOINT
-+	select SANDBOX_RESET
- 	select SPI
-+	select SERIAL
- 	select SUPPORT_OF_CONTROL
- 	select SUPPORT_BIG_ENDIAN
- 	select SUPPORT_LITTLE_ENDIAN
-+	select SYSRESET
-+	select SYSRESET_CMD_RESET
- 	select SYSRESET_CMD_POWEROFF if SYSRESET && CMD_POWEROFF
- 	select SYS_CACHE_SHIFT_4
- 	select IRQ
- 	select SUPPORT_EXTENSION_SCAN if CMDLINE
- 	select SUPPORT_ACPI
-+	select TIMER
-+	select SPL_TIMER if SPL
-+	select TPL_TIMER if TPL
-+	select VPL_TIMER if VPL
- 	imply BITREVERSE
- 	select BLOBLIST
- 	imply LTO
--- 
-2.43.0
+ arch/arm/dts/Makefile                   |   11 -
+ arch/arm/dts/rk3128-evb.dts             |   99 --
+ arch/arm/dts/rk3128.dtsi                |  780 ---------------
+ arch/arm/dts/rk3229-evb.dts             |  256 -----
+ arch/arm/dts/rk3229.dtsi                |   52 -
+ arch/arm/dts/rk3368-geekbox.dts         |  281 ------
+ arch/arm/dts/rk3368-px5-evb.dts         |  277 ------
+ arch/arm/dts/rk3368-sheep-u-boot.dtsi   |   35 -
+ arch/arm/dts/rk3368-sheep.dts           |  286 ------
+ arch/arm/dts/rk3368-u-boot.dtsi         |    4 +
+ arch/arm/dts/rk3368.dtsi                | 1218 -----------------------
+ arch/arm/mach-rockchip/Kconfig          |    3 +
+ arch/arm/mach-rockchip/rk3368/Kconfig   |    7 -
+ board/rockchip/evb_rk3229/MAINTAINERS   |    1 -
+ board/rockchip/sheep_rk3368/Kconfig     |   12 -
+ board/rockchip/sheep_rk3368/MAINTAINERS |    6 -
+ board/rockchip/sheep_rk3368/README      |   44 -
+ configs/evb-px5_defconfig               |    2 +-
+ configs/evb-rk3128_defconfig            |    4 +-
+ configs/evb-rk3229_defconfig            |    4 +-
+ configs/geekbox_defconfig               |    2 +-
+ configs/sheep-rk3368_defconfig          |   32 -
+ doc/board/rockchip/rockchip.rst         |    1 -
+ include/configs/sheep_rk3368.h          |   15 -
+ include/dt-bindings/clock/rk3128-cru.h  |  273 -----
+ include/dt-bindings/clock/rk3228-cru.h  |  287 ------
+ 26 files changed, 13 insertions(+), 3979 deletions(-)
+ delete mode 100644 arch/arm/dts/rk3128-evb.dts
+ delete mode 100644 arch/arm/dts/rk3128.dtsi
+ delete mode 100644 arch/arm/dts/rk3229-evb.dts
+ delete mode 100644 arch/arm/dts/rk3229.dtsi
+ delete mode 100644 arch/arm/dts/rk3368-geekbox.dts
+ delete mode 100644 arch/arm/dts/rk3368-px5-evb.dts
+ delete mode 100644 arch/arm/dts/rk3368-sheep-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/rk3368-sheep.dts
+ delete mode 100644 arch/arm/dts/rk3368.dtsi
+ delete mode 100644 board/rockchip/sheep_rk3368/Kconfig
+ delete mode 100644 board/rockchip/sheep_rk3368/MAINTAINERS
+ delete mode 100644 board/rockchip/sheep_rk3368/README
+ delete mode 100644 configs/sheep-rk3368_defconfig
+ delete mode 100644 include/configs/sheep_rk3368.h
+ delete mode 100644 include/dt-bindings/clock/rk3128-cru.h
+ delete mode 100644 include/dt-bindings/clock/rk3228-cru.h
+
+--
+2.39.5
 
