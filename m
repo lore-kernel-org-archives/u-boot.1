@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7282F1099B37
-	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 20:54:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F021F1099B37
+	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 20:54:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA0E583FF9;
-	Fri, 20 Mar 2026 21:53:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2AC9984088;
+	Fri, 20 Mar 2026 21:53:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZaTaWzJI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jdtqT2gh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4770A8407E; Fri, 20 Mar 2026 21:53:39 +0100 (CET)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 920868394E; Fri, 20 Mar 2026 21:53:39 +0100 (CET)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0EA58394E
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 21:53:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3657983FFF
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 21:53:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7d1872504cbso2150215a34.0
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 13:53:35 -0700 (PDT)
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-67bac077116so364876eaf.1
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 13:53:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774040014; x=1774644814; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1774040016; x=1774644816; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=Ej1CGRDVTSsd5b2KAAiUdMB3oh1XzfjDdelkwaJiizU=;
- b=ZaTaWzJIX63syQF0LQ4n2vcfcFh5wNWmEXmfimLwf39H6OJ99kTLIrCAmKeYYbQ6SG
- LxqNVMeh/dcLMIS3nyNl61ZLdjxOgUgaLn7iI9SAZfk1Q9CCmbQAgSenKpQjarGzrBya
- CsHXW0FlUXNOzT14+wiTiIKsgiQSfzuTQkMOs=
+ bh=Y9eNxSi1oZaYIn0l5y4FIjirlf3yMQBpnRKNMiVXe60=;
+ b=jdtqT2ghWeng5YDtHDxBwU4KKVYhy2tflOHeMEAs2WzRZ/uqwsfskHcTP4KCzgnYd5
+ e9Fw+7blxiT3LpTBrk36bzYMPZmcdcJEw9y+dw9dr6LWKksy/CoBDebZmt3vEhceifi9
+ azPci67YE/3J4+iG0h6mjvzLfiszzoioNxJ98=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774040014; x=1774644814;
+ d=1e100.net; s=20251104; t=1774040016; x=1774644816;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Ej1CGRDVTSsd5b2KAAiUdMB3oh1XzfjDdelkwaJiizU=;
- b=mNJ/TVarEAv205wThr6HgNBqcD19WDIt57+DlZUkyYgb4hf1l43FfhSgZ+Av9XFzWl
- T8h7DwRUeVCn+SFNYuOrsHNNey+XDsp+oKNeLUSW+jZt6TXXgY35m8zGNmHTTAVby2W6
- ZBCDnDYoPakbsMjjhgfpufztSkDgp1vJhfpEtpqpSKByLQca70/aG2ZiymqI/G3/hpiK
- YU1oEmMvROYhVHTpEru2TVo1wu52rZLKDOy3oP7QPP+r0JUr6+d561lgp8S1NAOHZaZS
- bl7UgbpsgUG6mddwJjwVSfKohwGX6Unoa2oqMUHVwOvNS/CsNYWLBlgo8HKTY0wp1Zhk
- SBrw==
-X-Gm-Message-State: AOJu0YzOmWFWWgc38rfXWfPiB07ssv0DB8z214UVc8XHSK+O3m1WBQ/P
- QfTfjpq16bwQbk4jfpe9D4j8hBb42tnLwemD+cg5V/eFWHn4oPVglmEVs5ilblZa8UPIvpv9H1p
- ZX0Z74Ro=
-X-Gm-Gg: ATEYQzy9YLtlJ5wcmcmkHkUoQ1dLQKk2hvRR0dhxOtvqlhAL33ZnkgBGD6O/d0Lc/wU
- 0hwyTHDq930bKf2SqtqLleoLeTgUkQH22CZPTHGmJkHzY7D8aktWHVUm9zFGTPBqmQGgC/fQYFl
- IjjatCCVqWp22lMmnII5gbV2khasD6NswLHfeXho98RISlsizfSRuKks/G9gKGsg2C2FDtFTwf7
- WMopzCe3wNT7PKMfMqTKSHB7UkS+bh9h/cYxQHEKnPcN36RYKCie6zjWkQyr4zleewXyH458sxk
- fEQJDQ/BL3Tx2tO3R/ML5dv0XJs9aikiJL8rW+HCeVwUyEgyutscYSRQg22/otxtzO1WIc7Nvno
- BEv+bX28rkPTiuSysQ9SA2aQ6ZCKL3yYiLlJYOWdvRw3GxCuFhR07lFIr3+0voEjhcmCC6oG5Hm
- MVhcI7K4OxjYWsBSjhCqcvwc93jYW1FeO1h5IG+TxoGStqHqG2MRlk+NfPjODDKOaIkA1qrlVTD
- jD9Hhot60FgdRh2ofF/W+efHtQGmn5Fx6AizcNs+KWzZ6ULkDs=
-X-Received: by 2002:a05:6830:3690:b0:7d7:ddb9:670c with SMTP id
- 46e09a7af769-7d7eaad0afdmr2750251a34.9.1774040014240; 
- Fri, 20 Mar 2026 13:53:34 -0700 (PDT)
+ bh=Y9eNxSi1oZaYIn0l5y4FIjirlf3yMQBpnRKNMiVXe60=;
+ b=jyJ3XkqfI1+HviEZ3NB9r+3mnkkFISZEcr8rxlvam880eXKBYYUJJ0N4p4heTNEqYo
+ ewJfSzHED1Muj6E5vaXsRofGpBd6DpWwZy574o5mdEgzk7HsM0jpaDAZ54h0hKkU1Ams
+ jGM2jqmEkUzImarmzmLe92D4Y6jFXXhCoFs6A9QzroJjQ45t81k9eKGccpfm6pKlNqFU
+ dAVbUyH8gTz+g3AgXbTAch2tfclbBSEcp5XieWF6c/CTRwyE33sr9KwP/LW3CZubOtad
+ AJEzjgc4oVAC2dp3Q3h4FBF70Do5a84+kz4uUi4kaX+SWNVjtEEvZRs9cwiKp1/sBaIW
+ rbRA==
+X-Gm-Message-State: AOJu0Yy2RaBdBRN1PK53wnPOWhvyPS41yqcd+zt8GdFfXHxYU7DFs/HA
+ Cn+EfP1OaXIPVVlxicu+d4zvGUTnbOQu59K7CuKpcQUQhtgZHcnOuZ4G/ORdnajTRGj3yRe0//3
+ Lzrr4XV8=
+X-Gm-Gg: ATEYQzy7KFrR3laoCEvwK8pesNcY9i5YGy4BkSoi2jhA0ysQc+llTei8Q4HeuQUf216
+ tBDAELmrR+0X4F4uoY5tzxXS50bI+VYfHGLnffsNXFMcPDl+Basm0sV0dkQPcWwQgdy0XBC5eBg
+ 3pR1zKMvByUcG3Wu/ONBQazr5+dj6ed79rIaxzE79zuUtV+C9Zbo8gumWaz4aNk4J4KqmWv9B3U
+ ytRD2DEJDKQNP7HdZbum5BkuR8uJkl+wZ7inKMMXmT4rVu7mCFLGYeS0jP1SXw9Plb3ltZbIk/m
+ ufhE69/OSca8iiTBommRNDDIdh1eQebuDNwGAgdm5sYFxzcgB41XNePNYO7eGxL679GCfShDJMw
+ 8MYoDzpVInRZvGSZhIbP1GqpsYxVa3c/X6mIq/ldEkNd3VsUZubTYxQMo25vLxf7/5hzC4aF/vB
+ hxF8iP6WQ+bhQyHyIw4evau+QG1VHg1iABNZ999xXzx5W0STLaqdXGx7+FTA9I+kOIyyXLcU6W7
+ A02mWUud9jDPxjWeQYYJis0g7wjsEl1bdF7rou40z7K4zA/9Gg=
+X-Received: by 2002:a05:6820:998:b0:67b:bc25:267e with SMTP id
+ 006d021491bc7-67c22ed154emr2865451eaf.30.1774040015744; 
+ Fri, 20 Mar 2026 13:53:35 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7eac2dffbsm3036930a34.10.2026.03.20.13.53.33
+ 006d021491bc7-67c253fceddsm1881215eaf.15.2026.03.20.13.53.35
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Mar 2026 13:53:33 -0700 (PDT)
+ Fri, 20 Mar 2026 13:53:35 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] rtc: ds1337: Remove various legacy code and update
- dependencies
-Date: Fri, 20 Mar 2026 14:53:32 -0600
-Message-ID: <20260320205332.3788725-1-trini@konsulko.com>
+Subject: [PATCH] rtc: Update Kconfig dependencies
+Date: Fri, 20 Mar 2026 14:53:34 -0600
+Message-ID: <20260320205334.3788743-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -94,229 +93,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At this point there are no users of this driver which do not enable
-DM_RTC, so remove the legacy code and express the depdendency in
-Kconfig. We can further remove code related to RTC chips / options that
-are neither available in Kconfig nor set by any platforms.
+Update the dependencies for RTC drivers which did not express a
+requirement on DM_RTC, or in some cases on DM_RTC being disabled. In a
+few cases, when DM_RTC is disabled we also require DM_I2C to also be
+disabled or for POWER_LEGACY to be enabled.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/rtc/Kconfig  |   1 +
- drivers/rtc/ds1337.c | 156 +------------------------------------------
- 2 files changed, 2 insertions(+), 155 deletions(-)
+ drivers/rtc/Kconfig | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/rtc/Kconfig b/drivers/rtc/Kconfig
-index cb0a672668ea..648948cc735e 100644
+index 648948cc735e..65d9bf533cb1 100644
 --- a/drivers/rtc/Kconfig
 +++ b/drivers/rtc/Kconfig
-@@ -73,6 +73,7 @@ config RTC_DS1307
+@@ -84,7 +84,7 @@ config RTC_DS1337_NOOSC
  
- config RTC_DS1337
- 	bool "Enable DS1337 driver"
+ config RTC_DS1374
+ 	bool "Enable DS1374 driver"
+-	depends on !DM_RTC
++	depends on !DM_RTC && !DM_I2C
+ 	help
+ 	  Support for Dallas Semiconductor (now Maxim) DS1374 and compatible
+ 	  Real Time Clock devices.
+@@ -166,12 +166,14 @@ config RTC_PCF85063
+ 
+ config RTC_PCF8563
+ 	bool "Philips PCF8563"
 +	depends on DM_RTC
  	help
- 	  Support for Dallas Semiconductor (now Maxim) DS1337/8/9 compatible
- 	  Real Time Clock devices.
-diff --git a/drivers/rtc/ds1337.c b/drivers/rtc/ds1337.c
-index 77544298d8a8..e9db6220c55d 100644
---- a/drivers/rtc/ds1337.c
-+++ b/drivers/rtc/ds1337.c
-@@ -21,7 +21,6 @@
- /*
-  * RTC register addresses
-  */
--#if defined CONFIG_RTC_DS1337
- #define RTC_SEC_REG_ADDR	0x0
- #define RTC_MIN_REG_ADDR	0x1
- #define RTC_HR_REG_ADDR		0x2
-@@ -32,18 +31,6 @@
- #define RTC_CTL_REG_ADDR	0x0e
- #define RTC_STAT_REG_ADDR	0x0f
- #define RTC_TC_REG_ADDR		0x10
--#elif defined CONFIG_RTC_DS1388
--#define RTC_SEC_REG_ADDR	0x1
--#define RTC_MIN_REG_ADDR	0x2
--#define RTC_HR_REG_ADDR		0x3
--#define RTC_DAY_REG_ADDR	0x4
--#define RTC_DATE_REG_ADDR	0x5
--#define RTC_MON_REG_ADDR	0x6
--#define RTC_YR_REG_ADDR		0x7
--#define RTC_CTL_REG_ADDR	0x0c
--#define RTC_STAT_REG_ADDR	0x0b
--#define RTC_TC_REG_ADDR		0x0a
--#endif
+ 	  If you say yes here you get support for the Philips PCF8563 RTC
+ 	  and compatible chips.
  
- /*
-  * RTC control register bits
-@@ -62,132 +49,6 @@
- #define RTC_STAT_BIT_A2F	0x2	/* Alarm 2 flag			*/
- #define RTC_STAT_BIT_OSF	0x80	/* Oscillator stop flag		*/
+ config RTC_PT7C4338
+ 	bool "Enable Pericom Technology PT7C4338 RTC driver"
++	depends on DM_RTC
  
--#if !CONFIG_IS_ENABLED(DM_RTC)
--static uchar rtc_read (uchar reg);
--static void rtc_write (uchar reg, uchar val);
--
--/*
-- * Get the current time from the RTC
-- */
--int rtc_get (struct rtc_time *tmp)
--{
--	int rel = 0;
--	uchar sec, min, hour, mday, wday, mon_cent, year, control, status;
--
--	control = rtc_read (RTC_CTL_REG_ADDR);
--	status = rtc_read (RTC_STAT_REG_ADDR);
--	sec = rtc_read (RTC_SEC_REG_ADDR);
--	min = rtc_read (RTC_MIN_REG_ADDR);
--	hour = rtc_read (RTC_HR_REG_ADDR);
--	wday = rtc_read (RTC_DAY_REG_ADDR);
--	mday = rtc_read (RTC_DATE_REG_ADDR);
--	mon_cent = rtc_read (RTC_MON_REG_ADDR);
--	year = rtc_read (RTC_YR_REG_ADDR);
--
--	/* No century bit, assume year 2000 */
--#ifdef CONFIG_RTC_DS1388
--	mon_cent |= 0x80;
--#endif
--
--	debug("Get RTC year: %02x mon/cent: %02x mday: %02x wday: %02x "
--		"hr: %02x min: %02x sec: %02x control: %02x status: %02x\n",
--		year, mon_cent, mday, wday, hour, min, sec, control, status);
--
--	if (status & RTC_STAT_BIT_OSF) {
--		printf ("### Warning: RTC oscillator has stopped\n");
--		/* clear the OSF flag */
--		rtc_write (RTC_STAT_REG_ADDR,
--			   rtc_read (RTC_STAT_REG_ADDR) & ~RTC_STAT_BIT_OSF);
--		rel = -1;
--	}
--
--	tmp->tm_sec  = bcd2bin (sec & 0x7F);
--	tmp->tm_min  = bcd2bin (min & 0x7F);
--	tmp->tm_hour = bcd2bin (hour & 0x3F);
--	tmp->tm_mday = bcd2bin (mday & 0x3F);
--	tmp->tm_mon  = bcd2bin (mon_cent & 0x1F);
--	tmp->tm_year = bcd2bin (year) + ((mon_cent & 0x80) ? 2000 : 1900);
--	tmp->tm_wday = bcd2bin ((wday - 1) & 0x07);
--	tmp->tm_yday = 0;
--	tmp->tm_isdst= 0;
--
--	debug("Get DATE: %4d-%02d-%02d (wday=%d)  TIME: %2d:%02d:%02d\n",
--		tmp->tm_year, tmp->tm_mon, tmp->tm_mday, tmp->tm_wday,
--		tmp->tm_hour, tmp->tm_min, tmp->tm_sec);
--
--	return rel;
--}
--
--/*
-- * Set the RTC
-- */
--int rtc_set (struct rtc_time *tmp)
--{
--	uchar century;
--
--	debug("Set DATE: %4d-%02d-%02d (wday=%d)  TIME: %2d:%02d:%02d\n",
--		tmp->tm_year, tmp->tm_mon, tmp->tm_mday, tmp->tm_wday,
--		tmp->tm_hour, tmp->tm_min, tmp->tm_sec);
--
--	rtc_write (RTC_YR_REG_ADDR, bin2bcd (tmp->tm_year % 100));
--
--	century = (tmp->tm_year >= 2000) ? 0x80 : 0;
--	rtc_write (RTC_MON_REG_ADDR, bin2bcd (tmp->tm_mon) | century);
--
--	rtc_write (RTC_DAY_REG_ADDR, bin2bcd (tmp->tm_wday + 1));
--	rtc_write (RTC_DATE_REG_ADDR, bin2bcd (tmp->tm_mday));
--	rtc_write (RTC_HR_REG_ADDR, bin2bcd (tmp->tm_hour));
--	rtc_write (RTC_MIN_REG_ADDR, bin2bcd (tmp->tm_min));
--	rtc_write (RTC_SEC_REG_ADDR, bin2bcd (tmp->tm_sec));
--
--	return 0;
--}
--
--/*
-- * Reset the RTC.  We also enable the oscillator output on the
-- * SQW/INTB* pin and program it for 32,768 Hz output. Note that
-- * according to the datasheet, turning on the square wave output
-- * increases the current drain on the backup battery from about
-- * 600 nA to 2uA. Define CONFIG_RTC_DS1337_NOOSC if you wish to turn
-- * off the OSC output.
-- */
--
--#ifdef CONFIG_RTC_DS1337_NOOSC
-- #define RTC_DS1337_RESET_VAL \
--	(RTC_CTL_BIT_INTCN | RTC_CTL_BIT_RS1 | RTC_CTL_BIT_RS2)
--#else
-- #define RTC_DS1337_RESET_VAL (RTC_CTL_BIT_RS1 | RTC_CTL_BIT_RS2)
--#endif
--void rtc_reset (void)
--{
--#ifdef CONFIG_RTC_DS1337
--	rtc_write (RTC_CTL_REG_ADDR, RTC_DS1337_RESET_VAL);
--#elif defined CONFIG_RTC_DS1388
--	rtc_write(RTC_CTL_REG_ADDR, 0x0); /* hw default */
--#endif
--#ifdef CONFIG_RTC_DS1339_TCR_VAL
--	rtc_write (RTC_TC_REG_ADDR, CONFIG_RTC_DS1339_TCR_VAL);
--#endif
--#ifdef CONFIG_RTC_DS1388_TCR_VAL
--	rtc_write(RTC_TC_REG_ADDR, CONFIG_RTC_DS1388_TCR_VAL);
--#endif
--}
--
--/*
-- * Helper functions
-- */
--
--static
--uchar rtc_read (uchar reg)
--{
--	return (i2c_reg_read (CFG_SYS_I2C_RTC_ADDR, reg));
--}
--
--static void rtc_write (uchar reg, uchar val)
--{
--	i2c_reg_write (CFG_SYS_I2C_RTC_ADDR, reg, val);
--}
--#else
- static uchar rtc_read(struct udevice *dev, uchar reg)
- {
- 	return dm_i2c_reg_read(dev, reg);
-@@ -213,11 +74,6 @@ static int ds1337_rtc_get(struct udevice *dev, struct rtc_time *tmp)
- 	mon_cent = rtc_read(dev, RTC_MON_REG_ADDR);
- 	year = rtc_read(dev, RTC_YR_REG_ADDR);
+ config RTC_RV3028
+ 	bool "Enable RV3028 driver"
+@@ -235,13 +237,14 @@ config RTC_MV
  
--	/* No century bit, assume year 2000 */
--#ifdef CONFIG_RTC_DS1388
--	mon_cent |= 0x80;
--#endif
--
- 	debug("Get RTC year: %02x mon/cent: %02x mday: %02x wday: %02x\n",
- 	      year, mon_cent, mday, wday);
- 	debug("hr: %02x min: %02x sec: %02x control: %02x status: %02x\n",
-@@ -278,17 +134,8 @@ static int ds1337_rtc_set(struct udevice *dev, const struct rtc_time *tmp)
- #endif
- static int ds1337_rtc_reset(struct udevice *dev)
- {
--#ifdef CONFIG_RTC_DS1337
- 	rtc_write(dev, RTC_CTL_REG_ADDR, RTC_DS1337_RESET_VAL);
--#elif defined CONFIG_RTC_DS1388
--	rtc_write(dev, RTC_CTL_REG_ADDR, 0x0); /* hw default */
--#endif
--#ifdef CONFIG_RTC_DS1339_TCR_VAL
--	rtc_write(dev, RTC_TC_REG_ADDR, CONFIG_RTC_DS1339_TCR_VAL);
--#endif
--#ifdef CONFIG_RTC_DS1388_TCR_VAL
--	rtc_write(dev, RTC_TC_REG_ADDR, CONFIG_RTC_DS1388_TCR_VAL);
--#endif
-+
- 	return 0;
- }
+ config RTC_S35392A
+ 	bool "Enable S35392A driver"
++	depends on DM_RTC
+ 	select BITREVERSE
+ 	help
+ 	  Enable s35392a driver which provides rtc get and set function.
  
-@@ -311,4 +158,3 @@ U_BOOT_DRIVER(rtc_ds1337) = {
- 	.of_match = ds1337_rtc_ids,
- 	.ops    = &ds1337_rtc_ops,
- };
--#endif
+ config RTC_MC13XXX
+ 	bool "Enable MC13XXX RTC driver"
+-	depends on !DM_RTC
++	depends on !DM_RTC && POWER_LEGACY
+ 
+ config RTC_MC146818
+ 	bool "Enable MC146818 driver"
+@@ -253,6 +256,7 @@ config RTC_MC146818
+ 
+ config MCFRTC
+ 	bool "Use common CF RTC driver"
++	depends on DM_RTC
+ 	depends on M68K
+ 
+ config SYS_MCFRTC_BASE
+@@ -262,9 +266,11 @@ config SYS_MCFRTC_BASE
+ config RTC_MXS
+ 	bool "Enable i.MXS RTC driver"
+ 	depends on ARCH_MX23 || ARCH_MX28
++	depends on !DM_RTC
+ 
+ config RTC_M41T62
+ 	bool "Enable M41T62 driver"
++	depends on DM_RTC
+ 	help
+ 	  Enable driver for ST's M41T62 compatible RTC devices (like RV-4162).
+ 	  It is a serial (I2C) real-time clock (RTC) with alarm.
+@@ -305,6 +311,7 @@ config RTC_ABX80X
+ config RTC_DAVINCI
+ 	bool "Enable TI OMAP RTC driver"
+ 	depends on ARCH_DAVINCI || ARCH_OMAP2PLUS
++	depends on DM_RTC
+ 	help
+ 	  Say "yes" here to support the on chip real time clock
+ 	  present on TI OMAP1, AM33xx, DA8xx/OMAP-L13x, AM43xx and DRA7xx.
 -- 
 2.43.0
 
