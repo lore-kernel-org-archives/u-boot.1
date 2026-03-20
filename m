@@ -4,132 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BE511098784
-	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 13:41:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C13121098782
+	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 13:53:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 883D383F00;
-	Fri, 20 Mar 2026 14:41:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 3220283FF5;
+	Fri, 20 Mar 2026 14:53:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="swVNAByI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="scHdSs0M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4069883CF5; Fri, 20 Mar 2026 14:41:43 +0100 (CET)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D345E83CF5; Fri, 20 Mar 2026 14:53:16 +0100 (CET)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 177A883CF5
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 14:41:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E80D83F00
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 14:53:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=a0ZbTL9kGMvUG3uQMEq0A0VPyindO5cU3/4P2IvOXzAkNKPzFwwj76uT3Xao9rKnuIlZnMWWnOWpQfE7blR/MSdKiWm+nNyXo+axqZTmrtgQg4EdojNyC0/8AAlTGcsrqzx1Qr79xGDboTIMZ3NtVTHlpEKi3k9Wwqx5z86Ikfb4+IAbHAfFv6fWR9c+8mcP72zO/87GOZQag0oHMCmibZNgl5LsmATjE/djLrEppYe+W1ZWUTDPxDF70geE+L5lUP/E1ZjUwk0ARRiX+tU8bjwSFAdvnpfBW5A9gFdxgOvNoLO/bgO9tB+SZh6V54FjhBPzrHOvqAWixjXyEh6unw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xF8H9VXbo/udC/GpzdNd2GowtIrWltl7l1YVQPep8PU=;
- b=JntI81K6SiwbJjccHjYrdSvQMBzY+H9nERd/IkkTlhcXg2uRGIhhORDzT1emQoKt3KzNVJg6E1EvIaGcUVhR09kHTnRSJtt0I0BALpcsDO9ckzjl0bDzLWYLmdwis7X9khzv0E5e8jv+NUmC0/Pvc2UjwTPkDyLfV8Q6UBlRsY2tYffuaMEVgxFoIOm5ra5wuRUTTOVbLXYUnlLoRWx/+0XbnZ6dzdwSHmx2oGaL12XxdZKOx37zieogp9G78ZaBi2w3Wq/so3jSTe7Kly4EKfqD5gHb6wAdSiD89uL5otP7JxJr2cBrTfPBIRbTul8P9ugF/8lXEZI2bv+SlyDpJw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xF8H9VXbo/udC/GpzdNd2GowtIrWltl7l1YVQPep8PU=;
- b=swVNAByIVq9eIsXUVj87xfobSx9JP/1VWFy8UUWln/2Ebe+E4SJ/tM0ubCdG76skkXIAY+kbdhR3cT9hUo0xP9xefxIxirN0DP/OWKUh2fYm8cVutNeVm2Gh4hDyfPirW2VdLP6jsIeTWpdLE5kgB07HknGTRfjxj52ZW/SDA49OB4N+85ZX15zERjhD6FMp/a1+oK95p6wmYZQRqWF0WKd+coMoUHG9UbEDuxqWmiH4YnJwlxNgJPKfbheEdB3Vqo9yhDujeDWXOZzExDdOKIYYs5y9/tuzGojiu4EpPhM9Uo5jyjjd4EDdi+PafMjaPGeGj2qMui+DjvHxcZtIVw==
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by PA2PR04MB10188.eurprd04.prod.outlook.com (2603:10a6:102:406::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.23; Fri, 20 Mar
- 2026 13:41:34 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::4972:7eaa:b9f6:7b5e%3]) with mapi id 15.20.9723.018; Fri, 20 Mar 2026
- 13:41:34 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Marek Vasut <marex@nabladev.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Sam Protsenko <semen.protsenko@linaro.org>,
- Tom Rini <trini@konsulko.com>, "u-boot@dh-electronics.com"
- <u-boot@dh-electronics.com>
-Subject: RE: [PATCH] board: dhelectronics: imx: Use second Ethernet MAC also
- from fuse
-Thread-Topic: [PATCH] board: dhelectronics: imx: Use second Ethernet MAC also
- from fuse
-Thread-Index: AQHcuFTL3zELcCJKDE60GTSXntN1pLW3bZSw
-Date: Fri, 20 Mar 2026 13:41:34 +0000
-Message-ID: <PAXPR04MB84598FAEE27CECAF44791AAC884CA@PAXPR04MB8459.eurprd04.prod.outlook.com>
-References: <20260320102918.4011-1-cniedermaier@dh-electronics.com>
-In-Reply-To: <20260320102918.4011-1-cniedermaier@dh-electronics.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|PA2PR04MB10188:EE_
-x-ms-office365-filtering-correlation-id: e874c6d9-9680-4d90-1cab-08de8686671b
-x-ms-exchange-sharedmailbox-routingagent-processed: True
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|19092799006|366016|376014|1800799024|56012099003|18002099003|22082099003|38070700021;
-x-microsoft-antispam-message-info: 9FUiQN+3Jh+4qJPJTsRcuWrYsJ7H3bCKFheCAsIAs7hrYmwY/fqXAVyDmvy3Wp2Na+ykaKdCVF25Gw/angf+kpzeUt09zdzAs87TpdmOFoZP3PKlnNx5jE01hJXfHHdCb1yFASmiACzBRmC6h4kyYS0H0EsYfoigFs3R+c8Wp12wOGbCo2o1HFTcsi/kKIoN4szNtAdy5AdHT3OQkkCwnVaf+MSOAxUrSjCTD0eD/BlsQj3ze20Ah0I/6V01mmcAqq4Sv9UxWuylK0yAEtnag2WdPktoxaJggWYG0+WMnt/F3ba+PR0mOa8fBqBbFdPkzRQEpIJBIa6u8hzESDBhsZcYoNIFIbq5DGTC3KwZmq37VYp1u++oIpBiKA0DU//LAAstNr97ZvflBQWDZWh7jVfmpZ2wB9Y86YXwZn1BYF6oSSNWrWTMykp0qqCisadtTtqvzqr1eSe6Xy7Lz+Y47KiJTStNp4Ho2cXjkNvgCc6IqVfC/+vtCsm7FWRMGIW7SX9q8XNQNaBREwsqAQBe6DF6u/TUk6jIJO5XKmNTvvSHszo5r7vFw1MQc7bCHp2vjBnJoCJsJCNwO4UrAT2p0qwnBISB1VD3BsgkLbbYIJRNRdohZdGVGnbAaK01T2ekNVS8zMNmQBzGEgJyrNbaKJrrzjggofbbpSN1mNcJC872RUFmAlXlTlTCIzxEOpz+TGCXuY127mAakU9Lla197g81EhJlpKlK1OorbXzG56KmWtcz+k3U9efI7OCSQPPz9ac8GUEQfYwKYzT5vIe+I8Ts9NfOR0kBzjCNl7QezWg=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(19092799006)(366016)(376014)(1800799024)(56012099003)(18002099003)(22082099003)(38070700021);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?/1EPEivIEOowfA2PJCcAJwCMcGJdrCMiyie/Pwql3Rqm16ilCziBOwdBBwZQ?=
- =?us-ascii?Q?A5e4r1/j6NMuU4E/VI4czB1Djua1uZZjVfsqTUKGR2dmKBIU49CGeeHR8e/g?=
- =?us-ascii?Q?kG9mhUtFiUoDJs1coWHHuc1+2RFFSDMpps/dDcB+NRVGhsXWoRKphwASOMUI?=
- =?us-ascii?Q?AmdDqzeDqqqKHh6/ot1P08564zdu45g85x/DF5VVs/g+knRZgJvd5XBzWK+9?=
- =?us-ascii?Q?o+d7Emy3PhmTcdzgPt7WZMasxzncY0v+wIsJXOCBtToICcBomVlcdD3Lw96T?=
- =?us-ascii?Q?llmxftBkmR3byOkQU5O4KyqHsx/ytnoNUYtkrGlzJyoQj6xC76V9PMwt91dJ?=
- =?us-ascii?Q?h1AKC7o4dPg73Nug16ijErK1Vg0nt5n1h/hzjTu9pQAdrU/5eZSeBLvWnNGm?=
- =?us-ascii?Q?Rj60+zBueYQ6N96psPdiq3vGgQF/HtYiTUJYH1RMkgI/+G01JWQDBxw4kton?=
- =?us-ascii?Q?iPIOXce8qFHQzhBQ0tB2HEUDCGb9MscMbAoE6p+a+WHzNM9XIz2MpRSYlgwr?=
- =?us-ascii?Q?RNM8Z1HVKdZMx+3FT28dNEfMLBcGGMqTknPu+7Vs/2+hTFnfOZnkt9bJsTOe?=
- =?us-ascii?Q?i4yopMqR1yfH5ufsSOdFL19N0YoVwd11mZJjcMQJacUa2n9QRrjxfDwDMKD9?=
- =?us-ascii?Q?KZ9JAIZnakL/EwdDdSWzVR+DGviByxJwMGvJjNk6PNtdSQwje/ExjQ+Aw2Wv?=
- =?us-ascii?Q?t4MlOnfFgPqIEiD0Pg9/pGR78CX+cDs7vbVf217U4cChsLbe2rDj3GiLgmtH?=
- =?us-ascii?Q?4P5ZQ8/fEP3ej+2+8fvIvWcxsP2WBWj0a2L4VJ3F145Ep8pby/W0CIreZABt?=
- =?us-ascii?Q?K+mhKRZ7a6E29gUj8Bxs5qnhh9c8NdqMjhRB3RmcUZPea40ZOM6Z3juw5uw0?=
- =?us-ascii?Q?vMkpOF0Jb6fnjHQTFHp55YrBEN991oHk2TBjQS6OJd6xNv2SaoqwwV/JZlWC?=
- =?us-ascii?Q?jKsnpG4uYE5/9VV7OGoAjXMhpAInj7syNHQhNTSInhgIVekYaYMF1KBtANHz?=
- =?us-ascii?Q?f3imlyiujdKI+23MMoMfqm6rCZL/JRJzR6RTL8LSRqUs0w9A8VXaKuSPO9Iu?=
- =?us-ascii?Q?jJ4E2dodU0314B5uNKDw97j5k07xddjU1dPwu+uer3Q2r7LOIqi4FYDlh+6O?=
- =?us-ascii?Q?Era/1LA5dBBdmJ6M4a38VM/xIL2iNJJ3J8GNCk2G2GxXWlKyo2KiGUI08YPH?=
- =?us-ascii?Q?1vPcrAKqLM9jhZssBG8X/qr8peQp0J8nnR7sp57JwncjC7HVx8rTvqILvIxT?=
- =?us-ascii?Q?6TpKHlyOu/rtNRIjDWnpZ06yuVmgIcGraEfkmDB8mp4tpzPwtzCFiwRuj17/?=
- =?us-ascii?Q?/o51YOuYkXMVQK2Y2HwxW/9ptM/uFm7wQCGYo10ChaqZpYbwexkpGWUu9TRz?=
- =?us-ascii?Q?L4w0c2sTT2k3VHV97MGO40+rVitGckFcwAsQNY2eyQhrbhCaR7H+5iq7Sg/S?=
- =?us-ascii?Q?MLt2U/6XCXoJQ0836I7fQ3cQbTlBHab8YDGefHTKkrTi6rHUjpOlwndX8OMS?=
- =?us-ascii?Q?h6Mi/Op9ps8nhHaRsI/g871p6WjqUf/GCbqkt32QCFfTixoSxOSjkmr2TPbw?=
- =?us-ascii?Q?eDgffhELU7F9jnaSQi39hO3i5tmklLZM6imAXPujF6NBZtCyHEUI3TNk7FqN?=
- =?us-ascii?Q?ucJlaIWpPEuNgOuGdIaGmBq9cLDVpQFx6YIE4dTMPAF879mB/dkNYYlB7V79?=
- =?us-ascii?Q?0BLzt2bOf0AXdw4DWJFRvKfdNGJcAShPvpzc7MKIuAJqlHmT?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7d7f8f0d7c9so60091a34.0
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 06:53:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1774014788; x=1774619588; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=MCLIZO4f5bFpFUfpjQX51N3LmkIIbcTrIfCkpMC8mTQ=;
+ b=scHdSs0MCohSCOZn0UQZ1+328Z8zhEKjLn95sv9egAB4b+7KkYGm1nHfbx6+lEkSPO
+ jJrSu7k2NaXzpL0bXEKzCcKrRpQjRuKIeefO56BoJaGBmeoTnpIaezUI/BQjNeUPM5ar
+ 01xwt4aE0c2A07inuIZJB+18dWrAx5yWgVvlU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774014788; x=1774619588;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=MCLIZO4f5bFpFUfpjQX51N3LmkIIbcTrIfCkpMC8mTQ=;
+ b=Z0lL5F7KnR5rrcnPwLsKhbBY5OFIX7QDCiSEQ0DS+0DdzhUWHaGHZyalpbLqtgfEWW
+ yPNxqJ8NV5AFxiQzB5NHf9nRVfRGGMowWoB/hqgcSOpEFP7tRD34bZCLyJ7DNKgrpCu6
+ ZQszcWScQpmnGLRNW0ynEEaNyyDxV3K1dUn9DFqArrPz87u6B9UcDxWw3E9bfPwwwa6F
+ /PdxCMaqtKku5QxDzUwUiAsonh9EWuzHHpQolQi9AxBlIyP546tRyMGp1sWmzK0e2I2w
+ +FnBnFan1G2sffwuYoIJqai9OMtzhKm4OWMrVn3qFNvEHaaYPlqvEbLCnwgSncEYQKEq
+ GWKg==
+X-Gm-Message-State: AOJu0YwD5eM6tWWBPDECgOnjrCz1hTMOuPFEeHdkVTwEbw0gMY92L79y
+ REDR2h55B3CG5PSbBm9i13AtFNsVtyqYOT+wx/0DiFSXA0VVBQSlMxCOukHNQqyg65A=
+X-Gm-Gg: ATEYQzxhFqKmINn57WgjxYMjri2+WQWKzaq4UpaU/7KMAKDgSs6+HIpetuCkh7pLFbR
+ 4LYqmOYw85oskNmiYtbEmYYo13+fR1Jd1/6AO3U23rEO9jY250ikOhOM7p5P4nQv1c3PQw7Ul+N
+ XBGMfnPYprM5JkgPrKY6bHSJ0GLMtR3UcJXZx+rPr7ysQGvbN5cZnl2ypPFGa18qUtpNvZPK1tk
+ jDk+AAWMiyz/2Fj/61/B1BOU4YdZNl6VUKDqXRQPxyHg6OKH5Z8vw0w9OzhN8vUD+mOf0Zc4PWx
+ XAZCnDoVKMPxkR+ebThjhSUyzc6y1X8O+plWveS2pQp7Rh5t0uFl0Xc36jMlA7sGJwBMRQKoOSj
+ +/jXRXDxz9CR8adZpZpVYb7QDMP74eCnif8sh55q2vztYNtF0hNroqfh+LLYpDd4uYMFjbz6sDw
+ k1BZ91v9P6PAEIW988culF2nAvpgAviNLIkRotLMbXGYsCVRDt9+yQzeui6KeNa8pMnMb22z6JE
+ dHtm4byJmblJTDx7Sn8yvBrlv0mddUftCdf0C+VtqtU1tee
+X-Received: by 2002:a05:6830:6c84:b0:7d7:ecfc:62d5 with SMTP id
+ 46e09a7af769-7d7ecfc6d91mr1005703a34.31.1774014788137; 
+ Fri, 20 Mar 2026 06:53:08 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d7eadfc678sm2117281a34.19.2026.03.20.06.53.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Mar 2026 06:53:07 -0700 (PDT)
+Date: Fri, 20 Mar 2026 07:53:05 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
+Subject: Re: [PATCH] usb: gadget: Move USB_GADGET_DUALSPEED to be slightly
+ more visible
+Message-ID: <20260320135305.GX502704@bill-the-cat>
+References: <20260317012433.4162524-1-trini@konsulko.com>
+ <bcaede64-7918-4eaf-9695-a155b1395e50@mailbox.org>
+ <20260317134107.GR502704@bill-the-cat>
+ <bbdd71c7-3276-402e-a9f8-98afffd10538@mailbox.org>
+ <20260318012649.GG502704@bill-the-cat>
+ <bf3bb11e-e891-4703-ad47-04d53e21d7af@mailbox.org>
+ <20260319133952.GO502704@bill-the-cat>
+ <b48f3f6c-0403-4528-8de6-0b24caa810ef@mailbox.org>
 MIME-Version: 1.0
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e874c6d9-9680-4d90-1cab-08de8686671b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Mar 2026 13:41:34.6412 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: XhRUVbccow0rsBjRmKEUWYxh6tuNii9fKY+3MOu4h52ti0vlOX6w0aV0x7IwvLNq6/xMcxEABInwb0F76YIJXg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA2PR04MB10188
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9KN+SQnZq9oH16YS"
+Content-Disposition: inline
+In-Reply-To: <b48f3f6c-0403-4528-8de6-0b24caa810ef@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,140 +104,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Christoph,
 
-> Subject: [PATCH] board: dhelectronics: imx: Use second Ethernet MAC
-> also from fuse
->=20
-> When two Ethernet MAC addresses are fused, the first MAC address is
-> incremented by one and used for the second MAC address. This causes
-> the second fused MAC address to be ignored. Change this so that the
-> second fused MAC address will be used.
+--9KN+SQnZq9oH16YS
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I may miss something, would you please help explain a bit on why
-the second fused mac address is ignored?
+On Thu, Mar 19, 2026 at 06:57:21PM +0100, Marek Vasut wrote:
+> On 3/19/26 2:39 PM, Tom Rini wrote:
+> > On Thu, Mar 19, 2026 at 01:50:56AM +0100, Marek Vasut wrote:
+> > > On 3/18/26 2:26 AM, Tom Rini wrote:
+> > > > On Tue, Mar 17, 2026 at 08:42:06PM +0100, Marek Vasut wrote:
+> > > > > On 3/17/26 2:41 PM, Tom Rini wrote:
+> > > > > > On Tue, Mar 17, 2026 at 03:34:36AM +0100, Marek Vasut wrote:
+> > > > > > > On 3/17/26 2:24 AM, Tom Rini wrote:
+> > > > > > > > As exposed by "make randconfig", we have an issue around
+> > > > > > > > USB_GADGET_DUALSPEED. It is possible to select this symbol =
+(via
+> > > > > > > > SPL_USB_CDNS3_GADGET for example) and so have an unmet depe=
+ndency. As
+> > > > > > > > this is a hidden symbol, move it up within the menu.
+> > > > > > > What is the issue this is fixing ?
+> > > > > >=20
+> > > > > > Valid configs causing the kconfig part of the build system to n=
+ote
+> > > > > > unmet dependencies.
+> > > > > Lemme rephrase, is this actually a fix, or is this some readabili=
+ty/ordering
+> > > > > improvement patch ?
+> > > >=20
+> > > > Yes, it's a fix because randconfig finds problems that users may st=
+umble
+> > > > on to while trying to make a valid config for a platform.
+> > >=20
+> > > Is the commit message telling me, that "config USB_GADGET_DUALSPEED" =
+is
+> > > moved outside of the "if USB_GADGET" block ?
+> > >=20
+> > > Because if this is something else, and the symbols are simply reorder=
+ed,
+> > > that I do not understand how this could be fixing anything.
+> >=20
+> > I'm unclear what else you need to know to take this bugfix. The symbol
+> > is not placed correctly, leading to possibly unmet dependency errors.
+>=20
+> Why do you think the symbol is placed incorrectly ?
 
-Thanks,
-Peng.
-> Keep the old behavior if there isn't any second Ethernet MAC defined
-> and only the first MAC address is fused but not the second. In this case
-> use the fused MAC address incremented by one, for the second MAC
-> address.
+Because we wouldn't get a Kconfig unmet dependency error if it was
+correctly placed.
+
+> What this change does, is it moves "config USB_GADGET_DUALSPEED" outside =
+of
+> the "if USB_GADGET" block in drivers/usb/gadget/Kconfig , which the commit
+> message should clearly spell out.
+
+I could reword "As this is a hidden symbol, move it up within the menu."
+more, sure.
+
+> However , I believe that is not the correct fix. The USB_GADGET_DUALSPEED
+> has to be available only if USB_GADGET or SPL_USB_GADGET is selected, the
+> former is already satisfied, the later is not and the SPL_USB_CDNS3_GADGET
+> triggers a problem here. I think this is the correct fix:
 >=20
-> Signed-off-by: Christoph Niedermaier <cniedermaier@dh-
-> electronics.com>
-> ---
-> Cc: Marek Vasut <marex@nabladev.com>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Sam Protsenko <semen.protsenko@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> ---
->  board/dhelectronics/common/dh_imx.c               |  4 ++--
->  board/dhelectronics/common/dh_imx.h               |  3 ++-
->  board/dhelectronics/dh_imx6/dh_imx6.c             |  2 +-
->  board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c | 13
-> ++++++++++---
->  4 files changed, 15 insertions(+), 7 deletions(-)
+> "
+> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+> index ebb306852a6..87d17780c45 100644
+> --- a/drivers/usb/gadget/Kconfig
+> +++ b/drivers/usb/gadget/Kconfig
+> @@ -178,10 +178,6 @@ config SDP_LOADADDR
+>         hex "Default load address at SDP_WRITE and SDP_JUMP"
+>         default 0x0
 >=20
-> diff --git a/board/dhelectronics/common/dh_imx.c
-> b/board/dhelectronics/common/dh_imx.c
-> index 3d6487dd0d8..308cdb5b002 100644
-> --- a/board/dhelectronics/common/dh_imx.c
-> +++ b/board/dhelectronics/common/dh_imx.c
-> @@ -10,13 +10,13 @@
->  #include <net.h>
->  #include "dh_imx.h"
+> -# Selected by UDC drivers that support high-speed operation.
+> -config USB_GADGET_DUALSPEED
+> -       bool
+> -
+>  config USB_GADGET_DOWNLOAD
+>         bool "Enable USB download gadget"
+>         help
+> @@ -371,3 +367,11 @@ config SPL_SDP_USB_DEV
+>           so it can be used in compiled environment.
 >=20
-> -int dh_imx_get_mac_from_fuse(unsigned char *enetaddr)
-> +int dh_imx_get_mac_from_fuse(int dev_id, unsigned char *enetaddr)
->  {
->  	/*
->  	 * If IIM fuses contain valid MAC address, use it.
->  	 * The IIM MAC address fuses are NOT programmed by default.
->  	 */
-> -	imx_get_mac_from_fuse(0, enetaddr);
-> +	imx_get_mac_from_fuse(dev_id, enetaddr);
->  	if (!is_valid_ethaddr(enetaddr))
->  		return -EINVAL;
->=20
-> diff --git a/board/dhelectronics/common/dh_imx.h
-> b/board/dhelectronics/common/dh_imx.h
-> index 284f8637fb8..cb51a2f6eb2 100644
-> --- a/board/dhelectronics/common/dh_imx.h
-> +++ b/board/dhelectronics/common/dh_imx.h
-> @@ -6,7 +6,8 @@
->  /*
->   * dh_imx_get_mac_from_fuse - Get MAC address from fuse and write
-> it to env
->   *
-> + * @dev_id: index of MAC address in fuse (starts with 0)
->   * @enetaddr: buffer where address is to be stored
->   * Return: 0 if OK, other value on error
->   */
-> -int dh_imx_get_mac_from_fuse(unsigned char *enetaddr);
-> +int dh_imx_get_mac_from_fuse(int dev_id, unsigned char *enetaddr);
-> diff --git a/board/dhelectronics/dh_imx6/dh_imx6.c
-> b/board/dhelectronics/dh_imx6/dh_imx6.c
-> index 234824b38c2..5806a03ed17 100644
-> --- a/board/dhelectronics/dh_imx6/dh_imx6.c
-> +++ b/board/dhelectronics/dh_imx6/dh_imx6.c
-> @@ -94,7 +94,7 @@ int dh_setup_mac_address(struct
-> eeprom_id_page *eip)
->  	if (dh_get_mac_is_enabled("ethernet0"))
->  		return 0;
->=20
-> -	if (!dh_imx_get_mac_from_fuse(enetaddr))
-> +	if (!dh_imx_get_mac_from_fuse(0, enetaddr))
->  		goto out;
->=20
->  	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0")) diff --git
-> a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-> b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-> index 5c35a5bf447..60d1e05b77f 100644
-> --- a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-> +++ b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-> @@ -50,7 +50,7 @@ static int dh_imx8_setup_ethaddr(struct
-> eeprom_id_page *eip)
->  	if (dh_get_mac_is_enabled("ethernet0"))
->  		return 0;
->=20
-> -	if (!dh_imx_get_mac_from_fuse(enetaddr))
-> +	if (!dh_imx_get_mac_from_fuse(0, enetaddr))
->  		goto out;
->=20
->  	if (!dh_get_value_from_eeprom_buffer(DH_MAC0, enetaddr,
-> sizeof(enetaddr), eip)) @@ -75,8 +75,8 @@ static int
-> dh_imx8_setup_eth1addr(struct eeprom_id_page *eip)
->  	if (dh_get_mac_is_enabled("ethernet1"))
->  		return 0;
->=20
-> -	if (!dh_imx_get_mac_from_fuse(enetaddr))
-> -		goto increment_out;
-> +	if (!dh_imx_get_mac_from_fuse(1, enetaddr))
-> +		goto out;
->=20
->  	if (!dh_get_value_from_eeprom_buffer(DH_MAC1, enetaddr,
-> sizeof(enetaddr), eip))
->  		goto out;
-> @@ -92,6 +92,13 @@ static int dh_imx8_setup_eth1addr(struct
-> eeprom_id_page *eip)
->  	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0"))
->  		goto increment_out;
->=20
-> +	/*
-> +	 * If only the first MAC address is fused but not the second, use
-> the
-> +	 * fused MAC address incremented by one, for the second MAC
-> address.
-> +	 */
-> +	if (!dh_imx_get_mac_from_fuse(0, enetaddr))
-> +		goto increment_out;
+>  endif # SPL_USB_GADGET
 > +
->  	return -ENXIO;
->=20
->  increment_out:
-> --
-> 2.30.2
+> +if USB_GADGET || SPL_USB_GADGET
+> +
+> +# Selected by UDC drivers that support high-speed operation.
+> +config USB_GADGET_DUALSPEED
+> +       bool
+> +
+> +endif
+> "
 
+You don't need to guard hidden symbols. But this also probably also
+works, so yes, please post that as a proper patch and I'll go Changes
+Requested mine.
+
+> > Yes, the error is discovered by randconfig which makes it harder to
+> > describe how exactly to reproduce it (but I believe it does), but that
+> > doesn't make it any less valid.
+> This part is not relevant.
+
+Well it's been unclear to me what you do and don't see as a valid
+problem with this and the other patch.
+
+--=20
+Tom
+
+--9KN+SQnZq9oH16YS
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCab1ROgAKCRAr4qD1Cr/k
+ChM0AP97UaOLzJ1eQNIMXSv9sh1tXkeRc7dKffklYra8qfvIqwD/Z/xyTBejoCAu
+qoFk60mdp/r++5EJFfeBSTOYSz9cewo=
+=z15V
+-----END PGP SIGNATURE-----
+
+--9KN+SQnZq9oH16YS--
