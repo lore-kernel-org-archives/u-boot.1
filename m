@@ -4,89 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C13121098782
-	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 13:53:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 790541098782
+	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 13:56:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3220283FF5;
-	Fri, 20 Mar 2026 14:53:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DFDE783BC8;
+	Fri, 20 Mar 2026 14:56:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="scHdSs0M";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dw+NZ0Mt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D345E83CF5; Fri, 20 Mar 2026 14:53:16 +0100 (CET)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 2DD4A83CEA; Fri, 20 Mar 2026 14:56:23 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E80D83F00
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 14:53:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E2F95805D7
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 14:56:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7d7f8f0d7c9so60091a34.0
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 06:53:09 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7d7f92bde91so36706a34.1
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 06:56:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774014788; x=1774619588; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1774014979; x=1774619779; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=MCLIZO4f5bFpFUfpjQX51N3LmkIIbcTrIfCkpMC8mTQ=;
- b=scHdSs0MCohSCOZn0UQZ1+328Z8zhEKjLn95sv9egAB4b+7KkYGm1nHfbx6+lEkSPO
- jJrSu7k2NaXzpL0bXEKzCcKrRpQjRuKIeefO56BoJaGBmeoTnpIaezUI/BQjNeUPM5ar
- 01xwt4aE0c2A07inuIZJB+18dWrAx5yWgVvlU=
+ bh=A8tUBY3i2Im1K4aZLi3YDoLOKLgWa2CvtYGTG/i1NgQ=;
+ b=dw+NZ0MtKx4yYCQO6uSeiZXi91Ux1IoGJVF9goDiXqGPBPggJjXtqWkllQiwLTJNlt
+ IhRfBu2SszTZeCJdWJVVSBsf1FiJfQ3ZRLD9kRhnWVXYWGkCDe4q4BoaRqWyDZg7oJjH
+ sEC5QCRHopiHe1zZgvpECxKrqdhxo5fCSJPcg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774014788; x=1774619588;
+ d=1e100.net; s=20251104; t=1774014979; x=1774619779;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MCLIZO4f5bFpFUfpjQX51N3LmkIIbcTrIfCkpMC8mTQ=;
- b=Z0lL5F7KnR5rrcnPwLsKhbBY5OFIX7QDCiSEQ0DS+0DdzhUWHaGHZyalpbLqtgfEWW
- yPNxqJ8NV5AFxiQzB5NHf9nRVfRGGMowWoB/hqgcSOpEFP7tRD34bZCLyJ7DNKgrpCu6
- ZQszcWScQpmnGLRNW0ynEEaNyyDxV3K1dUn9DFqArrPz87u6B9UcDxWw3E9bfPwwwa6F
- /PdxCMaqtKku5QxDzUwUiAsonh9EWuzHHpQolQi9AxBlIyP546tRyMGp1sWmzK0e2I2w
- +FnBnFan1G2sffwuYoIJqai9OMtzhKm4OWMrVn3qFNvEHaaYPlqvEbLCnwgSncEYQKEq
- GWKg==
-X-Gm-Message-State: AOJu0YwD5eM6tWWBPDECgOnjrCz1hTMOuPFEeHdkVTwEbw0gMY92L79y
- REDR2h55B3CG5PSbBm9i13AtFNsVtyqYOT+wx/0DiFSXA0VVBQSlMxCOukHNQqyg65A=
-X-Gm-Gg: ATEYQzxhFqKmINn57WgjxYMjri2+WQWKzaq4UpaU/7KMAKDgSs6+HIpetuCkh7pLFbR
- 4LYqmOYw85oskNmiYtbEmYYo13+fR1Jd1/6AO3U23rEO9jY250ikOhOM7p5P4nQv1c3PQw7Ul+N
- XBGMfnPYprM5JkgPrKY6bHSJ0GLMtR3UcJXZx+rPr7ysQGvbN5cZnl2ypPFGa18qUtpNvZPK1tk
- jDk+AAWMiyz/2Fj/61/B1BOU4YdZNl6VUKDqXRQPxyHg6OKH5Z8vw0w9OzhN8vUD+mOf0Zc4PWx
- XAZCnDoVKMPxkR+ebThjhSUyzc6y1X8O+plWveS2pQp7Rh5t0uFl0Xc36jMlA7sGJwBMRQKoOSj
- +/jXRXDxz9CR8adZpZpVYb7QDMP74eCnif8sh55q2vztYNtF0hNroqfh+LLYpDd4uYMFjbz6sDw
- k1BZ91v9P6PAEIW988culF2nAvpgAviNLIkRotLMbXGYsCVRDt9+yQzeui6KeNa8pMnMb22z6JE
- dHtm4byJmblJTDx7Sn8yvBrlv0mddUftCdf0C+VtqtU1tee
-X-Received: by 2002:a05:6830:6c84:b0:7d7:ecfc:62d5 with SMTP id
- 46e09a7af769-7d7ecfc6d91mr1005703a34.31.1774014788137; 
- Fri, 20 Mar 2026 06:53:08 -0700 (PDT)
+ bh=A8tUBY3i2Im1K4aZLi3YDoLOKLgWa2CvtYGTG/i1NgQ=;
+ b=J+bCKmxHhcBPD4VcF00b/4GDUKOwreKNBE0AR7mmtMeWlD8cyI+cse55TX2Ap0116e
+ DynIkO30O7Vhv9RAW35ZdZZhTuYO6gZcjsAq2rq58Y9M8r5ZvTHDj9MWErwcBfoPJplr
+ WoQaxqsNWMVPCtKFOmKrX29Sl1DjsPAWeQ1jqyTvZDB2i3Uzd2CU99X2MG/itWyWSgg2
+ xOj8q5IhJVcqepgkg8H8eAwf26dqVl9VVbL/fevpE7nTIvUd6O+CJoxUGjXSvKqKtQeP
+ /IA1r5vDbFG9eu3joIIBQJLPlpYphZ2bwNwMTZo6mdnqX0De8VVDD52fquBUYcKNiHxP
+ y96g==
+X-Gm-Message-State: AOJu0Yy4ho0JVMoYI+/ugrmC8s8g0L/WlymIOWN3Hie4fPxUw0SOB6E4
+ 3wsyyob92sbY56IbGi/RKW5AbpNe/EmKs5i7lmaIJTiClY3i4y8YEipqtL+WUwGfHOg=
+X-Gm-Gg: ATEYQzwbn60BOdELam6YKGX4yr5Ul5ux+3qVqCB1waabriYRkGf8wXUB/AYCD05jzNE
+ Ts+2Q48kbLVNHrfedD5xGbaD2Fgfe9Fx+7Ey1iYgTYMkFytMtA2WZ5VAASU6jJuwvcFFPR36TC4
+ Tg671DjfzFQ44C7/cOjfmh+UgSr8Mos3YSiiKL0LcFrT3cWilRiKW+m725b9nyjYfrZ45or9h2z
+ 8cx3ZceX/hhp1lPEB+g6EF2NNz5KeHbB4YnxaILxQVVH54vpVqekIV9vU0PyQ2/YZAHGVVnwfR3
+ 7o6OEfvmzBysaXVsZBnc1nqBNVOeqs+z3H6l1je6S5bWFrXn863JULjMAH4gsGQDrEPpD7/6qIv
+ 8VbstDqWnXze1b8FjP0limqIQT7Duq/BNO+aRIJ41miDJTYZBu+YxtRJxhmIwe9n4BL3FoR1OKB
+ ZKHHRx315OJcrq5RoUs21pPTEclkROspDiP8HuQSshePhHOZqFpFQ/Ebslz7ZITf4W/krCFnDrU
+ hnEL819qiTNxznNhvpH35/WjkfaxPbHu16KvrtURDeFYXJ+WHCtl3yNJOI=
+X-Received: by 2002:a05:6830:82c3:b0:7d7:cc53:1ead with SMTP id
+ 46e09a7af769-7d7eac66f45mr2137847a34.0.1774014978826; 
+ Fri, 20 Mar 2026 06:56:18 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7eadfc678sm2117281a34.19.2026.03.20.06.53.07
+ 46e09a7af769-7d7eac3e763sm2239580a34.11.2026.03.20.06.56.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Mar 2026 06:53:07 -0700 (PDT)
-Date: Fri, 20 Mar 2026 07:53:05 -0600
+ Fri, 20 Mar 2026 06:56:18 -0700 (PDT)
+Date: Fri, 20 Mar 2026 07:56:16 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: Re: [PATCH] usb: gadget: Move USB_GADGET_DUALSPEED to be slightly
- more visible
-Message-ID: <20260320135305.GX502704@bill-the-cat>
-References: <20260317012433.4162524-1-trini@konsulko.com>
- <bcaede64-7918-4eaf-9695-a155b1395e50@mailbox.org>
- <20260317134107.GR502704@bill-the-cat>
- <bbdd71c7-3276-402e-a9f8-98afffd10538@mailbox.org>
- <20260318012649.GG502704@bill-the-cat>
- <bf3bb11e-e891-4703-ad47-04d53e21d7af@mailbox.org>
- <20260319133952.GO502704@bill-the-cat>
- <b48f3f6c-0403-4528-8de6-0b24caa810ef@mailbox.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] reset: Correct dependencies for RESET_RZG2L_USBPHY_CTRL
+Message-ID: <20260320135616.GY502704@bill-the-cat>
+References: <20260317012443.4162600-1-trini@konsulko.com>
+ <ed88ec35-7d53-48df-a65b-7da1298e265b@mailbox.org>
+ <20260317134008.GQ502704@bill-the-cat>
+ <58699be1-5414-4749-9975-7fdf0064b1a3@mailbox.org>
+ <20260318012557.GF502704@bill-the-cat>
+ <34a0c151-f8ff-4b91-92b3-d6f63097440e@mailbox.org>
+ <20260319134128.GP502704@bill-the-cat>
+ <11128ed2-a53d-4286-84cc-dc5c6d932405@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9KN+SQnZq9oH16YS"
+ protocol="application/pgp-signature"; boundary="TWUcbXq08EREhb7u"
 Content-Disposition: inline
-In-Reply-To: <b48f3f6c-0403-4528-8de6-0b24caa810ef@mailbox.org>
+In-Reply-To: <11128ed2-a53d-4286-84cc-dc5c6d932405@mailbox.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,121 +104,50 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---9KN+SQnZq9oH16YS
+--TWUcbXq08EREhb7u
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 19, 2026 at 06:57:21PM +0100, Marek Vasut wrote:
-> On 3/19/26 2:39 PM, Tom Rini wrote:
-> > On Thu, Mar 19, 2026 at 01:50:56AM +0100, Marek Vasut wrote:
-> > > On 3/18/26 2:26 AM, Tom Rini wrote:
-> > > > On Tue, Mar 17, 2026 at 08:42:06PM +0100, Marek Vasut wrote:
-> > > > > On 3/17/26 2:41 PM, Tom Rini wrote:
-> > > > > > On Tue, Mar 17, 2026 at 03:34:36AM +0100, Marek Vasut wrote:
-> > > > > > > On 3/17/26 2:24 AM, Tom Rini wrote:
-> > > > > > > > As exposed by "make randconfig", we have an issue around
-> > > > > > > > USB_GADGET_DUALSPEED. It is possible to select this symbol =
-(via
-> > > > > > > > SPL_USB_CDNS3_GADGET for example) and so have an unmet depe=
-ndency. As
-> > > > > > > > this is a hidden symbol, move it up within the menu.
-> > > > > > > What is the issue this is fixing ?
-> > > > > >=20
-> > > > > > Valid configs causing the kconfig part of the build system to n=
-ote
-> > > > > > unmet dependencies.
-> > > > > Lemme rephrase, is this actually a fix, or is this some readabili=
-ty/ordering
-> > > > > improvement patch ?
-> > > >=20
-> > > > Yes, it's a fix because randconfig finds problems that users may st=
-umble
-> > > > on to while trying to make a valid config for a platform.
-> > >=20
-> > > Is the commit message telling me, that "config USB_GADGET_DUALSPEED" =
-is
-> > > moved outside of the "if USB_GADGET" block ?
-> > >=20
-> > > Because if this is something else, and the symbols are simply reorder=
-ed,
-> > > that I do not understand how this could be fixing anything.
+On Fri, Mar 20, 2026 at 04:58:13AM +0100, Marek Vasut wrote:
+> On 3/19/26 2:41 PM, Tom Rini wrote:
+>=20
+> [...]
+>=20
+> > > > So I think the answer is if you fire up menuconfig, and turn off
+> > > > RESET_RZG2L_USBPHY_CTRL and REGULATOR_RZG2L_USBPHY and DM_REGULATOR=
+ and
+> > > > then enable RESET_RZG2L_USBPHY_CTRL things will become mad because
+> > > > RESET_RZG2L_USBPHY_CTRL has select'd REGULATOR_RZG2L_USBPHY but we =
+don't
+> > > > have DM_REGULATOR.
+> > > How is it possible to enable RESET_RZG2L_USBPHY_CTRL without enabling=
+ its
+> > > dependencies ? This is what I do not understand.
 > >=20
-> > I'm unclear what else you need to know to take this bugfix. The symbol
-> > is not placed correctly, leading to possibly unmet dependency errors.
->=20
-> Why do you think the symbol is placed incorrectly ?
+> > The way I said in the part you quoted? If you don't like the way I'm
+> > solving the problem with the dependency graph here please propose an
+> > alternate. But it is possible to encounter this problem, or randconfig
+> > wouldn't expose it.
+> What I do not understand is, how is it possible to enable Kconfig symbol
+> without enabling its dependencies. Is that a bug in Kconfig ?
 
-Because we wouldn't get a Kconfig unmet dependency error if it was
-correctly placed.
-
-> What this change does, is it moves "config USB_GADGET_DUALSPEED" outside =
-of
-> the "if USB_GADGET" block in drivers/usb/gadget/Kconfig , which the commit
-> message should clearly spell out.
-
-I could reword "As this is a hidden symbol, move it up within the menu."
-more, sure.
-
-> However , I believe that is not the correct fix. The USB_GADGET_DUALSPEED
-> has to be available only if USB_GADGET or SPL_USB_GADGET is selected, the
-> former is already satisfied, the later is not and the SPL_USB_CDNS3_GADGET
-> triggers a problem here. I think this is the correct fix:
->=20
-> "
-> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-> index ebb306852a6..87d17780c45 100644
-> --- a/drivers/usb/gadget/Kconfig
-> +++ b/drivers/usb/gadget/Kconfig
-> @@ -178,10 +178,6 @@ config SDP_LOADADDR
->         hex "Default load address at SDP_WRITE and SDP_JUMP"
->         default 0x0
->=20
-> -# Selected by UDC drivers that support high-speed operation.
-> -config USB_GADGET_DUALSPEED
-> -       bool
-> -
->  config USB_GADGET_DOWNLOAD
->         bool "Enable USB download gadget"
->         help
-> @@ -371,3 +367,11 @@ config SPL_SDP_USB_DEV
->           so it can be used in compiled environment.
->=20
->  endif # SPL_USB_GADGET
-> +
-> +if USB_GADGET || SPL_USB_GADGET
-> +
-> +# Selected by UDC drivers that support high-speed operation.
-> +config USB_GADGET_DUALSPEED
-> +       bool
-> +
-> +endif
-> "
-
-You don't need to guard hidden symbols. But this also probably also
-works, so yes, please post that as a proper patch and I'll go Changes
-Requested mine.
-
-> > Yes, the error is discovered by randconfig which makes it harder to
-> > describe how exactly to reproduce it (but I believe it does), but that
-> > doesn't make it any less valid.
-> This part is not relevant.
-
-Well it's been unclear to me what you do and don't see as a valid
-problem with this and the other patch.
+There is nothing ensuring that when you enable RESET_RZG2L_USBPHY_CTRL
+today that DM_REGULATOR is enabled. But since you're telling it to
+select REGULATOR_RZG2L_USBPHY it then will give an error.
 
 --=20
 Tom
 
---9KN+SQnZq9oH16YS
+--TWUcbXq08EREhb7u
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCab1ROgAKCRAr4qD1Cr/k
-ChM0AP97UaOLzJ1eQNIMXSv9sh1tXkeRc7dKffklYra8qfvIqwD/Z/xyTBejoCAu
-qoFk60mdp/r++5EJFfeBSTOYSz9cewo=
-=z15V
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCab1R/wAKCRAr4qD1Cr/k
+CvoMAQDirpOlLJdcbQgmOvzu+nCxKEEapRPQonE8Q62qN2EQ1QEA5Nv2aIGfaNJN
+YHKHqdQCy4RIhLvaWMYEnu6HgyxI2gQ=
+=eKDu
 -----END PGP SIGNATURE-----
 
---9KN+SQnZq9oH16YS--
+--TWUcbXq08EREhb7u--
