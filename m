@@ -4,67 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A955B1075269
-	for <u-boot@archiver.kernel.org>; Sat, 21 Mar 2026 02:41:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19530108B8FF
+	for <u-boot@archiver.kernel.org>; Sat, 21 Mar 2026 07:11:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C90A8403D;
-	Sat, 21 Mar 2026 03:41:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 4F05083E48;
+	Sat, 21 Mar 2026 08:11:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="nnx+gKgR";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="CzVE49eR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C8BB83D71; Sat, 21 Mar 2026 03:40:55 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id 6C68A83FDB; Sat, 21 Mar 2026 03:40:43 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 439FB84010
- for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 03:40:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8505583FA4
+ for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 03:40:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4fd3Zq47KHz9v5q;
- Sat, 21 Mar 2026 03:40:51 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1774060851;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=D7/hCa7NePYBNgmP7gZN+FyHSynqxpIja1bxBAU/9Ao=;
- b=nnx+gKgRsXljNCzQvsD95oKnIH5NpfNQKYq4qOEb6WtJIcnHnSCnZqMD+4b7MbweHfplop
- js1135WHIiRVTHh2dLX5Ok8j751FXFNPQLa0QkofHqj/oUTCbcLeWk3G8PEZ5nUrDMCzqY
- FuImhi5+fiFTdreB+6eDimjX4RnJqPWupUY3ebPJt5Z2g5HKfK0twrZqMxNfUs1v03xM9h
- S6PwzWvAnnVikvuItsxEvEegxWG8WWVwTgkW3X6jU/+b80RteKyRJr3V5LN4r44nohMWT0
- EkHKEm5w7yBuPAvCNfHuuRivM4PGM0Uf1KM7JFi/2V+KxWnkdXf5ZeE0N/I4qw==
-Message-ID: <2446be00-c67d-4dd7-b45c-da3925b23cd0@mailbox.org>
-Date: Sat, 21 Mar 2026 03:23:35 +0100
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 28E31111E8D; Sat, 21 Mar 2026 03:40:40 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1774060841;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=5AOrKrIbesfzNfg7yRGjOMAjTs3Mstu0lXWhxRgi7jI=;
+ b=CzVE49eRR0E4SfpVTwwAHNWcgwTLHhqlLi2xB7H8Lt3d0NPgLdIo7x/rNNHKjpW7yWk8zU
+ VOaS8q/RvPSsqxqKVrUXo9wzexzyiv9STlEM182dM6JE+sr2oV/Y+TD+/kT/NfH2kD5FSG
+ QCmPhzkz5x2GJo3dMToLCs8VgO8mNGFRPmMI2+AG5gWBaC9zLnsTxLSJMwYmtUex6tlNlC
+ SVM7zk4SQymwVL+RUMCaUDqTBDHIX2rbOzVxMnDnyhng/0qSenu1QTh+AVTMD45io1OqIN
+ WOCyXdo1klVReA8deCKJTz6cTUS9hef0bkNq0UQWxUEilCGUJozvJfWsUUzf3g==
+Message-ID: <382f338c-020f-482d-80b8-5a39ad724843@nabladev.com>
+Date: Fri, 20 Mar 2026 19:22:25 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH] reset: Correct dependencies for RESET_RZG2L_USBPHY_CTRL
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20260317012443.4162600-1-trini@konsulko.com>
- <ed88ec35-7d53-48df-a65b-7da1298e265b@mailbox.org>
- <20260317134008.GQ502704@bill-the-cat>
- <58699be1-5414-4749-9975-7fdf0064b1a3@mailbox.org>
- <20260318012557.GF502704@bill-the-cat>
- <34a0c151-f8ff-4b91-92b3-d6f63097440e@mailbox.org>
- <20260319134128.GP502704@bill-the-cat>
- <11128ed2-a53d-4286-84cc-dc5c6d932405@mailbox.org>
- <20260320135616.GY502704@bill-the-cat>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] board: dhelectronics: imx: Use second Ethernet MAC also
+ from fuse
+To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ u-boot@lists.denx.de
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan
+ <peng.fan@nxp.com>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
+References: <20260320102918.4011-1-cniedermaier@dh-electronics.com>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260320135616.GY502704@bill-the-cat>
+From: Marek Vasut <marex@nabladev.com>
+In-Reply-To: <20260320102918.4011-1-cniedermaier@dh-electronics.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: oqkki58h3igqxuohh48ftbhdkpfnthq5
-X-MBO-RS-ID: 51c4849a7a03306b6bf
+X-Last-TLS-Session-Version: TLSv1.3
+X-Mailman-Approved-At: Sat, 21 Mar 2026 08:11:56 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,55 +72,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/20/26 2:56 PM, Tom Rini wrote:
-> On Fri, Mar 20, 2026 at 04:58:13AM +0100, Marek Vasut wrote:
->> On 3/19/26 2:41 PM, Tom Rini wrote:
->>
->> [...]
->>
->>>>> So I think the answer is if you fire up menuconfig, and turn off
->>>>> RESET_RZG2L_USBPHY_CTRL and REGULATOR_RZG2L_USBPHY and DM_REGULATOR and
->>>>> then enable RESET_RZG2L_USBPHY_CTRL things will become mad because
->>>>> RESET_RZG2L_USBPHY_CTRL has select'd REGULATOR_RZG2L_USBPHY but we don't
->>>>> have DM_REGULATOR.
->>>> How is it possible to enable RESET_RZG2L_USBPHY_CTRL without enabling its
->>>> dependencies ? This is what I do not understand.
->>>
->>> The way I said in the part you quoted? If you don't like the way I'm
->>> solving the problem with the dependency graph here please propose an
->>> alternate. But it is possible to encounter this problem, or randconfig
->>> wouldn't expose it.
->> What I do not understand is, how is it possible to enable Kconfig symbol
->> without enabling its dependencies. Is that a bug in Kconfig ?
-> 
-> There is nothing ensuring that when you enable RESET_RZG2L_USBPHY_CTRL
-> today that DM_REGULATOR is enabled. But since you're telling it to
-> select REGULATOR_RZG2L_USBPHY it then will give an error.
-Hmmm, I see it now. If I have both CONFIG_REGULATOR_RZG2L_USBPHY=y and 
-CONFIG_RESET_RZG2L_USBPHY_CTRL=y in .config, and I delete 
-CONFIG_DM_REGULATOR=y from .config , then I can select 
-CONFIG_DM_REGULATOR=n .
+On 3/20/26 11:29 AM, Christoph Niedermaier wrote:
 
-But isn't the right fix the elimination of 'select' ? Linux Kconfig 
-documentation now hints that 'select' should only be used for hidden 
-symbols. So how about this fix instead , that should retain the 
-transitive dependency on REGULATOR_RZG2L_USBPHY , which depends on 
-DM_REGULATOR :
+[...]
+
+> +++ b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
+> @@ -50,7 +50,7 @@ static int dh_imx8_setup_ethaddr(struct eeprom_id_page *eip)
+>   	if (dh_get_mac_is_enabled("ethernet0"))
+>   		return 0;
+>   
+> -	if (!dh_imx_get_mac_from_fuse(enetaddr))
+> +	if (!dh_imx_get_mac_from_fuse(0, enetaddr))
+>   		goto out;
+>   
+>   	if (!dh_get_value_from_eeprom_buffer(DH_MAC0, enetaddr, sizeof(enetaddr), eip))
+> @@ -75,8 +75,8 @@ static int dh_imx8_setup_eth1addr(struct eeprom_id_page *eip)
+>   	if (dh_get_mac_is_enabled("ethernet1"))
+>   		return 0;
+>   
+> -	if (!dh_imx_get_mac_from_fuse(enetaddr))
+> -		goto increment_out;
+> +	if (!dh_imx_get_mac_from_fuse(1, enetaddr))
+> +		goto out;
+
+The ordering in this and next hunk seems bogus.
+
+If read from the (new/second) fuse slot 1 fails, the code should attempt 
+to use fuse slot 0 content incremented by 1, just like it did before ...
 
 "
-diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
-index 2fd91d6299c..a7acd5cfa69 100644
---- a/drivers/reset/Kconfig
-+++ b/drivers/reset/Kconfig
-@@ -239,8 +239,7 @@ config RESET_AT91
-
-  config RESET_RZG2L_USBPHY_CTRL
-         bool "Enable support for Renesas RZ/G2L USB 2.0 PHY control"
--       depends on DM_RESET
--       select REGULATOR_RZG2L_USBPHY
-+       depends on DM_RESET && REGULATOR_RZG2L_USBPHY
-         help
-           Enable support for controlling USB 2.0 PHY resets on the Renesas
-           RZ/G2L SoC. This is required for USB 2.0 functionality to 
-work on this
+if (!dh_imx_get_mac_from_fuse(1, enetaddr))
+   goto out;
+if (!dh_imx_get_mac_from_fuse(0, enetaddr))
+   goto increment_out;
 "
+
+>   	if (!dh_get_value_from_eeprom_buffer(DH_MAC1, enetaddr, sizeof(enetaddr), eip))
+>   		goto out;
+> @@ -92,6 +92,13 @@ static int dh_imx8_setup_eth1addr(struct eeprom_id_page *eip)
+>   	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0"))
+>   		goto increment_out;
+>   
+> +	/*
+> +	 * If only the first MAC address is fused but not the second, use the
+> +	 * fused MAC address incremented by one, for the second MAC address.
+> +	 */
+> +	if (!dh_imx_get_mac_from_fuse(0, enetaddr))
+> +		goto increment_out;
+... this part would then be unnecessary.
