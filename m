@@ -4,115 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 970F71099B2D
-	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 17:55:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81BE61099B30
+	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 20:53:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D425383D71;
-	Fri, 20 Mar 2026 18:55:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9AE1383D71;
+	Fri, 20 Mar 2026 21:53:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="c90WCn31";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Er4HyzV3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BD3783F00; Fri, 20 Mar 2026 18:55:12 +0100 (CET)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id EAC7883F00; Fri, 20 Mar 2026 21:53:26 +0100 (CET)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D26883CF5
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 18:55:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BB3C8394E
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 21:53:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-7986fb839f5so24486357b3.0
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 10:55:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-4648447e29bso359806b6e.0
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 13:53:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1774029309; x=1774634109; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=ZKxIsZk3MePZx+RnClHiZcRVbt55LdMEwlShCQI++1U=;
- b=c90WCn3134iaekRyEbtAxWqixYf3xeK+e6cN22aqxds9UnoYSxcL2Qj1gHo5q1poMG
- c4Oq0Q4s3LAzHKoOnsaBjO4rtV8cUkS+sg3E8N4G7qPNfYu3apiPCOJDR9GgP5HKjzBx
- cdVAoHYowv8Jq2ngHFaZZARWafB/oc0dtjvGf3/4UPBIbDTjKXugNAcmEL/dG8Cst93Y
- NGPUmN7dmorIR4YOAMJdcyS49a/kXJBS1z0G6AJWXjuZ2k6gY62kZ/9PY42x+WUVrqVJ
- 9joPknEq4jRHelmJKXFQn0APIFhQFz3bvKSrk9PXzCWEDSsq9JFdUV6JSty4x+E0HSKw
- m80g==
+ d=konsulko.com; s=google; t=1774040003; x=1774644803; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=s5/Izo3CTWnhW6SsTlHy/ES0fsJe1Le81kinXNHf6f4=;
+ b=Er4HyzV30UU57G7Niw5fp/ingxI02Sk7E86FLdClWay6TdSaXpMQN4WTbP/QBZGqF7
+ rF7+KEfe7msrOh/rHkno2/CIU/VjFkG4lilrGgZCz6f38RAhafDPmIWSZMbr3VOehElO
+ W2HwnCDXj/3fNQfYtFqEUA34vbvhIwBEMpOW4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774029309; x=1774634109;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZKxIsZk3MePZx+RnClHiZcRVbt55LdMEwlShCQI++1U=;
- b=K0m9mDWfut/UJ18MlFOA8Plat5XQTc4q7yi3EEQCpd5JOchgQQEH25XGpnr1qVKve+
- 75A+JV35V80VL21QIvBYKn6V+HKA0NBXNCmIJxy43O/PfpWRfFqFCE1HHQZGv7mtrZZY
- DF4s5AFAkKMk825EQh9BUQwtCkJmJy+M8ewD0+Zj1rrPWqxD914c7Qoz3VUOAA6rLkWW
- qPkxryGdaEFFrPZlvWOHVtetFf92GuTGcvgKV+WbXBUkSHpKnMT2xp6iMWAZWX0nDyux
- X/ggnmNKsWlRiKOTW6MLPYzS2cuY5n1jBopumMsvTOwJ2vriZuI/EWe0Cp8zHaHdYgw6
- kakQ==
-X-Gm-Message-State: AOJu0YyduuJlmcXYzem8FX9uHnGreS007RA7VLNUhO7CQqOc1T9mjCpm
- oUhXx+L0yUrB3nhagS8nxdAI4I1WjRIsapoLLE1y1iOmzFcePnYHIovUKuMVZRaLJYA=
-X-Gm-Gg: ATEYQzx5EIwOfe7Z7n/jJehG4ehZpVBHUtGlYApL6QKWi3M6fi/ZW6GBoJUks4r4quV
- q+1nCBOx2g00lZ4gVQ1KurL/Jc28WDjHGGURWQisioKYv5hggM38IEQ0tFW1Fibd0+h+tLYgSCf
- 1raJ0Q5TiF6E/lS+IIkn2Sychj/YwTpm9n1CSUGM26HQxixJD+aBKoLg89EadfDTCwzYadVbfhX
- Yqw2pkoX8+JktzF3rr+aK4nvgoAXgb0Kri955HGFu+KNj/0ljStxf1tBDC+2hmhitSzXiM/Jwo2
- ovv3BRIeN+PVUDZQxG6JQ/Ga0OghGZxNLGX85jwvoGuA8S1rJXcBWNBnN2yTdVbDW6stU1f+b+7
- hFWa1UEHvXiJBsCSZ2fIIQ0WI0L837DZCLLoWptczFvH4CsHPIcoQIg+skRhgWc2ZAm/IUA3MvI
- 8loqZL5fKOXMCSX8FlYlj6fb+sT4rmdhg+FWBd+ktgmqlkGPpV2FNrYo2ay5fM9Y5sLNzW8AgCv
- vjlxN0=
-X-Received: by 2002:a05:690c:c508:b0:79a:55f5:a3e5 with SMTP id
- 00721157ae682-79a90acd45amr41888597b3.17.1774029308294; 
- Fri, 20 Mar 2026 10:55:08 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:c01d:178d:b037:2418?
- ([2a01:e0a:106d:1080:c01d:178d:b037:2418])
- by smtp.gmail.com with ESMTPSA id
- 00721157ae682-79a905a2eb5sm19055187b3.42.2026.03.20.10.55.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 20 Mar 2026 10:55:07 -0700 (PDT)
-Message-ID: <4d07d238-42b7-439b-9369-9306ce1b64c4@linaro.org>
-Date: Fri, 20 Mar 2026 18:55:05 +0100
+ d=1e100.net; s=20251104; t=1774040003; x=1774644803;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=s5/Izo3CTWnhW6SsTlHy/ES0fsJe1Le81kinXNHf6f4=;
+ b=ZYL6x5L/312BXdbAlJO/OZchVZRqQxyH7dmBJRQN/ONkKfY84XlV78gQQcv1UMg5va
+ f7R4Um6PusByrHM1IDaNjj/s/oALc6Zyspe03+wVdrD28Pj8/G9x3YDf1rcIfp9BKCWD
+ DNRHSAecjx6NDmQLP9kd3kLvI1Sw4UTxoTzMzWP/117zxzhnM4Rdlea5FvqJGBl9t5z0
+ si/Hm85OPUkANIxOFQOHC5n+SU7oB7/o7DHVO0wDV1yvShWpvgfEkcPo889jJNTX4Ixp
+ xb/tJyEPIxEpfA0p6f9nfClx5b/GfUic6DKa/nzKd+JaFwJbTQMSPAihGtedlhzXVpfY
+ 6Qng==
+X-Gm-Message-State: AOJu0Ywgofa2nFKtNsPYqp0dyHoXrsd5uS5wCWX/iet+Urs9W9KrMUwc
+ GbLDbuEqXj2bu0OnWnm9jtCVBerGcVz6CsbQQUhwzl87JpIn7iYlk8Poo+h9ZMxgXclNMec81f1
+ 3oAUvgK8=
+X-Gm-Gg: ATEYQzwnor3WFQe6zve16sxEeWC36n1WeF8lHrI3f3DY73tgOyxDKkY/c7Ghpjl7kM5
+ N4JIJNX0zBjujn+p0UCr1oAoiHyyEIvb8I9qaTRr41U7YYMrZ8jI0CYfTPhZR5R0ZROhjO2r3Rc
+ /XO5kI9NIaW2pBSN8W8tAk26tl/Alql4QtcPIAr1/rX30j+yW9NvEdcsWS+Zr6M/PgXtAafKhPR
+ U+lL56lyuEpdcvwkQlVo3vuBX3fUFqWkW0QYCA8xYGTH7mi4B2klLflLHTgnQ8gM9ALFI1V5eON
+ imHxXajf2ltFQVfY4Fzg1NEjQU5slyaGg/iwkPZiH2ui4BC8Dn45Dz8jq9kEssD+hVvb4G5O213
+ uZQTuoRhEGCjxupb4nyPZIZhBFlFGd1SY7c5wqerrLLw+8cssMX9CsgfQp6K/rs5vmW2jsma/sy
+ UkOAuaLU1dN3T9P6QfAxM5qK9Cp4QrGa7X5wKHBh5eNzMZS6V80AcYO26F0Y+w76Z8B4iBJTNKM
+ cAnxZykmIxkAs3BiH7wMoID4RSYaDrRbIUT8IwFHJG1bv9HAYxx8h8fVX9Faw==
+X-Received: by 2002:a05:6808:1454:b0:467:11ab:cd6a with SMTP id
+ 5614622812f47-467e5d1529cmr2234121b6e.2.1774040002723; 
+ Fri, 20 Mar 2026 13:53:22 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-467e7a96c3asm2123507b6e.0.2026.03.20.13.53.22
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Mar 2026 13:53:22 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH] i2c: Remove legacy CONFIG_SYS_I2C_SOFT
+Date: Fri, 20 Mar 2026 14:53:21 -0600
+Message-ID: <20260320205321.3788559-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH RFC 00/40] clk: port full Linux Common Clock Framework to
- U-Boot
-To: Simon Glass <sjg@chromium.org>, Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
- <CAFLszTimOLhu=n5jrztE9QqbtXRDjutf_WiKLGMVe4ODJOc8wA@mail.gmail.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <CAFLszTimOLhu=n5jrztE9QqbtXRDjutf_WiKLGMVe4ODJOc8wA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,255 +88,624 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/20/26 17:52, Simon Glass wrote:
-> Hi Casey,
-> 
-> On Thu, 19 Mar 2026 at 14:56, Casey Connolly <casey.connolly@linaro.org> wrote:
->>
->> This RFC provides a proof of concept for using the full Linux CCF in
->> U-Boot and consequently porting full Linux clock drivers with extremely
->> minimal changes.
-> 
-> As a general question, what is the boot flow for the Qualcomm devices
-> you are are targeting, i.e. where does U-Boot come in the chain from
-> reset? Does it use xPL?
-> 
->>
->> == Overview ==
->>
->> This RFC is pretty long but can be separated into a few chunks. The
->> first patches relate to Linux API compatibility and just contain small
->> self contained changes, these can go upstream regardless of CCF.
->>
->> The next group of changes prepare for importing CCF from Linux, the
->> standalone fixed clock drivers are moved to clk/basic, the existing
->> U-Boot CCF drivers are moved to clk/uccf, and struct clk_ops is renamed
->> to clk_ops_uboot.
->>
->> Additionally, clk_set_rate() is changed so that it returns a signed
->> long, since it can return negative values. This is also done to align
->> with CCF but it's a standalone improvement nonetheless.
-> 
-> Agreed.
-> 
->>
->> The next changes import CCF from Linux 6.19 and then adjust it to
->> compile and work with U-Boot. These commits are split up mostly to
->> try and reduce the size. Finally clk-uclass is adjusted for CCF, this
->> definitely will need some additional passes to be a bit cleaner.
->>
->> With CCF done, sandbox clk-ccf driver gets a CCF_FULL port, the clk_ccf
->> tests are adjusted to pass.
-> 
-> Minor point - perhaps CLK_LINUX ? CCF_FULL seems cryptic to me and
-> some would argue that the existing CLK_CCF is already full..
-> 
->>
->> Lastly, a PoC port of Qualcomms Linux clock drivers is done, this
->> only has sm8650 clocks but they serve the desired purpose. The changes
->> necessary to the Linux drivers are mostly to deal with U-Boots driver
->> model, the actual platform specific clock drivers require essentially
->> zero changes!
->>
->> === Feedback ===
->>
->> I'd like to get feedback on the overall architecture and ideas, feel
->> free to point out any dead code or printf's I forgot about, but I'll for
->> sure do a more detailed cleanup before the next revision.
->>
->> I would definitely like to input on how to deal with clk-uclass, since
->> it's now supporting 3 different clock frameworks, but I'm now sure how
->> best to separate the code out without duplicating code.
-> 
-> Perhaps a justification can be expressed in terms of code size / capabilities:
-> 
-> Small - can boot in xPL from limited SRAM, only simple clocks
-> Medium - smaller code size but still provides good access to clocks
-> Large - Linux compatible, full capability but lots of code
-> 
->>
->> In terms of overall architecture, CCF is a departure from the uclass
->> model that U-Boot has stuck too for so long. If this is a success then
->> I think it could make a lot of sense to make similar changes for power
->> domains and resets. I think this change offers a lot of additional
->> flexibility which has been sorely missed.
-> 
-> While those are separate, does this mean that there will be a
-> significant delta from Linux's clock drivers on Qualcomm, or will it
-> be minor?
->>
->> == Motivation ==
->>
->> There were quite a few motivating factors behind this effort which I
->> think provide useful context for this series:
->>
->> 1. Existing UCLASS_CLK support in U-Boot (even with U-Boots minimal CCF)
->>     doesn't provide a fully cohesive API nor implement the necessary
->>     functionality to support complex modern platforms without a lot of
->>     additional effort.
->>
->> 2. While trying to enable display support on Qualcomm, it became clear
->>     that U-Boots clock framework was a severe limiting factor,
->>     particularly for more complicated setups like "bonded" dual-DSI.
-> 
-> It seems that 1 and 2 could be merged? The question here is how much
-> effort would someone want to put in. Providing an easy way to pull in
-> the Linux clock driver makes sense. Some people may wish to put in
-> effort to at least support the basic clocks for xPL, etc.
-> 
->>
->> 3. The current state of Qualcomm clock drivers in U-Boot is pretty poor,
->>     as the old very basic driver code is being expected to support more
->>     and more complicated usecases. Clock support is generally the most
->>     complicated part of bringing up any new Qualcomm platform, so being
->>     able to properly reuse Linux drivers with the familiar API greatly
->>     reduces the amount of friction when working on U-Boot support for
->>     complicated peripherals like the display.
->>
->> Consequently, My aim with this effort was primarily to provide API
->> compatibility with Linux as much as possible, minimising the changes
->> that have to be made to clock drivers to port them from Linux, and
->> reducing the chance of introducing U-Boot specific bugs.
->>
->> === clk_ops/UCLASS_CLK ===
->>
->> CCF_FULL drivers should NOT use UCLASS_CLK, since CCF uses a totally
->> independent clock API. If the clocks are provided by another device like
->> a phy, they can simply be registered with the clk core the same way they
->> are in Linux. Standalone clock drivers should use UCLASS_NOP.
-> 
-> Bypassing UCLASS_CLK entirely is a big departure. It means DM can't
-> track these clock devices properly - no uclass_find_device(), no
-> sequence numbers, no standard device iteration.
-> 
+The last users of this legacy i2c stack have been removed or converted
+to a modern part of the stack instead. Remove this code and references
+to it.
 
-Can't we allocate struct clk as udevices subdevices of clk drivers ?
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ README                     |  92 --------
+ board/nxp/m53017evb/README |   4 -
+ board/nxp/m5373evb/README  |   4 -
+ drivers/i2c/Kconfig        |  20 --
+ drivers/i2c/Makefile       |   1 -
+ drivers/i2c/soft_i2c.c     | 418 -------------------------------------
+ 6 files changed, 539 deletions(-)
 
-Like alloc_clk() woult create a child udevice of dev and the lookup
-functions would use the uclass functions and use dm for all the
-allocation and lifetime of the clk.
-
-This is what I did for the interconnect, and it works well. You
-can easily create/attach/find/iterate/remove subdevices instead
-of using custom alloc and lists.
-
-Neil
-
-> The suggestion to do the same for power domains and resets would
-> fragment driver model further.
-> 
-> How about having a single UCLASS_CLK_LINUX device?
-> 
->>
->> Clocks must all be registered during driver probe, the CCF will ensure
->> that a given clock provider is probed (via a global ofnode -> device
->> lookup) before checking the of_providers, thus making sure the clocks
->> are registered so that the consumer can use them. There is currently no
->> special handling for cyclical dependencies.
-> 
-> Driver model normally registers devices during a bind step, which
-> helps to remove the problem of cyclic dependencies. Is there any need
-> to wait until probe()? Also, can we statically declare it, to save
-> code size? Most of the definitions are static
-> 
-> The global ofnode -> device lookup to force probe ordering is
-> reinventing what DM already does with uclass probing. This feels like
-> it should integrate with DM rather than work around it.
-> 
->>
->> === struct clk ===
->>
->> It's definitely debatable if it makes sense to have 3 different structs
->> for each clk (clk_hw, clk_core and clk). I do think clk_hw and clk_core
->> are justified, since clk_hw is more tied to the hardware description and
->> typically nested in a clk-specific descriptor while clk_core contains
->> the internal runtime state of the clk which should remain private to
->> CCF core.
-> 
-> Probably we should follow Linux, since we would start to lose the
-> benefit of your series if we merged two structs.
-> 
->>
->> It could make sense to merge clk and clk_core, but since struct clk is
->> public in U-Boot, where it's an opaque pointer in Linux this would be
->> a substantial effort. In Linux struct clk objects are allocated inside
->> CCF, but in U-Boot they're allocated by the driver, this would need to
->> be resolved before we investigate combining these structs.
->>
->> === Memory/perf overhead ===
->>
->> The memory and size overhead of CCF is undoubtably bigger than uCCF,
->> although I suspect the difference is less than it might seem at
->> first glance. In particular: clk_core is only ~50 bytes larger than
->> struct udevice on ARM64, and an additional 120 bytes is saved for each
->> U_BOOT_DRIVER used by uCCF.
->>
->> On the other hand, the CPU overhead is probably more significant,
->> but not an unreasonable cost to ensure correctness and propagate rate
->> changes across the clock tree.
-> 
-> We already struggle with slow pre-relocation performance, something I
-> have never really dug into.
-> 
->>
->> Just comparing the binary size of sandbox64_defconfig with uCCF vs
->> CCF_FULL, CCF_FULL results in a 135k size increase in the binary. I
->> haven't done any more detailed analysis here (still haven't got buildman
->> to play nice...).
-> 
-> Sandbox may overestimate the size here, not sure. Ping on irc if you
-> need update with the buildman setup.
-> 
->>
->> === SPL ===
->>
->> This RFC doesn't have any SPL specific support, I think this role is
->> better fulfilled by UCLASS_CLK.
->>
->> === U-Boot's old CCF port ===
->>
->> The original CCF port done for IMX platforms is vastly different in API,
->> scope, and function to CCF_FULL, to differentiate I refer to it
->> as "uCCF".
->>
->> I have kept support for this in and made it mutually exclusive with
->> CCF_FULL. uCCF drivers have been moved to drivers/clk/uccf, with the new
->> CCF port in drivers/clk/ccf.
->>
->> Included near the end of this series is a port of Sandbox's clk-ccf
->> driver from uCCF over to CCF_FULL, this might be a useful reference for
->> other drivers (although it's probably better to just adapt the Linux
->> drivers).
->>
->> === Compat shim ===
->>
->> Lastly, this series includes a compat shim which allows UCLASS_CLK
->> drivers to somewhat work with CCF, I would imagine this being useful
->> if some generic peripheral device provides a clock for example, but in
->> almost all cases I think it's better to implement a proper CCF clock
->> device. Unless there is a particular usecase for this I would probably
->> not include it in the next revision.
->>
->> == TODO/Outstanding issues ==
->>
->> * Clean up clk-uclass.c, does it make sense to somewhow split it in two?
->> * Assess test coverage, have basic sandbox tests, would like to mostly
->>    use integration tests (i.e. diff the clk summary) once more platforms
->>    are supported.
->> * pre-relocation support is currently missing, on Qualcomm at least I
->>    would prefer to completely skip FDT scanning pre-reloc, there is a
->>    patch in this series which does that. It is very non-trivial to try
->>    and handle clocks pre-reloc.
-> 
-> Does this mean that only serial is needed and the clock for it is
-> already set up by some pre-U-Boot phase?
-> 
-> Regards,
-> SImon
+diff --git a/README b/README
+index 38fcb23531cf..87de3163cb70 100644
+--- a/README
++++ b/README
+@@ -628,98 +628,6 @@ The following options need to be configured:
+ 
+ 		If you do not have i2c muxes on your board, omit this define.
+ 
+-- Legacy I2C Support:
+-		If you use the software i2c interface (CONFIG_SYS_I2C_SOFT)
+-		then the following macros need to be defined (examples are
+-		from include/configs/lwmon.h):
+-
+-		I2C_INIT
+-
+-		(Optional). Any commands necessary to enable the I2C
+-		controller or configure ports.
+-
+-		eg: #define I2C_INIT (immr->im_cpm.cp_pbdir |=	PB_SCL)
+-
+-		I2C_ACTIVE
+-
+-		The code necessary to make the I2C data line active
+-		(driven).  If the data line is open collector, this
+-		define can be null.
+-
+-		eg: #define I2C_ACTIVE (immr->im_cpm.cp_pbdir |=  PB_SDA)
+-
+-		I2C_TRISTATE
+-
+-		The code necessary to make the I2C data line tri-stated
+-		(inactive).  If the data line is open collector, this
+-		define can be null.
+-
+-		eg: #define I2C_TRISTATE (immr->im_cpm.cp_pbdir &= ~PB_SDA)
+-
+-		I2C_READ
+-
+-		Code that returns true if the I2C data line is high,
+-		false if it is low.
+-
+-		eg: #define I2C_READ ((immr->im_cpm.cp_pbdat & PB_SDA) != 0)
+-
+-		I2C_SDA(bit)
+-
+-		If <bit> is true, sets the I2C data line high. If it
+-		is false, it clears it (low).
+-
+-		eg: #define I2C_SDA(bit) \
+-			if(bit) immr->im_cpm.cp_pbdat |=  PB_SDA; \
+-			else	immr->im_cpm.cp_pbdat &= ~PB_SDA
+-
+-		I2C_SCL(bit)
+-
+-		If <bit> is true, sets the I2C clock line high. If it
+-		is false, it clears it (low).
+-
+-		eg: #define I2C_SCL(bit) \
+-			if(bit) immr->im_cpm.cp_pbdat |=  PB_SCL; \
+-			else	immr->im_cpm.cp_pbdat &= ~PB_SCL
+-
+-		I2C_DELAY
+-
+-		This delay is invoked four times per clock cycle so this
+-		controls the rate of data transfer.  The data rate thus
+-		is 1 / (I2C_DELAY * 4). Often defined to be something
+-		like:
+-
+-		#define I2C_DELAY  udelay(2)
+-
+-		CONFIG_SOFT_I2C_GPIO_SCL / CONFIG_SOFT_I2C_GPIO_SDA
+-
+-		If your arch supports the generic GPIO framework (asm/gpio.h),
+-		then you may alternatively define the two GPIOs that are to be
+-		used as SCL / SDA.  Any of the previous I2C_xxx macros will
+-		have GPIO-based defaults assigned to them as appropriate.
+-
+-		You should define these to the GPIO value as given directly to
+-		the generic GPIO functions.
+-
+-		CFG_SYS_I2C_NOPROBES
+-
+-		This option specifies a list of I2C devices that will be skipped
+-		when the 'i2c probe' command is issued.
+-
+-		e.g.
+-			#define CFG_SYS_I2C_NOPROBES {0x50,0x68}
+-
+-		will skip addresses 0x50 and 0x68 on a board with one I2C bus
+-
+-		CONFIG_SOFT_I2C_READ_REPEATED_START
+-
+-		defining this will force the i2c_read() function in
+-		the soft_i2c driver to perform an I2C repeated start
+-		between writing the address pointer and reading the
+-		data.  If this define is omitted the default behaviour
+-		of doing a stop-start sequence will be used.  Most I2C
+-		devices can use either method, but some require one or
+-		the other.
+-
+ - SPI Support:	CONFIG_SPI
+ 
+ 		Enables SPI driver (so far only tested with
+diff --git a/board/nxp/m53017evb/README b/board/nxp/m53017evb/README
+index 258316292669..c6dc020af371 100644
+--- a/board/nxp/m53017evb/README
++++ b/board/nxp/m53017evb/README
+@@ -90,10 +90,6 @@ MCFFEC_TOUT_LOOP		-- set FEC timeout loop
+ CONFIG_MCFTMR			-- define to use DMA timer
+ 
+ CONFIG_SYS_I2C_FSL		-- define to use FSL common I2C driver
+-CONFIG_SYS_I2C_SOFT		-- define for I2C bit-banged
+-CONFIG_SYS_I2C_SPEED		-- define for I2C speed
+-CONFIG_SYS_I2C_SLAVE		-- define for I2C slave address
+-CONFIG_SYS_I2C_OFFSET		-- define for I2C base address offset
+ CONFIG_SYS_IMMR			-- define for MBAR offset
+ 
+ CFG_SYS_MBAR			-- define MBAR offset
+diff --git a/board/nxp/m5373evb/README b/board/nxp/m5373evb/README
+index c7130b322514..7217886fdfaa 100644
+--- a/board/nxp/m5373evb/README
++++ b/board/nxp/m5373evb/README
+@@ -89,10 +89,6 @@ MCFFEC_TOUT_LOOP	-- set FEC timeout loop
+ CONFIG_MCFTMR		-- define to use DMA timer
+ 
+ CONFIG_SYS_I2C_FSL	-- define to use FSL common I2C driver
+-CONFIG_SYS_I2C_SOFT	-- define for I2C bit-banged
+-CONFIG_SYS_I2C_SPEED		-- define for I2C speed
+-CONFIG_SYS_I2C_SLAVE		-- define for I2C slave address
+-CONFIG_SYS_I2C_OFFSET		-- define for I2C base address offset
+ CONFIG_SYS_IMMR		-- define for MBAR offset
+ 
+ CFG_SYS_MBAR		-- define MBAR offset
+diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
+index 55465dc1d463..37288a47eb75 100644
+--- a/drivers/i2c/Kconfig
++++ b/drivers/i2c/Kconfig
+@@ -624,26 +624,6 @@ config SH_I2C_CLOCK
+ 	default 104000000
+ endif
+ 
+-config SYS_I2C_SOFT
+-	bool "Legacy software I2C interface"
+-	depends on !COMPILE_TEST
+-	help
+-	  Enable the legacy software defined I2C interface
+-
+-config SYS_I2C_SOFT_SPEED
+-	int "Software I2C bus speed"
+-	depends on SYS_I2C_SOFT
+-	default 100000
+-	help
+-	  Speed of the software I2C bus
+-
+-config SYS_I2C_SOFT_SLAVE
+-	hex "Software I2C slave address"
+-	depends on SYS_I2C_SOFT
+-	default 0xfe
+-	help
+-	  Slave address of the software I2C bus
+-
+ config SYS_I2C_OCTEON
+ 	bool "Octeon II/III/TX/TX2 I2C driver"
+ 	depends on (ARCH_OCTEON || ARCH_OCTEONTX || ARCH_OCTEONTX2) && DM_I2C
+diff --git a/drivers/i2c/Makefile b/drivers/i2c/Makefile
+index 5fe30d0df4fc..2da649e97d3b 100644
+--- a/drivers/i2c/Makefile
++++ b/drivers/i2c/Makefile
+@@ -47,7 +47,6 @@ obj-$(CONFIG_SYS_I2C_RZ_RIIC) += rz_riic.o
+ obj-$(CONFIG_SYS_I2C_S3C24X0) += s3c24x0_i2c.o exynos_hs_i2c.o
+ obj-$(CONFIG_SYS_I2C_SANDBOX) += sandbox_i2c.o i2c-emul-uclass.o
+ obj-$(CONFIG_SYS_I2C_SH) += sh_i2c.o
+-obj-$(CONFIG_SYS_I2C_SOFT) += soft_i2c.o
+ obj-$(CONFIG_SYS_I2C_STM32F7) += stm32f7_i2c.o
+ obj-$(CONFIG_SYS_I2C_SUN6I_P2WI) += sun6i_p2wi.o
+ obj-$(CONFIG_SYS_I2C_SUN8I_RSB) += sun8i_rsb.o
+diff --git a/drivers/i2c/soft_i2c.c b/drivers/i2c/soft_i2c.c
+index 4102375e5b73..e69de29bb2d1 100644
+--- a/drivers/i2c/soft_i2c.c
++++ b/drivers/i2c/soft_i2c.c
+@@ -1,418 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * (C) Copyright 2009
+- * Heiko Schocher, DENX Software Engineering, hs@denx.de.
+- * Changes for multibus/multiadapter I2C support.
+- *
+- * (C) Copyright 2001, 2002
+- * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+- *
+- * This has been changed substantially by Gerald Van Baren, Custom IDEAS,
+- * vanbaren@cideas.com.  It was heavily influenced by LiMon, written by
+- * Neil Russell.
+- *
+- * NOTE: This driver should be converted to driver model before June 2017.
+- * Please see doc/driver-model/i2c-howto.rst for instructions.
+- */
+-
+-#include <config.h>
+-#if defined(CONFIG_AT91FAMILY)
+-#include <asm/io.h>
+-#include <asm/arch/hardware.h>
+-#include <asm/arch/at91_pio.h>
+-#ifdef CONFIG_ATMEL_LEGACY
+-#include <asm/arch/gpio.h>
+-#endif
+-#endif
+-#include <i2c.h>
+-#include <linux/delay.h>
+-
+-#if defined(CONFIG_SOFT_I2C_GPIO_SCL)
+-# include <asm/gpio.h>
+-
+-# ifndef I2C_GPIO_SYNC
+-#  define I2C_GPIO_SYNC
+-# endif
+-
+-# ifndef I2C_INIT
+-#  define I2C_INIT \
+-	do { \
+-		gpio_request(CONFIG_SOFT_I2C_GPIO_SCL, "soft_i2c"); \
+-		gpio_request(CONFIG_SOFT_I2C_GPIO_SDA, "soft_i2c"); \
+-	} while (0)
+-# endif
+-
+-# ifndef I2C_ACTIVE
+-#  define I2C_ACTIVE do { } while (0)
+-# endif
+-
+-# ifndef I2C_TRISTATE
+-#  define I2C_TRISTATE do { } while (0)
+-# endif
+-
+-# ifndef I2C_READ
+-#  define I2C_READ gpio_get_value(CONFIG_SOFT_I2C_GPIO_SDA)
+-# endif
+-
+-# ifndef I2C_SDA
+-#  define I2C_SDA(bit) \
+-	do { \
+-		if (bit) \
+-			gpio_direction_input(CONFIG_SOFT_I2C_GPIO_SDA); \
+-		else \
+-			gpio_direction_output(CONFIG_SOFT_I2C_GPIO_SDA, 0); \
+-		I2C_GPIO_SYNC; \
+-	} while (0)
+-# endif
+-
+-# ifndef I2C_SCL
+-#  define I2C_SCL(bit) \
+-	do { \
+-		gpio_direction_output(CONFIG_SOFT_I2C_GPIO_SCL, bit); \
+-		I2C_GPIO_SYNC; \
+-	} while (0)
+-# endif
+-
+-# ifndef I2C_DELAY
+-#  define I2C_DELAY udelay(5)	/* 1/4 I2C clock duration */
+-# endif
+-
+-#endif
+-
+-/* #define	DEBUG_I2C	*/
+-
+-#ifndef	I2C_SOFT_DECLARATIONS
+-#  define I2C_SOFT_DECLARATIONS
+-#endif
+-
+-/*-----------------------------------------------------------------------
+- * Definitions
+- */
+-#define RETRIES		0
+-
+-#define I2C_ACK		0		/* PD_SDA level to ack a byte */
+-#define I2C_NOACK	1		/* PD_SDA level to noack a byte */
+-
+-#ifdef DEBUG_I2C
+-#define PRINTD(fmt,args...)	do {	\
+-		printf (fmt ,##args);	\
+-	} while (0)
+-#else
+-#define PRINTD(fmt,args...)
+-#endif
+-
+-/*-----------------------------------------------------------------------
+- * Local functions
+- */
+-static void  send_reset	(void);
+-static void  send_start	(void);
+-static void  send_stop	(void);
+-static void  send_ack	(int);
+-static int   write_byte	(uchar byte);
+-static uchar read_byte	(int);
+-
+-/*-----------------------------------------------------------------------
+- * Send a reset sequence consisting of 9 clocks with the data signal high
+- * to clock any confused device back into an idle state.  Also send a
+- * <stop> at the end of the sequence for belts & suspenders.
+- */
+-static void send_reset(void)
+-{
+-	I2C_SOFT_DECLARATIONS	/* intentional without ';' */
+-	int j;
+-
+-	I2C_SCL(1);
+-	I2C_SDA(1);
+-#ifdef	I2C_INIT
+-	I2C_INIT;
+-#endif
+-	I2C_TRISTATE;
+-	for(j = 0; j < 9; j++) {
+-		I2C_SCL(0);
+-		I2C_DELAY;
+-		I2C_DELAY;
+-		I2C_SCL(1);
+-		I2C_DELAY;
+-		I2C_DELAY;
+-	}
+-	send_stop();
+-	I2C_TRISTATE;
+-}
+-
+-/*-----------------------------------------------------------------------
+- * START: High -> Low on SDA while SCL is High
+- */
+-static void send_start(void)
+-{
+-	I2C_SOFT_DECLARATIONS	/* intentional without ';' */
+-
+-	I2C_DELAY;
+-	I2C_SDA(1);
+-	I2C_ACTIVE;
+-	I2C_DELAY;
+-	I2C_SCL(1);
+-	I2C_DELAY;
+-	I2C_SDA(0);
+-	I2C_DELAY;
+-}
+-
+-/*-----------------------------------------------------------------------
+- * STOP: Low -> High on SDA while SCL is High
+- */
+-static void send_stop(void)
+-{
+-	I2C_SOFT_DECLARATIONS	/* intentional without ';' */
+-
+-	I2C_SCL(0);
+-	I2C_DELAY;
+-	I2C_SDA(0);
+-	I2C_ACTIVE;
+-	I2C_DELAY;
+-	I2C_SCL(1);
+-	I2C_DELAY;
+-	I2C_SDA(1);
+-	I2C_DELAY;
+-	I2C_TRISTATE;
+-}
+-
+-/*-----------------------------------------------------------------------
+- * ack should be I2C_ACK or I2C_NOACK
+- */
+-static void send_ack(int ack)
+-{
+-	I2C_SOFT_DECLARATIONS	/* intentional without ';' */
+-
+-	I2C_SCL(0);
+-	I2C_DELAY;
+-	I2C_ACTIVE;
+-	I2C_SDA(ack);
+-	I2C_DELAY;
+-	I2C_SCL(1);
+-	I2C_DELAY;
+-	I2C_DELAY;
+-	I2C_SCL(0);
+-	I2C_DELAY;
+-}
+-
+-/*-----------------------------------------------------------------------
+- * Send 8 bits and look for an acknowledgement.
+- */
+-static int write_byte(uchar data)
+-{
+-	I2C_SOFT_DECLARATIONS	/* intentional without ';' */
+-	int j;
+-	int nack;
+-
+-	I2C_ACTIVE;
+-	for(j = 0; j < 8; j++) {
+-		I2C_SCL(0);
+-		I2C_DELAY;
+-		I2C_SDA(data & 0x80);
+-		I2C_DELAY;
+-		I2C_SCL(1);
+-		I2C_DELAY;
+-		I2C_DELAY;
+-
+-		data <<= 1;
+-	}
+-
+-	/*
+-	 * Look for an <ACK>(negative logic) and return it.
+-	 */
+-	I2C_SCL(0);
+-	I2C_DELAY;
+-	I2C_SDA(1);
+-	I2C_TRISTATE;
+-	I2C_DELAY;
+-	I2C_SCL(1);
+-	I2C_DELAY;
+-	I2C_DELAY;
+-	nack = I2C_READ;
+-	I2C_SCL(0);
+-	I2C_DELAY;
+-	I2C_ACTIVE;
+-
+-	return(nack);	/* not a nack is an ack */
+-}
+-
+-/*-----------------------------------------------------------------------
+- * if ack == I2C_ACK, ACK the byte so can continue reading, else
+- * send I2C_NOACK to end the read.
+- */
+-static uchar read_byte(int ack)
+-{
+-	I2C_SOFT_DECLARATIONS	/* intentional without ';' */
+-	int  data;
+-	int  j;
+-
+-	/*
+-	 * Read 8 bits, MSB first.
+-	 */
+-	I2C_TRISTATE;
+-	I2C_SDA(1);
+-	data = 0;
+-	for(j = 0; j < 8; j++) {
+-		I2C_SCL(0);
+-		I2C_DELAY;
+-		I2C_SCL(1);
+-		I2C_DELAY;
+-		data <<= 1;
+-		data |= I2C_READ;
+-		I2C_DELAY;
+-	}
+-	send_ack(ack);
+-
+-	return(data);
+-}
+-
+-/*-----------------------------------------------------------------------
+- * Initialization
+- */
+-static void soft_i2c_init(struct i2c_adapter *adap, int speed, int slaveaddr)
+-{
+-	/*
+-	 * WARNING: Do NOT save speed in a static variable: if the
+-	 * I2C routines are called before RAM is initialized (to read
+-	 * the DIMM SPD, for instance), RAM won't be usable and your
+-	 * system will crash.
+-	 */
+-	send_reset ();
+-}
+-
+-/*-----------------------------------------------------------------------
+- * Probe to see if a chip is present.  Also good for checking for the
+- * completion of EEPROM writes since the chip stops responding until
+- * the write completes (typically 10mSec).
+- */
+-static int soft_i2c_probe(struct i2c_adapter *adap, uint8_t addr)
+-{
+-	int rc;
+-
+-	/*
+-	 * perform 1 byte write transaction with just address byte
+-	 * (fake write)
+-	 */
+-	send_start();
+-	rc = write_byte ((addr << 1) | 0);
+-	send_stop();
+-
+-	return (rc ? 1 : 0);
+-}
+-
+-/*-----------------------------------------------------------------------
+- * Read bytes
+- */
+-static int  soft_i2c_read(struct i2c_adapter *adap, uchar chip, uint addr,
+-			int alen, uchar *buffer, int len)
+-{
+-	int shift;
+-	PRINTD("i2c_read: chip %02X addr %02X alen %d buffer %p len %d\n",
+-		chip, addr, alen, buffer, len);
+-
+-#ifdef CONFIG_SYS_I2C_EEPROM_ADDR_OVERFLOW
+-	/*
+-	 * EEPROM chips that implement "address overflow" are ones
+-	 * like Catalyst 24WC04/08/16 which has 9/10/11 bits of
+-	 * address and the extra bits end up in the "chip address"
+-	 * bit slots. This makes a 24WC08 (1Kbyte) chip look like
+-	 * four 256 byte chips.
+-	 *
+-	 * Note that we consider the length of the address field to
+-	 * still be one byte because the extra address bits are
+-	 * hidden in the chip address.
+-	 */
+-	chip |= ((addr >> (alen * 8)) & CONFIG_SYS_I2C_EEPROM_ADDR_OVERFLOW);
+-
+-	PRINTD("i2c_read: fix addr_overflow: chip %02X addr %02X\n",
+-		chip, addr);
+-#endif
+-
+-	/*
+-	 * Do the addressing portion of a write cycle to set the
+-	 * chip's address pointer.  If the address length is zero,
+-	 * don't do the normal write cycle to set the address pointer,
+-	 * there is no address pointer in this chip.
+-	 */
+-	send_start();
+-	if(alen > 0) {
+-		if(write_byte(chip << 1)) {	/* write cycle */
+-			send_stop();
+-			PRINTD("i2c_read, no chip responded %02X\n", chip);
+-			return(1);
+-		}
+-		shift = (alen-1) * 8;
+-		while(alen-- > 0) {
+-			if(write_byte(addr >> shift)) {
+-				PRINTD("i2c_read, address not <ACK>ed\n");
+-				return(1);
+-			}
+-			shift -= 8;
+-		}
+-
+-		/* Some I2C chips need a stop/start sequence here,
+-		 * other chips don't work with a full stop and need
+-		 * only a start.  Default behaviour is to send the
+-		 * stop/start sequence.
+-		 */
+-#ifdef CONFIG_SOFT_I2C_READ_REPEATED_START
+-		send_start();
+-#else
+-		send_stop();
+-		send_start();
+-#endif
+-	}
+-	/*
+-	 * Send the chip address again, this time for a read cycle.
+-	 * Then read the data.  On the last byte, we do a NACK instead
+-	 * of an ACK(len == 0) to terminate the read.
+-	 */
+-	write_byte((chip << 1) | 1);	/* read cycle */
+-	while(len-- > 0) {
+-		*buffer++ = read_byte(len == 0);
+-	}
+-	send_stop();
+-	return(0);
+-}
+-
+-/*-----------------------------------------------------------------------
+- * Write bytes
+- */
+-static int  soft_i2c_write(struct i2c_adapter *adap, uchar chip, uint addr,
+-			int alen, uchar *buffer, int len)
+-{
+-	int shift, failures = 0;
+-
+-	PRINTD("i2c_write: chip %02X addr %02X alen %d buffer %p len %d\n",
+-		chip, addr, alen, buffer, len);
+-
+-	send_start();
+-	if(write_byte(chip << 1)) {	/* write cycle */
+-		send_stop();
+-		PRINTD("i2c_write, no chip responded %02X\n", chip);
+-		return(1);
+-	}
+-	shift = (alen-1) * 8;
+-	while(alen-- > 0) {
+-		if(write_byte(addr >> shift)) {
+-			PRINTD("i2c_write, address not <ACK>ed\n");
+-			return(1);
+-		}
+-		shift -= 8;
+-	}
+-
+-	while(len-- > 0) {
+-		if(write_byte(*buffer++)) {
+-			failures++;
+-		}
+-	}
+-	send_stop();
+-	return(failures);
+-}
+-
+-/*
+- * Register soft i2c adapters
+- */
+-U_BOOT_I2C_ADAP_COMPLETE(soft00, soft_i2c_init, soft_i2c_probe,
+-			 soft_i2c_read, soft_i2c_write, NULL,
+-			 CONFIG_SYS_I2C_SOFT_SPEED, CONFIG_SYS_I2C_SOFT_SLAVE,
+-			 0)
+-- 
+2.43.0
 
