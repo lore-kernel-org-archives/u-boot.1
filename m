@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3CEE1098792
-	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 14:39:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 707D11098792
+	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 14:39:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15672840CF;
-	Fri, 20 Mar 2026 15:38:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 135B284101;
+	Fri, 20 Mar 2026 15:38:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="jN8xFrg3";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="dkS1SU/T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AC6C83FC5; Fri, 20 Mar 2026 15:32:23 +0100 (CET)
-Received: from out-186.mta0.migadu.com (out-186.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::ba])
+ id A0C6083FFF; Fri, 20 Mar 2026 15:32:26 +0100 (CET)
+Received: from out-181.mta0.migadu.com (out-181.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::b5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34C2083F00
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 15:32:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 037E583F9B
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 15:32:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
@@ -29,17 +29,17 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1774017139;
+ s=key1; t=1774017143;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ZebeunayAyKzVB9cKrTkH9BCekDBsdVHWHi3u/9w/5k=;
- b=jN8xFrg3USOSuqc/n1NnAhi9D7IMqx+S58lXIwpnL+isxzhvNr9KTkiXaSwbsCZaaQRNQH
- fnLhveYSPGNWpEz8eu3BhbgY6H0eJj4vtLulgeAqXmEMpUhYZT6AzPmFTleEmKSYrUQFXN
- gftWqTJA3vwVlahnkOXbGxM/pGJLC19s+570dB1Cb5rW4adLwCUgHaNPro3Kb9ZPzLFAUq
- YP5XKbX3Bt/NILVw07qWBzBR7ngQhMcm68wZDjFRC93MIW0XTUjyElzpyEBvjF5HeOrGif
- C95DVwf6Q/ZtbvyjL26i4A22BSaTZ8doBfpWNXwacbbNkKdC7CYgtSzGFpkWyQ==
+ bh=8TOdW1C2jzBT6E8bbI7bLvVyd00e6KNjwAOMN21XucM=;
+ b=dkS1SU/TJMuWNVlRFSmhporbSgPM+ixlpNjfSqSY6RRHuiXyt13ERJi2/ETY8SdqjtFM6d
+ zctJfENu+iJ2uo045S4Ydr9Gq+Cor4bHeRG2eBOAR1RyXkbTflZggsRKSPSEPVqNdcl61A
+ ouwHY+T/XCGjrCK1feebWyFi7TSQsNqx2lojndaBttYMqQdEqbiEMmLus+6cQyhvgl5bTH
+ nT5wn/XgkVc1jWBIr4UivEHFanvIYOIxNyrxUgxmlG4XaUwopjhrosyU3tt+/pzso3hZOD
+ uyM4xco+6naG95Ybb0UWM8++XAxj9U9mZaTdKqvP85q3GHlBvzzBrKzWy0h92Q==
 From: Casey Connolly <kcxt@postmarketos.org>
 To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
  u-boot-qcom@groups.io, uboot-snps-arc@synopsys.com,
@@ -63,21 +63,20 @@ Cc: Casey Connolly <casey.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
  20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org,
  Marek Vasut <marex@denx.de>
-Subject: [PATCH RFC 37/40] clk/qcom/ccf: adapt common, gdsc,
- and reset code for U-Boot
-Date: Fri, 20 Mar 2026 15:31:33 +0100
-Message-ID: <20260320-casey-ccf-upstream-v1-37-5b654f4b6620@linaro.org>
+Subject: [PATCH RFC 38/40] clk/qcom/ccf: adapt clocks for U-Boot
+Date: Fri, 20 Mar 2026 15:31:34 +0100
+Message-ID: <20260320-casey-ccf-upstream-v1-38-5b654f4b6620@linaro.org>
 In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-X-Developer-Signature: v=1; a=openpgp-sha256; l=36029;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=25560;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=pTg2DYm1YBrXMl1Ae4kAqOMD+Gegfm7mDR1C5pJEWnE=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsy9kStmVh+f5WI31UeyLv3XFLVk4fXi5V/2FvwraV6aV
- SrzbHpWRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZhIrBXD/zy2/JulpimTn7+0
- LNjhclptWWLvAzM+/XOChRcPfWvN+svIsPfIQqGsii8u3H+Ko1WfekoWnzNb7ta8fOlPjV/XNdS
- z3gMA
+ bh=+1Sy/P0C+qQKtMtZjcHJ+SAaw0wqFHyU8jnhpvW+H4g=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsy9kSte/cwu0teV/9Oq0FZ4s3fuy9Q5h1fm/zL9JOy/b
+ NMOtUCPjlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCRY18YGRYtn8s+69O61bmP
+ Ph78fmHdnoNaUw1mbmt/vlmKbf5z/1l3GP7whQjI8E9TD4h8vGy67YP8PzWun0+Lx53P/lwV+fj
+ RTi4pAA==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 Content-Transfer-Encoding: 8bit
@@ -101,1272 +100,750 @@ X-Virus-Status: Clean
 
 From: Casey Connolly <casey.connolly@linaro.org>
 
-Since U-Boot drivers require a udevice per driver, adapt the qcom clock
-core code as well as the power domain and reset drivers so that we bind
-these additional drivers to the clock device. The clock device itself
-will be a UCLASS_NOP driver for clarity, even though with CCF it would
-be possible to register the clocks from either the PD or reset drivers,
-using a separate device for now makes the code cleaner and easier to
-reason about.
+Adapt the various clock type helpers to work with U-Boot CCF, these
+changes are quite minor, predominantly just the superficial API
+differences.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/clk/qcom/ccf/common.c | 328 ++++++++----------------------------------
- drivers/clk/qcom/ccf/common.h |  40 ++++--
- drivers/clk/qcom/ccf/gdsc.c   | 324 +++++++++++++----------------------------
- drivers/clk/qcom/ccf/gdsc.h   |  32 +++--
- drivers/clk/qcom/ccf/reset.c  | 101 +++++++++----
- drivers/clk/qcom/ccf/reset.h  |  10 +-
- 6 files changed, 282 insertions(+), 553 deletions(-)
+ drivers/clk/qcom/Kconfig                  |   1 +
+ drivers/clk/qcom/ccf/Makefile             |  21 ++++
+ drivers/clk/qcom/ccf/clk-alpha-pll.c      |   5 +-
+ drivers/clk/qcom/ccf/clk-branch.c         |   7 +-
+ drivers/clk/qcom/ccf/clk-branch.h         |   1 +
+ drivers/clk/qcom/ccf/clk-rcg2.c           | 157 ++++++------------------------
+ drivers/clk/qcom/ccf/clk-regmap-divider.c |   2 +-
+ drivers/clk/qcom/ccf/clk-regmap-mux-div.c |   1 +
+ drivers/clk/qcom/ccf/clk-regmap-mux.c     |   2 +-
+ drivers/clk/qcom/ccf/clk-regmap-phy-mux.c |   2 +-
+ drivers/clk/qcom/ccf/clk-regmap.c         |  10 +-
+ drivers/clk/qcom/ccf/clk-regmap.h         |   2 +-
+ drivers/clk/qcom/ccf/clk-rpmh.c           | 113 ++++++++++-----------
+ 13 files changed, 122 insertions(+), 202 deletions(-)
 
-diff --git a/drivers/clk/qcom/ccf/common.c b/drivers/clk/qcom/ccf/common.c
-index 121591886774..8af0e8889357 100644
---- a/drivers/clk/qcom/ccf/common.c
-+++ b/drivers/clk/qcom/ccf/common.c
-@@ -2,17 +2,17 @@
- /*
-  * Copyright (c) 2013-2014, The Linux Foundation. All rights reserved.
+diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+index 8504ed5d6561..727ff7dec61d 100644
+--- a/drivers/clk/qcom/Kconfig
++++ b/drivers/clk/qcom/Kconfig
+@@ -2,8 +2,9 @@ if ARCH_SNAPDRAGON || ARCH_IPQ40XX
+ 
+ config CLK_QCOM
+ 	bool
+ 	depends on CLK && DM_RESET && POWER_DOMAIN
++	select REGMAP if CLK_CCF_FULL
+ 	def_bool n
+ 
+ menu "Qualcomm clock drivers"
+ 
+diff --git a/drivers/clk/qcom/ccf/Makefile b/drivers/clk/qcom/ccf/Makefile
+new file mode 100644
+index 000000000000..1d8fcdd3667f
+--- /dev/null
++++ b/drivers/clk/qcom/ccf/Makefile
+@@ -0,0 +1,21 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# (C) Copyright 2023 Linaro
++
++obj-y += common.o common-uboot.o
++obj-y += clk-regmap.o
++obj-y += clk-alpha-pll.o
++obj-y += clk-rcg2.o
++obj-y += clk-branch.o
++obj-y += clk-regmap-divider.o
++obj-y += clk-regmap-mux.o
++obj-y += clk-regmap-mux-div.o
++obj-y += clk-regmap-phy-mux.o
++obj-y += clk-rpmh.o
++obj-y += reset.o
++obj-y += gdsc.o
++
++obj-$(CONFIG_CLK_QCOM_SM8650) += gcc-sm8650.o \
++				 dispcc-sm8550.o \
++				 tcsrcc-sm8650.o
++
+diff --git a/drivers/clk/qcom/ccf/clk-alpha-pll.c b/drivers/clk/qcom/ccf/clk-alpha-pll.c
+index 6aeba40358c1..58a13521abc3 100644
+--- a/drivers/clk/qcom/ccf/clk-alpha-pll.c
++++ b/drivers/clk/qcom/ccf/clk-alpha-pll.c
+@@ -3,16 +3,19 @@
+  * Copyright (c) 2015, 2018, The Linux Foundation. All rights reserved.
+  * Copyright (c) 2021, 2023-2024, Qualcomm Innovation Center, Inc. All rights reserved.
   */
  
--#include <linux/export.h>
--#include <linux/module.h>
-+#include <dm/read.h>
-+#include <dm/device_compat.h>
-+#include <dm/devres.h>
-+#include <dm/ofnode.h>
-+#include <linux/compat.h>
- #include <linux/regmap.h>
--#include <linux/platform_device.h>
- #include <linux/clk-provider.h>
--#include <linux/interconnect-clk.h>
--#include <linux/pm_runtime.h>
--#include <linux/reset-controller.h>
--#include <linux/of.h>
-+#include <reset.h>
-+#include <event.h>
- 
- #include "common.h"
- #include "clk-alpha-pll.h"
- #include "clk-branch.h"
-@@ -20,13 +20,15 @@
- #include "clk-regmap.h"
- #include "reset.h"
- #include "gdsc.h"
- 
-+#include "common-uboot.h"
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
- struct qcom_cc {
--	struct qcom_reset_controller reset;
- 	struct clk_regmap **rclks;
- 	size_t num_rclks;
--	struct dev_pm_domain_list *pd_list;
- };
- 
- const
- struct freq_tbl *qcom_find_freq(const struct freq_tbl *f, unsigned long rate)
-@@ -104,18 +106,36 @@ int qcom_find_cfg_index(struct clk_hw *hw, const struct parent_map *map, u8 cfg)
- }
- EXPORT_SYMBOL_GPL(qcom_find_cfg_index);
- 
- struct regmap *
--qcom_cc_map(struct platform_device *pdev, const struct qcom_cc_desc *desc)
-+qcom_cc_map(struct udevice *dev, const struct qcom_cc_desc *desc)
- {
- 	void __iomem *base;
--	struct device *dev = &pdev->dev;
-+	struct regmap_config config = {
-+		.reg_offset_shift = 0,
-+	};
- 
--	base = devm_platform_ioremap_resource(pdev, 0);
--	if (IS_ERR(base))
--		return ERR_CAST(base);
-+	switch (desc->config->val_bits) {
-+	case 64:
-+		config.width = REGMAP_SIZE_64;
-+		break;
-+	case 32:
-+		config.width = REGMAP_SIZE_32;
-+		break;
-+	case 16:
-+		config.width = REGMAP_SIZE_16;
-+		break;
-+	}
- 
--	return devm_regmap_init_mmio(dev, base, desc->config);
-+	if (desc->config->max_register) {
-+		base = dev_read_addr_ptr(dev);
-+		if (!IS_ERR(base)) {
-+			config.r_start = (ulong)base;
-+			config.r_size = desc->config->max_register - (ulong)base;
-+		}
-+	}
-+
-+	return devm_regmap_init(dev, NULL, NULL, &config);
- }
- EXPORT_SYMBOL_GPL(qcom_cc_map);
- 
- void
-@@ -138,259 +158,43 @@ qcom_pll_set_fsm_mode(struct regmap *map, u32 reg, u8 bias_count, u8 lock_count)
- 	regmap_update_bits(map, reg, PLL_VOTE_FSM_ENA, PLL_VOTE_FSM_ENA);
- }
- EXPORT_SYMBOL_GPL(qcom_pll_set_fsm_mode);
- 
--static void qcom_cc_gdsc_unregister(void *data)
--{
--	gdsc_unregister(data);
--}
--
--/*
-- * Backwards compatibility with old DTs. Register a pass-through factor 1/1
-- * clock to translate 'path' clk into 'name' clk and register the 'path'
-- * clk as a fixed rate clock if it isn't present.
-- */
--static int _qcom_cc_register_board_clk(struct device *dev, const char *path,
--				       const char *name, unsigned long rate,
--				       bool add_factor)
--{
--	struct device_node *node = NULL;
--	struct device_node *clocks_node;
--	struct clk_fixed_factor *factor;
--	struct clk_fixed_rate *fixed;
--	struct clk_init_data init_data = { };
--	int ret;
--
--	clocks_node = of_find_node_by_path("/clocks");
--	if (clocks_node) {
--		node = of_get_child_by_name(clocks_node, path);
--		of_node_put(clocks_node);
--	}
--
--	if (!node) {
--		fixed = devm_kzalloc(dev, sizeof(*fixed), GFP_KERNEL);
--		if (!fixed)
--			return -EINVAL;
--
--		fixed->fixed_rate = rate;
--		fixed->hw.init = &init_data;
--
--		init_data.name = path;
--		init_data.ops = &clk_fixed_rate_ops;
--
--		ret = devm_clk_hw_register(dev, &fixed->hw);
--		if (ret)
--			return ret;
--	}
--	of_node_put(node);
--
--	if (add_factor) {
--		factor = devm_kzalloc(dev, sizeof(*factor), GFP_KERNEL);
--		if (!factor)
--			return -EINVAL;
--
--		factor->mult = factor->div = 1;
--		factor->hw.init = &init_data;
--
--		init_data.name = name;
--		init_data.parent_names = &path;
--		init_data.num_parents = 1;
--		init_data.flags = 0;
--		init_data.ops = &clk_fixed_factor_ops;
--
--		ret = devm_clk_hw_register(dev, &factor->hw);
--		if (ret)
--			return ret;
--	}
--
--	return 0;
--}
--
--int qcom_cc_register_board_clk(struct device *dev, const char *path,
--			       const char *name, unsigned long rate)
--{
--	bool add_factor = true;
--
--	/*
--	 * TODO: The RPM clock driver currently does not support the xo clock.
--	 * When xo is added to the RPM clock driver, we should change this
--	 * function to skip registration of xo factor clocks.
--	 */
--
--	return _qcom_cc_register_board_clk(dev, path, name, rate, add_factor);
--}
--EXPORT_SYMBOL_GPL(qcom_cc_register_board_clk);
--
--int qcom_cc_register_sleep_clk(struct device *dev)
--{
--	return _qcom_cc_register_board_clk(dev, "sleep_clk", "sleep_clk_src",
--					   32768, true);
--}
--EXPORT_SYMBOL_GPL(qcom_cc_register_sleep_clk);
--
--/* Drop 'protected-clocks' from the list of clocks to register */
--static void qcom_cc_drop_protected(struct device *dev, struct qcom_cc *cc)
--{
--	struct device_node *np = dev->of_node;
--	u32 i;
--
--	of_property_for_each_u32(np, "protected-clocks", i) {
--		if (i >= cc->num_rclks)
--			continue;
--
--		cc->rclks[i] = NULL;
--	}
--}
--
--static struct clk_hw *qcom_cc_clk_hw_get(struct of_phandle_args *clkspec,
-+static struct clk_hw *qcom_cc_clk_hw_get(struct ofnode_phandle_args *clkspec,
- 					 void *data)
- {
- 	struct qcom_cc *cc = data;
- 	unsigned int idx = clkspec->args[0];
- 
-+	// printf("%s: %s: id %u\n", __func__, ofnode_get_name(clkspec->node), idx);
-+
- 	if (idx >= cc->num_rclks) {
- 		pr_err("%s: invalid index %u\n", __func__, idx);
- 		return ERR_PTR(-EINVAL);
- 	}
- 
--	return cc->rclks[idx] ? &cc->rclks[idx]->hw : NULL;
-+	if (!cc->rclks[idx])
-+		return NULL;
-+
-+	/* U-Boot: some clocks may not be registered pre-reloc */
-+	return cc->rclks[idx]->hw.core ? &cc->rclks[idx]->hw : NULL;
- }
- 
--static int qcom_cc_icc_register(struct device *dev,
--				const struct qcom_cc_desc *desc)
--{
--	struct icc_clk_data *icd;
--	struct clk_hw *hws;
--	int i;
--
--	if (!IS_ENABLED(CONFIG_INTERCONNECT_CLK))
--		return 0;
--
--	if (!desc->icc_hws)
--		return 0;
--
--	icd = devm_kcalloc(dev, desc->num_icc_hws, sizeof(*icd), GFP_KERNEL);
--	if (!icd)
--		return -ENOMEM;
--
--	for (i = 0; i < desc->num_icc_hws; i++) {
--		icd[i].master_id = desc->icc_hws[i].master_id;
--		icd[i].slave_id = desc->icc_hws[i].slave_id;
--		hws = &desc->clks[desc->icc_hws[i].clk_id]->hw;
--		icd[i].clk = devm_clk_hw_get_clk(dev, hws, "icc");
--		if (IS_ERR(icd[i].clk))
--			return dev_err_probe(dev, PTR_ERR(icd[i].clk),
--					     "(%d) clock entry is null\n", i);
--		icd[i].name = clk_hw_get_name(hws);
--	}
--
--	return devm_icc_clk_register(dev, desc->icc_first_node_id,
--						     desc->num_icc_hws, icd);
--}
--
--static int qcom_cc_clk_pll_configure(const struct qcom_cc_driver_data *data,
--				     struct regmap *regmap)
--{
--	const struct clk_init_data *init;
--	struct clk_alpha_pll *pll;
--	int i;
--
--	for (i = 0; i < data->num_alpha_plls; i++) {
--		pll = data->alpha_plls[i];
--		init = pll->clkr.hw.init;
--
--		if (!pll->config || !pll->regs) {
--			pr_err("%s: missing pll config or regs\n", init->name);
--			return -EINVAL;
--		}
--
--		qcom_clk_alpha_pll_configure(pll, regmap);
--	}
--
--	return 0;
--}
--
--static void qcom_cc_clk_regs_configure(struct device *dev, const struct qcom_cc_driver_data *data,
--				       struct regmap *regmap)
--{
--	int i;
--
--	for (i = 0; i < data->num_clk_cbcrs; i++)
--		qcom_branch_set_clk_en(regmap, data->clk_cbcrs[i]);
--
--	if (data->clk_regs_configure)
--		data->clk_regs_configure(dev, regmap);
--}
--
--int qcom_cc_really_probe(struct device *dev,
-+int qcom_cc_really_probe(struct udevice *dev,
- 			 const struct qcom_cc_desc *desc, struct regmap *regmap)
- {
--	int i, ret;
--	struct qcom_reset_controller *reset;
-+	int ret;
- 	struct qcom_cc *cc;
--	struct gdsc_desc *scd;
- 	size_t num_clks = desc->num_clks;
- 	struct clk_regmap **rclks = desc->clks;
- 	size_t num_clk_hws = desc->num_clk_hws;
- 	struct clk_hw **clk_hws = desc->clk_hws;
-+	int i;
- 
- 	cc = devm_kzalloc(dev, sizeof(*cc), GFP_KERNEL);
- 	if (!cc)
- 		return -ENOMEM;
- 
--	ret = devm_pm_domain_attach_list(dev, NULL, &cc->pd_list);
--	if (ret < 0 && ret != -EEXIST)
--		return ret;
--
--	if (desc->use_rpm) {
--		ret = devm_pm_runtime_enable(dev);
--		if (ret)
--			return ret;
--
--		ret = pm_runtime_resume_and_get(dev);
--		if (ret)
--			return ret;
--	}
--
--	if (desc->driver_data) {
--		ret = qcom_cc_clk_pll_configure(desc->driver_data, regmap);
--		if (ret)
--			goto put_rpm;
--
--		qcom_cc_clk_regs_configure(dev, desc->driver_data, regmap);
--	}
--
--	reset = &cc->reset;
--	reset->rcdev.of_node = dev->of_node;
--	reset->rcdev.ops = &qcom_reset_ops;
--	reset->rcdev.owner = dev->driver->owner;
--	reset->rcdev.nr_resets = desc->num_resets;
--	reset->regmap = regmap;
--	reset->reset_map = desc->resets;
--
--	ret = devm_reset_controller_register(dev, &reset->rcdev);
--	if (ret)
--		goto put_rpm;
--
--	if (desc->gdscs && desc->num_gdscs) {
--		scd = devm_kzalloc(dev, sizeof(*scd), GFP_KERNEL);
--		if (!scd) {
--			ret = -ENOMEM;
--			goto put_rpm;
--		}
--		scd->dev = dev;
--		scd->scs = desc->gdscs;
--		scd->num = desc->num_gdscs;
--		scd->pd_list = cc->pd_list;
--		ret = gdsc_register(scd, &reset->rcdev, regmap);
--		if (ret)
--			goto put_rpm;
--		ret = devm_add_action_or_reset(dev, qcom_cc_gdsc_unregister,
--					       scd);
--		if (ret)
--			goto put_rpm;
--	}
--
- 	if (desc->driver_data &&
- 	    desc->driver_data->dfs_rcgs &&
- 	    desc->driver_data->num_dfs_rcgs) {
- 		ret = qcom_cc_register_rcg_dfs(regmap,
-@@ -402,67 +206,47 @@ int qcom_cc_really_probe(struct device *dev,
- 
- 	cc->rclks = rclks;
- 	cc->num_rclks = num_clks;
- 
--	qcom_cc_drop_protected(dev, cc);
--
- 	for (i = 0; i < num_clk_hws; i++) {
-+		// if (!(gd->flags & GD_FLG_RELOC) && !(clk_hws[i]->init->flags & CLK_REGISTER_PRE_RELOC))
-+		// 	continue;
- 		ret = devm_clk_hw_register(dev, clk_hws[i]);
- 		if (ret)
--			goto put_rpm;
-+			return ret;
- 	}
- 
- 	for (i = 0; i < num_clks; i++) {
- 		if (!rclks[i])
- 			continue;
-+		// if (!(gd->flags & GD_FLG_RELOC) && !(rclks[i]->hw.init->flags & CLK_REGISTER_PRE_RELOC))
-+		// 	continue;
- 
--		ret = devm_clk_register_regmap(dev, rclks[i]);
-+		ret = devm_clk_register_regmap(dev, rclks[i], regmap);
- 		if (ret)
--			goto put_rpm;
-+			return ret;
- 	}
- 
- 	ret = devm_of_clk_add_hw_provider(dev, qcom_cc_clk_hw_get, cc);
- 	if (ret)
- 		goto put_rpm;
- 
--	ret = qcom_cc_icc_register(dev, desc);
--
- put_rpm:
- 	if (desc->use_rpm)
- 		pm_runtime_put(dev);
- 
- 	return ret;
- }
- EXPORT_SYMBOL_GPL(qcom_cc_really_probe);
- 
--int qcom_cc_probe(struct platform_device *pdev, const struct qcom_cc_desc *desc)
-+int qcom_cc_probe(struct udevice *dev, const struct qcom_cc_desc *desc)
- {
- 	struct regmap *regmap;
- 
--	regmap = qcom_cc_map(pdev, desc);
-+	regmap = qcom_cc_map(dev, desc);
- 	if (IS_ERR(regmap))
- 		return PTR_ERR(regmap);
- 
--	return qcom_cc_really_probe(&pdev->dev, desc, regmap);
-+	return qcom_cc_really_probe(dev, desc, regmap);
- }
- EXPORT_SYMBOL_GPL(qcom_cc_probe);
- 
--int qcom_cc_probe_by_index(struct platform_device *pdev, int index,
--			   const struct qcom_cc_desc *desc)
--{
--	struct regmap *regmap;
--	void __iomem *base;
--
--	base = devm_platform_ioremap_resource(pdev, index);
--	if (IS_ERR(base))
--		return -ENOMEM;
--
--	regmap = devm_regmap_init_mmio(&pdev->dev, base, desc->config);
--	if (IS_ERR(regmap))
--		return PTR_ERR(regmap);
--
--	return qcom_cc_really_probe(&pdev->dev, desc, regmap);
--}
--EXPORT_SYMBOL_GPL(qcom_cc_probe_by_index);
--
--MODULE_LICENSE("GPL v2");
--MODULE_DESCRIPTION("QTI Common Clock module");
-diff --git a/drivers/clk/qcom/ccf/common.h b/drivers/clk/qcom/ccf/common.h
-index 953c91f7b145..6dc4ec3ea9d6 100644
---- a/drivers/clk/qcom/ccf/common.h
-+++ b/drivers/clk/qcom/ccf/common.h
-@@ -3,23 +3,41 @@
- 
- #ifndef __QCOM_CLK_COMMON_H__
- #define __QCOM_CLK_COMMON_H__
- 
-+#include <linux/types.h>
-+
- struct platform_device;
- struct regmap_config;
- struct clk_regmap;
- struct qcom_reset_map;
- struct regmap;
- struct freq_tbl;
- struct clk_hw;
-+struct udevice;
- 
- #define PLL_LOCK_COUNT_SHIFT	8
- #define PLL_LOCK_COUNT_MASK	0x3f
- #define PLL_BIAS_COUNT_SHIFT	14
- #define PLL_BIAS_COUNT_MASK	0x3f
- #define PLL_VOTE_FSM_ENA	BIT(20)
- #define PLL_VOTE_FSM_RESET	BIT(21)
- 
-+/* U-Boot compat */
-+struct compat_regmap_config {
-+	const char *name;
-+
-+	int reg_bits;
-+	int reg_stride;
-+	int reg_shift;
-+	unsigned int reg_base;
-+	int pad_bits;
-+	int val_bits;
-+
-+	unsigned int max_register;
-+	bool fast_io;
-+};
-+
- struct qcom_icc_hws_data {
- 	int master_id;
- 	int slave_id;
- 	int clk_id;
-@@ -31,13 +49,13 @@ struct qcom_cc_driver_data {
- 	u32 *clk_cbcrs;
- 	size_t num_clk_cbcrs;
- 	const struct clk_rcg_dfs_data *dfs_rcgs;
- 	size_t num_dfs_rcgs;
--	void (*clk_regs_configure)(struct device *dev, struct regmap *regmap);
-+	void (*clk_regs_configure)(struct udevice *dev, struct regmap *regmap);
- };
- 
- struct qcom_cc_desc {
--	const struct regmap_config *config;
-+	const struct compat_regmap_config *config;
- 	struct clk_regmap **clks;
- 	size_t num_clks;
- 	const struct qcom_reset_map *resets;
- 	size_t num_resets;
-@@ -74,19 +92,15 @@ extern int qcom_find_src_index(struct clk_hw *hw, const struct parent_map *map,
- 			       u8 src);
- extern int qcom_find_cfg_index(struct clk_hw *hw, const struct parent_map *map,
- 			       u8 cfg);
- 
--extern int qcom_cc_register_board_clk(struct device *dev, const char *path,
-+extern int qcom_cc_register_board_clk(struct udevice *dev, const char *path,
- 				      const char *name, unsigned long rate);
--extern int qcom_cc_register_sleep_clk(struct device *dev);
-+extern int qcom_cc_register_sleep_clk(struct udevice *dev);
- 
--extern struct regmap *qcom_cc_map(struct platform_device *pdev,
--				  const struct qcom_cc_desc *desc);
--extern int qcom_cc_really_probe(struct device *dev,
--				const struct qcom_cc_desc *desc,
--				struct regmap *regmap);
--extern int qcom_cc_probe(struct platform_device *pdev,
--			 const struct qcom_cc_desc *desc);
--extern int qcom_cc_probe_by_index(struct platform_device *pdev, int index,
--				  const struct qcom_cc_desc *desc);
-+extern struct regmap * qcom_cc_map(struct udevice *dev,
-+				   const struct qcom_cc_desc *desc);
-+int qcom_cc_probe(struct udevice *dev, const struct qcom_cc_desc *desc);
-+int qcom_cc_really_probe(struct udevice *dev,
-+			 const struct qcom_cc_desc *desc, struct regmap *regmap);
- 
- #endif
-diff --git a/drivers/clk/qcom/ccf/gdsc.c b/drivers/clk/qcom/ccf/gdsc.c
-index 7deabf8400cf..5380bb479d6e 100644
---- a/drivers/clk/qcom/ccf/gdsc.c
-+++ b/drivers/clk/qcom/ccf/gdsc.c
-@@ -2,20 +2,22 @@
- /*
-  * Copyright (c) 2015, 2017-2018, 2022, The Linux Foundation. All rights reserved.
-  */
- 
-+#include <dm/device.h>
-+#include <dm/device_compat.h>
-+#include <dm/device-internal.h>
-+#include <dm/ofnode.h>
- #include <linux/bitops.h>
-+#include <linux/compat.h>
- #include <linux/delay.h>
- #include <linux/err.h>
--#include <linux/export.h>
--#include <linux/jiffies.h>
++#include <asm/io.h>
++#include <div64.h>
 +#include <linux/bug.h>
  #include <linux/kernel.h>
--#include <linux/ktime.h>
--#include <linux/pm_domain.h>
+-#include <linux/export.h>
+ #include <linux/clk-provider.h>
  #include <linux/regmap.h>
--#include <linux/regulator/consumer.h>
--#include <linux/reset-controller.h>
--#include <linux/slab.h>
-+#include <power/regulator.h>
-+#include <power-domain-uclass.h>
-+#include <reset-uclass.h>
- #include "gdsc.h"
+ #include <linux/delay.h>
  
- #define PWR_ON_MASK		BIT(31)
- #define EN_REST_WAIT_MASK	GENMASK_ULL(23, 20)
-@@ -48,9 +50,9 @@
+ #include "clk-alpha-pll.h"
+ #include "common.h"
++#include "common-uboot.h"
  
- #define STATUS_POLL_TIMEOUT_US	2000
- #define TIMEOUT_US		500
+ #define PLL_MODE(p)		((p)->offset + 0x0)
+ # define PLL_OUTCTRL		BIT(0)
+ # define PLL_BYPASSNL		BIT(1)
+diff --git a/drivers/clk/qcom/ccf/clk-branch.c b/drivers/clk/qcom/ccf/clk-branch.c
+index 444e7d8648d4..0b91a71289b2 100644
+--- a/drivers/clk/qcom/ccf/clk-branch.c
++++ b/drivers/clk/qcom/ccf/clk-branch.c
+@@ -3,13 +3,13 @@
+  * Copyright (c) 2013, The Linux Foundation. All rights reserved.
+  * Copyright (c) 2023, Qualcomm Innovation Center, Inc. All rights reserved.
+  */
  
--#define domain_to_gdsc(domain) container_of(domain, struct gdsc, pd)
-+#define domain_to_gdsc(domain) ((struct gdsc *)domain->priv)
++#include <linux/bug.h>
+ #include <linux/kernel.h>
+ #include <linux/bitops.h>
+ #include <linux/err.h>
+ #include <linux/delay.h>
+-#include <linux/export.h>
+ #include <linux/clk-provider.h>
+ #include <linux/regmap.h>
  
- enum gdsc_status {
- 	GDSC_OFF,
- 	GDSC_ON
-@@ -101,15 +103,15 @@ static int gdsc_hwctrl(struct gdsc *sc, bool en)
+ #include "clk-branch.h"
+@@ -83,10 +83,13 @@ static int clk_branch_wait(const struct clk_branch *br, bool enabling,
+ 			if (check_halt(br, enabling))
+ 				return 0;
+ 			udelay(1);
+ 		}
+-		WARN(1, "%s status stuck at 'o%s'", name,
++		WARN(1, "%s status stuck at 'o%s'\n", name,
+ 				enabling ? "ff" : "n");
++		u32 val;
++		regmap_read(br->clkr.regmap, br->halt_reg, &val);
++		printf("%s: halt_reg %#x val %#x\n", name, br->halt_reg, val);
+ 		return -EBUSY;
+ 	}
+ 	return 0;
  }
+diff --git a/drivers/clk/qcom/ccf/clk-branch.h b/drivers/clk/qcom/ccf/clk-branch.h
+index 6bc2ba2b5350..5cc5c2e9d165 100644
+--- a/drivers/clk/qcom/ccf/clk-branch.h
++++ b/drivers/clk/qcom/ccf/clk-branch.h
+@@ -5,8 +5,9 @@
+ #define __QCOM_CLK_BRANCH_H__
  
- static int gdsc_poll_status(struct gdsc *sc, enum gdsc_status status)
- {
--	ktime_t start;
-+	u64 timeout;
+ #include <linux/bitfield.h>
+ #include <linux/clk-provider.h>
++#include <linux/regmap.h>
  
--	start = ktime_get();
-+	timeout = timer_get_us() + STATUS_POLL_TIMEOUT_US;
- 	do {
- 		if (gdsc_check_status(sc, status))
+ #include "clk-regmap.h"
+ 
+ /**
+diff --git a/drivers/clk/qcom/ccf/clk-rcg2.c b/drivers/clk/qcom/ccf/clk-rcg2.c
+index e18cb8807d73..2f60830fc302 100644
+--- a/drivers/clk/qcom/ccf/clk-rcg2.c
++++ b/drivers/clk/qcom/ccf/clk-rcg2.c
+@@ -2,27 +2,23 @@
+ /*
+  * Copyright (c) 2013, 2018, The Linux Foundation. All rights reserved.
+  */
+ 
++#include <div64.h>
+ #include <linux/kernel.h>
+ #include <linux/bitops.h>
+ #include <linux/err.h>
+ #include <linux/bug.h>
+-#include <linux/export.h>
+-#include <linux/clk.h>
++#include <clk.h>
+ #include <linux/clk-provider.h>
+ #include <linux/delay.h>
+ #include <linux/rational.h>
+ #include <linux/regmap.h>
+ #include <linux/math64.h>
+-#include <linux/gcd.h>
+-#include <linux/minmax.h>
+-#include <linux/slab.h>
+-
+-#include <asm/div64.h>
+ 
+ #include "clk-rcg.h"
+ #include "common.h"
++#include "common-uboot.h"
+ 
+ #define CMD_REG			0x0
+ #define CMD_UPDATE		BIT(0)
+ #define CMD_ROOT_EN		BIT(1)
+@@ -132,9 +128,9 @@ static int update_config(struct clk_rcg2 *rcg)
  			return 0;
--	} while (ktime_us_delta(ktime_get(), start) < STATUS_POLL_TIMEOUT_US);
-+	} while (timer_get_us() < timeout);
- 
- 	if (gdsc_check_status(sc, status))
- 		return 0;
- 
-@@ -174,9 +176,9 @@ static int gdsc_toggle_logic(struct gdsc *sc, enum gdsc_status status,
  		udelay(1);
  	}
  
- 	ret = gdsc_poll_status(sc, status);
--	WARN(ret, "%s status stuck at 'o%s'", sc->pd.name, status ? "ff" : "n");
-+	WARN(ret, "%s status stuck at 'o%s'\n", sc->pd.name, status ? "ff" : "n");
- 
- 	if (!ret && status == GDSC_OFF && sc->rsupply) {
- 		ret = regulator_disable(sc->rsupply);
- 		if (ret < 0)
-@@ -187,21 +189,23 @@ static int gdsc_toggle_logic(struct gdsc *sc, enum gdsc_status status,
+-	WARN(1, "%s: rcg didn't update its configuration.", name);
++	WARN(1, "%s: rcg didn't update its configuration.\n", name);
+ 	return -EBUSY;
  }
  
- static inline int gdsc_deassert_reset(struct gdsc *sc)
- {
--	int i;
-+	debug("%s: %s: resets not yet supported!\n", sc->pd.name, __func__);
-+	// int i;
+ static int clk_rcg2_set_parent(struct clk_hw *hw, u8 index)
+@@ -222,9 +218,11 @@ clk_rcg2_recalc_rate(struct clk_hw *hw, unsigned long parent_rate)
+ 	u32 cfg;
  
--	for (i = 0; i < sc->reset_count; i++)
--		sc->rcdev->ops->deassert(sc->rcdev, sc->resets[i]);
-+	// for (i = 0; i < sc->reset_count; i++)
-+	// 	reset_deassert(sc->rcdev, sc->resets[i]);
- 	return 0;
+ 	regmap_read(rcg->clkr.regmap, RCG_CFG_OFFSET(rcg), &cfg);
+ 
+-	return __clk_rcg2_recalc_rate(hw, parent_rate, cfg);
++	ulong rate = __clk_rcg2_recalc_rate(hw, parent_rate, cfg);
++	pr_debug("%s: %s: rate %lu parent_rate %lu\n", __func__, clk_hw_get_name(hw), rate, parent_rate);
++	return rate;
  }
  
- static inline int gdsc_assert_reset(struct gdsc *sc)
- {
--	int i;
-+	debug("%s: %s: resets not yet supported!\n", sc->pd.name, __func__);
-+	// int i;
+ static int _freq_tbl_determine_rate(struct clk_hw *hw, const struct freq_tbl *f,
+ 				    struct clk_rate_request *req,
+@@ -349,22 +347,31 @@ static int _freq_tbl_fm_determine_rate(struct clk_hw *hw, const struct freq_mult
+ 	struct clk_hw *p;
+ 	int index;
  
--	for (i = 0; i < sc->reset_count; i++)
--		sc->rcdev->ops->assert(sc->rcdev, sc->resets[i]);
-+	// for (i = 0; i < sc->reset_count; i++)
-+	// 	reset_assert(sc->rcdev, sc->resets[i]);
- 	return 0;
- }
- 
- static inline void gdsc_force_mem_on(struct gdsc *sc)
-@@ -255,11 +259,10 @@ static void gdsc_retain_ff_on(struct gdsc *sc)
- 
- 	regmap_update_bits(sc->regmap, sc->gdscr, mask, mask);
- }
- 
--static int gdsc_enable(struct generic_pm_domain *domain)
-+static int _gdsc_enable(struct gdsc *sc)
- {
--	struct gdsc *sc = domain_to_gdsc(domain);
- 	int ret;
- 
- 	if (sc->pwrsts == PWRSTS_ON)
- 		return gdsc_deassert_reset(sc);
-@@ -313,9 +316,14 @@ static int gdsc_enable(struct generic_pm_domain *domain)
- 
- 	return 0;
- }
- 
--static int gdsc_disable(struct generic_pm_domain *domain)
-+static int gdsc_enable(struct power_domain *domain)
-+{
-+	return _gdsc_enable(domain_to_gdsc(domain));
-+}
+ 	f = qcom_find_freq_multi(f, rate);
+-	if (!f || !f->confs)
++	if (!f || !f->confs) {
++		dev_err(hw->clk->dev, "%s: couldn't match rate %lu\n", clk_hw_get_name(hw), rate);
+ 		return -EINVAL;
++	}
 +
-+static int gdsc_disable(struct power_domain *domain)
- {
- 	struct gdsc *sc = domain_to_gdsc(domain);
- 	int ret;
++	log_debug("%s: %s rate %lu table rate %lu\n", __func__,
++		clk_hw_get_name(hw), rate, f->freq);
  
-@@ -352,9 +360,9 @@ static int gdsc_disable(struct generic_pm_domain *domain)
- 	 */
- 	if (sc->pwrsts == PWRSTS_RET_ON)
- 		return 0;
+ 	conf = __clk_rcg2_select_conf(hw, f, rate);
+ 	if (IS_ERR(conf))
+ 		return PTR_ERR(conf);
+ 	index = qcom_find_src_index(hw, rcg->parent_map, conf->src);
+-	if (index < 0)
++	if (index < 0) {
++		dev_err(hw->clk->dev, "Couldn't find index for src %#x: %d\n", conf->src, index);
+ 		return index;
++	}
  
--	ret = gdsc_toggle_logic(sc, GDSC_OFF, domain->synced_poweroff);
-+	ret = gdsc_toggle_logic(sc, GDSC_OFF, true);
- 	if (ret)
- 		return ret;
+ 	clk_flags = clk_hw_get_flags(hw);
+ 	p = clk_hw_get_parent_by_index(hw, index);
+-	if (!p)
++	if (!p) {
++		dev_err(hw->clk->dev, "%s: couldn't get parent index %d\n", clk_hw_get_name(hw), index);
+ 		return -EINVAL;
++	}
  
- 	if (sc->flags & CLAMP_IO)
-@@ -362,45 +370,8 @@ static int gdsc_disable(struct generic_pm_domain *domain)
+ 	if (clk_flags & CLK_SET_RATE_PARENT) {
+ 		rate = f->freq;
+ 		if (conf->pre_div) {
+@@ -1203,122 +1210,8 @@ const struct clk_ops clk_pixel_ops = {
+ 	.determine_rate = clk_pixel_determine_rate,
+ };
+ EXPORT_SYMBOL_GPL(clk_pixel_ops);
  
- 	return 0;
- }
- 
--static int gdsc_set_hwmode(struct generic_pm_domain *domain, struct device *dev, bool mode)
+-static int clk_gfx3d_determine_rate(struct clk_hw *hw,
+-				    struct clk_rate_request *req)
 -{
--	struct gdsc *sc = domain_to_gdsc(domain);
+-	struct clk_rate_request parent_req = { .min_rate = 0, .max_rate = ULONG_MAX };
+-	struct clk_rcg2_gfx3d *cgfx = to_clk_rcg2_gfx3d(hw);
+-	struct clk_hw *xo, *p0, *p1, *p2;
+-	unsigned long p0_rate;
+-	u8 mux_div = cgfx->div;
 -	int ret;
 -
--	ret = gdsc_hwctrl(sc, mode);
+-	p0 = cgfx->hws[0];
+-	p1 = cgfx->hws[1];
+-	p2 = cgfx->hws[2];
+-	/*
+-	 * This function does ping-pong the RCG between PLLs: if we don't
+-	 * have at least one fixed PLL and two variable ones,
+-	 * then it's not going to work correctly.
+-	 */
+-	if (WARN_ON(!p0 || !p1 || !p2))
+-		return -EINVAL;
+-
+-	xo = clk_hw_get_parent_by_index(hw, 0);
+-	if (req->rate == clk_hw_get_rate(xo)) {
+-		req->best_parent_hw = xo;
+-		return 0;
+-	}
+-
+-	if (mux_div == 0)
+-		mux_div = 1;
+-
+-	parent_req.rate = req->rate * mux_div;
+-
+-	/* This has to be a fixed rate PLL */
+-	p0_rate = clk_hw_get_rate(p0);
+-
+-	if (parent_req.rate == p0_rate) {
+-		req->rate = req->best_parent_rate = p0_rate;
+-		req->best_parent_hw = p0;
+-		return 0;
+-	}
+-
+-	if (req->best_parent_hw == p0) {
+-		/* Are we going back to a previously used rate? */
+-		if (clk_hw_get_rate(p2) == parent_req.rate)
+-			req->best_parent_hw = p2;
+-		else
+-			req->best_parent_hw = p1;
+-	} else if (req->best_parent_hw == p2) {
+-		req->best_parent_hw = p1;
+-	} else {
+-		req->best_parent_hw = p2;
+-	}
+-
+-	clk_hw_get_rate_range(req->best_parent_hw,
+-			      &parent_req.min_rate, &parent_req.max_rate);
+-
+-	if (req->min_rate > parent_req.min_rate)
+-		parent_req.min_rate = req->min_rate;
+-
+-	if (req->max_rate < parent_req.max_rate)
+-		parent_req.max_rate = req->max_rate;
+-
+-	ret = __clk_determine_rate(req->best_parent_hw, &parent_req);
 -	if (ret)
 -		return ret;
 -
--	/*
--	 * Wait for the GDSC to go through a power down and
--	 * up cycle. If we poll the status register before the
--	 * power cycle is finished we might read incorrect values.
--	 */
--	udelay(1);
--
--	/*
--	 * When the GDSC is switched to HW mode, HW can disable the GDSC.
--	 * When the GDSC is switched back to SW mode, the GDSC will be enabled
--	 * again, hence we need to poll for GDSC to complete the power up.
--	 */
--	if (!mode)
--		return gdsc_poll_status(sc, GDSC_ON);
+-	req->rate = req->best_parent_rate = parent_req.rate;
+-	req->rate /= mux_div;
 -
 -	return 0;
 -}
 -
--static bool gdsc_get_hwmode(struct generic_pm_domain *domain, struct device *dev)
+-static int clk_gfx3d_set_rate_and_parent(struct clk_hw *hw, unsigned long rate,
+-		unsigned long parent_rate, u8 index)
 -{
--	struct gdsc *sc = domain_to_gdsc(domain);
--	u32 val;
+-	struct clk_rcg2_gfx3d *cgfx = to_clk_rcg2_gfx3d(hw);
+-	struct clk_rcg2 *rcg = &cgfx->rcg;
+-	u32 cfg;
+-	int ret;
 -
--	regmap_read(sc->regmap, sc->gdscr, &val);
+-	cfg = rcg->parent_map[index].cfg << CFG_SRC_SEL_SHIFT;
+-	/* On some targets, the GFX3D RCG may need to divide PLL frequency */
+-	if (cgfx->div > 1)
+-		cfg |= ((2 * cgfx->div) - 1) << CFG_SRC_DIV_SHIFT;
 -
--	return !!(val & HW_CONTROL_MASK);
--}
--
- static int gdsc_init(struct gdsc *sc)
- {
- 	u32 mask, val;
- 	int on, ret;
-@@ -427,14 +398,14 @@ static int gdsc_init(struct gdsc *sc)
- 	ret = regmap_update_bits(sc->regmap, sc->gdscr, mask, val);
- 	if (ret)
- 		return ret;
- 
--	/* Force gdsc ON if only ON state is supported */
--	if (sc->pwrsts == PWRSTS_ON) {
--		ret = gdsc_toggle_logic(sc, GDSC_ON, false);
--		if (ret)
--			return ret;
--	}
-+	// /* Force gdsc ON if only ON state is supported */
-+	// if (sc->pwrsts == PWRSTS_ON) {
-+	// 	ret = gdsc_toggle_logic(sc, GDSC_ON, false);
-+	// 	if (ret)
-+	// 		return ret;
-+	// }
- 
- 	on = gdsc_check_status(sc, GDSC_ON);
- 	if (on < 0)
- 		return on;
-@@ -473,31 +444,31 @@ static int gdsc_init(struct gdsc *sc)
- 		}
- 
- 	} else if (sc->flags & ALWAYS_ON) {
- 		/* If ALWAYS_ON GDSCs are not ON, turn them ON */
--		gdsc_enable(&sc->pd);
-+		_gdsc_enable(sc);
- 		on = true;
- 	}
- 
- 	if (on || (sc->pwrsts & PWRSTS_RET))
- 		gdsc_force_mem_on(sc);
- 	else
- 		gdsc_clear_mem_on(sc);
- 
--	if (sc->flags & ALWAYS_ON)
--		sc->pd.flags |= GENPD_FLAG_ALWAYS_ON;
--	if (!sc->pd.power_off)
--		sc->pd.power_off = gdsc_disable;
--	if (!sc->pd.power_on)
--		sc->pd.power_on = gdsc_enable;
--	if (sc->flags & HW_CTRL_TRIGGER) {
--		sc->pd.set_hwmode_dev = gdsc_set_hwmode;
--		sc->pd.get_hwmode_dev = gdsc_get_hwmode;
--	}
-+	// if (sc->flags & ALWAYS_ON)
-+	// 	sc->pd.flags |= GENPD_FLAG_ALWAYS_ON;
-+	// if (!sc->pd.power_off)
-+	// 	sc->pd.power_off = gdsc_disable;
-+	// if (!sc->pd.power_on)
-+	// 	sc->pd.power_on = gdsc_enable;
-+	// if (sc->flags & HW_CTRL_TRIGGER) {
-+	// 	sc->pd.set_hwmode_dev = gdsc_set_hwmode;
-+	// 	sc->pd.get_hwmode_dev = gdsc_get_hwmode;
-+	// }
- 
--	ret = pm_genpd_init(&sc->pd, NULL, !on);
+-	ret = regmap_write(rcg->clkr.regmap, rcg->cmd_rcgr + CFG_REG, cfg);
 -	if (ret)
--		goto err_disable_supply;
-+	// ret = pm_genpd_init(&sc->pd, NULL, !on);
-+	// if (ret)
-+	// 	goto err_disable_supply;
- 
- 	return 0;
- 
- err_disable_supply:
-@@ -506,162 +477,69 @@ err_disable_supply:
- 
- 	return ret;
- }
- 
--static int gdsc_add_subdomain_list(struct dev_pm_domain_list *pd_list,
--				   struct generic_pm_domain *subdomain)
-+static int qcom_gdsc_of_xlate(struct power_domain *pd,
-+			struct ofnode_phandle_args *args)
- {
--	int i, ret;
-+	struct gdsc_desc *desc = (struct gdsc_desc *)dev_get_driver_data(pd->dev);
- 
--	for (i = 0; i < pd_list->num_pds; i++) {
--		struct device *dev = pd_list->pd_devs[i];
--		struct generic_pm_domain *genpd = pd_to_genpd(dev->pm_domain);
+-		return ret;
 -
--		ret = pm_genpd_add_subdomain(genpd, subdomain);
--		if (ret)
--			return ret;
-+	if (args->args_count != 1) {
-+		debug("Invalid args_count: %d\n", args->args_count);
-+		return -EINVAL;
- 	}
- 
-+	pd->id = args->args[0];
-+
-+	if (pd->id > desc->num_gdscs) {
-+		dev_err(pd->dev, "Invalid GDSC ID %ld\n", pd->id);
-+		return -EINVAL;
-+	}
-+
-+	/* Assign per-GDSC private data */
-+	desc->gdsc[pd->id]->regmap = desc->regmap;
-+	pd->priv = desc->gdsc[pd->id];
-+
-+	gdsc_init(desc->gdsc[pd->id]);
-+
- 	return 0;
- }
- 
--static void gdsc_remove_subdomain_list(struct dev_pm_domain_list *pd_list,
--				       struct generic_pm_domain *subdomain)
-+static const struct power_domain_ops qcom_gdsc_ops = {
-+	.on = gdsc_enable,
-+	.off = gdsc_disable,
-+	.of_xlate = qcom_gdsc_of_xlate,
-+};
-+
-+U_BOOT_DRIVER(qcom_gdsc) = {
-+	.name = "qcom_gdsc",
-+	.id = UCLASS_POWER_DOMAIN,
-+	.ops = &qcom_gdsc_ops,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
-+
-+int gdsc_register(struct udevice *dev, struct gdsc **gdscs, int num_gdscs,
-+		  struct regmap *regmap)
- {
--	int i;
-+	int ret;
-+	char *name;
-+	struct gdsc_desc *desc;
- 
--	for (i = 0; i < pd_list->num_pds; i++) {
--		struct device *dev = pd_list->pd_devs[i];
--		struct generic_pm_domain *genpd = pd_to_genpd(dev->pm_domain);
--
--		pm_genpd_remove_subdomain(genpd, subdomain);
--	}
+-	return update_config(rcg);
 -}
 -
--static void gdsc_pm_subdomain_remove(struct gdsc_desc *desc, size_t num)
+-static int clk_gfx3d_set_rate(struct clk_hw *hw, unsigned long rate,
+-			      unsigned long parent_rate)
 -{
--	struct device *dev = desc->dev;
--	struct gdsc **scs = desc->scs;
--	int i;
--
--	/* Remove subdomains */
--	for (i = num - 1; i >= 0; i--) {
--		if (!scs[i])
--			continue;
--		if (scs[i]->parent)
--			pm_genpd_remove_subdomain(scs[i]->parent, &scs[i]->pd);
--		else if (!IS_ERR_OR_NULL(dev->pm_domain))
--			pm_genpd_remove_subdomain(pd_to_genpd(dev->pm_domain), &scs[i]->pd);
--		else if (desc->pd_list)
--			gdsc_remove_subdomain_list(desc->pd_list, &scs[i]->pd);
--	}
--}
--
--int gdsc_register(struct gdsc_desc *desc,
--		  struct reset_controller_dev *rcdev, struct regmap *regmap)
--{
--	int i, ret;
--	struct genpd_onecell_data *data;
--	struct device *dev = desc->dev;
--	struct gdsc **scs = desc->scs;
--	size_t num = desc->num;
--
--	data = devm_kzalloc(dev, sizeof(*data), GFP_KERNEL);
--	if (!data)
-+	desc = kzalloc(sizeof(*desc), GFP_KERNEL);
-+	if (!desc)
- 		return -ENOMEM;
- 
--	data->domains = devm_kcalloc(dev, num, sizeof(*data->domains),
--				     GFP_KERNEL);
--	if (!data->domains)
-+	desc->dev = dev;
-+	desc->gdsc = gdscs;
-+	desc->num_gdscs = num_gdscs;
-+	desc->regmap = regmap;
-+
-+	name = kzalloc(64, GFP_KERNEL);
-+	if (!name)
- 		return -ENOMEM;
-+	ret = snprintf(name, 64, "%s.%s", desc->dev->name, "gdsc");
-+	if (ret < 0)
-+		return ret;
- 
--	for (i = 0; i < num; i++) {
--		if (!scs[i] || !scs[i]->supply)
--			continue;
--
--		scs[i]->rsupply = devm_regulator_get_optional(dev, scs[i]->supply);
--		if (IS_ERR(scs[i]->rsupply)) {
--			ret = PTR_ERR(scs[i]->rsupply);
--			if (ret != -ENODEV)
--				return ret;
--
--			scs[i]->rsupply = NULL;
--		}
--	}
--
--	data->num_domains = num;
--	for (i = 0; i < num; i++) {
--		if (!scs[i])
--			continue;
--		scs[i]->regmap = regmap;
--		scs[i]->rcdev = rcdev;
--		ret = gdsc_init(scs[i]);
--		if (ret)
--			return ret;
--		data->domains[i] = &scs[i]->pd;
--	}
--
--	/* Add subdomains */
--	for (i = 0; i < num; i++) {
--		if (!scs[i])
--			continue;
--		if (scs[i]->parent)
--			ret = pm_genpd_add_subdomain(scs[i]->parent, &scs[i]->pd);
--		else if (!IS_ERR_OR_NULL(dev->pm_domain))
--			ret = pm_genpd_add_subdomain(pd_to_genpd(dev->pm_domain), &scs[i]->pd);
--		else if (desc->pd_list)
--			ret = gdsc_add_subdomain_list(desc->pd_list, &scs[i]->pd);
--
--		if (ret)
--			goto err_pm_subdomain_remove;
--	}
--
--	return of_genpd_add_provider_onecell(dev->of_node, data);
--
--err_pm_subdomain_remove:
--	gdsc_pm_subdomain_remove(desc, i);
--
--	return ret;
-+	return device_bind_with_driver_data(desc->dev, DM_DRIVER_REF(qcom_gdsc),
-+					    strdup(name), (ulong)desc, dev_ofnode(dev), NULL);
- }
--
--void gdsc_unregister(struct gdsc_desc *desc)
--{
--	struct device *dev = desc->dev;
--	size_t num = desc->num;
--
--	gdsc_pm_subdomain_remove(desc, num);
--	of_genpd_del_provider(dev->of_node);
--}
--
--/*
-- * On SDM845+ the GPU GX domain is *almost* entirely controlled by the GMU
-- * running in the CX domain so the CPU doesn't need to know anything about the
-- * GX domain EXCEPT....
-- *
-- * Hardware constraints dictate that the GX be powered down before the CX. If
-- * the GMU crashes it could leave the GX on. In order to successfully bring back
-- * the device the CPU needs to disable the GX headswitch. There being no sane
-- * way to reach in and touch that register from deep inside the GPU driver we
-- * need to set up the infrastructure to be able to ensure that the GPU can
-- * ensure that the GX is off during this super special case. We do this by
-- * defining a GX gdsc with a dummy enable function and a "default" disable
-- * function.
-- *
-- * This allows us to attach with genpd_dev_pm_attach_by_name() in the GPU
-- * driver. During power up, nothing will happen from the CPU (and the GMU will
-- * power up normally but during power down this will ensure that the GX domain
-- * is *really* off - this gives us a semi standard way of doing what we need.
-- */
--int gdsc_gx_do_nothing_enable(struct generic_pm_domain *domain)
--{
--	struct gdsc *sc = domain_to_gdsc(domain);
--	int ret = 0;
--
--	/* Enable the parent supply, when controlled through the regulator framework. */
--	if (sc->rsupply)
--		ret = regulator_enable(sc->rsupply);
--
--	/* Do nothing with the GDSC itself */
--
--	return ret;
--}
--EXPORT_SYMBOL_GPL(gdsc_gx_do_nothing_enable);
-diff --git a/drivers/clk/qcom/ccf/gdsc.h b/drivers/clk/qcom/ccf/gdsc.h
-index dd843e86c05b..e37f5ddbc4d3 100644
---- a/drivers/clk/qcom/ccf/gdsc.h
-+++ b/drivers/clk/qcom/ccf/gdsc.h
-@@ -6,14 +6,18 @@
- #ifndef __QCOM_GDSC_H__
- #define __QCOM_GDSC_H__
- 
- #include <linux/err.h>
--#include <linux/pm_domain.h>
-+#include <power-domain.h>
- 
- struct regmap;
--struct regulator;
- struct reset_controller_dev;
- 
-+/* Compat struct for Linux */
-+struct compat_power_domain {
-+	const char *name;
-+};
-+
- /**
-  * struct gdsc - Globally Distributed Switch Controller
-  * @pd: generic power domain
-  * @regmap: regmap for MMIO accesses
-@@ -31,10 +35,10 @@ struct reset_controller_dev;
-  * @reset_count: number of @resets
-  * @rcdev: reset controller
-  */
- struct gdsc {
--	struct generic_pm_domain	pd;
--	struct generic_pm_domain	*parent;
-+	struct compat_power_domain	pd;
-+	struct power_domain	*parent;
- 	struct regmap			*regmap;
- 	unsigned int			gdscr;
- 	unsigned int			collapse_ctrl;
- 	unsigned int			collapse_mask;
-@@ -67,28 +71,26 @@ struct gdsc {
- #define ALWAYS_ON	BIT(6)
- #define RETAIN_FF_ENABLE	BIT(7)
- #define NO_RET_PERIPH	BIT(8)
- #define HW_CTRL_TRIGGER	BIT(9)
--	struct reset_controller_dev	*rcdev;
-+	struct reset_ctl		*rcdev;
- 	unsigned int			*resets;
- 	unsigned int			reset_count;
- 
- 	const char 			*supply;
--	struct regulator		*rsupply;
-+	struct udevice			*rsupply;
- };
- 
- struct gdsc_desc {
--	struct device *dev;
--	struct gdsc **scs;
--	size_t num;
--	struct dev_pm_domain_list *pd_list;
-+	struct gdsc **gdsc;
-+	int num_gdscs;
-+	struct udevice *dev;
-+	struct regmap *regmap;
- };
- 
--#ifdef CONFIG_QCOM_GDSC
--int gdsc_register(struct gdsc_desc *desc, struct reset_controller_dev *,
--		  struct regmap *);
--void gdsc_unregister(struct gdsc_desc *desc);
--int gdsc_gx_do_nothing_enable(struct generic_pm_domain *domain);
-+#ifdef CONFIG_CLK_QCOM
-+int gdsc_register(struct udevice *dev, struct gdsc **gdscs, int num_gdscs,
-+		  struct regmap *regmap);
- #else
- static inline int gdsc_register(struct gdsc_desc *desc,
- 				struct reset_controller_dev *rcdev,
- 				struct regmap *r)
-diff --git a/drivers/clk/qcom/ccf/reset.c b/drivers/clk/qcom/ccf/reset.c
-index d96c96a9089f..4abca7ad80b1 100644
---- a/drivers/clk/qcom/ccf/reset.c
-+++ b/drivers/clk/qcom/ccf/reset.c
-@@ -2,36 +2,29 @@
- /*
-  * Copyright (c) 2013, The Linux Foundation. All rights reserved.
-  */
- 
-+#include <dm/device.h>
-+#include <dm/device-internal.h>
-+#include <dm/device_compat.h>
- #include <linux/bitops.h>
--#include <linux/export.h>
- #include <linux/regmap.h>
--#include <linux/reset-controller.h>
-+#include <reset-uclass.h>
- #include <linux/delay.h>
- 
- #include "reset.h"
- 
--static int qcom_reset(struct reset_controller_dev *rcdev, unsigned long id)
--{
--	struct qcom_reset_controller *rst = to_qcom_reset_controller(rcdev);
-+#define to_qcom_reset_controller(r) \
-+	(dev_get_priv((r)->dev))
- 
--	rcdev->ops->assert(rcdev, id);
--	fsleep(rst->reset_map[id].udelay ?: 1); /* use 1 us as default */
--
--	rcdev->ops->deassert(rcdev, id);
+-	/*
+-	 * We should never get here; clk_gfx3d_determine_rate() should always
+-	 * make us use a different parent than what we're currently using, so
+-	 * clk_gfx3d_set_rate_and_parent() should always be called.
+-	 */
 -	return 0;
 -}
 -
--static int qcom_reset_set_assert(struct reset_controller_dev *rcdev,
--				 unsigned long id, bool assert)
-+static int qcom_reset_set_assert(struct reset_ctl *rcdev, bool assert)
- {
- 	struct qcom_reset_controller *rst;
- 	const struct qcom_reset_map *map;
- 	u32 mask;
- 
- 	rst = to_qcom_reset_controller(rcdev);
--	map = &rst->reset_map[id];
-+	map = &rst->reset_map[rcdev->id];
- 	mask = map->bitmask ? map->bitmask : BIT(map->bit);
- 
- 	regmap_update_bits(rst->regmap, map->reg, mask, assert ? mask : 0);
- 
-@@ -40,20 +33,80 @@ static int qcom_reset_set_assert(struct reset_controller_dev *rcdev,
- 
- 	return 0;
- }
- 
--static int qcom_reset_assert(struct reset_controller_dev *rcdev, unsigned long id)
-+static int qcom_reset_assert(struct reset_ctl *rcdev)
- {
--	return qcom_reset_set_assert(rcdev, id, true);
-+	return qcom_reset_set_assert(rcdev, true);
- }
- 
--static int qcom_reset_deassert(struct reset_controller_dev *rcdev, unsigned long id)
-+static int qcom_reset_deassert(struct reset_ctl *rcdev)
- {
--	return qcom_reset_set_assert(rcdev, id, false);
-+	return qcom_reset_set_assert(rcdev, false);
- }
- 
--const struct reset_control_ops qcom_reset_ops = {
--	.reset = qcom_reset,
--	.assert = qcom_reset_assert,
--	.deassert = qcom_reset_deassert,
-+static int qcom_reset_of_xlate(struct reset_ctl *rcdev,
-+			struct ofnode_phandle_args *args)
-+{
-+	struct qcom_reset_controller *desc = dev_get_priv(rcdev->dev);
-+
-+	if (args->args_count != 1) {
-+		debug("Invalid args_count: %d\n", args->args_count);
-+		return -EINVAL;
-+	}
-+
-+	rcdev->id = args->args[0];
-+
-+	if (rcdev->id > desc->nr_resets) {
-+		dev_err(rcdev->dev, "Invalid GDSC ID %ld\n", rcdev->id);
-+		return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+
-+static struct reset_ops qcom_reset_ops = {
-+	.rst_assert = qcom_reset_assert,
-+	.rst_deassert = qcom_reset_deassert,
-+	.of_xlate = qcom_reset_of_xlate,
- };
--EXPORT_SYMBOL_GPL(qcom_reset_ops);
-+
-+U_BOOT_DRIVER(qcom_reset) = {
-+	.name = "qcom_reset",
-+	.id = UCLASS_RESET,
-+	.ops = &qcom_reset_ops,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
-+
-+int qcom_reset_register(struct udevice *dev, const struct qcom_reset_map *reset_map,
-+			int nr_resets, struct regmap *regmap)
-+{
-+	int ret;
-+	char *name;
-+	struct qcom_reset_controller *desc;
-+	struct udevice *rst_dev;
-+
-+	desc = kzalloc(sizeof(*desc), GFP_KERNEL);
-+	if (!desc)
-+		return -ENOMEM;
-+
-+	desc->reset_map = reset_map;
-+	desc->nr_resets = nr_resets;
-+	desc->regmap = regmap;
-+
-+	name = kzalloc(64, GFP_KERNEL);
-+	if (!name)
-+		return -ENOMEM;
-+	ret = snprintf(name, 64, "%s.%s", dev->name, "reset");
-+	if (ret < 0)
-+		return ret;
-+
-+	printf("%s: desc %p\n", __func__, desc);
-+	ret = device_bind_with_driver_data(dev, DM_DRIVER_REF(qcom_reset),
-+					    strdup(name), 0, dev_ofnode(dev), &rst_dev);
-+	if (ret)
-+		return ret;
-+
-+	dev_set_priv(rst_dev, desc);
-+
-+	return 0;
-+}
-diff --git a/drivers/clk/qcom/ccf/reset.h b/drivers/clk/qcom/ccf/reset.h
-index fe0561bf53d4..5911b397e2dd 100644
---- a/drivers/clk/qcom/ccf/reset.h
-+++ b/drivers/clk/qcom/ccf/reset.h
-@@ -5,9 +5,9 @@
- 
- #ifndef __QCOM_CLK_RESET_H__
- #define __QCOM_CLK_RESET_H__
- 
--#include <linux/reset-controller.h>
-+#include <reset.h>
- 
- struct qcom_reset_map {
- 	unsigned int reg;
- 	u8 bit;
-@@ -18,14 +18,12 @@ struct qcom_reset_map {
- struct regmap;
- 
- struct qcom_reset_controller {
- 	const struct qcom_reset_map *reset_map;
-+	int nr_resets;
- 	struct regmap *regmap;
--	struct reset_controller_dev rcdev;
- };
- 
--#define to_qcom_reset_controller(r) \
--	container_of(r, struct qcom_reset_controller, rcdev);
+-const struct clk_ops clk_gfx3d_ops = {
+-	.is_enabled = clk_rcg2_is_enabled,
+-	.get_parent = clk_rcg2_get_parent,
+-	.set_parent = clk_rcg2_set_parent,
+-	.recalc_rate = clk_rcg2_recalc_rate,
+-	.set_rate = clk_gfx3d_set_rate,
+-	.set_rate_and_parent = clk_gfx3d_set_rate_and_parent,
+-	.determine_rate = clk_gfx3d_determine_rate,
+-};
+-EXPORT_SYMBOL_GPL(clk_gfx3d_ops);
 -
--extern const struct reset_control_ops qcom_reset_ops;
-+int qcom_reset_register(struct udevice *dev, const struct qcom_reset_map *reset_map,
-+			int nr_resets, struct regmap *regmap);
+ static int clk_rcg2_set_force_enable(struct clk_hw *hw)
+ {
+ 	struct clk_rcg2 *rcg = to_clk_rcg2(hw);
+ 	const char *name = clk_hw_get_name(hw);
+@@ -1372,8 +1265,11 @@ static int __clk_rcg2_shared_set_rate(struct clk_hw *hw, unsigned long rate,
+ {
+ 	struct clk_rcg2 *rcg = to_clk_rcg2(hw);
+ 	const struct freq_tbl *f;
+ 
++	log_debug("%s: %s rate %lu parent_rate %lu policy %sp\n", __func__,
++		clk_hw_get_name(hw), rate, parent_rate, policy == FLOOR ? "floor" : "ceil");
++
+ 	switch (policy) {
+ 	case FLOOR:
+ 		f = qcom_find_freq_floor(rcg->freq_tbl, rate);
+ 		break;
+@@ -1383,8 +1279,15 @@ static int __clk_rcg2_shared_set_rate(struct clk_hw *hw, unsigned long rate,
+ 	default:
+ 		return -EINVAL;
+ 	}
+ 
++	if (!f) {
++		dev_err(hw->clk->dev, "%s: couldn't find frequency for rate %lu\n", clk_hw_get_name(hw), rate);
++		return -EINVAL;
++	}
++
++	log_debug("%s: found freq %p rate %lu\n", __func__, f, f ? f->freq : 10101010);
++
+ 	/*
+ 	 * In case clock is disabled, update the M, N and D registers, cache
+ 	 * the CFG value in parked_cfg and don't hit the update bit of CMD
+ 	 * register.
+@@ -1447,8 +1350,10 @@ static int clk_rcg2_shared_enable(struct clk_hw *hw)
+ static void clk_rcg2_shared_disable(struct clk_hw *hw)
+ {
+ 	struct clk_rcg2 *rcg = to_clk_rcg2(hw);
+ 
++	log_debug("%s: %s\n", __func__, clk_hw_get_name(hw));
++
+ 	/*
+ 	 * Store current configuration as switching to safe source would clear
+ 	 * the SRC and DIV of CFG register
+ 	 */
+diff --git a/drivers/clk/qcom/ccf/clk-regmap-divider.c b/drivers/clk/qcom/ccf/clk-regmap-divider.c
+index 4f5395f0ab6d..f37556d31f4e 100644
+--- a/drivers/clk/qcom/ccf/clk-regmap-divider.c
++++ b/drivers/clk/qcom/ccf/clk-regmap-divider.c
+@@ -2,12 +2,12 @@
+ /*
+  * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+  */
+ 
++#include <dm/ofnode.h>
+ #include <linux/kernel.h>
+ #include <linux/bitops.h>
+ #include <linux/regmap.h>
+-#include <linux/export.h>
+ 
+ #include "clk-regmap-divider.h"
+ 
+ static inline struct clk_regmap_div *to_clk_regmap_div(struct clk_hw *hw)
+diff --git a/drivers/clk/qcom/ccf/clk-regmap-mux-div.c b/drivers/clk/qcom/ccf/clk-regmap-mux-div.c
+index 6044839da85a..9c0eb8e1b8e2 100644
+--- a/drivers/clk/qcom/ccf/clk-regmap-mux-div.c
++++ b/drivers/clk/qcom/ccf/clk-regmap-mux-div.c
+@@ -3,8 +3,9 @@
+  * Copyright (c) 2017, Linaro Limited
+  * Author: Georgi Djakov <georgi.djakov@linaro.org>
+  */
+ 
++#include <dm/ofnode.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+ #include <linux/kernel.h>
+ #include <linux/regmap.h>
+diff --git a/drivers/clk/qcom/ccf/clk-regmap-mux.c b/drivers/clk/qcom/ccf/clk-regmap-mux.c
+index 45d9cca28064..c6f95a3d4e5f 100644
+--- a/drivers/clk/qcom/ccf/clk-regmap-mux.c
++++ b/drivers/clk/qcom/ccf/clk-regmap-mux.c
+@@ -2,12 +2,12 @@
+ /*
+  * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+  */
+ 
++#include <dm/ofnode.h>
+ #include <linux/kernel.h>
+ #include <linux/bitops.h>
+ #include <linux/regmap.h>
+-#include <linux/export.h>
+ 
+ #include "clk-regmap-mux.h"
+ 
+ static inline struct clk_regmap_mux *to_clk_regmap_mux(struct clk_hw *hw)
+diff --git a/drivers/clk/qcom/ccf/clk-regmap-phy-mux.c b/drivers/clk/qcom/ccf/clk-regmap-phy-mux.c
+index 7b7243b7107d..04f79591aef4 100644
+--- a/drivers/clk/qcom/ccf/clk-regmap-phy-mux.c
++++ b/drivers/clk/qcom/ccf/clk-regmap-phy-mux.c
+@@ -2,12 +2,12 @@
+ /*
+  * Copyright (c) 2022, Linaro Ltd.
+  */
+ 
++#include <linux/bug.h>
+ #include <linux/clk-provider.h>
+ #include <linux/bitfield.h>
+ #include <linux/regmap.h>
+-#include <linux/export.h>
+ 
+ #include "clk-regmap.h"
+ #include "clk-regmap-phy-mux.h"
+ 
+diff --git a/drivers/clk/qcom/ccf/clk-regmap.c b/drivers/clk/qcom/ccf/clk-regmap.c
+index 92ac4e0d7dbe..bc59b2456a3e 100644
+--- a/drivers/clk/qcom/ccf/clk-regmap.c
++++ b/drivers/clk/qcom/ccf/clk-regmap.c
+@@ -2,12 +2,13 @@
+ /*
+  * Copyright (c) 2014, The Linux Foundation. All rights reserved.
+  */
+ 
++#include <dm/ofnode.h>
++#include <dm/device.h>
+ #include <linux/device.h>
+ #include <linux/clk-provider.h>
+ #include <linux/regmap.h>
+-#include <linux/export.h>
+ 
+ #include "clk-regmap.h"
+ 
+ /**
+@@ -93,14 +94,11 @@ EXPORT_SYMBOL_GPL(clk_disable_regmap);
+  * Clocks that use regmap for their register I/O should register their
+  * clk_regmap struct via this function so that the regmap is initialized
+  * and so that the clock is registered with the common clock framework.
+  */
+-int devm_clk_register_regmap(struct device *dev, struct clk_regmap *rclk)
++int devm_clk_register_regmap(struct udevice *dev, struct clk_regmap *rclk, struct regmap *regmap)
+ {
+-	if (dev && dev_get_regmap(dev, NULL))
+-		rclk->regmap = dev_get_regmap(dev, NULL);
+-	else if (dev && dev->parent)
+-		rclk->regmap = dev_get_regmap(dev->parent, NULL);
++	rclk->regmap = regmap;
+ 
+ 	return devm_clk_hw_register(dev, &rclk->hw);
+ }
+ EXPORT_SYMBOL_GPL(devm_clk_register_regmap);
+diff --git a/drivers/clk/qcom/ccf/clk-regmap.h b/drivers/clk/qcom/ccf/clk-regmap.h
+index 14ec659a3a77..c23160f2b6e5 100644
+--- a/drivers/clk/qcom/ccf/clk-regmap.h
++++ b/drivers/clk/qcom/ccf/clk-regmap.h
+@@ -32,7 +32,7 @@ static inline struct clk_regmap *to_clk_regmap(struct clk_hw *hw)
+ 
+ int clk_is_enabled_regmap(struct clk_hw *hw);
+ int clk_enable_regmap(struct clk_hw *hw);
+ void clk_disable_regmap(struct clk_hw *hw);
+-int devm_clk_register_regmap(struct device *dev, struct clk_regmap *rclk);
++int devm_clk_register_regmap(struct udevice *dev, struct clk_regmap *rclk, struct regmap *regmap);
  
  #endif
+diff --git a/drivers/clk/qcom/ccf/clk-rpmh.c b/drivers/clk/qcom/ccf/clk-rpmh.c
+index 1a98b3a0c528..992e6a3da4f8 100644
+--- a/drivers/clk/qcom/ccf/clk-rpmh.c
++++ b/drivers/clk/qcom/ccf/clk-rpmh.c
+@@ -5,18 +5,16 @@
+ 
+ #include <linux/clk-provider.h>
+ #include <linux/err.h>
+ #include <linux/kernel.h>
+-#include <linux/module.h>
+-#include <linux/of.h>
+-#include <linux/platform_device.h>
+-#include <linux/string_choices.h>
+ #include <soc/qcom/cmd-db.h>
+ #include <soc/qcom/rpmh.h>
+ #include <soc/qcom/tcs.h>
+ 
+ #include <dt-bindings/clock/qcom,rpmh.h>
+ 
++#include "common-uboot.h"
++
+ #define CLK_RPMH_ARC_EN_OFFSET		0
+ #define CLK_RPMH_VRM_EN_OFFSET		4
+ 
+ /**
+@@ -58,9 +56,9 @@ struct clk_rpmh {
+ 	u32 aggr_state;
+ 	u32 last_sent_aggr_state;
+ 	u32 valid_state_mask;
+ 	u32 unit;
+-	struct device *dev;
++	struct udevice *dev;
+ 	struct clk_rpmh *peer;
+ };
+ 
+ struct clk_rpmh_desc {
+@@ -69,9 +67,9 @@ struct clk_rpmh_desc {
+ 	/* RPMh clock clkaN are optional for this platform */
+ 	bool clka_optional;
+ };
+ 
+-static DEFINE_MUTEX(rpmh_clk_lock);
++// static DEFINE_MUTEX(rpmh_clk_lock);
+ 
+ #define __DEFINE_CLK_RPMH(_name, _clk_name, _res_name,			\
+ 			  _res_en_offset, _res_on, _div)		\
+ 	static struct clk_rpmh clk_rpmh_##_clk_name##_ao;		\
+@@ -309,8 +307,10 @@ static int clk_rpmh_bcm_set_rate(struct clk_hw *hw, unsigned long rate,
+ 				 unsigned long parent_rate)
+ {
+ 	struct clk_rpmh *c = to_clk_rpmh(hw);
+ 
++	printf("%s: %s: rate %lu parent_rate %lu\n", __func__, clk_hw_get_name(hw), rate, parent_rate);
++
+ 	c->aggr_state = rate / c->unit;
+ 	/*
+ 	 * Since any non-zero value sent to hw would result in enabling the
+ 	 * clock, only send the value if the clock has already been prepared.
+@@ -335,9 +335,9 @@ static unsigned long clk_rpmh_bcm_recalc_rate(struct clk_hw *hw,
+ 	return (unsigned long)c->aggr_state * c->unit;
+ }
+ 
+ static const struct clk_ops clk_rpmh_bcm_ops = {
+-	.prepare	= clk_rpmh_bcm_prepare,
++	.enable	= clk_rpmh_bcm_prepare,
+ 	.unprepare	= clk_rpmh_bcm_unprepare,
+ 	.set_rate	= clk_rpmh_bcm_set_rate,
+ 	.determine_rate = clk_rpmh_determine_rate,
+ 	.recalc_rate	= clk_rpmh_bcm_recalc_rate,
+@@ -900,9 +900,9 @@ static const struct clk_rpmh_desc clk_rpmh_glymur = {
+ 	.clks = glymur_rpmh_clocks,
+ 	.num_clks = ARRAY_SIZE(glymur_rpmh_clocks),
+ };
+ 
+-static struct clk_hw *of_clk_rpmh_hw_get(struct of_phandle_args *clkspec,
++static struct clk_hw *of_clk_rpmh_hw_get(struct ofnode_phandle_args *clkspec,
+ 					 void *data)
+ {
+ 	struct clk_rpmh_desc *rpmh = data;
+ 	unsigned int idx = clkspec->args[0];
+@@ -914,16 +914,16 @@ static struct clk_hw *of_clk_rpmh_hw_get(struct of_phandle_args *clkspec,
+ 
+ 	return rpmh->clks[idx];
+ }
+ 
+-static int clk_rpmh_probe(struct platform_device *pdev)
++static int clk_rpmh_probe(struct udevice *dev)
+ {
+ 	struct clk_hw **hw_clks;
+ 	struct clk_rpmh *rpmh_clk;
+ 	const struct clk_rpmh_desc *desc;
+ 	int ret, i;
+ 
+-	desc = of_device_get_match_data(&pdev->dev);
++	desc = (void *)dev_get_driver_data(dev);
+ 	if (!desc)
+ 		return -ENODEV;
+ 
+ 	hw_clks = desc->clks;
+@@ -947,17 +947,17 @@ static int clk_rpmh_probe(struct platform_device *pdev)
+ 			if (desc->clka_optional &&
+ 			    !strncmp(rpmh_clk->res_name, "clka", sizeof("clka") - 1))
+ 				continue;
+ 
+-			dev_err(&pdev->dev, "missing RPMh resource address for %s\n",
++			dev_err(dev, "missing RPMh resource address for %s\n",
+ 				rpmh_clk->res_name);
+ 			return -ENODEV;
+ 		}
+ 
+ 		data = cmd_db_read_aux_data(rpmh_clk->res_name, &aux_data_len);
+ 		if (IS_ERR(data)) {
+ 			ret = PTR_ERR(data);
+-			dev_err(&pdev->dev,
++			dev_err(dev,
+ 				"error reading RPMh aux data for %s (%d)\n",
+ 				rpmh_clk->res_name, ret);
+ 			return ret;
+ 		}
+@@ -966,78 +966,65 @@ static int clk_rpmh_probe(struct platform_device *pdev)
+ 		if (aux_data_len == sizeof(*data))
+ 			rpmh_clk->unit = le32_to_cpu(data->unit) * 1000ULL;
+ 
+ 		rpmh_clk->res_addr += res_addr;
+-		rpmh_clk->dev = &pdev->dev;
++		rpmh_clk->dev = dev;
+ 
+-		ret = devm_clk_hw_register(&pdev->dev, hw_clks[i]);
++		ret = devm_clk_hw_register(dev, hw_clks[i]);
+ 		if (ret) {
+-			dev_err(&pdev->dev, "failed to register %s\n", name);
++			dev_err(dev, "failed to register %s\n", name);
+ 			return ret;
+ 		}
+ 	}
+ 
+ 	/* typecast to silence compiler warning */
+-	ret = devm_of_clk_add_hw_provider(&pdev->dev, of_clk_rpmh_hw_get,
++	ret = devm_of_clk_add_hw_provider(dev, of_clk_rpmh_hw_get,
+ 					  (void *)desc);
+ 	if (ret) {
+-		dev_err(&pdev->dev, "Failed to add clock provider\n");
++		dev_err(dev, "Failed to add clock provider\n");
+ 		return ret;
+ 	}
+ 
+-	dev_dbg(&pdev->dev, "Registered RPMh clocks\n");
++	dev_dbg(dev, "Registered RPMh clocks\n");
+ 
+ 	return 0;
+ }
+ 
+-static const struct of_device_id clk_rpmh_match_table[] = {
+-	{ .compatible = "qcom,glymur-rpmh-clk", .data = &clk_rpmh_glymur},
+-	{ .compatible = "qcom,milos-rpmh-clk", .data = &clk_rpmh_milos},
+-	{ .compatible = "qcom,qcs615-rpmh-clk", .data = &clk_rpmh_qcs615},
+-	{ .compatible = "qcom,qdu1000-rpmh-clk", .data = &clk_rpmh_qdu1000},
+-	{ .compatible = "qcom,sa8775p-rpmh-clk", .data = &clk_rpmh_sa8775p},
+-	{ .compatible = "qcom,sar2130p-rpmh-clk", .data = &clk_rpmh_sar2130p},
+-	{ .compatible = "qcom,sc7180-rpmh-clk", .data = &clk_rpmh_sc7180},
+-	{ .compatible = "qcom,sc7280-rpmh-clk", .data = &clk_rpmh_sc7280},
+-	{ .compatible = "qcom,sc8180x-rpmh-clk", .data = &clk_rpmh_sc8180x},
+-	{ .compatible = "qcom,sc8280xp-rpmh-clk", .data = &clk_rpmh_sc8280xp},
+-	{ .compatible = "qcom,sdm845-rpmh-clk", .data = &clk_rpmh_sdm845},
+-	{ .compatible = "qcom,sdm670-rpmh-clk", .data = &clk_rpmh_sdm670},
+-	{ .compatible = "qcom,sdx55-rpmh-clk",  .data = &clk_rpmh_sdx55},
+-	{ .compatible = "qcom,sdx65-rpmh-clk",  .data = &clk_rpmh_sdx65},
+-	{ .compatible = "qcom,sdx75-rpmh-clk",  .data = &clk_rpmh_sdx75},
+-	{ .compatible = "qcom,sm4450-rpmh-clk", .data = &clk_rpmh_sm4450},
+-	{ .compatible = "qcom,sm6350-rpmh-clk", .data = &clk_rpmh_sm6350},
+-	{ .compatible = "qcom,sm8150-rpmh-clk", .data = &clk_rpmh_sm8150},
+-	{ .compatible = "qcom,sm8250-rpmh-clk", .data = &clk_rpmh_sm8250},
+-	{ .compatible = "qcom,sm8350-rpmh-clk", .data = &clk_rpmh_sm8350},
+-	{ .compatible = "qcom,sm8450-rpmh-clk", .data = &clk_rpmh_sm8450},
+-	{ .compatible = "qcom,sm8550-rpmh-clk", .data = &clk_rpmh_sm8550},
+-	{ .compatible = "qcom,sm8650-rpmh-clk", .data = &clk_rpmh_sm8650},
+-	{ .compatible = "qcom,sm8750-rpmh-clk", .data = &clk_rpmh_sm8750},
+-	{ .compatible = "qcom,x1e80100-rpmh-clk", .data = &clk_rpmh_x1e80100},
++static const struct udevice_id clk_rpmh_match_table[] = {
++	{ .compatible = "qcom,glymur-rpmh-clk", .data = (ulong)&clk_rpmh_glymur},
++	{ .compatible = "qcom,milos-rpmh-clk", .data = (ulong)&clk_rpmh_milos},
++	{ .compatible = "qcom,qcs615-rpmh-clk", .data = (ulong)&clk_rpmh_qcs615},
++	{ .compatible = "qcom,qdu1000-rpmh-clk", .data = (ulong)&clk_rpmh_qdu1000},
++	{ .compatible = "qcom,sa8775p-rpmh-clk", .data = (ulong)&clk_rpmh_sa8775p},
++	{ .compatible = "qcom,sar2130p-rpmh-clk", .data = (ulong)&clk_rpmh_sar2130p},
++	{ .compatible = "qcom,sc7180-rpmh-clk", .data = (ulong)&clk_rpmh_sc7180},
++	{ .compatible = "qcom,sc7280-rpmh-clk", .data = (ulong)&clk_rpmh_sc7280},
++	{ .compatible = "qcom,sc8180x-rpmh-clk", .data = (ulong)&clk_rpmh_sc8180x},
++	{ .compatible = "qcom,sc8280xp-rpmh-clk", .data = (ulong)&clk_rpmh_sc8280xp},
++	{ .compatible = "qcom,sdm845-rpmh-clk", .data = (ulong)&clk_rpmh_sdm845},
++	{ .compatible = "qcom,sdm670-rpmh-clk", .data = (ulong)&clk_rpmh_sdm670},
++	{ .compatible = "qcom,sdx55-rpmh-clk",  .data = (ulong)&clk_rpmh_sdx55},
++	{ .compatible = "qcom,sdx65-rpmh-clk",  .data = (ulong)&clk_rpmh_sdx65},
++	{ .compatible = "qcom,sdx75-rpmh-clk",  .data = (ulong)&clk_rpmh_sdx75},
++	{ .compatible = "qcom,sm4450-rpmh-clk", .data = (ulong)&clk_rpmh_sm4450},
++	{ .compatible = "qcom,sm6350-rpmh-clk", .data = (ulong)&clk_rpmh_sm6350},
++	{ .compatible = "qcom,sm8150-rpmh-clk", .data = (ulong)&clk_rpmh_sm8150},
++	{ .compatible = "qcom,sm8250-rpmh-clk", .data = (ulong)&clk_rpmh_sm8250},
++	{ .compatible = "qcom,sm8350-rpmh-clk", .data = (ulong)&clk_rpmh_sm8350},
++	{ .compatible = "qcom,sm8450-rpmh-clk", .data = (ulong)&clk_rpmh_sm8450},
++	{ .compatible = "qcom,sm8550-rpmh-clk", .data = (ulong)&clk_rpmh_sm8550},
++	{ .compatible = "qcom,sm8650-rpmh-clk", .data = (ulong)&clk_rpmh_sm8650},
++	{ .compatible = "qcom,sm8750-rpmh-clk", .data = (ulong)&clk_rpmh_sm8750},
++	{ .compatible = "qcom,x1e80100-rpmh-clk", .data = (ulong)&clk_rpmh_x1e80100},
+ 	{ }
+ };
+-MODULE_DEVICE_TABLE(of, clk_rpmh_match_table);
+ 
+-static struct platform_driver clk_rpmh_driver = {
+-	.probe		= clk_rpmh_probe,
+-	.driver		= {
+-		.name	= "clk-rpmh",
+-		.of_match_table = clk_rpmh_match_table,
+-	},
++U_BOOT_DRIVER(clk_rpmh) = {
++	.name = "clk-rpmh",
++	.id = UCLASS_NOP,
++	.probe = clk_rpmh_probe,
++	.of_match = clk_rpmh_match_table,
++	.flags = DM_FLAG_DEFAULT_PD_CTRL_OFF,
+ };
+ 
+-static int __init clk_rpmh_init(void)
+-{
+-	return platform_driver_register(&clk_rpmh_driver);
+-}
+-core_initcall(clk_rpmh_init);
+-
+-static void __exit clk_rpmh_exit(void)
+-{
+-	platform_driver_unregister(&clk_rpmh_driver);
+-}
+-module_exit(clk_rpmh_exit);
+-
+ MODULE_DESCRIPTION("QCOM RPMh Clock Driver");
+ MODULE_LICENSE("GPL v2");
 
 -- 
 2.51.0
