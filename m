@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C26DF1098782
-	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 13:07:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 132C81098782
+	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 13:07:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1121A84035;
+	by phobos.denx.de (Postfix) with ESMTP id 488A38405A;
 	Fri, 20 Mar 2026 14:06:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NGfA/ejQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Uj5LNY5n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24C8783CF5; Fri, 20 Mar 2026 13:52:47 +0100 (CET)
-Received: from mail-qv1-xf43.google.com (mail-qv1-xf43.google.com
- [IPv6:2607:f8b0:4864:20::f43])
+ id DE3EF83D71; Fri, 20 Mar 2026 13:52:49 +0100 (CET)
+Received: from mail-qk1-x743.google.com (mail-qk1-x743.google.com
+ [IPv6:2607:f8b0:4864:20::743])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDBEE83CEA
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 13:52:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C7FA983CEA
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 13:52:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jcethrid@gmail.com
-Received: by mail-qv1-xf43.google.com with SMTP id
- 6a1803df08f44-899ee491af3so21848926d6.1
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 05:52:44 -0700 (PDT)
+Received: by mail-qk1-x743.google.com with SMTP id
+ af79cd13be357-8cfc795ca97so69630585a.0
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 05:52:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1774011164; x=1774615964; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1774011166; x=1774615966; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=z36/pBdP+0WyCp4eyCgU4weNUeh3cpEIhILICmbnPa4=;
- b=NGfA/ejQi0nNDHk9L9oov3e9410V7Ltjqb9oRXMWulIhSaA1L6oI9xnfoyB6JxV94W
- +kz/roPYWisDOvYInmCLPaHdnXTIBJbl9bwurddNHK2xNpe9PYOGHJrDpG18XMa884Qr
- FVtHdRTaB9BfBCA85zixu/z3tEVi0OuKi5iF02n6UxQjeOQC0OP8KGwyV5MuDZRVqvRC
- PkVo9BFmgVPX4yv9U1jesp6WUpyVLLon2JO4g4QyGei3X+97bAg9ki7GNkJYRa3prFln
- expMu4JYgBXebh0GAY83D0BOhP1OkKH3IFACofIEf5Offhji/8z7jMVSj1D83INlcuXo
- +TrA==
+ bh=Q/KH2tpFhJzaixNSsS/FoNj19VlWMlwakz8LBcvpRJg=;
+ b=Uj5LNY5nX+A8a+V7OJma1k/wqg4PjL83lVGWElhMrJwKjswUxlwZtJjEk2xCKb/EW4
+ p5h/A1WAfJDrWFk45kG0nuj+aMVaDwy2I6GSQ492g8DJZR9J3qxsbyHQjCMdNYTwJl2t
+ hl5C9GHAFrNTWgLmSJ57qwp0tGdNHWs2U5K0JS3KsrYMQ9butWgtTiwlSZ7vbpwhxJAP
+ ZmaywNSwKwbGtlRIjPUutrTidNaEySmJxw4ccKN0AO1y/vbnqYzsTb89rGh1BB5GbDRq
+ e/D4AoHbzpIcY9Dz8sVub3Z1k/dpY1cSBKc5m5GfBdcqAjHQ3dFLED4tt0cxqEpXWSSj
+ uyTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774011164; x=1774615964;
+ d=1e100.net; s=20251104; t=1774011166; x=1774615966;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=z36/pBdP+0WyCp4eyCgU4weNUeh3cpEIhILICmbnPa4=;
- b=QW206pQKXVGZ9Rv0OZqpI96SZa6NhA/EmXAQXU0OxX6RjB88gMkNRIUsxVZKzo3wWt
- UyY1ym7vbPuludsvXzbNl49lDFCKPUD/fnutgQtsoKw3sOItMzNipRBpPYA3U18Z4uQU
- Ph8wyt5LKcUqekP3ne/+w91tmQqFU12YuVdlKKpATE6jxZzaAd8O8zKe7Z+udnkAuT6Z
- Me+VH5oRsvHDNn84cirJMMUBRukb8WSC0aFLDiaRFF0CleN0WeDZ1+tbv4KDoa1SP1xq
- UhmpDjgJ22dOHw7iQQK/3xI3+ciXIdtVCwA1OCVOsO4bg4CBOZaiEo1joE9d5woIrP/Z
- FvpA==
-X-Gm-Message-State: AOJu0Yx/pyOBMzJwQ49V9lYB9P+exAsLgAJhKRuMMTJqhoNneaWXp9wF
- jeWtrFfkzyOqvBL55TKmf2ns3CWXc//D8/4k/X1F8YREM6IvazmGC089txMcpOiljcK8Mw==
-X-Gm-Gg: ATEYQzw36D/LF9eR7w8WCSgyOI40X43cTG2SVkk4CAKp1mSQNSMnjYcKm8ALEIJhFEn
- tzn1mPrrZQ5Tc7ljTSkm8RSUQ2TBTh9KjCcCcP0m5Ys+7dYIyQ+thVNT/paDsXYvEumFZvIwnDT
- f9Ix5/Pyvbv9ztylWDJi5soWHjVPTkS/LMGWqhJuu7h3YhuekoiQmghq456Hefk35fhE6r7SCGD
- 2CtnV9guwFSP4kBRAZSC7XqcMzlePX4QzHa+a0lXqb6SvYOD8SuuhmWLiU+gwaS7q78tNMBsR3G
- JQRTVCY4AY7RnBMUn3kJG2kFIKtxZkLEJEU0BfUHOGwxosUh3ZGf8iCdMUE7cSHhV3AyF7bFMtC
- hAYuVzjsgAF0nBUmvnOy/UIkuArYkrZGSuhgKRoBk1WLcUpfquU514xDlkrUEN8g26C5rqscODk
- PBQTyzAIkNTOx/7ZXa/fUAIwac+j4k6Bnr2A==
-X-Received: by 2002:a05:6214:3019:b0:89a:249:d2c1 with SMTP id
- 6a1803df08f44-89c85a620e3mr38138696d6.51.1774011163647; 
- Fri, 20 Mar 2026 05:52:43 -0700 (PDT)
+ bh=Q/KH2tpFhJzaixNSsS/FoNj19VlWMlwakz8LBcvpRJg=;
+ b=r6caAQJO76mENmHymI9qxQzUHG4cbwE+KZflXUJnfvwBAt2l4wLYxG4cxTZYdTfInE
+ PMBW35A4GcjU+DgVyVy1/gQHDTS7VxUliv10OLChnyCt9Nw1yJOJdGR/3DRma4gh4F1y
+ yC+wHMvPJh4/7thBKFJu+VIdSZ5amwFqUWDY9bhwfBqimcFupMJnrQuuAKHD8rka4T3N
+ E4khpgvzJYub413wOFJ9SkDnv1hI1bSMQRdcdF5EL27n9/Itnc7iPhyXLSXjoNQcrQKX
+ K53ae9RZRKs+fynjCG0/hqVEZJV6SMS+6YtepFVjdqEXWLFNH4v1oyToBIqv/nvQKJee
+ xj8w==
+X-Gm-Message-State: AOJu0YxI1WQ7Vvjg3tq6Qju92s1NNxpJJag79NwmCRNxM+Un5LC7vT5i
+ cguva3wOdNH6RB3d15gZVn23dm3K0gqvCpFbVR/2TL5Q85ZaeX9gGPj4UOTwnVeZHe/dkw==
+X-Gm-Gg: ATEYQzyuE2RMOQQ09E4+xkrST7vk1xiFnYV0n3OyixSpEnjbYatdDu+BRYeAiOKIQrC
+ YwDIlqdUi/XYkGGu11DbOKnq/EfhN6PjbENcy5Fhpza7jj626i8p1KYGD27BYBY8rMtkUhSY7Bm
+ wBtcKgVzJwi6DLs0lEx8WjQ+avnLjSG/an//5ahkrqlkqYD4+RitK5Hy/WXyevCzD7jgkVY9fQy
+ uTqXhU7tKRh9twLAOObAyi5LdhCiQKPFjvWXWDqWo/oopuwsetMPq0Z+7PrbvX45lRNmFpeE9LV
+ oO7hCC4k6kIs42PTrPnGC5mAKrzOHhJrX9OMnXeFg4XnVnmQhT14HJC/4w+Qc4dwUhP2O+MX158
+ g0xVpQUkZiH10b0bGOTuIrKa/UMJ8Sop84Av5v0P30HiO/pblAP0cPDxeeF/k+uUlVzA2c8vDYu
+ gZ2HFmgvhBdLZHgftE37a0gUNP2cpK2XQcVw==
+X-Received: by 2002:ad4:5746:0:b0:89c:5c95:eeea with SMTP id
+ 6a1803df08f44-89c85a1aae8mr38891226d6.20.1774011166246; 
+ Fri, 20 Mar 2026 05:52:46 -0700 (PDT)
 Received: from cethr-l01.localdomain ([136.56.120.109])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-89c8537c3b5sm19168166d6.47.2026.03.20.05.52.42
+ 6a1803df08f44-89c8537c3b5sm19168166d6.47.2026.03.20.05.52.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Mar 2026 05:52:43 -0700 (PDT)
+ Fri, 20 Mar 2026 05:52:45 -0700 (PDT)
 From: Caleb Ethridge <jcethrid@gmail.com>
 To: u-boot@lists.denx.de
 Cc: malysagreg@gmail.com, philip@philipmolloy.com, trini@konsulko.com,
  linux@analog.com, Caleb Ethridge <caleb.ethridge@analog.com>
-Subject: [PATCH 05/11] mach-sc5xx: Add USB boot command
-Date: Fri, 20 Mar 2026 08:50:20 -0400
-Message-Id: <9a01a335c3eb2d8e3a471da81496cf619aec65ff.1774008927.git.jcethrid@gmail.com>
+Subject: [PATCH 06/11] mach-sc5xx: Remove preliminary binman support
+Date: Fri, 20 Mar 2026 08:50:21 -0400
+Message-Id: <721c9c2562411461b64b1819c0965813eeca5888.1774008927.git.jcethrid@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1774008927.git.jcethrid@gmail.com>
 References: <cover.1774008927.git.jcethrid@gmail.com>
@@ -101,89 +101,111 @@ X-Virus-Status: Clean
 
 From: Caleb Ethridge <caleb.ethridge@analog.com>
 
-Add the USB boot command to the environments
-of the boards that support it.
+Remove preliminary binman support from all sc5xx ADSP boards.
+Full support was never added because it was unused.
 
 Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
 ---
- board/adi/sc573-ezkit/sc573-ezkit.env         | 1 +
- board/adi/sc589-ezkit/sc589-ezkit.env         | 1 +
- board/adi/sc589-mini/sc589-mini.env           | 1 +
- board/adi/sc594-som-ezkit/sc594-som-ezkit.env | 1 +
- board/adi/sc598-som-ezkit/sc598-som-ezkit.env | 1 +
- include/env/adi/adi_boot.env                  | 7 +++++++
- 6 files changed, 12 insertions(+)
+ arch/arm/dts/sc5xx.dtsi     | 41 -------------------------------------
+ arch/arm/mach-sc5xx/Kconfig | 33 -----------------------------
+ 2 files changed, 74 deletions(-)
 
-diff --git a/board/adi/sc573-ezkit/sc573-ezkit.env b/board/adi/sc573-ezkit/sc573-ezkit.env
-index 88766870c1a..74eaa23a1c3 100644
---- a/board/adi/sc573-ezkit/sc573-ezkit.env
-+++ b/board/adi/sc573-ezkit/sc573-ezkit.env
-@@ -13,5 +13,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
- #define USE_SPI
- #define USE_RAM
- #define USE_MMC
-+#define USE_USB
+diff --git a/arch/arm/dts/sc5xx.dtsi b/arch/arm/dts/sc5xx.dtsi
+index 9d346ae62e0..072631e34f7 100644
+--- a/arch/arm/dts/sc5xx.dtsi
++++ b/arch/arm/dts/sc5xx.dtsi
+@@ -25,47 +25,6 @@
+ 		bootph-pre-ram;
+ 	};
  
- #include <env/adi/adi_boot.env>
-diff --git a/board/adi/sc589-ezkit/sc589-ezkit.env b/board/adi/sc589-ezkit/sc589-ezkit.env
-index f49d30e88e2..a15a446eb71 100644
---- a/board/adi/sc589-ezkit/sc589-ezkit.env
-+++ b/board/adi/sc589-ezkit/sc589-ezkit.env
-@@ -13,5 +13,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
- #define USE_RAM
- #define USE_MMC
- #define USE_SPI
-+#define USE_USB
+-#ifdef CONFIG_SC5XX_USE_BINMAN
+-	binman {
+-		filename = CONFIG_SC5XX_BINMAN_FILENAME;
+-		stage1-boot {
+-			offset = <CONFIG_SC5XX_UBOOT_SPL_OFFSET>;
+-			type = "blob-ext";
+-			filename = "spl/u-boot-spl.ldr";
+-		};
+-
+-		/* since falcon mode can jump from SPL to OS directly
+-		 * full u-boot is optional
+-		 *
+-		 * @todo: review if we can say this given support has
+-		 * not yet been upstreamed. Otherwise we might have to
+-		 * invoke binman only for full u-boot.
+-		 */
+-		stage2-boot {
+-			offset = <CONFIG_SC5XX_UBOOT_OFFSET>;
+-			type = "blob-ext";
+-			filename = "u-boot.ldr";
+-			optional;
+-		};
+-
+-#ifdef CONFIG_SC5XX_FITIMAGE_NAME
+-		fitImage {
+-			offset = <CONFIG_SC5XX_FITIMAGE_OFFSET>;
+-			type = "blob-ext";
+-			filename = CONFIG_SC5XX_FITIMAGE_NAME;
+-		};
+-#endif
+-
+-#ifdef CONFIG_SC5XX_ROOTFS_NAME
+-		rfs {
+-			offset = <CONFIG_SC5XX_ROOTFS_OFFSET>;
+-			type = "blob-ext";
+-			filename = CONFIG_SC5XX_ROOTFS_NAME;
+-		};
+-#endif
+-	};
+-#endif
+-
+ 	clocks {
+ 		dummy: dummy {
+ 			compatible = "fixed-clock";
+diff --git a/arch/arm/mach-sc5xx/Kconfig b/arch/arm/mach-sc5xx/Kconfig
+index 774c69091ee..276d173912a 100644
+--- a/arch/arm/mach-sc5xx/Kconfig
++++ b/arch/arm/mach-sc5xx/Kconfig
+@@ -143,39 +143,6 @@ config SC5XX_LOADADDR
+ 	help
+ 	  The default load address for u-boot.
  
- #include <env/adi/adi_boot.env>
-diff --git a/board/adi/sc589-mini/sc589-mini.env b/board/adi/sc589-mini/sc589-mini.env
-index c741896601a..c6f7e491f32 100644
---- a/board/adi/sc589-mini/sc589-mini.env
-+++ b/board/adi/sc589-mini/sc589-mini.env
-@@ -13,5 +13,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
- #define USE_RAM
- #define USE_SPI
- #define USE_MMC
-+#define USE_USB
- 
- #include <env/adi/adi_boot.env>
-diff --git a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-index d314e1117b5..a15793a279f 100644
---- a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-+++ b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-@@ -14,5 +14,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
- #define USE_OSPI
- #define USE_RAM
- #define USE_MMC
-+#define USE_USB
- 
- #include <env/adi/adi_boot.env>
-diff --git a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-index 525e0f3547b..17a6d19c306 100644
---- a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-+++ b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-@@ -14,5 +14,6 @@ loadaddr=CONFIG_SC5XX_LOADADDR
- #define USE_OSPI
- #define USE_RAM
- #define USE_MMC
-+#define USE_USB
- 
- #include <env/adi/adi_boot.env>
-diff --git a/include/env/adi/adi_boot.env b/include/env/adi/adi_boot.env
-index 4d4a76729dc..b04bd1ba20e 100644
---- a/include/env/adi/adi_boot.env
-+++ b/include/env/adi/adi_boot.env
-@@ -67,3 +67,10 @@ ramboot= wget ${loadaddr} ${serverip}:/fitImage;
- 	run ramargs;
- 	bootm ${loadaddr}
- #endif
-+
-+#if defined(USE_USB)
-+usbargs=setenv bootargs root=/dev/sda2 rw rootfstype=ext4 rootwait ${adi_bootargs}
-+usbboot=usb start;
-+	ext4load usb 0:1 ${loadaddr} /fitImage; run usbargs;
-+	bootm ${loadaddr}
-+#endif
+-menu "Binman configuration"
+-config SC5XX_USE_BINMAN
+-	bool "Use binman for final image"
+-	select BINMAN
+-	help
+-	  If you wish to use binman to assemble an image, say 'Y' here.
+-	  This will enable binman-specific sections in the device tree.
+-
+-config SC5XX_BINMAN_FILENAME
+-	string "Image name"
+-	default "sc5xx-image.img"
+-	depends on SC5XX_USE_BINMAN
+-	help
+-	  The name of the image that will be created by binman.
+-	  This is used to create the final image.
+-
+-config SC5XX_FITIMAGE_NAME
+-	string "FitImage name"
+-	default "fitImage"
+-	depends on SC5XX_USE_BINMAN
+-	help
+-	  The name of the fitImage to be packed by binman.
+-	  This is used to create the final image.
+-
+-config SC5XX_ROOTFS_NAME
+-	string "RootFS name"
+-	default "rootfs"
+-	depends on SC5XX_USE_BINMAN
+-	help
+-	  The name of the rootfs to be packed by binman.
+-	  This is used to create the final image.
+-endmenu
+-
+ config ADI_IMAGE
+ 	string "ADI fitImage type"
+ 	help
 -- 
 2.34.1
 
