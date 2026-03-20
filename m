@@ -4,107 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A758108B913
-	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 12:38:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 928001098783
+	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 13:06:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6766C83CF5;
-	Fri, 20 Mar 2026 13:38:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id D7BE083CEA;
+	Fri, 20 Mar 2026 14:06:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="oCl2L7V7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YSfM/ONr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5CF483D71; Fri, 20 Mar 2026 13:38:56 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 213F683D71; Fri, 20 Mar 2026 13:52:19 +0100 (CET)
+Received: from mail-qv1-xf44.google.com (mail-qv1-xf44.google.com
+ [IPv6:2607:f8b0:4864:20::f44])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D83583BC8
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 13:38:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 029CE83CEA
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 13:52:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-b983ca059a1so61572566b.0
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 05:38:54 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774010334; cv=none;
- d=google.com; s=arc-20240605;
- b=X4bXEBsaZJrwynobnOvMQn9G+lMK58oAP9dJgy79Opiag52HMP5rf012D9ZQbohbZp
- PkXnmNW+PGXjpeU/GedpR4Rvhc5zY39QO7JqKsaFE2elsLjmI8VuhDClYmVYKBTjN/iE
- v7rLChEn+YLj6/K12WLDGi+PCQ6jzkaLaaPx0QMj1mdCS8c3UvulZrskyuRZU7QI3JYJ
- +NTVaV8XPnVvgfLGmTqwioSW1SpA/5NkuBLtzRCVods/96tSFY1McDVX4Yh92dWKnurg
- Mq6ZxV3Q3NkxQZ0x7Unphs+k8f71YI4UDV2yopPuj0BBeCeoGN3guRsX5g3BKF6OGI/T
- UW/w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=SpHfn5BmEA0LKn1TgDQTI+VAycrDf1e26PkKnZKFaoQ=;
- fh=GT8nDKBHVSrdlqnNwy39TqJWCYCY8oSDcdz5beFMNtw=;
- b=NX2W+QVN/ecz4ukVhyHWvNekANkJSegJ4XlC5TPCl/EEu4x4vhFYlM/Juk3OIsTya1
- XFla+35I9JCRs5SlXeGU7AR06eg+Ibj1492WzTC8RlI3enmlL+FvD1Gqkrws9NwDDTiP
- GwUrQnYhLJX2jxZ+H76XEOGyatA9vv60cJ5+cZ9gMK2sipFunrJCfdZIzxIAx/D+w9Vb
- NM6E4wURQ2rTMLbzy/y+gqyUQ71yldOMpS+NsQIqs95nqusyoLI0+2y2L8CqywhE3XhQ
- n+2lUSQ79ymgmI3zRI+M0nIdOj40Jw3kKTFvFsWk8VE/gLcXcbOUiKU5+KXUR2lXpSgc
- esjg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=jcethrid@gmail.com
+Received: by mail-qv1-xf44.google.com with SMTP id
+ 6a1803df08f44-89a05955720so19054976d6.2
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 05:52:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774010334; x=1774615134;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SpHfn5BmEA0LKn1TgDQTI+VAycrDf1e26PkKnZKFaoQ=;
- b=oCl2L7V7Z9E0GP6qrqVQ2OBh6USfZxnOGvPvopsuSdxR/akKESWnBTrlvCgevDczgF
- YaD4L5zjBl3sw2ob+wPEYPxsDLMr5W1ogxZGvdfyT1Ma6Gjg54/Fu6ATLoujfd6/vxHa
- okVH6Ngg6wqty/7SjV41GvKhNKOmVC1o6CruwMSP1rMOnPsfvKfIoV5Zr2BNPESPngjc
- h0pl7Dbb9DhI0F+/afz615J38uy/eLY50GWncwsFz/bXR4QgGb923FBVDTiNahfb4yTo
- X8vTqgTWd0TQOD8uV50Q+Y2d3nUNb7Tdm4l4MqQWBq8Jtw3H3VlCbRtlW+h7qToYj0kr
- 6JSA==
+ d=gmail.com; s=20230601; t=1774011136; x=1774615936; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xuOecnpWLzgfDuDrI+Mb5Cjkni6iM2EzM/8tWpDtR8A=;
+ b=YSfM/ONrgIgO+43Srz0htpTsAIA9ppa7tIJiPYPMjn4lFhNRDPEfJSLldjRV808UTH
+ 9Qvt6x1Xy19qrrNAHZgk0u6HtFxVH+OyYk1WFRRjlv/B1kA79D1DlSpd77SRNcmaj+MV
+ gZlpMhmtNNmBb0+ZJluccnILqmgS+V8jDf4uuY8pqelMb6xOcgAFK1j72XTISYEneRcA
+ v1JbAZcCQoP5/q0lFyZ/OzJR32a3YvsyBKKPS0ftN/E9hIR70BM4hnuUEH34tauhYVoG
+ tBqGBVXf6QvJQqqdQ/cKQUeDC4xxEzLuL+E9ZhabU67fyhcTEH/zdhvfjBjygTv43auq
+ J2Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774010334; x=1774615134;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=SpHfn5BmEA0LKn1TgDQTI+VAycrDf1e26PkKnZKFaoQ=;
- b=WdVjGoYesGga6Q4aV/Bely5LZ/Dl2x4bOiTZ255eMKtRut/uKcbTS4YQBt1AovnDd9
- fdIAJaAg7eDh2i4Nf7S+R4KeqhW2jWDGddbqdj4qq/TsG3P7MWGpuiNh/ueTOplETszf
- qGgGHWDPq/WSe2y7II+ku6R4+oHXElySpa0MhCIHthn8Lg3jahTYu6bsKzza3p4/6oUa
- Xc1MNuI3MU2p8hDORaheshjM6sm+cAyhi8/5zMH/qb9y6ZobamgVWzszESWZ99igCUWF
- gXCOaF4hy7wtLQ+xC1W2mnIO5r9OlKm1qjxtJ8pRa4zEAbE9+In+mp1Q5gv/94azD1xu
- SZQg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWDsX1nKpVmAq2fLY7TFwB2RQYYNAgWRAtLNzwZiZ/oygaD5iAz+KdxSDHKQ5+Zd4k1E9H5UkQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwQjp5PRPg0b4dnwwGB39tRhxfZXJeJKht0yZRuEven36vd3u8z
- JPc8IkrkTmWtPab8AV7aC3VppNMtvC8s4TXkaU1ndAWMOVRQoGbCfkncTEkbcISs15Dgd+Skjuk
- DnBvy8r8v+SBgVIJdeS/r+KmNI/2uQj1hDTJ5BhOYWw==
-X-Gm-Gg: ATEYQzzIu7IbGEBdesuLDIaM+cUiSqUG1aqd4+4OkL7PvdZ9yHgUEm3GcZ8mE+1THF0
- Q3WSUXk7hClFVFNTVJmAFu6DT1NNboPOIR4vqGc3J9N+mPeohrKMcoEt1nHImc3SrIP48+iTHIO
- dJFBCIO8fFeY8c7+0QktimaJiaackEnm2++VGOAHLXmNYsnH88NvdASymaAeG8W1NHZKPIEobMG
- xhzAD451urwVow/z9s/srtUAYGNxTAgEEltDhlgVVhmB80WCc8yp6YXb/dqR5MEp5DwIDhOlKTb
- DIsQdcD4dUqI6a+Q30HvoMG0H2SnIay9S01+qkf7a7X5NBHyExWt5Ska4zQOEF8SXKC5XDA+V3I
- 01+Krxa8UbpMBSr0jo1WdEkBSUA==
-X-Received: by 2002:a17:907:c8a7:b0:b98:155e:603 with SMTP id
- a640c23a62f3a-b982f3a3b43mr184960066b.31.1774010333743; Fri, 20 Mar 2026
- 05:38:53 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1774011136; x=1774615936;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xuOecnpWLzgfDuDrI+Mb5Cjkni6iM2EzM/8tWpDtR8A=;
+ b=tQpK0ydvzpOsLHtyG05IemIlOSPRv+dQaxYQIYqqZsT50zkcLkYCCBb92x4rqp/xG0
+ kAQEQdfIjT6p5ECSzVli/1x6S3kaSsYIDrn/O1XnoZm0o/1SDqarhCWE4G9akv1qj7fF
+ 2zx0sG7B/wu+RnuC1rTSG8j4HnAPmpWHuwYEo0K/kvz2vfpe8oL8PydOtczHoP09dR3g
+ SJufM8Iy2ANKGeXdPqy/PtglDF6f17i7BjRRjHibP3/ZDgJLeKGjGclfKPuyKMUL4aL4
+ WiETwvc/z56SIA2K0H3Uq9Lq19b/QwUtI95OihfpV0jI80M6kGrWlaTH+X3smS9uRLcc
+ oYMw==
+X-Gm-Message-State: AOJu0YyKau12Wf19RuEHYJEUWC9dnl6ocN9QIiSm6fxHq9My7LnBKz1Q
+ YP+Inz8sWxcqLOxHWEF8qwcrL3kysFBh6DWLQpiioA3xWm6WVdvcribsaX8JQYB872+fJg==
+X-Gm-Gg: ATEYQzwlhIYNE6cGXKs+B3LZQS9LvFOfsa1Q+IZ8geotIL8nJfKBLbY1yVCG6/2pQ2R
+ S4W/aVq5Rmot2Thj0Udii+k1wBUu5pZQ5Tg9dEL0+kSVjTvXjLi8r+7egkPaAGMTqQ5ihYqU/2C
+ skuWmyKG6/7LT0DYdVG+DzyeQX8txNT80Dj6X8ZVgaTJxEuxAY5giYiohLqJKJ+suTOL13rsEbq
+ gthDZ1vD2pUtxEcwSiawsKvu48Mobx6R5a4tRGWFwr0MisJGU4SO+q9fCRx7zlRcyF0wiAAe4JW
+ V0kclyYgd3nxq1Yggc5EfwRjgitkW6h1cVM5KQNXCkQqjD4VtFtqg9AQ1EAPWW6tlR+3RoEMN5z
+ L06VIDMITA83jqMW+aXy/r4mki8oWktaodHcQmeAC6q2Ap30WUY0w1mije1WcpGOpvo1YiqnISy
+ Y7I8Zc6paT1J5UG7anppbgontyf8/viuzqGw==
+X-Received: by 2002:ad4:5749:0:b0:89a:2fe7:91c9 with SMTP id
+ 6a1803df08f44-89c859b5269mr43832746d6.1.1774011135579; 
+ Fri, 20 Mar 2026 05:52:15 -0700 (PDT)
+Received: from cethr-l01.localdomain ([136.56.120.109])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-89c8537c3b5sm19168166d6.47.2026.03.20.05.52.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Mar 2026 05:52:15 -0700 (PDT)
+From: Caleb Ethridge <jcethrid@gmail.com>
+To: u-boot@lists.denx.de
+Cc: malysagreg@gmail.com, philip@philipmolloy.com, trini@konsulko.com,
+ linux@analog.com, Caleb Ethridge <jcethrid@gmail.com>
+Subject: [PATCH 00/11] sc5xx Environment Cleanup and Fixes
+Date: Fri, 20 Mar 2026 08:50:15 -0400
+Message-Id: <cover.1774008927.git.jcethrid@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20260319-mtk-init-fix-dram-v1-0-6171ec141f40@baylibre.com>
-In-Reply-To: <20260319-mtk-init-fix-dram-v1-0-6171ec141f40@baylibre.com>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Fri, 20 Mar 2026 13:38:46 +0100
-X-Gm-Features: AaiRm50C3dJ61Z6ARS7xjUzLRatDG1RJwKpmKRKJk9gaRvldRcxXFo-gpKsH9o4
-Message-ID: <CAEHHSvbkFGC=gyRFN4jh3nF-rFZ5W+sdKtDMXZqo9Xm5VzQZbg@mail.gmail.com>
-Subject: Re: [PATCH 00/17] arm: mediatek: clean up init code
-To: David Lechner <dlechner@baylibre.com>
-Cc: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 20 Mar 2026 14:06:14 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,75 +96,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le jeu. 19 mars 2026 =C3=A0 21:02, David Lechner <dlechner@baylibre.com> a =
-=C3=A9crit :
->
-> While debugging an issue for Genio 520 EVK support [1], we found some
-> issue with the various init functions that have clearly been copy-pasted
-> between the different MediaTek SoCs. Most of this is cleaning up
-> duplicate or dead code.
->
-> The "fix gd->ram_top limit" patches are fixing actual bugs on a couple
-> of platforms that were introduced during this development cycle. It
-> turns out that this was the root cause of DMA not working on MCC on
-> on those platforms, so we should not need [2] after all.
->
-> [1]: https://lore.kernel.org/u-boot/f2545bf9-3709-40fd-8d0b-b68f4d841d02@=
-baylibre.com/
-> [2]: https://lore.kernel.org/u-boot/20260317-mt8188-mt8195-disable-mmc-di=
-sable-dma-v1-1-220da4144920@baylibre.com/
->
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
-> ---
-> David Lechner (17):
->       arm: mediatek: mt7987: drop dram_init_banksize()
->       arm: mediatek: mt7988: drop dram_init_banksize()
->       arm: mediatek: mt8183: drop dram_init_banksize()
->       arm: mediatek: mt8183: remove call to fdtdec_setup_memory_banksize(=
-)
->       arm: mediatek: mt8188: drop dram_init_banksize()
->       arm: mediatek: mt8188: check return value of fdtdec_setup_mem_size_=
-base()
->       arm: mediatek: mt8188: remove call to fdtdec_setup_memory_banksize(=
-)
->       arm: mediatek: mt8188: fix gd->ram_top limit
->       arm: mediatek: mt8195: drop dram_init_banksize()
->       arm: mediatek: mt8195: check return value of fdtdec_setup_mem_size_=
-base()
->       arm: mediatek: mt8195: remove call to fdtdec_setup_memory_banksize(=
-)
->       arm: mediatek: mt8195: fix gd->ram_top limit
->       arm: mediatek: mt8365: drop dram_init_banksize()
->       arm: mediatek: mt8512: drop dram_init_banksize()
->       arm: mediatek: mt8516: drop dram_init_banksize()
->       arm: mediatek: mt8518: drop dram_init_banksize()
->       arm: mediatek: mt8518: remove call to fdtdec_setup_memory_banksize(=
-)
->
->  arch/arm/mach-mediatek/mt7987/init.c |  8 --------
->  arch/arm/mach-mediatek/mt7988/init.c |  8 --------
->  arch/arm/mach-mediatek/mt8183/init.c | 14 --------------
->  arch/arm/mach-mediatek/mt8188/init.c | 32 ++++++++----------------------=
---
->  arch/arm/mach-mediatek/mt8195/init.c | 32 ++++++++----------------------=
---
->  arch/arm/mach-mediatek/mt8365/init.c |  8 --------
->  arch/arm/mach-mediatek/mt8512/init.c |  8 --------
->  arch/arm/mach-mediatek/mt8516/init.c |  8 --------
->  arch/arm/mach-mediatek/mt8518/init.c | 14 --------------
->  9 files changed, 16 insertions(+), 116 deletions(-)
-> ---
-> base-commit: a27980786cfb3c430aa1c05da8e79180c584d221
-> change-id: 20260319-mtk-init-fix-dram-51bd6157bb63
->
-> Best regards,
-> --
-> David Lechner <dlechner@baylibre.com>
->
+This series performs a general cleanup of the default U-boot environment
+for sc5xx boards, stemming from the decision to no longer store the
+environment in the SPI flash. The environments for each board have been
+edited to contain the minimum number of commands needed for all supported
+boot modes to avoid confusion, and the default boot command synced to spi
+for all boards that support it. The filesystem for the SPI flash has also
+been changed from jffs2 to ubifs.
 
-Thank you David for this!
-I tested on genio-510, genio-700 and genio-1200 and it fixex the dma
-issue on these platforms.
+A bug with the Ethernet reset line on the sc594 has been fixed, and the
+sc573 has been renamed from the EZKIT to the EZLITE to match the name of the
+publically available board. EZKIT was only used internally before release.
+Preliminary binman support for sc5xx boards has been removed as it was unused
+and full support never added.
 
-Reviewed-by: Julien Stephan <jstephan@baylibre.com>
-Tested-by: Julien Stephan <jstephan@baylibre.com>
+Caleb Ethridge (11):
+  configs: sc5xx: Do not store environment in SPI flash
+  mach-sc5xx: Remove update commands from default environment
+  mach-sc5xx: Update boot commands
+  mach-sc5xx: Switch from tftp to wget
+  mach-sc5xx: Add USB boot command
+  mach-sc5xx: Remove preliminary binman support
+  dts: sc594: Fix gige-reset line on EZKIT
+  mach-sc5xx: sc573: Rename EZKIT board to EZLITE
+  mach-sc5xx: Update image load address
+  mach-sc5xx: Update SPI bootargs for ubifs
+  configs: sc5xx: Set default bootcmd to SPI boot
+
+ arch/arm/dts/Makefile                         |  2 +-
+ .../dts/{sc573-ezkit.dts => sc573-ezlite.dts} |  4 +-
+ arch/arm/dts/sc594-som-ezkit.dts              |  2 +-
+ arch/arm/dts/sc5xx.dtsi                       | 41 ---------
+ arch/arm/mach-sc5xx/Kconfig                   | 41 +--------
+ arch/arm/mach-sc5xx/init/dmcinit.c            |  2 +-
+ .../adi/{sc573-ezkit => sc573-ezlite}/Kconfig |  8 +-
+ .../{sc573-ezkit => sc573-ezlite}/Makefile    |  2 +-
+ .../sc573-ezlite.c}                           |  0
+ .../sc573-ezlite.env}                         |  7 +-
+ board/adi/sc584-ezkit/sc584-ezkit.env         |  6 +-
+ board/adi/sc589-ezkit/sc589-ezkit.env         |  7 +-
+ board/adi/sc589-mini/sc589-mini.env           |  7 +-
+ board/adi/sc594-som-ezkit/sc594-som-ezkit.env |  7 +-
+ .../adi/sc594-som-ezlite/sc594-som-ezlite.env |  6 +-
+ board/adi/sc598-som-ezkit/sc598-som-ezkit.env |  7 +-
+ .../adi/sc598-som-ezlite/sc598-som-ezlite.env |  6 +-
+ ...ezkit_defconfig => sc573-ezlite_defconfig} | 10 +--
+ configs/sc584-ezkit_defconfig                 |  8 +-
+ configs/sc589-ezkit_defconfig                 | 10 +--
+ configs/sc589-mini_defconfig                  | 10 +--
+ configs/sc594-som-ezkit-spl_defconfig         |  8 +-
+ configs/sc594-som-ezlite-spl_defconfig        |  8 +-
+ configs/sc598-som-ezkit-spl_defconfig         |  5 +-
+ configs/sc598-som-ezlite-spl_defconfig        |  6 +-
+ .../arm/adi/adi,sc5xx.yaml                    |  2 +-
+ .../configs/{sc573-ezkit.h => sc573-ezlite.h} |  4 +-
+ include/env/adi/adi_boot.env                  | 83 +++++--------------
+ 28 files changed, 73 insertions(+), 236 deletions(-)
+ rename arch/arm/dts/{sc573-ezkit.dts => sc573-ezlite.dts} (98%)
+ rename board/adi/{sc573-ezkit => sc573-ezlite}/Kconfig (92%)
+ rename board/adi/{sc573-ezkit => sc573-ezlite}/Makefile (79%)
+ rename board/adi/{sc573-ezkit/sc573-ezkit.c => sc573-ezlite/sc573-ezlite.c} (100%)
+ rename board/adi/{sc573-ezkit/sc573-ezkit.env => sc573-ezlite/sc573-ezlite.env} (52%)
+ rename configs/{sc573-ezkit_defconfig => sc573-ezlite_defconfig} (88%)
+ rename include/configs/{sc573-ezkit.h => sc573-ezlite.h} (79%)
+
+-- 
+2.34.1
+
