@@ -4,138 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EF8F1098796
-	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 15:18:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7605F109879B
+	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 15:26:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D91E83D71;
-	Fri, 20 Mar 2026 16:18:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id B3DEF83D71;
+	Fri, 20 Mar 2026 16:26:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="ZW7FZEIV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bJplmsY6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98D6983E36; Fri, 20 Mar 2026 16:18:03 +0100 (CET)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BB41A83E36; Fri, 20 Mar 2026 16:26:52 +0100 (CET)
+Received: from mail-dl1-x1235.google.com (mail-dl1-x1235.google.com
+ [IPv6:2607:f8b0:4864:20::1235])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4874B83AC5
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 16:18:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 19AAC83CEA
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 16:26:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=simona.toaca@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=pozYBMdRl29Sz+tkb2rQ/S9vc6McbMy8CUQLHbBumnWmnWVvdvKelNoW5NC2IiMpAhlyItkDGFUc081JSfFU44/EBEqD2BigzoLwJNpZfR9QdxGggVzCQm60kWU1/kCc4ea7G/VfgwdPzx0aKa/hZpZuumgPSownBQ3KJcdTb71xFGi47HWT1ko4ooHFQ67m4Fkr3vvUon6lnXVdUz4nn8XgwGFj49oquPbyj4pPfHIOgHJqnRA/cJxxNAWKgb+rsszJyzzH6amddpEIidlVUvTlk6FsthP6tuK7pD4NpK8tK3H1cAxZv55k5ItewCq00rrhzfYD7FWgASDHLr7uuw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Y+nPzTFildEzUUT7cpYpIamakGvZW2B7sACi1tCQcCc=;
- b=ApFErY2HwndDkj0dmu9e8ce4cuxOeWoJKr7jx3Rr17wpw1BfSWd3TAj8Xg22DAWAV9HgsOckBqp025nM3ZKfjum522kUVL8FqYDE6aFhglH1wpYbfXv1pZEML03lEfXVFAkljRBmVS9qyTkykakqB8KSZoRGus7nBGT7SJLo9Qc3dvmbUZtG6ED6U1QplyWKDh1TaMhmTf+/Nm/Poc5y32xN/eUqbolDJoBuE9rHlcwcRFfEDw7EZrTmCty+jlyf+/ZqpLJ424p6WEZoDtAJRLOJp9FOZSbtjNn8XoCSB8oVcKtWaXuo6f4zsU1AaZBWsiN+bqPAP0HbAQ0lZI2jhw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Y+nPzTFildEzUUT7cpYpIamakGvZW2B7sACi1tCQcCc=;
- b=ZW7FZEIVwm6uad83o3C6rT+qQMrt+XJ90sUCcJJpkmmqL/tgniTWJLnvwkLTFSpkH6fKt9jfozOQplqw/D+vFjdpvkSIl6GD+U7X4o0YN9S6g4ILc005g/qpwZAM0o+LJ1EGaeBv1qQ9n6vZIdodaET+ypjIRnJTOhZ13Q6r/7suTfvLrupqYVxDbKiwkPC0mVVaURPXS9uu8EpneBgkpX0RcRupo6XfIfN4up4LgQYpcNN3jcxXgVHTTQlxPELeUnM38qYJdv9Js+fkVlyd0BYfGq7OLPhtkPxmJIidNybT4u/wV4fiRk9pbUaOkpyhJKgbHbvSUgYPdcH3LihSTA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from VI0PR04MB11917.eurprd04.prod.outlook.com (2603:10a6:800:306::9)
- by GVXPR04MB10235.eurprd04.prod.outlook.com (2603:10a6:150:1be::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.19; Fri, 20 Mar
- 2026 15:17:49 +0000
-Received: from VI0PR04MB11917.eurprd04.prod.outlook.com
- ([fe80::a506:3460:d2bc:26e7]) by VI0PR04MB11917.eurprd04.prod.outlook.com
- ([fe80::a506:3460:d2bc:26e7%4]) with mapi id 15.20.9723.018; Fri, 20 Mar 2026
- 15:17:47 +0000
-Date: Fri, 20 Mar 2026 17:29:44 +0200
-From: Simona Toaca <simona.toaca@oss.nxp.com>
-To: Marek Vasut <marex@nabladev.com>
-Cc: uboot-imx@nxp.com, u-boot@lists.denx.de, 
- Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com, peng.fan@nxp.com,
- alice.guo@nxp.com, 
- simona.toaca@nxp.com, ye.li@nxp.com, viorel.suman@nxp.com, ping.bai@nxp.com, 
- sebastien.szymanski@armadeus.com, ravi@prevas.dk, joao.goncalves@toradex.com,
- ji.luo@nxp.com, tharvey@gateworks.com, qijian.guo@nxp.com
-Subject: Re: [PATCH v2 5/5] doc: board: nxp: Add Quickboot documentation
-Message-ID: <7ew7523twjd26673q2pezosnhyu2qzf7foywuga7r3hoamqpfb@bm2d4fsbk3ld>
-References: <cover.1773648510.git.simona.toaca@nxp.com>
- <be6b07edb38e4e0dc86e65f8bac7b6b3b0e29d01.1773648510.git.simona.toaca@nxp.com>
- <d3b42af1-65a8-401f-9dda-1f79cb0dde9a@nabladev.com>
- <yuwvhik6p6eordghidde6l4ey6fclwwuxnzuqpttcoicxqa2r4@jpp2t42tl2wx>
- <541a05c0-e0f0-43ce-b944-d7656da585e1@nabladev.com>
- <becryuzd7ohecs7vq2goxhfv5fsrjh6a3ctav77y4uxrszzecd@wsnoc3muqoit>
- <78c40910-a90c-4cef-ba72-4e4cdfd5abe2@nabladev.com>
- <7fg7jj4rou4ke7nkewytibvcz3oehxtot4q4apq2uhtz75a2gp@uvpcobhbwu33>
- <a8f0a62a-9b26-46c7-bf5c-edd26bb1f29c@nabladev.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <a8f0a62a-9b26-46c7-bf5c-edd26bb1f29c@nabladev.com>
-X-ClientProxiedBy: AS4P195CA0046.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:20b:65a::27) To VI0PR04MB11917.eurprd04.prod.outlook.com
- (2603:10a6:800:306::9)
+ spf=pass smtp.mailfrom=robertcnelson@gmail.com
+Received: by mail-dl1-x1235.google.com with SMTP id
+ a92af1059eb24-1279eced0b9so1068888c88.0
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 08:26:50 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774020408; cv=none;
+ d=google.com; s=arc-20240605;
+ b=j2wovb6R3K6+/EZVC448NlzXAmofIGb7MIVg+9YTYAW/xqyQcWFmYv+4e8Dq7bf9mf
+ 6DgM/Cks7uJPteaco1EqCQ0jXUYZDRf2orlZ2fMDo55WlGp3YPFybhqwkgsyZBYbVNB/
+ ShHhTESDt1lSIyn4hbS5rvLfqNJXtynwQ95/gXYLsdB7c8r0xfSkYWSrBnFIO6jpGGWB
+ N46wz+3WsgZCQS2LvDF5+LvOeA2QHv3cpBHdoIOE59LWKwYkYtVzWbZh4ON520aJ+irg
+ mJIZVijjh+VyqRUecxZzKFfuZ/QQIrwbtyu44hckv822EkSAHF+omxpk2Hiem//QJrOa
+ IBpg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=iFigyVIcwgkbUg5co5XMjfFATUrEqAXp3/Z2DLG7qJw=;
+ fh=JXrI8gKPurr923CGQytcS6B1kcIMvYsaWfImmqlnhMk=;
+ b=DHcDnZvj5q2w1cq2K2OAysitGv7j05yl1beTDQFnPS16qdwPtHYoNZefiEncwL73XR
+ Ycd7+ODzSxCY8dFQ4p/kIm0k8a36U2z/n40Hqv1Xjv1hnw4eVfHRLzRZNgCiWE4adYpQ
+ niWZ54vlN6DoQ9lf+xyrZxvpFvCPI4Ci3MQgqN/9xR7UubOP1rPtIWjUEF7mU5W7/k5k
+ kQRMPfeXZOgIxDavtBVSXWmV3+Nh4co5MtrQ7vXCJEBx6+3rvqlrlwt+KC04kzYZ8gTG
+ +D3mSd4v7g6/szn31gqZqBf3kUR6GsBex7wTfctya+L0O2aGgtDJioL0LEWsldr3kGwC
+ VZjw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1774020408; x=1774625208; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=iFigyVIcwgkbUg5co5XMjfFATUrEqAXp3/Z2DLG7qJw=;
+ b=bJplmsY65Laa6zaeplbuakoPBQrJV/9HIUfEWfkPiNJNim46dmeoywDP4nNsRqPwbq
+ t4vVwIufGtY3gFaf3UqFRSaB7GPXwKVf6l5Qwswcj+qZM8jjWwMRh17+/xRsvgUNvQuG
+ 0OZD0o25gXE7TtihkOzvdxUxX5nHoW9LLAJ4svQCrTinam/+S+nKJcmpX2vhPOrAsknr
+ 0QZH3kslOGcpB7InsR1PQdqTpsJjK2eIEHrQhhOJgdUaQZDqXrE2UbXmMe7VQnWN5SPD
+ +uUTbBDcg69G5NqjHkEfdxMlOf66nL3N329VW202XfFg3DWSAJsjjUVcd6HdCIyCEd3k
+ ZiuQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774020408; x=1774625208;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=iFigyVIcwgkbUg5co5XMjfFATUrEqAXp3/Z2DLG7qJw=;
+ b=C3+lK3gPkcg/xcFned0lEhzJhxE2lYqUnBIz34MVkyeZzw4G9RXnPkNAUB/5RjqMBo
+ 1FeYmMm3dnpa8J1VaYxEjfaM0IJILgwRJTwPSPF2OPVDFYabRTkFjLTWqbZEJkkKyiP7
+ WyCwd6DA9K0JqLnLKAQGWoGacOh0oRJIzFV65us0pJAjiyTY/Mn3hES4vZ9kl5zhndDL
+ o17edfs2A3bgEm5tTJ2fmrR9TWDIoG3KL/UGSokkgDNhYycGftr6dyjL8Qlqb34gokZd
+ iD/E6smqYVvY492w6vHiFUuko2CsyFuronF18IhtgkCq0vHyXshMDd6426Kiot0n8RdD
+ YkJw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUX6Yb7GQPsI25TvBq2qsw/TZMLMxFhgV2zPzwHp5sLvUilGHfNNMcR2wHwu7nA4A9ZqCoG580=@lists.denx.de
+X-Gm-Message-State: AOJu0YyPRn8L1b38GMBcsa4ezzkuBlN4SRYktxugY/iyrfEtAb1r2Q6X
+ F0T2naHXiBAL6z7cHmX/LYsMnqFuvq8hfGG/9+MW5PPs9jY9qmMT+3t6mMnCht9+RcyrBej9Qqc
+ tGruU8ocXrej45GJbe+ek4wQMsvn1YQ8=
+X-Gm-Gg: ATEYQzwTRDAzLGxiOyrz4tEEo+tlOyWDdImtRvJNr1JHYFcvgVq+J+FvqdJcd94GPst
+ 1+FAcF2OiRbBj53RS0rVkzxjDKQGKWyMyL6rlu6/dGJA/uib4U2208dePYvU1KWbM0YlClKnlXr
+ /cKAUw5iOFes3ch3rWkFfTLSXEGSn4NKZvotyVl6YdS0ni3AX38n0RK/qhkbneWPbFzx2uJ0Eab
+ i3ZUavnOgtGJvxoUWNtFfPszgAU/qcN6glr33Rzx1qOop6AANm8KpksGkzNOK2mnkdJ1dbdES0Q
+ dZGyWVjI8avPdUos+bMQ9I5OHZEzQvrYE2l2h++rr46CWJkGYAlLkZz2NHRL/ySp0tvvHK68oJF
+ 09M69RpGDahQJrvSYVBSULNnZpLU=
+X-Received: by 2002:a05:7022:490:b0:12a:6a64:81ef with SMTP id
+ a92af1059eb24-12a7267d891mr1575148c88.9.1774020408252; Fri, 20 Mar 2026
+ 08:26:48 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VI0PR04MB11917:EE_|GVXPR04MB10235:EE_
-X-MS-Office365-Filtering-Correlation-Id: 81253b09-d362-4f60-b242-08de8693d776
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|19092799006|1800799024|376014|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: EFKsC0hyZybyXkMOHVwAUz4z+BRP0lFaxTIao+40mk9LSjC+jDtJVFaAwfV8mp7rkjcRwgxelrxYSGSVRVuvNACNr/FEbiepCmD/qHQC6Hfj0gEizSl/ctffVm/TTYvs16eAP2Kf9T2H6f7TzmJO+lBbmZmdceBxMTK/93pqeLB9rnPZqg/+TanMDJ9y4umxlnUmtJNivxhpPMILsRNSWWNk7PxbmNSSgWGDulSyMpdMXdq1/TZq9tEuHbeS+lxVqDA2EoZMPLPRkwrxTV7ObfHjdQpIC1HsgpxHUHg2UPTKpYZcQvUwR1es85kWbzR2WrkV4Hh62gGnna/j6+JeDodolW3PFIkHgVdFew0NUBrzsyNRpf9A9q4J1S4Ej8/L1PNvp+OwET5OY+lsPHyxLTiORgfGtxawh9j5FawZRhsIR7Kd2seNrTW9hz5X+vI+4XbxcVIz1kmW2KEXVk/42yrZw5eJfcEWvpBymNTSp2cEVqbUt/lH7zsu2Vu+WmXqrSZs4wlAdMnyVfJB5AHM1L/Ti5dMgSv9MAcUZyhOLPKXeNwEULmnhiNBA+OVNOZpl3UCuEbqJ2zP71wRuzrUkv+Bmv0oCfrgw+2LqDgR5REpX3AZqr5VD66gyDS46dd0bsV2t9FI9uG4rylH46A/CSxrKQn+05aFbI+My9RY3zAWU91af+R3m8Lz1u1HIUa2imEmw+ZHQgEcC/r4H6lCBImaeI93Uv7IgNRBKGedym0=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:VI0PR04MB11917.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(19092799006)(1800799024)(376014)(56012099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?twr6k4ow2/XkpvHk7vGkP/QWkbfkRtd3q1DB/l4+74bPOpBo5evxBJkeUV0I?=
- =?us-ascii?Q?poS9JvOsSPuAHC0ry9WCx4Gtm3aewlcSitqy63zNmLAqdwCFBO9eeENZvzOJ?=
- =?us-ascii?Q?IqdpiAl1/P9mutZ5e5RN0aENBNYdjoZ0P9klIZgn6aHNoXFEUSH0eYHVbzpc?=
- =?us-ascii?Q?Fu5axb7HzPPrYtOaU1xrJ2IlBhao7mpBNusfpN7t76no/Yem0We93sR0uLOd?=
- =?us-ascii?Q?N4Lp+CZ4QEaSrGA4E1ZM2DswyQK3i8ZBfvmgvK9EjjV2hC8/QpCOwseyBs/C?=
- =?us-ascii?Q?kwGk6iLFEyScebEQeFrW8KSmzuz9Q3AuaNQnxDdjYVw7y15hhBKqRsfF5yb+?=
- =?us-ascii?Q?qGjKccTkB+Z03UUZSlVzW8BM+h9He6JP+f0dBixfXBOnzwefedwlpsG3IZkz?=
- =?us-ascii?Q?zHvV1lr1ivwdTlV73FQnYiTB/vgfvzeXh/ZJNFPD2Uc0jeE/I8r/25uMigAE?=
- =?us-ascii?Q?G2YGus3yy0psUnhzo0F/O6nQKlRfKJHPfrjhPfP5yUI5ZnaJuVQLG0mmWveg?=
- =?us-ascii?Q?qUYQ78AOmVrthNaYDHt7IHOpyRq7ZUIfIUBn8M+qcoP8wrLyAEikeQ4Zhe6C?=
- =?us-ascii?Q?yuytLdDRRFf9B2+EcLhnB4+pCsRx+PacrushbyviUGZT5ZLkCn4GsLtKYLhO?=
- =?us-ascii?Q?z51QZgtpHBqV/4f2N6ry4seATlBoMRmAtiC0HIOaDeTDpBYb55G3rDUX1Jig?=
- =?us-ascii?Q?/sCPjWPAWy/0d5NEC/wxz0fwIottiMetokqxfbLZ2za/bmY8M3jUv7Q0ZOLS?=
- =?us-ascii?Q?flM3r2CiJtA23FhVpn93OnQDPr5jIWPseYkJpW7r4d8rcsIh0ybAl85ujS5p?=
- =?us-ascii?Q?hQG3oJdzn6RLbwDAuvgyJLHMzmSnVlKTn85Zv46EIYYIasbCw7wP6AhrXhCB?=
- =?us-ascii?Q?URtKyuRPvJJSSFmAEM/xNzL+86yGyFoYhJ3jw3du89JaePBDZt+tTQst4KKr?=
- =?us-ascii?Q?sQHTM0Xii4zs105Ds3LGLVnfsqmqwUOpGXS6mrNFUAI2MFBfSzXZr+d5qfAc?=
- =?us-ascii?Q?cVvRzchGwV+Hck9RaLBPBdGX9RvV6qEayOyotQpP1qg+i4JnJvD5qkmZaGXE?=
- =?us-ascii?Q?2TqehUxkNJ3suuqXvWyVZbGYcjw3DCGnQyyZb/lIkEuVCWaUnHl3xvjK3k+L?=
- =?us-ascii?Q?skJWuW4FXk19ahapAFMat9U3pTruRVGZZUQJf8wBL2llPVta84Blkzzk7z5t?=
- =?us-ascii?Q?BI/flDcQQGvLzEYPWP0WAJaTCACOsSQcVFdDwhrRlHFxX6WAhsoImI6TjiTt?=
- =?us-ascii?Q?ta6zCrlspIqQFsRj+aJDP6KJLXzFLK7sjEfrrhxchuJyDUtlFtzn2g02Qp5b?=
- =?us-ascii?Q?tuI7laSXwm8rxSkmMPgm23Zv4rybejsRD/EuJadg1VWGnCG7nqurHM0qlKDM?=
- =?us-ascii?Q?djE1zkhOVXro32ayIp5t2tFdwy/G1+A390IFr/nTwwmQNblY3smqynceJGn6?=
- =?us-ascii?Q?lZV7JUzWKitE1uRPZU5J7MWahxFAtwDO2nBVJwqrJ+7Jg6C8JllZ/7VfNBoP?=
- =?us-ascii?Q?rjB1VJg77ofgce2bJoUdMdAAI6WblSK8xK3/OAKAJ7wwmyQazSJ1a0DWIC54?=
- =?us-ascii?Q?eRI3xztFnzL5u3+MlIsCU++2ZL9oKBVrnOCQsaHMf9VfUGtdQrchNkKHQohy?=
- =?us-ascii?Q?oeJfjXq5169kgeuXUiPaGpOR3h4NYrdLL/eKVOLJIwKUxTij0H+MPy+GwnUb?=
- =?us-ascii?Q?/QpyDpPJiqjujzqZwHrc1YFLI+x304rvLO2cG5SZ0Lkk3iE/hcTioDZHvOBf?=
- =?us-ascii?Q?n1F+eTnaAg=3D=3D?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 81253b09-d362-4f60-b242-08de8693d776
-X-MS-Exchange-CrossTenant-AuthSource: VI0PR04MB11917.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Mar 2026 15:17:47.1008 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: T8VvWlVpVHILytH4GIXjtr1GM1KgiSBk5wNbXAh/nRiDX8Zibmg+6kcHsWgqWecITSiyTtYfq9Kt/H5WsFCGug==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB10235
+References: <20260317223800.776581-1-rs@ti.com>
+ <20260317223800.776581-4-rs@ti.com>
+ <DH7J0W8ZJCDY.27ZGBQPIP4TP5@ti.com>
+In-Reply-To: <DH7J0W8ZJCDY.27ZGBQPIP4TP5@ti.com>
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Fri, 20 Mar 2026 10:26:21 -0500
+X-Gm-Features: AaiRm519qow7aPFQO5dCfZb248FUCJhXDRbPzUx8d7R1JojsF6PIKag7R1GZYDU
+Message-ID: <CAOCHtYg3OcqNCP=vNtMDuDauFoUgED0o7t_8vAcPmo3M4Hxzhw@mail.gmail.com>
+Subject: Re: [PATCH 3/3] k3-am62-pocketbeagle2: add support for 1GB variant
+To: Anshul Dalal <anshuld@ti.com>, Andrei Aldea <andrei@ti.com>
+Cc: rs@ti.com, bb@ti.com, nm@ti.com, trini@konsulko.com, afd@ti.com, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,59 +117,317 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-On Thu, Mar 19, 2026 at 07:02:58PM +0100, Marek Vasut wrote:
-> On 3/19/26 4:17 PM, Simona Toaca wrote:
-> 
-> Hi,
-> 
-> > > > If one wants to store the data elsewhere, they could use
-> > > > the generic fs methods to make the backup wherever they want, and re-load
-> > > > it themselves to the QB_SAVED_STATE_BASE address, so that U-Boot can save
-> > > > it from there.
-> > > 
-> > > It would be good to document this mechanism, esp. how to locate the QB data
-> > > in RAM and how much data have to be saved into backup storage.
-> > > 
-> > 
-> > I don't recommend anyone does this sort of backup, although it is possible.
-> 
-> I think I know of at least one such use case.
-> 
-> > I don't see why one would do that since OEI runs training and the data can be
-> > saved then. The data is board, ddr configuration and firmare specific,
-> > and I wouldn't want to encourage someone to think they could save it and re-use it
-> > just like that. Why not re-run OEI and save the data (by using SPL_IMX_QB, for
-> > example, which does it automatically)? Or run the training multiple times and use
-> > the cmdline qb command to save to all the boot devices?
-> 
-> Consider a device that is trained in factory, at 25C. The training data are
-> saved, and backed up. Then, due to some sort of training data corruption, a
-> slow retraining happens in field at unknown and possibly very high or very
-> low temperature, which could lead to low quality QB data. Worse, the next
-> time the device starts, the conditions can be the exact opposite, very low
-> or very high temperature and the DRAM may start to suffer from bitflips
-> because of that. In this deployment, it is better to use the factory QB data
-> from backup than to rely on the in-field training.
+> > +
+> > +config POCKETBEAGLE2_AM62X_RAM_SIZE_FIX
+> > +     bool "Set the PocketBeagle 2 RAM size instead of detecting it"
+> > +     default false
+> > +     help
+> > +       RAM size is automatically detected through the device revision stored
+> > +       in EEPROM. This overrides the detection logic with a fixed value.
 >
-Low/High temperatures don't generate 'low quality' data, just data
-more suitable for that temperature point. If there are issues with the
-DRAM, one can erase the data themselves, using 'qb erase', to force a
-new training. This way, the data is collected under the current operating
-conditions.
+> With the ability to detect the board type via the EEPROM, is there any
+> use to having this option?
+>
+> IMO we should just let the board boot with runtime detection for DDR
+> size everytime. This config option just makes the execution harder to
+> understand while providing minimal value.
 
-If there are any PHY firmware updates, or changes in DDR configuration,
-performing training again is necessary, cannot use the 'backup' data.
+Phytec also does that with their boards that detect memory sizes, i
+think Randolph was trying to mirror that kconfig section..
 
-If the concern also includes the training time, if the data gets
-corrupted, the training will happen regardless.
+>
+> > +
+> > +choice
+> > +     prompt "PocketBeagle 2 RAM size"
+> > +     depends on POCKETBEAGLE2_AM62X_RAM_SIZE_FIX
+> > +     default POCKETBEAGLE2_AM62X_RAM_SIZE_512MB
+> > +
+> > +config POCKETBEAGLE2_AM62X_RAM_SIZE_512MB
+> > +     bool "512MB RAM"
+> > +     help
+> > +       Set RAM size fix to 512MB for the PocketBeagle 2.
+> > +
+> > +config POCKETBEAGLE2_AM62X_RAM_SIZE_1GB
+> > +     bool "1GB RAM"
+> > +     help
+> > +       Set RAM size fix to 1GB for the PocketBeagle 2.
+> > +
+> > +endchoice
+> > diff --git a/board/beagle/pocketbeagle2/Makefile b/board/beagle/pocketbeagle2/Makefile
+> > index 3d42c160716..dd529fe6d75 100644
+> > --- a/board/beagle/pocketbeagle2/Makefile
+> > +++ b/board/beagle/pocketbeagle2/Makefile
+> > @@ -7,3 +7,5 @@
+> >  #
+> >
+> >  obj-y += pocketbeagle2.o
+> > +obj-${CONFIG_K3_DDRSS} += ../../phytec/common/k3/k3_ddrss_patch.o
+> > +obj-${CONFIG_TI_I2C_BOARD_DETECT} += ../../ti/common/board_detect.o
+> > diff --git a/board/beagle/pocketbeagle2/pocketbeagle2.c b/board/beagle/pocketbeagle2/pocketbeagle2.c
+> > index b6768caa34b..1bfc79350b6 100644
+> > --- a/board/beagle/pocketbeagle2/pocketbeagle2.c
+> > +++ b/board/beagle/pocketbeagle2/pocketbeagle2.c
+> > @@ -15,15 +15,123 @@
+> >  #include <spl.h>
+> >  #include <asm/arch/k3-ddr.h>
+> >
+> > +#include "../../ti/common/board_detect.h"
+> > +#include "pocketbeagle2_ddr.h"
+> > +
+> > +DECLARE_GLOBAL_DATA_PTR;
+> > +
+> > +static int pocketbeagle2_get_ddr_size(void)
+> > +{
+> > +     // check config overrides first
+> > +     if (IS_ENABLED(CONFIG_POCKETBEAGLE2_AM62X_RAM_SIZE_FIX)) {
+> > +             if (IS_ENABLED(CONFIG_POCKETBEAGLE2_AM62X_RAM_SIZE_512MB))
+> > +                     return EEPROM_RAM_SIZE_512MB;
+> > +             if (IS_ENABLED(CONFIG_POCKETBEAGLE2_AM62X_RAM_SIZE_1GB))
+> > +                     return EEPROM_RAM_SIZE_1GB;
+> > +     }
+> > +
+> > +#if IS_ENABLED(CONFIG_TI_I2C_BOARD_DETECT)
+> > +     // dynamically detect the config if we can
+> > +     if (!do_board_detect_am6()) {
+> > +             struct ti_am6_eeprom *ep = TI_AM6_EEPROM_DATA;
+> > +
+> > +             if (strlen(ep->name) > 11 && ep->name[0] == 'P') {
+> > +                     /*
+> > +                      * POCKETBEAGL2A00 (am6232 512MB)
+> > +                      * POCKETBEAGL2A10 (am625 512MB)
+> > +                      * POCKETBEAGL2A1I (am625 1GB)
+> > +                      */
+> > +                     if (!strncmp(&ep->name[11], "2A1I", 4))
+> > +                             return EEPROM_RAM_SIZE_1GB;
+> > +             }
+> > +     }
+> > +#endif
+> > +
+> > +     return EEPROM_RAM_SIZE_512MB;
+> > +}
+> > +
+> >  int dram_init(void)
+> >  {
+> > -     return fdtdec_setup_mem_size_base();
+> > +     if (!IS_ENABLED(CONFIG_CPU_V7R))
+>
+> I don't have a 1GiB pb2 to test with but I'm assuming the fixed up
+> memory nodes get passed from the R5 SPL to A53 SPL and then finally to
+> U-Boot as part of fixup_memory_node from k3-ddr.c.
 
-I am not saying it can't be done, I am just saying that for things
-to work the proper way, I encourage the usage of 'qb save/erase',
-as I said in my previous reply.
+@Andrei Aldea ^ can you help ;)
 
-[ ... ]
 
-Kind regards,
-Simona
+> Could somebody confirm if this is indeed the correct flow? I wanted to
+> see if both A53 SPL and U-Boot receive the correct memory size as part
+> of their DT.
+
+Sadly while developing this, the DT memory values were not passed
+between the R5 SPL and the A53 SPL ( and thus A53 main )..
+
+After thinking about this routine since I came up with it last month,
+it might be better to do 2 device-tree's...  So with 512MB default
+path, for 1GB, patch ddr timing in R5/SPL and force 1GB device tree.
+Then A53/SPL (and main) would have the correct memory size..
+
+Currently, we read the eeprom 3 times, R5 SPL, A53 SPL and A53 main..
+(but we only need it really twice, R5 SPL (ddr patch) and the A53 main
+(device-tree values patching..)
+
+
+>
+> > +             return fdtdec_setup_mem_size_base();
+> > +
+> > +     return 0;
+> >  }
+> >
+> > +// logic after this block assumes that there is only 1 DRAM bank currently
+> > +#if CONFIG_NR_DRAM_BANKS != 1
+> > +#error Unsupported number of DRAM banks!
+> > +#endif
+> > +
+> >  int dram_init_banksize(void)
+> >  {
+> > -     return fdtdec_setup_memory_banksize();
+> > +     u8 ram_size;
+> > +
+> > +     if (!IS_ENABLED(CONFIG_CPU_V7R))
+> > +             return fdtdec_setup_memory_banksize();
+> > +
+> > +     memset(gd->bd->bi_dram, 0, sizeof(gd->bd->bi_dram[0]));
+> > +
+> > +     ram_size = pocketbeagle2_get_ddr_size();
+> > +     switch (ram_size) {
+> > +     case EEPROM_RAM_SIZE_1GB:
+> > +             gd->bd->bi_dram[0].start = CFG_SYS_SDRAM_BASE;
+> > +             gd->bd->bi_dram[0].size = 0x40000000;
+> > +             gd->ram_size = 0x40000000;
+> > +             break;
+> > +     case EEPROM_RAM_SIZE_512MB:
+> > +     default:
+> > +             gd->bd->bi_dram[0].start = CFG_SYS_SDRAM_BASE;
+> > +             gd->bd->bi_dram[0].size = 0x20000000;
+> > +             gd->ram_size = 0x20000000;
+>
+> We can make use of SZ_512M and SZ_1G macros here.
+>
+> > +             break;
+> > +     }
+> > +
+> > +     return 0;
+> > +}
+> > +
+> > +#if IS_ENABLED(CONFIG_K3_DDRSS)
+> > +static int update_ddrss_timings(void)
+> > +{
+> > +     int ret = 0;
+> > +     u8 ram_size = 0;
+>
+> Having a u8 of "ram_size" is confusing, we should  make it explict that
+> it's an index into pocketbeagle2_ddrss_data.
+>
+> > +     struct ddrss *ddr_patch = NULL;
+> > +     void *fdt = (void *)gd->fdt_blob;
+> > +
+> > +     ram_size = pocketbeagle2_get_ddr_size();
+> > +     ddr_patch = &pocketbeagle2_ddrss_data[ram_size];
+> > +
+> > +     if (!ddr_patch)
+> > +             return ret;
+> > +
+> > +     ret = fdt_apply_ddrss_timings_patch(fdt, ddr_patch);
+> > +     if (ret) {
+> > +             printf("Failed to apply ddrs timings patch: %d\n", ret);
+> > +             return ret;
+> > +     }
+> > +
+> > +     return ret;
+> > +}
+> > +
+> > +int do_board_detect(void)
+> > +{
+> > +     void *fdt = (void *)gd->fdt_blob;
+> > +     u64 start[] = {gd->bd->bi_dram[0].start};
+> > +     u64 size[] = {gd->bd->bi_dram[0].size};
+> > +     int ret;
+> > +
+>
+> Nit: formatting (done with clang-format)
+>
+>         -       u64 start[] = {gd->bd->bi_dram[0].start};
+>         -       u64 size[] = {gd->bd->bi_dram[0].size};
+>         +       u64 start[] = { gd->bd->bi_dram[0].start };
+>         +       u64 size[] = { gd->bd->bi_dram[0].size };
+>                 ...
+>         -       snprintf(fdtfile, sizeof(fdtfile), "%s.dtb", CONFIG_DEFAULT_DEVICE_TREE);
+>         +       snprintf(fdtfile, sizeof(fdtfile), "%s.dtb",
+>         +                CONFIG_DEFAULT_DEVICE_TREE);
+>
+>
+> > +     dram_init();
+> > +     dram_init_banksize();
+> > +
+> > +     ret = fdt_fixup_memory_banks(fdt, start, size, 1);
+> > +     if (ret) {
+> > +             printf("Failed to fixup memory banks: %d\n", ret);
+> > +             return ret;
+> > +     }
+> > +
+> > +     return update_ddrss_timings();
+> >  }
+> > +#endif /* CONFIG_K3_DDRSS */
+> >
+> >  #if IS_ENABLED(CONFIG_BOARD_LATE_INIT)
+> >  int board_late_init(void)
+> > diff --git a/board/beagle/pocketbeagle2/pocketbeagle2_ddr.h b/board/beagle/pocketbeagle2/pocketbeagle2_ddr.h
+> > new file mode 100644
+> > index 00000000000..6d248ce6dfa
+> > --- /dev/null
+> > +++ b/board/beagle/pocketbeagle2/pocketbeagle2_ddr.h
+> > @@ -0,0 +1,50 @@
+> > +/* SPDX-License-Identifier: GPL-2.0+ */
+> > +/*
+> > + * DDR override logic for AM625 PocketBeagle 2
+> > + * https://www.beagleboard.org/boards/pocketbeagle-2
+> > + *
+> > + * Copyright (C) 2025 Texas Instruments Incorporated - https://www.ti.com/
+> > + */
+> > +
+> > +#ifndef __POCKETBEAGLE2_DDR_H
+> > +#define __POCKETBEAGLE2_DDR_H
+> > +
+> > +#include "../../phytec/common/k3/k3_ddrss_patch.h"
+> > +
+> > +enum {
+> > +     EEPROM_RAM_SIZE_512MB = 0,
+> > +     EEPROM_RAM_SIZE_1GB = 1
+> > +};
+> > +
+> > +struct ddr_reg ddr_1gb_ctl_regs[] = {
+> > +     { 317, 0x00000101 },
+> > +     { 318, 0x1FFF0000 },
+> > +};
+> > +
+> > +struct ddr_reg ddr_1gb_pi_regs[] = {
+> > +     { 77, 0x04010100 },
+> > +};
+> > +
+> > +struct ddrss pocketbeagle2_ddrss_data[] = {
+> > +     // default configuration
+> > +     [EEPROM_RAM_SIZE_512MB] = {
+> > +             .ctl_regs = NULL,
+> > +             .ctl_regs_num = 0,
+> > +             .pi_regs = NULL,
+> > +             .pi_regs_num = 0,
+> > +             .phy_regs = NULL,
+> > +             .phy_regs_num = 0,
+> > +     },
+> > +
+> > +     // industrial configuration
+> > +     [EEPROM_RAM_SIZE_1GB] = {
+> > +             .ctl_regs = &ddr_1gb_ctl_regs[0],
+> > +             .ctl_regs_num = ARRAY_SIZE(ddr_1gb_ctl_regs),
+> > +             .pi_regs = &ddr_1gb_pi_regs[0],
+> > +             .pi_regs_num = ARRAY_SIZE(ddr_1gb_pi_regs),
+> > +             .phy_regs = NULL,
+> > +             .phy_regs_num = 0,
+> > +     },
+> > +};
+> > +
+> > +#endif /* __POCKETBEAGLE2_DDR_H */
+> > diff --git a/configs/am62_pocketbeagle2_r5_defconfig b/configs/am62_pocketbeagle2_r5_defconfig
+> > index e863204cfef..d72f78b932c 100644
+> > --- a/configs/am62_pocketbeagle2_r5_defconfig
+> > +++ b/configs/am62_pocketbeagle2_r5_defconfig
+> > @@ -14,7 +14,7 @@ CONFIG_DM_GPIO=y
+> >  CONFIG_SPL_DM_SPI=y
+> >  CONFIG_DEFAULT_DEVICE_TREE="k3-am62-r5-pocketbeagle2"
+> >  CONFIG_DM_RESET=y
+> > -CONFIG_SPL_SYS_MALLOC_F_LEN=0x7000
+> > +CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
+> >  CONFIG_SPL_MMC=y
+> >  CONFIG_SPL_SERIAL=y
+> >  CONFIG_SPL_DRIVERS_MISC=y
+> > @@ -42,6 +42,7 @@ CONFIG_SPL_SYS_MALLOC=y
+> >  CONFIG_SPL_EARLY_BSS=y
+> >  CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+> >  CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
+> > +CONFIG_SPL_I2C=y
+> >  CONFIG_SPL_DM_MAILBOX=y
+> >  CONFIG_SPL_DM_RESET=y
+> >  CONFIG_SPL_POWER_DOMAIN=y
+> > @@ -73,6 +74,8 @@ CONFIG_SPL_CLK_K3_PLL=y
+> >  CONFIG_SPL_CLK_K3=y
+> >  CONFIG_TI_SCI_PROTOCOL=y
+> >  CONFIG_DA8XX_GPIO=y
+> > +CONFIG_DM_I2C=y
+> > +CONFIG_SYS_I2C_OMAP24XX=y
+> >  CONFIG_DM_MAILBOX=y
+> >  CONFIG_K3_SEC_PROXY=y
+> >  CONFIG_SPL_MISC=y
+>
+
+
+-- 
+Robert Nelson
+https://rcn-ee.com/
