@@ -4,103 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2074C1098797
-	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 15:32:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30CFE1099B2D
+	for <u-boot@archiver.kernel.org>; Fri, 20 Mar 2026 17:25:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9633583D71;
-	Fri, 20 Mar 2026 16:32:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6472983FA4;
+	Fri, 20 Mar 2026 18:25:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W802Tsas";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GBClpmON";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D1CB83F9B; Fri, 20 Mar 2026 16:32:50 +0100 (CET)
-Received: from mail-dl1-x1232.google.com (mail-dl1-x1232.google.com
- [IPv6:2607:f8b0:4864:20::1232])
+ id 206E683FE1; Fri, 20 Mar 2026 18:25:06 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7AD783CEA
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 16:32:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B77683FA4
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 18:25:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robertcnelson@gmail.com
-Received: by mail-dl1-x1232.google.com with SMTP id
- a92af1059eb24-127380532eeso178218c88.1
- for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 08:32:47 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774020766; cv=none;
- d=google.com; s=arc-20240605;
- b=IGlkYbmN/MsIZ5adjsRtILgE1jJZMnWxMGd3ohQbZ5TrWN2N2RiYZj4Gc5c156qWpV
- IK8Wd+RsWP7BF9or0n2UqVJkcIVIZ84yuMfn4efNvGRrxPBOTqC0eJjIrn4cEULr5OEa
- MMK1FzPnns3DZjCdkjkcDAD0m5zJOhm0XPHg0Vd0G/r1/AAqZjARbwZTOK4j+8OLb1Wf
- CJBKs63N14SPUU3Qn+koxU2fPITMlPazuYnR7sU+voghbvbGizAfqalHOw7LEGI5GSNm
- tn8/tboAow59EJGBz5Tn0uXZyi7k28hUIjwolVOsGPxKRqZ5m4b8/9bYG8JILSmxkg4n
- TXOA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=XMlY8k3eRPvkUk1QUIasP1d9CDBJxwEeQ4VztJxvmOQ=;
- fh=7dnD6jdbQiDzkpj99NveqitsOmFzdY487ttwbMO1t7o=;
- b=Byo7RUG6zVW5BBKE8DQoachZ+jGNKr5SEeXqyCOHXK/EiXRzE6O+CZ/jVn5zurqevM
- tOlFSLQC0FQV2zQXa9s5I2xyXQj/zscAo5BJ28bl8rwYSeHmXWooKyMX2O+VezSzbRXj
- FtfCPT6FfgwuxcNdJoPbq2yct6Um8QCCccAQ2UllFyzj8IVrZViYabjArSWFXDu+mkrx
- KUXxiPckO+kl6wEEz9CKb2lSwaeKvpeve9lTxxJiVAW+aieF4EEtaAGkqIzwXmel8IlY
- u8Oy3WhLXmjzSsFnSis6aCFy+UHwLOCGWPos2uMYJLKqufg+HKpPJRGAuN8aL8GySZIs
- 7f6w==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7d4c383f2fcso1821408a34.0
+ for <u-boot@lists.denx.de>; Fri, 20 Mar 2026 10:25:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1774020766; x=1774625566; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XMlY8k3eRPvkUk1QUIasP1d9CDBJxwEeQ4VztJxvmOQ=;
- b=W802TsasQZuTmh9MUQmwsXj5cVhx6CLx9Z+TAcOwnqLtgUDTvH3/Xm4bmFNExUtqls
- HjvG3UvDDjtMAfOhG2iF943qJ2/EF1Ys8EtIwlynjgEMzpC7gZYJrNTHhxTK4dnZVQHh
- p5vRtNVJF7NX9CeGND4jkosXfx/8ekcpOyWDu8ADRIoUolkLhDiccOrHoZh4rX1paDhY
- M+wXjbt84wl8uDsiUPJDUng6qIkhIVOp5kMouv3MN98wBHDh/BVn4sbnZuTncesMOLis
- ZYJZcSaDt0MrScqrI8mJxhpscRpfQgWEyZwljb3nTkxdCromXRfgUA189pyrN6VoZiKG
- HsBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774020766; x=1774625566;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1774027500; x=1774632300; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XMlY8k3eRPvkUk1QUIasP1d9CDBJxwEeQ4VztJxvmOQ=;
- b=LNpyzamiOqsa8+spNYuRIOvd91lkfX9YrKXKkgBOSzJld6o8nLOwCD6UBgQdpTHH4N
- l48x0fPwJz/eUtm+tHX1aDWt6fbgem9yhjlLoMEwa9+vpBinRQusEq4WpRQcvRlQPuqb
- uD7lxouCFf5nXmgpu0Wnbzbw/XhMTIvraPrXJEPaGXHTF347HG5EJqO94Z2ousiYKYUh
- sgUx67UGMQ/VolBsRMwKkgl0rc33JGbvLm185c6bo4ndJJN3/wy6GCxm5QLoEIS50yS3
- dqwN3fE9fTF89MS6krK++iexSWXJO8F45ckqSCyZpOeYppxU3skJr8pmj53cbpoq1Tpc
- mUDg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWgjASRVcshAmUYZ4l77seUU0ZnxzRmEU8ugriSnoZVwr1bjajrvqhu5bEM15BgWWbdWLdwTQo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw+o0G55zpwXHPirZbOfK5x8n3k2V73RtB5WSrSmDZYu8efqjjq
- pVtnNclIgxZte2ochkOcE06FXYDPi79ZDTfJYokQUF5NG1rAhgqB6upQchimpA0MtKk5aV09mm9
- 1kWdd8cPC6fnJoFa0GQxjWWcvOXNCzgQ=
-X-Gm-Gg: ATEYQzzem6gUoYTV9lPeVk3EsO66oUQM0vKLQRy8DVIlNpXqIay6v3Hv5JQBZRUQB+i
- HAnYdU0RF4/+e4cU8uqAJBWjOt0IomQaz816e38ed27FF9bi6ogWbHrYzQiHJQQCgpHndmw44ln
- BLWCXqEL7nGcT3tG8zvUKj+AJS3MnqxJe6o2cRHhS3vmx4RkT91kNXia75uIkBJUzmZzFn7H2tM
- EwBTzgmsl3aU8CEgIioA/yh9RS370WkP0Zplc1kczQYJx/Pk/XnqS8R4oaN84wGNFdMIejrOb36
- jQdw6SBFbC6ESl/OX5sDJiOd0otGUCFzAFVkokLicMFOTGfJYEnsj+4pkZtCoZMrezOwUAbbWuW
- g5sCLUZbOcKDgAW7hdDOE3y+tc1I=
-X-Received: by 2002:a05:7022:612:b0:12a:713b:8964 with SMTP id
- a92af1059eb24-12a726655fbmr1710415c88.11.1774020765985; Fri, 20 Mar 2026
- 08:32:45 -0700 (PDT)
+ bh=Q+9rLTKb88hyJn6ZnB7hp5lBedOjbVN8tBG11E/9t8A=;
+ b=GBClpmONWak6b/oIpZ1qqImmhLQQUCX6xe4y4eMYfMIBzozu487GFKkYausvRaVZ/6
+ AuYxA5IzI4T9ShpA4bH0gX624Znwh8Q1uK1M+wGt7UBV1KPUVPFfrAjjpGpzUnw6J2ot
+ PE/dKhUFt5e9paF4vGaq6L0IzEwDLeOXIw8/M=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774027500; x=1774632300;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=Q+9rLTKb88hyJn6ZnB7hp5lBedOjbVN8tBG11E/9t8A=;
+ b=bnQZ8ZXIlHNPRINZEA2jXrc383eKj2zQCWoKtslzgv+6bWR/O6F8k17qLT+jQNEuLm
+ AEEtiZT7cgksiCrR1QRpqXUDx9AhsXbmwOi55IOg0Khf9e1ePjdfuMBN/zq6TeAPVvsP
+ i2QetuYJDu7KRpDPSUsPC3yQ10d4r8H8X89dKI/Rjfl/DPxic6iSrvCN1a3QkkJzx//P
+ jOZBHUJk/3PATmuo9xgqrO3Hs39rpA7peh3tk/H/3OQ5Qrg3hdkBK82NS84CUkr7mS2R
+ 1Ag2U26Scl0m+galoUQIU48hqRXxFfWq/6EzKhqP4UGjZREfWjTENwGRglCV/EYMb8V0
+ BhiA==
+X-Gm-Message-State: AOJu0Yx0ICojsirKIa2gMZ75wwhVmBdY5bs/BwnfV+fby3tRfiuMVBDV
+ XAIxq6O3VAHNyAVWtPGhSBv+j+kYypaTOcF+nDmPnXz5Tt5AWCnGmOb12YHLtj2RIHF6YomxSbX
+ T+YBSOAY=
+X-Gm-Gg: ATEYQzzyb5QNrwrc7KnTq6udoo7ZoaIsVbmHl7ghIZcBDCS+ppW/RrW3HZ0dBqnXiUi
+ I+qVpOtaKKJvPYpM3nAYCmhTz4MLbBp+Shwwg5OL4/ENPBRoWfZviDdH5BUaT22D/i2q66JRMlk
+ JDoBq5r/cNO3nQwq5srCD1V/9UZqzk0OOghM7DEGcLoCou9P7WR2t9dWW+bIxmYjxxVwraQh7y/
+ oS6GbLBMj6rNpLKTkyehNkCEaaEDvi7PQ/VJ/Mq2xbTIRfwV1BWsP0fTluVCTk6mJsb/bY6YZFP
+ +/miNW8SrrI4enBJW3iF49z52T8R6hZNPzsk3if87Ah1EccWsijWbLuIm7ne+EBWrCSx0T+M7LD
+ M0sYO2NbAk4Q+ueOsT0AkTtICENHsLLq80lnfokXCef8VYqRXodQMLGFzNTk+BFdNcOKiaaE053
+ 9Za6ZVzNG78qVddXIemvRFlxk9cN24FhCmxP2VGnVrZNuC4o2+LM54FURlj0/7Mm0cOq9SF6+aQ
+ AEosBXZTVLv210fiCK0PR0htwYXFd1FzFqH3VT+BSfHVc1xK8o=
+X-Received: by 2002:a05:6830:81cf:b0:7d7:d60e:650a with SMTP id
+ 46e09a7af769-7d7eafb908fmr2448787a34.23.1774027500499; 
+ Fri, 20 Mar 2026 10:25:00 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d7eac3e763sm2696398a34.11.2026.03.20.10.24.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Mar 2026 10:24:59 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: "Bryan O'Donoghue" <bryan.odonoghue@linaro.org>,
+ Fabio Estevam <festevam@gmail.com>, Marek Vasut <marek.vasut@mailbox.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@dh-electronics.com
+Subject: [PATCH v2] optee: Correct dependencies for BOOTM_OPTEE
+Date: Fri, 20 Mar 2026 11:24:58 -0600
+Message-ID: <20260320172458.3587330-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260317012452.4162719-1-trini@konsulko.com>
+References: <20260317012452.4162719-1-trini@konsulko.com>
 MIME-Version: 1.0
-References: <20260317223800.776581-1-rs@ti.com>
- <20260317223800.776581-3-rs@ti.com>
- <DH7I5D8U3GQX.1NAV7HTPAAJ8L@ti.com>
-In-Reply-To: <DH7I5D8U3GQX.1NAV7HTPAAJ8L@ti.com>
-From: Robert Nelson <robertcnelson@gmail.com>
-Date: Fri, 20 Mar 2026 10:32:19 -0500
-X-Gm-Features: AaiRm50Jdwg4v1zhIRDTpw-OIq2dp1fcBHgJDyOuV8qOxvEn70Wy9VGn1ABRORA
-Message-ID: <CAOCHtYhr50ywU_ar6qFPYrwJeUbjE+GQC_OYO_W4Pc5A9iJ5-w@mail.gmail.com>
-Subject: Re: [PATCH 2/3] k3-am62-pocketbeagle2: add initial board support
-To: Anshul Dalal <anshuld@ti.com>
-Cc: rs@ti.com, bb@ti.com, nm@ti.com, trini@konsulko.com, afd@ti.com, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,64 +99,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> > +++ b/configs/am62_pocketbeagle2_a53_defconfig
-> > @@ -6,11 +6,11 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
-> >  CONFIG_SPL_LIBGENERIC_SUPPORT=y
-> >  CONFIG_NR_DRAM_BANKS=1
-> >  CONFIG_SOC_K3_AM625=y
-> > -CONFIG_TARGET_AM625_A53_BEAGLEPLAY=y
-> > +CONFIG_TARGET_AM62X_A53_POCKETBEAGLE2=y
-> >  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-> >  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80b80000
-> >  CONFIG_DM_GPIO=y
-> > -CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am625-beagleplay"
-> > +CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am62-pocketbeagle2"
-> >  CONFIG_OF_LIBFDT_OVERLAY=y
-> >  CONFIG_DM_RESET=y
-> >  CONFIG_SPL_MMC=y
-> > @@ -44,8 +44,6 @@ CONFIG_SPL_I2C=y
-> >  CONFIG_SPL_DM_MAILBOX=y
-> >  CONFIG_SPL_POWER_DOMAIN=y
-> >  CONFIG_SPL_YMODEM_SUPPORT=y
-> > -CONFIG_CMD_BOOTEFI_SELFTEST=y
-> > -CONFIG_CMD_NVEDIT_EFI=y
-> >  CONFIG_CMD_GPIO=y
-> >  CONFIG_CMD_GPIO_READ=y
-> >  CONFIG_CMD_I2C=y
-> > @@ -53,6 +51,7 @@ CONFIG_CMD_MMC=y
-> >  CONFIG_CMD_EFIDEBUG=y
-> >  CONFIG_CMD_PMIC=y
-> >  CONFIG_CMD_REGULATOR=y
-> > +CONFIG_CMD_CACHE=y
-> >  CONFIG_OF_CONTROL=y
-> >  CONFIG_SPL_OF_CONTROL=y
-> >  CONFIG_OF_UPSTREAM=y
-> > @@ -90,10 +89,6 @@ CONFIG_MMC_SDHCI=y
-> >  CONFIG_MMC_SDHCI_ADMA=y
-> >  CONFIG_SPL_MMC_SDHCI_ADMA=y
-> >  CONFIG_MMC_SDHCI_AM654=y
-> > -CONFIG_PHY_REALTEK=y
-> > -CONFIG_PHY_TI=y
-> > -CONFIG_DM_ETH_PHY=y
-> > -CONFIG_TI_AM65_CPSW_NUSS=y
-> >  CONFIG_PHY=y
-> >  CONFIG_PINCTRL=y
-> >  CONFIG_SPL_PINCTRL=y
-> > @@ -120,7 +115,8 @@ CONFIG_SYSRESET_TI_SCI=y
-> >  CONFIG_EXT4_WRITE=y
-> >  CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
-> >  CONFIG_LZO=y
-> > -CONFIG_EFI_SET_TIME=y
-> > +CONFIG_SYS_MEM_TOP_HIDE=0x4000000
->
-> Any reason why we are using TOP_HIDE here instead of just moving OPTEE
-> lower in DDR like we do on the 512MiB AM6254atl EVM?
+As exposed by "make randconfig", we have an issue with the dependencies
+for BOOTM_OPTEE. This symbol needs to select BOOTM_LINUX and in turn
+depend on the library symbols that have to be enabled for BOOTM_LINUX to
+be valid (LIB_BOOTI, LIB_BOOTM and LIB_BOOTZ).
 
-Sorry, that is now a legacy setting before OPTEE finally got moved in
-v2026.01, as this had been developed thru v2025 u-boot releases..
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Changes in v2:
+- Make this depend on LIB_BOOT[IMZ] as that is the library symbol for
+  both xPL and full U-Boot to support boot[imz] and related boot flows.
 
-Regards,
+Cc: "Bryan O'Donoghue" <bryan.odonoghue@linaro.org>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: u-boot@dh-electronics.com
+---
+ lib/optee/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
+diff --git a/lib/optee/Kconfig b/lib/optee/Kconfig
+index 34b9d8afe675..e0de57e29306 100644
+--- a/lib/optee/Kconfig
++++ b/lib/optee/Kconfig
+@@ -40,6 +40,7 @@ config OPTEE_TZDRAM_SIZE
+ 
+ config BOOTM_OPTEE
+ 	bool "Support OPTEE bootm command"
++	depends on LIB_BOOTI || LIB_BOOTM || LIB_BOOTZ
+ 	select BOOTM_LINUX
+ 	select OPTEE_IMAGE
+ 	help
 -- 
-Robert Nelson
-https://rcn-ee.com/
+2.43.0
+
