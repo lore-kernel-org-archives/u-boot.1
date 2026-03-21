@@ -4,93 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A33C1094478
-	for <u-boot@archiver.kernel.org>; Sat, 21 Mar 2026 15:02:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A4E91094489
+	for <u-boot@archiver.kernel.org>; Sat, 21 Mar 2026 17:06:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FEBD83FF5;
-	Sat, 21 Mar 2026 16:02:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 7252C83FF5;
+	Sat, 21 Mar 2026 18:06:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W/ohJatl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J/uneoPi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9756283FED; Sat, 21 Mar 2026 16:02:29 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 32B9D83FFF; Sat, 21 Mar 2026 18:06:32 +0100 (CET)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78AE383FA7
- for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 16:02:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EF5D583FDC
+ for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 18:06:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-b980b35534eso487442066b.1
- for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 08:02:27 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774105347; cv=none;
- d=google.com; s=arc-20240605;
- b=W70sVhsMo8YbLoMBHwM72zFAyYiIigUmJO3+67h7AL1kzZISIOxvMG1bhHD58Rid9t
- FbcwxDgIept//sx8rBsp4YMEH0QpnleTBPVmWM/9B+W14tSAgu58LyGaQtFKIsDjyV6j
- iWAcMBxOeZi+ly7zKO48V6Ugptzs4C2EzN/cwHqzdZhBs2jcD6YpuWgqyB+XzjDxSB0H
- wV2k9AohevfgYTQCGuF9HCQoa7EVaROwXsPDzy8OjkSBQXigsBbzmZFZiPpV+2TAoTg/
- oW3G494FkDttEOrcOjIf4q1nPznPcdhtuZ/95TOO5Dl7Tr93WRnmJsp2ALRbk8E4Xpqh
- Zxsw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=9RhPAmZ+tq9gzid7QAuIIDks39OuZiJ4LGw1HPdDMyg=;
- fh=ToXak3o3FxKjeN9zN6KF+Y7XD0fq/gRTAn22wDFBJO0=;
- b=cHYtIij9d+g64N4FLlx+msCcyqTAGcQIbBJVbSntMfkjoVCOIiwB64JaMUQWJ0+tG9
- V7RbE5FRwskHLK4yjbeerWf+ol/H5EXAwTGDPzolgdmvmvg+exAYSei8E/ePvYy0k3oz
- RpR/admbPxB/XhYZ9CaxYTw22Pl9axkipbOBeG1PnBsbFKsiHuBWHV8Whq3o2MNjpvIF
- Hnxl3f/F22z0NEv2zJ5ujH8W50moKJfpFtTrGHK0SD7w9Eiwc+tUtfTcuVUC8tzxL7zl
- wTwYkXDEOAvtVrv3A9j8BOmW9hVRr9yF0SJVSPvSeDfhBlIygnHHqlCpW9WmKXHVth1U
- zUbQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-466f1c3c627so983173b6e.1
+ for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 10:06:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1774105347; x=1774710147; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9RhPAmZ+tq9gzid7QAuIIDks39OuZiJ4LGw1HPdDMyg=;
- b=W/ohJatlMspJMiRSQQcVLseUKQ5aeyw+ddQ9ltcArbIA7/QuE/gI3yoGrW7C5KvNF2
- Yieto4O6yYPpSiIoq/KqWKLDbhxZaNa1IR3zifF1/lGfRhhnWcgpA9IasuvamUjXpFKw
- jVZhCiCRWerVMfKXSNV9I6rxOWjWQ8yZul2lY=
+ d=konsulko.com; s=google; t=1774112789; x=1774717589; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=o02BGGkLGtaUx5MgCxITSkF51syaQ9cJjKbGhapQsgs=;
+ b=J/uneoPi+m/iWMYFSW13nhYmVUY70kMutmwSv5woXqfPdtnK3Hl6B5iJv8DIn/H9QR
+ qkLgvylljRaR+ryPIWsTzt85gTuuZ4AAu9Yiz27TvDblbpUxMO6PMicBrN4pZj1+W/zZ
+ aQ2ETGMfLLafunubdIMbtAQaVkiFGiPj0tIzc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774105347; x=1774710147;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9RhPAmZ+tq9gzid7QAuIIDks39OuZiJ4LGw1HPdDMyg=;
- b=evRadUVFJb1RGbMwFatCFssct2BJaTrt7E3CcrLHn7m0cso+PcLKNPjA7oudeEXfsw
- 9F1yO0TI7GVA1NzfxhLxyFrST4sIpqOOqKrZ/jUnZN2+hS1qSBAZ8px+CXWcCSorCXRJ
- wGncPOzKORQlMvzxLo4itE4Zhjo0yuI2ZQ3w7khnvSUU9YZLpX8UPj2DrwyMDHXnufK5
- XynfY2ELY15JhSyOqTPbF21k1c6z2v7m5IJd4CDMHYCc+kXqK9SKX3ZKoi5eVdTAsUi4
- eCfT51avf+q9S4s5T1o1D8RZ4VHkuyHf/E+7j0+ihcJ9FDocUBVUU30Eci5HRpQ3vRL0
- 1CJA==
-X-Gm-Message-State: AOJu0YzVli7Dn3x4wvLIbP3Crcd/9cxGlK+YGs//jcyEaF4lyKfRcPtH
- oLusahzdZgFQ8/RYneimJh0+kPL8ELo3EigYbzSw7oKSOg7RA4Uvf06+NWbRln7je9nVCjwU0Jo
- E3NOLsdh/x0Pppe342FnU3O7sKU1vt5chRmgDZrL/
-X-Gm-Gg: ATEYQzzh6yLlp2BL37N62fzGyM/AXqsSe0+nh6eLt4De+MNpBjapnCSyqZzdVCZ8KjE
- jLJtsKlYfVJbexUGM637OVXzjs+PDTw2wRr7c9TYeLMOK7yR1d43dxegwXhyOHXEyVlmvFPEMke
- erhRBTVVrzmnc5gb2BV2fvQkveJiIIboKMsRcioJ4T+7xwdbTvZR2AvfzoIertVhVkbZBJ/hWp2
- zycJARvbO5gl1RNB1dcquOY/GEjbjXNg7hNFvlWaglnWdp+kQrGyb0+IZO5YfdYbjV1xP6fGCFo
- 9yUbWzc=
-X-Received: by 2002:a17:907:398c:b0:b97:a4b1:51b4 with SMTP id
- a640c23a62f3a-b982f59564cmr416374166b.17.1774105346898; Sat, 21 Mar 2026
- 08:02:26 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1774112789; x=1774717589;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=o02BGGkLGtaUx5MgCxITSkF51syaQ9cJjKbGhapQsgs=;
+ b=rbKJNMMy3ZLrmmXrJ5reYTrwTf9oF9mQHS9l8J/DsM008s3/7Qtt4ikMBOmaFO4/Fx
+ edoT/NRzOHTOx1x8lCrQa8BPfHWajlP3ffSXjAxPh/FhuyFXvJpvwE/FU/ha5Cc2BPcc
+ tcXzSpv2NhRLrGVfeW9lPDhG6bEguxNPj0Cmzcp1+CFk5sXfGCQn3JY6tDJtKaxPr5L8
+ iIWMow5u78Kbj6KO5uUj0+R39wGUkxJOMV4f09U7OyncMR2vkfxm90TvD4vOrTzyj8VT
+ 9/xR+/2ZLo+9jngjqjiQ8Tr4ZxD8/MMOHgvQZ2LWRpDrTcZTQytVmNOFrIXLPixn35qS
+ r8dQ==
+X-Gm-Message-State: AOJu0YzN20AS7/a2mBbOjPCvDrUj85TFjfpWPcC1RR9MmcQiq+Fi8zRX
+ JYb68lgwNH1L2BlnEfbsN+6TCaV3SLVBT9AGfukFPbzsQJ5zCjcRK/XzD+UfGyCHPsk=
+X-Gm-Gg: ATEYQzxY/BO4X/V4JUxCRRyErssTTG2jgqdx/SiJSbKB2s+fFuBp/DKhwnJXbPdhgEt
+ 6CYYndGA/tFMOaemma2bknQyDyFIHIl7z6vZI3WEhAkzcw0cPYwJuy/46MU0CMDA6bOTQVG3mAv
+ Qn6iPdubOVzHHNaGZJG96WmtGIlejxkciSvMcStF8mrOYTXcLGlbmG7L1SL5hAUI/F16rvZXRsF
+ go46U7FQQYrZ4wAqsIH7OpUMgJgkp8ukwwJw8ACMe8rYf75Eb9uOVUQhuvapW/2Pn+wbdcdqGbz
+ 5G+naJqpYFXM+bGbqq7wyS/rk0/R8lTCAVqGJFVNad/w7RL6b0pKkivct6t1pUuIRS67sWLhvnG
+ p8x0bghnF8pdTQc+sIuW+XeO8v9nTkfZ2MPdWroK+ZJemCPz+4h91RdAG73DYQ6VRkJfrVqE26t
+ xCxrCfEkvRqU6k8fVqzxQ5N7eYwiw2Xm+HqDXkanp/IwaquXIfh0g0zO4zsns18I9htAwZULAoH
+ +vte9tk9fg+8HiPGQKLzhOCvDfbXVOYDPG0ZpN9+wKqd6G6
+X-Received: by 2002:a05:6808:c2a9:b0:467:2418:ced9 with SMTP id
+ 5614622812f47-467e5fe309emr3476094b6e.50.1774112788641; 
+ Sat, 21 Mar 2026 10:06:28 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-467e7d4bdbdsm3591421b6e.7.2026.03.21.10.06.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 21 Mar 2026 10:06:27 -0700 (PDT)
+Date: Sat, 21 Mar 2026 11:06:25 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH] usb: Correct dependencies around USB_EMUL
+Message-ID: <20260321170625.GE502704@bill-the-cat>
+References: <20260320205353.3789127-1-trini@konsulko.com>
+ <f6ffc6db-c59d-45c9-964f-7fa56c320047@mailbox.org>
 MIME-Version: 1.0
-References: <CAJs94EYWoVAyWXexA=f_UwqUpo9zuxO6G6Tx7L7xPdciAVHW5A@mail.gmail.com>
-In-Reply-To: <CAJs94EYWoVAyWXexA=f_UwqUpo9zuxO6G6Tx7L7xPdciAVHW5A@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 21 Mar 2026 09:02:13 -0600
-X-Gm-Features: AaiRm53NeuUQlkQGTOEvfDurG_XjXPKs2dojCRYu8EAcdtxOmhQUeIGkwKohygE
-Message-ID: <CAFLszTjDnEoTP1fHdounqov_SYSDdr-Zpt7L_+-c9qb=c0F8JQ@mail.gmail.com>
-Subject: Re: Need help with FDT overlay
-To: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="SbMfKvYR6hu/aLvW"
+Content-Disposition: inline
+In-Reply-To: <f6ffc6db-c59d-45c9-964f-7fa56c320047@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,52 +97,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Matwey,
 
-On Sat, 21 Mar 2026 at 06:55, Matwey V. Kornilov
-<matwey.kornilov@gmail.com> wrote:
->
-> Hello,
->
-> I am running U-boot 2026.01 with orangepi_zero2w config and I am
-> trying to apply my hand-written dtbo via fdt apply.
-> The issue is that the fdi apply command just hangs forever for me. The
-> issue only appears when I try to append a new node to the root. How
-> could I find what is going wrong here?
->
-> The overlay source is the following:
->
-> /dts-v1/;
-> /plugin/;
->
-> #include <dt-bindings/i2c/i2c.h>
-> #include <dt-bindings/gpio/gpio.h>
->
->
-> &i2c0 {
->     status = "okay";
-> };
->
-> &i2c1 {
->     status = "okay";
-> };
->
-> &{/} {
->     i2c_gpio: i2c-gpio {
->         compatible = "i2c-gpio";
->         sda-gpios = <&pio 8 0 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>; // PI0  (29)
->         scl-gpios = <&pio 8 15 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>; // PI15 (31)
->         i2c-gpio,delay-us = <2>;        /* ~100 kHz */
->         #address-cells = <1>;
->         #size-cells = <0>;
->         status = "okay";
->     };
-> };
->
+--SbMfKvYR6hu/aLvW
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Can you provide thte dtc command you are using to build this? Is there
-enough spare space in the dtb? I'm not sure what would cause it to
-hang.
+On Sat, Mar 21, 2026 at 02:24:04AM +0100, Marek Vasut wrote:
+> On 3/20/26 9:53 PM, Tom Rini wrote:
+> > The symbol USB_EMUL is how sandbox has access to USB. It's
+> > implementation however enforces a few other requirements. It must have
+> > SCSI enabled, and in turn that means it must have BLK enabled. Finally,
+> > we should not be using SANDBOX itself as a symbol to decide what to
+> > build or not build here, as SANDBOX is selected for COMPILE_TEST builds
+> > as well and so may not have enabled the sandbox specific USB support.
+> >=20
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> > Cc: Marek Vasut <marek.vasut@mailbox.org>
+> > ---
+> >   drivers/usb/emul/Kconfig  | 2 ++
+> >   drivers/usb/host/Makefile | 2 +-
+> >   2 files changed, 3 insertions(+), 1 deletion(-)
+> >=20
+> > diff --git a/drivers/usb/emul/Kconfig b/drivers/usb/emul/Kconfig
+> > index 279f6c6d7404..8ba372453e37 100644
+> > --- a/drivers/usb/emul/Kconfig
+> > +++ b/drivers/usb/emul/Kconfig
+> > @@ -1,7 +1,9 @@
+> >   config USB_EMUL
+> >   	bool "Support for USB device emulation"
+> >   	depends on SANDBOX
+> > +	select BLK
+>=20
+> The select SCSI and Makefile change I do understand. But why do we also n=
+eed
+> BLK ? I can't find anything which would interact with BLK in the sandbox =
+USB
+> emulation ?
 
-Regards,
-Simon
+Ah woops, I was fixing too many problems at once then and forgot BLK is
+select'd by SCSI now, not depends on, so indeed, it's not required here.
+
+--=20
+Tom
+
+--SbMfKvYR6hu/aLvW
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCab7QDgAKCRAr4qD1Cr/k
+CjtGAP41eyFT/Mvqm4lY+KT9sGMBe0xiZlHPW/XuNkbqZ1LrPwEAtrcR1c5TaMh3
+B2EMboJdRscbhK9K3Sa9MnN9z6Bv+Qk=
+=Ao+/
+-----END PGP SIGNATURE-----
+
+--SbMfKvYR6hu/aLvW--
