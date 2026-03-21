@@ -4,91 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 067961094489
-	for <u-boot@archiver.kernel.org>; Sat, 21 Mar 2026 17:10:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 671C6109448A
+	for <u-boot@archiver.kernel.org>; Sat, 21 Mar 2026 17:20:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41AB483FED;
-	Sat, 21 Mar 2026 18:10:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A725384008;
+	Sat, 21 Mar 2026 18:20:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LwLX0mMT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WVLWXkJ3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C57DB83F00; Sat, 21 Mar 2026 18:10:36 +0100 (CET)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id 8B11784010; Sat, 21 Mar 2026 18:20:52 +0100 (CET)
+Received: from mail-dl1-x122c.google.com (mail-dl1-x122c.google.com
+ [IPv6:2607:f8b0:4864:20::122c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C65583F00
- for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 18:10:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 52C1A83FED
+ for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 18:20:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-467161c4b89so1597393b6e.3
- for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 10:10:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=matwey.kornilov@gmail.com
+Received: by mail-dl1-x122c.google.com with SMTP id
+ a92af1059eb24-12732e6a123so2772404c88.1
+ for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 10:20:50 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774113649; cv=none;
+ d=google.com; s=arc-20240605;
+ b=WgvX9qu+YoSNQ21wfYGKx3hfyJrmTeCuuWEHnyGmEhlbdHH+Iff/YVD6cnW8UVjHKC
+ qlLNK9Gad1B2McIROyraebYDLxaD+r9gV7qI70k+VpaenR9yYDuV3szZNhI2UgO6d0+a
+ KDjWk/mr3n/8nHyTd4i/kcimJNqGmCDnB3YSLU5r9lNr/GtCESYMM33EBgcmiRPhvYjt
+ BRP162UwA0lak0YQ7Bxenc7GHjsvUBo4E8H0J7subseUtHFYwVmHd0M1qZWoSCrdT5GG
+ llagCQnCWBoVRjgNLPW3nrATO2YyDlCOs79WhGspGBS7o2NdbfXA5EnjrHqB/bEBAiV/
+ MTVg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=00jFX9hnRgESRotSoajJcHq4zTU2Vqo/wj5f2uo9zLo=;
+ fh=xB9JIAryxjwldGJ3NBJ4qnAb38ct+d9xEuHultImQco=;
+ b=YoXuOdAL7WOD9sifBptyucd8r75fyVyPeaQBVChO2cOF8WmJ1EdCv4Z+/tk4sYTrza
+ kCC50nVssxMCjB4mJUnzcdN14hgVqGrdX4RiGbmyxdr3ZC02NLSQc/kRdwz/jd3Lfoew
+ ZvSgX9KXgc/lrSo0HNT9ikrVg6wTA6dWkyPZiQBJmSkDA87lVEZJXWNgGvCxcqn3y/zr
+ fRPk2xjqNaXld8jxo6j6q3ityHU7guxgTZNDlNjeZbEt5kUEb7jnaz4UY7nMpVqqMxFp
+ j7v554KM/Ia6YMmvqCVktnTp8P+ZEiWvWzL87bZ6Y6aLTw9qAkqJ3w+rYAPmoO6JBJgF
+ L3BA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774113033; x=1774717833; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uKYoVjZkKAdZeJWnNa91xVLBtVPq+PV8zPZ5AJJuZOU=;
- b=LwLX0mMTL9E5hJfhDY1lepcALm44wLDmjV/lDuc/4QIkayLv+bqLF1m08tl6Ijw993
- ilplLR10XX6EWgx9I9Q+ipNlXUHO04bFfjYF5NmQ/rf32iHDV6e5G4jr/dcwDnvd3c5W
- T1zpLvvj6wHI/Fy7xa2ebhdpWyovm+oAdzQZY=
+ d=gmail.com; s=20230601; t=1774113649; x=1774718449; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=00jFX9hnRgESRotSoajJcHq4zTU2Vqo/wj5f2uo9zLo=;
+ b=WVLWXkJ3YO9Liz68pk1RwFjCxaENsLuKTF06KduRPRGBC63cHTVn5ZU6qCLbkARZ0+
+ tQ9W6TBqzS4w9aZztfRG9Ef/KUu2B4xJc8oj5oWW3ZDhsOF3vkwXnZxBodVZjC/2fARO
+ +4sijpA3jVrYPqVOAhSZRIaT9N619lnmxPNJIF6RD961j6b64UnjRHd9Tft00t/awXP1
+ vqp868h0G+mLsM5ZW6eqE/vspaIr2ULC5URag3VpMSraOngqPpBiAvXr/NNS/jOWuf8u
+ PL3xAy+Olp4KoC1A6Yv1Hl7IuR6LVht7xSSMTq37jx96fAHFsGxHD7LSLTkzgyjLLN9/
+ nDMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774113033; x=1774717833;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=uKYoVjZkKAdZeJWnNa91xVLBtVPq+PV8zPZ5AJJuZOU=;
- b=NOIxl27dWSgDXXwTU4iCY4+vJiFQdtlRdIKW5NvJMuU2eAmb1Ts8fy6d3eJSuEw5NZ
- hVoi0AZEBVm5C9wVDuuRGnXsfQygpRZjlu2PwVBJd/wgyzHSIap5l1g/JrM6h3F+mxTK
- BwsZtLKL06Od3ijVl3izq/ZJ+ZCGWQeHFHkVdZjHnqtq1GumHLBwJbqr9Ho4eWKu9PZV
- 3BBUtV9r2mvqR33IK0P3kQEM+ubHZcItpaeQxHP0pbGRg28c/KLtG4H6TWA2SO2aOUcS
- uD3iP5jHTRTl4gae/8ptQJVRNBqsWRUq3ZV/toRhjC2MF5U24egOK9p7zrcICQapeC6k
- yjpQ==
-X-Gm-Message-State: AOJu0YzmsRS/ZPkTG+fDhOXPciK8ZKSfARnNrNttcLsjUavNB8lQYcn2
- 0tkJCJgV65OlWiG3l9s/OypCsUdnhbTGrJAbkCIK+G7wOp4Nc+kOp/3bIpVvyqEZlU8=
-X-Gm-Gg: ATEYQzwIRFZnaYYqwxufhfu4JwRbDWVCcmeVQiH8aLDiXbO73LCo+NKw8M8tT827q0h
- GM04pQowx1i/VcIvkzUhuN2f9BWcQYjbssGY7kAI1J7U3l36TJvfxOOSNWef/VfslAHBX+pej7M
- nImmYFhyaOJwgjUGB7cqWW/ka7g9Md7lchdUf69NCU5Xi3DS/SiDsK87B/CuRfaCCYrBv3SVCw8
- 4V3lw9atre9mPz4e49gr0qdjZrLdaJQZvDBwx7gIOTtHFATvVAgw8UiQk+nVZWqq6PF5Eblp/dj
- cL1Z/MkVcCHXXN13ae23Wv6yPZiE09m5Ji7Ow2Tb4tFQrxPmzLSCnU9Q2tVc+3hLwg5QHQFIl9j
- Fr5KZ/4kEsTqACChLkGi0H6nLIM9uYXCSQSEiBG2EpbZdWOpZgxFw+YwdxWKhHJQCyyqPFmFygW
- iUw/308DK4zrpvLiQufLnFNOrDngWQV5llPi94Nf2v7G/6Bg/NOL2yL/SXzSMPhEDF/gMnpy+Ci
- ML+qpCra/4T6/wLuvg7kFr/AR2XBtccQWCuLvCdAcIK8YbG
-X-Received: by 2002:a05:6808:820d:b0:467:58e:5d6e with SMTP id
- 5614622812f47-467e5f419bamr3539004b6e.30.1774113033302; 
- Sat, 21 Mar 2026 10:10:33 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-467e7f21e8dsm3434423b6e.16.2026.03.21.10.10.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 21 Mar 2026 10:10:32 -0700 (PDT)
-Date: Sat, 21 Mar 2026 11:10:30 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] reset: Correct dependencies for RESET_RZG2L_USBPHY_CTRL
-Message-ID: <20260321171030.GF502704@bill-the-cat>
-References: <20260317012443.4162600-1-trini@konsulko.com>
- <ed88ec35-7d53-48df-a65b-7da1298e265b@mailbox.org>
- <20260317134008.GQ502704@bill-the-cat>
- <58699be1-5414-4749-9975-7fdf0064b1a3@mailbox.org>
- <20260318012557.GF502704@bill-the-cat>
- <34a0c151-f8ff-4b91-92b3-d6f63097440e@mailbox.org>
- <20260319134128.GP502704@bill-the-cat>
- <11128ed2-a53d-4286-84cc-dc5c6d932405@mailbox.org>
- <20260320135616.GY502704@bill-the-cat>
- <2446be00-c67d-4dd7-b45c-da3925b23cd0@mailbox.org>
+ d=1e100.net; s=20251104; t=1774113649; x=1774718449;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=00jFX9hnRgESRotSoajJcHq4zTU2Vqo/wj5f2uo9zLo=;
+ b=Kl4x8dPg7IuERgPSzSC81J0ydiMe706yQum3zvxJvX+9cxTzvZkDbM1UTfxitgpEXD
+ imLZvwqn6QwOB/mRddRufkX8xDRbJ3jiN50LpyQU1biTNRFT3WXvB3+4SZW+5DSSlkoL
+ aTM8VkFod6l0157ymahyx4/WwuxkJFRWsAvXLDx9uyb1jN344w/icJXjnwn1w4YrJ/dU
+ r482nTJLLbQgCMNoc43ULxaYJC+e7/vsVR72AYJBkVSD3pONdPxayZ4LR+TYF9Gx8yGo
+ 7W4K/bQZkapG6ekkwKbpFYmJGY7u1Qdu5IPJgV5iJL28CqUZYUvi9VCoO/8ZUOtjKhUU
+ DX7Q==
+X-Gm-Message-State: AOJu0YyU42AGYVXcp31sz0SOoflhbIjagr6Dytx7d6une5CXJFqjnRw/
+ 7MlGdF35TzOS0j/K2qXixbWq+Mj/Tb2HhOikg85qif2EskcP5x3oFY0Vgu8vGfPrz6pl+1VEDB5
+ Rti73h66QLiVdCJQn3DvtCyHRcE/pXp0=
+X-Gm-Gg: ATEYQzxizpwh2+gvyMfvNsFf6oYRpSHDhU/1vE2W5SU+JKMfxwW6Egcdfjr5XV29HEB
+ EVLmVE88YV3Az+YCoNFF+NpgpR3wZIBxVGnkaGuDkEheVGjz91wuP8X5F0CtHjl1bEd2vxhcBBI
+ mkN4hkZSFtZCL+xAbC6NoUT8bOWb1zPXAnsssJGGcW1dfh3C0fNGbfETaSVdMgQOumIEa10Rdty
+ Sbmw4f9S3bNs/n/IDQRhKpxcJ9pc7qWvrY2XR8Lx1fQYoXRK+BPjMM7SUoVcf7L3319Bi/qLJBy
+ Z2Ec
+X-Received: by 2002:a05:7022:327:b0:12a:7181:2f1c with SMTP id
+ a92af1059eb24-12a72682797mr3055289c88.17.1774113648572; Sat, 21 Mar 2026
+ 10:20:48 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="v/FfW+BfhQplWGSk"
-Content-Disposition: inline
-In-Reply-To: <2446be00-c67d-4dd7-b45c-da3925b23cd0@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CAJs94EYWoVAyWXexA=f_UwqUpo9zuxO6G6Tx7L7xPdciAVHW5A@mail.gmail.com>
+ <CAFLszTjDnEoTP1fHdounqov_SYSDdr-Zpt7L_+-c9qb=c0F8JQ@mail.gmail.com>
+In-Reply-To: <CAFLszTjDnEoTP1fHdounqov_SYSDdr-Zpt7L_+-c9qb=c0F8JQ@mail.gmail.com>
+From: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
+Date: Sat, 21 Mar 2026 20:20:37 +0300
+X-Gm-Features: AaiRm5168zaer9onD-_-KnHTvZrQjKzmTpjUkg2JVgD3dwN70kXgpQTrk5UZ5Xw
+Message-ID: <CAJs94EYuFQJvdTjWZX1qWg9e7Qz_X_G7Bz017nucN1HtU1Mrcw@mail.gmail.com>
+Subject: Re: Need help with FDT overlay
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,94 +114,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+I compile dtbo as the following;
 
---v/FfW+BfhQplWGSk
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+cpp -x assembler-with-cpp -I /home/matwey/lab/linux/include
+overlay.dtso overlay.i
+dtc -@ -O dtb -o overlay.dtbo overlay.i
 
-On Sat, Mar 21, 2026 at 03:23:35AM +0100, Marek Vasut wrote:
-> On 3/20/26 2:56 PM, Tom Rini wrote:
-> > On Fri, Mar 20, 2026 at 04:58:13AM +0100, Marek Vasut wrote:
-> > > On 3/19/26 2:41 PM, Tom Rini wrote:
-> > >=20
-> > > [...]
-> > >=20
-> > > > > > So I think the answer is if you fire up menuconfig, and turn off
-> > > > > > RESET_RZG2L_USBPHY_CTRL and REGULATOR_RZG2L_USBPHY and DM_REGUL=
-ATOR and
-> > > > > > then enable RESET_RZG2L_USBPHY_CTRL things will become mad beca=
-use
-> > > > > > RESET_RZG2L_USBPHY_CTRL has select'd REGULATOR_RZG2L_USBPHY but=
- we don't
-> > > > > > have DM_REGULATOR.
-> > > > > How is it possible to enable RESET_RZG2L_USBPHY_CTRL without enab=
-ling its
-> > > > > dependencies ? This is what I do not understand.
-> > > >=20
-> > > > The way I said in the part you quoted? If you don't like the way I'm
-> > > > solving the problem with the dependency graph here please propose an
-> > > > alternate. But it is possible to encounter this problem, or randcon=
-fig
-> > > > wouldn't expose it.
-> > > What I do not understand is, how is it possible to enable Kconfig sym=
-bol
-> > > without enabling its dependencies. Is that a bug in Kconfig ?
-> >=20
-> > There is nothing ensuring that when you enable RESET_RZG2L_USBPHY_CTRL
-> > today that DM_REGULATOR is enabled. But since you're telling it to
-> > select REGULATOR_RZG2L_USBPHY it then will give an error.
-> Hmmm, I see it now. If I have both CONFIG_REGULATOR_RZG2L_USBPHY=3Dy and
-> CONFIG_RESET_RZG2L_USBPHY_CTRL=3Dy in .config, and I delete
-> CONFIG_DM_REGULATOR=3Dy from .config , then I can select CONFIG_DM_REGULA=
-TOR=3Dn
-> .
+Decompiled overlay.dtbo looks like this:
 
-Right.
+/dts-v1/;
 
-> But isn't the right fix the elimination of 'select' ? Linux Kconfig
-> documentation now hints that 'select' should only be used for hidden
+/ {
 
-As a much longer term goal, yes, this is largely where we should go. But
-we're still at the point where I'm catching these kind of dependency
-issues in the Kconfig side of things, let alone build time problems.
+    fragment@0 {
+        target =3D <0xffffffff>;
 
-> symbols. So how about this fix instead , that should retain the transitive
-> dependency on REGULATOR_RZG2L_USBPHY , which depends on DM_REGULATOR :
->=20
-> "
-> diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
-> index 2fd91d6299c..a7acd5cfa69 100644
-> --- a/drivers/reset/Kconfig
-> +++ b/drivers/reset/Kconfig
-> @@ -239,8 +239,7 @@ config RESET_AT91
->=20
->  config RESET_RZG2L_USBPHY_CTRL
->         bool "Enable support for Renesas RZ/G2L USB 2.0 PHY control"
-> -       depends on DM_RESET
-> -       select REGULATOR_RZG2L_USBPHY
-> +       depends on DM_RESET && REGULATOR_RZG2L_USBPHY
->         help
->           Enable support for controlling USB 2.0 PHY resets on the Renesas
->           RZ/G2L SoC. This is required for USB 2.0 functionality to work =
-on
+        __overlay__ {
+            status =3D "okay";
+        };
+    };
 
-This is fine too, yes, please do a patch for it and you'll need to make
-sure that renesas_rzg2l_smarc_defconfig gets updated with
-CONFIG_REGULATOR_RZG2L_USBPHY=3Dy too so there's no functional change.
+    fragment@1 {
+        target =3D <0xffffffff>;
+
+        __overlay__ {
+            status =3D "okay";
+        };
+    };
+
+    fragment@2 {
+        target-path =3D "/";
+
+        __overlay__ {
+
+            i2c-gpio {
+                compatible =3D "i2c-gpio";
+                sda-gpios =3D <0xffffffff 0x08 0x00 0x06>;
+                scl-gpios =3D <0xffffffff 0x08 0x0f 0x06>;
+                i2c-gpio,delay-us =3D <0x02>;
+                #address-cells =3D <0x01>;
+                #size-cells =3D <0x00>;
+                status =3D "okay";
+                phandle =3D <0x01>;
+            };
+        };
+    };
+
+    __symbols__ {
+        i2c_gpio =3D "/fragment@2/__overlay__/i2c-gpio";
+    };
+
+    __fixups__ {
+        i2c0 =3D "/fragment@0:target:0";
+        i2c1 =3D "/fragment@1:target:0";
+        pio =3D "/fragment@2/__overlay__/i2c-gpio:sda-gpios:0",
+"/fragment@2/__overlay__/i2c-gpio:scl-gpios:0";
+    };
+};
+
+
+I am not sure about the size. How do I check it correctly? Now, I just do
+
+fdt resize 16384
+
+=D1=81=D0=B1, 21 =D0=BC=D0=B0=D1=80. 2026=E2=80=AF=D0=B3. =D0=B2 18:02, Sim=
+on Glass <sjg@chromium.org>:
+>
+> Hi Matwey,
+>
+> On Sat, 21 Mar 2026 at 06:55, Matwey V. Kornilov
+> <matwey.kornilov@gmail.com> wrote:
+> >
+> > Hello,
+> >
+> > I am running U-boot 2026.01 with orangepi_zero2w config and I am
+> > trying to apply my hand-written dtbo via fdt apply.
+> > The issue is that the fdi apply command just hangs forever for me. The
+> > issue only appears when I try to append a new node to the root. How
+> > could I find what is going wrong here?
+> >
+> > The overlay source is the following:
+> >
+> > /dts-v1/;
+> > /plugin/;
+> >
+> > #include <dt-bindings/i2c/i2c.h>
+> > #include <dt-bindings/gpio/gpio.h>
+> >
+> >
+> > &i2c0 {
+> >     status =3D "okay";
+> > };
+> >
+> > &i2c1 {
+> >     status =3D "okay";
+> > };
+> >
+> > &{/} {
+> >     i2c_gpio: i2c-gpio {
+> >         compatible =3D "i2c-gpio";
+> >         sda-gpios =3D <&pio 8 0 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>; //=
+ PI0  (29)
+> >         scl-gpios =3D <&pio 8 15 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>; /=
+/ PI15 (31)
+> >         i2c-gpio,delay-us =3D <2>;        /* ~100 kHz */
+> >         #address-cells =3D <1>;
+> >         #size-cells =3D <0>;
+> >         status =3D "okay";
+> >     };
+> > };
+> >
+>
+> Can you provide thte dtc command you are using to build this? Is there
+> enough spare space in the dtb? I'm not sure what would cause it to
+> hang.
+>
+> Regards,
+> Simon
+
+
 
 --=20
-Tom
-
---v/FfW+BfhQplWGSk
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCab7RBgAKCRAr4qD1Cr/k
-CjSmAP9b8CI9oOHTEzIjX+zaGM5xAKOnbiRSHqzJLY0Zr1iBlAEAg2FEyZLuMPKE
-sIZbT04rZC4Wxlog0ecPPb+oPDy9Rw8=
-=62VD
------END PGP SIGNATURE-----
-
---v/FfW+BfhQplWGSk--
+With best regards,
+Matwey V. Kornilov
