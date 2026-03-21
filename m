@@ -4,80 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21B771094474
-	for <u-boot@archiver.kernel.org>; Sat, 21 Mar 2026 13:46:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A33C1094478
+	for <u-boot@archiver.kernel.org>; Sat, 21 Mar 2026 15:02:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B73CD83AC5;
-	Sat, 21 Mar 2026 14:46:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9FEBD83FF5;
+	Sat, 21 Mar 2026 16:02:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Nfh/i01n";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W/ohJatl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 405FE83FF5; Sat, 21 Mar 2026 14:46:43 +0100 (CET)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
+ id 9756283FED; Sat, 21 Mar 2026 16:02:29 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24E3B80050
- for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 14:46:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 78AE383FA7
+ for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 16:02:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-41c420d1460so79476fac.3
- for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 06:46:41 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-b980b35534eso487442066b.1
+ for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 08:02:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774105347; cv=none;
+ d=google.com; s=arc-20240605;
+ b=W70sVhsMo8YbLoMBHwM72zFAyYiIigUmJO3+67h7AL1kzZISIOxvMG1bhHD58Rid9t
+ FbcwxDgIept//sx8rBsp4YMEH0QpnleTBPVmWM/9B+W14tSAgu58LyGaQtFKIsDjyV6j
+ iWAcMBxOeZi+ly7zKO48V6Ugptzs4C2EzN/cwHqzdZhBs2jcD6YpuWgqyB+XzjDxSB0H
+ wV2k9AohevfgYTQCGuF9HCQoa7EVaROwXsPDzy8OjkSBQXigsBbzmZFZiPpV+2TAoTg/
+ oW3G494FkDttEOrcOjIf4q1nPznPcdhtuZ/95TOO5Dl7Tr93WRnmJsp2ALRbk8E4Xpqh
+ Zxsw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=9RhPAmZ+tq9gzid7QAuIIDks39OuZiJ4LGw1HPdDMyg=;
+ fh=ToXak3o3FxKjeN9zN6KF+Y7XD0fq/gRTAn22wDFBJO0=;
+ b=cHYtIij9d+g64N4FLlx+msCcyqTAGcQIbBJVbSntMfkjoVCOIiwB64JaMUQWJ0+tG9
+ V7RbE5FRwskHLK4yjbeerWf+ol/H5EXAwTGDPzolgdmvmvg+exAYSei8E/ePvYy0k3oz
+ RpR/admbPxB/XhYZ9CaxYTw22Pl9axkipbOBeG1PnBsbFKsiHuBWHV8Whq3o2MNjpvIF
+ Hnxl3f/F22z0NEv2zJ5ujH8W50moKJfpFtTrGHK0SD7w9Eiwc+tUtfTcuVUC8tzxL7zl
+ wTwYkXDEOAvtVrv3A9j8BOmW9hVRr9yF0SJVSPvSeDfhBlIygnHHqlCpW9WmKXHVth1U
+ zUbQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1774100799; x=1774705599; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KWYNte/1/BvFuyrla2gEMTDzd4KRNPD4dSaIz17pbpA=;
- b=Nfh/i01nPXnDPnNsbxcz9RDImkP48tAszEEVRcUuv6FViW+NKKI51vhCeaqqTQ26fg
- lvWVdf2C1FlYLBlmDr2JYzwXsWqrYEo1nto6BebB5OnI9eYDAnFJBVVlt+Iwdj9aIjjr
- pcy8Kr/9LfkN5OmKzL6fDG3TqJazaHvFCGjDo=
+ d=chromium.org; s=google; t=1774105347; x=1774710147; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=9RhPAmZ+tq9gzid7QAuIIDks39OuZiJ4LGw1HPdDMyg=;
+ b=W/ohJatlMspJMiRSQQcVLseUKQ5aeyw+ddQ9ltcArbIA7/QuE/gI3yoGrW7C5KvNF2
+ Yieto4O6yYPpSiIoq/KqWKLDbhxZaNa1IR3zifF1/lGfRhhnWcgpA9IasuvamUjXpFKw
+ jVZhCiCRWerVMfKXSNV9I6rxOWjWQ8yZul2lY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774100799; x=1774705599;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=KWYNte/1/BvFuyrla2gEMTDzd4KRNPD4dSaIz17pbpA=;
- b=BX+emVTDF0KwTEBjtPRTlIDRqqG2FzFqT8JG/UlqLDTTMATiQW1XlKIgKkR5F0uQ2W
- bYKzoWd8FlgAgRDYaiaW3qmUWSQYy7/gCaFxRUkv7B72m2mY9ybFWswc5rp90iABidj4
- jJvLmAexQx+D5kIHBCVTdISqwcseGtB2BegXi+vE0TsWruov6bWMXJfMOW0q6UExO02p
- ezYHarQKn0qRekm2iPMsEpIL0na9Rh36TOXbiSuSYyAtuxyb9lc2aT0mOogExbHxYOs6
- jElMLGVZ8VEaLNPe9NgqdDaBVG+nC2VgbetO2n9u+q2LmJ2QDEQaZMpn0aFod1aTadwK
- NLTw==
-X-Gm-Message-State: AOJu0YwMqoMHJFj+KBAOcxIn+tzOOqxUvTtGwGiJA/SIcsRHHC2c9QFq
- iJnbe+h3HLgCICobNS4wRNXbNOnEVadNkqBL8o7GOYrBF9H3l1twefhdo6O21nV6vr+9FZKAIc9
- iGG2PFw==
-X-Gm-Gg: ATEYQzxn43kz02fYNp5FJgEMogGAGLjkkRrTTHMG4yqhO4epPayZ9fO5Am5GzdCWw/n
- TNUoGZnfRvD5GK3igQsNLMs8UYuIrs3Moxuemuo2O5LesjSP7HmTwwomPw1OD19p3+7W1oHDz1A
- KH6qlutA+MrWamUVhlJUs4xQqr0YD9u51TT68vzycYLFG+nIO01uG8QZRIPvsMOFJ/U9cadcSUO
- iHDKvfjShDZNRY6S0rf8rdUukY3FDIqx3gH+DEjDtG03xs6YztSBoew4huH27CjM/Aaw3UW9gtm
- UD5BOVXImZOyCRDXM4eFRK/61WybY2782SwcCJrBZhLnL8f9WnWdG1gcXO7P2f6Ixdoh9yopfNL
- m+ZEQCAyNGZ9S6YGFxoTT/Si16AAmiGJ1hlD0AeMUXhq0lwRtdABrW2EC3pOejOXB06bana3o5t
- Tal6hRMF18ey9HeZB7og==
-X-Received: by 2002:a05:6870:c0d2:b0:417:529c:1b20 with SMTP id
- 586e51a60fabf-41c10b29fa5mr4159820fac.0.1774100798823; 
- Sat, 21 Mar 2026 06:46:38 -0700 (PDT)
-Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41c148a5ca4sm4947257fac.3.2026.03.21.06.46.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 21 Mar 2026 06:46:37 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <simon.glass@canonical.com>, Marek Vasut <marex@denx.de>,
- Pavel Herrmann <morpheus.ibis@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/2] dm: Fix linker list alignment for ll_entry_get()
-Date: Sat, 21 Mar 2026 07:46:24 -0600
-Message-ID: <20260321134626.516665-3-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260321134626.516665-1-sjg@chromium.org>
-References: <20260321134626.516665-1-sjg@chromium.org>
+ d=1e100.net; s=20251104; t=1774105347; x=1774710147;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9RhPAmZ+tq9gzid7QAuIIDks39OuZiJ4LGw1HPdDMyg=;
+ b=evRadUVFJb1RGbMwFatCFssct2BJaTrt7E3CcrLHn7m0cso+PcLKNPjA7oudeEXfsw
+ 9F1yO0TI7GVA1NzfxhLxyFrST4sIpqOOqKrZ/jUnZN2+hS1qSBAZ8px+CXWcCSorCXRJ
+ wGncPOzKORQlMvzxLo4itE4Zhjo0yuI2ZQ3w7khnvSUU9YZLpX8UPj2DrwyMDHXnufK5
+ XynfY2ELY15JhSyOqTPbF21k1c6z2v7m5IJd4CDMHYCc+kXqK9SKX3ZKoi5eVdTAsUi4
+ eCfT51avf+q9S4s5T1o1D8RZ4VHkuyHf/E+7j0+ihcJ9FDocUBVUU30Eci5HRpQ3vRL0
+ 1CJA==
+X-Gm-Message-State: AOJu0YzVli7Dn3x4wvLIbP3Crcd/9cxGlK+YGs//jcyEaF4lyKfRcPtH
+ oLusahzdZgFQ8/RYneimJh0+kPL8ELo3EigYbzSw7oKSOg7RA4Uvf06+NWbRln7je9nVCjwU0Jo
+ E3NOLsdh/x0Pppe342FnU3O7sKU1vt5chRmgDZrL/
+X-Gm-Gg: ATEYQzzh6yLlp2BL37N62fzGyM/AXqsSe0+nh6eLt4De+MNpBjapnCSyqZzdVCZ8KjE
+ jLJtsKlYfVJbexUGM637OVXzjs+PDTw2wRr7c9TYeLMOK7yR1d43dxegwXhyOHXEyVlmvFPEMke
+ erhRBTVVrzmnc5gb2BV2fvQkveJiIIboKMsRcioJ4T+7xwdbTvZR2AvfzoIertVhVkbZBJ/hWp2
+ zycJARvbO5gl1RNB1dcquOY/GEjbjXNg7hNFvlWaglnWdp+kQrGyb0+IZO5YfdYbjV1xP6fGCFo
+ 9yUbWzc=
+X-Received: by 2002:a17:907:398c:b0:b97:a4b1:51b4 with SMTP id
+ a640c23a62f3a-b982f59564cmr416374166b.17.1774105346898; Sat, 21 Mar 2026
+ 08:02:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CAJs94EYWoVAyWXexA=f_UwqUpo9zuxO6G6Tx7L7xPdciAVHW5A@mail.gmail.com>
+In-Reply-To: <CAJs94EYWoVAyWXexA=f_UwqUpo9zuxO6G6Tx7L7xPdciAVHW5A@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 21 Mar 2026 09:02:13 -0600
+X-Gm-Features: AaiRm53NeuUQlkQGTOEvfDurG_XjXPKs2dojCRYu8EAcdtxOmhQUeIGkwKohygE
+Message-ID: <CAFLszTjDnEoTP1fHdounqov_SYSDdr-Zpt7L_+-c9qb=c0F8JQ@mail.gmail.com>
+Subject: Re: Need help with FDT overlay
+To: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,43 +107,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Simon Glass <simon.glass@canonical.com>
+Hi Matwey,
 
-The extern declaration in ll_entry_get() lacks the __aligned(4)
-attribute present in ll_entry_declare(). When the compiler sees an
-unaligned extern reference to a linker list entry in the same
-compilation unit as its definition, it may increase the section
-alignment beyond the expected struct size. This causes gaps in the
-linker list array, which the alignment checker reports as failures.
+On Sat, 21 Mar 2026 at 06:55, Matwey V. Kornilov
+<matwey.kornilov@gmail.com> wrote:
+>
+> Hello,
+>
+> I am running U-boot 2026.01 with orangepi_zero2w config and I am
+> trying to apply my hand-written dtbo via fdt apply.
+> The issue is that the fdi apply command just hangs forever for me. The
+> issue only appears when I try to append a new node to the root. How
+> could I find what is going wrong here?
+>
+> The overlay source is the following:
+>
+> /dts-v1/;
+> /plugin/;
+>
+> #include <dt-bindings/i2c/i2c.h>
+> #include <dt-bindings/gpio/gpio.h>
+>
+>
+> &i2c0 {
+>     status = "okay";
+> };
+>
+> &i2c1 {
+>     status = "okay";
+> };
+>
+> &{/} {
+>     i2c_gpio: i2c-gpio {
+>         compatible = "i2c-gpio";
+>         sda-gpios = <&pio 8 0 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>; // PI0  (29)
+>         scl-gpios = <&pio 8 15 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>; // PI15 (31)
+>         i2c-gpio,delay-us = <2>;        /* ~100 kHz */
+>         #address-cells = <1>;
+>         #size-cells = <0>;
+>         status = "okay";
+>     };
+> };
+>
 
-For example, sandbox_dir is both defined and referenced via
-DM_DRIVER_GET() in sandboxfs.c. The compiler applies 32-byte
-alignment to its section instead of the 4-byte alignment from the
-definition, creating an 8-byte gap before it in the driver list.
+Can you provide thte dtc command you are using to build this? Is there
+enough spare space in the dtb? I'm not sure what would cause it to
+hang.
 
-Add __aligned(4) to the extern declaration in ll_entry_get() to
-match ll_entry_declare()
-
-Signed-off-by: Simon Glass <simon.glass@canonical.com>
----
-
- include/linker_lists.h | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/include/linker_lists.h b/include/linker_lists.h
-index 6a018f175ca..470dcfc621a 100644
---- a/include/linker_lists.h
-+++ b/include/linker_lists.h
-@@ -284,7 +284,8 @@
-  */
- #define ll_entry_get(_type, _name, _list)				\
- 	({								\
--		extern _type _u_boot_list_2_##_list##_2_##_name;	\
-+		extern _type _u_boot_list_2_##_list##_2_##_name		\
-+			__aligned(4);					\
- 		_type *_ll_result =					\
- 			&_u_boot_list_2_##_list##_2_##_name;		\
- 		_ll_result;						\
--- 
-2.43.0
-
+Regards,
+Simon
