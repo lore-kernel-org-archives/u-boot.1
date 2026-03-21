@@ -4,93 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0262B109448A
-	for <u-boot@archiver.kernel.org>; Sat, 21 Mar 2026 17:35:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0673109448F
+	for <u-boot@archiver.kernel.org>; Sat, 21 Mar 2026 19:21:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1232B84011;
-	Sat, 21 Mar 2026 18:35:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5E70684006;
+	Sat, 21 Mar 2026 20:21:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SaYnNquc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Gddjsrdr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2799D84013; Sat, 21 Mar 2026 18:35:00 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 97F9584011; Sat, 21 Mar 2026 20:21:01 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6FA784008
- for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 18:34:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3856F83F9B
+ for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 20:20:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7d55b97f358so1921820a34.3
- for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 10:34:57 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-b97f9587e6eso377757666b.3
+ for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 12:20:59 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774120859; cv=none;
+ d=google.com; s=arc-20240605;
+ b=D3+79VLJKE4aQ730HCxi8vO08XRN20iZ/Zark7FUa1J5AKcp9FTdeqEJGs5t6kOIBn
+ ptxASUiiRl5CXyuiRWCfpgVAZ4An9KcHLGBiuXraFZvCiwcB4xnusV/IuQNxhUUJpfcK
+ M7Xhc9P82oD7MY7rIOwx1KrL7xJaiw3eX73vxEJDgNhw/jbYLlsLwTUTxUxnmpZSwRh6
+ Fat7bcXZGF0fGaQSyvozTuBNmUQAxs4mgMewxR2MG5rdHjm7ympsNgV8isoQmqCx4zwx
+ 8ODK0FF6Azxnf88hujBhVoGqWL/2z+VEAJ2qcB4nyPe2w2shwoCYEyMLDr2/yA/oTKcA
+ 9PIg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=c9ePjbsGQYI6sBXIkNIc0+vhDGYqccbz4TZ05v4Iydw=;
+ fh=ToXak3o3FxKjeN9zN6KF+Y7XD0fq/gRTAn22wDFBJO0=;
+ b=jh9zfQ8DrkW7SkTXP6FJzJ8sT5SWQnSXda02zDqpHDsw/S+qJ++lrnYBjaVA3C5LYn
+ upDmWgb6wUgYjaCViyaCeDypOpRvjuBRizQ8i6QnLO7nHvK284lSUGo5dcJw/oW7b2VF
+ dcacIWsfKGX0MTBnCUV6qOzt29n2rhseydoWKjnh38+sh4JTPDK0jJUMZGF6j0by362k
+ f0ZhOyIB8d6Qs484h6SrQlE3UzBHLw/ZFKGHT06bK+mmypd355gRTFcXbLrfRXW9SB44
+ HdDc6xQQNL1JHXPiTFh0euamz2tgHSt1azpDJFyuXwx+sMKC91NOilAFH05un46bgS+7
+ VEjg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774114496; x=1774719296; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RRo//9uYS2ynEO1bVoa7pF2ucwUNOhZlSt0MwV+/HII=;
- b=SaYnNqucqJdT8rV2PSrp1yfgG/X+p2Qth/6WuRQL4jjAOaxKICYSnizqH9wkuGqYiR
- F+Pq0N+qb3dplOUsUtLf4YaIeJ6lvtL/r6c8xVJt9StJqT3sXKOihq1okTths+CNQXtA
- AcKAv3u8SAeyNC5aqwxHa1LUYgFvwBo4eKFlU=
+ d=chromium.org; s=google; t=1774120859; x=1774725659; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=c9ePjbsGQYI6sBXIkNIc0+vhDGYqccbz4TZ05v4Iydw=;
+ b=Gddjsrdr036lwn0pUf65kF0DAaUXs5iN22xmdYoCqU5yQoAw7RT+Wnjz/VV76RsTm2
+ apyUf7XoiJMlukyeXK06vDn80LCO0wReBUt1sC1kSwddZ/kKFF/aVu2rrYOsf72KS9MC
+ BCkbaktBm05a+TfzJyxISeNkYXqJCqGWUEM68=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774114496; x=1774719296;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RRo//9uYS2ynEO1bVoa7pF2ucwUNOhZlSt0MwV+/HII=;
- b=hATe9NDVMJ941g4Z1FD5y3pcAO7pOitBSCeo2YPyng9E6e0znUGvfkMpKVP4sIRZUi
- a1xPukVqL+iC0MM2JrqOVYffg1P0Sywkt/4I2YXIEi9cqMj2d+W3PQu+UfXUwXiCKmRm
- 8ZyOnYu7ZAOpMZcAqmYiCNSF3zQ6izHiYxWRcKGyJVa1MNaZsFDo2uuB67zix39x9lvi
- Mb1WFSz0p2wo+Ls2sKIpTKDhXN9vitew4PnssVIfEbc7ITORcH1eKKYq31DNwzDtEikO
- GqVj+j44XHd96V3aMdyrmsaPtTWGveBZ3YCweTHzDzOb8y3ej31wHK82floUpCp/9RBC
- ezFA==
-X-Gm-Message-State: AOJu0YwBeFuiZY17jb2AscPetjt8fBnq9dCZjh8AM7TZXhOnsFNkoHc5
- rM+dGDNcrFkABDAGkiGDCroFOt1rrLLFka3OftoUzgPNRTOEoqqXqqHuu3du9MwRdcPwAlta8CN
- SDZLxycc=
-X-Gm-Gg: ATEYQzzmJ6n64pKzW2MzD96qCHIDCM4smaWbtkZIC9b7sQbr37AqWaQCbC/UvAnbLRO
- SYGSybuaefZVcdehqzpIALnvrwx64KwgpWgytl5xEmobNmCFGyh4e0EFyBYwWmpsb07nsIqcCEJ
- Q8cY8me6Qn624YAw+sPTJZd8lhoIRvS70iRKidhopa11wLQf9Z0/O+J8iCFxdkf7UrwaoTtDk7O
- C6/dxfVpc7y/tZ3vk9CTAjbbBFaEg32yo8SVGiI2XPQZ/wt1zAdA5lC8txGQZ2CMfUNvq3bVxTi
- mEvCgIT9uyaQ22JUcmOdVRiw5dmgTEzBuJAAlqqk9TOgYsT80aTdg6S64tHHLii/oM5hDBKrpAh
- dWoarGxtqFrvQyJyMsY7UaS9HOzorVI3RF0xsS1Q5DjiFHO9WTpLc/+aTqSo7RBTNwMyzpGMHdC
- Cxn+5dfUAoU/BF0ty4RkJM9ew9u+1F6ubagtvN7rCHklvwoGS7FCEJWQfZqSS99wE5SCG4JH6uf
- nDXjOU3bgZOVutohYTSVil2HrXU7vf+Ii5OeTigYjhQQYj+
-X-Received: by 2002:a05:6830:81c9:b0:7d7:de7f:1216 with SMTP id
- 46e09a7af769-7d7eb05988cmr4098926a34.34.1774114496629; 
- Sat, 21 Mar 2026 10:34:56 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7fbee2c6dsm2715562a34.1.2026.03.21.10.34.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 21 Mar 2026 10:34:55 -0700 (PDT)
-Date: Sat, 21 Mar 2026 11:34:53 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: Re: [PATCH] usb: gadget: Move USB_GADGET_DUALSPEED to be slightly
- more visible
-Message-ID: <20260321173453.GG502704@bill-the-cat>
-References: <20260317012433.4162524-1-trini@konsulko.com>
- <bcaede64-7918-4eaf-9695-a155b1395e50@mailbox.org>
- <20260317134107.GR502704@bill-the-cat>
- <bbdd71c7-3276-402e-a9f8-98afffd10538@mailbox.org>
- <20260318012649.GG502704@bill-the-cat>
- <bf3bb11e-e891-4703-ad47-04d53e21d7af@mailbox.org>
- <20260319133952.GO502704@bill-the-cat>
- <b48f3f6c-0403-4528-8de6-0b24caa810ef@mailbox.org>
- <20260320135305.GX502704@bill-the-cat>
- <03a11b96-88f4-4ca0-9705-0bfe8409ee6c@mailbox.org>
+ d=1e100.net; s=20251104; t=1774120859; x=1774725659;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=c9ePjbsGQYI6sBXIkNIc0+vhDGYqccbz4TZ05v4Iydw=;
+ b=cxnSzTG76/w/YDPdypoTvntxHjQ3Q2GHSMFDdUGvAfcAjw3N4RGJLUl7CpRRfIipm7
+ symj2tzgliF7UZoLx1Qc/1buXFYKBwkfdfousFURrEl0OFXNSyra0Aznh9rtYX9tOpvK
+ a/SE2TGs5cFCO5mtfFml/MehkQBFvGoMj6NR1t/ptdcETDBkXn2A2Rh72WvaoQlxhYiG
+ i5MQlAgZ1LIesbymQdfBiW+yO9pfVcYajgQz7Km7KlKaBRPkpvq5v45jd22EW77kegUl
+ v+nL8UHkBsUFuAW47VtsQ7+jufDzY+9dZArEBsx+awNYU9mS5v6z0XbC10UVJu0ogojO
+ Ev2A==
+X-Gm-Message-State: AOJu0YwPvyOLkoeilD2dEbfEQIPHwuhm7GkM6FQeygIFVRiLv3yJjrIx
+ 5hLpYMN5cUAlDgVP6sl2tIwjRj09D39aCrA3T+YxtiqHf6WwZsC4CgH4Jr1flpOzRJd5Tg9jjVa
+ xxeTg3maAmtdptgEWBueH+07SZ3zK9dTf/ldxOfua/i2bFML/eBOla6Ws
+X-Gm-Gg: ATEYQzzGHh1uSjDMVS+txv3AlSNtHQl2oNISLTeW15ektRdsHblrYW21JazjkpHyuJ9
+ Q1UDKNT4TSUJZ1jQHN+4ASJzhRZKj8afr35MsQX4o+3V+Q3VbO8dAPEmk1lCUSDNvbyUuVx2pTm
+ 7vZ7dIeydP/4T6EaZd5Q23mmpW4BMPUeY4Mauc9/cPAisJZzHUGHm4QeE+OrTh5iWWyU6AHNKJI
+ 58oT4f1wKietFD1E0pw8fhZMjiVe+NN7+y2HpjDNab/HQ8Qe5rWvgBuSgGcZD2sosHdCmzWkrE9
+ Z6lhzbo=
+X-Received: by 2002:a17:907:c706:b0:b97:cc05:61b9 with SMTP id
+ a640c23a62f3a-b982f1ec96fmr515247466b.15.1774120858558; Sat, 21 Mar 2026
+ 12:20:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="i3rwoRgGwZYZovpw"
-Content-Disposition: inline
-In-Reply-To: <03a11b96-88f4-4ca0-9705-0bfe8409ee6c@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CAJs94EYWoVAyWXexA=f_UwqUpo9zuxO6G6Tx7L7xPdciAVHW5A@mail.gmail.com>
+ <CAFLszTjDnEoTP1fHdounqov_SYSDdr-Zpt7L_+-c9qb=c0F8JQ@mail.gmail.com>
+ <CAJs94EYuFQJvdTjWZX1qWg9e7Qz_X_G7Bz017nucN1HtU1Mrcw@mail.gmail.com>
+In-Reply-To: <CAJs94EYuFQJvdTjWZX1qWg9e7Qz_X_G7Bz017nucN1HtU1Mrcw@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 21 Mar 2026 13:20:47 -0600
+X-Gm-Features: AaiRm51SfODNqAAKnpmw5vzoVnOKkcfMPWrmoB6xOJCELKPkvCqNXjabMWuMRoo
+Message-ID: <CAFLszTj7g-pYE6+Fw7=Vip-1dw0QK7+1tgjuUzNK_J1Yi4mW+g@mail.gmail.com>
+Subject: Re: Need help with FDT overlay
+To: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,58 +111,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Matwey,
 
---i3rwoRgGwZYZovpw
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Sat, 21 Mar 2026 at 11:20, Matwey V. Kornilov
+<matwey.kornilov@gmail.com> wrote:
+>
+> I compile dtbo as the following;
+>
+> cpp -x assembler-with-cpp -I /home/matwey/lab/linux/include
+> overlay.dtso overlay.i
+> dtc -@ -O dtb -o overlay.dtbo overlay.i
+>
+> Decompiled overlay.dtbo looks like this:
+>
+> /dts-v1/;
+>
+> / {
+>
+>     fragment@0 {
+>         target =3D <0xffffffff>;
+>
+>         __overlay__ {
+>             status =3D "okay";
+>         };
+>     };
+>
+>     fragment@1 {
+>         target =3D <0xffffffff>;
+>
+>         __overlay__ {
+>             status =3D "okay";
+>         };
+>     };
+>
+>     fragment@2 {
+>         target-path =3D "/";
+>
+>         __overlay__ {
+>
+>             i2c-gpio {
+>                 compatible =3D "i2c-gpio";
+>                 sda-gpios =3D <0xffffffff 0x08 0x00 0x06>;
+>                 scl-gpios =3D <0xffffffff 0x08 0x0f 0x06>;
+>                 i2c-gpio,delay-us =3D <0x02>;
+>                 #address-cells =3D <0x01>;
+>                 #size-cells =3D <0x00>;
+>                 status =3D "okay";
+>                 phandle =3D <0x01>;
+>             };
+>         };
+>     };
+>
+>     __symbols__ {
+>         i2c_gpio =3D "/fragment@2/__overlay__/i2c-gpio";
+>     };
+>
+>     __fixups__ {
+>         i2c0 =3D "/fragment@0:target:0";
+>         i2c1 =3D "/fragment@1:target:0";
+>         pio =3D "/fragment@2/__overlay__/i2c-gpio:sda-gpios:0",
+> "/fragment@2/__overlay__/i2c-gpio:scl-gpios:0";
+>     };
+> };
+>
+>
+> I am not sure about the size. How do I check it correctly? Now, I just do
+>
+> fdt resize 16384
+>
+> =D1=81=D0=B1, 21 =D0=BC=D0=B0=D1=80. 2026=E2=80=AF=D0=B3. =D0=B2 18:02, S=
+imon Glass <sjg@chromium.org>:
+> >
+> > Hi Matwey,
+> >
+> > On Sat, 21 Mar 2026 at 06:55, Matwey V. Kornilov
+> > <matwey.kornilov@gmail.com> wrote:
+> > >
+> > > Hello,
+> > >
+> > > I am running U-boot 2026.01 with orangepi_zero2w config and I am
+> > > trying to apply my hand-written dtbo via fdt apply.
+> > > The issue is that the fdi apply command just hangs forever for me. Th=
+e
+> > > issue only appears when I try to append a new node to the root. How
+> > > could I find what is going wrong here?
+> > >
+> > > The overlay source is the following:
+> > >
+> > > /dts-v1/;
+> > > /plugin/;
+> > >
+> > > #include <dt-bindings/i2c/i2c.h>
+> > > #include <dt-bindings/gpio/gpio.h>
+> > >
+> > >
+> > > &i2c0 {
+> > >     status =3D "okay";
+> > > };
+> > >
+> > > &i2c1 {
+> > >     status =3D "okay";
+> > > };
+> > >
+> > > &{/} {
+> > >     i2c_gpio: i2c-gpio {
+> > >         compatible =3D "i2c-gpio";
+> > >         sda-gpios =3D <&pio 8 0 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>; =
+// PI0  (29)
+> > >         scl-gpios =3D <&pio 8 15 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>;=
+ // PI15 (31)
+> > >         i2c-gpio,delay-us =3D <2>;        /* ~100 kHz */
+> > >         #address-cells =3D <1>;
+> > >         #size-cells =3D <0>;
+> > >         status =3D "okay";
+> > >     };
+> > > };
+> > >
+> >
+> > Can you provide thte dtc command you are using to build this? Is there
+> > enough spare space in the dtb? I'm not sure what would cause it to
+> > hang.
+> >
+> > Regards,
+> > Simon
 
-On Sat, Mar 21, 2026 at 02:53:13AM +0100, Marek Vasut wrote:
-> On 3/20/26 2:53 PM, Tom Rini wrote:
->=20
-> [...]
->=20
-> > > @@ -371,3 +367,11 @@ config SPL_SDP_USB_DEV
-> > >            so it can be used in compiled environment.
-> > >=20
-> > >   endif # SPL_USB_GADGET
-> > > +
-> > > +if USB_GADGET || SPL_USB_GADGET
-> > > +
-> > > +# Selected by UDC drivers that support high-speed operation.
-> > > +config USB_GADGET_DUALSPEED
-> > > +       bool
-> > > +
-> > > +endif
-> > > "
-> >=20
-> > You don't need to guard hidden symbols.
->=20
-> We also do not want to expose this Kconfig symbol unless it makes sense to
-> expose it ? In fact, if the symbol is not available and someone attempts =
-to
-> use it in Kconfig, they would get a warning, which should provide a clue
-> that they are doing something wrong ?
+It might help to have the console log too. I can't see any way this
+can hang unless the addreses are wrong and something important is
+overwritten.
 
-It's a hidden symbol, so it's not exposed to the user. The problem is
-that today someone is getting it wrong as you suggest but it's hard to
-trigger a warning over it. That said, your patch also fixes the problem,
-so:
+Try this to see the address:
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+fdt header
 
---=20
-Tom
+Compare to 'meminfo' so you can tell that there is nothing important
+above the fdt. Also where do you load the overlay?
 
---i3rwoRgGwZYZovpw
-Content-Type: application/pgp-signature; name="signature.asc"
+BTW U-Boot uses hex, so it should be 'fdt resize 4000'
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCab7WugAKCRAr4qD1Cr/k
-CtuSAP4hi+OHxQawQgPruw9qvoX9iwsKpNlZtsJ+vkef5GNW1QD/U7auhOYZ9t2c
-162RKx/2C0xrzSVUtj+5FatStTQR2AE=
-=62ZR
------END PGP SIGNATURE-----
-
---i3rwoRgGwZYZovpw--
+Regards,
+Simon
