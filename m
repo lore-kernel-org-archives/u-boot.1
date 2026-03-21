@@ -4,92 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6589C1094472
-	for <u-boot@archiver.kernel.org>; Sat, 21 Mar 2026 12:55:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E80E41094478
+	for <u-boot@archiver.kernel.org>; Sat, 21 Mar 2026 13:46:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 615AC83F00;
-	Sat, 21 Mar 2026 13:55:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 28AC483FED;
+	Sat, 21 Mar 2026 14:46:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FjncdxmE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SJOgpNI3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F3F783F9B; Sat, 21 Mar 2026 13:55:07 +0100 (CET)
-Received: from mail-dy1-x132b.google.com (mail-dy1-x132b.google.com
- [IPv6:2607:f8b0:4864:20::132b])
+ id 0ACB083AC5; Sat, 21 Mar 2026 14:46:38 +0100 (CET)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1282483E48
- for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 13:55:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9136880050
+ for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 14:46:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=matwey.kornilov@gmail.com
-Received: by mail-dy1-x132b.google.com with SMTP id
- 5a478bee46e88-2c0f754e756so2715704eec.1
- for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 05:55:03 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774097702; cv=none;
- d=google.com; s=arc-20240605;
- b=Q/dRV6/fwoZ391ueNngl4w5knnqUJd6PKTIF648Qi4muCfU3YG0hH90e/A2FlxeOYE
- P7h4dfOcEBoDjPQc6uyXJvKAgGJUl1gEgG7vPnng7vIBjraWmirAM4J/HOcPCc9khlvA
- eq9Tgnd274iN2yVG6ZabfM3afl4OeRb4/sKGd9owRbxO71jStHD89O6GPLM4H77UzzTc
- MTnT0OD3OMv5oBFgXMD7bsP3IBIC1zmY4P/WhFOxNAiQevi43amz0RTKDX2PtYg95+W6
- WAudu60/HuFZZdT2SaW2fugLkDvcH4zWFWQgaW8cFzk/dIWZ2RRusK3iioNbst839jQJ
- thwA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=to:subject:message-id:date:from:mime-version:dkim-signature;
- bh=yPQ3zAaTCre/8ZGDJW9QLtOA6XlPbld6wj4YhEoMoB8=;
- fh=GQyKwPRr8dOXk65gAXuiKSXcuQM8h6Aog4njpiF9nLE=;
- b=ZIbWD7sYer/oPQXXE1399c1jKkYufyeeTYP3Yzqpi0+5RPG4ZYTnZ0LGRR5jSLmzko
- W+JXfEVGEjYzikC2U4bXVCwo9IQk6S0+R5x9CA7CUXomhh4eF6y2gBtnL4BaTwq4F3/W
- EoOdWyv3CFV+FI2y2mnARqVVjC3ofO3eKmH39SOOzTK+HqeOYbPdbMwUJXrm2ngeZQsm
- GVVL6vOljwrxdJ0JG+MBiTsRUxjfG55B+KXcWmTzboMBbAk0VS5VlQozRq+5l2EBc22U
- fJme1rrSki7lr8tvcjIXHlLbLMWtzSshb4wf1bK33pbggBka8qO4O5eShbbQkh7a8jIA
- 9JVg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7d91f82d819so186209a34.1
+ for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 06:46:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1774097702; x=1774702502; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=yPQ3zAaTCre/8ZGDJW9QLtOA6XlPbld6wj4YhEoMoB8=;
- b=FjncdxmE3BnF8/tmbFAEr1shVN1Wr09JZqJVc3QbUvUMrHJjm2CaWb94k1k8rP4Li3
- if+6naj55EbaH25BLRa8gZV1XvgNJTF59+Rb7SzD8oLiUNDFpN0rOn+5Uv/ooIXPzXTv
- liXS56MM211K2vyqCVjQ9Z0jWbYruAl5zWsm7YN57PeW1DPpTAa52poZw8hWJurzb0xP
- sdsCC5x6kmIA06zIAeV5qYQvGRRcHvL2bznbf4zgR0fhj5JN882XMCUaz1n2lDPIbAFD
- dpH7zguY4GDwiWWheIcMsWmlU/1r5d9WnurYa/fJuj2hX3enVL6LkVOsL14+Q4VTz6TS
- kALA==
+ d=chromium.org; s=google; t=1774100793; x=1774705593; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ucbSs83ZnIGDgS7GcanvbmOQBe2/ZSPlV8vQCkdqyqE=;
+ b=SJOgpNI3eYed2tbXguaaGTTCY8dX/bC57deHiOuMUGMEnJN27TouFH0wrheUpbLgCm
+ AQL8se02xxUm32uN8OaGpyJKOZW1EHkpTx9azEJdZfO7WSq0n4YJOqWDs9RfTeYGC2D7
+ R6iZIf7fP9aCtm0vNDMJWv50dC9NkbZAzyQA8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774097702; x=1774702502;
- h=to:subject:message-id:date:from:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=yPQ3zAaTCre/8ZGDJW9QLtOA6XlPbld6wj4YhEoMoB8=;
- b=MDk1vkWA1UiULDPDqMp2m/yhLbzH/shCRe+jaL6cg0d0w97lqBrowFp+wZvFxDVkCK
- /jNBABqcoiww4DVfqpRHlJkRWv1HN3NDZNyv0BFKCG4KIdv0B5yFEbf3SRjquSOrNoX2
- nOHrBpJK4em5ojgJiSpTn6qY2BcYQFNZmdeAb4Gn7VbY9TWfZt9Ivywcquzn/AuzMfo2
- 0Q64KA99FguW6uPeGL2aJGrxMYnXLQz4cW1KZwVA3H+Trdojljq2VGvPG82V6YxzBNfw
- b533PVl3Mg7HiW8beiTKvyWbslJ7ehLSDOHZvGfCEGLF1GpNuikyZZ/7iid9bPG+87MJ
- RQHA==
-X-Gm-Message-State: AOJu0YzKs7wdKLGzNN98eNTsqGd7MYE0ZVCrUYaBTESkG2aHV3c/9TqA
- PIFK+pWPBwufs7JHy0frFLiNp1jNyakqWEV79TtZh8MkntNGmiOisaentJ2HyM3rm/Bip5Upzlx
- 2CaCNta6JMFp9UWvsFL6hruv9HdDEPFBaA/s+mQE=
-X-Gm-Gg: ATEYQzzDBa8tS1wrSyDpyIj3w8VhW7N6DaBXxWqgr//DVr4fQYvTcr2Yu2waavU6NNC
- ry4GexzD8TN2Q7yq+GCgnFlOaQqLQn+ts/kVfe6/tbtxbMLSRx4hbaRGkZUvo2h+b4cRv+xtB8S
- qi9TVFN9K6OiVQ4HPKQeyDHieOxwmuR8drAAkEuox2pqsiy8a0LzzC7PqFxwbvVl6ab0//Li/hl
- QywHkbGISmEtdM1P0bK5K54hwkjPVxM9ysmG9AnxbzrD8eOJJYQxP523ZsvF7vkQEwfJjEBmTSW
- SXEHa4oz8OM4pPQ=
-X-Received: by 2002:a05:7022:fa9:b0:128:d1cf:8ab with SMTP id
- a92af1059eb24-12a7263d773mr2658989c88.6.1774097701812; Sat, 21 Mar 2026
- 05:55:01 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1774100793; x=1774705593;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ucbSs83ZnIGDgS7GcanvbmOQBe2/ZSPlV8vQCkdqyqE=;
+ b=AZBYTVYS645DTADQdaHqW8+C9AH1DD3Z9GojnYfWxxYrbhzWbIYZGKCpjQJE2cfOPn
+ NKbzYhqRZojI8UxcOZ0HXEFk5D6j2NV+Urx+TeB/hA9wgTrfVw8C0zVwujmZTrNDPHlR
+ 7gMoPNQ6WovqjY07gu0OZEwAEVlPigvTAYSQ+fELn3mPjcPbLRxti9huiAfqIVVb82IA
+ lK3j2ts2zJlpV1c62xC6h5/FIe48FYH8GBi3eWWoxrSwaPwak7d5FhAZ97V2kzEnwX9p
+ C9oKt7xc1zg1Fgiw1uVNh4JAmjOBgAVfluWoLagCpcgEimBrtpDcrvqkpjofUvcnNI0h
+ H8qQ==
+X-Gm-Message-State: AOJu0Yz/cxkv/8V0fnAiQVLz4aSC0XBRQNRmJwtg8CIEsS56zqFHv0Xj
+ 1e/I+SO8hXDxXP8vse4wrtfKMF0JQKHnZGpSfzbFy22EBUFCDcV9l1lEvJ3mDnw2cSBx+OnxYAi
+ Ov8kPFg==
+X-Gm-Gg: ATEYQzz1uSalnzxKNGWCF6ZvCdKuc9AsiTndpAwwLHv2s9UCRvMIYo6AE+TS5nBNLYq
+ xYid3rU6aYG0WG0mZQNzregLu1HECposIn3hFthhpPy8DNdy6Y6cuLP2FlAHHTxta6x2mJ1imPC
+ P3rMzBdXY3X9bR/0puq74itBE3FuTKsHNhckRBzXw5uSesx7jINIxv/swNpbwLyQx7XE5OCAy8Y
+ Og4QiGyf40wp49aRK0W0H0MN3Aq3vk3HRXN3aufY15700wtPo4Dr4dlUuIWhVmSuXG4wNWHXShl
+ 6vK/cBTZ0Ii8Y7Ub/nK3d1Nq8Gqp1zeTfnmBTGQHdDx0HCeyv5RgJIi8zq4sjyvwlNZ2AF10WVk
+ q1bya41dhQ+Zl2+JNT4yF/NIUiKDu3UBnQV4KxOrUl/ruR8ix3p+8RGq8nZzjGMPJ1FdlfyE8oE
+ LtqTf68o1XMyAnCFqpnw==
+X-Received: by 2002:a05:6870:788b:b0:315:b768:bd1d with SMTP id
+ 586e51a60fabf-41c10e80979mr4369318fac.6.1774100792930; 
+ Sat, 21 Mar 2026 06:46:32 -0700 (PDT)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-41c148a5ca4sm4947257fac.3.2026.03.21.06.46.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 21 Mar 2026 06:46:31 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
+ Pavel Herrmann <morpheus.ibis@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 0/2] A few linker-list fixes
+Date: Sat, 21 Mar 2026 07:46:22 -0600
+Message-ID: <20260321134626.516665-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-From: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
-Date: Sat, 21 Mar 2026 15:54:49 +0300
-X-Gm-Features: AaiRm52NtworBSX4gPvetHSG-8FSid2WDykuUvmr3S0UnKCDfwSPAjRDOA_9vXs
-Message-ID: <CAJs94EYWoVAyWXexA=f_UwqUpo9zuxO6G6Tx7L7xPdciAVHW5A@mail.gmail.com>
-Subject: Need help with FDT overlay
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,45 +91,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
-
-I am running U-boot 2026.01 with orangepi_zero2w config and I am
-trying to apply my hand-written dtbo via fdt apply.
-The issue is that the fdi apply command just hangs forever for me. The
-issue only appears when I try to append a new node to the root. How
-could I find what is going wrong here?
-
-The overlay source is the following:
-
-/dts-v1/;
-/plugin/;
-
-#include <dt-bindings/i2c/i2c.h>
-#include <dt-bindings/gpio/gpio.h>
+This series includes two patches to fix aignment problems with linker
+lists. In certain circumstances these can cause the drivers list to be
+non-contiguous, causing crashes, hangs, etc.
 
 
-&i2c0 {
-    status = "okay";
-};
+Simon Glass (2):
+  linker_lists: Fix end-marker alignment to prevent padding
+  dm: Fix linker list alignment for ll_entry_get()
 
-&i2c1 {
-    status = "okay";
-};
-
-&{/} {
-    i2c_gpio: i2c-gpio {
-        compatible = "i2c-gpio";
-        sda-gpios = <&pio 8 0 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>; // PI0  (29)
-        scl-gpios = <&pio 8 15 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>; // PI15 (31)
-        i2c-gpio,delay-us = <2>;        /* ~100 kHz */
-        #address-cells = <1>;
-        #size-cells = <0>;
-        status = "okay";
-    };
-};
-
-
+ include/linker_lists.h | 25 ++++++++++++++++++++++---
+ 1 file changed, 22 insertions(+), 3 deletions(-)
 
 -- 
-With best regards,
-Matwey V. Kornilov
+2.43.0
+
+base-commit: eb00c710508d09b2a3b9aca75dd18280f1304703
+branch: llistb
