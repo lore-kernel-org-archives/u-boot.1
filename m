@@ -4,59 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 125B41099B3C
-	for <u-boot@archiver.kernel.org>; Sat, 21 Mar 2026 02:40:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE7851075269
+	for <u-boot@archiver.kernel.org>; Sat, 21 Mar 2026 02:41:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFAB783FE9;
-	Sat, 21 Mar 2026 03:40:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EF52684006;
+	Sat, 21 Mar 2026 03:41:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="d9gS+ix8";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="N1ZaFTgp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6798483FA4; Sat, 21 Mar 2026 03:40:48 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id 85C4483D71; Sat, 21 Mar 2026 03:40:53 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C80E83F00
- for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 03:40:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B26884006
+ for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 03:40:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4fd3Zh6Dvtz9slL;
- Sat, 21 Mar 2026 03:40:44 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4fd3Zn5B6yz9spj;
+ Sat, 21 Mar 2026 03:40:49 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1774060844;
+ s=mail20150812; t=1774060849;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=4asuB9Oopa7vk71l3vcG0poD3r/Kpgy9s5p4lcd0V/Y=;
- b=d9gS+ix8S+9o26z5jyVncyeQSLSPU31YAVUI5YswSTAsq1DJQPDc7K7YuD/EhCQ0NJZCH9
- XkOcschieoP2+0ZaYkjxWDUW/eXRi2tq/6Gj7Vaq8q7MkHjP7HRGK8gRlgdXZi5ZQn+Quv
- qL1Nw4bq6w2EwXd0s3TjdXjQonDQbEVhAuGuXOat8mThrlX1O4vDi2M3gpbJktaQ60aCWU
- U1VrWyo1QMMx2FgAB06fbaQQchTLPGytrWoEwJmhkoMcqaFkAPOeUpWP8ujyp8wkA6ptuJ
- F27SaKirTqUqk5WC4Iht6p1QmjPyZkI7tgr6FLg06exu/2TJZ3SZRDg/aWhGRQ==
-Message-ID: <f6ffc6db-c59d-45c9-964f-7fa56c320047@mailbox.org>
-Date: Sat, 21 Mar 2026 02:24:04 +0100
+ bh=WD2PMntZY3ENb7B6NjgsOIhvBMwOwjPPmdj4mlWqNBA=;
+ b=N1ZaFTgpZby3DHPCV2Wo/eh5ZI+AEa31pjgjvCuZwYagEXC7TUdbFGir9fiROOiikonzP2
+ YCyJo4pmN+y/DAc+AchkGaIys/7DZKwuvm+bEdOLn2cYroXbsNq2617r4AraA/BUXbrMFb
+ 40yOvPYE0+eKGrz5GQKQlzfvhyIJLelPowPiS75onOs6/ipJWPkbCDFrp9MDKW4kUHsYoL
+ G5JsXvUZ12WjvOS9uP03LVjIYAZXww7q/1N0t1RoVazlcAQhy+ovuGhdoJDCS8mTerhtys
+ ejJosaBqrlD0ilDyX0/ahlgrIXUaHZxtgaOUbVqBuQyA/nCobA5/C71mCs4jbw==
+Message-ID: <03a11b96-88f4-4ca0-9705-0bfe8409ee6c@mailbox.org>
+Date: Sat, 21 Mar 2026 02:53:13 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH] usb: Correct dependencies around USB_EMUL
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20260320205353.3789127-1-trini@konsulko.com>
+Subject: Re: [PATCH] usb: gadget: Move USB_GADGET_DUALSPEED to be slightly
+ more visible
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
+References: <20260317012433.4162524-1-trini@konsulko.com>
+ <bcaede64-7918-4eaf-9695-a155b1395e50@mailbox.org>
+ <20260317134107.GR502704@bill-the-cat>
+ <bbdd71c7-3276-402e-a9f8-98afffd10538@mailbox.org>
+ <20260318012649.GG502704@bill-the-cat>
+ <bf3bb11e-e891-4703-ad47-04d53e21d7af@mailbox.org>
+ <20260319133952.GO502704@bill-the-cat>
+ <b48f3f6c-0403-4528-8de6-0b24caa810ef@mailbox.org>
+ <20260320135305.GX502704@bill-the-cat>
 Content-Language: en-US
-Cc: Simon Glass <sjg@chromium.org>
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260320205353.3789127-1-trini@konsulko.com>
+In-Reply-To: <20260320135305.GX502704@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 5ac2e04c01f4899eb5a
-X-MBO-RS-META: fczkhm3pfx6wg64qpzcmma3pyxhemhi7
+X-MBO-RS-ID: 30496adfef872aa62a9
+X-MBO-RS-META: myki86xzchd1rqs1bupamuqgchc8ydqn
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,51 +84,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/20/26 9:53 PM, Tom Rini wrote:
-> The symbol USB_EMUL is how sandbox has access to USB. It's
-> implementation however enforces a few other requirements. It must have
-> SCSI enabled, and in turn that means it must have BLK enabled. Finally,
-> we should not be using SANDBOX itself as a symbol to decide what to
-> build or not build here, as SANDBOX is selected for COMPILE_TEST builds
-> as well and so may not have enabled the sandbox specific USB support.
-> 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Marek Vasut <marek.vasut@mailbox.org>
-> ---
->   drivers/usb/emul/Kconfig  | 2 ++
->   drivers/usb/host/Makefile | 2 +-
->   2 files changed, 3 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/usb/emul/Kconfig b/drivers/usb/emul/Kconfig
-> index 279f6c6d7404..8ba372453e37 100644
-> --- a/drivers/usb/emul/Kconfig
-> +++ b/drivers/usb/emul/Kconfig
-> @@ -1,7 +1,9 @@
->   config USB_EMUL
->   	bool "Support for USB device emulation"
->   	depends on SANDBOX
-> +	select BLK
+On 3/20/26 2:53 PM, Tom Rini wrote:
 
-The select SCSI and Makefile change I do understand. But why do we also 
-need BLK ? I can't find anything which would interact with BLK in the 
-sandbox USB emulation ?
+[...]
 
->   	select DM_USB
-> +	select SCSI
->   	select USB_HOST
->   	help
->   	  Since sandbox does not have access to a real USB bus, it is possible
-> diff --git a/drivers/usb/host/Makefile b/drivers/usb/host/Makefile
-> index ef4ce62a680c..9cac53f07c7a 100644
-> --- a/drivers/usb/host/Makefile
-> +++ b/drivers/usb/host/Makefile
-> @@ -5,7 +5,7 @@
->   
->   ifdef CONFIG_$(PHASE_)DM_USB
->   obj-y += usb-uclass.o
-> -obj-$(CONFIG_SANDBOX) += usb-sandbox.o
-> +obj-$(CONFIG_USB_EMUL) += usb-sandbox.o
->   endif
->   
->   ifdef CONFIG_$(PHASE_)USB_STORAGE
+>> @@ -371,3 +367,11 @@ config SPL_SDP_USB_DEV
+>>            so it can be used in compiled environment.
+>>
+>>   endif # SPL_USB_GADGET
+>> +
+>> +if USB_GADGET || SPL_USB_GADGET
+>> +
+>> +# Selected by UDC drivers that support high-speed operation.
+>> +config USB_GADGET_DUALSPEED
+>> +       bool
+>> +
+>> +endif
+>> "
+> 
+> You don't need to guard hidden symbols.
+
+We also do not want to expose this Kconfig symbol unless it makes sense 
+to expose it ? In fact, if the symbol is not available and someone 
+attempts to use it in Kconfig, they would get a warning, which should 
+provide a clue that they are doing something wrong ?
