@@ -4,51 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F29B8109448F
-	for <u-boot@archiver.kernel.org>; Sat, 21 Mar 2026 19:56:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30615109449C
+	for <u-boot@archiver.kernel.org>; Sat, 21 Mar 2026 20:55:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 199BE84011;
-	Sat, 21 Mar 2026 20:56:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 838F784035;
+	Sat, 21 Mar 2026 21:55:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="d4Pv8kS3";
+	dkim=pass (2048-bit key; secure) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="kAz9lp/f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DE3584013; Sat, 21 Mar 2026 20:52:46 +0100 (CET)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
+ id 8EF468404D; Sat, 21 Mar 2026 21:55:31 +0100 (CET)
+Received: from mx3.securetransport.de (mx3.securetransport.de
+ [IPv6:2a01:4f8:c0c:92be::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C997784006
- for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 20:52:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 48C7F84013
+ for <u-boot@lists.denx.de>; Sat, 21 Mar 2026 21:55:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
+ header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marex@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id C2B4F103CE9; Sat, 21 Mar 2026 20:52:40 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1774122761; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=jRuhiv+ufrDDhbcOk8X5i3ElTwKJbmUZjk/4/72SEG4=;
- b=d4Pv8kS3YAxQ4LhG5m3qmOa1Z1T4Z/zsX0owB8LetOPn8Kv1i6+WANTw0Q4HSO+mYBKXPk
- dxczIJcvWQj1CwBb3m9fhbzhk4PNKG5LVb1d2g/lM2/9V6R3Q2CHNREEPGdfXVnaaKLydt
- amCU+TrAXVXU2XTzQOD/qRukknQnSaiDb8HpnYZyDtdGdP0t50A34ogLzd7t4wI7kjgeEB
- eOG5uCyqRILwZClkUzGZ6PWzD1jD4zkHdUwV8+kbY0SYyodi+urXboEN7r36Xcx3vaeZur
- 5Oz+Any//tFmLNTHvjtTlyFUJ5p7wtZkUqKOnVAN/gQLhb9s6BpUCxWpEzA40A==
-From: Marek Vasut <marex@nabladev.com>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@nabladev.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3] binman: add CST backend selection for i.MX8M signing
-Date: Sat, 21 Mar 2026 20:52:23 +0100
-Message-ID: <20260321195238.174658-1-marex@nabladev.com>
-X-Mailer: git-send-email 2.53.0
+ spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
+ s=dhelectronicscom; t=1774126522;
+ bh=Lnpp65UIya6CoxcX+87FpnyVSVCz+jE15B+d80Qoe2M=;
+ h=From:To:CC:Subject:Date:References:In-Reply-To:From;
+ b=kAz9lp/f+IX8CHJKWFFptqbhEcv8qI/3X2kvkqBsxG5nChCBSY1ehp/Gfx/7IIvzN
+ FWas1BBTiQwjTZED/rN42s9H+VOGBYYClbmAbC9yvPIfSVSe01AxlDfVAyk1UsZIKp
+ nHIVebkIyU9KHUYDoI6C6l+XNCU0aH5opUYxB/UluUAaBHTLJhR9Uu12D8atoKpQ0o
+ ixdliXpdk8bYVHt3FEEZnbnHdaJcN7viNpNobXvghKDYEwMofU++lgcatXA+ZOMv1U
+ qqQpnVZogO81wo6IvsbyKOUkLlpI3aIoWcgHUV9FQWKX0nkRkl01OALi5TsefWsUHi
+ GUn3DeXKdCcGQ==
+X-secureTransport-forwarded: yes
+From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Complaints-To: abuse@cubewerk.de
+To: Marek Vasut <marex@nabladev.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+CC: Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan
+ <peng.fan@nxp.com>, Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini
+ <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
+Subject: RE: [PATCH] board: dhelectronics: imx: Use second Ethernet MAC also
+ from fuse
+Thread-Topic: [PATCH] board: dhelectronics: imx: Use second Ethernet MAC also
+ from fuse
+Thread-Index: AQHcuFTCAYeM+Dh5A0K4haKIts4CsrW3q5OAgAHGg1A=
+Date: Sat, 21 Mar 2026 20:55:19 +0000
+Message-ID: <b443e161b5db4abab8d8889135a345fa@dh-electronics.com>
+References: <20260320102918.4011-1-cniedermaier@dh-electronics.com>
+ <382f338c-020f-482d-80b8-5a39ad724843@nabladev.com>
+In-Reply-To: <382f338c-020f-482d-80b8-5a39ad724843@nabladev.com>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
-X-Mailman-Approved-At: Sat, 21 Mar 2026 20:56:32 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,132 +77,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for setting the CST backend, both via DT property and
-CST_BACKEND environment variable. The CST currently supports two
-backends, 'ssl' and 'pkcs11', with 'ssl' being the default when
-CST tool is invoked without any -b parameter. Keep 'ssl' backend
-as the default, but explicitly pass it via the '-b' parameter,
-unless the user selects 'pkcs11' via either method.
-
-Signed-off-by: Marek Vasut <marex@nabladev.com>
----
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
-V2: Fill in documentation for all used DT properties
-V3: Fill third copy of documentation into nxp_imx8mcst.py
----
- doc/imx/habv4/guides/mx8m_spl_secure_boot.txt | 30 ++++++++++++-------
- tools/binman/entries.rst                      |  7 +++++
- tools/binman/etype/nxp_imx8mcst.py            | 19 +++++++++++-
- 3 files changed, 44 insertions(+), 12 deletions(-)
-
-diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-index 1bea091344d..a3ebd397d82 100644
---- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-+++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-@@ -167,17 +167,25 @@ The nxp-imx8mcst etype is configurable using either DT properties or environment
- variables. The following DT properties and environment variables are supported.
- Note that environment variables override DT properties.
- 
--+--------------------+-----------+------------------------------------------------------------------+
--| DT property        | Variable  | Description                                                      |
--+====================+===========+==================================================================+
--| nxp,loader-address |           | SPL base address                                                 |
--+--------------------+-----------+------------------------------------------------------------------+
--| nxp,srk-table      | SRK_TABLE | full path to SRK_1_2_3_4_table.bin                               |
--+--------------------+-----------+------------------------------------------------------------------+
--| nxp,csf-crt        | CSF_KEY   | full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem |
--+--------------------+-----------+------------------------------------------------------------------+
--| nxp,img-crt        | IMG_KEY   | full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
--+--------------------+-----------+------------------------------------------------------------------+
-++--------------------+-------------+------------------------------------------------------------------+
-+| DT property        | Variable    | Description                                                      |
-++====================+=============+==================================================================+
-+| nxp,loader-address |             | SPL base address                                                 |
-++--------------------+-------------+------------------------------------------------------------------+
-+| nxp,srk-table      | SRK_TABLE   | full path to SRK_1_2_3_4_table.bin                               |
-++--------------------+-------------+------------------------------------------------------------------+
-+| nxp,csf-crt        | CSF_KEY     | full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem |
-++--------------------+-------------+------------------------------------------------------------------+
-+| nxp,img-crt        | IMG_KEY     | full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
-++--------------------+-------------+------------------------------------------------------------------+
-+| nxp,fast-auth      |             | enable fast authentication method                                |
-++--------------------+-------------+------------------------------------------------------------------+
-+| nxp,srk-crt        | SRK_KEY     | full path to the SRK Key SRK1_sha256_4096_65537_v3_ca_crt.pem    |
-++--------------------+-------------+------------------------------------------------------------------+
-+| nxp,unlock         |             | unlock CAAM in SPL                                               |
-++--------------------+-------------+------------------------------------------------------------------+
-+| nxp,cst-backend    | CST_BACKEND | CST tool backend, default is 'ssl', or selectable 'pkcs11'       |
-++--------------------+-------------+------------------------------------------------------------------+
- 
- Environment variables can be set as follows to point the build process
- to external key material:
-diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
-index 8922d6cd070..29bc778d0e5 100644
---- a/tools/binman/entries.rst
-+++ b/tools/binman/entries.rst
-@@ -1664,6 +1664,13 @@ Entry: nxp-imx8mcst: NXP i.MX8M CST .cfg file generator and cst invoker
- 
- Properties / Entry arguments:
-     - nxp,loader-address - loader address (SPL text base)
-+    - nxp,srk-table - full path to SRK_1_2_3_4_table.bin
-+    - nxp,csf-crt - full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem
-+    - nxp,img-crt - full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem
-+    - nxp,fast-auth - enable fast authentication method
-+    - nxp,srk-crt - full path to the SRK Key SRK1_sha256_4096_65537_v3_ca_crt.pem
-+    - nxp,unlock - unlock CAAM in SPL
-+    - nxp,cst-backend - CST tool backend, default is 'ssl', or selectable 'pkcs11'
- 
- 
- 
-diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
-index dd9f226b751..a10f61aa01f 100644
---- a/tools/binman/etype/nxp_imx8mcst.py
-+++ b/tools/binman/etype/nxp_imx8mcst.py
-@@ -65,6 +65,13 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
- 
-     Properties / Entry arguments:
-         - nxp,loader-address - loader address (SPL text base)
-+        - nxp,srk-table - full path to SRK_1_2_3_4_table.bin
-+        - nxp,csf-crt - full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem
-+        - nxp,img-crt - full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem
-+        - nxp,fast-auth - enable fast authentication method
-+        - nxp,srk-crt - full path to the SRK Key SRK1_sha256_4096_65537_v3_ca_crt.pem
-+        - nxp,unlock - unlock CAAM in SPL
-+        - nxp,cst-backend - CST tool backend, default is 'ssl', or selectable 'pkcs11'
-     """
- 
-     def __init__(self, section, etype, node):
-@@ -90,6 +97,10 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
-                 'SRK_KEY', fdt_util.GetString(self._node, 'nxp,srk-crt',
-                                               f'SRK1_{KEY_NAME}.pem'))
- 
-+        self.backend = os.getenv(
-+            'CST_BACKEND', fdt_util.GetString(self._node, 'nxp,cst-backend',
-+                                              'ssl'))
-+
-         self.unlock = fdt_util.GetBool(self._node, 'nxp,unlock')
-         self.ReadEntries()
- 
-@@ -161,8 +172,14 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
-         with open(cfg_fname, 'w') as cfgf:
-             config.write(cfgf)
- 
-+        # SSL is the default backend, PKCS11 backend is optional
-+        if self.backend == "pkcs11":
-+            cst_backend = "pkcs11"
-+        else:
-+            cst_backend = "ssl"
-+
-         output_fname = tools.get_output_filename(f'nxp.csf-output-blob.{uniq}')
--        args = ['-i', cfg_fname, '-o', output_fname]
-+        args = ['-i', cfg_fname, '-o', output_fname, '-b', cst_backend]
-         if self.cst.run_cmd(*args) is not None:
-             outdata = tools.read_file(output_fname)
-             # fixme: 0x2000 should be CONFIG_CSF_SIZE
--- 
-2.53.0
-
+RnJvbTogTWFyZWsgVmFzdXQgPG1hcmV4QG5hYmxhZGV2LmNvbT4NClNlbnQ6IEZyaWRheSwgTWFy
+Y2ggMjAsIDIwMjYgNzoyMiBQTQ0KPiBPbiAzLzIwLzI2IDExOjI5IEFNLCBDaHJpc3RvcGggTmll
+ZGVybWFpZXIgd3JvdGU6DQo+IA0KPiBbLi4uXQ0KPiANCj4+ICsrKyBiL2JvYXJkL2RoZWxlY3Ry
+b25pY3MvZGhfaW14OG1wL2lteDhtcF9kaGNvbV9wZGsyLmMNCj4+IEBAIC01MCw3ICs1MCw3IEBA
+IHN0YXRpYyBpbnQgZGhfaW14OF9zZXR1cF9ldGhhZGRyKHN0cnVjdCBlZXByb21faWRfcGFnZSAq
+ZWlwKQ0KPj4gICAgICAgaWYgKGRoX2dldF9tYWNfaXNfZW5hYmxlZCgiZXRoZXJuZXQwIikpDQo+
+PiAgICAgICAgICAgICAgIHJldHVybiAwOw0KPj4NCj4+IC0gICAgIGlmICghZGhfaW14X2dldF9t
+YWNfZnJvbV9mdXNlKGVuZXRhZGRyKSkNCj4+ICsgICAgIGlmICghZGhfaW14X2dldF9tYWNfZnJv
+bV9mdXNlKDAsIGVuZXRhZGRyKSkNCj4+ICAgICAgICAgICAgICAgZ290byBvdXQ7DQo+Pg0KPj4g
+ICAgICAgaWYgKCFkaF9nZXRfdmFsdWVfZnJvbV9lZXByb21fYnVmZmVyKERIX01BQzAsIGVuZXRh
+ZGRyLCBzaXplb2YoZW5ldGFkZHIpLCBlaXApKQ0KPj4gQEAgLTc1LDggKzc1LDggQEAgc3RhdGlj
+IGludCBkaF9pbXg4X3NldHVwX2V0aDFhZGRyKHN0cnVjdCBlZXByb21faWRfcGFnZSAqZWlwKQ0K
+Pj4gICAgICAgaWYgKGRoX2dldF9tYWNfaXNfZW5hYmxlZCgiZXRoZXJuZXQxIikpDQo+PiAgICAg
+ICAgICAgICAgIHJldHVybiAwOw0KPj4NCj4+IC0gICAgIGlmICghZGhfaW14X2dldF9tYWNfZnJv
+bV9mdXNlKGVuZXRhZGRyKSkNCj4+IC0gICAgICAgICAgICAgZ290byBpbmNyZW1lbnRfb3V0Ow0K
+Pj4gKyAgICAgaWYgKCFkaF9pbXhfZ2V0X21hY19mcm9tX2Z1c2UoMSwgZW5ldGFkZHIpKQ0KPj4g
+KyAgICAgICAgICAgICBnb3RvIG91dDsNCj4gDQo+IFRoZSBvcmRlcmluZyBpbiB0aGlzIGFuZCBu
+ZXh0IGh1bmsgc2VlbXMgYm9ndXMuDQo+IA0KPiBJZiByZWFkIGZyb20gdGhlIChuZXcvc2Vjb25k
+KSBmdXNlIHNsb3QgMSBmYWlscywgdGhlIGNvZGUgc2hvdWxkIGF0dGVtcHQNCj4gdG8gdXNlIGZ1
+c2Ugc2xvdCAwIGNvbnRlbnQgaW5jcmVtZW50ZWQgYnkgMSwganVzdCBsaWtlIGl0IGRpZCBiZWZv
+cmUgLi4uDQo+IA0KPiAiDQo+IGlmICghZGhfaW14X2dldF9tYWNfZnJvbV9mdXNlKDEsIGVuZXRh
+ZGRyKSkNCj4gICAgZ290byBvdXQ7DQo+IGlmICghZGhfaW14X2dldF9tYWNfZnJvbV9mdXNlKDAs
+IGVuZXRhZGRyKSkNCj4gICAgZ290byBpbmNyZW1lbnRfb3V0Ow0KPiAiDQo+IA0KPj4gICAgICAg
+aWYgKCFkaF9nZXRfdmFsdWVfZnJvbV9lZXByb21fYnVmZmVyKERIX01BQzEsIGVuZXRhZGRyLCBz
+aXplb2YoZW5ldGFkZHIpLCBlaXApKQ0KPj4gICAgICAgICAgICAgICBnb3RvIG91dDsNCj4+IEBA
+IC05Miw2ICs5MiwxMyBAQCBzdGF0aWMgaW50IGRoX2lteDhfc2V0dXBfZXRoMWFkZHIoc3RydWN0
+IGVlcHJvbV9pZF9wYWdlICplaXApDQo+PiAgICAgICBpZiAoIWRoX2dldF9tYWNfZnJvbV9lZXBy
+b20oZW5ldGFkZHIsICJlZXByb20wIikpDQo+PiAgICAgICAgICAgICAgIGdvdG8gaW5jcmVtZW50
+X291dDsNCj4+DQo+PiArICAgICAvKg0KPj4gKyAgICAgICogSWYgb25seSB0aGUgZmlyc3QgTUFD
+IGFkZHJlc3MgaXMgZnVzZWQgYnV0IG5vdCB0aGUgc2Vjb25kLCB1c2UgdGhlDQo+PiArICAgICAg
+KiBmdXNlZCBNQUMgYWRkcmVzcyBpbmNyZW1lbnRlZCBieSBvbmUsIGZvciB0aGUgc2Vjb25kIE1B
+QyBhZGRyZXNzLg0KPj4gKyAgICAgICovDQo+PiArICAgICBpZiAoIWRoX2lteF9nZXRfbWFjX2Zy
+b21fZnVzZSgwLCBlbmV0YWRkcikpDQo+PiArICAgICAgICAgICAgIGdvdG8gaW5jcmVtZW50X291
+dDsNCj4gLi4uIHRoaXMgcGFydCB3b3VsZCB0aGVuIGJlIHVubmVjZXNzYXJ5Lg0KDQpUaGF0J3Mg
+aG93IGl0J3Mgc3VwcG9zZWQgdG8gYmUuIFRoZSB0d28gTUFDIGFkZHJlc3NlcyBzaG91bGQgYmUg
+YXNzaWduZWQgdGhlIHNhbWUNCnByaW9yaXR5IG9yZGVyIGFuZCBiZSBhcyBpbmRlcGVuZGVudCBv
+ZiBlYWNoIG90aGVyIGFzIHBvc3NpYmxlIHRvIGF2b2lkIGNvbmZ1c2lvbi4NClNvdXJjZXMgYXNz
+b2NpYXRlZCB3aXRoIHRoZSBzZWNvbmQgTUFDIGFkZHJlc3MgdGhlcmVmb3JlIGhhdmUgYSBoaWdo
+ZXIgcHJpb3JpdHkNCnRoYW4gdGhvc2UgYXNzb2NpYXRlZCB3aXRoIHRoZSBmaXJzdCBNQUMgYWRk
+cmVzcyBpbiB0aGUgZnVzZXMuIFVzaW5nIHRoZSBmdXNlIG9mDQp0aGUgZmlyc3QgTUFDIGFkZHJl
+c3MgaW5jcmVtZW50ZWQgYnkgb25lIGFzIGEgZmFsbGJhY2sgaXMgdGhlIGxhc3QgcmVzb3J0IGlm
+IG5vDQphZGRyZXNzIGlzIGZvdW5kIGZvciB0aGUgc2Vjb25kIE1BQyBhZGRyZXNzIGFmdGVyIHRo
+ZSBwcmlvcml0eSBvcmRlciBoYXMgYmVlbg0KY2hlY2tlZC4NCg0KDQpSZWdhcmRzDQpDaHJpc3Rv
+cGgNCg==
