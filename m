@@ -4,72 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0892DD58CA3
-	for <u-boot@archiver.kernel.org>; Sun, 22 Mar 2026 21:31:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AC6AD58CA3
+	for <u-boot@archiver.kernel.org>; Sun, 22 Mar 2026 21:40:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CE1A83D71;
-	Sun, 22 Mar 2026 22:31:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 43BF483BE1;
+	Sun, 22 Mar 2026 22:40:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="jLmg6GEe";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="PqgvxyuI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5ECD683FBC; Sun, 22 Mar 2026 22:31:01 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id D713283FED; Sun, 22 Mar 2026 22:40:22 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 259FF83BE1;
- Sun, 22 Mar 2026 22:30:59 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4ff8cK2pJCz9tWy;
- Sun, 22 Mar 2026 22:30:57 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1774215057;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=gMp3U4cPP95xTZwfYvepU3pHQCJzK43tV0pUH+DeH6Y=;
- b=jLmg6GEe1EB7YsdIzp4mYmqZhf2Xpei6zeykIC1bD8bga8iT2nrH1BIHPE8U5mkYqAgITH
- htQKp6Q4tMzN9QLMK5bTf+q+A7h/E8hjKWrAmzvUI7opm1MovxJ5FQxyMnmMz8M1tkuUWk
- pP1lX3WbwW+/eQLe8yVIUe4YHtGVwLFvBil2LXauL6jcLFlLmHSnjIbv8y9Z7B7ZIGGjFM
- pmsKLIf2XgozTdQ9w0h2qQ0Dpa3d+K74qZUi+IvmTUURgB1jUcB5tdD6NHtcj0Kq9tt73W
- hpUd/WFJG1lOOg+9oOu8oRkVbhgiASxpPb4jKU8PBsVMHIElXmdFPbm9Dsq/IA==
-Message-ID: <1e74f277-dedf-4fa1-810d-63f3d517a8a0@mailbox.org>
-Date: Sun, 22 Mar 2026 22:30:51 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 4F55A82BF2
+ for <u-boot@lists.denx.de>; Sun, 22 Mar 2026 22:40:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=8acd=BX=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1774215619;
+ bh=tpCVLVgL4aNwZ2D/z+Hu7xvTXjRZg3qMNWTudxLzp2g=;
+ b=PqgvxyuIlJUJsPed50jqmYh4ZocYLzPd2KtofNYaS2IxORBNG7kCRRDP1kR/YL8t4J7ABdzgI
+ Ggm0naiJuF7M54CN7s+cPgHsUkpOlOZE2H01h0QXP1XXmebJC8pKwgpqB8etF7KvGU3N6MJG3VC
+ eSfz74dCFWE3iirBvlb7s17SdNcM69PivwHaODM/BlJQHn2SyZ764P5x5pbd1zVpTzC3drkp63f
+ t3XeEuqwEXQCUOUgwLtbZ3HJHsqouaCVvd3ZAMDeYoijmmzWFB6TP+Puqdq5EY7/iFuss6bnWUq
+ kTu1NqVzolGzeWho24vY2Jd3yEIM5s4g6fjKo5MHHcuw==
+X-Forward-Email-ID: 69c061be01dbcaee716a1a0e
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.6.53
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Stefan Roese <stefan.roese@mailbox.org>,
+	Tom Rini <trini@konsulko.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>,
+	u-boot@lists.denx.de
+Subject: [PATCH] watchdog: designware: Fix probe when clk_enable return ENOSYS
+Date: Sun, 22 Mar 2026 21:39:55 +0000
+Message-ID: <20260322213955.1348690-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Subject: Re: [PATCH] lmb: Reinstate access to memory above ram_top
-To: Gary Guo <gary@garyguo.net>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Cc: Matthias Brugger <mbrugger@suse.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Holger Brunck <holger.brunck@hitachienergy.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Mark Kettenis <kettenis@openbsd.org>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, U-Boot <u-boot-bounces@lists.denx.de>
-References: <20260127234856.1503030-1-marek.vasut+renesas@mailbox.org>
- <177343529761.1131472.9417054395876652663.b4-ty@konsulko.com>
- <DH9MF45X89KK.1CV4WUVTCTUO5@garyguo.net>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <DH9MF45X89KK.1CV4WUVTCTUO5@garyguo.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 96n31b6ttr3dnibmqg3r8n7xgy3ibs44
-X-MBO-RS-ID: fe8fc00e27622cea55c
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,76 +69,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/22/26 10:15 PM, Gary Guo wrote:
-> On Fri Mar 13, 2026 at 8:54 PM GMT, Tom Rini wrote:
->> On Wed, 28 Jan 2026 00:48:40 +0100, Marek Vasut wrote:
->>
->>> Revert commit eb052cbb896f ("lmb: add and reserve memory above ram_top")
->>> and commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from
->>> same bank"). These are based on incorrect premise of the first commit, that
->>> "U-Boot does not use memory above ram_top". While U-Boot itself indeed does
->>> not and should not use memory above ram_top, user can perfectly well use
->>> that memory from the U-Boot shell, for example to load content in there.
->>>
->>> [...]
->>
->> Applied to u-boot/next, thanks!
->>
->> [1/1] lmb: Reinstate access to memory above ram_top
->>        commit: a3075db94d49f415658bf7e961e1eae90d9abc33
-> 
-> (Cc RPI maintainers)
-> 
-> Hi Tom,
-> 
-> I'm testing out latest u-boot/next on my Raspberry Pi 5 8GB, and I am running
-> into issues caused by this patch.
-> 
-> I have EFI enabled, and efi_allocate_pages will call into lmb to allocate pages
-> and start accessing them. However on RPI5, only 1G is mapped, so I got hit with
-> an "Synchronous Abort" triggered at address 0x1_ffff_f000.
-> 
-> Now, that is easy to fix with the following diff:
-> 
-> diff --git a/arch/arm/mach-bcm283x/init.c b/arch/arm/mach-bcm283x/init.c
-> index 7a1de22e0aef..1db2e37c44f4 100644
-> --- a/arch/arm/mach-bcm283x/init.c
-> +++ b/arch/arm/mach-bcm283x/init.c
-> @@ -69,10 +69,10 @@ static struct mm_region bcm2711_mem_map[MEM_MAP_MAX_ENTRIES] = {
->   
->   static struct mm_region bcm2712_mem_map[MEM_MAP_MAX_ENTRIES] = {
->   	{
-> -		/* First 1GB of DRAM */
-> -		.virt = 0x00000000UL,
-> -		.phys = 0x00000000UL,
-> -		.size = 0x40000000UL,
-> +		/* 16GB of DRAM max */
-> +		.virt = 0x000000000UL,
-> +		.phys = 0x000000000UL,
-> +		.size = 0x400000000UL,
->   		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
->   			 PTE_BLOCK_INNER_SHARE
->   	}, {
-> 
-> and that indeed makes my system go past the init. However, I found that while it
-> is fine to boot into systemd-boot, systemd-boot cannot boot into kernel. After
-> some investigation, it turns out that efi_load_image_from_file uses
-> efi_allocate_pages to allocate pages, and then feed this to f->read. This all
-> eventually trickles down to the MMC driver, and MMC is doing a 32-bit DMA and it
-> fails to write to the buffer allocated (which is above 4G).
-> 
-> This could be all fixed by having dma_map_single use a bounce buffer and copy
-> back the contents on unmap similar to kernel's swiotlb, but that's going to be
-> some major work.
+Rockchip SoCs typically reset with all (or most) clocks ungated. Because
+of this, U-Boot clock drivers for Rockchip typically do not implement
+the optional clk-uclass enable/disable ops.
 
-The DMA32 allocator is on my list of things to fix.
+Normal driver model behavior is to return -ENOSYS when an uclass ops
+is not implemented.
 
-> In the mean time, I think this patch should be reverted. I can confirm that my
-> system boots fine with this reverted.
-Is your malloc area by any chance above the 4 GiB boundary ? Or how come 
-does EFI allocate pages from above 4 GiB range? It should not be doing 
-that and that is what should be fixed, at least until the DMA32 
-allocator is in place.
+Ignore -ENOSYS to allow the designware watchdog driver to be probed on
+platforms that do not implement the clk-uclass enable/disable ops, e.g.
+Rockchip RK3308.
 
-Please keep in mind, that revering this patch breaks other use cases, 
-like loading into the DRAM above 4 GiB.
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ drivers/watchdog/designware_wdt.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/watchdog/designware_wdt.c b/drivers/watchdog/designware_wdt.c
+index bd9d7105366..91228de5e8e 100644
+--- a/drivers/watchdog/designware_wdt.c
++++ b/drivers/watchdog/designware_wdt.c
+@@ -122,7 +122,7 @@ static int designware_wdt_probe(struct udevice *dev)
+ 		return ret;
+ 
+ 	ret = clk_enable(&clk);
+-	if (ret)
++	if (ret && ret != -ENOSYS)
+ 		return ret;
+ 
+ 	priv->clk_khz = clk_get_rate(&clk) / 1000;
+-- 
+2.53.0
+
