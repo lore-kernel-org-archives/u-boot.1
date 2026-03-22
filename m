@@ -4,98 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 031E7FC72CB
-	for <u-boot@archiver.kernel.org>; Sun, 22 Mar 2026 16:09:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAD00FC72CB
+	for <u-boot@archiver.kernel.org>; Sun, 22 Mar 2026 18:41:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16287840AA;
-	Sun, 22 Mar 2026 17:09:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E22EF84090;
+	Sun, 22 Mar 2026 19:41:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EW6sNKpC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WiLcl4Cb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7EB9840AE; Sun, 22 Mar 2026 17:09:37 +0100 (CET)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id 01F0F840AA; Sun, 22 Mar 2026 15:37:23 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3055284082
- for <u-boot@lists.denx.de>; Sun, 22 Mar 2026 17:09:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C7D884082
+ for <u-boot@lists.denx.de>; Sun, 22 Mar 2026 15:37:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ryan.persee@gmail.com
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-59dea72099eso2673025e87.0
- for <u-boot@lists.denx.de>; Sun, 22 Mar 2026 09:09:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774195774; cv=none;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-b9825ba7e8dso396387966b.3
+ for <u-boot@lists.denx.de>; Sun, 22 Mar 2026 07:37:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774190240; cv=none;
  d=google.com; s=arc-20240605;
- b=SW3/OPr/0xtzGK1vHMx6ynVwp+Fd0+n3WN1wxoP30VAbGe/WIKkJUJSOnx2s+bW2vw
- 0s77p4nU+WbbEHn3LowUD2sXNUTstU4cTJIWTW8I5rKOJZ4MOO5V1Gt7dtUtt0D8CQXh
- dulMyl/8iB837//3o+Xmb6J6oJ8LOFkb4xhauIbzlSYZssrqmHIIdAJaNkShQp5mTXL0
- Tr4M3JfC60fBP4dg4lW6JyNNHsC1Hno5cM+TZMcn813OFNpbCwd52+S9YHs4VuQ6hYR6
- dFzRgXOeAcRXlBJyJxUHn5Abm26K+V1b2MSc8iIGsnx/XgR65UMuA2kendERbBk1bcDk
- ETtw==
+ b=Mk1y3EMLkge7pA1PLPX/8ZCA4do/dqaRivFWGOSaQYBHx5rvSjXACFr/AI0mzbfRKB
+ Ox9+XHxXicFLuqRpQBjvxsjrMC2Br8P+v/CW90LtgVjQZI9f0h4T5TxY+UcIudMVW1Il
+ NXBsrj83sgx9ppA2DW/OEBQGd2DzLW9pdylhfgHrImYXR1WMvkwCmV4TAeUUieUfXMjh
+ Cz9vKbfRPqwajJuyfZHFXsziAleRRMWO1KPxFB2E8twEBCNou3TRxLY4J87YB/GAG72j
+ j5Ftgif2jgzZH7TppaBeSioA3OpQ0YuxnuqCLBRH8JaE+6ZSI+gfeYdM6iAswup5Tixj
+ syoA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :dkim-signature;
- bh=2KadKMfZXy+81n+QVuCpb7yLN6/7QefY8fZdTL/f2Zw=;
- fh=ea3Lb1kmqTyoSSOGd3r79PdCdfQHXBjS15GzGXd6hwE=;
- b=RmNWcmERO4AqWmmRsiu5ONT8n3kJHx5rPMTq0yTNGVe5/kSjWe3zUpK7K1mCOIU51u
- l1IpE/vo43VOZBcFh2bDBNFD6rZuOR6xLvRiF/+aTwsWoOq2O90+0GGRnkqlbM1Vx8yY
- CLyoCZAg1XbvH3ihJInWfOTRgz9NMk5umd5oWLUtMELHM3lQ/wu/Gcb2DMz7Q1eitdYi
- O5RCxamcORxDQsvUOJfrvDBH2cJokd7X3txlUv+JxO741MoQI0z/LKXJajrEkMYfaz5L
- PgxVv8RxRSNKgdJKZMATmu9tJLXn4SusG0c8boAbEeJ6l9yaaU+PX6RtGG4pWELdRPRr
- OFKg==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=MHg4GweYtLm0NcAk25X9agBHb2n1L7sTgfvhd5yGtRY=;
+ fh=Mwjd0rnSvpf0+LVRVKefCJ+wk1xopgZF6pU+T4cdJSk=;
+ b=c2FG1Px8RY7RGxk+7mPnVzu3vz4/PMSEdx4bNnCvUgsyVp3TuxD0yXJpJYDUNN5FKf
+ t60XUcJmpellcNsMdfSEBYI8EWfB28ox+aX3ksQ9I/9HcGRmWOZ5LeTJ509mGEcKEDZd
+ kWnExJoyA6Qw47n7ekJueB5BeNG8F2ygU4x20+Jm2FzPbmRQ9uAfXAw8DfIp/a+CIqn+
+ Kh5K6CORW/NMf61Yn+4RU2j1XoA8lwUPLdbu5o5Yb2k/A1y45sS9SHGqrFSwcOozgojT
+ TfbKljtttePPVliQihklTLpOjlpugSJPSA8BXDwfmWImvf/ibJs46ATF3SyU104R40FY
+ dF/w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1774195774; x=1774800574; darn=lists.denx.de;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :from:to:cc:subject:date:message-id:reply-to;
- bh=2KadKMfZXy+81n+QVuCpb7yLN6/7QefY8fZdTL/f2Zw=;
- b=EW6sNKpCcVwFpK/gEY5fuD/CC0Jd+jIOeLWNZ5aX/fKnFEoTPGeMjhJVRRikSyPbmN
- AWtQz0Br6BU4cFmAgOoUaYHoL5GuoyziS7JuKeAAXAcM3KRQ5PW9O1BBvrGFphUtnvXu
- kDDpau4tbuFAAdvuRtF3SBOxYRHHQEwd5t9pX8R3J/JsVawOddcR4Qbo/5POmej+wI54
- 4tg5s/D5RmE+1GMrJl+64gU85r4a6KQ7B6EPDN0CCXR0R7oQZmTKYBiVoUzbt3GBjpQS
- Iqx5EYGTyFqIGKA1SGPKnW22IYZQV4w2fHXnbnpH0c9Xt3YL7Ueffl9VORu6lbqY6cbY
- hagw==
+ d=chromium.org; s=google; t=1774190240; x=1774795040; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MHg4GweYtLm0NcAk25X9agBHb2n1L7sTgfvhd5yGtRY=;
+ b=WiLcl4CbRT17jcA9gXOX/B2A87hWu+OjxpwPlNI+/V46UWkIySYXlBklfLgc0ltxGZ
+ 5+lcqp+S0HU33Vn+ccJzFiTzy25MABDsjtP50rIMs9pqAouHpOl+WcTEBJA11QXjrVJk
+ x+s3dV5+WPVW1G6FI1EzPn7WivMDGim/qgr64=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774195774; x=1774800574;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2KadKMfZXy+81n+QVuCpb7yLN6/7QefY8fZdTL/f2Zw=;
- b=VXQre/W4cKQNNjHYsKtB0kk4A1+X99eJWRcvr+s9or9ljRgkV1KD4ADZ2Pd0vYAPeD
- RUfRx/2q0O8yXTasjeDTHFzgo1h177te4pHnz4ghL+y3bGTjrNoaO85vO0+5h8PAyk5v
- iyXftPJsEmkO99R+Bc65C50O20V88HSfVS3gDvoIGeecQvDClVx427Yi4C03ktKR8kb5
- 6yv1vuOvBFkGapazrScoaQSq0ihE+9bRYkL20v13ADUoDdZBRqnlG/eFthHRlCyZtYOq
- 0gILpQCm7Hpq1fOEL1ca+TwM3xswT6zN2oHqxrPmrhAmqHJSLPmwMUlN1qhzfE0aws5B
- Gsow==
-X-Gm-Message-State: AOJu0YzLWZiiA9wO8cdYeM93W+GhkqoG/Eqzhzaw1jC2P3gxZ8RxnDrK
- G8QdfW0RCBkBKdbNO48322lKbTddfpw2SXyEwwvM2Q8+kX+2wfn9XxtOwUbamkIRVkWQyPDOI9Z
- TjgwUQggnOFxZ4vhRLdUkN1qNZ0iUV7tw6Q==
-X-Gm-Gg: ATEYQzyPIAukN+uuQYZGnmzxiS5nASM+h+Qkd10MJPiFem3wqLBoMKhLjVCyU0OnIjf
- enxaZVWn6cubX9hs8CeDvKMPR/oCrMa9WgXPMhX21ppuM34HjmXaB/BHmjdN3bswO0fX/9DTSs4
- CHIOs1WoIdDe3zD5Va9tFImpP5J2rOIGjh5fvJKwG9HR5epZA2wSX3O6hYHU+mUQk4dNLqB9g0s
- fnFGLjaIk4snFVMje+E1m7Gsi26peo8zmGFX/ydRz0g5G1Ngeg7XYKG2GMq3if+5I8xE7YY/oCi
- Ia5/6P4z5oW/y11cyZEjJZMaAdRR77V84Iw=
-X-Received: by 2002:a05:6512:3e18:b0:5a1:572f:c45 with SMTP id
- 2adb3069b0e04-5a285b046a2mr3155322e87.12.1774195773478; Sun, 22 Mar 2026
- 09:09:33 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1774190240; x=1774795040;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=MHg4GweYtLm0NcAk25X9agBHb2n1L7sTgfvhd5yGtRY=;
+ b=sMwnfXDddKJrn+UU5fZIqE9GwnPRzLfWBunNDiYNyBUU5rcs4r6yMbalLGQ6YQIxJz
+ ePoXN/MDUC3utkxI7ghX7mIoqsZsz0+CEjQ0DCIJSSIMflcuTV2OPXQyrE3QbuTXXi4G
+ TXjHtNnqjZ/qdkK3XcsWll6Lif76kWtUCitwTIp6TNT8xjOK3NZwQE9pllv2gPvS0pJT
+ 5K6JG3F1ucpsl1J5Sqq4xesiZ46wwJk0Epp0Py8st8+HQytr9cJvDirmbeOdamizcY9P
+ lPsh8Nsr1uNye56m4vIfS6m2SAQumTwAc2B2q9ROgdd343b5W/SFlbVvi/e2iQNzw/1C
+ KLNQ==
+X-Gm-Message-State: AOJu0YzJb/8Shjkdf9Ks9N32OYuojpi1DW99EpKADXMIn4ZN3ZnVuLUw
+ TzMJVgLCGVUntHMuZVHVZ+jRTaFCjiWdldIZFQ/zDxQFR0QqpJem2wff9i5tUu0mT0/BEq0io2A
+ gPPYkdhSbOHdKtKw2KelPpGhpevtiHf4ZfJ9iuRj1
+X-Gm-Gg: ATEYQzwlwjLkrGVKQl3YgRmk9AG8X1nUeagamwIbGI7mNwrWgo1pIzX2yKD5m0R1quJ
+ phyFC2vB4yy5wlQkOKPuHWiUZT1Sni8jLPZM/C7C8gSRw6SfKMcFfDm2HkP/osJ7PrUPiz8IjFf
+ OizK+Shvg2Pv70mtYIj+euweiE+9U4lM2N3tRkb6sh7OVJvv3886AuNCVBjfIkIosw1s3eidSE6
+ whH9jNoAg7/BGwfzJjY+oA1Rf7eciMen/I/R3rYesttqjxeUrHPodx4r77VQGmVIEy7Mmfpah2J
+ 6ylWh6I=
+X-Received: by 2002:a17:906:b382:b0:b96:ed21:f46f with SMTP id
+ a640c23a62f3a-b982f284cefmr394732766b.14.1774190239558; Sun, 22 Mar 2026
+ 07:37:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <CANRoWwhdatirL6V=xptv-ZYW_fLqYc+QzUgktGTTc187nHRgpg@mail.gmail.com>
-In-Reply-To: <CANRoWwhdatirL6V=xptv-ZYW_fLqYc+QzUgktGTTc187nHRgpg@mail.gmail.com>
-From: =?UTF-8?B?UnlhbiBQZXJzw6ll?= <ryan.persee@gmail.com>
-Date: Sun, 22 Mar 2026 17:09:24 +0100
-X-Gm-Features: AaiRm53CNwj0PF29zZxHFA5uRsHI0mHNZyfvMX2jTk3ZLC-P4VnJIOUmgPlQHf8
-Message-ID: <CANRoWwjZeMXpOaDw-CCw-24mPCGEo6Y45VeHrgrx_KKeJiPxXg@mail.gmail.com>
-Subject: [HELP needed] bootstd EFI bootmeth over the network
-To: u-boot@lists.denx.de
+References: <20260319213551.267031-1-sjg@chromium.org>
+ <CAPVz0n0DYDPcT7ZDLwXz0pUFc04R-X1C3GROpmSEp1z=xrA7Vg@mail.gmail.com>
+In-Reply-To: <CAPVz0n0DYDPcT7ZDLwXz0pUFc04R-X1C3GROpmSEp1z=xrA7Vg@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 22 Mar 2026 08:37:08 -0600
+X-Gm-Features: AaiRm50ZyqK_eNkqODMmbJ02CWIH5Yz-kDLQWwzYvxyyh6puRhxIhiGdD1epXRo
+Message-ID: <CAFLszTiZYiQgaspCutyQeZy+Tok9scLp-rG9_Sdk8XirUinOSA@mail.gmail.com>
+Subject: Re: [RFC PATCH 00/15] RFC: dm: Add uclass adjunct support
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de, Alice Guo <alice.guo@nxp.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
+ Brian Sune <briansune@gmail.com>, Dinesh Maniyam <dinesh.maniyam@altera.com>, 
+ Fabio Estevam <festevam@gmail.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ George McCollister <george.mccollister@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Jim Liu <JJLIU0@nuvoton.com>, Kever Yang <kever.yang@rock-chips.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
+ Martin Schwan <m.schwan@phytec.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
+ Philip Molloy <philip.molloy@analog.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Rasmus Villemoes <ravi@prevas.dk>, Ryan Chen <ryan_chen@aspeedtech.com>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Stanley Chu <yschu@nuvoton.com>, Stefan Bosch <stefan_b@posteo.net>, 
+ Sughosh Ganu <sughosh.ganu@arm.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, Yao Zi <me@ziyao.cc>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-Mailman-Approved-At: Sun, 22 Mar 2026 19:41:11 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,251 +139,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello!
+Hi Svyatoslav,
 
-I'm a bit stuck on this. Does anyone have any idea what I might be doing
-wrong? Any suggestions on how to make it work would be really appreciated!
-
-Thanks.
-
-Le lun. 9 mars 2026, 22:45, Ryan Pers=C3=A9e <ryan.persee@gmail.com> a =C3=
-=A9crit :
-
-> Hello,
+On Fri, 20 Mar 2026 at 02:01, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
 >
-> As the title says, I'm trying to get u-boot to discover and boot an EFI
-> application (iPXE) over the network with DHCP+TFTP.
-> I can get the EFI application to start if I run commands (bootflow scan +
-> bootefi) manually, but after reading the documentation, I expected u-boot
-> to automatically register a bootflow after the scan, and run it
-> automatically.
+> =D1=87=D1=82, 19 =D0=B1=D0=B5=D1=80. 2026=E2=80=AF=D1=80. =D0=BE 23:36 Si=
+mon Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
+> >
+> > [Note: this is marked RFC as I am still not sure that this is the best
+> > approach. But this is my third redesign so I think it makes sense to ge=
+t
+> > some feedback before trying to refine it further]
+> >
 >
-> ## Environment
+> Hello Simon!
 >
-> - U-Boot version: U-Boot 2026.01 (compiled from sources)
-> - Target: qemu_arm64
-> - EFI-related bootmeths present (from `bootmeth list`):
->   ```text
->   =3D> bootmeth list
->   Order  Seq  Name                Description
->   -----  ---  ------------------  ------------------
->       0    0  extlinux            Extlinux boot from a block device
->       1    1  script              Script boot from a block device
->    glob    2  efi_mgr             EFI bootmgr flow
->       3    3  efi                 EFI boot from an .efi file
->       4    4  qfw                 QEMU boot using firmware interface
->       5    5  pxe                 PXE boot from a network device
->    glob    6  vbe_simple          VBE simple
->   -----  ---  ------------------  ------------------
->   (7 bootmeths)
->   ```
-> - To narrow down the issue, I restricted bootmeths to only the EFI loader=
-:
->   ```text
->   =3D> bootmeth order efi
->   =3D> bootmeth list
->   Order  Seq  Name                Description
->   -----  ---  ------------------  ------------------
->       0    3  efi                 EFI boot from an .efi file
->   -----  ---  ------------------  ------------------
->   (1 bootmeth)
->   ```
+> With all do respect how this change improves current situation? From
+> what I can see introducing multi-uclass will bring only chaos and
+> confusion.
 >
-> ## Network/TFTP setup
+> > U-Boot's driver model requires each device to belong to exactly one
+> > uclass. Multi-function hardware must work around this by creating
+> > child devices in different uclasses via device_bind_driver_to_node(),
+> > with a NOP parent device.
 >
-> - DHCP/TFTP server: `dnsmasq` on the host
-> - For ARM64 EFI clients (DHCP option 93 =3D 11), dnsmasq returns the
-> bootfile `arm64-efi/snp.efi`:
->   ```ini
->   dhcp-match=3Dset:arm64efi,option:client-arch,11
->   enable-tftp
->   tftp-root=3D/var/lib/tftpboot
+> Example you are targeting behaves as it should. MFD can have a
+> multiple cell linked to the parent node and/or its subnodes, this is
+> not a workaround, this is how Linux MFD operate too. And a parent may
+> not be a NOP device, it may be a core providing access or misc
+> communication functions (like PMICs do).
 >
->   dhcp-boot=3Dtag:arm64efi,arm64-efi/snp.efi
->   ```
-> - File on disk:
->   ```bash
->   $ file /var/lib/tftpboot/arm64-efi/snp.efi
->   /var/lib/tftpboot/arm64-efi/snp.efi: PE32+ executable for EFI
-> (application), ARM64, 6 sections
->   ```
+> >
+> > This is quite common: at least 8 PMIC drivers bind sysreset children,
+> > every Qualcomm GCC driver (15+ platforms) does this and several PHY
+> > drivers bind clock children.
+> >
+> > This series adds uclass adjuncts, which allow a device to register
+> > in additional uclasses without creating child devices. Each adjunct
+> > carries its own ops pointer, per-device uclass private/platform
+> > data, and sequence number.
+> >
+> > With this series, uclass lookup and iteration functions include
+> > adjunct registrations alongside primary devices. The
+> > uclass_foreach_dev() iterator walks all entries in the uclass,
+> > including adjunct ones. Iterators that use a struct udevice * to
+> > iterate (uclass_find_first_device() etc.) only see primary devices,
+> > since they navigate via the embedded primary ucm.
+> >
+> > A new ucm_ iterator API uses struct uclass_member * as the cursor,
+> > enabling adjunct-aware iteration and lookup. It provides find, probe,
+> > check, drvdata, seq and ofnode variants. uclass_foreach_dev_probe()
+> > uses this internally so that it includes adjuncts.
+> >
 >
-> So the TFTP payload appears to be a valid ARM64 EFI application.
+> It seems to be overcomplication. ATM cells can be bound to the parent
+> device node and called by the UCLASS from the parent node. For
+> example, if PMIC has gpio cells and does not expose them as an
+> individual node then gpio driver can be bound to parents node and used
+> as a gpio function provider which matches what OF schema expects
+> pretty accurately.
 >
-> ## Steps to reproduce
->
-> 1. Start QEMU with `qemu_arm64` and virtio-net pointing to the
-> dnsmasq/TFTP server.
-> 2. Interrupt autoboot to get a U-Boot prompt.
-> 3. Ensure only the `efi` bootmeth is active:
->    ```bash
->    bootmeth order efi
->    bootmeth list
->    ```
-> 4. Set `fdt_addr_r`:
->    ```bash
->    env set fdt_addr_r 0x44000000
->    ```
-> 5. Run a full bootflow scan with errors shown:
->    ```bash
->    bootflow scan -lae
->    ```
->
-> (Initially, before setting `fdt_addr_r`, I saw `err=3D-22` on the network
-> bootflow; after setting `fdt_addr_r` that changed to `err=3D-114` =E2=80=
-=94 see logs
-> below.)
->
-> ## Observed behavior
->
-> ### Before setting `fdt_addr_r` (for context)
->
-> When I first ran `bootflow scan -lae` with only `efi` enabled and **no**
-> `fdt_addr_r` in the environment, I saw:
->
-> ```text
-> Scanning bootdev 'virtio-net#32.bootdev':
-> BOOTP broadcast 1
-> DHCP client bound to address 172.18.0.243 (2 ms)
-> Using virtio-net#32 device
-> TFTP from server 172.18.0.2; our IP address is 172.18.0.243
-> Filename 'arm64-efi/snp.efi'.
-> Load address: 0x40400000
-> Loading: #####################
->          11.7 MiB/s
-> done
-> Bytes transferred =3D 305664 (4aa00 hex)
->   6  efi          base    ethernet     0  virtio-net#32.bootdev.0
-> arm64-efi/snp.efi
->      ** No media/partition found, err=3D-22
-> ...
-> (7 bootflows, 0 valid)
-> ```
->
-> So:
-> - DHCP and TFTP succeed.
-> - `bootfile` is `arm64-efi/snp.efi`.
-> - A bootflow entry is created but stays in `base` state and has `err=3D-2=
-2`.
-> - No bootflows are considered valid.
->
-> ### After setting `fdt_addr_r`
->
-> After:
->
-> ```bash
-> env set fdt_addr_r 0x44000000
-> bootflow scan -lae
-> ```
->
-> I now get:
->
-> ```text
-> Scanning for bootflows in all bootdevs
-> Seq  Method       State   Uclass    Part  Name
->  Filename
-> ---  -----------  ------  --------  ----  ------------------------
->  ----------------
-> Scanning bootdev 'fw-cfg@9020000.bootdev':
->   0  efi          base    qfw          0  <NULL>
->      ** No media/partition found, err=3D-524
-> Scanning bootdev 'usb_mass_storage.lun0.bootdev':
->   1  efi          media   usb_mass_    0  usb_mass_storage.lun0.boo
->      ** No partition found, err=3D-2
->   2  efi          media   usb_mass_    1  usb_mass_storage.lun0.boo
->      ** No partition found, err=3D-2
->   3  efi          media   usb_mass_    2  usb_mass_storage.lun0.boo
->      ** No partition found, err=3D-2
->   4  efi          media   usb_mass_    3  usb_mass_storage.lun0.boo
->      ** No partition found, err=3D-2
-> Scanning bootdev 'virtio-blk#35.bootdev':
->   5  efi          media   virtio       0  virtio-blk#35.bootdev.who
->      ** No partition found, err=3D-93
-> Scanning bootdev 'virtio-net#32.bootdev':
-> BOOTP broadcast 1
-> DHCP client bound to address 172.18.0.243 (2 ms)
-> Using virtio-net#32 device
-> TFTP from server 172.18.0.2; our IP address is 172.18.0.243
-> Filename 'arm64-efi/snp.efi'.
-> Load address: 0x40400000
-> Loading: #####################
->          4.9 MiB/s
-> done
-> Bytes transferred =3D 305664 (4aa00 hex)
->   6  efi          base    ethernet     0  virtio-net#32.bootdev.0
-> arm64-efi/snp.efi
->      ** No media/partition found, err=3D-114
-> No more bootdevs
-> ---  -----------  ------  --------  ----  ------------------------
->  ----------------
-> (7 bootflows, 0 valid)
-> ```
->
-> So with `fdt_addr_r` set:
->
-> - DHCP and TFTP still succeed; the same EFI binary is downloaded.
-> - The bootflow for `virtio-net#32.bootdev.0` stays in `base` state, now
-> with `err=3D-114`.
-> - There are still `(0 bootflows, 0 valid)`.
-> - No attempt to actually execute the downloaded EFI application is visibl=
+> > As a concrete example, a Qualcomm GCC driver could register as
+> > UCLASS_CLK (primary) with adjunct UCLASS_RESET and
+> > UCLASS_POWER_DOMAIN, thus removing the UCLASS_NOP container and the
+> > qcom_cc_bind() function. The raa215300 PMIC conversion in this series
+> > demonstrates the pattern: one device, no child sysreset driver,
+> > no dev_get_priv(dev->parent) indirection.
+> >
+> > The mechanism is enabled by a new CONFIG_DM_UC_ADJUNCT option. Code siz=
 e
-> on the console.
+> > is largely neutral without this, except for the change to add
+> > dev_int_set_seq() which is used by PCI boards.
+> >
 >
-> Separately, `file(1)` on the TFTP payload shows:
+> So you basically propose to squash everything into a single enormous
+> driver coding every function that MFD provides instead of keeping
+> existing layout of separate cells with dedicated function. This seems
+> to be a maintainers hell.
 >
-> ```text
-> /var/lib/tftpboot/arm64-efi/snp.efi: PE32+ executable for EFI
-> (application), ARM64, 6 sections
-> ```
->
-> ## Expected behavior
->
-> Given that:
->
-> - The EFI bootmeth (`efi`) is present and enabled.
-> - The network bootdev (`virtio-net#32.bootdev`) successfully completes
-> DHCP and downloads the bootfile.
-> - The bootfile is a PE32+ ARM64 EFI application on disk.
->
-> I expected:
->
-> - A bootflow for `virtio-net#32` to reach a =E2=80=9Cready=E2=80=9D or eq=
-uivalent state
-> (i.e. no error), and
-> - `bootflow scan -b` to attempt to execute the downloaded EFI application
-> via the EFI loader.
->
-> Instead, the bootflow remains in `base` state with `err=3D-22` (before
-> setting `fdt_addr_r`) or `err=3D-114` (after setting `fdt_addr_r`), and i=
-s
-> not considered valid, so it never gets booted.
->
-> ## Notes
->
-> - This is all on QEMU (`qemu_arm64`), but my end goal is to use the EFI
-> bootmeth to automatically boot into iPXE on real ARM64 hardware using the
-> same network flow.
-> - Running `bootefi` manually after DHCP+TFTP fetched the file does work:
-> ```text
-> =3D> bootefi 0x40400000
-> Booting /arm64-efi\snp.efi
-> iPXE initialising devices...
->
->
->
-> iPXE 1.0.0+ -- Open Source Network Boot Firmware -- https://ipxe.org
-> Features: DNS FTP HTTP HTTPS iSCSI NFS TFTP VLAN AoE EFI Menu
->
-> net0: 52:54:00:12:34:56 using SNP on SNP-0xbe690010 (Ethernet) [open]
->   [Link:up, TX:0 TXE:0 RX:0 RXE:0]
-> Configuring (net0 52:54:00:12:34:56)...... ok
-> net0: 172.18.0.243/255.255.0.0 gw 172.18.0.1
-> net0: fe80::5054:ff:fe12:3456/64
-> Next server: 172.18.0.2
-> ...
-> ```
->
-> Can you please help me on this? And/or explain what I'm doing wrong?
->
-> Kind regards.
->
+> > Note that a couple of linker-list fixes are included so that sandbox
+> > will start up correctly. It still does not pass all tests though, due t=
+o
+> > various bugs surfaced by this series. If we go ahead, we will need at
+> > least one precursor series to resolve these pre-existing problems.
+> >
+> > This is an RFC. The next steps could be:
+> > - Convert one Qualcomm GCC driver to use adjuncts
+> > - Convert one RK8xx PMIC from child-sysreset to adjunct
+> > - Update per-subsystem ops accessors (clk_dev_ops(), etc.)
+> >
+
+Just to clarify, the goal here is not to squash all MFDs into one. It
+is not intended to move away from how Linux handles a particular
+subsystem (quite the opposite!)
+
+This is really just aimed at allowing a driver to support multiple
+uclasses, in cases where that is useful. It can actually simplify
+certain drivers, since they can have their state in one place rather
+than having to deal with the parent/child relationships and multiple
+priv/plat data. I have had quite a few bugs calling an operation on
+dev instead of dev->parent as well. I still believe that modelling a
+PMIC with child devices for CLK, REGULATOR, SYSRESET and GPIO makes
+sense in many cases. But now it becomes optional. Ssee the example in
+this series, which I hope you will agree does actually simplify the
+driver.
+
+The original design of driver model was based on uclass being
+associated with a particular API, with a device being in a single
+uclass. This series is really just looking at what it might look like
+if we relaxed that contraint.
+
+I've been thinking about doing this for years...the most recent
+impetus comes from the clk/reset/power domain discussion on irc and
+Casey's recent series, although in fact that seems to be heading
+towards mostly separate infra rather than enhancing driver model. I
+would like to steer it towards still integrating fully with clk - e.g.
+using clk_get_by_index(), etc.
+
+Regards,
+Simon
