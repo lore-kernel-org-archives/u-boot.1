@@ -4,98 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F02E3FC72AD
-	for <u-boot@archiver.kernel.org>; Sun, 22 Mar 2026 13:31:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0459FC72C2
+	for <u-boot@archiver.kernel.org>; Sun, 22 Mar 2026 13:34:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8346183D71;
-	Sun, 22 Mar 2026 14:31:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1CE7F84105;
+	Sun, 22 Mar 2026 14:34:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JoL/rPVF";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P59G2cxI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B5A5805D7; Sun, 22 Mar 2026 14:31:14 +0100 (CET)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
+ id EE24C84109; Sun, 22 Mar 2026 14:34:07 +0100 (CET)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D12C840CC
- for <u-boot@lists.denx.de>; Sun, 22 Mar 2026 14:31:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FEB084101
+ for <u-boot@lists.denx.de>; Sun, 22 Mar 2026 14:34:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-5a27c329e98so2543847e87.3
- for <u-boot@lists.denx.de>; Sun, 22 Mar 2026 06:31:12 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774186272; cv=none;
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-5a27a7f711eso2537537e87.2
+ for <u-boot@lists.denx.de>; Sun, 22 Mar 2026 06:34:06 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774186445; cv=none;
  d=google.com; s=arc-20240605;
- b=GtrBdiJMS6XS8Xf3FprIFZS8X7uxiMZoPl2oC5Gdf9R65t6saInAkY/3ajERnIIgAF
- TuihZidw4g8BqoTwQRCHhQme6QNAE92fJMrUkymYpFMru96apYdz1rMTB95PmjcxJjGx
- Z5s4A/Ju3VSJ3Cn2WiGuFjXZGDaJaOpkMfW9Ers0DEpm/MF2+lyUOQJTYbJ/gj94PT4I
- 0LIXkoUnOix6P58ry2kYb6+iq4zfD4sLmbTR9ZNRGQqcNwgPex+mupLeeiwBO4IqWxvt
- Zlyw7ZiROSFI/C6k8Xz5XLa/G3qy8/qSx+G7l3EW+pB1LKtZUL1UN9JTFxwydX1qs0u/
- ujvg==
+ b=f2EkS9/0PMXJDXqr98WhIjR+fhkCXauOn6Gjx4iKMp79T/avQvG9j9OjGPxhKq6dgY
+ XEO9och9h7QvKSWpaQUJoCNuA0eQ8g9F+gzwV/2TAYJ/mmlZFfjolDtUOwi17oP9p27R
+ fjYWiku/wHJj++sqjmuXm/EAjZtvxKAMVVAqAPWBLel0NX1EPfcpgaEgrOrLcKD9EXYD
+ xcpmhBn5N1vpoSNX+O1O92soQpWo+LQT5XE4No54RUK0Vck+qpbSYifaqVgqPJ1hw2b+
+ aBLbbScDGE1ThY740elcp6gQ1bH6DV0/jwz+Rb1iksk27MeAdFZp8rZFGa2uB6mjm+bS
+ UmVQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=AGOnVZIzJVJwtHMDC8pKuPHBHLeWpnkzsf/SxI5d6kw=;
- fh=v0Q2GEY7M08CKAhkkoXQjdBl9o1cQT+vQ9rafrWvpGA=;
- b=W5NKHPbZf1cJFSK3aU26FeLjQ+N80Kc5Gw9tLy+RmTqazLfc1zpV8EubjpfNLiResM
- x4WhKMrQmnjmiTuTLlOi6M9uwpO2GvV7SWfYpYpgxz0HJG3iYWnS9gmoVywENlEc7poO
- BC7CJE4kLGfZ/KeCQL6PXTEpOj9SMLLYpEPsqunuZS4rinU31mEXqAjWfJNk2i3apqNV
- PoECMNrRQGBnCzQxTAnJb1NNeDLU7oQ0+4URAPpQV4K+aWVp1AghJ4/EeeZIE4JGB6Ig
- CeTrI3O1XquuZgZ/mDhnq5mGin4zhObEF6c5HGCGQtVtbZ3DI064J7yJeM1LWyzuDbiu
- HTcQ==; darn=lists.denx.de
+ bh=K/nCN5bKjRwfpkho3KnyOJ8zv/poPOSm752TJknsYXU=;
+ fh=G8grUqmXAQWOlRtQpkdf44KL0t22jEZVRHWldP5hbxQ=;
+ b=V44c+Y/rwAxATS+IUsxK1FrWVmrQeCHzeFkU48B9u1VVyDVCdmc5cLf+GRIdkFdVpW
+ pgr2n+aUyqepKpkRHv5RMvBKERnrIw30iLFDddZ37k8ihwBwRqqFglX3Rcxb/PerbAB9
+ jE+DxkoiASNuAZ16xAW3zri/vapjuAtuMostohJvNq5P51X/vr3u6TgCbpyeR3vXtKTr
+ UzHoo2Dc4NZOqR2pV5XAwRzYVM3Nfg5GW0pXQQ9mtMRGQhTPrej+Ii2GI9lcE2kienlP
+ zetm/HKM4EqhaE0Sg7c2jUA9LC1me35UVyscb24swBP+a+QBjj1m4nQ+84xZB9meVJX9
+ xEww==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1774186272; x=1774791072; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1774186445; x=1774791245; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AGOnVZIzJVJwtHMDC8pKuPHBHLeWpnkzsf/SxI5d6kw=;
- b=JoL/rPVF+5MaBwWE4usFD/myw9cLGLyploflNZ0uvQeqJdDvPWdcfwO53nrutiJ9hU
- aZK9/MQIeZO5R1UoYAN2TvGyoyMGTzUY3HnBRxxYwv7XcGqC3Bp83tmZaqp7wtTF2fVX
- 10JNmmtmxzBesTdjsPUTGH2SkYW2kHzAGyw3/O1ArVAzga/o6r8SxonVZw8Z865aajG/
- OfMbPSUZAZvbUZ5V2iSg46abnfCdNjen82171Kkrx86VEQaN7qPKUMnwjSFtmUlc2wqB
- +gkXTcmKH5VzJ+gQh4jsSQcLvP7T5vn5s5kCSQb8L8dnXxhSGd8DvAD50XQrpo93HbEi
- is0A==
+ bh=K/nCN5bKjRwfpkho3KnyOJ8zv/poPOSm752TJknsYXU=;
+ b=P59G2cxI/alh1b8l09eexH9ezVx8+6pbn0e8CBrxqVdMnacDIvV5Gae+yc8C33wapH
+ 5TS57ct2rQisp8csh0l7Ud9XXN2yihqeOxZQNL/Ib6uUrRYEgqxfG67owE94B9DTPsmW
+ MJUrY/eFdyLAnfLRO9ftUDPBc2rymn9y4kvqqqnn0aPa2zUd12J4d1b2sJu/FzOkeXcP
+ bcGTwz0Y451BV0hyFfM4stVhyjdP6W/+OHzwTrTBMoAOTjKnmQuZYIkjP3wfATpX2btL
+ bbLRX1qvVXxc6v9oDljKDDJiRctTSVIdSfDh7WyeKM8NxlzLDhiBWApQ28jFo5MDorci
+ VRDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774186272; x=1774791072;
+ d=1e100.net; s=20251104; t=1774186445; x=1774791245;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=AGOnVZIzJVJwtHMDC8pKuPHBHLeWpnkzsf/SxI5d6kw=;
- b=F8UbUgBuOfJbxk/F9jq/r1WEjtDTHszf77B8R58j1P52AY+39XXmzLCF86lOgNQR1w
- 90a1dLwtDcou9kMwpO9ala21iOaDh5xk7oRZ3U/eX+cNNPAZ4wW+HecaL7Rds3PsUqcg
- 1zKmzueaWD7mqa2o2dRjwa5HWA6sEsyFNbNStCc4AtMAlTquuJgJJHiXBGHWud5RjYpE
- dUKBVGwvGba2Fh+7pLe/ia1k8bsgv30ggaGS2b5PGCUkvhluOXQVXLl1sjjv3w7/lsOW
- liX4SA9uExUwLJdcxhqUxkEP9v0mUJAxi6JmyAsUYAJ+TrLWu7iwWN4Ff5HVIj+sVD0N
- C2nQ==
+ bh=K/nCN5bKjRwfpkho3KnyOJ8zv/poPOSm752TJknsYXU=;
+ b=MHsLXOb+Cef0/Mvq03WaPcFCtFA6j7C7e4g6M8svLzYNs2I+yBQyAkXzY+ldlwlNaN
+ 5kbn3DfOjqeF8lT6IPEkJBKJOyB6Yl/uHww6NqgPUKOCOnO8FTtStZzmIbxD7QmWV1kP
+ OjLzwZiKf+c+ULHoZZK8pGPbfbBxPAv/8ulVuZnjpmyuXMdVYt/I3vVJpBSFpIIlL0mW
+ v6c2rVTX5ur5b9R190ardCWK2O/S+bv9AYMTzN0KQudklQOFczl33eJ5QHNn5K1D6Dh5
+ 8DKVFq2RAoN891/DOx7IqiBJ7uBDFvo9o+lipwkEqkZZoPu7C/0Y5UA1WNUfqM8Go3jN
+ LZCQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVx69HJJAENTIYgVJ8y6lZJuhSP0oe23GVo0MJr1GpPubrc/oBArWf6J2wFB20pQgXJWuCe7eQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy19Sq98cvTAQQRsTqu+0nbABlA5vzQUYwNxht+VARc/kk8Zyzx
- xzU4cK85fpASDthskGWAAy1u363B1zTwSES3t9X6KvD2lDNxgVLsENGTu5zAlmS9nqQEud4mHQQ
- SnZjwpC3CeFAHaZ2u7sOIFn8rxzOC4HA=
-X-Gm-Gg: ATEYQzzfxvX75LOnWh+/8V1WIJnQmr3NZGpxioP5B8zT3iS+4pURrGsO4Par5J1FBKu
- 1PA7M/NxedSGT9/QI52G88xMxFIouXncAQdaZYSKX36JmAFbZBVQnRjf+DweveJZb98ntJtN0lh
- jK5fYkc3twNyiNQpAZEZq04EyRVwxzVEwXi1csmedwJDs0pyI1zA8leztHf6RssKTJPToTpepVE
- l8G2o21VZKkz8Eaxqq2i1AWstyuU1YDfPyFzAy3kctvQaOTVrPFIVpC3MrfD237v0/e0z9rKhr2
- ObhwCugjgR01dWII0HE8gZAaWPLfgyR0A2kxzNXvpmfE7zGnUb7GWWFNnnup6iqFAlWnQAs=
-X-Received: by 2002:a05:6512:1388:b0:5a2:8513:8a98 with SMTP id
- 2adb3069b0e04-5a285b03660mr2649530e87.5.1774186271367; Sun, 22 Mar 2026
- 06:31:11 -0700 (PDT)
+ AJvYcCUOBfUYFeb/X4gaaU0OV++3rOQURS7vpyk+7DDD2YKLGKI/qCMrTzEJzaTHmFm+Y7qCcEnx8rw=@lists.denx.de
+X-Gm-Message-State: AOJu0YybG2prOWWOyxd+FExxBHzHsNy1Qqsyl1YQqE6f+m/PkKyLBb42
+ fXPRr0tdp9yOaec0fY2hUq8YE2GEd8CXxcjCbUvPRVBQh0k+mD3WxwwqXeftpdlsNqCKS9oo37A
+ TdDAj2kzzzLTg38/UmJ3jkcePkst2jwY=
+X-Gm-Gg: ATEYQzx9eX5REVr3HhYGy7Pk64I8m1V9p0UULnXCWSVeIKrIsNDjXHSwWlNUxulkSb5
+ 5PBcKfa9YHLA/VjGqgajOdkgH4WAX8uBGysOqUlMWDQ+moNawqPswdmEZUbwx68O1PNYOq9VlBc
+ 9klGJbn9G+O1/fUL4r6fZ1bj7CeHXRZLpZ1chgPUvT7a9zalRhTnb+mDH1RmixQh+tRbG2w23eU
+ VCw4cgt+KXjHFFQ8mfzY/+t638/KscsGiqcNMOMzeAa+wjWUO0wkJcczP0bSfFMZ0TgeFDjCDh8
+ lYQeI7ghSa4HHbUoYSvsW1U6wrY4P28FwhVBUbyUux/JkDv05fOyHEbU/3ot/l4TPynwSac=
+X-Received: by 2002:a05:6512:2244:b0:5a1:440f:512f with SMTP id
+ 2adb3069b0e04-5a285b6da33mr2910859e87.27.1774186445059; Sun, 22 Mar 2026
+ 06:34:05 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260312095711.3219756-1-Max.Merchel@ew.tq-group.com>
- <20260312095711.3219756-11-Max.Merchel@ew.tq-group.com>
-In-Reply-To: <20260312095711.3219756-11-Max.Merchel@ew.tq-group.com>
+In-Reply-To: <20260312095711.3219756-1-Max.Merchel@ew.tq-group.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sun, 22 Mar 2026 10:31:00 -0300
-X-Gm-Features: AaiRm530B-fMuqbedXVQr08CZQ6sfLkkjAWQ2nUcFyNhFiWYmzmMHvSAlLHRhvM
-Message-ID: <CAOMZO5BxXq-9toGKMUWge4vPwA0ZPrboVWCwQBFtCurWcLWtbg@mail.gmail.com>
-Subject: Re: [PATCH 10/13] board/tq: Add common mmc API
+Date: Sun, 22 Mar 2026 10:33:53 -0300
+X-Gm-Features: AaiRm508B5kr4vlAlhcObp4x2xfZSQz6ZjDtxE-c_CUWnXMt3Ue5c02hp2lbKWc
+Message-ID: <CAOMZO5CkBp7FJbnvMsiB6HSchZ+z8T+aU-08C8baWYETrBHVsQ@mail.gmail.com>
+Subject: Re: [PATCH 00/13] TQMa6 with preparations for integrating additional
+ TQ boards
 To: Max Merchel <Max.Merchel@ew.tq-group.com>
 Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
  Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de,
@@ -118,9 +118,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Mar 12, 2026 at 7:10=E2=80=AFAM Max Merchel <Max.Merchel@ew.tq-grou=
+On Thu, Mar 12, 2026 at 6:57=E2=80=AFAM Max Merchel <Max.Merchel@ew.tq-grou=
 p.com> wrote:
 >
-> The default implementation reduces code duplication.
+> This series introduces features for sharing across different TQ boards,
+> simplifying maintenance by avoiding code duplication.
+>
+> These changes are implemented for the TQMa6.
+> They will also be used by TQMa7 and TQMa6UL, whose mainlining is currentl=
+y
+> being prepared.
+>
+> These changes also serve as preparation for further work on the TQMa6
+> (in following series).
 
-"Reduce code duplication by adding a default implementation".
+The series looks good, but two points need to be addressed:
+
+1. Make sure to pass your series through CI.
+
+2. Improve the commit log style (Use imperative mood. Write full sentences,=
+ etc)
+I sent some feedback on individual patches.
+
+After these points are addressed, feel free to submit a v2.
