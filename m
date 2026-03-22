@@ -4,55 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AC6AD58CA3
-	for <u-boot@archiver.kernel.org>; Sun, 22 Mar 2026 21:40:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA6AED58CAA
+	for <u-boot@archiver.kernel.org>; Sun, 22 Mar 2026 22:00:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43BF483BE1;
-	Sun, 22 Mar 2026 22:40:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 4749283BE1;
+	Sun, 22 Mar 2026 23:00:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="PqgvxyuI";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Wu3qyS8C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D713283FED; Sun, 22 Mar 2026 22:40:22 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id C7AC383D71; Sun, 22 Mar 2026 23:00:02 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F55A82BF2
- for <u-boot@lists.denx.de>; Sun, 22 Mar 2026 22:40:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=8acd=BX=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1774215619;
- bh=tpCVLVgL4aNwZ2D/z+Hu7xvTXjRZg3qMNWTudxLzp2g=;
- b=PqgvxyuIlJUJsPed50jqmYh4ZocYLzPd2KtofNYaS2IxORBNG7kCRRDP1kR/YL8t4J7ABdzgI
- Ggm0naiJuF7M54CN7s+cPgHsUkpOlOZE2H01h0QXP1XXmebJC8pKwgpqB8etF7KvGU3N6MJG3VC
- eSfz74dCFWE3iirBvlb7s17SdNcM69PivwHaODM/BlJQHn2SyZ764P5x5pbd1zVpTzC3drkp63f
- t3XeEuqwEXQCUOUgwLtbZ3HJHsqouaCVvd3ZAMDeYoijmmzWFB6TP+Puqdq5EY7/iFuss6bnWUq
- kTu1NqVzolGzeWho24vY2Jd3yEIM5s4g6fjKo5MHHcuw==
-X-Forward-Email-ID: 69c061be01dbcaee716a1a0e
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 2.6.53
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Stefan Roese <stefan.roese@mailbox.org>,
-	Tom Rini <trini@konsulko.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>,
-	u-boot@lists.denx.de
-Subject: [PATCH] watchdog: designware: Fix probe when clk_enable return ENOSYS
-Date: Sun, 22 Mar 2026 21:39:55 +0000
-Message-ID: <20260322213955.1348690-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.53.0
+ by phobos.denx.de (Postfix) with ESMTPS id 865EC8366F;
+ Sun, 22 Mar 2026 22:59:59 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4ff9Fp38LFz9sqc;
+ Sun, 22 Mar 2026 22:59:58 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1774216798;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Wv5IsaGRVR1I/n4O6iErxrnmKGKBVQjI4eEZ2k7OD+8=;
+ b=Wu3qyS8CSjt6oHduq5w2NgtKsZeJ6PaaTDXcDk0f88VoCpheQG0v6Dgkr4kkCgsh0p1hi5
+ N8syDeSZvM/osrztcR4UsyPBfYdTl/G/a2bO37cyHNxOa1TrMgc/zGlTY2kAkEHOoG/xpB
+ t3qAyrGp6+C1kr8x/9ugwduVU/6SGoLClB6kvapZs3ly5719jDaJ42/6op8A2ZTPiDT/zL
+ gHKsq49I0oYDW3GRjx9yhmdrATt8Gg/cM1XC6D/Nf9DQR2QpEqHDQhAk+syjMo5Pr4vpLo
+ sN2c+ibTzLsZ3KhfSeAXCxojuwknEQxsaQ4e++0zH2YQ+aFuwkEJZKKeXJj32g==
+Message-ID: <9bc9a2d3-c1e8-43d5-b03a-c56850c715f3@mailbox.org>
+Date: Sun, 22 Mar 2026 22:59:53 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH] lmb: Reinstate access to memory above ram_top
+To: Gary Guo <gary@garyguo.net>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Cc: Matthias Brugger <mbrugger@suse.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Holger Brunck <holger.brunck@hitachienergy.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Mark Kettenis <kettenis@openbsd.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, U-Boot <u-boot-bounces@lists.denx.de>
+References: <20260127234856.1503030-1-marek.vasut+renesas@mailbox.org>
+ <177343529761.1131472.9417054395876652663.b4-ty@konsulko.com>
+ <DH9MF45X89KK.1CV4WUVTCTUO5@garyguo.net>
+ <1e74f277-dedf-4fa1-810d-63f3d517a8a0@mailbox.org>
+ <DH9N233GTVKM.2XIG8EETTUQAY@garyguo.net>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <DH9N233GTVKM.2XIG8EETTUQAY@garyguo.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: t9u1d1dot9zymhytzzy3ncwsykk73z9y
+X-MBO-RS-ID: a792dec53ef6bab9ca9
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,35 +90,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rockchip SoCs typically reset with all (or most) clocks ungated. Because
-of this, U-Boot clock drivers for Rockchip typically do not implement
-the optional clk-uclass enable/disable ops.
+On 3/22/26 10:45 PM, Gary Guo wrote:
 
-Normal driver model behavior is to return -ENOSYS when an uclass ops
-is not implemented.
+[...]
 
-Ignore -ENOSYS to allow the designware watchdog driver to be probed on
-platforms that do not implement the clk-uclass enable/disable ops, e.g.
-Rockchip RK3308.
+>> Is your malloc area by any chance above the 4 GiB boundary ? Or how come
+>> does EFI allocate pages from above 4 GiB range? It should not be doing
+>> that and that is what should be fixed, at least until the DMA32
+>> allocator is in place.
+>>
+>> Please keep in mind, that revering this patch breaks other use cases,
+>> like loading into the DRAM above 4 GiB.
+> 
+> Code in lib/efi_loader uses efi_allocate_pool (in lib/efi_loader/efi_memory.c)
+> whenever it allocates, which calls efi_allocate_pages, which calls into
+> lmb_alloc_mem. There's no malloc here.
+Does something like this make the issue go away ?
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- drivers/watchdog/designware_wdt.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+"
+diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+index b77c2f980cc..44eccc0cf35 100644
+--- a/lib/efi_loader/efi_memory.c
++++ b/lib/efi_loader/efi_memory.c
+@@ -475,8 +475,10 @@ efi_status_t efi_allocate_pages(enum 
+efi_allocate_type type,
+         flags = LMB_NOOVERWRITE | LMB_NONOTIFY;
+         switch (type) {
+         case EFI_ALLOCATE_ANY_PAGES:
++               addr = map_to_sysmem((void *)(uintptr_t)0xffff0000);
++
+                 /* Any page */
+-               err = lmb_alloc_mem(LMB_MEM_ALLOC_ANY, EFI_PAGE_SIZE, &addr,
++               err = lmb_alloc_mem(LMB_MEM_ALLOC_MAX, EFI_PAGE_SIZE, &addr,
+                                     len, flags);
+                 if (err)
+                         return EFI_OUT_OF_RESOURCES;
+"
 
-diff --git a/drivers/watchdog/designware_wdt.c b/drivers/watchdog/designware_wdt.c
-index bd9d7105366..91228de5e8e 100644
---- a/drivers/watchdog/designware_wdt.c
-+++ b/drivers/watchdog/designware_wdt.c
-@@ -122,7 +122,7 @@ static int designware_wdt_probe(struct udevice *dev)
- 		return ret;
- 
- 	ret = clk_enable(&clk);
--	if (ret)
-+	if (ret && ret != -ENOSYS)
- 		return ret;
- 
- 	priv->clk_khz = clk_get_rate(&clk) / 1000;
--- 
-2.53.0
-
+If so, then maybe we need a temporary config option which limits the 
+EFI_ALLOCATE_ANY_PAGES below 4 GiB on hardware that has DMA limitations.
