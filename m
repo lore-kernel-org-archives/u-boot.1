@@ -4,102 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 126A2FC72BE
-	for <u-boot@archiver.kernel.org>; Sun, 22 Mar 2026 11:03:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6417EFC72AD
+	for <u-boot@archiver.kernel.org>; Sun, 22 Mar 2026 12:27:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DC8083FC6;
-	Sun, 22 Mar 2026 12:03:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 939B083FDC;
+	Sun, 22 Mar 2026 13:27:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MaMSGa9x";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="aNmfKn5P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3A4F83FDC; Sun, 22 Mar 2026 12:03:53 +0100 (CET)
-Received: from mail-dl1-x1230.google.com (mail-dl1-x1230.google.com
- [IPv6:2607:f8b0:4864:20::1230])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DDF3C8405B; Sun, 22 Mar 2026 13:27:06 +0100 (CET)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8549483FA7
- for <u-boot@lists.denx.de>; Sun, 22 Mar 2026 12:03:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EDD2383FC6
+ for <u-boot@lists.denx.de>; Sun, 22 Mar 2026 13:27:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=matwey.kornilov@gmail.com
-Received: by mail-dl1-x1230.google.com with SMTP id
- a92af1059eb24-12a80c36350so432214c88.1
- for <u-boot@lists.denx.de>; Sun, 22 Mar 2026 04:03:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774177430; cv=none;
- d=google.com; s=arc-20240605;
- b=fTcin3OnanCQpFMDOZCvKvGaru5gsDL0YL4CjitlEe23ZAkBbrSlBPE+2oLBf7csEJ
- 4IizdihH25wSI0qBdosEMRIETG2Fk+7i24ZEgPC5GTnOjUuISfIHM7ay2wHVk0qb7Kvc
- XAYZO7Zt0iqnSkluBO8tEg1y+l9MPpiLEUrzEPk6lwg8gP+ALc2nNPsBtYYSGDoAjC15
- 2zlKQRUwF5+8e5DKggCKAY0EkKPbhSfchGGfRZqQ8BgF/9oZW2RnFogORXGVQGdvJ6vZ
- kZKZZYwFfevjBqnzwettXfU9U2Fo2/CsbCuGoWNPtlMn9EGCOoxVdaAqqerAv710RN6c
- 1JOg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=seVmSUOATdzRVQOI6GR2eAnYkWJG3bCULR6psE3ot0A=;
- fh=xB9JIAryxjwldGJ3NBJ4qnAb38ct+d9xEuHultImQco=;
- b=CEjJvRmbFj92uB/RD5UWLE8HJG+yiMJf1YaXMzI5BNQA6muiJLCMIHiXxlmiGnvpgH
- mMkMrP6WW4krpMbdcvpBO4Wwi7TTZKWaD3qu7TrIuDZ3WNrboLAor0+AnXuShK/A4JG4
- vEDjsTkW2LCULaa6xxOKD3tFAJkurFsKj6OuZky++zqAOUTXXJg/EOuUdoBFTP3qAgtT
- rFPhMJ+rtYX0kA9NwDIoyMOj92PqG1ngq+dRYuBwtduqbqmK8V6n/MgBgA8A2thX20g9
- XnAHZcauGpUYU+MOlMRtDsmyhNeN+5q2BNF/1uZCoyuiYAtftDh37EN5DqP+wYWIkwQs
- uZnw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1774177430; x=1774782230; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=seVmSUOATdzRVQOI6GR2eAnYkWJG3bCULR6psE3ot0A=;
- b=MaMSGa9xI48qvxO+qsvAUG4rhojoW1wanw+nCtghofaXy3ErmfbdK3M9ygDFTZEVD3
- tcFpjBpodL/jaxkA4YlKZYz86tsTK2dr3KW4jSbI4Bc8yDWiv/CLyqvwPSwe8NuaLgaw
- gJszAmo+Qh+ugSUoxEnO5s2QJBZgpMzcsBsa65q9RuKwMxCbTyh5fMyzT0yPH/zHKITo
- GN7ruYGtzTYqdFzuiQOrlzt6V2eS2zudsEHDazKBwBAayxL3utd4Rlujm+/Im4DAv/De
- Rr3CnJpaNaXKfjfHij/jay1nGGAgqdWS8zEV8nbDjbHbY3rZQ2SdVJanOipw+UzDH0iu
- vdXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774177430; x=1774782230;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=seVmSUOATdzRVQOI6GR2eAnYkWJG3bCULR6psE3ot0A=;
- b=JUptmQuDHaeDJE/ybfqkvj0uY+y2zY8559LbzwIWT8nQyf72y9A1tLqClHUhBYAl+7
- aphlaV0er9CTsUyYlNzGods6Vz9YgqntKh9/vkk5Ws04Bo4LPvCcO7Mr8HQUggewAZpe
- lNH9qp7OQ/NdJKcdzo5pQYt8ocpVFNS4QV757yVHM6jFZp9R2MOdCLyBqFfuJxVi8NHX
- 75byhnUHpAYIHAICgzc9mZfoZPDQCiJu9DE+vtE1COZkPU/w0qT7be+wfvmU2heecQwT
- oPh7QtNM/r7rRMqgmmn9FOvAgJtRCM7rHijss697By9H1Lmqu+05DpSA5x0MIly01O6a
- xdaA==
-X-Gm-Message-State: AOJu0YwzPkz/Eq2mFHCxrpZbIK2YW7n7vCVNCts+XLKF6INdhMc6Yzfe
- MCOm4S7xsYTcPn6eIRrJxO/pjXQpry1eaIFpXzyh12kSU9J6CGJSugpfpKkFVAnE/f+yw6C/etL
- tc/M6RqrxjsLotkL1qwULh8Q+s73+a29Xend+K28=
-X-Gm-Gg: ATEYQzwgNfd0q0TbYs0xvMOkVj1m5q41WXVDp1Nh1Kg+oR7P6KgdAduVL1OvchqcQiO
- /eaD1/7YaQPecb1H4rD05mtU8M66k9M1KvgUlPoWXTaolcEoPuJSK+mkrI82938pRBn5IZiIvZB
- 5iX88unML1xUl6dTTnRNx/Rj/vDwF2AzSQ5/1L27ejucL82icxH6PPL3XLH7faENCYWgWUuQPwx
- Sjd8ZsB6tfVY8KhWDZnswjliAFREfYnKLCiS/48EQNnUY5uuVOOk43k2GF8e3xBXplwFJpW2ypf
- 4Ltz
-X-Received: by 2002:a05:7022:48:b0:12a:7165:7408 with SMTP id
- a92af1059eb24-12a726755d9mr4498865c88.18.1774177429746; Sun, 22 Mar 2026
- 04:03:49 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAJs94EYWoVAyWXexA=f_UwqUpo9zuxO6G6Tx7L7xPdciAVHW5A@mail.gmail.com>
- <CAFLszTjDnEoTP1fHdounqov_SYSDdr-Zpt7L_+-c9qb=c0F8JQ@mail.gmail.com>
- <CAJs94EYuFQJvdTjWZX1qWg9e7Qz_X_G7Bz017nucN1HtU1Mrcw@mail.gmail.com>
- <CAFLszTj7g-pYE6+Fw7=Vip-1dw0QK7+1tgjuUzNK_J1Yi4mW+g@mail.gmail.com>
-In-Reply-To: <CAFLszTj7g-pYE6+Fw7=Vip-1dw0QK7+1tgjuUzNK_J1Yi4mW+g@mail.gmail.com>
-From: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
-Date: Sun, 22 Mar 2026 14:03:38 +0300
-X-Gm-Features: AaiRm52nsXB4Uw1-n7h3tmOLqGsls8CiQCwNGv_IP7fgS57GINDQ9L1CKd3HF5g
-Message-ID: <CAJs94EZk3avSo=Oxdr4yqXCHDApvwUhR1VcUFf4GJ=Pq=O8CZA@mail.gmail.com>
-Subject: Re: Need help with FDT overlay
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Py6KXCDR9Nb5Zh0JPGFV8PUh8F1COvbhjEVR1Gtf7kdGqMa4hBJS1Cloygq1axueEF5k5f/tn7TMY/3vlPyz9kVQAjm7Jjnk7Tfncw0AQJE5rVp7G0H4tgfV1CkRytwzd5G2fdNU8UCE1Cns3m9o2ks1ywhxd7wx0Q0Jn31JVFmWqAl2gwhzt1Vc9qqhQY9uIhJQIjTJx1dIQbY4Xr25yMkNgL1u//2F8KLTjM2b9Tkm8uwkxdF2KjdPv0ix2K8BVMdMwp0pXQAeeSb/dvuN3Q0RVGNx7c7B+JjzEiJdStOgZipRCRojbZCEnhxtIfw8TxbQ59D952hO0ksehRIHwA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=M/j17Jq8Mj/DK/P+Vvjr1RQjwlUnY/nkSoo6cNr91ZA=;
+ b=Mcgq1Pq+e3qqwPrqc2tJCYtE+yPk0M6YJ7QeLqviuSQWp8Uwrkr7uls2KH69g1T/pAEwFNiVRUWgN0+zhpzFoVlt9OKXD5u4FH8lcyJa8gbev6o6T0Ii5I1AvzwtoGAR1kS80FfoxOuRRm6Uwm02On3upJ+j96vJxy6B9rG47XP1Byx4FzCpU5U4NXQy2b/uwji2aIZs5IcPkKkjj+CKKNlrA/iqoohsUrzKEcczEd6Ao3L30CGayAtkrr0d/X1BIfxkXHdySB+kPWX/2XvhRb7OCWVjtHLFO1u2UZADwpQnjuY5+/oBfBttUK1kQmnvckrusWOHiJHzvN1mCQwBRA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=M/j17Jq8Mj/DK/P+Vvjr1RQjwlUnY/nkSoo6cNr91ZA=;
+ b=aNmfKn5PUde4cTeqqAYsCLyOWYrD3qoR6JXANApY6nRYlIF1a0RSsG151mZJs6hTfCiH2cbOSKwlUIGt2/gk3w90zKZym41idFBgAPB4k+Z3pDJqiDywdVqJ5+sejVFwodu5Vjshcd21vW3rrshIp5hyKVSxqDnANhOA/+CIPqvgqnsRKSQLoFFXFfYoL75GvjBaYIWSXq1IbKXEliJ/Rk3k9TZm5NXmA2lDrbRzoKpCVNgymMyb+PBEfr8Hcci8PCNOhUQ/FN9rZEqRKYKl84tFsnBTgJKCmFqDgZdAHcgGXQ3AZxNZAq21DVkSzcAwD6/33klBKCAFZg0PwJtxyw==
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by PAXPR04MB9022.eurprd04.prod.outlook.com (2603:10a6:102:20e::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.25; Sun, 22 Mar
+ 2026 12:26:37 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e%3]) with mapi id 15.20.9723.022; Sun, 22 Mar 2026
+ 12:26:46 +0000
+From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+To: Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+CC: Manoj Sai <abbaraju.manojsai@amarulasolutions.com>, matteo.lisi
+ <matteo.lisi@engicam.com>, Teresa Remmet <T.remmet@phytec.de>, Fabio Estevam
+ <festevam@gmail.com>, Marco Franchi <marcofrk@gmail.com>, Alifer Moraes
+ <alifer.wsdm@gmail.com>, "Lukas F. Hartmann" <lukas@mntre.com>, Patrick Wildt
+ <patrick@blueri.se>, Heiko Thiery <heiko.thiery@gmail.com>, Marek Vasut
+ <marex@denx.de>, Francesco Dolcini <francesco.dolcini@toradex.com>,
+ "upstream@lists.phytec.de" <upstream@lists.phytec.de>
+Subject: RE: U-Boot and legacy SPL power control on modern platforms
+Thread-Topic: U-Boot and legacy SPL power control on modern platforms
+Thread-Index: AQHcuLLYezNniABc4UyNlVXNULOJILW6fIfQ
+Date: Sun, 22 Mar 2026 12:26:46 +0000
+Message-ID: <PAXPR04MB84595AE69ADF07A9F9FAB7B1884AA@PAXPR04MB8459.eurprd04.prod.outlook.com>
+References: <20260320214518.GD502704@bill-the-cat>
+In-Reply-To: <20260320214518.GD502704@bill-the-cat>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|PAXPR04MB9022:EE_
+x-ms-office365-filtering-correlation-id: 31ae28d6-d2a2-4222-7f47-08de880e48c4
+x-ms-exchange-sharedmailbox-routingagent-processed: True
+x-ld-processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|366016|376014|1800799024|19092799006|7416014|56012099003|18002099003|22082099003|38070700021;
+x-microsoft-antispam-message-info: KDrPoNKmm/u4phr9uMueVJ6WWmPEr6TNFr2qBvUX7I+r7CuFyUge1jdUn+Ug+dbKmguHdzgHEo9rsOGKATn+VJKniKSbtCo2+mqEjK9h5t2dlpFq/4MSumm7pJE8adul2pEWjkmmww7P5uZq+5Dlg6LnvRVoWh3wMN+RdeyOPNpKuZha7M0NuuytcZjn+pmhnOsSwoljTxYloSbhxP2SlHxpHY5BHnohM1/FVHv56H0xb1ocmT85TJdK0B/FT5vMkPOBj+K3l/RZmyP9DDUVzx+Yl0ltskJYAnobUjK3l4/WVVZpoqqyVBfb3Cw7q1QipUYpbAN3klMbip5emInu+YAUGdzo5MeqwGA1xJcD9Onl4kJYyjdDrrxT+K2BlOqD+9KHFzJGWFSqvJLDBg8Tdw6+L/SWnt/zIizzvkHixFHt+IyLafMYf2a7emTrFBqVYcEwJcU4NsxWVo96+pIWx8gtlqN1hVJu1mUaTq4JvDecBQydktBgnjA9Tg299M+pCmxnBiWSIeoWCm681s12SRPaBeMU3mL5rrE5NrMYmyiyiGGzfa1LR1Dk5a/z8JI9kBFGMFOUZ1JtPvnb9Y6mIYXG5FCChkC2oTOLrKyqL+DoT+uqIBjSgklLDttsS39dWdzJ21xw0UkSsnsvBCmgC+isIDmn0dicb1OLRs7g5qTGtcsYry7AFcMaFgeR/UGkKKo/iBuOR8kuavqYm7eGkX4865nGIgim4thl//tuSOQ4s9u/X2BIurPiRldyB6M34qwRodIxaQJNt7BiJEp5XT1YMKK+fHBjPjptEK7FxZc=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(19092799006)(7416014)(56012099003)(18002099003)(22082099003)(38070700021);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?rmt58EecZchfGAdE+Ymj0fZn9OWNe4NCyVzZLktB3hVXb15LkMkv/3gZLNqO?=
+ =?us-ascii?Q?a6GQ/Zg4sK4F/Fd837C7ihUfrZonucQ49vU27YvskL4QAjUIGS/yACEBcEnz?=
+ =?us-ascii?Q?rC4S6cRRNPmj9szcMuv+UEupdoeWEOIy9esF5ThfvX0/EmQhp1QCjdDE7DS3?=
+ =?us-ascii?Q?uaF/GO2KkxkctUi0OY5YFMi5L2H8nm5Ylvqj/kWhi7phsEbGNoPKdezS29lc?=
+ =?us-ascii?Q?PX58fOgJrh7zfA6SRFfRYvd44PBk4EPFbfVWYA7XsraF1LGjwouMU3ifuxZB?=
+ =?us-ascii?Q?CwatiNxGpOZY/fR+YjWFRoyO4PoJeor2vHiBfF/uUMueKMIaejBnD1eYfLvU?=
+ =?us-ascii?Q?j8r+lEKg9ki3vYoMZkEonXBn+6Y+ZTlmiEGWsJBTpZ95t2sYjCc9BgoC2/Aa?=
+ =?us-ascii?Q?o+a3r1zfY6uYtXsU2rMhh1vs0nhZfZQNFQQP6QNYLiyqcthi4a5J6gWt9Nwt?=
+ =?us-ascii?Q?3KD4lqNnil3kaLeDY/UVOWRa4a6421Luu4DCuXQ77FVvoFjB/sN/nqsj+OD9?=
+ =?us-ascii?Q?k2voX7/FzDdFQ/vFs1wMlNgTyh1wlcCNZuDt1uDYFu4GCic0/dPnGo8asdmu?=
+ =?us-ascii?Q?HPIViQ28E2fRtEl44A7bJdOl0yHHk/TGa1WVA0Q5v47PgebxsUsqB4qObEwo?=
+ =?us-ascii?Q?BnFnlYZPkI2MbJ+cZlbkNqrbrerHe817TSzDo8ALnleoPkbdBtKzzagr0S4t?=
+ =?us-ascii?Q?N/bw4cBAuW8kjUcO4oZvZmSO6fWFU8NKKNU7L4vT6yhvavLYH6HdCGvkZr5R?=
+ =?us-ascii?Q?YxDKUOYkdumy969YQ5yQrDjUFy71knVCXUaLBuCTaKn2fHSiWSEoMiWTxiwH?=
+ =?us-ascii?Q?7JoxcPb1LO8YmpCvjIGS7RXAXDOg95VolH4SvqLkAqqpDwliJDdh89gIBjF4?=
+ =?us-ascii?Q?IycJRhm5otWlmXhPTUUsJ99KJZKQZrERxk6qGNhiPPxJMrLEJ6m4JXDuZduE?=
+ =?us-ascii?Q?DdGPvchClf2zYaKwwPDU+2iK7cJl//uprw1edvxvoy2E4/sXfP/hI3V8Fdsn?=
+ =?us-ascii?Q?OIiKjaDCPMGB865NspUHgGw7rzPlRvYR0aDSnu2ihulqdYnSaR6MJctzeunH?=
+ =?us-ascii?Q?7RwfFCUa1HSw+Ylsqw5VXYKsIY/zkqMcEAYIIxUaKnArlWMLB2nelwqQ5xtC?=
+ =?us-ascii?Q?GpIxy7eQzVCMObwI6VvWrA0ubmGEljpKUK4IfOLf/HhTtxoVPpWs+maPcrVq?=
+ =?us-ascii?Q?nqWR69rRpnR2a4nQ/xD4GlH1CCYh2uLSkZ9ciEOt1nkgslOeLaYwfpHq2/2J?=
+ =?us-ascii?Q?2ZmQBjHYxe5o4l55wNUhKCYarAxcbj1vqnjEOv2mE7quQS7u5TrfnPUI+hc1?=
+ =?us-ascii?Q?GuB6pRio/67nffSoC4+DCytEWnQ1UzK+t0hiajXvWboYsYwGodT6dlCKhnUU?=
+ =?us-ascii?Q?VymKs4XXcUmWmss2UbAMbeovYDjwPWym3z9tk5V+OAoXRSD33+22ezRN1ek8?=
+ =?us-ascii?Q?YDg+LLWEuNHo2e8tHfySELNjqJyq9AUAgc1x4PPjNUOedNsfHUsw2JrwaXm2?=
+ =?us-ascii?Q?+XWLsgUQybHiV5YCl1MVJZFJIMeFexxxck/ymv/RGMwwiB73ToHvUn0DdABk?=
+ =?us-ascii?Q?KpTyfDnaSp/je23AqE85MBrtHqRXAuCBm/phzBAIZQzc6qKHrMglKZhg7Oyd?=
+ =?us-ascii?Q?8FEN0ff7/dyk4vtYrWtC/krYOtOy4LrMqnIEIsrGIuObXguEm4E+x3r+C7de?=
+ =?us-ascii?Q?PZ8CgEKk3HXPiDLF09qv2QPr8sAdc5x/FmHjJ67cmSSRKVMC?=
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 31ae28d6-d2a2-4222-7f47-08de880e48c4
+X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Mar 2026 12:26:46.4737 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: I2G1miX3QkPJBREozst3d5NF7ti4MXNI/cXpzDL93ktkfRdFgS+1Ygwp61kYgdEHQog2FDYDuoyr7alU975XPA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB9022
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,174 +148,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D1=81=D0=B1, 21 =D0=BC=D0=B0=D1=80. 2026=E2=80=AF=D0=B3. =D0=B2 22:21, Sim=
-on Glass <sjg@chromium.org>:
->
-> Hi Matwey,
->
-> On Sat, 21 Mar 2026 at 11:20, Matwey V. Kornilov
-> <matwey.kornilov@gmail.com> wrote:
-> >
-> > I compile dtbo as the following;
-> >
-> > cpp -x assembler-with-cpp -I /home/matwey/lab/linux/include
-> > overlay.dtso overlay.i
-> > dtc -@ -O dtb -o overlay.dtbo overlay.i
-> >
-> > Decompiled overlay.dtbo looks like this:
-> >
-> > /dts-v1/;
-> >
-> > / {
-> >
-> >     fragment@0 {
-> >         target =3D <0xffffffff>;
-> >
-> >         __overlay__ {
-> >             status =3D "okay";
-> >         };
-> >     };
-> >
-> >     fragment@1 {
-> >         target =3D <0xffffffff>;
-> >
-> >         __overlay__ {
-> >             status =3D "okay";
-> >         };
-> >     };
-> >
-> >     fragment@2 {
-> >         target-path =3D "/";
-> >
-> >         __overlay__ {
-> >
-> >             i2c-gpio {
-> >                 compatible =3D "i2c-gpio";
-> >                 sda-gpios =3D <0xffffffff 0x08 0x00 0x06>;
-> >                 scl-gpios =3D <0xffffffff 0x08 0x0f 0x06>;
-> >                 i2c-gpio,delay-us =3D <0x02>;
-> >                 #address-cells =3D <0x01>;
-> >                 #size-cells =3D <0x00>;
-> >                 status =3D "okay";
-> >                 phandle =3D <0x01>;
-> >             };
-> >         };
-> >     };
-> >
-> >     __symbols__ {
-> >         i2c_gpio =3D "/fragment@2/__overlay__/i2c-gpio";
-> >     };
-> >
-> >     __fixups__ {
-> >         i2c0 =3D "/fragment@0:target:0";
-> >         i2c1 =3D "/fragment@1:target:0";
-> >         pio =3D "/fragment@2/__overlay__/i2c-gpio:sda-gpios:0",
-> > "/fragment@2/__overlay__/i2c-gpio:scl-gpios:0";
-> >     };
-> > };
-> >
-> >
-> > I am not sure about the size. How do I check it correctly? Now, I just =
-do
-> >
-> > fdt resize 16384
-> >
-> > =D1=81=D0=B1, 21 =D0=BC=D0=B0=D1=80. 2026=E2=80=AF=D0=B3. =D0=B2 18:02,=
- Simon Glass <sjg@chromium.org>:
-> > >
-> > > Hi Matwey,
-> > >
-> > > On Sat, 21 Mar 2026 at 06:55, Matwey V. Kornilov
-> > > <matwey.kornilov@gmail.com> wrote:
-> > > >
-> > > > Hello,
-> > > >
-> > > > I am running U-boot 2026.01 with orangepi_zero2w config and I am
-> > > > trying to apply my hand-written dtbo via fdt apply.
-> > > > The issue is that the fdi apply command just hangs forever for me. =
-The
-> > > > issue only appears when I try to append a new node to the root. How
-> > > > could I find what is going wrong here?
-> > > >
-> > > > The overlay source is the following:
-> > > >
-> > > > /dts-v1/;
-> > > > /plugin/;
-> > > >
-> > > > #include <dt-bindings/i2c/i2c.h>
-> > > > #include <dt-bindings/gpio/gpio.h>
-> > > >
-> > > >
-> > > > &i2c0 {
-> > > >     status =3D "okay";
-> > > > };
-> > > >
-> > > > &i2c1 {
-> > > >     status =3D "okay";
-> > > > };
-> > > >
-> > > > &{/} {
-> > > >     i2c_gpio: i2c-gpio {
-> > > >         compatible =3D "i2c-gpio";
-> > > >         sda-gpios =3D <&pio 8 0 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>=
-; // PI0  (29)
-> > > >         scl-gpios =3D <&pio 8 15 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)=
->; // PI15 (31)
-> > > >         i2c-gpio,delay-us =3D <2>;        /* ~100 kHz */
-> > > >         #address-cells =3D <1>;
-> > > >         #size-cells =3D <0>;
-> > > >         status =3D "okay";
-> > > >     };
-> > > > };
-> > > >
-> > >
-> > > Can you provide thte dtc command you are using to build this? Is ther=
-e
-> > > enough spare space in the dtb? I'm not sure what would cause it to
-> > > hang.
-> > >
-> > > Regards,
-> > > Simon
->
-> It might help to have the console log too. I can't see any way this
-> can hang unless the addreses are wrong and something important is
-> overwritten.
->
-> Try this to see the address:
->
-> fdt header
->
-> Compare to 'meminfo' so you can tell that there is nothing important
-> above the fdt. Also where do you load the overlay?
->
+Hi Tom,
 
-Hi,
+> Subject: U-Boot and legacy SPL power control on modern platforms
+>=20
+> Hello,
+>=20
+> As part of the work I've been doing on clarifying Kconfig dependencies
+> I've stumbled on to a number of modern boards[1] that are using the
+> SPL_POWER_LEGACY symbol. Can the maintainers please update these
+> to use DM_PMIC, DM_REGULATOR (and SPL variants) as needed so
+> that they use the modern architecture, or let me know what's missing
+> here? Thanks!
 
-I guess I found my mistake. I've been trying to apply the overlay to
-${fdtcontroladdr}. It has been working while I updated only existing
-nodes.
+If board maintainers would work on the migration, that would be great.
+If not, I will give a check, but I not have the board to test.
 
-Now, I do the following:
-
-cp.b ${fdtcontroladdr} ${fdt_addr_r} 0x8000
-fdt addr ${fdt_addr_r}
-fdt resize 10000
-fdt apply ${fdtoverlay_addr_r}
-
-I am not sure if there is a better way
+Regards
+Peng.
 
 
-> BTW U-Boot uses hex, so it should be 'fdt resize 4000'
-
-Then doc/usage/fdt_overlays.rst should be improved because now it says
-'fdt resize 8192'.
-
->
-> Regards,
-> Simon
-
-
-
---=20
-With best regards,
-Matwey V. Kornilov
+>=20
+> --
+> Tom
+>=20
+> [1]: imx8mp-icore-mx8mp-edimm2.2 imx8mp-libra-fpsc imx8mq_evk
+>      imx8mq_phanbell imx8mq_reform2 kontron_pitx_imx8m phycore-
+> imx8mp
+>      pico-imx8mq verdin-imx8mp
