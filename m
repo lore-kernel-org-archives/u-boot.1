@@ -4,125 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAD00FC72CB
-	for <u-boot@archiver.kernel.org>; Sun, 22 Mar 2026 18:41:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6634AFC72D4
+	for <u-boot@archiver.kernel.org>; Sun, 22 Mar 2026 18:46:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E22EF84090;
-	Sun, 22 Mar 2026 19:41:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B94FD840F1;
+	Sun, 22 Mar 2026 19:46:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WiLcl4Cb";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Y00Ywt/d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01F0F840AA; Sun, 22 Mar 2026 15:37:23 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 36375840F5; Sun, 22 Mar 2026 19:46:55 +0100 (CET)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C7D884082
- for <u-boot@lists.denx.de>; Sun, 22 Mar 2026 15:37:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 19C13840AE
+ for <u-boot@lists.denx.de>; Sun, 22 Mar 2026 19:46:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-b9825ba7e8dso396387966b.3
- for <u-boot@lists.denx.de>; Sun, 22 Mar 2026 07:37:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774190240; cv=none;
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-79ab3e26cceso1789437b3.3
+ for <u-boot@lists.denx.de>; Sun, 22 Mar 2026 11:46:53 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774205212; cv=none;
  d=google.com; s=arc-20240605;
- b=Mk1y3EMLkge7pA1PLPX/8ZCA4do/dqaRivFWGOSaQYBHx5rvSjXACFr/AI0mzbfRKB
- Ox9+XHxXicFLuqRpQBjvxsjrMC2Br8P+v/CW90LtgVjQZI9f0h4T5TxY+UcIudMVW1Il
- NXBsrj83sgx9ppA2DW/OEBQGd2DzLW9pdylhfgHrImYXR1WMvkwCmV4TAeUUieUfXMjh
- Cz9vKbfRPqwajJuyfZHFXsziAleRRMWO1KPxFB2E8twEBCNou3TRxLY4J87YB/GAG72j
- j5Ftgif2jgzZH7TppaBeSioA3OpQ0YuxnuqCLBRH8JaE+6ZSI+gfeYdM6iAswup5Tixj
- syoA==
+ b=IwNrXiMJMT9CP7tfffO9I/iK43SoLz7pEX5m1pPa78vqgYk2cX+VOnD/ZJK8M2Ex7j
+ 4vLhSSan1CoThKU3fdPRZEAypsib2Lm6oE7WsGja6noaOmYy+dy6GhvRTKBfg5IYtK1U
+ RVExs/lm4q33pZTlpqr2s+1qEosuW6MNDphsiF3dH5RYrEn9yw8h3BT9D3v/rHXDs0h0
+ qw4QbFYLA83NKddaxQUsNL/xXP6hfoSqrevzMaO8FScaOCQnNH3RN8vG9sHlOFXBr4Vq
+ dUOEv2uvpDlkzGBr/bOjF+grsvHQ8fbzIz5hD2XKISGs5pIOH2JHvIjrOtkqXiq30Ree
+ 0o6g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=MHg4GweYtLm0NcAk25X9agBHb2n1L7sTgfvhd5yGtRY=;
- fh=Mwjd0rnSvpf0+LVRVKefCJ+wk1xopgZF6pU+T4cdJSk=;
- b=c2FG1Px8RY7RGxk+7mPnVzu3vz4/PMSEdx4bNnCvUgsyVp3TuxD0yXJpJYDUNN5FKf
- t60XUcJmpellcNsMdfSEBYI8EWfB28ox+aX3ksQ9I/9HcGRmWOZ5LeTJ509mGEcKEDZd
- kWnExJoyA6Qw47n7ekJueB5BeNG8F2ygU4x20+Jm2FzPbmRQ9uAfXAw8DfIp/a+CIqn+
- Kh5K6CORW/NMf61Yn+4RU2j1XoA8lwUPLdbu5o5Yb2k/A1y45sS9SHGqrFSwcOozgojT
- TfbKljtttePPVliQihklTLpOjlpugSJPSA8BXDwfmWImvf/ibJs46ATF3SyU104R40FY
- dF/w==; darn=lists.denx.de
+ bh=bHRL4p/2Kn0P4qmtnGp1tKnjXQPPewogO2+GresLTdw=;
+ fh=3cGkqt4Xgv2w9dTeeIJFEJ5AO4AvGobPArcY4WlS1wc=;
+ b=EfLzJFDpM3xKfgWVH+iD09Tob+j/nbQGCYzf2QTzKBMdN+0YhZWOCmDA4q8jksEMUo
+ B0cRSbXATfZ8GsfnEeR60JYd1Ev53V+nWLAVchj87VSUdSW9OXh7kh0F4+zh5hVpZ0q8
+ 2F3zFpQMZTRcKHDciltPajp7mOfHqrGgzPOV4VqiVWpl0ZnqcCMu3z9X6xUCC6bXC4Sa
+ MkdD9i859i6Q8OIh8XuoDU9BU010sqlkfN7HOgyQe7FXe0ngh6yP/Cuzt/kVUR9LYV/L
+ CbmIAvqAQKmUP695r9CQQ7OyfMEV+0f6cdFDHfh71ERKc7oEuo1yf2gDPvlRLmd1/B4t
+ 9GCA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1774190240; x=1774795040; darn=lists.denx.de;
+ d=amarulasolutions.com; s=google; t=1774205212; x=1774810012;
+ darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MHg4GweYtLm0NcAk25X9agBHb2n1L7sTgfvhd5yGtRY=;
- b=WiLcl4CbRT17jcA9gXOX/B2A87hWu+OjxpwPlNI+/V46UWkIySYXlBklfLgc0ltxGZ
- 5+lcqp+S0HU33Vn+ccJzFiTzy25MABDsjtP50rIMs9pqAouHpOl+WcTEBJA11QXjrVJk
- x+s3dV5+WPVW1G6FI1EzPn7WivMDGim/qgr64=
+ bh=bHRL4p/2Kn0P4qmtnGp1tKnjXQPPewogO2+GresLTdw=;
+ b=Y00Ywt/dB9i+1q5plcmAEyUJagl/PUXzELm7q8zerggZPU70aQK+v0Bhxv30BRCuLZ
+ GauK14o6q408dZ3KIET2I3XoTRZXIF/DPWOn1eDXXV5Z08y4tHc6D/FfuCv4bv6UztSm
+ kdw279KpnLYd/lSLj3XnJb7dYUrK/78BzDY/0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774190240; x=1774795040;
+ d=1e100.net; s=20251104; t=1774205212; x=1774810012;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=MHg4GweYtLm0NcAk25X9agBHb2n1L7sTgfvhd5yGtRY=;
- b=sMwnfXDddKJrn+UU5fZIqE9GwnPRzLfWBunNDiYNyBUU5rcs4r6yMbalLGQ6YQIxJz
- ePoXN/MDUC3utkxI7ghX7mIoqsZsz0+CEjQ0DCIJSSIMflcuTV2OPXQyrE3QbuTXXi4G
- TXjHtNnqjZ/qdkK3XcsWll6Lif76kWtUCitwTIp6TNT8xjOK3NZwQE9pllv2gPvS0pJT
- 5K6JG3F1ucpsl1J5Sqq4xesiZ46wwJk0Epp0Py8st8+HQytr9cJvDirmbeOdamizcY9P
- lPsh8Nsr1uNye56m4vIfS6m2SAQumTwAc2B2q9ROgdd343b5W/SFlbVvi/e2iQNzw/1C
- KLNQ==
-X-Gm-Message-State: AOJu0YzJb/8Shjkdf9Ks9N32OYuojpi1DW99EpKADXMIn4ZN3ZnVuLUw
- TzMJVgLCGVUntHMuZVHVZ+jRTaFCjiWdldIZFQ/zDxQFR0QqpJem2wff9i5tUu0mT0/BEq0io2A
- gPPYkdhSbOHdKtKw2KelPpGhpevtiHf4ZfJ9iuRj1
-X-Gm-Gg: ATEYQzwlwjLkrGVKQl3YgRmk9AG8X1nUeagamwIbGI7mNwrWgo1pIzX2yKD5m0R1quJ
- phyFC2vB4yy5wlQkOKPuHWiUZT1Sni8jLPZM/C7C8gSRw6SfKMcFfDm2HkP/osJ7PrUPiz8IjFf
- OizK+Shvg2Pv70mtYIj+euweiE+9U4lM2N3tRkb6sh7OVJvv3886AuNCVBjfIkIosw1s3eidSE6
- whH9jNoAg7/BGwfzJjY+oA1Rf7eciMen/I/R3rYesttqjxeUrHPodx4r77VQGmVIEy7Mmfpah2J
- 6ylWh6I=
-X-Received: by 2002:a17:906:b382:b0:b96:ed21:f46f with SMTP id
- a640c23a62f3a-b982f284cefmr394732766b.14.1774190239558; Sun, 22 Mar 2026
- 07:37:19 -0700 (PDT)
+ bh=bHRL4p/2Kn0P4qmtnGp1tKnjXQPPewogO2+GresLTdw=;
+ b=L77onWq6FPsdWCHlo6ctBjhIjUViaSnXE9TD2wBeSvPSal00dKCrhbDLTDXMI2ea2h
+ W121tIdoMK+QoUqFl7vy8FseoScEbnAcHlIUi0gxilBcqqiXh1HdG7puI/1yAa8e1zbP
+ n73XVgFZv8gDlhVuMolLXA0pup0LgaV8rHBOoqzpJFqUEE1/gBQZM75uGvebftXmS+DL
+ aQHu97w0fyFhFezmBAJjGflcrzBJmxItRqHCWrHaoIlNcAK20+aOKB8D4UyM63V5sX9X
+ ntgeacTykMaazVmD65L2Fnysx0ouCbZZu6hjWWzm9hUEkD2ejpCeGON/se8p47BEt0a8
+ M+Vg==
+X-Gm-Message-State: AOJu0YxEgocqmR2uPfnZZgL4CxtUreSkAo0VsvhI1TFgP836J7G+TQQA
+ ZhGWhSi4GoHBBSubGdwgXuqGkOGttyUS/v2ouqzT2iA/A7CpyG1PjnTnz1445gBwEo89ngQzKCe
+ E2btuAxt2O3JDXPEJpbFqsDH/VNiKwvNIPJY8irDuITLGPg8y3BzjVsxw0Q==
+X-Gm-Gg: ATEYQzzXToLgbIJE6NqbajzsnJmIsrK+HjGUt46MYFQCIPymbNGmbLpguo1m8XZg00B
+ l4sw8E9PYKpetgRadEKa8oqrAufz5+hpnbkBY/V8tEAwC+angEa1YgpTQyc8ZD2IOoN26L1wTbh
+ /colPKuNLXQBECvADS779UcSEjUsviHjOAiiT1ZtPUC0nNZ/Nf+IM7/CMLNd1km2pKreiI+3HXg
+ WNEjArjKuBYZjm5L149AvNX0GJYwtYnj4BaZMBvyz0bUmuoB+4EEXsfrjROq0cmreshXx2Q8KIC
+ H5IghzRp4OdFzsUZ389BfKAMcR1W6HQepB/DNME=
+X-Received: by 2002:a05:690c:3181:b0:79a:b03a:a2ad with SMTP id
+ 00721157ae682-79ab03aa8damr19750167b3.19.1774205211818; Sun, 22 Mar 2026
+ 11:46:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260319213551.267031-1-sjg@chromium.org>
- <CAPVz0n0DYDPcT7ZDLwXz0pUFc04R-X1C3GROpmSEp1z=xrA7Vg@mail.gmail.com>
-In-Reply-To: <CAPVz0n0DYDPcT7ZDLwXz0pUFc04R-X1C3GROpmSEp1z=xrA7Vg@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 22 Mar 2026 08:37:08 -0600
-X-Gm-Features: AaiRm50ZyqK_eNkqODMmbJ02CWIH5Yz-kDLQWwzYvxyyh6puRhxIhiGdD1epXRo
-Message-ID: <CAFLszTiZYiQgaspCutyQeZy+Tok9scLp-rG9_Sdk8XirUinOSA@mail.gmail.com>
-Subject: Re: [RFC PATCH 00/15] RFC: dm: Add uclass adjunct support
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de, Alice Guo <alice.guo@nxp.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
- Brian Sune <briansune@gmail.com>, Dinesh Maniyam <dinesh.maniyam@altera.com>, 
- Fabio Estevam <festevam@gmail.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- George McCollister <george.mccollister@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@arm.com>, 
- Jim Liu <JJLIU0@nuvoton.com>, Kever Yang <kever.yang@rock-chips.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
- Martin Schwan <m.schwan@phytec.de>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
- Philip Molloy <philip.molloy@analog.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Rasmus Villemoes <ravi@prevas.dk>, Ryan Chen <ryan_chen@aspeedtech.com>, 
- Ryder Lee <ryder.lee@mediatek.com>, Sam Protsenko <semen.protsenko@linaro.org>,
- Stanley Chu <yschu@nuvoton.com>, Stefan Bosch <stefan_b@posteo.net>, 
- Sughosh Ganu <sughosh.ganu@arm.com>, Tim Harvey <tharvey@gateworks.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Yao Zi <me@ziyao.cc>
+References: <20260320205326.3788614-1-trini@konsulko.com>
+In-Reply-To: <20260320205326.3788614-1-trini@konsulko.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Sun, 22 Mar 2026 19:46:40 +0100
+X-Gm-Features: AaiRm53StdQyxAO6XUt7tqKlOooZqDcp8h20QZbG7tGxIMZu2jamOIakKZLabZg
+Message-ID: <CAOf5uw=VXUuPu+AOW1RVg6dTch47T2WSjmD6Tj-CJUmOqv2W8Q@mail.gmail.com>
+Subject: Re: [PATCH] bootcount: Give i2c-eeprom a unique identifier
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sun, 22 Mar 2026 19:41:11 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -139,122 +111,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Svyatoslav,
+Hi
 
-On Fri, 20 Mar 2026 at 02:01, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
+On Fri, Mar 20, 2026 at 9:53=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
 >
-> =D1=87=D1=82, 19 =D0=B1=D0=B5=D1=80. 2026=E2=80=AF=D1=80. =D0=BE 23:36 Si=
-mon Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
-> >
-> > [Note: this is marked RFC as I am still not sure that this is the best
-> > approach. But this is my third redesign so I think it makes sense to ge=
-t
-> > some feedback before trying to refine it further]
-> >
+> Every U_BOOT_DRIVER entry must be unique and this driver was re-using
+> the name of the bootcount_spi_flash driver. Change to
+> bootcount_i2c_eeprom.
 >
-> Hello Simon!
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+>  drivers/bootcount/i2c-eeprom.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> With all do respect how this change improves current situation? From
-> what I can see introducing multi-uclass will bring only chaos and
-> confusion.
+> diff --git a/drivers/bootcount/i2c-eeprom.c b/drivers/bootcount/i2c-eepro=
+m.c
+> index 12c430465c98..f54515f451ec 100644
+> --- a/drivers/bootcount/i2c-eeprom.c
+> +++ b/drivers/bootcount/i2c-eeprom.c
+> @@ -85,7 +85,7 @@ static const struct udevice_id bootcount_i2c_eeprom_ids=
+[] =3D {
+>         { }
+>  };
 >
-> > U-Boot's driver model requires each device to belong to exactly one
-> > uclass. Multi-function hardware must work around this by creating
-> > child devices in different uclasses via device_bind_driver_to_node(),
-> > with a NOP parent device.
+> -U_BOOT_DRIVER(bootcount_spi_flash) =3D {
+> +U_BOOT_DRIVER(bootcount_i2c_eeprom) =3D {
+>         .name   =3D "bootcount-i2c-eeprom",
+>         .id     =3D UCLASS_BOOTCOUNT,
+>         .priv_auto      =3D sizeof(struct bootcount_i2c_eeprom_priv),
+> --
+> 2.43.0
 >
-> Example you are targeting behaves as it should. MFD can have a
-> multiple cell linked to the parent node and/or its subnodes, this is
-> not a workaround, this is how Linux MFD operate too. And a parent may
-> not be a NOP device, it may be a core providing access or misc
-> communication functions (like PMICs do).
->
-> >
-> > This is quite common: at least 8 PMIC drivers bind sysreset children,
-> > every Qualcomm GCC driver (15+ platforms) does this and several PHY
-> > drivers bind clock children.
-> >
-> > This series adds uclass adjuncts, which allow a device to register
-> > in additional uclasses without creating child devices. Each adjunct
-> > carries its own ops pointer, per-device uclass private/platform
-> > data, and sequence number.
-> >
-> > With this series, uclass lookup and iteration functions include
-> > adjunct registrations alongside primary devices. The
-> > uclass_foreach_dev() iterator walks all entries in the uclass,
-> > including adjunct ones. Iterators that use a struct udevice * to
-> > iterate (uclass_find_first_device() etc.) only see primary devices,
-> > since they navigate via the embedded primary ucm.
-> >
-> > A new ucm_ iterator API uses struct uclass_member * as the cursor,
-> > enabling adjunct-aware iteration and lookup. It provides find, probe,
-> > check, drvdata, seq and ofnode variants. uclass_foreach_dev_probe()
-> > uses this internally so that it includes adjuncts.
-> >
->
-> It seems to be overcomplication. ATM cells can be bound to the parent
-> device node and called by the UCLASS from the parent node. For
-> example, if PMIC has gpio cells and does not expose them as an
-> individual node then gpio driver can be bound to parents node and used
-> as a gpio function provider which matches what OF schema expects
-> pretty accurately.
->
-> > As a concrete example, a Qualcomm GCC driver could register as
-> > UCLASS_CLK (primary) with adjunct UCLASS_RESET and
-> > UCLASS_POWER_DOMAIN, thus removing the UCLASS_NOP container and the
-> > qcom_cc_bind() function. The raa215300 PMIC conversion in this series
-> > demonstrates the pattern: one device, no child sysreset driver,
-> > no dev_get_priv(dev->parent) indirection.
-> >
-> > The mechanism is enabled by a new CONFIG_DM_UC_ADJUNCT option. Code siz=
-e
-> > is largely neutral without this, except for the change to add
-> > dev_int_set_seq() which is used by PCI boards.
-> >
->
-> So you basically propose to squash everything into a single enormous
-> driver coding every function that MFD provides instead of keeping
-> existing layout of separate cells with dedicated function. This seems
-> to be a maintainers hell.
->
-> > Note that a couple of linker-list fixes are included so that sandbox
-> > will start up correctly. It still does not pass all tests though, due t=
-o
-> > various bugs surfaced by this series. If we go ahead, we will need at
-> > least one precursor series to resolve these pre-existing problems.
-> >
-> > This is an RFC. The next steps could be:
-> > - Convert one Qualcomm GCC driver to use adjuncts
-> > - Convert one RK8xx PMIC from child-sysreset to adjunct
-> > - Update per-subsystem ops accessors (clk_dev_ops(), etc.)
-> >
 
-Just to clarify, the goal here is not to squash all MFDs into one. It
-is not intended to move away from how Linux handles a particular
-subsystem (quite the opposite!)
-
-This is really just aimed at allowing a driver to support multiple
-uclasses, in cases where that is useful. It can actually simplify
-certain drivers, since they can have their state in one place rather
-than having to deal with the parent/child relationships and multiple
-priv/plat data. I have had quite a few bugs calling an operation on
-dev instead of dev->parent as well. I still believe that modelling a
-PMIC with child devices for CLK, REGULATOR, SYSRESET and GPIO makes
-sense in many cases. But now it becomes optional. Ssee the example in
-this series, which I hope you will agree does actually simplify the
-driver.
-
-The original design of driver model was based on uclass being
-associated with a particular API, with a device being in a single
-uclass. This series is really just looking at what it might look like
-if we relaxed that contraint.
-
-I've been thinking about doing this for years...the most recent
-impetus comes from the clk/reset/power domain discussion on irc and
-Casey's recent series, although in fact that seems to be heading
-towards mostly separate infra rather than enhancing driver model. I
-would like to steer it towards still integrating fully with clk - e.g.
-using clk_get_by_index(), etc.
-
-Regards,
-Simon
+Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
