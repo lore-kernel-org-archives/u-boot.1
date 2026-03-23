@@ -4,55 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E0FEF46112
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 13:43:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50ACDF4610D
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 13:48:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 076908416C;
-	Mon, 23 Mar 2026 14:43:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id CBD6284180;
+	Mon, 23 Mar 2026 14:48:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="VoDsbN09";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="XpIOtFek";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1EE6384114; Mon, 23 Mar 2026 14:43:23 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id B048084144; Mon, 23 Mar 2026 14:48:01 +0100 (CET)
+Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1278284175
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 14:43:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FA3884099
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 14:47:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mwalle@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id CE9E340ABC;
- Mon, 23 Mar 2026 13:43:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8476FC4CEF7;
- Mon, 23 Mar 2026 13:43:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1774273396;
- bh=E/d0Y9rfYY0+dgC04Nx9nfu7GqYdQ08cupS06mN5wu4=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=VoDsbN09sMXwtmEjBznr/DjH+5NZXB03rYwqJF94l0TN7M5DXvEE9lkeQnJIWnIg0
- P2Bksc3DTc9nT7gUcmlv7OBwV4ORT4yTyyq+IxYso2dHaRpUMhUQSUCQ+iYW9EB0HJ
- mOF+tmHgmC9jM5pkfmBwGiTIxGJN/eaam1OgV1COVzaSaq4Vb0zw0NZX12De6iCkjw
- GhTXQpuF0/sCRTcw1XasCMdfJMDjl3sEbOETocuZ6vQvWv6xVbxXZje5kSDuo4GcyK
- GC/c1CMOHPk6hkzrs2cvKz5Fdf0MUD/ARawstrLR1ddHyZzJOqai9JQDXvmfZxOTNB
- wwmNFX4tmS6yg==
-From: Michael Walle <mwalle@kernel.org>
-To: Huang Jianan <jnhuang95@gmail.com>,
-	Tom Rini <trini@konsulko.com>
-Cc: linux-erofs@lists.ozlabs.org, u-boot@lists.denx.de,
- Michael Walle <mwalle@kernel.org>
-Subject: [PATCH 4/4] fs/erofs: allocate data buffers on heap with alignment
- (3/3)
-Date: Mon, 23 Mar 2026 14:42:20 +0100
-Message-ID: <20260323134305.2675822-5-mwalle@kernel.org>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260323134305.2675822-1-mwalle@kernel.org>
-References: <20260323134305.2675822-1-mwalle@kernel.org>
+ spf=pass smtp.mailfrom=Max.Merchel@ew.tq-group.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:Content-Type:
+ MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References;
+ bh=b0uWArjc6/32EUg7FTU6f/LF5DMispAhgn3qfH+/h1A=; b=XpIOtFekn90LvRb6T43lxSyD16
+ WeIhVaXpjiIbp7CxzZokbfNHSuberq9a4qwwhyg9Ci6Q84w9MznEzfUlB0JYhuqchp3PThyAgHgYN
+ yYUlIO2uiag11Nk05GxHa2oINIcz/cOq2hS6YmUuUH5mZ6+qDvgn8OerEbpztTIffbomC3ZFwez5J
+ 9ddQ4fMRCCg1VvwV+YZcD8khPNP/CbQU3yayMJsFrAEvCyKHyPTod2+YhmMYNmGMIZ1kgTpspU+1f
+ 6FWhATh75Ts05fbZTirqRk0GKnHHhMd0RvdyRmovBErk2g8L7rBf2YcXJlWiAf5LdkPsKsg5nPP4F
+ YATqyaBw==;
+Received: from sslproxy08.your-server.de ([78.47.166.52])
+ by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96.2) (envelope-from <Max.Merchel@ew.tq-group.com>)
+ id 1w4fdO-0000d9-16; Mon, 23 Mar 2026 14:47:58 +0100
+Received: from localhost ([127.0.0.1])
+ by sslproxy08.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96) (envelope-from <Max.Merchel@ew.tq-group.com>)
+ id 1w4fdN-000M7t-0N; Mon, 23 Mar 2026 14:47:57 +0100
+From: Max Merchel <Max.Merchel@ew.tq-group.com>
+To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Max Merchel <Max.Merchel@ew.tq-group.com>, u-boot@lists.denx.de,
+ u-boot@ew.tq-group.com
+Subject: [PATCH v2 00/10] TQMa6 with preparations for integrating additional
+ TQ boards
+Date: Mon, 23 Mar 2026 14:47:30 +0100
+Message-ID: <20260323134746.787430-1-Max.Merchel@ew.tq-group.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -70,293 +73,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The data buffers are used to transfer from or to hardware peripherals.
-Often, there are restrictions on addresses, i.e. they have to be aligned
-at a certain size. Thus, allocate the data on the heap instead of the
-stack (at a random address alignment).
+This series introduces features for sharing across different TQ boards,
+simplifying maintenance by avoiding code duplication.
 
-This will also have the benefit, that large data (4k) isn't eating up
-the stack.
+These changes are implemented for the TQMa6.
+They will also be used by TQMa7 and TQMa6UL, whose mainlining is currently
+being prepared.
 
-The actual change is split across multiple patches. This one handles the
-"struct erofs_map_blocks" which itself contains a data buffer. Add some
-helpers to alloc and free the struct because the data buffer will now be
-malloc'ed separately.
+These changes also serve as preparation for further work on the TQMa6
+(in following series).
 
-Signed-off-by: Michael Walle <mwalle@kernel.org>
----
- fs/erofs/data.c     | 103 +++++++++++++++++++++++++++++---------------
- fs/erofs/internal.h |   4 +-
- fs/erofs/zmap.c     |  29 ++++++++++---
- 3 files changed, 94 insertions(+), 42 deletions(-)
+Changes V2:
+- Drop patches 1 and 2 from the series.
+  They cause CI errors and need to be revised.
+- Drop patch 12 with planned SPL usage the values ​​can be
+  read from the device trees.
+- Uptate commit log (Use imperative mood)
 
-diff --git a/fs/erofs/data.c b/fs/erofs/data.c
-index 2fe345d80ee..d10c00fe9f3 100644
---- a/fs/erofs/data.c
-+++ b/fs/erofs/data.c
-@@ -174,32 +174,60 @@ int erofs_read_one_data(struct erofs_map_blocks *map, char *buffer, u64 offset,
- 	return 0;
- }
- 
-+struct erofs_map_blocks *erofs_alloc_map_blocks(void)
-+{
-+	struct erofs_map_blocks *map;
-+
-+	map = malloc(sizeof(struct erofs_map_blocks));
-+	if (!map)
-+		return NULL;
-+
-+	memset(map, 0, sizeof(struct erofs_map_blocks));
-+	map->index = UINT_MAX;
-+
-+	map->mpage = malloc_cache_aligned(EROFS_MAX_BLOCK_SIZE);
-+	if (!map->mpage) {
-+		free(map);
-+		return NULL;
-+	}
-+
-+	return map;
-+}
-+
-+void erofs_free_map_blocks(struct erofs_map_blocks *map)
-+{
-+	free(map->mpage);
-+	free(map);
-+}
-+
- static int erofs_read_raw_data(struct erofs_inode *inode, char *buffer,
- 			       erofs_off_t size, erofs_off_t offset)
- {
--	struct erofs_map_blocks map = {
--		.index = UINT_MAX,
--	};
-+	struct erofs_map_blocks *map;
- 	int ret;
- 	erofs_off_t ptr = offset;
- 
-+	map = erofs_alloc_map_blocks();
-+	if (!map)
-+		return -ENOMEM;
-+
- 	while (ptr < offset + size) {
- 		char *const estart = buffer + ptr - offset;
- 		erofs_off_t eend, moff = 0;
- 
--		map.m_la = ptr;
--		ret = erofs_map_blocks(inode, &map, 0);
-+		map->m_la = ptr;
-+		ret = erofs_map_blocks(inode, map, 0);
- 		if (ret)
--			return ret;
-+			goto out;
- 
--		DBG_BUGON(map.m_plen != map.m_llen);
-+		DBG_BUGON(map->m_plen != map->m_llen);
- 
- 		/* trim extent */
--		eend = min(offset + size, map.m_la + map.m_llen);
--		DBG_BUGON(ptr < map.m_la);
-+		eend = min(offset + size, map->m_la + map->m_llen);
-+		DBG_BUGON(ptr < map->m_la);
- 
--		if (!(map.m_flags & EROFS_MAP_MAPPED)) {
--			if (!map.m_llen) {
-+		if (!(map->m_flags & EROFS_MAP_MAPPED)) {
-+			if (!map->m_llen) {
- 				/* reached EOF */
- 				memset(estart, 0, offset + size - ptr);
- 				ptr = offset + size;
-@@ -210,17 +238,21 @@ static int erofs_read_raw_data(struct erofs_inode *inode, char *buffer,
- 			continue;
- 		}
- 
--		if (ptr > map.m_la) {
--			moff = ptr - map.m_la;
--			map.m_la = ptr;
-+		if (ptr > map->m_la) {
-+			moff = ptr - map->m_la;
-+			map->m_la = ptr;
- 		}
- 
--		ret = erofs_read_one_data(&map, estart, moff, eend - map.m_la);
-+		ret = erofs_read_one_data(map, estart, moff, eend - map->m_la);
- 		if (ret)
--			return ret;
-+			goto out;
- 		ptr = eend;
- 	}
--	return 0;
-+
-+	ret = 0;
-+out:
-+	erofs_free_map_blocks(map);
-+	return ret;
- }
- 
- int z_erofs_read_one_data(struct erofs_inode *inode,
-@@ -282,19 +314,21 @@ static int z_erofs_read_data(struct erofs_inode *inode, char *buffer,
- 			     erofs_off_t size, erofs_off_t offset)
- {
- 	erofs_off_t end, length, skip;
--	struct erofs_map_blocks map = {
--		.index = UINT_MAX,
--	};
-+	struct erofs_map_blocks *map;
- 	bool trimmed;
- 	unsigned int bufsize = 0;
- 	char *raw = NULL;
- 	int ret = 0;
- 
-+	map = erofs_alloc_map_blocks();
-+	if (!map)
-+		return -ENOMEM;
-+
- 	end = offset + size;
- 	while (end > offset) {
--		map.m_la = end - 1;
-+		map->m_la = end - 1;
- 
--		ret = z_erofs_map_blocks_iter(inode, &map, 0);
-+		ret = z_erofs_map_blocks_iter(inode, map, 0);
- 		if (ret)
- 			break;
- 
-@@ -302,31 +336,31 @@ static int z_erofs_read_data(struct erofs_inode *inode, char *buffer,
- 		 * trim to the needed size if the returned extent is quite
- 		 * larger than requested, and set up partial flag as well.
- 		 */
--		if (end < map.m_la + map.m_llen) {
--			length = end - map.m_la;
-+		if (end < map->m_la + map->m_llen) {
-+			length = end - map->m_la;
- 			trimmed = true;
- 		} else {
--			DBG_BUGON(end != map.m_la + map.m_llen);
--			length = map.m_llen;
-+			DBG_BUGON(end != map->m_la + map->m_llen);
-+			length = map->m_llen;
- 			trimmed = false;
- 		}
- 
--		if (map.m_la < offset) {
--			skip = offset - map.m_la;
-+		if (map->m_la < offset) {
-+			skip = offset - map->m_la;
- 			end = offset;
- 		} else {
- 			skip = 0;
--			end = map.m_la;
-+			end = map->m_la;
- 		}
- 
--		if (!(map.m_flags & EROFS_MAP_MAPPED)) {
-+		if (!(map->m_flags & EROFS_MAP_MAPPED)) {
- 			memset(buffer + end - offset, 0, length - skip);
--			end = map.m_la;
-+			end = map->m_la;
- 			continue;
- 		}
- 
--		if (map.m_plen > bufsize) {
--			bufsize = map.m_plen;
-+		if (map->m_plen > bufsize) {
-+			bufsize = map->m_plen;
- 			free(raw);
- 			raw = malloc_cache_aligned(bufsize);
- 			if (!raw) {
-@@ -335,13 +369,14 @@ static int z_erofs_read_data(struct erofs_inode *inode, char *buffer,
- 			}
- 		}
- 
--		ret = z_erofs_read_one_data(inode, &map, raw,
-+		ret = z_erofs_read_one_data(inode, map, raw,
- 					    buffer + end - offset, skip, length,
- 					    trimmed);
- 		if (ret < 0)
- 			break;
- 	}
- 	free(raw);
-+	erofs_free_map_blocks(map);
- 	return ret < 0 ? ret : 0;
- }
- 
-diff --git a/fs/erofs/internal.h b/fs/erofs/internal.h
-index 13c862325a6..2e471d66c7d 100644
---- a/fs/erofs/internal.h
-+++ b/fs/erofs/internal.h
-@@ -291,7 +291,7 @@ enum {
- #define EROFS_MAP_PARTIAL_REF	(1 << BH_Partialref)
- 
- struct erofs_map_blocks {
--	char mpage[EROFS_MAX_BLOCK_SIZE];
-+	char *mpage;
- 
- 	erofs_off_t m_pa, m_la;
- 	u64 m_plen, m_llen;
-@@ -367,6 +367,8 @@ static inline int erofs_get_occupied_size(const struct erofs_inode *inode,
- }
- 
- /* data.c */
-+struct erofs_map_blocks *erofs_alloc_map_blocks(void);
-+void erofs_free_map_blocks(struct erofs_map_blocks *map);
- int erofs_getxattr(struct erofs_inode *vi, const char *name, char *buffer,
- 		   size_t buffer_size);
- int erofs_listxattr(struct erofs_inode *vi, char *buffer, size_t buffer_size);
-diff --git a/fs/erofs/zmap.c b/fs/erofs/zmap.c
-index 1ded934a5d7..3060b2e9ec6 100644
---- a/fs/erofs/zmap.c
-+++ b/fs/erofs/zmap.c
-@@ -75,28 +75,43 @@ static int z_erofs_fill_inode_lazy(struct erofs_inode *vi)
- 	}
- 
- 	if (vi->z_advise & Z_EROFS_ADVISE_INLINE_PCLUSTER) {
--		struct erofs_map_blocks map = { .index = UINT_MAX };
-+		struct erofs_map_blocks *map;
-+
-+		map = erofs_alloc_map_blocks();
-+		if (!map) {
-+			ret = -ENOMEM;
-+			goto err_out;
-+		}
- 
- 		vi->idata_size = le16_to_cpu(h->h_idata_size);
--		ret = z_erofs_do_map_blocks(vi, &map,
-+		ret = z_erofs_do_map_blocks(vi, map,
- 					    EROFS_GET_BLOCKS_FINDTAIL);
--		if (!map.m_plen ||
--		    erofs_blkoff(map.m_pa) + map.m_plen > erofs_blksiz()) {
-+		if (!map->m_plen ||
-+		    erofs_blkoff(map->m_pa) + map->m_plen > erofs_blksiz()) {
- 			erofs_err("invalid tail-packing pclustersize %llu",
--				  map.m_plen | 0ULL);
-+				  map->m_plen | 0ULL);
- 			ret = -EFSCORRUPTED;
-+			erofs_free_map_blocks(map);
- 			goto err_out;
- 		}
-+		erofs_free_map_blocks(map);
- 		if (ret < 0)
- 			goto err_out;
- 	}
- 	if (vi->z_advise & Z_EROFS_ADVISE_FRAGMENT_PCLUSTER &&
- 	    !(h->h_clusterbits >> Z_EROFS_FRAGMENT_INODE_BIT)) {
--		struct erofs_map_blocks map = { .index = UINT_MAX };
-+		struct erofs_map_blocks *map;
-+
-+		map = erofs_alloc_map_blocks();
-+		if (!map) {
-+			ret = -ENOMEM;
-+			goto err_out;
-+		}
- 
- 		vi->fragmentoff = le32_to_cpu(h->h_fragmentoff);
--		ret = z_erofs_do_map_blocks(vi, &map,
-+		ret = z_erofs_do_map_blocks(vi, map,
- 					    EROFS_GET_BLOCKS_FINDTAIL);
-+		erofs_free_map_blocks(map);
- 		if (ret < 0)
- 			goto err_out;
- 	}
+Markus Niebel (2):
+  env: tq: add shareable environment settings
+  board/tq: Add common baseboard API
+
+Max Merchel (6):
+  [cleanup]configs: tqma6.h: remove unused define for PHYS_SDRAM_SIZE
+  [cleanup]configs: tqma6.h: remove unused define for PFUZE100_I2C
+  board: tqma6: change to use shareable tq environment
+  configs: tqma6: change to include tqma6.h in baseboard headers
+  board/tq: Add common mmc API
+  board: tqma6: use common TQ mmc function
+
+Paul Gerber (2):
+  board: tqma6: use common TQ baseboard
+  board: tqma6: update eMMC DSR handling
+
+ board/tq/common/Kconfig          |  13 ++
+ board/tq/common/Makefile         |   9 ++
+ board/tq/common/tq_bb.c          |  78 +++++++++
+ board/tq/common/tq_bb.h          |  39 +++++
+ board/tq/common/tq_sdmmc.c       |  46 ++++++
+ board/tq/tqma6/Kconfig           |   8 +-
+ board/tq/tqma6/Makefile          |   1 +
+ board/tq/tqma6/tqma6.c           |  39 +++--
+ board/tq/tqma6/tqma6.env         |  47 ++++++
+ board/tq/tqma6/tqma6_bb.h        |  28 ----
+ board/tq/tqma6/tqma6_emmc.c      |  88 ++++++++++
+ board/tq/tqma6/tqma6_emmc.h      |  19 +++
+ board/tq/tqma6/tqma6_mba6.c      |  26 +--
+ board/tq/tqma6/tqma6_wru4.c      |  29 +---
+ include/configs/tqma6.h          | 266 ++-----------------------------
+ include/configs/tqma6_mba6.h     |   3 +-
+ include/configs/tqma6_wru4.h     |   2 +
+ include/env/tq/mmc.env           |  82 ++++++++++
+ include/env/tq/nfs.env           |  51 ++++++
+ include/env/tq/spi.env           |  23 +++
+ include/env/tq/tq-imx-shared.env |  38 +++++
+ include/env/tq/ubi.env           |  47 ++++++
+ 22 files changed, 641 insertions(+), 341 deletions(-)
+ create mode 100644 board/tq/common/Kconfig
+ create mode 100644 board/tq/common/Makefile
+ create mode 100644 board/tq/common/tq_bb.c
+ create mode 100644 board/tq/common/tq_bb.h
+ create mode 100644 board/tq/common/tq_sdmmc.c
+ create mode 100644 board/tq/tqma6/tqma6.env
+ delete mode 100644 board/tq/tqma6/tqma6_bb.h
+ create mode 100644 board/tq/tqma6/tqma6_emmc.c
+ create mode 100644 board/tq/tqma6/tqma6_emmc.h
+ create mode 100644 include/env/tq/mmc.env
+ create mode 100644 include/env/tq/nfs.env
+ create mode 100644 include/env/tq/spi.env
+ create mode 100644 include/env/tq/tq-imx-shared.env
+ create mode 100644 include/env/tq/ubi.env
+
+
+base-commit: eb00c710508d09b2a3b9aca75dd18280f1304703
 -- 
-2.47.3
+2.43.0
 
