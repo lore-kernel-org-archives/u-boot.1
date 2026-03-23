@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EADCDF483EC
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 19:53:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18174F483EC
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 19:53:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 746368419C;
-	Mon, 23 Mar 2026 20:52:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 52038841F7;
+	Mon, 23 Mar 2026 20:53:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UEjNc3H6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iO6RKgUk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CE3E8419C; Mon, 23 Mar 2026 20:52:53 +0100 (CET)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id 16182841D6; Mon, 23 Mar 2026 20:52:56 +0100 (CET)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DF7C8415D
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 20:52:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6ACA984199
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 20:52:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-467161c4a1cso1454250b6e.3
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 12:52:50 -0700 (PDT)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7d9b1c57a4cso1434986a34.3
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 12:52:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774295569; x=1774900369; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1774295571; x=1774900371; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=ldmQsjh+CSYRcJi6d6QGoDGcQUySJe4MBrml4Lm3VhQ=;
- b=UEjNc3H6OVXDIHoCt1onYRUesI5eOmndg+NGXOsCCrtYTg3oZj2ThQ7NRKhG+4cxyZ
- +fxI5OX48dPl4fWFQnhJHQRZkd896uqMZANIFC9WlI5Xqvcp2WRDbNu1LDeyAuAnAJBg
- 07l9Sf4E0AN+I0vyGd8PvA/0rn7UyciY2c33w=
+ bh=9Llebjgc+JKaGCGldTEKDzkFJ+S2Va8kQciaJV1Lwng=;
+ b=iO6RKgUk3M4lZahHUzGo7fizrSBE0qm3CpAwTIq+LYU20MjT/74iH4p8FGwEBDwyhL
+ 8yF6tRh/gEwNCOTp6335EsSDShqGAkG92KQG1B4Hk8oy26gk0ink8mh4h+7Dz6jAfmX8
+ PmGV1VaawC0k4pjBAKSOjXwObsJ4ML9MJGRIw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774295569; x=1774900369;
+ d=1e100.net; s=20251104; t=1774295571; x=1774900371;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ldmQsjh+CSYRcJi6d6QGoDGcQUySJe4MBrml4Lm3VhQ=;
- b=c5cylAv6HX4VTrSYPwNexNjXKnh6rq2AwJv7v8h5ApIrvpbGgSjQj4/8WwmVcavcEV
- waVlyMPW/ULe58csI4Hr8Y/N5GBhNuiTAK76ZBBVU2NRh5tfFu9t6GACbSjC2ChCsCVN
- 9G3DyoTQ7+JZ9lZpw8E//Uhz8LnNgzLHGsHilfDeHLjp7mXGqRF+kpp2WRocdbr2ayKq
- WLc4xqnYEHk8J1klyHWNObmqQfXxwx4hGNlkUoclgrKZGjuzDyBNcqLxSZXI3FFrSXr4
- 9Pi8NLhZJoo1X83s2uYQ6PlhquY0yVmR32mcKTdXRYcSRFMBg326uFL3H4SU9udL6VLB
- rHYQ==
-X-Gm-Message-State: AOJu0YzXLb6I8qg7xpcr6tkSgyx1d4u6zKeDDKSzG2BJXOl4KoBE8MSZ
- akza7r6enjSFhLRJ0kOUJbhcdVqFnDiUGElX1qIjwYQUUsFqQequ6jLg6gNiPWSM+LRY75WnhXQ
- FpzVWFaU=
-X-Gm-Gg: ATEYQzyQ777fxfzmcTiDBOCRwNeIq0xPDNmf1KHl6UZkYRwM5SW4v59q4kNpo32DB2S
- c08uawDx0q5LGqBX7nVbIEY2cCTXpKvDGu9ojv33gFPce90+Vb8ZoI79yn7l8V9rIqWgf1aizWl
- d1Kqy+KIzfDQOZgteFDp3tuF8XVZ+3Okuox7VrM4mAxKFESr3oEST5ZpSGT0KrQH9RRAdUZ++ry
- X/oh55qSeF6ONCNCa44WJ6gyw9abIVc+NwTvPxIAxzXzc3YSohJAH/QTl33rLjlPagn91n4KTD0
- UnuIcoqBfIu9mz5//McoWZVJnSwW9ND60B4jfzjetcNZLdnwoTA8TUf6UP3qmIG1y+AtR2u8fQ1
- CpvCgxEehymIHHGu2nLfNxOv4BCbNjtqI4S/uXNdbPvzfWUdzbJ+NRDKx/0ygkyS+FQ5pR5rCL4
- D8k3m2UyuJ7NY5hOwhswi2hUIatXcq82Bk/pDKcsLUDdsbJXHdrjPaeI3TN0HODiv9GIVyTZEUq
- 3f8LhiaAaHaLOv8cfVDcEMuRSN/W21cxELuvpwlFJBDLxQR00o=
-X-Received: by 2002:a05:6808:4a87:b0:467:1c6b:ee14 with SMTP id
- 5614622812f47-467e5f05ea0mr6233379b6e.33.1774295569219; 
- Mon, 23 Mar 2026 12:52:49 -0700 (PDT)
+ bh=9Llebjgc+JKaGCGldTEKDzkFJ+S2Va8kQciaJV1Lwng=;
+ b=Z3H81TczxXgyTyMnwLVtRd6J6KGvSoJqwKJM5payN/ZWcWnIq1eNB+YiH9kTGU8SO+
+ XI6CfvJX3ght+d+oDFH8ZzfKzJb7jgBzp0CnqHDD8sMaNEELN8PmG2AYsW4h+GVjWEoY
+ 4yxNXkKH+QCi/CznuNA/L7ToEsO5aQAJN6HQ8egKYo76moUinI7MPo64zpXpOVec9gdx
+ 5n5oO19N6X4GJsbnCoTKcg6qqfNTXTURwzAX4Iekkao+EXWd2dwGUjxujurA2h3lJJTV
+ 3HtcUvT/47pdQp3CCq4RdqIapO5zu4jQl9Pt5ZOMDROplqFEkPMFBTVUlr89S59WjPk6
+ RHbA==
+X-Gm-Message-State: AOJu0YypPsgYQrvGjBk5Wvc7gDcS78EP8XuF61UUeHoPY8zZ0zHCec+b
+ J3gHblZlSuivBU5Uest60TdlV46IhE/X85XBlF9Mv7WDv9tz9P8iJWhbVg5i5qP9EQMYNwxu438
+ cmsjnV1k=
+X-Gm-Gg: ATEYQzytimZWZVxyI8EU99QJ6/33NJmElHStELWrtt0IpL3HYzaSbOXh/x+mqf+fchO
+ oapiIddOGXmYqJt8EUkr0IXPTSQOzaS1/f/Hhq6YayjV1wBf5HsD9B02D4zrka8qSPCEmCzonZt
+ OVAPuwfehjP9L64/Yj5ZO53AlS4SLy/Vea7oez/M9X0blBQRU5pRwMMWRvH2P3ySY0rNPs/7zBc
+ RDBkqov3D8NRUgEQa52nlYjM/dXEcrBDyQX5Ekyaxol1g4bhpekb2Q8pqsk9uftQY+EO9fSGYA2
+ sJvkud3rtBX01x0WpHdjT2at+ogE7H5J2pDuh5NRs5+xMYVYV3HIqp9+Z3z/BkBeXDJQ0+KUOTM
+ a3M0Ccm7DLSW0RSunG9Jw3zv5P9HUXUYgW2NVQ2h88zqi/5aMzpZVdYSHbSE+livG+Ht37OVTfr
+ DU+fU78nS0YJr40ZQjnMc80bUDm5gYL4/UdezvEgnhGKsTQKNWmQnIjaQ6KnP1Nftn7/ZjbLFHn
+ VoqcmlbYlAPLQMhUAw5uxx9n5a2iRLV9kJ2cjDiWyWIUI4QY+ft++JEZcGwkA==
+X-Received: by 2002:a05:6830:4985:b0:7d7:da1d:4472 with SMTP id
+ 46e09a7af769-7d7eae57842mr9307114a34.8.1774295570967; 
+ Mon, 23 Mar 2026 12:52:50 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-467e7d19ef9sm7381278b6e.4.2026.03.23.12.52.48
+ 586e51a60fabf-41c14e45213sm10351042fac.18.2026.03.23.12.52.50
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Mar 2026 12:52:48 -0700 (PDT)
+ Mon, 23 Mar 2026 12:52:50 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] lmb: boot: Update dependencies within BOOT_DEFAULTS_CMDS
-Date: Mon, 23 Mar 2026 13:52:47 -0600
-Message-ID: <20260323195247.2363434-1-trini@konsulko.com>
+Subject: [PATCH] cmd: Correct dependencies for CMD_BOOTD
+Date: Mon, 23 Mar 2026 13:52:49 -0600
+Message-ID: <20260323195249.2363452-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -93,30 +93,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The CMD_BOOT[IZ] symbols have a dependency on LMB, correctly,
-currently. Make sure that in BOOT_DEFAULTS_CMDS we only select these
-commands if LMB is enabled.
+The CMD_BOOTD functionality can only work with CMD_BOOTM enabled, so
+express this dependency in Kconfig.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- boot/Kconfig | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ cmd/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index f37e7a0c380b..75fd64f02054 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -434,8 +434,8 @@ config BOOT_DEFAULTS_CMDS
- 	select CMD_DHCP if CMD_NET && !NO_NET
- 	select CMD_PING if CMD_NET && !NO_NET
- 	select CMD_PXE if CMD_NET && !NO_NET
--	select CMD_BOOTI if ARM64
--	select CMD_BOOTZ if ARM && !ARM64
-+	select CMD_BOOTI if ARM64 && LMB
-+	select CMD_BOOTZ if ARM && !ARM64 && LMB
- 	imply CMD_MII if CMD_NET && !NO_NET
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 24dc7fa54273..7712cb9f3afe 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -292,6 +292,7 @@ menu "Boot commands"
  
- config BOOT_DEFAULTS
+ config CMD_BOOTD
+ 	bool "bootd"
++	depends on CMD_BOOTM
+ 	default y
+ 	help
+ 	  Run the command stored in the environment "bootcmd", i.e.
 -- 
 2.43.0
 
