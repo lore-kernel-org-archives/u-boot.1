@@ -4,87 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9116F46101
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 13:24:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45DC9F46115
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 13:43:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDB1484114;
-	Mon, 23 Mar 2026 14:24:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 903B784144;
+	Mon, 23 Mar 2026 14:43:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LL0vpl/u";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="mQ/vHnTI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B90B784099; Mon, 23 Mar 2026 12:05:22 +0100 (CET)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4CF1284148; Mon, 23 Mar 2026 14:43:14 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1EDE83DB6
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 12:05:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B7BE84099
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 14:43:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=charles.cc.zhang@gmail.com
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-43b41b545d9so24097f8f.2
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 04:05:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1774263920; x=1774868720; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ziKbpuE/iBLkQ1ZrvFIdlxs8qx5h46mrrTY+AS0WOfE=;
- b=LL0vpl/ufXQ6g0wVPYfMXFP0ligg27te4wnwpgapbVZFEIN3MKLHxkAfEdJLqWxgQ9
- 1QwBhefLW5mRx7+TZblLJx7PLNzwHBT+oy3mSMVRo+4Wr6BEgzJ5jDccdvjErMBCvOiI
- p99YSiXqLyVCs4YY//ZlHys5yBQng0tesIJWVsuFVWyZGWkDE7kzq+tVU5apj16AvIaj
- 6hRWN3vMH1SZm7S5RMNvNbBSCDPSW37hgMGBVrNzo8Wu2z+k1NLleszkPuUwpQIx13Tp
- X+gKMfm/+KnThdC/Shmlz6Nx3EVxtqKFYmhvXoZhg8QkqSEUAeTTHHcxu2DGBM4ddO/O
- lTng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774263920; x=1774868720;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ziKbpuE/iBLkQ1ZrvFIdlxs8qx5h46mrrTY+AS0WOfE=;
- b=kG+90rGrxWE3jaTon2MF24sSmQJFsbVwnrsTkekMQ6yqkT4hZY6v4vJO2CuAWz5oRY
- qgiDzxafYFxIekUrtEBWzV1FgPOpHqBalMvFtjh3v4jYG2TcwlhSusN6sMJ0R4ItC6bw
- wXoihARwBfi1C+2pply8Hy5QNwd8Sy2oNcYWdyUTqsO34f8DZSJQTfvn/7xvdlYdWyZv
- +dIT1VP7PCMlWxo6lvD2J+NTKlTxSgek5Ycz0ceOZQecMjwLWRCB+X+8nxXOAayUXB7r
- 32zKTJARAqkvPnGP2PVmX7pA4hYvZItNnc5sPDxMCEuucspN8BoqrKc7ATQO9fq36sVG
- 8Ydw==
-X-Gm-Message-State: AOJu0YyeYdb6FxbzGF0GesZXWZSFgU/pVZwRQ5dC9ue6aBgmQrJ9ijJl
- ASeuQnJJ+Sxtx/owwPrMU3fDM/brXc85edTIn+nbB9iuJ+ncL7xy/y6Z
-X-Gm-Gg: ATEYQzzMB1ftuYkkLg869P0HN18tsUWjUgRDlMDWh4tk6ewvCnz7JLmaSGkS8BXE2xr
- FQTzbYl3lSVLXxQFdjsJ9cA43KiHIW9uQjgDVUPPsrjzrg7dFatuhsSrY2r6WGaXnjminxI5pQC
- wHpbdq3Z7oxlij0HdQ4Fq4dJh9Fy4Z55is/yeQE5h9BEK3LI70VSJrn1EjrUtbaXWgFUhq015u/
- SmwC0yKE+qvlacnTFbNL73ZnOBZsYm5Tmt51+MfBZF+HyDTdxJ1QfnvAJnYcny22YqAWMP3S0XF
- II1nwDerxaXKqvmejB8bHgCZ0sWMSphH8fCotpnsaG99aIDFmLtfPrNj/qVXnrKs/Kidm9yHIeA
- n9eHYslxZ8O1dCJGag+qBQynlAM/U63AUODFhrykaTJt+1l0JcvIeHzACeZDC28bx1caOWhy0zM
- BMOPoTMkSAdPukninFMs3Nr08s1QFL9xal6MaMAf8r3Q==
-X-Received: by 2002:a05:6000:1845:b0:43b:3cea:ddc2 with SMTP id
- ffacd0b85a97d-43b6427cdd3mr18310330f8f.47.1774263920009; 
- Mon, 23 Mar 2026 04:05:20 -0700 (PDT)
-Received: from SMLLTUK00006.sml.com ([77.91.218.123])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b64703343sm29532861f8f.19.2026.03.23.04.05.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Mar 2026 04:05:19 -0700 (PDT)
-From: Chencheng Zhang <charles.cc.zhang@gmail.com>
-To: Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Yannic Moog <y.moog@phytec.de>, Leonard Anderweit <l.anderweit@phytec.de>,
- =?UTF-8?q?Alvin=20=C5=A0ipraga?= <alvin@pqrs.dk>,
- Chencheng Zhang <charles.cc.zhang@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] net: tftp: fix malformed option string parsing
-Date: Mon, 23 Mar 2026 12:05:16 +0100
-Message-Id: <20260323110516.84423-1-charles.cc.zhang@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=mwalle@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 6D1544380B;
+ Mon, 23 Mar 2026 13:43:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1F782C4CEF7;
+ Mon, 23 Mar 2026 13:43:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1774273390;
+ bh=ELGN7+2FkkSaWxcngu7PqeaKwb7oORMOp5q3h9ev+yE=;
+ h=From:To:Cc:Subject:Date:From;
+ b=mQ/vHnTI+5/ocVZu6/DtuwXC+ncf1aOx9n2EGhd9s8JOCYBpx3jZ4FU7FBdkG1NEg
+ Hv7bZh10/m3KVXApZGmRD9i8n1Y38nFSheL6GewYYbACh7Swd+Woc0Y73XxEqfigNe
+ aXOZcA5jtEp7uMjenW2EgAnA2Rja1VI0qYtWl9ShCwlWNBImzKCnqR7McnoSOGsHJX
+ EMs37+qPjjVmq4JTrRMadUQqBwj7QBYucwAvXiSfP2k8CVE+AOVqIC/SSPbp6pcq2F
+ lAatED/aKy75MDEjuK4dIEistVg+hEUaPMbw9/o2tRdZvD+1w6uywtF0xHb7xx5Ss5
+ F+6Z+ItqtSIYQ==
+From: Michael Walle <mwalle@kernel.org>
+To: Huang Jianan <jnhuang95@gmail.com>,
+	Tom Rini <trini@konsulko.com>
+Cc: linux-erofs@lists.ozlabs.org, u-boot@lists.denx.de,
+ Michael Walle <mwalle@kernel.org>
+Subject: [PATCH 0/4] fs/erofs: major alignment fixes
+Date: Mon, 23 Mar 2026 14:42:16 +0100
+Message-ID: <20260323134305.2675822-1-mwalle@kernel.org>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 23 Mar 2026 14:24:52 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,70 +67,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When formatting the TFTP options (tsize, blksize, windowsize), the
-code previously used sprintf() with embedded null bytes (%c). Because
-sprintf() returns the length excluding the terminating null byte,
-subsequent sprintf() calls overwrote the required null separators.
+Throughout the whole fs code, large (4k) data buffers are allocated
+on the stack. While it is not nice, to allocate that large buffers on
+the stack, there is a much more fundamental problem: it's not
+aligned.
 
-This caused the options to be concatenated into a single malformed
-string (e.g., "tsize0blksize1468") which breaks strict TFTP servers
-like atftpd, causing them to reply with empty packets or drop the
-connection.
+This will result in a huge amount of cache misaligned messages on
+arm32 SoCs, e.g.:
 
-Fix this by explicitly using strcpy() for the option names and manually
-advancing the pointer to ensure the null bytes are preserved.
+ CACHE: Misaligned operation at range [x, y]
 
-Signed-off-by: Chencheng Zhang <charles.cc.zhang@gmail.com>
----
- net/tftp.c | 33 +++++++++++++++++++++------------
- 1 file changed, 21 insertions(+), 12 deletions(-)
+While this is more or less a warning, as it will only invalidate
+surrounding data, DMA is more of a problem. Some DMA controllers
+have address restrictions and because of that there is
+ARCH_DMA_MINALIGN. Thus as a first fix, move all the data buffers
+from the stack to the heap with proper alignment.
 
-diff --git a/net/tftp.c b/net/tftp.c
-index 5f2e0a2bc06..5a8094791ab 100644
---- a/net/tftp.c
-+++ b/net/tftp.c
-@@ -355,20 +355,29 @@ static void tftp_send(void)
- 		debug("send option \"timeout %s\"\n", (char *)pkt);
- 		pkt += strlen((char *)pkt) + 1;
- #ifdef CONFIG_TFTP_TSIZE
--		pkt += sprintf((char *)pkt, "tsize%c%u%c",
--				0, net_boot_file_size, 0);
-+		/* Write "tsize" + \0 */
-+		strcpy((char *)pkt, "tsize");
-+		pkt += 6; /* 5 chars + 1 null */
-+
-+		/* Write the value + \0 */
-+		pkt += sprintf((char *)pkt, "%u", net_boot_file_size) + 1;
- #endif
--		/* try for more effic. blk size */
--		pkt += sprintf((char *)pkt, "blksize%c%d%c",
--				0, tftp_block_size_option, 0);
- 
--		/* try for more effic. window size.
--		 * Implemented only for tftp get.
--		 * Don't bother sending if it's 1
--		 */
--		if (tftp_state == STATE_SEND_RRQ && tftp_window_size_option > 1)
--			pkt += sprintf((char *)pkt, "windowsize%c%d%c",
--					0, tftp_window_size_option, 0);
-+		/* Write "blksize" + \0 */
-+		strcpy((char *)pkt, "blksize");
-+		pkt += 8; /* 7 chars + 1 null */
-+
-+		/* Write the value + \0 */
-+		pkt += sprintf((char *)pkt, "%d", tftp_block_size_option) + 1;
-+
-+		if (tftp_state == STATE_SEND_RRQ && tftp_window_size_option > 1) {
-+			/* Write "windowsize" + \0 */
-+			strcpy((char *)pkt, "windowsize");
-+			pkt += 11; /* 10 chars + 1 null */
-+
-+			/* Write the value + \0 */
-+			pkt += sprintf((char *)pkt, "%d", tftp_window_size_option) + 1;
-+		}
- 		len = pkt - xp;
- 		break;
- 
+There are still some misalignment warnings. I've traced it to
+fs_devread(). Most of the calls to blk_dread() will pass an aligned
+buffer. But the main blk_dread() will just pass buf, which might
+have previously been advanced by readlen. Not sure how that could be
+fixed in an elegant way. The simplest would probably be just a
+bounce buffer, which there is already one in blk_read() if
+BOUNCE_BUFFERS is enabled. But I haven't managed to get that
+working. And now, I'm running out of time.
+
+Michael Walle (4):
+  fs/erofs: align the malloc'ed data
+  fs/erofs: allocate data buffers on heap with alignment (1/3)
+  fs/erofs: allocate data buffers on heap with alignment (2/3)
+  fs/erofs: allocate data buffers on heap with alignment (3/3)
+
+ fs/erofs/data.c     | 125 +++++++++++++++++++++++++++++---------------
+ fs/erofs/fs.c       |  14 ++++-
+ fs/erofs/internal.h |   5 +-
+ fs/erofs/namei.c    |  47 ++++++++++++-----
+ fs/erofs/super.c    |  40 ++++++++++----
+ fs/erofs/zmap.c     |  61 +++++++++++++++------
+ 6 files changed, 205 insertions(+), 87 deletions(-)
+
 -- 
-2.34.1
+2.47.3
 
