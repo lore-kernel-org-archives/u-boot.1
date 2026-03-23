@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 480E0F4612A
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 14:33:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D309F4612E
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 14:38:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC00F8408D;
-	Mon, 23 Mar 2026 15:32:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9C8F98408D;
+	Mon, 23 Mar 2026 15:38:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eAW3pJzF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PFuQUrtj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89C7984180; Mon, 23 Mar 2026 15:32:58 +0100 (CET)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
+ id D1D4E84132; Mon, 23 Mar 2026 15:38:41 +0100 (CET)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FAF683DB6
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 15:32:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A598783DB6
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 15:38:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-467fd082ffeso1560389b6e.1
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 07:32:56 -0700 (PDT)
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-67c2045c0f7so2343666eaf.3
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 07:38:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774276375; x=1774881175; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1774276718; x=1774881518; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xD1XrXBI7ee+ZneLiE5cjRHVE6lmS6s1T1nfjo1rJlc=;
- b=eAW3pJzFpCg2QgEHgRJSwwUC3BSahly9j6Gu1sDm/qXTA9UGpXrUN/gu8x5UblTCd7
- VwzUa7vHdkTn9XuiDEWtMeo7uj1nuboIH7wVO3cGGMQP7OAp5GluoHISo5vuenc4BB11
- Hls85Om23qXxW5quMpVarNsGilYCDYER5iDe4=
+ bh=4rFZnwPGD/1aq8lOtoQ7KVbRD6oUyk8Ne3dumq1Ea3A=;
+ b=PFuQUrtjGcYyD5Y2LlcmLr9TiSNPaQRlsi/zzyVIs2jd1Mf1ZxGLQnPDLro9sCDw4M
+ WYVP6oKI2mYpbujq8XV14LmM9c7yuszcX9VuY5rOvW9OW4GYvoi1nQF9ONgDLuvEtS7j
+ 7NhqgPf/p9jBDqpDBoQxFOD4YjTtPx+5tKdcg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774276375; x=1774881175;
+ d=1e100.net; s=20251104; t=1774276718; x=1774881518;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=xD1XrXBI7ee+ZneLiE5cjRHVE6lmS6s1T1nfjo1rJlc=;
- b=CBfMkQMPGVxN6Ail/t2hEXpkerBIQeb0GP+reYKCEg0/NC+pK6Xd4VX9EKB0nsksb/
- OsXzUViML2afLrfx15wwsuUjgpe91cMNgY9gbh2qb5VXIxihTLsb83EsD4uC1tybkRpO
- 1+ogHn1qX4ywpNUSWCTP4F6r+rPdYQvNb3feuN8GDV9UpGq2Hv1MjPJO3RgMMi4+37A+
- VPlBoeWcAtUpWTXTM8Gzwu18Mnw1D4v0I9kl/ZpE3twr5AlSVZj+iKF1BFw3KJAJZI2d
- v0cpr5H3S0M2JuVs2Wq4jeUbjiIjAb7DJsUTusswEZUh7knPzv3lfMTtqorJ1wuy4Ubf
- cFCw==
-X-Gm-Message-State: AOJu0Yz3Fiyq/2C8T/MDJc7z6Jsu47K0Z+MLPIpvIlmqaRoooLB3AwZ1
- Z4toEWsFGB5ytz/yJCRnLuOFnyOpJKdI0cHnIY1wXpVpp7tC7Vey4K0iGq3z7BJKXglAtzbs+cp
- quiJy+2E=
-X-Gm-Gg: ATEYQzwmuGmYYII5TZQItmnjWP54CjXXSvKbyoOUpbgB38AVKL1AWf6kqEsvz9O/GdO
- /EJdIBJV5elGWT68JcLY8ydJJaXblyiI8LOcxZ2/BFslocldmtAxG10kcoMgxKxN0lw+fqDjPbW
- bmZ+UnIQ1j0i8bKF/OIen9edCKgu24fyYcYAW1DP51wDIV32qmFgi/Y4BWNASqdDRpYeF3x0sT+
- poZdeM7MGloVbQSV2l5zAH1etaQmS3M8pIBt09fjOFCHVDF8ffgJcrY3MzXVVjywBo5536eglpJ
- SIrZpQd/HJRhP53B7rHeRkZhxLEeldvoPyt0NK8Cl3OEbM+BMYXbXTI+dVCNu63ipWvWQVGX63c
- CiL9VK/dk4FpqgdvyNmomVEa8jiIm39zL0kxHSyDJbCWQ9vxHyAVH7mh6aRfnbmgZN8xIUzzbug
- 9RBbx2xqPzYAAOChXPrf3gU3+IqG55tFKdSksohGorsjA24uua3OsOwrvKaSPZQOybUpD/a3J/q
- oyEM8dDopRp0+UETlu8NtDO8JWkesi+dzDUqNOxZoQcchKVx7M=
-X-Received: by 2002:a05:6808:524a:b0:467:53b0:b43f with SMTP id
- 5614622812f47-467e5fe304emr7370179b6e.56.1774276375027; 
- Mon, 23 Mar 2026 07:32:55 -0700 (PDT)
+ bh=4rFZnwPGD/1aq8lOtoQ7KVbRD6oUyk8Ne3dumq1Ea3A=;
+ b=NFv60cRS3Wovj9ic3aluX+mOZc32anxVrzl9MGE0wfOUx7YqNw83pZYAkhAvD6+beJ
+ jJQbqzQ17DLdVpulQyfybhtO9y8ZkigNsNmK5LdRMTWwsrj/amWWF3iVXn1tToqspaXM
+ Kqqx8WX57CpCSEdH+WKHTKSzakdywaLRHmlnldZiX9MJHl4xiT8qIl1rs9WAYvJmAydT
+ fgVrfXJ0pMJaMNdFa9OXMtUrdCwKbyfiGPGHlHKVkM9mkK06ny2uffZbr7uh1jfjUfEb
+ ETnzK7LFQGqESAosBWM62zmuPvYSZU4ryMB7yc4i2WE87Gz4ow3PaEVyqChPV4+IT7jo
+ 1HUw==
+X-Gm-Message-State: AOJu0YzBlYS1akGvbC5v3cQ1d/jYWlBOMC+dM2KGGXpuzEQBZ4uKc9/E
+ ryZt3Cq6Y0i7vAYnV/8frkpbW1BKtH8b958aUgd+romrjVU+rRcCYWQ9lcWFIfbgeKIwZwuYwh8
+ NdAz2
+X-Gm-Gg: ATEYQzyrrUHRXkfh9XZxMziJc76YGx6oBBCCSn6alCsI9PdPNBIliUJW8qT10jQOVXq
+ /7ciuUP8AaB900HBWq1zcmORNKauNwNU5JgTQ89VXkbAjK3dCLPl/MWu8aeU8GnL+BeRSJBzPzF
+ fIx2VHcjPAKuzjffwCoiI9YCg252FyoW0rcwCZ0FT1Mrq0PO3zid8I9PvD42aYSooA49IwNaB4k
+ ci8BDzOMBd72k1oFXNevcLUnRVCO+ENWqI+Q8xyMYr1YulNAeUsHNk03VFY5jzzerTzLuMWyaz4
+ lvklvxFKATQLPPXYEMHLNyRMYAv1zlI72YM5kxnpD/60Uj05YcKgwLgUD2/SO5+02+1Ow0VdrOB
+ xRSvKGo+aHJqPOX5Co7dzsHeJ/skXL+Hv/4LNt0ykly3Y8Z4wqhoB5VirDNqWx72XwV3NiWopQB
+ dsBN4E2XTe5TNsJoL7qUI1U85/rMzFBGnFjiZzD9f8ecnxhehWAQbyI0kJY0vOVikfhWxNmJOWf
+ g9UNNuaI8+ySSnB/NIQawarOJQUcwxP5Ygkbx/ToWZuuvIJXvU=
+X-Received: by 2002:a05:6820:2287:b0:67b:ab68:b5f2 with SMTP id
+ 006d021491bc7-67c22ecb3efmr7280515eaf.22.1774276718238; 
+ Mon, 23 Mar 2026 07:38:38 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-467e7ecb194sm6950491b6e.12.2026.03.23.07.32.53
+ 006d021491bc7-67c252dbd05sm6143057eaf.6.2026.03.23.07.38.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Mar 2026 07:32:54 -0700 (PDT)
+ Mon, 23 Mar 2026 07:38:37 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Marek Vasut <marek.vasut+usb@mailbox.org>
-Subject: [PATCH v2] usb: gadget: Move USB_GADGET_DUALSPEED to be slightly more
- visible
-Date: Mon, 23 Mar 2026 08:32:53 -0600
-Message-ID: <20260323143253.2272167-1-trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut@mailbox.org>
+Subject: [PATCH v2] usb: Correct dependencies around USB_EMUL
+Date: Mon, 23 Mar 2026 08:38:36 -0600
+Message-ID: <20260323143836.2274286-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260317012433.4162524-1-trini@konsulko.com>
-References: <20260317012433.4162524-1-trini@konsulko.com>
+In-Reply-To: <f6ffc6db-c59d-45c9-964f-7fa56c320047@mailbox.org>
+References: <f6ffc6db-c59d-45c9-964f-7fa56c320047@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,50 +96,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As exposed by "make randconfig", we have an issue around
-USB_GADGET_DUALSPEED. It is possible to select this symbol (via
-SPL_USB_CDNS3_GADGET for example) and so have an unmet dependency due to
-how this symbol is placed today. Move this to it's own section of the
-file guarded by USB_GADGET || SPL_USB_GADGET.
+The symbol USB_EMUL is how sandbox has access to USB. It's
+implementation however enforces a few other requirements. It must have
+SCSI enabled, and in turn that means it must have BLK enabled. Finally,
+we should not be using SANDBOX itself as a symbol to decide what to
+build or not build here, as SANDBOX is selected for COMPILE_TEST builds
+as well and so may not have enabled the sandbox specific USB support.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Changes in v2:
-- Implement this move as suggested by Marek instead
+- Drop erroneous select BLK line, pointed out by Marek
 
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Marek Vasut <marek.vasut+usb@mailbox.org>
+Cc: Marek Vasut <marek.vasut@mailbox.org>
 ---
- drivers/usb/gadget/Kconfig | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
+ drivers/usb/emul/Kconfig  | 1 +
+ drivers/usb/host/Makefile | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-index baa2eb61ea33..2f79840df18c 100644
---- a/drivers/usb/gadget/Kconfig
-+++ b/drivers/usb/gadget/Kconfig
-@@ -179,10 +179,6 @@ config SDP_LOADADDR
- 	hex "Default load address at SDP_WRITE and SDP_JUMP"
- 	default 0x0
- 
--# Selected by UDC drivers that support high-speed operation.
--config USB_GADGET_DUALSPEED
--	bool
--
- config USB_GADGET_DOWNLOAD
- 	bool "Enable USB download gadget"
+diff --git a/drivers/usb/emul/Kconfig b/drivers/usb/emul/Kconfig
+index 279f6c6d7404..6305f2496c3b 100644
+--- a/drivers/usb/emul/Kconfig
++++ b/drivers/usb/emul/Kconfig
+@@ -2,6 +2,7 @@ config USB_EMUL
+ 	bool "Support for USB device emulation"
+ 	depends on SANDBOX
+ 	select DM_USB
++	select SCSI
+ 	select USB_HOST
  	help
-@@ -372,3 +368,11 @@ config SPL_SDP_USB_DEV
- 	  so it can be used in compiled environment.
+ 	  Since sandbox does not have access to a real USB bus, it is possible
+diff --git a/drivers/usb/host/Makefile b/drivers/usb/host/Makefile
+index ef4ce62a680c..9cac53f07c7a 100644
+--- a/drivers/usb/host/Makefile
++++ b/drivers/usb/host/Makefile
+@@ -5,7 +5,7 @@
  
- endif # SPL_USB_GADGET
-+
-+if USB_GADGET || SPL_USB_GADGET
-+
-+# Selected by UDC drivers that support high-speed operation.
-+config USB_GADGET_DUALSPEED
-+	bool
-+
-+endif
+ ifdef CONFIG_$(PHASE_)DM_USB
+ obj-y += usb-uclass.o
+-obj-$(CONFIG_SANDBOX) += usb-sandbox.o
++obj-$(CONFIG_USB_EMUL) += usb-sandbox.o
+ endif
+ 
+ ifdef CONFIG_$(PHASE_)USB_STORAGE
 -- 
 2.43.0
 
