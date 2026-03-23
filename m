@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BED1F483EC
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 19:55:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D735F483F2
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 20:08:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C47218426E;
-	Mon, 23 Mar 2026 20:53:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 56F4C83FED;
+	Mon, 23 Mar 2026 21:08:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HPJuwwrG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FVot6pES";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 743A7842E6; Mon, 23 Mar 2026 20:53:19 +0100 (CET)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 8054383FED; Mon, 23 Mar 2026 21:08:04 +0100 (CET)
+Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
+ [IPv6:2607:f8b0:4864:20::c31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D018842BF
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 20:53:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CDC1C83A91
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 21:08:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7d7653db148so2596913a34.2
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 12:53:16 -0700 (PDT)
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-67bb04151dcso2278961eaf.0
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 13:08:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774295595; x=1774900395; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=bMG7pdJNx6QlGL3FkGSQU5FuaKoP/QMZaexEYoF6jYg=;
- b=HPJuwwrG8SonHns5y8UziiKvM9GEADWI/G+45GDxB/F6N8rfhy1b/OpKE47a6cd/5H
- PP1msKLcmD/uG7lpL3WQ3hvC/eXN6+XJlSJU/R+3wgfFwH7RZ0uv9HMZXfnyyoZj/p1Q
- 3uQZDF7akh6A1G+E2YrksqMJIXlQdhjPLbnxg=
+ d=konsulko.com; s=google; t=1774296479; x=1774901279; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=o48Pjkys9XGxGQaxsUMhz9AhjcKN1t2N+hJcNfsuF+g=;
+ b=FVot6pES5KL73eZp+eu+kALEtYr8u1FrKYVwqZiZHW54mLSU3y7WP0pn2tjrz7GueP
+ wwNcLxmJfpIvQ0Gf8LnNY+Mw4l7L561Lnc0IgvKzigJthuj95HL2FN8IuVneqSFRGBJN
+ Ov8cwypNhB3b92gVvbUt7N5M5GadJkbt/t9vw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774295595; x=1774900395;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bMG7pdJNx6QlGL3FkGSQU5FuaKoP/QMZaexEYoF6jYg=;
- b=WbFJWxMcXXOI2R+AUOj58JWoOjnKfTyI2xMhPG0iFjaLp7ozRPvggRTYocCoI8xNiq
- FFDiN7tERIwlk1F5rTTwIoqKtu4heX0e+bGncSWAIYqbaJdl/3NqJ+vS0l3oQ505ysPk
- BJ3mJ4//LajZRkT4jOnS1IxZHa9yj733/kIu0gOpjgYGDcvN9mXJpwvmqXpXuvGaJsEn
- x+4ofIRI3kWek41YMrZjHKWK1vW28M5J7fccIK419u+qvU4oP/Rb0MU2P1nRUcQNDBhs
- ldTKs62tRRZV7FqPgEkLEvApIwGeLKTArkChSS5Wz1zyzEtZaDYSB/fGzrirYZRvQoFi
- 0ojA==
-X-Gm-Message-State: AOJu0Ywl4IrjkD/mgeopOUNLy1uMc00Bk3SA34zL55Efh2d/NXqMM71m
- RPoJLBMX3uiOvEwG3JtIN6fs7UcrnLVq0xrXoRy6VOrfWfX7hQmoF5yzKQS5FbAQ+OmT5y0nWnS
- g4g0KEqM=
-X-Gm-Gg: ATEYQzxN+WSjiM9ui1IvScCrxwtZ7w8AnvP3tR1EDcP7EMm7MPYQtrXhI4q/Qus0XON
- WNMa1S1nxBbT23P0i9JcATK8FZFrk8ieByP45D8BBIla6f5ORnuxZKvoiVL63wvQbE4qHXNwfS7
- f/aDgnUUGaXeZnuBg0mGQXNIWsEMthBGZhH9AShHW8LYDN7JW6hMQoGDjwUT2f79auCHA1Lthqq
- tJK1ewnX5gwUbSflZYfycKsKrCXiqMgaDseAz5k1tFf64i8C23+ZCy1DbO5AzdVT6SssSuAOP42
- 4djZYCCm7kSxAo+n+IugF7VH4IWILUv5kS7kjM9bHgjXLNUzigB0mmya3ugSkaFSXWrUys3Dh+i
- cDlU9oVqGnhygDnA2oLRzy9vhYbHTr+bbvLE/k8IpiTxLLl9Hog2KbWu+THyvc+v1M7JXAGG+oZ
- hxOhzuXZaRISALz9ianqkakNRxiBP9CO4KLBj8oMRYqkQ9r/EoDCL7mcVZ3bwxA2hbXw/wS8hwQ
- nWF8v7Nd1yvubUR/02plGArjCcKY9TJVSJdHCxQ9TIxShqEQIJCPbMBzqJBbw==
-X-Received: by 2002:a05:6830:81c9:b0:7d7:d2e4:6373 with SMTP id
- 46e09a7af769-7d7eaf4da3fmr8037079a34.20.1774295595055; 
- Mon, 23 Mar 2026 12:53:15 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
+ d=1e100.net; s=20251104; t=1774296479; x=1774901279;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=o48Pjkys9XGxGQaxsUMhz9AhjcKN1t2N+hJcNfsuF+g=;
+ b=chxbJ/xNGjB5InE/4moALIoSUujZnGdtkp12HWM9oX+pWKrz4fZeGof0kKIiRN3TnQ
+ cf+rX1bsrDido2mMQpdzP4E2YSe1jqHxWOdx51BHX6SYqm10opVDRRsnhXB1pNMZySg/
+ Nmyl6hyQytRWK4AOip/3/fwvBOdHkzTHhYyUxGrKIvObbBFPCWIr0Lwwig6xhwlBA5k/
+ 6Qf3lBibTS6u6qyxmpMBBWtlqeqp/3MqiK6mdROquXknMSDsaIjwhXSd94UarLu3kIUp
+ jtGykF1EBxxZQUr5kisOb4kcmaCAdWX7aoTo9j/c4Cy3S0BbGgvC4+LoogRN8lQELnwC
+ a3Rw==
+X-Gm-Message-State: AOJu0YyIXNB+0/25RNbSjptfBRJi1Yub99bItj0B6HqVP5nnPOTWL4Xy
+ 65VrylI9ESJpMRVyjvIhjRHXZaDJBbjQWpJY3xmasyBzSXRNr24aK81jN3m4lANbHSp6c/exmIV
+ VSZb13bA=
+X-Gm-Gg: ATEYQzxi+aJijTWGVPW4yyqfs13+w1b9ykmqpZqwD1ygfcnBckvEaNzDsbh4sn0BKnn
+ ZQ43LWuxaNK9kBGzI/wxKIdyTB8B+es0Hth5hTMHZ5mok6q/i8le/bpBP8p6mk6RKNqrN4mY6Yu
+ toZ4GFL0lHY400/yONnp1rQCrVcc9x6+ubYSFS3BW+Nsesev6N6uQQ4+LsKq9B/gXWxmpn2LHYh
+ 4p2V4OLjfSCF6i8lH9yT7pqsquKNm6fsq/FOd7ZHeu1/DDgJHdImte6gy7grFUNyJyunDw64rzF
+ PzwABEbJ57MyFZQyD0Y4yIF0+2mVL1/KozUyQlCs5gDII5ZnjlUV8/rw8GhpnUvctPqwNpt0B9V
+ 4zCFSJZT1s4EcQtnpuvQQHSz44wZDlic8VR275elB+6HUSaHLDbRDnmnsWlCJIP97XtSVWS2qFY
+ hEum3ShXbIvKRGmdhS3IWS020/mfdCEUNYhcH6V0ZG6jL1nZK6Jh5er+c38OzTvMXfqPNIVLLAg
+ TdjFCBIno5nQ+2hlNlPO0noilF/wSAkSoxgl0Fln09Pb3Yz
+X-Received: by 2002:a05:6820:81d2:b0:67b:d547:26dd with SMTP id
+ 006d021491bc7-67c22eca784mr11964029eaf.21.1774296479300; 
+ Mon, 23 Mar 2026 13:07:59 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7eadce96dsm10301366a34.18.2026.03.23.12.53.14
- for <u-boot@lists.denx.de>
+ 006d021491bc7-67c252c892dsm7165373eaf.4.2026.03.23.13.07.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Mar 2026 12:53:14 -0700 (PDT)
+ Mon, 23 Mar 2026 13:07:58 -0700 (PDT)
+Date: Mon, 23 Mar 2026 14:07:56 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] tpl: Correct dependencies for TPL_OF_CONTROL
-Date: Mon, 23 Mar 2026 13:53:13 -0600
-Message-ID: <20260323195313.2363694-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+To: E Shattow <e@freeshell.de>
+Cc: u-boot@lists.denx.de, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ rick@andestech.com, hal.feng@starfivetech.com, jamie.gibbons@microchip.com
+Subject: Re: [GIT PULL] u-boot-riscv/next
+Message-ID: <20260323200756.GK502704@bill-the-cat>
+References: <20260317060146.3983817-1-ycliang@andestech.com>
+ <bb87214b-8b1a-428c-a339-2e632ebc2b15@freeshell.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="PiykUc0uRjXv5akn"
+Content-Disposition: inline
+In-Reply-To: <bb87214b-8b1a-428c-a339-2e632ebc2b15@freeshell.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,31 +99,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The TPL_OF_CONTROL option can only select TPL_OF_LIBFDT functionality if
-we also have enabled TPL_LIBGENERIC_SUPPORT, so express this dependency
-in Kconfig.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-This is a step in the right direction, I think. There is however a
-larger web to untangle here.
----
- dts/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+--PiykUc0uRjXv5akn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/dts/Kconfig b/dts/Kconfig
-index 169abe607837..6b501c2239ed 100644
---- a/dts/Kconfig
-+++ b/dts/Kconfig
-@@ -59,7 +59,7 @@ config SPL_OF_CONTROL
- config TPL_OF_CONTROL
- 	bool "Enable run-time configuration via Device Tree in TPL"
- 	depends on TPL && OF_CONTROL
--	select TPL_OF_LIBFDT if !TPL_OF_PLATDATA
-+	select TPL_OF_LIBFDT if !TPL_OF_PLATDATA && TPL_LIBGENERIC_SUPPORT
- 	select TPL_OF_REAL if !TPL_OF_PLATDATA
- 	help
- 	  Some boards use device tree in U-Boot but only have 4KB of SRAM
--- 
-2.43.0
+On Mon, Mar 23, 2026 at 12:20:02PM -0700, E Shattow wrote:
+> Hi Tom,
+>=20
+> There are some Fixes tags for master in this pull request applied to
+> next and not yet applied to master, noted inline below.
+>=20
+> On 3/16/26 23:01, Leo Yu-Chi Liang wrote:
+> > Hi Tom,
+> >=20
+> > The following changes since commit 841856ed9675b26ec517fdd00b5cc0aef8db=
+508e:
+> >=20
+> >   Merge patch series "Add PCIe Boot support for TI J784S4 SoC" (2026-03=
+-16 08:24:18 -0600)
+> >=20
+> > are available in the Git repository at:
+> >=20
+> >   https://source.denx.de/u-boot/custodians/u-boot-riscv.git next
+> >=20
+> > for you to fetch changes up to b51e59c8b34c780e28728bc0cb58783855c7ffbf:
+> >=20
+> >   riscv: Add support for BeagleV-Fire (2026-03-17 11:39:18 +0800)
+> >=20
+> > CI result shows no issue: https://source.denx.de/u-boot/custodians/u-bo=
+ot-riscv/-/pipelines/29548
+> > ----------------------------------------------------------------
+> > - board: starfive: Add Xunlong OrangePi RV
+> > - board: starfive: Add VisionFive 2 Lite
+> > - board: beagle: Add BeagleV-Fire
+> > ----------------------------------------------------------------
+> > E Shattow (5):
+> >       board: starfive: visionfive2: Add Orange Pi RV selection by produ=
+ct_id
+> >       configs: starfive: Add Orange Pi RV to visionfive2
+> >       doc: board: starfive: Add Xunlong OrangePi RV
+>=20
+> >       doc: board: starfive: jh7110 common give build output dir by env =
+not arg
+>=20
+> commit 24662f698f5ad6f444e6dc437c0b5a932726a6ef
+> Fixes: 8304f3226700 ("doc: board: starfive: update jh7110 common
+> description")
+>=20
+> >       doc: board: starfive: jh7110 common update OPENSBI build env refe=
+rence
+>=20
+> commit 1edeb52086c6e160d93d86386505e6cc6ce1457c
+> Fixes: 8304f3226700 ("doc: board: starfive: update jh7110 common
+> description")
+>=20
+> >=20
+> > Hal Feng (7):
+> >       eeprom: starfive: Simplify get_ddr_size_from_eeprom()
+>=20
+> commit 6015c98be50f2fc571c294d2f2b0768212fb7e99
+> Fixes: aea1bd95b61e ("eeprom: starfive: Enable ID EEPROM configuration")
+>=20
+> >       eeprom: starfive: Correct get_pcb_revision_from_eeprom()
+>=20
+> commit 78253aeeecdfea4c71779905ff2b400fa7400b1c
+> Fixes: aea1bd95b61e ("eeprom: starfive: Enable ID EEPROM configuration")
+>=20
+> >       eeprom: starfive: Support eeprom data format v3
+> >       pcie: starfive: Add a optional power gpio support
+> >       configs: visionfive2: Add VisionFive 2 Lite DT to OF_LIST
+> >       board: starfive: spl: Support VisionFive 2 Lite
+> >       board: starfive: visionfive2: Add VisionFive 2 Lite fdt selection
+> >=20
+> > Jamie Gibbons (1):
+> >       riscv: Add support for BeagleV-Fire
+> >=20
+> >  arch/riscv/Kconfig                                 |   4 +
+> >  arch/riscv/cpu/jh7110/spl.c                        |   2 +-
+> >  arch/riscv/include/asm/arch-jh7110/eeprom.h        |  13 ++-
+> >  board/beagle/beaglev_fire/Kconfig                  |  43 ++++++++
+> >  board/beagle/beaglev_fire/MAINTAINERS              |   7 ++
+> >  board/beagle/beaglev_fire/Makefile                 |   6 ++
+> >  board/beagle/beaglev_fire/beaglev_fire.c           | 117 +++++++++++++=
+++++++++
+> >  board/starfive/visionfive2/spl.c                   |   6 ++
+> >  board/starfive/visionfive2/starfive_visionfive2.c  |   4 +
+> >  .../starfive/visionfive2/visionfive2-i2c-eeprom.c  |  64 ++++++-----
+> >  configs/beaglev_fire_defconfig                     |  29 +++++
+> >  configs/starfive_visionfive2_defconfig             |   2 +-
+> >  doc/board/starfive/index.rst                       |   1 +
+> >  doc/board/starfive/jh7110_common.rst               |  11 +-
+> >  doc/board/starfive/orangepi_rv.rst                 |  35 ++++++
+> >  drivers/pci/pcie_starfive_jh7110.c                 |   8 ++
+> >  include/configs/beaglev_fire.h                     |  57 ++++++++++
+> >  17 files changed, 375 insertions(+), 34 deletions(-)
+> >  create mode 100644 board/beagle/beaglev_fire/Kconfig
+> >  create mode 100644 board/beagle/beaglev_fire/MAINTAINERS
+> >  create mode 100644 board/beagle/beaglev_fire/Makefile
+> >  create mode 100644 board/beagle/beaglev_fire/beaglev_fire.c
+> >  create mode 100644 configs/beaglev_fire_defconfig
+> >  create mode 100644 doc/board/starfive/orangepi_rv.rst
+> >  create mode 100644 include/configs/beaglev_fire.h
+> >=20
+> >  Best regards,
+> >  Leo
+>=20
+> I note that there may be other authors' contributions applied to next
+> with Fixes tags for master that are not part of this pull request, not
+> highlighted in my reply here.
 
+Thanks for looking at this. To be clear and to repeat what I said on
+IRC, we don't have the formal process (nor tooling nor human backup)
+that the linux kernel has about fixes tags and what they get applied to.
+It's up to individual custodians to decide if a Fixes commit is worth
+pushing to a pending release, once the next window is open, or holding
+off for more testing, as it's not serious enough of a problem. That
+means it's also up to a contributor to follow-up if they thought
+something should really go to master instead (and custodians should be
+uinsg b4 and b4 ty, so contributors know where something is applied,
+once it is applied).
+
+--=20
+Tom
+
+--PiykUc0uRjXv5akn
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCacGdlQAKCRAr4qD1Cr/k
+CnVbAP9VO1SS3zlRK+JgbK6RGMQFC12g5/cH9p9A995Zl5tXpwEA4C81CbrnxG8P
+oNlvAiLZEZA5dne0lYExqEad+rENcwM=
+=2SSZ
+-----END PGP SIGNATURE-----
+
+--PiykUc0uRjXv5akn--
