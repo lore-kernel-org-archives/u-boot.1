@@ -4,80 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B358CF483F7
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 20:20:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94325F483F7
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 20:24:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3188D84065;
-	Mon, 23 Mar 2026 21:20:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 127AA83FED;
+	Mon, 23 Mar 2026 21:24:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZFby8nBH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ap6/GI0H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C49D840AB; Mon, 23 Mar 2026 21:20:13 +0100 (CET)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id B9D8C83FED; Mon, 23 Mar 2026 21:24:05 +0100 (CET)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79C8E83FA7
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 21:20:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A20883FA7
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 21:24:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-404254ffe8aso2949391fac.0
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 13:20:10 -0700 (PDT)
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7d751ef36ccso1660268a34.0
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 13:24:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774297209; x=1774902009; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=wmUWbQwgDI/xz/v83ociz7E1S3q6xIeC6bUlxTYNiZ8=;
- b=ZFby8nBH+7795NoXqD4vDgBFTLaZXcXMsx9IuGTyLpcdjegc9qF6XOJsULOvkQDWsP
- aC4SKGmH1eLTktUaTGAVyt2+XYkPcZJd0aNbTUn7aclDp+LTi2gkdJPhv/73bfmw4/hD
- AmHSWv1/2oN7jQlEBFZTIzaCTUzbnzD8JO5II=
+ d=konsulko.com; s=google; t=1774297442; x=1774902242; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=dRhwcG3CxOKsVyU2e2e/eAaKJcK/mRWdY0QlO40HdI0=;
+ b=ap6/GI0H1TIRVl2AHBorWgAK/KBFSS6wR2vs3QmkD+npN9CzIw5YUPwdIMfzeRRS2C
+ ++ElaPw2Qy0OrCNW3cBhkA+dE+FQjbRUpuv/lj6RIuhrEzSdqJqEzSOeBTcbwhFHIUx8
+ XDpOZF3lMfnfAUJle1wr7A9Znw9DrPAEogA48=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774297209; x=1774902009;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=wmUWbQwgDI/xz/v83ociz7E1S3q6xIeC6bUlxTYNiZ8=;
- b=ax7xi3VtVrJHG511WOJkUnR6yfYjAb8P0KKYbWU8nahbPEItUOzo4r664/PCfCvRdu
- 3TE0McURiGpLZESIFgezqDf5m+XerEf3yvzAzMsVzo1usUseABxyc8dR225lRGuPHYD9
- +KXiHNY09Z3bQQWrTneic1GMVj1UZ40oWvoou6n7NAvwDX8S01epBGVkHHd+J9GJo8io
- 2ws9LTDy/oqegGAeF4bZdIN0tUwH1YPrKOCmsEpwZE9LYFUepNjRlc6HnzOw/xbtGEL/
- XNjGlttPlUWO47ysPkuqgnVJRKG9R0PpDG8/0hehO7ZQ0KmJePAND6nw9mEvLZDNWtO0
- VYYg==
-X-Gm-Message-State: AOJu0YxE16jhfUXe6A/L//evwFr+nrKjkQIsiG8Y26nPtqdeGtnPR67I
- vQunBZt5XN/ojM8ps62U5NKJKgYd4IBs1bTRsxxCrC4+E9k0oEqUGtnYcoqNxMZZEYowvetX7vk
- a2P/RRDU=
-X-Gm-Gg: ATEYQzzaFNkLCwN2zUZwPDAGn9l2FTylycbOcd0JgwBhqm1UOecb6862Ubx7quJOiSA
- etIzH1qL1lz7ThZr6c2dHslCblD8g6/avaJO3epzND+4ijWLSRcoPF+IoMmQ7001nK2cgqpVudl
- p6r6tqxx7AX1T8r0eSQtN2SMaoGhZltUJm6K9gSx7Jzjgi7sc07HVIKbvnjPQxG3QFQlWyMpeR4
- 5PfWJeay2wu0JDy6N1AAEqashvLJIryo7SKQVkNMkCOzqOKXfI3tdLR1zXTabej+uJN3oJ2J1dP
- KI2Y4KX/KAUmaLB0xpAyPwnKRp7jbnL4pwvVKIctarYztQerN9ZkzgDXk/b4XO6xLWNwC90m5aK
- 9/n4TMI0uHogJmxyv+S6G/YrRwSQqyePuMdGf7dO+MIOf4Kj/JzCKJdyjB6BI276fmOHl17rp43
- 2tnDYm2E6hdhUf5QgqsDSXuir3KaAQXN7AcehQSFb3ZuQUnTR/VHJggGklo9ZK5NMe1jXqtG6Y6
- RylkCqvuvPSlgRfcchPNVu3q354z4SVGcW4f6WXMZfvlGHk
-X-Received: by 2002:a05:6870:7d15:b0:3e8:9b72:5cda with SMTP id
- 586e51a60fabf-41c875b66e9mr617219fac.11.1774297209156; 
- Mon, 23 Mar 2026 13:20:09 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1774297442; x=1774902242;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dRhwcG3CxOKsVyU2e2e/eAaKJcK/mRWdY0QlO40HdI0=;
+ b=rRm6rhPLquIoEk8cZHnI3+Waar0MRO75nSwPpoAWeRlybrPmh12r2/0AW9DPNf5S6t
+ w2vOAhk4Yd7m+k78KeH5Ko/PaFDfIPKoc4inbqorTlcm+JTslkr5+LR0hEkQQoj3Gghc
+ qWXT4l4zPB9OWy9FzBLmfRPzgZk2Pvyw55gb9Uy2Gnwl5A8iif0EKPhYsk/TWUoj2UX4
+ ry6DSTeJMSU+EyMLYc7CvlmBg1bDde9+XeGqN6yNNobIjhBuTrDnxBpgEyb29u7CrQxq
+ RGct3lga/Rfm1Mhsrkr5CjYeG9sSlp7xp5RAy61j2lZjUd1s+2IFoOueKhu/FeGlcJBR
+ MfHg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVQwmhA20I975+G9KclEzy1Q2YoBLHnFSWaaca+dbcpY0NPYZMnkGWKAn5HC7+PdiAHIWvuU9U=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywu1ATt3+kan4SJ4HTa2nHRqGJ5vvs8scE08fjqR5qL2/hOQWzq
+ Hd57Kyzy0DDgn8BNr/cx9XgHXlicgO1tAE7+Z3nVXNtIEbcWzBg8nGMQ1K/gTxIGEcM=
+X-Gm-Gg: ATEYQzxyxi9NxX20hWzHvW3SVPA5eDB4vvspG2olAKJJuk/JeupQ40bnzBAjvLbuw8p
+ S1sWliiErB97cHvNquxNRU8AzNtzeb5SrXNdIovFf0FEkmiyRIWyAlkrooYu7JX70B8oflAH80Y
+ qIW8vMcW5RKJCfKQr8A6vM5JmcvAfGMHWMO7RKP5YpYGRNu5c+ZVSZQcIa0NSPiEJJgFFkZB5b3
+ +Nr+N/GINZ/1gId8hhNVBzsGIekcb/X5oUinIulLqy2Jmb5tBai74YUApZ7en8Oi0eYDjtS2b5k
+ 9fBGW2GULddRBFxR3aniOczlU+QYt4j3M9yty1W0tKu73DjQr/4xV/NpH96fqAtW8vlYCuLC69V
+ je0k8QhufrSifDd5InNa0BRcTXxXFYUYnUHNgMic1Ort1PvGTSgy+1nN4ConguM9RciZcNDUTk0
+ H+dBisPPxvWXXKv6SBauyQoZn3Gu6AaJIOjAys5P8p8/LDYZPmqI4eVK+/Y+NozdGmbkrKQjDl6
+ jQu9/quRtHdLvG+3cyPzKhZAgFnjLtZUkEO7bFzB1Bkw552
+X-Received: by 2002:a05:6820:1789:b0:67d:e308:bad3 with SMTP id
+ 006d021491bc7-67de308ed77mr5736651eaf.36.1774297442065; 
+ Mon, 23 Mar 2026 13:24:02 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41c14ddbcb3sm11224427fac.14.2026.03.23.13.20.08
+ 006d021491bc7-67c252dbd05sm6613832eaf.6.2026.03.23.13.24.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Mar 2026 13:20:08 -0700 (PDT)
-Date: Mon, 23 Mar 2026 14:20:06 -0600
+ Mon, 23 Mar 2026 13:24:01 -0700 (PDT)
+Date: Mon, 23 Mar 2026 14:23:58 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-Subject: [ANN] U-Boot v2026.04-rc5 released
-Message-ID: <20260323202006.GL502704@bill-the-cat>
+To: David Lechner <dlechner@baylibre.com>
+Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Macpaul Lin <macpaul.lin@mediatek.com>, Lukasz Majewski <lukma@denx.de>,
+ Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v3 1/6] clk: mediatek: mt8189: add some VLP clocks
+Message-ID: <20260323202358.GM502704@bill-the-cat>
+References: <20260323-mtk-mt8391-initial-support-v3-0-19dd92f4543f@baylibre.com>
+ <20260323-mtk-mt8391-initial-support-v3-1-19dd92f4543f@baylibre.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="yAaPUHOID4mUDQ8t"
+ protocol="application/pgp-signature"; boundary="RdrQlYpn0wuvIvH9"
 Content-Disposition: inline
+In-Reply-To: <20260323-mtk-mt8391-initial-support-v3-1-19dd92f4543f@baylibre.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,53 +105,49 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---yAaPUHOID4mUDQ8t
+--RdrQlYpn0wuvIvH9
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hey all,
+On Mon, Mar 23, 2026 at 03:16:52PM -0500, David Lechner wrote:
 
-So it's release day and I have tagged and pushed things out. We once
-again have a small delta from the previous release. It's a handful of
-fixes that are also pretty well defined. If there's any regressions
-still open people know of, please speak up now so we can get them
-resolved.
+> Add some VLP clocks needed by the PMIC on MT8189 and similar SoCs.
+>=20
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
+> ---
+>  drivers/clk/mediatek/clk-mt8189.c | 289 ++++++++++++++++++++++++++++++++=
+++++++
+>  1 file changed, 289 insertions(+)
 
-We're continuing with a community meeting following the release and the
-calendar link is
-https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DMHYzYz=
-Q1dWh2bnRjcm80czVmcDczYmhsNThfMjAyNjAxMjdUMTUwMDAwWiA4OWJlN2I4MTMxMzZiZWMwN=
-mE4M2RlNGRhNTk3NDVmMGFiZDExYzFiODM2MDYxYWUwNmMxYzdkYmNkMThkZjQxQGc&tmsrc=3D=
-89be7b813136bec06a83de4da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group.ca=
-lendar.google.com&scp=3DALL
-and once again this is the same time as the previous meeting. The
-meeting details itself are:
-https://meet.google.com/icv-nvmv-dbf
-March 24th, 2025. 9am (GMT -06:00)
+I'm working on a series now to fix this globally, and it's not a
+MediaTek only problem, but:
 
-To join by phone:
-https://tel.meet/icv-nvmv-dbf?pin=3D5493171900556
+> @@ -1733,6 +2012,16 @@ U_BOOT_DRIVER(mtk_clk_topckgen) =3D {
+>  	.flags =3D DM_FLAG_PRE_RELOC,
+>  };
+> =20
+> +U_BOOT_DRIVER(mtk_clk_vlpckgen) =3D {
 
-In terms of a rough changelog:
-- Platform updates for NXP, Raspberry Pi, MediaTek
-
-This is the final rc before the release on 06 April 2026.
-
-Thanks all!
+This is a bad name to use. I bet in other parts of the series you re-use
+it. These names need to be unique within a binary, and while today they
+will be I bet (since all the other examples are fine), someday we'd like
+to be able to compile test (and so static analyize) more code, and it
+will clash and fail to link. A better one would be
+"mt8189_clk_vlpckgen".
 
 --=20
 Tom
 
---yAaPUHOID4mUDQ8t
+--RdrQlYpn0wuvIvH9
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCacGgdgAKCRAr4qD1Cr/k
-Ch3+AP4p908Omuhn+rogiKXCHFOfnvD5r70rnCtQyT6FvSMrOAD+JldNgqZviL8U
-yhQ7VHSxUstjMz1MH3QrQeAoVU+P+Ac=
-=G1Cv
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCacGhXQAKCRAr4qD1Cr/k
+Ck4oAP94wCL7e0HyavjAS3uJ0FfmLsqxTqYm12rrsjuMXo3heAD/XYF5LBgkX+TB
+S7IiZ/BQBKQ0CHMZ2o7mMmK0lfqgPQc=
+=5G/9
 -----END PGP SIGNATURE-----
 
---yAaPUHOID4mUDQ8t--
+--RdrQlYpn0wuvIvH9--
