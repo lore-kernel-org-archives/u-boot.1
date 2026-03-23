@@ -4,125 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7F96EC01B6
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 09:56:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2025BEC01B6
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 10:01:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 085BA83DB6;
-	Mon, 23 Mar 2026 10:56:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 5015484114;
+	Mon, 23 Mar 2026 11:01:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="Ce2bEA7k";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="b1B5lUkA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20B0183FAF; Mon, 23 Mar 2026 10:56:26 +0100 (CET)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id 35C6484118; Mon, 23 Mar 2026 11:00:58 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A30A283BE1
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 10:56:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F19683DB6
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 11:00:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lunrzTmpaG7wnL5jdDo7/xLBHSFvCvgUTS3aVySYQUNT7mjGpkE2AwqiOdg/PSPFmNWv9r330RN9uFFGX3aKQMxx4N/Z6qwl30ubuvlPKjJDJkNzU/EO0Kq0v0RB18fFBaigFMJ5YBycLILqze5VFoNrAUae7dzbozKB73FurrV5DtIPTISzzIhnn9QfALEIK1BmlouOakileoOywKVviJjSyPClAX/AUyaWvKvnyqcef0O37gJ2iukZ36MhXitQEDPEVlXUL6H+rluwpuZ+DCBCgKNCyzkrZXhP1Dg4Fsj59WWt6NUYz3jrpJk1+FBa8dg6p6yxzcB+7czampHJ6Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5qEvlIBjeVueuj6at5AXNHnUYHENQ0G6Gq/SERXkJxo=;
- b=aAB6teZ4xtLhLErlStJdHZWNGG1G29hydOzbK0aYfogPq6edXAlgLuPfGz9nkybsH/EdgI+IdOWJeQQjpBnenU0AwK2FcjTh8Ublk1D/bCGiAthdT/HhYgnGi5GVrwFJWgxgkA7jNkbnwfUBgXSJWa5fcCvrQnF+FwbqSu3RxxZYL8PeSz3WauTjha+69Oz91Al7E3stU0Tidb/TswBtHFk4BIF3Qo8QOUGrBC7EJuhRJI8bIhzs5KaNarEnKSw5TPW/LAaPRc3n9xdvsGHBVw46wZoKUZxbcTWTXsVAOBhjMYVTEZdnlZP8LD7Y0edEb8f0KG3q0fuSOlm/P/SCuA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5qEvlIBjeVueuj6at5AXNHnUYHENQ0G6Gq/SERXkJxo=;
- b=Ce2bEA7kUNIGt9DaGo8TkkPaxeLAnRZF3+wlspkM6TRfKL/NOwT4dXHqdfLKk6ns6P+mXN/kHzrbPsdeYS8OWQeT0jk6mWznjoFPt2ggmmgG7JRrgTUgE1fwdOScYlrVxGnuQJ8KnldX3e5xuUcdQiRgOiVELFoQSRig5RwEoD0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by GVXPR10MB6008.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:16::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.31; Mon, 23 Mar
- 2026 09:56:16 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8%5]) with mapi id 15.20.9723.030; Mon, 23 Mar 2026
- 09:56:15 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de,  Simon Glass <simon.glass@canonical.com>,  Tom
- Rini <trini@konsulko.com>
-Subject: Re: [PATCH 1/2] linker_lists: Fix end-marker alignment to prevent
- padding
-In-Reply-To: <20260321134626.516665-2-sjg@chromium.org> (Simon Glass's message
- of "Sat, 21 Mar 2026 07:46:23 -0600")
-References: <20260321134626.516665-1-sjg@chromium.org>
- <20260321134626.516665-2-sjg@chromium.org>
-Date: Mon, 23 Mar 2026 10:56:14 +0100
-Message-ID: <87jyv2oon5.fsf@prevas.dk>
-User-Agent: Gnus/5.13 (Gnus v5.13)
-Content-Type: text/plain
-X-ClientProxiedBy: GVX0EPF0005F6D1.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:158:401::64e) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id D0896439F0;
+ Mon, 23 Mar 2026 10:00:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3EAD3C4CEF7;
+ Mon, 23 Mar 2026 10:00:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1774260053;
+ bh=Cyuxn0c2WKhEHJ55OylZwjAvUZIoxo0Q+kKW6uB6Kjg=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=b1B5lUkAdTIPSy0MnIa4SWPO6CHOTV+pKpZiRl11CcNRZwg/Zmqhz5MySEuk0QaC3
+ Vv6hVZ9tzJwpTdmZ21xJJoQpO79wN/0CKy3h2S0rRpsYQjG0kx7gRedv4N7edPFZCI
+ J/qFnpxVd1JCZPN5QY5JZ2es0Lh1/48p/7tcuUVKBBJJZfhuYWptuDlO2tthM3f5JP
+ UItOBLE7Cv7MlzeTDbK0RAoRKQHgLcjefDNvKauMMQy+AZb/c4YdEETh1jqCkpw0WP
+ 89xiGLAoPUqlIryIcAOWemJ3Af2aO6AtM6JWsUZgj6AsfNS7gJSz832nB2NgDEUbDS
+ 9pdDPqo3NEMhQ==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Neil Armstrong <neil.armstrong@linaro.org>, Ruitong Su
+ <suruitong@lixiang.com>, u-boot@lists.denx.de
+Cc: mkorpershoek@kernel.org, trini@konsulko.com
+Subject: Re: [PATCH 1/2] fastboot: Add UFS flash backend
+In-Reply-To: <d25dd1a8-282a-4c0b-84fc-85dc29a7edc8@linaro.org>
+References: <20260303062926.3335004-1-suruitong@lixiang.com>
+ <20260303062926.3335004-2-suruitong@lixiang.com>
+ <d25dd1a8-282a-4c0b-84fc-85dc29a7edc8@linaro.org>
+Date: Mon, 23 Mar 2026 11:00:50 +0100
+Message-ID: <87cy0un9v1.fsf@kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|GVXPR10MB6008:EE_
-X-MS-Office365-Filtering-Correlation-Id: 595ba438-e826-4373-c4b8-08de88c26c55
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|52116014|376014|366016|38350700014|22082099003|56012099003|18002099003|7053199007;
-X-Microsoft-Antispam-Message-Info: qmfsPE5/2bUXBCB9in3iByYRwNmF0hBCFxIy1NRiDxvTOmvptJrKRY2JbGPn5e8V4Pbqz1YuTpyCaorhPUq4lwm6yTNz2YaLinkbzbpo1imUVVv2z7epC/1blbdsbiY9ECy5cflNXr+xCa4XYDckzmgK/UD3wauhG2qYSWS00efZxVnlOdm1InAqyo3Tj3iG7Czg5y8fid1a06DKrJ1TjEjxlltJc16Vrb4rqtTolF4x7bMKIGlWSVbXfc41TPYrdF4GBD5unPc2IIPqTvj9D7fYP59vz2IadhQyAVOopffDcHKvBg4y58rQloyLEU7VFjxDeL19TNL54G6YoIyakFZg3nb1YelbMKmBVkW+/j8pjaJHzoVTgsShbsCo8V8XjvgDbYHOxda1KfEA2c+W6kEs0gN+c3EJ5XuPondA5sfRBtWyQ9L/d6e9HnHVMxjrplreuMq5ymvl7/CoPGwInwMr8y/UrITNqRg0mzSgRWHMxWCERcm8GFgpb4zvrJxb8mrer4hUYfTQioJrnLaXKaC183cMh5ReSbmr11mHettm1GjgqM7UsIt0DlmusKFWX2mWQ5VSbKuZgsL3t1+O74E6JYUUnA4xIP4Mr9IKYMSq3oFw5Qgt7kBoYDd3y2zuPOKLEd3wkDQRFFrrLK7otXmdXSxyW06TsAiKcmJ9TaFqpxl2+ijd5yusivrgHQTrlGcavTulhH0Z4WmY+BmhV2uZA3hNWPpjqmWRsGtEl/ri6fbvef/Y/Z+03r2kIg0qkGhsgD/v2VH3Vdu1O0TFfL2qACIT5toJUkZhVc7wGOs=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(52116014)(376014)(366016)(38350700014)(22082099003)(56012099003)(18002099003)(7053199007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?H4dIcohdCYadiTl+R7oBxSv8rjtTx8ePDY3zBiy35EstvjDLlOxuKMrCRTpO?=
- =?us-ascii?Q?HrCzid7VMWKt1bhUd8MYPMdlMuQGZzDZojevMLoErLPwYryqENx3FtA+r5h4?=
- =?us-ascii?Q?+sRSDIWlR1/Le59L43PDCNdE8GeNd+eorFWonVT+eSnAuwM+z/CL5VWd9WwV?=
- =?us-ascii?Q?wjydxN6HFl50OHXJ9tlxSVNpvsRoUacOdLcyYS9qlgzO+z5Ny97bUwQj5Hmk?=
- =?us-ascii?Q?GpGyONP3TJCa36uGiwsQkF/+R0tUtQoJQ4eON64juLzkG/1mKUYcWCYIveXu?=
- =?us-ascii?Q?7FOqSn/ILrPU6UXkR4ekPMBnryOCqRmA4oYD9NlTlkAw4upgdUTU/PDghR6N?=
- =?us-ascii?Q?vgmqCyPgAL7NFKueWQkNT1xhFrM9htKZtqbyKYkkCLsTEqKDMWjQqlKWQbHI?=
- =?us-ascii?Q?v1PV+B0g1gZfxVFN3DjlRWF5RIb+jbLY4pDZuj2RJKG5hpEsMVvC5odSSA7h?=
- =?us-ascii?Q?vEDUoARIFCZbMIkCQJo37KX+OU6ieJWl6wxjpy5Gpc0CpraJNsBB0GnA4YV1?=
- =?us-ascii?Q?VFGEoHsdrmdhF1cE5I/9HQIyWJGH0DzHMAc8x0VnhJGNYXsZeEgPMCPP9BX4?=
- =?us-ascii?Q?YLgDyuNzgwVsAjtaI69eoK0AZXIBCGp7u5mDoRrfjuetJjTC4OpoKlCYcH3p?=
- =?us-ascii?Q?hvVjDDm4Rq7d+miO2eCJEk1/dby6bh3iFQR1fk7TCIwcC/XNEgQ9P4o2JQla?=
- =?us-ascii?Q?P0H91fhWBzdjI4d+2+XXPcF3wdBSWEXw6yVCxeNdi4Ffw41UJFkJG86JF1D1?=
- =?us-ascii?Q?Vc3drgJ4OdwF91D/ytSay89nR+Sp7FCYFBqFHFcAXyt4I5zBtfpKHwR4ck5p?=
- =?us-ascii?Q?evVlItE0jKlJGFAmK4IK/GrKbKWYm5HN73Gezwc/rFtMrWnxs+LY5IPptDWL?=
- =?us-ascii?Q?mDS3Eh1QOAbMZrrCfaUG1YPtkmIUBqzXNcY7Fd0Jin2B8kIGhpEBXACEyyAW?=
- =?us-ascii?Q?uJow4dhr5L4ivUodAmor69rv3Z6q38C+2r59I5tJ9bdp1HVP4474u+QcYtYu?=
- =?us-ascii?Q?UAOaey8sj6P7xsLb9GcrjKRNZgLoX24UQEYhURyjtElDhJdNIkR1oS1pem1Q?=
- =?us-ascii?Q?Kn9n6gyKvqqXDZoFsEn9mq/nYRhQlwUfORiKV/gn2FVK3j8BclD2406fL6HA?=
- =?us-ascii?Q?Hp9Jjt+extOwxJFGfA/H1HhKxJacyFwpLSvbGVOJf2dhavZ1LjXbw5q/c1jR?=
- =?us-ascii?Q?hTEQeKoaXLL0EwjDGCai5+edT+ERXmuTH/WnRh2UdKIcbr076fwMjSeRQXlO?=
- =?us-ascii?Q?ozuptAXT2G8fkeMAHX57Y1kysZcMadCU6VBL/8VNNxd60FPaDb+cfM76dxEf?=
- =?us-ascii?Q?zGNpVRHOYo/l4YQPF8/SzPgSh1/QSwG1BO6ovJIqlk7bpYBWSz1D+jbNV3f8?=
- =?us-ascii?Q?zTYzCVZsXINEqSNThbac9Q8Dj5LmXY2kl/tQljNaQlRGTCX6VRLnpKxYhUSu?=
- =?us-ascii?Q?zmrrs98q4NKuZiocD8N5bEGWMuLeOX8Reud/U2YdZBoPkUK8z1Fs/xQqQkhu?=
- =?us-ascii?Q?e/jiyUVuvVtcO1q5Ve4AFKQ2C8AxGW7gJXJN+PQ4aX0frvUN1m7vn4dnQmjO?=
- =?us-ascii?Q?Ql+8CUx0xPnixCi5OAnrwFyTDZSDGkOPxety6UMamISlsmwDdjS+ibq510nn?=
- =?us-ascii?Q?RkhjPAiAZtvSgwby6qPizC/cRe64qO4O9RcAkjZGsf9mwNu0NuCjKn1W5Ghr?=
- =?us-ascii?Q?LQVesIaadedtnfxYrqynOs9z2pV9DSepXQ93oldbg5R5wJF8lq/Kc6tS1OSm?=
- =?us-ascii?Q?RdQj7smYLBLNaj1B/71n4dGFImtam4g=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 595ba438-e826-4373-c4b8-08de88c26c55
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2026 09:56:15.8268 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +s9q1wnVBye3WGZyoNJsLSx/VdVX88SsvCAWSYjKL06GiImC2K1WfG3zzfRD/wspOR1+FV2e55Dzt/JRNwxXEWNHBnfvKTpCTJpY8VGCRxg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR10MB6008
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -139,56 +70,358 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Mar 21 2026, Simon Glass <sjg@chromium.org> wrote:
 
-> From: Simon Glass <simon.glass@canonical.com>
+On Wed, Mar 04, 2026 at 17:23, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+
+> Hi,
 >
-> Change the alignment of end markers in ll_entry_end() and ll_end_decl()
-> from __aligned(4) and __aligned(CONFIG_LINKER_LIST_ALIGN) respectively
-> to __aligned(1).
+> On 3/3/26 07:29, Ruitong Su wrote:
+>> Add a fastboot backend for UFS (Universal Flash Storage) devices.
+>> UFS devices are accessed through the SCSI subsystem, with each UFS
+>> LUN exposed as a separate SCSI block device.
+>> 
+>> The key feature is multi-LUN partition addressing using the syntax
+>> "<scsi_dev>#<partition_name>" (e.g. "0#system", "1#boot_a").
+>> Unqualified names fall back to the default SCSI device configured
+>> via CONFIG_FASTBOOT_FLASH_UFS_DEV.
 >
-> The linker places zero-size end markers at aligned boundaries based on
-> what follows them. When the next list's start marker has a high alignment
-> requirement (e.g., 32 bytes), padding gets inserted before the end
-> marker. This causes the byte span (end - start) to not be an exact
-> multiple of the struct size.
+> I get this is a cool feature, but multi-LUN is exactly like multi-block,
+> so could you try to extend the block to support multiple different block
+> devices instead ? no need to limit this to UFS...
+
+I agree with Neil here. Can you explain why this needs to be UFS
+specific or re-spin a new version to extend block support?
+
 >
-> The compiler optimises pointer subtraction (end - start) using
-> magic-number multiplication for division. This optimisation only produces
-> correct results when the byte span is an exact multiple of the struct
-> size. With padding, the result is garbage (e.g., -858993444 instead of
-> 15).
+> Thanks,
+> Neil
 >
-> By using __aligned(1), the end marker is placed immediately after the
-> last entry with no padding, ensuring (end - start) equals exactly (n *
-> sizeof) where n is the number of entries.
-
-So I'm wondering why that is guaranteed. I mean, the linker is placing
-these sections one after another in order
-
-
-  2_foo_2_last_foo   size sizeof(struct foo), alignment max(4, alignof(struct foo))
-  2_foo_3            size 0, alignment 4 (1 with your patch)
-  2_bar_1            size 0, alignment CONFIG_LINKER_LIST_ALIGN
-  2_bar_2_first_bar  size sizeof(struct bar), alignment max(4, alignof(struct bar))
-
-So clearly the end of last_foo does have 4-byte alignment, yet it is
-observed that the linker sometimes makes 2_foo_3's address coincide with
-2_bar_1's address?
-
-What I don't understand is that it seems that the linker could place the
-zero-size object 2_foo_3 at any 4-byte aligned address between the end
-of 2_foo_2_last_foo and 2_bar_1. And the same seems to be true when one
-changes it to have even smaller alignment requirement.
-
-So why does an align(1) stop the linker from placing that 0-size section
-at the same address as 2_bar_1, or even force it (as we need) to put it
-at the first possible address, i.e. immediately after last_foo? Unless
-alignment 1 is somehow special-cased to mean "place as early as
-possible", I can't see how this should provide any better guarantees
-than what we already have.
-
-So I don't oppose the patch at all, but I'd really like to understand
-how it actually works.
-
-Rasmus
+>> 
+>> The implementation reuses the existing fb_block helpers for raw
+>> image, sparse image, and erase operations, adding only the
+>> UFS-specific partition lookup and GPT handling logic on top.
+>> 
+>> Partition lookup uses a quiet iteration via part_get_info() instead
+>> of the verbose part_get_info_by_name() / part_get_info_by_dev_and_
+>> name_or_num(), which avoids noisy console output during fastboot
+>> getvar probing (has-slot, partition-size queries).
+>> 
+>> Signed-off-by: Ruitong Su <suruitong@lixiang.com>
+>> ---
+>>   MAINTAINERS               |   1 +
+>>   drivers/fastboot/Kconfig  |  30 ++++++-
+>>   drivers/fastboot/Makefile |   1 +
+>>   drivers/fastboot/fb_ufs.c | 164 ++++++++++++++++++++++++++++++++++++++
+>>   include/fb_ufs.h          |  49 ++++++++++++
+>>   5 files changed, 243 insertions(+), 2 deletions(-)
+>>   create mode 100644 drivers/fastboot/fb_ufs.c
+>>   create mode 100644 include/fb_ufs.h
+>> 
+>> diff --git a/MAINTAINERS b/MAINTAINERS
+>> index f8d4f6ee8b2..071102f47fd 100644
+>> --- a/MAINTAINERS
+>> +++ b/MAINTAINERS
+>> @@ -1197,6 +1197,7 @@ F:	cmd/fastboot.c
+>>   F:	doc/android/fastboot*.rst
+>>   F:	include/fastboot.h
+>>   F:	include/fastboot-internal.h
+>> +F:	include/fb_ufs.h
+>>   F:	include/net/fastboot_tcp.h
+>>   F:	include/net/fastboot_udp.h
+>>   F:	drivers/fastboot/
+>> diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
+>> index 576c3ef8a45..8569bec5d9b 100644
+>> --- a/drivers/fastboot/Kconfig
+>> +++ b/drivers/fastboot/Kconfig
+>> @@ -92,7 +92,7 @@ config FASTBOOT_FLASH
+>>   	bool "Enable FASTBOOT FLASH command"
+>>   	default y if ARCH_SUNXI && ( MMC || MTD_RAW_NAND )
+>>   	default y if ARCH_ROCKCHIP && MMC
+>> -	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS) || DM_SPI_FLASH || BLK
+>> +	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS) || DM_SPI_FLASH || BLK || (UFS && SCSI)
+>>   	select IMAGE_SPARSE
+>>   	help
+>>   	  The fastboot protocol includes a "flash" command for writing
+>> @@ -124,12 +124,38 @@ config FASTBOOT_FLASH_SPI
+>>   	bool "FASTBOOT on SPI flash"
+>>   	depends on DM_SPI_FLASH
+>>   
+>> +config FASTBOOT_FLASH_UFS
+>> +	bool "FASTBOOT on UFS"
+>> +	depends on UFS && SCSI
+>> +	help
+>> +	  This enables support for the fastboot "flash" and "erase"
+>> +	  commands on UFS (Universal Flash Storage) devices. UFS
+>> +	  devices are accessed through the SCSI subsystem, with each
+>> +	  UFS LUN exposed as a separate SCSI block device.
+>> +
+>> +	  Partitions are addressed using the syntax
+>> +	  "<scsi_dev>#<partition_name>" (e.g. "0#system") to
+>> +	  disambiguate across multiple UFS LUNs. Unqualified names
+>> +	  fall back to the default SCSI device number.
+>> +
+>>   config FASTBOOT_FLASH_BLOCK
+>>   	bool "FASTBOOT on block device"
+>>   	depends on BLK
+>>   
+>>   endchoice
+>>   
+>> +config FASTBOOT_FLASH_UFS_DEV
+>> +	int "Define FASTBOOT UFS default SCSI device number"
+>> +	depends on FASTBOOT_FLASH_UFS
+>> +	default 0
+>> +	help
+>> +	  The default SCSI device number for UFS fastboot operations.
+>> +	  UFS LUNs are exposed as SCSI block devices by the UFS driver.
+>> +	  Use "scsi scan" followed by "scsi info" to discover the
+>> +	  mapping between SCSI device numbers and UFS LUNs. Typically
+>> +	  device 0 corresponds to UFS LUN 0. When the partition name
+>> +	  does not contain a "#" separator, this device is used.
+>> +
+>>   config FASTBOOT_FLASH_MMC_DEV
+>>   	int "Define FASTBOOT MMC FLASH default device"
+>>   	depends on FASTBOOT_FLASH_MMC
+>> @@ -227,7 +253,7 @@ config FASTBOOT_FLASH_BLOCK_DEVICE_ID
+>>   
+>>   config FASTBOOT_GPT_NAME
+>>   	string "Target name for updating GPT"
+>> -	depends on FASTBOOT_FLASH_MMC && EFI_PARTITION
+>> +	depends on (FASTBOOT_FLASH_MMC || FASTBOOT_FLASH_UFS) && EFI_PARTITION
+>>   	default "gpt"
+>>   	help
+>>   	  The fastboot "flash" command supports writing the downloaded
+>> diff --git a/drivers/fastboot/Makefile b/drivers/fastboot/Makefile
+>> index a341af076d1..93a5227b737 100644
+>> --- a/drivers/fastboot/Makefile
+>> +++ b/drivers/fastboot/Makefile
+>> @@ -7,4 +7,5 @@ obj-$(CONFIG_FASTBOOT_FLASH_BLOCK) += fb_block.o
+>>   # MMC reuses block implementation
+>>   obj-$(CONFIG_FASTBOOT_FLASH_MMC) += fb_block.o fb_mmc.o
+>>   obj-$(CONFIG_FASTBOOT_FLASH_NAND) += fb_nand.o
+>> +obj-$(CONFIG_FASTBOOT_FLASH_UFS) += fb_block.o fb_ufs.o
+>>   obj-$(CONFIG_FASTBOOT_FLASH_SPI) += fb_spi_flash.o
+>> diff --git a/drivers/fastboot/fb_ufs.c b/drivers/fastboot/fb_ufs.c
+>> new file mode 100644
+>> index 00000000000..1273c946491
+>> --- /dev/null
+>> +++ b/drivers/fastboot/fb_ufs.c
+>> @@ -0,0 +1,164 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/*
+>> + * Copyright (C) 2026 Li Auto Inc.
+>> + *
+>> + * UFS (Universal Flash Storage) backend for fastboot.
+>> + *
+>> + * UFS devices in U-Boot are accessed through the SCSI subsystem, with
+>> + * each UFS LUN exposed as a separate SCSI block device.  This backend
+>> + * provides UFS-aware partition lookup with multi-LUN addressing, layered
+>> + * on top of the generic fb_block helpers for the actual I/O.
+>> + *
+>> + * Partition addressing uses the syntax "<scsi_dev>#<partition_name>"
+>> + * (e.g. "0#system") to disambiguate across multiple UFS LUNs.
+>> + * Unqualified names fall back to CONFIG_FASTBOOT_FLASH_UFS_DEV.
+>> + */
+>> +
+>> +#include <blk.h>
+>> +#include <fastboot.h>
+>> +#include <fastboot-internal.h>
+>> +#include <fb_block.h>
+>> +#include <fb_ufs.h>
+>> +#include <image-sparse.h>
+>> +#include <part.h>
+>> +#include <vsprintf.h>
+>> +#include <linux/printk.h>
+>> +
+>> +static struct blk_desc *fastboot_ufs_get_dev(char *response, int dev_num)
+>> +{
+>> +	struct blk_desc *dev_desc;
+>> +
+>> +	dev_desc = blk_get_dev("scsi", dev_num);
+>> +	if (!dev_desc || dev_desc->type == DEV_TYPE_UNKNOWN) {
+>> +		pr_err("invalid UFS/SCSI device %d\n", dev_num);
+>> +		fastboot_fail("invalid UFS device", response);
+>> +		return NULL;
+>> +	}
+>> +
+>> +	return dev_desc;
+>> +}
+>> +
+>> +static int fb_ufs_find_part(struct blk_desc *dev_desc, const char *name,
+>> +			    struct disk_partition *info)
+>> +{
+>> +	int i;
+>> +	int ret;
+>> +
+>> +	for (i = 1; ; i++) {
+>> +		ret = part_get_info(dev_desc, i, info);
+>> +		if (ret)
+>> +			return ret;
+>> +		if (!strcmp(name, (char *)info->name))
+>> +			return i;
+>> +	}
+>> +}
+>> +
+>> +int fastboot_ufs_get_part_info(const char *part_name,
+>> +			       struct blk_desc **dev_desc,
+>> +			       struct disk_partition *part_info,
+>> +			       char *response)
+>> +{
+>> +	int dev_num = CONFIG_FASTBOOT_FLASH_UFS_DEV;
+>> +	char name_buf[32];
+>> +	const char *name = part_name;
+>> +	int ret;
+>> +
+>> +	if (!part_name || !*part_name) {
+>> +		fastboot_fail("partition not given", response);
+>> +		return -ENOENT;
+>> +	}
+>> +
+>> +	/* Parse "<dev>#<name>" syntax for multi-LUN addressing */
+>> +	if (strchr(part_name, '#')) {
+>> +		if (sscanf(part_name, "%d#%31s", &dev_num, name_buf) != 2) {
+>> +			fastboot_fail("invalid partition spec", response);
+>> +			return -EINVAL;
+>> +		}
+>> +		name = name_buf;
+>> +	}
+>> +
+>> +	*dev_desc = blk_get_dev("scsi", dev_num);
+>> +	if (!*dev_desc || (*dev_desc)->type == DEV_TYPE_UNKNOWN) {
+>> +		fastboot_fail("no such device", response);
+>> +		return -ENODEV;
+>> +	}
+>> +
+>> +	ret = fb_ufs_find_part(*dev_desc, name, part_info);
+>> +	if (ret < 0) {
+>> +		fastboot_fail("no such partition", response);
+>> +		return -ENOENT;
+>> +	}
+>> +
+>> +	return ret;
+>> +}
+>> +
+>> +void fastboot_ufs_flash_write(const char *cmd, void *download_buffer,
+>> +			      u32 download_bytes, char *response)
+>> +{
+>> +	struct blk_desc *dev_desc;
+>> +	struct disk_partition info = {0};
+>> +
+>> +#if CONFIG_IS_ENABLED(EFI_PARTITION)
+>> +	{
+>> +		int dev_num = CONFIG_FASTBOOT_FLASH_UFS_DEV;
+>> +		char op_buf[16];
+>> +		const char *op = cmd;
+>> +
+>> +		if (strchr(cmd, '#')) {
+>> +			if (sscanf(cmd, "%d#%15s", &dev_num, op_buf) == 2)
+>> +				op = op_buf;
+>> +		}
+>> +
+>> +		if (!strcmp(op, CONFIG_FASTBOOT_GPT_NAME)) {
+>> +			dev_desc = fastboot_ufs_get_dev(response, dev_num);
+>> +			if (!dev_desc)
+>> +				return;
+>> +
+>> +			printf("%s: updating GPT on scsi %d\n",
+>> +			       __func__, dev_num);
+>> +			if (is_valid_gpt_buf(dev_desc, download_buffer)) {
+>> +				printf("%s: invalid GPT - refusing to write\n",
+>> +				       __func__);
+>> +				fastboot_fail("invalid GPT partition",
+>> +					      response);
+>> +				return;
+>> +			}
+>> +			if (write_mbr_and_gpt_partitions(dev_desc,
+>> +							 download_buffer)) {
+>> +				printf("%s: writing GPT partitions failed\n",
+>> +				       __func__);
+>> +				fastboot_fail("writing GPT partitions failed",
+>> +					      response);
+>> +				return;
+>> +			}
+>> +			part_init(dev_desc);
+>> +			printf("........ success\n");
+>> +			fastboot_okay(NULL, response);
+>> +			return;
+>> +		}
+>> +	}
+>> +#endif
+>> +
+>> +	if (fastboot_ufs_get_part_info(cmd, &dev_desc, &info, response) < 0)
+>> +		return;
+>> +
+>> +	if (is_sparse_image(download_buffer)) {
+>> +		fastboot_block_write_sparse_image(dev_desc, &info, cmd,
+>> +						  download_buffer, response);
+>> +	} else {
+>> +		fastboot_block_write_raw_image(dev_desc, &info, cmd,
+>> +					       download_buffer,
+>> +					       download_bytes, response);
+>> +	}
+>> +}
+>> +
+>> +void fastboot_ufs_erase(const char *cmd, char *response)
+>> +{
+>> +	struct blk_desc *dev_desc;
+>> +	struct disk_partition info;
+>> +
+>> +	if (fastboot_ufs_get_part_info(cmd, &dev_desc, &info, response) < 0)
+>> +		return;
+>> +
+>> +	fastboot_block_raw_erase(dev_desc, &info, cmd, 0, response);
+>> +}
+>> diff --git a/include/fb_ufs.h b/include/fb_ufs.h
+>> new file mode 100644
+>> index 00000000000..d64d5aca81a
+>> --- /dev/null
+>> +++ b/include/fb_ufs.h
+>> @@ -0,0 +1,49 @@
+>> +/* SPDX-License-Identifier: GPL-2.0+ */
+>> +/*
+>> + * Copyright (C) 2026 Li Auto Inc.
+>> + */
+>> +
+>> +#ifndef _FB_UFS_H_
+>> +#define _FB_UFS_H_
+>> +
+>> +struct blk_desc;
+>> +struct disk_partition;
+>> +
+>> +/**
+>> + * fastboot_ufs_get_part_info() - Look up partition on UFS device
+>> + *
+>> + * Supports two naming conventions:
+>> + *   "<scsi_dev>#<partition_name>"  -- explicit LUN targeting (e.g. "0#system")
+>> + *   "<partition_name>"             -- searches on default UFS SCSI device
+>> + *
+>> + * @part_name: Partition specifier (see above)
+>> + * @dev_desc: Pointer to returned block device descriptor
+>> + * @part_info: Pointer to returned partition info
+>> + * @response: Pointer to fastboot response buffer
+>> + * Return: Partition number on success, negative on error
+>> + */
+>> +int fastboot_ufs_get_part_info(const char *part_name,
+>> +			       struct blk_desc **dev_desc,
+>> +			       struct disk_partition *part_info,
+>> +			       char *response);
+>> +
+>> +/**
+>> + * fastboot_ufs_flash_write() - Write downloaded image to UFS partition
+>> + *
+>> + * @cmd: Partition specifier ("0#system", "0#gpt", etc.)
+>> + * @download_buffer: Pointer to downloaded image data
+>> + * @download_bytes: Size of downloaded image
+>> + * @response: Pointer to fastboot response buffer
+>> + */
+>> +void fastboot_ufs_flash_write(const char *cmd, void *download_buffer,
+>> +			      u32 download_bytes, char *response);
+>> +
+>> +/**
+>> + * fastboot_ufs_erase() - Erase a UFS partition
+>> + *
+>> + * @cmd: Partition specifier ("0#userdata", etc.)
+>> + * @response: Pointer to fastboot response buffer
+>> + */
+>> +void fastboot_ufs_erase(const char *cmd, char *response);
+>> +
+>> +#endif /* _FB_UFS_H_ */
