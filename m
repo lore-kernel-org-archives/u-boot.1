@@ -4,110 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 916EEF46126
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 14:12:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAA7BF4612A
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 14:25:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F86684154;
-	Mon, 23 Mar 2026 15:12:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 351168408D;
+	Mon, 23 Mar 2026 15:25:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Mb6ddPVz";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="cfr14jfj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A763C84148; Mon, 23 Mar 2026 14:52:14 +0100 (CET)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id 044B984132; Mon, 23 Mar 2026 15:25:46 +0100 (CET)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56DE384114
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 14:52:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D29583DB6
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 15:25:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=charles.cc.zhang@gmail.com
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-50b2b2aa276so33749841cf.3
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 06:52:12 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774273931; cv=none;
- d=google.com; s=arc-20240605;
- b=XPEPHNSIu2MJFnFcxZxxop3FA6bxgUnvhgEtEcGggdb666h6Mhnf3tx0VC/gaP2MGW
- h+wi9Psluo73RmgF3R//fILXcNFlzNAcumR2hg8GLlw2TRmBohBGwXAbBircdi74+9iL
- myZL/RwhtYNslbt71hvuyQ+4qz/ChUwcmDk4Pgw3I+Owq7beTLI5Eixebni3W5cv7/Pe
- Hn+23N5kygOioL02rzDytMzA5+0QTKDjCMnxtNAC8qQEsWz8E5VwN/o1RqByx5hvNS/X
- wTwRG7U2zb3O1zQmrNtBruLqfYjBxs+fkv5/n25/UNQHdaPYEGhcUwCHjq0gj3XVlpUS
- ERBQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=wBzH3lNYpyZCYKKCdmACJZomT2ppYmon4IOG8UFwfgU=;
- fh=zL5PnHyHNS1kIg8FqiWP46dB1IqmBQwcT+IW6D0Qz3I=;
- b=YLSat4xIV2HVveGyrXE5Ov9eWofFQN8H273s9BlfFYvgHcuomdQMDB68nZnwDetBao
- YofjbkTAhdWaBJF1mzh57C6XX8cba0SdnpdvNKAI90FLL4GGqlDrjYlyNsH87uf7J2Kz
- HsNjLkckP9dMotAEAGJWZ+WtnSoPdDULp78T/VkyYGk6R8GBLE0uQ2fYHT60PNj2zX/S
- aLCYGSj+mG4w4TRhiYCgKPpyfmx/y4zW/ky0000WJuYp4dfkKpBF+CjewP9gNeXtsHHT
- GRoiKg5hhQhwXrYySVQtwtG4AN4j921C0+i39Mo31fUeSItAQUALRolCHggO9/T1B4aK
- 4/FA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7d1872504cbso3893426a34.0
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 07:25:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1774273931; x=1774878731; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wBzH3lNYpyZCYKKCdmACJZomT2ppYmon4IOG8UFwfgU=;
- b=Mb6ddPVzD2qhwaD6mVG1PWPsQnbboXS7L66ewykpc/gvCDBy1nEO3yYcw5/dmmRFH3
- aIdwp3flwmY3vAPJYUjg9/yd5NU9K0pK7mI8fsZsmMGSl7Gc+1qdkgEs3xbFBTBlJPHg
- fBdyt7Y777S4ht3Kg7z7fDcypdpz/dDacD+mO7pIoDma8kPlwNZStb37MsFayh+yYBrG
- vTBbtC4jZIDQJ0hNh5MnF00bW/nitwz699R5kzE8DHpj4EwWgIGp1KuhySBF4CSLbcgl
- k8QOoP+60M+I+gHvUZpm1TmnZERwq3KSSVtulW74iu569KsXmo7F1vWt0Tw8zxjAhgJ0
- KVug==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774275942; x=1774880742;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=c1/RqIsUlDiuzdJ9gnssBgtNCVAW3AaaY+xm0GPAO08=;
+ b=cfr14jfjjQTw15lDiWSQ3YJWHwmwPsh34R6I5XL3c0sy1KDhepA/S700pXp+mYzwTc
+ 8wb3Z7C0/RrW4BhZYKyrswfb5jlWdL+rLVniTjIpMXL9HQMrl4yUdy56FX0movV7vNdP
+ Wamzj5VMTXyHm2rgGVmZzDH78SNLF8/EJZl55O3lPk0M8DP6cJeO2DaQdAxa2wDwtCHT
+ XM0BJVNvy7gt6cLaOj0zu9wK4a0X3LZBPJZQr9ESRuTsQ9m8ZuOuIaYlN0+xXy3pE6EK
+ Jp0WYxPzVuuFf3NfOx8q09UaR49iXvKchsgA8Erf5GiZEY7XJecqxv89TUGwhPsdW4uT
+ y8Sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774273931; x=1774878731;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wBzH3lNYpyZCYKKCdmACJZomT2ppYmon4IOG8UFwfgU=;
- b=S/KgziABXA6Y8wv4SCXjaxMWuXMcmz0JWAw3aVgKNRliauVbXPg43rAEDsD5WvRy4V
- W6FQpBW7aRscpeONPzypLu5WIXPW/EE/oIzj0hRiVaAZUgliZxc/oTAiUr/jgL8exw70
- tCsrFHyiuTiwj7gqIXx0J4uI24244i3HaKsaV62QJ5JkmmsAsmOpEkO4NFJjIG7p0D9o
- eJW80XcKe1m49q7mCe5zCPPx+Zrk/rfdMQOiSE2Lo0cUtZycVAfdFNhKbWPNNUe6X3W9
- bC8oWOV4pDPpR2wC7yhPzbfkCzilwm4QVbIJvT320XKylOgOe/t8nmwWocdbqxrJEcYj
- pCrQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWDwk9F68TyYA2c/lrF3KGBsnmZF6W58SUQjMkC49EwhBhMfv/Rzeian8KKLz5KsvjoKBjUKcw=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywo8eiJkxWCH6+6ITxb4u5+TYTegzhxEktYkYFpJdNiBnb9NhWE
- aTPUgWymvf+jrTaOpTpp7skTGxDic59KC43uNFDFY5NqhJv1+a7I8hib0ZUHeFHv7h01yGZN58a
- yxxKqknNe3EBfcj1zXMxuxIApD+sQowc=
-X-Gm-Gg: ATEYQzwy+ZziWCSbLh/9zJBf7LWQWgswaI6pmKuJwT9jF/rvmTb0sr5sFticqwPy34B
- EmAvJjbnDylAaPzBk3o/CF9YDCxP/BQlmyVrL/4QRZasTiZyOPGezY25Z5P5V5xtIAG95NWzAKM
- eClYS1eSVFXufPrLueno7ReK4eMa4fBMoXsKkPZtWH7YZ2LjtyxClhhIIay4OQ+qBDkgNWhDCSf
- mPJE7lKIi4R709Ug7aA6z7qHctrpESta6pP6DDeDDYFpERon7Fx6zR51aDly3d1ljBqkpHFwgJe
- koG8y8w=
-X-Received: by 2002:a05:622a:1882:b0:50b:3a6d:db5f with SMTP id
- d75a77b69052e-50b3a6ddfe2mr184977001cf.64.1774273930924; Mon, 23 Mar 2026
- 06:52:10 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1774275942; x=1774880742;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=c1/RqIsUlDiuzdJ9gnssBgtNCVAW3AaaY+xm0GPAO08=;
+ b=F5ReVwja0AU7ZdUE+KABn0C19psQeoquxueQ4Qdb5fEspuuVV7sbCmuzjQWRcon0bG
+ 8M1znJftUJIcld/rkZ4hIFkvYKHHZXkJAV9iOUw2O13oBwJZ7bODlQg5Vc0cS/x56LNc
+ 85qy4fXsxvOAzVrbP1rcNNdtpz/A7vgS4VtfigK2NkFD0/q64aGFk0z1VZWLTnQohxzN
+ d4nc4EANS5pYsNFcU1bxh07nxptjQ4lYiC8j6Z41dKWV8Vjr4+9IynAOaFtYqkxOe4RQ
+ ArNQ4+KaM1tsEHkb9mk5PPaBXiPAIykpUBBBUVMtEASawSiafOqsOHAoBqq1+pCgUdnf
+ dMpA==
+X-Gm-Message-State: AOJu0YxlgE+kr3ubrPez6iTLdO0dEySu42x7IxCePsBOY3NY1T7iJfpU
+ iSR7vsGfcxZgog3ImHlmoPU+WQcLvZDVfgrdXpUTSYFsb6D68zcFRve6uM1RqpYOFQQ=
+X-Gm-Gg: ATEYQzxCo2KoRFyqBcM3em2BQ/4Zbag5otJSjH3ZX3fW6p3HaQsg8cfJvYgUnDdfpl1
+ jQMr3pY95Z1PgzaGIyK+r2QtRjBzc3PTumrwS9Mllv0So9e0wCGsvkElP1onb0Ur5nQQvp3vj1y
+ l0fYXCLWRzI/d7MrmQOOJsJVHod8Yzn2o66E6gtODGISczKYjRo/jCRGCFEfiubMbfgstCupSQX
+ K6aGfYezJ0LxHbFKbIlh5EhGgbX+foilVhe6XoJs5VuHAdz6pgZc8TrheB1+3UowtkWGgTlc1m8
+ TyVgUJeFQoCagY/thIVV2qXGtO9yITTWtjXqWxKyyHDjCpfKqpHyJPJZNiDbULSlBSuWJrpXyRN
+ Xk4YXOKNEcnDq3m3MNWve047reXEv7HhbYwDm/KInuk68nw9SygKF9T3pn5JZjDNZPozDogxirX
+ nSIkfrsQtOrmCznT5QVlMkkVvUvUisPcr1nBzbOsFsEPBbxrN7WEDoKnXpZHjBu08R9XUp8zM=
+X-Received: by 2002:a05:6830:2713:b0:7d7:f73d:bd7f with SMTP id
+ 46e09a7af769-7d7f73dbde9mr6902204a34.5.1774275941966; 
+ Mon, 23 Mar 2026 07:25:41 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:964:f712:dbc7:4119?
+ ([2600:8803:e7e4:500:964:f712:dbc7:4119])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d7fbee2c6dsm7101946a34.1.2026.03.23.07.25.41
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 23 Mar 2026 07:25:41 -0700 (PDT)
+Message-ID: <48da89e0-279a-403a-b96f-ed27f6157fc8@baylibre.com>
+Date: Mon, 23 Mar 2026 09:25:40 -0500
 MIME-Version: 1.0
-References: <20260323110516.84423-1-charles.cc.zhang@gmail.com>
- <63086c74fc1885ded988325e3a3e474310919493.camel@siemens.com>
- <be0a3106-69ca-43f3-86de-0fd018e96e22@arm.com>
-In-Reply-To: <be0a3106-69ca-43f3-86de-0fd018e96e22@arm.com>
-From: Chencheng Zhang <charles.cc.zhang@gmail.com>
-Date: Mon, 23 Mar 2026 14:51:59 +0100
-X-Gm-Features: AQROBzCQFXIYLk1IoJfr4dKNiUGePm5D0p-dF3DCOfSoXXbimibi5JFFRtDl7Ew
-Message-ID: <CAB08KXL5hBrbXS91SrJy22Ca7ZTPzb7D+3V0stVNvNibOoT=nQ@mail.gmail.com>
-Subject: Re: [PATCH] net: tftp: fix malformed option string parsing
-To: Jerome Forissier <jerome.forissier@arm.com>
-Cc: "Sverdlin,
- Alexander (SI B PRO TI EAC CCP)" <alexander.sverdlin@siemens.com>,
- "y.moog@phytec.de" <y.moog@phytec.de>, 
- "alvin@pqrs.dk" <alvin@pqrs.dk>, "trini@konsulko.com" <trini@konsulko.com>, 
- "l.anderweit@phytec.de" <l.anderweit@phytec.de>, 
- "quentin.schulz@cherry.de" <quentin.schulz@cherry.de>, 
- "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>, 
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, nd@arm.com
-X-Mailman-Approved-At: Mon, 23 Mar 2026 15:12:56 +0100
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/6] configs: mediatek: rename genio boards defconfigs
+ to match the device tree name
+To: Julien Stephan <jstephan@baylibre.com>
+Cc: u-boot@lists.denx.de,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Tom Rini <trini@konsulko.com>, Macpaul Lin <Macpaul.Lin@mediatek.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Julien Masson <jmasson@baylibre.com>, Peng Fan <peng.fan@nxp.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>
+References: <20260318-rename-genio-defconfigs-v2-0-1f77580d72f3@baylibre.com>
+ <9060e287-9b77-4051-b378-c68ddba4fa65@baylibre.com>
+ <CAEHHSvaFcOzyz1-WkunbYELGOwP11w0z9ZtNOLTGFm5G9qRCHg@mail.gmail.com>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <CAEHHSvaFcOzyz1-WkunbYELGOwP11w0z9ZtNOLTGFm5G9qRCHg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,116 +113,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sverdin and Jerome,
+On 3/23/26 3:36 AM, Julien Stephan wrote:
+> Le ven. 20 mars 2026 à 22:33, David Lechner <dlechner@baylibre.com> a écrit :
+>>
+>> On 3/18/26 11:45 AM, Julien Stephan wrote:
+>>> Rename the defconfig file for various genio board to match the name of
+>>> the device tree. While at it, do some cleanup:
+>>> - introduce mt8188.config to factor genio-510/genio-700
+>>> - remove useless SYS_BOARD_CONFIG for genio-700
+>>> - set myself as maintainer
+>>>
+>>> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+>>> ---
+>>> Changes in v2:
+>>> - Split the initial commit into several commits as requested by Mattijs
+>>> - Link to v1: https://lore.kernel.org/r/20260318-rename-genio-defconfigs-v1-1-1440312442f0@baylibre.com
+>>>
+>>> ---
+>>> Julien Stephan (6):
+>>>       configs: mt8390_evk: remove useless CONFIG_SYS_BOARD
+>>>       configs: mt8395_evk: rename to mt8395_genio_1200_evk_defconfig
+>>>       configs: mt8370_evk: rename to mt8370_genio_510_evk_defconfig
+>>>       configs: mt8390_evk: rename to mt8390_genio_700_evk_defconfig
+>>>       configs: mt8370/mt8390: introduce mt8188.config to avoid duplication
+>>>       configs: mt8370/mt8390/mt8395 add myself as maintainer
+>>>
+>>>  board/mediatek/MAINTAINERS                         | 18 +++++++-------
+>>>  configs/{mt8390_evk_defconfig => mt8188.config}    |  3 ---
+>>>  configs/mt8370_evk_defconfig                       | 28 ----------------------
+>>>  configs/mt8370_genio_510_evk_defconfig             |  5 ++++
+>>>  configs/mt8390_genio_700_evk_defconfig             |  4 ++++
+>>>  ...k_defconfig => mt8395_genio_1200_evk_defconfig} |  2 +-
+>>
+>> How about also including _emmc_ in the name, like:
+>>
+>>         mt8370_genio_510_evk_emmc_defconfig.
+>>
+>> Since we will be adding a _ufs_ variant for all of these, similar to [1],
+>> then it will be more obvious which one you should pick when booting from
+>> eMMC vs UFS.
+> 
+> But then the name of the defconfig will not match the device tree name
+> anymore .. which was the point of this series.
 
-> Do you test with commit 1bc125becaa5 ("tiny-printf: emit \0 as %c")?
-Thanks for pointing that out!
-I have checked my baseline which is TI u-boot v2025-01.
-Clearly 1bc125becaa5 is not included. I patched my baseline with
-1bc125becaa5 and it works.
+Ah right, I wasn't thinking about that.
 
-You can reject my patch.
-BR/Chencheng
+> Personally, both are fine for me, so I can update to use _emmc_ if
+> this is a strong requirements for you. Let me know.
 
-On Mon, 23 Mar 2026 at 13:10, Jerome Forissier <jerome.forissier@arm.com>
-wrote:
+Both seem equally valid to me, so we can just leave it as-is.
 
->
->
-> On 23/03/2026 12:58, Sverdlin, Alexander (SI B PRO TI EAC CCP) wrote:
-> > Hi Chencheng,
-> >
-> > On Mon, 2026-03-23 at 12:05 +0100, Chencheng Zhang wrote:
-> >> When formatting the TFTP options (tsize, blksize, windowsize), the
-> >> code previously used sprintf() with embedded null bytes (%c). Because
-> >> sprintf() returns the length excluding the terminating null byte,
-> >> subsequent sprintf() calls overwrote the required null separators.
-> >
-> > I'm not convinced, the analysis explains the observed effect,
-> >
-> >> This caused the options to be concatenated into a single malformed
-> >> string (e.g., "tsize0blksize1468") which breaks strict TFTP servers
-> >                      ^^
-> > ... as missing 0 byte between 'e' and '0' is not even at the end...
-> >
-> >> like atftpd, causing them to reply with empty packets or drop the
-> >> connection.
-> >>
-> >> Fix this by explicitly using strcpy() for the option names and manually
-> >> advancing the pointer to ensure the null bytes are preserved.
-> >>
-> >> Signed-off-by: Chencheng Zhang <charles.cc.zhang@gmail.com>
-> >> ---
-> >>  net/tftp.c | 33 +++++++++++++++++++++------------
-> >>  1 file changed, 21 insertions(+), 12 deletions(-)
-> >>
-> >> diff --git a/net/tftp.c b/net/tftp.c
-> >> index 5f2e0a2bc06..5a8094791ab 100644
-> >> --- a/net/tftp.c
-> >> +++ b/net/tftp.c
-> >> @@ -355,20 +355,29 @@ static void tftp_send(void)
-> >>              debug("send option \"timeout %s\"\n", (char *)pkt);
-> >>              pkt += strlen((char *)pkt) + 1;
-> >>  #ifdef CONFIG_TFTP_TSIZE
-> >> -            pkt += sprintf((char *)pkt, "tsize%c%u%c",
-> >                                                  ^^^
-> > ... of this format string.
->
-> +1, and NACK. The original code is perfectly fine assuming a compliant
-> snprintf() implementation.
->
-> >
-> > Are you using USE_TINY_PRINTF or not?
-> > Do you test with commit 1bc125becaa5 ("tiny-printf: emit \0 as %c")?
->
->
-> Nice hint :)
->
-> Thanks,
-> --
-> Jerome
->
-> >> -                            0, net_boot_file_size, 0);
-> >> +            /* Write "tsize" + \0 */
-> >> +            strcpy((char *)pkt, "tsize");
-> >> +            pkt += 6; /* 5 chars + 1 null */
-> >> +
-> >> +            /* Write the value + \0 */
-> >> +            pkt += sprintf((char *)pkt, "%u", net_boot_file_size) + 1;
-> >>  #endif
-> >> -            /* try for more effic. blk size */
-> >> -            pkt += sprintf((char *)pkt, "blksize%c%d%c",
-> >> -                            0, tftp_block_size_option, 0);
-> >>
-> >> -            /* try for more effic. window size.
-> >> -             * Implemented only for tftp get.
-> >> -             * Don't bother sending if it's 1
-> >> -             */
-> >> -            if (tftp_state == STATE_SEND_RRQ &&
-> tftp_window_size_option > 1)
-> >> -                    pkt += sprintf((char *)pkt, "windowsize%c%d%c",
-> >> -                                    0, tftp_window_size_option, 0);
-> >> +            /* Write "blksize" + \0 */
-> >> +            strcpy((char *)pkt, "blksize");
-> >> +            pkt += 8; /* 7 chars + 1 null */
-> >> +
-> >> +            /* Write the value + \0 */
-> >> +            pkt += sprintf((char *)pkt, "%d", tftp_block_size_option)
-> + 1;
-> >> +
-> >> +            if (tftp_state == STATE_SEND_RRQ &&
-> tftp_window_size_option > 1) {
-> >> +                    /* Write "windowsize" + \0 */
-> >> +                    strcpy((char *)pkt, "windowsize");
-> >> +                    pkt += 11; /* 10 chars + 1 null */
-> >> +
-> >> +                    /* Write the value + \0 */
-> >> +                    pkt += sprintf((char *)pkt, "%d",
-> tftp_window_size_option) + 1;
-> >> +            }
-> >>              len = pkt - xp;
-> >>              break;
-> >>
-> >
->
->
+> 
+> 
+>>
+>> [1]: https://lore.kernel.org/u-boot/20260318-mt8195-add-ufs-support-v2-9-f18eeeeb0e72@baylibre.com/
+>>
+>>
+>>
+>>>  6 files changed, 18 insertions(+), 42 deletions(-)
+>>> ---
+>>> base-commit: 142c805d470cd02470146d6d70aa9c522d4da16c
+>>> change-id: 20260318-rename-genio-defconfigs-bc4070c90e9e
+>>>
+>>> Best regards,
+>>
+
