@@ -4,86 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73914F46139
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 15:29:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B22F7F46139
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 15:30:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCE258418A;
-	Mon, 23 Mar 2026 16:29:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 34EC78418A;
+	Mon, 23 Mar 2026 16:30:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s/DKNWbv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QcpFvEMt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2484A8419E; Mon, 23 Mar 2026 16:29:17 +0100 (CET)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
+ id 3CE018418A; Mon, 23 Mar 2026 16:30:24 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7B2A84144
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 16:29:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9016484144
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 16:30:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-4138136f02eso176466fac.2
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 08:29:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-79a74765703so26411267b3.3
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 08:30:21 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774279820; cv=none;
+ d=google.com; s=arc-20240605;
+ b=ceybYvZFiyOoPlVwygfsRMljR0q2y0b3HptXkYOon2hChEhl3Hs/vl4T0kuCBMSuRx
+ MCVjxXMgltZZTviqSKTrAVpFG/Y6CSdZ0QYny9I8qK1xA17TAdclP0RU77xveHdPTX5Y
+ ezBSG4dnlUgTWcv8ltx/WJX83KIu5F+IEOH3zYwEVlJjs9Fs+vtITL27easZ719TTaKI
+ CGfkJD6UiZ+7yVWFsBeHfqm4mTW1t5W2rRymF00vy2VOgKQ54HAIaZHBF+5YfLPkzwMA
+ O0vndCVbPTVL8SUC4lgp+dyBQAek9DeAhUc7ZWOJw4EDY7ti0s7KN72nRMMS9ORw0mnA
+ Wuaw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=vZmxDxjrQ4WlpQ9kHXNemZeGflf1otO2H0YnZ0H2A/c=;
+ fh=Sm85NSXZ4Zd87FSCB53LZttHN6qS1hdtUgXzpD2h2tg=;
+ b=GCnz9Vqn8JKrmkuXqQmYGH4G9lo79AlLZgpJPH9wXduPYVbeR6QQ87sFQgHCh0gqBu
+ G6ZneVBUjARfYHunEedQSdpYjfKlrCVZm5FgNBSlkRYdQQlMTDlyR+G0NSPblxSeYJAv
+ eV6KXsxvOdBEpU/HVDchnOANhrJbsdID2YS/plOMyDaN20XXqXmoy7R0TQYH3nQBZNCL
+ LLNz/YqtDgDfe9xGJyJMMtDon/McQ342oWLPEFQ5OSKsw63h66gfwmQN8/vkb/PeKKrS
+ Ln5AeAv/zrC9vGcGlMofSmC9/u0leYB453Ux6OeFG77uVQuGkOmrzSrFIpJp+zZdohO4
+ ww9A==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774279753; x=1774884553; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=fMucKIpZyVfJ4X8Vd3Dpf3sMiebMCIFyXZUVjJ8l2B8=;
- b=s/DKNWbvzufGrQ8Im2FV5isjdHtexLcdAcEN//mv4LssZEzWOpi1po5uUWH5oEOUwr
- Xy/I2IntPuElSR4mq8fmovSk5HajXAEeSaNDWvLZfRxeR2jpd+e35DwAUZqKdQ5Ux2hb
- k3VB4s69YicBQLB0dB75ImI7OhKtrNW8ttcS0=
+ d=linaro.org; s=google; t=1774279820; x=1774884620; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vZmxDxjrQ4WlpQ9kHXNemZeGflf1otO2H0YnZ0H2A/c=;
+ b=QcpFvEMtOc13M/kLghuJdUE1OmUpUobBU1IgQ13soEzN0KJk9GSq3Xw97/ANMh3ERG
+ DJZod9trl+HXLXbKZAjqlfyD4nsw9gu3BNju7xr6tKmLZTVixglfYL8+WkfljTvcKgT1
+ dWWrnqE70LPPJv5FShaLumy3o5Stjk0cydrMBZUur8DN8CT4eVbsnjxVDNQX2KUHsrPi
+ kBe1w6kExeJY+z0DvvW/AFHSVCxrjOqUcXj/3PMyz8hI63m0LigfHJVrdc3tOf0fcaKO
+ TjRZ6KvcDoRqbafgHsJdWy1FyriWks/bmfPhkKCkH5gSQgbb4GakbYj2VxG4iwuLjVoC
+ osmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774279753; x=1774884553;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=fMucKIpZyVfJ4X8Vd3Dpf3sMiebMCIFyXZUVjJ8l2B8=;
- b=InaRyTTRfopS3c/RLmANXOEpYSkYi3r6+tw2UXAUOikUe9evhWJldG3B76qd0IRN74
- OsG8NaTK7+hX5nL7mv89Llm7G+5TukYaTTGTf+pFlMX2wOQxQqooPb7CGqaOwDLshUTV
- DOp/QqECAKbhnto2Au3aUjgbFt4BYs8b8pQF/a4GyUfl0uCOAZCYjk11jGtWLCjR4Ic9
- ervYaU00uwoTjWfrSL9K6qBDVF3ch7VZr78d4d9vfKUkB8djG7XoLbKVfeB4+3fpTt4t
- +W+6nnJyxeonDHN4lnNUZAb129bucCfgrwUxexPBaERQFiB6xQrgvPAn2AeTPJc2Y3xb
- HsKg==
-X-Gm-Message-State: AOJu0YyphCivZAAtPwBSUMJu1ruxyHgZWvTveDNCywtU6n/tm6t4436u
- xPZl/HyanFIu5onXCcwLra5rIE2MluO5Lo89PJxuzKOiQx3oYGgQVfLMsO5GvTEDsblXYDS6/RM
- MoZGhmZY=
-X-Gm-Gg: ATEYQzwGkeRA1HCzE8d7oV+/gq/ZxIBsOUjOiySF5DSaZuoQI9mNXds6Bi3fMEcEdnZ
- Lm0oAQjFS+TXiOVTNdkRadcPXmc8lkugxN9lPufR3a+RfPvsD74Xn3gRvR3cWELzK5vx8pS1UDK
- kwcQuD6hp+etpeogrc1TAmFMvHU3Pt7nkUqq+oX2qeylAtTv2GmVq6wn8sXZ/gvbVHo1b9n7cca
- Udn4iHTE212Ugfecc8IKBzqJ9xwC2c5UOB9z1C8J/oGhk/+KjyViTcObL6Fa50Xz5610VTRRwom
- G8aJ9ZzbzJBhFNeXDs9/tnO4l/nGSlFh8vPAig7cItwqw4JIfn+B9uvoKwoohudwQTHM7CrJwEC
- C44imTo3PxRGhLyvBb8mczmtaZbY7C4E6HtrzmGPI+wuy9E/Kc0RjIufuKE/fwLEUL0rxOEOrGh
- MiBnJBfbMK0wu1bU28irtsHZfmNFZSS4X/6FqcCtG/exXVPefJqvVtis5aD6JoGKAqUL7Alzqk+
- IOT90UuLs4jOfI746ZstNc+CkMNh9abyR8tP8ey7fZkLHrZb3lFX/IWqjs=
-X-Received: by 2002:a05:6870:219c:b0:417:565d:e3e with SMTP id
- 586e51a60fabf-41c10ee8758mr7408506fac.1.1774279753476; 
- Mon, 23 Mar 2026 08:29:13 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41c14ddbcb3sm10520475fac.14.2026.03.23.08.29.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Mar 2026 08:29:12 -0700 (PDT)
-Date: Mon, 23 Mar 2026 09:29:10 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>
-Subject: Re: [PATCH 1/2] linker_lists: Fix end-marker alignment to prevent
- padding
-Message-ID: <20260323152910.GI502704@bill-the-cat>
-References: <20260321134626.516665-1-sjg@chromium.org>
- <20260321134626.516665-2-sjg@chromium.org>
- <87jyv2oon5.fsf@prevas.dk>
+ d=1e100.net; s=20251104; t=1774279820; x=1774884620;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vZmxDxjrQ4WlpQ9kHXNemZeGflf1otO2H0YnZ0H2A/c=;
+ b=NR65d/UCI+GxV15MQH/bSBpeHflkGOycWbDlMM47rtmGAE1sDzyJ8ZPSIUOHk79Vx1
+ xy1dETaBdNLuq+0FCCN39i5J79GyOjsCbG7mKnWlWI19Bk45NLzppGVrdvXHlWln/X74
+ YQZR5CSfhwwSEIbTzkw+nZH6n3Osx6z/KAYeChTxXar1LqPW3WURT2Vpt79BWbl30q5E
+ WPA2CJD2NIdiU+60pp+neLg1WUIuX6ZMI6JeWBuHc2V21HynhrD93CuJq81DUj3Z//Id
+ da8HnOFfOt79z8jTxrWJLymoYPfKAM0c3jTYkZtVDxQaae7NuGljyFe3l/OFTz59TWkY
+ pKeg==
+X-Gm-Message-State: AOJu0YyM4HAhWejm4QCSTUeCEQIa0t1BBP3KRETQhlXejUvMghpKFCvu
+ 5NpFZK8pXjY43xMu993JN6+VYd1lgZsEce2Nptzc5+CmmNL3Jf2psty5Wy881+czIYAYyd2p81g
+ sKYhRoSngGS2t7HdB2FxEQbH2liftUMUkk5qJnSk5sw==
+X-Gm-Gg: ATEYQzwP7psFJpDbehTRdYuJsuIyZNzeUktJq7G/wJfjddo7Rczt8B/0xGvdaWTKpM1
+ AedasZMCRsdDR8gvlrL5Raq8fk65xrfs/je4cNpadQCFEbufIIIugthb6vUuHZO7G+1JSvvi7hw
+ MZxCpH9A2JCxGGM2YZOKeW0SxNs7k8ybKJZ6dLMhSiddDpgqHv5hQCR2rA366Ahz53s4oMKDwTE
+ klrhLQkiO/NKhOgCJ+cSxp7advrVfxVLW0lttkLd4BTQDRrlFusrBo0vBE+RVwqUbV2do74feNO
+ cV4V/y61e1pMEgFHHEFP5IC/1bWxNbO9wViSP4Vu+lAEpxcyoT0gQpNVq1W9SK6aPTaCCXEXURU
+ nBsFwPdD2qjkCEVHrWpMNMqHWs4LY26LzzBTV+XCECnN1iJGJAxd/2B7S2kCWf4BXyyqvUtxAa6
+ uBjirP3//0ioyPYXX19FOZhSDbjMuLLKRl3St6Fx0sk+L+MWFXxrva1P2Wx2i95Ij64Cxtm61/g
+ HQ4gvARf9RxsovyMSHq9dsjoan9AiiKPD9M7ARX+Hum69ji8wOzkQb/EThufYxQKZopWZYobZAA
+ wetBq1GUXQ6h1MHeMoDkz/CfMly3S7CJuwWQhhSaDhgK
+X-Received: by 2002:a05:690c:6706:b0:796:3e50:77b with SMTP id
+ 00721157ae682-79a90ac1280mr128552107b3.6.1774279820074; Mon, 23 Mar 2026
+ 08:30:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Ld536lrdPGzgUUBD"
-Content-Disposition: inline
-In-Reply-To: <87jyv2oon5.fsf@prevas.dk>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <99ed0e792590ecfc1a3f056f234e053013ffd981.1773904505.git.michal.simek@amd.com>
+In-Reply-To: <99ed0e792590ecfc1a3f056f234e053013ffd981.1773904505.git.michal.simek@amd.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 23 Mar 2026 17:29:44 +0200
+X-Gm-Features: AaiRm50b3fA1TvI9s8YahwYwYaLyqHKEApwwSo4KkAm7k3smJwX69cXS_heW_DM
+Message-ID: <CAC_iWjKQXd+wgChZU3wuUgfEHkhvOezgXVD8-G-uMjHF-mwk7g@mail.gmail.com>
+Subject: Re: [PATCH v2] efi_loader: efi_var_sf: Do not fail on blank SPI Flash
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@amd.com, John Toomey <john.toomey@amd.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Shantur Rathore <i@shantur.com>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,88 +117,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 19 Mar 2026 at 09:15, Michal Simek <michal.simek@amd.com> wrote:
+>
+> When SPI Flash is blank (first boot or erased), efi_var_from_storage()
+> returns EFI_DEVICE_ERROR because efi_var_restore() fails on invalid
+> magic/CRC. This prevents the EFI subsystem from initializing.
+>
+> Check the magic value before attempting to restore variables. If
+> the magic does not match EFI_VAR_FILE_MAGIC, treat it as an empty
+> store and return EFI_SUCCESS, matching the behavior of the file-based
+> efi_var_file.c which deliberately returns EFI_SUCCESS on missing or
+> corrupted variable files to avoid blocking the boot process.
+>
+> Similarly, if the magic matches but efi_var_restore() fails (e.g.
+> corrupted CRC), log the error but still return EFI_SUCCESS.
+>
+> Suggested-by: John Toomey <john.toomey@amd.com>
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
 
---Ld536lrdPGzgUUBD
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-On Mon, Mar 23, 2026 at 10:56:14AM +0100, Rasmus Villemoes wrote:
-> On Sat, Mar 21 2026, Simon Glass <sjg@chromium.org> wrote:
->=20
-> > From: Simon Glass <simon.glass@canonical.com>
-> >
-> > Change the alignment of end markers in ll_entry_end() and ll_end_decl()
-> > from __aligned(4) and __aligned(CONFIG_LINKER_LIST_ALIGN) respectively
-> > to __aligned(1).
-> >
-> > The linker places zero-size end markers at aligned boundaries based on
-> > what follows them. When the next list's start marker has a high alignme=
-nt
-> > requirement (e.g., 32 bytes), padding gets inserted before the end
-> > marker. This causes the byte span (end - start) to not be an exact
-> > multiple of the struct size.
-> >
-> > The compiler optimises pointer subtraction (end - start) using
-> > magic-number multiplication for division. This optimisation only produc=
-es
-> > correct results when the byte span is an exact multiple of the struct
-> > size. With padding, the result is garbage (e.g., -858993444 instead of
-> > 15).
-> >
-> > By using __aligned(1), the end marker is placed immediately after the
-> > last entry with no padding, ensuring (end - start) equals exactly (n *
-> > sizeof) where n is the number of entries.
->=20
-> So I'm wondering why that is guaranteed. I mean, the linker is placing
-> these sections one after another in order
->=20
->=20
->   2_foo_2_last_foo   size sizeof(struct foo), alignment max(4, alignof(st=
-ruct foo))
->   2_foo_3            size 0, alignment 4 (1 with your patch)
->   2_bar_1            size 0, alignment CONFIG_LINKER_LIST_ALIGN
->   2_bar_2_first_bar  size sizeof(struct bar), alignment max(4, alignof(st=
-ruct bar))
->=20
-> So clearly the end of last_foo does have 4-byte alignment, yet it is
-> observed that the linker sometimes makes 2_foo_3's address coincide with
-> 2_bar_1's address?
->=20
-> What I don't understand is that it seems that the linker could place the
-> zero-size object 2_foo_3 at any 4-byte aligned address between the end
-> of 2_foo_2_last_foo and 2_bar_1. And the same seems to be true when one
-> changes it to have even smaller alignment requirement.
->=20
-> So why does an align(1) stop the linker from placing that 0-size section
-> at the same address as 2_bar_1, or even force it (as we need) to put it
-> at the first possible address, i.e. immediately after last_foo? Unless
-> alignment 1 is somehow special-cased to mean "place as early as
-> possible", I can't see how this should provide any better guarantees
-> than what we already have.
->=20
-> So I don't oppose the patch at all, but I'd really like to understand
-> how it actually works.
-
-And as was recently demonstrated in getting device trees to be 8 byte
-aligned in linker scripts, you need to be making changes in the linker
-script to ensure output alignment matches what you expect and also it's
-not always obvious what actually will happen in all cases (when you
-haven't been dealing with the nuances of linker scripts for days on
-end).
-
---=20
-Tom
-
---Ld536lrdPGzgUUBD
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCacFcQwAKCRAr4qD1Cr/k
-CuTkAP0dNc+myOCMwBVXI8mgaKsXCd+aEhzxU8bjC2JxjGXHfQEAwAz0D8Gnpupd
-nc3gk6yFtWyhphi6IUObNRfiOZcJfA0=
-=nNbz
------END PGP SIGNATURE-----
-
---Ld536lrdPGzgUUBD--
+>
+> Changes in v2:
+> - Remove magic checking which is the part of efi_var_restore() already
+>
+>  lib/efi_loader/efi_var_sf.c | 5 +----
+>  1 file changed, 1 insertion(+), 4 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_var_sf.c b/lib/efi_loader/efi_var_sf.c
+> index 6eae8d464645..b84ec8e67dce 100644
+> --- a/lib/efi_loader/efi_var_sf.c
+> +++ b/lib/efi_loader/efi_var_sf.c
+> @@ -98,11 +98,8 @@ efi_status_t efi_var_from_storage(void)
+>                 goto error;
+>         }
+>
+> -       if (efi_var_restore(buf, false) != EFI_SUCCESS) {
+> +       if (efi_var_restore(buf, false) != EFI_SUCCESS)
+>                 log_err("No valid EFI variables in SPI Flash\n");
+> -               ret = EFI_DEVICE_ERROR;
+> -               goto error;
+> -       }
+>
+>         ret = EFI_SUCCESS;
+>  error:
+> --
+> 2.43.0
+>
+> base-commit: 85854708c4d707d9db8ec84c11e1686a32198d91
+> branch: debian-sent3
