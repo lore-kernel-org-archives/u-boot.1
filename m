@@ -4,101 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB18CF46126
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 14:06:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 599D9F46126
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 14:07:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71E2084099;
-	Mon, 23 Mar 2026 15:06:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DCBEA84154;
+	Mon, 23 Mar 2026 15:07:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="YlPkgrxh";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="O6EgTGjy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D09E84114; Mon, 23 Mar 2026 15:06:46 +0100 (CET)
-Received: from mail-yx1-xb130.google.com (mail-yx1-xb130.google.com
- [IPv6:2607:f8b0:4864:20::b130])
+ id 05E7884154; Mon, 23 Mar 2026 15:07:53 +0100 (CET)
+Received: from mail-yx1-xb12a.google.com (mail-yx1-xb12a.google.com
+ [IPv6:2607:f8b0:4864:20::b12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC4C28408D
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 15:06:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7871684099
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 15:07:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-yx1-xb130.google.com with SMTP id
- 956f58d0204a3-64e8c7f5082so3755851d50.0
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 07:06:43 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774274803; cv=none;
+Received: by mail-yx1-xb12a.google.com with SMTP id
+ 956f58d0204a3-64937edbc9eso2601280d50.2
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 07:07:50 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774274869; cv=none;
  d=google.com; s=arc-20240605;
- b=ZZ/XSj6VG+ku9GalY4eHHgmGdvicUF8xTjU9w7bq5clni0IRqq7b5dQgvJeVT8r6vl
- DjUW9Rd6rin5i0mJGE5aiopqrQ79pEM10kDDmGTinIVPj4jBUqfQvbsRJAGaVxGHjMxZ
- 3gSYBpIwaXtNaEi5+CFJ3KfE0tAZxB605gF01eP+Ib1wkPSeuAa2Ctsw2FfcsAqYbofG
- 0rvlL++/0aHXbscLBJObPuZi3WFJboQqucAS82aehWwEdu0aqXkFp9E/v0we11eWDu8Z
- iw+idFpvIhPdZRVZhnoUAQOPTR7WtkTWmC+K2cgLu6MC6PGZqrH95wb367St9okzjk/b
- +OJw==
+ b=T2kckM5VbiEgLaGBjckKXtGHeECS3mkCStoUlMMptBj7thQo3W+qDpTADA7XFeog06
+ aTXh7OxURrKVkZxv2EzW4Ga94G2PcGFXWmSml5fuf8ndOWWPa2C5PXs5r1szGkw3+Bhb
+ jg3icW1UerffLkxi0WMGVq9d/Js88eGsDmBm+e9lwY5zrIv3zKYnGQdgdm3tTPjH5MRz
+ QWuTcPzpMEJ/979o4TzVbnR+guZFoZBarpq7VGTncHx5OaELPjsgvIwchXsWTYDMO03R
+ GX1dkpXfJKauWhuvF7BNZKIifI3XazppQGf5ngcqeyJymVx4+ZtecIWRstGoGkASrmUD
+ 3q2A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=e3XAlBfczEfVipfZo11BZFzeDVrWkjSUEbgr2mBwwlQ=;
- fh=NdMCHlleW6/UV05/Kaj+Jp3sC5JOZU0FO/siHgghkk0=;
- b=C9oRa2nHgV2diB78979PIw8qAYZ0Mv8MfX+yww5aY6IX06mI79512KASO4uY2HAMKc
- vpwXRd6q5vmvhmlKpaEFFk6UFGwBJyszapaU/QFRsf45JzWJExNbD5D7eZzB86K8eM7e
- oWkcS8XwJPu13vucJA3N7HireH7IY1ArzWzbQ106LSAqAYv659Eq/9DFI76MD7+sbCKi
- NYXsR+SKU/8RW74GpOiCYZ39JVbzbfQInJ3qKteFGLUFN9mSQpgTHMYkJnJodSS7deth
- NzJeM1QBGEh9sBjJCpipylBM5KRJHGgpT5+KuQSVTL5dhGp5z/cAc0wqna81/eCyHmQs
- SkLw==; darn=lists.denx.de
+ bh=BSPcbjWelXgCmNhJxM91ioDOInOXx9uA0EUpTUweQuI=;
+ fh=/KN9hdoQy9CA3T5HcjvmoQFbaoBuKwo+oDcI5oS1IgI=;
+ b=ilLCnX91L1XtQXgytzA/gW8RY0nD2rCyADrukQxsUtr94K/UzZNc3AnRWODjeJe4Pc
+ 0IbfCqSRiFcAFTqfaKg5DpFlB0C9PKMmLmMZh+c0TRNknWzbXINkS/cQ4uLNkGM+vJD3
+ qbBHJaW4jV21jjzmfguuEG0JxTKS5/1m9wQUHpm7UQJLGTzCI2AgeRBYJBcbp0w5I7ha
+ ZixGyoy7nFMzTQoAhIOm7JpSx8tIYrOTL2VBelfiODaqmtNKOL9vLO4XdM3ou4l3d2OE
+ H5h5J4asP1ezSl3PONZdM7orl4bRa6Zxpctery0v6XeKX8gjLSRPoe/CdqoLR5+9hxP3
+ ua1w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1774274803; x=1774879603;
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1774274869; x=1774879669;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=e3XAlBfczEfVipfZo11BZFzeDVrWkjSUEbgr2mBwwlQ=;
- b=YlPkgrxhTEAE9R5UyiyKX5JkBHqgdG5b9HaJYg1bpdkO//dCuZQty6D68M0T2ITSCw
- WvGi5mWiS0xfCLnDVlBcEjlFPuzPypcx3iOKyVOOk8XoErGLcXp+r6pbiLj3xwxaBexP
- nN6DKdCgMwPCvS/KM7aY+r2O7hZpus12RxjJuGjR7L/TNTME8RyhedELumoanmre7d64
- yIsccsOHtFtpsrbdFGyHfWXHaNvdOLJB+/YsudzRjevw6gT+Glo1dBs8vJhp3BeInT92
- suvI1HIO15K+0xjHk8TswkHX5bnGI86FawDDylsQU7OZndeEx8eenb/++KE6mn5VrulP
- COBA==
+ bh=BSPcbjWelXgCmNhJxM91ioDOInOXx9uA0EUpTUweQuI=;
+ b=O6EgTGjyAESgwuDdQtCctpCPMefiZlRY8ZULvU8ePKOm76M5yZua2gz2HXmiAGC/aO
+ +DtkJKXLYA1FbDLJm+ceIebr6NFFfdZuVSs2UazYRD3gFilUzwnofDFQRcTYxzev0tZj
+ OF/Ye5+4ukGYTTlfB3i2Tl4WA9LPQxKS4HlW+FbXXcmwyc2+WMz7knzosWLiay/fGW6Z
+ b2W5jl+MW3w/SADNamqkX4sJj9m2jwrMNHqOlcHpeigF0O7OLsfxq3hYAmZ9bol18b2d
+ n29iaB070XiX5EJXdJwzmgLDc7BEKtX1mvJOJ/APH26hqqqyczdTbBx+vE4+xTleBucO
+ VRWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774274803; x=1774879603;
+ d=1e100.net; s=20251104; t=1774274869; x=1774879669;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=e3XAlBfczEfVipfZo11BZFzeDVrWkjSUEbgr2mBwwlQ=;
- b=K9mk/f/ptXfV2KRy3NwfKIYCav1bxtImQ771DfmD4yFwnc0f0hy+CYYNVLLH0efTAC
- UvJCFo56fx6xT+WEiDHjhusLi++N+Q4En6ts1fUFQeyfnmP0Bro7gIoqSXjXzd2ehDmp
- fN2nBOkIZLCjzobjOZ14f1b1LtTMLl5AdfO79/rTTOloZ4poWVy/J3VDXLCdEYONj9w3
- 2vk1I9hgAfaQcul7aLIiyRwE/VMD/z9n+qEMlUegMVhoZcOAVndsFoQw6cgxbyKwAuuW
- uWnRWRobpzNDnxEaReP4XbnBhn2RByyV8X72zfUZjlY7AyA/5vr3lQpELVIs9Wjm7rkP
- m7EA==
-X-Gm-Message-State: AOJu0YynyK3BvI+amiso10z6uEMTz6RDaunxbntXvrW4t7rwzUmkAtvc
- BNQ9DeHYDmisArjgFM5jPNtrgqm7IMByZ7B4wPhlDlIUwan45zVUX4LyOjbue4+deBErMyq1AZE
- hZMC1DmMoUiNQcZml3noG1Map38e6Li8BipZ+jL2y
-X-Gm-Gg: ATEYQzxk62cPAmmBWqOnjPEuTZhbgQyFL+jlHHjg3AtNngRl1N7ezasueEvc7bl5n6J
- h8Xv9L2K+qq7Ex/xKqe9jJP/eff4cpASVB37L+jjXmgRDw8RvkFSuV8K41O5/4V9FhGY+m6VBOe
- wjbjGxuQhQroAmPmhzpRMr7vdslKHCmVhTFSdxy1SqA3M5BvDQxjpMBCMLyReYA0xr1iM2ZIEDP
- kY8lKmV93HoIWk8K4+lwimtAjGDRp59Dez8hW5DY8QSM1Pk3lkVMvsJxzZtNyEzrbSJVDhQtzAX
- x8Mjax6r
-X-Received: by 2002:a05:690e:d45:b0:64c:aa84:762d with SMTP id
- 956f58d0204a3-64eaa6a8e89mr14311608d50.7.1774274801266; Mon, 23 Mar 2026
- 07:06:41 -0700 (PDT)
+ bh=BSPcbjWelXgCmNhJxM91ioDOInOXx9uA0EUpTUweQuI=;
+ b=HA5wTwjon3p9LYY/APaBZf5zY0cb95n76XrrkIleX+i6+Bski2VTshn1gl+ILVnwBy
+ b3McHGx9eXb414HcVlEE3Q6B012th5HBjLLjo0Y7z2lC6hs/a/rcuAENLr8e7n4Onjz/
+ XJF6eT4nvuFBuQVh6ihF9s2mlgc+4EsoGcHqpJtYogmWoaTqXoHl4dBW6L+qgS5YTn5y
+ sZO1GWBBB5j4v2GAdgKsx6iYq1NgbhVYdhhYlbcXBuo0nSXrZqhpmLrhLbkmFuYdXI/r
+ m7zCgz6EVRe9fEk9nty50w8YbPMXBkdf3ZZ1iskDxlwSKTlBQI9sggro5nPyBWD1iPHV
+ lfDw==
+X-Gm-Message-State: AOJu0Yxily6/3lFzjFnsn4fWos6hAPko+IX9cb62NrD1x5LAw5fPz3xR
+ VyaRqZKUsTzLhe/yQlucnc+ZuWQFGdlhs+gNFbXztRIzHip+WRCZ6Fv8QJmHHycnHnS+XbBL78M
+ 8jIiTEX9xgSThCr3O5ZvdtVSu0Oh3qpMKEzD3H/VezSyJHqkhYgFTHg==
+X-Gm-Gg: ATEYQzyqL5EqRk8mkrgzj9OwSSVfHUnl3debhUrOTi5sID1KjeZiwlvU9KWti/M4Bv9
+ FAsU359SLObsoBWGj615kifYKakZd0jhZeRzhBXciFlxumOHTma0Yw37B08Av/i6QlB6Ij2KqiV
+ /csX1mEt7ILkh9WMKw935Fzn5ADO/3s4uJfQHU0g1zJu4CnZtHp+Cy44uwKmUvjuaucUMjH1LOY
+ ghOQI2CJlNbmMSP8pv4vZyT2mHlEBjW6ZZ0O1dYxKnAHH9rchktXzijZUz6aMSs6CGa5aSCway5
+ GIzepAmvNJmunt7lwtI=
+X-Received: by 2002:a53:ee5e:0:b0:64a:f1ac:7bc with SMTP id
+ 956f58d0204a3-64eaa8b764bmr9371356d50.79.1774274869030; Mon, 23 Mar 2026
+ 07:07:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251017035719.122911-1-vlim@gigadevice.com>
- <20251017035719.122911-2-vlim@gigadevice.com>
-In-Reply-To: <20251017035719.122911-2-vlim@gigadevice.com>
+References: <20251028000426.90860-1-vlim@gigadevice.com>
+ <20251028000426.90860-2-vlim@gigadevice.com>
+In-Reply-To: <20251028000426.90860-2-vlim@gigadevice.com>
 From: Michal Simek <monstr@monstr.eu>
-Date: Mon, 23 Mar 2026 15:06:30 +0100
-X-Gm-Features: AQROBzA0O1bIghnS-1KLpjx2kvqkCsMKDXoNqyWFMzX1FluHAUuZpXoJBLOoA64
-Message-ID: <CAHTX3dJbRkWmpQE_Q2bbhHBqqZiH9VAfwu-5t=N1thhBagL+Lw@mail.gmail.com>
-Subject: Re: [PATCH V1 1/1] MTD/SPI-NOR: Add new device
+Date: Mon, 23 Mar 2026 15:07:38 +0100
+X-Gm-Features: AQROBzAR5UVx4RZhiwjTcmWzTcAyMY-mFlP2yBAKfS1tUa8BZvHdbGpQ-PxLNfI
+Message-ID: <CAHTX3dLyOw8Zbz47OWk+MYBZca1HCNiH7UvVoYN6-K0qi856Yw@mail.gmail.com>
+Subject: Re: [PATCH V1 1/1] mtd/spi: add new part numbers
 To: Victor <vlim@gigadevice.com>
-Cc: u-boot@lists.denx.de, git@amd.com, venkatesh.abbarapu@amd.com, 
- dunaev@tecon.ru, han.xu@nxp.com, alice.guo@nxp.com, 
- Takahiro.Kuwano@infineon.com, trini@konsulko.com, tudor.ambarus@linaro.org, 
- vigneshr@ti.com, jagan@amarulasolutions.com, havish.mutya@amd.com
+Cc: u-boot@lists.denx.de, git@amd.com, jagan@amarulasolutions.com, 
+ vigneshr@ti.com, tudor.ambarus@linaro.org, trini@konsulko.com, 
+ Takahiro.Kuwano@infineon.com, venkatesh.abbarapu@amd.com, 
+ marek.vasut+renesas@mailbox.org, havish.mutya@amd.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -117,30 +117,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Victor,
-
-it has been assigned to me in patchwork.
-
-Subject is very generic. You should say more there.
-
-p=C3=A1 17. 10. 2025 v 5:58 odes=C3=ADlatel Victor <vlim@gigadevice.com> na=
+=C3=BAt 28. 10. 2025 v 1:05 odes=C3=ADlatel Victor <vlim@gigadevice.com> na=
 psal:
 >
-> GD25B512 with ID C8401A
-> This is a 3V 512Mbit SPI NOR Flash.
-> Link to the datasheet:
-> https://download.gigadevice.com/Datasheet/DS-00975-GD25B512MF-Rev1.1.pdf
+> GD25B512: ID C8401A, 3V 512Mbit
+> https://download.gigadevice.com/Datasheet/DS-00649-GD25B512ME-Rev1.6.pdf
 >
-> Tested on Xilinx Zynq-7000, on Digilent Arty-Z7
-> Test result on cover page.
+> GD55B01G: ID C8401B, 3V 1Gbit
+> https://download.gigadevice.com/Datasheet/DS-00979-GD55B01GF-Rev1.1.pdf
+>
+> GD55B02G: ID C8401C, 3V 2Gbit
+> https://download.gigadevice.com/Datasheet/DS-00980-GD55B02GF-Rev1.2.pdf
+>
+> GD55F01G: ID C8431B, 3V 1Gbit high performance
+> I can send the datasheet via email
+>
+> GD55F02G: ID C8431C, 3V 2Gbit high performance
+> I can send the datasheet via email.
+>
+> These parts are tested on Digilent Atry Z7 board and Xilinx Vitis.
 >
 > Signed-off-by: Victor <vlim@gigadevice.com>
 
-Are you just Victor? I expect you have a surname and a given name.
-Please use both.
+Same comment as before. Full name and fix subject.
 
-Thanks,
-Michal
+M
+
+> ---
+>  drivers/mtd/spi/spi-nor-ids.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+>
+> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.=
+c
+> index 666203c8485..5c6fc8a5155 100644
+> --- a/drivers/mtd/spi/spi-nor-ids.c
+> +++ b/drivers/mtd/spi/spi-nor-ids.c
+> @@ -123,6 +123,10 @@ const struct flash_info spi_nor_ids[] =3D {
+>         SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NO=
+R_4B_OPCODES)  },
+>         {INFO("gd25b512", 0xc8401A, 0, 64 * 1024, 1024, SECT_4K |       S=
+PI_NOR_HAS_TB |
+>         SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NO=
+R_4B_OPCODES)},
+> +       {INFO("gd55b01g", 0xc8401B, 0, 64 * 1024, 2048, SECT_4K |       S=
+PI_NOR_HAS_TB |
+> +       SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NO=
+R_4B_OPCODES)},
+> +       {INFO("gd55b02g", 0xc8401C, 0, 64 * 1024, 4096, SECT_4K |       S=
+PI_NOR_HAS_TB |
+> +       SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NO=
+R_4B_OPCODES)},
+>         {INFO("gd25b512", 0xc8471A, 0, 64 * 1024, 1024, SECT_4K |
+>         SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
+>         {INFO("gd55b01g", 0xc8471B, 0, 64 * 1024, 2048, SECT_4K |
+> @@ -137,6 +141,10 @@ const struct flash_info spi_nor_ids[] =3D {
+>         SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NO=
+R_4B_OPCODES)},
+>         {INFO("gd55f512", 0xc8431A, 0, 64 * 1024, 1024, SECT_4K |
+>         SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NO=
+R_4B_OPCODES)},
+> +       {INFO("gd55f01g", 0xc8431B, 0, 64 * 1024, 2048, SECT_4K |
+> +       SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NO=
+R_4B_OPCODES)},
+> +       {INFO("gd55f02g", 0xc8431C, 0, 64 * 1024, 4096, SECT_4K |
+> +       SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NO=
+R_4B_OPCODES)},
+>         {INFO("gd25t512", 0xc8461A, 0, 64 * 1024, 1024, SECT_4K |
+>         SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
+>         {INFO("gd55t01g", 0xc8461B, 0, 64 * 1024, 2048, SECT_4K |
+> --
+> 2.34.1
+>
 
 
 --=20
