@@ -4,82 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D309F4612E
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 14:38:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 861ECF46130
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 14:41:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C8F98408D;
-	Mon, 23 Mar 2026 15:38:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1CED884082;
+	Mon, 23 Mar 2026 15:41:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PFuQUrtj";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b="tNs3DeO/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1D4E84132; Mon, 23 Mar 2026 15:38:41 +0100 (CET)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 014A2841DA; Mon, 23 Mar 2026 15:41:54 +0100 (CET)
+Received: from out30-131.freemail.mail.aliyun.com
+ (out30-131.freemail.mail.aliyun.com [115.124.30.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A598783DB6
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 15:38:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DD86A8406D
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 15:41:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=linux.alibaba.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-67c2045c0f7so2343666eaf.3
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 07:38:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=hsiangkao@linux.alibaba.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774276718; x=1774881518; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4rFZnwPGD/1aq8lOtoQ7KVbRD6oUyk8Ne3dumq1Ea3A=;
- b=PFuQUrtjGcYyD5Y2LlcmLr9TiSNPaQRlsi/zzyVIs2jd1Mf1ZxGLQnPDLro9sCDw4M
- WYVP6oKI2mYpbujq8XV14LmM9c7yuszcX9VuY5rOvW9OW4GYvoi1nQF9ONgDLuvEtS7j
- 7NhqgPf/p9jBDqpDBoQxFOD4YjTtPx+5tKdcg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774276718; x=1774881518;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=4rFZnwPGD/1aq8lOtoQ7KVbRD6oUyk8Ne3dumq1Ea3A=;
- b=NFv60cRS3Wovj9ic3aluX+mOZc32anxVrzl9MGE0wfOUx7YqNw83pZYAkhAvD6+beJ
- jJQbqzQ17DLdVpulQyfybhtO9y8ZkigNsNmK5LdRMTWwsrj/amWWF3iVXn1tToqspaXM
- Kqqx8WX57CpCSEdH+WKHTKSzakdywaLRHmlnldZiX9MJHl4xiT8qIl1rs9WAYvJmAydT
- fgVrfXJ0pMJaMNdFa9OXMtUrdCwKbyfiGPGHlHKVkM9mkK06ny2uffZbr7uh1jfjUfEb
- ETnzK7LFQGqESAosBWM62zmuPvYSZU4ryMB7yc4i2WE87Gz4ow3PaEVyqChPV4+IT7jo
- 1HUw==
-X-Gm-Message-State: AOJu0YzBlYS1akGvbC5v3cQ1d/jYWlBOMC+dM2KGGXpuzEQBZ4uKc9/E
- ryZt3Cq6Y0i7vAYnV/8frkpbW1BKtH8b958aUgd+romrjVU+rRcCYWQ9lcWFIfbgeKIwZwuYwh8
- NdAz2
-X-Gm-Gg: ATEYQzyrrUHRXkfh9XZxMziJc76YGx6oBBCCSn6alCsI9PdPNBIliUJW8qT10jQOVXq
- /7ciuUP8AaB900HBWq1zcmORNKauNwNU5JgTQ89VXkbAjK3dCLPl/MWu8aeU8GnL+BeRSJBzPzF
- fIx2VHcjPAKuzjffwCoiI9YCg252FyoW0rcwCZ0FT1Mrq0PO3zid8I9PvD42aYSooA49IwNaB4k
- ci8BDzOMBd72k1oFXNevcLUnRVCO+ENWqI+Q8xyMYr1YulNAeUsHNk03VFY5jzzerTzLuMWyaz4
- lvklvxFKATQLPPXYEMHLNyRMYAv1zlI72YM5kxnpD/60Uj05YcKgwLgUD2/SO5+02+1Ow0VdrOB
- xRSvKGo+aHJqPOX5Co7dzsHeJ/skXL+Hv/4LNt0ykly3Y8Z4wqhoB5VirDNqWx72XwV3NiWopQB
- dsBN4E2XTe5TNsJoL7qUI1U85/rMzFBGnFjiZzD9f8ecnxhehWAQbyI0kJY0vOVikfhWxNmJOWf
- g9UNNuaI8+ySSnB/NIQawarOJQUcwxP5Ygkbx/ToWZuuvIJXvU=
-X-Received: by 2002:a05:6820:2287:b0:67b:ab68:b5f2 with SMTP id
- 006d021491bc7-67c22ecb3efmr7280515eaf.22.1774276718238; 
- Mon, 23 Mar 2026 07:38:38 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-67c252dbd05sm6143057eaf.6.2026.03.23.07.38.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Mar 2026 07:38:37 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut@mailbox.org>
-Subject: [PATCH v2] usb: Correct dependencies around USB_EMUL
-Date: Mon, 23 Mar 2026 08:38:36 -0600
-Message-ID: <20260323143836.2274286-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <f6ffc6db-c59d-45c9-964f-7fa56c320047@mailbox.org>
-References: <f6ffc6db-c59d-45c9-964f-7fa56c320047@mailbox.org>
+ d=linux.alibaba.com; s=default;
+ t=1774276905; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=0MLXON+tffXeSNtv8HxcDcXnRXOeI/mVCRcpRJJJa3E=;
+ b=tNs3DeO/058cFcESysqVwhdl64RvVaWI2d7SZtzn4LMjGRAYWKTnXg3s0WXJUOjkBbR8cGGpq6LUV5EESNgEFYI/vuus0HF2YRPZwJ9JzNskecp//MEZTJhAnCuxIchRJKt+vxp+AVThwrWRm73f3WvusTczlzD7Y4SYmpbawm0=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045098064;
+ MF=hsiangkao@linux.alibaba.com; NM=1; PH=DS; RN=5; SR=0;
+ TI=SMTPD_---0X.YqmWQ_1774276895; 
+Received: from 30.41.54.139(mailfrom:hsiangkao@linux.alibaba.com
+ fp:SMTPD_---0X.YqmWQ_1774276895 cluster:ay36) by smtp.aliyun-inc.com;
+ Mon, 23 Mar 2026 22:41:36 +0800
+Message-ID: <b761dcf1-db25-47f3-8ef6-096c7a2f0493@linux.alibaba.com>
+Date: Mon, 23 Mar 2026 22:41:35 +0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] fs/erofs: align the malloc'ed data
+To: Michael Walle <mwalle@kernel.org>, Huang Jianan <jnhuang95@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: linux-erofs@lists.ozlabs.org, u-boot@lists.denx.de
+References: <20260323134305.2675822-1-mwalle@kernel.org>
+ <20260323134305.2675822-2-mwalle@kernel.org>
+From: Gao Xiang <hsiangkao@linux.alibaba.com>
+In-Reply-To: <20260323134305.2675822-2-mwalle@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,49 +68,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The symbol USB_EMUL is how sandbox has access to USB. It's
-implementation however enforces a few other requirements. It must have
-SCSI enabled, and in turn that means it must have BLK enabled. Finally,
-we should not be using SANDBOX itself as a symbol to decide what to
-build or not build here, as SANDBOX is selected for COMPILE_TEST builds
-as well and so may not have enabled the sandbox specific USB support.
+Hi Michael,
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Changes in v2:
-- Drop erroneous select BLK line, pointed out by Marek
+On 2026/3/23 21:42, Michael Walle wrote:
+> The data buffers are used to transfer from or to hardware peripherals.
+> Often, there are restrictions on addresses, i.e. they have to be aligned
+> at a certain size. Thus, allocate the data on the heap instead of the
+> stack (at a random address alignment). Use malloc_cache_aligned() to get
+> an aligned buffer.
 
-Cc: Marek Vasut <marek.vasut@mailbox.org>
----
- drivers/usb/emul/Kconfig  | 1 +
- drivers/usb/host/Makefile | 2 +-
- 2 files changed, 2 insertions(+), 1 deletion(-)
+Many thanks for the patch, I wonder if it's possible to
+submit the patches to erofs-utils first (even make
+malloc_cache_aligned() as another malloc() for example)?
 
-diff --git a/drivers/usb/emul/Kconfig b/drivers/usb/emul/Kconfig
-index 279f6c6d7404..6305f2496c3b 100644
---- a/drivers/usb/emul/Kconfig
-+++ b/drivers/usb/emul/Kconfig
-@@ -2,6 +2,7 @@ config USB_EMUL
- 	bool "Support for USB device emulation"
- 	depends on SANDBOX
- 	select DM_USB
-+	select SCSI
- 	select USB_HOST
- 	help
- 	  Since sandbox does not have access to a real USB bus, it is possible
-diff --git a/drivers/usb/host/Makefile b/drivers/usb/host/Makefile
-index ef4ce62a680c..9cac53f07c7a 100644
---- a/drivers/usb/host/Makefile
-+++ b/drivers/usb/host/Makefile
-@@ -5,7 +5,7 @@
- 
- ifdef CONFIG_$(PHASE_)DM_USB
- obj-y += usb-uclass.o
--obj-$(CONFIG_SANDBOX) += usb-sandbox.o
-+obj-$(CONFIG_USB_EMUL) += usb-sandbox.o
- endif
- 
- ifdef CONFIG_$(PHASE_)USB_STORAGE
--- 
-2.43.0
+Since I'd like to make u-boot codebase following
+erofs-utils, but I don't think Jianan have the
+bandwidth now, but if you have some use cases,
+you could help syncing up a bit.
+
+Or at least, let's keep these four patches in sync
+between erofs-utils and u-boot.
+
+Many thanks!
+Gao Xiang
+
+> 
+> Signed-off-by: Michael Walle <mwalle@kernel.org>
+> ---
+>   fs/erofs/data.c     | 11 ++++-------
+>   fs/erofs/internal.h |  1 +
+>   2 files changed, 5 insertions(+), 7 deletions(-)
+> 
+> diff --git a/fs/erofs/data.c b/fs/erofs/data.c
+> index b58ec6fcc66..61dbae51a9a 100644
+> --- a/fs/erofs/data.c
+> +++ b/fs/erofs/data.c
+> @@ -319,15 +319,13 @@ static int z_erofs_read_data(struct erofs_inode *inode, char *buffer,
+>   		}
+>   
+>   		if (map.m_plen > bufsize) {
+> -			char *tmp;
+> -
+>   			bufsize = map.m_plen;
+> -			tmp = realloc(raw, bufsize);
+> -			if (!tmp) {
+> +			free(raw);
+> +			raw = malloc_cache_aligned(bufsize);
+> +			if (!raw) {
+>   				ret = -ENOMEM;
+>   				break;
+>   			}
+> -			raw = tmp;
+>   		}
+>   
+>   		ret = z_erofs_read_one_data(inode, &map, raw,
+> @@ -336,8 +334,7 @@ static int z_erofs_read_data(struct erofs_inode *inode, char *buffer,
+>   		if (ret < 0)
+>   			break;
+>   	}
+> -	if (raw)
+> -		free(raw);
+> +	free(raw);
+>   	return ret < 0 ? ret : 0;
+>   }
+>   
+> diff --git a/fs/erofs/internal.h b/fs/erofs/internal.h
+> index 1875f37fcd2..13c862325a6 100644
+> --- a/fs/erofs/internal.h
+> +++ b/fs/erofs/internal.h
+> @@ -11,6 +11,7 @@
+>   #include <linux/printk.h>
+>   #include <linux/log2.h>
+>   #include <inttypes.h>
+> +#include <memalign.h>
+>   #include "erofs_fs.h"
+>   
+>   #define erofs_err(fmt, ...)	\
 
