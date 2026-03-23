@@ -4,90 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE55F483F7
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 20:18:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C710F483F5
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 20:18:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 924F383FA7;
-	Mon, 23 Mar 2026 21:18:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E5E4483FED;
+	Mon, 23 Mar 2026 21:18:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="n6LfsLeU";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="suKdm7Gi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EED08405B; Mon, 23 Mar 2026 21:18:06 +0100 (CET)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
+ id 46DBA83BE1; Mon, 23 Mar 2026 21:18:07 +0100 (CET)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9EAC783BE1
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 21:18:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A509C83FA7
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 21:18:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-40946982a78so1409594fac.2
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 13:18:03 -0700 (PDT)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-46708149af2so350072b6e.0
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 13:18:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774297082; x=1774901882;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774297083; x=1774901883;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=V+VjZWS0p4FnqCe6zlupJYiEbXWSbU7a2IS2hrQHL84=;
- b=n6LfsLeUx3MlFj2H164Q/beq1zirxoMdpT8HzzxIhdW58bJvmNqKMezGaC0cWTManI
- z/A9MKWRv/0Zde0mNyQ78iW17x690BzLNq+kkglw2JhCMBTLgwBrFhPhhzG+pvZ94x0b
- 5YFKYC2+fCBSEfS7xuhUL96WgWU2cNNrTbTjDtQuoS5IHRoVj9WoqLMNiO2mKHzBWFYA
- /uXDefrG8+waJ1eWwv4a2BPSXIC8MXYqionHIbOBOXnQPOay2FZ8NhsoxennKz5zvT8O
- JoXS5VXkAzxY7FXZBRjRP5rLX+LZK1622AQsgKl3O2G5dSdkcoGi7XzzcQBPXmY1s8wP
- FNQw==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=hhtwf0AJWAoHi2YQd//GPWUG7WSk1J5mIkIbJY7k/z0=;
+ b=suKdm7GibTUIMZ6/du2i1G00ev5rzzB+wkQ3Cxd97dgCati09QgKEdHkwXqzLbME+a
+ uRo2+/v4foZH0q6DrTWVMLjVXYn2cR+KJaP35fd4h063PROlN5sc27fBFxjVY0BWldYl
+ /+RLOK+Tnx7bD+FPjxdTLIiDGDnmTU9AEQq7aqigK2i41X+Ch1HxTkjaFoyyYyOK79t2
+ ZB1lZ7uGm6ZTTBXVGYLcXywmxo09B5iU68KubJc/FuBscj14a7MZXAYCnZfpEIy3cagC
+ ad3axlZlT8WgpK6f1/Hr0mV60IewqITqR4zu4OEqVWnxANikUHCu5ZHhZffceedbx/R8
+ 1pmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774297082; x=1774901882;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=V+VjZWS0p4FnqCe6zlupJYiEbXWSbU7a2IS2hrQHL84=;
- b=nQCou3gWILtFBRmLwC/6Rp61BOCUQaDYggdwZVvdYY69oNQ5UUFWUunuf2cBMNEWwh
- n8UMBaswamUadPWuKM0yJtqwvT42IrFOCVH9mhgYVSwlkp/FH51or4OHRqEoAAjpNGBW
- pjKUUGQHDOO2t7AbN4Qu5DkNzByHV2Tta3Gpr6nhfBIK8pNLtpfy0oVICxguhiH8Fe9R
- ssW20/GELGGT7Jjnncr2os9uf7dSKieofbLA5ADERsHLgym5Y5JkXT1sIuI4dMaSgi4C
- PdcIiIq22QWXNpgHeEY1ntfCzmmyLKk59cHlr7+3KraShgI24MTEP7jFC39svY6AhLmz
- rF1A==
+ d=1e100.net; s=20251104; t=1774297083; x=1774901883;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=hhtwf0AJWAoHi2YQd//GPWUG7WSk1J5mIkIbJY7k/z0=;
+ b=tJqkAdCwXnnaiBof+en7TurpFC/jZ2EBxE+YmlVFrhB8YVVrHzHhnFxhvUQr2ozBzj
+ yfmwk0LiJNVBdfUSGYNZecQN3roSav8v7V4PVx+gb0+RTUOyZg8zeMo24eGMqZl4uVs6
+ GcwsTBLPj6tLF0ZkfXzDXUbjO9jrqkopILYt2PPO83Vu8YnKgHEsvoXsRtYyodr6PqnD
+ VWxfs9RreLq0ZPcsclr0o7jAXg7qS8/5FFMZfLj8mjGbjb0CLRXPBRpI1yIiQN5AZo1D
+ ZN6c6qYQ9Bb6TENu+VhDF7rcAR0mbVgtazjPR7245aDlAZG4Z2d7MQjtabB+kiNlwmhJ
+ 3qCQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU2jCjZODlkIu8TSbdIJRH14xQkvNoBqqeEND5W34td/Ma+PsLVJNViKYb+88oCZPVmzVeYDUk=@lists.denx.de
-X-Gm-Message-State: AOJu0YwFyr8adGtR/bldhP4xITUqxR41szLs4ZSAV/cpxiBhwaTJlR7M
- 8jTCA3apPif0boFcHBveavC7L9ZXujDqQ8MNAbZ4N+y7WzcfBq04NH0U4EK/jssPCKXpZHL/El/
- es7MQ
-X-Gm-Gg: ATEYQzxyBuX9SG2rbKgCBYWkBmCLDterebDBap1tcHqgeotMTsIAKQhR74gBUb04lhn
- pEwOp6QsCgzGy4qgdwDdeVZOhDA8H5QMr7zUZNeizXYN6vVWiYygObyWBJwqkQkOgEoo6Jlo8c9
- Esi3hCFTBcZjeiJZiGyCl1WjSfgF04Z2pqI4EUomsGFcslFye7zJyE10L3J04gT/ByQdq8Yoz0t
- vfb2hYr37+NEycFEvD4sRjWZ7q00YNQpwCBvpYQMFZPpp/fkDO6xnh6mnfh0u4XjiZff7bI4Gzo
- eSOFjh8xaGvuIx6NUzayygJi+dRR5HhrnV5S8x2tV6T120x1MepF9Y9onR22mrArWnEcUwzFLO0
- nvBPJgi1Xp87F1j5ZzaMT8RbPsOEI8KcBQzkULUKftkl8bxe85F9LiuitavOC8ZpXy38R7bjc66
- CrqgqPiwLtql0vSwXim9ToxAPkIRIBujy5/uXPRQ==
-X-Received: by 2002:a05:6870:a79f:b0:41c:6bf0:6747 with SMTP id
- 586e51a60fabf-41c6bf074f4mr2705371fac.25.1774297082212; 
- Mon, 23 Mar 2026 13:18:02 -0700 (PDT)
+ AJvYcCUs+pFfVk3aXrPX8BFxPy48B7ZIMfs0jKP4UOZqFF7Tt8BSbKf/y975RajsvS8C6Ni3e1PB5Rc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxO7Xa7lLgkX39CpKGMYoEdfQApxaLUxtiPUOlmEzgWn+smJmAg
+ MgRTRq7giAg2OGkyjyaTtULoJJaH4tElXh1AlwgS+b4ZLqt/7HuKQX2+Rfne9bfY3co=
+X-Gm-Gg: ATEYQzyeUgVLD+IH0Yvw9TgsHcTYupb3N7PSil+6GgZKOfB2Bn67AWzr+5Z73Hc6kI7
+ ZUffp9V3inntNCfZ46+fxzLdjCPRipDQvFIvevBv69dBFWV9c9/+iJhvOfdzQmS0/PeWmRrCjcA
+ GScr4pGhj4dT9YTPxTKdMsxIw5b3PAKnUvVueyifZAyM01fCP5tE3N/iNwgZGgBYO3XV11quxdL
+ /Qm+UOzWvq/RRKHF7RqAbPgwxEvPd7w8h8F2dy3nOoDYeSOid2b+KJEnfnWpejRBwsidJafjOOF
+ WR5BD/J4tF2Sgu3socVMYD5Vg0o3ZWpOo74NAokEhiA2Q3mDlTmTUvD1NjrPJjxqakFzuGWUiD/
+ jCGzZ/elEh3U/IfwiKoioxBL3/Roft86OHQ0ErA4oz1W4/EaZ/A0jew0gd+qH5yUPExNW18QHhu
+ w8VXa2Ltt874rPI2uh3zX9r2g6uvw=
+X-Received: by 2002:a05:6808:bd1:b0:467:880:7441 with SMTP id
+ 5614622812f47-467e5d83ff6mr7380468b6e.18.1774297083177; 
+ Mon, 23 Mar 2026 13:18:03 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:964:f712:dbc7:4119])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41c148a5ca4sm11077540fac.3.2026.03.23.13.18.01
+ 586e51a60fabf-41c148a5ca4sm11077540fac.3.2026.03.23.13.18.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Mar 2026 13:18:01 -0700 (PDT)
+ Mon, 23 Mar 2026 13:18:02 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Subject: [PATCH v3 0/6] boards: mediatek: initial support for Genio 720 EVK
-Date: Mon, 23 Mar 2026 15:16:51 -0500
-Message-Id: <20260323-mtk-mt8391-initial-support-v3-0-19dd92f4543f@baylibre.com>
+Date: Mon, 23 Mar 2026 15:16:52 -0500
+Subject: [PATCH v3 1/6] clk: mediatek: mt8189: add some VLP clocks
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/43S3W6DIBQH8FdpvN7ZQBSwWZa9x7ILvmxJFR2ga
- dP03YfYdNmyNI3RcLz4/YFzzkUw3ppQbDfnwpvZBju4VJCnTaH2wu0MWJ3qokQlRekDfTykl5M
- Gg3U2WtFBmMZx8BG4UlozihvMZZGA0ZvWHjP+8bnW3nxNKSOuP4vehCByxnbzmiMIZqC6Q46Zn
- G1P0E9HGIU3LgaYCSAQFaOorSUSHL1Lceqs9OZZDf3bEvoPiUjmFpYTWoP2wwi9GGHGkB7Wcqw
- Iq8vmQa657TBdBOZ8Bc0xegExrVQ3qENYdATUmIpVRPCK1g/pGN309dSpNMJN49WjmNVK8JYS9
- phHYLRORd9lMzVk3XVz9RDTmrBWm/88KYKBVPQ2bjeDtzvrXlw6aLG0c29DHPwpj86Mcz+vU9L
- cm5IcK0siZKORbKT6FZvlufzRlgu5p5VJw1pxWuqa16T8o10ul2+gtU+M5AIAAA==
-X-Change-ID: 20260202-mtk-mt8391-initial-support-8ccdd761918b
+Message-Id: <20260323-mtk-mt8391-initial-support-v3-1-19dd92f4543f@baylibre.com>
+References: <20260323-mtk-mt8391-initial-support-v3-0-19dd92f4543f@baylibre.com>
+In-Reply-To: <20260323-mtk-mt8391-initial-support-v3-0-19dd92f4543f@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
  Weijie Gao <weijie.gao@mediatek.com>, 
  Chunfeng Yun <chunfeng.yun@mediatek.com>, 
@@ -95,21 +88,19 @@ To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
  Macpaul Lin <macpaul.lin@mediatek.com>, Lukasz Majewski <lukma@denx.de>
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- David Lechner <dlechner@baylibre.com>, 
- Chris-QJ Chen <chris-qj.chen@mediatek.com>, 
- Cathy Xu <ot_cathy.xu@mediatek.com>
+ David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5837; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=PSVIFfecyLqMPK/6mQqoLDD7Wtwhk6EwSQ+DJtYFo+8=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpwZ/JrvQCHLNEzOgxp6lLypz2qguoHst5RzLtm
- PCLYRsP+jiJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCacGfyRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A3woH/3zdBBjrGeUZHLhG0Md9l5oPWrURp+uVt7I8Eb2
- Yg87Af0wugdg3Mo4DLyLLoSJhHkYsIJsqFMGtlLOIWhx0ZU93xR9gV67YvSsLLtztjciA2vbOKN
- 5CaWRjbc38zYwjN8Fx40k7cp4d85E93QRMq8FuGhUfMRg2iUhNYjMSS9X2xP3cnzy3W3EuTC3iM
- HMVCSsYZfDeMu8Lwd4UE82QCSilZq9u/3C6MkOMcRHwV3nQP4bs+VpuCaN1FCOKdgevm+49cwFM
- SX98O5PhdNc6c1tXQbpn6CyGBd4LiuVzRtdCBzGP4mLZsT0Sv6ur20D9uyYQ7IqCbVv9Jjh1QvX
- /m7Q=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=13473;
+ i=dlechner@baylibre.com; h=from:subject:message-id;
+ bh=MgzsXJ7NkyacqTASVMiDbxKgnMWvoWfOg8NWM8Bv5jM=;
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpwZ/QB5qg1nHf2hquluRgnzgFAeM++CsMTMzR+
+ kexONwMvB+JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCacGf0BYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AMx4IAJzlrzzZtb4OukqFBCN+n9AkDi/e9EeptRoyCdL
+ xkOvODcLGlIgo3qADzLNR/hbjQGYmooS0zK3fkRBlLRNAtwKW2me2SsE0Y5zvDXrA3SOVc7gyY+
+ MLMEiTFOY+Htm6ebb1g4YUeMuk5K1UADR1BmlnJE6X3ZhcrCOAWNcQna4sQRN8C9GVLjzMovHgC
+ t/4M1WMlcJLUH/4YBlM0fyke80DnradpMYZtYcOVOanVEAtHbXj+UV71zcH6UM8UYzqOKej7Xs+
+ Fm+YRUXNyejZPLh/RlnyyzQtdpnyEy/iz1XA3jFGRH+LRGB3TtLonSc1jpZtkgzekwDllZNGIIK
+ eTOQ=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -128,114 +119,368 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These patches along with the listed prerequisites are enough to get the
-MediaTek Genio 720 EVK board to boot into Linux from the eMMC (with a
-bit of extra config that isn't included here because it isn't generic.)
-
-This is currently being upstreamed in Linux as well, so we just have
-some minimal devicetree files here to hold us over for a while until we
-can switch to the upstream ones.
-
-This depends on the pinctrl and all MediaTek clock patches from be
-currently under review.
+Add some VLP clocks needed by the PMIC on MT8189 and similar SoCs.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-Changes in v3:
-- Adapt clock patch to changes in dependency.
-- Fix bugs found in init.c.
-- Fix typo in commit message.
-- Link to v2: https://patch.msgid.link/20260310-mtk-mt8391-initial-support-v2-0-1dc862d58532@baylibre.com
+ drivers/clk/mediatek/clk-mt8189.c | 289 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 289 insertions(+)
 
-Changes in v2:
-- New clock driver patch to add required clocks for PMIC.
-- Added pinctrl nodes to both dts patches.
-- Added "mediatek,mt8189-vlpckgen" clock controller node.
-- Added "mt6359.dtsi" include and associated regulator changes.
-- New patch with macros to support the change above.
-- Fixed wrong CONFIG_PINCTRL_MT8391 in defconfig.
-- Added defconfig and dts for virtually identical Genio 520 EVK.
-- Enabled more config options for things that have already been merged.
-- Link to v1: https://lore.kernel.org/r/20260209-mtk-mt8391-initial-support-v1-0-b23ab9d0b9bc@baylibre.com
+diff --git a/drivers/clk/mediatek/clk-mt8189.c b/drivers/clk/mediatek/clk-mt8189.c
+index fec908728c0..9e640059f11 100644
+--- a/drivers/clk/mediatek/clk-mt8189.c
++++ b/drivers/clk/mediatek/clk-mt8189.c
+@@ -287,12 +287,16 @@ enum {
+ 	CLK_PAD_CLK32K,
+ 	CLK_PAD_CLK26M,
+ 	CLK_PAD_ULPOSC,
++	CLK_PAD_CLK13M,
++	CLK_PAD_AUD_ADC_EXT,
+ };
+ 
+ static ulong ext_clock_rates[] = {
+ 	[CLK_PAD_CLK32K] = 32000,
+ 	[CLK_PAD_CLK26M] = 26 * MHZ,
+ 	[CLK_PAD_ULPOSC] = 260 * MHZ,
++	[CLK_PAD_CLK13M] = 13 * MHZ,
++	[CLK_PAD_AUD_ADC_EXT] = 260 * MHZ,
+ };
+ 
+ #define MT8189_PLL_FMAX		(3800UL * MHZ)
+@@ -1637,6 +1641,258 @@ static const struct mtk_gate mminfra_config_clks[] = {
+ 	GATE_MMINFRA_CONFIG1(CLK_MMINFRA_GCE_26M, CLK_TOP_MMINFRA_SEL, 17),
+ };
+ 
++static const struct mtk_parent vlp_26m_oscd10_parents[] = {
++	EXT_PARENT(CLK_PAD_CLK26M),
++	TOP_PARENT(CLK_TOP_OSC_D10),
++};
++
++static const struct mtk_parent vlp_vadsp_vowpll_parents[] = {
++	EXT_PARENT(CLK_PAD_CLK26M),
++	TOP_PARENT(CLK_TOP_VOWPLL),
++};
++
++static const struct mtk_parent vlp_sspm_ulposc_parents[] = {
++	EXT_PARENT(CLK_PAD_ULPOSC),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_OSC_D10),
++};
++
++static const struct mtk_parent vlp_aud_adc_parents[] = {
++	EXT_PARENT(CLK_PAD_CLK26M),
++	TOP_PARENT(CLK_TOP_VOWPLL),
++	EXT_PARENT(CLK_PAD_AUD_ADC_EXT),
++	TOP_PARENT(CLK_TOP_OSC_D10),
++};
++
++static const struct mtk_parent vlp_scp_iic_spi_parents[] = {
++	EXT_PARENT(CLK_PAD_CLK26M),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7_D2),
++	TOP_PARENT(CLK_TOP_OSC_D10),
++};
++
++static const struct mtk_parent vlp_vadsp_uarthub_b_parents[] = {
++	EXT_PARENT(CLK_PAD_CLK26M),
++	TOP_PARENT(CLK_TOP_OSC_D10),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++};
++
++static const struct mtk_parent vlp_axi_kp_parents[] = {
++	EXT_PARENT(CLK_PAD_CLK26M),
++	TOP_PARENT(CLK_TOP_OSC_D10),
++	TOP_PARENT(CLK_TOP_OSC_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7_D2),
++};
++
++static const struct mtk_parent vlp_sspm_parents[] = {
++	EXT_PARENT(CLK_PAD_CLK26M),
++	TOP_PARENT(CLK_TOP_OSC_D10),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D2),
++	EXT_PARENT(CLK_PAD_ULPOSC),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6),
++};
++
++static const struct mtk_parent vlp_pwm_vlp_parents[] = {
++	EXT_PARENT(CLK_PAD_CLK26M),
++	TOP_PARENT(CLK_TOP_OSC_D4),
++	EXT_PARENT(CLK_PAD_CLK32K),
++	TOP_PARENT(CLK_TOP_OSC_D10),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D8),
++};
++
++static const struct mtk_parent vlp_pwrap_ulposc_parents[] = {
++	EXT_PARENT(CLK_PAD_CLK26M),
++	TOP_PARENT(CLK_TOP_OSC_D10),
++	TOP_PARENT(CLK_TOP_OSC_D7),
++	TOP_PARENT(CLK_TOP_OSC_D8),
++	TOP_PARENT(CLK_TOP_OSC_D16),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7_D8),
++};
++
++static const struct mtk_parent vlp_vadsp_parents[] = {
++	EXT_PARENT(CLK_PAD_CLK26M),
++	TOP_PARENT(CLK_TOP_OSC_D20),
++	TOP_PARENT(CLK_TOP_OSC_D10),
++	TOP_PARENT(CLK_TOP_OSC_D2),
++	EXT_PARENT(CLK_PAD_ULPOSC),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++};
++
++static const struct mtk_parent vlp_scp_parents[] = {
++	EXT_PARENT(CLK_PAD_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D3),
++	TOP_PARENT(CLK_TOP_MAINPLL_D3),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
++	APMIXED_PARENT(CLK_APMIXED_APLL1),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7),
++	TOP_PARENT(CLK_TOP_OSC_D10),
++};
++
++static const struct mtk_parent vlp_spmi_p_parents[] = {
++	EXT_PARENT(CLK_PAD_CLK26M),
++	TOP_PARENT(CLK_TOP_F26M_CK_D2),
++	TOP_PARENT(CLK_TOP_OSC_D8),
++	TOP_PARENT(CLK_TOP_OSC_D10),
++	TOP_PARENT(CLK_TOP_OSC_D16),
++	TOP_PARENT(CLK_TOP_OSC_D7),
++	EXT_PARENT(CLK_PAD_CLK32K),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7_D8),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6_D8),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D8),
++};
++
++static const struct mtk_parent vlp_camtg_parents[] = {
++	EXT_PARENT(CLK_PAD_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D8),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D8),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D4),
++	TOP_PARENT(CLK_TOP_OSC_D16),
++	TOP_PARENT(CLK_TOP_OSC_D20),
++	TOP_PARENT(CLK_TOP_OSC_D10),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D16),
++	TOP_PARENT(CLK_TOP_TVDPLL1_D16),
++	TOP_PARENT(CLK_TOP_F26M_CK_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D10),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D16),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D32),
++};
++
++static const struct mtk_composite vlp_ck_muxes[] = {
++	/* VLP_CLK_CFG_0 */
++	MUX_GATE_CLR_SET_UPD(CLK_VLP_CK_SCP_SEL, vlp_scp_parents,
++			     0x008, 0x00c, 0x010, 0, 4, 7, 0x04, 0),
++	MUX_CLR_SET_UPD(CLK_VLP_CK_PWRAP_ULPOSC_SEL, vlp_pwrap_ulposc_parents,
++			0x008, 0x00c, 0x010, 8, 3, 0x04, 1),
++	MUX_CLR_SET_UPD(CLK_VLP_CK_SPMI_P_MST_SEL, vlp_spmi_p_parents,
++			0x008, 0x00c, 0x010, 16, 4, 0x04, 2),
++	MUX_CLR_SET_UPD(CLK_VLP_CK_DVFSRC_SEL, vlp_26m_oscd10_parents,
++			0x008, 0x00c, 0x010, 24, 1, 0x04, 3),
++	/* VLP_CLK_CFG_1 */
++	MUX_CLR_SET_UPD(CLK_VLP_CK_PWM_VLP_SEL, vlp_pwm_vlp_parents,
++			0x014, 0x018, 0x01c, 0, 3, 0x04, 4),
++	MUX_CLR_SET_UPD(CLK_VLP_CK_AXI_VLP_SEL, vlp_axi_kp_parents,
++			0x014, 0x018, 0x01c, 8, 3, 0x04, 5),
++	MUX_CLR_SET_UPD(CLK_VLP_CK_SYSTIMER_26M_SEL, vlp_26m_oscd10_parents,
++			0x014, 0x018, 0x01c, 16, 1, 0x04, 6),
++	MUX_CLR_SET_UPD(CLK_VLP_CK_SSPM_SEL, vlp_sspm_parents,
++			0x014, 0x018, 0x01c, 24, 3, 0x04, 7),
++	/* VLP_CLK_CFG_2 */
++	MUX_CLR_SET_UPD(CLK_VLP_CK_SSPM_F26M_SEL, vlp_26m_oscd10_parents,
++			0x020, 0x024, 0x028, 0, 1, 0x04, 8),
++	MUX_CLR_SET_UPD(CLK_VLP_CK_SRCK_SEL, vlp_26m_oscd10_parents,
++			0x020, 0x024, 0x028, 8, 1, 0x04, 9),
++	MUX_CLR_SET_UPD(CLK_VLP_CK_SCP_SPI_SEL, vlp_scp_iic_spi_parents,
++			0x020, 0x024, 0x028, 16, 2, 0x04, 10),
++	MUX_CLR_SET_UPD(CLK_VLP_CK_SCP_IIC_SEL, vlp_scp_iic_spi_parents,
++			0x020, 0x024, 0x028, 24, 2, 0x04, 11),
++	/* VLP_CLK_CFG_3 */
++	MUX_CLR_SET_UPD(CLK_VLP_CK_SCP_SPI_HIGH_SPD_SEL,
++			vlp_scp_iic_spi_parents,
++			0x02c, 0x030, 0x034, 0, 2, 0x04, 12),
++	MUX_CLR_SET_UPD(CLK_VLP_CK_SCP_IIC_HIGH_SPD_SEL,
++			vlp_scp_iic_spi_parents,
++			0x02c, 0x030, 0x034, 8, 2, 0x04, 13),
++	MUX_CLR_SET_UPD(CLK_VLP_CK_SSPM_ULPOSC_SEL, vlp_sspm_ulposc_parents,
++			0x02c, 0x030, 0x034, 16, 2, 0x04, 14),
++	MUX_CLR_SET_UPD(CLK_VLP_CK_APXGPT_26M_SEL, vlp_26m_oscd10_parents,
++			0x02c, 0x030, 0x034, 24, 1, 0x04, 15),
++	/* VLP_CLK_CFG_4 */
++	MUX_GATE_CLR_SET_UPD(CLK_VLP_CK_VADSP_SEL, vlp_vadsp_parents,
++			     0x038, 0x03c, 0x040, 0, 3, 7, 0x04, 16),
++	MUX_GATE_CLR_SET_UPD(CLK_VLP_CK_VADSP_VOWPLL_SEL,
++			     vlp_vadsp_vowpll_parents,
++			     0x038, 0x03c, 0x040, 8, 1, 15, 0x04, 17),
++	MUX_GATE_CLR_SET_UPD(CLK_VLP_CK_VADSP_UARTHUB_BCLK_SEL,
++			     vlp_vadsp_uarthub_b_parents,
++			     0x038, 0x03c, 0x040, 16, 2, 23, 0x04, 18),
++	MUX_GATE_CLR_SET_UPD(CLK_VLP_CK_CAMTG0_SEL, vlp_camtg_parents,
++			     0x038, 0x03c, 0x040, 24, 4, 31, 0x04, 19),
++	/* VLP_CLK_CFG_5 */
++	MUX_GATE_CLR_SET_UPD(CLK_VLP_CK_CAMTG1_SEL, vlp_camtg_parents,
++			     0x044, 0x048, 0x04c, 0, 4, 7, 0x04, 20),
++	MUX_GATE_CLR_SET_UPD(CLK_VLP_CK_CAMTG2_SEL, vlp_camtg_parents,
++			     0x044, 0x048, 0x04c, 8, 4, 15, 0x04, 21),
++	MUX_GATE_CLR_SET_UPD(CLK_VLP_CK_AUD_ADC_SEL, vlp_aud_adc_parents,
++			     0x044, 0x048, 0x04c, 16, 2, 23, 0x04, 22),
++	MUX_GATE_CLR_SET_UPD(CLK_VLP_CK_KP_IRQ_GEN_SEL, vlp_axi_kp_parents,
++			     0x044, 0x048, 0x04c, 24, 3, 31, 0x04, 23),
++};
++
++static const struct mtk_gate_regs vlp_ck_gate_regs = {
++	.set_ofs = 0x1f4,
++	.clr_ofs = 0x1f8,
++	.sta_ofs = 0x1f0,
++};
++
++#define GATE_VLP_CK(id, parent, shift, flags) \
++	GATE_FLAGS(id, parent, &vlp_ck_gate_regs, shift, flags | CLK_GATE_NO_SETCLR_INV)
++
++#define GATE_VLP_CK_EXT(id, parent, shift) \
++	GATE_VLP_CK(id, parent, shift, CLK_PARENT_EXT)
++
++#define GATE_VLP_CK_TOP(id, parent, shift) \
++	GATE_VLP_CK(id, parent, shift, CLK_PARENT_TOPCKGEN)
++
++static const struct mtk_gate vlp_ck_gates[] = {
++	GATE_VLP_CK_EXT(CLK_VLP_CK_VADSYS_VLP_26M_EN, CLK_PAD_CLK26M, 1),
++	GATE_VLP_CK_EXT(CLK_VLP_CK_SEJ_13M_EN, CLK_PAD_CLK13M, 4),
++	GATE_VLP_CK_EXT(CLK_VLP_CK_SEJ_26M_EN, CLK_PAD_CLK26M, 5),
++	GATE_VLP_CK_TOP(CLK_VLP_CK_FMIPI_CSI_UP26M_CK_EN, CLK_TOP_OSC_D10, 11),
++};
++
++static const struct mtk_gate_regs vlpcfg_ao_regs = {
++	.set_ofs = 0x4,
++	.clr_ofs = 0x4,
++	.sta_ofs = 0x4,
++};
++
++/*
++ * REVISIT: this is currently the only clock tree using the infrasys ops so we
++ * are using it instead of introducing a new parent in the core code. Instead,
++ * we should eventually rework the core code to do a better job of supporting
++ * arbitrary parent trees.
++ */
++#define CLK_PARENT_VLP_CK CLK_PARENT_INFRASYS
++
++#define GATE_VLPCFG_AO(id, parent, shift, flags) \
++	GATE_FLAGS(id, parent, &vlpcfg_ao_regs, shift, flags | CLK_GATE_NO_SETCLR_INV)
++
++#define GATE_VLPCFG_AO_EXT(id, parent, shift) \
++	GATE_VLPCFG_AO(id, parent, shift, CLK_PARENT_EXT)
++
++#define GATE_VLPCFG_AO_TOP(id, parent, shift) \
++	GATE_VLPCFG_AO(id, parent, shift, CLK_PARENT_TOPCKGEN)
++
++#define GATE_VLPCFG_AO_VLP(id, parent, shift) \
++	GATE_VLPCFG_AO(id, parent, shift, CLK_PARENT_VLP_CK)
++
++static const struct mtk_gate vlpcfg_ao_clks[] = {
++	GATE_VLPCFG_AO_VLP(CLK_VLPCFG_REG_SCP, CLK_VLP_CK_SCP_SEL, 28),
++	GATE_VLPCFG_AO_EXT(CLK_VLPCFG_REG_RG_R_APXGPT_26M, CLK_PAD_CLK26M, 24),
++	GATE_VLPCFG_AO_EXT(CLK_VLPCFG_REG_DPMSRCK_TEST, CLK_PAD_CLK26M, 23),
++	GATE_VLPCFG_AO_VLP(CLK_VLPCFG_REG_RG_DPMSRRTC_TEST, CLK_PAD_CLK32K, 22),
++	GATE_VLPCFG_AO_VLP(CLK_VLPCFG_REG_DPMSRULP_TEST, CLK_TOP_OSC_D10, 21),
++	GATE_VLPCFG_AO_VLP(CLK_VLPCFG_REG_SPMI_P_MST, CLK_VLP_CK_SPMI_P_MST_SEL, 20),
++	GATE_VLPCFG_AO_EXT(CLK_VLPCFG_REG_SPMI_P_MST_32K, CLK_PAD_CLK32K, 18),
++	GATE_VLPCFG_AO_VLP(CLK_VLPCFG_REG_PMIF_SPMI_P_SYS, CLK_VLP_CK_PWRAP_ULPOSC_SEL, 13),
++	GATE_VLPCFG_AO_VLP(CLK_VLPCFG_REG_PMIF_SPMI_P_TMR, CLK_VLP_CK_PWRAP_ULPOSC_SEL, 12),
++	GATE_VLPCFG_AO_VLP(CLK_VLPCFG_REG_PMIF_SPMI_M_SYS, CLK_VLP_CK_PWRAP_ULPOSC_SEL, 11),
++	GATE_VLPCFG_AO_VLP(CLK_VLPCFG_REG_PMIF_SPMI_M_TMR, CLK_VLP_CK_PWRAP_ULPOSC_SEL, 10),
++	GATE_VLPCFG_AO_VLP(CLK_VLPCFG_REG_DVFSRC, CLK_VLP_CK_DVFSRC_SEL, 9),
++	GATE_VLPCFG_AO_VLP(CLK_VLPCFG_REG_PWM_VLP, CLK_VLP_CK_PWM_VLP_SEL, 8),
++	GATE_VLPCFG_AO_VLP(CLK_VLPCFG_REG_SRCK, CLK_VLP_CK_SRCK_SEL, 7),
++	GATE_VLPCFG_AO_VLP(CLK_VLPCFG_REG_SSPM_F26M, CLK_VLP_CK_SSPM_F26M_SEL, 4),
++	GATE_VLPCFG_AO_EXT(CLK_VLPCFG_REG_SSPM_F32K, CLK_PAD_CLK32K, 3),
++	GATE_VLPCFG_AO_VLP(CLK_VLPCFG_REG_SSPM_ULPOSC, CLK_VLP_CK_SSPM_ULPOSC_SEL, 2),
++	GATE_VLPCFG_AO_EXT(CLK_VLPCFG_REG_VLP_32K_COM, CLK_PAD_CLK32K, 1),
++	GATE_VLPCFG_AO_EXT(CLK_VLPCFG_REG_VLP_26M_COM, CLK_PAD_CLK26M, 0),
++};
++
+ static const struct mtk_clk_tree mt8189_apmixedsys_clk_tree = {
+ 	.pll_parent = EXT_PARENT(CLK_PAD_CLK26M),
+ 	.ext_clk_rates = ext_clock_rates,
+@@ -1659,6 +1915,17 @@ static const struct mtk_clk_tree mt8189_topckgen_clk_tree = {
+ 	.num_gates = ARRAY_SIZE(top_gates),
+ };
+ 
++static const struct mtk_clk_tree mt8189_vlpckgen_clk_tree = {
++	.ext_clk_rates = ext_clock_rates,
++	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
++	.muxes_offs = CLK_VLP_CK_SCP_SEL,
++	.gates_offs = CLK_VLP_CK_VADSYS_VLP_26M_EN,
++	.muxes = vlp_ck_muxes,
++	.gates = vlp_ck_gates,
++	.num_muxes = ARRAY_SIZE(vlp_ck_muxes),
++	.num_gates = ARRAY_SIZE(vlp_ck_gates),
++};
++
+ static const struct udevice_id mt8189_apmixed[] = {
+ 	{ .compatible = "mediatek,mt8189-apmixedsys", },
+ 	{ }
+@@ -1669,6 +1936,11 @@ static const struct udevice_id mt8189_topckgen_compat[] = {
+ 	{ }
+ };
+ 
++static const struct udevice_id mt8189_vlpckgen[] = {
++	{ .compatible = "mediatek,mt8189-vlpckgen", },
++	{ }
++};
++
+ struct mt8189_gate_clk_data {
+ 	const struct mtk_gate *gates;
+ 	int num_gates;
+@@ -1683,12 +1955,14 @@ GATE_CLK_DATA(perao_clks);
+ GATE_CLK_DATA(imp_clks);
+ GATE_CLK_DATA(mm_clks);
+ GATE_CLK_DATA(mminfra_config_clks);
++GATE_CLK_DATA(vlpcfg_ao_clks);
+ 
+ static const struct udevice_id of_match_mt8189_clk_gate[] = {
+ 	{ .compatible = "mediatek,mt8189-peri-ao", .data = (ulong)&perao_clks_data },
+ 	{ .compatible = "mediatek,mt8189-iic-wrap", .data = (ulong)&imp_clks_data },
+ 	{ .compatible = "mediatek,mt8189-dispsys", .data = (ulong)&mm_clks_data },
+ 	{ .compatible = "mediatek,mt8189-mm-infra", .data = (ulong)&mminfra_config_clks_data },
++	{ .compatible = "mediatek,mt8189-vlpcfg-ao", .data = (ulong)&vlpcfg_ao_clks_data },
+ 	{ }
+ };
+ 
+@@ -1702,6 +1976,11 @@ static int mt8189_topckgen_probe(struct udevice *dev)
+ 	return mtk_common_clk_init(dev, &mt8189_topckgen_clk_tree);
+ }
+ 
++static int mt8189_infrasys_probe(struct udevice *dev)
++{
++	return mtk_common_clk_infrasys_init(dev, &mt8189_vlpckgen_clk_tree);
++}
++
+ static int mt8189_clk_gate_probe(struct udevice *dev)
+ {
+ 	struct mt8189_gate_clk_data *data;
+@@ -1733,6 +2012,16 @@ U_BOOT_DRIVER(mtk_clk_topckgen) = {
+ 	.flags = DM_FLAG_PRE_RELOC,
+ };
+ 
++U_BOOT_DRIVER(mtk_clk_vlpckgen) = {
++	.name = "mt8189-vlpckgen",
++	.id = UCLASS_CLK,
++	.of_match = mt8189_vlpckgen,
++	.probe = mt8189_infrasys_probe,
++	.priv_auto = sizeof(struct mtk_clk_priv),
++	.ops = &mtk_clk_infrasys_ops,
++	.flags = DM_FLAG_PRE_RELOC,
++};
++
+ U_BOOT_DRIVER(mtk_clk_gate) = {
+ 	.name = "mt8189-gate-clk",
+ 	.id = UCLASS_CLK,
 
----
-Cathy Xu (1):
-      arm: dts: mediatek: mt8189: Add pinmux macro header file
-
-Chris-QJ Chen (4):
-      arm: mediatek: add support of MT8189 SoC family
-      arm: dts: mediatek: Add MediaTek MT8189 dtsi file
-      arm: dts: mediatek: Add MediaTek Genio 520/720 EVK DTS
-      board: mediatek: Add Genio 520/720 EVK defconfigs
-
-David Lechner (1):
-      clk: mediatek: mt8189: add some VLP clocks
-
- arch/arm/dts/Makefile                  |    2 +
- arch/arm/dts/mt8189-pinfunc.h          | 1125 ++++++++++++++++++++++++++++++++
- arch/arm/dts/mt8189.dtsi               |  301 +++++++++
- arch/arm/dts/mt8371-genio-520-evk.dts  |   11 +
- arch/arm/dts/mt8371-genio-common.dtsi  |  176 +++++
- arch/arm/dts/mt8391-genio-720-evk.dts  |   11 +
- arch/arm/mach-mediatek/Kconfig         |   11 +-
- arch/arm/mach-mediatek/Makefile        |    1 +
- arch/arm/mach-mediatek/mt8189/Makefile |    3 +
- arch/arm/mach-mediatek/mt8189/init.c   |   41 ++
- board/mediatek/MAINTAINERS             |    7 +
- configs/mt8189.config                  |   34 +
- configs/mt8371_genio_520_evk_defconfig |    4 +
- configs/mt8391_genio_720_evk_defconfig |    4 +
- drivers/clk/mediatek/clk-mt8189.c      |  289 ++++++++
- 15 files changed, 2019 insertions(+), 1 deletion(-)
----
-base-commit: eb00c710508d09b2a3b9aca75dd18280f1304703
-change-id: 20260202-mtk-mt8391-initial-support-8ccdd761918b
-prerequisite-message-id: <20260317-clk-mtk-unify-mux-parents-v3-0-a4760f5b0a80@baylibre.com>
-prerequisite-patch-id: eaacb54acebe803c95a4416f9839632caa8bbe36
-prerequisite-patch-id: 291f87bf8033440b0c79a03055cec7e1317216e2
-prerequisite-patch-id: d3ff487de22ca508a65613bebf8cbe0e61005a31
-prerequisite-patch-id: edb2b9a5644e0deb0b846cb6365957e8cdd9e9d8
-prerequisite-patch-id: 14723a8815ed459c3995ba2682344f8c6813da74
-prerequisite-patch-id: 5c528aa9c92e9d79fe406bca97192624f0267db9
-prerequisite-patch-id: c5a12abe7b61f253d13966fc6b257995f085c7b0
-prerequisite-patch-id: b4f5a8dafda57305a07cfc3783d7154558f515a6
-prerequisite-patch-id: 9a33fdfe476f6dc0e9e314755073d308c6a61a1e
-prerequisite-patch-id: 2daeb61c75b459c5c790266c329439a0fec5f50c
-prerequisite-patch-id: 29f06542d7c519b8995bcebd04b800508cf32d1d
-prerequisite-patch-id: 2d8a751c3012596e64b93e5361c7a50c8ac0a303
-prerequisite-patch-id: 85f6c9b692293d482d04bb3661fb51dfb5533ef0
-prerequisite-patch-id: 0700411359ab89ebd24c4c3d17a5864e41289547
-prerequisite-patch-id: 688b2021a1585ae037c15081cf43e62d95e7c286
-prerequisite-patch-id: 10f08bad47e8a2e6953c59540264dfa9ba433c1f
-prerequisite-message-id: <20260303-mtk-clk-8365-drop-map-v1-1-17f81c375290@baylibre.com>
-prerequisite-patch-id: 625ea8b616208d1c8a412ae514d8e94a3c13a6ff
-prerequisite-message-id: <20260309-clk-mtk-mt8188-drop-extra-top-clocks-v1-0-6ee4743a8465@baylibre.com>
-prerequisite-patch-id: 63670888fcc3abb762a182a7354216e2700a201a
-prerequisite-patch-id: d8e4fd450697687889673ea835578739387d612a
-prerequisite-message-id: <20260310-clk-mtk-parent-cleanup-v1-0-66175ca8f637@baylibre.com>
-prerequisite-patch-id: 7d34eacfb07b05743fdb6bc7f2e9eaf9412652ef
-prerequisite-patch-id: 4e840545a5c629bb437265dadc3278ec7896af31
-prerequisite-patch-id: c8207aef95f4fe0e7035f2b568243c2897b47d5a
-prerequisite-patch-id: d15f4c079134f0e0c8d7521473553f55ddbf6dd8
-prerequisite-patch-id: 8c3bac0b04e5662fda9520bb1c5903973e383c66
-prerequisite-patch-id: 09064d21f1d8db557f5cb42dd309a71d540ec16d
-prerequisite-patch-id: c4353fb375d509fc658dae60611dd2058d2c50c1
-prerequisite-patch-id: 5a8dbab74fc01b66fa5e644603a7026d7b6fb392
-prerequisite-patch-id: c918d85e92db8e23718728d9f1c236bbf6dd4624
-prerequisite-patch-id: 640dad8f1295f5705873dd1727d819dbd69a590d
-prerequisite-patch-id: 053e35bb1e211602195bebe16a5995d42513d904
-prerequisite-patch-id: da039a34a16a3aa95c8dd06d9af08034f04bdf5e
-prerequisite-patch-id: f143e3daade6b31a725f4001a22cde49511ced90
-prerequisite-patch-id: 5c229cbb3c52f65cdcee9c49182461ad70c81156
-prerequisite-patch-id: 81df2ad9f9ee0f14b2d286cba72e863a9f7bfbeb
-prerequisite-patch-id: 979df31ce215fedc030fed831060a07a15e672d8
-prerequisite-message-id: <20260313-pinctrl-mtk-fix-mt8189-v1-0-607dd37fde37@baylibre.com>
-prerequisite-patch-id: 7c53e753d42d5c9bc0c804e448f44a38da849133
-prerequisite-patch-id: 6ab8dac0c634a91d74a3cc470caa5310e0796e2c
-prerequisite-patch-id: aed7fb93e30e9eb9037a13777026d2bf134a582d
-prerequisite-patch-id: e5471470a7ca7c30b62189a59c2a79a7d45a7db8
-
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+-- 
+2.43.0
 
