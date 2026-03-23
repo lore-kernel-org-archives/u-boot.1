@@ -4,124 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C529F483C4
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 16:09:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3200DF483C6
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 16:17:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C140F8408D;
-	Mon, 23 Mar 2026 17:09:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id A36F484180;
+	Mon, 23 Mar 2026 17:17:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="IGPG99e1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VjT57VBT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D2568418A; Mon, 23 Mar 2026 17:09:45 +0100 (CET)
-Received: from SN4PR0501CU005.outbound.protection.outlook.com
- (mail-southcentralusazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DD3C0841C8; Mon, 23 Mar 2026 17:17:32 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69A7C8406D
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 17:09:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9676B8408D
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 17:17:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qiKRXkK0zqldyOyEhxEUjtDHc1I4qLKy8YJXF2hfNKMeGfVFKyo+kru5WXv5CW+p/QRS+mnOhZnTlbA3bpbjEkZ79qREsGHeQmG+S36j0txQIwDamePiIyrqtXTpmZ4ZVRf7VjVDQPnHKDCDecSnZ2fkbLa8UiD75ZP8lwtU1Pic9ureodJMCJInXb9T1SMXDirQSgGggfTa5iee8U7LZtOtVV6i9LtQygDAKpDQwG1i6ql33QEVR4Ic65E1Ktt2TFndH1F8bYozJIstx8daEtgYbSkC4ZQG5brpxbZ2YqGZGzcTk3EgJ8c2cyHVy/qPvWIfz86XNmXKVwgKiiSmJA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=56yTLPGRjOP/PAth6Uyx2U6gqnhUGd8kjxVwpy7Com0=;
- b=SsbdCFYZJ1T64WiyAe1kCFZ2fgDTedg5gVDbUJI9fJN+jA9HHhtdYr0dinnPDnjaET8q9W+iIvSqUjqiO2m6ChQUmOAzCA93U0P8ItW40BewpGhQ1izeT7h+hoUMO9gkiYUVvdqi9oYwRsZp8T7/1818onqqQrjC788nuou7YDfdsyN/osvj7E+p/PddxzwQVCmZx7vR2b9+Fh6ardVha5Rn7royqIkIYU9ZuSALwa5Orhaaa8Zb982O1XbRum3BXnq76mGhDRt30RVwyaIt8KFtgnjXg7nhVCObcgchVY0s0/PX9TvJIOxvVioM2BR3/NPrGOG2TihkCPx3IeaELQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=56yTLPGRjOP/PAth6Uyx2U6gqnhUGd8kjxVwpy7Com0=;
- b=IGPG99e112iyYXpMtZl3PKlHETZGlLs0n0xQnkAPh1HV8jirn2f/aiPjM/AQYq/IlooDcOL0CKy7V3t3rqyUt1En261hOVWa5T6goHPKtwIp5a4L/zLhX1Mr46Xa6vOfYSUVN35dfC5gn4qTzt0AxZU0FN3ru7KgvqmjjP2a9Xg=
-Received: from SJ0PR03CA0085.namprd03.prod.outlook.com (2603:10b6:a03:331::30)
- by LV3PR12MB9215.namprd12.prod.outlook.com (2603:10b6:408:1a0::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.20; Mon, 23 Mar
- 2026 16:09:32 +0000
-Received: from SJ1PEPF00002322.namprd03.prod.outlook.com
- (2603:10b6:a03:331:cafe::c1) by SJ0PR03CA0085.outlook.office365.com
- (2603:10b6:a03:331::30) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9723.25 via Frontend Transport; Mon,
- 23 Mar 2026 16:09:32 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SJ1PEPF00002322.mail.protection.outlook.com (10.167.242.84) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9723.19 via Frontend Transport; Mon, 23 Mar 2026 16:09:31 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Mon, 23 Mar
- 2026 11:09:26 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Mon, 23 Mar
- 2026 11:09:25 -0500
-Received: from localhost (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Mon, 23 Mar 2026 11:09:25 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: Andrew Goodbody <andrew.goodbody@linaro.org>, Jerome Forissier
- <jerome.forissier@arm.com>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>, Sai Varun Venkatapuram
- <saivarun.venkatapuram@amd.com>, Siddharth Vadapalli <s-vadapalli@ti.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] net: xilinx: Reject broadcast and multicast packets in AXI
- Ethernet MAC
-Date: Mon, 23 Mar 2026 17:09:15 +0100
-Message-ID: <07ad94eb8a3a9d80273a16a7ac8c7caaba607fe2.1774282153.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-b97e6e48b24so82698166b.2
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 09:17:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774282650; cv=none;
+ d=google.com; s=arc-20240605;
+ b=MyVChNuALzSr05qtvH2/FRiIfBjNSEWqGIj4Sks5EoiYC4EV5zODJYGbEo4ViWozuo
+ vltJf2l0T+LtyaswOM/yhBe2ESHvSw5iGNmMLVilk9DeGhMpXRtEl4VVEJ7L+blKW76I
+ 57vDi3eFmNmGJ/1QkDUbMW02qEDN/VqP7sEbSFx0L3I0fWM+oyZTK9YsX4gSMAzvMB8z
+ krRanFkrzS0TQTJ/Pq/hGc4LMryiQ04/1fbOGo+icINwfYU2+ei70YKAoFQfOUdINySa
+ Bo4IzVpApSPSl6MTcH8ENh5U2rllljpXrlpyW5cRVg89QeDSFlHKR4CJ0HLHFVczPuGQ
+ LRqQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=d4gv4RNExH/zywHJtNg8ggXvT2JPipQAb5DfnNuF7qQ=;
+ fh=5ToLsHOpvXw1vijzHr9QPV2BetlknSEbc3OXpxTlJcA=;
+ b=S7dggUprbuCdlbd83v1ajUMjwoCiObhczoUFdBfgXqbCStWnYh+Gjm1jKsWv6t8fGl
+ ZvS/y+capiyVmB4X+YBwyaApbGhH45LAc0cmekmNOIg5kNrNzfryDLPo6y93q9Ymmje7
+ yqpxsXNczwEfvqt6wzU4Z0FXYR3IuVY+MIEdj7ZC/YlOvC4Cj8ngDC1zD9DxDrrq80fS
+ kH8eJ0VXp4VKv9TTJ+Kn5o1+dIH9y4dc9VBvINSttuanGK4EaPP/Gm++6Gzr8xTvQODr
+ XtQoK1MwtHs6UuAheewhno5jT/a/JYNX032/bEkc774j15yPon+R7oj973Xt9S1ky9i2
+ FrCQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1774282650; x=1774887450; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=d4gv4RNExH/zywHJtNg8ggXvT2JPipQAb5DfnNuF7qQ=;
+ b=VjT57VBT/hhFoCQeyLv99YaZew1zf3l6jWxRwB1iPhTog+lg4mZuL+TJQLEqBOVone
+ LpsoPj/xMdXa8WWubmqbdM3b306fZoeVJ0DIvqIHkM1a03RcEpKVvlWi6bbaQEVs68RE
+ PGHc7awCHPuxWx5hRP2XGSbm8lSs5JbuIm/hI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774282650; x=1774887450;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=d4gv4RNExH/zywHJtNg8ggXvT2JPipQAb5DfnNuF7qQ=;
+ b=cPwIeTJBSiVGULusCMq7ObE21kse68xQXYAwirAylp902kMxg1C3d39wdaz1vreLY4
+ wNuXGkX+82SsRw9L1qp2L9Qb/O1Kl5+dYtHWefwXkUEUgmvruJsX2TUqgI52QS9dPZ/9
+ aXhRQDde6xjC7OVYmXar5D6xZ8UW5TcNqBNNWYbmiJGJvNzvqtzOQT5sifxsgd83a9x6
+ ePh47MLjlQoFGxcSj98CoLQC0uIUMnH1CH53vklvxBtugGWnL3SHJz9Ojq7FU+bLllfW
+ tyAt3cppkRj8N0eBA7R9N5RCz/SsLekMkMcJaKvvdRk+MQ2r4BLyjWKMMP13UAX7Fdvm
+ aTDA==
+X-Gm-Message-State: AOJu0Yya+u3hOykj5i57PqDeOoSIj36L1u/ZumOTv4B1ihpTvRUt0txg
+ k4bzkp2ycTY3YD9vk+ArgSaXwQw2HIjRbKVYaweoH+pD7fHF2P+3poTqg+xDZh+qjuO4B4uCm2V
+ bQk1xhYe3V5n9SdMBcxv+fUHgPJARLMLzQG6pOjac
+X-Gm-Gg: ATEYQzwOEhrpsQWt3ioVPj/516SyxIULHX1GcxFyusqBPHfHQHJ3FCoQ2GGvyzrpg18
+ bpy79KAw6MmWihxSp8Kp3uExq0IlCY4RVK/bfqago8SoyldydiKux7S8MtNGI6+4VsLVmIeFdGs
+ S+63tu7yUG4AN59iClMpiuWl+vLtFvEXmoYpTwMOkdDHiwTmmAHMpFUNPJovwLqSksNYb3ol5zP
+ eJEsUxFurnaMEgYMOqrXY859ZlUbKraHYp25sThRR8ah8/rYf+Ctjt+qJIpUDkdVTsf+7KgUVCj
+ 9C/xhBE=
+X-Received: by 2002:a17:907:e0d8:b0:b97:408f:eda0 with SMTP id
+ a640c23a62f3a-b982f254f2cmr529983366b.14.1774282649664; Mon, 23 Mar 2026
+ 09:17:29 -0700 (PDT)
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2724; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=GrNeL26KvwSPUUvPF2P2qTgB6H1/X4BkwUVm0teePls=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWQeTF37dp2nSU7BMzXNQ7LGeTxT79qZtC3fU+rS15f1/
- /KSaUesO0pZGMQ4GGTFFFmmM+k4rPl2banY8sh8mDmsTCBDGLg4BWAiVfmMDOtN+LY/lLF72tuf
- ++HJfJMcsXsGBYqZ1g2/Ncr1jxg9mM/IcMwh5dzfMqWMNMn2e5NlZDuXF6VNblx64eaM1XqXHwT
- dZQEA
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00002322:EE_|LV3PR12MB9215:EE_
-X-MS-Office365-Filtering-Correlation-Id: 735097da-f5bb-43c4-b659-08de88f691a8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700016|82310400026|1800799024|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: rOFI63pUcfpQ4e1w6ST1JFfa5oQLmsquNf5lrzSmBmy1mHHhXuaeizpn1SWya3OY1k1MnjYkC5qqoDsW88eVf4yAn7wq36IlvauEVuiJEpyBlki4W/pd1zAholwRq64GRVeUWOfeGzzXRxWbHT0grkfZ+KvI6604tLBicnFB2BqQJXzP9aWZhb2woXeTEjfnZUmjRLWNgUGx1Q53EaD1PhtMvoeVfylJQEao0KIiq5oC5ypCBwFXcujDbaWeTE/vxQbQEfsQvnc4wYsKKXOSQyUPa+GmlglpRVP4Qx7XDer+2d3gtpOIiuo5l2cY8B0Nm83KvaRpEyVduqsIJ8HNZc4U8NWXK1pSNrgT/6YOlnVIzdV1n01dZIxGsEz5ut09VZG9w6uFZ1btDP29alZ5MQMzJVfShITs1E3fjZFAfl1rE1zQ/7t9HoqeivyM7fyxJkHF/RHjzuYJycnZOspOEIa9W+2HWxOQqx3GO19N9VyRyorWy/QBa+Gsrv27YrZSuUiZ2vFTFSOkP7K/yBN10OJJpYy0pbVg8mX89P9vBldnmf93meGJcz6N5SX2tD7fzD5DxTTJb5m8EiAAMXqY1nzi9nYoe80xbVme1+NHIONEW7NiaipsgeH5PvdkYHTjuqA6c9J+0XtQBBIQJJpbMQfXa09VAf6WEjDanYVX+5qMFhClY3tpTqNqza1kG1WJqIUbyqX7I0e1K5XLwBlO8MCC7cuyUHdTY7NrRdgVt1J6VOUFNBdFSKhcPuUXWSM2smbp8mE88qCCKtiCk2x9CA==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700016)(82310400026)(1800799024)(56012099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: biChm3IPQGLJfCYnl/L6dtLk8UtpKfArBmbpCEN3MpJsYrQuHnKb7xIyGHK1cWfvs6NseT3tOlnl0Bp/K7n+Vk2kaFwiLeLsvRA5mYy8LHmJlMsT6Liz6yH3sZjNMz0mZKz/NVaHrxX/NDnZIjuIIhp7xTO9xcBHBjxWq02jx6mIFELP0PlxVj5juMk9TIupoO8dRpTd7z4rupHwcNT2uR0mS1TYrjr2e68AZabaKy6K6CNWmMQGnnB0obzXS5L0koBuaqXgBk+YDrKfprxM21WjZ9g4RVOdIklqyfccAFRBH8QEvghCsKNwh/OBj9VCFfkrVrE8R0tdo3OvCbN413e1wGPMRejQXwFH84lAMst+4vJFkPHdwwwRF+9IHO1Ulm+9FCoTAod+nphVXv5m7BJc4A3cRT9rQedlXB/BOjG7CtkkxA396eT6BMb0HNvA
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2026 16:09:31.9342 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 735097da-f5bb-43c4-b659-08de88f691a8
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00002322.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR12MB9215
+References: <20260321134626.516665-1-sjg@chromium.org>
+ <20260321134626.516665-2-sjg@chromium.org>
+ <87jyv2oon5.fsf@prevas.dk>
+In-Reply-To: <87jyv2oon5.fsf@prevas.dk>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 23 Mar 2026 10:17:17 -0600
+X-Gm-Features: AQROBzAatVqvpbyJzqry-Cv2Op9pqjdrGJ09fKRzPk-j8-elluBGCXTYL28kf2c
+Message-ID: <CAFLszTi_U4xS_6kW1VUqaKVUeP+sweOfQvAydXM5F0nQOGSZ+Q@mail.gmail.com>
+Subject: Re: [PATCH 1/2] linker_lists: Fix end-marker alignment to prevent
+ padding
+To: Rasmus Villemoes <ravi@prevas.dk>
+Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -138,72 +111,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set the XAE_RAF_BCSTREJ_MASK bit in the Reset and Address Filter (RAF)
-register during hardware initialization to make the MAC drop incoming
-frames with broadcast destination address. This avoids unnecessary
-broadcast traffic processing by the CPU.
+Hi Rasmus,
 
-Additionally, when IPv6 is not enabled (CONFIG_IPV6), also set the
-XAE_RAF_MCSTREJ_MASK bit to reject multicast frames. Multicast
-rejection is skipped when IPv6 is configured because IPv6 Neighbor
-Discovery and DHCPv6 rely on multicast.
+On Mon, 23 Mar 2026 at 03:56, Rasmus Villemoes <ravi@prevas.dk> wrote:
+>
+> On Sat, Mar 21 2026, Simon Glass <sjg@chromium.org> wrote:
+>
+> > From: Simon Glass <simon.glass@canonical.com>
+> >
+> > Change the alignment of end markers in ll_entry_end() and ll_end_decl()
+> > from __aligned(4) and __aligned(CONFIG_LINKER_LIST_ALIGN) respectively
+> > to __aligned(1).
+> >
+> > The linker places zero-size end markers at aligned boundaries based on
+> > what follows them. When the next list's start marker has a high alignment
+> > requirement (e.g., 32 bytes), padding gets inserted before the end
+> > marker. This causes the byte span (end - start) to not be an exact
+> > multiple of the struct size.
+> >
+> > The compiler optimises pointer subtraction (end - start) using
+> > magic-number multiplication for division. This optimisation only produces
+> > correct results when the byte span is an exact multiple of the struct
+> > size. With padding, the result is garbage (e.g., -858993444 instead of
+> > 15).
+> >
+> > By using __aligned(1), the end marker is placed immediately after the
+> > last entry with no padding, ensuring (end - start) equals exactly (n *
+> > sizeof) where n is the number of entries.
+>
+> So I'm wondering why that is guaranteed. I mean, the linker is placing
+> these sections one after another in order
+>
+>
+>   2_foo_2_last_foo   size sizeof(struct foo), alignment max(4, alignof(struct foo))
+>   2_foo_3            size 0, alignment 4 (1 with your patch)
+>   2_bar_1            size 0, alignment CONFIG_LINKER_LIST_ALIGN
+>   2_bar_2_first_bar  size sizeof(struct bar), alignment max(4, alignof(struct bar))
+>
+> So clearly the end of last_foo does have 4-byte alignment, yet it is
+> observed that the linker sometimes makes 2_foo_3's address coincide with
+> 2_bar_1's address?
+>
+> What I don't understand is that it seems that the linker could place the
+> zero-size object 2_foo_3 at any 4-byte aligned address between the end
+> of 2_foo_2_last_foo and 2_bar_1. And the same seems to be true when one
+> changes it to have even smaller alignment requirement.
+>
+> So why does an align(1) stop the linker from placing that 0-size section
+> at the same address as 2_bar_1, or even force it (as we need) to put it
+> at the first possible address, i.e. immediately after last_foo?
 
-Expose the RAF register (offset 0x0) in struct axi_regs which was
-previously hidden in a reserved array.
+My commit message was a bit confusing - alignment of symbol is not
+based on what follows an item, just on the item itself (despite
+appearances to the contrary).
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+My understanding of this is that the linker processes input sections
+sequentially within the SORT(_u_boot_list*) output section, placing
+each at the first address that satisfies its alignment. So the
+location counter advances forward only by the minimum needed. But this
+isn't specific to alignment 1.
 
- drivers/net/xilinx_axi_emac.c | 20 +++++++++++++++++++-
- 1 file changed, 19 insertions(+), 1 deletion(-)
+I've used __aligned(1) in order to make it clear we don't want any
+alignment. In all current cases, __aligned(4) would be OK too since
+the structs we use are always 4-byte-aligned. We just want the end
+marker to go at the current location-counter, i.e. immediately after
+the last entry. I suppose another way of saying this is that we want
+the end marker to be a 'multiple of the struct size' higher than the
+start marker.
 
-diff --git a/drivers/net/xilinx_axi_emac.c b/drivers/net/xilinx_axi_emac.c
-index e9cc5db52d25..1ea81fe1830a 100644
---- a/drivers/net/xilinx_axi_emac.c
-+++ b/drivers/net/xilinx_axi_emac.c
-@@ -28,6 +28,10 @@
- #define XAE_EMMC_LINKSPD_100	0x40000000 /* Link Speed mask for 100 Mbit */
- #define XAE_EMMC_LINKSPD_1000	0x80000000 /* Link Speed mask for 1000 Mbit */
- 
-+/* Reset and Address Filter (RAF) Register bit definitions */
-+#define XAE_RAF_MCSTREJ_MASK	0x00000002 /* Reject rx multicast dst addr */
-+#define XAE_RAF_BCSTREJ_MASK	0x00000004 /* Reject rx broadcast dst addr */
-+
- /* Interrupt Status/Enable/Mask Registers bit definitions */
- #define XAE_INT_RXRJECT_MASK	0x00000008 /* Rx frame rejected */
- #define XAE_INT_MGTRDY_MASK	0x00000080 /* MGT clock Lock */
-@@ -153,7 +157,8 @@ static struct axidma_bd tx_bd __attribute((aligned(DMAALIGN)));
- static struct axidma_bd rx_bd __attribute((aligned(DMAALIGN)));
- 
- struct axi_regs {
--	u32 reserved[3];
-+	u32 raf; /* 0x0: Reset and Address Filter */
-+	u32 reserved[2];
- 	u32 is; /* 0xC: Interrupt status */
- 	u32 reserved2;
- 	u32 ie; /* 0x14: Interrupt enable */
-@@ -528,6 +533,19 @@ static int axi_ethernet_init(struct axidma_priv *priv)
- 	/* Set default MDIO divisor */
- 	writel(XAE_MDIO_DIV_DFT | XAE_MDIO_MC_MDIOEN_MASK, &regs->mdio_mc);
- 
-+	/*
-+	 * Reject broadcast and multicast frames at MAC level to reduce
-+	 * unnecessary traffic processing. Multicast rejection is only
-+	 * enabled when IPv6 is not configured because IPv6 Neighbor
-+	 * Discovery and DHCPv6 rely on multicast.
-+	 */
-+	if (!IS_ENABLED(CONFIG_IPV6))
-+		writel(readl(&regs->raf) | XAE_RAF_MCSTREJ_MASK |
-+		       XAE_RAF_BCSTREJ_MASK, &regs->raf);
-+	else
-+		writel(readl(&regs->raf) | XAE_RAF_BCSTREJ_MASK,
-+		       &regs->raf);
-+
- 	debug("axiemac: InitHw done\n");
- 	return 0;
- }
--- 
-2.43.0
+With ll_end_decl() using __aligned(CONFIG_LINKER_LIST_ALIGN), the
+result depends on the struct size and the number of items in the list.
+On sandbox the value is 32. If the last entry ends at, say, 0x103c
+(4-byte aligned but not 32-byte aligned), the linker must advance to
+0x1040 to place the end marker. So then there is a 4-byte gap, i.e.
+(end - start) not a multiple of sizeof(struct), and the compiler's
+magic-number division optimisation fails.
 
-base-commit: 5d771fc684405b135f003ab3b226e8bc24fd2889
-branch: debian-sent3
+> Unless
+> alignment 1 is somehow special-cased to mean "place as early as
+> possible", I can't see how this should provide any better guarantees
+> than what we already have.
+
+Yes, we could use 4, see above. I think that would be confusing
+though. We cannot use CONFIG_LINKER_LIST_ALIGN as above.
+
+>
+> So I don't oppose the patch at all, but I'd really like to understand
+> how it actually works.
+
+BTW I spent quite a lot of time analysing what was actually going on
+and even wrote a Python script to check the build. There is a blog
+post about all of this too (search for "Linker Lists" and magic
+numbers).
+
+Regards,
+Simon
