@@ -4,96 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 599D9F46126
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 14:07:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D92E2F46126
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 14:09:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCBEA84154;
-	Mon, 23 Mar 2026 15:07:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 71A1784154;
+	Mon, 23 Mar 2026 15:09:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="O6EgTGjy";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="j073Be6K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05E7884154; Mon, 23 Mar 2026 15:07:53 +0100 (CET)
-Received: from mail-yx1-xb12a.google.com (mail-yx1-xb12a.google.com
- [IPv6:2607:f8b0:4864:20::b12a])
+ id E41168418A; Mon, 23 Mar 2026 15:09:14 +0100 (CET)
+Received: from mail-yx1-xb134.google.com (mail-yx1-xb134.google.com
+ [IPv6:2607:f8b0:4864:20::b134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7871684099
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 15:07:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 54B3984099
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 15:09:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-yx1-xb12a.google.com with SMTP id
- 956f58d0204a3-64937edbc9eso2601280d50.2
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 07:07:50 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774274869; cv=none;
+Received: by mail-yx1-xb134.google.com with SMTP id
+ 956f58d0204a3-64ad8435f46so3207330d50.1
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 07:09:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774274951; cv=none;
  d=google.com; s=arc-20240605;
- b=T2kckM5VbiEgLaGBjckKXtGHeECS3mkCStoUlMMptBj7thQo3W+qDpTADA7XFeog06
- aTXh7OxURrKVkZxv2EzW4Ga94G2PcGFXWmSml5fuf8ndOWWPa2C5PXs5r1szGkw3+Bhb
- jg3icW1UerffLkxi0WMGVq9d/Js88eGsDmBm+e9lwY5zrIv3zKYnGQdgdm3tTPjH5MRz
- QWuTcPzpMEJ/979o4TzVbnR+guZFoZBarpq7VGTncHx5OaELPjsgvIwchXsWTYDMO03R
- GX1dkpXfJKauWhuvF7BNZKIifI3XazppQGf5ngcqeyJymVx4+ZtecIWRstGoGkASrmUD
- 3q2A==
+ b=SBe5ep15zueDhTi1WursFmxwBXGo9j0eUS3ZR7Hc/moFzA9Berr66ww4DfSy68//2s
+ LVdLo1i6TUxMVOCX1VVCsX8/cwp32iRCj7sx1G++PHpBVRRTLOOEdenEnMhLkW0la5Cx
+ GpvTUTOAB2xFQ+ylZ5o+xhkPthERh6YZL+uhE8zqLxfHdU0UaaUI25AAWC4Q5CdodF9Y
+ 1leBur5T8Aaz8Yvt1cwnJRrQzs5gFjCSuJ0H5N0jEoZxHRnfcx7r0FXx7HTjmczuPpx/
+ 8rAz7l+rni9Ej2pvAsWLix2mCA6kgQSjnKG2F83c4ZmpMdkA8S7CsuYNYfupPiijOn+m
+ s8qw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=BSPcbjWelXgCmNhJxM91ioDOInOXx9uA0EUpTUweQuI=;
+ bh=k3D0cyWekRLkIA4HyAue3rst22fcNNPMUjyZmFPMPWs=;
  fh=/KN9hdoQy9CA3T5HcjvmoQFbaoBuKwo+oDcI5oS1IgI=;
- b=ilLCnX91L1XtQXgytzA/gW8RY0nD2rCyADrukQxsUtr94K/UzZNc3AnRWODjeJe4Pc
- 0IbfCqSRiFcAFTqfaKg5DpFlB0C9PKMmLmMZh+c0TRNknWzbXINkS/cQ4uLNkGM+vJD3
- qbBHJaW4jV21jjzmfguuEG0JxTKS5/1m9wQUHpm7UQJLGTzCI2AgeRBYJBcbp0w5I7ha
- ZixGyoy7nFMzTQoAhIOm7JpSx8tIYrOTL2VBelfiODaqmtNKOL9vLO4XdM3ou4l3d2OE
- H5h5J4asP1ezSl3PONZdM7orl4bRa6Zxpctery0v6XeKX8gjLSRPoe/CdqoLR5+9hxP3
- ua1w==; darn=lists.denx.de
+ b=X8S5kq8CM4CJvBoD1aj2YOvTw7fFV6DmkwSjxqRbXm201+JPWnp/IC30Ny506Z9cAm
+ FD9dan3YL35e2maYR0nkNfYq6cLJtfrclDjxrv/Gp/Tc6POHxCcw2Q1DKjhQRaZR/PrH
+ A+X8Jo7011kLl0e2xjJxi6or6e7cTjCLB4rap763ysL3HRCoJk6xpUrzHQsUr4DijzHU
+ FvTlU6f+4FE0NAjf50v2GXDlp8gh90XdW0jSGUP6idETxml0k94G/G1t/bCOCz1CruPE
+ 5JH0p4bRBX3Ia+0GoYRyJy9lizfQAU5j4TAzflq8yhn/1To0SHMDY58s3zFigZXFJ13y
+ rK1Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1774274869; x=1774879669;
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1774274951; x=1774879751;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BSPcbjWelXgCmNhJxM91ioDOInOXx9uA0EUpTUweQuI=;
- b=O6EgTGjyAESgwuDdQtCctpCPMefiZlRY8ZULvU8ePKOm76M5yZua2gz2HXmiAGC/aO
- +DtkJKXLYA1FbDLJm+ceIebr6NFFfdZuVSs2UazYRD3gFilUzwnofDFQRcTYxzev0tZj
- OF/Ye5+4ukGYTTlfB3i2Tl4WA9LPQxKS4HlW+FbXXcmwyc2+WMz7knzosWLiay/fGW6Z
- b2W5jl+MW3w/SADNamqkX4sJj9m2jwrMNHqOlcHpeigF0O7OLsfxq3hYAmZ9bol18b2d
- n29iaB070XiX5EJXdJwzmgLDc7BEKtX1mvJOJ/APH26hqqqyczdTbBx+vE4+xTleBucO
- VRWw==
+ bh=k3D0cyWekRLkIA4HyAue3rst22fcNNPMUjyZmFPMPWs=;
+ b=j073Be6K4aPrisdvx4TIx3nQ8T4aCQPT/7L944PAfwAXx94PP9N6MjoYR3JQgQPL54
+ TDOzrM1B5OwvSIKw4SjqBQ7Xt4yT/bKEYqUvP0EKCAP1B8VJx0io2troKun56sVjaixO
+ dsqzaZdeFAqHRDm/xnXTuWWUpJL1NIVhcNvdBU5LdAg6O+a8yda9/pWlkGc5Uk+8zyWO
+ jMJiihIouSMK8jcvRsC2OE8Y8cr8aX7Gyb496Tp5OkPm1RgLuL/objQc4K05H+7hFunx
+ mMHZ+Bsz/RlbaRfWBoQveSroTg6nq03ffgQbqv4DNFpmglrFRWiibF/6rxhmSwhPM2C6
+ pgKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774274869; x=1774879669;
+ d=1e100.net; s=20251104; t=1774274951; x=1774879751;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=BSPcbjWelXgCmNhJxM91ioDOInOXx9uA0EUpTUweQuI=;
- b=HA5wTwjon3p9LYY/APaBZf5zY0cb95n76XrrkIleX+i6+Bski2VTshn1gl+ILVnwBy
- b3McHGx9eXb414HcVlEE3Q6B012th5HBjLLjo0Y7z2lC6hs/a/rcuAENLr8e7n4Onjz/
- XJF6eT4nvuFBuQVh6ihF9s2mlgc+4EsoGcHqpJtYogmWoaTqXoHl4dBW6L+qgS5YTn5y
- sZO1GWBBB5j4v2GAdgKsx6iYq1NgbhVYdhhYlbcXBuo0nSXrZqhpmLrhLbkmFuYdXI/r
- m7zCgz6EVRe9fEk9nty50w8YbPMXBkdf3ZZ1iskDxlwSKTlBQI9sggro5nPyBWD1iPHV
- lfDw==
-X-Gm-Message-State: AOJu0Yxily6/3lFzjFnsn4fWos6hAPko+IX9cb62NrD1x5LAw5fPz3xR
- VyaRqZKUsTzLhe/yQlucnc+ZuWQFGdlhs+gNFbXztRIzHip+WRCZ6Fv8QJmHHycnHnS+XbBL78M
- 8jIiTEX9xgSThCr3O5ZvdtVSu0Oh3qpMKEzD3H/VezSyJHqkhYgFTHg==
-X-Gm-Gg: ATEYQzyqL5EqRk8mkrgzj9OwSSVfHUnl3debhUrOTi5sID1KjeZiwlvU9KWti/M4Bv9
- FAsU359SLObsoBWGj615kifYKakZd0jhZeRzhBXciFlxumOHTma0Yw37B08Av/i6QlB6Ij2KqiV
- /csX1mEt7ILkh9WMKw935Fzn5ADO/3s4uJfQHU0g1zJu4CnZtHp+Cy44uwKmUvjuaucUMjH1LOY
- ghOQI2CJlNbmMSP8pv4vZyT2mHlEBjW6ZZ0O1dYxKnAHH9rchktXzijZUz6aMSs6CGa5aSCway5
- GIzepAmvNJmunt7lwtI=
-X-Received: by 2002:a53:ee5e:0:b0:64a:f1ac:7bc with SMTP id
- 956f58d0204a3-64eaa8b764bmr9371356d50.79.1774274869030; Mon, 23 Mar 2026
- 07:07:49 -0700 (PDT)
+ bh=k3D0cyWekRLkIA4HyAue3rst22fcNNPMUjyZmFPMPWs=;
+ b=hIZ2UGT+u0n7fwDMMB1b31FWBZlS8AapjTw4qcok9KnEr2oHRTfZCa1ltSLZ+saUP6
+ o+rnX4b3lq64Oj+kr2daQaajhjdBamzPXxJhdtfTvesvBVuVjj5hl6DehYVVqCKC9BgG
+ TYD+KaZmjD4sAptkgDYMbG7MGwHCqNjH/xquXTTjUrdzTBnWQEVKjpEM0KBy0R8wGj72
+ zP30xHsGrvxA/E7YJTipaqVVzT3by5XpaZ/jY9/YvrqK5zX9GnUqO525roQ4E9JFfcuV
+ EL/XPsgY2OEJQPaikaE9UDtX8k6mLTSM76g2h57CtKzg4QIUHLxVNCyFj5ZBwxkrO52j
+ h5iw==
+X-Gm-Message-State: AOJu0YySjMIKMc7g4p4fbXksShs2mUGmI7dE5sEg7qwuuD0bmZAGLoF7
+ 9CSeiRd5Ci2sVIYPWRdm5rAxgwJEYgZdVisnOeqRIObdl9hwjg21Sauxz2zrO3HXpOcUNOyw6Ba
+ L3jNBXW7UVmElf69pYXEdN/4fgE2/cDwVPaVIbD44
+X-Gm-Gg: ATEYQzwakcMrCtiaS/25pLHUQuAvpAvApruINer3R0G68rOU/t/PG/u4DOvtUT7EHiU
+ 9sDzlxaCokF+pE6A0xhuzp/l8dbXW3bjFkvcOllCU+/Xvr4YO0R1v+cEBJ2i+4JP2M3SnjOhaQN
+ uqV/8IZiRdRqoD9/UIk7v/nAGpQE7JQ7xYWRSSivotuS5P2/wtbIrule+mtkbP+YTYx6oH2AHnN
+ 1wjMheSe+6TTRoBzdrTrbFLm20NSFNpL0mmq52tG5eW1/EMaYr1gglbOhHAuGb2ens64hC/jnmc
+ +hfe3BJ4
+X-Received: by 2002:a53:d909:0:b0:64e:a8d7:46d0 with SMTP id
+ 956f58d0204a3-64eaa8455dbmr9642043d50.63.1774274951043; Mon, 23 Mar 2026
+ 07:09:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251028000426.90860-1-vlim@gigadevice.com>
- <20251028000426.90860-2-vlim@gigadevice.com>
-In-Reply-To: <20251028000426.90860-2-vlim@gigadevice.com>
+References: <20251030175856.115246-1-vlim@gigadevice.com>
+ <20251030175856.115246-2-vlim@gigadevice.com>
+In-Reply-To: <20251030175856.115246-2-vlim@gigadevice.com>
 From: Michal Simek <monstr@monstr.eu>
-Date: Mon, 23 Mar 2026 15:07:38 +0100
-X-Gm-Features: AQROBzAR5UVx4RZhiwjTcmWzTcAyMY-mFlP2yBAKfS1tUa8BZvHdbGpQ-PxLNfI
-Message-ID: <CAHTX3dLyOw8Zbz47OWk+MYBZca1HCNiH7UvVoYN6-K0qi856Yw@mail.gmail.com>
-Subject: Re: [PATCH V1 1/1] mtd/spi: add new part numbers
+Date: Mon, 23 Mar 2026 15:08:59 +0100
+X-Gm-Features: AQROBzAOMn4Eief6pSQV5VFdepuaBVNIK42UiMAOqcuyQi5m__qV2-2ALXISVww
+Message-ID: <CAHTX3dKqpPFKty3ih07L4txmxvk9eWvpL6NFvXDVv82fJmHrFA@mail.gmail.com>
+Subject: Re: [PATCH V1 1/1] MTD/SPI: Add new part numbers and modify one part
+ number
 To: Victor <vlim@gigadevice.com>
 Cc: u-boot@lists.denx.de, git@amd.com, jagan@amarulasolutions.com, 
  vigneshr@ti.com, tudor.ambarus@linaro.org, trini@konsulko.com, 
@@ -117,82 +118,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=C3=BAt 28. 10. 2025 v 1:05 odes=C3=ADlatel Victor <vlim@gigadevice.com> na=
-psal:
+Hi,
+
+=C4=8Dt 30. 10. 2025 v 18:59 odes=C3=ADlatel Victor <vlim@gigadevice.com> n=
+apsal:
 >
-> GD25B512: ID C8401A, 3V 512Mbit
-> https://download.gigadevice.com/Datasheet/DS-00649-GD25B512ME-Rev1.6.pdf
+> gd25lq256d: add SPI_NOR_4B_OPCODES to definition
 >
-> GD55B01G: ID C8401B, 3V 1Gbit
-> https://download.gigadevice.com/Datasheet/DS-00979-GD55B01GF-Rev1.1.pdf
+> gd25lb512: 1.8V 512Mbit
+> https://download.gigadevice.com/Datasheet/DS-01014-GD25LB512MF-Rev1.1.pdf
 >
-> GD55B02G: ID C8401C, 3V 2Gbit
-> https://download.gigadevice.com/Datasheet/DS-00980-GD55B02GF-Rev1.2.pdf
+> gd55lb01g: 1.8V 1Gbit
+> https://download.gigadevice.com/Datasheet/DS-01013-GD55LB01GF-Rev1.1.pdf
 >
-> GD55F01G: ID C8431B, 3V 1Gbit high performance
-> I can send the datasheet via email
+> gd55lb02g: 1.8V 2Gbit
+> https://download.gigadevice.com/Datasheet/DS-01015-GD55LB02GF-Rev1.2.pdf
 >
-> GD55F02G: ID C8431C, 3V 2Gbit high performance
-> I can send the datasheet via email.
+> gd55lf01g: 1.8V 1Gbit high performance
+> Can send datasheet over email.
 >
-> These parts are tested on Digilent Atry Z7 board and Xilinx Vitis.
+> gd55lf02g: 1.8V 2Gbit high performance
+> Can send datasheet over email.
+>
+> These parts have been tested on Xilinx ZC702 board.
 >
 > Signed-off-by: Victor <vlim@gigadevice.com>
 
-Same comment as before. Full name and fix subject.
+The same comment here. Full name and look below how commit looks like.
+
+commit c5d82cab7722379c57e3383b5aaed83e5071adba
+Author:     Jeffrey Yu <jeyu@issi.com>
+AuthorDate: Tue Aug 26 23:30:03 2025 +0000
+Commit:     Tom Rini <trini@konsulko.com>
+CommitDate: Fri Feb 20 10:39:19 2026 -0600
+
+    spi: add support for ISSI IS25WP02GG flash
+
+    This patch adds support for the ISSI IS25WP02GG QSPI NOR flash device.
+    Tested on the Versal VMK180
+    board in dual-parallel QSPI configuration.
+
+    Signed-off-by: jeffrey yu <jeyu@issi.com>
+
+commit 311f9237613d71ac1807db59c16c2250076e9957
+Author:     Christoph Reiter <christoph.reiter@evk.biz>
+AuthorDate: Mon Aug 25 05:53:58 2025 +0000
+Commit:     Tom Rini <trini@konsulko.com>
+CommitDate: Fri Feb 20 10:39:19 2026 -0600
+
+    mtd: spi-nor-ids: Add Fujitsu MB85RS256TY FRAM
+
+    This part is an FRAM, but can be used through the spi-nor generic code.
+
+    Signed-off-by: christoph.reiter@evk.biz
 
 M
-
-> ---
->  drivers/mtd/spi/spi-nor-ids.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
->
-> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.=
-c
-> index 666203c8485..5c6fc8a5155 100644
-> --- a/drivers/mtd/spi/spi-nor-ids.c
-> +++ b/drivers/mtd/spi/spi-nor-ids.c
-> @@ -123,6 +123,10 @@ const struct flash_info spi_nor_ids[] =3D {
->         SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NO=
-R_4B_OPCODES)  },
->         {INFO("gd25b512", 0xc8401A, 0, 64 * 1024, 1024, SECT_4K |       S=
-PI_NOR_HAS_TB |
->         SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NO=
-R_4B_OPCODES)},
-> +       {INFO("gd55b01g", 0xc8401B, 0, 64 * 1024, 2048, SECT_4K |       S=
-PI_NOR_HAS_TB |
-> +       SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NO=
-R_4B_OPCODES)},
-> +       {INFO("gd55b02g", 0xc8401C, 0, 64 * 1024, 4096, SECT_4K |       S=
-PI_NOR_HAS_TB |
-> +       SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NO=
-R_4B_OPCODES)},
->         {INFO("gd25b512", 0xc8471A, 0, 64 * 1024, 1024, SECT_4K |
->         SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
->         {INFO("gd55b01g", 0xc8471B, 0, 64 * 1024, 2048, SECT_4K |
-> @@ -137,6 +141,10 @@ const struct flash_info spi_nor_ids[] =3D {
->         SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NO=
-R_4B_OPCODES)},
->         {INFO("gd55f512", 0xc8431A, 0, 64 * 1024, 1024, SECT_4K |
->         SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NO=
-R_4B_OPCODES)},
-> +       {INFO("gd55f01g", 0xc8431B, 0, 64 * 1024, 2048, SECT_4K |
-> +       SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NO=
-R_4B_OPCODES)},
-> +       {INFO("gd55f02g", 0xc8431C, 0, 64 * 1024, 4096, SECT_4K |
-> +       SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NO=
-R_4B_OPCODES)},
->         {INFO("gd25t512", 0xc8461A, 0, 64 * 1024, 1024, SECT_4K |
->         SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
->         {INFO("gd55t01g", 0xc8461B, 0, 64 * 1024, 2048, SECT_4K |
-> --
-> 2.34.1
->
-
-
---=20
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal SoCs
