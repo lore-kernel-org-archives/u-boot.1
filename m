@@ -4,99 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09138D58CBF
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 22:55:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27356D58CBF
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 22:56:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25302838BB;
-	Mon, 23 Mar 2026 23:55:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8798A83FBC;
+	Mon, 23 Mar 2026 23:56:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=garyguo.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IJbDT9A9";
+	dkim=pass (1024-bit key; unprotected) header.d=garyguo.net header.i=@garyguo.net header.b="c2T/aLJo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E97D983A91; Mon, 23 Mar 2026 23:55:48 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 07DF1841FA; Mon, 23 Mar 2026 18:12:05 +0100 (CET)
+Received: from CWXP265CU008.outbound.protection.outlook.com
+ (mail-ukwestazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c206::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F29C3807C0
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 23:55:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C36C184180;
+ Mon, 23 Mar 2026 18:12:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7d9bba96f7dso799831a34.1
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 15:55:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774306545; x=1774911345; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=1hTCRLHoymAPBArsW36X5D4k8l8yBhAMZQ27e3e32Zs=;
- b=IJbDT9A9OFvw65Zyat9yMWJ9qxrTnbX6g4KVbVE19VGJWpmagJvH4ByfIDwhVI6xMB
- eXwp3Xg1fpml1X5Xa6sdsb2XYD/kW9u1WNIy3f3KTjh1sYPFY3mBtRSpGaXtYAVIV5lX
- pw3S375eAdxbTJP+taU6VrkihnWiIDjBGgQWA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774306545; x=1774911345;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1hTCRLHoymAPBArsW36X5D4k8l8yBhAMZQ27e3e32Zs=;
- b=T5/jMwQ6LKO25tEq3NVjXo4yRPyyAqVBraJX5Jnd3SUAyS8Q2EGtBMxs2lyB+JfK8G
- ydPuDxROxv9tFRwuKwnz1aZnKhzjudPqN6/0DfMeCwwLuohB//hoPFAqGLVQfkN3dMJp
- 1ta1vbhhNDsbDZMPFAFwS9ukKF+4226G35O7QXPIHF8ccW65ndHQZH2pezCI1YIp1Wy/
- Nh4MHW0Dt0JN131dFb2gQSHCQx+27iV68Z6rV5m2KW2f4jJu4MGtMLtJsB41RLPUxprI
- IC82yJkG01rFmExhUHCNsDo8Hfwg/sURRXeBwtdNWOgojQMunaknXq97kL9R6Qc1NDWZ
- trrA==
-X-Gm-Message-State: AOJu0Ywd/bQhK7wMfvJc5NaZ+XELDWWFsOcYAVievXEUIan6fxPGZMST
- xF1f3Fro0T3RIPwqkAzaztbnPWrf772CR+xepQiXklJWE46MQOEOcOz7343OqWIN6+cbdWRTJ5g
- GqvcbASo=
-X-Gm-Gg: ATEYQzwzIeKuLiHJ8q9Dc4VDFCiXfhRoQpVf4qRj4ilddO1k9YOEGqgbZD3XH/+P5dm
- 0aZf9uIHsSImk/x/g0/kNQ2DLcc2SRPaTIqC3wj2gKV2DHFtQyVeGU0phAuuq+YZsoC3F/3LH/7
- RxxM89BWs1Q7O+HdtdkVAeioMhP4H1hnuO0JwejQJ7CwWvS/oVnHUmn3bdRW5I/XZp56MCmCdIT
- tqcU9KjqTRm7gt1dJXTtgS+vZN5EWIOKDuUEiB3iiD/JtVNkXtwYghgTAMYweV/tzB70PLjlwfo
- K1XrmcoKrzEGjV53DYrIG4nqGnAx+Myi8f51zTDiIpyAAKeqYmuv5tkD1OrTDPOn4XKPAXMXLx9
- NJ+aUk5EslHsm4lEytSxGZlueIZlc656OYDwdDgC+bW5B2xQ+gOYwtRxwQMUmn4FmI7L9e53Y2N
- GzkN0yxlRBW5sQ9iEJ6IHqvOXmDoTVWpQbbaXVwnjhV9GGn97bymutyhVOlq4Mu0ReBi7g7g6SB
- PZ4NWqRP0Q+T+SDbfMT9HI/2GBrr7L6EPLB05Ps8OS+tGK8lIY=
-X-Received: by 2002:a05:6830:8283:b0:7d7:d1f1:1031 with SMTP id
- 46e09a7af769-7d7eb028de9mr10150549a34.20.1774306544548; 
- Mon, 23 Mar 2026 15:55:44 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7eadce96dsm10640999a34.18.2026.03.23.15.55.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Mar 2026 15:55:44 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Heiko Schocher <hs@nabladev.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- =?UTF-8?q?=C5=81ukasz=20Majewski?= <lukma@nabladev.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Matthias Brugger <mbrugger@suse.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, u-boot-amlogic@groups.io,
- uboot-stm32@st-md-mailman.stormreply.com, u-boot-qcom@groups.io,
- linux@analog.com
-Subject: [PATCH] global: Correct duplicate U_BOOT_DRIVER entry names
-Date: Mon, 23 Mar 2026 16:55:37 -0600
-Message-ID: <20260323225537.896180-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
+ dmarc=pass (p=none dis=none) header.from=garyguo.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=gary@garyguo.net
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=rVNG9XD3CfW84kyPgidmRt9c23O2SSFYK0i3vXct5KlVZLlZGjYLgG2VY2NsF38L070CvzxPp0E6S+d6UsWVZLl1+3bmOVNpXrPA7nJUKfDZXbGHKWWDxHkaZv6MwCNgRNDWxyklN+5kVcFTB2wyxZ4c4PYGVBXj2XYelAfndcdsuefOPhQ0eCRZocs2iotc08J6n9ZmPgL8iFdvduif/BI3YjAsEEkkdJzhq2ULsMykgLSLfcz2JHNXJv6dEIo0GC9TtUeLjiUx6xN9ie+DpAUOOLLUe1jqI9C/Ptg+fXKmcFuQiX1hGXA6UyZgPO0k2cM8O1cIflsf5jArkg2gVQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ruahVboODDmPVRaj0qHQCZ5PxKMOF4AyDlH5umWsiOY=;
+ b=CPt79gm4gBxGvBBMxYgjBouXBkOmuKycx54UxErN/cdVzF8fh62VIy85wECm8ACpyendDVniMTr09AkZ0W/z7c1Ft2HAzmI1Z9ZidwTazcPoqfNQ5HRALei0YfoPQ8gFIpi///i4x1fk8uV1uOrO8khb0QT29dYtBEkgf1KOMUPuybVtjls4RQ1ojYGUS5cXzctDqrgiqPhUNwvuOIipSe4/dPTtTlEy+V9Z1tZ8gDNE7W3w7Yoa2SG1KPeAwxbLLT4oSELpPzxCck5Aue10w0SgnFnP1VKNwMdeC8iJTuP4vmt6E9rJVzh+gIpYqgPTcIBQ9o3H54nSfSQXX5gVDQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=garyguo.net; dmarc=pass action=none header.from=garyguo.net;
+ dkim=pass header.d=garyguo.net; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=garyguo.net;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ruahVboODDmPVRaj0qHQCZ5PxKMOF4AyDlH5umWsiOY=;
+ b=c2T/aLJoLaT305xoziHOhRZkepDNlRKaS4v/V0HlLLS28aH/98vjC7WS72CosrWvqJPXrmVWs9yqd7KLbnOtAsBb3inwNXlpjY2sWzvw7kXzR5DOcz97qr42sbjsbGgqDK9zNUZdeViSnzIUhglBW+4HseSJGwNNGDLaVZecWSs=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=garyguo.net;
+Received: from LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM (2603:10a6:600:488::16)
+ by CWXP265MB2583.GBRP265.PROD.OUTLOOK.COM (2603:10a6:400:aa::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.31; Mon, 23 Mar
+ 2026 17:11:58 +0000
+Received: from LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM
+ ([fe80::1c3:ceba:21b4:9986]) by LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM
+ ([fe80::1c3:ceba:21b4:9986%5]) with mapi id 15.20.9723.030; Mon, 23 Mar 2026
+ 17:11:58 +0000
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Date: Mon, 23 Mar 2026 17:11:57 +0000
+Message-Id: <DHABV5ZOLJOQ.1H3Q6TEFCTBET@garyguo.net>
+Cc: <gary@garyguo.net>, <trini@konsulko.com>, <u-boot@lists.denx.de>,
+ <mbrugger@suse.com>, <pbrobinson@gmail.com>,
+ <yuya.hamamachi.sx@renesas.com>, <andrew.goodbody@linaro.org>,
+ <casey.connolly@linaro.org>, <xypron.glpk@gmx.de>,
+ <holger.brunck@hitachienergy.com>, <ilias.apalodimas@linaro.org>,
+ <jonas@kwiboo.se>, <kettenis@openbsd.org>, <semen.protsenko@linaro.org>,
+ <sughosh.ganu@arm.com>, <u-boot-bounces@lists.denx.de>
+Subject: Re: [PATCH] lmb: Reinstate access to memory above ram_top
+From: "Gary Guo" <gary@garyguo.net>
+To: "Mark Kettenis" <mark.kettenis@xs4all.nl>, "Marek Vasut"
+ <marek.vasut@mailbox.org>
+X-Mailer: aerc 0.21.0
+References: <20260127234856.1503030-1-marek.vasut+renesas@mailbox.org>
+ <177343529761.1131472.9417054395876652663.b4-ty@konsulko.com>
+ <DH9MF45X89KK.1CV4WUVTCTUO5@garyguo.net>
+ <1e74f277-dedf-4fa1-810d-63f3d517a8a0@mailbox.org>
+ <DH9N233GTVKM.2XIG8EETTUQAY@garyguo.net>
+ <9bc9a2d3-c1e8-43d5-b03a-c56850c715f3@mailbox.org>
+ <87mrzzbg5k.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <87mrzzbg5k.fsf@bloch.sibelius.xs4all.nl>
+X-ClientProxiedBy: LO4P123CA0184.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:1a4::9) To LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:488::16)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LOVP265MB8871:EE_|CWXP265MB2583:EE_
+X-MS-Office365-Filtering-Correlation-Id: 836cc13a-946b-4885-944e-08de88ff4a67
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|7416014|10070799003|366016|22082099003|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: dbTIb3WWNVz4xTV3TWdv2/RJvhofjExNt+j45CdIEp2RxI1VRGlGO+V/N7bVy+CDP47glFQvFoIiYPXTv4V3BeFt2K4HyJcq2fvqHNB96lyhvAdVKbonLuOi5rH5jN8ZjU3oQxnjkLntKSfLLPQHBSk9Ha1m0aWX34fe+VB0TfI0ENTpgoh7kICH1pK+k9lKg2nbeACylDZQYw8RmcxTidwRtlNHTkdoT83Ovi3G+Gf1stfNC9A1d3lYlkVHNcA38ec9jOHFWUEgwZLrivPEWG+40B4x8erQpTlaKVNabG7/ReMBebqt4HwQ0IE7qDZRxG8uBh/3cJulhn6xABCtYZVlP/kr1EGlrDAwykMe4x1/0v3y2oGm74VsgLkdaYfQUn9/CHD7c1Mibr8eNDd3MU8tisySK/GEBrgzsImOD9ZiOmLamkjGVt0xfhk/QQz7cU+dmM07ko4RMDnoRFX33t42vLz78Kkrr/jkc3yvuR4sbGvew3AGkORf9zki0p8Ad8EMBwTuVr9ExQONwThcOJVzqg6UHzhxiDnGAprw9ciDp+3mRNSFbir+mbOiElxZnfR9oEI2y77UvAY7ahFlE1MAUjVTCTeuJUOqPK/rB2ST462K6UQLefz5lh//57xxQh90t+8bXTT9mom3A1suc4lN9e35XhfW2aXXzABjPfGKCaItDBh2a2OmtWfnwZMqZD3xx+frYZPK9ZnRmIOwiSMTG6romgZcQlqZ3/lNt3A=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(7416014)(10070799003)(366016)(22082099003)(56012099003)(18002099003);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bkxuVHpZOTJDQ2ZrTjBhOGZEcnhzWThNdU5yRnhrY0RRcVhHSHNwbmFzY1Y4?=
+ =?utf-8?B?ekExMFYrWThhQXBUb1ZqbmwzWUo3QVBGZ21aWXhVVlZ4M0RBVk02Vk9WUDdq?=
+ =?utf-8?B?Y2Q1ZzZxOUVxakxBcm55OU9MWHU2aXhDTVhGeEx5WVRYK201NC96VTJER0N0?=
+ =?utf-8?B?eWZ0RS9MejJXSmVEYnVLN0dyYkl0WWN0N2hmSmtxaGkrVkw3SXN6VkRBVWR2?=
+ =?utf-8?B?RUJkYnhaT3BoY01UbzNLQnlwM0tTUHJKSXZMeG5wMldNdjlOb2dXNlR1VG5x?=
+ =?utf-8?B?RkI3T1ZmeHdMS0VTK3dxT0RZT2tkU3RKeHBjMzZ6YnRrRWY4REJVK2hNQm9v?=
+ =?utf-8?B?NEgvc3RCeWZMck9lTWxBL0F6ejlUYnBXd0o0c1V2bDUrY283YVRxWXpQVTA5?=
+ =?utf-8?B?R0kxZmVBZFNnc1VQNEVLZGl5VDAwbWt2cTZWcW1BODltcFdLOWI2QlUvZ3Vj?=
+ =?utf-8?B?WUExR2tCRUNkamhuODlhVEN5YUdBeHdrNlVkQ3BJTEVRZmFtZzlxSXZNU0dm?=
+ =?utf-8?B?VkJoYnIrV2FIZFRScDZwQk94QzFsYkFYYWErZEFsT2hrL1JMbU02Ry9IRmFS?=
+ =?utf-8?B?WUJOb1lEK2c0SzhaU0N6bWpTdUpzeXN0MklLbzBTQWI4RW1yM3dWQi9YdXVB?=
+ =?utf-8?B?ZitHalh1UnM4L0xQRUpYWGNpbzIrYjFXWVd5cW1lQVRvOWVyQUl3cDBLUFlJ?=
+ =?utf-8?B?ejVsQTRHQ1Bvenp6WHpMZXdaVC9CMlVZT0hDT0FkYllQREdBZklRb0hYQWpD?=
+ =?utf-8?B?anNjUXFSRFhwUldUM3h0RE5BNCs2VzRYdER6TVAvcFVicWl2TjFjNEdXRUEv?=
+ =?utf-8?B?K2hQbnFJSHBnTzhIZjM4dXcvUElqdUNBODRLaHRnQkpham9iMHE3Z1NoSTJt?=
+ =?utf-8?B?VDM4OGV1VlpTc3B0UFJiM0ZVVko3R2IyQlNxSjJZa2ZMOHJ2c3VSR2ZKSFZV?=
+ =?utf-8?B?d3Q4ZkhLLzBhRUFrK0lvQWxyOUM4RjkzejloNTVSQjNKQXVVc3dDVHVHa1d5?=
+ =?utf-8?B?Z3JJeHpNczBkTENDQ2hXcDJGZmx0TTFSdC9qWmpCanpFY1F1ZEJkTzRoSGNW?=
+ =?utf-8?B?aHozcEVnakpVcnJZdGVpcjZRMitNVENHR1VzS2ZGdmNzOGQ4NTBrK3dvSk1k?=
+ =?utf-8?B?cGpITHczN1g2Z3FmRTkxQjhYVkp3Mkd1TDBpSzhVNmhjelRCVkF4Ynh3dWVV?=
+ =?utf-8?B?NEhEOEFsbjU5SEZSSHVFV2o4RTlKaEdKcnhPeGgrdlQrNVNiZDBrZ0VrZStK?=
+ =?utf-8?B?elVKUjA3QmpseXZuSE5wcjRuZEkzV2FKRTJ1bGJvd3EzbkRxRWt1SEJUMlpK?=
+ =?utf-8?B?M3Mwc3ZvTkMzdTNLT1VRTFdpRm1OTWduRnlRaGhjak10NEpQWXBiWmVpYmRr?=
+ =?utf-8?B?SWFuRXlWSktuMi81aUNZRVhMRGl0eVViTmcxVEFDZy9jUHBBL1ZQdjdxd1I0?=
+ =?utf-8?B?Q1VQY0x3Wng5ek5UQzViTnNVQUExV0NqWGdHUVRzQnJjMnJWeTJCQ0s5ZnJr?=
+ =?utf-8?B?UW1nNnFFSHRaTWNvN1RncGN0OGZJL09jMjMzTzlBQUlQQXZGL3F1VldMa1pp?=
+ =?utf-8?B?SXNlV1ZWa2RTcFZwTldnbTlkbkNWemw1S1J3TnY3elVhTnhQQ3dJUnFDTEE5?=
+ =?utf-8?B?WjJIQ2ZzalVWTzZJY2VnTHZYZDB2QzdKVWVESFdWVjgzL1JWUGNreTdnakxk?=
+ =?utf-8?B?c2FWU1JobmtUTFhvMWdIRGV0OFc1eHlQSk0xa2krTnp0SDhmTlVrSXpyS2xD?=
+ =?utf-8?B?Y29iNXlOVmhGM2kxSkFsMEx6emdqdm43MisxUThYdmxTV3A0QTRENDI2cVBL?=
+ =?utf-8?B?cEZaUWZWRkZhNG96T0RqVGRENDVzWmxvQ1hOUGNuQmVzMHBQVkVDMllzSy9M?=
+ =?utf-8?B?TDB6Z3Znd1lvN0hUMGErNmZueXUzMUlkcEJOd2N3Q0M3WEJMZHg2a09rZmZp?=
+ =?utf-8?B?TFlkMnZJVXl1c2dMckswOVROam11UFdKNXlUR2RldlRiZHhVN0IvekdoZ1Vz?=
+ =?utf-8?B?djJEYWtkcmkzZEdqdm5qNnVlNnFaamludjM0THlzWWh3eldUU3N3S3h0MVhz?=
+ =?utf-8?B?c2pQQks2TTdmVERmNDBFeGtSTi8weURkK3Y3RmlLOTQwWUJUaWRXUCtCSTdE?=
+ =?utf-8?B?WkhQaktrNExReVhDWWFqRGs2VGo4WTZSZk9sYXVnaFhGYkhYQlZhQ1hkM0xn?=
+ =?utf-8?B?VzdkTFNwVC8rT1ZNd3c4RDJCUzFETi9kNFpTaFJRT2kzbHFkNUhhbnd5QkxE?=
+ =?utf-8?B?U2hZbDRhMkJnditISjBrRmpOcVdtN3FqaDYyNHlnOTBRSWo5Wm51TFNzcXNM?=
+ =?utf-8?B?YXZtTVN0Sm1mdkhPS01kQ1VPRk50eDNJcGIxaTJaWUxYMHl4Qm5RUT09?=
+X-OriginatorOrg: garyguo.net
+X-MS-Exchange-CrossTenant-Network-Message-Id: 836cc13a-946b-4885-944e-08de88ff4a67
+X-MS-Exchange-CrossTenant-AuthSource: LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2026 17:11:58.0304 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: bbc898ad-b10f-4e10-8552-d9377b823d45
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: skFb8DsbPgMLaklwGVFWncNbAi+NeZPKeODzV7mIYtvXMGKxhX9A20NngX6j0FsYVfXXTZaOmtIxVyWl68mwJw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CWXP265MB2583
+X-Mailman-Approved-At: Mon, 23 Mar 2026 23:56:16 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,626 +159,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The U_BOOT_DRIVER macro creates a list of drivers used at link time, and
-all entries here must be unique. This in turn means that all entries in
-the code should also be unique in order to not lead to build failures
-later with unexpected build combinations. Typically, the problem we have
-here is when a driver is obviously based on another driver and didn't
-update this particular field and so while the name field reflects
-something unique the linker entry itself is not. In a few places this
-provides a more suitable string name as well, however.
+On Sun Mar 22, 2026 at 11:25 PM GMT, Mark Kettenis wrote:
+>> Date: Sun, 22 Mar 2026 22:59:53 +0100
+>>=20
+>> On 3/22/26 10:45 PM, Gary Guo wrote:
+>>=20
+>> [...]
+>>=20
+>> >> Is your malloc area by any chance above the 4 GiB boundary ? Or how c=
+ome
+>> >> does EFI allocate pages from above 4 GiB range? It should not be doin=
+g
+>> >> that and that is what should be fixed, at least until the DMA32
+>> >> allocator is in place.
+>> >>
+>> >> Please keep in mind, that revering this patch breaks other use cases,
+>> >> like loading into the DRAM above 4 GiB.
+>
+> Well, technically it doesn't break things as this is new
+> functionality.
+>
+>> > Code in lib/efi_loader uses efi_allocate_pool (in lib/efi_loader/efi_m=
+emory.c)
+>> > whenever it allocates, which calls efi_allocate_pages, which calls int=
+o
+>> > lmb_alloc_mem. There's no malloc here.
+>> Does something like this make the issue go away ?
+>>=20
+>> "
+>> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+>> index b77c2f980cc..44eccc0cf35 100644
+>> --- a/lib/efi_loader/efi_memory.c
+>> +++ b/lib/efi_loader/efi_memory.c
+>> @@ -475,8 +475,10 @@ efi_status_t efi_allocate_pages(enum=20
+>> efi_allocate_type type,
+>>          flags =3D LMB_NOOVERWRITE | LMB_NONOTIFY;
+>>          switch (type) {
+>>          case EFI_ALLOCATE_ANY_PAGES:
+>> +               addr =3D map_to_sysmem((void *)(uintptr_t)0xffff0000);
+>> +
+>>                  /* Any page */
+>> -               err =3D lmb_alloc_mem(LMB_MEM_ALLOC_ANY, EFI_PAGE_SIZE, =
+&addr,
+>> +               err =3D lmb_alloc_mem(LMB_MEM_ALLOC_MAX, EFI_PAGE_SIZE, =
+&addr,
+>>                                      len, flags);
+>>                  if (err)
+>>                          return EFI_OUT_OF_RESOURCES;
+>> "
+>>=20
+>> If so, then maybe we need a temporary config option which limits the=20
+>> EFI_ALLOCATE_ANY_PAGES below 4 GiB on hardware that has DMA limitations.
+>
+> Note that some arm64 systems (e.g. Apple Silicon) have *no* memory
+> below 4 GiB.  So that change must indeed be behind a config option and
+> care must be taken on what systems to enabled it.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>
-Cc: Heiko Schocher <hs@nabladev.com>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Jerome Forissier <jerome.forissier@arm.com>
-Cc: Kever Yang <kever.yang@rock-chips.com>
-Cc: Łukasz Majewski <lukma@nabladev.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Masahisa Kojima <kojima.masahisa@socionext.com>
-Cc: Matthias Brugger <mbrugger@suse.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>
-Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-Cc: Stefan Roese <stefan.roese@mailbox.org>
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Thierry Reding <treding@nvidia.com>
-Cc: Tien Fong Chee <tien.fong.chee@altera.com>
-Cc: u-boot-amlogic@groups.io
-Cc: uboot-stm32@st-md-mailman.stormreply.com
-Cc: u-boot-qcom@groups.io
-Cc: linux@analog.com
----
- arch/x86/cpu/broadwell/sdram.c             | 2 +-
- arch/x86/cpu/ivybridge/early_me.c          | 2 +-
- board/liebherr/btt/btt.c                   | 2 +-
- board/liebherr/xea/xea.c                   | 2 +-
- drivers/block/efi_blk.c                    | 2 +-
- drivers/clk/at91/compat.c                  | 4 ++--
- drivers/clk/at91/sckc.c                    | 2 +-
- drivers/clk/meson/a1.c                     | 2 +-
- drivers/clk/meson/gxbb.c                   | 2 +-
- drivers/clk/nuvoton/clk_npcm7xx.c          | 2 +-
- drivers/clk/nuvoton/clk_npcm8xx.c          | 2 +-
- drivers/clk/stm32/clk-stm32mp13.c          | 2 +-
- drivers/dma/ti/k3-udma.c                   | 2 +-
- drivers/i2c/tegra186_bpmp_i2c.c            | 2 +-
- drivers/mmc/bcm2835_sdhci.c                | 2 +-
- drivers/mmc/fsl_esdhc_imx.c                | 2 +-
- drivers/mmc/rockchip_sdhci.c               | 2 +-
- drivers/net/calxedaxgmac.c                 | 2 +-
- drivers/net/dwc_eth_xgmac.c                | 2 +-
- drivers/net/qe/dm_qe_uec_phy.c             | 2 +-
- drivers/net/sni_netsec.c                   | 2 +-
- drivers/pinctrl/meson/pinctrl-meson-g12a.c | 2 +-
- drivers/pinctrl/tegra/pinctrl-tegra20.c    | 4 ++--
- drivers/reset/stm32/stm32-reset-mp1.c      | 2 +-
- drivers/spi/kirkwood_spi.c                 | 4 ++--
- drivers/spi/mvebu_a3700_spi.c              | 4 ++--
- drivers/sysreset/sysreset_socfpga_soc64.c  | 2 +-
- drivers/usb/dwc3/dwc3-meson-g12a.c         | 2 +-
- drivers/usb/dwc3/dwc3-meson-gxl.c          | 2 +-
- drivers/usb/host/ehci-exynos.c             | 2 +-
- drivers/usb/host/ehci-msm.c                | 2 +-
- drivers/usb/host/ehci-tegra.c              | 2 +-
- drivers/usb/host/ehci-vf.c                 | 2 +-
- drivers/usb/host/ohci-da8xx.c              | 2 +-
- drivers/usb/musb-new/pic32.c               | 2 +-
- drivers/usb/musb-new/sc5xx.c               | 2 +-
- drivers/usb/musb-new/sunxi.c               | 2 +-
- drivers/video/rockchip/rk3288_mipi.c       | 4 ++--
- drivers/video/rockchip/rk3399_mipi.c       | 4 ++--
- drivers/watchdog/arm_smc_wdt.c             | 2 +-
- 40 files changed, 46 insertions(+), 46 deletions(-)
+Perhaps a good short-term fix it to use gd->ram_top here rather than hardco=
+ding
+4 GiB. This way it should work on all systems without a config option.
 
-diff --git a/arch/x86/cpu/broadwell/sdram.c b/arch/x86/cpu/broadwell/sdram.c
-index cd534a17cf15..1ba7f403c8a1 100644
---- a/arch/x86/cpu/broadwell/sdram.c
-+++ b/arch/x86/cpu/broadwell/sdram.c
-@@ -205,7 +205,7 @@ static const struct udevice_id broadwell_syscon_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(syscon_intel_me) = {
-+U_BOOT_DRIVER(syscon_intel_me_broadwell) = {
- 	.name = "intel_me_syscon",
- 	.id = UCLASS_SYSCON,
- 	.of_match = broadwell_syscon_ids,
-diff --git a/arch/x86/cpu/ivybridge/early_me.c b/arch/x86/cpu/ivybridge/early_me.c
-index ac868025f8ed..ca73fc21262e 100644
---- a/arch/x86/cpu/ivybridge/early_me.c
-+++ b/arch/x86/cpu/ivybridge/early_me.c
-@@ -166,7 +166,7 @@ static const struct udevice_id ivybridge_syscon_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(syscon_intel_me) = {
-+U_BOOT_DRIVER(syscon_intel_me_ivybridge) = {
- 	.name = "intel_me_syscon",
- 	.id = UCLASS_SYSCON,
- 	.of_match = ivybridge_syscon_ids,
-diff --git a/board/liebherr/btt/btt.c b/board/liebherr/btt/btt.c
-index dc683bd082ad..e1ff041c54f5 100644
---- a/board/liebherr/btt/btt.c
-+++ b/board/liebherr/btt/btt.c
-@@ -421,7 +421,7 @@ static const struct udevice_id imx28_clk_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(fsl_imx28_clkctrl) = {
-+U_BOOT_DRIVER(btt_dummy_fsl_imx28_clkctrl) = {
- 	.name           = "fsl_imx28_clkctrl",
- 	.id             = UCLASS_CLK,
- 	.of_match       = imx28_clk_ids,
-diff --git a/board/liebherr/xea/xea.c b/board/liebherr/xea/xea.c
-index 9630e7f576b2..a277163683c1 100644
---- a/board/liebherr/xea/xea.c
-+++ b/board/liebherr/xea/xea.c
-@@ -351,7 +351,7 @@ static const struct udevice_id imx28_clk_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(fsl_imx28_clkctrl) = {
-+U_BOOT_DRIVER(xea_dummy_fsl_imx28_clkctrl) = {
- 	.name           = "fsl_imx28_clkctrl",
- 	.id             = UCLASS_CLK,
- 	.of_match       = imx28_clk_ids,
-diff --git a/drivers/block/efi_blk.c b/drivers/block/efi_blk.c
-index f3ae70290e7e..a1714c41d00b 100644
---- a/drivers/block/efi_blk.c
-+++ b/drivers/block/efi_blk.c
-@@ -79,7 +79,7 @@ static const struct blk_ops efi_blk_ops = {
- 	.write	= efi_bl_write,
- };
- 
--U_BOOT_DRIVER(efi_block) = {
-+U_BOOT_DRIVER(efi_media_block) = {
- 	.name		= "efi_block",
- 	.id		= UCLASS_BLK,
- 	.ops		= &efi_blk_ops,
-diff --git a/drivers/clk/at91/compat.c b/drivers/clk/at91/compat.c
-index 1d738f160b6e..2449ac9fae6e 100644
---- a/drivers/clk/at91/compat.c
-+++ b/drivers/clk/at91/compat.c
-@@ -136,7 +136,7 @@ static const struct udevice_id at91_sckc_match[] = {
- 	{}
- };
- 
--U_BOOT_DRIVER(at91_sckc) = {
-+U_BOOT_DRIVER(at91sam9x5_sckc) = {
- 	.name = "at91-sckc",
- 	.id = UCLASS_SIMPLE_BUS,
- 	.of_match = at91_sckc_match,
-@@ -368,7 +368,7 @@ static const struct udevice_id at91_system_clk_match[] = {
- 	{}
- };
- 
--U_BOOT_DRIVER(at91_system_clk) = {
-+U_BOOT_DRIVER(at91rm9200_system_clk) = {
- 	.name = "at91-system-clk",
- 	.id = UCLASS_MISC,
- 	.of_match = at91_system_clk_match,
-diff --git a/drivers/clk/at91/sckc.c b/drivers/clk/at91/sckc.c
-index 3fde8ea71382..dcaffd360fdf 100644
---- a/drivers/clk/at91/sckc.c
-+++ b/drivers/clk/at91/sckc.c
-@@ -162,7 +162,7 @@ static const struct udevice_id sam9x60_sckc_ids[] = {
- 	{ /* Sentinel. */ },
- };
- 
--U_BOOT_DRIVER(at91_sckc) = {
-+U_BOOT_DRIVER(sam9x60_sckc) = {
- 	.name = UBOOT_DM_CLK_AT91_SCKC,
- 	.id = UCLASS_CLK,
- 	.of_match = sam9x60_sckc_ids,
-diff --git a/drivers/clk/meson/a1.c b/drivers/clk/meson/a1.c
-index a1b8d7914910..669247a9a09c 100644
---- a/drivers/clk/meson/a1.c
-+++ b/drivers/clk/meson/a1.c
-@@ -712,7 +712,7 @@ static struct clk_ops meson_clk_ops = {
- #endif
- };
- 
--U_BOOT_DRIVER(meson_clk) = {
-+U_BOOT_DRIVER(meson_clk_a1) = {
- 	.name		= "meson-clk-a1",
- 	.id		= UCLASS_CLK,
- 	.of_match	= meson_clk_ids,
-diff --git a/drivers/clk/meson/gxbb.c b/drivers/clk/meson/gxbb.c
-index 51f124869c9c..218be45c2cb9 100644
---- a/drivers/clk/meson/gxbb.c
-+++ b/drivers/clk/meson/gxbb.c
-@@ -962,7 +962,7 @@ static const struct udevice_id meson_clk_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(meson_clk) = {
-+U_BOOT_DRIVER(meson_clk_gxbb) = {
- 	.name		= "meson_clk",
- 	.id		= UCLASS_CLK,
- 	.of_match	= meson_clk_ids,
-diff --git a/drivers/clk/nuvoton/clk_npcm7xx.c b/drivers/clk/nuvoton/clk_npcm7xx.c
-index b23dd37af6c8..4c787823d053 100644
---- a/drivers/clk/nuvoton/clk_npcm7xx.c
-+++ b/drivers/clk/nuvoton/clk_npcm7xx.c
-@@ -84,7 +84,7 @@ static const struct udevice_id npcm7xx_clk_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(clk_npcm) = {
-+U_BOOT_DRIVER(clk_npcm750) = {
- 	.name           = "clk_npcm",
- 	.id             = UCLASS_CLK,
- 	.of_match       = npcm7xx_clk_ids,
-diff --git a/drivers/clk/nuvoton/clk_npcm8xx.c b/drivers/clk/nuvoton/clk_npcm8xx.c
-index d1b32e32371e..c7a510f5c256 100644
---- a/drivers/clk/nuvoton/clk_npcm8xx.c
-+++ b/drivers/clk/nuvoton/clk_npcm8xx.c
-@@ -87,7 +87,7 @@ static const struct udevice_id npcm8xx_clk_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(clk_npcm) = {
-+U_BOOT_DRIVER(clk_npcm845) = {
- 	.name           = "clk_npcm",
- 	.id             = UCLASS_CLK,
- 	.of_match       = npcm8xx_clk_ids,
-diff --git a/drivers/clk/stm32/clk-stm32mp13.c b/drivers/clk/stm32/clk-stm32mp13.c
-index 39ec06a9556c..5e88cf63e204 100644
---- a/drivers/clk/stm32/clk-stm32mp13.c
-+++ b/drivers/clk/stm32/clk-stm32mp13.c
-@@ -2193,7 +2193,7 @@ static int stm32mp1_clk_probe(struct udevice *dev)
- 	return 0;
- }
- 
--U_BOOT_DRIVER(stm32mp1_clock) = {
-+U_BOOT_DRIVER(stm32mp13_clock) = {
- 	.name = "stm32mp13_clk",
- 	.id = UCLASS_CLK,
- 	.ops = &stm32_clk_ops,
-diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
-index 018243109952..5b440bb38b80 100644
---- a/drivers/dma/ti/k3-udma.c
-+++ b/drivers/dma/ti/k3-udma.c
-@@ -2866,7 +2866,7 @@ static const struct udevice_id udma_ids[] = {
- 	{ /* Sentinel */ },
- };
- 
--U_BOOT_DRIVER(ti_edma3) = {
-+U_BOOT_DRIVER(ti_udma) = {
- 	.name	= "ti-udma",
- 	.id	= UCLASS_DMA,
- 	.of_match = udma_ids,
-diff --git a/drivers/i2c/tegra186_bpmp_i2c.c b/drivers/i2c/tegra186_bpmp_i2c.c
-index d30eb5231229..b76ef016cda3 100644
---- a/drivers/i2c/tegra186_bpmp_i2c.c
-+++ b/drivers/i2c/tegra186_bpmp_i2c.c
-@@ -117,7 +117,7 @@ static const struct udevice_id tegra186_bpmp_i2c_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(i2c_gpio) = {
-+U_BOOT_DRIVER(tegra186_bpmp_i2c) = {
- 	.name	= "tegra186_bpmp_i2c",
- 	.id	= UCLASS_I2C,
- 	.of_match = tegra186_bpmp_i2c_ids,
-diff --git a/drivers/mmc/bcm2835_sdhci.c b/drivers/mmc/bcm2835_sdhci.c
-index 598a51d914a9..655d9902dfa9 100644
---- a/drivers/mmc/bcm2835_sdhci.c
-+++ b/drivers/mmc/bcm2835_sdhci.c
-@@ -243,7 +243,7 @@ static const struct udevice_id bcm2835_sdhci_match[] = {
- 	{ /* sentinel */ }
- };
- 
--U_BOOT_DRIVER(sdhci_cdns) = {
-+U_BOOT_DRIVER(sdhci_bcm2835) = {
- 	.name = "sdhci-bcm2835",
- 	.id = UCLASS_MMC,
- 	.of_match = bcm2835_sdhci_match,
-diff --git a/drivers/mmc/fsl_esdhc_imx.c b/drivers/mmc/fsl_esdhc_imx.c
-index 335b44a8a1a0..87125493c0dc 100644
---- a/drivers/mmc/fsl_esdhc_imx.c
-+++ b/drivers/mmc/fsl_esdhc_imx.c
-@@ -1686,7 +1686,7 @@ static int fsl_esdhc_bind(struct udevice *dev)
- 	return mmc_bind(dev, &plat->mmc, &plat->cfg);
- }
- 
--U_BOOT_DRIVER(fsl_esdhc) = {
-+U_BOOT_DRIVER(fsl_esdhc_imx) = {
- 	.name	= "fsl_esdhc",
- 	.id	= UCLASS_MMC,
- 	.of_match = fsl_esdhc_ids,
-diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
-index 8116e464278f..b685da8643c3 100644
---- a/drivers/mmc/rockchip_sdhci.c
-+++ b/drivers/mmc/rockchip_sdhci.c
-@@ -745,7 +745,7 @@ static const struct udevice_id sdhci_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(arasan_sdhci_drv) = {
-+U_BOOT_DRIVER(rockchip_sdhci_5_1_drv) = {
- 	.name		= "rockchip_sdhci_5_1",
- 	.id		= UCLASS_MMC,
- 	.of_match	= sdhci_ids,
-diff --git a/drivers/net/calxedaxgmac.c b/drivers/net/calxedaxgmac.c
-index ebb399457fb5..92990fa6d479 100644
---- a/drivers/net/calxedaxgmac.c
-+++ b/drivers/net/calxedaxgmac.c
-@@ -597,7 +597,7 @@ static const struct udevice_id xgmac_eth_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(eth_xgmac) = {
-+U_BOOT_DRIVER(calxeda_hb_xgmac) = {
- 	.name		= "eth_xgmac",
- 	.id		= UCLASS_ETH,
- 	.of_match	= xgmac_eth_ids,
-diff --git a/drivers/net/dwc_eth_xgmac.c b/drivers/net/dwc_eth_xgmac.c
-index 458b87af7a27..add1ea2e978f 100644
---- a/drivers/net/dwc_eth_xgmac.c
-+++ b/drivers/net/dwc_eth_xgmac.c
-@@ -1206,7 +1206,7 @@ static const struct udevice_id xgmac_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(eth_xgmac) = {
-+U_BOOT_DRIVER(dwc_eth_xgmac) = {
- 	.name = "eth_xgmac",
- 	.id = UCLASS_ETH,
- 	.of_match = of_match_ptr(xgmac_ids),
-diff --git a/drivers/net/qe/dm_qe_uec_phy.c b/drivers/net/qe/dm_qe_uec_phy.c
-index 8c0168be859e..107c7686b3b5 100644
---- a/drivers/net/qe/dm_qe_uec_phy.c
-+++ b/drivers/net/qe/dm_qe_uec_phy.c
-@@ -152,7 +152,7 @@ static const struct udevice_id qe_uec_mdio_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(mvmdio) = {
-+U_BOOT_DRIVER(qe_uec_mdio) = {
- 	.name			= "qe_uec_mdio",
- 	.id			= UCLASS_MDIO,
- 	.of_match		= qe_uec_mdio_ids,
-diff --git a/drivers/net/sni_netsec.c b/drivers/net/sni_netsec.c
-index 71afe78fd28a..b74a5c27cae1 100644
---- a/drivers/net/sni_netsec.c
-+++ b/drivers/net/sni_netsec.c
-@@ -1138,7 +1138,7 @@ static const struct udevice_id netsec_ids[] = {
- 	{}
- };
- 
--U_BOOT_DRIVER(ave) = {
-+U_BOOT_DRIVER(synquacer_netsec) = {
- 	.name     = "synquacer_netsec",
- 	.id       = UCLASS_ETH,
- 	.of_match = netsec_ids,
-diff --git a/drivers/pinctrl/meson/pinctrl-meson-g12a.c b/drivers/pinctrl/meson/pinctrl-meson-g12a.c
-index 67114df6824a..29cfdcaa7f89 100644
---- a/drivers/pinctrl/meson/pinctrl-meson-g12a.c
-+++ b/drivers/pinctrl/meson/pinctrl-meson-g12a.c
-@@ -1283,7 +1283,7 @@ static const struct udevice_id meson_g12a_pinctrl_match[] = {
- 	{ },
- };
- 
--U_BOOT_DRIVER(meson_axg_pinctrl) = {
-+U_BOOT_DRIVER(meson_g12a_pinctrl) = {
- 	.name = "meson-g12a-pinctrl",
- 	.id = UCLASS_PINCTRL,
- 	.of_match = of_match_ptr(meson_g12a_pinctrl_match),
-diff --git a/drivers/pinctrl/tegra/pinctrl-tegra20.c b/drivers/pinctrl/tegra/pinctrl-tegra20.c
-index c32d590a7e0e..b3727b917dc8 100644
---- a/drivers/pinctrl/tegra/pinctrl-tegra20.c
-+++ b/drivers/pinctrl/tegra/pinctrl-tegra20.c
-@@ -182,8 +182,8 @@ static const struct udevice_id tegra_pinctrl_ids[] = {
- 	{ },
- };
- 
--U_BOOT_DRIVER(tegra_pinctrl) = {
--	.name		= "tegra_pinctrl",
-+U_BOOT_DRIVER(tegra20_pinctrl) = {
-+	.name		= "tegra20_pinctrl",
- 	.id		= UCLASS_PINCTRL,
- 	.of_match	= tegra_pinctrl_ids,
- 	.bind		= tegra_pinctrl_bind,
-diff --git a/drivers/reset/stm32/stm32-reset-mp1.c b/drivers/reset/stm32/stm32-reset-mp1.c
-index ce4532561e5e..e7ac2c6f066b 100644
---- a/drivers/reset/stm32/stm32-reset-mp1.c
-+++ b/drivers/reset/stm32/stm32-reset-mp1.c
-@@ -46,7 +46,7 @@ static int stm32_reset_probe(struct udevice *dev)
- 	return stm32_reset_core_probe(dev, &stm32mp1_reset_data);
- }
- 
--U_BOOT_DRIVER(stm32mp25_rcc_reset) = {
-+U_BOOT_DRIVER(stm32mp1_rcc_reset) = {
- 	.name		= "stm32mp1_reset",
- 	.id		= UCLASS_RESET,
- 	.probe		= stm32_reset_probe,
-diff --git a/drivers/spi/kirkwood_spi.c b/drivers/spi/kirkwood_spi.c
-index 095cbea0fca9..bb5ab26685c4 100644
---- a/drivers/spi/kirkwood_spi.c
-+++ b/drivers/spi/kirkwood_spi.c
-@@ -347,8 +347,8 @@ static const struct udevice_id mvebu_spi_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(mvebu_spi) = {
--	.name = "mvebu_spi",
-+U_BOOT_DRIVER(kirkwood_spi) = {
-+	.name = "kirkwood_spi",
- 	.id = UCLASS_SPI,
- 	.of_match = mvebu_spi_ids,
- 	.ops = &mvebu_spi_ops,
-diff --git a/drivers/spi/mvebu_a3700_spi.c b/drivers/spi/mvebu_a3700_spi.c
-index 79836d7e2715..370a52a90b3d 100644
---- a/drivers/spi/mvebu_a3700_spi.c
-+++ b/drivers/spi/mvebu_a3700_spi.c
-@@ -307,8 +307,8 @@ static const struct udevice_id mvebu_spi_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(mvebu_spi) = {
--	.name = "mvebu_spi",
-+U_BOOT_DRIVER(mvebu_a3700_spi) = {
-+	.name = "mvebu_a3700_spi",
- 	.id = UCLASS_SPI,
- 	.of_match = mvebu_spi_ids,
- 	.ops = &mvebu_spi_ops,
-diff --git a/drivers/sysreset/sysreset_socfpga_soc64.c b/drivers/sysreset/sysreset_socfpga_soc64.c
-index 6ce30d9eaf0b..e1267ac118ae 100644
---- a/drivers/sysreset/sysreset_socfpga_soc64.c
-+++ b/drivers/sysreset/sysreset_socfpga_soc64.c
-@@ -80,7 +80,7 @@ static struct sysreset_ops socfpga_sysreset = {
- 	.request = socfpga_sysreset_request,
- };
- 
--U_BOOT_DRIVER(sysreset_socfpga) = {
-+U_BOOT_DRIVER(sysreset_socfpga_soc64) = {
- 	.id	= UCLASS_SYSRESET,
- 	.name	= "socfpga_sysreset",
- 	.ops	= &socfpga_sysreset,
-diff --git a/drivers/usb/dwc3/dwc3-meson-g12a.c b/drivers/usb/dwc3/dwc3-meson-g12a.c
-index 41d15996e5b2..49e9c3fa0e99 100644
---- a/drivers/usb/dwc3/dwc3-meson-g12a.c
-+++ b/drivers/usb/dwc3/dwc3-meson-g12a.c
-@@ -533,7 +533,7 @@ static const struct udevice_id dwc3_meson_g12a_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(dwc3_generic_wrapper) = {
-+U_BOOT_DRIVER(dwc3_meson_g12a) = {
- 	.name	= "dwc3-meson-g12a",
- 	.id	= UCLASS_SIMPLE_BUS,
- 	.of_match = dwc3_meson_g12a_ids,
-diff --git a/drivers/usb/dwc3/dwc3-meson-gxl.c b/drivers/usb/dwc3/dwc3-meson-gxl.c
-index 5fb9b477adaf..0edf41a4720a 100644
---- a/drivers/usb/dwc3/dwc3-meson-gxl.c
-+++ b/drivers/usb/dwc3/dwc3-meson-gxl.c
-@@ -430,7 +430,7 @@ static const struct udevice_id dwc3_meson_gxl_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(dwc3_generic_wrapper) = {
-+U_BOOT_DRIVER(dwc3_meson_gxl) = {
- 	.name	= "dwc3-meson-gxl",
- 	.id	= UCLASS_SIMPLE_BUS,
- 	.of_match = dwc3_meson_gxl_ids,
-diff --git a/drivers/usb/host/ehci-exynos.c b/drivers/usb/host/ehci-exynos.c
-index e1fc04efd2e9..ec21b7c6246c 100644
---- a/drivers/usb/host/ehci-exynos.c
-+++ b/drivers/usb/host/ehci-exynos.c
-@@ -249,7 +249,7 @@ static const struct udevice_id ehci_usb_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(usb_ehci) = {
-+U_BOOT_DRIVER(ehci_exynos) = {
- 	.name	= "ehci_exynos",
- 	.id	= UCLASS_USB,
- 	.of_match = ehci_usb_ids,
-diff --git a/drivers/usb/host/ehci-msm.c b/drivers/usb/host/ehci-msm.c
-index 8aeb6a915563..a58eff7cb9c8 100644
---- a/drivers/usb/host/ehci-msm.c
-+++ b/drivers/usb/host/ehci-msm.c
-@@ -117,7 +117,7 @@ void ci_init_after_reset(struct ehci_ctrl *ctrl)
- }
- #endif
- 
--U_BOOT_DRIVER(usb_ehci) = {
-+U_BOOT_DRIVER(ehci_msm) = {
- 	.name	= "ehci_msm",
- 	.id	= UCLASS_USB,
- 	.of_to_plat = ehci_usb_of_to_plat,
-diff --git a/drivers/usb/host/ehci-tegra.c b/drivers/usb/host/ehci-tegra.c
-index 89b87886da18..c1f76752cb1e 100644
---- a/drivers/usb/host/ehci-tegra.c
-+++ b/drivers/usb/host/ehci-tegra.c
-@@ -969,7 +969,7 @@ static const struct udevice_id ehci_usb_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(usb_ehci) = {
-+U_BOOT_DRIVER(ehci_tegra) = {
- 	.name	= "ehci_tegra",
- 	.id	= UCLASS_USB,
- 	.of_match = ehci_usb_ids,
-diff --git a/drivers/usb/host/ehci-vf.c b/drivers/usb/host/ehci-vf.c
-index 5afe28ea3033..96d1363a76ea 100644
---- a/drivers/usb/host/ehci-vf.c
-+++ b/drivers/usb/host/ehci-vf.c
-@@ -344,7 +344,7 @@ static const struct udevice_id vf_usb_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(usb_ehci) = {
-+U_BOOT_DRIVER(ehci_vf) = {
- 	.name = "ehci_vf",
- 	.id = UCLASS_USB,
- 	.of_match = vf_usb_ids,
-diff --git a/drivers/usb/host/ohci-da8xx.c b/drivers/usb/host/ohci-da8xx.c
-index d321d147c2f9..a36950082afb 100644
---- a/drivers/usb/host/ohci-da8xx.c
-+++ b/drivers/usb/host/ohci-da8xx.c
-@@ -165,7 +165,7 @@ static const struct udevice_id da8xx_ohci_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(ohci_generic) = {
-+U_BOOT_DRIVER(ohci_da8xx) = {
- 	.name	= "ohci-da8xx",
- 	.id	= UCLASS_USB,
- 	.of_match = da8xx_ohci_ids,
-diff --git a/drivers/usb/musb-new/pic32.c b/drivers/usb/musb-new/pic32.c
-index 0b25e5893b3c..b878e979d93d 100644
---- a/drivers/usb/musb-new/pic32.c
-+++ b/drivers/usb/musb-new/pic32.c
-@@ -279,7 +279,7 @@ static const struct udevice_id pic32_musb_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(usb_musb) = {
-+U_BOOT_DRIVER(musb_pic32) = {
- 	.name		= "pic32-musb",
- 	.id		= UCLASS_USB,
- 	.of_match	= pic32_musb_ids,
-diff --git a/drivers/usb/musb-new/sc5xx.c b/drivers/usb/musb-new/sc5xx.c
-index 991846818a22..b1765abe8279 100644
---- a/drivers/usb/musb-new/sc5xx.c
-+++ b/drivers/usb/musb-new/sc5xx.c
-@@ -188,7 +188,7 @@ static const struct udevice_id sc5xx_musb_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(usb_musb) = {
-+U_BOOT_DRIVER(musb_sc5xx) = {
- 	.name		= "sc5xx-musb",
- 	.id		= UCLASS_USB,
- 	.of_match	= sc5xx_musb_ids,
-diff --git a/drivers/usb/musb-new/sunxi.c b/drivers/usb/musb-new/sunxi.c
-index b577ba418780..0747f025f2a1 100644
---- a/drivers/usb/musb-new/sunxi.c
-+++ b/drivers/usb/musb-new/sunxi.c
-@@ -545,7 +545,7 @@ static const struct udevice_id sunxi_musb_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(usb_musb) = {
-+U_BOOT_DRIVER(musb_sunxi) = {
- 	.name		= "sunxi-musb",
- #ifdef CONFIG_USB_MUSB_HOST
- 	.id		= UCLASS_USB,
-diff --git a/drivers/video/rockchip/rk3288_mipi.c b/drivers/video/rockchip/rk3288_mipi.c
-index 850fe3107549..574ba8c69573 100644
---- a/drivers/video/rockchip/rk3288_mipi.c
-+++ b/drivers/video/rockchip/rk3288_mipi.c
-@@ -177,8 +177,8 @@ static const struct udevice_id rk_mipi_dsi_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(rk_mipi_dsi) = {
--	.name	= "rk_mipi_dsi",
-+U_BOOT_DRIVER(rk3288_mipi_dsi) = {
-+	.name	= "rk3288_mipi_dsi",
- 	.id	= UCLASS_DISPLAY,
- 	.of_match = rk_mipi_dsi_ids,
- 	.of_to_plat = rk_mipi_of_to_plat,
-diff --git a/drivers/video/rockchip/rk3399_mipi.c b/drivers/video/rockchip/rk3399_mipi.c
-index 57e36eed6a99..68316df871cb 100644
---- a/drivers/video/rockchip/rk3399_mipi.c
-+++ b/drivers/video/rockchip/rk3399_mipi.c
-@@ -168,8 +168,8 @@ static const struct udevice_id rk_mipi_dsi_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(rk_mipi_dsi) = {
--	.name	= "rk_mipi_dsi",
-+U_BOOT_DRIVER(rk3399_mipi_dsi) = {
-+	.name	= "rk3399_mipi_dsi",
- 	.id	= UCLASS_DISPLAY,
- 	.of_match = rk_mipi_dsi_ids,
- 	.of_to_plat = rk_mipi_of_to_plat,
-diff --git a/drivers/watchdog/arm_smc_wdt.c b/drivers/watchdog/arm_smc_wdt.c
-index f6854aa9ac93..151dc42d1164 100644
---- a/drivers/watchdog/arm_smc_wdt.c
-+++ b/drivers/watchdog/arm_smc_wdt.c
-@@ -130,7 +130,7 @@ static const struct udevice_id smcwd_dt_ids[] = {
- 	{}
- };
- 
--U_BOOT_DRIVER(wdt_sandbox) = {
-+U_BOOT_DRIVER(arm_smc_wdt) = {
- 	.name = "smcwd",
- 	.id = UCLASS_WDT,
- 	.of_match = smcwd_dt_ids,
--- 
-2.43.0
-
+Best,
+Gary
