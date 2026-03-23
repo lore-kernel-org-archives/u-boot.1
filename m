@@ -4,121 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59196EC01A2
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 08:39:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CADBCEC01B6
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 09:44:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B84383DB6;
-	Mon, 23 Mar 2026 09:39:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 0B48184073;
+	Mon, 23 Mar 2026 10:44:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="mlJFIuee";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="y6ZLqFTI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A57984073; Mon, 23 Mar 2026 09:39:54 +0100 (CET)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
+ id 9419F84099; Mon, 23 Mar 2026 10:44:55 +0100 (CET)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 056C583BE1
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 09:39:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F320583FAF
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 10:44:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ spf=fail smtp.mailfrom=Pranav.VinayTilak@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CpF3ONDw4uE6kYEHdDZ9pszQMJ050GZ/6HKJTdDCBcBQhnce/uQJYO0bv3K0PVn4ybBxcTogPvi1tTavoM7X2mQXhhTlxLcWE8/5ntuvtQyKEqvuQKsNtw0E6agwtirbj5w9Br75KsqOfjqBfb0JD28NzMAFNGnNVvqFkoXWx1N6aH+tTG8eSO0j5POnsK/aD07MkMCmMn1fWfhU/3M2Iox4dFLlwuuoOxDDhJBFtncoyBxnUM6X7cHaEep2IJBeqV45AGxdawZhVumDsTwFvL5rIBlwgkrQ3IIXSjDh0Fth+NXLftcGNAsmb0hS4ZuUFKgNNoe0O/YtmK44LevHVA==
+ b=YPaadumuw6w9p9IKuqbOBmt/kfdQYq7rf4ZAE3kyM6Xb6T66HNRCuAfPVHpBIudw2onsLMSVxFsflxz/rQf2IsImTIY6Bh8vXdFblceXa10SporyLZuqC4WKRIbSSu0zVFyJVA+MWk71c5zDILkHJYUmJ2G9XUMrvRvUVm8uYMjPUDh1Wggri9WQonymPOwO2LO9zbr21pEadO+B85kY445hytqzvLqxQhfOAO/wt5fJuXDwgPZxxUbhJP7Wbn3j4ODH+zbwv9UHLu8fDrmbUaOFdCYcAmSKfXrEdHSPElT3ZRjpm5fJwR7K+Lg+TXZq0xKmXqYjNhvSw5IsxAVQYA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YNl91ZOceO/eFEMNVTF7cYEiX0SSxhdXxX6tbR9pMSg=;
- b=faTEYijfm++/WnUzZxiNmsPvKwDKqoZ6R/ZwGusO5sLTuGB5NQUjZzBnIF0ERGtgmxqpnQyaNTGyKVqH/12oCe4QkWjvU3nR5u3rrMXGcnM7P/vFvMcRHmcPyJ8HESx/gXAUSYoKADAg+quBZhj3qMWI1zAsiRmd+T6s5gunNpexe99dyV5KCjGUuf9YpSAzIWdeqaZJUY/UFtzVPeQth44uAalqBrgML27h6rRDFbBvsCU1noyrneMEi+Ban2Zt8LYHo1poQl7lX/ZPXQtcRiUtyctIR+xHQtAp1vMvIr62481K9ZCGKGL3tffpgvyXMyW8UgZOJvLQe52ZTnwp2Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ bh=mdNNHnbOsw0nAnGtng0ZmV+wHttp+nPqAgvBYNS61cw=;
+ b=Y4VW0e2SDYXdg+3mXgSFLmRMaFA0738Zns3udhd3veeSXrtaeiaO06g8DX1/A8o2M1lv/XuednTH8yQUh7D1Rp6JFytkjEe0cMXw7Fo1tDltZIE0YsdkLY/3RCIQFD0TW4KwJIcdmzFucx9J0/cJh9FQnxQ2ioz5AdaOeZlr4XzGqAmEhVq1X/yOZtqPdnEb1BF69BT2E1Dk+HNERIf0ZlvxCMuLQL41/GYd6WB6NIA45XyFVZmi88U4O8Rbog5w8ACW/GahmT++Wh/shoZTn9PsdqL57iPDKd08COsK9A0jnmkJ66WEfvE/T2X8eKgevg4vTLcq/TCTfqBy+U1lLQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YNl91ZOceO/eFEMNVTF7cYEiX0SSxhdXxX6tbR9pMSg=;
- b=mlJFIuee0XYMB/4/npNgxSU0KXHhBb5o9OBkqj2nvQthMzT007ctf4DCNeTLnzHwuMlAhKwMkz8QdsjSqkxUxle1SrZ5aFrx5M/iVtFHbPp108lxf9fx51vfgIT8QKUm71VMb8HFTbKw4evNZfa+rd8dwFzPVFM2NEF2SFjNuBs=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by AMBPR10MB9779.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:766::8)
+ bh=mdNNHnbOsw0nAnGtng0ZmV+wHttp+nPqAgvBYNS61cw=;
+ b=y6ZLqFTIZn6s/TO74nxkRt1x4UiTpey6TZ7Biu3TrDrBbGkHPtDhiP5iQmRCsq4dorBhJPm9liqkP7vth4NWy++nlUf0bAI3+XWN4WO2Qip4Yt96GExlsmzjfNWB47CGYWZszWBzBKRdfulH7erwOfPs7Yb9hHSpBKuYCI/FQno=
+Received: from BL1PR13CA0120.namprd13.prod.outlook.com (2603:10b6:208:2b9::35)
+ by IA1PR12MB6284.namprd12.prod.outlook.com (2603:10b6:208:3e4::20)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.20; Mon, 23 Mar
- 2026 08:39:49 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8%5]) with mapi id 15.20.9723.030; Mon, 23 Mar 2026
- 08:39:49 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH] linker_lists.h: drop never used ll_start, ll_end macros
-Date: Mon, 23 Mar 2026 09:39:28 +0100
-Message-ID: <20260323083928.1928856-1-ravi@prevas.dk>
-X-Mailer: git-send-email 2.53.0
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.20; Mon, 23 Mar
+ 2026 09:44:49 +0000
+Received: from BL6PEPF0001AB4E.namprd04.prod.outlook.com
+ (2603:10b6:208:2b9:cafe::72) by BL1PR13CA0120.outlook.office365.com
+ (2603:10b6:208:2b9::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9723.31 via Frontend Transport; Mon,
+ 23 Mar 2026 09:44:29 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ BL6PEPF0001AB4E.mail.protection.outlook.com (10.167.242.72) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9723.19 via Frontend Transport; Mon, 23 Mar 2026 09:44:48 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Mon, 23 Mar
+ 2026 04:44:47 -0500
+Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Mon, 23 Mar 2026 04:44:45 -0500
+From: Pranav Tilak <pranav.vinaytilak@amd.com>
+To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
+CC: <git@amd.com>, <padmarao.begari@amd.com>, Pranav Tilak
+ <pranav.vinaytilak@amd.com>, Jerome Forissier <jerome.forissier@arm.com>,
+ "Tom Rini" <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: [PATCH v2] net: lwip: nfs: fix buffer overflow when using symlinks
+Date: Mon, 23 Mar 2026 15:14:14 +0530
+Message-ID: <20260323094437.138927-1-pranav.vinaytilak@amd.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: GV3P280CA0012.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:150:b::23) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
-MIME-Version: 1.0
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|AMBPR10MB9779:EE_
-X-MS-Office365-Filtering-Correlation-Id: 12a0e5e3-23b7-4a18-1bff-08de88b7be83
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB4E:EE_|IA1PR12MB6284:EE_
+X-MS-Office365-Filtering-Correlation-Id: a753bf9b-1a06-41a2-9fcd-08de88c0d310
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|376014|366016|1800799024|38350700014|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: rJI76AUv5w2wZ6PIslbrpEBgRAmCCjxrjNNW63Eg62wrn4f5o6KCk7UWd9D/G4b8iMulWJhMs3SKxs7gdZqAFbJ0s7Dtsf/Bm7sv5LctP23Z6otDFyOwp956llAD+UvQoWHFkdJtdHvo2u7oL1FXH1ewvjV4JYWw/tX1FOAnIAm78edMUN6blHCJkm0kUrpJ5AxTScIs9/AlDTaCHCLOSirIgsCDjryFJk3QPFP8m9geOdMJsRYtrIh/IvDbXMzCkt0TwAEm7hnVjWpXGqQbwzXzHGYBlYJ6jneiHw8pm2IrzK9rO8+DwYq/QpERtSz4UbAGyFtLdrD1TfAHBtk5aeKPtUHuF/hMZ+dh4EHRCXeCnGPUwUgW2ENrUa7Ve5z7OrwPmg/nb2Gib4gljxNRlJrm/81aZO9FvST0eq6NstCHoqudsimQpS1HpiQTY8GQ6NtyaydPwTdCRBodFiHTdjnzou7fO+o+s7PodfaEMgcz7YlYLBmTNRwAaVyiA9uF0998DtyEhy4pKxfN7BA2MhR3uYg01Y4qlTXvQyeQgSDM/bTtn5adXeJ76QV9ZL7Do7fJhwmOO1cOjkNgKEDE+iAz5R3/XPzKZ9rYnvWbWyC6cSGbn03iZN0TQJ5qXNi/hb0LM3AOsZWdqLdr3QfBXc89zMNIv9lbHcbyYUCQdT33HlhnfbdBdOJde0Rp54OlSOL0eoGhZyRjXtiwutSDktK9ozkxZe8y+mTfJGtZ+imN5stnWkGBQIfEox1gCQq7iRupHBLulmnIZI1WJq7IZdiftJ+FBStzG1VUrEbUvaY=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(376014)(366016)(1800799024)(38350700014)(18002099003)(56012099003);
+ ARA:13230040|376014|82310400026|1800799024|36860700016|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: U6ryEbn9V4b5Sbf18sz4Su3bS9w/Gq71IvlraV9cMr0h5wHRVDxjr2qTRYKh8Ft5t4wPyF8t7zt7XofOoS/8Fb7QyzA9AhOIRtPEzBplSnv9htbRJEYv7Dke3vnm4NLIAh8GiDU9pbeP9WGHHsyUggOpyiiDf6aBLcIMebc9oQQ0PAjhSPMVUDTLJBaV9teFvEp7YLlRUX9AsnKOMmvyIeCKMv7Nr7vCcnWctqW3nAMYtt69ew2vNc/N0gfpiQP7Ke7eK663rHTczidclGrZhCJoyMXsF/1AtisQ5t7arAmn0GNoXxYJN9JXj8ShDwI1Jgo9wBzc/4nXHG6jXAm0yinYJxdxclQC/iJ3PcyuAlmHzByV7f9z/jy6IxDld+bKXdRNmyXQRrY/M/KdOUaOeoKRLarY3r22iDcTUsOdkarSC1fxi2A3mDL4P6Q/ogcaLbkEceiZCRbkEjO6qVJEZMwwMe+xnowi2lrnNnKoGfzTNB3Aj69PlgCazUyTcWnojsFTQPWuzIJ77w+qcVbADScuAX57Z/6U4wl27Vzl6ufNLIF4sNffNxQ+SaXLnhiE++OTJhY3m/LivR41SDL9X6DEATb75JODFcRoXjZh0+DaGrcTxdp1WQop9smpWV2BWORrxSmt3VL7a2V4lD2CJXXwMu4N3TRd6+EFjn/491I8oV/1M42FrCOL2l4md8MVLMpQZWXFWiJjih7ux+lng660hx378VKVjllnLqWUDhB/OURb3HdUTeN9tPlJBBKEB2mPTapJ8m2Lj0/a9p7oHQ==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(1800799024)(36860700016)(18002099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?PwqD1cQTgDZR+oBGVlQ0LE+9251BjZOKeIqauCXIGoXTrLtYIkIM5Nsfd5e3?=
- =?us-ascii?Q?slPDdobdkM+utAArzKpTv0cgPWLTElFI9zo/4w3dJ66QP31lriE0guND7F69?=
- =?us-ascii?Q?ev5cResq0nYOZgfOB3i5HoZ4WtsLKRNqau6HzjZlQhkU9AkKxHSwFrEDk9Eq?=
- =?us-ascii?Q?BD/BD/+1FnKuYqYaFm01Iv9FT8xEw4OuAaV91OImFHookIQACfOh+YVFHRAT?=
- =?us-ascii?Q?BcNEHPoRZQJUp4jFmicktcCe4tARN5d+QpSH4jj3Ox/mtj9YLoSrNtX6o8u/?=
- =?us-ascii?Q?lPLXrsE3EVFWUVwwSLHvuiy7GJKuokRB0uvmXGwXJaOqZCWJW7WzxGR30kXL?=
- =?us-ascii?Q?B+By0t0Mt1KEW2J7RMl+CiDWv58D8VnMoTpNqKxcEKFRKXdbgavxzcpFHL7I?=
- =?us-ascii?Q?8O1FL0aIGtv9A4VeK47BQA4AoKGptIAiQEPtSDc3K4GeiWIsceZdhXqR0i0F?=
- =?us-ascii?Q?/bmOpDTT9s95XU0Cel6aWXSTjYp72H/mYRdqMjyUEASE4ZOG8b8SKaLbTgDH?=
- =?us-ascii?Q?N9oDToTW+4IWUSidh1gFVlMfP+VTetKVbczrIocHOTNQ23kb2d54bLywlq8/?=
- =?us-ascii?Q?ZRyV75CpNblz5XhbOFZpvskbpl/4OQA0ILaHV6nvOkfg9m1b4SrU3EfAdIUG?=
- =?us-ascii?Q?BSEMGCG+MHKuY1Y7IDv8Nb52TqEuFTtQoRJtzbBA5nsoPaGt/8BGfaigoZCG?=
- =?us-ascii?Q?NJ2TBpowKXF3pAJPvHQddA0oz9cDFUx5PV/m9AaipPNs8511Y2ceUBQFhV3N?=
- =?us-ascii?Q?kKtRpvxHcAx2i03Kax0pTBx2NHI5Xni/vlKyhSzOqt0Ng0sgRqdb4nWNllsR?=
- =?us-ascii?Q?leO+y1MN2Bt7Z3KmRP+m61230ENodLCDSc+xrBOji1x2OX4VEeFiEVfBYpZJ?=
- =?us-ascii?Q?b3E4jYMTy7a2VSH5tneG8ahkWFVq05I0Tw8IAxnW8KSkxUWAi+2vCWzSPnYg?=
- =?us-ascii?Q?LPMm/fjXKzExzyGTDRbvgl7DbhjYVKwjaMx68tDBmsuQbEwlxAyzZTAi0i/V?=
- =?us-ascii?Q?JfVAKXSVNReulJyfaYwkTu9/StdwBwSlhi07Rte/WtNally7Wg8CFY+yb/DF?=
- =?us-ascii?Q?0jFiyIZVzFDfkJU4T7hkpz47Qt5E+f/0HRRQEZGA04MKje1HlvDGjerEfJeE?=
- =?us-ascii?Q?OQnVAfjTOL7V9aMubQtEhbQombi8liyKrgxSHj+BY9psdRn5k/4mQiUt8mSZ?=
- =?us-ascii?Q?IRtSbOr++miMvHISdAO/fxV1+kEIID7KJEr7JSrizBF9rP27tdiJsaACdgkq?=
- =?us-ascii?Q?vc8fGmdOxMp2hv0M0r9/uLJjCNsmQfMLjm3MihLrgxYqHhzOg/ambBB2RSoQ?=
- =?us-ascii?Q?1QmfLXbb54C4LveXkuGSDhvXf27zm69WJIyMCIL/BwohToVTXXr9aPlVjQV5?=
- =?us-ascii?Q?SOzG1A4ifNkOySYlCBFc6lSZBb2vVI33/fdCQbz6qLqruUDk5ZZJwETjeyYp?=
- =?us-ascii?Q?UJu6FTqkZOpUaUqzg6awLhGSankMlR2QwHRDh1rExJWrDaJQgNuY6I1E9Sfc?=
- =?us-ascii?Q?w2tNBRC5FKDiHfC26XLxkDkOGlvSq/hhMIKvPCUdwHXxggQWE6gelVBejs3d?=
- =?us-ascii?Q?cKYlTVfefD86i3m4DkDgJDAVWFM61gJAFPfAy57dNgPZQq/A+dX50egmRO8r?=
- =?us-ascii?Q?RotFM/UvVLTe7ZWE+2OvKf878ZWR6yehQd1U+jEaia8nCOW+SDXv2NBYO7J+?=
- =?us-ascii?Q?jNW0rlbZUxVeiKWPUm0gzMvQPdY0mBheIyx84paZnCb4FyBIRmmHrr8oJD00?=
- =?us-ascii?Q?qwtVmNT5WMgigPnHB4iuh7gz8D5dFNs=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 12a0e5e3-23b7-4a18-1bff-08de88b7be83
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2026 08:39:49.1783 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Z5foWzKnF5vCZR/8XUl2q5xAU8MKMvTG8bajtNHWpbOvbxEA2vgQ3RuV/+KLmrRWTlZIvg/vmbrmcj1NYNgaSmJki/W24jl/vIuQlhzPsX0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMBPR10MB9779
+X-MS-Exchange-AntiSpam-MessageData-0: CSczgaRU63ziwZki5Jd+BZNLdtVOVw0sgHMIsywDsqg/3IOFXoK/cCOdxm21hu0pLymcE0pPoEqrSTvMOF8RuorVLPTVgiJYq6KpOLN8HUxIkhhUFRoHXkBv7VPNea9vSeVAe3DB+EkoTwYMKBXYI8uJZfpieTHncVxpmgcXUCUbW51mOh/Z4A+GybNTmmz52rw4ubrbobA8TgwAA3O6JOuh1L/s4pkPCscvSiJk4y4PNMVpk/wSk2odP8CsZzX+TF7QmZengzl2uMr3MSNC1hIJNrn1/qQth4IXfLYXN3oB3EIQnfGxWHdOdCfLjRHiyme5+Az9eWTjylA2N3+VEeBc1TTVSwzbfZTz2KDxvDgQHbqZuTKpi7fh5cn/GVIvA7Cq9HHcE+v4W7q0LdqsW57Xh+O8v4x1tOpNAZDHQo7e0usTJRXK0eGDOPVI1E/8
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2026 09:44:48.8998 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a753bf9b-1a06-41a2-9fcd-08de88c0d310
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB4E.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6284
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,83 +123,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These macros have AFAICT never been used at all. It's also far from
-clear what purpose it could serve - for one thing, what _type would
-one pass, other than void perhaps? The example using "struct
-my_sub_cmd" seems misplaced, as how could one know that the first
-linker list consists of those, and moreover, how would one know how
-many there are?
+When resolving a symlink, nfs_path points into a heap allocated buffer
+which is just large enough to hold the original path with no extra
+space. If the symlink target name is longer than the original
+filename, the write goes beyond the end of the buffer corrupting
+heap memory.
 
-The linker list concept is fragile enough on its own, there is no need
-to have unused functionality lying around that may or may not bitrot
-and certainly will confuse readers of linker_lists.h.
+Fix this by ensuring nfs_path always points to a buffer large enough
+to accommodate the resolved symlink path.
 
-Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+Fixes: 230cf3bc2776 ("net: lwip: nfs: Port the NFS code to work with lwIP")
+Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
+Acked-by: Jerome Forissier <jerome.forissier@arm.com>
 ---
- include/linker_lists.h | 50 ------------------------------------------
- 1 file changed, 50 deletions(-)
+Changes in v2:
+- Remove redundant nfs_path assignment.
 
-diff --git a/include/linker_lists.h b/include/linker_lists.h
-index 0f4a2d686e2..78ba937c8c3 100644
---- a/include/linker_lists.h
-+++ b/include/linker_lists.h
-@@ -288,56 +288,6 @@
- #define ll_entry_ref(_type, _name, _list)				\
- 	((_type *)&_u_boot_list_2_##_list##_2_##_name)
+ net/lwip/nfs.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/net/lwip/nfs.c b/net/lwip/nfs.c
+index c3b819a091e..9e6b801e465 100644
+--- a/net/lwip/nfs.c
++++ b/net/lwip/nfs.c
+@@ -114,8 +114,10 @@ static int nfs_loop(struct udevice *udev, ulong addr, char *fname,
+ 	if (!netif)
+ 		return -1;
  
--/**
-- * ll_start() - Point to first entry of first linker-generated array
-- * @_type:	Data type of the entry
-- *
-- * This function returns ``(_type *)`` pointer to the very first entry of
-- * the very first linker-generated array.
-- *
-- * Since this macro defines the start of the linker-generated arrays,
-- * its leftmost index must be 1.
-- *
-- * Example:
-- *
-- * ::
-- *
-- *   struct my_sub_cmd *msc = ll_start(struct my_sub_cmd);
-- */
--#define ll_start(_type)							\
--({									\
--	static char start[0] __aligned(4) __attribute__((unused))	\
--		__section("__u_boot_list_1");				\
--	_type * tmp = (_type *)&start;					\
--	asm("":"+r"(tmp));						\
--	tmp;								\
--})
--
--/**
-- * ll_end() - Point after last entry of last linker-generated array
-- * @_type:	Data type of the entry
-- *
-- * This function returns ``(_type *)`` pointer after the very last entry of
-- * the very last linker-generated array.
-- *
-- * Since this macro defines the end of the linker-generated arrays,
-- * its leftmost index must be 3.
-- *
-- * Example:
-- *
-- * ::
-- *
-- *   struct my_sub_cmd *msc = ll_end(struct my_sub_cmd);
-- */
--#define ll_end(_type)							\
--({									\
--	static char end[0] __aligned(4) __attribute__((unused))		\
--		__section("__u_boot_list_3");				\
--	_type * tmp = (_type *)&end;					\
--	asm("":"+r"(tmp));						\
--	tmp;								\
--})
--
- #endif /* __ASSEMBLY__ */
+-	nfs_filename = nfs_basename(fname);
+-	nfs_path     = nfs_dirname(fname);
++	strlcpy(nfs_path_buff, fname, sizeof(nfs_path_buff));
++
++	nfs_filename = nfs_basename(nfs_path_buff);
++	nfs_path     = nfs_dirname(nfs_path_buff);
  
- #endif	/* __LINKER_LISTS_H__ */
+ 	printf("Using %s device\n", udev->name);
+ 
 -- 
-2.53.0
+2.34.1
 
