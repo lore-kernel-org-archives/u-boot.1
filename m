@@ -4,71 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B009CD58CC5
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 04:16:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5661BD58CD1
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 05:02:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C3FC805D7;
-	Mon, 23 Mar 2026 05:16:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 8BE2683FEC;
+	Mon, 23 Mar 2026 06:02:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="rTevkhLT";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="m54i7xt2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AEA68366F; Mon, 23 Mar 2026 05:16:24 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id 1D88D840AE; Mon, 23 Mar 2026 06:02:26 +0100 (CET)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C790780077;
- Mon, 23 Mar 2026 05:16:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DA05283DB6
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 06:02:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4ffKc40FLCz9tQg;
- Mon, 23 Mar 2026 05:16:20 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1774239380;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Rq6tUbAjZqHQBRb99wcenpyDe2Sgr5stc2JDOu09DlU=;
- b=rTevkhLTHCs+ucRtJvD2hQckQnzxcw4T6rdoBzUtUBkQzXyRIBkc+mOrJL2e/+5BOr1ICz
- JQncgRr0vbHkKiLCum/wJikOeaAG/1zjiAstVAbILzK2UZyM7t/+HZsPmEh8nemiLHwuRB
- FyciLutDAislDJN7FpZ5fuKBd/zsRJxaj449fOd89W/KTATtgM7Cu8eh/f71axd18CPZud
- 0dOzPd8UzYVCIZ3RxSJKQAFK1qI6tVzvtijPAPEeYabNov5vzwojGFEzuVRXQQ6T2dxeMw
- odpsXItvk67gYwMdS5BgldGf/rnShT9NaUoCCoSdLK5cGDdAvcdREZov5lV/sA==
-Message-ID: <0b82ef62-e6b5-4f4c-abdf-fa901015f465@mailbox.org>
-Date: Mon, 23 Mar 2026 05:16:14 +0100
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Q7Jsh7PpJv05SN2kKpqyZBvoo1MLK/BujDMvX6dxFuSwT/Wmru9EwNNMqSPFyZgaWYhYZy2g5G7D6SXvTnkC8ZMHd7PNgsxKntgPJQbtv5oUupbilKHpen1LLpaguAsqB1uDabayhb0+fKd4Yv0/Wv+vyN4t3rpeN9gPxHG8iKnIt8HFpxdkqUnAjfk+TOSrig+b2zQMoD6FKufBp5w2HH5P/tmSl0JchYT2buqx6/86tOB+V+8CxvoFzT/vRWN5bSR89PchpVczTrCzRWbclein53abcm9LST44mCBjd2D1VD9c48cCdg7OPQSCgiLtfDIkXKn0Bg0q9bLh66FZQg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bnyB0yUNWi3To7mXrbbsZS+T53XfHDktHGri+MHM+gY=;
+ b=JtMdbl16r4kY8C8e5KS7uSLWHy6d0D2bvlr/x72L4QOqf9J57sxVSwKhrLBlG7PekxQhgyfUTHuqt9kSMadbPbw1W//a1IfuUTsno5krz66gSay6aHSKNi/MXFoBOukDcIxhcIbbQi6MftAJo6ZtX28dUEgfisrIGIlMQRHXYk4LAf1k5VMeMG5qWmkKre8+At6o78jTGKA9Jc11ynL1NQUcSTLnsGZ2XHQhUx4GH2vtglnPWPcA639aFvErV/E13fsXGVdHMmBei5eJMtvY7YPZISaxh6uqzVwKRtuRABw32+nMeHz5oWB4TgPS30iEb9gEqWKHttszaIJxxxvRQQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bnyB0yUNWi3To7mXrbbsZS+T53XfHDktHGri+MHM+gY=;
+ b=m54i7xt2e+eH6WTrFkReTsEZyoZsa2ZTIdg4z7LK+3BRfaS8LSCwFC9216bJW7IsKI9etEHD/V+A5ybqR1j154kcQwXDFkWKH3NG442GyH/7zSLfEno3ybUrb8cb6dRFNm9Ec6DhlFF0vV7Id3+crzRcuARAcOb0i9Fm42nmPumSyst25og9H7SDGUx98xX1X/aW2w4mwZLi1EGbt3ErRfzeU6m/k6+iYZb1+zt3Lj0oz3/wTQ4uJxvlOW8KmqMhGhY09E+xcsNkVKgcCclqz6r6XZo1QTFoQGAFVu4kl33woyUrmV53Ben/8P9oFhoZGNWGqe3GR5cB7SPgu4r3Dg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by AS8PR04MB7543.eurprd04.prod.outlook.com (2603:10a6:20b:29b::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.31; Mon, 23 Mar
+ 2026 05:02:04 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e%3]) with mapi id 15.20.9723.022; Mon, 23 Mar 2026
+ 05:02:03 +0000
+Date: Mon, 23 Mar 2026 14:18:03 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Dan Carpenter <dan.carpenter@linaro.org>
+Subject: [GIT PULL] Please pull fsl-qoriq-next-2026-03-23
+Message-ID: <acDbGwsosXBP8C3p@nxa18884-linux.ap.freescale.net>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-ClientProxiedBy: MA5P287CA0030.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:a01:17a::14) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-Subject: Re: [PATCH] lmb: Reinstate access to memory above ram_top
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: gary@garyguo.net, trini@konsulko.com, u-boot@lists.denx.de,
- mbrugger@suse.com, pbrobinson@gmail.com, yuya.hamamachi.sx@renesas.com,
- andrew.goodbody@linaro.org, casey.connolly@linaro.org, xypron.glpk@gmx.de,
- holger.brunck@hitachienergy.com, ilias.apalodimas@linaro.org,
- jonas@kwiboo.se, kettenis@openbsd.org, semen.protsenko@linaro.org,
- sughosh.ganu@arm.com, u-boot-bounces@lists.denx.de
-References: <20260127234856.1503030-1-marek.vasut+renesas@mailbox.org>
- <177343529761.1131472.9417054395876652663.b4-ty@konsulko.com>
- <DH9MF45X89KK.1CV4WUVTCTUO5@garyguo.net>
- <1e74f277-dedf-4fa1-810d-63f3d517a8a0@mailbox.org>
- <DH9N233GTVKM.2XIG8EETTUQAY@garyguo.net>
- <9bc9a2d3-c1e8-43d5-b03a-c56850c715f3@mailbox.org>
- <87mrzzbg5k.fsf@bloch.sibelius.xs4all.nl>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <87mrzzbg5k.fsf@bloch.sibelius.xs4all.nl>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 7ee1dcbcbeec9e4cda7
-X-MBO-RS-META: 3z1haxybfpphtn7apar947uww39ujbuc
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AS8PR04MB7543:EE_
+X-MS-Office365-Filtering-Correlation-Id: e0d681f2-bca3-4771-7a5f-08de8899526e
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|19092799006|376014|52116014|38350700014|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: eymiv/rwjFbYwlU+06Ttfx1kyf13G/HIEbbRNn/6UIGxK8o2cuv2fGM4BBiOSjE4gA1JDH9FC25x5y0vskRe5zACrgWy0/+L4IVimJQSPrW+1ljQZJtOxSBc8kzI5vv7ZePyt9WkuXGJPPF8FwKg8vCBqe8w5Yd+SS+49n9wEnXHGwToNTItQ4yGNoOZbJL4zRwOkn882JY6jVYsRO6Z7kN/5mMla6/YUhH7mn4oQPY5NQIMBf004waZp08CNdpIZdVSDS3b0l5Vchhl3vJYnAHdauAmX8C8scQlpseeK7X7o3jXGJ0bdBAf/A7mfiWt2YCTYMepvnbL26+gfSnijTgUMGrtv7ny/5CDOlznAUrD+iUwCliIiH/4g/6PS5sH8UXu8p20Lvw34O+SSsfKub+SVJV88/CDKqX3m7377RK5czsJwRkQ8TDxHY3qYogSS5lgrFTK0b7DHSm7TakZkjxhSFsJ7ITxutgf/9Rc4E7LCXhpEdlEFYLb3iOx9RoMmMDNvECP/NPCvwf1ovlFAOR1IyYfqbGLjpxsOCqYWYpS9wskIwedGxECVRbTLRJ4XWJ3MlodNwVHlgYkSyVc8Q6HsJRJFA4eelDPjaZCuJamMSzeHfLnxNHKvOqIuLDhKCDdEXh6252vbgtYyjPTeyEj4K9tAKk/sFM2LXRDjzKqv3L9vczG+tMw2iJImZMk8yWfYE3cVa6eTo3CwFrNK0IxWp3TQlxu97M7cxL7JqtCCkMmShAtwT/JQ181zD/i
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(19092799006)(376014)(52116014)(38350700014)(18002099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?f3gOmyIRlU+obNDrQMNJDDC/Ey0EVQ19mZTqrtwesYTUZ2Mdv60kA1Q0+D2T?=
+ =?us-ascii?Q?WQ4muDRzY8eAXGxBlcQjQMwRFpYVakDc0EvB2vd8/JpjSSCvZipnRbyfuO6W?=
+ =?us-ascii?Q?q23H4oJOvNlmibetQZllehWdT6Ewa5ENRifdOYdNOZ+bv/Ezh1tyZUJJOsvK?=
+ =?us-ascii?Q?XUm9UgJAql4tDkIfL8mpviNM50AIY/cyH8j3hbSiDco6ECZCtEe/wcf8+TPz?=
+ =?us-ascii?Q?m5eetSoMlWHmbrdQEFQBZxJt3M5uY7JHrNAGT/cmmdZDEZtZkNzf17QzrvoA?=
+ =?us-ascii?Q?wGbNO8+SCmXcnDEKIUP1KOe2aOoK7rADY73daax5Rxm0xSPu4VPgCjYvrzul?=
+ =?us-ascii?Q?4tHRXVksNucRnemPjy2CEAUonT/1n8lDHu5qF6aET6So04YXHf2Z9ykvhHfq?=
+ =?us-ascii?Q?bBg5yKsNnhfN2ToUqu1qg/0+EIEQfHdzq7iRgrv0csPtvtk/E5czy4TIgxjS?=
+ =?us-ascii?Q?WD2QujKFLmFuiqLOjfIsDfbIWU2WQxSfXPr7IwPP02/57ajCJEIndYB4lIsa?=
+ =?us-ascii?Q?+7eOuPnRUDKzQca3gixEXsPsIVKxAvArjalP6fGLkFmg6umGxD97ULx0f4zN?=
+ =?us-ascii?Q?smmp+Hs7YUYXk1QS/mPp7fMLCV2tE88/giwlA78ovHTGitZyyMHiX+8iC/fE?=
+ =?us-ascii?Q?jhSngT6oB+4Ywz9J+8blgWkxwR+z99lazdCSZWhejYBocdKMyAZPQdOnhuwL?=
+ =?us-ascii?Q?zAnQTrM4oWH5rrdSyV8M8Wzr8gXoFWgysseigOPcIYMCcp1GDOZzDx3PD0sG?=
+ =?us-ascii?Q?930TBqGzOiFU3TIRSVF26BaQAnOpX9MU6qWJD9veLkVhF7ooCYSK91bbT98R?=
+ =?us-ascii?Q?R9RhugIsL+AdgMI0uWMrePnyLLFRidwcX97wtyn649H89caskfPvLTYOiAve?=
+ =?us-ascii?Q?pliWRGJeteKXemYURetceyy/u1Br+KYIqwnu8NNWEUD/bfhQejHupbWadp1F?=
+ =?us-ascii?Q?YzM7gb2iaYg7nLC50F6pe+bbOKQSgQSqxoQYdh9CmnZqqCv33R9ZVpr/DI/y?=
+ =?us-ascii?Q?hcPlaQJGldSaS1wCQr0quQG0ZdxryCc1k6lG80sIcDNTTg5Uqrf8dfLV2SLt?=
+ =?us-ascii?Q?n3izryiLcfiI5mIMhOexg4YlFaPpFzjgh0RJSJsEZGsWgReZcUDVY4WG0fyb?=
+ =?us-ascii?Q?VaFulsi6sWaMkJvgUImjx0aIYZLJ/aWxiq7ePvpV4jAO19zC1amwdpqhKk9x?=
+ =?us-ascii?Q?DXBeVJuXWQrbFoOE8oOashOqRIE/Ob12aQyOvBnkQC/rD0OtMMHaQQvSUDPo?=
+ =?us-ascii?Q?FwtAZHfuLJ95paXzYDlscbBJ/kOh1Kyp+aUiKtmYTRI6Bsf5nngsf+B+qJfP?=
+ =?us-ascii?Q?HQTBk8ojvSD5lamoRPxoburO9odYUU6pt0eTMEK8gf2FHfJgGVfR6dxJZ3Wj?=
+ =?us-ascii?Q?w3+Es7H6yDZ23K1UR+m/qlDlokfBmU44tIRWRJJsQ7b+PfszzIR3HqOtyM0X?=
+ =?us-ascii?Q?RblCROX0LA1VqPyHAJHKtdjmgkDi+C0NdataVjQGcpHEN+ygrANdhUQTCeCD?=
+ =?us-ascii?Q?6E2jX++oPur9x0iY1IRgbkGBOlzK9Wt5wpytpzrBJnvVVEfv587S02f1aC5m?=
+ =?us-ascii?Q?SLEvLt3v9gNp5WWycS4qheqmg9xumGdnVstKGinPWxDlub8WKryJ/gjp+ClV?=
+ =?us-ascii?Q?ha563LVS5KveL8s/9UCQ6xvc5boL5YXQqt/vk2QIzi+Td3rlyQAFjwsbzbJN?=
+ =?us-ascii?Q?hfTQemgH79TD2USLrLuc0ETwcvHc5VQWeUkhHryuOKWHCb2qKWWAMaeXQPgo?=
+ =?us-ascii?Q?rx7bPnMqVQ=3D=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e0d681f2-bca3-4771-7a5f-08de8899526e
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2026 05:02:03.1672 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: +UxHWHO9YTruub+rmKEqxg5h8EXHgNV+4OOSr+9GAHCN09I1EeAOoaDbcauov37hirFgKmWhX7JpenKlQ8lNig==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7543
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,91 +136,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/23/26 12:25 AM, Mark Kettenis wrote:
->> Date: Sun, 22 Mar 2026 22:59:53 +0100
->>
->> On 3/22/26 10:45 PM, Gary Guo wrote:
->>
->> [...]
->>
->>>> Is your malloc area by any chance above the 4 GiB boundary ? Or how come
->>>> does EFI allocate pages from above 4 GiB range? It should not be doing
->>>> that and that is what should be fixed, at least until the DMA32
->>>> allocator is in place.
->>>>
->>>> Please keep in mind, that revering this patch breaks other use cases,
->>>> like loading into the DRAM above 4 GiB.
-> 
-> Well, technically it doesn't break things as this is new
-> functionality.
+Hi Tom,
 
-It isn't, this change effectively reverted previous change, so this is 
-the original behavior.
+Please pull fsl-qoriq-next-2026-03-23 for next
 
->>> Code in lib/efi_loader uses efi_allocate_pool (in lib/efi_loader/efi_memory.c)
->>> whenever it allocates, which calls efi_allocate_pages, which calls into
->>> lmb_alloc_mem. There's no malloc here.
->> Does something like this make the issue go away ?
->>
->> "
->> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
->> index b77c2f980cc..44eccc0cf35 100644
->> --- a/lib/efi_loader/efi_memory.c
->> +++ b/lib/efi_loader/efi_memory.c
->> @@ -475,8 +475,10 @@ efi_status_t efi_allocate_pages(enum
->> efi_allocate_type type,
->>           flags = LMB_NOOVERWRITE | LMB_NONOTIFY;
->>           switch (type) {
->>           case EFI_ALLOCATE_ANY_PAGES:
->> +               addr = map_to_sysmem((void *)(uintptr_t)0xffff0000);
->> +
->>                   /* Any page */
->> -               err = lmb_alloc_mem(LMB_MEM_ALLOC_ANY, EFI_PAGE_SIZE, &addr,
->> +               err = lmb_alloc_mem(LMB_MEM_ALLOC_MAX, EFI_PAGE_SIZE, &addr,
->>                                       len, flags);
->>                   if (err)
->>                           return EFI_OUT_OF_RESOURCES;
->> "
->>
->> If so, then maybe we need a temporary config option which limits the
->> EFI_ALLOCATE_ANY_PAGES below 4 GiB on hardware that has DMA limitations.
-> 
-> Note that some arm64 systems (e.g. Apple Silicon) have *no* memory
-> below 4 GiB.  So that change must indeed be behind a config option and
-> care must be taken on what systems to enabled it.
+--------------------------------
+Kconfig update for SCMI_FIRMWARE
+Add SCMI pinctrl driver
+--------------------------------
 
-Indeed, good point. I suspect we should call the option something like 
-"CONFIG_BROKEN_DMA_ABOVE_4G" or "CONFIG_BROKEN_DMA64" , so that once the 
-DMA32 allocator lands, it can be enabled exactly on those machines and 
-that option deprecated instead.
+CI: https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq/-/pipelines/29614
 
-> To come back to my earlier statement that some SoCs don't fully
-> support DMA above the 4 GiB boundary: I specifically mentioned
-> Raspberry Pi and various Rockchip SoCs.  I'm sorry I didn't get around
-> to testing those boards, but I recently did some work on adding
-> support for the RK3576 SoC to OpenBSD and can confirm that its SD
-> controller does not support DMA above the 4 GiB boundary.  That means
-> that with the diff that has now been commited, any attempt to load
-> into DRAM above 4 GiB from SD card or MMC is probably going to corrup
-> some memory below 4 GiB.  The Ethernet controller on those boards does
-> support DMA above 4 GiB though.
+Thanks,
+Peng
 
-I also have hardware with such limitations, but please read on ...
+The following changes since commit eb00c710508d09b2a3b9aca75dd18280f1304703:
 
-> That said, I'd say that on a platform where some of the supported
-> storage or network devices don't support DMA above 4 GiB, lmb should
-> not make that memory available until bounce buffers are implemented.
+  Merge patch series "bootm: Clean up arch-specific, pre-OS clean-up" (2026-03-18 18:36:50 -0600)
 
-I don't think LMB is the right tool, because LMB prevents everyone from 
-using the memory above 4 GiB boundary, and that makes the memory 
-effectively useless.
+are available in the Git repository at:
 
-For example, it is currently (with this patch) possible to TFTP or WGET 
-into the memory above 4 GiB, even if the ethernet MAC does not support 
-direct writes above 4 GiB boundary, because U-Boot network stack copies 
-packets from its packet buffer into the target location (at the expense 
-of slight performance drop).
+  https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq.git tags/fsl-qoriq-next-2026-03-23
 
-I think it would be better to identify the few places which may pass 
-64-bit memory addresses to 32-bit only hardware and fix those up on 
-affected hardware ... and then start working toward some DMA32 allocator.
+for you to fetch changes up to 0cb160f1b62905c701569850d3a4d1b46b3dc100:
+
+  scmi: pinctrl: add pinctrl driver for SCMI (2026-03-23 10:58:20 +0800)
+
+----------------------------------------------------------------
+Dan Carpenter (3):
+      scmi: pinctrl: add pinctrl message IDs
+      scmi: update comments for scmi_pinctrl_config_set_in()
+      scmi: pinctrl: add pinctrl driver for SCMI
+
+Tom Rini (1):
+      scmi: Rework SCMI_FIRMWARE implementation
+
+ configs/amd_versal2_virt_defconfig        |   1 +
+ configs/r8a78000_ironhide_defconfig       |   1 +
+ configs/sandbox_defconfig                 |   1 +
+ configs/stm32mp13_defconfig               |   1 +
+ configs/stm32mp15-odyssey_defconfig       |   1 +
+ configs/stm32mp15_defconfig               |   1 +
+ configs/stm32mp15_trusted_defconfig       |   1 +
+ configs/stm32mp21_defconfig               |   1 +
+ configs/stm32mp23_defconfig               |   1 +
+ configs/stm32mp25_defconfig               |   1 +
+ drivers/firmware/scmi/Kconfig             |   1 +
+ drivers/firmware/scmi/Makefile            |   1 +
+ drivers/firmware/scmi/pinctrl.c           | 365 ++++++++++++++++++++++++++++
+ drivers/firmware/scmi/scmi_agent-uclass.c |   4 +-
+ drivers/pinctrl/Kconfig                   |   9 +
+ drivers/pinctrl/Makefile                  |   1 +
+ drivers/pinctrl/nxp/pinctrl-imx-scmi.c    |   2 +-
+ drivers/pinctrl/pinctrl-scmi.c            | 365 ++++++++++++++++++++++++++++
+ drivers/reset/Kconfig                     |   2 +-
+ include/scmi_agent-uclass.h               |   2 +-
+ include/scmi_protocols.h                  | 379 +++++++++++++++++++++++++++++-
+ 21 files changed, 1128 insertions(+), 13 deletions(-)
+ create mode 100644 drivers/firmware/scmi/pinctrl.c
+ create mode 100644 drivers/pinctrl/pinctrl-scmi.c
