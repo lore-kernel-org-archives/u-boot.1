@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F186F483D7
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 19:54:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B98EF483EC
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 19:54:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB00D84242;
-	Mon, 23 Mar 2026 20:53:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1238084255;
+	Mon, 23 Mar 2026 20:53:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EwjX65lT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ctzFKB3C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12AA6841FA; Mon, 23 Mar 2026 20:53:06 +0100 (CET)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 99EAF84227; Mon, 23 Mar 2026 20:53:07 +0100 (CET)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0DB38420C
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 20:53:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D9AF838FA
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 20:53:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7d7e565c877so1792429a34.3
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 12:53:03 -0700 (PDT)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7d7653db148so2596841a34.2
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 12:53:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774295582; x=1774900382; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1774295584; x=1774900384; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=SOrEQabpXLglfPI+cvSSCjZBxUujruBSy5tFX/otJnc=;
- b=EwjX65lThassIObCesEtoDLtfHXjZJzFnKIa0LUG9k35H1QAuqc8WETRSY+Gvp8zC1
- QAV4DpgvMVM7WTUECl2huuKOOLisu4Rzu9k221MPXkqd/LQS2aakbPtg9v3XOReeJPpG
- JMjXa61gJ3GPWFqvTiI3eRXiEAiK7RJvlcoJc=
+ bh=fqlI3zO38bjXifNjeh350Fir+rYyM2eI7Gs8myzRE+U=;
+ b=ctzFKB3CXxko7sRKQN71HTGpi4qFoxqIP887MkmED0RvWCBbpBKZTJ3XjDG8FX4MC5
+ nSd6km+epfMynGbQPVW3W/ma4p2Y6qV2nw2A2d78msODf97KCb0VDtjQglYl21ltVB2C
+ Lsh21ezctpLvxeIan1X1Z5wGo9u6Om8Wl7RVs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774295582; x=1774900382;
+ d=1e100.net; s=20251104; t=1774295584; x=1774900384;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SOrEQabpXLglfPI+cvSSCjZBxUujruBSy5tFX/otJnc=;
- b=nseYs6DHv1FPcwLCIoURgv2ugDKH4oObPgXQm/EXaKrP1goDA3A+SF1amzMHbG56Ea
- g8qI2glSqoNv6YiBCawT21QUDUwXdLjGAz97QIZ+ci1MwqXl2Xed0bgqcHEHSYtMmOj8
- Gty7KLS+U/KvjcN5Nqf4ws31nu4IElP6St3+QBxRiNCeeDLLzI0I/HvpI6VfsWBbr1PG
- wKQv6+JZDcs4/om2RPkloBBmg75NdshDIl/7JV5Czxd2MuAotRSbltFQAmX5TAQgxQuu
- fwv7OzbXOz5f+f6Gy8lc+L9ufZqnwkL+IAZlAPb2WCtXTFJ9oTToHG+HVrNRQk3YT5O2
- y2KA==
-X-Gm-Message-State: AOJu0YycCREaKTs0X5nLYgQYM+x1wgcuiV9VpUUYuHi2zAc5KBI513G/
- txlZOPCINbwA3xso2FYFG2iyCMJkboa+qArkaalyKxPZ5EFYh7KNQSo/0zG2yTyOPsj1EPPFGlV
- YhS3FWCs=
-X-Gm-Gg: ATEYQzwDO7OykHUk8umhFRDmoTH6ZhA23pb7ee1OxYtYxykAgC1xipPZ/iOzjEUuse/
- glQMhXaSg5pW/N/bWxbkO/MwV0ETl5+mZLXSYFVTb3O/u67CxKzk3Kz5cy2rhYUXLZBJYKq0ej7
- jH5vCzy1gcSCj1lT+uXwxmz8d8pw6scoamFS1hl1YPj2JLeo97dYoxOr7wfo2x/HHj+JWKpqcid
- ONAKXqvuVE4DoLThyTO2mREv+41hAujxUvgYOZJQG+d8/eSHB8/7Fi5eLKwtJa+yPdjpXJ3mmXw
- dyGcpqAQV9gIfB9d8g/JeLcjg18w+MYEgLg00qAwg2lIZFWXGKgp1VImOHh1hL7ojQomvRnSgc+
- 6GII1x8O3cqJXf4KKjaW3oIqPs/r7nHqJkh8Ojrm6FRTDNdBj5a9TTxV5J0FETyFqLPgK4Zlcys
- Nv3YBIhXs90I+0gTAOhet1trQ9XSnA5aaj13fy9CKsfuBMGNGi8Taaci6KUs5IqZ2AGB+D9UmaI
- Upfpj4RSRaVgA6cE90m3TXWRiyt658Y2aeCawr3cSFeyU64+eI=
-X-Received: by 2002:a05:6830:4989:b0:7d9:b4dd:c34a with SMTP id
- 46e09a7af769-7d9b4ddcca4mr3437191a34.7.1774295582509; 
- Mon, 23 Mar 2026 12:53:02 -0700 (PDT)
+ bh=fqlI3zO38bjXifNjeh350Fir+rYyM2eI7Gs8myzRE+U=;
+ b=JOqAvTj4ZIAitqxI2dRdJnbaccVNMijhz14JlfR3kAuVI1VYNUKFlSY1zinXdaCegL
+ 4PO6GJyx55zK9gqHwg4znl+BbSFuADDTbUFuvOe0WFiMxUPv7Yw7T9LaUCpxF+kqTSEi
+ IdYzABIapK5uihM7Cz7S3JCEvf8sedJuksqZAd1AgS+aWUvgG5w0c13RWztbrkPkkn9O
+ PQHGR8FPqeneJd6GhuiN3HHkm4V354VG2TiP33NnhbDGNlV7oQWOaNF05OyU1BOLpAJ9
+ wTRndfQomuwvAn9Q7V0kDKx3XRGsBhwexWNgZl9EDmALQoxMqmxkOqX4TnM/jgDp/lOW
+ UdRg==
+X-Gm-Message-State: AOJu0YxQIb4WtYp9s4VXqLjJUoSxLh80/lmqd2DOhHqjvcf3QHaUFmRW
+ eQEB8c/OHJjD2whiVsx5WWV3nnxQulQmhNtTm9VhxhLSDIFmn5gXEYi8sIm69cXxgqeeqh81JtJ
+ VFF6u
+X-Gm-Gg: ATEYQzzF5GmRGho+WJi+6CN8MSXot1btAfQXlNRQnQAtIiaOYN66dE8zkVBmAMW585K
+ ZDqiIKsT9q90lGyncUIgkjWZZ/aTRI/X8vIU43Jf3JSjmhuccbHsQL73Pu5XKOwUWYJe0iCVl7R
+ NIs4nI701eZs1SZ+6f47ZICtY1N204TbRcAKRqEuGMt+aGscHNHUc7C9471nMFkuJ3pSoPy4h2D
+ EptBJPG9+ZBLBhsjzEnqjBepOa7sewSFqRGOs/Q9dz/oTom5nHk39L8FylRbxXVbbo62/VUORCo
+ gehFIvtRnlIoJP7TCujlAQD578D1e0NZatmawN16GALknb5IBtGwu9KC+rbF077w7ANINexdig1
+ 4gjpjNJMhEp4N6bd8pTs43d0rXmVMrEWeanZ/LXbyf8VmAzCveN3U8HpJPvXPfy88Bz4HcMLv12
+ yUkQA3an0R0TQPvCuUGg8+DLITOtMwhxwJ9oK+CMVtyT1WiCpnzkQDV10hXKgs8T8R8LXjFsoFh
+ PiFTcKotmXd2W8eYszw1W+NH1bJPvO36010OSohnNLFST8TdYB0tjrM3616ig==
+X-Received: by 2002:a05:6820:4d05:b0:67b:dc97:119f with SMTP id
+ 006d021491bc7-67c22bc874fmr9108551eaf.9.1774295584031; 
+ Mon, 23 Mar 2026 12:53:04 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7eabe6248sm10108130a34.2.2026.03.23.12.53.01
+ 006d021491bc7-67c252c892dsm7143255eaf.4.2026.03.23.12.53.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Mar 2026 12:53:02 -0700 (PDT)
+ Mon, 23 Mar 2026 12:53:03 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Jerome Forissier <jerome.forissier@arm.com>
-Subject: [PATCH] net: Correct dependencies for HIFEMAC_ETH
-Date: Mon, 23 Mar 2026 13:53:00 -0600
-Message-ID: <20260323195300.2363561-1-trini@konsulko.com>
+Cc: Casey Connolly <casey.connolly@linaro.org>
+Subject: [PATCH] power: regulator: qcom: Correct dependenecies for
+ DM_REGULATOR_QCOM_USB_VBUS
+Date: Mon, 23 Mar 2026 13:53:02 -0600
+Message-ID: <20260323195302.2363577-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -93,30 +94,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The HIFEMAC_ETH functionality can only work with both DM_ETH_PHY and
-DM_MDIO enabled (it calls one of the functions that requires both), so
-express this dependency in Kconfig.
+The DM_REGULATOR_QCOM_USB_VBUS functionality can only work with DM_PMIC
+enabled as well, so express this dependency in Kconfig.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Jerome Forissier <jerome.forissier@arm.com>
+Cc: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/net/Kconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/power/regulator/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index 9d4e9f069701..ed07e286676c 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -983,6 +983,8 @@ config HIFEMAC_ETH
- 	depends on DM && OF_CONTROL
- 	select CLK
- 	select DM_CLK
-+	select DM_ETH_PHY
-+	select DM_MDIO
- 	select DM_RESET
- 	select PHYLIB
- 	help
+diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
+index 4f39e46cebd5..a4ee5f1335ad 100644
+--- a/drivers/power/regulator/Kconfig
++++ b/drivers/power/regulator/Kconfig
+@@ -244,7 +244,7 @@ config DM_REGULATOR_QCOM_RPMH
+ 
+ config DM_REGULATOR_QCOM_USB_VBUS
+ 	bool "Enable driver model for Qualcomm USB vbus regulator"
+-	depends on DM_REGULATOR
++	depends on DM_REGULATOR && DM_PMIC
+ 	---help---
+ 	  Enable support for the Qualcomm USB Vbus regulator. The driver
+ 	  implements get/set api for the regulator to be used by u-boot.
 -- 
 2.43.0
 
