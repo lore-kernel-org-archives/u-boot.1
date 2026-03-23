@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6310F4610D
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 13:48:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0356EF4610D
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 13:48:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36B7F8418C;
+	by phobos.denx.de (Postfix) with ESMTP id DC38084189;
 	Mon, 23 Mar 2026 14:48:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="nkwD6bmQ";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="JAF6eZn0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C190841DD; Mon, 23 Mar 2026 14:48:06 +0100 (CET)
+ id 1DC19841D7; Mon, 23 Mar 2026 14:48:07 +0100 (CET)
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8184784144
+ by phobos.denx.de (Postfix) with ESMTPS id D993484189
  for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 14:48:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
@@ -30,30 +30,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=PIYMrE88u+S0LTwXWRCu+iJDKudKgWa5sdoxg8sKxC4=; b=nkwD6bmQyZ8g/XB7hagXLRTrHz
- sN1mN/lbyyk0WdFjG8Bb5k8j5xFd+Q72+BBcHhpazuC2Npkb6V5ERwaRtto1m/4OCtj3Uk0BrNCtL
- 5xr/HWee6zH3OPQliofDuNqCyvYySGFP/kcofNOOVjhgC/T/pKJ1W8ZP5PQdHSVmNbcCcYyCJ5779
- YTFToIMRevranGVuSrmGQLAuirbrI1F7HpSW2+gy0dJ9IDZK+GfT2patKb2vd1DPZpQTEzifWGhQ+
- wbtPU4OpGjbATlJiamgGm5xTVzjZLZKXlPIcQvCEa158sONKrd9YuqLnBTvcc1Zrb7QaQxHCXiloG
- s1VApa2Q==;
+ bh=nCehW3kNWlqMcWICK+1TrdJNz8f34ozFmGJvfsB7N4U=; b=JAF6eZn0aZatvyOZqKpzd6J73M
+ TV497q/0wASETEcOUdNQE6gWitR0NjvtWQ041o4sCz57gwO54PFwyLSnZ8kujdlS5GqPyUggkYOhD
+ UKTy3zjRlcuzqIjGPS0/4I8HsQuXVkIn/LBL9v7PkRBZFUt2mji35LXUngfZMdctPpIYmHPqoVqnc
+ sCimcO3UUohVt60jq2HlQIi2r0Qq5tLFhMBGSFPXxRFF1XmmL+xKkM4Q/1IzlLq+C+w0lwQgNNEHP
+ 3e3PegZiIUuva3ZryGy+ljgyAimO2yiTFDVcT/2WrA+8HAyn6dEUk3rDq1SSU91+Yad7PzeKIX8F5
+ rWUdiJGw==;
 Received: from sslproxy08.your-server.de ([78.47.166.52])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1w4fdR-0000dp-1b; Mon, 23 Mar 2026 14:48:01 +0100
+ id 1w4fdS-0000em-1z; Mon, 23 Mar 2026 14:48:02 +0100
 Received: from localhost ([127.0.0.1])
  by sslproxy08.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1w4fdQ-000M7t-15; Mon, 23 Mar 2026 14:48:01 +0100
+ id 1w4fdR-000M7t-1I; Mon, 23 Mar 2026 14:48:02 +0100
 From: Max Merchel <Max.Merchel@ew.tq-group.com>
 To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
  Markus Niebel <Markus.Niebel@ew.tq-group.com>
-Cc: Max Merchel <Max.Merchel@ew.tq-group.com>, u-boot@lists.denx.de,
- u-boot@ew.tq-group.com
-Subject: [PATCH v2 03/10] [cleanup]configs: tqma6.h: remove unused define for
- PFUZE100_I2C
-Date: Mon, 23 Mar 2026 14:47:33 +0100
-Message-ID: <20260323134746.787430-4-Max.Merchel@ew.tq-group.com>
+Cc: Paul Gerber <Paul.Gerber@ew.tq-group.com>, u-boot@lists.denx.de,
+ u-boot@ew.tq-group.com, Max Merchel <Max.Merchel@ew.tq-group.com>
+Subject: [PATCH v2 07/10] board: tqma6: use common TQ baseboard
+Date: Mon, 23 Mar 2026 14:47:37 +0100
+Message-ID: <20260323134746.787430-8-Max.Merchel@ew.tq-group.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260323134746.787430-1-Max.Merchel@ew.tq-group.com>
 References: <20260323134746.787430-1-Max.Merchel@ew.tq-group.com>
@@ -75,30 +74,285 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove the definition of CFG_POWER_PFUZE100_I2C_ADDR and
-TQMA6_PFUZE100_I2C_BUS as it is not used.
+From: Paul Gerber <Paul.Gerber@ew.tq-group.com>
 
+Update functions to use the common baseboard header and
+select TQ_COMMON_BB Kconfig option for MBa6 and WRU4.
+
+While at it, remove empty implementations that are now covered by
+board/tq/common.
+
+Signed-off-by: Paul Gerber <Paul.Gerber@ew.tq-group.com>
 Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
 ---
- include/configs/tqma6.h | 5 -----
- 1 file changed, 5 deletions(-)
+ board/tq/tqma6/Kconfig      |  4 ++++
+ board/tq/tqma6/tqma6.c      | 17 +++++++++--------
+ board/tq/tqma6/tqma6_bb.h   | 28 ----------------------------
+ board/tq/tqma6/tqma6_mba6.c | 26 +++-----------------------
+ board/tq/tqma6/tqma6_wru4.c | 29 +++++++----------------------
+ 5 files changed, 23 insertions(+), 81 deletions(-)
+ delete mode 100644 board/tq/tqma6/tqma6_bb.h
 
-diff --git a/include/configs/tqma6.h b/include/configs/tqma6.h
-index 7c59b722e2f..bb335ee1b41 100644
---- a/include/configs/tqma6.h
-+++ b/include/configs/tqma6.h
-@@ -20,11 +20,6 @@
+diff --git a/board/tq/tqma6/Kconfig b/board/tq/tqma6/Kconfig
+index 9cb0c909aa9..1ef9f6732aa 100644
+--- a/board/tq/tqma6/Kconfig
++++ b/board/tq/tqma6/Kconfig
+@@ -72,6 +72,7 @@ choice
  
- #define TQMA6_SPI_FLASH_SECTOR_SIZE	SZ_64K
+ config MBA6
+ 	bool "TQMa6 on MBa6 Starterkit"
++	select TQ_COMMON_BB
+ 	select USB
+ 	select CMD_USB
+ 	select USB_STORAGE
+@@ -92,6 +93,7 @@ config MBA6
  
--#if !defined(CONFIG_DM_PMIC)
--#define CFG_POWER_PFUZE100_I2C_ADDR	0x08
--#define TQMA6_PFUZE100_I2C_BUS		2
--#endif
+ config WRU4
+ 	bool "OHB WRU-IV"
++	select TQ_COMMON_BB
+ 	help
+ 	  Select the
+ 	  OHB Systems AG WRU-IV baseboard.
+@@ -107,4 +109,6 @@ config IMX_CONFIG
+ 	default "board/tq/tqma6/tqma6dl.cfg" if TQMA6DL
+ 	default "board/tq/tqma6/tqma6s.cfg" if TQMA6S
+ 
++source "board/tq/common/Kconfig"
++
+ endif
+diff --git a/board/tq/tqma6/tqma6.c b/board/tq/tqma6/tqma6.c
+index 75d36240a1e..a3a0a11c42b 100644
+--- a/board/tq/tqma6/tqma6.c
++++ b/board/tq/tqma6/tqma6.c
+@@ -26,7 +26,7 @@
+ #include <power/pfuze100_pmic.h>
+ #include <power/pmic.h>
+ 
+-#include "tqma6_bb.h"
++#include "../common/tq_bb.h"
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -41,7 +41,7 @@ static const uint16_t tqma6_emmc_dsr = 0x0100;
+ 
+ int board_early_init_f(void)
+ {
+-	return tqma6_bb_board_early_init_f();
++	return tq_bb_board_early_init_f();
+ }
+ 
+ int board_init(void)
+@@ -49,7 +49,7 @@ int board_init(void)
+ 	/* address of boot parameters */
+ 	gd->bd->bi_boot_params = PHYS_SDRAM + 0x100;
+ 
+-	tqma6_bb_board_init();
++	tq_bb_board_init();
+ 
+ 	return 0;
+ }
+@@ -96,11 +96,12 @@ int board_late_init(void)
+ {
+ 	env_set("board_name", tqma6_get_boardname());
+ 
+-	tqma6_bb_board_late_init();
++	tq_bb_board_late_init();
+ 
+ 	printf("Board: %s on a %s\n", tqma6_get_boardname(),
+-	       tqma6_bb_get_boardname());
+-	return 0;
++	       tq_bb_get_boardname());
++
++	return tq_bb_checkboard();
+ }
+ 
+ /*
+@@ -113,14 +114,14 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ 	char modelstr[MODELSTRLEN];
+ 
+ 	snprintf(modelstr, MODELSTRLEN, "TQ %s on %s", tqma6_get_boardname(),
+-		 tqma6_bb_get_boardname());
++		 tq_bb_get_boardname());
+ 	do_fixup_by_path_string(blob, "/", "model", modelstr);
+ 	fdt_fixup_memory(blob, (u64)PHYS_SDRAM, (u64)gd->ram_size);
+ 	/* bring in eMMC dsr settings */
+ 	do_fixup_by_path_u32(blob,
+ 			     "/soc/aips-bus@02100000/usdhc@02198000",
+ 			     "dsr", tqma6_emmc_dsr, 2);
+-	tqma6_bb_ft_board_setup(blob, bd);
++	tq_bb_ft_board_setup(blob, bd);
+ 
+ 	return 0;
+ }
+diff --git a/board/tq/tqma6/tqma6_bb.h b/board/tq/tqma6/tqma6_bb.h
+deleted file mode 100644
+index e17e6ad3f57..00000000000
+--- a/board/tq/tqma6/tqma6_bb.h
++++ /dev/null
+@@ -1,28 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-or-later */
+-/*
+- * Copyright (c) 2013-2014 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
+- * D-82229 Seefeld, Germany.
+- * Author: Markus Niebel
+- */
 -
- /* MMC Configs */
- #define CFG_SYS_FSL_ESDHC_ADDR	0
+-#ifndef __TQMA6_BB__
+-#define __TQMA6_BB__
+-
+-int tqma6_bb_board_mmc_getwp(struct mmc *mmc);
+-int tqma6_bb_board_mmc_getcd(struct mmc *mmc);
+-int tqma6_bb_board_mmc_init(struct bd_info *bis);
+-
+-int tqma6_bb_board_early_init_f(void);
+-int tqma6_bb_board_init(void);
+-int tqma6_bb_board_late_init(void);
+-int tqma6_bb_checkboard(void);
+-
+-const char *tqma6_bb_get_boardname(void);
+-/*
+- * Device Tree Support
+- */
+-#if defined(CONFIG_OF_BOARD_SETUP) && defined(CONFIG_OF_LIBFDT)
+-void tqma6_bb_ft_board_setup(void *blob, struct bd_info *bd);
+-#endif /* defined(CONFIG_OF_BOARD_SETUP) && defined(CONFIG_OF_LIBFDT) */
+-
+-#endif
+diff --git a/board/tq/tqma6/tqma6_mba6.c b/board/tq/tqma6/tqma6_mba6.c
+index 46989102fec..d604d6d4f0a 100644
+--- a/board/tq/tqma6/tqma6_mba6.c
++++ b/board/tq/tqma6/tqma6_mba6.c
+@@ -31,7 +31,7 @@
+ #include <mmc.h>
+ #include <netdev.h>
  
+-#include "tqma6_bb.h"
++#include "../common/tq_bb.h"
+ 
+ #if defined(CONFIG_TQMA6Q)
+ 
+@@ -126,34 +126,14 @@ int board_phy_config(struct phy_device *phydev)
+ 	return 0;
+ }
+ 
+-int tqma6_bb_board_early_init_f(void)
+-{
+-	return 0;
+-}
+-
+-int tqma6_bb_board_init(void)
++int tq_bb_board_init(void)
+ {
+ 	mba6_setup_iomuxc_enet();
+ 
+ 	return 0;
+ }
+ 
+-int tqma6_bb_board_late_init(void)
+-{
+-	return 0;
+-}
+-
+-const char *tqma6_bb_get_boardname(void)
++const char *tq_bb_get_boardname(void)
+ {
+ 	return "MBa6x";
+ }
+-
+-/*
+- * Device Tree Support
+- */
+-#if defined(CONFIG_OF_BOARD_SETUP) && defined(CONFIG_OF_LIBFDT)
+-void tqma6_bb_ft_board_setup(void *blob, struct bd_info *bd)
+-{
+- /* TBD */
+-}
+-#endif /* defined(CONFIG_OF_BOARD_SETUP) && defined(CONFIG_OF_LIBFDT) */
+diff --git a/board/tq/tqma6/tqma6_wru4.c b/board/tq/tqma6/tqma6_wru4.c
+index 7acefc7b064..a7dc8fca109 100644
+--- a/board/tq/tqma6/tqma6_wru4.c
++++ b/board/tq/tqma6/tqma6_wru4.c
+@@ -33,7 +33,7 @@
+ #include <mmc.h>
+ #include <netdev.h>
+ 
+-#include "tqma6_bb.h"
++#include "../common/tq_bb.h"
+ 
+ /* UART */
+ #define UART4_PAD_CTRL (			\
+@@ -95,7 +95,7 @@ static struct fsl_esdhc_cfg usdhc2_cfg = {
+ 	.max_bus_width = 4,
+ };
+ 
+-int tqma6_bb_board_mmc_getcd(struct mmc *mmc)
++int tq_bb_board_mmc_getcd(struct mmc *mmc)
+ {
+ 	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
+ 	int ret = 0;
+@@ -106,7 +106,7 @@ int tqma6_bb_board_mmc_getcd(struct mmc *mmc)
+ 	return ret;
+ }
+ 
+-int tqma6_bb_board_mmc_getwp(struct mmc *mmc)
++int tq_bb_board_mmc_getwp(struct mmc *mmc)
+ {
+ 	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
+ 	int ret = 0;
+@@ -117,7 +117,7 @@ int tqma6_bb_board_mmc_getwp(struct mmc *mmc)
+ 	return ret;
+ }
+ 
+-int tqma6_bb_board_mmc_init(struct bd_info *bis)
++int tq_bb_board_mmc_init(struct bd_info *bis)
+ {
+ 	int ret;
+ 
+@@ -256,14 +256,14 @@ static void gpio_init(void)
+ 		gpio_direction_output(GPIO_UART3_PWRON, 0);
+ }
+ 
+-int tqma6_bb_board_early_init_f(void)
++int tq_bb_board_early_init_f(void)
+ {
+ 	setup_iomuxc_uart4();
+ 
+ 	return 0;
+ }
+ 
+-int tqma6_bb_board_init(void)
++int tq_bb_board_init(void)
+ {
+ 	setup_iomuxc_enet();
+ 
+@@ -279,12 +279,7 @@ int tqma6_bb_board_init(void)
+ 	return 0;
+ }
+ 
+-int tqma6_bb_board_late_init(void)
+-{
+-	return 0;
+-}
+-
+-const char *tqma6_bb_get_boardname(void)
++const char *tq_bb_get_boardname(void)
+ {
+ 	return "WRU-IV";
+ }
+@@ -331,13 +326,3 @@ int board_ehci_power(int port, int on)
+ 
+ 	return 0;
+ }
+-
+-/*
+- * Device Tree Support
+- */
+-#if defined(CONFIG_OF_BOARD_SETUP) && defined(CONFIG_OF_LIBFDT)
+-void tqma6_bb_ft_board_setup(void *blob, struct bd_info *bd)
+-{
+-	/* TBD */
+-}
+-#endif /* defined(CONFIG_OF_BOARD_SETUP) && defined(CONFIG_OF_LIBFDT) */
 -- 
 2.43.0
 
