@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDC74F46112
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 13:48:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6310F4610D
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 13:48:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC6B8841CD;
-	Mon, 23 Mar 2026 14:48:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 36B7F8418C;
+	Mon, 23 Mar 2026 14:48:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="lFC6yu5q";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="nkwD6bmQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 979058419E; Mon, 23 Mar 2026 14:48:04 +0100 (CET)
+ id 7C190841DD; Mon, 23 Mar 2026 14:48:06 +0100 (CET)
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 134C384099
+ by phobos.denx.de (Postfix) with ESMTPS id 8184784144
  for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 14:48:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
@@ -30,29 +30,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=F6+XSV8yGvzI0jfM0moNsNejs8Y6nngqZJ7GL30gjO8=; b=lFC6yu5qECiWwhRzRO4sIVAD4e
- 1YT3NUiQhq0CX/kCWf0RlyZzJW/gM2lVKxL+78oxecGJgzk0hthDGuN4oebjeHUcPrBBpWwouaAlX
- QbcPbq9o+MasbBPWeD0N3xh3iqK+/d1RQLW2WMURJ0LlMGvApgFKfUr4RnGgCKdLDEwD3VfUxGCwg
- GDhHhU0qbzd6iO3MAvWNE3A0cAZ0oJN4OLrI00t9VwPsBo0XijlhUV4qB8v/8kow1qm4sbNigSqHj
- 5boJz4tZuwLrG1FcGkqxglQrUDuLZhzCbRfsbybRKeYRwXae6QD66Cak3IXG+6caN//71Kik8sPjZ
- I45E2Myw==;
+ bh=PIYMrE88u+S0LTwXWRCu+iJDKudKgWa5sdoxg8sKxC4=; b=nkwD6bmQyZ8g/XB7hagXLRTrHz
+ sN1mN/lbyyk0WdFjG8Bb5k8j5xFd+Q72+BBcHhpazuC2Npkb6V5ERwaRtto1m/4OCtj3Uk0BrNCtL
+ 5xr/HWee6zH3OPQliofDuNqCyvYySGFP/kcofNOOVjhgC/T/pKJ1W8ZP5PQdHSVmNbcCcYyCJ5779
+ YTFToIMRevranGVuSrmGQLAuirbrI1F7HpSW2+gy0dJ9IDZK+GfT2patKb2vd1DPZpQTEzifWGhQ+
+ wbtPU4OpGjbATlJiamgGm5xTVzjZLZKXlPIcQvCEa158sONKrd9YuqLnBTvcc1Zrb7QaQxHCXiloG
+ s1VApa2Q==;
 Received: from sslproxy08.your-server.de ([78.47.166.52])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1w4fdQ-0000df-3C; Mon, 23 Mar 2026 14:48:01 +0100
+ id 1w4fdR-0000dp-1b; Mon, 23 Mar 2026 14:48:01 +0100
 Received: from localhost ([127.0.0.1])
  by sslproxy08.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1w4fdP-000M7t-2d; Mon, 23 Mar 2026 14:48:00 +0100
+ id 1w4fdQ-000M7t-15; Mon, 23 Mar 2026 14:48:01 +0100
 From: Max Merchel <Max.Merchel@ew.tq-group.com>
 To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
  Markus Niebel <Markus.Niebel@ew.tq-group.com>
-Cc: u-boot@lists.denx.de, u-boot@ew.tq-group.com,
- Max Merchel <Max.Merchel@ew.tq-group.com>
-Subject: [PATCH v2 01/10] env: tq: add shareable environment settings
-Date: Mon, 23 Mar 2026 14:47:31 +0100
-Message-ID: <20260323134746.787430-2-Max.Merchel@ew.tq-group.com>
+Cc: Max Merchel <Max.Merchel@ew.tq-group.com>, u-boot@lists.denx.de,
+ u-boot@ew.tq-group.com
+Subject: [PATCH v2 03/10] [cleanup]configs: tqma6.h: remove unused define for
+ PFUZE100_I2C
+Date: Mon, 23 Mar 2026 14:47:33 +0100
+Message-ID: <20260323134746.787430-4-Max.Merchel@ew.tq-group.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260323134746.787430-1-Max.Merchel@ew.tq-group.com>
 References: <20260323134746.787430-1-Max.Merchel@ew.tq-group.com>
@@ -74,297 +75,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Remove the definition of CFG_POWER_PFUZE100_I2C_ADDR and
+TQMA6_PFUZE100_I2C_BUS as it is not used.
 
-Prepare moving boiler plate code out of board confguration header and
-prepare to share a lot of things between boards.
-
-Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
 ---
- include/env/tq/mmc.env           | 82 ++++++++++++++++++++++++++++++++
- include/env/tq/nfs.env           | 51 ++++++++++++++++++++
- include/env/tq/spi.env           | 23 +++++++++
- include/env/tq/tq-imx-shared.env | 38 +++++++++++++++
- include/env/tq/ubi.env           | 47 ++++++++++++++++++
- 5 files changed, 241 insertions(+)
- create mode 100644 include/env/tq/mmc.env
- create mode 100644 include/env/tq/nfs.env
- create mode 100644 include/env/tq/spi.env
- create mode 100644 include/env/tq/tq-imx-shared.env
- create mode 100644 include/env/tq/ubi.env
+ include/configs/tqma6.h | 5 -----
+ 1 file changed, 5 deletions(-)
 
-diff --git a/include/env/tq/mmc.env b/include/env/tq/mmc.env
-new file mode 100644
-index 00000000000..abf561f8467
---- /dev/null
-+++ b/include/env/tq/mmc.env
-@@ -0,0 +1,82 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
-+/*
-+ * Copyright (c) 2024-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Max Merchel
-+ *
-+ * shared mmc environment for TQ boards
-+ */
-+
-+addmmc=
-+	setenv bootargs "${bootargs}"
-+	root=/dev/mmcblk"${mmcblkdev}"p"${mmcrootpart}" "${rootfsmode}" rootwait;
-+
-+get_blockcount=
-+	setexpr blkc "${filesize}" + 0x1ff;
-+	setexpr blkc "${blkc}" / 0x200;
-+
-+load_mmc=
-+	mmc dev "${mmcdev}"; mmc rescan;
-+	load mmc "${mmcdev}":"${mmcpart}" "${kernel_addr_r}" /boot/"${image}";
-+	load mmc "${mmcdev}":"${mmcpart}" "${fdt_addr_r}" /boot/"${fdtfile}";
-+	fdt address "${fdt_addr_r}";
-+        fdt resize 0x100000;
-+	for overlay in "${fdt_overlays}"; do
-+		load mmc "${mmcdev}":"${mmcpart}" "${fdtoverlay_addr_r}"
-+                        /boot/"${overlay}" && fdt apply "${fdtoverlay_addr_r}";
-+	done;
-+
-+mmcargs=run addtty addmmc
-+
-+mmcboot=
-+	echo "Booting from mmc ...";
-+	setenv bootargs && run mmcargs &&
-+	if run load_mmc; then
-+		run boot_os;
-+	else
-+		echo "ERROR: loading from mmc";
-+	fi;
-+
-+mmcpart=2
-+
-+mmc_finish_update_uboot=
-+	mmc write "${loadaddr}" "${update_start_blk}" "${blkc}";
-+	mmc dev "${mmcdev}" 0;
-+	setenv update_part;
-+	setenv update_start_blk;
-+	setenv blkc;
-+
-+mmc_prepare_update_uboot=
-+	echo "Write U-Boot to mmc "${mmcdev}" ...";
-+	mmc dev "${mmcdev}"; mmc rescan;
-+	run get_blockcount;
-+	setenv update_start_blk "${uboot_mmc_start}";
-+	setenv update_part 0;
-+
-+mmc_switch_part=
-+	mmc partconf "${mmcdev}" update_part;
-+	mmc dev "${mmcdev}" "${update_part}";
-+
-+mmcrootpart=2
-+
-+update_uboot_mmc=
-+	run check_ipaddr;
-+	if tftp "${uboot}"; then
-+		run mmc_prepare_update_uboot;
-+		if itest "${blkc}" >= "${uboot_mmc_size}"; then
-+			echo "ERROR: size to large ...";
-+			exit;
-+		fi;
-+		if itest "${mmcdev}" == "${emmc_dev}"; then
-+			run mmc_switch_part;
-+			if itest "${update_part}" > 0 ; then
-+				if env exists emmc_bootp_start; then
-+					setenv update_start_blk "${emmc_bootp_start}";
-+				else
-+					echo "ERROR: eMMC boot partition block unset";
-+					exit;
-+				fi;
-+			fi;
-+		fi;
-+		run mmc_finish_update_uboot;
-+	fi;
-diff --git a/include/env/tq/nfs.env b/include/env/tq/nfs.env
-new file mode 100644
-index 00000000000..53fcbd0d152
---- /dev/null
-+++ b/include/env/tq/nfs.env
-@@ -0,0 +1,51 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
-+/*
-+ * Copyright (c) 2024-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Max Merchel
-+ *
-+ * shared nfs environment for TQ boards
-+ */
-+
-+addnfs=
-+	setenv bootargs "${bootargs}" root=/dev/nfs rw
-+        nfsroot="${serverip}":"${rootpath}",v3,tcp
-+
-+load_nfs=
-+	nfs "${kernel_addr_r}" "${serverip}":"${rootpath}"/boot/"${image}";
-+	nfs "${fdt_addr_r}" "${serverip}":"${rootpath}"/boot/"${fdtfile}";
-+	fdt address "${fdt_addr_r}";
-+	fdt resize 0x100000;
-+	for overlay in "${fdt_overlays}"; do
-+		nfs "${fdtoverlay_addr_r}"
-+		        "${serverip}":"${rootpath}"/boot/"${overlay}" &&
-+			fdt apply "${fdtoverlay_addr_r}";
-+	done;
-+
-+load_tftp=
-+	tftp "${kernel_addr_r}" "${image}";
-+	tftp "${fdt_addr_r}" "${fdtfile}";
-+	fdt address "${fdt_addr_r}";
-+	fdt resize 0x100000;
-+	for overlay in "${fdt_overlays}"; do
-+		if tftp "${fdtoverlay_addr_r}" "${overlay}"; then
-+			fdt apply "${fdtoverlay_addr_r}";
-+		else
-+			exit;
-+		fi;
-+	done;
-+
-+netargs=run addnfs addip addtty
-+
-+netloadcmd=load_tftp
-+
-+nfsboot=
-+	echo "Booting from NFS ...";
-+	setenv bootargs;
-+	run netargs;
-+	run check_ipaddr;
-+	if run ${netloadcmd}; then
-+		run boot_os;
-+	else
-+		echo "ERROR: loading from NFS";
-+	fi;
-diff --git a/include/env/tq/spi.env b/include/env/tq/spi.env
-new file mode 100644
-index 00000000000..47dcfea7d3f
---- /dev/null
-+++ b/include/env/tq/spi.env
-@@ -0,0 +1,23 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
-+/*
-+ * Copyright (c) 2024-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Max Merchel
-+ *
-+ * shared spi environment for TQ boards
-+ */
-+
-+update_uboot_spi=
-+	run check_ipaddr;
-+	if tftp ${uboot}; then
-+		if itest "${filesize}" >= "${uboot_spi_size}"; then
-+			echo "ERROR: size to large ...";
-+			exit;
-+		fi;
-+		echo "Write u-boot image to SPI NOR ...";
-+		if sf probe; then
-+			run write_uboot_spi;
-+		fi;
-+	fi;
-+
-+write_uboot_spi=sf update "${loadaddr}" "${uboot_spi_start}" "${filesize}"
-diff --git a/include/env/tq/tq-imx-shared.env b/include/env/tq/tq-imx-shared.env
-new file mode 100644
-index 00000000000..d4e42f8b536
---- /dev/null
-+++ b/include/env/tq/tq-imx-shared.env
-@@ -0,0 +1,38 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
-+/*
-+ * Copyright (c) 2024-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Max Merchel
-+ *
-+ * shared environment for TQ imx boards
-+ */
-+
-+#ifdef CONFIG_CMD_SF
-+#include "spi.env"
-+#ifdef CONFIG_CMD_UBIFS
-+#include "ubi.env"
-+#endif /* CONFIG_CMD_UBIFS */
-+#endif /* CONFIG_CMD_SF */
-+
-+#ifdef CONFIG_CMD_MMC
-+#include "mmc.env"
-+#endif
-+
-+#ifdef CONFIG_CMD_NFS
-+#include "nfs.env"
-+#endif
-+
-+addip=
-+	run check_ipaddr;
-+	setenv bootargs "${bootargs}"
-+	ip="${ipaddr}":"${serverip}":"${gatewayip}":"${netmask}":"${hostname}":"${netdev}":off
-+
-+addtty=setenv bootargs "${bootargs}" "${console}"
-+
-+check_ipaddr=
-+	if test -z "${ipaddr}" || test -z "${serverip}"; then
-+		echo "ipaddr or serverip unset, falling back to DHCP...";
-+		dhcp;
-+	fi;
-+
-+rootfsmode=ro
-diff --git a/include/env/tq/ubi.env b/include/env/tq/ubi.env
-new file mode 100644
-index 00000000000..01243d2eb53
---- /dev/null
-+++ b/include/env/tq/ubi.env
-@@ -0,0 +1,47 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
-+/*
-+ * Copyright (c) 2024-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Max Merchel
-+ *
-+ * shared ubi environment for TQ boards
-+ */
-+
-+addubi=
-+	setenv bootargs "${bootargs}" rootfstype=ubifs ubi.mtd="${ubimtdname}"
-+        root=ubi0:"${ubirootfsvol}" "${rootfsmode}" rootwait;
-+
-+load_spi=
-+	if sf probe; then
-+                if ubi part "${ubirootfspart}"; then
-+			if ubifsmount ubi0:"${ubirootfsvol}"; then
-+				ubifsload "${kernel_addr_r}" /boot/"${image}";
-+				ubifsload "${fdt_addr_r}" /boot/"${fdtfile}";
-+                                fdt address "${fdt_addr_r}";
-+				fdt resize 0x100000;
-+				for overlay in "${fdt_overlays}"; do
-+					ubifsload "${fdtoverlay_addr_r}"
-+					/boot/"${overlay}" &&
-+					fdt apply "${fdtoverlay_addr_r}";
-+				done;
-+				ubifsumount;
-+			fi;
-+			ubi detach;
-+		fi;
-+	fi
-+
-+ubiargs=run addubi addtty
-+
-+ubiboot=
-+	echo "Booting from UBI ...";
-+	setenv bootargs;
-+	run ubiargs;
-+	if run load_spi; then
-+		run boot_os;
-+	else
-+		echo "ERROR: loading kernel";
-+	fi;
-+
-+ubimtdname=mtdname
-+ubirootfspart=ubi
-+ubirootfsvol=root
+diff --git a/include/configs/tqma6.h b/include/configs/tqma6.h
+index 7c59b722e2f..bb335ee1b41 100644
+--- a/include/configs/tqma6.h
++++ b/include/configs/tqma6.h
+@@ -20,11 +20,6 @@
+ 
+ #define TQMA6_SPI_FLASH_SECTOR_SIZE	SZ_64K
+ 
+-#if !defined(CONFIG_DM_PMIC)
+-#define CFG_POWER_PFUZE100_I2C_ADDR	0x08
+-#define TQMA6_PFUZE100_I2C_BUS		2
+-#endif
+-
+ /* MMC Configs */
+ #define CFG_SYS_FSL_ESDHC_ADDR	0
+ 
 -- 
 2.43.0
 
