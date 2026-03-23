@@ -4,111 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2638AEC01A4
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 08:36:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59196EC01A2
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 08:39:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62A6C83DB6;
-	Mon, 23 Mar 2026 09:36:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 9B84383DB6;
+	Mon, 23 Mar 2026 09:39:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="dnc1qVM1";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="mlJFIuee";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D271983FAF; Mon, 23 Mar 2026 09:36:35 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3A57984073; Mon, 23 Mar 2026 09:39:54 +0100 (CET)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 806B483BE1
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 09:36:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 056C583BE1
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 09:39:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-b982a80317fso321955366b.1
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 01:36:33 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774254993; cv=none;
- d=google.com; s=arc-20240605;
- b=ZiI8Gd/NSvI3ajam9UwdM2yLBb32HIBz3T8ZtKnr9rlZtle2g909FP8XAdVhoneKgl
- 6Ima9Hdp0Ip7Mx3S/nHWNLiN+yTJ1XJn/tO6Eb6reUXWenTA8r/di0Wd/HdhsEarb86R
- MWjz1/AAHK6h5E1zovDH/ZR3Nl7Az6aajG3WQqs9+XBmQxdHiv8QYWp/yRTGu8YyA9FB
- Ns+0CQ1XWtNH6id4Th8H3iySmEXnZdGRS1vlIpaqxVobhzsON3VXguffsUDhnLfFUFJz
- MkTxh9nDg0zO9eLyjM+vpcrd9hkiHLaXTsYqwaI2QJf715KjIBAnlYfUYcgAWHeuhfOB
- kLkQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=azwb/ClmOETJ8C4G2JFVM6hCPjaLoUiksg/HWe8BFac=;
- fh=QYlt14pcNm5uAcw1vKFTAUKEwdSMRn61eunrphEZcSA=;
- b=V8VOzroGIysaqmHN0NSI0AzuYg31efy9BU63kdJd69ZW6rVTAS86GMnKwwdqORi9oR
- Gn8bBGAwGG/OolAim1dlQ40DGV0IkH5jw3xPCekH6BjTyCMih4ieNkz8uu1Pm6gJ2J8W
- g9vlOH7ycFmFK5a0ggquqZtwO/TmKZTfm+8UWNuKTBEDeHBmC1DIJjtTr+PMuyFOhE3k
- TmnDKriDINcmGeheM4ZXYyJZ0J++45vRCvK6idJPYmdjBTzo8VOEkigp2yhhqvtiWzFv
- x5Xw/3T//s2b48EtxKsNpR2pJ+w7ofobVCnE7InIH4NtVNmwA9+14WQU+lZJUpfBociM
- 0uhQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774254993; x=1774859793;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=azwb/ClmOETJ8C4G2JFVM6hCPjaLoUiksg/HWe8BFac=;
- b=dnc1qVM1ZGOUF0HnyuARJJyMuZZfYjJfr5fvUtuI7Ws+yoB0NcJZmsboT9jzvAfebn
- +xBT+Vhb/0DaoAjmj5uGuHPxFXqMGaxdowPuseipmsHkJuh8Qn1v+ckng+99lBrVqRLu
- dOJhEdB2oGD80UE88DGAmCC6jJkI0RKvG8NWu/j5Fm4TWeiJPsRbIxfhXS4HTLiCYIe1
- 4jjLkh0l91EOiN+zIzTAhB5iTt25JlzW512Sm53kgwB/YHV17rM6cFAqQ574OTsJCv6u
- KasaUh5HCEMfEECH5YLLSz+TJtscF9WJkxFrM1ulYga7P7mKeR7fjS4r3+/mCcU0R45v
- 5tIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774254993; x=1774859793;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=azwb/ClmOETJ8C4G2JFVM6hCPjaLoUiksg/HWe8BFac=;
- b=IlnlTmCCib3fc9ROl6xT0qtj4+YbgB5DIy3W/tkL4zSE5KbCS24L5D+PSceYvwrVQP
- K66P9zDa3AoBT1DqQlt2za5hYG3WWETiK0SKPa0vgehNF03roA6ktWVNHouuV1pAQ+fw
- /p31YpAkxJ8uGqRxKW6L4MZeRXHlbjFFO1mBcWc5inq8L/nYd63eNfvdNvA1p/X3XUob
- RUK3DXLu+US/9zogdwWD42G91MA4RYCnnyod9FvjF0agkIkhd1xalXkl85/tlCkwOePo
- /BbnclEMEyJO+528ehgwmKk9rlTmN08V3YaPBoFrmLAccit9e9Y4rDW69zksY6A2gj7B
- 9r/Q==
-X-Gm-Message-State: AOJu0YwuooNtIix0TleZ84HyAozJmkrgqtFLwlepZeBVTT81j4KOJ01f
- BdHV55Q9LC/h6sCHLYBkK3qAXP9cx0Zs1Ns9eQ7zSo7KLkPKMAQBYA81bQsWLHd1YA8aEstAHXB
- FNuBHjDOS2Z+2V0eELSH9mNG+5KUIy2Uw9HsNerKC1g==
-X-Gm-Gg: ATEYQzwOWCsVrPNnbbITiA1mexsOgkZm9LcZrMwUwumYmA7h1qIZORqrCKNuQfGwT3u
- ZPZczzG5EQqsp8GCNkmr/bgtLfFe9Rjz7lC6s4OG11bLFI1dwc1NOLhKzaBMcdcwbcNT4P99enB
- GKtov7pvSgyelyDRDs5Qk+V/c48wd23Ax46ufo9xJWWTLyizRcNCdIf4d6CFsQLP3ydUFLM2vuP
- nf/Enufx+TA5k0vkZeI5IUXwD75POOOFUXYHIwiSAIUUadTR+3RjuGaaH5uGX8UWWtuaNJFoZwn
- o1Jp07dKO+JD9SkSMsIizo9qEX8OOkNLAOXxndOGZyElxWL6/4R1cEyr+fO4hXB1jWxGJ4cfSJg
- GvYNvPMP/SWE6SfLAlQRwR0rbQg==
-X-Received: by 2002:a17:906:4786:b0:b97:bd5d:36fb with SMTP id
- a640c23a62f3a-b98594ed1e0mr366654066b.57.1774254992896; Mon, 23 Mar 2026
- 01:36:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=CpF3ONDw4uE6kYEHdDZ9pszQMJ050GZ/6HKJTdDCBcBQhnce/uQJYO0bv3K0PVn4ybBxcTogPvi1tTavoM7X2mQXhhTlxLcWE8/5ntuvtQyKEqvuQKsNtw0E6agwtirbj5w9Br75KsqOfjqBfb0JD28NzMAFNGnNVvqFkoXWx1N6aH+tTG8eSO0j5POnsK/aD07MkMCmMn1fWfhU/3M2Iox4dFLlwuuoOxDDhJBFtncoyBxnUM6X7cHaEep2IJBeqV45AGxdawZhVumDsTwFvL5rIBlwgkrQ3IIXSjDh0Fth+NXLftcGNAsmb0hS4ZuUFKgNNoe0O/YtmK44LevHVA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YNl91ZOceO/eFEMNVTF7cYEiX0SSxhdXxX6tbR9pMSg=;
+ b=faTEYijfm++/WnUzZxiNmsPvKwDKqoZ6R/ZwGusO5sLTuGB5NQUjZzBnIF0ERGtgmxqpnQyaNTGyKVqH/12oCe4QkWjvU3nR5u3rrMXGcnM7P/vFvMcRHmcPyJ8HESx/gXAUSYoKADAg+quBZhj3qMWI1zAsiRmd+T6s5gunNpexe99dyV5KCjGUuf9YpSAzIWdeqaZJUY/UFtzVPeQth44uAalqBrgML27h6rRDFbBvsCU1noyrneMEi+Ban2Zt8LYHo1poQl7lX/ZPXQtcRiUtyctIR+xHQtAp1vMvIr62481K9ZCGKGL3tffpgvyXMyW8UgZOJvLQe52ZTnwp2Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YNl91ZOceO/eFEMNVTF7cYEiX0SSxhdXxX6tbR9pMSg=;
+ b=mlJFIuee0XYMB/4/npNgxSU0KXHhBb5o9OBkqj2nvQthMzT007ctf4DCNeTLnzHwuMlAhKwMkz8QdsjSqkxUxle1SrZ5aFrx5M/iVtFHbPp108lxf9fx51vfgIT8QKUm71VMb8HFTbKw4evNZfa+rd8dwFzPVFM2NEF2SFjNuBs=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
+ by AMBPR10MB9779.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:766::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.20; Mon, 23 Mar
+ 2026 08:39:49 +0000
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8%5]) with mapi id 15.20.9723.030; Mon, 23 Mar 2026
+ 08:39:49 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Rasmus Villemoes <ravi@prevas.dk>
+Subject: [PATCH] linker_lists.h: drop never used ll_start, ll_end macros
+Date: Mon, 23 Mar 2026 09:39:28 +0100
+Message-ID: <20260323083928.1928856-1-ravi@prevas.dk>
+X-Mailer: git-send-email 2.53.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: GV3P280CA0012.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:150:b::23) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:681::18)
 MIME-Version: 1.0
-References: <20260318-rename-genio-defconfigs-v2-0-1f77580d72f3@baylibre.com>
- <9060e287-9b77-4051-b378-c68ddba4fa65@baylibre.com>
-In-Reply-To: <9060e287-9b77-4051-b378-c68ddba4fa65@baylibre.com>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Mon, 23 Mar 2026 09:36:24 +0100
-X-Gm-Features: AaiRm51zT6pLviNfJ_wREo2q-UQ-PP_m8Dgt7S-glaNNRiE_PXeq8H4c8pbVLeg
-Message-ID: <CAEHHSvaFcOzyz1-WkunbYELGOwP11w0z9ZtNOLTGFm5G9qRCHg@mail.gmail.com>
-Subject: Re: [PATCH v2 0/6] configs: mediatek: rename genio boards defconfigs
- to match the device tree name
-To: David Lechner <dlechner@baylibre.com>
-Cc: u-boot@lists.denx.de, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Tom Rini <trini@konsulko.com>, Macpaul Lin <Macpaul.Lin@mediatek.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Julien Masson <jmasson@baylibre.com>, Peng Fan <peng.fan@nxp.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|AMBPR10MB9779:EE_
+X-MS-Office365-Filtering-Correlation-Id: 12a0e5e3-23b7-4a18-1bff-08de88b7be83
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|52116014|376014|366016|1800799024|38350700014|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: rJI76AUv5w2wZ6PIslbrpEBgRAmCCjxrjNNW63Eg62wrn4f5o6KCk7UWd9D/G4b8iMulWJhMs3SKxs7gdZqAFbJ0s7Dtsf/Bm7sv5LctP23Z6otDFyOwp956llAD+UvQoWHFkdJtdHvo2u7oL1FXH1ewvjV4JYWw/tX1FOAnIAm78edMUN6blHCJkm0kUrpJ5AxTScIs9/AlDTaCHCLOSirIgsCDjryFJk3QPFP8m9geOdMJsRYtrIh/IvDbXMzCkt0TwAEm7hnVjWpXGqQbwzXzHGYBlYJ6jneiHw8pm2IrzK9rO8+DwYq/QpERtSz4UbAGyFtLdrD1TfAHBtk5aeKPtUHuF/hMZ+dh4EHRCXeCnGPUwUgW2ENrUa7Ve5z7OrwPmg/nb2Gib4gljxNRlJrm/81aZO9FvST0eq6NstCHoqudsimQpS1HpiQTY8GQ6NtyaydPwTdCRBodFiHTdjnzou7fO+o+s7PodfaEMgcz7YlYLBmTNRwAaVyiA9uF0998DtyEhy4pKxfN7BA2MhR3uYg01Y4qlTXvQyeQgSDM/bTtn5adXeJ76QV9ZL7Do7fJhwmOO1cOjkNgKEDE+iAz5R3/XPzKZ9rYnvWbWyC6cSGbn03iZN0TQJ5qXNi/hb0LM3AOsZWdqLdr3QfBXc89zMNIv9lbHcbyYUCQdT33HlhnfbdBdOJde0Rp54OlSOL0eoGhZyRjXtiwutSDktK9ozkxZe8y+mTfJGtZ+imN5stnWkGBQIfEox1gCQq7iRupHBLulmnIZI1WJq7IZdiftJ+FBStzG1VUrEbUvaY=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(376014)(366016)(1800799024)(38350700014)(18002099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?PwqD1cQTgDZR+oBGVlQ0LE+9251BjZOKeIqauCXIGoXTrLtYIkIM5Nsfd5e3?=
+ =?us-ascii?Q?slPDdobdkM+utAArzKpTv0cgPWLTElFI9zo/4w3dJ66QP31lriE0guND7F69?=
+ =?us-ascii?Q?ev5cResq0nYOZgfOB3i5HoZ4WtsLKRNqau6HzjZlQhkU9AkKxHSwFrEDk9Eq?=
+ =?us-ascii?Q?BD/BD/+1FnKuYqYaFm01Iv9FT8xEw4OuAaV91OImFHookIQACfOh+YVFHRAT?=
+ =?us-ascii?Q?BcNEHPoRZQJUp4jFmicktcCe4tARN5d+QpSH4jj3Ox/mtj9YLoSrNtX6o8u/?=
+ =?us-ascii?Q?lPLXrsE3EVFWUVwwSLHvuiy7GJKuokRB0uvmXGwXJaOqZCWJW7WzxGR30kXL?=
+ =?us-ascii?Q?B+By0t0Mt1KEW2J7RMl+CiDWv58D8VnMoTpNqKxcEKFRKXdbgavxzcpFHL7I?=
+ =?us-ascii?Q?8O1FL0aIGtv9A4VeK47BQA4AoKGptIAiQEPtSDc3K4GeiWIsceZdhXqR0i0F?=
+ =?us-ascii?Q?/bmOpDTT9s95XU0Cel6aWXSTjYp72H/mYRdqMjyUEASE4ZOG8b8SKaLbTgDH?=
+ =?us-ascii?Q?N9oDToTW+4IWUSidh1gFVlMfP+VTetKVbczrIocHOTNQ23kb2d54bLywlq8/?=
+ =?us-ascii?Q?ZRyV75CpNblz5XhbOFZpvskbpl/4OQA0ILaHV6nvOkfg9m1b4SrU3EfAdIUG?=
+ =?us-ascii?Q?BSEMGCG+MHKuY1Y7IDv8Nb52TqEuFTtQoRJtzbBA5nsoPaGt/8BGfaigoZCG?=
+ =?us-ascii?Q?NJ2TBpowKXF3pAJPvHQddA0oz9cDFUx5PV/m9AaipPNs8511Y2ceUBQFhV3N?=
+ =?us-ascii?Q?kKtRpvxHcAx2i03Kax0pTBx2NHI5Xni/vlKyhSzOqt0Ng0sgRqdb4nWNllsR?=
+ =?us-ascii?Q?leO+y1MN2Bt7Z3KmRP+m61230ENodLCDSc+xrBOji1x2OX4VEeFiEVfBYpZJ?=
+ =?us-ascii?Q?b3E4jYMTy7a2VSH5tneG8ahkWFVq05I0Tw8IAxnW8KSkxUWAi+2vCWzSPnYg?=
+ =?us-ascii?Q?LPMm/fjXKzExzyGTDRbvgl7DbhjYVKwjaMx68tDBmsuQbEwlxAyzZTAi0i/V?=
+ =?us-ascii?Q?JfVAKXSVNReulJyfaYwkTu9/StdwBwSlhi07Rte/WtNally7Wg8CFY+yb/DF?=
+ =?us-ascii?Q?0jFiyIZVzFDfkJU4T7hkpz47Qt5E+f/0HRRQEZGA04MKje1HlvDGjerEfJeE?=
+ =?us-ascii?Q?OQnVAfjTOL7V9aMubQtEhbQombi8liyKrgxSHj+BY9psdRn5k/4mQiUt8mSZ?=
+ =?us-ascii?Q?IRtSbOr++miMvHISdAO/fxV1+kEIID7KJEr7JSrizBF9rP27tdiJsaACdgkq?=
+ =?us-ascii?Q?vc8fGmdOxMp2hv0M0r9/uLJjCNsmQfMLjm3MihLrgxYqHhzOg/ambBB2RSoQ?=
+ =?us-ascii?Q?1QmfLXbb54C4LveXkuGSDhvXf27zm69WJIyMCIL/BwohToVTXXr9aPlVjQV5?=
+ =?us-ascii?Q?SOzG1A4ifNkOySYlCBFc6lSZBb2vVI33/fdCQbz6qLqruUDk5ZZJwETjeyYp?=
+ =?us-ascii?Q?UJu6FTqkZOpUaUqzg6awLhGSankMlR2QwHRDh1rExJWrDaJQgNuY6I1E9Sfc?=
+ =?us-ascii?Q?w2tNBRC5FKDiHfC26XLxkDkOGlvSq/hhMIKvPCUdwHXxggQWE6gelVBejs3d?=
+ =?us-ascii?Q?cKYlTVfefD86i3m4DkDgJDAVWFM61gJAFPfAy57dNgPZQq/A+dX50egmRO8r?=
+ =?us-ascii?Q?RotFM/UvVLTe7ZWE+2OvKf878ZWR6yehQd1U+jEaia8nCOW+SDXv2NBYO7J+?=
+ =?us-ascii?Q?jNW0rlbZUxVeiKWPUm0gzMvQPdY0mBheIyx84paZnCb4FyBIRmmHrr8oJD00?=
+ =?us-ascii?Q?qwtVmNT5WMgigPnHB4iuh7gz8D5dFNs=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 12a0e5e3-23b7-4a18-1bff-08de88b7be83
+X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2026 08:39:49.1783 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Z5foWzKnF5vCZR/8XUl2q5xAU8MKMvTG8bajtNHWpbOvbxEA2vgQ3RuV/+KLmrRWTlZIvg/vmbrmcj1NYNgaSmJki/W24jl/vIuQlhzPsX0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMBPR10MB9779
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,65 +135,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le ven. 20 mars 2026 =C3=A0 22:33, David Lechner <dlechner@baylibre.com> a =
-=C3=A9crit :
->
-> On 3/18/26 11:45 AM, Julien Stephan wrote:
-> > Rename the defconfig file for various genio board to match the name of
-> > the device tree. While at it, do some cleanup:
-> > - introduce mt8188.config to factor genio-510/genio-700
-> > - remove useless SYS_BOARD_CONFIG for genio-700
-> > - set myself as maintainer
-> >
-> > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-> > ---
-> > Changes in v2:
-> > - Split the initial commit into several commits as requested by Mattijs
-> > - Link to v1: https://lore.kernel.org/r/20260318-rename-genio-defconfig=
-s-v1-1-1440312442f0@baylibre.com
-> >
-> > ---
-> > Julien Stephan (6):
-> >       configs: mt8390_evk: remove useless CONFIG_SYS_BOARD
-> >       configs: mt8395_evk: rename to mt8395_genio_1200_evk_defconfig
-> >       configs: mt8370_evk: rename to mt8370_genio_510_evk_defconfig
-> >       configs: mt8390_evk: rename to mt8390_genio_700_evk_defconfig
-> >       configs: mt8370/mt8390: introduce mt8188.config to avoid duplicat=
-ion
-> >       configs: mt8370/mt8390/mt8395 add myself as maintainer
-> >
-> >  board/mediatek/MAINTAINERS                         | 18 +++++++-------
-> >  configs/{mt8390_evk_defconfig =3D> mt8188.config}    |  3 ---
-> >  configs/mt8370_evk_defconfig                       | 28 --------------=
---------
-> >  configs/mt8370_genio_510_evk_defconfig             |  5 ++++
-> >  configs/mt8390_genio_700_evk_defconfig             |  4 ++++
-> >  ...k_defconfig =3D> mt8395_genio_1200_evk_defconfig} |  2 +-
->
-> How about also including _emmc_ in the name, like:
->
->         mt8370_genio_510_evk_emmc_defconfig.
->
-> Since we will be adding a _ufs_ variant for all of these, similar to [1],
-> then it will be more obvious which one you should pick when booting from
-> eMMC vs UFS.
+These macros have AFAICT never been used at all. It's also far from
+clear what purpose it could serve - for one thing, what _type would
+one pass, other than void perhaps? The example using "struct
+my_sub_cmd" seems misplaced, as how could one know that the first
+linker list consists of those, and moreover, how would one know how
+many there are?
 
-But then the name of the defconfig will not match the device tree name
-anymore .. which was the point of this series.
-Personally, both are fine for me, so I can update to use _emmc_ if
-this is a strong requirements for you. Let me know.
+The linker list concept is fragile enough on its own, there is no need
+to have unused functionality lying around that may or may not bitrot
+and certainly will confuse readers of linker_lists.h.
 
+Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+---
+ include/linker_lists.h | 50 ------------------------------------------
+ 1 file changed, 50 deletions(-)
 
->
-> [1]: https://lore.kernel.org/u-boot/20260318-mt8195-add-ufs-support-v2-9-=
-f18eeeeb0e72@baylibre.com/
->
->
->
-> >  6 files changed, 18 insertions(+), 42 deletions(-)
-> > ---
-> > base-commit: 142c805d470cd02470146d6d70aa9c522d4da16c
-> > change-id: 20260318-rename-genio-defconfigs-bc4070c90e9e
-> >
-> > Best regards,
->
+diff --git a/include/linker_lists.h b/include/linker_lists.h
+index 0f4a2d686e2..78ba937c8c3 100644
+--- a/include/linker_lists.h
++++ b/include/linker_lists.h
+@@ -288,56 +288,6 @@
+ #define ll_entry_ref(_type, _name, _list)				\
+ 	((_type *)&_u_boot_list_2_##_list##_2_##_name)
+ 
+-/**
+- * ll_start() - Point to first entry of first linker-generated array
+- * @_type:	Data type of the entry
+- *
+- * This function returns ``(_type *)`` pointer to the very first entry of
+- * the very first linker-generated array.
+- *
+- * Since this macro defines the start of the linker-generated arrays,
+- * its leftmost index must be 1.
+- *
+- * Example:
+- *
+- * ::
+- *
+- *   struct my_sub_cmd *msc = ll_start(struct my_sub_cmd);
+- */
+-#define ll_start(_type)							\
+-({									\
+-	static char start[0] __aligned(4) __attribute__((unused))	\
+-		__section("__u_boot_list_1");				\
+-	_type * tmp = (_type *)&start;					\
+-	asm("":"+r"(tmp));						\
+-	tmp;								\
+-})
+-
+-/**
+- * ll_end() - Point after last entry of last linker-generated array
+- * @_type:	Data type of the entry
+- *
+- * This function returns ``(_type *)`` pointer after the very last entry of
+- * the very last linker-generated array.
+- *
+- * Since this macro defines the end of the linker-generated arrays,
+- * its leftmost index must be 3.
+- *
+- * Example:
+- *
+- * ::
+- *
+- *   struct my_sub_cmd *msc = ll_end(struct my_sub_cmd);
+- */
+-#define ll_end(_type)							\
+-({									\
+-	static char end[0] __aligned(4) __attribute__((unused))		\
+-		__section("__u_boot_list_3");				\
+-	_type * tmp = (_type *)&end;					\
+-	asm("":"+r"(tmp));						\
+-	tmp;								\
+-})
+-
+ #endif /* __ASSEMBLY__ */
+ 
+ #endif	/* __LINKER_LISTS_H__ */
+-- 
+2.53.0
+
