@@ -4,152 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBE04D58CC5
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 05:21:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94E7BD58CDC
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 07:36:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 291F18408D;
-	Mon, 23 Mar 2026 06:21:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 258A083FEC;
+	Mon, 23 Mar 2026 08:36:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="mXstpnQy";
+	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="JbtvsgU8";
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="JbtvsgU8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72BD8840F1; Mon, 23 Mar 2026 06:04:49 +0100 (CET)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
+ id 46BF484067; Mon, 23 Mar 2026 08:36:00 +0100 (CET)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D09D83DB6
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 06:04:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 27BA583FDC
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 08:35:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ spf=pass smtp.mailfrom=Jerome.Forissier@arm.com
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=szRCf9NG39pe0X4vePbMnbtAU000a+4JvlmoR0acpQtQ610jAkMI4kKfW6leXR8GyEeAxCE0o58tXAB6EjBv43b03dF5DCgvROq1s+gcHsENTs6pRQU8UNe9Dm/jlJIiR8Q07hOnvVT50wOyzsOJXbiJPcAcf/h9EXflGg65VA75hIJxlONpK4Y9fMISYtaAz3wJRsER0+wRanI5Z9OOeCuIjDoZY46WjOrI8vaJn9aANuOnyc3CsBkZSF3qQ+LZvAMf6xa8GDsyuvCJul3wyBD8CbwMTywf1ur0JHxCBnUYYazqFQbvVJ6aGSGhzyzb2N8uqz/e6z0/x4xvzM3kmQ==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VgozD7E+pGr73eIwnXtFaDBpkJqHvX8nUZH0GWezOqc=;
+ b=gklsCOl/zF5klLt0lni0Jvg0vxsX3xn18aEzxUH3NqXWm2nY3x2dyoRA7eIZ5adjnC2qD+nexYoPbJdPRiHd0nbC8PRnRJ8c0KzwJhi/H0cSzJ3vtbaPRRjjZLLT7rvn+TUjxOZFYqM7GHit+98LL1LpdilMxxeGotrN18ePgEiBhkvHkCI6GcK++Lcx3gh8ZaUY7DuNuL3kvYEV63oikox7+ns2bDkhNAE3fjUdE7WJglrrV1MwgcsvSs7SbuVqjT/uzoA0oegIkGuKICRvZaEFR6ddkQ4akEHkp3eGbwOc4RL1HJ315HQlAXZBQ1ufL7BF5s3dqAVOkcU3paZvHA==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=konsulko.com smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VgozD7E+pGr73eIwnXtFaDBpkJqHvX8nUZH0GWezOqc=;
+ b=JbtvsgU8Ad88L5sV2CeARMCNACuLGhA0mYU8Gkpwn/B/uJurwtBPQYlklOg2b4I8F5nWFmzzw72EKLVecaZNehGg7jCMuAxEatkDFrL2JKjqeDcmB39LvswHcummD9Sq+17BIMSq1CbFk+HkQ5PhhLj8ZM6gl//uHfXWKqQAgec=
+Received: from DUZPR01CA0344.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4b8::9) by DU5PR08MB10636.eurprd08.prod.outlook.com
+ (2603:10a6:10:523::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.19; Mon, 23 Mar
+ 2026 07:35:51 +0000
+Received: from DB1PEPF000509E9.eurprd03.prod.outlook.com
+ (2603:10a6:10:4b8:cafe::82) by DUZPR01CA0344.outlook.office365.com
+ (2603:10a6:10:4b8::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9723.31 via Frontend Transport; Mon,
+ 23 Mar 2026 07:35:52 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ DB1PEPF000509E9.mail.protection.outlook.com (10.167.242.59) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9723.19
+ via Frontend Transport; Mon, 23 Mar 2026 07:35:51 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ndZJbMq0/KmVUVYa5gOz71mxkKIjyIOIbbbYoKx27r52JYbGriuo+V80ryPIb+1WZVlq0TkImPKS+4gfuOG6vp21XBP8CS+bi67BFbIE+GAOOnNiz/MM6n7jWQrAxndrMktcdX00d/A9LYVoQ7bi6ER7AA6orqwMVcrI1TqZmWkiTHf+tzk4mzaA79As9ve2hnc89So7yF3iDn7/sIlSvDyyUDBpd1oiOOsAyt95ERa1N6OHcSUPvW7o1rm1oMVCvOprFuvH9xJc6p9phFF9AuVwBXfs/ommlDaP8jTrCy09nd4JIHJLekYFvKzA9lQp70mPrDoLNIgLhSsEFB+Ekg==
+ b=ynoyDbx+btIQWfs1W94JY++f2KacAAooGxPGU8IavwUVmOAxCAQU1lsw5O5N9YtadiL2qGRyGKcxzIhUqcJXHLHxZ8pnHwM6vknooxjPSLQh01OjwoJDt1yPM6ITjhGhynt9O80histhoFGbIl6bt25/AazK6+YLLzJWQC0cCpF+IP7CPfz4EHmIAQGI6ABe3eeVJEIMMGmu06QNpJfN7skyWjCFjb2KTYYYk+kvpKhOlO1umXJtTC5WPW5eouViz1i8qiRo7nIQ36i3Eums6VE2SrQEPA4QIBstBF/j7fmapPvhsxBhpKL991iZg12vc7i/u9TIirVilJ0QpDGCTw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SsCN1F9+1ZhXcZSx4UhQ063DlSXD0x5hBye9ET+rMZ0=;
- b=j2RC7HJa48IafTJcVgxKvN/1HLn/p2zaKPHXjaiFQg8mTLJZ+tUzonL9/jJAaN8BZ11BO9DSRjxMzsz+UT3v0+gt+S30csxX4G2mMYqD9GiBkG5TgXBr0DV4jckMj1TfKyapERvAI41yyoUt6vj5QRObtmo6j7VjMYkO3Y+lDQ0K+g/F3umpkV/fHwZ1mGYU616zbrS9vv0XUSdrVLmxqLz5tCjksVNTTLj6EJ/tGnPkIQrMqih3h2+KeywPXOT6kt60sXAMI8WYEmI7SbgFB/B7iAeaf5TAy1gKC0pWj/0SCWhjAKhuEm55awN7ZdbSZXQrWvcFQkQdv0tOUTX/AQ==
+ bh=VgozD7E+pGr73eIwnXtFaDBpkJqHvX8nUZH0GWezOqc=;
+ b=DMJcBaUUfE5syiJhjGPI9rnO4rZyveWxtskp2wUNl/BPC/NhNaLJ18uF48erO99ilOLEAayiwmlyXO2HT5jFK55ppLIKVbcTVf2upWv01dXrbBoFzbVJXWrQgnbzl/MUofU6maMBdmtvaasS6FX2D703CGsRD4G1E8RlA2dCPXMnzQs/WI3wXEpd0GuMJBiWc5YVWINIxXPe2IgVBsD7wSSO7gDXfiBeIDesjV8uZcCsSHh7gilSndLuRKJXX0EkoI4WWlkLYrBpg9Lm10gNFIL6qK+uMwSY2rCSO9TN8hBT53NZxUcQJ0Znmc/wVTXgTX8aXxYLjKHrODJht269QQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SsCN1F9+1ZhXcZSx4UhQ063DlSXD0x5hBye9ET+rMZ0=;
- b=mXstpnQySFY4EU9oATsEjpAl4cGcfUn70n1FZk01lpUp018DBTWOVG7qh+YybRgGAyMfyqSHvEjStVvgBNMG+zK+KLibZrqZG/Rl2S23Szz3UoMa/vNEJt5GtSPuqbyGiiNjU3C/ILr1TgmDBp9p0tzqTKyH7y4/1+RTjJsPIx7JSwyZIT/FK/XAFuG97YCtaOWCpNxS83VL22WLPoOYRz8Ign3JgRcDVB+x3gyU0xnCggeQmwYx2O0T901xehmjx+TKbSZ/OPAYlIrWhqtoNmQAgxk0oTeMszt52k0YjNG2gRMEeB/jDIDJKJjLsJZJ9p7XW1+IeuKfwEOMPARIgw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by VI0PR04MB10317.eurprd04.prod.outlook.com (2603:10a6:800:216::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.25; Mon, 23 Mar
- 2026 05:04:28 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::4972:7eaa:b9f6:7b5e%3]) with mapi id 15.20.9723.022; Mon, 23 Mar 2026
- 05:04:24 +0000
-Date: Mon, 23 Mar 2026 14:20:24 +0800
-From: Peng Fan <peng.fan@oss.nxp.com>
-To: Dan Carpenter <dan.carpenter@linaro.org>
-Cc: Peng Fan <peng.fan@nxp.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alice Guo <alice.guo@nxp.com>, Anis Chali <chalianis1@gmail.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Eoin Dickson <eoin.dickson@microchip.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Ian Roberts <ian.roberts@timesys.com>, Jacky Bai <ping.bai@nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Philip Molloy <philip.molloy@analog.com>,
- Ranjani Vaidyanathan <Ranjani.Vaidyanathan@nxp.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Valentin Caron <valentin.caron@foss.st.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Vinh Nguyen <vinh.nguyen.xz@renesas.com>, Yao Zi <me@ziyao.cc>,
- Yegor Yefremov <yegorslists@googlemail.com>, Ye Li <ye.li@nxp.com>,
- Andy Shevchenko <andriy.shevchenko@intel.com>,
- Linus Walleij <linusw@kernel.org>,
- Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
- arm-scmi@vger.kernel.org, linux-gpio@vger.kernel.org,
- Vincent Guittot <vincent.guittot@linaro.org>,
- Khaled Ali Ahmed <Khaled.AliAhmed@arm.com>,
- Michal Simek <michal.simek@amd.com>
-Subject: Re: [PATCH v2 0/4] u-boot: add SCMI GPIO/Pinctrl support
-Message-ID: <acDbqCbCSulKNELd@nxa18884-linux.ap.freescale.net>
-References: <cover.1773256350.git.dan.carpenter@linaro.org>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <cover.1773256350.git.dan.carpenter@linaro.org>
-X-ClientProxiedBy: SI1PR02CA0050.apcprd02.prod.outlook.com
- (2603:1096:4:1f5::12) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ bh=VgozD7E+pGr73eIwnXtFaDBpkJqHvX8nUZH0GWezOqc=;
+ b=JbtvsgU8Ad88L5sV2CeARMCNACuLGhA0mYU8Gkpwn/B/uJurwtBPQYlklOg2b4I8F5nWFmzzw72EKLVecaZNehGg7jCMuAxEatkDFrL2JKjqeDcmB39LvswHcummD9Sq+17BIMSq1CbFk+HkQ5PhhLj8ZM6gl//uHfXWKqQAgec=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
+ (2603:10a6:20b:740::16) by DBBPR08MB10464.eurprd08.prod.outlook.com
+ (2603:10a6:10:53a::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.31; Mon, 23 Mar
+ 2026 07:34:47 +0000
+Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
+ ([fe80::29d7:e9ba:ff69:a0c3]) by AM0PR08MB11733.eurprd08.prod.outlook.com
+ ([fe80::29d7:e9ba:ff69:a0c3%6]) with mapi id 15.20.9723.030; Mon, 23 Mar 2026
+ 07:34:46 +0000
+Message-ID: <1cf1d54b-09de-4feb-b71f-22f8d8afd8c3@arm.com>
+Date: Mon, 23 Mar 2026 08:34:45 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] net: Rework dependencies around NET/NET_LWIP and
+ NETDEVICES
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20260320205327.3788628-1-trini@konsulko.com>
+Content-Language: en-US
+Cc: nd@arm.com
+From: Jerome Forissier <jerome.forissier@arm.com>
+In-Reply-To: <20260320205327.3788628-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: PA7P264CA0498.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:3da::19) To AM0PR08MB11733.eurprd08.prod.outlook.com
+ (2603:10a6:20b:740::16)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|VI0PR04MB10317:EE_
-X-MS-Office365-Filtering-Correlation-Id: f0c016c5-f06b-4ba4-9e8d-08de8899a69d
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|DBBPR08MB10464:EE_|DB1PEPF000509E9:EE_|DU5PR08MB10636:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5dd832c8-13d4-4549-c51b-08de88aecf2a
+x-checkrecipientrouted: true
+NoDisclaimer: true
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+ ARA:13230040|376014|366016|1800799024|7053199007|22082099003|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info-Original: Chtqg6WQ03MmU+xCGWTDJJ09+vLSH8XYJsEz94zcoF2t8d2vx/fUDcKlmSdEn1Kl1B0nFY7rmlqq0Wotj1Jnb7gD3Qs0361SIhUp7/toax1RdhxEXPK1tZnM0+ttbERrqj5pd3OFXHFfSmXz/N02a3fqihreAO051R77w3rVUEYhVE7i1W5GvaO6H/M2NBYrlxUZoL+NCZ2VAK67MYdU0JshOa0i/z1o6pKhU6x1JMyNe6jKv3uBKkuLPdrKBYDAkgt5rx4N4okkDqkGnu1B9MMIT9tRbHNdxtULiPAmxQdWlFh5AKRBZ4jyWMasWS9ihteLyKcq0RUdf5r8HFaOVQJTS+wids+2zLwEYQ26wAx1wg3PzWqdAegHJxSjVIX4UsEhv72fHN67x9sgdCIHaa+PDp4hLbBFLp17agbxOPoRrD5SRQ2UsGK03dJy8HVnGWGZ87UeY1vHv28BGmyBrMSDfk9hwXhYJEqzW4knuI8fPZHAhQ7mB+mBDbAWuR4ACibiA+ug27xptcgpfxMN2R6U8ktWuwwYh6mhnuwhJ/h2Vue/rQy0DS488EqMcH42vouNp5viVCdcPrrbzBMd2Li7XseUB2m9LKM+U+/0AeGU1KZCzRtZwCuTKlyoL42uCMgNMywcsCzbMx3W8jzafc4Tn4T9u3P66lEpCxR8E5k9imobHShkTzpMg9HASeTC
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM0PR08MB11733.eurprd08.prod.outlook.com;
+ PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024)(7053199007)(22082099003)(18002099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-Exchange-RoutingPolicyChecked: VYgmtMaypZ9AW6uXkrYbAsvM65qXPMVn5VNHZiDCiB34u4txKgxhi1ts5QJvAwiOfkOVXcr1k3/1n5MC0lLVCs2TvEMU7MdNa66UMJ2IeSylVyuOsPKVWLy9M4n2BhF6uMiURwyWfpox8b8cBv2vCpthCbEpoAfCPHlxXkY2Xh6ysoDFJ9LqQQ9l5tUqAYcqIAwR/mBdykmNqenm+DfL5T0gxSMLn5F78NUEroNQIbwYybZlF7tleOXQ2FCa1IQ6qIf/56STYVI7VQ6KeS3D3MU0jm+v2LCUrblX7amxSphDCAcH8h701UyI61QsIP2mB3KnFKl3DKch1/PKQ/QNtQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR08MB10464
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: DB1PEPF000509E9.eurprd03.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 8b3fa7ae-d41c-45a2-c485-08de88aea883
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|52116014|19092799006|366016|1800799024|38350700014|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: C1v+9WndEnowEEJbtXaIaZT/kKt2Ar/wXj0223TanGqVgDWoROQq5bdtLJzXKDTWJ3sr1PgXVkGryw8xij/jh8BA82JsCPz2xfIkFHZdiQOFEHkWJfQSWmHmuo4nhKMH38UFh6hZ6ZqiA7lKPxv36L0xs07DBS7mWsXGTe6JVD6dR3m4dN++ECg6mXsPcTuSV6NUBYLhSR10ZZNox7nJUEF4yldY7Kr/hGljMRCyT8ykjQNsq/2m6o6MjucFIEzb7zIEZQeQuFE+1Oszz+C891YMvs78oD/17Pvq/Pa9ATNtbiYHdMltjMRf4DPwajE8VckWE9be9vK+MbS4l9nYN1jx+3wad/rEHTvmr+Ba72sHScvKSirtdAO6pmUMhgec8ArVHPLD/1ch2NeDg6EpoCNl0snMT6Wu6DbGzF+G0YO83Y5MoPR2eNICXoCX4SY9hwTR7mwgGJsLXCcD+lG6v0NueUOQuqw9sI/liImr/6t+ma+VBRfJl324+XsyMe6wfMxS++N7M30STn0/OePW5DeuDQac33gm4Xr9PaDLxV4yQjvd9b3ikrcwfAZ1gxFj00uit4OYPw1GCYt+EGoPgTwLZlza8f3CRz9rFk0sKRPR1J+xVetVJMMU4abChtoH9rsz3f587J9gbTAvFEycJgS/IbxM/J4yED02mVmjMBYTV7Yn44T1+J9BrLIdE8dVyayQSQNRY2h3eBSJ1XGGYKLp5frAZ3sp5IQsqlpX1KpFdSdmmsl8zE8bxh2niAEwqZTiGp+cftcr37o9swQfBgbkR/RAkNEOLWzx/heMZGc=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(52116014)(19092799006)(366016)(1800799024)(38350700014)(56012099003)(22082099003)(18002099003);
+ ARA:13230040|1800799024|14060799003|36860700016|82310400026|35042699022|376014|22082099003|18002099003|56012099003|7053199007|13003099007;
+X-Microsoft-Antispam-Message-Info: 9ZSVx3R6fv9zi+NqIZawu8lBQX9N+miznLhkblMIA1PfyEPDW6H0of/m5sXKEr5MRDXpiqy2GGboP4aTkP3X1qbTlmm5lAU43F5crvXTRCphui5beOTBUYrHVmj3VC48r/dE/kKY2c93oI5KAJ8qX3Rpa4CkMZ02JXUBqKVDfklEIGwh7OjweLx/fuKXBHavDuHNrXOzopuzR0nElSDGL7mIZHSx9QghoXA+Rc4By+OqIwU+c9XSsULlaQ27MRaAVQAG036QP9xZ5qjkBg0ungd1OkR2wjBFHsrUIeaLLC7U1gQvv7128BfRy7qSEK/iF8pM6pxKSKww5ZuS7b41uZhSZu0ECt7gcpqLk0jwNaARjb2vwSkXGEqGoZ6FPDSUE8fsqtk8bPJ+aPDPXDqNeALNoUmcV1tEtew4/Y8gB5CELTBSvfnCXnipGSEL2UswTy6CLk+Aw+4uI7B+Hu8WgsZL42YlmHV6oAumOC2ze5cdg6MhWf/d3L3fnZcIFcapnPQijgs6PV0ah9BRvIWTQF70XQ6AQezhi7TAr3ALl9ZHevXkvqW3I04UhCjTLxi4QpcLdBTs4RCj9ksFnm1bsS+F68pghAcf6NSLycinWr56GI5AGssGLdEroViyxitkw3T2CBC9VYa2T+TKXCy+K2id2W/AdXdpnrJM8fYOO2Gv7K+9CGYqNE3n5bdl+5NvihlJRc0WZ8QwbzqzwReE1Q==
+X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
+ PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(14060799003)(36860700016)(82310400026)(35042699022)(376014)(22082099003)(18002099003)(56012099003)(7053199007)(13003099007);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gSGjpDLm2NrCPq2HRgeYXoPltvIsC3tYS11TmC7hnNddYBh9K8pemz4L9a+Z?=
- =?us-ascii?Q?sC+x6NMEf4+Itwk5ALiU7LuaUai7Mhw4MyzO+P+2bwEmAvQiYkL8hrQUI2lW?=
- =?us-ascii?Q?p7WkQB8sXHQbs8YqtPvXkztKje/byxnAE3QZq1yBINiHcA9NA98Fc5LpQc+c?=
- =?us-ascii?Q?Z5IChKhCUytE+f26DzXIEgdtz6CxhUH+qDhpXMo517GM7DLcv1DmdTi0k1p8?=
- =?us-ascii?Q?EKMnYE/vkm6m71WmDJEkJX/mqTKQWs3VtUod4I+l8RKyjv/N2/BOBK8DX646?=
- =?us-ascii?Q?vDr88LfS74ADeQ9QW/JxCUu47FsBgd/LYty3LR8VOjOL5TcP7FtM+ut17Jt4?=
- =?us-ascii?Q?vF5x4ntYETN1++M3+pno9xD5ym6qP199Derr0AqIntOZhiM0DsCRHo2l23Ll?=
- =?us-ascii?Q?la48vbJBW1UAUHhQYziutmMgNA0W9VkkU+mwZdOknv40IVpisrJk/+Ed5cDo?=
- =?us-ascii?Q?tlO3vvGLJAZO+MBrp9sbARwN/LHI+1L8qB5Cm875ldwNJ4FjuXETKjkscluG?=
- =?us-ascii?Q?OIuF5cAaCjgVM7HxsvT59du7ftm54k4d9BTbeqRcYX3QK+2/E0mGBJqJ2170?=
- =?us-ascii?Q?W4/AxdXQdjKwcX59qRzAGS/ehJRhhXhfuUQM8O1jWzEnA+kx6KSiWEFWMEBH?=
- =?us-ascii?Q?pmHEdziv/n//GQxEXGyQahhPCBfqJC5i6Z1mHRX3mg5f2HxB8SGTOfKdSJ1a?=
- =?us-ascii?Q?zAa3ftskjwNxK3CwRd5R5GPEUQxPvlq6ns/1I/riMLob2bYBWe6pDhzbPV/t?=
- =?us-ascii?Q?cF7hHYimn0QGvG3dK6kxXal6wt5OlnZQ0NmiAVmEFiMhIKC+xQ5aS2+CMnfq?=
- =?us-ascii?Q?1LdXgcGBykMw3ld2fhYFbpfRSKfhg5C7Dje1tcumtsYWXNj9z2eplmMCmkAv?=
- =?us-ascii?Q?YBsjOA586x7WPfn68BcFZYAxRDcQUk8+HUL/zxJDyzwughUjnGiOGVIzcHTI?=
- =?us-ascii?Q?kIaY9w1o4JLjwA144XGExXg4jmMKfkp+YDCA+SCvJAEKlc7RGH1kNGD5WKtY?=
- =?us-ascii?Q?VKvQpeaVdygzTfesw/06xHpfTlcM4NFHk/b1pTI3n0SiVJukzXzB11sDAxKM?=
- =?us-ascii?Q?/e9nEKdpeULVXu3PrlXrGAyKCvhy8PinV8bw1RSmy0mN6wisavUrqMzfGHEF?=
- =?us-ascii?Q?UzObq9GCQCdLvcGb9daw8PoXW9HY/+PJxvLdGlivra6cp+K9sg8nRTvXyeY3?=
- =?us-ascii?Q?pt01wd/aOHBG8rJaF3bWZaPTjUVXbQEkSMEpgTa+xlaimDKLluAmwzzGydNE?=
- =?us-ascii?Q?Q7aNlU1US8h7NGrC/uBiBUSLV6xyYgPnI7kkYlIPTnOJjbf3vqhGbHKlwRJV?=
- =?us-ascii?Q?qbVtWXZVKpGnRfSUaEjs/V1ULPUS5BeMoBZBALvBppSVV73N7yFN+Q8rIgvW?=
- =?us-ascii?Q?YXCVLAsWcnyjOTiwz434/6q8LFQck+PobIyOm4vdHQwb/pag70xWsuRFbAp+?=
- =?us-ascii?Q?iUkF5SjEUwYAfgL5P3hgb9YZX3upOd0Zxy58WroK3Lan6XKe6QqzLqLogeB2?=
- =?us-ascii?Q?lOwviAWMQuyCZaRk2cHJAtVVuJ8tDFj7Ps/Axgu18pVQNPogBuZnkZqTC5D/?=
- =?us-ascii?Q?SJ1YnwS3JFar5849h3ycFEAxVCrC04cE2z0e3zOkS0WDXuPNV9zvPiZLwy71?=
- =?us-ascii?Q?OnAsGVWFQO6t+CWHaE3dtTIjaHoe5YkdrI4EMy+pzE7tpq+r3Z6pZE1P+F/a?=
- =?us-ascii?Q?fOiaMA9cEI7ns79DXzEV3xNuVQIUT/9DXxRaH896tk0BojRP4UO4WzzlfRmn?=
- =?us-ascii?Q?b0faor7KNQ=3D=3D?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f0c016c5-f06b-4ba4-9e8d-08de8899a69d
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2026 05:04:24.3134 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: yJXZwxSVjtHBrQ8fNKLlze3oFeDNaGI43t/YStcokbEID62o4js66TrGaXC2uDUuXg+hsQm1JibJwAnrV5NHyA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB10317
-X-Mailman-Approved-At: Mon, 23 Mar 2026 06:21:34 +0100
+X-MS-Exchange-AntiSpam-MessageData-0: 0GSCNGX2eKl7aImDtwffQZaHP5iG3QOXFilkO9IyLuwO37o0nwSPN+YzdcD7ySknCRDSgoljkveq5mEGCZqbXNFkC1lKh/OFsAXvKGKh7A9IuKpcAJxzyQPigWfk/frwgGgDn9eVlV8bCj+HUiH0La5SzJ5VmHU5UPXGRnsnQA4PNk2ufZ9QG29lDizDUe98bSwQm2x+xRVKJ4bXZlAd5GZh5iPiYnEeSjnEKg+bJRqE2BYlVjNJmmxRNUJIyqKzPraxylcvov5B8P5pwuPKzMLKw8PMFrBoR+q/LNX/7EYK6zHMbeLWZau7+EnFD26vAw2YObz93oJDLXp27e3OSlk0cESJYrM7RWw0vHM/mYqiEkRB+UOAdNDWG2nIMjnOzaoXxu7LV+A5WOTKZ/9/CNHAEjqK6Qe+wOtLcQRxh3qrTCMOUNzNo/DdH2Svskv/
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2026 07:35:51.4107 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5dd832c8-13d4-4549-c51b-08de88aecf2a
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
+ Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509E9.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU5PR08MB10636
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,61 +163,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dan,
+On 20/03/2026 21:53, Tom Rini wrote:
+> Functionally, both networking stacks require DM_ETH. This is because
+> they both also require some networking devices to be enabled. Express
+> this more correctly by having both NET and NET_LWIP select NETDEVICES.
+> In turn NETDEVICES no longer depends on NET or NET_LWIP as it's not
+> prompted anymore.
+> 
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Cc: Jerome Forissier <jerome.forissier@arm.com>
+> ---
+>  Kconfig             | 4 ++--
+>  drivers/net/Kconfig | 9 ++++++---
+>  2 files changed, 8 insertions(+), 5 deletions(-)
 
-On Wed, Mar 11, 2026 at 10:39:30PM +0300, Dan Carpenter wrote:
->There is an existing SCMI pinctrl driver in drivers/pinctrl/nxp/ which
->lets you configure the initial state of the pins via device tree.  This
->patchset is a more generic version which provides GPIO as well.
->
->I wrote two small cleanup patches to the NXP driver, one which renamed
->an enum and another which made some white space changes.
->
->The next patch adds an pinctrl driver which lets you configure the
->initial state for the pins.  But the main thing is that we need one
->driver to handle the SCMI pinctrl protocol so the pinctrl driver does
->this.
->
->The last patch adds GPIO support over SCMI.
->
->I tested this code using the SCP SCMI server on OP-TEE over Qemu.  I
->created a custom mock pinctrl device in SCP.
->
->Changes since v1:
->Address Peng Fang's review comments.
->Use the standard gpio-ranges to describe the pins instead of
->inventing a custom format.
->
->Dan Carpenter (4):
->  scmi: pinctrl: add pinctrl message IDs
->  scmi: update comments for scmi_pinctrl_config_set_in()
->  scmi: pinctrl: add pinctrl driver for SCMI
-
-I picked up the above three patches.
+Reviewed-by: Jerome Forissier <jerome.forissier@arm.com>
 
 Thanks,
-Peng
+-- 
+Jerome
 
->  gpio: scmi: Add gpio_scmi driver
->
-> drivers/firmware/scmi/Makefile            |   1 +
-> drivers/firmware/scmi/pinctrl.c           | 365 +++++++++++++++++++++
-> drivers/firmware/scmi/scmi_agent-uclass.c |   4 +-
-> drivers/gpio/Kconfig                      |   6 +
-> drivers/gpio/Makefile                     |   1 +
-> drivers/gpio/gpio_scmi.c                  | 248 ++++++++++++++
-> drivers/pinctrl/Kconfig                   |   9 +
-> drivers/pinctrl/Makefile                  |   1 +
-> drivers/pinctrl/nxp/pinctrl-imx-scmi.c    |   2 +-
-> drivers/pinctrl/pinctrl-scmi.c            | 365 +++++++++++++++++++++
-> include/scmi_agent-uclass.h               |   2 +-
-> include/scmi_protocols.h                  | 379 +++++++++++++++++++++-
-> 12 files changed, 1371 insertions(+), 12 deletions(-)
-> create mode 100644 drivers/firmware/scmi/pinctrl.c
-> create mode 100644 drivers/gpio/gpio_scmi.c
-> create mode 100644 drivers/pinctrl/pinctrl-scmi.c
->
->-- 
->2.51.0
->
->
+> diff --git a/Kconfig b/Kconfig
+> index b52331d6ff25..01708e80f476 100644
+> --- a/Kconfig
+> +++ b/Kconfig
+> @@ -787,14 +787,14 @@ config NO_NET
+>  
+>  config NET
+>  	bool "Legacy U-Boot networking stack"
+> -	imply NETDEVICES
+> +	select NETDEVICES
+>  	help
+>  	  Include networking support with U-Boot's internal implementation of
+>  	  the TCP/IP protocol stack.
+>  
+>  config NET_LWIP
+>  	bool "Use lwIP for networking stack"
+> -	imply NETDEVICES
+> +	select NETDEVICES
+>  	help
+>  	  Include networking support based on the lwIP (lightweight IP)
+>  	  TCP/IP stack (https://nongnu.org/lwip). This is a replacement for
+> diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+> index 02063ce3aa91..9d4e9f069701 100644
+> --- a/drivers/net/Kconfig
+> +++ b/drivers/net/Kconfig
+> @@ -90,9 +90,10 @@ config DSA_SANDBOX
+>  	  Ethernet device used as DSA master, to test DSA class code, including
+>  	  exported DSA API and datapath processing of Ethernet traffic.
+>  
+> -menuconfig NETDEVICES
+> -	bool "Network device support"
+> -	depends on NET || NET_LWIP
+> +menu "Network device support"
+> +
+> +config NETDEVICES
+> +	bool
+>  	select DM_ETH
+>  	help
+>  	  You must select Y to enable any network device support
+> @@ -1106,3 +1107,5 @@ source "drivers/net/pfe_eth/Kconfig"
+>  source "drivers/net/fsl-mc/Kconfig"
+>  
+>  endif # NETDEVICES
+> +
+> +endmenu
+
