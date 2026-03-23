@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 143DAF46114
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 13:49:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBEBEF46115
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 13:49:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 983CF841E6;
+	by phobos.denx.de (Postfix) with ESMTP id D9B83841FF;
 	Mon, 23 Mar 2026 14:48:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="IYu4q1Gj";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="WXt5YFSN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2197D84150; Mon, 23 Mar 2026 14:48:09 +0100 (CET)
+ id 9D6BC84159; Mon, 23 Mar 2026 14:48:10 +0100 (CET)
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91CEE8419C
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 14:48:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EA8A98418C
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 14:48:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de;
@@ -30,29 +30,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=ZrmKLBXvOhG/42GEp5hBVT+CjLWDuKxw5PQWWScltzo=; b=IYu4q1GjvJxyMxrI9LrC3vaXjq
- qw3DDJxgDQPe/kChTi9Q+fL9to7oQcCbqh+54qStcRskhUtA7Px238CumUbddV07qKq/N0cEjxdMJ
- Ctv/dA1Y7Xspnwkltef3YQztXg+4ap22TX8NVL2Ly3BNzHUuIIKp83sctgmjcGB4RqogJVYYHZ8Dg
- L42PQcH0Mw70Cx89Jaoue5xbEOY3hnTok62NCqS6v2H5FMS0cJq7GyCrjRELxUraFGnq6eaZR8eZz
- Nj1YPvRflbFXErwsVA8ECMzp2zV3cOqUWLVE3AoFvstxmtMz4TaXpirGor8ijhQcwysDPdKRp1h2v
- KEg8TabQ==;
+ bh=9LjBc3+HKprftKL4pPbxysIINT34G/HreqnLEOQa1U0=; b=WXt5YFSN5clv10ZeDjYg6VkCoA
+ QUh/XE2yBYWgvg7CgGoP92UcLkmElNYkOKCGdNPdIlKzwAiMCb9x71YDT2/I7aKsABocUUv6YBLo6
+ f65T2CwCSWuOKRmhEwornJ0Rpwwts50BO062tshxZvzy34YZoJ1zppLJAbgZYkS11GdZY3VaCbsL7
+ cFSVyQgpwTLE4SikKXJZKtPMeX62jtKCpHPwWiHSjVsor35AZ9Cb3ayPN7UOy6w3VzQQ1kUzaTJvi
+ MIu5IR4JIOwxoUKKBslA7ofT4XT1lDrk1nw+7CdSzWLsT55mOdIsUcP/tgJjZYVKs08bOI33p1c1L
+ hfJyBb9w==;
 Received: from sslproxy08.your-server.de ([78.47.166.52])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1w4fdT-0000fe-0U; Mon, 23 Mar 2026 14:48:03 +0100
+ id 1w4fdS-0000eF-01; Mon, 23 Mar 2026 14:48:02 +0100
 Received: from localhost ([127.0.0.1])
  by sslproxy08.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1w4fdR-000M7t-32; Mon, 23 Mar 2026 14:48:02 +0100
+ id 1w4fdQ-000M7t-2n; Mon, 23 Mar 2026 14:48:01 +0100
 From: Max Merchel <Max.Merchel@ew.tq-group.com>
 To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
  Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Cc: Max Merchel <Max.Merchel@ew.tq-group.com>, u-boot@lists.denx.de,
  u-boot@ew.tq-group.com
-Subject: [PATCH v2 09/10] board: tqma6: use common TQ mmc function
-Date: Mon, 23 Mar 2026 14:47:39 +0100
-Message-ID: <20260323134746.787430-10-Max.Merchel@ew.tq-group.com>
+Subject: [PATCH v2 05/10] configs: tqma6: change to include tqma6.h in
+ baseboard headers
+Date: Mon, 23 Mar 2026 14:47:35 +0100
+Message-ID: <20260323134746.787430-6-Max.Merchel@ew.tq-group.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260323134746.787430-1-Max.Merchel@ew.tq-group.com>
 References: <20260323134746.787430-1-Max.Merchel@ew.tq-group.com>
@@ -74,41 +75,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add function from common mmc header and
-select TQ_COMMON_SDMMC Kconfig option for MBa6
+The SoM (TQMa6) can be used on various baseboards. No modifications to
+the SoM files should be required to use the SoM on different baseboards.
+Therefore, include the SoM headers in the baseboard.
 
 Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
 ---
- board/tq/tqma6/Kconfig      | 1 +
- board/tq/tqma6/tqma6_mba6.c | 6 ++++++
- 2 files changed, 7 insertions(+)
+ board/tq/tqma6/Kconfig       |  3 ++-
+ include/configs/tqma6.h      | 13 -------------
+ include/configs/tqma6_mba6.h |  2 ++
+ include/configs/tqma6_wru4.h |  2 ++
+ 4 files changed, 6 insertions(+), 14 deletions(-)
 
 diff --git a/board/tq/tqma6/Kconfig b/board/tq/tqma6/Kconfig
-index 1ef9f6732aa..21bcb8e0cb3 100644
+index e62228d73d0..9cb0c909aa9 100644
 --- a/board/tq/tqma6/Kconfig
 +++ b/board/tq/tqma6/Kconfig
-@@ -73,6 +73,7 @@ choice
- config MBA6
- 	bool "TQMa6 on MBa6 Starterkit"
- 	select TQ_COMMON_BB
-+	select TQ_COMMON_SDMMC
- 	select USB
- 	select CMD_USB
- 	select USB_STORAGE
-diff --git a/board/tq/tqma6/tqma6_mba6.c b/board/tq/tqma6/tqma6_mba6.c
-index d604d6d4f0a..32aeb1b07c8 100644
---- a/board/tq/tqma6/tqma6_mba6.c
-+++ b/board/tq/tqma6/tqma6_mba6.c
-@@ -137,3 +137,9 @@ const char *tq_bb_get_boardname(void)
- {
- 	return "MBa6x";
- }
+@@ -7,7 +7,8 @@ config SYS_VENDOR
+ 	default "tq"
+ 
+ config SYS_CONFIG_NAME
+-	default "tqma6"
++	default "tqma6_mba6" if MBA6
++	default "tqma6_wru4" if WRU4
+ 
+ choice
+ 	prompt "TQMa6 SoC variant"
+diff --git a/include/configs/tqma6.h b/include/configs/tqma6.h
+index 3c6678aa2b8..00610e76869 100644
+--- a/include/configs/tqma6.h
++++ b/include/configs/tqma6.h
+@@ -38,17 +38,4 @@
+ #define TQMA6_SPI_UBOOT_START		0x400
+ #define TQMA6_SPI_UBOOT_SIZE		0xc0000
+ 
+-/*
+- * All the defines above are for the TQMa6 SoM
+- *
+- * Now include the baseboard specific configuration
+- */
+-#ifdef CONFIG_MBA6
+-#include "tqma6_mba6.h"
+-#elif CONFIG_WRU4
+-#include "tqma6_wru4.h"
+-#else
+-#error "No baseboard for the TQMa6 defined!"
+-#endif
+-
+ #endif /* __TQMA6_CONFIG_H */
+diff --git a/include/configs/tqma6_mba6.h b/include/configs/tqma6_mba6.h
+index 81f96ac91e8..c30aeae4f29 100644
+--- a/include/configs/tqma6_mba6.h
++++ b/include/configs/tqma6_mba6.h
+@@ -11,6 +11,8 @@
+ #ifndef __CONFIG_TQMA6_MBA6_H
+ #define __CONFIG_TQMA6_MBA6_H
+ 
++#include "tqma6.h"
 +
-+int tq_bb_board_late_init(void)
-+{
-+	board_late_mmc_env_init();
-+	return 0;
-+}
+ #define CFG_MXC_UART_BASE		UART2_BASE
+ 
+ #endif /* __CONFIG_TQMA6_MBA6_H */
+diff --git a/include/configs/tqma6_wru4.h b/include/configs/tqma6_wru4.h
+index 110bd895a8a..b35e471bd95 100644
+--- a/include/configs/tqma6_wru4.h
++++ b/include/configs/tqma6_wru4.h
+@@ -6,6 +6,8 @@
+ #ifndef __CONFIG_TQMA6_WRU4_H
+ #define __CONFIG_TQMA6_WRU4_H
+ 
++#include "tqma6.h"
++
+ /* Ethernet */
+ #define CFG_FEC_MXC_PHYADDR		0x01
+ 
 -- 
 2.43.0
 
