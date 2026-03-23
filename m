@@ -4,54 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 861ECF46130
-	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 14:41:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5699F4613A
+	for <u-boot@archiver.kernel.org>; Mon, 23 Mar 2026 15:05:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CED884082;
-	Mon, 23 Mar 2026 15:41:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com
+	by phobos.denx.de (Postfix) with ESMTP id 32BC48418A;
+	Mon, 23 Mar 2026 16:05:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b="tNs3DeO/";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="VjVBtgRj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 014A2841DA; Mon, 23 Mar 2026 15:41:54 +0100 (CET)
-Received: from out30-131.freemail.mail.aliyun.com
- (out30-131.freemail.mail.aliyun.com [115.124.30.131])
+ id 01DA584180; Mon, 23 Mar 2026 16:05:49 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD86A8406D
- for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 15:41:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=linux.alibaba.com
+ by phobos.denx.de (Postfix) with ESMTPS id CD1738406D
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 16:05:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hsiangkao@linux.alibaba.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1774276905; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=0MLXON+tffXeSNtv8HxcDcXnRXOeI/mVCRcpRJJJa3E=;
- b=tNs3DeO/058cFcESysqVwhdl64RvVaWI2d7SZtzn4LMjGRAYWKTnXg3s0WXJUOjkBbR8cGGpq6LUV5EESNgEFYI/vuus0HF2YRPZwJ9JzNskecp//MEZTJhAnCuxIchRJKt+vxp+AVThwrWRm73f3WvusTczlzD7Y4SYmpbawm0=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045098064;
- MF=hsiangkao@linux.alibaba.com; NM=1; PH=DS; RN=5; SR=0;
- TI=SMTPD_---0X.YqmWQ_1774276895; 
-Received: from 30.41.54.139(mailfrom:hsiangkao@linux.alibaba.com
- fp:SMTPD_---0X.YqmWQ_1774276895 cluster:ay36) by smtp.aliyun-inc.com;
- Mon, 23 Mar 2026 22:41:36 +0800
-Message-ID: <b761dcf1-db25-47f3-8ef6-096c7a2f0493@linux.alibaba.com>
-Date: Mon, 23 Mar 2026 22:41:35 +0800
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4ffc1P0WQQz9tSb;
+ Mon, 23 Mar 2026 16:05:45 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1774278345;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=l6eYuOl5hoR9/TYTHlkrcyE1rrPhqgwKP+MTVDY2XSo=;
+ b=VjVBtgRjT2XROn+3LyVZfCrrTB9ND3JnlB1egP0TSnwU0+PPVnaSdaaNzNE6HHGpjBVhfE
+ +29A130pkxkOEIU+7YgNBPWxWCtKGHTdCCVwrmszNcRfiuPIKUrKx5jfB0M4obziz6LYoN
+ qseWjmyhF75OuAN5LSUnSgv3V1hXeBfggegYs99eVb/h05+gHq2ei0OOez638f+Xz9tZs1
+ HVm/WHs0cLGzS0ipketogF0m4jCAAnQHgVBaZpE1n41dRqVR1Zu1XL6LCHIN18ouwrIMfQ
+ Bfrjdu8KbiFDi+YoZOOvmzaQb/ylwLV863r9OL9X78rlEWgh6lMR2uYy8SZLMw==
+Message-ID: <6b1784e6-ad9f-46f4-8890-ac0f2939cf03@mailbox.org>
+Date: Mon, 23 Mar 2026 16:04:55 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] fs/erofs: align the malloc'ed data
-To: Michael Walle <mwalle@kernel.org>, Huang Jianan <jnhuang95@gmail.com>,
- Tom Rini <trini@konsulko.com>
-Cc: linux-erofs@lists.ozlabs.org, u-boot@lists.denx.de
-References: <20260323134305.2675822-1-mwalle@kernel.org>
- <20260323134305.2675822-2-mwalle@kernel.org>
-From: Gao Xiang <hsiangkao@linux.alibaba.com>
-In-Reply-To: <20260323134305.2675822-2-mwalle@kernel.org>
+Subject: Re: [PATCH v2] usb: Correct dependencies around USB_EMUL
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <f6ffc6db-c59d-45c9-964f-7fa56c320047@mailbox.org>
+ <20260323143836.2274286-1-trini@konsulko.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260323143836.2274286-1-trini@konsulko.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: bb3c396432c9ab472a1
+X-MBO-RS-META: ap5ie87mtzkhawskzhxshuzyptx4skwz
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,80 +74,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
-
-On 2026/3/23 21:42, Michael Walle wrote:
-> The data buffers are used to transfer from or to hardware peripherals.
-> Often, there are restrictions on addresses, i.e. they have to be aligned
-> at a certain size. Thus, allocate the data on the heap instead of the
-> stack (at a random address alignment). Use malloc_cache_aligned() to get
-> an aligned buffer.
-
-Many thanks for the patch, I wonder if it's possible to
-submit the patches to erofs-utils first (even make
-malloc_cache_aligned() as another malloc() for example)?
-
-Since I'd like to make u-boot codebase following
-erofs-utils, but I don't think Jianan have the
-bandwidth now, but if you have some use cases,
-you could help syncing up a bit.
-
-Or at least, let's keep these four patches in sync
-between erofs-utils and u-boot.
-
-Many thanks!
-Gao Xiang
-
+On 3/23/26 3:38 PM, Tom Rini wrote:
+> The symbol USB_EMUL is how sandbox has access to USB. It's
+> implementation however enforces a few other requirements. It must have
+> SCSI enabled, and in turn that means it must have BLK enabled. Finally,
+> we should not be using SANDBOX itself as a symbol to decide what to
+> build or not build here, as SANDBOX is selected for COMPILE_TEST builds
+> as well and so may not have enabled the sandbox specific USB support.
 > 
-> Signed-off-by: Michael Walle <mwalle@kernel.org>
-> ---
->   fs/erofs/data.c     | 11 ++++-------
->   fs/erofs/internal.h |  1 +
->   2 files changed, 5 insertions(+), 7 deletions(-)
-> 
-> diff --git a/fs/erofs/data.c b/fs/erofs/data.c
-> index b58ec6fcc66..61dbae51a9a 100644
-> --- a/fs/erofs/data.c
-> +++ b/fs/erofs/data.c
-> @@ -319,15 +319,13 @@ static int z_erofs_read_data(struct erofs_inode *inode, char *buffer,
->   		}
->   
->   		if (map.m_plen > bufsize) {
-> -			char *tmp;
-> -
->   			bufsize = map.m_plen;
-> -			tmp = realloc(raw, bufsize);
-> -			if (!tmp) {
-> +			free(raw);
-> +			raw = malloc_cache_aligned(bufsize);
-> +			if (!raw) {
->   				ret = -ENOMEM;
->   				break;
->   			}
-> -			raw = tmp;
->   		}
->   
->   		ret = z_erofs_read_one_data(inode, &map, raw,
-> @@ -336,8 +334,7 @@ static int z_erofs_read_data(struct erofs_inode *inode, char *buffer,
->   		if (ret < 0)
->   			break;
->   	}
-> -	if (raw)
-> -		free(raw);
-> +	free(raw);
->   	return ret < 0 ? ret : 0;
->   }
->   
-> diff --git a/fs/erofs/internal.h b/fs/erofs/internal.h
-> index 1875f37fcd2..13c862325a6 100644
-> --- a/fs/erofs/internal.h
-> +++ b/fs/erofs/internal.h
-> @@ -11,6 +11,7 @@
->   #include <linux/printk.h>
->   #include <linux/log2.h>
->   #include <inttypes.h>
-> +#include <memalign.h>
->   #include "erofs_fs.h"
->   
->   #define erofs_err(fmt, ...)	\
-
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+Reviewed-by: Marek Vasut <marek.vasut+usb@mailbox.org>
