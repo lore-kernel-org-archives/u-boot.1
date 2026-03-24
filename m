@@ -4,104 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 811F9F54AC7
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 15:07:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01F5EF54ACD
+	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 15:09:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C827F80517;
-	Tue, 24 Mar 2026 16:07:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5C29080517;
+	Tue, 24 Mar 2026 16:09:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Th9i8L3e";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NhBrket8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A945807C0; Tue, 24 Mar 2026 16:07:21 +0100 (CET)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id C9F9382A9E; Tue, 24 Mar 2026 16:09:12 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 217A680212
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 16:07:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 562CB80212
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 16:09:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dan.carpenter@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-43b40fb7f95so1366686f8f.3
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 08:07:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4852c9b4158so41562675e9.0
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 08:09:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1774364838; x=1774969638; darn=lists.denx.de;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=P5ZdFYh1bLXmKv/xLtFTZBUW421AXSY/+eTav2poOSM=;
- b=Th9i8L3etvEjpiHgMX0H8VataLpGWe1WVlu/QEDohFOIcdshSsNdS0V/wy8OAGwFgX
- RvxLympvuYMZYj7NRCQ9vIq01l9Ov/GgV10/G9KGfvxUjuV2okZ4tUXlun8SGazyXXsz
- dlYiEO4KSBMFgf8T+c2lo1fY6pgQROKinBzA2qURXMByd5kzFOKGC6OpfFzrb3tFWSaH
- xS83U7BFftjCv9GtEHj/tRafSYA0fa4rt6zZsR6S21Xl+dEVWNQTDzugIombhZ0qok6p
- xrzmfi8myd7zOhpnZ9Noaj2mlk+MwMATNkbVF6Td2leHVsgDBWATEhdAiJAGkHduLtc9
- MAcg==
+ d=linaro.org; s=google; t=1774364949; x=1774969749; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=P8RmIok3yTkeUNcmhidDvRM1w4/Sk44GpMpVQEuqqQQ=;
+ b=NhBrket8rgs4T1kK35T15hI/n4S5WpjBYADRtCi/hMeYL7PPFIPcX1W40p7WGzE9z2
+ Z5a1Htm15Ix6zq7ai1eMVGXf6S59uooXYUklRbCrrMBZJKlHwHHYHpQvReBN5No1K0BO
+ YADisIH1rRKnp7sesEbNIxKAXH61r1C9NYHsr5m57ID0+xBDAI+yGYEQQ2MeB8r2Ciaw
+ VoHloZsB8zYG5G2te41TENO1p7VKAy0WFDk9Bf5oWtAax4krFa0SxjCreLtdoAj8ebaV
+ UHdGrQTzE7e7rDdrh2RWj5uSz+CV4scM7v0WaYrWp5iye0+Bdogl2jjHcPLFchP3JTla
+ Mr1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774364838; x=1774969638;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=P5ZdFYh1bLXmKv/xLtFTZBUW421AXSY/+eTav2poOSM=;
- b=NFEtPYsTem+lOi+MX9/SFzn/4eU95iyTYEiVSIBCnekowlayR2RaQToHGcqtoABCtt
- 4R4tdlg5s58UUcGtYi7Bl74XcS71q1vN/2XSRiKW7K2zzFRXZ1C8XWyaY9XpCL4jFkaU
- aNOG3hRu9cKvgeszbdsp8Fdtugn+xswsimSpMfzVbNQgt5JM5Kv7TY2m+eKvlchidxKp
- CdmWAIyG3VM2kjxd2MyY3ms4jkwgyz5Vrm5A+xdkmWqBUo/itV3hVwS4q/qCbjWlQ0fN
- HzMfXQKGTSdzG+x3Mya+a0kheufHeEb8/DlDQOAu+mRUhOGuPBd8TXhDrR/F5iIqbzXJ
- L/Lw==
+ d=1e100.net; s=20251104; t=1774364949; x=1774969749;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=P8RmIok3yTkeUNcmhidDvRM1w4/Sk44GpMpVQEuqqQQ=;
+ b=aA5XMh/RcsgeYCA9ZPCI8BEzsLjkS8QTNY8wK54/qdBIrt/QPYURCvayzqhedsJn0w
+ +t+156XP3dAqhnS5ca39Jafum/bGz+p6fIb3uK8tiBR40u2qtpblLzWFoIolDLs6Z5ml
+ 5+C0Yhpwxq6LffFoqh+4vLA35ytgJlQyFKhVE3B5YJr8gN7VNbhDnm00ilcTNEXPiBu7
+ tZIrWW0Oa7B+ntOqjqF+LIdb01nkwzk8GD/T5fcW4GRGky5O3T/wTk8Qwr1487avyfJN
+ RkVBlIZa1vQoTNjT2RCgI8OujdavVUSEW2Qg3RIkmjVxT69/wVP4FucUS5Q1zPVeIE2x
+ xSAA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVe+u+6arjPEpk079JVYAvHcfdSYHIhU7y/nqZEI7aCY05IX/YEjWBbeFVHxsZ6DriZXvnApDQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzzINw//WdOZB+sAmr/CQP0aGhCboCFJAabXAw9CklYGFXTJPxz
- uV6yHi5X4qpUR3sKWHFfDuLpZUTBD+oJg3whd3j42jWbbPbzbtWwZ88C6+Fev9VAxcA=
-X-Gm-Gg: ATEYQzw5lj29h7Adjg5yZ14HE3bBDJd75WadJWFG7vgajwieHndKDIhsKoqZ57/0Tjy
- uP4hN/bBNM0U/TtmBFG5H81FitRc3UU5SOzBmp2pU5LhUVvJpBHYJGXnOWC9jSS2zGTSW+Xb9Bn
- 2wjO0BrO66BxxD3u4GF9iadAp8POUO/Ko2QaAnvXj57zj84znXjGJYL7IgXU4hcWTfvZ8jFgkUS
- PIr3PR5QwAvjLtDsf1qbe8k4pBdRBTgz6kaFphJh6MISe2dBpih8uCEGDN1OvGyp0/cNfGS2QEv
- 4Gcz2GLC/vldigfFLHzYWEngKiwSm+zsytu3U67NTaqiOh5BGUM1fpMHozDtPw06aRi9HZXLuvI
- swAIREK4ToMb7bPjKIIFd/0nDs9k532bg8+VB+gDHbumDR8SLKLk4lg5ZK9eApV3ZSSTzJ8Rpgu
- yPpi4Tuxh2V3YC17nMQhG4atVnOTj6
-X-Received: by 2002:a5d:64c6:0:b0:439:b4dc:1e1e with SMTP id
- ffacd0b85a97d-43b6426493fmr24948925f8f.29.1774364838270; 
- Tue, 24 Mar 2026 08:07:18 -0700 (PDT)
-Received: from localhost ([196.207.164.177]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b6470393fsm39839147f8f.17.2026.03.24.08.07.17
+ AJvYcCVFzJKtt7u+/5zKt2UC63e4tULeI40ScGneJ6xv9v9ku6Vyjjeg1zG+F1g9UHm7vqnpnJlo69Y=@lists.denx.de
+X-Gm-Message-State: AOJu0YwdacLG7c3AWkHD1uucewO27lpigug6lytHHAx2EQLDhQIjjW7S
+ DlK871X3rpxRNUmdDLrxUIS9ZybkisKZ/02XYvSyaVHs2a/U/KKSyiT18b2MgYNdcQ4=
+X-Gm-Gg: ATEYQzxZbR7a+Z+JLr8i7bc4SVXR1Obst1WPWd1VXQr96CvTNxhs6MILIDYC+AM9mhj
+ 1uWuyN4IFqoHXExJcN6wSJmL8j5hKVC/sB1omAjsMnQ8lt1eYS33+u42u5mv00i6FVSJ+qxjFuz
+ LzILpQrDiT+XabwhLyYhfPFdSaCh9jcboSTS3T9/CoKuhz/qUI4h8FdUCVnbpMVMm+ZdS8ap9uQ
+ aRaq0Y1iz6CiIJOAIgXihFfOiVUGtLggl2dD57PJkvb1ztUmpBJh1aQmT2sFpgkvp3LHFKoRzPO
+ 4IzIm6wdiKdfiXt+Qf/kaJ9IyYCsrcyr8IaNf1oeGwRiZ9WUG8dFaf8jiDGDY6bdcXF6VKv4yrC
+ oTJC5gx9OLQ0wXHcmwkXM0aHzgmUfeDc8e5uWuxPB9/pA6enQ+Yw8JlT4my5BXlsRRSnVl0yXGp
+ 0ST+91mvBhh+2IjvSjT+4StiKcFhVUCl9qVmVoGm53YDZ+oSKCWBC4cOW6o2YnDJqmV4TyePemH
+ g==
+X-Received: by 2002:a05:600c:1d19:b0:485:353f:c651 with SMTP id
+ 5b1f17b1804b1-4871605aa27mr1613445e9.22.1774364949375; 
+ Tue, 24 Mar 2026 08:09:09 -0700 (PDT)
+Received: from lion.tail248178.ts.net (p5b29eb0d.dip0.t-ipconnect.de.
+ [91.41.235.13]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-487116d82e4sm104870775e9.12.2026.03.24.08.09.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Mar 2026 08:07:17 -0700 (PDT)
-Date: Tue, 24 Mar 2026 18:07:13 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Linus Walleij <linusw@kernel.org>
-Cc: Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Alice Guo <alice.guo@nxp.com>,
- Marek Vasut <marex@denx.de>, Greg Malysa <malysagreg@gmail.com>,
- Michael Trimarchi <michael@amarulasolutions.com>, Yao Zi <me@ziyao.cc>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Anis Chali <chalianis1@gmail.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>, Ye Li <ye.li@nxp.com>,
- Valentin Caron <valentin.caron@foss.st.com>,
- Vinh Nguyen <vinh.nguyen.xz@renesas.com>, u-boot@lists.denx.de,
- Andy Shevchenko <andriy.shevchenko@intel.com>,
- Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
- arm-scmi@vger.kernel.org, linux-gpio@vger.kernel.org,
- Vincent Guittot <vincent.guittot@linaro.org>,
- Khaled Ali Ahmed <Khaled.AliAhmed@arm.com>,
- Michal Simek <michal.simek@amd.com>,
- Cristian Marussi <cristian.marussi@arm.com>
-Subject: Re: [PATCH v2 3/4] scmi: pinctrl: add pinctrl driver for SCMI
-Message-ID: <acKooSHo_FB45nYH@stanley.mountain>
-References: <cover.1773256350.git.dan.carpenter@linaro.org>
- <1048331f5d3c8e0cdbe1542bcb65bbf942a4275b.1773256350.git.dan.carpenter@linaro.org>
- <CAD++jLmfRVGGHH1EqMAeSVHVCr1-s2JPyuY_w=2h35_mKUXj2Q@mail.gmail.com>
+ Tue, 24 Mar 2026 08:09:08 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, u-boot-qcom@groups.io
+Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Casey Connolly <casey.connolly@linaro.org>
+Subject: [PULL] Please pull qcom-fixes-24Mar2026
+Date: Tue, 24 Mar 2026 16:07:34 +0100
+Message-ID: <20260324150903.3786680-1-casey.connolly@linaro.org>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAD++jLmfRVGGHH1EqMAeSVHVCr1-s2JPyuY_w=2h35_mKUXj2Q@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,35 +98,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Mar 24, 2026 at 02:19:34PM +0100, Linus Walleij wrote:
-> On Wed, Mar 11, 2026 at 8:41 PM Dan Carpenter <dan.carpenter@linaro.org> wrote:
-> 
-> >         scmi_pinctrl: protocol@19 {
-> >                 reg = <0x19>;
-> >                 pinmux1: pinmux_test {
-> >                         pinmux = <0 1 0xFFFFFFFF 18 1
-> >                                   0 2 0xFFFFFFFF 18 1
-> >                                   0 3 0xFFFFFFFF 18 1>;
-> >                         function = "f_gpio1";
-> >                         groups = "grp_1", "grp_3";
-> >                 };
-> >         };
-> >
-> > Under linux the pinctrl subsystem will parse the function and group
-> > properties and use that to handle muxing.  However, under u-boot the
-> > pin muxing is done using the "pinmux" property, which feeds raw SCMI
-> > pinctrl PINCTRL_SETTINGS_CONFIGURE commands to the server.  The
-> > numbers are: selector, identifier, function_id, config_type, and
-> > config_value.  In the example above, it sets pins 1, 2, and 3 to 1.
-> > The linux-kernel ignores this pinmux property.
-> 
-> This whole thing is a bit of a hack and shortcut to make hard things
-> simple isn't it?
+Hi Tom,
 
-I'm not disagreeing with you at all, but handling the default pinmux
-property is the only mandatory part of a pin controller driver in
-u-boot.
+These are minimal fixes that should ideally go into master, sorry
+they're so last minute. The watchdog patch is the priority, if you'd
+rather not risk taking the others I can queue them for next instead.
 
-regards,
-dan carpenter
+Kind regards,
+Casey
 
+The following changes since commit eb95914b9f5886b7ca0eaa2dbcd8a66bb8e5f81a:
+
+  Prepare v2026.04-rc5 (2026-03-23 14:19:17 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git tags/qcom-fixes-24Mar2026
+
+for you to fetch changes up to 1cf505e51b49438271f4b36a648b93b618f13a8e:
+
+  watchdog: qcom: stop watchdog by default (2026-03-24 11:51:52 +0100)
+
+----------------------------------------------------------------
+Balaji Selvanathan (3):
+      clk: qcom: qcs615: Add GCC_USB3_PRIM_CLKREF_CLK support
+      clk: qcom: qcs615: Add GCC_AHB2PHY_WEST_CLK clock support
+      phy: qcom: qusb2: Add QCS615 QUSB2 PHY support
+
+Casey Connolly (3):
+      serial: msm-geni: allow invalid clock
+      qcom: rpmh: don't error for SLEEP requests
+      watchdog: qcom: stop watchdog by default
+
+Tom Rini (1):
+      power: regulator: qcom: Correct dependenecies for DM_REGULATOR_QCOM_USB_VBUS
+
+ drivers/clk/qcom/clock-qcs615.c   |  2 ++
+ drivers/phy/qcom/phy-qcom-qusb2.c | 38 ++++++++++++++++++++++++++++++++++++++
+ drivers/power/regulator/Kconfig   |  2 +-
+ drivers/serial/serial_msm_geni.c  | 15 ++++++---------
+ drivers/soc/qcom/rpmh-rsc.c       |  8 ++++----
+ drivers/soc/qcom/rpmh.c           |  4 ++--
+ drivers/watchdog/Kconfig          |  1 +
+ drivers/watchdog/qcom-wdt.c       |  2 +-
+ 8 files changed, 55 insertions(+), 17 deletions(-)
