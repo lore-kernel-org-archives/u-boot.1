@@ -4,84 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1257FFEC0F1
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 18:40:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16F4EFEC0F9
+	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 18:55:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75A8C807C0;
-	Tue, 24 Mar 2026 19:40:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 4798F8352B;
+	Tue, 24 Mar 2026 19:55:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="QbspRX6X";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="PAAIYDMm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BED68352B; Tue, 24 Mar 2026 19:40:30 +0100 (CET)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C6288838BB; Tue, 24 Mar 2026 19:55:48 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A0C88063E
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 19:40:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 61EB0807C0
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 19:55:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7d7f09aa39fso4553975a34.0
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 11:40:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774377627; x=1774982427;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=9ZCyKKIFTfUJmNzwMRU75uRYXa31+52pbz6S6XeyINU=;
- b=QbspRX6XwATAQK7uXbu/NSkpGYx36b/J148Uxum36itjRTHK4Q6wGkChb3CtAZ1iF/
- O/kb5Q0x9pf8+ISyp9IlSDs01azgMnAKJNaOtJrFdSmOeKanRXaVSvs5ZiQQpo5O2CCZ
- tA7s7Qr4q8rYaStP0VpSEeMbnnU8RBkcLeEfu0va0youUHsgxjLkel7+Nxo+2yYVQs8e
- DASP1PMJielvJ+N6SQq/ALIubthC1DBQ/yhCuxQwQt+m3sR26KxIDmkm/MlWuefnhJI3
- FZtE+b5zs6xLDtS4JnAE8LzrygordME40ZAI1kWRPKp7hpaBCdQEPqThaQekObsLN1Z/
- ZYjQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774377627; x=1774982427;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9ZCyKKIFTfUJmNzwMRU75uRYXa31+52pbz6S6XeyINU=;
- b=r+mF5Ms1ukH4kFPq0c5hBhajlxlZYm4Mk7n+axFALxalyHj/eGf8g3vPP9rsABXRTx
- 7/oYmcPiEeApsWMUF2jMZURnFKjwjYAgq/z2nDfpLwo/Q6gp5csSnLtTMWWUk4FSQW/+
- xzdfBPQpi7/BCkgnRL8XLxUYi0k0wPTQ2iKOuGwUq0Z6P5Yj4vO2XA5WEoXPu1m/Ylcu
- 4YZOP6/AdP6odiTyixZ4zaAdgKixxUR0pHTnU0+UjZIOZwPm0vIxdCYWEo2ANCQbrf3g
- GKX9OBpHroQKKrkBJzBunsx711E9POJN/QAxze9fk/zjpSXxZ0aWfONJSILg7VULeVl0
- dtxQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXa9QXP69SKn2+MnJOnzr82h+VZELkBfsLDonTbLlvF7p3F0801JNhQSc2Da9oBcKiNVf4Tq6Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YxAvL6639lcUUj86NIqVsoQXrw5ULPXm2J0NKz/P9rRoRgc6KUC
- 72ewTujVgFwdoxlvhRSYx+I4j6UyDaq0xBJsCh7dsjHO4DmulTKbNmfxMb8IAjZpjoE=
-X-Gm-Gg: ATEYQzzeJao5XkcZFCvIvXBxctKCQMG76MjGOQQ8MeCc6dEsoxXwQ/oOKYLYBhFs6L2
- SRXctCzNXXRnjdoBNaMEsq2VjhS8NzPtJHKtK9tg5f+2LxGJL1whqFXuq3Qxk6wijqjZ/CFQgdi
- CiTELfhbE+pcjg9K6MGsp2hjBJp1R7S0Pgms0ffp5/IfrYD8daBfsJhFqizfqALvh1QMLKsryz4
- WE9cyvpXqorY0E3aOQUVRtf7n0fcuB8fSYHQ/inpZdB80VVw2BKbCeI4Tb+EkSeCfbEMnpXyGMV
- WHdGi8socSQg867QFuFHDcX0+/zdieIN0GAgxw2IOc6C4k4/NJnS1yucaoQDHYicgvyqBMPT6mf
- pcJIAbVva2s14xaYLpn1zEeTNOOOKclqNjU+5sisJhsh8Sf0o3X5YKAm8QNAozSR+uUhuH4E2gr
- UIczVjScgLVHQvMUgv2LgxhbGD
-X-Received: by 2002:a05:6830:82b6:b0:7d7:f158:1f44 with SMTP id
- 46e09a7af769-7d9d69eac69mr264506a34.21.1774377626621; 
- Tue, 24 Mar 2026 11:40:26 -0700 (PDT)
-Received: from freyr.lan ([2600:8803:e7e4:500:8a85:a776:3f75:a1d])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7fbee2c6dsm9987889a34.1.2026.03.24.11.40.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Mar 2026 11:40:26 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: David Lechner <dlechner@baylibre.com>, u-boot@lists.denx.de,
- Julien Stephan <jstephan@baylibre.com>
-Subject: [GIT PULL] Please pull mediatek-for-next-2026-03-24 into next
-Date: Tue, 24 Mar 2026 13:39:20 -0500
-Message-ID: <20260324184019.987767-1-dlechner@baylibre.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1774378540; x=1774983340; i=xypron.glpk@gmx.de;
+ bh=/cymX/6jnUG2a13heIXwFZWKhER/4Soc5jPuwy3nfgc=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=PAAIYDMmRFSaaxpqMdBRFciErfDr4kfLsEH/0cHVBDnVpAOHPxhK/gmM0cWsjH50
+ W15CjsvECHw7SqGD59EVvSHFEILbo49PXNkAVGGKXXxlNv68KiAz6PUdkT8byCrFi
+ +vSWUbkI3BnmWJarhX3LwLKGROPQiCyccmB3YjCGD1T15g2q3mUCXZt3HVnwK1Rqp
+ HPXqE+Pk6KRUZ0lfCOs7R2N8kP5oMvb1ndPlgYp8RYAsfdDV19hMpEpHZNH/NiM5Z
+ 1NNbFHi2jZIo41h5GzAfSnbI87Fjt9FBYt5ZFXCfeyP5OnNFTtzk/hiC2cO3hwCCz
+ +zxt+bGdM1xlitbtuQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MPog5-1vrY910YFf-00Vqnm; Tue, 24
+ Mar 2026 19:55:40 +0100
+Date: Tue, 24 Mar 2026 19:55:35 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Leo Yu-Chi Liang <ycliang@andestech.com>, u-boot@lists.denx.de
+CC: rick@andestech.com, ycliang@andestech.com, trini@konsulko.com, me@ziyao.cc,
+ anshuld@ti.com, qemu-devel@nongnu.org
+Subject: Re: [PATCH 1/2] riscv: Add CSR detection support
+User-Agent: Thunderbird for Android
+In-Reply-To: <20260319082911.3270255-1-ycliang@andestech.com>
+References: <20260319082911.3270255-1-ycliang@andestech.com>
+Message-ID: <9E0E8083-2F08-4621-AD8C-E8B7AA91F205@gmx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:oCabSaglRq9UBn7Xq63AEZW9y7RLlHw+mm267lA5DSQ1nebb3QR
+ p7M+tzzARYRbnAn2O7DO+lHVuKSMk8KNreFXhXD8GQPawrVAETXyKPNZ2J8qx8Tz0PzJl1A
+ 0Qtl1vI0VNxvJwPJ4H8cbGxki1j594G1PTjiK1pOpEsACcogvyLwqi9KdnrmLoDbUVfjW7i
+ WNs3D5/jSahCG80zHnXtA==
+UI-OutboundReport: notjunk:1;M01:P0:b1zjxN6nkNc=;fRQEtvWzYHJaqwUnMxSavp/MsjT
+ Z+JCxWU9AIm6Z0Q8oA5bZ8LPoMgYPWUabCtT5RMEC+iehHH3/Txdvp7u9J7oJ+z4IFzu3Cv56
+ Gfa9rZA3j3DoX3pSpY2oZGR40+aE5RPBsaKJqwq8GdG65+OFgs/5oXZeYz4MqBOA5Vz/eCxUk
+ Itpb9HFxnhClAS67sSuzCHDCsBfflO6/vnOqGJ9vdveM5BkZJ9Nr+yDbCyM3Aj9/V2qVLUM/t
+ YJ/KKG5IK/AYK2opc+Wm7jkiniBl1UzDvemXhGAzzx5Fjvw+JH1zux5troOYZFbNk5f/Q4F4O
+ 8U5SBRBIntxphWqxscLp37NeDQUzMjRmFJ3yhITChNPZBzFjIztHNMYda2TgFsgFQsufAitTx
+ nhSNGQu5/Chxdz4nAhKPfsRh6UXEtqhkezPMqh767XgzHB3j3T6tz7MZUMCp3no6VQIL06Ack
+ C/t+fgqa+S6zQn28P+xT1q/2C85ZrzbQEGip7dcudXDs8AC86Bx+5O23A3pBV/eZ7Aa9TZ+I3
+ bR2Ux7hmAfhJRJsfb8oOSfghmdDbsbaX3i2wPTT9KmKn5QtenJy7oua7Hr0yIWrYkrohterF1
+ K78NuKZEeD50T7EMcDGdd2yV7MFBfqfH9O/ptOV0UoH7A6zJPfBtfLElDPCYoB0Z/tXkvg4Bu
+ D8YlKLMjzs6FTBTMds7bfuO3HGJkPTtRnjPaMVYE/dD28VxgvxBetUU8ohqdLxHTGR6Hs+EPc
+ tpdKCruMZDNb2p7qrRFSt9hx2KVSaj/VEOEG/L58k2tDUXse/T58nMypC7voCcMiJhj1Tav35
+ /zU+b4vZizwyJ0iCV6Cx4JcJOZnaFSCJJKFeWjVyypcXSwVbLTkGnFIypmx+lh3+L+OsI0EeX
+ 0/E4WVQ8NMwwCMS0Nt6J28m8GroTcU8+gY6OxwvrdvIo2LG2x60Trr96K6EuvRTjzGVaqseXk
+ DivrOV03OpJaJA0LUrWA6Y+Jjl9qWluIm/pvALfWfwAHx3dFzcwiify8QCReBUxnfM/6Hrxiv
+ aFVyDptBH2CC/KuFIkJ2yPmdp20YVBnS/8s4SXT189ypiuYMqfQhc3XMHcnewF/WtzstVnTyw
+ 6QrfsIVlsvXIXrAgZY/+z5Ok+Kktrlxh3G4uJssRVPCFzoPY+LMArI/oxdB0ZyEHgmUUicHRq
+ e3os02N1YsVBjV9PGs1zHR3P+y+uCUnIBqcGHC/zKY3Mvn9O0gb8WPKXoCMhcw1wzeNMKtWPS
+ FywY0t44KXhJxIbz+L8awENjg8mUYkIfduYai92aVxYhkF0WiOyR8u/b8Be2HRdrreez8z9xi
+ noU+XZD+E0VEpQra7c70D+H9xeYfsxaGs9jtV9qSaNuGIJsGiElmBJhZwwiJwmEN9EWhvF093
+ l0agnIr8No0qDHiOuNA5TgWtUu8dYd59Mkf5lIGpdp2We4DxSkAnAAqVvsdZwpX44hedVPxW4
+ l7TVr9GM+LEP0nw1dJ99renepxVuLOwYZ4ZxQyyyjdXl4jwE0XVv4G7TK57UZmrtFqKkBpx7n
+ AX2wb1L0Mz1G3AyCz2BU/sa9oyalHjjHbrgu5DyrWlo+I8UyCt9RpBAZEJJ4Lr+uyANZRfmwT
+ hQ978AxAXMhOQ75+o4Vccj0+ZI/vj1Aif3LPBsNabrBtENqYyormzUmcAK3DtILdwbomv5Q72
+ OVqECYj1NGwm1TGfyCQVDVCmCdDHorTqleZg32arFWqVdmHUPj/LNX4uZ116FxWC4Mly/UqGC
+ 7PVMI/HD/ugeh2hi0EpptqjlYIHoNM8QEm6eiUYVvPtXtqD3QsmTkzy8bYTbABa+J03dRzZzO
+ 27LJ1tEhghXIjp05wTY7cPGSq1nPBO9IbN4hjkAPi+qwEbRKytbSM1F5cbWXqQPe61/EO8eUh
+ jnV6uKrjkUrHTK9kAmCrnuWWN/kb4VTO0l3iXWuZzqa9t/gLVBl0iz06abo22tFqtuyvrHXaX
+ 5nj3QO/mqaJxMtLP274DQxoM372WGTblYZLPwshc6jpvIqwdfgls0A4K9oOsbaTsyb5a6MR29
+ uPXPe9iMeTh+o527GhBspgf0KlS0a+BKiXPg2/uX07FpcNhGacN3PC8qVJutan9m+Ikg3DkFW
+ 9VJ6MZZaJolJg1yOmYXNbwNz/Uo0tbrOnYq0u+8zdrWxyvWDZ2kx4A0XaNIKP4G6MZDewligB
+ YJf6xp+f7LcKImhouK0kYXIQ9FzGoB+SIjKllFQQ7+VQefBRn7/4j7imwb5h7qbHn2w1GiQ7l
+ VnvayozIcsfTKmpkgfewYUGUZnZwHxGF9WJhkZhPghp8rUw7+RPnSUUOpTkYJsWPFMaRU4CVg
+ gg/L39IuZA7TkCNdz3Vp7gNLUA4C2bF4NX0WAfsCpog5bKx11OlafqAkVkeUR27UWgH1ZShP0
+ J6Gd6G6SQ12INfpBWtz3sppcKx+lmUJqDSQVxhaZWIp9GniT6E0JtCbyeiFKzOwJkaOUWn592
+ g0bhWDB1jwA4o83cYseNK4y54fy9DVWgINDeEkiJG1aq70NzQEAEzFMAKafZtqw1O/Imt+wYR
+ Soa0Jxl5J4/Wrszv4wXQlqA9YnYW+N4UWK75Z8fBXvmWR1KZ338SdpP565goe0/yqQ9UXqc0z
+ cAd96+EMPZPHtnmgif4g/v8+9Azxp8MDrbRp/5qf7aoJCabqPM2fBUaSpIpWkolT+ZlkodhbS
+ olUkjFcUxd0DDm5HmB4NTeyssh9O1zL08LvJ8kJrvwzLau1G7M3OyrwrtCPXZ0rICkQ3c9p4z
+ /DK7vhhHhLGUvCswf7SWEAAiuT1GQRUcHs8qPAKw+V1VVS+dLbdpoKcO22wDxJPxu5VWxPaQv
+ yRCwEVQKUObmuFukAIdIT9TvpByZHOeo6jxfmw4qILZ4QVoc7bQW/PN3GGkDx3AMk4URH3BTo
+ EbsevvcgeHo0Jb+CTPPx7AGllrOr0WyUIVsT+CUREEyTCoef4b8K89XnReokh1+jlpuHGDvUf
+ eWEvek+mCFuYz0aN6DFJp7dPwIdJjuqrJRrf3O+W/OphUWeymSs6NvaCNuXy58BagG/OMIpJ3
+ J6quopDil9/ikVM+SbOp0B+vjkS2eTDEqfZxqVstzUXLO4pHm/DUOeu48j918fg+7+Az17txx
+ SUQGVlTrO7oelSd5F4erQHug+FUJHXDbEq3EIWbUM6kmXb47+BM6V/HE8xnHPVYMa/PE4XTzM
+ LY5P7kYdrvqVugLmHcezOzzXUZ4xfqsGT29tBAsrMjILYv5Tndm9XewGLGePs28Be+Ldfp36y
+ rmAx6PiNMm9E8T2CAm+jPQPRqJSekprP9F4oV223vmIBzz3MJdUqACZddp8sltrIPNMQK933Y
+ Ufy+g7L0u5TU8HZvUFiUFtSGahJG6bTQIy7OAf01F5RKMnKn8Lz3PSK4gQm4+vbWMGyaeZEmF
+ PhKTB4vf8QAjelJAFYZ21EXvsPUsLydrQdSO06qkbaWtdRWntkzDQYnfxj1aiwt2e0Gi6Hml1
+ dcUxPIqmaDyb/1c0EhE6BmxqKCCWu3Ne81hxjXWxeg8iz4+BtzmeblS8ErPJvEtr0EdpE/W5D
+ YEUYa3umhmwS5j6wuvIKRZEx5GncydwoNWFNG7II414x22iVA8y/15Bi2bPEn049bABb4cgnw
+ SWnx32k2hpDIFhaLL9o7oE4VbOsBbx7FKqj1kY5AUz2FtsizCUxLfRJsvJojhjJ9ZJQ/icl5t
+ 5OcTFPdYpQuGkAv+lk5S6rrEeIx3amfkZg/DceHCFvpba+lRJGgXVs5zrIus85eAH2UeCOhRq
+ anSb8Ls/e5nTJmokADcBLfr5zVoKM9CJAWE4r0Wypv6Z3rWCPMMuDaSl3zbIj3iC+1P5m504c
+ AQTC6hjpcpzwRPuFBYCccIrKx/OFqrBl622YA64YYu+iTkG3lLBJifPtfDcchbEQ2/WWOKzQx
+ s2dDLr4Y2mk4krlyaZgMeX4aSq5LF7LnUiQGpQtEa/RmwaH0X2dBFN+mF7cX7QoY4bKDzDmg7
+ PJ4mpiQ/TwYk1DyYasXkwj4hzqt+w4624+qtjK855cqVCAuq+jpo2+8LjfVaJvz+X55hx9sLX
+ bVKyIrEcsSDMqRXlJwu6qwU+Ig4mZQY0FXZht1e00+FTdUVJl6IrcIbnbBngL5vIH6u98fehC
+ XHMB8DgrydXeOK8qdCfC8/aSOUgvRpPMGsnw300E4vfH7zzr0bLNChxUefwSVeStFqmPDO31I
+ xSnGPxxQjmWFyR9BBv91hKHFS96AIw2R2wBJE1MBYFSxJa4okLdButZLGTb06WQ95TiSE5eyg
+ tMfk1IAim7hwb7Ux267akN5FpB7bpqZ47VNxDizWpnwJmcmBUTuywZ9/m9l0BSn7WcMeI4BoI
+ b6vqUOzXg4/WyLgX/nb7UecCf1Cu234zCHIYp41zolnRCSWXpY9Vb2cVmkRbC7Vo4xF3ZENlC
+ gRg9c5R6WGY8yX1Xna/sF+LLNJP6mp+mufPVn/lnSr+bF4X07he0nIZh+x/VMxbwkpaxqFmx5
+ tgmYh2yBEeQ0l2tmc32h5WMvlg6E276NNerkflZ2fRXFr3NW3KrKCwtoMLN2B9IhLVM/fIyJb
+ sCSt9WKyTyGKoO3N76DruPj82uGpbeCConYw8UO5hGOY8Ic7hC/9pVQcmo+JHS0kf52o9PHiy
+ U06+QNHFx4kZ8HnVetqGylGjoub1WLV+oT3mVgUsV0APxgGjc2gVnLMHeUVvy9VXDIzhxU+sc
+ Zl0I4xX13YR4peTj/hZQ6+ClrMvoHm5v+xUCVQHZpbVyN1EJoBTlk7bQWA28CSkJ6L+oT1SMw
+ 8l7KzHemdClXAf9fxiSMZWHXkw535pKjrSlr+mqwVc6ypmawo0kL2VeHpoOIcPOfC/GHSIxi2
+ fQkiA7L3V8j0VXa+5PZjj0ghY4cbK+eAd/xXF9Oc/Mkt4uBrbroQu8fBj/Zj1tThWbHXtQsDh
+ muTrqZiMObxOXYPm+kKj6cOd90jwAWRbyogo2Ug9SIq6GFLhtjLT3BND9XhRHxyImY3XRlV9n
+ UJSPXx1Pow5nFXymmD5oC7wZI+pW+xnKoI/XWyzh2N7IpudKqjoThJ0C3VeUwCV+BlSkhiazf
+ GyDzEbc4c2593Y76RUz5+wA9Jo+lq1GwhzsoFew/I++1YaMJ+2qUhqUJ7b2LrQvX2qrCT3/sP
+ 9wDlmCMridanpWspWdwKY+ypG4rm409Ehm7o70yMfglS2G2AWoyFfzdwnmLe0AkWRHkY0rvIQ
+ ez+1q8etNdk3nHcvjeSMzj9BW/4+ar9pdxgQfoct5qKEzmKFIJbQYvsN2fvRDImXV586L8V+b
+ PQu6hawExerJCNwHMlHSFCQBZ2maoj/oVM/6UW3sK+GwRQUq0lW2y2ySgXGbKnqElSeFHdoOw
+ X/eynxk7WWoedoCex5G7QK7tLV40N6Ct4XsSEqGWXw0uNZG8wq9NCCulHDWZEdF+CQbup1OnY
+ FOX80ze2f6FkohNWWcU+oo6A==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,87 +153,182 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit 1ffc541eafc96d5eebcf837ab892dccec3b93568:
+Am 19=2E M=C3=A4rz 2026 09:29:10 MEZ schrieb Leo Yu-Chi Liang <ycliang@ande=
+stech=2Ecom>:
+>Add a lightweight mechanism to safely probe CSRs that may not exist
+>on the current hart=2E This is useful for detecting optional extensions
+>(e=2Eg=2E Smstateen) without relying on MARCHID or ISA string parsing=2E
+>
+>The implementation consists of:
+>- A minimal expected trap handler (__riscv_expected_trap) that advances
+>  past the faulting instruction and signals the trap via register a4=2E
+>- csr_read_allowed() and csr_write_allowed() macros that temporarily
+>  swap the trap vector, attempt the CSR access, and report whether it
+>  trapped=2E
+>
+>Ported from OpenSBI's sbi_csr_detect=2Eh mechanism=2E
 
-  Merge patch series "DDR configuration refactor and 16GB dual-rank support" (2026-03-23 09:19:00 -0600)
+We already have a more generic mechanism for catching exceptions on RISC-V=
+=2E See functions  riscv_zkr_bind() and set_resume()=2E
 
-are available in the Git repository at:
+Do we really need a second mechanism?
 
-  https://source.denx.de/u-boot/custodians/u-boot-mediatek.git tags/mediatek-for-next-2026-03-24
+Best regards
 
-for you to fetch changes up to 730958e9b01801fb2be194c1281e886236f4d08d:
+Heinrich
 
-  clk: mediatek: mt7623: fix pericfg priv_auto size (2026-03-24 12:32:02 -0500)
 
-----------------------------------------------------------------
-* MAINTAINERS patch for new MediaTek custodians
-* MediaTek pinctrl fix to allow using GPIOs on recent platforms
-* The rest is a second wave of MediaTek clock refactoring to remove duplicate
-  ways of doing the same thing.
+>
+>Signed-off-by: Leo Yu-Chi Liang <ycliang@andestech=2Ecom>
+>---
+> arch/riscv/include/asm/csr_detect=2Eh | 90 +++++++++++++++++++++++++++++
+> arch/riscv/lib/Makefile             |  1 +
+> arch/riscv/lib/csr_detect=2ES         | 23 ++++++++
+> 3 files changed, 114 insertions(+)
+> create mode 100644 arch/riscv/include/asm/csr_detect=2Eh
+> create mode 100644 arch/riscv/lib/csr_detect=2ES
+>
+>diff --git a/arch/riscv/include/asm/csr_detect=2Eh b/arch/riscv/include/a=
+sm/csr_detect=2Eh
+>new file mode 100644
+>index 00000000000=2E=2Ec058b6b85ea
+>--- /dev/null
+>+++ b/arch/riscv/include/asm/csr_detect=2Eh
+>@@ -0,0 +1,90 @@
+>+/* SPDX-License-Identifier: GPL-2=2E0+ */
+>+/*
+>+ * Copyright (C) 2026 Andes Technology Corporation
+>+ * Leo Yu-Chi Liang <ycliang@andestech=2Ecom>
+>+ *
+>+ * RISC-V CSR detection support
+>+ *
+>+ * Provides macros to safely probe CSRs that may not exist on the
+>+ * current hart=2E Uses a lightweight trap handler that simply advances
+>+ * past the faulting instruction and sets a flag=2E
+>+ *
+>+ * Ported from OpenSBI's sbi_csr_detect=2Eh=2E
+>+ */
+>+
+>+#ifndef _ASM_RISCV_CSR_DETECT_H
+>+#define _ASM_RISCV_CSR_DETECT_H
+>+
+>+#include <asm/csr=2Eh>
+>+
+>+#ifndef __ASSEMBLY__
+>+
+>+/* Two-level stringification so CSR macros are expanded before quoting *=
+/
+>+#define __CSR_DETECT_XSTR(x)	#x
+>+#define __CSR_DETECT_STR(x)	__CSR_DETECT_XSTR(x)
+>+
+>+#if CONFIG_IS_ENABLED(RISCV_SMODE)
+>+#define CSR_XTVEC	CSR_STVEC
+>+#else
+>+#define CSR_XTVEC	CSR_MTVEC
+>+#endif
+>+
+>+void __riscv_expected_trap(void);
+>+
+>+/**
+>+ * csr_read_allowed() - Read a CSR, detecting illegal-instruction traps=
+=2E
+>+ * @csr_num:	CSR number (must be a compile-time constant)=2E
+>+ * @trap:	lvalue that is set to 1 if the access trapped, 0 otherwise=2E
+>+ *
+>+ * Returns the CSR value on success, or 0 if the CSR does not exist=2E
+>+ *
+>+ * This works by temporarily installing a minimal trap handler that
+>+ * skips the faulting instruction and sets register a4 to 1=2E Interrupt=
+s
+>+ * must be disabled when calling this macro (they normally are during
+>+ * early init)=2E
+>+ */
+>+#define csr_read_allowed(csr_num, trap)					\
+>+({									\
+>+	register unsigned long __mtvec =3D				\
+>+		(unsigned long)__riscv_expected_trap;			\
+>+	register unsigned long __trap asm("a4") =3D 0;			\
+>+	register unsigned long __ret =3D 0;				\
+>+	__asm__ __volatile__(						\
+>+		"csrrw %[mtvec], "					\
+>+			__CSR_DETECT_STR(CSR_XTVEC) ", %[mtvec]\n"	\
+>+		"csrr %[ret], " __ASM_STR(csr_num) "\n"		\
+>+		"csrw "	__CSR_DETECT_STR(CSR_XTVEC) ", %[mtvec]"	\
+>+		: [mtvec] "+&r"(__mtvec), [ret] "=3D&r"(__ret),		\
+>+		  [trap] "+&r"(__trap)					\
+>+		:							\
+>+		: "memory");						\
+>+	trap =3D __trap;							\
+>+	__ret;								\
+>+})
+>+
+>+/**
+>+ * csr_write_allowed() - Write a CSR, detecting illegal-instruction trap=
+s=2E
+>+ * @csr_num:	CSR number (must be a compile-time constant)=2E
+>+ * @trap:	lvalue that is set to 1 if the access trapped, 0 otherwise=2E
+>+ * @value:	Value to write=2E
+>+ */
+>+#define csr_write_allowed(csr_num, trap, value)				\
+>+({									\
+>+	register unsigned long __mtvec =3D				\
+>+		(unsigned long)__riscv_expected_trap;			\
+>+	register unsigned long __trap asm("a4") =3D 0;			\
+>+	register unsigned long __val =3D (unsigned long)(value);		\
+>+	__asm__ __volatile__(						\
+>+		"csrrw %[mtvec], "					\
+>+			__CSR_DETECT_STR(CSR_XTVEC) ", %[mtvec]\n"	\
+>+		"csrw " __ASM_STR(csr_num) ", %[val]\n"		\
+>+		"csrw "	__CSR_DETECT_STR(CSR_XTVEC) ", %[mtvec]"	\
+>+		: [mtvec] "+&r"(__mtvec), [trap] "+&r"(__trap)		\
+>+		: [val] "rK"(__val)					\
+>+		: "memory");						\
+>+	trap =3D __trap;							\
+>+})
+>+
+>+#endif /* !__ASSEMBLY__ */
+>+
+>+#endif /* _ASM_RISCV_CSR_DETECT_H */
+>diff --git a/arch/riscv/lib/Makefile b/arch/riscv/lib/Makefile
+>index a527b3e9ae3=2E=2E42463b8bed0 100644
+>--- a/arch/riscv/lib/Makefile
+>+++ b/arch/riscv/lib/Makefile
+>@@ -12,6 +12,7 @@ obj-$(CONFIG_$(PHASE_)LIB_BOOTM) +=3D bootm=2Eo
+> obj-$(CONFIG_$(PHASE_)LIB_BOOTI) +=3D image=2Eo
+> obj-$(CONFIG_CMD_GO) +=3D boot=2Eo
+> obj-y	+=3D cache=2Eo
+>+obj-y	+=3D csr_detect=2Eo
+> obj-$(CONFIG_SIFIVE_CACHE) +=3D sifive_cache=2Eo
+> obj-$(CONFIG_SYS_CACHE_THEAD_CMO) +=3D thead_cmo=2Eo
+> ifeq ($(CONFIG_$(PHASE_)RISCV_MMODE),y)
+>diff --git a/arch/riscv/lib/csr_detect=2ES b/arch/riscv/lib/csr_detect=2E=
+S
+>new file mode 100644
+>index 00000000000=2E=2E69c4b8e7933
+>--- /dev/null
+>+++ b/arch/riscv/lib/csr_detect=2ES
+>@@ -0,0 +1,23 @@
+>+/* SPDX-License-Identifier: GPL-2=2E0+ */
+>+/*
+>+ * RISC-V CSR detection support
+>+ *
+>+ * Copyright (C) 2025 Andes Technology Corporation
+>+ * Leo Yu-Chi Liang <ycliang@andestech=2Ecom>
+>+ *
+>+ * Ported from OpenSBI's expected trap mechanism=2E
+>+ */
+>+
+>+#include <asm/encoding=2Eh>
+>+
+>+	=2Etext
+>+	=2Ealign 2
+>+	=2Eglobal __riscv_expected_trap
+>+__riscv_expected_trap:
+>+	/* Advance past the faulting instruction */
+>+	csrr	a4, MODE_PREFIX(epc)
+>+	addi	a4, a4, 4
+>+	csrw	MODE_PREFIX(epc), a4
+>+	/* Set a4 =3D 1 to signal that a trap occurred */
+>+	li	a4, 1
+>+	MODE_PREFIX(ret)
 
-----------------------------------------------------------------
-David Lechner (37):
-      clk: mediatek: mt7622: convert to struct mtk_parent
-      clk: mediatek: mt7623: convert to struct mtk_parent
-      clk: mediatek: mt7629: convert to struct mtk_parent
-      clk: mediatek: mt7981: convert to struct mtk_parent
-      clk: mediatek: mt7987: convert to struct mtk_parent
-      clk: mediatek: mt7988: convert to struct mtk_parent
-      clk: mediatek: mt8183: convert to struct mtk_parent
-      clk: mediatek: mt8188: convert to struct mtk_parent
-      clk: mediatek: mt8195: convert to struct mtk_parent
-      clk: mediatek: mt8365: convert to struct mtk_parent
-      clk: mediatek: mt8512: convert to struct mtk_parent
-      clk: mediatek: mt8516: convert to struct mtk_parent
-      clk: mediatek: mt8518: convert to struct mtk_parent
-      clk: mediatek: remove use of CLK_BYPASS_XTAL flag
-      clk: mediatek: remove CLK_PARENT_MIXED flag
-      clk: mediatek: refactor duplicate *_mux_get_rate()
-      clk: mediatek: mt8365: drop topckgen map
-      clk: mediatek: mt8188: use ext_clock_rates
-      clk: mediatek: mt8195: use ext_clock_rates
-      clk: mediatek: replace xtal2_rate with struct mtk_parent
-      clk: mediatek: mt7622: convert CLK_XTAL to CLK_PAD_CLK25M
-      clk: mediatek: mt7623: convert CLK_XTAL to CLK_PAD_CLK26M
-      clk: mediatek: mt7629: convert CLK_XTAL to CLK_PAD_CLK40M
-      clk: mediatek: mt7981: convert CLK_XTAL to CLK_PAD_CLK40M
-      clk: mediatek: mt7986: convert CLK_XTAL to CLK_PAD_CLK40M
-      clk: mediatek: mt7987: convert CLK_XTAL to CLK_PAD_CLK40M
-      clk: mediatek: mt7988: convert CLK_XTAL to CLK_PAD_CLK40M
-      clk: mediatek: mt8183: convert CLK_XTAL to CLK_PAD_CLK26M
-      clk: mediatek: mt8188: convert CLK_XTAL to CLK_PAD_CLK26M
-      clk: mediatek: mt8195: convert CLK_XTAL to CLK_PAD_CLK26M
-      clk: mediatek: mt8365: convert CLK_XTAL to CLK_PAD_CLK26M
-      clk: mediatek: mt8512: convert CLK_XTAL to CLK_PAD_CLK26M
-      clk: mediatek: mt8516: convert CLK_XTAL to CLK_PAD_CLK26M
-      clk: mediatek: mt8518: convert CLK_XTAL to CLK_PAD_CLK26M
-      clk: mediatek: remove CLK_PARENT_XTAL
-      MAINTAINERS: add new MediaTek custodians
-      clk: mediatek: mt7623: fix pericfg priv_auto size
-
-Julien Stephan (1):
-      pinctrl: mediatek: Add missing bind callback for several SoCs
-
- MAINTAINERS                               |    6 +
- drivers/clk/mediatek/clk-mt7622.c         |  323 ++---
- drivers/clk/mediatek/clk-mt7623.c         |  696 +++++-----
- drivers/clk/mediatek/clk-mt7629.c         |  403 +++---
- drivers/clk/mediatek/clk-mt7981.c         |  250 +++-
- drivers/clk/mediatek/clk-mt7986.c         |   29 +-
- drivers/clk/mediatek/clk-mt7987.c         |  124 +-
- drivers/clk/mediatek/clk-mt7988.c         |  144 +-
- drivers/clk/mediatek/clk-mt8183.c         |  599 ++++----
- drivers/clk/mediatek/clk-mt8188.c         | 2058 ++++++++++++++--------------
- drivers/clk/mediatek/clk-mt8189.c         |   16 +-
- drivers/clk/mediatek/clk-mt8195.c         | 1990 +++++++++++++--------------
- drivers/clk/mediatek/clk-mt8365.c         |  678 ++++-----
- drivers/clk/mediatek/clk-mt8512.c         |  611 +++++----
- drivers/clk/mediatek/clk-mt8516.c         |  717 +++++-----
- drivers/clk/mediatek/clk-mt8518.c         | 2117 +++++++++++++++--------------
- drivers/clk/mediatek/clk-mtk.c            |  156 +--
- drivers/clk/mediatek/clk-mtk.h            |   78 +-
- drivers/pinctrl/mediatek/pinctrl-mt8188.c |    1 +
- drivers/pinctrl/mediatek/pinctrl-mt8189.c |    1 +
- drivers/pinctrl/mediatek/pinctrl-mt8195.c |    1 +
- drivers/pinctrl/mediatek/pinctrl-mt8365.c |    1 +
- 22 files changed, 5537 insertions(+), 5462 deletions(-)
