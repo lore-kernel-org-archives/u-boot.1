@@ -4,142 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1280E9A75A
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 10:06:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BE2AE9A75C
+	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 10:09:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4586E80077;
-	Tue, 24 Mar 2026 11:06:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id D979E80077;
+	Tue, 24 Mar 2026 11:09:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=philipmolloy.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="FYNdIeFf";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DQt57HJS";
+	dkim=pass (2048-bit key; secure) header.d=philipmolloy.com header.i=@philipmolloy.com header.b="gz1w66ey";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3524E82A9E; Tue, 24 Mar 2026 11:06:51 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id 994A480517; Tue, 24 Mar 2026 11:09:54 +0100 (CET)
+Received: from mail-244119.protonmail.ch (mail-244119.protonmail.ch
+ [109.224.244.119])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03C7B80050
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 11:06:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 62O8xgTm2322865
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 10:06:47 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=Ca+Iu7ocGDElKFxhjDkdM2wY
- pC7exP+3VKYd1k1eC7o=; b=FYNdIeFfcgHg3Xc7NxQnedlGF9SvZc0pfg8uZwmV
- rkaRW/sgX/NqCEOPqUGkqxIo6ZjlIrWs+wohtpUV1ffcshf1BLssZPetVWGj//VU
- PAgxWNlbdoTNQkZSWtY4Hiw374YN5VKh5DzqvwXALjS4gt1e0YW6zhWtSaEyYZdM
- h+Lz7msWT/GktvBCvM69mYI7SNupp//5U3fL2PN1EqAz3W+cOhNyJ/3XL3ASl63O
- aInPOLCEZ1aB+XpCsEsJhbJfx9D7oG0lamgB2wLkpIubrY5gP16rjYGq2YovMcWw
- Gt5mtcQ4ALgJU8ZpX+uCfUoXf0JiptJgacn5vhyKFhFczA==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4d3qker9dj-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 10:06:47 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-35b901d542bso3020033a91.3
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 03:06:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1774346806; x=1774951606; darn=lists.denx.de; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Ca+Iu7ocGDElKFxhjDkdM2wYpC7exP+3VKYd1k1eC7o=;
- b=DQt57HJSL3BQ3VkqBOTyJZCRDRO9cmNWZdVFNieWYWPH9bDcWgpmghd4MqS81qJkP3
- 5no83A4XzHBhXfbVApo6CcgiaNl2aLx/Wmd1ISjO7uxOKHeYbMBCQETI9jrDoQPlOkyQ
- rK9l3TxszNeABkp6d0m3NFOwvq8kkYk0tw+954JdeV0nC+Wn+lCJtSKVHZXAnfXJayof
- x7XprH4mkH8uy7uGNVpyQz7Ft+1VQ1i4ppR6hM72lW4oRMDdjnITXZf10NumrFat1Arp
- Zn7MkO0M+RuY+9FnZJOkxcIHEliOrZ9yd5nwU5181qgtyP5oJi0g/0jiwNUI+PKL06nz
- w9IA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774346806; x=1774951606;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Ca+Iu7ocGDElKFxhjDkdM2wYpC7exP+3VKYd1k1eC7o=;
- b=idTh4OXQIroukZJo4AXNohcUmA4hKef2DbLqryncXU3krlSVvFpcauGfj12zcXICc0
- TRgg7TZ3xoQGuzCJIrWKfeSRv6IyzR5KLNM0rfWM6emyC6Omsup4ysgAow/kritN/MVQ
- Pzng7Ml4r6tpc7Rml0q6wZVjUbNYrAFJDi/Z8rz9VGQqST+m1LPEJzXU3yv9aYfwxa0B
- ilzYzyoBvvGF/YpdqeJIP8oiJxZYVRVyWoJaqeGKEUHO0GHln4Q2wH1AnzOULEKWpDIC
- gjTyyCodq8tyPmVKeUHIUlVlslZHak3NXsuEbmwqSs9oNJlL+itCvyfNnei9fbGKfpBr
- Fk/A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV8gfHkIKTLYBQTZlcwqBpsYSaven3ToxYwrAdcxqC1wCZ2lKwcGzLJpKq+97H+EdGvb+M5JpI=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywcyf/+B87aia6jcI2XBVXEbaht1JOW7+5rQPvJfudS4rCrPxk4
- Z2sD/X7Gs4BInLS757qa3lxiQe1teyVcrL7nSWhUv83zMOjiiSdBGGazz0XX9TK1HWMQpzh0Qle
- lbDDp62KWl8sAhQYQXU3G+eFrmV4TIJoUNqrlsQoGoe9TEYD/FajzFXTk
-X-Gm-Gg: ATEYQzyXWXxnbDr8GWSjzlY2bYioRsHrPITDd8uJNhiOdNrDtdzYB2uxdi0QZllsBsH
- KKaBGoYS9SbrTMZY8dINSdyIz+NrmD9HTbcExVO8jws1IyaQ0z7xa8EFHEs006mzfWH4L9CncJL
- 55FEVhTAltUiVMiEjTPdfaztdsqHZ7j62mVz6RH4KWLG7TTMiLbAoNaB4TtPHy2f+jWIRzg4NG5
- HTRFRC/Kz5UAovxf5nhmzSgzYk6J0nlNg954oQdAZpxdeAGvhpY1pdtxlaRskqahbqK7tAifew0
- +nycXA7/eTdIv6P9jWcjKsCqIEyF+RAmQY9svXkKr3azfOKlcZ/QKi5/QW/bSKqTYlWfi1PFcel
- 6mgWsvTkhkVY9lZP+l7xkxe6hfVEMp7HV6I4izsiTyDNsbjQQWpRhB7IKrOAVftJmzP1cTy+Mqu
- dRzSwBES6sGVoEiNe7onFEUs4UxQq3m6ionWJYpXOq9Yg0FjzbSeU=
-X-Received: by 2002:a17:90a:1182:b0:35b:e4d7:9694 with SMTP id
- 98e67ed59e1d1-35be4d7975cmr5063141a91.19.1774346806476; 
- Tue, 24 Mar 2026 03:06:46 -0700 (PDT)
-X-Received: by 2002:a17:90a:1182:b0:35b:e4d7:9694 with SMTP id
- 98e67ed59e1d1-35be4d7975cmr5063131a91.19.1774346806000; 
- Tue, 24 Mar 2026 03:06:46 -0700 (PDT)
-Received: from hu-varada-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-35c03124a87sm2317126a91.3.2026.03.24.03.06.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Mar 2026 03:06:45 -0700 (PDT)
-Date: Tue, 24 Mar 2026 15:36:38 +0530
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Stephan Gerhold <stephan.gerhold@linaro.org>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Simon Glass <sjg@chromium.org>, Jean-Jacques Hiblot <jjhiblot@ti.com>
-Subject: Re: [PATCH 1/3] clk: qcom: qcs615: Add SDCC1 and SDCC2 clock support
-Message-ID: <acJiLj6XRFredehd@hu-varada-blr.qualcomm.com>
-References: <20260324-emmc_sd-v1-0-883a45538b6e@oss.qualcomm.com>
- <20260324-emmc_sd-v1-1-883a45538b6e@oss.qualcomm.com>
+ by phobos.denx.de (Postfix) with ESMTPS id B134980050
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 11:09:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=philipmolloy.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=philip@philipmolloy.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=philipmolloy.com;
+ s=protonmail; t=1774346989; x=1774606189;
+ bh=6kw6XS/34Ke79Ih93aiy1Ej9NGcHNKL+D4YOVFA/6Tg=;
+ h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+ Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=gz1w66eydfjtqUawBt30alLhxL2ry6v5yHIrz8UzrxzMsy3vNdR+UmrEoIV9FXjZv
+ tD45vLGIaELFOpSzx1O16xMFFHiQHgbxHg/E00yj0bbzZYWEEa2GD6ymmY8vNchDuT
+ /Ktr0+bISq7WDkAfqSprJfeoSbv+TUg0sIB/pdd0P81+vFxXdBZp8eO/OtKz6iXR1C
+ eMz0MC7pfPzHusHeT8nh+3VHd8HYCkq7cKBcgq9dFW66NCT7Hwf88kosWGZ9+D3x/E
+ vWC/Q0knxJjgXXtZCnsz2EkfJHhKOfmMmfw8bjezs8k4LtCs4scW3xWRlQHwFbMU33
+ 2zvB9NY4jQ3zQ==
+Date: Tue, 24 Mar 2026 10:09:44 +0000
+To: u-boot@lists.denx.de
+From: Philip Molloy <philip@philipmolloy.com>
+Cc: linux@analog.com, Philip Molloy <philip.molloy@analog.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Caleb Ethridge <caleb.ethridge@analog.com>, E Shattow <e@freeshell.de>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymond.mao@riscstar.com>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>, Yao Zi <me@ziyao.cc>
+Subject: [PATCH] arm: mach-sc5xx: Align header paths with SYS_SOC convention
+Message-ID: <20260324100921.1783280-1-philip@philipmolloy.com>
+Feedback-ID: 9117015:user:proton
+X-Pm-Message-ID: ba3df7b01e494da03fd49dfaac97d4bd1d757c7b
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260324-emmc_sd-v1-1-883a45538b6e@oss.qualcomm.com>
-X-Proofpoint-GUID: oufXKo-5CtKui06Y7Bc2Z-dU169gEV2U
-X-Proofpoint-ORIG-GUID: oufXKo-5CtKui06Y7Bc2Z-dU169gEV2U
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzI0MDA4MSBTYWx0ZWRfXz3m97lRTX7/C
- Okzv8ArQjl+frj4xZleR8U+U0QUAwst3NfETsJpEJOzBchWQnN61nznqVHYlz9zU9nxBqq8cnTO
- 7V6CgKZhdB15B3R/5/abcyJy4QBVmLNdMN5y5Atsw6nbZIYiTF5ByxrHoeaBnQjJsoxQulM9qvc
- OKIt1YpBkL7j18yoXrNEkTFU6BguF6FQ5NkiE5ehQwvhnmuoINiZS+zmM5kEJncfVB6oS+Jaqgf
- g58A4U7YVQ7s5jwWHGzzK2HUJixUhug5UO2ds0OwrEK5wkI79YX9DO9evHKW/ssC3lzXx0pDXQB
- sjDIt8YeVfHAQwIO0AkQQ1CRkY7cMgWJPaJ//ZUX2WoYq6Csi5VLAJejeGlk8oxHsEFHfPQ81iD
- kAWQN4pcEJMmOU5U93OYv/oCis1UKmg3PItHckfRmghqTAl3fxhrnveN5vVWQE3bc9emPlwhUi/
- kkhCHtROFkmY0iJhuPg==
-X-Authority-Analysis: v=2.4 cv=Veb6/Vp9 c=1 sm=1 tr=0 ts=69c26237 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=kj9zAlcOel0A:10 a=Yq5XynenixoA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=cjBMemDpsFTr1MPu70gA:9 a=CjuIK1q_8ugA:10 a=zgiPjhLxNE0A:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-03-24_02,2026-03-23_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 impostorscore=0 lowpriorityscore=0 spamscore=0 clxscore=1015
- priorityscore=1501 suspectscore=0 adultscore=0 phishscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603240081
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,15 +80,392 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Mar 24, 2026 at 11:22:34AM +0530, Balaji Selvanathan wrote:
-> Add clock support for SDCC1 (eMMC) and SDCC2 (SD card) controllers
-> on QCS615 platform. This enables proper clock configuration for both
-> storage interfaces.
->
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> ---
->  drivers/clk/qcom/clock-qcom.h   |  2 ++
->  drivers/clk/qcom/clock-qcs615.c | 46 ++++++++++++++++++++++++++++++++++++++++-
->  2 files changed, 47 insertions(+), 1 deletion(-)
+From: Philip Molloy <philip.molloy@analog.com>
 
-Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Define CONFIG_SYS_SOC in the mach-sc5xx Kconfig. Follow the standard
+U-Boot include path convention by moving the SC5xx SoC headers from
+arch/arm/include/asm/arch-adi/sc5xx/ to the conventional
+arch/arm/include/asm/arch-sc5xx/ location. Update includes from
+<asm/arch-adi/sc5xx/*.h> to <asm/arch/*.h> across mach-sc5xx and board
+files.
+
+Signed-off-by: Philip Molloy <philip.molloy@analog.com>
+---
+
+ MAINTAINERS                                                 | 2 +-
+ arch/arm/include/asm/{arch-adi/sc5xx =3D> arch-sc5xx}/sc5xx.h | 0
+ arch/arm/include/asm/{arch-adi/sc5xx =3D> arch-sc5xx}/soc.h   | 0
+ arch/arm/include/asm/{arch-adi/sc5xx =3D> arch-sc5xx}/spl.h   | 0
+ arch/arm/mach-sc5xx/Kconfig                                 | 3 +++
+ arch/arm/mach-sc5xx/init/clkinit.c                          | 2 +-
+ arch/arm/mach-sc5xx/init/dmcinit.c                          | 2 +-
+ arch/arm/mach-sc5xx/sc57x-spl.c                             | 2 +-
+ arch/arm/mach-sc5xx/sc57x.c                                 | 4 ++--
+ arch/arm/mach-sc5xx/sc58x-spl.c                             | 2 +-
+ arch/arm/mach-sc5xx/sc58x.c                                 | 4 ++--
+ arch/arm/mach-sc5xx/sc59x-spl.c                             | 2 +-
+ arch/arm/mach-sc5xx/sc59x.c                                 | 4 ++--
+ arch/arm/mach-sc5xx/sc59x_64-spl.c                          | 2 +-
+ arch/arm/mach-sc5xx/sc59x_64.c                              | 4 ++--
+ arch/arm/mach-sc5xx/soc.c                                   | 4 ++--
+ arch/arm/mach-sc5xx/spl.c                                   | 4 ++--
+ board/adi/carriers/somcrr_common.c                          | 2 +-
+ board/adi/common-sc594-som/sc594-som.c                      | 4 ++--
+ board/adi/common-sc598-som/sc598-som.c                      | 4 ++--
+ board/adi/sc573-ezkit/sc573-ezkit.c                         | 4 ++--
+ board/adi/sc584-ezkit/sc584-ezkit.c                         | 4 ++--
+ board/adi/sc589-ezkit/sc589-ezkit.c                         | 4 ++--
+ board/adi/sc589-mini/sc589-mini.c                           | 4 ++--
+ drivers/net/dwc_eth_qos_adi.c                               | 2 +-
+ 25 files changed, 36 insertions(+), 33 deletions(-)
+ rename arch/arm/include/asm/{arch-adi/sc5xx =3D> arch-sc5xx}/sc5xx.h (100%=
+)
+ rename arch/arm/include/asm/{arch-adi/sc5xx =3D> arch-sc5xx}/soc.h (100%)
+ rename arch/arm/include/asm/{arch-adi/sc5xx =3D> arch-sc5xx}/spl.h (100%)
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index d4b527560aa..d65abd78d76 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -633,7 +633,7 @@ L:=09linux@analog.com
+ S:=09Supported
+ T:=09git https://github.com/analogdevicesinc/u-boot
+ F:=09arch/arm/dts/sc5*
+-F:=09arch/arm/include/asm/arch-adi/
++F:=09arch/arm/include/asm/arch-sc5xx/
+ F:=09arch/arm/mach-sc5xx/
+ F:=09board/adi/
+ F:=09configs/sc5*
+diff --git a/arch/arm/include/asm/arch-adi/sc5xx/sc5xx.h b/arch/arm/include=
+/asm/arch-sc5xx/sc5xx.h
+similarity index 100%
+rename from arch/arm/include/asm/arch-adi/sc5xx/sc5xx.h
+rename to arch/arm/include/asm/arch-sc5xx/sc5xx.h
+diff --git a/arch/arm/include/asm/arch-adi/sc5xx/soc.h b/arch/arm/include/a=
+sm/arch-sc5xx/soc.h
+similarity index 100%
+rename from arch/arm/include/asm/arch-adi/sc5xx/soc.h
+rename to arch/arm/include/asm/arch-sc5xx/soc.h
+diff --git a/arch/arm/include/asm/arch-adi/sc5xx/spl.h b/arch/arm/include/a=
+sm/arch-sc5xx/spl.h
+similarity index 100%
+rename from arch/arm/include/asm/arch-adi/sc5xx/spl.h
+rename to arch/arm/include/asm/arch-sc5xx/spl.h
+diff --git a/arch/arm/mach-sc5xx/Kconfig b/arch/arm/mach-sc5xx/Kconfig
+index 1486656b36b..59aac2859b1 100644
+--- a/arch/arm/mach-sc5xx/Kconfig
++++ b/arch/arm/mach-sc5xx/Kconfig
+@@ -13,6 +13,9 @@ if ARCH_SC5XX
+ config SYS_VENDOR
+ =09default "adi"
+=20
++config SYS_SOC
++=09default "sc5xx"
++
+ choice
+ =09prompt "SC5xx SoC Select"
+ =09help
+diff --git a/arch/arm/mach-sc5xx/init/clkinit.c b/arch/arm/mach-sc5xx/init/=
+clkinit.c
+index 3dcba33bd1b..f9c83c6efac 100644
+--- a/arch/arm/mach-sc5xx/init/clkinit.c
++++ b/arch/arm/mach-sc5xx/init/clkinit.c
+@@ -6,7 +6,7 @@
+  *
+  */
+=20
+-#include <asm/arch-adi/sc5xx/sc5xx.h>
++#include <asm/arch/sc5xx.h>
+ #include <asm/io.h>
+ #include <linux/types.h>
+ #include "clkinit.h"
+diff --git a/arch/arm/mach-sc5xx/init/dmcinit.c b/arch/arm/mach-sc5xx/init/=
+dmcinit.c
+index 2bf2cc53a9f..12052613feb 100644
+--- a/arch/arm/mach-sc5xx/init/dmcinit.c
++++ b/arch/arm/mach-sc5xx/init/dmcinit.c
+@@ -7,7 +7,7 @@
+  */
+=20
+ #include <asm/io.h>
+-#include <asm/arch-adi/sc5xx/sc5xx.h>
++#include <asm/arch/sc5xx.h>
+ #include <linux/types.h>
+ #include "clkinit.h"
+ #include "dmcinit.h"
+diff --git a/arch/arm/mach-sc5xx/sc57x-spl.c b/arch/arm/mach-sc5xx/sc57x-sp=
+l.c
+index 28380b89b48..6084493cf4f 100644
+--- a/arch/arm/mach-sc5xx/sc57x-spl.c
++++ b/arch/arm/mach-sc5xx/sc57x-spl.c
+@@ -3,7 +3,7 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+=20
+-#include <asm/arch-adi/sc5xx/spl.h>
++#include <asm/arch/spl.h>
+=20
+ // Table 45-16 in SC573 HRM
+ const struct adi_boot_args adi_rom_boot_args[] =3D {
+diff --git a/arch/arm/mach-sc5xx/sc57x.c b/arch/arm/mach-sc5xx/sc57x.c
+index 02b04cd1b2f..7e58e92b188 100644
+--- a/arch/arm/mach-sc5xx/sc57x.c
++++ b/arch/arm/mach-sc5xx/sc57x.c
+@@ -7,8 +7,8 @@
+  */
+=20
+ #include <asm/io.h>
+-#include <asm/arch-adi/sc5xx/sc5xx.h>
+-#include <asm/arch-adi/sc5xx/spl.h>
++#include <asm/arch/sc5xx.h>
++#include <asm/arch/spl.h>
+=20
+ #define REG_SPU0_SECUREC0 0x3108B980
+ #define REG_PADS0_PCFG0 0x31004404
+diff --git a/arch/arm/mach-sc5xx/sc58x-spl.c b/arch/arm/mach-sc5xx/sc58x-sp=
+l.c
+index ae809f09e55..2582e38ce12 100644
+--- a/arch/arm/mach-sc5xx/sc58x-spl.c
++++ b/arch/arm/mach-sc5xx/sc58x-spl.c
+@@ -3,7 +3,7 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+=20
+-#include <asm/arch-adi/sc5xx/spl.h>
++#include <asm/arch/spl.h>
+=20
+ // Table 53-13 in SC58x HRM
+ const struct adi_boot_args adi_rom_boot_args[] =3D {
+diff --git a/arch/arm/mach-sc5xx/sc58x.c b/arch/arm/mach-sc5xx/sc58x.c
+index c981cafd986..dc11df683a8 100644
+--- a/arch/arm/mach-sc5xx/sc58x.c
++++ b/arch/arm/mach-sc5xx/sc58x.c
+@@ -7,8 +7,8 @@
+  */
+=20
+ #include <asm/io.h>
+-#include <asm/arch-adi/sc5xx/sc5xx.h>
+-#include <asm/arch-adi/sc5xx/spl.h>
++#include <asm/arch/sc5xx.h>
++#include <asm/arch/spl.h>
+=20
+ #define REG_SPU0_SECUREC0 0x3108C980
+ #define REG_PADS0_PCFG0 0x31004404
+diff --git a/arch/arm/mach-sc5xx/sc59x-spl.c b/arch/arm/mach-sc5xx/sc59x-sp=
+l.c
+index c8fc25fe7c4..883bdb3c772 100644
+--- a/arch/arm/mach-sc5xx/sc59x-spl.c
++++ b/arch/arm/mach-sc5xx/sc59x-spl.c
+@@ -3,7 +3,7 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+=20
+-#include <asm/arch-adi/sc5xx/spl.h>
++#include <asm/arch/spl.h>
+=20
+ // Table 45-14 in sc594 HRM
+ const struct adi_boot_args adi_rom_boot_args[] =3D {
+diff --git a/arch/arm/mach-sc5xx/sc59x.c b/arch/arm/mach-sc5xx/sc59x.c
+index 675f8c7d69a..286f6d52eef 100644
+--- a/arch/arm/mach-sc5xx/sc59x.c
++++ b/arch/arm/mach-sc5xx/sc59x.c
+@@ -7,8 +7,8 @@
+  */
+=20
+ #include <asm/io.h>
+-#include <asm/arch-adi/sc5xx/sc5xx.h>
+-#include <asm/arch-adi/sc5xx/spl.h>
++#include <asm/arch/sc5xx.h>
++#include <asm/arch/spl.h>
+=20
+ #define REG_SPU0_SECUREC0 0x3108B980
+ #define REG_PADS0_PCFG0 0x31004604
+diff --git a/arch/arm/mach-sc5xx/sc59x_64-spl.c b/arch/arm/mach-sc5xx/sc59x=
+_64-spl.c
+index 3992538133d..500824b5bb9 100644
+--- a/arch/arm/mach-sc5xx/sc59x_64-spl.c
++++ b/arch/arm/mach-sc5xx/sc59x_64-spl.c
+@@ -3,7 +3,7 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+=20
+-#include <asm/arch-adi/sc5xx/spl.h>
++#include <asm/arch/spl.h>
+=20
+ // Table 47-14 in SC598 hardware reference manual
+ const struct adi_boot_args adi_rom_boot_args[] =3D {
+diff --git a/arch/arm/mach-sc5xx/sc59x_64.c b/arch/arm/mach-sc5xx/sc59x_64.=
+c
+index a8402075d0a..b9694a48e87 100644
+--- a/arch/arm/mach-sc5xx/sc59x_64.c
++++ b/arch/arm/mach-sc5xx/sc59x_64.c
+@@ -8,8 +8,8 @@
+=20
+ #include <asm/io.h>
+ #include <asm/armv8/mmu.h>
+-#include <asm/arch-adi/sc5xx/sc5xx.h>
+-#include <asm/arch-adi/sc5xx/spl.h>
++#include <asm/arch/sc5xx.h>
++#include <asm/arch/spl.h>
+=20
+ #define REG_TSGENWR0_CNTCR 0x310AE000
+ #define REG_PADS0_PCFG0 0x31004604
+diff --git a/arch/arm/mach-sc5xx/soc.c b/arch/arm/mach-sc5xx/soc.c
+index cf8ff0dc3af..09978a5cf44 100644
+--- a/arch/arm/mach-sc5xx/soc.c
++++ b/arch/arm/mach-sc5xx/soc.c
+@@ -6,8 +6,8 @@
+  *
+  */
+=20
+-#include <asm/arch-adi/sc5xx/sc5xx.h>
+-#include <asm/arch-adi/sc5xx/soc.h>
++#include <asm/arch/sc5xx.h>
++#include <asm/arch/soc.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <cpu_func.h>
+diff --git a/arch/arm/mach-sc5xx/spl.c b/arch/arm/mach-sc5xx/spl.c
+index c529829420d..94e4a08fa32 100644
+--- a/arch/arm/mach-sc5xx/spl.c
++++ b/arch/arm/mach-sc5xx/spl.c
+@@ -7,8 +7,8 @@
+  */
+=20
+ #include <spl.h>
+-#include <asm/arch-adi/sc5xx/sc5xx.h>
+-#include <asm/arch-adi/sc5xx/spl.h>
++#include <asm/arch/sc5xx.h>
++#include <asm/arch/spl.h>
+ #include "init/clkinit.h"
+ #include "init/dmcinit.h"
+=20
+diff --git a/board/adi/carriers/somcrr_common.c b/board/adi/carriers/somcrr=
+_common.c
+index 34ae48f31d2..7bd890d6e70 100644
+--- a/board/adi/carriers/somcrr_common.c
++++ b/board/adi/carriers/somcrr_common.c
+@@ -3,7 +3,7 @@
+  * (C) Copyright 2025 - Analog Devices, Inc.
+  */
+=20
+-#include <asm/arch-adi/sc5xx/sc5xx.h>
++#include <asm/arch/sc5xx.h>
+ #include <linux/delay.h>
+=20
+ #include "somcrr.h"
+diff --git a/board/adi/common-sc594-som/sc594-som.c b/board/adi/common-sc59=
+4-som/sc594-som.c
+index aab729fc761..37817c4b062 100644
+--- a/board/adi/common-sc594-som/sc594-som.c
++++ b/board/adi/common-sc594-som/sc594-som.c
+@@ -6,8 +6,8 @@
+ #include <config.h>
+ #include <phy.h>
+ #include <asm/u-boot.h>
+-#include <asm/arch-adi/sc5xx/sc5xx.h>
+-#include <asm/arch-adi/sc5xx/soc.h>
++#include <asm/arch/sc5xx.h>
++#include <asm/arch/soc.h>
+=20
+ #include "../carriers/somcrr.h"
+=20
+diff --git a/board/adi/common-sc598-som/sc598-som.c b/board/adi/common-sc59=
+8-som/sc598-som.c
+index 96b73520e66..0e1ee828956 100644
+--- a/board/adi/common-sc598-som/sc598-som.c
++++ b/board/adi/common-sc598-som/sc598-som.c
+@@ -6,8 +6,8 @@
+ #include <config.h>
+ #include <phy.h>
+ #include <asm/u-boot.h>
+-#include <asm/arch-adi/sc5xx/sc5xx.h>
+-#include <asm/arch-adi/sc5xx/soc.h>
++#include <asm/arch/sc5xx.h>
++#include <asm/arch/soc.h>
+ #include <asm/armv8/mmu.h>
+=20
+ #include "../carriers/somcrr.h"
+diff --git a/board/adi/sc573-ezkit/sc573-ezkit.c b/board/adi/sc573-ezkit/sc=
+573-ezkit.c
+index 288c2670761..464142b27a5 100644
+--- a/board/adi/sc573-ezkit/sc573-ezkit.c
++++ b/board/adi/sc573-ezkit/sc573-ezkit.c
+@@ -5,8 +5,8 @@
+=20
+ #include <phy.h>
+ #include <asm/u-boot.h>
+-#include <asm/arch-adi/sc5xx/sc5xx.h>
+-#include <asm/arch-adi/sc5xx/soc.h>
++#include <asm/arch/sc5xx.h>
++#include <asm/arch/soc.h>
+=20
+ int board_phy_config(struct phy_device *phydev)
+ {
+diff --git a/board/adi/sc584-ezkit/sc584-ezkit.c b/board/adi/sc584-ezkit/sc=
+584-ezkit.c
+index 288c2670761..464142b27a5 100644
+--- a/board/adi/sc584-ezkit/sc584-ezkit.c
++++ b/board/adi/sc584-ezkit/sc584-ezkit.c
+@@ -5,8 +5,8 @@
+=20
+ #include <phy.h>
+ #include <asm/u-boot.h>
+-#include <asm/arch-adi/sc5xx/sc5xx.h>
+-#include <asm/arch-adi/sc5xx/soc.h>
++#include <asm/arch/sc5xx.h>
++#include <asm/arch/soc.h>
+=20
+ int board_phy_config(struct phy_device *phydev)
+ {
+diff --git a/board/adi/sc589-ezkit/sc589-ezkit.c b/board/adi/sc589-ezkit/sc=
+589-ezkit.c
+index 288c2670761..464142b27a5 100644
+--- a/board/adi/sc589-ezkit/sc589-ezkit.c
++++ b/board/adi/sc589-ezkit/sc589-ezkit.c
+@@ -5,8 +5,8 @@
+=20
+ #include <phy.h>
+ #include <asm/u-boot.h>
+-#include <asm/arch-adi/sc5xx/sc5xx.h>
+-#include <asm/arch-adi/sc5xx/soc.h>
++#include <asm/arch/sc5xx.h>
++#include <asm/arch/soc.h>
+=20
+ int board_phy_config(struct phy_device *phydev)
+ {
+diff --git a/board/adi/sc589-mini/sc589-mini.c b/board/adi/sc589-mini/sc589=
+-mini.c
+index 288c2670761..464142b27a5 100644
+--- a/board/adi/sc589-mini/sc589-mini.c
++++ b/board/adi/sc589-mini/sc589-mini.c
+@@ -5,8 +5,8 @@
+=20
+ #include <phy.h>
+ #include <asm/u-boot.h>
+-#include <asm/arch-adi/sc5xx/sc5xx.h>
+-#include <asm/arch-adi/sc5xx/soc.h>
++#include <asm/arch/sc5xx.h>
++#include <asm/arch/soc.h>
+=20
+ int board_phy_config(struct phy_device *phydev)
+ {
+diff --git a/drivers/net/dwc_eth_qos_adi.c b/drivers/net/dwc_eth_qos_adi.c
+index b578225eaad..37db8525b48 100644
+--- a/drivers/net/dwc_eth_qos_adi.c
++++ b/drivers/net/dwc_eth_qos_adi.c
+@@ -15,7 +15,7 @@
+ #include <reset.h>
+ #include <linux/io.h>
+=20
+-#include <asm/arch-adi/sc5xx/sc5xx.h>
++#include <asm/arch/sc5xx.h>
+=20
+ #include "dwc_eth_qos.h"
+=20
+--=20
+2.53.0
+
+base-commit: eb95914b9f5886b7ca0eaa2dbcd8a66bb8e5f81a
+branch: adsp-sys-soc
+
