@@ -4,91 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9608AE9A769
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 10:59:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68872E9A767
+	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 10:59:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D328D8352B;
-	Tue, 24 Mar 2026 11:59:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 199EF83952;
+	Tue, 24 Mar 2026 11:59:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MsUHqlHQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZTmFtCOb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B112A839A8; Tue, 24 Mar 2026 11:59:40 +0100 (CET)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id 6E4E2839A8; Tue, 24 Mar 2026 11:59:41 +0100 (CET)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8752A80050
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 11:59:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D7CBC838FA
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 11:59:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-439b9b1900bso2629838f8f.1
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 03:59:35 -0700 (PDT)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-439d8df7620so3353778f8f.0
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 03:59:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1774349975; x=1774954775; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1774349978; x=1774954778; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=byOY/c3pda3nCAw4UcZvi/XHby6O6dU1IfIH5pqk6/A=;
- b=MsUHqlHQxGpHC9qE/y1lybp6Cxc+cxRirj8QVmk77UHcIZEMgKttiPETx6N+dQ9+bp
- dWsAE8gLKOdrmBSHWYOHfqkDnJZ1L6+ihFR6GHwRACEywFyz3KzZ/2ZOiwFbh29Bul5V
- f5203CYK8HggClLPIP95wHwF2+GdQk0xcMkBbJ1sjrVWN1pWVcaTqD/RNiDhFTTFmL1k
- NMGt6aoNuXq7OEQZ6I+Udvw8NHQPSB+/OZcFl1QEa2MQqfVOB4Thx5fpRSYh84R8olYX
- gRvV0T7/xzz/o5PyCyHk+00DF9dX/pj7dfHfFKe7RSaVggyDUENTD8L3iP1T8g+ZvzxJ
- ZKCA==
+ bh=xwz684Xa/91be45sMaZ9Iy0fLkL5fYJJ6clwh2EQG4g=;
+ b=ZTmFtCObkPxEgpwICZk0ve3T3IlUoNuTz6n4LrotUsj9Dg+F+5wu+7dhQRQjgtLOLq
+ TR5MFBETJYQyNTcXNcdmlJTqnjgsWFX8VdNuhz8FIoUN4sW3GN8woFyfA/QruYyvslsA
+ A/LEVVxRHgze1lXB9p//3czEDd69UiHNNqMTZmjB3BQHOKuAVcMPoV0K9xI5lzMqbSG/
+ BQvuy38Pnnczj11eMbFzSHhU4D86m/qhby/6N+P01Se3G6cp6/O1TsEP+Pw5owPoFMOG
+ rrLLvXvhDlisS6f3FX7xkObvCXuv7rPVgyiEHpmz7T4/IJ46Halsu/OsYDyp7t/fzdUj
+ zfew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774349975; x=1774954775;
+ d=1e100.net; s=20251104; t=1774349978; x=1774954778;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=byOY/c3pda3nCAw4UcZvi/XHby6O6dU1IfIH5pqk6/A=;
- b=l3OX7qACoVI77y3DiZ0wMNOD6ontxbFEzGbhVIUVH2MNf5fIvgw+SzDLMhIIK0/1td
- thkxtCvYdT2TiLHPMZERe63BKZ+DDRMri4Z1YBjWBwnz+AN7EcrQ9Zb9tKaRNfmOxDeP
- 91q9LOM/q6ZOPXisnP3hKA7tfzeYXxWs6e10a45L+Whe9wuyHkKfIvC8jtbxmHUnhYGU
- keM9TeKthIrjMFWArZy1jfoxocauy7XX2qzRBbWSRWrwoHeRv/2QH+EePdA0cb0FzPEZ
- MQ3A7bjTmv7TxLdUcCCmlaUcsiWqmy4P6IwCyyEOaRoziPrmpZXX6v7XQsupPbMHboeP
- K3Aw==
+ bh=xwz684Xa/91be45sMaZ9Iy0fLkL5fYJJ6clwh2EQG4g=;
+ b=HHUHR9JQRPJltbaVTjHmJVyUdhzT1OLshQPFrXCokmjnWzM0tstBGfFpFGGKjsKdec
+ j70+c3chrnk7AYxSslCuH2QXqNgQSxGW3FGGjOigITc8hF/ZZ4AGSA8iyBJ+vC77UfYy
+ dYsvB4ElBjv51nmQbknwn3KGSdQMx32ZnTD9/Z/PURIO4cJARZRVdMsQO9tJIDx6kym/
+ 3+EerGz2vc6H2NjVh7j+tCD9ccZAADaD/F6Wi6DxdTstP40mRJjgXm7gY7ZKp80bP7pC
+ LYlD330OpG0BfbXy6wT1HpAJmRaS7w/fcEExw5blsw07SubqGBbewtuqnsVUXvHp3wiQ
+ gvBA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUmifQJZSNHqI18CEaa9fvLmqa6wBmewNftbffSiCoLeuhC7oLRvFjBIYsA5Dv44BU3zk5H5Qw=@lists.denx.de
-X-Gm-Message-State: AOJu0YyAuUOA76lHMH5j2y3F1Y/2m9UDRff5fYGGBn0QkzK/oEAfpmID
- G4nvOfjAMoMtu5nICg7LEYmi/XVxTvpb/Sw5zKJEqm6kd5al0akIevcLivPGT99hIdDZLKzUQrM
- iiMrB
-X-Gm-Gg: ATEYQzx4S+wNYOtM04TAc5PYaUPNUIZEAzSuYZv2rxMAM9cuVIev8DTwFpw9oaz8DZ2
- i0KpuGAZemYYwWL5se1iOEQndGtoJPFPQz29VPuXezkYgMfi5Ha4JoMUvSkDbV+rDMFb2TDy3SD
- XKdC0AdE1b6RdfsGNykzkCtLDDsSuOiEkkQJ/MkdPP7lhIYSuMPCir+Ag2+RW8CsS5VEV9xHfXP
- G6K8jLtpGnTwotVJXymWq85pzCFCT6fMWiH10Cfx6VPgnOqci2noIJZA1HGLy+sZteCSaMTGorT
- sot9FUTa5jjyScMntES/jzbGPY8oMr+xxlHmdn1muovu8ZiRP9vjRONGGyXRwPl5Uh/fo965gCS
- cKl51oP3SWHGFlOXBnGdzMJflM7yH0u/Z3VXy18DU7y8MrzaVq2VURnWxGpk5HM+UmlUrkjvWjF
- Wp8iwDYvOeBMalaBA6rakv6+7Twozzav+wS8udLLtD6qwRtmCy+64gIQvA/kK6OuXPtPFvHJvKG
- VEH
-X-Received: by 2002:a05:6000:310b:b0:439:f605:afde with SMTP id
- ffacd0b85a97d-43b6428ae11mr24586575f8f.51.1774349974673; 
- Tue, 24 Mar 2026 03:59:34 -0700 (PDT)
+ AJvYcCWUB8awf5mTDiqbfggDm0RhDPQszLwOxKL/0ebPsLz0/BdxS5zYmEFD/yvmyXeI8JBwue5HvBE=@lists.denx.de
+X-Gm-Message-State: AOJu0YyQHpLPwHqCzR1iJMiObJlaChalb+Tp1nvejW5RajKI+VTmNEL4
+ KdrEZoln86w1qelakIgeEgo+Els+/DlWaHouXzfNuVCORfvbUpPnh7DOFiRuqA3EKH0=
+X-Gm-Gg: ATEYQzw/PyRHMbF4eafl0l6g9jxsGHhrXIi4kDu9LCA+1ulEQICH1Q02Hetkx3tjGyz
+ ZTqlHNB4BdIsRnXcX8aOWmMjkKy58VLnUbEQvRSIrlfTsX8CUzNgaIvx5oepjwl6Q6XXwxXYZOU
+ 4p655aYDgwEIBHQ4FKV+ZsTwcuPA8+z/nsERadV96gWYxZhtVmBIJUHBrGvL9oEU97cX/2RRmN3
+ qoNuTrtup6RTMrEjT0SlRcFWNymge70yMYPFRTKnde8oR85Z2LRHaszj4hLjNyUMMKozJ1tdnB7
+ renuqMfFnDk7BQ7XssItyTJjDYdSC7uG9ypLiJa8ae8dWjOyqxWqupNWjWT0rrEt6CekLN1TESw
+ QsADX64dfGVPR/VcOCFF/odDIylWBVdfsplBdfa4nq8uiP/WeDT7iDhyR1ZBONJMTSl1vFwhu2N
+ sgaRUANxE77aVAP57LAFUXGCoqgOmGVxmIeuJbqks1o5kksKhsvvYOQ2k6zayGSwHnyQ==
+X-Received: by 2002:a05:6000:2489:b0:43b:43ae:8c2e with SMTP id
+ ffacd0b85a97d-43b64289994mr23383292f8f.51.1774349978121; 
+ Tue, 24 Mar 2026 03:59:38 -0700 (PDT)
 Received: from lion.localdomain (p5b29eb0d.dip0.t-ipconnect.de. [91.41.235.13])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b6470b243sm37810416f8f.26.2026.03.24.03.59.33
+ ffacd0b85a97d-43b6470b243sm37810416f8f.26.2026.03.24.03.59.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Mar 2026 03:59:34 -0700 (PDT)
+ Tue, 24 Mar 2026 03:59:37 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
- u-boot@lists.denx.de, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: Lukasz Majewski <lukma@denx.de>, 
+To: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
+ Gopinath Sekar <gopinath.sekar@oss.qualcomm.com>, 
+ Lukasz Majewski <lukma@nabladev.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>, 
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
- Tom Rini <trini@konsulko.com>, Biswapriyo Nath <nathbappai@gmail.com>, 
- Alexey Minnekhanov <alexeymin@postmarketos.org>, 
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-In-Reply-To: <20260213-talos_usb-v1-0-4c4355d61437@oss.qualcomm.com>
-References: <20260213-talos_usb-v1-0-4c4355d61437@oss.qualcomm.com>
-Subject: Re: [PATCH 0/3] Enable USB High-Speed support for QCS615
-Message-Id: <177434997369.3720457.15261784252984910297.b4-ty@linaro.org>
-Date: Tue, 24 Mar 2026 11:59:33 +0100
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Shmuel Leib Melamud <smelamud@redhat.com>, 
+ Stefan Roese <stefan.roese@mailbox.org>, Sumit Garg <sumit.garg@kernel.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Casey Connolly <casey.connolly@linaro.org>
+Cc: Sumit Garg <sumit.garg@oss.qualcomm.com>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, u-boot-qcom@groups.io, 
+ u-boot@lists.denx.de
+In-Reply-To: <20260121003659.69305-1-casey.connolly@linaro.org>
+References: <20260121003659.69305-1-casey.connolly@linaro.org>
+Subject: Re: [PATCH] watchdog: qcom: stop watchdog by default
+Message-Id: <177434997680.3720457.10960566999240623555.b4-ty@linaro.org>
+Date: Tue, 24 Mar 2026 11:59:36 +0100
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -110,19 +113,20 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Fri, 13 Feb 2026 14:31:17 +0530, Balaji Selvanathan wrote:
-> This series enables USB High-Speed functionality on QCS615 by
-> adding missing clock support and QUSB2 PHY support.
+On Wed, 21 Jan 2026 01:36:51 +0100, Casey Connolly wrote:
+> Prevent the Qualcomm watchdog from autostarting and ensure it's stopped
+> when the driver probed. In some cases the watchdog is left running by
+> a previous bootloader stage. Disable autostart so it isn't left running
+> when we boot into the OS, this behaviour can be changed by enabling
+> autostart in the board defconfig.
 > 
+> 
+> [...]
 
 Applied, thanks!
 
-[1/3] clk: qcom: qcs615: Add GCC_USB3_PRIM_CLKREF_CLK support
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/c4f40d092590
-[2/3] clk: qcom: qcs615: Add GCC_AHB2PHY_WEST_CLK clock support
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/c4169dfa1dcc
-[3/3] phy: qcom: qusb2: Add QCS615 QUSB2 PHY support
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/0f265c20a56f
+[1/1] watchdog: qcom: stop watchdog by default
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/1cf505e51b49
 
 Best regards,
 -- 
