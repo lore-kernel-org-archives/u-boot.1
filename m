@@ -4,142 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81680F54ACE
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 15:47:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C558F54AD7
+	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 16:05:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBE3F807C0;
-	Tue, 24 Mar 2026 16:47:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 8BB00807C0;
+	Tue, 24 Mar 2026 17:05:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="E0cKKwu5";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="A/iGkGgu";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="tjeoGGIv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6414C838BB; Tue, 24 Mar 2026 16:47:06 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 623CD838FA; Tue, 24 Mar 2026 17:05:05 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5F8180087
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 16:47:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 62OFGg5l3903725
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 15:47:02 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=qcppdkim1; bh=CdcFevE5YsgNIizKbhcUa1
- cl6QQwN3kpPYwynUoiPPI=; b=E0cKKwu58nCca31CONjjwBClU8TTKv9DidJOnq
- rOnAHavRWfxtVgIPZ26VwqdoCCYnuZii59KEgJTsSxXsFaL0GPL+z+RxJjp5lGxS
- 9vV52AAKJy0EnzjHaHSB6O3UuQKKkgsqRY4eF+86B/9ks+ViNBRHl6Ztw3yXymBw
- dxcDJP1PmBK4TPxBNMqtr4mHqcxBEBphHahFE5BF91lnBLW6+BbX9lB8s9WPZCmX
- yRCK/VBpRz3YBBDG9omyKqDsHrDXq5AIFKD4zNvqWHlIbFuMW7MH4XoALyy/JBrj
- 3Tht3/KquA+JauWj9Xc7FaijHLcw2BmhQGLtVLFivrXuSTnA==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com
- [209.85.215.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4d3jt0jpf2-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 15:47:02 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id
- 41be03b00d2f7-bce224720d8so3725405a12.1
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 08:47:02 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id B044780087
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 17:05:02 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7d9c98e437cso728335a34.0
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 09:05:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1774367221; x=1774972021; darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=CdcFevE5YsgNIizKbhcUa1cl6QQwN3kpPYwynUoiPPI=;
- b=A/iGkGgutKJ9mqWBG34Y+ZKBSC4KxIaA4Tn2pdplPfrbFdeQYlN5IJWFFcxneYJCl4
- QhyRGEcwpICQZjxWJ8mjAu6iRoD4+KwrM7mcMG4rT3FqJoAZjQsB8TL7XXXG1s1M02pi
- 05scLPleUJe2V0fI3AcufDWxqKPOz9ehulPfOJc0agXYz8U9AfcPz9/QDTm5kh0QK4jA
- YnF529oelfmqOsXscepPvOVqY+2EW5LCKSMgLLrF0cgoC4GnkWT401Ucps9AWi1KVk+w
- 9DoafMYabyfqO6cMBZ8aqlxEADjq3SnIp1zxAEkXg7egwVzAaYwF/lRf+LOD1SuFc5Oa
- zqFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774367221; x=1774972021;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774368301; x=1774973101;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CdcFevE5YsgNIizKbhcUa1cl6QQwN3kpPYwynUoiPPI=;
- b=ryEoy4z55gB+8kGK2e2by5tL7josAp1dsCFpCFvmDUb3NtCl111cnTN2Mif5IlwEMl
- 7TD1yLMjdXd04oeJsVQ+tzETw3ywL5eIG47rZruS0BFudsM0jnIYsv5one3JJCrggAWG
- /6Jr1AiDv/aqWNa0gNWx99MANwAZkXU8JXolNKqsZXsEDD3IUY6dI484b6njJjNAgMV9
- gFt8dmA7xLROqPP8roEV0TRxKbNA69jjWFFsdFOaTRVglP3WYOnvUdZYgQpF6ezsOJg0
- b4h20bNQnRqCGAK7j1et3+Hmk6EtbcGa5CnM5UCi71UjSz3llRbHjZ3kklUx35IV1/8N
- GQ+w==
-X-Gm-Message-State: AOJu0Yz5wXm41N0SeihcY8BdQEaZbVynXuAYUtP7942AvpyC168lZbqH
- IWdcgPmfya/GsvtCHu5YPqkmCS1vKJYBzOg7cDFPReeuj69z5lWCDzKFwDNGdDw1SMEML5YdN8i
- 970LLAn1AmV/iiWrLjzxhbTzp5wxttW6j8rvipKTdM1oYAxkKdkEApgdN
-X-Gm-Gg: ATEYQzxKLQfzhiX652XXdED+WYt9J0OA/HLZnAr0eBO7e4JwOy1p0vYGx+vqSd6gOlT
- y9quk2RjMZaORRHS9xI1WMzcdo/vAgWNhGfq6W4EF/rivWAfspH4L7RVabx9yhMWwP7ceu49IRW
- insc4sfb+OAKjdKde4AwLl9HPp5SmiH3moTb/4j64kAeX5f99D/SPQOTbx6O6Qr0C+etQm8BW/v
- Ihb4lu2/hK7uUhcfMDfVMHne13C5HC+M/QX5GRW85mStTLe/YsejUc6oDxUiwH9wZ1xzt8UvdNX
- qGAritCGrMS9y0kYoEEjSTtyfMLAB6V5+uO696I815E5Rzabk/CJm3uClCEh59+csGqNUMUM0V1
- 2Ne533tN9eiKS98omIK/2ySbcku/87Cmf3yHsirTGa4dSEw8Dq/5xR4ARI+Tvn+Ap7Dyq40FDCz
- 84VuOKkp5eH2RbBnIggy7W7e/vMAc43Vd9gvIvk+JomK8PNDG+3w==
-X-Received: by 2002:a05:6a20:432b:b0:39b:c10a:bec9 with SMTP id
- adf61e73a8af0-39c4aa68bd7mr279612637.2.1774367220866; 
- Tue, 24 Mar 2026 08:47:00 -0700 (PDT)
-X-Received: by 2002:a05:6a20:432b:b0:39b:c10a:bec9 with SMTP id
- adf61e73a8af0-39c4aa68bd7mr279581637.2.1774367220333; 
- Tue, 24 Mar 2026 08:47:00 -0700 (PDT)
-Received: from hu-bselvana-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ bh=g4IHo9gUuL2kMiML+PcPbClxAQ5zRu6U3/IqfT9TeUw=;
+ b=tjeoGGIvBRxgNixrnduMLg889eKcMeRF1KfSNsuwkvi7kLyhLkoUpweldWWRzdlNPK
+ glUZg7AkjlFDrEb3hfaw4InR2B7rnQ4bj0hpwhSMypMKCaIe01M/i93TDpoOLXjVEMMK
+ /5DkKwTl1K9E/lcki5EfzpIWomCaZfp+WbltMGsQSGfqdjXa/QufImlqec583pVn6Idr
+ J1CnNK1TJB3WBZU0w52sW87zlYEQYafmlHsW3YGv5FNCJ+q3qgSj21Y+YKj6YHwLBp6i
+ /te+DFOcjK8+aL/H+5GAzmxCMGg9Wl9dQtbj1NdMBQxJBN3W9duoX3NWKJFY5sKU3ftU
+ AvxQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774368301; x=1774973101;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=g4IHo9gUuL2kMiML+PcPbClxAQ5zRu6U3/IqfT9TeUw=;
+ b=b+epDrfxbt9QYppbV+O4FSHCq9D9taStY4POru+cu95rwlG3n0ANParpfPk8I5EChL
+ leUhceut3YZZy4Hi0JaeX0cbvNmsb3xcdwvI2IqKqKavL2AKI+KBqrmMQtzYJAjw5lH7
+ nVwLgH8ErnWGKzLdnBBDwnzPojtYndf4mGi8Kc79RkOhn4uC4L0wdTdL9pNveRg8aXOM
+ z3E49t67KN2RUszr73Fh+EgWiRMQBEnc0QPFiexEHdTGtOIKy9Cyq5hE2Nhp86ezIlDP
+ Rwxi0PpDwod2OLBcoolZdAtESeE01x1Rj4R50tl7J8i6Xb2Hb7mGy4+5QoAltN55DHbE
+ ZQGg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVoMb9RveMrbdg/yj6qEIY/zKfK8ew96CxtQslIaRCE5BTH1B8+7W5/BtT4ulwTAEKnuCQY4iE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwT1MVG5NunG+Ru7uIN+V6dXnMA1ezzjeJ8Cs35i1jzL3qKul/4
+ C5N1QkwqgyxzTScT1wQaQ4OcSPAAJSFxB0Pbv0GDJ4bXHrtOAoEHHEi0MQOLd3qrtbw=
+X-Gm-Gg: ATEYQzyHhtdAd3kTOuofkMZ75WZx6Eoa3mnVV0Gxg5SQhjGFZrGKtIemXsDKwJjM62u
+ 0iSbs5iQ2Q8fzC4/dq6J/VrUln+A3yLPONxl3FgTQ3k32LQsJ1KRxYrK30zQfvdtESvuzcJXeeP
+ L3MJIS+7RDuEb2aDNtJ0nn1RKYfPYjjmjI/yTPl/+BTpumr4cGy+/m5NoQfrQ9NBtWEv3BuWSND
+ FDd3w4LtgvxIABgkleFAHtevZV3JlZIheTc9AkoQ9OPHIw60t2CFIFhLFSC4yiej6f3pzo4kjZN
+ /Z8yO+7L2NQzsC8NfNyqzGraq1lklqXlHlf9reGKg/kXtiySUebp+tx45P0G9MICDMsG5IEOR5F
+ vQqX6bCYfU8HRusRjoGgaUdJOtJztEF9pfMEEvrgnnZKu4dkyH2DW3fIwqCoyRu0x/ImFErj7Gg
+ 5Gxtmne7/Qq+wtr1HWG9RCYcSZb3s=
+X-Received: by 2002:a05:6830:648b:b0:7d7:f13a:761c with SMTP id
+ 46e09a7af769-7d7f13a787fmr10392706a34.23.1774368300940; 
+ Tue, 24 Mar 2026 09:05:00 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:8a85:a776:3f75:a1d])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c743a7ffafdsm10108509a12.7.2026.03.24.08.46.58
+ 46e09a7af769-7d7eaa025dcsm12821134a34.0.2026.03.24.09.05.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Mar 2026 08:46:59 -0700 (PDT)
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Tue, 24 Mar 2026 21:16:55 +0530
-Subject: [PATCH v2] dts: qcs6490-rb3gen2: Remove USB controller dr_mode
- override
+ Tue, 24 Mar 2026 09:05:00 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+In-Reply-To: <20260310-clk-mtk-parent-cleanup-v1-0-66175ca8f637@baylibre.com>
+References: <20260310-clk-mtk-parent-cleanup-v1-0-66175ca8f637@baylibre.com>
+Subject: Re: [PATCH 00/16] clk: mediatek: remove CLK_XTAL/CLK_PARENT_XTAL
+Message-Id: <177436828706.3897241.523698758984337394.b4-ty@b4>
+Date: Tue, 24 Mar 2026 11:04:47 -0500
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260324-kodiak_dts-v2-1-243c28a3ffb9@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAO6xwmkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyjHQUlJIzE
- vPSU3UzU4B8JSMDIzMDYyMT3ez8lMzE7PiUkmLdpERzszTTFCNTQ0NjJaCGgqLUtMwKsGHRsbW
- 1AMDdf0pcAAAA
-X-Change-ID: 20260324-kodiak_dts-ba76f5d25113
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1774367217; l=1596;
- i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=U7ftOFpKfUsanznc+NToeVpNe6umATH2uIw8TdeRy/A=;
- b=qH89vSNgpyH0x231b1DwgIyxjq1Td9l4tBx5wZ9RBIP7dIbPxPHvKAA/jISkKTUNzXsC8s5Iy
- nUaxox2DpTzA3Ml+EN1KgoTMw+ZyKtwQqo8e0pbJUkGRERR8Rs1bmAu
-X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
- pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-ORIG-GUID: MGQz7ICNmli246NPdVjhFZKOYSrHYbPA
-X-Authority-Analysis: v=2.4 cv=Nc3rFmD4 c=1 sm=1 tr=0 ts=69c2b1f6 cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=VeTN72RG__Jq-RpK3zUA:9 a=QEXdDO2ut3YA:10
- a=3WC7DwWrALyhR5TkjVHa:22
-X-Proofpoint-GUID: MGQz7ICNmli246NPdVjhFZKOYSrHYbPA
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzI0MDEyMyBTYWx0ZWRfX8zFMPLbqfnEV
- 2D8kgJ2vXfvFf/D4rR/mBstB1ZbDDL50wQPYKuYLCGi0cyKUXNooS/jafcj12TwyY3SMX2MimiO
- XGsMbm+HjDh20mL6e6bacJHPqnvmMpmGne9fvi/2BDebKyQW3cR318lGn4yVjGlBM0xGYKZsoV3
- jA4uuXo2/Jyyp8DHVoHbb/E8FCs17NRPT1WWohNdK5fs7/wN79TYO6os1LNiwT00P08KZLJqtLF
- r0Igib+PNBBCqOV0vbbihfzX5k6JeyrZf3RswJ5GdTVvJ37WDwD+SBdJlmW1IpNMWOwSr9k4voc
- +lmcVzH0dd+QkZPC6xLskSLsX5M5AsbuL6nudbhelhys08Ks86y+yqic6x5bzStQwK1IW2/atjG
- 7/J5FbiCHzo4wq8nrFX21IIG0r8H3+RbGNlW4oMVilvIuVeskquvEbubYbNQqPLxhg77uhuVCQg
- TSZb/pQ4JEIlAkB570w==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-03-24_03,2026-03-23_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 impostorscore=0 spamscore=0 clxscore=1015 priorityscore=1501
- bulkscore=0 lowpriorityscore=0 malwarescore=0 suspectscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603240123
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2496; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=VtYqJze2+elo5DHkFg3cIBTrDES4cJ0FgWTkuucrhRE=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpwrYjxo2roYgqWnJhmIlIpP6TOIhxfEZ0Eqls6
+ FOnVL5/wvyJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCacK2IxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Ao+UH/RBWE2U1fKoCByHv4OeBKLA0QA14EYwd0xB+Frp
+ Cy0Aq0J+i48c3dVrkoAwV+LdQv7qyYXwh39kJ9qK0hnbw/UHKOqmVJThDpLmUYiF5M+/7vSWz6o
+ a07miVrWqrz9biSVnIl4Eh5S3jISZDkGoINgnukR+8beyND7yE4oyrEQTM4ZlAX/C7HlEuLFAi4
+ ZeYeQ8ZgTbh9YPaRB8DnnG4lBkYZT8Ph5q6WiLcvW/ArZKfOmJ+vnggp+9vr7EY1hNDEX9NgUoQ
+ NT+23eBbhDehPMwpSITQFMYM67c8Kn5wJoDEIbqoHMWiID0uPzlmnQSljPOaQY/+bN5Xhry210H
+ bwdc=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,48 +119,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove the USB controller dr_mode override from the u-boot device
-tree. The upstream Linux device tree already configures the USB
-controller with dr_mode = "otg", which supports both host and
-peripheral modes including fastboot.
+On Tue, 10 Mar 2026 10:32:13 -0500, David Lechner wrote:
+> clk: mediatek: remove CLK_XTAL/CLK_PARENT_XTAL
+> 
+> Since many MediaTek SoCs have more than one fixed-rate external clock,
+> CLK_XTAL/CLK_PARENT_XTAL is not sufficient to represent them, being
+> limited to a single clock. We have since introduced CLK_PARENT_EXT that
+> allows an arbitrary number of external clocks to be represented.
+> 
+> [...]
 
-The previous override to "host" mode prevented fastboot from working
-as it requires peripheral mode support. By removing this override,
-the upstream OTG configuration is inherited, enabling fastboot while
-maintaining host mode capability through the usb-role-switch
-property.
+Applied to mediatek-for-next, thanks!
 
-Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
----
-Changes in v2:
-- Removed the USB controller dr_mode override as existing mode is "otg"
-  which supports both host and peripheral modes
-- Link to v1: https://lore.kernel.org/u-boot/20251114064042.3835312-1-balaji.selvanathan@oss.qualcomm.com/
----
- arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi | 4 ----
- 1 file changed, 4 deletions(-)
-
-diff --git a/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi b/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
-index 8d4871135fa..c3ec4a317f7 100644
---- a/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
-+++ b/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
-@@ -17,10 +17,6 @@
- 	};
- };
- 
--&usb_1 {
--	dr_mode = "host";
--};
--
- // RAM Entry 0 : Base 0x0080000000  Size 0x003A800000
- // RAM Entry 1 : Base 0x00C0000000  Size 0x0001800000
- // RAM Entry 2 : Base 0x00C3400000  Size 0x003CC00000
-
----
-base-commit: 108bc442ed292dac4ea9175ede1bc8d1ed687788
-change-id: 20260324-kodiak_dts-ba76f5d25113
+[01/16] clk: mediatek: replace xtal2_rate with struct mtk_parent
+        commit: bd79703ba6bf074dc645c26a9ebb936faa37150c
+[02/16] clk: mediatek: mt7622: convert CLK_XTAL to CLK_PAD_CLK25M
+        commit: 0f2fb0d8f4b4ac924abd63f2a989896abf52ee29
+[03/16] clk: mediatek: mt7623: convert CLK_XTAL to CLK_PAD_CLK26M
+        commit: 09bef33f713223343007369442c49e42e7727457
+[04/16] clk: mediatek: mt7629: convert CLK_XTAL to CLK_PAD_CLK40M
+        commit: 70313ab220be39a032b9597647a57ab253adf1dd
+[05/16] clk: mediatek: mt7981: convert CLK_XTAL to CLK_PAD_CLK40M
+        commit: 781a3aaca8c56fd970cb23aaf9ff36a75de2746d
+[06/16] clk: mediatek: mt7986: convert CLK_XTAL to CLK_PAD_CLK40M
+        commit: ce10db8048806c6c3bb0f3ea3479d00e008ead36
+[07/16] clk: mediatek: mt7987: convert CLK_XTAL to CLK_PAD_CLK40M
+        commit: ad15c5d5f03434f58eeeecb8a55db675619e902d
+[08/16] clk: mediatek: mt7988: convert CLK_XTAL to CLK_PAD_CLK40M
+        commit: 9c0d3a02eabfa6cbca8c58603a6bc56e79fef7b7
+[09/16] clk: mediatek: mt8183: convert CLK_XTAL to CLK_PAD_CLK26M
+        commit: ae32ee9273d21635c647853182c39f888934c937
+[10/16] clk: mediatek: mt8188: convert CLK_XTAL to CLK_PAD_CLK26M
+        commit: 2ea4728575df1c915e6d9851ef3879074e35c219
+[11/16] clk: mediatek: mt8195: convert CLK_XTAL to CLK_PAD_CLK26M
+        commit: 43a4f0de6656c705792889ecc78e24e326a2d25c
+[12/16] clk: mediatek: mt8365: convert CLK_XTAL to CLK_PAD_CLK26M
+        commit: 8747ef9ceb1af43c0037bce0a830195c4cc2e984
+[13/16] clk: mediatek: mt8512: convert CLK_XTAL to CLK_PAD_CLK26M
+        commit: 8fae93c2f081caa6270143ba5c128c06f515ca35
+[14/16] clk: mediatek: mt8516: convert CLK_XTAL to CLK_PAD_CLK26M
+        commit: 9b10b61eceb2eee7574608564611ae3b02ab42a4
+[15/16] clk: mediatek: mt8518: convert CLK_XTAL to CLK_PAD_CLK26M
+        commit: a0757eb64c45a5a1cf7e17a8e2bdc35323bc2561
+[16/16] clk: mediatek: remove CLK_PARENT_XTAL
+        commit: 741f9ab9cc0d46f087b467e24931392f13cc2848
 
 Best regards,
 -- 
-Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+David Lechner <dlechner@baylibre.com>
 
