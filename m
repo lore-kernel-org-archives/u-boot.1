@@ -4,108 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08B6BF532F6
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 08:52:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5520BE9A741
+	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 09:14:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1874E80212;
-	Tue, 24 Mar 2026 09:52:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 9135F80212;
+	Tue, 24 Mar 2026 10:14:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="ZmEXQteH";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="JD8rCbJT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6B0D80517; Tue, 24 Mar 2026 09:52:19 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9D13780517; Tue, 24 Mar 2026 10:14:52 +0100 (CET)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 767F380087
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 09:52:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 587D680087
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 10:14:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-b97bca3797dso133195966b.0
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 01:52:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774342337; cv=none;
- d=google.com; s=arc-20240605;
- b=N1TVVsh8a27TrIb5yNTfykm550GxRUPENtAiFjskjmKwZlNOT3VBHlMVpTFD1p8QGU
- gnXSNdBo+xX0OfDTWJ7CcjkNqFCgMzHdh6NS2xC8b4AGNpKv/m8uMIDe9Z8Xj2bIaPsu
- uaiVGnBmLe5GKqdwzrPB/81dd8TaP+t3X5jGo7tHfw/Q0OfE3ye9z4BB9cnLfhznGUfn
- 1PmKj5fBFANfO6it+XfIhcfwsRj0jgaHy8c2GNBH9FdkZag6v/upxysHOZaHx3hX2TNa
- KXuC8n9c9FyUObNTlDgxkF2oMxsigBRJ0lfcp9LSe5+d8lqo1852MOa4SvwLQMW1xySq
- EBPw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=xrpRrOYJ9qaYKD8T8VBQI4Rxy71XO2djd3rYW+HXJDg=;
- fh=y516F1kj/cMFqE82c9KGhMLVkEHYD/k8z9fDE+hE3Ag=;
- b=dytJZ05ukXf7EW8u+rCUvmD3xd8K0hLJhVVsnE5kIKyfQ/MLDZvBNH2wf9xb2nwsBF
- tKdtjl2FNHTrPzPGkpsz+LnbXoSMt6dSd2SZzfkwYeKebcHxfJ4mxclN3OTV7M9U/MID
- eE9pnT5qMsCMyUhgyMc0Tc3x40Ton8utJrO7hPg+9qrBDymWLNiVlS6GNhTDEJjQt7gM
- K86/fiJ/YGYC1ie5RfJYAwERze2/l68azWNHzdDo79NQY3b1D6MB4A6IGlWPL0Nku7sI
- Wxx3zzYUImwvBOB4ikyzg3HY9af2In1dT5+fRGUFpq/JxA82Pjl20lQiRoh8GWh0OFm1
- CmSg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774342337; x=1774947137;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xrpRrOYJ9qaYKD8T8VBQI4Rxy71XO2djd3rYW+HXJDg=;
- b=ZmEXQteHeXAp0y7B6s3R8DY7X94M6VDfschEGK3Rttd1v6ZSoyn3DbVW4VRLtxYo7R
- 2/iD9NqAsQSPMt3vFGlGfy+Db7XdMQ64Ekgcr7NLQQlnqyDkESeU5tzkBWW44bpHTS6+
- ltZwfX14WnQemi/MDFgdwTjFvYfE3jSUrHJTL7OC9Ra1R3C10AfnqX31ymxNE8Sq/+RC
- /PtQitOXY8ZD/wkYs468bmUEglsDyPgwDIt+PZ11EGZGHh659cxuDuY04c6fhUUMQDnC
- XiWlLhyyVMSSb4c8hxpCEwYq6JBqSOXPLgIoeFhdz+s8PBgIqWJQFfV19CXy2VtTXpP0
- 1REg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774342337; x=1774947137;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=xrpRrOYJ9qaYKD8T8VBQI4Rxy71XO2djd3rYW+HXJDg=;
- b=UX76hvz5Qx/Kryc85YgOUEQQ8k17rQ+BGT1Yi+u9arLDdUZKR+/RXZbmBSN9AXZ/oR
- FzdrJozy34hlPGXQShThbHSJH6TqpMWzuRXLqEpexeW1fmVcZjlStz/Hk3xhQIVFtBJL
- YnwBCDMlRF+sMkTUMpby+eTwJ3IVaIz2zvQaG3WpgFT1GeaVIVSY6ItyfsYUGiuT/mtU
- hRcKPRPIjZwTmzM4XK+mdbXSx3PDMg5DBirtManm5xHmaN+WbuFBY0EYUB5LpD0sp4t+
- RaT3F7e1bcA9uJEbM4JukdmBRAEx/sblvzkYyoCvS0aUjmrIlQxu83faZEyJ1zpjA9RB
- z9FA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCULbO4fwouJ5wUOw/NkyAcDfXoWaz3MYIQG4UuNqrPKiIwmOwJ1TmurGGpsEjdIlIKhJ+KtdUE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxO/jG1GKuIuZFZL48q/Ys0XWiULhXNhjt3GcOo9xEP9jV9QOJJ
- drX5s5w4gt8fxAfqVOhbW/1tvWEpNtoJmb0XDhwazwDXFiOtM7Ou+7MKRVDrm1lShJvs3eg4mB4
- ewpWqSbgM+SgsN6p0+wjsWjX3SPI/S0oG2jztIZfX4w==
-X-Gm-Gg: ATEYQzwkJqgO+xkZuoHS5RI2cY3Me5wZyMOtfLeee98sZPetV92tQo8q2Ztr8X13Chq
- gM9IHq7XTKjS5sVv9sUqt9O6rKxGHRMiUSkEKQSfHCJdiwpOQ5lQ9Eqe/5M5WuTJGb/6oywDeiP
- um7bD4uvXPUqoaCm0lv8V/Wbz8vN7Xw89THgldvZ9yq11c14D0E6+caC4G3ORbWYi/rD84h9U2S
- FDy33MsfpHsxsbbyg4egef3AAylgwZTu9kieDGMfyYppIlLscMCqmasq99xDwiv+1KjrfPE8GEO
- BEG3P5g5ua+e0iVIjmnc1mgA18Mb7r0LrSLO0pAUWuG17YFfFPzWFMazxvVAlt8EQjbEigqMhHg
- 7QGVgHSpQ2Tk+ouy27Lu+vns2Rw==
-X-Received: by 2002:a17:907:1c0d:b0:b98:82c9:d1ba with SMTP id
- a640c23a62f3a-b9882c9d29emr223025766b.1.1774342336308; Tue, 24 Mar 2026
- 01:52:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=TkMOhLeYLPlDCYeszB3+iakF4WFL1AQ5gE5cJnY8uX/slQVPFtKy3SpnzjbJBx2wFDZ3F/YgS1EJwrloOR57LgGBe2Kqhz0EMMdVaSS+h4+EoSt5YzXWZvku0SWU8Mxy5mbyq9YombfXI7DGhtbyV2st6Vv2j6QF1JpPRZkkUH5jH11ZFsVSGhUeVRD+QkN8Sc6tG6IeKr/2QZGQgIbBYIflDj+OPSpIIy/5mTO8EweDZyNozzbDaQjiWfa4R5H/G+0Os5M8Xtvn2y3SBrYh32a80IGeaHw7VbON/xknwabZEWXT4ypLQGYBxGDbrpKWrivZMMU9xQQ5F+H86Y468g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=M4ldys95YcsnfjR0wCNk4aP5B+dbC7+cAJi+i0Yn/UY=;
+ b=GGVnNyKuSvp1CY96F2EPwxkZDK9bBXyUG7v1lB5x4EznwU/KgUMTTayE2bHwlukn7JxkuYxpa2RGJ4zSkr+i1mWTSB0qNuRUBznlI+Zxzt3ZMkWvBeoh5OlRLgW1pjHveIqY8y9HXmtsvMk3aWX01FSGVWNyZqvD7lGaZWRU0G47UHaw/RUF5qyQNVfgOIShzSffJBiDY2sHgxrdFU1lGl4QdSDEI1xL2Q2/3bpFuQ/JLp0wIYmU0dDVsD5D1ddTSLdudXpMPzT+09Y1fO92bPNjkB2OugAJUalGSq2k5JeSowiOxq0t9N3qmUiEyrTrEoYL2wps3b+RQSmkGgNNtw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=M4ldys95YcsnfjR0wCNk4aP5B+dbC7+cAJi+i0Yn/UY=;
+ b=JD8rCbJTbdPYmK1VxsG+Hpt2ogqYg7xPF3VUsp68DbCk7L4zL1QTHpR5w/kEP8okKTCKvm2yl2KvUPGzjh+dQ1j4eY7YYcJns3KGSPTGYihC1fgoanWELpm7xkTPtDi2F7oOVxL6WANWgN2RqTSUvjA3SZoLgC/kTautZY3Nwp1Ftw3S8dkjPhTzpf2u7W6ZlfKBk6zVkOLvircb2EsMY/Y/lR+MuTS295BDy8Eh2vkNYGayV4HV71HIwBtAhSPbUSVYBm2ENdT1SDCpjzWcx2ODwLh6tCr1WGeSoh9TLscI1XOfqCsahd41I/nVG38JErpIvzpRzJWrdWwBt/BY7g==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by AM7PR04MB6885.eurprd04.prod.outlook.com (2603:10a6:20b:10d::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.31; Tue, 24 Mar
+ 2026 09:14:27 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e%3]) with mapi id 15.20.9723.030; Tue, 24 Mar 2026
+ 09:14:27 +0000
+From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Subject: [PATCH 0/4] i.MX8MP: Convert to DM_PMIC for a few boards
+Date: Tue, 24 Mar 2026 18:30:30 +0800
+Message-Id: <20260324-power-legacy-v1-0-ed432367817c@nxp.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAMdnwmkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDYyNj3YL88tQi3ZzU9MTkSl1TSyOLVJM0w5SkJEsloJaCotS0zAqwcdG
+ xtbUA774iU14AAAA=
+X-Change-ID: 20260323-power-legacy-5928e4f1dbb9
+To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, upstream@lists.phytec.de, 
+ u-boot@lists.denx.de, Stefano Babic <sbabic@nabladev.com>, 
+ Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: Teresa Remmet <t.remmet@phytec.de>, Benjamin Hahn <B.Hahn@phytec.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Leonard Anderweit <l.anderweit@phytec.de>, Yannic Moog <y.moog@phytec.de>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>, 
+ Matteo Lisi <matteo.lisi@engicam.com>, Peng Fan <peng.fan@nxp.com>
+X-Mailer: b4 0.14.3
+X-ClientProxiedBy: SG2PR06CA0250.apcprd06.prod.outlook.com
+ (2603:1096:4:ac::34) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-References: <20260317-clk-mtk-unify-mux-parents-v3-0-a4760f5b0a80@baylibre.com>
-In-Reply-To: <20260317-clk-mtk-unify-mux-parents-v3-0-a4760f5b0a80@baylibre.com>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Tue, 24 Mar 2026 09:52:10 +0100
-X-Gm-Features: AaiRm53qrSZj2jgxlOI0VtPsELutEnQA0i1Ejrjf6fjR7jGFDLHe8WOX7tDywEE
-Message-ID: <CAEHHSvZT1w2VzaYW=e7x00b-kJoMbkwpxF4K0h6MZVr48nML3w@mail.gmail.com>
-Subject: Re: [PATCH v3 00/16] clk: mediatek: unify mux clocks
-To: David Lechner <dlechner@baylibre.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Macpaul Lin <macpaul.lin@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AM7PR04MB6885:EE_
+X-MS-Office365-Filtering-Correlation-Id: 03e85b5c-8d15-4d9b-069b-08de8985bf2f
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|19092799006|1800799024|52116014|376014|7416014|38350700014|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: huYIhw1BSdop4TVqUl1YY0hxAgyibCSzzgDwCa0nxUFSxJnGPHDIzIVGGwCKunxzjL6eGfz8dkoAq30Er2omv1vMlBtqs6MGUUe//aWFRAdmePFoPSh0TLldJLWYo3mUbN3brOFykWJarfuqx6AioVKbVgW8rqzKk8WZ8mar60Uwe9a29Ong+1c2+/IwpL/Gl7GSo6DteycqbDSeJUEZudE+zWXJSI2fIBeeeHFG/SXvtfQRU+GNSkvs4sM+0c6YwSmRk/PHEa7Vz7GfJdNa8DlW0/TushLEIfGSZYuJUJUhxYW8u6CvC+A+lYjysCyYGQlPn6vYAC396dX4PeTJJDTWexxautit7rfUHA0FHc+loSicmPTT8SeXWl1csvU2VXyRO3MTAmiBuAJiR6qPPtaEq9JuQNxpPq3EP8QAjaE06vh3yCjx2HjJmFD4WTxY+/H8RJ2K5IrxP+uLNZOONXwBD5mTD736upsJr4l6OOAIBpP5OZ9xywD8Aws1DESXfPYHpe5Vjr+PmPhHESqXND4lJda0BYtVu1hc3dcV1UwObo+lvInxW8h+Ld4OxiPmKn0WAKdXyMZ4TXKX+bJHMChWM5CZuh6aTQEdSjR1sgyGOzDZWL691yUNrTtIiBo/OVXil/m8y/iEJ+4IXNdNLcnDWJUbN4+m2D209WEY58q1kjO+JBhfsoV//fAuGB4ShCCRsmYhI87nHKsptMzQBm0WiNfxxXdKDmWeLtJpdj+b3Ce3bKw5hvUdtWnqoc+G0Wlkqzxq0lYaWKKRZu4MoiCGytGX1iOuhT9LSjPA0V2ifHErmLLgzHIseQDvzDfe
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(19092799006)(1800799024)(52116014)(376014)(7416014)(38350700014)(18002099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SXZCTHR6aUtBa0dQZ2xiZkVIOUU5VUt6L2Y4eFZFTG01VUZwSG0zVm84TzVv?=
+ =?utf-8?B?YTRITTl0ZVJxQU5UTFVLT2o4N2xHUXo0RG5iY0t6OTVYUHJPYzRPcVdYR2tv?=
+ =?utf-8?B?NzB0WkFWNHlJRThYK0R4ZnpUajBSdGg3SXhNN0F0MUVPRFpyaGk0bXMyWEp0?=
+ =?utf-8?B?WXBtQmlYQUI1cmMyR2xyRW02MXVYMzAra0ZneXRFWC9FTkdHRTRpdTFtYTcv?=
+ =?utf-8?B?aSt1aUU0OUNFU2p0eFZISE1NdnYzU2ZiK3orQml5RkRsTlpxNTdjTWpaNkhn?=
+ =?utf-8?B?VXl2QVBWaFE4UmZXam5QWDBpM1hHWDlncTRmOEFxSXNmKzIzVGtlR2ZSMnV0?=
+ =?utf-8?B?RGdMZ2NKZHlvZ3JpeldDSUk0QkNDSXlZc3k3SGQwMm42OTNib1lEY05uaWpr?=
+ =?utf-8?B?amFhcnhLMXhGVUVaWTluVGxtTFdRd1NOVnhWWGd3MDVUL241eFlCYklUMDVr?=
+ =?utf-8?B?bGVrSE9VMEJOMUJBS1pQbXZDRFlLL2QwWCtjQmQrSzQvQmx4TjM1U0dGMmNa?=
+ =?utf-8?B?TC9YU244Nzh5Rk5LL1VSVE1WckhVK1E1RXRCc1VtTWI1NjBzeWtndVl5cHlP?=
+ =?utf-8?B?VHErOE43Q1VKYVNCSW8yMGNudUxMS2x2eUVwTlRNd1lpWTh1TTBoUnUzMlRJ?=
+ =?utf-8?B?WG1ZcDlNa2dkaUZyU3FRREwwdzVTRjN0RzZ1em1PMU5ibjkvUGdXTEk1UzJS?=
+ =?utf-8?B?ektGVldKMXZ3U0pUcTFQSFFJN0NVK2lKU3hoU2xmUkt4cjFxRmluelZFTjcw?=
+ =?utf-8?B?OXNvSloyVDZUUXl6ck9jUzVvVTM4MFJTc2EreVlpQ0h3QTdBbERtNEE5OUlu?=
+ =?utf-8?B?b3JXZkxWSkt6SE9YWTU5Q2dVLzZrclJwQ3d2dVRhQzF5TzF1anJ6TUNpMVBD?=
+ =?utf-8?B?RzNOL1JtTlpVMkVlZ3RkeDZsY0hTTjZEbGNIcFB4Z1hnbjVhUUVwd2tCcGVN?=
+ =?utf-8?B?djZnd0RLbnprVnpmVmIzWHBUVmFuaUdBMnhjaW8valRabFpRekIyS21ORll5?=
+ =?utf-8?B?Tk03bkZjRlRRVk5Cc2loZEJXai9LdkdiUXUvYWZ2UVlqQnpySHVVMWRCWWxD?=
+ =?utf-8?B?TXA1ZVIybG82OUd4OE5PS2ZOUzNjWGo1L1NoOVc1eGRrZDVTRSsvekVNUFV6?=
+ =?utf-8?B?SFlmbWM3emV1ellMd2JRbVMxdXUvNGdESHB0UXcxWjl3WXpwcjNoUGF2cFp4?=
+ =?utf-8?B?cnhTMlBKa1VYVU1BbFk5aVp5R1E2eDA0dEI5Z2I1bTFGS2E2QXB3ZGZHRUlE?=
+ =?utf-8?B?L3QzTGhjYW53WStGWHRIU0tmSEthaDdpdDFnVnh0dkpTenJPSk91SWZaTFlu?=
+ =?utf-8?B?cm1CVytaNDZ3ZjlWVkl5Smo5Q2w4M0psbnhtYlF1Y00xWnFWeXdhUlE1Uis5?=
+ =?utf-8?B?MnB2eWlndUlSbldSUEhSUjVFUDFCLzRmcWw2TFVPRk1rTCt2MjZVN2ZoNVZQ?=
+ =?utf-8?B?T2JOaHVXUUFidFFuYWx4THpxelhWbmFjZWVFb056R2RmTXRRM1g1LzhzbGNN?=
+ =?utf-8?B?LzVSZ1d6NkFTNmN3NWxaZnl4OFRtWXJadyszc3VkdHpSNndkN3BDczJpM2JI?=
+ =?utf-8?B?bUswTzhnT1ZQTHRBN3BXbUxxSm94QnNIMUZiZ2dtTXp4akNsSkZ5ejIzUzBi?=
+ =?utf-8?B?UG9aTEJXMmluMnM3eFl4V0o3Z0FsZDdhQlo4NWMzT1BmYmJ1U2VMQUtSYVJm?=
+ =?utf-8?B?ajhuT0k2ek1JeDFHZ3JWMEFJZExFMlBYcGdhQUQyRW0zUnc5cGFVTEUyTUFY?=
+ =?utf-8?B?SHEwT1BJUmE4MGdsb3BwV3pmMlhCN0tGUWx3WldTL1FSUUNCYTl6c1FzNXhv?=
+ =?utf-8?B?STV0TEFjQjYzdGF2UlpaT0pPdmFKc3E3N3k3UTNkUW96ZmJBUlVaWnBveURo?=
+ =?utf-8?B?VTQwOEpWK082bHJqbGFZbGJQWlBreUdKdFVEdkE3WXNCMVNBQ2RNTHhuaFIy?=
+ =?utf-8?B?OS9rS3VHMmVUVlJkRFJZRXN1UVhKUFN0Q2tyR0pEdi92bmhVVzhPbnZxN2gr?=
+ =?utf-8?B?YkdqOENuR1g3c0I2TGUzb2FyOWttUGNDZmpKTnZqUmI4cHR5d3hURHV3WWcv?=
+ =?utf-8?B?d3BsU0VjMWY0ekxjeVVnblNXb1d1eGpjTFNIdHJhOFJWd0VjQjFVbzBRMk9I?=
+ =?utf-8?B?cllXTGc0ZXA0R1M1ZHJwYTE0M1V1UENhczRzTEdYcGRWdHIwRjFPZ2xRbzJu?=
+ =?utf-8?B?cjlIckIvNHc3UzlnNURIQytQeFN6c2RRTjlyWkJBbWhjMzloSkZrdVdWWnpp?=
+ =?utf-8?B?eXBLVURaWVZRaEpkQzhWbjgzS0wzc0YvMm4yVUZxdlhpMUpvdHBRVS8ySGlU?=
+ =?utf-8?B?b0FCQnlSaHRIYjRNT044eWg5bW0rYVZ2S0pUWWlDazBlVk5LdUpMUT09?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 03e85b5c-8d15-4d9b-069b-08de8985bf2f
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Mar 2026 09:14:26.6751 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: vOG4iZwS5C06kish9r/GcN0NX0Y0wLulvgvoAqLl9hMNGWKqoG8ZhGrvfxTyT5IOTKdPL9E0eLF4IHkUjbUXwA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR04MB6885
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,87 +159,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le mer. 18 mars 2026 =C3=A0 00:26, David Lechner <dlechner@baylibre.com> a =
-=C3=A9crit :
->
-> The MediaTek clock driver currently have two ways to indicate the parent
-> tree that contains the parent clock. This adds to code complexity and
-> makes it more difficult to know the "right thing" to do in new drivers.
->
-> The plan here is to convert all mux clocks to use the more robust option
-> of using struct mtk_parent to specify parent clocks.
->
-> The conversion to the static const struct mtk_parent arrays was done
-> by script to minimize the chance of error (and save time).
->
-> After the conversion, we can drop two of the clock flags that are no
-> longer used and remove the dead code.
->
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
-> ---
-> Changes in v3:
-> - Picked up similar patches from another series [1] and updated commit
->   messages to match to this series.
-> - Squashed the mt7622 patch into the one from the other series.
-> - Link to v2: https://patch.msgid.link/20260309-clk-mtk-unify-mux-parents=
--v2-0-b084ea74b99d@baylibre.com
->
-> [1]: https://lore.kernel.org/u-boot/20260306-clk-mtk-remove-clk-bypass-xt=
-al-flag-v2-0-b253b49f17b2@baylibre.com/
->
-> Changes in v2:
-> - Rebased on updated dependencies.
-> - Link to v1: https://lore.kernel.org/r/20260302-clk-mtk-unify-mux-parent=
-s-v1-0-32f45085f4d0@baylibre.com
->
-> ---
-> David Lechner (16):
->       clk: mediatek: mt7622: convert to struct mtk_parent
->       clk: mediatek: mt7623: convert to struct mtk_parent
->       clk: mediatek: mt7629: convert to struct mtk_parent
->       clk: mediatek: mt7981: convert to struct mtk_parent
->       clk: mediatek: mt7987: convert to struct mtk_parent
->       clk: mediatek: mt7988: convert to struct mtk_parent
->       clk: mediatek: mt8183: convert to struct mtk_parent
->       clk: mediatek: mt8188: convert to struct mtk_parent
->       clk: mediatek: mt8195: convert to struct mtk_parent
->       clk: mediatek: mt8365: convert to struct mtk_parent
->       clk: mediatek: mt8512: convert to struct mtk_parent
->       clk: mediatek: mt8516: convert to struct mtk_parent
->       clk: mediatek: mt8518: convert to struct mtk_parent
->       clk: mediatek: remove use of CLK_BYPASS_XTAL flag
->       clk: mediatek: remove CLK_PARENT_MIXED flag
->       clk: mediatek: refactor duplicate *_mux_get_rate()
->
->  drivers/clk/mediatek/clk-mt7622.c |  288 +++--
->  drivers/clk/mediatek/clk-mt7623.c |  649 ++++++------
->  drivers/clk/mediatek/clk-mt7629.c |  371 ++++---
->  drivers/clk/mediatek/clk-mt7981.c |  233 +++--
->  drivers/clk/mediatek/clk-mt7986.c |   12 +-
->  drivers/clk/mediatek/clk-mt7987.c |   78 +-
->  drivers/clk/mediatek/clk-mt7988.c |   82 +-
->  drivers/clk/mediatek/clk-mt8183.c |  584 +++++------
->  drivers/clk/mediatek/clk-mt8188.c | 1522 +++++++++++++--------------
->  drivers/clk/mediatek/clk-mt8189.c |   12 +-
->  drivers/clk/mediatek/clk-mt8195.c | 1349 ++++++++++++------------
->  drivers/clk/mediatek/clk-mt8365.c |  450 ++++----
->  drivers/clk/mediatek/clk-mt8512.c |  620 +++++------
->  drivers/clk/mediatek/clk-mt8516.c |  704 ++++++-------
->  drivers/clk/mediatek/clk-mt8518.c | 2088 ++++++++++++++++++-------------=
-------
->  drivers/clk/mediatek/clk-mtk.c    |  112 +-
->  drivers/clk/mediatek/clk-mtk.h    |   69 +-
->  17 files changed, 4611 insertions(+), 4612 deletions(-)
-> ---
-> base-commit: 142c805d470cd02470146d6d70aa9c522d4da16c
-> change-id: 20260302-clk-mtk-unify-mux-parents-1bf35aeabf00
->
-> Best regards,
-> --
-> David Lechner <dlechner@baylibre.com>
->
+Per the thread [1] that Tom asks.
 
-Reviewed-by: Julien Stephan <jstephan@baylibre.com>
+Convert to DM_PMIC for icore-edimm2.2, libra-fpsc, verdin and
+phyboard-pollux-rdk.
 
-Thanks
-Julien
+I not have the boards to test, so just my best practice to do the
+migration.
+
+For i.MX8MQ boards that still using SPL_POWER_LEGACY, it is a bit different,
+because the OCRAM is a bit small, I need find more time to check on it.
+
+[1] https://lore.kernel.org/u-boot/20260320214518.GD502704@bill-the-cat/
+
+CI: https://github.com/u-boot/u-boot/pull/916
+
+Signed-off-by: Peng Fan <peng.fan@nxp.com>
+---
+Peng Fan (4):
+      imx8mp: phyboard-pollux-rdk: Convert to DM_PMIC
+      imx8mp: verdin: Convert to DM_PMIC
+      imx8mp: libra-fpsc: Convert to DM_PMIC
+      imx8mp: icore-edimm2.2: Convert to DM_PMIC
+
+ .../dts/imx8mp-icore-mx8mp-edimm2.2-u-boot.dtsi    | 18 ++++++-
+ arch/arm/dts/imx8mp-libra-rdk-fpsc-u-boot.dtsi     | 16 ++++++-
+ .../arm/dts/imx8mp-phyboard-pollux-rdk-u-boot.dtsi | 16 ++++++-
+ arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi    | 14 ++++--
+ board/engicam/imx8mp/spl.c                         | 53 +++++++--------------
+ board/phytec/imx8mp-libra-fpsc/spl.c               | 46 ++++++------------
+ board/phytec/phycore_imx8mp/spl.c                  | 43 ++++++-----------
+ board/toradex/verdin-imx8mp/spl.c                  | 55 +++++++---------------
+ configs/imx8mp-icore-mx8mp-edimm2.2_defconfig      | 12 ++---
+ configs/imx8mp-libra-fpsc_defconfig                | 10 ++--
+ configs/phycore-imx8mp_defconfig                   | 10 ++--
+ configs/verdin-imx8mp_defconfig                    | 13 ++---
+ 12 files changed, 133 insertions(+), 173 deletions(-)
+---
+base-commit: eb00c710508d09b2a3b9aca75dd18280f1304703
+change-id: 20260323-power-legacy-5928e4f1dbb9
+
+Best regards,
+-- 
+Peng Fan <peng.fan@nxp.com>
+
