@@ -4,138 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF271FEC0E6
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 18:00:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A63BFEC0F0
+	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 18:22:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98C4D83CD3;
-	Tue, 24 Mar 2026 18:59:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id BCF8B80517;
+	Tue, 24 Mar 2026 19:22:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="abnJ56ei";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="crrr9mnM";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Q4/KtqEo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEEC883E4C; Tue, 24 Mar 2026 18:59:57 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id C86EE807C0; Tue, 24 Mar 2026 19:22:19 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9538483BE1
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 18:59:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8C2DA80087
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 19:22:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 62OEYOt82323409
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 17:59:54 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=OKT1E67LXBj
- v9n3G89uM+82b+HsryUf1I4YIBzoLHNQ=; b=abnJ56eitCzREwXTzjtvU2amXYo
- fY6zofDk9RQ+ekF0C82B1DS215cIVFoUdd3eATNoOXuhNy5/L+0HKGtYi59cidrH
- O51SkSwdxPjs4ENlGQA3egnCDhf0dX5GFCvEJevu9cb6k0JVolUsX3wZUEU/u86s
- G+hpdTkVvL8M+MUvZXKzeAMLzEGM8zAm2G+mZzryGi/gReTyLu5AhPdxRY0fu/bS
- Cn0EDTRS8NUtLOwBHFpiPEtPH6SNfOaEe/O9ugMgh0EZ9ehIMWG2vTKmCsv9guQo
- nbMmXSrDK8H1pP9eCzHG3X1rbESw9e/OeZU8Zpa9t7jWt8lKakJSa6Xsl1Q==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
- [209.85.215.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4d3qket69e-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 17:59:54 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id
- 41be03b00d2f7-c7414516609so975949a12.3
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 10:59:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1774375193; x=1774979993; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=OKT1E67LXBjv9n3G89uM+82b+HsryUf1I4YIBzoLHNQ=;
- b=crrr9mnMXkZSS8OKWSwv/KnMySHWceine4M4HLGvfhh0qMFzNpTnyjhrnzNHAsxRE0
- iehMkzJ6iiCt5NP85ZHgT/L+/pW6GYz78n64oB1xJH+KhUX27+EVXhgjyBAoa+/LV/PC
- QWD06U/KIkomruYQGMM9wO5adDPdcQQFz5uoMwXAXXgDHf8AeUAgEDHI8baWSxs8dJl9
- R3Prr4+/Wdu9Y2tsPtjWSVHvHzqdVPIOVL0naRZRE+TzQMqa/7Gan+HESptykOdH53/i
- GbBxbB9+k0FfA9n91EQ+8uXyF7YSwbyEiQ5r6k3WU9bnTrXcCRR0QbWGzd5BxPEtKqSY
- eEnw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774375193; x=1774979993;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=OKT1E67LXBjv9n3G89uM+82b+HsryUf1I4YIBzoLHNQ=;
- b=AUBuj7rZbnyx9rszgHtXK3HQITg1rZk3Uy0CA34i8rccI3UGsaHv6mrgCFILspVlx7
- L8B+cxZiV5Gq12ozW5GZmDFZE7FwJV4f/PGhmLxpLxSOGPPFTaCFnjzHihfy5MrKfXU8
- hblPBbOGvq0iVzaV//fpIZBYktclaydzqOzgghb9ufILsXgO9tsTufmzWfN7+7WIySfl
- MsiYO+CJkYbIpcKtKJjmXARqP1AiJLTUYzZbK2YW3Uq67G6jJO0t93N/ePXn0gVnUv7q
- bUgcZBD9Pzm26SrPH171LdglHRrq3tNg1LTUX9SLOYHfj2cLP8elw5I2VZ2mAl3sTvH9
- ob9Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVmeKEObx6eFNVgwohfX1cnWSAqvxsC37j4Ld0vi6zB8pq4NzypyVd5fzxDWtydpjrWv1QfcpI=@lists.denx.de
-X-Gm-Message-State: AOJu0YypPlNl8hWOqrcjn3pha/w124NrS3jrGRyd9z2vgSHcQJUzpZS/
- 2zCqFuxoXyuwirgbJHW/H0nQhh9ITOgfR41rC8DOAGVsLyxLeK5oSP8Ke/vj/Fm0YYwOMWRggrt
- NDNoGzu1XUeq89oH0kpAmdD2G7DOOSfsor2YS3XyBAS4eZF0vLRpPlq4c
-X-Gm-Gg: ATEYQzxwArvAgNTNLTe3fXTpMSp5fMQtYjHV0Zxm0qdJtZ9ucsEiaaWMg69ZTndiL31
- IQR9Oy6VmPqwdlQZaXDNHOsHb0grlI+bOFYxoubbke6dwq2tz3k4IXDSCn/MqHsiLBqu4R6Rz93
- qTsw2+EJeesd5Y6fh79UNcK3TlLK8gZuGalpT5DqbL8771yXD7ChBjk9TdGIb0KyLfWWSM20M/+
- 95o8eDUI1thksDt9IoG0GXctXf4Pw2bWeyNCLmd4j5npdjMB4Fb8Xs6dmfyBa7Zzb8cG7cBqaA9
- 2tQHqBLAarunJJch4605aSmRkm5CZTFTyAcDsD0mwPiPSkNyX0VTjjJ/fVBnGWF32E98uBipLH8
- 1epimohwmCb4ofcRYcm2VGWKr2vJ7IrEP5iU0sVAV3lCU0JHWpGM1cxE1CouT9+Mq8IzwesyQTi
- p1l/uTLRu3n4I1/OWaeWz9i997ckmOZxw=
-X-Received: by 2002:a05:6a00:1bcd:b0:82a:e3de:27c2 with SMTP id
- d2e1a72fcca58-82c6e0ca891mr425553b3a.41.1774375192860; 
- Tue, 24 Mar 2026 10:59:52 -0700 (PDT)
-X-Received: by 2002:a05:6a00:1bcd:b0:82a:e3de:27c2 with SMTP id
- d2e1a72fcca58-82c6e0ca891mr425531b3a.41.1774375192365; 
- Tue, 24 Mar 2026 10:59:52 -0700 (PDT)
-Received: from hu-aswinm-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-82c212ac8a2sm15503901b3a.17.2026.03.24.10.59.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Mar 2026 10:59:51 -0700 (PDT)
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-X-Google-Original-From: Aswin Murugan <aswinm@qti.qualcomm.com>
-To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, trini@konsulko.com, xypron.glpk@gmx.de,
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1774376508; x=1774981308; i=xypron.glpk@gmx.de;
+ bh=A2sUXTLCGF3E/3GVj5GSjx1GKpNSYkF05BiQTJYTqYk=;
+ h=X-UI-Sender-Class:Date:From:To:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=Q4/KtqEoNC13vnH3w9aDYV8ib5R7/U+DyPm28E9hLHYWsEwpDdL/cNy6vtsoF5WO
+ OdF934QSH1hnFPFQTKWPbAhwEY/LQSNbNIC1tw4AI6C1PfFWw33m1eJjWUYW+zWR5
+ J/pPXb4EfFShNA0nA9Ov4dvBDemh5k3nXY8pw7Rkn0s0zCCAIOGraPTPFAAMIfAOd
+ xIXVUydNCRWAzMeoxBX0vLV5uv2MkMSU8SnUSbyrfYJrOorN0XqkOPm2s0M1QzxKt
+ SCAeD+2sJZi0VfCVCcDUk/3oB84hAD8MgylVBtOxfjqr9y+5MWHw6U6hPWMtRsVNP
+ WYFfKvqMvWNxK5sRrg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MNKhm-1vtTPi1aWI-00XVB7; Tue, 24
+ Mar 2026 19:21:48 +0100
+Date: Tue, 24 Mar 2026 19:21:44 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>, casey.connolly@linaro.org, 
+ neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com,
  ilias.apalodimas@linaro.org, aswin.murugan@oss.qualcomm.com,
- marek.vasut+renesas@mailbox.org, michal.simek@amd.com,
- sjg@chromium.org, mkorpershoek@kernel.org, jan.kiszka@siemens.com,
- paul.liu@linaro.org, j-humphreys@ti.com, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Subject: [PATCH v4 2/2] qcom_defconfig: Disable EFI_HAVE_RUNTIME_RESET in
- qcom_defconfig
-Date: Tue, 24 Mar 2026 23:29:13 +0530
-Message-Id: <20260324175913.92858-3-aswinm@qti.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260324175913.92858-1-aswinm@qti.qualcomm.com>
+ marek.vasut+renesas@mailbox.org, michal.simek@amd.com, sjg@chromium.org,
+ mkorpershoek@kernel.org, jan.kiszka@siemens.com, paul.liu@linaro.org,
+ j-humphreys@ti.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v4_1/2=5D_efi=5Floader=3A_make_EFI=5FH?=
+ =?US-ASCII?Q?AVE=5FRUNTIME=5FRESET_a_user-selectable_option?=
+User-Agent: Thunderbird for Android
+In-Reply-To: <20260324175913.92858-2-aswinm@qti.qualcomm.com>
 References: <20260324175913.92858-1-aswinm@qti.qualcomm.com>
+ <20260324175913.92858-2-aswinm@qti.qualcomm.com>
+Message-ID: <7C8B85DA-6439-41DF-A2CC-ED51BF42752D@gmx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: 2rK_4EEMsbBvkhET-k-e5TE-88-kHbuj
-X-Proofpoint-ORIG-GUID: 2rK_4EEMsbBvkhET-k-e5TE-88-kHbuj
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzI0MDEzOSBTYWx0ZWRfXzfhINg2KhiHv
- p+A0Xf8o5LNATtQYnaNyv4IO5B7uFnOt1c0vFDMIzG9THtxfHcirKDi7SXWV81xv7NOjKhQQWAU
- fyEWLLzzIYMEAMIJyberEOHn4MHS2+G1i4/gGJfDZAgbthldOYKT0QH6aLjaR3s4p02/kehot/1
- inGhnB7cGQH0OAhoOqF7Cc278aCkm2jO4A7kZq3IeQHofE8h+TWAq4uRStsyXz1WIHlTh3Cj1tB
- o1x6b808J+Ai5OsA1ggoOfl1IL/fGoGWzgw+mKbR/D0LF74TRLhGgFrM8sTmVuM4hG+ZqjgItxz
- zocpVAUlA7tlbB55uO616mEu0WBEs/PHBtHl6H+D0hkb95LxaChugRyxXh//U/84N6jGp3JQVas
- /WrJGOtBRx08mFfXCvQr2SkTgUVFy/DSav80PBJNz1UxhA/aqhPySaGx93Rk+ezscDLHy29ju1d
- dnhUL5EKr98HqDFXHFA==
-X-Authority-Analysis: v=2.4 cv=Veb6/Vp9 c=1 sm=1 tr=0 ts=69c2d11a cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=Yq5XynenixoA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
- a=0yAwa9zdhTZloVlH2DkA:9 a=x9snwWr2DeNwDh03kgHS:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-03-24_03,2026-03-24_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 impostorscore=0 lowpriorityscore=0 spamscore=0 clxscore=1015
- priorityscore=1501 suspectscore=0 adultscore=0 phishscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603240139
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:OC9YFcasetvGXkcCZmdeUCUB61b5f8kBGopXmgQe+L1TVYksn6B
+ G2z1eUalOCQEbvkLKy4E3Kmv1tZy/Ej5teJaOwtYbsYUQELOZtYEC/y0b7u2tHQxJwfhLYn
+ n9GC+YEZlZVtQQWkN7iACaOWogIDiz+3BeeNwjLWkYdysDYdvp+xbdfxcrigse4qOwDoBp9
+ l79bs8eV4xDLaA+71OdJA==
+UI-OutboundReport: notjunk:1;M01:P0:VagwA4WtdyQ=;Af9gF/7R4ar6oEhLWzEKfUkw5Ij
+ 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
+ kzzoJu9PySQcN4Q==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,38 +159,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Am 24=2E M=C3=A4rz 2026 18:59:12 MEZ schrieb Aswin Murugan <aswin=2Emurugan=
+@oss=2Equalcomm=2Ecom>:
+>From: Aswin Murugan <aswin=2Emurugan@oss=2Equalcomm=2Ecom>
+>
+>Expose EFI_HAVE_RUNTIME_RESET as a proper Kconfig boolean with a prompt
+>so platforms can explicitly enable or disable advertising the EFI reset
+>runtime service=2E
+>
+>The current PSCI-based EFI runtime reset implementation is always
+>enabled whenever CONFIG_PSCI_RESET is selected, but it does not support
+>passing the additional arguments required for specialized reset modes=2E
+>As a result, reboot requests such as bootloader mode or EDL mode cannot
+>be propagated correctly and instead fall back to a normal reboot=2E
+>
+>By making EFI_HAVE_RUNTIME_RESET user-configurable, platforms that
+>depend on extended PSCI reset can now explicitly disable EFI runtime
+>reset handling even when CONFIG_PSCI_RESET is enabled, ensuring
+>that the kernel retains full control of advanced reboot paths=2E
+>
+>Default behavior for existing platforms remains unchanged=2E
+>
+>Signed-off-by: Aswin Murugan <aswin=2Emurugan@oss=2Equalcomm=2Ecom>
 
-Qualcomm platforms rely on the kernel to manage specialized reboot modes
-such as EDL, bootloader entry, and other vendor-specific reset flows.
-Allowing U-Boot to override these via EFI runtime reset services leads to
-incorrect behavior when the kernel issues advanced reboot requests.
+Reviewed-by: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
 
-Now that EFI_HAVE_RUNTIME_RESET is exposed as a user-configurable Kconfig
-option, disable it for qcom_defconfig so that the kernel retains full
-control over reboot handling on Qualcomm SoCs.
 
-This ensures that EFI runtime reboot callbacks are not registered on
-these platforms, preventing conflicts with kernel-managed PSCI reset
-paths.
-
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
----
- configs/qcom_defconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index 314fc0c4903..8042855bae1 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -6,6 +6,7 @@ CONFIG_ARCH_SNAPDRAGON=y
- CONFIG_NR_DRAM_BANKS=24
- CONFIG_DEFAULT_DEVICE_TREE="qcom/sdm845-db845c"
- CONFIG_SYS_LOAD_ADDR=0xA0000000
-+# CONFIG_EFI_HAVE_RUNTIME_RESET is not set
- CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
- CONFIG_EFI_CAPSULE_ON_DISK=y
- CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
--- 
-2.34.1
+>---
+> lib/efi_loader/Kconfig | 3 +--
+> 1 file changed, 1 insertion(+), 2 deletions(-)
+>
+>diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+>index 13e44be1d06=2E=2E31d1c4fc257 100644
+>--- a/lib/efi_loader/Kconfig
+>+++ b/lib/efi_loader/Kconfig
+>@@ -100,8 +100,7 @@ config EFI_SET_TIME
+> 	  can be used by an EFI application to adjust the real time clock=2E
+>=20
+> config EFI_HAVE_RUNTIME_RESET
+>-	# bool "Reset runtime service is available"
+>-	bool
+>+	bool "Reset runtime service"
+> 	default y
+> 	depends on ARCH_BCM283X || FSL_LAYERSCAPE || PSCI_RESET || \
+> 		   SANDBOX || SYSRESET_SBI || SYSRESET_X86
 
