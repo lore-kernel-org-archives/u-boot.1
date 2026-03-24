@@ -4,68 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F05EF532C4
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 06:50:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08B6BF532F6
+	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 08:52:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92E428352B;
-	Tue, 24 Mar 2026 07:50:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 1874E80212;
+	Tue, 24 Mar 2026 09:52:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="RkYGDGlR";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="ZmEXQteH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FF05836D3; Tue, 24 Mar 2026 07:50:16 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E6B0D80517; Tue, 24 Mar 2026 09:52:19 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C55B80077
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 07:50:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 767F380087
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 09:52:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 29F2D401AF;
- Tue, 24 Mar 2026 06:50:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E2066C19424;
- Tue, 24 Mar 2026 06:50:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1774335007;
- bh=JhvktiuEWNM2ByykeyrMWRardX3yxhJFMU/Vz6HFO9k=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=RkYGDGlRzFKg7yO1XqBJnK2L5HpnJ6RgqYtzI5jbqBeFxoB2euQoaGIlkxwFk152f
- 0SKOs+XC1yth/pUTs5du1zlkLBAQKA5UZEk9ZfzPIgGP93GP5s7KKhuXnn0w3ffOgK
- 6vSJ/agy4LZB4/RYIiLAx9xvjy+L4bPSVxXHSs10VkTsNRfDgK2QV4zFxXY3wkn2uv
- oA+HRBqgS9yOMj7euDuW/OnXr8buIo6h9LwcEZqzj4eSLwcxrzf5/sFB34RUkwmdGZ
- wuWZdutfw5MDSDgztE/3mF8ReMotXtNIJ4ltie07ktgeVMRjnQBCqJToE1npnPVBuS
- Kt8Hoygh5xPSQ==
-Date: Tue, 24 Mar 2026 12:19:58 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
- Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- David Wronek <david.wronek@mainlining.org>,
- Luca Weiss <luca.weiss@fairphone.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
- Swathi Tamilselvan <swathi.tamilselvan@oss.qualcomm.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Julien Stephan <jstephan@baylibre.com>
-Subject: Re: [PATCH 5/5] drivers: ufs: qcom: Initialize and enable clocks
- before hardware access
-Message-ID: <acI0Flg4gUKmP2FQ@sumit-xelite>
-References: <20260319-ufs_probe_clk-v1-0-08c085d6b15d@oss.qualcomm.com>
- <20260319-ufs_probe_clk-v1-5-08c085d6b15d@oss.qualcomm.com>
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-b97bca3797dso133195966b.0
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 01:52:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774342337; cv=none;
+ d=google.com; s=arc-20240605;
+ b=N1TVVsh8a27TrIb5yNTfykm550GxRUPENtAiFjskjmKwZlNOT3VBHlMVpTFD1p8QGU
+ gnXSNdBo+xX0OfDTWJ7CcjkNqFCgMzHdh6NS2xC8b4AGNpKv/m8uMIDe9Z8Xj2bIaPsu
+ uaiVGnBmLe5GKqdwzrPB/81dd8TaP+t3X5jGo7tHfw/Q0OfE3ye9z4BB9cnLfhznGUfn
+ 1PmKj5fBFANfO6it+XfIhcfwsRj0jgaHy8c2GNBH9FdkZag6v/upxysHOZaHx3hX2TNa
+ KXuC8n9c9FyUObNTlDgxkF2oMxsigBRJ0lfcp9LSe5+d8lqo1852MOa4SvwLQMW1xySq
+ EBPw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=xrpRrOYJ9qaYKD8T8VBQI4Rxy71XO2djd3rYW+HXJDg=;
+ fh=y516F1kj/cMFqE82c9KGhMLVkEHYD/k8z9fDE+hE3Ag=;
+ b=dytJZ05ukXf7EW8u+rCUvmD3xd8K0hLJhVVsnE5kIKyfQ/MLDZvBNH2wf9xb2nwsBF
+ tKdtjl2FNHTrPzPGkpsz+LnbXoSMt6dSd2SZzfkwYeKebcHxfJ4mxclN3OTV7M9U/MID
+ eE9pnT5qMsCMyUhgyMc0Tc3x40Ton8utJrO7hPg+9qrBDymWLNiVlS6GNhTDEJjQt7gM
+ K86/fiJ/YGYC1ie5RfJYAwERze2/l68azWNHzdDo79NQY3b1D6MB4A6IGlWPL0Nku7sI
+ Wxx3zzYUImwvBOB4ikyzg3HY9af2In1dT5+fRGUFpq/JxA82Pjl20lQiRoh8GWh0OFm1
+ CmSg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774342337; x=1774947137;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xrpRrOYJ9qaYKD8T8VBQI4Rxy71XO2djd3rYW+HXJDg=;
+ b=ZmEXQteHeXAp0y7B6s3R8DY7X94M6VDfschEGK3Rttd1v6ZSoyn3DbVW4VRLtxYo7R
+ 2/iD9NqAsQSPMt3vFGlGfy+Db7XdMQ64Ekgcr7NLQQlnqyDkESeU5tzkBWW44bpHTS6+
+ ltZwfX14WnQemi/MDFgdwTjFvYfE3jSUrHJTL7OC9Ra1R3C10AfnqX31ymxNE8Sq/+RC
+ /PtQitOXY8ZD/wkYs468bmUEglsDyPgwDIt+PZ11EGZGHh659cxuDuY04c6fhUUMQDnC
+ XiWlLhyyVMSSb4c8hxpCEwYq6JBqSOXPLgIoeFhdz+s8PBgIqWJQFfV19CXy2VtTXpP0
+ 1REg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774342337; x=1774947137;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=xrpRrOYJ9qaYKD8T8VBQI4Rxy71XO2djd3rYW+HXJDg=;
+ b=UX76hvz5Qx/Kryc85YgOUEQQ8k17rQ+BGT1Yi+u9arLDdUZKR+/RXZbmBSN9AXZ/oR
+ FzdrJozy34hlPGXQShThbHSJH6TqpMWzuRXLqEpexeW1fmVcZjlStz/Hk3xhQIVFtBJL
+ YnwBCDMlRF+sMkTUMpby+eTwJ3IVaIz2zvQaG3WpgFT1GeaVIVSY6ItyfsYUGiuT/mtU
+ hRcKPRPIjZwTmzM4XK+mdbXSx3PDMg5DBirtManm5xHmaN+WbuFBY0EYUB5LpD0sp4t+
+ RaT3F7e1bcA9uJEbM4JukdmBRAEx/sblvzkYyoCvS0aUjmrIlQxu83faZEyJ1zpjA9RB
+ z9FA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCULbO4fwouJ5wUOw/NkyAcDfXoWaz3MYIQG4UuNqrPKiIwmOwJ1TmurGGpsEjdIlIKhJ+KtdUE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxO/jG1GKuIuZFZL48q/Ys0XWiULhXNhjt3GcOo9xEP9jV9QOJJ
+ drX5s5w4gt8fxAfqVOhbW/1tvWEpNtoJmb0XDhwazwDXFiOtM7Ou+7MKRVDrm1lShJvs3eg4mB4
+ ewpWqSbgM+SgsN6p0+wjsWjX3SPI/S0oG2jztIZfX4w==
+X-Gm-Gg: ATEYQzwkJqgO+xkZuoHS5RI2cY3Me5wZyMOtfLeee98sZPetV92tQo8q2Ztr8X13Chq
+ gM9IHq7XTKjS5sVv9sUqt9O6rKxGHRMiUSkEKQSfHCJdiwpOQ5lQ9Eqe/5M5WuTJGb/6oywDeiP
+ um7bD4uvXPUqoaCm0lv8V/Wbz8vN7Xw89THgldvZ9yq11c14D0E6+caC4G3ORbWYi/rD84h9U2S
+ FDy33MsfpHsxsbbyg4egef3AAylgwZTu9kieDGMfyYppIlLscMCqmasq99xDwiv+1KjrfPE8GEO
+ BEG3P5g5ua+e0iVIjmnc1mgA18Mb7r0LrSLO0pAUWuG17YFfFPzWFMazxvVAlt8EQjbEigqMhHg
+ 7QGVgHSpQ2Tk+ouy27Lu+vns2Rw==
+X-Received: by 2002:a17:907:1c0d:b0:b98:82c9:d1ba with SMTP id
+ a640c23a62f3a-b9882c9d29emr223025766b.1.1774342336308; Tue, 24 Mar 2026
+ 01:52:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260319-ufs_probe_clk-v1-5-08c085d6b15d@oss.qualcomm.com>
+References: <20260317-clk-mtk-unify-mux-parents-v3-0-a4760f5b0a80@baylibre.com>
+In-Reply-To: <20260317-clk-mtk-unify-mux-parents-v3-0-a4760f5b0a80@baylibre.com>
+From: Julien Stephan <jstephan@baylibre.com>
+Date: Tue, 24 Mar 2026 09:52:10 +0100
+X-Gm-Features: AaiRm53qrSZj2jgxlOI0VtPsELutEnQA0i1Ejrjf6fjR7jGFDLHe8WOX7tDywEE
+Message-ID: <CAEHHSvZT1w2VzaYW=e7x00b-kJoMbkwpxF4K0h6MZVr48nML3w@mail.gmail.com>
+Subject: Re: [PATCH v3 00/16] clk: mediatek: unify mux clocks
+To: David Lechner <dlechner@baylibre.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Macpaul Lin <macpaul.lin@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,118 +122,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Mar 19, 2026 at 03:07:42PM +0530, Balaji Selvanathan wrote:
-> Move UFS clock initialization and enabling before hardware setup
-> to ensure clocks are running when accessing UFS registers.
-> 
-> Previously, U-Boot depended on earlier bootloader stages to
-> initialize UFS clocks. When these bootloaders failed to do so,
-> UFS registers became inaccessible, causing initialization to fail.
-> This change makes U-Boot initialize and enable UFS clocks early
-> in the init sequence, removing the dependency on previous
-> bootloaders.
-> 
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Le mer. 18 mars 2026 =C3=A0 00:26, David Lechner <dlechner@baylibre.com> a =
+=C3=A9crit :
+>
+> The MediaTek clock driver currently have two ways to indicate the parent
+> tree that contains the parent clock. This adds to code complexity and
+> makes it more difficult to know the "right thing" to do in new drivers.
+>
+> The plan here is to convert all mux clocks to use the more robust option
+> of using struct mtk_parent to specify parent clocks.
+>
+> The conversion to the static const struct mtk_parent arrays was done
+> by script to minimize the chance of error (and save time).
+>
+> After the conversion, we can drop two of the clock flags that are no
+> longer used and remove the dead code.
+>
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
 > ---
->  drivers/ufs/ufs-qcom.c | 45 +++++++++++++++++++++++++++++++++++++--------
->  1 file changed, 37 insertions(+), 8 deletions(-)
-> 
-> diff --git a/drivers/ufs/ufs-qcom.c b/drivers/ufs/ufs-qcom.c
-> index dc40ee62daf..c63e550c881 100644
-> --- a/drivers/ufs/ufs-qcom.c
-> +++ b/drivers/ufs/ufs-qcom.c
-> @@ -30,6 +30,7 @@
->  #define UFS_CPU_MAX_BANDWIDTH	819200
->  
->  static void ufs_qcom_dev_ref_clk_ctrl(struct ufs_hba *hba, bool enable);
-> +static u32 ufs_qcom_get_core_clk_unipro_max_freq(struct ufs_hba *hba);
->  
->  static int ufs_qcom_enable_clks(struct ufs_qcom_priv *priv)
->  {
-> @@ -49,12 +50,34 @@ static int ufs_qcom_enable_clks(struct ufs_qcom_priv *priv)
->  
->  static int ufs_qcom_init_clks(struct ufs_qcom_priv *priv)
->  {
-> -	int err;
->  	struct udevice *dev = priv->hba->dev;
-> +	struct clk clk;
-> +	int err;
-> +	long rate;
-> +	u32 max_freq;
-> +
-> +	/* Get maximum frequency for core_clk_unipro from device tree */
-> +	max_freq = ufs_qcom_get_core_clk_unipro_max_freq(priv->hba);
-> +
-> +	/* Get and configure core_clk_unipro */
-> +	err = clk_get_by_name(dev, "core_clk_unipro", &clk);
-> +	if (err) {
-> +		dev_err(dev, "Failed to get core_clk_unipro: %d\n", err);
-> +		return err;
-> +	}
-> +
-> +	rate = clk_set_rate(&clk, max_freq);
-> +
-> +	if (rate < 0) {
-> +		dev_err(dev, "Failed to set core_clk_unipro rate to %u Hz: %ld\n",
-> +			max_freq, rate);
-> +	}
->  
->  	err = clk_get_bulk(dev, &priv->clks);
-> -	if (err)
-> +	if (err) {
-> +		dev_err(dev, "clk_get_bulk failed: %d\n", err);
->  		return err;
-> +	}
->  
->  	return 0;
->  }
-> @@ -561,6 +584,18 @@ static int ufs_qcom_init(struct ufs_hba *hba)
->  
->  	priv->hba = hba;
->  
-> +	err = ufs_qcom_init_clks(priv);
+> Changes in v3:
+> - Picked up similar patches from another series [1] and updated commit
+>   messages to match to this series.
+> - Squashed the mt7622 patch into the one from the other series.
+> - Link to v2: https://patch.msgid.link/20260309-clk-mtk-unify-mux-parents=
+-v2-0-b084ea74b99d@baylibre.com
+>
+> [1]: https://lore.kernel.org/u-boot/20260306-clk-mtk-remove-clk-bypass-xt=
+al-flag-v2-0-b253b49f17b2@baylibre.com/
+>
+> Changes in v2:
+> - Rebased on updated dependencies.
+> - Link to v1: https://lore.kernel.org/r/20260302-clk-mtk-unify-mux-parent=
+s-v1-0-32f45085f4d0@baylibre.com
+>
+> ---
+> David Lechner (16):
+>       clk: mediatek: mt7622: convert to struct mtk_parent
+>       clk: mediatek: mt7623: convert to struct mtk_parent
+>       clk: mediatek: mt7629: convert to struct mtk_parent
+>       clk: mediatek: mt7981: convert to struct mtk_parent
+>       clk: mediatek: mt7987: convert to struct mtk_parent
+>       clk: mediatek: mt7988: convert to struct mtk_parent
+>       clk: mediatek: mt8183: convert to struct mtk_parent
+>       clk: mediatek: mt8188: convert to struct mtk_parent
+>       clk: mediatek: mt8195: convert to struct mtk_parent
+>       clk: mediatek: mt8365: convert to struct mtk_parent
+>       clk: mediatek: mt8512: convert to struct mtk_parent
+>       clk: mediatek: mt8516: convert to struct mtk_parent
+>       clk: mediatek: mt8518: convert to struct mtk_parent
+>       clk: mediatek: remove use of CLK_BYPASS_XTAL flag
+>       clk: mediatek: remove CLK_PARENT_MIXED flag
+>       clk: mediatek: refactor duplicate *_mux_get_rate()
+>
+>  drivers/clk/mediatek/clk-mt7622.c |  288 +++--
+>  drivers/clk/mediatek/clk-mt7623.c |  649 ++++++------
+>  drivers/clk/mediatek/clk-mt7629.c |  371 ++++---
+>  drivers/clk/mediatek/clk-mt7981.c |  233 +++--
+>  drivers/clk/mediatek/clk-mt7986.c |   12 +-
+>  drivers/clk/mediatek/clk-mt7987.c |   78 +-
+>  drivers/clk/mediatek/clk-mt7988.c |   82 +-
+>  drivers/clk/mediatek/clk-mt8183.c |  584 +++++------
+>  drivers/clk/mediatek/clk-mt8188.c | 1522 +++++++++++++--------------
+>  drivers/clk/mediatek/clk-mt8189.c |   12 +-
+>  drivers/clk/mediatek/clk-mt8195.c | 1349 ++++++++++++------------
+>  drivers/clk/mediatek/clk-mt8365.c |  450 ++++----
+>  drivers/clk/mediatek/clk-mt8512.c |  620 +++++------
+>  drivers/clk/mediatek/clk-mt8516.c |  704 ++++++-------
+>  drivers/clk/mediatek/clk-mt8518.c | 2088 ++++++++++++++++++-------------=
+------
+>  drivers/clk/mediatek/clk-mtk.c    |  112 +-
+>  drivers/clk/mediatek/clk-mtk.h    |   69 +-
+>  17 files changed, 4611 insertions(+), 4612 deletions(-)
+> ---
+> base-commit: 142c805d470cd02470146d6d70aa9c522d4da16c
+> change-id: 20260302-clk-mtk-unify-mux-parents-1bf35aeabf00
+>
+> Best regards,
+> --
+> David Lechner <dlechner@baylibre.com>
+>
 
-I would just drop this wrapper and directly invoke clk_get_bulk() here.
+Reviewed-by: Julien Stephan <jstephan@baylibre.com>
 
-> +	if (err) {
-> +		dev_err(hba->dev, "failed to initialize clocks, err:%d\n", err);
-> +		return err;
-> +	}
-> +
-> +	err = ufs_qcom_enable_clks(priv);
-
-There is already a comment related to this API:
-
-/*
- * The PHY PLL output is the source of tx/rx lane symbol
- * clocks, hence, enable the lane clocks only after PHY
- * is initialized.
- */
-
-Shouldn't PHY be initialized before clocks being enabled?
-
-> +	if (err) {
-> +		dev_err(hba->dev, "failed to enable clocks, err:%d\n", err);
-> +		return err;
-> +	}
-> +
->  	/* setup clocks */
->  	ufs_qcom_setup_clocks(hba, true, PRE_CHANGE);
->  
-> @@ -579,12 +614,6 @@ static int ufs_qcom_init(struct ufs_hba *hba)
->  		 priv->hw_ver.minor,
->  		 priv->hw_ver.step);
->  
-> -	err = ufs_qcom_init_clks(priv);
-> -	if (err) {
-> -		dev_err(hba->dev, "failed to initialize clocks, err:%d\n", err);
-> -		return err;
-> -	}
-> -
->  	ufs_qcom_advertise_quirks(hba);
->  	ufs_qcom_setup_clocks(hba, true, POST_CHANGE);
-
-While at it, I see this POST_CHANGE setup invoked twice. Can you check
-as to why that is needed?
-
--Sumit
+Thanks
+Julien
