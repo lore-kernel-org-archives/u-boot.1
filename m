@@ -4,86 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE6CFE9A777
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 11:56:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7549E9A779
+	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 12:02:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41853807C0;
-	Tue, 24 Mar 2026 12:56:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3746A807C0;
+	Tue, 24 Mar 2026 13:02:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="St9lWzx3";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="s0WrO7RI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F6D4807C0; Tue, 24 Mar 2026 12:56:29 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 57CDD838BB; Tue, 24 Mar 2026 13:02:20 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7260380517
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 12:56:25 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-486b96760easo10821915e9.2
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 04:56:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1774353385; x=1774958185; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Lz2gCT1ifgN3PZxWCYU81eDJ9QiFJlIa7LS3bRO+cro=;
- b=St9lWzx3SOgT8t8X8GJu4Qx0UAMRHhY4wy86DdUrHnJsQGXpsHSR3/acfL1gUEueC2
- LBSvKYxS5N6kwc9o45shXkCTaN5WlGSekHVS4syF6Sch1KzRxf0NRGluNE1rgfgY4Kfp
- 78eYUzgMW/MJESTqUEhZOdngJcMFZMnQe/M6X9bnBisRgfNVCGCl8zF2B0s36918IatA
- 20rb8oMOY0hxzenNxG7LBLQZkBCMPqSYqGGpeeZgVhwlL5ai2C6XqTz+YGmycls48h5G
- rMRHe8kCFWdipQySoOQK6RAjNbbzhIy5TyrSA1HHi3CMeA6FNEJLhW3tdBPP2FQBaPBk
- HgVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774353385; x=1774958185;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Lz2gCT1ifgN3PZxWCYU81eDJ9QiFJlIa7LS3bRO+cro=;
- b=L1lZP/YmtCVDCRYXzqrQhBo8FAEtFLRPPf6lDCfv8nQQbHKt8MY2OfZt3WnNN1KBLc
- L9E8CoG1D5qDeejHZsP6tQH/MI1QOIKbmnOqSxGS3ysvALGqUuyT0RXRc+lMgcw35c2D
- IaREAjoLBTg9QBTXOQb6I123qtvCS+cpT3APlIdW7SluAlfIbmsLM5B3sRAhtJ0ZS+nf
- +qUPck/NeLmfh2eXoBonKZcRvi9KyQ0UiO63r89hjz08YM3FkVuEsX5gS73Mi2eBm+7I
- wJTutOlEKNfAJMrCtK2g06fZun4Mpa5BEIrTRywO7Pq0lcZo6G40yflw9ABQlRc/oGTE
- NilA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVH87tq5L3cBeSLs4WUIZZnCBeJDEwOL/yETrHCJ2cvcjLmu4NfXkvxE6IK6VezNGLi4hHUcZs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxR7VCSn3rCt5wHQmyn7b1/J9mSB3ACJ9OJoI+k+vaSvZJt+rJa
- baAUaZ4EaexPeS9R4tONuk9PZknYdciC/XIeP07wO7Pnz68mD7SsHpDUtM3hBHPjQlg=
-X-Gm-Gg: ATEYQzw8Ndh3eyvmar8XxpYa6dIIffKaKlet1ajNIwqswh189FWupJkBsjvK+rOXKY1
- +D9j3RkWcjuZy1uccwoUVzEkSk5XFKQPPolafhURw1X7QxPteEi675t7jHWTbflAM5uTmfa7WN0
- HLgOp1+879k3IJRFjvss3TbtQdT1IiyhgTeV6Pd06BIJeUGIReMjPBLM1y6StQt2NeC9bVmK5x4
- 69VzKyDegaZi9whv8r4egEfxOxunCrC6EcEJW/3GrdrmxZ+2fWfVPqZacSUoC52CpJvpgs84TuB
- cgF+itSsphgWUmo3x/BZvnhJY5lJ8DLrmhFsn2BhHDaERZN0GeDE3rzUuQT0yzcZlEIaTUhlrEB
- AijtjEHfj/0RGw/k4hkrb8/1JLNaPiinUhdaRWT5OxNZqSNU6d2bdccAwp7553Vw9Q1l+ABNxKS
- NvW94pSnIgi07Zrr9UT5PRWOCjRPQcRp6D+lNQ8pl2FM2CrClf+cwkqAVXm4NoBI8=
-X-Received: by 2002:a05:600c:3f16:b0:485:3f38:3de3 with SMTP id
- 5b1f17b1804b1-486fedab1aamr220211615e9.3.1774353384707; 
- Tue, 24 Mar 2026 04:56:24 -0700 (PDT)
-Received: from [192.168.1.36] (p5b29eb0d.dip0.t-ipconnect.de. [91.41.235.13])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48710fd2c4esm30300935e9.4.2026.03.24.04.56.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 24 Mar 2026 04:56:24 -0700 (PDT)
-Message-ID: <a8c8f3f7-15ca-49b2-872e-aded2a424ff0@linaro.org>
-Date: Tue, 24 Mar 2026 12:56:23 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 6E99880517
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 13:02:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=b4de=BZ=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1774353736;
+ bh=06jmEoeVsNS1NrYkZxCjGty8bjBn67YCBAR81LmN/4E=;
+ b=s0WrO7RIB5VCjfR/GQmwuvPZZG0yFZ/mBuREi4FHvFjS9UCyiQCGvjjixGCCjJZaXonNdSfF3
+ 3QzCc/hH9z6P6tVibkc9MMGhCEjopwh3xrDMPoRUsKeY88j/ZtOwxzbgn0TmC6J0HW1u2aSmxrZ
+ 8EAnEIHwSLdMbeRLWCE/uo0lsybSJ9WnDrQCQ3QcGiuBsXtnERyaUpzVGVDMKzlpmktbBJ4cgF/
+ eMzrzKuD5Hm60fW3bTtd4yKywE3SvXhR9HssJjgO9BFojZhoK2MW4pamTJNxfS0YvCx/gQI2LDN
+ aOc8sOr4mPna4/be5pSpUpr0GSPwPaaPV5sNbNWO6G4Q==
+X-Forward-Email-ID: 69c27d444e162f78964b74f6
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 2.6.55
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <6b16c87a-ef5d-4c5d-9268-f1c0c3884b05@kwiboo.se>
+Date: Tue, 24 Mar 2026 13:02:07 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 3/3] fs: fat: Limit transfer size to prevent SDHCI
  controller timeout
-Content-Language: en-US
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>,
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: Sumit Garg <sumit.garg@kernel.org>,
+ "u-boot-qcom@groups.io" <u-boot-qcom@groups.io>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Lukasz Majewski <lukma@denx.de>, Casey Connolly <casey.connolly@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
  Stephan Gerhold <stephan.gerhold@linaro.org>,
@@ -94,7 +64,8 @@ Cc: Lukasz Majewski <lukma@denx.de>,
  Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 References: <20260324-emmc_sd-v1-0-883a45538b6e@oss.qualcomm.com>
  <20260324-emmc_sd-v1-3-883a45538b6e@oss.qualcomm.com>
-From: Casey Connolly <casey.connolly@linaro.org>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
 In-Reply-To: <20260324-emmc_sd-v1-3-883a45538b6e@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
@@ -114,9 +85,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Balaji,
+Hi,
 
-On 24/03/2026 06:52, Balaji Selvanathan wrote:
+On 3/24/2026 6:52 AM, Balaji Selvanathan wrote:
 > Some SDHCI controllers have limitations on maximum transfer sizes
 > and can timeout on large block operations.
 > 
@@ -124,15 +95,6 @@ On 24/03/2026 06:52, Balaji Selvanathan wrote:
 > to stay within controller limits. This prevents timeout errors during
 > large file transfers on FAT filesystems while maintaining
 > compatibility with all platforms.
-
-Shouldn't this be split into two transfers at the MMC layer? Perhaps
-with a quirk flag?
-
-In fact this seems to be already totally supported, just change
-CONFIG_SYS_MMC_MAX_BLK_COUNT to 16384 (see mmc_get_b_max() in mmc_bread()).
-
-Kind regards,
-
 > 
 > This patch builds on top of the work from:
 > https://lore.kernel.org/u-boot/20260224035000.1617869-1-varadarajan.narayanan@oss.qualcomm.com/
@@ -167,6 +129,15 @@ Kind regards,
 > +		/* Break large reads/writes into chunks */
 > +		while (n > 0) {
 > +			__u32 transfer_count = (n > MAX_BLOCKS_PER_TRANSFER) ? MAX_BLOCKS_PER_TRANSFER : n;
+
+Have you tried to configure SYS_MMC_MAX_BLK_COUNT=16384 for your
+platform, or otherwise set b_max in your mmc driver?
+
+That should cause similar max blocks handling at a the mmc-uclass level.
+
+Regards,
+Jonas
+
 >  
 > -		if (ret != n) {
 > -			ret = -1;
@@ -193,7 +164,4 @@ Kind regards,
 >  
 >  	/* Do part 3, read a block and copy the trailing sectors */
 > 
-
--- 
-// Casey (she/her)
 
