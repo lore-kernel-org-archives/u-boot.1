@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21381FEC102
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 19:43:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12E2FFEC107
+	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 19:44:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B416383CE3;
-	Tue, 24 Mar 2026 20:43:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1232C83EAC;
+	Tue, 24 Mar 2026 20:43:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aRmE0S0+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kXa3Kg7K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FF1183CE3; Tue, 24 Mar 2026 20:43:36 +0100 (CET)
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
+ id EF46A807C0; Tue, 24 Mar 2026 20:43:37 +0100 (CET)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 173CF83A41
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 20:43:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B28BB807C0
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 20:43:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-46808125d28so1072763b6e.1
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 12:43:34 -0700 (PDT)
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-4043b27ddeaso1019854fac.1
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 12:43:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1774381412; x=1774986212; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1774381414; x=1774986214; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=g+tA0kKc9VPs5+CpYroaJWJoYk9jb4OAMkTU9FqSEWw=;
- b=aRmE0S0+kczt4uThene+dkNkAiWZ0EKclh0n/VGE3A3lqfD1vU8wjQg4xnazRK8cCu
- bgfI2D/eN5XAGMw5T8XrNHu1LLvbmylwZ20sdmJmQts6aGmPvaa/tyhw7KPDrcwQviqF
- AN6UGiCqfrNKKqiNlgxmLJaOiNsUaA3sERWP4=
+ bh=s/Ah/ME7wNstJI9FjXlNGsbMV8rfHuBUOYXo8B63KbU=;
+ b=kXa3Kg7KRjpB/wSzBuJPU6uaA3nxX9OrDrJGOaQFqhPB+uesm1AjSn01PpWXqU7WXl
+ 8RW6YTGvqEuWtA0JiwkbaKzCADeIfaNpuZ0DOa86c83zfZmlq2qB9euS/EK71fSv646C
+ 1YuwZIv+qYGnDxR0NEVfpGJFDS8rULUAjOdTg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774381412; x=1774986212;
+ d=1e100.net; s=20251104; t=1774381414; x=1774986214;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=g+tA0kKc9VPs5+CpYroaJWJoYk9jb4OAMkTU9FqSEWw=;
- b=GAmKMvJmYc74nMQ5hk+Kbh+HHPlL1JmwkChHN0gcDkXDHy3zI4QdiN5iOdlUTNoBnN
- 5R8Um6NogmATg1dev7lkEVW5yEJyb0+omgAo2VMaxg3uqD+xQn6fSYBsqSIadFHmX2O5
- +vtUiACD+BPAcD6gdS2OKbWVsM97RAwVnRwejp7KcF8Jp81nN+hYhOF/64cSqNz6MiEi
- LBpdjJGQg/5vtUBuBFIu65OieUBlEzO50kFXUfID9Obs2aW7JaKV2fp1BuyRNBwWgKNB
- HahO8kSuohlNG1+f/eBdIUMswHIA6+cBJoJ5lY95xuDTQMVpFDRmbZFOSN9hMB+K+BNW
- skrA==
-X-Gm-Message-State: AOJu0YwfAnncKHwhOqg0vFKog0pUAqfMegn0dnI9+NPu1A6n+qfnA7+6
- krmNP/c+ToJ8ZmL0FXH0sS3Hn/WzStFERJf096FiSe0bfKrXT25/aCO/Lpux9O/2VaIm+s7E89M
- a8669dg==
-X-Gm-Gg: ATEYQzwXj7MCPzNrCuq4XaXJ1BEteRLevXk3fbJsKrNW6uqA/CGJYoW/M7epw3TMPKF
- R/+5+9PVyUKYf24cWr7XSMUXW3QkdOiGOhSUw6k8HsAq+ThorT3smVQdLgh1DKOaqh9PjnKENLQ
- sJqH8qRCarr+RGllyHl5kJlDblaXKKSzwMFKJv+wFTBUKmJXcpKIVUhRLyavhmE6TDobaw/k9aR
- 34ehq/kNfI6qyrDuI59D4OE9uHLYx/uLzrjnqarWc+zPRMj1WX+k4Bnnhz7QdPb6pA+egiJdHS8
- q3AztMHiZ38tt5whzteNe6+pvvRhaMYn6IYNDU3ybU3i0nyVGiW8Y+li0ch+FAolspqhoQ/GEpD
- jrV5gB6fXNJI/rph+gpM4/KeDd/i3y/mP13o4yLO6YOarFspaZyWpA2Z5Nc7j3+x78bdluPZtTd
- W8CZgxZJWwL5JXQsIDGg==
-X-Received: by 2002:a05:6808:bc7:b0:45e:e20b:aa14 with SMTP id
- 5614622812f47-46a5c7be89fmr427342b6e.54.1774381412227; 
- Tue, 24 Mar 2026 12:43:32 -0700 (PDT)
+ bh=s/Ah/ME7wNstJI9FjXlNGsbMV8rfHuBUOYXo8B63KbU=;
+ b=l8kTDdZSB//w/J0QRZG2fdMd1j3sAQMGYRAYCCJmVpFUEQ5CIB9qmoB7/VNdU5yHnV
+ aA4KNF7S4BPAHyJnTbHB/28xNw4BI2Whbtnlm5HaUwtF2kdnCHkKWXOX/PTO/e3WjDd9
+ PAr9fMQO5B4V4twx467Pghqf6gmfwvxk60364c4AU77RUZnO1VcwLS2MNCY5PGuNLwO2
+ F5MhqAQg20+DYwrdLhfsogGRvK391tLDWroswRbsQm3/8eLEtUiwYHo00hLdG744/5YE
+ 5x8BAUadZdTr1wCW7pslBFKGuwPmVZgMadlkwSifcJ2LvlccrXJu0aIqr6FIxSKzQyw2
+ ymZg==
+X-Gm-Message-State: AOJu0Yzf9ORkgJZHvDpOGEwHpV1c4DqHghLnlVM/dZbYE4HDMldWyQMU
+ +dssA6geG4vkVbDdRnXWBf9bx1yq9iMvKi+3+URKpd7nKRkcYj9598rBgRX0fJYkR21tNnfX1ul
+ l3Kc=
+X-Gm-Gg: ATEYQzzV+TTQopvaj9qJwTJLiHQQ/slLSfr8SYqNypiDSO5yRFRAdPbgbPvjKNsRuB0
+ rnU+uPZw4NMlmdL9iBI74nVkywYJRBI49ZiSq0lwTmDt66oqbs3UZEw01TYSIZpJm5d47fXKvWU
+ nI0CFWXyCiGixzmHSTAuws23SMudVF/83rrdIoA7CJmnaCwTeAZiUW4JEhQRw+VPobaj/igwGdP
+ ItaeRJ+2B6xlQ4thnwtYpYlkkFjc/XSp0tA6F62e64ppOJxI2ufqcjMLuKs1f3fzz0kQzWg6+yN
+ XgWTx8QOpN7tkpkxWbOXHjne6bwSvPPIrWxUYZ0U0DVft9LZTiER+czyeyiPUzO8khch4ynUTLD
+ ZvW7UDGXzfvvhaZr8yacBnlAhYRHaamfcj1szEgAIEoZEw9/h3ol6XFstazSVxMNtz18spI8stM
+ lGOiEAJ7jRc++YcdUisQ==
+X-Received: by 2002:a05:6870:9110:b0:3fa:aa1:5b1c with SMTP id
+ 586e51a60fabf-41ca6fd5895mr579094fac.30.1774381413827; 
+ Tue, 24 Mar 2026 12:43:33 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41c88218654sm3714784fac.17.2026.03.24.12.43.30
+ 586e51a60fabf-41c88218654sm3714784fac.17.2026.03.24.12.43.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Mar 2026 12:43:30 -0700 (PDT)
+ Tue, 24 Mar 2026 12:43:32 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/6] test: Rename test_fit() to test_fit_base()
-Date: Tue, 24 Mar 2026 13:43:17 -0600
-Message-ID: <20260324194323.2335679-3-sjg@chromium.org>
+Subject: [PATCH 3/6] test: Add a check for a missing kernel
+Date: Tue, 24 Mar 2026 13:43:18 -0600
+Message-ID: <20260324194323.2335679-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260324194323.2335679-1-sjg@chromium.org>
 References: <20260324194323.2335679-1-sjg@chromium.org>
@@ -94,30 +94,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current name is uses as a root name by a few other tests, such as
-test_fit_ecdsa() which makes it hard to run just this test.
-
-Rename it to test_fit_base()
+U-Boot should complain if the kernel is missing, so add a check for this
+in test_fit_base()
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/py/tests/test_fit.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ test/py/tests/test_fit.py | 13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
 
 diff --git a/test/py/tests/test_fit.py b/test/py/tests/test_fit.py
-index 42aa3b76ddd..5c0e74ff81e 100755
+index 5c0e74ff81e..811bafaf94d 100755
 --- a/test/py/tests/test_fit.py
 +++ b/test/py/tests/test_fit.py
-@@ -119,7 +119,7 @@ host save hostfs 0 %(loadables2_addr)x %(loadables2_out)s %(loadables2_size)x
- @pytest.mark.boardspec('sandbox')
- @pytest.mark.buildconfigspec('fit_signature')
- @pytest.mark.requiredtool('dtc')
--def test_fit(ubman):
-+def test_fit_base(ubman):
-     def make_fname(leaf):
-         """Make a temporary filename
+@@ -70,7 +70,7 @@ base_its = '''
+         configurations {
+                 default = "conf-1";
+                 conf-1 {
+-                        kernel = "kernel-1";
++                        %(kernel_config)s
+                         fdt = "fdt-1";
+                         %(ramdisk_config)s
+                         %(loadables_config)s
+@@ -281,6 +281,7 @@ def test_fit_base(ubman):
+             'kernel_out' : kernel_out,
+             'kernel_addr' : 0x40000,
+             'kernel_size' : filesize(kernel),
++            'kernel_config' : 'kernel = "kernel-1";',
  
+             'fdt' : fdt,
+             'fdt_out' : fdt_out,
+@@ -389,8 +390,16 @@ def test_fit_base(ubman):
+             check_equal(kernel, kernel_out, 'Kernel not loaded')
+             check_equal(fdt_data, fdt_out, 'FDT not loaded')
+             check_not_equal(ramdisk, ramdisk_out, 'Ramdisk got decompressed?')
+-            check_equal(ramdisk + '.gz', ramdisk_out, 'Ramdist not loaded')
++            check_equal(ramdisk + '.gz', ramdisk_out, 'Ramdisk not loaded')
+ 
++        # Try without a kernel
++        with ubman.log.section('No kernel + FDT'):
++            params['kernel_config'] = ''
++            params['ramdisk_config'] = ''
++            params['ramdisk_load'] = ''
++            fit = fit_util.make_fit(ubman, mkimage, base_its, params)
++            output = ubman.run_command_list(cmd.splitlines())
++            assert "can't get kernel image!" in '\n'.join(output)
+ 
+     mkimage = ubman.config.build_dir + '/tools/mkimage'
+     run_fit_test(mkimage)
 -- 
 2.43.0
 
