@@ -4,106 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68A32F54AD2
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 16:09:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10D3AF54AD7
+	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 16:11:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEDFD807C0;
-	Tue, 24 Mar 2026 17:09:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7F959807C0;
+	Tue, 24 Mar 2026 17:11:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="JXQAeAsw";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="exeSdme3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DFA1838BB; Tue, 24 Mar 2026 17:08:59 +0100 (CET)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
+ id 276D5838FA; Tue, 24 Mar 2026 17:11:31 +0100 (CET)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3C6880087
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 17:08:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D5B9680087
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 17:11:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-67de15e8452so21123eaf.0
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 09:08:56 -0700 (PDT)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7d7447778b9so2104461a34.2
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 09:11:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774368536; x=1774973336;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774368687; x=1774973487;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=z85D4nCpITnX2+c0Bvl9PXCpM6h4xhbD46rLw8H+Sws=;
- b=JXQAeAswOq5mWfRISUpRwfHMHVoVb17C+50AxB2wrUSSjp/M9b6OPtC8WDqhQNK6Mg
- CIyLwIg2NGh4jycYa34NJhQgUUCLH1e4arWk5J5vEKpDmLXOq1DU17N+AHQIP/d0ibW0
- JTWEERpxQKP9J/1ggIl4sNayIQi0pxTBDMtW7QwdzTyvAUgFv44bWgluHUJmgBM3Px7K
- p47YfArNSlRP7ZCrFlD+EZ7aQW8FXw7vai1b8GpT/y/RjscSWwo4mKc3Zgn0D72+r7uI
- qQT9wm4b3gVabIldbY/acp1ZncnGzTNuF7IeVVc2KWrv8leyCI2DToVizerUbVBygIHW
- RJzw==
+ bh=ieCIyJ8pDUnsdxvcq4ZRkxr/6cklNL3XX6nHiidpTxM=;
+ b=exeSdme375QPnsoGu7/vdNpQWkmXh7pIeh2+J6QIzxtHC5sy4mRIpv953DpmQ6i2TL
+ Nlz1SQLqfZj2+kVFRkaZz/iblePC9Z5PYDrEHLW5wAYxp7ue/2JMAsTn95HNm8zc1KcX
+ iB7u4SmXqeQlTWm+xFTYcB21xzjKr6AeaUYHqPnoQ2NvQDAYj2VAjdh+Dl17qiO7BpmU
+ coS/BeKtoeVrU1T5ml4soOBfRmNUAi/bHoTar91iGpVhvO2jbXpf5bE99/OMW0mBSt9I
+ +Fx3yUnrSJzRJf05cEnpViwjtl+iFaGUTNd2gNlUaZRsn76Lpwzxj+pojbCkab+6g5IZ
+ Ttaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774368536; x=1774973336;
+ d=1e100.net; s=20251104; t=1774368687; x=1774973487;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=z85D4nCpITnX2+c0Bvl9PXCpM6h4xhbD46rLw8H+Sws=;
- b=YKzyu3TOOYJF23Txd3NTpud5jNMpzuKkn7OB1Neawi6nD9uyFkTBzfe2gyWm4CnwKy
- JJ8w81PrSBlu/V1mz5jYoFfq3YPjE04vkYXyEfD5ix7JWldUW1xbvUA/gMxDbKvS4xVM
- u6+q/xoEbRM1W3Dycz2BCO6SLFTcF6fgDyOeHOzuSiIPG5PacmJHieFJ/XBkdUZu2TXq
- +G6n88dYAHZ8IzbnPhWmX8GaM9xxUB01ERBUKz7a/RkNOM5JhsfwFrufEX1eBKzeTJv7
- wX/kYSecDFaFkeZa2JAXVc1w3fu0B90gPWEoUw94nGbBTbOzC8WhqFeSzbHI5/d6aKad
- T7vg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUJk3S+nIkbCpcTyhQ7drU0NlCP1It3pqX/LgClGYIHAvdEyP2dPsphsOvdLtwU0fEKX+5ctCQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzotlSuyuUx0VYuUgAicjYNeZYR/jvvYBMTF7EdUsqdG85dPD5Q
- OgR0h0eWcMrhQEEBhwH/AwstYYt7T1fuL4N3Ig0ECZXtrwwbTW0A58DCCzax2uGY4Vjc87WFsEq
- R4WL8
-X-Gm-Gg: ATEYQzweLztsmWJ/aQVb5KdmyT1Y9J0i0KBMBYZygJ/0gEqxxnWJpkR98Dt4OwHgtVu
- 5HUUsoh5GNSp+3jfFw+Hvp4ctGzQsFvz9unPjbUaBmN2eA9n0lcjK37wwWgkJLNlIfIOqR0nzD7
- p6kDBTvhKY9ktsRZ1IuKqhOPHZ/UFPV9uuqY15XOaUK9FfnUKFNPqSan4TyM90cMIwhv5dF6lSk
- ZASKBok8ohbCJT5K11qdg3MpOBJWDraUGBjz9tavBHXOrDahNjuWnsulumguqM7NOn+HO5StH+B
- dARA2u/1wuuNH9gDKw4nM49svX2lrqXFSKz7Huhq+Dro1ULahXQocsTcB48hkjhkv/56Tu5Y2aZ
- TSQPLzwrrsvA8TCgGkb5xAjb1O4Oq20RysgwHbf5ky7zKXbrsF9JHIZZp+qkrj8J1XH/TJC2QxN
- fZ3zqHGcgwV84LSzY82/09G/Ox1/Rc8gxd8CJgYw==
-X-Received: by 2002:a05:6820:1606:b0:67d:e770:748d with SMTP id
- 006d021491bc7-67dff4e99c1mr151151eaf.15.1774368535703; 
- Tue, 24 Mar 2026 09:08:55 -0700 (PDT)
+ bh=ieCIyJ8pDUnsdxvcq4ZRkxr/6cklNL3XX6nHiidpTxM=;
+ b=C5IgKzYLuMpkrhtI6a04BSk/rUBUHDyUCiFB5okeGWumO5ez5/puhRHQ9GTO+sA5yc
+ XchJCPZp2yc9yKNOyhLwJ7fNhLoAhdMwBD7NlMxm8BrK1Xp3J2diAoLWsqwF8DpyeEwm
+ LBtiJ1DB3tqA2YLIo8jjRKdARjIjt8tXYk9PIst5+cSehnB56X64Unh2wrJw+ygwILaj
+ vj0oiwGEOmD6DAlEBdINDhXTOBdIViORuIUABRWoiER4nyZmZe92MTzANl3M1W7pyKYQ
+ TyPb8Hfj0cQKofWLkV3RupjhLv0M/b2zpIMdASMdrM/A4IUjr6UPMB1LOwfFwwCJI7hK
+ Nc3A==
+X-Gm-Message-State: AOJu0YxuAnYjNFXa+ygBPuWhKmm+hCQ7mSZ4AlpcQq5ciT3dipzbqNAk
+ 5Kf1xQ4Cvl7eL2RLDuF94oZk1h6m1biaspDUDeT3XFJUmsf5ouMn24Skz3hQzrSQVk0=
+X-Gm-Gg: ATEYQzy6uWZs+XcEX+0OKZFfzfOS8sqS+KqXkZz3f+7Z8/04+DL0g4aevqwA/fbbB/U
+ 1TrnF0oX203TgZF8c6H8ZS8aJuWuleX/XY34VMqPmwOlkG/eqrPe1dblHlCw3H5MdheA3vX7q2e
+ V09ND6e5ilMiOmDKFP1xonSjh5OCx0lbpdMNtfoEjSCGkSSrTxGmRLAyFkjE5Xu67nre+P0IN40
+ 9X+KVgXQmfGfjKMZvvSRQxebmKMmVhtCSCNixMl8wVozWrKnUW1K/WRjYgirOghMAeqdyQuLkQl
+ MOP2srROPcz5/4NhX5KnXT9NC2LDzZqr75A6NwRbOg/QVxJTIjrbFfudSUAhMQvoYETd7s3g4hL
+ g+6FEekr8l+RHnDlcowFslW9Hy8HAEHizjS2aAhvLj9gtAo4817iSInpXVhWSeU9W+AfR+/c9bo
+ i7RTBiIeP1dqZY2NP36nGgYXFefVM=
+X-Received: by 2002:a05:6830:438e:b0:7d7:f58a:10af with SMTP id
+ 46e09a7af769-7d7f58a3b2bmr10086130a34.5.1774368687600; 
+ Tue, 24 Mar 2026 09:11:27 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:8a85:a776:3f75:a1d])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41c144015fbsm14068215fac.0.2026.03.24.09.08.54
+ 46e09a7af769-7d7eac56278sm14102264a34.12.2026.03.24.09.11.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Mar 2026 09:08:55 -0700 (PDT)
+ Tue, 24 Mar 2026 09:11:27 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- =?utf-8?q?Macpaul_Lin_=28=E6=9E=97=E6=99=BA=E6=96=8C=29?=
- <Macpaul.Lin@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- David Lechner <dlechner@baylibre.com>
+To: u-boot@lists.denx.de, Julien Stephan <jstephan@baylibre.com>
 Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-In-Reply-To: <20260311-mtk-custodians-v1-1-000f9025b54c@baylibre.com>
-References: <20260311-mtk-custodians-v1-1-000f9025b54c@baylibre.com>
-Subject: Re: [PATCH] MAINTAINERS: add new MediaTek custodians
-Message-Id: <177436852301.3897241.11997471326327322783.b4-ty@b4>
-Date: Tue, 24 Mar 2026 11:08:43 -0500
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Tom Rini <trini@konsulko.com>, Chris-QJ Chen <chris-qj.chen@mediatek.com>, 
+ "Jill.Wu" <shu-yun.wu@mediatek.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
+ Vitor Sato Eschholz <vsatoes@baylibre.com>, 
+ Bo-Chen Chen <rex-bc.chen@mediatek.com>, 
+ Julien Masson <jmasson@baylibre.com>
+In-Reply-To: <20260312-pinctrl-mtk-bind-gpio-v1-1-21b8968902ed@baylibre.com>
+References: <20260312-pinctrl-mtk-bind-gpio-v1-1-21b8968902ed@baylibre.com>
+Subject: Re: [PATCH] pinctrl: mediatek: Add missing bind callback for
+ several SoCs
+Message-Id: <177436867662.3897241.12096288590972200028.b4-ty@b4>
+Date: Tue, 24 Mar 2026 11:11:16 -0500
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=310; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=353; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=vKULl+DO6iUktTO5qGFca1EsnWXX3bWX3ag86FsF5kU=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpwrcOwWUUuWVdaXxKwhkMHyO6HtKLiAS+a4Gbz
- mfJLBLQIIqJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCacK3DhYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AL50H+gKODQLd0DmofLyGjEbF3B9eqWOtxcKQ8Wgy68o
- zTh1L5fssMbF6R78mf2TyCRXaVBCJNZLg3uNzw9M/3Ok4PG3mU8JZ3GiM3DzutJEYYH2M4uEDMQ
- +Q/JskCK3Mq5ykEyWR1WbdYIE2WGiCEheEGrOnV/QztrT1s/m3l3x5bPZIxQqJlVKRNtr/ifaiX
- SBVPP9P+jq7VP/ygz7+mzZnY92ogI2zcWvi+l1HKLJ2tpHLWIJ1aGh1NQ7bWITtTkPRqmGwpKep
- V/6VwNsltxVfos5HnAI+ceHaLCIKruxaK+9nD2L8Ckg19gZgcJo/g+TEearE/tWFZbWTWOMCBiE
- fTcU=
+ bh=LYQ2iaolaDdLKiKZqzm/iU/JgUlJ8rJmX8MDUJCUtBY=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpwrenV5mcwx+Bz48pGFG62KET508U5uCmXnPjJ
+ /PiibQSBXyJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCacK3pxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AMpMH/j92UhFn3ASpsHyogZunHhnfNgIg//u6bxSkHOL
+ c5zEIduNOUIM9+xwNKADJS66ya7rthvGOZNgREDWVBNIwoPJjb0ScAZPvoJOE4iYYajubbvfuKy
+ 62VUFRKN0s68BkgSSU8xijHP3wsUVCYFrQqGTBhgijs3TPE5W2wPKBSvJtJ1WkHlPN+7DBezCs7
+ oH4b8jAM3VS6sRPC90V8bMlKWLxIf78VcSI7nomAoXj2J+Bq1dS9wwvORqx9ivjQc3BkRo5bD/1
+ oNTnyP59sjkx7d+oVo4QA4LgkcG+udvQo6vfjr08kqE/tKdR4hZZvH98SdEWgtVXtGXYx0egUgR
+ MjiY=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -122,13 +121,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 11 Mar 2026 09:52:49 -0500, David Lechner wrote:
-> MAINTAINERS: add new MediaTek custodians
+On Thu, 12 Mar 2026 17:19:26 +0100, Julien Stephan wrote:
+> pinctrl: mediatek: Add missing bind callback for several SoCs
 
 Applied to mediatek-for-next, thanks!
 
-[1/1] MAINTAINERS: add new MediaTek custodians
-      commit: f82f50caa1d5c1a9e4e2982a05da58416da356d6
+[1/1] pinctrl: mediatek: Add missing bind callback for several SoCs
+      commit: 71e736ed6d4ff22130aff7b12b0150e042f64cf8
 
 Best regards,
 -- 
