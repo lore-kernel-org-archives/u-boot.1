@@ -4,84 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01F5EF54ACD
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 15:09:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8561BF54ACD
+	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 15:33:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C29080517;
-	Tue, 24 Mar 2026 16:09:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B9E1180212;
+	Tue, 24 Mar 2026 16:33:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NhBrket8";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="3Ewq10Pb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9F9382A9E; Tue, 24 Mar 2026 16:09:12 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id C4EAD80517; Tue, 24 Mar 2026 16:33:45 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 562CB80212
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 16:09:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A359680087
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 16:33:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4852c9b4158so41562675e9.0
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 08:09:10 -0700 (PDT)
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-486fd5360d4so16092145e9.1
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 08:33:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1774364949; x=1774969749; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=P8RmIok3yTkeUNcmhidDvRM1w4/Sk44GpMpVQEuqqQQ=;
- b=NhBrket8rgs4T1kK35T15hI/n4S5WpjBYADRtCi/hMeYL7PPFIPcX1W40p7WGzE9z2
- Z5a1Htm15Ix6zq7ai1eMVGXf6S59uooXYUklRbCrrMBZJKlHwHHYHpQvReBN5No1K0BO
- YADisIH1rRKnp7sesEbNIxKAXH61r1C9NYHsr5m57ID0+xBDAI+yGYEQQ2MeB8r2Ciaw
- VoHloZsB8zYG5G2te41TENO1p7VKAy0WFDk9Bf5oWtAax4krFa0SxjCreLtdoAj8ebaV
- UHdGrQTzE7e7rDdrh2RWj5uSz+CV4scM7v0WaYrWp5iye0+Bdogl2jjHcPLFchP3JTla
- Mr1g==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774366423; x=1774971223;
+ darn=lists.denx.de; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TOiDhle0PnY0wck/VOrs74zYzASRvEfrRyQ8rF9/ZA8=;
+ b=3Ewq10PbTnWq2ZvITq6QIBylFhamuxLS5Oj61JEUfVZxhr29ixawOg/PM8In7XBKJe
+ 0ieJkz85L96KnsBMDAvOpyEmmyq+/DMrQnVjj5/Sct72LoDo8RiXkjMmyGQECHHs8KKo
+ O4jX6vgJiCobvNFRouaPVXW2SsLCZpF91FFuHuM2EwPi4R4C0qGjcuCObdDoJ42GBWrM
+ zflYRddehLt+5K/ysRLywXZH9VmNLXLJ8WCekDqRD32FfaAlC5he2ggtEVVFnua8TK8N
+ LG4BT9vCtL5rLWEloDcqe6ekZnuPh62OTsqUGybK0kC55xijEhaqu+WC6F7OwUxByvsw
+ 9aQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774364949; x=1774969749;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1774366423; x=1774971223;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P8RmIok3yTkeUNcmhidDvRM1w4/Sk44GpMpVQEuqqQQ=;
- b=aA5XMh/RcsgeYCA9ZPCI8BEzsLjkS8QTNY8wK54/qdBIrt/QPYURCvayzqhedsJn0w
- +t+156XP3dAqhnS5ca39Jafum/bGz+p6fIb3uK8tiBR40u2qtpblLzWFoIolDLs6Z5ml
- 5+C0Yhpwxq6LffFoqh+4vLA35ytgJlQyFKhVE3B5YJr8gN7VNbhDnm00ilcTNEXPiBu7
- tZIrWW0Oa7B+ntOqjqF+LIdb01nkwzk8GD/T5fcW4GRGky5O3T/wTk8Qwr1487avyfJN
- RkVBlIZa1vQoTNjT2RCgI8OujdavVUSEW2Qg3RIkmjVxT69/wVP4FucUS5Q1zPVeIE2x
- xSAA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVFzJKtt7u+/5zKt2UC63e4tULeI40ScGneJ6xv9v9ku6Vyjjeg1zG+F1g9UHm7vqnpnJlo69Y=@lists.denx.de
-X-Gm-Message-State: AOJu0YwdacLG7c3AWkHD1uucewO27lpigug6lytHHAx2EQLDhQIjjW7S
- DlK871X3rpxRNUmdDLrxUIS9ZybkisKZ/02XYvSyaVHs2a/U/KKSyiT18b2MgYNdcQ4=
-X-Gm-Gg: ATEYQzxZbR7a+Z+JLr8i7bc4SVXR1Obst1WPWd1VXQr96CvTNxhs6MILIDYC+AM9mhj
- 1uWuyN4IFqoHXExJcN6wSJmL8j5hKVC/sB1omAjsMnQ8lt1eYS33+u42u5mv00i6FVSJ+qxjFuz
- LzILpQrDiT+XabwhLyYhfPFdSaCh9jcboSTS3T9/CoKuhz/qUI4h8FdUCVnbpMVMm+ZdS8ap9uQ
- aRaq0Y1iz6CiIJOAIgXihFfOiVUGtLggl2dD57PJkvb1ztUmpBJh1aQmT2sFpgkvp3LHFKoRzPO
- 4IzIm6wdiKdfiXt+Qf/kaJ9IyYCsrcyr8IaNf1oeGwRiZ9WUG8dFaf8jiDGDY6bdcXF6VKv4yrC
- oTJC5gx9OLQ0wXHcmwkXM0aHzgmUfeDc8e5uWuxPB9/pA6enQ+Yw8JlT4my5BXlsRRSnVl0yXGp
- 0ST+91mvBhh+2IjvSjT+4StiKcFhVUCl9qVmVoGm53YDZ+oSKCWBC4cOW6o2YnDJqmV4TyePemH
- g==
-X-Received: by 2002:a05:600c:1d19:b0:485:353f:c651 with SMTP id
- 5b1f17b1804b1-4871605aa27mr1613445e9.22.1774364949375; 
- Tue, 24 Mar 2026 08:09:09 -0700 (PDT)
-Received: from lion.tail248178.ts.net (p5b29eb0d.dip0.t-ipconnect.de.
- [91.41.235.13]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-487116d82e4sm104870775e9.12.2026.03.24.08.09.08
+ bh=TOiDhle0PnY0wck/VOrs74zYzASRvEfrRyQ8rF9/ZA8=;
+ b=e7+lX/m0cpU9oftLpW6GlDln0IqG4hCz9QtEXq7vZvQRnQ1YliZEfTTbE0YwV4/gxR
+ lPUNZLo8wL6sZzW5QVgzojezZ7zksi83ylA3RgDkwwlbXzX1QAVk98RnTxwE1pvbFNdD
+ rrVqd2kv74gN4ATpXqN/VwDmCG3nNlLsVj2BFznQBM4wuvDBNpZPu/5qH6kEWntFT9O8
+ D5gzAF1N9j3fTF208ZSxYGNGLjrkDZTIPXy26/yxFtFjMBE9T0s0viGfKhGwCGQkO/pQ
+ AfIr2Lq2cf8N9BrBTtHyBdp84bHYp0cyf0PqrvFCC7ygs1OKo+h89V3I/XclcMzpcUQx
+ K6Bw==
+X-Gm-Message-State: AOJu0YwR4P/942BRaLtKSa3aMMncVyMmmOgfp6jLNLwEmwBnaBSKpWK9
+ k1akCF8KO4hEWT3zoSIUP89Hx8hDhaDtxF7CsYjQLw4JaOBRmmVbPJ3KewEHTbY1+6o=
+X-Gm-Gg: ATEYQzwQJQUmydy52zV+r3RA5sTkB1V0203ir2BCM8CdBdAF7tH9AnSCNGe5POa+1Oi
+ IXKdKfQz7jxw+Y37r237PzRc0K8p4I42A+/y+fbBBtZDU8eNkPcwywBl1hHV9elxnYzhRXDHITR
+ 3ZBiSFnSTb/wQ3p9t7L9goYEqHj9WbwnevEMoCz6vaTGRNMYtx9PPpS6GQKshJokmWSjbm58nw+
+ 2yJ4fOpu6SYwg0EOzoASfIpGcRvvgZv6zOuV33sF/KMbk0wLpRTcXtxzAMOoxycwXeN8wTbcgK5
+ r3YpYV6l+bT7hdof6zsl0TVhPuhNwGl6tJa3iFYU8zxFJsG2GR3IdyKlWhsshAu7S5zBVfs9CyL
+ lm4Zzbt1VArmkPjWrntdm21iLMN5Vr5ceo63dIZk5ERzza5QhKMd4nAOD1bDNpXcnDPhMYvWAvp
+ uZ6K1QSS8s0ha81Td2Qt3/fGdfgkgQ6CFeMdcgktAONYG3WVypJmbkYggirXJzRfJeQYBQ/JsMI
+ X/uvxlEtTPRtG2B6qJwNEJlVDEcc/oQ4lmrFoSS7Quei03HMoFShz1f58LXXy0F9iMVygSu/eYr
+ WSm1Sk0=
+X-Received: by 2002:a05:600c:1e8f:b0:487:36c:f5ab with SMTP id
+ 5b1f17b1804b1-48715fe70f2mr3178925e9.10.1774366422901; 
+ Tue, 24 Mar 2026 08:33:42 -0700 (PDT)
+Received: from [192.168.1.100]
+ (2a02-842a-d52e-6101-b535-6f9c-731f-0b89.rev.sfr.net.
+ [2a02:842a:d52e:6101:b535:6f9c:731f:b89])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43b644ae619sm39934003f8f.5.2026.03.24.08.33.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Mar 2026 08:09:08 -0700 (PDT)
-From: Casey Connolly <casey.connolly@linaro.org>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Casey Connolly <casey.connolly@linaro.org>
-Subject: [PULL] Please pull qcom-fixes-24Mar2026
-Date: Tue, 24 Mar 2026 16:07:34 +0100
-Message-ID: <20260324150903.3786680-1-casey.connolly@linaro.org>
-X-Mailer: git-send-email 2.51.0
+ Tue, 24 Mar 2026 08:33:41 -0700 (PDT)
+From: Julien Stephan <jstephan@baylibre.com>
+Date: Tue, 24 Mar 2026 16:33:45 +0100
+Subject: [PATCH] boot/fit: remove useless else branch
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
+Message-Id: <20260324-boot-fit-fix-8-byte-alignement-for-overlays-v1-1-257b132b6bda@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x2NwQrCMBBEf6Xs2YUkLVr8FfGQ6LQu1EQ2pbSU/
+ rurhzm8gTezU4UKKl2bnRSLVCnZwJ8aerxiHsHyNKbgwtm1oeNUysyD/LJyz2mbwXGSMeONbG1
+ RLgt0ilvltvfJRX9JQweyxY/CrP/b7X4cXx3kQhZ9AAAA
+X-Change-ID: 20260324-boot-fit-fix-8-byte-alignement-for-overlays-381b0a17bf4e
+To: u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ James Hilliard <james.hilliard1@gmail.com>, 
+ David Lechner <dlechner@baylibre.com>, 
+ Julien Stephan <jstephan@baylibre.com>
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,47 +109,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+The assignment of load = data is already performed before the
+if–elseif logic, making the additional assignment in the else
+branch unnecessary.
 
-These are minimal fixes that should ideally go into master, sorry
-they're so last minute. The watchdog patch is the priority, if you'd
-rather not risk taking the others I can queue them for next instead.
+Remove the redundant statement to simplify
+the control flow and improve readability.
 
-Kind regards,
-Casey
+Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+---
+While doing some debug on overlay loading, I notice this useless else
+branch in fit_image_load(). Let's just remove it.
+---
+ boot/image-fit.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-The following changes since commit eb95914b9f5886b7ca0eaa2dbcd8a66bb8e5f81a:
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index e7c7212195f..a0864bd0906 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -2281,8 +2281,6 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 
+ 		printf("   Loading %s from 0x%08lx to 0x%08lx\n",
+ 		       prop_name, data, load);
+-	} else {
+-		load = data;	/* No load address specified */
+ 	}
+ 
+ 	comp = IH_COMP_NONE;
 
-  Prepare v2026.04-rc5 (2026-03-23 14:19:17 -0600)
+---
+base-commit: 1ffc541eafc96d5eebcf837ab892dccec3b93568
+change-id: 20260324-boot-fit-fix-8-byte-alignement-for-overlays-381b0a17bf4e
 
-are available in the Git repository at:
+Best regards,
+-- 
+Julien Stephan <jstephan@baylibre.com>
 
-  https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git tags/qcom-fixes-24Mar2026
-
-for you to fetch changes up to 1cf505e51b49438271f4b36a648b93b618f13a8e:
-
-  watchdog: qcom: stop watchdog by default (2026-03-24 11:51:52 +0100)
-
-----------------------------------------------------------------
-Balaji Selvanathan (3):
-      clk: qcom: qcs615: Add GCC_USB3_PRIM_CLKREF_CLK support
-      clk: qcom: qcs615: Add GCC_AHB2PHY_WEST_CLK clock support
-      phy: qcom: qusb2: Add QCS615 QUSB2 PHY support
-
-Casey Connolly (3):
-      serial: msm-geni: allow invalid clock
-      qcom: rpmh: don't error for SLEEP requests
-      watchdog: qcom: stop watchdog by default
-
-Tom Rini (1):
-      power: regulator: qcom: Correct dependenecies for DM_REGULATOR_QCOM_USB_VBUS
-
- drivers/clk/qcom/clock-qcs615.c   |  2 ++
- drivers/phy/qcom/phy-qcom-qusb2.c | 38 ++++++++++++++++++++++++++++++++++++++
- drivers/power/regulator/Kconfig   |  2 +-
- drivers/serial/serial_msm_geni.c  | 15 ++++++---------
- drivers/soc/qcom/rpmh-rsc.c       |  8 ++++----
- drivers/soc/qcom/rpmh.c           |  4 ++--
- drivers/watchdog/Kconfig          |  1 +
- drivers/watchdog/qcom-wdt.c       |  2 +-
- 8 files changed, 55 insertions(+), 17 deletions(-)
