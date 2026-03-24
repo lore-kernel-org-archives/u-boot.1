@@ -4,94 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68872E9A767
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 10:59:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEA82E9A767
+	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 11:00:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 199EF83952;
+	by phobos.denx.de (Postfix) with ESMTP id 72EB180077;
 	Tue, 24 Mar 2026 11:59:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZTmFtCOb";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hrRq1VLs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E4E2839A8; Tue, 24 Mar 2026 11:59:41 +0100 (CET)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 7D755838FA; Tue, 24 Mar 2026 11:59:41 +0100 (CET)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7CBC838FA
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 11:59:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CEA368366F
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 11:59:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-439d8df7620so3353778f8f.0
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 03:59:38 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-439b97a8a8cso4048494f8f.1
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 03:59:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1774349978; x=1774954778; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1774349977; x=1774954777; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xwz684Xa/91be45sMaZ9Iy0fLkL5fYJJ6clwh2EQG4g=;
- b=ZTmFtCObkPxEgpwICZk0ve3T3IlUoNuTz6n4LrotUsj9Dg+F+5wu+7dhQRQjgtLOLq
- TR5MFBETJYQyNTcXNcdmlJTqnjgsWFX8VdNuhz8FIoUN4sW3GN8woFyfA/QruYyvslsA
- A/LEVVxRHgze1lXB9p//3czEDd69UiHNNqMTZmjB3BQHOKuAVcMPoV0K9xI5lzMqbSG/
- BQvuy38Pnnczj11eMbFzSHhU4D86m/qhby/6N+P01Se3G6cp6/O1TsEP+Pw5owPoFMOG
- rrLLvXvhDlisS6f3FX7xkObvCXuv7rPVgyiEHpmz7T4/IJ46Halsu/OsYDyp7t/fzdUj
- zfew==
+ bh=AZZfVLFqhh02LFaRnvls9012KzUrJg9ZyKOHDrQtdn4=;
+ b=hrRq1VLsfTe1/Tpuy1O/LTa9732tnCGmyqi++s1lrZs0/Fk2DKaJE9YdqHFH4fEll+
+ uDSWoVwgLr/0sILcZmwDxCG/BJ/h5N4jZl9ROM3Z5+qLZW4g/P2WoIUh8SmKQF+58X27
+ ozLsZ0aiO3aOR3Gdi6IznIzBeiKIMsAzlqeNcYjlD4yZfCmpw/TGAN/4KbkczPswPcOi
+ 4sMJ6VvECXpdLuSePapTVt3XBOtxvWUIY5vIkE+tINPgwb5xK49YjCD5cDevDPCZpvmG
+ /Us37V7eeRAdGP3K1EI7DTqmL30eMU3hrd/LICHUEGXU8CFn9i2XczEnQRy/lgpAlOP5
+ hCjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774349978; x=1774954778;
+ d=1e100.net; s=20251104; t=1774349977; x=1774954777;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=xwz684Xa/91be45sMaZ9Iy0fLkL5fYJJ6clwh2EQG4g=;
- b=HHUHR9JQRPJltbaVTjHmJVyUdhzT1OLshQPFrXCokmjnWzM0tstBGfFpFGGKjsKdec
- j70+c3chrnk7AYxSslCuH2QXqNgQSxGW3FGGjOigITc8hF/ZZ4AGSA8iyBJ+vC77UfYy
- dYsvB4ElBjv51nmQbknwn3KGSdQMx32ZnTD9/Z/PURIO4cJARZRVdMsQO9tJIDx6kym/
- 3+EerGz2vc6H2NjVh7j+tCD9ccZAADaD/F6Wi6DxdTstP40mRJjgXm7gY7ZKp80bP7pC
- LYlD330OpG0BfbXy6wT1HpAJmRaS7w/fcEExw5blsw07SubqGBbewtuqnsVUXvHp3wiQ
- gvBA==
+ bh=AZZfVLFqhh02LFaRnvls9012KzUrJg9ZyKOHDrQtdn4=;
+ b=EtOZyJT9iLtgJT6JjoaG2GldovytNCH7xkNaSDYVtfQazyTy3zqNayJfKb9me8ym0J
+ fAeGRB7rNEXUe3dnwS04W9/ArciVqxVu4Xz6QviRJQ9vkoyxsjYFLnlpXnN26lchEQtO
+ j7ZwE3NEfP9JwIC5DP35Ccu+HqORSzeX8PN9O+9199Bnfw2+D/bZDqYVnKlgbsbMe//c
+ hTJCwIfhnESFsZzJnZiLkhq1XHVqCZ17DqJqZOvRqbrez6AesRELUSTbx7/4JyhLyLjB
+ q+NpKLdr4TOF1poeGx0vkiFthzyIUE4i6wN7FvPygVvbUWBu8i1ygqwk+O/V9kUm0J2b
+ x+4g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWUB8awf5mTDiqbfggDm0RhDPQszLwOxKL/0ebPsLz0/BdxS5zYmEFD/yvmyXeI8JBwue5HvBE=@lists.denx.de
-X-Gm-Message-State: AOJu0YyQHpLPwHqCzR1iJMiObJlaChalb+Tp1nvejW5RajKI+VTmNEL4
- KdrEZoln86w1qelakIgeEgo+Els+/DlWaHouXzfNuVCORfvbUpPnh7DOFiRuqA3EKH0=
-X-Gm-Gg: ATEYQzw/PyRHMbF4eafl0l6g9jxsGHhrXIi4kDu9LCA+1ulEQICH1Q02Hetkx3tjGyz
- ZTqlHNB4BdIsRnXcX8aOWmMjkKy58VLnUbEQvRSIrlfTsX8CUzNgaIvx5oepjwl6Q6XXwxXYZOU
- 4p655aYDgwEIBHQ4FKV+ZsTwcuPA8+z/nsERadV96gWYxZhtVmBIJUHBrGvL9oEU97cX/2RRmN3
- qoNuTrtup6RTMrEjT0SlRcFWNymge70yMYPFRTKnde8oR85Z2LRHaszj4hLjNyUMMKozJ1tdnB7
- renuqMfFnDk7BQ7XssItyTJjDYdSC7uG9ypLiJa8ae8dWjOyqxWqupNWjWT0rrEt6CekLN1TESw
- QsADX64dfGVPR/VcOCFF/odDIylWBVdfsplBdfa4nq8uiP/WeDT7iDhyR1ZBONJMTSl1vFwhu2N
- sgaRUANxE77aVAP57LAFUXGCoqgOmGVxmIeuJbqks1o5kksKhsvvYOQ2k6zayGSwHnyQ==
-X-Received: by 2002:a05:6000:2489:b0:43b:43ae:8c2e with SMTP id
- ffacd0b85a97d-43b64289994mr23383292f8f.51.1774349978121; 
- Tue, 24 Mar 2026 03:59:38 -0700 (PDT)
+ AJvYcCXs4meAAosdlCmMKfyU0C3K97hRiN4xB/CVTK+9WE+Duf5C3pp846SFlWRY7CVlh+zCx1us1q8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxS/3c6YN/f6I8h3L6+XiM0fEQKyBqC5XNrriBT9AV480C9ZN4G
+ j1Lit175OD6uzePAHM5pyfYCmgOw/hw5yqRpDlC7Sx7lOmLv+B6hW3EQY45JYsJHvJ0=
+X-Gm-Gg: ATEYQzx7l/g9MPoDWbQnBe+nINo099PitqqIdRbOEhTUHxrXlQWtPLOpNNC8x0iAexo
+ su3mpKwwx5TQW+7Qfa0RyooPtcp+g+8jrZpWRZlHiNuUzip/mzs65nLpaZ/SIYzWhxL9vLmgfYt
+ kEzMUpjtYJXzIzEQH06LOL0sZnfqH6ensRrEuneLTuoRuPV/nL9G00NlKXGD/CUqrDeCJAEuOAD
+ 2LkI9tCnOqriJE1q7Pt45MiUV/97RbFQccAlMBcpy0OCFaASzZdKncwUty/dD7kC1oqogEWu6MT
+ rjpWo0ilXUvov4tcfmrEqR6lDccu6yjVZ/vbx4tMe1119MdM7eNEQ5Sl3U6J/jSvPYIaZJBVyfc
+ Et1a7LRmzCQNYW5Wu8Uu8q2l8AeReuem2OHYMj10eM63L8lDuYSTt5dEhvNS93JeVKFUxjiEQat
+ U3bQFoMgUD2aGoS7p5EvUYUyJzhacVsME3SKjZP59dNZeY3BnyOFQVKUfVkYzMHlmMHA==
+X-Received: by 2002:a5d:5f87:0:b0:439:ac6b:dd56 with SMTP id
+ ffacd0b85a97d-43b6427d710mr24360332f8f.53.1774349976703; 
+ Tue, 24 Mar 2026 03:59:36 -0700 (PDT)
 Received: from lion.localdomain (p5b29eb0d.dip0.t-ipconnect.de. [91.41.235.13])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b6470b243sm37810416f8f.26.2026.03.24.03.59.36
+ ffacd0b85a97d-43b6470b243sm37810416f8f.26.2026.03.24.03.59.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Mar 2026 03:59:37 -0700 (PDT)
+ Tue, 24 Mar 2026 03:59:36 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-To: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
- Gopinath Sekar <gopinath.sekar@oss.qualcomm.com>, 
- Lukasz Majewski <lukma@nabladev.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Shmuel Leib Melamud <smelamud@redhat.com>, 
- Stefan Roese <stefan.roese@mailbox.org>, Sumit Garg <sumit.garg@kernel.org>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Casey Connolly <casey.connolly@linaro.org>
-Cc: Sumit Garg <sumit.garg@oss.qualcomm.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, u-boot-qcom@groups.io, 
- u-boot@lists.denx.de
-In-Reply-To: <20260121003659.69305-1-casey.connolly@linaro.org>
-References: <20260121003659.69305-1-casey.connolly@linaro.org>
-Subject: Re: [PATCH] watchdog: qcom: stop watchdog by default
-Message-Id: <177434997680.3720457.10960566999240623555.b4-ty@linaro.org>
-Date: Tue, 24 Mar 2026 11:59:36 +0100
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
+ u-boot@lists.denx.de, Casey Connolly <casey.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Stephen Boyd <swboyd@chromium.org>
+In-Reply-To: <20260320-casey-qcom-rpmh-serial-fixes-v1-0-b81d05832eec@linaro.org>
+References: <20260320-casey-qcom-rpmh-serial-fixes-v1-0-b81d05832eec@linaro.org>
+Subject: Re: [PATCH 0/2] qcom: gracefully handle some errors better
+Message-Id: <177434997567.3720457.11847423430588003350.b4-ty@linaro.org>
+Date: Tue, 24 Mar 2026 11:59:35 +0100
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -113,20 +104,26 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Wed, 21 Jan 2026 01:36:51 +0100, Casey Connolly wrote:
-> Prevent the Qualcomm watchdog from autostarting and ensure it's stopped
-> when the driver probed. In some cases the watchdog is left running by
-> a previous bootloader stage. Disable autostart so it isn't left running
-> when we boot into the OS, this behaviour can be changed by enabling
-> autostart in the board defconfig.
+On Fri, 20 Mar 2026 16:45:39 +0100, Casey Connolly wrote:
+> Adjust the serial driver to not bail out if we can't find the clock,
+> this could happen pre-relocation if the clock driver isn't bound or if
+> there is no clock driver yet. In most cases this isn't an issue since
+> the clocks are left enabled by the previous bootloader stage.
 > 
+> Additionally adjust the rpmh driver to gracefully bail out for
+> non-active write requests, sleep/wake votes are meaningless in U-Boot
+> since we will always be in the active state. It's possible that the
+> caller may send an active rpmh write after the sleep request but might
+> not if we return an error, so let's play it safe.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] watchdog: qcom: stop watchdog by default
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/1cf505e51b49
+[1/2] serial: msm-geni: allow invalid clock
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/7f09aff39924
+[2/2] qcom: rpmh: don't error for SLEEP requests
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/4577a672ecea
 
 Best regards,
 -- 
