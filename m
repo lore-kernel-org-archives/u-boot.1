@@ -4,118 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24D11E9A756
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 09:51:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A19F6E9A755
+	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 09:54:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95EB380087;
-	Tue, 24 Mar 2026 10:51:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 327068352B;
+	Tue, 24 Mar 2026 10:54:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CSJZoW59";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="g0PJzAsN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0547380087; Tue, 24 Mar 2026 10:51:42 +0100 (CET)
-Received: from mail-yx1-xb12d.google.com (mail-yx1-xb12d.google.com
- [IPv6:2607:f8b0:4864:20::b12d])
+ id 8EF6E838BB; Tue, 24 Mar 2026 10:54:31 +0100 (CET)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2705880077
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 10:51:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 83B4082A9E
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 10:54:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12d.google.com with SMTP id
- 956f58d0204a3-64ad79df972so5627060d50.1
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 02:51:39 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774345898; cv=none;
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-79ab50ee951so11403137b3.2
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 02:54:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774346067; cv=none;
  d=google.com; s=arc-20240605;
- b=MTDusPF3FqFArXyE1ULdlwE1D3SFfMUm+5tFVGUJtHU307Q1Opk4XGk2bkdXwQGlUt
- yqb/nCPfwi75kkaNLSTZp+IjlXmBRn3K+RpvoEaQYTQoyCRyEk6D/lGfVkWvVPgNSu+1
- gFHZaKnhbE0LAP3s/e5mgd83GyTO/dhNeUCm2GYAJp4OoH5XPm44deulpJwUKKEcSNjs
- MGGeU211A2KfIvHIsTQSLH3SqNmmGaVBU3iSQoTiL/FAq75OkT87JHp9v/ITcKWwLAj/
- neciXUj7UtiF/GbQdtnoTnfWf890lAyfKaL4VDBs+8bHC23WqivvROx141T7w2ywYCWB
- t5gw==
+ b=B6CApEPpqxLN20W6P+8JCMVDU4sUO1SlYK+w3u9DIruSwwU/kDrGOaDk5GDm+DSD/H
+ 0P7tS77Xzhz2XDtiXLAJxdt1GDsc1DOR3IXDYgVMP5z88R2AywpWg65SNtajKzROHPiH
+ GvXWJamD4dyY/L1kaJX5uwifK9Md/BSikS+SoKUOF6PYLJPowSaalvcu8oQ683V1jnzZ
+ l/mDU17lejifH0nwSpYMMRL/wDhBO+tBpUmAEmOSxLTGt0VsNgvxP8p34TwHkKr6MTOh
+ w+Hhp9CHb0QZMzHVvnbYtxSsedFtJC6izFv2NxPApBf4TyP/Ba4HPtstJ/lBt0tv4nRC
+ O+eg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=FOq1le/ZjK5QXH87OwnbFgf8vpRzLS3iJiUcSKtPJ44=;
- fh=PHfh1F4dNVf/Z0An1v4suYIt/PW4tbVpeinhhA6xsC4=;
- b=hq2hSyTnMKNZr4P1FQGKNnu7Ju8rItNnw08yZn4dHahILW6b8colQgOnlIz3ThC5iP
- 2g+ncPLdGL74qwnQFAB4BOVXWapyvPwr+nmjHIS2PHXlZZtAMZ8l3AmazfI5EXxjeimL
- t8MPTDiuku+NZNnlBXaqR3ti4sgqauGXHlnWK4fDLpeCM44Q9Kyg6yrtawO5Hpo+S2Ql
- WRousxtJewk54IGOqGqUsBDEsBCsCUVka1ALRCZiD633CZfJYXtBp9v1nQp6x+1dlTRv
- AM6Q5GOH2EW0T29usCeVWfaHA5mj2F6NR4pTvYd7vFqRQooAKieGSg9je4S/UoVuqhwh
- AgAw==; darn=lists.denx.de
+ bh=8x9ZADBLt/28eMUwGU51AK1Ah3iVPEBweV0vUKUc9P4=;
+ fh=SYTXsRvjEju37iVQhRpP6statsP1sHRONuiMYZUtw7M=;
+ b=UU9VYkcI/3ZaQKXT7vBgymG3rGV04OWgj4UrxwAC5+IEnPHaqnFRcy3tXKtnWn9E67
+ 7abt9rJ3uo8mz3ZoHv6iCwyWynZu9DuoRrDwXmb3C5EmwtI5plvWjVLaD3QfsXc0Q8sW
+ Eq9/mmp3yZpFBPw0+5Mepv+szL9MhtcuUc6yOXoyl13SG2/+JVb4X7wN2R96RxJs18dy
+ b/Y83YQavnKV0WYD5X8T4N+ZQ+gconLtxXyHT+PkhNbmZHS3nrl/Kt86PX2JHDN9ZYq1
+ EjiiwOhHthCX5tvkb2TmWg99jSj5FjDsFuxtLQnkn15QCAcHNYPwA09dCxTSsr65n2xZ
+ nxKw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1774345898; x=1774950698; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1774346067; x=1774950867; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FOq1le/ZjK5QXH87OwnbFgf8vpRzLS3iJiUcSKtPJ44=;
- b=CSJZoW59j3/KN1Y9XT8g26SoSbMLw44qCOZ2NyCuelm7AHG7xUGBTgB+VEXXBF4WzE
- vu7bv3G5k720BiDc8ROTiWKcTXMa2ST+sE7ykgE4wBwsyt40WaNTieBKTvNe8OfK9hh0
- rDqb1npzoD1vQ8y8iwIBQQbayxrcYcHGoXWDuScLG5H1oPM3o8I87zbz8Vrjm7jUno8E
- LW5QoTDG4XLa3YKwH2q4kId3gMurEGT5FadAcgc7pUWPYZCbKaYWFhJXZsOyORwp7n+/
- EAUr2kUNjOPVHrjz1acssIDvZWcfvYQye3bOcUGN3TX3+AAr6eOwHf7z8SqSbMZxCt6M
- jdLA==
+ bh=8x9ZADBLt/28eMUwGU51AK1Ah3iVPEBweV0vUKUc9P4=;
+ b=g0PJzAsN0NxvvZ3KkxM6yQil3A0z2TRxD0nKdO295jrSoFCJN7cU2SftEwYum/Hmcf
+ jiEVGL6gOsR9vhfh+Ha9pBmmk+C5mZS4/gQ0t3sBkEMGXvS3Wt7YwYjq1eaH5ngGLYN7
+ 7jhB/CPvsIexVfhZyL4X7IoUuPWehWTKdWbUcpGE15N/40EKUg7mdjsmjTNm66GVzDCe
+ vsa8FEEFaIXBZ4JvbIIYLqnD6NAwAsFrKdP5RJGw4Imgmsufu1xY2z4WDamTy3afstxN
+ a6vDIur171ir8ECSqCCzF4xsyOnuN8SZA0D+mEbOqEmViN0y7tCCoBjdh+HupusQgI9D
+ Izow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774345898; x=1774950698;
+ d=1e100.net; s=20251104; t=1774346067; x=1774950867;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FOq1le/ZjK5QXH87OwnbFgf8vpRzLS3iJiUcSKtPJ44=;
- b=njLS3maDRMaT5IOrJ/lSsm/xPWgosP77yrIXzGdefzhMyT6+reOAcl4NkhRQkkWIz0
- Q9Gm1LbFE7DDA3KMi8SduOKP6Uip52MqyWbODf6i9b53q0Jc24Lx+siUn1OV/TNcd5xs
- CARvnL+OFTbo0lM99qqQb6wrAMG1qbi0YeUa1AoDrzT5taDc6yV1LCynNPBQBfoyfSJL
- ddxxoa83EarMnJvHpOS+pDlAr7YVf91+zWDJxECy7Fbj9WPAoLTGVHF8qWMOWZRDbioX
- g8l7zzpuEHGS8L+C2uo4lnSmcDieE61inTK6ACtWpaLC8Dh0Xjta9EX06k3adzk8lOay
- yjOA==
+ bh=8x9ZADBLt/28eMUwGU51AK1Ah3iVPEBweV0vUKUc9P4=;
+ b=YP5pNeDJDEGTfSRUlH2hqtIxNDWu0VMt8xCmXaarxWce70VvP7wEAb5MEYBXwr2SrH
+ UfTU0PMFaw3zQFne/JO72gLP6Gr53WDMgPaMEzcl4upXXYrHoXLTeI7zAbSRFZPpZSvd
+ yELl876AFmvLPmwWYF3fnCdzTnq9eYLqmTQhwDZQBjfV6uqS24mICCh/n4hO0Aptr7up
+ KfkMaImxwxW5g0Eh2020U2jvD62Zzxbbk/T8JbsrM/314mAY/s1wx+n11PVy31kCRwhj
+ 0bER4HcqdV33Luyg5rfNAUZgqogC7TMwFcBKziiFa+VGYH6fqlmM+8eIC4KiQP46RsaH
+ fTVQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXCGgPDgR75Vpe8AIO1x1vIowk16ztiL1e2Zuy7nMKYSAYnQn2lE9I3L6PaOibPi6OsX2pOEYw=@lists.denx.de
-X-Gm-Message-State: AOJu0YywZPAquBzMJZMgCjAJw+ZSX6KCjgIvpv3emeGio2tDmmpp5Z12
- 9ZcLFf7e8B2ChM/RCeSRYd0MgzeEy+ZtH80Wdp/sIXHFTRnEHpCjB3rU5sfnLmXTNQ9lJoMWBVM
- w9Zb1p506Fa70nEhiyBynsShhRof6NfioHnfD/strUQ==
-X-Gm-Gg: ATEYQzwfWtbunlM47VPBBIpmgq+NoChp3f0iBJpUNMVRnOOgvrcda04uc45yLpD1snn
- zVhUd4z3ZniI92mNoH5GE+WtM/wbrv1vD5T6c/VIT3yv7MPsfwUk5mrkiI0kB3KmYzQrd0sDraO
- +nVk+G5fpcLnLy5lsfQb2rsWZ1Quj02n83qyOACyvY5kEmqWnisLJ9vD/8f1TPKkuELY6LBwgSq
- qcIpaxJruXDLWJdef9YHYB1erGyvnW6qbUy5W02EpdbuR3h4YLOYUE6eryWS3jyBDu8AQwF/Qjj
- OXSIFfW8WeiNo+xRaq6kodjTOhI3S5oB2HWYM3/aUUwB17XSEswfj2R7lH4ozUsyt9B/Zog4zu6
- X1nWlas7LAFztjfrWeDksRQiWIyFRQvWsJOkLJ9yjgpzVG+4Lh8i86B2gbKzqAL1xz7Xhu2wbtU
- 7igMmmyHJrfs91UT6eoVvNAccilFQAPvEiEWKVJ+KvmPHaL4DsNys/zac+5FYTnXWqb59cp+24x
- 4v7XQF9s0LI+dJT0PZ0yQk/wf48+VJti+n+kUl33LL5HqUIyM4/xRFujJqVlLvnF4Mnm0+OCV0h
- hbRsTVkpQjxxKlUQ9WzOUxDXuexi4j7h9PM8M30TX3h3AwI7xlguXns=
-X-Received: by 2002:a05:690c:1d:b0:79a:38a2:d8ca with SMTP id
- 00721157ae682-79a90af1076mr166511707b3.23.1774345897932; Tue, 24 Mar 2026
- 02:51:37 -0700 (PDT)
+ AJvYcCUsMOvD4q1MLfX3vAwOBL3erYd+y7s5mU2L1iIy0hlpDqo0mErMAdg8vbC241G4Z19LqSckvWk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxlCyvc2kcCqU1IcR/p847PDqqAnpbmySND+TVYkh3zyppIyqro
+ XagRkmsROUjuLJXygXQ9BrAu1nzMfEKHj45OUhwi5vknJLMd8WmjqnciFCm0uEhXwkLEoxGN/v6
+ Q4BhugFpoRthkiXggcqQkcx2Tctxi7aJX5EiILgltmw==
+X-Gm-Gg: ATEYQzzjYpoTiwFeq0UvnMZCdsis7uP24GHVT/m5o9/qJUwpI/HJcLrSBsB1/INxlYg
+ zlKLaohuWca8KJn8dCeHh2SbLRqwfzeDrKWUAK3TFt3MN2MlISzLK9zId3b7xxiMbwEeqbTr5jm
+ x15/1CMGVNKRUSeO6di7UeYus8ggTzplv00j19ThioXw+V4cvNirtBifs5cxrYYn12iGC7y//T/
+ RzDKFTUWdyUXJ9YEL9vX8AcwYuQ56ZBfF6l3rrnaGdAkF5AAFNmbmvMLTBnI9TSBPSUpNkei+Ls
+ jQ7vn+33H3eWotebP9R+akbGBABl/dP1li0cUMOkG2S9a4wftQ4J1R5rMaHQw7FYJWshlXLpPIA
+ SpdwC/6HFZ17K/GK56Ftenl3dml9LtYaQtvdjLa2rOJbID0sRu0YcPTHXEeCNfP7Z9Xi8S3uKEW
+ dWN7PqozoWqRFiskjIh0r/w7S4iSs+72sykFMGMgnyyITSWm22QrZRyFhGPiqfERaX1oqJ/gV+B
+ ppGu+EevyCydSfuzEwDnMNbByQSaxMS3tLjbsX0fW/GjHt93aByo8VlxjbqFPv49Hr1Vlo2Dwvl
+ k493GtjzOKbiPp6IClgZV22esqXode92UXabWnI+NbPwizgjKiSObfg=
+X-Received: by 2002:a05:690c:6201:b0:79a:668a:b6d9 with SMTP id
+ 00721157ae682-79a90c510b7mr156168157b3.60.1774346067270; Tue, 24 Mar 2026
+ 02:54:27 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260127234856.1503030-1-marek.vasut+renesas@mailbox.org>
- <177343529761.1131472.9417054395876652663.b4-ty@konsulko.com>
- <DH9MF45X89KK.1CV4WUVTCTUO5@garyguo.net>
- <1e74f277-dedf-4fa1-810d-63f3d517a8a0@mailbox.org>
- <DH9N233GTVKM.2XIG8EETTUQAY@garyguo.net>
- <9bc9a2d3-c1e8-43d5-b03a-c56850c715f3@mailbox.org>
- <87mrzzbg5k.fsf@bloch.sibelius.xs4all.nl>
- <DHABV5ZOLJOQ.1H3Q6TEFCTBET@garyguo.net>
- <f2e7af73-569a-49fd-95ea-011c37d21cf1@mailbox.org>
- <DHAD1Y4YFJGF.223KKI69PZKC0@garyguo.net>
-In-Reply-To: <DHAD1Y4YFJGF.223KKI69PZKC0@garyguo.net>
+ <A2BF7446-8270-486A-9239-8CBB2C52AC17@gmx.de>
+ <462cf22d-10d4-4c59-9690-29d9584e7efb@mailbox.org>
+ <875x8l69l3.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <875x8l69l3.fsf@bloch.sibelius.xs4all.nl>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 24 Mar 2026 11:51:01 +0200
-X-Gm-Features: AaiRm52Eu5vEMPMN7CUmpBF0EMaiYpLyjdbnrgX7GQYUbCPRmz_feejd9xn9VTQ
-Message-ID: <CAC_iWjKOi57Wm5TaRviV2KEUhXoQGLr0WUgchPywt6qPxLTnvg@mail.gmail.com>
+Date: Tue, 24 Mar 2026 11:53:51 +0200
+X-Gm-Features: AaiRm52ZMPXH0VJEzWCV3Kw47tZ203VVc8Nuz_XS84uF0M7nUN65GZX0m0DIKhI
+Message-ID: <CAC_iWjK2ARXUS2cpYLVHQx7Jxn6VYnon3ZU0V_SCJxH_hjtmkw@mail.gmail.com>
 Subject: Re: [PATCH] lmb: Reinstate access to memory above ram_top
-To: Gary Guo <gary@garyguo.net>
-Cc: Marek Vasut <marek.vasut@mailbox.org>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, trini@konsulko.com, 
- u-boot@lists.denx.de, mbrugger@suse.com, pbrobinson@gmail.com, 
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: Marek Vasut <marek.vasut@mailbox.org>, xypron.glpk@gmx.de,
+ u-boot@lists.denx.de, 
  yuya.hamamachi.sx@renesas.com, andrew.goodbody@linaro.org, 
- casey.connolly@linaro.org, xypron.glpk@gmx.de, 
- holger.brunck@hitachienergy.com, jonas@kwiboo.se, kettenis@openbsd.org, 
- semen.protsenko@linaro.org, sughosh.ganu@arm.com, 
- u-boot-bounces@lists.denx.de
+ casey.connolly@linaro.org, holger.brunck@hitachienergy.com, jonas@kwiboo.se, 
+ kettenis@openbsd.org, semen.protsenko@linaro.org, sughosh.ganu@linaro.org, 
+ trini@konsulko.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -133,75 +125,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 23 Mar 2026 at 20:07, Gary Guo <gary@garyguo.net> wrote:
+Hi Mark
+
+On Wed, 28 Jan 2026 at 17:27, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
 >
-> On Mon Mar 23, 2026 at 5:26 PM GMT, Marek Vasut wrote:
-> > On 3/23/26 6:11 PM, Gary Guo wrote:
-> >> On Sun Mar 22, 2026 at 11:25 PM GMT, Mark Kettenis wrote:
-> >>>> Does something like this make the issue go away ?
-> >>>>
-> >>>> "
-> >>>> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> >>>> index b77c2f980cc..44eccc0cf35 100644
-> >>>> --- a/lib/efi_loader/efi_memory.c
-> >>>> +++ b/lib/efi_loader/efi_memory.c
-> >>>> @@ -475,8 +475,10 @@ efi_status_t efi_allocate_pages(enum
-> >>>> efi_allocate_type type,
-> >>>>           flags = LMB_NOOVERWRITE | LMB_NONOTIFY;
-> >>>>           switch (type) {
-> >>>>           case EFI_ALLOCATE_ANY_PAGES:
-> >>>> +               addr = map_to_sysmem((void *)(uintptr_t)0xffff0000);
-> >>>> +
-> >>>>                   /* Any page */
-> >>>> -               err = lmb_alloc_mem(LMB_MEM_ALLOC_ANY, EFI_PAGE_SIZE, &addr,
-> >>>> +               err = lmb_alloc_mem(LMB_MEM_ALLOC_MAX, EFI_PAGE_SIZE, &addr,
-> >>>>                                       len, flags);
-> >>>>                   if (err)
-> >>>>                           return EFI_OUT_OF_RESOURCES;
-> >>>> "
-> >>>>
-> >>>> If so, then maybe we need a temporary config option which limits the
-> >>>> EFI_ALLOCATE_ANY_PAGES below 4 GiB on hardware that has DMA limitations.
-> >>>
-> >>> Note that some arm64 systems (e.g. Apple Silicon) have *no* memory
-> >>> below 4 GiB.  So that change must indeed be behind a config option and
-> >>> care must be taken on what systems to enabled it.
-> >>
-> >> Perhaps a good short-term fix it to use gd->ram_top here rather than hardcoding
-> >> 4 GiB. This way it should work on all systems without a config option.
-> > Looking at my notes from last DMA32 investigation, this may indeed do
-> > the trick in the meantime. But it would be really good to have this
-> > temporary workaround guarded by some Kconfig symbol, so it can be fixed
-> > up once the DMA32 allocator is available.
+> > Date: Wed, 28 Jan 2026 12:43:28 +0100
+> > From: Marek Vasut <marek.vasut@mailbox.org>
+>
+> Hi Marek,
+>
+> > On 1/28/26 5:41 AM, Heinrich Schuchardt wrote:
+> > > Am 28. Januar 2026 00:48:40 MEZ schrieb Marek Vasut <marek.vasut+renesas@mailbox.org>:
+> > >> Revert commit eb052cbb896f ("lmb: add and reserve memory above ram_top")
+> > >> and commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from
+> > >> same bank"). These are based on incorrect premise of the first commit, that
+> > >> "U-Boot does not use memory above ram_top". While U-Boot itself indeed does
+> > >> not and should not use memory above ram_top, user can perfectly well use
+> > >> that memory from the U-Boot shell, for example to load content in there.
+> > >>
+> > >> Currently, attempt to use that memory to load large image using TFTP ends
+> > >> with "TFTP error: trying to overwrite reserved memory...". With this change
+> > >> in place, the memory can be used again.
+> > >
+> > > IIRC there are drivers that have issues with memory above 4 GiB and boards that artificially set ram_top to 4 GiB to work around these issues.
 > >
-> > Does the gd->ram_top fix the RPi5 too ?
+> > I thought I had all of those solved, but apparently not, please read on.
+> >
+> > > We need to carefully consider why the reverted patch was introduced.
+> >
+> > I didn't find much on either commit. I believe the premise on which the
+> > original patch was introduced is wrong, cf this commit message. We
+> > should allow U-Boot to access the memory above ram_top, we should not
+> > allow U-Boot to use it for its data structures because of the possible
+> > 32bit DMA limitations.
 >
-> Yes, I can boot my RPi5 with the following diff, which makes sense as it has
-> ram_top of 0x3fc00000. Testing on devices with ram_top > 4 GiB would be needed
-> to know if this is a proper fix.
+> What do you want to do with that memory in U-Boot?  You can't really
+> use it to load a kernel into if there is a 32-bit DMA limitations in,
+> for example, your MMC controller...
 >
-> Best,
-> Gary
+> Are there boards that don't have enough memory below the 4GB address
+> boundary?
 >
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index b77c2f980cc0..76ae89e31f47 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -475,8 +475,10 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
->         flags = LMB_NOOVERWRITE | LMB_NONOTIFY;
->         switch (type) {
->         case EFI_ALLOCATE_ANY_PAGES:
-> +               addr = map_to_sysmem((void *)gd->ram_top);
-> +
->                 /* Any page */
-> -               err = lmb_alloc_mem(LMB_MEM_ALLOC_ANY, EFI_PAGE_SIZE, &addr,
-> +               err = lmb_alloc_mem(LMB_MEM_ALLOC_MAX, EFI_PAGE_SIZE, &addr,
->                                     len, flags);
+> > > Why does your board use a 4GiB ram_top and not place ram_top at the physical top?
+> > Originally, I thought it was only a remnant from the past which kept
+> > U-Boot and all its data structures, stack, heap in the first DRAM bank
+> > in 32bit space, so I tried to remove that. It turns out there are still
+> > a couple of problems that have to be solved to make it possible to
+> > relocate U-Boot fully into the 64bit space.
+> >
+> > The first one is the standard parsing of DRAM size / ram_top / DRAM
+> > banks order in common/board_f.c , which probably hides a lot of issues
+> > on various boards, pretty much what you wrote above. In short,
+> > dram_init() only sets up gd->ram_base and gd->ram_size , which is often
+> > the first continuous DRAM bank which is in 32bit space. The follow up
+> > setup_dest_addr() uses that information to set up U-Boot relocation
+> > address at the end of that first continuous bank. And then
+> > dram_init_banksize() parses the rest of the DRAM banks into gd->bd
+> > (gd->bd is set up after setup_dest_addr() is called, in reserve_board()).
+> >
+> > This above is fixable and I already have some clean up patches for that,
+> > which I implemented while writing this email.
+> >
+> > But then I found out, that the ravb ethernet driver also has 32bit
+> > limited DMA, which breaks if I relocate U-Boot to the 64bit range. It
+> > worked thus far, because U-Boot was in 32bit space, so were mallocated
+> > DMA descriptors, so was the net_pkt_buf[] array (which is in .data
+> > section). I didn't find any other breakage thus far.
+>
+> Unfortunately hardware with 32-bit DMA constraints is very common.
+> There are device trees with dma-ranges properties that imply DMA
+> constraints.  That is mostly about restrictions of busses that have a
+> limited number of address lines so it certainly doesn't cover
+> everything.  My list of additonal SoCs with restrictions in OpenBSD has
+> the Raspberry Pi 4 and Rockchip RK356x and RK3588 on it.
+>
+> > Which means, before we can really start switching boards to relocate to
+> > 64bit space, we need to find all these remaining 32bit limitation sites
+> > and fix them first. And to do that, we would need some way to force
+> > allocation from 32bit space for drivers which need that ... do we
+> > already have such a thing ? I couldn't find anything.
+>
+> We have bounce buffers in the EFI loader.  There is a more genric
+> bounce buffer implementation in U-Boot as well, but that is only used
+> to solve DMA cache coherency issues.  But this suggests that solving
+> things in generic code instead of drivers might be feasable (at the
+> price of extra memery copying).
+>
+> That said, is there really a benefit in giving U-Boot more memory on
+> systems that typically have 2GB or more below the 4GB address
+> boundary?
 
-When you boot to linux, what does the memory map say ? Can you try
-booting with efi=debug and paste the dmg output?
+The only benefit I can see is loading live images or linux distros
+that are pretty fat nowadays. It's worth noting that we can load live
+images and boot with the recent pmem changes we added a few months
+ago.
 
-Thanks
+Cheers
 /Ilias
->                 if (err)
->                         return EFI_OUT_OF_RESOURCES;
