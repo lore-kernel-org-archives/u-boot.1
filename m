@@ -4,67 +4,153 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DEDEF532DD
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 05:42:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88994F532DD
+	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 05:52:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF99B8063E;
-	Tue, 24 Mar 2026 06:42:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id DE1938366F;
+	Tue, 24 Mar 2026 06:52:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="cRGB1LZm";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="ByulWWWO";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YhhXt+Bp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB8F08352B; Tue, 24 Mar 2026 06:42:50 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 04CEE8352B; Tue, 24 Mar 2026 06:52:48 +0100 (CET)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F40D805D7
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 06:42:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 2C425600C4;
- Tue, 24 Mar 2026 05:42:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D5A26C2BC87;
- Tue, 24 Mar 2026 05:42:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1774330966;
- bh=EQx2Omxj5fnsvDl7BenQDpMUqB2RxZgULO/J/nxHxl4=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=cRGB1LZmQ39ac5qIVgtYwPolIM1jjhTyu9PhzY8q3rEQOHMpoTTKIdC1EXfjjMDih
- YODyBScFynzMCIL3RyiMQ7KXc78KgjFT9/UriaPpK7l6LQfVOou9HRCsJD9HkxTrZ/
- EtLWJTNKAvWqCUm/znQ4avI0y6Ttc84PBTE7bOBmfQDkoTJc7Bz0k4g38eVHkW3oQD
- ZC1U0X/KPVBqbeMod82Q9zny4M8JrMkqDt0mlkbTvoji53i6m10uXog8hxLdDRvaH1
- 4m4p2+r5Go4ZVaOGrzCyzsDX+uMRBLs01E8NYxGBkeAaGIeeaZLrt/XbOgMD794nF/
- 7joyexBdlIcrA==
-Date: Tue, 24 Mar 2026 11:12:37 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Luca Weiss <luca.weiss@fairphone.com>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Danila Tikhonov <danila@jiaxyga.com>,
- David Wronek <david.wronek@mainlining.org>,
- Alexey Minnekhanov <alexeymin@postmarketos.org>,
- Lukasz Majewski <lukma@denx.de>, Aelin Reidel <aelin@mainlining.org>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- Rui Miguel Silva <rui.silva@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Sam Day <me@samcday.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH v2 2/7] clk/qcom: Add Milos clock driver
-Message-ID: <acIkTWYekJDJ_rda@sumit-xelite>
-References: <20260318-milos-bringup-v2-0-650b91dd75d8@fairphone.com>
- <20260318-milos-bringup-v2-2-650b91dd75d8@fairphone.com>
+ by phobos.denx.de (Postfix) with ESMTPS id A9D79805D7
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 06:52:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 62O4DVds943506
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 05:52:44 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=Cd+czKgb4tiGrpdizKLZoJ
+ a58fEippXcZ1AksYB9wZg=; b=ByulWWWOLblQ8cRg4DzdrF/4JjKeHEe9QIu290
+ s9k/StM0CCKTe78RnLKlxnK6RXffkR9uVESEkbryZOnZA6RC2VSVSzxxV09EB9L0
+ hzAkaynVVRLNdY70Mqkx5uCNwBOeyQeiHZ/4/T0IhgenZC2Y80GCJIr9DK7QMtsG
+ YZxk4+kIHwFXrk9VACtSWbDcDk3j7wPoLUSLbvhACni69a56dka3uMN8jsfnxP8L
+ 2Fq4OHgn7gUbTC0mWkitioSxx0KTuNHHrK+dd6/BQmOHXDaMajW0Rg2/U5I4snA1
+ UojpVxN5yzS4/o5IMu2lHTGY7NTuxL0tWF60aui85qs7+ecA==
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
+ [209.85.210.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4d34vkudw4-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 05:52:44 +0000 (GMT)
+Received: by mail-pf1-f198.google.com with SMTP id
+ d2e1a72fcca58-829ba0e63e8so3001012b3a.2
+ for <u-boot@lists.denx.de>; Mon, 23 Mar 2026 22:52:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1774331563; x=1774936363; darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Cd+czKgb4tiGrpdizKLZoJa58fEippXcZ1AksYB9wZg=;
+ b=YhhXt+BpvHnVog6fSnXW9uwiOzyk+/AfCo9Zzi7pLfORfAlPLwwu1/svX/oPBKY13Y
+ VznPEaopJ12vYRiKd4JEWVWnVrHjNpsXISGbfYvD7DlutE2QSICekizh+vlNcJ6q/WFD
+ JpGBklq+kSpqbEBP1lmgGiKA3Ln0vSudR1uY0uZbHBVX3CyWTy64QIAKL+6b4ce1QBGJ
+ vJqczGS+GaPDkyfWSl8aXKrnsZ02Olb4yX3iOMI8l2Ny2KHw4Yhjnkp3TyvETL7itfHp
+ DLrTf1ZRR5Oc5QT1t+yUlnQLIXjDzRKLJ9Wl32SWf1YZvUPLZFfEPWZb63cVRatOYr2b
+ 9A9w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774331563; x=1774936363;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Cd+czKgb4tiGrpdizKLZoJa58fEippXcZ1AksYB9wZg=;
+ b=HUV9uHu2gvdr5BKUpr47dn1aLlR1shOcznaOTo2klt+40rkbysopTAed8PBvV6sT4c
+ TRFfUoMSnMOMRLLuREhFBoB/Toj8Joj5HIt5s4HbnmfhKkqehcOizlth9XyPSHPm5nba
+ QtC9ngKiAkAVUJE2KE5HKCB33K8BV0PjfOBartMhB0UeRvib0EsiaNCHqmW4gMKPpOvo
+ SwfQOMd3RChRuBy0tGs5uLWu6VmEneUcG2Ro9x1uYy/99QB8pYHf/asU16QStf3R/aQb
+ VERB+Kf+kXG8r0VSw6J7cWrzBnaN1bO3az+zpKdv0m+MGsre31TtOm9Kf1AqKCFZHJt4
+ sXLw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXj9q4YPao+0u6jwhfaq7WQDmGFQtQCUtHi3e//JIrfgFZwNB5a8GGtWF9udYaoM7qGzbPcDRI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxzkqOP/fDipqtkuvDINBQjoJ1z5IT5XIaN+XAJVImyAbVLyTV5
+ ogQW7ldlUjkRCTEtqoSCI9XBJctr9lqFwEgqvqSWhniXPbaCLSYrnXRovBFsnacuvl9u9iknMF0
+ Se3DER9pBjbvKCbkNXCyCHOwh9CqEY6jxuizktdOTXr9NIFVNvBqE/uOu
+X-Gm-Gg: ATEYQzzYZ7mHPkvTUpO1Ee+0VSu0S3f+/53otHC8VArlsJqlSkhzA26ubXT6wtO2PqA
+ CVc7mDdCVXaf3FGSFs+hbsaavDT1cNOI7uNpcFy92cFh5owamU/cQQLUqrvQe0+rHhyyCS+sbMM
+ 6QLW4fJc4PaaWjMlIxi452ThfcuFaAiq6OPZoFyzSyfuheZo55vXwxchPDwzozEYoT+4uV2vJkS
+ guIHezsEg3DBqcF66cMq73T94vampsHy9zVu3KaErhK9nfaAN27CXEJgk9E7vLY7QhOcOSEaqcn
+ NCf4w75WOCqWp9mFaZzOuLsGDiub4haPJT036QCpMnoX/PaCVPmAUMSToxcJckjcXJQi+JjZByJ
+ GNN9HYZos1yQjVEqZzAc2w5sK9IIgDlYNjaq6ZTzvec8/3Lf9ztE9Uj6ynUwOFC4cPdz0S4ZM0+
+ sL7X+syU08L6kI1+YrTXfywOwl9Iaf3eZRs9b4D23KLz0CO/h4bQ==
+X-Received: by 2002:a05:6a00:1da2:b0:82a:64b1:bb6e with SMTP id
+ d2e1a72fcca58-82a8c30283fmr10889703b3a.35.1774331562908; 
+ Mon, 23 Mar 2026 22:52:42 -0700 (PDT)
+X-Received: by 2002:a05:6a00:1da2:b0:82a:64b1:bb6e with SMTP id
+ d2e1a72fcca58-82a8c30283fmr10889673b3a.35.1774331562389; 
+ Mon, 23 Mar 2026 22:52:42 -0700 (PDT)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-82c212ac8a2sm12874783b3a.17.2026.03.23.22.52.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 23 Mar 2026 22:52:41 -0700 (PDT)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Subject: [PATCH 0/3] Enable eMMC and SD card support for QCS615
+Date: Tue, 24 Mar 2026 11:22:33 +0530
+Message-Id: <20260324-emmc_sd-v1-0-883a45538b6e@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260318-milos-bringup-v2-2-650b91dd75d8@fairphone.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAKEmwmkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDYyMT3dTc3OT44hRdCyPLlJQUSwNzUwNjJaDqgqLUtMwKsEnRsbW1AJ9
+ OEypZAAAA
+X-Change-ID: 20260324-emmc_sd-829ddd907503
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Stephan Gerhold <stephan.gerhold@linaro.org>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
+ Simon Glass <sjg@chromium.org>, Jean-Jacques Hiblot <jjhiblot@ti.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1774331557; l=946;
+ i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
+ bh=hAlkpWq+oo53uLjmGH7HTfPPDHCRXh9AA9wA3lCz+cs=;
+ b=e+rKL5OU6OLjiOqIQvGqn6TV4utKpt1DhVGENdSYU5ASONwYB4uPYEF4qhUeauTqBe0a7aVgf
+ fj5KRS0ljHOD1pJaUMxdhDEX4B5SZz0GdlYBw4X7pqOpYTxxFKU9sm2
+X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
+ pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzI0MDA0NiBTYWx0ZWRfXxcHg/lcBDe35
+ 1dVtBz+xnSM8sSM1K3g0jxIw0E1KowFpvunvz1bpEcVUxHOA2pdpvWZCN+hM1xQi6cGb5WYy4mZ
+ ZKBsVEUgA2Y9yGvhrabXVrPhi/ZVPnip5BUEfGgAWVi26CPqAEqB/oB3mxdZUPgUQAByd6CdDXp
+ WmV7Dn8EO4rcw8D+4fiQ0gFDjRXn3SJscaDzTSWSicMkUPjjhVXLn6QzEnrz5Y7u0+u1NVKoSLk
+ NObIeSZNqYOfDdKT2nQBdF/FPeOnnvGdsl5JWwtgaIfTcGMTe3kfJ+DMktQfApke4cKSF968+95
+ j9eodhZSRjnTwZKUdbNzrfC0VpaCO3DO1w3Tyda5gtzM5KWzhCcz4DhmfkxZI3uKbTmNy3/3E6r
+ 3Iy89cFvSXIoyIOhFlm52g/jXwmg3aQyR31OCorotf5vrsf1RepKwZT/GiatVrNdecEcve8Y/6M
+ K6Y9Ly5rmJPRwNkKm+g==
+X-Authority-Analysis: v=2.4 cv=eMoeTXp1 c=1 sm=1 tr=0 ts=69c226ac cx=c_pps
+ a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=EUspDBNiAAAA:8 a=X5k_lUzB0La9wDsTO34A:9 a=QEXdDO2ut3YA:10 a=zgiPjhLxNE0A:10
+ a=ZXulRonScM0A:10 a=IoOABgeZipijB_acs4fv:22
+X-Proofpoint-GUID: 31aaWhmbAk_zm99lAwkzBEMcI5ZigUuk
+X-Proofpoint-ORIG-GUID: 31aaWhmbAk_zm99lAwkzBEMcI5ZigUuk
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-03-24_01,2026-03-23_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 suspectscore=0 adultscore=0 lowpriorityscore=0 impostorscore=0
+ bulkscore=0 phishscore=0 spamscore=0 clxscore=1015 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603240046
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,258 +167,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Mar 18, 2026 at 01:46:28PM +0100, Luca Weiss wrote:
-> Add Clock driver for the GCC block found in the Milos SoC.
-> 
-> The qcom-snps-eusb2-hsphy driver requires the TCXO frequency ("ref"
-> clock), so we need to pass that as well.
-> 
-> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
-> ---
->  drivers/clk/qcom/Kconfig       |   8 ++
->  drivers/clk/qcom/Makefile      |   1 +
->  drivers/clk/qcom/clock-milos.c | 196 +++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 205 insertions(+)
->
+This series enables eMMC and SD card support on the QCS615 platform
+and includes general improvements for MMC device handling and FAT
+filesystem operations.
 
-Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+---
+Balaji Selvanathan (3):
+      clk: qcom: qcs615: Add SDCC1 and SDCC2 clock support
+      drivers: mmc: uclass: Set removable flag based on device tree property
+      fs: fat: Limit transfer size to prevent SDHCI controller timeout
 
--Sumit
+ drivers/clk/qcom/clock-qcom.h   |  2 ++
+ drivers/clk/qcom/clock-qcs615.c | 46 ++++++++++++++++++++++++++++++++++++++++-
+ drivers/mmc/mmc-uclass.c        |  5 +++++
+ fs/fat/fat.c                    | 29 ++++++++++++++++++--------
+ 4 files changed, 72 insertions(+), 10 deletions(-)
+---
+base-commit: 5a08f1a98c85f35addfc7e6efb5cb06070bb6499
+change-id: 20260324-emmc_sd-829ddd907503
 
-> diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
-> index 8504ed5d656..0a2ce55aaa2 100644
-> --- a/drivers/clk/qcom/Kconfig
-> +++ b/drivers/clk/qcom/Kconfig
-> @@ -47,6 +47,14 @@ config CLK_QCOM_IPQ9574
->  	  on the Snapdragon IPQ9574 SoC. This driver supports the clocks
->  	  and resets exposed by the GCC hardware block.
->  
-> +config CLK_QCOM_MILOS
-> +	bool "Qualcomm Milos GCC"
-> +	select CLK_QCOM
-> +	help
-> +	  Say Y here to enable support for the Global Clock Controller
-> +	  on the Snapdragon Milos SoC. This driver supports the clocks
-> +	  and resets exposed by the GCC hardware block.
-> +
->  config CLK_QCOM_QCM2290
->  	bool "Qualcomm QCM2290 GCC"
->  	select CLK_QCOM
-> diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
-> index 82a5b166196..b96d61b603e 100644
-> --- a/drivers/clk/qcom/Makefile
-> +++ b/drivers/clk/qcom/Makefile
-> @@ -9,6 +9,7 @@ obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
->  obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
->  obj-$(CONFIG_CLK_QCOM_IPQ5424) += clock-ipq5424.o
->  obj-$(CONFIG_CLK_QCOM_IPQ9574) += clock-ipq9574.o
-> +obj-$(CONFIG_CLK_QCOM_MILOS) += clock-milos.o
->  obj-$(CONFIG_CLK_QCOM_QCM2290) += clock-qcm2290.o
->  obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
->  obj-$(CONFIG_CLK_QCOM_QCS8300) += clock-qcs8300.o
-> diff --git a/drivers/clk/qcom/clock-milos.c b/drivers/clk/qcom/clock-milos.c
-> new file mode 100644
-> index 00000000000..afe59108559
-> --- /dev/null
-> +++ b/drivers/clk/qcom/clock-milos.c
-> @@ -0,0 +1,196 @@
-> +// SPDX-License-Identifier: BSD-3-Clause
-> +/*
-> + * Clock drivers for Qualcomm Milos
-> + *
-> + * (C) Copyright 2024 Linaro Ltd.
-> + * (C) Copyright 2026 Luca Weiss <luca.weiss@fairphone.com>
-> + */
-> +
-> +#include <clk-uclass.h>
-> +#include <dm.h>
-> +#include <linux/delay.h>
-> +#include <errno.h>
-> +#include <asm/io.h>
-> +#include <linux/bug.h>
-> +#include <linux/bitops.h>
-> +#include <dt-bindings/clock/qcom,milos-gcc.h>
-> +#include <dt-bindings/clock/qcom,rpmh.h>
-> +
-> +#include "clock-qcom.h"
-> +
-> +/* On-board TCXO, TOFIX get from DT */
-> +#define TCXO_RATE	76800000
-> +
-> +/* bi_tcxo_div4 divided after RPMh output */
-> +#define TCXO_DIV4_RATE	(TCXO_RATE / 4)
-> +
-> +static const struct freq_tbl ftbl_gcc_qupv3_wrap0_s3_clk_src[] = {
-> +	F(7372800, CFG_CLK_SRC_GPLL0_EVEN, 1, 384, 15625),
-> +	F(14745600, CFG_CLK_SRC_GPLL0_EVEN, 1, 768, 15625),
-> +	F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
-> +	F(29491200, CFG_CLK_SRC_GPLL0_EVEN, 1, 1536, 15625),
-> +	F(32000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 8, 75),
-> +	F(48000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 25),
-> +	F(51200000, CFG_CLK_SRC_GPLL0_EVEN, 1, 64, 375),
-> +	F(64000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 16, 75),
-> +	F(75000000, CFG_CLK_SRC_GPLL0_EVEN, 4, 0, 0),
-> +	F(80000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 15),
-> +	F(96000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 8, 25),
-> +	F(100000000, CFG_CLK_SRC_GPLL0, 6, 0, 0),
-> +	{ }
-> +};
-> +
-> +static const struct freq_tbl ftbl_gcc_sdcc2_apps_clk_src[] = {
-> +	F(400000, CFG_CLK_SRC_CXO, 12, 1, 4),
-> +	F(25000000, CFG_CLK_SRC_GPLL0_EVEN, 12, 0, 0),
-> +	F(37500000, CFG_CLK_SRC_GPLL0_EVEN, 8, 0, 0),
-> +	F(50000000, CFG_CLK_SRC_GPLL0_EVEN, 6, 0, 0),
-> +	F(100000000, CFG_CLK_SRC_GPLL0_EVEN, 3, 0, 0),
-> +	/* TOFIX F(202000000, CFG_CLK_SRC_GPLL9, 4, 0, 0), */
-> +	{ }
-> +};
-> +
-> +static const struct freq_tbl ftbl_gcc_usb30_prim_master_clk_src[] = {
-> +	F(66666667, CFG_CLK_SRC_GPLL0_EVEN, 4.5, 0, 0),
-> +	F(133333333, CFG_CLK_SRC_GPLL0, 4.5, 0, 0),
-> +	F(200000000, CFG_CLK_SRC_GPLL0, 3, 0, 0),
-> +	F(240000000, CFG_CLK_SRC_GPLL0, 2.5, 0, 0),
-> +	{ }
-> +};
-> +
-> +static ulong milos_set_rate(struct clk *clk, ulong rate)
-> +{
-> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +	const struct freq_tbl *freq;
-> +
-> +	switch (clk->id) {
-> +	case GCC_QUPV3_WRAP0_S5_CLK: /* UART5 */
-> +		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap0_s3_clk_src, rate);
-> +		clk_rcg_set_rate_mnd(priv->base, 0x18500,
-> +				     freq->pre_div, freq->m, freq->n, freq->src, 16);
-> +		return freq->freq;
-> +	case GCC_SDCC2_APPS_CLK:
-> +		freq = qcom_find_freq(ftbl_gcc_sdcc2_apps_clk_src, rate);
-> +		clk_rcg_set_rate_mnd(priv->base, 0x14018,
-> +				     freq->pre_div, freq->m, freq->n, freq->src, 8);
-> +		return freq->freq;
-> +	case GCC_USB30_PRIM_MASTER_CLK:
-> +		freq = qcom_find_freq(ftbl_gcc_usb30_prim_master_clk_src, rate);
-> +		clk_rcg_set_rate_mnd(priv->base, 0x3902c,
-> +				     freq->pre_div, freq->m, freq->n, freq->src, 8);
-> +		return freq->freq;
-> +	case GCC_USB30_PRIM_MOCK_UTMI_CLK:
-> +		clk_rcg_set_rate(priv->base, 0x39044, 0, 0);
-> +		return TCXO_DIV4_RATE;
-> +	default:
-> +		return 0;
-> +	}
-> +}
-> +
-> +static const struct gate_clk milos_clks[] = {
-> +	GATE_CLK(GCC_AGGRE_USB3_PRIM_AXI_CLK,		0x39090, BIT(0)),
-> +	GATE_CLK(GCC_QUPV3_WRAP0_S5_CLK,		0x52008, BIT(27)),
-> +	GATE_CLK(GCC_QUPV3_WRAP_0_M_AHB_CLK,		0x52008, BIT(20)),
-> +	GATE_CLK(GCC_QUPV3_WRAP_0_S_AHB_CLK,		0x52008, BIT(21)),
-> +	GATE_CLK(GCC_SDCC2_AHB_CLK,			0x14010, BIT(0)),
-> +	GATE_CLK(GCC_SDCC2_APPS_CLK,			0x14004, BIT(0)),
-> +	GATE_CLK(GCC_USB30_PRIM_MASTER_CLK,		0x39018, BIT(0)),
-> +	GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK,		0x39028, BIT(0)),
-> +	GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK,		0x39024, BIT(0)),
-> +	GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK,		0x3908c, BIT(0)),
-> +};
-> +
-> +static int milos_enable(struct clk *clk)
-> +{
-> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +
-> +	switch (clk->id) {
-> +	case GCC_AGGRE_USB3_PRIM_AXI_CLK:
-> +		qcom_gate_clk_en(priv, GCC_USB30_PRIM_MASTER_CLK);
-> +		break;
-> +	}
-> +
-> +	return qcom_gate_clk_en(priv, clk->id);
-> +}
-> +
-> +static const struct qcom_reset_map milos_gcc_resets[] = {
-> +	[GCC_QUSB2PHY_PRIM_BCR] = { 0x12000 },
-> +	[GCC_SDCC1_BCR] = { 0xa3000 },
-> +	[GCC_SDCC2_BCR] = { 0x14000 },
-> +	[GCC_UFS_PHY_BCR] = { 0x77000 },
-> +	[GCC_USB30_PRIM_BCR] = { 0x39000 },
-> +};
-> +
-> +static const struct qcom_power_map milos_gdscs[] = {
-> +	[UFS_PHY_GDSC] = { 0x77004 },
-> +	[UFS_MEM_PHY_GDSC] = { 0x9e000 },
-> +	[USB30_PRIM_GDSC] = { 0x39004 },
-> +};
-> +
-> +static struct msm_clk_data milos_gcc_data = {
-> +	.resets = milos_gcc_resets,
-> +	.num_resets = ARRAY_SIZE(milos_gcc_resets),
-> +	.clks = milos_clks,
-> +	.num_clks = ARRAY_SIZE(milos_clks),
-> +	.power_domains = milos_gdscs,
-> +	.num_power_domains = ARRAY_SIZE(milos_gdscs),
-> +
-> +	.enable = milos_enable,
-> +	.set_rate = milos_set_rate,
-> +};
-> +
-> +static const struct udevice_id gcc_milos_of_match[] = {
-> +	{
-> +		.compatible = "qcom,milos-gcc",
-> +		.data = (ulong)&milos_gcc_data,
-> +	},
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(gcc_milos) = {
-> +	.name		= "gcc_milos",
-> +	.id		= UCLASS_NOP,
-> +	.of_match	= gcc_milos_of_match,
-> +	.bind		= qcom_cc_bind,
-> +	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
-> +};
-> +
-> +static ulong milos_rpmh_clk_set_rate(struct clk *clk, ulong rate)
-> +{
-> +	return (clk->rate = rate);
-> +}
-> +
-> +static ulong milos_rpmh_clk_get_rate(struct clk *clk)
-> +{
-> +	switch (clk->id) {
-> +	case RPMH_CXO_CLK:
-> +		return TCXO_DIV4_RATE;
-> +	default:
-> +		return clk->rate;
-> +	}
-> +}
-> +
-> +static int milos_rpmh_clk_nop(struct clk *clk)
-> +{
-> +	return 0;
-> +}
-> +
-> +static struct clk_ops milos_rpmh_clk_ops = {
-> +	.set_rate = milos_rpmh_clk_set_rate,
-> +	.get_rate = milos_rpmh_clk_get_rate,
-> +	.enable = milos_rpmh_clk_nop,
-> +	.disable = milos_rpmh_clk_nop,
-> +};
-> +
-> +static const struct udevice_id milos_rpmh_clk_ids[] = {
-> +	{ .compatible = "qcom,milos-rpmh-clk" },
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(milos_rpmh_clk) = {
-> +	.name		= "milos_rpmh_clk",
-> +	.id		= UCLASS_CLK,
-> +	.of_match	= milos_rpmh_clk_ids,
-> +	.ops		= &milos_rpmh_clk_ops,
-> +	.flags		= DM_FLAG_DEFAULT_PD_CTRL_OFF,
-> +};
-> 
-> -- 
-> 2.53.0
-> 
+Best regards,
+-- 
+Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+
