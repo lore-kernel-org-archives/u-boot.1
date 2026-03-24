@@ -4,143 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95173E9A758
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 10:15:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DF27E9A767
+	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 10:59:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C6D480077;
-	Tue, 24 Mar 2026 11:15:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 9594A839DF;
+	Tue, 24 Mar 2026 11:59:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="ULZTr+u0";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="GIrCAvON";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="o6760VEo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B4BC8352B; Tue, 24 Mar 2026 11:15:07 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3A76F83981; Tue, 24 Mar 2026 11:59:39 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7A9880050
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 11:15:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 62O8xnGg2323354
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 10:15:03 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=fPs1Jf96UrOwl1Ey2WeKdV0o
- m4qVQNS94v2U45zvVrE=; b=ULZTr+u0JWG14nso0PeGwgrMHLH4SiYeA2uxa6wC
- emvxpvEAErJjXFezDW1ONhPXKlVEm2z96RuAPGoy9gw+/V88Z9prRsA5McX5NHXN
- fvNVfc879mdu34Uzlvj5C9TycP13O8PcqtIkVAVqBIQjk8SyXaJFQkG5gGhggTqn
- BVkqYh461PN7imiG0W6HcwHzcWzgNnByTEiY1rHjwKm77t7HFrsx8v5TfV9vwWTs
- dGXZMYX0NR08Ea4eCJ518zpdIgrNQE+0WAThXJJax+VzCRDlxGYq8z4sB5U/p6V6
- Ae9ko5mud3NndZBUJqTnuEv0vt+OIBUkQC6kvdQBk6ZU5g==
-Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
- [209.85.210.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4d3qkerafy-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 10:15:03 +0000 (GMT)
-Received: by mail-pf1-f199.google.com with SMTP id
- d2e1a72fcca58-82c675116f1so578626b3a.2
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 03:15:03 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CCED80077
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 11:59:36 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-48557c8ad47so7833045e9.0
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 03:59:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1774347302; x=1774952102; darn=lists.denx.de; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=fPs1Jf96UrOwl1Ey2WeKdV0om4qVQNS94v2U45zvVrE=;
- b=GIrCAvONJSmYWh7drZnUSXWswUBIAQ79/K6shgr1IN/M92UB5kaGAPOxrtw5E9oprr
- /vc2Zgxw6dyJIcRUWOFFSbz3B1IqC6HKsCXBHHyjGJixiBDF30AgNq/9Xy1nDEBZSgJe
- bBY5AfLgTQIuQmVS1AjaC8Py3+XRuIPfh2jokQxwT4u9jzgtFj1/kkyZ+yS93JaureAF
- bRNmRlOus6Txru1WbSwq1vkRKnxKBqnEO44WRkMdGRxj/nsmLxcjJjXEUV3rVynRfD3e
- 2LLk8jcXbU3YNkDmPTw0lPlXjMraqn9JQb0+eTX0H7XmV7ZkVJoZlv1i1gGf5YCGFI1B
- YhEQ==
+ d=linaro.org; s=google; t=1774349976; x=1774954776; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=FwoUBnAE8oA+nBnxuJA8SZNAOsBsWI7exBq+XaOjI/A=;
+ b=o6760VEo1f7apZuVumh7VvAXeb07He3JBAIh5YE4v0Fx/MS1bBYkbQBIA8wF69wIbU
+ awZHj7Vih7hpqzVvRlbX7vCF3iivSn4xLwR6n1HBMN6rtitWjK5DTtC2B5ZBBY5sRcCY
+ fiHvfUvLDRPURHhjTa8ja3TOcYFLNOozwK/laR9CQ2W/b9cYEwQh648Rfiw4TCu1uLk5
+ 8b6Uyn4F4p1Juhvf5LuC8Af5tI6z1TYgi38RpebAM7RFM4iRf9O8+OM77+dCQayMzHm3
+ yX4Fm4Z/K1mXporEJ7bpfmXR3tqugrA5sjbhgpweBufkALy4BgoCJDWQXyV9W1Ew5Wy+
+ ItiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774347302; x=1774952102;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=fPs1Jf96UrOwl1Ey2WeKdV0om4qVQNS94v2U45zvVrE=;
- b=Hyf1mIbiJQ4m09yp8Q+h7zFKXqkN1zh4FKhEkqTOQVSkvDwt56GifCD4fTosvKLPRG
- 6ljVSZpxq/KGftXkmkVzH3Pd9yEtIeAdfxkmeTAeKaGQoUmCtKb5beg77L14pN3/VxFi
- BN6f2QVH7W033CGV1dOjizHhO/TaJ7uBAXdSHhvuHkPeMevaLNG8hDrdgXoZKf2nwT/W
- suhdP2eY3qMMMSAr76yvW/j7m4DHKp2GIamX0wLM0UrBVgWBsOq5h6OH6TQ2qyXz8hDv
- 6W8FOwEqAvDVedQkFpEwrdIg2LK3UDe1SQbqrZ4AZXYllO5tU0wT9o/pj6NnturcQpnR
- dC4A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVWYQKzDvaYV8P5rc4ExI5+lwPkw45KBUt1UyU6rAoMGmebQJAvFKOkFjGokusXFfEjiL27lGE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw9HH5RBwYix9pTXWXXBy11nNLlwr92dy8EtScNy3otIDveF4fZ
- 3rxZng7ryBAZnZbXqHD2CqfR6O9HJHhTvN/lH4Q6sOx0WYoVEpzVxTa77u+U93LmuJ2QBEdfKlj
- KrTIZDBwctDQMBSydJOwpR5Y9/FLM/1NmbxvA06DHTz1p5FF0Ng9YZhTX
-X-Gm-Gg: ATEYQzwzkDNRgjCGSkbyZnKPctm6X8nbUPE1yf4dyrcmayZyb7QNqC47XGINwQuzBA9
- ST/2bczo+HHaHY7cHlXIT99cOO3WdkeFyaPA7blS4Vl6Ttv0XaffrPaHR6GqMdFBejcntdrSEOz
- LHf2FKZVpXOLoLJnddTvcMSYQuSZBRybyxND+L3s7H3zz80LwWdd2qIW0Zd2DWzANga7yfrowDv
- Je11UePoGk0nPcWMqqN7ldrvPjQRc81uO0a0IcO6VKIFeXbqlHYbP0vpGbmtG9oJZU994bqR4y9
- WENFr7uM38jJYWbr+yLil2WTNBcLz23gAyyQ/agxNe8hHmUxbR1UATTv8Ka3pataZN1RVV2ruqn
- OUArRf+cRCZ10oWJ2Y2btf+ma46KMR7T3JGUgeq1CMXaDoTmCuKsD7r0ARAF2tn2Iud6IJ7ubT8
- badXcqxBs/OhwTwq+r7tATMbxqFbSUBXTIwiyh8gJf4wnMJH19KYk=
-X-Received: by 2002:a05:6a00:928d:b0:824:9edb:454 with SMTP id
- d2e1a72fcca58-82a8c2ef6d0mr14569070b3a.37.1774347302203; 
- Tue, 24 Mar 2026 03:15:02 -0700 (PDT)
-X-Received: by 2002:a05:6a00:928d:b0:824:9edb:454 with SMTP id
- d2e1a72fcca58-82a8c2ef6d0mr14569031b3a.37.1774347301715; 
- Tue, 24 Mar 2026 03:15:01 -0700 (PDT)
-Received: from hu-varada-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ d=1e100.net; s=20251104; t=1774349976; x=1774954776;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=FwoUBnAE8oA+nBnxuJA8SZNAOsBsWI7exBq+XaOjI/A=;
+ b=orrKKohaCr9YW3nocmXsPXx9cbGYew3SbkW4taJiMJLBE4MvsxgKZSe/b0rwkob+xD
+ vuoaqErPthp1DEuLf6TPTdhCFMMk4rR7ibWLdk5ne/c+bU/bQpCGoHOrUeXSKZ7pSiuN
+ LG8XS1bUIVcoYMW4/5dVdIzcoKZ2E/jw9CnaBGJzOsgqfPssfr3hvKGUA8byhS7YGwm2
+ MCR3YoetB9gCMl+zhPJ4rGqZom9+qkdG3oECGkndKgY/2DeFTwz4/czGYciHe5XJsYUR
+ IfX5ApQYq+Hu7ADGtO1As2rTGmbnKMl4puGxY2+c6BF6lXX7iaFLMIZdBLSQ66YfuXIg
+ 0XVg==
+X-Gm-Message-State: AOJu0YxEayC1zQvNasDbwa22TMHhG/SpLOZPExbN/D6ekydyzvXpDDjT
+ SWz0vFHhMMgdxd78pwuwEuhyzUid+1EMDbixLstOrrPExZWsmKzEcgtYdZFp5hARsoQ=
+X-Gm-Gg: ATEYQzxd0a9lxrUNQEcxuWgmajoL/fkpkcbiUlOoxPvsv5Z0sRdjaW1n1rOgJUYHHI6
+ tR3KcTGNtKjObz26QOu4+F1c4jWnJ8ZJO2otFy294v2YM8i94FKtflhZUwTDdCQHgyzAvbTlhW5
+ WLuk05UFJQAh68qnY5iKBWSOq085/6yRUOY9w5QS8rhfLUEN8YveeVot2rwdn0VaZ0OfNtaGR/3
+ 6Zt0YPv7BjwbUwjnifhEMxJIKO1vgASog/GB9+Dr3ulzL8sXlVT+lblM42O0sKv/bNGMn/YZSxT
+ oxj58W98rBL6I6D4zkFYpef3PwQNU/B0VER1mV72c05dTSL4BwhQ8LlWsgu1bx7xb00upIlg1Sz
+ 5dwprz2qd3dQf2A1DBmAQlbZKaktBI4Ym7BdAjPWzw43kUrPaGHRE2dq6M/SFbZsN2SsD7kx8EN
+ weWBk5FUxsByIPZ+BQDEXq3BNVPea+GtNpk8ArfHR0H/9GnTs/sq0VwkbfC3eooAVFmw==
+X-Received: by 2002:a05:600c:3f16:b0:485:3f38:3de3 with SMTP id
+ 5b1f17b1804b1-486fedab1aamr217421175e9.3.1774349975577; 
+ Tue, 24 Mar 2026 03:59:35 -0700 (PDT)
+Received: from lion.localdomain (p5b29eb0d.dip0.t-ipconnect.de. [91.41.235.13])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-82b040da438sm12235559b3a.43.2026.03.24.03.14.56
+ ffacd0b85a97d-43b6470b243sm37810416f8f.26.2026.03.24.03.59.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Mar 2026 03:15:01 -0700 (PDT)
-Date: Tue, 24 Mar 2026 15:44:53 +0530
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Stephan Gerhold <stephan.gerhold@linaro.org>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Simon Glass <sjg@chromium.org>, Jean-Jacques Hiblot <jjhiblot@ti.com>
-Subject: Re: [PATCH 2/3] drivers: mmc: uclass: Set removable flag based on
- device tree property
-Message-ID: <acJkHTO/6l8LNb9c@hu-varada-blr.qualcomm.com>
-References: <20260324-emmc_sd-v1-0-883a45538b6e@oss.qualcomm.com>
- <20260324-emmc_sd-v1-2-883a45538b6e@oss.qualcomm.com>
+ Tue, 24 Mar 2026 03:59:35 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20260323195302.2363577-1-trini@konsulko.com>
+References: <20260323195302.2363577-1-trini@konsulko.com>
+Subject: Re: [PATCH] power: regulator: qcom: Correct dependenecies for
+ DM_REGULATOR_QCOM_USB_VBUS
+Message-Id: <177434997476.3720457.57595020023433204.b4-ty@linaro.org>
+Date: Tue, 24 Mar 2026 11:59:34 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260324-emmc_sd-v1-2-883a45538b6e@oss.qualcomm.com>
-X-Proofpoint-GUID: 79TzhX6g3nI1CzOTy4ZXMRiXzuGHwX5n
-X-Proofpoint-ORIG-GUID: 79TzhX6g3nI1CzOTy4ZXMRiXzuGHwX5n
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzI0MDA4MSBTYWx0ZWRfX/Toz9nBZzThY
- IXIq+NHlPOHU9DZn1sVLjnf/2e6dZ3g5XoK4JhCLOSKXYi5mwZJSfwmdpFm36DPk77+j0A68PNz
- LdiGuwvNCFIuQuFZe+KDi6EGVRiajaSOW+qclk2xAvewxna5SZdU88GBrbww9gJ3lgj7kuNvhzj
- 2EYcvASz36OpsFjXBe8lcGAyI7KTZcxMsqfwI1yGmhceuI55PZxy1JNEuc+DirkjOPCKwhJYA9o
- lRTidIetlujJl/qnR9XR8vA8+gQEcIMKI8/aVU+OOEUJv29lDWaDsSnLEhz8c32mtD5tZUpBgTf
- g1DBkT1mYhM9u8UZjAyWSNOrt6P8RQ2Voi4ZIuwkyIsP/r2a5lwHV7IrkRJtgdHfDQWnPukr/gG
- AtiZo/BBd/nhEZW6csgERh48+cubtZzqeiW+YugGmphf0ULqWSrZ77pbpW8c3514AT/WjiRWWa/
- ec6SBqIt7a+OkmRLdTw==
-X-Authority-Analysis: v=2.4 cv=Veb6/Vp9 c=1 sm=1 tr=0 ts=69c26427 cx=c_pps
- a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=kj9zAlcOel0A:10 a=Yq5XynenixoA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=0QS2TLFTIzAymdrKPJUA:9 a=CjuIK1q_8ugA:10 a=zgiPjhLxNE0A:10
- a=OpyuDcXvxspvyRM73sMx:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-03-24_02,2026-03-23_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 impostorscore=0 lowpriorityscore=0 spamscore=0 clxscore=1015
- priorityscore=1501 suspectscore=0 adultscore=0 phishscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603240081
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.15-dev-47773
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,24 +97,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Mar 24, 2026 at 11:22:35AM +0530, Balaji Selvanathan wrote:
-> The block device removable flag should reflect whether the MMC
-> device is physically removable (SD card) or soldered (eMMC). This
-> information is specified in the device tree via the "non-removable"
-> property and stored in the MMC_CAP_NONREMOVABLE capability flag.
->
-> Update the removable flag in the block device descriptor after
-> successful MMC initialization to properly reflect the device's
-> removable status. This allows the block layer and upper layers to
-> distinguish between eMMC and SD cards for appropriate handling.
->
-> The default removable=1 is set in mmc_bind(), and this change
-> overrides it only for non-removable devices after confirming
-> successful initialization.
->
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> ---
->  drivers/mmc/mmc-uclass.c | 5 +++++
->  1 file changed, 5 insertions(+)
 
-Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+On Mon, 23 Mar 2026 13:53:02 -0600, Tom Rini wrote:
+> The DM_REGULATOR_QCOM_USB_VBUS functionality can only work with DM_PMIC
+> enabled as well, so express this dependency in Kconfig.
+> 
+> 
+
+Applied, thanks!
+
+[1/1] power: regulator: qcom: Correct dependenecies for DM_REGULATOR_QCOM_USB_VBUS
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/bb5012fb66ca
+
+Best regards,
+-- 
+// Casey (she/they)
+
+
