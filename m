@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A63BFEC0F0
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 18:22:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADA7AFEC0F2
+	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 18:23:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCF8B80517;
-	Tue, 24 Mar 2026 19:22:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1A5B680517;
+	Tue, 24 Mar 2026 19:23:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Q4/KtqEo";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="WnDQ5bN1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C86EE807C0; Tue, 24 Mar 2026 19:22:19 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id 4BBCD8352B; Tue, 24 Mar 2026 19:22:59 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C2DA80087
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 19:22:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D59180087
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 19:22:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1774376508; x=1774981308; i=xypron.glpk@gmx.de;
- bh=A2sUXTLCGF3E/3GVj5GSjx1GKpNSYkF05BiQTJYTqYk=;
+ s=s31663417; t=1774376576; x=1774981376; i=xypron.glpk@gmx.de;
+ bh=tBBAmzkP0XnoAK7ubXpd3fmTsEY++H7IouSqGDdLExI=;
  h=X-UI-Sender-Class:Date:From:To:Subject:In-Reply-To:References:
  Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
  content-transfer-encoding:content-type:date:from:message-id:
  mime-version:reply-to:subject:to;
- b=Q4/KtqEoNC13vnH3w9aDYV8ib5R7/U+DyPm28E9hLHYWsEwpDdL/cNy6vtsoF5WO
- OdF934QSH1hnFPFQTKWPbAhwEY/LQSNbNIC1tw4AI6C1PfFWw33m1eJjWUYW+zWR5
- J/pPXb4EfFShNA0nA9Ov4dvBDemh5k3nXY8pw7Rkn0s0zCCAIOGraPTPFAAMIfAOd
- xIXVUydNCRWAzMeoxBX0vLV5uv2MkMSU8SnUSbyrfYJrOorN0XqkOPm2s0M1QzxKt
- SCAeD+2sJZi0VfCVCcDUk/3oB84hAD8MgylVBtOxfjqr9y+5MWHw6U6hPWMtRsVNP
- WYFfKvqMvWNxK5sRrg==
+ b=WnDQ5bN1DOUkBf3LcpvkLc7ND7EdySMvpSP1ns+/dvLYIfqBbbsUTpubK+ZEjKD7
+ 0O8fRXK7udBgYWmlrrjjJATMep+jN6qgyC27ebKCbhLNwlf5h+XoMPSRbYyXWiBsg
+ 07pc2dFjMMulModQ/D16yP5YgDLriZxFGvFVuLJlSCqcNUbeY0uFeUjSetodnDQ2j
+ XA7Xe9AMjPOvun9A4xNqv2keliLexDLQxVXNuzvITZEVJgerjCbAxzI7a5E01zwFp
+ BNG6kCPuxGsT8m5Kq9jDs0razVlMoItEHNVaBemAnY/D+NYtCUPFVcq2rWyWWh09p
+ dXjBuMTDhTBLBsMBYA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MNKhm-1vtTPi1aWI-00XVB7; Tue, 24
- Mar 2026 19:21:48 +0100
-Date: Tue, 24 Mar 2026 19:21:44 +0100
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MvbG2-1vEdwH3m4c-015h72; Tue, 24
+ Mar 2026 19:22:56 +0100
+Date: Tue, 24 Mar 2026 19:22:52 +0100
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>, casey.connolly@linaro.org, 
  neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com,
@@ -50,99 +50,99 @@ To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>, casey.connolly@linaro.org,
  marek.vasut+renesas@mailbox.org, michal.simek@amd.com, sjg@chromium.org,
  mkorpershoek@kernel.org, jan.kiszka@siemens.com, paul.liu@linaro.org,
  j-humphreys@ti.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v4_1/2=5D_efi=5Floader=3A_make_EFI=5FH?=
- =?US-ASCII?Q?AVE=5FRUNTIME=5FRESET_a_user-selectable_option?=
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v4_2/2=5D_qcom=5Fdefconfig=3A_Disabl?=
+ =?US-ASCII?Q?e_EFI=5FHAVE=5FRUNTIME=5FRESET_in_qcom=5Fdefconfig?=
 User-Agent: Thunderbird for Android
-In-Reply-To: <20260324175913.92858-2-aswinm@qti.qualcomm.com>
+In-Reply-To: <20260324175913.92858-3-aswinm@qti.qualcomm.com>
 References: <20260324175913.92858-1-aswinm@qti.qualcomm.com>
- <20260324175913.92858-2-aswinm@qti.qualcomm.com>
-Message-ID: <7C8B85DA-6439-41DF-A2CC-ED51BF42752D@gmx.de>
+ <20260324175913.92858-3-aswinm@qti.qualcomm.com>
+Message-ID: <3C912C2E-EAFC-4F15-81B0-2DBB60C607C4@gmx.de>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:OC9YFcasetvGXkcCZmdeUCUB61b5f8kBGopXmgQe+L1TVYksn6B
- G2z1eUalOCQEbvkLKy4E3Kmv1tZy/Ej5teJaOwtYbsYUQELOZtYEC/y0b7u2tHQxJwfhLYn
- n9GC+YEZlZVtQQWkN7iACaOWogIDiz+3BeeNwjLWkYdysDYdvp+xbdfxcrigse4qOwDoBp9
- l79bs8eV4xDLaA+71OdJA==
-UI-OutboundReport: notjunk:1;M01:P0:VagwA4WtdyQ=;Af9gF/7R4ar6oEhLWzEKfUkw5Ij
- 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
- kzzoJu9PySQcN4Q==
+X-Provags-ID: V03:K1:1j7+juIF9+fYBsXUTIhvc56fOsFALbk8/3frHpvEUeWNLVY/EfC
+ Q9CDmYF54n/fHxk05vchfAoNGVQ2WYmOdiDMQRJ7CmEQRAusw3RyTNNB6i2aoFTItvkVltQ
+ AJnUQD5A8vaMhhBM+UrQcw6pJt86YD0t6+uoShL5Ev5I2G2SLnE9GMwixVLLV4r/+9CI8iL
+ 9hPaWjaIuJK2wbHeEYz2g==
+UI-OutboundReport: notjunk:1;M01:P0:a2/+kqp9Ar0=;RObub9/0Dobv5KV14qGofMErpGc
+ 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
+ OndAufyOKenMlHpmZ1c/PkT88X8Sn1KlFsos=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -159,48 +159,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 24=2E M=C3=A4rz 2026 18:59:12 MEZ schrieb Aswin Murugan <aswin=2Emurugan=
+Am 24=2E M=C3=A4rz 2026 18:59:13 MEZ schrieb Aswin Murugan <aswin=2Emurugan=
 @oss=2Equalcomm=2Ecom>:
 >From: Aswin Murugan <aswin=2Emurugan@oss=2Equalcomm=2Ecom>
 >
->Expose EFI_HAVE_RUNTIME_RESET as a proper Kconfig boolean with a prompt
->so platforms can explicitly enable or disable advertising the EFI reset
->runtime service=2E
+>Qualcomm platforms rely on the kernel to manage specialized reboot modes
+>such as EDL, bootloader entry, and other vendor-specific reset flows=2E
+>Allowing U-Boot to override these via EFI runtime reset services leads to
+>incorrect behavior when the kernel issues advanced reboot requests=2E
 >
->The current PSCI-based EFI runtime reset implementation is always
->enabled whenever CONFIG_PSCI_RESET is selected, but it does not support
->passing the additional arguments required for specialized reset modes=2E
->As a result, reboot requests such as bootloader mode or EDL mode cannot
->be propagated correctly and instead fall back to a normal reboot=2E
+>Now that EFI_HAVE_RUNTIME_RESET is exposed as a user-configurable Kconfig
+>option, disable it for qcom_defconfig so that the kernel retains full
+>control over reboot handling on Qualcomm SoCs=2E
 >
->By making EFI_HAVE_RUNTIME_RESET user-configurable, platforms that
->depend on extended PSCI reset can now explicitly disable EFI runtime
->reset handling even when CONFIG_PSCI_RESET is enabled, ensuring
->that the kernel retains full control of advanced reboot paths=2E
->
->Default behavior for existing platforms remains unchanged=2E
+>This ensures that EFI runtime reboot callbacks are not registered on
+>these platforms, preventing conflicts with kernel-managed PSCI reset
+>paths=2E
 >
 >Signed-off-by: Aswin Murugan <aswin=2Emurugan@oss=2Equalcomm=2Ecom>
 
-Reviewed-by: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
-
+Acked-by: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
 
 >---
-> lib/efi_loader/Kconfig | 3 +--
-> 1 file changed, 1 insertion(+), 2 deletions(-)
+> configs/qcom_defconfig | 1 +
+> 1 file changed, 1 insertion(+)
 >
->diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
->index 13e44be1d06=2E=2E31d1c4fc257 100644
->--- a/lib/efi_loader/Kconfig
->+++ b/lib/efi_loader/Kconfig
->@@ -100,8 +100,7 @@ config EFI_SET_TIME
-> 	  can be used by an EFI application to adjust the real time clock=2E
->=20
-> config EFI_HAVE_RUNTIME_RESET
->-	# bool "Reset runtime service is available"
->-	bool
->+	bool "Reset runtime service"
-> 	default y
-> 	depends on ARCH_BCM283X || FSL_LAYERSCAPE || PSCI_RESET || \
-> 		   SANDBOX || SYSRESET_SBI || SYSRESET_X86
+>diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+>index 314fc0c4903=2E=2E8042855bae1 100644
+>--- a/configs/qcom_defconfig
+>+++ b/configs/qcom_defconfig
+>@@ -6,6 +6,7 @@ CONFIG_ARCH_SNAPDRAGON=3Dy
+> CONFIG_NR_DRAM_BANKS=3D24
+> CONFIG_DEFAULT_DEVICE_TREE=3D"qcom/sdm845-db845c"
+> CONFIG_SYS_LOAD_ADDR=3D0xA0000000
+>+# CONFIG_EFI_HAVE_RUNTIME_RESET is not set
+> CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=3Dy
+> CONFIG_EFI_CAPSULE_ON_DISK=3Dy
+> CONFIG_EFI_CAPSULE_FIRMWARE_RAW=3Dy
 
