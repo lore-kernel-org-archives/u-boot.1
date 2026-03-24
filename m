@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1013F54AC4
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 14:37:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C7AFF54AC7
+	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 14:41:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F26080212;
-	Tue, 24 Mar 2026 15:37:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E192680212;
+	Tue, 24 Mar 2026 15:41:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="UVVtkS2D";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Byn0zTmf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8953982A9E; Tue, 24 Mar 2026 15:37:33 +0100 (CET)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id B461C80517; Tue, 24 Mar 2026 15:41:36 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BCDA80087
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 15:37:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DEB780087
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 15:41:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7d7fdb922a5so3079830a34.3
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 07:37:31 -0700 (PDT)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7d751ef36ccso2063780a34.0
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 07:41:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774363050; x=1774967850;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774363293; x=1774968093;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2+dSDaFt7cZtKIJtLDuFZPPUCHWEaf+feei3h8Ec1fA=;
- b=UVVtkS2DI3J23MR2NqblqKizb+NtTNXEVr8Sqvp7cTa07VOPJbTQtVqgoa+eRi3aG/
- bxobi+w69ehoEn1EecFoFRrMtPNaNrOaJ7SxSL6/pgcQWLgSYOXnSvsmi2mF+2pswdBC
- zSLa1OE/eXWbNo/RpiJL4N684HmTfv2KjCx61nTZAN6gRtL7aXyMCZTVYjKw4CGSmxUP
- iSLqhzv/OeuMk1j00/64oEiocLQAj7/qXFNpb/iTCj6d669wRAEwTNiPcXiKw0HA0hiI
- GfqLkLSyZnKlCAJeOqv4R/O15omuOAaEz+IyduXFJNBLh2z9AhJfSh5TXCcM/b1WIfP3
- hVHw==
+ bh=ycEkj71xjlYKfA5k3htDVGudW9AHqTmVqtFpLTVQqEA=;
+ b=Byn0zTmf4MbhPh3O7N0sWtFnCwuW/485SKJlv5Nxiwy/UN/BTkIjQNd1jYEBFhQ9AW
+ mjVfH7HXcM6l+Eh0se+Z+SBGe+anVY4zWVSqIEIpkqw/238Um53d6U9TStYU1NF7zniI
+ q0z9Vibj6hj9HgqW5Bhx065D6oYzPZ30prmbQ3FtNQMBbM9eTwpcpGBr4nzJ9ZZW9Jcs
+ jLCojY05OaCnt5NKKYIJdeqor/+lzp1aUiAZ6mO4NEnFRYBHFuYl3FCouLzZ6bXLDJW3
+ XVdpn2XhGBxNerJSkc9LLCQQRLC+iu7FWDxYck9KrYIg3aFJFX6zx6oxcBHEGNltI2ft
+ /WRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774363050; x=1774967850;
+ d=1e100.net; s=20251104; t=1774363293; x=1774968093;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=2+dSDaFt7cZtKIJtLDuFZPPUCHWEaf+feei3h8Ec1fA=;
- b=gucebylqxV4V9OdBK4IPOtyvlUly3Tt6AIi7H+q+Tiss1uWkUMcgyMjx/oGcY5Wblc
- odW71uJpf2O0jWIXrA1OwJcpBeSlh6abJ2q8/fbCvlIC7QF816rEP0NlYtv1pyn71EzG
- qg03LcSIHUb6iq/VYRygl/rfG/7ZaD3yvw+CXAZ60k4uTDSKfW6giF17qLDzd9vAKMtJ
- x5d6FblHphhHHo/QXJzK5ElTEUYolTjW+YhdjMaLXi3wZTwyNXo3zRSUaa+qjRCobss2
- 9qKcUdICRSVz1lMnJaSMnL2RFhOcPrMMXgUqStVd/dJ5Z05GDRGxB8L5OMIUAKIXptej
- FAig==
+ bh=ycEkj71xjlYKfA5k3htDVGudW9AHqTmVqtFpLTVQqEA=;
+ b=cJromtDDTA6Cin8Wc6pC0LEhFfd0TBcj61NNbH7wcx99kTnln+WBW1gvCDINeNfCs3
+ /6rJqNJipMjreCGfCXnJNv4UVd/l8+deoDGitPCvf1rrItAU+IqolAcgWNUArakHLDrK
+ Ugy83QcynwN0ZjyKoocQ0IgPNK4u1EGuZah4Xo7up8/H/QhWMJXHibJP54WWH1uRKZlF
+ 5T5qXOgNf3PQEqES93JLVfbWTuoszinX7YavwQqALj1TVTvoR93ca5zJz3M4h+nv5B9M
+ tJrgY3blp3HQyUTKi44slmODZKCzYwydKut4H2IIs74hQEcBDbzWEPSvypuxOq/IF1Au
+ hBPQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVkEEGve/kZRVOCO6eh4y6Kthrk3+JItCKbvCrbQeY3/Sn6cMhoHujQu8dHIknLAGEQIJpuuFA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzq2+w7tNnxGa++JdpP7EBTgT9sYnpi5faZ1PcI8sGhbgib+gDW
- 7MX8u2tS6gc61khQIR0TavTPNUMSZRtKmo/tnmgkRBWKmKQ9QEeq1QNaxD5ylWwpbCqszdZHNTC
- vzvTy
-X-Gm-Gg: ATEYQzyZvqFAGZkN6yakwn7sOmwN41iX2fHil8VCTE4c2HCnquj2ENks8PqibEoSxP1
- 6kxATSC35uv9X+0MJp8spgRztw1bREMMd86M08R6BSM5I5Jh5MiZylEJXOOxyQatc5fCeQQFylh
- 78o9gG0SSUJAO7M8+D1bLQHArDXfPK8XHILWn0T9AQYk9AddtqH7e5/RAsdftQ3rCsPXWhZK77U
- ifwJ8tuZEJXTQMWCPH0zde/2EDS+6C2UbQRAd424e3uMyJKb7wOeUdRV9lWRV/NJF7OX5H3d0pq
- GUrFLA6RgGgSDz2Pyx6hCHrSNr05JJ0dZ1uoEV1md4GE2A5kFzi4BuNvDLocYQc83fjVyHpu3TX
- AgR1a0xDKl7SpH5EGVN+s8l1QGNps2N0RloE5CNLttP/94Z7G9eJvMv4Jmv1Js4bVS7gOx6YeUl
- ZZWuY+0CeywKonRFJGH62tR5dmJxs=
-X-Received: by 2002:a05:6830:6f88:b0:7d7:cb13:3fef with SMTP id
- 46e09a7af769-7d7eaf9abccmr10775409a34.20.1774363050050; 
- Tue, 24 Mar 2026 07:37:30 -0700 (PDT)
+ AJvYcCV5MBm3Pu5dOQQdH5T97S6/JHUXQIsziQBfmNNZUZXpC6KZ4i3zT/5v/LKnnun2kjWM2mmGPbg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwWQUTlPZzpeAyTNZD+bNQ+OJVyurDcIqFz5YYV/Hjso+xEl+UP
+ osxRZqhLsrAuOrwosP/oULKKQZadrSvz5jhMb/TTCZl5KxGXh+3AScT0/OzJj2Qvc0vrbjZNNrH
+ OaNZX
+X-Gm-Gg: ATEYQzw1sNh9dBGdqnTi46Qc5bGbpBYiAewnQyKazn2xaRCL1BRGskT1NxCtw/lxkMl
+ avgfW/we/9iTA89ezJDUabNAoPwzwLnQ3brTZaDMvYs2J4ngGvo3PNEAJe+ZcXVANOTm/s14j2c
+ t+ES5/FOo4ztcH6qHTULHRSW4QaZvT35kdaFJEbjOegmvO1SShQSRR5WZMKMuzXyI/nJpIv3Im5
+ KOar3xFw1apmBwaWJZA/0zYaFY9PX2f5Rz4ooAwS5zOFYGuGfOuPVKkXZmlqr8m4oZDxqh2pe0R
+ 8XEQ+LcgWdF723PZmG1jU9sriBAURT4rdQmqeSZWIgPh48tORJ5VUdf2BYHchuxwJ5Wz3QwvEC+
+ w4WODEK0a0S+8C99mWB0p5JZBt6ktdzEi6qiOXnKcZz/IK3MbjCPHzmTkqc04X74T9CXKFMF03C
+ 97FUsEg0RJMADQD0NuUwt5kZ8XCvk=
+X-Received: by 2002:a05:6830:4118:b0:7d9:ad99:9ff0 with SMTP id
+ 46e09a7af769-7d9ad99a072mr7244010a34.30.1774363292927; 
+ Tue, 24 Mar 2026 07:41:32 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:8a85:a776:3f75:a1d])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7fbee2c6dsm9534208a34.1.2026.03.24.07.37.28
+ 46e09a7af769-7d7eae62322sm12263379a34.26.2026.03.24.07.41.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Mar 2026 07:37:29 -0700 (PDT)
+ Tue, 24 Mar 2026 07:41:31 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
 To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
  Weijie Gao <weijie.gao@mediatek.com>, 
@@ -82,26 +82,26 @@ To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
  Tom Rini <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-In-Reply-To: <20260303-mtk-clk-8365-drop-map-v1-1-17f81c375290@baylibre.com>
-References: <20260303-mtk-clk-8365-drop-map-v1-1-17f81c375290@baylibre.com>
-Subject: Re: [PATCH] clk: mediatek: mt8365: drop topckgen map
-Message-Id: <177436303839.2186727.18214912334910121056.b4-ty@b4>
-Date: Tue, 24 Mar 2026 09:37:18 -0500
+In-Reply-To: <20260309-clk-mtk-mt8188-drop-extra-top-clocks-v1-0-6ee4743a8465@baylibre.com>
+References: <20260309-clk-mtk-mt8188-drop-extra-top-clocks-v1-0-6ee4743a8465@baylibre.com>
+Subject: Re: [PATCH 0/2] clk: mediatek: avoid more "extra" topckgen clocks
+Message-Id: <177436327915.2186727.643832596729660503.b4-ty@b4>
+Date: Tue, 24 Mar 2026 09:41:19 -0500
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=310; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=737; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=tLfHUWwtzxiv5+NL2/uq0BEXORjitdszdr+zDuOk4UA=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpwqGhCzXVoknE2bVhS+l+6OPyszgcOO0Q79MpK
- MHnyJQCtwmJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCacKhoRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ArIwH/1V8j/u+s1z/9Po4HRrEoOlOOVdkdqu3CDmA3rp
- ebhQn7MpxgsJblxeXfcoZXiHu8ceHjJoai4ghcaWRa/BaBkD5UNuvBnapxzF5d8FMsQ0jAu9M4S
- eoOS5t0Vug3m/8RHhLnOPhE+TBXQsRhy8noB87hsUtrsZOZAG0HIr2uBl1Qe9VNyNIZ6hBZAjvS
- 0sOQVbtcpc9UKkvo/XwRW1JxigQJYZP2UfTLoad2UkiaeBROHrdsvQxMhlDqMiwJ5deQ95nQf/U
- E3Wsa1tJPa7JA3hL9dAmSCYB656ijntXg6903TNvRAbHVgMs3slUtXGN0lr9YfIuMhiegJNvzZp
- bDao=
+ bh=lsyzi4sorDGK28DBjAx6ptBezEGcH3bGT99biTjcGms=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpwqKTycF1SRjADsINlwGlQD3udaNgW5aD2s4Jk
+ itcmyEklnSJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCacKikxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AuiUH/R3cLDdj/hSChJJgP09pTHlKpYyXcaoSUW8jWs9
+ 5OWYS/sD18IEBPG8tshRE6H6Im+NIUQIO64iEfWWNVeZdMxS9V0neAECsDwnPJZP0lOoi9FRBAA
+ giODGwExZ7FsB8jrmKDE77soxryneeZEGoMVey9EtUWh02nhzs8FFjoLe2JnVWIecs+g8oo1rrV
+ qTOcqJDV4byO9JCePQUwzB6p9YvTiTXizMccOvRzTlxgET/5fO5kLJC2SQspBE7ouYaD1FhRewL
+ hpqUul8mkM0vA7oxvw01ENzBswA3qUVAof3hRbzgo3k2v4PgSnnotr+7K1AiKDvv8DYFf6Ocrf3
+ yzr0=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -120,13 +120,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 03 Mar 2026 16:17:47 -0600, David Lechner wrote:
-> clk: mediatek: mt8365: drop topckgen map
+On Mon, 09 Mar 2026 17:51:09 -0500, David Lechner wrote:
+> clk: mediatek: avoid more "extra" topckgen clocks
+> 
+> This is similar to [1] in the goal to not add extra #defines for
+> topckgen clocks that aren't in the dt-bindings, but in these cases,
+> we are not able to fully stop using the ID map.
+> 
+> [1]: https://lore.kernel.org/all/20260303-mtk-clk-8365-drop-map-v1-1-17f81c375290@baylibre.com/
+> 
+> [...]
 
 Applied to mediatek-for-next, thanks!
 
-[1/1] clk: mediatek: mt8365: drop topckgen map
-      commit: f017d8fe9dbb6693b9938735a23162b7f1a156de
+[1/2] clk: mediatek: mt8188: use ext_clock_rates
+      commit: 1e1654c7dc9c2a41475feafba65cd2eb5ce5be5d
+[2/2] clk: mediatek: mt8195: use ext_clock_rates
+      commit: 248b8b9bcca8c14c7a21af9567136ea0e351f8f7
 
 Best regards,
 -- 
