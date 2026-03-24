@@ -4,61 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC3F2E9A744
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 09:19:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20954E9A743
+	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 09:30:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F03A580212;
-	Tue, 24 Mar 2026 10:19:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 9204982A9E;
+	Tue, 24 Mar 2026 10:30:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="tVp60JMG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kmryXXmx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCF4D8352B; Tue, 24 Mar 2026 10:19:05 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 87BB38366F; Tue, 24 Mar 2026 10:30:35 +0100 (CET)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA7A180087
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 10:19:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FCC380517
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 10:30:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb
- (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch [83.173.201.248])
- by mail11.truemail.it (Postfix) with ESMTPA id 0FA45275B6;
- Tue, 24 Mar 2026 10:19:02 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1774343942;
- bh=UrTXau5OXCKaUdGB9DQobgaqy4zD4VN5JVKUn1woZhU=; h=From:To:Subject;
- b=tVp60JMGIH5px58bPVuAEZgAtXnuTE1Nb7JDR01FUPsqn5KH7L8iyQNhkuWuBkXAt
- jDhlCl1Cxbh6z49mlDVlYmvkZ5lDuz5HeMrnNkdHVM7f9xtVOaRyi8J6xvff+DnHVg
- rKY8QxXVFxQA5cxSFeK92CGo9p4UmjZwLjy9sB/fz9QiFtWzBqyZLszOtolyyeCPus
- TQkQm66ZGFTz39OKNlsREUdmiV0erjGI4byupA3KOsfmBDgvo5bYGG6hnDwHhO4/E5
- hU2TfZyFxrLLnThR3OLcD8HewL2L+ujq7Y+ZRcXhnhB4wQoagRR5iEhiogi51ddVNb
- /UN+6ooCjhnXg==
-Date: Tue, 24 Mar 2026 10:18:58 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: Tom Rini <trini@konsulko.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- "matteo.lisi" <matteo.lisi@engicam.com>,
- Teresa Remmet <T.remmet@phytec.de>, Fabio Estevam <festevam@gmail.com>,
- Marco Franchi <marcofrk@gmail.com>, Alifer Moraes <alifer.wsdm@gmail.com>,
- "Lukas F. Hartmann" <lukas@mntre.com>, Patrick Wildt <patrick@blueri.se>,
- Heiko Thiery <heiko.thiery@gmail.com>, Marek Vasut <marex@denx.de>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- "upstream@lists.phytec.de" <upstream@lists.phytec.de>
-Subject: Re: U-Boot and legacy SPL power control on modern platforms
-Message-ID: <20260324091858.GA22537@francesco-nb>
-References: <20260320214518.GD502704@bill-the-cat>
- <PAXPR04MB84595AE69ADF07A9F9FAB7B1884AA@PAXPR04MB8459.eurprd04.prod.outlook.com>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-793fdbb8d3aso49723787b3.3
+ for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 02:30:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774344632; cv=none;
+ d=google.com; s=arc-20240605;
+ b=hSpFXRAf58ZV5yVisx2bt703Ie8JFjMWYKUzRuCksjxY3ehojFNDiVjj4FWzUiqrDP
+ 8yfSD+FR33Yd7JZavTHbHicWvZvPfSefqnA+Ax3VwxDE7C1zyayncHJhxcVU2TK632XJ
+ /MvgcdJD6Tl9NkWd4iIi4c/BzZElHgRFPenkPwcDs4nTdjsHxMcgaFqH20dy419DZ5oe
+ M+o9307G8OOAtuqoW76Ya57Gh8fhQzMRNgOncionVUUE8jwHskWb4pxi5TZVnq1DSeZ5
+ iD9S5PPH0tArvepUGthQppwznBv7P3hOqQUOBRo3q3IevYG/gpoJExiKa9XvKJpFE6wb
+ BWuA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=tVUpZCYnHaxysdlf+drvJnN0V8RdoIj2kFoJyLHiMhc=;
+ fh=x+hhjjJc/60gntzIcb8RvYudSSdxcKS9dWUybTmFFzs=;
+ b=PA5ni7BwEGZ2AT52FM6vJcLe5UqVGp/x7fYkNDBCAAeDmVqyKkPrAMgPfT0qXEKBnM
+ mmbQywnBXGwfu7AvCt25BVHfa/inEZ12g1VFZgvWtVucWuwBnOdIDycushbE1GqwhTVs
+ V8uLeZ0kRSkEsgO8tNk5D/4l1mp/fGrhGWx5+hCbxE47gdFYkC07KfbUNS5Gqb70BjKV
+ jTaND4hSwPwp2RWJky0peyDAy0U11dZvvictcvOIzIqhRvX6UiQEfe9+d1QwPOcA4tYj
+ 1wiUCjISn078r/OTHw7Y5CUExgYLJqNJwxwfOP69DzXDdwzgzatR4I5GkqYsPiQEdP9Q
+ CpLw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1774344632; x=1774949432; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=tVUpZCYnHaxysdlf+drvJnN0V8RdoIj2kFoJyLHiMhc=;
+ b=kmryXXmxoAfmUKPTfZGTJeVXcqLPGl4eXEO43yqpMihbIc02OP1LWzpq7qDlhcPGgY
+ /uPUgxuFWW7Pm7ssXmi3pmNc2lfTcdlw6UsslQBFqt+miQom49vte90LJQWk4Ly56cvM
+ fMjs4/0m9aldInncNaVoxBG9RRbi8TkdDcvRGZcvMB83JLz6IoOxq0tzFfe+/wS/Emwc
+ 4HFsYBQJBvhcqsWiEydK5NhtGD1qFBEVRCWJNLvE8VJlem0wipCanF5/LGDwZfSuDtFT
+ DR6trpGJQcNflD0WtVAwSTwinmGRhnEjmABL2l9t/TF2B266w0D5iHMr5uP1yVCkxFAt
+ G09Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774344632; x=1774949432;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tVUpZCYnHaxysdlf+drvJnN0V8RdoIj2kFoJyLHiMhc=;
+ b=ArvkRjwLMSTT/GegM8NV5srMVVcARCxxMQ6M1kJRIuTpclOJeuYoAJFrUFpoD8epGp
+ Yyj5lQzBWyJSGo1tCDxXQbOeOj42rCODXYsNojEim4/cDeGR8p3+Jc1piyVB/GhSh34H
+ Qa7o8lujz75KW7v8ylzdHDonnmJ0p32vQA7PdIdlWUoFC6JOwMN9yKAP1XQfuE18X04v
+ uLjGz737nhO69SptvdCP39+SazUWaXV6E+ASxl0oXBc7/RVcY1ev3/BHlI6zCYecBiTA
+ 5hcUZ7hEK3qI1wnicKWj6u5zmAE0IRra3HdCFsLn9tG7cJUgDLVcEcfGMCMT9lTlvqSU
+ QqVQ==
+X-Gm-Message-State: AOJu0Yw2IIyMDDb/YmiKHFKV6L6xHgDWpfkgl/Fbr4h4n/1wYJ1JGmT3
+ aA3CVttgYrpfwx/kFMFFnlvokYABu0VQLPvnJnK0OVLhJVaLQ66LBLFu29QuLNccSqil+DnXxxh
+ sYM+GtkCGF1ILadyXwTsUP9+F2MORXz6g5FKCXiOasA==
+X-Gm-Gg: ATEYQzzwWiLaLBGhyo6OIT0lcI1zcDnMz1RevZ/dX6kATzuBIzcfiLONj1MwwkbglOu
+ uEtvdmebQSxC+HlosEpeUApq522vEXOGTv0oiK98T0rZJUCrGnKo1auMtXgA+c6cjWh7I+3ERWh
+ muIYXVArS9aWw8jNoLMNbDP+yzkUfiAf/iEwDCnR4GF5vM50TCYgPbIodV6Z13ukzyZbvrk8ain
+ 4QInBJIDH8U5gno27Oiu9ALM+N7TeseF6HX4q4VGaiLBMMw59vP6YHKIKlRoFwyB3Yktx6PsCUc
+ nzfWvIGpUIYXn4KfE9d7mI4VvEzcWAe579ttFKkiUqJzI15yMTCfxbCdQxUGDx4JRE21s9GLVfE
+ n+JXNLqIr7e9w2vyO4h4+DR4rfyfDUIR9rETdTUuivH4FC0vt/WHy8Cyc8Flh4ZEt11mCU72Fx8
+ AQGVhEAIH0ADEhWpEqbmeabeiFNoBzyM6e2+5uD/llvgkViNwI4F2cC4zD2aTys6iwm50TmCqAj
+ 2Oe1b07B8/K+bkvHPpF8GckKDXMD9crAX+k26xD/s/WJB4syG/HR4Hggdz57gLjjwm5NQNqLCp4
+ Cy5IhLX7qkAIHhrpj9Sn4LVaw1wwjNDmlJgeAtRx11X06xjGb3v8ukQ=
+X-Received: by 2002:a05:690c:22c4:b0:796:2fde:5dfe with SMTP id
+ 00721157ae682-79a90ba0251mr167979557b3.38.1774344631989; Tue, 24 Mar 2026
+ 02:30:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <PAXPR04MB84595AE69ADF07A9F9FAB7B1884AA@PAXPR04MB8459.eurprd04.prod.outlook.com>
+References: <85854708c4d707d9db8ec84c11e1686a32198d91.1773843890.git.michal.simek@amd.com>
+In-Reply-To: <85854708c4d707d9db8ec84c11e1686a32198d91.1773843890.git.michal.simek@amd.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 24 Mar 2026 11:29:56 +0200
+X-Gm-Features: AaiRm51Wuv1ngOqX500CSKnBziQc_83rtGLxP2T71xzhoufv4B3F9FrncOKrijc
+Message-ID: <CAC_iWj+85eztMnt8G-cDsUgBJ7Jhpa+mB19F=d_VsKv4T2si-Q@mail.gmail.com>
+Subject: Re: [PATCH v2] efi_loader: Allow disabling ANSI console queries via
+ Kconfig
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@amd.com, pbrobinson@gmail.com, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jonathan Humphreys <j-humphreys@ti.com>, Shantur Rathore <i@shantur.com>,
+ Wadim Egorov <w.egorov@phytec.de>, 
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,16 +122,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Mar 22, 2026 at 12:26:46PM +0000, Peng Fan (OSS) wrote:
-> > SPL_POWER_LEGACY symbol. Can the maintainers please update these
-> > to use DM_PMIC, DM_REGULATOR (and SPL variants) as needed so
-> > that they use the modern architecture, or let me know what's missing
-> > here? Thanks!
-> 
-> If board maintainers would work on the migration, that would be great.
-> If not, I will give a check, but I not have the board to test.
+On Wed, 18 Mar 2026 at 16:25, Michal Simek <michal.simek@amd.com> wrote:
+>
+> Commit 4cb724364030 ("efi_loader: Disable ANSI output for tests")
+> introduced efi_console_set_ansi() to suppress ANSI escape sequences
+> during unit tests. Extend this mechanism to be configurable via a new
+> Kconfig option CONFIG_EFI_CONSOLE_DISABLE_ANSI.
+>
+> When CONFIG_EFI_CONSOLE_DISABLE_ANSI is enabled,
+> efi_console_set_ansi(false) is called at the start of
+> efi_setup_console_size(). This prevents query_console_serial() from
+> sending ANSI escape sequences to the terminal, using default 25x80
+> dimensions instead. This is useful for platforms where the serial
+> console cannot handle ANSI queries.
+>
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
 
-Thanks Peng, I have seen the patch on Verdin and I'll test/review the code.
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Francesco
-
+> ---
+>
+> Changes in v2:
+> - Replace runtime 'no_ansi' env variable with compile-time
+>   CONFIG_EFI_CONSOLE_DISABLE_ANSI Kconfig option (Ilias, Peter)
+>
+>  lib/efi_loader/Kconfig       | 11 +++++++++++
+>  lib/efi_loader/efi_console.c |  3 +++
+>  2 files changed, 14 insertions(+)
+>
+> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> index b5f81e0ff530..bae98e07d238 100644
+> --- a/lib/efi_loader/Kconfig
+> +++ b/lib/efi_loader/Kconfig
+> @@ -576,6 +576,17 @@ config EFI_EBBR_2_1_CONFORMANCE
+>         help
+>           Enabling this option adds the EBBRv2.1 conformance entry to the ECPT UEFI table.
+>
+> +config EFI_CONSOLE_DISABLE_ANSI
+> +       bool "Disable ANSI escape sequence queries for console size"
+> +       help
+> +         Select this option to disable ANSI escape sequence queries for
+> +         detecting serial console size. When enabled,
+> +         efi_setup_console_size() will not send ANSI escape sequences to
+> +         the terminal and will use default 25x80 dimensions instead.
+> +         This is useful for platforms where the serial console cannot
+> +         properly handle ANSI queries, causing boot delays or garbled
+> +         output.
+> +
+>  config EFI_SCROLL_ON_CLEAR_SCREEN
+>         bool "Avoid overwriting previous output on clear screen"
+>         help
+> diff --git a/lib/efi_loader/efi_console.c b/lib/efi_loader/efi_console.c
+> index 068d1a0a7b74..a798d5604a31 100644
+> --- a/lib/efi_loader/efi_console.c
+> +++ b/lib/efi_loader/efi_console.c
+> @@ -365,6 +365,9 @@ void efi_setup_console_size(void)
+>         int rows = 25, cols = 80;
+>         int ret = -ENODEV;
+>
+> +       if (IS_ENABLED(CONFIG_EFI_CONSOLE_DISABLE_ANSI))
+> +               efi_console_set_ansi(false);
+> +
+>         if (IS_ENABLED(CONFIG_VIDEO))
+>                 ret = query_vidconsole(&rows, &cols);
+>         if (ret) {
+> --
+> 2.43.0
+>
+> base-commit: 0d7293676b1e644b9b9ee2e45fb1ed10337cef31
+> branch: debian-sent3
