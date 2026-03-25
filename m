@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FBE4109C045
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 16:56:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31769109C047
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 16:56:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4D6F83FA7;
-	Wed, 25 Mar 2026 17:55:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 094BA83F86;
+	Wed, 25 Mar 2026 17:55:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QQsUzcrP";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lfShIvsO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2359383FB6; Wed, 25 Mar 2026 17:55:44 +0100 (CET)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id B53B183FD3; Wed, 25 Mar 2026 17:55:45 +0100 (CET)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D25D583FAF
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 17:55:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F57B83FA7
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 17:55:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-466f1c3c627so5325b6e.1
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 09:55:41 -0700 (PDT)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-46701f2077cso924118b6e.0
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 09:55:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1774457739; x=1775062539; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1774457741; x=1775062541; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DsVAD4+4Y029fRGCZEiSkMOUYbOgsQQ3d5i8iCrRDW4=;
- b=QQsUzcrPTnWdblUBfMxN2KdAmWO6FbgUtoJE89EGZ8vFV8dZ+iFK+9u96xskRkDjdv
- BQ71vurOyi5GWI4IawaBIJ21kn7ZnXoygX0s0v0GHeHlwYeubqBa/ufMuYvuB37KLqw1
- 9cfFjQxSL0egZa+nCQEqx3WpoMGIivASjr4zw=
+ bh=Z881z5jd2wmbjjcTKjYLqOLeDOI/44P3CyjiizKqpSo=;
+ b=lfShIvsOH2CC1/V5bT/AXwDAi8tHlORPywd3aGuLQj3StxWNK9lRq4uPDUv3HaYTvb
+ mfLhzFv82M6p1DL741j4b7AElhfBKLMSXgL4+1B52zrSogxEVdduYf4ruWV6QZlAh9T3
+ slwUuX0eqGdiSU7E4wemNCKkeFXbrSmANq33g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774457739; x=1775062539;
+ d=1e100.net; s=20251104; t=1774457741; x=1775062541;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=DsVAD4+4Y029fRGCZEiSkMOUYbOgsQQ3d5i8iCrRDW4=;
- b=KSCJI/eP/1sIYgv7Q+NmAjDpRFN0UN4wAiorFvRgV1wKHzfzEbxo441xIIptzP4fhB
- W8Xjn/WHUYC+rHjpCQk2bh6+Ow52/pZVqQJ0vFh6xKHAaCFzraJ6JecyiE0DYkmGIBV3
- snu5bEEI1iU9IX3iyfAEBemwQSZHrKLA+LugAB72Y9NbVQcI8uJMvr4JNrnfGplQAGC5
- 4wi+F+D9PL0ZXOR9WYjDPoCUZNjaF636QXePHZiy9G4M6aq0v21icrfcPjanflAdh8Yn
- jLvu/ftcQT8bdnKuGYy6SfIZlgrcyvaL8XOkKLbmol56gOG58J6csbMju2zIl99TY2dx
- QTMg==
-X-Gm-Message-State: AOJu0Yyj7wsuY9N82Qfod2fP7txwLaondqXgDuaf5TDYJpf0fQ36LcEM
- eyqJ5ZVnI0h6Bx22lZn+XbjSlkvfXdTDNc9wZ29+rJFdgyqyLUyz4fdzKMpCgwfJPR6JvlT+cmc
- 8jrDZMQ==
-X-Gm-Gg: ATEYQzzmPYXplNkWRieGgG5eidmtv2tmmHrZaTyjDf1jLEVrDXmQfq+cp74qUhH62PB
- LO/s5pGVVXL0bjcdMuUe5kdWLbDrGUmEFfP8tttzcR1FAiBpi47plwMrMcTiuMdjwS8xVT/UbQJ
- AW6k7SJmMQKIWRGJvfXggvod89kIQcLd7kEfVhW++EsClYIAoOAhbKIYTDeXwzDJyOHae5b6cxD
- QRzQsl4M0wPnRP2RIs1Bz1KHYpEFoWzaHTsYGmw3JAqqgNfnlUL7W7HNLMavxzznnoxDBqiGK92
- RV+EwtbtVMxyMkOR3Chdla8kCAbgEyHVCLJKxQPAOvFYgUCrY3kc1Udh/fq9Gqbw+G+4SBNlpav
- N2Mg0n0RKwFik9YeQeSrjFi6J7AJEHzk95a0pnhVSLGJ7OFbFUYsj91Ctdb+rzODvWmvA0sFiTD
- EXZxIeEOY10nTvD41MLsKms5M/kj9r
-X-Received: by 2002:a05:6808:c1b0:b0:467:272e:892 with SMTP id
- 5614622812f47-46a5c7f5165mr2049323b6e.57.1774457739493; 
- Wed, 25 Mar 2026 09:55:39 -0700 (PDT)
+ bh=Z881z5jd2wmbjjcTKjYLqOLeDOI/44P3CyjiizKqpSo=;
+ b=nlZSYnLAqwlbMiucnf/MPMGR39RHyMP5VOzjI4x3lVrLYcXuxkwRtGlBVCWrGeoobE
+ caiX6xV0pdw18DhT7QqhHyX5ry09YTCEGvOK6WUQdVnhyqau3ddBwshbhb25WaW/yXWl
+ PcByk6EDx2GdQeNnhfsSp21t0R8q9+SarG3LhE91GwLqx2x7LGknEpW2EkNwPkxrl/lA
+ SeDiIYVruB6+q/kay1Gz48Gp5kAYPAUeWXivonOjj358U6lo13o8n2YmyNhjmiUkYWYo
+ DCMBRX1XzvtR4kqR2PK1sx/nPMA7UPvCXwuKCQ2t2rdNW1qicQKfwu5qf+cTP7wGiRed
+ 4O5Q==
+X-Gm-Message-State: AOJu0YxRJFcuboZXwukjWukq2JerXxgYNa87OpdBpb/yHFfwRBxX/QnX
+ xrdqQSg6HYA5Rasy3cu+sQNKZPILvFyHqSTFLAhI+9C4JtBW7ObXKGYi4KHCoufWlZMeLoOQLvX
+ 1jlPFAg==
+X-Gm-Gg: ATEYQzxz6LUz9XhKuPgnLTjNEihLAsNbm8q278CCNdn1Xa55QYXM28UEBxeUURLS4zK
+ 0tG25a4pPWKp0DNSkOOT1Ao49MCPC6xvYBabUnCny6IQ/OVaW7I/PTxBSiNeF8PVOlkO47Rnes/
+ X+i4FtRv+q5vI8O0RHPJux3PkdPhtuVdqB0jdqxHjob3nKoRrQo1nQ8A0Gvh7rlG43qYZ7JDXpI
+ ce2MgAFwXOOD5VHOLq/BQbWGExnrkwjdhic9DIH4GT7279zBe3Ys7kZMG9Dp1EAx9T0d//layfJ
+ nh3g5qtxJ1ay1thaQCS0PyX6n0mx1yN8sWGw1aeVtDYlY/akNlSMBc+LmMrfGxlEt2qlxgRh1cW
+ BAnWoXbg/DWVTpQvbxWbQ6iPWtewY0mLoETEad6/BS2dmqFkBXqamAhxc6wNc60wj0asq2fJD0s
+ xMgulJqmNuM6+Mk/ugJA==
+X-Received: by 2002:a05:6808:1787:b0:467:153a:2d9c with SMTP id
+ 5614622812f47-46a0cde406fmr4489674b6e.15.1774457741389; 
+ Wed, 25 Mar 2026 09:55:41 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-46a7099df08sm30481b6e.15.2026.03.25.09.55.36
+ 5614622812f47-46a7099df08sm30481b6e.15.2026.03.25.09.55.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Mar 2026 09:55:38 -0700 (PDT)
+ Wed, 25 Mar 2026 09:55:40 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, James Hilliard <james.hilliard1@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Shiji Yang <yangshiji66@outlook.com>, Tom Rini <trini@konsulko.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>
-Subject: [PATCH 04/13] boot: Move type and OS checking into a new function
-Date: Wed, 25 Mar 2026 10:54:13 -0600
-Message-ID: <20260325165431.1027591-5-sjg@chromium.org>
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 05/13] boot: Move handling of the load_op into a separate
+ function
+Date: Wed, 25 Mar 2026 10:54:14 -0600
+Message-ID: <20260325165431.1027591-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260325165431.1027591-1-sjg@chromium.org>
 References: <20260325165431.1027591-1-sjg@chromium.org>
@@ -100,165 +96,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move the code which checks whether the image can be loaded into a
-separate check_allowed() function.
+Since fit_image_load() is still too long, move the load-operation
+handling into a separate function.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/image-fit.c | 98 ++++++++++++++++++++++++++++++------------------
- include/image.h  |  4 +-
- 2 files changed, 63 insertions(+), 39 deletions(-)
+ boot/image-fit.c | 107 ++++++++++++++++++++++++++++++++---------------
+ 1 file changed, 73 insertions(+), 34 deletions(-)
 
 diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 5680cc8b496..3a6120e9151 100644
+index 3a6120e9151..c5067b63682 100644
 --- a/boot/image-fit.c
 +++ b/boot/image-fit.c
-@@ -2177,9 +2177,64 @@ static int select_image(const void *fit, struct bootm_headers *images,
- 	return noffset;
+@@ -2232,6 +2232,75 @@ static int check_allowed(const void *fit, int noffset,
+ 	return 0;
  }
  
 +/**
-+ * check_allowed() - Check if an image is allowed to be loaded
++ * handle_load_op() - Handle the load operation
++ *
++ * Process the load_op and figure out where the image should be loaded, now
++ * that it has been located
 + *
 + * @fit: FIT to check
 + * @noffset: Node offset of the image being loaded
++ * @prop_name: Property name (in the configuration node) indicating the image
++ * that was loaded
++ * @buf: Pointer to image (within the FIT)
++ * @size: Size of the image in bytes
 + * @image_type: Type of the image
-+ * @arch: Expected architecture for the image
++ * @load_op: Load operation to process
 + * @bootstage_id: ID of starting bootstage to use for progress updates
-+ * Return: 0 if OK, -EIO if not
++ * @datap: Returns buf
++ * @loadp: Returns the address to which the data should be loaded
++ * @load_endp: Returns the end address of the data-loading location
++ * Return: 0 if OK, -ve on error
 + */
-+static int check_allowed(const void *fit, int noffset,
-+			 enum image_type_t image_type, enum image_arch_t arch,
-+			 int bootstage_id)
++static int handle_load_op(const void *fit, int noffset, const char *prop_name,
++			  void *buf, ulong size,
++			  enum image_type_t image_type,
++			  enum fit_load_op load_op, int bootstage_id,
++			  ulong *datap, ulong *loadp, ulong *load_endp)
 +{
-+	bool type_ok, os_ok;
-+	uint8_t os;
++	ulong data, load;
 +
-+	bootstage_mark(bootstage_id + BOOTSTAGE_SUB_CHECK_ALL);
-+	type_ok = fit_image_check_type(fit, noffset, image_type) ||
-+		  fit_image_check_type(fit, noffset, IH_TYPE_FIRMWARE) ||
-+		  fit_image_check_type(fit, noffset, IH_TYPE_TEE) ||
-+		  fit_image_check_type(fit, noffset, IH_TYPE_TFA_BL31) ||
-+		  (image_type == IH_TYPE_KERNEL &&
-+		   fit_image_check_type(fit, noffset, IH_TYPE_KERNEL_NOLOAD));
++	data = map_to_sysmem(buf);
++	load = data;
++	*load_endp = 0;
++	if (load_op == FIT_LOAD_IGNORED) {
++		log_debug("load_op: not loading\n");
++		/* Don't load */
++	} else if (fit_image_get_load(fit, noffset, &load)) {
++		if (load_op == FIT_LOAD_REQUIRED) {
++			printf("Can't get %s subimage load address!\n",
++			       prop_name);
++			bootstage_error(bootstage_id + BOOTSTAGE_SUB_LOAD);
++			return -EBADF;
++		}
++	} else if (load_op != FIT_LOAD_OPTIONAL_NON_ZERO || load) {
++		ulong image_start, image_end;
 +
-+	os_ok = image_type == IH_TYPE_FLATDT ||
-+		image_type == IH_TYPE_FPGA ||
-+		fit_image_check_os(fit, noffset, IH_OS_LINUX) ||
-+		fit_image_check_os(fit, noffset, IH_OS_U_BOOT) ||
-+		fit_image_check_os(fit, noffset, IH_OS_TEE) ||
-+		fit_image_check_os(fit, noffset, IH_OS_OPENRTOS) ||
-+		fit_image_check_os(fit, noffset, IH_OS_EFI) ||
-+		fit_image_check_os(fit, noffset, IH_OS_VXWORKS) ||
-+		fit_image_check_os(fit, noffset, IH_OS_ELF);
++		/*
++		 * move image data to the load address,
++		 * make sure we don't overwrite initial image
++		 */
++		image_start = map_to_sysmem(fit);
++		image_end = image_start + fit_get_size(fit);
 +
-+	/*
-+	 * If either of the checks fail, we should report an error, but
-+	 * if the image type is coming from the "loadables" field, we
-+	 * don't care what it is
-+	 */
-+	if ((!type_ok || !os_ok) && image_type != IH_TYPE_LOADABLE) {
-+		fit_image_get_os(fit, noffset, &os);
-+		printf("No %s %s %s Image\n",
-+		       genimg_get_os_name(os),
-+		       genimg_get_arch_name(arch),
-+		       genimg_get_type_name(image_type));
-+		bootstage_error(bootstage_id + BOOTSTAGE_SUB_CHECK_ALL);
-+		return -EIO;
++		*load_endp = load + size;
++		if (image_type != IH_TYPE_KERNEL &&
++		    load < image_end && *load_endp > image_start) {
++			printf("Error: %s overwritten\n", prop_name);
++			return -EXDEV;
++		}
++
++		printf("   Loading %s from 0x%08lx to 0x%08lx\n",
++		       prop_name, data, load);
++	} else {
++		load = data;	/* No load address specified */
 +	}
-+
-+	bootstage_mark(bootstage_id + BOOTSTAGE_SUB_CHECK_ALL_OK);
++	*datap = data;
++	*loadp = load;
 +
 +	return 0;
 +}
 +
  int fit_image_load(struct bootm_headers *images, ulong addr,
  		   const char **fit_unamep, const char **fit_uname_configp,
--		   int arch, int ph_type, int bootstage_id,
-+		   enum image_arch_t arch, int ph_type, int bootstage_id,
- 		   enum fit_load_op load_op, ulong *datap, ulong *lenp)
- {
- 	int image_type = image_ph_type(ph_type);
-@@ -2191,10 +2246,10 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 	void *buf;
- 	void *loadbuf;
- 	size_t size;
--	int type_ok, os_ok;
- 	ulong load, load_end, data, len;
--	uint8_t os, comp, os_arch;
-+	uint8_t comp, os_arch;
- 	const char *prop_name;
-+	int ret;
+ 		   enum image_arch_t arch, int ph_type, int bootstage_id,
+@@ -2305,40 +2374,10 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
  
- 	fit = map_sysmem(addr, 0);
- 	prop_name = fit_get_image_type_property(ph_type);
-@@ -2221,40 +2276,9 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 	fit_image_get_arch(fit, noffset, &os_arch);
- 	images_set_arch(images, os_arch);
+ 	bootstage_mark(bootstage_id + BOOTSTAGE_SUB_GET_DATA_OK);
  
--	bootstage_mark(bootstage_id + BOOTSTAGE_SUB_CHECK_ALL);
--	type_ok = fit_image_check_type(fit, noffset, image_type) ||
--		  fit_image_check_type(fit, noffset, IH_TYPE_FIRMWARE) ||
--		  fit_image_check_type(fit, noffset, IH_TYPE_TEE) ||
--		  fit_image_check_type(fit, noffset, IH_TYPE_TFA_BL31) ||
--		  (image_type == IH_TYPE_KERNEL &&
--		   fit_image_check_type(fit, noffset, IH_TYPE_KERNEL_NOLOAD));
+-	data = map_to_sysmem(buf);
+-	load = data;
+-	if (load_op == FIT_LOAD_IGNORED) {
+-		log_debug("load_op: not loading\n");
+-		/* Don't load */
+-	} else if (fit_image_get_load(fit, noffset, &load)) {
+-		if (load_op == FIT_LOAD_REQUIRED) {
+-			printf("Can't get %s subimage load address!\n",
+-			       prop_name);
+-			bootstage_error(bootstage_id + BOOTSTAGE_SUB_LOAD);
+-			return -EBADF;
+-		}
+-	} else if (load_op != FIT_LOAD_OPTIONAL_NON_ZERO || load) {
+-		ulong image_start, image_end;
 -
--	os_ok = image_type == IH_TYPE_FLATDT ||
--		image_type == IH_TYPE_FPGA ||
--		fit_image_check_os(fit, noffset, IH_OS_LINUX) ||
--		fit_image_check_os(fit, noffset, IH_OS_U_BOOT) ||
--		fit_image_check_os(fit, noffset, IH_OS_TEE) ||
--		fit_image_check_os(fit, noffset, IH_OS_OPENRTOS) ||
--		fit_image_check_os(fit, noffset, IH_OS_EFI) ||
--		fit_image_check_os(fit, noffset, IH_OS_VXWORKS) ||
--		fit_image_check_os(fit, noffset, IH_OS_ELF);
+-		/*
+-		 * move image data to the load address,
+-		 * make sure we don't overwrite initial image
+-		 */
+-		image_start = addr;
+-		image_end = addr + fit_get_size(fit);
 -
--	/*
--	 * If either of the checks fail, we should report an error, but
--	 * if the image type is coming from the "loadables" field, we
--	 * don't care what it is
--	 */
--	if ((!type_ok || !os_ok) && image_type != IH_TYPE_LOADABLE) {
--		fit_image_get_os(fit, noffset, &os);
--		printf("No %s %s %s Image\n",
--		       genimg_get_os_name(os),
--		       genimg_get_arch_name(arch),
--		       genimg_get_type_name(image_type));
--		bootstage_error(bootstage_id + BOOTSTAGE_SUB_CHECK_ALL);
--		return -EIO;
+-		load_end = load + len;
+-		if (image_type != IH_TYPE_KERNEL &&
+-		    load < image_end && load_end > image_start) {
+-			printf("Error: %s overwritten\n", prop_name);
+-			return -EXDEV;
+-		}
+-
+-		printf("   Loading %s from 0x%08lx to 0x%08lx\n",
+-		       prop_name, data, load);
+-	} else {
+-		load = data;	/* No load address specified */
 -	}
--
--	bootstage_mark(bootstage_id + BOOTSTAGE_SUB_CHECK_ALL_OK);
-+	ret = check_allowed(fit, noffset, image_type, arch, bootstage_id);
++	ret = handle_load_op(fit, noffset, prop_name, buf, len, image_type,
++			     load_op, bootstage_id, &data, &load, &load_end);
 +	if (ret)
 +		return ret;
  
- 	/* get image data address and length */
- 	if (fit_image_get_data(fit, noffset, (const void **)&buf, &size)) {
-diff --git a/include/image.h b/include/image.h
-index 5e11dc92559..726d82deb22 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -111,7 +111,7 @@ enum {
-  * New IDs *MUST* be appended at the end of the list and *NEVER*
-  * inserted for backward compatibility.
-  */
--enum {
-+enum image_arch_t {
- 	IH_ARCH_INVALID		= 0,	/* Invalid CPU	*/
- 	IH_ARCH_ALPHA,			/* Alpha	*/
- 	IH_ARCH_ARM,			/* ARM		*/
-@@ -760,7 +760,7 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
-  */
- int fit_image_load(struct bootm_headers *images, ulong addr,
- 		   const char **fit_unamep, const char **fit_uname_configp,
--		   int arch, int image_ph_type, int bootstage_id,
-+		   enum image_arch_t arch, int image_ph_type, int bootstage_id,
- 		   enum fit_load_op load_op, ulong *datap, ulong *lenp);
- 
- /**
+ 	comp = IH_COMP_NONE;
+ 	loadbuf = buf;
 -- 
 2.43.0
 
