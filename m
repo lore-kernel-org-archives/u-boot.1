@@ -4,133 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B7C7109C02F
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 15:31:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 653A7109C02F
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 15:36:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A2B183A91;
-	Wed, 25 Mar 2026 16:31:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+	by phobos.denx.de (Postfix) with ESMTP id D8B848352B;
+	Wed, 25 Mar 2026 16:36:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="M2V9X5at";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="K7xTpyDs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70CD983AAB; Wed, 25 Mar 2026 16:31:26 +0100 (CET)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4F29683A91; Wed, 25 Mar 2026 16:36:53 +0100 (CET)
+Received: from PH0PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82CE081E18
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 16:31:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=suse.com
+ by phobos.denx.de (Postfix) with ESMTPS id 955A281E18
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 16:36:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mbrugger@suse.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-43b4d734678so2465017f8f.1
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 08:31:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1774452684; x=1775057484; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=t1GExhSWuz6W80lZOfKQ4skaQjWfvh/+Yp/jUqj93Bc=;
- b=M2V9X5atE7jyoNZSQEvg43U5GJdqAlSSEOpcJq/4Nt1GWFXDKTNjYxhmhPcT24xjS7
- 33mkSfE09g7eaXsI9gw1ZCzNGUE7kLC7miasQzyZ3zDDIqca4PE5f/9eRfcmrVf2r8IC
- amWFfUOgODkpbuNuoEic6j5X919a7zfF7hLqY6M6xMc9NmzCN6BBtAhXS9O3HDL1BqjM
- hQiAzAyoZZQOUgEyWFig3E9iY5XzfBeF4RJduLJFVZ8JLP/spgEXidsfoTXOcAySOB9L
- Y32t4LCHNn5kYZleySV3keRZEvi5oJvIbSZ02iIxz7yeXy6dKjwAsrt7RvMIw81DIVRe
- pA4g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774452684; x=1775057484;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=t1GExhSWuz6W80lZOfKQ4skaQjWfvh/+Yp/jUqj93Bc=;
- b=gimGGQWO80HEW9Ey2IK9QKeOa1xzB+qMfHyZ2la81j5aDCzoezFrm4wzHBOP9IRuSn
- Ir3fYtaK0dC9TmRfNJi9VZkbS43LXSCIkmJbYaJRcaYtXCghXE9O/XziqV3zxzabqKhv
- Xj6++0TZCQxhkEt9LJ0NA5hxhtv4VZzWC0gVs8w+DtXNSBnVgkFvyamwjg5znhDxdDc4
- GHLduBGCXrK531nyKDcF+69JOXOkQUueU/O9gX7FxEnKyBSClv8+HL8Q8Oz3nrNoFfl0
- fJGlBFkSTV6K4xQ9hpywwjH/1wCU+UhQKvTrPjrU7ZSjt2pBUPkd/v2hI+7g/QkEoMIv
- 5vpA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWLuiZrD4CbAsx1vXCjNcCmBl60wNLYoxJbHjqgWcPz6pNOytG6EzWFA1eGETCUCQzqxSgs4BI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzzk0DRibFIPKN5tFwjWy5bD6/Ehj5pq3XTxB1eUozY6rEv7LNy
- PsAHS2KTteIdm0UXIdB3BVlfy69FEJCaQGRVbOsWS5eHIW48uAetC249vBH9nbKILjM=
-X-Gm-Gg: ATEYQzzdGEfmgoOB8obamshkC2FvFjDqUCVfilfoTfgLLCKukTGqt/0oNBLnfloQw1a
- o/1eA+k2kF2QGoEhgQelY/cowyg7SJgovuvc7pO+AQBax8xL03dFwKAYSNCmuKW3JQKWy6K67qU
- mQ7jxb3nkg/71X5XMPM4V6tD1GmNViVt2KD66Orav9NOozayxH4vWTcZdrNfXwwLo+1/O3Izjaa
- E14t72C5zE0/D2GqFpD/dG1/B4ZJC10wD8bKrMGr7WWl5jgE/PN6Xazfx++bqxaidEu248TNrLK
- e6eZ3AJeW4xU2GpYJuOKGlo/P5Et2o+KYrccMemWUlFLJOstMYjuEai6CmnF7F/pA315aLAfkBw
- WP07Gjobbhm9+6K/acaU4C1UWWnU6q7thd/KO4QctTfPpSWTwSDqgxH06N19vfQ0X+DXIgRDaoO
- qFC6ZdSV6bCv9ZPsKixTaoWS3u4Cm6ZAzTKJ6lt4S1n2KLDoeEfrIsX8bZXQj3bR43NW5qFdwxR
- g==
-X-Received: by 2002:a05:6000:2912:b0:439:ac98:751f with SMTP id
- ffacd0b85a97d-43b889bd9b8mr5778342f8f.23.1774452683774; 
- Wed, 25 Mar 2026 08:31:23 -0700 (PDT)
-Received: from [192.168.2.177] (156.85-85-163.dynamic.clientes.euskaltel.es.
- [85.85.163.156]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b9192e3f9sm703739f8f.7.2026.03.25.08.31.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 25 Mar 2026 08:31:23 -0700 (PDT)
-Message-ID: <f5fba242-a2ee-450f-a45f-17197c9a850b@suse.com>
-Date: Wed, 25 Mar 2026 16:31:20 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ufbGrrw9/Y9Q4AVajUTybn7VWU14YuSn6zWRWYbS5SuUlG89Jdtji9sq6q6mWOC1kEzpCdWrgazMRV5D9PJ5TBA6JgPRaJu2WMVZjGXR/ayx9wTfBwg35j8IehIzOLBR7nLdWpuxScf7Ufjry4RREUj3hifImYw35GoimRyOC//FQl02j/6ZZ6/AmmrreZzbyJ8yRy7fwQ3dzxMqKmZeRhTyFIlsvpWOuMKWU2oVZ/NmUzMbUGUe8awmh+ToQDn2ep/Ap9adkHMEXp5kx+ece8/iKa4RBos63Lcys17y2/qSpYS3NbU7dHfuIhdX4if9Z5yXquk2kxJ0OA330GA2sQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=09bZugIdJsAP+GEm02OKvxHj5skajf7+Y6JMqSkQxlY=;
+ b=NxNCMacdndgbWzx1Z57X3QHnZtwUF3emLh4K6kmicdWB56Xr8vr85GQv+3l805osXPt4SKUqo5mjgBVnPzUz00DBL5kQt/a1ibUNtIM08ae6ZUB4I0T1O4/CZWmUBrENvJ2b3OE0h2E6n90DhdaLI2rQGGYgaKD5MU/azuFIW7Wz2OeIzJjT1XzCW/qhpQVyWLywE7GYhssxfE396hvjv4gfl9lgLYQFvEzcCYd4Fn+/KSniokf3v2j2fp5joXssBVQPQYR68849pr4PZe6xb0jscv50WWmVfm4h7MFigTo16ftzSsKgOTurea3UzMuE3o/ywqM8+drExNeI2kYMaw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=09bZugIdJsAP+GEm02OKvxHj5skajf7+Y6JMqSkQxlY=;
+ b=K7xTpyDsmAb9mq1LjHdrhHdlC/bVSyxMWCIYZNcDYL5+3sfYvrxdg9p1CFt5HXeaZn0y8WgQseXnFXY5qz1ZFtQ8mE9k0Tdpv8aJ5O/GiG2Wf4+3wJUiyAqE6rmzJA6JchVy0WdFCy3dqNKqNdvdTaHy36kGhlJRQoCkaZ3KaU0=
+Received: from CH0PR13CA0017.namprd13.prod.outlook.com (2603:10b6:610:b1::22)
+ by BN7PPF2E18BD747.namprd12.prod.outlook.com
+ (2603:10b6:40f:fc02::6ca) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.8; Wed, 25 Mar
+ 2026 15:36:44 +0000
+Received: from CH3PEPF0000000D.namprd04.prod.outlook.com (2603:10b6:610:b1::4)
+ by CH0PR13CA0017.outlook.office365.com (2603:10b6:610:b1::22) with
+ Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.20
+ via Frontend Transport; Wed, 25 Mar 2026 15:36:43 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ CH3PEPF0000000D.mail.protection.outlook.com (10.167.244.43) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9723.19 via Frontend Transport; Wed, 25 Mar 2026 15:36:43 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 25 Mar
+ 2026 10:36:43 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 25 Mar
+ 2026 10:36:42 -0500
+Received: from localhost (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Wed, 25 Mar 2026 10:36:41 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@amd.com>
+CC: Pranav Tilak <pranav.vinaytilak@amd.com>, "Edgar E. Iglesias"
+ <edgar.iglesias@xilinx.com>, Jerome Forissier <jerome.forissier@arm.com>, Joe
+ Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] net: phy: dp83867: reset PHY on init to ensure clean state
+Date: Wed, 25 Mar 2026 16:36:34 +0100
+Message-ID: <66795e9c91026c8fc6d40703f200eedd62ada355.1774452992.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rpi: Update the naming for bcm2712 SoC RevD naming
-To: Peter Robinson <pbrobinson@gmail.com>,
- =?UTF-8?Q?Filip_Kokosi=C5=84ski?= <filip.kokosinski@gmail.com>,
- u-boot@lists.denx.de
-References: <20260313170839.2720191-1-pbrobinson@gmail.com>
-Content-Language: en-US, ca-ES, es-ES
-From: Matthias Brugger <mbrugger@suse.com>
-Autocrypt: addr=mbrugger@suse.com; keydata=
- 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
- PVrr2NoUqi/bxI8fFQJD1jVj8K0=
-In-Reply-To: <20260313170839.2720191-1-pbrobinson@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1480; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=faY4Tk49unXoUMAQqkueK0R/NhGjJvs4a2P4bjditGA=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWQeYWSew8UezblN/OmxffMDpmlpi1nKXNjKVeR2Uvhrp
+ +KLu02RHaUsDGIcDLJiiizTmXQc1ny7tlRseWQ+zBxWJpAhDFycAjCRyd6MDNf0j9WvtTNffbRn
+ gofLAd22gp/6WlWfL/OpWxobc1xQsWf4K9fDpRmzbcvymH1pP688mhVx3eHTVKZejzoRkcK3lj+
+ mcAAA
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH3PEPF0000000D:EE_|BN7PPF2E18BD747:EE_
+X-MS-Office365-Filtering-Correlation-Id: 64af2bf1-8a15-402c-e17d-08de8a84514c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|36860700016|376014|1800799024|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: dkfKP+69bP9bgV1KkRMbBAHJtfyyvq2f2leGdphJgmmK2vxz5wiGtoZP7NAMqjrySzA5OWzPi3dDnJQIYC0/RjNBjrCbxPzAr/bI2YmP+uP6fr5NbkKJ9kmHOzpcTb04jNkzjZuBMOJNtNVQiwfxP5Lc4oe+aThEDB5Y8WXFNOfaU/deOwisAUFfRBxX0iLFVfSGMhuKFN6E+P9wMl+kyjy6YuaN8fD4zZ32ssE2uKMYefti+HcbAXQHWvkj3fDfkcRLXksW5gUltrBZ7he6vLAvqRnEA7rM0DskB3wVr2bOwOoe2W99294TctryTe7e2wybAovHRK3enJbVsLD/9qkWHU2kx33USK7NRMQshfh49igFJRiyoS52B7XCLs7/3RTnqDF7BGBuDwAXSNY1JWkO/BWtVsme0Byg/lREoYbQ/t1W1XCe9IXx3dsrDKzevx52zUhxpdJbRNxRyupeAzirOFO8CvWW/PSr4DhoG4iyMZRRrtQWQd2LchIo7ZqhEN+YwxaQOyAan853okao2y9JDLx4/Vu5TrND6RSI7beIscxUMad0fO0A2GXDnKlNDvgNlvDDcBC13+ZDIv5I2CXqRLwCvG9AEgbLSY5GSclur5cwZaB971pvVUYj/MRQP93YYLLPl06NPiC8+PqKz9u9w0PiJS7wgVcFHDkVXIxCZUJFV6xAFDdM7YFlW5l48BXd9xOTkXLzY6JsU/h5DaYiVAjwA2uMkhBx4DmNt4SJ5C9Fg4GBV+3PyHB8QtKAjajUs5XKiLIM+IZwNORATg==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: +FNU1XcP/yqk0I5cvEHfVAEv6KBeBBRYsNRJ2SxsZiv/lcOPjcOTmvWXcM+nn3ozQMkcVSGh//tWzE4ybfqujf39Orgg7/DMG8oFGtL8ucnHKOUB7j4QFoc1HE/ht/fNz5ZvbUnR00pueTGslBg1q013f6XZgNFlh0fT5HOIlrfvIz9vQ3CZSXTDZFPIEe3S9b0pfN2zsHVhkpg8WbyNd//hbgBnwT8JbWKglqfnjX+Py9nUi/2mvkUKBiDMZVBeQ0th2PN5AD12aog4ikCWzrJRNikzgHuEkTxQuIN4t75m9HMpwUZDbxSGaRIXVSyBh4s2V+SAeZEsTXB1VAIQ9c9k4+UCug3GLfsfWMM3k6spv6shoj8HQ2jwVV8cDbEUuZTWoVB96nmxKof9WrDZy3v7VcCwfD06K0Lw1nA+hpGkT+SUwfw8kPd8eKQwzCAI
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Mar 2026 15:36:43.6953 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 64af2bf1-8a15-402c-e17d-08de8a84514c
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH3PEPF0000000D.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN7PPF2E18BD747
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,34 +135,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Pranav Tilak <pranav.vinaytilak@amd.com>
 
+After a warm reboot, the PHY is left in power-down state
+(BMCR_PDOWN set) causing auto-negotiation to timeout when
+running the dhcp command.
 
-On 13/03/2026 18:08, Peter Robinson wrote:
-> The downstream Raspberry Pi uses two namings for the revD
-> SoC device trees, both bcm2712d0-rpi-5-b and bcm2712-d-rpi-5-b
-> but it seems upstream has settled on just the later, so lets
-> use that as it's the name that maps both upstream and downstream.
-> 
-> Fixes: c15a7919725 ("board/raspberrypi: add bcm2712d0-rpi-5-b for Raspberry Pi 5")
-> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+Fix this by calling phy_reset() in dp83867_config() which
+brings the PHY to a known clean state. The existing
+DP83867_SW_RESTART is removed as it is redundant after phy_reset().
 
-Reviewed-by: Matthias Brugger <mbrugger@suse.com>
+Fixes: 721aed79126b ("net: phy: Add support for Texas Instruments DP83867")
+Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-> ---
->   board/raspberrypi/rpi/rpi.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-> index 7f69e5b6163..b0a1484c0fa 100644
-> --- a/board/raspberrypi/rpi/rpi.c
-> +++ b/board/raspberrypi/rpi/rpi.c
-> @@ -199,7 +199,7 @@ static const struct rpi_model rpi_models_new_scheme[] = {
->   		"5 Model B",
->   		FDTFILES(
->   			[0] = DTB_DIR "bcm2712-rpi-5-b.dtb",
-> -			[1] = DTB_DIR "bcm2712d0-rpi-5-b.dtb"
-> +			[1] = DTB_DIR "bcm2712-d-rpi-5-b.dtb"
->   		),
->   		true,
->   	},
+ drivers/net/phy/dp83867.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
+diff --git a/drivers/net/phy/dp83867.c b/drivers/net/phy/dp83867.c
+index 772cde1c520c..7ce03b59b6ab 100644
+--- a/drivers/net/phy/dp83867.c
++++ b/drivers/net/phy/dp83867.c
+@@ -257,14 +257,14 @@ static int dp83867_config(struct phy_device *phydev)
+ 
+ 	dp83867 = (struct dp83867_private *)phydev->priv;
+ 
+-	ret = dp83867_of_init(phydev);
++	/* Reset PHY to clear any stale state after warm reboot */
++	ret = phy_reset(phydev);
+ 	if (ret)
+ 		return ret;
+ 
+-	/* Restart the PHY.  */
+-	val = phy_read(phydev, MDIO_DEVAD_NONE, DP83867_CTRL);
+-	phy_write(phydev, MDIO_DEVAD_NONE, DP83867_CTRL,
+-		  val | DP83867_SW_RESTART);
++	ret = dp83867_of_init(phydev);
++	if (ret)
++		return ret;
+ 
+ 	/* Mode 1 or 2 workaround */
+ 	if (dp83867->rxctrl_strap_quirk) {
+-- 
+2.43.0
+
+base-commit: 07ad94eb8a3a9d80273a16a7ac8c7caaba607fe2
+branch: debian-sent3
