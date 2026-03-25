@@ -4,92 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62772109C057
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 19:53:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99BF6109C05B
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 20:12:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C376F83DA6;
-	Wed, 25 Mar 2026 20:53:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D7F3183CD3;
+	Wed, 25 Mar 2026 21:12:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gDU43POS";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Ks8ckR/p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15BA283F6D; Wed, 25 Mar 2026 20:53:44 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1E98D83DA6; Wed, 25 Mar 2026 21:12:38 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D531283A91
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 20:53:41 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7d8b2703f37so166583a34.1
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 12:53:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774468420; x=1775073220; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JUhfvVooYjZR+hDYLYGquvPoI3t7JF3lJVJwOQYZFKs=;
- b=gDU43POSlZgAKk3nKUaiJv+gpOspSWOKKtowBMGFszgnQf0jSIuZ6I+8L4zZk97vEZ
- ysvQ+/+mvu34keP3mVeQpQSqBZJBomABO7BPTkzvis5Nl/UQjzITiaRHObNeNaGT5jeQ
- K9IU+8KcP4GZZ1Zwv+sJhdO3RvTHXLIVkmUrQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774468420; x=1775073220;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=JUhfvVooYjZR+hDYLYGquvPoI3t7JF3lJVJwOQYZFKs=;
- b=n1SDAX4cDxDaTEtoa8RXQS6qeEtkwoE3YyJrqqo27df2YziScF4u+y3jv1ju/pcf8X
- TRDF0x0IEmuQR2uksRgPhOUy82KuXcqSPgf2+6++BbEL/LIn2zGgMd4t+4RiEeheqMzo
- LNMrQiV9ICezPNbDQv+AsdjtptQ8KK1546l8UgWTrpdRAU8jUqn31+KQwWToBNQOYJnv
- KYATQ5+XsOwJiq2Rkmv99R/cpAHKxE+2grgYT/qU4+3opUY0dUeHErtP4l7w8SrbHz7y
- 4rZhgoZqU2RYtix1LvXxXdasU9cSpH2LtqHS4CiM9KtmYoiK7rYnADsPK9K9IL/u0p8l
- 1QAA==
-X-Gm-Message-State: AOJu0YzRwm7SVK35GpgkM8gE497H4j5sZrqv64fcrD967tafAuHdXVVl
- k3oZcxN4bUZaL1gK/VthArjGlQn4bhucoHPv/jgE/sv189Oo6pHsTG4ebyQ4z3SrI/M=
-X-Gm-Gg: ATEYQzyQZLftFPEj8pMMItdft+KgK2f6Ve7Epz3SH7GIzAxU1c7/G+6Q3KJS4cuRhqt
- ZADhot3u7wuhBrkuW0A+ITbXxHbjxrgPpD/jzf0FYLqwZtgahLoq/LUOgOv07QN+GT0qAXnNojf
- 1s0u8FioYXAzwyi0UUPLmnwEf+R4TugBTSuLN5v71ki9btcY5f5wK3QKECX9aeVzeCmJe2bA7Mi
- EH7fCEjKkvdZ+aBmWtzuamflzbfVAGDsQrg2sUeIHjBsBGYFRkhl5fz6ZjjPi3F07ohdc1oCdsu
- z/VgkR7xa6US/y+HcWw62mRiQvBQqlx7LOqtOP9cCEQfQqhuKratb0Q5sKTNY5wG10g8gmCK64S
- o97LCL6J/fbtUxo2ApXJtHVkUe51imi1H6aoC08ZKNptQClJP0WCxCDqtlls85H8hqWam58HE4d
- D6lb0p+PxUx3Gztu8AGEkNzos/2/HqWf/8IUjG3b49qLFibMBMH8rbewRXgtf6ANxs6wMms5ZUP
- 7adDZGaK600ANiPB7STwHyguNY6snQdvuSt5/OGCkZjUaYi
-X-Received: by 2002:a05:6830:380f:b0:7d7:f90c:5833 with SMTP id
- 46e09a7af769-7d9d69d0c5cmr2384609a34.27.1774468420515; 
- Wed, 25 Mar 2026 12:53:40 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d9e71f5ab2sm480687a34.18.2026.03.25.12.53.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Mar 2026 12:53:39 -0700 (PDT)
-Date: Wed, 25 Mar 2026 13:53:37 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>, Sam Edwards <cfsworks@gmail.com>,
- Sughosh Ganu <sughosh.ganu@arm.com>
-Subject: Re: [PATCH] kbuild: Use relative paths in generated .incbin directives
-Message-ID: <20260325195337.GY502704@bill-the-cat>
-References: <20260325130811.447377-1-sjg@chromium.org>
- <20260325165420.GT502704@bill-the-cat>
- <CAFLszTgZpg-anG1J5kyiYk2JJ3dDiiyvuk5AV_PO+ri_b552tA@mail.gmail.com>
- <20260325171540.GU502704@bill-the-cat>
- <CAFLszTh3NgpY1VQer2wN9-feOvM8khXaFyp+ePhTpqowGK_qrQ@mail.gmail.com>
- <20260325182619.GV502704@bill-the-cat>
- <CAFLszThCO2a1COB8kBwYfTXM65AGJEugo9MWZAjphQNuX16Y-Q@mail.gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 82D8E83A91
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 21:12:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=e7f4=B2=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1774469554;
+ bh=zHHwz/+3M7NfTahxD6ru0zt1ES7K64xNpVDwnEHLHg8=;
+ b=Ks8ckR/pfbcpFhhkYVthqkl+8DKZHMuRWlxE0CNthxvgv3ZmF9TP4FEw/XN14UFvgHzan73DZ
+ IqcMDyX8P7c04TDsfPsyQnpTMDBvpb3Ybvo4IDDo7FesdKIl+FciDXyHDDPi+anX0gT9Vrn8v7O
+ 8iMra4emvuQaEnHdE51LUSQm4jd4vGUT7P2IHiOkCb9BUNjBf4FFavCE3iHtIn4uZz+JAwj2OIy
+ ppycF+u0t6ixKsh3K+/50SshGA2V8y0vyNlXAqpbT7IjtW0pn3nWvTMK5it+qsOt5ARJanW9yH9
+ pxfsDoOygm5CjbBG6QiKH4dPJkl4WYYUHFwcUIfuAKcA==
+X-Forward-Email-ID: 69c441b167e6eae9db0904fd
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.66
+X-Forward-Email-Version: 2.6.55
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <c67bddd4-3827-4e72-a08e-99691cea2165@kwiboo.se>
+Date: Wed, 25 Mar 2026 21:12:31 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="F+jMOzaAK/fmICJV"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThCO2a1COB8kBwYfTXM65AGJEugo9MWZAjphQNuX16Y-Q@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: rockchip: Guard call of board_early_init_f in SPL
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>
+References: <20260325190025.3428560-1-trini@konsulko.com>
+ <fb6ee141-3369-45e6-8320-e91f67ec6b1e@kwiboo.se>
+ <CAFLszTiF4RDyo8+4RZhsNViSNquU3Ouq2fNr5NjG7PvK+2zrtg@mail.gmail.com>
+ <20260325195129.GX502704@bill-the-cat>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20260325195129.GX502704@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,105 +76,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 3/25/2026 8:51 PM, Tom Rini wrote:
+> On Wed, Mar 25, 2026 at 01:42:28PM -0600, Simon Glass wrote:
+>> Hi Jonas,
+>>
+>> On Wed, 25 Mar 2026 at 13:31, Jonas Karlman <jonas@kwiboo.se> wrote:
+>>>
+>>> Hi Tom,
+>>>
+>>> On 3/25/2026 8:00 PM, Tom Rini wrote:
+>>>> Today, no platforms call board_early_init_f, and rockchip provides a
+>>>> weak default function. Change this to not providing a weak function and
+>>>> only call board_early_init_f if CONFIG_BOARD_EARLY_INIT_F is enabled.
+>>>> This will allow any potential future needs to be taken care of, and make
+>>>> future consolidation easier.
+>>>>
+>>>> Signed-off-by: Tom Rini <trini@konsulko.com>
+>>>> ---
+>>>> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+>>>> Cc: Kever Yang <kever.yang@rock-chips.com>
+>>>> ---
+>>>>  arch/arm/mach-rockchip/spl.c | 8 ++------
+>>>>  1 file changed, 2 insertions(+), 6 deletions(-)
+>>>>
+>>>> diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
+>>>> index e989c148079a..8026cc0abb8d 100644
+>>>> --- a/arch/arm/mach-rockchip/spl.c
+>>>> +++ b/arch/arm/mach-rockchip/spl.c
+>>>> @@ -97,11 +97,6 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+>>>>       return MMCSD_MODE_RAW;
+>>>>  }
+>>>>
+>>>> -__weak int board_early_init_f(void)
+>>>> -{
+>>>> -     return 0;
+>>>> -}
+>>>> -
+>>>>  __weak int arch_cpu_init(void)
+>>>>  {
+>>>>       return 0;
+>>>> @@ -111,7 +106,8 @@ void board_init_f(ulong dummy)
+>>>>  {
+>>>>       int ret;
+>>>>
+>>>> -     board_early_init_f();
+>>>> +     if (IS_ENABLED(CONFIG_BOARD_EARLY_INIT_F))
+>>>
+>>> This patch seem to introduce a change in behavior for chromebook bob and
+>>> kevin, they do not seem to enable BOARD_EARLY_INIT_F, yet they have a
+>>> board_early_init_f() in board/google/gru/gru.c no longer being called
+>>> after this change.
+> 
+> I wouldn't call it a behavior change, since it's not called now, and
 
---F+jMOzaAK/fmICJV
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+You mean the function is currently being optimized out? Why would it not
+be called before the change introduced in this patch?
 
-On Wed, Mar 25, 2026 at 01:21:54PM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Wed, 25 Mar 2026 at 12:26, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Wed, Mar 25, 2026 at 11:57:17AM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Wed, 25 Mar 2026 at 11:15, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Wed, Mar 25, 2026 at 11:12:00AM -0600, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Wed, 25 Mar 2026 at 10:54, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Wed, Mar 25, 2026 at 07:08:09AM -0600, Simon Glass wrote:
-> > > > > > > The generated .S files for fonts, splash screens and EFI apps=
- use
-> > > > > > > .incbin with the full prerequisite path. When building with O=
-=3D this
-> > > > > > > bakes an absolute path into the .S file. If the build directo=
-ry is
-> > > > > > > later used on a different machine (e.g. in a container), the =
-assembler
-> > > > > > > cannot find the source file.
-> > > > > > >
-> > > > > > > Use $(src)/$(notdir $<) instead of $< so the .incbin directiv=
-e contains
-> > > > > > > a source-relative path like drivers/video/fonts/nimbus_sans_l=
-_regular.ttf
-> > > > > > > rather than an absolute one. Add -Wa,-I$(srctree) to the asse=
-mbler
-> > > > > > > flags so the assembler can resolve these paths.
-> > > > > > >
-> > > > > > > The DTB and DTBO rules are left unchanged since their prerequ=
-isites are
-> > > > > > > generated files in the build directory.
-> > > > > > >
-> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > ---
-> > > > > > >
-> > > > > > >  scripts/Makefile.lib | 7 ++++---
-> > > > > > >  1 file changed, 4 insertions(+), 3 deletions(-)
-> > > > > >
-> > > > > > This is generic kbuild infrastructure now. Is there a fix we're=
- missing
-> > > > > > from upstream, a change we haven't pulled in yet (as we need to=
- keep
-> > > > > > syncing upwards) or a problem upstream too? Thanks!
-> > > > >
-> > > > > Linux does this with DTB files in quiet_cmd_wrap_S_dtb:
-> > > > >
-> > > > > echo '.incbin "$<" ';
-> > > > >
-> > > > > But Linux only uses generated files in the build directory, never
-> > > > > actual source files. The font/splash/EFI .incbin rules are U-Boot
-> > > > > additions that aren't in the upstream kbuild. So Linux doesn't ha=
-ve
-> > > > > this problem.
-> > > >
-> > > > Shouldn't we be generating these files in to the build directory to=
-o?
-> > >
-> > > These are actually source files, e.g.
-> > > drivers/video/fonts/nimbus_sans_l_regular.ttf
-> >
-> > So, the first thing then is that S_ttf is a local U-Boot rule. Lets
-> > start by moving this out of scripts/Makefile.lib to
-> > scripts/Makefile.lib-u-boot as that will make future re-sync work easier
-> > (and is something we've talked about in the re-sync threads, splitting
-> > U-Boot specific stuff out to new files). Then 2/2 of that series can be
-> > this change, thanks.
->=20
-> Almost, but I still need the a_flags change.
+The code in board/google/gru/gru.c is silly and probably gets optimized
+out anyway, but the comment there suggest something was done to try and
+make so it was not.
 
-Think a bit on how to solve that without touching the files that we
-really want to have no delta with upstream on please. It's 5 files,
-adding AFLAGS_foo.o +=3D ... to the fonts Makefile and a note doesn't seem
-bad and reduces the chances of the a_flags part being lost in a future
-resync to zero.
+> this is the output from building before/after, checking for size
+> differnces (and how I spotted odd cases as part of this overall work):
+> 
+>             chromebook_bob : spl/u-boot-spl:all -8 spl/u-boot-spl:text -8
+>                spl-u-boot-spl: add: 0/-1, grow: 0/-1 bytes: 0/-12 (-12)
+>                  function                                   old     new   delta
+>                  board_init_f                               148     144      -4
+>                  board_early_init_f                           8       -      -8
+>             chromebook_kevin: spl/u-boot-spl:all -8 spl/u-boot-spl:text -8
+>                spl-u-boot-spl: add: 0/-1, grow: 0/-1 bytes: 0/-12 (-12)
+>                  function                                   old     new   delta
+>                  board_init_f                               148     144      -4
+>                  board_early_init_f                           8       -      -8
+> 
+> 
+>>> I do not have a chromebook_bob/kevin so I cannot help verify if this
+>>> change break anything, hopefully Simon can help test/verify.
+>>
+>> Kevin spews some junk to the console with or without this patch.
+>>
+>> No change observed on bob or kevin. BTW both are in the lab so you
+>> should be able to test if you push to your tree.
+>>
+>> Tested-by: Simon Glass <sjg@chromium.org>  # chromebook_kevin
+>> Tested-by: Simon Glass <sjg@chromium.org>  # chromebook_bob
+> 
+> Perhaps the problem is those platforms should be enabling, but lost.
+> I'll take a look, but would be unrelated to this (since if enabling
+> BOARD_EARLY_INIT_F it would then call it).
 
---=20
-Tom
+board_early_init_f() in gru.c is wrapped around CONFIG_XPL_BUILD so
+should only be included in SPL and was called from rockchip spl.c
+board_init_f() prior to this patch.
 
---F+jMOzaAK/fmICJV
-Content-Type: application/pgp-signature; name="signature.asc"
+Based on Simons comment I guess the board_early_init_f() in gru.c
+probably could and should be fully removed, as it currently does not
+seem to provide the suggested delay.
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCacQ9QQAKCRAr4qD1Cr/k
-Cn8iAP93H9fLBc0r2snx6nZUXtm6ImFzCMqsCeNydbKrxqwwZgD/Qq1dLsYFEfxS
-Uar05Hw2WfD4LMhnq6NaaZ6lsq7ApAA=
-=vUEt
------END PGP SIGNATURE-----
-
---F+jMOzaAK/fmICJV--
+Regards,
+Jonas
