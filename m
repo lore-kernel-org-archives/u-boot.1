@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93D56109C059
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 19:27:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2CF4109C059
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 19:27:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6983083FEC;
-	Wed, 25 Mar 2026 20:27:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 09C1A83DA7;
+	Wed, 25 Mar 2026 20:27:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=netcube.li
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=netcube.li header.i=@netcube.li header.b="bqBLI3cl";
+	dkim=pass (1024-bit key; unprotected) header.d=netcube.li header.i=@netcube.li header.b="Kv9KAw3c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A29F283FD9; Wed, 25 Mar 2026 20:27:23 +0100 (CET)
+ id 8E62383FC6; Wed, 25 Mar 2026 20:27:25 +0100 (CET)
 Received: from mail.netcube.li (mail.netcube.li [173.249.15.149])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B16483FA7
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 20:27:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B3D6C83FC6
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 20:27:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=netcube.li
 Authentication-Results: phobos.denx.de;
@@ -28,20 +28,20 @@ Authentication-Results: phobos.denx.de;
 dkim-signature: v=1; a=rsa-sha256; d=netcube.li; s=s1;
  c=relaxed/relaxed; q=dns/txt;
  h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References;
- bh=D64yMnijWbHgGWDWA/CqZFKx5yQYF/sP68dY4oYva+8=;
- b=bqBLI3clWe1vlYWJpCZw5LDNTxnkL+j9EXWkvF7balVCDWveUxHzvvw8Lm4ZaUKX+aeVqdnM4HtyVjB6TdWAMjbCDZ3Mmk8yBiRtvUJKy0SqzylLudCPBu1VDCp2Jnqbo1QCxbxwLhLpObIJrhOz3c0P27f2H9FvSk7Pph4e29s=
+ bh=Zq0qmAlMWxTJOYcL3mW4bjKwgi3QCMcSHdbIEEhZnxM=;
+ b=Kv9KAw3cF4y8AYcOMxOHP35E9eIipUNVjKoyDG739Yg7y3MvyuUvv6XJaYqx1EDlMuvLMrccNtmr4Rgfp7gxaQGv6//58iQcje65u0bBl88Cv2WOAuuSpvM2TTFs22Eecd4j3PE1gIOgynyfj0hCm2YFQzH8jIyenJd35rFvl3c=
 Received: from lukas-hpz440workstation.lan.sk100508.local
  (193-80-178-216.hdsl.highway.telekom.at [193.80.178.216])
- by mail.netcube.li with ESMTPA ; Wed, 25 Mar 2026 20:27:18 +0100
+ by mail.netcube.li with ESMTPA ; Wed, 25 Mar 2026 20:27:20 +0100
 From: Lukas Schmid <lukas.schmid@netcube.li>
 To: Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
  Hans de Goede <hdegoede@redhat.com>,
  Jerome Forissier <jerome.forissier@arm.com>
 Cc: Lukas Schmid <lukas.schmid@netcube.li>,
 	u-boot@lists.denx.de
-Subject: [PATCH 3/6] sunxi: add SPC setup for R528/T113 secure boot handoff
-Date: Wed, 25 Mar 2026 20:26:10 +0100
-Message-ID: <20260325192628.750398-4-lukas.schmid@netcube.li>
+Subject: [PATCH 4/6] boot: allow SPL FIT signature verification without DM
+Date: Wed, 25 Mar 2026 20:26:11 +0100
+Message-ID: <20260325192628.750398-5-lukas.schmid@netcube.li>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260325192628.750398-1-lukas.schmid@netcube.li>
 References: <20260325192628.750398-1-lukas.schmid@netcube.li>
@@ -63,168 +63,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The R528/T113 family protects peripheral access through the SPC, and
-also uses security switch registers in the CCU, PRCM and DMA
-controller.
+SPL FIT verification was effectively tied to Driver Model. The RSA
+verifier assumed a DM-backed modexp device, and SPL_FIT_SIGNATURE
+depended on SPL_DM. This prevents non-DM SPL platforms from using
+FIT signature verification even though the software modular exponent
+fallback is already available.
 
-Configure these blocks during early platform init so Linux can access
-the peripherals after U-Boot hands off control when booting in secure
-mode. Add an R528/T113-specific SPC init step alongside the existing
-early security controller setup, allow non-secure DMA access there, and
-switch the CCU and PRCM buses to non-secure access in clock_init_sec().
+Drop the hard SPL_DM dependency and only look up the modexp device
+when DM is enabled. Non-DM SPL builds then fall back to the software
+implementation and can enable signed FIT verification.
 
 Signed-off-by: Lukas Schmid <lukas.schmid@netcube.li>
 ---
- arch/arm/cpu/armv7/sunxi/Makefile             |  1 +
- arch/arm/cpu/armv7/sunxi/spc.c                | 20 ++++++++++++++
- .../include/asm/arch-sunxi/cpu_sunxi_ncat2.h  | 27 +++++++++++++++++++
- arch/arm/include/asm/arch-sunxi/sys_proto.h   |  8 ++++++
- arch/arm/mach-sunxi/board.c                   |  1 +
- arch/arm/mach-sunxi/clock_sun50i_h6.c         |  8 ++++++
- 6 files changed, 65 insertions(+)
- create mode 100644 arch/arm/cpu/armv7/sunxi/spc.c
+ boot/Kconfig         |  1 -
+ lib/rsa/rsa-verify.c | 16 ++++++++++------
+ 2 files changed, 10 insertions(+), 7 deletions(-)
 
-diff --git a/arch/arm/cpu/armv7/sunxi/Makefile b/arch/arm/cpu/armv7/sunxi/Makefile
-index 0624e93efde..bc19f6a203c 100644
---- a/arch/arm/cpu/armv7/sunxi/Makefile
-+++ b/arch/arm/cpu/armv7/sunxi/Makefile
-@@ -8,6 +8,7 @@
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 4e9bc9491a0..6ccb7d44a5e 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -202,7 +202,6 @@ config SPL_FIT_FULL_CHECK
  
- obj-$(CONFIG_MACH_SUN6I)	+= tzpc.o
- obj-$(CONFIG_MACH_SUN8I_H3)	+= tzpc.o
-+obj-$(CONFIG_MACH_SUN8I_R528)	+= spc.o
+ config SPL_FIT_SIGNATURE
+ 	bool "Enable signature verification of FIT firmware within SPL"
+-	depends on SPL_DM
+ 	depends on SPL_LOAD_FIT
+ 	select FIT_SIGNATURE
+ 	select SPL_FIT
+diff --git a/lib/rsa/rsa-verify.c b/lib/rsa/rsa-verify.c
+index 3169c3a6dd1..24b23ab565a 100644
+--- a/lib/rsa/rsa-verify.c
++++ b/lib/rsa/rsa-verify.c
+@@ -355,13 +355,17 @@ static int rsa_verify_key(struct image_sign_info *info,
+ 	hash_len = checksum->checksum_len;
  
- obj-$(CONFIG_MACH_SUN6I)	+= sram.o
- obj-$(CONFIG_MACH_SUN8I)	+= sram.o
-diff --git a/arch/arm/cpu/armv7/sunxi/spc.c b/arch/arm/cpu/armv7/sunxi/spc.c
-new file mode 100644
-index 00000000000..bdecfaa1b4b
---- /dev/null
-+++ b/arch/arm/cpu/armv7/sunxi/spc.c
-@@ -0,0 +1,20 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * (C) Copyright 2015 Chen-Yu Tsai <wens@csie.org>
-+ * (C) Copyright 2026 Lukas Schmid <lukas.schmid@netcube.li>
-+ */
-+
-+#include <asm/io.h>
-+#include <asm/arch/cpu.h>
-+#include <asm/arch/sys_proto.h>
-+
-+void spc_init(void)
-+{
-+	struct sunxi_spc *spc = (struct sunxi_spc *)SUNXI_SPC_BASE;
-+	int i;
-+
-+	for (i = 0; i < SUNXI_SPC_NUM_PORTS; i++)
-+		writel(SUNXI_SPC_DECPORT_MASK, &spc->decport[i].set);
-+
-+	writel(SUNXI_DMA_SEC_MASK, SUNXI_DMA_BASE + SUNXI_DMA_SEC_REG);
-+}
-diff --git a/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h b/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
-index bcfdc0a41c5..7a4d25e6e78 100644
---- a/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
-+++ b/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
-@@ -7,6 +7,7 @@
- #ifndef _SUNXI_CPU_SUNXI_NCAT2_H
- #define _SUNXI_CPU_SUNXI_NCAT2_H
+ #if !defined(USE_HOSTCC)
+-	ret = uclass_get_device(UCLASS_MOD_EXP, 0, &mod_exp_dev);
+-	if (ret) {
+-		printf("RSA: Can't find Modular Exp implementation\n");
+-		return -EINVAL;
+-	}
++	if (CONFIG_IS_ENABLED(DM)) {
++		ret = uclass_get_device(UCLASS_MOD_EXP, 0, &mod_exp_dev);
++		if (ret) {
++			printf("RSA: Can't find Modular Exp implementation\n");
++			return -EINVAL;
++		}
  
-+#define SUNXI_SPC_BASE			0x02000800
- #define SUNXI_CCM_BASE			0x02001000
- #define SUNXI_TIMER_BASE		0x02050000
- 
-@@ -16,6 +17,7 @@
- #define SUNXI_TWI3_BASE			0x02502C00
- 
- #define SUNXI_SRAMC_BASE		0x03000000
-+#define SUNXI_DMA_BASE			0x03002000
- /* SID address space starts at 0x03006000, but e-fuse is at offset 0x200 */
- #define SUNXI_SIDC_BASE			0x03006000
- #define SUNXI_SID_BASE			0x03006200
-@@ -50,7 +52,32 @@
- 
- #define SUNXI_CPU_PLL_CFG_BASE		0x08817000
- 
-+#ifdef CONFIG_MACH_SUN8I_R528
-+#define SUNXI_CCM_SEC_SWITCH_REG        (SUNXI_CCM_BASE + 0x0f00)
-+#define SUNXI_CCM_SEC_SWITCH_NONSEC	0x7
-+#define SUNXI_PRCM_SEC_SWITCH_REG       (SUNXI_PRCM_BASE + 0x0290)
-+#define SUNXI_PRCM_SEC_SWITCH_NONSEC	0x1
-+#define SUNXI_SPC_DECPORT_STA_REG(p)    (SUNXI_SPC_BASE + 0x0000 + 0x10 * (p))
-+#define SUNXI_SPC_DECPORT_SET_REG(p)    (SUNXI_SPC_BASE + 0x0004 + 0x10 * (p))
-+#define SUNXI_SPC_DECPORT_CLR_REG(p)    (SUNXI_SPC_BASE + 0x0008 + 0x10 * (p))
-+#define SUNXI_SPC_NUM_PORTS             13
-+#define SUNXI_SPC_DECPORT_MASK		0xffffffff
-+#define SUNXI_DMA_SEC_REG		0x20
-+#define SUNXI_DMA_SEC_MASK		0xffff
-+#endif
-+
- #ifndef __ASSEMBLY__
-+struct sunxi_spc_decport {
-+	u32 status;
-+	u32 set;
-+	u32 clear;
-+	u32 reserved;
-+};
-+
-+struct sunxi_spc {
-+	struct sunxi_spc_decport decport[SUNXI_SPC_NUM_PORTS];
-+};
-+
- void sunxi_board_init(void);
- void sunxi_reset(void);
- int sunxi_get_sid(unsigned int *sid);
-diff --git a/arch/arm/include/asm/arch-sunxi/sys_proto.h b/arch/arm/include/asm/arch-sunxi/sys_proto.h
-index 6f70753e948..a006e592f83 100644
---- a/arch/arm/include/asm/arch-sunxi/sys_proto.h
-+++ b/arch/arm/include/asm/arch-sunxi/sys_proto.h
-@@ -18,6 +18,14 @@ bool sunxi_get_unique_sid(unsigned int *sid);
- /* Build legacy-compatible SID-derived locally administered MAC address. */
- bool sunxi_get_sid_mac_addr(int index, u8 mac[6]);
- 
-+#ifdef CONFIG_MACH_SUN8I_R528
-+void spc_init(void);
-+#else
-+static inline void spc_init(void)
-+{
-+}
-+#endif
-+
- /* return_to_fel() - Return to BROM from SPL
-  *
-  * This returns back into the BROM after U-Boot SPL has performed its initial
-diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
-index 432b1c10f92..4d98d350cbe 100644
---- a/arch/arm/mach-sunxi/board.c
-+++ b/arch/arm/mach-sunxi/board.c
-@@ -475,6 +475,7 @@ void board_init_f(ulong dummy)
- 
- 	/* Enable non-secure access to some peripherals */
- 	tzpc_init();
-+	spc_init();
- 
- 	timer_init();
- 	clock_init();
-diff --git a/arch/arm/mach-sunxi/clock_sun50i_h6.c b/arch/arm/mach-sunxi/clock_sun50i_h6.c
-index 80004f13a1e..217d47c8770 100644
---- a/arch/arm/mach-sunxi/clock_sun50i_h6.c
-+++ b/arch/arm/mach-sunxi/clock_sun50i_h6.c
-@@ -74,6 +74,14 @@ void clock_init_safe(void)
- 	}
- }
- 
-+void clock_init_sec(void)
-+{
-+	if (IS_ENABLED(CONFIG_MACH_SUN8I_R528)) {
-+		writel(SUNXI_CCM_SEC_SWITCH_NONSEC, SUNXI_CCM_SEC_SWITCH_REG);
-+		writel(SUNXI_PRCM_SEC_SWITCH_NONSEC, SUNXI_PRCM_SEC_SWITCH_REG);
+-	ret = rsa_mod_exp(mod_exp_dev, sig, sig_len, prop, buf);
++		ret = rsa_mod_exp(mod_exp_dev, sig, sig_len, prop, buf);
++	} else {
++		ret = rsa_mod_exp_sw(sig, sig_len, prop, buf);
 +	}
-+}
-+
- void clock_init_uart(void)
- {
- 	void *const ccm = (void *)SUNXI_CCM_BASE;
+ #else
+ 	ret = rsa_mod_exp_sw(sig, sig_len, prop, buf);
+ #endif
 -- 
 2.47.3
 
