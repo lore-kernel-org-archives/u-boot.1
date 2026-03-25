@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DFD7FEA835
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 09:20:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C50A0FEA835
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 09:20:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A7C583CE3;
-	Wed, 25 Mar 2026 10:20:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3F3A583EAC;
+	Wed, 25 Mar 2026 10:20:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="Jyq/GWpi";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="NboMf0MJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD65E83DA6; Wed, 25 Mar 2026 10:20:10 +0100 (CET)
+ id 91C7081E18; Wed, 25 Mar 2026 10:20:14 +0100 (CET)
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AFD083A91
+ by phobos.denx.de (Postfix) with ESMTPS id 6932C838BB
  for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 10:20:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
@@ -30,28 +30,28 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=qAvuCKByXfmQv3OrZN2XBV8azIShQgw1VpjYJcYQiNU=; b=Jyq/GWpiSiPIVhnbDotHaIKCNT
- y6KDmlqDxBJ4FiMsbji9RQ3PEbmSN3sfRpr3bCFTMzXq9lNO29c19qjNiG9OJjCyo1tRt9XMZkfNi
- zWbdT6hdmBPBIWHUyCRnXVT/mqcWU/pz3Vk8pq+uqptCADVhpeKwkp8F6naiY1BV0GPa8p8la6/A+
- vSO2bl5WcvWj2BuNJZPyonyqoib9ElM/ean/gN3JcpKQlthi/gHPMKBX5ucjfD3UBrVD2nDHA6T1I
- 9iyNX8WPCAiGs6zyySqnSCtzduBcE3WnuZc6Zbh6W3nXzeFVwcu4dde7aiqQkSFhAg0dHszw4VPFN
- TbE6XksQ==;
+ bh=MUk+Ta7qE/G5TDypdW7Btj+VnsRRwlfwH0A2G7IInFw=; b=NboMf0MJJ8Z/q0l8hQGDSVSmTv
+ zH4q/MIElb8HdrmbpW8u0oAwxmF65sE+QO9AFhSyvKKIjVnfxpi5oTfclh6mQiuOkUSKvWKIurM7U
+ Ssw9ehqqHnOmIS6JQX7vd2Yp+UgnLxN+YOt4Flqyj+V7nog+btqqrwTIQvXgWajj6OHmap7oLvxDo
+ JkltV1SgGk0hLi83hLHwX7gf20Xl+Zj03onlwcc/VZtQtnd5pk4wnYgO2i7eqvPY+TLlUWe857UyC
+ ce31M4P0u+iHm0d/LfGMD6twTPAVGRbj9bPWcYw6abDFHTFzR2ODRZelRc9J/ZHhOBPd+cKpGffI7
+ 05JF3TNg==;
 Received: from sslproxy08.your-server.de ([78.47.166.52])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1w5KPD-0004Ai-1n; Wed, 25 Mar 2026 10:20:03 +0100
+ id 1w5KPD-0004Aq-2P; Wed, 25 Mar 2026 10:20:03 +0100
 Received: from localhost ([127.0.0.1])
  by sslproxy08.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1w5KPC-0005cv-1I; Wed, 25 Mar 2026 10:20:03 +0100
+ id 1w5KPC-0005cv-21; Wed, 25 Mar 2026 10:20:03 +0100
 From: Max Merchel <Max.Merchel@ew.tq-group.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Max Merchel <Max.Merchel@ew.tq-group.com>,
  Fabio Estevam <festevam@gmail.com>, u-boot@lists.denx.de,
  u-boot@ew.tq-group.com
-Subject: [PATCH 2/3] tq: add TQ board MAINTAINERS
-Date: Wed, 25 Mar 2026 10:19:53 +0100
-Message-ID: <20260325091957.906400-3-Max.Merchel@ew.tq-group.com>
+Subject: [PATCH 3/3] tqma6: remove board MAINTAINERS
+Date: Wed, 25 Mar 2026 10:19:54 +0100
+Message-ID: <20260325091957.906400-4-Max.Merchel@ew.tq-group.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260325091957.906400-1-Max.Merchel@ew.tq-group.com>
 References: <20260325091957.906400-1-Max.Merchel@ew.tq-group.com>
@@ -73,29 +73,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add MAINTAINERS file containing board-specific information and
-the name of the board maintainer.
+All information is contained in the global MAINTAINERS or
+TQ board MAINTAINERS.
 
 Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
 ---
- board/tq/MAINTAINERS | 8 ++++++++
- 1 file changed, 8 insertions(+)
- create mode 100644 board/tq/MAINTAINERS
+ board/tq/tqma6/MAINTAINERS | 7 -------
+ 1 file changed, 7 deletions(-)
+ delete mode 100644 board/tq/tqma6/MAINTAINERS
 
-diff --git a/board/tq/MAINTAINERS b/board/tq/MAINTAINERS
-new file mode 100644
-index 00000000000..e6f3dc4da21
---- /dev/null
-+++ b/board/tq/MAINTAINERS
-@@ -0,0 +1,8 @@
-+TQMA6
-+M:	Max Merchel <max.merchel@ew.tq-group.com>
-+L:	u-boot@ew.tq-group.com
-+S:	Maintained
-+W:	https://www.tq-group.com/en/products/tq-embedded/
-+F:	arch/arm/dts/*mba6*.dts*
-+F:	arch/arm/dts/*tqma6*.dts*
-+F:	configs/tqma6*config
+diff --git a/board/tq/tqma6/MAINTAINERS b/board/tq/tqma6/MAINTAINERS
+deleted file mode 100644
+index 1d3f7d2cf63..00000000000
+--- a/board/tq/tqma6/MAINTAINERS
++++ /dev/null
+@@ -1,7 +0,0 @@
+-TQ-SYSTEMS TQMA6 BOARD
+-M:	Markus Niebel <Markus.Niebel@ew.tq-group.com>
+-L:	TQ-Systems OSS Team <u-boot@ew.tq-group.com>
+-S:	Maintained
+-F:	board/tq/tqma6/
+-F:	include/configs/tqma6.h
+-F:	configs/tqma6*_defconfig
 -- 
 2.43.0
 
