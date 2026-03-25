@@ -4,154 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C562103A9AD
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 11:36:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25F4A106B530
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 13:08:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C0008405B;
-	Wed, 25 Mar 2026 12:36:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kontron.de
+	by phobos.denx.de (Postfix) with ESMTP id 5E7B583AAB;
+	Wed, 25 Mar 2026 14:08:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kontron.de header.i=@kontron.de header.b="VcZcCTue";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZNhgcu+m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8755A84088; Wed, 25 Mar 2026 12:36:09 +0100 (CET)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9E6F883CD3; Wed, 25 Mar 2026 14:08:27 +0100 (CET)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 431AC84020
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 12:36:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 051FA81E18
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 14:08:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=kontron.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=frieder.schrempf@kontron.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=G2fRuUq9C2jrGGWvciPcCKI9pOy/zFCs2OBn1q6m/Se6FjTgMUrrOrheGbBunJj6jhJ4q7WkAbv+g0nwNHvOjyIx3S5VemsBVkim5sMR8XwTENLGEOhUmn23cYpLIGx3zLGAJSrdBHimE64N0ZA3K8SgTX9aU7OpFUZzGJiJJBc29YbgowNar8pAkR1hFFvXjWpIKVZs/u2RnV7IpKuX6ncfp0vQ62/fWvWz/USp7yRF4p5y1IDrcwHjMAzMzEuuQXpil+vjhkUhPJYSsNJtA0qHTCsxw5/rCtGu3mpqnLAEe19ljjAHQXxGxF3X9jneS2tFMGrFeVgmvRz31kcoAA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gV/ICPhotZgYTPSaQ9VgDSZjmXTejTGsjPKdt6PTGx4=;
- b=mK0bdCQVty7ekkbE93Qk/k/k0TTu4jaFAZ1ltETCgiIXZe9yT9Ps99dIL0/wd6kx6q30UDFu69/r5JjwyTGuKavbAgwDkFI0Q4Le/dcyssybVMw5DigSj0tdC8gsBr4LmwsLCbX2ccPatyfvbTBYWY8EsgdrbmpIWlwyX1K8qRmzccmfDzDAjqv/zTp5+VKdQerSKBBovapuIxQ0YlSExOncx4iRtx5+/MxC3cz/7ioZ5xJlUbVqJPDTjI+wDJVmsY/6a4pEife0Get+YNR4QQzsEd9EZd9NjnIl4kySgpyXSQj0ntYcnOIfaPWIJ5iEdhaTLsMYDwhaOBPzxbk4jw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=kontron.de; dmarc=pass action=none header.from=kontron.de;
- dkim=pass header.d=kontron.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kontron.de;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gV/ICPhotZgYTPSaQ9VgDSZjmXTejTGsjPKdt6PTGx4=;
- b=VcZcCTue3PYLEXBdPX1oepNBajHTihXdUJCy6qOozszK+hGorH/3pyRsgNrZm7LNjLAcnN6JgQZYRSH+j3bTHfeDMoNNh7/g4G+QJRwatnrNGtwSQmhkNhd1f5Ghy4lyXel7v8wTUodZoM7fmmFZTpBRCvOCfP/KLJoSnMcOS//aVLhWvcef59JV3bFneEOI7ip2gcXkG6MEt7B4HybGtvwQk7ZRLRfcuSFpRjCucmJBMLT9uqxSxapkgNq6+8KHvBsapuCEk33x7dV38keHHmNCK31Q6d2UiASRo1ttSLI1kwktFhul8kfnK6RKis9b27kfEnY+BgeMxE5LRqlLoA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=kontron.de;
-Received: from PR3PR10MB4288.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:97::22)
- by AS8PR10MB6340.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:53c::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.31; Wed, 25 Mar
- 2026 11:36:01 +0000
-Received: from PR3PR10MB4288.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::6aec:a389:7814:860f]) by PR3PR10MB4288.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::6aec:a389:7814:860f%6]) with mapi id 15.20.9745.019; Wed, 25 Mar 2026
- 11:36:01 +0000
-Message-ID: <d10bc263-3129-4504-acac-e751c0f8e3c3@kontron.de>
-Date: Wed, 25 Mar 2026 12:35:59 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] imx8mp: phyboard-pollux-rdk: Convert to DM_PMIC
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: Peng Fan <peng.fan@nxp.com>, Teresa Remmet <T.remmet@phytec.de>,
- "sbabic@nabladev.com" <sbabic@nabladev.com>, Yannic Moog <Y.Moog@phytec.de>,
- dl-uboot-imx <uboot-imx@nxp.com>, "trini@konsulko.com" <trini@konsulko.com>,
- "festevam@gmail.com" <festevam@gmail.com>,
- "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
- Leonard Anderweit <L.Anderweit@phytec.de>,
- "emanuele.ghidoli@toradex.com" <emanuele.ghidoli@toradex.com>,
- Benjamin Hahn <B.Hahn@phytec.de>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- "matteo.lisi" <matteo.lisi@engicam.com>,
- "abbaraju.manojsai@amarulasolutions.com"
- <abbaraju.manojsai@amarulasolutions.com>
-References: <20260324-power-legacy-v1-0-ed432367817c@nxp.com>
- <20260324-power-legacy-v1-1-ed432367817c@nxp.com>
- <0c16dfd0d1cedc87bbac071030bbb4d6f04ff4af.camel@phytec.de>
- <PAXPR04MB84596009AB3591BBE0AD49F98848A@PAXPR04MB8459.eurprd04.prod.outlook.com>
- <5f44e3d45ac725c16c61a92fff527f9b7bea2fc4.camel@phytec.de>
- <PAXPR04MB845968E9F7A73809AFAE21E18849A@PAXPR04MB8459.eurprd04.prod.outlook.com>
- <fd99509a-315f-4c0d-b300-eba1308f7ff1@kontron.de>
- <acPDFUn4R/nsQcg0@shlinux89>
-Content-Language: en-US, de-DE
-From: Frieder Schrempf <frieder.schrempf@kontron.de>
-In-Reply-To: <acPDFUn4R/nsQcg0@shlinux89>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FRYP281CA0018.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10::28)
- To PR3PR10MB4288.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:102:97::22)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7d7ebe11bffso4508652a34.0
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 06:08:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1774444103; x=1775048903; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=pbOrn84Xkzv5lhQUHdQURoeaywa+UgT6vYgTS83rhUo=;
+ b=ZNhgcu+mw7m7y+TGb9aMkx/cF84yr7LlycK+57zrz2In+SYBOf7I4rQtmCbG+oJi9x
+ T62unZFaPEhXsp7eGxP00I5V1Bybw5yNfGKes7ivjS/yT8V2rAQBFU/94tr5kGt/9wyh
+ uHHamrYqt1Uxd3Kq1LogmPu1ohVmESbfSeuT8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774444103; x=1775048903;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pbOrn84Xkzv5lhQUHdQURoeaywa+UgT6vYgTS83rhUo=;
+ b=piaZVmyhZeMrVgYbr+xnk04oXdSbIPTxqyUqbetpUZjGHaq1VW8gTvSYkASrPRw1cA
+ KHqnsB9Rz39vP6JD6+lGBz9OFBqR2zh3RaTWZ39mqzK2lWvk8OmeLkAGbEN+P0fABPyF
+ wIC77ca8HxkGo4VQ5z6aS2Mjq11ZC/ENhUmwvDazbCaz0vJFBJuMJAOulLVzVWqemSt3
+ +KyhqWerjq217gBTMk3trkkDSWmfTafeR4m7GoYpqsJDPwYSImyetZh6esQuO1RcA7s7
+ w3cTe3VNuG8aDYvsFeOgW52ZC4xirxioqp9OhA3aM4Ozyfht7WCM2SiZBnzDLGlTjSfr
+ TgLQ==
+X-Gm-Message-State: AOJu0YwIgH30hgLI1XcHyIvvFRg+Nc+igp2DPluSnNFbKRlX6bbghlMk
+ QCh2LeYRiEyotmuv2Kqaq42VHk/d7jrxavDd3t0lR9FSHk7pW3uoJ3UQ9LolyTfkVh2iDWMKIKm
+ FJ4IBWA==
+X-Gm-Gg: ATEYQzyBSea5XhAmq5cXik6DQ5YsykV/jQnie7mVIBWp9+Evwwuu5RzBqMr4roelSby
+ /QM2Dmk2ibsT5FZdhgRYDOxwNqmIUFhme2ODpk+WUL7HvHll9+eGDm56pIGH6wZ+sbJAx7mKT6f
+ 1MCgu2Up1QN5vjq9DQfQ9451OSXS5OYZINOZYAIXYcr02xKbCQAy9FQGgsaRVRvcU4iuAqC+h0q
+ 1WLXVfT27eUInjEm/iVzbC3lGJAZAirLO0Ityaka3fDtUXrw7Ds78AYQqql8GBrph4maA7+Ntyg
+ ym5r23eVsa6X7XEL36cbzkeSumWD9qN0LO2K0X0tDV2ifTsoL2ftDr9sRkNYiusLKl77oXig+Hi
+ +0nMYfn1DWO7JJMHRPSqphRcxtq2EAAARDjqWk2pJ0llbVrZy1305IBMIxlfBtGB2RmlRGqa025
+ dcT8A5S+850LzY5f/dGQ==
+X-Received: by 2002:a05:6830:6ae5:b0:7d9:b58e:55f2 with SMTP id
+ 46e09a7af769-7d9d6966d65mr1929451a34.24.1774444103040; 
+ Wed, 25 Mar 2026 06:08:23 -0700 (PDT)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d7eadc8a12sm14466116a34.16.2026.03.25.06.08.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Mar 2026 06:08:22 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Adriano Cordova <adrianox@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peter Robinson <pbrobinson@gmail.com>, Sam Edwards <cfsworks@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] kbuild: Use relative paths in generated .incbin directives
+Date: Wed, 25 Mar 2026 07:08:09 -0600
+Message-ID: <20260325130811.447377-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PR3PR10MB4288:EE_|AS8PR10MB6340:EE_
-X-MS-Office365-Filtering-Correlation-Id: f8527965-39d1-4cec-1989-08de8a62b0da
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|7416014|376014|22082099003|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: w++m2zBrPINbwooNJX90Qglr6pifKfnoZY1rR8QwiENxOZqgIAgMCfwKjIpvSAdiftYc+SApV46k3AjhC4YnPv0tF2vLZmvchR/AOMSugygrbpfyeBqiiFhl2q1YDomysyBkhbyZFIflkVtnw10gaHUPBKNH1Xxh4eWUR1JU1yFM+FJq7ltm03RKuB47A3R1zJv0gFCR4JBHLJXzeu/ZUnCNA0AfMbj6YQverP8zzVN8D4ktAm5hhtVdyl51MyiRCHcswksLKxnsxm0Sva2zZPglF778n4uPMykYSVoER3FLwtzxvd6jQmcxBM+TaATwNPbJ5kg/+iVB1pvKfUG21QLOUnBKI1FpfHA5ro+WB1L53p7ZXGhepjs3WIkep01RqmulnClq06EwJlSecY6LoCyoZnTPlmZDr4UuZCFSoQsP8VZppVaYWzCGFEIG+9Lc3MIJtgmjGFFqqfM6p5gqyEECfLNNc5o3xefN2VLEcG0FGroF5fuS+rffbuwm15mE/TY478PGCyBUFXC/pIShmBFd1dmsEJScozzzoq20hIVUSvjPAc6LhM0Y9nLGEPC0VeiQcpfdchCNKjKRXYNqatn5/jZ+twdgmJTH3THvKmCFlBA1x5+4btK82PH88jdyYzv2H+T15YL1B9QFGaXqpkBZxrA672bK30eF83pPg9Jyb1ahkgT3xgulXL10cFeJ1w6SKAX+Bwgcb48YacEmQFKizhRf3x9SC2WUjKO4Xgc=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PR3PR10MB4288.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(7416014)(376014)(22082099003)(56012099003)(18002099003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?djFWSTM2VnM0eENYeFhldmFycUhwcWNkSmtFRjU2US82YjMvMzhacFBoUmhj?=
- =?utf-8?B?c1M5TkVNKy9XWFhGYjdOTk9PeFVNODlSWjQ0ak5IMUc0bWp4WTRYTUgrclFQ?=
- =?utf-8?B?emZGTEdkREZhU1ZTMk8rQ3RkLzBGNmx6S2JiWExDSGRhY0FlZlRha3ZZV1Nt?=
- =?utf-8?B?Y2FyQUNvRVA4MWV4akp2dHhacjBNRzUzai9nUjlhUVIyemg2WHU1alZDSmhz?=
- =?utf-8?B?ZHVsM253aStFY2R4UE8vSk10YXlUL1JteDJIZG03c2FSK2cwa3NySlhQUk9D?=
- =?utf-8?B?Zk5FUGtBYnlNREt5b1M1eEg5MjFOd2xWcVNrSGhPZG9ZRFhpeHl1cnpGVUdP?=
- =?utf-8?B?ZDBnbnpwejQ5VkVueFN3R1pheURQelhkSTlNNXBaK01uYUJyQWNLRDFXdDFR?=
- =?utf-8?B?RWhYa2R3cDZMUzlTT3JGRjhCMHBGdE1BYUx2SkRHWk9ZL2htTEFzMmNkOWRZ?=
- =?utf-8?B?VVMwVGs5N2o5K0lkWERKN0h2aThEdTRWV2dUUU45UFEyUGhiRzVkS2ZLMDVM?=
- =?utf-8?B?L3ZnQ2l5bTB0dXAwQWNHMWZZa1ZOUTFZNi9WWGRvOXBER2JPSWZ3dnNvWFd3?=
- =?utf-8?B?MG4xcHlMU1NWSFk3Mm9IMnh6WmdnZi9vSVcrQ0NZVzNTSFZvd1ZXZWluL0U4?=
- =?utf-8?B?ZUJNUXl5Sy9XRjBDYVJkWElCbU1UNTBkZU5va1FpSGR0aHpLUWpBVEhVZEpu?=
- =?utf-8?B?eWZOem1GK096ODMyZXBQWXk4RWw1VU00MkpmVUxYOVMrTVQyZG1ET0tiZkRn?=
- =?utf-8?B?c2g0Y2l0K3kyK295RkJ5c2cvRjhyTXdweWgxQ2gzNzk5ZzNmRTd2LzNJZzRE?=
- =?utf-8?B?WXprNk5QUmw1ZGo4NWViWW4rQ2RwbVBsZG5BOTRiTmxzNDVWT1ZwdmFjWml6?=
- =?utf-8?B?Vm5yK0NNNkhGOGpVYkdWMW9IY3RZMjdXem5wQXdya2s5Q2lQb0U2MXk3enBI?=
- =?utf-8?B?aXhGRUorUHM5N0tab0FKemYzMlVzVTVBU295SGUwdHM4cDhKczBzdkd4THF1?=
- =?utf-8?B?U1BLcjQranhwcThMdWhLaktZdk1RYzRWTXI0RUFJUGVJbllYUFJmRnRseDlz?=
- =?utf-8?B?Q1BJRFc0a25WV2xndGg5em5EM0pRcjVEWU41NWRZOXg2YjVkamt6M1B5Y1ZF?=
- =?utf-8?B?a3h1aTZ2NFRyMUlxeFUvT0ErZTZIMmFYazhQTWdNQkhZZUNHcERqTlY1MEpY?=
- =?utf-8?B?cS9Pczh0L2cxWkZmS2M3ZjB3OUlGY2ZGZUM2eTNxdmNYenFMQlkvYkxxVzMw?=
- =?utf-8?B?cjFDeENWeUJYcEdjaHl4Y3Jua2V4a1VKUWppK3BGbnJpcXNZSDEwWVpsVmhV?=
- =?utf-8?B?c2gxVmNtMmEyNFJNQVlhL2F4RDQrZVhqVEdsLzhMYlNaZGwzTnY1cll5ZCtj?=
- =?utf-8?B?Mmd3UXZ2dUtYazhwQy96dEo3TElyZ3l2OThzdHVMVTBnNnV3S2piZE5MSE43?=
- =?utf-8?B?d3JYamVWWmJwT3c3QkpKUldmTFNQR0hrK2lHSytNRlJUVVo2MnVjcU9uVU1q?=
- =?utf-8?B?U1YrdThzckYwQytFQUdpRkdLVTFwc0IvNFI4dU1DWEUzc0hOVzIvblg3ZUJD?=
- =?utf-8?B?NDA4VVVvOGYxQ3BON0JlbVMxV2JvbC9iZzFNenJMV2IwR3F1a25FNWV2NDYy?=
- =?utf-8?B?TGVyUk44dXpZQ3RubWs4Z1hEcWtZcUpPT2JBN3hkbXExdm1tRnVmTHg3L3F2?=
- =?utf-8?B?WjRFMU9zU01aRmVEb1FrbWk2MFVCY3YrVUY2ZmxiNE1XR05jY0FPcDhCaEZW?=
- =?utf-8?B?NmdqMHZlRnJ2VmFLOEdEcWtzalpUQ0hZSVl1dy9TU2kwaEo0U0ZKcktxVnZh?=
- =?utf-8?B?NEg1d3hObnVacW91RlVnYWNNL0dCVXk1anl6Ylp5MEtmaVVnRXUyRXRVdk9p?=
- =?utf-8?B?U1F2SWpJcEZ4ZnVpK0FGNDhjQ2NwaDRORXFQeVFidGFuNTRoZGtoME9VdUhP?=
- =?utf-8?B?VjJVOG5MTDIydllVNkpKTCtaVUJFelptSUJyRU5RWkowL1ZaL1o4TUtJbWlH?=
- =?utf-8?B?R1ZHc1V1b1RPTy9Hd29USFVTT3hoM1RBT0VXcVpiNy9MdCsvYjU2c1pwblE5?=
- =?utf-8?B?YTVtdzJpWnNqekhURVd0cHB1Skg4QnJjOS9DY0NuTjkzSnlTNGpNcXZSb1ZM?=
- =?utf-8?B?VXNqdmhBYmZqL05vNnNMdXpUZ2l3SFBFSmhTZFJEMTR4d2xKYnlPLy95MEMw?=
- =?utf-8?B?SWxCbFJicGN0VGtyTFVkQnhmVE5CWDBRL3dzcDVBZWtnN1ZMRFJ1SDczYkFY?=
- =?utf-8?B?NXIyVUJMOE85SDlUNHlFZnhTNGphKzVzVlhNODEvSmRvbkFVRkNKUlMzTXRP?=
- =?utf-8?B?Ris3ZkRtMHJHN0VvbGtNMzFuS0NaMjc0UXdMUytqT3FpWTd0VjRPQ1FIZ3hJ?=
- =?utf-8?Q?VfKT0nqJI+nA7UOU=3D?=
-X-OriginatorOrg: kontron.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: f8527965-39d1-4cec-1989-08de8a62b0da
-X-MS-Exchange-CrossTenant-AuthSource: PR3PR10MB4288.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Mar 2026 11:36:01.2910 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zCAZGxLVbydz4/Oh743iskSeDT96itHoSMhucx3qFLBRbr1KMoRh6Ut6NY8cmRE0DBcCffP4GHADdIURlpZiGPCI5Ex11rDDcKZyXnORqUg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB6340
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -168,127 +94,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng,
+The generated .S files for fonts, splash screens and EFI apps use
+.incbin with the full prerequisite path. When building with O= this
+bakes an absolute path into the .S file. If the build directory is
+later used on a different machine (e.g. in a container), the assembler
+cannot find the source file.
 
-On 25.03.26 12:12, Peng Fan wrote:
-> Hi Frieder,
-> 
-> On Wed, Mar 25, 2026 at 08:40:26AM +0100, Frieder Schrempf wrote:
->> On 25.03.26 04:50, Peng Fan wrote:
->>>> Subject: Re: [PATCH 1/4] imx8mp: phyboard-pollux-rdk: Convert to
->>>> DM_PMIC
->>>>
->>>> Hello Peng,
->>>> Hello Yannic,
->>>>
->>>> Am Dienstag, dem 24.03.2026 um 13:33 +0000 schrieb Peng Fan:
->>>>> Hi Yannic,
->>>>>
->>>>>> Subject: Re: [PATCH 1/4] imx8mp: phyboard-pollux-rdk: Convert to
->>>>>> DM_PMIC
->>>>>>
->>>>>> Hi Peng,
->>>>>>
->>>>>> On Tue, 2026-03-24 at 18:30 +0800, Peng Fan (OSS) wrote:
->>>>>>> From: Peng Fan <peng.fan@nxp.com>
->>>>>>>
->>>>>>> Convert the board to use DM_PMIC instead of the legacy SPL
->>>>>> I2C/PMIC
->>>>>>> handling.
->>>>>>>
->>>>>>> Changes include:
->>>>>>> - Enable DM_PMIC, DM_PMIC_PCA9450, and
->>>>>> SPL_DM_PMIC_PCA9450 in defconfig.
->>>>>>> - Drop legacy SPL I2C and PMIC options.
->>>>>>> - Remove manual I2C1 pad setup and legacy power_pca9450_init()
->>>>>> usage.
->>>>>>> - Use DM-based pmic_get() with the DT node "pmic@25".
->>>>>>> - Update PMIC register programming to use struct udevice API.
->>>>>>
->>>>>> these changes break something.
->>>>>>
->>>>>> Getting
->>>>>>
->>>>>> Loading Environment from MMC... Card did not respond to voltage
->>>>>> select! : -110
->>>>>> *** Warning - No block device, using default environment
->>>>>>
->>>>>> and SD card is not accessible as a result. I also worked on this
->>>>>> modernization and got the same result as with your commit. Have
->>>> not
->>>>>> had time to investigate the cause, yet.
->>>>>
->>>>> This change should not impact sd, unless pmic not probe correctly.
->>>>> You may give a look on "regulators", "pmic" in U-Boot shell, to see
->>>>> whether pmic is good.
->>>>>
->>>>> And you may also need to confirm, whether SD works or not without
->>>> this
->>>>> migration to DM_PMIC.
->>>>
->>>> I see the same issue. The error is gone when the patch is reverted again.
->>>> PMIC probing is working but the voltage change of SD-Card is probably
->>>> not.
->>>> We have set
->>>> dts/upstream/src/arm64/freescale/imx8mp-phycore-fpsc.dtsi:
->>>> vqmmc-supply = <&ldo5>;
->>>>
->>>> which references the PMIC.
->>>> The evk is not using this property.
->>>
->>> I tried to add vqmmc-supply for i.MX8MP-EVK, I not see issues.
->>> Not sure why this property impacts phycore-fpsc.
->>>
->>> The only suspecting point is 
->>>
->>> -                       MX8MP_IOMUXC_GPIO1_IO04__USDHC2_VSELECT 0xc0
->>> +                       MX8MP_IOMUXC_GPIO1_IO04__USDHC2_VSELECT 0x1c0
->>>
->>> No more ideas as of now.
->>
->> I'm pretty sure this issue is related to the VSELECT signal in some way.
->>
->> With MX8MP_IOMUXC_GPIO1_IO04__USDHC2_VSELECT being set, the SDHC
->> controller controls the VSELECT signal that goes into the SD_VSEL input
->> of the PMIC and switches the LDO5 between 1.8V and 3.3V. Internally the
->> PMIC uses the state of SD_VSEL to decide which one of two voltage
->> registers for LDO5 is used.
->>
->> When vqmmc-supply is set, the driver additionally sets the voltage by
->> writing to the PMIC LDO5 voltage register. This can potentially cause
->> conflicts and lead to an invalid state, where the driver thinks the card
->> is in 1.8V state but the voltage is set to 3.3V or the other way round.
->>
->> One way to handle this, is to set the SION bit for the VSELECT signal
->> and specify the sd-vsel-gpios property in the ldo5 node. This allows the
->> PMIC driver to know about the current state of the VSELECT signal and
->> use the correct voltage register when setting or getting the LDO5 voltage.
->>
->> Below you can find some pointers for additional information. I hope this
->> helps to solve the issue on your board.
-> 
-> Thanks for the detailed information. But I still have a question:
-> For current phyboard-pollux-rdk, vqmmc-supply will always use
-> PCA9450_LDO5CTRL_H for regulator value configuration.
-> 
-> In drivers/mmc/fsl_esdhc_imx.c, when configure with 3.3V, PCA9450_LDO5CTRL_H
-> will configured to 3.3V, but SD_VSEL is low, so no impact. When configure
-> with 1.8V, PCA9450_LDO5CTRL_H will be configured to 1.8V, and SD_VSEL is high,
-> so it should work.
-> 
-> or I may miss something.
+Use $(src)/$(notdir $<) instead of $< so the .incbin directive contains
+a source-relative path like drivers/video/fonts/nimbus_sans_l_regular.ttf
+rather than an absolute one. Add -Wa,-I$(srctree) to the assembler
+flags so the assembler can resolve these paths.
 
-I think you are right. The process is the same as in Linux and I never
-saw any issue there. Just the fact that when reading back the voltage of
-the LDO5 regulator in Linux or U-Boot you could get a wrong value. This
-can be fixed as described before.
+The DTB and DTBO rules are left unchanged since their prerequisites are
+generated files in the build directory.
 
-So I'm really not sure what the actual problem is. I remember having a
-similar or the same issue with our Kontron boards before switching to
-the upstream DTS with sd-vsel-gpios. So it might also fix this issue
-here, but of course it would be good to know the actual reason.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Best regards
-Frieder
+ scripts/Makefile.lib | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index 7386353e0cc..e44120ea0c0 100644
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -219,6 +219,7 @@ c_flags        = -Wp,-MMD,$(depfile) $(NOSTDINC_FLAGS) $(UBOOTINCLUDE)    \
+ 		 $(basename_flags) $(modname_flags)
+ 
+ a_flags        = -Wp,-MMD,$(depfile) $(NOSTDINC_FLAGS) $(UBOOTINCLUDE)     \
++		 -Wa,-I$(srctree)                                   \
+ 		 $(_a_flags) $(modkern_aflags)
+ 
+ cpp_flags      = -Wp,-MMD,$(depfile) $(NOSTDINC_FLAGS) $(UBOOTINCLUDE)     \
+@@ -520,7 +521,7 @@ cmd_S_ttf=						\
+ 	echo '.balign 16';				\
+ 	echo '.global __ttf_$(*F)_begin';		\
+ 	echo '__ttf_$(*F)_begin:';			\
+-	echo '.incbin "$<" ';				\
++	echo '.incbin "$(src)/$(notdir $<)" ';				\
+ 	echo '__ttf_$(*F)_end:';			\
+ 	echo '.global __ttf_$(*F)_end';			\
+ 	echo '.balign 16';				\
+@@ -541,7 +542,7 @@ cmd_S_splash=						\
+ 	echo '.balign 16';				\
+ 	echo '.global __splash_$(*F)_begin';		\
+ 	echo '__splash_$(*F)_begin:';			\
+-	echo '.incbin "$<" ';				\
++	echo '.incbin "$(src)/$(notdir $<)" ';				\
+ 	echo '__splash_$(*F)_end:';			\
+ 	echo '.global __splash_$(*F)_end';			\
+ 	echo '.balign 16';				\
+@@ -562,7 +563,7 @@ cmd_S_efi=					\
+ 	echo '.balign 16';			\
+ 	echo '.global __efi_$*_begin';		\
+ 	echo '__efi_$*_begin:';			\
+-	echo '.incbin "$<" ';			\
++	echo '.incbin "$(src)/$(notdir $<)" ';			\
+ 	echo '__efi_$*_end:';			\
+ 	echo '.global __efi_$*_end';		\
+ 	echo '.balign 16';			\
+-- 
+2.43.0
 
+base-commit: 1ffc541eafc96d5eebcf837ab892dccec3b93568
+branch: font-us
