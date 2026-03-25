@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 714D8FEA83E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 09:59:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AB88FEA824
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 09:59:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F396784065;
-	Wed, 25 Mar 2026 10:58:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 39EFA8407E;
+	Wed, 25 Mar 2026 10:58:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="Dh2vjx/2";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="RnP4dZlo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C207681E18; Wed, 25 Mar 2026 10:58:20 +0100 (CET)
+ id D339581E18; Wed, 25 Mar 2026 10:58:22 +0100 (CET)
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F3F183DA7
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 10:58:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D5FC283FDC
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 10:58:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=Alexander.Feilke@ew.tq-group.com
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:MIME-Version:
- Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References;
- bh=bj9GNZrCGNR9miWGAXwOscidZz2OgcOGDCK09FtF8e0=; b=Dh2vjx/2bqpWSt3lM8440/rCSp
- 8TtK1TFVekZn9iHAFR7+YdqKEX2M8BkBKA1U8/L5POLhKbhuTbwmJKn3bozoM4/zVNX07U/IimTJn
- C5WlRcNvDyPtY3dxlxx/Y3+xyMM+s0WU2udWjGZ6oh7VEe9AyYPPe1eKIfqS4Jl54tAFDf6gMFjZY
- 086r+QQTkSXmQdR+1lyvTD+VlUfrhnHlUIq/ohAMCiHZCJSp8khdJNF8/NoCRsGpgwi2FoKg0WzL9
- EVULgE8RseLAxfHTzpWofbMsD7785SFFY2yEqcS89yUkqiQ0NrLrwnp5Z3bra8aC+cLh8PPo+JIc6
- j3adoCRA==;
+ References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
+ bh=KrPVneYIjrF6+Xg59nriDVdKVHxC4I4v/W8+o4VDTZY=; b=RnP4dZlo3xWbRK2H8Je2RauI16
+ QJsp/BxHMeBtMN6+m9WdFTAOm6LGn/nJzi/6UY44LQlmLhcD0VZCdE//ZdY473JPdohnBebHAbHuC
+ 8ArpV+EES63TeHHxrrAXX6wPsexfbhAoe23TbTA/hcksNvz4Cwae4Z7qg7GlgfntMZDC+hyXYBd84
+ bgfIzyB+Kk1fnuvLP2RXARG0UDLpOXZ1Yfu6gziGkJirLx2rZKrhwAa1JPh4dsm/7ifFhgTuLaBQu
+ y9qIAav3zmD5f47qULr2/E5RxfkZs5LDHdpU3kKUe8M1Z84S/Pd7zzsgvztkQoiCgRgHHIxIkIhSa
+ /YQQl1nw==;
 Received: from sslproxy07.your-server.de ([78.47.199.104])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1w5L07-0009lo-0Z; Wed, 25 Mar 2026 10:58:11 +0100
+ id 1w5L0A-0009nE-1k; Wed, 25 Mar 2026 10:58:14 +0100
 Received: from localhost ([127.0.0.1])
  by sslproxy07.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1w5L06-000HPv-37; Wed, 25 Mar 2026 10:58:10 +0100
+ id 1w5L0A-000HPv-17; Wed, 25 Mar 2026 10:58:14 +0100
 From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
  u-boot@ew.tq-group.com
@@ -52,10 +52,12 @@ Cc: Alexander Feilke <alexander.feilke@ew.tq-group.com>,
  Fabio Estevam <festevam@gmail.com>,
  Alexander Feilke <Alexander.Feilke@ew.tq-group.com>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
-Subject: [PATCH v2 0/8] Add support for TQMa7x
-Date: Wed, 25 Mar 2026 10:57:53 +0100
-Message-Id: <20260325095801.47706-1-Alexander.Feilke@ew.tq-group.com>
+Subject: [PATCH v2 8/8] doc: tqma7: add documentation
+Date: Wed, 25 Mar 2026 10:58:01 +0100
+Message-Id: <20260325095801.47706-9-Alexander.Feilke@ew.tq-group.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260325095801.47706-1-Alexander.Feilke@ew.tq-group.com>
+References: <20260325095801.47706-1-Alexander.Feilke@ew.tq-group.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -76,98 +78,117 @@ X-Virus-Status: Clean
 
 From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 
-This series adds support for TQMa7x and is based on the preparations for
-additional TQ boards series [1] and [2]. It has 512M, 1G and 2G RAM variants
-which are detected by the SPL by initializing them in descending order.
-It can boot from SD, MMC, SPI and USB (SDP). SPI however requires an additional
-prepended NXP header image which is currently unsupported in u-boot.
+Add readme for the tqma7 board.
 
-The i.MX7S variant boots but is not being actively supported.
-
-Best regards,
-Alexander
-
-[1] "TQMa6 with preparations for integrating additional TQ boards" (V2)
-https://patchwork.ozlabs.org/project/uboot/list/?series=497120
-[2] "TQ-Systems MAINTAINERS files"
-https://patchwork.ozlabs.org/project/uboot/list/?series=497398
-
-Changes in v2:
-- Update MAINTAINERS to fix CI issue
-- Improved commit messages
-- Fix a checkpatch warning in board/tq/common/tq_som.c
-
-Alexander Feilke (7):
-  Kconfig: update build-target for MX7 with SPL
-  board/tq: Add common SoM API
-  arch: arm: dts: tqma7x: add u-boot device tree fragments
-  arch: arm: dts: tqma7x: add boot phase properties
-  board: tqma7: add code for u-boot with spl
-  configs: tqma7: add defconfigs
-  doc: tqma7: add documentation
-
-Nora Schiffer (1):
-  env: add env_set_runtime() helper
-
- Kconfig                              |   2 +-
- arch/arm/dts/imx7d-mba7-u-boot.dtsi  |  10 ++
- arch/arm/dts/imx7s-mba7-u-boot.dtsi  |  48 +++++++
- arch/arm/dts/imx7s-tqma7-u-boot.dtsi |  22 ++++
- arch/arm/mach-imx/mx7/Kconfig        |  16 +++
- board/tq/MAINTAINERS                 |   9 ++
- board/tq/common/Kconfig              |   3 +
- board/tq/common/Makefile             |   1 +
- board/tq/common/tq_som.c             |  32 +++++
- board/tq/common/tq_som.h             |  34 +++++
- board/tq/tqma7/Kconfig               | 103 +++++++++++++++
- board/tq/tqma7/Makefile              |  14 +++
- board/tq/tqma7/spl.c                 | 123 ++++++++++++++++++
- board/tq/tqma7/spl_mba7.c            | 182 +++++++++++++++++++++++++++
- board/tq/tqma7/spl_tqma7_ram.c       | 171 +++++++++++++++++++++++++
- board/tq/tqma7/tqma7.c               |  96 ++++++++++++++
- board/tq/tqma7/tqma7.cfg             |  26 ++++
- board/tq/tqma7/tqma7.env             |  36 ++++++
- board/tq/tqma7/tqma7_mba7.c          | 148 ++++++++++++++++++++++
- configs/tqma7_common.config          | 119 ++++++++++++++++++
- configs/tqma7_mba7_mmc_defconfig     |   2 +
- configs/tqma7_mba7_qspi_defconfig    |   2 +
- configs/tqma7_mba7_uuu_defconfig     |   2 +
- configs/tqma7_mmc.config             |   4 +
- configs/tqma7_qspi.config            |   7 ++
- configs/tqma7_uuu.config             |  22 ++++
- doc/board/tq/index.rst               |  12 ++
- doc/board/tq/tqma7.rst               |  77 ++++++++++++
- include/configs/tqma7.h              |  71 +++++++++++
- include/configs/tqma7_mba7.h         |  16 +++
- include/env.h                        |  19 +++
- include/env/tq/spi.env               |   4 +
- 32 files changed, 1432 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/dts/imx7d-mba7-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx7s-mba7-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx7s-tqma7-u-boot.dtsi
- create mode 100644 board/tq/common/tq_som.c
- create mode 100644 board/tq/common/tq_som.h
- create mode 100644 board/tq/tqma7/Kconfig
- create mode 100644 board/tq/tqma7/Makefile
- create mode 100644 board/tq/tqma7/spl.c
- create mode 100644 board/tq/tqma7/spl_mba7.c
- create mode 100644 board/tq/tqma7/spl_tqma7_ram.c
- create mode 100644 board/tq/tqma7/tqma7.c
- create mode 100644 board/tq/tqma7/tqma7.cfg
- create mode 100644 board/tq/tqma7/tqma7.env
- create mode 100644 board/tq/tqma7/tqma7_mba7.c
- create mode 100644 configs/tqma7_common.config
- create mode 100644 configs/tqma7_mba7_mmc_defconfig
- create mode 100644 configs/tqma7_mba7_qspi_defconfig
- create mode 100644 configs/tqma7_mba7_uuu_defconfig
- create mode 100644 configs/tqma7_mmc.config
- create mode 100644 configs/tqma7_qspi.config
- create mode 100644 configs/tqma7_uuu.config
+Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
+---
+ doc/board/tq/index.rst | 12 +++++++
+ doc/board/tq/tqma7.rst | 77 ++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 89 insertions(+)
  create mode 100644 doc/board/tq/index.rst
  create mode 100644 doc/board/tq/tqma7.rst
- create mode 100644 include/configs/tqma7.h
- create mode 100644 include/configs/tqma7_mba7.h
 
+diff --git a/doc/board/tq/index.rst b/doc/board/tq/index.rst
+new file mode 100644
+index 00000000000..d6dc6101c2c
+--- /dev/null
++++ b/doc/board/tq/index.rst
+@@ -0,0 +1,12 @@
++.. SPDX-License-Identifier: GPL-2.0-or-later or CC-BY-4.0
++
++.. Copyright (c) 2024-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++.. D-82229 Seefeld, Germany.
++
++TQ-Systems
++==========
++
++.. toctree::
++   :maxdepth: 2
++
++   tqma7
+diff --git a/doc/board/tq/tqma7.rst b/doc/board/tq/tqma7.rst
+new file mode 100644
+index 00000000000..60fd883968d
+--- /dev/null
++++ b/doc/board/tq/tqma7.rst
+@@ -0,0 +1,77 @@
++.. SPDX-License-Identifier: CC-BY-4.0
++
++.. Copyright (c) 2020-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++.. D-82229 Seefeld, Germany.
++
++########################################
++U-Boot for the TQ-Systems TQMa7x modules
++########################################
++
++This file contains information for the port of
++U-Boot to the TQ-Systems TQMa7x modules.
++
++***********
++Boot source
++***********
++
++The following boot sources are supported:
++
++- SD/eMMC
++- USB (SDP)
++
++QSPI boot is functional but requires an additional prepended NXP header
++image. This currently unsupported in u-boot.
++
++********
++Building
++********
++
++To build U-Boot for the TQ-Systems TQMa7x modules:
++
++.. code-block:: bash
++
++	make tqma7_mba7_<boot>_defconfig
++	make
++
++**boot** is a placeholder for the boot device:
++
+++------+-----------+
++| mmc  | SD/eMMC   |
+++------+-----------+
++| uuu  | USB (SDP) |
+++------+-----------+
++
++The default build artifact is named ``u-boot-with-spl.imx``.
++
++*****************************************
++Serial Download Protocol (SDP) / USB boot
++*****************************************
++
++The complete system image can be programmed with ``uuu``
++(https://github.com/nxp-imx/mfgtools) to eMMC.
++
++Serial Download Protocol is supported on the Micro-B USB port (X5) of MBa7x.
++The command ``fastboot usb 0`` is used to enable the fastboot gadget.
++
++Build SDP enabled U-Boot image
++==============================
++
++.. code-block:: bash
++
++	make <som>_mba7_uuu_defconfig
++	make
++
++Booting
++=======
++
++With UUU
++
++.. code-block:: bash
++
++	uuu -b spl <UUU U-Boot image>
++
++************
++Support Wiki
++************
++
++See `TQ Embedded Wiki for TQMa7x <https://support.tq-group.com/en/arm/tqma7x>`_.
 -- 
 2.34.1
 
