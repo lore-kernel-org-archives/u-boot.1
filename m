@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46C36109C05D
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 20:18:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCDBA109C05B
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 20:32:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A87C783CD3;
-	Wed, 25 Mar 2026 21:18:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 30ACE83CD3;
+	Wed, 25 Mar 2026 21:32:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bSmmvR90";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Kse6KRTP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1E9383DA7; Wed, 25 Mar 2026 21:18:12 +0100 (CET)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id 4E8E983E76; Wed, 25 Mar 2026 21:32:10 +0100 (CET)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EAD683A91
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 21:18:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB7B183A91
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 21:32:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7d7ebe11bffso182086a34.0
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 13:18:10 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-40f387a688dso253135fac.0
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 13:32:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774469889; x=1775074689; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vaqUDP/M5fdpPsACxeHK3yU5RWk8+PCG7QWB1vCDZcw=;
- b=bSmmvR90W/XN98RxdqQcNxMTXxCSx4L67oZSJW79j+g7cUDD2rmfvX9qhche66xUsf
- kTJOO8Ts+AF12P2hP0oSW9E/VB/JsqWabqJeEchadfsHKlHuxLGRFZprKiIdQnduzlbJ
- KUMHfOBMPi1STM19kgGIJqeQ/lyacyZGaiqj4=
+ d=konsulko.com; s=google; t=1774470726; x=1775075526; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=N5IJcZSTxwwWf9H1wlKGkBbJMMTrVPLOqfl4GuhAN5s=;
+ b=Kse6KRTPFVcJP8kcuxSpiPme+WCnPRN8Utt50f+k+xAGO1w9+xsNzOuyKD6Bfjf1VT
+ Ss+0DeqwXDucdlitLjBokOSVGJ/uNJ51iErrrNuOs03cwPOIYwbdWP4INXRzJEJ+FexD
+ L4Q/FTpgIXUWZ/GgjmuOQYrpTZhcM/96EwEe8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774469889; x=1775074689;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vaqUDP/M5fdpPsACxeHK3yU5RWk8+PCG7QWB1vCDZcw=;
- b=efMgRygh3DImWOutXL+FywEpIjQlqLH+dLRXfBUKPuOxXwJTPmWA2daucTwGAvK7TT
- j6EUYIi8g/Oe/CaEWIDOsu6MW2nygNSts00rDOHX9xURE7WCAZWEDs4dcvbJ8X8nL6UC
- Kd50YRWSOGf2OktUv31IuNXaMQUhCb6umUQVtuLxXV4S0L8zT0Hu2D+47iPULqjM3DO4
- rNVwlWgyG6gXTaGdy0tvlGULJda2dYll8PAq0e3WtsMbFJPZ4Ofj+bb+3vlCSARP0QUn
- J5B80o3e35dPA8WOxrRXwfQ4xtHIgFzmI0LpdABGmuzJLQ5sI/Geht39TltVcTzu7tQe
- +e0g==
-X-Gm-Message-State: AOJu0YxO6XjaxafsZthW5GxYd9eYqLbXeGLY7gnh5joLmaD0Ydk1pTxO
- Mquofy8s8wh6FJ5gNGF9yoe1DgrDzBLPO23lMQ4zFh4nrAE7pQNlWHcEO6Ue900lctc=
-X-Gm-Gg: ATEYQzzMrHLmLHO2SRFhd/+dKzz6Ym6AS1KvgkPDLZ452mx6ssKc12mBlALEEarsTVk
- eW39HINk8lxEpjocWLMYw7iSal+FAupyXlVZc018/MRFKRPpktrusVYRnkslcZ1sSH5LV0thaM1
- F7HuYOm2FBi9bxOQvD05mfEj3f57C+UKXBc4lPiXm4VT/ab9bGfSAO7RyK6NXLQ6m22NgxvzsXi
- XlaRp/T/pYOhVgMufIBx/BJazu2Wo6X/5sE0Uf51qobuldBpJTXS4k1JvLyxQzerMl/4FExzilA
- mDkAXiXq0mPUXhrtwCWtv1Sxq13v3VNHBfTUTIV8LqOCSGYR46lxh5n+l6xFjyzIIZUMighdEUW
- 4IEZjHQxVxZ3sY6XId00WIRxVDLiTvzOoZcEmpRrGct5WxAHKbHr3HZkp6oaFT1q4rmJ5W6cUji
- P6uqk4qNiH2Z5zlVKSoHDE+mSvhXnvz4VpxLeOrIXQ9u7maIDOomYkCvWSeE8uaOki/qPfIcm9d
- c5scg8qRxOhQeMGnOd0ScV2tF8NpImbdpmPkPKd9cEJHp0t
-X-Received: by 2002:a05:6830:dc3:b0:7d9:b2b8:e06f with SMTP id
- 46e09a7af769-7d9d68ee184mr2553954a34.21.1774469888943; 
- Wed, 25 Mar 2026 13:18:08 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
+ d=1e100.net; s=20251104; t=1774470726; x=1775075526;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=N5IJcZSTxwwWf9H1wlKGkBbJMMTrVPLOqfl4GuhAN5s=;
+ b=heRyW8gdOtzjJgyZHgvuEmZlejlshPIQAajPcKyoVqNF9r4lBOblE9vH5c+cDa6Z8U
+ UyAnkgw04nPieh1mPyov4hfJJZx7nVfjpigLoQM85aRznAnGbyTjeMf5TwHzCnYTxY+u
+ ZngOGhk7oHI8YNXwBZ+1uE7pqnuzK/mZekz9Ge3uh3Nxzy/nxZO0lo0b0XHoDW61LMp6
+ 8vctxj8gy8IK+rBGJJjxsDeUHR1ArVDGps74AEo2B3+IgcgNLEfeS2fQgnRxn/Mk0POG
+ a0uSuujgZXR8ATzq3IHT0s4X439RNv8wRyX1PXbXTGmEsEiRAJZ8GbIQIsq0Lr0krHYS
+ 4iLg==
+X-Gm-Message-State: AOJu0YySoFBz8J9Fjh6Ztei4wQLQseVfIoMWBUaypabBJIMSm+/GymZy
+ t/DK4Lt+xNJVwX/yQol7rYtx4cEpHM0A0ss46O7pXHBblpr479a9mbu3PrYu3ZzOoy8=
+X-Gm-Gg: ATEYQzzwXjXKuNvhZHEYP16OevDwovFFVxhwSqbmVCfYQXVIt/FrMXAkss+LERFGAcZ
+ v+/KS/DMmuWpS8Q9S/CAG9zDV3duIUtkklfgJpucW63C0U48SR17KwX3jLV7F/TR2SGVuH9FXMF
+ x+3xc+Oxufnaxa3PIHHsZPgrPtuPXOCSFdzrAzwxRYXI3cn0PYzLjfLxrC/Ke6LXXmo9+ZUqTNq
+ huVua3go0MkSwVb1tu7ZD6mTiGnFSvZ6AnrE/3kxvgm6aTIdQ9V+5BYKER6jeh8iQoZA6zg7/VE
+ CysxiAy1kpSyFVi39n5CHqJ0eXOPzbB3zMj3OAHMTRJvEPySL0UJ9FTPr7Xv+Q0mMW5WZhXcdbx
+ CxX7fiB5v0z4uvN+iA69z9Qgb7igwPbkd3So8eaYRhmAhzYp2hZ8Po151QwWMjlHCKxqDQKV9NM
+ CtznohgBY4tVuwUcT7KjHhqR5075m+mwTAB4CAn6V8Ysvk5VYTXs4S1oOBL8G5dEM9KaHqRL1eS
+ tpNfRzGjGic1p1LZljRgvaUG+VkJrkEulWfA75ooWxiW1k=
+X-Received: by 2002:a05:6871:409c:b0:417:47c0:3504 with SMTP id
+ 586e51a60fabf-41ca7088a58mr2937430fac.34.1774470726528; 
+ Wed, 25 Mar 2026 13:32:06 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d9e6fb2e11sm644101a34.3.2026.03.25.13.18.07
+ 586e51a60fabf-41ccb6b1d25sm107735fac.16.2026.03.25.13.32.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Mar 2026 13:18:08 -0700 (PDT)
-Date: Wed, 25 Mar 2026 14:18:06 -0600
+ Wed, 25 Mar 2026 13:32:06 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Raymond Mao <raymondmaoca@gmail.com>
-Subject: Re: [PATCH] CI: Update sjg lab to match currently actively boards
-Message-ID: <20260325201806.GA3445024@bill-the-cat>
-References: <20260317131839.2418655-1-sjg@chromium.org>
+To: David Lechner <dlechner@baylibre.com>
+Cc: u-boot@lists.denx.de, Julien Stephan <jstephan@baylibre.com>
+In-Reply-To: <20260324184019.987767-1-dlechner@baylibre.com>
+References: <20260324184019.987767-1-dlechner@baylibre.com>
+Subject: Re: [GIT PULL] Please pull mediatek-for-next-2026-03-24 into next
+Message-Id: <177447072568.3473727.2910209623719626896.b4-ty@konsulko.com>
+Date: Wed, 25 Mar 2026 14:32:05 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="bQzEe6sZYhEqjWWW"
-Content-Disposition: inline
-In-Reply-To: <20260317131839.2418655-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,60 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 24 Mar 2026 13:39:20 -0500, David Lechner wrote:
 
---bQzEe6sZYhEqjWWW
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> The following changes since commit 1ffc541eafc96d5eebcf837ab892dccec3b93568:
+> 
+>   Merge patch series "DDR configuration refactor and 16GB dual-rank support" (2026-03-23 09:19:00 -0600)
+> 
+> are available in the Git repository at:
+> 
+>   https://source.denx.de/u-boot/custodians/u-boot-mediatek.git tags/mediatek-for-next-2026-03-24
+> 
+> [...]
 
-On Tue, Mar 17, 2026 at 07:18:35AM -0600, Simon Glass wrote:
+Merged into u-boot/next, thanks!
 
-> Various updates:
-> - c4 lack signing so does not currently build
-> - samus hardware is non-functional
-> - colibrimx8, rockpro64, rock3a, rock5b, rpi5, tk1 and play are new
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
->=20
-> ---
-> A sample run is here:
->=20
-> https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/29552
->=20
-> At present, coral, play, rpi5, snow and vf2 appear to be genuinely
-> broken on -next
->=20
-> The ff3399 board needs some investigation.
->=20
->  .gitlab-ci.yml | 46 ++++++++++++++++++++++++++++++++++++----------
->  1 file changed, 36 insertions(+), 10 deletions(-)
-
-I have two sets of problems with this patch.
-
-One, it doesn't do, but perhaps I wasn't clear enough when bringing it
-up, change it so that failure to pass is a job failure (it's currently a
-warning). This in turn means people can't tell expected failure from new
-failure.
-
-Two, when you had previously gone about adding at least colibrimx8 I
-noted that this extended how you were having labgrid build U-Boot in an
-even further non-upstreamable manner. As the sage lab yaml shows, we can
-bring in external binaries for buildman (and binman) to find and use.
-We'll need to extend that logic a bit, to be sure, but it's a solvable
-problem with the baseline already there.
-
---=20
+-- 
 Tom
 
---bQzEe6sZYhEqjWWW
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCacRC+gAKCRAr4qD1Cr/k
-CrERAP9kjcSycRpUnvthZo9CC70bWgUyZRhmp3lDFwDTaA2usAEA1BQ20aa3Ij6g
-FzBoK/t51Ik+4hxyU2wTMRIRD82+rws=
-=TcOM
------END PGP SIGNATURE-----
-
---bQzEe6sZYhEqjWWW--
