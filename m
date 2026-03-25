@@ -4,86 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B4D3109C048
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 16:54:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DED0F109C046
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 16:55:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87830838BB;
-	Wed, 25 Mar 2026 17:54:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5812783AAB;
+	Wed, 25 Mar 2026 17:55:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MxbVqRE4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MKIAz/Vu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 071FE83A91; Wed, 25 Mar 2026 17:54:27 +0100 (CET)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id C047F83A91; Wed, 25 Mar 2026 17:55:33 +0100 (CET)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA71881E18
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 17:54:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2056581E18
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 17:55:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-4094b31a037so59637fac.1
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 09:54:24 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-4673790ab85so3006715b6e.3
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 09:55:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774457663; x=1775062463; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Lger8soUN0DkzqUK3ISYHnmhj1vt3o4EaG5spU1kipA=;
- b=MxbVqRE45mDGIQddVrksZnqevCyzgf5CWyxGzhNjs/I4lSdxlJaZn87dEr9ye06dBW
- 8SeU1UhihCAA4F21foJvWGxQfFBSmu1WY4EAhhjmzWDpEbk8lOPwJ7PQhKRpkjkLblqH
- MLSQ1lb1O9ztjG8meTDv01/gUiUTBfnU7PTbg=
+ d=chromium.org; s=google; t=1774457729; x=1775062529; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6ZtOhdIYb7moHvHPIaOKUtQTQcWhiRvVx/3eNC6ae68=;
+ b=MKIAz/Vuq4PHE4bWFVpQCHqdibS0i3ZGBcGF+i5R0jGYGZ5Na8L2+f//z1ntquVRuj
+ JBDSk06+ldn84jj/ShtiG6kCqglX21z5/dLcmbek0RV8tFmVxEYblynKV6GVBqOt/3dk
+ XVy8zgZOZg4W/zYufisaEj3o/F7pgzUzxWdOk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774457663; x=1775062463;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Lger8soUN0DkzqUK3ISYHnmhj1vt3o4EaG5spU1kipA=;
- b=KyUHubnNjPXHbqQ9Sx9Q87paEfDwiSiMAMzpNDtRkcIcl75S6pFiGMsGgxE8vUneh9
- IXs3Tg/f/Y5zclevN9JuO7rybWRFw1meo2rDUaO54Ss3zwk5djkmuva5rfDhLGmHSlXQ
- VkM/k85H3uY3aEo0g54B1MoKeGvPWToSKY87g3mVGHoRAU5aKghsFHPeuH98z5dAfDZr
- luqw4CR81yN6PpNpAHId1DV4lWoeK7OhQbmyuPg8bjsYogOxn5b+f1WO63STW/8sOmRq
- O1EiilRitfnIq+CoYgDJkLUGEnSqSQn/GCBbXTwAfwXzn1WRaZHGUb/g7i7CjLVaG2Yj
- rn6w==
-X-Gm-Message-State: AOJu0YwASFJk94lOncRVtCCT9FOhKB2G8A23CYzgFnEdpdpRrGsC4WZx
- YSIYtWXKGc4xvjVo2y9w95AEdxeskCB/vHv5QKx+7aEplpbrQ+SpfYyyNf/qF0E3DLA=
-X-Gm-Gg: ATEYQzyEPs70DchSsYBMqBxI2Fb45gnhhhLyhcL2jBeKusyoRMplD/84PPe9hW7b584
- nSLXOMmEgaqHtTxdVp6dwDCU6OE0s2KtshSy0uzshJ3QgBA9LQBA/Jtu5pNioYkznyFWGRHxNCR
- p/mfvkLj1EtcLydlInVKpzkUV3VUazVNml3AHlHasmQySrzcdFdp9Ik4MsIrrqnA3g8L994QQX7
- jk9yIPCyBgB40r53LfU0AsBbZTjNmEDxFl7tltEmSfY7uY+IGPrirFfz8rUodmBijZAVhsLm3r9
- 2pWayQvxwzaP1UgOuq28fzj2KEIv/0Nvl55OM1PcjjaKtznf2h4Gty9JuU+Uf0jklYrrTk/Yds0
- rckty4ASKOtGK1jSsInNOVptAtBKTcfSsreY1xr+xoQiH06S83IE/MV4FqX2PSseceLZavVVsdR
- wCKMJWAhz+/ej3hIjlgi7VUuabpQO+OKO81dSv3GlCDzE7PkgL6fqnAu/zeTaLoyU1ITpl8Fk7L
- Cw/9O/OhKvecaBX+J6z7EnVhNEhaVSUAt6/zmvrZw/VcW/g
-X-Received: by 2002:a05:6870:458c:b0:416:32c1:4276 with SMTP id
- 586e51a60fabf-41ca7005de9mr2344187fac.28.1774457663608; 
- Wed, 25 Mar 2026 09:54:23 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41cc7b6312csm56309fac.15.2026.03.25.09.54.22
+ d=1e100.net; s=20251104; t=1774457729; x=1775062529;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6ZtOhdIYb7moHvHPIaOKUtQTQcWhiRvVx/3eNC6ae68=;
+ b=n4obILPUjJX8Dt30FT6LBzPCbsCR9Hl82MsiMANWKEeQs1b8zO8rx4Tgtwdyh9BP1S
+ c2kGyl//sXrWJsE4mHRi+zPDsMnTSqSg8Mm/mcuh0ZFV4NnUbQIM2p5IdxDqy6N02ATA
+ Iaulj3encRsJpEyv/C/vHysMY8tSKXPY31QZBUFH7+npxYw8IBMzcD8MHd44ZJXVmPm8
+ FCpzV04SqRJpv8ftfKHUCYddBABCIO+TadfjqE2MXJgurGv4RpbhNxi2Ww/7AaLvLt90
+ pQ98hrehRI3h8cuRqO6X0FMl7fO/MnJAJpDWT9pRRq08pJrN9UggElb9jy/iho+0fIq9
+ zq+Q==
+X-Gm-Message-State: AOJu0YwOgoBQZmq3iz8xKzJqIXLUVcV8WS9E0GsaaLzrR+MBFfIP+Bc6
+ ZBv/1Jyuv/8XQZqQ2UnB1qDZzuWK1ikUIE3cY3mdHbyYH8XgeAtO4q+ui/QVFQX2n3NGxzV4dED
+ RTq0e+g==
+X-Gm-Gg: ATEYQzyHCnyKtyb0i0J9P71Y3ynpqENPZ76fC5wt2plylbKF3oQVuGaZyknlrIvrkuL
+ hrmZR7KY34ZUILpTeVoroVYruW2MQWx+v64nr7lTJhC6FAfWgnj0pDxzml8xE8SND35tZYF66Ez
+ 7G/Q5W9TKppstD1qFL02InkYAv+Oak4u2yyuKKqBKYZF1mpn0idSHNgFvsgp62WD0d+473DiIUY
+ vOuEhhWPkWjkLCG9xkIyUFOzS3TdMW25t23CTEbv7hbKYdIFlC/MDj/86GtIhiUx7eCXnwtGFvo
+ eb+qHbVOdf7BIH99CMQAgQ+yQa+jS8rA/rDA9cuGq2w97BXkAVZX4xTvuLBsv7+ekNs7th9OlPj
+ vUzSInDYlr/zLjx//ooe757y82lDTzxIeBaJKD5YrhJogvefC48mCF+IaK1X9rGtPRTSlJOvvGi
+ MPYYu/c2ss59Rq4T2KjQ==
+X-Received: by 2002:a05:6808:4f49:b0:467:f36d:a08a with SMTP id
+ 5614622812f47-46a5c59bda0mr2106626b6e.5.1774457728732; 
+ Wed, 25 Mar 2026 09:55:28 -0700 (PDT)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-46a7099df08sm30481b6e.15.2026.03.25.09.55.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Mar 2026 09:54:22 -0700 (PDT)
-Date: Wed, 25 Mar 2026 10:54:20 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Wed, 25 Mar 2026 09:55:28 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, James Hilliard <james.hilliard1@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>, Sam Edwards <cfsworks@gmail.com>,
- Sughosh Ganu <sughosh.ganu@arm.com>
-Subject: Re: [PATCH] kbuild: Use relative paths in generated .incbin directives
-Message-ID: <20260325165420.GT502704@bill-the-cat>
-References: <20260325130811.447377-1-sjg@chromium.org>
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Shiji Yang <yangshiji66@outlook.com>, Tom Rini <trini@konsulko.com>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>
+Subject: [PATCH 00/13] boot: Make fit_image_load() easier to maintain
+Date: Wed, 25 Mar 2026 10:54:09 -0600
+Message-ID: <20260325165431.1027591-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8iyf4/4mPO/q5dlm"
-Content-Disposition: inline
-In-Reply-To: <20260325130811.447377-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,49 +97,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Before fit_image_load() was created, the code to load kernels, ramdisks
+and devicetrees from a FIT was spread around many functions. By
+combining most of the code in one place, it became possible to add more
+features in a consistent way. The 'loadables' feature was much easier to
+plumb in, for example.
 
---8iyf4/4mPO/q5dlm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+While fit_image_load() was a substantial advance, it has never been a
+svelte function and the passing years have not been entirely kind. With
+a few new features on the horizon, this is a good time to improve the
+implementation.
 
-On Wed, Mar 25, 2026 at 07:08:09AM -0600, Simon Glass wrote:
-> The generated .S files for fonts, splash screens and EFI apps use
-> .incbin with the full prerequisite path. When building with O=3D this
-> bakes an absolute path into the .S file. If the build directory is
-> later used on a different machine (e.g. in a container), the assembler
-> cannot find the source file.
->=20
-> Use $(src)/$(notdir $<) instead of $< so the .incbin directive contains
-> a source-relative path like drivers/video/fonts/nimbus_sans_l_regular.ttf
-> rather than an absolute one. Add -Wa,-I$(srctree) to the assembler
-> flags so the assembler can resolve these paths.
->=20
-> The DTB and DTBO rules are left unchanged since their prerequisites are
-> generated files in the build directory.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
->  scripts/Makefile.lib | 7 ++++---
->  1 file changed, 4 insertions(+), 3 deletions(-)
+This series splits much of the code from fit_image_load() into a number
+of smaller functions. Most of the changes are fairly mechanical, with
+just a few renames and tweaks here and there.
 
-This is generic kbuild infrastructure now. Is there a fix we're missing
-=66rom upstream, a change we haven't pulled in yet (as we need to keep
-syncing upwards) or a problem upstream too? Thanks!
+This should make the function much easier to maintain. It may also
+encourage someone to take a look at its callers, which could also use
+some attention.
 
---=20
-Tom
+Code-size impact: about +8 bytes on aarch64 and +24-40 bytes on arm, due
+to the compiler's register allocation across the new helper functions.
 
---8iyf4/4mPO/q5dlm
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
+Simon Glass (13):
+  boot: Split out the first part of fit_image_load()
+  boot: Move call to fit_image_select() and rename it
+  boot: Tidy up setting of the OS arch on host builds
+  boot: Move type and OS checking into a new function
+  boot: Move handling of the load_op into a separate function
+  boot: Move obtaining data from a FIT image into a function
+  boot: Check the image is allowed before setting os.arch
+  boot: Move the architecture check into check_allowed()
+  boot: Move image-decompression into a separate function
+  boot: Move decomp_image() into handle_load_op()
+  boot: Move setting the OS arch into check_allowed()
+  boot: Drop unnecessary data variable
+  boot: Tidy local variables in fit_image_load()
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCacQTPAAKCRAr4qD1Cr/k
-CqwaAP90fpAq8F475xxF7KfZi0rUdxC51glB6Y9RcX9+eKjKnwD8DR+1KFar/buw
-zO444zcSzNkLuRrhs12sjCTd8d8XmAs=
-=5aDx
------END PGP SIGNATURE-----
+ boot/image-fit.c | 354 +++++++++++++++++++++++++++++++++++------------
+ include/image.h  |  11 +-
+ 2 files changed, 273 insertions(+), 92 deletions(-)
 
---8iyf4/4mPO/q5dlm--
+-- 
+2.43.0
+
+base-commit: 1ffc541eafc96d5eebcf837ab892dccec3b93568
+branch: loadb-us
