@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FCCFFEA83F
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 09:59:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 714D8FEA83E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 09:59:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB46C83FEE;
+	by phobos.denx.de (Postfix) with ESMTP id F396784065;
 	Wed, 25 Mar 2026 10:58:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="F3ow1tHU";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="Dh2vjx/2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFA1983AAB; Wed, 25 Mar 2026 10:58:20 +0100 (CET)
+ id C207681E18; Wed, 25 Mar 2026 10:58:20 +0100 (CET)
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F21783F86
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 10:58:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F3F183DA7
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 10:58:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=Alexander.Feilke@ew.tq-group.com
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=ovIHWF4mEmKfQJYC0i7h2Bm78YyJyN7QhyM6rJ+7JcE=; b=F3ow1tHURATc6lFA5LZbmt78ko
- c4gsVCz9qTpEC+EBh6sgwaPiZ4IjZvEluqKBw+XqPTAHXbyTzhT1TbYS3ODjPsdQF/K9azLgO71dw
- Cf9EDc3Vuyn6ovBFlEIQsuMDbYYzII8/jAQpk1en1AMDP+voVNxCr2ObafkzfMFtnFIcIlgxsh+mS
- Niq8V2E9bafHB6P7xv4bcgo+2sBdKSc45r+GaHFDPU3+j6XajgNXsRFKOQWLmzln7EqS7u/2RSDIG
- RBXwofC3M2P56Gjlu97jI1RHf2R3iQG7J5d8ixuWEGL/BkDFlk6haidQR/oQ2nQmnZ+wyJs75HUmx
- oiEPrtmw==;
+ Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References;
+ bh=bj9GNZrCGNR9miWGAXwOscidZz2OgcOGDCK09FtF8e0=; b=Dh2vjx/2bqpWSt3lM8440/rCSp
+ 8TtK1TFVekZn9iHAFR7+YdqKEX2M8BkBKA1U8/L5POLhKbhuTbwmJKn3bozoM4/zVNX07U/IimTJn
+ C5WlRcNvDyPtY3dxlxx/Y3+xyMM+s0WU2udWjGZ6oh7VEe9AyYPPe1eKIfqS4Jl54tAFDf6gMFjZY
+ 086r+QQTkSXmQdR+1lyvTD+VlUfrhnHlUIq/ohAMCiHZCJSp8khdJNF8/NoCRsGpgwi2FoKg0WzL9
+ EVULgE8RseLAxfHTzpWofbMsD7785SFFY2yEqcS89yUkqiQ0NrLrwnp5Z3bra8aC+cLh8PPo+JIc6
+ j3adoCRA==;
 Received: from sslproxy07.your-server.de ([78.47.199.104])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1w5L0A-0009n9-0P; Wed, 25 Mar 2026 10:58:14 +0100
+ id 1w5L07-0009lo-0Z; Wed, 25 Mar 2026 10:58:11 +0100
 Received: from localhost ([127.0.0.1])
  by sslproxy07.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1w5L09-000HPv-36; Wed, 25 Mar 2026 10:58:13 +0100
+ id 1w5L06-000HPv-37; Wed, 25 Mar 2026 10:58:10 +0100
 From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
  u-boot@ew.tq-group.com
@@ -52,12 +52,10 @@ Cc: Alexander Feilke <alexander.feilke@ew.tq-group.com>,
  Fabio Estevam <festevam@gmail.com>,
  Alexander Feilke <Alexander.Feilke@ew.tq-group.com>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
-Subject: [PATCH v2 7/8] configs: tqma7: add defconfigs
-Date: Wed, 25 Mar 2026 10:58:00 +0100
-Message-Id: <20260325095801.47706-8-Alexander.Feilke@ew.tq-group.com>
+Subject: [PATCH v2 0/8] Add support for TQMa7x
+Date: Wed, 25 Mar 2026 10:57:53 +0100
+Message-Id: <20260325095801.47706-1-Alexander.Feilke@ew.tq-group.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260325095801.47706-1-Alexander.Feilke@ew.tq-group.com>
-References: <20260325095801.47706-1-Alexander.Feilke@ew.tq-group.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -78,19 +76,86 @@ X-Virus-Status: Clean
 
 From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 
-Add general shared configurations for different
-boot media and variants for every RAM configuration.
+This series adds support for TQMa7x and is based on the preparations for
+additional TQ boards series [1] and [2]. It has 512M, 1G and 2G RAM variants
+which are detected by the SPL by initializing them in descending order.
+It can boot from SD, MMC, SPI and USB (SDP). SPI however requires an additional
+prepended NXP header image which is currently unsupported in u-boot.
 
-Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
----
- configs/tqma7_common.config       | 119 ++++++++++++++++++++++++++++++
- configs/tqma7_mba7_mmc_defconfig  |   2 +
- configs/tqma7_mba7_qspi_defconfig |   2 +
- configs/tqma7_mba7_uuu_defconfig  |   2 +
- configs/tqma7_mmc.config          |   4 +
- configs/tqma7_qspi.config         |   7 ++
- configs/tqma7_uuu.config          |  22 ++++++
- 7 files changed, 158 insertions(+)
+The i.MX7S variant boots but is not being actively supported.
+
+Best regards,
+Alexander
+
+[1] "TQMa6 with preparations for integrating additional TQ boards" (V2)
+https://patchwork.ozlabs.org/project/uboot/list/?series=497120
+[2] "TQ-Systems MAINTAINERS files"
+https://patchwork.ozlabs.org/project/uboot/list/?series=497398
+
+Changes in v2:
+- Update MAINTAINERS to fix CI issue
+- Improved commit messages
+- Fix a checkpatch warning in board/tq/common/tq_som.c
+
+Alexander Feilke (7):
+  Kconfig: update build-target for MX7 with SPL
+  board/tq: Add common SoM API
+  arch: arm: dts: tqma7x: add u-boot device tree fragments
+  arch: arm: dts: tqma7x: add boot phase properties
+  board: tqma7: add code for u-boot with spl
+  configs: tqma7: add defconfigs
+  doc: tqma7: add documentation
+
+Nora Schiffer (1):
+  env: add env_set_runtime() helper
+
+ Kconfig                              |   2 +-
+ arch/arm/dts/imx7d-mba7-u-boot.dtsi  |  10 ++
+ arch/arm/dts/imx7s-mba7-u-boot.dtsi  |  48 +++++++
+ arch/arm/dts/imx7s-tqma7-u-boot.dtsi |  22 ++++
+ arch/arm/mach-imx/mx7/Kconfig        |  16 +++
+ board/tq/MAINTAINERS                 |   9 ++
+ board/tq/common/Kconfig              |   3 +
+ board/tq/common/Makefile             |   1 +
+ board/tq/common/tq_som.c             |  32 +++++
+ board/tq/common/tq_som.h             |  34 +++++
+ board/tq/tqma7/Kconfig               | 103 +++++++++++++++
+ board/tq/tqma7/Makefile              |  14 +++
+ board/tq/tqma7/spl.c                 | 123 ++++++++++++++++++
+ board/tq/tqma7/spl_mba7.c            | 182 +++++++++++++++++++++++++++
+ board/tq/tqma7/spl_tqma7_ram.c       | 171 +++++++++++++++++++++++++
+ board/tq/tqma7/tqma7.c               |  96 ++++++++++++++
+ board/tq/tqma7/tqma7.cfg             |  26 ++++
+ board/tq/tqma7/tqma7.env             |  36 ++++++
+ board/tq/tqma7/tqma7_mba7.c          | 148 ++++++++++++++++++++++
+ configs/tqma7_common.config          | 119 ++++++++++++++++++
+ configs/tqma7_mba7_mmc_defconfig     |   2 +
+ configs/tqma7_mba7_qspi_defconfig    |   2 +
+ configs/tqma7_mba7_uuu_defconfig     |   2 +
+ configs/tqma7_mmc.config             |   4 +
+ configs/tqma7_qspi.config            |   7 ++
+ configs/tqma7_uuu.config             |  22 ++++
+ doc/board/tq/index.rst               |  12 ++
+ doc/board/tq/tqma7.rst               |  77 ++++++++++++
+ include/configs/tqma7.h              |  71 +++++++++++
+ include/configs/tqma7_mba7.h         |  16 +++
+ include/env.h                        |  19 +++
+ include/env/tq/spi.env               |   4 +
+ 32 files changed, 1432 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/imx7d-mba7-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx7s-mba7-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx7s-tqma7-u-boot.dtsi
+ create mode 100644 board/tq/common/tq_som.c
+ create mode 100644 board/tq/common/tq_som.h
+ create mode 100644 board/tq/tqma7/Kconfig
+ create mode 100644 board/tq/tqma7/Makefile
+ create mode 100644 board/tq/tqma7/spl.c
+ create mode 100644 board/tq/tqma7/spl_mba7.c
+ create mode 100644 board/tq/tqma7/spl_tqma7_ram.c
+ create mode 100644 board/tq/tqma7/tqma7.c
+ create mode 100644 board/tq/tqma7/tqma7.cfg
+ create mode 100644 board/tq/tqma7/tqma7.env
+ create mode 100644 board/tq/tqma7/tqma7_mba7.c
  create mode 100644 configs/tqma7_common.config
  create mode 100644 configs/tqma7_mba7_mmc_defconfig
  create mode 100644 configs/tqma7_mba7_qspi_defconfig
@@ -98,207 +163,11 @@ Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
  create mode 100644 configs/tqma7_mmc.config
  create mode 100644 configs/tqma7_qspi.config
  create mode 100644 configs/tqma7_uuu.config
+ create mode 100644 doc/board/tq/index.rst
+ create mode 100644 doc/board/tq/tqma7.rst
+ create mode 100644 include/configs/tqma7.h
+ create mode 100644 include/configs/tqma7_mba7.h
 
-diff --git a/configs/tqma7_common.config b/configs/tqma7_common.config
-new file mode 100644
-index 00000000000..7e5e31a14ab
---- /dev/null
-+++ b/configs/tqma7_common.config
-@@ -0,0 +1,119 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_MX7=y
-+CONFIG_SPL_GPIO=y
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_SF_DEFAULT_SPEED=40000000
-+CONFIG_ENV_SIZE=0x10000
-+CONFIG_DEFAULT_DEVICE_TREE="nxp/imx/imx7d-mba7"
-+CONFIG_TARGET_TQMA7=y
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_MAX_SIZE=0x100000
-+CONFIG_SF_DEFAULT_BUS=4
-+CONFIG_SPL=y
-+CONFIG_ARMV7_BOOT_SEC_DEFAULT=y
-+CONFIG_IMX_RDC=y
-+CONFIG_SYS_MEMTEST_START=0x80000000
-+CONFIG_SYS_MEMTEST_END=0x98000000
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+# CONFIG_EFI_LOADER is not set
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_OF_BOARD_SETUP=y
-+CONFIG_FDT_FIXUP_PARTITIONS=y
-+CONFIG_SYS_CONSOLE_IS_IN_ENV=y
-+# CONFIG_BOARD_EARLY_INIT_F is not set
-+CONFIG_SPL_MAX_SIZE=0xf000
-+CONFIG_SPL_SYS_MALLOC=y
-+CONFIG_SPL_FIT_IMAGE_TINY=y
-+CONFIG_SPL_NOR_SUPPORT=y
-+CONFIG_SPL_WATCHDOG=y
-+CONFIG_CMD_LICENSE=y
-+CONFIG_CRC32_VERIFY=y
-+CONFIG_CMD_EEPROM=y
-+CONFIG_CMD_MD5SUM=y
-+CONFIG_MD5SUM_VERIFY=y
-+CONFIG_CMD_MEMINFO=y
-+CONFIG_CMD_MEMTEST=y
-+CONFIG_SYS_ALT_MEMTEST=y
-+# CONFIG_SYS_ALT_MEMTEST_BITFLIP is not set
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_MMC_SPEED_MODE_SET=y
-+CONFIG_CMD_MTD=y
-+CONFIG_CMD_SPI=y
-+CONFIG_CMD_TEMPERATURE=y
-+CONFIG_CMD_WDT=y
-+CONFIG_CMD_NFS=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_TIMER=y
-+CONFIG_CMD_PMIC=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_MTDIDS_DEFAULT="nor0=30bb0000.qspi"
-+CONFIG_MTDPARTS_DEFAULT="mtdparts=30bb0000.qspi:4m@0k(bootstream),64k@4096k(env0),64k@4160k(env1),-@6m(ubi)"
-+CONFIG_CMD_UBI=y
-+CONFIG_OF_CONTROL=y
-+CONFIG_OF_UPSTREAM=y
-+CONFIG_OF_LIST="nxp/imx/imx7d-mba7 nxp/imx/imx7s-mba7"
-+CONFIG_MULTI_DTB_FIT=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_USE_ROOTPATH=y
-+CONFIG_ROOTPATH="/srv/nfs"
-+CONFIG_BUTTON=y
-+CONFIG_BUTTON_GPIO=y
-+CONFIG_GPIO_HOG=y
-+CONFIG_DM_PCA953X=y
-+CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
-+CONFIG_I2C_DEFAULT_BUS_NUMBER=0x3
-+CONFIG_SYS_I2C_MXC=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_FSL_USDHC=y
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_BOOTDEV_SPI_FLASH=y
-+CONFIG_SPI_FLASH_GIGADEVICE=y
-+CONFIG_SPI_FLASH_ISSI=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_SPI_FLASH_WINBOND=y
-+# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
-+CONFIG_SPI_FLASH_MTD=y
-+CONFIG_DM_MDIO=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_PHY_GIGE=y
-+CONFIG_FEC_MXC=y
-+CONFIG_RGMII=y
-+CONFIG_MII=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCTRL_IMX7=y
-+CONFIG_DM_PMIC=y
-+CONFIG_DM_PMIC_PFUZE100=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_PFUZE100=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_RTC=y
-+CONFIG_RTC_DS1307=y
-+CONFIG_CONS_INDEX=5
-+CONFIG_SPI=y
-+CONFIG_FSL_QSPI=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_WATCHDOG=y
-+CONFIG_IMX_THERMAL=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_MXC_USB_OTG_HACTIVE=y
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_IMX_WATCHDOG=y
-+CONFIG_CC_OPTIMIZE_LIBS_FOR_SPEED=y
-diff --git a/configs/tqma7_mba7_mmc_defconfig b/configs/tqma7_mba7_mmc_defconfig
-new file mode 100644
-index 00000000000..9d4a37c5b81
---- /dev/null
-+++ b/configs/tqma7_mba7_mmc_defconfig
-@@ -0,0 +1,2 @@
-+#include <configs/tqma7_common.config>
-+#include <configs/tqma7_mmc.config>
-diff --git a/configs/tqma7_mba7_qspi_defconfig b/configs/tqma7_mba7_qspi_defconfig
-new file mode 100644
-index 00000000000..041339597b4
---- /dev/null
-+++ b/configs/tqma7_mba7_qspi_defconfig
-@@ -0,0 +1,2 @@
-+#include <configs/tqma7_common.config>
-+#include <configs/tqma7_qspi.config>
-diff --git a/configs/tqma7_mba7_uuu_defconfig b/configs/tqma7_mba7_uuu_defconfig
-new file mode 100644
-index 00000000000..18404b02ed8
---- /dev/null
-+++ b/configs/tqma7_mba7_uuu_defconfig
-@@ -0,0 +1,2 @@
-+#include <configs/tqma7_common.config>
-+#include <configs/tqma7_uuu.config>
-diff --git a/configs/tqma7_mmc.config b/configs/tqma7_mmc.config
-new file mode 100644
-index 00000000000..8c081314002
---- /dev/null
-+++ b/configs/tqma7_mmc.config
-@@ -0,0 +1,4 @@
-+CONFIG_SYS_MALLOC_LEN=0x2000000
-+CONFIG_ENV_OFFSET=0x100000
-+CONFIG_BOOTCOMMAND="run mmcboot; run nfsboot; run panicboot"
-+CONFIG_ENV_MMC_USE_DT=y
-diff --git a/configs/tqma7_qspi.config b/configs/tqma7_qspi.config
-new file mode 100644
-index 00000000000..652abb8d14b
---- /dev/null
-+++ b/configs/tqma7_qspi.config
-@@ -0,0 +1,7 @@
-+CONFIG_SYS_MALLOC_LEN=0x2000000
-+CONFIG_ENV_OFFSET=0x100000
-+CONFIG_ENV_SECT_SIZE=0x10000
-+CONFIG_QSPI_BOOT=y
-+CONFIG_BOOTCOMMAND="run ubiboot; run nfsboot; run panicboot"
-+# CONFIG_ENV_IS_IN_MMC is not set
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
-diff --git a/configs/tqma7_uuu.config b/configs/tqma7_uuu.config
-new file mode 100644
-index 00000000000..6131aa5b4b4
---- /dev/null
-+++ b/configs/tqma7_uuu.config
-@@ -0,0 +1,22 @@
-+CONFIG_SYS_MALLOC_LEN=0x2000000
-+# CONFIG_ANDROID_BOOT_IMAGE is not set
-+CONFIG_BOOTDELAY=1
-+CONFIG_BOOTCOMMAND="run fastbootcmd"
-+# CONFIG_ENV_IS_IN_MMC is not set
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_FASTBOOT_BUF_ADDR=0x84000000
-+CONFIG_FASTBOOT_BUF_SIZE=0x8000000
-+CONFIG_FASTBOOT_FLASH=y
-+CONFIG_FASTBOOT_UUU_SUPPORT=y
-+CONFIG_FASTBOOT_FLASH_MMC_DEV=0
-+CONFIG_SPL_USB_HOST=y
-+CONFIG_USB_MAX_CONTROLLER_COUNT=2
-+CONFIG_USB_GADGET=y
-+CONFIG_SPL_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="FSL"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0525
-+CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
-+CONFIG_CI_UDC=y
-+CONFIG_SDP_LOADADDR=0x80800000
-+CONFIG_SPL_USB_SDP_SUPPORT=y
 -- 
 2.34.1
 
