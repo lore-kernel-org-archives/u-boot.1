@@ -4,72 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F010F54AD9
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 05:15:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43FF5FEA80E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 07:00:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2091283AAB;
-	Wed, 25 Mar 2026 06:15:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 4126F8352B;
+	Wed, 25 Mar 2026 08:00:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="Y+7uP5Qp";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KoD5YS/z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DA7383CE3; Wed, 25 Mar 2026 06:15:52 +0100 (CET)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 101B4838BB; Wed, 25 Mar 2026 08:00:30 +0100 (CET)
+Received: from mail-yx1-xb12f.google.com (mail-yx1-xb12f.google.com
+ [IPv6:2607:f8b0:4864:20::b12f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7DB78352B
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 06:15:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 72AB81122C9; Wed, 25 Mar 2026 06:15:40 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1774415749;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=MOn1jMj8un72XbO7XQ4ykPHaiQh9RJHTF3LV7AhpioE=;
- b=Y+7uP5QpRmypY3Hazmgz5r2r0F/Hm4/StUULEpN7kA3qvnX0qCpM+8ffj//+vpDttFDEki
- fMvlXeVEKsy0cEeZF7Y48gtavFX8h/drIko5o9yOnSKxewboD6/9UWITsc8V+e7CtwLDLc
- 1zQN77tWGtdgtn90KeCAx1Zff8NE8DwZVDpr9ysXRSnHpr69/z2cCRi6ijKujDB6I4aCtr
- 17ajaLEIKOCOgG6KPX6JgJrRdeVJlUM2SUQJpNVw7xSRSFTsFiDjf1X8EihWjB5c0XOdjR
- 1uU9EqDJQ5WuWQ+L5BHGElgB/0gbKAvJFeoqRemOV02CDe1rGBwYSJ9PXwmhcQ==
-Message-ID: <9b848de9-33c4-5eb1-38dc-22bf3e57847b@nabladev.com>
-Date: Wed, 25 Mar 2026 06:15:35 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 04BD581E18
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 08:00:26 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12f.google.com with SMTP id
+ 956f58d0204a3-64ca6595c8aso3953484d50.0
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 00:00:26 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774422026; cv=none;
+ d=google.com; s=arc-20240605;
+ b=eINzy9Z6CwKqHziJDI0puhTxS+ClFdfs+9YYp9Dw4xNrAzQjL5Wj9ThaXzZgS1cU2+
+ nEBU3VbufaL4phtmDVq+RfCKGa5R2SGFbNL29YHdjyFDGM6V9RJRRopAxQcaPayCiD4i
+ 0cBnxCPNXc6zQjI1vtAgHDqvb7T2AjRRjrY+blOLg62jPWphntHdZaIPf8jQuPVFVQcl
+ g4o2CvyRwZnn+eHhG98c87heagic2MN7dFXNovkmMRfL313etEvu3jdrOd/mvlUIUgr8
+ 9fyr81sWE+zjhsiq1hZowrqd4pcIxoge/eMXCH8kLEEECYYiygaUFTrGkt9a+xZlbwD0
+ EaKQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=ZSmPq3xm5T06Ep2sLwb7OcygoBrfMNyGqlf+PQyU4ug=;
+ fh=RmTn4s4sqLcX8iJ4MxtUSIkPs4H9uRcitXg8KKSp8LE=;
+ b=lBtT3M6lLQ/f5F7msByBNV7cmVOrp6kNIyMvgLzARr1L2Gon2Rd0fv2vu/EfTs3qw1
+ bJ5rn8788X8NhwvwyZO/bSd+dldKagIlDz4hjtnkNz8rHIt8dJKpyoSZpq+bfT7cQWBx
+ 8bT1oWxi3BJuRRyRtBWf7ETUG5GdyE/ol+AxNqD1sTjLdpnBuAD7z4uI/L0+jrvvDCuV
+ Fov6JFh3zV/C4eeN9EBO080EVutO7oNypxGWbz2sBgHB8KjFLYgfb17gCTYErXxE3Fky
+ BUsqGAAGeSx+3lGHqIrhY737om3uifllrA4cmppJZpyv+LH0jFEUBZJ3oSdWicGBeccQ
+ +YvQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1774422026; x=1775026826; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZSmPq3xm5T06Ep2sLwb7OcygoBrfMNyGqlf+PQyU4ug=;
+ b=KoD5YS/z4cxCzMLKowoM0jlsy3c67/klwfQDLaIXhrQ7cdo7uhRv8wj4EKQSh/+gxk
+ +ME0/9yQZLxqKcEPZB02DkwikhEY7/G35K0rmegzMn649Zkf+P4RBOZu/yQkcPaP8Cot
+ mxQ9HSuF6SwCF+hBgfNiJIT+x4RnVdO9uQZ9d5kI5JAJ2xpXONPzb3MA0OvUNkMUlwC6
+ r3zWGLrE7IfURFnHm5GIixLadZ1k0tPD1+5Xu3ieKEKRA6h8k6KxSMp4YFKNTP+thOjY
+ +JPycCj8pCUuQMjmSmJiww8g+Jj+4HysIl7Mvf826Wi9hix153NT/67w8MRehvk13Eac
+ jXiQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774422026; x=1775026826;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZSmPq3xm5T06Ep2sLwb7OcygoBrfMNyGqlf+PQyU4ug=;
+ b=GBtwn4C4av4B85c08pVyw7tw8p2HzA5Xn758jycqFHnG65Z6XffTFveEuOK4W1RkdB
+ tN6HAwzhMmKBOQXXLEDjcVh9PoQDf8q7UmjxLsM34OnjvrVLkSqVlNeFhJJY8mxKF4yw
+ CuLQGZBwRaopKbNLC6T4SoHgNMXhTW0OlPToRr58MzBYxQtONqdCZIyFvIpuY/uCuwcW
+ vEWRRtbFblIMA3YyQmqsLnVQwUfbZ0vJliEyvLs0rFZh0uUDtLI1IkmkCMxU/iuhfmyW
+ hnLyUnGk42XjuhrDm9Jikk4vSmEBTDOHA4FziJNeAuEmto6/6cfACkz4KPBuCHZSDJur
+ fdcg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXFPb8u/Fw4D+84Z8rC7iFVb7J8cYO0D8ZiQ2UDu5g7Tm8kOs2FwjD8APZfZp/gsvPAM4SDtyk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxhRAVglNnCK1s7vTMv3FsKyKndH1I8rWz/AwvgkTHFhhUtDAlV
+ eRG2OPZW9694wkTZGELyf4EjsW09T36gWdTXt5xLD00UTBYFf8MKMNgFBkFzv7uWLeM1toProiO
+ eVS1Wbq797lwUxWgQLefEXyQUGnqH+w5z3nleSj5akg==
+X-Gm-Gg: ATEYQzwFELJAl4TE8VEIJrTAXBnEtx8SV9+HIcfk5nCJrWz5YrIMkFxCSSwgomkjQME
+ 2i7tC/6Rw8hOGngA2HvGWc0xkMiOclJoQVupfDqfUtxovqfIqTE8lw9chHkKqlkvNQPiJo7Hyqj
+ eAbpIJtYkmfeOdiSrnTbzOVkE8G5wvtZrf4nypS05sLGMA99c28Pi+STl4uyL3HDvSFGx+xqdHt
+ ggsaTUkC13Yp7mi+RESlKw7CmYUfdFCwkWZXgBDkGw0ggLBhFpvjfzE7d16Q7NAIhNwGJhoxJQf
+ DZz0hqV4rCOaRthAQwSQ25FiLY5QgNIBpHhoGtUmnnyCn2uahi4jGbRK/qkLqV0lVF9j+HZHUjm
+ UFVW+X1sduILNtJWSDkWfODjDgd3+WMNIYBBgNRLlcP36IpZeagld93EKeTyxz0bYMimo8zfEiv
+ CYRDmAhFn3ZyAvlO4Yf8yQxlkhLJ6MI3IdujbRgu2aJ/nA1ddeW6mgAvvBmEGndfzm5qXR7W5Io
+ 2wP669SI9Xa7Yg4rOW6yQeAUVMs3urEEXc6zSJ8rC/oaa3W1wZziz3+wh5NVsveMDfhodK4uWIY
+ LQkwSFApj2L3G4x/Fvhn7pQs8yckjB3cQp2Yx47iZJ9T
+X-Received: by 2002:a53:8241:0:b0:64c:aace:60c2 with SMTP id
+ 956f58d0204a3-64ee612f9dfmr1725991d50.38.1774422025287; Wed, 25 Mar 2026
+ 00:00:25 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH] global: Correct duplicate U_BOOT_DRIVER entry names
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>, Bin Meng
- <bmeng.cn@gmail.com>, Casey Connolly <casey.connolly@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Kever Yang <kever.yang@rock-chips.com>, =?UTF-8?Q?=c5=81ukasz_Majewski?=
- <lukma@nabladev.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Matthias Brugger <mbrugger@suse.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan
- <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, u-boot-amlogic@groups.io,
- uboot-stm32@st-md-mailman.stormreply.com, u-boot-qcom@groups.io,
- linux@analog.com
-References: <20260323225537.896180-1-trini@konsulko.com>
-From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <20260323225537.896180-1-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20260324175913.92858-1-aswinm@qti.qualcomm.com>
+ <20260324175913.92858-3-aswinm@qti.qualcomm.com>
+In-Reply-To: <20260324175913.92858-3-aswinm@qti.qualcomm.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 25 Mar 2026 08:59:49 +0200
+X-Gm-Features: AaiRm53WAs6_kkFuqJyX7Cdx29IBI9Xp4S-vYQPEau-xsqygB1kfdiLaXRS-5hQ
+Message-ID: <CAC_iWj+XvV+LE43CbvvjwgF3iyGAVgfW6dm_FRC2Ombs80g-4A@mail.gmail.com>
+Subject: Re: [PATCH v4 2/2] qcom_defconfig: Disable EFI_HAVE_RUNTIME_RESET in
+ qcom_defconfig
+To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, trini@konsulko.com, xypron.glpk@gmx.de, 
+ marek.vasut+renesas@mailbox.org, michal.simek@amd.com, sjg@chromium.org, 
+ mkorpershoek@kernel.org, jan.kiszka@siemens.com, paul.liu@linaro.org, 
+ j-humphreys@ti.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,97 +123,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
+On Tue, 24 Mar 2026 at 19:59, Aswin Murugan
+<aswin.murugan@oss.qualcomm.com> wrote:
+>
+> From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+>
+> Qualcomm platforms rely on the kernel to manage specialized reboot modes
+> such as EDL, bootloader entry, and other vendor-specific reset flows.
+> Allowing U-Boot to override these via EFI runtime reset services leads to
+> incorrect behavior when the kernel issues advanced reboot requests.
+>
+> Now that EFI_HAVE_RUNTIME_RESET is exposed as a user-configurable Kconfig
+> option, disable it for qcom_defconfig so that the kernel retains full
+> control over reboot handling on Qualcomm SoCs.
+>
+> This ensures that EFI runtime reboot callbacks are not registered on
+> these platforms, preventing conflicts with kernel-managed PSCI reset
+> paths.
+>
+> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 
-On 23.03.26 23:55, Tom Rini wrote:
-> The U_BOOT_DRIVER macro creates a list of drivers used at link time, and
-> all entries here must be unique. This in turn means that all entries in
-> the code should also be unique in order to not lead to build failures
-> later with unexpected build combinations. Typically, the problem we have
-> here is when a driver is obviously based on another driver and didn't
-> update this particular field and so while the name field reflects
-> something unique the linker entry itself is not. In a few places this
-> provides a more suitable string name as well, however.
-> 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+
 > ---
-> Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>
-> Cc: Bin Meng <bmeng.cn@gmail.com>
-> Cc: Casey Connolly <casey.connolly@linaro.org>
-> Cc: Heiko Schocher <hs@nabladev.com>
-> Cc: Jaehoon Chung <jh80.chung@samsung.com>
-> Cc: Jerome Forissier <jerome.forissier@arm.com>
-> Cc: Kever Yang <kever.yang@rock-chips.com>
-> Cc: Łukasz Majewski <lukma@nabladev.com>
-> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Cc: Masahisa Kojima <kojima.masahisa@socionext.com>
-> Cc: Matthias Brugger <mbrugger@suse.com>
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Peter Robinson <pbrobinson@gmail.com>
-> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-> Cc: Stefan Roese <stefan.roese@mailbox.org>
-> Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-> Cc: Thierry Reding <treding@nvidia.com>
-> Cc: Tien Fong Chee <tien.fong.chee@altera.com>
-> Cc: u-boot-amlogic@groups.io
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> Cc: u-boot-qcom@groups.io
-> Cc: linux@analog.com
-> ---
->   arch/x86/cpu/broadwell/sdram.c             | 2 +-
->   arch/x86/cpu/ivybridge/early_me.c          | 2 +-
->   board/liebherr/btt/btt.c                   | 2 +-
->   board/liebherr/xea/xea.c                   | 2 +-
->   drivers/block/efi_blk.c                    | 2 +-
->   drivers/clk/at91/compat.c                  | 4 ++--
->   drivers/clk/at91/sckc.c                    | 2 +-
->   drivers/clk/meson/a1.c                     | 2 +-
->   drivers/clk/meson/gxbb.c                   | 2 +-
->   drivers/clk/nuvoton/clk_npcm7xx.c          | 2 +-
->   drivers/clk/nuvoton/clk_npcm8xx.c          | 2 +-
->   drivers/clk/stm32/clk-stm32mp13.c          | 2 +-
->   drivers/dma/ti/k3-udma.c                   | 2 +-
->   drivers/i2c/tegra186_bpmp_i2c.c            | 2 +-
->   drivers/mmc/bcm2835_sdhci.c                | 2 +-
->   drivers/mmc/fsl_esdhc_imx.c                | 2 +-
->   drivers/mmc/rockchip_sdhci.c               | 2 +-
->   drivers/net/calxedaxgmac.c                 | 2 +-
->   drivers/net/dwc_eth_xgmac.c                | 2 +-
->   drivers/net/qe/dm_qe_uec_phy.c             | 2 +-
->   drivers/net/sni_netsec.c                   | 2 +-
->   drivers/pinctrl/meson/pinctrl-meson-g12a.c | 2 +-
->   drivers/pinctrl/tegra/pinctrl-tegra20.c    | 4 ++--
->   drivers/reset/stm32/stm32-reset-mp1.c      | 2 +-
->   drivers/spi/kirkwood_spi.c                 | 4 ++--
->   drivers/spi/mvebu_a3700_spi.c              | 4 ++--
->   drivers/sysreset/sysreset_socfpga_soc64.c  | 2 +-
->   drivers/usb/dwc3/dwc3-meson-g12a.c         | 2 +-
->   drivers/usb/dwc3/dwc3-meson-gxl.c          | 2 +-
->   drivers/usb/host/ehci-exynos.c             | 2 +-
->   drivers/usb/host/ehci-msm.c                | 2 +-
->   drivers/usb/host/ehci-tegra.c              | 2 +-
->   drivers/usb/host/ehci-vf.c                 | 2 +-
->   drivers/usb/host/ohci-da8xx.c              | 2 +-
->   drivers/usb/musb-new/pic32.c               | 2 +-
->   drivers/usb/musb-new/sc5xx.c               | 2 +-
->   drivers/usb/musb-new/sunxi.c               | 2 +-
->   drivers/video/rockchip/rk3288_mipi.c       | 4 ++--
->   drivers/video/rockchip/rk3399_mipi.c       | 4 ++--
->   drivers/watchdog/arm_smc_wdt.c             | 2 +-
->   40 files changed, 46 insertions(+), 46 deletions(-)
-
-Reviewed-by: Heiko Schocher <hs@nabladev.com>
-
-bye,
-Heiko
--- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
+>  configs/qcom_defconfig | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+> index 314fc0c4903..8042855bae1 100644
+> --- a/configs/qcom_defconfig
+> +++ b/configs/qcom_defconfig
+> @@ -6,6 +6,7 @@ CONFIG_ARCH_SNAPDRAGON=y
+>  CONFIG_NR_DRAM_BANKS=24
+>  CONFIG_DEFAULT_DEVICE_TREE="qcom/sdm845-db845c"
+>  CONFIG_SYS_LOAD_ADDR=0xA0000000
+> +# CONFIG_EFI_HAVE_RUNTIME_RESET is not set
+>  CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+>  CONFIG_EFI_CAPSULE_ON_DISK=y
+>  CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+> --
+> 2.34.1
+>
