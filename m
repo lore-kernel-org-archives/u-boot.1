@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 254BD109E522
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 23:06:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BE78109E528
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 23:06:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 215DB8410D;
-	Thu, 26 Mar 2026 00:06:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9034B83E7A;
+	Thu, 26 Mar 2026 00:06:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RiM2/tfL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jV0izTtc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3ACC83FB6; Thu, 26 Mar 2026 00:06:01 +0100 (CET)
+ id BC286840D8; Thu, 26 Mar 2026 00:06:04 +0100 (CET)
 Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
  [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7654083FC6
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 00:05:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 423B884027
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 00:06:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-4648447e29bso142150b6e.0
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 16:05:58 -0700 (PDT)
+ 5614622812f47-46808125c65so127356b6e.2
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 16:06:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774479957; x=1775084757; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1774479960; x=1775084760; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3yVVKCMChe+sZbjGpFnI3BOPM2C/mk8wep/BZ2MqAEU=;
- b=RiM2/tfLfcjfrtZTczgs2qlnYddba/TTUeVBm40uPqUlHvs3lE2OTZQajcLV92Lgo2
- qG5B9K8dngYoHET7Q+bXzcPjw5O8MB5TCAJbCRNJPWzt22zoh4sylfYm4PKVfUj9CRXO
- CWm/X53XR0KRflcqqSMtOGRf+1+Cwz/DvfK2A=
+ bh=wsdaEZ3yY6+BFS/Jk0G9GW4m3KGJpdtliKo6+3VDSm4=;
+ b=jV0izTtcQSMPm+iQF+tQebBbVE1KjZ/pru3doUObkFEbVHKpQAQIP/YQs9Bwu2sCxx
+ cAJfjt2nNBKuDL7lcDOmba+E7uKIRU/tIsQ2FkFlGJFVGnnXbXpa76HFJJmNnjkoySd5
+ xR2/v7XwNPfk88UKeLTz6aqf5AcmYh1+igQmA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774479957; x=1775084757;
+ d=1e100.net; s=20251104; t=1774479960; x=1775084760;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=3yVVKCMChe+sZbjGpFnI3BOPM2C/mk8wep/BZ2MqAEU=;
- b=c9sOf9Nytuds/mNnVUZeLgi+GfX+eKAKLZ8w7zv0djfaf+T+QcXtXCRQsO7N7mBomT
- yHZS88OAAuVHe0fZqSZEl6rSQmWRffdT+SksPd9aBk19QmtlnleBFKtyj+PBZNjdR4Y0
- NjUjjBAhhbOQXt/0AYjpi7Y9VLzPBDI2CpHeRKbUpLVWnm1P824Yy6FlBILSyKug0Vzv
- 0jXdh2ZpTrRkGwgwRiY8Qyrwnoj813o+xD4+ErUf1ieyrWp4/4vEIIEjbTe4lym0kJ8Q
- ugkK7Bk3YdeBJXZWAcGJwP1o36+kZue7s6JO+R9yrKcSqSI5cTx7p0y50q5X7mJMc0hM
- NesQ==
-X-Gm-Message-State: AOJu0Yyp3jLm9sPIfN8HeGjOCj7clg18XRtNKBMoTqXS5+ZHsfNur0lt
- /d6a/t/36m+G0hGzbPJGj08Pix33Od9u8hofxGdKHybhpxun1g5itd+MzsCaVtyJYKE=
-X-Gm-Gg: ATEYQzzBfHqc138Q0osg35I0z2/XvH8JGDs5wBpOu8dxKC8o+IonzetX9K+8kPfKE9o
- 0DTt/WLcXoQGJMK5pHuw9elhrtN0NaCAgBfss6W8AHEmtcCv1wwXFUQb9Pa48S2R0NXn2npfYu8
- jHCHJBCRoloFLpdJCHH01vnatIONVIDIADHLeQIFq4MhjsFS1i41t4q2TKzjJie4CLoeb9Kv1gL
- Sv4T4dsD/tZVnaZl33npVH8jJrYSBDdEk2hjydMOTl9Y98F7F40DF+ZDrpCasu/Tm96acMCVcdb
- nlrojQXd4/k6xoKbKDa74uF+7wprIGwhtWnIFLSySGtosiJvZ9YmcQN83cBmQDBBCQXzbHBWnLV
- tGqm/5/d8vxpNNmUcBQEUwkJfDoxk0K/WyQLsGalY1/asI55d+qVFTGOawniHIWWzdhSvJVmUvZ
- rKfvzouwNsc5PnRsM5ok2J9LNgxKryIgsVue3hVUaq82msiRqdvIK1GYZ+bOJWWRBNzu7YZKw5b
- HjKWfdE6Fbiqi3XDa7q1SIzIKeRKFd5mrUqAoZWgPgJqEo=
-X-Received: by 2002:a05:6808:229e:b0:468:776:1e9d with SMTP id
- 5614622812f47-46a5c7df054mr2392231b6e.51.1774479957173; 
- Wed, 25 Mar 2026 16:05:57 -0700 (PDT)
+ bh=wsdaEZ3yY6+BFS/Jk0G9GW4m3KGJpdtliKo6+3VDSm4=;
+ b=W8r/4d9JPL5ZIfrQs4QfZSguGbZTcvQWh+c7b+mAlbtjoZ768Kdf5VR/bXuNN9RUFK
+ zViMvogVGEh5MzrU2h12VBv9semHZg7743+wYYNIfYW4SPD5GrINpvYvPBWqXNwM3Nwq
+ YiGSCyQBpwq/OFXvvHrJRiBKNQcXkH6+8HO+FwcfZOMZk3ikqd0tw0/OmAC002Zf144V
+ Zq+TnzmwIYkckjddBooyB1h6j31n7ldfDmk4PB13zdcPcj2x3qB0xUJiDPBJxxbNiMMD
+ 6hruDjRqoIjxV2qCnVh+6mcCOSUkNttU3CK/HgWrVuoiIDVbvYmTEkLTrcEzn3KpRse+
+ ZNiA==
+X-Gm-Message-State: AOJu0YySg8yb5Ab9Qs/0jFKlAW27hG3Nt8g22LVFv3uYf2kg8/JFva3D
+ k3htesSzpBG/ff3V4s52MVvSyvlUO+ZU3GDCt/lqL+9rRuRa+DXKBZ9r/CfdO/nmJd/kAwoO4Pp
+ Nath10Zs=
+X-Gm-Gg: ATEYQzwzc+Qa/DgKHHDG/Pad5je3KsKqeTx57D+TyVyyTHlDwx18aIN4xrzsulBcsCO
+ cj400r78+WVtHtYLFInC0JiwEUFwD9FlY0xVi4MOKfUxx+OSSSj8BW8jjxdjA4mTiik+1aOTTIw
+ 3UDRIQV0bYYsaJqoDsLNkzSqKIh2PKc88Da+mRpCsQ4g2cqtWLXkYrWUI7HqMSjTSgADq/H3aQy
+ kSwGxjd/Ne1TKAibrMF7u98OzzKOFVPEsmlP4foOhqNaqV/gt9o7xZXqXC8V1Kw3IdRHEA/BQVF
+ g3OusGN5mhwzrx9s/K+k1Ris08gfRh8UuvqOIkQrhDRTtZzB3535j/bBWR11wgTSJpa0Xm0rRR+
+ JJQkkieSpc2/6LjAMY5y9raJ6iY9gKHYuFYmAYQgy8LB0fcK+dQ9EN/ighNgyorQaUPgQw0hUnL
+ mt3eCVwoKxaSgHtCAcLQSVinDynFUear9l2X/Q60iRjReeQs/61JL0buXhmUmEzUzxjdxD5OgOy
+ Ga/ySNfpr1VbmArepnt+9+anp8ToBZ36IRLwZs8vG2Q+kg=
+X-Received: by 2002:a05:6808:17aa:b0:466:feb1:5f79 with SMTP id
+ 5614622812f47-46a5c785723mr2481903b6e.50.1774479959929; 
+ Wed, 25 Mar 2026 16:05:59 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-46a7099df08sm581446b6e.15.2026.03.25.16.05.56
+ 5614622812f47-46a7099df08sm581446b6e.15.2026.03.25.16.05.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Mar 2026 16:05:56 -0700 (PDT)
+ Wed, 25 Mar 2026 16:05:59 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
-Cc: Suhaas Joshi <s-joshi@ti.com>, Neha Malcom Francis <n-francis@ti.com>, 
- Andrew Davis <afd@ti.com>, Bryan Brattlof <bb@ti.com>, 
- Dhruva Gole <d-gole@ti.com>, Udit Kumar <u-kumar1@ti.com>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, Daniel Schultz <d.schultz@phytec.de>, 
- =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>
-In-Reply-To: <20260312-tfa_tee_addr_kconfig_refactor-v3-1-86c92718e048@ti.com>
-References: <20260312-tfa_tee_addr_kconfig_refactor-v3-1-86c92718e048@ti.com>
-Subject: Re: [PATCH next v3] arm: mach-k3: use Kconfig options for
- ATF/OPTEE size
-Message-Id: <177447995616.3508238.4367565307716242135.b4-ty@konsulko.com>
-Date: Wed, 25 Mar 2026 17:05:56 -0600
+To: u-boot@lists.denx.de, Rasmus Villemoes <ravi@prevas.dk>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260312100106.702368-1-ravi@prevas.dk>
+References: <20260312100106.702368-1-ravi@prevas.dk>
+Subject: Re: [PATCH v2 0/4] add [ as alias for test, fix 0/1 argument handling
+Message-Id: <177447995901.3508238.4236856739882459467.b4-ty@konsulko.com>
+Date: Wed, 25 Mar 2026 17:05:59 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -101,18 +97,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 12 Mar 2026 09:13:24 +0530, Anshul Dalal wrote:
+On Thu, 12 Mar 2026 11:01:02 +0100, Rasmus Villemoes wrote:
 
-> The reserved memory sizes for ATF and OPTEE were hard-coded for K3
-> devices, this patch replaces them with a Kconfig option allowing for
-> easier modifications.
+> Make 'test' behave a little more like its cousins in other shells, by
+> allowing the [ ... ] spelling, and while here, fix up the handling of
+> a single, non-empty argument to comply with POSIX.
 > 
+> v2: update documentation, add a few more test cases.
 > 
+> CI is happy: https://github.com/u-boot/u-boot/pull/905
+> 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] arm: mach-k3: use Kconfig options for ATF/OPTEE size
-      commit: b2c02c04ec7fe070e3cecce665b423376972f07b
+[1/4] cmd: test: allow using [ as alias for test
+      commit: fc8bf9a984c118d551b3f93c66f1ae2733b9b588
+[2/4] doc: test: document [ ] spelling of test
+      commit: d44f61582947564991cce7501f2e5db0b29ebad6
+[3/4] test: add tests for left-bracket alias for 'test' command
+      commit: 6f9cc3310a764aaae4478b5a8a0c0cae3b2be4a1
+[4/4] cmd: test: fix handling of single-argument form of test
+      commit: 8b0619579b2282050e7fb0d92fbc645b79d18bae
 -- 
 Tom
 
