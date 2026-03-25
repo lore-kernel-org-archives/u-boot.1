@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D91C109C02F
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 15:31:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B7C7109C02F
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 15:31:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6ABA8352B;
-	Wed, 25 Mar 2026 16:31:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0A2B183A91;
+	Wed, 25 Mar 2026 16:31:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="Yky1cu1Y";
+	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="M2V9X5at";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1670483A1B; Wed, 25 Mar 2026 16:31:05 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 70CD983AAB; Wed, 25 Mar 2026 16:31:26 +0100 (CET)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3F7881E18
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 16:31:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 82CE081E18
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 16:31:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=suse.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mbrugger@suse.com
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4853e1ce427so56814875e9.3
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 08:31:01 -0700 (PDT)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-43b4d734678so2465017f8f.1
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 08:31:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1774452661; x=1775057461; darn=lists.denx.de;
+ d=suse.com; s=google; t=1774452684; x=1775057484; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:autocrypt:from
  :content-language:references:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=BjRZ2ZFlY0ICzZ7Wxxc7yd1BsoFOcgXxq9JMteuZ/Dc=;
- b=Yky1cu1Y2rUwg/smR1yzqTvxda2RZLVJD1kbE9Z9ZMWQZKBwFIBfjUB4ByGO0sAT8n
- 5svLZOk491mTr0nWAKsabfj7z98RqS5k7wwN/eweuunN+aZRCjFoA+/5bKH6TlLPc2e0
- XWnlqRvOSiKKAsAgzTmN9Zvq9bkVdgMt2xUug4ccA8JlkW/rjZ7THccMTOJAcV9XNdgL
- tpkaAZs0zrRjAcEWW/wrSmJS1TUbQD4/DGHf1Fx+Q4ZqYI3AjkouGqxSLtgRC2zYZQQR
- BPDHLGnLGVOg3jo58IJps8W5pTjXu6F7VXaB5eIShR4siHeYDtUC4SUbXuClR5N1aSjk
- tckg==
+ bh=t1GExhSWuz6W80lZOfKQ4skaQjWfvh/+Yp/jUqj93Bc=;
+ b=M2V9X5atE7jyoNZSQEvg43U5GJdqAlSSEOpcJq/4Nt1GWFXDKTNjYxhmhPcT24xjS7
+ 33mkSfE09g7eaXsI9gw1ZCzNGUE7kLC7miasQzyZ3zDDIqca4PE5f/9eRfcmrVf2r8IC
+ amWFfUOgODkpbuNuoEic6j5X919a7zfF7hLqY6M6xMc9NmzCN6BBtAhXS9O3HDL1BqjM
+ hQiAzAyoZZQOUgEyWFig3E9iY5XzfBeF4RJduLJFVZ8JLP/spgEXidsfoTXOcAySOB9L
+ Y32t4LCHNn5kYZleySV3keRZEvi5oJvIbSZ02iIxz7yeXy6dKjwAsrt7RvMIw81DIVRe
+ pA4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774452661; x=1775057461;
+ d=1e100.net; s=20251104; t=1774452684; x=1775057484;
  h=content-transfer-encoding:in-reply-to:autocrypt:from
  :content-language:references:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BjRZ2ZFlY0ICzZ7Wxxc7yd1BsoFOcgXxq9JMteuZ/Dc=;
- b=pL4o5iLvgeobc8s7MBb3xMdU9ylRBuRDnUbtPelU085IKzyecGD38HlmwQzNeQMpR5
- Ni0t7EMUKyuPY2PLHwroEr0DlYWF57W3pZq7lUCnA45aYN2a/O5E9q8IpBOiKX4+puLt
- CgVDHnWDw+7SDzN1ym+a4JR6LuMTDSLoPltA4Puozq+icbx8y2uZhTT2wB5tcXJHZWND
- m5iUbEg5RAoyILnersZGd7PspoRfEoogFUJrMmuDZJN7RzMzS2AfzAJRcAES3ABa9Nac
- RLm3f6XB3UyMzxlqFwouFXAPw/SJ2FcC105yEdQeLs9LvuzeSk4lBfbuTT63WeG+o+9H
- e6tw==
+ bh=t1GExhSWuz6W80lZOfKQ4skaQjWfvh/+Yp/jUqj93Bc=;
+ b=gimGGQWO80HEW9Ey2IK9QKeOa1xzB+qMfHyZ2la81j5aDCzoezFrm4wzHBOP9IRuSn
+ Ir3fYtaK0dC9TmRfNJi9VZkbS43LXSCIkmJbYaJRcaYtXCghXE9O/XziqV3zxzabqKhv
+ Xj6++0TZCQxhkEt9LJ0NA5hxhtv4VZzWC0gVs8w+DtXNSBnVgkFvyamwjg5znhDxdDc4
+ GHLduBGCXrK531nyKDcF+69JOXOkQUueU/O9gX7FxEnKyBSClv8+HL8Q8Oz3nrNoFfl0
+ fJGlBFkSTV6K4xQ9hpywwjH/1wCU+UhQKvTrPjrU7ZSjt2pBUPkd/v2hI+7g/QkEoMIv
+ 5vpA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX6g2uv/8SM9/Pw9R5+4PbNQFaNj+KPKlPCMHjIHQrA87Qi/cHoDT9BvuV5cueX182UA85Auuc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwoYt5acKfNDRFTiXbTfMJ3BKyuDdATJiF9ZaMl29BcRUW81JJd
- pDwoejt5Eis8B9HHac13+G6ibPcs+nFdLEt5/HERW6gJOhL4axUNDSNxmBZwRfAPhw8=
-X-Gm-Gg: ATEYQzz09zAlCLOkbnGglwR/dOZF1OvlxqT2DH+SmsUobeFnXtVJs5Nq0TPTPu3LzvO
- /LryFvzDgk221gp7B08c8MYBkG7LWbkVjMVxpeo2i2LKZWOy33oLNZJG23/Gn9LwvHN90e9q41r
- +X12c8TULWTQQmWTAWhlJw7MwnOsIOPfJVr0hcI6i6yMZn8g5qSZIMM/xO3K8Mq/5tEWUFXYRxm
- KuXsTyHJV5IRdEofyPPVDYnouuBa+reK9jncTkKr070WdjjOf0KRuMG73pcHrs2TwGESKxidT9K
- hNsFxa++xh1jsD5oDQHbTKM9J78tS/x6TUtYHrbgdYwAAbuOFPN8u+LrTMcS3LRJdEklN4m0Iq8
- Xp7mihZU6X0uFbzolx6+JgqlMg8ohvWsS8KcNlrrvwkEsgqU30Gi1YyF012jXaX4zob8I6PxVfx
- dJwAYpBVwwQztCkmtkgS8FttQFMvB3XGN6B9tywoqEhYyrW6LzrBOpXrAYIf4Ah1fRazAY2wO29
- Q==
-X-Received: by 2002:a05:600c:6089:b0:485:3f72:324d with SMTP id
- 5b1f17b1804b1-48716008471mr57043615e9.14.1774452660913; 
- Wed, 25 Mar 2026 08:31:00 -0700 (PDT)
+ AJvYcCWLuiZrD4CbAsx1vXCjNcCmBl60wNLYoxJbHjqgWcPz6pNOytG6EzWFA1eGETCUCQzqxSgs4BI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzzk0DRibFIPKN5tFwjWy5bD6/Ehj5pq3XTxB1eUozY6rEv7LNy
+ PsAHS2KTteIdm0UXIdB3BVlfy69FEJCaQGRVbOsWS5eHIW48uAetC249vBH9nbKILjM=
+X-Gm-Gg: ATEYQzzdGEfmgoOB8obamshkC2FvFjDqUCVfilfoTfgLLCKukTGqt/0oNBLnfloQw1a
+ o/1eA+k2kF2QGoEhgQelY/cowyg7SJgovuvc7pO+AQBax8xL03dFwKAYSNCmuKW3JQKWy6K67qU
+ mQ7jxb3nkg/71X5XMPM4V6tD1GmNViVt2KD66Orav9NOozayxH4vWTcZdrNfXwwLo+1/O3Izjaa
+ E14t72C5zE0/D2GqFpD/dG1/B4ZJC10wD8bKrMGr7WWl5jgE/PN6Xazfx++bqxaidEu248TNrLK
+ e6eZ3AJeW4xU2GpYJuOKGlo/P5Et2o+KYrccMemWUlFLJOstMYjuEai6CmnF7F/pA315aLAfkBw
+ WP07Gjobbhm9+6K/acaU4C1UWWnU6q7thd/KO4QctTfPpSWTwSDqgxH06N19vfQ0X+DXIgRDaoO
+ qFC6ZdSV6bCv9ZPsKixTaoWS3u4Cm6ZAzTKJ6lt4S1n2KLDoeEfrIsX8bZXQj3bR43NW5qFdwxR
+ g==
+X-Received: by 2002:a05:6000:2912:b0:439:ac98:751f with SMTP id
+ ffacd0b85a97d-43b889bd9b8mr5778342f8f.23.1774452683774; 
+ Wed, 25 Mar 2026 08:31:23 -0700 (PDT)
 Received: from [192.168.2.177] (156.85-85-163.dynamic.clientes.euskaltel.es.
  [85.85.163.156]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-487116f1905sm143051655e9.3.2026.03.25.08.30.58
+ ffacd0b85a97d-43b9192e3f9sm703739f8f.7.2026.03.25.08.31.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 25 Mar 2026 08:30:59 -0700 (PDT)
-Message-ID: <53a81079-6886-4c37-b3e6-6c8c2ca99f79@suse.com>
-Date: Wed, 25 Mar 2026 16:30:57 +0100
+ Wed, 25 Mar 2026 08:31:23 -0700 (PDT)
+Message-ID: <f5fba242-a2ee-450f-a45f-17197c9a850b@suse.com>
+Date: Wed, 25 Mar 2026 16:31:20 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] rpi: Update the naming for bcm2712 SoC RevD naming
-To: =?UTF-8?Q?Filip_Kokosi=C5=84ski?= <filip.kokosinski@gmail.com>,
- Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
+To: Peter Robinson <pbrobinson@gmail.com>,
+ =?UTF-8?Q?Filip_Kokosi=C5=84ski?= <filip.kokosinski@gmail.com>,
+ u-boot@lists.denx.de
 References: <20260313170839.2720191-1-pbrobinson@gmail.com>
- <af790887-96b5-4839-aeb5-6bf6d1d4cf22@gmail.com>
 Content-Language: en-US, ca-ES, es-ES
 From: Matthias Brugger <mbrugger@suse.com>
 Autocrypt: addr=mbrugger@suse.com; keydata=
@@ -128,9 +128,9 @@ Autocrypt: addr=mbrugger@suse.com; keydata=
  LV6nybxdRG/jp8ZQdQQixPA9azZDzuTu+NjKtzIA5qtfZfmm8xC+kAwAMZ/ZnfCsKwN0bbnD
  YfO3B5Q131ASmu0kbwY03Mw4PhxDzZNrt4a89Y95dq5YkMtVH2Me1ZP063cFCCYCkvEAK/C8
  PVrr2NoUqi/bxI8fFQJD1jVj8K0=
-In-Reply-To: <af790887-96b5-4839-aeb5-6bf6d1d4cf22@gmail.com>
+In-Reply-To: <20260313170839.2720191-1-pbrobinson@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,84 +149,32 @@ X-Virus-Status: Clean
 
 
 
-On 18/03/2026 19:46, Filip Kokosiński wrote:
-> Hi Peter!
+On 13/03/2026 18:08, Peter Robinson wrote:
+> The downstream Raspberry Pi uses two namings for the revD
+> SoC device trees, both bcm2712d0-rpi-5-b and bcm2712-d-rpi-5-b
+> but it seems upstream has settled on just the later, so lets
+> use that as it's the name that maps both upstream and downstream.
 > 
-> I've taken a look at this, and unfortunately - with fdtfile set to
-> broadcom/bcm2712-d-rpi-5-b.dtb the kernel panics on pinctrl-related symbols:
-> 
-> [    0.236580] SError Interrupt on CPU2, code 0x00000000be000011 -- SError
-> [    0.236586] CPU: 2 UID: 0 PID: 1 Comm: swapper/0 Tainted: G   M       
->   6.12.47 #1-NixOS
-> [    0.236590] Tainted: [M]=MACHINE_CHECK
-> [    0.236591] Hardware name: Raspberry Pi 5 Model B Rev 1.1 (DT)
-> [    0.236592] pstate: 804000c9 (Nzcv daIF +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
-> [    0.236595] pc : bcm2712_pull_config_set+0x78/0x120
-> [    0.236602] lr : bcm2712_pinconf_set+0x6c/0xe0
-> [    0.236605] sp : ffffc00080033ae0
-> [    0.236606] x29: ffffc00080033ae0 x28: 0000000000000000 x27: 0000000000000000
-> [    0.236609] x26: 0000000000000000 x25: ffffd06fcffb1060 x24: ffff800104c62a98
-> [    0.236611] x23: 0000000000000018 x22: 0000000000000000 x21: 0000000000000122
-> [    0.236613] x20: 0000000000000000 x19: ffff800104ced480 x18: ffffffffffffffff
-> [    0.236616] x17: 00000000105916e2 x16: 00000000acf0c9e7 x15: ffff800101736948
-> [    0.236618] x14: ffffc000800337e0 x13: ffff80010173694a x12: 3030306330356437
-> [    0.236620] x11: 0000000000000040 x10: ffff800104d13c20 x9 : ffffd06fcebb4ffc
-> [    0.236622] x8 : ffff8001024024a8 x7 : 0000000000000000 x6 : 0000000000000000
-> [    0.236624] x5 : ffff800102402480 x4 : 0000000000000001 x3 : 0000000000000018
-> [    0.236626] x2 : 0000000000000024 x1 : 0000000000000000 x0 : 0000000000000000
-> [    0.236628] Kernel panic - not syncing: Asynchronous SError Interrupt
-> 
-> 
-> The `bcm2712d0-rpi-5-b.dts` from downstream kernel seems to change the pinctrl
-> node compat to "brcm,bcm2712d0-pinctrl"[1], which then in turn causes the
-> pinctrl driver to use a different register layout[2]. There are also other more
-> minor differences between these two dtses.
-> 
-> I haven't had the time to do more thorough digging, but I've managed to get my
-> setup working using the following overlay:
-> 
+> Fixes: c15a7919725 ("board/raspberrypi: add bcm2712d0-rpi-5-b for Raspberry Pi 5")
+> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
 
-There are more changes between bcm2712d0-rpi-5-b.dts and bcm2712-d-rpi-5-b.dts.
-But all of them should be fixed when applying overlay: bcm2712d0-overlay.dts
+Reviewed-by: Matthias Brugger <mbrugger@suse.com>
 
-Regards,
-Matthias
-
->      /dts-v1/;
->      /plugin/;
+> ---
+>   board/raspberrypi/rpi/rpi.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
->      / {
->          compatible = "brcm,bcm2712";
-> 
->          fragment@0 {
->              target = <&pinctrl>;
->              __overlay__ {
->                    compatible = "brcm,bcm2712d0-pinctrl";
->                reg = <0x7d504100 0x20>;
->              };
->          };
-> 
->          fragment@1 {
->              target = <&pinctrl_aon>;
->              __overlay__ {
->                  compatible = "brcm,bcm2712d0-aon-pinctrl";
->                reg = <0x7d510700 0x1c>;
->              };
->          };
-> 
->          fragment@2 {
->              target = <&uart10>;
->              __overlay__ {
->                interrupts = <0x0 120 0x4>; /* <GIC_SPI 120 IRQ_TYPE_LEVEL_HIGH> /*
->              };
->          };
->      };
-> 
-> 1: https://github.com/raspberrypi/linux/blob/rpi-6.12.y/arch/arm64/boot/dts/ 
-> broadcom/bcm2712d0-rpi-5-b.dts#L80
-> 2: https://github.com/raspberrypi/linux/blob/rpi-6.12.y/drivers/pinctrl/bcm/ 
-> pinctrl-bcm2712.c#L390
-> 
-> Best
-> FK
+> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+> index 7f69e5b6163..b0a1484c0fa 100644
+> --- a/board/raspberrypi/rpi/rpi.c
+> +++ b/board/raspberrypi/rpi/rpi.c
+> @@ -199,7 +199,7 @@ static const struct rpi_model rpi_models_new_scheme[] = {
+>   		"5 Model B",
+>   		FDTFILES(
+>   			[0] = DTB_DIR "bcm2712-rpi-5-b.dtb",
+> -			[1] = DTB_DIR "bcm2712d0-rpi-5-b.dtb"
+> +			[1] = DTB_DIR "bcm2712-d-rpi-5-b.dtb"
+>   		),
+>   		true,
+>   	},
 
