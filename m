@@ -4,83 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9CA4109C048
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 17:08:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8EE1109C049
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 17:12:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32E6283A41;
-	Wed, 25 Mar 2026 18:08:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3E8EF83AAB;
+	Wed, 25 Mar 2026 18:12:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ffmPIn4E";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OqkVUuTs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D56D83A91; Wed, 25 Mar 2026 18:08:14 +0100 (CET)
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
+ id 5842783CD3; Wed, 25 Mar 2026 18:12:18 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F1188352B
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 18:08:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 55BCB83A41
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 18:12:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-4671cbce465so7190b6e.3
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 10:08:08 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b9358bc9c50so8488066b.1
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 10:12:16 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774458735; cv=none;
+ d=google.com; s=arc-20240605;
+ b=lgohFhOXFSVRHzIaahmStOu8zE2WJq18v1HbsQw1uPWJ4B2MKTUGSz6K7uu3I3QJuX
+ 7On/fzoQQmevE6jTsyBjonyA+6MgBK0A8gzYAp7rZTSxFXKC1Wy3OLA6mh5athrhEtZO
+ 6a2r0uWyhkzuBvVmETH5lIrtEGnevogngRQ8D71fQ9ROIAzr1aJgvcjuvfKf5CQzvBnA
+ FcUDQnzfP1beAt8dybb6luETogiM3/b4f/gFnJVoBVVOTUuEsmHxt0zW0t0N93ute9ex
+ z3rhLzyEsBdPcCOgzWE5q24d3qd/Avk7iscRkoPFTYvCpDmSoz8JgmYHxzgDiVHzJWaL
+ QtBQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=o+/BNoINvYLTGSfhMXhOKhgxJr/KRaweO0u/TT819Dw=;
+ fh=2w8mYF4LuweTY133cjdJkKBJK54+rTD/AxCP+o9GCM8=;
+ b=RpGWNYldEgQbx/hac30xR1DmBErG9cREItJuvFCYviHvLFj5A2tLc529U8ltYhbUp5
+ 8vkIUpboyU4As3eJTaNI9/h6AsBABVfyZLWicww91Vyw7uyMqG0aO0iupfQoIEPO8b5r
+ Y8XvptPJ00F42nrpVctb7Zb8aG68/A5wib/khMe5pJlfUkRTctbdK42iUp3fKsnyLYP1
+ kC26zAf/e20DzUwY03wQamrIa2mnmPktrcbQUX+nGAQB6MMVZKKSBRPYTgNXx64JWLUH
+ Ydqkhsvrpg4xXAcUw8OhFmBsuK1N6ToMzNku9WWUHVqc37JyEGzFwHqp04pplNM4CJWm
+ JseA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774458487; x=1775063287; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YqnKJZTarz4rWhUfDVMYsvC19js95mBu/h8BOrfnK9o=;
- b=ffmPIn4ELY0B9NPdT5y0pVDMejUW9hLQIGDqHvHQ/zaxSguNQMtZmWZ6A919e4ajHQ
- J9YYWeArvn/D2Y0uvLrcKPJU99aFwwJm6ANnAsfKknqnh1LFd9Z5S4Tqgz3Xd2uz2T3U
- FOvfSmspmW9+1JtUyRjtJ2rLNDV8/r9buznLM=
+ d=chromium.org; s=google; t=1774458735; x=1775063535; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=o+/BNoINvYLTGSfhMXhOKhgxJr/KRaweO0u/TT819Dw=;
+ b=OqkVUuTs7d4JLo4zcUSfeVs0o25APCHFT0vmTbTtSuAMgTjkEWjwUHjD6aq9EUlOY+
+ IXJLM2gs72x6os2AE8bm5+aELNxL/JroUyLL4o3SHqJqDX4lSFtZYPQPekMk7bPloBOU
+ UihbDgG/3QCjH5oyHBJSI+8Z3U0CzLSmOoT1A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774458487; x=1775063287;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=YqnKJZTarz4rWhUfDVMYsvC19js95mBu/h8BOrfnK9o=;
- b=TMzeSjohpoE/mN8SdoqLJXEsznagIBpeL2UfsQZRw1Fr0CWSowXPf5u0HRw1KROfWl
- tbAHWnE/DWmgrp3POvXJWhBOaj9MSGDzLVNA30QNQH62MTeIIiH9EcGzwrzY8SEj3ij8
- lTgBV5NUzimRN0/5ADowGqyDY/GySkoY7Pfj+DcldRsVruPqc7hH0/qlIKwxuyO5+WOn
- r50YpzGJlAuy5yKSaWbgy6NSWhVNd73mVQZYn/eXP+lTtT5qBPSOsENCb9EFRPchND9y
- cD7w+OVZFuzT/wJIC737wxOANsPZXYtYSl8VCXLnn05VzPmL1nNcuau8bMCiXblxAUy7
- 3Iug==
-X-Gm-Message-State: AOJu0YygCnBpo4+eq3DhppobrEWTiQYhHEWx70clZLduSg7mmCjmSs7W
- I8dGgDGaGS769gEf8OT6hPTUJO9z7tlx6Dat1dPGP3DKea8QkeZGZgKe+ZJqrUwv7vQ=
-X-Gm-Gg: ATEYQzyhyPx4mjw8v3wuvhwWJf56J+JslrXDASsSatgotO1wrVFvg7PsGk83i0j5CiZ
- zhZopFffSOih9z4x2/wTcj9jjBm+52RLxIvJJxOp+2TldUT518VMMhK9h10eKxl/Vmh7ZAktxJA
- GDwj0wZR01MrKE4ULGcu8pJx62q5RHeqbTxQZPs8R8mkMTE5zVNA+Y13l3VIYC2nEMK3DCC/yiz
- PiVItHhOk35kYgUo6QugScO2OV2IMOO0JsCdl4GFCZwtqfzNeMDKRETKmzDLxdda9+cxXH9bw8S
- YQbUgHf9dn5QkN6iZ+Ge86erYNnkiUZlD1oSU9bGbL0NMQV6Fe3yWBXRisUH7h8qK6W8nD0ONpR
- wR1ox8gFv7SB5+7a3TdiPhyhUjh5xRSplrEcS2iipkLHm9eew47gaDJ24S/Kg1+muRty3Cu8aMb
- BwN+MtK4tlMpEMfsxLy/GJg81XlMrf1OBht72rGpyfEn0rNSxQRcxcQicpjmVqw8cbbsopVg7BV
- dNTlWY5qbdjRMpYHiIvlLw88nrc+LDJzdviZBMGy/nrKzk=
-X-Received: by 2002:a05:6808:144e:b0:467:880:7454 with SMTP id
- 5614622812f47-46a5c5a3227mr1867577b6e.18.1774458486573; 
- Wed, 25 Mar 2026 10:08:06 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41cc77d8aa8sm109500fac.8.2026.03.25.10.08.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Mar 2026 10:08:06 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Casey Connolly <casey.connolly@linaro.org>
-Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <20260324150903.3786680-1-casey.connolly@linaro.org>
-References: <20260324150903.3786680-1-casey.connolly@linaro.org>
-Subject: Re: [PULL] Please pull qcom-fixes-24Mar2026
-Message-Id: <177445848570.3401805.14148956748971029943.b4-ty@konsulko.com>
-Date: Wed, 25 Mar 2026 11:08:05 -0600
+ d=1e100.net; s=20251104; t=1774458735; x=1775063535;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=o+/BNoINvYLTGSfhMXhOKhgxJr/KRaweO0u/TT819Dw=;
+ b=sEwPlKyDK2t/MhZ8Im8J9/n4FmeVrkXGmAD0FmAof0/oUxOT2nCWEV1JMM/dD2uxZm
+ xv3x1jIz1avn6RViuIR8z6eMZijHr3ONUtqT8vuog9OCMxSTazPRmKGT/HQFjfyY5446
+ NyffNayWpL8e9k9x9Q5X7XfjB8Wwu43AW3c08n9F29iiCfhswQxpvaaxGDBtw5nU3HzE
+ IWBBIA/DOQ1QpgrmyIR5xU4nJa07jBomHDoxWwo8kHQsfbEIpIgZYsRkiLwiYuMWk4YC
+ 1sXCQxnYgBokXxBR5bb2o9qUUe3Wq9mGLj/HtPjVXny2K84JHfiHj/GD2trb1g/uXdAk
+ lMoQ==
+X-Gm-Message-State: AOJu0YyOGAQMow6iwYdNdlLAra8mZK6t1yH5d/J71aXGkScHMEG7lN94
+ MZQZHc3LHKGkhSHqxR6VJDO9CgcxkQ+/1ScaEzWC5//lFcHlW85AV/8QXaqGV7dM3wEQ3N73dC8
+ 9ryCdivh0CB1qm0uRRxg492dD+6v2kAsPn5YQBur5Ur1E/Dc1JHpilEuS
+X-Gm-Gg: ATEYQzwAUmT5FBIsjqnmFyPk12ubgehPnvttxpADlJL/rA3HPWiOVuuK/1W87tutQt9
+ c5VkhNmNrI/feJIX8oX3szwFpdvF90qeWdUr77o+JL0bK0+oDRNXrzjr3GYoIQvXEuOfABR2g9o
+ 2hmEcWzxGazyj9tuUrOjLJj6ZNPDa8StiMQ81ipSn/WKEtQTgQ/QcRlOf8+ymujne89aQVDtHn5
+ 6vR44S93xooJNCI5yKJ9JOoM1V0ESiT+4VJH8bvwF9GWfcbMZJZ4xhyM0xGje12Zs6QFWRK6KF6
+ 7RFjIkg=
+X-Received: by 2002:a17:907:3ea5:b0:b98:e4:6d1f with SMTP id
+ a640c23a62f3a-b9a542833a1mr277009266b.40.1774458735173; Wed, 25 Mar 2026
+ 10:12:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+References: <20260325130811.447377-1-sjg@chromium.org>
+ <20260325165420.GT502704@bill-the-cat>
+In-Reply-To: <20260325165420.GT502704@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 25 Mar 2026 11:12:00 -0600
+X-Gm-Features: AQROBzCO-ejDFuoRm6ruaiuqqmCDZrN3apcRxRaejGuVLkBSdLg4Fq9TX1VEYbY
+Message-ID: <CAFLszTgZpg-anG1J5kyiYk2JJ3dDiiyvuk5AV_PO+ri_b552tA@mail.gmail.com>
+Subject: Re: [PATCH] kbuild: Use relative paths in generated .incbin directives
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Peter Robinson <pbrobinson@gmail.com>, Sam Edwards <cfsworks@gmail.com>, 
+ Sughosh Ganu <sughosh.ganu@arm.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,22 +112,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 24 Mar 2026 16:07:34 +0100, Casey Connolly wrote:
+Hi Tom,
 
-> These are minimal fixes that should ideally go into master, sorry
-> they're so last minute. The watchdog patch is the priority, if you'd
-> rather not risk taking the others I can queue them for next instead.
-> 
-> Kind regards,
-> Casey
-> 
-> The following changes since commit eb95914b9f5886b7ca0eaa2dbcd8a66bb8e5f81a:
-> 
-> [...]
+On Wed, 25 Mar 2026 at 10:54, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Mar 25, 2026 at 07:08:09AM -0600, Simon Glass wrote:
+> > The generated .S files for fonts, splash screens and EFI apps use
+> > .incbin with the full prerequisite path. When building with O= this
+> > bakes an absolute path into the .S file. If the build directory is
+> > later used on a different machine (e.g. in a container), the assembler
+> > cannot find the source file.
+> >
+> > Use $(src)/$(notdir $<) instead of $< so the .incbin directive contains
+> > a source-relative path like drivers/video/fonts/nimbus_sans_l_regular.ttf
+> > rather than an absolute one. Add -Wa,-I$(srctree) to the assembler
+> > flags so the assembler can resolve these paths.
+> >
+> > The DTB and DTBO rules are left unchanged since their prerequisites are
+> > generated files in the build directory.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  scripts/Makefile.lib | 7 ++++---
+> >  1 file changed, 4 insertions(+), 3 deletions(-)
+>
+> This is generic kbuild infrastructure now. Is there a fix we're missing
+> from upstream, a change we haven't pulled in yet (as we need to keep
+> syncing upwards) or a problem upstream too? Thanks!
 
-Merged into u-boot/master, thanks!
+Linux does this with DTB files in quiet_cmd_wrap_S_dtb:
 
--- 
-Tom
+echo '.incbin "$<" ';
 
+But Linux only uses generated files in the build directory, never
+actual source files. The font/splash/EFI .incbin rules are U-Boot
+additions that aren't in the upstream kbuild. So Linux doesn't have
+this problem.
 
+Regards,
+Simon
