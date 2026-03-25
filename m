@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AAC8FEA83D
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 09:58:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40D86FEA83E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 09:58:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 905D783FAF;
+	by phobos.denx.de (Postfix) with ESMTP id DA1AE83FD3;
 	Wed, 25 Mar 2026 10:58:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="gVnGFubZ";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="ii2qHYry";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E90883FAF; Wed, 25 Mar 2026 10:58:18 +0100 (CET)
+ id C36FE83A41; Wed, 25 Mar 2026 10:58:18 +0100 (CET)
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D85F81E18
+ by phobos.denx.de (Postfix) with ESMTPS id 4E8E68352B
  for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 10:58:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
@@ -30,20 +30,20 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=Ylu4fS2C3e6B7U4eJODWQb16nVW/UbaeOPjewVOtUf0=; b=gVnGFubZKaMnvpBiGKHxAaHLqf
- L/Fk3J7yiTj+jyOCGJAyzh6Y4qov+BWyvNWyjB05bcukQv9m670Meongoww4LM138d0F8gbqXsTrc
- B6fBBcORlgNPGx+dlwC+tp1w7hNKhEbEsQ1jQ6fTso1Dd/B+cdM8YCzR1g7PI+jPQtQPNQ4jhWOxP
- PQYLLvczKAQd5fQdeWgPLgsYATsX9bv1ZulF4Qxn+OI03+qGKfLQReSMVa0DjqkXBYWS/9GrpiHSw
- u60CYjgM6r/DIcvfHlVzvJqX/wv8MPfP+Lcg6+Zov+VnnVHKa+Ep4Ten3MAxNwBqyVGAgiioleNEW
- emwEDUYA==;
+ bh=3gqTM7J59MsEiSzP8+UDQ5IFcC1CvW+D5ymRepUZAV4=; b=ii2qHYryQprGfmhIUE1H0je3mz
+ mCk+tEGSRpyirw4I58rdtjGN/1laZN3dMqo91E2pcnYlh2B9brjlnA1PmR4jSP9UAkbxRF8a6lRA4
+ 7qAOKaN+t9KpxDBoDeLDLgp+94JN4d5LgtmRWn724wuvo3SudPdmgz7AJxUZVVxVvRXM3uA+rsOus
+ tpCL1aGoZl0Df/mmb17h1TYd8LY+mji9YqjflFO3GwUtczg1X2KnI+uzHBPjUgqqkqdwHL7KF7GKA
+ gpfRLA4u/sP2rihYi01LA0+bYuUCScRQRi97vlUGXxrK2RpuvBUFSMvjVmXLs62zlsBju4zMC1fIU
+ 8mlLiwWA==;
 Received: from sslproxy07.your-server.de ([78.47.199.104])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1w5L07-0009lq-1l; Wed, 25 Mar 2026 10:58:11 +0100
+ id 1w5L09-0009m7-0B; Wed, 25 Mar 2026 10:58:13 +0100
 Received: from localhost ([127.0.0.1])
  by sslproxy07.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1w5L07-000HPv-17; Wed, 25 Mar 2026 10:58:11 +0100
+ id 1w5L08-000HPv-2c; Wed, 25 Mar 2026 10:58:12 +0100
 From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
  u-boot@ew.tq-group.com
@@ -52,9 +52,10 @@ Cc: Alexander Feilke <alexander.feilke@ew.tq-group.com>,
  Fabio Estevam <festevam@gmail.com>,
  Alexander Feilke <Alexander.Feilke@ew.tq-group.com>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
-Subject: [PATCH v2 1/8] Kconfig: update build-target for MX7 with SPL
-Date: Wed, 25 Mar 2026 10:57:54 +0100
-Message-Id: <20260325095801.47706-2-Alexander.Feilke@ew.tq-group.com>
+Subject: [PATCH v2 4/8] arch: arm: dts: tqma7x: add u-boot device tree
+ fragments
+Date: Wed, 25 Mar 2026 10:57:57 +0100
+Message-Id: <20260325095801.47706-5-Alexander.Feilke@ew.tq-group.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260325095801.47706-1-Alexander.Feilke@ew.tq-group.com>
 References: <20260325095801.47706-1-Alexander.Feilke@ew.tq-group.com>
@@ -78,26 +79,65 @@ X-Virus-Status: Clean
 
 From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 
-Prepare for MX7-based module with SPL support.
+Add u-boot specific device tree properties.
 
 Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 ---
- Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/dts/imx7d-mba7-u-boot.dtsi | 10 ++++++++++
+ arch/arm/dts/imx7s-mba7-u-boot.dtsi | 27 +++++++++++++++++++++++++++
+ 2 files changed, 37 insertions(+)
+ create mode 100644 arch/arm/dts/imx7d-mba7-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx7s-mba7-u-boot.dtsi
 
-diff --git a/Kconfig b/Kconfig
-index b52331d6ff2..4bc05d43ee2 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -522,7 +522,7 @@ config BUILD_TARGET
- 	default "u-boot-elf.srec" if RCAR_64
- 	default "u-boot-with-spl.bin" if ARCH_AT91 && SPL_NAND_SUPPORT
- 	default "u-boot-with-spl.bin" if MPC85xx && !E500MC && !E5500 && !E6500 && SPL
--	default "u-boot-with-spl.imx" if ARCH_MX6 && SPL
-+	default "u-boot-with-spl.imx" if (ARCH_MX6 || ARCH_MX7) && SPL
- 	default "u-boot-with-spl.kwb" if ARMADA_32BIT && SPL
- 	default "u-boot-with-spl.sfp" if ARCH_SOCFPGA_ARRIA10
- 	default "u-boot-with-spl.sfp" if ARCH_SOCFPGA_GEN5
+diff --git a/arch/arm/dts/imx7d-mba7-u-boot.dtsi b/arch/arm/dts/imx7d-mba7-u-boot.dtsi
+new file mode 100644
+index 00000000000..3ccc95a7ac6
+--- /dev/null
++++ b/arch/arm/dts/imx7d-mba7-u-boot.dtsi
+@@ -0,0 +1,10 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
++/*
++ * Device Tree Source for TQ-Systems TQMa7D board on MBa7x carrier board.
++ *
++ * Copyright (C) 2024-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++ * D-82229 Seefeld, Germany
++ * Author: Steffen Doster
++ */
++
++#include "imx7s-mba7-u-boot.dtsi"
+diff --git a/arch/arm/dts/imx7s-mba7-u-boot.dtsi b/arch/arm/dts/imx7s-mba7-u-boot.dtsi
+new file mode 100644
+index 00000000000..2ed3f9c4769
+--- /dev/null
++++ b/arch/arm/dts/imx7s-mba7-u-boot.dtsi
+@@ -0,0 +1,27 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
++/*
++ * Device Tree Source for TQ-Systems TQMa7S board on MBa7x carrier board.
++ *
++ * Copyright (C) 2025-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++ * D-82229 Seefeld, Germany
++ * Author: Steffen Doster
++ */
++
++#include "imx7s-u-boot.dtsi"
++
++/ {
++	config {
++		u-boot,mmc-env-offset = <0x100000>;
++		u-boot,mmc-env-offset-redundant = <0x110000>;
++	};
++
++	wdt-reboot {
++		compatible = "wdt-reboot";
++		wdt = <&wdog1>;
++	};
++};
++
++&wdog1 {
++	u-boot,noautostart;
++	timeout-sec = <60>;
++};
 -- 
 2.34.1
 
