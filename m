@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECD7B109C046
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 16:57:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A357E109C046
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 16:57:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7377E8406D;
-	Wed, 25 Mar 2026 17:55:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C04BD84090;
+	Wed, 25 Mar 2026 17:55:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fLF2dvxl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X/ctBrxU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6A2784082; Wed, 25 Mar 2026 17:55:54 +0100 (CET)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id 618F28408D; Wed, 25 Mar 2026 17:55:57 +0100 (CET)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85F4283F14
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 17:55:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 34BF083F14
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 17:55:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-46805c4ae5dso4023b6e.1
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 09:55:52 -0700 (PDT)
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-46805c4ae5dso4048b6e.1
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 09:55:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1774457750; x=1775062550; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1774457753; x=1775062553; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4TCMothyrrc4+m6VCEww4SjWQn5vb6XWEl2OBrcWSjI=;
- b=fLF2dvxlO/xYrB75/T9KBMfqwpY/ijit9AxVQvAlUXFLSAXPxsmrsjxP0AelnkH3kD
- r4JtMDbFJlvb1QDO0YjMTbySMwAVsC5uP0CvysauVBPt/4jEDdSXmCeZEuRkSSDRmAIZ
- qtojAxdiznFAwL5/mTKumlfihSVcXwmB9VhXk=
+ bh=/X8linunaJh7FOP64XGfe4iHFWg4bjSahyn53q0yEfQ=;
+ b=X/ctBrxUWLUcn+0mmwgDMoK0ho28JFdgLs4aalInFCe86it8oG0qVzNhneHbcS21vt
+ R+VAmCvpjG+VOAmf/WstYQKYLeCx5UcUsw+i9McKF9ooif3LDBFx2AeEjDknyl91ZM14
+ TzrxyLY2n4p8OqALy56Dh6Ec0hPD9uCUkvde0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774457750; x=1775062550;
+ d=1e100.net; s=20251104; t=1774457753; x=1775062553;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=4TCMothyrrc4+m6VCEww4SjWQn5vb6XWEl2OBrcWSjI=;
- b=G6Tf+tvsQvzxjCmwc/LrnsTBsglU5s43BKy0/nA30/PwlyHZ59AqZ7UFiXyUuDUjat
- r64jFev8myNFyJteVNr25BBiOhXDLELVfJlC+bBk5H9437P6t0Ma/bN/5iDMBMNME4XN
- iXlpUT29sHfmZTOHIwB9jn0947gM71/aq2pVsnz7CRMEeBtP2WeYiq/PtWYdCaOyl8Mt
- +JROVaY/8saRPzBdD3M2+gniVmnA6ElLjijuq5KdUbzGUCH5eyZ++rEKUzlXz/Fl970h
- bwgierzwdjaIV2yuouulno6K+sQk1TX7NGhKq5PL9csxRN4hhoX9wsbpz/0ymHSZXmNL
- d+Ug==
-X-Gm-Message-State: AOJu0YynE7tNDFY9duZ45eaa18Ho3aUQbQA7lsURmLcLo6QKbfHeadU9
- nhazax1CY2BrYLYjbnHjpQHM7a14DNnQJiWSgowlmbr3+BEaSWUzGGxdDrH0xB+IdzpDWXqKbL4
- R2a5r/w==
-X-Gm-Gg: ATEYQzzpHeGSYJnyS3IaCz2mSCteinDaiNEojzP7zPWTUyckV3MeULP+Ke+tNc1zBCt
- v+tYmKocPo+cFtBeIctl5Z+ec2VFPimsVLDGUR58D5js8at6DxolvuriBNt0gtwrlq46dLUmNgO
- nhcIi9aMm72Qfb1jxrRxASuPD7wW5eW6a3ygABPHQ+sR7vp0fZ5ZR10uMpJCksDosfipDMYOMDY
- Bgag6p1nrTCpv9/7VY1T9vADYrYHTKiVdkHFubITJtakrQZNWRud/JkL36q01I3X77rdcp7NxU9
- jLIoAolG9qGENA/pqs430K7evBv6x+NaUjm1+wPXxFKvIU/XPW//m4S3b7hKaIgKIv1ZJ6hGj/c
- Yarn6wQlmXEfvWVjUg3wv0bZjc2vfKz/b/NrAw09+YQ4rKfuHcDkDp+1OJuCZUVfC+/RYACDHEJ
- XaTWcUW5bdBIwxASXLNKEHKo9Rl6QE
-X-Received: by 2002:a05:6808:8955:b0:466:fcbb:1673 with SMTP id
- 5614622812f47-46a5c5d63c8mr2037568b6e.17.1774457750564; 
- Wed, 25 Mar 2026 09:55:50 -0700 (PDT)
+ bh=/X8linunaJh7FOP64XGfe4iHFWg4bjSahyn53q0yEfQ=;
+ b=FHbDffVmIL3hhFP0imSWdv835S9vhLcxMZ8BMPwrJeTqxJ8JalLikGLsjOCgi/nxV7
+ O+MpUkhciqLYJkHOIBDPJHDCoTJlEElCmA7bayYWMKdNXtxgr0+TeP+5kl6LqEp/0NHM
+ ifjQ/PV6w674QA4O+L2l1GrVCYwE/iux2ey5g+OPma6agIGZPJc+TW+idxpVQXA/IfrF
+ 4ntRLfzsXinMuo2BfmxsNLcrxxJibKIywiMw5gXb3x2hYNXKY1KhbhPNjJOxXXCpj+gr
+ 9qcPb7I5/GyZz0jBrFk9yOW9c1ysSXRYTwFz8Za+Pnx5gWQLvEZC4KpJp5I1ZWLfww1R
+ iaMg==
+X-Gm-Message-State: AOJu0YztYndqTlr3sQrSAXF8UUKjOIMCGBnUeEB6c1thy2LSpqIVanHp
+ MuR4zYJlfDxSoGehRQeQEdW6MuFnMdfRf3VUS+sx796iBVzbqBTu0DxQC4lZnZgaVmm2+nOuMu7
+ XuuSSKA==
+X-Gm-Gg: ATEYQzzu2E/PyPQB+v5XDQ9PSwetb3YTJyXfi0ZQQTLNO4uJTJi0W+bl6Do+PyGRa1M
+ jJEwjakCwHe5a0/hXXeneGyWOPTAo5GFgLd/fdlYlua6P3QrZG+0Ob5kRovFOfJH+8l0KhxGtXT
+ 9AzwbIMLKt2AqDlWWs1AmHpDYVxBTLXXZ64ty/qREm9BU4eHFsd0K29YDW3uD7EvEQ8CPTEHTsW
+ ksxQIZs8IEKKk9mNAcjTrY4a+WQr+pLTVLN5kVT8tr/pvi3Y8nSYOJN8rOYYBA+MjzCIhwY13Hx
+ b6ICfH37fa7mUDcK9Yl3IIALYbziWoKmGC0Pdk/aIjQ1Gnhi042yIEnK+h74YEzuA1ggRE4LiF4
+ P5C8USTxKTLUhXMFgmuvMkW+WmnQnUnJeqFLWlgAmF/U7EV/0vgSfwMgtSXtshhMG6x8l5UTq0u
+ o9WCqNYk+Vrgmx9nNfTQ==
+X-Received: by 2002:a05:6808:23cc:b0:467:f636:23bd with SMTP id
+ 5614622812f47-46a5c7448f7mr2004293b6e.42.1774457753357; 
+ Wed, 25 Mar 2026 09:55:53 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-46a7099df08sm30481b6e.15.2026.03.25.09.55.49
+ 5614622812f47-46a7099df08sm30481b6e.15.2026.03.25.09.55.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Mar 2026 09:55:49 -0700 (PDT)
+ Wed, 25 Mar 2026 09:55:51 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, James Hilliard <james.hilliard1@gmail.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 10/13] boot: Move decomp_image() into handle_load_op()
-Date: Wed, 25 Mar 2026 10:54:19 -0600
-Message-ID: <20260325165431.1027591-11-sjg@chromium.org>
+Subject: [PATCH 11/13] boot: Move setting the OS arch into check_allowed()
+Date: Wed, 25 Mar 2026 10:54:20 -0600
+Message-ID: <20260325165431.1027591-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260325165431.1027591-1-sjg@chromium.org>
 References: <20260325165431.1027591-1-sjg@chromium.org>
@@ -95,108 +95,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Decompress is really part of loading, so simplify the code slightly by
-moving decompression out of the top-level fit_image_load() function.
+Remove a few more lines from fit_image_load() by dealing with this small
+detail in check_allowed().
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/image-fit.c | 38 ++++++++++++++++++++------------------
- 1 file changed, 20 insertions(+), 18 deletions(-)
+ boot/image-fit.c | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
 
 diff --git a/boot/image-fit.c b/boot/image-fit.c
-index a59226d42c5..7efd0f30dc5 100644
+index 7efd0f30dc5..749cbe19ade 100644
 --- a/boot/image-fit.c
 +++ b/boot/image-fit.c
-@@ -2390,7 +2390,8 @@ static int decomp_image(const void *fit, int noffset, const char *prop_name,
-  * handle_load_op() - Handle the load operation
-  *
-  * Process the load_op and figure out where the image should be loaded, now
-- * that it has been located
-+ * that it has been located. Decompress and move as necessary to get the image
-+ * into the right place - see decomp_image()
+@@ -2182,17 +2182,19 @@ static int select_image(const void *fit, struct bootm_headers *images,
   *
   * @fit: FIT to check
   * @noffset: Node offset of the image being loaded
-@@ -2402,21 +2403,21 @@ static int decomp_image(const void *fit, int noffset, const char *prop_name,
-  * @load_op: Load operation to process
++ * @images: Boot images structure
+  * @image_type: Type of the image
+  * @arch: Expected architecture for the image
   * @bootstage_id: ID of starting bootstage to use for progress updates
-  * @datap: Returns buf
-- * @loadp: Returns the address to which the data should be loaded
-- * @load_endp: Returns the end address of the data-loading location
-+ * @loadp: Returns the address where the data was loaded
-+ * @sizep: On entry, the size of the image in bytes. Updated if decompressed
-  * Return: 0 if OK, -ve on error
+  * Return: 0 if OK, -EIO if not
   */
- static int handle_load_op(const void *fit, int noffset, const char *prop_name,
--			  void *buf, ulong size,
--			  enum image_type_t image_type,
-+			  void *buf, ulong size, enum image_type_t image_type,
- 			  enum fit_load_op load_op, int bootstage_id,
--			  ulong *datap, ulong *loadp, ulong *load_endp)
-+			  ulong *datap, ulong *loadp, ulong *sizep)
+ static int check_allowed(const void *fit, int noffset,
++			 struct bootm_headers *images,
+ 			 enum image_type_t image_type, enum image_arch_t arch,
+ 			 int bootstage_id)
  {
--	ulong data, load;
-+	ulong data, load, load_end;
-+	int ret;
+ 	bool type_ok, os_ok;
+-	uint8_t os;
++	uint8_t os, os_arch;
  
- 	data = map_to_sysmem(buf);
- 	load = data;
--	*load_endp = 0;
-+	load_end = 0;
- 	if (load_op == FIT_LOAD_IGNORED) {
- 		log_debug("load_op: not loading\n");
- 		/* Don't load */
-@@ -2437,9 +2438,9 @@ static int handle_load_op(const void *fit, int noffset, const char *prop_name,
- 		image_start = map_to_sysmem(fit);
- 		image_end = image_start + fit_get_size(fit);
+ 	bootstage_mark(bootstage_id + BOOTSTAGE_SUB_CHECK_ARCH);
+ 	if (!tools_build() && IS_ENABLED(CONFIG_SANDBOX)) {
+@@ -2238,6 +2240,9 @@ static int check_allowed(const void *fit, int noffset,
  
--		*load_endp = load + size;
-+		load_end = load + size;
- 		if (image_type != IH_TYPE_KERNEL &&
--		    load < image_end && *load_endp > image_start) {
-+		    load < image_end && load_end > image_start) {
- 			printf("Error: %s overwritten\n", prop_name);
- 			return -EXDEV;
- 		}
-@@ -2449,6 +2450,13 @@ static int handle_load_op(const void *fit, int noffset, const char *prop_name,
- 	} else {
- 		load = data;	/* No load address specified */
- 	}
+ 	bootstage_mark(bootstage_id + BOOTSTAGE_SUB_CHECK_ALL_OK);
+ 
++	fit_image_get_arch(fit, noffset, &os_arch);
++	images_set_arch(images, os_arch);
 +
-+	ret = decomp_image(fit, noffset, prop_name, buf, image_type,
-+			   load_op, bootstage_id, data, &load, sizep,
-+			   load_end);
-+	if (ret)
-+		return ret;
-+
- 	*datap = data;
- 	*loadp = load;
+ 	return 0;
+ }
  
-@@ -2467,7 +2475,7 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 	const char *fit_base_uname_config;
+@@ -2476,7 +2481,6 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
  	const void *fit;
  	void *buf;
--	ulong load, load_end, data, len;
-+	ulong load, data, len;
- 	uint8_t os_arch;
+ 	ulong load, data, len;
+-	uint8_t os_arch;
  	const char *prop_name;
  	int ret;
-@@ -2497,13 +2505,7 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 		return ret;
  
- 	ret = handle_load_op(fit, noffset, prop_name, buf, len, image_type,
--			     load_op, bootstage_id, &data, &load, &load_end);
--	if (ret)
--		return ret;
--
--	ret = decomp_image(fit, noffset, prop_name, buf, image_type,
--			   load_op, bootstage_id, data, &load, &len,
--			   load_end);
-+			     load_op, bootstage_id, &data, &load, &len);
+@@ -2493,13 +2497,11 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 	if (noffset < 0)
+ 		return noffset;
+ 
+-	ret = check_allowed(fit, noffset, image_type, arch, bootstage_id);
++	ret = check_allowed(fit, noffset, images, image_type, arch,
++			    bootstage_id);
  	if (ret)
  		return ret;
  
+-	fit_image_get_arch(fit, noffset, &os_arch);
+-	images_set_arch(images, os_arch);
+-
+ 	ret = obtain_data(fit, noffset, prop_name, bootstage_id, &buf, &len);
+ 	if (ret)
+ 		return ret;
 -- 
 2.43.0
 
