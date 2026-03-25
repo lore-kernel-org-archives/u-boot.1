@@ -4,89 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17A67109C057
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 18:26:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAC2A109C058
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 18:33:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5889683DA7;
-	Wed, 25 Mar 2026 19:26:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5465783E76;
+	Wed, 25 Mar 2026 19:33:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QBsxOJXt";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Od3F8rd+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B29583F14; Wed, 25 Mar 2026 19:26:25 +0100 (CET)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id 0FBE683F6D; Wed, 25 Mar 2026 19:33:52 +0100 (CET)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5871380077
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 19:26:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E4AEC83DA7
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 19:33:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7d1872504cbso73863a34.0
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 11:26:23 -0700 (PDT)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-467e8aaa865so55408b6e.2
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 11:33:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774463182; x=1775067982; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1774463628; x=1775068428; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=d3vt0plxIOlJxMdKRhIHHoH5wxnMbZYRcq9oQ5la1As=;
- b=QBsxOJXteB03v/hXO0Dbu0dyB+trvjVbLbPVSfEZdSmozhedOaWV8ycWpjv64kNAsE
- kqml6AaAAS/PrJg2Bonl//dWzo96muXJXDrYRq9GBfL1zLibCYZIbOmojY3RwQaohSSe
- JBzWK7n/TMmruwv9p86qt0CYAjWtwCa3LdXE4=
+ bh=cSVIMzStd8iA9dq9sFlBOCCsSdrbdM1i8uX/yTkb4NI=;
+ b=Od3F8rd+xIoLixT/c/zPbvaT32agRZNwgcyHWKg7ap+Bf8aZrlTYqMW06sNOr6B0xt
+ jPVi7Cn6zCQMGw5L5IRtu+edyg5YfPN9rpZ3R+uIZAX4T2+wE2i0umrWqcsvQjFyIv+Y
+ oCPCVLX9kZUVv6soBbE5Q+74MJrjN9lC6vn9Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774463182; x=1775067982;
+ d=1e100.net; s=20251104; t=1774463628; x=1775068428;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=d3vt0plxIOlJxMdKRhIHHoH5wxnMbZYRcq9oQ5la1As=;
- b=brx8jJDEwFaDj3uDE8l5n9zrhuNpY5V/vnBtp+e8wkXy++6TlFWju7qQ0AlIUePCzd
- 7zWy++6R6V3wNwG+IqAQCDWFILJD5Evto86Bk2UROby6jgBfIZa+q+yAYRb9e6yRq4ih
- ndH019psPdi0QZV4e5dghynb3zRh9Jaqk69OW/HyP53UsLjWhc4CL98VcbjD6aEbmZXd
- Axzs6+JHRsyzznEUtxKuNsMiqILfj817jonT0rsp21UrWKK23DplJ8oeiEY3jw4Sy2FC
- nSvUnNI5/5YBjFtZFSaEkDEU3t139JWgwkSY6Zw/dy4wiG33vnrZFde1VZWYhdIZGMZd
- FOHw==
-X-Gm-Message-State: AOJu0YwkgQaI15pZRo6jBhgcZV9pBOPomM00vBZvXoZR2H3uR4dVkhHh
- /BtRcxhwTlmVGD42v0f728jPGRT76RnLHNLGsNitlmnFgXDGfe9pksPJb3PMiMGkRlI=
-X-Gm-Gg: ATEYQzxMzruPQAfG+lPeKQdEW3+lpCk9PO2AVT0o1pC5qLEhH16kuKc3wkaG/VbVqOY
- TU245NfrveQ5oYyQGdJ+kvr+kJovmRbLsdCQrHi2spKu+1PTnQzElu0k/bmW5NJ9rl25+fqMJxE
- Jlkkad/J5zxgr7za+//FlZpNKCw66CPUiPh1//CSthNNEwzcV9VRdW5g37LAWUJWdLmmnSZZHFU
- lFkhV04i0kejssFnA0mMWK8gBUynumqTFzSqFzThBYvgdqCFTNVoqixPwUiAT8oFCYbFlM+599L
- qquktO3Y9rcgj5I3k0p6jhjEyQBKPti7WwlkbIcrWltHvcdHrlucHhjDKjWWtJvwGuEe1slg6bw
- DxMAE5+j525An6312i4hPYQU+Zs6/zraV1+JClWxHNsfkfgFwMICxjXDUg+OvMPHW9KwY2MaIum
- JfxXjJjUmGhg76hIRTtcODbEwpwd0hASPWyQnYvjers7nfyVHG2aJp1ZUziHenuv/0+YTWJfLCw
- ErAjCBrFRjfDWWKrWJdnb0KKCOTc0iHkpm5lMHtupGhkF2U
-X-Received: by 2002:a05:6830:6a12:b0:7d7:bf59:2238 with SMTP id
- 46e09a7af769-7d9d4df422fmr2650870a34.4.1774463181966; 
- Wed, 25 Mar 2026 11:26:21 -0700 (PDT)
+ bh=cSVIMzStd8iA9dq9sFlBOCCsSdrbdM1i8uX/yTkb4NI=;
+ b=RAUhCm6UsM/7oyPGNOebKKJL7Wmnr9MSvqEmVWQcfc6oDP6RerhpJBnP/Q2saCMU7G
+ R6MUKjaXEisuVANcXs6ECVgzS4dAKg4++arIEVVZ8Dcj453vR+1u9goV7XJ9zc4DNjwf
+ v6/pav0iLAFaIPOMzqu3CPN5BoqFtpKwX6ZVQQh6RvPBdtlS2vTLmZtnF4skojLSgVoH
+ soQNLEpcqnnZNPd7Q4PN9AOk3eE9bB4v+S9n2I66BQXxKn0rvNgMwE/0m/+irB2mrAyV
+ +moPq5gkZhfZW7sYSiJlye4Qc0ObVJeIXjfsku3Wej3/Z0FnXtu0MzIwW7xQNQEvhjjn
+ 6gMA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXFB8whYRxJbsXsg960AvzwZcgclyqDxMxM0LEevB9l3asMGZlzseSxEULKX5mhRJARKnKdw1E=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxtmus3uZhMq97ofNEFKYmafjoI00JmtE1k/1279jjuTa1TBVsa
+ fQxkZb43f+TsFj56QEcQzQdeBP2Bq0Jm36/VAkM7yLzZzTKFGPgqGqLAblFl98gVCXX+h64+Dle
+ Kje0bZ4Q=
+X-Gm-Gg: ATEYQzxxiMhWDnOVHLX3090uXBcejr8w/gV8gZ59aig/V7K2p/9EG/U1yK0QA7BDGzh
+ caoibRqH6zbc+kUMVk9Djdr97QeI6v0S5ThNVq1zMq2sCxqC62CyaW23HaIyrHmJlyBzVIiqn3q
+ LoFMN9P9r/1w2bIIPRKxe0z8IL1HdAegYfB2kbkJx6QywOGIExOTgcnE6ujfKqZzS4EMUkrk8GA
+ DH6QPfyNViahAmzjGFmYT0rjpFFAf9EI9HmlrYpLiR5Hrb/oFnpiQbIqjeraYvF0RJfdv65EGqU
+ deqHxno0CiPzZL7ZHGwI7cSl16p7jyEBcgSNyrb/1a7TRuogvYACdgpyFI2LOX4PiOwrayURHJO
+ 6SIR2Qhb5GceKb5Ko2albSaAhR2FyJwgGcGVf0/nAhsV6Rr2kV4xLnkWvbzV2zsrfr0vQE80myX
+ EeCD9ksUOPucS7VhAh8Ebs+7pts7m3skaJwfqbuW5r+qTvCvDxKYeTjLLbvDQNrkGeR8pVKOkp/
+ LSfKl2Wv/CeTMYZUZQUyoKcXYSkgEUStkL8fHhpnU1sCkPo
+X-Received: by 2002:a05:6808:22a1:b0:467:1e7b:72de with SMTP id
+ 5614622812f47-46a5c5552a2mr2257698b6e.2.1774463628588; 
+ Wed, 25 Mar 2026 11:33:48 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d9e6fde23esm375471a34.9.2026.03.25.11.26.20
+ 5614622812f47-46a703c406asm227379b6e.0.2026.03.25.11.33.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Mar 2026 11:26:21 -0700 (PDT)
-Date: Wed, 25 Mar 2026 12:26:19 -0600
+ Wed, 25 Mar 2026 11:33:47 -0700 (PDT)
+Date: Wed, 25 Mar 2026 12:33:45 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>, Sam Edwards <cfsworks@gmail.com>,
- Sughosh Ganu <sughosh.ganu@arm.com>
-Subject: Re: [PATCH] kbuild: Use relative paths in generated .incbin directives
-Message-ID: <20260325182619.GV502704@bill-the-cat>
-References: <20260325130811.447377-1-sjg@chromium.org>
- <20260325165420.GT502704@bill-the-cat>
- <CAFLszTgZpg-anG1J5kyiYk2JJ3dDiiyvuk5AV_PO+ri_b552tA@mail.gmail.com>
- <20260325171540.GU502704@bill-the-cat>
- <CAFLszTh3NgpY1VQer2wN9-feOvM8khXaFyp+ePhTpqowGK_qrQ@mail.gmail.com>
+To: "Feilke, Alexander" <alexander.feilke@ew.tq-group.com>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
+ u-boot@ew.tq-group.com, Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Subject: Re: [PATCH v2 6/8] board: tqma7: add code for u-boot with spl
+Message-ID: <20260325183345.GW502704@bill-the-cat>
+References: <20260325095801.47706-1-Alexander.Feilke@ew.tq-group.com>
+ <20260325095801.47706-7-Alexander.Feilke@ew.tq-group.com>
+ <699c7adc-d636-4ef3-9844-52a28333ef0c@ew.tq-group.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="u0QaSU2tmctKcN4/"
+ protocol="application/pgp-signature"; boundary="g0EC2x7LXh8BV/Ez"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTh3NgpY1VQer2wN9-feOvM8khXaFyp+ePhTpqowGK_qrQ@mail.gmail.com>
+In-Reply-To: <699c7adc-d636-4ef3-9844-52a28333ef0c@ew.tq-group.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,85 +105,54 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---u0QaSU2tmctKcN4/
+--g0EC2x7LXh8BV/Ez
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 25, 2026 at 11:57:17AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Wed, 25 Mar 2026 at 11:15, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Wed, Mar 25, 2026 at 11:12:00AM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Wed, 25 Mar 2026 at 10:54, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Wed, Mar 25, 2026 at 07:08:09AM -0600, Simon Glass wrote:
-> > > > > The generated .S files for fonts, splash screens and EFI apps use
-> > > > > .incbin with the full prerequisite path. When building with O=3D =
-this
-> > > > > bakes an absolute path into the .S file. If the build directory is
-> > > > > later used on a different machine (e.g. in a container), the asse=
-mbler
-> > > > > cannot find the source file.
-> > > > >
-> > > > > Use $(src)/$(notdir $<) instead of $< so the .incbin directive co=
-ntains
-> > > > > a source-relative path like drivers/video/fonts/nimbus_sans_l_reg=
-ular.ttf
-> > > > > rather than an absolute one. Add -Wa,-I$(srctree) to the assembler
-> > > > > flags so the assembler can resolve these paths.
-> > > > >
-> > > > > The DTB and DTBO rules are left unchanged since their prerequisit=
-es are
-> > > > > generated files in the build directory.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > ---
-> > > > >
-> > > > >  scripts/Makefile.lib | 7 ++++---
-> > > > >  1 file changed, 4 insertions(+), 3 deletions(-)
-> > > >
-> > > > This is generic kbuild infrastructure now. Is there a fix we're mis=
-sing
-> > > > from upstream, a change we haven't pulled in yet (as we need to keep
-> > > > syncing upwards) or a problem upstream too? Thanks!
-> > >
-> > > Linux does this with DTB files in quiet_cmd_wrap_S_dtb:
-> > >
-> > > echo '.incbin "$<" ';
-> > >
-> > > But Linux only uses generated files in the build directory, never
-> > > actual source files. The font/splash/EFI .incbin rules are U-Boot
-> > > additions that aren't in the upstream kbuild. So Linux doesn't have
-> > > this problem.
-> >
-> > Shouldn't we be generating these files in to the build directory too?
->=20
-> These are actually source files, e.g.
-> drivers/video/fonts/nimbus_sans_l_regular.ttf
+On Wed, Mar 25, 2026 at 06:50:59PM +0100, Feilke, Alexander wrote:
 
-So, the first thing then is that S_ttf is a local U-Boot rule. Lets
-start by moving this out of scripts/Makefile.lib to
-scripts/Makefile.lib-u-boot as that will make future re-sync work easier
-(and is something we've talked about in the re-sync threads, splitting
-U-Boot specific stuff out to new files). Then 2/2 of that series can be
-this change, thanks.
+> Hi,
+>=20
+> Please wait with applying the series. I just stumbled over a weird issue
+> related to the environment.
+>=20
+> The default rootpath is set to `rootpath=3D"/srv/nfs"` (with quotes).
+> This is wrong. Running `env default rootpath` will reset it correctly
+> to rootpath=3D/srv/nfs
+> However, `env default -fa` resets it back to `rootpath=3D"/srv/nfs"`
+>=20
+> Independently of that, the variables inside load_nfs are not being replac=
+ed
+> correctly. They appear to be empty, as I get `Filename '/'.` in the run l=
+og
+> when it should be something like `Filename '/srv/nfs/boot/imx7d-mba7.dtb'`
+>=20
+> We will fix this before the patch should be accepted. The first issue see=
+ms
+> pretty weird tho. Any idea what might be causing this?
+
+Using plain text environment can be funny about quotes, especially when
+dealing with values that come from another CONFIG option and so come
+=66rom Kconfig. One thing to look at, at least while debugging, is that
+"make u-boot-initial-env" will give you the resulting environment in
+u-boot-initial-env so you can check the output quicker than flashing
+cycles. If there's a quoting issue, commit b3087d21f022 ("env: Provide
+another work-around for unquoting fdtfile") may get you pointed in the
+right direction for a solution at least.
 
 --=20
 Tom
 
---u0QaSU2tmctKcN4/
+--g0EC2x7LXh8BV/Ez
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCacQoxwAKCRAr4qD1Cr/k
-CnoxAQDMMoyz12LcrLI9hzT/dfrWYsiJ1Tu8vvFojMXQBUZF/wD/W2u0Debiw0GQ
-X5KHa/sDdOfGmfOAEzK6a8pgmGUq+Qs=
-=NlVX
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCacQqiQAKCRAr4qD1Cr/k
+Cp0BAQD4UdI6cHhxe7i80khmWwSay67G1ePvXTUMbtfdIAsqfwEAzRrog5lxN2vQ
+Qhi1JF14jR7MoTr8FzfhGAKTSQjqsAg=
+=Ewtc
 -----END PGP SIGNATURE-----
 
---u0QaSU2tmctKcN4/--
+--g0EC2x7LXh8BV/Ez--
