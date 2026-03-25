@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A524FEA806
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 05:14:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E82FFEA806
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 05:14:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 689218352B;
-	Wed, 25 Mar 2026 06:14:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E973683AAB;
+	Wed, 25 Mar 2026 06:14:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="duI1gizf";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="MBf3Os+B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22F2A838BB; Wed, 25 Mar 2026 06:14:04 +0100 (CET)
+ id A0BBA83CD3; Wed, 25 Mar 2026 06:14:33 +0100 (CET)
 Received: from mx.nabladev.com (mx.nabladev.com
  [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BCC681E18
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 06:14:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B484283AAB
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 06:14:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 01D4010BB80; Wed, 25 Mar 2026 06:13:55 +0100 (CET)
+ with ESMTPSA id 6199210BB80; Wed, 25 Mar 2026 06:14:29 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1774415639;
+ s=dkim; t=1774415671;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=h+1uBTkVTchrcL/FDQCaByR0i35/+zI66cyCee8w1tg=;
- b=duI1gizfUkPBHRHGHINk9YP3SIu9gB/LzJLw3rl4wBaDGmCKoViVOqF74KWEiLnnoGeazs
- Pjfaf7NmrDXjXFoQn135ORJNlQDl6biFsOm7SG3eef9vyzsi6xcOS8YCHL+fBsPi8zWLXP
- PSncdrNfaHKhnJTEHXfe2cQB/T9/NwS3TnKnWIYXXFwANmpH98VhM8dTQKe/azkMwzalFO
- GPa7MBNw9OqAPub6gYa9Ga4fYZePuyCD2zBO6pUNzI7D52QZhjopdrh7YBPhE6BArQtrkJ
- i1JU4dlH/XBpIAQFKW37tLvyAJkSDwMO5MVXnDDborDtbDDat5SWMTBcy+GMZA==
-Message-ID: <ea7e374e-b947-c7ed-67d2-487343d12d06@nabladev.com>
-Date: Wed, 25 Mar 2026 06:13:29 +0100
+ bh=JlJpzQTI7/xJpg34Abko7OfQOmOVBQAsxOkim6cKF+A=;
+ b=MBf3Os+BR8LKtEQUJtkqz10RrW4Nu4jCOL73o2C2WEFtEig+CtWoj/kdzFZO7jEq+hRZkO
+ 6WdXuP8N7CFB9sYfBJy1lhpRlFNW6lc0DqCBzt0VWQ8ctTd+3fUflULdTFQrHIDxxWAC/u
+ f51myRsElt+a49IHBUK8+QGJp60O4Ay6xzfXc73yV19fLvPlXg5mclVFi4fP7+j32IItv1
+ QDTrQs3nOp/bmcze9lJv3yL0fpP/6B1uI8TNZZXewV9pvILQfANw+bZTjWI8fO+U6QVaQL
+ KByGsw0vmhOvoewwXMBA+CbgMv9jsbLvpkd4zbBmZIt16qTyvu92prXlIXoj1w==
+Message-ID: <919f34c7-2b8e-0359-f4ba-7d739dcfa3a2@nabladev.com>
+Date: Wed, 25 Mar 2026 06:14:24 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH] cmd: dhcp: Select CMD_BOOTP
+Subject: Re: [PATCH] net: bootp: Drop unused code
 Content-Language: en-US
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
@@ -54,9 +54,9 @@ Cc: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
  Michael Trimarchi <michael@amarulasolutions.com>,
  Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
  Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
-References: <20260325010659.279966-1-marek.vasut+renesas@mailbox.org>
+References: <20260325010716.280005-1-marek.vasut+renesas@mailbox.org>
 From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <20260325010659.279966-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260325010716.280005-1-marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -78,9 +78,9 @@ X-Virus-Status: Clean
 
 Hello Marek,
 
-On 25.03.26 02:06, Marek Vasut wrote:
-> The DHCP command depends on bootp_reset() function, which is implemented
-> only if CMD_BOOTP is enabled. Select CMD_BOOTP to satisfy the dependency.
+On 25.03.26 02:07, Marek Vasut wrote:
+> This code is surely unused and there are not even commented out
+> references to the function name. Drop the code.
 > 
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
@@ -97,16 +97,13 @@ On 25.03.26 02:06, Marek Vasut wrote:
 > Cc: Tom Rini <trini@konsulko.com>
 > Cc: u-boot@lists.denx.de
 > ---
->   cmd/Kconfig | 1 +
->   1 file changed, 1 insertion(+)
+>   net/bootp.c | 17 -----------------
+>   1 file changed, 17 deletions(-)
 
 Reviewed-by: Heiko Schocher <hs@nabladev.com>
 
-Thanks!
-
 bye,
 Heiko
-
 -- 
 Nabla Software Engineering
 HRB 40522 Augsburg
