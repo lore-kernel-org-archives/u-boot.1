@@ -4,50 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 096F1109C059
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 19:28:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FE58109C05B
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 19:31:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F96183FB6;
-	Wed, 25 Mar 2026 20:27:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=netcube.li
+	by phobos.denx.de (Postfix) with ESMTP id D147283DA6;
+	Wed, 25 Mar 2026 20:31:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=netcube.li header.i=@netcube.li header.b="yLMBUZuh";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Wkhw+qYZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C4AD840AE; Wed, 25 Mar 2026 20:27:28 +0100 (CET)
-Received: from mail.netcube.li (mail.netcube.li [173.249.15.149])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ id B26EA83DA7; Wed, 25 Mar 2026 20:31:33 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1AFE583FA7
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 20:27:26 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=netcube.li
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lukas.schmid@netcube.li
-dkim-signature: v=1; a=rsa-sha256; d=netcube.li; s=s1;
- c=relaxed/relaxed; q=dns/txt;
- h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References;
- bh=xefSctjPuuAIiDQIo2+rCMrMoGaL2bChSeJJ0RrE7XU=;
- b=yLMBUZuhFTgTFbdUf3wzeUdo/DWeVMWJyPPy+JuDoZoid3LZSo4q+zXCjxaNbFO/+L7xbr7kjbusLGF/OyX34DgsDbajg39L+VD3XqCrs/mQtnVmUe4K4EPjawGMQpcgitr+6pgmLE0zhW+FB7d4bKtlRUE0EQhgphakF5J72uY=
-Received: from lukas-hpz440workstation.lan.sk100508.local
- (193-80-178-216.hdsl.highway.telekom.at [193.80.178.216])
- by mail.netcube.li with ESMTPA ; Wed, 25 Mar 2026 20:27:25 +0100
-From: Lukas Schmid <lukas.schmid@netcube.li>
-To: Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
- Hans de Goede <hdegoede@redhat.com>,
- Jerome Forissier <jerome.forissier@arm.com>
-Cc: Lukas Schmid <lukas.schmid@netcube.li>,
-	u-boot@lists.denx.de
-Subject: [PATCH 6/6] sunxi: add support for NetCube Systems Nagami and
- associated carrier boards
-Date: Wed, 25 Mar 2026 20:26:13 +0100
-Message-ID: <20260325192628.750398-7-lukas.schmid@netcube.li>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260325192628.750398-1-lukas.schmid@netcube.li>
-References: <20260325192628.750398-1-lukas.schmid@netcube.li>
+ by phobos.denx.de (Postfix) with ESMTPS id 37D3083A41
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 20:31:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=e7f4=B2=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1774467090;
+ bh=E6M1ZUYUdT/ko/elH6apWiIa6YqqVJ40EKdZsn3jGQQ=;
+ b=Wkhw+qYZCTv72t3d7mcuTiO4jTn9NWnJkRVAzM9r3vHlJhTCqlnskm93B6a/dmxw4EQhCw1T7
+ 1LAEVe9I4Vv1Mm3UfJF016ENGBv1o+FuYG024tNiaxIcxarWV2AkPE66aotKr7G1W+G9M8rJGAX
+ nB2Rf18z0XmZLULQiBETCnN1e6irLG1dUABSMJXr0qGQxIMf/A6G14Xud8NtW3WPSsChenj5H8u
+ 5MUNlSsWAYrTW3kuqhzkx1PCNTAbNNFS2r/XdhficeUEiqYe4Sol5C+kB/WyV2lqm31LX36nkfI
+ L4iI16iPWscdh2VlWbgNi1NriPRfJIecyDESIw4Ec32g==
+X-Forward-Email-ID: 69c43810a686125d1eb84997
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.66
+X-Forward-Email-Version: 2.6.55
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <fb6ee141-3369-45e6-8320-e91f67ec6b1e@kwiboo.se>
+Date: Wed, 25 Mar 2026 20:31:25 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: rockchip: Guard call of board_early_init_f in SPL
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>
+References: <20260325190025.3428560-1-trini@konsulko.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20260325190025.3428560-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,201 +73,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-NetCube Systems Nagami is a system-on-module based on the Allwinner
-T113-S3 and T113-S4 series chips.
+Hi Tom,
 
-Its features include:
-* Dual ARM Cortex-A7 @ 1.2 GHz
-* 128/256 MiB DDR3 memory, 4 GiB eMMC
-* 10/100 Ethernet PHY
-* 1x USB 2.0 OTG, 1x USB 2.0 host
-* 1x SPI interface with HOLD/WP
-* Up to 5 UARTs (2 with RTS/CTS)
-* Up to 4 I2C interfaces
-* Up to 2 CAN 2.0B interfaces
-* Up to 2 I2S/PCM interfaces
-* Up to 1 SPDIF input and output
-* I2C extension interface with INT
+On 3/25/2026 8:00 PM, Tom Rini wrote:
+> Today, no platforms call board_early_init_f, and rockchip provides a
+> weak default function. Change this to not providing a weak function and
+> only call board_early_init_f if CONFIG_BOARD_EARLY_INIT_F is enabled.
+> This will allow any potential future needs to be taken care of, and make
+> future consolidation easier.
+> 
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+> Cc: Kever Yang <kever.yang@rock-chips.com>
+> ---
+>  arch/arm/mach-rockchip/spl.c | 8 ++------
+>  1 file changed, 2 insertions(+), 6 deletions(-)
+> 
+> diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
+> index e989c148079a..8026cc0abb8d 100644
+> --- a/arch/arm/mach-rockchip/spl.c
+> +++ b/arch/arm/mach-rockchip/spl.c
+> @@ -97,11 +97,6 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+>  	return MMCSD_MODE_RAW;
+>  }
+>  
+> -__weak int board_early_init_f(void)
+> -{
+> -	return 0;
+> -}
+> -
+>  __weak int arch_cpu_init(void)
+>  {
+>  	return 0;
+> @@ -111,7 +106,8 @@ void board_init_f(ulong dummy)
+>  {
+>  	int ret;
+>  
+> -	board_early_init_f();
+> +	if (IS_ENABLED(CONFIG_BOARD_EARLY_INIT_F))
 
-Add defconfigs for the basic carrier and keypad carrier variants,
-plus a secure-boot example defconfig for the basic carrier.
+This patch seem to introduce a change in behavior for chromebook bob and
+kevin, they do not seem to enable BOARD_EARLY_INIT_F, yet they have a
+board_early_init_f() in board/google/gru/gru.c no longer being called
+after this change.
 
-The basic carrier brings out the SD interface to a microSD slot, the
-USB host to USB-A, and USB OTG to micro-B. It has an Ethernet
-MagJack and exposes CAN, I2C, SPI, I2S and GPIO signals on pin
-headers.
+I do not have a chromebook_bob/kevin so I cannot help verify if this
+change break anything, hopefully Simon can help test/verify.
 
-The keypad carrier adds an I2C-connected PN532 NFC reader, a 4x3
-keypad, Ethernet with PoE, a USB mini-B diagnostics port, and a
-two-colour status LED.
+Regards,
+Jonas
 
-Signed-off-by: Lukas Schmid <lukas.schmid@netcube.li>
----
- .../netcube_nagami_basic_carrier_defconfig    | 43 +++++++++++++++
- ..._nagami_basic_carrier_secureboot_defconfig | 52 +++++++++++++++++++
- .../netcube_nagami_keypad_carrier_defconfig   | 43 +++++++++++++++
- 3 files changed, 138 insertions(+)
- create mode 100644 configs/netcube_nagami_basic_carrier_defconfig
- create mode 100644 configs/netcube_nagami_basic_carrier_secureboot_defconfig
- create mode 100644 configs/netcube_nagami_keypad_carrier_defconfig
-
-diff --git a/configs/netcube_nagami_basic_carrier_defconfig b/configs/netcube_nagami_basic_carrier_defconfig
-new file mode 100644
-index 00000000000..ab56479545d
---- /dev/null
-+++ b/configs/netcube_nagami_basic_carrier_defconfig
-@@ -0,0 +1,43 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_SUNXI=y
-+CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun8i-t113s-netcube-nagami-basic-carrier"
-+CONFIG_DRAM_CLK=792
-+CONFIG_SPL=y
-+CONFIG_DRAM_SUNXI_ODT_EN=0
-+CONFIG_DRAM_SUNXI_TPR0=0x004a2195
-+CONFIG_DRAM_SUNXI_TPR11=0x340000
-+CONFIG_DRAM_SUNXI_TPR12=0x46
-+CONFIG_DRAM_SUNXI_TPR13=0x34000100
-+CONFIG_MACH_SUN8I_R528=y
-+CONFIG_DRAM_ZQ=8092667
-+CONFIG_SUNXI_MINIMUM_DRAM_MB=128
-+CONFIG_MMC_SUNXI_SLOT_EXTRA=2
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_BOOTDELAY=1
-+CONFIG_PREBOOT="gpio set PD9"
-+# CONFIG_SYS_DEVICE_NULLDEV is not set
-+# CONFIG_SYS_MMCSD_FS_BOOT is not set
-+CONFIG_SYS_PROMPT="Nagami> "
-+CONFIG_CMD_EEPROM=y
-+CONFIG_SYS_I2C_EEPROM_BUS=1
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_USE_HOSTNAME=y
-+CONFIG_HOSTNAME="nagami"
-+CONFIG_VERSION_VARIABLE=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_MISC=y
-+CONFIG_NVMEM=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_SYS_I2C_EEPROM_ADDR=0x50
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_RMII=y
-+CONFIG_SUN8I_EMAC=y
-+CONFIG_CONS_INDEX=4
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_MUSB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-diff --git a/configs/netcube_nagami_basic_carrier_secureboot_defconfig b/configs/netcube_nagami_basic_carrier_secureboot_defconfig
-new file mode 100644
-index 00000000000..65bf42299f8
---- /dev/null
-+++ b/configs/netcube_nagami_basic_carrier_secureboot_defconfig
-@@ -0,0 +1,52 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_SUNXI=y
-+CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun8i-t113s-netcube-nagami-basic-carrier"
-+CONFIG_DRAM_CLK=792
-+CONFIG_SPL=y
-+CONFIG_DRAM_SUNXI_ODT_EN=0
-+CONFIG_DRAM_SUNXI_TPR0=0x004a2195
-+CONFIG_DRAM_SUNXI_TPR11=0x340000
-+CONFIG_DRAM_SUNXI_TPR12=0x46
-+CONFIG_DRAM_SUNXI_TPR13=0x34000100
-+CONFIG_MACH_SUN8I_R528=y
-+CONFIG_DRAM_ZQ=8092667
-+CONFIG_SUNXI_MINIMUM_DRAM_MB=128
-+CONFIG_MMC_SUNXI_SLOT_EXTRA=2
-+CONFIG_SPL_IMAGE_TYPE_SUNXI_TOC0=y
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_PRINT=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_BOOTDELAY=1
-+CONFIG_PREBOOT="gpio set PD9"
-+# CONFIG_SYS_DEVICE_NULLDEV is not set
-+CONFIG_SPL_MAX_SIZE=0x17fa0
-+CONFIG_SPL_LEGACY_IMAGE_FORMAT=y
-+# CONFIG_SYS_MMCSD_FS_BOOT is not set
-+CONFIG_SYS_PROMPT="Nagami> "
-+CONFIG_CMD_EEPROM=y
-+CONFIG_SYS_I2C_EEPROM_BUS=1
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_USE_HOSTNAME=y
-+CONFIG_HOSTNAME="nagami"
-+CONFIG_VERSION_VARIABLE=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_MISC=y
-+CONFIG_NVMEM=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_SYS_I2C_EEPROM_ADDR=0x50
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_RMII=y
-+CONFIG_SUN8I_EMAC=y
-+CONFIG_CONS_INDEX=4
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_MUSB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-diff --git a/configs/netcube_nagami_keypad_carrier_defconfig b/configs/netcube_nagami_keypad_carrier_defconfig
-new file mode 100644
-index 00000000000..c4d44e9dddc
---- /dev/null
-+++ b/configs/netcube_nagami_keypad_carrier_defconfig
-@@ -0,0 +1,43 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_SUNXI=y
-+CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun8i-t113s-netcube-nagami-keypad-carrier"
-+CONFIG_DRAM_CLK=792
-+CONFIG_SPL=y
-+CONFIG_DRAM_SUNXI_ODT_EN=0
-+CONFIG_DRAM_SUNXI_TPR0=0x004a2195
-+CONFIG_DRAM_SUNXI_TPR11=0x340000
-+CONFIG_DRAM_SUNXI_TPR12=0x46
-+CONFIG_DRAM_SUNXI_TPR13=0x34000100
-+CONFIG_MACH_SUN8I_R528=y
-+CONFIG_DRAM_ZQ=8092667
-+CONFIG_SUNXI_MINIMUM_DRAM_MB=128
-+CONFIG_MMC_SUNXI_SLOT_EXTRA=2
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_BOOTDELAY=1
-+CONFIG_PREBOOT="gpio set PD9"
-+# CONFIG_SYS_DEVICE_NULLDEV is not set
-+# CONFIG_SYS_MMCSD_FS_BOOT is not set
-+CONFIG_SYS_PROMPT="Nagami> "
-+CONFIG_CMD_EEPROM=y
-+CONFIG_SYS_I2C_EEPROM_BUS=1
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_USE_HOSTNAME=y
-+CONFIG_HOSTNAME="nagami"
-+CONFIG_VERSION_VARIABLE=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_MISC=y
-+CONFIG_NVMEM=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_SYS_I2C_EEPROM_ADDR=0x50
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_RMII=y
-+CONFIG_SUN8I_EMAC=y
-+CONFIG_CONS_INDEX=4
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_MUSB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
--- 
-2.47.3
-
+> +		board_early_init_f();
+>  
+>  	ret = spl_early_init();
+>  	if (ret) {
 
