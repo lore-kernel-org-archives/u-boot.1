@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FD04109C059
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 19:03:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CC1F109C058
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 19:03:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F8D783FEC;
+	by phobos.denx.de (Postfix) with ESMTP id 7281A84105;
 	Wed, 25 Mar 2026 20:00:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Vw0uLX3r";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Kb9rQiNS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BC7F84137; Wed, 25 Mar 2026 20:00:50 +0100 (CET)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id 6C854840F1; Wed, 25 Mar 2026 20:00:50 +0100 (CET)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 878B9840AE
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 20:00:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4940B8412A
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 20:00:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7d744d9acbeso64239a34.1
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 12:00:46 -0700 (PDT)
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-467161c4b7aso65138b6e.1
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 12:00:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774465245; x=1775070045; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1774465247; x=1775070047; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=UFGGo3PRmdLT5f2SFZupziXkYSHatzR3Xux7xSoTY2A=;
- b=Vw0uLX3r3PXcBVB8wJaB5wDO+hDWmwgK3RTbkt0EdWhJ5Picv0nZjWtojsK2VWbI+p
- A0sV0J9vYCI5RPL5QyYe13ov1AAFs2Wm+WyjLzV5nFkes+yFrtd3QJ/qH7OJ8KwWtG66
- UDOzn9p0tR7uxuPfYl5U3YU0GAmwHWmoVtf54=
+ bh=987/hDrolpWp1PQ0mKG7XN7YfHsnClFxfFJAXkNPBrk=;
+ b=Kb9rQiNSbXaq5/1Z3t4XB7X3jfB9bDuuhWOSkWlxzdIVrOr0WNZ7zO4fTstuVg8uPV
+ qWnnblTWyJBLrN5B5XTKF0f3C/YWGX5M7lly/S/DlwWtKirAX4NIHY8apML+k7l7u+6n
+ mCZ7UBcbswrcgho+mGLq0XSGNqAyfTBrdfTMM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774465245; x=1775070045;
+ d=1e100.net; s=20251104; t=1774465247; x=1775070047;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UFGGo3PRmdLT5f2SFZupziXkYSHatzR3Xux7xSoTY2A=;
- b=rtx/tL+vp8BBpL09dKBaCfkxkCRswGnxYi5aNOw28TwxB2wuM7fgnX19pxRJUi6Q90
- nhSSbOeOkVz53H+0r+ulbzaXvHItmKQKhgKITBTeG+gfPdpF1y3byAePRjCVx/te3+hY
- tWVtmA5GSIr/gXnSduCrxWT7csSrMtPuM8Wg9he0llMqUHkfUJBkPPuh+cfaPxjz0947
- JFxr4aFPY0l02qrkEXK5+9F+YXXfVwvTDWAt4ghr6ARgKA3KEUV16QsNdQ3HZWbUSl2X
- B5JbAfhgXFcfvwaNP37IWhdrdXlvBAdfE4x/7Sy5DeQVgn92CdVRW33iejRPoL/0DHF4
- Xzpw==
-X-Gm-Message-State: AOJu0YzjDDukTYEW92tEzeF6CAKxvNjJK4JNOm+2sbCSjzfxFCCdKI6/
- a0VBDi7Ihc1xLWKLRZy38mqM3S2/HiJpgtE0wjaKgkjun2seX2XImZchEyL4ayrJirChPNLPlC7
- JKYTsMow=
-X-Gm-Gg: ATEYQzz4b8V1IM2S8hRFnX6JZmtoLnpbgKExFTlvyRl+jz3E5MNJjF59mp5ZUiejHiH
- sakTQUaAXaKnnKCVhSQ4+dCPhiGjC75MfwQ4U+4ti5r//3PErLlYgXb8OKkPsTNWtdtBiL1uHn4
- nZSac0rk2uCuvyCNfeqou/+rNCyWZcpREzxw/9TVLM4WxzjXHmWlnUokLA+YIUtWkYKykVH4Ja9
- S5UbsvUJ7IGMG/VOeppv5W+atunIpr5u5akVSkBXRI1HoLhC7r9MWJMgWXtscpIq3vkpYEnd1UK
- VjBxbciEFLBX9Qn5V1dHFwcOnVWVuWjufYPesYrEoyWsIHRZJ+TeA6oaXWTUDi+qVjmGt4hj55W
- 4TLPS9dQDdAqEv2vYifeXUJ5xcAOgFNvZ/MZq7UqD1t3lOW9cHg2K20QPeC634leuZCNURJvrW+
- PEAvhA495mndwoDxsfO+QhBEjdilEPTq/hUrsZ/qDrDyeSZ65Vb9WYwg/yEgEfOOeCz9df2aYXD
- GZyvGi8g+UCs+j4cbkZ8fAZTJ8KVDpBwypf+Xw3UgF4kLSvmDk=
-X-Received: by 2002:a05:6830:374a:b0:7d7:f623:680a with SMTP id
- 46e09a7af769-7d9d6749b07mr2551318a34.2.1774465245309; 
- Wed, 25 Mar 2026 12:00:45 -0700 (PDT)
+ bh=987/hDrolpWp1PQ0mKG7XN7YfHsnClFxfFJAXkNPBrk=;
+ b=H7rcq/oHnfhEpI3a5ZSa7vCBcWpveF5XO5y0iZolGoqG3We6uLiztjwHbhdnktck09
+ pp+top6/LAByHG8Ii2LvN8FWzAhgB/Hd0NYjpGL9tc2CAdC5mKvgTgSJpb0NF0Qtqyae
+ P+0imzA4TtVeVtox+/BGuDC22r/DUmhi2TLRjfcnSGP5lDM6B98e51PZOPqvOCdnYkNd
+ DzE3AEubx0zJlBu26yW2nap7Js2TQG6G8xGXucKbGVb45KNu7sVilvxVix05kK5IjcLG
+ ePT/2+ZXa+vBdaMm6dtKE4AmM1vl7S4tixrivAZH1Sh2cLtCLtMB3SOmNDzmD9k1yFUU
+ 9JMA==
+X-Gm-Message-State: AOJu0YzyqzkdRp8lM1YYAxwMXZDZmH/EwoozY5dEueojpzWtv3umoOOT
+ twEsUIN8WOAcrNGBx/8SiUrZtBjafhZkgLcoWjzk1QuWzJnjoauIlptOOAdX5nw8hzaX4aJzSQW
+ YD5CBZzY=
+X-Gm-Gg: ATEYQzyk7OvK0ycgEbPOJYqb6MOfQbrVn+OQELYNc23ayU6svRlgf+ds7QabCEDgIiM
+ 2GyvEfssqw1IEwcIlI2JMhqtYduF46xSfa/Z2AYhoFQPlimdS+H6o5kciO9tJSebZW5LrU6qy0E
+ u9yiJTKA2dBlXI0xxyJoph7Lh+KQtHWN4qh556ahCFRX0tzbKMb7ZwSVfCUIlnYfUjXtS4AYEwc
+ YL3mV7XkxbTVoq7hxXNxR0oFZcikWu7gILIH75Ez5+9d/ddj83nHb9VIwKcjmT9bdx/kmBAW1eb
+ 8h12VT+nIbO0cDgNhyYGB+C7WJE3hRd6gMoata3/IlHVYL/XjW3NLKXRGhERaRA/4pYg+XEnGu2
+ YsKjtcnGu5Kq8V+quv8pXTncQZCRwzSnG6BVr9C0MlLspqrnz49FtpChoR3YHyuU0BJasiQUTV5
+ PK4nf7yBDu5/w/44LjG5/AXPfkBfzH/3Db/EKjUw2ADEmVL+cvoWkHDVP75qDMpBq26er3e8o4m
+ wjMfNmJng1pbfZXlIpKzam61dTMnoiZHZ+IqBNHS7cNvau3ACs=
+X-Received: by 2002:a05:6808:4f29:b0:467:1e7b:72cd with SMTP id
+ 5614622812f47-46a5c55621dmr2140777b6e.1.1774465246895; 
+ Wed, 25 Mar 2026 12:00:46 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d9e6fb2e11sm471911a34.3.2026.03.25.12.00.44
+ 586e51a60fabf-41cc7305739sm357454fac.0.2026.03.25.12.00.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Mar 2026 12:00:45 -0700 (PDT)
+ Wed, 25 Mar 2026 12:00:46 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH] mx6ullevk: Drop unnecessary BOARD_EARLY_INIT_F usage
-Date: Wed, 25 Mar 2026 13:00:43 -0600
-Message-ID: <20260325190043.3428756-1-trini@konsulko.com>
+Cc: Oleh Kravchenko <oleg@kaa.org.ua>
+Subject: [PATCH] o4-imx6ull-nano: Drop unnecessary BOARD_EARLY_INIT_F usage
+Date: Wed, 25 Mar 2026 13:00:45 -0600
+Message-ID: <20260325190045.3428772-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -100,22 +99,17 @@ option and so not needing an empty function.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Stefano Babic <sbabic@nabladev.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Oleh Kravchenko <oleg@kaa.org.ua>
 ---
- board/nxp/mx6ullevk/mx6ullevk.c           | 5 -----
- configs/mx6ull_14x14_evk_defconfig        | 1 -
- configs/mx6ull_14x14_evk_plugin_defconfig | 1 -
- configs/mx6ulz_14x14_evk_defconfig        | 1 -
- 4 files changed, 8 deletions(-)
+ board/out4/o4-imx6ull-nano/o4-imx6ull-nano.c | 5 -----
+ 1 file changed, 5 deletions(-)
 
-diff --git a/board/nxp/mx6ullevk/mx6ullevk.c b/board/nxp/mx6ullevk/mx6ullevk.c
-index 189eddefea3f..7a02b571c563 100644
---- a/board/nxp/mx6ullevk/mx6ullevk.c
-+++ b/board/nxp/mx6ullevk/mx6ullevk.c
-@@ -41,11 +41,6 @@ int mmc_map_to_kernel_blk(int devno)
- 	return devno;
+diff --git a/board/out4/o4-imx6ull-nano/o4-imx6ull-nano.c b/board/out4/o4-imx6ull-nano/o4-imx6ull-nano.c
+index 10469aecd0bb..b55e92fb0514 100644
+--- a/board/out4/o4-imx6ull-nano/o4-imx6ull-nano.c
++++ b/board/out4/o4-imx6ull-nano/o4-imx6ull-nano.c
+@@ -16,11 +16,6 @@ int dram_init(void)
+ 	return 0;
  }
  
 -int board_early_init_f(void)
@@ -123,45 +117,9 @@ index 189eddefea3f..7a02b571c563 100644
 -	return 0;
 -}
 -
- #ifdef CONFIG_FEC_MXC
- static int setup_fec(int fec_id)
+ static int setup_fec_clock(void)
  {
-diff --git a/configs/mx6ull_14x14_evk_defconfig b/configs/mx6ull_14x14_evk_defconfig
-index 36c342bcfe2f..983b8aeb407c 100644
---- a/configs/mx6ull_14x14_evk_defconfig
-+++ b/configs/mx6ull_14x14_evk_defconfig
-@@ -16,7 +16,6 @@ CONFIG_SUPPORT_RAW_INITRD=y
- CONFIG_USE_BOOTCOMMAND=y
- CONFIG_BOOTCOMMAND="run findfdt;mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi"
- CONFIG_SYS_PBSIZE=532
--CONFIG_BOARD_EARLY_INIT_F=y
- CONFIG_HUSH_PARSER=y
- CONFIG_SYS_MAXARGS=32
- CONFIG_CMD_BOOTZ=y
-diff --git a/configs/mx6ull_14x14_evk_plugin_defconfig b/configs/mx6ull_14x14_evk_plugin_defconfig
-index 28961f5a13f9..c88d18dbf9be 100644
---- a/configs/mx6ull_14x14_evk_plugin_defconfig
-+++ b/configs/mx6ull_14x14_evk_plugin_defconfig
-@@ -17,7 +17,6 @@ CONFIG_SUPPORT_RAW_INITRD=y
- CONFIG_USE_BOOTCOMMAND=y
- CONFIG_BOOTCOMMAND="run findfdt;mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi"
- CONFIG_SYS_PBSIZE=532
--CONFIG_BOARD_EARLY_INIT_F=y
- CONFIG_HUSH_PARSER=y
- CONFIG_SYS_MAXARGS=32
- CONFIG_CMD_BOOTZ=y
-diff --git a/configs/mx6ulz_14x14_evk_defconfig b/configs/mx6ulz_14x14_evk_defconfig
-index 9db0251a8a0f..8f4a92e4a5f7 100644
---- a/configs/mx6ulz_14x14_evk_defconfig
-+++ b/configs/mx6ulz_14x14_evk_defconfig
-@@ -16,7 +16,6 @@ CONFIG_SUPPORT_RAW_INITRD=y
- CONFIG_USE_BOOTCOMMAND=y
- CONFIG_BOOTCOMMAND="run findfdt;mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi"
- CONFIG_SYS_PBSIZE=532
--CONFIG_BOARD_EARLY_INIT_F=y
- CONFIG_HUSH_PARSER=y
- CONFIG_SYS_MAXARGS=32
- CONFIG_CMD_BOOTZ=y
+ 	if (IS_ENABLED(CONFIG_FEC_MXC) && !IS_ENABLED(CONFIG_CLK_IMX6Q)) {
 -- 
 2.43.0
 
