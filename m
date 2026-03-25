@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D0F3109C059
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 19:01:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C2FC109C059
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 19:01:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E42B83FD3;
+	by phobos.denx.de (Postfix) with ESMTP id D9BBE8406D;
 	Wed, 25 Mar 2026 20:00:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="G/hny2+8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mkvWXoxp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08A9A83FC6; Wed, 25 Mar 2026 20:00:31 +0100 (CET)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id BF5B683AAB; Wed, 25 Mar 2026 20:00:33 +0100 (CET)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D197983F60
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 20:00:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A60B3838BB
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 20:00:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7d9c98e437cso124997a34.0
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 12:00:28 -0700 (PDT)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7d7f592b8beso118658a34.1
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 12:00:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774465227; x=1775070027; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1774465229; x=1775070029; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=MCLjJTnbX7Ov0OE5hw+rtvI/0iJAL1M3jDdYvML7vCo=;
- b=G/hny2+8SXjZmEtiMQo4j+wfVbN+mCWt4BOBiY+zjoW0a238WQuHVTvaLZpD2ZASxU
- krqIb+2KFwCcybE072L68ZxptyQQigMw7NWuuJQatbqmXqclX/X4cOskd7QUSIRP+N4b
- S+xGMmvNBI4d22MbbSBCzH/NhZjvKcRYTb1kw=
+ bh=0OIPNbfNxnMicZyifpKc9retvzGF6QXsTnXJHM708zs=;
+ b=mkvWXoxpWRy+Dp5+FIOny/vT7uHZiJmxEpT4MuTZDwH+Grb7pFgXIvvUnXh5o8Z4qk
+ 9I11vsGLJYBaOxWhXCJJHa4Qv1ZFX8txCWCohzi2bi/rzXa9jGxGDEaLC3VlvIYXFDm8
+ muIFlaouEfn2TYtrn8KeXtzO81Y3zcE6d6KuM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774465227; x=1775070027;
+ d=1e100.net; s=20251104; t=1774465229; x=1775070029;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MCLjJTnbX7Ov0OE5hw+rtvI/0iJAL1M3jDdYvML7vCo=;
- b=ZFDuqeqmONgqFBLkvs1L66mY9OUya62NFSaQzK4JtQOJwCkNXDkrvHHxXORZWuPQ1D
- SdmQPQN6l1D1BCGSNE2yJss5kP5XTtJnsNL6PnvDIEfD2p1FVzMRz+KBMJ2LJixHDenJ
- HlWFoGr0MwLL0Ey5ZozudxCjcLkCV+t+abB2V4qzcHvzK2Nq3OS1abdHDrRKfxtVg7NU
- MWnkYdCP1qXsRwTL++TtFWx8rl4aDkaFEPcZUp0iMAWYTYtzEg6EpYzmTgv7jB3K4eI0
- rAswRVwU1T3xpqFukdtS12NT91I0eId2FOvGV2ZttQeBCM0HpCJ5FGHT4zNhiAmmQkyL
- FuxQ==
-X-Gm-Message-State: AOJu0YwQBpbrecm77sxKZ17y+cVIweeJEDC1RhAeugbiKbXlxG/KYKtR
- expj0c+t/r6Y+CbTmSo0A4o5GsYgycAocuVfM5zyRTUtmMVZ1uVymKrtRRUKOMweiot5nJy1idv
- k2ZV5p9o=
-X-Gm-Gg: ATEYQzzOYjP2IdYtuh9Jg7UfDS5N6p0wYjyAtQAQIJNp+Ph4po2CjffQ0SHXQU4lKW8
- NxvPAh+NYsKMDTQF/jqYle3sJuBai2GXcgpP/qcVtWPd6P0Xhh+D8fbuGWVXFYxu6/VlSx3Cj/4
- Q0/AOCXMfAQRmZCe2ybtDXYs3uPwvXRKdbOMUzdWt2m7wPteV4wgRW9kzVKLoZ/+yk0LewXIp9z
- g69kTvK/Sv1Z+w9oUoonzandHKrGKyJ5IVtfRQqAIwbOLo9+3oHCLFJSHdsAxnJg1cNsjIGPwWT
- qndn6SJy5MvkuwM7yEYKjMxqhW1V/VdJWMnNocE98Ow72hA4QG8rRFo43TegPMRAB8Xt9nPXBq+
- A/429K9XptZfSWTlyuzlqeNT9VstBS0r50EnE5rUAiya8gxdXm5gXbqCcPXU9TJmHRG4oDd3Ia5
- qzlOLrr3B4cki9tPvO4PpnnyCQ22YGyD2VZYmsnyL8qAxiv55+5nyeGSUBIX8PkYV0GccTxtcwd
- sOZ7DuPNniDQ/PF+6sFiklax5embqAU5bBzGbcBGKKYlD2F/z8=
-X-Received: by 2002:a05:6820:168c:b0:67d:ef28:8dca with SMTP id
- 006d021491bc7-67dff3dd541mr2540109eaf.24.1774465227407; 
- Wed, 25 Mar 2026 12:00:27 -0700 (PDT)
+ bh=0OIPNbfNxnMicZyifpKc9retvzGF6QXsTnXJHM708zs=;
+ b=fB0paywrkeAGYj5q0/NdO7Uiqv6uEKUaPxvPemgyfS/bWXsv0VDraBXwD7lFlFICTv
+ qmiBEUR7IcHVOTx/irx9QrXu2RGNMpvpMYO//QASETpz7/v/UP+8g9/YGM5Dt162ocII
+ nNmxhLPK+Qnp/DpT0Q5WWpY2P4m6I+GuWuiX3aQGpkYNvP12sqJrhnSo8Ixs7w8Ep2RK
+ nmAL33BBGri9hKTyopxq0xWxHbCw7PtB8bF5QqaLGqWJEzrZd1crZgMNCjSDRQhF6WRC
+ 3mXnOHlYfk/CWBLkybrNIsUyjnX2mLIWVP0CwrbW0OG5g72SzkUVPfg7HdKm62/wwY9m
+ 2kCg==
+X-Gm-Message-State: AOJu0Yw+S7iYWWzTXB7icYC5CNi62x58VwVplh6VoNN4jzzb76/j3HgJ
+ qV8qIumcJP/2C4Ozq4oXCa/XedEAnBngiIdqjtUscuRPtdRk3keyqKApsFXGtXVwfKDu8Bsh9hw
+ Jhan66uQ=
+X-Gm-Gg: ATEYQzydbQIPUgONFzytAYGRLuwwGtrtawx8p5669JEFg769aHx79RZA7QGzr8THSp+
+ KoFdA3CZhd+6lQL1pQAjAbeJMFHEU2teOW3ecQ/gi1ZIhgLfQA1uxAWDMQXndHxS4N1UEYEPOrm
+ qLbEwAmDFIDfYZGuLpxP4ving2VKQXr3Cssauu4IsLiHwor0gH/c5e3L+Cjk0hCtJF3ZYvLe/dD
+ sJcZyA2djl+YOIGSmvNOBfK7Tr+/6kQeAbIXthcnWM1GACuLEM/u7toQR3mCYyEzRchhr8nPWi/
+ Dmq4+FJrwrnbfVCeMiOVSxh9jsrzDK++Z1+1aakptACyR92K0cdkw6iaL/5N9p9+P+Ee8cf/TN/
+ QrJZws+ZjsesD3OQICfeRNL/lroD48TJzp8SK4tgLOmMQ+Y8GjYXcgaRjErAcn3dyXw/MUrnH6n
+ BNnYaguKoz2TdzLFNfO0ILN/yA38s4o8mwQTQw0l7bxBqwK/Z429YxYjq+4DYWdhBH2odA+f7OV
+ 43V5CkRYg0EKBKOe4Usfa4f+0qeGjr1kNHlgl+fY/69Qdt8jLo=
+X-Received: by 2002:a05:6830:3487:b0:7d7:f5c6:9fa3 with SMTP id
+ 46e09a7af769-7d9d67995afmr2447512a34.8.1774465229339; 
+ Wed, 25 Mar 2026 12:00:29 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-67e0a9e18desm550887eaf.3.2026.03.25.12.00.26
+ 46e09a7af769-7d9e701545bsm409005a34.11.2026.03.25.12.00.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Mar 2026 12:00:27 -0700 (PDT)
+ Wed, 25 Mar 2026 12:00:29 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>
-Subject: [PATCH] arm: rockchip: Guard call of board_early_init_f in SPL
-Date: Wed, 25 Mar 2026 13:00:25 -0600
-Message-ID: <20260325190025.3428560-1-trini@konsulko.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Matteo Lisi <matteo.lisi@engicam.com>,
+ Dillon Min <dillon.minfei@gmail.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH] arm: stm32mp: Drop unnecessary BOARD_EARLY_INIT_F usage
+Date: Wed, 25 Mar 2026 13:00:27 -0600
+Message-ID: <20260325190027.3428596-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -94,46 +98,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Today, no platforms call board_early_init_f, and rockchip provides a
-weak default function. Change this to not providing a weak function and
-only call board_early_init_f if CONFIG_BOARD_EARLY_INIT_F is enabled.
-This will allow any potential future needs to be taken care of, and make
-future consolidation easier.
+All of these platforms enable CONFIG_BOARD_EARLY_INIT_F and then have a
+do-nothing board_early_init_f function. Change to not enabling the
+option and so not needing an empty function.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: Kever Yang <kever.yang@rock-chips.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>
+Cc: Matteo Lisi <matteo.lisi@engicam.com>
+Cc: Dillon Min <dillon.minfei@gmail.com>
+Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- arch/arm/mach-rockchip/spl.c | 8 ++------
- 1 file changed, 2 insertions(+), 6 deletions(-)
+ arch/arm/mach-stm32mp/stm32mp1/spl.c         | 15 ++++++---------
+ board/engicam/stm32mp1/spl.c                 |  6 ------
+ board/st/stm32h750-art-pi/stm32h750-art-pi.c |  5 -----
+ configs/stm32h750-art-pi_defconfig           |  1 -
+ 4 files changed, 6 insertions(+), 21 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
-index e989c148079a..8026cc0abb8d 100644
---- a/arch/arm/mach-rockchip/spl.c
-+++ b/arch/arm/mach-rockchip/spl.c
-@@ -97,11 +97,6 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
- 	return MMCSD_MODE_RAW;
+diff --git a/arch/arm/mach-stm32mp/stm32mp1/spl.c b/arch/arm/mach-stm32mp/stm32mp1/spl.c
+index e63bdaaf42fd..d2e41b8e65ff 100644
+--- a/arch/arm/mach-stm32mp/stm32mp1/spl.c
++++ b/arch/arm/mach-stm32mp/stm32mp1/spl.c
+@@ -90,11 +90,6 @@ void spl_display_print(void)
  }
+ #endif
  
 -__weak int board_early_init_f(void)
 -{
 -	return 0;
 -}
 -
- __weak int arch_cpu_init(void)
+ uint32_t stm32mp_get_dram_size(void)
+ {
+ 	struct ram_info ram;
+@@ -204,10 +199,12 @@ void board_init_f(ulong dummy)
+ 	/* enable console uart printing */
+ 	preloader_console_init();
+ 
+-	ret = board_early_init_f();
+-	if (ret) {
+-		log_debug("board_early_init_f() failed: %d\n", ret);
+-		hang();
++	if (IS_ENABLED(CONFIG_BOARD_EARLY_INIT_F)) {
++		ret = board_early_init_f();
++		if (ret) {
++			log_debug("board_early_init_f() failed: %d\n", ret);
++			hang();
++		}
+ 	}
+ 
+ 	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+diff --git a/board/engicam/stm32mp1/spl.c b/board/engicam/stm32mp1/spl.c
+index bb2bd446aa8c..19e5ab0180f9 100644
+--- a/board/engicam/stm32mp1/spl.c
++++ b/board/engicam/stm32mp1/spl.c
+@@ -15,9 +15,3 @@ void board_vddcore_init(u32 voltage_mv)
+ 	if (IS_ENABLED(CONFIG_PMIC_STPMIC1) && CONFIG_IS_ENABLED(POWER))
+ 		opp_voltage_mv = voltage_mv;
+ }
+-
+-int board_early_init_f(void)
+-{
+-	return 0;
+-}
+-
+diff --git a/board/st/stm32h750-art-pi/stm32h750-art-pi.c b/board/st/stm32h750-art-pi/stm32h750-art-pi.c
+index 244bb5eefb3a..8b1b23337790 100644
+--- a/board/st/stm32h750-art-pi/stm32h750-art-pi.c
++++ b/board/st/stm32h750-art-pi/stm32h750-art-pi.c
+@@ -32,11 +32,6 @@ int dram_init_banksize(void)
+ 	return 0;
+ }
+ 
+-int board_early_init_f(void)
+-{
+-	return 0;
+-}
+-
+ int board_late_init(void)
  {
  	return 0;
-@@ -111,7 +106,8 @@ void board_init_f(ulong dummy)
- {
- 	int ret;
- 
--	board_early_init_f();
-+	if (IS_ENABLED(CONFIG_BOARD_EARLY_INIT_F))
-+		board_early_init_f();
- 
- 	ret = spl_early_init();
- 	if (ret) {
+diff --git a/configs/stm32h750-art-pi_defconfig b/configs/stm32h750-art-pi_defconfig
+index 971d5c00d88f..0d0dca2511b7 100644
+--- a/configs/stm32h750-art-pi_defconfig
++++ b/configs/stm32h750-art-pi_defconfig
+@@ -24,7 +24,6 @@ CONFIG_DEFAULT_FDT_FILE="stm32h750i-art-pi"
+ CONFIG_SYS_CBSIZE=256
+ CONFIG_SYS_PBSIZE=282
+ # CONFIG_DISPLAY_CPUINFO is not set
+-CONFIG_BOARD_EARLY_INIT_F=y
+ # CONFIG_BOARD_INIT is not set
+ CONFIG_BOARD_LATE_INIT=y
+ CONFIG_SYS_PROMPT="U-Boot > "
 -- 
 2.43.0
 
