@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CC1F109C058
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 19:03:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2308109C059
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 19:03:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7281A84105;
-	Wed, 25 Mar 2026 20:00:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C7FD58413A;
+	Wed, 25 Mar 2026 20:00:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Kb9rQiNS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lMJQs/HA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C854840F1; Wed, 25 Mar 2026 20:00:50 +0100 (CET)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id 9564684137; Wed, 25 Mar 2026 20:00:52 +0100 (CET)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4940B8412A
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 20:00:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E345A84132
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 20:00:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-467161c4b7aso65138b6e.1
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 12:00:48 -0700 (PDT)
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-46808125c65so53754b6e.2
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 12:00:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774465247; x=1775070047; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1774465248; x=1775070048; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=987/hDrolpWp1PQ0mKG7XN7YfHsnClFxfFJAXkNPBrk=;
- b=Kb9rQiNSbXaq5/1Z3t4XB7X3jfB9bDuuhWOSkWlxzdIVrOr0WNZ7zO4fTstuVg8uPV
- qWnnblTWyJBLrN5B5XTKF0f3C/YWGX5M7lly/S/DlwWtKirAX4NIHY8apML+k7l7u+6n
- mCZ7UBcbswrcgho+mGLq0XSGNqAyfTBrdfTMM=
+ bh=Bk5EkhXR2cl4+zOsKwBGCy4YOcynAFNgBDiyUu9jzYE=;
+ b=lMJQs/HA+UEWD8/F01Dc+K0wGeHP+Ja306+FeZJWinPfKeYp9TA1HSuXezOQsog9Bq
+ ftwg4pscHHcgT9NAKlXXTpwX0NSAzZzFtjzR07N3y7jrMKp6q2iMpun6GUysFryGG6eb
+ Sl2FsKP08YcH+xkIbLPVuq8+e8d9CVhKxALnw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774465247; x=1775070047;
+ d=1e100.net; s=20251104; t=1774465248; x=1775070048;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=987/hDrolpWp1PQ0mKG7XN7YfHsnClFxfFJAXkNPBrk=;
- b=H7rcq/oHnfhEpI3a5ZSa7vCBcWpveF5XO5y0iZolGoqG3We6uLiztjwHbhdnktck09
- pp+top6/LAByHG8Ii2LvN8FWzAhgB/Hd0NYjpGL9tc2CAdC5mKvgTgSJpb0NF0Qtqyae
- P+0imzA4TtVeVtox+/BGuDC22r/DUmhi2TLRjfcnSGP5lDM6B98e51PZOPqvOCdnYkNd
- DzE3AEubx0zJlBu26yW2nap7Js2TQG6G8xGXucKbGVb45KNu7sVilvxVix05kK5IjcLG
- ePT/2+ZXa+vBdaMm6dtKE4AmM1vl7S4tixrivAZH1Sh2cLtCLtMB3SOmNDzmD9k1yFUU
- 9JMA==
-X-Gm-Message-State: AOJu0YzyqzkdRp8lM1YYAxwMXZDZmH/EwoozY5dEueojpzWtv3umoOOT
- twEsUIN8WOAcrNGBx/8SiUrZtBjafhZkgLcoWjzk1QuWzJnjoauIlptOOAdX5nw8hzaX4aJzSQW
- YD5CBZzY=
-X-Gm-Gg: ATEYQzyk7OvK0ycgEbPOJYqb6MOfQbrVn+OQELYNc23ayU6svRlgf+ds7QabCEDgIiM
- 2GyvEfssqw1IEwcIlI2JMhqtYduF46xSfa/Z2AYhoFQPlimdS+H6o5kciO9tJSebZW5LrU6qy0E
- u9yiJTKA2dBlXI0xxyJoph7Lh+KQtHWN4qh556ahCFRX0tzbKMb7ZwSVfCUIlnYfUjXtS4AYEwc
- YL3mV7XkxbTVoq7hxXNxR0oFZcikWu7gILIH75Ez5+9d/ddj83nHb9VIwKcjmT9bdx/kmBAW1eb
- 8h12VT+nIbO0cDgNhyYGB+C7WJE3hRd6gMoata3/IlHVYL/XjW3NLKXRGhERaRA/4pYg+XEnGu2
- YsKjtcnGu5Kq8V+quv8pXTncQZCRwzSnG6BVr9C0MlLspqrnz49FtpChoR3YHyuU0BJasiQUTV5
- PK4nf7yBDu5/w/44LjG5/AXPfkBfzH/3Db/EKjUw2ADEmVL+cvoWkHDVP75qDMpBq26er3e8o4m
- wjMfNmJng1pbfZXlIpKzam61dTMnoiZHZ+IqBNHS7cNvau3ACs=
-X-Received: by 2002:a05:6808:4f29:b0:467:1e7b:72cd with SMTP id
- 5614622812f47-46a5c55621dmr2140777b6e.1.1774465246895; 
- Wed, 25 Mar 2026 12:00:46 -0700 (PDT)
+ bh=Bk5EkhXR2cl4+zOsKwBGCy4YOcynAFNgBDiyUu9jzYE=;
+ b=OBIAXR2WXaT7S7dWkOCS9anlOPvvLDI5rCPEzKMv2mQPTQ5mGqQDNfANwOWhhe/Fxf
+ oA40VXeiCSNAoLaaidYFPhfi/oCW8KWE6M2fwdsS1fPvWcifkqVDGx2mQmzXZm1pmoCt
+ ZJqxylCjN1sI7Dk38/39N1G9L/m7R8RzSEQqkKVtwbXMflh+Pbl06CBn5n4qiHQQLdQR
+ 5dIWiYximiEXbvKas6jmC583Wz5gtuzf4z+Qk5zuAhbfInNndBdFEvXfdC/jrHWC9mHs
+ GmDV+eWdDFq6zMMXjnbzYhxgJnfGPPK8ZQnuHq5OAvIsbsp4Ut4EayOLZzh9ihrklLE8
+ mTjw==
+X-Gm-Message-State: AOJu0Yyrdd5YCRItJnIRZISlLtCG0+z7oZPiE6Ptz5QNAHF/Jbbl5h2i
+ HvRPCjmeWNUXEuu9KB6Mg5eBER4kRMqhlupzl4hTuoyU+J5pRmCijf3Hi3bDd6G20JxQgQz6G9l
+ qA3IvGPI=
+X-Gm-Gg: ATEYQzySlr0tK54MQlxmeouZosrOLRw9AogAuD8IiVQNUWDx+b5d1H45PUhtxjzZZrQ
+ ECjDETc/0dLHNYR4n4wMzoPjJWtGR9FwQWnAGk+n6NJX+qHd+sPX9VXSh0kAyABaUiCMgn7Tvsc
+ zgQq/WnbJNUYKVpxf0rXv4OYqB4KktTDWqRHzlS/zUcd7CdFU/pNRowt26MkLtz+dq29zSFEFVD
+ SzjOGAnsFVrlB8PlPgEXJ2tkBQMtt2sTalBIWfNGum2GV7H1dc2c48olxa6ckvdhGabNNTM80Az
+ WQbi019WdwyUgmQjdBERm+tEql2XDsXMS9SL8egES6/wb5Cakyx6H7rDuO+f3KCokt/3JCv0IBR
+ qMYmYPVol+e7qoIsSw0EQXkrM9uZ6UHomI6FRNiqqU1XLCqxI+y2P6IyQ5al/xtYmvqCFXQpeFU
+ cl/q0bjZMV5slht6XAzuUlNM2KQbbRgVSPIR820G7f6I8T7Rlt2P/XXcwCT7opNokPEpTobOh69
+ gAnCMAcIuZexUQ4L74K1+20OgsRylzgeD3v1B5knS40lmbvsl4=
+X-Received: by 2002:a05:6808:1582:b0:467:14c7:a8ba with SMTP id
+ 5614622812f47-46a5c6e70d1mr2414354b6e.32.1774465248498; 
+ Wed, 25 Mar 2026 12:00:48 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41cc7305739sm357454fac.0.2026.03.25.12.00.46
+ 46e09a7af769-7d9e71f6815sm407607a34.15.2026.03.25.12.00.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Mar 2026 12:00:46 -0700 (PDT)
+ Wed, 25 Mar 2026 12:00:48 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Oleh Kravchenko <oleg@kaa.org.ua>
-Subject: [PATCH] o4-imx6ull-nano: Drop unnecessary BOARD_EARLY_INIT_F usage
-Date: Wed, 25 Mar 2026 13:00:45 -0600
-Message-ID: <20260325190045.3428772-1-trini@konsulko.com>
+Cc: Angus Ainslie <angus@akkea.ca>,
+	kernel@puri.sm
+Subject: [PATCH] librem5: Drop unnecessary BOARD_EARLY_INIT_F usage
+Date: Wed, 25 Mar 2026 13:00:47 -0600
+Message-ID: <20260325190047.3428806-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -99,27 +100,55 @@ option and so not needing an empty function.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Oleh Kravchenko <oleg@kaa.org.ua>
+Cc: Angus Ainslie <angus@akkea.ca>
+Cc: kernel@puri.sm
 ---
- board/out4/o4-imx6ull-nano/o4-imx6ull-nano.c | 5 -----
- 1 file changed, 5 deletions(-)
+ board/purism/librem5/librem5.c | 5 -----
+ board/purism/librem5/spl.c     | 2 --
+ configs/librem5_defconfig      | 1 -
+ 3 files changed, 8 deletions(-)
 
-diff --git a/board/out4/o4-imx6ull-nano/o4-imx6ull-nano.c b/board/out4/o4-imx6ull-nano/o4-imx6ull-nano.c
-index 10469aecd0bb..b55e92fb0514 100644
---- a/board/out4/o4-imx6ull-nano/o4-imx6ull-nano.c
-+++ b/board/out4/o4-imx6ull-nano/o4-imx6ull-nano.c
-@@ -16,11 +16,6 @@ int dram_init(void)
- 	return 0;
- }
+diff --git a/board/purism/librem5/librem5.c b/board/purism/librem5/librem5.c
+index a2bc0c08f0b5..3640ef232c8c 100644
+--- a/board/purism/librem5/librem5.c
++++ b/board/purism/librem5/librem5.c
+@@ -31,11 +31,6 @@
+ #include <usb/xhci.h>
+ #include "librem5.h"
  
 -int board_early_init_f(void)
 -{
 -	return 0;
 -}
 -
- static int setup_fec_clock(void)
+ #if IS_ENABLED(CONFIG_LOAD_ENV_FROM_MMC_BOOT_PARTITION)
+ uint board_mmc_get_env_part(struct mmc *mmc)
  {
- 	if (IS_ENABLED(CONFIG_FEC_MXC) && !IS_ENABLED(CONFIG_CLK_IMX6Q)) {
+diff --git a/board/purism/librem5/spl.c b/board/purism/librem5/spl.c
+index 568224f97324..a104ee5c2aab 100644
+--- a/board/purism/librem5/spl.c
++++ b/board/purism/librem5/spl.c
+@@ -547,8 +547,6 @@ void board_init_f(ulong dummy)
+ 	gpio_direction_output(WIFI_EN, 1);
+ #endif
+ 
+-	board_early_init_f();
+-
+ 	timer_init();
+ 
+ 	preloader_console_init();
+diff --git a/configs/librem5_defconfig b/configs/librem5_defconfig
+index e6ad27ed1bf8..d9d32bf5a50a 100644
+--- a/configs/librem5_defconfig
++++ b/configs/librem5_defconfig
+@@ -36,7 +36,6 @@ CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_SYS_PBSIZE=1050
+ CONFIG_SYS_CONSOLE_IS_IN_ENV=y
+ # CONFIG_SYS_DEVICE_NULLDEV is not set
+-CONFIG_BOARD_EARLY_INIT_F=y
+ CONFIG_BOARD_LATE_INIT=y
+ CONFIG_SPL_MAX_SIZE=0x25000
+ CONFIG_SPL_BOARD_INIT=y
 -- 
 2.43.0
 
