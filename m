@@ -4,77 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CD37FEC0FC
-	for <u-boot@archiver.kernel.org>; Tue, 24 Mar 2026 19:45:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEDCEFEC0F4
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 01:07:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B20B383A1B;
-	Tue, 24 Mar 2026 20:45:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id A95CA8352B;
+	Wed, 25 Mar 2026 02:07:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QhJ9iFS0";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Ju3/8nO0";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="EMtBdkdP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3A7083A91; Tue, 24 Mar 2026 20:45:47 +0100 (CET)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 35A3E838BB; Wed, 25 Mar 2026 02:07:11 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A634A83981
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 20:45:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B9A3A81E18
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 02:07:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7d75ed779bfso1305563a34.2
- for <u-boot@lists.denx.de>; Tue, 24 Mar 2026 12:45:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1774381544; x=1774986344; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=r9+HDK5733+jjeoxynKyW3vVuU3i5ZQsZ4OKGA2zjUE=;
- b=QhJ9iFS0cKp54HOeBHtkbEhrsAMjDW2gmxmMTbUjw8f4xpxstJnFENpb9L4CcrsDKk
- 9iU8ECeJuAfRJnWYv6d/0nYJCk2ceBej2ij6eSpdvi1MYf09unh/FrdDRahS/e7BkyTf
- /sbKScJKqUaClhBFhwOjShn2oBBYEiNkXOYD4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774381544; x=1774986344;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=r9+HDK5733+jjeoxynKyW3vVuU3i5ZQsZ4OKGA2zjUE=;
- b=aCXyMG8mS/yh1nxRoxAoV6RTIM8jm6g+32mkabC0YBJdj05p+75+bKAwl6RtR3Qw+I
- npBbuqNb+oIV6ANbVHSWFvutf2UuBSho8yHJVGzUw9an04IhvpJEhpqyTYJ6NZYQ7DyF
- 5iRHHkY0rim0spK+/AhBNnvjCVpeT+/vvEGAG20bxy73TJi2Nfvn7KSShZrkc9andt1q
- 7fj0Se6iCLolnvgaUCGUofAX6Zksztn7owlq9jKQ7RV3D7pKKhzE2QPaHqys581GYvNu
- 6S21bsdEp19pP87GVR68AjvCEgljrCfWBUZHG88wUP4p55ll/34xNAwbmQj0NagqtylC
- Z+xw==
-X-Gm-Message-State: AOJu0YxMe8pszRHvAFTsQJtoMmcNwcHawoeYWqiNgyPQiPNyToKicBTA
- dXeVafZNfHM8IoIuhXrqgPKiWe+O6FmTKr0Y3cnTOiE/iCtUqWOymMMkAr0+cUdANFjGpSUBDep
- 8lFiTJA==
-X-Gm-Gg: ATEYQzxszkXqa/Fc9SD5jy120kFMk1sesztdpQRslIQEQQp5QcA/UYTUbdESK2p0Jh5
- g3YQ2pBUAA0+fBB4HSgD7owUXTD9frG+JFlaE6epy7HSDJ4x5xtL7rE/3tCQtfjS3MHDsWr4jo4
- JOQwskjpd9VABQ+doH14OVSK7rB4lEUoYpb5OYUmCIH49PF4rYW8acHddms3jcQzugZ4ETYSIDX
- EoCIXjyRarerFWZ7XjGI92kUxhDZzAdVUoN1h803AiDJE/cMHuDmbkwC+LMMsdkCkWx+G7Hf7Bi
- KqeaYcOgY11zf4oZVBWbBu/Vi/U0YI/JUOLgp40hATo/QuoxNdHHvO5dWRdC/b1+rJEgq7hk4XN
- 9cDnDCyxtxXuyVMdcFnVAUmNB6Mi3VO2cNH4tx01xZfmyTaVivOT76SXZDvRxB9ihzTJN8kXZXm
- I+vmu9G7TcBDmoXWFp1g==
-X-Received: by 2002:a05:6830:2403:b0:7d7:fbe5:e9be with SMTP id
- 46e09a7af769-7d9d695c0f4mr378160a34.20.1774381543771; 
- Tue, 24 Mar 2026 12:45:43 -0700 (PDT)
-Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7eadc8a12sm12783012a34.16.2026.03.24.12.45.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Mar 2026 12:45:43 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4fgTJq3Fwsz9tVj;
+ Wed, 25 Mar 2026 02:07:07 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1774400827;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=6VlmxMafgPnAlJXV99HrWERbJ+ngFD9DRtiiZdyybhI=;
+ b=Ju3/8nO0EL8PPE8Ise1b3e7C/PKxBt9p7B3IWPWoPpkxulwZ4U4XEWSar14MWVP7xxH+So
+ 7rROoNkgrvPBfTzHLyi/5eWi5R86wJN25qSwoDTf+vP0NEAIVfxYduLym3Dzl6zHHm/216
+ 2S+rJ3PPCGnEAygmerCsAubj/aYh4BP6j+TqIIdq5+51LbUyadIUKCvuY5clzGxZS9ZLTs
+ u5zVawYORxKdaXJHHwFerR47TX/zF3MyPck8QAT51VrkYUBhwdBzYqh5w8lZLxKT/aRrgP
+ RuUx52W9U7Pgpi0lYFgOp2Y6Rmv1XH+meB9wmuJznAIhLVTtVJUAY+m59PtZUQ==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=EMtBdkdP;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::1 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1774400825;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=6VlmxMafgPnAlJXV99HrWERbJ+ngFD9DRtiiZdyybhI=;
+ b=EMtBdkdPTXHIcoOZzzo+3NCjiNddAb5hWGsRsH+JekH7pJC10D58SVBUk6aXUC7dO7EPSg
+ Y/2YmQ12sLUNhVlQMgDsIgZdOjBe2p/fPgde1lsVj4mdkbXolvY7tGJCgFuqOUAL8770mv
+ WcMLyXA+ZGBTS+gE4obETAIXquV8d+D5yIcQZlazw0xeI6qONI59WwE0ngzJZS2+WswLH/
+ icxPlDlNGahlcCIeoYVwhEmlGF20wRCNRgjEAfVOeRBP/vkpnumuB8Efw2iZHO5M4Kgjpv
+ f4XJz0DUInPJmE9Qr2xn/4L8Ds/J9Chd1qA3wmzaN6/8EuZ/jyhCqEHCLZ8ngA==
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH] sandbox: Adjust how OS-interface files are built
-Date: Tue, 24 Mar 2026 13:45:20 -0600
-Message-ID: <20260324194535.2338985-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] cmd: dhcp: Select CMD_BOOTP
+Date: Wed, 25 Mar 2026 02:06:47 +0100
+Message-ID: <20260325010659.279966-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 9f4fb7e5b4c7d10bf8f
+X-MBO-RS-META: ysuc61w6n3i8dr86x4kh4xfufq8foom6
+X-Rspamd-Queue-Id: 4fgTJq3Fwsz9tVj
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,103 +97,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current mechanism uses a completely separate build rule for each
-file which must be built with system headers. This is tricky to
-maintain.
+The DHCP command depends on bootp_reset() function, which is implemented
+only if CMD_BOOTP is enabled. Select CMD_BOOTP to satisfy the dependency.
 
-Add a foreach template in the sandbox cpu Makefile which generates the
-custom compile rules from a CFLAGS_USE_SYSHDRS list. This keeps the
-rules data-driven without needing changes to the common
-scripts/Makefile.lib, which could affect other architectures.
-
-Move initjmp.o into the template since it uses the same pattern. Add
-sdl.o to the list too, with an override for its command since it also
-needs -fshort-wchar removed and -fno-lto added.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
+Cc: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
+Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Heiko Schocher <hs@nabladev.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jerome Forissier <jerome.forissier@arm.com> <jerome@forissier.org>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Michael Trimarchi <michael@amarulasolutions.com>
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ cmd/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
- arch/sandbox/Makefile     |  2 +-
- arch/sandbox/cpu/Makefile | 45 ++++++++++++++-------------------------
- 2 files changed, 17 insertions(+), 30 deletions(-)
-
-diff --git a/arch/sandbox/Makefile b/arch/sandbox/Makefile
-index a335f8acfde..5bbf9f1f96b 100644
---- a/arch/sandbox/Makefile
-+++ b/arch/sandbox/Makefile
-@@ -1,6 +1,6 @@
- # SPDX-License-Identifier: GPL-2.0+
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 322ebe600c5..317ff8e9987 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2186,6 +2186,7 @@ endif  # if NET
+ config CMD_DHCP
+ 	bool "dhcp"
+ 	select PROT_DHCP_LWIP if NET_LWIP
++	select CMD_BOOTP
+ 	help
+ 	  Boot image via network using DHCP/TFTP protocol
  
--head-y := arch/sandbox/cpu/start.o arch/sandbox/cpu/os.o
-+head-y := arch/sandbox/cpu/start.o
- head-$(CONFIG_SANDBOX_SDL) += arch/sandbox/cpu/sdl.o
- libs-y += arch/sandbox/cpu/
- libs-y += arch/sandbox/lib/
-diff --git a/arch/sandbox/cpu/Makefile b/arch/sandbox/cpu/Makefile
-index 038ad78accc..ee3c04c49e1 100644
---- a/arch/sandbox/cpu/Makefile
-+++ b/arch/sandbox/cpu/Makefile
-@@ -5,42 +5,29 @@
- # (C) Copyright 2000-2003
- # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
- 
--obj-y	:= cache.o cpu.o state.o initjmp.o
--extra-y	:= start.o os.o
-+obj-y	:= cache.o cpu.o state.o initjmp.o os.o
-+extra-y	:= start.o
- extra-$(CONFIG_SANDBOX_SDL)    += sdl.o
- obj-$(CONFIG_XPL_BUILD)	+= spl.o
- obj-$(CONFIG_ETH_SANDBOX_RAW)	+= eth-raw-os.o
- 
--# os.c is build in the system environment, so needs standard includes
--# CFLAGS_REMOVE_os.o cannot be used to drop header include path
--quiet_cmd_cc_os.o = CC $(quiet_modtag)  $@
--cmd_cc_os.o = $(CC) $(filter-out -nostdinc, \
--	$(patsubst -I%,-idirafter%,$(c_flags))) -c -o $@ $<
-+# These files need to be built with system headers, since they use system
-+# calls or system-level interfaces. Generate a custom compile rule for each
-+# one that drops -nostdinc and converts -I to -idirafter.
-+CFLAGS_USE_SYSHDRS := eth-raw-os.o initjmp.o os.o sdl.o
- 
--$(obj)/os.o: $(src)/os.c FORCE
--	$(call if_changed_dep,cc_os.o)
-+define syshdrs_rule
-+quiet_cmd_cc_$(1) = CC $$(quiet_modtag)  $$@
-+cmd_cc_$(1) = $$(CC) $$(filter-out -nostdinc, \
-+	$$(patsubst -I%,-idirafter%,$$(c_flags))) -c -o $$@ $$<
- 
--# eth-raw-os.c is built in the system env, so needs standard includes
--# CFLAGS_REMOVE_eth-raw-os.o cannot be used to drop header include path
--quiet_cmd_cc_eth-raw-os.o = CC $(quiet_modtag)  $@
--cmd_cc_eth-raw-os.o = $(CC) $(filter-out -nostdinc, \
--	$(patsubst -I%,-idirafter%,$(c_flags))) -c -o $@ $<
-+$$(obj)/$(1): $$(src)/$(1:.o=.c) FORCE
-+	$$(call if_changed_dep,cc_$(1))
-+endef
- 
--$(obj)/eth-raw-os.o: $(src)/eth-raw-os.c FORCE
--	$(call if_changed_dep,cc_eth-raw-os.o)
-+$(foreach f,$(CFLAGS_USE_SYSHDRS),$(eval $(call syshdrs_rule,$(f))))
- 
--# initjmp.c is build in the system environment, so needs standard includes
--# CFLAGS_REMOVE_initjmp.o cannot be used to drop header include path
--quiet_cmd_cc_initjmp.o = CC $(quiet_modtag)  $@
--cmd_cc_initjmp.o = $(CC) $(filter-out -nostdinc, \
--	$(patsubst -I%,-idirafter%,$(c_flags))) -c -o $@ $<
--
--$(obj)/initjmp.o: $(src)/initjmp.c FORCE
--	$(call if_changed_dep,cc_initjmp.o)
--
--# sdl.c fails to build with -fshort-wchar using musl
-+# sdl.c also needs -fshort-wchar removed (musl) and -fno-lto, so override
-+# the generated rule
- cmd_cc_sdl.o = $(CC) $(filter-out -nostdinc -fshort-wchar, \
- 	$(patsubst -I%,-idirafter%,$(c_flags))) -fno-lto -c -o $@ $<
--
--$(obj)/sdl.o: $(src)/sdl.c FORCE
--	$(call if_changed_dep,cc_sdl.o)
 -- 
-2.43.0
+2.53.0
 
-base-commit: 1ffc541eafc96d5eebcf837ab892dccec3b93568
-branch: sb-os-us
