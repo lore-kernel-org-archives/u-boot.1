@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2CF4109C059
-	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 19:27:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69C83109C059
+	for <u-boot@archiver.kernel.org>; Wed, 25 Mar 2026 19:27:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 09C1A83DA7;
+	by phobos.denx.de (Postfix) with ESMTP id 653438406D;
 	Wed, 25 Mar 2026 20:27:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=netcube.li
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=netcube.li header.i=@netcube.li header.b="Kv9KAw3c";
+	dkim=pass (1024-bit key; unprotected) header.d=netcube.li header.i=@netcube.li header.b="UJwkBTo5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E62383FC6; Wed, 25 Mar 2026 20:27:25 +0100 (CET)
+ id F06AA83FC6; Wed, 25 Mar 2026 20:27:25 +0100 (CET)
 Received: from mail.netcube.li (mail.netcube.li [173.249.15.149])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3D6C83FC6
- for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 20:27:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CFE9783FA7
+ for <u-boot@lists.denx.de>; Wed, 25 Mar 2026 20:27:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=netcube.li
 Authentication-Results: phobos.denx.de;
@@ -28,20 +28,21 @@ Authentication-Results: phobos.denx.de;
 dkim-signature: v=1; a=rsa-sha256; d=netcube.li; s=s1;
  c=relaxed/relaxed; q=dns/txt;
  h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References;
- bh=Zq0qmAlMWxTJOYcL3mW4bjKwgi3QCMcSHdbIEEhZnxM=;
- b=Kv9KAw3cF4y8AYcOMxOHP35E9eIipUNVjKoyDG739Yg7y3MvyuUvv6XJaYqx1EDlMuvLMrccNtmr4Rgfp7gxaQGv6//58iQcje65u0bBl88Cv2WOAuuSpvM2TTFs22Eecd4j3PE1gIOgynyfj0hCm2YFQzH8jIyenJd35rFvl3c=
+ bh=NFbNTkgbgyURLl6Y/Z1CTk7IxE9bF2QiSeHVd5MQ3uY=;
+ b=UJwkBTo51nbfoiMiprAq6LyL0nxrXXF5W9hcZa2KBpY37icl3f5DvlNJYeFDB5zxFHwXbOeL0A0wes4r0hIqTCiMEbFZkcOurxj04e6xnzwfY+lqS9r4aedMkeQ0cAEGknS0xjRoWLV+Te8RiBeHGehRhzBl6qdxiJLrLzbphEg=
 Received: from lukas-hpz440workstation.lan.sk100508.local
  (193-80-178-216.hdsl.highway.telekom.at [193.80.178.216])
- by mail.netcube.li with ESMTPA ; Wed, 25 Mar 2026 20:27:20 +0100
+ by mail.netcube.li with ESMTPA ; Wed, 25 Mar 2026 20:27:14 +0100
 From: Lukas Schmid <lukas.schmid@netcube.li>
 To: Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
  Hans de Goede <hdegoede@redhat.com>,
  Jerome Forissier <jerome.forissier@arm.com>
 Cc: Lukas Schmid <lukas.schmid@netcube.li>,
 	u-boot@lists.denx.de
-Subject: [PATCH 4/6] boot: allow SPL FIT signature verification without DM
-Date: Wed, 25 Mar 2026 20:26:11 +0100
-Message-ID: <20260325192628.750398-5-lukas.schmid@netcube.li>
+Subject: [PATCH 1/6] sunxi: move SID MAC fallback from board env setup to EMAC
+ read_rom_hwaddr
+Date: Wed, 25 Mar 2026 20:26:08 +0100
+Message-ID: <20260325192628.750398-2-lukas.schmid@netcube.li>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260325192628.750398-1-lukas.schmid@netcube.li>
 References: <20260325192628.750398-1-lukas.schmid@netcube.li>
@@ -63,62 +64,276 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SPL FIT verification was effectively tied to Driver Model. The RSA
-verifier assumed a DM-backed modexp device, and SPL_FIT_SIGNATURE
-depended on SPL_DM. This prevents non-DM SPL platforms from using
-FIT signature verification even though the software modular exponent
-fallback is already available.
+sunxi currently seeds ethaddr/ethXaddr in setup_environment() from SID.
+That happens before Ethernet probe, so even with a clean persisted
+environment we can populate env with a generated MAC and later get a
+mismatch warning when DM Ethernet reads a different MAC from DT/NVMEM.
 
-Drop the hard SPL_DM dependency and only look up the modexp device
-when DM is enabled. Non-DM SPL builds then fall back to the software
-implementation and can enable signed FIT verification.
+Stop generating Ethernet MAC env variables in setup_environment() and
+provide SID-derived fallback addresses through read_rom_hwaddr in the
+sunxi EMAC drivers instead.
+
+Also move the SID uniqueness/MAC derivation logic into shared sunxi arch
+helpers so board code and drivers use one implementation and keep legacy
+algorithm compatibility across SoCs.
+
+This keeps the generic MAC source order (DT/NVMEM first, fallback second),
+avoids board-level MAC policy special-casing, and prevents same-boot
+env-vs-NVMEM mismatch warnings caused by early env seeding.
 
 Signed-off-by: Lukas Schmid <lukas.schmid@netcube.li>
 ---
- boot/Kconfig         |  1 -
- lib/rsa/rsa-verify.c | 16 ++++++++++------
- 2 files changed, 10 insertions(+), 7 deletions(-)
+ arch/arm/include/asm/arch-sunxi/sys_proto.h |  6 +++
+ arch/arm/mach-sunxi/cpu_info.c              | 44 ++++++++++++++++
+ board/sunxi/board.c                         | 57 +--------------------
+ drivers/net/sun8i_emac.c                    | 15 ++++++
+ drivers/net/sunxi_emac.c                    | 15 ++++++
+ 5 files changed, 81 insertions(+), 56 deletions(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 4e9bc9491a0..6ccb7d44a5e 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -202,7 +202,6 @@ config SPL_FIT_FULL_CHECK
+diff --git a/arch/arm/include/asm/arch-sunxi/sys_proto.h b/arch/arm/include/asm/arch-sunxi/sys_proto.h
+index 92c7721a530..6f70753e948 100644
+--- a/arch/arm/include/asm/arch-sunxi/sys_proto.h
++++ b/arch/arm/include/asm/arch-sunxi/sys_proto.h
+@@ -12,6 +12,12 @@
  
- config SPL_FIT_SIGNATURE
- 	bool "Enable signature verification of FIT firmware within SPL"
--	depends on SPL_DM
- 	depends on SPL_LOAD_FIT
- 	select FIT_SIGNATURE
- 	select SPL_FIT
-diff --git a/lib/rsa/rsa-verify.c b/lib/rsa/rsa-verify.c
-index 3169c3a6dd1..24b23ab565a 100644
---- a/lib/rsa/rsa-verify.c
-+++ b/lib/rsa/rsa-verify.c
-@@ -355,13 +355,17 @@ static int rsa_verify_key(struct image_sign_info *info,
- 	hash_len = checksum->checksum_len;
+ void sdelay(unsigned long);
  
- #if !defined(USE_HOSTCC)
--	ret = uclass_get_device(UCLASS_MOD_EXP, 0, &mod_exp_dev);
--	if (ret) {
--		printf("RSA: Can't find Modular Exp implementation\n");
--		return -EINVAL;
--	}
-+	if (CONFIG_IS_ENABLED(DM)) {
-+		ret = uclass_get_device(UCLASS_MOD_EXP, 0, &mod_exp_dev);
-+		if (ret) {
-+			printf("RSA: Can't find Modular Exp implementation\n");
-+			return -EINVAL;
-+		}
++/* Read SID and apply legacy/newer-SoC normalization for uniqueness. */
++bool sunxi_get_unique_sid(unsigned int *sid);
++
++/* Build legacy-compatible SID-derived locally administered MAC address. */
++bool sunxi_get_sid_mac_addr(int index, u8 mac[6]);
++
+ /* return_to_fel() - Return to BROM from SPL
+  *
+  * This returns back into the BROM after U-Boot SPL has performed its initial
+diff --git a/arch/arm/mach-sunxi/cpu_info.c b/arch/arm/mach-sunxi/cpu_info.c
+index c3a51d9956e..d804307e280 100644
+--- a/arch/arm/mach-sunxi/cpu_info.c
++++ b/arch/arm/mach-sunxi/cpu_info.c
+@@ -9,8 +9,10 @@
+ #include <asm/io.h>
+ #include <asm/arch/cpu.h>
+ #include <asm/arch/clock.h>
++#include <asm/arch/sys_proto.h>
+ #include <axp_pmic.h>
+ #include <errno.h>
++#include <u-boot/crc.h>
  
--	ret = rsa_mod_exp(mod_exp_dev, sig, sig_len, prop, buf);
-+		ret = rsa_mod_exp(mod_exp_dev, sig, sig_len, prop, buf);
-+	} else {
-+		ret = rsa_mod_exp_sw(sig, sig_len, prop, buf);
-+	}
- #else
- 	ret = rsa_mod_exp_sw(sig, sig_len, prop, buf);
+ #ifdef CONFIG_MACH_SUN6I
+ int sunxi_get_ss_bonding_id(void)
+@@ -175,3 +177,45 @@ int sunxi_get_sid(unsigned int *sid)
+ 	return -ENODEV;
  #endif
+ }
++
++bool sunxi_get_unique_sid(unsigned int *sid)
++{
++	if (sunxi_get_sid(sid) != 0)
++		return false;
++
++	if (!sid[0])
++		return false;
++
++	/*
++	 * On newer SoCs use a CRC over SID words 1..3 for better uniqueness,
++	 * while keeping the long-standing algorithm on older SoCs.
++	 */
++#if !defined(CONFIG_MACH_SUN4I) && !defined(CONFIG_MACH_SUN5I) && \
++	!defined(CONFIG_MACH_SUN6I) && !defined(CONFIG_MACH_SUN7I) && \
++	!defined(CONFIG_MACH_SUN8I_A23) && !defined(CONFIG_MACH_SUN8I_A33)
++	sid[3] = crc32(0, (unsigned char *)&sid[1], 12);
++#endif
++
++	/* Ensure the NIC-specific bytes are not all 0. */
++	if ((sid[3] & 0xffffff) == 0)
++		sid[3] |= 0x800000;
++
++	return true;
++}
++
++bool sunxi_get_sid_mac_addr(int index, u8 mac[6])
++{
++	unsigned int sid[4];
++
++	if (!sunxi_get_unique_sid(sid))
++		return false;
++
++	mac[0] = ((index & 0xf) << 4) | 0x02;
++	mac[1] = (sid[0] >>  0) & 0xff;
++	mac[2] = (sid[3] >> 24) & 0xff;
++	mac[3] = (sid[3] >> 16) & 0xff;
++	mac[4] = (sid[3] >>  8) & 0xff;
++	mac[5] = (sid[3] >>  0) & 0xff;
++
++	return true;
++}
+diff --git a/board/sunxi/board.c b/board/sunxi/board.c
+index d7722d1858a..420c4504720 100644
+--- a/board/sunxi/board.c
++++ b/board/sunxi/board.c
+@@ -41,7 +41,6 @@
+ #include <asm/gpio.h>
+ #include <sunxi_gpio.h>
+ #include <asm/io.h>
+-#include <u-boot/crc.h>
+ #include <env_internal.h>
+ #include <linux/libfdt.h>
+ #include <fdt_support.h>
+@@ -750,34 +749,7 @@ static void parse_spl_header(const uint32_t spl_addr)
+ 
+ static bool get_unique_sid(unsigned int *sid)
+ {
+-	if (sunxi_get_sid(sid) != 0)
+-		return false;
+-
+-	if (!sid[0])
+-		return false;
+-
+-	/*
+-	 * The single words 1 - 3 of the SID have quite a few bits
+-	 * which are the same on many models, so we take a crc32
+-	 * of all 3 words, to get a more unique value.
+-	 *
+-	 * Note we only do this on newer SoCs as we cannot change
+-	 * the algorithm on older SoCs since those have been using
+-	 * fixed mac-addresses based on only using word 3 for a
+-	 * long time and changing a fixed mac-address with an
+-	 * u-boot update is not good.
+-	 */
+-#if !defined(CONFIG_MACH_SUN4I) && !defined(CONFIG_MACH_SUN5I) && \
+-    !defined(CONFIG_MACH_SUN6I) && !defined(CONFIG_MACH_SUN7I) && \
+-    !defined(CONFIG_MACH_SUN8I_A23) && !defined(CONFIG_MACH_SUN8I_A33)
+-	sid[3] = crc32(0, (unsigned char *)&sid[1], 12);
+-#endif
+-
+-	/* Ensure the NIC specific bytes of the mac are not all 0 */
+-	if ((sid[3] & 0xffffff) == 0)
+-		sid[3] |= 0x800000;
+-
+-	return true;
++	return sunxi_get_unique_sid(sid);
+ }
+ 
+ /*
+@@ -788,37 +760,10 @@ static void setup_environment(const void *fdt)
+ {
+ 	char serial_string[17] = { 0 };
+ 	unsigned int sid[4];
+-	uint8_t mac_addr[6];
+-	char ethaddr[16];
+-	int i;
+ 
+ 	if (!get_unique_sid(sid))
+ 		return;
+ 
+-	for (i = 0; i < 4; i++) {
+-		sprintf(ethaddr, "ethernet%d", i);
+-		if (!fdt_get_alias(fdt, ethaddr))
+-			continue;
+-
+-		if (i == 0)
+-			strcpy(ethaddr, "ethaddr");
+-		else
+-			sprintf(ethaddr, "eth%daddr", i);
+-
+-		if (env_get(ethaddr))
+-			continue;
+-
+-		/* Non OUI / registered MAC address */
+-		mac_addr[0] = (i << 4) | 0x02;
+-		mac_addr[1] = (sid[0] >>  0) & 0xff;
+-		mac_addr[2] = (sid[3] >> 24) & 0xff;
+-		mac_addr[3] = (sid[3] >> 16) & 0xff;
+-		mac_addr[4] = (sid[3] >>  8) & 0xff;
+-		mac_addr[5] = (sid[3] >>  0) & 0xff;
+-
+-		eth_env_set_enetaddr(ethaddr, mac_addr);
+-	}
+-
+ 	if (!env_get("serial#")) {
+ 		snprintf(serial_string, sizeof(serial_string),
+ 			"%08x%08x", sid[0], sid[3]);
+diff --git a/drivers/net/sun8i_emac.c b/drivers/net/sun8i_emac.c
+index 41c52f56d7a..a267b6cd7f5 100644
+--- a/drivers/net/sun8i_emac.c
++++ b/drivers/net/sun8i_emac.c
+@@ -13,6 +13,7 @@
+ #include <cpu_func.h>
+ #include <log.h>
+ #include <asm/cache.h>
++#include <asm/arch/sys_proto.h>
+ #include <asm/global_data.h>
+ #include <asm/gpio.h>
+ #include <asm/io.h>
+@@ -259,6 +260,19 @@ static int sun8i_eth_write_hwaddr(struct udevice *dev)
+ 	return 0;
+ }
+ 
++static int sun8i_eth_read_rom_hwaddr(struct udevice *dev)
++{
++	struct eth_pdata *pdata = dev_get_plat(dev);
++	u8 mac[ARP_HLEN];
++
++	if (!sunxi_get_sid_mac_addr(dev_seq(dev), mac))
++		return -ENODEV;
++
++	memcpy(pdata->enetaddr, mac, ARP_HLEN);
++
++	return 0;
++}
++
+ static void sun8i_adjust_link(struct emac_eth_dev *priv,
+ 			      struct phy_device *phydev)
+ {
+@@ -715,6 +729,7 @@ static int sun8i_emac_eth_probe(struct udevice *dev)
+ 
+ static const struct eth_ops sun8i_emac_eth_ops = {
+ 	.start                  = sun8i_emac_eth_start,
++	.read_rom_hwaddr	= sun8i_eth_read_rom_hwaddr,
+ 	.write_hwaddr           = sun8i_eth_write_hwaddr,
+ 	.send                   = sun8i_emac_eth_send,
+ 	.recv                   = sun8i_emac_eth_recv,
+diff --git a/drivers/net/sunxi_emac.c b/drivers/net/sunxi_emac.c
+index 3dee849c97e..f45a0790a40 100644
+--- a/drivers/net/sunxi_emac.c
++++ b/drivers/net/sunxi_emac.c
+@@ -15,6 +15,7 @@
+ #include <miiphy.h>
+ #include <net.h>
+ #include <asm/io.h>
++#include <asm/arch/sys_proto.h>
+ #include <asm/arch/clock.h>
+ #include <power/regulator.h>
+ 
+@@ -539,6 +540,19 @@ static int sunxi_emac_eth_send(struct udevice *dev, void *packet, int length)
+ 	return _sunxi_emac_eth_send(priv, packet, length);
+ }
+ 
++static int sunxi_emac_read_rom_hwaddr(struct udevice *dev)
++{
++	struct eth_pdata *pdata = dev_get_plat(dev);
++	u8 mac[ARP_HLEN];
++
++	if (!sunxi_get_sid_mac_addr(dev_seq(dev), mac))
++		return -ENODEV;
++
++	memcpy(pdata->enetaddr, mac, ARP_HLEN);
++
++	return 0;
++}
++
+ static int sunxi_emac_eth_recv(struct udevice *dev, int flags, uchar **packetp)
+ {
+ 	struct emac_eth_dev *priv = dev_get_priv(dev);
+@@ -581,6 +595,7 @@ static int sunxi_emac_eth_probe(struct udevice *dev)
+ 
+ static const struct eth_ops sunxi_emac_eth_ops = {
+ 	.start			= sunxi_emac_eth_start,
++	.read_rom_hwaddr	= sunxi_emac_read_rom_hwaddr,
+ 	.send			= sunxi_emac_eth_send,
+ 	.recv			= sunxi_emac_eth_recv,
+ 	.stop			= sunxi_emac_eth_stop,
 -- 
 2.47.3
 
