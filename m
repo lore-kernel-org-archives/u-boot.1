@@ -4,98 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E37BD106F313
-	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 09:36:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45E49106F313
+	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 09:37:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BCBF83FE1;
-	Thu, 26 Mar 2026 10:36:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CC2F484082;
+	Thu, 26 Mar 2026 10:37:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Pxeb43/R";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bThvDlIa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B33283FED; Thu, 26 Mar 2026 10:36:40 +0100 (CET)
+ id BB62F84090; Thu, 26 Mar 2026 10:37:41 +0100 (CET)
 Received: from mail-yx1-xb133.google.com (mail-yx1-xb133.google.com
  [IPv6:2607:f8b0:4864:20::b133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 106FA83FA7
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 10:36:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D0E383FE1
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 10:37:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
 Received: by mail-yx1-xb133.google.com with SMTP id
- 956f58d0204a3-64937edbc9eso732172d50.2
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 02:36:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774517797; cv=none;
+ 956f58d0204a3-64e9f9226a7so829947d50.2
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 02:37:39 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774517858; cv=none;
  d=google.com; s=arc-20240605;
- b=FUp+lZZTn0Yl0JdHAGdUnSde6+W9wdA26LG6HCjsBzhgRGBHVhKckPgMcAgwY99Ihm
- KO01LjdbsUdRX1V7M01Lrbvd5llAlqhZYzk03dkykciotnhPoCUVQhJN7PIpG9dsoEkD
- tOY8l3HnQG8Gj3V6zQBXFCZ4nu/L2yJrWGuaf26wLMKnwGEIZzl/o+nTjfpT5TMLUDpt
- Iqrb7+cBs3BT1bvs/cDq6TS7IUjs38aHyjtvi0vJcVRsMTQqgaShkU40/hHheQh2wcm7
- 12nNFZyu5HWl3zgCVqh0ZrmWcRSwkjVkFMAjypVIIUlejB2oAELWhSD+Vlr+SQXgAm5S
- 74Kg==
+ b=gKuMYxamevHPtB21zpJVv8fTQoDbYGDPwmip+FDPN0SI4An0Au4xOiKyBiaOaDIdw0
+ xtZtGXFIlZRmtivb8az1QG6ya6Ce1QeT0KimpDzBxmdH4cSmms0lT/yvk61/QoMP1Pxn
+ +7kOgMMY/glrkRDlk0+/K7tA6IJHNOooMzmLmiurIWunYS1aUoE3WTgTyLztc0zxoYAs
+ ER+XfOJ/O9deTd4GRqQUHxCu4bLgkt97rNWCZWqfBw86IWMlWZRZRD+dVA11Xj+QPSQV
+ vAAG5oIORsLjtKDaoASiSrmJi6jXs9tosA4dv/J5nJAhcdBf+ZDv7YmVRenmDSwtJ2xm
+ P8qQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=xsdcjAwBdwguZMJfN2XY0eQB1VgoNMIcHUXxsmgEzv4=;
+ bh=Vzqj5N8bfx7tobPdCoo0JIHk9oR9fLErkH6F5h4UgBk=;
  fh=nEkXRhqCjx3ONPRTdOk67xC+ThsQtT0sulRkQM3zgmo=;
- b=gJiSmSLgmenwWqXFXMQ5w1FO6OnhDOnFfUTDddMyCf5KlaM4hj80X+AORvE2xcaSf2
- hqd+7oJRFCieWlxLnLsdwomLjuCHxccd2CFdZjzitCwvBs834u5QrfFDStEjG6TBE98V
- avIds4sFDSQSzkZdFqtqLvs0y2/rUGVa5wzCggJ3VBRj9nkNE6OdeCnz16ERRqeomiwS
- guuCdnBDvn8EJ8MZdMbs75QD9G68LxotPczkcGml0BlerKBr3cPntnpwq/z2aqtnFA9y
- tJ7lifMp0hU/V+/y3V43diaj575OfZPGo3hEGLknUQ9vFRXI4+e69oqgwpgdK/2AvCDD
- 4ZRg==; darn=lists.denx.de
+ b=UuCLARt4n9JYFeMaEgsZcm0uZnYQIdH9+6bYMVfKW8ySlW75TRFo86zFym/laf0RZ8
+ eWpFBrRV+BoArK2ASmtzDlN29ljVB8lIz8NI4MeUW9v2ucbLPPwmqpyYMptKR5CVlVzN
+ dedUfY378KEnPq4IwIwBP17Z+3fFwGI8zNtPqGBrHV7KyfYIv3kpvcxhpgQ+1vdbqm7w
+ UB/MOXl+Itk3ALWASw49+jdkmJV8TBxjMmzBM6OPhTx3wIf3gLjYvD4FDw5xAIRyig3g
+ PotBRREHUTtb/VOG8gJjyNwbh3Nox4zMGj71X3Z4Xuik6Pl/097subfGoPVQUjLTu+ag
+ s5/g==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1774517797; x=1775122597; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1774517858; x=1775122658; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xsdcjAwBdwguZMJfN2XY0eQB1VgoNMIcHUXxsmgEzv4=;
- b=Pxeb43/RdgKm0T/hE6w7i+Skoux0wgzZy4CbTfQ0+1mRegrGEOxTp9ILeTMOPNAYoR
- +hrsoswNS9RIkfUkLnsu1WrKKEXKALhGApdemtF4MB2NOAnDPhIgife99IAiikvCqAAq
- xnsJSgCiL8e/20Hp9Y9ZLE69xmdS4LhnX8p1Ms571wLxqEU3USz3a66J3d/I+9P54j1X
- WF7tAH5lqwZHANuBsw30Tfk0zyWluaF/U+t4tMgQHEDJSP733lTveujbWuFg19Y0nGun
- p/Jlk8yztpypmzBxMqKfx1nWiv3fCsVUk8TaLT77BdEYiRilmRNPOFixYZTSZZS567uI
- KxfA==
+ bh=Vzqj5N8bfx7tobPdCoo0JIHk9oR9fLErkH6F5h4UgBk=;
+ b=bThvDlIazx2X2ToNXO8YjPWvtR0v3qJGz5rJmob8qAT/bTj1PfvjBu18d9bTjZ+nC2
+ zDrR3UCq6moOh2rLb2w5ZdaFQOmeqSH5JOyMq/OLcwwAZX3HSnMvJCLXnWbglAlddyoG
+ se4RI0JBLP4y0YwnpyL7NLb7aAOnT9FBMcukiu86qNzLDhS4vad4rpo7hF3oymkj6DTd
+ fh+r2ViF3QiV+TYm7JDxQ1sTMlsgENN9io+ZmHSTxwi0I/+rfPCuUjRPOQHWjTKLRgsm
+ XUJkTKEvAZoxD2PVzLWoBReV46iPWqa15nFk9gJlPIyNLbuTw+c1Tm6E1Wj4W2CsF52b
+ Y2hQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774517797; x=1775122597;
+ d=1e100.net; s=20251104; t=1774517858; x=1775122658;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xsdcjAwBdwguZMJfN2XY0eQB1VgoNMIcHUXxsmgEzv4=;
- b=mAsHIqLeHph78SB23Z2mtshYKY9ilu6AjBtvzxI5mXR8ONSfLcxxzk6RjR5UV6COpA
- uHSqC1+kway805VPbWyHMEXewgcGTbw9eHYI0QnGD9Pdr+nKepmW0sZom8K+6wI7Xrbl
- DBuJ5v9C36TyF1msUisArnMoQSj3cPvMJizE+DmHv5XegvfJQKg7jOUCtNSodJyhDygn
- 0bEgBARZfNxFbsjw294KZpzo8dYR658UzJcNJIM1msThO1CP6CmNR8gR5esuEKobVpJG
- fGC2HSYAct9veAyxkgwvUiJJcO4Ag4I3darKCv78jihvn6UHpNRe+TJOXjaFDAbgae2Q
- FeVw==
-X-Gm-Message-State: AOJu0YzHHf55DNOVcVCLZhfSM7v2EFgP3MM5GaP615qu3th4mkwxciUi
- xbPtzdpOBzk6O4ZvXo/R7Ca5MmXJtjP3bYhXChgFOlumcMmioiC8EU3uUUjam0zGpjwVOP866TM
- RQ7ZwjtkdzD34fmIZlEZDz9BR8Eoj5DKHKZL/wFEHpg==
-X-Gm-Gg: ATEYQzzkkk6KpTZmw5BdQiumuMk7x4CaDdRCUQf3zn+t3v1W6xZy44msm8DLV5EMY1S
- kFyAYobhe/A/W/AyRriUZ9A0IKixGoN+MZ3qdiX7e4avirU+W/vb4eP23BG0EAEQHIlLxJR5pUO
- H276AH979GzbHJ81pdc/28ZpTN0jkJFWZ9ORnuL0DuJRLRk1XLMrhRhCqMDnHQDjYEYo3mJ2htw
- jgowq3yNOAh+etviRcJGLtOfEtPdcBxWcfaF5ui4yvv0N1Hzh6PpAEJnnUk97+x98wq7/Tmj1a4
- /yHtjYcp0SLjEB7X54yVFwTSWxjjx0zWuKcIIR9jQx8rI4/DdfbiuXZc+lKqDb3Oa1SNrS8DZ1c
- nVRnG/RWosGnNnQJUZCOEo/JFzWqkwvQz6Yt3b+7DOIRto4Oe7rj3Koco90wwQoDZe5B5sc0ls7
- Gexpp7+qc1ypuFJ2U1J/vE6JCjDL7lNnnLNSO6M3Y8j/hDayWC8MT7bogXPywo1DUJ0nr0gOWZL
- G2c8wd7eXSHE83UkoO1Z/p2G/TXCRySozFxrGjfKJmGSOxGLl1T9NSLqg/jS9bjA/Ki1co1+xQl
- +1Cl3LK27hpcW+FiLP1YlT3L39QixwCIGc1X0LNtpLNp
-X-Received: by 2002:a53:ac99:0:b0:64e:f106:60e4 with SMTP id
- 956f58d0204a3-64ef1066a8emr4192138d50.53.1774517796740; Thu, 26 Mar 2026
- 02:36:36 -0700 (PDT)
+ bh=Vzqj5N8bfx7tobPdCoo0JIHk9oR9fLErkH6F5h4UgBk=;
+ b=SoRwLjNP4mNIwdKheDvUkH0RSaa4xaKS0qXGzslBgfKusnBfW1v39F0L89EvynChss
+ 03tonN4a7GvRxjCKQNOO/i05YUW9h0CYxxlaSQUlk0J34s50o5j1IzPsvtUQEkrdLpfm
+ s9waJsb5ytJBZMx6R7nIi2ybAIddfZ+23BmdNwKom0STuMskjclMVhHlHPIESjJXmGot
+ uyomGFnTMKRFHZ+zrhI4ia0Hc0LWHl+0lsm4jqfrVnatqTv9aQ0nY7YXcde7rOM/Xq6M
+ ZwSd3xz+xmWTnDVuqhqkKAGZpXDhUOA+SXzkLdh78JP+qwtC+V/W6QLcKEF/zef8JlcL
+ hnSA==
+X-Gm-Message-State: AOJu0Yzd60U5U6eHnxSBoOGBwIyiIobBdyxtvrhsQZMbvizGfwHHljG6
+ 56IbqYWp6TMFS8iw1pHs1G+ZWxffaLQPoPjYR4mTOR+Pj8Uu0LtR42HEqntViu2BC7mQXIgTjwZ
+ Jo7u44UaWF/QnEF1BOLpas0k7EwapRfexvz9P8P8N3A==
+X-Gm-Gg: ATEYQzyc16rT28L1L8/BXheO2EYBWlMIVSzArjNX2VrU7IrKc2nXWkCe4GyEAZxO5Qh
+ sb43G3Xj3ypIUHcq+P2L4RtR0UwjBYW9zY1ZfY7AD1voG4f5AY3QglrqyV/32I6S5jjrWV5Abey
+ dhSnJYTdnvjepjRXy8eULGm5xnDyUXzfHLwaEVJCr6FcuyVdjvM8DL6yId4zmxPsRJ5XmHHe3qG
+ HdiYqzRr8J4lmlnBpileaRIhOoWZmaonCQtRLURUJjMj4VZGXYXaZdH4pwxCPcD9WlkF04b2OXz
+ pSWjuDmGroh+2OFpZoNV7KofI4ANNt0HQ6hH9nBBW/I17TGwy5hz4RkzCO4RMrGfcGQR6XbJfD4
+ tRotJbVzKgWN6rA27tO1iMbxmyPooJb6aUQhMca7wOpJ1FgMR/O5b0SxhcdYfGmqpTmYOqgiL0K
+ nEeYeI+To8xXoJQTraYx+6Vs0pvFV09GgMYd4bUdMSs1y6r4CR8oar6fF+zCDx/ugK9yVbP3S2u
+ XiLwpDxE3fq1RwzEgiEYV/JRY7vix8fHZs0u1Elw6AHQsm57t51MBH7GZs5qJ2rJGqZJqbegi1c
+ Niduw5izVNnMlfYQAyUsQGsDREO+8yVN9AXQxQW5Zhmd
+X-Received: by 2002:a05:690e:419b:b0:64e:edea:dee3 with SMTP id
+ 956f58d0204a3-64eedeae164mr4259860d50.44.1774517857990; Thu, 26 Mar 2026
+ 02:37:37 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260325031743.371728-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260325031743.371728-1-marek.vasut+renesas@mailbox.org>
+ <20260325031743.371728-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260325031743.371728-2-marek.vasut+renesas@mailbox.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 26 Mar 2026 11:35:59 +0200
-X-Gm-Features: AaiRm50JWAvwaE7c9lTac9EsncRQHPCxTIJPkl2vaJrKg7G_1FdgGP4vohIEb7M
-Message-ID: <CAC_iWj+BtaUn-8zo6jARgOcM57i+octphEg8ADDM8bBGTQq7KA@mail.gmail.com>
-Subject: Re: [RFC][PATCH 1/3] fdtdec: Deduplicate iterator function
+Date: Thu, 26 Mar 2026 11:37:01 +0200
+X-Gm-Features: AaiRm51EjpLRrMgJQFh6Fre_Yn6EDBQ3Y8JFt-PRz-SxzAvDukC0uhdhoU8hyKk
+Message-ID: <CAC_iWjJX2Te=28zZYq=xMJd4r1AcxMXyejL19PTwKRcxoFkQsw@mail.gmail.com>
+Subject: Re: [RFC][PATCH 2/3] fdtdec: Introduce fdtdec_setup_mem_ram_top() to
+ determine end of topmost DRAM bank
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: u-boot@lists.denx.de, Casey Connolly <casey.connolly@linaro.org>, 
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Raymond Mao <raymondmaoca@gmail.com>,
@@ -117,138 +119,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 25 Mar 2026 at 05:17, Marek Vasut
-<marek.vasut+renesas@mailbox.org> wrote:
+Hi Marek
+
+[...]
+
+> + * fdtdec_setup_mem_ram_top() - decode and setup gd->ram_top to highest address
+> + * available in any memory bank
+> + *
+> + * Decode the /memory 'reg' property to determine the highest end of the memory
+> + * bank and populate the global data ram_top with it.
+> + *
+> + * This function should be called from a boards board_get_usable_ram_top().
+> + * This helper function allows for boards to query the device tree for topmost
+> + * DRAM address.
+> + *
+> + * Return: 0 if OK, -EINVAL if the /memory node or reg property is missing or
+> + * invalid
+> + */
+> +int fdtdec_setup_mem_ram_top(void);
+> +
+>  /**
+>   * fdtdec_setup_memory_banksize() - decode and populate gd->bd->bi_dram
+>   *
+> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+> index d820f75b031..bdb26d8fb75 100644
+> --- a/lib/fdtdec.c
+> +++ b/lib/fdtdec.c
+> @@ -1162,6 +1162,24 @@ int fdtdec_setup_mem_size_base_lowest(void)
+>         return fdtdec_setup_mem_for_each_bank(fdtdec_setup_mem_size_base_lowest_bankfn);
+>  }
 >
-> Both fdtdec_setup_memory_banksize() and fdtdec_setup_mem_size_base_lowest()
-> implement the exact same iterator over all memory banks, the only difference
-> is the body that is executed for each bank. Deduplicate the functionality
-> into iterator function fdtdec_setup_mem_for_each_bank(), which takes a
-> function pointer to a function which implements the body as a parameter.
-> No functional change.
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> +static void fdtdec_setup_mem_ram_top_bankfn(struct resource *res, int bank)
+> +{
+> +       if ((res->end + 1) > gd->ram_top)
+> +               gd->ram_top = res->end + 1;
+
+We can also update gd->ram_size.
+
+I'll send a v2 with some changes in board_f.c using this code, so I'll
+update it there
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-> ---
-> Cc: Casey Connolly <casey.connolly@linaro.org>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Raymond Mao <raymondmaoca@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  lib/fdtdec.c | 77 ++++++++++++++++++++--------------------------------
->  1 file changed, 30 insertions(+), 47 deletions(-)
->
-> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> index c38738b48c7..d820f75b031 100644
-> --- a/lib/fdtdec.c
-> +++ b/lib/fdtdec.c
-> @@ -1092,7 +1092,7 @@ ofnode get_next_memory_node(ofnode mem)
->         return mem;
->  }
->
-> -int fdtdec_setup_memory_banksize(void)
-> +static int fdtdec_setup_mem_for_each_bank(void (*bankfn)(struct resource *res, int bank))
->  {
->         int bank, ret, reg = 0;
->         struct resource res;
-> @@ -1120,63 +1120,46 @@ int fdtdec_setup_memory_banksize(void)
->                 if (ret != 0)
->                         return -EINVAL;
->
-> -               gd->bd->bi_dram[bank].start = (phys_addr_t)res.start;
-> -               gd->bd->bi_dram[bank].size =
-> -                       (phys_size_t)(res.end - res.start + 1);
-> -
-> -               debug("%s: DRAM Bank #%d: start = 0x%llx, size = 0x%llx\n",
-> -                     __func__, bank,
-> -                     (unsigned long long)gd->bd->bi_dram[bank].start,
-> -                     (unsigned long long)gd->bd->bi_dram[bank].size);
-> +               bankfn(&res, bank);
->         }
->
->         return 0;
->  }
->
-> -int fdtdec_setup_mem_size_base_lowest(void)
-> +static void fdtdec_setup_memory_banksize_bankfn(struct resource *res, int bank)
->  {
-> -       int bank, ret, reg = 0;
-> -       struct resource res;
-> -       unsigned long base;
-> -       phys_size_t size;
-> -       ofnode mem = ofnode_null();
-> +       gd->bd->bi_dram[bank].start = (phys_addr_t)res->start;
-> +       gd->bd->bi_dram[bank].size = (phys_size_t)(res->end - res->start + 1);
->
-> -       gd->ram_base = (unsigned long)~0;
-> -
-> -       mem = get_next_memory_node(mem);
-> -       if (!ofnode_valid(mem)) {
-> -               debug("%s: Missing /memory node\n", __func__);
-> -               return -EINVAL;
-> -       }
-> -
-> -       for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-> -               ret = ofnode_read_resource(mem, reg++, &res);
-> -               if (ret < 0) {
-> -                       reg = 0;
-> -                       mem = get_next_memory_node(mem);
-> -                       if (!ofnode_valid(mem))
-> -                               break;
-> -
-> -                       ret = ofnode_read_resource(mem, reg++, &res);
-> -                       if (ret < 0)
-> -                               break;
-> -               }
-> -
-> -               if (ret != 0)
-> -                       return -EINVAL;
-> +       debug("%s: DRAM Bank #%d: start = 0x%llx, size = 0x%llx\n",
-> +             __func__, bank,
-> +             (unsigned long long)gd->bd->bi_dram[bank].start,
-> +             (unsigned long long)gd->bd->bi_dram[bank].size);
+
 > +}
->
-> -               base = (unsigned long)res.start;
-> -               size = (phys_size_t)(res.end - res.start + 1);
-> +int fdtdec_setup_memory_banksize(void)
-> +{
-> +       return fdtdec_setup_mem_for_each_bank(fdtdec_setup_memory_banksize_bankfn);
-> +}
->
-> -               if (gd->ram_base > base && size) {
-> -                       gd->ram_base = base;
-> -                       gd->ram_size = size;
-> -                       debug("%s: Initial DRAM base %lx size %lx\n",
-> -                             __func__, base, (unsigned long)size);
-> -               }
-> +static void fdtdec_setup_mem_size_base_lowest_bankfn(struct resource *res, int bank)
-> +{
-> +       unsigned long base = (unsigned long)res->start;
-> +       phys_size_t size = (phys_size_t)(res->end - res->start + 1);
 > +
-> +       if (gd->ram_base > base && size) {
-> +               gd->ram_base = base;
-> +               gd->ram_size = size;
-> +               debug("%s: Initial DRAM base %lx size %lx\n",
-> +                     __func__, base, (unsigned long)size);
->         }
-> +}
->
-> -       return 0;
-> +int fdtdec_setup_mem_size_base_lowest(void)
+> +int fdtdec_setup_mem_ram_top(void)
 > +{
-> +       gd->ram_base = (unsigned long)~0;
+> +       phys_addr_t old_top = gd->ram_top;
+> +       int ret;
 > +
-> +       return fdtdec_setup_mem_for_each_bank(fdtdec_setup_mem_size_base_lowest_bankfn);
->  }
->
+> +       ret = fdtdec_setup_mem_for_each_bank(fdtdec_setup_mem_ram_top_bankfn);
+> +       if (ret)
+> +               gd->ram_top = old_top;
+> +
+> +       return ret;
+> +}
+> +
 >  static int uncompress_blob(const void *src, ulong sz_src, void **dstp)
+>  {
+>  #if CONFIG_IS_ENABLED(MULTI_DTB_FIT_GZIP) ||\
 > --
 > 2.53.0
 >
