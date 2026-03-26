@@ -4,90 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1EAB10A3D96
-	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 15:09:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C67610A88C3
+	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 15:15:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BC2681E18;
-	Thu, 26 Mar 2026 16:09:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 998FD81E18;
+	Thu, 26 Mar 2026 16:15:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mOe6oVsl";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qwUnInac";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8C6683CD3; Thu, 26 Mar 2026 16:09:06 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id C5E7F83E76; Thu, 26 Mar 2026 16:15:46 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9813580517
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 16:08:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B0D580517
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 16:15:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-486fb14227cso13504465e9.3
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 08:08:58 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-43a03cb1df9so995155f8f.1
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 08:15:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1774537738; x=1775142538; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1774538144; x=1775142944; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=9p9rJDpDSYtxi+4RtJYQwc0QbRwtDKj+gYeaGbYPetU=;
- b=mOe6oVslXsSPQzPbl+Phc2J7xlW3sL1l5gBUf5YaCJkVu6v/fm57NRfUBu5hoShGSJ
- 7XkIGuSiFpj9lTeOqJgUxjoQ8cVDD4eGYcRl9Oatj+6KSR/vSYcCMq6ennq7XfNGGmdM
- vXPJvjeBoCxQdMsVI35aPU4SxZvGuMTlQSnDjbRwrX7yRbzXjm5pB70a2aC+Kd9vOpJe
- 54cyoZsm3sNJoPDfrvGNcwFhNUUfqtt+8Y2IGPiynGZKbAISb8+uq/YFELEgrSPDoqdN
- 08amyjjaGPHvsHnkG6u74V7eE26OxjWZrRpzoxJ34DlSL2+owa9J8D6r7Ynmrc2QmGMx
- GiLw==
+ bh=DzBrqiqa2HFsC3XmMz014TrD7Qub7bTPx295ka9bbX0=;
+ b=qwUnInac+XjDhp912Ductc6xyTwZWHO3frAomms1r65uX1/by5lssIJw4+N79oi7ke
+ BanI3tV7J0p7yzopVE0SBwZQcHqBbJvsEK2fp79cj/CuvqPL9MsL7dkrzXgHRCzdsm96
+ 6zPaAofPlOxzTI1MR+P5OLtRhkZzXos1GlzZ9pBtJD/BLXeY8VnNOVVAUr3eDJ4JGqG8
+ P8UUdv/rGTsqTrvsAi66e84QANA/OUy7xvo6z4AYY5kLzg4m8mXbuhYoH9ENmQjdICYC
+ 5i56NeLSapju7qV1ciz4z1cM9xriE8slUaUsNFMp7hj8BsHyCX0zDqdABnlCH/i3j3fE
+ 90Nw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774537738; x=1775142538;
+ d=1e100.net; s=20251104; t=1774538144; x=1775142944;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9p9rJDpDSYtxi+4RtJYQwc0QbRwtDKj+gYeaGbYPetU=;
- b=Kn4MsIurnT48yvmccZvlDJ5iBxOe2CuvttuJtm8V2qikV0tdbswqHydbWxNWGvyoik
- MT7q7pdW705JUjkydKflfEjlYDgnWfQj3YSs41+j0WEpa/NGbEPfo1LxXLAsPbwGJUgh
- gIXltVNwyOomzhOqfKN72kVYaP0oYb4nQ4LDx43ydu81HORvoA3GOEyh7JVdbreikJkB
- EsqEOzKUJe1TxjVHigsauwik8bhf3jTFiu2vyzNL+h0MDpJbcKnx4C6hAQqvwGqK+KIN
- kxZC6hTbD4vvksxp1TmEXkxkqejD6yR5PxjOe6KNRbomrz9lfZHlgknDvFebVLW25tLq
- nSgw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUAY1XIhGz/b1mvpc5wQ7/7Jdd670lR1jRh7R8qWIHjGYlbK69lJpOPmeJBj2egpvzByc6YZPQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YxcmeYa5AZjdps+UAKtc3iGeakW5mwYq7mSMkvsNUVXYcyksx8Y
- JYBkc5erp+sliia/Uj7NAnuU2ljdJUwnXPG3ujhixTe34YcZyEtc6CbQEfFIvdGAtf4=
-X-Gm-Gg: ATEYQzz2CyNmzUZeZQc5OV0xux+T7rkhRj/P2J82bwiC0Pl7G6AG0UDT9L5DYwOXRW0
- E6x3v+KM9l6hf6kBvcsWMXfNxtjMi0Abp6qBAZedjXNESKl+w4Gcvw5jFeKBUZp1AB6HkhX127L
- NdVMuk9UyPFvmH42L5sk/ijt3jUYeRtOrXRD7lXo0RnGiI8nyi22zxfHA3xTqzwLu5zRfybcUn7
- fluxxpyYeSztcfpd3SbdgmXWZVJNVuoGndb1uOUpu1cK8wykeXSj66WQyH61ml7ZZNb3ei0PTza
- z4CVSNW9Ame1WgyFy5QZBoBTGJzLCUET9kBxkNkQJgRtduHGyMR8hbrZrmUn289vzhKVYZo5zcb
- r65DCvdvO1fYi/AebrVgey2DSZ76pEDt3stiapXD6ZRBjXRiUhCL+UAsgGkgoxOZsK3I51UrXoU
- 4aSR0NUzP49wDbFsY0F1tnzooIMGPCxJsP8Nw6KCCptIyW2+0GqwTY5kVRSqz/nKaG3NVFlpGd+
- g==
-X-Received: by 2002:a05:600c:4685:b0:486:5f71:5829 with SMTP id
- 5b1f17b1804b1-48715fc3870mr125719795e9.5.1774537737747; 
- Thu, 26 Mar 2026 08:08:57 -0700 (PDT)
+ bh=DzBrqiqa2HFsC3XmMz014TrD7Qub7bTPx295ka9bbX0=;
+ b=RIuiBFALUfkGlZjMOX0DUaoKmBcFIuivWmVq9bRvaSxKFECgkSpeFdBk7Pi2u7DB8K
+ oSkpQk7D3OKJPktt+jg5EYhIA1dQXlw/E0m6TlHxwFcDE23UtndNVv7Zkzobz/++Z5Tn
+ MltA+zoB+RWrvMbvnOiZu0bbMv+9dNZJfjVbkavmYPLfVZtgY5+dikOwg+KQmEbEEDOK
+ ueSUJgRoXZhQajmWNl05F5wd6tBFzOEEZLNq2Ee/5WXgXmzJlz8UTv+zThRHc7MC1FUr
+ Wc4Ndmau/sxnRUqZHmOWGQQHr5l7p0B3cbh1DJaswOVwzy1IUdkyKHisZt2pXoyOszLv
+ JkIg==
+X-Gm-Message-State: AOJu0Yx0o0uYfUPsvm7IPvOC/O02VVdI74wRc1OKnO/r1TZfDc5vwBau
+ jdF1wWyELB5i/wS0bXxCyvuKzoU686l8nMTkZoV1s4wAFj2ZioIBH93481MoqlFbuos=
+X-Gm-Gg: ATEYQzykp3dV1kmJJpr6grcvNMl7Jg2aQoomi4H3pK6ZA6jWnIx3mSTELet0Dokbvqj
+ 65lwMhzx82JGMgm7rbo8ZgNk1St0nzfAwIAgWQ1GTuRPUFor5OxAZFVaH0XxbjXvVvvjO0uf0ZL
+ Cq3Vv1HlzvXO12Iqk2emzFf83gnr8W3WFfbSJBSjJDphXiZif7dngMMCyhhcDL84jIMwH+jjFhF
+ QDrXZW9cmy4bCI28Sf2vS7fTRB5GpkNK0mSC1yr4MLy5eAKe7+FwDhAnDNMl5WUiLlKF67F8+Nm
+ R3GnzlFqpevOJeIkUpBh3MMSpaCjlx2TjK4EyYmybzZ2+mUKFs/0U+TfmRD5++4kEaxK4/YUuiO
+ EBkkBBxZI5nI+fzhitUGjgMfsvKIhc3FUprdh12dUcHE0n+tVSIsLH/k0a7UloLUu+JS3aT9Qo+
+ zkZV0ws/DyU3jnXiVTJrKBwgVl0uOmSBc4D8bxc/AG/yXfmU779nWys7I0pM8B9qk=
+X-Received: by 2002:a5d:6708:0:b0:43b:998c:d82b with SMTP id
+ ffacd0b85a97d-43b998cd88dmr1461541f8f.19.1774538143466; 
+ Thu, 26 Mar 2026 08:15:43 -0700 (PDT)
 Received: from [192.168.1.36] (p5b29eb0d.dip0.t-ipconnect.de. [91.41.235.13])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48722fa8dc6sm64775835e9.1.2026.03.26.08.08.56
+ ffacd0b85a97d-43b9179b212sm8766711f8f.0.2026.03.26.08.15.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 26 Mar 2026 08:08:57 -0700 (PDT)
-Message-ID: <61e458bd-3b1a-4b7b-bb03-797c7ac8dc27@linaro.org>
-Date: Thu, 26 Mar 2026 16:08:56 +0100
+ Thu, 26 Mar 2026 08:15:43 -0700 (PDT)
+Message-ID: <297cff44-ab4f-486e-b546-426468f50968@linaro.org>
+Date: Thu, 26 Mar 2026 16:15:42 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC][PATCH 1/3] fdtdec: Deduplicate iterator function
+Subject: Re: [PATCH] video: simplefb: Map framebuffer region on probe on ARM64
 Content-Language: en-US
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Raymond Mao <raymondmaoca@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20260325031743.371728-1-marek.vasut+renesas@mailbox.org>
+To: Sumit Garg <sumit.garg@kernel.org>, Luca Weiss <luca.weiss@fairphone.com>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+References: <20260318-simplefb-map-v1-1-edec1ee81df1@fairphone.com>
+ <acIpDkBPdC0DGW8y@sumit-xelite>
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260325031743.371728-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <acIpDkBPdC0DGW8y@sumit-xelite>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -108,139 +106,97 @@ X-Virus-Status: Clean
 
 
 
-On 25/03/2026 04:17, Marek Vasut wrote:
-> Both fdtdec_setup_memory_banksize() and fdtdec_setup_mem_size_base_lowest()
-> implement the exact same iterator over all memory banks, the only difference
-> is the body that is executed for each bank. Deduplicate the functionality
-> into iterator function fdtdec_setup_mem_for_each_bank(), which takes a
-> function pointer to a function which implements the body as a parameter.
-> No functional change.
-
-This is a nice optimisation! It will be good to de-dup some thing in
-mach-snapdragon too with this.
-
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
-
-Kind regards,>
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Casey Connolly <casey.connolly@linaro.org>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Raymond Mao <raymondmaoca@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  lib/fdtdec.c | 77 ++++++++++++++++++++--------------------------------
->  1 file changed, 30 insertions(+), 47 deletions(-)
+On 24/03/2026 07:02, Sumit Garg wrote:
+> Hi Luca,
 > 
-> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> index c38738b48c7..d820f75b031 100644
-> --- a/lib/fdtdec.c
-> +++ b/lib/fdtdec.c
-> @@ -1092,7 +1092,7 @@ ofnode get_next_memory_node(ofnode mem)
->  	return mem;
->  }
->  
-> -int fdtdec_setup_memory_banksize(void)
-> +static int fdtdec_setup_mem_for_each_bank(void (*bankfn)(struct resource *res, int bank))
->  {
->  	int bank, ret, reg = 0;
->  	struct resource res;
-> @@ -1120,63 +1120,46 @@ int fdtdec_setup_memory_banksize(void)
->  		if (ret != 0)
->  			return -EINVAL;
->  
-> -		gd->bd->bi_dram[bank].start = (phys_addr_t)res.start;
-> -		gd->bd->bi_dram[bank].size =
-> -			(phys_size_t)(res.end - res.start + 1);
-> -
-> -		debug("%s: DRAM Bank #%d: start = 0x%llx, size = 0x%llx\n",
-> -		      __func__, bank,
-> -		      (unsigned long long)gd->bd->bi_dram[bank].start,
-> -		      (unsigned long long)gd->bd->bi_dram[bank].size);
-> +		bankfn(&res, bank);
->  	}
->  
->  	return 0;
->  }
->  
-> -int fdtdec_setup_mem_size_base_lowest(void)
-> +static void fdtdec_setup_memory_banksize_bankfn(struct resource *res, int bank)
->  {
-> -	int bank, ret, reg = 0;
-> -	struct resource res;
-> -	unsigned long base;
-> -	phys_size_t size;
-> -	ofnode mem = ofnode_null();
-> +	gd->bd->bi_dram[bank].start = (phys_addr_t)res->start;
-> +	gd->bd->bi_dram[bank].size = (phys_size_t)(res->end - res->start + 1);
->  
-> -	gd->ram_base = (unsigned long)~0;
-> -
-> -	mem = get_next_memory_node(mem);
-> -	if (!ofnode_valid(mem)) {
-> -		debug("%s: Missing /memory node\n", __func__);
-> -		return -EINVAL;
-> -	}
-> -
-> -	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-> -		ret = ofnode_read_resource(mem, reg++, &res);
-> -		if (ret < 0) {
-> -			reg = 0;
-> -			mem = get_next_memory_node(mem);
-> -			if (!ofnode_valid(mem))
-> -				break;
-> -
-> -			ret = ofnode_read_resource(mem, reg++, &res);
-> -			if (ret < 0)
-> -				break;
-> -		}
-> -
-> -		if (ret != 0)
-> -			return -EINVAL;
-> +	debug("%s: DRAM Bank #%d: start = 0x%llx, size = 0x%llx\n",
-> +	      __func__, bank,
-> +	      (unsigned long long)gd->bd->bi_dram[bank].start,
-> +	      (unsigned long long)gd->bd->bi_dram[bank].size);
-> +}
->  
-> -		base = (unsigned long)res.start;
-> -		size = (phys_size_t)(res.end - res.start + 1);
-> +int fdtdec_setup_memory_banksize(void)
-> +{
-> +	return fdtdec_setup_mem_for_each_bank(fdtdec_setup_memory_banksize_bankfn);
-> +}
->  
-> -		if (gd->ram_base > base && size) {
-> -			gd->ram_base = base;
-> -			gd->ram_size = size;
-> -			debug("%s: Initial DRAM base %lx size %lx\n",
-> -			      __func__, base, (unsigned long)size);
-> -		}
-> +static void fdtdec_setup_mem_size_base_lowest_bankfn(struct resource *res, int bank)
-> +{
-> +	unsigned long base = (unsigned long)res->start;
-> +	phys_size_t size = (phys_size_t)(res->end - res->start + 1);
-> +
-> +	if (gd->ram_base > base && size) {
-> +		gd->ram_base = base;
-> +		gd->ram_size = size;
-> +		debug("%s: Initial DRAM base %lx size %lx\n",
-> +		      __func__, base, (unsigned long)size);
->  	}
-> +}
->  
-> -	return 0;
-> +int fdtdec_setup_mem_size_base_lowest(void)
-> +{
-> +	gd->ram_base = (unsigned long)~0;
-> +
-> +	return fdtdec_setup_mem_for_each_bank(fdtdec_setup_mem_size_base_lowest_bankfn);
->  }
->  
->  static int uncompress_blob(const void *src, ulong sz_src, void **dstp)
+> On Wed, Mar 18, 2026 at 04:07:17PM +0100, Luca Weiss wrote:
+>> The framebuffer buffer might not be mapped on some devices.
+>>
+>> This is #ifdef'ed for ARM64 since mmu_map_region() is not defined for
+>> any other architecture.
+> 
+> This isn't an appropriate fix to the problem.
+> 
+>>
+>> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
+>> ---
+>> Map 0x1000 extra due to unknown reason, but otherwise it's not enough
+>> and we still get a "Synchronous Abort" when drawing at the bottom of the
+>> framebuffer.
+>>
+>> For milos-fairphone-fp6 the framebuffer is reg=0xe3940000
+>> size=0xa932c0 (2484*1116*4).
+>>
+>> When just calling mmu_map_region with plat->size, then it's crashing at
+>> 0xe43d3000 even though everything up to 0xe43d32c0 should be mapped.
+>> With size+0x800 (or less) it was also still crashing, only size+0x1000
+>> then worked.
+>>
+>> Possible I just don't know enough about memory mapping things, so
+>> suggestions welcome! :)
+> 
+> This sounds more likely the synchronous aborts caused by cache prefetch
+> of nearby reserved memory regions. I see there are some reserved mememory
+> regions around the address space you have mentioned on Milos.
+
+I don't think so, more likely mmu_map_region() is doing an ALIGN_DOWN()
+somewhere.
+
+Luca: I think you should do ALIGN(plat->size, SZ_4K) and assert that
+plat->stat is 4k aligned as well (or at least WARN if it's not). That
+will round up the size 0xa932c0 to 0xa94000.
+
+> 
+> On Qcom platforms, the default memory map strategy is to map the overall
+> DRAM space without excluding reserved reqions. One can exclude reserved
+> regions in a SoC specific manner here [1] but it adds some runtime
+> overhead. Give it a try for Milos as well in case it resolves your
+> issue.
+> 
+> I think we still need to revisit that reserved memory strategy where
+> default should rather be we unmap the reserved regions.
+> 
+> [1] https://github.com/u-boot/u-boot/blob/master/arch/arm/mach-snapdragon/board.c#L743
+> 
+> -Sumit
+> 
+>> ---
+>>  drivers/video/simplefb.c | 6 ++++++
+>>  1 file changed, 6 insertions(+)
+>>
+>> diff --git a/drivers/video/simplefb.c b/drivers/video/simplefb.c
+>> index 8d0772d4e51..e144fde697b 100644
+>> --- a/drivers/video/simplefb.c
+>> +++ b/drivers/video/simplefb.c
+>> @@ -9,6 +9,7 @@
+>>  #include <log.h>
+>>  #include <video.h>
+>>  #include <asm/global_data.h>
+>> +#include <asm/system.h>
+>>  
+>>  static int simple_video_probe(struct udevice *dev)
+>>  {
+>> @@ -37,6 +38,11 @@ static int simple_video_probe(struct udevice *dev)
+>>  	plat->base = base;
+>>  	plat->size = size;
+>>  
+>> +#ifdef CONFIG_ARM64
+>> +	/* The framebuffer buffer might not be mapped on some devices */
+>> +	mmu_map_region((phys_addr_t)plat->base, (phys_addr_t)plat->size + 0x1000, false);
+>> +#endif
+>> +
+>>  	video_set_flush_dcache(dev, true);
+>>  
+>>  	debug("%s: Query resolution...\n", __func__);
+>>
+>> ---
+>> base-commit: ba7bf918dafcd093ad733b07ba490baeb20cf5da
+>> change-id: 20260318-simplefb-map-abb9dba0eed1
+>>
+>> Best regards,
+>> -- 
+>> Luca Weiss <luca.weiss@fairphone.com>
+>>
 
 -- 
 // Casey (she/her)
