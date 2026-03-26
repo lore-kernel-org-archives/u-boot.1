@@ -4,90 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E53A910A1E81
-	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 11:51:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED75110A1E82
+	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 11:52:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27F5A83EAC;
-	Thu, 26 Mar 2026 12:51:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7EB3B83E76;
+	Thu, 26 Mar 2026 12:52:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="g2nmLbaI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hRxTXlWk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79F0383CD3; Thu, 26 Mar 2026 12:51:36 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 79EEC83EAC; Thu, 26 Mar 2026 12:52:50 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EBEA83A1B
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 12:51:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6940581E18
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 12:52:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-482f454be5bso18236965e9.0
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 04:51:34 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-b982b0889d8so98275766b.2
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 04:52:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774525968; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Q5Qrnu4TJ72BV8zboFeNz/qtOv2oSpRIF48D7x0vX64+kW9oVnnKLyxGgSQkrtGiup
+ mUSohLX7qyy6gT3m7GKnBIDEfBEzNzxlk+hUiApYfKMQgbqDJqEHSyrXoE5M11ezYAYi
+ OsahJYfIpjmQ9ynMRYAp17QMCVbdd9UIZ0M0x4q3EUAStqVmnKohMghzGFbtG/dr2hsz
+ Sthrx48ibxKOqXTRk4jTjK9E/YegaU1UMjLh1itPzrLE7sehGSHk3tPAMgg4Q3siGIFb
+ qNUy80NHyCWFVbkSPznFqCbaI+03EhKYje2H2pIKN4mKiRFkxiSlt1PCnEO03SblMru0
+ znMQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=uQTjkRn6bAiHqBdbOK7XQS/kLvhT4v67B4Jk+TeM4Co=;
+ fh=2w8mYF4LuweTY133cjdJkKBJK54+rTD/AxCP+o9GCM8=;
+ b=CRNlpya8T9FU3JB0m+ZX3quWIbSLGkfg8di3G7lxtyx2t9axnkPzr/kLRLaQEpoysZ
+ JSB3Ybe+RT5WXwz1x/emgewxpMOtgHzNOXgEAB7pLwcf9qV3D5SqC3U9+ZHXtZgvqTQy
+ sien2f1oqhHJeKHtHL/fH9gJbbPC98ABERTCuXPFbQI6RGX6Kh3QNso72Eu8syus5EKT
+ mhqbRqH82EplyZndFAxt6CJihPv3891X7I8A05ueLbX5VxgcQiWB7sXzlgNgLESY0+YS
+ 2316nY609zYGBWRtQ6+eNynsVFy9qhITE7haZBJk3Xx/fgm5dM2DRGruS6g5ahCmqOHm
+ liWw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1774525894; x=1775130694; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3NRNe0tsv7xdwn6TailZS7sFZ+Z82CCtkQxhMibYX3s=;
- b=g2nmLbaIxUuYV57n452FklEr0yKpKkHGzPUbZu2Ssm/TIdGPGJVMUdZO15vouaI3zh
- BcjGbTCt2OSNNIKnoHvoyaM8UR9mLnMXZ8qSRoRohFaFOXOhprFIoq7Ysi3iDbNYwnK0
- RRRHpQT29zgaCBv7ISXcypPbPlmMFHGDO2BnxYz7WdkF6auiEbEnp/nkEV/T51U+LgUI
- iQuMkUepCh6C47oRAPGusmBqUtaQf42QOQ9paaHnOA3/2BP6AADZQEOOpJR01mSBWGWA
- 3gQr7dTVwtU3CyWh0Szyj2M5ZgjQi83BnsS26EEtYm87agkCtCHQnaLhHMhV5b3CiuRf
- qtYg==
+ d=chromium.org; s=google; t=1774525968; x=1775130768; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=uQTjkRn6bAiHqBdbOK7XQS/kLvhT4v67B4Jk+TeM4Co=;
+ b=hRxTXlWkWTlODUkPmLH9aYnR4Ov77gaSx/07XDBp0cqtuyY78M8fi4jXIEtZjjpP5L
+ lKbr3ViVNOz+b4gXxGYrvJlIxcODdt5KUr7dr/KnB8ZAprGqR2AVQ/mY+kCTroWOD6lT
+ lpCxQSX+FkD64q1FXNB20BDxCqveB/cY/eOVI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774525894; x=1775130694;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=3NRNe0tsv7xdwn6TailZS7sFZ+Z82CCtkQxhMibYX3s=;
- b=cOeHhLT20srY1mjbBW8XZ2Fj6purQ5DmaxbpRGJBuR6BJyrSgr5qIrZfPtDEvTr5el
- ZF0cJgUqa8+qvgJS7lzb26fzvxIOsSxPf85CF+eVrgXLIw721RNLsxz0+UyHfLXCO4g9
- ODmwYu55zDDpCwab1G0EddaP7OLFXhKAKB2ZVwE1qo8tJ9mQ4Mv72IwpTrVDyg47YOH/
- NtomyzLZ3Zu7XHWWo6bKevV3N+72JHJHUaL1ZjLqzOO40qLNhUmub1zA7us34lJLcaC6
- d7Jz5TM9IJ8YteM+dAyMGELtUSE4CEkM95P96BVVOOHItRUc1HGWFNKF+0VFbGXhv4jD
- PwlQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXQKeUaBd8YVHKMMnzA08Ip8dTix+llI0/jQbajkuySTvfMdQwpL6fs7gFOgfILpLGh0iDz0TE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxHF3XBg/CAOlK8FDS4NTY1iAW1aV044ANPKyUVqIyh5XEWn2nQ
- WMz/q3kmRo1I7YcRv2eraa0ZVtn8DW70yka0v7xtG3oaW4omUkKwGHAGOSs8htG5rWU=
-X-Gm-Gg: ATEYQzyWay/hHnZoP92pJLvkOuehXI01qxaGkxNh4BNkJIe2HX5ZPvVURRU3F1cfD5c
- DvgDO9qMgLZjoOPvM5uRJavOFk2SGBR9VktZ8t1nv8XkDhRHD7yPolvprCApRNXjxc6b8OO2NiY
- 625Al2IxKoAyodDEscH7oh4U9HsB/b1bcqy5H1fsE3O3Wu56wf1Sz+K3PvrZb+og3yFfGTubvp9
- raHnn86ty+kvkZn6H55XCx6gwyQtlL7Lx8/2j0kRkLGpGb5G8hiUDQdZAcvLy15NAuZulC6owXi
- PPaPC7jW0pW162bzCiFA+S9TpUtD8RdOOnnMXC5ICrBKDZX1DxsAzPhRza8ecqlLxDKo+9Cicmo
- JveODUJiGMkbjG0Z8EIwawtk8oeo1UHn9rszgXXVjyCOKOVFPRvvg1O0HQKQzQAIoBk6M0RHfKy
- O+4Br2be5BRkD1xuRm+qaQ22Rhr3uSwKRzaKbub54JD/ady2BLRY10e4m4C70HSJsuumzZLSHTZ
- T3vw761f5JNGu9VxSdlJiRO4jbqNQZoJgokUDS3JTaDIR4jzR65UXscHWBnJ6D4lpppvcE8eBcM
- c+p5nqQdWxXiOmrVrOEEymZXTHGrKtRB3EOAAqVcR9LJIIsdz1BZqov21chrN0n0V0lHTIveZ/+
- hZbBqqIZdSut8nXWqcd0P28vBJjG3QMtm7YssVQvnzEW2E9jWHfwP2iznnH2uky2l6VnJAwbDt1
- NIjVdkPo9dM523IGcpwYFAF9ybblsD1s96bSqglRlT9lqiXO69Dqa89mXyctYO
-X-Received: by 2002:a05:600c:8b85:b0:487:12c:e7ea with SMTP id
- 5b1f17b1804b1-48722ba914dmr19132935e9.5.1774525893401; 
- Thu, 26 Mar 2026 04:51:33 -0700 (PDT)
-Received: from hera ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4871fb3d09dsm25968005e9.0.2026.03.26.04.51.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Mar 2026 04:51:32 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: marek.vasut+renesas@mailbox.org,
-	trini@konsulko.com
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
-	u-boot@lists.denx.de
-Subject: [PATCH v1 3/3] common: Allow relocations on the top of the last bank
-Date: Thu, 26 Mar 2026 13:51:09 +0200
-Message-ID: <20260326115111.1631261-4-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20260326115111.1631261-1-ilias.apalodimas@linaro.org>
-References: <20260326115111.1631261-1-ilias.apalodimas@linaro.org>
+ d=1e100.net; s=20251104; t=1774525968; x=1775130768;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uQTjkRn6bAiHqBdbOK7XQS/kLvhT4v67B4Jk+TeM4Co=;
+ b=l9W9IPsYrPsVkbQkVzABxKYkOJ1v5YSfTpqZjmSIzSYvjeUEhGz/NyxnF5TnrmLV2g
+ LwuZ7wRcKTTeBosMy6m1DBcPxcdU10v8BEYS84YNNOnwGvJBbbW8vuiMliYZp4rQ28RM
+ Hmhm4Nf310NUzleSq/tFIfQd1kcfW4GZTyotMfo9qD3LLQb/HyX6gbMGl9P1u22XxEpR
+ lWPueqmrS/l6ul4B6C3E+SoHCwPUlyebxuVlw+R9NlwX9i7LANDAGll3JCiS7jU/w5X/
+ MKx9ul6aDm3htieHc5/pgNgFKmw10W3N8WP3b5tDkxscd7nVAujxTeno3jPAzIyQH3Jw
+ Ou0g==
+X-Gm-Message-State: AOJu0Yx7iAJ/LRpwWT/JlmLjTDWDPr8ryWEnyTKiYQJYCTXusaBn09EA
+ J+YDxG3j13/AVqKY2k5haW2k9zidmvhNLF+Hv8fPnIdI/OjpDxgIqjKL1FsBmkRUrz3bxvgzJ5O
+ RLsXvvPVLF5XjSeB+dYMjBll0nv7AS6cWQ4EC2M9S
+X-Gm-Gg: ATEYQzwa7WxYf66xKxmcZ5D/nY0QqrFLcpNBcn6hdV/BwT8qV59mItY7wuYyW6/oX4Q
+ cOKrmk3nDodQF7/RyhzYzApsJ4CbDiu8nAt3Hu0S90fFa5q1ivWfi502MnWBvKkoj+Db358UOgW
+ Z3MLLfFwCJw6883VtiuslikOx8NXZa4sa35Eau1e2I1eHZj0tadhEKjD/H0r4ldPmWgnizCv1pR
+ Rs1pF3o+5aqA2dtSSBaUzR1BmxHv4+HDUw7us/cjFJuGjntyeeFvfp0/AeSoAf5iMfnvxgcGsPj
+ nBhYP9A=
+X-Received: by 2002:a17:907:cbc5:b0:b98:82c9:d1ba with SMTP id
+ a640c23a62f3a-b9a3f161d53mr499151966b.1.1774525967865; Thu, 26 Mar 2026
+ 04:52:47 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260325130811.447377-1-sjg@chromium.org>
+ <20260325165420.GT502704@bill-the-cat>
+ <CAFLszTgZpg-anG1J5kyiYk2JJ3dDiiyvuk5AV_PO+ri_b552tA@mail.gmail.com>
+ <20260325171540.GU502704@bill-the-cat>
+ <CAFLszTh3NgpY1VQer2wN9-feOvM8khXaFyp+ePhTpqowGK_qrQ@mail.gmail.com>
+ <20260325182619.GV502704@bill-the-cat>
+ <CAFLszThCO2a1COB8kBwYfTXM65AGJEugo9MWZAjphQNuX16Y-Q@mail.gmail.com>
+ <20260325195337.GY502704@bill-the-cat>
+In-Reply-To: <20260325195337.GY502704@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 26 Mar 2026 05:52:36 -0600
+X-Gm-Features: AQROBzArWZSfkefDwD7-5JAEIv8CXH47Ou8Uj3nKgnH4Kqj7nC3igso1M1JJdgo
+Message-ID: <CAFLszTimy0pLBYd=my+uDafTyS9_AmhOonhSo9TBcnzJMzM_yQ@mail.gmail.com>
+Subject: Re: [PATCH] kbuild: Use relative paths in generated .incbin directives
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Peter Robinson <pbrobinson@gmail.com>, Sam Edwards <cfsworks@gmail.com>, 
+ Sughosh Ganu <sughosh.ganu@arm.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,57 +118,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Right now we only relocate u-boot to the top of the first
-memory bank unless the board specific code overwrites it.
-This is problematic when loading big binaries as it
-fragments the contiguous memory space for no apparent reason.
+Hi Tom,
 
-It's worth noting that there are cases where we must not relocate
-above the 4GB boundary (e.g 64bit hardware with 32bit only capable
-DMA).
+On Wed, 25 Mar 2026 at 13:53, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Mar 25, 2026 at 01:21:54PM -0600, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Wed, 25 Mar 2026 at 12:26, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Wed, Mar 25, 2026 at 11:57:17AM -0600, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Wed, 25 Mar 2026 at 11:15, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Wed, Mar 25, 2026 at 11:12:00AM -0600, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Wed, 25 Mar 2026 at 10:54, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Wed, Mar 25, 2026 at 07:08:09AM -0600, Simon Glass wrote:
+> > > > > > > > The generated .S files for fonts, splash screens and EFI apps use
+> > > > > > > > .incbin with the full prerequisite path. When building with O= this
+> > > > > > > > bakes an absolute path into the .S file. If the build directory is
+> > > > > > > > later used on a different machine (e.g. in a container), the assembler
+> > > > > > > > cannot find the source file.
+> > > > > > > >
+> > > > > > > > Use $(src)/$(notdir $<) instead of $< so the .incbin directive contains
+> > > > > > > > a source-relative path like drivers/video/fonts/nimbus_sans_l_regular.ttf
+> > > > > > > > rather than an absolute one. Add -Wa,-I$(srctree) to the assembler
+> > > > > > > > flags so the assembler can resolve these paths.
+> > > > > > > >
+> > > > > > > > The DTB and DTBO rules are left unchanged since their prerequisites are
+> > > > > > > > generated files in the build directory.
+> > > > > > > >
+> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > ---
+> > > > > > > >
+> > > > > > > >  scripts/Makefile.lib | 7 ++++---
+> > > > > > > >  1 file changed, 4 insertions(+), 3 deletions(-)
+> > > > > > >
+> > > > > > > This is generic kbuild infrastructure now. Is there a fix we're missing
+> > > > > > > from upstream, a change we haven't pulled in yet (as we need to keep
+> > > > > > > syncing upwards) or a problem upstream too? Thanks!
+> > > > > >
+> > > > > > Linux does this with DTB files in quiet_cmd_wrap_S_dtb:
+> > > > > >
+> > > > > > echo '.incbin "$<" ';
+> > > > > >
+> > > > > > But Linux only uses generated files in the build directory, never
+> > > > > > actual source files. The font/splash/EFI .incbin rules are U-Boot
+> > > > > > additions that aren't in the upstream kbuild. So Linux doesn't have
+> > > > > > this problem.
+> > > > >
+> > > > > Shouldn't we be generating these files in to the build directory too?
+> > > >
+> > > > These are actually source files, e.g.
+> > > > drivers/video/fonts/nimbus_sans_l_regular.ttf
+> > >
+> > > So, the first thing then is that S_ttf is a local U-Boot rule. Lets
+> > > start by moving this out of scripts/Makefile.lib to
+> > > scripts/Makefile.lib-u-boot as that will make future re-sync work easier
+> > > (and is something we've talked about in the re-sync threads, splitting
+> > > U-Boot specific stuff out to new files). Then 2/2 of that series can be
+> > > this change, thanks.
+> >
+> > Almost, but I still need the a_flags change.
+>
+> Think a bit on how to solve that without touching the files that we
+> really want to have no delta with upstream on please. It's 5 files,
+> adding AFLAGS_foo.o += ... to the fonts Makefile and a note doesn't seem
+> bad and reduces the chances of the a_flags part being lost in a future
+> resync to zero.
 
-Add a Kconfig option and allow the common code to relocate U-Boot
-to the top of the last discovered bank.
+I don't like it very much, but I'll send a v2 along these lines.
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
-Changes since RFC: 
-- new patch
- Kconfig          | 7 +++++++
- common/board_f.c | 2 ++
- 2 files changed, 9 insertions(+)
-
-diff --git a/Kconfig b/Kconfig
-index ce25ea24a60f..b9144878ce0b 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -474,6 +474,13 @@ config SKIP_RELOCATE
- 	  Skips relocation of U-Boot allowing for systems that have extremely
- 	  limited RAM to run U-Boot.
- 
-+config RELOCATE_LAST_BANK
-+	bool "Relocate U-Boot to the top of the last memory bank"
-+	help
-+	  When U-Boot relocates, it chooses the end of the first memory bank.
-+	  Enable this if you have multiple banks and want U-Boot to relocate
-+	  to the top of the last available bank.
-+
- endif # EXPERT
- 
- config PHYS_64BIT
-diff --git a/common/board_f.c b/common/board_f.c
-index df2b0dc899bf..7c3fbeab17ec 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -321,6 +321,8 @@ __weak phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- 		 */
- 		return 0;
- #endif
-+	if (IS_ENABLED(CONFIG_RELOCATE_LAST_BANK))
-+		fdtdec_setup_mem_ram_top();
- 	return gd->ram_top;
- }
- 
--- 
-2.51.0
-
+Regards,
+Simon
