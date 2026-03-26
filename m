@@ -4,84 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7907710A3D80
-	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 12:08:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97B6910A3D80
+	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 12:08:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7D3F83CD3;
-	Thu, 26 Mar 2026 13:08:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DC47183E76;
+	Thu, 26 Mar 2026 13:08:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Iy8F+x8O";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Hd/w4YN2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18F8183CF5; Thu, 26 Mar 2026 13:08:22 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 3AA8283FA3; Thu, 26 Mar 2026 13:08:26 +0100 (CET)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2EB9838BB
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 13:08:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 06BB483E76
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 13:08:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dan.carpenter@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-486fb14227cso11091255e9.3
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 05:08:19 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-482f454be5bso18448455e9.0
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 05:08:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1774526899; x=1775131699; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=t4cjfZg4F2PiXHof9rE5/dVu2fe6fRlZdwfljw54iWY=;
- b=Iy8F+x8OUyGvEmEcghcucEeHvEGK1AjoNLoldA6Tk2a2dzS04TNUgtB2S1LmBOZAbw
- 4awIrPnSe4vCDqlAIas4tFqREXQg0LVjSflA/URN+sYALC9g2/S5mT6y0MRu+YThvGe4
- SvLk4PIBaGLY7EZM+PD2S3IvamocfXKA/HdtGTqw5+tqRgl2tBS9vtoN4Ai8qSrCVGIN
- CbrFOu8bHhB20OOr0PczzjsbqB1RQqqNIWIIu85wRC280JsLS10bWncqZiUIZXOUStyV
- OH1rOF/7TSamndedyBqaSPxc/gqnyStGTKnauO+yMBfdD1U0ieccmG+bIk5HsReWH1Eo
- 2CYA==
+ d=linaro.org; s=google; t=1774526903; x=1775131703; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=gVQKnJrqFmndyfPGajYI2v1TJJhYYnjqTw5bKsVt/5U=;
+ b=Hd/w4YN2Vp2msJU+OBPHath5EsRtujpf1VUrmkay635nM3eCks9VVo1sqKZiI4LGSO
+ I8M5ev+fPaDtBfZOSWggxDDBQtq617HVt9J/3F1RLj1wc1kJwlzBl01OUoNgyRecCAXR
+ xqFgMEK9U3GPrCE4pXRmlCRz0IQzUi1XP3H4B84TyN4CKKUjKNcANiqYAbaxhUDW2/SF
+ yeQ1OjBsjL0xCn2+K78z2RhZaooPq95Pus3qfBLhzwOj7Dy/XmDXg2HYio1UKMrEl6xr
+ OHwlxXxaBR7u/sVJIRFNaKBoO1Ksycrw/A2IzXD6LyQirYHhhn40k7skjyZLHzv+J0bF
+ 1OaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774526899; x=1775131699;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=t4cjfZg4F2PiXHof9rE5/dVu2fe6fRlZdwfljw54iWY=;
- b=LSrYa4F88g97rfSwDX8+jcWJ8Z5aosA7L7kwRSHVCHsTzgoRsJSbbWg4ymC8CXhIJw
- Y4E6tOI8/4zhWzYI2fK9O9euSGchHzBEvJmD2pq4QpooplYy2DqGAxX1l4EWCNKP7g0v
- p1us5ZkWzwnv2oSBIe8QPc7flleoKHc224zu3OsyOPtaMHIwxQ3vL7WclpJJCT9HzPvN
- AHoZPLhiWGRLF2cDGAPbFt9bOUDeHoyHJhyOTe76yiMiqi8nP3MTL99O+BV5xjDBIQkq
- QJ8y1d5UR/uK32o9Vi0+2g3ZsQFW6wY+iEwsy9mMGwwYvwnpb7B2ZRVAXCLAlIvZ6GMA
- G/JA==
+ d=1e100.net; s=20251104; t=1774526903; x=1775131703;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gVQKnJrqFmndyfPGajYI2v1TJJhYYnjqTw5bKsVt/5U=;
+ b=j/EC7md47jCXUYVsFW3V3wWQImuA/eDtyC1VQZbVZMZAUQiVp97htW4AjkcxRz+o2M
+ 1XlFOYFt+0VX07GlKAQlzSMOnNV6h1wes7qL1fIU6N1+paE3Zd+ZOKTvF6ktkHAg150W
+ t7IKhHhK/aiwmE33Hgheajv+ZiFbspHnb1KuIlT5TKHKrYHVG008fsUGr5X2uAV5pE93
+ 6n9LCRjv3ijckd2OgP6SENigk0tOmpXV/oHHMySoQZUU7mq4KHNWHd4gWqqfiRj4YLFw
+ g+GdKx5kDCgeUIGqjgi7P1Nr3+WTlnB5ToLJASd5p3M/k8jG/SnfXJtwOuuHnZk+qpl+
+ OAWA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUFcO4PDFGWhXHEH0jTB0OUfW45GtNTKcgQhtCrOWU6219ttvYY724Zld6gdoxG7pYQlEed3Yo=@lists.denx.de
-X-Gm-Message-State: AOJu0YwTQEZuxeO2uaStlTacuOoTaIzGGxDmLH+fiHXlJU93AHdrIlX1
- 4GH1KCzdfSI5IqmqDGimByN75TWu/nZ372riMGv3gYbHUvX+jv9VjPJh+XbTUktq4Cw=
-X-Gm-Gg: ATEYQzx/e4YgySTXgk79iuzTL9YFd4B7dYv9KgKNzQ7SxzWksRT9JM2tnkrjoQIeTM3
- PpVZIBg3PGixW1Q6VDiH2/DZPtNXD7rOUAEovckMR6hZI+LsdTL1b94774wFDCcHooEbE8lX+M+
- sFzWewBClNn435CT1kDYppXZd54vghcvy6myr5TKEhEDF9vRShTSXcOIXkw308GN/0l4s7E2RDm
- f2ukcKfnOBeNRoFqZolA57kXg+4o0kkcuVTwXs49Ob0q9g9JPsX66qh1QEqecalKH9QpFiUQg37
- cfUfKzS9cEgAmePgIsi3pCLGvg1qIPcr8NHbrRQ1ID6irkBYxhUW7eUlOH3EM7YIV0csIEcGbDt
- pElKwCdOQPjFog8D+ucWa/MoRxECgciAMXXexZPwOtWRbXfUTyvPJRrQr0GVqG2fjcrLqaoBdY1
- HgYJwZt72houO3GBavrK4ufmUWNF6E
-X-Received: by 2002:a05:600c:3592:b0:485:3bb5:92cf with SMTP id
- 5b1f17b1804b1-48715fea715mr118494995e9.12.1774526899232; 
- Thu, 26 Mar 2026 05:08:19 -0700 (PDT)
+ AJvYcCVaJCgQRVxDIM+/b5kVzHuFzXYFVjV7Vb3H1HYPIQ5TmiFjluicXqueYtZjqo1elZzFY6mh/6M=@lists.denx.de
+X-Gm-Message-State: AOJu0YyDM/G8i23+2Wo79saKg9DkFWj8ocBJ0sFKw1gIKSRUpE93bKCA
+ 0IOHfGRRusmMW/MDShgYbGXZxaf0YXoDhYZBUuxEkPYXynH581idNVnjX/CHW1EqEZs=
+X-Gm-Gg: ATEYQzwAzHwqHQmfVKf228A+VydxOPvzu211Jmt8mEF1+TNkyam1rXwVbCLTmAxvhDx
+ c9oObjtGPiXY7uSZDB04JGNPwXe7hr5sd7xVephhNLIgp52vRtk9uyEjv7c391l0+G+VQh5z+CX
+ AEzriYZc3+7F+m734Ig0//yll5y7FE78FjpZzwCsJCOYfHRC7iQdknJUUu7mY8EWSbERqeWuNnj
+ IUnBDcr87iC5N/VC0RmFt2eylbVRs71GmHfSMIiY+4J7SOPCpeEctP6j2ObOYxr1a48O4W+TgoX
+ qgOgzjfMwegO84kZtd5sRhaZ22L4giwK/Dla12sQh03ET3bDX8qh088MDYEeRpx/E4cYQeBFkdd
+ chRauY4GajH0B4BQBGsm+PRj/mfoKjUq5KNacUNEnjXYbafaveCzKf1zIogkZhNPv72ltnS2OsF
+ cxuEdurhbwR95PegdOXu54I4J4CIAG
+X-Received: by 2002:a05:600c:4e4f:b0:485:50ac:b8cf with SMTP id
+ 5b1f17b1804b1-48722ad3f0fmr22947665e9.0.1774526903352; 
+ Thu, 26 Mar 2026 05:08:23 -0700 (PDT)
 Received: from localhost ([196.207.164.177]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48722d236a9sm61097315e9.11.2026.03.26.05.08.17
+ 5b1f17b1804b1-48720925591sm13483345e9.25.2026.03.26.05.08.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Mar 2026 05:08:18 -0700 (PDT)
-Date: Thu, 26 Mar 2026 15:08:12 +0300
+ Thu, 26 Mar 2026 05:08:22 -0700 (PDT)
+Date: Thu, 26 Mar 2026 15:08:17 +0300
 From: Dan Carpenter <dan.carpenter@linaro.org>
 To: Dan Carpenter <dan.carpenter@linaro.org>
 Cc: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
  u-boot@lists.denx.de, Vincent Guittot <vincent.guittot@linaro.org>,
  Michal Simek <michal.simek@amd.com>, arm-scmi@vger.kernel.org,
  Linus Walleij <linusw@kernel.org>
-Subject: [PATCH 0/2] u-boot: pinctrl: scmi: Use standard pin muxing format
-Message-ID: <cover.1774526652.git.dan.carpenter@linaro.org>
+Subject: [PATCH 1/2] firmware: scmi: Fix setting the function
+Message-ID: <401560217b674c299cb0f344e6f24c271fa7583a.1774526652.git.dan.carpenter@linaro.org>
+References: <cover.1774526652.git.dan.carpenter@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
+In-Reply-To: <cover.1774526652.git.dan.carpenter@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,21 +100,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In my original code I created a custom format for pin muxing but it's
-better to use the standard format.  I also found a bug trying to use
-set the function.  (That code wasn't used previously).
+Set BIT(10) when the function needs to be set, otherwise the setting is
+ignored.
 
-My GPIO driver is not affected by this change:
-https://lore.kernel.org/all/ff0756d9a26c95540fb65a35765e9a43949a5814.1774350851.git.dan.carpenter@linaro.org/
+Fixes: 1048331f5d3c ("scmi: pinctrl: add pinctrl driver for SCMI")
+Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+---
+ drivers/firmware/scmi/pinctrl.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Dan Carpenter (2):
-  firmware: scmi: Fix setting the function
-  pinctrl: scmi: Use standard device tree pin muxing format
-
- drivers/firmware/scmi/pinctrl.c |   2 +
- drivers/pinctrl/pinctrl-scmi.c  | 151 ++++++++++++--------------------
- 2 files changed, 56 insertions(+), 97 deletions(-)
-
+diff --git a/drivers/firmware/scmi/pinctrl.c b/drivers/firmware/scmi/pinctrl.c
+index 47f7a8ad9b81..e670538c87f9 100644
+--- a/drivers/firmware/scmi/pinctrl.c
++++ b/drivers/firmware/scmi/pinctrl.c
+@@ -259,6 +259,8 @@ static int scmi_pinctrl_settings_configure_helper(struct udevice *dev,
+ 	in->attr = 0;
+ 	in->attr |= FIELD_PREP(GENMASK(9, 2), num_configs);
+ 	in->attr |= FIELD_PREP(GENMASK(1, 0), select_type);
++	if (function_id != SCMI_PINCTRL_FUNCTION_NONE)
++		in->attr |= BIT(10);
+ 	memcpy(in->configs, configs, num_configs * sizeof(u32) * 2);
+ 
+ 	ret = devm_scmi_process_msg(dev, &msg);
 -- 
 2.53.0
 
