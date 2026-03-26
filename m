@@ -4,104 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED75110A1E82
-	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 11:52:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1E8010A1E82
+	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 11:55:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EB3B83E76;
-	Thu, 26 Mar 2026 12:52:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 17E1983E76;
+	Thu, 26 Mar 2026 12:55:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hRxTXlWk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cW4TyyEf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79EEC83EAC; Thu, 26 Mar 2026 12:52:50 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 8F00483F14; Thu, 26 Mar 2026 12:55:17 +0100 (CET)
+Received: from mail-oi1-x242.google.com (mail-oi1-x242.google.com
+ [IPv6:2607:f8b0:4864:20::242])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6940581E18
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 12:52:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B7E781E18
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 12:55:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-b982b0889d8so98275766b.2
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 04:52:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774525968; cv=none;
- d=google.com; s=arc-20240605;
- b=Q5Qrnu4TJ72BV8zboFeNz/qtOv2oSpRIF48D7x0vX64+kW9oVnnKLyxGgSQkrtGiup
- mUSohLX7qyy6gT3m7GKnBIDEfBEzNzxlk+hUiApYfKMQgbqDJqEHSyrXoE5M11ezYAYi
- OsahJYfIpjmQ9ynMRYAp17QMCVbdd9UIZ0M0x4q3EUAStqVmnKohMghzGFbtG/dr2hsz
- Sthrx48ibxKOqXTRk4jTjK9E/YegaU1UMjLh1itPzrLE7sehGSHk3tPAMgg4Q3siGIFb
- qNUy80NHyCWFVbkSPznFqCbaI+03EhKYje2H2pIKN4mKiRFkxiSlt1PCnEO03SblMru0
- znMQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=uQTjkRn6bAiHqBdbOK7XQS/kLvhT4v67B4Jk+TeM4Co=;
- fh=2w8mYF4LuweTY133cjdJkKBJK54+rTD/AxCP+o9GCM8=;
- b=CRNlpya8T9FU3JB0m+ZX3quWIbSLGkfg8di3G7lxtyx2t9axnkPzr/kLRLaQEpoysZ
- JSB3Ybe+RT5WXwz1x/emgewxpMOtgHzNOXgEAB7pLwcf9qV3D5SqC3U9+ZHXtZgvqTQy
- sien2f1oqhHJeKHtHL/fH9gJbbPC98ABERTCuXPFbQI6RGX6Kh3QNso72Eu8syus5EKT
- mhqbRqH82EplyZndFAxt6CJihPv3891X7I8A05ueLbX5VxgcQiWB7sXzlgNgLESY0+YS
- 2316nY609zYGBWRtQ6+eNynsVFy9qhITE7haZBJk3Xx/fgm5dM2DRGruS6g5ahCmqOHm
- liWw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Received: by mail-oi1-x242.google.com with SMTP id
+ 5614622812f47-46726528f1cso536118b6e.0
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 04:55:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1774525968; x=1775130768; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uQTjkRn6bAiHqBdbOK7XQS/kLvhT4v67B4Jk+TeM4Co=;
- b=hRxTXlWkWTlODUkPmLH9aYnR4Ov77gaSx/07XDBp0cqtuyY78M8fi4jXIEtZjjpP5L
- lKbr3ViVNOz+b4gXxGYrvJlIxcODdt5KUr7dr/KnB8ZAprGqR2AVQ/mY+kCTroWOD6lT
- lpCxQSX+FkD64q1FXNB20BDxCqveB/cY/eOVI=
+ d=chromium.org; s=google; t=1774526113; x=1775130913; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=OP5IoAJBR58biIqTCrkgk6Mvus+34Pd5UVdC5e5GZNw=;
+ b=cW4TyyEfD1flKeTqSM63yXLL/s4ysUcVGHh8mu/UnNN4wsSXvPi5+y7foBbUrLXwLd
+ qzhV8r1QtO/jCd1zLg7A8wz1lc3Ksk6SfYwA6iN6u76FN1cisjijIOJ3BZDpAoph4vrY
+ CllsKajdQHL1LMx/mzDAbrofGTRdO+mkb3MJU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774525968; x=1775130768;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1774526113; x=1775130913;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uQTjkRn6bAiHqBdbOK7XQS/kLvhT4v67B4Jk+TeM4Co=;
- b=l9W9IPsYrPsVkbQkVzABxKYkOJ1v5YSfTpqZjmSIzSYvjeUEhGz/NyxnF5TnrmLV2g
- LwuZ7wRcKTTeBosMy6m1DBcPxcdU10v8BEYS84YNNOnwGvJBbbW8vuiMliYZp4rQ28RM
- Hmhm4Nf310NUzleSq/tFIfQd1kcfW4GZTyotMfo9qD3LLQb/HyX6gbMGl9P1u22XxEpR
- lWPueqmrS/l6ul4B6C3E+SoHCwPUlyebxuVlw+R9NlwX9i7LANDAGll3JCiS7jU/w5X/
- MKx9ul6aDm3htieHc5/pgNgFKmw10W3N8WP3b5tDkxscd7nVAujxTeno3jPAzIyQH3Jw
- Ou0g==
-X-Gm-Message-State: AOJu0Yx7iAJ/LRpwWT/JlmLjTDWDPr8ryWEnyTKiYQJYCTXusaBn09EA
- J+YDxG3j13/AVqKY2k5haW2k9zidmvhNLF+Hv8fPnIdI/OjpDxgIqjKL1FsBmkRUrz3bxvgzJ5O
- RLsXvvPVLF5XjSeB+dYMjBll0nv7AS6cWQ4EC2M9S
-X-Gm-Gg: ATEYQzwa7WxYf66xKxmcZ5D/nY0QqrFLcpNBcn6hdV/BwT8qV59mItY7wuYyW6/oX4Q
- cOKrmk3nDodQF7/RyhzYzApsJ4CbDiu8nAt3Hu0S90fFa5q1ivWfi502MnWBvKkoj+Db358UOgW
- Z3MLLfFwCJw6883VtiuslikOx8NXZa4sa35Eau1e2I1eHZj0tadhEKjD/H0r4ldPmWgnizCv1pR
- Rs1pF3o+5aqA2dtSSBaUzR1BmxHv4+HDUw7us/cjFJuGjntyeeFvfp0/AeSoAf5iMfnvxgcGsPj
- nBhYP9A=
-X-Received: by 2002:a17:907:cbc5:b0:b98:82c9:d1ba with SMTP id
- a640c23a62f3a-b9a3f161d53mr499151966b.1.1774525967865; Thu, 26 Mar 2026
- 04:52:47 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260325130811.447377-1-sjg@chromium.org>
- <20260325165420.GT502704@bill-the-cat>
- <CAFLszTgZpg-anG1J5kyiYk2JJ3dDiiyvuk5AV_PO+ri_b552tA@mail.gmail.com>
- <20260325171540.GU502704@bill-the-cat>
- <CAFLszTh3NgpY1VQer2wN9-feOvM8khXaFyp+ePhTpqowGK_qrQ@mail.gmail.com>
- <20260325182619.GV502704@bill-the-cat>
- <CAFLszThCO2a1COB8kBwYfTXM65AGJEugo9MWZAjphQNuX16Y-Q@mail.gmail.com>
- <20260325195337.GY502704@bill-the-cat>
-In-Reply-To: <20260325195337.GY502704@bill-the-cat>
+ bh=OP5IoAJBR58biIqTCrkgk6Mvus+34Pd5UVdC5e5GZNw=;
+ b=NvLC8xnoq1wuJIrYvq9RkfJENyvDNDFwafgIN035pYBytyTFXYTRrDt+SqlJv1QM36
+ JcroODcMeIGymyfotKwcjQcx5Uou/e4wjNEVqAdXkANbI8pwUfOiW1eMpHdN4ck68JJ+
+ pzqbdMaoqV/DnVoRwvSXccnOWbMCLclQSBR68dKJ3SBFjrQt+pSqX28Kl8S30BiiDUTv
+ 9LUtSnGzp1ZBdkIwNQZjgbPNIIQif8Y8cg4EJv7ISOsZj0oWWWmfSo0HVru8hGrKC337
+ wWb6QruKxMdlBuuJ+ip2oNxdDEuZzlXJUk+fmCQI3u/F2S0WrR6S8Nbr21tczZ6sEjyR
+ 2Vrg==
+X-Gm-Message-State: AOJu0YyZGJIIlns5bw5tTODPa7pqWQfUhCRUanfqwrO/HpXni3Xhx1Os
+ CKVMAD7jE63VISppnDD+WUEigVH2PjceE/v5ORqRp9unzwUS4xuyrKsesAp0XZ9G2Fl3EPbD95n
+ ESWejSbhW
+X-Gm-Gg: ATEYQzzZCW8IW172bSQ9wZGsjoLsR6T3cKQpkSU0LXQtVrPJo5ZZaz3lTrOqboUQVx+
+ h/QzoiFBEKechAoKbZ5Nwya/lOLeGyaahecHc8DrH7aTd/xRXrcwkhxohCN84XYkMnn15xH3RDm
+ 1oXUGbxi7ryq8rZ4IAq8OrgYmqG/xOyCt+Pa62WYrkM1bbwd+0R5H0aWaHxFV4YYpaFfWnqL64P
+ w0cIy0jqLh1sOADE/xB4kgO+cxj22tDDguLxZgJgB72DV7KDe5XXqGL0rCUICCTEZkyBleOzK7T
+ eL2qxmySjR8KzZfTBXu+n+83guymn4UMjocUcvfnpJEfreDZaqZa+p49hchp0trN+CoeTO+vmFI
+ eE2FS6yOSljT/d6PezlGO88EpwuPBA69L8rDBVsjq6vPtjgwTp58S0C/Q8FBiVYXFkDfPFcPLLA
+ iaNmDGB7aGH24sV3LfYVebktkm8A0F
+X-Received: by 2002:a05:6808:50d9:b0:46a:7ab9:c339 with SMTP id
+ 5614622812f47-46a7ab9c72emr310601b6e.14.1774526113128; 
+ Thu, 26 Mar 2026 04:55:13 -0700 (PDT)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-41cc7b6312csm2145860fac.15.2026.03.26.04.55.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Mar 2026 04:55:12 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 26 Mar 2026 05:52:36 -0600
-X-Gm-Features: AQROBzArWZSfkefDwD7-5JAEIv8CXH47Ou8Uj3nKgnH4Kqj7nC3igso1M1JJdgo
-Message-ID: <CAFLszTimy0pLBYd=my+uDafTyS9_AmhOonhSo9TBcnzJMzM_yQ@mail.gmail.com>
-Subject: Re: [PATCH] kbuild: Use relative paths in generated .incbin directives
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>, 
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Greg Malysa <malysagreg@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Peter Robinson <pbrobinson@gmail.com>, Sam Edwards <cfsworks@gmail.com>, 
- Sughosh Ganu <sughosh.ganu@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+ James Hilliard <james.hilliard1@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sam Edwards <cfsworks@gmail.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>
+Subject: [PATCH v2 1/2] kbuild: Move U-Boot .incbin rules to
+ Makefile.lib-u-boot
+Date: Thu, 26 Mar 2026 05:54:56 -0600
+Message-ID: <20260326115500.955388-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,80 +99,264 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+The font, splash-screen and EFI .incbin wrapper rules are U-Boot
+additions that do not exist in the upstream Linux kbuild. Keeping them
+in scripts/Makefile.lib makes re-syncing with Linux harder than it needs
+to be, as every sync must manually preserve the U-Boot additions.
 
-On Wed, 25 Mar 2026 at 13:53, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Mar 25, 2026 at 01:21:54PM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Wed, 25 Mar 2026 at 12:26, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Wed, Mar 25, 2026 at 11:57:17AM -0600, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Wed, 25 Mar 2026 at 11:15, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Wed, Mar 25, 2026 at 11:12:00AM -0600, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Wed, 25 Mar 2026 at 10:54, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Wed, Mar 25, 2026 at 07:08:09AM -0600, Simon Glass wrote:
-> > > > > > > > The generated .S files for fonts, splash screens and EFI apps use
-> > > > > > > > .incbin with the full prerequisite path. When building with O= this
-> > > > > > > > bakes an absolute path into the .S file. If the build directory is
-> > > > > > > > later used on a different machine (e.g. in a container), the assembler
-> > > > > > > > cannot find the source file.
-> > > > > > > >
-> > > > > > > > Use $(src)/$(notdir $<) instead of $< so the .incbin directive contains
-> > > > > > > > a source-relative path like drivers/video/fonts/nimbus_sans_l_regular.ttf
-> > > > > > > > rather than an absolute one. Add -Wa,-I$(srctree) to the assembler
-> > > > > > > > flags so the assembler can resolve these paths.
-> > > > > > > >
-> > > > > > > > The DTB and DTBO rules are left unchanged since their prerequisites are
-> > > > > > > > generated files in the build directory.
-> > > > > > > >
-> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > ---
-> > > > > > > >
-> > > > > > > >  scripts/Makefile.lib | 7 ++++---
-> > > > > > > >  1 file changed, 4 insertions(+), 3 deletions(-)
-> > > > > > >
-> > > > > > > This is generic kbuild infrastructure now. Is there a fix we're missing
-> > > > > > > from upstream, a change we haven't pulled in yet (as we need to keep
-> > > > > > > syncing upwards) or a problem upstream too? Thanks!
-> > > > > >
-> > > > > > Linux does this with DTB files in quiet_cmd_wrap_S_dtb:
-> > > > > >
-> > > > > > echo '.incbin "$<" ';
-> > > > > >
-> > > > > > But Linux only uses generated files in the build directory, never
-> > > > > > actual source files. The font/splash/EFI .incbin rules are U-Boot
-> > > > > > additions that aren't in the upstream kbuild. So Linux doesn't have
-> > > > > > this problem.
-> > > > >
-> > > > > Shouldn't we be generating these files in to the build directory too?
-> > > >
-> > > > These are actually source files, e.g.
-> > > > drivers/video/fonts/nimbus_sans_l_regular.ttf
-> > >
-> > > So, the first thing then is that S_ttf is a local U-Boot rule. Lets
-> > > start by moving this out of scripts/Makefile.lib to
-> > > scripts/Makefile.lib-u-boot as that will make future re-sync work easier
-> > > (and is something we've talked about in the re-sync threads, splitting
-> > > U-Boot specific stuff out to new files). Then 2/2 of that series can be
-> > > this change, thanks.
-> >
-> > Almost, but I still need the a_flags change.
->
-> Think a bit on how to solve that without touching the files that we
-> really want to have no delta with upstream on please. It's 5 files,
-> adding AFLAGS_foo.o += ... to the fonts Makefile and a note doesn't seem
-> bad and reduces the chances of the a_flags part being lost in a future
-> resync to zero.
+Move these rules into a new scripts/Makefile.lib-u-boot and include it
+from Makefile.build and Makefile.xpl, right after the existing
+Makefile.lib include.
 
-I don't like it very much, but I'll send a v2 along these lines.
+This is a pure code-move with no functional change.
 
-Regards,
-Simon
+Suggested-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
+
+Changes in v2:
+- Split out of the relative-path patch as requested by Tom Rini
+
+ scripts/Makefile.build      |  1 +
+ scripts/Makefile.lib        | 94 ------------------------------------
+ scripts/Makefile.lib-u-boot | 96 +++++++++++++++++++++++++++++++++++++
+ scripts/Makefile.xpl        |  1 +
+ 4 files changed, 98 insertions(+), 94 deletions(-)
+ create mode 100644 scripts/Makefile.lib-u-boot
+
+diff --git a/scripts/Makefile.build b/scripts/Makefile.build
+index 8da9851d430..e625f99986e 100644
+--- a/scripts/Makefile.build
++++ b/scripts/Makefile.build
+@@ -65,6 +65,7 @@ ccflags-y  += $(PLATFORM_CPPFLAGS)
+ cppflags-y += $(PLATFORM_CPPFLAGS)
+ 
+ include $(srctree)/scripts/Makefile.lib
++include $(srctree)/scripts/Makefile.lib-u-boot
+ 
+ # Do not include hostprogs rules unless needed.
+ # $(sort ...) is used here to remove duplicated words and excessive spaces.
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index 7386353e0cc..b8969b7de54 100644
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -508,100 +508,6 @@ $(multi-dtb-y): FORCE
+ 	$(call if_changed,fdtoverlay)
+ $(call multi_depend, $(multi-dtb-y), .dtb, -dtbs)
+ 
+-# Fonts
+-# ---------------------------------------------------------------------------
+-
+-# Generate an assembly file to wrap the font data
+-quiet_cmd_S_ttf= TTF     $@
+-# Modified for U-Boot
+-cmd_S_ttf=						\
+-(							\
+-	echo '.section .rodata.ttf.init,"a"';		\
+-	echo '.balign 16';				\
+-	echo '.global __ttf_$(*F)_begin';		\
+-	echo '__ttf_$(*F)_begin:';			\
+-	echo '.incbin "$<" ';				\
+-	echo '__ttf_$(*F)_end:';			\
+-	echo '.global __ttf_$(*F)_end';			\
+-	echo '.balign 16';				\
+-) > $@
+-
+-$(obj)/%.S: $(src)/%.ttf
+-	$(call cmd,S_ttf)
+-
+-# Splash logos
+-# ---------------------------------------------------------------------------
+-
+-# Generate an assembly file to wrap the splash data
+-quiet_cmd_S_splash= TTF     $@
+-# Modified for U-Boot
+-cmd_S_splash=						\
+-(							\
+-	echo '.section .rodata.splash.init,"a"';		\
+-	echo '.balign 16';				\
+-	echo '.global __splash_$(*F)_begin';		\
+-	echo '__splash_$(*F)_begin:';			\
+-	echo '.incbin "$<" ';				\
+-	echo '__splash_$(*F)_end:';			\
+-	echo '.global __splash_$(*F)_end';			\
+-	echo '.balign 16';				\
+-) > $@
+-
+-$(obj)/%.S: $(src)/%.bmp
+-	$(call cmd,S_splash)
+-
+-# EFI applications
+-# A Makefile target *.efi is built as EFI application.
+-# A Makefile target *_efi.S wraps *.efi as built-in EFI application.
+-# ---------------------------------------------------------------------------
+-
+-# Generate an assembly file to wrap the EFI app
+-cmd_S_efi=					\
+-(						\
+-	echo '.section .rodata.$*.init,"a"';	\
+-	echo '.balign 16';			\
+-	echo '.global __efi_$*_begin';		\
+-	echo '__efi_$*_begin:';			\
+-	echo '.incbin "$<" ';			\
+-	echo '__efi_$*_end:';			\
+-	echo '.global __efi_$*_end';		\
+-	echo '.balign 16';			\
+-) > $@
+-
+-$(obj)/%_efi.S: $(obj)/%.efi
+-	$(call cmd,S_efi)
+-
+-quiet_cmd_efi_objcopy = OBJCOPY $@
+-cmd_efi_objcopy = $(OBJCOPY) -j .header -j .text -j .sdata -j .data \
+-		-j .dynamic -j .dynstr  -j .dynsym -j .rel* -j .reloc \
+-		$(if $(EFI_TARGET),$(EFI_TARGET),-O binary) $^ $@
+-
+-$(obj)/%.efi: $(obj)/%_efi.so
+-	$(call cmd,efi_objcopy)
+-
+-KBUILD_EFILDFLAGS = -nostdlib -zexecstack -znocombreloc -znorelro
+-KBUILD_EFILDFLAGS += $(call ld-option,--no-warn-rwx-segments)
+-quiet_cmd_efi_ld = LD      $@
+-cmd_efi_ld = $(LD) $(KBUILD_EFILDFLAGS) -L $(srctree) -T $(EFI_LDS_PATH) \
+-		-shared -Bsymbolic -s $^ $(PLATFORM_LIBGCC) -o $@
+-
+-EFI_LDS_PATH = arch/$(ARCH)/lib/$(EFI_LDS)
+-
+-$(obj)/efi_crt0.o: $(srctree)/arch/$(ARCH)/lib/$(EFI_CRT0:.o=.S) FORCE
+-	$(call if_changed_dep,as_o_S)
+-
+-$(obj)/efi_reloc.o: $(srctree)/arch/$(ARCH)/lib/$(EFI_RELOC:.o=.c) $(recordmcount_source) FORCE
+-	$(call cmd,force_checksrc)
+-	$(call if_changed_rule,cc_o_c)
+-
+-$(obj)/%_efi.so: $(obj)/%.o $(obj)/efi_crt0.o $(obj)/efi_reloc.o $(obj)/efi_freestanding.o
+-	$(call cmd,efi_ld)
+-
+-targets += $(obj)/efi_crt0.o $(obj)/efi_reloc.o $(obj)/efi_freestanding.o
+-
+-CFLAGS_REMOVE_efi_reloc.o := $(LTO_CFLAGS)
+-CFLAGS_REMOVE_efi_freestanding.o := $(LTO_CFLAGS)
+-
+ # ACPI
+ # ---------------------------------------------------------------------------
+ #
+diff --git a/scripts/Makefile.lib-u-boot b/scripts/Makefile.lib-u-boot
+new file mode 100644
+index 00000000000..c55f8d8e0c3
+--- /dev/null
++++ b/scripts/Makefile.lib-u-boot
+@@ -0,0 +1,96 @@
++# SPDX-License-Identifier: GPL-2.0
++#
++# U-Boot-specific rules for embedding binary data via .incbin
++# These are split out of Makefile.lib to simplify kbuild re-syncs.
++
++# Fonts
++# ---------------------------------------------------------------------------
++
++# Generate an assembly file to wrap the font data
++quiet_cmd_S_ttf= TTF     $@
++cmd_S_ttf=						\
++(							\
++	echo '.section .rodata.ttf.init,"a"';		\
++	echo '.balign 16';				\
++	echo '.global __ttf_$(*F)_begin';		\
++	echo '__ttf_$(*F)_begin:';			\
++	echo '.incbin "$<" ';				\
++	echo '__ttf_$(*F)_end:';			\
++	echo '.global __ttf_$(*F)_end';			\
++	echo '.balign 16';				\
++) > $@
++
++$(obj)/%.S: $(src)/%.ttf
++	$(call cmd,S_ttf)
++
++# Splash logos
++# ---------------------------------------------------------------------------
++
++# Generate an assembly file to wrap the splash data
++quiet_cmd_S_splash= TTF     $@
++cmd_S_splash=						\
++(							\
++	echo '.section .rodata.splash.init,"a"';	\
++	echo '.balign 16';				\
++	echo '.global __splash_$(*F)_begin';		\
++	echo '__splash_$(*F)_begin:';			\
++	echo '.incbin "$<" ';				\
++	echo '__splash_$(*F)_end:';			\
++	echo '.global __splash_$(*F)_end';		\
++	echo '.balign 16';				\
++) > $@
++
++$(obj)/%.S: $(src)/%.bmp
++	$(call cmd,S_splash)
++
++# EFI applications
++# A Makefile target *.efi is built as EFI application.
++# A Makefile target *_efi.S wraps *.efi as built-in EFI application.
++# ---------------------------------------------------------------------------
++
++# Generate an assembly file to wrap the EFI app
++cmd_S_efi=					\
++(						\
++	echo '.section .rodata.$*.init,"a"';	\
++	echo '.balign 16';			\
++	echo '.global __efi_$*_begin';		\
++	echo '__efi_$*_begin:';			\
++	echo '.incbin "$<" ';			\
++	echo '__efi_$*_end:';			\
++	echo '.global __efi_$*_end';		\
++	echo '.balign 16';			\
++) > $@
++
++$(obj)/%_efi.S: $(obj)/%.efi
++	$(call cmd,S_efi)
++
++quiet_cmd_efi_objcopy = OBJCOPY $@
++cmd_efi_objcopy = $(OBJCOPY) -j .header -j .text -j .sdata -j .data \
++		-j .dynamic -j .dynstr  -j .dynsym -j .rel* -j .reloc \
++		$(if $(EFI_TARGET),$(EFI_TARGET),-O binary) $^ $@
++
++$(obj)/%.efi: $(obj)/%_efi.so
++	$(call cmd,efi_objcopy)
++
++KBUILD_EFILDFLAGS = -nostdlib -zexecstack -znocombreloc -znorelro
++KBUILD_EFILDFLAGS += $(call ld-option,--no-warn-rwx-segments)
++quiet_cmd_efi_ld = LD      $@
++cmd_efi_ld = $(LD) $(KBUILD_EFILDFLAGS) -L $(srctree) -T $(EFI_LDS_PATH) \
++		-shared -Bsymbolic -s $^ $(PLATFORM_LIBGCC) -o $@
++
++EFI_LDS_PATH = arch/$(ARCH)/lib/$(EFI_LDS)
++
++$(obj)/efi_crt0.o: $(srctree)/arch/$(ARCH)/lib/$(EFI_CRT0:.o=.S) FORCE
++	$(call if_changed_dep,as_o_S)
++
++$(obj)/efi_reloc.o: $(srctree)/arch/$(ARCH)/lib/$(EFI_RELOC:.o=.c) $(recordmcount_source) FORCE
++	$(call cmd,force_checksrc)
++	$(call if_changed_rule,cc_o_c)
++
++$(obj)/%_efi.so: $(obj)/%.o $(obj)/efi_crt0.o $(obj)/efi_reloc.o $(obj)/efi_freestanding.o
++	$(call cmd,efi_ld)
++
++targets += $(obj)/efi_crt0.o $(obj)/efi_reloc.o $(obj)/efi_freestanding.o
++
++CFLAGS_REMOVE_efi_reloc.o := $(LTO_CFLAGS)
++CFLAGS_REMOVE_efi_freestanding.o := $(LTO_CFLAGS)
+diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
+index c5ddf64c73f..862a8e6f231 100644
+--- a/scripts/Makefile.xpl
++++ b/scripts/Makefile.xpl
+@@ -88,6 +88,7 @@ include $(srctree)/config.mk
+ include $(srctree)/arch/$(ARCH)/Makefile
+ 
+ include $(srctree)/scripts/Makefile.lib
++include $(srctree)/scripts/Makefile.lib-u-boot
+ 
+ # Enable garbage collection of un-used sections for SPL
+ KBUILD_CFLAGS += -ffunction-sections -fdata-sections
+-- 
+2.43.0
+
+base-commit: 1ffc541eafc96d5eebcf837ab892dccec3b93568
+branch: font-us2
