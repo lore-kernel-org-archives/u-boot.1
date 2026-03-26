@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 499D510A1E7E
-	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 11:30:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D63310A1E7C
+	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 11:30:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5334A83FA3;
-	Thu, 26 Mar 2026 12:29:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D1E4083EAC;
+	Thu, 26 Mar 2026 12:29:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="HnbCPo4Z";
+	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="XaRib0Eh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA01D840B5; Thu, 26 Mar 2026 12:29:40 +0100 (CET)
-Received: from mail-dl1-x122c.google.com (mail-dl1-x122c.google.com
- [IPv6:2607:f8b0:4864:20::122c])
+ id 2370E840CB; Thu, 26 Mar 2026 12:29:49 +0100 (CET)
+Received: from mail-dl1-x1236.google.com (mail-dl1-x1236.google.com
+ [IPv6:2607:f8b0:4864:20::1236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CAD481E18
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 12:29:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D3CB81E18
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 12:29:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=robert.marko@sartura.hr
-Received: by mail-dl1-x122c.google.com with SMTP id
- a92af1059eb24-126ea4e9694so2002375c88.1
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 04:29:38 -0700 (PDT)
+Received: by mail-dl1-x1236.google.com with SMTP id
+ a92af1059eb24-1271257ae53so924874c88.1
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 04:29:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sartura.hr; s=sartura; t=1774524576; x=1775129376; darn=lists.denx.de;
+ d=sartura.hr; s=sartura; t=1774524582; x=1775129382; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zF3BdZHRpB/pHfQJonf9bVhdkO7Uo7oZqm7EXSJmXMw=;
- b=HnbCPo4Z0ljQQpyv500utAY/vNnzptRokohTzJXSfG5rsd0/vFuzcJavpKnyILTksq
- M2sgU8/Ah9C1AevmyCfmxoEascyi49m3OoBnx7f4f1RMZ2S1JBeiV2q23LiIQ4iTfprN
- yF8EO+uo+h4A/S0H7Zhnak2LaHUM05ebjYgZhh0PFg1LHMePm8xgjlCQ1Se69kDGvqXd
- b+3VIZ1C6ttEkRbGiDNVZRcQvNyIjL2J9ITyMp/Y9Jn11VJjeRY4iPbotWQoH+ekgPHm
- u8BVKekp0Bc+4W9obcKWoNhzRWUBAwDbo7GzfLRGsiUtGiCmU3oif/T1lTHpV6T17Aha
- CG1Q==
+ bh=5weQZcfSrYyjEqGh1aoQ44iHXVJ+hxgOKesVVlSOrWE=;
+ b=XaRib0EhOraBdRH6dGyyNIQet5iWkFzRQQdpMRMHfXDo/T5xa92AFDp2DroTVvPYiy
+ M3wAFS4Hr4udRQEoZzzytxEq48daOv9zvn15OeupcyZpH8rBqMgs82tOC7Hvsuw/59FZ
+ DNP8K9JJQqAcF1JheI0l2xwBB4LUdPec88w/eXo+A6h9JYhF31PZgEsiKJ0wA2xV7RPM
+ wEXYYG9kgUSVUh4GTtb06KOr9KzW5q/3NRurAugDBZubBmwrak+2QsPMidDjuKtiV/FG
+ CD9ZEHD8e4sXGxI5ZEx2t8uiUR3CPHiVlNvqVjKVI04IJPG0IocKywaM7HaF5FAMIS1N
+ lD1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774524576; x=1775129376;
+ d=1e100.net; s=20251104; t=1774524582; x=1775129382;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=zF3BdZHRpB/pHfQJonf9bVhdkO7Uo7oZqm7EXSJmXMw=;
- b=DLUL4doxSf87l/r4cycWqwUa/OwS6hVHLjppNoNFCvN4eKwLcbvO3qZL+AweZLk9eM
- XSKt+AtPfih/x7N0s+4JEtiM9/UBFE4GL0f6RNW4OQcGif7HcQHs/nfyuW0pRlQIPgac
- hJhefoNZV2yB0XwfbaYIjgsgPKBhwR0Ceo2NfsSSqpzRUtrdYMslMTvYwMYY1IhK9k7N
- 46LlNrm/YYDraVfie5/j+l/aXdtNGt5s/yipqf0TP72bMaVHXrwMitjliNJXE2HD3ggt
- Hndt0F9ud+KqncQKE0KJZzBBE4CmcixsenFAbAQ25lIl6AF+Ru0xB9/rFuIYHVqWlJ6y
- 7/xQ==
-X-Gm-Message-State: AOJu0YwNUKbza3bm6Cuyqy3du1QY6MIMOGRGo5nmrwiGOypYcMmUT14h
- JMJbnrVshyOHAOPP82039Tplv94o0ryIhGtxWhuaQh2wi6iMmFAAsuZUJlDMdSIgjnBVLwcCcbC
- nB8XnyHtl4Vej6N4VwaIvX7J8wEM85Sq+KjVz3kqxybIF/kVs3Q95uE5/eKx76uqT0QVE4ROVwY
- 6oxNiHkK82kuM/5FCa2l+86NaPLYmlGyss74vfr/i/I74=
-X-Gm-Gg: ATEYQzwWV6KsHKS9TYbZS7rKqhXBXjNh/2RHgstj4e+yT9P+yl/bRRYA6KIDbKNx6Zx
- evaCxdheAjHzj9/nKStP6DfLX1dRcK9ULm6JlEQx3BRXJ7Rc61WzlNT7rSNZ36MCNH3mOmOD2V2
- UvdxogxgZQAyUDfvz9wLSYhXM5u0cKX03SVDj66UY4Ht9rw5jfSjlV1yzS0OsJIUfb5r2v2E+DQ
- AQNjTTvpARI/yIeJvVsZrUZFwDxfDPtXq7wP6NONMDteW9L2KWCGjQCskbd2UohhLqHXVehJVrH
- XEJWtLeJGJwfrK1UL8d3X1nqGnnrAzE36Qs/IIp6vIqdlh8Z95TWQrOStJ8yDvw2qhkMZDdyDQl
- 5lOFSJ344q7m0XlF3Ydao7Ikl3vqW3wg4A6Xp5DBbe+DeZsqSQ5qYhsUFEpg4Dhh6GBCSPKiPJ2
- l9uUD4bpM1KEWkI6Eoree9cXPlMGw37EeYI7HHu/1SMTfoFj/EUpZDyLQM6CNTJUd6zMa2r8/fk
- vufwz0TVMVTOJIm2c/G5Bulwy9YLxqy8mGwvPeE
-X-Received: by 2002:a05:7022:fa09:b0:11b:b179:6e17 with SMTP id
- a92af1059eb24-12a96eeaf79mr3631130c88.34.1774524575864; 
- Thu, 26 Mar 2026 04:29:35 -0700 (PDT)
+ bh=5weQZcfSrYyjEqGh1aoQ44iHXVJ+hxgOKesVVlSOrWE=;
+ b=H/R+a/v9+OlI2alzf67gsLuv/S/Gb3WLZPBEbjqFK2tYKYlsagY9wl9v4cZcg5yD2Y
+ Pim5g3CEyUUSFaa56Zwm/+g3vf1QMr1nj8r0o+jfkn9fQA0/0qwwqpGdc3fmi1NUFV7o
+ NJF5DSc1hHRiKUDwreu7JGUEAX+9yvUs95e8D0QITgkL81s5NO25HJAG75iTwxxBRDi4
+ zIGBkoMRnW8kOnoVBPdFFJb7KuEeojhxE7egyiggYeidZNr7TINzse/U19Gkc3gWBeUG
+ ldCZV1Fz1W136VG0BqSgqguKaFQp+IKmCguMdQeBqZGz1XHOkjQvSq+Si3N22jixQUFQ
+ JG0A==
+X-Gm-Message-State: AOJu0YxwOijzjV3N5phurIX+us00hjA3IlF3Z7QU+zFA/NLEx901ViNn
+ ++Q5oEgwh38ZeQyvYEG8HRX9VQidPS5kdUlWQz0Mi7MDOUVrgORUFkg0s/Hr39EEwdmfpDK0kEm
+ aCPwrVhu2FMVWZygxsGv+zSS8Jux1PHE438y/SdZ7dzLda9fsqq9h+26Nk+PVr4OokUpyZlYkwg
+ 0SuuSKJzxr1mW1CkR3p7futGeiiARQPlDHZeXWEsZ+wxQ=
+X-Gm-Gg: ATEYQzzyDRFQS5f+qWeLQBbkCx2rzt2yOG/xsa26JIU6mdyTh8ecwSuQJ2s1ZFqnfc3
+ X0AuFeY2OB4E8aRaTUW5A7+2s9JksBJYesCuj3aWV5nRMy++UYIBQPakAuX6T+lZaukXOLVIf3R
+ wA9A/wwJD9go/M0y+Rmil4qhSID/p7M53XBGuj/4PHrye8Gb2NFEeLWyCl9LQ+1IQqVu5DmBmm6
+ gnNs/RQkRjbJLhbiLV/TkIbZW5xYQTO1ShlsRgQJH+LURRagPWS2qEQY27gr4h3MVg2yzECGWYg
+ GSQm965Kh5V1W8FwX+sH7xO2f1LRp3lfQt6XAGLIlZ+7ydgzZvrzhOL1tXApG2H4IhhXlQpSLWn
+ b2DdocI0MQRXXAgl8Aznq6paYSzDM6TbIGYi7aFr0hNRjaV4alntwFTeZkWLLlDfZtcBdO17Q/7
+ BQscLdT+rKyuItEDAiG3D4jp7p/ME48sGGA1NeXRfWkQBpB/qX+OOOoyZHYTVkW498vMFBeezBV
+ /9R2iLWvlKMMLb0/b/TAHKlLkDN3MBJtLvHUn0a
+X-Received: by 2002:a05:7022:ec86:b0:128:ccb7:7fa3 with SMTP id
+ a92af1059eb24-12a96eeb11amr3723510c88.34.1774524581623; 
+ Thu, 26 Mar 2026 04:29:41 -0700 (PDT)
 Received: from fedora (cpe-109-60-83-68.zg3.cable.xnet.hr. [109.60.83.68])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-12aa7624247sm3729221c88.11.2026.03.26.04.29.31
+ a92af1059eb24-12aa7624247sm3729221c88.11.2026.03.26.04.29.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Mar 2026 04:29:34 -0700 (PDT)
+ Thu, 26 Mar 2026 04:29:39 -0700 (PDT)
 From: Robert Marko <robert.marko@sartura.hr>
 To: u-boot@lists.denx.de, trini@konsulko.com, lukma@denx.de, hs@nabladev.com,
  peng.fan@nxp.com, jh80.chung@samsung.com, gregory.clement@bootlin.com,
@@ -80,9 +80,9 @@ To: u-boot@lists.denx.de, trini@konsulko.com, lukma@denx.de, hs@nabladev.com,
  jerome.forissier@arm.com, marex@denx.de, daniel.machon@microchip.com
 Cc: luka.perkov@sartura.hr,
 	Robert Marko <robert.marko@sartura.hr>
-Subject: [PATCH 13/14] net: phy: add Microchip LAN8841 support
-Date: Thu, 26 Mar 2026 12:26:54 +0100
-Message-ID: <20260326112830.313874-13-robert.marko@sartura.hr>
+Subject: [PATCH 14/14] arch: arm: add Microchip LAN969x support
+Date: Thu, 26 Mar 2026 12:26:55 +0100
+Message-ID: <20260326112830.313874-14-robert.marko@sartura.hr>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260326112830.313874-1-robert.marko@sartura.hr>
 References: <20260326112830.313874-1-robert.marko@sartura.hr>
@@ -104,238 +104,2073 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add driver for the Microchip LAN8841 PHY.
+Microchip LAN9696x is a Cortex-A53 based switch SoC.
 
-It provides fixes for erratas, as well as support for enabling the required
-RGMII delays based on the PHY mode.
+Since Microchip also has LAN966x and SparX-5 families of switch SoC-s
+lets add a generic architecture so those could be added in future as
+well under the same architecture.
 
-It is based on the upstream Linux driver.
+Support is included for the SoC and the EV23X71A board.
 
 Signed-off-by: Robert Marko <robert.marko@sartura.hr>
 ---
- drivers/net/phy/Kconfig     |   3 +
- drivers/net/phy/Makefile    |   1 +
- drivers/net/phy/microchip.c | 185 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 189 insertions(+)
- create mode 100644 drivers/net/phy/microchip.c
+ arch/arm/Kconfig                             |  10 +
+ arch/arm/Makefile                            |   1 +
+ arch/arm/dts/Makefile                        |   2 +
+ arch/arm/dts/clk-lan9691.h                   |  24 +
+ arch/arm/dts/lan9691.dtsi                    | 545 +++++++++++++
+ arch/arm/dts/lan9696-ev23x71a-u-boot.dtsi    |  18 +
+ arch/arm/dts/lan9696-ev23x71a.dts            | 795 +++++++++++++++++++
+ arch/arm/dts/lan969x-u-boot.dtsi             |  72 ++
+ arch/arm/mach-microchipsw/Kconfig            |  31 +
+ arch/arm/mach-microchipsw/Makefile           |   3 +
+ arch/arm/mach-microchipsw/include/mach/soc.h |  29 +
+ arch/arm/mach-microchipsw/lan969x/Makefile   |   3 +
+ arch/arm/mach-microchipsw/lan969x/soc.c      | 136 ++++
+ board/microchip/lan969x/Makefile             |   3 +
+ board/microchip/lan969x/lan969x.c            | 115 +++
+ configs/microchip_ev23x71a_defconfig         |  77 ++
+ include/configs/lan969x.h                    |  36 +
+ 17 files changed, 1900 insertions(+)
+ create mode 100644 arch/arm/dts/clk-lan9691.h
+ create mode 100644 arch/arm/dts/lan9691.dtsi
+ create mode 100644 arch/arm/dts/lan9696-ev23x71a-u-boot.dtsi
+ create mode 100644 arch/arm/dts/lan9696-ev23x71a.dts
+ create mode 100644 arch/arm/dts/lan969x-u-boot.dtsi
+ create mode 100644 arch/arm/mach-microchipsw/Kconfig
+ create mode 100644 arch/arm/mach-microchipsw/Makefile
+ create mode 100644 arch/arm/mach-microchipsw/include/mach/soc.h
+ create mode 100644 arch/arm/mach-microchipsw/lan969x/Makefile
+ create mode 100644 arch/arm/mach-microchipsw/lan969x/soc.c
+ create mode 100644 board/microchip/lan969x/Makefile
+ create mode 100644 board/microchip/lan969x/lan969x.c
+ create mode 100644 configs/microchip_ev23x71a_defconfig
+ create mode 100644 include/configs/lan969x.h
 
-diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
-index 709f1c91eb2..3eaf9d7495f 100644
---- a/drivers/net/phy/Kconfig
-+++ b/drivers/net/phy/Kconfig
-@@ -231,6 +231,9 @@ config PHY_MICREL_KSZ8XXX
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index cd6a454fd60..ebd9d96452f 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -869,6 +869,14 @@ config ARCH_MEDIATEK
+ 	  Support for the MediaTek SoCs family developed by MediaTek Inc.
+ 	  Please refer to doc/README.mediatek for more information.
  
- endif # PHY_MICREL
- 
-+config PHY_MICROCHIP
-+	bool "Microchip Ethernet PHYs support"
++config ARCH_MICROCHIPSW
++	bool "Microchip switch SoCs"
++	select DM
++	select OF_CONTROL
++	imply CMD_DM
++	help
++	  Support for Microchip switch focused SoC-s.
 +
- config PHY_MOTORCOMM
- 	tristate "Motorcomm PHYs"
- 	help
-diff --git a/drivers/net/phy/Makefile b/drivers/net/phy/Makefile
-index 83520de7f1f..04e9d61a3c2 100644
---- a/drivers/net/phy/Makefile
-+++ b/drivers/net/phy/Makefile
-@@ -25,6 +25,7 @@ obj-y += mediatek/
- obj-y += airoha/
- obj-$(CONFIG_PHY_MICREL_KSZ8XXX) += micrel_ksz8xxx.o
- obj-$(CONFIG_PHY_MICREL_KSZ90X1) += micrel_ksz90x1.o
-+obj-$(CONFIG_PHY_MICROCHIP) += microchip.o
- obj-$(CONFIG_PHY_MESON_GXL) += meson-gxl.o
- obj-$(CONFIG_PHY_MOTORCOMM) += motorcomm.o
- obj-$(CONFIG_PHY_NATSEMI) += natsemi.o
-diff --git a/drivers/net/phy/microchip.c b/drivers/net/phy/microchip.c
+ config ARCH_MMP
+ 	bool "Marvell MMP"
+ 	select ARM64
+@@ -2400,6 +2408,8 @@ source "arch/arm/mach-nexell/Kconfig"
+ 
+ source "arch/arm/mach-npcm/Kconfig"
+ 
++source "arch/arm/mach-microchipsw/Kconfig"
++
+ source "board/armltd/total_compute/Kconfig"
+ source "board/armltd/corstone1000/Kconfig"
+ source "board/bosch/shc/Kconfig"
+diff --git a/arch/arm/Makefile b/arch/arm/Makefile
+index b36b0742580..2d5e4836b06 100644
+--- a/arch/arm/Makefile
++++ b/arch/arm/Makefile
+@@ -70,6 +70,7 @@ machine-$(CONFIG_ARCH_KIRKWOOD)		+= kirkwood
+ machine-$(CONFIG_ARCH_LPC32XX)		+= lpc32xx
+ machine-$(CONFIG_ARCH_MEDIATEK)		+= mediatek
+ machine-$(CONFIG_ARCH_MESON)		+= meson
++machine-$(CONFIG_ARCH_MICROCHIPSW)	+= microchipsw
+ machine-$(CONFIG_ARCH_MMP)		+= mmp
+ machine-$(CONFIG_ARCH_MVEBU)		+= mvebu
+ machine-$(CONFIG_ARCH_NEXELL)		+= nexell
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index 82ad3035308..ec6ba8c5f55 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -1210,6 +1210,8 @@ dtb-$(CONFIG_TARGET_CORSTONE1000) += corstone1000-mps3.dtb \
+ 
+ dtb-$(CONFIG_TARGET_COREPRIMEVELTE) += pxa1908-samsung-coreprimevelte.dtb
+ 
++dtb-$(CONFIG_ARCH_MICROCHIPSW) += lan9696-ev23x71a.dtb
++
+ include $(srctree)/scripts/Makefile.dts
+ 
+ # Add any required device tree compiler flags here
+diff --git a/arch/arm/dts/clk-lan9691.h b/arch/arm/dts/clk-lan9691.h
 new file mode 100644
-index 00000000000..bc54311ab72
+index 00000000000..0f2d7a0f881
 --- /dev/null
-+++ b/drivers/net/phy/microchip.c
-@@ -0,0 +1,185 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/arch/arm/dts/clk-lan9691.h
+@@ -0,0 +1,24 @@
++/* SPDX-License-Identifier: (GPL-2.0-or-later OR MIT) */
 +
-+#include <phy.h>
-+#include <linux/bitops.h>
++#ifndef _DTS_CLK_LAN9691_H
++#define _DTS_CLK_LAN9691_H
 +
-+#define PHY_ID_MATCH_MODEL_MASK 	GENMASK(31, 4)
-+#define PHY_ID_LAN8841			0x00221650
++#define GCK_ID_QSPI0		0
++#define GCK_ID_QSPI2		1
++#define GCK_ID_SDMMC0		2
++#define GCK_ID_SDMMC1		3
++#define GCK_ID_MCAN0		4
++#define GCK_ID_MCAN1		5
++#define GCK_ID_FLEXCOM0		6
++#define GCK_ID_FLEXCOM1		7
++#define GCK_ID_FLEXCOM2		8
++#define GCK_ID_FLEXCOM3		9
++#define GCK_ID_TIMER		10
++#define GCK_ID_USB_REFCLK	11
 +
-+#define LAN8841_MMD_COMMON_CTRL_REG	2
-+#define LAN8841_RXC_DLL_CTRL		76
-+#define LAN8841_TXC_DLL_CTRL		77
-+#define LAN8841_DLL_ENABLE_DELAY	0
++/* Gate clocks */
++#define GCK_GATE_USB_DRD	12
++#define GCK_GATE_MCRAMC		13
++#define GCK_GATE_HMATRIX	14
 +
-+#define LAN8841_MMD_TIMER_REG			0
-+#define LAN8841_MMD0_REGISTER_17		17
-+#define LAN8841_MMD0_REGISTER_17_DROP_OPT(x)	((x) & 0x3)
-+#define LAN8841_MMD0_REGISTER_17_XMIT_TOG_TX_DIS	BIT(3)
-+#define LAN8841_OPERATION_MODE_STRAP_OVERRIDE_LOW_REG	2
-+#define LAN8841_OPERATION_MODE_STRAP_OVERRIDE_LOW_REG_MAGJACK	BIT(14)
-+#define LAN8841_MMD_ANALOG_REG			28
-+#define LAN8841_ANALOG_CONTROL_1		1
-+#define LAN8841_ANALOG_CONTROL_1_PLL_TRIM(x)	(((x) & 0x3) << 5)
-+#define LAN8841_ANALOG_CONTROL_10		13
-+#define LAN8841_ANALOG_CONTROL_10_PLL_DIV(x)	((x) & 0x3)
-+#define LAN8841_ANALOG_CONTROL_11		14
-+#define LAN8841_ANALOG_CONTROL_11_LDO_REF(x)	(((x) & 0x7) << 12)
-+#define LAN8841_TX_LOW_I_CH_C_D_POWER_MANAGMENT	69
-+#define LAN8841_TX_LOW_I_CH_C_D_POWER_MANAGMENT_VAL 0xbffc
-+#define LAN8841_BTRX_POWER_DOWN			70
-+#define LAN8841_BTRX_POWER_DOWN_QBIAS_CH_A	BIT(0)
-+#define LAN8841_BTRX_POWER_DOWN_BTRX_CH_A	BIT(1)
-+#define LAN8841_BTRX_POWER_DOWN_QBIAS_CH_B	BIT(2)
-+#define LAN8841_BTRX_POWER_DOWN_BTRX_CH_B	BIT(3)
-+#define LAN8841_BTRX_POWER_DOWN_BTRX_CH_C	BIT(5)
-+#define LAN8841_BTRX_POWER_DOWN_BTRX_CH_D	BIT(7)
-+#define LAN8841_ADC_CHANNEL_MASK		198
-+#define LAN8841_PTP_RX_PARSE_L2_ADDR_EN		370
-+#define LAN8841_PTP_RX_PARSE_IP_ADDR_EN		371
-+#define LAN8841_PTP_RX_VERSION			374
-+#define LAN8841_PTP_TX_PARSE_L2_ADDR_EN		434
-+#define LAN8841_PTP_TX_PARSE_IP_ADDR_EN		435
-+#define LAN8841_PTP_TX_VERSION			438
-+#define LAN8841_PTP_CMD_CTL			256
-+#define LAN8841_PTP_CMD_CTL_PTP_ENABLE		BIT(2)
-+#define LAN8841_PTP_CMD_CTL_PTP_DISABLE		BIT(1)
-+#define LAN8841_PTP_CMD_CTL_PTP_RESET		BIT(0)
-+#define LAN8841_PTP_RX_PARSE_CONFIG		368
-+#define LAN8841_PTP_TX_PARSE_CONFIG		432
-+#define LAN8841_PTP_RX_MODE			381
-+#define LAN8841_PTP_INSERT_TS_EN		BIT(0)
-+#define LAN8841_PTP_INSERT_TS_32BIT		BIT(1)
++#endif
+diff --git a/arch/arm/dts/lan9691.dtsi b/arch/arm/dts/lan9691.dtsi
+new file mode 100644
+index 00000000000..b79923fba00
+--- /dev/null
++++ b/arch/arm/dts/lan9691.dtsi
+@@ -0,0 +1,545 @@
++// SPDX-License-Identifier: (GPL-2.0-or-later OR MIT)
++/*
++ * Copyright (c) 2025 Microchip Technology Inc. and its subsidiaries.
++ */
 +
-+static int lan8841_config_rgmii_delay(struct phy_device *phydev)
++#include <dt-bindings/dma/at91.h>
++#include <dt-bindings/interrupt-controller/arm-gic.h>
++#include <dt-bindings/mfd/at91-usart.h>
++#include <dt-bindings/mfd/atmel-flexcom.h>
++
++#include "clk-lan9691.h"
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	model = "Microchip LAN969x";
++	compatible = "microchip,lan9691";
++	interrupt-parent = <&gic>;
++
++	clocks {
++		fx100_clk: fx100-clk {
++			compatible = "fixed-clock";
++			#clock-cells = <0>;
++			clock-frequency = <320000000>;
++		};
++
++		cpu_clk: cpu-clk {
++			compatible = "fixed-clock";
++			#clock-cells = <0>;
++			clock-frequency = <1000000000>;
++		};
++
++		ddr_clk: ddr-clk {
++			compatible = "fixed-clock";
++			#clock-cells = <0>;
++			clock-frequency = <600000000>;
++		};
++
++		fabric_clk: fabric-clk {
++			compatible = "fixed-clock";
++			#clock-cells = <0>;
++			clock-frequency = <250000000>;
++		};
++	};
++
++	cpus {
++		#address-cells = <2>;
++		#size-cells = <0>;
++
++		cpu0: cpu@0 {
++			compatible = "arm,cortex-a53";
++			device_type = "cpu";
++			reg = <0x0 0x0>;
++			next-level-cache = <&l2_0>;
++		};
++
++		l2_0: l2-cache {
++			compatible = "cache";
++			cache-level = <2>;
++			cache-unified;
++		};
++	};
++
++	psci {
++		compatible = "arm,psci-1.0";
++		method = "smc";
++	};
++
++	pmu {
++		compatible = "arm,cortex-a53-pmu";
++		interrupts = <GIC_SPI 77 IRQ_TYPE_LEVEL_HIGH>;
++	};
++
++	timer {
++		compatible = "arm,armv8-timer";
++		interrupts = <GIC_PPI 13 IRQ_TYPE_LEVEL_LOW>, /* Secure Phys IRQ */
++			     <GIC_PPI 14 IRQ_TYPE_LEVEL_LOW>, /* Non-secure Phys IRQ */
++			     <GIC_PPI 11 IRQ_TYPE_LEVEL_LOW>, /* Virt IRQ */
++			     <GIC_PPI 10 IRQ_TYPE_LEVEL_LOW>; /* Hyp IRQ */
++	};
++
++	axi: axi {
++		compatible = "simple-bus";
++		#address-cells = <1>;
++		#size-cells = <1>;
++		ranges;
++
++		usb: usb@300000 {
++			compatible = "microchip,lan9691-dwc3", "snps,dwc3";
++			reg = <0x300000 0x80000>;
++			interrupts = <GIC_SPI 80 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&clks GCK_GATE_USB_DRD>,
++				 <&clks GCK_ID_USB_REFCLK>;
++			clock-names = "bus_early", "ref";
++			assigned-clocks = <&clks GCK_ID_USB_REFCLK>;
++			assigned-clock-rates = <60000000>;
++			maximum-speed = "high-speed";
++			dr_mode = "host";
++			status = "disabled";
++		};
++
++		otp: otp@e0021000 {
++			compatible = "microchip,lan9691-otpc";
++			reg = <0xe0021000 0x1000>;
++		};
++
++		flx0: flexcom@e0040000 {
++			compatible = "microchip,lan9691-flexcom", "atmel,sama5d2-flexcom";
++			reg = <0xe0040000 0x100>;
++			ranges = <0x0 0xe0040000 0x800>;
++			clocks = <&clks GCK_ID_FLEXCOM0>;
++			#address-cells = <1>;
++			#size-cells = <1>;
++			status = "disabled";
++
++			usart0: serial@200 {
++				compatible = "microchip,lan9691-usart", "atmel,at91sam9260-usart";
++				reg = <0x200 0x200>;
++				interrupts = <GIC_SPI 46 IRQ_TYPE_LEVEL_HIGH>;
++				dmas = <&dma AT91_XDMAC_DT_PERID(3)>,
++				       <&dma AT91_XDMAC_DT_PERID(2)>;
++				dma-names = "tx", "rx";
++				clocks = <&fabric_clk>;
++				clock-names = "usart";
++				atmel,fifo-size = <32>;
++				atmel,usart-mode = <AT91_USART_MODE_SERIAL>;
++				status = "disabled";
++			};
++
++			spi0: spi@400 {
++				compatible = "microchip,lan9691-spi", "atmel,at91rm9200-spi";
++				reg = <0x400 0x200>;
++				interrupts = <GIC_SPI 46 IRQ_TYPE_LEVEL_HIGH>;
++				dmas = <&dma AT91_XDMAC_DT_PERID(3)>,
++				       <&dma AT91_XDMAC_DT_PERID(2)>;
++				dma-names = "tx", "rx";
++				clocks = <&fabric_clk>;
++				clock-names = "spi_clk";
++				#address-cells = <1>;
++				#size-cells = <0>;
++				atmel,fifo-size = <32>;
++				status = "disabled";
++			};
++
++			i2c0: i2c@600 {
++				compatible = "microchip,lan9691-i2c", "microchip,sam9x60-i2c";
++				reg = <0x600 0x200>;
++				interrupts = <GIC_SPI 46 IRQ_TYPE_LEVEL_HIGH>;
++				dmas = <&dma AT91_XDMAC_DT_PERID(3)>,
++				       <&dma AT91_XDMAC_DT_PERID(2)>;
++				dma-names = "tx", "rx";
++				clocks = <&fabric_clk>;
++				#address-cells = <1>;
++				#size-cells = <0>;
++				status = "disabled";
++			};
++		};
++
++		flx1: flexcom@e0044000 {
++			compatible = "microchip,lan9691-flexcom", "atmel,sama5d2-flexcom";
++			reg = <0xe0044000 0x100>;
++			ranges = <0x0 0xe0044000 0x800>;
++			clocks = <&clks GCK_ID_FLEXCOM1>;
++			#address-cells = <1>;
++			#size-cells = <1>;
++			status = "disabled";
++
++			usart1: serial@200 {
++				compatible = "microchip,lan9691-usart", "atmel,at91sam9260-usart";
++				reg = <0x200 0x200>;
++				interrupts = <GIC_SPI 47 IRQ_TYPE_LEVEL_HIGH>;
++				dmas = <&dma AT91_XDMAC_DT_PERID(3)>,
++				       <&dma AT91_XDMAC_DT_PERID(2)>;
++				dma-names = "tx", "rx";
++				clocks = <&fabric_clk>;
++				clock-names = "usart";
++				atmel,fifo-size = <32>;
++				atmel,usart-mode = <AT91_USART_MODE_SERIAL>;
++				status = "disabled";
++			};
++
++			spi1: spi@400 {
++				compatible = "microchip,lan9691-spi", "atmel,at91rm9200-spi";
++				reg = <0x400 0x200>;
++				interrupts = <GIC_SPI 47 IRQ_TYPE_LEVEL_HIGH>;
++				dmas = <&dma AT91_XDMAC_DT_PERID(3)>,
++				       <&dma AT91_XDMAC_DT_PERID(2)>;
++				dma-names = "tx", "rx";
++				clocks = <&fabric_clk>;
++				clock-names = "spi_clk";
++				#address-cells = <1>;
++				#size-cells = <0>;
++				atmel,fifo-size = <32>;
++				status = "disabled";
++			};
++
++			i2c1: i2c@600 {
++				compatible = "microchip,lan9691-i2c", "microchip,sam9x60-i2c";
++				reg = <0x600 0x200>;
++				interrupts = <GIC_SPI 47 IRQ_TYPE_LEVEL_HIGH>;
++				dmas = <&dma AT91_XDMAC_DT_PERID(3)>,
++				       <&dma AT91_XDMAC_DT_PERID(2)>;
++				dma-names = "tx", "rx";
++				clocks = <&fabric_clk>;
++				#address-cells = <1>;
++				#size-cells = <0>;
++				status = "disabled";
++			};
++		};
++
++		trng: rng@e0048000 {
++			compatible = "microchip,lan9691-trng", "atmel,at91sam9g45-trng";
++			reg = <0xe0048000 0x100>;
++			clocks = <&fabric_clk>;
++			status = "disabled";
++		};
++
++		aes: crypto@e004c000 {
++			compatible = "microchip,lan9691-aes", "atmel,at91sam9g46-aes";
++			reg = <0xe004c000 0x100>;
++			interrupts = <GIC_SPI 51 IRQ_TYPE_LEVEL_HIGH>;
++			dmas = <&dma AT91_XDMAC_DT_PERID(12)>,
++			       <&dma AT91_XDMAC_DT_PERID(13)>;
++			dma-names = "tx", "rx";
++			clocks = <&fabric_clk>;
++			clock-names = "aes_clk";
++			status = "disabled";
++		};
++
++		flx2: flexcom@e0060000 {
++			compatible = "microchip,lan9691-flexcom", "atmel,sama5d2-flexcom";
++			reg = <0xe0060000 0x100>;
++			ranges = <0x0 0xe0060000 0x800>;
++			clocks = <&clks GCK_ID_FLEXCOM2>;
++			#address-cells = <1>;
++			#size-cells = <1>;
++			status = "disabled";
++
++			usart2: serial@200 {
++				compatible = "microchip,lan9691-usart", "atmel,at91sam9260-usart";
++				reg = <0x200 0x200>;
++				interrupts = <GIC_SPI 48 IRQ_TYPE_LEVEL_HIGH>;
++				dmas = <&dma AT91_XDMAC_DT_PERID(7)>,
++				       <&dma AT91_XDMAC_DT_PERID(6)>;
++				dma-names = "tx", "rx";
++				clocks = <&fabric_clk>;
++				clock-names = "usart";
++				atmel,fifo-size = <32>;
++				atmel,usart-mode = <AT91_USART_MODE_SERIAL>;
++				status = "disabled";
++			};
++
++			spi2: spi@400 {
++				compatible = "microchip,lan9691-spi", "atmel,at91rm9200-spi";
++				reg = <0x400 0x200>;
++				interrupts = <GIC_SPI 48 IRQ_TYPE_LEVEL_HIGH>;
++				dmas = <&dma AT91_XDMAC_DT_PERID(7)>,
++				       <&dma AT91_XDMAC_DT_PERID(6)>;
++				dma-names = "tx", "rx";
++				clocks = <&fabric_clk>;
++				clock-names = "spi_clk";
++				#address-cells = <1>;
++				#size-cells = <0>;
++				atmel,fifo-size = <32>;
++				status = "disabled";
++			};
++
++			i2c2: i2c@600 {
++				compatible = "microchip,lan9691-i2c", "microchip,sam9x60-i2c";
++				reg = <0x600 0x200>;
++				interrupts = <GIC_SPI 48 IRQ_TYPE_LEVEL_HIGH>;
++				dmas = <&dma AT91_XDMAC_DT_PERID(7)>,
++				       <&dma AT91_XDMAC_DT_PERID(6)>;
++				dma-names = "tx", "rx";
++				clocks = <&fabric_clk>;
++				#address-cells = <1>;
++				#size-cells = <0>;
++				status = "disabled";
++			};
++		};
++
++		flx3: flexcom@e0064000 {
++			compatible = "microchip,lan9691-flexcom", "atmel,sama5d2-flexcom";
++			reg = <0xe0064000 0x100>;
++			ranges = <0x0 0xe0064000 0x800>;
++			clocks = <&clks GCK_ID_FLEXCOM3>;
++			#address-cells = <1>;
++			#size-cells = <1>;
++			status = "disabled";
++
++			usart3: serial@200 {
++				compatible = "microchip,lan9691-usart", "atmel,at91sam9260-usart";
++				reg = <0x200 0x200>;
++				interrupts = <GIC_SPI 49 IRQ_TYPE_LEVEL_HIGH>;
++				dmas = <&dma AT91_XDMAC_DT_PERID(9)>,
++				       <&dma AT91_XDMAC_DT_PERID(8)>;
++				dma-names = "tx", "rx";
++				clocks = <&fabric_clk>;
++				clock-names = "usart";
++				atmel,fifo-size = <32>;
++				atmel,usart-mode = <AT91_USART_MODE_SERIAL>;
++				status = "disabled";
++			};
++
++			spi3: spi@400 {
++				compatible = "microchip,lan9691-spi", "atmel,at91rm9200-spi";
++				reg = <0x400 0x200>;
++				interrupts = <GIC_SPI 49 IRQ_TYPE_LEVEL_HIGH>;
++				dmas = <&dma AT91_XDMAC_DT_PERID(9)>,
++				       <&dma AT91_XDMAC_DT_PERID(8)>;
++				dma-names = "tx", "rx";
++				clocks = <&fabric_clk>;
++				clock-names = "spi_clk";
++				#address-cells = <1>;
++				#size-cells = <0>;
++				atmel,fifo-size = <32>;
++				status = "disabled";
++			};
++
++			i2c3: i2c@600 {
++				compatible = "microchip,lan9691-i2c", "microchip,sam9x60-i2c";
++				reg = <0x600 0x200>;
++				interrupts = <GIC_SPI 49 IRQ_TYPE_LEVEL_HIGH>;
++				dmas = <&dma AT91_XDMAC_DT_PERID(9)>,
++				       <&dma AT91_XDMAC_DT_PERID(8)>;
++				dma-names = "tx", "rx";
++				clocks = <&fabric_clk>;
++				#address-cells = <1>;
++				#size-cells = <0>;
++				status = "disabled";
++			};
++		};
++
++		dma: dma-controller@e0068000 {
++			compatible = "microchip,lan9691-dma", "microchip,sama7g5-dma";
++			reg = <0xe0068000 0x1000>;
++			interrupts = <GIC_SPI 44 IRQ_TYPE_LEVEL_HIGH>;
++			dma-channels = <16>;
++			#dma-cells = <1>;
++			clocks = <&fabric_clk>;
++			clock-names = "dma_clk";
++		};
++
++		sha: crypto@e006c000 {
++			compatible = "microchip,lan9691-sha", "atmel,at91sam9g46-sha";
++			reg = <0xe006c000 0xec>;
++			interrupts = <GIC_SPI 55 IRQ_TYPE_LEVEL_HIGH>;
++			dmas = <&dma AT91_XDMAC_DT_PERID(14)>;
++			dma-names = "tx";
++			clocks = <&fabric_clk>;
++			clock-names = "sha_clk";
++			status = "disabled";
++		};
++
++		timer: timer@e008c000 {
++			compatible = "snps,dw-apb-timer";
++			reg = <0xe008c000 0x400>;
++			clocks = <&fabric_clk>;
++			clock-names = "timer";
++			interrupts = <GIC_SPI 37 IRQ_TYPE_LEVEL_HIGH>;
++			status = "disabled";
++		};
++
++		watchdog: watchdog@e0090000 {
++			compatible = "snps,dw-wdt";
++			reg = <0xe0090000 0x1000>;
++			interrupts = <GIC_SPI 36 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&fabric_clk>;
++		};
++
++		cpu_ctrl: syscon@e00c0000 {
++			compatible = "microchip,lan966x-cpu-syscon", "syscon";
++			reg = <0xe00c0000 0x350>;
++		};
++
++		switch: switch@e00c0000 {
++			compatible = "microchip,lan9691-switch";
++			reg = <0xe00c0000 0x0010000>,
++			      <0xe2010000 0x1410000>;
++			reg-names = "cpu", "devices";
++			interrupt-names = "xtr", "fdma", "ptp";
++			interrupts = <GIC_SPI 10 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 88 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI  9 IRQ_TYPE_LEVEL_HIGH>;
++			resets = <&reset 0>;
++			reset-names = "switch";
++			status = "disabled";
++		};
++
++		clks: clock-controller@e00c00b4 {
++			compatible = "microchip,lan9691-gck";
++			reg = <0xe00c00b4 0x30>, <0xe00c0308 0x4>;
++			#clock-cells = <1>;
++			clocks = <&cpu_clk>, <&ddr_clk>, <&fx100_clk>;
++			clock-names = "cpu", "ddr", "sys";
++		};
++
++		qspi0: spi@e0804000 {
++			compatible = "microchip,lan9691-qspi";
++			reg = <0xe0804000 0x00000100>,
++			      <0x20000000 0x08000000>;
++			reg-names = "qspi_base", "qspi_mmap";
++			interrupts = <GIC_SPI 43 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&fabric_clk>, <&clks GCK_ID_QSPI0>;
++			clock-names = "pclk", "gclk";
++			assigned-clocks = <&clks GCK_ID_QSPI0>;
++			assigned-clock-rates = <100000000>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "disabled";
++		};
++
++		sdmmc0: mmc@e0830000 {
++			compatible = "microchip,lan9691-sdhci";
++			reg = <0xe0830000 0x00000300>;
++			interrupts = <GIC_SPI 64 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&clks GCK_ID_SDMMC0>, <&clks GCK_ID_SDMMC0>;
++			clock-names = "hclock", "multclk";
++			assigned-clocks = <&clks GCK_ID_SDMMC0>;
++			assigned-clock-rates = <100000000>;
++			status = "disabled";
++		};
++
++		sdmmc1: mmc@e0838000 {
++			compatible = "microchip,lan9691-sdhci";
++			reg = <0xe0838000 0x00000300>;
++			interrupts = <GIC_SPI 50 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&clks GCK_ID_SDMMC1>, <&clks GCK_ID_SDMMC1>;
++			clock-names = "hclock", "multclk";
++			assigned-clocks = <&clks GCK_ID_SDMMC1>;
++			assigned-clock-rates = <45000000>;
++			status = "disabled";
++		};
++
++		qspi2: spi@e0834000 {
++			compatible = "microchip,lan9691-qspi";
++			reg = <0xe0834000 0x00000100>,
++			      <0x30000000 0x04000000>;
++			reg-names = "qspi_base", "qspi_mmap";
++			interrupts = <GIC_SPI 66 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&fabric_clk>, <&clks GCK_ID_QSPI2>;
++			clock-names = "pclk", "gclk";
++			assigned-clocks = <&clks GCK_ID_QSPI2>;
++			assigned-clock-rates = <100000000>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "disabled";
++		};
++
++		reset: reset-controller@e201000c {
++			compatible = "microchip,lan9691-switch-reset",
++				     "microchip,lan966x-switch-reset";
++			reg = <0xe201000c 0x4>;
++			reg-names = "gcb";
++			#reset-cells = <1>;
++			cpu-syscon = <&cpu_ctrl>;
++		};
++
++		gpio: pinctrl@e20100d4 {
++			compatible = "microchip,lan9691-pinctrl";
++			reg = <0xe20100d4 0xd4>,
++			      <0xe2010370 0xa8>;
++			gpio-controller;
++			#gpio-cells = <2>;
++			gpio-ranges = <&gpio 0 0 66>;
++			interrupt-controller;
++			interrupts = <GIC_SPI 15 IRQ_TYPE_LEVEL_HIGH>;
++			#interrupt-cells = <2>;
++		};
++
++		mdio0: mdio@e20101a8 {
++			compatible = "microchip,lan9691-miim", "mscc,ocelot-miim";
++			reg = <0xe20101a8 0x24>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++			clocks = <&fx100_clk>;
++			status = "disabled";
++		};
++
++		mdio1: mdio@e20101cc {
++			compatible = "microchip,lan9691-miim", "mscc,ocelot-miim";
++			reg = <0xe20101cc 0x24>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++			clocks = <&fx100_clk>;
++			status = "disabled";
++		};
++
++		sgpio: gpio@e2010230 {
++			compatible = "microchip,lan9691-sgpio", "microchip,sparx5-sgpio";
++			reg = <0xe2010230 0x118>;
++			clocks = <&fx100_clk>;
++			resets = <&reset 0>;
++			reset-names = "switch";
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "disabled";
++
++			sgpio_in: gpio@0 {
++				compatible = "microchip,lan9691-sgpio-bank",
++					     "microchip,sparx5-sgpio-bank";
++				reg = <0>;
++				gpio-controller;
++				#gpio-cells = <3>;
++				interrupts = <GIC_SPI 16 IRQ_TYPE_LEVEL_HIGH>;
++				interrupt-controller;
++				#interrupt-cells = <3>;
++			};
++
++			sgpio_out: gpio@1 {
++				compatible = "microchip,lan9691-sgpio-bank",
++					     "microchip,sparx5-sgpio-bank";
++				reg = <1>;
++				gpio-controller;
++				#gpio-cells = <3>;
++			};
++		};
++
++		tmon: hwmon@e2020100 {
++			compatible = "microchip,lan9691-temp", "microchip,sparx5-temp";
++			reg = <0xe2020100 0xc>;
++			clocks = <&fx100_clk>;
++			#thermal-sensor-cells = <0>;
++		};
++
++		serdes: serdes@e3410000 {
++			compatible = "microchip,lan9691-serdes";
++			reg = <0xe3410000 0x150000>;
++			#phy-cells = <1>;
++			clocks = <&fabric_clk>;
++		};
++
++		gic: interrupt-controller@e8c11000 {
++			compatible = "arm,gic-400";
++			reg = <0xe8c11000 0x1000>, /* Distributor GICD_ */
++			      <0xe8c12000 0x2000>, /* CPU interface GICC_ */
++			      <0xe8c14000 0x2000>, /* Virt interface control */
++			      <0xe8c16000 0x2000>; /* Virt CPU interface */
++			#interrupt-cells = <3>;
++			interrupt-controller;
++			interrupts = <GIC_PPI 9 IRQ_TYPE_LEVEL_HIGH>;
++		};
++	};
++};
+diff --git a/arch/arm/dts/lan9696-ev23x71a-u-boot.dtsi b/arch/arm/dts/lan9696-ev23x71a-u-boot.dtsi
+new file mode 100644
+index 00000000000..bbbb578cc57
+--- /dev/null
++++ b/arch/arm/dts/lan9696-ev23x71a-u-boot.dtsi
+@@ -0,0 +1,18 @@
++
++#include <dt-bindings/mscc/sparx5_data.h>
++
++&switch {
++	/delete-node/ ethernet-ports;
++
++	ethernet-ports {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		port29: port@29 {
++			reg = <29>;
++			phy-handle = <&phy3>;
++			phy-mode = "rgmii-rxid";
++			phys = <IF_RGMII>;
++		};
++	};
++};
+diff --git a/arch/arm/dts/lan9696-ev23x71a.dts b/arch/arm/dts/lan9696-ev23x71a.dts
+new file mode 100644
+index 00000000000..4935b6d7b14
+--- /dev/null
++++ b/arch/arm/dts/lan9696-ev23x71a.dts
+@@ -0,0 +1,795 @@
++// SPDX-License-Identifier: (GPL-2.0-or-later OR MIT)
++/*
++ * Copyright (c) 2025 Microchip Technology Inc. and its subsidiaries.
++ */
++
++/dts-v1/;
++
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/leds/common.h>
++#include "lan9691.dtsi"
++
++/ {
++	model = "Microchip EV23X71A";
++	compatible = "microchip,ev23x71a", "microchip,lan9696", "microchip,lan9691";
++
++	aliases {
++		serial0 = &usart0;
++	};
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++	};
++
++	gpio-restart {
++		compatible = "gpio-restart";
++		gpios = <&gpio 60 GPIO_ACTIVE_LOW>;
++		open-source;
++		priority = <200>;
++	};
++
++	i2c-mux {
++		compatible = "i2c-mux-gpio";
++		#address-cells = <1>;
++		#size-cells = <0>;
++		i2c-parent = <&i2c3>;
++		idle-state = <0x8>;
++		mux-gpios = <&sgpio_out 0 1 GPIO_ACTIVE_HIGH>,
++			    <&sgpio_out 0 2 GPIO_ACTIVE_HIGH>,
++			    <&sgpio_out 0 3 GPIO_ACTIVE_HIGH>;
++		settle-time-us = <100>;
++
++		i2c_sfp0: i2c@0 {
++			reg = <0x0>;
++		};
++
++		i2c_sfp1: i2c@1 {
++			reg = <0x1>;
++		};
++
++		i2c_sfp2: i2c@2 {
++			reg = <0x2>;
++		};
++
++		i2c_sfp3: i2c@3 {
++			reg = <0x3>;
++		};
++
++		i2c_poe: i2c@7 {
++			reg = <0x7>;
++		};
++	};
++
++	leds {
++		compatible = "gpio-leds";
++
++		led-status {
++			color = <LED_COLOR_ID_GREEN>;
++			function = LED_FUNCTION_STATUS;
++			gpios = <&gpio 61 GPIO_ACTIVE_LOW>;
++		};
++
++		led-sfp1-green {
++			color = <LED_COLOR_ID_GREEN>;
++			function = LED_FUNCTION_LAN;
++			function-enumerator = <0>;
++			gpios = <&sgpio_out 6 0 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++		};
++
++		led-sfp1-yellow {
++			color = <LED_COLOR_ID_YELLOW>;
++			function = LED_FUNCTION_LAN;
++			function-enumerator = <0>;
++			gpios = <&sgpio_out 6 1 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++		};
++
++		led-sfp2-green {
++			color = <LED_COLOR_ID_GREEN>;
++			function = LED_FUNCTION_LAN;
++			function-enumerator = <1>;
++			gpios = <&sgpio_out 7 0 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++		};
++
++		led-sfp2-yellow {
++			color = <LED_COLOR_ID_YELLOW>;
++			function = LED_FUNCTION_LAN;
++			function-enumerator = <1>;
++			gpios = <&sgpio_out 7 1 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++		};
++
++		led-sfp3-green {
++			color = <LED_COLOR_ID_GREEN>;
++			function = LED_FUNCTION_LAN;
++			function-enumerator = <2>;
++			gpios = <&sgpio_out 8 0 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++		};
++
++		led-sfp3-yellow {
++			color = <LED_COLOR_ID_YELLOW>;
++			function = LED_FUNCTION_LAN;
++			function-enumerator = <2>;
++			gpios = <&sgpio_out 8 1 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++		};
++
++		led-sfp4-green {
++			color = <LED_COLOR_ID_GREEN>;
++			function = LED_FUNCTION_LAN;
++			function-enumerator = <3>;
++			gpios = <&sgpio_out 9 0 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++		};
++
++		led-sfp4-yellow {
++			color = <LED_COLOR_ID_YELLOW>;
++			function = LED_FUNCTION_LAN;
++			function-enumerator = <3>;
++			gpios = <&sgpio_out 9 1 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++		};
++	};
++
++	mux-controller {
++		compatible = "gpio-mux";
++		#mux-control-cells = <0>;
++		mux-gpios = <&sgpio_out 1 2 GPIO_ACTIVE_LOW>,
++			    <&sgpio_out 1 3 GPIO_ACTIVE_LOW>;
++	};
++
++	sfp0: sfp0 {
++		compatible = "sff,sfp";
++		i2c-bus = <&i2c_sfp0>;
++		tx-disable-gpios = <&sgpio_out 6 2 GPIO_ACTIVE_HIGH>;
++		los-gpios = <&sgpio_in 6 0 GPIO_ACTIVE_HIGH>;
++		mod-def0-gpios = <&sgpio_in 6 1 GPIO_ACTIVE_LOW>;
++		tx-fault-gpios = <&sgpio_in 6 2 GPIO_ACTIVE_HIGH>;
++	};
++
++	sfp1: sfp1 {
++		compatible = "sff,sfp";
++		i2c-bus = <&i2c_sfp1>;
++		tx-disable-gpios = <&sgpio_out 7 2 GPIO_ACTIVE_HIGH>;
++		los-gpios = <&sgpio_in 7 0 GPIO_ACTIVE_HIGH>;
++		mod-def0-gpios = <&sgpio_in 7 1 GPIO_ACTIVE_LOW>;
++		tx-fault-gpios = <&sgpio_in 7 2 GPIO_ACTIVE_HIGH>;
++	};
++
++	sfp2: sfp2 {
++		compatible = "sff,sfp";
++		i2c-bus = <&i2c_sfp2>;
++		tx-disable-gpios = <&sgpio_out 8 2 GPIO_ACTIVE_HIGH>;
++		los-gpios = <&sgpio_in 8 0 GPIO_ACTIVE_HIGH>;
++		mod-def0-gpios = <&sgpio_in 8 1 GPIO_ACTIVE_LOW>;
++		tx-fault-gpios = <&sgpio_in 8 2 GPIO_ACTIVE_HIGH>;
++	};
++
++	sfp3: sfp3 {
++		compatible = "sff,sfp";
++		i2c-bus = <&i2c_sfp3>;
++		tx-disable-gpios = <&sgpio_out 9 2 GPIO_ACTIVE_HIGH>;
++		los-gpios = <&sgpio_in 9 0 GPIO_ACTIVE_HIGH>;
++		mod-def0-gpios = <&sgpio_in 9 1 GPIO_ACTIVE_LOW>;
++		tx-fault-gpios = <&sgpio_in 9 2 GPIO_ACTIVE_HIGH>;
++	};
++};
++
++&gpio {
++	emmc_sd_pins: emmc-sd-pins {
++		/* eMMC_SD - CMD, CLK, D0, D1, D2, D3, D4, D5, D6, D7, RSTN */
++		pins = "GPIO_14", "GPIO_15", "GPIO_16", "GPIO_17",
++		       "GPIO_18", "GPIO_19", "GPIO_20", "GPIO_21",
++		       "GPIO_22", "GPIO_23", "GPIO_24";
++		function = "emmc_sd";
++	};
++
++	fan_pins: fan-pins {
++		pins = "GPIO_25", "GPIO_26";
++		function = "fan";
++	};
++
++	fc0_pins: fc0-pins {
++		pins = "GPIO_3", "GPIO_4";
++		function = "fc";
++	};
++
++	fc2_pins: fc2-pins {
++		pins = "GPIO_64", "GPIO_65", "GPIO_66";
++		function = "fc";
++	};
++
++	fc3_pins: fc3-pins {
++		pins = "GPIO_55", "GPIO_56";
++		function = "fc";
++	};
++
++	mdio_irq_pins: mdio-irq-pins {
++		pins = "GPIO_11";
++		function = "miim_irq";
++	};
++
++	mdio_pins: mdio-pins {
++		pins = "GPIO_9", "GPIO_10";
++		function = "miim";
++	};
++
++	ptp_ext_pins: ptp-ext-pins {
++		pins = "GPIO_59";
++		function = "ptpsync_5";
++	};
++
++	ptp_out_pins: ptp-out-pins {
++		pins = "GPIO_58";
++		function = "ptpsync_4";
++	};
++
++	sgpio_pins: sgpio-pins {
++		/* SCK, D0, D1, LD */
++		pins = "GPIO_5", "GPIO_6", "GPIO_7", "GPIO_8";
++		function = "sgpio_a";
++	};
++
++	usb_over_pins: usb-over-pins {
++		pins = "GPIO_13";
++		function = "usb_over_detect";
++	};
++
++	usb_power_pins: usb-power-pins {
++		pins = "GPIO_1";
++		function = "usb_power";
++	};
++
++	usb_rst_pins: usb-rst-pins {
++		pins = "GPIO_12";
++		function = "usb2phy_rst";
++	};
++
++	usb_ulpi_pins: usb-ulpi-pins {
++		pins = "GPIO_30", "GPIO_31", "GPIO_32", "GPIO_33",
++		       "GPIO_34", "GPIO_35", "GPIO_36", "GPIO_37",
++		       "GPIO_38", "GPIO_39", "GPIO_40", "GPIO_41";
++		function = "usb_ulpi";
++	};
++};
++
++&flx0 {
++	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_USART>;
++	status = "okay";
++};
++
++&flx2 {
++	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_SPI>;
++	status = "okay";
++};
++
++&flx3 {
++	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_TWI>;
++	status = "okay";
++};
++
++&i2c3 {
++	pinctrl-0 = <&fc3_pins>;
++	pinctrl-names = "default";
++	i2c-analog-filter;
++	i2c-digital-filter;
++	i2c-digital-filter-width-ns = <35>;
++	i2c-sda-hold-time-ns = <1500>;
++	status = "okay";
++};
++
++&mdio0 {
++	pinctrl-0 = <&mdio_pins>, <&mdio_irq_pins>;
++	pinctrl-names = "default";
++	reset-gpios = <&gpio 62 GPIO_ACTIVE_LOW>;
++	status = "okay";
++
++	phy3: phy@3 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <3>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy4: phy@4 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <4>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy5: phy@5 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <5>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy6: phy@6 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <6>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy7: phy@7 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <7>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy8: phy@8 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <8>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy9: phy@9 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <9>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy10: phy@10 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <10>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy11: phy@11 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <11>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy12: phy@12 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <12>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy13: phy@13 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <13>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy14: phy@14 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <14>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy15: phy@15 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <15>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy16: phy@16 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <16>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy17: phy@17 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <17>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy18: phy@18 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <18>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy19: phy@19 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <19>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy20: phy@20 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <20>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy21: phy@21 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <21>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy22: phy@22 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <22>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy23: phy@23 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <23>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy24: phy@24 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <24>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy25: phy@25 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <25>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy26: phy@26 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <26>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++
++	phy27: phy@27 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <27>;
++		interrupts = <11 IRQ_TYPE_LEVEL_LOW>;
++		interrupt-parent = <&gpio>;
++	};
++};
++
++&otp {
++	nvmem-layout {
++		compatible = "microchip,otp-layout";
++
++		base_mac_address: base-mac-address {
++			#nvmem-cell-cells = <1>;
++		};
++	};
++};
++
++&qspi0 {
++	status = "okay";
++
++	flash@0 {
++		compatible = "jedec,spi-nor";
++		reg = <0>;
++		spi-max-frequency = <100000000>;
++		#address-cells = <1>;
++		#size-cells = <1>;
++		spi-tx-bus-width = <1>;
++		spi-rx-bus-width = <4>;
++		m25p,fast-read;
++	};
++};
++
++&sdmmc0 {
++	pinctrl-0 = <&emmc_sd_pins>;
++	pinctrl-names = "default";
++	max-frequency = <100000000>;
++	bus-width = <8>;
++	mmc-ddr-1_8v;
++	mmc-hs200-1_8v;
++	non-removable;
++	disable-wp;
++	status = "okay";
++};
++
++&serdes {
++	status = "okay";
++};
++
++&sgpio {
++	pinctrl-0 = <&sgpio_pins>;
++	pinctrl-names = "default";
++	microchip,sgpio-port-ranges = <0 1>, <6 9>;
++	status = "okay";
++
++	gpio@0 {
++		ngpios = <128>;
++	};
++	gpio@1 {
++		ngpios = <128>;
++	};
++};
++
++&spi2 {
++	pinctrl-0 = <&fc2_pins>;
++	pinctrl-names = "default";
++	cs-gpios = <&gpio 63 GPIO_ACTIVE_LOW>;
++	status = "okay";
++};
++
++&switch {
++	pinctrl-0 = <&ptp_out_pins>, <&ptp_ext_pins>;
++	pinctrl-names = "default";
++	nvmem-cells = <&base_mac_address 0>;
++	nvmem-cell-names = "mac-address";
++	status = "okay";
++
++	ethernet-ports {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		port0: port@0 {
++			reg = <0>;
++			phy-handle = <&phy4>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 0>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port1: port@1 {
++			reg = <1>;
++			phy-handle = <&phy5>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 0>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port2: port@2 {
++			reg = <2>;
++			phy-handle = <&phy6>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 0>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port3: port@3 {
++			reg = <3>;
++			phy-handle = <&phy7>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 0>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port4: port@4 {
++			reg = <4>;
++			phy-handle = <&phy8>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 1>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port5: port@5 {
++			reg = <5>;
++			phy-handle = <&phy9>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 1>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port6: port@6 {
++			reg = <6>;
++			phy-handle = <&phy10>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 1>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port7: port@7 {
++			reg = <7>;
++			phy-handle = <&phy11>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 1>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port8: port@8 {
++			reg = <8>;
++			phy-handle = <&phy12>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 2>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port9: port@9 {
++			reg = <9>;
++			phy-handle = <&phy13>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 2>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port10: port@10 {
++			reg = <10>;
++			phy-handle = <&phy14>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 2>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port11: port@11 {
++			reg = <11>;
++			phy-handle = <&phy15>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 2>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port12: port@12 {
++			reg = <12>;
++			phy-handle = <&phy16>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 3>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port13: port@13 {
++			reg = <13>;
++			phy-handle = <&phy17>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 3>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port14: port@14 {
++			reg = <14>;
++			phy-handle = <&phy18>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 3>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port15: port@15 {
++			reg = <15>;
++			phy-handle = <&phy19>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 3>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port16: port@16 {
++			reg = <16>;
++			phy-handle = <&phy20>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 4>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port17: port@17 {
++			reg = <17>;
++			phy-handle = <&phy21>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 4>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port18: port@18 {
++			reg = <18>;
++			phy-handle = <&phy22>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 4>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port19: port@19 {
++			reg = <19>;
++			phy-handle = <&phy23>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 4>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port20: port@20 {
++			reg = <20>;
++			phy-handle = <&phy24>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 5>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port21: port@21 {
++			reg = <21>;
++			phy-handle = <&phy25>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 5>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port22: port@22 {
++			reg = <22>;
++			phy-handle = <&phy26>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 5>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port23: port@23 {
++			reg = <23>;
++			phy-handle = <&phy27>;
++			phy-mode = "qsgmii";
++			phys = <&serdes 5>;
++			microchip,bandwidth = <1000>;
++		};
++
++		port24: port@24 {
++			reg = <24>;
++			phys = <&serdes 6>;
++			phy-mode = "10gbase-r";
++			sfp = <&sfp0>;
++			managed = "in-band-status";
++			microchip,bandwidth = <10000>;
++			microchip,sd-sgpio = <24>;
++		};
++
++		port25: port@25 {
++			reg = <25>;
++			phys = <&serdes 7>;
++			phy-mode = "10gbase-r";
++			sfp = <&sfp1>;
++			managed = "in-band-status";
++			microchip,bandwidth = <10000>;
++			microchip,sd-sgpio = <28>;
++		};
++
++		port26: port@26 {
++			reg = <26>;
++			phys = <&serdes 8>;
++			phy-mode = "10gbase-r";
++			sfp = <&sfp2>;
++			managed = "in-band-status";
++			microchip,bandwidth = <10000>;
++			microchip,sd-sgpio = <32>;
++		};
++
++		port27: port@27 {
++			reg = <27>;
++			phys = <&serdes 9>;
++			phy-mode = "10gbase-r";
++			sfp = <&sfp3>;
++			managed = "in-band-status";
++			microchip,bandwidth = <10000>;
++			microchip,sd-sgpio = <36>;
++		};
++
++		port29: port@29 {
++			reg = <29>;
++			phy-handle = <&phy3>;
++			phy-mode = "rgmii-id";
++			microchip,bandwidth = <1000>;
++		};
++	};
++};
++
++&tmon {
++	pinctrl-0 = <&fan_pins>;
++	pinctrl-names = "default";
++};
++
++&usart0 {
++	pinctrl-0 = <&fc0_pins>;
++	pinctrl-names = "default";
++	status = "okay";
++};
++
++&usb {
++	pinctrl-0 = <&usb_ulpi_pins>, <&usb_rst_pins>, <&usb_over_pins>, <&usb_power_pins>;
++	pinctrl-names = "default";
++	status = "okay";
++};
+diff --git a/arch/arm/dts/lan969x-u-boot.dtsi b/arch/arm/dts/lan969x-u-boot.dtsi
+new file mode 100644
+index 00000000000..066e0697d77
+--- /dev/null
++++ b/arch/arm/dts/lan969x-u-boot.dtsi
+@@ -0,0 +1,72 @@
++
++&switch {
++	/delete-property/ reg;
++	/delete-property/ reg-names;
++
++	reg = <0xe2900000 0x100000>, // ANA_AC
++	      <0xe2400000 0x100000>, // ANA_CL
++	      <0xe2800000 0x100000>, // ANA_L2
++	      <0xe2480000 0x100000>, // ANA_L3
++	      <0xe3200000 0x10000>,  // ASM
++	      <0xe2060000 0x10000>,  // LRN
++	      <0xe20b0000 0x10000>,  // QFWD
++	      <0xe2030000 0x20000>,  // DEVCPU_QS
++	      <0xe20a0000 0x10000>,  // QSYS
++	      <0xe2600000 0x80000>,  // REW
++	      <0xe2a00000 0x80000>,  // VOP
++	      <0xe30ec000 0x80000>,  // DSM
++	      <0xe22c0000 0x80000>,  // EACL
++	      <0xe2080000 0x80000>,  // VCAP_SUPER
++	      <0xe2580000 0x80000>,  // HSCH
++	      <0xe30f0000 0x10000>,  // PORT_CONF
++	      <0xe20c0000 0x10000>,  // XQS
++	      <0xe3408000 0x10000>,  // HSIO
++	      <0xe2010000 0x10000>,  // GCB
++	      <0xe00c0000 0x10000>,  // CPU
++	      <0xe2040000 0x10000>,  // PTP
++	      <0xe3004000 0x4000>,   // DEV2G5_0
++	      <0xe3010000 0x4000>,   // DEV2G5_1
++	      <0xe3014000 0x4000>,   // DEV2G5_2
++	      <0xe3018000 0x4000>,   // DEV2G5_3
++	      <0xe301c000 0x4000>,   // DEV2G5_4
++	      <0xe3028000 0x4000>,   // DEV2G5_5
++	      <0xe302c000 0x4000>,   // DEV2G5_6
++	      <0xe3030000 0x4000>,   // DEV2G5_7
++	      <0xe3034000 0x4000>,   // DEV2G5_8
++	      <0xe3040000 0x4000>,   // DEV2G5_9
++	      <0xe304c000 0x4000>,   // DEV2G5_10
++	      <0xe3050000 0x4000>,   // DEV2G5_11
++	      <0xe3054000 0x4000>,   // DEV2G5_12
++	      <0xe3060000 0x4000>,   // DEV2G5_13
++	      <0xe306c000 0x4000>,   // DEV2G5_14
++	      <0xe3070000 0x4000>,   // DEV2G5_15
++	      <0xe3074000 0x4000>,   // DEV2G5_16
++	      <0xe3080000 0x4000>,   // DEV2G5_17
++	      <0xe308c000 0x4000>,   // DEV2G5_18
++	      <0xe3090000 0x4000>,   // DEV2G5_19
++	      <0xe3094000 0x4000>,   // DEV2G5_20
++	      <0xe30a0000 0x4000>,   // DEV2G5_21
++	      <0xe30ac000 0x4000>,   // DEV2G5_22
++	      <0xe30b0000 0x4000>,   // DEV2G5_23
++	      <0xe30b4000 0x4000>,   // DEV2G5_24
++	      <0xe30c0000 0x4000>,   // DEV2G5_25
++	      <0xe30cc000 0x4000>,   // DEV2G5_26
++	      <0xe30d8000 0x4000>,   // DEV2G5_27
++	      <0xe30e4000 0x4000>,   // DEV2G5_28 (RGMII)
++	      <0xe30e8000 0x4000>,   // DEV2G5_29 (RGMII)
++	      <0xe3410000 0x150000>; // SERDES
++	reg-names =
++	      "ana_ac", "ana_cl", "ana_l2", "ana_l3",
++	      "asm", "lrn", "qfwd", "qs",
++	      "qsys", "rew", "vop", "dsm",
++	      "eacl", "vcap_super", "hsch", "port_conf", "xqs",
++	      "hsio", "gcb", "cpu", "ptp",
++	      "port0", "port1", "port2", "port3",
++	      "port4", "port5", "port6", "port7", "port8",
++	      "port9", "port10", "port11", "port12", "port13",
++	      "port14", "port15", "port16", "port17", "port18",
++	      "port19", "port20", "port21", "port22", "port23",
++	      "port24", "port25", "port26", "port27", "port28",
++	      "port29";
++	clocks = <&fabric_clk>;
++};
+diff --git a/arch/arm/mach-microchipsw/Kconfig b/arch/arm/mach-microchipsw/Kconfig
+new file mode 100644
+index 00000000000..aadd6beb00d
+--- /dev/null
++++ b/arch/arm/mach-microchipsw/Kconfig
+@@ -0,0 +1,31 @@
++if ARCH_MICROCHIPSW
++
++config SYS_SOC
++	default "microchipsw"
++
++config SYS_VENDOR
++	default "microchip"
++
++choice
++	prompt "Microchip switch SoC select"
++
++config TARGET_LAN969X
++	bool "Microchip LAN969x SoC"
++	select ARM64
++	select ARCH_SUPPORT_TFABOOT
++	select DM_SERIAL
++	select DM_GPIO
++	help
++	  Support for Microchip LAN969X reference board platform.
++
++endchoice
++
++config SYS_BOARD
++	string "Board name"
++	default "lan969x" if TARGET_LAN969X
++	default ""
++
++config SYS_CONFIG_NAME
++	default "lan969x" if TARGET_LAN969X
++
++endif
+diff --git a/arch/arm/mach-microchipsw/Makefile b/arch/arm/mach-microchipsw/Makefile
+new file mode 100644
+index 00000000000..39eca321705
+--- /dev/null
++++ b/arch/arm/mach-microchipsw/Makefile
+@@ -0,0 +1,3 @@
++# SPDX-License-Identifier: GPL-2.0+
++
++obj-$(CONFIG_TARGET_LAN969X) += lan969x/
+diff --git a/arch/arm/mach-microchipsw/include/mach/soc.h b/arch/arm/mach-microchipsw/include/mach/soc.h
+new file mode 100644
+index 00000000000..cd1d61ff121
+--- /dev/null
++++ b/arch/arm/mach-microchipsw/include/mach/soc.h
+@@ -0,0 +1,29 @@
++/*
++ * Copyright (C) 2023 Microchip Technology Inc. and its subsidiaries.
++ *
++ * SPDX-License-Identifier: BSD-3-Clause
++ */
++
++#ifndef _MICROCHIPSW_SOC_H_
++#define _MICROCHIPSW_SOC_H_
++
++#if defined(CONFIG_TARGET_LAN969X)
++#include <asm/types.h>
++
++typedef enum {
++	BOOT_SOURCE_EMMC = 0,
++	BOOT_SOURCE_QSPI,
++	BOOT_SOURCE_SDMMC,
++	BOOT_SOURCE_NONE
++} boot_source_type_t;
++
++phys_size_t tfa_get_dram_size(void);
++
++boot_source_type_t tfa_get_boot_source(void);
++
++int tfa_get_board_number(void);
++
++phys_size_t tfa_get_sram_info(int ix, phys_addr_t *start);
++
++#endif /* CONFIG_TARGET_LAN969X */
++#endif /* _LAN969X_SOC_H_ */
+diff --git a/arch/arm/mach-microchipsw/lan969x/Makefile b/arch/arm/mach-microchipsw/lan969x/Makefile
+new file mode 100644
+index 00000000000..efa5153a3b7
+--- /dev/null
++++ b/arch/arm/mach-microchipsw/lan969x/Makefile
+@@ -0,0 +1,3 @@
++# SPDX-License-Identifier: GPL-2.0+
++
++obj-y = soc.o
+diff --git a/arch/arm/mach-microchipsw/lan969x/soc.c b/arch/arm/mach-microchipsw/lan969x/soc.c
+new file mode 100644
+index 00000000000..d094b52f888
+--- /dev/null
++++ b/arch/arm/mach-microchipsw/lan969x/soc.c
+@@ -0,0 +1,136 @@
++#include <asm/io.h>
++#include <dm/uclass.h>
++#include <linux/arm-smccc.h>
++#include <linux/bitfield.h>
++
++#include <asm/arch/soc.h>
++
++#define CPU_RESET_PROT_STAT	0xe00c0088
++#define SYS_RST_PROT_VCORE_M	BIT(5)
++
++#define GCB_CHIP_ID		0xe2010000
++#define PART_ID_M		GENMASK(27, 12)
++
++#define GCB_SOFT_RST		0xe201000c
++#define CHIP_SOFT_RST_M		BIT(0)
++
++#define SIP_SVC_UID		0x8200ff01
++#define SIP_SVC_VERSION		0x8200ff02
++#define SIP_SVC_GET_BOOTSRC	0x8200ff09
++#define SIP_SVC_GET_DDR_SIZE	0x8200ff0a
++#define SIP_SVC_GET_BOARD_NO	0x8200ff0b
++#define SIP_SVC_SRAM_INFO	0x8200ff0d
++
++enum lan969x_part_id {
++	LAN9691VAO = 0x9691,  /* lan969x-40-VAO */
++	LAN9692VAO = 0x9692,  /* lan969x-65-VAO */
++	LAN9693VAO = 0x9693,  /* lan969x-100-VAO */
++	LAN9694	   = 0x9694,  /* lan969x-40 */
++	LAN9694TSN = 0x9695,  /* lan969x-40-TSN */
++	LAN9694RED = 0x969A,  /* lan969x-40-RED */
++	LAN9696    = 0x9696,  /* lan969x-60 */
++	LAN9696TSN = 0x9697,  /* lan969x-60-TSN */
++	LAN9696RED = 0x969B,  /* lan969x-60-RED */
++	LAN9698    = 0x9698,  /* lan969x-100 */
++	LAN9698TSN = 0x9699,  /* lan969x-100-TSN */
++	LAN9698RED = 0x969C,  /* lan969x-100-RED */
++};
++
++boot_source_type_t tfa_get_boot_source(void)
 +{
-+	u16 rxcdll_val, txcdll_val;
-+	int ret;
++	struct arm_smccc_res res;
 +
-+	switch (phydev->interface) {
-+	case PHY_INTERFACE_MODE_RGMII:
-+		rxcdll_val = BIT(14);
-+		txcdll_val = BIT(14);
-+		break;
-+	case PHY_INTERFACE_MODE_RGMII_ID:
-+		rxcdll_val = LAN8841_DLL_ENABLE_DELAY;
-+		txcdll_val = LAN8841_DLL_ENABLE_DELAY;
-+		break;
-+	case PHY_INTERFACE_MODE_RGMII_RXID:
-+		rxcdll_val = LAN8841_DLL_ENABLE_DELAY;
-+		txcdll_val = BIT(14);
-+		break;
-+	case PHY_INTERFACE_MODE_RGMII_TXID:
-+		rxcdll_val = BIT(14);
-+		txcdll_val = LAN8841_DLL_ENABLE_DELAY;
-+		break;
-+	default:
++	arm_smccc_smc(SIP_SVC_GET_BOOTSRC, -1, 0, 0, 0, 0, 0, 0, &res);
++	if (res.a0)
++		return BOOT_SOURCE_NONE;
++
++	return (boot_source_type_t) res.a1;
++}
++
++phys_size_t tfa_get_dram_size(void)
++{
++	struct arm_smccc_res res;
++
++	arm_smccc_smc(SIP_SVC_GET_DDR_SIZE, -1, 0, 0, 0, 0, 0, 0, &res);
++	if (res.a0)
++		return 0;
++
++	return res.a1;
++}
++
++int tfa_get_board_number(void)
++{
++	struct arm_smccc_res res;
++
++	arm_smccc_smc(SIP_SVC_GET_BOARD_NO, -1, 0, 0, 0, 0, 0, 0, &res);
++	if (res.a0)
++		return 0;
++
++	return res.a1;
++}
++
++phys_size_t tfa_get_sram_info(int ix, phys_addr_t *start)
++{
++	struct arm_smccc_res res;
++
++	arm_smccc_smc(SIP_SVC_VERSION, 0, 0, 0, 0, 0, 0, 0, &res);
++	if (res.a0 == 0 && res.a1 <= 1) {
++		/* SRAM info supported > 0.1 */
 +		return 0;
 +	}
 +
-+	ret = phy_modify_mmd(phydev, LAN8841_MMD_COMMON_CTRL_REG,
-+			     LAN8841_RXC_DLL_CTRL, BIT_MASK(14),
-+			     rxcdll_val);
-+	if (ret < 0)
-+		return ret;
++	arm_smccc_smc(SIP_SVC_SRAM_INFO, ix, 0, 0, 0, 0, 0, 0, &res);
++	if (res.a0) {
++		/* No SRAM segment 'ix' */
++		return 0;
++	}
 +
-+	return phy_modify_mmd(phydev, LAN8841_MMD_COMMON_CTRL_REG,
-+			      LAN8841_TXC_DLL_CTRL, BIT_MASK(14),
-+			      txcdll_val);
++	/* Have SRAM segment */
++	*start = res.a1;
++	return res.a2;
 +}
 +
-+static int lan8841_config_init(struct phy_device *phydev)
++__weak void reset_cpu(void)
 +{
-+	int ret;
++	clrbits_le32(CPU_RESET_PROT_STAT, SYS_RST_PROT_VCORE_M);
++	setbits_le32(GCB_SOFT_RST, CHIP_SOFT_RST_M);
++}
 +
-+	if (phy_interface_is_rgmii(phydev)) {
-+		ret = lan8841_config_rgmii_delay(phydev);
-+		if (ret < 0)
-+			return ret;
++static char *part_id_string(u32 chip_id_reg)
++{
++	switch (FIELD_GET(PART_ID_M, chip_id_reg)) {
++	case LAN9691VAO:
++		return "LAN9691VAO";
++	case LAN9692VAO:
++		return "LAN9692VAO";
++	case LAN9693VAO:
++		return "LAN9693VAO";
++	case LAN9694:
++		return "LAN9694";
++	case LAN9694TSN:
++		return "LAN9694TSN";
++	case LAN9694RED:
++		return "LAN9694RED";
++	case LAN9696:
++		return "LAN9696";
++	case LAN9696TSN:
++		return "LAN9696TSN";
++	case LAN9696RED:
++		return "LAN9696RED";
++	case LAN9698:
++		return "LAN9698";
++	case LAN9698TSN:
++		return "LAN9698TSN";
++	case LAN9698RED:
++		return "LAN9698RED";
++	default:
++		return "Unknown ID";
 +	}
++}
 +
-+	/* Initialize the HW by resetting everything */
-+	phy_modify_mmd(phydev, LAN8841_MMD_COMMON_CTRL_REG,
-+		       LAN8841_PTP_CMD_CTL,
-+		       LAN8841_PTP_CMD_CTL_PTP_RESET,
-+		       LAN8841_PTP_CMD_CTL_PTP_RESET);
++int print_cpuinfo(void)
++{
++	printf("CPU:   %s\n", part_id_string(readl(GCB_CHIP_ID)));
 +
-+	phy_modify_mmd(phydev, LAN8841_MMD_COMMON_CTRL_REG,
-+		       LAN8841_PTP_CMD_CTL,
-+		       LAN8841_PTP_CMD_CTL_PTP_ENABLE,
-+		       LAN8841_PTP_CMD_CTL_PTP_ENABLE);
++	return 0;
++}
+diff --git a/board/microchip/lan969x/Makefile b/board/microchip/lan969x/Makefile
+new file mode 100644
+index 00000000000..97e3de097b4
+--- /dev/null
++++ b/board/microchip/lan969x/Makefile
+@@ -0,0 +1,3 @@
++# SPDX-License-Identifier: GPL-2.0+
 +
-+	/* Don't process any frames */
-+	phy_write_mmd(phydev, LAN8841_MMD_COMMON_CTRL_REG,
-+		      LAN8841_PTP_RX_PARSE_CONFIG, 0);
-+	phy_write_mmd(phydev, LAN8841_MMD_COMMON_CTRL_REG,
-+		      LAN8841_PTP_TX_PARSE_CONFIG, 0);
-+	phy_write_mmd(phydev, LAN8841_MMD_COMMON_CTRL_REG,
-+		      LAN8841_PTP_TX_PARSE_L2_ADDR_EN, 0);
-+	phy_write_mmd(phydev, LAN8841_MMD_COMMON_CTRL_REG,
-+		      LAN8841_PTP_RX_PARSE_L2_ADDR_EN, 0);
-+	phy_write_mmd(phydev, LAN8841_MMD_COMMON_CTRL_REG,
-+		      LAN8841_PTP_TX_PARSE_IP_ADDR_EN, 0);
-+	phy_write_mmd(phydev, LAN8841_MMD_COMMON_CTRL_REG,
-+		      LAN8841_PTP_RX_PARSE_IP_ADDR_EN, 0);
++obj-y	:= lan969x.o
+diff --git a/board/microchip/lan969x/lan969x.c b/board/microchip/lan969x/lan969x.c
+new file mode 100644
+index 00000000000..47083a95999
+--- /dev/null
++++ b/board/microchip/lan969x/lan969x.c
+@@ -0,0 +1,115 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (C) 2022 Microchip Technology Inc. and its subsidiaries.
++ */
 +
-+	/* Disable checking for minorVersionPTP field */
-+	phy_write_mmd(phydev, LAN8841_MMD_COMMON_CTRL_REG,
-+		      LAN8841_PTP_RX_VERSION, 0xff00);
-+	phy_write_mmd(phydev, LAN8841_MMD_COMMON_CTRL_REG,
-+		      LAN8841_PTP_TX_VERSION, 0xff00);
++#include <asm/io.h>
++#include <asm/armv8/cpu.h>
++#include <asm/armv8/mmu.h>
++#include <dm/uclass.h>
++#include <dm/uclass-internal.h>
++#include <linux/sizes.h>
++#include <asm/global_data.h>
++#include <env.h>
++#include <env_internal.h>
 +
-+	/* 100BT Clause 40 improvement errata */
-+	phy_write_mmd(phydev, LAN8841_MMD_ANALOG_REG,
-+		      LAN8841_ANALOG_CONTROL_1,
-+		      LAN8841_ANALOG_CONTROL_1_PLL_TRIM(0x2));
-+	phy_write_mmd(phydev, LAN8841_MMD_ANALOG_REG,
-+		      LAN8841_ANALOG_CONTROL_10,
-+		      LAN8841_ANALOG_CONTROL_10_PLL_DIV(0x1));
++#include <asm/arch/soc.h>
 +
-+	/* 10M/100M Ethernet Signal Tuning Errata for Shorted-Center Tap
-+	 * Magnetics
-+	 */
-+	ret = phy_read_mmd(phydev, LAN8841_MMD_COMMON_CTRL_REG,
-+			   LAN8841_OPERATION_MODE_STRAP_OVERRIDE_LOW_REG);
-+	if (ret & LAN8841_OPERATION_MODE_STRAP_OVERRIDE_LOW_REG_MAGJACK) {
-+		phy_write_mmd(phydev, LAN8841_MMD_ANALOG_REG,
-+			      LAN8841_TX_LOW_I_CH_C_D_POWER_MANAGMENT,
-+			      LAN8841_TX_LOW_I_CH_C_D_POWER_MANAGMENT_VAL);
-+		phy_write_mmd(phydev, LAN8841_MMD_ANALOG_REG,
-+			      LAN8841_BTRX_POWER_DOWN,
-+			      LAN8841_BTRX_POWER_DOWN_QBIAS_CH_A |
-+			      LAN8841_BTRX_POWER_DOWN_BTRX_CH_A |
-+			      LAN8841_BTRX_POWER_DOWN_QBIAS_CH_B |
-+			      LAN8841_BTRX_POWER_DOWN_BTRX_CH_B |
-+			      LAN8841_BTRX_POWER_DOWN_BTRX_CH_C |
-+			      LAN8841_BTRX_POWER_DOWN_BTRX_CH_D);
++DECLARE_GLOBAL_DATA_PTR;
++
++static struct mm_region fa_mem_map[] = {
++	{
++		.virt = PHYS_SDRAM_1,
++		.phys = PHYS_SDRAM_1,
++		.size = PHYS_SDRAM_1_SIZE,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++			 PTE_BLOCK_INNER_SHARE
++	}, {
++		.virt = LAN969X_SRAM_BASE,
++		.phys = LAN969X_SRAM_BASE,
++		.size = LAN969X_SRAM_SIZE,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++			 PTE_BLOCK_INNER_SHARE
++	}, {
++		.virt = LAN969X_QSPI0_MMAP,
++		.phys = LAN969X_QSPI0_MMAP,
++		.size = LAN969X_QSPI0_RANGE,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		.virt = LAN969X_DEV_BASE,
++		.phys = LAN969X_DEV_BASE,
++		.size = LAN969X_DEV_SIZE,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		.virt = LAN969X_USB_BASE,
++		.phys = LAN969X_USB_BASE,
++		.size = LAN969X_USB_SIZE,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* List terminator */
++		0,
 +	}
++};
++struct mm_region *mem_map = fa_mem_map;
 +
-+	/* LDO Adjustment errata */
-+	phy_write_mmd(phydev, LAN8841_MMD_ANALOG_REG,
-+		      LAN8841_ANALOG_CONTROL_11,
-+		      LAN8841_ANALOG_CONTROL_11_LDO_REF(1));
++int dram_init(void)
++{
++	gd->ram_size = tfa_get_dram_size();
 +
-+	/* 100BT RGMII latency tuning errata */
-+	phy_write_mmd(phydev, MDIO_MMD_PMAPMD,
-+		      LAN8841_ADC_CHANNEL_MASK, 0x0);
-+	phy_write_mmd(phydev, LAN8841_MMD_TIMER_REG,
-+		      LAN8841_MMD0_REGISTER_17,
-+		      LAN8841_MMD0_REGISTER_17_DROP_OPT(2) |
-+		      LAN8841_MMD0_REGISTER_17_XMIT_TOG_TX_DIS);
-+
-+	/* Disable Power Down */
-+	phy_modify(phydev, MDIO_DEVAD_NONE, MII_BMCR, BMCR_PDOWN, 0);
++	/* Fall-back to compile-time default */
++	if (!gd->ram_size)
++		gd->ram_size = LAN969X_DDR_SIZE_DEF;
 +
 +	return 0;
 +}
 +
-+U_BOOT_PHY_DRIVER(lan8841) = {
-+	.name = "Microchip LAN8841",
-+	.uid = PHY_ID_LAN8841,
-+	.mask = PHY_ID_MATCH_MODEL_MASK,
-+	.features = PHY_GBIT_FEATURES,
-+	.config = &lan8841_config_init,
-+	.startup = &genphy_startup,
-+	.shutdown = &genphy_shutdown,
-+};
++static void add_memory_bank(int bankno, phys_addr_t start, phys_size_t size)
++{
++	gd->bd->bi_dram[bankno].start = start;
++	gd->bd->bi_dram[bankno].size = size;
++}
++
++int dram_init_banksize(void)
++{
++	int bankno = 0;
++	phys_addr_t start;
++	phys_size_t size;
++
++	/* Add DDR */
++	add_memory_bank(bankno++, PHYS_SDRAM_1, gd->ram_size);
++
++	/* First the lower half of SRAM */
++	size = tfa_get_sram_info(0, &start);
++	if (size) {
++		add_memory_bank(bankno++, start, size);
++	}
++
++	/* Upper half of SRAM has 1st 128K reserved for BL31 */
++	size = tfa_get_sram_info(1, &start);
++	if (size) {
++		add_memory_bank(bankno++, start, size);
++	}
++
++	return 0;
++}
++
++int arch_cpu_init(void)
++{
++	return 0;
++}
++
++int mach_cpu_init(void)
++{
++	return 0;
++}
++
++int board_init(void)
++{
++	return 0;
++}
+diff --git a/configs/microchip_ev23x71a_defconfig b/configs/microchip_ev23x71a_defconfig
+new file mode 100644
+index 00000000000..2717f6e9adf
+--- /dev/null
++++ b/configs/microchip_ev23x71a_defconfig
+@@ -0,0 +1,77 @@
++CONFIG_ARM=y
++CONFIG_POSITION_INDEPENDENT=y
++# CONFIG_ARM64_SUPPORT_AARCH32 is not set
++CONFIG_ARCH_MICROCHIPSW=y
++CONFIG_TFABOOT=y
++CONFIG_NR_DRAM_BANKS=3
++CONFIG_ENV_OFFSET=0x0
++CONFIG_DEFAULT_DEVICE_TREE="lan9696-ev23x71a"
++CONFIG_SYS_BOOTM_LEN=0x4000000
++CONFIG_SYS_LOAD_ADDR=0x64000000
++CONFIG_DEBUG_UART_BASE=0xe0040200
++CONFIG_DEBUG_UART_CLOCK=250000000
++CONFIG_DEBUG_UART=y
++# CONFIG_EFI_LOADER is not set
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++# CONFIG_LEGACY_IMAGE_FORMAT is not set
++CONFIG_HUSH_PARSER=y
++# CONFIG_HUSH_OLD_PARSER is not set
++CONFIG_HUSH_MODERN_PARSER=y
++CONFIG_CMD_CLK=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_MTD=y
++CONFIG_CMD_PART=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_WDT=y
++CONFIG_CMD_DHCP=y
++CONFIG_CMD_DNS=y
++CONFIG_CMD_MII=y
++CONFIG_CMD_PING=y
++CONFIG_CMD_WGET=y
++CONFIG_EFI_PARTITION=y
++CONFIG_DEVICE_TREE_INCLUDES="lan969x-u-boot.dtsi"
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_ENV_MMC_USE_SW_PARTITION=y
++CONFIG_ENV_MMC_SW_PARTITION="Env"
++CONFIG_PROT_TCP_SACK=y
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_CLK=y
++CONFIG_CLK_LAN966X=y
++# CONFIG_I2C is not set
++# CONFIG_INPUT is not set
++CONFIG_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_MISC=y
++CONFIG_MICROCHIP_FLEXCOM=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_ATMEL=y
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_SST=y
++CONFIG_SPI_FLASH_MTD=y
++CONFIG_PHY_MICROCHIP=y
++CONFIG_DM_MDIO=y
++CONFIG_PHY_GIGE=y
++CONFIG_MSCC_LAN969X_SWITCH=y
++CONFIG_MDIO_MSCC_MIIM=y
++CONFIG_PINCTRL=y
++CONFIG_PINCTRL_LAN969X=y
++CONFIG_SERIAL_SEARCH_ALL=y
++CONFIG_DEBUG_UART_ANNOUNCE=y
++CONFIG_DEBUG_UART_SKIP_INIT=y
++CONFIG_ATMEL_USART=y
++CONFIG_SPI=y
++CONFIG_DM_SPI=y
++CONFIG_ATMEL_QSPI=y
++CONFIG_SYSRESET=y
++CONFIG_SYSRESET_GPIO=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_DESIGNWARE_WATCHDOG=y
++CONFIG_WDT=y
+diff --git a/include/configs/lan969x.h b/include/configs/lan969x.h
+new file mode 100644
+index 00000000000..3164b1b3da2
+--- /dev/null
++++ b/include/configs/lan969x.h
+@@ -0,0 +1,36 @@
++/*
++ * Copyright (C) 2022 Microchip Technology Inc. and its subsidiaries.
++ *
++ * SPDX-License-Identifier: BSD-3-Clause
++ */
++
++#ifndef __LAN969X_CONFIG_H
++#define __LAN969X_CONFIG_H
++
++#include <linux/sizes.h>
++
++/* LAN969X defines */
++#define LAN969X_QSPI0_MMAP      UL(0x20000000)
++#define LAN969X_QSPI0_RANGE     SZ_256M
++#define LAN969X_SRAM_BASE       UL(0x00100000)
++#define LAN969X_SRAM_SIZE       SZ_2M
++#define LAN969X_DDR_BASE        UL(0x60000000)
++#define LAN969X_DDR_SIZE_DEF    (SZ_1G - (SZ_1G / 8)) /* ECC enabled cost 1/8th capacity */
++#define LAN969X_DDR_SIZE_MAX    SZ_2G
++
++#define LAN969X_DEV_BASE	UL(0xE0000000)
++#define LAN969X_DEV_SIZE	UL(0x10000000)
++
++#define LAN969X_USB_BASE	0x300000
++#define LAN969X_USB_SIZE	0x80000
++
++#define PHYS_SDRAM_1		LAN969X_DDR_BASE
++#define PHYS_SDRAM_1_SIZE	LAN969X_DDR_SIZE_MAX /* Used for MMU table - only */
++
++#define CFG_SYS_SDRAM_BASE      LAN969X_DDR_BASE
++#define CFG_SYS_INIT_RAM_ADDR	(LAN969X_DDR_BASE + SZ_64M)
++#define CFG_SYS_INIT_RAM_SIZE	SZ_32K
++
++#define CFG_SYS_BOOTMAPSZ	SZ_64M	/* Initial map for Linux*/
++
++#endif	/* __LAN969X_CONFIG_H */
 -- 
 2.53.0
 
