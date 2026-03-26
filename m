@@ -4,51 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AA87106F304
-	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 08:56:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E5A1106F304
+	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 08:57:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A203481E18;
-	Thu, 26 Mar 2026 09:56:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0923D83CF5;
+	Thu, 26 Mar 2026 09:57:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="aU+YBnBp";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="LqeGvP0T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AEF8838BB; Thu, 26 Mar 2026 09:56:52 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id C7B4A81E18; Thu, 26 Mar 2026 09:57:19 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06B5080517
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 09:56:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BE79383CF5
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 09:57:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id CBCD660053;
- Thu, 26 Mar 2026 08:56:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1612BC116C6;
- Thu, 26 Mar 2026 08:56:46 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 084BF418FC;
+ Thu, 26 Mar 2026 08:57:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 76C50C116C6;
+ Thu, 26 Mar 2026 08:57:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1774515407;
- bh=i5tkQ60CrpVI+5rE1NcoxdArEtClMQMkcw+835tf3iU=;
+ s=k20201202; t=1774515435;
+ bh=f9TTZfHRURdfI9Sdi+Bp8XlFdjIP1ivCmDk0MbYZp+4=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=aU+YBnBpFtpGj7sS8sHkRFSSG4X/rFvNubc3q00LyyiX3T1ZvirVdmtA+qp1TesGg
- zlelMqY1G7ZTEyfFHSkXe5CsKhFmbC9thrm9jCha3TEnCkXyISNE/QKBXh25g5I2mM
- ZWQeUGOuUTTlDFeyLPPwzKyudhZUO3XWt/DUhYR0rGzmnYQ5Tpr5fHExlDRXgOCEFL
- 0LWZcxSo2/i8bAjZpuQ89t5jhQ0Zz6/YCI5g76G/f6vXe2U3Arzzyx0qR1gaDLxY6k
- sewu5EuOWS1DDHPlR4td5sbERAsHVt61PORpWat1yfwK+9b5uaWwUznBcqHNrCo5S3
- w9slwzz9rLS8g==
+ b=LqeGvP0TgQhHHQKkMorfHBv/suYDFf7abIYOw+1dU4Zuu3Zw11RR4rSUrs/MHED2Z
+ araWlfbNPadF+RmGouhl5Mely0lDGyoUldrOTMXBBEXlqaptPndJA3oVk+DQtN90Lu
+ cB24W28fWjKUVGWmSxEM/s5wxjw7loPQRhhd0YVVufKhX6+WW1XCbj9XsBzLeB/2/i
+ ye8DJlyohHQf0FqpayiDyVIxliLFznToawLFXmv5m7ApY82s1jaEqXB5mSr+eJL1ln
+ RHl2NCTOAFLLWG89yXMInjDi9ZEHJEnKGSrbx12xeYPa0jr2JRGkBfHGGwVS/R7Y6V
+ LhcTyPXHPNu3Q==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: Re: [PATCH] dfu: Correct dependencies for DFU_TFTP
-In-Reply-To: <20260317012435.4162538-1-trini@konsulko.com>
-References: <20260317012435.4162538-1-trini@konsulko.com>
-Date: Thu, 26 Mar 2026 09:56:44 +0100
-Message-ID: <87wlyzge9f.fsf@kernel.org>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut
+ <marek.vasut+usb@mailbox.org>
+Subject: Re: [PATCH v2] usb: gadget: Move USB_GADGET_DUALSPEED to be
+ slightly more visible
+In-Reply-To: <20260323143253.2272167-1-trini@konsulko.com>
+References: <20260317012433.4162524-1-trini@konsulko.com>
+ <20260323143253.2272167-1-trini@konsulko.com>
+Date: Thu, 26 Mar 2026 09:57:13 +0100
+Message-ID: <87tsu3ge8m.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -71,35 +74,54 @@ Hi Tom,
 
 Thank you for the patch.
 
-On Mon, Mar 16, 2026 at 19:24, Tom Rini <trini@konsulko.com> wrote:
+On Mon, Mar 23, 2026 at 08:32, Tom Rini <trini@konsulko.com> wrote:
 
-> As exposed by "make randconfig", we have an issue with the dependencies
-> for DFU_TFTP. This really depends on the legacy networking stack being
-> enabled, not just lwIP not being enabled (as it will fail in the NO_NET
-> case).
+> As exposed by "make randconfig", we have an issue around
+> USB_GADGET_DUALSPEED. It is possible to select this symbol (via
+> SPL_USB_CDNS3_GADGET for example) and so have an unmet dependency due to
+> how this symbol is placed today. Move this to it's own section of the
+> file guarded by USB_GADGET || SPL_USB_GADGET.
 >
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
 > ---
-> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> ---
->  drivers/dfu/Kconfig | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> Changes in v2:
+> - Implement this move as suggested by Marek instead
 >
-> diff --git a/drivers/dfu/Kconfig b/drivers/dfu/Kconfig
-> index 962bda40ad2d..1d5d8caa7daa 100644
-> --- a/drivers/dfu/Kconfig
-> +++ b/drivers/dfu/Kconfig
-> @@ -20,7 +20,7 @@ if DFU
->  config DFU_TFTP
->  	bool "DFU via TFTP"
->  	depends on NETDEVICES
-> -	depends on !NET_LWIP
-> +	depends on NET # Legacy stack only
->  	select UPDATE_COMMON
->  	select DFU_OVER_TFTP
+> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> Cc: Marek Vasut <marek.vasut+usb@mailbox.org>
+> ---
+>  drivers/usb/gadget/Kconfig | 12 ++++++++----
+>  1 file changed, 8 insertions(+), 4 deletions(-)
+>
+> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+> index baa2eb61ea33..2f79840df18c 100644
+> --- a/drivers/usb/gadget/Kconfig
+> +++ b/drivers/usb/gadget/Kconfig
+> @@ -179,10 +179,6 @@ config SDP_LOADADDR
+>  	hex "Default load address at SDP_WRITE and SDP_JUMP"
+>  	default 0x0
+>  
+> -# Selected by UDC drivers that support high-speed operation.
+> -config USB_GADGET_DUALSPEED
+> -	bool
+> -
+>  config USB_GADGET_DOWNLOAD
+>  	bool "Enable USB download gadget"
 >  	help
+> @@ -372,3 +368,11 @@ config SPL_SDP_USB_DEV
+>  	  so it can be used in compiled environment.
+>  
+>  endif # SPL_USB_GADGET
+> +
+> +if USB_GADGET || SPL_USB_GADGET
+> +
+> +# Selected by UDC drivers that support high-speed operation.
+> +config USB_GADGET_DUALSPEED
+> +	bool
+> +
+> +endif
 > -- 
 > 2.43.0
