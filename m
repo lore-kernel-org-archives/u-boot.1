@@ -4,97 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F74D10A1E7E
-	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 11:44:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B84EF10A1E82
+	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 11:51:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8642181E18;
-	Thu, 26 Mar 2026 12:44:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 3FEFD81E18;
+	Thu, 26 Mar 2026 12:51:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y8UjTIgF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ISvQGlWT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28D15838BB; Thu, 26 Mar 2026 12:44:46 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id D0B4C80517; Thu, 26 Mar 2026 12:51:32 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99FDE80517
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 12:44:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A820E80517
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 12:51:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-b97bca3797dso129227766b.0
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 04:44:42 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774525482; cv=none;
- d=google.com; s=arc-20240605;
- b=iITtJ4OlaZ9m0r6j6JhK9qfec1NVuf9rwZlUk+2iw2KKwT2bSjWKP/H12IgFp44QLg
- 8DlJUw82RwaHMi3jisAmXDDxhONMTcqEJTn+eneC/YEH9hTz9DYv1VvRQu1vOYiJ88WL
- T0OY4/kk9lAtVxK4/FggBBAEV2ClA2shRijzXZmYiLF3yuIsz8Z730qXzdnzM+63vibE
- MLh1TvuBIwVwWe7XMUG/WiUuCiG0rWPkQ1YepZXunSoMa4ylVywBgB743CeWX77/P6No
- EEzaJCBHxn0ZI298jSrqAUtCacvajt/dLtHi8RBjYJueDK8wzZLtZcjD3WX/AaKvoQKQ
- 9QbA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=4y9y7lyP+1FRFZZcjs1d+YMhW7aJVaDfgNIAWRj3Frw=;
- fh=X+TXTfimi8ikLXygKYSNqmXeuVlv5IEYi0IesntAZJo=;
- b=B0a4knPmTlglOowluXOoRudUw48XbeIGozgBzwMjW7hbAvxsHT68TSH8TrrMQZuqOE
- SVOG9yW40jj67m4c/+QZrT8XuQjVZ33WN6aJWfy6b/vUs2X2aEWA2zs2EHnXjCZCQrso
- pvHrMkT9/+eHUCJgsKXjlGaN1DPdiiw369gJDQNPKRT/JJXFi4ejuCI2/Ih3SNdJRphE
- cDpZXftwXJko4X9ZTDUDiKgpPZNhR5N44Zo/OXY/tFV/jh926FFXUtYqwxtJizgODecm
- uxs2kNwqasHz9MM9r7E0S9Vs/tV/s6xFCia/ln8O0pDRl2tdBRI7wTgKeTxSp+U9hftP
- tOjA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-48702d51cd0so10512855e9.2
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 04:51:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1774525482; x=1775130282; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4y9y7lyP+1FRFZZcjs1d+YMhW7aJVaDfgNIAWRj3Frw=;
- b=Y8UjTIgFycOirUP6dfAyNiGlPLBeElzv33uABH3aH+Nn+Q7uehKHy5pz+yW6/8HK1q
- LYObEwjB507Mvc8iwV966FHgV31lIhg3vRHew21Qy+N9TSSXOAm2DuWfNA180poPTBfy
- Q1e0PoyPOIAAijtdciAN+h82kkdlq/x+WDMcc=
+ d=linaro.org; s=google; t=1774525889; x=1775130689; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ho48seBb8ILW6QLx6YvlTuZM2vDsDZPSDD/nUE+7YGs=;
+ b=ISvQGlWTIzwkQECzADPnACtdz9C9LyHdB2JGYYfDUZ3zSEVBhuc4Dj+P3sFXlUTV32
+ HMazPa3tqg/WQKgc/Ah2G2r+5KOR/q6H5mM/M3T7FJl00gd0jy89mPv4t91OPAVPWC+C
+ NGMAaos09YYu+lYX2bES59DFxBkazYdv6zwuuDr+z0vUpEf+jrZmFZ09JUDHlOVlDiB1
+ MWyrG1La3OLxKyP1xeYCefM5sIyEAdMbXc2rcZRQ/7DC4qYjSbjS8R8Bx5NolIIM+DQv
+ 3XzOIfPivqH53OofWH5ckB3UxoF+WmwSRJ/GcMawrv3jdY9vZAw/skIW41nmTyXbC6eY
+ deWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774525482; x=1775130282;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1774525889; x=1775130689;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4y9y7lyP+1FRFZZcjs1d+YMhW7aJVaDfgNIAWRj3Frw=;
- b=oAl7eal9g1YglUoxSQ8yCGt0LnkVh0dP3douFTGzWo+OwECo3NKOcYcxoo7GbPeAQp
- nYnfHaKIHzCSQIFLj5iQrk+nkTl0qp8JiGzFST6uVFeYJiZe8ike70QBOW/vxkACFpg1
- f/rwfzA6Qy+RMWG/8/4J29zgk+QH3+zSbLdhvOowpGONuFkk96jiKl3wyzjEjLpjSPyz
- s/Ij4pU3/M+EXoStBI0uslNwqRpLUtZsntmgF7Ndp+TJ0ZkwU6fOWl/6+9XRhFnZxe4k
- /Yujb2t9uvMop16m3ATlu9abKhJs0A0SWOlM9nSJaCBLYO+pwn/vlTQUlVzI4Qs0zPgn
- ddlQ==
-X-Gm-Message-State: AOJu0Yz74MjrfTPeh1HkdEbAa9i8VL+jFSQweyJWXVDuTfUQjXBvxSIF
- 2O3prKlAAkAs/srg8DMH5usQdouk8e8FTjY7K7qX55FDXZRDfM4bqDV1PJb0B9Lg7vL7Bnk/5lI
- o4OZubXIj2UQ+JtA1qL4EePo08C901m9YBkjQMCqF
-X-Gm-Gg: ATEYQzwvpyHWtQBWj6TPERAJuw55QHf3psRLnEdTS5K3ZbiazH3EO3WSFBvoiNNFAJY
- olX4Zb3MKxAkdOlzUt19WAPQqQjDAUDyqOdv5HvIi02L9kdrXFgZ1zLPvmv913MtAwRVf51RYMW
- crX5ZoVs/GH2DGzR2DVdBj6dkQkeKvJMDiUGg9QaUxhet6JHeDEXk7uEyc+avX0feZt++IhCgLv
- 28BhM3gSUn6bSYl1K3K6OjuA8pPT9As5U5/zQdjPvCz1zD7mouKMKTIM9KJzc+beYaILM9v3HOo
- 7m+Oqrg=
-X-Received: by 2002:a17:907:1c9a:b0:b9b:1ea2:97d3 with SMTP id
- a640c23a62f3a-b9b1ea29afamr251235166b.35.1774525481810; Thu, 26 Mar 2026
- 04:44:41 -0700 (PDT)
+ bh=ho48seBb8ILW6QLx6YvlTuZM2vDsDZPSDD/nUE+7YGs=;
+ b=KVHC+fQhT3U/W6jgtN+Y0IVg9sLl5sV9F3fyU8mOaZar2sWcqfyrUZj3+8XqyyOCDK
+ Liwa/Zxz2y4AfJhQyoYUwE2Ou17NjMVnaI9vofGYuitleUSZstgNGt51Nwy9Zpt3JrUG
+ GfWOfVsl1c5cwEFMDteigW+EBykF66DbP3I94ff0TSO0nK0Lw6nm0pcB759af/CrxyMw
+ mlkUE+LCFGT/d4CoIwbivXIx0M45EESHx+sD8aNR8/BbBVwyViVgeeZepFFMdhJYNvJm
+ +mh3X7ZFyTA9X6eNHfSRzW6VagB2MbaqVS7WFZua8dCA++QEeG+wW6w3V2KCFrZkcRG5
+ Tkag==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVrzH8lQh+KpYyaFDVQpoWU2BeyNjJTzVz97/TMpIz8B6ItOH31wLC2TsCQzVyc+gZ+7O5x/GM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwgOqr77DEBkfBlzMgbR8GKZ+l5fF594fSurwEUdUEppOFX4bYJ
+ yuMzr90d8RwFugJgQ+CpmHe44CWuQDZOF/C/6Z9kl37IrhOz6qqoVZ8Q16gc/fckErY=
+X-Gm-Gg: ATEYQzx23an6fEzoMxntTGqX3EZ+h+J67/1QnQBDfl1ByjM/XBxmGoVLldNv03SLQHG
+ 9xeMcrzox+86ApcQwBGn43wqsTxJryXHQiooZEW7kzevM4k1I+dOURQrmUJNK4QRGDQw1xDfr1z
+ IPntaMR2WYMyKKALCTIBgmzYb/Lpwbl/QyLiEi1yYgDB3ukNR8KGgme/4iYPkf4hsNfGXVNjzCX
+ zCLW+TBcTiUUkppStoUmC1C/Cy9aWEFZutMvgcBjI8176rKWtxlRV5aKwFPJIhTGmlq3bHPFkTW
+ qtrIFV9ass5fmTfZiPiwzDdHKYvIb9gBzQeSGg+jbCKWn8OgESwZ8ubYiDyeo5fIldOQjNkLXQO
+ x0j6TuRQ6OLumU9lwakBypEjI1FMNyHjgJkWoIrUTSbeb/9vDfC7jTJO7aWoM39FGigfvWnuQ3W
+ l4ulW5CGrt1BM87vZCSUY5gAmkWG6AfWSGb/JEsaDBbQa3cQlwC7l6XPY9MQsTLLKDhkdGs3uE8
+ zVmUprVykC6Eduzj+2evVdpBZ1ESzsiJmEHecgLcCQ0FaYWn7b4reE6bEapv2r+6G8JFqzxBVd7
+ eHcR30O5J2R9bMLX+Qww4Brsl2/tsHSsqtrfOnqcbLTmjlqPFe7H0WlDGh35OxHqY/ZaM3xncTL
+ S1q1rKRZfcTw1vWhPkCKOOt2kWqyUboLOB5UJqZ6cZ8tLaCDobRmjQmE7ATQMCEJCdbDTNFb3JD
+ m7KerkbmlynBOgDLYthojEVyLm/CQfqIsDyvcI7AZzwqtvXQMuPo/uP1dwx6MtjIhKxkg6euM=
+X-Received: by 2002:a05:600c:3511:b0:485:3ca4:4ef4 with SMTP id
+ 5b1f17b1804b1-48715fd479amr111341885e9.9.1774525888979; 
+ Thu, 26 Mar 2026 04:51:28 -0700 (PDT)
+Received: from hera ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4871fb3d09dsm25968005e9.0.2026.03.26.04.51.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Mar 2026 04:51:28 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: marek.vasut+renesas@mailbox.org,
+	trini@konsulko.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+	u-boot@lists.denx.de
+Subject: [PATCH v1 0/3] Relocate U-Boot in the last bank
+Date: Thu, 26 Mar 2026 13:51:06 +0200
+Message-ID: <20260326115111.1631261-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-References: <20260317131839.2418655-1-sjg@chromium.org>
- <20260325201806.GA3445024@bill-the-cat>
-In-Reply-To: <20260325201806.GA3445024@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 26 Mar 2026 05:44:29 -0600
-X-Gm-Features: AQROBzBEyg8_WkNN4QJ5_pc5bMALHiIX5LjYCO7w2-pUJwLzVDqpgr9aVu7lZAA
-Message-ID: <CAFLszTgEq7e4ee9H3mbNeBOgG-8B8L_-E0LsQNmGPZfXLK2BXA@mail.gmail.com>
-Subject: Re: [PATCH] CI: Update sjg lab to match currently actively boards
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Raymond Mao <raymondmaoca@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,63 +101,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+There was a discussion recently on the mailing lists regarding our 
+management of memory above ram_top [0]. The tl;dr is that we have two problems.
 
-On Wed, 25 Mar 2026 at 14:18, Tom Rini <trini@konsulko.com> wrote:
->
-> On Tue, Mar 17, 2026 at 07:18:35AM -0600, Simon Glass wrote:
->
-> > Various updates:
-> > - c4 lack signing so does not currently build
-> > - samus hardware is non-functional
-> > - colibrimx8, rockpro64, rock3a, rock5b, rpi5, tk1 and play are new
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> >
-> > ---
-> > A sample run is here:
-> >
-> > https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/29552
-> >
-> > At present, coral, play, rpi5, snow and vf2 appear to be genuinely
-> > broken on -next
-> >
-> > The ff3399 board needs some investigation.
-> >
-> >  .gitlab-ci.yml | 46 ++++++++++++++++++++++++++++++++++++----------
-> >  1 file changed, 36 insertions(+), 10 deletions(-)
->
-> I have two sets of problems with this patch.
->
-> One, it doesn't do, but perhaps I wasn't clear enough when bringing it
-> up, change it so that failure to pass is a job failure (it's currently a
-> warning). This in turn means people can't tell expected failure from new
-> failure.
+The first one is that U-Boot always relocates to the top of the first available
+bank unless there's special board code to sidestep that. The second is we don't
+successfully deal with devices that can only do 32-bit DMA.
 
-It looks the same as sage...can you post a snippet of what the rules should
-be? It shows failure for me, when the lab fails.
+This patch series deals with the first problem by adding a Kconfig option
+allowing platforms to relocate to the top of the last discovered bank.
 
->
-> Two, when you had previously gone about adding at least colibrimx8 I
-> noted that this extended how you were having labgrid build U-Boot in an
-> even further non-upstreamable manner. As the sage lab yaml shows, we can
-> bring in external binaries for buildman (and binman) to find and use.
-> We'll need to extend that logic a bit, to be sure, but it's a solvable
-> problem with the baseline already there.
+It's worth noting that this is easily testable with QEMU
 
-Not quite. Buildman builds U-Boot, it's just kicked off by Labgrid (via a
-U-Boot 'provider' class), with some pre-built Intel binaries for x86, plus
-BL31, etc. put in as environment variables. My design approach is different
-from Sage, in that I often connect to boards interactively, send U-Boot
-over USB in some cases (so different files are needed depending on the
-board) and at the moment I have all boards connected to a single server.
+qemu-system-aarch64 -m 8192 -smp 2 -nographic -cpu cortex-a57 \
+    -machine virt,secure=off \
+    -bios u-boot.bin \
+    -device virtio-rng-pci \
+    -drive id=os,if=none,file="$image" \
+    -device virtio-blk-device,drive=os \
+    -object memory-backend-ram,id=ram0,size=4G \
+    -object memory-backend-ram,id=ram1,size=4G \
+    -numa node,memdev=ram0 \
+    -numa node,memdev=ram1
 
-Labgrid has 90 open PRs, including my terminal one
-<https://github.com/labgrid-project/labgrid/pull/1571> from over a year
-ago. There definitely are PRs getting in though (20 so far this year). In
-terms of upstreaming, my approach has been to break things down into
-smaller PRs, but four of them are still outstanding after 18 months. I did
-ask on irc a few times but didn't get a response.
+# RELOCATE_LAST_BANK not set
+Hit any key to stop autoboot: 0
+=> bdinfo
+[...]
+relocaddr   = 0x000000013f66c000
+reloc off   = 0x000000013f66c000
+[...]
+lmb_dump_all:
+ memory.count = 0x1
+ memory[0]	[0x40000000-0x23fffffff], 0x200000000 bytes, flags: none
+ reserved.count = 0x2
+ reserved[0]	[0x13d507000-0x13d509fff], 0x3000 bytes, flags: no-notify, no-overwrite
+ reserved[1]	[0x13d50aff0-0x23fffffff], 0x102af5010 bytes, flags: no-overwrite
+devicetree  = board
+[...]
+TLB addr    = 0x000000013ffe0000
+irq_sp      = 0x000000013e50aff0
+sp start    = 0x000000013e50aff0
+Early malloc usage: e88 / 2000
+=>
 
-Regards,
-Simon
+# RELOCATE_LAST_BANK enabled
+
+=> bdinfo
+[...]
+relocaddr   = 0x000000023f66c000
+reloc off   = 0x000000023f66c000
+[...]
+lmb_dump_all:
+ memory.count = 0x1
+ memory[0]	[0x40000000-0x23fffffff], 0x200000000 bytes, flags: none
+ reserved.count = 0x2
+ reserved[0]	[0x23d507000-0x23d509fff], 0x3000 bytes, flags: no-notify, no-overwrite
+ reserved[1]	[0x23d50aff0-0x23fffffff], 0x2af5010 bytes, flags: no-overwrite
+devicetree  = board
+[...]
+TLB addr    = 0x000000023ffe0000
+irq_sp      = 0x000000023e50aff0
+sp start    = 0x000000023e50aff0
+Early malloc usage: e88 / 2000
+=>
+
+[0] https://lore.kernel.org/u-boot/CAC_iWjKFAzpj3B_MEW7-dnOrcAV-rfkhXXo8Bv0KgLNP2VJxRA@mail.gmail.com/
+
+Ilias Apalodimas (1):
+  common: Allow relocations on the top of the last bank
+
+Marek Vasut (2):
+  fdtdec: Deduplicate iterator function
+  fdtdec: Introduce fdtdec_setup_mem_ram_top() to determine end of
+    topmost DRAM bank
+
+ Kconfig          |  7 ++++
+ common/board_f.c |  2 ++
+ include/fdtdec.h | 16 +++++++++
+ lib/fdtdec.c     | 89 +++++++++++++++++++++++++-----------------------
+ 4 files changed, 71 insertions(+), 43 deletions(-)
+
+-- 
+2.51.0
+
