@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19B1210AB82C
-	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 23:00:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D878710AB82A
+	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 23:01:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62231838BB;
-	Fri, 27 Mar 2026 00:00:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0D85283FD3;
+	Fri, 27 Mar 2026 00:00:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="XPSg0ELG";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="ZzOYpJfO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C878783FAF; Fri, 27 Mar 2026 00:00:26 +0100 (CET)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
+ id 2785C83F14; Fri, 27 Mar 2026 00:00:33 +0100 (CET)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74F9683F14
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 00:00:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1074583FD9
+ for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 00:00:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-40438e0cba6so966293fac.1
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 16:00:22 -0700 (PDT)
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-46702742c99so1003614b6e.3
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 16:00:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774566021; x=1775170821;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774566024; x=1775170824;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=GKmlXLxbMfQwtK0s7gQqz09EPgGB5Qp7/8l8MLvMeVY=;
- b=XPSg0ELGvqHs+079vdIJPJDqf34EB+ClRjxAHCjGGlD+dDRfYHkfR4AruAqqa1A7Bl
- //tRz2WzxF5Y55/+xkZyGpClv0Kka1Veo8aM2/Q8adfY9mCp2F5rDKCuD0PfS81qyrW7
- 6GJyFPefkf2hopA849RCmMnGNMbt4pjshhMwfOG0tou3TlCX5rMzgCFHnXvKlcD9f3Rg
- KzupJXylIl2xDA1GcOYq8gFkO/eHINT0aidl24sQDoPjvQWixrhx+ypV5lnl3auXjtuI
- 8/V73sSGMWVKHR6E1XUr0rYlxS47WKaOoa+cEK2vQFpo70E03sNgV9j11lWxTKH15/EB
- fqnA==
+ :reply-to; bh=8SdwYQgVrfwqO/lLh0b7KhO1/SqUcZfnoedtBT8V+gc=;
+ b=ZzOYpJfO1nw2KiNmbqBl/v4gUkVQyMr5gdc8WEUAcWHWAaWFCPcziOwr1yICsJPk1u
+ tQWLt/9zlAZk94lDzxA0CEtexSpEIWnO4fyppf11bTDbwdmEKpTepjH+jqPkc/DadaIy
+ X5V6ho++iFjTvzj1HBfMciTnCjDImaegjvTfj9BED55/3PX9R0c3gZ4U22yLcR/3W4Xl
+ fEoFHTTPqo7c3z4lcCm4k/LzgcDlRRkTi3+rqgQhAgp+wH2orrfBV4Fh6CodmAYYNWdD
+ QlrrrbOD+kidrOqgo66f/pUe63y6WGckpvrBDfUiJSkD8VSUoCM0SIPh38D74mZ+CbC9
+ 9aKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774566021; x=1775170821;
+ d=1e100.net; s=20251104; t=1774566024; x=1775170824;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=GKmlXLxbMfQwtK0s7gQqz09EPgGB5Qp7/8l8MLvMeVY=;
- b=sYCx6Ry6KQk08EHuUDyttyRF+c09fMWNRawX/rL+2h364gmJR8V2gEitNOzvhageu2
- 6uQLvASwaACCoj8JoaESn6z8gHbRqk7eTdn8nB+2y9PcUD2l/wUKB31Ukrbqh4lIC1V9
- fIXpHLzcxdkvL1qnyye12BMemmB9YdRPIbxF55ZHizqrpsARV58JO/VQDhl/RBcOe81U
- QvVUCwLr+duPRKK9ACjZXI7qmDO1yHP3LY/I7HiydW8PRXpGgjZvapSRyb2G9Q7XSLCB
- detaN1oRoTkVuKIw7JKuKoGN3zN+hgmsHMV3s9yj5GW6sZyVU8LRVtP2epdqGE1nwXYL
- yf1g==
+ bh=8SdwYQgVrfwqO/lLh0b7KhO1/SqUcZfnoedtBT8V+gc=;
+ b=iQupMOEfYz3FBzbXGiyJYopinWBqOwVzBBpDy6UK8A1D05h7TFUP2Chc72g7tQneB2
+ jYolY+pLIWshNnQX7nR6FNgnF6btE9cG/atpMZ1GQsu2wmPPqfd7ws3Cfd9nOkQSViR3
+ Hx9IcnJnsHb1z0DdH+VntKyX14UitMOC2fXw6Y31WP/5TBQhq1sdP2SjNDG1PGO9cHmP
+ lXmHclDuMxXsteX6AP8toY+vXqZAwtb8OrQZQQ8r2A0MmVgxx+sfYBe1uJDKVU5mmq9C
+ Z/913Qz7p2K9gcWJI0WIv7rWWH2ahGaPUQ+tYqGmH3UXdxVbhapr0FkWmD1Nz5aSNdWZ
+ m4qQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWUaJ9kBSMxT93/KXBWnPrCmLQ4wvi9XGp/VM7i7Wx2ZTuviyFt4mHW9Jg0m38SZKyD6BQk9Po=@lists.denx.de
-X-Gm-Message-State: AOJu0YzNgs/12IfvivMX6+WajKvkp0MSNB3daa9sV8S3PcuuMDQHQ9cM
- 8g2HGiRkBTxnkUCTv0S7rXTrfXtqHuZpk72tKbxRdnXNh/dfeJ1JcBCUbEmkjPViGpI=
-X-Gm-Gg: ATEYQzwBDdL2RabAc1yTW9NkqENl5UaQgRpfvb4PHGNrGhVWZM80r0OErFEdPKnFOtO
- bPX0Yk+4b5BpiITOEb24Zsp/PPaJAoFoRZ2nC/sJ9Pm46i6xHCnoDaryRfJ2J45/pKp1lQ+PDG2
- 1vYaQ9K4QFKvBOtMCtFgRQfv18+VPCYlrPjY98Q8RXXu0PR0PbAFXCH5K8V1nx3GIWSDjQE9Nux
- B1mua/mu91XFWbggAQ/SnKr74R3l7e5jlF0ScgbKoPf+2UyvqJSzl+lshuYdw5UdS16UqVb9bp+
- dPyZ5huYJK3lCulPX6+/VZeKVhiTVT5Tiz06htszGOba/eCZCLZcigIY4nW/IJbclH054gomZEd
- hhPDjvP6JBS9w1gmJ3u0hwX5loZecT5kf0ihn5Nc+2Gh3vEFVlKk99AbbIE5O0N0IskWwk/T3Ns
- KIQaZLxSFQs4eslWCTY6v8t/j5+eQ0
-X-Received: by 2002:a05:6871:a84a:b0:41c:e8ab:e008 with SMTP id
- 586e51a60fabf-41cec3d6f5fmr75138fac.49.1774566020955; 
- Thu, 26 Mar 2026 16:00:20 -0700 (PDT)
+ AJvYcCUm/gTnIBPXzaMPEDEZnV9/k7PlqkmSCSJeEhHbHLZc9Ui6j0i9Nx2QdEzM0J/oC/sWWXH+3Gs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx1rUlDcIQwFJMsvJt5dXPPJGzDhEO8JUoxxt8S/GA+pYK/DkFD
+ GtM2FEb5BNMt8tSMnkLGNbj9CtuuV6GC45qab6D4bpnmZEsZPuVGVRJtQWOOboatFmQ=
+X-Gm-Gg: ATEYQzyvuzpIW9cHkQubIQqKkitma5hPxoHBIIcGfofYNv2lheoQRoLi8SGXmd6AyAi
+ QcpPPfxddvEFHuVX9qqJ4P/4NXM9odN7w9wXHfmblogZ0tOjjzRf9X8JbUJ3dpFswGwfVX5MVuK
+ Xc1ytOKK+UxxdZ38tLXkMZuiwHwus+0ChJTWPFk/891pW1NBi5HrUyaGdy8LsL3xzJ3V5lRtdPg
+ yCkhGUBp4yZ1Hw02JfVxH0NdKTe5gbMLwiIk72qJbTEDe8fxL5jPKbWeNUyGokGqXhpHrB35Dyv
+ HRXPCO1JSmCL7Xdpd0z4IwNKC60Wq7ZusTpFAGH5qsim01z6YDRy+3T72faHPzYGmkXgshQR64o
+ j5mdmDmkXSW8xpecAWp41FmiHm1h9kFP140sIrr8VflAYlc7lF3Kv7MbT7LMFFGHx2bL7nUSUhN
+ c91J+PreCUJ5dBvHXEKiKkGtUfpZw/jqoYLxA3+JI=
+X-Received: by 2002:a05:6820:2d0c:b0:67c:25b9:d366 with SMTP id
+ 006d021491bc7-67e18705d11mr223155eaf.42.1774566023633; 
+ Thu, 26 Mar 2026 16:00:23 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:54a7:4cbc:7d2e:3b99])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41ccb6b1d25sm2742836fac.16.2026.03.26.16.00.19
+ 586e51a60fabf-41ccb6b1d25sm2742836fac.16.2026.03.26.16.00.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Mar 2026 16:00:20 -0700 (PDT)
+ Thu, 26 Mar 2026 16:00:23 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Thu, 26 Mar 2026 17:59:25 -0500
-Subject: [PATCH 3/6] scsi: document return values of public functions
+Date: Thu, 26 Mar 2026 17:59:28 -0500
+Subject: [PATCH 6/6] env: scsi: document requirements for ENV_IS_IN_SCSI
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260326-env-scsi-hw-part-support-v1-3-55c9dd07a2cb@baylibre.com>
+Message-Id: <20260326-env-scsi-hw-part-support-v1-6-55c9dd07a2cb@baylibre.com>
 References: <20260326-env-scsi-hw-part-support-v1-0-55c9dd07a2cb@baylibre.com>
 In-Reply-To: <20260326-env-scsi-hw-part-support-v1-0-55c9dd07a2cb@baylibre.com>
 To: Casey Connolly <casey.connolly@linaro.org>, 
@@ -89,17 +89,17 @@ To: Casey Connolly <casey.connolly@linaro.org>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot-qcom@groups.io, 
  u-boot@lists.denx.de, David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1251; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1234; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=us8TXyySa7UFnlCKyCatnihXC9uI1wOizbztgoSpSa8=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpxbpjloF2Vwvkx+mMWqD+7wwDCre6rgneI/jvP
- 5waelPds2iJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCacW6YxYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AO88H/0wKewFHwUDsmlnDB8h6xUOgVhmtT9BhEJzXHav
- EJiVM93n+NZeizD6COHrAY80mEPuu/ZYCg8FbJwGZsRaouiIUyVtuIREdvZjWn2mr8/9g2azvO1
- T0LIufDXsag3DtCXZzmBz2JaK9MlfvJ5qeR8E0FiuQdsF31iuQSrYKtg9VkOxySEClnl9cVW/0z
- uLtkymGe69SignnL3AqROmqsm977BgkRR9paQ3utLiKvdIv4Df7njXZkLgurXpqLuPugbvkktaL
- qooi63nhLEhbv2B2Sb7NtFZHYSHuKCvvKh2it7hJFqj6k6/8Seq517A0D7QATFp/La0fj69bUE0
- ue+A=
+ bh=ZhZ4cewrnGWhFTk3zKHvrdPwo7D3mdsYgMBmBNKvoIE=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpxbp4k4FIU6nuPSPsPcaqxkEB0xdtuZ4rKS5H0
+ FyNMkPegxyJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCacW6eBYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AbpYIAKICUDKK9Hfi2YHdW8l7Rt2DGGlPn+QxiO9EnQt
+ jg8nUu8sVvDmaj5/FgQfG+Rtgvx2ISj4kTlq9YIawEq5truf++0yerzPCkPgMZsS/elCI0l2UQ4
+ 6FqAmjXYWI8jPEneZN7DAohYTO+voof0Zx+mT9Xv2uznBGE9QMNIRTUOUR4FtAcQf0q9ZaBpxJe
+ inS9j1rP76WfDsQPwtMZVV5B83Kdr3juElI/HFp0RViIGblRfIl8jwhtYTbsxiCu4JwqXAS8711
+ LrKqZp6VLRSSZt+o/ne89HGS29cAWfUrhLWUzjrKRTzC6s2VJWQhBvxFXJ9lE0KWd8BTGQyBXKu
+ 5OXE=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -118,42 +118,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add Return: documentation for some public functions in scsi.h that were
-missing it.
+Expand the Kconfig help for ENV_IS_IN_SCSI to explain the other
+required config options when this option is enabled.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- include/scsi.h | 3 +++
- 1 file changed, 3 insertions(+)
+ env/Kconfig | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-diff --git a/include/scsi.h b/include/scsi.h
-index 8d6c5116419..c244120c283 100644
---- a/include/scsi.h
-+++ b/include/scsi.h
-@@ -340,6 +340,7 @@ int scsi_bus_reset(struct udevice *dev);
-  * scsi_scan() - Scan all SCSI controllers for available devices
-  *
-  * @vebose: true to show information about each device found
-+ * Return: 0 if OK, -ve on error
-  */
- int scsi_scan(bool verbose);
+diff --git a/env/Kconfig b/env/Kconfig
+index ffaf16c581c..9eb941b74a4 100644
+--- a/env/Kconfig
++++ b/env/Kconfig
+@@ -293,6 +293,23 @@ config ENV_IS_IN_SCSI
+ 	  Define this if you have an SCSI device which you want to use for the
+ 	  environment.
  
-@@ -348,6 +349,7 @@ int scsi_scan(bool verbose);
-  *
-  * @dev:	SCSI bus
-  * @verbose:	true to show information about each device found
-+ * Return: 0 if OK, -ve on error
-  */
- int scsi_scan_dev(struct udevice *dev, bool verbose);
- 
-@@ -357,6 +359,7 @@ int scsi_scan_dev(struct udevice *dev, bool verbose);
-  * @uuid:		UUID of the partition for fetching its info
-  * @blk_desc_ptr:	Provides the blk descriptor
-  * @part_info_ptr:	Provides partition info
-+ * Return: 0 if OK, -ve on error
-  */
- int scsi_get_blk_by_uuid(const char *uuid, struct blk_desc **blk_desc_ptr,
- 			 struct disk_partition *part_info_ptr);
++	  - CONFIG_ENV_SIZE:
++
++	  The size of the partition where the environment is stored in bytes. Must
++	  be a multiple of the partition block size.
++
++	  - CONFIG_ENV_SCSI_HW_PARTITION:
++
++	  Specifies which SCSI partition the environment is stored in. If not
++	  set, defaults to partition 0, the user area. Common values might be
++	  1 (first SCSI boot partition), 2 (second SCSI boot partition). Ignored
++	  if CONFIG_ENV_SCSI_PART_UUID is set to non-empty string.
++
++	  - CONFIG_ENV_SCSI_PART_UUID:
++
++	  UUID of the SCSI partition where the environment is stored.
++
++
+ config ENV_RANGE
+ 	hex "Length of the region in which the environment can be written"
+ 	depends on ENV_IS_IN_NAND
 
 -- 
 2.43.0
