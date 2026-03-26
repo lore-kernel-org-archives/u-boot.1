@@ -4,64 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D67E106F2EA
-	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 08:18:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71552106F2EA
+	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 08:24:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9AC281E18;
-	Thu, 26 Mar 2026 09:18:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id CDF0E83DA6;
+	Thu, 26 Mar 2026 09:24:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="elHbIFjB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fOaJYzN4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D0FF838BB; Thu, 26 Mar 2026 09:18:08 +0100 (CET)
-Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BCA7483E76; Thu, 26 Mar 2026 09:23:59 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E59780517
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 09:18:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ew.tq-group.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=alexander.feilke@ew.tq-group.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:Content-Type:
- In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
- :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=XTNj07VvpELqEB4m0M7LAM78HZOP0Xtw1cJNUqIFi9s=; b=elHbIFjBB7R6lJmpOgW73og+LU
- WxbZwnYA7tOTXU9XR11akP09LuFbrJZVM2jSdv9q0GUqbI37ZwvbzBdXZ1QXP/E+M47mv1qdyDoyd
- LvcuAYCYPrJFN8sTRWiS+316ZGY2Ymfz+Qbjd4JkWEkxHv8jePOBKL8UZWLhXnSYo94mJq9rRww8p
- 6fwTuuJZsmxc5auoFb4Qtsr/vogz4hDHdhxqv/hWgqMXTUGeKedp+I4pkoOeLV/WG7kLXosdZGQjT
- xbjsgcswdg4I54/VslG21tSo/jWGmgST3X9q0wqsLS4vcqXy5Ivg1brI7stpw1fk06dR9wtA1At78
- ZFGnEYuw==;
-Received: from sslproxy06.your-server.de ([78.46.172.3])
- by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96.2) (envelope-from <alexander.feilke@ew.tq-group.com>)
- id 1w5ful-000H3b-1h; Thu, 26 Mar 2026 09:18:03 +0100
-Received: from localhost ([127.0.0.1])
- by sslproxy06.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96) (envelope-from <alexander.feilke@ew.tq-group.com>)
- id 1w5fuD-000NSR-33; Thu, 26 Mar 2026 09:18:03 +0100
-Message-ID: <efa2f339-44c3-4a2a-8f20-1d495e56de57@ew.tq-group.com>
-Date: Thu, 26 Mar 2026 09:18:02 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 9199380517
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 09:23:56 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-487035181a7so4038745e9.2
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 01:23:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1774513436; x=1775118236; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZblMf4m73cDI8hR+m/GG9JCwgb7d+VVs7DKO1uR+ik4=;
+ b=fOaJYzN4Z+sx1CDXgvLGYUuOklTt+tgZj7/cintUT4NZ+GgLL+WqxLK1Hz7mOPF3el
+ +SPgu+OPG2I/2dptW1uF8yfb23qzML2UDttWhSZvErrS/D9Ge8geteOtLBlIPwKd7/rl
+ JoMremso4modvMH9D6YMv6FQOvY532oQ6AZcTtgfXGA/ryAi+ENIlP5rDXGPoPZ/FaHQ
+ jdF++dKQmOYPdY0NJaO18dUDCiEfQqpBvnsSb/SkGOmNU0LrHztXUT+yAULZ1APMtzI5
+ SL1rN9kxclr2QmIWnDUqWjeY5cbWf/qyJikOi4Uhh4jXf0Yas8+IBj3zsLsTIVQlCae7
+ 5qUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774513436; x=1775118236;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZblMf4m73cDI8hR+m/GG9JCwgb7d+VVs7DKO1uR+ik4=;
+ b=Ze7x836ko2Ky+erJZPEYjtTn0K15W0i/vExM6vNQmRMJU1MVz5L3YN0tO6RDpG4ZQU
+ TiBRofxGZZqH9AMDXv5lBVCgNZO2WIh2JJqgcDO/0TcokpQN4wE1gYyUM8lcPyIOtCul
+ JZmyV8K4xC4LDalL+UG3WYYHN8OIOOWjrLHBl3yhe2fWxBT42fYB1jRqugGXQrxdf7lY
+ 2pF7mUKuPyMHlGQRved/Z8eel8ugYf3DPilcK3MIvnGS3Gs3kPGH8Trh6KSYKpSRwUUY
+ MWPyUDpvxYNgtR7rsK5Zbb9AP6AaQ+NLaz9tIASBLHNOWVUCzCasm1ieVfi7Ea+NUjeW
+ KYvA==
+X-Gm-Message-State: AOJu0Yxp0+gK8San4gtlDDYWEIm0lMbhUk5LoIcxeU2ek1nEGXCaFvD7
+ 4O8EFsZJJHQCMVuiEBFGcUklujBpUD0trJV4lwu7VDQr+GJhCeicpLiiWhcuYiqn89FMZgb7HgV
+ fKgiA
+X-Gm-Gg: ATEYQzzHf6bJn7h+/A5lO2RySbaXLyhealSP8KWQlMHIQClmLt2WO1VZtjM0BTZ2kmv
+ wXTZsJM+HJ5iCEYmTUU3ubhpWGZ05C+xhJBB6LfcIPB5LceNdeXoMKS79M2XWkLbUfoACX0ubbH
+ 65R+QRWSsQsSgl3TTSfCmZlVuNyqVcXWtjbcfxaxZQ3Kx6sXxAAvDAVQAxB9UVQT3W9ZEwWZDhI
+ fWOyF2IRlisXnLx94LhnuJ0aTf4ZGfYbchqF8IFqn5i8Bk6gQLXmq+ukfbWbIHa8YBE+kFDO1Y2
+ de6jb9vs+1I8Chz3scHd3c0eL679thgVQqjiS0TjDsqWEMOSVpWoNtYousG8a/+lQ/AOZpff2+h
+ Wzxc1kNTy1+A98juLybTQQ1qadg2gmLcV+V1nN55faWnFhFiVwhkZrqTxZffkYH5k7KP2YqN+Mi
+ ABtA98+JNBmYYh/yUnTocl6FhEBTdnOtv77YBH7vVowhHkSt1KpM3GvEKoODn6CouyKR/guhHyM
+ ZQoUt5Ezy1EGMArqS4vRO4NWu1pxg2eAAevcx6BXMLOTogWvJPC46+zRDIWbUGOxYoXEnXhvUR7
+ xPKT7USE1HCv3prLqfOsDRulo0R/ddDEpNvTh5VZmlqtl6wfH4+kC1ACo+J7OdNmsP2dnKfZEQf
+ CHjVxTuYvZP3UxoV6C65CPWf5EmN34xvqOC+sQ+ElLG7QLuKkD/qyqydTaxmWokwBixA9QGaXmC
+ ozvnCuI/qdvwtK3+Lav256W26ofuV3Q1PB/5h7sQrocTjnqTkHv3kC+2VIQQvR
+X-Received: by 2002:a05:600c:870b:b0:477:7ae0:cd6e with SMTP id
+ 5b1f17b1804b1-48715fb723bmr90810345e9.5.1774513435772; 
+ Thu, 26 Mar 2026 01:23:55 -0700 (PDT)
+Received: from hera ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48722d2366dsm14854975e9.10.2026.03.26.01.23.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Mar 2026 01:23:55 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: u-boot@lists.denx.de,
+	trini@konsulko.com
+Cc: ilias.apalodimas@linaro.org,
+	kory.maincent@bootlin.com
+Subject: Pull request for fwu-next-26032026
+Date: Thu, 26 Mar 2026 10:23:46 +0200
+Message-ID: <20260326082346.1569343-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 6/8] board: tqma7: add code for u-boot with spl
-To: Tom Rini <trini@konsulko.com>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
- u-boot@ew.tq-group.com, Stefano Babic <sbabic@nabladev.com>,
- Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>
-References: <20260325095801.47706-1-Alexander.Feilke@ew.tq-group.com>
- <20260325095801.47706-7-Alexander.Feilke@ew.tq-group.com>
- <699c7adc-d636-4ef3-9844-52a28333ef0c@ew.tq-group.com>
- <20260325183345.GW502704@bill-the-cat>
-From: "Feilke, Alexander" <alexander.feilke@ew.tq-group.com>
-In-Reply-To: <20260325183345.GW502704@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,37 +100,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom
 
-Am 25.03.2026 um 19:33 schrieb Tom Rini:
-> On Wed, Mar 25, 2026 at 06:50:59PM +0100, Feilke, Alexander wrote:
->
->> Hi,
->>
->> Please wait with applying the series. I just stumbled over a weird issue
->> related to the environment.
->>
->> The default rootpath is set to `rootpath="/srv/nfs"` (with quotes).
->> This is wrong. Running `env default rootpath` will reset it correctly
->> to rootpath=/srv/nfs
->> However, `env default -fa` resets it back to `rootpath="/srv/nfs"`
->>
->> Independently of that, the variables inside load_nfs are not being replaced
->> correctly. They appear to be empty, as I get `Filename '/'.` in the run log
->> when it should be something like `Filename '/srv/nfs/boot/imx7d-mba7.dtb'`
->>
->> We will fix this before the patch should be accepted. The first issue seems
->> pretty weird tho. Any idea what might be causing this?
-> Using plain text environment can be funny about quotes, especially when
-> dealing with values that come from another CONFIG option and so come
-> from Kconfig. One thing to look at, at least while debugging, is that
-> "make u-boot-initial-env" will give you the resulting environment in
-> u-boot-initial-env so you can check the output quicker than flashing
-> cycles. If there's a quoting issue, commit b3087d21f022 ("env: Provide
-> another work-around for unquoting fdtfile") may get you pointed in the
-> right direction for a solution at least.
+Kory added a userspace tool to modify the fwu metadata from linux userspace.
+Although this was originally designed to work with UEFI, there are uses cases
+where people use it, but boot without EFI.
 
-Thanks for the quick reply. It appears that the issue was an extra rootpath
-definition in tqma7.env. Removing it fixes the symptoms.
+The following changes since commit 8813d74163e4d84dbd4fb30d9639f01c0acb6d39:
 
-I will send a v3 with the latest changes
+  Merge patch series "test/py: gpio: cleanups and improvement" (2026-03-25 14:38:28 -0600)
 
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/fwu-next-26032026
+
+for you to fetch changes up to 44a1e17b2a49d724538b4d500b27b0eda4be015c:
+
+  tools: mkfwumdata: Remove dependency on fwu_mdata.h header (2026-03-26 08:20:00 +0200)
+
+The CI seems fine 
+https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/29677
+
+Please pull
+Thanks!
+
+----------------------------------------------------------------
+Add a new fwumdata tool to allows users to read, display, and modify FWU
+(Firmware Update) metadata from Linux userspace. It provides functionality
+similar to fw_printenv/fw_setenv but for FWU metadata. Users can view
+metadata, change active/previous bank indices, modify bank states, and set
+image acceptance flags. Configuration is done via fwumdata.config file.
+
+----------------------------------------------------------------
+Kory Maincent (6):
+      tools: gitignore: Add mkfwumdata to the git ignore file
+      tools: Reorganize mkfwumdata tool into fwumdata_src directory
+      tools: mkfwumdata: Improve error message specificity
+      tools: mkfwumdata: Add bank count validation for FWU metadata v2
+      tools: Add support for fwumdata tool
+      tools: mkfwumdata: Remove dependency on fwu_mdata.h header
+
+ MAINTAINERS                           |   7 +-
+ doc/develop/uefi/fwu_updates.rst      |   4 +-
+ doc/fwumdata.1                        | 222 +++++++++
+ tools/.gitignore                      |   2 +
+ tools/Kconfig                         |   9 +-
+ tools/Makefile                        |   4 +-
+ tools/fwumdata_src/Kconfig            |  19 +
+ tools/fwumdata_src/fwumdata.c         | 854 ++++++++++++++++++++++++++++++++++
+ tools/fwumdata_src/fwumdata.config    |  33 ++
+ tools/fwumdata_src/fwumdata.h         | 138 ++++++
+ tools/fwumdata_src/fwumdata.mk        |  10 +
+ tools/{ => fwumdata_src}/mkfwumdata.c | 106 ++---
+ 12 files changed, 1315 insertions(+), 93 deletions(-)
+ create mode 100644 doc/fwumdata.1
+ create mode 100644 tools/fwumdata_src/Kconfig
+ create mode 100644 tools/fwumdata_src/fwumdata.c
+ create mode 100644 tools/fwumdata_src/fwumdata.config
+ create mode 100644 tools/fwumdata_src/fwumdata.h
+ create mode 100644 tools/fwumdata_src/fwumdata.mk
+ rename tools/{ => fwumdata_src}/mkfwumdata.c (79%)
