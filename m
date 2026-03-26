@@ -4,87 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A71B010A88FF
-	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 18:31:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3650310AB800
+	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 18:41:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 603F883F00;
-	Thu, 26 Mar 2026 19:31:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 76FAA81E18;
+	Thu, 26 Mar 2026 19:41:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=online.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="i2OaidJ0";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC21480517; Thu, 26 Mar 2026 19:31:18 +0100 (CET)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5A87A83E76; Thu, 26 Mar 2026 19:36:04 +0100 (CET)
+Received: from smtp4-g21.free.fr (smtp4-g21.free.fr [IPv6:2a01:e0c:1:1599::13])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92247838BB
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 19:31:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 01FB180517
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 19:36:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-464ba2bb3aeso730365b6e.1
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 11:31:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774549875; x=1775154675; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yLdiTw0FDVz79BVaD2VOzKIz0UgcdPJH7bW4vfmxLXk=;
- b=i2OaidJ0TJjx/EHAmGYJrBHmqR1sDNiXR3B8VIa4toAQOJ7YxBJIYEqFJisRcDv2zW
- nhWt0OaKf2cc1ENxsF4e6YCBoqMQ+xGv9HP0IBIkPtOPFxM8RLy9d3E8MbePlVQ+j+4a
- PJCK/2xE1GO/rdLIRap4Z1+y2p3zGO0pRe0O8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774549875; x=1775154675;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=yLdiTw0FDVz79BVaD2VOzKIz0UgcdPJH7bW4vfmxLXk=;
- b=j0mXORpIndhdw5BJvV3dSMJ1IHI5A3frkti3038THkrS9pECjtmhwlYAs7qxQxF+0G
- 8UuklW4FPGiCQC4XjAerX0HL1S/m4CUZ2y0YrFTMAREGy2kk5KNzmGFpHb9GVhlvw7vD
- Ust0I/nIcAdYpuRCSxG2u1Vq/ebrtht1HuiyA4nBghgIDOSFrMOO5FQswKXE8vOlnd50
- XDmFgBzMHMU5BFpu3wplDcCug/t9iqADVoZ+vUBQsecv/o7bU6PooWZ7atpzTSTDFj5J
- Wh7q3VDDyJbIqyGJmsJZ+1hW+5Gxzl/M3Khhy9ASU+DvBIuYWSZqToVSCQcX+hAvbulS
- wLMw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUyI6kK46U5Pf23et0y82vBnSeSIBbT1UumTIlo0WxL5MhpKVJ5NuDV4zDLsgs3VKMNEP5w6vU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxXJLh+C3tDGHwOpCSCcPk7e+uvrTFv3Nc5toe5rTcr/5lDyPPz
- H8MlChsPc6Mus7PdslqO1AJSL4387kaF6Yt9zsaBrJS1iGtd27KI3f5Am94IhFhru/0=
-X-Gm-Gg: ATEYQzyidRm4G3PGJZ2N/GWTzpXDeZUwFfmeCHnAnD5QoYOR7AYsog8FKWaED01X2Ks
- vpPtJlezbzvnUcZVzdvO1Kz9TCYSRko7aNvmUllZ/+49OPsTmihmcB5ZT5kSxkd4BimtNKqC7PY
- NxnZceF7uv45KoLIPdvadfpbYUX7yuJGYgY6H6PTvz1AKlZMlksCC72Q9quCM78C4onzxoS1fm5
- F5ISy+drI4MiBL4hZeD6SiNRRZtmWORRI1nNDcut/qDrmEs/iEIdJgyA5Wu/NfatrElnryP27Lt
- StucjJCtv6pwaoVi/Qxk/0+FGhCePNZONm69wWm3BdE79dTM0aJaKSb7SJRlwnpH6tj7v1yQFyE
- eYBgnjAw/aOc2kPetgnyjytH9Ry5ESfZxAO4pVu84AzSkxJpHJOEU4/IetobIkWfTGHgsAhZNR/
- wyFiHv6pMTN82+RcVOQVVB7FxuRpsDPO4eZbU1ymaMp6OsdWEfeQx/jsrDU3Pf2Hy6v2WV4pYmM
- 9jFekTJ5dOV2l3cKZG7utLTtGGTff8W1HE6YxwEO1ivfCQ=
-X-Received: by 2002:a05:6808:4f2c:b0:467:ff23:dc98 with SMTP id
- 5614622812f47-46a7aa54690mr1002146b6e.33.1774549875253; 
- Thu, 26 Mar 2026 11:31:15 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41cc7ad6c42sm2685784fac.10.2026.03.26.11.31.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Mar 2026 11:31:14 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Joao Marcos Costa <joaomarcos.costa@bootlin.com>, 
- Richard Genoud <richard.genoud@bootlin.com>
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, u-boot@lists.denx.de
-In-Reply-To: <20260313104229.1555236-1-richard.genoud@bootlin.com>
-References: <20260313104229.1555236-1-richard.genoud@bootlin.com>
-Subject: Re: [PATCH 0/7] Introduce SQUASHFS support in SPL
-Message-Id: <177454987437.3767000.7729696697242811161.b4-ty@konsulko.com>
-Date: Thu, 26 Mar 2026 12:31:14 -0600
+ dmarc=fail (p=none dis=none) header.from=online.fr
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=legoll@online.fr
+Received: from [10.0.0.2] (unknown [82.65.243.93])
+ (Authenticated sender: legoll@free.fr)
+ by smtp4-g21.free.fr (Postfix) with ESMTPSA id AB65719F5BE;
+ Thu, 26 Mar 2026 19:35:37 +0100 (CET)
+Message-ID: <87d4cc89-e60a-4365-b6c0-efe5b20d0c7f@online.fr>
+Date: Thu, 26 Mar 2026 19:35:37 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+In-Reply-To: <20260325223232.1553212-1-raymondmaoca@gmail.com>
+To: u-boot@lists.denx.de
+Cc: uboot@riscstar.com, u-boot-spacemit@groups.io, raymond.mao@riscstar.com,
+ rick@andestech.com, ycliang@andestech.com, trini@konsulko.com,
+ lukma@denx.de, hs@nabladev.com, jh80.chung@samsung.com, peng.fan@nxp.com,
+ xypron.glpk@gmx.de, randolph@andestech.com, dlan@gentoo.org,
+ junhui.liu@pigmoral.tech, neil.armstrong@linaro.org,
+ quentin.schulz@cherry.de, samuel@sholland.org, raymondmaoca@gmail.com
+From: Vincent Legoll <legoll@online.fr>
+Subject: Re: [PATCH v3 00/16] Add board support for Spacemit K1 SoC in SPL
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.14.3
+X-Mailman-Approved-At: Thu, 26 Mar 2026 19:41:50 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,34 +59,175 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 13 Mar 2026 11:42:22 +0100, Richard Genoud wrote:
+Hello,
 
-> SquashFS has support in U-Boot, but not in SPL.
-> 
-> This series adds the possibility for the SPL to load files from SquashFS
-> partitions.
-> This is useful, for instance, when there's a SquashFS rootfs containing
-> U-Boot binary.
-> 
-> [...]
+I wanted to try this series (applied to upstream u-boot, next branch),
+but it failed to boot properly.
 
-Applied to u-boot/next, thanks!
+Note that I tried to follow instructions from:
+Subject: [PATCH] doc: spacemit: add K1 SPL build and test guide
+https://lore.kernel.org/u-boot/20260311073741.80616-1-guodong@riscstar.com/
 
-[1/7] fs/squashfs: fix sqfs_decompressor.c build in SPL
-      commit: f0b4f502bdd5f17da58aca9ebf86e16e96e0d347
-[2/7] fs/squashfs: sqfs_decompressor: simplify code
-      commit: 0fe2801730edb99e24b601b043ec5595af319274
-[3/7] fs/squashfs: squashfs.h: include file should be self dependent
-      commit: 5e23f7f9f3b3c8fe78ed3aadeed9b187ba8930da
-[4/7] spl: add squashfs support
-      commit: 6494e823b46ced400764b6203d7480c9e3badc20
-[5/7] spl: mmc: support squashfs
-      commit: fb0df3552892ff150edaf7579989fd4750ee85ee
-[6/7] MAINTAINERS: SQUASHFS: update João Marcos Costa email
-      commit: eed18b1e25051123804d26525d600c9d2cd76e2c
-[7/7] MAINTAINERS: SQUASHFS: Add myself as co-maintainer
-      commit: 868233099d873cc8e2f8b99f609bdbaed421eab7
--- 
-Tom
+But they looked wrong at times so I tried to guess what was intended.
 
+Can someone see why it failed like that ?
 
+Find the detailed description of what I did below:
+
+## Get the repos
+
+git clone https://github.com/u-boot/u-boot
+git clone https://github.com/spacemit-com/spacemit-firmware
+git clone https://gitee.com/bianbu-linux/uboot-2022.10 bianbu-uboot-2022.10
+
+## Build u-boot
+
+BUILD_PATH=$(pwd)
+UBOOT_UPSTREAM_DIR="${BUILD_PATH}/u-boot"
+UBOOT_BIANBU_DIR="${BUILD_PATH}/bianbu-uboot-2022.10"
+SPACEMIT_FW_DIR="${BUILD_PATH}/spacemit-firmware"
+
+cd "${UBOOT_UPSTREAM_DIR}"
+
+git checkout -b spacemit-k1 upstream/next
+
+# Grab the series link from:
+# 
+https://patchwork.ozlabs.org/project/uboot/patch/20260325223232.1553212-2-raymondmaoca@gmail.com/
+
+curl https://patchwork.ozlabs.org/series/497518/mbox/ > 
+Add-board-support-for-Spacemit-K1-SoC-in-SPL.patch
+git am < Add-board-support-for-Spacemit-K1-SoC-in-SPL.patch
+
+export CROSS_COMPILE=riscv64-linux-musl-
+export ARCH=riscv
+export DDR_FW_FILE="${SPACEMIT_FW_DIR}/k1/v0.2/ddr_fw.bin"
+
+make spacemit_k1_defconfig
+make -j $(nproc)
+
+# Here the path to fsbl.json was not right
+# See: 
+https://gitee.com/spacemit-buildroot/uboot-2022.10/blob/k1-bl-v2.2.y/board/spacemit/k1-x/configs/fsbl.json
+
+mkdir -p "${UBOOT_BIANBU_DIR}/spl_bin/configs"
+sed 's/u-boot-spl\.bin/u-boot-spl-ddr.bin/g' \
+   < "${UBOOT_BIANBU_DIR}/board/spacemit/k1-x/configs/fsbl.json" \
+   > "${UBOOT_BIANBU_DIR}/spl_bin/configs/fsbl_ddr.json"
+
+echo "Clean binaries in ${UBOOT_BIANBU_DIR}/spl_bin"
+rm -f "${UBOOT_BIANBU_DIR}/spl_bin/u-boot-spl-ddr.bin"
+rm -f "${UBOOT_BIANBU_DIR}/spl_bin/u-boot-spl.bin"
+
+cp "${UBOOT_UPSTREAM_DIR}/u-boot-spl-ddr.bin" "${UBOOT_BIANBU_DIR}/spl_bin"
+
+python3 "${UBOOT_BIANBU_DIR}/tools/build_binary_file.py" \
+   -c "${UBOOT_BIANBU_DIR}/spl_bin/configs/fsbl_ddr.json" \
+   -o "${UBOOT_BIANBU_DIR}/spl_bin/FSBL.bin"
+
+# This created a FSBL.bin in the specified directory.
+
+## Setup serial console, boot with FDL button pressed, then USB upload:
+
+FSBL="${UBOOT_BIANBU_DIR}/spl_bin/FSBL.bin"
+
+fastboot stage "${FSBL}"
+fastboot continue
+
+## Serial console output
+
+sys: 0x1000
+bm:2
+ROM: usb download handler
+usb2d_initialize : enter
+Controller Run
+usb rst int
+SETUP: 0x80 0x6 0x100
+usb rst int
+SETUP: 0x0 0x5 0x1
+SETUP: 0x80 0x6 0x100
+SETUP: 0x80 0x6 0x200
+SETUP: 0x80 0x6 0x200
+SETUP: 0x80 0x6 0x300
+SETUP: 0x80 0x6 0x302
+SETUP: 0x80 0x6 0x301
+SETUP: 0x80 0x6 0x30a
+SETUP: 0x0 0x9 0x1
+usb_rx_bytes : len= 4096 pBuf= 0xc0838720
+SETUP: 0x80 0x6 0x302
+SETUP: 0x80 0x6 0x304
+fastboot_handle_command: max-download-size
+usb_tx_bytes : len= 65 pBuf= 0xc083fe88
+usb_rx_bytes : len= 4096 pBuf= 0xc0838720
+fastboot_handle_command: 0001e860
+Starting download of 125024 bytes
+usb_tx_bytes : len= 65 pBuf= 0xc083fe88
+usb_rx_bytes : len= 125024 pBuf= 0xc0800000
+usb_tx_bytes : len= 65 pBuf= 0xc083fe88
+usb_rx_bytes : len= 4096 pBuf= 0xc0838720
+fastboot_handle_command: continue
+usb_tx_bytes : len= 65 pBuf= 0xc083fe88
+j...
+
+<debug_uart>
+
+U-Boot SPL 2026.04-rc4-00543-g2ba03a569e61 (Mar 26 2026 - 16:48:44 +0100)
+Fail to detect board:-2
+vdd_core, value:900000
+vdd_1v8, value:1800000
+vdd_1v8_mmc, value:500000
+DDR firmware: [0xc08159c0]:0xf0227179, size:0x8d98
+DDR is ready
+SPL: Unsupported Boot Device!
+SPL: failed to boot from all boot devices
+### ERROR ### Please RESET the board ###
+
+## More details
+
+[bianbu-uboot-2022.10]$ git log --oneline -1
+d61c8c77 (HEAD -> k1-bl-v2.2.y, tag: k1-bl-v2.2.9-release, 
+origin/k1-bl-v2.2.y, origin/HEAD) Update for v2.2.9
+
+[spacemit-firmware]$ git log --oneline -1
+3eca456 (HEAD -> master, origin/master, origin/HEAD) Merge pull request 
+#1 from docularxu/add-readme
+
+$ ls -la $DDR_FW_FILE
+-rw-r--r-- 1 user user 36248 Mar 26 16:38 
+.../spacemit-firmware/k1/v0.2/ddr_fw.bin
+$ sha256sum $DDR_FW_FILE
+4ca729dae39580fe6d52ff6a1ead95fd18cd6394c942cc4a323882ccf2840148 
+.../spacemit-firmware/k1/v0.2/ddr_fw.bin
+
+[u-boot]$ git remote -v | grep upstream
+upstream        https://source.denx.de/u-boot/u-boot.git (fetch)
+upstream        https://source.denx.de/u-boot/u-boot.git (push)
+
+$ git log --oneline upstream/next^..HEAD
+2ba03a569e6 (HEAD -> spacemit-k1) board: k1: enable pmic in spl
+d4b07728ec7 power: regulator: add support for Spacemit P1 SoC
+698e1dac98b power: pmic: add support for Spacemit P1 PMIC
+76b9c476576 spacemit: k1: Add DDR firmware support to SPL
+d8bc52c01f2 spacemit: k1: add TLV EEPROM support in SPL
+06ac4c0cc55 i2c: k1: add I2C driver support
+29c9f971bbe configs: k1: add default option for clock driver in SPL
+66fd60bea6e board: k1: initialize clock and serial devices in SPL
+1c69ee27980 dts: k1: enable clocks in SPL
+fdad5fdcc0d clk: spacemit: Add support for K1 SoC
+0e4f554b274 dts: k1: import dts file from upstream folder
+a8cd1f828c4 dt-bindings: clock: import k1-syscon from upstream
+0dd6c089190 reset: k1: remove TWSI8 reset restriction
+a46bdb334d7 configs: k1: enable early timer support
+052c15d331a spacemit: k1: enable SPL with debug UART
+25905d01c7e spacemit: k1: support multi-board infrastructure
+8813d74163e (upstream/next, upstream/WIP/25Mar2026-next, origin/next, 
+origin/WIP/25Mar2026-next) Merge patch series "test/py: gpio: cleanups 
+and improvement"
+0f101dac8fb test/py: gpio: allow omitting gpio_op_pin
+908db6c647c test/py: gpio: removing trailing semicolons
+b02b0a0c6cb test/py: gpio: remove unused imports
+
+Thanks
+
+PS: I just (re-)subscribed to the list. I tried to get the email 
+threading right, hopefully it'll work.
