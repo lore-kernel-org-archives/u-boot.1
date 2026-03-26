@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C67610A88C3
-	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 15:15:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3C2810A88C4
+	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 15:18:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 998FD81E18;
-	Thu, 26 Mar 2026 16:15:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1810C81E18;
+	Thu, 26 Mar 2026 16:18:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qwUnInac";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fLOFxPz3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5E7F83E76; Thu, 26 Mar 2026 16:15:46 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 9318283F00; Thu, 26 Mar 2026 16:18:22 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B0D580517
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 16:15:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2697D80517
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 16:18:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-43a03cb1df9so995155f8f.1
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 08:15:44 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-486fd27754bso10506555e9.3
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 08:18:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1774538144; x=1775142944; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1774538298; x=1775143098; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=DzBrqiqa2HFsC3XmMz014TrD7Qub7bTPx295ka9bbX0=;
- b=qwUnInac+XjDhp912Ductc6xyTwZWHO3frAomms1r65uX1/by5lssIJw4+N79oi7ke
- BanI3tV7J0p7yzopVE0SBwZQcHqBbJvsEK2fp79cj/CuvqPL9MsL7dkrzXgHRCzdsm96
- 6zPaAofPlOxzTI1MR+P5OLtRhkZzXos1GlzZ9pBtJD/BLXeY8VnNOVVAUr3eDJ4JGqG8
- P8UUdv/rGTsqTrvsAi66e84QANA/OUy7xvo6z4AYY5kLzg4m8mXbuhYoH9ENmQjdICYC
- 5i56NeLSapju7qV1ciz4z1cM9xriE8slUaUsNFMp7hj8BsHyCX0zDqdABnlCH/i3j3fE
- 90Nw==
+ bh=Xk7pi8UAdBfI6SJWXvHXus3M21ZVmb2wDvRfF4QCmk8=;
+ b=fLOFxPz3DTf9PvQs44ay9yLwNaQJGPap/5AICv3NiWSfyKE/bZN0O6KqxQUFkImt6e
+ 0WUmxAFrwdhArwc6vs3u2Y7v7XulG0jAQvRbsbRSXriIr57Zrf3m3HTXFWeeNNmhPItN
+ JtYc2Og/KJOgCIp06qnC8/zzt7w/qkxNx1krpHSvRaxeWrgboUA96qtViFmEeoziHr3v
+ zaRiH5s+eQ2DX4/JvLe3s2N4rv6pSpc6aehW6vJgO8EFarBXl8SIeVg/zqWdG969FNNr
+ I9fJ6HpLOhHySbVxvmeQs93TWO+FaIjra/mU5lPPJBS7hFDeqn9RZP+VwipQfC3KtYBB
+ ArQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774538144; x=1775142944;
+ d=1e100.net; s=20251104; t=1774538298; x=1775143098;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DzBrqiqa2HFsC3XmMz014TrD7Qub7bTPx295ka9bbX0=;
- b=RIuiBFALUfkGlZjMOX0DUaoKmBcFIuivWmVq9bRvaSxKFECgkSpeFdBk7Pi2u7DB8K
- oSkpQk7D3OKJPktt+jg5EYhIA1dQXlw/E0m6TlHxwFcDE23UtndNVv7Zkzobz/++Z5Tn
- MltA+zoB+RWrvMbvnOiZu0bbMv+9dNZJfjVbkavmYPLfVZtgY5+dikOwg+KQmEbEEDOK
- ueSUJgRoXZhQajmWNl05F5wd6tBFzOEEZLNq2Ee/5WXgXmzJlz8UTv+zThRHc7MC1FUr
- Wc4Ndmau/sxnRUqZHmOWGQQHr5l7p0B3cbh1DJaswOVwzy1IUdkyKHisZt2pXoyOszLv
- JkIg==
-X-Gm-Message-State: AOJu0Yx0o0uYfUPsvm7IPvOC/O02VVdI74wRc1OKnO/r1TZfDc5vwBau
- jdF1wWyELB5i/wS0bXxCyvuKzoU686l8nMTkZoV1s4wAFj2ZioIBH93481MoqlFbuos=
-X-Gm-Gg: ATEYQzykp3dV1kmJJpr6grcvNMl7Jg2aQoomi4H3pK6ZA6jWnIx3mSTELet0Dokbvqj
- 65lwMhzx82JGMgm7rbo8ZgNk1St0nzfAwIAgWQ1GTuRPUFor5OxAZFVaH0XxbjXvVvvjO0uf0ZL
- Cq3Vv1HlzvXO12Iqk2emzFf83gnr8W3WFfbSJBSjJDphXiZif7dngMMCyhhcDL84jIMwH+jjFhF
- QDrXZW9cmy4bCI28Sf2vS7fTRB5GpkNK0mSC1yr4MLy5eAKe7+FwDhAnDNMl5WUiLlKF67F8+Nm
- R3GnzlFqpevOJeIkUpBh3MMSpaCjlx2TjK4EyYmybzZ2+mUKFs/0U+TfmRD5++4kEaxK4/YUuiO
- EBkkBBxZI5nI+fzhitUGjgMfsvKIhc3FUprdh12dUcHE0n+tVSIsLH/k0a7UloLUu+JS3aT9Qo+
- zkZV0ws/DyU3jnXiVTJrKBwgVl0uOmSBc4D8bxc/AG/yXfmU779nWys7I0pM8B9qk=
-X-Received: by 2002:a5d:6708:0:b0:43b:998c:d82b with SMTP id
- ffacd0b85a97d-43b998cd88dmr1461541f8f.19.1774538143466; 
- Thu, 26 Mar 2026 08:15:43 -0700 (PDT)
+ bh=Xk7pi8UAdBfI6SJWXvHXus3M21ZVmb2wDvRfF4QCmk8=;
+ b=k9PCQCkK46uXqU4EorreDSWDhbOArfOOpWeJw1IirQNft6AfsCwxUhjuj8s/Wj1gvq
+ y8UI1DVx7Du31JHecPJ2cwuUW224YKngfT03Zu8GGc9y24GKrlEIDuLBQB0NGPiuDQmv
+ OncHNnRWygRdjH119UBA/kWXxnVBiwZENf+qzt4ZhdZyTrgDAF2hYcPId8vIgoUaIRfD
+ qGO3M+Ji6Yyl6L0bQ0RMB3Sqs8GPRs0LhJj/ugxRaBSFI7PJidDzlv3VTbeRgJBfrH9Q
+ ydYf2ys3USXRCc7rXSxfpcCWCPNUHvyVISxN7M/dacwPd829U6ukoxAgQRtNfNd5iYLx
+ u41A==
+X-Gm-Message-State: AOJu0YxfRzB/IPFTJALOpEQy1TtufhQZIKXMWIcrwy04K9LhTK6wpyZ7
+ EyEmho7hH16ktjuH3t15s1IenUGm8PB+eApjHQ4i+TDxX1ettxt1jIqOsxisvpEPeL8=
+X-Gm-Gg: ATEYQzyOVzE5wNFSw7CsYtJaVmic7mAbwPmwasg7cj21Y8nuceIuKevCCoUEwYsup5r
+ 1M5sEzKh+7yWj9LhsrU9/T33lW4s/RyytXzX3G8FHIwF6aLiejLhf0EHX46hANzZgmUVvkrImWX
+ FqXejmZk1SBLKg8b+7dG0QUEZp+PTzCdnWObxFnY+q1cJ8bI6FjAnorDhJyBu+F8Z6Xal42RfCc
+ 5gEQOitSG7U2gyT4qqtE9AsnmnEsj7naSW6IJUrRD4LkYxCUfKko2V3prcLwOTa2dKfgaeV30R6
+ Gkr4poj6He8SyIXEoeoRDCo6Fw6czIE6QiyTI3e3ca28tuJwi2blZQ3TOmaK//H7Ch1nGDGlkJs
+ eOFEEjDgUAGfNKSy2W+dy5i2lvEaQhacWTs2fOoQOLGs1f3vS/Pcip7MvS7oj3inuzrPgpBvw+Z
+ iTuhh6kXeQzA9Q95gEAAYo79COoPLx/Fp7uLLLhvxyOyrEkfI5aR5sxxM/2Gwk27U=
+X-Received: by 2002:a05:600c:6487:b0:486:f9d0:aac8 with SMTP id
+ 5b1f17b1804b1-48716051c95mr127501425e9.18.1774538298428; 
+ Thu, 26 Mar 2026 08:18:18 -0700 (PDT)
 Received: from [192.168.1.36] (p5b29eb0d.dip0.t-ipconnect.de. [91.41.235.13])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b9179b212sm8766711f8f.0.2026.03.26.08.15.42
+ 5b1f17b1804b1-48722c957b9sm67020305e9.8.2026.03.26.08.18.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 26 Mar 2026 08:15:43 -0700 (PDT)
-Message-ID: <297cff44-ab4f-486e-b546-426468f50968@linaro.org>
-Date: Thu, 26 Mar 2026 16:15:42 +0100
+ Thu, 26 Mar 2026 08:18:17 -0700 (PDT)
+Message-ID: <72c0d063-a70d-4957-b679-bb331c3e7f0d@linaro.org>
+Date: Thu, 26 Mar 2026 16:18:17 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] video: simplefb: Map framebuffer region on probe on ARM64
@@ -138,14 +138,6 @@ On 24/03/2026 07:02, Sumit Garg wrote:
 > This sounds more likely the synchronous aborts caused by cache prefetch
 > of nearby reserved memory regions. I see there are some reserved mememory
 > regions around the address space you have mentioned on Milos.
-
-I don't think so, more likely mmu_map_region() is doing an ALIGN_DOWN()
-somewhere.
-
-Luca: I think you should do ALIGN(plat->size, SZ_4K) and assert that
-plat->stat is 4k aligned as well (or at least WARN if it's not). That
-will round up the size 0xa932c0 to 0xa94000.
-
 > 
 > On Qcom platforms, the default memory map strategy is to map the overall
 > DRAM space without excluding reserved reqions. One can exclude reserved
@@ -155,6 +147,13 @@ will round up the size 0xa932c0 to 0xa94000.
 > 
 > I think we still need to revisit that reserved memory strategy where
 > default should rather be we unmap the reserved regions.
+
+I think it would be nice to get dcache enabled with a very basic map and
+the livetree built pre-relocation, then when we go to build the full
+memory map and switch to it we can add this more complex logic without
+introducing a big slowdown. U-Boots MMU code will need further
+improvements to do all this properly.
+
 > 
 > [1] https://github.com/u-boot/u-boot/blob/master/arch/arm/mach-snapdragon/board.c#L743
 > 
