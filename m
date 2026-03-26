@@ -4,116 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2936A106F30F
-	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 09:42:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1BAC106F311
+	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 09:49:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 779D683FA3;
-	Thu, 26 Mar 2026 10:42:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 602CF83FD3;
+	Thu, 26 Mar 2026 10:49:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="n5YLEukz";
+	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="ATxhSigu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3443184082; Thu, 26 Mar 2026 10:42:45 +0100 (CET)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 997DD83FBC; Thu, 26 Mar 2026 10:49:18 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 139EB83EB3
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 10:42:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B78883FA3
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 10:49:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=suse.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qbzDK9LUMyHWJ+9zH2dNNxdTJL41z/uZenGofPo7RHXv1Sxb1CPjuPFrSAmzgd11vN3kJgH2Q1WKr+n59XLj1PgUi0fxPSG4XxFTmC/NmTkkot+OQPNurO3Wqh9hLM+rdxBZ1ozlzHddVJ307GTSTXX9lJoeEzqGY6090IkPryGHClQ5xep6S6EPK5CD5DkxP+mucspIEyyGP97T+7pavybFPfyoTQW6Q4842YPqpBJ1L726bUJbiyQADMzXdIm+kxemG83yc8GIiJmZP9LP+49ZbM1jmfudSMvKVQoub879FBTAlLEXRxYwaDPQc0kLn3NaA484JEpk8up/TIbV4A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ygpwNYxtPxr2cyaJDzp2OhaJUK1W4EdFBzMzC8FsPGs=;
- b=O7qAzF/IZRPGO+O4S+9adHl1GnQxEiMvzNi44Lg2G10jxLlg3fEeY/n4NrfQOsaZTwc4+mkh3k+Kh/reu9C+98UpSf2tlTINHBea4KDrOmfqMpGnW4kAy4RPw8/zuCN8bphOEobuA81hUSn2W4XUaiW9J/z+2X2gKE1jdrBLjOLMFfB/7NiYnEXKW4sqPUAJYykEW8IAHgEmBllzZqY++yNuf/R2+lqfuT5pT/pJY/SkRClQ5n6A/jN5PFQJMRW2am05WlsKlMvhdH2TWMrsXyUwOPTs/ITnMsvZpUhh0VKhVmUgyMV+MG4LncBMSsmcRH5nfYFmQkO5dZL7nqwWqQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=konsulko.com smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ygpwNYxtPxr2cyaJDzp2OhaJUK1W4EdFBzMzC8FsPGs=;
- b=n5YLEukzQBz/MgEGuwq6TOEAKilcPf2QR+2bPA5oFlvx0gJHAA7ol6cYD4//I4hdqM0R4NzhVvEzuteVIdStIbQEJ1tQUr9Zy/qpyuXL6AJxQLd+KpG56DaRoszqTuhb8gbK2vFqpu4lTwUVAyqri4eiGpqMdDi1wVwLHmQF6AqWOgh+THSMOSNkXL1Epka+0vnuEOITQM+iJ6KsYGu50nbGHlOK2LsgWd3xPdZryJcxP3DCr8LGMLqOhoQzv6/nmIgYWf/OVNIW+COVhP0YqJZUwepRkiVAdGRZqsPr1SP8O+mG/SQ2pKGRVPv7fMTjLLmCd8TQ0QWa7d2jmQbx4g==
-Received: from AS9PR01CA0004.eurprd01.prod.exchangelabs.com
- (2603:10a6:20b:540::13) by AS8PR10MB5927.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:529::7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.20; Thu, 26 Mar
- 2026 09:42:40 +0000
-Received: from AMS1EPF00000046.eurprd04.prod.outlook.com
- (2603:10a6:20b:540:cafe::ec) by AS9PR01CA0004.outlook.office365.com
- (2603:10a6:20b:540::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9723.31 via Frontend Transport; Thu,
- 26 Mar 2026 09:42:37 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- AMS1EPF00000046.mail.protection.outlook.com (10.167.16.43) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9745.21 via Frontend Transport; Thu, 26 Mar 2026 09:42:40 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 26 Mar
- 2026 10:45:09 +0100
-Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 26 Mar
- 2026 10:42:30 +0100
-Message-ID: <f6c27c74-1188-4062-9082-d0f3639d3ce0@foss.st.com>
-Date: Thu, 26 Mar 2026 10:42:13 +0100
+ spf=pass smtp.mailfrom=mbrugger@suse.com
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-439bcec8613so498470f8f.3
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 02:49:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=suse.com; s=google; t=1774518554; x=1775123354; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=J396XDsZeUT91u9zAv44pZdLCvSwnUx+OeGSs3K93aM=;
+ b=ATxhSigu38PZgskExwRUgCgOuo35pd1gYwMJaMgx+SfJbOpMICbsKIXYs2de7+3lP8
+ HYJjALE+0yVpp67gNvqYysyATvaQGXfzuhqIDqsZtQjnR9HWm6JX5/3RCbToQqIKMPL6
+ dKEXmEta0484k2XORpqheQHsJS3qAfxkYAq96rC5mZCOush42PG6mQh/PYS7Zutjs2CZ
+ fLdk3Ey2RkHtQojgihxL62kNqCGFf5DZteNjyeWmKl7a/wYkXhP3BpLx4h2BRiPLTCs4
+ jLPpjeSr3ZTqGZGbRmZSsbqAxpiiq27UhYh3BUb1/CPR6B8xW48k15CDJMYra8hNxzJf
+ VTTA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774518554; x=1775123354;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=J396XDsZeUT91u9zAv44pZdLCvSwnUx+OeGSs3K93aM=;
+ b=UaYf3+om6mnAE0YVOdQ7xlhFoxTX7nt+iP5FHXU6wa/sc9uL/72013Db7a4bNE30b0
+ HJkwgk3oStTIwTxyCrJudmE0V4J0P9+tl0GfMIw+4nzHJBcNySEweH7r96v//5c4I6/M
+ mhMoNZWHD8wDnrvWRNTtrdwlNK/YaCxwMSNw4vxLzn1oliqXvJLIDDXwzq66ieKxXB43
+ VjfRpxSR77CeXRgnztJtM4wiCgirHjtSW+MgDMGVbiJpYojFqyTHzQLZ/jnmB5H3Tqbm
+ ruchux01OeimrO1jsvCEB4NEq33mSZ36508Tns8Mz7fWDa3JbasbGnWtR5VxHd+dir7T
+ TWQQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVxdRUOB67sRzz67lptSWy6/SqDtBxXxpZePgaBkcZTyUnxjBJcXuzxQv6wdaIJqXzs3Hj035o=@lists.denx.de
+X-Gm-Message-State: AOJu0YwdSdfWLfqqrO9tEhMsWk1dKTXyFyTzghKQFDQnDkjtA09SelGD
+ OqHml5lc2S9nU3WZyM2McJJP3tYF5twuSLJjoG8gFIXUp4qklNLdmyNGgOHAOnVV1oQ=
+X-Gm-Gg: ATEYQzwI2plWdbAgXm0AS+o1+i+faLY0QQ4uMSdwxlQBWjeuaxRAeKBFz5UEZngAj42
+ WYn7g6UhzNtnrdMTRUmt/ioavr5hfnsMXo/45yEHNukYZymR3rOD/zOKMq50jfDLqiBS2WCkhKC
+ wDjxy3xP7S6o+oyb14cR1alP7ficrg/Rr0p6XBxNfAejYnEvSigWIX0k26RI/fvLP+WvSJAYKn7
+ YGVu+XW1VsYeC1BPGVQsvFOUJ0tvASTCft0KfehTO6uNXo2SueWN+p1n2oQOJFBFgbd38raal1N
+ K3LQkCGrbZ+1M5BWwIhuKNBeHcgLHU8/6hq3OlCIqabsxy7M6D0Fxf0qJnGpAHUnYSei4q5UIVw
+ 2DZQ+fe/ao8/fB1h92Ta7Rlw4rkI2f2mQq9y8FOuB+4Yk2BQmFZp78y8+LEIV2tRH2US1+bt8AM
+ KELaE8FJWMFrbnLRFRpY44r0a0i0X49MWNGVSWCkfhZi1KkUwVSOJAseApoGwuqRahtd5+IZaCr
+ Q==
+X-Received: by 2002:a5d:64e7:0:b0:43b:4960:60f2 with SMTP id
+ ffacd0b85a97d-43b88a399aemr10026450f8f.47.1774518553764; 
+ Thu, 26 Mar 2026 02:49:13 -0700 (PDT)
+Received: from [192.168.2.177] (156.85-85-163.dynamic.clientes.euskaltel.es.
+ [85.85.163.156]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43b919cf2c8sm6606330f8f.20.2026.03.26.02.49.13
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 26 Mar 2026 02:49:13 -0700 (PDT)
+Message-ID: <35cc32cd-cf2e-4b49-8c62-6af784a951a0@suse.com>
+Date: Thu, 26 Mar 2026 10:49:12 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: stm32mp: Drop unnecessary BOARD_EARLY_INIT_F usage
-To: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Jagan Teki
- <jagan@amarulasolutions.com>, Matteo Lisi <matteo.lisi@engicam.com>, "Dillon
- Min" <dillon.minfei@gmail.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20260325190027.3428596-1-trini@konsulko.com>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20260325190027.3428596-1-trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH] arm: bcm: Include missing errno.h
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
+References: <20260315235816.305016-1-marek.vasut+renesas@mailbox.org>
+Content-Language: en-US, ca-ES, es-ES
+From: Matthias Brugger <mbrugger@suse.com>
+Autocrypt: addr=mbrugger@suse.com; keydata=
+ xsFNBFP1zgUBEAC21D6hk7//0kOmsUrE3eZ55kjc9DmFPKIz6l4NggqwQjBNRHIMh04BbCMY
+ fL3eT7ZsYV5nur7zctmJ+vbszoOASXUpfq8M+S5hU2w7sBaVk5rpH9yW8CUWz2+ZpQXPJcFa
+ OhLZuSKB1F5JcvLbETRjNzNU7B3TdS2+zkgQQdEyt7Ij2HXGLJ2w+yG2GuR9/iyCJRf10Okq
+ gTh//XESJZ8S6KlOWbLXRE+yfkKDXQx2Jr1XuVvM3zPqH5FMg8reRVFsQ+vI0b+OlyekT/Xe
+ 0Hwvqkev95GG6x7yseJwI+2ydDH6M5O7fPKFW5mzAdDE2g/K9B4e2tYK6/rA7Fq4cqiAw1+u
+ EgO44+eFgv082xtBez5WNkGn18vtw0LW3ESmKh19u6kEGoi0WZwslCNaGFrS4M7OH+aOJeqK
+ fx5dIv2CEbxc6xnHY7dwkcHikTA4QdbdFeUSuj4YhIZ+0QlDVtS1QEXyvZbZky7ur9rHkZvP
+ ZqlUsLJ2nOqsmahMTIQ8Mgx9SLEShWqD4kOF4zNfPJsgEMB49KbS2o9jxbGB+JKupjNddfxZ
+ HlH1KF8QwCMZEYaTNogrVazuEJzx6JdRpR3sFda/0x5qjTadwIW6Cl9tkqe2h391dOGX1eOA
+ 1ntn9O/39KqSrWNGvm+1raHK+Ev1yPtn0Wxn+0oy1tl67TxUjQARAQABzSRNYXR0aGlhcyBC
+ cnVnZ2VyIDxtYnJ1Z2dlckBzdXNlLmNvbT7CwXgEEwECACIFAlV6iM0CGwMGCwkIBwMCBhUI
+ AgkKCwQWAgMBAh4BAheAAAoJENkUC7JWEwLx6isQAIMGBgJnFWovDS7ClZtjz1LgoY8skcMU
+ ghUZY4Z/rwwPqmMPbY8KYDdOFA+kMTEiAHOR+IyOVe2+HlMrXv/qYH4pRoxQKm8H9FbdZXgL
+ bG8IPlBu80ZSOwWjVH+tG62KHW4RzssVrgXEFR1ZPTdbfN+9Gtf7kKxcGxWnurRJFzBEZi4s
+ RfTSulQKqTxJ/sewOb/0kfGOJYPAt/QN5SUaWa6ILa5QFg8bLAj6bZ81CDStswDt/zJmAWp0
+ 08NOnhrZaTQdRU7mTMddUph5YVNXEXd3ThOl8PetTyoSCt04PPTDDmyeMgB5C3INLo1AXhEp
+ NTdu+okvD56MqCxgMfexXiqYOkEWs/wv4LWC8V8EI3Z+DQ0YuoymI5MFPsW39aPmmBhSiacx
+ diC+7cQVQRwBR6Oz/k9oLc+0/15mc+XlbvyYfscGWs6CEeidDQyNKE/yX75KjLUSvOXYV4d4
+ UdaNrSoEcK/5XlW5IJNM9yae6ZOL8vZrs5u1+/w7pAlCDAAokz/As0vZ7xWiePrI+kTzuOt5
+ psfJOdEoMKQWWFGd/9olX5ZAyh9iXk9TQprGUOaX6sFjDrsTRycmmD9i4PdQTawObEEiAfzx
+ 1m2MwiDs2nppsRr7qwAjyRhCq2TOAh0EDRNgYaSlbIXX/zp38FpK/9DMbtH14vVvG6FXog75
+ HBoOzsFNBF3VOUgBEACbvyZOfLjgfB0hg0rhlAfpTmnFwm1TjkssGZKvgMr/t6v1yGm8nmmD
+ MIa4jblx41MSDkUKFhyB80wqrAIB6SRX0h6DOLpQrjjxbV46nxB5ANLqwektI57yenr/O+ZS
+ +GIuiSTu1kGEbP5ezmpCYk9dxqDsAyJ+4Rx/zxlKkKGZQHdZ+UlXYOnEXexKifkTDaLne6Zc
+ up1EgkTDVmzam4MloyrA/fAjIx2t90gfVkEEkMhZX/nc/naYq1hDQqGN778CiWkqX3qimLqj
+ 1UsZ6qSl6qsozZxvVuOjlmafiVeXo28lEf9lPrzMG04pS3CFKU4HZsTwgOidBkI5ijbDSimI
+ CDJ+luKPy6IjuyIETptbHZ9CmyaLgmtkGaENPqf+5iV4ZbQNFxmYTZSN56Q9ZS6Y3XeNpVm6
+ FOFXrlKeFTTlyFlPy9TWcBMDCKsxV5eB5kYvDGGxx26Tec1vlVKxX3kQz8o62KWsfr1kvpeu
+ fDzx/rFpoY91XJSKAFNZz99xa7DX6eQYkM2qN9K8HuJ7XXhHTxDbxpi3wsIlFdgzVa5iWhNw
+ iFFJdSiEaAeaHu6yXjr39FrkIVoyFPfIJVyK4d1mHe77H47WxFw6FoVbcGTEoTL6e3HDwntn
+ OGAU6CLYcaQ4aAz1HTcDrLBzSw/BuCSAXscIuKuyE/ZT+rFbLcLwOQARAQABwsF2BBgBCAAg
+ FiEE5rmSGMDywyUcLDoX2RQLslYTAvEFAl3VOUgCGwwACgkQ2RQLslYTAvG11w/+Mcn28jxp
+ 0WLUdChZQoJBtl1nlkkdrIUojNT2RkT8UfPPMwNlgWBwJOzaSZRXIaWhK1elnRa10IwwHfWM
+ GhB7nH0u0gIcSKnSKs1ebzRazI8IQdTfDH3VCQ6YMl+2bpPz4XeWqGVzcLAkamg9jsBWV6/N
+ c0l8BNlHT5iH02E43lbDgCOxme2pArETyuuJ4tF36F7ntl1Eq1FE0Ypk5LjB602Gh2N+eOGv
+ hnbkECywPmr7Hi5o7yh8bFOM52tKdGG+HM8KCY/sEpFRkDTA28XGNugjDyttOI4UZvURuvO6
+ quuvdYW4rgLVgAXgLJdQEvpnUu2j/+LjjOJBQr12ICB8T/waFc/QmUzBFQGVc20SsmAi1H9c
+ C4XB87oE4jjc/X1jASy7JCr6u5tbZa+tZjYGPZ1cMApTFLhO4tR/a/9v1Fy3fqWPNs3F4Ra3
+ 5irgg5jpAecT7DjFUCR/CNP5W6nywKn7MUm/19VSmj9uN484vg8w/XL49iung+Y+ZHCiSUGn
+ LV6nybxdRG/jp8ZQdQQixPA9azZDzuTu+NjKtzIA5qtfZfmm8xC+kAwAMZ/ZnfCsKwN0bbnD
+ YfO3B5Q131ASmu0kbwY03Mw4PhxDzZNrt4a89Y95dq5YkMtVH2Me1ZP063cFCCYCkvEAK/C8
+ PVrr2NoUqi/bxI8fFQJD1jVj8K0=
+In-Reply-To: <20260315235816.305016-1-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS1EPF00000046:EE_|AS8PR10MB5927:EE_
-X-MS-Office365-Filtering-Correlation-Id: 63be5d94-39c2-45cf-a584-08de8b1c05da
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|376014|82310400026|1800799024|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: UxVrUfhj6jxeiGwnDXLBN155cKNTmsyPeXaRnWfvZLVqnWEbgd5jIG2NIlB6Tzbi0XBhMdzdEzalGqxfoWrIIqemw0fn3Avrc3iEQk3KaBy0TWa2t/0rSlU2VFeKRqQahdrG6r0YHeLKRDC1L4X5aL0/45Mzr1IbsSkWH9RM1Gzg4Bk8I7sXC+fCgHV+/WaFErLTT1mGDxVKTwbaFNhXc8DyDITWlnanOtR7BDErTH2j5oEoVllC91Vo+N31gS9QKmOc/UN/WaX9nl1usDaw9sHpZoBNjQD/lhavOzQ3/wv82qimY9aioHHwrk/4oSbcGkz35GPtrkCWFQzH0tddqsE3CkFCHJZbiGfkKeDVNv/RwCCWFT8YTNLs6wykHQBaTAPc8XAxs2pLZR9qyLxOi1p9bb+fVZ97U4ijhBpdI7BlmH+dRg8rfOECFEB3JUv/wVXUo1JpJyGNTQlvEUtHqQa8xs88b4ZammxiRIbsWu3qVn/9oPIfBNkicLUKlL2VmU3SF7uTn5MKkQQJGpAgnSb6sbaQ8CmQTSe99EIay/OovVQtPZQclDdCsrfVZ4W2jbHfOHI1ghG2e/CgF8zIcmMwCCdPkrhm9RaiDGlwah8sZPsUVM1KZRNgVtH0ZrNTOp/7L6Iw9G4cXDXZFgA8cHHslSpoIlXI/zOdWba9ALyZ1REvVP9RcMnhFIjdu1QX4k+4oqTELkIM+MN1OVatXMx7+HExvvrqWSBQfc4DKuAFjFvLdCMYvCfeRnJYSk9WHDjy0HKNqgNzEfOwBILGbg==
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(376014)(82310400026)(1800799024)(18002099003)(22082099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: BveLg3Y9mcP2xh0I1ogodF0Mw1kamYmAmFWNYUuw74taYxpL4NDOuQyHu8sRGGYi+nWYIZk0osDOYA6HYZf3K3/bnFzkCaYyQH8wNGcIr7UkmCagnUfQLqWenb0uuP39KJqgwxgvOEReEfJh5xMfV7RjIj6pNNkrYkqz6in61sjKYjMlj0bqNj3b4hD2BFbr3wCjIFYINPY74UM8YzhkezvZq8mJya2Gc7cFouKCD8R7e4Q2+NTrE2k+hsIreq49uX80TeTYMxAIWdz0qlfuZoTu451Pf0CVZ0yBv7xZHqTql6MVYlVqBHmLYMG9b08SjKaUbmFXNuXW+la/hZb3dRdTWhZ7KAzH1FCytsZeLS09ZtQn2OPFqcqRfk0nJ1D7Pm3bqgclTCJEn8YZUMQCC/RNWD7MmogWrSd2qqvsHN0HABAJ3BEPZgd/2ByFOc++
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Mar 2026 09:42:40.5853 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 63be5d94-39c2-45cf-a584-08de8b1c05da
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF00000046.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB5927
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,105 +148,40 @@ X-Virus-Status: Clean
 
 
 
-On 3/25/26 20:00, Tom Rini wrote:
-> All of these platforms enable CONFIG_BOARD_EARLY_INIT_F and then have a
-> do-nothing board_early_init_f function. Change to not enabling the
-> option and so not needing an empty function.
+On 16/03/2026 00:58, Marek Vasut wrote:
+> The msg.c file uses EIO macro defined in errno.h , include errno.h
+> to avoid build failure:
 > 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Jagan Teki <jagan@amarulasolutions.com>
-> Cc: Matteo Lisi <matteo.lisi@engicam.com>
-> Cc: Dillon Min <dillon.minfei@gmail.com>
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  arch/arm/mach-stm32mp/stm32mp1/spl.c         | 15 ++++++---------
->  board/engicam/stm32mp1/spl.c                 |  6 ------
->  board/st/stm32h750-art-pi/stm32h750-art-pi.c |  5 -----
->  configs/stm32h750-art-pi_defconfig           |  1 -
->  4 files changed, 6 insertions(+), 21 deletions(-)
+> "
+> arch/arm/mach-bcm283x/msg.c: In function 'bcm2835_power_on_module':
+> arch/arm/mach-bcm283x/msg.c:73:25: error: 'EIO' undeclared (first use in this function)
+>     73 |                 return -EIO;
+>        |                         ^~~
+> "
 > 
-> diff --git a/arch/arm/mach-stm32mp/stm32mp1/spl.c b/arch/arm/mach-stm32mp/stm32mp1/spl.c
-> index e63bdaaf42fd..d2e41b8e65ff 100644
-> --- a/arch/arm/mach-stm32mp/stm32mp1/spl.c
-> +++ b/arch/arm/mach-stm32mp/stm32mp1/spl.c
-> @@ -90,11 +90,6 @@ void spl_display_print(void)
->  }
->  #endif
->  
-> -__weak int board_early_init_f(void)
-> -{
-> -	return 0;
-> -}
-> -
->  uint32_t stm32mp_get_dram_size(void)
->  {
->  	struct ram_info ram;
-> @@ -204,10 +199,12 @@ void board_init_f(ulong dummy)
->  	/* enable console uart printing */
->  	preloader_console_init();
->  
-> -	ret = board_early_init_f();
-> -	if (ret) {
-> -		log_debug("board_early_init_f() failed: %d\n", ret);
-> -		hang();
-> +	if (IS_ENABLED(CONFIG_BOARD_EARLY_INIT_F)) {
-> +		ret = board_early_init_f();
-> +		if (ret) {
-> +			log_debug("board_early_init_f() failed: %d\n", ret);
-> +			hang();
-> +		}
->  	}
->  
->  	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
-> diff --git a/board/engicam/stm32mp1/spl.c b/board/engicam/stm32mp1/spl.c
-> index bb2bd446aa8c..19e5ab0180f9 100644
-> --- a/board/engicam/stm32mp1/spl.c
-> +++ b/board/engicam/stm32mp1/spl.c
-> @@ -15,9 +15,3 @@ void board_vddcore_init(u32 voltage_mv)
->  	if (IS_ENABLED(CONFIG_PMIC_STPMIC1) && CONFIG_IS_ENABLED(POWER))
->  		opp_voltage_mv = voltage_mv;
->  }
-> -
-> -int board_early_init_f(void)
-> -{
-> -	return 0;
-> -}
-> -
-> diff --git a/board/st/stm32h750-art-pi/stm32h750-art-pi.c b/board/st/stm32h750-art-pi/stm32h750-art-pi.c
-> index 244bb5eefb3a..8b1b23337790 100644
-> --- a/board/st/stm32h750-art-pi/stm32h750-art-pi.c
-> +++ b/board/st/stm32h750-art-pi/stm32h750-art-pi.c
-> @@ -32,11 +32,6 @@ int dram_init_banksize(void)
->  	return 0;
->  }
->  
-> -int board_early_init_f(void)
-> -{
-> -	return 0;
-> -}
-> -
->  int board_late_init(void)
->  {
->  	return 0;
-> diff --git a/configs/stm32h750-art-pi_defconfig b/configs/stm32h750-art-pi_defconfig
-> index 971d5c00d88f..0d0dca2511b7 100644
-> --- a/configs/stm32h750-art-pi_defconfig
-> +++ b/configs/stm32h750-art-pi_defconfig
-> @@ -24,7 +24,6 @@ CONFIG_DEFAULT_FDT_FILE="stm32h750i-art-pi"
->  CONFIG_SYS_CBSIZE=256
->  CONFIG_SYS_PBSIZE=282
->  # CONFIG_DISPLAY_CPUINFO is not set
-> -CONFIG_BOARD_EARLY_INIT_F=y
->  # CONFIG_BOARD_INIT is not set
->  CONFIG_BOARD_LATE_INIT=y
->  CONFIG_SYS_PROMPT="U-Boot > "
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-Hi Tom
+Acked-by: Matthias Brugger <mbrugger@suse.com>
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> ---
+> Cc: Matthias Brugger <mbrugger@suse.com>
+> Cc: Peter Robinson <pbrobinson@gmail.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>   arch/arm/mach-bcm283x/msg.c | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/arch/arm/mach-bcm283x/msg.c b/arch/arm/mach-bcm283x/msg.c
+> index 4993c0bdb81..05e1a02e80f 100644
+> --- a/arch/arm/mach-bcm283x/msg.c
+> +++ b/arch/arm/mach-bcm283x/msg.c
+> @@ -7,6 +7,7 @@
+>   #include <phys2bus.h>
+>   #include <asm/arch/mbox.h>
+>   #include <linux/delay.h>
+> +#include <linux/errno.h>
+>   
+>   struct msg_set_power_state {
+>   	struct bcm2835_mbox_hdr hdr;
 
-Thanks
-Patrice
