@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC14610A1E7D
-	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 11:29:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07E1110A1E7D
+	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 11:29:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DFD583EB3;
-	Thu, 26 Mar 2026 12:28:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C7D2783FA3;
+	Thu, 26 Mar 2026 12:28:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="jk8yawMd";
+	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="zj/vzwfL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5002683F00; Thu, 26 Mar 2026 12:28:55 +0100 (CET)
-Received: from mail-dl1-x122f.google.com (mail-dl1-x122f.google.com
- [IPv6:2607:f8b0:4864:20::122f])
+ id 7A50C83FA3; Thu, 26 Mar 2026 12:28:58 +0100 (CET)
+Received: from mail-dl1-x122d.google.com (mail-dl1-x122d.google.com
+ [IPv6:2607:f8b0:4864:20::122d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74A3983EAC
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 12:28:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1DBE881E18
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 12:28:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=robert.marko@sartura.hr
-Received: by mail-dl1-x122f.google.com with SMTP id
- a92af1059eb24-1274204434bso1494587c88.1
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 04:28:52 -0700 (PDT)
+Received: by mail-dl1-x122d.google.com with SMTP id
+ a92af1059eb24-1273349c56bso1061700c88.0
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 04:28:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sartura.hr; s=sartura; t=1774524530; x=1775129330; darn=lists.denx.de;
+ d=sartura.hr; s=sartura; t=1774524534; x=1775129334; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xBko6k2hA8ne8g8ij92m5N39zM2ulWtmXGViXHNdMMc=;
- b=jk8yawMdIO4VS70uL+zlBLvq0vKgDGb8/U0Ns6nu+Abh2vCNQST3QDSLroip24sEij
- tVudbYkoQlfwLnmdjjx4V0NQs4hvkLxMVts1JZVSfLkE+iv4yuGTdkfRMrxwav4SSXdr
- YS1lWKeUr6grVHsCoQYtNzmh/rz828e5BulnbU1CkU7HGcZ7jy/2on3+n/Zi5zkwdlpd
- BjmB5SPEKpvorZx0Chme5t9vzlf7jvYt3feQmdjhXZQUF5LAZDF1AwsLcfQgyBwfa1/j
- XICWjOOVSrfkcQN6fJ6ZzKDJ6NXITDebiUCcFQGSDsxzwY0f6hIv9jFuTFtO7rZAwBh/
- Ch7A==
+ bh=YOmPf7pVOZfVaKWARfzyjy34cnRpMT9ra0XlHy3wdyk=;
+ b=zj/vzwfLTVpht5E8rfJZhkNP/evGarPrFl2vildJkdPUHG3a0LSZ05aqMKJ7Ecltpy
+ 7qJz47pEL4b9y6g5FsPhN3LnzUoOOZULOgm8WoWKNwCPB+E5UR5ukiAundbAQ2iXw2Wk
+ h8Sp0KYTkLbuWiVCOcfx9NH13o1i4Phvd2pLtEGbt/wgVb/foeBmTS5t9fNIY0WLEoiv
+ CdSK0tmGt/VAygxkCR+mJ+dGf1gONapvpLwefMn2OERgX18KmtW3W28MUowGlZq0smwV
+ P15O0NqMW+Z5oUMAFdxq3I3NJ+o3FReLaopv+hLXKDEuNkCyPcpPNC7tHTOggjCp57br
+ 7/Sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774524530; x=1775129330;
+ d=1e100.net; s=20251104; t=1774524534; x=1775129334;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=xBko6k2hA8ne8g8ij92m5N39zM2ulWtmXGViXHNdMMc=;
- b=qhuN9eFSDpq0lQz0cEsnMPnp9QIcQXaiBCXyKiLll4ByOeuYICDRM1w2+65fyprZJd
- Cea4I78e+2blcGCKncJbHiT351IMFDBu3Kx6jxtvupUuTA0E2kDMrCBmEiAfFZoTB9dg
- /mTZfTWyU7/vOiUhPqSxjpDNyFN8g6eGA+MIgNbDLni88peL6MJuzp5oqvSCRG/UDcVY
- Qt9XUTuFw2NHND3xaq5VDbli4WLBoCxyZIP+UzEOgKmytbsQ2mwINp18mYD8zEbcGJ26
- qYDgCKVPhoWS2AoNgkJl6xuHuLSUNAk/yo85eEOMgHHvXoglqhWrwOBrsgLidusbY9Ll
- GUpg==
-X-Gm-Message-State: AOJu0YzxOa0vzhdkhfNnFTYxeigfjSw3nH6A6URiSjljbk/gAauroWo4
- 5DrTuZ1g4SG2zbppkYfKboq5O5Udl4hDnzUafRqi80EBjJwuX4zfwaBYZJVJh6yeVhOXwz1/TiB
- ApX63lQhXtmvCLdewyFxw+gaaE1TwtWJva4S0hDlQG462bHj9E18fn5XnHlfgm7MYan/mG0821B
- KIHXXequwtjV0Y8uZ+4mBbQQPZny+4E1jynHcuFQkzPfA=
-X-Gm-Gg: ATEYQzz+ThiZM4w4wwsDZ3ssEvwZbbLnMZ+eyluuIldSDy7fcQVPfYab7zjs5IfrLc2
- W53FLDEtITvPq1LhX3aUCD/ZO6/g8U0dban3khHK/BOsULF2OvdMKj3Di6f7/WEspVeJsvSykYX
- EHVyRmb8ZV0GWnDhFPAG6jnVuPnXN/qvU02pAqQS69UE0Pk5Rp6/XZkjZYZqqXNCOmKuZ5CPaWJ
- a3Zr36z+jXY2GF/RFYMMlIymUDgsZXUQFMhdYbaRwc5psDc8SvT7pxr4DPvuxM7N0mMpkOy+Tdw
- 5Zx2mu51kXbTZ304oMH/MVeik2FeYoxq6HC/dRb8Tb74FgJ4fSTsa1VKnysmAM5iRr74kFGWojd
- gHtofPByIs0u++vOTxdgYOUbYRRPtVZlMbtGPYQWGCThqCLWjNzCAZ5j4RJlCCyjJWYydcbVvyh
- jr/X+DotfwGTclCYgaaXhcGPipvsYJ/sjR5raq9Jh2r4K9kbIc2vA1SsGsaiF8TC7sgGCiZIDNc
- YHvZ9XE9c/VxvkWh/NFmNRbIOxnoh77o6wprBX8
-X-Received: by 2002:a05:7022:438b:b0:119:e569:f874 with SMTP id
- a92af1059eb24-12aabbaee76mr520375c88.17.1774524530042; 
- Thu, 26 Mar 2026 04:28:50 -0700 (PDT)
+ bh=YOmPf7pVOZfVaKWARfzyjy34cnRpMT9ra0XlHy3wdyk=;
+ b=TjDSqYqxNFVw2qiCy0hmfC6L3PiWGanjD/vm/Zy23Vs8jVlTD2v0u4SBHmkCvRS7Si
+ O4fAQ2IWpexQq2ogDwprHA7EgzmY4nJGxB1IT4XKvgEOL/rjCwiIRlRP6mckgg1nRUfP
+ vzB7doRXHoSYhkVAXjIv+htZ4ICGljbPdVTonpKEBZ1s7V8bqJ8JRbOiXyrLFO2PrtkB
+ M9RV8hjCslpsvCSr7uVJOCMgpp/CmRWCpoJCKEMWwwzsUot8kpolt2Mue8Imq+emyzRH
+ W3JiAnMaIrexwE8EPbBi/X46+HjbWuyYNEPEvTImNKCinYGIg7r7qBxwcjbNKjvM+ax7
+ ZqsA==
+X-Gm-Message-State: AOJu0Ywq7V8fspjdXMZrvJtRwx8fPJlOI3p7PIBwt520gOv2RZbLMajG
+ MtN/SQqQNnpPvRjMhXiWMZiMqPtFRkA4hjxemlXBVgDB3GksiBn0PGZ1eYnd3+gDC2kQpqJ5OHU
+ inILiC3j9W6QfclHIXY+ck+e+Ts/mZ6lXrpI4cPxXEUrEso3OeA3hN5YTQVjWy4sfxEueogM6bE
+ Ujl5KVvvozUjmPQulcxEyiMi53FiletU9dB/C5MzZkF5s=
+X-Gm-Gg: ATEYQzxtMiR+XEnak6dTK0KxvENwAfW32NxiSptpkQ5O8rivUUU6jIHIWtbbCQ5D6p4
+ /OeQzluEvv7n7MxPqva8UYEHfYhTl8xJKNnoLNK+pAvUg4wLLWHGFaa2qsTPXEYmv6JJAnA56TH
+ 1ye3mvgk3qpUQflTJFdQJSOaJavxhvKQL3+Vjjfmnavmg3s1/xOQL+aYCdWUO4Jtf0AkWeYmSQ0
+ 2c7kEUp2Si0batqJTjrXfwtqYlTh1ouolHX0ae5u3ey+dTuVXu1k0lIweMIMlI4pRNAbK+Fcnzg
+ AWeH5Pj49rPqEi3/lX9LOjEMDDyN6cGh0R0aXTuOgs9Vb/LFhHbGXaEw8wxrTpLFbci2VX4X1KV
+ RvBM6gbsW3u7IJdt2+N5H3xiQSNViL3V4EZaSQr0VOM+6CDxQNxUXNI5GTZ5BbWdU2AjVlvi0rq
+ UXXpIna9BWBrvvtxbiER8TFVcYPk49GzTLMrGe3xe3PH5LuB1jhRUJ7P0hZmbNn4okf93CB7KIO
+ DOIM9kL2lDGcuQuvG9rd96z65zbYjWgHJR1I+hQHU30lr/sMZY=
+X-Received: by 2002:a05:7022:490:b0:11f:2c9e:87f8 with SMTP id
+ a92af1059eb24-12a96f0944emr3395503c88.34.1774524533877; 
+ Thu, 26 Mar 2026 04:28:53 -0700 (PDT)
 Received: from fedora (cpe-109-60-83-68.zg3.cable.xnet.hr. [109.60.83.68])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-12aa7624247sm3729221c88.11.2026.03.26.04.28.46
+ a92af1059eb24-12aa7624247sm3729221c88.11.2026.03.26.04.28.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Mar 2026 04:28:49 -0700 (PDT)
+ Thu, 26 Mar 2026 04:28:53 -0700 (PDT)
 From: Robert Marko <robert.marko@sartura.hr>
 To: u-boot@lists.denx.de, trini@konsulko.com, lukma@denx.de, hs@nabladev.com,
  peng.fan@nxp.com, jh80.chung@samsung.com, gregory.clement@bootlin.com,
@@ -80,9 +80,9 @@ To: u-boot@lists.denx.de, trini@konsulko.com, lukma@denx.de, hs@nabladev.com,
  jerome.forissier@arm.com, marex@denx.de, daniel.machon@microchip.com
 Cc: luka.perkov@sartura.hr,
 	Robert Marko <robert.marko@sartura.hr>
-Subject: [PATCH 02/14] pinctrl: add Microchip LAN969x driver
-Date: Thu, 26 Mar 2026 12:26:43 +0100
-Message-ID: <20260326112830.313874-2-robert.marko@sartura.hr>
+Subject: [PATCH 03/14] clk: add Microchip LAN966x and LAN969x support
+Date: Thu, 26 Mar 2026 12:26:44 +0100
+Message-ID: <20260326112830.313874-3-robert.marko@sartura.hr>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260326112830.313874-1-robert.marko@sartura.hr>
 References: <20260326112830.313874-1-robert.marko@sartura.hr>
@@ -104,638 +104,257 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add pinctrl, pinconf and GPIO driver for Microchip LAN969x.
-
-This is updated version of the vendor U-Boot driver to include all
-pinmux functions supported in Linux as well as printing the current
-pinmux as set in the SoC.
+Import clock driver for Microchip LAN966x and LAN969x SoC-s from the vendor
+U-Boot as it is based on the upstream Linux driver.
 
 Signed-off-by: Robert Marko <robert.marko@sartura.hr>
 ---
- drivers/pinctrl/Kconfig           |   8 +
- drivers/pinctrl/Makefile          |   1 +
- drivers/pinctrl/pinctrl-lan969x.c | 582 ++++++++++++++++++++++++++++++
- 3 files changed, 591 insertions(+)
- create mode 100644 drivers/pinctrl/pinctrl-lan969x.c
+ drivers/clk/Makefile                |   2 +-
+ drivers/clk/microchip/Kconfig       |   7 +
+ drivers/clk/microchip/Makefile      |   3 +-
+ drivers/clk/microchip/clk-lan966x.c | 198 ++++++++++++++++++++++++++++
+ 4 files changed, 208 insertions(+), 2 deletions(-)
+ create mode 100644 drivers/clk/microchip/clk-lan966x.c
 
-diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
-index ea90713ec6c..b962c61c8ea 100644
---- a/drivers/pinctrl/Kconfig
-+++ b/drivers/pinctrl/Kconfig
-@@ -227,6 +227,14 @@ config PINCTRL_INTEL
- 	  driver which must be separately enabled. The driver supports setting
- 	  pins on start-up and changing the GPIO attributes.
- 
-+config PINCTRL_LAN969X
-+	bool "Microchip LAN969X pinctrl driver"
-+	depends on DM && TARGET_LAN969X
-+	select PINCONF
-+	select REGMAP
+diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+index 5f0c0d8a5c2..88b76652378 100644
+--- a/drivers/clk/Makefile
++++ b/drivers/clk/Makefile
+@@ -39,7 +39,7 @@ obj-$(CONFIG_CLK_EXYNOS) += exynos/
+ obj-$(CONFIG_CLK_HSDK) += clk-hsdk-cgu.o
+ obj-$(CONFIG_CLK_K210) += clk_k210.o
+ obj-$(CONFIG_CLK_MPC83XX) += mpc83xx_clk.o
+-obj-$(CONFIG_CLK_MPFS) += microchip/
++obj-y += microchip/
+ obj-$(CONFIG_CLK_MVEBU) += mvebu/
+ obj-$(CONFIG_CLK_OCTEON) += clk_octeon.o
+ obj-$(CONFIG_CLK_OWL) += owl/
+diff --git a/drivers/clk/microchip/Kconfig b/drivers/clk/microchip/Kconfig
+index 62072e100b1..275cd849fec 100644
+--- a/drivers/clk/microchip/Kconfig
++++ b/drivers/clk/microchip/Kconfig
+@@ -1,3 +1,10 @@
++config CLK_LAN966X
++	bool "Microchip LAN966X and LAN969X clock support"
++	depends on ARCH_MICROCHIPSW
++	depends on CLK
 +	help
-+	  This option is to enable the LAN969X pinctrl driver.
++	  Clock driver for Microchip LAN969X platforms.
 +
- config PINCTRL_PIC32
- 	bool "Microchip PIC32 pin-control and pin-mux driver"
- 	depends on DM && MACH_PIC32
-diff --git a/drivers/pinctrl/Makefile b/drivers/pinctrl/Makefile
-index 33ff7b95ef2..d0c46268673 100644
---- a/drivers/pinctrl/Makefile
-+++ b/drivers/pinctrl/Makefile
-@@ -12,6 +12,7 @@ obj-$(CONFIG_$(PHASE_)PINCTRL_ROCKCHIP)	+= rockchip/
- obj-$(CONFIG_ARCH_ASPEED) += aspeed/
- obj-$(CONFIG_ARCH_ATH79) += ath79/
- obj-$(CONFIG_PINCTRL_INTEL) += intel/
-+obj-$(CONFIG_PINCTRL_LAN969X) += pinctrl-lan969x.o
- obj-$(CONFIG_ARCH_MTMIPS) += mtmips/
- obj-$(CONFIG_ARCH_NPCM)         += nuvoton/
- obj-$(CONFIG_PINCTRL_QCOM) += qcom/
-diff --git a/drivers/pinctrl/pinctrl-lan969x.c b/drivers/pinctrl/pinctrl-lan969x.c
+ config CLK_MPFS
+ 	bool "Clock support for Microchip PolarFire SoC"
+ 	depends on CLK && CLK_CCF
+diff --git a/drivers/clk/microchip/Makefile b/drivers/clk/microchip/Makefile
+index 329b2c0c93f..bce4cbebd69 100644
+--- a/drivers/clk/microchip/Makefile
++++ b/drivers/clk/microchip/Makefile
+@@ -1 +1,2 @@
+-obj-y += mpfs_clk.o mpfs_clk_cfg.o mpfs_clk_periph.o mpfs_clk_msspll.o
++obj-$(CONFIG_CLK_LAN966X) += clk-lan966x.o
++obj-$(CONFIG_CLK_MPFS) += += mpfs_clk.o mpfs_clk_cfg.o mpfs_clk_periph.o mpfs_clk_msspll.o
+diff --git a/drivers/clk/microchip/clk-lan966x.c b/drivers/clk/microchip/clk-lan966x.c
 new file mode 100644
-index 00000000000..70e66193ddd
+index 00000000000..1d704af006c
 --- /dev/null
-+++ b/drivers/pinctrl/pinctrl-lan969x.c
-@@ -0,0 +1,582 @@
-+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
++++ b/drivers/clk/microchip/clk-lan966x.c
+@@ -0,0 +1,198 @@
++// SPDX-License-Identifier: GPL-2.0+
 +
-+#include <asm/gpio.h>
-+#include <config.h>
++#include <asm/io.h>
++#include <clk-uclass.h>
++#include <div64.h>
 +#include <dm.h>
-+#include <dm/devres.h>
-+#include <dm/device-internal.h>
-+#include <dm/pinctrl.h>
-+#include <errno.h>
-+#include <fdtdec.h>
-+#include <linux/bitfield.h>
-+#include <linux/io.h>
-+#include <linux/types.h>
 +#include <regmap.h>
++#include <syscon.h>
++#include <linux/bitfield.h>
 +
-+/* GPIO standard registers */
-+#define LAN969X_FUNC_PER_PIN	8
++#define GCK_ENA         BIT(0)
++#define GCK_SRC_SEL     GENMASK(9, 8)
++#define GCK_PRESCALER   GENMASK(23, 16)
 +
-+/* GPIO standard registers */
-+#define LAN969X_GPIO_OUT_SET	0x0
-+#define LAN969X_GPIO_OUT_CLR	0x4
-+#define LAN969X_GPIO_OUT	0x8
-+#define LAN969X_GPIO_IN		0xc
-+#define LAN969X_GPIO_OE		0x10
-+#define LAN969X_GPIO_INTR	0x14
-+#define LAN969X_GPIO_INTR_ENA	0x18
-+#define LAN969X_GPIO_INTR_IDENT	0x1c
-+#define LAN969X_GPIO_ALT0	0x20
-+#define LAN969X_GPIO_ALT1	0x24
-+#define LAN969X_GPIO_ALT2	0x28
-+#define LAN969X_GPIO_SD_MAP	0x2c
-+
-+enum {
-+	FUNC_CAN0_a,
-+	FUNC_CAN0_b,
-+	FUNC_CAN1,
-+	FUNC_CLKMON,
-+	FUNC_NONE,
-+	FUNC_FAN,
-+	FUNC_FC,
-+	FUNC_FC_SHRD,
-+	FUNC_FUSA,
-+	FUNC_GPIO,
-+	FUNC_IRQ0,
-+	FUNC_IRQ1,
-+	FUNC_IRQ3,
-+	FUNC_IRQ4,
-+	FUNC_MIIM,
-+	FUNC_MIIM_Sa,
-+	FUNC_MIIM_IRQ,
-+	FUNC_PCIE_PERST,
-+	FUNC_PTPSYNC_0,
-+	FUNC_PTPSYNC_1,
-+	FUNC_PTPSYNC_2,
-+	FUNC_PTPSYNC_3,
-+	FUNC_PTPSYNC_4,
-+	FUNC_PTPSYNC_5,
-+	FUNC_PTPSYNC_6,
-+	FUNC_PTPSYNC_7,
-+	FUNC_QSPI1,
-+	FUNC_R,
-+	FUNC_SD,
-+	FUNC_SFP_SD,
-+	FUNC_SGPIO_a,
-+	FUNC_SYNCE,
-+	FUNC_TWI,
-+	FUNC_USB_POWER,
-+	FUNC_USB2PHY_RST,
-+	FUNC_USB_OVER_DETECT,
-+	FUNC_USB_ULPI,
-+	FUNC_EMMC_SD,
-+	FUNC_MAX
-+};
-+
-+static const char *const lan969x_function_names[FUNC_MAX] = {
-+	[FUNC_CAN0_a]		= "can0_a",
-+	[FUNC_CAN0_b]		= "can0_b",
-+	[FUNC_CAN1]		= "can1",
-+	[FUNC_CLKMON]		= "clkmon",
-+	[FUNC_NONE]		= "none",
-+	[FUNC_FAN]		= "fan",
-+	[FUNC_FC]		= "fc",
-+	[FUNC_FC_SHRD]		= "fc_shrd",
-+	[FUNC_FUSA]		= "fusa",
-+	[FUNC_GPIO]		= "gpio",
-+	[FUNC_IRQ0]		= "irq0",
-+	[FUNC_IRQ1]		= "irq1",
-+	[FUNC_IRQ3]		= "irq3",
-+	[FUNC_IRQ4]		= "irq4",
-+	[FUNC_MIIM]		= "miim",
-+	[FUNC_MIIM_Sa]		= "miim_slave_a",
-+	[FUNC_MIIM_IRQ]		= "miim_irq",
-+	[FUNC_PCIE_PERST]	= "pcie_perst",
-+	[FUNC_PTPSYNC_0]	= "ptpsync_0",
-+	[FUNC_PTPSYNC_1]	= "ptpsync_1",
-+	[FUNC_PTPSYNC_2]	= "ptpsync_2",
-+	[FUNC_PTPSYNC_3]	= "ptpsync_3",
-+	[FUNC_PTPSYNC_4]	= "ptpsync_4",
-+	[FUNC_PTPSYNC_5]	= "ptpsync_5",
-+	[FUNC_PTPSYNC_6]	= "ptpsync_6",
-+	[FUNC_PTPSYNC_7]	= "ptpsync_7",
-+	[FUNC_QSPI1]		= "qspi1",
-+	[FUNC_R]		= "reserved",
-+	[FUNC_SD]		= "sd",
-+	[FUNC_SFP_SD]		= "sfp_sd",
-+	[FUNC_SGPIO_a]		= "sgpio_a",
-+	[FUNC_SYNCE]		= "synce",
-+	[FUNC_TWI]		= "twi",
-+	[FUNC_USB_POWER]	= "usb_power",
-+	[FUNC_USB2PHY_RST]	= "usb2phy_rst",
-+	[FUNC_USB_OVER_DETECT]	= "usb_over_detect",
-+	[FUNC_USB_ULPI]		= "usb_ulpi",
-+	[FUNC_EMMC_SD]		= "emmc_sd",
-+};
-+
-+struct lan969x_pin_caps {
-+	unsigned int pin;
-+	unsigned char functions[LAN969X_FUNC_PER_PIN];
-+};
-+
-+struct lan969x_pin_data {
++struct lan966x_soc_clk_gate_desc {
 +	const char *name;
-+	struct lan969x_pin_caps *drv_data;
++	int bit_idx;
 +};
 +
-+#define LAN969X_P(p, f0, f1, f2, f3, f4, f5, f6, f7)          \
-+static struct lan969x_pin_caps lan969x_pin_##p = {             \
-+	.pin = p,                                              \
-+	.functions = {                                         \
-+		FUNC_##f0, FUNC_##f1, FUNC_##f2,               \
-+		FUNC_##f3, FUNC_##f4, FUNC_##f5,               \
-+		FUNC_##f6, FUNC_##f7                           \
-+	},                                                     \
-+}
-+
-+#define REG(r, info, p) ((r) * (info)->stride + (4 * ((p) / 32)))
-+
-+struct lan969x_pmx_func {
-+	const char **groups;
-+	unsigned int ngroups;
++static const struct lan966x_soc_clk_gate_desc lan966x_clk_gate_desc[] = {
++	{ "uhphs", 11 },
++	{ "udphs", 10 },
++	{ "mcramc", 9 },
++	{ "hmatrix", 8 },
++	{ }
 +};
 +
-+struct lan969x_pinctrl {
-+	struct udevice *dev;
-+	struct pinctrl_dev *pctl;
-+	struct regmap *map;
-+	void __iomem *pincfg;
-+	struct lan969x_pmx_func *func;
-+	int num_func;
-+	const struct lan969x_pin_data *lan969x_pins;
-+	int num_pins;
-+	const char * const *function_names;
-+	const unsigned long *lan969x_gpios;
-+	u8 stride;
++static const struct lan966x_soc_clk_gate_desc lan969x_clk_gate_desc[] = {
++	{ "usb_drd", 10 },
++	{ "mcramc", 9 },
++	{ "hmatrix", 8 },
++	{ }
 +};
 +
-+/* Pinmuxing table taken from data sheet */
-+/*        Pin   FUNC0      FUNC1   FUNC2         FUNC3                  FUNC4     FUNC5      FUNC6        FUNC7 */
-+LAN969X_P(0,    GPIO,      IRQ0,   FC_SHRD,      PCIE_PERST,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(1,    GPIO,      IRQ1,   FC_SHRD,       USB_POWER,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(2,    GPIO,        FC,      NONE,            NONE,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(3,    GPIO,        FC,      NONE,            NONE,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(4,    GPIO,        FC,      NONE,            NONE,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(5,    GPIO,   SGPIO_a,      NONE,          CLKMON,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(6,    GPIO,   SGPIO_a,      NONE,          CLKMON,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(7,    GPIO,   SGPIO_a,      NONE,          CLKMON,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(8,    GPIO,   SGPIO_a,      NONE,          CLKMON,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(9,    GPIO,      MIIM,   MIIM_Sa,          CLKMON,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(10,   GPIO,      MIIM,   MIIM_Sa,          CLKMON,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(11,   GPIO,  MIIM_IRQ,   MIIM_Sa,          CLKMON,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(12,   GPIO,      IRQ3,   FC_SHRD,     USB2PHY_RST,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(13,   GPIO,      IRQ4,   FC_SHRD, USB_OVER_DETECT,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(14,   GPIO,   EMMC_SD,     QSPI1,              FC,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(15,   GPIO,   EMMC_SD,     QSPI1,              FC,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(16,   GPIO,   EMMC_SD,     QSPI1,              FC,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(17,   GPIO,   EMMC_SD,     QSPI1,       PTPSYNC_0,       USB_POWER,     NONE,      NONE,        R);
-+LAN969X_P(18,   GPIO,   EMMC_SD,     QSPI1,       PTPSYNC_1,     USB2PHY_RST,     NONE,      NONE,        R);
-+LAN969X_P(19,   GPIO,   EMMC_SD,     QSPI1,       PTPSYNC_2, USB_OVER_DETECT,     NONE,      NONE,        R);
-+LAN969X_P(20,   GPIO,   EMMC_SD,      NONE,         FC_SHRD,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(21,   GPIO,   EMMC_SD,      NONE,         FC_SHRD,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(22,   GPIO,   EMMC_SD,      NONE,         FC_SHRD,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(23,   GPIO,   EMMC_SD,      NONE,         FC_SHRD,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(24,   GPIO,   EMMC_SD,      NONE,            NONE,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(25,   GPIO,       FAN,      FUSA,          CAN0_a,           QSPI1,     NONE,      NONE,        R);
-+LAN969X_P(26,   GPIO,       FAN,      FUSA,          CAN0_a,           QSPI1,     NONE,      NONE,        R);
-+LAN969X_P(27,   GPIO,     SYNCE,        FC,            MIIM,           QSPI1,     NONE,      NONE,        R);
-+LAN969X_P(28,   GPIO,     SYNCE,        FC,            MIIM,           QSPI1,     NONE,      NONE,        R);
-+LAN969X_P(29,   GPIO,     SYNCE,        FC,        MIIM_IRQ,           QSPI1,     NONE,      NONE,        R);
-+LAN969X_P(30,   GPIO, PTPSYNC_0,  USB_ULPI,         FC_SHRD,           QSPI1,     NONE,      NONE,        R);
-+LAN969X_P(31,   GPIO, PTPSYNC_1,  USB_ULPI,         FC_SHRD,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(32,   GPIO, PTPSYNC_2,  USB_ULPI,         FC_SHRD,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(33,   GPIO,        SD,  USB_ULPI,         FC_SHRD,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(34,   GPIO,        SD,  USB_ULPI,            CAN1,         FC_SHRD,     NONE,      NONE,        R);
-+LAN969X_P(35,   GPIO,        SD,  USB_ULPI,            CAN1,         FC_SHRD,     NONE,      NONE,        R);
-+LAN969X_P(36,   GPIO,        SD,  USB_ULPI,      PCIE_PERST,         FC_SHRD,     NONE,      NONE,        R);
-+LAN969X_P(37,   GPIO,        SD,  USB_ULPI,          CAN0_b,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(38,   GPIO,        SD,  USB_ULPI,          CAN0_b,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(39,   GPIO,        SD,  USB_ULPI,            MIIM,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(40,   GPIO,        SD,  USB_ULPI,            MIIM,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(41,   GPIO,        SD,  USB_ULPI,        MIIM_IRQ,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(42,   GPIO, PTPSYNC_3,      CAN1,            NONE,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(43,   GPIO, PTPSYNC_4,      CAN1,            NONE,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(44,   GPIO, PTPSYNC_5,    SFP_SD,            NONE,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(45,   GPIO, PTPSYNC_6,    SFP_SD,            NONE,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(46,   GPIO, PTPSYNC_7,    SFP_SD,            NONE,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(47,   GPIO,      NONE,    SFP_SD,            NONE,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(48,   GPIO,      NONE,    SFP_SD,            NONE,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(49,   GPIO,      NONE,    SFP_SD,            NONE,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(50,   GPIO,      NONE,    SFP_SD,            NONE,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(51,   GPIO,      NONE,    SFP_SD,            NONE,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(52,   GPIO,       FAN,    SFP_SD,            NONE,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(53,   GPIO,       FAN,    SFP_SD,            NONE,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(54,   GPIO,     SYNCE,        FC,            NONE,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(55,   GPIO,     SYNCE,        FC,            NONE,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(56,   GPIO,     SYNCE,        FC,            NONE,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(57,   GPIO,    SFP_SD,   FC_SHRD,             TWI,       PTPSYNC_3,     NONE,      NONE,        R);
-+LAN969X_P(58,   GPIO,    SFP_SD,   FC_SHRD,             TWI,       PTPSYNC_4,     NONE,      NONE,        R);
-+LAN969X_P(59,   GPIO,    SFP_SD,   FC_SHRD,             TWI,       PTPSYNC_5,     NONE,      NONE,        R);
-+LAN969X_P(60,   GPIO,    SFP_SD,   FC_SHRD,             TWI,       PTPSYNC_6,     NONE,      NONE,        R);
-+LAN969X_P(61,   GPIO,      MIIM,   FC_SHRD,             TWI,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(62,   GPIO,      MIIM,   FC_SHRD,             TWI,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(63,   GPIO,  MIIM_IRQ,   FC_SHRD,             TWI,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(64,   GPIO,        FC,   FC_SHRD,             TWI,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(65,   GPIO,        FC,   FC_SHRD,             TWI,            NONE,     NONE,      NONE,        R);
-+LAN969X_P(66,   GPIO,        FC,   FC_SHRD,             TWI,            NONE,     NONE,      NONE,        R);
-+
-+#define LAN969X_PIN(n) {                                      \
-+	.name = "GPIO_"#n,                                     \
-+	.drv_data = &lan969x_pin_##n                          \
-+}
-+
-+static const struct lan969x_pin_data lan969x_pins[] = {
-+	LAN969X_PIN(0),
-+	LAN969X_PIN(1),
-+	LAN969X_PIN(2),
-+	LAN969X_PIN(3),
-+	LAN969X_PIN(4),
-+	LAN969X_PIN(5),
-+	LAN969X_PIN(6),
-+	LAN969X_PIN(7),
-+	LAN969X_PIN(8),
-+	LAN969X_PIN(9),
-+	LAN969X_PIN(10),
-+	LAN969X_PIN(11),
-+	LAN969X_PIN(12),
-+	LAN969X_PIN(13),
-+	LAN969X_PIN(14),
-+	LAN969X_PIN(15),
-+	LAN969X_PIN(16),
-+	LAN969X_PIN(17),
-+	LAN969X_PIN(18),
-+	LAN969X_PIN(19),
-+	LAN969X_PIN(20),
-+	LAN969X_PIN(21),
-+	LAN969X_PIN(22),
-+	LAN969X_PIN(23),
-+	LAN969X_PIN(24),
-+	LAN969X_PIN(25),
-+	LAN969X_PIN(26),
-+	LAN969X_PIN(27),
-+	LAN969X_PIN(28),
-+	LAN969X_PIN(29),
-+	LAN969X_PIN(30),
-+	LAN969X_PIN(31),
-+	LAN969X_PIN(32),
-+	LAN969X_PIN(33),
-+	LAN969X_PIN(34),
-+	LAN969X_PIN(35),
-+	LAN969X_PIN(36),
-+	LAN969X_PIN(37),
-+	LAN969X_PIN(38),
-+	LAN969X_PIN(39),
-+	LAN969X_PIN(40),
-+	LAN969X_PIN(41),
-+	LAN969X_PIN(42),
-+	LAN969X_PIN(43),
-+	LAN969X_PIN(44),
-+	LAN969X_PIN(45),
-+	LAN969X_PIN(46),
-+	LAN969X_PIN(47),
-+	LAN969X_PIN(48),
-+	LAN969X_PIN(49),
-+	LAN969X_PIN(50),
-+	LAN969X_PIN(51),
-+	LAN969X_PIN(52),
-+	LAN969X_PIN(53),
-+	LAN969X_PIN(54),
-+	LAN969X_PIN(55),
-+	LAN969X_PIN(56),
-+	LAN969X_PIN(57),
-+	LAN969X_PIN(58),
-+	LAN969X_PIN(59),
-+	LAN969X_PIN(60),
-+	LAN969X_PIN(61),
-+	LAN969X_PIN(62),
-+	LAN969X_PIN(63),
-+	LAN969X_PIN(64),
-+	LAN969X_PIN(65),
-+	LAN969X_PIN(66),
++struct lan966x_clk {
++	void *base;
++	void *gate;
++	int clk_cnt;
++	int clk_gate_cnt;
++	const struct lan966x_soc_clk_gate_desc *clk_gate_desc;
++	ulong parent_rate;
 +};
 +
-+static int lan969x_gpio_probe(struct udevice *dev)
-+{
-+	struct gpio_dev_priv *uc_priv;
-+
-+	uc_priv = dev_get_uclass_priv(dev);
-+	uc_priv->bank_name = "lan969x-gpio";
-+	uc_priv->gpio_count = ARRAY_SIZE(lan969x_pins);
-+
-+	return 0;
-+}
-+
-+static int lan969x_gpio_get(struct udevice *dev, unsigned int offset)
-+{
-+	struct lan969x_pinctrl *info = dev_get_priv(dev->parent);
-+	unsigned int val;
-+
-+	regmap_read(info->map, REG(LAN969X_GPIO_IN, info, offset), &val);
-+
-+	return !!(val & BIT(offset % 32));
-+}
-+
-+static int lan969x_gpio_set(struct udevice *dev, unsigned int offset, int value)
-+{
-+	struct lan969x_pinctrl *info = dev_get_priv(dev->parent);
-+
-+	if (value)
-+		regmap_write(info->map, REG(LAN969X_GPIO_OUT_SET, info, offset),
-+			     BIT(offset % 32));
-+	else
-+		regmap_write(info->map, REG(LAN969X_GPIO_OUT_CLR, info, offset),
-+			     BIT(offset % 32));
-+
-+	return 0;
-+}
-+
-+static int lan969x_gpio_get_direction(struct udevice *dev, unsigned int offset)
-+{
-+	struct lan969x_pinctrl *info = dev_get_priv(dev->parent);
-+	unsigned int val;
-+
-+	regmap_read(info->map, REG(LAN969X_GPIO_OE, info, offset), &val);
-+
-+	if (val & BIT(offset % 32))
-+		return GPIOF_OUTPUT;
-+
-+	return GPIOF_INPUT;
-+}
-+
-+static int lan969x_gpio_direction_input(struct udevice *dev, unsigned int offset)
-+{
-+	struct lan969x_pinctrl *info = dev_get_priv(dev->parent);
-+
-+	regmap_write(info->map, REG(LAN969X_GPIO_OE, info, offset),
-+		     ~BIT(offset % 32));
-+
-+	return 0;
-+}
-+
-+static int lan969x_gpio_direction_output(struct udevice *dev,
-+					 unsigned int offset, int value)
-+{
-+	struct lan969x_pinctrl *info = dev_get_priv(dev->parent);
-+
-+	regmap_write(info->map, REG(LAN969X_GPIO_OE, info, offset),
-+		     BIT(offset % 32));
-+
-+	return lan969x_gpio_set(dev, offset, value);
-+}
-+
-+const struct dm_gpio_ops lan969x_gpio_ops = {
-+	.set_value = lan969x_gpio_set,
-+	.get_value = lan969x_gpio_get,
-+	.get_function = lan969x_gpio_get_direction,
-+	.direction_input = lan969x_gpio_direction_input,
-+	.direction_output = lan969x_gpio_direction_output,
++struct lan966x_driver_data {
++	int clk_cnt;
++	int clk_gate_cnt;
++	const struct lan966x_soc_clk_gate_desc *clk_gate_desc;
++	ulong parent_rate;
 +};
 +
-+static int lan969x_pctl_get_groups_count(struct udevice *dev)
-+{
-+	struct lan969x_pinctrl *info = dev_get_priv(dev);
++static struct lan966x_driver_data lan966x_data = {
++	.clk_cnt = 14,
++	.clk_gate_cnt = 4,
++	.clk_gate_desc = lan966x_clk_gate_desc,
++	.parent_rate = 600000000,
++};
 +
-+	return info->num_pins;
++static struct lan966x_driver_data lan969x_data = {
++	.clk_cnt = 12,
++	.clk_gate_cnt = 3,
++	.clk_gate_desc = lan969x_clk_gate_desc,
++	.parent_rate = 1000000000,
++};
++
++static void* lan966x_clk_ctlreg(struct lan966x_clk *gck, u8 id)
++{
++	return gck->base + (id * sizeof(u32));
 +}
 +
-+static const char *lan969x_pctl_get_group_name(struct udevice *dev,
-+					    unsigned int group)
++static ulong lan966x_clk_set_rate(struct clk *clk, ulong rate)
 +{
-+	struct lan969x_pinctrl *info = dev_get_priv(dev);
++	struct lan966x_clk *gck = dev_get_priv(clk->dev);
++	unsigned long parent_rate = gck->parent_rate;
++	u32 div;
 +
-+	return info->lan969x_pins[group].name;
-+}
++	if (clk->id >= gck->clk_cnt)
++		return -ENODEV;
 +
-+static int lan969x_get_functions_count(struct udevice *dev)
-+{
-+	struct lan969x_pinctrl *info = dev_get_priv(dev);
-+
-+	return info->num_func;
-+}
-+
-+static const char *lan969x_get_function_name(struct udevice *dev,
-+					  unsigned int function)
-+{
-+	struct lan969x_pinctrl *info = dev_get_priv(dev);
-+
-+	return info->function_names[function];
-+}
-+
-+static int lan969x_pin_function_idx(unsigned int pin, unsigned int function,
-+				    const struct lan969x_pin_data *lan969x_pins)
-+{
-+	struct lan969x_pin_caps *p = lan969x_pins[pin].drv_data;
-+	int i;
-+
-+	for (i = 0; i < LAN969X_FUNC_PER_PIN; i++) {
-+		if (function == p->functions[i])
-+			return i;
-+	}
-+
-+	return -1;
-+}
-+
-+#define REG_ALT(msb, info, p) (LAN969X_GPIO_ALT0 * (info)->stride + 4 * ((msb) + ((info)->stride * ((p) / 32))))
-+
-+static int lan969x_pinmux_set_mux(struct udevice *dev,
-+				  unsigned int pin_selector, unsigned int selector)
-+{
-+	struct lan969x_pinctrl *info = dev_get_priv(dev);
-+	struct lan969x_pin_caps *pin = info->lan969x_pins[pin_selector].drv_data;
-+	unsigned int p = pin->pin % 32;
-+	int f;
-+
-+	f = lan969x_pin_function_idx(pin_selector, selector, info->lan969x_pins);
-+	if (f < 0)
++	if (rate == 0)
 +		return -EINVAL;
 +
-+	/*
-+	 * f is encoded on two bits.
-+	 * bit 0 of f goes in BIT(pin) of ALT[0], bit 1 of f goes in BIT(pin) of
-+	 * ALT[1], bit 2 of f goes in BIT(pin) of ALT[2]
-+	 * This is racy because both registers can't be updated at the same time
-+	 * but it doesn't matter much for now.
-+	 * Note: ALT0/ALT1/ALT2 are organized specially for 78 gpio targets
-+	 */
-+	regmap_update_bits(info->map, REG_ALT(0, info, pin->pin),
-+			   BIT(p), f << p);
-+	regmap_update_bits(info->map, REG_ALT(1, info, pin->pin),
-+			   BIT(p), (f >> 1) << p);
-+	regmap_update_bits(info->map, REG_ALT(2, info, pin->pin),
-+			   BIT(p), (f >> 2) << p);
++	/* Calc divisor */
++	div = DIV_ROUND_CLOSEST(parent_rate, rate);
++
++	/* Set src, prescaler */
++	clrsetbits_le32(lan966x_clk_ctlreg(gck, clk->id),
++			GCK_SRC_SEL | GCK_PRESCALER,
++			/* Select CPU_CLK as source always */
++			FIELD_PREP(GCK_SRC_SEL, 0x0) |
++			/* Divisor - 1 */
++			FIELD_PREP(GCK_PRESCALER, (div - 1)));
 +
 +	return 0;
 +}
 +
-+/* Non-constant mask variant of FIELD_GET */
-+#define field_get(_mask, _reg) (((_reg) & (_mask)) >> (ffs(_mask) - 1))
-+
-+static int lan969x_get_pin_muxing(struct udevice *dev, unsigned int selector,
-+				  char *buf, int size)
++static ulong lan966x_clk_get_rate(struct clk *clk)
 +{
-+	struct lan969x_pinctrl *info = dev_get_priv(dev);
-+	struct lan969x_pin_caps *pin = info->lan969x_pins[selector].drv_data;
-+	unsigned int alt0, alt1, alt2, function = 0;
++	struct lan966x_clk *gck = dev_get_priv(clk->dev);
++	unsigned long parent_rate = gck->parent_rate;
++	u32 div, val;
 +
-+	regmap_read(info->map, REG_ALT(0, info, pin->pin), &alt0);
-+	regmap_read(info->map, REG_ALT(1, info, pin->pin), &alt1);
-+	regmap_read(info->map, REG_ALT(2, info, pin->pin), &alt2);
++	if (clk->id >= gck->clk_cnt)
++		return -ENODEV;
 +
-+	function |= FIELD_PREP(BIT(0), field_get(BIT(pin->pin), alt0));
-+	function |= FIELD_PREP(BIT(1), field_get(BIT(pin->pin), alt1));
-+	function |= FIELD_PREP(BIT(2), field_get(BIT(pin->pin), alt2));
++	val = readl(lan966x_clk_ctlreg(gck, clk->id));
 +
-+	snprintf(buf, size, "%s", lan969x_get_function_name(dev, pin->functions[function]));
-+	return 0;
++	div = 1 + FIELD_GET(GCK_PRESCALER, val);
++
++	return parent_rate / div;
 +}
 +
-+#if CONFIG_IS_ENABLED(PINCONF)
-+static const struct pinconf_param lan969x_pinconf_params[] = {
-+	{ "bias-disable", PIN_CONFIG_BIAS_DISABLE, 0 },
-+	{ "bias-pull-up", PIN_CONFIG_BIAS_PULL_UP, 1 },
-+	{ "bias-pull-down", PIN_CONFIG_BIAS_PULL_DOWN, 0 },
-+	{ "drive-strength", PIN_CONFIG_DRIVE_STRENGTH, 0 },
-+};
-+
-+static int lan969x_pinconf_set(struct udevice *dev, unsigned int pin,
-+			    unsigned int param, unsigned int arg)
++static int lan966x_clk_enable(struct clk *clk)
 +{
-+	struct lan969x_pinctrl *info = dev_get_priv(dev);
-+	unsigned int val;
-+	int err = 0;
++	struct lan966x_clk *gck = dev_get_priv(clk->dev);
 +
-+	if (info->pincfg == NULL)
-+		return err;
++	if (clk->id >= gck->clk_cnt) {
++		/* If there are no gate clock then this is not allowed */
++		if (gck->gate == NULL)
++			return -ENODEV;
 +
-+	switch (param) {
-+	case PIN_CONFIG_BIAS_DISABLE:
-+	case PIN_CONFIG_BIAS_PULL_UP:
-+	case PIN_CONFIG_BIAS_PULL_DOWN:
-+		val = readl(info->pincfg + (pin * 4));
-+		val &= ~(BIT(3) | BIT(2));
-+		val |= (param == PIN_CONFIG_BIAS_DISABLE) ? 0 :
-+		       (param == PIN_CONFIG_BIAS_PULL_UP) ? BIT(3) : BIT(2);
-+		writel(val, info->pincfg + (pin * 4));
-+		break;
-+	case PIN_CONFIG_DRIVE_STRENGTH:
-+		if (arg <= 3) {
-+			val = readl(info->pincfg + (pin * 4));
-+			val &= ~GENMASK(1, 0);
-+			val |= arg;
-+			writel(val, info->pincfg + (pin * 4));
-+		} else {
-+			err = -EINVAL;
-+		}
-+		break;
-+	default:
-+		err = -ENOTSUPP;
++		if (clk->id >= gck->clk_cnt + gck->clk_gate_cnt)
++			return -ENODEV;
++
++		setbits_le32(gck->gate,
++			     BIT(gck->clk_gate_desc[clk->id - gck->clk_cnt].bit_idx));
++
++		return 0;
 +	}
 +
-+	return err;
++	setbits_le32(lan966x_clk_ctlreg(gck, clk->id), GCK_ENA);
++
++	return 0;
 +}
-+#endif
 +
-+const struct pinctrl_ops lan969x_pinctrl_ops = {
-+	.get_pins_count = lan969x_pctl_get_groups_count,
-+	.get_pin_name = lan969x_pctl_get_group_name,
-+	.get_pin_muxing = lan969x_get_pin_muxing,
-+	.get_functions_count = lan969x_get_functions_count,
-+	.get_function_name = lan969x_get_function_name,
-+	.pinmux_set = lan969x_pinmux_set_mux,
-+	.set_state = pinctrl_generic_set_state,
-+#if CONFIG_IS_ENABLED(PINCONF)
-+	.pinconf_num_params = ARRAY_SIZE(lan969x_pinconf_params),
-+	.pinconf_params = lan969x_pinconf_params,
-+	.pinconf_set = lan969x_pinconf_set,
-+#endif
-+};
-+
-+static struct driver lan969x_gpio_driver = {
-+	.name	= "lan969x-gpio",
-+	.id	= UCLASS_GPIO,
-+	.probe	= lan969x_gpio_probe,
-+	.ops	= &lan969x_gpio_ops,
-+};
-+
-+int lan969x_pinctrl_probe(struct udevice *dev)
++static int lan966x_clk_disable(struct clk *clk)
 +{
-+	struct lan969x_pinctrl *priv = dev_get_priv(dev);
-+	int ret;
++	struct lan966x_clk *gck = dev_get_priv(clk->dev);
 +
-+	ret = regmap_init_mem(dev_ofnode(dev), &priv->map);
-+	if (ret)
-+		return -EINVAL;
++	if (clk->id >= gck->clk_cnt) {
++		/* If there are no gate clock then this is not allowed */
++		if (gck->gate == NULL)
++			return -ENODEV;
 +
-+	priv->pincfg = dev_remap_addr_index(dev, 1);
++		if (clk->id >= gck->clk_cnt + gck->clk_gate_cnt)
++			return -ENODEV;
 +
-+	priv->func = devm_kzalloc(dev, FUNC_MAX * sizeof(struct lan969x_pmx_func), GFP_KERNEL);
-+	priv->num_func = FUNC_MAX;
-+	priv->function_names = lan969x_function_names;
++		clrbits_le32(gck->gate, BIT(gck->clk_gate_desc[clk->id - gck->clk_cnt].bit_idx));
 +
-+	priv->lan969x_pins = lan969x_pins;
-+	priv->num_pins = ARRAY_SIZE(lan969x_pins);
-+	priv->stride = 1 + (priv->num_pins - 1) / 32;
++		return 0;
++	}
 +
-+	ret = device_bind(dev, &lan969x_gpio_driver, "lan969x-gpio", NULL,
-+			  dev_ofnode(dev), NULL);
++	clrbits_le32(lan966x_clk_ctlreg(gck, clk->id), GCK_ENA);
 +
-+	return ret;
++	return 0;
 +}
 +
-+static const struct udevice_id lan969x_pinctrl_of_match[] = {
-+	{.compatible = "microchip,lan9691-pinctrl"},
-+	{},
++static int lan966x_clk_probe(struct udevice *dev)
++{
++	struct lan966x_clk *priv = dev_get_priv(dev);
++	struct lan966x_driver_data *data;
++
++	priv->base = dev_remap_addr(dev);
++	if (IS_ERR(priv->base))
++		return PTR_ERR(priv->base);
++
++	priv->gate = dev_remap_addr_index(dev, 1);
++
++	/* Get clock count for target device */
++	data = (struct lan966x_driver_data*)dev_get_driver_data(dev);
++	priv->clk_cnt = data->clk_cnt;
++	priv->clk_gate_cnt = data->clk_gate_cnt;
++	priv->clk_gate_desc = data->clk_gate_desc;
++	priv->parent_rate = data->parent_rate;
++
++	return 0;
++}
++
++static struct clk_ops lan966x_clk_ops = {
++	.disable	= lan966x_clk_disable,
++	.enable		= lan966x_clk_enable,
++	.get_rate	= lan966x_clk_get_rate,
++	.set_rate	= lan966x_clk_set_rate,
 +};
 +
-+U_BOOT_DRIVER(lan969x_pinctrl) = {
-+	.name = "lan969x-pinctrl",
-+	.id = UCLASS_PINCTRL,
-+	.of_match = of_match_ptr(lan969x_pinctrl_of_match),
-+	.probe = lan969x_pinctrl_probe,
-+	.priv_auto = sizeof(struct lan969x_pinctrl),
-+	.ops = &lan969x_pinctrl_ops,
++static const struct udevice_id lan966x_clk_ids[] = {
++	{ .compatible = "microchip,lan966x-gck", .data = (unsigned long)&lan966x_data },
++	{ .compatible = "microchip,lan9691-gck", .data = (unsigned long)&lan969x_data },
++	{ }
++};
++
++U_BOOT_DRIVER(lan966x_clk) = {
++	.name		= "lan966x_clk",
++	.id		= UCLASS_CLK,
++	.of_match	= lan966x_clk_ids,
++	.priv_auto	= sizeof(struct lan966x_clk),
++	.ops		= &lan966x_clk_ops,
++	.probe		= lan966x_clk_probe,
 +};
 -- 
 2.53.0
