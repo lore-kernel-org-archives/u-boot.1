@@ -4,112 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F46010A1E60
-	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 10:42:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D0A010A1E72
+	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 11:04:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F23C083A1B;
-	Thu, 26 Mar 2026 11:42:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 7584083A1B;
+	Thu, 26 Mar 2026 12:04:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="cGvdFrfn";
+	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="q32R/s1b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D56783CD3; Thu, 26 Mar 2026 11:42:23 +0100 (CET)
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::9])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0E88983CD3; Thu, 26 Mar 2026 12:04:40 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5F8181E18
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 11:42:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E7AAC81E18
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 12:04:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Pranav.sanwal@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hOgAbNtos40x5J/gZkwpNgqhVF2Ku2GfDgPgpvVZGQOcjbREUFevxNRi1dd4ax3i2vBYyWBTa+FdB4jSdVJavmFCMRz1hrQ2VSXEWjyQzy+hMVU5giwqdoZSPH5Xer1y/XUGS5DQlmiUlxd58rKK1zn9QEH/YNHPkRMwCq2Co/o/xeEtWBQ1sjIp+wHRkffU3AvD3jB0AH/9oEvKXtE4PolCgttYvpatiIcakaYrxhS/xvVPl3ICQYgTpCdY4fHaiZS9h4WCaCeN8yVfAoItXeEBCsbGq6Qzkf+z+MOkgS8IO4lumfpPs5CjQPEoY2JP2GrU18wDjUqX+B9kMaIn3Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GZ2uOW50RZ/Tm7LFQfROcyqx1yxWtIiqsMqoRqVSg9w=;
- b=PXpyPhjE635vQ7VCunmL7JO5arL5v0kWRzqE02QP/TG/bFvy/VET/E7CHbP160gnyh9rCEwJjt+4YEQqVGl/OZodOWNK5rJm2KJ3mEjDz0vdzu/9x9Dgvlw0RdsxhJb3plNlFfRt54VHJqcHUnsYjRlsak4pTricG4rZuJdVSqmKjL5ZMZMIg7hw622dlGK3Ge4B2+DY0ddyEiptRFKVKFjBEJFfx3Suzjef3QUKAzLRBd1gahaoWkKmNN+LLQfSycS8AIhMjHNDuIrioNz3zQbQqxc2tszBD8oKEV1uMbzFdFCu7EnyvraqCjomOSIJZJxLKIn71RHaLRB7cCuWBg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GZ2uOW50RZ/Tm7LFQfROcyqx1yxWtIiqsMqoRqVSg9w=;
- b=cGvdFrfn4rLPhBUWUWnvThvuhA5YtWI6VlZeQ1JJqdklsJWlLSoH5kk78ps9vnYpdeMozja+QfkN6qNgJRj2ltJE4m/Cx6Mn6tqT9NJYpsL9d7ArWfsyXnRCVu3HyUeGXgtfHEP5fdz+/sq/nCDjSSrg0Q0EducW5ydjWswkxmE=
-Received: from SJ0PR05CA0126.namprd05.prod.outlook.com (2603:10b6:a03:33d::11)
- by DS0PR12MB6607.namprd12.prod.outlook.com (2603:10b6:8:d1::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.8; Thu, 26 Mar
- 2026 10:42:14 +0000
-Received: from SJ1PEPF00001CEA.namprd03.prod.outlook.com
- (2603:10b6:a03:33d:cafe::12) by SJ0PR05CA0126.outlook.office365.com
- (2603:10b6:a03:33d::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.20 via Frontend Transport; Thu,
- 26 Mar 2026 10:42:13 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- SJ1PEPF00001CEA.mail.protection.outlook.com (10.167.242.26) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9745.21 via Frontend Transport; Thu, 26 Mar 2026 10:42:13 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 26 Mar
- 2026 05:42:07 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 26 Mar
- 2026 05:42:06 -0500
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Thu, 26 Mar 2026 05:42:05 -0500
-From: Pranav Sanwal <pranav.sanwal@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <git@amd.com>, <michal.simek@amd.com>
-Subject: [PATCH] net: lwip: tftp: update image_load_addr after successful
- transfer
-Date: Thu, 26 Mar 2026 16:11:58 +0530
-Message-ID: <20260326104158.4182723-1-pranav.sanwal@amd.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=robert.marko@sartura.hr
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-6674cba2c50so2977875a12.0
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 04:04:37 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774523077; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Fb4uwFB6a7UYisZUqp2/4nZt+ZQvbVFoJCoohy4Z8LmVFh/0N2+03ijtqfv3T1b9k5
+ FIfG/bcwq3Msk0YI0J3VbTX6ixprRoJ7Jh0HPUUF2TuFJnoefl08c96QxOJVv5E5ndq+
+ i4ZszpFHE1opWeEBfWmSSz2JF34dDTMMNQkjQq4ilec6uEivkINRHrtpT/iPafUXWc0p
+ yqn1QTjne5P5hxvYnB6kudcy2eVtfXya+JRmh3qejQkwJLGM5F2fthQyjv6I5wJ6FNTE
+ DX8vtfurXqxECMumGSijnbMzXiXqJ09owiAKwPe4T9bn+WVlxVG9ql32m/O4VwMc5LAT
+ KfnA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=ElcPPX/orCyBpBNalv+zzTQuclAepCTeILX63NlpZEQ=;
+ fh=b/59rRfUTTMuKCQOd2M8mPkKtPAZ1mLPI+Y3K2VJOyo=;
+ b=XyqKFYO1LcFI8m2dFlWfGVGdv40DX84vvR6gYyu0KAvcy/geoTxW07TabZ0oHGUB+s
+ mQOiUWYMK8czTplOp8KMd8MjW1nf+LENE3u9tX1QriULCbxwUhitqE9e7AZUTbrFF+iV
+ CrhXkkLzb5VSck6Br7R/GO5bJg/5yOJfbwngwOQN63yLlRqf1o6E9bJzVaeC3EK1hQq+
+ CNj2EL89vyKzNUJIw0PEtNo9df65bVtHWW4MF7LWOmdEROchrGw+QXtGD1pS7tYrES8u
+ fgZlvtZAlPXRO46qjOHTancx40x836z8qqNs4wzQG/uCE42wA4pQl9dek+RIHrP2XKcc
+ 3H+g==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sartura.hr; s=sartura; t=1774523077; x=1775127877; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ElcPPX/orCyBpBNalv+zzTQuclAepCTeILX63NlpZEQ=;
+ b=q32R/s1blIiG+r30hI/mvKLtFTIAPKZJb2AFa7djxhtkFZ4ZOVcSaY2anGK57oayNg
+ 99/Jl+3vdDLeQaRXAn79p7vYeOcar9+Zo/JqCYKvy7hvC+55UnuZB/k2MgdeYVQXHAmj
+ rFxeso/dB4I+jlArkgrVFk03A2FLhZBpAI53tPHDUjx7faESnggPSTbd2WJ7uFMDWVsy
+ 6zzxFGJwUHefVClETpwnz9f+XkX3eUhdRTY7STn5PoZgf9O51bAA9FRciTLXS2jMnJNB
+ KletqNORlyVTAqVYd7X+R+1j5QZKzQYZmAGby9PKPKTB//gFLcAJEk9aMhIyOF/AbAee
+ EDSA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774523077; x=1775127877;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=ElcPPX/orCyBpBNalv+zzTQuclAepCTeILX63NlpZEQ=;
+ b=ER4ZAF8uM6TuCL27kwJdtl4otUVFUuJFU8/VWedSqsGwaqd6pK/vwMycMoquJNToJW
+ f+2O4DDZL1cRCaI6paGjY1NNcal+F1i1qGugvkzv3wJ/c+Elab6v2CvzwHafZqOJM6QY
+ uRoh8LtLLFIydW/lUMnhMNj7fgloC+a5ySB3vyfjiwf7NlJnQBhkdVnFRFe/+4Y2oUCS
+ 8BMX+tPWXJL79KdtNeZQpi/DU80noQj7GOH9xJQOE8Bk/icZU9xpp6TtAVwjGqlnHPz1
+ kT3Rm2BaMd7SRAs7uO+KUhhApqJmTsVNX09Gb5YMrHpzlzl2hSBfkQJ4y5rd1ncZUYl0
+ 2uhA==
+X-Gm-Message-State: AOJu0Yxb11OzrvHCwu10ecfsolIiQDnyiFplv9llhjJpXJ13NOP8LsAk
+ Rq+eDBlT+EUeSR/KATpof+ljRL8lsFlMnGpaZ1bDknEdAqixRyW8nVWAfUbncj8O/XMb6WfQUIc
+ Bfq/b58GcAq4pDDcafd5x/6aE+7kzx/ERIS1MP8s0YA==
+X-Gm-Gg: ATEYQzzPfyO/hHMxAhvHIskt0OM4f5AAoPvilY3GG7fplT+eNLcIzlXVRrtQtgUQQ6/
+ ARAas9pU2tstGWqM2TUdFwkRbjotlrJ/CfLxnJk4WItgf686xEbQ4pGfKgRt9Oa0TawDWLmwHyJ
+ LDYqrV7c4GTUPH6knFRT+EUabLLoW6raVQjIeD2SLqH1QdcPuPodhPW5ciGm3+pISf8cuT2pvJy
+ 8ZE/OyLI4sdmBS0Apg0hldJfcNTFZdIccHorcdsb27uhm4w5GRFLrwl5gQCp/hwBsG0+3zhC7La
+ RQ4cYjgyeRGjHCG/kdnnNEuQer3K9JBEAnPmHHTQOvgW7dDK589AY3eSqjNxUg==
+X-Received: by 2002:a17:906:c155:b0:b97:9a7a:9d21 with SMTP id
+ a640c23a62f3a-b9b2e5481abmr76673266b.4.1774523077336; Thu, 26 Mar 2026
+ 04:04:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CEA:EE_|DS0PR12MB6607:EE_
-X-MS-Office365-Filtering-Correlation-Id: 51820dd1-b782-43a4-217e-08de8b245782
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|1800799024|36860700016|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: r4JW0Rlw3HZ1gRkE8Jqi9vKf34/Lsf7tZ5VAExXt173mz3rbi6qkzfrTZnznbmes51fbzlnNMEoWXhZXabv/NY7bla7N9Z/xBQ7QM98Sasc9Rd8+plM4qPKrL/gvzfhetNeM2cRRo2Ba6no7YZdHCzdPIOvpiW1y+1Z66rV5g6rgn6SGOw4X440DZLgyF9tEDMIw9w65NPT6A5CODgESwXDjY0v8sbKhITSoVEBKLdYKZCRvZO6ZYpi7AqMqP9Qp+xpvqu3qwZPRHo/3gNc+MRSzIAPy7Lje5sRJV6/m+qOOXo0NQQ4a9uy7AXrFebNH/ySOc1oIuUJIvpTR+QKUCD9xZzXyHoRw3nAewizCP249AZxOvWFFYFs5PcgY4nVrVVN2banltCqcCI9u4XlodzLLGhUP31lRkI2jKBw7z5/G9siFquK6xoeQlnT3PqZrRK47ZUhgoPVpW7Ci602J67GrilJ3tdLBFJsHOgFyHw0MKKvnTEKMCXRo60OV5I96EzmWK0F4xVLN29MgcAtR4NnvFMWCjHQgYCSZHynP94uOx7N/7PGvbrhSHWmvS3Jbs15PAf9MRqNNdPtZVr4hvBoz5IPaGvrGv6CGpcBRDi21b91J9obv/MYSn1IFXgUZmkxu7/C8WBY+7WlTSkG0H5tr0SywZmGX65eGkJ9+ImorO2/9PjQXDz6XzLrbPGs2VLxub74FoU/dY+e/XaunjLAZqVNNYsPupET57/X56Hqo6R5ALssX6zBsOKgviy0ztdVJnhXH4SRB2Ib+rbsReA==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(1800799024)(36860700016)(18002099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: ONVOdWdzudrDIPvJWcH0gKNdd7cQvkqOjSBoC3ET8LV7QcUVtv0qk+jekBbI6pT8Fx8a7XfUSUqpm/A+LHRgEOtTEzcYEYuNos07WpCblPAFQ/lCgLk1D4yGZ0fSVbBQTn1r8B2DNTR7AOFlh5JPZpayqxZcvR9FqY92f7RsZx8b3p/kJBQvAHABE1FU1dK0/623kMcoojK2gGrICIIDd37bDxs/XgcOESAI3Zjc20Q9j9ScbNlB6YAEyrTHKRUZIjXtPrpJDuEwbOXkQzChMVAzrwuEUZc+NeW5MgtD4X5aWnFKxwM2JocdVeVMzzQtWWelSIUtpVtUVO+UEQiWYSZDLiNFIiZlOWUxx4piWEaYCjdS2H7d3W9gwt5kb0cEv2k77o2DzvZrtmwmxvKx4SarsR8XSXHp12ZhsmkJxrIopGMge/+lJrpFnmhJW9tE
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Mar 2026 10:42:13.5432 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 51820dd1-b782-43a4-217e-08de8b245782
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00001CEA.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6607
+References: <20260325190022.3428531-1-trini@konsulko.com>
+In-Reply-To: <20260325190022.3428531-1-trini@konsulko.com>
+From: Robert Marko <robert.marko@sartura.hr>
+Date: Thu, 26 Mar 2026 12:04:25 +0100
+X-Gm-Features: AQROBzB6F-BsCgv0S5C3d7MTBPK6er0Z87VHwPiXW4tLRe7nOJIuAn41Xonq0qU
+Message-ID: <CA+HBbNHqG_w1kxtp_B9otXSGf2nSac6FaeVBtE+6qT9sb_PpMQ@mail.gmail.com>
+Subject: Re: [PATCH] arm: mvebu: Drop unnecessary BOARD_EARLY_INIT_F usage
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Stefan Roese <sr@denx.de>, 
+ Konstantin Porotchkin <kostap@marvell.com>, Ben Schneider <ben@bens.haus>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,34 +114,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-do_tftpb() parses the load address into a local variable laddr but
-never updates the global image_load_addr. Commands that rely on
-image_load_addr as their default address (e.g. 'bmp info')
-therefore operate on the wrong address when called without
-an explicit argument after tftpboot.
+On Wed, Mar 25, 2026 at 8:00=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> All of these platforms enable CONFIG_BOARD_EARLY_INIT_F and then have a
+> do-nothing board_early_init_f function. Change to not enabling the
+> option and so not needing an empty function.
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 
-Update image_load_addr to laddr only on a successful transfer, so
-that it accurately reflects where data was actually loaded.
+Reviewed-by: Robert Marko <robert.marko@sartura.hr>
 
-Fixes: 4d4d7838127e ("net: lwip: add TFTP support and tftpboot command")
-Signed-off-by: Pranav Sanwal <pranav.sanwal@amd.com>
----
- net/lwip/tftp.c | 2 ++
- 1 file changed, 2 insertions(+)
+> ---
+> Cc: Stefan Roese <sr@denx.de>
+> Cc: Robert Marko <robert.marko@sartura.hr>
+> Cc: Konstantin Porotchkin <kostap@marvell.com>
+> Cc: Ben Schneider <ben@bens.haus>
+> ---
+>  board/Marvell/mvebu_armada-37xx/board.c           | 5 -----
+>  configs/eDPU_defconfig                            | 1 -
+>  configs/mvebu_db-88f3720_defconfig                | 1 -
+>  configs/mvebu_espressobin-88f3720_defconfig       | 1 -
+>  configs/mvebu_espressobin_ultra-88f3720_defconfig | 1 -
+>  configs/uDPU_defconfig                            | 1 -
+>  6 files changed, 10 deletions(-)
+>
+> diff --git a/board/Marvell/mvebu_armada-37xx/board.c b/board/Marvell/mveb=
+u_armada-37xx/board.c
+> index e44b713f96d7..c30fca6cffd8 100644
+> --- a/board/Marvell/mvebu_armada-37xx/board.c
+> +++ b/board/Marvell/mvebu_armada-37xx/board.c
+> @@ -102,11 +102,6 @@ static bool is_edpu_plus(void)
+>                 return false;
+>  }
+>
+> -int board_early_init_f(void)
+> -{
+> -       return 0;
+> -}
+> -
+>  int board_init(void)
+>  {
+>         /* adress of boot parameters */
+> diff --git a/configs/eDPU_defconfig b/configs/eDPU_defconfig
+> index 0b7815c78a30..98ba91aa568f 100644
+> --- a/configs/eDPU_defconfig
+> +++ b/configs/eDPU_defconfig
+> @@ -23,7 +23,6 @@ CONFIG_SYS_PBSIZE=3D1048
+>  # CONFIG_DISPLAY_CPUINFO is not set
+>  # CONFIG_DISPLAY_BOARDINFO is not set
+>  CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
+> -CONFIG_BOARD_EARLY_INIT_F=3Dy
+>  CONFIG_SYS_PROMPT=3D"eDPU>> "
+>  CONFIG_SYS_MAXARGS=3D32
+>  # CONFIG_CMD_ELF is not set
+> diff --git a/configs/mvebu_db-88f3720_defconfig b/configs/mvebu_db-88f372=
+0_defconfig
+> index 52ad18e4dd91..b7a2559997fe 100644
+> --- a/configs/mvebu_db-88f3720_defconfig
+> +++ b/configs/mvebu_db-88f3720_defconfig
+> @@ -23,7 +23,6 @@ CONFIG_SYS_CONSOLE_INFO_QUIET=3Dy
+>  # CONFIG_DISPLAY_CPUINFO is not set
+>  # CONFIG_DISPLAY_BOARDINFO is not set
+>  CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
+> -CONFIG_BOARD_EARLY_INIT_F=3Dy
+>  CONFIG_SYS_MAXARGS=3D32
+>  CONFIG_CMD_FUSE=3Dy
+>  CONFIG_CMD_GPIO=3Dy
+> diff --git a/configs/mvebu_espressobin-88f3720_defconfig b/configs/mvebu_=
+espressobin-88f3720_defconfig
+> index af3bf1a04fce..c101b342980c 100644
+> --- a/configs/mvebu_espressobin-88f3720_defconfig
+> +++ b/configs/mvebu_espressobin-88f3720_defconfig
+> @@ -25,7 +25,6 @@ CONFIG_SYS_CONSOLE_INFO_QUIET=3Dy
+>  # CONFIG_DISPLAY_CPUINFO is not set
+>  # CONFIG_DISPLAY_BOARDINFO is not set
+>  CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
+> -CONFIG_BOARD_EARLY_INIT_F=3Dy
+>  CONFIG_BOARD_LATE_INIT=3Dy
+>  CONFIG_SYS_MAXARGS=3D32
+>  CONFIG_CMD_FUSE=3Dy
+> diff --git a/configs/mvebu_espressobin_ultra-88f3720_defconfig b/configs/=
+mvebu_espressobin_ultra-88f3720_defconfig
+> index 69d6f7e34c3b..157bd9696425 100644
+> --- a/configs/mvebu_espressobin_ultra-88f3720_defconfig
+> +++ b/configs/mvebu_espressobin_ultra-88f3720_defconfig
+> @@ -24,7 +24,6 @@ CONFIG_SYS_CONSOLE_INFO_QUIET=3Dy
+>  # CONFIG_DISPLAY_CPUINFO is not set
+>  # CONFIG_DISPLAY_BOARDINFO is not set
+>  CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
+> -CONFIG_BOARD_EARLY_INIT_F=3Dy
+>  CONFIG_BOARD_LATE_INIT=3Dy
+>  CONFIG_SYS_MAXARGS=3D32
+>  CONFIG_CMD_FUSE=3Dy
+> diff --git a/configs/uDPU_defconfig b/configs/uDPU_defconfig
+> index 851d7bb2cb99..b819e978c3a5 100644
+> --- a/configs/uDPU_defconfig
+> +++ b/configs/uDPU_defconfig
+> @@ -22,7 +22,6 @@ CONFIG_SYS_PBSIZE=3D1048
+>  # CONFIG_DISPLAY_CPUINFO is not set
+>  # CONFIG_DISPLAY_BOARDINFO is not set
+>  CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
+> -CONFIG_BOARD_EARLY_INIT_F=3Dy
+>  CONFIG_SYS_PROMPT=3D"uDPU>> "
+>  CONFIG_SYS_MAXARGS=3D32
+>  # CONFIG_CMD_ELF is not set
+> --
+> 2.43.0
+>
 
-diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
-index 5c3becc68c6..7f3b28b8507 100644
---- a/net/lwip/tftp.c
-+++ b/net/lwip/tftp.c
-@@ -368,6 +368,8 @@ int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 
- 	if (tftp_loop(eth_get_dev(), laddr, fname, srvip, port) < 0)
- 		ret = CMD_RET_FAILURE;
-+	else
-+		image_load_addr = laddr;
- out:
- 	if (arg != net_boot_file_name)
- 		free(arg);
--- 
-2.34.1
 
+--=20
+Robert Marko
+Staff Embedded Linux Engineer
+Sartura d.d.
+Lendavska ulica 16a
+10000 Zagreb, Croatia
+Email: robert.marko@sartura.hr
+Web: www.sartura.hr
