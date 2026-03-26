@@ -4,98 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A10310AB807
-	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 19:46:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC17110AB825
+	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 20:40:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FBA081E18;
-	Thu, 26 Mar 2026 20:46:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id BEE5681E18;
+	Thu, 26 Mar 2026 21:40:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="j4nxSz2d";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="TCs1r1+M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C509683CD3; Thu, 26 Mar 2026 20:46:39 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 5CBFC838BB; Thu, 26 Mar 2026 21:40:07 +0100 (CET)
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F28C80517
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 20:46:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1424080517
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 21:40:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-b97e6e48b24so234154966b.2
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 12:46:37 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774554396; cv=none;
- d=google.com; s=arc-20240605;
- b=MhVXDUfcuqZx1TMko2q34bBv6wFM7rm8MS6esmfESFLt03NCKzpBG43jvqsr9P0d9R
- 116tCGfxp/i01OMB3xacx0UNMKKIWX9I7BanrSUWwR4j4IY8CGx1GWN0Eg4lwykwfQVP
- QJzjeOT1MSgAlsU/GNqZeLo+Ea8vqIePR4xb/M187MFWAuxhOGXoJKHewbpB/h5YQc2o
- iZ+KzK08xF9Bd8Pg+lFFpdowO7Rv5ld7Gu7JG6k5ezk6sZboO9y0dBYuBnH95jvgraRs
- WV6WcJpxAeqQFoMs2p9pC7ugLaqTGDne2QMHqWNLDVNdVKC65cv750JEWKzrYQLLwV0I
- Y8lw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=Pbj3BbRScsVXrLnNb4V+BMAkQbPRDM9SkYwrhQ4UPZo=;
- fh=X+TXTfimi8ikLXygKYSNqmXeuVlv5IEYi0IesntAZJo=;
- b=RnCTs3YoZcPC3DO3DNvns7hbtv27aGnxum5/RyEDc8Ymx75KdhgzaydsN/N1H2s9xc
- /6s+0dhlPP8ZCjF96LDJYrUQMHCp8tnmDf9cValSx8bbRKJLFiBK7jI78PjJ6N/OT+bV
- NN+xecSSyBA5KGOCmwfpEN64K2cdYdZAhiBojIXZ9x8SJS59m+yCcoaw8WMjxy286juI
- /hnwaNS+bvmHm4LN0fWuDfELQsc5fUE2eaR8GwPLBl6s6mwbaYd512V/AKsmbXN73VMF
- 9HcewxPiLKcAguwByt8lhOJL5xb5ICOsk9HWbTXK+/1Hz1pDMbvrRqJiWoOiw9x+RhU6
- 7jGA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-673ee2a98b1so816372eaf.0
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 13:40:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1774554396; x=1775159196; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Pbj3BbRScsVXrLnNb4V+BMAkQbPRDM9SkYwrhQ4UPZo=;
- b=j4nxSz2dcNR31UmEBk608WDMGfO+h7r4Aca8/zDssfb+bzhLEBrW8orI3zslsdIOsm
- P+jBz0hl3M6fORbTJwHc9uDsZ52ekwQ4dIbnMmgtQRksWAqOj7lT7FNrzCIiFYH25g93
- 54ZYElhyMrZ3erOLw1qGR3HJHt+Dj0QEaDftU=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774557602; x=1775162402;
+ darn=lists.denx.de; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Oqk6CsKtaPl0De8iZAYsRePyHANYoDGV/OKyqT0+R7Q=;
+ b=TCs1r1+MTJV8u3okfUHfB7pgjs2yfOCXHvMZCpREX/9f01uUcxl3tWH1RbE8GSehho
+ +VId61qYdlPBhiJ5q5P3IW0LCYf1NPYCCff4JfQ54bXtT4bm6Z/nkJbOfIHJAuc837ze
+ Y8L1Wn0T+mVSZyDJ2mb5I6QK3CjtB/6oCFoLN2WHW2mc7DBvkxG42oQLJ62NdvVFJGMl
+ aIgECcr2AmzczFOUazx3AtJjqeYrDuTtQ+9vbCd3NINSHzx4/E955umHFgIbZFWL3zUq
+ fmKqtn5sSTQIPtbaYfxdXjl0iVdzmrMQ2H4eTtGXIW8vTi93MHeBoulomAtnVcFUH4cZ
+ tzIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774554396; x=1775159196;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1774557602; x=1775162402;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Pbj3BbRScsVXrLnNb4V+BMAkQbPRDM9SkYwrhQ4UPZo=;
- b=hyqIRT5JHzc3Apddm1xD/8hvf+UsnjxKr0T8A10Smd6lkzDbL2G3lPKYEo+GS82T1u
- JJa+k07N7+I2IvsCLVjiT29WcW8XTzZhC4uh7z/C8GLAfeaQHQOG9Pc68dKI4RJYwV1U
- 0DZ1OZuebOgpHnZCeCX34GJj0uoL2bbmU2nt8+u5N4nDjsJbUV+A2L8nXK4nTq7qWVMu
- +K+5+JkcFANWyYiiO0aXt/HOczzKbsH6Yj+iBRw8DLQFagT1hEDjS6zVnBH8IRvgiB6w
- fZLR2qf53kshDJB8jvYu4jGz6jgjegGGA6sSh95vcGg6LUO/OpJK0NH8WzoLaQwWoowJ
- PzrA==
-X-Gm-Message-State: AOJu0Yz3OYDb3z3NlrNvCZmdRGvJ3XNeNvoxpllhyeVnIKz0OlD881Ar
- P3eAUfk4tVxcCdTR9STcM4hZrEB++noP7DK/NdzCmvB2tr8PgCiO05ASlKXnWiE9mXmhrbgQx1T
- AbFG7mEBcrGjtFERrQJvWrtIiEy/J1Ciz3PqZzXF5
-X-Gm-Gg: ATEYQzztQTflr2q+UE3j9lTOM2JYLfCVz8DzwlYf1DvUNPOEd0J2Y2/ukiSSeDR0XXm
- D08UAQVtvxSMzzwI1g5m4HBFpFrGMoMJX6a6V/OYEQ8zYMkWf6xc/49c1mKhCTB23CDRMzVSTHA
- pj8kt6Zol6tnhCsAo6uf0Wm1HxiKWjHhCLaalWWmKrs72yojnqEyDETz/Bg55l1zZGInIrScnWu
- H008SoHDUatPfRolzg2s27QDcS5sd9/VQJT0MGTVmsFTPeSKCbFiffdEjNd8C4X22PNBQo3kjd0
- KoAWXG6x8lP3QVkfFQ==
-X-Received: by 2002:a17:906:60d:b0:b98:4156:8787 with SMTP id
- a640c23a62f3a-b9a542c0b0emr456289066b.49.1774554396431; Thu, 26 Mar 2026
- 12:46:36 -0700 (PDT)
+ bh=Oqk6CsKtaPl0De8iZAYsRePyHANYoDGV/OKyqT0+R7Q=;
+ b=l45Nwc3L+8jEMD8kBRY2RAtDirSWF+V5yYJTIuFu5z61mDm9LbooU6RjEV5JGTqnvz
+ G72o4n/EXN4wQhdgNs82dOJ3jjZNH4mQtZmBkPBmGjJVm1qCekeEv6jKXH5r2sx7FubA
+ +DI4gQ/qxizBwr1ORlU2FErPULa1cHL/Z1tUt9VaGbJjV2dCTYINeWIctLXR3iXpypsr
+ Jo7UNNhLGun/LAxO08rbNCJyW9bmN5Ci6a1VQC1bBgKtq6ghF7becF5uD1MyJtEqcY/s
+ G57YSLhD8SSfBzDZz5rLBNuQFGZNHeA3Vbv127y3Q+HRZzPPMhtJXoon/DJQyvDYn9qM
+ h/9A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXYVEMz4UwGF3ypFOV4YBSceU9AqOQPUcDKp/Dnez4IHkirmdXjlvf/SotYSTrxQCET+cLGrvY=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywzzghnjg1EdW++FyNsPyyflOuBhDeVUkrDRbsnmi/25mlg5J/4
+ A+TrEVjmq7z9o42bN1LapGNQG2hFgswgsrDWzDQP45AMKVTwih8YyfzpS8NejbnOPrpWKB3cHIg
+ Ocn9F
+X-Gm-Gg: ATEYQzwbeullOxKJ0gcgN5+0L7AjfKsAyity80zv3e3BGthf6yVXp3V2ULuYw0Klywp
+ NL6F9Ux/iqIC7nifsqr1Niy7NCGDM8qLvVHoKA8BJU+QU7xGMW1XjySmBKXE41BAEZyCaEBgrtL
+ d0uTD/PL8aA6lTPpMyU6Hk8I6qgawSQe7dRucOLvGI3K+UYRZy4Vvb+eUDbERQUPiuvY1LISJeW
+ f9HiBQCKRJ+nlcp6vV1AyCz84gDM86ThhxxmcOVUm1ZmlxVNuMnWtn/7Z5oksTD7+C5ZnyBE0a8
+ CTW9sXZbe8adgrx85BMU6Dj7MX0Ab0cAVVdSeTmmQ3R7UrLfa1uXcSTY3XDMX2H8Bq/PzypKN+2
+ 6v5P90pxBrKHgMmY/6U85/UMFtY2PjRiUPlVPul2zoFTE4ZXsZZ4RfmhosZoy3LlvU3Tmz6xpka
+ WFA2dc+paUIumEmQfB1OxNptt/0byS
+X-Received: by 2002:a05:6820:1344:b0:67d:f88f:d853 with SMTP id
+ 006d021491bc7-67e185f6571mr56199eaf.6.1774557602108; 
+ Thu, 26 Mar 2026 13:40:02 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:5200:5612:f63e:1681])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-67e0aaf8185sm2539014eaf.11.2026.03.26.13.40.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Mar 2026 13:40:01 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+Date: Thu, 26 Mar 2026 15:39:52 -0500
+Subject: [PATCH] cmd/scsi: drop scsi reset command
 MIME-Version: 1.0
-References: <20260317131839.2418655-1-sjg@chromium.org>
- <20260325201806.GA3445024@bill-the-cat>
- <CAFLszTgEq7e4ee9H3mbNeBOgG-8B8L_-E0LsQNmGPZfXLK2BXA@mail.gmail.com>
- <20260326154716.GA502704@bill-the-cat>
-In-Reply-To: <20260326154716.GA502704@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 26 Mar 2026 13:46:24 -0600
-X-Gm-Features: AQROBzAXoaGmMSlPGXjmrZv-s7cqRufkSEJBbJEYVWkDCfAYK8VVDs-AiIOtLAY
-Message-ID: <CAFLszTjovewJ3YCz-Fu39Tr=W8ZOWo9EC3m1VDVBuEjJG2zcJg@mail.gmail.com>
-Subject: Re: [PATCH] CI: Update sjg lab to match currently actively boards
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260326-cmd-scsi-drop-reset-v1-1-01956d061acc@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDQAxA0atI1g3oiCP2KqWLTiZqhKokWgTx7
+ k51+Rb/72CswgbPbAfln5hMY0LxyID6z9gxSkwGlzufl84jfSMamWDUaUZl4wULX1eh8jW52EA
+ qZ+VWtuv6et+2NQxMy38Fx3ECXqSBxncAAAA=
+X-Change-ID: 20260326-cmd-scsi-drop-reset-1675b567c2d9
 To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Raymond Mao <raymondmaoca@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
+ David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2631; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=qlIgHBDBALp8rpnEprF6sqVWx8IDfU0MCTX83ff5q9Y=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpxZma1P1tEBsk3Sb1KQfFIF+ry8WCd+1pn3ltK
+ AOH4vQeCRaJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCacWZmhYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A1CEH/0NCqU95B/6+Ym6oHeFdPyks/rWUq5kyxIkET7f
+ 5KkHKjzEqy+IymSZSVXZTvrJJ4A12y/sXDBrMND22XgUwhR++equfxXBgaDUFvI+MaSX3je5isJ
+ Sr5aIZeY5sGGnKcquns3LejUj0gM1HwN6csmIK3xCu2HjJeVkRbbJU0srCMmZGwoMs7pI3E3LlC
+ UfpiAYOuZiaStH9h7NbEf6Np6ExF83dJLJrhdOI1yaiZuloobmirezsrDhNgdwRF6WCd/xXnNQQ
+ NLG6HRIswhmm7S3EJinEF7mMmU0MdMczFRV3W3QE2WuE4T0HWif89XNPC0Rlhoef9Mo0Lo9JcK+
+ aNQQ=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,99 +117,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Since commit b630f8b3aefc ("scsi: Forceably finish migration to DM_SCSI")
+the "scsi reset" command has no possibility of actually resetting any
+SCSI controller. Drop the command to avoid confusion that the command is
+actually resetting the SCSI controller.
 
-On Thu, 26 Mar 2026 at 09:47, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Mar 26, 2026 at 05:44:29AM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Wed, 25 Mar 2026 at 14:18, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Mar 17, 2026 at 07:18:35AM -0600, Simon Glass wrote:
-> > >
-> > > > Various updates:
-> > > > - c4 lack signing so does not currently build
-> > > > - samus hardware is non-functional
-> > > > - colibrimx8, rockpro64, rock3a, rock5b, rpi5, tk1 and play are new
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > >
-> > > > ---
-> > > > A sample run is here:
-> > > >
-> > > > https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/29552
-> > > >
-> > > > At present, coral, play, rpi5, snow and vf2 appear to be genuinely
-> > > > broken on -next
-> > > >
-> > > > The ff3399 board needs some investigation.
-> > > >
-> > > >  .gitlab-ci.yml | 46 ++++++++++++++++++++++++++++++++++++----------
-> > > >  1 file changed, 36 insertions(+), 10 deletions(-)
-> > >
-> > > I have two sets of problems with this patch.
-> > >
-> > > One, it doesn't do, but perhaps I wasn't clear enough when bringing it
-> > > up, change it so that failure to pass is a job failure (it's currently a
-> > > warning). This in turn means people can't tell expected failure from new
-> > > failure.
-> >
-> > It looks the same as sage...can you post a snippet of what the rules should
-> > be? It shows failure for me, when the lab fails.
->
-> https://source.denx.de/u-boot/u-boot/-/pipelines/29670 shows a bunch of
-> warning for failed boards.
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+This is just something I noticed while inspecting the code. Since it
+has done nothing for a couple of years, it seems likely that no one is
+using it, so hopefully can just be removed. And if anyone actually is 
+using it, removing it should actually make them aware there is a problem
+vs. currently silently not doing what was intended. In that case,
+someone who actually uses it can re-implement it properly.
+---
+ cmd/scsi.c                 |  8 --------
+ test/py/tests/test_scsi.py | 10 ----------
+ 2 files changed, 18 deletions(-)
 
-OK, but how did you generate that? Did you see SJG_LAB=1 for the
-pipeline? The rules look the same as sage, but perhaps I am missing
-something.
+diff --git a/cmd/scsi.c b/cmd/scsi.c
+index 9f7613424e5..ad7d8a4b664 100644
+--- a/cmd/scsi.c
++++ b/cmd/scsi.c
+@@ -31,13 +31,6 @@ static int do_scsi(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	int ret;
+ 
+ 	if (argc == 2) {
+-		if (strncmp(argv[1], "res", 3) == 0) {
+-			printf("\nReset SCSI\n");
+-			ret = scsi_scan(true);
+-			if (ret)
+-				return CMD_RET_FAILURE;
+-			return ret;
+-		}
+ 		if (strncmp(argv[1], "scan", 4) == 0) {
+ 			ret = scsi_scan(true);
+ 			if (ret)
+@@ -52,7 +45,6 @@ static int do_scsi(struct cmd_tbl *cmdtp, int flag, int argc,
+ U_BOOT_CMD(
+ 	scsi, 5, 1, do_scsi,
+ 	"SCSI sub-system",
+-	"reset - reset SCSI controller\n"
+ 	"scsi info  - show available SCSI devices\n"
+ 	"scsi scan  - (re-)scan SCSI bus\n"
+ 	"scsi device [dev] - show or set current device\n"
+diff --git a/test/py/tests/test_scsi.py b/test/py/tests/test_scsi.py
+index 2a35e47e558..4390ff65845 100644
+--- a/test/py/tests/test_scsi.py
++++ b/test/py/tests/test_scsi.py
+@@ -38,16 +38,6 @@ def scsi_setup(ubman):
+ 
+     return dev_num, dev_type, dev_size
+ 
+-@pytest.mark.buildconfigspec('cmd_scsi')
+-def test_scsi_reset(ubman):
+-    dev_num, dev_type, dev_size = scsi_setup(ubman)
+-    output = ubman.run_command('scsi reset')
+-    assert f'Device {dev_num}:' in output
+-    assert f'Type: {dev_type}' in output
+-    assert f'Capacity: {dev_size}' in output
+-    output = ubman.run_command('echo $?')
+-    assert output.endswith('0')
+-
+ @pytest.mark.buildconfigspec('cmd_scsi')
+ def test_scsi_info(ubman):
+     dev_num, dev_type, dev_size = scsi_setup(ubman)
 
->
-> > > Two, when you had previously gone about adding at least colibrimx8 I
-> > > noted that this extended how you were having labgrid build U-Boot in an
-> > > even further non-upstreamable manner. As the sage lab yaml shows, we can
-> > > bring in external binaries for buildman (and binman) to find and use.
-> > > We'll need to extend that logic a bit, to be sure, but it's a solvable
-> > > problem with the baseline already there.
-> >
-> > Not quite. Buildman builds U-Boot, it's just kicked off by Labgrid (via a
-> > U-Boot 'provider' class), with some pre-built Intel binaries for x86, plus
-> > BL31, etc. put in as environment variables. My design approach is different
-> > from Sage, in that I often connect to boards interactively, send U-Boot
-> > over USB in some cases (so different files are needed depending on the
-> > board) and at the moment I have all boards connected to a single server.
-> >
-> > Labgrid has 90 open PRs, including my terminal one
-> > <https://github.com/labgrid-project/labgrid/pull/1571> from over a year
-> > ago. There definitely are PRs getting in though (20 so far this year). In
-> > terms of upstreaming, my approach has been to break things down into
-> > smaller PRs, but four of them are still outstanding after 18 months. I did
-> > ask on irc a few times but didn't get a response.
->
-> Yes, your approach requires changes to upstream labgrid, while the
-> approach I suggested before, and was able to finally get done a while
-> ago, does not, and still allows for using boards interactively. labgrid
-> even supports python well so whatever tooling you wanted around labgrid
-> and building u-boot and anything else could be written in that, instead
-> of shell, for example.
+---
+base-commit: 80a4c49a4ab2ad06fa84a8b7bdf6e33b3b5101bf
+change-id: 20260326-cmd-scsi-drop-reset-1675b567c2d9
 
-Yes I suspect you are right. One of the design decisions I made was to
-put all of the config in one file (the labgrid environment file).
-That's not something that the labgrid projects wants.
+Best regards,
+--  
+David Lechner <dlechner@baylibre.com>
 
-I really can't operate with an external terminal program though, as it
-loses output at the top for some boards. Also I need the USB drivers
-and QEMU changes. Perhaps tougher are the changes to the UBootStrategy
-to support sending over USB, different power/reset combinations, etc.
-
-If I could get some of these smaller PRs upstream then I could start
-to do some rework. But until then I'm not it is worth the effort, as
-everything will still be downstream.
-
-I'm definitely keen to replace the shell scripts, probably with
-Python. I've had good results with uman being fast to start, having
-shell aliases, etc.
-
-Regards,
-Simon
