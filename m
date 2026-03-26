@@ -4,86 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71552106F2EA
-	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 08:24:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F8B1106F2FE
+	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 08:29:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDF0E83DA6;
-	Thu, 26 Mar 2026 09:24:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CF55983CF5;
+	Thu, 26 Mar 2026 09:29:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fOaJYzN4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dVbXxOIl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCA7483E76; Thu, 26 Mar 2026 09:23:59 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id CAC9283DA6; Thu, 26 Mar 2026 09:29:07 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9199380517
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 09:23:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D440E838BB
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 09:29:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-487035181a7so4038745e9.2
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 01:23:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-66970715adbso1302916a12.3
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 01:29:05 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774513745; cv=none;
+ d=google.com; s=arc-20240605;
+ b=AGwRZXjxXaBDSkrxnohFaS1N1/kyvGSH/rJko4sPlfGf+TVScdZsDpz+dsbtRf/sT4
+ u8yavJCbz+zHq2fS8HNLUnIijV6uVL0/1ZhOeXNUFOGF1KelcNJVbRf0D8U7oBQz883V
+ vA1zIqXVBKqNa7ekMo6B2OwRE1wKymWvwvC3XViqUE0JQrD26/1VW98vLrC6jRbfyTsX
+ NO9W0aZ+xAWHshrFstyPULZuu5IlcJHoI0aYxImvCXcXzqrp0BiSmw4yY3nFMome7UQo
+ BBPGY+1aK9N3frFpT1paGUdgfameC515CUTsoCGGAm4fN/6KOVCeGlSnkhgViRSKHYfb
+ r3ZA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=wUkV3leqypFJwBCW/ChAbj7BsTT9Fz3gCriqOcPnntM=;
+ fh=PVnhSyy3ycvMPUBco9IQzzpgWdHW0/eY65EufewLhP0=;
+ b=lpPrBU/eUryjKSHzdBgdHOJYrmoUYv3O/nhWzWGvk1nB1L53C2FyJmyBX0J6BWTKvm
+ RQChvzZtTpHBQ5Tffk9Y+4VIpL6JF/+tzK2Lq/56z7kUYO+Ky3zX56SiLgWRul4fvUyL
+ MeLLYF+rqBdqiwWLbcOMgXcLYeRe8VjIP5Vzyt/EMy9FeUpAsOvTRfrQkVStnXidDtd/
+ 41m39iEW8R7Z1gNlAk4Vvvdlz9qjKyYM2BO0PHauyNfNt3/rRbC/G+lWn8Cf6jNlPGZf
+ LPX8UpTdLNVgO6zbi5S0M8sE3ukdD2WB3+oEOe7ltDUJz36xDfCwlC6G+HE7gzZ86zJR
+ Juyg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1774513436; x=1775118236; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ZblMf4m73cDI8hR+m/GG9JCwgb7d+VVs7DKO1uR+ik4=;
- b=fOaJYzN4Z+sx1CDXgvLGYUuOklTt+tgZj7/cintUT4NZ+GgLL+WqxLK1Hz7mOPF3el
- +SPgu+OPG2I/2dptW1uF8yfb23qzML2UDttWhSZvErrS/D9Ge8geteOtLBlIPwKd7/rl
- JoMremso4modvMH9D6YMv6FQOvY532oQ6AZcTtgfXGA/ryAi+ENIlP5rDXGPoPZ/FaHQ
- jdF++dKQmOYPdY0NJaO18dUDCiEfQqpBvnsSb/SkGOmNU0LrHztXUT+yAULZ1APMtzI5
- SL1rN9kxclr2QmIWnDUqWjeY5cbWf/qyJikOi4Uhh4jXf0Yas8+IBj3zsLsTIVQlCae7
- 5qUw==
+ d=gmail.com; s=20251104; t=1774513745; x=1775118545; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=wUkV3leqypFJwBCW/ChAbj7BsTT9Fz3gCriqOcPnntM=;
+ b=dVbXxOIlpbsKS/lgklTJs77J/neIKzoMwd6dYG38meERp+u034FqLmRXwjWFQTVW+g
+ doVSkuqbUi3WySQQaCb4lvAEAUwEUdliwPf+emNWNb9j/iUz3yv4Y+h94tv4T/QKoZej
+ TcMDn98fAgH5rlRCskuUC20cFEvYTjG3IjWlhPQCbxmkfh5iC2Gzk2t7QJ16wmOCyIj9
+ pCTzfmj8zL6y9+GmxR3qn7ggFUO46S53cAP/7j+vXOV7jmtnP6IFNMCXZea2zom1ZLw8
+ /+z08EiozipWXPHRveTlJ+jW+e9/s3gPUhpUKULQDAmMfttX4L0mnN/aGPzqXgHJYF50
+ qDrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774513436; x=1775118236;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1774513745; x=1775118545;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZblMf4m73cDI8hR+m/GG9JCwgb7d+VVs7DKO1uR+ik4=;
- b=Ze7x836ko2Ky+erJZPEYjtTn0K15W0i/vExM6vNQmRMJU1MVz5L3YN0tO6RDpG4ZQU
- TiBRofxGZZqH9AMDXv5lBVCgNZO2WIh2JJqgcDO/0TcokpQN4wE1gYyUM8lcPyIOtCul
- JZmyV8K4xC4LDalL+UG3WYYHN8OIOOWjrLHBl3yhe2fWxBT42fYB1jRqugGXQrxdf7lY
- 2pF7mUKuPyMHlGQRved/Z8eel8ugYf3DPilcK3MIvnGS3Gs3kPGH8Trh6KSYKpSRwUUY
- MWPyUDpvxYNgtR7rsK5Zbb9AP6AaQ+NLaz9tIASBLHNOWVUCzCasm1ieVfi7Ea+NUjeW
- KYvA==
-X-Gm-Message-State: AOJu0Yxp0+gK8San4gtlDDYWEIm0lMbhUk5LoIcxeU2ek1nEGXCaFvD7
- 4O8EFsZJJHQCMVuiEBFGcUklujBpUD0trJV4lwu7VDQr+GJhCeicpLiiWhcuYiqn89FMZgb7HgV
- fKgiA
-X-Gm-Gg: ATEYQzzHf6bJn7h+/A5lO2RySbaXLyhealSP8KWQlMHIQClmLt2WO1VZtjM0BTZ2kmv
- wXTZsJM+HJ5iCEYmTUU3ubhpWGZ05C+xhJBB6LfcIPB5LceNdeXoMKS79M2XWkLbUfoACX0ubbH
- 65R+QRWSsQsSgl3TTSfCmZlVuNyqVcXWtjbcfxaxZQ3Kx6sXxAAvDAVQAxB9UVQT3W9ZEwWZDhI
- fWOyF2IRlisXnLx94LhnuJ0aTf4ZGfYbchqF8IFqn5i8Bk6gQLXmq+ukfbWbIHa8YBE+kFDO1Y2
- de6jb9vs+1I8Chz3scHd3c0eL679thgVQqjiS0TjDsqWEMOSVpWoNtYousG8a/+lQ/AOZpff2+h
- Wzxc1kNTy1+A98juLybTQQ1qadg2gmLcV+V1nN55faWnFhFiVwhkZrqTxZffkYH5k7KP2YqN+Mi
- ABtA98+JNBmYYh/yUnTocl6FhEBTdnOtv77YBH7vVowhHkSt1KpM3GvEKoODn6CouyKR/guhHyM
- ZQoUt5Ezy1EGMArqS4vRO4NWu1pxg2eAAevcx6BXMLOTogWvJPC46+zRDIWbUGOxYoXEnXhvUR7
- xPKT7USE1HCv3prLqfOsDRulo0R/ddDEpNvTh5VZmlqtl6wfH4+kC1ACo+J7OdNmsP2dnKfZEQf
- CHjVxTuYvZP3UxoV6C65CPWf5EmN34xvqOC+sQ+ElLG7QLuKkD/qyqydTaxmWokwBixA9QGaXmC
- ozvnCuI/qdvwtK3+Lav256W26ofuV3Q1PB/5h7sQrocTjnqTkHv3kC+2VIQQvR
-X-Received: by 2002:a05:600c:870b:b0:477:7ae0:cd6e with SMTP id
- 5b1f17b1804b1-48715fb723bmr90810345e9.5.1774513435772; 
- Thu, 26 Mar 2026 01:23:55 -0700 (PDT)
-Received: from hera ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48722d2366dsm14854975e9.10.2026.03.26.01.23.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Mar 2026 01:23:55 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: u-boot@lists.denx.de,
-	trini@konsulko.com
-Cc: ilias.apalodimas@linaro.org,
-	kory.maincent@bootlin.com
-Subject: Pull request for fwu-next-26032026
-Date: Thu, 26 Mar 2026 10:23:46 +0200
-Message-ID: <20260326082346.1569343-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.51.0
+ bh=wUkV3leqypFJwBCW/ChAbj7BsTT9Fz3gCriqOcPnntM=;
+ b=ePBGO+JxL0ivvu7jq9qYa2Q6dC/+UEpaAfYKsRj3bqQQz4Wo2OfR36jmQHM/XMI08b
+ Ypud7Ruic4md5Ab6PM3C7vSyL3JldCezOlTvRB52e5ol87pdoxzbHuu8yM8ff1ag/aaH
+ 72WnClTW20CmdjWfvefiyZW8vYcLiGW8uZAb2lwJynvgRFTwwuMJ92GNz22SszWNZT0F
+ ZKLrkubTSxbXksDH3UitKzLYUC46jb0E+amy5Ri1Q3XZ4ULPyZjA0OyuCkM8Ps8XHlKT
+ gvg3epGqGTFQXe6P5evf+CRwp9lL60rbOhuPzSv3gJqaSehcA1Vafb6UYEMtgN5420kD
+ FidA==
+X-Gm-Message-State: AOJu0YzdFFsv/O4WgvgJxmPYDs3d4QIzZ9KCA7w1nEXKj7zWzbWM0Ybj
+ mV5QMWG+5i/4GO+4Ja7LUZUwMKtAgjVoF/rkawo9bZ00nSFfISU9usKjznH03jLt+F51wEyMsAm
+ VlHgPzuZ1nLUEY3Ih9hVu1aI1Tcq6lnA=
+X-Gm-Gg: ATEYQzxKXWw0LsLM5wh7YN4Bu8LT/3ZjufBZ2pbNgxHmOkoD1EtujYXNG6SfRcTbGth
+ VH9J3KpCqaH5T6RK7tgBQFmlPUbRlgf0q7iUJlv4xvqwhxheEkdlUEuAw++dR/xyP7NVJn78Sdm
+ 28n9dhFXqmsonpBbeF/QMpupvA0zN/H+XjOhOIpK6UlGRz/CotGpwmdjH8xtBflLKSau5hFSjRM
+ rUwxM6Bkb5qL3RM0zIIfpsgBxvz38q72ctIDzS/uyHgcO0odCXEQqCKTVRyg/7nOll9xW/WhBcD
+ ay+MIUZTAx4XX6+18tGVlXGA+6yFZLv6MBxpPAPBUmHw1OUVWpEbJJfidAuJV5w5nKXKV4/W0cw
+ s7G2+x8n3EhlKC/xosA/ozLimSmZz61wQ8H4Ej3R3pmevSiHcaB2ws3OJ6nHmmBFEjSkPIfG8DI
+ PYzVFm/dG1QTU=
+X-Received: by 2002:a05:6402:4557:b0:665:57e8:66f1 with SMTP id
+ 4fb4d7f45d1cf-66a8267303fmr3326470a12.21.1774513745020; Thu, 26 Mar 2026
+ 01:29:05 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260315235816.305016-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260315235816.305016-1-marek.vasut+renesas@mailbox.org>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Thu, 26 Mar 2026 08:28:53 +0000
+X-Gm-Features: AQROBzAMXVpbnobNFqxbVmaAHJxMo3q9qZzK4j0_yjkoklthyt3NognEjPUMbpA
+Message-ID: <CALeDE9PeY8V2HjJRv96Cw1CbuXokf9pGfdBhaggWugqJwCwTzA@mail.gmail.com>
+Subject: Re: [PATCH] arm: bcm: Include missing errno.h
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,63 +114,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
-
-Kory added a userspace tool to modify the fwu metadata from linux userspace.
-Although this was originally designed to work with UEFI, there are uses cases
-where people use it, but boot without EFI.
-
-The following changes since commit 8813d74163e4d84dbd4fb30d9639f01c0acb6d39:
-
-  Merge patch series "test/py: gpio: cleanups and improvement" (2026-03-25 14:38:28 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/fwu-next-26032026
-
-for you to fetch changes up to 44a1e17b2a49d724538b4d500b27b0eda4be015c:
-
-  tools: mkfwumdata: Remove dependency on fwu_mdata.h header (2026-03-26 08:20:00 +0200)
-
-The CI seems fine 
-https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/29677
-
-Please pull
-Thanks!
-
-----------------------------------------------------------------
-Add a new fwumdata tool to allows users to read, display, and modify FWU
-(Firmware Update) metadata from Linux userspace. It provides functionality
-similar to fw_printenv/fw_setenv but for FWU metadata. Users can view
-metadata, change active/previous bank indices, modify bank states, and set
-image acceptance flags. Configuration is done via fwumdata.config file.
-
-----------------------------------------------------------------
-Kory Maincent (6):
-      tools: gitignore: Add mkfwumdata to the git ignore file
-      tools: Reorganize mkfwumdata tool into fwumdata_src directory
-      tools: mkfwumdata: Improve error message specificity
-      tools: mkfwumdata: Add bank count validation for FWU metadata v2
-      tools: Add support for fwumdata tool
-      tools: mkfwumdata: Remove dependency on fwu_mdata.h header
-
- MAINTAINERS                           |   7 +-
- doc/develop/uefi/fwu_updates.rst      |   4 +-
- doc/fwumdata.1                        | 222 +++++++++
- tools/.gitignore                      |   2 +
- tools/Kconfig                         |   9 +-
- tools/Makefile                        |   4 +-
- tools/fwumdata_src/Kconfig            |  19 +
- tools/fwumdata_src/fwumdata.c         | 854 ++++++++++++++++++++++++++++++++++
- tools/fwumdata_src/fwumdata.config    |  33 ++
- tools/fwumdata_src/fwumdata.h         | 138 ++++++
- tools/fwumdata_src/fwumdata.mk        |  10 +
- tools/{ => fwumdata_src}/mkfwumdata.c | 106 ++---
- 12 files changed, 1315 insertions(+), 93 deletions(-)
- create mode 100644 doc/fwumdata.1
- create mode 100644 tools/fwumdata_src/Kconfig
- create mode 100644 tools/fwumdata_src/fwumdata.c
- create mode 100644 tools/fwumdata_src/fwumdata.config
- create mode 100644 tools/fwumdata_src/fwumdata.h
- create mode 100644 tools/fwumdata_src/fwumdata.mk
- rename tools/{ => fwumdata_src}/mkfwumdata.c (79%)
+On Sun, 15 Mar 2026 at 23:58, Marek Vasut
+<marek.vasut+renesas@mailbox.org> wrote:
+>
+> The msg.c file uses EIO macro defined in errno.h , include errno.h
+> to avoid build failure:
+>
+> "
+> arch/arm/mach-bcm283x/msg.c: In function 'bcm2835_power_on_module':
+> arch/arm/mach-bcm283x/msg.c:73:25: error: 'EIO' undeclared (first use in this function)
+>    73 |                 return -EIO;
+>       |                         ^~~
+> "
+>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+> ---
+> Cc: Matthias Brugger <mbrugger@suse.com>
+> Cc: Peter Robinson <pbrobinson@gmail.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>  arch/arm/mach-bcm283x/msg.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/arch/arm/mach-bcm283x/msg.c b/arch/arm/mach-bcm283x/msg.c
+> index 4993c0bdb81..05e1a02e80f 100644
+> --- a/arch/arm/mach-bcm283x/msg.c
+> +++ b/arch/arm/mach-bcm283x/msg.c
+> @@ -7,6 +7,7 @@
+>  #include <phys2bus.h>
+>  #include <asm/arch/mbox.h>
+>  #include <linux/delay.h>
+> +#include <linux/errno.h>
+>
+>  struct msg_set_power_state {
+>         struct bcm2835_mbox_hdr hdr;
+> --
+> 2.51.0
+>
