@@ -4,62 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7333310A62CB
-	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 13:34:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1EAB10A3D96
+	for <u-boot@archiver.kernel.org>; Thu, 26 Mar 2026 15:09:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1C3D81E18;
-	Thu, 26 Mar 2026 14:34:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
+	by phobos.denx.de (Postfix) with ESMTP id 2BC2681E18;
+	Thu, 26 Mar 2026 16:09:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="wcn6E7t+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mOe6oVsl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC81883CF5; Thu, 26 Mar 2026 14:34:32 +0100 (CET)
-Received: from mx2.securetransport.de (mx2.securetransport.de [188.68.39.254])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A8C6683CD3; Thu, 26 Mar 2026 16:09:06 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9EA7080517
- for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 14:34:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=dh-electronics.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9813580517
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 16:08:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1774532063;
- bh=rFswUFzx81PlSTAYeabjYZAqEYHz5YdGFY5g6WUNDM8=;
- h=From:To:CC:Subject:Date:References:In-Reply-To:From;
- b=wcn6E7t+QhvYUweKuwIQnAvtydTtowCEGvY7whVXFZOPIwFww7c3T/YMqBuzAPrb+
- Aa7tgfUH6xt4skEBc33LIhHSyAcgzs3GqinYrlZ+V+LNLzYrI8WpnWAeAfGQg/hbMm
- DirSDxYXvWgxrc3f62op4X5Yn5S6P2NPNJbx3v7p3TRiMsaj0vj9UqkgkKuVYx0FnT
- f1dHqSm/jQ3Wq3MgRvjX9+SO/W1ERo8DRqi84HVblnrybxTqQFNthSFEN5yqlmDmKQ
- 4kEGMX6WZUOSG8Xc4BtoEAnRHX8L0OQazgJz5iEOwpAmM80uZnwpeF8lynFNUk0xEl
- zDrQjR0z+S0gg==
-X-secureTransport-forwarded: yes
-From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Complaints-To: abuse@cubewerk.de
-To: Marek Vasut <marex@nabladev.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan
- <peng.fan@nxp.com>, Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini
- <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
-Subject: RE: [PATCH] board: dhelectronics: imx: Use second Ethernet MAC also
- from fuse
-Thread-Topic: [PATCH] board: dhelectronics: imx: Use second Ethernet MAC also
- from fuse
-Thread-Index: AQHcuFTCAYeM+Dh5A0K4haKIts4CsrW8VUEAgASES0A=
-Date: Thu, 26 Mar 2026 13:34:21 +0000
-Message-ID: <b42cfbe814b24a54a0758b2e37c4353c@dh-electronics.com>
-References: <20260320102918.4011-1-cniedermaier@dh-electronics.com>
- <b5b04334-704e-49aa-819d-c6500e82e35f@nabladev.com>
-In-Reply-To: <b5b04334-704e-49aa-819d-c6500e82e35f@nabladev.com>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-486fb14227cso13504465e9.3
+ for <u-boot@lists.denx.de>; Thu, 26 Mar 2026 08:08:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1774537738; x=1775142538; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=9p9rJDpDSYtxi+4RtJYQwc0QbRwtDKj+gYeaGbYPetU=;
+ b=mOe6oVslXsSPQzPbl+Phc2J7xlW3sL1l5gBUf5YaCJkVu6v/fm57NRfUBu5hoShGSJ
+ 7XkIGuSiFpj9lTeOqJgUxjoQ8cVDD4eGYcRl9Oatj+6KSR/vSYcCMq6ennq7XfNGGmdM
+ vXPJvjeBoCxQdMsVI35aPU4SxZvGuMTlQSnDjbRwrX7yRbzXjm5pB70a2aC+Kd9vOpJe
+ 54cyoZsm3sNJoPDfrvGNcwFhNUUfqtt+8Y2IGPiynGZKbAISb8+uq/YFELEgrSPDoqdN
+ 08amyjjaGPHvsHnkG6u74V7eE26OxjWZrRpzoxJ34DlSL2+owa9J8D6r7Ynmrc2QmGMx
+ GiLw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774537738; x=1775142538;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9p9rJDpDSYtxi+4RtJYQwc0QbRwtDKj+gYeaGbYPetU=;
+ b=Kn4MsIurnT48yvmccZvlDJ5iBxOe2CuvttuJtm8V2qikV0tdbswqHydbWxNWGvyoik
+ MT7q7pdW705JUjkydKflfEjlYDgnWfQj3YSs41+j0WEpa/NGbEPfo1LxXLAsPbwGJUgh
+ gIXltVNwyOomzhOqfKN72kVYaP0oYb4nQ4LDx43ydu81HORvoA3GOEyh7JVdbreikJkB
+ EsqEOzKUJe1TxjVHigsauwik8bhf3jTFiu2vyzNL+h0MDpJbcKnx4C6hAQqvwGqK+KIN
+ kxZC6hTbD4vvksxp1TmEXkxkqejD6yR5PxjOe6KNRbomrz9lfZHlgknDvFebVLW25tLq
+ nSgw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUAY1XIhGz/b1mvpc5wQ7/7Jdd670lR1jRh7R8qWIHjGYlbK69lJpOPmeJBj2egpvzByc6YZPQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YxcmeYa5AZjdps+UAKtc3iGeakW5mwYq7mSMkvsNUVXYcyksx8Y
+ JYBkc5erp+sliia/Uj7NAnuU2ljdJUwnXPG3ujhixTe34YcZyEtc6CbQEfFIvdGAtf4=
+X-Gm-Gg: ATEYQzz2CyNmzUZeZQc5OV0xux+T7rkhRj/P2J82bwiC0Pl7G6AG0UDT9L5DYwOXRW0
+ E6x3v+KM9l6hf6kBvcsWMXfNxtjMi0Abp6qBAZedjXNESKl+w4Gcvw5jFeKBUZp1AB6HkhX127L
+ NdVMuk9UyPFvmH42L5sk/ijt3jUYeRtOrXRD7lXo0RnGiI8nyi22zxfHA3xTqzwLu5zRfybcUn7
+ fluxxpyYeSztcfpd3SbdgmXWZVJNVuoGndb1uOUpu1cK8wykeXSj66WQyH61ml7ZZNb3ei0PTza
+ z4CVSNW9Ame1WgyFy5QZBoBTGJzLCUET9kBxkNkQJgRtduHGyMR8hbrZrmUn289vzhKVYZo5zcb
+ r65DCvdvO1fYi/AebrVgey2DSZ76pEDt3stiapXD6ZRBjXRiUhCL+UAsgGkgoxOZsK3I51UrXoU
+ 4aSR0NUzP49wDbFsY0F1tnzooIMGPCxJsP8Nw6KCCptIyW2+0GqwTY5kVRSqz/nKaG3NVFlpGd+
+ g==
+X-Received: by 2002:a05:600c:4685:b0:486:5f71:5829 with SMTP id
+ 5b1f17b1804b1-48715fc3870mr125719795e9.5.1774537737747; 
+ Thu, 26 Mar 2026 08:08:57 -0700 (PDT)
+Received: from [192.168.1.36] (p5b29eb0d.dip0.t-ipconnect.de. [91.41.235.13])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48722fa8dc6sm64775835e9.1.2026.03.26.08.08.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 26 Mar 2026 08:08:57 -0700 (PDT)
+Message-ID: <61e458bd-3b1a-4b7b-bb03-797c7ac8dc27@linaro.org>
+Date: Thu, 26 Mar 2026 16:08:56 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC][PATCH 1/3] fdtdec: Deduplicate iterator function
+Content-Language: en-US
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Raymond Mao <raymondmaoca@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20260325031743.371728-1-marek.vasut+renesas@mailbox.org>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260325031743.371728-1-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,19 +106,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RnJvbTogTWFyZWsgVmFzdXQgPG1hcmV4QG5hYmxhZGV2LmNvbT4NClNlbnQ6IE1vbmRheSwgTWFy
-Y2ggMjMsIDIwMjYgNjozNSBQTQ0KPiBPbiAzLzIwLzI2IDExOjI5IEFNLCBDaHJpc3RvcGggTmll
-ZGVybWFpZXIgd3JvdGU6DQo+IA0KPiBbLi4uXQ0KPiANCj4+ICtpbnQgZGhfaW14X2dldF9tYWNf
-ZnJvbV9mdXNlKGludCBkZXZfaWQsIHVuc2lnbmVkIGNoYXIgKmVuZXRhZGRyKQ0KPj4gICB7DQo+
-PiAgICAgICAvKg0KPj4gICAgICAgICogSWYgSUlNIGZ1c2VzIGNvbnRhaW4gdmFsaWQgTUFDIGFk
-ZHJlc3MsIHVzZSBpdC4NCj4+ICAgICAgICAqIFRoZSBJSU0gTUFDIGFkZHJlc3MgZnVzZXMgYXJl
-IE5PVCBwcm9ncmFtbWVkIGJ5IGRlZmF1bHQuDQo+PiAgICAgICAgKi8NCj4+IC0gICAgIGlteF9n
-ZXRfbWFjX2Zyb21fZnVzZSgwLCBlbmV0YWRkcik7DQo+PiArICAgICBpbXhfZ2V0X21hY19mcm9t
-X2Z1c2UoZGV2X2lkLCBlbmV0YWRkcik7DQo+IGRoX3N0bTMyIHVzZXMgdGhlIHNlY29uZCBwYXJh
-bWV0ZXIgYXMgdGhlIElELCBzbyBsZXQncyBiZSBjb25zaXN0ZW50IGhlcmUuDQoNCkknbGwgY2hh
-bmdlIHRoZSBwYXJhbWV0ZXJzIGluIHRoZSBuZXh0IHZlcnNpb24NCg0KDQpSZWdhcmRzDQpDaHJp
-c3RvcGgNCg0KREggZWxlY3Ryb25pY3MgR21iSA0KX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCkFtIEFu
-Z2VyIDggfCA4MzM0NiBCZXJnZW4gfCBHZXJtYW55IHwgd3d3LmRoLWVsZWN0cm9uaWNzLmNvbSB8
-IFRlbDogKzQ5IDg2NjIgNDg4MiA0Mg0KQm9hcmQgb2YgTWFuYWdlbWVudDogU3RlZmFuIERheGVu
-YmVyZ2VyLCBIZWxtdXQgSGVuc2Noa2UgfCBIUkIgVHJhdW5zdGVpbiA5NjAyDQo=
+
+
+On 25/03/2026 04:17, Marek Vasut wrote:
+> Both fdtdec_setup_memory_banksize() and fdtdec_setup_mem_size_base_lowest()
+> implement the exact same iterator over all memory banks, the only difference
+> is the body that is executed for each bank. Deduplicate the functionality
+> into iterator function fdtdec_setup_mem_for_each_bank(), which takes a
+> function pointer to a function which implements the body as a parameter.
+> No functional change.
+
+This is a nice optimisation! It will be good to de-dup some thing in
+mach-snapdragon too with this.
+
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+
+Kind regards,>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Casey Connolly <casey.connolly@linaro.org>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Raymond Mao <raymondmaoca@gmail.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>  lib/fdtdec.c | 77 ++++++++++++++++++++--------------------------------
+>  1 file changed, 30 insertions(+), 47 deletions(-)
+> 
+> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+> index c38738b48c7..d820f75b031 100644
+> --- a/lib/fdtdec.c
+> +++ b/lib/fdtdec.c
+> @@ -1092,7 +1092,7 @@ ofnode get_next_memory_node(ofnode mem)
+>  	return mem;
+>  }
+>  
+> -int fdtdec_setup_memory_banksize(void)
+> +static int fdtdec_setup_mem_for_each_bank(void (*bankfn)(struct resource *res, int bank))
+>  {
+>  	int bank, ret, reg = 0;
+>  	struct resource res;
+> @@ -1120,63 +1120,46 @@ int fdtdec_setup_memory_banksize(void)
+>  		if (ret != 0)
+>  			return -EINVAL;
+>  
+> -		gd->bd->bi_dram[bank].start = (phys_addr_t)res.start;
+> -		gd->bd->bi_dram[bank].size =
+> -			(phys_size_t)(res.end - res.start + 1);
+> -
+> -		debug("%s: DRAM Bank #%d: start = 0x%llx, size = 0x%llx\n",
+> -		      __func__, bank,
+> -		      (unsigned long long)gd->bd->bi_dram[bank].start,
+> -		      (unsigned long long)gd->bd->bi_dram[bank].size);
+> +		bankfn(&res, bank);
+>  	}
+>  
+>  	return 0;
+>  }
+>  
+> -int fdtdec_setup_mem_size_base_lowest(void)
+> +static void fdtdec_setup_memory_banksize_bankfn(struct resource *res, int bank)
+>  {
+> -	int bank, ret, reg = 0;
+> -	struct resource res;
+> -	unsigned long base;
+> -	phys_size_t size;
+> -	ofnode mem = ofnode_null();
+> +	gd->bd->bi_dram[bank].start = (phys_addr_t)res->start;
+> +	gd->bd->bi_dram[bank].size = (phys_size_t)(res->end - res->start + 1);
+>  
+> -	gd->ram_base = (unsigned long)~0;
+> -
+> -	mem = get_next_memory_node(mem);
+> -	if (!ofnode_valid(mem)) {
+> -		debug("%s: Missing /memory node\n", __func__);
+> -		return -EINVAL;
+> -	}
+> -
+> -	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+> -		ret = ofnode_read_resource(mem, reg++, &res);
+> -		if (ret < 0) {
+> -			reg = 0;
+> -			mem = get_next_memory_node(mem);
+> -			if (!ofnode_valid(mem))
+> -				break;
+> -
+> -			ret = ofnode_read_resource(mem, reg++, &res);
+> -			if (ret < 0)
+> -				break;
+> -		}
+> -
+> -		if (ret != 0)
+> -			return -EINVAL;
+> +	debug("%s: DRAM Bank #%d: start = 0x%llx, size = 0x%llx\n",
+> +	      __func__, bank,
+> +	      (unsigned long long)gd->bd->bi_dram[bank].start,
+> +	      (unsigned long long)gd->bd->bi_dram[bank].size);
+> +}
+>  
+> -		base = (unsigned long)res.start;
+> -		size = (phys_size_t)(res.end - res.start + 1);
+> +int fdtdec_setup_memory_banksize(void)
+> +{
+> +	return fdtdec_setup_mem_for_each_bank(fdtdec_setup_memory_banksize_bankfn);
+> +}
+>  
+> -		if (gd->ram_base > base && size) {
+> -			gd->ram_base = base;
+> -			gd->ram_size = size;
+> -			debug("%s: Initial DRAM base %lx size %lx\n",
+> -			      __func__, base, (unsigned long)size);
+> -		}
+> +static void fdtdec_setup_mem_size_base_lowest_bankfn(struct resource *res, int bank)
+> +{
+> +	unsigned long base = (unsigned long)res->start;
+> +	phys_size_t size = (phys_size_t)(res->end - res->start + 1);
+> +
+> +	if (gd->ram_base > base && size) {
+> +		gd->ram_base = base;
+> +		gd->ram_size = size;
+> +		debug("%s: Initial DRAM base %lx size %lx\n",
+> +		      __func__, base, (unsigned long)size);
+>  	}
+> +}
+>  
+> -	return 0;
+> +int fdtdec_setup_mem_size_base_lowest(void)
+> +{
+> +	gd->ram_base = (unsigned long)~0;
+> +
+> +	return fdtdec_setup_mem_for_each_bank(fdtdec_setup_mem_size_base_lowest_bankfn);
+>  }
+>  
+>  static int uncompress_blob(const void *src, ulong sz_src, void **dstp)
+
+-- 
+// Casey (she/her)
+
