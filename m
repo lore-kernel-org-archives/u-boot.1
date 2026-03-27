@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7599710F284A
-	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 16:25:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED9D610F284A
+	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 16:25:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD56384088;
-	Fri, 27 Mar 2026 17:24:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2A1B78409B;
+	Fri, 27 Mar 2026 17:24:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eOSvuX5g";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WQ58bt0a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 006FE83FA3; Fri, 27 Mar 2026 14:51:52 +0100 (CET)
-Received: from mail-qt1-x843.google.com (mail-qt1-x843.google.com
- [IPv6:2607:f8b0:4864:20::843])
+ id 8938F83E7A; Fri, 27 Mar 2026 14:51:53 +0100 (CET)
+Received: from mail-qv1-xf41.google.com (mail-qv1-xf41.google.com
+ [IPv6:2607:f8b0:4864:20::f41])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC01A83E7A
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 14:51:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6636F8394E
+ for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 14:51:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jcethrid@gmail.com
-Received: by mail-qt1-x843.google.com with SMTP id
- d75a77b69052e-505a1789a27so11442051cf.3
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 06:51:49 -0700 (PDT)
+Received: by mail-qv1-xf41.google.com with SMTP id
+ 6a1803df08f44-89a06bc2f1bso33898046d6.1
+ for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 06:51:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1774619508; x=1775224308; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1774619510; x=1775224310; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Q/KH2tpFhJzaixNSsS/FoNj19VlWMlwakz8LBcvpRJg=;
- b=eOSvuX5gv2TZj6QZSobqC5izrOYhbE03yGp2me3IoiUDYPwRLqHmaYWc57kuruKHaT
- h39L/tt7ztQ5URPsFzWAd72oRBAR2NbId0T/4xsQC+IYlPIxzXxsn1nKuprOEM2/V5gC
- 2lbB3MZ2YsR+117LVl0q86du4HeqlsBsyG5o6/ZfTaN8p3v36cg9yl3kdBpQY/dsOHD8
- 1uB56FZuaSo0XOt9lMmO+57GAGpeMUIvApnx4RqCLLNDiZnwwNLZ+LhbjauIrFeHcntx
- Cpbc50wc7ly3Fet+Fti9B/N75TOB2glzaxH95man4OtFLOIEhnWT6mq/RcMBipL66uQq
- IZOg==
+ bh=R6O+pKFwNLypageFlQ8uCy5NsL1KTAHz+rsH7vM/YJQ=;
+ b=WQ58bt0aEibChqMaXLIO2QAxwE1+wpA20nc/OBn82JmrFL5qqpHuYeqh8V6ndiE6WC
+ vIo+2HOIhSHAOQU0/E8N+SkQuroW4qIYDmK/7UUA7H5YqARgwmItehrrc1vRy8hXZbo2
+ 2YyZeaFtrQmtNKLDFBTgrQbAuLw6kvmYtF91WBNim3+Z+08FM1UdSePdvWnFDQCBiQUk
+ uPh7slzoNOfefkbyUkTBm4fyNfjc5qSk2ezDs1ETLScxVTG/vn0A9Vb9O5TW61tF7azV
+ fuZj2kEHOXF6OaxWiYcAFs+4uEwATER/JfhdryOOO/M4DWOZqGp1ailTjLECtfyZNDX9
+ pWqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774619508; x=1775224308;
+ d=1e100.net; s=20251104; t=1774619510; x=1775224310;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Q/KH2tpFhJzaixNSsS/FoNj19VlWMlwakz8LBcvpRJg=;
- b=AYwJHTppkz6AYBRrEjzaPupeLrZKKeKj6rX6K79a7vkhXR3eXi1psyioldsfhtjUzu
- W26wzYDZeGcsMbn5DFvNtxHYlpWSSlipspMHpwOnnNJlPXZE13LLnKP1xjc076G7tSNm
- HRGuiB0QEFHZvv9fEt3lauGNABpm8QjJWHwtjDu+1Hm9f81tlj6EwZHqCQPEn2d/HE5m
- 0ldtMSMEGHel2Eon/tJ0D9J2ZjOYcRLmKxXxn9kF/JaqvMslHczsaSp5LvJMdf0fwzWj
- zczaxFyyzOnPMF15MIJ6rczcuuPU31T36pgj/MkY78Rxbpr31PySp17/ftKtjGXanAvN
- 6/Hw==
-X-Gm-Message-State: AOJu0YydR4G/KVj3pkk4B9VAVwYucoDZCjM5dKLmq6RQPyWutNK15BrE
- Hh7UylDQZb2bR/go/dwoZBEozRVE3s7DJDKcJIQcC0O0r25vLLVqcBu2AnLNeG0g
-X-Gm-Gg: ATEYQzwJW9g5a1abErzq+IC895pw6NfcHjLMkxCdBPdzavfkhy7Dg8wUQ9WTH6oPG50
- KsGxQ5/7S245OrHPYUOXNIHEXfO3bfU+5WLhjjuAdThKR/n1HlDVRWW6XhTUxfwHBwUR8jBhwrm
- 8jZGH8m9OsHcG9RR5B7pQjAdH6QsEj/pg1K+c3EZKawCymaQ7Q4vwnl9ja50j1RxVM0HFwULcas
- IkcK/EYvrO0/zVki5Oj93ix+NeW8HsX3XqrC4zqsMideekYB80U4ugpn9AuIKGOoBmLX0gIWn5F
- cBUNj3vITTmxMoXYsTeNNM4ThIHOtwBHeiJOXKErrYslO6A+YMClB9onjJxTWaFqXqHRzip2g3B
- rTwO/Sg/rUi36kGw8tbXq1cb2QzYqdyVNHKUXn3IKWpnoZQITdWYMcrXSuJlJR8Nqa4xcXxsgxX
- ycmWXFNvvkgixrOic4O38OjK+HtYMLVhqzgw==
-X-Received: by 2002:ac8:5744:0:b0:509:45fc:c88c with SMTP id
- d75a77b69052e-50ba3836f51mr35765211cf.19.1774619508519; 
- Fri, 27 Mar 2026 06:51:48 -0700 (PDT)
+ bh=R6O+pKFwNLypageFlQ8uCy5NsL1KTAHz+rsH7vM/YJQ=;
+ b=dzEk2xvyXatNoQQmVgOXVwQdQCZPt8+KvUtVxl+nrHTAqjfARt8gpWlnq3PTuRonaF
+ P9NhfiRZcjMlRN6Ei5IX3GBUMOPjeMwNvQOUpIO/+dG+aWtZW6dWJ0A690J5wCy5uOtX
+ aXxCm81LEtTh9YRplTtaknabKzI5g6aqZAQItni0NyXWbwdNkhPUWnOzk5/eDDl/yEBq
+ tCqRbd3lnSOdkVVfimctZ5fHDX53SQmILGjlJgv7Xpk51BktJ15yGGbaO374wyuoVz+N
+ /rWY8ApFfp7lJiuEgzC1S57PIk8eKfU1k5XevqHxv6C7hGLYd3M0Wa1Fuk2yDGNgDHTp
+ uNLw==
+X-Gm-Message-State: AOJu0YyMhvukylxYhnzcWhhpeU3VUCsEv+R9TnjR+Xwf6FwtMJTGr5er
+ SCJt8wENUKyGopaQTscwk2wXOZOsbMqaZGkoIVy6MhTvbwipHsrJJ2S7rbJmW+UH
+X-Gm-Gg: ATEYQzyYbG25BcKK8aZ9ZvKhYR7RLEU8ssw2GtNG1qt3SakTz4e1wjxpMOGj8FrZ4og
+ rFXbZf1myH7P9V/84jRTjLkERGoaP5+kOH0L21mcqNXCMxO0LYcAi+Wl91LAexLZwspNGmKJbr0
+ ExGI5ptAGMOd0il/RUtABxWustoSV+nlyX5+Us0ZqgSY3AUGqt9A+sWFgYPyZ/dYPppHbcrsiM4
+ 0cjBz9+wOUjgpvpINHux//iQfiZCvJo+6Yoqzrck5GPM6Dr2+K2UCPZIcJT8GkQOiRyO1h9ctm4
+ h3zn52Htxapveh7Jssom+Rj5HxtnHwp4Val0iBybi2pgHohaQ2sIrWpKyoLe9bpt7sdRRnfSD+6
+ JQAuJkr/hVH86X9NG9SgKMkJbPsh8bu0n0Yi1QKb/XJTWaq7wAuugJ4wg05R7ILPz9M+fwEseEZ
+ xfKdSEsitxdpka7PMUeWpOo6pz1WFSKTr18gYz84u3K+BV
+X-Received: by 2002:a05:6214:6005:b0:89c:5c57:98c with SMTP id
+ 6a1803df08f44-89ce8d3b820mr33300536d6.18.1774619510071; 
+ Fri, 27 Mar 2026 06:51:50 -0700 (PDT)
 Received: from cethr-l01.localdomain ([136.56.120.109])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-89cd588969dsm48691356d6.12.2026.03.27.06.51.46
+ 6a1803df08f44-89cd588969dsm48691356d6.12.2026.03.27.06.51.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Mar 2026 06:51:48 -0700 (PDT)
+ Fri, 27 Mar 2026 06:51:49 -0700 (PDT)
 From: Caleb Ethridge <jcethrid@gmail.com>
 To: u-boot@lists.denx.de
 Cc: malysagreg@gmail.com, trini@konsulko.com, linux@analog.com,
  philip@philipmolloy.com, Caleb Ethridge <caleb.ethridge@analog.com>
-Subject: [PATCH v2 06/13] mach-sc5xx: Remove preliminary binman support
-Date: Fri, 27 Mar 2026 09:49:21 -0400
-Message-Id: <83ccfceb891bc6c5388deea06a0600575c77be45.1774618658.git.jcethrid@gmail.com>
+Subject: [PATCH v2 07/13] dts: sc594: Fix gige-reset line on EZKIT
+Date: Fri, 27 Mar 2026 09:49:22 -0400
+Message-Id: <bc44c8f140dcd33b91db530b37c98ffcd1ccf363.1774618658.git.jcethrid@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1774618658.git.jcethrid@gmail.com>
 References: <cover.1774618658.git.jcethrid@gmail.com>
@@ -101,111 +101,30 @@ X-Virus-Status: Clean
 
 From: Caleb Ethridge <caleb.ethridge@analog.com>
 
-Remove preliminary binman support from all sc5xx ADSP boards.
-Full support was never added because it was unused.
+The gige-reset line on the EZKIT was updated for the
+sc598 but not the sc594. This commit aligns the two .dts
+files since they are describing the same hardware, the
+EZKIT carrier board.
 
+Fixes: be79378 ("board: adi: Add support for SC594")
 Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
 ---
- arch/arm/dts/sc5xx.dtsi     | 41 -------------------------------------
- arch/arm/mach-sc5xx/Kconfig | 33 -----------------------------
- 2 files changed, 74 deletions(-)
+ arch/arm/dts/sc594-som-ezkit.dts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/sc5xx.dtsi b/arch/arm/dts/sc5xx.dtsi
-index 9d346ae62e0..072631e34f7 100644
---- a/arch/arm/dts/sc5xx.dtsi
-+++ b/arch/arm/dts/sc5xx.dtsi
-@@ -25,47 +25,6 @@
- 		bootph-pre-ram;
- 	};
+diff --git a/arch/arm/dts/sc594-som-ezkit.dts b/arch/arm/dts/sc594-som-ezkit.dts
+index 11154e65ed6..e1628ce2082 100644
+--- a/arch/arm/dts/sc594-som-ezkit.dts
++++ b/arch/arm/dts/sc594-som-ezkit.dts
+@@ -130,7 +130,7 @@
  
--#ifdef CONFIG_SC5XX_USE_BINMAN
--	binman {
--		filename = CONFIG_SC5XX_BINMAN_FILENAME;
--		stage1-boot {
--			offset = <CONFIG_SC5XX_UBOOT_SPL_OFFSET>;
--			type = "blob-ext";
--			filename = "spl/u-boot-spl.ldr";
--		};
--
--		/* since falcon mode can jump from SPL to OS directly
--		 * full u-boot is optional
--		 *
--		 * @todo: review if we can say this given support has
--		 * not yet been upstreamed. Otherwise we might have to
--		 * invoke binman only for full u-boot.
--		 */
--		stage2-boot {
--			offset = <CONFIG_SC5XX_UBOOT_OFFSET>;
--			type = "blob-ext";
--			filename = "u-boot.ldr";
--			optional;
--		};
--
--#ifdef CONFIG_SC5XX_FITIMAGE_NAME
--		fitImage {
--			offset = <CONFIG_SC5XX_FITIMAGE_OFFSET>;
--			type = "blob-ext";
--			filename = CONFIG_SC5XX_FITIMAGE_NAME;
--		};
--#endif
--
--#ifdef CONFIG_SC5XX_ROOTFS_NAME
--		rfs {
--			offset = <CONFIG_SC5XX_ROOTFS_OFFSET>;
--			type = "blob-ext";
--			filename = CONFIG_SC5XX_ROOTFS_NAME;
--		};
--#endif
--	};
--#endif
--
- 	clocks {
- 		dummy: dummy {
- 			compatible = "fixed-clock";
-diff --git a/arch/arm/mach-sc5xx/Kconfig b/arch/arm/mach-sc5xx/Kconfig
-index 774c69091ee..276d173912a 100644
---- a/arch/arm/mach-sc5xx/Kconfig
-+++ b/arch/arm/mach-sc5xx/Kconfig
-@@ -143,39 +143,6 @@ config SC5XX_LOADADDR
- 	help
- 	  The default load address for u-boot.
- 
--menu "Binman configuration"
--config SC5XX_USE_BINMAN
--	bool "Use binman for final image"
--	select BINMAN
--	help
--	  If you wish to use binman to assemble an image, say 'Y' here.
--	  This will enable binman-specific sections in the device tree.
--
--config SC5XX_BINMAN_FILENAME
--	string "Image name"
--	default "sc5xx-image.img"
--	depends on SC5XX_USE_BINMAN
--	help
--	  The name of the image that will be created by binman.
--	  This is used to create the final image.
--
--config SC5XX_FITIMAGE_NAME
--	string "FitImage name"
--	default "fitImage"
--	depends on SC5XX_USE_BINMAN
--	help
--	  The name of the fitImage to be packed by binman.
--	  This is used to create the final image.
--
--config SC5XX_ROOTFS_NAME
--	string "RootFS name"
--	default "rootfs"
--	depends on SC5XX_USE_BINMAN
--	help
--	  The name of the rootfs to be packed by binman.
--	  This is used to create the final image.
--endmenu
--
- config ADI_IMAGE
- 	string "ADI fitImage type"
- 	help
+ 		gige-reset {
+ 			gpio-hog;
+-			gpios = <15 GPIO_ACTIVE_HIGH>;
++			gpios = <15 GPIO_ACTIVE_LOW>;
+ 			output-high;
+ 			line-name = "gige-reset";
+ 			bootph-pre-ram;
 -- 
 2.34.1
 
