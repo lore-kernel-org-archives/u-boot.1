@@ -4,88 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9FEB10F286A
-	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 20:10:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FAC810F2867
+	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 20:10:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5519483E7A;
-	Fri, 27 Mar 2026 21:09:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C0E7C83FAF;
+	Fri, 27 Mar 2026 21:10:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="qhvOTLL2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B+/FsObM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 033DA83DA7; Fri, 27 Mar 2026 21:09:58 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 3830983FA7; Fri, 27 Mar 2026 21:10:01 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A77E68394E
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 21:09:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EC7958394E
+ for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 21:09:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7d7d4ebccf7so2091363a34.0
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 13:09:55 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7d74dbfe84cso1708901a34.1
+ for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 13:09:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1774642194; x=1775246994; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Yb+91WANTYfIoBSwBVZ/Egwt/l3EltUFuvcCRUECruI=;
- b=qhvOTLL2W2Q/S9LkpC11qXQeRQjFUPOg5i5rdaNreMmj9s5+uDMAVqLwQ9CLrH8glJ
- 1hEJJL1FRqItxTOYsOp4x+ZJye9FAuSiy0QEMtztr2ltBlMpa+sImZDdteGAyl5Fq7uW
- FIhFCJZuKigRyDyE6p5Gmv0Xx471R22ksK6wadQTuKqN7I2Dp2+hqfxCJ06lwjDySmK1
- 3vzYbLfa+ihsEC/8R3GnIO9sQTkVcR43Kzfr5T+8plV714t+haK4Q685HATGX9m0rrkY
- 9JA1S7w5a6ZSN5pKajNLdGU+6VuhFYVeUz6OVD9M8FS9t9+haVMi3XwO014LOEasfCZW
- dimw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774642194; x=1775246994;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1774642197; x=1775246997; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Yb+91WANTYfIoBSwBVZ/Egwt/l3EltUFuvcCRUECruI=;
- b=L3vizeZCJ8/lno0XyeiaCVqtXQuG4hwbMii8g9x5l+yIgT9zopXCUKMk1RbL9uEfet
- N2Aq4lEUxvb5kdMqH7pQ0I8ZoCkVEra1Ge17AXm+y9dhWmyo/0JvdFIdz2JHrPve0CJr
- o1JfB0G519DFyiVr3qcScLg4/L5s875LE989+SRlxzNPc9rqaqWpCzkuD6REZh0+jqir
- UM3VI3G7IggM89zAjWkNC0/gbeDUSypSka+f7Z32G/k4XWuNIoVkfAEMr3e6v73y3B7U
- FbL89qWBmRQLJX+FM3C4fLsh/kGFLOXBVa5AU1mf9i0Rdssmyaoa8ueeErF2wKeQv6+4
- xjpQ==
-X-Gm-Message-State: AOJu0YzG/6enOONFP1woHCF5qi3WM018ceB/pSWaCwDGkFCDSaLSnm+m
- kX1FloyszVrE49QHr2Tr4PNEYk1bpae0ZteVT8ewNdmp0j8amv5npqe/DUo606bb
-X-Gm-Gg: ATEYQzy6w0gMeC2AOj2WBrt5nxf6rD851bK5p3HvVFpv3yN/eeXbfyCU39eVIw07t5Q
- 1hhVoGMXoK9EcWk4kiSx6XRLNBlNbT257A2BFnd6b3A010ct/50FZEjZ6dw6sBNm1jScc5KeV7L
- 44rtDZTuZlK6qJuNoEiOrUJCainy7QtE8DSU/4Vbz0ThpCDI3E3TVy5cK9yMasPLvnJXCZnBrq5
- PlRRbsyDipdPwu+eW+yvbbhJtWbWFyRCpVDZaK2AvwZF/ftF86S2HybIBNpZrpFwTgVnoy7TR7j
- iIeMW+NFpX071TB8CD1AHnoqOPIYLuChPEgXL+VjvAGSvVDKdRZtruR124FKme84/TDxABVaabq
- XPoLIQr/5MLvXy1sAwsCC82Qw1KzVP9HFxTJLLCl8nrn/oM3YcfpH6EgS2AJsvSkM7XkcOI6V2L
- VDxtOtYjrxNkxI/I+RN9kZSk+9E1y+WnOZH2SJx4MWvWY3Oln5pcM2NDeLZxrpIQhgl6fdtoxB1
- eocCK+nAiYLR0E6qKQ76+QvRzP7Cb9IFwcrTFqwBOnO4fPTZgSN/RkYHyda
-X-Received: by 2002:a05:6830:488f:b0:7c7:69c8:2d2 with SMTP id
- 46e09a7af769-7d9fad77586mr2049433a34.13.1774642194036; 
- Fri, 27 Mar 2026 13:09:54 -0700 (PDT)
+ bh=t1PzgCuunsNOT2GKEFj0EWNMYKiUyLhbM9iVZXmRt4Q=;
+ b=B+/FsObMQ87iIYFreNYC0zYd1z/2guYh6rDS4vKWT52ZFFlLYD/TkKkuo70OEynFJ7
+ 56fOYmUn1p3NJSk5du6+zOrvh92LTifzGnAhMRg67+GYKz3isxGN3YKTz2Gz1ilVK13R
+ OsktppFoot3f8/nzK9390Ha5i3kvXHo6hhDm6y/9hfkUqq28L9tR9wba129jlE/JQofM
+ QATVmFYXwv7NiSdHIumR+Sd6Wv6VCbWlozhSCl1I5sS3KESrxorpd1p20ciXWeidjh0O
+ m+m4Fx5lt0iJ1D4pcv+og3hyE797PkXNJi1n79mJqZMgudhaPthnPLwIBRddd1gfxIzc
+ vaPQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774642197; x=1775246997;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=t1PzgCuunsNOT2GKEFj0EWNMYKiUyLhbM9iVZXmRt4Q=;
+ b=MMAqexyppKTl3XAYEQaI9TnL2kpdYtEibW45Lm1WrQr8ZARrVY/kacjOdtCEjkcR0v
+ OjiI80w4fd4nWR/dL9MB/CGpKPLyHS/8342ROUlLk6vLEGbkmsVNfyNh1RhMNZ42RL2P
+ +Kg9v59Am+ETvkpmWCu996CpnrHWMtdpLq283SsoV8yBFaTse9CyFWpfePuNl+SclyMk
+ EOIWtH6xiJQr8JfQdxIhV3yiLnjc8cRXhjiP47qxoIVA+p89JO8+8M77APDkCWFfovdq
+ XVroeyC+Lu582j5AI93TR/AT3EDVFN5eTVh05gFYdajHZm863ekNjmTFgHgUeDtt4YFf
+ 4VNg==
+X-Gm-Message-State: AOJu0Ywg8Dyst9xTZ4A7mnOQ0xtHjcSa9yk9BKWbi+YVCi8cwtyzXheb
+ njK4ZYEskNcbWwaFoM5c9YHdKIw+bVJsNmJCPeMAlTReRdR9hRNFsNtR+vUVfw==
+X-Gm-Gg: ATEYQzwDmNKan5yax8UlJSf963St0uJ52lRK6GLi17tbce0xiX+XN3pqr2YGB5someL
+ /HenKaay5UNGzkMea1VibMJp9oES9Ky/+kgGvU6hitia8XatoyhUn1SJbLQBmSMK9rekkxziXnt
+ xPa0myBOJPJTYGgqWbpxFH1dW2TqNoLqZAKfunov5nrOQWadXzfnB9WLoZirTtq4WvG+YxC08+z
+ uGSdTFCst82+PXB8sn5ekrvXiXAIirboCU6zKUK+yhu5QecqT4lOjDNlDDul4TZ4iJnkI4UqqqK
+ kgkERID7rp7oP8vj0eZ3VwyW3DI/bf9/zYGufdSo8XUPS1sPpf34qTMDV6Uwah2HatwoBocGYKQ
+ dHesy1j3HW8vr508Q5Euk9Ai9227VnwQ2UV/xAEu7ds4rW02KEZgt5mv4vPUbxpKys/Okr7hqk8
+ uy56h+8gLhCoQis9KZk9PJK+40iYrLki2KIKIXuS99M2ek+iwNw1gfh2n2JjhVnosLRa56tGPNq
+ oPAFoRhJxSd8F74YDDfMY71Td7Eg5Cb0fCrnGtUzp97rO09BHpKZW2x/g14
+X-Received: by 2002:a05:6830:710a:b0:7d9:b314:1452 with SMTP id
+ 46e09a7af769-7d9fad15978mr2161235a34.7.1774642197416; 
+ Fri, 27 Mar 2026 13:09:57 -0700 (PDT)
 Received: from james-x399.localdomain (71-33-142-50.hlrn.qwest.net.
  [71.33.142.50]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7da0a7b5b41sm166102a34.15.2026.03.27.13.09.53
+ 46e09a7af769-7da0a7b5b41sm166102a34.15.2026.03.27.13.09.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Mar 2026 13:09:53 -0700 (PDT)
+ Fri, 27 Mar 2026 13:09:57 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
 To: u-boot@lists.denx.de
 Cc: James Hilliard <james.hilliard1@gmail.com>,
  Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
  Jernej Skrabec <jernej.skrabec@gmail.com>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
  Paul Kocialkowski <contact@paulk.fr>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Mikhail Kalashnikov <iuncuim@gmail.com>,
  Richard Genoud <richard.genoud@bootlin.com>,
- Alexander Graf <agraf@csgraf.de>, Cody Eksal <masterr3c0rd@epochal.quest>,
- Samuel Holland <samuel@sholland.org>,
- Mikhail Kalashnikov <iuncuim@gmail.com>
-Subject: [PATCH v4 1/5] sunxi: h616: make ns_to_t() use the DRAM clock
-Date: Fri, 27 Mar 2026 14:09:12 -0600
-Message-ID: <20260327200932.2016910-1-james.hilliard1@gmail.com>
+ Cody Eksal <masterr3c0rd@epochal.quest>,
+ Samuel Holland <samuel@sholland.org>
+Subject: [PATCH v4 2/5] sunxi: h616: move PHY init tables into timing files
+Date: Fri, 27 Mar 2026 14:09:13 -0600
+Message-ID: <20260327200932.2016910-2-james.hilliard1@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260327200932.2016910-1-james.hilliard1@gmail.com>
+References: <20260327200932.2016910-1-james.hilliard1@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -104,183 +106,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Pass struct dram_para into ns_to_t() and derive the controller
-clock from para->clk instead of CONFIG_DRAM_CLK.
+Store the compile-time-selected PHY initialisation data alongside
+each H616 timing implementation instead of in the common H616
+DRAM code.
 
-This prepares the H616 timing code for selecting the DRAM
-backend from runtime parameters instead of a fixed build-time
-clock setting.
+The common code still consumes a single phy_init pointer, so this
+only moves the DRAM-type-specific data without changing the
+selection model.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- .../include/asm/arch-sunxi/dram_sun50i_h616.h |  4 +--
- .../mach-sunxi/dram_timings/h616_ddr3_1333.c  | 30 +++++++++----------
- .../arm/mach-sunxi/dram_timings/h616_lpddr3.c | 30 +++++++++----------
- .../dram_timings/h616_lpddr4_2133.c           | 30 +++++++++----------
- 4 files changed, 47 insertions(+), 47 deletions(-)
+ .../include/asm/arch-sunxi/dram_sun50i_h616.h |  3 ++
+ arch/arm/mach-sunxi/dram_sun50i_h616.c        | 41 +------------------
+ .../mach-sunxi/dram_timings/h616_ddr3_1333.c  | 18 ++++++++
+ .../arm/mach-sunxi/dram_timings/h616_lpddr3.c | 18 ++++++++
+ .../dram_timings/h616_lpddr4_2133.c           | 18 ++++++++
+ 5 files changed, 58 insertions(+), 40 deletions(-)
 
 diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
-index a8fdda124a0..c35ef0252cb 100644
+index c35ef0252cb..fa12d5d2685 100644
 --- a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
 +++ b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
-@@ -168,9 +168,9 @@ struct dram_config {
+@@ -168,6 +168,8 @@ struct dram_config {
  	u8 bus_full_width;
  };
  
--static inline int ns_to_t(int nanoseconds)
-+static inline int ns_to_t(const struct dram_para *para, int nanoseconds)
++#define H616_PHY_INIT_LEN	27
++
+ static inline int ns_to_t(const struct dram_para *para, int nanoseconds)
  {
--	const unsigned int ctrl_freq = CONFIG_DRAM_CLK / 2;
-+	const unsigned int ctrl_freq = para->clk / 2;
- 
+ 	const unsigned int ctrl_freq = para->clk / 2;
+@@ -175,6 +177,7 @@ static inline int ns_to_t(const struct dram_para *para, int nanoseconds)
  	return DIV_ROUND_UP(ctrl_freq * nanoseconds, 1000);
  }
+ 
++extern const u8 *phy_init;
+ void mctl_set_timing_params(const struct dram_para *para);
+ 
+ #endif /* _SUNXI_DRAM_SUN50I_H616_H */
+diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+index 3345c9b8e82..5ee1ca25311 100644
+--- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
++++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+@@ -227,45 +227,6 @@ static void mctl_set_addrmap(const struct dram_config *config)
+ 	mctl_ctl->addrmap[8] = 0x3F3F;
+ }
+ 
+-#ifdef CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_1
+-static const u8 phy_init[] = {
+-#ifdef CONFIG_SUNXI_DRAM_H616_DDR3_1333
+-	0x08, 0x02, 0x12, 0x05, 0x15, 0x17, 0x18, 0x0b,
+-	0x14, 0x07, 0x04, 0x13, 0x0c, 0x00, 0x16, 0x1a,
+-	0x0a, 0x11, 0x03, 0x10, 0x0e, 0x01, 0x0d, 0x19,
+-	0x06, 0x09, 0x0f
+-#elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR3)
+-	0x18, 0x00, 0x04, 0x09, 0x06, 0x05, 0x02, 0x19,
+-	0x17, 0x03, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+-	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x07,
+-	0x08, 0x01, 0x1a
+-#elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR4)
+-	0x03, 0x00, 0x17, 0x05, 0x02, 0x19, 0x06, 0x07,
+-	0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+-	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x01,
+-	0x18, 0x04, 0x1a
+-#endif
+-};
+-#else /* CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_0 */
+-static const u8 phy_init[] = {
+-#ifdef CONFIG_SUNXI_DRAM_H616_DDR3_1333
+-	0x07, 0x0b, 0x02, 0x16, 0x0d, 0x0e, 0x14, 0x19,
+-	0x0a, 0x15, 0x03, 0x13, 0x04, 0x0c, 0x10, 0x06,
+-	0x0f, 0x11, 0x1a, 0x01, 0x12, 0x17, 0x00, 0x08,
+-	0x09, 0x05, 0x18
+-#elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR3)
+-	0x18, 0x06, 0x00, 0x05, 0x04, 0x03, 0x09, 0x02,
+-	0x08, 0x01, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+-	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x07,
+-	0x17, 0x19, 0x1a
+-#elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR4)
+-	0x02, 0x00, 0x17, 0x05, 0x04, 0x19, 0x06, 0x07,
+-	0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+-	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x01,
+-	0x18, 0x03, 0x1a
+-#endif
+-};
+-#endif /* CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_0 */
+ #define MASK_BYTE(reg, nr) (((reg) >> ((nr) * 8)) & 0x1f)
+ static void mctl_phy_configure_odt(const struct dram_para *para)
+ {
+@@ -964,7 +925,7 @@ static bool mctl_phy_init(const struct dram_para *para,
+ 	writel(val2, SUNXI_DRAM_PHY0_BASE + 0x37c);
+ 
+ 	ptr = (u32 *)(SUNXI_DRAM_PHY0_BASE + 0xc0);
+-	for (i = 0; i < ARRAY_SIZE(phy_init); i++)
++	for (i = 0; i < H616_PHY_INIT_LEN; i++)
+ 		writel(phy_init[i], &ptr[i]);
+ 
+ 	if (para->tpr10 & TPR10_CA_BIT_DELAY)
 diff --git a/arch/arm/mach-sunxi/dram_timings/h616_ddr3_1333.c b/arch/arm/mach-sunxi/dram_timings/h616_ddr3_1333.c
-index 3faf8d5bd97..1f0d0de198c 100644
+index 1f0d0de198c..f367f604d5f 100644
 --- a/arch/arm/mach-sunxi/dram_timings/h616_ddr3_1333.c
 +++ b/arch/arm/mach-sunxi/dram_timings/h616_ddr3_1333.c
-@@ -20,27 +20,27 @@ void mctl_set_timing_params(const struct dram_para *para)
- 			(struct sunxi_mctl_ctl_reg *)SUNXI_DRAM_CTL0_BASE;
+@@ -14,6 +14,24 @@
+ #include <asm/arch/dram.h>
+ #include <asm/arch/cpu.h>
  
- 	u8 tccd		= 2;			/* JEDEC: 4nCK */
--	u8 tfaw		= ns_to_t(50);		/* JEDEC: 30 ns w/ 1K pages */
--	u8 trrd		= max(ns_to_t(6), 4);	/* JEDEC: max(6 ns, 4nCK) */
--	u8 trcd		= ns_to_t(15);		/* JEDEC: 13.5 ns */
--	u8 trc		= ns_to_t(53);		/* JEDEC: 49.5 ns */
--	u8 txp		= max(ns_to_t(6), 3);	/* JEDEC: max(6 ns, 3nCK) */
--	u8 trtp		= max(ns_to_t(8), 2);	/* JEDEC: max(7.5 ns, 4nCK) */
--	u8 trp		= ns_to_t(15);		/* JEDEC: >= 13.75 ns */
--	u8 tras		= ns_to_t(38);		/* JEDEC >= 36 ns, <= 9*trefi */
--	u16 trefi	= ns_to_t(7800) / 32;	/* JEDEC: 7.8us@Tcase <= 85C */
--	u16 trfc	= ns_to_t(350);		/* JEDEC: 160 ns for 2Gb */
-+	u8 tfaw		= ns_to_t(para, 50);	/* JEDEC: 30 ns w/ 1K pages */
-+	u8 trrd		= max(ns_to_t(para, 6), 4); /* JEDEC: max(6 ns, 4nCK) */
-+	u8 trcd		= ns_to_t(para, 15);	/* JEDEC: 13.5 ns */
-+	u8 trc		= ns_to_t(para, 53);	/* JEDEC: 49.5 ns */
-+	u8 txp		= max(ns_to_t(para, 6), 3); /* JEDEC: max(6 ns, 3nCK) */
-+	u8 trtp		= max(ns_to_t(para, 8), 2); /* JEDEC: max(7.5 ns, 4nCK) */
-+	u8 trp		= ns_to_t(para, 15);	/* JEDEC: >= 13.75 ns */
-+	u8 tras		= ns_to_t(para, 38);	/* JEDEC >= 36 ns, <= 9*trefi */
-+	u16 trefi	= ns_to_t(para, 7800) / 32; /* JEDEC: 7.8us@Tcase <= 85C */
-+	u16 trfc	= ns_to_t(para, 350);	/* JEDEC: 160 ns for 2Gb */
- 	u16 txsr	= 4;			/* ? */
- 
- 	u8 tmrw		= 0;			/* ? */
- 	u8 tmrd		= 4;			/* JEDEC: 4nCK */
--	u8 tmod		= max(ns_to_t(15), 12);	/* JEDEC: max(15 ns, 12nCK) */
--	u8 tcke		= max(ns_to_t(6), 3);	/* JEDEC: max(5.625 ns, 3nCK) */
--	u8 tcksrx	= max(ns_to_t(10), 4);	/* JEDEC: max(10 ns, 5nCK) */
--	u8 tcksre	= max(ns_to_t(10), 4);	/* JEDEC: max(10 ns, 5nCK) */
-+	u8 tmod		= max(ns_to_t(para, 15), 12); /* JEDEC: max(15 ns, 12nCK) */
-+	u8 tcke		= max(ns_to_t(para, 6), 3); /* JEDEC: max(5.625 ns, 3nCK) */
-+	u8 tcksrx	= max(ns_to_t(para, 10), 4); /* JEDEC: max(10 ns, 5nCK) */
-+	u8 tcksre	= max(ns_to_t(para, 10), 4); /* JEDEC: max(10 ns, 5nCK) */
- 	u8 tckesr	= tcke + 1;		/* JEDEC: tCKE(min) + 1nCK */
- 	u8 trasmax	= (para->clk / 2) / 15;	/* JEDEC: tREFI * 9 */
--	u8 txs		= ns_to_t(360) / 32;	/* JEDEC: max(5nCK,tRFC+10ns) */
-+	u8 txs		= ns_to_t(para, 360) / 32; /* JEDEC: max(5nCK,tRFC+10ns) */
- 	u8 txsdll	= 16;			/* JEDEC: 512 nCK */
- 	u8 txsabort	= 4;			/* ? */
- 	u8 txsfast	= 4;			/* ? */
++static const u8 h616_ddr3_phy_init_default[H616_PHY_INIT_LEN] = {
++	0x07, 0x0b, 0x02, 0x16, 0x0d, 0x0e, 0x14, 0x19,
++	0x0a, 0x15, 0x03, 0x13, 0x04, 0x0c, 0x10, 0x06,
++	0x0f, 0x11, 0x1a, 0x01, 0x12, 0x17, 0x00, 0x08,
++	0x09, 0x05, 0x18
++};
++
++static const u8 h616_ddr3_phy_init_addr_map_1[H616_PHY_INIT_LEN] = {
++	0x08, 0x02, 0x12, 0x05, 0x15, 0x17, 0x18, 0x0b,
++	0x14, 0x07, 0x04, 0x13, 0x0c, 0x00, 0x16, 0x1a,
++	0x0a, 0x11, 0x03, 0x10, 0x0e, 0x01, 0x0d, 0x19,
++	0x06, 0x09, 0x0f
++};
++
++const u8 *phy_init = IS_ENABLED(CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_1) ?
++		     h616_ddr3_phy_init_addr_map_1 :
++		     h616_ddr3_phy_init_default;
++
+ void mctl_set_timing_params(const struct dram_para *para)
+ {
+ 	struct sunxi_mctl_ctl_reg * const mctl_ctl =
 diff --git a/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c b/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c
-index ce2ffa7a020..e753fd7b4af 100644
+index e753fd7b4af..7efb1b22a84 100644
 --- a/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c
 +++ b/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c
-@@ -20,27 +20,27 @@ void mctl_set_timing_params(const struct dram_para *para)
- 			(struct sunxi_mctl_ctl_reg *)SUNXI_DRAM_CTL0_BASE;
+@@ -14,6 +14,24 @@
+ #include <asm/arch/dram.h>
+ #include <asm/arch/cpu.h>
  
- 	u8 tccd		= 2;
--	u8 tfaw		= ns_to_t(50);
--	u8 trrd		= max(ns_to_t(6), 4);
--	u8 trcd		= ns_to_t(24);
--	u8 trc		= ns_to_t(70);
--	u8 txp		= max(ns_to_t(8), 3);
--	u8 trtp		= max(ns_to_t(8), 2);
--	u8 trp		= ns_to_t(27);
--	u8 tras		= ns_to_t(41);
--	u16 trefi	= ns_to_t(7800) / 64;
--	u16 trfc	= ns_to_t(210);
-+	u8 tfaw		= ns_to_t(para, 50);
-+	u8 trrd		= max(ns_to_t(para, 6), 4);
-+	u8 trcd		= ns_to_t(para, 24);
-+	u8 trc		= ns_to_t(para, 70);
-+	u8 txp		= max(ns_to_t(para, 8), 3);
-+	u8 trtp		= max(ns_to_t(para, 8), 2);
-+	u8 trp		= ns_to_t(para, 27);
-+	u8 tras		= ns_to_t(para, 41);
-+	u16 trefi	= ns_to_t(para, 7800) / 64;
-+	u16 trfc	= ns_to_t(para, 210);
- 	u16 txsr	= 88;
- 
- 	u8 tmrw		= 5;
- 	u8 tmrd		= 5;
--	u8 tmod		= max(ns_to_t(15), 12);
--	u8 tcke		= max(ns_to_t(6), 3);
--	u8 tcksrx	= max(ns_to_t(12), 4);
--	u8 tcksre	= max(ns_to_t(12), 4);
-+	u8 tmod		= max(ns_to_t(para, 15), 12);
-+	u8 tcke		= max(ns_to_t(para, 6), 3);
-+	u8 tcksrx	= max(ns_to_t(para, 12), 4);
-+	u8 tcksre	= max(ns_to_t(para, 12), 4);
- 	u8 tckesr	= tcke + 2;
- 	u8 trasmax	= (para->clk / 2) / 16;
--	u8 txs		= ns_to_t(360) / 32;
-+	u8 txs		= ns_to_t(para, 360) / 32;
- 	u8 txsdll	= 16;
- 	u8 txsabort	= 4;
- 	u8 txsfast	= 4;
++static const u8 h616_lpddr3_phy_init_default[H616_PHY_INIT_LEN] = {
++	0x18, 0x06, 0x00, 0x05, 0x04, 0x03, 0x09, 0x02,
++	0x08, 0x01, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
++	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x07,
++	0x17, 0x19, 0x1a
++};
++
++static const u8 h616_lpddr3_phy_init_addr_map_1[H616_PHY_INIT_LEN] = {
++	0x18, 0x00, 0x04, 0x09, 0x06, 0x05, 0x02, 0x19,
++	0x17, 0x03, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
++	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x07,
++	0x08, 0x01, 0x1a
++};
++
++const u8 *phy_init = IS_ENABLED(CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_1) ?
++		     h616_lpddr3_phy_init_addr_map_1 :
++		     h616_lpddr3_phy_init_default;
++
+ void mctl_set_timing_params(const struct dram_para *para)
+ {
+ 	struct sunxi_mctl_ctl_reg * const mctl_ctl =
 diff --git a/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c b/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
-index 6f5c4acbd62..bbe401464eb 100644
+index bbe401464eb..055d8dd3cad 100644
 --- a/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
 +++ b/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
-@@ -18,24 +18,24 @@ void mctl_set_timing_params(const struct dram_para *para)
- 			(struct sunxi_mctl_ctl_reg *)SUNXI_DRAM_CTL0_BASE;
+@@ -12,6 +12,24 @@
+ #include <asm/arch/dram.h>
+ #include <asm/arch/cpu.h>
  
- 	u8 tccd		= 4;
--	u8 tfaw		= ns_to_t(40);
--	u8 trrd		= max(ns_to_t(10), 2);
--	u8 trcd		= max(ns_to_t(18), 2);
--	u8 trc		= ns_to_t(65);
--	u8 txp		= max(ns_to_t(8), 2);
-+	u8 tfaw		= ns_to_t(para, 40);
-+	u8 trrd		= max(ns_to_t(para, 10), 2);
-+	u8 trcd		= max(ns_to_t(para, 18), 2);
-+	u8 trc		= ns_to_t(para, 65);
-+	u8 txp		= max(ns_to_t(para, 8), 2);
- 	u8 trtp		= 4;
--	u8 trp		= ns_to_t(21);
--	u8 tras		= ns_to_t(42);
--	u16 trefi	= ns_to_t(3904) / 32;
--	u16 trfc	= ns_to_t(280);
--	u16 txsr	= ns_to_t(190);
-+	u8 trp		= ns_to_t(para, 21);
-+	u8 tras		= ns_to_t(para, 42);
-+	u16 trefi	= ns_to_t(para, 3904) / 32;
-+	u16 trfc	= ns_to_t(para, 280);
-+	u16 txsr	= ns_to_t(para, 190);
- 
--	u8 tmrw		= max(ns_to_t(14), 5);
-+	u8 tmrw		= max(ns_to_t(para, 14), 5);
- 	u8 tmrd		= tmrw;
- 	u8 tmod		= 12;
--	u8 tcke		= max(ns_to_t(15), 2);
--	u8 tcksrx	= max(ns_to_t(2), 2);
--	u8 tcksre	= max(ns_to_t(5), 2);
-+	u8 tcke		= max(ns_to_t(para, 15), 2);
-+	u8 tcksrx	= max(ns_to_t(para, 2), 2);
-+	u8 tcksre	= max(ns_to_t(para, 5), 2);
- 	u8 tckesr	= tcke;
- 	u8 trasmax	= (trefi * 9) / 32;
- 	u8 txs		= 4;
-@@ -49,7 +49,7 @@ void mctl_set_timing_params(const struct dram_para *para)
- 
- 	u8 twtp		= 24;
- 	u8 twr2rd	= max(trrd, (u8)4) + 14;
--	u8 trd2wr	= (ns_to_t(4) + 17) - ns_to_t(1);
-+	u8 trd2wr	= (ns_to_t(para, 4) + 17) - ns_to_t(para, 1);
- 
- 	/* set DRAM timing */
- 	writel((twtp << 24) | (tfaw << 16) | (trasmax << 8) | tras,
++static const u8 h616_lpddr4_phy_init_default[H616_PHY_INIT_LEN] = {
++	0x02, 0x00, 0x17, 0x05, 0x04, 0x19, 0x06, 0x07,
++	0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
++	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x01,
++	0x18, 0x03, 0x1a
++};
++
++static const u8 h616_lpddr4_phy_init_addr_map_1[H616_PHY_INIT_LEN] = {
++	0x03, 0x00, 0x17, 0x05, 0x02, 0x19, 0x06, 0x07,
++	0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
++	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x01,
++	0x18, 0x04, 0x1a
++};
++
++const u8 *phy_init = IS_ENABLED(CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_1) ?
++		     h616_lpddr4_phy_init_addr_map_1 :
++		     h616_lpddr4_phy_init_default;
++
+ void mctl_set_timing_params(const struct dram_para *para)
+ {
+ 	struct sunxi_mctl_ctl_reg * const mctl_ctl =
 -- 
 2.43.0
 
