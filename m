@@ -4,179 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B086C10ED65C
-	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 11:45:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34DC410ED660
+	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 12:10:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E628583E7A;
-	Fri, 27 Mar 2026 12:45:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 79D3583DA7;
+	Fri, 27 Mar 2026 13:10:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Zqn7Q+fA";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="bSBlwxL0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D76483DBF; Fri, 27 Mar 2026 12:45:13 +0100 (CET)
-Received: from SA9PR02CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170130001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10c::1])
+ id 1C45E83DBF; Fri, 27 Mar 2026 13:10:36 +0100 (CET)
+Received: from PH8PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C05BD83C14
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 12:45:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F053E83C14
+ for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 13:10:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
+ spf=fail smtp.mailfrom=Pranav.sanwal@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=awT9I6s0dc0X7rkqZtCXFBa7g4osQIkAmbKbrudlDJa2bOpYtUXNiRiXnxZ4LhQWk0ZkmppsMDBJ7Xs8euwNkOPItPikUO+/DDjX5k+SdUTsvL5beOJeZ+2uz9pN4RZYUFAa2YCk/YlAM2QkZw0/Y/NqODmL7C2oZEDdLF6F0axRaskRI4l+i6oHhnPLSYFh4xVVjd8G9hQpppabH9ZcnBGlq6kffrCxZD5RVCTFmplPpqNdbZM0ZGa0aezP1b1qG8mog82/pKuojJjHBOhg5ZOnBaMjbJkmqrDrbIrffBV2TglsHpRkpTco73MR87iLhpWYzIZNJPCMdPghGUkoYQ==
+ b=NrhOZ0/avWEZfrfk5A1Hzf+qjdI2fiJDAgoTGP8hV0j685R/ukEn2YSm2s5HTvGMNVKMp0CwuV4BGyX6/qpg6Kq5tRWhwleXjs2WjeEkYszDgMIFG7KGq52MogKA1e53ljnn0T4QcszoBZyPD1jGySgyIK9f/PrENIDGn76h1TE98l16Whu411whlIoyekFwqi3BfalXvoqmhb3h7XzTGwpa6JALR/8Ae/mwZ0ncvkDokijurvSM4CypQy0MTxjdb79wJxMNIXh38unw9Uyzt85Ggq3WVuWCSFkS2vB7WuRvhI54hrPtz9F9MQKvyjymczzNm6pohVRw4LrxzQiq/g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=e84kq9tQASnC2Gn84rQjhd4K7RMzwA1JqZ12BNTvj1w=;
- b=CQQNvxUwzSiVpVl1lH0Q5UPa915uZ2KNu5bALKbIQzC6lZojZw6rwn+eWygw9v+sUS9p0xlk8csyq9YmYCAqLa9gJQOf76INXZS/C0VfsCKXjoy78R149CeyRdRyvTHez1XJqh8C7XtBJacYGrZAk4jCSRbw64TPz/hHlvG32n8T5aZMvR4jjLB90YK04fUFWT7xnjUuV+aB7zX4nd2L2jkCs5HXWIveK/wMh0gZcnyUzuxD6Qd9Wh/NWrONzfyVK9I2m83nkJYQsRVQCItFz09jk0zCNUeZVBEElq/Iv2rqqw1NesKE0FJNBMbHU/AmmpBgscz9GoB05aiMBJuJcw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
+ bh=yFaXaASPytbqt5UVfe+Vr4IPur9fjR0kE5h90SKFz3c=;
+ b=dVb4kcPmZTVlH1EqpipVdHg8MtMLUXFsnpInENZGwDnLAjbYeF+6Gx9OMqOXwyRfvNuMm2R9Enz9pswqJD6WQDejGeoYFzz98Lc6xNTYVUU9TorDE+io5AaiQnrujRXwg47SlCuxVPrFCzJOP6hZuvfkiCx+tALha3jlromQHUVj39Rk4Ged+R5lJFq//RvFJGn/sXzIg2yYoT+2P/9LDjvq+edtI/faYKw1nghByqMrJAbjYlOFfbSRFEDma2t3pWJ0gX2uhuSiVewiVYFq+Y/gvr0yYgvIwK+f9JCbpkZQx+clkSl7myZx0o6vWaRpznyqtUHYEMcl+ClfBCFUUA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e84kq9tQASnC2Gn84rQjhd4K7RMzwA1JqZ12BNTvj1w=;
- b=Zqn7Q+fAaeAGi8SlO5XEa5I5JbGr0GxXgwqfHNWu1bSrhZ52ugdr2dECXwnM0Kar9gESooLLvp+Ok0zDzXO0r+v5/gz7AG0IH3OeM2s8odnu6MxHjopdSonPOgPRvFHJWGam/LzoaOFac/izxwi2O3i9SfRd5kW1Dzh8bdyQ3WI=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
- by LV8PR12MB9205.namprd12.prod.outlook.com (2603:10b6:408:191::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.7; Fri, 27 Mar
- 2026 11:45:05 +0000
-Received: from LV5PR12MB9779.namprd12.prod.outlook.com
- ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
- ([fe80::8ac8:e862:8ae9:9287%4]) with mapi id 15.20.9769.006; Fri, 27 Mar 2026
- 11:45:05 +0000
-Message-ID: <93019930-f082-445c-a3c4-90024aadbf60@amd.com>
-Date: Fri, 27 Mar 2026 12:45:00 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] firmware: scmi: Fix setting the function
-To: Dan Carpenter <dan.carpenter@linaro.org>
-Cc: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, Vincent Guittot <vincent.guittot@linaro.org>,
- arm-scmi@vger.kernel.org, Linus Walleij <linusw@kernel.org>
-References: <cover.1774526652.git.dan.carpenter@linaro.org>
- <401560217b674c299cb0f344e6f24c271fa7583a.1774526652.git.dan.carpenter@linaro.org>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- mpwx1d8=
-In-Reply-To: <401560217b674c299cb0f344e6f24c271fa7583a.1774526652.git.dan.carpenter@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SJ0PR13CA0021.namprd13.prod.outlook.com
- (2603:10b6:a03:2c0::26) To LV5PR12MB9779.namprd12.prod.outlook.com
- (2603:10b6:408:301::14)
+ bh=yFaXaASPytbqt5UVfe+Vr4IPur9fjR0kE5h90SKFz3c=;
+ b=bSBlwxL0JXOg/TgZwVyvozWJVl453+SJhAYoKr4+1iYPV9sLWY6ZhgbjL7w1b7XjOEQKQuhHojsXKUoxS5s12/e89TrYhzHowdfWanQxIo54D1IxpGD+z63V+AV2IJy/zR9rJjsaseEubSNzjw02qSJZLhFeYpJW8quThd4smhM=
+Received: from PH2PEPF0000385C.namprd17.prod.outlook.com (2603:10b6:518:1::6a)
+ by DS7PR12MB6262.namprd12.prod.outlook.com (2603:10b6:8:96::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9769.10; Fri, 27 Mar 2026 12:10:29 +0000
+Received: from CY4PEPF0000E9D6.namprd05.prod.outlook.com
+ (2a01:111:f403:f912::5) by PH2PEPF0000385C.outlook.office365.com
+ (2603:1036:903:48::3) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9723.32 via Frontend Transport; Fri,
+ 27 Mar 2026 12:10:28 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CY4PEPF0000E9D6.mail.protection.outlook.com (10.167.241.69) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9745.21 via Frontend Transport; Fri, 27 Mar 2026 12:10:28 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Fri, 27 Mar
+ 2026 07:10:25 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 27 Mar
+ 2026 07:10:23 -0500
+Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Fri, 27 Mar 2026 07:10:22 -0500
+From: Pranav Sanwal <pranav.sanwal@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <git@amd.com>, <michal.simek@amd.com>
+Subject: [PATCH 0/3] Add PCIe and NVMe support for AMD Versal Gen 2
+Date: Fri, 27 Mar 2026 17:40:12 +0530
+Message-ID: <20260327121015.996806-1-pranav.sanwal@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: pranav.sanwal@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|LV8PR12MB9205:EE_
-X-MS-Office365-Filtering-Correlation-Id: b6fab17a-2279-498f-df1a-08de8bf649eb
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D6:EE_|DS7PR12MB6262:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1f2ce6ec-dedb-4723-3e15-08de8bf9d5d8
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|376014|18002099003|22082099003|56012099003; 
-X-Microsoft-Antispam-Message-Info: FH/hEjEQn1MMigHZ8WdbLzrIOiZMf6hE/pldTjlhHX8IhbmfsZf7pr5VTebZDMM8MxFTqowkqoqQE8jXFICbEGT0RU88wAGVQhc55APVvY1r0wVAIDr4D+KmwAXwu18hVOVN/VugHYlWlf12mWCSkAT0fF+VK3KDYi814erti3vCrVJr7l49toG13GFYcQiebSDPQtJUkIC0iTFnWhTsgNXFMQoqSqtyrXs+W3vk5fee2SRpHK777SnJtJLe5w0RWR9KxClRO8wlR917UHssqTGAeohTPdCFFOunCV5k2sWcRSKNbq0muto3Xi4r1KVpuff0eG4VV6O34JeudBSUCY0DHYmQPoBObc7yIjXWpR527IyaT+YI48Kut0U/vhZfm/KpaGdnwTGiqmntBGvQtqthmVHbsUdUUqpJugXhxMms4Fo3174SN7ptjbdfnqlTjj++1e557f3YDLB1Gt7VYVuS03O/Z8jpcEzZ88xNcH71WELDmKLFj8Mxdd1+akcXUVZAbilg8BRl6Xtfkcx5O6ckefl2pDtL5UO7dscLvYcrJNcrGVYiflGqJU56ZY/bCqRMYH4HcP0EujtCNz8OqnPjBnbG+mivKomWjSA7mtWWciPgT59ImYH1WvuUoc/SplfzYeKSipmYHFBZwn5w6fz94TVBCshO2v7eJot1NqtAvA/hB1341vdZA2bP3Yper+fy+K0wdcxdek8Dg7X25wrTrX86SteqAzJG0wSItJQ=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(18002099003)(22082099003)(56012099003);
+ ARA:13230040|1800799024|36860700016|376014|82310400026|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: PrIsZPUO/Cd31xsn1fmSxU22T8i8KNkfbeID5nnmFLqEVH7oTZODTVLcRs0I14pQVaLBe23aJSLV6wcI3Ba0kRqAqXFZPIjjgEwvO3lKXa1pa5MdMjW5DvG1vFFLhwdhVMuHXS6WHHlK1xOrP+3hJifTIshOavW336Job0WoEN0u/Ixki/c3ywUrVz2IUEaY+BCuwbvit98Wj6SQ6b9Ps2rQGcp/O7mTNPRNl/F2UW/BdjZ+NkikMW41jkNh5XqKhZl8MTsIKNr6mKRTBd6r19tPm9e/s/aWZcLPdyjhWkNjJ7BTYdC9ok5/Lxj/ep0+YQ7wuECRvHtXQBFSTPQNg112T3ORa/RT1TdTd9v2jMhLhH30jbJiagxQLn44MLEGQ2QcNUgOZepQ+dwhhAGBMp37HeKm0dw8Ek1BOe4Fd4oX979H9VNEyPxtMIutb/MBERJtZncDOJ+AP1hki6u7lR69zhw6wTt0RHtvip222c7tXcYTEpTb9XeGb4oSgDcZCQzgnASaV3biUvt/2OcEnX7pcubQOgngqQniJFlPCpOfEbV/yyeQc/r7j5ZR1lSMqZPcTjUTisdYpEH6hwY9M16W6/BK/VWNUJnGSQLFItd46HR7gn2KrmX8tXITNNlb7eyhukRwVdd/ypvwjjVXy08QuMNWj5+rB7ZLvB8KlposhEyOsqDj6qQ15iCMHV9yhV8ITwv8F6UysqF0ZWF6+y5AlY9hT7Stw4gCUo2VPtSPjTCHJHM53DM0ojN/qmPv0UfNmqCyOlymGt1I4mRhdQ==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700016)(376014)(82310400026)(18002099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y25zT0taK0kxeWliL3VadGdVYjFhdmZrQ2J0bXpMZjhQU0hmdGdCY0RZV2g0?=
- =?utf-8?B?TzJBQWNuR3VrdXFkZUNVTDdHcENiSWFBZFFUaDU2b3VZQ2JrUTl4Tms0YzBo?=
- =?utf-8?B?L2s4eU8xNUJDRThvOGtpSko5Vjg5VXdicmtJbjBLVFQzOFhBdWRMRkFHenVP?=
- =?utf-8?B?dkFHZTd5Tjk2bGd2Z1BhSmdhZFRRZjRNNkRiaEZma0NkTzA3RGJCV29MaGNM?=
- =?utf-8?B?U1FWUFBIZktsb0xQbStUY1hRa0FNM2lsWFFlaldaZGJqL3BTZzl3S3o1VzEv?=
- =?utf-8?B?NDY0ZDVFY2hLT2FyWmh4bmFJRlREREo4aWx3Q2tBSzVIZHQ0SUFoVUpFYXph?=
- =?utf-8?B?Y1RTMERvSit0TjRtbFlMdmRUdGg5TldMYWtNRnk2b1V2eDcxWXg4WFhKODBh?=
- =?utf-8?B?aTAxM1ZCSzF6SjgxN1ovNmN6RkRrdXNzcEhrQmN6RW51SFVDV1ppdkJyRXdY?=
- =?utf-8?B?d09FVkwvTlEwRVU4SDhZc1prM3h4N0JSM1o3U3RuNk10ZUgrTDh6eHNQbzZM?=
- =?utf-8?B?ZEhoV3hZbjF4VnRLUXVjNzNuaTBqUnhISmNLWWMwM0VsaktZV0pXV3N2YzR1?=
- =?utf-8?B?VjZac3NuVzhER1dlSUtTN1hYa3RjRm4vZmxwVnRnNENIZzM4WkVpVXArWDVO?=
- =?utf-8?B?L2h4bFhRNHpVdzJqRVBuOFRwSE1IQ0kvWk1RMVVSNUlTUW5ZNW05b1lhbXVY?=
- =?utf-8?B?R1RRejVKZzhlTmZHV0JCRFNYNWFvSDJEaGltUys5VTJtZjVlVkkxVjFHVEVo?=
- =?utf-8?B?clZZaVdpKzRjeDNGRWZ1YTF4a20wcTNvdmIzV3g0eG5sVTFVT1d2MHJmRm1L?=
- =?utf-8?B?eCtWdExFaGhVZUtzanE2TnBGQTBqaFdZY1hCUGM5eWgxWmhQS0RmY0ptVXZF?=
- =?utf-8?B?a2V6NW0zNUJhaUU3d0ZtdUk0d25heHlxTnIvYTRobVdreWwxSkJnek1ucFVk?=
- =?utf-8?B?c2dEZGptVXVCc2lPV1Bvalh2K3psbzFBbkFyckYzZVMxTmFndlVSekhpZVR6?=
- =?utf-8?B?cmdiNmJpT0xCWnJ5RTJQK0tBNVNtOUMraFlHQWluYXNlcE9iVCtoMWowQnJq?=
- =?utf-8?B?UmZsWmRQOHlSNkRKdkNyWWgzMVpoUVdxMXZNanRDbTdVa0I4VWxLUzlPZyt1?=
- =?utf-8?B?WHhEaTYzeVpDR20yNFBFaEdVdndUMS84b0Q3cmdMdUxtOGtFWW1oMFJqMWpq?=
- =?utf-8?B?NWRBNVdBYlo2d3RrdFJReWZqMU1EcytMRGlLUnRWNmxBM0tEZG9NQ2xuYS9W?=
- =?utf-8?B?TzIxaFdyOWltMGRkUjFFSEMrWnFZd0U5N3NQSDI5WVI4ZnptSktOL1RJcTZF?=
- =?utf-8?B?L0dzTDROK3lodkFiaVZoTndtQmRGS2ErT2RBNWdZbkVJQVdIeFJ0VnVnY3FW?=
- =?utf-8?B?YnRJWk0wUE1yRWx4OFdCTG9zWldoOHo5d3diVkUrK0NMbDNnTUdia1loTzB1?=
- =?utf-8?B?UGttZTl5eWlMZkgvNEt3KzFLRTZ1dHkrK2VKbjl1di96dUhiSHl1VzhmVzl1?=
- =?utf-8?B?aWl6Z0V4OUhNQWdQTE9lVElDQmhONjVnbEd0MVU2UVhHazlXRm9Ya1dLcnJI?=
- =?utf-8?B?OW9iNTdmQ3VxbzBlK09XZElHMnFzallOamJjY25nQmVsMW14MHZOamwwQ2Zx?=
- =?utf-8?B?cWd2dlh1eTRDUzhHWjdnQkRaTFF2cEN1MHNhQkhJakhjbHNKS0FNSW4zQjRM?=
- =?utf-8?B?T3ZjVG9ETHd0L3gweW5oZ0ZITVd0U0xFRDJwellpYUdTNVhlL1RraTExeThm?=
- =?utf-8?B?NzAxcFpHOVgzbXFSVFJwdC9OQWZMM3pGaERROUhCUVdLT2dUck5mRTVhNFZk?=
- =?utf-8?B?aGpxamFyc3dxYm5Kc2pmenJ3ZmhBS0tJcnlLWmJLeU8wSHI1ckJMWUxrYXpX?=
- =?utf-8?B?aFo0T2hQSEYyajZPQ1gzSHRnNUpkQmd5b3lFcW55MUNDWndDVk5kY3VWU2RN?=
- =?utf-8?B?MHJ3d21CWVptKzg1UzBZNENLenpJRkJSWWxnaDJoMXpXSWtFZi94OUpzNVBh?=
- =?utf-8?B?djl0SXlUSTJ1ZkxOSWdzVTFRRlpsbXFuZnhXaitjcTFobDFNQzhtTjRwemhW?=
- =?utf-8?B?OVl4dk1NWjJhSFp2VDZiM1IxcWpkYWhIL3dUZWZzNW4wa2V3eVlpRFo1Y3Vn?=
- =?utf-8?B?cktmWVRkQUdsdnFKVHBVWlZmUzZMQjZoOTlvTUlmd053b3RML0NmQ0hhMFRu?=
- =?utf-8?B?aGVGcXZ3bjQ2ODZvRVArZmNVdGVtRnRzMVZRZEZvdDAzVXFyeno3RzNkWmh3?=
- =?utf-8?B?RURzaGV4UGdFdkI1cis4T0kvUGp5ZVJpR0EvL3hCRmNGUVV2VVJaZW41bWVR?=
- =?utf-8?B?V0hVZ0p6RlBhYVJTSlVROW1vb2FKdUdybW1LNkpEYkNUNHN5cHhVdz09?=
+X-MS-Exchange-AntiSpam-MessageData-0: g/ES9fRreXxBG5H9NYQ6QKlX8afwGFnVcCjmUmmQGFyMZJEJ+O5r0GxKN4y144Ul/2kveIzwph+nFKwMNsOuz51SDAN+7N7ni8asMIXb78j4DlUvWFTiHj8/xRPnazqKGIHHnbBzpr9LVQd04i7b75eGWeglvonzy2p/xet17JbfLfmHqcjrjZbI2AEGjEMn2ij7CILwLoW5TBOKR4+SMnt2j1FMlcshKh9UFirVjvaLnWTsvNue8VO5L23+m2YdRJf0ix9Tl7BGu2P1/2WFrOr9zJVhe8kqxUiUrp3GO9Tv/C921Zf5C5NNEr0LQPKIYcVm7Z+4b2WWEsWq8Gwn1qtFHcYrN6mxoAK92CrNXOKkDuml0XBz8i0DgVBKpSgsvHN2NzkEIWPIbRueFUKJptNjyQACoMWmKQJgCNLOLvz/T9u7VUXJZQwBt+WD0bwn
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b6fab17a-2279-498f-df1a-08de8bf649eb
-X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2026 11:45:05.3615 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2026 12:10:28.3143 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1f2ce6ec-dedb-4723-3e15-08de8bf9d5d8
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: j/Wl3bjfy+woFhuvYSYfCT3fgRyIQfW2EIEHMtf36OokWtkCBh5UkizCAdAtPN0W
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR12MB9205
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9D6.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6262
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -193,35 +127,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series adds PCIe host controller support for AMD Versal Gen 2 SoCs,
+enabling NVMe boot on boards such as the VEK385.
 
+Patch 1 introduces the driver (pcie_dw_amd.c), built on the existing
+pcie_dw_common infrastructure.
 
-On 3/26/26 13:08, Dan Carpenter wrote:
-> Set BIT(10) when the function needs to be set, otherwise the setting is
-> ignored.
-> 
-> Fixes: 1048331f5d3c ("scmi: pinctrl: add pinctrl driver for SCMI")
-> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
-> ---
->   drivers/firmware/scmi/pinctrl.c | 2 ++
->   1 file changed, 2 insertions(+)
-> 
-> diff --git a/drivers/firmware/scmi/pinctrl.c b/drivers/firmware/scmi/pinctrl.c
-> index 47f7a8ad9b81..e670538c87f9 100644
-> --- a/drivers/firmware/scmi/pinctrl.c
-> +++ b/drivers/firmware/scmi/pinctrl.c
-> @@ -259,6 +259,8 @@ static int scmi_pinctrl_settings_configure_helper(struct udevice *dev,
->   	in->attr = 0;
->   	in->attr |= FIELD_PREP(GENMASK(9, 2), num_configs);
->   	in->attr |= FIELD_PREP(GENMASK(1, 0), select_type);
-> +	if (function_id != SCMI_PINCTRL_FUNCTION_NONE)
-> +		in->attr |= BIT(10);
+Patch 2 adds the required MMU entries for the PCIe DBI registers.
 
-hm shouldn't be macros to use for holding that value instead?
+Patch 3 enables the required Kconfig symbols in the defconfig and
+extends amd_versal2.h to include BOOT_TARGET_DEVICES_NVME in the
+distro boot target list when CONFIG_NVME is set.
 
-As I see GENMASK above is the same case.
+Pranav Sanwal (3):
+  pci: Add AMD Versal2 DW PCIe host controller driver
+  arm: versal2: Map PCIe DBI and config regions when PCIe is enabled
+  amd: versal2: Enable PCIe/NVMe support and add NVMe boot target
 
->   	memcpy(in->configs, configs, num_configs * sizeof(u32) * 2);
+ MAINTAINERS                        |   5 +
+ arch/arm/mach-versal2/cpu.c        |  16 +-
+ configs/amd_versal2_virt_defconfig |   6 +
+ drivers/pci/Kconfig                |  11 ++
+ drivers/pci/Makefile               |   1 +
+ drivers/pci/pcie_dw_amd.c          | 250 +++++++++++++++++++++++++++++
+ include/configs/amd_versal2.h      |   7 +
+ 7 files changed, 295 insertions(+), 1 deletion(-)
+ create mode 100644 drivers/pci/pcie_dw_amd.c
 
-Another magic here.
+-- 
+2.34.1
 
-M
