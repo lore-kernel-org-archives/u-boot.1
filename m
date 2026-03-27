@@ -4,115 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D80210ED66F
-	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 12:54:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93C2810ED664
+	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 13:01:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF56B83FE9;
-	Fri, 27 Mar 2026 13:54:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id B577F83DBF;
+	Fri, 27 Mar 2026 14:01:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernkonzept.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="eRVeRvJq";
+	dkim=pass (2048-bit key; unprotected) header.d=kernkonzept.com header.i=@kernkonzept.com header.b="Upn2YaiM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 124BF8394E; Fri, 27 Mar 2026 13:54:05 +0100 (CET)
-Received: from PH0PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::3])
+ id 3968D83F14; Fri, 27 Mar 2026 09:20:42 +0100 (CET)
+Received: from mx.kernkonzept.com (serv1.kernkonzept.com
+ [IPv6:2a01:4f8:1c1c:b490::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EC0B81E18
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 13:54:01 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZXLl/pvipVhHkIuQpO9cFBc5GamqMiqWulZL4p4NoVlAM9nqUVhKkXMoigzAULd67rv+GiG/4f0cD/zH6B64gEmjI1eI/+FNopqEQ53cXLQ7Q7938olzKX0d/zdDXizHkMtTwrlXHSw5MgQlMqMtGIpG9wEtMvvG75e8R/zqEpSEgwQwDhPvgsaH7iwxesv3Fq5QZ1P8SPU2MnW+ILr9R6tXiP3UHbwm21UUuQC11Wo+emqdAqBwHawjjfS4rEeDTqiysl7tyhlvNgbiyBiKPgTI7vy1kVb32Dr4rDREYqAplcEMxreze4kyDR7fV5J8LX+GvhgtzCG1XaHyWurRnw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=K+y9bCewZECNBdfqBiHDyyQPFRgunNZPt/DSnKmweI0=;
- b=NgkdyEDM0pB7eK6ASHlkyGpOtX70jZHLilhSvxTm0u9EgsxzHGNsvlgXHOcVOYPZl84FwuGxiFAFOAPBaW81s4q422cfo8JId0kQ6fw2Y9StOHtdVwlTjSQw3zASDlHV/8Ia9FL2tThOm9XccWpB6ekDgHx5d6o6Tz55AjhZIKjTm4enAoIX5kLYKnmsaU0kJja7P7sdHxfIgEOn0doZtos6vbn6G1+owSop4k+hgr4AZOEyB/XeG3RvmkLhkXs10K93SWlJnSBxfyiUnlON9iYYq4LrD0zp63w4idperZv95rYLcTPewea+dTWhpaKiIw4W9GqvubOraLBQdojBCw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=K+y9bCewZECNBdfqBiHDyyQPFRgunNZPt/DSnKmweI0=;
- b=eRVeRvJqgAzJpu5mqiCCOrJhSCJxb0iWtgXYsrw2QsouJGMY9WCc6DbGDV//mNmicAFRzWJ767M/BIaU+ykIEfcW/4KUtLiy4/vjqZct4JQbE1u0R4YYoWOsq0NH/Tq4F7INDg2OYIx8PSJQPQtVyjwEv3pra37AMcZe8672LR4=
-Received: from BY5PR17CA0041.namprd17.prod.outlook.com (2603:10b6:a03:167::18)
- by CH3PR12MB8912.namprd12.prod.outlook.com (2603:10b6:610:169::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.20; Fri, 27 Mar
- 2026 12:53:56 +0000
-Received: from MWH0EPF000A672F.namprd04.prod.outlook.com
- (2603:10b6:a03:167:cafe::9d) by BY5PR17CA0041.outlook.office365.com
- (2603:10b6:a03:167::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.22 via Frontend Transport; Fri,
- 27 Mar 2026 12:53:55 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- MWH0EPF000A672F.mail.protection.outlook.com (10.167.249.21) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9745.21 via Frontend Transport; Fri, 27 Mar 2026 12:53:56 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Fri, 27 Mar
- 2026 07:53:54 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 27 Mar
- 2026 07:53:52 -0500
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Fri, 27 Mar 2026 07:53:51 -0500
-From: Padmarao Begari <padmarao.begari@amd.com>
-To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
-CC: <git@amd.com>, <padmarao.begari@amd.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 4/4] configs: amd: Enable Versal Gen 2 TPM2 driver
-Date: Fri, 27 Mar 2026 18:22:58 +0530
-Message-ID: <20260327125318.1037146-5-padmarao.begari@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260327125318.1037146-1-padmarao.begari@amd.com>
-References: <20260327125318.1037146-1-padmarao.begari@amd.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 2148D83C14
+ for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 09:20:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=kernkonzept.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=christian.poetzsch@kernkonzept.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=kernkonzept.com; s=mx1; h=Content-Transfer-Encoding:Content-Type:
+ MIME-Version:Message-ID:Date:Subject:Cc:To:From:References:In-Reply-To:
+ Reply-To:Content-ID:Content-Description;
+ bh=Z5cq+cuz7Y6OQMPyNZNWafMZ+GzdnDa8E/r2WIWyykY=; b=Upn2YaiMx9ny+UbXA/7YaEqpoF
+ IKZg2VuUJGzje75v7rQYkHpVu9GYOplEFDUrHoyEV8bVxNP0TX6GVbAGwdMn8eyXwB7rt3hiHjeUN
+ 0Qtme0fxuMjV9NqUgkowf4hMt/1fkIqVio9kjDy6vpdqUva3trZpXa9XTh3fx/vKImWMtwyLqp7Ho
+ d5ESonmrpJBTdKhFbWDTtGy7P0jpbhoFEY4jzhyrFBb14+cEoWNRbqCZxXpymjj7CujITA+xYBC36
+ KansKUhtFQlEQEiaJ592hgT8FNyHYUecx6blbI+ZM8bpi37Z7Py2dNpniBxMshrehLrXWJjkJzHn6
+ cQ4WVgqw==;
+Received: from [10.22.3.169] (helo=iris.dd1.int.kernkonzept.com)
+ by mx.kernkonzept.com with esmtpsa
+ (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim 4.98.2)
+ id 1w62Qp-00000006ciW-16M1; Fri, 27 Mar 2026 09:20:39 +0100
+From: =?UTF-8?q?Christian=20P=C3=B6tzsch?= <christian.poetzsch@kernkonzept.com>
+To: u-boot@lists.denx.de
+Cc: Bin Meng <bmeng.cn@gmail.com>,
+ =?UTF-8?q?Christian=20P=C3=B6tzsch?= <christian.poetzsch@kernkonzept.com>,
+ Adam Lackorzynski <adam@l4re.org>
+Subject: [PATCH] virtio: add support for SIZE_MAX & SEG_MAX features
+Date: Fri, 27 Mar 2026 09:18:58 +0100
+Message-ID: <20260327081858.311591-1-christian.poetzsch@kernkonzept.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: padmarao.begari@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000A672F:EE_|CH3PR12MB8912:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6e47ad15-bebc-4ecd-3bb5-08de8bffe843
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|1800799024|36860700016|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: aaO6wOueKY9FkxZCgM9cSJjCjo8kXQtVAcyjrH/cJNbWNH7hh3z5D357ltqrYJ2HQp2IzLkYy/WBNbAuCy1+CEFxzZVdnejf7gyuXprBhE3U9GvaOtW4qXefWrXRN0lCNXD7+UYOMBbqRB0xwO66be+TrTk/3PCl6HobSXmAbrgldZLQeRmBEzymDubqzn8ggr9B3YwWf+/korNcTYQaurUEIEP+ClRkp7gduTfoYTvPT6vaGkDgP0foIidI2tP3khAai7sEQM3XVTnShIJrnkVR5BNsFAi6qKsKB+4Z+qMoIVBewv8//HUos9kSBKTQCuovYF+p5WQZqTo0Fp9r5sVJVFeKbw9vqhMOo+QmEwwJnkllhVa2pU3gUap47TsySIonhLkejz23ihkLQzgJJTbMw80E0aT1SQy0cIKxjc1bD96/zFgaPWD7bwTij87C4+OzghHYUcInefDKNfsWluo+J1ZlEPGxS8IX7cjUPhFw0o3kV2D3pi3ZzXjnR7P+L1vQ+eBCJ3il7s/ZRCx2js1FdgxJ5jp9t2oz1DZRj6v6wdD4lrRQ7GEMik/itcCXo2ptbqLsA0TJpqSWQE68qzweuQNqxwSVXD61DBw6S7p8MG5F6VBmO2VKeJCx+tgZLrdhXMmr4k3f3No6CKTDk1e4q6LxnRQX83lG4iZ8vO0gwR3w2bBtRiuuZ807fdgoHJ83Gj/jgIi+lkSUbvQ9xGvIhEsJt8sbIMvmzM0F/YpimUzzgmm8uViIi0qeiXprg4NwPsYmQNyGlBfVuh6VGg==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(1800799024)(36860700016)(18002099003)(22082099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: wWTbpk/Bpp0qvEQftkT/3oym1k+EqKLdletFWVf0An2TjxoCH9TokgNMqYQ5wo7DXAzXx6cInb7KtwGaNNbSja1gQ1lu73E8x4K7jbkgG/ZClUpjCNUJejzAjUmGPaS5g0tKxAcxkf+g1gKv5QEjMICN3nwmd5xc0uekWsAioys1dkKGpz1phYaZjR21bnhbZdpT3bq2cREGcN9gTLm4Rc7dfoae0iwtp2yliGe1CLPMgW37DeF8IIuPTiUwF6S+yl1MRqmIUAVJk8UnL382xzsnt4UIQ/md1j/CbnxH8QXsb2TVHr7p7x7JhmN+yz+PCCXWI9zZplQaFtHR7WhZnfpTsU1h7WmHniaHZkDz39gDcAb3FAowsPYWAjut3RejXo6dOr1LCqp44VgiA0Uob1j/q8ueMb1yQAI5WONl2QSp6Oq08XqB4dQgjCRswHG8
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2026 12:53:56.1489 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6e47ad15-bebc-4ecd-3bb5-08de8bffe843
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000A672F.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8912
+X-Mailman-Approved-At: Fri, 27 Mar 2026 14:01:00 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,26 +69,198 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable CONFIG_TPM2_VERSAL2_SMC to activate the AMD Versal Gen 2 TPM2
-driver that exposes PLM XilOCP HW PCRs via TF-A SMC.
+Some virtio implementations may forward the virtio requests directly to
+the underlying hw. The hw may have some restrictions in how many and how
+big the requests can be. Therefore, the corresponding virtio device will
+announce this limitations with the SIZE_MAX & SEG_MAX feature.
 
-Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
+Add support for those features. Split an io request into multiple virtio
+requests if more than seg_max segments would be used. Also split a
+single buffer request into multiple segments if the buffer is bigger
+then size_max.
+
+Signed-off-by: Christian Pötzsch <christian.poetzsch@kernkonzept.com>
+Signed-off-by: Adam Lackorzynski <adam@l4re.org>
 ---
- configs/amd_versal2_virt_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/virtio/virtio_blk.c | 110 ++++++++++++++++++++++++++++--------
+ 1 file changed, 88 insertions(+), 22 deletions(-)
 
-diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
-index 0344089030c..ea49f748ebe 100644
---- a/configs/amd_versal2_virt_defconfig
-+++ b/configs/amd_versal2_virt_defconfig
-@@ -144,6 +144,7 @@ CONFIG_SYSRESET_PSCI=y
- CONFIG_TEE=y
- CONFIG_OPTEE=y
- CONFIG_TPM2_TIS_SPI=y
-+CONFIG_TPM2_VERSAL2_SMC=y
- CONFIG_USB=y
- CONFIG_DM_USB_GADGET=y
- CONFIG_USB_XHCI_HCD=y
+diff --git a/drivers/virtio/virtio_blk.c b/drivers/virtio/virtio_blk.c
+index 3dd0cf36268..80006a49e4a 100644
+--- a/drivers/virtio/virtio_blk.c
++++ b/drivers/virtio/virtio_blk.c
+@@ -14,6 +14,7 @@
+ #include <virtio_ring.h>
+ #include <linux/log2.h>
+ #include "virtio_blk.h"
++#include <malloc.h>
+ 
+ /**
+  * struct virtio_blk_priv - private data for virtio block device
+@@ -23,10 +24,16 @@ struct virtio_blk_priv {
+ 	struct virtqueue *vq;
+ 	/** @blksz_shift - log2 of block size divided by 512 */
+ 	u32 blksz_shift;
++	/** @size_max - maximum segment size */
++	u32 size_max;
++	/** @seg_max - maximum segment count */
++	u32 seg_max;
+ };
+ 
+ static const u32 feature[] = {
+ 	VIRTIO_BLK_F_BLK_SIZE,
++	VIRTIO_BLK_F_SIZE_MAX,
++	VIRTIO_BLK_F_SEG_MAX,
+ 	VIRTIO_BLK_F_WRITE_ZEROES
+ };
+ 
+@@ -67,50 +74,69 @@ static void virtio_blk_init_data_sg(void *buffer, lbaint_t blkcnt, struct virtio
+ 	sg->length = blkcnt * 512;
+ }
+ 
+-static ulong virtio_blk_do_req(struct udevice *dev, u64 sector,
+-			       lbaint_t blkcnt, void *buffer, u32 type)
++static ulong virtio_blk_do_single_req(struct udevice *dev, u64 sector,
++				      lbaint_t blkcnt, char *buffer, u32 type)
+ {
+ 	struct virtio_blk_priv *priv = dev_get_priv(dev);
++	// The virtio device may have constrains on the maximum segment size.
++	// Calculate how many segments we need.
++	u32 seg_cnt = (blkcnt * 512) / priv->size_max + 1;
++	lbaint_t seg_sec_cnt = priv->size_max / 512;
+ 	struct virtio_blk_outhdr out_hdr;
+ 	struct virtio_blk_discard_write_zeroes wz_hdr;
+ 	unsigned int num_out = 0, num_in = 0;
+-	struct virtio_sg hdr_sg, wz_sg, data_sg, status_sg;
+-	struct virtio_sg *sgs[3];
++	struct virtio_sg **sgs;
+ 	u8 status;
+ 	int ret;
++	u32 i;
++
++	// +2 is header and status descriptor; seg_cnt is the number of data segments
++	// required. Needs to be dynamically allocated.
++	sgs = calloc(seg_cnt + 2, sizeof(struct virtio_sg *));
++	if (!sgs)
++		return -ENOMEM;
++
++	for (i = 0; i < seg_cnt + 2; ++i) {
++		sgs[i] = malloc(sizeof(struct virtio_sg));
++		if (!sgs[i])
++			goto err_free;
++	}
+ 
+-	sector <<= priv->blksz_shift;
+-	blkcnt <<= priv->blksz_shift;
+-	virtio_blk_init_header_sg(dev, sector, type, &out_hdr, &hdr_sg);
+-	sgs[num_out++] = &hdr_sg;
++	virtio_blk_init_header_sg(dev, sector, type, &out_hdr, sgs[num_out++]);
+ 
+ 	switch (type) {
+ 	case VIRTIO_BLK_T_IN:
+-	case VIRTIO_BLK_T_OUT:
+-		virtio_blk_init_data_sg(buffer, blkcnt, &data_sg);
+-		if (type & VIRTIO_BLK_T_OUT)
+-			sgs[num_out++] = &data_sg;
+-		else
+-			sgs[num_out + num_in++] = &data_sg;
++	case VIRTIO_BLK_T_OUT: {
++		i = 0;
++		while (i < blkcnt) {
++			u32 blk_per_seg = min(blkcnt - i, seg_sec_cnt);
++
++			if (type & VIRTIO_BLK_T_OUT)
++				virtio_blk_init_data_sg(buffer + i * 512, blk_per_seg,
++							sgs[num_out++]);
++			else
++				virtio_blk_init_data_sg(buffer + i * 512, blk_per_seg,
++							sgs[num_out + num_in++]);
++			i += blk_per_seg;
++		}
+ 		break;
+-
++	}
+ 	case VIRTIO_BLK_T_WRITE_ZEROES:
+-		virtio_blk_init_write_zeroes_sg(dev, sector, blkcnt, &wz_hdr, &wz_sg);
+-		sgs[num_out++] = &wz_sg;
++		virtio_blk_init_write_zeroes_sg(dev, sector, blkcnt, &wz_hdr,
++						sgs[num_out++]);
+ 		break;
+ 
+ 	default:
+-		return -EINVAL;
++		goto err_free;
+ 	}
+ 
+-	virtio_blk_init_status_sg(&status, &status_sg);
+-	sgs[num_out + num_in++] = &status_sg;
++	virtio_blk_init_status_sg(&status, sgs[num_out + num_in++]);
+ 	log_debug("dev=%s, active=%d, priv=%p, priv->vq=%p\n", dev->name,
+ 		  device_active(dev), priv, priv->vq);
+ 
+ 	ret = virtqueue_add(priv->vq, sgs, num_out, num_in);
+ 	if (ret)
+-		return ret;
++		goto err_free;
+ 
+ 	virtqueue_kick(priv->vq);
+ 
+@@ -119,7 +145,38 @@ static ulong virtio_blk_do_req(struct udevice *dev, u64 sector,
+ 		;
+ 	log_debug("done\n");
+ 
+-	return status == VIRTIO_BLK_S_OK ? blkcnt >> priv->blksz_shift : -EIO;
++err_free:
++	for (i = 0; i < seg_cnt + 2; ++i)
++		free(sgs[i]);
++	free(sgs);
++
++	return status == VIRTIO_BLK_S_OK ? blkcnt : -EIO;
++}
++
++static ulong virtio_blk_do_req(struct udevice *dev, u64 sector,
++			       lbaint_t blkcnt, char *buffer, u32 type)
++{
++	struct virtio_blk_priv *priv = dev_get_priv(dev);
++	lbaint_t seg_sec_cnt = priv->size_max / 512;
++	u32 i = 0;
++	ulong ret;
++
++	sector <<= priv->blksz_shift;
++	blkcnt <<= priv->blksz_shift;
++
++	// The virtio device may have constrains on the maximum segment count. So
++	// send multiple virtio requests one after each other, if so.
++	while (i < blkcnt) {
++		u32 blk_per_sg = min(blkcnt - i, seg_sec_cnt * priv->seg_max);
++
++		ret = virtio_blk_do_single_req(dev, sector + i, blk_per_sg,
++					       buffer + i * 512, type);
++		if (!ret)
++			return ret;
++		i += blk_per_sg;
++	}
++
++	return blkcnt >> priv->blksz_shift;
+ }
+ 
+ static ulong virtio_blk_read(struct udevice *dev, lbaint_t start,
+@@ -207,6 +264,15 @@ static int virtio_blk_probe(struct udevice *dev)
+ 	priv->blksz_shift = desc->log2blksz - 9;
+ 	desc->lba >>= priv->blksz_shift;
+ 
++	if (virtio_has_feature(dev, VIRTIO_BLK_F_SIZE_MAX))
++		virtio_cread(dev, struct virtio_blk_config, size_max, &priv->size_max);
++	else
++		priv->size_max = -1U;
++	if (virtio_has_feature(dev, VIRTIO_BLK_F_SEG_MAX))
++		virtio_cread(dev, struct virtio_blk_config, seg_max, &priv->seg_max);
++	else
++		priv->seg_max = -1U;
++
+ 	return 0;
+ }
+ 
 -- 
-2.34.1
+2.47.3
 
