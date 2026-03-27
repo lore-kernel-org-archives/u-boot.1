@@ -4,82 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93D1110F286F
-	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 20:46:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9F5410F2871
+	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 22:02:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C67E583C5E;
-	Fri, 27 Mar 2026 21:46:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 24D9A83C14;
+	Fri, 27 Mar 2026 23:02:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eqvOf0d9";
+	dkim=pass (2048-bit key; secure) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="BU6wgJyc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B45FC83DA7; Fri, 27 Mar 2026 21:46:29 +0100 (CET)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 52ACA83C5E; Fri, 27 Mar 2026 23:02:54 +0100 (CET)
+Received: from mx2.securetransport.de (mx2.securetransport.de
+ [IPv6:2a03:4000:13:6c7::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F7688394E
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 21:46:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8FEA78394E
+ for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 23:02:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-67c1b8b1f96so1567041eaf.2
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 13:46:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774644386; x=1775249186; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=XKX4LWO6Mh3hHiDt7mj4gEgl5DeR/XNl6vtkKF4r9BQ=;
- b=eqvOf0d9eDqv6n+FFtsUwnm8LMpb8HFvnjaqX1roB1C2d2+1pdtCus4tQLTjJE6sy+
- ASgSKThfJPx3HCGLu8vHtgEleK1fxnwvc/2zwujYlmVaY1FFIgQabkIavWDVu7BLyH4j
- 2vBP+HxI9iBrE2uHJjJswnVrC0UxVgl6n57ok=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774644386; x=1775249186;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=XKX4LWO6Mh3hHiDt7mj4gEgl5DeR/XNl6vtkKF4r9BQ=;
- b=oORBTm4P5k1oM+tApNca/hYXuJkvYt2Ur/XK0RuRKa9rvoQJNPki0g/xK58trxbw1i
- gGv1VrfBtRi3r3Kz2UAkNFZPjKM24dKXQzcbw1DgCP9i3yarrIlxwTBofD2mA7ntustE
- zDCccYfaK9OSgQRwdSFUBta/tm1Ad0hXiG2t/sbO00JZ8uqTCbCwFhf0yOmUvnJEozX+
- pYxll2JLuPKWLJK7UqlxsvCSrFiGKtTLsUd671oyeg5W+AhtzbviJ3kj+MuxaBTG6lMn
- KBs7kpSyFuT9MrLGpiTAz9QEoOOxPvtDNwiuC/GU71RWvOj2K/m4A8N6mhmXxa4zHKWL
- 8PHw==
-X-Gm-Message-State: AOJu0Yz1YtNtDDpOK3S265ed1s5HON1cRb7VxABIKDD8m0gEQ9XHjN90
- M9EjM0EWPpexMe7GCgwCgjVGXLrnqGWEFbnMJTV0USkbcIE+DFpBq5VY53arjessEkw=
-X-Gm-Gg: ATEYQzwFhIR7pWEr371p9wH69z6ojWmu1s88VTGiNRMqTypn6yW4yGRdwrvWLQ5xz3t
- G4+W6TPZ4HTOmNkuL74Noq06eus0M5hWmWpZ3Bk2vKYMnFH8vzZwGmthowD38SGSW/uX4SehEuo
- HeUa/2fg3g+Zb8VJ3w1D1OR9a2fLRUJNQj9DM6CA2Hsi2xePQV04MaFuo4M3LkRWw4ch5Sn/fkU
- H38M5QNhaU7LK5Wv3/LtZUkeBWKFYaVzGXzrH7BaYWj3K82AaJAeolnsERsw1vD1GDY278thwOh
- Aj5byM6c359YJ74rY1vmtrnxGifuCfgTv1hSb+U8RNNcmERjyFFR69jkmoiaRxGMeWMzLpWC652
- UBIgZdxzUC5PMUoNrY53txuV+04itJEOPUrydwbuxKfOGvr8aiXANNRfTV82pEg9RD+SkDjcGHU
- pPPc8GlbzZpfx2BTuN+GJYqAGPWqrIXGqH01tsxewUhQqJ8oqHl3CGyRZ0zPcrKbJdHc0C36lLP
- 4Es7FmRkkInlMxn5F355Eumi3O2jh3DnPZqtzHvVpHRnC3l
-X-Received: by 2002:a05:6820:2082:b0:67d:e552:922e with SMTP id
- 006d021491bc7-67e187059bcmr2205495eaf.35.1774644386264; 
- Fri, 27 Mar 2026 13:46:26 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-67e230a7f7csm248338eaf.7.2026.03.27.13.46.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Mar 2026 13:46:25 -0700 (PDT)
-Date: Fri, 27 Mar 2026 14:46:23 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 0/6] test: Refactor FIT test for clarity and extensibility
-Message-ID: <20260327204623.GF502704@bill-the-cat>
-References: <20260324194323.2335679-1-sjg@chromium.org>
+ spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
+ s=dhelectronicscom; t=1774648964;
+ bh=hEQ/2t98dTfXvWEX1g4RC0xVX5rIY4po7OmkuDTXv/w=;
+ h=From:To:CC:Subject:Date:References:In-Reply-To:From;
+ b=BU6wgJycN6OJvpvgrkZy8RgcEAUJkDQUxZ1zkD6Vr/hWbspw0P91+ptkTIWZ8Kruz
+ femkQZ5X3xh9mybVzkLXEpE8y4ma8ijcZEQxuM2r7Ekm3NSfQTyB/wfrZ9l65T9jKC
+ SEP1XobCs29A5/rbnpRjMEFlt8ofSHRMRN8C0JuAcmMcw8SZ1NSOWtqM/I4S8VYh88
+ acpikRn3rUYofQzo38i4DCuqvM/yBUtbzjRXR6ODWYEGQZSvGe0J1NQA05C53TjmpM
+ GC0j/0XHnO9Q4syl3GqnG6SOS9ZpuOjhjo4H/41YCqyig+bnpqGf9IF91pZqctM3Sp
+ 8twFscjmKtEWw==
+X-secureTransport-forwarded: yes
+From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Complaints-To: abuse@cubewerk.de
+To: Marek Vasut <marex@nabladev.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+CC: Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan
+ <peng.fan@nxp.com>, Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini
+ <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
+Subject: RE: [PATCH] board: dhelectronics: imx: Use second Ethernet MAC also
+ from fuse
+Thread-Topic: [PATCH] board: dhelectronics: imx: Use second Ethernet MAC also
+ from fuse
+Thread-Index: AQHcuFTCAYeM+Dh5A0K4haKIts4CsrW3q5OAgAHGg1CAACS3gIACOHIAgABacoCAACH7kIAABaOAgABQ+/A=
+Date: Fri, 27 Mar 2026 22:02:41 +0000
+Message-ID: <3a8724ffe4fa44808ac8a278e4a702f7@dh-electronics.com>
+References: <20260320102918.4011-1-cniedermaier@dh-electronics.com>
+ <382f338c-020f-482d-80b8-5a39ad724843@nabladev.com>
+ <b443e161b5db4abab8d8889135a345fa@dh-electronics.com>
+ <941708e9-a2e6-4f8d-a15d-d1da8a91ae91@nabladev.com>
+ <2eebac26eff54f9da7e2d01dbca71569@dh-electronics.com>
+ <a40a11f9-f3f5-4eee-ab6e-c2597808c471@nabladev.com>
+ <a7ebfe912f084176b79c54a2e9e3d8e3@dh-electronics.com>
+ <2dca42bf-a247-4190-9439-14e14f65aec3@nabladev.com>
+In-Reply-To: <2dca42bf-a247-4190-9439-14e14f65aec3@nabladev.com>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zqdQVPiwziJShRaY"
-Content-Disposition: inline
-In-Reply-To: <20260324194323.2335679-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,50 +83,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---zqdQVPiwziJShRaY
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Mar 24, 2026 at 01:43:15PM -0600, Simon Glass wrote:
-
-> This series reworks the FIT test (test_fit.py) to make it easier to
-> maintain and extend. It avoids unnecessary U-Boot restarts, renames the
-> main test for easier selection, adds a missing-kernel check, fixes
-> Python warnings, converts the test to use a class, and splits into
-> separate test functions.
->=20
->=20
-> Simon Glass (6):
->   test: fit: Avoid restarting U-Boot
->   test: Rename test_fit() to test_fit_base()
->   test: Add a check for a missing kernel
->   test: Update fit test to fix a few Python warnings
->   test: Convert FIT test to use a class
->   test: Add fsetup fixture and prepare helper for FIT test
->=20
->  test/py/tests/test_fit.py | 403 ++++++++++++++++++++------------------
->  1 file changed, 216 insertions(+), 187 deletions(-)
-
-This overall seems fine. Now that we've fixed the problem with
-readthedocs and pytest, the next follow-up should include adding
-doc/develop/pytest/test_fit.rst (which based on all the others should be
-minimal) and any needed changes / corrections to the docstrings / etc so
-that the output renders well.
-
---=20
-Tom
-
---zqdQVPiwziJShRaY
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCacbsmwAKCRAr4qD1Cr/k
-ChLMAP91U52eMg+Lpleau9yX7AbB1UYtv01T0xqhtbZp3i08oAEA0PuySS4mDMub
-z3KynPeAblilAcmVTak1gPenXcIjpgE=
-=qBwU
------END PGP SIGNATURE-----
-
---zqdQVPiwziJShRaY--
+RnJvbTogTWFyZWsgVmFzdXQgPG1hcmV4QG5hYmxhZGV2LmNvbT4NClNlbnQ6IE1vbmRheSwgTWFy
+Y2ggMjMsIDIwMjYgNjoyMSBQTQ0KPiBPbiAzLzIzLzI2IDU6NDkgUE0sIENocmlzdG9waCBOaWVk
+ZXJtYWllciB3cm90ZToNCj4gDQo+IFsuLi5dDQo+IA0KPj4+IEFzIGZvciB0aGUgcmVzdCwgaXQg
+cmVhbGx5IGJvaWxzIGRvd24gdG8gdGhlIG9yZGVyaW5nIG9mIGZhbGxiYWNrcywgaXQNCj4+PiBp
+cyBlaXRoZXI6DQo+Pj4NCj4+PiBBKQ0KPj4+IGZ1c2UxDQo+Pj4gZWVwcm9tMQ0KPj4+IGZ1c2Uw
+KzENCj4+PiBlZXByb20wKzENCj4+Pg0KPj4+IG9yDQo+Pj4NCj4+PiBCKQ0KPj4+IGZ1c2UxDQo+
+Pj4gZnVzZTArMQ0KPj4+IGVlcHJvbTENCj4+PiBlZXByb20wKzENCj4+Pg0KPj4+IFRoZSBmb2xs
+b3dpbmcgb3JkZXJpbmcsIHdoaWNoIGlzIHRoZSBvcmRlcmluZyBpbnRyb2R1Y2VkIGJ5IHRoaXMg
+cGF0Y2gsDQo+Pj4gaXMgY29uZnVzaW5nOg0KPj4+DQo+Pj4gZnVzZTENCj4+PiBlZXByb20xDQo+
+Pj4gZWVwcm9tMCsxDQo+Pj4gZnVzZTArMQ0KPj4+DQo+Pj4gU28gcGxlYXNlIHBpY2sgZWl0aGVy
+IEEpIG9yIEIpIGFib3ZlLiBJIGRvIG5vdCBzZWUgYW55IHBhcnRpY3VsYXINCj4+PiBhZHZhbnRh
+Z2Ugb2YgZWl0aGVyIG9mIHRoZSBvdGhlciwgZXhjZXB0IG1heWJlIEIpIGltcHJvdmVzIGJvb3Qg
+dGltZSBpbg0KPj4+IGNhc2UgYm90aCBmdXNlIGJsb2NrcyBhcmUgYmxvd24sIGJlY2F1c2UgaXQg
+YXZvaWRzIHRoZSBFRVBST00gSTJDIGFjY2Vzcy4NCj4+DQo+PiBUaGUgcHJldmVudGlvbiBvZiBJ
+MkMgYWNjZXNzIGlzIG9ubHkgYSBvbmUgdGltZSBlZmZlY3QsIGJlY2F1c2UgdGhlbiB0aGUNCj4+
+IE1BQyBhZGRyZXNzZXMgd2lsbCBwcm92aWRlZCBieSB0aGUgZW52aXJvbm1lbnQuDQo+IA0KPiBX
+aGljaCBpbmNyZWFzZXMgdGhlIHN5c3RlbSBib290IHRpbWUsIHdoaWNoIGlzIHVuZGVzaXJlZC4N
+Cg0KSWYgYSBjdXN0b21lciBzZXF1ZW50aWFsbHkgZnVzZSBvbmx5IHRoZSBmaXJzdCBNQUMgYWRk
+cmVzcyBmcm9tIGEgTUFDIGFkZHJlc3MNCnBvb2wuIFRoZW4gdGhlIHNlY29uZCBNQUMgYWRkcmVz
+cyBvZiB0aGUgU29NIGlzIHRoZSBzYW1lIE1BQyBhZGRyZXNzIGFzIHRoZSBNQUMNCmFkZHJlc3Mg
+ZnJvbSB0aGUgbmV4dCBTb00ncyBmaXJzdCBNQUMgYWRkcmVzcy4gVGhhdCBpcyB2ZXJ5IGJhZC4g
+V2l0aCB0aGUgQSkNCml0IGNhbiBiZSBhdm9pZGVkLCBiZWNhdXNlIHRoZSBzZWNvbmQgTUFDIGFk
+ZHJlc3MgdGhlbiBpcyB0YWtlbiBmcm9tIHRoZSBFRVBST00uDQpJZiBJIGhhZCB0byBjaG9vc2Ug
+YmV0d2VlbiByZWR1Y2luZyB0aGUgYm9vdCB0aW1lIG9uY2UgYW5kIHByZXZlbnRpbmcgcG90ZW50
+aWFsDQpkdXBsaWNhdGUgTUFDIGFkZHJlc3NlcywgSSB3b3VsZCBzYXkgdGhhdCBwcmV2ZW50aW5n
+IHBvdGVudGlhbCBkdXBsaWNhdGUgTUFDDQphZGRyZXNzZXMgaXMgdGhlIGJldHRlciBvcHRpb24u
+IEZ1cnRoZXJtb3JlLCB0aGUgaXNzdWUgb2YgZHVwbGljYXRlIE1BQyBhZGRyZXNzZXMNCmluIHRo
+ZSBzeXN0ZW0gaXMgbm90IGEgaHlwb3RoZXRpY2FsIHNjZW5hcmlvLCBpdCBoYXMgYWxyZWFkeSBv
+Y2N1cnJlZCBpbiBwcmFjdGljZS4NCg0KPj4gSWYgSSByZW1vdmUgdGhlIGVlcHJvbTArMSwgYmVj
+YXVzZSBpdCB3YXMgZm9yIHByb3RvdHlwZSBjb25maWd1cmF0aW9ucywNCj4+IG15IHByZWZlcnJl
+ZCBvcmRlciB3b3VsZCBiZToNCj4+DQo+PiBmdXNlMQ0KPj4gZWVwcm9tMQ0KPj4gZnVzZTArMQ0K
+PiBlZXByb20wIGNhbiBub3QgYmUgcmVtb3ZlZCwgdGhhdCBicmVha3MgYmFja3dhcmQgY29tcGF0
+aWJpbGl0eS4gQW5kIHRoZQ0KPiBvcmRlcmluZyBvZiBmdXNlLWVlcHJvbS1mdXNlIGlzIGNvbmZ1
+c2luZyBhbmQgaGFzIHRoZSBib290IHRpbWUgaW5jcmVhc2UNCj4gZG93bnNpZGUgb2YgQSkuDQoN
+CkZvciB3aGljaCBTb00gc2hvdWxkIGJhY2t3YXJkIGNvbXBhdGliaWxpdHkgYmUgbWFpbnRhaW5l
+ZCBoZXJlLiBUaGVyZSBpcw0Kbm8gU29NIGF0IHRoZSBjdXN0b21lcidzIHNpdGUgd2hlcmUgaXQg
+aXMgcmVxdWlyZWQuIEZvciByZXYuMjAwIHRoZSBFRVBST00NCklEIHBhZ2UgaXMgdXNlZCwgZm9y
+IHJldi4xMDAgb25seSBzb21lIGludGVybmFsIFNvTSBwcm90b3R5cGVzIHdpdGggdHdvDQpFdGhl
+cm5ldCBpbnRlcmZhY2VzIGhhZCBvbmx5IHRoZSBmaXJzdCBFRVBST00gcG9wdWxhdGVkLiBJdCdz
+IG5vdCB3b3J0aA0Ka2VlcGluZyB0aGF0IGNvZGUuDQoNCj4gSSB3b3VsZCBzYXkgQikgaXMgdGhl
+IHdheSB0byBnbywgaXQgc2hvdWxkIGFsc28gY292ZXIgeW91ciByZXF1aXJlbWVudHMsDQo+IGtl
+ZXBzIHRoZSBib290IHRpbWUgbG93IGlmIGJvdGggZnVzZSBiYW5rcyBhcmUgZnVzZWQgKHdoaWNo
+IGNhbiBiZSBmaXhlZA0KPiBldmVuIG9uIGV4aXN0aW5nIGhhcmR3YXJlLCBzaW1wbHkgcmVhZCBv
+dXQgZWVwcm9tIGNvbnRlbnQgYW5kIGZ1c2UgaXQNCj4gaW50byBmdXNlIGJhbmsgMSksIGFuZCBp
+dCByZXRhaW5zIHRoZSBwcmlvcml0eSBvcmRlcmluZyAoZW52LCBmdXNlLA0KPiBlZXByb20pIHdp
+dGhvdXQgbWl4aW5nIGl0IHVwLg0KDQpUaGUgY2FzZSB0aGF0IG9ubHkgdGhlIGZpcnN0IE1BQyBh
+ZGRyZXNzIGlzIGZ1c2VkIGFuZCBub3QgdGhlIHNlY29uZCBvbmUgaXMNCmEgc3BlY2lhbCBjYXNl
+LCBidXQgaWYgdGhpcyBoYXBwZW5zLCB3aXRoIHRoZSBvcmRlciBBKSBhYm92ZSB5b3UgY2FuIHBy
+ZXZlbnQNCmR1cGxpY2F0ZSBNQUMgYWRkcmVzc2VzIGZyb20gYXBwZWFyaW5nIGluIHRoZSBzeXN0
+ZW0uIEluIGFkZGl0aW9uLCBpZiB5b3Ugd2FudA0KdG8gZml4IGl0LCBpdCdzIGRhbmdlcm91cyB0
+byBmdXNlIHRoZSBzZWNvbmQgTUFDIGFkZHJlc3MgYXQgdGhlIGN1c3RvbWVyJ3MNCmxvY2F0aW9u
+LCBiZWNhdXNlIGlmIHNvbWV0aGluZyBnb2VzIHdyb25nIGR1cmluZyB0aGUgZnVzaW5nLCB0aGUg
+ZGV2aWNlIG11c3QNCmJlIHJlcGxhY2VkIG9uLXNpdGUuIFRoaXMgY2FuIGFsc28gYmUgYXZvaWRl
+ZCB3aXRoIG9yZGVyIEEpLg0KDQoNClJlZ2FyZHMNCkNocmlzdG9waA0K
