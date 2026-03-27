@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34DC410ED660
-	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 12:10:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 119FF10ED64A
+	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 12:10:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79D3583DA7;
-	Fri, 27 Mar 2026 13:10:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6E70583FAF;
+	Fri, 27 Mar 2026 13:10:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="bSBlwxL0";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="BteV2wpD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C45E83DBF; Fri, 27 Mar 2026 13:10:36 +0100 (CET)
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::1])
+ id 4950583F14; Fri, 27 Mar 2026 13:10:41 +0100 (CET)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F053E83C14
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 13:10:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E82B83F14
+ for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 13:10:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=Pranav.sanwal@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NrhOZ0/avWEZfrfk5A1Hzf+qjdI2fiJDAgoTGP8hV0j685R/ukEn2YSm2s5HTvGMNVKMp0CwuV4BGyX6/qpg6Kq5tRWhwleXjs2WjeEkYszDgMIFG7KGq52MogKA1e53ljnn0T4QcszoBZyPD1jGySgyIK9f/PrENIDGn76h1TE98l16Whu411whlIoyekFwqi3BfalXvoqmhb3h7XzTGwpa6JALR/8Ae/mwZ0ncvkDokijurvSM4CypQy0MTxjdb79wJxMNIXh38unw9Uyzt85Ggq3WVuWCSFkS2vB7WuRvhI54hrPtz9F9MQKvyjymczzNm6pohVRw4LrxzQiq/g==
+ b=vB/QIDk4tuuaWuRcV4Cq5Nrx/UsU4nTtQfxIOKmyhCKr376nqUvhcfTI9PZXdL4J6NcAzNAJxYFiU3oXYCRvNDM3dja6yawPxnpQehk8UvdQ3s/dUVfCAJtakGCigwEhng8+4h8PsyNMZdh3V/rLtYdJRWCvxWuDBISWZn6L+ub87Li3lo7DUTvAcM7cncD3xF/RXZnLY1Y2TGmVMpEykLcMFQQMRHTNMx5SS0mIYQJ4+eqg5XT46rTGvMfUeJfp31liTAx2HXK/dBdVOCwC/+YMPX336UjkCtfGA3r6iJC8+dv/7XZ/ijQy2+d0lYdqMyim/sYt4io3NGGM15aSWg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yFaXaASPytbqt5UVfe+Vr4IPur9fjR0kE5h90SKFz3c=;
- b=dVb4kcPmZTVlH1EqpipVdHg8MtMLUXFsnpInENZGwDnLAjbYeF+6Gx9OMqOXwyRfvNuMm2R9Enz9pswqJD6WQDejGeoYFzz98Lc6xNTYVUU9TorDE+io5AaiQnrujRXwg47SlCuxVPrFCzJOP6hZuvfkiCx+tALha3jlromQHUVj39Rk4Ged+R5lJFq//RvFJGn/sXzIg2yYoT+2P/9LDjvq+edtI/faYKw1nghByqMrJAbjYlOFfbSRFEDma2t3pWJ0gX2uhuSiVewiVYFq+Y/gvr0yYgvIwK+f9JCbpkZQx+clkSl7myZx0o6vWaRpznyqtUHYEMcl+ClfBCFUUA==
+ bh=ZbRSYAaoYmea3Ni6/abbyvu+VIoBv5YgiXmz3WIhkvI=;
+ b=gnj7q63OtQ7fuiPIbym9jwLYW4ZTpwrq/k7efynTFpQXgkptQgNn6mDBqqs3Btqpv15EPLeRj9K0/jiXbcFRiKNcT/6SLtIfUn0vY2T19uzTg6aFuvp26JocQOIa4VsHUpp9drGfFMDuT3V2Vw7rw5TQXjd7/61yY+rg5k98fCwTfh5LRiy4zV2CnhZ2EUJHVAEP1N/0ei0VMVk3F1w3V1bOQaJspctQ5MsA1xI1zlc4tC3It0ZgLrjkEcDXURaNYaTAdmTMdn7n3hs7iA2imSFFOW2U3Oewup4uwacAijsKt4c33PvlB56BS1gKXLqfdKnYmCvBg7PYYx29Nvwfdw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yFaXaASPytbqt5UVfe+Vr4IPur9fjR0kE5h90SKFz3c=;
- b=bSBlwxL0JXOg/TgZwVyvozWJVl453+SJhAYoKr4+1iYPV9sLWY6ZhgbjL7w1b7XjOEQKQuhHojsXKUoxS5s12/e89TrYhzHowdfWanQxIo54D1IxpGD+z63V+AV2IJy/zR9rJjsaseEubSNzjw02qSJZLhFeYpJW8quThd4smhM=
-Received: from PH2PEPF0000385C.namprd17.prod.outlook.com (2603:10b6:518:1::6a)
- by DS7PR12MB6262.namprd12.prod.outlook.com (2603:10b6:8:96::7) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9769.10; Fri, 27 Mar 2026 12:10:29 +0000
-Received: from CY4PEPF0000E9D6.namprd05.prod.outlook.com
- (2a01:111:f403:f912::5) by PH2PEPF0000385C.outlook.office365.com
- (2603:1036:903:48::3) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9723.32 via Frontend Transport; Fri,
- 27 Mar 2026 12:10:28 +0000
+ bh=ZbRSYAaoYmea3Ni6/abbyvu+VIoBv5YgiXmz3WIhkvI=;
+ b=BteV2wpDDP/RjqrXuL/BRBgysV1ec+OA8yCZtG7mT6++L3h/gWwvv7waP3/INDrsEDqoTqm/3ita6Mcg27XN1KMYd91YV6ukPiuODq8Xc3R6mrRHMjDG1axtTWI1tKcqv+Gz23JFexU3Mt15yy1kccv0On4ID96d/wz9NlAAQOM=
+Received: from DM6PR02CA0137.namprd02.prod.outlook.com (2603:10b6:5:1b4::39)
+ by CY8PR12MB8315.namprd12.prod.outlook.com (2603:10b6:930:7e::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.7; Fri, 27 Mar
+ 2026 12:10:34 +0000
+Received: from CY4PEPF0000E9DB.namprd05.prod.outlook.com
+ (2603:10b6:5:1b4:cafe::56) by DM6PR02CA0137.outlook.office365.com
+ (2603:10b6:5:1b4::39) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.23 via Frontend Transport; Fri,
+ 27 Mar 2026 12:10:31 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,28 +59,31 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
 Received: from satlexmb07.amd.com (165.204.84.17) by
- CY4PEPF0000E9D6.mail.protection.outlook.com (10.167.241.69) with Microsoft
+ CY4PEPF0000E9DB.mail.protection.outlook.com (10.167.241.74) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9745.21 via Frontend Transport; Fri, 27 Mar 2026 12:10:28 +0000
+ 15.20.9745.21 via Frontend Transport; Fri, 27 Mar 2026 12:10:33 +0000
 Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Fri, 27 Mar
- 2026 07:10:25 -0500
+ 2026 07:10:30 -0500
 Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 27 Mar
- 2026 07:10:23 -0500
+ 2026 07:10:28 -0500
 Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Fri, 27 Mar 2026 07:10:22 -0500
+ Transport; Fri, 27 Mar 2026 07:10:27 -0500
 From: Pranav Sanwal <pranav.sanwal@amd.com>
 To: <u-boot@lists.denx.de>
 CC: <git@amd.com>, <michal.simek@amd.com>
-Subject: [PATCH 0/3] Add PCIe and NVMe support for AMD Versal Gen 2
-Date: Fri, 27 Mar 2026 17:40:12 +0530
-Message-ID: <20260327121015.996806-1-pranav.sanwal@amd.com>
+Subject: [PATCH 3/3] amd: versal2: Enable PCIe/NVMe support and add NVMe boot
+ target
+Date: Fri, 27 Mar 2026 17:40:15 +0530
+Message-ID: <20260327121015.996806-4-pranav.sanwal@amd.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260327121015.996806-1-pranav.sanwal@amd.com>
+References: <20260327121015.996806-1-pranav.sanwal@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -88,29 +91,29 @@ Received-SPF: None (SATLEXMB04.amd.com: pranav.sanwal@amd.com does not
  designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D6:EE_|DS7PR12MB6262:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1f2ce6ec-dedb-4723-3e15-08de8bf9d5d8
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9DB:EE_|CY8PR12MB8315:EE_
+X-MS-Office365-Filtering-Correlation-Id: ea28c0b0-d7eb-4d76-33b4-08de8bf9d8b6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700016|376014|82310400026|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: PrIsZPUO/Cd31xsn1fmSxU22T8i8KNkfbeID5nnmFLqEVH7oTZODTVLcRs0I14pQVaLBe23aJSLV6wcI3Ba0kRqAqXFZPIjjgEwvO3lKXa1pa5MdMjW5DvG1vFFLhwdhVMuHXS6WHHlK1xOrP+3hJifTIshOavW336Job0WoEN0u/Ixki/c3ywUrVz2IUEaY+BCuwbvit98Wj6SQ6b9Ps2rQGcp/O7mTNPRNl/F2UW/BdjZ+NkikMW41jkNh5XqKhZl8MTsIKNr6mKRTBd6r19tPm9e/s/aWZcLPdyjhWkNjJ7BTYdC9ok5/Lxj/ep0+YQ7wuECRvHtXQBFSTPQNg112T3ORa/RT1TdTd9v2jMhLhH30jbJiagxQLn44MLEGQ2QcNUgOZepQ+dwhhAGBMp37HeKm0dw8Ek1BOe4Fd4oX979H9VNEyPxtMIutb/MBERJtZncDOJ+AP1hki6u7lR69zhw6wTt0RHtvip222c7tXcYTEpTb9XeGb4oSgDcZCQzgnASaV3biUvt/2OcEnX7pcubQOgngqQniJFlPCpOfEbV/yyeQc/r7j5ZR1lSMqZPcTjUTisdYpEH6hwY9M16W6/BK/VWNUJnGSQLFItd46HR7gn2KrmX8tXITNNlb7eyhukRwVdd/ypvwjjVXy08QuMNWj5+rB7ZLvB8KlposhEyOsqDj6qQ15iCMHV9yhV8ITwv8F6UysqF0ZWF6+y5AlY9hT7Stw4gCUo2VPtSPjTCHJHM53DM0ojN/qmPv0UfNmqCyOlymGt1I4mRhdQ==
+ ARA:13230040|376014|36860700016|1800799024|82310400026|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: WYGK6vqUpydmVRaDvGihNt0LxQo5OwIbGVwzw/xezhKGUlvWG/TvrBxVRtpFF5JNFUEHNI2GQXwhI7xfgXQD0N/Uxw4lTqq5+/wEB2VvWdEhr+p717enYkH1VCAZnhMgn31Sg6Gz10d2/CW5ugORYpZ5eAtLFyujyDplOCbQofLRvwGHZVYN87DrJ4CiNwoI5CXunC9RLiCyk1Nr64MMr6qzujsubBff98/AIom5oCtNET0pxY00CFbiYZU4d7pm774VuVJiE4ff1bmccz4dZ3QWPrk8xcC1kCTKo2p9FjmEVEmSOchiJtMCgFUlQdJTDrI0exiIsBKvcKuQsmpX0nsrK/SeEKzw/oRBcghJ3nOavoji9kF9L2DNZpmKJftrWqcRbz2e+xZ9QtvhES23j6IPaYDcaW1K6uEwo7dLUyN7HRzNNXzgYhrnusFYGfZyPiC28WNHUCMTpBtIvpAtCVi74IE00ZBDb0jweCD0o9gR67+KJAbnNzj6kjUobTDKYqAfggewQqcRb4SmE1iWql2GFSUnIPVk8s8K8kj/+dA3RUxVKpEEJ33QouW6KydLTPFQB7e0sUPC5uUYK64lqv2VuCkYrYte5hd288yFM+fOzkpEnkGhL02S+D7lga6hqrM96EW+MJ/Ip2oe8ujJ85wJ7rOqZ96zbxmRCgz/CsVHmsVs1+Z+QZwHHVLA9Gt2kbT44gZugbj3+tuvHoESpOrktvLBjjfsVjRapk5MPxUbVGbnrtbwf4W91zP/9iUkNjwso5hhqjA8ObQo1TMADQ==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700016)(376014)(82310400026)(18002099003)(56012099003);
+ SFS:(13230040)(376014)(36860700016)(1800799024)(82310400026)(56012099003)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: g/ES9fRreXxBG5H9NYQ6QKlX8afwGFnVcCjmUmmQGFyMZJEJ+O5r0GxKN4y144Ul/2kveIzwph+nFKwMNsOuz51SDAN+7N7ni8asMIXb78j4DlUvWFTiHj8/xRPnazqKGIHHnbBzpr9LVQd04i7b75eGWeglvonzy2p/xet17JbfLfmHqcjrjZbI2AEGjEMn2ij7CILwLoW5TBOKR4+SMnt2j1FMlcshKh9UFirVjvaLnWTsvNue8VO5L23+m2YdRJf0ix9Tl7BGu2P1/2WFrOr9zJVhe8kqxUiUrp3GO9Tv/C921Zf5C5NNEr0LQPKIYcVm7Z+4b2WWEsWq8Gwn1qtFHcYrN6mxoAK92CrNXOKkDuml0XBz8i0DgVBKpSgsvHN2NzkEIWPIbRueFUKJptNjyQACoMWmKQJgCNLOLvz/T9u7VUXJZQwBt+WD0bwn
+X-MS-Exchange-AntiSpam-MessageData-0: rIFPRg3HGa4ftkKMDp2mzY15OgBkM+wtKRdynl8BZTNYuWaMuBzqnVn22itFu+kp70eBDnvJIED4i6kCFvmG7f9BJUepCTHoGQbqchoCV+K+yM82W3D3hCKGvU9Mvgn2lZad+oPFzwqj+jSoxggHN/LHNp7NBAKm36ja1bG9SGxJle9Cr9iDoHjVFxxcwvxM/+H/k8Sl2LlMNV3p2Y3AXBwtKfBJ/c8Mner0Asi1ME/EQDSUjF7h3SQ514dmpxisaNnnVyvDxKMwJljKPc83FftOwyRolsNxmjkTZt4YZ6GpIX1MJobv28Ado74o54f8pH02uyYfiZ9urAnjGPxl8BrSjRqp3rjCM8Y2VUp3arxfZhlYNH7ZTiPr/wIlK36CjBkrRDsyuqZVVaSRw58ABmSf0+leZn9cPyktpomt7Sv0v3JOV+0BSzBG3n3fcgOq
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2026 12:10:28.3143 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1f2ce6ec-dedb-4723-3e15-08de8bf9d5d8
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2026 12:10:33.1729 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ea28c0b0-d7eb-4d76-33b4-08de8bf9d8b6
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9D6.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9DB.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6262
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB8315
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,33 +130,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds PCIe host controller support for AMD Versal Gen 2 SoCs,
-enabling NVMe boot on boards such as the VEK385.
+Enable the AMD Versal Gen 2 DW PCIe host controller and NVMe storage
+in the virtual platform defconfig:
 
-Patch 1 introduces the driver (pcie_dw_amd.c), built on the existing
-pcie_dw_common infrastructure.
+- CONFIG_PCI / CONFIG_CMD_PCI: core PCI stack and pci command
+- CONFIG_PCIE_DW_AMD: AMD Versal Gen 2 PCIe host driver
+- CONFIG_NVME_PCI: NVMe-over-PCIe storage driver
+- CONFIG_CMD_LSBLK: block device listing command
+- CONFIG_DM_PCA953X: GPIO expander driver for PERST# control
 
-Patch 2 adds the required MMU entries for the PCIe DBI registers.
+Add BOOT_TARGET_DEVICES_NVME to amd_versal2.h so NVMe is included
+in the distro boot target list when CONFIG_NVME is enabled.
 
-Patch 3 enables the required Kconfig symbols in the defconfig and
-extends amd_versal2.h to include BOOT_TARGET_DEVICES_NVME in the
-distro boot target list when CONFIG_NVME is set.
+Signed-off-by: Pranav Sanwal <pranav.sanwal@amd.com>
+---
+ configs/amd_versal2_virt_defconfig | 6 ++++++
+ include/configs/amd_versal2.h      | 7 +++++++
+ 2 files changed, 13 insertions(+)
 
-Pranav Sanwal (3):
-  pci: Add AMD Versal2 DW PCIe host controller driver
-  arm: versal2: Map PCIe DBI and config regions when PCIe is enabled
-  amd: versal2: Enable PCIe/NVMe support and add NVMe boot target
-
- MAINTAINERS                        |   5 +
- arch/arm/mach-versal2/cpu.c        |  16 +-
- configs/amd_versal2_virt_defconfig |   6 +
- drivers/pci/Kconfig                |  11 ++
- drivers/pci/Makefile               |   1 +
- drivers/pci/pcie_dw_amd.c          | 250 +++++++++++++++++++++++++++++
- include/configs/amd_versal2.h      |   7 +
- 7 files changed, 295 insertions(+), 1 deletion(-)
- create mode 100644 drivers/pci/pcie_dw_amd.c
-
+diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
+index 8cc21094653..e0bbc43ddc1 100644
+--- a/configs/amd_versal2_virt_defconfig
++++ b/configs/amd_versal2_virt_defconfig
+@@ -13,6 +13,7 @@ CONFIG_SYS_BOOTM_LEN=0x6400000
+ CONFIG_SYS_LOAD_ADDR=0x8000000
+ CONFIG_XILINX_OF_BOARD_DTB_ADDR=0x1000000
+ CONFIG_CMD_FRU=y
++CONFIG_PCI=y
+ CONFIG_SYS_MEMTEST_START=0x00000000
+ CONFIG_SYS_MEMTEST_END=0x00001000
+ CONFIG_REMAKE_ELF=y
+@@ -40,10 +41,12 @@ CONFIG_CMD_CLK=y
+ CONFIG_CMD_DFU=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
++CONFIG_CMD_LSBLK=y
+ CONFIG_CMD_MMC=y
+ CONFIG_MMC_SPEED_MODE_SET=y
+ CONFIG_CMD_OPTEE=y
+ CONFIG_CMD_MTD=y
++CONFIG_CMD_PCI=y
+ CONFIG_CMD_POWEROFF=y
+ CONFIG_CMD_SF_TEST=y
+ CONFIG_CMD_SPI=y
+@@ -83,6 +86,7 @@ CONFIG_ARM_FFA_TRANSPORT=y
+ CONFIG_SCMI_FIRMWARE=y
+ CONFIG_FPGA_XILINX=y
+ CONFIG_FPGA_VERSALPL=y
++CONFIG_DM_PCA953X=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_CADENCE=y
+ CONFIG_I2C_MUX=y
+@@ -122,6 +126,8 @@ CONFIG_DM_ETH_PHY=y
+ CONFIG_PHY_GIGE=y
+ CONFIG_XILINX_AXIEMAC=y
+ CONFIG_ZYNQ_GEM=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_AMD=y
+ CONFIG_POWER_DOMAIN=y
+ CONFIG_ZYNQMP_POWER_DOMAIN=y
+ CONFIG_RESET_SCMI=y
+diff --git a/include/configs/amd_versal2.h b/include/configs/amd_versal2.h
+index 404af2cd4c6..c8705aae17e 100644
+--- a/include/configs/amd_versal2.h
++++ b/include/configs/amd_versal2.h
+@@ -131,11 +131,18 @@
+ #define BOOT_TARGET_DEVICES_USB(func)
+ #endif
+ 
++#if defined(CONFIG_NVME)
++# define BOOT_TARGET_DEVICES_NVME(func)	func(NVME, nvme, 0)
++#else
++# define BOOT_TARGET_DEVICES_NVME(func)
++#endif
++
+ #define BOOT_TARGET_DEVICES(func) \
+ 	BOOT_TARGET_DEVICES_JTAG(func) \
+ 	BOOT_TARGET_DEVICES_MMC(func) \
+ 	BOOT_TARGET_DEVICES_UFS(func) \
+ 	BOOT_TARGET_DEVICES_XSPI(func) \
++	BOOT_TARGET_DEVICES_NVME(func) \
+ 	BOOT_TARGET_DEVICES_DFU_USB(func) \
+ 	BOOT_TARGET_DEVICES_USB(func) \
+ 	BOOT_TARGET_DEVICES_PXE(func) \
 -- 
 2.34.1
 
