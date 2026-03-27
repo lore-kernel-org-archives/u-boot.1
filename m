@@ -4,128 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DC7610ED656
-	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 10:27:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1925A10ED659
+	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 11:19:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 918D283DA7;
-	Fri, 27 Mar 2026 11:27:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 3809C83DA7;
+	Fri, 27 Mar 2026 12:19:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="OLTSbkFp";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="uIVamtug";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1EF7883E7A; Fri, 27 Mar 2026 11:27:31 +0100 (CET)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
+ id 2356D83E7A; Fri, 27 Mar 2026 12:19:26 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE02283C14
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 11:27:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BAA4883C14
+ for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 12:19:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=q1z2EKLsVX9fAESorlnXwmugLb1C8mFB4Doyf173YGlREg7MX3jhd0wPITzuKMkRpBvbSrH3y1LSOsCeUYc173kqutMrctm7dTVyK1focbY/n4BjJHN21sSohVQ0RWAf71sNpNY6kiz1jC1/3+zW7iJNxJimWJf3lz+MdC4Ca3LiBnrjGcyvPd0woTwuB6E6Ua1c0xLPYeJcj9PzvdLKnMh6rQlZcgB7k4Ayr1MW8OoSevwy2iXAzy4zfKSx8Csn32FnNjCGeUUjLlAi17+vKv2xW+XlDNITvORqNF4KLEYMAPfHcfpddtj32G8KCDkQLhrg8uDz4b5ptv4IZ6P+WA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WJvU2NkY8MLW7uje//B8b+6DAp3VKsR/a/XnFrzaOuI=;
- b=R49YqCWrLl6PIyXgc8VYFzvsDaW6rp8TdcbDsycQfDqnpwqDBbBzQaylxvQjIsH8CcVFGsuI1rz0GPmOJOGP2pUcz+wO7U3gHTO0Hm6J88ki0dgK9MEsWk/PzgfMm38CyRz7DdEwQAIyoQuC4Ed1+ey3ggJ9kRqhpBWSSESIwMqLrCnjTYdYnrT6qMAFLkmRUj647EK8wFxAWr08+NeVcEAPJnEsWNZreNAhHUYT5rrazGg/3q/oqla25ikHkZDV6w63qPfu+zLa1xrZR9FUBa82o03aIcFfM976kLUZzk/z9s2FUcmI+HojxKqvvXeGIAl4wL/h3krxTeBHBugKZw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WJvU2NkY8MLW7uje//B8b+6DAp3VKsR/a/XnFrzaOuI=;
- b=OLTSbkFpEOlX37TBZcBihmp15d5eXEfWajT3HT/VUVifNi3e+AgiCFRYQ9O9A4+9po82iMzdqD5g3M3/Uyy4jA+QXn4WApWcPfOXqk1sQg5mNJ+pbOwafjt0msRRUdO5qJS6JF2R80pO3TXhoMjy0ry4teYhroqQpVNDnztLLhQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by DBAPR10MB4107.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:1b7::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.19; Fri, 27 Mar
- 2026 10:27:25 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8%5]) with mapi id 15.20.9745.023; Fri, 27 Mar 2026
- 10:27:24 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: Simon Glass <sjg@chromium.org>
-Cc: <u-boot@lists.denx.de>,  Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,  "Heinrich
- Schuchardt" <xypron.glpk@gmx.de>,  Ion Agorria <ion@agorria.com>,  "Miquel
- Raynal" <miquel.raynal@bootlin.com>,  Patrice Chotard
- <patrice.chotard@foss.st.com>,  Svyatoslav Ryhel <clamor95@gmail.com>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v2 2/2] kbuild: Use relative paths in generated .incbin
- directives
-In-Reply-To: <87cy0plmh8.fsf@prevas.dk> (Rasmus Villemoes's message of "Fri,
- 27 Mar 2026 09:12:35 +0100")
-References: <20260326115500.955388-1-sjg@chromium.org>
- <20260326115500.955388-2-sjg@chromium.org> <87cy0plmh8.fsf@prevas.dk>
-Date: Fri, 27 Mar 2026 11:27:23 +0100
-Message-ID: <875x6hlg8k.fsf@prevas.dk>
-User-Agent: Gnus/5.13 (Gnus v5.13)
-Content-Type: text/plain
-X-ClientProxiedBy: CPCP307CA0006.DNKP307.PROD.OUTLOOK.COM (2603:10a6:380::8)
- To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1774610360; x=1775215160; i=xypron.glpk@gmx.de;
+ bh=Drz2rkimG8GX04Q+rjcCC688nnd8G+uf7p6wtHFas0Y=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
+ Subject:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=uIVamtug/NhHKLgf1F8kn1THe8CjilyciS7NWRNgkm5pD7V4ooqufrOve9DQOB1N
+ lQNAcneQWF6De9f2+TZ4pYZF4jcDleEUwmakpwgKj6Lq10S/lRZcaerlLRb/8jzlH
+ yh69q2MU+Z4TLEgEJxaXnkkkM/aLTDH2P1NLoW0dDNG7uypedtMrIK1KZlfJKySMs
+ rsQ1DdPQMsLi9fphMNixBQYqmnOGNGLCLw2Bj1HHShdG1h7x2+bB7efoffOKgCja+
+ S35GTbAql7jgoj40+GIAA2ZsNZYHh6/Cfl71CMhla+mfTtwKlq5UiOBgbcei5HJdD
+ U26FmkUWf1RhqloE7A==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MKKUv-1vpF3g31UV-00O8Fh; Fri, 27
+ Mar 2026 12:19:19 +0100
+Message-ID: <5eee3f35-a8f6-4e7c-9ea3-c7be045ff6e2@gmx.de>
+Date: Fri, 27 Mar 2026 12:19:15 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|DBAPR10MB4107:EE_
-X-MS-Office365-Filtering-Correlation-Id: 29f5a423-f346-4ca5-01d1-08de8beb7005
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|52116014|7416014|376014|366016|38350700014|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: 9jT//izSb0rUf71JdMBr4bCTjAjdOOmD9REhKRGxC8tmp4kWPwMmzY6ZfnByztuv3VkCyPAqbT9CWSd+r9jmrbFtQfu9o/YXwLJ30qafKOp+atIigWotFUSB9QsQaXwkOSGemoXP+rqAv995Xm7x5iUppOau8H1DFNhM6exEgN40R5MIR89Gs04WRFBBL79+GZ5R7UCzy0ecUUakEBFZZRG/4AYL0AeEULPgEN4EsuGxlMPn462Nj9BLIHSefcE+zUOa/6/3QmsrpboYfmrN1OhooOjyIvCGKBmIAtnAMvDBdsM1gfjq1aVKvqaQ8+t9BOdQEJWeJowfqnFD6eQDFJWVbMHUZZf0idoftrMyG+7n/zRExgmY94BXBDiQUoUXUX0ukmEw8nFldNlqn6hB10F8gbBQp6tmS2Rkpn5I/Pb90sFj2DdZz6UffuSELA0scwJn56e0oVLAFPrGNzYpHK7JWCUd16HuXpyPMTsg+o5z2VZxdQErkHcJc0f6WlaXyzrNjH+kGxbRVkyDbpqY+EzPe/IaoBfeV+57uPLf3EGMAqB8igbLE9BNOXcYRQTIaQYcEIuWd9zJBdn2h1I/dm3Jn1+APHgSS+2leklEj1wluQ8sEedom89k8LuZGv77J0iHg5MU6bc3koS0YvuZIQQf8Xo/7yRT7/9Ged4F8YbeGqQE9JKwkTyufk9e8ptTPPzdj57WmLn0tMAgQm7zikaJ2x8FtoSv9pFxVO/LEFwQHtiC2CinU9VP829vwi7vKjak329wOzVXG9JVSBN0EwKkVSF42hIcbjvIsUhW8n0=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(52116014)(7416014)(376014)(366016)(38350700014)(56012099003)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?uZ2YbM5MbQx2ifdm5SnJoWBdlgAOZt33Um6ic6vwLDAqHepxmR0guLXNGPyF?=
- =?us-ascii?Q?iRpadRWutYvqftJAmDCVqCsi512d6nL0tiKsEIgapI86b2q+11gXcPGa01fF?=
- =?us-ascii?Q?6wR1QNDmWNUq2WJajPPtjJgOiXjPz4PK/9M0R+6HL7myZD9jVMBYj94dg8Mj?=
- =?us-ascii?Q?7zACRU4M2cZlfnFnGHQ6uxpwpIepDH9zliV55bPLotL/RgcSmCYGm677duXu?=
- =?us-ascii?Q?DR8vu7Yyku9sSohVl5tpgfJAjjBWeEXxjRBr6Wzl3yXmlEFbcCakDsVhwydr?=
- =?us-ascii?Q?lU2tJ2+NpHQ7J1lPmqKHVrK0EeLQFhDxaYTO6Zj3n+DmkeUdLTvFxm1rSGuK?=
- =?us-ascii?Q?9l0tcsP3sKlKjLzaWi6Qz/b/Sl/zjX/woKEX0w7EZfsHiD4QNqdJDHf7a57F?=
- =?us-ascii?Q?CB0hgyfSrur287LoXKAnj27FtDNCouXtBDJwXSMumw2RXZb70ms5holhUs3H?=
- =?us-ascii?Q?nRQybUBLtsouvJugLGm08TkisLZre6nuVAiuls+puBE7J6STUzubYSJGW8+L?=
- =?us-ascii?Q?yiXW3MldUcvRbkkTyeXS5gUOrljqyEm+brPegieZMdaP2fyQ5jsfBX1SWkQA?=
- =?us-ascii?Q?PdH+AE+ubdXd+OMqjrFgrXI8nMNs3Cn6zNSJGC6txkwAyjCFDX/2ydgtVCf1?=
- =?us-ascii?Q?5grts+W2jAEWbFMV4BTslLy/6zOQmcg6KjM+eWRLcfvfht+XOEcbU+kyQXzP?=
- =?us-ascii?Q?j6hjqFULeyH4PmthGFqQn7U9TEXUm24Du6g2aQtzPQxEA74RkZPDO8lWotvv?=
- =?us-ascii?Q?O/Q5q9CPNDJE1kJGPUdwPC2hPyc94U/t3fEGJJgTG15GWk6peRWxXuL4dQ9m?=
- =?us-ascii?Q?aDi5169XrVMbpI6qXyFr0hYw6hPunPGH9S79TUJuFxllkmBNSMe7DfEoLfc8?=
- =?us-ascii?Q?DYZqogFVf2+diTKvJNtf/0r/Ha64oKd/Tz6N3e+FBksvljyrjfwtObrY49n/?=
- =?us-ascii?Q?jOzW5K1UT485NKJir2syVBjjh/FTGhK0AuFVg0eoW8hH51eD7Bu6Y4V2T7O5?=
- =?us-ascii?Q?qb9NoUsxObXY5NzQb7Mo0CZOPrr2L/zaOW53MlYLiJzCspC2NjG2j2g8ONsn?=
- =?us-ascii?Q?Txq/DWINJ9X/BSUSjgVDqkDh66R4Q4Zcd+Kgxp2B1C//T1yAqEyTc3KlmSRg?=
- =?us-ascii?Q?byM8Shug0DUy/Y3ir7xKKs+fv/lH/TNUaUa1wNOflW7fkR41weY29PJ4gPor?=
- =?us-ascii?Q?vCpvVv+BzvtaNKCstIIykFiGpr2f4aWogDuHpdTkbgnvKu2Hvd8R0sTfZjHp?=
- =?us-ascii?Q?1JThWqoKDT2SLkI7pZ3QcTIRk3rxpp1QUnTzl4DlNItWhNAw0I9psgHFh4hC?=
- =?us-ascii?Q?yPcIiQOV3sb2dQwY+i779TBv1q8gjPEr5UyJ3BdgMRcaDuVGuG9v/seQ4AR6?=
- =?us-ascii?Q?3AFCILGROFTLoeJOrrTqW3dsxcg1mpJ75FdQ8C/oPmoysomu5nyczrn7mNAg?=
- =?us-ascii?Q?iJsVcZ+h2un7R2lxmkH7PNpavUiua+RM+CrxD9ZNPR0mC7lofYPzDnvvGVR/?=
- =?us-ascii?Q?NZNVI9rTlRsZZDf1XV+tWm+ebSNbqRmsqTZthg5RF2xdEGTAsUH5VSSRQA0l?=
- =?us-ascii?Q?vH37WULoiOJZ58HFdGABs8cnEPiIoHcUqNoUsN7NZfbf5axGQ/EQanUdZoxQ?=
- =?us-ascii?Q?IsptVo2WyZUQDl2RoE5+P2POthmBfFuLelmmJhDxcYJusjluNdS7Kr6IB7SR?=
- =?us-ascii?Q?OegaYlIIVGZ3hh+xTFheldvYG99dgtNQydXS35fs+w3d1AVZi+dzuWP0i1Lb?=
- =?us-ascii?Q?jopj2w73zc9GFxwds3LO0pfvBXZz8hE=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 29f5a423-f346-4ca5-01d1-08de8beb7005
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2026 10:27:24.8539 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8XF2/zw4ZuqAhNL8Lda/5LsaFni0lEaOnKnumI8/5vw09rM8fdrvStWtMnmKh1geK6VNlXE6zsGuDz8r4fzVdlJIFSR7KynW9kfSGsRHrMM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR10MB4107
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Anshul Dalal
+ <anshuld@ti.com>, Aristo Chen <aristo.chen@canonical.com>,
+ David Lechner <dlechner@baylibre.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Pull request doc-2026-04-rc6
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:sB/F8HvpKw/9HkLNdubYv9rG3fR3vDvOGy4Lph3v7QWwuQel28m
+ MJRp32IhQ4h71XWxNFRgQkD6qQnVawa4ReJHoT2YwFDZz7ilC2VLLD9C30g1996yhXQdNqN
+ vq5Db+7MC5RLCP/NHsvUYyBuaQyG3TKOLfBIps9c02mmraIUd+r6pnppzUEQ1uXm6UwNyZY
+ BwPTdm+TsthsuiLAZmuVA==
+UI-OutboundReport: notjunk:1;M01:P0:ZyYG2FZbpiY=;vJgU3R8a8HhZKHUDUUYVdax9rzH
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -142,76 +152,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Mar 27 2026, Rasmus Villemoes <ravi@prevas.dk> wrote:
+Dear Tom,
 
-> On Thu, Mar 26 2026, Simon Glass <sjg@chromium.org> wrote:
->
->> The generated .S files for fonts and splash screens use .incbin with the
->> full prerequisite path. When building with O= this bakes an absolute
->> path into the .S file. If the build directory is later used on a
->> different machine (e.g. in a container), the assembler cannot find the
->> source file.
->
-> I must be missing something, because I can't see how this can be a
-> problem, while all the other absolute paths to the source dir that go
-> into files generated in the build directory is not. For example, there's
-> a top-level "source -> /path/to/u-boot" symlink created, and as far as I
-> can tell, all the .foo.o.cmd files end up full of such references as
-> well, e.g. $BUILD/lib/.vsprintf.o.cmd contains
->
-> source_lib/vsprintf.o := /path/to/u-boot/lib/vsprintf.c
+The following changes since commit c24a72c35abe9cbbeb72e2effc6b6c73cd828a3=
+2:
 
-OK, I can sort-of reproduce, though I don't know if what I did is
-representable for your use case. No containers involved, just moved the
-source directory.
+   Merge tag 'rpi-2026.04-rc5' of=20
+https://source.denx.de/u-boot/custodians/u-boot-raspberrypi (2026-03-26=20
+09:02:05 -0600)
 
-  # original source dir
-  $ cd /tmp/u-boot 
-  $ make O=/tmp/build sandbox_defconfig
-  $ make O=/tmp/build -j7
-  $ cd /tmp ; mv u-boot u-boot-new ; cd u-boot-new
-  $ make O=/tmp/build -j7
+are available in the Git repository at:
 
-This breaks as you describe, but most files simply get rebuilt due to
-their .cmd files containing stale references to /tmp/u-boot/. Which
-suggests that the bug is really the lack of a .S.cmd file describing how
-the .S file was created in the first place.
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git=20
+tags/doc-2026-04-rc6
 
-This seems to be a better fix, which also causes the .S files to be
-generated anew if one does some actual change to the rule:
+for you to fetch changes up to c009771427767679b5d0f2a91110eb10bfa1d604:
 
-diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-index 7386353e0cc..b2441080e7e 100644
---- a/scripts/Makefile.lib
-+++ b/scripts/Makefile.lib
-@@ -526,8 +526,8 @@ cmd_S_ttf=						\
- 	echo '.balign 16';				\
- ) > $@
- 
--$(obj)/%.S: $(src)/%.ttf
--	$(call cmd,S_ttf)
-+$(obj)/%.S: $(src)/%.ttf FORCE
-+	$(call if_changed,S_ttf)
- 
- # Splash logos
- # ---------------------------------------------------------------------------
-@@ -547,8 +547,8 @@ cmd_S_splash=						\
- 	echo '.balign 16';				\
- ) > $@
- 
--$(obj)/%.S: $(src)/%.bmp
--	$(call cmd,S_splash)
-+$(obj)/%.S: $(src)/%.bmp FORCE
-+	$(call if_changed,S_splash)
- 
- # EFI applications
- # A Makefile target *.efi is built as EFI application.
+   doc: overlay-fdt-boot: .dtbos do not need load addresses (2026-03-27=20
+10:57:08 +0100)
 
-See e.g. kernel commit a7f9241909 which did essentially the same change
-to the .dtb -> .S rule back in 2018.
+Gitlab CI showed no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/29687
 
-It still makes sense to put these rules in a u-boot specific makefile,
-but this should avoid the need for each font .o file to need those
-AFLAGS changes.
+=2D---------------------------------------------------------------
+Pull request doc-2026-04-rc6
 
-Rasmus
+Documentation:
+
+* TI boards
+   - fix OP-TEE args
+   - fix incorrect labels for boot switches
+* Fix typo in pstore documentation.
+* Fix document references pointing to replaced uImage.FIT.
+* buildman: Add missing :: for examples.
+* overlay-fdt-boot: .dtbos do not need load addresses.
+* When building the documentation use sys.path.append for pytests.
+
+=2D---------------------------------------------------------------
+Anshul Dalal (2):
+       doc: board: fix OPTEE args for TI SoCs
+       doc: board: ti: fix incorrect labels for boot switches
+
+Aristo Chen (1):
+       doc: pstore: fix typo
+
+Daniel Golle (1):
+       treewide: fix uImage.FIT document paths
+
+David Lechner (1):
+       doc/buildman: fix missing :: on examples
+
+Rasmus Villemoes (1):
+       doc: overlay-fdt-boot: .dtbos do not need load addresses
+
+Tom Rini (1):
+       doc: Use sys.path.append for pytests being found
+
+  Makefile                                           |  3 +--
+  README                                             |  2 +-
+  board/technexion/pico-imx7d/README.pico-imx7d_BL33 |  2 +-
+  boot/Kconfig                                       |  2 +-
+  doc/README.dfutftp                                 |  2 +-
+  doc/README.odroid                                  |  2 +-
+  doc/README.uniphier                                |  2 +-
+  doc/README.update                                  |  6 +++---
+  doc/board/beagle/am62x_beagleplay.rst              |  3 ++-
+  doc/board/phytec/phycore-am62x.rst                 |  3 ++-
+  doc/board/qualcomm/board.rst                       |  2 +-
+  doc/board/ti/am6254atl_sk.rst                      |  2 +-
+  doc/board/ti/am62ax_sk.rst                         |  2 +-
+  doc/board/ti/am62dx_evm.rst                        |  2 +-
+  doc/board/ti/am62px_sk.rst                         |  8 +++++---
+  doc/board/ti/am62x_sk.rst                          |  6 +++---
+  doc/board/toradex/verdin-am62.rst                  |  3 ++-
+  doc/conf.py                                        |  2 ++
+  doc/develop/package/index.rst                      |  2 +-
+  doc/usage/cmd/pstore.rst                           |  4 ++--
+  doc/usage/fit/howto.rst                            |  4 ++--
+  doc/usage/fit/overlay-fdt-boot.rst                 |  8 +-------
+  lib/ecdsa/Kconfig                                  |  2 +-
+  lib/rsa/Kconfig                                    |  4 ++--
+  tools/buildman/buildman.rst                        | 16 +++++++++-------
+  tools/image-host.c                                 |  2 +-
+  26 files changed, 49 insertions(+), 47 deletions(-)
+
