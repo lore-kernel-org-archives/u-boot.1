@@ -4,101 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D35B910ED664
-	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 12:44:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 075F910ED66E
+	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 12:53:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A73083DA7;
-	Fri, 27 Mar 2026 13:44:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 79C608394E;
+	Fri, 27 Mar 2026 13:53:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f0A1pY5h";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="mehz7/eM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 822AE83DBF; Fri, 27 Mar 2026 13:44:46 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9AAF883DA7; Fri, 27 Mar 2026 13:53:39 +0100 (CET)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F77E8394E
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 13:44:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 28CBB81E18
+ for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 13:53:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-b9795ca4e6dso320470766b.2
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 05:44:44 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774615483; cv=none;
- d=google.com; s=arc-20240605;
- b=EkLchUl4uUsW1A+xNNeCTttaw41EVCbJLCPI0yzzIOpYGbh9Z9IHCbEPSxy/L/IUt0
- 9ansYx8E28JMs12ZpLkRQL7GR/vz/2XM3JzK9BvOgnhWUUD+Qm+8WFSY8ztmVieNxbms
- Kp2SGjSlIJ7+89QPj8rjfYYlVJ04Bgu5RqovfgMaDzMYWntXzS6kqWinNWyW8sR03rpF
- h0uy1F+UNxa1XeV7KmRko3JdNTlb0toaRoQnOrmZ/Lu5BxuSKeAE0GK5wllkLYR0T49i
- azBBbpJWRaodNmnOnq6TR1Z9p2AXWv4f2LSlapI4aI2pf5VWnoxLkmmDNTEN9Ib+BEdL
- P4fw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=CeI6vEPQknH36BT2avnJyMpixlYADC4qBCJmp7k7Re0=;
- fh=rXvbdCKXd6BT7xBh3jRTexWkacKLjaJLI3zNaituv3c=;
- b=MQVYPVAkvUe5OSjYzF/bZq/VePCSq+ztq4Lc2PCxfYfgqf8mdtBHD1WFmikJG6Md2i
- codF0XehZceD2qGLUPbR2RadA6XCq01bJxRNf7wal5lQ4QcUMIDWm0dvZsavI28NF9iV
- v0BXsLtOijj9Vkw3XKiiqPK9iSP3RO8zf//g4JWo+N9xDs0OmojuOjBYtLu9sxMCsmSJ
- vUgOq5h33YPILS2RNAypTJXwAXvogd07JA2v/nNR5V+7+Z+OdYYjUz3crGdmz505p4vb
- zvkxjPWxbUinieC17Nn026oaRcv7kHiEK1T8YWs/HAcTRxWTOyg9FWqupA3fI7EMx2Sz
- cjFQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1774615483; x=1775220283; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CeI6vEPQknH36BT2avnJyMpixlYADC4qBCJmp7k7Re0=;
- b=f0A1pY5hEN605mb5GmPMYRBO6xZvyfWCKcP0upz8YyL4daIo6EGwHxd8/uMhn2wJaS
- 4nmsWeue38vgmNu9YRR1FI6gVsBdohSOsAub8t7ZVB1hVmGb9vVqoSaWbi+yqBPJojFz
- 6cf0mHBRYQuYoFb50Ng6AfkXCsZ73lfi2T9es=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774615483; x=1775220283;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CeI6vEPQknH36BT2avnJyMpixlYADC4qBCJmp7k7Re0=;
- b=ZS+78q8vplhMTYXf/PYtnX529NcmZ0RXXFRGZu3Qs7hW4iXzeQqjyUtcK6v7Pg2TKw
- CtkHhbKjY1efO8a0xbzwwmlQKcu856kSwmwTtN9DSTI3xsaPL29iR7EBKs5mJotWSOWo
- zzBQCqBYWK32KCfP3VDHWFHNpkHSnyPCCVaj7Zr524gSbL0PEi9ySBvwqHl+Ju3VU6dw
- aQFI3rlwpAL43QIfrmsWjE/757SC2QE7C/a7SpI9/dMoW9ZcThXkQtrXngsKMgnmolgA
- Tk4OUdS3Ld9nVOvFBcTX8mMyVpb/r0fbp/aNtVx5vgBF0pL3RpWcbQpimEGXI+g/cb6I
- ESQQ==
-X-Gm-Message-State: AOJu0Yx5Gzqb37XDnyRBQcBvmoZLkiVObE2/pALpM0YeDxo4Txxt9YNp
- zsDNhBG/YaF4FgLu9AXU89KhF/gRg56fiyWZtIBEpnjmvaxWL7nZXquZvUIlUWpFxYunlgiiYRw
- vG2gDxguqjodj1FfapjKO/DPgIlvCQgcVXHvREBiu
-X-Gm-Gg: ATEYQzx4BqWGOcxWDOAmT2DLEGDnZ2+V4xhcr9kysinZDXvaYww4rOrlSp5q1P9yRqM
- U6iJ1Io+VFhko/tG+avi1w15nw5wnCx+yxrjUeU3tckpJdmOQKJogWI+PHor8LJG4QPsDcxBh+G
- YylNqmcUqOB2hh+B8R07KJKDWzDkW6PJAWYRF2/fitOGYvoac21jxj/tLl2/rZwMzfmfaMwtnJ7
- zMzLQNI1rHvzWheR7OL0qLI2GOou6tQltpE3d+R3HEn6cJN0mr29oTrhMMPeUD2HFhPOxSO0Cdk
- PsNGtb8=
-X-Received: by 2002:a17:907:3ccb:b0:b97:cc05:61b9 with SMTP id
- a640c23a62f3a-b9b502a8e9fmr170544466b.15.1774615483322; Fri, 27 Mar 2026
- 05:44:43 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=hTMyLXo1Xd42yH1WUGH0tS1WzrAIrPrUPcqrGGTwGo3s6E0RDCGk6habim2zLf+2Bist/AqXVMm3345EcS1jrAVr/E16LJVILRIqGoFOAZv5v2H+0tfxFx+oiny7VVPy8swLSskKizYMHCoNlFKzEDBhWAZa2vmzpcjV2dZDzdswf/V8hP0aRbdmPEz/fGpCr8Z2DA67MCfs49GvQuOI0O9DVGwAMys5o1YDYZcbSBourCkFKumn5vVFDu1yaEQp/2aJbakBCZG4iy3GA8wcizw+ZpSyvFoNRplEdRkXmHiCt2evQyZRgNm+xC4ypbz3GmL73UQS4LzE0G+jRbFLYA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kytsmhfKZPfi+FrX4JcCYoLltlHyiqvarVSTHGFx0yU=;
+ b=YdJWfp+wY5cLwefSOTqjiOhhmgjM+lYzaEOHpveTAxTqGES5+CLqE+S8ZGKEqiBeDoC/31pSrMCBIIMvKo/NErSSNCILnGu8q17HKxe770g8tJJ2PFkVeQDXjkXvDlxfWL8UrtyrDwcBiZ43ymuLG2O5B4bBZM5UTX8t18HhyFpNGiNHvvZG30aGg8qRfimo9iQO+CPO2HoVtDeu0RvNPcxVjkcBpK7uheH+HZTCUYAvOz0QJiVDAnViCZdCGCFpBFpntMNoXqEt/G0J6Fz7OSI8UC+HyDWkK69eZUx3FAbbP4LtEAY1ydB6F4mKYNlHk/TT0Tnj84SGFc0tkFE1Wg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kytsmhfKZPfi+FrX4JcCYoLltlHyiqvarVSTHGFx0yU=;
+ b=mehz7/eMroOPB1r9ztDqSpxPGH0mmYHg25RHKuOqy9irfGoCq5qyTNpggyqCdGAiEOsTFLov/FzEOx+cdQmJKr6FtoR89dzUCmIoayhr9VhYrt6GpmAErLulCFiDSaBDuLw7Cfj2dUif7G1/rc7Kf6+szuv2epZ8bVlQ12AghFM=
+Received: from BL1P223CA0024.NAMP223.PROD.OUTLOOK.COM (2603:10b6:208:2c4::29)
+ by MN2PR12MB4406.namprd12.prod.outlook.com (2603:10b6:208:268::23)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.11; Fri, 27 Mar
+ 2026 12:53:32 +0000
+Received: from BN3PEPF0000B074.namprd04.prod.outlook.com
+ (2603:10b6:208:2c4:cafe::8d) by BL1P223CA0024.outlook.office365.com
+ (2603:10b6:208:2c4::29) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9723.32 via Frontend Transport; Fri,
+ 27 Mar 2026 12:53:32 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BN3PEPF0000B074.mail.protection.outlook.com (10.167.243.119) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9745.21 via Frontend Transport; Fri, 27 Mar 2026 12:53:32 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 27 Mar
+ 2026 07:53:32 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
+ (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 27 Mar
+ 2026 05:53:31 -0700
+Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Fri, 27 Mar 2026 07:53:30 -0500
+From: Padmarao Begari <padmarao.begari@amd.com>
+To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
+CC: <git@amd.com>, <padmarao.begari@amd.com>
+Subject: [PATCH 0/4] Add TPM2 support for AMD Versal Gen 2
+Date: Fri, 27 Mar 2026 18:22:54 +0530
+Message-ID: <20260327125318.1037146-1-padmarao.begari@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20260326115500.955388-1-sjg@chromium.org>
- <20260326115500.955388-2-sjg@chromium.org>
- <87cy0plmh8.fsf@prevas.dk> <875x6hlg8k.fsf@prevas.dk>
-In-Reply-To: <875x6hlg8k.fsf@prevas.dk>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 27 Mar 2026 06:44:30 -0600
-X-Gm-Features: AQROBzDxgjACUAKdJzxG0vbIjwclK_xc-W4luGVbJhLrp_0ZtiOqjha4Lp7S3o0
-Message-ID: <CAFLszTj-SBhSsrrsDwS0qWeRysno+M9fGhcZL6i0N+tbzbREUg@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] kbuild: Use relative paths in generated .incbin
- directives
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: u-boot@lists.denx.de, Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Ion Agorria <ion@agorria.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B074:EE_|MN2PR12MB4406:EE_
+X-MS-Office365-Filtering-Correlation-Id: 46d3b704-7d50-4194-6614-08de8bffda26
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|36860700016|376014|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: J0143ukWwDpR1k1oLV0US+4FTwAnqGXJciBN5NZcbkUOBNaYG/WWcPhWnwCITA2kr3WzAqbmiL9R5eLCGgZnpj/KwOfjVEjB3Kxv8Df0rHcwAe4qPP7VdmdEwiDhVm5DtIQHw7D0cbu3oJzg1am7/ibcCeIU1UYvYVM0yF1CkI0vRJ8NqtQQiTy6aOL4eyIIG68A6JhnjPyaxbJyVDCHksPUhGM4oRnET+Djxa70geUXqxpn1+RxW+vN/rH7+poT+5k5xeqETOry4aXK+2b9dHAixCz4Jxu8uX8xpUqimtdNfY86abgstQB9uPNd5hfUCkM/ghB2vG3SAzlDYpX1FnbP/IWE8ILPTqbiqa7ezAZITbWe8b8nN02YIf9/1Pri4yBd6clag4vZBDrT9DdsANxiTViKJAOSfWn5XaElBsZNo5lQeMNo8BRjq+DoQsdWd3g4TLywDsqPFYP3KND/TnjM979omwsM6dlmF3ERKJJdSwfN6cCv9D8J/Iuem9oaXept9II+xlh46zHtigWGlQPSRF8ZA6P4OaEoQUlZassm1gITGvQF5gFhcX8NA/xU8GGq8TYjARSO/5u0Tt98vDzwKs+dww1WcIndE8dkV9vVk+ysRadIvzsebWCXTAFKPYsNdxYpCAygj/JGCmXEiS8eYFce16C92KwhG3hbeo+nyDBJPCtqYK09INubJPYqDxaPsKWjX0eqO/7hQIa+GAueXLiX8sKL8ZFT6RC0ymwThEZAkftiifJ2nzqd1jcPORWfookd5TeprjVpJ8vD+Q==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: MtGQdTlMf9/cY8FE4jOMISyZI9fTObBrvpXA69dCj6vxPi+c+SAFQ7SuFoPgDeCA+X4rJwRdmA4SvaIZw/espFtmIuddCKX5RpzdQw2nmeD7fgB7xY+hhC//CzMYvIcYGb+iAEcov9U6z7R1A8zrCjNtIyW4hKODtnPjxoaMmXFv4DAJCA6JWmQ1EUipqJYyekV+qFFsjP68AWBzi2V4nOVxgsaGMNjQPPVrhyQJ6qUAgQGRzO7dgC0/Lb97B9eYKYGAvuS4fRDi6XwKHyMDqEapK3iZotDRpI4+ooicblnaece7THWIw2mIdbxWSbGFQBOqw+IlPKltChps0vidPfb1FzE2py9AYT4fuviytvjSc24tCz8xtGmuaCsxJbLVD+dEDQKFW9O06317QMC8roPHBKienbApGOBvLZvS2Iu/GH3XyqttQfz01nb+yHvD
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2026 12:53:32.5635 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 46d3b704-7d50-4194-6614-08de8bffda26
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B074.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4406
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,176 +125,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
+This series adds a TPM2 driver for AMD Versal Gen 2 that exposes the
+PLM XilOCP Hardware PCR service as a standard TPM2 interface.
 
-On Fri, 27 Mar 2026 at 04:27, Rasmus Villemoes <ravi@prevas.dk> wrote:
->
-> On Fri, Mar 27 2026, Rasmus Villemoes <ravi@prevas.dk> wrote:
->
-> > On Thu, Mar 26 2026, Simon Glass <sjg@chromium.org> wrote:
-> >
-> >> The generated .S files for fonts and splash screens use .incbin with the
-> >> full prerequisite path. When building with O= this bakes an absolute
-> >> path into the .S file. If the build directory is later used on a
-> >> different machine (e.g. in a container), the assembler cannot find the
-> >> source file.
-> >
-> > I must be missing something, because I can't see how this can be a
-> > problem, while all the other absolute paths to the source dir that go
-> > into files generated in the build directory is not. For example, there's
-> > a top-level "source -> /path/to/u-boot" symlink created, and as far as I
-> > can tell, all the .foo.o.cmd files end up full of such references as
-> > well, e.g. $BUILD/lib/.vsprintf.o.cmd contains
-> >
-> > source_lib/vsprintf.o := /path/to/u-boot/lib/vsprintf.c
+On Versal Gen 2 there is no discrete TPM chip; instead the Platform
+Management controller (PLM) provides a set of Hardware PCRs through its
+XilOCP module (module ID 13). U-Boot reaches PLM via the TF-A SMC
+PASS_THROUGH path using the existing xilinx_pm_request() infrastructure:
 
-Thanks for looking at this.
+ U-Boot -> xilinx_pm_request() -> SMC (PASS_THROUGH) -> TF-A -> IPI -> PLM
 
-When I build outside the container and then build inside I get:
-$ um -n b sandbox
-buildman -L -I -w -W --boards sandbox -o /tmp/b/sandbox
-$ um b sandbox
-drivers/video/fonts/cantoraone_regular.S: Assembler messages:
-drivers/video/fonts/cantoraone_regular.S:5: Error: file not found:
-/home/sglass/files.local/u-boot/drivers/video/fonts/cantoraone_regular.ttf
-make[4]: *** [scripts/Makefile.build:344:
-drivers/video/fonts/cantoraone_regular.o] Error 1
-drivers/video/fonts/nimbus_sans_l_regular.S: Assembler messages:
-drivers/video/fonts/nimbus_sans_l_regular.S:5: Error: file not found:
-/home/sglass/files.local/u-boot/drivers/video/fonts/nimbus_sans_l_regular.ttf
-make[4]: *** [scripts/Makefile.build:344:
-drivers/video/fonts/nimbus_sans_l_regular.o] Error 1
-make[3]: *** [scripts/Makefile.build:492: drivers/video/fonts] Error 2
-drivers/video/u_boot_logo.S: Assembler messages:
-drivers/video/u_boot_logo.S:5: Error: file not found:
-/home/sglass/files.local/u-boot/drivers/video/u_boot_logo.bmp
-make[3]: *** [scripts/Makefile.build:344: drivers/video/u_boot_logo.o] Error 1
-make[2]: *** [scripts/Makefile.build:492: drivers/video] Error 2
-make[1]: *** [Makefile:2201: drivers] Error 2
-make: *** [Makefile:189: __sub-make] Error 2
-drivers/video/fonts/cantoraone_regular.S: Assembler messages:
-drivers/video/fonts/cantoraone_regular.S:5: Error: file not found:
-/home/sglass/files.local/u-boot/drivers/video/fonts/cantoraone_regular.ttf
-make[4]: *** [scripts/Makefile.build:344:
-drivers/video/fonts/cantoraone_regular.o] Error 1
-drivers/video/fonts/nimbus_sans_l_regular.S: Assembler messages:
-drivers/video/fonts/nimbus_sans_l_regular.S:5: Error: file not found:
-/home/sglass/files.local/u-boot/drivers/video/fonts/nimbus_sans_l_regular.ttf
-make[4]: *** [scripts/Makefile.build:344:
-drivers/video/fonts/nimbus_sans_l_regular.o] Error 1
-make[3]: *** [scripts/Makefile.build:492: drivers/video/fonts] Error 2
-drivers/video/u_boot_logo.S: Assembler messages:
-drivers/video/u_boot_logo.S:5: Error: file not found:
-/home/sglass/files.local/u-boot/drivers/video/u_boot_logo.bmp
-make[3]: *** [scripts/Makefile.build:344: drivers/video/u_boot_logo.o] Error 1
-make[2]: *** [scripts/Makefile.build:492: drivers/video] Error 2
-make[1]: *** [Makefile:2201: drivers] Error 2
-make: *** [Makefile:189: __sub-make] Error 2
+Padmarao Begari (4):
+  firmware: zynqmp: Add HW PCR API for Versal Gen 2
+  tpm: Add AMD Versal Gen 2 TPM2 driver
+  firmware: zynqmp: Bind TPM2 driver for Versal Gen 2
+  configs: amd: Enable Versal Gen 2 TPM2 driver
 
-If I then do a fresh build inside the container, then build outside, I get:
+ MAINTAINERS                        |   5 +
+ configs/amd_versal2_virt_defconfig |   1 +
+ drivers/firmware/firmware-zynqmp.c |  85 +++-
+ drivers/tpm/Kconfig                |  21 +
+ drivers/tpm/Makefile               |   1 +
+ drivers/tpm/tpm2_versal2_smc.c     | 666 +++++++++++++++++++++++++++++
+ include/zynqmp_firmware.h          |  24 ++
+ 7 files changed, 802 insertions(+), 1 deletion(-)
+ create mode 100644 drivers/tpm/tpm2_versal2_smc.c
 
-$ um b sandbox
-drivers/video/fonts/cantoraone_regular.S: Assembler messages:
-drivers/video/fonts/cantoraone_regular.S:5: Error: file not found:
-/home/ubuntu/project/drivers/video/fonts/cantoraone_regular.ttf
-make[4]: *** [scripts/Makefile.build:344:
-drivers/video/fonts/cantoraone_regular.o] Error 1
-drivers/video/fonts/nimbus_sans_l_regular.S: Assembler messages:
-drivers/video/fonts/nimbus_sans_l_regular.S:5: Error: file not found:
-/home/ubuntu/project/drivers/video/fonts/nimbus_sans_l_regular.ttf
-make[4]: *** [scripts/Makefile.build:344:
-drivers/video/fonts/nimbus_sans_l_regular.o] Error 1
-make[3]: *** [scripts/Makefile.build:492: drivers/video/fonts] Error 2
-make[2]: *** [scripts/Makefile.build:492: drivers/video] Error 2
-make[1]: *** [Makefile:2201: drivers] Error 2
-make: *** [Makefile:189: __sub-make] Error 2
-drivers/video/fonts/cantoraone_regular.S: Assembler messages:
-drivers/video/fonts/cantoraone_regular.S:5: Error: file not found:
-/home/ubuntu/project/drivers/video/fonts/cantoraone_regular.ttf
-make[4]: *** [scripts/Makefile.build:344:
-drivers/video/fonts/cantoraone_regular.o] Error 1
-drivers/video/fonts/nimbus_sans_l_regular.S: Assembler messages:
-drivers/video/fonts/nimbus_sans_l_regular.S:5: Error: file not found:
-/home/ubuntu/project/drivers/video/fonts/nimbus_sans_l_regular.ttf
-make[4]: *** [scripts/Makefile.build:344:
-drivers/video/fonts/nimbus_sans_l_regular.o] Error 1
-make[3]: *** [scripts/Makefile.build:492: drivers/video/fonts] Error 2
-make[2]: *** [scripts/Makefile.build:492: drivers/video] Error 2
-make[1]: *** [Makefile:2201: drivers] Error 2
-make: *** [Makefile:189: __sub-make] Error 2
+-- 
+2.34.1
 
->
-> OK, I can sort-of reproduce, though I don't know if what I did is
-> representable for your use case. No containers involved, just moved the
-> source directory.
->
->   # original source dir
->   $ cd /tmp/u-boot
->   $ make O=/tmp/build sandbox_defconfig
->   $ make O=/tmp/build -j7
->   $ cd /tmp ; mv u-boot u-boot-new ; cd u-boot-new
->   $ make O=/tmp/build -j7
->
-> This breaks as you describe, but most files simply get rebuilt due to
-> their .cmd files containing stale references to /tmp/u-boot/. Which
-> suggests that the bug is really the lack of a .S.cmd file describing how
-> the .S file was created in the first place.
->
-> This seems to be a better fix, which also causes the .S files to be
-> generated anew if one does some actual change to the rule:
->
-> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-> index 7386353e0cc..b2441080e7e 100644
-> --- a/scripts/Makefile.lib
-> +++ b/scripts/Makefile.lib
-> @@ -526,8 +526,8 @@ cmd_S_ttf=                                          \
->         echo '.balign 16';                              \
->  ) > $@
->
-> -$(obj)/%.S: $(src)/%.ttf
-> -       $(call cmd,S_ttf)
-> +$(obj)/%.S: $(src)/%.ttf FORCE
-> +       $(call if_changed,S_ttf)
->
->  # Splash logos
->  # ---------------------------------------------------------------------------
-> @@ -547,8 +547,8 @@ cmd_S_splash=                                               \
->         echo '.balign 16';                              \
->  ) > $@
->
-> -$(obj)/%.S: $(src)/%.bmp
-> -       $(call cmd,S_splash)
-> +$(obj)/%.S: $(src)/%.bmp FORCE
-> +       $(call if_changed,S_splash)
->
->  # EFI applications
->  # A Makefile target *.efi is built as EFI application.
->
-> See e.g. kernel commit a7f9241909 which did essentially the same change
-> to the .dtb -> .S rule back in 2018.
->
-> It still makes sense to put these rules in a u-boot specific makefile,
-> but this should avoid the need for each font .o file to need those
-> AFLAGS changes.
-
-Sure, but it causes the font/logo .S files to be rebuilt on every make
-invocation. How did you test this?
-
-It would be nice to use if_changed though. It needs the .cmd file to
-be loaded via -include, which only happens for files in the targets
-variable. The generated .S files are never added to targets, so cmd_$@
-is always empty and if_changed always rebuilds.
-
-The kernel commit you referenced (a7f9241909) works for DTB because
-.dtb.o has a compound suffix with a matching intermediate_targets
-entry. We could follow the same convention, renaming to .ttf.o/.bmp.o
-and adding:
-
-targets += $(call intermediate_targets, .ttf.o, .ttf.S) \
-           $(call intermediate_targets, .bmp.o, .bmp.S)
-
-The pattern stem stays the same, so symbol names are unaffected. What
-do you think?
-
-Regards,
-Simon
