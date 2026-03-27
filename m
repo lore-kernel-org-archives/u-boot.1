@@ -4,86 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 162EE10BA424
-	for <u-boot@archiver.kernel.org>; Sat, 28 Mar 2026 07:06:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF66E10BA425
+	for <u-boot@archiver.kernel.org>; Sat, 28 Mar 2026 07:06:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95B6183FD3;
+	by phobos.denx.de (Postfix) with ESMTP id DED8084010;
 	Sat, 28 Mar 2026 08:05:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CBurOtro";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="J6iOihPn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3375083CD3; Sat, 28 Mar 2026 07:02:12 +0100 (CET)
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6FCAB83DA7; Sat, 28 Mar 2026 07:43:58 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0438F8394E
- for <u-boot@lists.denx.de>; Sat, 28 Mar 2026 07:02:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F1078394E
+ for <u-boot@lists.denx.de>; Sat, 28 Mar 2026 07:43:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ngotra27101996@gmail.com
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-c70e27e2b74so938680a12.0
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 23:02:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1774677728; x=1775282528; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NcRcN5ldVDZZAn32xO/pNyQnAy8qUflkMh6hUEqageI=;
- b=CBurOtroECVLCHv38sNxF2mH5cCCqO0LDCX9KZbWp0rh9e7M0pb4VtPfBPxJnfexZ8
- Vfyu+lbGbjUe5X0ZgkEGw37WvhNmgHTdlPLuqiAa0SbZhP+UGGrbgaTZKN0sH/ovLrYA
- wWCXsOTsTphmIXXoCQU935q4W+dPubGDp0UJd4cvyEY1pi10CrDk81k8I4lp4vJKzgLg
- LcAFbhREN/Srm7Man331UmzWK6yyagbv0UGySW6RG6xubogEBnDG39rgPujtxZeoT+ok
- LWhNrzrNFoR0ImBXx77WeZpi4vjUjQueG4H4czy9j4vRKF7KSGf0JoZ2ISByRvsN1us5
- Julg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774677728; x=1775282528;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=NcRcN5ldVDZZAn32xO/pNyQnAy8qUflkMh6hUEqageI=;
- b=EXDnTnAx5vDcwksH8BKG/eknUwHsfIu6xgUGfdOliJAUWbcDAER56pnB6egi/ecaO8
- bT5/vtcKgJJWgpd2Y2rX07NyPyy6HCxDb15GFeJL1pWVEQ6A6dl98hnq2ZR9+tw1NhIS
- w+iXXsGYgo7f53nU7UVTKtUK63Fis7OjfjLhdVLGrFZz0hF2FfBFQqkRg/g5YDD8ZGup
- rIy6+nd4XqeQsqzQtA+s3lN+ZBo9R6dIdYv8buR8WaubETGXS1HvVZYOMEqNqjqzKV4M
- +ZeYya6ZhqqpbRYbg2XSLBBonzWHsmrYoif92CPjP6a5Gl4n8i8Nabf+VAKv/hJOtJmp
- RZww==
-X-Gm-Message-State: AOJu0YwgDM7wTyrxdlMqNBDgpE8nKgKSOm/Y7Cat1xMKgMyXVPhOUS5y
- p0DmtxKdJc3gGa+0TJHtQnBvBjO4DhZquLdXOYhHKyM7mPemYKD/mtnCTa7WDsSf
-X-Gm-Gg: ATEYQzxjCZCzBendjYjZcnhcWlnY8wCUqYr+6kbL4tfzhR9VMCHHcFdGqJDLDbPgV4d
- kE9IE2ZVM9Ac1c4HMtWljSVchRHztkUpzXFJJI31STCbx23UufN4lAQwVtai3jDK4pHhB8EHxu+
- JtvJySPifIfPHGtpGJ8TwThTJCzY1SXgmTNRxtuoIqtmQsnbQoXaMQHptyZ/fnnXSJD3IfiJmtf
- 3haK759Py+g6iOQi/wqZsGelNoGVzGAiFWhqMUdxPYK3ck045W9TabQHb+S1jhCd20AXdIOMokN
- Up6mPp244Ko3J43fB+KCUg+9L61nRag1BG6vmdq0qtFuet5P5Kv50CrqJSxqwAaXS75cpZAW+rZ
- gJDCe3mDA9n1ZCOinQFaiksI6H/sO+Y4DbPIHXqF0dt5hM2AsGh8c3Fn1SW1CHbTmnxVxTJv/tp
- J1tcFFE2dxWNI5JPndQhW1Lv3zIKALDZMmtV04HEMLpMT7vGy/6DP/dlSehZvVIR8=
-X-Received: by 2002:a05:6a20:9143:b0:398:7830:8a40 with SMTP id
- adf61e73a8af0-39c8794f94dmr6127548637.23.1774677728166; 
- Fri, 27 Mar 2026 23:02:08 -0700 (PDT)
-Received: from localhost.localdomain ([171.244.188.41])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c76916d26dbsm902635a12.13.2026.03.27.23.02.06
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 27 Mar 2026 23:02:07 -0700 (PDT)
-From: Ngo Luong Thanh Tra <ngotra27101996@gmail.com>
-X-Google-Original-From: Ngo Luong Thanh Tra <S4210155@student.rmit.edu.au>
-To: u-boot@lists.denx.de
-Cc: Ngo Luong Thanh Tra <S4210155@student.rmit.edu.au>,
- Casey Connolly <casey.connolly@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/3] common: cli_hush: fix console_buffer overflow on boot
- retry
-Date: Sat, 28 Mar 2026 13:01:33 +0700
-Message-ID: <20260328060139.63221-3-S4210155@student.rmit.edu.au>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260328060139.63221-1-S4210155@student.rmit.edu.au>
-References: <20260328060139.63221-1-S4210155@student.rmit.edu.au>
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 35D981125B4; Sat, 28 Mar 2026 07:43:53 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1774680234;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=rw39yihxKLlu8Uf6ArwdqVOcXmmYYeUxMsEElf2kZpI=;
+ b=J6iOihPnSLXLCUFPqYUsDUo4c82bNPDxffEmLURc3e02KrAcvwFFYjUAsnbAw8CcNul8Fg
+ rygnQy+yxieJz+Oc3ez+h/ag+ttbHw21vinFB+lpK6p18CJCKdE5hv/cbE0HuQeZRbliJ2
+ OJ5a4JmN82I+7vho+/dYiV47frE8oUk1zlI2ebqnQcqB5cLwPqPO8ornNdywq3zvezRtlI
+ oMGQzl1l904FPzyS3SJwORK7zJs/NumOnvfnOelorbpgT9GKLY3Y3pYkApA0Q64oKmm/JA
+ XshdyGm2XjNmvKK0A6OfThpjbjeCLg8jjJMjebzX6s0pwGO+gdJPRj3hdS1fag==
+Message-ID: <03fd5ca1-6581-4c50-8d50-2cfae6d98683@nabladev.com>
+Date: Sat, 28 Mar 2026 00:11:54 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] board: dhelectronics: imx: Use second Ethernet MAC also
+ from fuse
+To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan
+ <peng.fan@nxp.com>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
+References: <20260320102918.4011-1-cniedermaier@dh-electronics.com>
+ <382f338c-020f-482d-80b8-5a39ad724843@nabladev.com>
+ <b443e161b5db4abab8d8889135a345fa@dh-electronics.com>
+ <941708e9-a2e6-4f8d-a15d-d1da8a91ae91@nabladev.com>
+ <2eebac26eff54f9da7e2d01dbca71569@dh-electronics.com>
+ <a40a11f9-f3f5-4eee-ab6e-c2597808c471@nabladev.com>
+ <a7ebfe912f084176b79c54a2e9e3d8e3@dh-electronics.com>
+ <2dca42bf-a247-4190-9439-14e14f65aec3@nabladev.com>
+ <3a8724ffe4fa44808ac8a278e4a702f7@dh-electronics.com>
+Content-Language: en-US
+From: Marek Vasut <marex@nabladev.com>
+In-Reply-To: <3a8724ffe4fa44808ac8a278e4a702f7@dh-electronics.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-Mailman-Approved-At: Sat, 28 Mar 2026 08:05:42 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,47 +81,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace strcpy() with strlcpy() when injecting the boot retry
-command into console_buffer. Add a BUILD_BUG_ON() to catch at
-compile time any configuration where CONFIG_SYS_CBSIZE is smaller
-than the retry command string, and use a named constant for the
-command so that the size check stays in sync if the string is
-ever changed.
+On 3/27/26 11:02 PM, Christoph Niedermaier wrote:
+> From: Marek Vasut <marex@nabladev.com>
+> Sent: Monday, March 23, 2026 6:21 PM
+>> On 3/23/26 5:49 PM, Christoph Niedermaier wrote:
+>>
+>> [...]
+>>
+>>>> As for the rest, it really boils down to the ordering of fallbacks, it
+>>>> is either:
+>>>>
+>>>> A)
+>>>> fuse1
+>>>> eeprom1
+>>>> fuse0+1
+>>>> eeprom0+1
+>>>>
+>>>> or
+>>>>
+>>>> B)
+>>>> fuse1
+>>>> fuse0+1
+>>>> eeprom1
+>>>> eeprom0+1
+>>>>
+>>>> The following ordering, which is the ordering introduced by this patch,
+>>>> is confusing:
+>>>>
+>>>> fuse1
+>>>> eeprom1
+>>>> eeprom0+1
+>>>> fuse0+1
+>>>>
+>>>> So please pick either A) or B) above. I do not see any particular
+>>>> advantage of either of the other, except maybe B) improves boot time in
+>>>> case both fuse blocks are blown, because it avoids the EEPROM I2C access.
+>>>
+>>> The prevention of I2C access is only a one time effect, because then the
+>>> MAC addresses will provided by the environment.
+>>
+>> Which increases the system boot time, which is undesired.
+> 
+> If a customer sequentially fuse only the first MAC address from a MAC address
+> pool. Then the second MAC address of the SoM is the same MAC address as the MAC
+> address from the next SoM's first MAC address. That is very bad. With the A)
+> it can be avoided, because the second MAC address then is taken from the EEPROM.
 
-Fixes: 657e19f8f2dd ("cli_hush: support running bootcmd on boot retry")
-Signed-off-by: Ngo Luong Thanh Tra <S4210155@student.rmit.edu.au>
-To: u-boot@lists.denx.de
----
+This edge case can be fixed on first boot in a boot script. Read out the 
+fuse using "setexpr var *addr", detect whether the fuse is empty using 
+"if test ...", and if it empty, then populate its content with EEPROM 
+content. This saves you one extra I2C operation on every boot afterward.
 
- common/cli_hush.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+> If I had to choose between reducing the boot time once and preventing potential
+> duplicate MAC addresses, I would say that preventing potential duplicate MAC
+> addresses is the better option. Furthermore, the issue of duplicate MAC addresses
+> in the system is not a hypothetical scenario, it has already occurred in practice.
+> 
+>>> If I remove the eeprom0+1, because it was for prototype configurations,
+>>> my preferred order would be:
+>>>
+>>> fuse1
+>>> eeprom1
+>>> fuse0+1
+>> eeprom0 can not be removed, that breaks backward compatibility. And the
+>> ordering of fuse-eeprom-fuse is confusing and has the boot time increase
+>> downside of A).
+> 
+> For which SoM should backward compatibility be maintained here. There is
+> no SoM at the customer's site where it is required. For rev.200 the EEPROM
+> ID page is used, for rev.100 only some internal SoM prototypes with two
+> Ethernet interfaces had only the first EEPROM populated. It's not worth
+> keeping that code.
 
-diff --git a/common/cli_hush.c b/common/cli_hush.c
-index 7bd6943d3ed..6141c2959df 100644
---- a/common/cli_hush.c
-+++ b/common/cli_hush.c
-@@ -84,6 +84,7 @@
- #include <cli_hush.h>
- #include <command.h>        /* find_cmd */
- #include <asm/global_data.h>
-+#include <linux/build_bug.h>
- #endif
- #ifndef __U_BOOT__
- #include <ctype.h>     /* isalpha, isdigit */
-@@ -1029,7 +1030,10 @@ static void get_user_input(struct in_str *i)
- #  ifdef CONFIG_RESET_TO_RETRY
- 	  do_reset(NULL, 0, 0, NULL);
- #  elif IS_ENABLED(CONFIG_RETRY_BOOTCMD)
--	strcpy(console_buffer, "run bootcmd\n");
-+	static const char retry_cmd[] = "run bootcmd\n";
-+
-+	BUILD_BUG_ON(sizeof(retry_cmd) - 1 > CONFIG_SYS_CBSIZE);
-+	strlcpy(console_buffer, retry_cmd, sizeof(console_buffer));
- # else
- #	error "This only works with CONFIG_RESET_TO_RETRY or CONFIG_BOOT_RETRY_COMMAND enabled"
- #  endif
--- 
-2.53.0
+So yes, eeprom0 can not be removed, because it also contains the WLP.
 
-base-commit: c704af3c8b0f37929bce8c2a4bba27d6e89919c7
-branch: fix/sys-cbsize-overflow-series
+>> I would say B) is the way to go, it should also cover your requirements,
+>> keeps the boot time low if both fuse banks are fused (which can be fixed
+>> even on existing hardware, simply read out eeprom content and fuse it
+>> into fuse bank 1), and it retains the priority ordering (env, fuse,
+>> eeprom) without mixing it up.
+> 
+> The case that only the first MAC address is fused and not the second one is
+> a special case, but if this happens, with the order A) above you can prevent
+> duplicate MAC addresses from appearing in the system. In addition, if you want
+> to fix it, it's dangerous to fuse the second MAC address at the customer's
+> location, because if something goes wrong during the fusing, the device must
+> be replaced on-site. This can also be avoided with order A).
+If this is a special case, then please convert it into a common case, so 
+the generic code upstream can be kept that, generic.
+
+If this special case can not be converted to common case, then add local 
+patch to handle that specific device.
