@@ -4,62 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B94C110F284B
-	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 16:28:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2C2510F284A
+	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 16:28:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2A8E84178;
-	Fri, 27 Mar 2026 17:24:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3901D8418C;
+	Fri, 27 Mar 2026 17:24:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=htecgroup.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=htecgroup.com header.i=@htecgroup.com header.b="rFXIxcSw";
+	dkim=pass (2048-bit key; unprotected) header.d=htecgroup.com header.i=@htecgroup.com header.b="paXxURgf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C7FC83FC6; Fri, 27 Mar 2026 15:11:22 +0100 (CET)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id 1264983FC6; Fri, 27 Mar 2026 15:12:15 +0100 (CET)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F160983C14
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 15:11:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 53CD981E18
+ for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 15:12:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=htecgroup.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=uros.stajic@htecgroup.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Qf2dWVUW1ZQT6BRlB4Ix8xSOgOR/GeeSPXub9Euk95WaoropOMck+xx1wMX21MuIhCq7n2m0PTdp0E3Ko2mL5FaAYQGRJXq6lCwgpKQhiY9UcRo9WmKK4WhxKQMu+LK1JmGwESQNLQbSCsPgMMZ43lYrZLDzHHTFjdyH3EMHNEtcJTIkkcDIr2aScrOYuL9JPj+e5TEY5pNqsnYU6acZWto2NaCEAltpfo82BKIdOExv3BA/n207wjcKX+URrSeNSBezTUe4L99CujwPsuj26voEP6w5t6UgvRD11Cxv9ImGrACoOZNSxkCznCsOyjtvkS0I0ATkDu5msj8WrERAPA==
+ b=MgVGXtm3cj/FOtUjBXp3VKVLa6kSb+wX5A34uYTo+H6S0B9DzI9W6OOg175LECm+SCoCC74NY4vxzU6YovnUVWkfYQ8vcAMjbQt0I1XhmzZtCwNqPcG9DU0XrkwD+S1QCp9umuEmNorPpCQPYkjHryMTJFBt4BMEy6OaWwZW8BDUA11cc/kqESHLuZ+o7Q68n+ZEvxqIgHDf/n+LFtrFa3SInqPZHingkXaQ424V3N7K6IjtpujF9BUzpYUzVL5YXPyQ+fYSM2hMgRp9idmCMwPXjG2HPnRxAjxTjTLxuQWH6JrPT5bQalTM3yiKCD4WLWTNM4jhBUMR9PFu3thbxQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=o+/ND8d6+dGfbyhQAq4aZG/YjqyQb9I7TjJsyRVdGPI=;
- b=MtYlMzua53Yj4qjoxurkcwPRAkKsEm6OKRSX6/KcAf5S8fo9+GCBnCASiY4qAVp4ujcV5kPGzwjlOJR1SIoJnhoB8nwDO+w5o5irjpb5n91JPWwGTU9bbJtjJU8yYYJMDPIB5sd5OLnervxbVX36SHv+V4pZdmSe8JOkE/syqS6LitTo+VyFDo/YfkAsb9jb2ewRnEr41sqmPlwoCOUjwPCLL934yM2+6k1d+gjoCkXddISnZiNB1Hgs/m5TlC0TrM5DtoaxrJb69t8UTFz2tSrD1jYFQb9BfPibNayUUFsGWWDMgLyPAqxf/A4tHvZ2eejaUB/RQKV2pdOcaGCMvQ==
+ bh=mUxEmHw4iY+h6ihOT2E4hZB2UyR5IahxXQePz7MxmAc=;
+ b=jwudpqpNJqLrqnXROGQtelqxwuvz6Eec0st4j1wxvG2SSKThuy0RFNUkGN3LQkFceLNZw8kOZfWORf82Dv4sU/rzou6Gs54A4lf/j0j0DYuYZhJeYKlp+HEqeyjFzmHdu8PxfU9HZGnJHYVmUT0cmSfWUs7PO2fojx77b5/SPIcn97DmFLS/lgac7IAPeGVuU+DXyO3oahlf8m4VGvLmOkGBSlZP/PESYjlVS2FYVWjle0sUXniCUIczG55Q0uWEiNvF/MS+L3NjYI13PpxFn4Z4eow9r0fth1d4YwuoUjNWNnQYwikK1Hfie6orAMk+RhxaOWiKjQOtdziV2Dn00Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=htecgroup.com; dmarc=pass action=none
  header.from=htecgroup.com; dkim=pass header.d=htecgroup.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=htecgroup.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=o+/ND8d6+dGfbyhQAq4aZG/YjqyQb9I7TjJsyRVdGPI=;
- b=rFXIxcSwyGYeRlNYf2NmjhaZDX4R8GGd0pQs28y42fs7oxj/EUhiRkspYZElLclmctF8UymZ9DVllLUSCjDBOjOIjOtvlm/C03nN+Wo8Nuz5Aakf+ldqfEWuOLHNMA6GmLL5ONxklB6a8aj1BJ90Pk1upbIvQYYQbTVZJFNAgz9kxJ05i82G2zbMglnYGVTyxsRN2aBjHxX07Fin+suirleglmQ10EYIRtQ9zX6gCte+MIY2zfhGaha4bWM2LxEWkel9Ui8mD94lzHrQrhq24PacXsMPiks39BmdhsJvTc0niYkDPfDCC4Oqi/S2BbjGi9AOaq1/xam2VloPM+LYlA==
+ bh=mUxEmHw4iY+h6ihOT2E4hZB2UyR5IahxXQePz7MxmAc=;
+ b=paXxURgfl6S0x/nb/GsbeoyYvsSLaw9yJgza02H9Ka/LmEA11gAZwZR8GViogxte3IWnOMIcLz5glucVNJ0h3OnAJwWTZqI2ZK1jgm4o0xACMC+NxmAIMDg6R8qBL6q19NpzxAouM9Qu6+h/YgIVW38g4F5at8DAWq5FY1b9rNQFVsql5Ea91wAQyZni5JePodb8JKt/jJ2qMT5rgLJ3oB81AnJX480jf0HBU2CanTZIsChisCy/HlhUNO+nxHS4m7oFhi0RU01OMrhjBSsgQQzeNGSsKd51VqfABBUqCPK+CFmNbMtFB/DMLFjavO3bVIHaWtjXFa6fqDnBpUDK+A==
 Received: from PA3PR09MB8140.eurprd09.prod.outlook.com (2603:10a6:102:4d4::20)
- by AM0PR09MB3969.eurprd09.prod.outlook.com (2603:10a6:208:19e::16)
- with Microsoft SMTP Server (version=TLS1_2,
+ by DU0PR09MB8167.eurprd09.prod.outlook.com (2603:10a6:10:5a2::7) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.23; Fri, 27 Mar
- 2026 14:11:15 +0000
+ 2026 14:12:09 +0000
 Received: from PA3PR09MB8140.eurprd09.prod.outlook.com
  ([fe80::ca17:d4db:b6cd:fb81]) by PA3PR09MB8140.eurprd09.prod.outlook.com
  ([fe80::ca17:d4db:b6cd:fb81%6]) with mapi id 15.20.9745.019; Fri, 27 Mar 2026
- 14:11:15 +0000
+ 14:12:09 +0000
 From: Uros Stajic <uros.stajic@htecgroup.com>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 CC: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>, Chao-ying Fu
  <cfu@mips.com>, Uros Stajic <uros.stajic@htecgroup.com>
-Subject: [PATCH v6 1/7] riscv: Add initial support for P8700 SoC
-Thread-Topic: [PATCH v6 1/7] riscv: Add initial support for P8700 SoC
-Thread-Index: AQHcvfOT04ZaizXAPkeedKvDKxrTEw==
-Date: Fri, 27 Mar 2026 14:11:15 +0000
-Message-ID: <20260327141029.628483-2-uros.stajic@htecgroup.com>
+Subject: [PATCH v6 2/7] board: boston-riscv: Add initial support for P8700
+ Boston board
+Thread-Topic: [PATCH v6 2/7] board: boston-riscv: Add initial support for
+ P8700 Boston board
+Thread-Index: AQHcvfOzrd8wJ8stDE+IQR7gNy02mw==
+Date: Fri, 27 Mar 2026 14:12:09 +0000
+Message-ID: <20260327141029.628483-3-uros.stajic@htecgroup.com>
 References: <20260327141029.628483-1-uros.stajic@htecgroup.com>
 In-Reply-To: <20260327141029.628483-1-uros.stajic@htecgroup.com>
 Accept-Language: en-US
@@ -69,72 +71,62 @@ X-MS-TNEF-Correlator:
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=htecgroup.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PA3PR09MB8140:EE_|AM0PR09MB3969:EE_
-x-ms-office365-filtering-correlation-id: bcaf3327-f381-4281-52a2-08de8c0ab58a
+x-ms-traffictypediagnostic: PA3PR09MB8140:EE_|DU0PR09MB8167:EE_
+x-ms-office365-filtering-correlation-id: 9558d634-4b02-4f5a-b5dd-08de8c0ad5c9
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|38070700021|22082099003|18002099003|56012099003;
-x-microsoft-antispam-message-info: 0VDNIUQWQHAJf35D+52Dqust/muvHmmkuBwblosCcAC2JaHSohi6w57Y/ejDhA8Xx4PjhKk6B4hABAoINNOknY6CQa20xX4axj5mGX0qIvWM5QBTZhNcyUUIySxpg9knkNzAXgTf9Qgj2z4G+fg0VZRVOmF0kSWKA4GoQ87QoN+LAJD6NZh0dPT0XAwb/YW5Kj/sX3VUZJmRr9vxciSRqlFmNWscBUsmKneufV7aYmH3VXg4ARl8um5zntivVmFdyxUoO02iy6ysH9rFLwRbEdPpkD+vyBLEZTCEkTBGtQwMjijTb5YTJIk0oC0mcxm3XrIw7Xm+VyQs/PSxa50zmEr69XV3EnHvb7q0S+0A2QUyymIempvY6x70Ael60tbQHfI2isjxC0qoz1ElYqybUDW/eiZjYXn8mLoXPElg0UZ9AkSzZrpkWJorucQA0mEy0YqJAEeMeniZUhKDQivZizPErKkmPjtpN2VMUkFcxpZ4Uoal/NzNLHYYLRxrz4D5Fj/ZmeHVKIhYSWSHxDPeCJDEs9MtjlwqD+py8YDxarD2rCvfc5mToK8UY5+6kD245IaA1DKVR2zWC4HWfVltiyoQMJTJ3OHfvWrkrpmiWDOrblug+jbN5X5Jxn8OZwQpluFyCQIDTDb/5DPb/OiRNVp0mnBd84m72ztqRps1rqUrhowhwXNCP4zE7MXFXnaqkf6NCIaGzrDgeLhbP5Vk4NOVxnICZzQuVAz1koznfJuSK9gKy2t0PNn6thXb1gtnWuGhjGdfmGfjAtmxKuBoNFGjERCVCmopA2QN72lw3RU=
+ ARA:13230040|376014|366016|1800799024|38070700021|18002099003|56012099003|22082099003;
+x-microsoft-antispam-message-info: qPMhoHIG17wVaELCz10Xvf5Oq4gg/yafs0AilgE43UmtzJ0SjqRN9NEe6QOiAYfAJ8ZN2gPz0aS8G0Q6R49ljfl2QOwFSQKpvwtOF/h5ziqwoJ6m/X8MZoKji3UzC4WK7CAHl2g22IfcaUVFdm7DYWKWk4XASUq5UhtsDLdI2eEFwJe0K/AGMOtwi+TmzvIfSfCDVNQB6Xa9SkBzfQmYvOrCC+cH/IuKud4k9m9LhJL5cFsrVFZfjfUppd5g2NR9bZnFg4NoZxF/Om4VsLkzO8eAfRVLbG4ah0IDCpnqGY/iPstE/+G60WXbbA9EemzUuboT5B5HgB+oDL17lys2qPReEOTKcwQMOdElIB5BZ/P9NvVeINXyPQXUUWPEQlcHZJuq2PVJPeUfnXWQn1poZ8fBfRqmgjPXKm49ne7nuQNBPQUvkPALD4485ceRfXFKEastiRkDgWEVMY1bmNto/3+L5888JjGsfsqDoj5A9h/zBUBxv2v9hlsXhGzkxlUgHC63hti6p4VCnnpOwbfunrOuhYLb5eu0ME8lV3X3BLZJrSgwIL43FIxHWgzKug/+K0x2/uSsySBAciBZKeEKsXSciMAvf4cIC4GD90pzRHYvvkKSZj//jKcG+IHO/lTn7/glOqmUcwBJ9qkLZYhMAzduVXCw8ZnUq7DVQvRYhZGHDrAmIYFNZtl4JGR56Ckr3BYbWajPgZjXag5u59EuDTHeBoiDe4Qr9Ty3aU97HvRbqu50BXPSnLSKaLN4SG4VbuMkFdtpRJZqw5xC4Pl3uSwcrZBW9IA31104sz101sg=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PA3PR09MB8140.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(38070700021)(22082099003)(18002099003)(56012099003);
+ SFS:(13230040)(376014)(366016)(1800799024)(38070700021)(18002099003)(56012099003)(22082099003);
  DIR:OUT; SFP:1102; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?RCtsV09Nd1NQR3I5ME1XYUVxQ0Q2cWF5L1lFTVZXRi9zajdGMFBuT251UlBz?=
- =?utf-8?B?ZElLTVFIamRaNkJPbW5WZnlCMnBMSDB4ajJPUGtBNWxrQW5yZ0ZCeE5sZG5r?=
- =?utf-8?B?aUIwVnJtN3k3UlB0NEYvQ011WEUrcGt3OExYanJoMWtQZVpqWGUvdzhEZjRw?=
- =?utf-8?B?QWlyVzZsYnNvWUJkajJiZlVFdzdZQTh4R0xmKyt2bzNJVXJ5NFRyaHFqUGpl?=
- =?utf-8?B?N1dIczVaQmk5V2F2V2ZQSTVYRzJjUDlnV2FPZm9qajJQMEJQeHBrZ3lHdjUv?=
- =?utf-8?B?a0hSZ3Niamk4b0NGSnVrNWFWOU04bW0xVHVYUUJjamllVmlRVUVBZUZtMm53?=
- =?utf-8?B?c0Q3N2NNcHdGb0V5a1JseEJ1TWUyWVBWSmk4cFFHbzhtaG1JenlEaHVqSkto?=
- =?utf-8?B?RUROSGp1TDB5MDRJWXBDUkJZY2MzdzY1clNBSEVVTkpaamZ0RVk1UHExeExs?=
- =?utf-8?B?VGtuVmZtZTdPV3djRlF6Qmxoa0dsbmFDaXpESC9IeDR1N0xkRys5SGREU05u?=
- =?utf-8?B?YkRRVThqdXkyZW1yV2txejh0WTlkSFNNMzZ0aElZcW9uelRzUlpUN1ZwSC9F?=
- =?utf-8?B?ZGdWVzY3U1ZiSTZjSnIyYzFGMlZOc0M3NUpFbmo5M0tmQkdLNzhwUWNjTmlX?=
- =?utf-8?B?ZVNxNFJuTkhoSHZSSXc4WTZ5REhURUVqMkUwaVVuMnN5L1hSRkZNM3F2eTY3?=
- =?utf-8?B?aWlXc1Z1UmpJWWlkWjRSN2d0MDJiRUVCWkRDZUVqNlhickRXZ2RMMzdvME40?=
- =?utf-8?B?azRxWnZiVmt6RlBDaDFjWVptakhORmxXeEZtbUgzdWd5eS9lVEVMbGJqanVy?=
- =?utf-8?B?YmJHUFhVTGNUWWI1LzBTM0tKaWNOZEYyWU10a3REMmlEQlpxMERTQi9DKzYr?=
- =?utf-8?B?dzQ5MThpY2l5dVppSnF5ZGhhNHVFNFBwU1dVR3NGazdKWlVJeE1VazY0Vmh4?=
- =?utf-8?B?MnlubEdaeU5TRUFLWndoSG1SYjNqZlRGUXd1NURpdU1DdU84ZS9rbnRVekpX?=
- =?utf-8?B?dGJ4a3R3OG1US1ZYV2ZveUVrdGUvVlFlNzNXVXB2TXg2ekMydHl6TEhIU3Ix?=
- =?utf-8?B?eFRtUXdObEVNVXdmR1pnZkhsNXdTR2g2QjdML2JxcGtiUGgwR0pqTEp5UUl2?=
- =?utf-8?B?aGhnY1lzalp5alBsTGpabE90L3FwclZPSEdsSTAwMTdadzRPWWU1cmNkelJH?=
- =?utf-8?B?b2FTOTAzTzc4N1lYTnlsNGpKTHRTQ3p2V2U5UU01QVpId0wvQVVZVG1qUkN0?=
- =?utf-8?B?dXNVcGp4SjNOUUcwbG0vL2hodGlpeEV4bzNEbWpncXpPSkIrNndJdTR6ZG5u?=
- =?utf-8?B?L1Jpb29oc3lRdFF6OGdaTHNYS3pCVGNZVzVvZ2huUXdhZE55b0UwcnNVc2Nh?=
- =?utf-8?B?bkY5UmdLQ3lPcC9sNXVuNFFFRUNFTkQ5R1FvUkIxbVRCcVhzUEFjMXliK1lI?=
- =?utf-8?B?cmhRTlQyTVVTQzZxMlQwTUhSSHl5dnAvdDE0Q3YxL3dSZHhhZXE2OFZIak5v?=
- =?utf-8?B?SGsyRjM0ay9hWmE0ZUt1SHpxZ2JzSXk3TWhEcjg3VEdtV3VQcUFYV21pVDUr?=
- =?utf-8?B?S2VVVnZseGE3UHJ0SVJRTmpOYTBVdzZzdE8yZWEyalFiejVaVitLWE9ZclNn?=
- =?utf-8?B?K2RRR0JGTEdSTUtLL0NOc3NyYVRJVUlKanBHMHY2dHpyVXVwTkxpblgySDZY?=
- =?utf-8?B?M1NZbW93R0dtUjlLU0U0TkxLclRzUVhTNzgycjV1SGZpSmIxaHJxekpLc3My?=
- =?utf-8?B?Ukx0akpRcm9DZnVROEJSaUU2RE5adEdML3hNM2tzTmQvb05rNm51TGtuWFJM?=
- =?utf-8?B?UUVzREd3SnNobXNZa2tqMWovcjVNQVVqV1Q3cjB0MWJ2c2EzR1UvUzhlaW9H?=
- =?utf-8?B?WWRKV0ZkZmplUnN0QTZLTTBmaTc1a2VWeG1tMjBhMVBtSWZYT1pvNTNTaHI2?=
- =?utf-8?B?ZDRiUVY3ak56N3ZTaEpWVTZTbjA2WC9BVDdSaVZVZnFsaTJPaCtQRC9YMXk2?=
- =?utf-8?B?UlEvZ0hKaWhpVm9JYXl0dDc5emJoRnEyLzRDNytVS3BxQ3ZpWVY5THllMWRl?=
- =?utf-8?B?dVRSSVM0ajJ6ZnJlOG5GT1NidTFBQW4xeUliQ1hobW9ZeGxKc2FSQlZlOC9P?=
- =?utf-8?B?SlNQQzQxTEYycW84cG56eG5YYXB0M0NvbklEdERNRHNKUE5mT0xGb29DcU5N?=
- =?utf-8?B?bFVBbHFsTmhoSmxTUlowZHIrUXZPcTBqMUtOZ3o5NGZmUysrcGxUU3h6MUE4?=
- =?utf-8?B?dHZwYzhsbjExVmtuU0M0Y0pRYi9wbmNhYmZBYzh0cDNPdWY0amlsZEVTU2RU?=
- =?utf-8?B?MHkwWmNMRjZFQWZoY3YxODVYNERoZ2EvSUhzbUVoNWVJVGN4TGRESTNRa1lE?=
- =?utf-8?Q?zooR9juns39Tlk8o=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <53240D1BA9118B458AD7D38E0CEF5CAC@eurprd09.prod.outlook.com>
-Content-Transfer-Encoding: base64
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?k5NPE9Ncj6CnHAdVLCazorZ4tK7F5JtxSO75ymTDuborUBSTNnzb5D3Uzj?=
+ =?iso-8859-1?Q?Jg+NJ0Y0yYxsL/r0hAffCgZ1MHFN5lOvz5De4XRQMpAdXlqlctX6w1I4cV?=
+ =?iso-8859-1?Q?nLNM5bO1ruDFxu4ATTQMdXPglUlLAiO/WdT4fpfR2H6cx31gFvX5wkt213?=
+ =?iso-8859-1?Q?zU9ewHLkGN84Tu3k8De2PoxxQ+tq6iy6qzKz0z6ROorQrq90qtQbMCIwyY?=
+ =?iso-8859-1?Q?SXWeDeIiE8YgVHxC6J8YIaRsixSOjmhL4up7Cx8iaIDwUclM2horWd/muf?=
+ =?iso-8859-1?Q?d1eAQyJkziz1OR1M0+EvGR/+oBcFD45z6nfujhu5rKMfg+qf6p3dmOHlXs?=
+ =?iso-8859-1?Q?jhvhdxgLnh5kiKR2Irt3W5Ybm8gYL4Q2RWOFfsr0bEyhjQzmd5MPljm+S8?=
+ =?iso-8859-1?Q?ycrYYWXsVvZ35kWgvX+iXFA0wl+GMjezhbbPXp2LQaZ/qLW3PXxTOGLaG0?=
+ =?iso-8859-1?Q?JBj/XkKNn8i6OCJor8jsmQk4EeVTMkWsS5z57HlOXnhYWmgDuNXEU1QgbN?=
+ =?iso-8859-1?Q?9nBXYZAKemRdWmJIh301Nx5OBKggs4DUvV+ByK0v69hmWcb7CWnB3M0byH?=
+ =?iso-8859-1?Q?3AELEDQlCXKRpD8XUiHzYSqZ9darmXqUVylhMLWdsR77lAte9u2jeTtt1D?=
+ =?iso-8859-1?Q?shtFXW88dHqza9Sdzb3GWw4t4zQ8uX3thjSqt7rqVUQV5QIj4/H2+noFFl?=
+ =?iso-8859-1?Q?rPueFQq9PQfrsCYhdsRLdiHZWD01BiL3dorqe8QXVqO9YE8lAXRdpAu1mm?=
+ =?iso-8859-1?Q?yM0dpMZXuRE2nTtwAtraA3+idOHQHH3xT++6k2jK4ofjCfJFjsvMf7Q5Uq?=
+ =?iso-8859-1?Q?BKvv+JwlwuOT5hjxxGqDw9b3P4bIW73PAmhl6uXJWwl+kVk//11xOtKECr?=
+ =?iso-8859-1?Q?/AXKfbGVdXQAr/RJI/y1oCbGgYjpOrlpxcWkQ/FEUgBqPkhfQJ5p/0XKey?=
+ =?iso-8859-1?Q?NS3mIzdoqVXJ3Mdg6Vf31N1ah0BNFHv+usUAxiN4MLIQCid9DV860bMm28?=
+ =?iso-8859-1?Q?9DRtgS289JJzmEv6vC45RuMiYah5PBiC0fNKpM4mDmtM17boMgx/j7md4w?=
+ =?iso-8859-1?Q?QXB7rLQpEJ+017//dVF66x2+SVc9oTIPww3CMe5Ik9Dl5yFyrgYmxbC+kJ?=
+ =?iso-8859-1?Q?EA/vDEoWLddzxsTxN4WC9pY8aA+F6/fHRo83rh0AQzQM/RTRguVd5Wakl9?=
+ =?iso-8859-1?Q?Vm63ND3/H8w3LyPeGWba6XTzWyzHTrN3YtNuekoiXLnZe4VkCzChwdZgyR?=
+ =?iso-8859-1?Q?wseC2gB5WeebQ6CkRGwK66/3mlQ9Epzk85RJhfz436AcbsltimoKI8bWyj?=
+ =?iso-8859-1?Q?9ea+f58oVzojp1IAvycAvtQwJe4pP9D/qx98SwIrQzoCPvrzTXJnWIKDZ7?=
+ =?iso-8859-1?Q?adqwRk7zt7+fQrRjU0pj41ZQRwAPfireus/+kaVmCjpN9UENezY+9F3Bq0?=
+ =?iso-8859-1?Q?i4xYEOUjGKBb/TAN2UYPpVf4rod40Dt/x9pB5zBtEhrhwLjooiGr+WKN76?=
+ =?iso-8859-1?Q?iBSoT4h2xwxV1qP1nDUvDqP/pF0YkAhTexMBlVAVe30sV+VhQ3yD8W8Ap2?=
+ =?iso-8859-1?Q?fNmyST3Iia48glA9nNT6qNFenrR5J5sXrhP9zmrFBrZHWCBZD5ekiJyBo/?=
+ =?iso-8859-1?Q?n7OCn0QSxWBWccHU2TjJew/eJIpEvEM+1WXIpB7gb9eHrM1TlcEW645S4B?=
+ =?iso-8859-1?Q?5A/HRCffbcCiiZS01ki8ADGa7GwilpqCKrAw/PJUObDdeU1ls5xwrhJcmd?=
+ =?iso-8859-1?Q?s+DTvgabnMJ7gFWgl/51f/aROM8HfEfcaqnSblm0RZI1Dc0SYGEkPxz1h2?=
+ =?iso-8859-1?Q?VBsNJcTZb6aAPPnDQ4QMIagYJfABWOA=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: htecgroup.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PA3PR09MB8140.eurprd09.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bcaf3327-f381-4281-52a2-08de8c0ab58a
-X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Mar 2026 14:11:15.5949 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9558d634-4b02-4f5a-b5dd-08de8c0ad5c9
+X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Mar 2026 14:12:09.6933 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 9f85665b-7efd-4776-9dfe-b6bfda2565ee
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 3EaI1v0pjMfaheTZRoOb0ufe39Y/A/AfMb62+jJGBBGxPQpOj05JMLAMMtWd1+HV7aVnkQuNFlVBQgGD7FOyNJo909nOV5LpZcrKnPNeww8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR09MB3969
+X-MS-Exchange-CrossTenant-userprincipalname: msE1Mi41Uap/a+HkC0fUKHoI9bQElCOAXhcZRF8JZRcroVrdlyP/7RN+iv/TGIfL+Wwz9z0mzDm+hHbslOl3m01RBMqcqYWaKAvAQqyTpb8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR09MB8167
 X-Mailman-Approved-At: Fri, 27 Mar 2026 17:24:54 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -152,249 +144,822 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RnJvbTogQ2hhby15aW5nIEZ1IDxjZnVAbWlwcy5jb20+DQoNCkFkZCBpbml0aWFsIHBsYXRmb3Jt
-IHN1cHBvcnQgZm9yIHRoZSBQODcwMC1GLCBhIGhpZ2gtcGVyZm9ybWFuY2UNCm11bHRpLWNvcmUg
-UlY2NEdDIFNvQyB3aXRoIG9wdGlvbmFsIG11bHRpLWNsdXN0ZXIgY29uZmlndXJhdGlvbiBhbmQN
-CmhhcmR3YXJlIG11bHRpdGhyZWFkaW5nLg0KDQpUaGlzIHBhdGNoIGludHJvZHVjZXMgdGhlIGlu
-aXRpYWwgcGxhdGZvcm0gY29kZSBuZWNlc3NhcnkgdG8gc3VwcG9ydA0KdGhlIFA4NzAwIENQVSBp
-biBVLUJvb3QuDQoNClNpZ25lZC1vZmYtYnk6IENoYW8teWluZyBGdSA8Y2Z1QG1pcHMuY29tPg0K
-U2lnbmVkLW9mZi1ieTogVXJvcyBTdGFqaWMgPHVyb3Muc3RhamljQGh0ZWNncm91cC5jb20+DQot
-LS0NCiBhcmNoL3Jpc2N2L0tjb25maWcgICAgICAgICAgICAgICAgICAgICAgICB8ICAgOCArKw0K
-IGFyY2gvcmlzY3YvY3B1L3A4NzAwL0tjb25maWcgICAgICAgICAgICAgIHwgIDE0ICsrKw0KIGFy
-Y2gvcmlzY3YvY3B1L3A4NzAwL01ha2VmaWxlICAgICAgICAgICAgIHwgICA4ICsrDQogYXJjaC9y
-aXNjdi9jcHUvcDg3MDAvY2FjaGUuYyAgICAgICAgICAgICAgfCAgOTMgKysrKysrKysrKysrKysr
-KysrKw0KIGFyY2gvcmlzY3YvY3B1L3A4NzAwL2NwdS5jICAgICAgICAgICAgICAgIHwgMTA1ICsr
-KysrKysrKysrKysrKysrKysrKysNCiBhcmNoL3Jpc2N2L2NwdS9wODcwMC9kcmFtLmMgICAgICAg
-ICAgICAgICB8ICAzNyArKysrKysrKw0KIGFyY2gvcmlzY3YvY3B1L3A4NzAwL3A4NzAwLmMgICAg
-ICAgICAgICAgIHwgIDEyICsrKw0KIGFyY2gvcmlzY3YvaW5jbHVkZS9hc20vYXJjaC1wODcwMC9w
-ODcwMC5oIHwgMTAxICsrKysrKysrKysrKysrKysrKysrKw0KIDggZmlsZXMgY2hhbmdlZCwgMzc4
-IGluc2VydGlvbnMoKykNCiBjcmVhdGUgbW9kZSAxMDA2NDQgYXJjaC9yaXNjdi9jcHUvcDg3MDAv
-S2NvbmZpZw0KIGNyZWF0ZSBtb2RlIDEwMDY0NCBhcmNoL3Jpc2N2L2NwdS9wODcwMC9NYWtlZmls
-ZQ0KIGNyZWF0ZSBtb2RlIDEwMDY0NCBhcmNoL3Jpc2N2L2NwdS9wODcwMC9jYWNoZS5jDQogY3Jl
-YXRlIG1vZGUgMTAwNjQ0IGFyY2gvcmlzY3YvY3B1L3A4NzAwL2NwdS5jDQogY3JlYXRlIG1vZGUg
-MTAwNjQ0IGFyY2gvcmlzY3YvY3B1L3A4NzAwL2RyYW0uYw0KIGNyZWF0ZSBtb2RlIDEwMDY0NCBh
-cmNoL3Jpc2N2L2NwdS9wODcwMC9wODcwMC5jDQogY3JlYXRlIG1vZGUgMTAwNjQ0IGFyY2gvcmlz
-Y3YvaW5jbHVkZS9hc20vYXJjaC1wODcwMC9wODcwMC5oDQoNCmRpZmYgLS1naXQgYS9hcmNoL3Jp
-c2N2L0tjb25maWcgYi9hcmNoL3Jpc2N2L0tjb25maWcNCmluZGV4IDc5ODY3NjU2YjE1Li45ZTJj
-YmU3NzVkMiAxMDA2NDQNCi0tLSBhL2FyY2gvcmlzY3YvS2NvbmZpZw0KKysrIGIvYXJjaC9yaXNj
-di9LY29uZmlnDQpAQCAtMTMyLDYgKzEzMiw3IEBAIHNvdXJjZSAiYXJjaC9yaXNjdi9jcHUvamg3
-MTEwL0tjb25maWciDQogc291cmNlICJhcmNoL3Jpc2N2L2NwdS9rMS9LY29uZmlnIg0KIHNvdXJj
-ZSAiYXJjaC9yaXNjdi9jcHUvazIzMC9LY29uZmlnIg0KIHNvdXJjZSAiYXJjaC9yaXNjdi9jcHUv
-dGgxNTIwL0tjb25maWciDQorc291cmNlICJhcmNoL3Jpc2N2L2NwdS9wODcwMC9LY29uZmlnIg0K
-IA0KICMgYXJjaGl0ZWN0dXJlLXNwZWNpZmljIG9wdGlvbnMgYmVsb3cNCiANCkBAIC00NDIsNiAr
-NDQzLDEzIEBAIGNvbmZpZyBTQkkNCiAJYm9vbA0KIAlkZWZhdWx0IHkgaWYgUklTQ1ZfU01PREUg
-fHwgU1BMX1JJU0NWX1NNT0RFDQogDQorY29uZmlnIFJJU0NWX0NNX0JBU0UNCisJaGV4ICJSSVND
-ViBDTSBCYXNlIEFkZHJlc3MiDQorCWRlZmF1bHQgMHgxNjEwMDAwMA0KKwloZWxwDQorCSAgVGhl
-IHBoeXNpY2FsIGJhc2UgYWRkcmVzcyBhdCB3aGljaCB0byBtYXAgdGhlIENvaGVyZW5jZSBNYW5h
-Z2VyDQorCSAgR2xvYmFsIENvbmZpZ3VyYXRpb24gUmVnaXN0ZXJzIChHQ1JzKS4NCisNCiBjaG9p
-Y2UNCiAJcHJvbXB0ICJTQkkgc3VwcG9ydCINCiAJZGVmYXVsdCBTQklfVjAyDQpkaWZmIC0tZ2l0
-IGEvYXJjaC9yaXNjdi9jcHUvcDg3MDAvS2NvbmZpZyBiL2FyY2gvcmlzY3YvY3B1L3A4NzAwL0tj
-b25maWcNCm5ldyBmaWxlIG1vZGUgMTAwNjQ0DQppbmRleCAwMDAwMDAwMDAwMC4uMDkxM2E2Y2U4
-ZjINCi0tLSAvZGV2L251bGwNCisrKyBiL2FyY2gvcmlzY3YvY3B1L3A4NzAwL0tjb25maWcNCkBA
-IC0wLDAgKzEsMTQgQEANCisjIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4wKw0KKyMN
-CisjIENvcHlyaWdodCAoQykgMjAyMSwgQ2hhby15aW5nIEZ1IDxjZnVAbWlwcy5jb20+DQorDQor
-Y29uZmlnIFA4NzAwX1JJU0NWDQorCWJvb2wNCisJc2VsZWN0IEFSQ0hfRUFSTFlfSU5JVF9SDQor
-CWltcGx5IENQVQ0KKwlpbXBseSBDUFVfUklTQ1YNCisJaW1wbHkgUklTQ1ZfQUNMSU5UIGlmIChS
-SVNDVl9NTU9ERSB8fCBTUExfUklTQ1ZfTU1PREUpDQorCWltcGx5IENNRF9DUFUNCisJaW1wbHkg
-U1BMX0NQVV9TVVBQT1JUDQorCWltcGx5IFNQTF9PUEVOU0JJDQorCWltcGx5IFNQTF9MT0FEX0ZJ
-VA0KZGlmZiAtLWdpdCBhL2FyY2gvcmlzY3YvY3B1L3A4NzAwL01ha2VmaWxlIGIvYXJjaC9yaXNj
-di9jcHUvcDg3MDAvTWFrZWZpbGUNCm5ldyBmaWxlIG1vZGUgMTAwNjQ0DQppbmRleCAwMDAwMDAw
-MDAwMC4uMDQyOTEzNzVhMjkNCi0tLSAvZGV2L251bGwNCisrKyBiL2FyY2gvcmlzY3YvY3B1L3A4
-NzAwL01ha2VmaWxlDQpAQCAtMCwwICsxLDggQEANCisjIFNQRFgtTGljZW5zZS1JZGVudGlmaWVy
-OiBHUEwtMi4wKw0KKyMNCisjIENvcHlyaWdodCAoQykgMjAyMSwgQ2hhby15aW5nIEZ1IDxjZnVA
-bWlwcy5jb20+DQorDQorb2JqLXkgKz0gY2FjaGUubw0KK29iai15ICs9IGNwdS5vDQorb2JqLXkg
-Kz0gZHJhbS5vDQorb2JqLXkgKz0gcDg3MDAubw0KZGlmZiAtLWdpdCBhL2FyY2gvcmlzY3YvY3B1
-L3A4NzAwL2NhY2hlLmMgYi9hcmNoL3Jpc2N2L2NwdS9wODcwMC9jYWNoZS5jDQpuZXcgZmlsZSBt
-b2RlIDEwMDY0NA0KaW5kZXggMDAwMDAwMDAwMDAuLjA2ZTYwMTU2Mzk0DQotLS0gL2Rldi9udWxs
-DQorKysgYi9hcmNoL3Jpc2N2L2NwdS9wODcwMC9jYWNoZS5jDQpAQCAtMCwwICsxLDkzIEBADQor
-Ly8gU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEdQTC0yLjArDQorLyoNCisgKiBDb3B5cmlnaHQg
-KEMpIDIwMjEsIENoYW8teWluZyBGdSA8Y2Z1QG1pcHMuY29tPg0KKyAqLw0KKw0KKyNpbmNsdWRl
-IDxjcHVfZnVuYy5oPg0KKyNpbmNsdWRlIDxhc20vZ2xvYmFsX2RhdGEuaD4NCisjaW5jbHVkZSA8
-YXNtL2lvLmg+DQorI2luY2x1ZGUgPGFzbS9hcmNoLXA4NzAwL3A4NzAwLmg+DQorDQorI2RlZmlu
-ZSBNQ0FDSEVfQkFTRV9JTlNUIDB4ZWMwNTAwZjMNCisNCisvKiBOT1RFOiBXZSBmb3JjZSB0byB1
-c2UgYTAgaW4gbWNhY2hlIHRvIGVuY29kZSB2aWEgLndvcmQuDQorICogMHhlYzA1MDBmMyBpcyBh
-IG1hbnVhbGx5IGVuY29kZWQgY3VzdG9tIFJJU0MtViBNQ0FDSEUgaW5zdHJ1Y3Rpb24uDQorICog
-VGhlIGJpdHMgWzE5OjE1XSBhcmUgc2V0IHRvIDAxMDEwLCBzZWxlY3RpbmcgcmVnaXN0ZXIgeDEw
-IChhMCkNCisgKiBhcyB0aGUgc291cmNlIG9wZXJhbmQuDQorICogVGhlIGJpdHMgWzI0OjIwXSBy
-ZXByZXNlbnQgdGhlICdvcCcgZmllbGQsIHdoaWNoIGlzIGN1cnJlbnRseSBzZXQgdG8gMC4NCisg
-KiBEaWZmZXJlbnQgY2FjaGUgb3BlcmF0aW9ucyBhcmUgYXBwbGllZCBieSBPUi1pbmcgKG9wIDw8
-IDIwKSBkeW5hbWljYWxseQ0KKyAqIHRvIHRoaXMgYmFzZSB2YWx1ZS4NCisgKiBCZWNhdXNlIG9m
-IHRoaXMgZW5jb2RpbmcsIHRoZSB2YXJpYWJsZSAnYWRkcicgaXMgZm9yY2VkIGludG8gcmVnaXN0
-ZXIgYTAsDQorICogc28gdGhhdCB0aGUgTUNBQ0hFIGluc3RydWN0aW9uIHVzZXMgdGhlIGFkZHJl
-c3MgaW4gYTAgYXMgaXRzIG9wZXJhbmQuDQorICovDQorI2RlZmluZSBjYWNoZV9sb29wKHN0YXJ0
-LCBlbmQsIGxzaXplLCBvcCkgZG8gewkJCQlcDQorCWNvbnN0IF9fdHlwZW9mX18obHNpemUpIF9f
-bHNpemUgPSAobHNpemUpOwkJCVwNCisJY29uc3QgcmVnaXN0ZXIgdm9pZCAqYWRkciBhc20oImEw
-IikgPSAoY29uc3Qgdm9pZCAqKSgoc3RhcnQpICYgfihfX2xzaXplIC0gMSkpOwlcDQorCWNvbnN0
-IHZvaWQgKmFlbmQgPSAoY29uc3Qgdm9pZCAqKSgoKGVuZCkgLSAxKSAmIH4oX19sc2l6ZSAtIDEp
-KTsJXA0KKwlmb3IgKDsgYWRkciA8PSBhZW5kOyBhZGRyICs9IF9fbHNpemUpCQkJCVwNCisJCWFz
-bSB2b2xhdGlsZSAoIi53b3JkICUwIHwgJTEgIyBmb3JjZSB0byB1c2UgJTIiIFwNCisJCQkJCTo6
-ImkiKE1DQUNIRV9CQVNFX0lOU1QpLCAiaSIoKG9wKSA8PCAyMCksICJyIihhZGRyKSk7IFwNCit9
-IHdoaWxlICgwKQ0KKw0KK3N0YXRpYyB1bnNpZ25lZCBsb25nIGxzaXplOw0KK3N0YXRpYyB1bnNp
-Z25lZCBsb25nIGwxZF90b3RhbF9zaXplOw0KK3N0YXRpYyB1bnNpZ25lZCBsb25nIHNsc2l6ZTsN
-CisNCitzdGF0aWMgdm9pZCBwcm9iZV9jYWNoZV9jb25maWcodm9pZCkNCit7DQorCWxzaXplID0g
-NjQ7DQorCWwxZF90b3RhbF9zaXplID0gNjQgKiAxMDI0Ow0KKw0KKwlpbnQgbDJfY29uZmlnID0g
-MDsNCisNCisJbDJfY29uZmlnID0gcmVhZGwoKHZvaWQgX19pb21lbSAqKShDTV9CQVNFICsgR0NS
-X0wyX0NPTkZJR19PRkZTRVQpKTsNCisJaW50IGwyX2xpbmVfc2l6ZV9pbmZvID0gKGwyX2NvbmZp
-ZyA+PiBMMl9MSU5FX1NJWkVfU0hJRlQpDQorCQkJCSYgTDJfTElORV9TSVpFX01BU0s7DQorCXNs
-c2l6ZSA9IChsMl9saW5lX3NpemVfaW5mbyA9PSAwKSA/IDAgOiAxIDw8IChsMl9saW5lX3NpemVf
-aW5mbyArIDEpOw0KK30NCisNCit2b2lkIGZsdXNoX2RjYWNoZV9yYW5nZSh1bnNpZ25lZCBsb25n
-IHN0YXJ0LCB1bnNpZ25lZCBsb25nIGVuZCkNCit7DQorCWlmIChsc2l6ZSA9PSAwKQ0KKwkJcHJv
-YmVfY2FjaGVfY29uZmlnKCk7DQorDQorCS8qIGFlbmQgd2lsbCBiZSBtaXNjYWxjdWxhdGVkIHdo
-ZW4gc2l6ZSBpcyB6ZXJvLCBzbyB3ZSByZXR1cm4gaGVyZSAqLw0KKwlpZiAoc3RhcnQgPj0gZW5k
-KQ0KKwkJcmV0dXJuOw0KKw0KKwljYWNoZV9sb29wKHN0YXJ0LCBlbmQsIGxzaXplLCBISVRfV1JJ
-VEVCQUNLX0lOVl9EKTsNCisNCisJLyogZmx1c2ggTDIgY2FjaGUgKi8NCisJaWYgKHNsc2l6ZSkN
-CisJCWNhY2hlX2xvb3Aoc3RhcnQsIGVuZCwgc2xzaXplLCBISVRfV1JJVEVCQUNLX0lOVl9TRCk7
-DQorDQorCS8qIEluc3RydWN0aW9uIEhhemFyZCBCYXJyaWVyIChJSEIpIOKAlCBhIGhpbnQtZW5j
-b2RlZCBTTExJIChyZD0wLCByczE9MCwgaW1tPTEpLg0KKwkgKiBFbnN1cmVzIHRoYXQgYWxsIHN1
-YnNlcXVlbnQgaW5zdHJ1Y3Rpb24gZmV0Y2hlcywgaW5jbHVkaW5nIHNwZWN1bGF0aXZlIG9uZXMs
-DQorCSAqIG9ic2VydmUgc3RhdGUgY2hhbmdlcyBmcm9tIHByaW9yIGluc3RydWN0aW9ucy4NCisJ
-ICogUmVxdWlyZWQgYWZ0ZXIgTUNBQ0hFIGluc3RydWN0aW9ucyB3aGVuIGluc3RydWN0aW9uIGZl
-dGNoIGRlcGVuZHMgb24gY2FjaGUgb3BzLg0KKwkgKi8NCisJYXNtIHZvbGF0aWxlICgic2xsaSB4
-MCx4MCwxICMgaWhiIik7DQorfQ0KKw0KK3ZvaWQgaW52YWxpZGF0ZV9kY2FjaGVfcmFuZ2UodW5z
-aWduZWQgbG9uZyBzdGFydCwgdW5zaWduZWQgbG9uZyBlbmQpDQorew0KKwlpZiAobHNpemUgPT0g
-MCkNCisJCXByb2JlX2NhY2hlX2NvbmZpZygpOw0KKw0KKwkvKiBhZW5kIHdpbGwgYmUgbWlzY2Fs
-Y3VsYXRlZCB3aGVuIHNpemUgaXMgemVybywgc28gd2UgcmV0dXJuIGhlcmUgKi8NCisJaWYgKHN0
-YXJ0ID49IGVuZCkNCisJCXJldHVybjsNCisNCisJLyogaW52YWxpZGF0ZSBMMiBjYWNoZSAqLw0K
-KwlpZiAoc2xzaXplKQ0KKwkJY2FjaGVfbG9vcChzdGFydCwgZW5kLCBzbHNpemUsIEhJVF9JTlZB
-TElEQVRFX1NEKTsNCisNCisJY2FjaGVfbG9vcChzdGFydCwgZW5kLCBsc2l6ZSwgSElUX0lOVkFM
-SURBVEVfRCk7DQorDQorCS8qIEluc3RydWN0aW9uIEhhemFyZCBCYXJyaWVyIChJSEIpIOKAlCBh
-IGhpbnQtZW5jb2RlZCBTTExJIChyZD0wLCByczE9MCwgaW1tPTEpLg0KKwkgKiBFbnN1cmVzIHRo
-YXQgYWxsIHN1YnNlcXVlbnQgaW5zdHJ1Y3Rpb24gZmV0Y2hlcywgaW5jbHVkaW5nIHNwZWN1bGF0
-aXZlIG9uZXMsDQorCSAqIG9ic2VydmUgc3RhdGUgY2hhbmdlcyBmcm9tIHByaW9yIGluc3RydWN0
-aW9ucy4NCisJICogUmVxdWlyZWQgYWZ0ZXIgTUNBQ0hFIGluc3RydWN0aW9ucyB3aGVuIGluc3Ry
-dWN0aW9uIGZldGNoIGRlcGVuZHMgb24gY2FjaGUgb3BzLg0KKwkgKi8NCisJYXNtIHZvbGF0aWxl
-ICgic2xsaSB4MCx4MCwxICMgaWhiIik7DQorfQ0KZGlmZiAtLWdpdCBhL2FyY2gvcmlzY3YvY3B1
-L3A4NzAwL2NwdS5jIGIvYXJjaC9yaXNjdi9jcHUvcDg3MDAvY3B1LmMNCm5ldyBmaWxlIG1vZGUg
-MTAwNjQ0DQppbmRleCAwMDAwMDAwMDAwMC4uNTViOWY5MzlmOGUNCi0tLSAvZGV2L251bGwNCisr
-KyBiL2FyY2gvcmlzY3YvY3B1L3A4NzAwL2NwdS5jDQpAQCAtMCwwICsxLDEwNSBAQA0KKy8vIFNQ
-RFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4wKw0KKy8qDQorICogQ29weXJpZ2h0IChDKSAy
-MDIxLCBDaGFvLXlpbmcgRnUgPGNmdUBtaXBzLmNvbT4NCisgKi8NCisNCisjaW5jbHVkZSA8YXNt
-L2VuY29kaW5nLmg+DQorI2luY2x1ZGUgPGFzbS9pby5oPg0KKyNpbmNsdWRlIDxsaW51eC90eXBl
-cy5oPg0KKyNpbmNsdWRlIDxhc20vYXJjaC1wODcwMC9wODcwMC5oPg0KKw0KK3N0YXRpYyBfX25v
-cmV0dXJuIHZvaWQganVtcF90b19hZGRyKHVsb25nIGFkZHIpDQorew0KKwlhc20gdm9sYXRpbGUg
-KCJqciAlMCIgOjogInIiKGFkZHIpIDogIm1lbW9yeSIpOw0KKwlfX2J1aWx0aW5fdW5yZWFjaGFi
-bGUoKTsNCit9DQorDQordm9pZCBoYXJ0c19lYXJseV9pbml0KHZvaWQpDQorew0KKwlpZiAoIUlT
-X0VOQUJMRUQoQ09ORklHX1JJU0NWX01NT0RFKSkNCisJCXJldHVybjsNCisNCisJdWxvbmcgaGFy
-dGlkID0gY3NyX3JlYWQoQ1NSX01IQVJUSUQpOw0KKw0KKwkvKiBXYWl0IGZvciBERFIzIGNhbGli
-cmF0aW9uICovDQorCXdhaXRfZGRyX2NhbGliKCk7DQorDQorCS8qDQorCSAqIE9ubHkgbWhhcnRp
-ZFszOjBdID09IDAgcGVyZm9ybXMgQ00vR0NSIHByb2dyYW1taW5nLg0KKwkgKiBPdGhlciBoYXJ0
-cyBza2lwIENNL0dDUiBzZXR1cCBhbmQgZ28gc3RyYWlnaHQgdG8gUE1QL1BNQSBzZXR1cC4NCisJ
-ICovDQorCWlmICgoaGFydGlkICYgMHhGVUxMKSA9PSAwKSB7DQorCQl1bG9uZyBjbV9iYXNlID0g
-Q01fQkFTRTsNCisJCXZvaWQgX19pb21lbSAqZ2NyX3dpbiA9ICh2b2lkIF9faW9tZW0gKikweDFm
-YjgwMDAwOw0KKwkJdWxvbmcgY2x1c3RlciA9IChoYXJ0aWQgPj4gTUhBUlRJRF9DTFVTVEVSX1NI
-SUZUKSAmDQorCQkJCU1IQVJUSURfQ0xVU1RFUl9NQVNLOw0KKw0KKwkJY21fYmFzZSArPSBjbHVz
-dGVyIDw8IENNX0JBU0VfQ0xVU1RFUl9TSElGVDsNCisNCisJCWlmICgoaGFydGlkICYgMHhGRkZG
-VUwpID09IDApDQorCQkJd3JpdGVxKGNtX2Jhc2UsIGdjcl93aW4gKyBHQ1JfQkFTRV9PRkZTRVQp
-Ow0KKw0KKwkJdWxvbmcgY29yZSA9IChoYXJ0aWQgPj4gTUhBUlRJRF9DT1JFX1NISUZUKSAmIE1I
-QVJUSURfQ09SRV9NQVNLOw0KKw0KKwkJLyogRW5hYmxlIGNvaGVyZW5jeSBmb3IgdGhlIGN1cnJl
-bnQgY29yZSAqLw0KKwkJY21fYmFzZSArPSBjb3JlIDw8IENNX0JBU0VfQ09SRV9TSElGVDsNCisJ
-CXdyaXRlcSgodTY0KUdDUl9DTF9DT0hfRU5fRU4sDQorCQkgICAgICAgKHZvaWQgX19pb21lbSAq
-KShjbV9iYXNlICsgUDg3MDBfR0NSX0MwX0NPSF9FTikpOw0KKw0KKwkJLyoNCisJCSAqIE9uIGhh
-cnQgMCwgZGVmYXVsdCBQQ0llIERNQSBtYXBwaW5nIHNob3VsZCBiZSB0aGUgbm9uLUlPQ1UNCisJ
-CSAqIHRhcmdldC4NCisJCSAqLw0KKwkJaWYgKGhhcnRpZCA9PSAwKQ0KKwkJCXNldHVwX3BjaWVf
-ZG1hX21hcCgpOw0KKwl9DQorDQorCS8qIFBNUCBzZXR1cCAqLw0KKwljc3Jfd3JpdGUocG1wYWRk
-cjEsIDB4MmZmZmZmZmZVTCk7DQorCWNzcl93cml0ZShwbXBhZGRyMiwgMHgwN2ZmN2ZmZlVMKTsN
-CisJY3NyX3dyaXRlKHBtcGFkZHIzLCAweDA3ZjNmZmZmVUwpOw0KKwljc3Jfd3JpdGUocG1wYWRk
-cjQsIDB4MWZmZmZmZmZmZmZmZmZmZlVMKTsNCisNCisJdW5zaWduZWQgbG9uZyBwbXBjZmcgPSAo
-KHVuc2lnbmVkIGxvbmcpKFBNUF9OQVBPVCB8IFBNUF9SIHwgUE1QX1cgfA0KKwkJCQkJCVBNUF9Y
-KSA8PCAzMikgfA0KKwkJCQkoKHVuc2lnbmVkIGxvbmcpKFBNUF9OQVBPVCB8IFBNUF9SIHwNCisJ
-CQkJCQlQTVBfWCkgPDwgMjQpIHwNCisJCQkJKCh1bnNpZ25lZCBsb25nKShQTVBfTkFQT1QgfCBQ
-TVBfUiB8IFBNUF9XIHwNCisJCQkJCQlQTVBfWCkgPDwgMTYpIHwNCisJCQkJKCh1bnNpZ25lZCBs
-b25nKShQTVBfTkFQT1QgfCBQTVBfUiB8IFBNUF9XIHwNCisJCQkJCQlQTVBfWCkgPDwgOCk7DQor
-DQorCWNzcl93cml0ZShwbXBjZmcwLCBwbXBjZmcpOw0KKw0KKwkvKiBQTUEvY2FjaGUgYXR0cmli
-dXRlcyAqLw0KKwl1bG9uZyBwbWFjZmcwOw0KKw0KKwlpZiAoaGFydGlkID09IDApIHsNCisJCS8q
-DQorCQkgKiBIYXJ0IDA6IGNhY2hlYWJsZSBmb3IgcG1hMCwgcG1hMSwgcG1hMzsgdW5jYWNoZWFi
-bGUgZm9yDQorCQkgKiBwbWEyLCBwbWE0Lg0KKwkJICovDQorCQlwbWFjZmcwID0gKCh1bnNpZ25l
-ZCBsb25nKUNDQV9DQUNIRV9ESVNBQkxFIDw8IDMyKSB8DQorCQkJKCh1bnNpZ25lZCBsb25nKUND
-QV9DQUNIRV9FTkFCTEUgIDw8IDI0KSB8DQorCQkJKCh1bnNpZ25lZCBsb25nKUNDQV9DQUNIRV9E
-SVNBQkxFIDw8IDE2KSB8DQorCQkJKCh1bnNpZ25lZCBsb25nKUNDQV9DQUNIRV9FTkFCTEUgIDw8
-IDgpICB8DQorCQkJKCh1bnNpZ25lZCBsb25nKUNDQV9DQUNIRV9FTkFCTEUpOw0KKwl9IGVsc2Ug
-ew0KKwkJLyoNCisJCSAqIEhhcnQgMSBvciBhYm92ZTogY2FjaGVhYmxlIGZvciBwbWEwLCBwbWEx
-OyB1bmNhY2hlYWJsZSBmb3INCisJCSAqIHBtYTIsIHBtYTMsIHBtYTQuDQorCQkgKi8NCisJCXBt
-YWNmZzAgPSAoKHVuc2lnbmVkIGxvbmcpQ0NBX0NBQ0hFX0RJU0FCTEUgPDwgMzIpIHwNCisJCQko
-KHVuc2lnbmVkIGxvbmcpQ0NBX0NBQ0hFX0RJU0FCTEUgPDwgMjQpIHwNCisJCQkoKHVuc2lnbmVk
-IGxvbmcpQ0NBX0NBQ0hFX0RJU0FCTEUgPDwgMTYpIHwNCisJCQkoKHVuc2lnbmVkIGxvbmcpQ0NB
-X0NBQ0hFX0VOQUJMRSAgPDwgOCkgIHwNCisJCQkoKHVuc2lnbmVkIGxvbmcpQ0NBX0NBQ0hFX0VO
-QUJMRSk7DQorCX0NCisNCisJYXNtIHZvbGF0aWxlICgiY3NydyAlMCwgJTEiIDo6ICJpIihDU1Jf
-UE1BQ0ZHMCksICJyIihwbWFjZmcwKSk7DQorCWFzbSB2b2xhdGlsZSAoImZlbmNlIiA6OjogIm1l
-bW9yeSIpOw0KKw0KKwkvKiBTZWNvbmRhcnkgaGFydHM6IGFmdGVyIGVhcmx5IHNldHVwLCBqdW1w
-IHRvIHRoZSBjb21tb24gZW50cnkgcG9pbnQgKi8NCisJaWYgKGhhcnRpZCAhPSAwKQ0KKwkJanVt
-cF90b19hZGRyKENPTkZJR19TWVNfTE9BRF9BRERSKTsNCit9DQpkaWZmIC0tZ2l0IGEvYXJjaC9y
-aXNjdi9jcHUvcDg3MDAvZHJhbS5jIGIvYXJjaC9yaXNjdi9jcHUvcDg3MDAvZHJhbS5jDQpuZXcg
-ZmlsZSBtb2RlIDEwMDY0NA0KaW5kZXggMDAwMDAwMDAwMDAuLjJiNTQzMjZiZTM5DQotLS0gL2Rl
-di9udWxsDQorKysgYi9hcmNoL3Jpc2N2L2NwdS9wODcwMC9kcmFtLmMNCkBAIC0wLDAgKzEsMzcg
-QEANCisvLyBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMCsNCisvKg0KKyAqIENvcHly
-aWdodCAoQykgMjAxOCwgQmluIE1lbmcgPGJtZW5nLmNuQGdtYWlsLmNvbT4NCisgKi8NCisNCisj
-aW5jbHVkZSA8ZmR0ZGVjLmg+DQorI2luY2x1ZGUgPGluaXQuaD4NCisjaW5jbHVkZSA8bGludXgv
-c2l6ZXMuaD4NCisNCitERUNMQVJFX0dMT0JBTF9EQVRBX1BUUjsNCisNCitpbnQgZHJhbV9pbml0
-KHZvaWQpDQorew0KKwlyZXR1cm4gZmR0ZGVjX3NldHVwX21lbV9zaXplX2Jhc2UoKTsNCit9DQor
-DQoraW50IGRyYW1faW5pdF9iYW5rc2l6ZSh2b2lkKQ0KK3sNCisJcmV0dXJuIGZkdGRlY19zZXR1
-cF9tZW1vcnlfYmFua3NpemUoKTsNCit9DQorDQorcGh5c19zaXplX3QgYm9hcmRfZ2V0X3VzYWJs
-ZV9yYW1fdG9wKHBoeXNfc2l6ZV90IHRvdGFsX3NpemUpDQorew0KKwlpZiAoSVNfRU5BQkxFRChD
-T05GSUdfNjRCSVQpKSB7DQorCQkvKg0KKwkJICogRW5zdXJlIHRoYXQgd2UgcnVuIGZyb20gZmly
-c3QgNEdCIHNvIHRoYXQgYWxsDQorCQkgKiBhZGRyZXNzZXMgdXNlZCBieSBVLUJvb3QgYXJlIDMy
-Yml0IGFkZHJlc3Nlcy4NCisJCSAqDQorCQkgKiBUaGlzIGluLXR1cm4gZW5zdXJlcyB0aGF0IDMy
-Yml0IERNQSBjYXBhYmxlDQorCQkgKiBkZXZpY2VzIHdvcmsgZmluZSBiZWNhdXNlIERNQSBtYXBw
-aW5nIEFQSXMgd2lsbA0KKwkJICogcHJvdmlkZSAzMmJpdCBETUEgYWRkcmVzc2VzIG9ubHkuDQor
-CQkgKi8NCisJCWlmIChnZC0+cmFtX3RvcCA+IFNaXzRHKQ0KKwkJCXJldHVybiBTWl80RzsNCisJ
-fQ0KKwlyZXR1cm4gZ2QtPnJhbV90b3A7DQorfQ0KZGlmZiAtLWdpdCBhL2FyY2gvcmlzY3YvY3B1
-L3A4NzAwL3A4NzAwLmMgYi9hcmNoL3Jpc2N2L2NwdS9wODcwMC9wODcwMC5jDQpuZXcgZmlsZSBt
-b2RlIDEwMDY0NA0KaW5kZXggMDAwMDAwMDAwMDAuLjQxZDU1NDdjNTExDQotLS0gL2Rldi9udWxs
-DQorKysgYi9hcmNoL3Jpc2N2L2NwdS9wODcwMC9wODcwMC5jDQpAQCAtMCwwICsxLDEyIEBADQor
-Ly8gU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEdQTC0yLjArDQorLyoNCisgKiBDb3B5cmlnaHQg
-KEMpIDIwMjEsIENoYW8teWluZyBGdSA8Y2Z1QG1pcHMuY29tPg0KKyAqLw0KKw0KKyNpbmNsdWRl
-IDxhc20vaW8uaD4NCisjaW5jbHVkZSA8bGludXgvdHlwZXMuaD4NCisjaW5jbHVkZSA8YXNtL2Fy
-Y2gtcDg3MDAvcDg3MDAuaD4NCisNCitfX3dlYWsgdm9pZCB3YWl0X2Rkcl9jYWxpYih2b2lkKSB7
-IH0NCisNCitfX3dlYWsgdm9pZCBzZXR1cF9wY2llX2RtYV9tYXAodm9pZCkgeyB9DQpkaWZmIC0t
-Z2l0IGEvYXJjaC9yaXNjdi9pbmNsdWRlL2FzbS9hcmNoLXA4NzAwL3A4NzAwLmggYi9hcmNoL3Jp
-c2N2L2luY2x1ZGUvYXNtL2FyY2gtcDg3MDAvcDg3MDAuaA0KbmV3IGZpbGUgbW9kZSAxMDA2NDQN
-CmluZGV4IDAwMDAwMDAwMDAwLi5kNmNjMTI1ZDc2YQ0KLS0tIC9kZXYvbnVsbA0KKysrIGIvYXJj
-aC9yaXNjdi9pbmNsdWRlL2FzbS9hcmNoLXA4NzAwL3A4NzAwLmgNCkBAIC0wLDAgKzEsMTAxIEBA
-DQorLyogU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEdQTC0yLjAgKi8NCisvKg0KKyAqIENvcHly
-aWdodCAoQykgMjAyMSwgQ2hhby15aW5nIEZ1IDxjZnVAbWlwcy5jb20+DQorICovDQorDQorI2lm
-bmRlZiBfX1A4NzAwX0hfXw0KKyNkZWZpbmUgX19QODcwMF9IX18NCisNCisjZGVmaW5lIENTUl9N
-SVBTQ09ORklHNwkJMHg3ZDcNCisjZGVmaW5lIENTUl9QTUFDRkcwCQkJMHg3ZTANCisNCisjZGVm
-aW5lIE1IQVJUSURfSEFSVF9TSElGVAkwDQorI2RlZmluZSBNSEFSVElEX0hBUlRfTUFTSwkweGYN
-CisjZGVmaW5lIE1IQVJUSURfQ09SRV9TSElGVAk0DQorI2RlZmluZSBNSEFSVElEX0NPUkVfTUFT
-SwkweGZmDQorI2RlZmluZSBNSEFSVElEX0NMVVNURVJfU0hJRlQJMTYNCisjZGVmaW5lIE1IQVJU
-SURfQ0xVU1RFUl9NQVNLCTB4Zg0KKw0KKyNkZWZpbmUgTUFSQ0hJRF9VQVJDSF9TSElGVAkwDQor
-I2RlZmluZSBNQVJDSElEX1VBUkNIX01BU0sJMHhmZg0KKyNkZWZpbmUgTUFSQ0hJRF9DTEFTU19T
-SElGVAk4DQorI2RlZmluZSBNQVJDSElEX0NMQVNTX01BU0sJMHhmZg0KKyNkZWZpbmUgTUFSQ0hJ
-RF9DTEFTU19NCQkwDQorI2RlZmluZSBNQVJDSElEX0NMQVNTX0kJCTENCisjZGVmaW5lIE1BUkNI
-SURfQ0xBU1NfUAkJMg0KKw0KKyNkZWZpbmUgQ01fQkFTRV9DT1JFX1NISUZUCTgNCisjZGVmaW5l
-IENNX0JBU0VfQ0xVU1RFUl9TSElGVAkxOQ0KKw0KKyNkZWZpbmUgUDg3MDBfVElNRVJfQUREUgkw
-eDE2MTA4MDUwDQorDQorI2RlZmluZSBDQ0FfQ0FDSEVfRU5BQkxFCTANCisjZGVmaW5lIENDQV9C
-VUZGRVJfQ0FDSEUJMQ0KKyNkZWZpbmUgQ0NBX0NBQ0hFX0RJU0FCTEUJMg0KKyNkZWZpbmUgQ0NB
-X1VOQ0FDSEVfQUNDCQkzDQorI2RlZmluZSBQTUFfU1BFQ1VMQVRJT04JCSgweDEgPDwgMykNCisN
-CisjZGVmaW5lIEwxX0lfQ0FDSEUgICAgICAwDQorI2RlZmluZSBMMV9EX0NBQ0hFICAgICAgMQ0K
-KyNkZWZpbmUgTDNfQ0FDSEUgICAgICAgIDINCisjZGVmaW5lIEwyX0NBQ0hFICAgICAgICAzDQor
-DQorI2RlZmluZSBISVRfSU5WQUxJREFURSAgICAgICAgICA0DQorI2RlZmluZSBISVRfV1JJVEVC
-QUNLX0lOViAgICAgICA1DQorDQorI2RlZmluZSBISVRfSU5WQUxJREFURV9EICAgICAgICAoKEhJ
-VF9JTlZBTElEQVRFIDw8IDIpIHwgTDFfRF9DQUNIRSkNCisjZGVmaW5lIEhJVF9JTlZBTElEQVRF
-X1NEICAgICAgICgoSElUX0lOVkFMSURBVEUgPDwgMikgfCBMMl9DQUNIRSkNCisjZGVmaW5lIEhJ
-VF9XUklURUJBQ0tfSU5WX0QgICAgICgoSElUX1dSSVRFQkFDS19JTlYgPDwgMikgfCBMMV9EX0NB
-Q0hFKQ0KKyNkZWZpbmUgSElUX1dSSVRFQkFDS19JTlZfU0QgICAgKChISVRfV1JJVEVCQUNLX0lO
-ViA8PCAyKSB8IEwyX0NBQ0hFKQ0KKw0KKyNkZWZpbmUgTDFEX0xJTkVfU0laRV9TSElGVAkxMA0K
-KyNkZWZpbmUgTDFEX0xJTkVfU0laRV9NQVNLCTB4Nw0KKw0KKyNkZWZpbmUgR0NSX0wyX0NPTkZJ
-R19PRkZTRVQJMHgwMTMwDQorI2RlZmluZSBMMl9MSU5FX1NJWkVfU0hJRlQJOA0KKyNkZWZpbmUg
-TDJfTElORV9TSVpFX01BU0sJMHhmDQorDQorI2RlZmluZSBQTVBfUgkJCTB4MDENCisjZGVmaW5l
-IFBNUF9XCQkJMHgwMg0KKyNkZWZpbmUgUE1QX1gJCQkweDA0DQorI2RlZmluZSBQTVBfVE9SCQkJ
-MHg4DQorI2RlZmluZSBQTVBfTkE0CQkJMHgxMA0KKyNkZWZpbmUgUE1QX05BUE9UCQkweDE4DQor
-DQorI2RlZmluZSBDTV9CQVNFCQkJQ09ORklHX1JJU0NWX0NNX0JBU0UNCisjZGVmaW5lIENQQ19C
-QVNFCQkoQ01fQkFTRSArIDB4ODAwMCkNCisNCisvKiBDUEMgQmxvY2sgb2Zmc2V0cyAqLw0KKyNk
-ZWZpbmUgQ1BDX09GRl9MT0NBTAkJMHgyMDAwDQorDQorI2RlZmluZSBDUENfUFdSVVBfQ1RMCQkw
-eDAwMzANCisNCisjZGVmaW5lIENQQ19TWVNfQ09ORklHCQkweDAxNDANCisNCisjZGVmaW5lIENQ
-Q19DeF9DTUQJCTB4MDAwMA0KKyNkZWZpbmUgQ1BDX0N4X0NNRF9SRVNFVAkweDQNCisNCisjZGVm
-aW5lIFA4NzAwX0dDUl9DMF9DT0hfRU4JMHgyMGY4DQorI2RlZmluZSBQODcwMF9HQ1JfQzFfQ09I
-X0VOCTB4MjFmOA0KKyNkZWZpbmUgUDg3MDBfR0NSX0MyX0NPSF9FTgkweDIyZjgNCisjZGVmaW5l
-IFA4NzAwX0dDUl9DM19DT0hfRU4JMHgyM2Y4DQorI2RlZmluZSBQODcwMF9HQ1JfQzRfQ09IX0VO
-CTB4MjRmOA0KKyNkZWZpbmUgUDg3MDBfR0NSX0M1X0NPSF9FTgkweDI1ZjgNCisNCisjZGVmaW5l
-IEdDUl9DTF9DT0hfRU4JCTB4MjAwOA0KKyNkZWZpbmUgR0NSX0NMX0NPSF9FTl9FTgkoMHgxIDw8
-IDApDQorI2RlZmluZSBHQ1JfQkFTRV9PRkZTRVQJCTB4MDAwOA0KKyNkZWZpbmUgR0lDX0JBU0Vf
-T0ZGU0VUCQkweDAwODANCisjZGVmaW5lIENQQ19CQVNFX09GRlNFVAkJMHgwMDg4DQorI2RlZmlu
-ZSBFTkFCTEUJCQkweDENCisjZGVmaW5lIENPVU5UX1NUT1AJCSgweDEgPDwgMjgpDQorI2RlZmlu
-ZSBHSUNfTE9DQUxfU0VDVElPTl9PRlMJMHg4MDAwDQorI2RlZmluZSBHSUNfVkxfTUFTSwkJMHgw
-OA0KKyNkZWZpbmUgR0lDX1ZMX1JNQVNLCQkweDBjDQorI2RlZmluZSBHSUNfVkxfU01BU0sJCTB4
-MTANCisjZGVmaW5lIEdJQ19WTF9DT01QQVJFX01BUAkweDQ0DQorDQordm9pZCB3YWl0X2Rkcl9j
-YWxpYih2b2lkKTsNCit2b2lkIHNldHVwX3BjaWVfZG1hX21hcCh2b2lkKTsNCisNCisjZW5kaWYg
-LyogX19QODcwMF9IX18gKi8NCi0tIA0KMi4zNC4xDQo=
+From: Chao-ying Fu <cfu@mips.com>
+
+Implement initial board-level support for the P8700 Boston SoC.
+
+Signed-off-by: Chao-ying Fu <cfu@mips.com>
+Signed-off-by: Uros Stajic <uros.stajic@htecgroup.com>
+---
+ arch/riscv/Kconfig                      |  11 +
+ arch/riscv/dts/Makefile                 |   1 +
+ arch/riscv/dts/boston-p8700.dts         | 264 ++++++++++++++++++++++++
+ board/mips/boston-riscv/Kconfig         |  43 ++++
+ board/mips/boston-riscv/MAINTAINERS     |   9 +
+ board/mips/boston-riscv/Makefile        |   8 +
+ board/mips/boston-riscv/boston-lcd.h    |  20 ++
+ board/mips/boston-riscv/boston-regs.h   |  42 ++++
+ board/mips/boston-riscv/boston-riscv.c  |  48 +++++
+ board/mips/boston-riscv/checkboard.c    |  43 ++++
+ board/mips/boston-riscv/config.mk       |  15 ++
+ board/mips/boston-riscv/lowlevel_init.S |  18 ++
+ board/mips/boston-riscv/reset.c         |  15 ++
+ configs/boston-p8700_defconfig          |  98 +++++++++
+ drivers/clk/Kconfig                     |   2 +-
+ include/configs/boston-riscv.h          |   9 +
+ 16 files changed, 645 insertions(+), 1 deletion(-)
+ create mode 100644 arch/riscv/dts/boston-p8700.dts
+ create mode 100644 board/mips/boston-riscv/Kconfig
+ create mode 100644 board/mips/boston-riscv/MAINTAINERS
+ create mode 100644 board/mips/boston-riscv/Makefile
+ create mode 100644 board/mips/boston-riscv/boston-lcd.h
+ create mode 100644 board/mips/boston-riscv/boston-regs.h
+ create mode 100644 board/mips/boston-riscv/boston-riscv.c
+ create mode 100644 board/mips/boston-riscv/checkboard.c
+ create mode 100644 board/mips/boston-riscv/config.mk
+ create mode 100644 board/mips/boston-riscv/lowlevel_init.S
+ create mode 100644 board/mips/boston-riscv/reset.c
+ create mode 100644 configs/boston-p8700_defconfig
+ create mode 100644 include/configs/boston-riscv.h
+
+diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+index 9e2cbe775d2..1d27e999340 100644
+--- a/arch/riscv/Kconfig
++++ b/arch/riscv/Kconfig
+@@ -61,6 +61,16 @@ config TARGET_XILINX_MBV
+ config TARGET_ASPEED_AST2700_IBEX
+ 	bool "Support Ibex RISC-V cores on Aspeed AST2700 SoC"
+=20
++config TARGET_MIPS_BOSTON
++	bool "Support Mips Boston Board"
++	select DM
++	select DM_EVENT
++	select DM_GPIO
++	select DM_SERIAL
++	select OF_CONTROL
++	select DISTRO_DEFAULTS
++	imply CMD_DM
++
+ endchoice
+=20
+ config SYS_ICACHE_OFF
+@@ -119,6 +129,7 @@ source "board/spacemit/bananapi-f3/Kconfig"
+ source "board/starfive/visionfive2/Kconfig"
+ source "board/thead/th1520_lpi4a/Kconfig"
+ source "board/xilinx/mbv/Kconfig"
++source "board/mips/boston-riscv/Kconfig"
+=20
+ # platform-specific options below
+ source "arch/riscv/cpu/andes/Kconfig"
+diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
+index 9b347fc3b50..63e3bd4c95f 100644
+--- a/arch/riscv/dts/Makefile
++++ b/arch/riscv/dts/Makefile
+@@ -16,6 +16,7 @@ dtb-$(CONFIG_TARGET_XILINX_MBV) +=3D xilinx-mbv32.dtb
+ dtb-$(CONFIG_TARGET_XILINX_MBV) +=3D xilinx-mbv64.dtb
+ dtb-$(CONFIG_TARGET_XILINX_MBV) +=3D xilinx-binman.dtb
+ dtb-$(CONFIG_TARGET_ASPEED_AST2700_IBEX) +=3D ast2700-ibex.dtb
++dtb-$(CONFIG_TARGET_MIPS_BOSTON) +=3D boston-p8700.dtb
+=20
+ include $(srctree)/scripts/Makefile.dts
+=20
+diff --git a/arch/riscv/dts/boston-p8700.dts b/arch/riscv/dts/boston-p8700.=
+dts
+new file mode 100644
+index 00000000000..8207017c6ce
+--- /dev/null
++++ b/arch/riscv/dts/boston-p8700.dts
+@@ -0,0 +1,264 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2021, Chao-ying Fu <cfu@mips.com>
++ */
++
++/dts-v1/;
++
++#include <dt-bindings/clock/boston-clock.h>
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/interrupt-controller/irq.h>
++#include <dt-bindings/interrupt-controller/mips-gic.h>
++
++/ {
++	#address-cells =3D <1>;
++	#size-cells =3D <1>;
++	model =3D "p8700";
++	compatible =3D "mips,p8700-boston";
++
++	aliases {
++		serial0 =3D &uart0;
++	};
++
++	chosen {
++		stdout-path =3D "serial0:115200n8";
++	};
++
++	cpus {
++		#address-cells =3D <1>;
++		#size-cells =3D <0>;
++		timebase-frequency =3D <25000000>;
++
++		cpu@0 {
++			device_type =3D "cpu";
++			compatible =3D "mips,p8700", "riscv";
++			reg =3D <0>;
++			mmu-type =3D "riscv,sv39";
++			riscv,isa-extensions =3D "i", "m", "a", "f", "d", "c", "zba", "zbb";
++			clocks =3D <&clk_boston BOSTON_CLK_CPU>;
++			clock-frequency =3D <25000000>;
++			bootph-all;
++			status =3D "okay";
++
++			cpu0_intc: interrupt-controller {
++				compatible =3D "riscv,cpu-intc";
++				interrupt-controller;
++				#interrupt-cells =3D <1>;
++			};
++		};
++	};
++
++	memory@0 {
++		device_type =3D "memory";
++		reg =3D <0x80000000 0x80000000>;
++	};
++
++	timer@16154000 {
++		compatible =3D "riscv,aclint-mtimer";
++		reg =3D <0x16108050 0x8>,
++			  <0x16154000 0x7ff8>;
++		interrupts-extended =3D <&cpu0_intc 7>;
++	};
++
++	gic: interrupt-controller {
++		compatible =3D "mti,gic";
++
++		interrupt-controller;
++		#interrupt-cells =3D <3>;
++	};
++
++	pci0: pci@10000000 {
++		device_type =3D "pci";
++		compatible =3D "xlnx,axi-pcie-host-1.00.a";
++		reg =3D <0x10000000 0x2000000>;
++
++		#address-cells =3D <3>;
++		#size-cells =3D <2>;
++		#interrupt-cells =3D <1>;
++
++		interrupt-parent =3D <&gic>;
++		interrupts =3D <GIC_SHARED 2 IRQ_TYPE_LEVEL_HIGH>;
++
++		ranges =3D <0x02000000 0 0x40000000
++			  0x40000000 0 0x40000000>;
++
++		bus-range =3D <0x00 0xff>;
++
++		interrupt-map-mask =3D <0 0 0 7>;
++		interrupt-map =3D <0 0 0 1 &pci0_intc 1>,
++				<0 0 0 2 &pci0_intc 2>,
++				<0 0 0 3 &pci0_intc 3>,
++				<0 0 0 4 &pci0_intc 4>;
++
++		status =3D "disabled";
++
++		pci0_intc: interrupt-controller {
++			interrupt-controller;
++			#address-cells =3D <0>;
++			#interrupt-cells =3D <1>;
++		};
++	};
++
++	pci1: pci@12000000 {
++		device_type =3D "pci";
++		compatible =3D "xlnx,axi-pcie-host-1.00.a";
++		reg =3D <0x12000000 0x2000000>;
++
++		#address-cells =3D <3>;
++		#size-cells =3D <2>;
++		#interrupt-cells =3D <1>;
++
++		interrupt-parent =3D <&gic>;
++		interrupts =3D <GIC_SHARED 1 IRQ_TYPE_LEVEL_HIGH>;
++
++		ranges =3D <0x02000000 0 0x20000000
++			  0x20000000 0 0x20000000>;
++
++		bus-range =3D <0x00 0xff>;
++
++		interrupt-map-mask =3D <0 0 0 7>;
++		interrupt-map =3D <0 0 0 1 &pci1_intc 1>,
++				<0 0 0 2 &pci1_intc 2>,
++				<0 0 0 3 &pci1_intc 3>,
++				<0 0 0 4 &pci1_intc 4>;
++
++		status =3D "disabled";
++
++		pci1_intc: interrupt-controller {
++			interrupt-controller;
++			#address-cells =3D <0>;
++			#interrupt-cells =3D <1>;
++		};
++	};
++
++	pci2: pci@14000000 {
++		device_type =3D "pci";
++		compatible =3D "xlnx,axi-pcie-host-1.00.a";
++		reg =3D <0x14000000 0x2000000>;
++
++		#address-cells =3D <3>;
++		#size-cells =3D <2>;
++		#interrupt-cells =3D <1>;
++
++		interrupt-parent =3D <&gic>;
++		interrupts =3D <GIC_SHARED 0 IRQ_TYPE_LEVEL_HIGH>;
++
++		ranges =3D <0x02000000 0 0x16000000
++			  0x16000000 0 0x100000>;
++
++		bus-range =3D <0x00 0xff>;
++
++		interrupt-map-mask =3D <0 0 0 7>;
++		interrupt-map =3D <0 0 0 1 &pci2_intc 1>,
++				<0 0 0 2 &pci2_intc 2>,
++				<0 0 0 3 &pci2_intc 3>,
++				<0 0 0 4 &pci2_intc 4>;
++
++		pci2_intc: interrupt-controller {
++			interrupt-controller;
++			#address-cells =3D <0>;
++			#interrupt-cells =3D <1>;
++		};
++
++		pci2_root@0,0,0 {
++			compatible =3D "pci10ee,7021", "pci-bridge";
++			reg =3D <0x00000000 0 0 0 0>;
++
++			#address-cells =3D <3>;
++			#size-cells =3D <2>;
++			#interrupt-cells =3D <1>;
++
++			eg20t_bridge@1,0,0 {
++				compatible =3D "pci8086,8800", "pci-bridge";
++				reg =3D <0x00010000 0 0 0 0>;
++
++				#address-cells =3D <3>;
++				#size-cells =3D <2>;
++				#interrupt-cells =3D <1>;
++
++				eg20t_mac@2,0,1 {
++					compatible =3D "pci8086,8802", "intel,pch-gbe";
++					reg =3D <0x00020100 0 0 0 0>;
++					phy-reset-gpios =3D <&eg20t_gpio 6 GPIO_ACTIVE_LOW>;
++				};
++
++				eg20t_gpio: eg20t_gpio@2,0,2 {
++					compatible =3D "pci8086,8803", "intel,eg20t-gpio";
++					reg =3D <0x00020200 0 0 0 0>;
++
++					gpio-controller;
++					#gpio-cells =3D <2>;
++				};
++
++				mmc0: mmc@2,4,0 {
++					compatible =3D "intel,apl-sd";
++					reg =3D <0x00022000 0 0 0 0>;
++				};
++
++				mmc1: mmc@2,4,1 {
++					compatible =3D "intel,apl-sd";
++					reg =3D <0x00022100 0 0 0 0>;
++				};
++
++				eg20t_i2c@2,12,2 {
++					compatible =3D "pci8086,8817";
++					reg =3D <0x00026200 0 0 0 0>;
++
++					#address-cells =3D <1>;
++					#size-cells =3D <0>;
++
++					rtc@0x68 {
++						compatible =3D "st,m41t81s";
++						reg =3D <0x68>;
++					};
++				};
++			};
++		};
++	};
++
++	plat_regs: system-controller@17ffd000 {
++		compatible =3D "img,boston-platform-regs", "syscon";
++		reg =3D <0x17ffd000 0x1000>;
++		bootph-all;
++	};
++
++	clk_boston: clock {
++		compatible =3D "img,boston-clock";
++		#clock-cells =3D <1>;
++		regmap =3D <&plat_regs>;
++		bootph-all;
++	};
++
++	reboot: syscon-reboot {
++		compatible =3D "syscon-reboot";
++		regmap =3D <&plat_regs>;
++		offset =3D <0x10>;
++		mask =3D <0x10>;
++	};
++
++	uart0: uart@17ffe000 {
++		compatible =3D "ns16550a";
++		reg =3D <0x17ffe000 0x1000>;
++		reg-shift =3D <2>;
++		reg-io-width =3D <4>;
++
++		interrupt-parent =3D <&gic>;
++		interrupts =3D <GIC_SHARED 3 IRQ_TYPE_LEVEL_HIGH>;
++
++		clocks =3D <&clk_boston BOSTON_CLK_SYS>;
++		clock-frequency =3D <25000000>;
++
++		bootph-all;
++	};
++
++	lcd: lcd@17fff000 {
++		compatible =3D "img,boston-lcd";
++		reg =3D <0x17fff000 0x8>;
++	};
++
++	flash@18000000 {
++		compatible =3D "cfi-flash";
++		reg =3D <0x18000000 0x8000000>;
++		bank-width =3D <2>;
++	};
++};
+diff --git a/board/mips/boston-riscv/Kconfig b/board/mips/boston-riscv/Kcon=
+fig
+new file mode 100644
+index 00000000000..bada4b6752d
+--- /dev/null
++++ b/board/mips/boston-riscv/Kconfig
+@@ -0,0 +1,43 @@
++if TARGET_MIPS_BOSTON
++
++config SYS_BOARD
++	default "boston-riscv"
++
++config SYS_VENDOR
++	default "mips"
++
++config SYS_CONFIG_NAME
++	default "boston-riscv"
++
++config SYS_CPU
++	default "p8700"
++
++config BOARD_SPECIFIC_OPTIONS
++	def_bool y
++	select P8700_RISCV
++	imply SYS_NS16550
++
++config SYS_CACHELINE_SIZE
++	default 64
++
++config SYS_SDRAM_BASE
++	hex
++	default 0x80000000
++
++config SYS_INIT_SP_ADDR
++	hex
++	default 0x80200000
++
++config STANDALONE_LOAD_ADDR
++	hex
++	default 0x80200000
++
++config SYS_MAX_FLASH_BANKS_DETECT
++	bool
++	default y
++
++config PHY_REALTEK
++	bool
++	default y
++
++endif
+diff --git a/board/mips/boston-riscv/MAINTAINERS b/board/mips/boston-riscv/=
+MAINTAINERS
+new file mode 100644
+index 00000000000..d03491d0f0c
+--- /dev/null
++++ b/board/mips/boston-riscv/MAINTAINERS
+@@ -0,0 +1,9 @@
++BOSTON-RISCV BOARD
++M:	Chao-ying Fu <cfu@mips.com>
++S:	Maintained
++F:	board/mips/boston-riscv/
++F:	include/configs/boston-riscv.h
++F:	arch/riscv/cpu/p8700/
++F:	arch/riscv/include/asm/arch-p8700/
++F:	configs/boston-p8700_defconfig
++F:	arch/riscv/dts/boston-p8700.dts
+diff --git a/board/mips/boston-riscv/Makefile b/board/mips/boston-riscv/Mak=
+efile
+new file mode 100644
+index 00000000000..0615c677d23
+--- /dev/null
++++ b/board/mips/boston-riscv/Makefile
+@@ -0,0 +1,8 @@
++# SPDX-License-Identifier: GPL-2.0
++#
++# Copyright (C) 2016 Imagination Technologies
++
++obj-y +=3D boston-riscv.o
++obj-y +=3D checkboard.o
++obj-y +=3D lowlevel_init.o
++obj-y +=3D reset.o
+diff --git a/board/mips/boston-riscv/boston-lcd.h b/board/mips/boston-riscv=
+/boston-lcd.h
+new file mode 100644
+index 00000000000..5f5cd0fe126
+--- /dev/null
++++ b/board/mips/boston-riscv/boston-lcd.h
+@@ -0,0 +1,20 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright (C) 2016 Imagination Technologies
++ */
++
++#ifndef __BOARD_BOSTON_LCD_H__
++#define __BOARD_BOSTON_LCD_H__
++
++/**
++ * lowlevel_display() - Display a message on Boston's LCD
++ * @msg: The string to display
++ *
++ * Display the string @msg on the 7 character LCD display of the Boston bo=
+ard.
++ * This is typically used for debug or to present some form of status
++ * indication to the user, allowing faults to be identified when things go
++ * wrong early enough that the UART isn't up.
++ */
++void lowlevel_display(const char msg[static 8]);
++
++#endif /* __BOARD_BOSTON_LCD_H__ */
+diff --git a/board/mips/boston-riscv/boston-regs.h b/board/mips/boston-risc=
+v/boston-regs.h
+new file mode 100644
+index 00000000000..60343368a68
+--- /dev/null
++++ b/board/mips/boston-riscv/boston-regs.h
+@@ -0,0 +1,42 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright (C) 2016 Imagination Technologies
++ */
++
++#ifndef __BOARD_BOSTON_REGS_H__
++#define __BOARD_BOSTON_REGS_H__
++
++#ifndef BOSTON_PLAT_BASE
++#define BOSTON_PLAT_BASE		(0x17ffd000)
++#endif
++#define BOSTON_LCD_BASE			(0x17fff000)
++
++/*
++ * Platform Register Definitions
++ */
++#define BOSTON_PLAT_CORE_CL		(BOSTON_PLAT_BASE + 0x04)
++
++#define BOSTON_PLAT_SOFT_RST		(BOSTON_PLAT_BASE + 0x10)
++#define BOSTON_PLAT_SOFT_RST_SYSTEM	(0x1 << 4)
++
++#define BOSTON_PLAT_DDR3STAT		(BOSTON_PLAT_BASE + 0x14)
++#define BOSTON_PLAT_DDR3STAT_CALIB	(0x1 << 2)
++
++#define BOSTON_PLAT_BUILDCFG0           (BOSTON_PLAT_BASE + 0x34)
++#define BOSTON_PLAT_BUILDCFG0_IOCU     (0x1 << 0)
++#define BOSTON_PLAT_BUILDCFG0_PCIE0    (0x1 << 1)
++#define BOSTON_PLAT_BUILDCFG0_PCIE1    (0x1 << 2)
++#define BOSTON_PLAT_BUILDCFG0_PCIE2    (0x1 << 3)
++#define BOSTON_PLAT_BUILDCFG0_CFG_LTR  (0xf << 4)
++#define BOSTON_PLAT_BUILDCFG0_CFG_NUM  (0xff << 8)
++#define BOSTON_PLAT_BUILDCFG0_DP       (0x1 << 24)
++#define BOSTON_PLAT_BUILDCFG0_DP_MULT  (0xf << 28)
++
++#define BOSTON_PLAT_DDRCONF0		(BOSTON_PLAT_BASE + 0x38)
++#define BOSTON_PLAT_DDRCONF0_SIZE	(0xf << 0)
++
++#define BOSTON_PLAT_NOCPCIE0ADDR        (BOSTON_PLAT_BASE + 0x3c)
++#define BOSTON_PLAT_NOCPCIE1ADDR        (BOSTON_PLAT_BASE + 0x40)
++#define BOSTON_PLAT_NOCPCIE2ADDR        (BOSTON_PLAT_BASE + 0x44)=20
++
++#endif /* __BOARD_BOSTON_REGS_H__ */
+diff --git a/board/mips/boston-riscv/boston-riscv.c b/board/mips/boston-ris=
+cv/boston-riscv.c
+new file mode 100644
+index 00000000000..f3fd2ec8348
+--- /dev/null
++++ b/board/mips/boston-riscv/boston-riscv.c
+@@ -0,0 +1,48 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2016 Imagination Technologies
++ */
++
++#include "boston-regs.h"
++#include <asm/encoding.h>
++#include <asm/io.h>
++#include <linux/types.h>
++#include <asm/arch-p8700/p8700.h>
++
++#define PMACFG0_PMP3_SHIFT	24
++#define PMACFG0_PMP3_MASK	(0xffUL << PMACFG0_PMP3_SHIFT)
++#define BOSTON_IOCU_NOC_OFFSET	0x10
++
++int board_early_init_r(void)
++{
++	if (!IS_ENABLED(CONFIG_RISCV_MMODE))
++		return 0;
++	ulong pmacfg0 =3D csr_read(CSR_PMACFG0);
++
++	/*
++	 * Make the flash region (PMA entry corresponding to pmp3) uncached by
++	 * setting the CCA field in CSR_PMACFG0[31:24].
++	 */
++	pmacfg0 &=3D ~PMACFG0_PMP3_MASK;
++	pmacfg0 |=3D (ulong)CCA_CACHE_DISABLE << PMACFG0_PMP3_SHIFT;
++
++	csr_write(CSR_PMACFG0, pmacfg0);
++	asm volatile ("fence" ::: "memory");
++
++	return 0;
++}
++
++void wait_ddr_calib(void)
++{
++	while (!(readl((void __iomem *)BOSTON_PLAT_DDR3STAT) &
++		 BOSTON_PLAT_DDR3STAT_CALIB)) {
++		/* busy-wait */
++	}
++}
++
++void setup_pcie_dma_map(void)
++{
++	writel(0x00, (void __iomem *)BOSTON_PLAT_NOCPCIE0ADDR);
++	writel(0x00, (void __iomem *)BOSTON_PLAT_NOCPCIE1ADDR);
++	writel(0x00, (void __iomem *)BOSTON_PLAT_NOCPCIE2ADDR);
++}
+diff --git a/board/mips/boston-riscv/checkboard.c b/board/mips/boston-riscv=
+/checkboard.c
+new file mode 100644
+index 00000000000..c7bf6734433
+--- /dev/null
++++ b/board/mips/boston-riscv/checkboard.c
+@@ -0,0 +1,43 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2016 Imagination Technologies
++ */
++
++#include "boston-lcd.h"
++#include "boston-regs.h"
++#include <init.h>
++#include <asm/io.h>
++#include <asm/arch-p8700/p8700.h>
++
++int checkboard(void)
++{
++	u32 changelist, cfg, core, uarch;
++	u64 marchid;
++
++	lowlevel_display("U-boot  ");
++
++	printf("Board: Mips Boston RISC-V\n");
++
++	changelist =3D __raw_readl((uint32_t *)BOSTON_PLAT_CORE_CL);
++	if (changelist > 1) {
++		asm volatile ("csrr %0, marchid" : "=3Dr"(marchid)::);
++		core =3D (marchid >> MARCHID_CLASS_SHIFT) & MARCHID_CLASS_MASK;
++		uarch =3D (marchid >> MARCHID_UARCH_SHIFT) & MARCHID_UARCH_MASK;
++
++		printf("Core:  class%x uarch%x cl%x", core, uarch, changelist);
++
++		cfg =3D __raw_readl((uint32_t *)BOSTON_PLAT_BUILDCFG0);
++		if (cfg & BOSTON_PLAT_BUILDCFG0_CFG_NUM)
++			printf(" config %u",
++			       (cfg & BOSTON_PLAT_BUILDCFG0_CFG_NUM) >> 8);
++		if (cfg & BOSTON_PLAT_BUILDCFG0_CFG_LTR)
++			printf("%c",
++			       'a' + ((cfg & BOSTON_PLAT_BUILDCFG0_CFG_LTR) >> 4) - 1);
++		if (cfg & BOSTON_PLAT_BUILDCFG0_DP)
++			printf(", x%u debug port",
++			       (cfg & BOSTON_PLAT_BUILDCFG0_DP_MULT) >> 28);
++		printf("\n");
++	}
++
++	return 0;
++}
+diff --git a/board/mips/boston-riscv/config.mk b/board/mips/boston-riscv/co=
+nfig.mk
+new file mode 100644
+index 00000000000..c1e242f1088
+--- /dev/null
++++ b/board/mips/boston-riscv/config.mk
+@@ -0,0 +1,15 @@
++# SPDX-License-Identifier: GPL-2.0+
++
++quiet_cmd_srec_cat =3D SRECCAT $@
++      cmd_srec_cat =3D srec_cat -output $@ -$2 \
++			$< -binary \
++			-fill 0x00 -within $< -binary -range-pad 16 \
++			-offset $3
++
++u-boot.mcs: u-boot.bin
++	$(call cmd,srec_cat,intel,0x7c00000)
++
++# if srec_cat is present build u-boot.mcs by default
++has_srec_cat =3D $(call try-run,srec_cat -VERSion,y,n)
++INPUTS-$(has_srec_cat) +=3D u-boot.mcs
++CLEAN_FILES +=3D u-boot.mcs
+diff --git a/board/mips/boston-riscv/lowlevel_init.S b/board/mips/boston-ri=
+scv/lowlevel_init.S
+new file mode 100644
+index 00000000000..8fa85749e40
+--- /dev/null
++++ b/board/mips/boston-riscv/lowlevel_init.S
+@@ -0,0 +1,18 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright (C) 2016 Imagination Technologies
++ */
++
++#include "boston-regs.h"
++
++.data
++
++msg_ddr_cal:	.ascii "DDR Cal "
++msg_ddr_ok:	.ascii "DDR OK  "
++
++.text
++
++	.globl lowlevel_display
++lowlevel_display:
++	li	t0, BOSTON_LCD_BASE
++	jr	ra
+diff --git a/board/mips/boston-riscv/reset.c b/board/mips/boston-riscv/rese=
+t.c
+new file mode 100644
+index 00000000000..8e7e0572aad
+--- /dev/null
++++ b/board/mips/boston-riscv/reset.c
+@@ -0,0 +1,15 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2017 Imagination Technologies
++ */
++
++#include "boston-regs.h"
++#include <asm/io.h>
++#include <linux/delay.h>
++
++void _machine_restart(void)
++{
++	writel(BOSTON_PLAT_SOFT_RST_SYSTEM, (void __iomem *)BOSTON_PLAT_SOFT_RST)=
+;
++
++	udelay(1000);
++}
+diff --git a/configs/boston-p8700_defconfig b/configs/boston-p8700_defconfi=
+g
+new file mode 100644
+index 00000000000..498ccb15b4c
+--- /dev/null
++++ b/configs/boston-p8700_defconfig
+@@ -0,0 +1,98 @@
++CONFIG_RISCV=3Dy
++CONFIG_SYS_TEXT_BASE=3D0x1fc00000
++CONFIG_ENV_SIZE=3D0x40000
++CONFIG_ENV_SECT_SIZE=3D0x40000
++CONFIG_TARGET_MIPS_BOSTON=3Dy
++CONFIG_DEFAULT_DEVICE_TREE=3D"boston-p8700"
++
++CONFIG_DISTRO_DEFAULTS=3Dy
++CONFIG_FIT=3Dy
++CONFIG_FIT_VERBOSE=3Dy
++CONFIG_FIT_BEST_MATCH=3Dy
++CONFIG_OF_STDOUT_VIA_ALIAS=3Dy
++CONFIG_SYS_PROMPT=3D"boston # "
++CONFIG_CMD_GREPENV=3Dy
++CONFIG_CMD_MEMTEST=3Dy
++CONFIG_SYS_MEMTEST_START=3D0x80000000
++CONFIG_SYS_MEMTEST_END=3D0x90000000
++CONFIG_BOOTDELAY=3D-1
++
++CONFIG_NR_DRAM_BANKS=3D1
++CONFIG_ARCH_RV64I=3Dy
++CONFIG_DISPLAY_CPUINFO=3Dy
++CONFIG_DISPLAY_BOARDINFO=3Dy
++CONFIG_BOARD_INIT=3Dn
++#CONFIG_CMD_BOOTEFI_SELFTEST=3Dy
++#CONFIG_CMD_NVEDIT_EFI=3Dy
++CONFIG_CMD_MII=3Dy
++# CONFIG_OF_PRIOR_STAGE=3Dy
++CONFIG_DM_MTD=3Dy
++CONFIG_SMP=3Dn
++CONFIG_XIP=3Dy
++CONFIG_CLK_BOSTON=3Dy
++CONFIG_RISCV_ISA_C=3Dn
++CONFIG_SHOW_REGS=3Dy
++CONFIG_SYS_NS16550=3Dy
++
++CONFIG_CMD_PCI=3Dy
++CONFIG_CMD_SNTP=3Dy
++CONFIG_CMD_DNS=3Dy
++CONFIG_CMD_LINK_LOCAL=3Dy
++CONFIG_CMD_TIME=3Dy
++CONFIG_CMD_EXT4_WRITE=3Dy
++CONFIG_ENV_IS_IN_FLASH=3Dy
++CONFIG_ENV_ADDR=3D0x1ffc0000
++CONFIG_NET_RANDOM_ETHADDR=3Dy
++CONFIG_MTD=3Dy
++CONFIG_MTD_NOR_FLASH=3Dy
++CONFIG_FLASH_CFI_DRIVER=3Dy
++CONFIG_CFI_FLASH=3Dy
++CONFIG_SYS_FLASH_USE_BUFFER_WRITE=3Dy
++CONFIG_SYS_FLASH_USE_PROTECTION=3Dy
++CONFIG_SYS_FLASH_CFI=3Dy
++CONFIG_SYS_FLASH_PROTECTION=3Dy
++CONFIG_DM_ETH=3Dy
++CONFIG_PCH_GBE=3Dy
++CONFIG_PCI=3Dy
++CONFIG_DM_PCI=3Dy
++CONFIG_PCI_XILINX=3Dy
++CONFIG_LZ4=3Dy
++CONFIG_CLK=3Dy
++CONFIG_EG20T_GPIO=3Dy
++
++CONFIG_MMC=3Dy
++CONFIG_HUSH_PARSER=3Dy
++CONFIG_CMD_CPU=3Dy
++CONFIG_CMD_MMC=3Dy
++CONFIG_CMD_DHCP=3Dy
++CONFIG_CMD_PING=3Dy
++CONFIG_CMD_EXT4=3Dy
++CONFIG_CMD_FAT=3Dy
++CONFIG_CMD_FS_GENERIC=3Dy
++CONFIG_OF_EMBED=3Dy
++CONFIG_CPU=3Dy
++CONFIG_MMC_SDHCI=3Dy
++CONFIG_MMC_PCI=3Dy
++
++CONFIG_UNIT_TEST=3Dy
++CONFIG_UT_LIB=3Dn
++CONFIG_UT_LIB_ASN1=3Dn
++CONFIG_UT_LOG=3Dn
++CONFIG_UT_TIME=3Dy
++CONFIG_UT_UNICODE=3Dn
++CONFIG_UT_ENV=3Dn
++CONFIG_UT_OVERLAY=3Dn
++
++CONFIG_SYS_LOAD_ADDR=3D0x80000000
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x80200000
++CONFIG_TEXT_BASE=3D0x1fc00000
++CONFIG_SYS_MALLOC_LEN=3D0x00800000
++CONFIG_SYS_BOOTM_LEN=3D0x04000000
++CONFIG_SYS_MAX_FLASH_SECT=3D1024
++CONFIG_PHY_ANEG_TIMEOUT=3D40000
++CONFIG_NET_RETRY_COUNT=3D10
++CONFIG_ENV_CALLBACK_LIST_STATIC=3D"io.coherent:io_coherent,"
++CONFIG_BOOTARGS=3D"root=3D/dev/sda rw earlycon console=3DttyS0,115200n8r"
++CONFIG_BOARD_EARLY_INIT_R=3Dy
++CONFIG_PCI_BRIDGE_MEM_ALIGNMENT=3D0x1
+diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+index c88931c8ec4..3d5829544ef 100644
+--- a/drivers/clk/Kconfig
++++ b/drivers/clk/Kconfig
+@@ -60,7 +60,7 @@ config CLK_BCM6345
+ 	  clocks on BCM6345 SoCs. HW has no rate changing capabilities.
+=20
+ config CLK_BOSTON
+-	def_bool y if TARGET_BOSTON
++	def_bool y if TARGET_BOSTON || TARGET_MIPS_BOSTON
+ 	depends on CLK
+ 	select REGMAP
+ 	select SYSCON
+diff --git a/include/configs/boston-riscv.h b/include/configs/boston-riscv.=
+h
+new file mode 100644
+index 00000000000..f1ee6f6032a
+--- /dev/null
++++ b/include/configs/boston-riscv.h
+@@ -0,0 +1,9 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (C) 2021, Chao-ying Fu <cfu@mips.com>
++ */
++
++#ifndef __CONFIG_BOSTON_RISCV_H
++#define __CONFIG_BOSTON_RISCV_H
++
++#endif /* __CONFIG_BOSTON_RISCV_H */
+--=20
+2.34.1
