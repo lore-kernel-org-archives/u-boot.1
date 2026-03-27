@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FAC810F2867
-	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 20:10:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CE4E10F2867
+	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 20:10:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0E7C83FAF;
-	Fri, 27 Mar 2026 21:10:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 28A2783FA7;
+	Fri, 27 Mar 2026 21:10:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B+/FsObM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="p10y8z7e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3830983FA7; Fri, 27 Mar 2026 21:10:01 +0100 (CET)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 8057283DA7; Fri, 27 Mar 2026 21:10:06 +0100 (CET)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC7958394E
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 21:09:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 308548394E
+ for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 21:10:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7d74dbfe84cso1708901a34.1
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 13:09:58 -0700 (PDT)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-464ba2bb3aeso1492537b6e.1
+ for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 13:10:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1774642197; x=1775246997; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1774642201; x=1775247001; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=t1PzgCuunsNOT2GKEFj0EWNMYKiUyLhbM9iVZXmRt4Q=;
- b=B+/FsObMQ87iIYFreNYC0zYd1z/2guYh6rDS4vKWT52ZFFlLYD/TkKkuo70OEynFJ7
- 56fOYmUn1p3NJSk5du6+zOrvh92LTifzGnAhMRg67+GYKz3isxGN3YKTz2Gz1ilVK13R
- OsktppFoot3f8/nzK9390Ha5i3kvXHo6hhDm6y/9hfkUqq28L9tR9wba129jlE/JQofM
- QATVmFYXwv7NiSdHIumR+Sd6Wv6VCbWlozhSCl1I5sS3KESrxorpd1p20ciXWeidjh0O
- m+m4Fx5lt0iJ1D4pcv+og3hyE797PkXNJi1n79mJqZMgudhaPthnPLwIBRddd1gfxIzc
- vaPQ==
+ bh=D81tqlM9p36aa6IXtx4qsIfEJnRmqGR3OB+YgHyg9Qg=;
+ b=p10y8z7egd5Y3mFq0+Mye0ZVdO++J+zxGqcG6z0VFJGjfLItgsNoAGpI1iH4aTVSz9
+ sLdnU5tA6cMU5o7bk5gYX2h2KX3Eh+LE2z3+u8rRj2+oShipSLdVoouBpC24CexhwOI/
+ K38XvSF+vK5T58EBzQ4P5RShry5pu6G2lebPXrTPJ6HmlMsjzwEOb6OSuKvNmh9U2Anm
+ IJTfHV4ZQJ25Yh34gXmTlttm32qZ6300/tzsf6JyxlKkIwrxu9psrR6MDxikd1zdSJLf
+ P/lVmtSbIqnxE0RHBlbicOoPTHm0Ql2Q5nggIm47RVB7ZSFldwMT4ZovAyjJcK+NRlgK
+ 5oRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774642197; x=1775246997;
+ d=1e100.net; s=20251104; t=1774642201; x=1775247001;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=t1PzgCuunsNOT2GKEFj0EWNMYKiUyLhbM9iVZXmRt4Q=;
- b=MMAqexyppKTl3XAYEQaI9TnL2kpdYtEibW45Lm1WrQr8ZARrVY/kacjOdtCEjkcR0v
- OjiI80w4fd4nWR/dL9MB/CGpKPLyHS/8342ROUlLk6vLEGbkmsVNfyNh1RhMNZ42RL2P
- +Kg9v59Am+ETvkpmWCu996CpnrHWMtdpLq283SsoV8yBFaTse9CyFWpfePuNl+SclyMk
- EOIWtH6xiJQr8JfQdxIhV3yiLnjc8cRXhjiP47qxoIVA+p89JO8+8M77APDkCWFfovdq
- XVroeyC+Lu582j5AI93TR/AT3EDVFN5eTVh05gFYdajHZm863ekNjmTFgHgUeDtt4YFf
- 4VNg==
-X-Gm-Message-State: AOJu0Ywg8Dyst9xTZ4A7mnOQ0xtHjcSa9yk9BKWbi+YVCi8cwtyzXheb
- njK4ZYEskNcbWwaFoM5c9YHdKIw+bVJsNmJCPeMAlTReRdR9hRNFsNtR+vUVfw==
-X-Gm-Gg: ATEYQzwDmNKan5yax8UlJSf963St0uJ52lRK6GLi17tbce0xiX+XN3pqr2YGB5someL
- /HenKaay5UNGzkMea1VibMJp9oES9Ky/+kgGvU6hitia8XatoyhUn1SJbLQBmSMK9rekkxziXnt
- xPa0myBOJPJTYGgqWbpxFH1dW2TqNoLqZAKfunov5nrOQWadXzfnB9WLoZirTtq4WvG+YxC08+z
- uGSdTFCst82+PXB8sn5ekrvXiXAIirboCU6zKUK+yhu5QecqT4lOjDNlDDul4TZ4iJnkI4UqqqK
- kgkERID7rp7oP8vj0eZ3VwyW3DI/bf9/zYGufdSo8XUPS1sPpf34qTMDV6Uwah2HatwoBocGYKQ
- dHesy1j3HW8vr508Q5Euk9Ai9227VnwQ2UV/xAEu7ds4rW02KEZgt5mv4vPUbxpKys/Okr7hqk8
- uy56h+8gLhCoQis9KZk9PJK+40iYrLki2KIKIXuS99M2ek+iwNw1gfh2n2JjhVnosLRa56tGPNq
- oPAFoRhJxSd8F74YDDfMY71Td7Eg5Cb0fCrnGtUzp97rO09BHpKZW2x/g14
-X-Received: by 2002:a05:6830:710a:b0:7d9:b314:1452 with SMTP id
- 46e09a7af769-7d9fad15978mr2161235a34.7.1774642197416; 
- Fri, 27 Mar 2026 13:09:57 -0700 (PDT)
+ bh=D81tqlM9p36aa6IXtx4qsIfEJnRmqGR3OB+YgHyg9Qg=;
+ b=qB4DWbk1CVW4hyqoX8fLS7008zSDnD9pgL9DCilMA8uQrfDyjkjlqU2rJySOobKl7O
+ H0l/wQqOfqRV0U2581Jv5lk8bReXobeorl3Rcg1a+DFyWMw5L45gOYkUpBWA/ZIUe1iA
+ CSC6zdjnsY4hVBiOASzRPWy7TdUnMJnVM+Y4uE0ulAmj9eJkhRAgxrMzg77obmDXf1WA
+ KGZtlstDc0vbYfQJIDujJDZcUUciy9Jk3nixx1kcuzKyKabccFn0HLiEd9qbQWe2bXv5
+ 1oS9PnupZmE7FCHe/8VHiQBH4leNYO0BDMZlFRLXSgHHnZuThZT6esRYIU6rBpU+sUrh
+ 9fFQ==
+X-Gm-Message-State: AOJu0YxBlosdZh59nonN6VdBPEwjRjruL0kEa04YGCEIf+zDW9c6zthK
+ zAju+sFlGx7JheeA7CWspmwEo9QzqsQBlvZY+PbRNJbgXmQ/t4D3GMMpCaxMKR9h
+X-Gm-Gg: ATEYQzzlRTIjCXlyo22NLnCw7vL9/rTF6Ywthsq5b+VnDgGFeBYgcdHVlTdebaScvht
+ rOfnh0vLlBiI54XGUPzxT5eNgSG0Jqir/9/c3BJ2OETFYKW+D1aWmX5jC69jXjBUTN7jSv5p8A7
+ ATq8vZ6vDJh6l6GWDCF9dnESVkO0PcS6lODbi9B1Ua4W9Ic4WRV9AHCS8yyG9aE3jg2H7/S7xGO
+ JW/uEJ6V8AkqpvgZDM/4UWG5v15WaQVW+apc4HZHReCMl0JiN8E0ylFS6Zy6Zqo2IrKu/QphF0V
+ +BjvIXJItwvd/vpqrR0IVhziuvmupHdKjq7VRaojhQNF75n0EgIEWtKDRr0dPobVDFgXfUIUUir
+ AQFoZrpVDc0iSoe0C11t+C6rUw7Jxz1lvHMDWGVWQSDEfk3CLoUGidH8/P3i/GfS6IgOfBl+Ypk
+ MV2Q8YHrF8fptjfnQlhsfy2QQU90Gv2R1CqSinWInZp2X6xVKKmOtosI6oBF4z3yC/s//1ZnZOG
+ TyvxXybJayB/iS+wSLoYGuF7Hdlry8IP+pMx+WUs3lWF9D1UWKAxBgrIZsa
+X-Received: by 2002:a05:6808:1585:b0:467:317:805a with SMTP id
+ 5614622812f47-46a7aa0c450mr2683421b6e.26.1774642200878; 
+ Fri, 27 Mar 2026 13:10:00 -0700 (PDT)
 Received: from james-x399.localdomain (71-33-142-50.hlrn.qwest.net.
  [71.33.142.50]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7da0a7b5b41sm166102a34.15.2026.03.27.13.09.56
+ 46e09a7af769-7da0a7b5b41sm166102a34.15.2026.03.27.13.10.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Mar 2026 13:09:57 -0700 (PDT)
+ Fri, 27 Mar 2026 13:10:00 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
 To: u-boot@lists.denx.de
 Cc: James Hilliard <james.hilliard1@gmail.com>,
@@ -78,13 +78,15 @@ Cc: James Hilliard <james.hilliard1@gmail.com>,
  Jernej Skrabec <jernej.skrabec@gmail.com>,
  Paul Kocialkowski <contact@paulk.fr>,
  "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Mikhail Kalashnikov <iuncuim@gmail.com>,
+ Simon Glass <sjg@chromium.org>,
  Richard Genoud <richard.genoud@bootlin.com>,
- Cody Eksal <masterr3c0rd@epochal.quest>,
- Samuel Holland <samuel@sholland.org>
-Subject: [PATCH v4 2/5] sunxi: h616: move PHY init tables into timing files
-Date: Fri, 27 Mar 2026 14:09:13 -0600
-Message-ID: <20260327200932.2016910-2-james.hilliard1@gmail.com>
+ Alexander Graf <agraf@csgraf.de>, Cody Eksal <masterr3c0rd@epochal.quest>,
+ Samuel Holland <samuel@sholland.org>,
+ Mikhail Kalashnikov <iuncuim@gmail.com>
+Subject: [PATCH v4 3/5] sunxi: h616: split timing and PHY init helpers by DRAM
+ type
+Date: Fri, 27 Mar 2026 14:09:14 -0600
+Message-ID: <20260327200932.2016910-3-james.hilliard1@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260327200932.2016910-1-james.hilliard1@gmail.com>
 References: <20260327200932.2016910-1-james.hilliard1@gmail.com>
@@ -106,190 +108,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Store the compile-time-selected PHY initialisation data alongside
-each H616 timing implementation instead of in the common H616
-DRAM code.
+Give each H616 timing file its own timing entry point and PHY
+initialisation accessor, then dispatch to them through inline
+helpers in the H616 header.
 
-The common code still consumes a single phy_init pointer, so this
-only moves the DRAM-type-specific data without changing the
-selection model.
+This keeps the current fixed-profile build model intact while
+making the common H616 code consume DRAM-type-specific helpers
+through a uniform interface.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- .../include/asm/arch-sunxi/dram_sun50i_h616.h |  3 ++
- arch/arm/mach-sunxi/dram_sun50i_h616.c        | 41 +------------------
- .../mach-sunxi/dram_timings/h616_ddr3_1333.c  | 18 ++++++++
- .../arm/mach-sunxi/dram_timings/h616_lpddr3.c | 18 ++++++++
- .../dram_timings/h616_lpddr4_2133.c           | 18 ++++++++
- 5 files changed, 58 insertions(+), 40 deletions(-)
+ .../include/asm/arch-sunxi/dram_sun50i_h616.h | 34 +++++++++++++++++--
+ arch/arm/mach-sunxi/dram_sun50i_h616.c        |  1 +
+ .../mach-sunxi/dram_timings/h616_ddr3_1333.c  | 12 ++++---
+ .../arm/mach-sunxi/dram_timings/h616_lpddr3.c | 12 ++++---
+ .../dram_timings/h616_lpddr4_2133.c           | 12 ++++---
+ 5 files changed, 57 insertions(+), 14 deletions(-)
 
 diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
-index c35ef0252cb..fa12d5d2685 100644
+index fa12d5d2685..6dab3b4832b 100644
 --- a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
 +++ b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
-@@ -168,6 +168,8 @@ struct dram_config {
- 	u8 bus_full_width;
- };
- 
-+#define H616_PHY_INIT_LEN	27
-+
- static inline int ns_to_t(const struct dram_para *para, int nanoseconds)
- {
- 	const unsigned int ctrl_freq = para->clk / 2;
-@@ -175,6 +177,7 @@ static inline int ns_to_t(const struct dram_para *para, int nanoseconds)
+@@ -177,7 +177,37 @@ static inline int ns_to_t(const struct dram_para *para, int nanoseconds)
  	return DIV_ROUND_UP(ctrl_freq * nanoseconds, 1000);
  }
  
-+extern const u8 *phy_init;
- void mctl_set_timing_params(const struct dram_para *para);
+-extern const u8 *phy_init;
+-void mctl_set_timing_params(const struct dram_para *para);
++void h616_ddr3_set_timing_params(const struct dram_para *para);
++void h616_lpddr3_set_timing_params(const struct dram_para *para);
++void h616_lpddr4_set_timing_params(const struct dram_para *para);
++
++const u8 *h616_ddr3_get_phy_init(void);
++const u8 *h616_lpddr3_get_phy_init(void);
++const u8 *h616_lpddr4_get_phy_init(void);
++
++static inline void mctl_set_timing_params(const struct dram_para *para)
++{
++#ifdef CONFIG_SUNXI_DRAM_H616_DDR3_1333
++	h616_ddr3_set_timing_params(para);
++#elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR3)
++	h616_lpddr3_set_timing_params(para);
++#elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR4)
++	h616_lpddr4_set_timing_params(para);
++#endif
++}
++
++static inline const u8 *h616_get_phy_init(const struct dram_para *para)
++{
++	(void)para;
++
++#ifdef CONFIG_SUNXI_DRAM_H616_DDR3_1333
++	return h616_ddr3_get_phy_init();
++#elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR3)
++	return h616_lpddr3_get_phy_init();
++#elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR4)
++	return h616_lpddr4_get_phy_init();
++#endif
++	return NULL;
++}
  
  #endif /* _SUNXI_DRAM_SUN50I_H616_H */
 diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-index 3345c9b8e82..5ee1ca25311 100644
+index 5ee1ca25311..c3e1286fb35 100644
 --- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
 +++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-@@ -227,45 +227,6 @@ static void mctl_set_addrmap(const struct dram_config *config)
- 	mctl_ctl->addrmap[8] = 0x3F3F;
- }
+@@ -869,6 +869,7 @@ static bool mctl_phy_init(const struct dram_para *para,
+ 			(struct sunxi_mctl_com_reg *)SUNXI_DRAM_COM_BASE;
+ 	struct sunxi_mctl_ctl_reg * const mctl_ctl =
+ 			(struct sunxi_mctl_ctl_reg *)SUNXI_DRAM_CTL0_BASE;
++	const u8 *phy_init = h616_get_phy_init(para);
+ 	u32 val, val2, *ptr, mr0, mr2;
+ 	int i;
  
--#ifdef CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_1
--static const u8 phy_init[] = {
--#ifdef CONFIG_SUNXI_DRAM_H616_DDR3_1333
--	0x08, 0x02, 0x12, 0x05, 0x15, 0x17, 0x18, 0x0b,
--	0x14, 0x07, 0x04, 0x13, 0x0c, 0x00, 0x16, 0x1a,
--	0x0a, 0x11, 0x03, 0x10, 0x0e, 0x01, 0x0d, 0x19,
--	0x06, 0x09, 0x0f
--#elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR3)
--	0x18, 0x00, 0x04, 0x09, 0x06, 0x05, 0x02, 0x19,
--	0x17, 0x03, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
--	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x07,
--	0x08, 0x01, 0x1a
--#elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR4)
--	0x03, 0x00, 0x17, 0x05, 0x02, 0x19, 0x06, 0x07,
--	0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
--	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x01,
--	0x18, 0x04, 0x1a
--#endif
--};
--#else /* CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_0 */
--static const u8 phy_init[] = {
--#ifdef CONFIG_SUNXI_DRAM_H616_DDR3_1333
--	0x07, 0x0b, 0x02, 0x16, 0x0d, 0x0e, 0x14, 0x19,
--	0x0a, 0x15, 0x03, 0x13, 0x04, 0x0c, 0x10, 0x06,
--	0x0f, 0x11, 0x1a, 0x01, 0x12, 0x17, 0x00, 0x08,
--	0x09, 0x05, 0x18
--#elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR3)
--	0x18, 0x06, 0x00, 0x05, 0x04, 0x03, 0x09, 0x02,
--	0x08, 0x01, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
--	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x07,
--	0x17, 0x19, 0x1a
--#elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR4)
--	0x02, 0x00, 0x17, 0x05, 0x04, 0x19, 0x06, 0x07,
--	0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
--	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x01,
--	0x18, 0x03, 0x1a
--#endif
--};
--#endif /* CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_0 */
- #define MASK_BYTE(reg, nr) (((reg) >> ((nr) * 8)) & 0x1f)
- static void mctl_phy_configure_odt(const struct dram_para *para)
- {
-@@ -964,7 +925,7 @@ static bool mctl_phy_init(const struct dram_para *para,
- 	writel(val2, SUNXI_DRAM_PHY0_BASE + 0x37c);
- 
- 	ptr = (u32 *)(SUNXI_DRAM_PHY0_BASE + 0xc0);
--	for (i = 0; i < ARRAY_SIZE(phy_init); i++)
-+	for (i = 0; i < H616_PHY_INIT_LEN; i++)
- 		writel(phy_init[i], &ptr[i]);
- 
- 	if (para->tpr10 & TPR10_CA_BIT_DELAY)
 diff --git a/arch/arm/mach-sunxi/dram_timings/h616_ddr3_1333.c b/arch/arm/mach-sunxi/dram_timings/h616_ddr3_1333.c
-index 1f0d0de198c..f367f604d5f 100644
+index f367f604d5f..20c90f20cb9 100644
 --- a/arch/arm/mach-sunxi/dram_timings/h616_ddr3_1333.c
 +++ b/arch/arm/mach-sunxi/dram_timings/h616_ddr3_1333.c
-@@ -14,6 +14,24 @@
- #include <asm/arch/dram.h>
- #include <asm/arch/cpu.h>
+@@ -28,11 +28,15 @@ static const u8 h616_ddr3_phy_init_addr_map_1[H616_PHY_INIT_LEN] = {
+ 	0x06, 0x09, 0x0f
+ };
  
-+static const u8 h616_ddr3_phy_init_default[H616_PHY_INIT_LEN] = {
-+	0x07, 0x0b, 0x02, 0x16, 0x0d, 0x0e, 0x14, 0x19,
-+	0x0a, 0x15, 0x03, 0x13, 0x04, 0x0c, 0x10, 0x06,
-+	0x0f, 0x11, 0x1a, 0x01, 0x12, 0x17, 0x00, 0x08,
-+	0x09, 0x05, 0x18
-+};
+-const u8 *phy_init = IS_ENABLED(CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_1) ?
+-		     h616_ddr3_phy_init_addr_map_1 :
+-		     h616_ddr3_phy_init_default;
++const u8 *h616_ddr3_get_phy_init(void)
++{
++	if (IS_ENABLED(CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_1))
++		return h616_ddr3_phy_init_addr_map_1;
 +
-+static const u8 h616_ddr3_phy_init_addr_map_1[H616_PHY_INIT_LEN] = {
-+	0x08, 0x02, 0x12, 0x05, 0x15, 0x17, 0x18, 0x0b,
-+	0x14, 0x07, 0x04, 0x13, 0x0c, 0x00, 0x16, 0x1a,
-+	0x0a, 0x11, 0x03, 0x10, 0x0e, 0x01, 0x0d, 0x19,
-+	0x06, 0x09, 0x0f
-+};
-+
-+const u8 *phy_init = IS_ENABLED(CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_1) ?
-+		     h616_ddr3_phy_init_addr_map_1 :
-+		     h616_ddr3_phy_init_default;
-+
- void mctl_set_timing_params(const struct dram_para *para)
++	return h616_ddr3_phy_init_default;
++}
+ 
+-void mctl_set_timing_params(const struct dram_para *para)
++void h616_ddr3_set_timing_params(const struct dram_para *para)
  {
  	struct sunxi_mctl_ctl_reg * const mctl_ctl =
+ 			(struct sunxi_mctl_ctl_reg *)SUNXI_DRAM_CTL0_BASE;
 diff --git a/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c b/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c
-index e753fd7b4af..7efb1b22a84 100644
+index 7efb1b22a84..23b29cc973c 100644
 --- a/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c
 +++ b/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c
-@@ -14,6 +14,24 @@
- #include <asm/arch/dram.h>
- #include <asm/arch/cpu.h>
+@@ -28,11 +28,15 @@ static const u8 h616_lpddr3_phy_init_addr_map_1[H616_PHY_INIT_LEN] = {
+ 	0x08, 0x01, 0x1a
+ };
  
-+static const u8 h616_lpddr3_phy_init_default[H616_PHY_INIT_LEN] = {
-+	0x18, 0x06, 0x00, 0x05, 0x04, 0x03, 0x09, 0x02,
-+	0x08, 0x01, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-+	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x07,
-+	0x17, 0x19, 0x1a
-+};
+-const u8 *phy_init = IS_ENABLED(CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_1) ?
+-		     h616_lpddr3_phy_init_addr_map_1 :
+-		     h616_lpddr3_phy_init_default;
++const u8 *h616_lpddr3_get_phy_init(void)
++{
++	if (IS_ENABLED(CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_1))
++		return h616_lpddr3_phy_init_addr_map_1;
 +
-+static const u8 h616_lpddr3_phy_init_addr_map_1[H616_PHY_INIT_LEN] = {
-+	0x18, 0x00, 0x04, 0x09, 0x06, 0x05, 0x02, 0x19,
-+	0x17, 0x03, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-+	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x07,
-+	0x08, 0x01, 0x1a
-+};
-+
-+const u8 *phy_init = IS_ENABLED(CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_1) ?
-+		     h616_lpddr3_phy_init_addr_map_1 :
-+		     h616_lpddr3_phy_init_default;
-+
- void mctl_set_timing_params(const struct dram_para *para)
++	return h616_lpddr3_phy_init_default;
++}
+ 
+-void mctl_set_timing_params(const struct dram_para *para)
++void h616_lpddr3_set_timing_params(const struct dram_para *para)
  {
  	struct sunxi_mctl_ctl_reg * const mctl_ctl =
+ 			(struct sunxi_mctl_ctl_reg *)SUNXI_DRAM_CTL0_BASE;
 diff --git a/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c b/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
-index bbe401464eb..055d8dd3cad 100644
+index 055d8dd3cad..c19ae025f75 100644
 --- a/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
 +++ b/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
-@@ -12,6 +12,24 @@
- #include <asm/arch/dram.h>
- #include <asm/arch/cpu.h>
+@@ -26,11 +26,15 @@ static const u8 h616_lpddr4_phy_init_addr_map_1[H616_PHY_INIT_LEN] = {
+ 	0x18, 0x04, 0x1a
+ };
  
-+static const u8 h616_lpddr4_phy_init_default[H616_PHY_INIT_LEN] = {
-+	0x02, 0x00, 0x17, 0x05, 0x04, 0x19, 0x06, 0x07,
-+	0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-+	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x01,
-+	0x18, 0x03, 0x1a
-+};
+-const u8 *phy_init = IS_ENABLED(CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_1) ?
+-		     h616_lpddr4_phy_init_addr_map_1 :
+-		     h616_lpddr4_phy_init_default;
++const u8 *h616_lpddr4_get_phy_init(void)
++{
++	if (IS_ENABLED(CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_1))
++		return h616_lpddr4_phy_init_addr_map_1;
 +
-+static const u8 h616_lpddr4_phy_init_addr_map_1[H616_PHY_INIT_LEN] = {
-+	0x03, 0x00, 0x17, 0x05, 0x02, 0x19, 0x06, 0x07,
-+	0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-+	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x01,
-+	0x18, 0x04, 0x1a
-+};
-+
-+const u8 *phy_init = IS_ENABLED(CONFIG_DRAM_SUNXI_PHY_ADDR_MAP_1) ?
-+		     h616_lpddr4_phy_init_addr_map_1 :
-+		     h616_lpddr4_phy_init_default;
-+
- void mctl_set_timing_params(const struct dram_para *para)
++	return h616_lpddr4_phy_init_default;
++}
+ 
+-void mctl_set_timing_params(const struct dram_para *para)
++void h616_lpddr4_set_timing_params(const struct dram_para *para)
  {
  	struct sunxi_mctl_ctl_reg * const mctl_ctl =
+ 			(struct sunxi_mctl_ctl_reg *)SUNXI_DRAM_CTL0_BASE;
 -- 
 2.43.0
 
