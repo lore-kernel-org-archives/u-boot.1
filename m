@@ -4,66 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2563710F284A
-	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 16:27:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE96F10F284A
+	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 16:28:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F2C184154;
+	by phobos.denx.de (Postfix) with ESMTP id 5B4FE8416C;
 	Fri, 27 Mar 2026 17:24:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=htecgroup.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=htecgroup.com header.i=@htecgroup.com header.b="MsscClVs";
+	dkim=pass (2048-bit key; unprotected) header.d=htecgroup.com header.i=@htecgroup.com header.b="m61Kfs4b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2575F83DA7; Fri, 27 Mar 2026 14:51:04 +0100 (CET)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id 29E8483C14; Fri, 27 Mar 2026 15:10:52 +0100 (CET)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DAE988394E
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 14:51:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A94483C14
+ for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 15:10:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=htecgroup.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=uros.stajic@htecgroup.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jU1jJIyr/tvcprX9WKD7oPeMtlB3iF2z53uV8AVzXK1OLqLiSF0cZBi5wyRgfARiOrFJG+CLdMnlJxRcwZSp/3lfQeyAOzUIrNFfAGE24Q+eMmY4AL+VL8y05XdU87soAkHjrJWbnvWRFDZ8gNwcWIUODijSMr3JL9Ocmr/nMftsYMQ87ay8xYNUL6He1ca1KkTXhisa1Ul3edR55oB4w20iym9mSs1qD42008etn1bZeZv6jCxpx2nMbJ+LUHlGcP4srMACrBRxPp2RKeAWzTGbo7Ox73sf8GSDXBuBBj21mAlzCEV5qO6tI3GrtGfl+0YrejuOIjCDTotf5Z+gVA==
+ b=d5asMIK/jdkXGZMIh+OnhDr0/AoKfxNT/2sNe6PzCv6VDBru9RVA1Y7Veix94tm5rADve51mgoqIq7Cw2g/BNufea+1CjH8paGYEyFG9eNVn6ayxpJwwLAQKf2tfAxSFtpp2MJVB2cQtdg6RH1uoQbRg/rh6CPYgpUpKApNWIuX/UgE6R4XHAFmaMSNdRbw4Fxojfph+hdrywSP2zgakdlvEeBx3tPvNWQ29q7+HcnrvgREP6qFwFlAblOSCsF4gP2uc1x8BORDdLlu3J03ocqaZRX7yzwCUXA+zar2UtgfsXTaGPFlcXRCfRHECDLd1drDjL5tzu20Zai0Gt/laVA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4cZ5vYMd0tCC8HxAWYPrH8G5R82R4cJ740GOtk6aaes=;
- b=qFtDQqWUWJ7pUrg45YR6ZIMq3/Z8pQizrgokMYAgxoS4YxRdFOF3JwG5gKR6FyX/ruBy6EcWgz1W6tBGiuWnBeHKshzYdjPhW7FBYMdDcLYtPgR+7y3iWYyCx7P/F7GpeZ/VJdvGOc6gihUbJDhl0XwptpY7JvsuWkHQ42QxtNTox8IY1o3fyfRThacJK46caJznAVZ2tInxtuYNnW63F4upDD4MphSzSDPTSbuWZKicXp3EYBeu+MhrkfRCHNFgHEzGEoCxlH0oeLWwb9KpP1yFWgV56KgSEeQmWmo4vt/peBwIibhLnjwa5pI0hpY2AKPjAJMCyn9imf/GSaooxA==
+ bh=RKB/VfFt4oCo8sz6K5vsOvB5DuFdoLpUBCI3D7ypx4g=;
+ b=yhWDdfWEZGxWVzpz1+yf3nFHD+RqgWI6iKnamBtayYu1oOx1FkfeoB3kup1NkRIUKhg/7X2bb66YQyF6WOcPURqZ86pD4uJhor6OLZedGNgCg0I0uig9dIsp5ETM3nCNSwuQ8N2Oox5YBVQaGz/m771i7KHSSuBrMdpGoLGfihs30c4cxKOMTpqLJTvRtxAyJrFUEdgyz5ULW9fIPagZvLyLGMwPLcIvGsU6IVss72ToRGTOZwsLZ0xkSyxrkRoFdzBkp6YVL/mEzC0BUNdLrNiOz6zQ7KX0+fj4JVJeSFTeNkKXHzSIvb11H8giCLDJV4PWzbWD8Km/jIXdeX/iKQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=htecgroup.com; dmarc=pass action=none
  header.from=htecgroup.com; dkim=pass header.d=htecgroup.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=htecgroup.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4cZ5vYMd0tCC8HxAWYPrH8G5R82R4cJ740GOtk6aaes=;
- b=MsscClVssy7I6qyb06BnsM2VLl+llPiQZ82GObG3CGmDvX6kYTpGIY2Rdz8ZfwOVysIELxV8QJSZDScwQv+w6sG7nw0MGNyM7A+j7IBGH+1MUNyHOm+67rvJLIX7timjY2AhAIliOwIoq4mxhUV8cgJFxV/KDT93B6/9wAeZZy67e/yCuaMWwcz7mIf3PvAyfpWc6hbUdHvhIyLPZDpvXxiBm2idnlbHD6RZv6QoIW1wihg4UFlzxWabq0A1lYOmv289a3ERwPffrEKWywda/TJBT8613ij3x+hYBjT4tXUFF5xI8ZpSL/tV0Fa5GTZ3K+eIvRVeCIO7+jQhTILXpw==
+ bh=RKB/VfFt4oCo8sz6K5vsOvB5DuFdoLpUBCI3D7ypx4g=;
+ b=m61Kfs4bkLG2aezL1IshT/JrwGMOaizQ/U0MvXLlxvpVBC70HVC7Y0VNxoT9dMpa/WF3ojnoZYn38lJQ/5k9wH5YwHQIFC180zbuNfkeiBrYVrEfiEMfiYN492TJ3TtDOGEmPm15qwjrdcOkKJ3IudN10qLDjC3UtUZAIKZTdwukdWp8sHs59yAA0JrYQjlTrtxaBrjW9n6EN3aTO/i6tW+93zEQx8T3554gRjScAO2XfPfVxcdSN7TY1tyWUB9vXJem1MKVfrCb2Bj8Z4gRX9j1JDguouptDR2AzAssT4PaBwtzV+orP521i0npyRrnyGv8I93gFe3wvB0nZazsqQ==
 Received: from PA3PR09MB8140.eurprd09.prod.outlook.com (2603:10a6:102:4d4::20)
- by GVXPR09MB7859.eurprd09.prod.outlook.com (2603:10a6:150:1d8::15)
- with Microsoft SMTP Server (version=TLS1_2,
+ by DU0PR09MB8167.eurprd09.prod.outlook.com (2603:10a6:10:5a2::7) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.23; Fri, 27 Mar
- 2026 13:50:57 +0000
+ 2026 14:10:47 +0000
 Received: from PA3PR09MB8140.eurprd09.prod.outlook.com
  ([fe80::ca17:d4db:b6cd:fb81]) by PA3PR09MB8140.eurprd09.prod.outlook.com
  ([fe80::ca17:d4db:b6cd:fb81%6]) with mapi id 15.20.9745.019; Fri, 27 Mar 2026
- 13:50:57 +0000
+ 14:10:46 +0000
 From: Uros Stajic <uros.stajic@htecgroup.com>
-To: Tom Rini <trini@konsulko.com>, Leo Liang <ycliang@andestech.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Djordje Todorovic
- <Djordje.Todorovic@htecgroup.com>
-Subject: [PATCH v5 7/8] libfdt: Allow non-64b aligned memreserve entries
-Thread-Topic: [PATCH v5 7/8] libfdt: Allow non-64b aligned memreserve entries
-Thread-Index: AQHcdOyU+hjYlttjF0usnk+3K9+TBbWy8PSAgABObACAD7g/AA==
-Date: Fri, 27 Mar 2026 13:50:57 +0000
-Message-ID: <e8ca05f3-f820-45f5-9fff-a4f96c6e71a0@htecgroup.com>
-References: <20251224154449.946780-1-uros.stajic@htecgroup.com>
- <20251224154449.946780-8-uros.stajic@htecgroup.com>
- <abkZr1hBcosqgBZd@swlinux02> <20260317134736.GV502704@bill-the-cat>
-In-Reply-To: <20260317134736.GV502704@bill-the-cat>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>, Uros Stajic
+ <uros.stajic@htecgroup.com>
+Subject: [PATCH v6 0/7] riscv: Add support for P8700 platform on Boston board
+Thread-Topic: [PATCH v6 0/7] riscv: Add support for P8700 platform on Boston
+ board
+Thread-Index: AQHcvfOB06iJFzr3GU6YuT14ReHoOg==
+Date: Fri, 27 Mar 2026 14:10:46 +0000
+Message-ID: <20260327141029.628483-1-uros.stajic@htecgroup.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -71,72 +68,62 @@ X-MS-TNEF-Correlator:
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=htecgroup.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PA3PR09MB8140:EE_|GVXPR09MB7859:EE_
-x-ms-office365-filtering-correlation-id: 9ac82ffa-7d55-46c4-9b2a-08de8c07df40
+x-ms-traffictypediagnostic: PA3PR09MB8140:EE_|DU0PR09MB8167:EE_
+x-ms-office365-filtering-correlation-id: b464a1f4-30a8-4ead-c084-08de8c0aa46a
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
- ARA:13230040|1800799024|376014|366016|38070700021|22082099003|56012099003|18002099003;
-x-microsoft-antispam-message-info: UZOq92ua35OGQRa13tX6p28ugdsoOpqFeBizsRK2EPfimH0IOmM7Y5moxg/cqGrlL7LBRbRC2mSsb6Yyx0u9jWoT6PvT2EIK6RxIfh1cQjdPWgaSRemJLc3rLqrBnM35Ga2QEc2pf7wJOIobjaIDtGWEwnqZ0d/smPgfBXVh4VAqC1zY8c1u5+sjoJkBrHvR2ImX4Knut6bTTYKbHlGn8LE/htpN4TbQJj+WHRqh1XqMSgEGrh20kqYDWqOIPuZVUGUIHtDoDD5k/a0wLYoYsizNTTKlbH0OXiE+isfNM9lTzHmO8Gt1U9YP6drSajlSLJzNGxveDracEYyTZE85DL+Dbuxu3ur9iMwP+hmbCtRQPGDhLvpXdLZQR1rfmHrzXHgUKEZ1waUAIlwBMKEZOE6Q/YJpo3EzCklK3zMcrzW5Efyz0WaNAKhUm6W1+UH77N2OuMEDWlrdQF5+qQH2az7aqfkizDfvBA+P0B7Mzi1dPRqnu1LtnCuB8nQZv3WGw8dNEivv2pCYmx13eip7uOnNGzni5kr7aUyB0c8w7le04Iuf/booSZb6XQ2F2KY7qB/Gveejd5C3ww9YbRFqlXpZztTTaABRJmTt3xWEyCmz0KG1YrjS2KRsjgRSGmrAKOBOdIxr5PZJb5xXxGOPe7WGMw5BET3UxIjoEWLQRdGQRICavXPecA/rlQYK0FIryepZ8O2737iCIukP2bNelOc2aBiTm02m4w3cfyU5KBS3ymqi4JKstCHMbAC27wTDZS2rr/idL6Olv9S5ZRzcJpFcoKLCyI3fSLrVvG6DVBw=
+ ARA:13230040|376014|366016|1800799024|38070700021|18002099003|56012099003; 
+x-microsoft-antispam-message-info: HsW/JJXHqIZTaLpuX7lcV/dcnV/Ri5yczllHwt+fAM+GdXEF/A2ydA2yOMCs2VxeaSMC5y0KS0aDgj0eWFahplUw37LwF7ATgfG4F2eGg/RwZZGcNeGKCiDY5liQf5+DmOl0kCrsKD5PseuuY4h0AVRCh71PAXQ1gkCZn/iGpeoAymWAILrVYVqCKQrnRTPow5EcGsaBTiDblwP+Cl09Ru8N2pVpH3zf4LJUt9WwU6WqB3rR4zvAm9d6s0Nt5SGiMTGaJtZPXqOSbl7S/hPW9pGYaADEcqU6xXTfwbFO3bQ26J6BggWOZofV6CouZ4Ne8wXKvvA6JnJO2tH1MT7cnXKN0vjdhtl5hpj8LGmNZ0rPu37nt1dzD8kYFkvThlu6pVCLCKHxDX+5JtAHTF+Azevf0QDb+Q2frDDAXHOOWRvMqSgF4muFrrKA+9NwMfktmF5ls4idraGiF4mm9EhCHDMVAknRNc2MtSFb2Uisw2cMU4PFSLm14x3gLABI1+1wmuQziu2A1TrpWBYRbBhtGrAjN8ups0YHj8w74qOSOX70SdHxa2V3O+VLAQlfyYS4lv6AafQXGEmbkU/k0m1L4YviE9gPKdYK9m2yyomwfE/sJ64/ea9VpLqUzOjOufAwW1e7D+Zg7F5PHFPj1R0v/sUof8HFPRR+sFK2YXJkQIpGe00HAD8jc1nLUrsx03EfVX5vCAqiJdKhjoPARY8xuV8HW3SMCtBRRoBLaRSyjuOiAvF8MSBLd5kQeQaaJ/JHxIWfrzzk43PXdWvm64oOjdVtn6eo3C6/LLR6mmm8+Jw=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PA3PR09MB8140.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(38070700021)(22082099003)(56012099003)(18002099003);
+ SFS:(13230040)(376014)(366016)(1800799024)(38070700021)(18002099003)(56012099003);
  DIR:OUT; SFP:1102; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?azBOOVo2M2NsYzNiZVkxcmN2bE8xSldteUZqSnRKYjZJcERJc0JOVUgwaFUx?=
- =?utf-8?B?bnlGMkVNSDlFVW5Mc2ZVelBpR0N3SW4yaGRsejdsK2QxeitTaHhOampwdUh4?=
- =?utf-8?B?RnowdmZDMkRudjVzUWwxa2NRaVhtR0dqcE45dXNtcEJZOEg4TGc2blFLcmhu?=
- =?utf-8?B?NlNhdStHZ3pPU0VUdVZFdDFpc09aN29SdVRzVW4vZWhlN1FyOS9OREVSOXBK?=
- =?utf-8?B?U1FyOWZ1RTNZQURaTWpWREllTDVyVFJ3NGdjam42cU1nSml0bFZXbkNvcEdC?=
- =?utf-8?B?S3p6eXVWNGRtTFVPaHpRMDZOa3hyY1VrdHNWNzdMNzNTdW8xVWwxRXdpQTZT?=
- =?utf-8?B?ZEdUSXo3SU1OZ0t5NUJRcnQraGpCVzFjbUM0cnhwTnZlOCtIZjFtZXA3Vit0?=
- =?utf-8?B?SHRPUVpaZUhXTGFtOENIWDBkcVFUR1dGa2QrRFVLYXNraWY4T0ltYXRjY1Zj?=
- =?utf-8?B?ak43b1dPVmN2bVlLeDJmeE55RHA2OWw4dnBPZ2k1VUZvY1ZlOU1PVmV0Zzd5?=
- =?utf-8?B?TkwxRTVadnBPckVEeEdCTitOTzBuVnF1RFg1WmxPZjdXdWwrempCeW0yN0xM?=
- =?utf-8?B?aXhiUGp1QTRNY0ZnTkVoZ2VlUEUySENsbk9wUExqUXRQQ1lSZ0pQMHBidXhQ?=
- =?utf-8?B?R0VjbEs2QVUyOGdJS0JlN2ZXMkVERE9RUUs1N1BETjl5RWNEWGs0U2pKejU1?=
- =?utf-8?B?SmRWdE4zcFBKVVFaSGgxdEJOQUFiT1krWE1Jd1ZHYWJKUFFKT1BLSCs0eHlM?=
- =?utf-8?B?RVVQVWxXdVVia3FhRE9RQThxeVJHUHRreUk4S0w2S2NYOGEzV1dtTW9aNTQx?=
- =?utf-8?B?V1RKMURmSHllMi9sdGlLNE9CaVl2c1JJQ1BDNlUwV2l4bjZDamlSWURQTDZv?=
- =?utf-8?B?K1RNSFZzQTgyYjcrTGFpUWJDV1RvdXFhRmwwNkZlQnZEeHlkL3cxRHJyb2sy?=
- =?utf-8?B?VVl3djNVTko1TmJTTE9FVDVaUzZRNTUyaURIaHdRVTMyR3FyTzJqZno1U3l3?=
- =?utf-8?B?QTJHUGFIVGxtWGVHRUx5MWU5N1ZWWkV4VG9ScFUzd2llUkRvemxTSTZUN0E0?=
- =?utf-8?B?Z3lzWktaY1BRalpmaGplV0l4cHl0dVhFQ1lpOGQxVnd2VlpyQ2VJQnZlc0ZW?=
- =?utf-8?B?TGNzTm9JWndlMXJCMWdabmFBSVRPd2JCbjVEcHBSMU1vcDMzWmZFTjZGdWVa?=
- =?utf-8?B?YlgzaDE1M3BHaURBTlBCQ0JYL08xTlFxNmdrdXlsMmdGSW80Z3plK1pWUm5j?=
- =?utf-8?B?NTVtenRMbnFDeVBsYnhJUm0vUkFwSmhkV3JjYXNwYW5ZU05DTEhYUzBrclVZ?=
- =?utf-8?B?VldpMlh5cEQ4NWtSNGhDT1hWWFp0S3p0ZEdNSzlja0RyQUI2MmFJeUdMUkJj?=
- =?utf-8?B?SnNNb2ZjcGtJSFdtbGZ4TmJiMTVkY2FFV3pmdlBYc3EyZU5oaXNhWmU0cFRx?=
- =?utf-8?B?c3dJRGppWXR5VW02WjFFdWJoT1dyanEzY2txTDYvamdaSWtCK0dKY1lDL1Vn?=
- =?utf-8?B?bFlnK1RkZmhWQ3UxSHhqbTV5OEZxZ0RYZzZVb2lGVURVMS9qQkI0WTRKTTBh?=
- =?utf-8?B?UVRRekhWYWluSWZJd0toeVJCL0U2K1ZkMXJjRm5hZlY5cU5CVWJVUE9TalJH?=
- =?utf-8?B?RzdiV1RIWWFUUnIzNW4xRk1jS2ZlQ0NkZ2FTSlMzNk8wNCsvT0xJOW4yd2RJ?=
- =?utf-8?B?bVFIVnNBdE5tcHRmZkg5MU1PUWlvUWJNZnNQZlQxMUU2TExha3pXcmVEdEhJ?=
- =?utf-8?B?NDYyY2xVcEpTd2xFS0ZFUlFnRGM2SjQweisyalRjZWduZjNWL09vNnM2aVcx?=
- =?utf-8?B?TkpQb2x0YzcwS2wvOHlpcENRRG03dlVucDF0RTZJQWZJWHk1Qk90M0J5WFFL?=
- =?utf-8?B?SEFZNCtRUUpybDJwek1pU1lRN3pScjVKeFFpMDdlYzJRWVgvVkp1WXJycERw?=
- =?utf-8?B?Z2E4RlNGTjNONU50dVFsaERCNzUxTUVjbWFsTGhYQWtOWERaU0VBeVJSVjEw?=
- =?utf-8?B?c0RvVUpsbFhwdmV5Vm42a3czZHczOVZBckIzVmpVemgwT2psUUNYeXpKTG1W?=
- =?utf-8?B?ZzVES1RrKy9FWitBVlRzWUpIWHJhR01TMWgwNHF6MS9xSnQyVDQzWW9TY3F2?=
- =?utf-8?B?SWVDRTBRd1pZck95Z3JWRlJ2QWRTc3hEdUQxUysyNXg4NTY3M0hrTFkzd2xh?=
- =?utf-8?B?RnpUZkpLZmkySEl2alBudW1HYkFDRU5BNEplaS9VeHZNSmdZcmZtWStLWHlT?=
- =?utf-8?B?Vks2ZWk2S0FKVXNnZFN4MW1jOTVMNDRoRXNremFGK0FRdmtwcXdsbGcwdm5v?=
- =?utf-8?B?aWJETVgvQmdXV0lJR2w2Umh4ZXlCbEtTNEh2K0J3VGtuazhIVTY1ZHp5cFZr?=
- =?utf-8?Q?6mH2DtuR/ADoZyw0=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <A56B4B0D0375DF4F84405B4E31DAA626@eurprd09.prod.outlook.com>
-Content-Transfer-Encoding: base64
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?4b+n7mCow1TJYwzJ7EkMUGzr0z7NU+vj8ovy3QHCbxqJA71lTmmiL6tgZQ?=
+ =?iso-8859-1?Q?RYRv8EA9h4GTy47czusEzw3CzAz1vAqIXjtEHmJmwRv7aSVmtIwf/J+7Z2?=
+ =?iso-8859-1?Q?p+zmZiv1PC/A6dNrCVKivvG24O0SSoqEtIqgNsg8KW1VAWTj9es/vOQffu?=
+ =?iso-8859-1?Q?qVdeVN0YaFuhOPsF1kLiKhQUM92gRLySnNLhlGFRX6fjGT+ys4w+bhpmH4?=
+ =?iso-8859-1?Q?gFuM3g8+Seu2f94Fh1Sy71iCuzGHNxt3+g4rNkafVq1lr5rwbOtz6DLhry?=
+ =?iso-8859-1?Q?1wAVNWtcsDMuNGWsiMDuKBArHgyVUxJ5DmjSbpU9gDTiPdM2HfCmHZLs8d?=
+ =?iso-8859-1?Q?B7728npxfjSSkUKKgug4hNbHoWXl4Yfh+8ejuHhuRHbX3qau+IawwnOiku?=
+ =?iso-8859-1?Q?uS9W2+fWtU1coIMTP3tFKqCTDKnmAzd/wnP6F31zP6hyQYOsFveJZLfmMm?=
+ =?iso-8859-1?Q?uSAVHqVR7MmgkBeGXyTNeT9fyYz4GzJIv9K0ZA0OVQj7N5TfgNZwFHmTmJ?=
+ =?iso-8859-1?Q?5Lxn5WTBDGLnbPV8J20oOM72FGkOKhWaFymVFmQUkFH4n/i8S1F0iCqT/+?=
+ =?iso-8859-1?Q?V5U/+t/vSXJq5C3zLONRbjFutwt/HNU9FsI/VQ3uToxfrrA3j2t35aQOeF?=
+ =?iso-8859-1?Q?KVx39r32NSXDt5tSyUyk6Wfan6pbwWpLkwMUz9tPehgvwAc6db7yzTqA7X?=
+ =?iso-8859-1?Q?s57PTvSXZULOw+hOIPzoX6vsuCBUD8O0deTPOWbGH2WBZOkOjZBze+4oLu?=
+ =?iso-8859-1?Q?oG3PdbIMLoY3eQdIiC6wNLj/fIWccBXwfNPhg8NCSc/d213S5Aqe2FFrsM?=
+ =?iso-8859-1?Q?njTL/wdMBK8TJskcJSLROqn97yWdT8Uxy+wQViZr9/j1iJnc1rA5h47VyM?=
+ =?iso-8859-1?Q?BR93J8omQZoEawyRDapQ+NER9kRnaXY4vuSRa8tzFZ2bPMRemG0OyXRPbR?=
+ =?iso-8859-1?Q?j2ozamPn98lG7q4Uq1ZkJFhHltDjYSxFXxCZnukEzq6PoPffSaNDx0G6fg?=
+ =?iso-8859-1?Q?MYqMRuUAlxQXa0zoXzXbtf9iOtCPnn0vgltDCQ2pSIamzMM2s5PHDUU5N9?=
+ =?iso-8859-1?Q?I4/dWwTyEFfwl92M1AKcFd4kjr5YEQACnXWvEmtAoBS2S5vFvRYHHO75lS?=
+ =?iso-8859-1?Q?HCPjqxckZ4a3lLNNI5kWa/0IO8fyGwTA7Mxu/Ix0BYHTx2wVKRD7TIdARl?=
+ =?iso-8859-1?Q?iQ5N512seruYHdgfVEOzBIW+rvZuYCAt5he4EV912TJ3YPsvOlrjYAadsT?=
+ =?iso-8859-1?Q?AFZQh2YylLmMHsMwKStJ8cvrni381utEkV4WiqKMN2qY3qgmCUcBLF+wx9?=
+ =?iso-8859-1?Q?MKsR7it/hn+gfx5veJUureiT0vC8h6VA5Jv+L7WfGMfiuoZABstNdg3RcG?=
+ =?iso-8859-1?Q?VOH1uGlW8JkSx71uU/xYlDeySYd/h5/P6btZNwMVkIs49QD6pzNcehqEIT?=
+ =?iso-8859-1?Q?1TwBVsmg1N6Y7HrquWMf+/guTeNzttoSldHUdV1VIRuNBp1sCZBSMxZj3f?=
+ =?iso-8859-1?Q?KwOOSwy72fbj2dKnzXDvc0HwNO8WIsFYDuV22XwC7CBSYEcd+B+aLcWDZu?=
+ =?iso-8859-1?Q?YG6uJCFjpSv9yY25oT2CNzb9e/jeKvnv50juKmFuQdD4hiFPMJM2EHVil1?=
+ =?iso-8859-1?Q?pgZclE8PqbCG90Rc1Whz8T0K0q2byEQ7G0/nEjGCfOlBUl9QCOptNVB0MR?=
+ =?iso-8859-1?Q?L8fEMl62Mo8hIOvEW/oBFdGRTFvcpKu1QYIojRqaDp3q5SvNUZe5GEAyuc?=
+ =?iso-8859-1?Q?xXLp666emGmHlyC78LeQu1FMU7ZGBHZ3CqcLSrAtSWWu+5D0/WXeWpvyKK?=
+ =?iso-8859-1?Q?ji0Hcm0fbOjns3xCcqMMltndTADhy9w=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: htecgroup.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PA3PR09MB8140.eurprd09.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9ac82ffa-7d55-46c4-9b2a-08de8c07df40
-X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Mar 2026 13:50:57.0227 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b464a1f4-30a8-4ead-c084-08de8c0aa46a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Mar 2026 14:10:46.8971 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 9f85665b-7efd-4776-9dfe-b6bfda2565ee
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: cd419KpACR7sFE5WLn9lvqY7WAT/UV6de/HcqET5BAWcK70a7ME81cAt4UdqJjuQFK6j/K9mnvFviKSa7CPz6jcKSaCFrBY3EpcBudqFo7I=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR09MB7859
+X-MS-Exchange-CrossTenant-userprincipalname: DJTypt4poMB/dpheLDNqZrpmIiB+93nWMADYD++3HAxyClcwMQIHHokuvxV8Daze3mCSAkhZYKz1p2M/aXnFNguYnP/0ItjPmcikOzintWs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR09MB8167
 X-Mailman-Approved-At: Fri, 27 Mar 2026 17:24:54 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -154,26 +141,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGksDQoNCk9uIDMvMTcvMjYgMTQ6NDcsIFRvbSBSaW5pIHdyb3RlOg0KPiBPbiBUdWUsIE1hciAx
-NywgMjAyNiBhdCAwNTowNjo1NVBNICswODAwLCBMZW8gTGlhbmcgd3JvdGU6DQo+PiBIaSBVcm9z
-LA0KPj4NCj4+IE9uIFdlZCwgRGVjIDI0LCAyMDI1IGF0IDAzOjQ3OjE3UE0gKzAwMDAsIFVyb3Mg
-U3RhamljIHdyb3RlOg0KPj4+IEZyb206IENoYW8teWluZyBGdTxjZnVAbWlwcy5jb20+DQo+Pj4N
-Cj4+PiBBbHRob3VnaCBtZW1yZXNlcnZlIGVudHJpZXMgaW4gYW4gRkRUIGFyZSA2NC1iaXQgYWxp
-Z25lZCByZWxhdGl2ZSB0byB0aGUNCj4+PiBzdGFydCBvZiB0aGUgRkRULCB3ZSBjYW5ub3QgZ3Vh
-cmFudGVlIHRoYXQgdGhlIEZEVCBpdHNlbGYgaXMgNjQtYml0IGFsaWduZWQNCj4+PiBpbiBtZW1v
-cnkuIFRoaXMgaXMgZXNwZWNpYWxseSBjb21tb24gd2hlbiB1c2luZyBhIEZJVCBpbWFnZSwgd2hl
-cmUgdGhlDQo+Pj4gYWxpZ25tZW50IG9mIHRoZSBlbWJlZGRlZCBEVEIgY2Fubm90IGJlIGNvbnRy
-b2xsZWQuDQo+Pj4NCj4+PiBPbiBzeXN0ZW1zIHRoYXQgZG8gbm90IHN1cHBvcnQgdW5hbGlnbmVk
-IDY0LWJpdCBtZW1vcnkgYWNjZXNzZXMsIHRoaXMgbGVhZHMNCj4+PiB0byBmYXVsdHMgd2hlbiBh
-Y2Nlc3NpbmcgdGhlIG1lbXJlc2VydmUgc2VjdGlvbiBiZWZvcmUgdGhlIEZEVCBpcyByZWxvY2F0
-ZWQuDQo+Pj4gVG8gcmVzb2x2ZSB0aGlzLCBjb3B5IHRoZSA2NC1iaXQgdmFsdWVzIGludG8gc3Vp
-dGFibHkgYWxpZ25lZCBvbi1zdGFjaw0KPj4+IHZhcmlhYmxlcyBiZWZvcmUgYWNjZXNzaW5nIHRo
-ZW0uDQo+IFllcywgYW5kIHNvIHlvdSBtdXN0IGFsaWduIHRoZSBkZXZpY2UgdHJlZSBmaXJzdC4g
-V2Ugc2hvdWxkIGhhdmUNCj4gYWRkcmVzc2VkIGFsbCBvZiB0aGVzZSBwcm9ibGVtcyBpbiBjdXJy
-ZW50IG1hc3RlciBub3cuIElmIHdlIGhhdmUgbm90LA0KPiBwbGVhc2UgZXhwbGFpbiB3aGF0IHRo
-ZSB1c2UgY2FzZSB5b3UncmUgZW5jb3VudGVyaW5nIG5vdyBpcy4NCj4gDQo+IFtzbmlwXQ0KPj4g
-SGkgVG9tLA0KPj4NCj4+IFNob3VsZCB3ZSBhY2NlcHQgdGhpcyBwYXRjaCBpbiB1LWJvb3Q/DQo+
-IE5vLCB3ZSBjYW5ub3QsIHRoYW5rcyBmb3IgY2hlY2tpbmcuDQo+IA0KPiAtLSBUb20NCg0KVGhh
-bmtzIGZvciBjaGVja2luZy4gV2l0aCBjdXJyZW50IG1hc3RlciBJIG5vIGxvbmdlciBzZWUgdGhl
-IGlzc3VlIHRoYXQgDQpvcmlnaW5hbGx5IG1vdGl2YXRlZCB0aGlzIHBhdGNoLCBzbyBJIHdpbGwg
-ZHJvcCBpdCBmcm9tIHY2Lg0KDQpCZXN0IHJlZ2FyZHMsDQpVcm9z
+----
+Changes in v6:
+- 01/07 - Fix the BOSTON_PLAT_BASE redefinition warning
+- 02/07 - Update the DTS compatibles and make minor cleanup changes
+- 06/07 - Replace <asm/gpio.h> with <asm-generic/gpio.h>
+- Drop the libfdt memreserve alignment patch
+
+Changes in v5:
+- 01/08 - Drop p8700_platform_setup.S; move the early init logic to
+          harts_early_init()
+- 02/08 - Add board_early_init_r() for Boston RISC-V.
+- 02/08 - Defconfig/DT: set timebase-frequency to 25MHz, enable PCIe2 node,
+          and move bootargs to CONFIG_BOOTARGS
+- 02/08 - Set CONFIG_PCI_BRIDGE_MEM_ALIGNMENT to avoid PCI BAR allocation
+          failures seen on Boston/P8700
+- 02/08 - Drop GD_FLG_COHERENT_DMA; use a platform DMA-coherency check
+          instead
+- 03/08 - Update eg20t-gpio driver to use the PCI API
+- 05/08 - Refine the commit subject/body for the MIPS GIC syscon change
+- 08/08 - Add p8700_dma_is_coherent() helper to determine whether DMA
+          is coherent
+- Drop 'display' command patch
+- Drop the 'startharts' command patch.
+
+Changes in v4:
+- 02/10 - Use riscv_aclint_timer and update CPU timer settings
+- 03/10 - Fixed inconsistent empty line usage in gpio-eg20t driver
+- 08/10 - Replaced inline assembly accessors with generic macros
+- Dropped AMO instructions emulation patch
+- Dropped P8700-specific timer patch
+
+Changes in v3:
+- 01/12 - Split original patch into CPU/Board parts
+- 02/12 - New patch: extracted board-specific logic from original 01/12
+- 01/12 - Relocated object rule for p8700 into p8700-specific Makefile
+- 01/12 - Explained .word usage for mcache instruction and replaced it
+          with symbolic macro
+- 01/12 - Replaced inline assembly lw instruction with readl()
+- 01/12 - Removed p8700 code from start.S, moved to harts_early_init()
+- 02/12 - Fixed operand spacing in assembly
+- 02/12 - Replaced hardcoded address with properly macros
+- 02/12 - Switched from riscv,isa to riscv,isa-extensions
+- 02/12 - Sorted DT properties properly
+=20
+Changes in v2:
+- 03/11 - Remove redundant pcie_xilinx_probe() and update commit
+	  message accordingly.
+----
+
+Chao-ying Fu (7):
+  riscv: Add initial support for P8700 SoC
+  board: boston-riscv: Add initial support for P8700 Boston board
+  gpio: Add GPIO driver for Intel EG20T
+  pci: xilinx: Avoid writing memory base/limit for root bridge
+  riscv: Add syscon driver for MIPS GIC block
+  net: pch_gbe: Add PHY reset and MAC address fallback for RISC-V
+  riscv: p8700: Add Coherence Manager (CM) and IOCU support
+
+ arch/riscv/Kconfig                        |  30 +++
+ arch/riscv/cpu/p8700/Kconfig              |  14 ++
+ arch/riscv/cpu/p8700/Makefile             |  10 +
+ arch/riscv/cpu/p8700/cache.c              |  99 ++++++++
+ arch/riscv/cpu/p8700/cm-iocu.c            |  75 ++++++
+ arch/riscv/cpu/p8700/cm.c                 |  92 ++++++++
+ arch/riscv/cpu/p8700/cpu.c                | 105 +++++++++
+ arch/riscv/cpu/p8700/dram.c               |  37 +++
+ arch/riscv/cpu/p8700/p8700.c              |  14 ++
+ arch/riscv/dts/Makefile                   |   1 +
+ arch/riscv/dts/boston-p8700.dts           | 264 ++++++++++++++++++++++
+ arch/riscv/include/asm/arch-p8700/cm.h    |  61 +++++
+ arch/riscv/include/asm/arch-p8700/p8700.h | 133 +++++++++++
+ arch/riscv/include/asm/global_data.h      |   4 +
+ arch/riscv/lib/Makefile                   |   1 +
+ arch/riscv/lib/mips_gic.c                 |  47 ++++
+ board/mips/boston-riscv/Kconfig           |  47 ++++
+ board/mips/boston-riscv/MAINTAINERS       |  11 +
+ board/mips/boston-riscv/Makefile          |   9 +
+ board/mips/boston-riscv/boston-lcd.h      |  20 ++
+ board/mips/boston-riscv/boston-regs.h     |  42 ++++
+ board/mips/boston-riscv/boston-riscv.c    |  59 +++++
+ board/mips/boston-riscv/checkboard.c      |  43 ++++
+ board/mips/boston-riscv/config.mk         |  15 ++
+ board/mips/boston-riscv/iocu.c            | 102 +++++++++
+ board/mips/boston-riscv/lowlevel_init.S   |  18 ++
+ board/mips/boston-riscv/reset.c           |  15 ++
+ configs/boston-p8700_defconfig            |  98 ++++++++
+ drivers/clk/Kconfig                       |   2 +-
+ drivers/gpio/Kconfig                      |   7 +
+ drivers/gpio/Makefile                     |   1 +
+ drivers/gpio/eg20t-gpio.c                 | 141 ++++++++++++
+ drivers/net/pch_gbe.c                     |  37 ++-
+ drivers/net/pch_gbe.h                     |   1 +
+ drivers/pci/pcie_xilinx.c                 |   9 +
+ include/configs/boston-riscv.h            |   9 +
+ 36 files changed, 1670 insertions(+), 3 deletions(-)
+ create mode 100644 arch/riscv/cpu/p8700/Kconfig
+ create mode 100644 arch/riscv/cpu/p8700/Makefile
+ create mode 100644 arch/riscv/cpu/p8700/cache.c
+ create mode 100644 arch/riscv/cpu/p8700/cm-iocu.c
+ create mode 100644 arch/riscv/cpu/p8700/cm.c
+ create mode 100644 arch/riscv/cpu/p8700/cpu.c
+ create mode 100644 arch/riscv/cpu/p8700/dram.c
+ create mode 100644 arch/riscv/cpu/p8700/p8700.c
+ create mode 100644 arch/riscv/dts/boston-p8700.dts
+ create mode 100644 arch/riscv/include/asm/arch-p8700/cm.h
+ create mode 100644 arch/riscv/include/asm/arch-p8700/p8700.h
+ create mode 100644 arch/riscv/lib/mips_gic.c
+ create mode 100644 board/mips/boston-riscv/Kconfig
+ create mode 100644 board/mips/boston-riscv/MAINTAINERS
+ create mode 100644 board/mips/boston-riscv/Makefile
+ create mode 100644 board/mips/boston-riscv/boston-lcd.h
+ create mode 100644 board/mips/boston-riscv/boston-regs.h
+ create mode 100644 board/mips/boston-riscv/boston-riscv.c
+ create mode 100644 board/mips/boston-riscv/checkboard.c
+ create mode 100644 board/mips/boston-riscv/config.mk
+ create mode 100644 board/mips/boston-riscv/iocu.c
+ create mode 100644 board/mips/boston-riscv/lowlevel_init.S
+ create mode 100644 board/mips/boston-riscv/reset.c
+ create mode 100644 configs/boston-p8700_defconfig
+ create mode 100644 drivers/gpio/eg20t-gpio.c
+ create mode 100644 include/configs/boston-riscv.h
+
+--=20
+2.34.1
