@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B741710F2867
-	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 19:07:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F202010F2865
+	for <u-boot@archiver.kernel.org>; Fri, 27 Mar 2026 19:15:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47ADB83E7A;
-	Fri, 27 Mar 2026 20:07:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5EE3E83FA3;
+	Fri, 27 Mar 2026 20:15:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=iki.fi
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IpV47TP6";
+	dkim=pass (1024-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="DjNIyO5T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62CB283EB3; Fri, 27 Mar 2026 20:07:41 +0100 (CET)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0D03583FC6; Fri, 27 Mar 2026 20:15:41 +0100 (CET)
+Received: from meesny.iki.fi (meesny.iki.fi [IPv6:2001:67c:2b0:1c1::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5278C83C14
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 20:07:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 74CD183E7A
+ for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 20:15:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=iki.fi
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7d744d9acbeso1005063a34.1
- for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 12:07:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774638458; x=1775243258; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=n+kSQrswQ5gIiLuK6KhDKaHlxxrFaQHn5qO/c5Me0vw=;
- b=IpV47TP68J4GKmaBJS1WmVK6VHvyb+mKzBgy0xID3dgT8zgG5VmXkZx7yWj53GVn7p
- AnkfMPr1PizKmjezu3KEF3TXz5ivHk/StjqcO5/8HXvTy1ASzu3xs3mPc3m1ZzST78u0
- xIfsA0lxdyOl7VMCgCFBEZEMEzcfLfiP1H5dI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774638458; x=1775243258;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=n+kSQrswQ5gIiLuK6KhDKaHlxxrFaQHn5qO/c5Me0vw=;
- b=iY+pL27TP5F++YMetYR/dOn9HfDIpf2HQBUcIYHxDzMxvnlbXKxLr09vgHc6moP6dC
- /5EN+HEWCscQv0SIZq6GuKCoDzSYBlyw7TlWqH8zFHguvA3FlQzyeB2V5jS8o9AzhVTK
- /GXTvLtXKlM/vK4VuOscm1IyBODt/THNrXgWLrpsFcLIG6n1CLibTy2RIgf9AEgJ73e8
- iiSirriN75yEA6pMQSROmGEfeWgnskne4d63yAalf4sdGEinsKNHphLmOUa/DZy+uAoP
- K+KdAnYYzpwzXmH3cIwHjjT5g7GDQeVHx1x5aFHdEAcnPnqoMi/5T0zmAGpjar2/hypC
- FMsA==
-X-Gm-Message-State: AOJu0Yx/gNanrAcLy2ROc4EkH70C5Z1L8AY/SNCTX/zJ/oKkT3U5LBYJ
- wjERXr0ddynUBaqoaxZtOHxZwN+gecNVHn/5DreDE5bsz9v0kxPHenlHIQpbqfPQUtES5/9VbyT
- x+wrwZUM=
-X-Gm-Gg: ATEYQzxoAaS5NgT57KL1BZlqpoteYu+06J7uy5GjUy6MUR0wE9mpGYte/RIu5J04LWg
- j2WIaBHP2fmNAqGICuaqBYq3eR46z/hrqPRlnNk3c2atLyyVE0pO5pBUKcS08q1pX7hGgA38PyD
- WwXvgwFNKusHs8AuDYrXC6vFWf1QwDm8B5bbW/2RnTm6jEK0mUIYZK1K/0xtBXT6BBC9bleJbi/
- Q/TUc7+lcaBnL6uggRh0G5HNKvZhs6KJZgw3oVvKG2giS4lT8Jdvc1kwyO3CqgBeTEPCJX7ZYuJ
- aJ1WXSHHw4TpiJPxtARDZOWSG2zde9PhXdXFrn4x2v1cOdURAa8IyeIgEGxFvlKducvdbawHbOE
- 0ztrVCx/eM7eYQ5qkeb81h1o9z873W8P7FeoaXruTEGDwh/LAZX17c7a5yF/NMTBcmuO+26o0fI
- oovXM7TrPzHIY7TBvGs63TfGY/Nxq8fGNG2eT7vmMgtzmoL6xtI0TkZtiTHwyuBIonOrlf6wUCY
- Q49FU/+hN7DSF07/Stn8dE3yWB49Rx/JN2o2KR62sxU2DU=
-X-Received: by 2002:a05:6830:2117:b0:7d7:fcac:6374 with SMTP id
- 46e09a7af769-7d9fadbef26mr2166721a34.8.1774638457995; 
- Fri, 27 Mar 2026 12:07:37 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7da0a7edb42sm46914a34.20.2026.03.27.12.07.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Mar 2026 12:07:37 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-In-Reply-To: <3f8a042d-72f8-45c7-9d3d-f278f209311e@amd.com>
-References: <3f8a042d-72f8-45c7-9d3d-f278f209311e@amd.com>
-Subject: Re: [GIT PULL] AMD/Xilinx changes for 2026-07-rc1 v2
-Message-Id: <177463845739.4129998.14387935794365644580.b4-ty@konsulko.com>
-Date: Fri, 27 Mar 2026 13:07:37 -0600
+ spf=pass smtp.mailfrom=marko.makela@iki.fi
+Received: from kehys.lan (dsl-hkibng22-54f98f-8.dhcp.inet.fi [84.249.143.8])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange secp256r1 server-signature RSA-PSS (2048 bits) server-digest
+ SHA256) (No client certificate requested)
+ (Authenticated sender: msmakela)
+ by meesny.iki.fi (Postfix) with ESMTPSA id 4fj9Ms0d39zyWr;
+ Fri, 27 Mar 2026 21:15:37 +0200 (EET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=meesny;
+ t=1774638937;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=vJMxlJPmYbsPGcd0Q+H7br6HlwRVfl9jhvqP0T6Fweo=;
+ b=DjNIyO5T81DopOc0kTrJsw4g4wLcmmPl2Py9wDTiPNzQR7/4lZLqljVRsAoEaOmOT5hX0Q
+ 70zafVkWXN9ZT9peDVFrDPLVopVAb1kP9FD66cdTOXUkEkFo9gXJk0X8zxFY+cVh0QuEEh
+ i5yoM/NurcP56XpEIxdc8lV2U/cAP1g=
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=meesny; cv=none; t=1774638937;
+ b=LbxagAEgtddhgOQiKT3M8XWSE49Na/P25INpi4hQZ0eCNhfCSAG8JPSODwbPMKxLbGN5/i
+ u9+Xv9HyQciiEZS7T/6wZxy4F/9EeIN7PxfrlKf2PJmWUgi/KCWfN7vwU6UxK/TcqChV/n
+ 3ZXLMtSc0YCTf9MnD8vhiPycr43bkl0=
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.auth=msmakela smtp.mailfrom=marko.makela@iki.fi
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+ s=meesny; t=1774638937;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=vJMxlJPmYbsPGcd0Q+H7br6HlwRVfl9jhvqP0T6Fweo=;
+ b=n+Kkil9JzkyvNGULBdLN+IOFxVaamLXj1CrMH1tl2PfERwZGXoQHqS59kczRR02OpYDNx3
+ FpTCOrbuHAxYiKk11hAVqRZoy6pDFjPRZq7OtJWbRGloqSvYgncS6h9rJPBqGl3d9dWIA0
+ KbYlsvUlhIh8XzRLZ+lhyhmCNG3Ffvc=
+Date: Fri, 27 Mar 2026 21:15:35 +0200
+From: Marko =?iso-8859-1?B?TeRrZWzk?= <marko.makela@iki.fi>
+To: Robert Nelson <robertcnelson@gmail.com>
+Cc: Randolph Sapp <rs@ti.com>, Erik Welsh <Erik.Welsh@octavosystems.com>,
+ Anshul Dalal <anshuld@ti.com>, bb@ti.com, nm@ti.com,
+ trini@konsulko.com, afd@ti.com, u-boot@lists.denx.de
+Subject: Re: [PATCH 2/3] k3-am62-pocketbeagle2: add initial board support
+Message-ID: <acbXV--BvxNuZxEa@kehys.lan>
+References: <20260317223800.776581-1-rs@ti.com>
+ <20260317223800.776581-3-rs@ti.com>
+ <DH7I5D8U3GQX.1NAV7HTPAAJ8L@ti.com>
+ <CAOCHtYhr50ywU_ar6qFPYrwJeUbjE+GQC_OYO_W4Pc5A9iJ5-w@mail.gmail.com>
+ <DHAEYEEVEBW7.304SKN4GDBP4B@ti.com>
+ <CAOCHtYgan-p8PiuwKCPmDY=xaKvnGc+F1OZXgyDHFGg4F9NJ1Q@mail.gmail.com>
+ <DHCAJ6L5XC77.9F2NK2OOEAT5@ti.com>
+ <DHD3N5DPHPVI.159WWX3H4U3Q3@ti.com> <acaTPyGbaUQj7hk3@kehys.lan>
+ <CAOCHtYidPpJMZeDj0KkLkuh6YYOFVAe80NMWWu5wbmV2ou+=UQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAOCHtYidPpJMZeDj0KkLkuh6YYOFVAe80NMWWu5wbmV2ou+=UQ@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,23 +96,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 27 Mar 2026 16:34:10 +0100, Michal Simek wrote:
+Fri, Mar 27, 2026 at 09:53:03AM -0500, Robert Nelson wrote:
+>On Fri, Mar 27, 2026 at 9:25 AM Marko Mäkelä <marko.makela@iki.fi> wrote:
+>Marko, here's my last wip, before Randolph submitted:
+>https://github.com/beagleboard/u-boot/tree/v2026.01-am62-pocketbeagle2
 
-> please pull these patches to your next branch.
-> 
-> Thanks,
-> Michal
-> 
-> The following changes since commit eb00c710508d09b2a3b9aca75dd18280f1304703:
-> 
->    Merge patch series "bootm: Clean up arch-specific, pre-OS clean-up"
-> (2026-03-18 18:36:50 -0600)
-> 
-> [...]
+Thank you. I was able to merge it to the current master and build it, 
+but that of course does not guarantee that it would actually work. I 
+guess that it wouldn't, and I should for now try out your branch as is.  
+But I did not get that far yet.
 
-Merged into u-boot/next, thanks!
+To get a somewhat predictable starting point, I downloaded 
+pocketbeagle2-debian-13.3-base-v6.12-arm64-2026-02-12-8gb.img.xz on a 
+MicroSD card. It booted straight to Debian; I could access it via the 
+USB Ethernet and /dev/ttyACM0 endpoints as noted in 
+https://docs.beagle.cc/boards/pocketbeagle-2/02-quick-start.html.
 
--- 
-Tom
+Can you help me enable the USB serial console, first for u-boot and 
+subsequently for the Linux console? Would I have to hold a button while 
+starting it up, or would I need some special u-boot configuration 
+option, or remove one of the files so that the autoboot would fail? Some 
+months ago I used a phyBOARD Lyra (phycore_am62x_*_defconfig), and it 
+was a rather well documented procedure with that one.
 
+Best regards,
 
+	Marko
