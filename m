@@ -4,144 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F2A310F3DED
-	for <u-boot@archiver.kernel.org>; Sat, 28 Mar 2026 17:36:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 686FE10D148A
+	for <u-boot@archiver.kernel.org>; Sat, 28 Mar 2026 23:01:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6DA283CD3;
-	Sat, 28 Mar 2026 18:36:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id E99B583C5E;
+	Sun, 29 Mar 2026 00:01:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="BDZXiXlU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="O6WHeExq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8785183DA7; Sat, 28 Mar 2026 18:36:27 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 558F083CD3; Sun, 29 Mar 2026 00:01:02 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 692CA83642
- for <u-boot@lists.denx.de>; Sat, 28 Mar 2026 18:36:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D6D7883C14
+ for <u-boot@lists.denx.de>; Sun, 29 Mar 2026 00:00:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1774719379; x=1775324179; i=xypron.glpk@gmx.de;
- bh=r/K9U3f8i6uMS7fO/kTHKSveVPexrdPt7k9FahIKdVk=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=BDZXiXlU6m/MQI9x2rDnwmAp566YG0sJ6Kf9aseIXrXpCesWH1JIuCAODhSNq0wh
- Zik5LP/nGb5qTqTPCgvxppxgy4x1Uvq5HBJBXUXPGSHSIPNm+o3Ngbww6QWKl/j2f
- zoBUGYgxtoS8wUhXCouGMTlRmtofzIuwpeFEnd/dNQleAfnXars9mS796PYnrhnTc
- LiuXTIN0DbFyoW9Jo2hQROwJ8OsXGkx4sy8yITA8WucVo0yx5mh1Dr0zXyBru+GE8
- 60W4YOoLLHN3xV4QUCh4QnLZpX1W2I6ypQCfw51Eqe3HdRZTx+dW8uTgC+SM/LR9u
- 4+jkvXVpcmlUAQmAHw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MV67o-1vzV803sF4-00Ytka; Sat, 28
- Mar 2026 18:36:19 +0100
-Date: Sat, 28 Mar 2026 18:36:15 +0100
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de
-CC: linux-amarula@amarulasolutions.com,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- =?ISO-8859-1?Q?Vincent_Stehl=E9?= <vincent.stehle@arm.com>
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_1/4=5D_lib=3A_uuid=3A_add_partit?=
- =?US-ASCII?Q?ion_type_GUID_for_extended_bootloader?=
-User-Agent: Thunderbird for Android
-In-Reply-To: <20260328171624.2377527-2-dario.binacchi@amarulasolutions.com>
-References: <20260328171624.2377527-1-dario.binacchi@amarulasolutions.com>
- <20260328171624.2377527-2-dario.binacchi@amarulasolutions.com>
-Message-ID: <5C2766D4-8A00-4136-B25B-8474E8E8B5AD@gmx.de>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7d86eb7c854so1770061a34.3
+ for <u-boot@lists.denx.de>; Sat, 28 Mar 2026 16:00:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1774738858; x=1775343658; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=tcdzzEJjpnNZrkNFJQUbAPO7Tuyj9RFeKs8GLCyh2mk=;
+ b=O6WHeExq+s1Vk9NSZC3R0J9+16HkuH8YS/3K99HxUITagAgwb8l6FnHsYtcQC3mEvT
+ 64cNe4KhBC2ibk00ngveG+e4uFZBT3Q3KebmubWY+n+ZxT/5QJaQqt/fFFffkBvd3K7W
+ v6QVsuwavRP4Rf43XAACNHLKRw9NnexLMXGxs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774738858; x=1775343658;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=tcdzzEJjpnNZrkNFJQUbAPO7Tuyj9RFeKs8GLCyh2mk=;
+ b=Yj1xyGDg/iZFLlpFG5AkrS/Ffb4GKercK0T0UJkvxUJ9exdwyfdYrncwbSRyDbAEsM
+ eo28KIymETUCXdxfQAJbuNI/syZaGk6o+B+vE3KseYAj2R6SeAtPyV3Ol+MU0h19Rsvx
+ oY4XOBKq9gzeBf10LDo+8OQ7TDgvPE5EFISWJjDB18MvMz7UGowDDQypLfayrcmZMafo
+ rKrpVZtvliaRMnNN1KCGcnRGTys6yK3/OHvr1VhO9x+qP+suog0ReKftt5P97wIGrOuI
+ BQll2cj4AtElJa9rLh2osJ+BF4sFjhRZ/XH9lqD4fDuGA/iv9GT+/0wSIWHCtoXGJSHb
+ EK3g==
+X-Gm-Message-State: AOJu0Yx/9JqfE4Rs9VBhccXv9QqTZnycMQa56K1lRCT1XpxIz4wP7ovi
+ SwRa1kUCAqBfLfX7lNS6BC/BdPBbPQdHA1eRySJmkmLX6urnqb7RPTIJlue9Az4AYYQ=
+X-Gm-Gg: ATEYQzxIbcj612RUe0je1UZNAEkZGAcG8YHAhFPAUvAd5ZIYpnN2KHFl3LHwmBFeP3h
+ BIs2xQShVsFfunGxjjHYCy/j36Rbu/LVuc5zqUISM+fXo2p3Nvx3cA7bTr22J9dybtj69oLqpJ2
+ HQm3g4x3A92rtpemLGdRgNzOoRogRlrcfxCPDdXqzeYb274hHNCFz4efINDNxIo9eyKkLraLhOC
+ QTQ1+GaLrUbwwI1dgVBCV6q1PtkM2FffxAOkB+yCVmU4ojM2JMr89vxohLMQ2YStxWEzC6eKw6h
+ 2E1gLr4Vsmql/E7W2jvSZwccHMBY4n4/avVgPJfaRPYJhGOIYfHO1Jts8kRCTBV8SSZywYm1L85
+ 8sUUUrIoYXgD3Hm4wRu0Jk+7ZvihYi80/MkCPZBKKb4jXd4krbK/mqBVSxX8Z8YlggMWJLx0urI
+ SaXYmh6/DdDjkl6G05YhZCGJpcKSdDR86htpf2mfuCixNq1Dmj4HH/jSvD6TMQW6GwN1N6hexFv
+ /UdByHHobSEhgMBAvQiltU3SB0+r6aVZdIhwzOO4yUcwdTq
+X-Received: by 2002:a05:6830:6c11:b0:7d7:5818:66bc with SMTP id
+ 46e09a7af769-7d9fadda96emr3889241a34.10.1774738858553; 
+ Sat, 28 Mar 2026 16:00:58 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7da0a7b62dfsm2728943a34.16.2026.03.28.16.00.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 28 Mar 2026 16:00:57 -0700 (PDT)
+Date: Sat, 28 Mar 2026 17:00:55 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, Casey Connolly <casey.connolly@linaro.org>,
+ Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Jesse Taube <mr.bossman075@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Simon Glass <sjg@chromium.org>, Udit Kumar <u-kumar1@ti.com>
+Subject: Re: [PATCH] arm: relocate: Introduce data-only relocation mode
+Message-ID: <20260328230055.GA41863@bill-the-cat>
+References: <20260315235510.304677-1-marek.vasut+renesas@mailbox.org>
+ <20260316145027.GK502704@bill-the-cat>
+ <b1f8bc9f-13fe-4931-a6b3-ae494632dd77@mailbox.org>
+ <20260316171026.GN502704@bill-the-cat>
+ <23cb1b70-1657-474f-ad02-8b49db12d0de@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:sCmsP8QbzV1oZYwi3Rj7Jx/Fwca0wm64BR+5h75+rHQVags+Srg
- F9ZPhdCz+Mt/+eednQYWPwSbyXBD2pzalKjap2u3yqAkHhtcXq2+yqOmIJRpH+piNAuzL0L
- bk2XXlR+XWhOt3A+GmmS5HGUyJ5nqUVqV5b2v2vNwWrM2+1pUArjVO8FUA4MTHaTkRVQZ1h
- 2TqwT6+kJt3ZnAlGZxQIA==
-UI-OutboundReport: notjunk:1;M01:P0:jit9K7yzDMk=;1n+5mc44O8BhUzty0MxQt8HA4Lx
- 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
- Uvl56Lccaj5qy7ryiDUNLocVzxM97hGIA==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="FGapwLNtDRdZBPja"
+Content-Disposition: inline
+In-Reply-To: <23cb1b70-1657-474f-ad02-8b49db12d0de@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,70 +105,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 28=2E M=C3=A4rz 2026 18:15:14 MEZ schrieb Dario Binacchi <dario=2Ebinacc=
-hi@amarulasolutions=2Ecom>:
->The Extended Boot Loader Partition (XBOOTLDR) is a standard defined by
->the Discoverable Partitions Specification (DPS) to host boot loader
->resources outside of the EFI System Partition=2E
->
->Defining this GUID (bc13c2ff-59e6-4262-a352-b275fd6f7172) allows U-Boot
->to correctly identify and label these partitions using the "xbootldr"
->shorthand=2E
 
-Please, provide a link to the specification that defines what XBOOTLDR is =
-and that this GUID should be used in the commit message=2E
+--FGapwLNtDRdZBPja
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Best regards
-
-Heinrich
-
->
->Signed-off-by: Dario Binacchi <dario=2Ebinacchi@amarulasolutions=2Ecom>
->---
->
-> doc/README=2Egpt     | 2 ++
-> include/part_efi=2Eh | 3 +++
-> lib/uuid=2Ec         | 1 +
-> 3 files changed, 6 insertions(+)
->
->diff --git a/doc/README=2Egpt b/doc/README=2Egpt
->index 386ac2e0fc8f=2E=2Ea6e1fd7ce8d4 100644
->--- a/doc/README=2Egpt
->+++ b/doc/README=2Egpt
->@@ -286,6 +286,8 @@ Some strings can be also used at the place of known G=
-UID :
-> 	                    (E6D6D379-F507-44C2-A23C-238F2A3DF928)
-> 	"u-boot-env"      =3D PARTITION_U_BOOT_ENVIRONMENT
-> 	                    (3DE21764-95BD-54BD-A5C3-4ABE786F38A8)
->+	"xbootldr"        =3D PARTITION_XBOOTLDR
->+	                    (BC13C2FF-59E6-4262-A352-B275FD6F7172)
+On Sat, Mar 28, 2026 at 01:03:15AM +0100, Marek Vasut wrote:
+> On 3/16/26 6:10 PM, Tom Rini wrote:
 >=20
->     "uuid_disk=3D=2E=2E=2E;name=3Du-boot,size=3D60MiB,uuid=3D=2E=2E=2E;
-> 	name=3Dkernel,size=3D60MiB,uuid=3D=2E=2E=2E,type=3Dlinux;"
->diff --git a/include/part_efi=2Eh b/include/part_efi=2Eh
->index fb402df6f13e=2E=2Eafb21569c932 100644
->--- a/include/part_efi=2Eh
->+++ b/include/part_efi=2Eh
->@@ -59,6 +59,9 @@
-> #define PARTITION_U_BOOT_ENVIRONMENT \
-> 	EFI_GUID( 0x3de21764, 0x95bd, 0x54bd, \
-> 		0xa5, 0xc3, 0x4a, 0xbe, 0x78, 0x6f, 0x38, 0xa8)
->+#define PARTITION_XBOOTLDR \
->+	EFI_GUID( 0xbc13c2ff, 0x59e6, 0x4262, \
->+		0xa3, 0x52, 0xb2, 0x75, 0xfd, 0x6f, 0x71, 0x72)
+> Hello Tom,
 >=20
-> /* Special ChromiumOS things */
-> #define PARTITION_CROS_KERNEL \
->diff --git a/lib/uuid=2Ec b/lib/uuid=2Ec
->index 0a166320e077=2E=2Ecf5f8be48a32 100644
->--- a/lib/uuid=2Ec
->+++ b/lib/uuid=2Ec
->@@ -86,6 +86,7 @@ static const struct {
-> 	{"swap",	NULL,	PARTITION_LINUX_SWAP_GUID},
-> 	{"lvm",		NULL,	PARTITION_LINUX_LVM_GUID},
-> 	{"u-boot-env",	NULL,	PARTITION_U_BOOT_ENVIRONMENT},
->+	{"xbootldr",	NULL,	PARTITION_XBOOTLDR},
-> 	{"cros-kern",	NULL,	PARTITION_CROS_KERNEL},
-> 	{"cros-root",	NULL,	PARTITION_CROS_ROOT},
-> 	{"cros-fw",	NULL,	PARTITION_CROS_FIRMWARE},
+> > > > > +config SKIP_RELOCATE_CODE
+> > > > > +	bool "Skips relocation of U-Boot code to end of RAM"
+> > > > > +	help
+> > > > > +	  Skips relocation of U-Boot code to the end of RAM, but still =
+does
+> > > > > +	  relocate data to the end of RAM. This is mainly meant to relo=
+cate
+> > > > > +	  data to read-write portion of the RAM, while the code remains=
+ in
+> > > > > +	  read-only portion of the RAM from which it is allowed to exec=
+ute.
+> > > > > +	  This split configuration is present on various secure cores.
+> > > >=20
+> > > > Is this really configurable, or is this determined by the SoC? This
+> > > > feels like something a board should be select'ing rather than
+> > > > configuring and I do worry about boards abusing this in the same of=
+ some
+> > > > possibly dubious speed-up rather than the intented and valid use ca=
+se.
+> > >=20
+> > > On R-Car X5H, the Cortex-M core U-Boot port selects this, the Cortex-=
+A core
+> > > U-Boot port does NOT select this. So, this is neither SoC level
+> > > configuration nor board level configuration, this is SoC CPU core lev=
+el
+> > > configuration. I can definitely hide this symbol and conditionally se=
+lect it
+> > > on SoC level.
+> >=20
+> > At the high level, this sounds similar to the TI K3 platforms where we
+> > have a Cortex-R build and a Cortex-A build and so (ARCH_K3 && CPU_V7R)
+> > is valid in Kconfig. I assume there something similar in this situation,
+> > so yes please, thanks.
+> >=20
+> > > > [snip]
+> > > > > diff --git a/arch/arm/lib/relocate.S b/arch/arm/lib/relocate.S
+> > > > > index 6ee58f4edfe..b6a648708f4 100644
+> > > > > --- a/arch/arm/lib/relocate.S
+> > > > > +++ b/arch/arm/lib/relocate.S
+> > > > > @@ -79,6 +79,15 @@ ENDPROC(relocate_vectors)
+> > > > >    ENTRY(relocate_code)
+> > > > >    relocate_base:
+> > > > >    	adr	r3, relocate_base
+> > > > > +
+> > > > > +#ifdef CONFIG_SKIP_RELOCATE_CODE
+> > > > > +	mov r4,	#CONFIG_SKIP_RELOCATE_CODE_DATA_OFFSET
+> > > >=20
+> > > > Spacing. But if there's no other comments and propmting the user is
+> > > > correct, I can fix when applying.
+> > > Fixed in V2 .
+> >=20
+> > Thanks.
+> Either drop this patch and wait for V2, or I will send a follow up ?
 
+Sigh, I forgot about my own feedback here even, I'll revert this in next
+shortly, sorry.
+
+--=20
+Tom
+
+--FGapwLNtDRdZBPja
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCachdoAAKCRAr4qD1Cr/k
+CsSPAQDlwrR77qQ/G4FBcHLlxs6ZKsoxqqo+gTMHNGPNtBTq8AEA1tRgqptzOabl
+4fIprCCCbIus+K+zhT5FzYfz7P4N0gM=
+=U4i8
+-----END PGP SIGNATURE-----
+
+--FGapwLNtDRdZBPja--
