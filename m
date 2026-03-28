@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 630A910F3DEC
-	for <u-boot@archiver.kernel.org>; Sat, 28 Mar 2026 17:16:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AE5210F3DEC
+	for <u-boot@archiver.kernel.org>; Sat, 28 Mar 2026 17:17:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A84D483642;
-	Sat, 28 Mar 2026 18:16:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 64B8683DA7;
+	Sat, 28 Mar 2026 18:17:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Tl7mCNvZ";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="W/JStxNh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B79E78394E; Sat, 28 Mar 2026 18:16:50 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id F068083DA7; Sat, 28 Mar 2026 18:17:00 +0100 (CET)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8161380077
- for <u-boot@lists.denx.de>; Sat, 28 Mar 2026 18:16:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0722180077
+ for <u-boot@lists.denx.de>; Sat, 28 Mar 2026 18:16:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-48700b1ba53so28934955e9.1
- for <u-boot@lists.denx.de>; Sat, 28 Mar 2026 10:16:48 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-486fda2a389so25152255e9.1
+ for <u-boot@lists.denx.de>; Sat, 28 Mar 2026 10:16:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1774718208; x=1775323008;
+ d=amarulasolutions.com; s=google; t=1774718218; x=1775323018;
  darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=n69iOfCx8r/tYYbLWbMgDiByJOAylNkX67zhneWbYew=;
- b=Tl7mCNvZPxeo4SU06PZXC75VeKFFEGn+mEsQ5L/JpI/4EyZz+xCHO9b63/Lkz45mBe
- BFaybNEg27CT+rCub6SHOAuxAwcEm6YNN01wBS9DrwNSXRfQ1v140jVoI86Rwb0BFZ7Z
- h94gdcoP2luAXc+aweDZQNFu9PFO9kIrAwp3c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774718208; x=1775323008;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=n69iOfCx8r/tYYbLWbMgDiByJOAylNkX67zhneWbYew=;
- b=GL6hz0r7iKSJjmcme5vQY9ZQ0wPHTWWPyoljDTkpjcTajGKlFehBw9VBLhLsl78IdJ
- /3xgxpixRS4rbITLs1OHMN+aTOkB12HKlqY+wT20zyT1w+C2H8qh9oaPAFirKvendCzh
- juBMx4Bj/SSzAXwYGY4kTaPgCgRPlS63PqJo3uJIEO+FYdAN8MUqbOCIXj7fiKY2MOkU
- W3cvtFMArecTRKnATwGfiMiGuv6d9ZbkZKZ3LvxvrxjZEsKTLw6xS+gZjFfpScTUQks+
- BdBbx8xJdBV/BoC7XfH8FBXJPlDFTZAjFTNEfDLkXE3IwEt/7taSVJ3RcjfKxhcmFc1r
- PPPA==
-X-Gm-Message-State: AOJu0YwxLE3WXneEuG8W97qkcFp7WPECi2UUYvIuuDRJIwYybztm34//
- KdLWpkUm5pC6haWjtmha0hOo6KuEDIR1aeDhHzx7n2GAl9fn9E8JYCeyDLhLODhu6Ua3mGmy44/
- F2vPn
-X-Gm-Gg: ATEYQzwPBywZ6i+kWVba3/O/A0dZrxjakrQRhvkxks07UH57urMNhv7BZOlWVlUKdc7
- KWszCtoZsKZBLxC5+IKQX03J3Qgrdbe+wbXaKcieH9mcB6jQfnark62H+jbti69Y9YDMXFZ8/XJ
- j1rshtgwGuU9w0pAK2HpJyNKj2v9V5M7K/fXipcDYMQxMTgEZzIMotXi+hhuBiNxWxzFD7LdOtT
- een5oiZgrWy0+GvTqK1FhzwciPj5sEC+ZmAbmNhRoGIBF5YrC7UjoqLl/cuuT4cte2TTBUjHKPk
- AfCZ2EHx/vW/J8FdC5JKzMoBaa7f7k3+4Ipsz+4Itw/rjogr5akNDuKHjupxaxM6RK1RlNprnDV
- 0emZAoDSuF8bUj1Gi/wJd1XYhQ5VZZi1EttBBdcUuzvjKc//rH7NugvotXFMPI2V8/eNy6aoXqL
- AKgjbhSlVvMR931tbN6JS+9NFqoZi40gf5oB276vUoxz3JWCJEFQT1YPUXt8jE4M8fxJTqv3M5j
- nzHkfSpyAqqDvpnQxt6GALyTp4njLAkNds/R/Q9/CLna5OSC0Xl5WqTGBeytPYqEOpAj76OB/oT
- TxPrpwU27heqhs9BQLSBUDpu28KrdGqZWjI=
-X-Received: by 2002:a05:600c:1d1e:b0:486:fc95:1a91 with SMTP id
- 5b1f17b1804b1-48727f2373dmr111216915e9.12.1774718207528; 
- Sat, 28 Mar 2026 10:16:47 -0700 (PDT)
+ bh=6gI9NPjgvG3jfqA9wtO4fse8fxDtOhFx28Vby6zIrCo=;
+ b=W/JStxNhRpwA8Yd5A9ZV4fNRwRbF/7V4pEYh6jXkS7hoACx74F+G2FaTZg+yNNnmWk
+ WwzDj6//IA4KeW5cKvck1YDxs2xQtiIZdjBZ/qRbhjXyo1Q5AV6rVvJXyf7vwLCuotY2
+ PygoyFLWbSmwaAKEciiQiKpd7rHVqDYJmKyQA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774718218; x=1775323018;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=6gI9NPjgvG3jfqA9wtO4fse8fxDtOhFx28Vby6zIrCo=;
+ b=ikIzx8wo5sLHl1Bc3GF5cDoAUutZJW1e1qHZCYl3FV884e2lF5tbNaE7qkbnLZhues
+ vLPqd97fTtcpNviZDJqCVYGkPf/T0P4e/3iHDyBYUSkJn5wMOtTE21117yInrJBoGGrJ
+ WSJCriZuNa+5WmLlufNHvxMu2E/woJjmL+/jqrMArmXaXrsSG6D6z8bx6l2/4U9mWP9t
+ ZTIW7C1QuzIardLu3k1QmcreG+mzStK18AIxPGMkw3mxLyMj7ddU9GHC+88weX4CUqVt
+ 4M2MM18ptDw30hFXrQ5DTcyIEguGyarshW0l934iPj+5CtJ3ZW5o56g6pWAU4q1cNPGL
+ Citw==
+X-Gm-Message-State: AOJu0YynRdtKJ1dLRQNMOJvuuAAPPK4jHA+cr1T9CoFgRXG2bke5zjBp
+ tLZWBnK7nyh+dcln2KU9VlTH5IFkxDG+VFPek2FJpwNGJSsAcLPKoXnxX5j8TZ7HqAZzyHBMmqM
+ qv3JB
+X-Gm-Gg: ATEYQzzESXrggfjEuTAyQe6JqmxfID8C+Kq5DTnfGfR5bMCkzhSIF+Qv0N+OPJLHyor
+ tPDZzIIAUJmqd+pmMq1hblCbDxyhu8yl3NWkqY3+QJ4FUmyo2S1oTrKiXiUwCtZm/ztpkKEFHXz
+ /ib6rLw+KoXA4D7v6APk5jt8xnemTB98OV6Ysf/2RAGYIPjlRZDYNfy8wt7ofBxEXYuM0YAa/5T
+ kkrISom9LJ+S0djw3W0KtBQk1MxrER3UFYlZrPyyL7M1a/FLRRrIQL1hmVaqlmUlYYGscywZ8zL
+ vL4zGJwWVIipzzFLRKF1iYF5cxmClpL1WIODbHyc2MLzJV4uWq4abl6gG2j9ny+OolUd2wSTMZy
+ 7u5iO40Obptp7bKkVvkIJ9Spu/7sVGQARFggkHTvNe/GhcFsdcl9Z+qelLHdwYzTGT4ajuRxHu0
+ +5iiREJojatmkWyYqFXrzbpk1Ep54ZKY+ejNbrWrYe3vNhIqKQ2d5/ar5EbBlSMA7JuprYeeyuU
+ S8P2UyrScYUEin0Jr7GWOsF9JqFdAktw+0yBUiR1vslzIWU6XqsqBK/UhmRoP3eXH2oxUzeH7dr
+ E0CN72ZrCqPH9k0Gz1H5M7eS
+X-Received: by 2002:a05:600c:1e2a:b0:485:1878:7b8c with SMTP id
+ 5b1f17b1804b1-48727ee9f5bmr122096135e9.18.1774718217723; 
+ Sat, 28 Mar 2026 10:16:57 -0700 (PDT)
 Received: from dario-ThinkPad-P14s-Gen-5.homenet.telecomitalia.it
  (host-87-9-100-184.retail.telecomitalia.it. [87.9.100.184])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48722c6b105sm332432465e9.1.2026.03.28.10.16.40
+ 5b1f17b1804b1-48722c6b105sm332432465e9.1.2026.03.28.10.16.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 28 Mar 2026 10:16:46 -0700 (PDT)
+ Sat, 28 Mar 2026 10:16:57 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: linux-amarula@amarulasolutions.com,
@@ -78,20 +79,15 @@ Cc: linux-amarula@amarulasolutions.com,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Javier Martinez Canillas <javierm@redhat.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michal Simek <michal.simek@amd.com>,
- Padmarao Begari <padmarao.begari@amd.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 0/4] Support metadata-driven A/B boot for STM32MP25
-Date: Sat, 28 Mar 2026 18:15:13 +0100
-Message-ID: <20260328171624.2377527-1-dario.binacchi@amarulasolutions.com>
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+Subject: [PATCH 1/4] lib: uuid: add partition type GUID for extended bootloader
+Date: Sat, 28 Mar 2026 18:15:14 +0100
+Message-ID: <20260328171624.2377527-2-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260328171624.2377527-1-dario.binacchi@amarulasolutions.com>
+References: <20260328171624.2377527-1-dario.binacchi@amarulasolutions.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -110,44 +106,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series, the mainline version of [1], provides the necessary changes
-in U-Boot to support the metadata-driven A/B update flow for STM32MP25
-boards. It implements the logic required to dynamically select the boot
-bank based on FWU metadata.
+The Extended Boot Loader Partition (XBOOTLDR) is a standard defined by
+the Discoverable Partitions Specification (DPS) to host boot loader
+resources outside of the EFI System Partition.
 
-These changes are designed to be backward compatible while providing
-the necessary infrastructure for the A/B scheme.
+Defining this GUID (bc13c2ff-59e6-4262-a352-b275fd6f7172) allows U-Boot
+to correctly identify and label these partitions using the "xbootldr"
+shorthand.
 
-The series has been tested on the STM32MP257F-EV1 board.
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+---
 
-Additionally, patches 1 to 3 propose some changes with general-purpose
-utility:
+ doc/README.gpt     | 2 ++
+ include/part_efi.h | 3 +++
+ lib/uuid.c         | 1 +
+ 3 files changed, 6 insertions(+)
 
- 1/4 fwu: add helper to get image GUID by type and bank index
- 2/4 cmd: part: support lookup by UUID in 'part number'
- 3/4 lib: uuid: add partition type GUID for extended bootloader
-
-[1] https://github.com/STMicroelectronics/u-boot/pull/6
-
-
-Dario Binacchi (4):
-  lib: uuid: add partition type GUID for extended bootloader
-  cmd: part: support lookup by UUID in 'part number'
-  fwu: add helper to get image GUID by type and bank index
-  board: st: stm32mp25: support dynamic A/B bank bootup
-
- board/st/stm32mp2/stm32mp2.c          | 25 +++++++++++++++++++++++++
- cmd/part.c                            |  8 ++++++--
- doc/README.gpt                        |  2 ++
- include/configs/stm32mp25_st_common.h | 15 +++++++++++++++
- include/fwu.h                         |  3 +++
- include/part_efi.h                    |  3 +++
- lib/fwu_updates/fwu.c                 | 24 ++++++++++++++++++++++++
- lib/uuid.c                            |  1 +
- 8 files changed, 79 insertions(+), 2 deletions(-)
-
+diff --git a/doc/README.gpt b/doc/README.gpt
+index 386ac2e0fc8f..a6e1fd7ce8d4 100644
+--- a/doc/README.gpt
++++ b/doc/README.gpt
+@@ -286,6 +286,8 @@ Some strings can be also used at the place of known GUID :
+ 	                    (E6D6D379-F507-44C2-A23C-238F2A3DF928)
+ 	"u-boot-env"      = PARTITION_U_BOOT_ENVIRONMENT
+ 	                    (3DE21764-95BD-54BD-A5C3-4ABE786F38A8)
++	"xbootldr"        = PARTITION_XBOOTLDR
++	                    (BC13C2FF-59E6-4262-A352-B275FD6F7172)
+ 
+     "uuid_disk=...;name=u-boot,size=60MiB,uuid=...;
+ 	name=kernel,size=60MiB,uuid=...,type=linux;"
+diff --git a/include/part_efi.h b/include/part_efi.h
+index fb402df6f13e..afb21569c932 100644
+--- a/include/part_efi.h
++++ b/include/part_efi.h
+@@ -59,6 +59,9 @@
+ #define PARTITION_U_BOOT_ENVIRONMENT \
+ 	EFI_GUID( 0x3de21764, 0x95bd, 0x54bd, \
+ 		0xa5, 0xc3, 0x4a, 0xbe, 0x78, 0x6f, 0x38, 0xa8)
++#define PARTITION_XBOOTLDR \
++	EFI_GUID( 0xbc13c2ff, 0x59e6, 0x4262, \
++		0xa3, 0x52, 0xb2, 0x75, 0xfd, 0x6f, 0x71, 0x72)
+ 
+ /* Special ChromiumOS things */
+ #define PARTITION_CROS_KERNEL \
+diff --git a/lib/uuid.c b/lib/uuid.c
+index 0a166320e077..cf5f8be48a32 100644
+--- a/lib/uuid.c
++++ b/lib/uuid.c
+@@ -86,6 +86,7 @@ static const struct {
+ 	{"swap",	NULL,	PARTITION_LINUX_SWAP_GUID},
+ 	{"lvm",		NULL,	PARTITION_LINUX_LVM_GUID},
+ 	{"u-boot-env",	NULL,	PARTITION_U_BOOT_ENVIRONMENT},
++	{"xbootldr",	NULL,	PARTITION_XBOOTLDR},
+ 	{"cros-kern",	NULL,	PARTITION_CROS_KERNEL},
+ 	{"cros-root",	NULL,	PARTITION_CROS_ROOT},
+ 	{"cros-fw",	NULL,	PARTITION_CROS_FIRMWARE},
 -- 
 2.43.0
 
-base-commit: c704af3c8b0f37929bce8c2a4bba27d6e89919c7
-branch: fwupdate-ab
