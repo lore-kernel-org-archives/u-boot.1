@@ -4,67 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF66E10BA425
-	for <u-boot@archiver.kernel.org>; Sat, 28 Mar 2026 07:06:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2E4010BA425
+	for <u-boot@archiver.kernel.org>; Sat, 28 Mar 2026 07:12:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DED8084010;
-	Sat, 28 Mar 2026 08:05:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 3982083D17;
+	Sat, 28 Mar 2026 08:12:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="J6iOihPn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LJ+0/YHu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FCAB83DA7; Sat, 28 Mar 2026 07:43:58 +0100 (CET)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2669D83D71; Sat, 28 Mar 2026 08:12:26 +0100 (CET)
+Received: from mail-yx1-xb12e.google.com (mail-yx1-xb12e.google.com
+ [IPv6:2607:f8b0:4864:20::b12e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F1078394E
- for <u-boot@lists.denx.de>; Sat, 28 Mar 2026 07:43:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8F11F83C14
+ for <u-boot@lists.denx.de>; Sat, 28 Mar 2026 08:12:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marex@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 35D981125B4; Sat, 28 Mar 2026 07:43:53 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1774680234;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=rw39yihxKLlu8Uf6ArwdqVOcXmmYYeUxMsEElf2kZpI=;
- b=J6iOihPnSLXLCUFPqYUsDUo4c82bNPDxffEmLURc3e02KrAcvwFFYjUAsnbAw8CcNul8Fg
- rygnQy+yxieJz+Oc3ez+h/ag+ttbHw21vinFB+lpK6p18CJCKdE5hv/cbE0HuQeZRbliJ2
- OJ5a4JmN82I+7vho+/dYiV47frE8oUk1zlI2ebqnQcqB5cLwPqPO8ornNdywq3zvezRtlI
- oMGQzl1l904FPzyS3SJwORK7zJs/NumOnvfnOelorbpgT9GKLY3Y3pYkApA0Q64oKmm/JA
- XshdyGm2XjNmvKK0A6OfThpjbjeCLg8jjJMjebzX6s0pwGO+gdJPRj3hdS1fag==
-Message-ID: <03fd5ca1-6581-4c50-8d50-2cfae6d98683@nabladev.com>
-Date: Sat, 28 Mar 2026 00:11:54 +0100
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12e.google.com with SMTP id
+ 956f58d0204a3-6500040ef83so1025885d50.2
+ for <u-boot@lists.denx.de>; Sat, 28 Mar 2026 00:12:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774681942; cv=none;
+ d=google.com; s=arc-20240605;
+ b=KI3XdwB8lKmYbRsmOw3I58UpUjrE81jmnQo7qEZwYe/d3quWF0RMRVkJd5zZKBMCDj
+ LreAr5AwVpBXNTSWxTOxD+XeZidlka87h1cIfH4k7ys38nNejmTL/C/iDbsK3NCRZhxk
+ q5yNVBo72nC5UhKn6R5sH9UFlxW8oR21HQiFLyQTvofh0YI/4mEBmfQaDnlfy7ZCNjRE
+ NaUwSFtP1P0zctxYI4m5lFkirNfPJ44H/kLbQby6f03Nno1EevW0C2nMo08EaLuDrJqH
+ kMj8lKJkGbT+HUa1PMQqCW4Am1ASi5becR0rpPiT/xXEh90YxDeBmYMM0BYG6ALFWbxf
+ X4tA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=ZnYyIYPdM4kSG1xNy++eCDM2yUVvQWKaau9bRKSNblw=;
+ fh=a6CtZosfjk3VNVaCJ3HvSWRqpwABV+7lvARsKon65Yk=;
+ b=Rp2KtUc6B5JeCf0zq55LI4+Eg/Kj7rw9mnzAC10Mjf9zRgI6ZYbk4gqakj7XEK0ZQS
+ SacJPptbF0xkznJwJZnohq4e0uEwWnbtXlxWaL4oosnt9t6hCMYSkhjzDHYpWHup3bqc
+ 7rmzUJ6qMLrJ4bx8goAejT4mVNAyV1FCK6ehd5u74e33pvqm70CV1uQ+BsHEgJPLYiY5
+ 98peK7RtSNJto93JH+mmaZhtVIv22BLRMV8vvXC9M5pHIWDCx0t94+aAWV8I4WlDiVp6
+ 6DtR74Tm/M7ax5KdaiAfFYXIAwSsbIdQXUenXo33PZsNWAztX0D3PDX4mwpFEBDI5mUs
+ EmqA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1774681942; x=1775286742; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZnYyIYPdM4kSG1xNy++eCDM2yUVvQWKaau9bRKSNblw=;
+ b=LJ+0/YHuG8sY/QH3wFZ5p4grn6RyCb3TXVXxdXd39UXjq2OoP5hE09C4X865d2P/tL
+ e8hJqq/ZFYCbbgrJNHOvW7hg+ICmi7g2bUUimKLKyvziA1yFf6h4HjZtqHVg1pEbiFFc
+ gisKWg6/12xPHE33saFU5Z9Y3g71aHqv6qQNJwaK9r4NYDcvedGFFT2Z+4BgTHespJg9
+ feBz6XTx8D2fdNG9pUZEaBv2dftQ9x5DsrcNllH9tJofEWHax662+KYzxeo4S7I5QbyO
+ 5X76RKr4RaXcuqkZGkV0M7VM1Clrb70rlt2xF0SR45Gxvt02+txEo5lkrr55M+KsuYgt
+ h2Tw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774681942; x=1775286742;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZnYyIYPdM4kSG1xNy++eCDM2yUVvQWKaau9bRKSNblw=;
+ b=UHmbwerXU4GX+Qa0CvwTzAyDnHyLP+vR8BgTQDmJQNHLBjfTVXqXSGWyMkL6JlVlcD
+ wf6/y2De2ojJzcJ8KZIywcCM3MIxsXv1garWpDoMqjmPUbZpeAW/XIZSclRxkeu9/Gk8
+ T0s3NZz+1gVAIydHXCFbyA72Ax/KRCI1U4DoEAOZP8HBPuZuTLYn+XXFKIPyU7B0zG6/
+ Rrnr9G35JOa9rSipcmmkvX78ndPdUkIzcwr0ug8CRc7hnD2Mee/7fML1eT8jx6R8MLcq
+ pmJRs2RBJKumLA4FgAahpXBE4BIAIp0zxg3cz9Jrh2iyeyRIidpvyp2N6fPmvCbEDjFv
+ v4ng==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXcUPm3ayl2plUKhP0+xBfkrvPZZr+E6wcmqyyyuRaTeO3Rqohl4q3FVQM9Ej4QHzX5JaGnxtI=@lists.denx.de
+X-Gm-Message-State: AOJu0YzNSpM1fo5G5TkH5ro4SYCr/KByj5TDe/myvZ/Xm+TBzQHUTLnH
+ iJlpmNThjSezdY2zCciwZTnD44Uw56Yaj1G2TjsfNHUpIwoKxbPuYzOnYnMyU6o2Dcgh7oxEDQu
+ 4ZFVySZmvQjR8N7l3Ast7jnQKRFJoNEUieQKTIfUxMw==
+X-Gm-Gg: ATEYQzy+GUmj+OFlbM8ycd/y552GhUoiWzXxObkr7WWaIhtZAmT6xbV9H3G/HCk2GWX
+ lyn5Eaufbd8onVRhskjlh0WWGDGXKgjIsqgm+f/olhYjy0TTL5We8XGi1/95B9X64mCf48mLUf1
+ +hgFuYKKXKNG/LEzLoJZjCEfaxWbNnoe17j3JwE+Z+W40ROGjVdQ2J517OG9ndg9KINgSVDGXCl
+ Cq28XKDb84u0ghDLmT1dU7UGq2znmtChUJUTRPPWv5jdaN9Cel9kwrT0pK7KaEtbe4Ug8/+HvHy
+ TEH16TX4xE6z+zfaP/qio16JddSg11pQwWjjIXPuliWhZcCxrFI/b0uukWWAN9H+07Qrq5k+6rL
+ FV+kL5dlokNhv4IS99BZ1Ig0NTCD4Qp6GF2mZBL1KAq5zfZ1oqinLCwiw72upP/n5NErRxshInp
+ FUPfeelv4kOCwiGaYcHTA0RhrsHLAUbYwjISmuKzInwZ2oMKB1Ap8mLxd5VkVT9DJk/3eF70PTO
+ QrcPDzJsqRm25fRd+mkXiIEb5LuJwsZjFGbTgteDcZQVdN+RDRIQ3JzQC5fKn6l9m+MfPxKtJyG
+ TCTBZMxCyuiVtna0Zbn7FyzbzoZnheo/clMl0BswaII=
+X-Received: by 2002:a53:d017:0:b0:649:97d9:cf1f with SMTP id
+ 956f58d0204a3-64ff73ad134mr5052701d50.44.1774681942319; Sat, 28 Mar 2026
+ 00:12:22 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] board: dhelectronics: imx: Use second Ethernet MAC also
- from fuse
-To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan
- <peng.fan@nxp.com>, Sam Protsenko <semen.protsenko@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
-References: <20260320102918.4011-1-cniedermaier@dh-electronics.com>
- <382f338c-020f-482d-80b8-5a39ad724843@nabladev.com>
- <b443e161b5db4abab8d8889135a345fa@dh-electronics.com>
- <941708e9-a2e6-4f8d-a15d-d1da8a91ae91@nabladev.com>
- <2eebac26eff54f9da7e2d01dbca71569@dh-electronics.com>
- <a40a11f9-f3f5-4eee-ab6e-c2597808c471@nabladev.com>
- <a7ebfe912f084176b79c54a2e9e3d8e3@dh-electronics.com>
- <2dca42bf-a247-4190-9439-14e14f65aec3@nabladev.com>
- <3a8724ffe4fa44808ac8a278e4a702f7@dh-electronics.com>
-Content-Language: en-US
-From: Marek Vasut <marex@nabladev.com>
-In-Reply-To: <3a8724ffe4fa44808ac8a278e4a702f7@dh-electronics.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
-X-Mailman-Approved-At: Sat, 28 Mar 2026 08:05:42 +0100
+References: <20260326115111.1631261-1-ilias.apalodimas@linaro.org>
+ <20260326115111.1631261-4-ilias.apalodimas@linaro.org>
+ <6f6f1fc8-56c5-405b-915f-269d789b43e3@mailbox.org>
+ <CAC_iWjK5-5Nn8+-OOQWuPSDwd6ckHyPY2Na-7eGO2tc_1XsLxg@mail.gmail.com>
+ <edbe864b-2c76-4ac2-8a1e-69f527f1316e@mailbox.org>
+In-Reply-To: <edbe864b-2c76-4ac2-8a1e-69f527f1316e@mailbox.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Sat, 28 Mar 2026 09:11:46 +0200
+X-Gm-Features: AQROBzAfeOOq02XxBbNh22okBP7muwr1gCLReItuxNRYmzcieXUrz8lq4OkCyTo
+Message-ID: <CAC_iWjKGzbbf1du3K9QuGYjkDrscAUKxMsOTcLvC1A4L7UTvxQ@mail.gmail.com>
+Subject: Re: [PATCH v1 3/3] common: Allow relocations on the top of the last
+ bank
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: marek.vasut+renesas@mailbox.org, trini@konsulko.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,94 +122,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/27/26 11:02 PM, Christoph Niedermaier wrote:
-> From: Marek Vasut <marex@nabladev.com>
-> Sent: Monday, March 23, 2026 6:21 PM
->> On 3/23/26 5:49 PM, Christoph Niedermaier wrote:
->>
->> [...]
->>
->>>> As for the rest, it really boils down to the ordering of fallbacks, it
->>>> is either:
->>>>
->>>> A)
->>>> fuse1
->>>> eeprom1
->>>> fuse0+1
->>>> eeprom0+1
->>>>
->>>> or
->>>>
->>>> B)
->>>> fuse1
->>>> fuse0+1
->>>> eeprom1
->>>> eeprom0+1
->>>>
->>>> The following ordering, which is the ordering introduced by this patch,
->>>> is confusing:
->>>>
->>>> fuse1
->>>> eeprom1
->>>> eeprom0+1
->>>> fuse0+1
->>>>
->>>> So please pick either A) or B) above. I do not see any particular
->>>> advantage of either of the other, except maybe B) improves boot time in
->>>> case both fuse blocks are blown, because it avoids the EEPROM I2C access.
->>>
->>> The prevention of I2C access is only a one time effect, because then the
->>> MAC addresses will provided by the environment.
->>
->> Which increases the system boot time, which is undesired.
-> 
-> If a customer sequentially fuse only the first MAC address from a MAC address
-> pool. Then the second MAC address of the SoM is the same MAC address as the MAC
-> address from the next SoM's first MAC address. That is very bad. With the A)
-> it can be avoided, because the second MAC address then is taken from the EEPROM.
+On Sat, 28 Mar 2026 at 08:44, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>
+> On 3/27/26 1:23 PM, Ilias Apalodimas wrote:
+>
+> Hello Ilias,
+>
+> >>> Add a Kconfig option and allow the common code to relocate U-Boot
+> >>> to the top of the last discovered bank.
+> >>
+> >> The commit message should really clarify the current pitfalls of
+> >> enabling this symbol, including the part where ethernet transfers above
+> >> 4 GiB used to work because of the packet buffer built into U-Boot, and
+> >> they will break because the buffer is now relocated above 4 GiB too.
+> >
+> > Shall I just add your note from the RFC with a few adjustments? I.e
+> >
+> > NOTE: This currently might break platforms. If the ethernet
+> >        controller cannot DMA above 4 GiB, and once U-Boot does
+> >        get relocated above 4 GiB, the packet buffer which is built
+> >        into the U-Boot binary is also relocated above 4 GiB.
+>
+> This patch should not be applied in the first place, this DOES break
+> things. I think when this patch is safe to be applied, the note will not
+> be needed.
 
-This edge case can be fixed on first boot in a boot script. Read out the 
-fuse using "setexpr var *addr", detect whether the fuse is empty using 
-"if test ...", and if it empty, then populate its content with EEPROM 
-content. This saves you one extra I2C operation on every boot afterward.
+The patch obviously will not get applied. I was referring to the note
+in the commit message only.
+I'll just add it with slight changes in the commit
 
-> If I had to choose between reducing the boot time once and preventing potential
-> duplicate MAC addresses, I would say that preventing potential duplicate MAC
-> addresses is the better option. Furthermore, the issue of duplicate MAC addresses
-> in the system is not a hypothetical scenario, it has already occurred in practice.
-> 
->>> If I remove the eeprom0+1, because it was for prototype configurations,
->>> my preferred order would be:
->>>
->>> fuse1
->>> eeprom1
->>> fuse0+1
->> eeprom0 can not be removed, that breaks backward compatibility. And the
->> ordering of fuse-eeprom-fuse is confusing and has the boot time increase
->> downside of A).
-> 
-> For which SoM should backward compatibility be maintained here. There is
-> no SoM at the customer's site where it is required. For rev.200 the EEPROM
-> ID page is used, for rev.100 only some internal SoM prototypes with two
-> Ethernet interfaces had only the first EEPROM populated. It's not worth
-> keeping that code.
+>
+> [...]
+> >>> +++ b/common/board_f.c
+> >>> @@ -321,6 +321,8 @@ __weak phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+> >>>                 */
+> >>>                return 0;
+> >>>    #endif
+> >>> +     if (IS_ENABLED(CONFIG_RELOCATE_LAST_BANK))
+> >>> +             fdtdec_setup_mem_ram_top();
+> >> Return value may need checking ?
+> >
+> > sure, but should we panic ? Or print a message and silently keep the
+> > old reloc address?
+> Print a message and relocate below 4 GiB , for maximum compatibility maybe ?
 
-So yes, eeprom0 can not be removed, because it also contains the WLP.
+Yea that's what I currently have on my local branch
 
->> I would say B) is the way to go, it should also cover your requirements,
->> keeps the boot time low if both fuse banks are fused (which can be fixed
->> even on existing hardware, simply read out eeprom content and fuse it
->> into fuse bank 1), and it retains the priority ordering (env, fuse,
->> eeprom) without mixing it up.
-> 
-> The case that only the first MAC address is fused and not the second one is
-> a special case, but if this happens, with the order A) above you can prevent
-> duplicate MAC addresses from appearing in the system. In addition, if you want
-> to fix it, it's dangerous to fuse the second MAC address at the customer's
-> location, because if something goes wrong during the fusing, the device must
-> be replaced on-site. This can also be avoided with order A).
-If this is a special case, then please convert it into a common case, so 
-the generic code upstream can be kept that, generic.
-
-If this special case can not be converted to common case, then add local 
-patch to handle that specific device.
+Cheers
+/Ilias
