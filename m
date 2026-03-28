@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2839010BA424
-	for <u-boot@archiver.kernel.org>; Sat, 28 Mar 2026 06:44:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 483D510BA424
+	for <u-boot@archiver.kernel.org>; Sat, 28 Mar 2026 07:05:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DA4A83FA3;
-	Sat, 28 Mar 2026 07:44:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id ADF9C83C14;
+	Sat, 28 Mar 2026 08:05:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="fjRzWW1X";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="KNBUR8lJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ppeCKt2a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 827CA83FD9; Sat, 28 Mar 2026 07:44:14 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5C79583C14; Sat, 28 Mar 2026 06:16:07 +0100 (CET)
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
+ [IPv6:2607:f8b0:4864:20::52f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4897583F14
- for <u-boot@lists.denx.de>; Sat, 28 Mar 2026 07:44:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 886758394E
+ for <u-boot@lists.denx.de>; Sat, 28 Mar 2026 06:16:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4fjSfH74CJz9tC6;
- Sat, 28 Mar 2026 07:44:07 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1774680248;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=dX60bXGN/yL5iTb298pEnsUYHhW3NeCgQrDccMJsg3w=;
- b=fjRzWW1XytaSqMPkFPhbB012Py97NrIZGx5VE3GXE+wESHw3lx7drKxyv63OkeTLTaFel/
- g9Rh6ingdFoaykiizOe4qhicLWVt0HthDLOtSavtryaXC3B2VVyxc3Gw8vA9fj697lqxZZ
- m0fGuoj69WfEySdjMMUCIsVONHxcx0dlnJozsN5aVoVDA3jXQWK66pqIn7EUUyjdBVLdLd
- KypPTxcMV4eGewXfw5NvE06Ydb/WVn92NqkKhj+6T5KrKO02nKEhVJ78trOV3wK2dWaBQk
- L2F3lSfFYlQ0bFCrjRGTUIwNd07EMFEJf0gHe0FTy9CgajdguSw65j+K2IvsTA==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=KNBUR8lJ;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <5d08b02a-9d74-4988-b308-c8d217dad2fa@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1774680246;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=dX60bXGN/yL5iTb298pEnsUYHhW3NeCgQrDccMJsg3w=;
- b=KNBUR8lJ1MNiunnHVIXucdLheVJNxqcWbNI5puX2m/j+6MEgK8i2lttZa4S37VQ4s0e/6A
- KyIgmDKLweYZdKQcg/BhQJsz8zSvQSo5e0P7p4Hs2fR5l9Ap9Y3PdqtCez/3TDk7/U2+aZ
- a2tg8IIF5Eeny4MfLF9usjG0/XKXkxQMhNAdxZWMfiKdELMHs/jdWKiCmbG0O/Q7FnsBTR
- CBve9kiOvFqW5VJYi0sqCMTCJyxoSFZavXnqsWUgAvNz7N4Fwk60z8nIRP/5J90ORFMPZN
- 3RxnWWoYIH0zGa8YyrcMUQIjNB6bHUQbkiAed5shzgVqAm/jc6J9aL+Iz2lT9Q==
-Date: Sat, 28 Mar 2026 01:07:29 +0100
+ spf=pass smtp.mailfrom=ngotra27101996@gmail.com
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-c6e2355739dso1179699a12.2
+ for <u-boot@lists.denx.de>; Fri, 27 Mar 2026 22:16:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1774674963; x=1775279763; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=V+UPu5cVM/AXy3VMCQunHsvKjHNgczRjnCcuiElLfl4=;
+ b=ppeCKt2aVx3yiUgp4rG+RKiR0vP5RIlNmE6Yf5J8AGlB69sK03ixPzH12ElGP97CPH
+ 17YvxCHWqtl4zTyTC7cZ6cJH00zq067MpkdzvCqAZuR5lMpTC/ttjKxwg8gQiOpgCKut
+ ZTDe4WrZCdXOGFp3TNfwpx+agQtrYI65zzLuXff+iTfv1NwOKLru2V7MiA8coTOLNK8g
+ hIiN0RNXiy3/KxDtNHjIpe5A0fBitecY2eeF/w8k2Kj98B4ZxnlHTrSXuRCcx/BPcIEv
+ UKhi5510HW1iXB1ZHvMCwcsyPBySz/WCOUefawW4CdUPgbUSpKYBURnA3OJZYeJ8GQjX
+ DfaA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774674963; x=1775279763;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=V+UPu5cVM/AXy3VMCQunHsvKjHNgczRjnCcuiElLfl4=;
+ b=Caqvg6NyjlikuhfaC2rGAmI2Hon7VW4sg6kfn+AvsLb2S3YP7hkHOPs1f5WkaHpYr8
+ u/IQgzILNEtqtDh/0ZBQUD9ewJvvCLlviDp46b21dvhmpRtk9g4uhnJWN4u4txWImbgd
+ wwwVkRLcJL9tMtrtkej0XYoX53LRu/SoLWnsHRLl0G+7PQgwqLqIdKdCMb3PwCug8c9h
+ R5MU0e7nqEEUtqs1S4XusFfbl2FqqgdYD/v94QXoQrTITQJUjFjUiPYAhYnzP0rse2C3
+ QQG/plceIWoTKZr9L3y/pzaqjf/EomrOUcRPE0ild4x1EyxC7UEqCTeMKGRA+NYPdsQC
+ uw1A==
+X-Gm-Message-State: AOJu0Yyg2ZNXQb1AY2z/k92Ey1+D1Nsog2+lVXPEHbluhOfsa/6/e4KX
+ +Vl9uIE2qervSNhiLYTPl4bJAbQirOaFPzt/HxK6lvrBC/bOerbxFTLeEehYQK8I
+X-Gm-Gg: ATEYQzxiek3p4Vzyu/co4u6dzcxXQs6biP7KtowrcGwIUY7Ro4LexC/8nZ/9IN5dKl7
+ +x4e01yGqBEoyM3VhhC8Wf3m+soymqu5eD4/kylXfk9jvLNNQ/YPV48Okigh56OiFlNQVzbJL0R
+ W//1r0QDHbuT3q3tsfhNuOb3vj+yGaULoiRzoOfdpsMvdu2oiex//UG6aQnrFnsf1VdCpD2R5nb
+ RbOLOIeW+5KRmBprqUqwFvvriadM8XwXIxiNlRXrGyfJvnZ6wBxy30UKjVuluq8b+z8O4PPlRmV
+ FikenBlh99ht0zdiAC0piJYMBKcnrNKigJGbIQ9PW62X/MsbQfg+ubHgT60wNr4r4tq1RPl/hKp
+ OUWfQOQoyxAZBwXXITaotJzvEBhHdjxbbdJa7fzwtnnGBOt6mAVTObSlIteU/wVa94/UI9o1e2J
+ 32tsYqTd/FRY4/Dh3XEgJpJUZyunctmPC3Dd5owqOR56dQ0Fr3/HepEoo99/pKiKPA8lKMvYo=
+X-Received: by 2002:a05:6a20:72a3:b0:39c:12c5:c6f5 with SMTP id
+ adf61e73a8af0-39c87915721mr5811663637.18.1774674962564; 
+ Fri, 27 Mar 2026 22:16:02 -0700 (PDT)
+Received: from localhost.localdomain ([118.69.37.28])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-c76916cd89esm716033a12.8.2026.03.27.22.16.00
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Fri, 27 Mar 2026 22:16:02 -0700 (PDT)
+From: Ngo Luong Thanh Tra <ngotra27101996@gmail.com>
+X-Google-Original-From: Ngo Luong Thanh Tra <S4210155@student.rmit.edu.au>
+To: u-boot@lists.denx.de
+Cc: Ngo Luong Thanh Tra <S4210155@student.rmit.edu.au>,
+ Stefan Bosch <stefan_b@posteo.net>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] board: nanopi2: fix bd_update_env() cmdline buffer overflow
+Date: Sat, 28 Mar 2026 12:15:48 +0700
+Message-ID: <20260328051552.29343-1-S4210155@student.rmit.edu.au>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Subject: Re: [PATCH] arm: relocate: Introduce data-only relocation mode
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Casey Connolly <casey.connolly@linaro.org>,
- Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Jesse Taube <mr.bossman075@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Udit Kumar <u-kumar1@ti.com>
-References: <20260315235510.304677-1-marek.vasut+renesas@mailbox.org>
- <CAC_iWjKpGKM5ATDZkGLPKTNj2DycxNTjhag_ez7ziOMSQRZR=w@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <CAC_iWjKpGKM5ATDZkGLPKTNj2DycxNTjhag_ez7ziOMSQRZR=w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: jbmxbj6xg5puhjtekfsjffjsk8164qbt
-X-MBO-RS-ID: 41a3a1f901515fe8b1f
-X-Rspamd-Queue-Id: 4fjSfH74CJz9tC6
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 28 Mar 2026 08:05:42 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,84 +97,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/18/26 7:59 AM, Ilias Apalodimas wrote:
+Replace unbounded strcpy()/sprintf() calls with snprintf() and
+check the return value against remaining buffer capacity at each
+append step. The previous size guard did not account for
+subsequent dpi suffix, remaining bootargs tail, and bootdev
+token appends, allowing overflow when those later writes exceed
+the remaining space.
 
-Hello Ilias,
+Fixes: d1611086e005 ("arm: add support for SoC s5p4418 (cpu) / nanopi2 board")
+To: u-boot@lists.denx.de
 
->> Introduce new mode of relocation which relocates only data, not code.
->> This is mainly meant to relocate data to read-write portion of the RAM,
->> while the code remains in read-only portion of the RAM from which it is
->> allowed to execute. This split configuration is present on various secure
->> cores.
->>
->> The result of the relocation is U-Boot running at its original address,
->> data relocated to the end of DRAM, but with added read-write area offset.
->> The U-Boot binary area is not reserved from the end of the DRAM in this
->> relocation mode, because U-Boot itself is not relocated.
-> 
-> We should mention at some point in the commit message that this is for v7 only.
+Signed-off-by: Ngo Luong Thanh Tra <S4210155@student.rmit.edu.au>
+---
 
-I actually do use this on V8M .
+ board/friendlyarm/nanopi2/board.c | 49 ++++++++++++++++++++-----------
+ 1 file changed, 32 insertions(+), 17 deletions(-)
 
-> [...]
-> 
->> +config SKIP_RELOCATE_CODE
->> +       bool "Skips relocation of U-Boot code to end of RAM"
->> +       help
->> +         Skips relocation of U-Boot code to the end of RAM, but still does
->> +         relocate data to the end of RAM. This is mainly meant to relocate
->> +         data to read-write portion of the RAM, while the code remains in
->> +         read-only portion of the RAM from which it is allowed to execute.
->> +         This split configuration is present on various secure cores.
->> +
->> +config SKIP_RELOCATE_CODE_DATA_OFFSET
->> +       hex "Offset of read-write data memory from read-only text memory"
->> +       default 0x0
->> +       depends on SKIP_RELOCATE_CODE
->> +       help
->> +         Offset of the read-write memory which contains data, from read-only
->> +         memory which contains executable text.
->> +
-> 
-> Similar concerns with Tom for limiting the Kconfig selection. Do we
-> need a depends on the armv7 arch for now ?
+diff --git a/board/friendlyarm/nanopi2/board.c b/board/friendlyarm/nanopi2/board.c
+index 4dff32e10d6..eb10cd5143d 100644
+--- a/board/friendlyarm/nanopi2/board.c
++++ b/board/friendlyarm/nanopi2/board.c
+@@ -328,6 +328,7 @@ static void bd_update_env(void)
+ #define CMDLINE_LCD		" lcd="
+ 	char cmdline[CONFIG_SYS_CBSIZE];
+ 	int n = 1;
++	int ret;
+ 
+ 	if (rootdev != CONFIG_ROOT_DEV && !env_get("firstboot")) {
+ 		env_set_ulong("rootdev", rootdev);
+@@ -347,49 +348,63 @@ static void bd_update_env(void)
+ 	else
+ 		cmdline[0] = '\0';
+ 
+-	if ((n + strlen(name) + sizeof(CMDLINE_LCD)) > sizeof(cmdline)) {
+-		printf("Error: `bootargs' is too large (%d)\n", n);
+-		goto __exit;
+-	}
+-
+ 	if (bootargs) {
+ 		p = strstr(bootargs, CMDLINE_LCD);
+ 		if (p) {
+ 			n = (p - bootargs);
+ 			p += strlen(CMDLINE_LCD);
+ 		}
+-		strncpy(cmdline, bootargs, n);
++		ret = snprintf(cmdline, sizeof(cmdline), "%.*s", n, bootargs);
++		if (ret < 0 || ret >= (int)sizeof(cmdline))
++			goto __exit;
+ 	}
+ 
+ 	/* add `lcd=NAME,NUMdpi' */
+-	strncpy(cmdline + n, CMDLINE_LCD, strlen(CMDLINE_LCD));
+-	n += strlen(CMDLINE_LCD);
++	ret = snprintf(cmdline + n, sizeof(cmdline) - n, "%s", CMDLINE_LCD);
++	if (ret < 0 || ret >= (int)(sizeof(cmdline) - n))
++		goto __exit;
++	n += ret;
+ 
+-	strcpy(cmdline + n, name);
+-	n += strlen(name);
++	ret = snprintf(cmdline + n, sizeof(cmdline) - n, "%s", name);
++	if (ret < 0 || ret >= (int)(sizeof(cmdline) - n))
++		goto __exit;
++	n += ret;
+ 
+ 	if (lcddpi) {
+-		n += sprintf(cmdline + n, ",%sdpi", lcddpi);
++		ret = snprintf(cmdline + n, sizeof(cmdline) - n, ",%sdpi", lcddpi);
++		if (ret < 0 || ret >= (int)(sizeof(cmdline) - n))
++			goto __exit;
++		n += ret;
+ 	} else {
+ 		int dpi = bd_get_lcd_density();
+ 
+-		if (dpi > 0 && dpi < 600)
+-			n += sprintf(cmdline + n, ",%ddpi", dpi);
++		if (dpi > 0 && dpi < 600) {
++			ret = snprintf(cmdline + n, sizeof(cmdline) - n, ",%ddpi", dpi);
++			if (ret < 0 || ret >= (int)(sizeof(cmdline) - n))
++				goto __exit;
++			n += ret;
++		}
+ 	}
+ 
+ 	/* copy remaining of bootargs */
+ 	if (p) {
+ 		p = strstr(p, " ");
+ 		if (p) {
+-			strcpy(cmdline + n, p);
+-			n += strlen(p);
++			ret = snprintf(cmdline + n, sizeof(cmdline) - n, "%s", p);
++			if (ret < 0 || ret >= (int)(sizeof(cmdline) - n))
++				goto __exit;
++			n += ret;
+ 		}
+ 	}
+ 
+ 	/* append `bootdev=2' */
+ #define CMDLINE_BDEV	" bootdev="
+-	if (rootdev > 0 && !strstr(cmdline, CMDLINE_BDEV))
+-		n += sprintf(cmdline + n, "%s2", CMDLINE_BDEV);
++	if (rootdev > 0 && !strstr(cmdline, CMDLINE_BDEV)) {
++		ret = snprintf(cmdline + n, sizeof(cmdline) - n, "%s2", CMDLINE_BDEV);
++		if (ret < 0 || ret >= (int)(sizeof(cmdline) - n))
++			goto __exit;
++		n += ret;
++	}
+ 
+ 	/* finally, let's update uboot env & save it */
+ 	if (bootargs && strncmp(cmdline, bootargs, sizeof(cmdline))) {
+-- 
+2.53.0
 
-No, because I use it on V8M.
-
->> @@ -126,3 +145,9 @@ _rel_dyn_start_ofs:
->>          .word   __rel_dyn_start - relocate_code
->>   _rel_dyn_end_ofs:
->>          .word   __rel_dyn_end - relocate_code
->> +#ifdef CONFIG_SKIP_RELOCATE_CODE
->> +_data_start_ofs:
->> +       .word   __data_start - relocate_code
->> +_data_end_ofs:
->> +       .word   __data_end - relocate_code
->> +#endif
-> 
-> Where are these defined? __data_[start|end] only seem to exist for x86
-> and microblaze
-
-Currently, I have to use own linker script, the data section looks like 
-this:
-
-"
-	. = ALIGN(4);
-	.data : {
-		__data_start = .;
-		*(.data*)
-		__data_end = .;
-	}
-"
-
-Any system which will use this will have to patch the start/end in their 
-data section too, or ideally if they use generic linker script, patch 
-that generic linker script to emit those symbols. Maybe we should patch 
-at least arch/arm/cpu/u-boot.lds ?
-
-> [...]
-> 
-> Overall this seems to be needed, I am a little concerned about test
-> coverage, since this will be fragile when changing asm and/or linker
-> scripts. But OTOH I dont have any bright ideas on how to test it
-Maybe QEMU can be extended with Cortex-M support ?
+base-commit: c704af3c8b0f37929bce8c2a4bba27d6e89919c7
+branch: fix/nanopi2-cmdline-overflow
