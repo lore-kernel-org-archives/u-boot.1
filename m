@@ -4,121 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 315BCF3D5E5
-	for <u-boot@archiver.kernel.org>; Sun, 29 Mar 2026 05:49:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FA23F3D600
+	for <u-boot@archiver.kernel.org>; Sun, 29 Mar 2026 12:09:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85AC583B8F;
-	Sun, 29 Mar 2026 07:49:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 3D2CC83D71;
+	Sun, 29 Mar 2026 14:09:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="iYbHV2qN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Kzt0gRid";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 514D683C14; Sun, 29 Mar 2026 07:49:17 +0200 (CEST)
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4358E83EB3; Sun, 29 Mar 2026 14:09:35 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 105A883B48
- for <u-boot@lists.denx.de>; Sun, 29 Mar 2026 07:49:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A5A1F83B8F
+ for <u-boot@lists.denx.de>; Sun, 29 Mar 2026 14:09:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ULQMgO3otOSRc8TD8q6ktrqg242P9PDw1Z+jsW3Uf/WPaouNEnLUXCPH3juGyFrQuMI6TJtJODjTY99SXHl1GMu0chbP8Xk0a7YuYBsk+Sy/6Y387+Ao3/PQ0nRwOTFsY6jCJpQ37p+pMRV+07lr5+BdoCEH23tmAdZKluGOqRH/9AfmsungGvPAU66U7vpOEU0eVFqb4Q/YXNsLGKUvbxiPY5XsWEgfgBsEpxmNMWckYXKlJ8ua63RPNKnu6VMJPwHF40dXq6jStJntQcHvCxSVcOucuWIGMdfxv6VEWWQOtnwwiYmGFkPTxIV+02C8vv4ymvKdCX77BoeYKunqmQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9mZFwLtm/NFeXex3Pkp0KxobjUr/qPI8kOb+gDScLE0=;
- b=edvVaxEMmetqbRL8jiv9cLVGRS+EoIpYYbYVKN3sXRHUydkkZ27wmQuv1mc4sPGxnNgrle8RjznB1mLSIlD4IbrPoQA5wRV86FLc7KqtDATI/6pNk8yA5DdGmnN6icPQhUBcdb/BqSaPvOOd8NG02g4PlTGaA3UZAjCzRCfVVBCoDpJZ+uHEkZWxj8WkPjTIilKncm8RqgUbANj4XQr/iUZY1uvRR5Y8bp6kMSPqnnmF0hmmwF292BFoHlSEFhL8gybu5TLFZtQ+mFAg8z+FOzbEGruJbgxbutJvGL5BtmQxFxHAvq0H+kE0OqDb+gXiXi4YxEkFot/T8udipIsrzg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9mZFwLtm/NFeXex3Pkp0KxobjUr/qPI8kOb+gDScLE0=;
- b=iYbHV2qN6QDl7ss71vB/KjcTVFoA6hAclfGChdRzLhL4RI06eqpjxwvnpB44GJl+ZSAlNAsPHRRjmvBMvEsHxuUgkTQvqaB5Ylg+SudbL6A5jSPQCYUqaLrk4uH4inZMawHA4YwBawD8M2FaogxnJJ1jeSa9ZnDe/+xAf92xo5o=
-Received: from BLAPR05CA0005.namprd05.prod.outlook.com (2603:10b6:208:36e::14)
- by IA3PR10MB8113.namprd10.prod.outlook.com (2603:10b6:208:50a::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.21; Sun, 29 Mar
- 2026 05:49:11 +0000
-Received: from MN1PEPF0000F0E1.namprd04.prod.outlook.com
- (2603:10b6:208:36e:cafe::ca) by BLAPR05CA0005.outlook.office365.com
- (2603:10b6:208:36e::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.28 via Frontend Transport; Sun,
- 29 Mar 2026 05:49:11 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- MN1PEPF0000F0E1.mail.protection.outlook.com (10.167.242.39) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9745.21 via Frontend Transport; Sun, 29 Mar 2026 05:49:09 +0000
-Received: from DFLE204.ent.ti.com (10.64.6.62) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sun, 29 Mar
- 2026 00:49:08 -0500
-Received: from DFLE206.ent.ti.com (10.64.6.64) by DFLE204.ent.ti.com
- (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sun, 29 Mar
- 2026 00:49:08 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE206.ent.ti.com
- (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Sun, 29 Mar 2026 00:49:08 -0500
-Received: from [10.249.134.231] ([10.249.134.231])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62T5n4w62664820;
- Sun, 29 Mar 2026 00:49:05 -0500
-Message-ID: <60358e0a-225d-4747-95c8-d060f27eb8b8@ti.com>
-Date: Sun, 29 Mar 2026 11:19:04 +0530
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-66abe08cdf5so5541963a12.0
+ for <u-boot@lists.denx.de>; Sun, 29 Mar 2026 05:09:32 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774786172; cv=none;
+ d=google.com; s=arc-20240605;
+ b=hC265HTpLFKmlj0PbMe3enL4BXlehUgldwCJbDPobDvC6bQMJpENbU0oHxGvsn27q3
+ nSwDUHB2i7FrCXtdRp5xGcFx80f9eYFVVMrGeYVWAwFMNAhLfsox8F9I0LA+7TsEbvqb
+ fQkiWdPgOY0vrAylurb7Eaq9sEhdkHVbekV6GgIEg1i+eoTnhqHup7U3mQ6ABk0dNayo
+ tDHh11+98+eNaqD8ZcvYNctExf8VtylQS97MFJIog3/drvPKMtBrHAMiWBKFQsTZMdEm
+ 5/O8i0FSAmn6HjZULv2JV+Pt5Gw0Ha9ojgShI4GxVIqyv5n2n3EagmPkky7cOPnEkA4A
+ LpCw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=cbNRqe1CMMp74DB1pDrlaKz4mKuVAGx+T61zR0QitE8=;
+ fh=BNXxXodM6x/TTtNw5dDUbIgJJ3THT0IIKdNrgcKqd+M=;
+ b=ZvITMOFKnkCdKG0gw06t7ZQR7dorxp+unBCa+EMOHXiqjRYZzWl0Kx2br+QxL6hNWJ
+ Dj82jPpzkqj2SYAfGd67Q4WDHA4ueaiGnaaUiEuHjr5fW68I+ktF73IA+zJAIEBNGLgk
+ GdakgkFL421pb2HonkXs1bpxR8npVFI55SRmJIpPsy5w4/ejNNW76ksd37JrW58R2+Pi
+ g7V8HL6RtAYIEmurrUbC65JBiPkCo1Srh8gXtY9cUXLBuvD3idKQmZ/BMTNgnTByN3m+
+ fwHCW2gNMJBYH1ppjMfICo0id3a3Npphw3X9s6lg5RwTDvILqol3GK6+N61qLustGSI2
+ oyUQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1774786172; x=1775390972; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=cbNRqe1CMMp74DB1pDrlaKz4mKuVAGx+T61zR0QitE8=;
+ b=Kzt0gRidgslhw6T40jUuTRR8CeB16LADzVYO8yBGeLOkn1vxmSxCyVLTv74QhtiB0E
+ +P1sIBdnXRLRuwHy2svBIyl1+CO1BgW6cWFCdnghObnuCvxzeFdfMgyEcFc4vCnogQ6M
+ mchNHj8GF9PQFHU/uDkvPF728xhzG0+KRFl/M=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774786172; x=1775390972;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cbNRqe1CMMp74DB1pDrlaKz4mKuVAGx+T61zR0QitE8=;
+ b=kQqsnG3KyJftNGDyBEruWQB2QywVWGw/d9ECW/ROq9J3OO6PnFLhv5C1gGeXaXlFiI
+ PJ3fIOaldbY3ZCiJc8ZsfYCZu+ZMAnEdF2g50Ei/pgfBXa6nscnPp0SxXmZk41jnbR4T
+ dVPQf1uRyaX0az0777wHqeUTJx8pRfftIL7UxDEcOglGJ1jXmLtDhvCSv5MR3mbe0tu0
+ SFACD/2LHiPUMtV9r9eNs2bQsDAQ2eKCpTirSqG8hzG3uuEdb9Hf3oqHwIKjgAiaFMxL
+ dR6gBl1kK7h2+8MowXuSjzQUpy19xDv69WSRC7nDBj9ULYss2FM1f72J1rlVtf/T+S4h
+ c92g==
+X-Gm-Message-State: AOJu0Yza0/N5TpkxxCGIzIpbXKn2IJViAxS+JJXuo/ekl/0wyROOFzpX
+ H7qkaSPS9d4RaMeavseCtYqy46tn5N4a1TRT5Mw/vZSPeEP0aig2qCcFAcZGKJFh7ER5kIOKg08
+ hGkXSmO8nQ3IHUNX0DG0qofOJ2MQCSto7Dsimal0niX+7qUX68C8=
+X-Gm-Gg: ATEYQzyJdj67u4DC9E5HesTcedWaB+D1ilLLFXD8Kqxd1QiiDCdqfjB0jQZjNpHCfWl
+ rfxqizRDj2qXqAVV/mvAaP7n0cEQkVdR7pULtII8cp5fa2yrC3YGR3bMwMnIgwUdDX+7kza+l7O
+ SrIl8yiuQijpBfHreUIXFaVtrOVOkjADfpWteylEpWjIabU5mHLO1jKG0T0GGuk5afaetjX74jk
+ jjqgPOBA7kFSZNzL2evq/aRHs3N28Ves1cwOGoyzFCQJ0mXnoRGWBaQKMEnfwwuoXYagypc5qTN
+ LtOKGg==
+X-Received: by 2002:a17:906:ef08:b0:b98:549d:8367 with SMTP id
+ a640c23a62f3a-b9b5033e19cmr569326066b.17.1774786171976; Sun, 29 Mar 2026
+ 05:09:31 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: Add ARMv8-M aarch32 support
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, <u-boot@lists.denx.de>
-CC: Casey Connolly <casey.connolly@linaro.org>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, "Jerome
- Forissier" <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>,
- <u-kumar1@ti.com>, "Raghavendra, Vignesh" <vigneshr@ti.com>, "Francis, Neha"
- <n-francis@ti.com>
-References: <20260325011414.288343-1-marek.vasut+renesas@mailbox.org>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20260325011414.288343-1-marek.vasut+renesas@mailbox.org>
+References: <20260321195238.174658-1-marex@nabladev.com>
+In-Reply-To: <20260321195238.174658-1-marex@nabladev.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 29 Mar 2026 06:09:20 -0600
+X-Gm-Features: AQROBzDHvdYXyrLiboMk3hFD2JgE1_hU6eUUivw8VtWudLSVWfYPAFEEvU-Cprc
+Message-ID: <CAFLszTjdv78kSfFwBXxGq=wxP7y-bc4O_8jDeVTtQFtLct4L4Q@mail.gmail.com>
+Subject: Re: [PATCH v3] binman: add CST backend selection for i.MX8M signing
+To: Marek Vasut <marex@nabladev.com>
+Cc: u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0E1:EE_|IA3PR10MB8113:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2870213f-626a-47df-f251-08de8d56e625
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|376014|36860700016|22082099003|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: CJ6kbTycyYQ76oaXrZDfPGXPIbKjMuYvF7LBYIiW1PxGf97kThwAipOYTln6gjlCidtWlvy1Zr48p2UIndQ46AJIuyGsS9fI8lFa9p15/HN3ROb4pT0qdYA1INocgzwoR/RLidok+JCCHXA/Uo9n1JeVxr3CVTlZywuk8RRO0PdyqcLroSvu3+ApKWg5S8pTqLmrEsU+cZs5Cv93UzFOXZRbZavEqIdnqIMu7IMTY/ExhAXJ/oPLZ5A0tCZWvzuyLWz0yFBXVCGmzl6CZCMz/zAgF5+gX1cuK6bE/RRmr7QlFxyaCtRtbVwZtfwou7aHzYZB2KUcHum6q8Ob+1l0/gtRyRBzFMAuNfqw44wqxzoeTYE/OsG6Yei8Zwxy44LqENcUCZQWwo8OV2Ny5AQY0d0hGEzlPK3Ufy7HaFOGNdOL3B/MvlKw5vZzasIVzdHU9bTCE++KGTYD97FY2toJ0VLE9vMXyqPqs3+T42Pnr16fN+TeS4pPFY70jSXNg42c7qlFuuoEFiEfzBB59n59PLA4y99H7rIvau3c+iix0iQ80uFBp4q9GlwnZ5LLq80Lt5+ExKCKKD2K+1AqsKDO5f4tr3TuHAosMkDq50VwOmNuRj1aj5Hvh/BX9zQOAr26esncr5l/3UcBWRO1s1ClNqSWMqsFE84S7hUNgQphREvsKkbQIf/EIBYMfDB2ZpN3pQafOpjYx4QG2uDppM+qA3PzMCvrCGjZdtbJA8YKaPc=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(376014)(36860700016)(22082099003)(18002099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: FykNkD5UYb+qaeQH5nGMhloYOWGzCPpY/tqrrN0n03esLNpRUpYmc7htqo9S7aK0M94CW/u2wxxq39mcG4Hm0ThQOrc6iITStjlHG75sjSUX9M2PwLteH+hUB0NHfXdzlnYJ0gugDPjFRJAblwUjCw9x7bYsceE7x+eumZjOWL6qdiTWrcBo7cHqynQ4LF4DHhhxij4uKFPgtZDy4GUezbHHJ6gz6EACv7i6GjRo1xhn1ACEUhsySTRCnj0TnullOZy0zdiTF1xYvD6fdD0c+e4PEisAcTCXvM4tCL5FhfojAVjQupJuKMsoJTT1Cbz0iOB/hSxy/a9j8StA07B7Jz8feljqEVChTAyCMm8vKasgKxj6VeCILOGrTeJ/kvP+78ysD17cxPCKuVujEKSxuJSHt4einNZ4isUTgDhqXUArufPQ0hrR+a+oY+GaSNWV
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Mar 2026 05:49:09.9947 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2870213f-626a-47df-f251-08de8d56e625
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000F0E1.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA3PR10MB8113
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,118 +108,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks Marek,
+Hi Marek,
 
-On 3/25/2026 6:43 AM, Marek Vasut wrote:
-> Add configuration for ARMv8-M aarch32 core, which are currently
-> Cortex-M23/M33 cores. These cores are treated similar to ARMv7-M
-> cores, except the code has to be compiled with matching compiler
-> -march=armv8-m.main flag . These cores have no MMU, they have MPU,
-> which is currently not configured.
-> 
-> Unlike ARMv7-M, these cores have 512 interrupt vectors. While the
-> SYS_ARM_ARCH should be set to 8, it is set to 7 because all of the
-> initialization code is built from from arch/arm/cpu/armv7m and not
-> armv8. Furthermore, CONFIG_ARM64 must be disabled, although DTs
-> for devices using these cores do come from arch/arm64/boot/dts .
-> 
-> To avoid excess duplication in Makefiles, introduce one new Kconfig
-> symbol, CPU_V78M. The CPU_V78M cover both ARMv7-M and ARMv8-M cores.
-> 
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+On Sat, 21 Mar 2026 at 13:52, Marek Vasut <marex@nabladev.com> wrote:
+>
+> Add support for setting the CST backend, both via DT property and
+> CST_BACKEND environment variable. The CST currently supports two
+> backends, 'ssl' and 'pkcs11', with 'ssl' being the default when
+> CST tool is invoked without any -b parameter. Keep 'ssl' backend
+> as the default, but explicitly pass it via the '-b' parameter,
+> unless the user selects 'pkcs11' via either method.
+>
+> Signed-off-by: Marek Vasut <marex@nabladev.com>
 > ---
-> Cc: Casey Connolly <casey.connolly@linaro.org>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Jerome Forissier <jerome.forissier@arm.com> <jerome@forissier.org>
+> Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+> Cc: Simon Glass <sjg@chromium.org>
 > Cc: Tom Rini <trini@konsulko.com>
 > Cc: u-boot@lists.denx.de
 > ---
->  Makefile                         |  8 ++++++--
->  arch/arm/Kconfig                 | 18 +++++++++++++++---
-[..]>
-> +config CPU_V8M
-> +	bool
-> +	select CPU_V78M
-> +	select SYS_CACHE_SHIFT_6
+> V2: Fill in documentation for all used DT properties
+> V3: Fill third copy of documentation into nxp_imx8mcst.py
+> ---
+>  doc/imx/habv4/guides/mx8m_spl_secure_boot.txt | 30 ++++++++++++-------
+>  tools/binman/entries.rst                      |  7 +++++
+>  tools/binman/etype/nxp_imx8mcst.py            | 19 +++++++++++-
+>  3 files changed, 44 insertions(+), 12 deletions(-)
+>
 
-referring to M55 TRM [0], (which seems to be next processor in this
-family)  page- (68-69) CCSIDR,
-LTM cache size is not default to 64.
-my suggestion will be to keep cache line same as of V7M, unless you
-think otherwise.
+This is missing coverage for line 177 of nxp_imx8mcst.py:
 
+   cst_backend = "pkcs11"
 
+Please can you use (or mock) this feature in a test.
+
+> diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+> index 1bea091344d..a3ebd397d82 100644
+> --- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+> +++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+> @@ -167,17 +167,25 @@ The nxp-imx8mcst etype is configurable using either DT properties or environment
+>  variables. The following DT properties and environment variables are supported.
+>  Note that environment variables override DT properties.
+>
+> -+--------------------+-----------+------------------------------------------------------------------+
+> -| DT property        | Variable  | Description                                                      |
+> -+====================+===========+==================================================================+
+> -| nxp,loader-address |           | SPL base address                                                 |
+> -+--------------------+-----------+------------------------------------------------------------------+
+> -| nxp,srk-table      | SRK_TABLE | full path to SRK_1_2_3_4_table.bin                               |
+> -+--------------------+-----------+------------------------------------------------------------------+
+> -| nxp,csf-crt        | CSF_KEY   | full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem |
+> -+--------------------+-----------+------------------------------------------------------------------+
+> -| nxp,img-crt        | IMG_KEY   | full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
+> -+--------------------+-----------+------------------------------------------------------------------+
+> ++--------------------+-------------+------------------------------------------------------------------+
+> +| DT property        | Variable    | Description                                                      |
+> ++====================+=============+==================================================================+
+> +| nxp,loader-address |             | SPL base address                                                 |
+> ++--------------------+-------------+------------------------------------------------------------------+
+> +| nxp,srk-table      | SRK_TABLE   | full path to SRK_1_2_3_4_table.bin                               |
+> ++--------------------+-------------+------------------------------------------------------------------+
+> +| nxp,csf-crt        | CSF_KEY     | full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem |
+> ++--------------------+-------------+------------------------------------------------------------------+
+> +| nxp,img-crt        | IMG_KEY     | full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
+> ++--------------------+-------------+------------------------------------------------------------------+
+> +| nxp,fast-auth      |             | enable fast authentication method                                |
+> ++--------------------+-------------+------------------------------------------------------------------+
+> +| nxp,srk-crt        | SRK_KEY     | full path to the SRK Key SRK1_sha256_4096_65537_v3_ca_crt.pem    |
+> ++--------------------+-------------+------------------------------------------------------------------+
+> +| nxp,unlock         |             | unlock CAAM in SPL                                               |
+> ++--------------------+-------------+------------------------------------------------------------------+
+> +| nxp,cst-backend    | CST_BACKEND | CST tool backend, default is 'ssl', or selectable 'pkcs11'       |
+> ++--------------------+-------------+------------------------------------------------------------------+
+>
+>  Environment variables can be set as follows to point the build process
+>  to external key material:
+> diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
+> index 8922d6cd070..29bc778d0e5 100644
+> --- a/tools/binman/entries.rst
+> +++ b/tools/binman/entries.rst
+> @@ -1664,6 +1664,13 @@ Entry: nxp-imx8mcst: NXP i.MX8M CST .cfg file generator and cst invoker
+>
+>  Properties / Entry arguments:
+>      - nxp,loader-address - loader address (SPL text base)
+> +    - nxp,srk-table - full path to SRK_1_2_3_4_table.bin
+> +    - nxp,csf-crt - full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem
+> +    - nxp,img-crt - full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem
+> +    - nxp,fast-auth - enable fast authentication method
+> +    - nxp,srk-crt - full path to the SRK Key SRK1_sha256_4096_65537_v3_ca_crt.pem
+> +    - nxp,unlock - unlock CAAM in SPL
+> +    - nxp,cst-backend - CST tool backend, default is 'ssl', or selectable 'pkcs11'
+>
+>
+>
+> diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
+> index dd9f226b751..a10f61aa01f 100644
+> --- a/tools/binman/etype/nxp_imx8mcst.py
+> +++ b/tools/binman/etype/nxp_imx8mcst.py
+> @@ -65,6 +65,13 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+>
+>      Properties / Entry arguments:
+>          - nxp,loader-address - loader address (SPL text base)
+> +        - nxp,srk-table - full path to SRK_1_2_3_4_table.bin
+> +        - nxp,csf-crt - full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem
+> +        - nxp,img-crt - full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem
+> +        - nxp,fast-auth - enable fast authentication method
+> +        - nxp,srk-crt - full path to the SRK Key SRK1_sha256_4096_65537_v3_ca_crt.pem
+> +        - nxp,unlock - unlock CAAM in SPL
+> +        - nxp,cst-backend - CST tool backend, default is 'ssl', or selectable 'pkcs11'
+>      """
+>
+>      def __init__(self, section, etype, node):
+> @@ -90,6 +97,10 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+>                  'SRK_KEY', fdt_util.GetString(self._node, 'nxp,srk-crt',
+>                                                f'SRK1_{KEY_NAME}.pem'))
+>
+> +        self.backend = os.getenv(
+> +            'CST_BACKEND', fdt_util.GetString(self._node, 'nxp,cst-backend',
+> +                                              'ssl'))
 > +
->  config SYS_CPU
->  	default "arm720t" if CPU_ARM720T
->  	default "arm920t" if CPU_ARM920T
-> @@ -389,6 +399,7 @@ config SYS_CPU
->  	default "armv7" if CPU_V7A
->  	default "armv7" if CPU_V7R
->  	default "armv7m" if CPU_V7M
-> +	default "armv7m" if CPU_V8M
->  	default "armv8" if ARM64
->  
->  config SYS_ARM_ARCH
-> @@ -402,6 +413,7 @@ config SYS_ARM_ARCH
->  	default 7 if CPU_V7A
->  	default 7 if CPU_V7M
->  	default 7 if CPU_V7R
-> +	default 7 if CPU_V8M
->  	default 8 if ARM64
->  
->  choice
-> @@ -445,7 +457,7 @@ config ARCH_CPU_INIT
->  
->  config SYS_ARCH_TIMER
->  	bool "ARM Generic Timer support"
-> -	depends on CPU_V7A || CPU_V7M || ARM64
-> +	depends on CPU_V7A || CPU_V78M || ARM64
->  	default y if ARM64
->  	help
->  	  The ARM Generic Timer (aka arch-timer) provides an architected
-> diff --git a/arch/arm/Makefile b/arch/arm/Makefile
-> index b36b0742580..de975fc9368 100644
-> --- a/arch/arm/Makefile
-> +++ b/arch/arm/Makefile
-> @@ -16,6 +16,7 @@ arch-$(CONFIG_CPU_V7A)		=$(call cc-option, -march=armv7-a, \
->  				 $(call cc-option, -march=armv7))
->  arch-$(CONFIG_CPU_V7M)		=-march=armv7-m
->  arch-$(CONFIG_CPU_V7R)		=-march=armv7-r
-> +arch-$(CONFIG_CPU_V8M)		=-march=armv8-m.main
->  ifeq ($(CONFIG_ARM64_CRC32),y)
->  arch-$(CONFIG_ARM64)		=-march=armv8-a+crc
->  else
-> @@ -42,6 +43,7 @@ tune-$(CONFIG_CPU_ARM1136)	=
->  tune-$(CONFIG_CPU_ARM1176)	=
->  tune-$(CONFIG_CPU_V7A)		=-mtune=generic-armv7-a
->  tune-$(CONFIG_CPU_V7R)		=
-> +tune-$(CONFIG_CPU_V8M)		=
->  tune-$(CONFIG_ARM64)		=
->  
->  # Evaluate tune cc-option calls now
-> diff --git a/arch/arm/cpu/armv7m/Makefile b/arch/arm/cpu/armv7m/Makefile
-> index baeac9343d9..33d49dc3d35 100644
-> --- a/arch/arm/cpu/armv7m/Makefile
-> +++ b/arch/arm/cpu/armv7m/Makefile
-> @@ -4,6 +4,7 @@
->  # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
->  
->  extra-y := start.o
-> -obj-y += cpu.o cache.o
-> +obj-y += cache.o
-> +obj-$(CONFIG_CPU_V7M) += cpu.o
+>          self.unlock = fdt_util.GetBool(self._node, 'nxp,unlock')
+>          self.ReadEntries()
+>
+> @@ -161,8 +172,14 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+>          with open(cfg_fname, 'w') as cfgf:
+>              config.write(cfgf)
+>
+> +        # SSL is the default backend, PKCS11 backend is optional
+> +        if self.backend == "pkcs11":
+> +            cst_backend = "pkcs11"
+> +        else:
+> +            cst_backend = "ssl"
+> +
+>          output_fname = tools.get_output_filename(f'nxp.csf-output-blob.{uniq}')
+> -        args = ['-i', cfg_fname, '-o', output_fname]
+> +        args = ['-i', cfg_fname, '-o', output_fname, '-b', cst_backend]
+>          if self.cst.run_cmd(*args) is not None:
+>              outdata = tools.read_file(output_fname)
+>              # fixme: 0x2000 should be CONFIG_CSF_SIZE
+> --
+> 2.53.0
+>
 
-Why you are dropping cpu.c compilation
-
->  obj-$(CONFIG_SYS_ARM_MPU) += mpu.o
->  obj-$(CONFIG_SYS_ARCH_TIMER) += systick-timer.o
-> diff --git a/arch/arm/include/asm/armv7_mpu.h b/arch/arm/include/asm/armv7_mpu.h
-> index 16b9d0d1aeb..b615b1bc9dc 100644
-> --- a/arch/arm/include/asm/armv7_mpu.h
-> +++ b/arch/arm/include/asm/armv7_mpu.h
-> @@ -11,7 +11,7 @@
-[..]
-[0]
-https://documentation-service.arm.com/static/6622c173fabc8c11c7b53a92?token=
+Regards,
+SImon
