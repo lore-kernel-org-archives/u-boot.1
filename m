@@ -4,94 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FA23F3D600
-	for <u-boot@archiver.kernel.org>; Sun, 29 Mar 2026 12:09:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 693D0F3D603
+	for <u-boot@archiver.kernel.org>; Sun, 29 Mar 2026 12:59:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D2CC83D71;
-	Sun, 29 Mar 2026 14:09:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id A295783D71;
+	Sun, 29 Mar 2026 14:59:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=windowslive.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Kzt0gRid";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=WINDOWSLIVE.COM header.i=@WINDOWSLIVE.COM header.b="BAUH2XRT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4358E83EB3; Sun, 29 Mar 2026 14:09:35 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 822D483D71; Sun, 29 Mar 2026 13:51:43 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazolkn190110001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d201::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5A1F83B8F
- for <u-boot@lists.denx.de>; Sun, 29 Mar 2026 14:09:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A5CB83B48
+ for <u-boot@lists.denx.de>; Sun, 29 Mar 2026 13:51:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=windowslive.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-66abe08cdf5so5541963a12.0
- for <u-boot@lists.denx.de>; Sun, 29 Mar 2026 05:09:32 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774786172; cv=none;
- d=google.com; s=arc-20240605;
- b=hC265HTpLFKmlj0PbMe3enL4BXlehUgldwCJbDPobDvC6bQMJpENbU0oHxGvsn27q3
- nSwDUHB2i7FrCXtdRp5xGcFx80f9eYFVVMrGeYVWAwFMNAhLfsox8F9I0LA+7TsEbvqb
- fQkiWdPgOY0vrAylurb7Eaq9sEhdkHVbekV6GgIEg1i+eoTnhqHup7U3mQ6ABk0dNayo
- tDHh11+98+eNaqD8ZcvYNctExf8VtylQS97MFJIog3/drvPKMtBrHAMiWBKFQsTZMdEm
- 5/O8i0FSAmn6HjZULv2JV+Pt5Gw0Ha9ojgShI4GxVIqyv5n2n3EagmPkky7cOPnEkA4A
- LpCw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=cbNRqe1CMMp74DB1pDrlaKz4mKuVAGx+T61zR0QitE8=;
- fh=BNXxXodM6x/TTtNw5dDUbIgJJ3THT0IIKdNrgcKqd+M=;
- b=ZvITMOFKnkCdKG0gw06t7ZQR7dorxp+unBCa+EMOHXiqjRYZzWl0Kx2br+QxL6hNWJ
- Dj82jPpzkqj2SYAfGd67Q4WDHA4ueaiGnaaUiEuHjr5fW68I+ktF73IA+zJAIEBNGLgk
- GdakgkFL421pb2HonkXs1bpxR8npVFI55SRmJIpPsy5w4/ejNNW76ksd37JrW58R2+Pi
- g7V8HL6RtAYIEmurrUbC65JBiPkCo1Srh8gXtY9cUXLBuvD3idKQmZ/BMTNgnTByN3m+
- fwHCW2gNMJBYH1ppjMfICo0id3a3Npphw3X9s6lg5RwTDvILqol3GK6+N61qLustGSI2
- oyUQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1774786172; x=1775390972; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cbNRqe1CMMp74DB1pDrlaKz4mKuVAGx+T61zR0QitE8=;
- b=Kzt0gRidgslhw6T40jUuTRR8CeB16LADzVYO8yBGeLOkn1vxmSxCyVLTv74QhtiB0E
- +P1sIBdnXRLRuwHy2svBIyl1+CO1BgW6cWFCdnghObnuCvxzeFdfMgyEcFc4vCnogQ6M
- mchNHj8GF9PQFHU/uDkvPF728xhzG0+KRFl/M=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774786172; x=1775390972;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cbNRqe1CMMp74DB1pDrlaKz4mKuVAGx+T61zR0QitE8=;
- b=kQqsnG3KyJftNGDyBEruWQB2QywVWGw/d9ECW/ROq9J3OO6PnFLhv5C1gGeXaXlFiI
- PJ3fIOaldbY3ZCiJc8ZsfYCZu+ZMAnEdF2g50Ei/pgfBXa6nscnPp0SxXmZk41jnbR4T
- dVPQf1uRyaX0az0777wHqeUTJx8pRfftIL7UxDEcOglGJ1jXmLtDhvCSv5MR3mbe0tu0
- SFACD/2LHiPUMtV9r9eNs2bQsDAQ2eKCpTirSqG8hzG3uuEdb9Hf3oqHwIKjgAiaFMxL
- dR6gBl1kK7h2+8MowXuSjzQUpy19xDv69WSRC7nDBj9ULYss2FM1f72J1rlVtf/T+S4h
- c92g==
-X-Gm-Message-State: AOJu0Yza0/N5TpkxxCGIzIpbXKn2IJViAxS+JJXuo/ekl/0wyROOFzpX
- H7qkaSPS9d4RaMeavseCtYqy46tn5N4a1TRT5Mw/vZSPeEP0aig2qCcFAcZGKJFh7ER5kIOKg08
- hGkXSmO8nQ3IHUNX0DG0qofOJ2MQCSto7Dsimal0niX+7qUX68C8=
-X-Gm-Gg: ATEYQzyJdj67u4DC9E5HesTcedWaB+D1ilLLFXD8Kqxd1QiiDCdqfjB0jQZjNpHCfWl
- rfxqizRDj2qXqAVV/mvAaP7n0cEQkVdR7pULtII8cp5fa2yrC3YGR3bMwMnIgwUdDX+7kza+l7O
- SrIl8yiuQijpBfHreUIXFaVtrOVOkjADfpWteylEpWjIabU5mHLO1jKG0T0GGuk5afaetjX74jk
- jjqgPOBA7kFSZNzL2evq/aRHs3N28Ves1cwOGoyzFCQJ0mXnoRGWBaQKMEnfwwuoXYagypc5qTN
- LtOKGg==
-X-Received: by 2002:a17:906:ef08:b0:b98:549d:8367 with SMTP id
- a640c23a62f3a-b9b5033e19cmr569326066b.17.1774786171976; Sun, 29 Mar 2026
- 05:09:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=szabo_tamas@windowslive.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=hRhZQesymsaes/DABuD6YbdHnjbXh2rgRpPdhiQ6TrOF1bEkSOnB8sKYy7FfDfBmbO4WbwTvoYEICvW4l7O7Cg3ukwwurDh/UemanWwi1yPRDJznWxqKRoWN5HpVMxzx3fFnjRtpEi0kaHYRmrvSDUrpVjU9eXA0SgQzr8RQjgqAXC8qj5942yO7Ow6yAQY2TNN6JgXI3aMrVfOMRDXnVyzn4z/zZWf5+Y9dvc8nLNRWlBcGLhCIyvPFLouLBOSnvjNsAWlv36BCKkOtbcLXeo3QaSx62x8l1L5DQfczqlRAaKcXz+9CD0AAULAeWtzLeXvxFuiArtBVfifElYyY+Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Dk+idOZ0OL3DrzCZwwHVg04XvnOh5RVqYNsDpMzA/ZM=;
+ b=tJ6/yI0aeZDridMv3xvzU1yBpM41XDN9Udxx0oRgYQGBQymkg6qZDkTerIYjHmivalRdHIuxggA0gJo0O/C0o+wRqQkTRx/12H4eSnl5vsselyFNAslnNmL4peyR0oo7n7uWYiT6QbgRXsE09M0M+muxjg9XUM+Pb9ZqGb2uVvGm00CCpZ1zhItxAz/oy/HTPBY4B9CW3RHrimWI45TrP/8gdupk62JaUbj/ngHF1TpnIkcpNBwueQuhCbLUeC3ZxEPJaq699B381ZTCdZBnBVvr1t5HsOi3ZQ+0aQkOW5JUJULp1KdHUcIdCaZTZczP8iLQgguzH4PQpFLNAT5rBA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=WINDOWSLIVE.COM;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Dk+idOZ0OL3DrzCZwwHVg04XvnOh5RVqYNsDpMzA/ZM=;
+ b=BAUH2XRTV6V6xbNrQcrMRGVU1P8QKRCV9f68RjsDkhORY9aYEP2Iu0CizypRobxlRmk5XYhrN3/9Kh82lPUSZgyOZgptLZYCrnpLlybNa/I8TwSIen9Y5OX45CAXW1mr6e+UZ5uWvvjXACulsN4/Rb2bdvGj2S0bqgxFqDzDVFN3mSSTVPXiwemxeSIViD4aH7RgPTph8sgw5negd9l0BlZ2ZJJn9WLriJdRZTp4wSG8CQMF1QE81DlSqFZOJcPoENBjrhXLjSvq6nr/LOITJl4RGPnWcsNMf6RMr0HcUK5UdcIX/5OOGVPf3M6O+lZ49bhD3Mv04W1ohk+WLnNv4A==
+Received: from MRWPR01MB12974.eurprd01.prod.exchangelabs.com
+ (2603:10a6:501:84::21) by AM7PR01MB6625.eurprd01.prod.exchangelabs.com
+ (2603:10a6:20b:18f::17) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.28; Sun, 29 Mar
+ 2026 11:51:40 +0000
+Received: from MRWPR01MB12974.eurprd01.prod.exchangelabs.com
+ ([fe80::d472:59c2:473:cc9]) by MRWPR01MB12974.eurprd01.prod.exchangelabs.com
+ ([fe80::d472:59c2:473:cc9%6]) with mapi id 15.20.9745.019; Sun, 29 Mar 2026
+ 11:51:40 +0000
+Message-ID: <MRWPR01MB1297423A4A87C6FDEC941A2898C55A@MRWPR01MB12974.eurprd01.prod.exchangelabs.com>
+Date: Sun, 29 Mar 2026 13:51:37 +0200
+User-Agent: Mozilla Thunderbird
+To: u-boot@lists.denx.de
+Content-Language: en-US
+From: =?UTF-8?B?VGFtw6FzIFN6YWLDsw==?= <szabo_tamas@windowslive.com>
+Subject: U-Boot HDMI console on rk3399
+X-ClientProxiedBy: VI1P190CA0048.EURP190.PROD.OUTLOOK.COM
+ (2603:10a6:800:1bb::19) To MRWPR01MB12974.eurprd01.prod.exchangelabs.com
+ (2603:10a6:501:84::21)
+X-Microsoft-Original-Message-ID: <7c615cde-7003-4749-9870-96f7cb68ec4c@windowslive.com>
 MIME-Version: 1.0
-References: <20260321195238.174658-1-marex@nabladev.com>
-In-Reply-To: <20260321195238.174658-1-marex@nabladev.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 29 Mar 2026 06:09:20 -0600
-X-Gm-Features: AQROBzDHvdYXyrLiboMk3hFD2JgE1_hU6eUUivw8VtWudLSVWfYPAFEEvU-Cprc
-Message-ID: <CAFLszTjdv78kSfFwBXxGq=wxP7y-bc4O_8jDeVTtQFtLct4L4Q@mail.gmail.com>
-Subject: Re: [PATCH v3] binman: add CST backend selection for i.MX8M signing
-To: Marek Vasut <marex@nabladev.com>
-Cc: u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MRWPR01MB12974:EE_|AM7PR01MB6625:EE_
+X-MS-Office365-Filtering-Correlation-Id: bb25fc18-38f0-4efa-e36d-08de8d898946
+X-Microsoft-Antispam: BCL:0;
+ ARA:14566002|12121999013|8060799015|19110799012|23021999003|461199028|15080799012|39105399006|5072599009|440099028|3412199025|26104999006|40105399003;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NDF1RW5RdzFzN292WjdoRU9nMmxKbys0UmQyZkNqRHk3UTdsdjVuV1hzd0hE?=
+ =?utf-8?B?NzMvNjRPVkZqVmprdk5KeVc2cXNEZEkvTXN2UWxMWW1Fd3dtdFR4U0M1TVZQ?=
+ =?utf-8?B?TnZJWlhhWGo3OUFhVThBMzhiTlV0YmR1MmJpM0d4ZmlpUkdVZ090ZmxRQnR1?=
+ =?utf-8?B?d3QwY2t1SGFVc2dDaHN2U2tMMjZPWUhEUWRYRTU1VnFjYzlYNTE0R0Nib1lz?=
+ =?utf-8?B?aXlBbm9FbnRGQWVYZytyZVBwa3dDZ2dZdXR6Mmt1YjJzUkJtZHFYcGYvZXlw?=
+ =?utf-8?B?bjlLZ1JySVhnMjZvRnBIRjk1d0MzTFdlM2hKazlFeEU5K0VEaDZUSjQ2b3J2?=
+ =?utf-8?B?T3p5K1BkZ3NoUTlRaDkrajM3ZktYUlNJNXFkZVJBeWZuTHlYb3dwWW1mYjhD?=
+ =?utf-8?B?VklaVDh6OEhTbERlSGJJdmdBVnVyVXlDYXA3K2gyU1dyTEhTSG9uQUF0Tjg2?=
+ =?utf-8?B?eXBjZFRrbjlaRVE1Q0x5TkF4WGppek1xczNGUzliVHhHQXdJQm5vWkFDbjNj?=
+ =?utf-8?B?WmhJNnVCUlloUW9rcmJVUGI5QW5CUEZrOXdWUktNamkweDJoL2dmbE1weVhB?=
+ =?utf-8?B?VHVyUGhjdzh2a0NjT1pGN2g2WkY0TnlQbXFRL05kZXlzWHBtblJjcmVzMkZS?=
+ =?utf-8?B?UEJkTlV2dEdiTGRILzRaanNMeEtRYi85OEJ1Wk40amQ0THRONUhhMGwrL25V?=
+ =?utf-8?B?a3R2SkVmamNwbS9lbHZ5cWFZdmk0dTNBeGE1WjBSTnJPaUdJYUs1Y1NQZGRL?=
+ =?utf-8?B?cG1WNFdXVkE3eGlPMmw4aUROVlFzMFdXTzdEeVRxc1pRaEVxQzd1NEdnRVNW?=
+ =?utf-8?B?aFpjTDh1MnJ1NGMyeDFPdEJXSi91aEhwZkFJRTBNZEZVakhYWm1Ba3EwNU1H?=
+ =?utf-8?B?Uld2cGJ2c1d1anNxcFVMd2lWVjFCUW8vMTIwb0VKSndnSmhQejFNdHFWT0dE?=
+ =?utf-8?B?Zk1sQXkwaEFGWlBmUHVTU054aWZsOWx2S2QxT3NYTXgxU0wxQ2pHNmlQc2t2?=
+ =?utf-8?B?d1BuYUtuZUhXTGY1WkFGekZwejVGTmZ2K0EyWnZ2WDFQQU5uVCtscStzK2M3?=
+ =?utf-8?B?UkNKVUE0N1hTNFdyRkdiMzZUcjJWNnMzZWY4RGFuYnA0OERhS2cxMkJxcnNO?=
+ =?utf-8?B?QVBRMW01c2JMMWFBQ3pSMm9MaHlKUmxXY0oxczgveEIxOHBTR2pEQzFieGFT?=
+ =?utf-8?B?VDB6SzFJeWczZHVEYnZ2Z1JJTHpMR2FCaHdRaFN2SGc3TUVINGdjZTUzQlhJ?=
+ =?utf-8?B?NzcvTk5NUGNQTUtCOWRvZnRMNmI1Y0ZkZTZ0SFloUjJTckV2UktpdDRMWURa?=
+ =?utf-8?Q?2oLPxQEn+Yvvw=3D?=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NnhWV3MyRVlrSHZRYjRZb2k5bVdTaERwVEFVOEpkcytCTlExOFh6OHZrUnNK?=
+ =?utf-8?B?ZDRDMW90Qk9RVlFnS3pURFpjUDIzdW1LWno5YlJ3MHhMMndyRTlMQkRwTjRu?=
+ =?utf-8?B?a3hIL0FzMis3aW1FOWxQS3VmTWdvaFNNVC8zbmgySVMwNndVM0RubmYxZURu?=
+ =?utf-8?B?eG84YVkxb2ZzU2dKNjIyRm1nTnc0RzVJVzB5VVRhYUVGczdUUFE4Y3VmN0lx?=
+ =?utf-8?B?T1FiS0QrQ09rVmxoVDVDbFR1ZUhLenNibjdESmdldEdhdWRqdm1vU29EQWYr?=
+ =?utf-8?B?VjYyQ3l4MTZCOG00RFlZMmRlK0hWU0ZjTkMxN1UyeXRLcWkvdnFjZXg5QTZG?=
+ =?utf-8?B?aHNFa0lsSUYyMEFDNGVPSUFhSDBoeXVDUFpMcGRXZi94bGF1QTVTR0VZekQ3?=
+ =?utf-8?B?YlQxNVNGLzVzWWMvVGVYSVprZ1hZUzU5UzhvV29KOERiK0tDbGdENi9qcVNI?=
+ =?utf-8?B?cVdmeis3U2tEMjBDTytkM2xEZk84K0dqQTJUVElFUzd4VWdmOTBOQlNKVFd2?=
+ =?utf-8?B?Sm12SGZJWGpTMXlIaWRjRCtqc3dEVngyWUdCd0ZvdkpNOE1vQkxRb0lvMkwy?=
+ =?utf-8?B?MTVOZTRMWllpdkxwNi9LbUtPT1FYZmo0N1htbGhxcUc2bGhzMi9rTFFQc29J?=
+ =?utf-8?B?dk5hSWdTS2xyQ2ZxZHQyRVBLc3FjYU1Kajh4QnFkTWduWVB3cXNhUmhVT0Mx?=
+ =?utf-8?B?VnZQdFBCTW94ejJYQXVhQjNDamdEay9EbG8vWi9wNU1KZG9qMDNOM1dtQjM4?=
+ =?utf-8?B?QitaTDl6RVVNUG5TYWNRSjJtOHdDSlRzWXRBM0d5QzRpZzFiZUYxRjJyRWF5?=
+ =?utf-8?B?c0lvQ0FJdkVrRmZzQTdnZXBYc3VzZ1ptQThlS3VUT01UNEtzSlZVSUhhMXVO?=
+ =?utf-8?B?V01tcVpLd1hIVUhnRzhKSy96eDV5KzFoMjdtZjlTT2Y0aHRCRjVLQjROMGI2?=
+ =?utf-8?B?Vkl0ZW9CVUtUbEJTU1Z2b3h3d2pENVhRa2J3cFd4L2c1WHV6Y2hGTllLNzNj?=
+ =?utf-8?B?MEMxVVA2eHFVWVJRamJ4SXl0U0JTdG1TOGRaRG9QT0NrTFA0eHVITTVPYmwx?=
+ =?utf-8?B?a21CTm1ZelYwS3h4emNwaGcxbTRMWDgrc0tNUHZQSlA5dEJPYklQd2JGZitO?=
+ =?utf-8?B?dDRPYjJQNlZvUjl2ZW05OEwyV0M3MTN6cjE5U2xyeVBrNm90YXVIVTFtMk8r?=
+ =?utf-8?B?N1JjdkN1Zk8relc0TElHZXNYbU5vQi9YTUdqSGQ5dDBWQkVzNXFaMG5wUCtj?=
+ =?utf-8?B?NnVKOHIzYTR3TGxEckFRYlBMMFFGMGJUcjBxZXlFWnlYU25RVnNtaUdaRE9u?=
+ =?utf-8?B?VUdxVlVLNWlGeGtvNnVPZXhyQzY5WUZWNVd6dldNT1UzUDR5V2JoYXNST20y?=
+ =?utf-8?B?S0xLdW1jQUF2bHdkMG4vaDV3RVAxVVY0L0sreCtBbDJycVdaY0srV1E5MmpS?=
+ =?utf-8?B?TnpUcHNhZWM4VkkxVnlHSjZzMWJPWVVxb2pKWStBbmhnUGNRNFhMYXRUTDRQ?=
+ =?utf-8?B?WTVYaW56ZjVxbW0zMjhnVFhWbzdxMTNlVkNzR0xMT0NHTllvNDNsQ1RuK3Va?=
+ =?utf-8?B?REx5bll3Y2FGYTZTdmxHZWJyakhMVGdTUTNuSTJvOWJFQjkxNktzSkNwRERD?=
+ =?utf-8?B?WExkK1NJdWVHOHhCNCtoY3MzNGJzNTQ0TXpsbEJuVGg3Q1dNdXdGVFFMcTVv?=
+ =?utf-8?B?bUtkY01ibGZHZm5Tb1BITGorMmY0eTBEMFpuc2JPT2RHVGdFNnJ3OVVwaUY2?=
+ =?utf-8?B?TzBqR2ZZenhrb2g3RmxHK3JtNUFTcW1YdUdEbWN2YnE2QVAwaG5WNld2M3Rz?=
+ =?utf-8?B?TEU1TkFIaTZiR1p0a3BkU25HTDZLMlh0ZWFJYWdlcTRUT2NIdElaMGZsakJt?=
+ =?utf-8?B?Rm5UekVXY1BtdlU2M0dibGNtUTBnTHROTlZWcEVYcDl1Ri9yZldzYVZieWcy?=
+ =?utf-8?B?ZHJGMXc5Z1VldXJUK0ppRng2UEoyUTFtQityMmNKNzllSTZjVnZZdzU3NnFH?=
+ =?utf-8?B?T2FaNklPbkRRPT0=?=
+X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-d13a4.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: bb25fc18-38f0-4efa-e36d-08de8d898946
+X-MS-Exchange-CrossTenant-AuthSource: MRWPR01MB12974.eurprd01.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Mar 2026 11:51:39.9850 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR01MB6625
+X-Mailman-Approved-At: Sun, 29 Mar 2026 14:59:47 +0200
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,146 +155,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hello,
 
-On Sat, 21 Mar 2026 at 13:52, Marek Vasut <marex@nabladev.com> wrote:
->
-> Add support for setting the CST backend, both via DT property and
-> CST_BACKEND environment variable. The CST currently supports two
-> backends, 'ssl' and 'pkcs11', with 'ssl' being the default when
-> CST tool is invoked without any -b parameter. Keep 'ssl' backend
-> as the default, but explicitly pass it via the '-b' parameter,
-> unless the user selects 'pkcs11' via either method.
->
-> Signed-off-by: Marek Vasut <marex@nabladev.com>
-> ---
-> Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
-> V2: Fill in documentation for all used DT properties
-> V3: Fill third copy of documentation into nxp_imx8mcst.py
-> ---
->  doc/imx/habv4/guides/mx8m_spl_secure_boot.txt | 30 ++++++++++++-------
->  tools/binman/entries.rst                      |  7 +++++
->  tools/binman/etype/nxp_imx8mcst.py            | 19 +++++++++++-
->  3 files changed, 44 insertions(+), 12 deletions(-)
->
 
-This is missing coverage for line 177 of nxp_imx8mcst.py:
+I read there is possible to use HDMI as console output on rk3399, but I 
+do not find any documentation about this, only Google AI give some 
+hints, but mostly mix up rockchip and sunxi stuff.
 
-   cst_backend = "pkcs11"
+I have a Giada DN74 which is based on rk3399 but I am not able to enable 
+HDMI output in u-boot.
 
-Please can you use (or mock) this feature in a test.
+I check in which defconfig is use necessary configs (|example: 
+CONFIG_VIDEO_ROCKCHIP|) and which one is similar to my board, I choose 
+nanopi-m4-rk3399_defconfig and build u-boot but no output.
 
-> diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> index 1bea091344d..a3ebd397d82 100644
-> --- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> +++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> @@ -167,17 +167,25 @@ The nxp-imx8mcst etype is configurable using either DT properties or environment
->  variables. The following DT properties and environment variables are supported.
->  Note that environment variables override DT properties.
->
-> -+--------------------+-----------+------------------------------------------------------------------+
-> -| DT property        | Variable  | Description                                                      |
-> -+====================+===========+==================================================================+
-> -| nxp,loader-address |           | SPL base address                                                 |
-> -+--------------------+-----------+------------------------------------------------------------------+
-> -| nxp,srk-table      | SRK_TABLE | full path to SRK_1_2_3_4_table.bin                               |
-> -+--------------------+-----------+------------------------------------------------------------------+
-> -| nxp,csf-crt        | CSF_KEY   | full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem |
-> -+--------------------+-----------+------------------------------------------------------------------+
-> -| nxp,img-crt        | IMG_KEY   | full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
-> -+--------------------+-----------+------------------------------------------------------------------+
-> ++--------------------+-------------+------------------------------------------------------------------+
-> +| DT property        | Variable    | Description                                                      |
-> ++====================+=============+==================================================================+
-> +| nxp,loader-address |             | SPL base address                                                 |
-> ++--------------------+-------------+------------------------------------------------------------------+
-> +| nxp,srk-table      | SRK_TABLE   | full path to SRK_1_2_3_4_table.bin                               |
-> ++--------------------+-------------+------------------------------------------------------------------+
-> +| nxp,csf-crt        | CSF_KEY     | full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem |
-> ++--------------------+-------------+------------------------------------------------------------------+
-> +| nxp,img-crt        | IMG_KEY     | full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
-> ++--------------------+-------------+------------------------------------------------------------------+
-> +| nxp,fast-auth      |             | enable fast authentication method                                |
-> ++--------------------+-------------+------------------------------------------------------------------+
-> +| nxp,srk-crt        | SRK_KEY     | full path to the SRK Key SRK1_sha256_4096_65537_v3_ca_crt.pem    |
-> ++--------------------+-------------+------------------------------------------------------------------+
-> +| nxp,unlock         |             | unlock CAAM in SPL                                               |
-> ++--------------------+-------------+------------------------------------------------------------------+
-> +| nxp,cst-backend    | CST_BACKEND | CST tool backend, default is 'ssl', or selectable 'pkcs11'       |
-> ++--------------------+-------------+------------------------------------------------------------------+
->
->  Environment variables can be set as follows to point the build process
->  to external key material:
-> diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
-> index 8922d6cd070..29bc778d0e5 100644
-> --- a/tools/binman/entries.rst
-> +++ b/tools/binman/entries.rst
-> @@ -1664,6 +1664,13 @@ Entry: nxp-imx8mcst: NXP i.MX8M CST .cfg file generator and cst invoker
->
->  Properties / Entry arguments:
->      - nxp,loader-address - loader address (SPL text base)
-> +    - nxp,srk-table - full path to SRK_1_2_3_4_table.bin
-> +    - nxp,csf-crt - full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem
-> +    - nxp,img-crt - full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem
-> +    - nxp,fast-auth - enable fast authentication method
-> +    - nxp,srk-crt - full path to the SRK Key SRK1_sha256_4096_65537_v3_ca_crt.pem
-> +    - nxp,unlock - unlock CAAM in SPL
-> +    - nxp,cst-backend - CST tool backend, default is 'ssl', or selectable 'pkcs11'
->
->
->
-> diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
-> index dd9f226b751..a10f61aa01f 100644
-> --- a/tools/binman/etype/nxp_imx8mcst.py
-> +++ b/tools/binman/etype/nxp_imx8mcst.py
-> @@ -65,6 +65,13 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
->
->      Properties / Entry arguments:
->          - nxp,loader-address - loader address (SPL text base)
-> +        - nxp,srk-table - full path to SRK_1_2_3_4_table.bin
-> +        - nxp,csf-crt - full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem
-> +        - nxp,img-crt - full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem
-> +        - nxp,fast-auth - enable fast authentication method
-> +        - nxp,srk-crt - full path to the SRK Key SRK1_sha256_4096_65537_v3_ca_crt.pem
-> +        - nxp,unlock - unlock CAAM in SPL
-> +        - nxp,cst-backend - CST tool backend, default is 'ssl', or selectable 'pkcs11'
->      """
->
->      def __init__(self, section, etype, node):
-> @@ -90,6 +97,10 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
->                  'SRK_KEY', fdt_util.GetString(self._node, 'nxp,srk-crt',
->                                                f'SRK1_{KEY_NAME}.pem'))
->
-> +        self.backend = os.getenv(
-> +            'CST_BACKEND', fdt_util.GetString(self._node, 'nxp,cst-backend',
-> +                                              'ssl'))
-> +
->          self.unlock = fdt_util.GetBool(self._node, 'nxp,unlock')
->          self.ReadEntries()
->
-> @@ -161,8 +172,14 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
->          with open(cfg_fname, 'w') as cfgf:
->              config.write(cfgf)
->
-> +        # SSL is the default backend, PKCS11 backend is optional
-> +        if self.backend == "pkcs11":
-> +            cst_backend = "pkcs11"
-> +        else:
-> +            cst_backend = "ssl"
-> +
->          output_fname = tools.get_output_filename(f'nxp.csf-output-blob.{uniq}')
-> -        args = ['-i', cfg_fname, '-o', output_fname]
-> +        args = ['-i', cfg_fname, '-o', output_fname, '-b', cst_backend]
->          if self.cst.run_cmd(*args) is not None:
->              outdata = tools.read_file(output_fname)
->              # fixme: 0x2000 should be CONFIG_CSF_SIZE
-> --
-> 2.53.0
->
 
-Regards,
-SImon
+Is the HDMI output in some rk3399  board enabled by default?
+
+There is documentation about HDMI output in u-boot?
+
+If not documentation, someone could please write a sort advise how to 
+enable HDMI output.
+
+
+Regards.
+
+Tamás
