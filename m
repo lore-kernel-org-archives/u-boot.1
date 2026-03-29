@@ -4,69 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53D42F3D5FB
-	for <u-boot@archiver.kernel.org>; Sun, 29 Mar 2026 15:04:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3DD2F3D60A
+	for <u-boot@archiver.kernel.org>; Sun, 29 Mar 2026 15:17:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 483D984011;
-	Sun, 29 Mar 2026 17:04:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4460D83E7A;
+	Sun, 29 Mar 2026 17:17:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="inOTTtct";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="k/3xjTiw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDA1C84020; Sun, 29 Mar 2026 17:04:56 +0200 (CEST)
+ id 28FAF84011; Sun, 29 Mar 2026 17:17:41 +0200 (CEST)
 Received: from tor.source.kernel.org (tor.source.kernel.org
  [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDB8083E7A
- for <u-boot@lists.denx.de>; Sun, 29 Mar 2026 17:04:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C651083C14
+ for <u-boot@lists.denx.de>; Sun, 29 Mar 2026 17:17:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+j.ne.posteo.net@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 9D5E960054;
- Sun, 29 Mar 2026 15:04:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 511ACC116C6;
- Sun, 29 Mar 2026 15:04:52 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 36DAA60054;
+ Sun, 29 Mar 2026 15:17:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id BC485C116C6;
+ Sun, 29 Mar 2026 15:17:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1774796692;
- bh=wU1j9pdfkVNbmxE+UBTFkOWNG4rh80Ej5qsM7Ozu0tg=;
+ s=k20201202; t=1774797456;
+ bh=+LvUE+V9kJ7Mm/fKNIbQo1Wlqu0hT7ZsN4yAvKXi1wQ=;
  h=From:Date:Subject:To:Cc:Reply-To:From;
- b=inOTTtct0OfC1St6dqS9d0MAWAWJ+z5U/Q3k3qQL5yU0GlEQUz/IxVju+aWz58H2r
- gxNfnkol3CAT/i1mfsgWE47wXfQkmYLoVjSYkaaKVk3MEnNmzRum6HlZndkFx4Z5KV
- j8zzYlR98517TYB0dKniKhhH8SeMdPmWD9r+gw8/SjipwAffK1qhhFKZXdMSQ8Vrqw
- fZvdeQ3rQYCKkdBrbySBuGbLpUf9DroBXTnC3+CiM0ctRxjhZYYpS+4mnctkOpXwYc
- vaR6esmirZMVKH0PhT9Iw6lz76DvcC8hnYjN+2KJ0GNkNqUO4npwE+PjniMIlY+Kq9
- 8JdtDpuY+TUYA==
+ b=k/3xjTiw8cPwAMzq1JLAXjgGjsKgOPB48A5BniMMlK9OriMuFFzj5Jii+lEOstHWb
+ ReOTxZZe3Z2llKy2+yqU/HHV2OB/YJXiaopD8I9GHUPij0IwTgrMpEa5EBjDiwNV7Q
+ dhoW2JPo2ZplysJIugIEesIU3RmtuQztZzSftWaDnUBvsirNddwbAuM1x+wvODAIHX
+ I1KNk9peWexW8zdhMYY/oIRV3lnK+RJccVQEXYk0bLZUh1+pa8u2s4RP1hxhCucKje
+ Qu2qPFKP53N2s0HNo078AYSQvW1uX52AqL11gjoFRggQicw8RMvHH+/PewuKhwjagc
+ W+X5MFELotXmg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 3FF22F3D60E;
- Sun, 29 Mar 2026 15:04:52 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id A945AF3D60A;
+ Sun, 29 Mar 2026 15:17:36 +0000 (UTC)
 From: =?utf-8?q?J=2E_Neusch=C3=A4fer_via_B4_Relay?=
  <devnull+j.ne.posteo.net@kernel.org>
-Date: Sun, 29 Mar 2026 17:04:36 +0200
-Subject: [PATCH] powerpc/mpc83xx: Move alignment padding into __u_boot_list
- section
+Date: Sun, 29 Mar 2026 17:17:33 +0200
+Subject: [PATCH] boot/bootm: Disable interrupts after loading the image
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20260329-mpc83xx-align-v1-1-9935d9db5310@posteo.net>
-X-B4-Tracking: v=1; b=H4sIAIM/yWkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDYyNL3dyCZAvjigrdxJzM9DxdQ1OjRHOjRMsUC6MUJaCegqLUtMwKsHn
- RsbW1AC8Rn1hfAAAA
-X-Change-ID: 20260329-mpc83xx-align-152a72a9d82d
+Message-Id: <20260329-bootm-wdt-v1-1-f46b3bc6d50e@posteo.net>
+X-B4-Tracking: v=1; b=H4sIAIxCyWkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDYyNL3aT8/JJc3fKUEt1kU0NDC3MzQ4tUMyMloPqCotS0zAqwWdGxtbU
+ AwHozGFsAAAA=
+X-Change-ID: 20260329-bootm-wdt-c51187618e62
 To: u-boot@lists.denx.de
-Cc: Mario Six <mario.six@gdsys.cc>, Tom Rini <trini@konsulko.com>, 
+Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@arm.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ =?utf-8?q?=E7=89=9B_=E5=BF=97=E5=AE=8F?= <Zone.Niuzh@hotmail.com>, 
+ Benjamin ROBIN <dev@benjarobin.fr>, Aristo Chen <jj251510319013@gmail.com>, 
  =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1774796691; l=1877;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1774797455; l=1473;
  i=j.ne@posteo.net; s=20240329; h=from:subject:message-id;
- bh=VUWaFYnC/VK+SLEHBxsWQRdfGjINlI8WB8vzqRJSbz0=;
- b=TId5SiqCl21ePYf9Rbbh9pM3Dbbk5pUIBD2pNjPCBVBV9KEwaIaQiujP2Ar0wX3C1FCy/KJrS
- L+2xOAf2B+oBvzd5bRGXe7e934niX5XbJytgrOn3yoNk3d7AO1JPtC2
+ bh=zPsGfFMuExAJidkBX5RFyv2C7XhSoz2IUlILWWWBH5I=;
+ b=hO2Zorae2qOXNp3SbKtYEfFtCH2IWBWMFI86shCJ6CW/qDgH3lHIJ6ZBH51mMLY5/IvlAfFXL
+ BLpKWgwlzkCA5P5K9t6ReTTduMMwvJpkFlDs9zZeLYEcOYzXZ/Z42If
 X-Developer-Key: i=j.ne@posteo.net; a=ed25519;
  pk=NIe0bK42wNaX/C4bi6ezm7NJK0IQE+8MKBm7igFMIS4=
 X-Endpoint-Received: by B4 Relay for j.ne@posteo.net/20240329 with auth_id=156
@@ -90,55 +93,45 @@ X-Virus-Status: Clean
 
 From: "J. Neuschäfer" <j.ne@posteo.net>
 
-u-boot-dtb.bin is built by concatenating u-boot-nodtb.bin and u-boot.dtb.
-u-boot-nodtb.bin, in turn, is generated by objcopy'ing the contents of
-u-boot (U-Boot in ELF format) into a raw file.
-
-In order to find the bundled FDT (u-boot.dtb), the code in lib/fdtdec.c
-uses the _end symbol. Platform-specific linker scripts ensure that _end is
-8-byte aligned, which is required by libfdt.
-
-For the PowerPC MPC83xx platform, the ALIGN(8) directive was outside a
-section, with the unfortunate effect that the potentially generated padding
-bytes would not be copied by objcopy. This resulted in a discrepancy
-between the _end symbol on the one hand, and the size of u-boot-nodtb.bin
-and thus the starting location of the actual FDT on the other side. Under
-these conditions, the FDT could not be found and boot would fail early.
-
-This commit fixes it by moving the ALIGN(8) into the __u_boot_list section,
-which is non-empty and thus copied into u-boot-nodtb.bin.
+Interrupts need to be disabled before we jump into the OS, but currently
+they're already disabled before we load/uncompress the image. This has
+the inconvenient side effect of taking up a part of the watchdog time
+budget, which can be rather large when the image is big. Ideally, we
+want to leave a full watchdog time slice for the OS, so that it has
+enough time to initialize its own watchdog driver. To ease the pressure,
+disable interrupts (and with it, a timer interrupt that could service
+the watchdog) after loading/uncompressing the OS image.
 
 Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
 ---
- arch/powerpc/cpu/mpc83xx/u-boot.lds | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ boot/bootm.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/arch/powerpc/cpu/mpc83xx/u-boot.lds b/arch/powerpc/cpu/mpc83xx/u-boot.lds
-index 5becc4d236e..a765babee3f 100644
---- a/arch/powerpc/cpu/mpc83xx/u-boot.lds
-+++ b/arch/powerpc/cpu/mpc83xx/u-boot.lds
-@@ -43,7 +43,8 @@ SECTIONS
+diff --git a/boot/bootm.c b/boot/bootm.c
+index 4bdca22ea8c..fa4b53050b7 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -1015,7 +1015,6 @@ int bootm_run_states(struct bootm_info *bmi, int states)
  
-   . = ALIGN(4);
-   __u_boot_list : {
--	KEEP(*(SORT(__u_boot_list*)));
-+    KEEP(*(SORT(__u_boot_list*)));
-+    . = ALIGN(8);
-   }
+ 	/* Load the OS */
+ 	if (!ret && (states & BOOTM_STATE_LOADOS)) {
+-		iflag = bootm_disable_interrupts();
+ 		ret = bootm_load_os(images, 0);
+ 		if (ret && ret != BOOTM_ERR_OVERLAP)
+ 			goto err;
+@@ -1044,6 +1043,8 @@ int bootm_run_states(struct bootm_info *bmi, int states)
+ 	}
+ #endif
  
- 
-@@ -56,7 +57,6 @@ SECTIONS
-    * _end - This is end of u-boot.bin image.
-    * dtb will be appended here to make u-boot-dtb.bin
-    */
--  . = ALIGN(8);
-   _end = .;
- 
-   . = ALIGN(4096);
++	iflag = bootm_disable_interrupts();
++
+ 	/* From now on, we need the OS boot function */
+ 	if (ret)
+ 		return ret;
 
 ---
 base-commit: eb95914b9f5886b7ca0eaa2dbcd8a66bb8e5f81a
-change-id: 20260329-mpc83xx-align-152a72a9d82d
+change-id: 20260329-bootm-wdt-c51187618e62
 
 Best regards,
 -- 
