@@ -4,57 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F09DFFF4927
-	for <u-boot@archiver.kernel.org>; Sun, 29 Mar 2026 23:10:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34E92FF4927
+	for <u-boot@archiver.kernel.org>; Sun, 29 Mar 2026 23:12:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D545883B48;
-	Mon, 30 Mar 2026 01:10:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id BBDB383B48;
+	Mon, 30 Mar 2026 01:12:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="ipnSqydE";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="XNWN/7P3";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="qGGd7Dbu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 646AA8403D; Sun, 29 Mar 2026 16:25:52 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
+ id 5FFDD83CD3; Mon, 30 Mar 2026 01:12:01 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6CF1184011
- for <u-boot@lists.denx.de>; Sun, 29 Mar 2026 16:25:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
+ by phobos.denx.de (Postfix) with ESMTPS id 62B328063E
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 01:11:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marex@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 37A7810E855; Sun, 29 Mar 2026 16:25:48 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1774794349;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=8ZyRv8SVq140r9d7O2Tkp7N+hM9csT/7MCKFnu1npgk=;
- b=ipnSqydEoSGOK0Om9MmlD4kYF8ckVAhvhHIL+EjLyvUBpWRHBgAL3p/tJGhCX3jE1hKf3B
- Z3LIolFbl0d60yjXh3vvdcBNRVYH5XumU5h+Wx53fhkoNtQ9ifXaapnNUDnW6JVUjLsVo9
- Ns6IeS2PDRvPf+ibuzNMy0sm8Mbd34w2HWUSKi2jMgZ5u7nilHxy5RWy/FGqxkK6SlLYg9
- H+cK+VYVgRlz2JIqMGToM1rlOfXxz9m0z+pcas9vrb6OIMgEvn4GanCjOVYsPNJU4sWjf1
- RsVSIgHkLe3iGyG/xW2HwKO0Z9eZDkBfopQMcpKqrIfdv4YiLjgsUFRHIaIUJA==
-Message-ID: <9f5c1c47-410c-419c-b272-2a44a0e4a4d9@nabladev.com>
-Date: Sun, 29 Mar 2026 16:23:39 +0200
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4fkVWd0xPYz9t3C;
+ Mon, 30 Mar 2026 01:11:57 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1774825917;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=xZEtDe0D6pLuEaTwEGISxJYnmxVTcjtpGFJZt8c9I2U=;
+ b=XNWN/7P3dAg2bQqQYTPuKGACl7iU0vDvhdFSEhFea2ndZYQX+d9keN9oxT5fDSWMHT4IWf
+ bcqoqJzK2Sa7nRpAko7fg1WNIP4R1JCrPsM6Ekn8KP7h4wRsZ/ICR0/zH4aQJ6CIUHUF17
+ UH815hKwP/z1wjmMk+cFmWwijPLU/hYsA0tKVkY+Q7OzIVc9eTa4U9FuwwBWZa0f0d91UE
+ ATEbCcsmV/DmjM8B9R0XWTJW3YA/jgXmFrdGV4q9wghzDKHrAgw2MYVdwcX8b9Vfznmf7x
+ hXCih7U/s4hgrijejyIIUQ4nQyT51xDwUzYJ1iHKgUTwMdUQrfOscak5PNjjMA==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=qGGd7Dbu;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1774825915;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=xZEtDe0D6pLuEaTwEGISxJYnmxVTcjtpGFJZt8c9I2U=;
+ b=qGGd7DbuBf4P9zMKERuZlbUAqkzA6iQXNPZXhdsIz5OH0HPdilxbtk7QvryNgyaK6YMzwz
+ pYOujjRu+5q5de5md3Jk2t6yqmxehVyCUj37rzEzLkOVHNhSkSdxlqVzXdCn37xV9DE59R
+ K+xyCSbB5HpH2rrRHolImcJczoaX9eOphWmXFZrNAwChzsBfD7FVUybgChKYFhjX2AZ0+k
+ HgXcBOAAATo0R+77Vf1SQzMKjumhe1wLuTe3XQHEzPPYd/d3scig0ZkEDjFyJaWUNMrV5t
+ Fxzvxb7DMX+iM5Q1IAn/5VJ6A406ZkytyzTpdA6K/+kzxc9m7I8HCfSs+/lVmw==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Julien Stephan <jstephan@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Padmarao Begari <padmarao.begari@amd.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] ufs: core: Fix heap corruption due to out of bounds write
+Date: Mon, 30 Mar 2026 01:11:36 +0200
+Message-ID: <20260329231151.332108-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] binman: add CST backend selection for i.MX8M signing
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Tom Rini <trini@konsulko.com>
-References: <20260321195238.174658-1-marex@nabladev.com>
- <CAFLszTjdv78kSfFwBXxGq=wxP7y-bc4O_8jDeVTtQFtLct4L4Q@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@nabladev.com>
-In-Reply-To: <CAFLszTjdv78kSfFwBXxGq=wxP7y-bc4O_8jDeVTtQFtLct4L4Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
-X-Mailman-Approved-At: Mon, 30 Mar 2026 01:10:37 +0200
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: 4xggxr9dq6rri7bzbfsnmak6ozqtkidz
+X-MBO-RS-ID: bcae9ff1b46e56d0717
+X-Rspamd-Queue-Id: 4fkVWd0xPYz9t3C
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,41 +93,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/29/26 2:09 PM, Simon Glass wrote:
-> Hi Marek,
-> 
-> On Sat, 21 Mar 2026 at 13:52, Marek Vasut <marex@nabladev.com> wrote:
->>
->> Add support for setting the CST backend, both via DT property and
->> CST_BACKEND environment variable. The CST currently supports two
->> backends, 'ssl' and 'pkcs11', with 'ssl' being the default when
->> CST tool is invoked without any -b parameter. Keep 'ssl' backend
->> as the default, but explicitly pass it via the '-b' parameter,
->> unless the user selects 'pkcs11' via either method.
->>
->> Signed-off-by: Marek Vasut <marex@nabladev.com>
->> ---
->> Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>
->> Cc: Simon Glass <sjg@chromium.org>
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: u-boot@lists.denx.de
->> ---
->> V2: Fill in documentation for all used DT properties
->> V3: Fill third copy of documentation into nxp_imx8mcst.py
->> ---
->>   doc/imx/habv4/guides/mx8m_spl_secure_boot.txt | 30 ++++++++++++-------
->>   tools/binman/entries.rst                      |  7 +++++
->>   tools/binman/etype/nxp_imx8mcst.py            | 19 +++++++++++-
->>   3 files changed, 44 insertions(+), 12 deletions(-)
->>
-> 
-> This is missing coverage for line 177 of nxp_imx8mcst.py:
-> 
->     cst_backend = "pkcs11"
-> 
-> Please can you use (or mock) this feature in a test.
-I already invested a lot of effort into binman tests before in [PATCH] 
-binman: Fill in most of the imx8mimage and imx8mcst tests and it went 
-nowhere.
+The ufshcd_read_string_desc() can perform out of bounds write and
+corrupt heap in case the input utf-16 string contains code points
+which convert to anything more than plain 7-bit ASCII string.
 
-Can you provide (an example of) such a test ?
+This occurs because utf16_to_utf8(dst, src, size) in U-Boot behaves
+differently than Linux utf16s_to_utf8s(..., maxlen), but the porting
+process did not take that into consideration. The U-Boot variant of
+the function converts up to $size utf-16 fixed-length 16-bit input
+characters into as many 1..4 Byte long variable-length utf-8 output
+characters. That means for 16 Byte input, the output can be up to 64
+Bytes long. The Linux variant converts up utf-16 input into up to
+$maxlen Bytes worth of utf-8 output, but stops at the $maxlen limit.
+That means for 16 Byte input with maxlen=32, the processing will stop
+after writing 32 output Bytes.
+
+In case of U-Boot, use of utf16_to_utf8() leads to potential corruption
+of data past the $size Bytes and therefore corruption of surrounding
+content on the heap.
+
+The fix is as simple, allocate buffer that is sufficient to fit the
+utf-8 string. The rest of the code in ufshcd_read_string_desc() does
+correctly limit the buffer to fit into the DMA descriptor afterward.
+
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+NOTE: This is for 2026.04, but please do test it on your hardware too.
+---
+Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>
+Cc: Julien Stephan <jstephan@baylibre.com>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Neha Malcom Francis <n-francis@ti.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Padmarao Begari <padmarao.begari@amd.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ drivers/ufs/ufs-uclass.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
+index 81fd431f951..6a51f337e47 100644
+--- a/drivers/ufs/ufs-uclass.c
++++ b/drivers/ufs/ufs-uclass.c
+@@ -1751,7 +1751,15 @@ static int ufshcd_read_string_desc(struct ufs_hba *hba, int desc_index,
+ 			goto out;
+ 		}
+ 
+-		buff_ascii = kmalloc(ascii_len, GFP_KERNEL);
++		/*
++		 * utf-8 is encoded using up to 4-Bytes per character,
++		 * however, we only allocate such a buffer because the
++		 * utf16_to_utf8() converts the entire $ascii_len worth
++		 * of input characters into up to 4-Byte long utf-8
++		 * characters. The rest of the function uses only up to
++		 * $ascii_len bytes of that utf-8 string.
++		 */
++		buff_ascii = kmalloc(ascii_len * 4, GFP_KERNEL);
+ 		if (!buff_ascii) {
+ 			err = -ENOMEM;
+ 			goto out;
+-- 
+2.53.0
+
