@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBA3A1061B1E
-	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 20:23:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DF911061B20
+	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 20:24:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6FE48352B;
-	Mon, 30 Mar 2026 22:23:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7C06383FD9;
+	Mon, 30 Mar 2026 22:23:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="gBwcObDu";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="1HUgDKTf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C7F283F5B; Mon, 30 Mar 2026 22:23:47 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id 1F05280212; Mon, 30 Mar 2026 22:23:48 +0200 (CEST)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E358680212
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 22:23:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC72683CE3
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 22:23:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-46aa216a5edso1423437b6e.0
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 13:23:44 -0700 (PDT)
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-4043b27ddeaso3186674fac.1
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 13:23:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774902223; x=1775507023;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774902224; x=1775507024;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=1MNb1X0K5X1O/Q4q852gl9UVzknGdpKLC8aTQuZVbqk=;
- b=gBwcObDuK5xA7+CxFZipMIB4uRcJc/tyxmrUapmEahrUQpcZzBRt9UZLULowIX8hiF
- TWqD6O5k/oimrPvPsoQ0Z4KwDWowusiwCfolGlM9zDh2xPx6t29RsRZnHRQ+qYvKr6sH
- XnAFqFZMRiUMibBWJjOETM+0LBIl1Va0z0XJtC3Q72NeOhyGrk6iPsH2omAdJQe6QPC+
- UG3otEfA5qVjPPRyCkkTQwwQ/IdJ2Kv1YKT1pudcnP0lelbkHHCoPDOrFk9zJwNxdYm8
- rlT5OwZcyAGyWfAm+Lg9avR+sKrZqa9kz3dIvtz8WAdwpFz/PdYsUD7Lk3uFyCjCCsfG
- fSww==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=wKs1pITaMZCPimQS0fmnnNqtLOdHdMzvP+C/vX3cL9E=;
+ b=1HUgDKTfzcOft4KvXlLzwdpsg6NnTQ3q46K4zLF26PIj1lFwJHJUFpipAdYT/agNnh
+ heymfxH+kuSNKvM8AbrGTujKXj3McpVviCgdnhbQeVkxJthTnK5gVpXtcXbfZcdWscw3
+ 3iKdWNesBCOZFNI62T2t+Gl00PJwAdoYf71yCo99h/zr5s4aFDToz7QbF5zxWkvWY6eg
+ QtJZdhOOciHlfCbcnJ5YqgN/q9dT0ty2MpEVXbv3NyH01cgAOvIeT1IIk84GrbG3mPTQ
+ OI1DIbkEZbEWy+urXTrWqueF3m86ToodNOS7gD/zoHOJJe+vb2Nm0yBuiLhRaDVxonfG
+ /UoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774902223; x=1775507023;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1MNb1X0K5X1O/Q4q852gl9UVzknGdpKLC8aTQuZVbqk=;
- b=loJfVhGWBdPIuI1I8FpH3kZw6M5E9j92XK1uqd0jX4bUYEqm6j7Fy95cqqSshnGadU
- vvfM6aOtttt5JsN8BUCtw69cqun8u2F+y8WFsRgvsIu/nJIQ3eIdOlal2OHLRUDVcjlb
- qdMW3WBHi8PFmwmkoUeiltmfJM5za/Axt7EDAZNqFVgoenYeHgxwRs5Qx02vSrGZqfnh
- hJIbBtFiq3ncfcR5sctX6pgGyHnnypJxVLdoZfzunEUKIefRJaX5gxesAA+Z3qucQPB9
- cWdMeqbxd0X6O9TgjnYICL/M19DQQjUumLC+szxR2aEFavzK3lQ6UvR9LXIsm8qRJmZr
- +KZQ==
+ d=1e100.net; s=20251104; t=1774902224; x=1775507024;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=wKs1pITaMZCPimQS0fmnnNqtLOdHdMzvP+C/vX3cL9E=;
+ b=fD9l/yQnJeIAhfX41WgYF0wXmrsmuzxBk++aj/Pbo9FJznImANvI5gHF/l7Nfb3Lif
+ 5gAbLVI04wDzHGyawqa6nadjz1l5p1DnyTYBpV53SZ5QMueY+r62+ILn6b6ErbBzpTgI
+ K34wP+RVPBnJurDRFVxLZzoXkh8u7ngdCpbaPkhWFa8cvH9N3771Eph5n3i6CDkTvnkJ
+ LGSrCE2FxWt46HFExqmqBN3/DeU2KutPraWkUfI+LoozUrdLiEzqm6qe0KRvkWxiqv7z
+ 21h5GQIcZI6nbE94GYuQ2h0m30VQkQ5dLVjU/SaBe1pKgCTRX0LWopf0nECt2yfll+5H
+ n5rg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWjV8RcHsThyA4ztrJtG19uzaOKfQ5Rbt4G1TXuO+B0IZPqeUtYztnmj3YkVMzdNY1xOD4lxSs=@lists.denx.de
-X-Gm-Message-State: AOJu0YwF3kS7ZQiHkEHiwSaurF1EKiXjF8YU78nEZBqIhI0j+6M+3YKQ
- 8/qHgrAOnihke9nLAI1TymdwpZRCTpiw4EYOEYXc4moRxbdDNwxOQg5XVOhbnHfPWXs=
-X-Gm-Gg: ATEYQzxCW39X9jQMum3OsXNmnyxp7LlrJHX/sHVLsT6hJNxG6fMgZNEbZAja/TdNZ4d
- mbNzyjYEm1j62uRoOqFs3heSx2peIkoy7TnxmzvD5I76LExNnsKc6l7TDvDtY2n3O6oLHcSzIxK
- l4MFmQnRmua4kTpuBsPWXmVZKlfY+lsdO0iRzlrO1TD5J+pEr0k3KLL99x8a+5eCZGliPFtjtdu
- D6+JIYJTan7pYRF+cdTpgDv67Ny5bFEOIiYgo/ujRlZXhTUlcEZEYfTLAoQ2bAOAxBvZSLFllnz
- f300o7+7UsSGa69nWOC7r1zF+pNjeHCR0ow/+AEnq4pareJtZjSzrGS5N3aCS3CjjQsMn3f34gf
- WgVULlvu+6y2+OcuhWVM5+aZ/USNvm0rq1jMgxjuVeXwtCRiAeK99HVgfdAKCPhBsv3GnIqffw8
- WY+YuiCoSTCOeXrFiw1/hR6nL7czGe
-X-Received: by 2002:a05:6808:1309:b0:467:3f4:906b with SMTP id
- 5614622812f47-46a8a64394cmr6689970b6e.51.1774902223550; 
- Mon, 30 Mar 2026 13:23:43 -0700 (PDT)
+ AJvYcCUvdjmfjKGY8MLWb9mNbnnrTz+s1WSfhDlohHONWhlSNNufgl9JwBqTYVgNYZhM+JUsZ5I785Y=@lists.denx.de
+X-Gm-Message-State: AOJu0YyJby7HbceLBXxD7wGmZzMN6JxTK5ACFKXPG/zxbRc+Pgn6S3A6
+ LgrD3BV9YolF1bn+xmiCbi8wKOMppTkHKkFvRWfhpsB2m15oNfWWqA6mkKQM7+f6u4RjAK06ASC
+ BmEuh
+X-Gm-Gg: ATEYQzwCNll4g7QZq/MQ2yiSMZ+RuiiATiLbWSZECPwvVtaDwO7/oupkgkibFYMfKrX
+ 2zcVUe9s9GG0Od0Z94PzXUG+7j/Wx65MbL38pRpmRX/cDIJZMdUwnJeHi4mIKwrNy8oUF3GRXAG
+ meZCTnPWKzsK3Y5b8ANobLA+rc4BwrnoQcn+XP8z9qf64EpPSFq4GD7VKgTw42gdtf5cgH//FuK
+ IGvAILdNgHvk294HDa+pPOtkjMxahDIULPXheXZWEDQDpLppNVewynR5wKCbQsjLThy47kxVM1+
+ mj4t+twMz+Rm6d8YzOLGdqtNgzC7BxV23vuZ2G83Tfa5ifuGEkwNR5wl4XxH8r8DR74897HIPcb
+ zlAIB0BjK3DqNk2LyfZPSV21Cw0OEgXROdv5KljsAsuWqylfP7rRlqnnC9t1BkkK9hwhYG7qYyF
+ /cxcUn3uWRwj4xBl/yYlvQlQM0hhTl
+X-Received: by 2002:a05:6870:9d9a:b0:41c:fdd7:5b4b with SMTP id
+ 586e51a60fabf-41cfdd77fa1mr7121904fac.21.1774902224463; 
+ Mon, 30 Mar 2026 13:23:44 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:a67f:a092:38d7:379e])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41d048e1984sm5882608fac.4.2026.03.30.13.23.42
+ 586e51a60fabf-41d048e1984sm5882608fac.4.2026.03.30.13.23.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Mar 2026 13:23:42 -0700 (PDT)
+ Mon, 30 Mar 2026 13:23:44 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Subject: [PATCH 0/2] arm: mediatek: print specific CPU type
-Date: Mon, 30 Mar 2026 15:23:17 -0500
-Message-Id: <20260330-mtk-mt8189-cpu-type-v1-0-4059c3b52761@baylibre.com>
+Date: Mon, 30 Mar 2026 15:23:18 -0500
+Subject: [PATCH 1/2] arm: mediatek: add SIP platform bininfo lookups
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDY2MD3dySbCC2MLSw1E0uKNUtqSxI1U0yM0syTrSwMDa1tFQC6iwoSk3
- LrACbGh0L4ReXJmWlJpeAjFKqrQUAV09gIHcAAAA=
-X-Change-ID: 20260330-mtk-mt8189-cpu-type-b66b3a883599
+Message-Id: <20260330-mtk-mt8189-cpu-type-v1-1-4059c3b52761@baylibre.com>
+References: <20260330-mtk-mt8189-cpu-type-v1-0-4059c3b52761@baylibre.com>
+In-Reply-To: <20260330-mtk-mt8189-cpu-type-v1-0-4059c3b52761@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
  Weijie Gao <weijie.gao@mediatek.com>, 
  Chunfeng Yun <chunfeng.yun@mediatek.com>, 
@@ -91,17 +90,17 @@ To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=850; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2861; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=zjTvD3TIQ7e3wTxn83PTpAvZ6FZ4/QPi8M8uIjw9ENg=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpytu5gFN5aYClS3uh9zf5k52m5DrHO/MrsdLXc
- ZGla/v/ux6JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCacrbuRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AiusIAJobbHVeB/55IN25LB9D9jik4WPQ+8AU5ciCxVn
- 000/e7QvP4Uvr8ewMl1kQAmnHtbhqh9UrLxjq1uaxIiNvSxIwVYHuyNtV7O6axgXdcmAiem7V98
- m7XhECY0YC/Q7OXM2EbBCoNcvYeu3S2Yusw8iIpGeo1nEybEsNAKLxEhZrSxEjDBXSA8A+V8SxT
- rWPXBMidoeQXqL5gK1bZBEVpEvXieGl4sdhng3mqG42CIWkPU+TCHOFwhc6ssfvmatTJ7mm6jen
- CFepL1UpYnVmv0H8JFT4QAjirzq//RuDH0+khblAlURAuPmfJj2mHhE7j/Pqi83USJWIYYYt8GC
- lzKE=
+ bh=0wQ96CpxG4gTYfxqjYWBRPIfajhuWCb/UVRjlQCFzso=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpytvBdSmt3o05WxutzKlMTWaZyOQLTlJ2QvaNc
+ 7/9+dq5ISOJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCacrbwRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AM0cIAJwIkaJ/VywZgLjt8VFdpiJfLxV53iTWYuv5zHj
+ qoOd4U1argkRLWyBbFVL78NdX9Uc1D/AbKhKKYCQtTZTvQLOSa9d+KqWM2pzC/VMYFjU0aOBD1v
+ SAs1HIxH77Y3P/C62rpk9mjaQ2xhzRL94m1zwcWJxEBLvJ8wKgz+LUYm8UCTPPw/SidiMHv+Skm
+ RdEgJ5v9NVu/bDGGqo7jD57r+ZywtTYMa70SerInSEcJhnbgkymvb6INHC57bNyJ6WlLAfBPcUR
+ iLEscN58TAvp0DvJu+KvyzXOPqpKN1S5q9kGtbvG+MBZdgvDYEBi21md1lSmGxWr1Qm2pq5TV4E
+ 1zQc=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -120,26 +119,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since the mt8189 init code is shared by multiple similar SoCs, it is
-useful to read the CPU type from the CPU itself and print it instead of
-always using "MT8189" in order to have accurate information in the boot
-log.
+Add a couple of functions to look up the segment and part name using SIP
+calls. These will be used to print more accurate CPU information in
+print_cpuinfo().
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-David Lechner (2):
-      arm: mediatek: add SIP platform bininfo lookups
-      arm: mediatek: mt8189: print specific CPU information
+ arch/arm/mach-mediatek/cpu.c | 55 ++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/mach-mediatek/cpu.h | 14 +++++++++++
+ 2 files changed, 69 insertions(+)
 
- arch/arm/mach-mediatek/cpu.c         | 55 ++++++++++++++++++++++++++++++++++++
- arch/arm/mach-mediatek/cpu.h         | 14 +++++++++
- arch/arm/mach-mediatek/mt8189/init.c | 32 ++++++++++++++++++++-
- 3 files changed, 100 insertions(+), 1 deletion(-)
----
-base-commit: 49a76f715d8e348650feb17979d8d3ad52a66fb3
-change-id: 20260330-mtk-mt8189-cpu-type-b66b3a883599
+diff --git a/arch/arm/mach-mediatek/cpu.c b/arch/arm/mach-mediatek/cpu.c
+index 8e8bc4f9cea..56a41e42df6 100644
+--- a/arch/arm/mach-mediatek/cpu.c
++++ b/arch/arm/mach-mediatek/cpu.c
+@@ -8,6 +8,11 @@
+ #include <init.h>
+ #include <wdt.h>
+ #include <dm/uclass-internal.h>
++#include <linux/arm-smccc.h>
++#include <linux/types.h>
++
++#define MTK_SIP_PLAT_BINFO ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL, ARM_SMCCC_SMC_64, \
++					      ARM_SMCCC_OWNER_SIP, 0x529)
+ 
+ int arch_cpu_init(void)
+ {
+@@ -21,3 +26,53 @@ void enable_caches(void)
+ 	/* Enable D-cache. I-cache is already enabled in start.S */
+ 	dcache_enable();
+ }
++
++/**
++ * mediatek_sip_part_name - get the part name
++ *
++ * Retrieve the part name of platform description.
++ *
++ * This only applicable to SoCs that support SIP plat binfo SMC call.
++ *
++ * Returns: the part name or 0 if error or no part name
++ */
++u32 mediatek_sip_part_name(void)
++{
++	if (CONFIG_IS_ENABLED(TARGET_MT8188) || CONFIG_IS_ENABLED(TARGET_MT8189) ||
++	    CONFIG_IS_ENABLED(TARGET_MT8195) || CONFIG_IS_ENABLED(TARGET_MT8365)) {
++		struct arm_smccc_res res __maybe_unused;
++
++		arm_smccc_smc(MTK_SIP_PLAT_BINFO, 0, 0, 0, 0, 0, 0, 0, &res);
++		if (res.a0)
++			return 0;
++
++		return res.a1;
++	}
++
++	return 0;
++}
++
++/**
++ * mediatek_sip_segment_name - get the segment name
++ *
++ * Retrieve the segment name of platform description.
++ *
++ * This only applicable to SoCs that support SIP plat binfo SMC call.
++ *
++ * Returns: the segment name or 0 if error or no segment name
++ */
++u32 mediatek_sip_segment_name(void)
++{
++	if (CONFIG_IS_ENABLED(TARGET_MT8188) || CONFIG_IS_ENABLED(TARGET_MT8189) ||
++	    CONFIG_IS_ENABLED(TARGET_MT8195) || CONFIG_IS_ENABLED(TARGET_MT8365)) {
++		struct arm_smccc_res res __maybe_unused;
++
++		arm_smccc_smc(MTK_SIP_PLAT_BINFO, 1, 0, 0, 0, 0, 0, 0, &res);
++		if (res.a0)
++			return 0;
++
++		return res.a1;
++	}
++
++	return 0;
++}
+diff --git a/arch/arm/mach-mediatek/cpu.h b/arch/arm/mach-mediatek/cpu.h
+new file mode 100644
+index 00000000000..768284e487f
+--- /dev/null
++++ b/arch/arm/mach-mediatek/cpu.h
+@@ -0,0 +1,14 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Copyright (C) 2026 MediaTek Inc.
++ */
++
++#ifndef _MACH_MEDIATEK_CPU_H_
++#define _MACH_MEDIATEK_CPU_H_
++
++#include <linux/types.h>
++
++u32 mediatek_sip_segment_name(void);
++u32 mediatek_sip_part_name(void);
++
++#endif /* _MACH_MEDIATEK_CPU_H_ */
 
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+-- 
+2.43.0
 
