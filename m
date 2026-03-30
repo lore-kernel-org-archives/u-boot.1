@@ -4,97 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9A0A1061B0F
-	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 15:21:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2343C1061B0F
+	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 15:33:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15ED283DBF;
-	Mon, 30 Mar 2026 17:21:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 3975183DBF;
+	Mon, 30 Mar 2026 17:33:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="pVeY6bgm";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="rrcx20BZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DFB183FD9; Mon, 30 Mar 2026 17:21:52 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 778F383F5B; Mon, 30 Mar 2026 16:19:06 +0200 (CEST)
+Received: from PA5P264CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E1C883D17
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 17:21:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C3B9383D17
+ for <u-boot+nodisclaimer@lists.denx.de>; Mon, 30 Mar 2026 16:19:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=softathome.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7d91f82d819so4568509a34.1
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 08:21:49 -0700 (PDT)
+ spf=pass smtp.mailfrom=paul.henrys_ext@softathome.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=rED9eaMyN9pJc4JEY2Js94kN5WPYrIyZXDZiWAFarBKzBj774sR9Q3nU+EXOP9nMgHBrlsDhJOJMxsUT2imDWZV9P2HToLyBJaT+7vsQmSev7jWrjez3xW5TV5gB93FM/qTLz0y6DNMzrwBjo9ayBfBOf7B0+AHxBoje4JwiacI3Yg0oIqnPvMFP9Gjki7fWb+39x66ulRWXYSNE4zmR2/DnUnTmrNJAx8r4XHnQzyRlsK1EQRnsSpI6mQS0jYyfqsZlI+GL4+9G7HHoa0ZOy/xjAQVhq8Q0pq4XQg7Z3t+6ma+foBPRKp/CrI8K5XsjPuHoDUTGGi4/7VOkZK3ong==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=lSOGyYgEs1nNRZcwTAwLr50Tk7Te2DezYeXotUqtXvk=;
+ b=IVcTi5PwMswOxzqS1riOmpFd4sV/E8s1biHfLsxP3veq28s+egQyfTcnHYz9hqoeWszA1vSKpB1uh+E5ec653JvBKlbVytam3VkV+cuqwWvTT1HmShKAoN1QuEcs/KzU/m020Kie2ojVuI95oPunn4ZmNiWljgGDxgvOg7eKbpvyzDC9NB1PfVyH6kUYSfLhavuMzlBV0iKkblC1eB3GlzKddUX0W0BSxWtmGn7ZYdLFhX1laKtwtPYhTKarTmKfpMAyGWcc39UVyYCFe6GXFSFZnlV2QowpeKxCFxqZcrZqrNjw18vuSdwSRppkHDIKvmvDT69ACc+x0rI6ogO4TQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 149.6.166.170) smtp.rcpttodomain=chromium.org smtp.mailfrom=softathome.com;
+ dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
+ (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774884108; x=1775488908;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Kbo7CR8HtF8bQs7ErDEgs5HJ5srCW6BztizVvohcnCg=;
- b=pVeY6bgmwnFKJowyBQlJXrZcos9vzhOHQbnHr2dM69+XEGwXEyGgZ/ok4azlmA9Mm6
- Lx4j8JMrRfmpfpF+jqNQWKWH5L3yOtu1eYU0la7NBtookznY4zUIdBhpSdLzwRacpCcb
- qhjSDX32r7+JsMUr7nJzQd2/2FIc1TDV8mjz6TX/1TBrveLq7rw5JxLm5xMr0iHy8hQR
- 7dCCxeih9uYfpW1SJmlP36lo4zjZubZLz9LHW2iC5/64dc0mZyzqRGVDkECnUBSgY2hN
- K0muJoIzxnaCts/8RSQZhL2Sz1ll/So3mJtd70Sg+OCn5IUMTlGciu/Eq8pqlct6iesl
- woGg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774884108; x=1775488908;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Kbo7CR8HtF8bQs7ErDEgs5HJ5srCW6BztizVvohcnCg=;
- b=Hqe6v0Vh6/ER8iXfB0SDb//h91sxe+lnWWTGc35eU+FAA9SV7Iwp/y72XZTwv/xL6F
- 0BVIaMP/JkDbyyjSV//HOSORVj0OrhQh5Uz33WUajGdzZdN1z9qFYIiokwDDFYeS/2rN
- O/tHPSh3RKBvN+L9+5AqkiKLE2Kwjy56kwyMQCD7+KCHLyX4hOxSAGUWJlhHjgjG7U2V
- A2fyrxS80BkT5DlwhF0sbmr9LuoxFPWU7l2DaGNVFuFLu8hKkj9z8qolGcBQKwBrH9ON
- 77Qd7fdxnk9wX88+T9GeMjpBzEJimKHsF3QJ41ai6uNk8wFzYZIbOwGTAOZrHWBon9Nr
- qceQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUckjYLA/ROM/j6ePyMKfK8UpUapwWYeXgd+AT51YJnVt3hJ9aYEh0IC76A49++97i/QloOkoA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxNWE3pfpesO3ejXvkpS9r+mpF020qMiEcpbmxqoHdafLBE59SB
- Zh29fiLoqcdCgFzWL8JmPEIGrs9h2rpFwo5u5h4u07C5cxz8oS0fDgqs6BiOv+9dJxA=
-X-Gm-Gg: ATEYQzzJwoBDr8S6gzzwZWVGSvaRH8CJ2WbGglaCsQEkyH9w26YNQ11O+2eesLL076T
- NSWEkIPm8UQvxVdg99HJYjReL7g6g5qrMeI0KyC6ZNtnJcv1aea9EI0K0XIe9V4T9sGdZJgyIHw
- BbeK7Yxy4E1pV+9qRLb+9N0OZcG6ZdbT55RKHnpOWgJj0ySUYruNFRnZp0WJs7njFEzcuvcQRiz
- 3TMlysA2iRs5a9julEl75iQDyBeTr9vzH707W2MCONDaS/5uCnYvt5eCsMC4nkGNjte8v+XFuDG
- +TLc1fkRH25T/HpeGxLxccl7Kp446oTNHlXqlsUUPsO/CLP/HHKzu+V9JJ3xx82VBhhKqd86klz
- LlaxKpcAxcOKkku9LMUHPDYjNX/WuycNkMwgoA++8pJcf2Ng1qhHoq6DeQir+eqKiBMiBKc3+UD
- MzgE6mNlkBDJGukHVzHkP58RNbyYBylObeeDmrkKNBYuN+BbCe1audQV1sxjqGU+DaYG49cSTdn
- A==
-X-Received: by 2002:a05:6830:618a:b0:7d9:d54a:f872 with SMTP id
- 46e09a7af769-7d9fadee948mr7381418a34.13.1774884108219; 
- Mon, 30 Mar 2026 08:21:48 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:a67f:a092:38d7:379e?
- ([2600:8803:e7e4:500:a67f:a092:38d7:379e])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7da0a7b54a4sm6111333a34.13.2026.03.30.08.21.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 30 Mar 2026 08:21:47 -0700 (PDT)
-Message-ID: <f407414b-1aa4-427a-8f78-d863a0e2cd3b@baylibre.com>
-Date: Mon, 30 Mar 2026 10:21:46 -0500
+ d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=lSOGyYgEs1nNRZcwTAwLr50Tk7Te2DezYeXotUqtXvk=;
+ b=rrcx20BZEI1BtROSAXgy1NWcdixJUNh5wKE7larcFrnnUhHzTi890sTFK8u3f4bUJ9h+af5fNiFohfnq0Q7X++h9jVnefTKeZvCvEsQYnppxWgqNSmpUCj8me0v/t40NvpFexO5bELM58IIKut1YRKV/TJgcpgkmpoft+gVygy+9/x6s70d8vFibeo5v9QAdCA15G4uobmXgpdwx43dywKPZUfY5HVEJ9opVwDnA9z4q/X418ed4mJ+b92vmgzl9bJuLJ8M6SG9HBVTKLQp+W09arTkKjmCtO+HQYxtbVOOo0nAtMDITIk2esVhxO5Ep+95S55dv+WQaoYdFxr3d7A==
+Received: from MR1P264CA0146.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:54::7) by
+ PARP264MB5484.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:3eb::8) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9745.28; Mon, 30 Mar 2026 14:18:59 +0000
+Received: from MR1PEPF00000D59.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:501:54:cafe::90) by MR1P264CA0146.outlook.office365.com
+ (2603:10a6:501:54::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.28 via Frontend Transport; Mon,
+ 30 Mar 2026 14:18:52 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
+ smtp.mailfrom=softathome.com; dkim=none (message not signed)
+ header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
+Received-SPF: Pass (protection.outlook.com: domain of softathome.com
+ designates 149.6.166.170 as permitted sender)
+ receiver=protection.outlook.com; client-ip=149.6.166.170;
+ helo=proxy.softathome.com; pr=C
+Received: from proxy.softathome.com (149.6.166.170) by
+ MR1PEPF00000D59.mail.protection.outlook.com (10.167.241.6) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.21
+ via Frontend Transport; Mon, 30 Mar 2026 14:18:58 +0000
+Received: from sah2lpt245.. (unknown [192.168.72.191])
+ by proxy.softathome.com (Postfix) with ESMTPSA id 5F846200C2;
+ Mon, 30 Mar 2026 16:18:58 +0200 (CEST)
+From: Paul HENRYS <paul.henrys_ext@softathome.com>
+To: u-boot+nodisclaimer@lists.denx.de
+Cc: sjg+nodisclaimer@chromium.org, Paul HENRYS <paul.henrys_ext@softathome.com>
+Subject: [PATCH 1/1] tools: u_boot_pylib: disable standalone module detection
+Date: Mon, 30 Mar 2026 16:18:52 +0200
+Message-ID: <20260330141852.984717-2-paul.henrys_ext@softathome.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260330141852.984717-1-paul.henrys_ext@softathome.com>
+References: <20260330141852.984717-1-paul.henrys_ext@softathome.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] pinctrl: mediatek: print bias info along with pinmux
-To: Julien Stephan <jstephan@baylibre.com>
-Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20260313-pinctrl-mtk-fix-mt8189-v1-0-607dd37fde37@baylibre.com>
- <20260313-pinctrl-mtk-fix-mt8189-v1-3-607dd37fde37@baylibre.com>
- <CAEHHSvbnYRXEgO3SZpgFO6njwfbEx-ocSeB-izotqVyQBBx2dw@mail.gmail.com>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <CAEHHSvbnYRXEgO3SZpgFO6njwfbEx-ocSeB-izotqVyQBBx2dw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MR1PEPF00000D59:EE_|PARP264MB5484:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: e5e09d18-a77d-4a54-43e1-08de8e6748e1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|36860700016|376014|56012099003|22082099003|18002099003|13003099007;
+X-Microsoft-Antispam-Message-Info: 6KLTZc+q7qU9NdGu4iVEVHogoMUMGHuS7kbzY0tWv37hfvIRJP3x7Z7WDCpAufU1nV19iczKEsVg92OyxIO0JELunsGEvGWpjtRAimbjFWl+NQADYywcN7ZkRqQGFwAfafvLeVPDCfk+2+KhTtVO5DJ0DlbpjlYMY+Hld7E1vaTBSMrQYvCEKl8gvMIcYK9hyEScVKCwkIK/ouN946NIr+4/Hqady+NElrlM7YhPCP5PKcupEooJxg1flXVeMXAzRul0+SPs8Tdseka7442IXbLmSM8eNciGKuGmea4GzWuJma5GuGjvO5Y8HCUHY9JTAMHqtb9fE8Qn6RnRDMgs83ZUhvm+jaqbC4o15SUmJseASiNGrDr08nuHyDlD/6HzsGD0/K7UOVkk7ONCusXJG8LFx5+l9i/iLuUM6gpHFR4BfpZVxWgf5v8pDDk473ImSghmYuONd3lzGH5YgNUoGkKpicnBQimyS3cB331U8yWD04x2sRy0msIr9o8bB7u7E7vuao4lRYzDelbpplnip6geuZHXFYv+ie/nahyoeh1TM6+uXVucKKyRT4x9jZH/oBrOuoefP9zfj3yJwuc1/d63MFfMpGT2BBCqXOPzVJaBonf8wP036v5RNX5NRO1B2aRTkq6qP4i1P18sUNMQD+6BazjwOfUTqnIn2IQNLy8rFuQbK6SGvdkTtm3ov1ybR1RfsP4IOCx2+Zmn+mUQ4Q==
+X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(56012099003)(22082099003)(18002099003)(13003099007);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: SW2lyXbM8RJOkKacxSzgvmnVy3GeUdPUytmfaR7BAK+xBETPHg4vHjfnQarP/6bztlfr01yfFCuckvg0rafdN2gW1ac2Q/Eq7NYkM0qUiFQmW6sEBGbG77qrPm8xvu10OANRWzDfaza4l/xtXX4W9k0k1+q4KoxVbYR6GUDZXLP2+XPVxaDD3iZJjvcofbh+yEg92v/xPe1/wnDv1il8DzolS+WSe7n2hQBDcOTQd+Lg5xkQgWfN3eUmxfZGOO7HqXvxIX/84LvsynQUA9OP7kSvSCbcdy+Lp88G8WatBG18yDLqGp1D6/gTMB+hDM2xyg7MMnHjLSddL+0tSZ1rtl09Aay65Ez1sPkSMHxgzpCMnpRechaawjDXX+otzC5gocTMaLmNGYf2znkgW10e4LafNVoMWt5japFy9yoDHBoj4HLully2m2Fl8ka/V3nl
+X-OriginatorOrg: softathome.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Mar 2026 14:18:58.8016 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e5e09d18-a77d-4a54-43e1-08de8e6748e1
+X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
+ Helo=[proxy.softathome.com]
+X-MS-Exchange-CrossTenant-AuthSource: MR1PEPF00000D59.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PARP264MB5484
+X-Mailman-Approved-At: Mon, 30 Mar 2026 17:33:14 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,90 +121,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/30/26 9:51 AM, Julien Stephan wrote:
-> Le ven. 13 mars 2026 à 22:56, David Lechner <dlechner@baylibre.com> a écrit :
->>
->> Add functionality to be able to print pin bias settings along with the
->> pinmux setting.
->>
->> This can be useful to debug why pins might not be working correctly.
->>
->> Signed-off-by: David Lechner <dlechner@baylibre.com>
->> ---
->>  drivers/pinctrl/mediatek/pinctrl-mtk-common.c | 96 ++++++++++++++++++++++++++-
->>  drivers/pinctrl/mediatek/pinctrl-mtk-common.h |  4 ++
->>  2 files changed, 98 insertions(+), 2 deletions(-)
->>
->> diff --git a/drivers/pinctrl/mediatek/pinctrl-mtk-common.c b/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
->> index 1028b8a93f5..ef4acc946a8 100644
->> --- a/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
->> +++ b/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
->> @@ -237,9 +237,39 @@ static int mtk_get_pin_io_type(struct udevice *dev, int pin,
->>         io_type->bias_set = priv->soc->io_type[io_n].bias_set;
->>         io_type->drive_set = priv->soc->io_type[io_n].drive_set;
->>         io_type->input_enable = priv->soc->io_type[io_n].input_enable;
->> +       io_type->get_pinconf = priv->soc->io_type[io_n].get_pinconf;
->>
->>         return 0;
->>  }
->> +
->> +static int mtk_pinconf_get(struct udevice *dev, u32 pin, char *buf, size_t size)
->> +{
->> +       struct mtk_io_type_desc io_type;
->> +       int err, pos = 0;
->> +
->> +       if (!mtk_get_pin_io_type(dev, pin, &io_type)) {
->> +               pos += snprintf(buf + pos, size - pos, " (%s)", io_type.name);
-> 
-> why += ? pos is initialized to 0.  Same why buf +pos? and  size - pos?
-> 
->> +               if (pos >= size)
->> +                       return pos;
->> +
->> +               if (io_type.get_pinconf) {
->> +                       err = io_type.get_pinconf(dev, pin, buf + pos, size - pos);
->> +                       if (err < 0)
->> +                               return err;
->> +
->> +                       pos += err;
->> +                       if (pos >= size)
->> +                               return pos;
-> 
-> Can't this be removed?
+Do not try to detect standalone python modules at the top level, so setuptools
+stops searching for: command, terminal, ... as independent modules and instead
+relies on package discovery.
 
-The idea was to make it robust against future additions. Should be
-fine to drop it.
+Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
+---
+ tools/u_boot_pylib/pyproject.toml | 3 +++
+ 1 file changed, 3 insertions(+)
 
-> 
->> +               }
->> +       }
->> +
->> +       return pos;
->> +}
-
-I will simplify it to:
-
-static int mtk_pinconf_get(struct udevice *dev, u32 pin, char *buf, size_t size)
-{
-	struct mtk_io_type_desc io_type;
-	int err, pos;
-
-	/* If we fail to get the type, then we just don't add any more info. */
-	if (mtk_get_pin_io_type(dev, pin, &io_type))
-		return 0;
-
-	pos = snprintf(buf, size, " (%s)", io_type.name);
-	if (pos >= size)
-		return pos;
-
-	if (io_type.get_pinconf) {
-		err = io_type.get_pinconf(dev, pin, buf + pos, size - pos);
-		if (err < 0)
-			return err;
-
-		pos += err;
-	}
-
-	return pos;
-}
+diff --git a/tools/u_boot_pylib/pyproject.toml b/tools/u_boot_pylib/pyproject.toml
+index a860d134551..22b364583a0 100644
+--- a/tools/u_boot_pylib/pyproject.toml
++++ b/tools/u_boot_pylib/pyproject.toml
+@@ -21,5 +21,8 @@ classifiers = [
+ "Homepage" = "https://docs.u-boot.org"
+ "Bug Tracker" = "https://source.denx.de/groups/u-boot/-/issues"
+ 
++[tool.setuptools]
++py-modules = []
++
+ [tool.setuptools.package-data]
+ u_boot_pylib = ["*.rst"]
+-- 
+2.43.0
 
