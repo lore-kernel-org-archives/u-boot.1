@@ -4,86 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C06EFF492B
-	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 00:30:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD28AFF492D
+	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 01:49:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BC138394E;
-	Mon, 30 Mar 2026 02:30:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 14DE78394E;
+	Mon, 30 Mar 2026 03:49:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="HCF7/pne";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Pt6VHXu/";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L9jLpZfn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1921383C14; Mon, 30 Mar 2026 02:30:54 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 239BF83B48; Mon, 30 Mar 2026 03:49:47 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 325EE8063E
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 02:30:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ADA3B8063E
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 03:49:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4fkXGg6v9Xz9tHG;
- Mon, 30 Mar 2026 02:30:51 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1774830652;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=sbVgbWtnfgoFi7Ut0IhyQNbHjUzU9eVuwSybEWvsMPI=;
- b=HCF7/pne746qN57GfSEKLXiUCpz6x8sVc/lxe3GO+sL8hgawI47X39ry6d3Jj9503e6g23
- kX7p3jazX72Z9qCUX9LYaJW5dwOS3p8nqDZrCiwx9IgLo5LLt8fRAe1mYs19YgzKtnsnsA
- YvogtGgjqSTYAfXRcvhknIS4ZpkQg21v0tkTopMItq6xMKrBEgjiStmGDLlMk+28ryYM8X
- bwPX7MGkcf2zubqPh+mG96quZx6xlV4VatzmXqr5SQUasiR0YV5v2JGemMI5Aio4mEocf1
- P2d6CoYUIq1qMv2u36caNUrYZ1KmVSNZs0O05IHtXg1xmBNg4L5J5ZJI8gdJJA==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="Pt6VHXu/";
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <d387da83-7c5b-4816-ba58-7939dfa7a28e@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1774830650;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=sbVgbWtnfgoFi7Ut0IhyQNbHjUzU9eVuwSybEWvsMPI=;
- b=Pt6VHXu/ZYBzLdpb42UDaep1H29GUA7/qLCe9uRp/i3geBs07SrBcVyBg/t1NlU2cuWXPz
- 7vGZJcBviBHPXRSpbHSZPrNkYbwOfVn8chgjD/ZBllyFLxML0Iu5hVOFY1tsZWIQ2i34o1
- tB9fAIDzetBwazixv5uYpgpHp1c1ENFKpAAd/pBaRqnnBZyQhijeyI9/N0Ck7VqPrHlUdx
- L+2J9fgvFrubXmsD+8h76tP2csOJrGZoxguSQq3pwTofMazRUIEkLi0L5J11IvT7ito/6z
- 7aAXmRE4jILSZFzMGrIOOn9/G5IzV6pf9TqO2xJGucmn+3oHARdmmwATydKG0Q==
-Date: Sun, 29 Mar 2026 16:42:47 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-6618bc129acso5697445a12.2
+ for <u-boot@lists.denx.de>; Sun, 29 Mar 2026 18:49:44 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774835384; cv=none;
+ d=google.com; s=arc-20240605;
+ b=bPF5eKe47/bqT7JppTHfNkCDgG00txopXc9wWqvlU+xmii8oJ6Gat3BEDSJF7zb14Q
+ Vm6QzV5yDvrZdf5A3Z+xlo4Pm2Qxx/I91a8VoZxq/hreFdhTbTz+iChuC4YTzSidh4GB
+ gl+KhKl04cpJ0MHb8xSrh0x0pixhwCg9aYxDeQ5DkidHy+kUZQxg+J22BF4H/EDkxoTh
+ kRHmvPJ7G6FP0yME6uWtUXDzrNvh2Zux4Qojnz26XzdEXU/F8LmVBidyMfLB8HOP/lQq
+ nV46+FnoL+aRHXe3mSuzUTZ0TxEdt4tDnhBqiypaG2CMALc9hEUCIRz6jQXkBw2b2JGQ
+ mSuQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=LLYiRAlZWMjxqzi4vM+XpTyG1mQL14t3PdCu7F/LNsc=;
+ fh=7FqrHHZ0L629h0TDQAGFOFxUMZzvTpP3UnKIBZgj4Go=;
+ b=VEHXktDnjwxp9mS6Qjj3SF/62jVFkkjEY+UgRftYacRIWc0shWFA9J/TtmPWHpbacP
+ vgL+SqRipIk6W0oB8fza1ajJ3LzxWcRS09KKcgOJqaOzwjEGK3FGBQXjTpf71Qo9ROmJ
+ lnrC46J4JUB3hEgUlQnO/g1by19TcOFFm8cfefSkqfKGbIjRBOCk6kbrqm0r0dIH0VMX
+ zHYFln4dRqYzLbLVQ1tPbjXf2azHbyuwkNIcoww+ATGGNVnA6XzKJCMj8OqP/WN/LNr3
+ PbCpYsVkndQSOjLx8N+tv4PyJ1BV7VR63E4ZLJaUStlzcTW8+qyR+um/hq5U7JBFELb+
+ Y6Bw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1774835384; x=1775440184; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=LLYiRAlZWMjxqzi4vM+XpTyG1mQL14t3PdCu7F/LNsc=;
+ b=L9jLpZfnufJv+mZ/2fNMkVa+A0jlx3Jtg+9q/2Mp5G3VuRALImIvfq6HfRGfpi/vgU
+ BgBPyyfC5dMQxG4XLlFJci75VLotrq2WCGHe76P3o07TNfWRbG8A0KZ3i5vNBulb5Ccj
+ 9znI9jeaSFidDdBgyRrlWtBrpueSZbvMF99tU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774835384; x=1775440184;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LLYiRAlZWMjxqzi4vM+XpTyG1mQL14t3PdCu7F/LNsc=;
+ b=qhxAlV0VFGXR8uMj0Haq1YUfeOhZOra7JndCPO3vvPn8kxMxE4ZTwBuRdMJVb1zLOB
+ NAO2LU/HrA2rO2S5Jez9eAzc9H4HNpzNjXbc6KLlykRBQCUZ1N0ROxCCgALOQ+wFKIeY
+ VPyEm6+szEopyqpe68w3+ywCvIlOwjJHZdxEOv9UzPh6/ttjJBiJYX1NMUKcuA6gZ57Y
+ BQlZFdSN5BWYd6Ur8XR7Fy25SZCDB53sbvWIayvnH1Erqe0SCn3iEurQEZ00HCPvaG4q
+ Lfz+S1U4K179gBu5zcarNaiY/8UwkUdPMYuCET5M/Gvqn3s8MSEf1UihoViornPdSihd
+ A5tw==
+X-Gm-Message-State: AOJu0Yyu/ei/6QI/NDLY/kmgG7D15ca8zg2XkJqKTNU7ir4/KpXCTk9y
+ 2sLam0uD7jx8NImusagt2vkJsngSDVJmtopWTa5NPSbMBlkQkHCxOKIUxsBgEehowvU15C/NzKH
+ 3qatnQQk+5p4MnlVWbSc7yjkXX09T/ifczU7W9DE1
+X-Gm-Gg: ATEYQzxnWkmNvS/85ZIXvKktzR1M0E2gVvhv7/86eiVadgIpXjU/ZnO19cf0s8PiV8S
+ duHwQ2LNrNLCNxprWuTbvMz4AslZ8BSmnIkfdmHJ6RG9KdQ9clCRWI0HLPUvNlydEWeUbnu5if7
+ ci421Rv+15djLzxsKp/bXOA6ASUmrkRAxxO31FkjwofbLFmz5zTOxVbSd8+arAndqbT8ILUrQh8
+ mVzplNKXEySAXRO7QY0Iw4NK8h4iJSkpUlgy0Qx2kSeqi/rnj4x4kEyeRnL43F5o00OFyi9ePHf
+ SHLnswfD5N7Ewv7CIJd3fLyWXvluSs/J2t08mbm/V4YsLIIjJz8=
+X-Received: by 2002:a17:907:a807:b0:b88:6309:c300 with SMTP id
+ a640c23a62f3a-b9b5090a9d9mr595726566b.39.1774835384009; Sun, 29 Mar 2026
+ 18:49:44 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH v1 3/3] common: Allow relocations on the top of the last
- bank
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: marek.vasut+renesas@mailbox.org, trini@konsulko.com, u-boot@lists.denx.de
-References: <20260326115111.1631261-1-ilias.apalodimas@linaro.org>
- <20260326115111.1631261-4-ilias.apalodimas@linaro.org>
- <6f6f1fc8-56c5-405b-915f-269d789b43e3@mailbox.org>
- <CAC_iWjK5-5Nn8+-OOQWuPSDwd6ckHyPY2Na-7eGO2tc_1XsLxg@mail.gmail.com>
- <edbe864b-2c76-4ac2-8a1e-69f527f1316e@mailbox.org>
- <CAC_iWjKGzbbf1du3K9QuGYjkDrscAUKxMsOTcLvC1A4L7UTvxQ@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <CAC_iWjKGzbbf1du3K9QuGYjkDrscAUKxMsOTcLvC1A4L7UTvxQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: e4f3dcc41fe9e2febb9
-X-MBO-RS-META: r6fhdrpfw5n43ega6qa817dmtofcua1o
-X-Rspamd-Queue-Id: 4fkXGg6v9Xz9tHG
+References: <20260321195238.174658-1-marex@nabladev.com>
+ <CAFLszTjdv78kSfFwBXxGq=wxP7y-bc4O_8jDeVTtQFtLct4L4Q@mail.gmail.com>
+ <9f5c1c47-410c-419c-b272-2a44a0e4a4d9@nabladev.com>
+In-Reply-To: <9f5c1c47-410c-419c-b272-2a44a0e4a4d9@nabladev.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 29 Mar 2026 21:49:32 -0400
+X-Gm-Features: AQROBzAP2sY5CUnc7AxscnmGPsYLZkGXN_SBsxvmAOwIETq6FKvWg-T1l_vHZQA
+Message-ID: <CAFLszThUT+YbHJLoXNBN73mZz_37jbOZ608xpnOmJNSVG5m-8Q@mail.gmail.com>
+Subject: Re: [PATCH v3] binman: add CST backend selection for i.MX8M signing
+To: Marek Vasut <marex@nabladev.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,52 +111,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/28/26 8:11 AM, Ilias Apalodimas wrote:
-> On Sat, 28 Mar 2026 at 08:44, Marek Vasut <marek.vasut@mailbox.org> wrote:
->>
->> On 3/27/26 1:23 PM, Ilias Apalodimas wrote:
->>
->> Hello Ilias,
->>
->>>>> Add a Kconfig option and allow the common code to relocate U-Boot
->>>>> to the top of the last discovered bank.
->>>>
->>>> The commit message should really clarify the current pitfalls of
->>>> enabling this symbol, including the part where ethernet transfers above
->>>> 4 GiB used to work because of the packet buffer built into U-Boot, and
->>>> they will break because the buffer is now relocated above 4 GiB too.
->>>
->>> Shall I just add your note from the RFC with a few adjustments? I.e
->>>
->>> NOTE: This currently might break platforms. If the ethernet
->>>         controller cannot DMA above 4 GiB, and once U-Boot does
->>>         get relocated above 4 GiB, the packet buffer which is built
->>>         into the U-Boot binary is also relocated above 4 GiB.
->>
->> This patch should not be applied in the first place, this DOES break
->> things. I think when this patch is safe to be applied, the note will not
->> be needed.
-> 
-> The patch obviously will not get applied. I was referring to the note
-> in the commit message only.
-> I'll just add it with slight changes in the commit
+Hi Marek,
 
-OK . Maybe keep sending the patches as RFC , so they won't accidentally 
-be picked ?
+On Sun, 29 Mar 2026 at 08:25, Marek Vasut <marex@nabladev.com> wrote:
+>
+> On 3/29/26 2:09 PM, Simon Glass wrote:
+> > Hi Marek,
+> >
+> > On Sat, 21 Mar 2026 at 13:52, Marek Vasut <marex@nabladev.com> wrote:
+> >>
+> >> Add support for setting the CST backend, both via DT property and
+> >> CST_BACKEND environment variable. The CST currently supports two
+> >> backends, 'ssl' and 'pkcs11', with 'ssl' being the default when
+> >> CST tool is invoked without any -b parameter. Keep 'ssl' backend
+> >> as the default, but explicitly pass it via the '-b' parameter,
+> >> unless the user selects 'pkcs11' via either method.
+> >>
+> >> Signed-off-by: Marek Vasut <marex@nabladev.com>
+> >> ---
+> >> Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+> >> Cc: Simon Glass <sjg@chromium.org>
+> >> Cc: Tom Rini <trini@konsulko.com>
+> >> Cc: u-boot@lists.denx.de
+> >> ---
+> >> V2: Fill in documentation for all used DT properties
+> >> V3: Fill third copy of documentation into nxp_imx8mcst.py
+> >> ---
+> >>   doc/imx/habv4/guides/mx8m_spl_secure_boot.txt | 30
+++++++++++++-------
+> >>   tools/binman/entries.rst                      |  7 +++++
+> >>   tools/binman/etype/nxp_imx8mcst.py            | 19 +++++++++++-
+> >>   3 files changed, 44 insertions(+), 12 deletions(-)
+> >>
+> >
+> > This is missing coverage for line 177 of nxp_imx8mcst.py:
+> >
+> >     cst_backend = "pkcs11"
+> >
+> > Please can you use (or mock) this feature in a test.
+> I already invested a lot of effort into binman tests before in [PATCH]
+> binman: Fill in most of the imx8mimage and imx8mcst tests and it went
+> nowhere.
+>
+> Can you provide (an example of) such a test ?
 
->> [...]
->>>>> +++ b/common/board_f.c
->>>>> @@ -321,6 +321,8 @@ __weak phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
->>>>>                  */
->>>>>                 return 0;
->>>>>     #endif
->>>>> +     if (IS_ENABLED(CONFIG_RELOCATE_LAST_BANK))
->>>>> +             fdtdec_setup_mem_ram_top();
->>>> Return value may need checking ?
->>>
->>> sure, but should we panic ? Or print a message and silently keep the
->>> old reloc address?
->> Print a message and relocate below 4 GiB , for maximum compatibility maybe ?
-> 
-> Yea that's what I currently have on my local branch
-OK
+Yes you created quite a few tests. Then I invested a lot of time to finish
+it off[1] so that we are finnaly back up to 100%
+
+Since you are adding a new feature your may need a test file with a
+'nxp,cst-backend' set to 'pkcs11'
+
+Regards,
+Simon
+
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=494765&state=*
