@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D9081061B22
-	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 23:00:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C6601061B18
+	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 23:01:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71D378407B;
+	by phobos.denx.de (Postfix) with ESMTP id EACE984082;
 	Tue, 31 Mar 2026 01:00:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="r/BZMWyK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pKbTVeP8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A394F8352B; Tue, 31 Mar 2026 01:00:22 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 186CD8407B; Tue, 31 Mar 2026 01:00:22 +0200 (CEST)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 421518403D
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 01:00:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4579480433
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 01:00:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7d77b179b52so4907151a34.2
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 16:00:15 -0700 (PDT)
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-464ba2bb3aeso2972911b6e.1
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 16:00:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774911614; x=1775516414; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1774911613; x=1775516413; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=g7g4mUKcnZOQ9pkuaxzGdG49mtZGx3H7H+5zychaLNw=;
- b=r/BZMWyKezJOWjsi3qAK39Etk3w0mWDn90ET7vkzMFbFUA2Dr4DpDya7YPH2TZiit7
- NIXUjjQl2uqEJQcZZDEyGNYgUhRs+IDnE2jbLjzV44Nz0/lyO/CX+NfgfHQPAfbYRNB0
- DGoqrX1q+EzOalSde1JUwaubz2cUpMIXvioqU=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=1LdfTXpNC8JkrsFuOIAzgO1lP8d9TlFuXznzkk+eG5Q=;
+ b=pKbTVeP8ahRPv5AKwtBtD3P4rmE4lAmBGsVRwKmLAkeKISHQ8qpIoSfkBTxzlt6UkG
+ 7U5SAjCZRDbT1tsmzcli+gUy8nvUsv3QdnuLgDkju8MeI+UGE1tw7r62vtk7u+mi4rdW
+ NBl+F6VRXdsQYfbI13YblV2cncTSYlEsnVfiw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774911614; x=1775516414;
+ d=1e100.net; s=20251104; t=1774911613; x=1775516413;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=g7g4mUKcnZOQ9pkuaxzGdG49mtZGx3H7H+5zychaLNw=;
- b=jzq31YkaVUypR4asRqyOV3Y4OKthuPbJGeiqy/bKeA7cbMBAH7s6YG4Kvb6Egg1ugu
- 29EQvgLfZAo6ManceHlC2wy96RR3GsQphw/WU7lGBU13SHzo1kfdiXmNtUOnKzrPUjFW
- qTnvxsRL/wL/LpjbkyE1UGSFhaB3Ot+od2RjXw0rOvYMGp4QgYTOdG4s+YullYDwEmfk
- hl12J7wxrZGHsquAYhlsSryjknHRV+BlFu3YzkCBf5RImSm4LB9GBflc9ClSQzexfwDk
- wfT77qpEXGIEYYvaucOLDrHOWQwBJj8cleHp8q8J/4wpTvM6QC+AvpOh6a88JXKgj/Of
- u5aw==
-X-Gm-Message-State: AOJu0Yyv8eBvJt3bjec8du/obTjygEbfQMYdNDpcfx3H8Fwo7p4p+rfA
- qggnWXe+MsifCT8DVcVMzAP+Tcvox9T7waLvUO7NNVv/kGHaRJ2zc8DkRwgNqrtHvOlDYLY2TTR
- 8e5G3XWY=
-X-Gm-Gg: ATEYQzw84Fg+RV6LaAp/qspt/hH/mH/IBAcwSWbDCHaC8PCVk5MwEnYrGCqk1G+Yvdv
- jyYGfcMQT6OiiODwE82ruzx1sCFLqcV1/BxJtX20FNQ/jQrXwdHGLv20vrexMEMQmwMfZn/c7mZ
- UgXLn0JEok/iwAgUZJDGUqyaE9LKYI+9Z/ZNTWZ/4FFzq+LBJkw4BpO9ARnE46JHwLOaR6RM3NC
- T70AQ//C05pUCrtUaDvIX1YtRbQXPK7wh0Ugf7+o6oyXV1JpK72LAOLgUMI9znnDV5wK6vt65Ip
- JnYIRsay82HwwMaEXnx3pewp7COLRCPJH3gpl5+wX4P+0SC+DhmbtIiyzL93oAH67rMzQe7Bdpl
- e7Nl8YmBrIdoMmZ3De4+ISzGhVKDDWbqvatMC1nn51tviZ2ZRFSypI/+kP2KJIlKj/dWVK09E0M
- EmrjeZGRJHmxKYPVO/v7FZj194cDHxhXQ37FkbQIqUx7hFZSBEE8ZXejqjxnACC8qSsK2QOohwH
- KQbQnD3xY+SOaARWU8p6Kgo74fsks5ZX+GWauFEI1wF3uI=
-X-Received: by 2002:a05:6808:1582:b0:467:bfa:bd9b with SMTP id
- 5614622812f47-46a8a458dfamr7130405b6e.21.1774911613916; 
- Mon, 30 Mar 2026 16:00:13 -0700 (PDT)
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=1LdfTXpNC8JkrsFuOIAzgO1lP8d9TlFuXznzkk+eG5Q=;
+ b=ApQZO2IhsBmb93QU+mHpLCWRl5X4AIJc3j6vQc4/7+b9lm3NlKxUZIODdkSFLByzLR
+ dhO6pq8n2+z8w0gp/0M0Ol1DvH4fc6TRHtwjITQF/wLDBgERRtNpJpr8Jjz+Au6QAlCl
+ xLGGtZ7NP8MIPfV2CdtNbjBt/9PS9/RdWFsuq7VTlasIZ8Gx73o65kdDBB73WJUEWAVw
+ rJolDQzkJho7JVjTQnY2VR+dPsY1eAQwVlyUH4TKvAVQIuDKPey26Jnwstp/UfkNbS8u
+ qB7OxyHGVsb2sEovPppmNUMNC2XrYFca08u3Zj+auTH1/MXZR1DRnc8lQN/SOgFObWep
+ AG5Q==
+X-Gm-Message-State: AOJu0YxAflht0cXFeXrmZGHOH0Gx5/sbBm90s4Eud0QrTWyFyXw+kat8
+ AxPLbKPEIBS0Aj53coIK5diXrnuu2/3acMKF5+yonl9lTwsTsihrOSw+VrgGAY5OOnRln4vtIdQ
+ BFbrw4dU=
+X-Gm-Gg: ATEYQzxq6pVKvwUAtoStQBKvE4qp2DDQfiVdY97ICi1sKR+UImXOC6BdXa6DBjN5F5z
+ NvMla5QttoydkS2PVgy1HQHcmUnzSuFXiZRFhQsZOwnNUiWR9B/M540Tw+LiGMllEtMThffHbcJ
+ qrA23/XwkgtYxrZpFxGjbTxXz/1aZf+lEKgQKZewxptTAfxnxhGqQUs4ueoEa3zuss1f9tHAIzs
+ 8KQ60L1A4w1ZlvxiB1rtKKfPBNiBRoX9X74rDgQGcJ3LIkia4xGv1xzcNw5mR+arvQRv+3XnDLE
+ G6ljvQCJarJNSOL5MWD74W34mUKUoF5aFNqU4Xz7VPDx0xnzy2yj17cTXJ4el7+go4AxGAaGRsy
+ P53j389cVPqCAPYvJtz/fOIPkJPWfTwxIu6uo9XnPGWpToqTeXvDEzQKHBchSPpQcPjqbcVSG5S
+ 7pnV7+yRfv115NVqtsP3oDBwcFpA2cafTBILsZgM/9tquHR1RuakzNYk0FyAntP90Qzm3/5fcYC
+ bI3X7b+hEc0UCaCXR6IlaFBaKhlMovqwGlSA2tC0fkjGdI=
+X-Received: by 2002:a05:6808:1a07:b0:450:d6fe:8991 with SMTP id
+ 5614622812f47-46acdc6e702mr836506b6e.21.1774911612944; 
+ Mon, 30 Mar 2026 16:00:12 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-46aa03b1e64sm5644737b6e.15.2026.03.30.16.00.13
+ 5614622812f47-46aa03b1e64sm5644737b6e.15.2026.03.30.16.00.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Mar 2026 16:00:13 -0700 (PDT)
+ Mon, 30 Mar 2026 16:00:12 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260317012437.4162554-1-trini@konsulko.com>
-References: <20260317012437.4162554-1-trini@konsulko.com>
-Subject: Re: [PATCH] input: Correct dependencies for BUTTON_KEYBOARD
-Message-Id: <177491161308.1028292.4696400846631007748.b4-ty@konsulko.com>
-Date: Mon, 30 Mar 2026 17:00:13 -0600
+In-Reply-To: <20260317012431.4162508-1-trini@konsulko.com>
+References: <20260317012431.4162508-1-trini@konsulko.com>
+Subject: Re: [PATCH] SPL: Rework logic around SPL_BLK_FS (and SPL_NVME)
+Message-Id: <177491161238.1028292.15965458966244569018.b4-ty@konsulko.com>
+Date: Mon, 30 Mar 2026 17:00:12 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,19 +95,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 16 Mar 2026 19:24:37 -0600, Tom Rini wrote:
+On Mon, 16 Mar 2026 19:24:31 -0600, Tom Rini wrote:
 
-> As exposed by "make randconfig", we have an issue with the dependencies
-> for BUTTON_KEYBOARD. This needs to also depend on DM_GPIO, and then
-> select BUTTON as well as BUTTON_GPIO, in order to meet all its
-> requirements.
+> As exposed by "make randconfig", we have an issue around SPL_BLK_FS.
+> This is functionally a library type symbol that should be selected when
+> required and select what it needs. Have SPL_BLK_FS select SPL_FS_LOADER
+> and then SPL_NVME will now correctly select SPL_FS_LOADER via
+> SPL_BLK_FS.
 > 
 > 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] input: Correct dependencies for BUTTON_KEYBOARD
-      commit: 292f1b974b2f2076325ca5648fca1db9eb2366ea
+[1/1] SPL: Rework logic around SPL_BLK_FS (and SPL_NVME)
+      commit: c40e539c77fbd3b68168c995f3dda64548b033d6
 -- 
 Tom
 
