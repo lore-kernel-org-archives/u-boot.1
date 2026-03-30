@@ -4,98 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C5E41061B18
-	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 17:14:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAB9B1061B17
+	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 17:15:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9048584056;
-	Mon, 30 Mar 2026 19:14:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3EE0784035;
+	Mon, 30 Mar 2026 19:15:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Ddl2CptG";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="I8FKIuwB";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="izMOBW61";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ckvVZ9J7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D357E83DBF; Mon, 30 Mar 2026 19:14:54 +0200 (CEST)
+ id C92078403D; Mon, 30 Mar 2026 19:15:03 +0200 (CEST)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E8DB83DBF
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 19:14:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 400C483DBF
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 19:15:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 62UGCCYQ3173878
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 17:14:50 GMT
+ 62UGNrQb1402844
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 17:14:58 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- ub3w5r5ERnT27Tt8pqmB4/FZhi0rKt0JwJy9n8K+EgU=; b=Ddl2CptGYlOjqrgU
- jqEx6t7isLACVHlogB+0N+LNls8g4f6NHvZY8bwZCI/MUMnYHAJ1BrxpmJu1Q6HY
- 0lRqSM4JKgOMRVXdn62A9W+vlKIGePbmjWsIZXgFoVmk71+VCGIAlqx6YvAhnlbG
- YP/g6mHjpa5M5O05nOgC1YIjJY5zXNz3vA6GM1MQTPQnzxpS+uyNg/57F31bQ6sj
- luAUz9oMo8Tt/FcLVyak1lAeSPQ0G47hNoZ2gUbZJW4KXAIi0cnpcESpM/1xu5lz
- HyX5mR8uDe85GGhp2PWRs+rdFLF2Zrpd1mtEzfeUDGLrKqjLmzoIxgEQfTZYw7Tg
- Jm6skg==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
- [209.85.215.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4d7q9h1mvv-1
+ content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=iy80Js7bnV+
+ SnqQqkACVhIrdRYyTidBddHsEI8ZZoTE=; b=izMOBW61mRcY2TIrmZgmhewwgFs
+ pz2QXwgyX28AkMDmrBAaRd0lT66OaGcJ+OqbMxXhaeqpDIFVP7lLQP4aMOKY6Wuw
+ E/GVRZlSasok7vvqhwEhoZVFuZgZmRpMTDpT42260CWz+HEy7wVGurIyKMBTx4jo
+ YReoUoHIqGXjefneTXwhjxz5dStMn7zdP7RKOee4GccwLK/xRzLbllICOeKi1xHy
+ /704ODvtJ4wRef5/xjeksYiRkqQOjKGoFRrUtQU553xk7v+EewF5+KXs3nNhNy0A
+ sZytwrRhG/T+RHPmA175mfldCrbqqwfq66kz3hhK/78guQUfcTKj3qv/E9A==
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
+ [209.85.210.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4d7r4h9kcu-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 17:14:50 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id
- 41be03b00d2f7-c739120475fso3072326a12.3
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 10:14:50 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 17:14:58 +0000 (GMT)
+Received: by mail-pf1-f198.google.com with SMTP id
+ d2e1a72fcca58-82c699d8caaso8756261b3a.1
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 10:14:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1774890890; x=1775495690; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1774890897; x=1775495697; darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ub3w5r5ERnT27Tt8pqmB4/FZhi0rKt0JwJy9n8K+EgU=;
- b=I8FKIuwBdtVNXExQcQKKio+ICc0dY+80uLXWJxMNamVLD53swGBBIZC9r/7ZeVQizT
- vF/SR4hi11kx4E84gyejMevh0RSUVMMuF/Uy1ZmKJN7MeoZeTi57822SzkECiANSHZBB
- Q49ptp7S5XAUBCUjXlNEwmR3XHXRg9dIM8esQVW7oGsM43bkURr+WwvnD5nEnc0wGHW6
- VS59Ciz1P+bonx2BEYAF1EtC44nmjbbgIF+2UCpCWtE6LUwhi8lUUIL2ULsW8YtWlwUI
- DsxZ4dpUjZg3S2E0Ulpq0wwxKrB+1YQkRLUTYP/L8Efp4YGitl4/ofTk8q1NCJ0RQm3a
- ARKA==
+ :reply-to; bh=iy80Js7bnV+SnqQqkACVhIrdRYyTidBddHsEI8ZZoTE=;
+ b=ckvVZ9J7cW6lpNa5IY9+EPfAtzGly01Erp7xdyIxdHarCVbEsdzRN2pvCgIHL94yVv
+ OI0FHAV0Nu5OeFBEyiY4aZG8KoYkNLqubZHbbSfskDSiFZe+Wum0LSS1E7F1UFbZ9QX7
+ 9PvSWfssESBs9379PYzzPOezT0GsJOwl5JqrQmmVq5KJQJvQV27XtaRm1qarSdnn/nEM
+ rBlOCo9Y6vtd0QIowu4Hn3SicER+AIBtl5lIc5TKZcjvOtsXEpyy+6yXrwR1aSe07cFp
+ HqwG3j01stgVI0GImv7hMw0Ys1W7uU7Vvx25pihGPfN5zu6Ah4fBVm4KGxZ9PxLi5cmo
+ o68w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774890890; x=1775495690;
+ d=1e100.net; s=20251104; t=1774890897; x=1775495697;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=ub3w5r5ERnT27Tt8pqmB4/FZhi0rKt0JwJy9n8K+EgU=;
- b=LCK+k8piTE58KD7rSId3W68fJAETzRVsWiYNlotpC4TQVWc/W61vgKvyx3h+yE7RXb
- st1y6AZWiIEUjDD+i+cfqJ64Z0n8lJfWSrt9rP8sxpKmMARjJQedDhqDRbiEx6k37xvf
- WFgcSUIkhxAU/o3TeVNv2OzEQJIZoHd9HJlbBo3WzOK8nPJ6ekDJy6csov/TaCH/XVGU
- PfFNv40FwQzQxDiGDbHG7Zc7FML74y0/26FpFAi6Km/PychkAkQJ8+TaTBXA//+8L+PJ
- 0oomc4smjKlQAauvEIACYEiEtxx95j2UvnSOERE2DG0Fm2aB4zqnlrlKbF5dk4FdtThN
- dsJQ==
+ bh=iy80Js7bnV+SnqQqkACVhIrdRYyTidBddHsEI8ZZoTE=;
+ b=D9uhZG0Hz2hcjmj0lX4yB86AkZXZM2/8h4WWVkM2zqj0NvxSWYhb0f9sxfkONrY105
+ 2917V1O2erietCg7QAzIoB6FYQB31VplfDRRtl6K77daBdCBpspTho9c8ydIarLRzi7S
+ moOZAdN1QH040rFTouzPySCMuNAmAToZy/FsJLmWEK+FZLJ2poLyyHIanSRm5BPTKm4o
+ WE0CDfO9ugJTnfhHUbIA1fADfaFlyPWbO2OBrXix2T4rhZVEposRSl0AuRB9BEu0Ob9I
+ 5aa1akjLE5rENrheMt7r6UuLD17llOz03NSeGr1lV+XgphNU8697Xv8yJsR1IwCoNJeg
+ LVHg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWF2KdOx/vlPm/e6qmkm4t2YFqg7RHoM/cJy0emQiCXSDvOEEnW+DZF04+u9nT8VQbv9WuSqUc=@lists.denx.de
-X-Gm-Message-State: AOJu0YyoeZmtTTw6JDGNDwkIZ9ZgLZ4j1Xl4uyvZPSzKOlpQmOsm+FeQ
- Hfr9kjRuLqNjT0hLLgQVHHJBzM0tCyQVh/w8go1diVc4tcsEpJfA+YokVFTFZfLeEvUPJGSq/5w
- TgUnR8QFL20xbzEknmSWRGEPC2XHjCLJLe1/onpBwvt4/UaaU5JYiLjZN
-X-Gm-Gg: ATEYQzxbq/fiLDkSR4fhKhssrmeAgGHjtAH5UhTcX9YodBHeT5kXQl5e2sVRdEof3z5
- hcerDHohe4tEhKMjkF+8JVSwJhUra0v3EAR4uaHtCepWPn2DpB5UhgkVpCFBI4zHfdqRZDjwMNf
- uIkaWhRGeyiMIfBy3AqUDMhkyz+mVa0g3qh86LAZZtCxoXrQ0KT2mBWN40LiuIU+EWlI6aFzMFw
- 8S6+wvwKca+lJtHPkjJok8lfKqK9T1o/q9ZngKwzGE0yrBsUamqLutmsG27myWLHLDTRF4vwbS1
- mMwT6d5WrLuZ5q4VyxoMw2jaHtfETE2vyZct/rvAJII+iTvIjVnRAYboe6mimJQ/clrqMocYNwI
- jWf0QmzyGAM27L6Efja030dG9jheuVqCP0TZKI5V/Zb+ihXbcwI9ksvIZ1CILWV6VR3pCuTGbfn
- 9gVQ0A6oCkSQoblTu1zZNW/N0EdAO8syVcj/CWbFSM
-X-Received: by 2002:a05:6a00:27a0:b0:823:cbb:a484 with SMTP id
- d2e1a72fcca58-82c95d45b1fmr12549393b3a.14.1774890889519; 
- Mon, 30 Mar 2026 10:14:49 -0700 (PDT)
-X-Received: by 2002:a05:6a00:27a0:b0:823:cbb:a484 with SMTP id
- d2e1a72fcca58-82c95d45b1fmr12549359b3a.14.1774890888921; 
- Mon, 30 Mar 2026 10:14:48 -0700 (PDT)
+ AJvYcCU1B+ydJ46iMcizmQY8yL/qCHoIsXr21duRo7nc5nnStdvmlBjJM0ib9Yeq4RsjfL+WCuzOuxA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy1fHro2XZeZtWwhC1wSvRSYAAkuZKdNig4L46MpeF8wupHo+g+
+ 1i5R+gro8tYqH5B3gXlF5wgBubQD99aBBPHlg8g67js1HGBr79Eaa4+5AdaCcbeuDDNcmLBlBfl
+ hG+VvcXSw1O+EBjh/uLENWjc257Ic1fcneo0QZcYQ28w/Vcpq0Wf5O65z
+X-Gm-Gg: ATEYQzz8t27TBwyrVt0r1eMLYT5KUj4aAqpwd0T4cLV8jm6LZADhMePZAXNX9njf4pY
+ MwofZhxC4IOuT3Xqkis/jDCiBh124+loRZT58bjJEh7Ucx6KeFHN0XHzmoOazQ3kNVnAIO1+W//
+ H8e7l3+jvINtpxB9c4zxFhSLI9aDXvu/OXnQv+MEWcQHgtmiJjw+VmOkFPCk/BkZgYxRQnNvXWA
+ xaqAWa1t6/JYMnotZXfQRUhHKGPpnFLKsC4TUP6f05JPdx6u1t77AxOub2eHUfuViYbYYQYtFbz
+ wCX/oaLyEXcbUCyh1G9SJGeV3/t1H8LClJ0Yq0V4HZM/n2w4hWojyn2tk+va4bVZwwd2r3Orcgr
+ A4ix1GsiEYmwOsIg3VVADf6B5+J5jOFTglD+YfAr6etMs6+Y6wpHVjeVAkIHrrJqkciBKOqYIoE
+ 47mlWnrgeDfUnOwguV1MBJZnZU9fCMG/VKFrzXVfZ3
+X-Received: by 2002:a05:6a00:2e9c:b0:824:a635:4181 with SMTP id
+ d2e1a72fcca58-82c95afa7femr13999619b3a.15.1774890897233; 
+ Mon, 30 Mar 2026 10:14:57 -0700 (PDT)
+X-Received: by 2002:a05:6a00:2e9c:b0:824:a635:4181 with SMTP id
+ d2e1a72fcca58-82c95afa7femr13999573b3a.15.1774890896707; 
+ Mon, 30 Mar 2026 10:14:56 -0700 (PDT)
 Received: from hu-aswinm-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-82ca8626518sm7349777b3a.52.2026.03.30.10.14.41
+ d2e1a72fcca58-82ca8626518sm7349777b3a.52.2026.03.30.10.14.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Mar 2026 10:14:48 -0700 (PDT)
+ Mon, 30 Mar 2026 10:14:56 -0700 (PDT)
 From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 To: trini@konsulko.com, aswin.murugan@oss.qualcomm.com,
  casey.connolly@linaro.org, neil.armstrong@linaro.org,
@@ -107,40 +106,37 @@ To: trini@konsulko.com, aswin.murugan@oss.qualcomm.com,
  kever.yang@rock-chips.com, jamie.gibbons@microchip.com,
  justin@tidylabs.net, xypron.glpk@gmx.de, n-francis@ti.com, h-vm@ti.com,
  ycliang@andestech.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v3 1/7] misc: Add support for bit fields in NVMEM cells
-Date: Mon, 30 Mar 2026 22:44:13 +0530
-Message-Id: <20260330171419.1117817-2-aswin.murugan@oss.qualcomm.com>
+Subject: [PATCH v3 2/7] misc: qcom: Add Qualcomm SPMI SDAM NVMEM driver
+Date: Mon, 30 Mar 2026 22:44:14 +0530
+Message-Id: <20260330171419.1117817-3-aswin.murugan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260330171419.1117817-1-aswin.murugan@oss.qualcomm.com>
 References: <20260330171419.1117817-1-aswin.murugan@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzMwMDE0MCBTYWx0ZWRfX4tGhleJNP5Qh
- ImT4IfM8PAH5A8H+NrM7kH4CAo7IomRITPYSTBPZg9XB0nDJR70FhXK49KJkUTEgFVS4GfEaEm5
- JRrW8boTdyucpRL41lq0A6BYCWhTE/yMXRPnvF14wmFKAC1NVn2JD4OEQyaTwzzLJPL7bIwYslk
- eENDXUjP0uKY0mhv7RcvlvfexhwlLSiXqoPiqGsRrlYhjlYZv7LtGAlqab8of56LQg1SDdQgBVA
- FXM+N3FZMjzndif0SwYSlP87XN+6B00s8k/Yyg/LpMBmMEk2e1wmIMZdRgEWjzcf8nVtNv3ZNiO
- CK8JSZL1bRr2JbVa4gUIyYjQEHGMvwxRL1ZilzLS2+pHWfIST2b/g3yYqKw7+Ph9cFe4JKxbayC
- /imps38X0EwOwfZxkMI1VNZiuQo3BH1tR9cejcJmHTBdwXXdI5vEy+XRl7/EVwZLxUXem+zsq7D
- PPl0Z5BhNmVLT4wHJcw==
-X-Authority-Analysis: v=2.4 cv=AZS83nXG c=1 sm=1 tr=0 ts=69caaf8a cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=77Gp4gJqd9K2asR3UTEA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=x9snwWr2DeNwDh03kgHS:22
-X-Proofpoint-GUID: JL4BSR_TtpZR77W_xLOaB47ZUV7LShIq
-X-Proofpoint-ORIG-GUID: JL4BSR_TtpZR77W_xLOaB47ZUV7LShIq
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzMwMDE0MCBTYWx0ZWRfXzzfdjKuQmvgU
+ KG5QW0RYTM09NXNjtjS4FKctvUgPX5DNCOmpLuH5admfY3ykfQrEY98RhximB/RF4sEl02YsmVg
+ svlQUfqzGwUgpx0S4eu25hAAG8G/TcQa2ETFrTo1aNNEAH0KDxvALOg4qapIvOMiXjJYhCWpKFU
+ PII4jgIWGZ7cvyusyR/8OmOCDljbNGi4tBd2d8JmwlzXE+kCWYSN5xFvAAfUZGx8FQcKAEY3LN8
+ LAKwy4sH4xA8/lw+QfYmluJW2bL1+n66cv0jDxv944wEI1m5bG/35i0GL+S/+OJ1GMkd0MvrFEC
+ 7AjlJqJtwDihOrbakpyrFfhZWwfxPaWGBd7QnpbKPnAzlPkojCeH31NERPlzLHW0M4XFN6NwC3z
+ iVWlxFVYHiuvCZ8SWj5bCOTuVHCPH7Uts9+HMBGlmYIImFMicYcrm1cHMl4NpzoYWXl/P0YDWjR
+ Xm4Xo5M+8/Z6TJnT9BA==
+X-Proofpoint-ORIG-GUID: Le3ai4oCEqwbuVprx2gGYlR4eOXLBK5r
+X-Authority-Analysis: v=2.4 cv=PI0COPqC c=1 sm=1 tr=0 ts=69caaf92 cx=c_pps
+ a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=Yq5XynenixoA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8
+ a=xi5d6GjbYgY_MreKiQQA:9 a=IoOABgeZipijB_acs4fv:22
+X-Proofpoint-GUID: Le3ai4oCEqwbuVprx2gGYlR4eOXLBK5r
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-03-29_05,2026-03-28_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 phishscore=0 priorityscore=1501 clxscore=1015
- impostorscore=0 suspectscore=0 bulkscore=0 adultscore=0 malwarescore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2603050001
- definitions=main-2603300140
+ priorityscore=1501 phishscore=0 adultscore=0 impostorscore=0 malwarescore=0
+ lowpriorityscore=0 spamscore=0 suspectscore=0 clxscore=1015 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603300140
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,272 +153,270 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-NVMEM cells currently only support byte-level access. Many hardware
-registers pack multiple fields into single bytes, requiring bit-level
-granularity. For example, Qualcomm PMIC PON registers store a 7-bit
-reboot reason field within a single byte, with bit 0 reserved for other
-purposes.
+Qualcomm PMICs include SDAM (Shared Direct Access Memory) regions which
+are used to store persistent data like reboot reasons that must survive
+across reboots.
 
-Add support for the optional 'bits' property in NVMEM cell device tree
-bindings. This property specifies <bit_offset num_bits> to define a bit
-field within the cell's register space.
+Without this driver, U-Boot cannot access PMIC storage, preventing
+reboot-to-bootloader functionality and other features that rely on
+persistent state.
 
-Implement bit‑field handling in the driver to max u32 size
+Add qcom-spmi-sdam driver that:
+- Probes SDAM regions from device tree compatible "qcom,spmi-sdam"
+- Implements NVMEM provider interface for standard cell-based access
+- Uses SPMI register read/write operations for data access
 
-Example device tree usage:
-        reboot-reason@48 {
-                reg = <0x48 0x01>;
-                bits = <0x01 0x07>;  /* 7 bits starting at bit 1 */
-        };
-
-This reads bits [7:1] from the byte at offset 0x48, leaving bit 0
-untouched during write operations.
-
-Cells without the 'bits' property continue to work unchanged, ensuring
-backward compatibility with existing device trees.
+This enables reboot-mode and other subsystems to access PMIC storage
+through standard NVMEM APIs.
 
 Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 ---
 Changes in v3:
-1. Simplified bit field handling to maximum u32 size (32 bits).
-2. Enforced strict size matching (size == cell->size) when nbits == 0.
-
+1. No change in v3
 ---
- drivers/misc/nvmem.c | 159 +++++++++++++++++++++++++++++++++++++------
- include/nvmem.h      |   4 ++
- 2 files changed, 141 insertions(+), 22 deletions(-)
+ drivers/misc/Kconfig          |   8 ++
+ drivers/misc/Makefile         |   1 +
+ drivers/misc/qcom-spmi-sdam.c | 200 ++++++++++++++++++++++++++++++++++
+ 3 files changed, 209 insertions(+)
+ create mode 100644 drivers/misc/qcom-spmi-sdam.c
 
-diff --git a/drivers/misc/nvmem.c b/drivers/misc/nvmem.c
-index 33e80858565..883ced9e898 100644
---- a/drivers/misc/nvmem.c
-+++ b/drivers/misc/nvmem.c
-@@ -12,55 +12,156 @@
- #include <dm/ofnode.h>
- #include <dm/read.h>
- #include <dm/uclass.h>
-+#include <linux/bitops.h>
-+#include <linux/kernel.h>
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index a0aa290480e..8ace19c1128 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -92,6 +92,14 @@ config QCOM_GENI
+ 	  for providing a common interface for various peripherals like UART, I2C, SPI,
+ 	  etc.
  
--int nvmem_cell_read(struct nvmem_cell *cell, void *buf, size_t size)
-+/* Maximum supported NVMEM cell size */
-+#define MAX_NVMEM_CELL_SIZE sizeof(u32)  /* 4 bytes */
++config QCOM_SPMI_SDAM
++	bool "Qualcomm SPMI SDAM NVMEM driver"
++	depends on MISC && NVMEM && SPMI
++	help
++	  Enable support for Qualcomm SPMI SDAM (Shared Direct Access Memory) blocks
++	  as NVMEM providers. This driver support accessing SDAM blocks in PMICs
++	  for reboot reason functionality and other NVMEM use cases.
++
+ config ROCKCHIP_EFUSE
+         bool "Rockchip e-fuse support"
+ 	depends on MISC
+diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+index 1d950f7a0ab..bed2cb63fcb 100644
+--- a/drivers/misc/Makefile
++++ b/drivers/misc/Makefile
+@@ -68,6 +68,7 @@ obj-$(CONFIG_QFW_SMBIOS) += qfw_smbios.o
+ obj-$(CONFIG_SANDBOX) += qfw_sandbox.o
+ endif
+ obj-$(CONFIG_QCOM_GENI) += qcom_geni.o
++obj-$(CONFIG_QCOM_SPMI_SDAM) += qcom-spmi-sdam.o
+ obj-$(CONFIG_$(PHASE_)ROCKCHIP_EFUSE) += rockchip-efuse.o
+ obj-$(CONFIG_$(PHASE_)ROCKCHIP_OTP) += rockchip-otp.o
+ obj-$(CONFIG_$(PHASE_)ROCKCHIP_IODOMAIN) += rockchip-io-domain.o
+diff --git a/drivers/misc/qcom-spmi-sdam.c b/drivers/misc/qcom-spmi-sdam.c
+new file mode 100644
+index 00000000000..482156f3bb7
+--- /dev/null
++++ b/drivers/misc/qcom-spmi-sdam.c
+@@ -0,0 +1,200 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Qualcomm SPMI SDAM NVMEM driver
++ *
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++
++#include <dm.h>
++#include <misc.h>
++#include <dm/device_compat.h>
++#include <dm/uclass.h>
++#include <spmi/spmi.h>
++
++#define PID_SHIFT 8
++#define PID_MASK (0xFF << PID_SHIFT)
++#define REG_MASK 0xFF
++#define SDAM_SIZE 0x100
++
++struct qcom_sdam_priv {
++	u32 base;
++	u32 size;
++	u32 pmic_usid;
++	struct udevice *spmi_dev;
++};
 +
 +/**
-+ * nvmem_cell_read_raw() - Read raw bytes from NVMEM cell without bit field extraction
-+ * @cell: NVMEM cell to read from
-+ * @buf: Buffer to store read data
-+ * @size: Size of buffer
++ * qcom_sdam_find_spmi_pmic() - Find SPMI controller and PMIC USID
++ * @dev: SDAM device
++ * @spmi_dev: Returns SPMI controller device
++ * @pmic_usid: Returns PMIC USID for SPMI access
 + *
-+ * This is an internal helper that reads raw bytes from hardware without applying
-+ * bit field extraction. Used by both nvmem_cell_read() and nvmem_cell_write().
-+ * Caller must validate buffer size before calling this function.
++ * Walks up the device tree to find the PMIC parent and SPMI controller.
++ * Supports both direct SDAM under PMIC and virtual NVMEM under PON.
 + *
-+ * Return: Number of bytes read on success, negative error code on failure
++ * Return: 0 on success, negative error code on failure
 + */
-+static int nvmem_cell_read_raw(struct nvmem_cell *cell, void *buf, size_t size)
- {
--	dev_dbg(cell->nvmem, "%s: off=%u size=%zu\n", __func__, cell->offset, size);
--	if (size != cell->size)
--		return -EINVAL;
++static int qcom_sdam_find_spmi_pmic(struct udevice *dev,
++				    struct udevice **spmi_dev,
++				    u32 *pmic_usid)
++{
++	struct udevice *pmic_dev = dev->parent;
 +	int ret;
 +
-+	memset(buf, 0, size);
- 
- 	switch (cell->nvmem->driver->id) {
- 	case UCLASS_I2C_EEPROM:
--		return i2c_eeprom_read(cell->nvmem, cell->offset, buf, size);
--	case UCLASS_MISC: {
--		int ret = misc_read(cell->nvmem, cell->offset, buf, size);
--
-+		ret = i2c_eeprom_read(cell->nvmem, cell->offset, buf, cell->size);
-+		break;
-+	case UCLASS_MISC:
-+		ret = misc_read(cell->nvmem, cell->offset, buf, cell->size);
- 		if (ret < 0)
- 			return ret;
--		if (ret != size)
-+		if (ret != cell->size)
- 			return -EIO;
--		return 0;
--	}
-+		ret = 0;
-+		break;
- 	case UCLASS_RTC:
--		return dm_rtc_read(cell->nvmem, cell->offset, buf, size);
-+		ret = dm_rtc_read(cell->nvmem, cell->offset, buf, cell->size);
-+		break;
- 	default:
- 		return -ENOSYS;
- 	}
++	if (!pmic_dev) {
++		dev_err(dev, "No parent device found\n");
++		return -ENODEV;
++	}
 +
-+	if (ret)
++	ret = dev_read_u32_index(pmic_dev, "reg", 0, pmic_usid);
++	if (ret) {
++		dev_err(dev, "Could not read PMIC USID: %d\n", ret);
 +		return ret;
++	}
 +
-+	return cell->size;
++	*spmi_dev = pmic_dev->parent;
++	if (!*spmi_dev || (*spmi_dev)->uclass->uc_drv->id != UCLASS_SPMI) {
++		dev_err(dev, "Could not find SPMI controller\n");
++		return -ENODEV;
++	}
++
++	dev_dbg(dev, "Found PMIC USID=%d, SPMI controller=%s\n",
++		*pmic_usid, (*spmi_dev)->name);
++
++	return 0;
 +}
 +
-+int nvmem_cell_read(struct nvmem_cell *cell, void *buf, size_t size)
++/**
++ * qcom_sdam_read() - Read data from SDAM/NVMEM region
++ * @dev: MISC device (SDAM)
++ * @offset: Offset within SDAM/NVMEM region
++ * @buf: Buffer to read data into
++ * @size: Number of bytes to read
++ *
++ * Uses the same SPMI register access pattern as pmic_qcom.c driver
++ * for consistency and reliability. This function is called by the
++ * NVMEM subsystem via misc_read().
++ *
++ * Return: number of bytes read on success, negative error code on failure
++ */
++static int qcom_sdam_read(struct udevice *dev, int offset,
++			  void *buf, int size)
 +{
-+	int ret, bytes_needed;
-+	u32 value;
++	struct qcom_sdam_priv *priv = dev_get_priv(dev);
++	u8 *buffer = buf;
++	int ret;
 +
-+	dev_dbg(cell->nvmem, "%s: off=%u size=%zu\n", __func__, cell->offset, size);
++	if (offset + size > priv->size)
++		return -EINVAL;
 +
-+	if ((cell->nbits && size < cell->size) || (!cell->nbits && size != cell->size)) {
-+		dev_dbg(cell->nvmem, "NVMEM: buffer size %zu invalid for cell size %zu\n",
-+			size, cell->size);
++	for (size_t i = 0; i < size; i++) {
++		u32 reg = priv->base + offset + i;
++
++		ret = spmi_reg_read(priv->spmi_dev, priv->pmic_usid,
++				    (reg & PID_MASK) >> PID_SHIFT,
++				    reg & REG_MASK);
++		if (ret < 0) {
++			dev_err(dev, "SPMI read failed at 0x%x: %d\n", reg, ret);
++			return ret;
++		}
++		buffer[i] = ret;
++
++		dev_dbg(dev, "Read 0x%02x from 0x%x (PID=0x%02x REG=0x%02x)\n",
++			buffer[i], reg, (reg & PID_MASK) >> PID_SHIFT, reg & REG_MASK);
++	}
++
++	return size;
++}
++
++/**
++ * qcom_sdam_write() - Write data to SDAM/NVMEM region
++ * @dev: MISC device (SDAM)
++ * @offset: Offset within SDAM/NVMEM region
++ * @buf: Buffer containing data to write
++ * @size: Number of bytes to write
++ *
++ * Uses the same SPMI register access pattern as pmic_qcom.c driver
++ * for consistency and reliability. This function is called by the
++ * NVMEM subsystem via misc_write().
++ *
++ * Return: number of bytes written on success, negative error code on failure
++ */
++static int qcom_sdam_write(struct udevice *dev, int offset,
++			   const void *buf, int size)
++{
++	struct qcom_sdam_priv *priv = dev_get_priv(dev);
++	const u8 *buffer = buf;
++	int ret;
++
++	if (offset + size > priv->size)
++		return -EINVAL;
++
++	for (size_t i = 0; i < size; i++) {
++		u32 reg = priv->base + offset + i;
++
++		ret = spmi_reg_write(priv->spmi_dev, priv->pmic_usid,
++				     (reg & PID_MASK) >> PID_SHIFT,
++				     reg & REG_MASK,
++				     buffer[i]);
++		if (ret < 0) {
++			dev_err(dev, "SPMI write failed at 0x%x: %d\n", reg, ret);
++			return ret;
++		}
++
++		dev_dbg(dev, "Wrote 0x%02x to 0x%x (PID=0x%02x REG=0x%02x)\n",
++			buffer[i], reg, (reg & PID_MASK) >> PID_SHIFT, reg & REG_MASK);
++	}
++
++	return size;
++}
++
++static const struct misc_ops qcom_sdam_ops = {
++	.read = qcom_sdam_read,
++	.write = qcom_sdam_write,
++};
++
++/**
++ * qcom_sdam_probe() - Probe SDAM device and register as NVMEM provider
++ * @dev: SDAM device
++ *
++ * Handles both real SDAM blocks and virtual NVMEM under PON blocks.
++ * For virtual NVMEM, adds the parent PON base address to the offset.
++ *
++ * Return: 0 on success, negative error code on failure
++ */
++static int qcom_sdam_probe(struct udevice *dev)
++{
++	struct qcom_sdam_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	priv->base = dev_read_addr(dev);
++	if (priv->base == FDT_ADDR_T_NONE) {
++		dev_err(dev, "Could not read base address\n");
 +		return -EINVAL;
 +	}
 +
-+	if (cell->nbits) {
-+		bytes_needed = DIV_ROUND_UP(cell->nbits + cell->bit_offset, BITS_PER_BYTE);
++	priv->size = dev_read_u32_default(dev, "qcom,sdam-size", SDAM_SIZE);
 +
-+		if (bytes_needed > cell->size || bytes_needed > MAX_NVMEM_CELL_SIZE ||
-+		    size != MAX_NVMEM_CELL_SIZE) {
-+			dev_dbg(cell->nvmem, "NVMEM: bit field requires %d bytes, cell size %zu, buffer size %d, got %zu\n",
-+				bytes_needed, cell->size, MAX_NVMEM_CELL_SIZE, size);
-+			return -EINVAL;
-+		}
-+	}
-+
-+	ret = nvmem_cell_read_raw(cell, buf, size);
-+	if (ret < 0)
-+		return ret;
-+
-+	if (cell->nbits) {
-+		value = *(u32 *)buf;
-+		value >>= cell->bit_offset;
-+		/* Handle nbits == 32 specially to avoid undefined behavior */
-+		if (cell->nbits < 32)
-+			value &= (1U << cell->nbits) - 1;
-+		*(u32 *)buf = value;
-+	}
-+
-+	return 0;
- }
- 
- int nvmem_cell_write(struct nvmem_cell *cell, const void *buf, size_t size)
- {
-+	int ret, bytes_needed;
-+	u32 current, value, mask;
-+
- 	dev_dbg(cell->nvmem, "%s: off=%u size=%zu\n", __func__, cell->offset, size);
--	if (size != cell->size)
-+
-+	if ((cell->nbits && size < cell->size) || (!cell->nbits && size != cell->size)) {
-+		dev_dbg(cell->nvmem, "NVMEM: buffer size %zu invalid for cell size %zu\n",
-+			size, cell->size);
- 		return -EINVAL;
-+	}
-+
-+	if (cell->nbits) {
-+		bytes_needed = DIV_ROUND_UP(cell->nbits + cell->bit_offset, BITS_PER_BYTE);
-+
-+		if (bytes_needed > cell->size || bytes_needed > MAX_NVMEM_CELL_SIZE ||
-+		    size != MAX_NVMEM_CELL_SIZE) {
-+			dev_dbg(cell->nvmem, "NVMEM: bit field requires %d bytes, cell size %zu, buffer size %d, got %zu\n",
-+				bytes_needed, cell->size, MAX_NVMEM_CELL_SIZE, size);
-+			return -EINVAL;
-+		}
-+
-+		/* For bit fields, perform Read-Modify-Write */
-+		ret = nvmem_cell_read_raw(cell, &current, sizeof(current));
-+		if (ret < 0)
-+			return ret;
-+
-+		/* Apply masked bitfield update (shift + mask + merge) */
-+		value = *(u32 *)buf;
-+		value &= (1U << cell->nbits) - 1;
-+		value <<= cell->bit_offset;
-+
-+		mask = ((1U << cell->nbits) - 1) << cell->bit_offset;
-+
-+		*(u32 *)buf = (current & ~mask) | value;
-+	}
- 
- 	switch (cell->nvmem->driver->id) {
- 	case UCLASS_I2C_EEPROM:
--		return i2c_eeprom_write(cell->nvmem, cell->offset, buf, size);
--	case UCLASS_MISC: {
--		int ret = misc_write(cell->nvmem, cell->offset, buf, size);
--
-+		ret = i2c_eeprom_write(cell->nvmem, cell->offset, buf, cell->size);
-+		break;
-+	case UCLASS_MISC:
-+		ret = misc_write(cell->nvmem, cell->offset, buf, cell->size);
- 		if (ret < 0)
- 			return ret;
--		if (ret != size)
-+		if (ret != cell->size)
- 			return -EIO;
--		return 0;
--	}
-+		ret = 0;
-+		break;
- 	case UCLASS_RTC:
--		return dm_rtc_write(cell->nvmem, cell->offset, buf, size);
-+		ret = dm_rtc_write(cell->nvmem, cell->offset, buf, cell->size);
-+		break;
- 	default:
- 		return -ENOSYS;
- 	}
-+
++	ret = qcom_sdam_find_spmi_pmic(dev, &priv->spmi_dev, &priv->pmic_usid);
 +	if (ret)
 +		return ret;
 +
++	dev_info(dev, "SDAM base=0x%x size=0x%x PMIC_USID=%d\n",
++		 priv->base, priv->size, priv->pmic_usid);
++
 +	return 0;
- }
- 
- /**
-@@ -121,13 +222,27 @@ int nvmem_cell_get_by_index(struct udevice *dev, int index,
- 
- 	offset = ofnode_get_addr_size_index_notrans(args.node, 0, &size);
- 	if (offset == FDT_ADDR_T_NONE || size == FDT_SIZE_T_NONE) {
--		dev_dbg(cell->nvmem, "missing address or size for %s\n",
-+		dev_err(cell->nvmem, "missing address or size for %s\n",
- 			ofnode_get_name(args.node));
- 		return -EINVAL;
- 	}
- 
- 	cell->offset = offset;
- 	cell->size = size;
++}
 +
-+	ret = ofnode_read_u32_index(args.node, "bits", 0, &cell->bit_offset);
-+	if (ret) {
-+		cell->bit_offset = 0;
-+		cell->nbits = 0;
-+	} else {
-+		ret = ofnode_read_u32_index(args.node, "bits", 1, &cell->nbits);
-+		if (ret)
-+			return -EINVAL;
++static const struct udevice_id qcom_sdam_ids[] = {
++	{ .compatible = "qcom,spmi-sdam" },
++	{ }
++};
 +
-+		if (cell->bit_offset + cell->nbits > cell->size * 8)
-+			return -EINVAL;
-+	}
-+
- 	return 0;
- }
- 
-diff --git a/include/nvmem.h b/include/nvmem.h
-index e6a8a98828b..dd82122f16f 100644
---- a/include/nvmem.h
-+++ b/include/nvmem.h
-@@ -26,11 +26,15 @@
-  * @nvmem: The backing storage device
-  * @offset: The offset of the cell from the start of @nvmem
-  * @size: The size of the cell, in bytes
-+ * @bit_offset: Bit offset within the cell (0 for byte-level access)
-+ * @nbits: Number of bits to use (0 for byte-level access)
-  */
- struct nvmem_cell {
- 	struct udevice *nvmem;
- 	unsigned int offset;
- 	size_t size;
-+	unsigned int bit_offset;
-+	unsigned int nbits;
- };
- 
- struct udevice;
++U_BOOT_DRIVER(qcom_spmi_sdam) = {
++	.name = "qcom-spmi-sdam",
++	.id = UCLASS_MISC,
++	.of_match = qcom_sdam_ids,
++	.probe = qcom_sdam_probe,
++	.ops = &qcom_sdam_ops,
++	.priv_auto = sizeof(struct qcom_sdam_priv),
++};
 -- 
 2.34.1
 
