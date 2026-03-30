@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D32201061B1C
-	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 19:05:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEDD91061B1C
+	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 19:14:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E6B283DBF;
-	Mon, 30 Mar 2026 21:05:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2BD6783DBF;
+	Mon, 30 Mar 2026 21:14:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="iAueds8D";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="HUsHEwjz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10D8D83E7A; Mon, 30 Mar 2026 21:05:20 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id 695E383F5B; Mon, 30 Mar 2026 21:14:55 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E3078352B
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 21:05:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C1348352B
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 21:14:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1774897503; x=1775502303; i=xypron.glpk@gmx.de;
- bh=+mYPiPBuJEJwbrW3ORUW6ZwY7iAS2iMozaBHefOx3TA=;
+ s=s31663417; t=1774898061; x=1775502861; i=xypron.glpk@gmx.de;
+ bh=WjbQG/xQ8BRt2+528hgS8JBiI4uaxpPDrg5Tj1M7Apg=;
  h=X-UI-Sender-Class:Date:From:To:Subject:In-Reply-To:References:
  Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
  content-transfer-encoding:content-type:date:from:message-id:
  mime-version:reply-to:subject:to;
- b=iAueds8DcSPER46o7vmGrxExHgpEDGsGNKowN1fQA/fAtYk/bvXZ7kwcdxMEIcJh
- Qjnn1jN1I5Y4wjlEsMHP0baOmyfFFkDnwJmg8uuEs6OcbDFT4Z3rMygu3HMYtzwFT
- kmXCnb/4gUznub8NjZd88YZhn9/IRE5m3IPIBj47TDrY7J2WbtFWImvjfiIT8RjVf
- kjlaDN75au7UC00K79NIs2bOvnvCpUa1XKqkXJwK0Yz5Ly+jgvaczGFGs2H6cG9Hg
- zokiIvVyq1J9Nuix1S7owtCa2m79hMvtXpE43H0iuKwtr331IdQqrsZWO0pNMya92
- R0SdUDe3uuzQeqO0dA==
+ b=HUsHEwjzwCViWF7SrTb+4mNhKu/L9bMfmJCAiyTGPp7ndmdJnTmSidYTdVElE/Kj
+ TzAbtYB1Y29zXgsFHWh8oHd1a5dhN4tMVNHvNaixcA5spgw+ZhOTMUNxs4ATQOc3E
+ jygP679AYrXjkhMwhXj6cOJ3aNg0CC29E/nRHAIjNd0ePaTe2MmLkbIjA3nt5wfcX
+ aWMubgSDMfOBb8FBy6U4aLqXb4ZX6yDigg8B/VgJ4524PwozYJHvc3HagWzueMMjT
+ 5XgK/1XIKaEsJhTHkaE2qPab6Cdmhg5FSSSoEsssj4e2tscOZYlXIZ6Gx9h9tyUNO
+ BqsDncmiMvPV+m4bQA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N4z6k-1vQDvO2hgS-017J7Z; Mon, 30
- Mar 2026 21:05:02 +0200
-Date: Mon, 30 Mar 2026 21:04:57 +0200
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N8ofE-1vU5es3c62-013ZeF; Mon, 30
+ Mar 2026 21:14:21 +0200
+Date: Mon, 30 Mar 2026 21:14:17 +0200
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>, trini@konsulko.com,
  aswin.murugan@oss.qualcomm.com, casey.connolly@linaro.org,
@@ -54,98 +54,95 @@ To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>, trini@konsulko.com,
  jamie.gibbons@microchip.com, justin@tidylabs.net, n-francis@ti.com,
  h-vm@ti.com, ycliang@andestech.com, u-boot@lists.denx.de,
  u-boot-qcom@groups.io
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v3_7/7=5D_misc=3A_update_API_docu?=
- =?US-ASCII?Q?mentation_for_bit_field_support_in_NVMEM?=
+Subject: =?UTF-8?Q?Re=3A_=5BPATCH_v3_0/7=5D_qcom=3A_Add_NVMEM_bitf?=
+ =?UTF-8?Q?ield_support_and_reboot=E2=80=91mode_integration?=
 User-Agent: Thunderbird for Android
-In-Reply-To: <20260330171419.1117817-8-aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <20260330171419.1117817-1-aswin.murugan@oss.qualcomm.com>
 References: <20260330171419.1117817-1-aswin.murugan@oss.qualcomm.com>
- <20260330171419.1117817-8-aswin.murugan@oss.qualcomm.com>
-Message-ID: <62BA7B31-2700-41C6-94DE-39D9EB1161C6@gmx.de>
+Message-ID: <D0D68612-F412-46C8-90DF-D33A6C655401@gmx.de>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:FrY8137WfqG1V3G9W+vgrMnxjuxX5rn0pseK3bp47tXnrtNEK4m
- RSbvuWjey6UTwJGI6+bCUhO7iC5z/Zgx/wOvrzoWS0sIJVrC2Dp6KQuLwR6CqT4IBX7zk3k
- voZwANfvgE4RbsoW67PTSBgq+vP+OKMsEWQK57z81v/frkmW/+hCqFO1Z5i5PHFjC73Wf8H
- KXZqxJQukSxsVqUlc4fZA==
-UI-OutboundReport: notjunk:1;M01:P0:kUnVqrNMhGE=;wCN+OOKE3nh7ZGanKkz8bq2wDBt
- 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
- ka
+X-Provags-ID: V03:K1:Nq/S4Er+kdfzLBjdxi7Nfh3ERe1ZGmVu7mFLqJ/i3VL/ZI5wbU3
+ VLHjcHfGyWohe8mNfFDxAGeC1Fm2vja7+Zqn/OQ48n1RNL4siP2olHji1X7u3RMQ+IjTzyR
+ 2rH/Q0gnEe8TS1GpgGL8K24GUTWSc7FxYAIgNChx2FRPibOnWYuw/21KfhP/qGOMuPhcqvC
+ KsiIsnwwViBpHeasECJ0g==
+UI-OutboundReport: notjunk:1;M01:P0:Ke5acvp7DWI=;IMtQJqokhe/FlWr844yaNHPMPwG
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -162,87 +159,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 30=2E M=C3=A4rz 2026 19:14:19 MESZ schrieb Aswin Murugan <aswin=2Emuruga=
+Am 30=2E M=C3=A4rz 2026 19:14:12 MESZ schrieb Aswin Murugan <aswin=2Emuruga=
 n@oss=2Equalcomm=2Ecom>:
->Update the nvmem_cell_read() and nvmem_cell_write() documentation to
->describe the new bit field operation mode=2E
+>This patch series introduces bit-level granularity to NVMEM cells and
+>adds complete reboot-mode support for Qualcomm platforms that store
+>reboot reasons in PMIC registers=2E
 >
->The documentation now clearly explains:
+>Qualcomm SoCs rely on PMIC-backed reboot reason storage to implement
+>features like "reboot bootloader" for entering fastboot mode=2E However,
+>these PMIC registers often pack multiple fields into a single byte,
+>requiring fine-grained bit access that the current NVMEM subsystem does
+>not support=2E
 >
->For bit field mode (nbits > 0):
+>In addition, PMIC generations differ in how reboot-related data is
+>stored: older PMICs use PON (Power On) registers, while newer ones
+>provide SDAM regions=2E This series introduces a unified, NVMEM-based
+>approach that works seamlessly across both architectures=2E
+>
+>This version also integrates reboot-mode handling into Qualcomm board
+>initialization, enabling automatic fastboot entry when the reboot reason
+>indicates bootloader mode=2E
+>
+>Signed-off-by: Aswin Murugan <aswin=2Emurugan@oss=2Equalcomm=2Ecom>
 
-Thank you for updating this documentation=2E=20
-
-Please refer to @cell->nbits in the function documentation and also mentio=
-n @cell->offset=2E
+It is unclear to me how endianness is handled in bitfields=2E Do you assum=
+e low-endianness or do you consider the system endianness? Please, ensure t=
+hat the tests are executed on both low- and big-endian systems=2E
 
 Best regards
 
 Heinrich
 
->- Read: extracts the bit field from raw hardware bytes
->- Write: performs read-modify-write to preserve other bits
->- Requirements: buffer size must be sizeof(u32), cell size <=3D 4 bytes
+
 >
->For non-bit-field mode (nbits =3D=3D 0):
->- Read/Write: direct byte-level access
->- Requirements: buffer size must equal the cell size
->
->This helps developers understand when to use each mode and the
->associated buffer size requirements=2E
->
->Signed-off-by: Aswin Murugan <aswin=2Emurugan@oss=2Equalcomm=2Ecom>
 >---
-> include/nvmem=2Eh | 24 ++++++++++++++++++++++--
-> 1 file changed, 22 insertions(+), 2 deletions(-)
+>Changes in v3:
+>1=2E Simplified bit field handling to maximum u32 size (32 bits)=2E
+>2=2E Enforced strict size matching (size =3D=3D cell->size) when nbits =
+=3D=3D 0=2E
+>3=2E Enhanced test function for NVMEM read & write
+>4=2E Updated NVMEM API documentation
 >
->diff --git a/include/nvmem=2Eh b/include/nvmem=2Eh
->index dd82122f16f=2E=2Eaf1d2594bd6 100644
->--- a/include/nvmem=2Eh
->+++ b/include/nvmem=2Eh
->@@ -47,9 +47,19 @@ struct udevice;
->  * @buf: The buffer to read into
->  * @size: The size of @buf
->  *
->+ * For cells with bit fields (nbits > 0), this function:
->+ * - Reads the raw bytes from hardware
->+ * - Extracts the bit field using bit_offset and nbits
->+ * - Returns the extracted value in @buf
->+ * - Requires @size =3D=3D sizeof(u32) and @cell->size <=3D 4
->+ *
->+ * For cells without bit fields (nbits =3D=3D 0):
->+ * - Reads raw bytes directly
->+ * - Requires @size =3D=3D @cell->size
->+ *
->  * Return:
->  * * 0 on success
->- * * -EINVAL if @buf is not the same size as @cell=2E
->+ * * -EINVAL if @size doesn't match requirements
->  * * -ENOSYS if CONFIG_NVMEM is disabled
->  * * A negative error if there was a problem reading the underlying stor=
-age
->  */
->@@ -61,9 +71,19 @@ int nvmem_cell_read(struct nvmem_cell *cell, void *buf=
-, size_t size);
->  * @buf: The buffer to write from
->  * @size: The size of @buf
->  *
->+ * For cells with bit fields (nbits > 0), this function:
->+ * - Performs Read-Modify-Write to preserve other bits
->+ * - Masks and shifts the value to the correct bit position
->+ * - Merges with existing bits outside the field
->+ * - Requires @size =3D=3D sizeof(u32) and @cell->size <=3D 4
->+ *
->+ * For cells without bit fields (nbits =3D=3D 0):
->+ * - Writes raw bytes directly
->+ * - Requires @size =3D=3D @cell->size
->+ *
->  * Return:
->  * * 0 on success
->- * * -EINVAL if @buf is not the same size as @cell
->+ * * -EINVAL if @size doesn't match requirements
->  * * -ENOSYS if @cell is read-only, or if CONFIG_NVMEM is disabled
->  * * A negative error if there was a problem writing the underlying stor=
-age
->  */
+>Link to V2:
+>https://lore=2Ekernel=2Eorg/all/20260213112717=2E1256823-1-aswin=2Emuruga=
+n@oss=2Equalcomm=2Ecom/
+>
+>Changes in v2:
+>1=2E Replaced custom reboot reason handling with the standard U-Boot
+>   reboot-mode subsystem, per review feedback=2E
+>2=2E Added bit-field support to the NVMEM core using the new "bits"
+>   property=2E
+>3=2E Introduced the Qualcomm SPMI SDAM driver for unified PMIC storage
+>   access=2E
+>4=2E Updated the reboot-mode driver to support variable-sized NVMEM cells=
+=2E
+>5=2E Added device tree configuration for the QCS615 RIDE board=2E
+>6=2E Enabled reboot-mode in qcom_defconfig=2E
+>7=2E Integrated reboot-mode detection into Snapdragon board
+>   initialization:
+>   - Added qcom_handle_reboot_mode() in board_late_init() to enable
+>     automatic fastboot entry on "reboot bootloader"=2E
+>
+>Link to v1:
+>https://lore=2Ekernel=2Eorg/all/20260108065533=2E1143179-1-aswin=2Emuruga=
+n@oss=2Equalcomm=2Ecom/
+>---
+>
+>
+>Aswin Murugan (7):
+>  misc: Add support for bit fields in NVMEM cells
+>  misc: qcom: Add Qualcomm SPMI SDAM NVMEM driver
+>  mach-snapdragon: Integrate reboot-mode handling
+>  dts: qcs615-ride-u-boot=2Edtsi: Add reboot-mode support
+>  qcom_defconfig: Enable reboot-mode support in qcom_defconfig
+>  test: dm: add comprehensive tests for NVMEM bit field operations
+>  misc: update API documentation for bit field support in NVMEM
+>
+> arch/arm/dts/qcs615-ride-u-boot=2Edtsi |  26 ++++
+> arch/arm/mach-snapdragon/board=2Ec     |  56 ++++++--
+> arch/sandbox/dts/test=2Edts            |  12 ++
+> configs/qcom_defconfig               |   3 +
+> drivers/misc/Kconfig                 |   8 ++
+> drivers/misc/Makefile                |   1 +
+> drivers/misc/nvmem=2Ec                 | 159 ++++++++++++++++++---
+> drivers/misc/qcom-spmi-sdam=2Ec        | 200 +++++++++++++++++++++++++++
+> include/nvmem=2Eh                      |  28 +++-
+> test/dm/reboot-mode=2Ec                | 137 ++++++++++++++++++
+> 10 files changed, 595 insertions(+), 35 deletions(-)
+> create mode 100644 drivers/misc/qcom-spmi-sdam=2Ec
+>
 
