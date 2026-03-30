@@ -4,145 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F1C0FF4930
-	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 02:21:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E6D5FF4959
+	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 08:03:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C156183C14;
-	Mon, 30 Mar 2026 04:21:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 6762383C5E;
+	Mon, 30 Mar 2026 10:03:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="Ex4KEUqY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xK7S0H5+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3348483C5E; Mon, 30 Mar 2026 04:21:16 +0200 (CEST)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C5CEB83D17; Mon, 30 Mar 2026 10:03:32 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC8F783B48
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 04:21:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EF43C80212
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 10:03:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oOU1YoJgarQqZMt8n+VSwoLh3/cXQ/xG2EmM/d0nsdmQemCjCHzitG+GQFFbpai2zD6ZF1bCGTh+vi4L4RRL0BVwzYqcORec/itQYHCbCKEQ38/IUs3DzCi5THHzBA7Q8bB0co4KpNuZNinJLdWYpkdFmt7riWzAR6TSwpNyxioLdHi7jbCq8fMs0n0NfNJfljaIiYJBQd/hXvvCtcLZfIqzG0/GLSWepVAFeirG+W5lnNC4Q+OaidklvxVzdd4emAiDs3ho501v2cxAi18m8DmX/E7IV/LjccjenT5wSd5X8YXDjvrk+ZcJeclP0GMLH9KL820lLcWq6oGqLPAfKQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ICuHsybfbWgwc8dva5U9Xd4Hw9plXkAaFswSjy2M5GI=;
- b=BjIBdWDl0trA1WKtnR4k5sYYp8RIIwBDQsquMCD4JpN5UpTXMVBUuS6tZBFripHimrqbxzwJetiCFDkG+rZC5X1cCkdemB2Z7FNAEbGXzNJ7qlb64DPH9dQH83TtG5o9xMGCXEMMOSHcKTn1pchtBCfR/21sgoKh8+ayCfYBL85cOgwxSrK9EXZxIky6cuDFJx2f3Sj959XyY8tx/3DYmkTOqs1Zs5oibmEGoyFj0mpgROm+iSzplRndtkDfq/GIYHXun+EynAgyAB26l5ZBpWb5C/og8IqZp1Tj4BZTs5Co5gQQGLl6ILYPrulPh5VCHW/a35p4MYEsEHpXI3rYAw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ICuHsybfbWgwc8dva5U9Xd4Hw9plXkAaFswSjy2M5GI=;
- b=Ex4KEUqYCOh5ZDzBhRxlQLDHpFxMVO+/hv5Pf+lJ8P6pNai2qWBY+vwo/UeFIkpki1iPUw9UY0V8tP5bB53R/+zuCkrzy+JOB3x3ctujylPFEDKMsYqrcuEA3ADcCF1c/eL8HGocVMyxXy3X+JrdTVbTLhAL7roWXg8tWwvukSGvBHOAN0jqSz6ULvR4u8rF/iWQxJhdqSPMkIGjWOI4yl5sB6lk8Se7tED1yTpRjkU5mR3p8M7TcheqjwGEREQ/Q72vTF5G7IiPW6gZz+2OYeIL4KdEYbcFEl3YKyWPiL/TPh9CFK92fGYvCIR6nXtLBDecVfcMv8PF79Y4fxJMnA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by VI0PR04MB12324.eurprd04.prod.outlook.com (2603:10a6:800:30d::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.28; Mon, 30 Mar
- 2026 02:21:11 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::4972:7eaa:b9f6:7b5e%3]) with mapi id 15.20.9723.030; Mon, 30 Mar 2026
- 02:20:43 +0000
-Date: Mon, 30 Mar 2026 10:23:21 +0800
-From: Peng Fan <peng.fan@oss.nxp.com>
-To: Frieder Schrempf <frieder.schrempf@kontron.de>
-Cc: Peng Fan <peng.fan@nxp.com>, Teresa Remmet <T.remmet@phytec.de>,
- "sbabic@nabladev.com" <sbabic@nabladev.com>,
- Yannic Moog <Y.Moog@phytec.de>, dl-uboot-imx <uboot-imx@nxp.com>,
- "trini@konsulko.com" <trini@konsulko.com>,
- "festevam@gmail.com" <festevam@gmail.com>,
- "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
- Leonard Anderweit <L.Anderweit@phytec.de>,
- "emanuele.ghidoli@toradex.com" <emanuele.ghidoli@toradex.com>,
- Benjamin Hahn <B.Hahn@phytec.de>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- "matteo.lisi" <matteo.lisi@engicam.com>,
- "abbaraju.manojsai@amarulasolutions.com"
- <abbaraju.manojsai@amarulasolutions.com>
-Subject: Re: [PATCH 1/4] imx8mp: phyboard-pollux-rdk: Convert to DM_PMIC
-Message-ID: <acnemXvnI7Ifs3Xp@shlinux89>
-References: <20260324-power-legacy-v1-0-ed432367817c@nxp.com>
- <20260324-power-legacy-v1-1-ed432367817c@nxp.com>
- <0c16dfd0d1cedc87bbac071030bbb4d6f04ff4af.camel@phytec.de>
- <PAXPR04MB84596009AB3591BBE0AD49F98848A@PAXPR04MB8459.eurprd04.prod.outlook.com>
- <5f44e3d45ac725c16c61a92fff527f9b7bea2fc4.camel@phytec.de>
- <PAXPR04MB845968E9F7A73809AFAE21E18849A@PAXPR04MB8459.eurprd04.prod.outlook.com>
- <fd99509a-315f-4c0d-b300-eba1308f7ff1@kontron.de>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <fd99509a-315f-4c0d-b300-eba1308f7ff1@kontron.de>
-X-ClientProxiedBy: MA5PR01CA0149.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a01:1b9::14) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-486fda2a389so33492345e9.1
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 01:03:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1774857808; x=1775462608; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=I5wSddwNxPsFcpymQw+kjweHwkYcN9QCac1VZoFVwkQ=;
+ b=xK7S0H5+B38zAt5wGp8XizZJZR3/9nQtovN/P47zux9jmBDwqWxFLOpnZ3moiUFhrG
+ 0fKdvXVbZ+710h029MAtQ2RhRHX6gduGLAqDSTUbfXs44XwVXPkoj/o1zYHcbKnTFPTM
+ pT00/jHBKrik5THGQDtU6i7J+T1EoJexJh7Jf/CgWqU1NrwRqVmuG4b3shzyl3y3Oa+u
+ h55K0iaepaYIBtAwsPZkMidWIm87X29q59frfr0qllhCGxkwwLaJYiVD3IP53cH/dW7X
+ vH0f0GyOYA7PRClqH7HNegOhnkB9mGbtil2Er8TQ3pE3m77nrscxd7/GU5qWmKN3kyop
+ dC5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774857808; x=1775462608;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=I5wSddwNxPsFcpymQw+kjweHwkYcN9QCac1VZoFVwkQ=;
+ b=pdvZQ447LemzEcBINilqXZQiTH7edAu0Hd3BJWimolyZEk1Tu68AKtYwHSEd2NMk0/
+ eA7Y3tgqWXd9VgQ6l9WbwtoYb4+TgvKUx7qd6jDlTjF/WuqKyBJvQ4hfg7SSa5Sj/mD/
+ 2y1a2JmcEa/WSJJR5z+0Cq6AR01c8p/SbT9cksDefQAYGWFEz98dpnsbH4SCXYMgztSV
+ tUjeSOPH+ywP/LTEniAYglW6rHpG+RsbxsbYoJYDQq6uJ9CKPqsvgNbly65TO+Ny9qYH
+ RoiBGyYuNstD6kSYyk6HJSbZlqi2fQK6STbO0np4mb+Sod3MwU3x8Na8hBTXq6l+gEQZ
+ p60g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVFi6gLvglYaMdyo1MDPQavSKm9NS4H79w22psnMA+cNG3nHP+anQh8YYYxcM1q8Um0M/z4iWs=@lists.denx.de
+X-Gm-Message-State: AOJu0YwmIPH1sc9TLFhnQy2mEkKwkrCngVvOHml+zBat8QGRYA73yAfS
+ qvBGVte1I8QPJW7VuRS1Om/szfsseSj+wx4UarrsI6ifEQVCTyft84UHZaqamzl+kvE=
+X-Gm-Gg: ATEYQzxGk4jiw+FZB5sPIqAe/NtoVpQgZ+kgFVb1AzBqapgMm+EWadWV60+fh+oHF9K
+ HkxMo5v+nGE73PBBKm4bdFKCmNufjwrh0RMcizLOYziGOyD2W3Fcrthua1E8lyqc7uusPTNn5gD
+ bjm4TCyP6Sowunh4/hF7JuS0NH+Lkgirxc4wGbnhoAe5GRpY14xo8KfSLrE1U7Ldci7eJed+LAe
+ NDO6z3EeN4idNDYz7a1VUvmFyoHfpjTVyRt6qjJ6TBUvFxKd5Q1IpbHj2s3uGc2mR56ItRtqm/a
+ 9Adq5xBdGImTFYsut4CF5bd66dm+mPxrHklzOVSWJS2mrT/5NF4hHDA9AfEQfB16mPRQVKrxYIW
+ 7XQsnczlFMmQ4Qd0OTogHDiXTFwICEIhii1VM1KPwloKq+zKD8I1ltDs+8EfDpi2unfzQhtojuO
+ p2VvIb4w9LAe3b655mLmTFG94DaWYK5wx4Bh53zihUAFxPPD4kWomsNGcznO9lFDViEfvowPLM5
+ hrmnZs=
+X-Received: by 2002:a05:600c:a303:b0:486:d76c:fa51 with SMTP id
+ 5b1f17b1804b1-48727f0a808mr141336425e9.27.1774857808230; 
+ Mon, 30 Mar 2026 01:03:28 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:cb3c:d0d2:870b:6ad0?
+ ([2a01:e0a:106d:1080:cb3c:d0d2:870b:6ad0])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43cf2580194sm15861023f8f.37.2026.03.30.01.03.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 30 Mar 2026 01:03:27 -0700 (PDT)
+Message-ID: <384346b6-e798-45d9-b490-67d8cb6b6751@linaro.org>
+Date: Mon, 30 Mar 2026 10:03:27 +0200
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|VI0PR04MB12324:EE_
-X-MS-Office365-Filtering-Correlation-Id: 75cff5ea-40e5-4d95-c649-08de8e02f188
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|19092799006|1800799024|376014|7416014|52116014|366016|56012099003|22082099003|18002099003|38350700014;
-X-Microsoft-Antispam-Message-Info: 23QIhTqtMG2FOx+46iOnFEUpLDBeoXcThbTgFdspsQL7QTDUqyrU+4L0YVunF5le78lXFdy7fOky0VuGmjLgEPdwh0Ab2BuVB/VrhvFGhe4R49r/s5xu1tIrCHzQLzPikWE84EX+qFlTpzgQHaB3apQWYlzgum+cmL/a4RtVs965EdCo0BWRNJBjiTLB8ZTThEjLXh/BDnEZBn4S3I6y74TfFukA05Wmznnkkwe8fGYt/0K3rB4tnR8Qh/pGWqywZX4iHPRI6uNg/YkRpAh+pObS86wQnixyjq5Ze6LpyjHNrAEniE29gG2EMqA1SLwJrV7ynVmRaZjJ+h/+lVTqsPQBDPI5BWHLNF6TtATRWZMPW/xbg/bm8seZSG3ncWcCy3tTKNgehEHQ2tWPi8ef1Oaw4g+otVGqrFJv5IGfEmB6S7r+Dwo9hw+O+4NstwYZr7nCtoFUa+6jWdC4M51Inealy4U0kQbZP0VRXL66ArPLGfc/SWiE3T79QPv9TLoV/V7j57gBc8zcG9XnVlLoSyYPbZoYJ8P4do0hRmxrD+agAs+J/f4FAyl4KsPcAdtWmKdDu2Xs/iKm0PZ8DX8fvYYxG+BXx7czmW8OCmcAx+fPbYRB70VW9Kbadpfzdn6+OOGgx1G8ptkKUtdk5Kepyjqb2ufhov9lPnzCJUzxXl67cEip0fgW61jK03hlSYa35PrJr55LjTQg05KURcwzQkBqUBpYvTT/2/mhHFVyvqD9tvVnazWPTIlzcxjNAsRJ
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(19092799006)(1800799024)(376014)(7416014)(52116014)(366016)(56012099003)(22082099003)(18002099003)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?LzZX8iEX8tl+xxBdedBkJ0J0OgAt5jUHryShSMSuronuMIUDJersyMGpOnSX?=
- =?us-ascii?Q?2RrfCM4TOWdNPaJm4y3KbJGLAZCA0ZhAv9pbaNMbiXNm0Vzk18KO5veracTM?=
- =?us-ascii?Q?feWIjscwAhGRJsagHS7b6b2Tl9ctLQwDBEYDXuk2RiEHRIP+ciSvhl7MHOtX?=
- =?us-ascii?Q?unVl8xtWs543TGd+S3os44Ag9dydf+DLNwv/eCckWD8/hhaQ3a3MWviVBIBI?=
- =?us-ascii?Q?qTkYN4sXnto5ISpgOeb3arWTTHkA9KrcdXFBMB4tv9TYOFdHLthfFXlJ9QyM?=
- =?us-ascii?Q?Kh1H7ew0FsPGnjvFYw4PupomX1nUPV6IRrihLM+gBKv3qpADWyWEU/OOc7ZS?=
- =?us-ascii?Q?qYTh/sZGyf8tVo57T4TXeKIUbe3mBbj0TdngovAiUbRPjwics/7VasfOCJWZ?=
- =?us-ascii?Q?8JecLoDEqX4g8fEsxbTkbTfD7uCYMGihfXUAebdJ3eGN9QDEzWpJszkMMGhH?=
- =?us-ascii?Q?TvRWdmDN0je8cjU6kcdxZ6sCnixTRalsAcggRtZlWM+Zy6zPOYhi30aITeoJ?=
- =?us-ascii?Q?iRIdC2scs1A9Ps2PRRq/lY/EM6GtedkhrHjv3VvJIBqp9eaZ21XhFmxAGvLq?=
- =?us-ascii?Q?g4ToIeoz1L7v/btueT96AOIDri0J8kRAQpQXY5apXNTmPwOk1t+LBxrtZLhr?=
- =?us-ascii?Q?r32RgOg2AcPuQAOarUPWYRPkSjeK5w3G61e9a1hgiph3S/aAqLyg8rvYpENc?=
- =?us-ascii?Q?XWtxdwxN0T42pW0ZR7UPstlWfHN9/rQPBwNQWyr1DF9ILqWUMf01KPw30puQ?=
- =?us-ascii?Q?+VzUEX/OtYv18h+J/LKdnpNuKBD+MbCKT8Ygt3uRBDkQLOWNupn1rZpqoN6y?=
- =?us-ascii?Q?PQEtjkMmLgkjhhJ8vl6CUD9sYND4YgrJyQ0qA+2n0foVFkc7trFXSqbUoTmn?=
- =?us-ascii?Q?yqtvmTykJFr9f19BKwh1YjIdf6WAKAjGBnvFWeaF5fi0I63f1mwLv+kfQWyL?=
- =?us-ascii?Q?onqyvRSe1kNUQGy62bIf18UeRFGTLK3KgbQ7PdpXwcU4q0swmwJsit2zsKNX?=
- =?us-ascii?Q?atSgIp6l1ZeZ1nythbhPzkChGGTcyuNsYstz8y3bAsp/pLkvNpn72c+iceSv?=
- =?us-ascii?Q?70cvtf4pUinZkSw14qPExbZBfW7ablm87xotG3BgS93i//ql1Hqjy+wGnrcu?=
- =?us-ascii?Q?ndJ9vzQkiNPZ3lEyZx78C1psXMXswj/AFAFQT1e8rrnotmgDjRFyhQAodqKm?=
- =?us-ascii?Q?ZOp0BKfeHksfPlkjR3Jb+BIgt7xH3cHsQJX8WrTuVDTfSCJFE5JpucQzMfTF?=
- =?us-ascii?Q?KRuzJKlDQB78M5E0Fn06w0+cvniDoClAFaSpCH4PC0pKyHyvAlw0mewQUOWA?=
- =?us-ascii?Q?MypML4vIK77Roe9pEq5STj/llD1RUCCY8tU3DKhYqSMqbZDN7LZs/eF3QDER?=
- =?us-ascii?Q?vZ1+iSQ/4liC/5L0DMWzjuKuUpKZGfa80ZPWFU7MTWXXt5wmUErEH9poShwF?=
- =?us-ascii?Q?yvXi+ffyMt8D1kVTkyrdPWU/pmQ6YSIl090txBc20lYLAQvQ4eO2P/Uj9Pnc?=
- =?us-ascii?Q?csz9vBT+ZArvrqVdgUJtdL0JZQsNNqhKUuoDvm009d2RV/uvwa/xEF7AkuPu?=
- =?us-ascii?Q?5R0kdFgBQiAp1Cw5Bef/qhReLGKaJz2Ipk2/pDGELXnCoFCXRoXTL0+7qFBz?=
- =?us-ascii?Q?ugtzN4rIjqUXqMMlyAjanJAnXd0zX5+d2Jz1qvobaSV3TXJV6YdigkL4tLc+?=
- =?us-ascii?Q?KNMT+CAUTbuZl0V+RJOb7ixhHXzmRF9Y4aS7ZgwwFfx8KtD4nPTn2Bc7+1qi?=
- =?us-ascii?Q?fWPyxDakDQ=3D=3D?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 75cff5ea-40e5-4d95-c649-08de8e02f188
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Mar 2026 02:20:42.9133 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 5TkFznxycHQjNT+UqUsdhSFGpuMHjC6/bm4K5bj1AOwbNGA/j0cuvxv/9g2xMdLVRokFmIauD2xyXXx73fn/8g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB12324
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH] ufs: core: Fix heap corruption due to out of bounds write
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Julien Stephan <jstephan@baylibre.com>, Michal Simek <michal.simek@amd.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Padmarao Begari <padmarao.begari@amd.com>, Tom Rini <trini@konsulko.com>
+References: <20260329231151.332108-1-marek.vasut+renesas@mailbox.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20260329231151.332108-1-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,141 +127,90 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Frieder,
+On 3/30/26 01:11, Marek Vasut wrote:
+> The ufshcd_read_string_desc() can perform out of bounds write and
+> corrupt heap in case the input utf-16 string contains code points
+> which convert to anything more than plain 7-bit ASCII string.
+> 
+> This occurs because utf16_to_utf8(dst, src, size) in U-Boot behaves
+> differently than Linux utf16s_to_utf8s(..., maxlen), but the porting
+> process did not take that into consideration. The U-Boot variant of
+> the function converts up to $size utf-16 fixed-length 16-bit input
+> characters into as many 1..4 Byte long variable-length utf-8 output
+> characters. That means for 16 Byte input, the output can be up to 64
+> Bytes long. The Linux variant converts up utf-16 input into up to
+> $maxlen Bytes worth of utf-8 output, but stops at the $maxlen limit.
+> That means for 16 Byte input with maxlen=32, the processing will stop
+> after writing 32 output Bytes.
+> 
+> In case of U-Boot, use of utf16_to_utf8() leads to potential corruption
+> of data past the $size Bytes and therefore corruption of surrounding
+> content on the heap.
+> 
+> The fix is as simple, allocate buffer that is sufficient to fit the
+> utf-8 string. The rest of the code in ufshcd_read_string_desc() does
+> correctly limit the buffer to fit into the DMA descriptor afterward.
+> 
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> NOTE: This is for 2026.04, but please do test it on your hardware too.
+> ---
+> Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>
+> Cc: Julien Stephan <jstephan@baylibre.com>
+> Cc: Michal Simek <michal.simek@amd.com>
+> Cc: Neha Malcom Francis <n-francis@ti.com>
+> Cc: Neil Armstrong <neil.armstrong@linaro.org>
+> Cc: Padmarao Begari <padmarao.begari@amd.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>   drivers/ufs/ufs-uclass.c | 10 +++++++++-
+>   1 file changed, 9 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
+> index 81fd431f951..6a51f337e47 100644
+> --- a/drivers/ufs/ufs-uclass.c
+> +++ b/drivers/ufs/ufs-uclass.c
+> @@ -1751,7 +1751,15 @@ static int ufshcd_read_string_desc(struct ufs_hba *hba, int desc_index,
+>   			goto out;
+>   		}
+>   
+> -		buff_ascii = kmalloc(ascii_len, GFP_KERNEL);
 
-On Wed, Mar 25, 2026 at 08:40:26AM +0100, Frieder Schrempf wrote:
->On 25.03.26 04:50, Peng Fan wrote:
->>> Subject: Re: [PATCH 1/4] imx8mp: phyboard-pollux-rdk: Convert to
->>> DM_PMIC
->>>
->>> Hello Peng,
->>> Hello Yannic,
->>>
->>> Am Dienstag, dem 24.03.2026 um 13:33 +0000 schrieb Peng Fan:
->>>> Hi Yannic,
->>>>
->>>>> Subject: Re: [PATCH 1/4] imx8mp: phyboard-pollux-rdk: Convert to
->>>>> DM_PMIC
->>>>>
->>>>> Hi Peng,
->>>>>
->>>>> On Tue, 2026-03-24 at 18:30 +0800, Peng Fan (OSS) wrote:
->>>>>> From: Peng Fan <peng.fan@nxp.com>
->>>>>>
->>>>>> Convert the board to use DM_PMIC instead of the legacy SPL
->>>>> I2C/PMIC
->>>>>> handling.
->>>>>>
->>>>>> Changes include:
->>>>>> - Enable DM_PMIC, DM_PMIC_PCA9450, and
->>>>> SPL_DM_PMIC_PCA9450 in defconfig.
->>>>>> - Drop legacy SPL I2C and PMIC options.
->>>>>> - Remove manual I2C1 pad setup and legacy power_pca9450_init()
->>>>> usage.
->>>>>> - Use DM-based pmic_get() with the DT node "pmic@25".
->>>>>> - Update PMIC register programming to use struct udevice API.
->>>>>
->>>>> these changes break something.
->>>>>
->>>>> Getting
->>>>>
->>>>> Loading Environment from MMC... Card did not respond to voltage
->>>>> select! : -110
->>>>> *** Warning - No block device, using default environment
->>>>>
->>>>> and SD card is not accessible as a result. I also worked on this
->>>>> modernization and got the same result as with your commit. Have
->>> not
->>>>> had time to investigate the cause, yet.
->>>>
->>>> This change should not impact sd, unless pmic not probe correctly.
->>>> You may give a look on "regulators", "pmic" in U-Boot shell, to see
->>>> whether pmic is good.
->>>>
->>>> And you may also need to confirm, whether SD works or not without
->>> this
->>>> migration to DM_PMIC.
->>>
->>> I see the same issue. The error is gone when the patch is reverted again.
->>> PMIC probing is working but the voltage change of SD-Card is probably
->>> not.
->>> We have set
->>> dts/upstream/src/arm64/freescale/imx8mp-phycore-fpsc.dtsi:
->>> vqmmc-supply = <&ldo5>;
->>>
->>> which references the PMIC.
->>> The evk is not using this property.
->> 
->> I tried to add vqmmc-supply for i.MX8MP-EVK, I not see issues.
->> Not sure why this property impacts phycore-fpsc.
->> 
->> The only suspecting point is 
->> 
->> -                       MX8MP_IOMUXC_GPIO1_IO04__USDHC2_VSELECT 0xc0
->> +                       MX8MP_IOMUXC_GPIO1_IO04__USDHC2_VSELECT 0x1c0
->> 
->> No more ideas as of now.
->
->I'm pretty sure this issue is related to the VSELECT signal in some way.
->
->With MX8MP_IOMUXC_GPIO1_IO04__USDHC2_VSELECT being set, the SDHC
->controller controls the VSELECT signal that goes into the SD_VSEL input
->of the PMIC and switches the LDO5 between 1.8V and 3.3V. Internally the
->PMIC uses the state of SD_VSEL to decide which one of two voltage
->registers for LDO5 is used.
->
->When vqmmc-supply is set, the driver additionally sets the voltage by
->writing to the PMIC LDO5 voltage register. This can potentially cause
->conflicts and lead to an invalid state, where the driver thinks the card
->is in 1.8V state but the voltage is set to 3.3V or the other way round.
->
->One way to handle this, is to set the SION bit for the VSELECT signal
->and specify the sd-vsel-gpios property in the ldo5 node. This allows the
->PMIC driver to know about the current state of the VSELECT signal and
->use the correct voltage register when setting or getting the LDO5 voltage.
->
->Below you can find some pointers for additional information. I hope this
->helps to solve the issue on your board.
->
->Best regards
->Frieder
->
->Relevant U-Boot patchset:
->https://patchwork.ozlabs.org/project/uboot/cover/20250811131213.211124-1-frieder@fris.de/
->
->Relevant Kernel patchset:
->https://patchwork.kernel.org/project/linux-arm-kernel/cover/20241218152842.97483-1-frieder@fris.de/
+I think the whole function is a mess, I think we would rewrite with something like this:
 
-I think this kernel patchset might be wrong.
+...
+int max_len;
+int ascii_len;
 
-GPIO1_04 is muxed as SD2_VSEL, reading GPIO1_04 will not able to get the PAD
-value of SD2_VSEL.
+max_len = (desc_len - QUERY_DESC_HDR_SIZE) * 2 + 1;
+buff_ascii = kmalloc(max_len, GFP_KERNEL);
 
-I also tried in U-Boot on i.MX8MP-EVK.
-u-boot=> mw 0x30330024 0x11 ==> set SION and MUX as SD2_VSELECT
-u-boot=> md 0x30b500c0 1
-30b500c0: 2000780b      ==>BIT 1 is VSEL, already 1                       .x.
-u-boot=> md 0x30330284 1
-30330284: 000000c0                             ....
-u-boot=> mw 0x30330284 0x1d0  ==> Configure PAD
-u-boot=> md 0x30200000 4       ==>Read back GPIO1
-30200000: 00001028 00000000 00001028 00000000  (.......(.......
+ascii_len = utf16_to_utf8(buff_ascii,
+		(uint16_t *)&buf[QUERY_DESC_HDR_SIZE], max_len);
+...
 
-value of GPIO1_IO4 is 0, not 1, but VSEL register is 1 in SDHC2.
+So we stop having random len, and use the _real_ len returned by utf16_to_utf8.
 
-So with your kernel patchset, reading the voltage, it will always return 3.3v.
+Neil
 
-Regards
-Peng
 
->
->Example for sd-vsel-gpios:
->https://source.denx.de/u-boot/u-boot/-/blob/master/dts/upstream/src/arm64/freescale/imx8mp-kontron-osm-s.dtsi#L314
->
->Example for pinmux with SION bit:
->https://source.denx.de/u-boot/u-boot/-/blob/master/dts/upstream/src/arm64/freescale/imx8mp-kontron-osm-s.dtsi#L812
+> +		/*
+> +		 * utf-8 is encoded using up to 4-Bytes per character,
+> +		 * however, we only allocate such a buffer because the
+> +		 * utf16_to_utf8() converts the entire $ascii_len worth
+> +		 * of input characters into up to 4-Byte long utf-8
+> +		 * characters. The rest of the function uses only up to
+> +		 * $ascii_len bytes of that utf-8 string.
+> +		 */
+> +		buff_ascii = kmalloc(ascii_len * 4, GFP_KERNEL);
+>   		if (!buff_ascii) {
+>   			err = -ENOMEM;
+>   			goto out;
+
