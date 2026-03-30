@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6299FFC981D
-	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 09:00:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9799AFF4932
+	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 09:00:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93A3783D17;
+	by phobos.denx.de (Postfix) with ESMTP id DC38583F5B;
 	Mon, 30 Mar 2026 11:00:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="oHo+FOqT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PtKIhfuf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4D6B80212; Mon, 30 Mar 2026 09:59:56 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 3BF9B83F5B; Mon, 30 Mar 2026 09:59:59 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4781C80212
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 09:59:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A22583C5E
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 09:59:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=fra.schnyder@gmail.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-48558d6ef83so40525945e9.3
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 00:59:54 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-486fe36cfabso25230655e9.1
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 00:59:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1774857594; x=1775462394; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/es7CKprRfE8VJ85lgkCIhBeopC+/aYsmrInMfp/JoU=;
- b=oHo+FOqT71+AqEfMK9W8ZuSLrpwkHGf0x3nCkN15EaqwBecb0BA63/OhtAS6mRcNzJ
- fJEDwbue52dWTmCr9/pbWvRYIGFSDXlEzGs2ZZr6+pFyaMxdV6UbEJ4lmVjP+er9cn6B
- ZRVsoLzoxLaqfyOxM/QI2eA0GmNPDD7HvFRYMqZMe9XUTaDJqvFhKQR7ixHsRaoEUt0v
- IO4IXeqxBDJFqURzv67cPUFsGlJH7I7bdz97RY7+P2E0Nxe+aWDscX7laNoCh6HqP0T4
- q8ZLbnnVLZTOq+ZO/K12W1GAyzh0+CVik1pWFGMw6xFjpzr/UkQLyR5dbO5/KFuUcYoh
- 4gsA==
+ d=gmail.com; s=20251104; t=1774857596; x=1775462396; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=98wB78cT0U3iaQkHLmSqdNAYPyR1x6/1ECkXfDw4WS4=;
+ b=PtKIhfuf4bJvWkK9Bgd+W8Ugcjojt41j1gEX/bk6k9uePTHO2sKGu4L6i66I9dDE7d
+ PibYzYWn58sdbxy9uP0wYQJxf4/kpe6G+y2GrRt1Dc3uzEJmXCTO226gGMhxBcppnaOY
+ sKx6+K+50v/FM5DX6fe0sqU9Gx9MvjvaC/Awg1tqj0JOWxFeE7WTx2+J9xXaM+U+YiVb
+ cuTsCxcgkanTN9efKy0/7U6pKn05Lm2lS2BcG2GT3XLZhdCleUMqVUoYFVWE8fJBW81Z
+ ljDXYk4Lef/egGgFpFyOu9L55gdRDkAImlpYjbNAABiZhqEM36VFJ1K597wT0FwxnDsr
+ LfXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774857594; x=1775462394;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/es7CKprRfE8VJ85lgkCIhBeopC+/aYsmrInMfp/JoU=;
- b=NMMZK8VfDksCMsyXFrGhvmOk1X2qBvQUy445zXi6FosaOySgTCk2IIGwtq3uoAn58g
- iU9Gcj9idZ7tz2lFQUtc+tNZf4n1OTdpq9Ruew8/EW5yIIG79dMsB0GLcjos8W7a8aPb
- CeP2vvv+e7C4x9DkwbQFap0IEQ1MEjL+B6dQHszmLDEDOVNLfm7YvhvnH/+6ZArtpJFr
- nnlPBG+x/kxi0Mwe6B28Tz19hdQpv8WsYhQ1gpaw26GOn2gg7PsDynUoBEnerrhtAQpW
- RI0mqc2DG30h7f5UQkgUnfCICHY8GckOjAugnu1JwXu9lnmbKjQNFmTKAOY8yBQyEfu6
- WjKA==
-X-Gm-Message-State: AOJu0Yz/iTybWw+a1JfJnYlLfx6P5Zl1ygeALdAEOP4zmziIaH45dvoK
- suOhQao5cL94AnCpJO1+EM+jgWM5j5NGc6N2Qs5vv11UcM4+WjAkOss7
-X-Gm-Gg: ATEYQzzpy8QpfAx7U9zc/pYWinaS3XT/o+ZMb24OLT+zYfgzcwkUSmcM4k25RtSaRnw
- Zthwee5Uxh6oZHZsci6zxEWtn+/noduz01ogFZr8LyqPmeFMHeWxhxa8eQjZghyYAgAImB6jTuU
- jIJl9+7PDXA9gDmcXkqH88482lvZ/Yzh0Nnbj1w5iNxmSP0h/JSPT1Yc5dMartHjOsHLbmS3a6K
- aUoqP8wuuCDjuhkQp0OJcz0clrPMZIkUOqkzTrix7VQL7F489eS1cW3ztjdLLltExsbTPUIEVSf
- k1zS4CNjjT4Jr3ZlZaHUN8ad60S0msK1x52pbQrh0jRrVQ2/HUpiEO5BXkY+OQjKXUCPdTRARiv
- /Mnoy8L3agOOIxFy4LqcXzVGXsSCG72NL751wA7mruQt/4dAY/ZwWlBC4jblDrdcfXiuTYXYsoY
- tFxhr8X6K2gb5nQmufKmsWPnFvmr7cP4hhugJsgNPDl5sWjY0ExCMDEoVQwyKyA0EWuuvlilRpq
- L3p51oFE2C5/E1pPtFnPVD1MwpGQNqoZkHBfk8NyWaZajnlNqb7KidXUYmq5LYi18V4P1eF3/sH
-X-Received: by 2002:a05:600c:46c5:b0:485:39d1:b4dd with SMTP id
- 5b1f17b1804b1-48727ef0bcemr202413595e9.10.1774857593429; 
- Mon, 30 Mar 2026 00:59:53 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1774857596; x=1775462396;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=98wB78cT0U3iaQkHLmSqdNAYPyR1x6/1ECkXfDw4WS4=;
+ b=B1aw0cgxdVLIhSlhOK9Mv5ST6Ueu+Gcm/blbBStA24hbyoBPsh75B9hdtddHtlzty4
+ iXsbdysgf8JPQ/B7uiOu4iIHyLdbUyyCm82vqB7LqO1TMBM9ooVMQBXMb22YMZ8uThj6
+ 14R5qHngTxFxNGcFmfavApCDEmYmBv9UhLh5GM6uhaAP/A63BKZ/GsLisnWPfSo9e2zX
+ kKJgOGUqc5LC+zImVbhVapMgg+jz2HYOVzVHixW7teepo3tYwU5Qotg1N5pyOG48cqDV
+ lvWHFt0xVTDznjwbeTFW9LW2LdvNEfV76FjGCT0xzckfZ8Yi/9rL5I1etB65k/BJWpD6
+ dURw==
+X-Gm-Message-State: AOJu0YyFZoGQHiEJZ2ro80NkzY0pfaqDNTNUOxQYOZXdzPV72wXc7QCA
+ PAPuktO+udn692WzShg9bDN6tAxMYiktdK+1SJjHSrq3D4t4O2psGKkpJPmmUFN7
+X-Gm-Gg: ATEYQzzCmZVP2W1K3aG22YFia1TmE5XP4iGHVdM8Jysl0b+O0nM8r442eB6p3YW09ws
+ ixbUzUL/C48w1BTVhtizzKDUT/RLrm1thi5fjg/ivwMeEngcbvSjbHj1mZLMNsMfeelYbQ5mrL+
+ uWNSJ3CUgRp9ldqPH0JD94hgpDx0tIw9ldIYao+YB8MqviRgMAaCCVPDVt73ZEn6wdr+FyTlecb
+ iSXyTQmmVhLz5O3ERcCl1OHvc4No32F2OXxkIxzdGw4fAGbSUvqSkClyqBGDeUHI2MfWroGKfTD
+ wBERqDZsxSp4U618mHnRsMtTiVxkig8UsflRzHQJUNROQ3ie8dgVfUDhko2ugrdl1EnQzYmxw4o
+ UybPcXMkNQXlMtwCCJKEGx1gGhCm3JrN1PqT3SNaofwddIfxt+ZtvpVuBplpsd+iCizwfxcKW7F
+ S8mJz0VYsVESpz4/PPzkzDz8FqXLazDlP+ZdkW5VYPuxQ6eulUBnTyhSFJO9KebXs68oze5Gu7D
+ dsk/ndSb+q3O92HVQ+EYQ48SJ1LcaNGUSCoiUcRypMpd+BMtsPjZCOEuBd8ycb/nGZn5CEUqlDv
+X-Received: by 2002:a05:600c:310f:b0:485:3cef:d6ea with SMTP id
+ 5b1f17b1804b1-4872911bf69mr174311555e9.13.1774857596112; 
+ Mon, 30 Mar 2026 00:59:56 -0700 (PDT)
 Received: from [127.0.1.1]
  (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48722d49c18sm257298055e9.14.2026.03.30.00.59.52
+ 5b1f17b1804b1-48722d49c18sm257298055e9.14.2026.03.30.00.59.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Mar 2026 00:59:52 -0700 (PDT)
+ Mon, 30 Mar 2026 00:59:55 -0700 (PDT)
 From: Franz Schnyder <fra.schnyder@gmail.com>
-Subject: [PATCH 0/2] imx95-toradex-smarc: Migrate to OF_UPSTREAM and enable
- GPIO_HOG
-Date: Mon, 30 Mar 2026 09:59:40 +0200
-Message-Id: <20260330-smarc-of-upstream-v1-0-c5b8cab32a22@toradex.com>
+Date: Mon, 30 Mar 2026 09:59:42 +0200
+Subject: [PATCH 2/2] configs: toradex-smarc-imx95: Add gpio-hog support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAGwtymkC/x3MPQqAMAxA4atIZgNtxR+8ijiUmmqGqiQqgnh3i
- +M3vPeAkjAp9MUDQhcrb2uGLQsIi19nQp6ywRnXmMq1qMlLwC3iuesh5BPGznaRWlvXPkDudqH
- I9/8cxvf9AMYgqu9jAAAA
-X-Change-ID: 20260327-smarc-of-upstream-f818fe7155ac
+Message-Id: <20260330-smarc-of-upstream-v1-2-c5b8cab32a22@toradex.com>
+References: <20260330-smarc-of-upstream-v1-0-c5b8cab32a22@toradex.com>
+In-Reply-To: <20260330-smarc-of-upstream-v1-0-c5b8cab32a22@toradex.com>
 To: u-boot@lists.denx.de
 Cc: Francesco Dolcini <francesco.dolcini@toradex.com>, 
  Fabio Estevam <festevam@gmail.com>, 
@@ -105,27 +102,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series migrates to OF_UPSTREAM to receive automatic device 
-tree updates for the Toradex SMARC iMX95 and Enable CONFIG_GPIO_HOG
-to apply gpio-hog definitions in the device tree.
+From: Franz Schnyder <franz.schnyder@toradex.com>
+
+On the SMARC iMX95 the WiFI UART and JTAG signals are shared. The
+WIFI_UART_EN signal is used to select between these two modes.
+Currently, there is no hog present in the device tree but the
+configuration needs to be added, as once the device tree comes from
+mainline Linux, a hog will drive WIFI_UART_EN high to select by
+default the UART function during boot.
+
+Enable CONFIG_GPIO_HOG to apply gpio-hog definitions in the device tree.
 
 Signed-off-by: Franz Schnyder <franz.schnyder@toradex.com>
 ---
-Franz Schnyder (2):
-      arm: dts: imx95-toradex-smarc: migrate to OF_UPSTREAM
-      configs: toradex-smarc-imx95: Add gpio-hog support
+ configs/toradex-smarc-imx95_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
- arch/arm/dts/imx95-toradex-smarc-dev.dts |  277 -------
- arch/arm/dts/imx95-toradex-smarc.dtsi    | 1153 ------------------------------
- arch/arm/mach-imx/imx9/Kconfig           |    1 +
- board/toradex/smarc-imx95/MAINTAINERS    |    2 -
- configs/toradex-smarc-imx95_defconfig    |    3 +-
- 5 files changed, 3 insertions(+), 1433 deletions(-)
----
-base-commit: 80a4c49a4ab2ad06fa84a8b7bdf6e33b3b5101bf
-change-id: 20260327-smarc-of-upstream-f818fe7155ac
+diff --git a/configs/toradex-smarc-imx95_defconfig b/configs/toradex-smarc-imx95_defconfig
+index c8da431d1c7..61abeff1afb 100644
+--- a/configs/toradex-smarc-imx95_defconfig
++++ b/configs/toradex-smarc-imx95_defconfig
+@@ -125,6 +125,7 @@ CONFIG_SPL_FIRMWARE=y
+ # CONFIG_SCMI_AGENT_SMCCC is not set
+ CONFIG_IMX_SM_CPU=y
+ CONFIG_IMX_SM_LMM=y
++CONFIG_GPIO_HOG=y
+ CONFIG_IMX_RGPIO2P=y
+ CONFIG_DM_PCA953X=y
+ CONFIG_SPL_DM_PCA953X=y
 
-Best regards,
 -- 
-Franz Schnyder <franz.schnyder@toradex.com>
+2.43.0
 
