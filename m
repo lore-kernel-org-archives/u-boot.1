@@ -4,63 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6EA2FF494F
-	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 12:48:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06F31FF494F
+	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 12:48:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E706C83DA7;
-	Mon, 30 Mar 2026 14:48:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 33EC683F69;
+	Mon, 30 Mar 2026 14:48:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="EfxQLp1z";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="SD7W63Uj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA02C83F5B; Mon, 30 Mar 2026 14:48:17 +0200 (CEST)
+ id D734B83DBF; Mon, 30 Mar 2026 14:48:17 +0200 (CEST)
 Received: from AS8PR04CU009.outbound.protection.outlook.com
  (mail-westeuropeazlp170110003.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA9F583DBF
+ by phobos.denx.de (Postfix) with ESMTPS id 3B24B83D17
  for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 14:48:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=r5FRW/RFQoR99mTFE00bG4rL1Yj4D3uR9KOFCvxffAVb33m6RNRhdcm0UiioA9wpxbFeRXkLOCUr1ahSVRCDhrmqxFBJVu+F3+nHbnSZ0kVvdXN171bxMXitRY0YEUBUFU5Ts5yNOO41VoXJ0NnYR3/Q2XKdfwdvxwy+lFa121kTLTKNHOAJCuFUKKzqTAFrUNuIjnk2GFx6Qh2VrY5+0VPNzfaWA3Ixfs/eGc0Oe39mn0lyVU7qh6Le4FEmhnPvom72tO1/rtNk3oiNmDtTeK9KCQUm9/AlI1k+D+zn8ad+QO49cRrteOn4XnFEbujAXrq3vn+h5qq4AsWsRU670A==
+ b=AWE9u5mL/QtViX22y1Y638E137hmjXbj4r9klhZbqR+b9qvhGKMzNudQcU8W+RR0iAEk4yfAkkfOSuoCQlZSLdMFvD/BeNl5bHWNXr/sfuZfGePggVQx996k8kKGV1PND9j/X5zITIijDCK1D+upb38cQ8cVBwFfh9lFcyKo8g8CROwryaJU9ksbg9DQWS9LCBYFwQerZJ0gFrfrB6gSnA9ECauOamZ+oO8MA9wBe1bUoXkhdRBZRq4MhcHs+eCONYPuJK7NRQWnJnSSU+ahYLwtu40eA6OTofh278eJ3vYGfmSilMAgdbh9gXS8LlJ7m/u4goKfFJweAhSXodn9BA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3g6WWZVurNHEok8rYp0tHtEDwXkXaXaSFYi1DHluDxY=;
- b=aTBmL+1IIPcaqXb/Z+iqMxhjsdGJ+hHGR7Z8lwo75AcSI5LvghOyP5wEMqs7h1H7KvQVJy+xEIzrmTRfOHu1I1jd/lW6uvf+Wtkkla9rMUI+FU+IZD/DbaXC6hvbQSWqQgDJXs9F3lITYuOJofV2ngdd9mPg7/yqPQGcD/v3YNY5jNwwcqin7LzgBGjdsEZnprnohLH+c4l6Yeal2j7+AXGKplvlLgdsgTg6vH9m08Q85cxpX8TPFcnBIBZkJSZsIgla1lmpB98OHZDhy1kiTWM1c7/GdsycnKS0i6U07i+rNhpTPYzfaRDn+cHvmeemEOlmQCFdIf7cLbuJnKuzAg==
+ bh=17P4Q3O4pKPDJVe4BPoRy46lypLwMNoiTo4x6bB2sgI=;
+ b=PCVad+oVi0k20332ygLPTZEx6SmmuoFzWm6wRgW/I8juqlpUy6qo6dANYQ/hsj6DxF6jIZ1VMzo7Dy4WkeBm+A1GYwnDxzSWFvkEcF4bJTbv7CwVnS8EAreIMRdV8w1wI4wPZpzol8jYZqtX4zDy8jX0SpVd5A4kv5SCe55b9n57+AE7wRG/KGxcTIggxRRao9+oDkcoVzhyOMzQDwbuYep7QRF7Tqft7NRwgLtv8cpdVIuXE5ZUYGwsL1m1wsSACEZjc54a7jSU2arlq2c3aEJ95IUmALBa8dnXnUpwl7lhy4aP6TdWl0ni4MQKnRKi55cY6ELksjwuGPv3dhz1Aw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3g6WWZVurNHEok8rYp0tHtEDwXkXaXaSFYi1DHluDxY=;
- b=EfxQLp1z5TehziHzZikUd+arns2ebaSMgdhqvafwpDvcv4yadzrjPWcuyhiM3+9qTR1bshJk/3kBarrv2bMBsKy3aTYreOQHFStJr2+6TeX6sC5af5cQbKMyKnsgAP7t8jtecDfcdKdCj7D2DLHMwxTFWkJRCMTzcYZsdAcsGyEEPH3dQi101WaklTQOyFewIMDvqwYU1nHd+ELWvMi26AyyF7RBlzg5xQ2d4fwxQbnNI7iPAq1PlCSvPNY8VozkSDxtYSJy4Cq3EziIKPnwTleCFMXiW4QtniUIoKX0WWxkJWxVVa3QB8bWuZUL3aPjGzzbgko5gBuwMtDN+ngRsQ==
+ bh=17P4Q3O4pKPDJVe4BPoRy46lypLwMNoiTo4x6bB2sgI=;
+ b=SD7W63UjvbptantRrsScjXUDptWy68JebRZOiOAXlT6NfG1LCcHlO3qXhYiDnPW6TKcgDTaECsxnff0GPptLYcgbkqjC0lSitkt8HCGbLvZbot1aRDfXcz1+vqJ5K3gr1rbZRMNgceYwF+ocFBPZlzeS3grXiJgNd6lf1NTkghY5w/kJw/KoChBy13mtKmg5+g+Qx80BTuzE0Wap6xnkTukxEhu7zLv981iFSk+WMszCe92JtKMc0y/yhdDmX/ex4/QHLMo5fWQT6vn+DVE5OS8lXBI1d2VxFZ6sXVP7DOHx7p8k2eqPJgSWXBmEc0lEMMdh/syRK3MZvFqjCSFThw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
  by DB9PR04MB9962.eurprd04.prod.outlook.com (2603:10a6:10:4c4::16)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.28; Mon, 30 Mar
- 2026 12:48:13 +0000
+ 2026 12:48:07 +0000
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::4972:7eaa:b9f6:7b5e%3]) with mapi id 15.20.9723.030; Mon, 30 Mar 2026
- 12:47:44 +0000
+ 12:47:38 +0000
 From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Mon, 30 Mar 2026 22:04:03 +0800
-Subject: [PATCH v2 1/4] imx8mp: phyboard-pollux-rdk: Convert to DM_PMIC
+Subject: [PATCH v2 0/4] i.MX8MP: Convert to DM_PMIC for a few boards
+Date: Mon, 30 Mar 2026 22:04:02 +0800
+Message-Id: <20260330-power-legacy-v2-0-47dde3182a2c@nxp.com>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260330-power-legacy-v2-1-47dde3182a2c@nxp.com>
-References: <20260330-power-legacy-v2-0-47dde3182a2c@nxp.com>
-In-Reply-To: <20260330-power-legacy-v2-0-47dde3182a2c@nxp.com>
+X-B4-Tracking: v=1; b=H4sIANOCymkC/1XNTQ6DIBCG4auYWXcaQOpPV71H40JhVJJWCDRUY
+ 7h7qUkXXb5fMs/sEMgbCnAtdvAUTTB2ySFOBai5XyZCo3ODYKJipSjR2Td5fNDUqw0vrWhIjlw
+ PQwv5xHkazXpw9y73bMLL+u3QI/+uP0j+Q5EjQ9Iyf6jqhtfqtqzurOwTupTSB4eBFf6mAAAA
+X-Change-ID: 20260323-power-legacy-5928e4f1dbb9
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, upstream@lists.phytec.de, 
  u-boot@lists.denx.de, Stefano Babic <sbabic@nabladev.com>, 
  Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>
@@ -79,67 +81,67 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|DB9PR04MB9962:EE_
-X-MS-Office365-Filtering-Correlation-Id: ceeaee9c-30fb-4eaf-5c9a-08de8e5a89a3
+X-MS-Office365-Filtering-Correlation-Id: 5cab507f-0599-4c1c-4c89-08de8e5a8648
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|19092799006|376014|7416014|52116014|366016|56012099003|22082099003|18002099003|38350700014;
-X-Microsoft-Antispam-Message-Info: LMaTma4V3b0cXKP/ugvFEnpJjUbUk4lH7+ybcuB3Ha07iU2JoncShG45i2sDdHMmjTBkA6WFw44A40B0ClTqlLNr53weTNDaZfSRWX8PxFwT/pxskauhMasKm4mjU41wadg4ciexwV0v94xKoBlJcQwR+QrZK6MlpwaqM1OUkqBl7RmeAmMN13VOcS6ToVzNNlfQwRzMu/2y2cNDUqI27mSvOwHV3TCh52UZKg49AsB4F7gKse0PQJ/CaKdIuMfO4mi3ZZuNJrlGFzQUQ5GXaNG2KAKUBTwT1qIK42FuqoaJlYRiE7B9j6ciaA/zvj3dlSiczUV2sRBjz1/49LFm/JfebrVDKhhGGjejkrURlIKawUYZdwy64Baj08ldLIrsyC18OhGgTmW83ZbIopHSGOed3TctYDHlYbnXW/b+8UdpXSB+2ALs/ojWJruhILiZGkZiO+V2QdDFjwufi66kA6DbaocNLlVPZMX107a6xN370x8Rr/OBnVljqxGWKPbv6eYzIfi8//W+5xaOU2pZqlAlkE/qXKLb+HH28O93DVMgjtUsxPPin35XieB6NXWLIinFi9o2LA8LKEg7DKCLHs6MClVr5x1pCeAoF+usACr6uIvWkYxEentL2Ojr10og6APymGH+Qf5GAGXq1MXcC0E1ydcT3KzAR0hNGC4EDvZo5Uu0nuNts4EbPoyqSVUbCBdyvZfpPHqI/aT/jIO6j4eqYZxTOHbB+CvF+6DM2ZOfqJnDpWR2u0GyGP7sdwjRUQY54CApjUFbFRREGthODTK1DM8X4rq1veW7Tc4q2ZI=
+ ARA:13230040|1800799024|19092799006|376014|7416014|52116014|366016|56012099003|18002099003|38350700014;
+X-Microsoft-Antispam-Message-Info: JV3d2ZZ7mYRX0OZt8R+o1Lfan13BGzMc7TlbOb+ZfYBOkoRCLcTJl44LpTJr5tbPo+YZCXX3f+vlEpN0sAh1XdkYvgHSsiayRIzQqeZgUXyn1C/yWG3jnWrJRwXeEDYQGlmYYH+wFL3Ou1gPtPSxN7osYlBRJKoencnDG/5WAYl6IoiRFRkpgxlmAmxFefbeM5V0pQyxBd7gnzFH3/X2nJKbc9PxgiCJT3I3T3FhaG9WdWfxomiU6f3pAyL1UvrNqIbx0dw1IUOODQDTyw8WllV6tCPAajrR63YA2Y5577etdEriWEHlQdhDjvMi9dUfJht2AwQXUMgbwFgVMOoYOfCDoPBnR2dZdP6sPnty0Bqdd5vq9wakX4QaEfiaMYap6pVNYtV4MkLCl8bAMkAWt3NuYcWxBWNaPxKY+bNewkSNRwQarZVZ73HiBcs7bDPqCi0qe1L4S9bUvUkKPbe9YDU/n401Sjah7+YZ70fsVN/a1uAEXujEHRLQO9oHvxDlwNSBNuRzAfWJqeviv04Ys8Ulveauw/F9wG9adSWM2HP34uiL2O9aCYZss6sJBM07lBgyyh5g7kUIq9Tjy+W8aFsSLoxHVIMNIGFUoR8hThOzQFC3tM8HvJ2GpJ/APnYs3XEk4K70ZODWhDDBtF++gBqFhXmp62Nt11nOtx3HxpEAq2eHrAU0JX8WOBbaqUE6DKGDXkdxIjjfoRHP6V5FjYT6Xq4BqnuUigi7ypPUqo20pXE85l5qHgToQ2PETeEx+zfe1d4rVG/bRuY/E4al73/sZJrjTogfNon18kC1CV/kOFf3xbTT1r+MnwB8Fc1H
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(19092799006)(376014)(7416014)(52116014)(366016)(56012099003)(22082099003)(18002099003)(38350700014);
+ SFS:(13230040)(1800799024)(19092799006)(376014)(7416014)(52116014)(366016)(56012099003)(18002099003)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Q1JFQ0ZpZC9XaU1ZVEV5bG16TkNFdlh0TCtITnVsMjFydGkvTXZzOHp6Yjhv?=
- =?utf-8?B?Tzd0L1EyeCs2Y1c4MnYxMFZVdEVVb0d1UXRGaHZsQ0JVSDR6TXZtRFFoQWU3?=
- =?utf-8?B?d1I4VmNNZFhReTk2Tk1TeHByWjNiUEUwRjB5OVBxYksxT01aUVFDUDlGOUta?=
- =?utf-8?B?L1FxUkxUUGdZVE5rTW9scmtXRHEwbDE5WHA5bysvUDJLTGxqNFlhOWxybjlx?=
- =?utf-8?B?Zk5HRHFCWTJCQlFTTk1XRUVQMUlGOWhkdVNSdmdYbHl0Q2FlUm5xK2xJQ2VH?=
- =?utf-8?B?cyt3Y1Nhc2ZPOXZFM2V4OWZqSXY2TTA1Vys0UWIreWszcGRrMk5ubjZDQkw0?=
- =?utf-8?B?aXkzT1BYL0xEOW04NGliQlJmdDU0cE5CTVNDSkNVTUJnY0ZaYWdEUkUzTXFX?=
- =?utf-8?B?T1dIU1pidUdaVCtNMUl6cFg4SllBcSsxZ3AyYXAvT1hRc0l4TE1vd2N0U1hw?=
- =?utf-8?B?WmFPQnJXeEZXUkJkdEliSEJZaU8vNjlhMHdTUkZmMkxSR2xNdWwxdFM2dnZR?=
- =?utf-8?B?Q0Vma1lVOWlEdDNoR1R4SFQ5Wmg2Wlowd0ZnbEVzVXByWXREVWVqRGJLMWFn?=
- =?utf-8?B?alRQcTBEMFlqMXh6OENpSEVZdTdGTjVOOWxUVi9mWnNLdTJNSElxd3FmVmVr?=
- =?utf-8?B?dzRKS3ZxaHU2cUhycEVGU3VXc05OWndldXJhenY4RSs2SHhEM2xZM3lZUkZs?=
- =?utf-8?B?MVFVaHQxeWIzZWF0U2o1UmdsZGF4S1loSFl1UUJQRjN1c0xyWkdvckNVMnZj?=
- =?utf-8?B?QzkyRlZjSVJqNnJFa05oK0dLcm1MSlNRaUJUZ0ZQUmJCSXVzNk9HQmRtbmcw?=
- =?utf-8?B?eVNyVU0xTU1UeklNWkFhbFN5U3Q0eVdvbTg0cW1iUkh1MWJmc1FYVTF1UEFq?=
- =?utf-8?B?bnJDcW8xbHZxdFJ2U0phZURIODVhRER3SHZwVWRaU01sc1VMSFVPc1FEeUdB?=
- =?utf-8?B?eDhZUjhwUmVVNUlIOVhabDBiQXUyekwwVXE1ZncxYllTUkcxOUMwdUFYZTg4?=
- =?utf-8?B?OWk2VmFMM05MWGIxMGRiTDc3ZWxYcHR3bmNITHF0eXNwNTVXS3pzaU5MYUk2?=
- =?utf-8?B?R3JicFRkK1YzL3NtY3k4SUl4MnRTRk1HK3pENmJuOWVmRmZURXNCbTVadWkw?=
- =?utf-8?B?dExNSDFKNE5pRWsyZ2wvUkdmZ0pZaUhobXlnWkxISG1KUmMrL2dXYWFtMlNB?=
- =?utf-8?B?REQxK1MzalBuTHhnUGdmdyttV1A4blhNNCt4aHIxNExTSG5URk1zRXBpRWM0?=
- =?utf-8?B?ellSUnhLQXRFOC9EY250VWpTeDNpTzAzU0dDaENBQTlPakNKTmk0UXBnSU9z?=
- =?utf-8?B?Q0Z0ZGxUb2wyMHBIZ3FVb3dVVStqbjFRbHAyMXpCQU1neUFqVmRkYmtsajV1?=
- =?utf-8?B?UVNWMi96YkV6bTJmeWZoU0o3RklVWUtXcndQU3dlSWlwN2ZuUkZWbVl3SWJQ?=
- =?utf-8?B?RjJ2MHBKYlM1SDZoMkJZencwcXFzbDk2bGJVRFZ3WTUyelJJTDVLa1VSM1Qr?=
- =?utf-8?B?RDdwTWJFTDBkYnpHcCswZEVYRFpPTm9LL2MrSURBTTlNTlRxWEZMYldtVDdj?=
- =?utf-8?B?L0hDWlFRWXVhNC90eWcrY2U1bE9vYkZMenpSZjNWYUF0MzZlamhaOU81Z3Rz?=
- =?utf-8?B?M0NuNHFteXFKVUJpajV4L1FhRHpNaklWT0tVdzNyOGovTzZNVU5wYytxUlJh?=
- =?utf-8?B?QVdlK0l2RUZqSXl0bE1uamNndXN2amNIYTZpV2xUMUZPM3BFQXc5NDFBZ3p0?=
- =?utf-8?B?QmZhNE5NSzBDOUIrWU5PZzdsMW5jV3FYL1o0dWpMaGhjYit6UnNzYlgvZzhw?=
- =?utf-8?B?WU1iRjFod24wNk5tSlFDQmtmREIyazVRcXBKeis1d3p1SDVkNEdTbVBPR1Yv?=
- =?utf-8?B?N2RoU1hpVEM2RmVEVDFiU2VMYytBYnZibnZyNnlVNExyWm5vbFRQenVoNVVV?=
- =?utf-8?B?T2NyMUx0OC95TkJhejRsV0dWUHhHRjVmNW9hZEpUaDMyeHJoamppdWN4VE5L?=
- =?utf-8?B?VUlBMGQvSDdkbGJqcHVEU053RVVGaEtoVnh0eWh4RTllaFZtODNaQVBSNWM5?=
- =?utf-8?B?MEs2YVcybkxDOHllQW5GNmhPYzdNalFyS0ZhbnpBQlNwcFRha1JrVUFlT2NP?=
- =?utf-8?B?MVg2dHp4Nm9EcTZNcDlMOVozWUszUzFkbHB6Nm9pWm5wZGRyZEdRaGxZdnpR?=
- =?utf-8?B?V2JhRG1NVGJlOG82bThGKzJBZHJabXc2VmFISi9VaDQ4Z2V4dzA3Uk1QanhC?=
- =?utf-8?B?MG5JUnpEZmt3MW1XMWI5N0IzLzNFQ0FNR0JlUEZFMk1lSnJXQWdRVUlvUitP?=
- =?utf-8?B?dStpamgyMXJNOThCdFMwR25RTkhnNGZEQmdQVjkzNkVFc01iazgzZz09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZjJ0THJiQXZRM3ZHcDRyVVJJRUI0OE4xNTFMY0lNcTQvVW4rbEtKempabkVH?=
+ =?utf-8?B?YzFZNElpa2w2MDc1UTNNN1FybnVKdlFCYkxHNVF0UWxhNXNEbmptYmtDeENB?=
+ =?utf-8?B?MW5GV0t1cFNrQ1lhaGhvVjR1ODB2a2VENmg2NXdOV1BCSGpvZmtpd1o4WTZy?=
+ =?utf-8?B?eGRrNkR0VjE3Q0gyQXdJakg4bmI5QitpdDc5TDdyUUFFbkkweXVRNWFKNUll?=
+ =?utf-8?B?V1ZOK3JOV1ViSXk2blRsYkhteTdtSW8zREs0VkxZTGVFK0VLRUxvNlFHWUZG?=
+ =?utf-8?B?ZU9kTVJpeFBTaDlIRG42R09ublZaSE1YdGFhUlhnV1cwdm4wYWJJZTZuSHJ3?=
+ =?utf-8?B?R0hKeUZlTHh0cVNJNnc2SEJ5eGVQVUZtcmhXU051MW9Xc0ZUQkJHcUkwY090?=
+ =?utf-8?B?N21RZm5YMFVNTFRNRjh1a21mNkhTVFV3VGNFQXIrS2g5ZGU2QTE2cTd5NmVM?=
+ =?utf-8?B?NEFpQXJOOW5yLytwejIzdUx0ajFRbHArQVEyWVBWN1RNa0JoYlpvRmFDNnR2?=
+ =?utf-8?B?eWhsVThiVUxydmxnY29TTXFKSEVjMG84S0p2R0krQWZnaHppejNNQk9yZDV6?=
+ =?utf-8?B?YXEvUmpncFhUcm5lMnVrcklSM2lhZ3pSNkY4UXhpOVJqOFhsc3IxUm5sOEtr?=
+ =?utf-8?B?QVI3cUNSRGZmWEpCN1JyQU4zUW90TTdUT0EvNXRpNVc1cDhPZFNRQzVQZlQw?=
+ =?utf-8?B?OGdXTmlaOFh1N0VFWjNiOEJzcWdha1lESVJFYjhScGx2SXNpeW9ubFFscFVw?=
+ =?utf-8?B?TG9YVHFranJlMUgzcFZCN2RqbGJxL0JuWjJ1anJpZWVmZG91Q21nSk9kT1RV?=
+ =?utf-8?B?UFRDWDhIZXh2cDRPOEtkNE80M3Zmb2tka2pZQ0ZyQ2xvYTEybnkyMGVHTm9S?=
+ =?utf-8?B?WmhtemI4TWdjbkhTL1hGcHR6eU1LbGM2VzRCcEdEenUxNU4rN0JsRUs2VnVS?=
+ =?utf-8?B?NExDU29OYkEvdXhvYVV5cHlCc1BDNitLM1J0aUs0cDhrZHZLc2ZQWnV2TTVp?=
+ =?utf-8?B?VG9CUHdUdDhza3g5QmFaVDVPRGN0a3cvMXpkODcwcDRGd01DZVg3dWpOMHIz?=
+ =?utf-8?B?blp6R2pvbEJXN0ZPS3M3Z3JTbjU1QnhoRVpkaUVmTEFCSy93bVhkVWlTVXV3?=
+ =?utf-8?B?cndCSFRBT2Myb2JXbU0rMC90QzZkRkR1bjFyendObmJiRWhLcEpJcVA2T0Iv?=
+ =?utf-8?B?QTJIS0duSmUzVzRpKzFNcjdpbU12d24zVHowSDM2dElsUndoUjlyU3BvZW92?=
+ =?utf-8?B?RmQycVYvRGY0L1BnY1BUL0pacXFhY3FlOWN0OWNVNXVBOVBWMnM5cGFhUXF2?=
+ =?utf-8?B?WVNwU3VGS1VHT3h5ZFc5UC9ZOUo3K0JwQ25YTzNPUmRFOGZUZ2dCRHpBelRx?=
+ =?utf-8?B?UHRmTGFnRVBqVzN5bzRUVGhvbHlEUXE2bSttYXlSYmNaWk95QXdQRXUvN1gv?=
+ =?utf-8?B?aG9vejFKUzNxVElEclBheU0vL2JaMWJYZDQxdDhYdDFyZi9oTWVpNDFSclk2?=
+ =?utf-8?B?U3Z1SFg0ZFBYbmZPZWwyMzMzM0Y4bUNDak9kQm1FRGZWdXI1bEZnSWQwVUsx?=
+ =?utf-8?B?Y0JQNC9mQi95MVZkVHBQRHBKVXpDd2ZxZXJYeHByd3VmWGJHVGpYa3E4Vi9G?=
+ =?utf-8?B?UERQaUhwNlY3d1QzMG5xTS9maVQxQkVpbndHa2Z5cFFRb3ZmbW4rZFpGbzRQ?=
+ =?utf-8?B?cHNBS0NsdFdxSERqbGlBaWI2TFhDZk03YmJQQkdJNVFRRWxTa21ydVpIalpJ?=
+ =?utf-8?B?RURqSVF0S1pvTDd3SkNqcjlaOWxydGxldEZSbytpMkw0dDVHcWl6emdsaUFX?=
+ =?utf-8?B?VkpzdU95UkJTMzVxM1ZQTVRYbHdJWkF5TENRZ2lmdzh5alh5SW9KTEtpYmJk?=
+ =?utf-8?B?Y1l5Wm11VTc0V2xqVWpOVjBqRDV4NkZhbEhzVFJQVy9IUGlaMjJoRVFTa1RW?=
+ =?utf-8?B?NlBmZlFoOEM1bGdwLytUYVVWYXh3a2p0dUg4ZmQ5M0dSTHlWZW1rSGkwMmJR?=
+ =?utf-8?B?VGZIVkIzcUYzM2pyc2g2STJuVlBwMnBCNWRaUDQ4eGdrMi9PNHc1YzhRS1BO?=
+ =?utf-8?B?WFNOOGpzWEhVM0JKeXhHUkVhbFI5aFNVY1YvWEQ4cWozMGI2S2E1dTQzRWRi?=
+ =?utf-8?B?dHVXbHlBTy9hUkpkRDZIcjdQZXRsMzZZWkowZ1Vuc2hZaTAyUmt5Zmw5OE9p?=
+ =?utf-8?B?ejRPakdVd3JCdm9kNmk3NnMvUWgybVpJRWVxdjNmM0U2OFVPb2JKOGdPdm1C?=
+ =?utf-8?B?K3JrREIrRURwa2Y4ZVFiZHpHMi9XTWJoYVRVbUduU1ZYeFJ3YlBoMThudXpj?=
+ =?utf-8?B?SXExKzVxNUt2TGR6ai9NTzF4NDF4amF3YkNUQ051SVdKVXlnbVNZUT09?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ceeaee9c-30fb-4eaf-5c9a-08de8e5a89a3
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5cab507f-0599-4c1c-4c89-08de8e5a8648
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Mar 2026 12:47:44.2729 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Mar 2026 12:47:38.6888 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: N4Vz98VoqnWGjD0CAuPFJe9p8gH0NXo/iCPkOmT9cXdOvpVm8BRjps2pVXwpBoOhmYHKDjKkgwSsrv6jf9Jkew==
+X-MS-Exchange-CrossTenant-UserPrincipalName: ClS59nGiFD59WwnlbNMv8ZM3Dkq7CqrL4COlaEOGta3rgkn35wG8r6PBMUcvX7sX3J8co238SSRWTzoDtKEvgA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB9962
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -157,190 +159,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+Per the thread [1] that Tom asks.
 
-Convert the board to use DM_PMIC instead of the legacy SPL I2C/PMIC
-handling.
+Convert to DM_PMIC for icore-edimm2.2, libra-fpsc, verdin and
+phyboard-pollux-rdk.
 
-Changes include:
-- Enable DM_PMIC, DM_PMIC_PCA9450, and SPL_DM_PMIC_PCA9450 in defconfig.
-- Drop legacy SPL I2C and PMIC options.
-- Remove manual I2C1 pad setup and legacy power_pca9450_init() usage.
-- Use DM-based pmic_get() with the DT node "pmic@25".
-- Update PMIC register programming to use struct udevice API.
+I not have the boards to test, so just my best practice to do the
+migration.
+
+For i.MX8MQ boards that still using SPL_POWER_LEGACY, it is a bit different,
+because the OCRAM is a bit small, I need find more time to check on it.
+
+[1] https://lore.kernel.org/u-boot/20260320214518.GD502704@bill-the-cat/
+
+CI: https://github.com/u-boot/u-boot/pull/916
 
 Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
- .../arm/dts/imx8mp-phyboard-pollux-rdk-u-boot.dtsi | 22 ++++++++++-
- board/phytec/phycore_imx8mp/spl.c                  | 43 +++++++---------------
- configs/phycore-imx8mp_defconfig                   | 10 ++---
- 3 files changed, 38 insertions(+), 37 deletions(-)
+Changes in v2:
+- Drop vqmmc-supply in patch 1,2,3
+- Rebased to next
+- Link to v1: https://lore.kernel.org/r/20260324-power-legacy-v1-0-ed432367817c@nxp.com
 
-diff --git a/arch/arm/dts/imx8mp-phyboard-pollux-rdk-u-boot.dtsi b/arch/arm/dts/imx8mp-phyboard-pollux-rdk-u-boot.dtsi
-index 4804a204e92..e9403d9ea82 100644
---- a/arch/arm/dts/imx8mp-phyboard-pollux-rdk-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mp-phyboard-pollux-rdk-u-boot.dtsi
-@@ -34,6 +34,18 @@
- 	};
- };
- 
-+&pinctrl_i2c1 {
-+	bootph-all;
-+};
-+
-+&pinctrl_pmic {
-+	bootph-all;
-+};
-+
-+&{/soc@0/bus@30800000/i2c@30a20000/pmic@25/regulators} {
-+	bootph-all;
-+};
-+
- &reg_usdhc2_vmmc {
- 	bootph-pre-ram;
- };
-@@ -83,11 +95,11 @@
- };
- 
- &i2c1 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pmic {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &usb_dwc3_0 {
-@@ -96,6 +108,12 @@
- 
- &usdhc2 {
- 	bootph-pre-ram;
-+	/*
-+	 * LDO5 output depends on SD2_VSEL, but no way to read back SD2_VSEL
-+	 * when using SDHC controller VSELECT to control SD2_VSEL. So drop
-+	 * vqmmc-supply to avoid fsl_esdhc_imx read back wrong voltage.
-+	 */
-+	/delete-property/ vqmmc-supply;
- };
- 
- &usdhc3 {
-diff --git a/board/phytec/phycore_imx8mp/spl.c b/board/phytec/phycore_imx8mp/spl.c
-index fc7aefd0073..fc6f5104925 100644
---- a/board/phytec/phycore_imx8mp/spl.c
-+++ b/board/phytec/phycore_imx8mp/spl.c
-@@ -117,45 +117,32 @@ out:
- 	ddr_init(&dram_timing);
- }
- 
--#define I2C_PAD_CTRL (PAD_CTL_DSE6 | PAD_CTL_HYS | PAD_CTL_PUE | PAD_CTL_PE)
--#define PC MUX_PAD_CTRL(I2C_PAD_CTRL)
--struct i2c_pads_info i2c_pad_info1 = {
--	.scl = {
--		.i2c_mode = MX8MP_PAD_I2C1_SCL__I2C1_SCL | PC,
--		.gpio_mode = MX8MP_PAD_I2C1_SCL__GPIO5_IO14 | PC,
--		.gp = IMX_GPIO_NR(5, 14),
--	},
--	.sda = {
--		.i2c_mode = MX8MP_PAD_I2C1_SDA__I2C1_SDA | PC,
--		.gpio_mode = MX8MP_PAD_I2C1_SDA__GPIO5_IO15 | PC,
--		.gp = IMX_GPIO_NR(5, 15),
--	},
--};
--
- int power_init_board(void)
- {
--	struct pmic *p;
-+	struct udevice *dev;
- 	int ret;
- 
--	ret = power_pca9450_init(0, 0x25);
--	if (ret)
--		printf("power init failed");
--	p = pmic_get("PCA9450");
--	pmic_probe(p);
-+	ret = pmic_get("pmic@25", &dev);
-+	if (ret == -ENODEV) {
-+		puts("No pmic@25\n");
-+		return 0;
-+	}
-+	if (ret < 0)
-+		return ret;
- 
- 	/* BUCKxOUT_DVS0/1 control BUCK123 output */
--	pmic_reg_write(p, PCA9450_BUCK123_DVS, 0x29);
-+	pmic_reg_write(dev, PCA9450_BUCK123_DVS, 0x29);
- 
- 	/* Increase VDD_SOC and VDD_ARM to OD voltage 0.95V */
--	pmic_reg_write(p, PCA9450_BUCK1OUT_DVS0, 0x1C);
--	pmic_reg_write(p, PCA9450_BUCK2OUT_DVS0, 0x1C);
-+	pmic_reg_write(dev, PCA9450_BUCK1OUT_DVS0, 0x1C);
-+	pmic_reg_write(dev, PCA9450_BUCK2OUT_DVS0, 0x1C);
- 
- 	/* Set BUCK1 DVS1 to suspend controlled through PMIC_STBY_REQ */
--	pmic_reg_write(p, PCA9450_BUCK1OUT_DVS1, 0x14);
--	pmic_reg_write(p, PCA9450_BUCK1CTRL, 0x59);
-+	pmic_reg_write(dev, PCA9450_BUCK1OUT_DVS1, 0x14);
-+	pmic_reg_write(dev, PCA9450_BUCK1CTRL, 0x59);
- 
- 	/* Set WDOG_B_CFG to cold reset */
--	pmic_reg_write(p, PCA9450_RESET_CTRL, 0xA1);
-+	pmic_reg_write(dev, PCA9450_RESET_CTRL, 0xA1);
- 
- 	return 0;
- }
-@@ -193,8 +180,6 @@ void board_init_f(ulong dummy)
- 
- 	enable_tzc380();
- 
--	setup_i2c(0, CONFIG_SYS_I2C_SPEED, 0x7f, &i2c_pad_info1);
--
- 	power_init_board();
- 
- 	/* DDR initialization */
-diff --git a/configs/phycore-imx8mp_defconfig b/configs/phycore-imx8mp_defconfig
-index 2fcf7db9e5c..51d9737afb3 100644
---- a/configs/phycore-imx8mp_defconfig
-+++ b/configs/phycore-imx8mp_defconfig
-@@ -10,7 +10,6 @@ CONFIG_SF_DEFAULT_SPEED=80000000
- CONFIG_ENV_SIZE=0x10000
- CONFIG_ENV_OFFSET=0x3C0000
- CONFIG_ENV_SECT_SIZE=0x10000
--CONFIG_SYS_I2C_MXC_I2C1=y
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="freescale/imx8mp-phyboard-pollux-rdk"
- CONFIG_IMX8M_OPTEE_LOAD_ADDR=0x7e000000
-@@ -113,8 +112,6 @@ CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
- CONFIG_FASTBOOT_MMC_USER_NAME="mmc2"
- CONFIG_MXC_GPIO=y
- CONFIG_DM_I2C=y
--# CONFIG_SPL_DM_I2C is not set
--CONFIG_SPL_SYS_I2C_LEGACY=y
- CONFIG_I2C_EEPROM=y
- CONFIG_SYS_I2C_EEPROM_ADDR=0x51
- CONFIG_SUPPORT_EMMC_BOOT=y
-@@ -144,15 +141,16 @@ CONFIG_PHY_IMX8MQ_USB=y
- CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_PINCTRL_IMX8M=y
--CONFIG_SPL_POWER_LEGACY=y
- CONFIG_POWER_DOMAIN=y
- CONFIG_IMX8M_POWER_DOMAIN=y
- CONFIG_IMX8MP_HSIOMIX_BLKCTRL=y
--CONFIG_POWER_PCA9450=y
-+CONFIG_DM_PMIC=y
-+CONFIG_DM_PMIC_PCA9450=y
-+CONFIG_SPL_DM_PMIC_PCA9450=y
- CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_PCA9450=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_REGULATOR_GPIO=y
--CONFIG_SPL_POWER_I2C=y
- CONFIG_DM_RNG=y
- CONFIG_DM_SERIAL=y
- CONFIG_MXC_UART=y
+---
+Peng Fan (4):
+      imx8mp: phyboard-pollux-rdk: Convert to DM_PMIC
+      imx8mp: verdin: Convert to DM_PMIC
+      imx8mp: libra-fpsc: Convert to DM_PMIC
+      imx8mp: icore-edimm2.2: Convert to DM_PMIC
 
+ .../dts/imx8mp-icore-mx8mp-edimm2.2-u-boot.dtsi    | 18 ++++++-
+ arch/arm/dts/imx8mp-libra-rdk-fpsc-u-boot.dtsi     | 22 ++++++++-
+ .../arm/dts/imx8mp-phyboard-pollux-rdk-u-boot.dtsi | 22 ++++++++-
+ arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi    | 20 ++++++--
+ board/engicam/imx8mp/spl.c                         | 53 +++++++--------------
+ board/phytec/imx8mp-libra-fpsc/spl.c               | 46 ++++++------------
+ board/phytec/phycore_imx8mp/spl.c                  | 43 ++++++-----------
+ board/toradex/verdin-imx8mp/spl.c                  | 55 +++++++---------------
+ configs/imx8mp-icore-mx8mp-edimm2.2_defconfig      | 12 ++---
+ configs/imx8mp-libra-fpsc_defconfig                | 10 ++--
+ configs/phycore-imx8mp_defconfig                   | 10 ++--
+ configs/verdin-imx8mp_defconfig                    | 13 ++---
+ 12 files changed, 151 insertions(+), 173 deletions(-)
+---
+base-commit: d9eee3d17882ec40f8ca5e231046bbf287ab4369
+change-id: 20260323-power-legacy-5928e4f1dbb9
+
+Best regards,
 -- 
-2.51.0
+Peng Fan <peng.fan@nxp.com>
 
