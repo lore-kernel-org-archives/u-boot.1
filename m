@@ -4,85 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0775C1061B20
-	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 21:07:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 227F41061B24
+	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 22:01:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F05CB8403D;
-	Mon, 30 Mar 2026 23:07:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 704A88352B;
+	Tue, 31 Mar 2026 00:01:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Dw5hyBVY";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="m2Cohtuy";
+	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="RlVZwlnI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2931480212; Mon, 30 Mar 2026 23:07:52 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 341A083CE3; Tue, 31 Mar 2026 00:01:38 +0200 (CEST)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F3A38403D
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 23:07:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B69280212
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 00:01:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4fl3jw6xygz9v7X;
- Mon, 30 Mar 2026 23:07:48 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1774904869;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=FFJQ9l0Rnwn0AKCXkMyDXfsd0WV8y3qyoPbO847dn2I=;
- b=Dw5hyBVY52sE+EkqiqVrIbUV1t+S0TJ0SywYOLfViNxLGbX8LlUOmV+ipi20Y67zou3fKK
- uJojAA/d9MNXe2t1MsVcAYelnctepGnGHDmZeQRMDTnxVMJfP7rzZjkI2vNMZ7w09JnWYt
- DPtyMut3FpngkoBJW8Org1ChZ3NVHLp21VBCw75J/7uzwsjdrnTENjoQTumvsbpyYAEdT0
- gvO0Tl6Agzqv+EUaXWGkD19EdgK15Pp61PPS85Hh8dPOdSujzHGOLlzcbY4ZSQ7QtcK620
- HhZg9Q+T5bvxwhpZSH9nqzqH7CAaZh7+B2l+X3WtzFIeg+g2yuNu8xy35h4PxQ==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=m2Cohtuy;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <2c4f13c9-ff78-42c6-b770-71d06f59d522@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1774904867;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=FFJQ9l0Rnwn0AKCXkMyDXfsd0WV8y3qyoPbO847dn2I=;
- b=m2CohtuynH+9MFpS/Tsk9MKpzq4y3ADx86I9Xf7y9korhsv7mw+ZZPOkts7RpRjxBORj/m
- tDsojoqvX8hDEBPk3DN099HKc2tWhp2+NEvsFGiHFbNs+7li2ISo98iN0bIAN9wHqeTq1Z
- hPr3H1TocQ7D5lloqBgx3ciABOIKuBi6XN9DcMc5XuHgeKue9sEQJVGTgvyJv1HLb7QN60
- zEbc1rmU3pC4ikdt6vVqkcOFy+/Ud7dZlL5d9ES77dubD/Mh281sY+fsd1PpJlwffAPAVh
- kiKyy+r9CNjiH8C+VMA+fK4ryW/i/zCidrAAX9Mn7ZHWiCoQciuGY08NyLwxlg==
-Date: Mon, 30 Mar 2026 19:24:01 +0200
+ dmarc=none (p=none dis=none) header.from=thingy.jp
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-35da8d037a5so602876a91.0
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 15:01:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=thingy.jp; s=google; t=1774908093; x=1775512893; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=sT3+dgYjJQ/g+c3prJPPxCudB6Kw3CFizw1NngUSp5s=;
+ b=RlVZwlnIdiipHrjQUsXFBpz5GZWqGlgIGLZ7JtJxi+MZp3UTyMUu1lyDqVbocPytWb
+ hsiZc/42AGQuKamTXBf90y3Pk02atGhojyyI/UB81D+lMmvx7Tysho0WauzVRRJzt4Ik
+ NKbAcQEy2j8tu9Jd6/cXDoYdZwIkuwe7XyUFk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774908093; x=1775512893;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sT3+dgYjJQ/g+c3prJPPxCudB6Kw3CFizw1NngUSp5s=;
+ b=pwhECjBfVwgl8ekPMWOnmsA49lZgZzV5l/mcyYgtJohHXvYsKsHjNPjOivWfTr+u0f
+ 8DxbEx7jVxVzD+T3K14k5I58EodHv/7/kWkJa6szNeY4/IeEsYl5l41K24ppaItbJBYw
+ YzpFkDIUFc4MySWfDdXNk/lqNI0O25neJ9Wo0ZXAL0WCvoeO3V4GNvadGqg80uVXplLq
+ XUHDyw7MxErDPYB6m47vxqyvsL7mynO7SeiBWKjbcqBTsn2VWZLStic3OG7P6oeJ1ohF
+ Vva3kJhtw7c31+2yaOqnG7iTwYhRgW09XqeNWcjZyiHNHqAnXNANsyA5w63JdF//FWor
+ mpSQ==
+X-Gm-Message-State: AOJu0YxTxdxxJf72e3ee8EMKmwDaNqLZgKeOstwXcfuK9syhNHz+BXIh
+ cxjf3xQonJ4+B1pEFnyP8MGl0sUYWIymi02xr20GNY+FjdtPxOZJHxL+1J9LJpk5xCzmWvPASI2
+ 1xuyd
+X-Gm-Gg: ATEYQzw+vj/w7ikGp5mRGw98Xm3nkIBdVqzfkp8W+N8U6wWPWmfOc7N8OCoR2ZOfF3u
+ 4Ltqi/Po3lD3v/aFco6vXoYKxzR19z4XsEVmw/R0yNpT0KtAosZFRrAU9/lr+cF0k1QckWCP8sw
+ /X2bMoQBJ7+fAFdPun12PxizayBpDWd42bZHP8fRZK3OGCXpJrT8ER+aVz8NhhWt5HahIDmKkB2
+ NZMUu0W90Vx3JCdtoSVt/RIG9QWzbEqEBx/ermkWhuuDwrKItGuO0KczASECJ2o8TFdXpW0JhDx
+ lsvsRkB+lxcdSDqhbHLg++9S3HcqgIYquQh3sbZqMXKMkZcUg/OJ4BfeqIah/TqdjUYaIkFZ8j7
+ 9AaHNUTTCisyBglct1jbcTncFW65NSJf/tvxOdpyLr54zHccu8KdpWNisJ3t0mUW0tWulchXvT/
+ MrIIE9Zv8Zm1TgpQ==
+X-Received: by 2002:a17:90b:46:b0:35d:9c43:57fe with SMTP id
+ 98e67ed59e1d1-35d9c435b02mr7274547a91.13.1774908092506; 
+ Mon, 30 Mar 2026 15:01:32 -0700 (PDT)
+Received: from kinako ([2400:2200:6b0:ddf0:675d:2610:7c9b:872f])
+ by smtp.googlemail.com with ESMTPSA id
+ 98e67ed59e1d1-35da9ef1b70sm3950740a91.16.2026.03.30.15.01.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 30 Mar 2026 15:01:32 -0700 (PDT)
+From: Daniel Palmer <daniel@thingy.jp>
+To: visitorckw@gmail.com,
+	angelo@kernel-space.org
+Cc: u-boot@lists.denx.de,
+	Daniel Palmer <daniel@thingy.jp>
+Subject: [PATCH v2] m68k: Add LTO support
+Date: Tue, 31 Mar 2026 07:01:24 +0900
+Message-ID: <20260330220124.2747127-1-daniel@thingy.jp>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Subject: Re: [PATCH] dm: Respect dma-ranges size
-To: Markus Schneider-Pargmann <msp@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20260315235756.304972-1-marek.vasut+renesas@mailbox.org>
- <DHG5MITAHNOS.3KKMVUI98SAZ0@baylibre.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <DHG5MITAHNOS.3KKMVUI98SAZ0@baylibre.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: n5x5w4z3u4mgtofk131oruzgj1i3h91r
-X-MBO-RS-ID: 1bdc6ef08470a72c9a0
-X-Rspamd-Queue-Id: 4fl3jw6xygz9v7X
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,77 +93,220 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/30/26 3:34 PM, Markus Schneider-Pargmann wrote:
+Most m68k retro/homebrew machines will have limited flash/RAM
+so having LTO working would be nice.
 
-Hello Markus,
+Not many changes are need really. Most of this is copy/paste
+from the ARM32 version.
 
-> On Mon Mar 16, 2026 at 12:57 AM CET, Marek Vasut wrote:
->> Rework dev_phys_to_bus() and dev_bus_to_phys() to respect the size
->> of the area specified in dma-ranges DT property. The area outside
->> of ranges is remapped 1:1, while the area in the ranges is remapped
->> according to the description in the dma-ranges property.
->>
->> Adjust the test to test the area within the remapped range, not area
->> outside the remapped range, which was incorrect.
->>
-> 
-> Should this have a Fixes tag?
-> 
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> 
-> Not a big expert, but this looks good to me:
-> 
-> Reviewed-by: Markus Schneider-Pargmann <msp@baylibre.com>
+The major change is that the direct register usage of d7 for gd
+needs to be hidden so that when LTO passes over everything it
+doesn't see multiple instances of d7.
 
-This was broken long enough, so this should go into next so it would get 
-sufficient testing before the next release.
+Signed-off-by: Daniel Palmer <daniel@thingy.jp>
+---
+ arch/Kconfig                        |  1 +
+ arch/m68k/config.mk                 |  8 ++++++--
+ arch/m68k/cpu/m680x0/cpu.c          |  2 +-
+ arch/m68k/include/asm/global_data.h | 19 +++++++++++++++++++
+ arch/m68k/lib/ashldi3.c             |  6 ++++--
+ arch/m68k/lib/lshrdi3.c             |  6 ++++--
+ arch/m68k/lib/muldi3.c              |  4 +++-
+ common/board_r.c                    |  4 ++--
+ common/init/board_init.c            |  4 ++--
+ 9 files changed, 42 insertions(+), 12 deletions(-)
 
-[...]
+diff --git a/arch/Kconfig b/arch/Kconfig
+index 4af0da2485fb..488de442f557 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -112,6 +112,7 @@ config ARM
+ 
+ config M68K
+ 	bool "M68000 architecture"
++	select ARCH_SUPPORTS_LTO
+ 	select HAVE_PRIVATE_LIBGCC
+ 	select USE_PRIVATE_LIBGCC
+ 	select SYS_BOOT_GET_CMDLINE
+diff --git a/arch/m68k/config.mk b/arch/m68k/config.mk
+index 458953f97122..4d8c83b51cdb 100644
+--- a/arch/m68k/config.mk
++++ b/arch/m68k/config.mk
+@@ -8,9 +8,13 @@ ifneq ($(CONFIG_M680x0),y)
+ PLATFORM_CPPFLAGS += -fPIC
+ endif
+ KBUILD_LDFLAGS    += -n -pie
+-PLATFORM_RELFLAGS += -ffunction-sections -fdata-sections
+ PLATFORM_RELFLAGS += -ffixed-d7
+ ifneq ($(CONFIG_M680x0),y)
+ PLATFORM_RELFLAGS += -msep-data
+ endif
+-LDFLAGS_FINAL     += --gc-sections -pie
++LDFLAGS_FINAL     += -pie
++
++ifneq ($(LTO_ENABLE),y)
++PLATFORM_RELFLAGS += -ffunction-sections -fdata-sections
++LDFLAGS_FINAL     += --gc-sections
++endif
+diff --git a/arch/m68k/cpu/m680x0/cpu.c b/arch/m68k/cpu/m680x0/cpu.c
+index f60b932c7dd4..3f87076b8c3d 100644
+--- a/arch/m68k/cpu/m680x0/cpu.c
++++ b/arch/m68k/cpu/m680x0/cpu.c
+@@ -24,7 +24,7 @@ void m68k_virt_init_reserve(ulong base)
+ 	for (i = 0; i < sizeof(*gd_ptr); i++)
+ 		p[i] = 0;
+ 
+-	gd = gd_ptr;
++	arch_setup_gd(gd);
+ 
+ 	gd->malloc_base = base + sizeof(*gd_ptr);
+ }
+diff --git a/arch/m68k/include/asm/global_data.h b/arch/m68k/include/asm/global_data.h
+index aea2ccabe083..9150ed4ab466 100644
+--- a/arch/m68k/include/asm/global_data.h
++++ b/arch/m68k/include/asm/global_data.h
+@@ -32,6 +32,25 @@ struct arch_global_data {
+ 
+ #include <asm-generic/global_data.h>
+ 
++#if defined(LTO_ENABLE)
++/* If LTO is enabled we have to hide d7 to avoid multiple symbol declarations */
++#define DECLARE_GLOBAL_DATA_PTR
++#define gd	get_gd()
++
++static inline gd_t *get_gd(void)
++{
++	gd_t *gd_ptr;
++
++	__asm__ volatile("move.l %%d7, %0\n" : "=r" (gd_ptr));
++
++	return gd_ptr;
++}
++#else
+ #define DECLARE_GLOBAL_DATA_PTR     register gd_t *gd asm ("d7")
++#endif
++static inline void arch_setup_gd(gd_t *new_gd)
++{
++	__asm__ volatile("move.l %0, %%d7\n" : : "r" (new_gd));
++}
+ 
+ #endif /* __ASM_GBL_DATA_H */
+diff --git a/arch/m68k/lib/ashldi3.c b/arch/m68k/lib/ashldi3.c
+index 9a4bc676bf4c..9e84bd0d9a07 100644
+--- a/arch/m68k/lib/ashldi3.c
++++ b/arch/m68k/lib/ashldi3.c
+@@ -6,6 +6,8 @@
+  * Copyright (C) 1989-2015 Free Software Foundation, Inc.
+  */
+ 
++#include <linux/compiler_attributes.h>
++
+ #define BITS_PER_UNIT 8
+ 
+ typedef		 int SItype	__attribute__ ((mode (SI)));
+@@ -21,7 +23,7 @@ typedef union
+   DItype ll;
+ } DIunion;
+ 
+-DItype __ashldi3 (DItype u, word_type b)
++__used DItype __ashldi3 (DItype u, word_type b)
+ {
+ 	DIunion w;
+ 	word_type bm;
+@@ -46,4 +48,4 @@ DItype __ashldi3 (DItype u, word_type b)
+ 	}
+ 
+ 	return w.ll;
+-}
+\ No newline at end of file
++}
+diff --git a/arch/m68k/lib/lshrdi3.c b/arch/m68k/lib/lshrdi3.c
+index e639e676a269..53163bc5f83f 100644
+--- a/arch/m68k/lib/lshrdi3.c
++++ b/arch/m68k/lib/lshrdi3.c
+@@ -6,6 +6,8 @@
+  * Copyright (C) 1989-2015 Free Software Foundation, Inc.
+  */
+ 
++#include <linux/compiler_attributes.h>
++
+ #define BITS_PER_UNIT 8
+ 
+ typedef		 int SItype	__attribute__ ((mode (SI)));
+@@ -21,7 +23,7 @@ typedef union
+   DItype ll;
+ } DIunion;
+ 
+-DItype __lshrdi3 (DItype u, word_type b)
++__used DItype __lshrdi3 (DItype u, word_type b)
+ {
+ 	DIunion w;
+ 	word_type bm;
+@@ -46,4 +48,4 @@ DItype __lshrdi3 (DItype u, word_type b)
+ 	}
+ 
+ 	return w.ll;
+-}
+\ No newline at end of file
++}
+diff --git a/arch/m68k/lib/muldi3.c b/arch/m68k/lib/muldi3.c
+index c42ca1d753e5..06af5533fde3 100644
+--- a/arch/m68k/lib/muldi3.c
++++ b/arch/m68k/lib/muldi3.c
+@@ -6,6 +6,8 @@
+  * Copyright (C) 1989, 1992, 1993, 1994, 1995 Free Software Foundation, Inc.
+  */
+ 
++#include <linux/compiler_attributes.h>
++
+ #define SI_TYPE_SIZE 32
+ #define __BITS4 (SI_TYPE_SIZE / 4)
+ #define __ll_B (1L << (SI_TYPE_SIZE / 2))
+@@ -54,7 +56,7 @@ typedef union
+ 	DItype ll;
+ } DIunion;
+ 
+-DItype __muldi3 (DItype u, DItype v)
++__used DItype __muldi3 (DItype u, DItype v)
+ {
+ 	DIunion w;
+ 	DIunion uu, vv;
+diff --git a/common/board_r.c b/common/board_r.c
+index 76f9fc090fbe..58eb69005468 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -800,12 +800,12 @@ void board_init_r(gd_t *new_gd, ulong dest_addr)
+ 	 * TODO(sjg@chromium.org): Consider doing this for all archs, or
+ 	 * dropping the new_gd parameter.
+ 	 */
+-	if (CONFIG_IS_ENABLED(X86_64) && !IS_ENABLED(CONFIG_EFI_APP))
++	if ((CONFIG_IS_ENABLED(X86_64) && !IS_ENABLED(CONFIG_EFI_APP)) || CONFIG_IS_ENABLED(M68K))
+ 		arch_setup_gd(new_gd);
+ 
+ #if defined(CONFIG_RISCV)
+ 	set_gd(new_gd);
+-#elif !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_ARM64)
++#elif !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_ARM64) && !defined(CONFIG_M68K)
+ 	gd = new_gd;
+ #endif
+ 	gd->flags &= ~GD_FLG_LOG_READY;
+diff --git a/common/init/board_init.c b/common/init/board_init.c
+index 2a6f39f51adb..31b499ebad9c 100644
+--- a/common/init/board_init.c
++++ b/common/init/board_init.c
+@@ -14,10 +14,10 @@
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+ /*
+- * Unfortunately x86, ARM and RISC-V can't compile this code as gd is defined
++ * Unfortunately x86, ARM, RISC-V, M68K can't compile this code as gd is defined
+  * as macro and cannot be assigned.
+  */
+-#if !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_RISCV)
++#if !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_RISCV) && !defined(CONFIG_M68K)
+ __weak void arch_setup_gd(struct global_data *gd_ptr)
+ {
+ 	gd = gd_ptr;
+-- 
+2.51.0
 
->> +++ b/include/dm/device.h
->> @@ -166,8 +166,9 @@ enum {
->>    *		When CONFIG_DEVRES is enabled, devm_kmalloc() and friends will
->>    *		add to this list. Memory so-allocated will be freed
->>    *		automatically when the device is removed / unbound
->> - * @dma_offset: Offset between the physical address space (CPU's) and the
->> - *		device's bus address space
->> + * @dma_cpu: DMA physical address space (CPU's)
->> + * @dma_bus: DMA device's bus address space
->> + * @dma_size: DMA window size
->>    * @iommu: IOMMU device associated with this device
->>    */
->>   struct udevice {
->> @@ -196,7 +197,9 @@ struct udevice {
->>   	struct list_head devres_head;
->>   #endif
->>   #if CONFIG_IS_ENABLED(DM_DMA)
->> -	ulong dma_offset;
->> +	phys_addr_t dma_cpu;
->> +	dma_addr_t dma_bus;
->> +	u64 dma_size;
->>   #endif
-
-[...]
-
->> +++ b/include/phys2bus.h
->> @@ -21,17 +21,23 @@ static inline unsigned long bus_to_phys(unsigned long bus)
->>   }
->>   #endif
->>   
->> -#if CONFIG_IS_ENABLED(DM)
->> +#if CONFIG_IS_ENABLED(DM_DMA)
-> 
-> This is not related to the code changes right?
-
-It is, see the matching hunk above and below why this is guarded by DM_DMA .
-
->>   #include <dm/device.h>
->>   
->>   static inline dma_addr_t dev_phys_to_bus(struct udevice *dev, phys_addr_t phys)
->>   {
->> -	return phys - dev_get_dma_offset(dev);
->> +	/* If the PA is in the remap range, apply remap. */
->> +	if (phys >= dev->dma_cpu && phys < dev->dma_cpu + dev->dma_size)
->> +		phys -= dev->dma_cpu - dev->dma_bus;
->> +	return phys;
-[...]
