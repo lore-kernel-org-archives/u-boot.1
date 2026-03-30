@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 569C41061B0A
-	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 16:01:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEF4D1061B12
+	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 16:01:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DECD184035;
-	Mon, 30 Mar 2026 18:01:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 423FF83DBF;
+	Mon, 30 Mar 2026 18:01:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="lVgVgRB2";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="CjjFrR9V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0407983FD9; Mon, 30 Mar 2026 18:01:34 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id BD96D8406D; Mon, 30 Mar 2026 18:01:35 +0200 (CEST)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA75183EB3
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 18:01:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 120D683F69
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 18:01:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-41cd9267bbfso2677786fac.1
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 09:01:31 -0700 (PDT)
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-4043b27ddeaso3021578fac.1
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 09:01:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774886490; x=1775491290;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774886492; x=1775491292;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=vUx4lAEU/bC593XVMkJqkxHGo7vuj+idl2YNDr9pRQM=;
- b=lVgVgRB2/TJjU4M02Ev22SP9j04TYB185mwv6e5xIrDTizr1awaaw1QkMrZDAkJRJl
- N1nXDamHnzwGV3VLycFLVXJQ5rWjurJL5lWfbS2v1bMhVvdvxzlOpFCiGjyXuI8EBi9j
- Yt3Mf0syLAe2VnJDcK6Emy/KazX75GdY6YiZify/IYaiVEP4gUS0A9Q1MQD0Vrg9uyXq
- FKYT1yTJj1lnOfT9qAtCsALN2BeOMNZrZAFirqpXcTAtUCSQyOn+wUUUzk+mEHTZi1Bc
- Q1ZNMyESM/XI/RzR6UI1Skn+zkg93/dg+uKnXfZ0gF1yxrG+/elIeCHyWesL4qz9wcMk
- 1IsA==
+ :reply-to; bh=M+e0O5WOGYRGwN5qFKx/P3hOoryhKz0LPdUsKQENqxc=;
+ b=CjjFrR9Vcdbdu+3yHWL07mu0GdL8iChEtWY9W7wXPDB6Uy/xYhszyApgF67IXy/yrt
+ Udr9Re5JuRlnnFTAYwPWUxr7YjYr4+mYdwOn7Z1t+iO8Zs5tMEoZyHxaO7OGXyZWmpgV
+ OA7cwDttOLceuoO6uiKjKuiA0PjFL8QvxqRyO8vmMVwHaRAGHOPDRzpIVEtNEl5UlH7k
+ Hm4UBJPUK9WDk2rEm0ayS2IrCOJOMslPNpGJQ+/U52zs1EhiVyRv+vaGVWEpARaO/47v
+ YTvk/uYzEh/jK+WxRRlOskQ4gUB5wBja1xNqmmCaVWxoD8OLO1jzDgkrbOWKVln4jUo6
+ 5l5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774886490; x=1775491290;
+ d=1e100.net; s=20251104; t=1774886492; x=1775491292;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=vUx4lAEU/bC593XVMkJqkxHGo7vuj+idl2YNDr9pRQM=;
- b=RJDgd9eTXrZa5V9/XPAr87tzUjponolxJwdsySvDHxTHCLd7Xzhq2R4M18WnjadcVW
- K0hXadPQqW0an+xdg3ks9b9ftAr1SFGaix3B8wi7Lc82vzxlD5cFTcH/GU5/atvv0lfr
- tUaA6GOLXnG7lDtvOKKjJk0DBYplqsohBDA9DnbYksZJtaeGh8eP9Xsut3UyEKhccc0g
- /rHauGp7x1/3GaCBFvWPOP4VJfkoeLQwzu/QWoGPMJNGiu1iz6+UEi8zAvZm2s61YFWc
- R8rDiEI6jElwd20WSMMgF0F2kEpqJ26vC8Dkjsw7zG87g4GJFf6iPqPATVIBrLxlA2yZ
- fhKg==
+ bh=M+e0O5WOGYRGwN5qFKx/P3hOoryhKz0LPdUsKQENqxc=;
+ b=NO2wgGJNLy3NFRXXO0bp/1HuYZKkDs6MXT+K3M27wEP1Rxi2mm5hk1tVvOmCeHVZAr
+ q15P83ik3lbP2Qiqe0TCDIyrhch1fdx7joIfqHsKb+UY4sQ8x74FroAnPJWnE4EHyS0P
+ t8Lr1ApEslmYoBensAH8hVEJ+by6FMX7hNxaOP3QdUpmtv6rsT4ApvmOUAZYNNPh/R+J
+ wfa9BACBHwUn7PKT3NQZxLvAm+8bzTEDslhoFQK0SbeEG7IDwXcU21zTU6covSd4K1nx
+ iCWl1LZ5NxdgApaZyS593P2XI5Ms+2VxtNRX1XT55EvGRp3vtJOUaiyg06q9rEc1YuDy
+ CE5A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUtTJpLg/DX/gc3YB0p9mlNHDd6oi7Xux5uXYOZtfNOGZa/UOLD0E85E6KOp1HvThSz92sBy8k=@lists.denx.de
-X-Gm-Message-State: AOJu0YyQwM6J3tZLkpJ7JkZA4/2IbimNyPaZCZtz34ZltQJnoffhjwVI
- h5ftDBAWZtzDRK8/Atqycwizp43DSrNubTdTVXuFyikUoYWpDyNLTcuD1hXDLNlvE9Y=
-X-Gm-Gg: ATEYQzznBcdAY+GA4VTASt8GpshRtyqXzPCN1MkYRdh+CciSjld9gyZMYvzti372kCy
- 0WKy4cQixa039hpgjOm6P1gIB9v/tc4Akdp5B0d2vw2mMPZuxG/SfNNfW5bdMZqNAbFDgFF7ojb
- vQiVI1jRPNWYSL189Y0MtZLTIwtUWkWRFpe/twmjsSfbw908kVpNg/7bPIW9oCQVDrLP1E/CqpB
- ZM56jw9MjeIF4z72TNzWwmNXoD0Cedh9O06Lkk4dYFFzSjQhnvay5blQlnyt/GRtF0tkPGhUItp
- dlVOtIepg4aoCa5GT1/2MmNQXqd3rD/mdqhkG4K1L3jkuhIpNQcJztQkhD6wwQ5i81HgqBtACtC
- bq1jDBBYzntRyhc2co/CVdRaxCcXue5kTfqGX9QyUWKErcBkTBCcgar7g2zUxQiWgNJfOoyAZ9U
- BfwXj/tBUtfSPkxV+XX5eA3Rj/4Uao
-X-Received: by 2002:a05:6870:9126:b0:417:3833:fbdb with SMTP id
- 586e51a60fabf-422a4ce758cmr56621fac.17.1774886490171; 
- Mon, 30 Mar 2026 09:01:30 -0700 (PDT)
+ AJvYcCVQ071YWObMnRE6vjkX5KuFyH+Wqx9WqjezSEeZloNB0bPw/aQB2ha68tqMfIgIeL7GrRsnewY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxWzlg4FBL5mQOnbZ3t3VaRYBpIF/l3vcwRT59YEkRA20l+QXea
+ dKcAD1Ibns6YntJLWW3h/3HHknM6F8YT2BjK7ZHI6Itb/1K7GOeF1ZvzKTj1Vv7BcEg=
+X-Gm-Gg: ATEYQzwDKxCjN0aMvujLqtxeF0mXO3aYNloXX4UZ+9xguzkWMufmBPkcPLpRkzz5KQs
+ ggQ/zS0RLQiVxm3WY3wBK3aoyG5xmHXPgX4Tbint4OmgCtOS27yOlPUk/BrGWmN9uPS6hTYCCDU
+ 4EW6Vi3FM6ECuF+yX9rDoNvZm9QW0aMRcKhMuvIq6SBYA9l6SQYkIbb+DxuYUwy9BTaSiFrU2CQ
+ UtUZEKH29t2wFc1HW0FfCsx+4f/koMY0ZPvF26kpTF+wNgsVKvVWXzE31T8+UvPWLTOhyNdejBD
+ qPARDv1kBon+LicCyxuuS704boOugBUoNy7rx0f3OiQfv59yv8JM5qbI5L9ez9GF5pxlzHfyi5I
+ QC3pDaH+pGPqR5nIQzbyuVh13NIipLnlcd/n50RMKDyxYKCS6VyoGj40EIeQC/Va7wN8Qgt6bM8
+ u8Xo4nhBgAmdJR7XZk1kqCl2t5QqO2
+X-Received: by 2002:a05:6870:1cd:b0:417:6237:cf7e with SMTP id
+ 586e51a60fabf-41cec1ee215mr6611733fac.8.1774886491283; 
+ Mon, 30 Mar 2026 09:01:31 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:a67f:a092:38d7:379e])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41d048e1984sm5432952fac.4.2026.03.30.09.01.29
+ 586e51a60fabf-41d048e1984sm5432952fac.4.2026.03.30.09.01.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Mar 2026 09:01:29 -0700 (PDT)
+ Mon, 30 Mar 2026 09:01:30 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Mon, 30 Mar 2026 11:00:33 -0500
-Subject: [PATCH v2 1/4] pinctrl: mediatek: add handling for RSEL register
+Date: Mon, 30 Mar 2026 11:00:34 -0500
+Subject: [PATCH v2 2/4] pinctrl: mediatek: mt8189: fix pinconf bias
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260330-pinctrl-mtk-fix-mt8189-v2-1-05a737ec623d@baylibre.com>
+Message-Id: <20260330-pinctrl-mtk-fix-mt8189-v2-2-05a737ec623d@baylibre.com>
 References: <20260330-pinctrl-mtk-fix-mt8189-v2-0-05a737ec623d@baylibre.com>
 In-Reply-To: <20260330-pinctrl-mtk-fix-mt8189-v2-0-05a737ec623d@baylibre.com>
 To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
@@ -89,17 +89,17 @@ To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2279; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=G7CrhQNKHaL1p222dcpfMKTtqBX5v//XobMJ6uN0pLQ=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpyp48u423tQsdvyKMkshsSy8OSjFCSoQI/7Y8Z
- TAUq4h/TtaJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCacqePBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AbqkIAI5JID/ElhO3OOuMcsx+QljGLyLb0KMLy0cmx4F
- 8sciLLv93xFz1sGkrejtIkZmCWEwf9PpOpc+Gyjp6uqwDDps+mF1r9sIGzuHQ45IchU7f3+DvaV
- dP435RPFNDibcNLzl6e6BJykEMB88/GdxnXsgIEVSGNgUT+c4ElplxhEYTS0Bhap+V88IJAYz73
- lvhPchqyy9l0INWqW8rttoyB3POLUVQIIPlrq/HCTb5yE+0mFz1hcJKDBBawqzDd9SD0UxngYXt
- X0U890GeV/x8TnnMwotwsDVm29Vy6Im5HJ90w5AJHAjJ2h9O6C3Y16fPfYuhqqG+036Ipz+4sJf
- aPOk=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=20756;
+ i=dlechner@baylibre.com; h=from:subject:message-id;
+ bh=WnRF5C7wmJTHedlhLXyTSeQ2Te8EwQSYMEC8pzxwwj8=;
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpyp5DqOzEUSJ+V87rQYy2wYR7rMa7IGGe3eF8l
+ BxRZRLaGsaJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCacqeQxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AKcAH/1CaP7ebShgPH/DP351abpiSx5BFpyKv57xowfi
+ 4mzheuv7eiCN44joTxqnxR73IjemxS2ZG6nn85ReTicRfF9En5xlVuqc429dcMJKmAAUFBrj+j+
+ OHWsdQX158eS1JnSXs6eKtvO8hhDqHxSzv2B4Bi74yO0pZMuasA7zSTmYlB7ZQNgldf6MvkIl/v
+ wah2/dt5DTc+BYDoHzh9X73x+DpdcEVYYwQB3D5+6MegmrKZPGJx46QSuMdUGb5wMzzdQbcMyGH
+ m7a8kTZdUL58VHvZAeqTnqPO7/iyKEYIOQg73QCmsOzpXAdez6SENv+pI8g5lprGSp6Fg4ivE4z
+ uvuU=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -118,64 +118,470 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new PINCTRL_PIN_REG_RSEL register type and a new function
-mtk_pinconf_bias_set_pu_pd_rsel() to handle setting it.
+Fix setting pinconf bias for MT8189.
 
-Some MediaTek SoCs have a pin configuration register called RSEL that
-sets the resistance value for bias pullup/pulldown.
+Using mtk_pinconf_bias_set_v1() was wrong because MT8189 does not have
+PULLEN/PULLSEL registers. It has PU and PD registers for most pins.
+MSDC pins need special handling since they have PUPD/R1/R0 registers.
+I2C pins need special handling since they have PU/PD/RSEL registers.
+New groups are added for MSDC and I2C pins and the bias_set callback
+is now set appropriately for all groups.
+
+A new table is needed for the RSEL registers since those were missing.
+
+Some new macros are introduced to avoid repeating the same info many
+times in MTK_TYPED_PIN(). This also fixes the semantically incorrect
+use of DRV_GRPX for the IO_TYPE_GRPX field.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- drivers/pinctrl/mediatek/pinctrl-mtk-common.c | 14 ++++++++++++++
- drivers/pinctrl/mediatek/pinctrl-mtk-common.h |  3 +++
- 2 files changed, 17 insertions(+)
+ drivers/pinctrl/mediatek/pinctrl-mt8189.c | 413 +++++++++++++++++-------------
+ 1 file changed, 229 insertions(+), 184 deletions(-)
 
-diff --git a/drivers/pinctrl/mediatek/pinctrl-mtk-common.c b/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
-index d152e216634..1028b8a93f5 100644
---- a/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
-+++ b/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
-@@ -450,6 +450,20 @@ int mtk_pinconf_bias_set_pupd_r1_r0(struct udevice *dev, u32 pin, bool disable,
- 	return 0;
- }
- 
-+int mtk_pinconf_bias_set_pu_pd_rsel(struct udevice *dev, u32 pin, bool disable,
-+				    bool pullup, u32 val)
-+{
-+	int err;
-+
-+	/* val is expected to be one of MTK_PULL_SET_RSEL_XXX */
-+
-+	err = mtk_pinconf_bias_set_pu_pd(dev, pin, disable, pullup, val);
-+	if (err)
-+		return err;
-+
-+	return mtk_hw_set_value(dev, pin, PINCTRL_PIN_REG_RSEL, val & 0x7);
-+}
-+
- int mtk_pinconf_bias_set(struct udevice *dev, u32 pin, u32 arg, u32 val)
- {
- 	int err;
-diff --git a/drivers/pinctrl/mediatek/pinctrl-mtk-common.h b/drivers/pinctrl/mediatek/pinctrl-mtk-common.h
-index 58f13613633..1215fb7094b 100644
---- a/drivers/pinctrl/mediatek/pinctrl-mtk-common.h
-+++ b/drivers/pinctrl/mediatek/pinctrl-mtk-common.h
-@@ -67,6 +67,7 @@ enum {
- 	PINCTRL_PIN_REG_PUPD,
- 	PINCTRL_PIN_REG_R0,
- 	PINCTRL_PIN_REG_R1,
-+	PINCTRL_PIN_REG_RSEL,
- 	PINCTRL_PIN_REG_MAX,
+diff --git a/drivers/pinctrl/mediatek/pinctrl-mt8189.c b/drivers/pinctrl/mediatek/pinctrl-mt8189.c
+index a64440d8bb3..9bcabe03151 100644
+--- a/drivers/pinctrl/mediatek/pinctrl-mt8189.c
++++ b/drivers/pinctrl/mediatek/pinctrl-mt8189.c
+@@ -1015,6 +1015,29 @@ static const struct mtk_pin_field_calc mt8189_pin_drv_range[] = {
+ 	PIN_FIELD_BASE(182, IO_BASE_RT, 0x0000, 9, 3),
  };
  
-@@ -253,6 +254,8 @@ int mtk_pinconf_bias_set_pullen_pullsel(struct udevice *dev, u32 pin,
- 					bool disable, bool pullup, u32 val);
- int mtk_pinconf_bias_set_pupd_r1_r0(struct udevice *dev, u32 pin, bool disable,
- 				    bool pullup, u32 val);
-+int mtk_pinconf_bias_set_pu_pd_rsel(struct udevice *dev, u32 pin, bool disable,
-+				    bool pullup, u32 val);
- int mtk_pinconf_bias_set_v0(struct udevice *dev, u32 pin, bool disable,
- 			    bool pullup, u32 val);
- int mtk_pinconf_bias_set_v1(struct udevice *dev, u32 pin, bool disable,
++static const struct mtk_pin_field_calc mt8189_pin_rsel_range[] = {
++	PIN_FIELD_BASE(51, IO_BASE_RB1, 0x00B0, 0, 3), /* SCP_SCL0 */
++	PIN_FIELD_BASE(52, IO_BASE_RB1, 0x00B0, 6, 3), /* SCP_SDA0 */
++	PIN_FIELD_BASE(53, IO_BASE_RB1, 0x00B0, 3, 3), /* SCP_SCL1 */
++	PIN_FIELD_BASE(54, IO_BASE_RB1, 0x00B0, 9, 3), /* SCP_SDA1 */
++	PIN_FIELD_BASE(55, IO_BASE_LM, 0x00B0, 0, 3), /* SCL2 */
++	PIN_FIELD_BASE(56, IO_BASE_LM, 0x00B0, 3, 3), /* SDA2 */
++	PIN_FIELD_BASE(57, IO_BASE_BM1, 0x00B0, 0, 3), /* SCL3 */
++	PIN_FIELD_BASE(58, IO_BASE_BM1, 0x00B0, 12, 3), /* SDA3 */
++	PIN_FIELD_BASE(59, IO_BASE_BM1, 0x00B0, 3, 3), /* SCL4 */
++	PIN_FIELD_BASE(60, IO_BASE_BM1, 0x00B0, 15, 3), /* SDA4 */
++	PIN_FIELD_BASE(61, IO_BASE_BM1, 0x00B0, 6, 3), /* SCL5 */
++	PIN_FIELD_BASE(62, IO_BASE_BM1, 0x00B0, 18, 3), /* SDA5 */
++	PIN_FIELD_BASE(63, IO_BASE_BM1, 0x00B0, 9, 3), /* SCL6 */
++	PIN_FIELD_BASE(64, IO_BASE_BM1, 0x00B0, 21, 3), /* SDA6 */
++	PIN_FIELD_BASE(65, IO_BASE_RT, 0x00E0, 0, 3), /* SCL7 */
++	PIN_FIELD_BASE(66, IO_BASE_RT, 0x00E0, 6, 3), /* SDA7 */
++	PIN_FIELD_BASE(67, IO_BASE_RT, 0x00E0, 3, 3), /* SCL8 */
++	PIN_FIELD_BASE(68, IO_BASE_RT, 0x00E0, 9, 3), /* SDA8 */
++	PIN_FIELD_BASE(180, IO_BASE_LT0, 0x0110, 0, 3), /* SPMI_P_SCL */
++	PIN_FIELD_BASE(181, IO_BASE_LT0, 0x0110, 3, 3), /* SPMI_P_SDA */
++};
++
+ static const struct mtk_pin_reg_calc mt8189_reg_cals[PINCTRL_PIN_REG_MAX] = {
+ 	[PINCTRL_PIN_REG_MODE] = MTK_RANGE(mt8189_pin_mode_range),
+ 	[PINCTRL_PIN_REG_DIR] = MTK_RANGE(mt8189_pin_dir_range),
+@@ -1028,6 +1051,7 @@ static const struct mtk_pin_reg_calc mt8189_reg_cals[PINCTRL_PIN_REG_MAX] = {
+ 	[PINCTRL_PIN_REG_PU] = MTK_RANGE(mt8189_pin_pu_range),
+ 	[PINCTRL_PIN_REG_PD] = MTK_RANGE(mt8189_pin_pd_range),
+ 	[PINCTRL_PIN_REG_DRV] = MTK_RANGE(mt8189_pin_drv_range),
++	[PINCTRL_PIN_REG_RSEL] = MTK_RANGE(mt8189_pin_rsel_range),
+ };
+ 
+ static const char * const mt8189_pinctrl_register_base_names[] = {
+@@ -1048,196 +1072,217 @@ static const char * const mt8189_pinctrl_register_base_names[] = {
+ 	[IO_BASE_EINT4] = "eint4",
+ };
+ 
++#define MT8189_TYPE0_PIN(_number, _name) \
++	MTK_TYPED_PIN(_number, _name, DRV_GRP4, IO_TYPE_GRP0)
++
++#define MT8189_TYPE1_PIN(_number, _name) \
++	MTK_TYPED_PIN(_number, _name, DRV_GRP4, IO_TYPE_GRP1)
++
++#define MT8189_TYPE2_PIN(_number, _name) \
++	MTK_TYPED_PIN(_number, _name, DRV_GRP4, IO_TYPE_GRP2)
++
+ static const struct mtk_pin_desc mt8189_pins[] = {
+-	MTK_TYPED_PIN(0,   "GPIO00", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(1,   "GPIO01", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(2,   "GPIO02", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(3,   "GPIO03", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(4,   "GPIO04", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(5,   "GPIO05", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(6,   "GPIO06", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(7,   "GPIO07", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(8,   "GPIO08", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(9,   "GPIO09", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(10,  "GPIO10", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(11,  "GPIO11", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(12,  "GPIO12", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(13,  "GPIO13", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(14,  "GPIO14", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(15,  "GPIO15", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(16,  "GPIO16", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(17,  "GPIO17", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(18,  "GPIO18", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(19,  "GPIO19", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(20,  "GPIO20", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(21,  "GPIO21", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(22,  "GPIO22", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(23,  "GPIO23", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(24,  "GPIO24", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(25,  "GPIO25", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(26,  "GPIO26", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(27,  "GPIO27", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(28,  "GPIO28", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(29,  "GPIO29", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(30,  "GPIO30", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(31,  "GPIO31", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(32,  "GPIO32", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(33,  "GPIO33", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(34,  "GPIO34", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(35,  "GPIO35", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(36,  "GPIO36", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(37,  "GPIO37", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(38,  "GPIO38", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(39,  "GPIO39", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(40,  "GPIO40", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(41,  "GPIO41", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(42,  "GPIO42", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(43,  "GPIO43", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(44,  "GPIO44", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(45,  "GPIO45", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(46,  "GPIO46", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(47,  "GPIO47", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(48,  "GPIO48", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(49,  "GPIO49", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(50,  "GPIO50", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(51,  "GPIO51", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(52,  "GPIO52", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(53,  "GPIO53", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(54,  "GPIO54", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(55,  "GPIO55", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(56,  "GPIO56", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(57,  "GPIO57", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(58,  "GPIO58", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(59,  "GPIO59", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(60,  "GPIO60", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(61,  "GPIO61", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(62,  "GPIO62", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(63,  "GPIO63", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(64,  "GPIO64", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(65,  "GPIO65", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(66,  "GPIO66", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(67,  "GPIO67", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(68,  "GPIO68", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(69,  "GPIO69", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(70,  "GPIO70", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(71,  "GPIO71", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(72,  "GPIO72", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(73,  "GPIO73", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(74,  "GPIO74", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(75,  "GPIO75", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(76,  "GPIO76", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(77,  "GPIO77", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(78,  "GPIO78", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(79,  "GPIO79", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(80,  "GPIO80", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(81,  "GPIO81", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(82,  "GPIO82", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(83,  "GPIO83", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(84,  "GPIO84", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(85,  "GPIO85", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(86,  "GPIO86", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(87,  "GPIO87", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(88,  "GPIO88", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(89,  "GPIO89", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(90,  "GPIO90", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(91,  "GPIO91", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(92,  "GPIO92", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(93,  "GPIO93", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(94,  "GPIO94", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(95,  "GPIO95", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(96,  "GPIO96", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(97,  "GPIO97", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(98,  "GPIO98", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(99,  "GPIO99", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(100, "GPIO100", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(101, "GPIO101", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(102, "GPIO102", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(103, "GPIO103", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(104, "GPIO104", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(105, "GPIO105", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(106, "GPIO106", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(107, "GPIO107", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(108, "GPIO108", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(109, "GPIO109", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(110, "GPIO110", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(111, "GPIO111", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(112, "GPIO112", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(113, "GPIO113", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(114, "GPIO114", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(115, "GPIO115", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(116, "GPIO116", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(117, "GPIO117", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(118, "GPIO118", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(119, "GPIO119", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(120, "GPIO120", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(121, "GPIO121", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(122, "GPIO122", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(123, "GPIO123", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(124, "GPIO124", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(125, "GPIO125", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(126, "GPIO126", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(127, "GPIO127", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(128, "GPIO128", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(129, "GPIO129", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(130, "GPIO130", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(131, "GPIO131", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(132, "GPIO132", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(133, "GPIO133", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(134, "GPIO134", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(135, "GPIO135", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(136, "GPIO136", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(137, "GPIO137", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(138, "GPIO138", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(139, "GPIO139", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(140, "GPIO140", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(141, "GPIO141", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(142, "GPIO142", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(143, "GPIO143", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(144, "GPIO144", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(145, "GPIO145", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(146, "GPIO146", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(147, "GPIO147", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(148, "GPIO148", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(149, "GPIO149", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(150, "GPIO150", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(151, "GPIO151", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(152, "GPIO152", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(153, "GPIO153", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(154, "GPIO154", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(155, "GPIO155", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(156, "GPIO156", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(157, "GPIO157", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(158, "GPIO158", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(159, "GPIO159", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(160, "GPIO160", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(161, "GPIO161", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(162, "GPIO162", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(163, "GPIO163", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(164, "GPIO164", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(165, "GPIO165", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(166, "GPIO166", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(167, "GPIO167", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(168, "GPIO168", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(169, "GPIO169", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(170, "GPIO170", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(171, "GPIO171", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(172, "GPIO172", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(173, "GPIO173", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(174, "GPIO174", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(175, "GPIO175", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(176, "GPIO176", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(177, "GPIO177", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(178, "GPIO178", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(179, "GPIO179", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(180, "GPIO180", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(181, "GPIO181", DRV_GRP4, DRV_GRP0),
+-	MTK_TYPED_PIN(182, "GPIO182", DRV_GRP4, DRV_GRP0),
++	MT8189_TYPE0_PIN(0, "GPIO00"),
++	MT8189_TYPE0_PIN(1, "GPIO01"),
++	MT8189_TYPE0_PIN(2, "GPIO02"),
++	MT8189_TYPE0_PIN(3, "GPIO03"),
++	MT8189_TYPE0_PIN(4, "GPIO04"),
++	MT8189_TYPE0_PIN(5, "GPIO05"),
++	MT8189_TYPE0_PIN(6, "GPIO06"),
++	MT8189_TYPE0_PIN(7, "GPIO07"),
++	MT8189_TYPE0_PIN(8, "GPIO08"),
++	MT8189_TYPE0_PIN(9, "GPIO09"),
++	MT8189_TYPE0_PIN(10, "GPIO10"),
++	MT8189_TYPE0_PIN(11, "GPIO11"),
++	MT8189_TYPE0_PIN(12, "GPIO12"),
++	MT8189_TYPE0_PIN(13, "GPIO13"),
++	MT8189_TYPE0_PIN(14, "GPIO14"),
++	MT8189_TYPE0_PIN(15, "GPIO15"),
++	MT8189_TYPE0_PIN(16, "GPIO16"),
++	MT8189_TYPE0_PIN(17, "GPIO17"),
++	MT8189_TYPE0_PIN(18, "GPIO18"),
++	MT8189_TYPE0_PIN(19, "GPIO19"),
++	MT8189_TYPE0_PIN(20, "GPIO20"),
++	MT8189_TYPE0_PIN(21, "GPIO21"),
++	MT8189_TYPE0_PIN(22, "GPIO22"),
++	MT8189_TYPE0_PIN(23, "GPIO23"),
++	MT8189_TYPE0_PIN(24, "GPIO24"),
++	MT8189_TYPE0_PIN(25, "GPIO25"),
++	MT8189_TYPE0_PIN(26, "GPIO26"),
++	MT8189_TYPE0_PIN(27, "GPIO27"),
++	MT8189_TYPE0_PIN(28, "GPIO28"),
++	MT8189_TYPE0_PIN(29, "GPIO29"),
++	MT8189_TYPE0_PIN(30, "GPIO30"),
++	MT8189_TYPE0_PIN(31, "GPIO31"),
++	MT8189_TYPE0_PIN(32, "GPIO32"),
++	MT8189_TYPE0_PIN(33, "GPIO33"),
++	MT8189_TYPE0_PIN(34, "GPIO34"),
++	MT8189_TYPE0_PIN(35, "GPIO35"),
++	MT8189_TYPE0_PIN(36, "GPIO36"),
++	MT8189_TYPE0_PIN(37, "GPIO37"),
++	MT8189_TYPE0_PIN(38, "GPIO38"),
++	MT8189_TYPE0_PIN(39, "GPIO39"),
++	MT8189_TYPE0_PIN(40, "GPIO40"),
++	MT8189_TYPE0_PIN(41, "GPIO41"),
++	MT8189_TYPE0_PIN(42, "GPIO42"),
++	MT8189_TYPE0_PIN(43, "GPIO43"),
++	MT8189_TYPE1_PIN(44, "GPIO44"),
++	MT8189_TYPE1_PIN(45, "GPIO45"),
++	MT8189_TYPE1_PIN(46, "GPIO46"),
++	MT8189_TYPE1_PIN(47, "GPIO47"),
++	MT8189_TYPE0_PIN(48, "GPIO48"),
++	MT8189_TYPE0_PIN(49, "GPIO49"),
++	MT8189_TYPE0_PIN(50, "GPIO50"),
++	MT8189_TYPE2_PIN(51, "GPIO51"),
++	MT8189_TYPE2_PIN(52, "GPIO52"),
++	MT8189_TYPE2_PIN(53, "GPIO53"),
++	MT8189_TYPE2_PIN(54, "GPIO54"),
++	MT8189_TYPE2_PIN(55, "GPIO55"),
++	MT8189_TYPE2_PIN(56, "GPIO56"),
++	MT8189_TYPE2_PIN(57, "GPIO57"),
++	MT8189_TYPE2_PIN(58, "GPIO58"),
++	MT8189_TYPE2_PIN(59, "GPIO59"),
++	MT8189_TYPE2_PIN(60, "GPIO60"),
++	MT8189_TYPE2_PIN(61, "GPIO61"),
++	MT8189_TYPE2_PIN(62, "GPIO62"),
++	MT8189_TYPE2_PIN(63, "GPIO63"),
++	MT8189_TYPE2_PIN(64, "GPIO64"),
++	MT8189_TYPE2_PIN(65, "GPIO65"),
++	MT8189_TYPE2_PIN(66, "GPIO66"),
++	MT8189_TYPE2_PIN(67, "GPIO67"),
++	MT8189_TYPE2_PIN(68, "GPIO68"),
++	MT8189_TYPE0_PIN(69, "GPIO69"),
++	MT8189_TYPE0_PIN(70, "GPIO70"),
++	MT8189_TYPE0_PIN(71, "GPIO71"),
++	MT8189_TYPE0_PIN(72, "GPIO72"),
++	MT8189_TYPE0_PIN(73, "GPIO73"),
++	MT8189_TYPE0_PIN(74, "GPIO74"),
++	MT8189_TYPE0_PIN(75, "GPIO75"),
++	MT8189_TYPE0_PIN(76, "GPIO76"),
++	MT8189_TYPE0_PIN(77, "GPIO77"),
++	MT8189_TYPE0_PIN(78, "GPIO78"),
++	MT8189_TYPE0_PIN(79, "GPIO79"),
++	MT8189_TYPE0_PIN(80, "GPIO80"),
++	MT8189_TYPE0_PIN(81, "GPIO81"),
++	MT8189_TYPE0_PIN(82, "GPIO82"),
++	MT8189_TYPE0_PIN(83, "GPIO83"),
++	MT8189_TYPE0_PIN(84, "GPIO84"),
++	MT8189_TYPE0_PIN(85, "GPIO85"),
++	MT8189_TYPE0_PIN(86, "GPIO86"),
++	MT8189_TYPE0_PIN(87, "GPIO87"),
++	MT8189_TYPE0_PIN(88, "GPIO88"),
++	MT8189_TYPE0_PIN(89, "GPIO89"),
++	MT8189_TYPE0_PIN(90, "GPIO90"),
++	MT8189_TYPE0_PIN(91, "GPIO91"),
++	MT8189_TYPE0_PIN(92, "GPIO92"),
++	MT8189_TYPE0_PIN(93, "GPIO93"),
++	MT8189_TYPE0_PIN(94, "GPIO94"),
++	MT8189_TYPE0_PIN(95, "GPIO95"),
++	MT8189_TYPE0_PIN(96, "GPIO96"),
++	MT8189_TYPE0_PIN(97, "GPIO97"),
++	MT8189_TYPE0_PIN(98, "GPIO98"),
++	MT8189_TYPE0_PIN(99, "GPIO99"),
++	MT8189_TYPE0_PIN(100, "GPIO100"),
++	MT8189_TYPE0_PIN(101, "GPIO101"),
++	MT8189_TYPE0_PIN(102, "GPIO102"),
++	MT8189_TYPE0_PIN(103, "GPIO103"),
++	MT8189_TYPE0_PIN(104, "GPIO104"),
++	MT8189_TYPE0_PIN(105, "GPIO105"),
++	MT8189_TYPE0_PIN(106, "GPIO106"),
++	MT8189_TYPE0_PIN(107, "GPIO107"),
++	MT8189_TYPE0_PIN(108, "GPIO108"),
++	MT8189_TYPE0_PIN(109, "GPIO109"),
++	MT8189_TYPE0_PIN(110, "GPIO110"),
++	MT8189_TYPE0_PIN(111, "GPIO111"),
++	MT8189_TYPE0_PIN(112, "GPIO112"),
++	MT8189_TYPE0_PIN(113, "GPIO113"),
++	MT8189_TYPE0_PIN(114, "GPIO114"),
++	MT8189_TYPE0_PIN(115, "GPIO115"),
++	MT8189_TYPE0_PIN(116, "GPIO116"),
++	MT8189_TYPE0_PIN(117, "GPIO117"),
++	MT8189_TYPE0_PIN(118, "GPIO118"),
++	MT8189_TYPE0_PIN(119, "GPIO119"),
++	MT8189_TYPE0_PIN(120, "GPIO120"),
++	MT8189_TYPE0_PIN(121, "GPIO121"),
++	MT8189_TYPE0_PIN(122, "GPIO122"),
++	MT8189_TYPE0_PIN(123, "GPIO123"),
++	MT8189_TYPE0_PIN(124, "GPIO124"),
++	MT8189_TYPE0_PIN(125, "GPIO125"),
++	MT8189_TYPE0_PIN(126, "GPIO126"),
++	MT8189_TYPE0_PIN(127, "GPIO127"),
++	MT8189_TYPE0_PIN(128, "GPIO128"),
++	MT8189_TYPE0_PIN(129, "GPIO129"),
++	MT8189_TYPE0_PIN(130, "GPIO130"),
++	MT8189_TYPE0_PIN(131, "GPIO131"),
++	MT8189_TYPE0_PIN(132, "GPIO132"),
++	MT8189_TYPE0_PIN(133, "GPIO133"),
++	MT8189_TYPE0_PIN(134, "GPIO134"),
++	MT8189_TYPE0_PIN(135, "GPIO135"),
++	MT8189_TYPE0_PIN(136, "GPIO136"),
++	MT8189_TYPE0_PIN(137, "GPIO137"),
++	MT8189_TYPE0_PIN(138, "GPIO138"),
++	MT8189_TYPE0_PIN(139, "GPIO139"),
++	MT8189_TYPE0_PIN(140, "GPIO140"),
++	MT8189_TYPE0_PIN(141, "GPIO141"),
++	MT8189_TYPE0_PIN(142, "GPIO142"),
++	MT8189_TYPE0_PIN(143, "GPIO143"),
++	MT8189_TYPE0_PIN(144, "GPIO144"),
++	MT8189_TYPE0_PIN(145, "GPIO145"),
++	MT8189_TYPE0_PIN(146, "GPIO146"),
++	MT8189_TYPE0_PIN(147, "GPIO147"),
++	MT8189_TYPE0_PIN(148, "GPIO148"),
++	MT8189_TYPE0_PIN(149, "GPIO149"),
++	MT8189_TYPE0_PIN(150, "GPIO150"),
++	MT8189_TYPE0_PIN(151, "GPIO151"),
++	MT8189_TYPE0_PIN(152, "GPIO152"),
++	MT8189_TYPE0_PIN(153, "GPIO153"),
++	MT8189_TYPE0_PIN(154, "GPIO154"),
++	MT8189_TYPE0_PIN(155, "GPIO155"),
++	MT8189_TYPE1_PIN(156, "GPIO156"),
++	MT8189_TYPE1_PIN(157, "GPIO157"),
++	MT8189_TYPE1_PIN(158, "GPIO158"),
++	MT8189_TYPE1_PIN(159, "GPIO159"),
++	MT8189_TYPE1_PIN(160, "GPIO160"),
++	MT8189_TYPE1_PIN(161, "GPIO161"),
++	MT8189_TYPE1_PIN(162, "GPIO162"),
++	MT8189_TYPE1_PIN(163, "GPIO163"),
++	MT8189_TYPE1_PIN(164, "GPIO164"),
++	MT8189_TYPE1_PIN(165, "GPIO165"),
++	MT8189_TYPE1_PIN(166, "GPIO166"),
++	MT8189_TYPE1_PIN(167, "GPIO167"),
++	MT8189_TYPE1_PIN(168, "GPIO168"),
++	MT8189_TYPE1_PIN(169, "GPIO169"),
++	MT8189_TYPE1_PIN(170, "GPIO170"),
++	MT8189_TYPE1_PIN(171, "GPIO171"),
++	MT8189_TYPE1_PIN(172, "GPIO172"),
++	MT8189_TYPE1_PIN(173, "GPIO173"),
++	MT8189_TYPE1_PIN(174, "GPIO174"),
++	MT8189_TYPE1_PIN(175, "GPIO175"),
++	MT8189_TYPE1_PIN(176, "GPIO176"),
++	MT8189_TYPE1_PIN(177, "GPIO177"),
++	MT8189_TYPE1_PIN(178, "GPIO178"),
++	MT8189_TYPE1_PIN(179, "GPIO179"),
++	MT8189_TYPE2_PIN(180, "GPIO180"),
++	MT8189_TYPE2_PIN(181, "GPIO181"),
++	MT8189_TYPE0_PIN(182, "GPIO182"),
+ };
+ 
+ static const struct mtk_io_type_desc mt8189_io_type_desc[] = {
+ 	[IO_TYPE_GRP0] = {
+ 		.name = "mt8189",
+-		.bias_set = mtk_pinconf_bias_set_v1,
++		.bias_set = mtk_pinconf_bias_set_pu_pd,
++		.drive_set = mtk_pinconf_drive_set_v1,
++		.input_enable = mtk_pinconf_input_enable_v1,
++	},
++	[IO_TYPE_GRP1] = {
++		.name = "MSDC",
++		.bias_set = mtk_pinconf_bias_set_pupd_r1_r0,
++		.drive_set = mtk_pinconf_drive_set_v1,
++		.input_enable = mtk_pinconf_input_enable_v1,
++	},
++	[IO_TYPE_GRP2] = {
++		.name = "I2C",
++		.bias_set = mtk_pinconf_bias_set_pu_pd_rsel,
+ 		.drive_set = mtk_pinconf_drive_set_v1,
+ 		.input_enable = mtk_pinconf_input_enable_v1,
+ 	},
 
 -- 
 2.43.0
