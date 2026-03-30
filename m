@@ -4,89 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DC8010D14B6
-	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 13:34:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F118BFF495E
+	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 14:02:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42B8283DBF;
-	Mon, 30 Mar 2026 15:34:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 35C8D83DBF;
+	Mon, 30 Mar 2026 16:02:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="jhaT0Bsy";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="T00ROJ1i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C50D783E7A; Mon, 30 Mar 2026 15:34:45 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BFB6783E7A; Mon, 30 Mar 2026 16:02:37 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EC8883D17
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 15:34:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE44F83D17
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 16:02:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-486fba7ce4cso45294565e9.3
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 06:34:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774877683; x=1775482483;
- darn=lists.denx.de; 
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Ev8lOo13efgH3zhnGzGGcz2oRE68lgvDHxg+Fbsuoio=;
- b=jhaT0Bsypyp4S2tp6IadtWV6QzMrqYuxZb9AF9pREebAAXbADoWDNZ56vSiTkbt3BT
- VNbg7jay3JGUgjzX28uG7k1BeDEitbj2PrZenXkjwvslazWSKuWIwCdbnHMDJuqFFItY
- Fbl5hiEq1m4GA1vhmlJeeDeYM4iXDytwZyjVruruI0KdQjMlUianRuAifymKIs2kLma/
- mzkKyyYavs80N8ACAKIqIpCrYOUddSFU19Bl7p87DjZMax3boxcCCcit2L/8RYXA1QN0
- QLfgLbwr+akBZKixKu1VnYXqpXLoIH39kYljXqeRLReAaliqi3CUmiHjPT4uJu8UwQSu
- QvNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774877683; x=1775482483;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ev8lOo13efgH3zhnGzGGcz2oRE68lgvDHxg+Fbsuoio=;
- b=YG4uDwngg3LVbLmLOSbQIlt0tYJCMGk2VpoMX72odWKPPQ5NcnI6YEOQ96PyEFOr+h
- RqJdGGa0ukRK7bK+lAWTOINV/PnrnmjyFBbQ+/w/NI1DQ2XbTbvH7bsdNOQbCc3km+kN
- M6ghCg5XI3S7j23Io0JB/eeja+aNUANTsUZB22uX0D4Ku6yal7dieUeBRJy0h4hB06bg
- qS/xgTBBLzTQzmKviA5tGC/jkU2o98racbXNwRMEKsjzLmVO79egZUx9vQRqQHZ6Wi3H
- VZJS0lugpLgkWDvHHyYM+FbJF5BuDLs3tIqNpTXLlCTiZgRlzm/sB3s1UeQuPHvQGzK+
- Lscw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWFJ3FIkWF4o5/ZaPY57W7RfN4Hk1ta1j/3Q+j6gx+mUMmb6c8s0hWySKs8kpc9UM/s/5MZs4I=@lists.denx.de
-X-Gm-Message-State: AOJu0YywSWHI22U+fZ/bgZHKMcdCbhA1kw+pvDXykIQipSQrsAz3EO/G
- h12/MZp18OxWFYps/DiOEXsVpRut6Co+ob185SMeuzo9NjZEUA89eFUkSr90wyhtEZA=
-X-Gm-Gg: ATEYQzzNAS/5taVBxjdDlWr5yhcJPvzJHfm8YSA0ATILEJ5N9/nu4ZiGMFprxYHQWKS
- VTSxmQMQhsZdfAF89qzGqcg0Z17O0oqx+Q+FnL2pkvtsxz10smX0IoGePm/2iN2/kUMtq4bEFYy
- 5JaItGlK5YwJ6CbzYVSl9gx7Dlb+Nh2aZA1jmYBtwVfWrGtuW+n+wMPzP6nj66JO91VTLQD6Hr0
- co1S8fKr+oeBZKH02smDGzp+BaWVtvdi6TmeBiZVCrFl1ySBCJTg8Cf5o/T+Q+LlxnsC+yc/cpQ
- v8M6XyYcQYooLAPD8G6TtsdBceLD/i2LNouSMjNSigaxZJFmoytLgbgBcUouIKlXZA3bW/Zdm7k
- e3fgkFZzLxwaXcS1DZt7+OD+SZSezMOkJGuJbJgThQbqnkC9hQO311GCQkA7/qn39xt1AHxBFjd
- 1AUub1ySA6wxSpBYTE
-X-Received: by 2002:a05:600c:4e08:b0:487:1fb4:7b3 with SMTP id
- 5b1f17b1804b1-48727ef0cc2mr228187805e9.23.1774877682736; 
- Mon, 30 Mar 2026 06:34:42 -0700 (PDT)
-Received: from localhost ([195.52.184.245]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48733c095dbsm113551145e9.0.2026.03.30.06.34.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Mar 2026 06:34:42 -0700 (PDT)
-Mime-Version: 1.0
-Content-Type: multipart/signed;
- boundary=5e4d58eda991f6c7e8891e0d4513a418c6cf39945c8cedd90a00bd67fbfb;
- micalg=pgp-sha512; protocol="application/pgp-signature"
-Date: Mon, 30 Mar 2026 15:34:33 +0200
-Message-Id: <DHG5MITAHNOS.3KKMVUI98SAZ0@baylibre.com>
-Cc: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>, "Andrew
- Goodbody" <andrew.goodbody@linaro.org>, "Casey Connolly"
- <casey.connolly@linaro.org>, "Mattijs Korpershoek"
- <mkorpershoek@kernel.org>, "Michal Simek" <michal.simek@amd.com>, "Simon
- Glass" <sjg@chromium.org>, "Tom Rini" <trini@konsulko.com>
-Subject: Re: [PATCH] dm: Respect dma-ranges size
-From: "Markus Schneider-Pargmann" <msp@baylibre.com>
-To: "Marek Vasut" <marek.vasut+renesas@mailbox.org>, <u-boot@lists.denx.de>
-X-Mailer: aerc 0.21.0-126-g9e77103592fe
-References: <20260315235756.304972-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260315235756.304972-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=UrWzpl1yYTaJsFRrlSxG6VCWTqUEhdMuUVu/WMdfcFKdMDDU3yAjv3yJlpLN9W9xEjK5AwY5hf17brqGms6nvKKNk+CvK19GY/KYmp8gCmWHZmBiQ3LyOQjM+McE96T6P0aoRwiONkkQf3hNsiUh8nEP1g3rbNSTT+tCzNJmQcny/aNWQlV6xcIxcy+17Bxyv+deaWqayn9XEmmVUUUb5xMcyR8pAiI+020SpygB1ToOjVmkqnkGrujvlnK1vWot83GEauUxhbCVdNoQ6IGVI+oymmZKcqjlapKC6R+u3U3GUVZxQIjQr+miZ/IL84yvJTSFXKytiJiOKKPVlF2RCQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=A5hw4PQshPvUyGP7a7qkZ3h3QTg+JM2o0MitvR+j0SY=;
+ b=QDWnXeJf/PaU+GkbOlwX910viYjhD9ahB0WnPa3mTzsAqZHkXHzQYEov47AClM+X0hcCkp1YQFqN476QRR6CvbtTUVbO/W9/dHzFfy03BXa2LxCf5vb6D0+9dBN3CY8vWjR7yJQnGcspPS1Nqp4z4IMwguGKjAS6sdbHnXO7ypF6VYV5zolSd3G7OJxfj2cp+eWSU9SDtX2otB0Lc5nimfDUwJZGMXXKMJO0T/ywLGblOzkdVCB4X7Wc3I1+jF1XFj8bLQzvbWqaUGry7J+0cr3Hg12F1s9gsAjMsS5zwq6lT1tyamHLWJtOrD8He2P2ArElQLTiUDdKp8vV97PqVQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=A5hw4PQshPvUyGP7a7qkZ3h3QTg+JM2o0MitvR+j0SY=;
+ b=T00ROJ1ichNsx5hcAH3tO0GpiKVWHgOCUnh8rbWM8FA4PbAMCofGvGSyPXCfXMKZtry8ZUh9gm2il2TO1YWKDs+koWdc0vduSo3RiUtZf2eMOYruLmfWMa707pb7W4RSwFsmNgngzMb+7V99rALJ3q8KNqVa4VewP/B29YvFAqs=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
+ by DU0PR10MB7508.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:427::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.28; Mon, 30 Mar
+ 2026 14:02:23 +0000
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8%5]) with mapi id 15.20.9745.027; Mon, 30 Mar 2026
+ 14:02:22 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>,
+ Rasmus Villemoes <ravi@prevas.dk>,
+ Franz Schnyder <franz.schnyder@toradex.com>
+Subject: [PATCH] cmd: test: add bug-compatibility special case for 'test -n'
+Date: Mon, 30 Mar 2026 16:01:06 +0200
+Message-ID: <20260330140106.401876-1-ravi@prevas.dk>
+X-Mailer: git-send-email 2.53.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: CPCP307CA0007.DNKP307.PROD.OUTLOOK.COM (2603:10a6:380::7)
+ To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|DU0PR10MB7508:EE_
+X-MS-Office365-Filtering-Correlation-Id: a457416f-c996-4129-bcba-08de8e64f711
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|52116014|366016|1800799024|38350700014|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: pzGclArbkO8QEIl5gh3a2J9+GF/IJptSsIhXUKy+JkWFDdRUSKzlu56AJQKi8lBBnJDWmLxU0QWK8YBmJvKrO+/T/LpVw/ax892ryhBOBg9CAOxh2BSnG6vWA9JUld8PKTZ6iyk5Dl7t2m3WVpcFHCnvZC9AWMb/wOFyKF3dH4OJrleSbpEnL6iRUeKt3gGC6kVGGCYYBV8MJcjqnojhf9OX7HCRhuKSGRcU2msJQ6h7dty38x1endL0MZHC420RDituNNgQruXEA2lKCMNhtPP7ySjaZp9ZEKresegXJZoXFWMwqRkS++bn3G0lqEd8EVsmMcKin1jrAFgtPVzdkVAmhlmvcmWdGOOLxPq3giF7pfiyTvq4ZnlhztUco4TM6/J476UElxEeZyER+hNs0MylkeCDAE9CT1FXt7I21XufFQ38YVw6Y7k4YP/YHhx8ydhNBvipz09NKusrpPNs5GhvSj63JhOHlauiyzQeJlWY3LylqSu41KKDnWMVqL6vbyA7hve6z8Gcvef/m0WpFYbI90bumxNazLpc1NcftjvQ5PxwNHTj4lsn1ZVGPseyWOA49+r1BByeUFalPlFY3HOBMUXQXnnSjx54IXAemX0vGNvpbI7tX0nHsZn/Tqorm9/S3bdO3EJ16CA9+l01Xuz+NBzKoCOBkT2h7pzdo91OYY+Z90nfU6VdUerEhx5F+MI0uNiM7z1HYAKKv4/0PQY8UcyRWyBLHvUDURvaxOZFiYd9qElcZKU+fXhiGeGyhZF/BJrHMOCTwSRHLgu8qmulYGhYFgHpNB5iq1/wcX8=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(52116014)(366016)(1800799024)(38350700014)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Mv8+MdYq0649EUIJqp5Vh4tLsIPvCT5CrnhwhLQeXTuZsJXuczkWMpez1wR+?=
+ =?us-ascii?Q?YuifVNCw/1P4oYEOtr9MFux+8ILFQu0cPVAHa9Pwl390v6JfqvU9RFY4yXdF?=
+ =?us-ascii?Q?0WP5CryBYEfqDB1lalr4bSd0B0Oa0yacPnM3S9SvHa7UKXwdKs6E2fxqxmzG?=
+ =?us-ascii?Q?tJGNb3Bn/XQTNRfv1rTwfcHS3V2K2EkLNFW/NSNgzO0cl1jf2DWwnHUaaABC?=
+ =?us-ascii?Q?9qXYALcHwl1waI2RG3spqtoGESW1aewjP9pxFKnBf2yPjTV8lhkAjPe+Lnoz?=
+ =?us-ascii?Q?EYwR53VqcBUhXC9hMmADtfv9aXd+40PWAM2VR6Q+hhYyVDQMmWh9on87AO05?=
+ =?us-ascii?Q?0iNM4vWDB/dMybNz1cYJm6Ji4NsZ8GQkzqJxfOj2yQMBI1u7FkAt4eeAk2+y?=
+ =?us-ascii?Q?jFdrEvXAxzvPAI1dPiasgIAYs9a+PtyVg5VfSTGoRplKMsGKEMtTIUYZDL6w?=
+ =?us-ascii?Q?4vhKPUlBFEmAcf22fmYNSMe5shTkVTlp/vJ3wc/zm9gI8D7VeqFatGMqPj6A?=
+ =?us-ascii?Q?f9B2dXNTRZHX09+ohOoDJ45dBOegKovkVGqk6AzT2KhXPqx18IgPj+iFoMjZ?=
+ =?us-ascii?Q?0rqFXoRIhJr9mZu/yshDRGbqqFSawcaMntDm6OV2xZEhvBq8ZRxz2JEiih2P?=
+ =?us-ascii?Q?9Q48TLELqCnN0mfGjsflRo8AtyCi01TyBKHADs1/qmFwyikfO0StCx9faBSz?=
+ =?us-ascii?Q?QyPS3nHcfetwa1y/LKNvXFme4WFMumP0xaklWgWrgQR8S3hfRYvodw63lJR8?=
+ =?us-ascii?Q?l/L63bfgkAF6+l/O0/fwq0Z5CXBBX+6f95QmufoV/uQmJywj8TDF3op2Ihqh?=
+ =?us-ascii?Q?a4zgekqE8VxnjZycPI8Po6/+1zIdyJpUMVApi76kLAvUFwC+J952xhYvK9FT?=
+ =?us-ascii?Q?kDmjd7itDES7RNAO5g403qLce1d9WcyxSgkU8svEXYRLVtamYTZFiya/nk+6?=
+ =?us-ascii?Q?KJe12Ei1uJAIK9KOH407BwCVXZD8ZsSsh7oWUFC+iJV2kqOvTr/cb/okIgfP?=
+ =?us-ascii?Q?TeTRGec4PmasuyfRntxZgkPQ7jdR/ey4YVPWt9GB91iJWgWuVOLHPbjxIGOq?=
+ =?us-ascii?Q?RXa1Q7TI+6PzSt9a0FKdHtS23us4RBF9SYSA+HmfxMlhTt1Y5LmKeYS9WZTn?=
+ =?us-ascii?Q?jzVmx+BTPVpcQiKx4mMDS8Ra8uskOyMH5eD8M8sk9YMoovWD+1G1OT5Ts6mR?=
+ =?us-ascii?Q?x3i5fN83QPvRPVlIHK9cCZRabiuL5UT5l/hujZwYaE1gQ8lzhizTCld5G93t?=
+ =?us-ascii?Q?tw7WNigYwIf9KUCvEoYu5w0qEPxTS/uJxaWMK4sjGxIDkRsmb+PPYIRA3NlG?=
+ =?us-ascii?Q?x+RIMkC5Tjw/8tqlDbXXM4+C9xkmOE4NKH43H6V0Pz68W0taiJ6sbLBTdXhD?=
+ =?us-ascii?Q?PAJaA+h7FIGsjcW6Nw/WbVw8cGbqP+JqH2yJEWIlVScOYsJ1M1qAz6zUryxQ?=
+ =?us-ascii?Q?5iQnZG1V+kyPb9qoFJNzI93g3HMi/THRREJd90q8elAyMMdnVkGd8HivJPJs?=
+ =?us-ascii?Q?9da1nvMa5wnXZbYv3AvnsuO0bCMj/Aavh/l/0PsQU2LEZHFNuK32nC6/ZDZ0?=
+ =?us-ascii?Q?4lLBhuNcy9+Wttfh6HQBV56YQY8e++xbHXAhx+SE+4XP4H3Ot+RaCbBUF4bR?=
+ =?us-ascii?Q?U8xQLsfnhwo1YLxLKweYJyTELRvnSnpw/jwMIzuodIGBjtTHScBC+xJ58iT7?=
+ =?us-ascii?Q?S4crETklfq8jq9N9e3bpHT487kkB3btMLd1bC5Qi7wdiEIbqQFdc7RxIBWIi?=
+ =?us-ascii?Q?yf2Z0oc1if5cz7P+5N8k90TbHh6FaLk=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: a457416f-c996-4129-bcba-08de8e64f711
+X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Mar 2026 14:02:22.8690 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: CdeYqhDUXc4eakm+FP8ElKm3Ezzg1IBtE4pus3IRFz22zPWBMGNussHO1r/E5TsXAlx1C8WZwkAkvDidW7Zd+O4wfHzhoZEYnii4tTRb0u0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB7508
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,219 +135,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---5e4d58eda991f6c7e8891e0d4513a418c6cf39945c8cedd90a00bd67fbfb
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+It turns out that there is lots of code in the wild, including in the
+U-Boot tree itself, which used to rely on
 
-Hi Marek,
+  test -n $somevar
 
-On Mon Mar 16, 2026 at 12:57 AM CET, Marek Vasut wrote:
-> Rework dev_phys_to_bus() and dev_bus_to_phys() to respect the size
-> of the area specified in dma-ranges DT property. The area outside
-> of ranges is remapped 1:1, while the area in the ranges is remapped
-> according to the description in the dma-ranges property.
->
-> Adjust the test to test the area within the remapped range, not area
-> outside the remapped range, which was incorrect.
->
+to yield false when $somevar is not defined or empty. See for example
+all the occurrences of 'test -n $fdtfile'. That was really only a
+quirk of the implementation that refused calls with argc < 3, and not
+because it was interpreted as
 
-Should this have a Fixes tag?
+  test -n "$somevar"
 
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+which is how this should be spelled.
 
-Not a big expert, but this looks good to me:
+While not exactly conforming to POSIX, we can accomodate such scripts
+by special-casing a single argument "-n" to be interpreted as if it
+comes from code as above with empty $somevar.
 
-Reviewed-by: Markus Schneider-Pargmann <msp@baylibre.com>
+Since we only just added the ability to test a string for emptiness
+using the single-argument form, it is very unlikely that there is code
+doing
 
+  test "$str"
 
-One detail inline:
+which would now fail if $str happens to be exactly "-n"; such a test
+should really always be spelled
 
-> ---
-> Cc: "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>
-> Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
-> Cc: Casey Connolly <casey.connolly@linaro.org>
-> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> Cc: Michal Simek <michal.simek@amd.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  drivers/core/device.c |  6 +++++-
->  include/dm/device.h   | 17 ++++++-----------
->  include/phys2bus.h    | 12 +++++++++---
->  test/dm/core.c        |  6 +++---
->  test/dm/phys2bus.c    |  4 ++--
->  5 files changed, 25 insertions(+), 20 deletions(-)
->
-> diff --git a/drivers/core/device.c b/drivers/core/device.c
-> index 779f371b9d5..d365204ba11 100644
-> --- a/drivers/core/device.c
-> +++ b/drivers/core/device.c
-> @@ -473,7 +473,11 @@ static int device_get_dma_constraints(struct udevice=
- *dev)
->  		return ret;
->  	}
-> =20
-> -	dev_set_dma_offset(dev, cpu - bus);
-> +#if CONFIG_IS_ENABLED(DM_DMA)
-> +	dev->dma_cpu =3D cpu;
-> +	dev->dma_bus =3D bus;
-> +	dev->dma_size =3D size;
-> +#endif
-> =20
->  	return 0;
->  }
-> diff --git a/include/dm/device.h b/include/dm/device.h
-> index 678cd83c271..7bcf6df2892 100644
-> --- a/include/dm/device.h
-> +++ b/include/dm/device.h
-> @@ -166,8 +166,9 @@ enum {
->   *		When CONFIG_DEVRES is enabled, devm_kmalloc() and friends will
->   *		add to this list. Memory so-allocated will be freed
->   *		automatically when the device is removed / unbound
-> - * @dma_offset: Offset between the physical address space (CPU's) and th=
-e
-> - *		device's bus address space
-> + * @dma_cpu: DMA physical address space (CPU's)
-> + * @dma_bus: DMA device's bus address space
-> + * @dma_size: DMA window size
->   * @iommu: IOMMU device associated with this device
->   */
->  struct udevice {
-> @@ -196,7 +197,9 @@ struct udevice {
->  	struct list_head devres_head;
->  #endif
->  #if CONFIG_IS_ENABLED(DM_DMA)
-> -	ulong dma_offset;
-> +	phys_addr_t dma_cpu;
-> +	dma_addr_t dma_bus;
-> +	u64 dma_size;
->  #endif
->  #if CONFIG_IS_ENABLED(IOMMU)
->  	struct udevice *iommu;
-> @@ -272,14 +275,6 @@ static inline __attribute_const__ ofnode dev_ofnode(=
-const struct udevice *dev)
->  /* Returns non-zero if the device is active (probed and not removed) */
->  #define device_active(dev)	(dev_get_flags(dev) & DM_FLAG_ACTIVATED)
-> =20
-> -#if CONFIG_IS_ENABLED(DM_DMA)
-> -#define dev_set_dma_offset(_dev, _offset)	_dev->dma_offset =3D _offset
-> -#define dev_get_dma_offset(_dev)		_dev->dma_offset
-> -#else
-> -#define dev_set_dma_offset(_dev, _offset)
-> -#define dev_get_dma_offset(_dev)		0
-> -#endif
-> -
->  static inline __attribute_const__ int dev_of_offset(const struct udevice=
- *dev)
->  {
->  #if CONFIG_IS_ENABLED(OF_REAL)
-> diff --git a/include/phys2bus.h b/include/phys2bus.h
-> index 866b8b51a8c..80fa88adae1 100644
-> --- a/include/phys2bus.h
-> +++ b/include/phys2bus.h
-> @@ -21,17 +21,23 @@ static inline unsigned long bus_to_phys(unsigned long=
- bus)
->  }
->  #endif
-> =20
-> -#if CONFIG_IS_ENABLED(DM)
-> +#if CONFIG_IS_ENABLED(DM_DMA)
+  test -n "$str"
 
-This is not related to the code changes right?
+Fixes: 8b0619579b2 ("cmd: test: fix handling of single-argument form of test")
+Reported-by: Franz Schnyder <franz.schnyder@toradex.com>
+Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+---
+I'm offline for the next 7+ days, so wanted to send this out now 
+since v2026.04 is about to be released and next merged to master.
 
-Best
-Markus
+I'm not sure this is the best fix, an alternative is to just drop the
+argc < 3 support and rely on the previous quirk.
 
->  #include <dm/device.h>
-> =20
->  static inline dma_addr_t dev_phys_to_bus(struct udevice *dev, phys_addr_=
-t phys)
->  {
-> -	return phys - dev_get_dma_offset(dev);
-> +	/* If the PA is in the remap range, apply remap. */
-> +	if (phys >=3D dev->dma_cpu && phys < dev->dma_cpu + dev->dma_size)
-> +		phys -=3D dev->dma_cpu - dev->dma_bus;
-> +	return phys;
->  }
-> =20
->  static inline phys_addr_t dev_bus_to_phys(struct udevice *dev, dma_addr_=
-t bus)
->  {
-> -	return bus + dev_get_dma_offset(dev);
-> +	/* If the DA is in the remap range, apply remap. */
-> +	if (bus >=3D dev->dma_bus && bus < dev->dma_bus + dev->dma_size)
-> +		bus +=3D dev->dma_cpu - dev->dma_bus;
-> +	return bus;
->  }
->  #else
->  #define dev_phys_to_bus(_, _addr)	_addr
-> diff --git a/test/dm/core.c b/test/dm/core.c
-> index 78ee14af228..bb9f526b064 100644
-> --- a/test/dm/core.c
-> +++ b/test/dm/core.c
-> @@ -1248,13 +1248,13 @@ static int dm_test_dma_offset(struct unit_test_st=
-ate *uts)
->         node =3D ofnode_path("/mmio-bus@0");
->         ut_assert(ofnode_valid(node));
->         ut_assertok(uclass_get_device_by_ofnode(UCLASS_TEST_BUS, node, &d=
-ev));
-> -       ut_asserteq_64(0, dev->dma_offset);
-> +       ut_asserteq_64(0, dev->dma_cpu - dev->dma_bus);
-> =20
->         /* Device behind a bus with dma-ranges */
->         node =3D ofnode_path("/mmio-bus@0/subnode@0");
->         ut_assert(ofnode_valid(node));
->         ut_assertok(uclass_get_device_by_ofnode(UCLASS_TEST_FDT, node, &d=
-ev));
-> -       ut_asserteq_64(-0x10000000ULL, dev->dma_offset);
-> +       ut_asserteq_64(-0x10000000ULL, dev->dma_cpu - dev->dma_bus);
-> =20
->         /* This one has no dma-ranges */
->         node =3D ofnode_path("/mmio-bus@1");
-> @@ -1263,7 +1263,7 @@ static int dm_test_dma_offset(struct unit_test_stat=
-e *uts)
->         node =3D ofnode_path("/mmio-bus@1/subnode@0");
->         ut_assert(ofnode_valid(node));
->         ut_assertok(uclass_get_device_by_ofnode(UCLASS_TEST_FDT, node, &d=
-ev));
-> -       ut_asserteq_64(0, dev->dma_offset);
-> +       ut_asserteq_64(0, dev->dma_cpu - dev->dma_bus);
-> =20
->         return 0;
->  }
-> diff --git a/test/dm/phys2bus.c b/test/dm/phys2bus.c
-> index 0f30c7e37fd..67f33904943 100644
-> --- a/test/dm/phys2bus.c
-> +++ b/test/dm/phys2bus.c
-> @@ -28,8 +28,8 @@ static int dm_test_phys_to_bus(struct unit_test_state *=
-uts)
->  	node =3D ofnode_path("/mmio-bus@0/subnode@0");
->  	ut_assert(ofnode_valid(node));
->  	ut_assertok(uclass_get_device_by_ofnode(UCLASS_TEST_FDT, node, &dev));
-> -	ut_asserteq_addr((void*)0x100fffffULL, (void*)dev_phys_to_bus(dev, 0xff=
-fff));
-> -	ut_asserteq_addr((void*)0xfffffULL, (void*)(ulong)dev_bus_to_phys(dev, =
-0x100fffff));
-> +	ut_asserteq_addr((void*)0x1003ffffULL, (void*)dev_phys_to_bus(dev, 0x3f=
-fff));
-> +	ut_asserteq_addr((void*)0x3ffffULL, (void*)(ulong)dev_bus_to_phys(dev, =
-0x1003ffff));
-> =20
->  	return 0;
->  }
+ cmd/test.c     | 15 ++++++++++++++-
+ test/hush/if.c |  8 ++++++++
+ 2 files changed, 22 insertions(+), 1 deletion(-)
 
+diff --git a/cmd/test.c b/cmd/test.c
+index 0d0f090386c..c76ebf800ee 100644
+--- a/cmd/test.c
++++ b/cmd/test.c
+@@ -75,12 +75,25 @@ static int do_test(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	 * Per POSIX, 'test' with 0 arguments should return 1, while
+ 	 * 'test <arg>' should be equivalent to 'test -n <arg>',
+ 	 * i.e. true if and only if <arg> is not empty.
++	 *
++	 * However, due to previous versions of U-Boot unconditionally
++	 * returning false when 'test' was given less than two
++	 * arguments, there are existing scripts that do
++	 *
++	 *   test -n $somevar
++	 *
++	 * (i.e. without properly quoting $somevar) and expecting that
++	 * to return false when $somevar expands to nothing. It is
++	 * quite unlikely that anyone would use the single-argument
++	 * form to test a string for being empty and a possible
++	 * non-empty value for that string to be exactly "-n". So we
++	 * interpret 'test -n' as if it was 'test -n ""'.
+ 	 */
+ 	if (argc < 2)
+ 		return 1;
+ 
+ 	if (argc == 2)
+-		return !strcmp(argv[1], "");
++		return !strcmp(argv[1], "") || !strcmp(argv[1], "-n");
+ 
+ #ifdef DEBUG
+ 	{
+diff --git a/test/hush/if.c b/test/hush/if.c
+index 6129e2c530c..6117c37e53c 100644
+--- a/test/hush/if.c
++++ b/test/hush/if.c
+@@ -41,6 +41,10 @@ static int hush_test_if_base(struct unit_test_state *uts)
+ 	sprintf(if_formatted, if_format, "test 'abc'");
+ 	ut_assertok(run_command(if_formatted, 0));
+ 
++	/* Special case: 'test -n' interpreted as 'test -n ""'. */
++	sprintf(if_formatted, if_format, "test '-n'");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
+ 	return 0;
+ }
+ HUSH_TEST(hush_test_if_base, 0);
+@@ -385,6 +389,10 @@ static int hush_test_lbracket_alias(struct unit_test_state *uts)
+ 	ut_asserteq(1, run_command(if_formatted, 0));
+ 	ut_assert_nextline(missing_rbracket_error);
+ 
++	/* Special case: '[ -n ]' interpreted as '[ -n "" ]'. */
++	sprintf(if_formatted, if_format, "[ -n ]");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
+ 	return 0;
+ }
+ HUSH_TEST(hush_test_lbracket_alias, UTF_CONSOLE);
+-- 
+2.53.0
 
---5e4d58eda991f6c7e8891e0d4513a418c6cf39945c8cedd90a00bd67fbfb
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCacp76RsUgAAAAAAEAA5t
-YW51MiwyLjUrMS4xMiwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlOi
-eAD/bymFuIctgkJLtaE+mYiRqez/Ygd44srw7YCVqgDt82IA/2ZXb6V6/QycxHtS
-Ck/1MQBYTtl7Z/tKnmHrT8JWXBMO
-=xzFs
------END PGP SIGNATURE-----
-
---5e4d58eda991f6c7e8891e0d4513a418c6cf39945c8cedd90a00bd67fbfb--
