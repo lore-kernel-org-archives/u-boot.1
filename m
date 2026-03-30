@@ -4,108 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D68CA1061B0A
-	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 15:06:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F9CFFC97F3
+	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 15:06:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3A7A83EB3;
-	Mon, 30 Mar 2026 17:06:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id E318D83DBF;
+	Mon, 30 Mar 2026 17:06:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Nxw3xklp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GSEmYzNY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB19B83E7A; Mon, 30 Mar 2026 17:06:13 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id CBD9183E7A; Mon, 30 Mar 2026 17:06:36 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB8F683D17
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 17:06:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1225283D17
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 17:06:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-b8f97c626aaso859031566b.2
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 08:06:10 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774883170; cv=none;
- d=google.com; s=arc-20240605;
- b=M6Fgbmcl8vE75WtTNDNm0CpPVZd0/+X7bpdmldOfwSUbExgNxc3hwlMIjrrFUIySLQ
- iYUJi8YxBcQWrqHEtDmWdyawgspLiFWkBClF3ZoUVVfxsgXm80VHaDySgcUeNuTk6Ov0
- xrGydlJhuEraC7y2QIerDPbp7siW3WmMqdLZ7rj9KBy1OG5CuCPmQY9Sx1XdxmnpV8zx
- hM48BWbwwAoKaTSQXLJWOEQVM/JSlJ6oSwMJ1TJIZarRsSwTSYXX01jHWmdSWKH6Pnbx
- 7FTjPO1vMngx3UZGUAdR3UXjcT+sHpBmzJWu5c6Pi1MXss6kKjOYdXVcLMBSifr6xTyO
- ehag==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=FUbx4LSyTjvuPuep6OECF+ZucEwoKPEaKqekDYnfvsU=;
- fh=/5TWuP5RrK1jirdRlr6ENPzDsDlypL6CuIEYowf9Sn0=;
- b=B+zRa8NyHPBgheqKWqMA2wayX9Vm+sHqsoA+eKEZ3B9Pesu/jrB340yHqJ/2uY/C5G
- 1tIbgLs73YikOUa9nBRIEm33onwh+SV1rifdrrQFVVOJuiZdNogetYjsBu468ckYgGDh
- Z1S3KTfKKiuoBwNd0/AsifuAJJCkIiu0Do9swhwakSSMNK0pmwFyUBdyAUsYvGC1Hzja
- g/bulX5n0OPQ6jQDptOIEV/tXloWP14Qx4AgbORKqgVX399WbYYOjlg5Xg/S9Vv9p64X
- +zDZj3jp3vfP4CLQwpEGkwsXkKtDvKaZ6VHJ6B0V/QU9ehkKvm4+0cB9dA+yd4F34D1F
- 8syw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-4094b31a037so3309023fac.1
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 08:06:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774883170; x=1775487970;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FUbx4LSyTjvuPuep6OECF+ZucEwoKPEaKqekDYnfvsU=;
- b=Nxw3xklpqoS4uu498LzD8GvD3Hl6U+VX4PZLhu1/OYIM1g6020YvSZBRyvCcAc0isg
- ebzH0VOGePh11lZ39zGF0wyOODv4m8mdkzCDqYqyLLmc1iAamlFta/mXxUAuy+Z2akeI
- lbFr+2zbhObWB6GY8Aw0sG+RiejV8T/txtWiXMo0gXSxuPp5ZSQfS9lyI2oXNVBjSNaa
- KupEeWYdA8q2EaI1VHnZO/bpB6NB2Y9iUjW48Pi3vvqZtHowJPNBSK9BhGnPB2fNW8cR
- 3xFxwvMidID3wvenGdJ89h0gODeSGWxxB2IoeA1MSMnq+I5nwL7w9Z36MZd+Xyvmtwpo
- 9dLg==
+ d=konsulko.com; s=google; t=1774883192; x=1775487992; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=LA8jP/vT7lGGbwSMDJerpBoJSEd1j7lk4q6lW5N1BwA=;
+ b=GSEmYzNY3sFGSOhlXqWEoIDPoqNfoLOC5sItcjMZBKotVB3YxwHzzIljlN9KuC8dTt
+ PD3wBH533Wu8F4/AIl9ugNuxDNyLLU6gV7ftm+LN0ji1JK0LOgwc3832TzIIKy78uLV7
+ NcAF43vIioxRiIpExUOzwdMskWPKXF7BuMkBQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774883170; x=1775487970;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=FUbx4LSyTjvuPuep6OECF+ZucEwoKPEaKqekDYnfvsU=;
- b=fyRi1pXPHlOvMOqTs6b6yJxV2bzk48hi8WEgOooLFd/m+u/FFhVuzaUeK0ICF2rg8C
- cjlh6NTL3iNziuHQXyjfceB/2nmQ2XZOWIKVxmhBV1c1MrvhewvaSO5t47w+MHNInuKf
- a5MYLxcytEZI3bNd6xdPY0j2JTN2uMkpCxceMlrsJz/ww+Zdako1KK5ZvS5Kmn4U6qlR
- 7caIewZa/scK++ws8BUTykssF2Xi87W/Dh9Me6qmltTvB6K9/g6Jg9pwqUmj1wyY4eT+
- 9Bz3gN1EmW0o7ilbPHyeqsrZC0cdY1j28Opuo9jPZrnfF3TpZXqmAsU2hlDG9d6h1lMy
- 6H/w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW5nzHY/FyiIjEMrA/1u23PUfjl2znLAz/PBwMujMdRS/1PjkazODTzBn0bJVA0lu0Z9Yc5ZCQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy2x6kJ2KHzLUnmMfiPBC50pMNkk4Oxuxo481s42HiSdTZnRyzk
- Crkp79YICtzATVEVhXmyRboEeEnFKUU0es9YU7YRCCLlZj5ouW+e3OuVeCNiGHUhDycWFa05+gL
- uOD1YH6fxoDwiDJ4nXCjDYFTTdTKd3fIpzon5HXLizw==
-X-Gm-Gg: ATEYQzyu71qujHE4lOkUB1SYnK+V1mZ14Vi1M6y8Iuv7whicH3yjkQ/iKh42CQVlNkd
- JvG1gsk1/8O7eru/DOq8cydKTwRRthIz7aIKX0ooLOcEMTyf5VuDDZ0KYNlJp6asdgk7GGbNGZI
- +7kvznSajMt2Fe96XmEYTZJwscxVMN94gpVX7jRuCBHSPTVpRMPuyUIt/FHU4167rbAtFLQQjLr
- Djr7fn06JOBn7jYDFqnkmjGZ0EhU6wWgLimDZeKXShxDcgmKH5EtwIr3lSeyxZCuxkGNoTdFiRI
- aJRJqKDTXb8RM4Uj4Yb4/99QnPKOHAbTXvkLmIOG9Rwff+CP188nYVSSoZ9wMrzKHMeyLnvujqE
- f8OVScNoYKIaFAO5+m1isUv05RvmHMHTqK+Pv
-X-Received: by 2002:a17:907:7212:b0:b96:eb7e:bc55 with SMTP id
- a640c23a62f3a-b9b50175831mr750974366b.10.1774883170005; Mon, 30 Mar 2026
- 08:06:10 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1774883192; x=1775487992;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LA8jP/vT7lGGbwSMDJerpBoJSEd1j7lk4q6lW5N1BwA=;
+ b=YNh7dCqNP8u2OAHu2U6v/J8SJKYCEohbYKbDI7HQ4oY6dwWY5Zuruw2bgB+3L69s1l
+ /xKG3rh+NNwfyC/DmFhakycoaEsnmJBCy677+T/XRD35q4CquRpVcycQnbQ2+rS7ljhj
+ RXuWfB90EHjlUj9Vk5ubMyvtcKIUVQuQ9k1jNVxj8aWadFIU18PlAeE8R9z1UIiGprgY
+ OGVdDhzRwoHZVWbrzobBLJRUtJZ0aRWKHSmtBS30ZASciEbsL1t0vegh4uUfxQ+sutsG
+ bNzCHfYmdGJf8gidW5Lt+rY0KBmx9piCd40rlu+BPwYQnjgmir7RQ3hQAThxiSs175jn
+ 2Sgg==
+X-Gm-Message-State: AOJu0YzYEfkJkF5yrEcTPw2PaH9Ue4OO76UlvFDVjJD5uZDdNQJLwfF9
+ gfTDfSUbxJfoUKizfXm9tdLjwrIwnf0P3iwPLuiz2CrRwaGxnNh507heZtbaWiFAGaA=
+X-Gm-Gg: ATEYQzwfm16LHQKY6cwlvj3Du9hBrPw6jrk6IDtbX7Z+Hyc/FxhSl2I7OP99Od5wXfD
+ c+lxlAsonIUBEEid+JCvOxMe/GRsc7NTcziPmJ8b6c5rM2ml0MqWyZuRHrQngfx8p/Jf6TLaSTU
+ XsMeXUWGyj+LsC0RNEuhVjOs4WKX5D+vx8C8Dz4auPD/CsKijodJbiucgvI010IXSAt6V1Ii9zz
+ iG6nN4OSFr88QdD2CbyJt7UmJLLUZZnIOSEy72+EmTqDDxUV2Y1xxl5Uz+Pat/Pt/0VkaaCQkpz
+ QD0UpcyQZewCk3WpXA8UPCRgJ5zQAdQxuZDmkuymsr89cB69GgUsAQBhlMr+8y26uVrmy8ezSd9
+ q/IrbPN0e4e5UY8RgP80u6uAVf/BKKpFj1qVq8J092SyiE5UG4rDuVbnP0tTU4qmmqPN7V68o+e
+ Et+JRXB3Q4VrnjIGIdt7v3jMGQBoRgNfJo+xdW+/bwySy7K5bbhvckmEZLGyTzaClU6PNtXAmUY
+ QZafVoJJvV5mHwOUMiPwZYzFxWfVPX/HbhbFe+5siXUHvoZ5FodLgJnZbI=
+X-Received: by 2002:a05:6870:658a:b0:417:3fe7:3c4d with SMTP id
+ 586e51a60fabf-41cec34c69amr6695546fac.38.1774883191747; 
+ Mon, 30 Mar 2026 08:06:31 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-41ec1cb054asm3892722fac.13.2026.03.30.08.06.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 30 Mar 2026 08:06:31 -0700 (PDT)
+Date: Mon, 30 Mar 2026 09:06:29 -0600
+From: Tom Rini <trini@konsulko.com>
+To: j.ne@posteo.net
+Cc: u-boot@lists.denx.de, Mario Six <mario.six@gdsys.cc>
+Subject: Re: [PATCH] powerpc/mpc83xx: Move alignment padding into
+ __u_boot_list section
+Message-ID: <20260330150629.GB41863@bill-the-cat>
+References: <20260329-mpc83xx-align-v1-1-9935d9db5310@posteo.net>
 MIME-Version: 1.0
-References: <20260316-mtk-ext-mmc-boot-v1-0-1aae51a44705@baylibre.com>
-In-Reply-To: <20260316-mtk-ext-mmc-boot-v1-0-1aae51a44705@baylibre.com>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Mon, 30 Mar 2026 17:06:02 +0200
-X-Gm-Features: AQROBzBeznvYuvf8P0DmBKJu8CnIOXp47XBEPmEjBfuanR95wOUcr2O-mnygreQ
-Message-ID: <CAEHHSvbkEkSVO4S=3a_z6-SH8ne5ineV-EhkJkeXKevrMLyjbg@mail.gmail.com>
-Subject: Re: [PATCH 0/3] boards: mediatek: add Genio 520/720 SD card support
-To: David Lechner <dlechner@baylibre.com>
-Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, 
- Macpaul Lin <macpaul.lin@mediatek.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="i9L6mgfZybpTBgqy"
+Content-Disposition: inline
+In-Reply-To: <20260329-mpc83xx-align-v1-1-9935d9db5310@posteo.net>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,46 +97,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le lun. 16 mars 2026 =C3=A0 22:55, David Lechner <dlechner@baylibre.com> a =
-=C3=A9crit :
->
-> Add required devicetree and defconfig changes to get SD card support
-> working out of the box on Genio 520/720 EVKs.
->
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
-> ---
-> David Lechner (3):
->       arm: dts: mt8371: add SD card nodes
->       arm: dts: add U-Boot overrides for Genio 520 and 720 SD card
->       configs: mt8189: enable GPIO support
->
->  arch/arm/dts/mt8189.dtsi                      | 12 +++++
->  arch/arm/dts/mt8371-genio-520-evk-u-boot.dtsi |  3 ++
->  arch/arm/dts/mt8371-genio-common-u-boot.dtsi  | 28 +++++++++++
->  arch/arm/dts/mt8371-genio-common.dtsi         | 67 +++++++++++++++++++++=
-++++++
->  arch/arm/dts/mt8391-genio-720-evk-u-boot.dtsi |  3 ++
->  board/mediatek/MAINTAINERS                    |  3 ++
->  configs/mt8189.config                         |  2 +
->  7 files changed, 118 insertions(+)
-> ---
-> base-commit: a27980786cfb3c430aa1c05da8e79180c584d221
-> change-id: 20260312-mtk-ext-mmc-boot-aa67a77835ad
-> prerequisite-message-id: <20260310-mtk-mt8391-initial-support-v2-0-1dc862=
-d58532@baylibre.com>
-> prerequisite-patch-id: 0a3f0badfacd3b6aac95fd6eecdb52a06f6b2862
-> prerequisite-patch-id: f5bc405061da27bf21302c1e91d1f7764d4c52c2
-> prerequisite-patch-id: 127eaeb5c641928088383c6fa468ef0a15d88306
-> prerequisite-patch-id: 8bc3f4284773a4e83ffc94e9e4aad43956073ab6
-> prerequisite-patch-id: ee4692f65c9b54d9b599b13bd965581318a3f372
-> prerequisite-patch-id: 02919217d9a44bc91036b6e8a2c0dc4f54a0fb3c
->
-> Best regards,
-> --
-> David Lechner <dlechner@baylibre.com>
->
 
-Reviewed-by: Julien Stephan <jstephan@baylibre.com>
+--i9L6mgfZybpTBgqy
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks
-Julien
+On Sun, Mar 29, 2026 at 05:04:36PM +0200, J. Neusch=E4fer via B4 Relay wrot=
+e:
+
+> From: "J. Neusch=E4fer" <j.ne@posteo.net>
+>=20
+> u-boot-dtb.bin is built by concatenating u-boot-nodtb.bin and u-boot.dtb.
+> u-boot-nodtb.bin, in turn, is generated by objcopy'ing the contents of
+> u-boot (U-Boot in ELF format) into a raw file.
+>=20
+> In order to find the bundled FDT (u-boot.dtb), the code in lib/fdtdec.c
+> uses the _end symbol. Platform-specific linker scripts ensure that _end is
+> 8-byte aligned, which is required by libfdt.
+>=20
+> For the PowerPC MPC83xx platform, the ALIGN(8) directive was outside a
+> section, with the unfortunate effect that the potentially generated paddi=
+ng
+> bytes would not be copied by objcopy. This resulted in a discrepancy
+> between the _end symbol on the one hand, and the size of u-boot-nodtb.bin
+> and thus the starting location of the actual FDT on the other side. Under
+> these conditions, the FDT could not be found and boot would fail early.
+>=20
+> This commit fixes it by moving the ALIGN(8) into the __u_boot_list sectio=
+n,
+> which is non-empty and thus copied into u-boot-nodtb.bin.
+>=20
+> Signed-off-by: J. Neusch=E4fer <j.ne@posteo.net>
+
+Sorry for missing this when trying to fix up all the architectures.
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--i9L6mgfZybpTBgqy
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCacqRcQAKCRAr4qD1Cr/k
+ChZRAP9WXUdjJpDt1gKj0eFidPAR9qlIZ2LqbSetcsjpv8+sHQD/W74+adA40RXO
+yG9cGqV7/Alfuk4RZDEGV7tl+7FxggM=
+=NRHW
+-----END PGP SIGNATURE-----
+
+--i9L6mgfZybpTBgqy--
