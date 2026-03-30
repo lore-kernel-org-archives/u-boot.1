@@ -4,107 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 537151061B1F
-	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 20:44:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 606011061B08
+	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 21:07:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7171B8409B;
-	Mon, 30 Mar 2026 22:43:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 9B5E683CE3;
+	Mon, 30 Mar 2026 23:07:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="cVPK6pgu";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="JLb8dw4r";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="iHUquRrs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54AC384035; Mon, 30 Mar 2026 22:43:16 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5A03283EB3; Mon, 30 Mar 2026 23:07:44 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7F8480212
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 22:43:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FB4880212
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 23:07:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7d74aa6bcdbso2789627a34.2
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 13:43:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774903391; x=1775508191;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=wyJu0hEapYhpV9QaRwo5ec8MxyUXDRq8s8z2mPJrfIc=;
- b=cVPK6pguaoNr2VQGmQUtV/eeW1c2XsVqeeZ0WtIXK6FYJiVQEU8i5JbgjmhCptLDVV
- vJZMY7mW26mW/0l+sgF5dNqfkNbfdIMqvmBknjJwjwdQJCBJCygrp4vhHfiStET/KVFw
- D0a6b+rIiTIGC4qZLwURHLXvremQxPI0tR1hn4fVemqevMshN9yFBqr96ojWRVn9xkhe
- tBZ8tUMahmCNnNmpo+QzVYm9DlNIc1m62xC9WbCxAUPA57bfr8oBMaCi5im34QGEavNC
- tNRqfpPbFoQMr92h5rQHiZWy1YHGiEfj93+TH5dEgalqJpn1Dpod8lY06NQ4V60iJdSm
- JlwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774903391; x=1775508191;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=wyJu0hEapYhpV9QaRwo5ec8MxyUXDRq8s8z2mPJrfIc=;
- b=B+SdrhoAukP2PWbUkHFleCRvyEU8u1Yyirc9EEf5pCwkbr9+0rGozDG2oKKMJ/Vq6w
- IiHBmh/BxbtLGzUOcjmi9PRAWqEkSpKpRYeKUmXxtcVCEIRT84px1Xq0GGq0FTD03HKw
- ecDM5mVzwzOocsL1jpvq75Kq4alR24KFORX+cl5jsjFYBJ39u1NC86PoKZoGCOp19fS7
- 3IN8kxKSnTOVW056gcZaA3rIoUKbz05O38SfiGS1VH0+4h/7GZk8ZCM3R3qq+FHEeNOi
- DNmWephQCtLiM+PJfabjfUE4EGP0P1DR5QVz9eBfB2NJz6ZsotfVrazgJsFA3p3dK3qG
- 5vUg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWvhh6ZC8f0l9bkY3TQBx7vK3iadYKUlrtxsXJXOg0hGOwmCPCzTQ83CSngDh2JWDz0xMirU5U=@lists.denx.de
-X-Gm-Message-State: AOJu0YxJKMOPDeKI2x2AwUrONBIAu4ljceyHbiz1mSMugi40oJVzM7oS
- 9s2UV3YO6X3OKJdfjW32jhi9yPBH1fwPTcZQWJ0rzQI2I6j//1OXepL2FGOoPVxY/kI=
-X-Gm-Gg: ATEYQzwdLbgGQGwTyo3jFeIuhlu+6MpqCmmKQRd1CT6ZjI06Rc2OZZbbXvqcW9Xu+ZQ
- KKOioE+umE0e3xN5Wbfox8v7fc/yJ0yulIlcf/m1IW2r8+Ue+5yq7Yd3RCTYinPCbVokN9aOlJb
- l5SRdkma0axkGiF0d00KA0RbvPNHSHKIEOU4KSkrck6lPoxcLbAyb+aYva4IdPzuIjs0clEy/OR
- hd8YK8RiyEk1fmL5D1e/2cic0Qugm/gITDdRGScUZ97LYhuGWBN/zUv3WHi/4je0lg04MTulx2U
- zBOcRxWHA7X6UuKmhEPzOwFXPKRha+8BmEVSq80unGUFjfOPja1j53FzoujGg3pN7qHugwXoNYM
- eaTUzSt4zCYXiXxLWW/PUGCuwvjtZusRHYiMGbd0PevZW/4jbe7QH4inTmbwsHE9d0Q6XguU/nq
- Mes0Kwa62GdgtA0CssXHosCWEGzl6o
-X-Received: by 2002:a05:6830:81c5:b0:7d7:d54c:5b53 with SMTP id
- 46e09a7af769-7d9faf22747mr8074524a34.29.1774903391131; 
- Mon, 30 Mar 2026 13:43:11 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:a67f:a092:38d7:379e])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7da0a384631sm6595736a34.7.2026.03.30.13.43.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Mar 2026 13:43:10 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-Date: Mon, 30 Mar 2026 15:42:17 -0500
-Subject: [PATCH 5/6] arm: dts: mediatek: add UFS variant of Genio 520/720 EVK
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4fl3jm5t18z9tpX;
+ Mon, 30 Mar 2026 23:07:40 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1774904860;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=AllQrW+KKfZSW9G7MI/LHqDshizenrrUULPdMkL3X48=;
+ b=JLb8dw4rabrBdsFIV5zTWW5m5rB8fLBhAZaj9Dqfsd3u28kqnX0b+zmS9mH2o17kGi/uKe
+ yy6YqwufD0mieVHdMJlynVM0GvEe+B6/gjU4VQ07qBgqyRVdpk/S94jpcyOLsXMHY9za0X
+ z0+bvBDaWYjtYWyzPK0C43tpunLohW2mO7DUTC9uZgVFceckoZNs4nw8Zi/uF57a6W9+Y8
+ U5khVwWT6w6GtE9sMUIDRjWWzmkzE6+gbWE7kyi3OJnFget1Xboj03Hbd491s9HuGhNV+s
+ Bxy1tjHHZpd5YIycwjEeZdTBMv9xdT8pqeosWs/EvIKrXuxhXs5L95XyNIiNQw==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=iHUquRrs;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::202 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <e56eb040-bf5c-4ded-b9fb-5b003da6bd74@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1774904859;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=AllQrW+KKfZSW9G7MI/LHqDshizenrrUULPdMkL3X48=;
+ b=iHUquRrsLPPO+CLlPwP/CW+ufaJa8W98+HevFp4UWUhLIuKtcMLsxRCqZFwEfAovMietSj
+ fGHmefHzhGw5y1pIrx8FDS7FF04KRMLGGIFcPuw8lRwNdMZsRnglr4tqPckInqHCYr7a22
+ g2/Z9NnAsg8INUswxCGPF5lqDoM3idbpGmjn3av0+orT1W3IviISvz0uuKPgq+rP7eY7V5
+ NUKewWUeue2egtG6xrLqrXOGpfvuZoRP9g6V+fKrbKX/OPi9E3L0uS0WUD9QZjK5bDCIq1
+ IGtIZp21PJAJTkeOJ4YQ4nHKgfHY/kqwKCYYd7qC8Om7a/m7dO39j6EqhyPi7Q==
+Date: Mon, 30 Mar 2026 19:20:35 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260330-mtk-genio-720-ufs-v1-5-3bad8362ed70@baylibre.com>
-References: <20260330-mtk-genio-720-ufs-v1-0-3bad8362ed70@baylibre.com>
-In-Reply-To: <20260330-mtk-genio-720-ufs-v1-0-3bad8362ed70@baylibre.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2504; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=xaJIIk/MXQ68QI9Fs8KqSRYEdB3WcvRQDizsjxfCtEI=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpyuBMibSnmJfuUy1tR+9vGXCYeJN1gx10yNzoh
- 5hIZER3cCyJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCacrgTBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AJSkH/RLl4zQU5qz+Bw1tqZR1THi0TwWtoHRq1eYIuRM
- l0IRHhHm3yozNFQnz1NO1Oy2xcFeHc0pnq0MBcaeR4Elh5T3v1O9meyuIGRYnR8bPKWkL/gaoxe
- AISIOLz6VrCp8cWkKBXh3KWMXgenWHyWQ26OmZuO6iIYMeNOIccTP4KPWpPs/cMBrr+bgf3lht2
- QzDgXyU+cCsVxs+CeYPE8ABBwBkwGMdXHzQ+fUROE722Mk6Xl1mgoINLUsMfiXneevvEwbfsL7D
- QOeBCp2RopoO6noVtfOdbVbRQP5Z6YwutV6b0+jcltJnD5GHOoHK1dBeb3Dg/IHmOSDGSZm28e8
- c0no=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+Subject: Re: [PATCH] ufs: core: Fix heap corruption due to out of bounds write
+To: Neil Armstrong <neil.armstrong@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Julien Stephan <jstephan@baylibre.com>, Michal Simek <michal.simek@amd.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Padmarao Begari <padmarao.begari@amd.com>, Tom Rini <trini@konsulko.com>
+References: <20260329231151.332108-1-marek.vasut+renesas@mailbox.org>
+ <384346b6-e798-45d9-b490-67d8cb6b6751@linaro.org>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <384346b6-e798-45d9-b490-67d8cb6b6751@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: cebca33a825268afab6
+X-MBO-RS-META: f9zrx1bz5e3wy4dec1irmooynt1z5fwd
+X-Rspamd-Queue-Id: 4fl3jm5t18z9tpX
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,79 +99,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a devicetree overlay and UFS variants of the Genio 520 and Genio 720
-EVK devicetree targets. There are dip switches and jumpers on the EVK
-that disconnect the eMMC and connect the UFS instead. The overlay
-adjusts the devicetree for this.
+On 3/30/26 10:03 AM, Neil Armstrong wrote:
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
- arch/arm/dts/Makefile                     |  5 +++++
- arch/arm/dts/mt8371-genio-common-ufs.dtso | 18 ++++++++++++++++++
- board/mediatek/MAINTAINERS                |  1 +
- 3 files changed, 24 insertions(+)
+[...]
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 4085d4c2de1..bff341d6118 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -1105,6 +1105,9 @@ dtb-$(CONFIG_SOC_K3_AM62D2) += k3-am62d2-r5-evm.dtb
- dtb-$(CONFIG_SOC_K3_AM62P5) += k3-am62p5-r5-sk.dtb \
- 			       k3-am62p5-verdin-r5.dtb
- 
-+mt8371-genio-520-evk-ufs-dtbs := mt8371-genio-520-evk.dtb mt8371-genio-common-ufs.dtbo
-+mt8391-genio-720-evk-ufs-dtbs := mt8391-genio-720-evk.dtb mt8371-genio-common-ufs.dtbo
-+
- dtb-$(CONFIG_ARCH_MEDIATEK) += \
- 	mt7622-rfb.dtb \
- 	mt7623a-unielec-u7623-02-emmc.dtb \
-@@ -1125,7 +1128,9 @@ dtb-$(CONFIG_ARCH_MEDIATEK) += \
- 	mt7988-sd-rfb.dtb \
- 	mt8183-pumpkin.dtb \
- 	mt8371-genio-520-evk.dtb \
-+	mt8371-genio-520-evk-ufs.dtb \
- 	mt8391-genio-720-evk.dtb \
-+	mt8391-genio-720-evk-ufs.dtb \
- 	mt8512-bm1-emmc.dtb \
- 	mt8516-pumpkin.dtb \
- 	mt8518-ap1-emmc.dtb
-diff --git a/arch/arm/dts/mt8371-genio-common-ufs.dtso b/arch/arm/dts/mt8371-genio-common-ufs.dtso
-new file mode 100644
-index 00000000000..b75fdafcf9b
---- /dev/null
-+++ b/arch/arm/dts/mt8371-genio-common-ufs.dtso
-@@ -0,0 +1,18 @@
-+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
-+/*
-+ * Copyright (C) 2026 MediaTek Inc.
-+ *
-+ * Adjusts for when boot DIP switches/jumpers on EVK are set for UFS boot
-+ * instead of eMMC.
-+ */
-+
-+/dts-v1/;
-+/plugin/;
-+
-+&ufshci {
-+	status = "okay";
-+};
-+
-+&mmc0 {
-+	status = "disabled";
-+};
-diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
-index 7a388409742..b0fbffd26ea 100644
---- a/board/mediatek/MAINTAINERS
-+++ b/board/mediatek/MAINTAINERS
-@@ -3,6 +3,7 @@ M:	Macpaul Lin <macpaul.lin@mediatek.com>
- S:	Maintained
- F:	arch/arm/dts/mt8371-genio-520-evk-u-boot.dtsi
- F:	arch/arm/dts/mt8371-genio-common-u-boot.dtsi
-+F:	arch/arm/dts/mt8371-genio-common-ufs.dtso
- F:	arch/arm/dts/mt8391-genio-720-evk-u-boot.dtsi
- F:	configs/mt8189.config
- F:	configs/mt8371_genio_520_evk_defconfig
-
--- 
-2.43.0
-
+>> diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
+>> index 81fd431f951..6a51f337e47 100644
+>> --- a/drivers/ufs/ufs-uclass.c
+>> +++ b/drivers/ufs/ufs-uclass.c
+>> @@ -1751,7 +1751,15 @@ static int ufshcd_read_string_desc(struct 
+>> ufs_hba *hba, int desc_index,
+>>               goto out;
+>>           }
+>> -        buff_ascii = kmalloc(ascii_len, GFP_KERNEL);
+> 
+> I think the whole function is a mess, I think we would rewrite with 
+> something like this:
+> 
+> ...
+> int max_len;
+> int ascii_len;
+> 
+> max_len = (desc_len - QUERY_DESC_HDR_SIZE) * 2 + 1;
+> buff_ascii = kmalloc(max_len, GFP_KERNEL);
+> 
+> ascii_len = utf16_to_utf8(buff_ascii,
+>          (uint16_t *)&buf[QUERY_DESC_HDR_SIZE], max_len);
+> ...
+> 
+> So we stop having random len, and use the _real_ len returned by 
+> utf16_to_utf8.
+Maybe we should port the utf16s_to_utf8s() from Linux instead ?
