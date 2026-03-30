@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4330F1061B1F
-	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 20:43:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B60B1061B1F
+	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 20:43:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8935583CE3;
+	by phobos.denx.de (Postfix) with ESMTP id D53928403D;
 	Mon, 30 Mar 2026 22:43:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Qj6qS9x6";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="i7YavUfq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1E0183EB3; Mon, 30 Mar 2026 22:43:09 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 081878352B; Mon, 30 Mar 2026 22:43:10 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 244E180212
+ by phobos.denx.de (Postfix) with ESMTPS id D472D83CE3
  for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 22:43:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7d9e22176a7so2537338a34.1
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7d74dbfe84cso3393828a34.1
  for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 13:43:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774903385; x=1775508185;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774903386; x=1775508186;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=8y0jKvJc1z6RRKshi7r+1otQiBT4VBNjBLAxXi1QglM=;
- b=Qj6qS9x6+K8FkNEOl+esyve+VvYINDFvMnunlYLEKyo5+tlGMq3pniwHl6ItiUpC7j
- 7Z+XX23hKW4he2c9x0vEJQFDoTzJIIJWhjBGnE0cz+S2b3EKhJ/K0nA54i5VxDiyZJM5
- sVd9Cx2H8OIjrf+AZtsWPNW9cdSL8KXQIjv1pDQD3/BgJbUVcTpMxWsEumhlZHCTVf6b
- AC4zH9hOsjhTzXhIi5B64tE34MwJiZm6q6Vf0mtD8sotQaAmgpeOv2Qzwuet1Ing80Pg
- 3zUF9pbRB6xPedlUjSLyr5lSPGMSEc3cFMrbcDaM9p/fh+qQB1kc6BHxrGptdxn/u5FH
- uv6g==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=jqye4zgq5iUy+dhQbmnvfTVtptP9gDxtiPfJoZB4vrU=;
+ b=i7YavUfquOQiOyiN4mZciiy5w/v6786Hr1SJkYrru1w5jzs8V7twXNQc2hqa9XCA/s
+ LcySz+YZTFVpMGcpABWgS1h7YzFodWeAYy/VQwdfgIUJtJ6l/DojLI3H6p/kBizcPoPk
+ Am1A4vvEZdw5cm2lPxp12cEKB6bkL+L5lR8zBTQjAKPB6+o8K2V75rZv2FPpEo8ouWMc
+ 8INgvIhqDM9CHDir1/wFdbfhjlsgF/4zekp3G64YtSFSHFSYNShFpPLULFfyL8cVHerg
+ +WTy7qen3YLoX3O8WPBZceIGeDLFzyaxl9osxR2nR5gJW34RQVm4WuZ7RE7oLSGnPCvU
+ sWqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774903385; x=1775508185;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8y0jKvJc1z6RRKshi7r+1otQiBT4VBNjBLAxXi1QglM=;
- b=q/pGj250fJ1Ai2Kw8NqfbUYY/k2KgVeytmOXhV2k3pzOQbvA38sRyTYiKah0MQMDPY
- +qhaAH28TasbS0JRi5qvPFw4d9E0LAs2qh3CjwszaIG1+RGrb8pcWlfZvAMlJasNdsJF
- v71u0YV1puL3iWPk7n5Yp//PGFn+905E2yQCWHYt74Hvkfliz7OZ1hhfGl3dAjLxKM8+
- GuHWMuy5VXTcAeoAXm2HXc9GrT4ix60CpjwSw8/yOalkRtVzC0ltJv37RzH/haNzGqvK
- caBJOhh5pHNGY054ea8XlCtDQDtiNQg3ks+L47pPgawzY+E7FxMkGQSClgBMzTWIetx+
- EfcQ==
+ d=1e100.net; s=20251104; t=1774903386; x=1775508186;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=jqye4zgq5iUy+dhQbmnvfTVtptP9gDxtiPfJoZB4vrU=;
+ b=Edr68z5jUzwC3gE2odyu/5yXClZsRi6lNnr6YXEMtG5xhmY2L9GxsV2bBcFIQzIX9b
+ fXJn+OF1UNl+tajdy3qwsPDIacMBdeCe3KAnkUmXKFwd+yg33ASaw5Mn9QDy4xVun+dA
+ 847UyI3htUmYSg2WTy/mzchi0nUw9r1BDxH3USSgw3OOYwf0RGtwEVDnJYoUd1UTW9Bs
+ vJgsiOn9ZGlc0fPl6/TaHToJSjLkuFhBlUk0W2nU8IUUzodEQJjK/BCbihZTbIIgoKxL
+ Oc4lhTqY4zHKmL7kB/hXVORjdgmbNrMVvpcOu2NXTXr5e/cDD1ga/PIg5wiPRwD0Sf0R
+ uqYQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW3ozcTuhZLChW3+9Gg6bgNpR35aAT3MoRNNfPLD2imjo72QNdPxUtFfeSCX7L+b24Mp1UsS8U=@lists.denx.de
-X-Gm-Message-State: AOJu0YyYUA8sdJ9s+XiK1sCVreBI+I0W5wQBxzmLdjkFHeGOLfqCxyvj
- woROvss9rQXbBfELKMVraoD5dc/OOd6V/Sif+zCoFbmCeA7+7nkUCpimgdfK75N9G2Q=
-X-Gm-Gg: ATEYQzwzx6er8qTSu6IHD91FSIZo0detn+bAh3sIPu3koJz2fJySD2OasmvotFHuezk
- GVxA7vCzkN40UIaWc75RSM+j0marol3KY+J7lYvSgDI3AN1XkVA85GO3ON1ABpE41Qyvi2eMItJ
- 70sEzd51ghk6f5r5SBsNSWf5jwlCXHi4gS3UyHzM38ghXbzou3TSWU4N6uApQ1Fil74CuuFU9RC
- LXQb80h68W5Tu7QcQgG9b/bEsqfAeBgLI+Ud+c+Ahx9imOF4F4GVvKyCx0Ho5sEYQQE8Mqem4A3
- +ie00IWTVbYLkYakhUOlsOl9kMonohvOaP7x8JfwOBywq5OiLtbdG8JNvRfkfaCdBR+iwrg/fdT
- +4UPqtVX6ZBfjhBfTysZy81xAyNLdkLcYc2wSGbk5Brb9cXSgC4rQZChBi4uvJsJXn+Wfzz5MBd
- QCM0Y8Kf8LySTZ9B529wtGTQ72mI7q
-X-Received: by 2002:a05:6830:6d50:b0:7d7:fb0f:3e56 with SMTP id
- 46e09a7af769-7d9faf5a084mr8003792a34.26.1774903385516; 
- Mon, 30 Mar 2026 13:43:05 -0700 (PDT)
+ AJvYcCXEvZcgyxYs0WofICDgk8KXAvorgtWeUZI14+jjzN3KcmVOMxMSOFTAUvVFLqTXL0vLmG/pZqc=@lists.denx.de
+X-Gm-Message-State: AOJu0YzI2F8S4jx1ZW8zW1Bq1lokyCO/BcoJnkJZW2We/5RArRvsFjBX
+ uMaUraWf7rBQKdbDI3XK9lGfyufObIZECSKgpH2Ki3+KIn0raecx37OHun8Re4QywDg=
+X-Gm-Gg: ATEYQzzblbKZkBCBTzPVxhM4o+EfYI6AsjXBtnNtywTo/b50X6J7wqj25zBOl0mS6jX
+ YNpn2eK0TdxRV9XRyC+0COFXDpzahE19zN/3BsW4KlCXNXrYnMVfDh8r4IFja7FzXzsFODq1BlY
+ cy4ixSAnlcg3z2hQCDG3747R648W3DemkA3mFuhdGXaiE+fBp7JGh5uqDLxKIq2XVF1Hs36ubyL
+ DPP+D0/tNkVf1fJFy24nkPPOOha18AW7CqEgfSEausc0yGngyZxsMhkVB6wlhT3AlGVkEDNw21L
+ TKToyCVTqwqdCOm8zSslqDkoD/qvNkp4WGlJ84/kUbJEMdHhMdki7UrLWzuskZRKczzdn3T209s
+ 9TfVkCi2hKrgkrK1AmDPaWuveSH9Rqfq+epgXj33mQWlpK/2gClkBjlc0QnWC2bi4/35Vreq0eC
+ xwAURpIZkLod35LujryZJB7rLK7oGE
+X-Received: by 2002:a05:6830:6509:b0:7d7:ef0a:1ce5 with SMTP id
+ 46e09a7af769-7d9fad4ecdemr7487147a34.9.1774903386447; 
+ Mon, 30 Mar 2026 13:43:06 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:a67f:a092:38d7:379e])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7da0a384631sm6595736a34.7.2026.03.30.13.43.04
+ 46e09a7af769-7da0a384631sm6595736a34.7.2026.03.30.13.43.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Mar 2026 13:43:05 -0700 (PDT)
+ Mon, 30 Mar 2026 13:43:06 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Subject: [PATCH 0/6] arm: mediatek: add UFS support for Genio 520/720 EVKs
-Date: Mon, 30 Mar 2026 15:42:12 -0500
-Message-Id: <20260330-mtk-genio-720-ufs-v1-0-3bad8362ed70@baylibre.com>
+Date: Mon, 30 Mar 2026 15:42:13 -0500
+Subject: [PATCH 1/6] ufs: ufs-mediatek: add mt8183-ufshci compatible
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDMBBA0avIrB1IRmiLVykuYjLaqRhLRkUQ7
- 96oy7f4fwflJKxQFzskXkVlihm2LMB/XOwZJWQDGXqYiioc5wF7jjLhkwwunSIHa5z1Lrxagtz
- 9EneyXc93c1uX9st+PkdwHH+2rPhGdQAAAA==
-X-Change-ID: 20260323-mtk-genio-720-ufs-ed10a1cad8b2
+Message-Id: <20260330-mtk-genio-720-ufs-v1-1-3bad8362ed70@baylibre.com>
+References: <20260330-mtk-genio-720-ufs-v1-0-3bad8362ed70@baylibre.com>
+In-Reply-To: <20260330-mtk-genio-720-ufs-v1-0-3bad8362ed70@baylibre.com>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
  Bhupesh Sharma <bhupesh.linux@gmail.com>, 
  Neha Malcom Francis <n-francis@ti.com>, Ryder Lee <ryder.lee@mediatek.com>, 
@@ -94,17 +92,17 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1652; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=722; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=l3XN2cbooTdNpF6oV2LDY9hCaMTc2f1ClUlLMin6udM=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpyuAptpVVElgNJuWbwfyNv1NGPMyt3XBFjnFkk
- mlT8WaK7NWJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCacrgKRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AkBIH/3H29+zdPYYSyKqqw8cIepra0DfPoga4WGq1VVb
- BYmK3eXTm9CzFU3h7Twyo4pET4dR3pX4A9893fVTFOcJXc6U7Nviji76NzkOPC+brd90YCYLvPD
- 9ZhjhDKhNFm1PBo7Y2+6GaALe8fGK1WPIeg3B2XGDRlBTX9Z/Zpm9bD90pKsgwFIx+e4QzoxxQk
- Dsd52snWYbmY8s5pDZvqR+7v7zSDPnT+4ym84r5OftYDwb9nJFqKsHiebJs/oW3peLwROMvWNzF
- eMGLoI8PuJ4hJzZ5pvyU1e/935hZrKpD5PjzQj73sB/+vKjiM/Ieoxl6NRKHZmc3og7yFdYrpdO
- Trxo=
+ bh=TaNSzi+rLQNk+QiFrtpzVV4YOvQ9Gd/F+kF5lnLbihM=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpyuAwS/z0dR1dISapvjeCvm3mPXN7PCzTksNIQ
+ BiwZd61hNaJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCacrgMBYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AoMIH/2ICCustPH59wil6U6571QBIGIhxjTjRWu4Kfyv
+ rLNldR1pXIqSREVI62CUDbxkyJ+SxNVCk3HhQEXczw9CLZtWTTp+TRzCuX2ljc44r7lIJf0ipQW
+ Z6YeaRyMcXmr7JpeeW6Km+D3ql6vT0iMspDDHYp4zktNUjck+p48I/UTCscUv2cwvNoWg0HZZoh
+ yTkmimCbPEC8a6Tpzz7GNBdbQNILFDR7SOn3OkI1PrLsFf/epJ3JF3CRwjHFvA0OMnwPzUu84QH
+ Iv1mw6Qh6sskEus9dRRPZ7KrRxhuEJmzKcw1wfPFasB/QbCIuXQHWvURLQBDn2VpxzrwUFnsulN
+ 3hAs=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -123,41 +121,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds support for booting from UFS on the MediaTek Genio 520
-and Genio 720 EVKs. The first few patches are adding missing runtime
-dependencies. Then we add the required devicetrees and defconfigs.
+Add a new compatible match for mediatek,mt8183-ufshci.
 
-To apply cleanly, the UFS patches depend on [1] and the devicetree
-patches depend on [2].
-
-[1]: https://lore.kernel.org/u-boot/20260318-mt8195-add-ufs-support-v2-8-f18eeeeb0e72@baylibre.com/
-[2]: https://lore.kernel.org/u-boot/20260316-mtk-ext-mmc-boot-v1-1-1aae51a44705@baylibre.com/
+This compatible is already defined in upstream devicetree bindings.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-David Lechner (6):
-      ufs: ufs-mediatek: add mt8183-ufshci compatible
-      ufs: mediatek: clean up zero terminator
-      clk: mediatek: mt8189: add UFS clocks
-      arm: dts: mt8189: add UFS nodes
-      arm: dts: mediatek: add UFS variant of Genio 520/720 EVK
-      config: mediatek: add UFS defconfigs for Genio 520/720 EVKs
+ drivers/ufs/ufs-mediatek.c | 1 +
+ 1 file changed, 1 insertion(+)
 
- arch/arm/dts/Makefile                      |   5 ++
- arch/arm/dts/mt8189.dtsi                   | 115 +++++++++++++++++++++++++++++
- arch/arm/dts/mt8371-genio-common-ufs.dtso  |  18 +++++
- board/mediatek/MAINTAINERS                 |   4 +
- configs/mt8189-ufs.config                  |   8 ++
- configs/mt8371_genio_520_evk_ufs_defconfig |   4 +
- configs/mt8391_genio_720_evk_ufs_defconfig |   4 +
- drivers/clk/mediatek/clk-mt8189.c          |  44 +++++++++++
- drivers/ufs/ufs-mediatek.c                 |   4 +-
- 9 files changed, 204 insertions(+), 2 deletions(-)
----
-base-commit: d6c79fe27b2142ba25f2ff05262698bdcc8ad2c9
-change-id: 20260323-mtk-genio-720-ufs-ed10a1cad8b2
+diff --git a/drivers/ufs/ufs-mediatek.c b/drivers/ufs/ufs-mediatek.c
+index 252c5fc4318..2cf65a3185c 100644
+--- a/drivers/ufs/ufs-mediatek.c
++++ b/drivers/ufs/ufs-mediatek.c
+@@ -395,6 +395,7 @@ static int ufs_mtk_probe(struct udevice *dev)
+ 
+ static const struct udevice_id ufs_mtk_ids[] = {
+ 	{ .compatible = "mediatek,mt6878-ufshci" },
++	{ .compatible = "mediatek,mt8183-ufshci" },
+ 	{ .compatible = "mediatek,mt8195-ufshci" },
+ 
+ 	{},
 
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+-- 
+2.43.0
 
