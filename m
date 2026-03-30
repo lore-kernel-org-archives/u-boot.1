@@ -4,110 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7987D1061B05
-	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 14:41:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AEC91061B09
+	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 14:51:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF8AA83DBF;
-	Mon, 30 Mar 2026 16:41:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C421C83DBF;
+	Mon, 30 Mar 2026 16:51:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BBu6Owqb";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="ZuMVmqDh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 216B683E7A; Mon, 30 Mar 2026 16:41:43 +0200 (CEST)
-Received: from mail-dl1-x1236.google.com (mail-dl1-x1236.google.com
- [IPv6:2607:f8b0:4864:20::1236])
+ id 0D79483E7A; Mon, 30 Mar 2026 16:51:30 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E3BC83D17
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 16:41:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DDE0383D17
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 16:51:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robertcnelson@gmail.com
-Received: by mail-dl1-x1236.google.com with SMTP id
- a92af1059eb24-128e4d0cc48so5422797c88.1
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 07:41:40 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774881699; cv=none;
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b9825ba7f9dso849099166b.0
+ for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 07:51:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774882287; cv=none;
  d=google.com; s=arc-20240605;
- b=cFRXPdVQu3z+oYvGfu1ABXUy8SOhnAXCPqYHxXTCIfpaLf4/u0Ge1Rb63VTZ/+x1uU
- 5NNWRNeMfZN56Sn7uBfcgFtTKBCY3c2KMOzkB9RjZuNvqGFVt88lNxnfWnsPo8j8Kj1R
- 5KOTnZxXykjk9RZq5aq/d45vRmWjtt/F7tmshsmnctInrffZcBUq/IAjUqOtAp5IZtbi
- gVaN5O+q0Dx6MKlLya7G4g7BT7UCReZJ/R5NteT7L6hQ4uiONAQYt+EldgwLU0RF2uY3
- gb6wk0rJBw//4yFoUX0CteNMOsbrhF5OJeZFX9LVBB03I+cZH/X9iI/8uL8ALcYRmYjR
- FNGg==
+ b=LGuf87sGUPOU7XLAwiQypxyAbC5k7dulZ+MdjvpOWIrIGqO6KNqpQ9O2QWktJ0IBKt
+ xAZHIG0/eSxguKx8/Mb4/x1DaMM3EWFA5VocWk9VurkQWXfeMkQJZka6bUe3v/yKyjw+
+ ktB3Tc2YAWLotsdyqw65PgvVsG8U43J7kx0rq5aO9+ZItpYsJIb1YmaFbVc9zl8JAcPT
+ 7pKsLQ5w9Zd0M5xr5cf0aMvS4h1/rCNg52lgoIjmZu9gftMMZTRnnTCgt8sWKFbuvDPO
+ Uhvw+OVaqjZiYrTzHUyDDq/nCPzLQxgu6xXiHiwFeWat5Ze4GSSTKYQhKmukrclgpS1V
+ PCgQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=nCzH6YFhcZlIlUwu4/3cAQl/0E6G0EWmUj2Q/vw9NUU=;
- fh=mA3mb/7aL0bWx13o6E+mvTaMg5//dmhLzW/tLoVxT9E=;
- b=Eq03BG6MD4XaWuT0DV6e4jDEPfbcO5wPWWXh1KPuB20HvHURoveVYB70KQvlbKhLei
- aLcIpNq5xvfQ5PbPSfqvPdkLi7iwJscoT5N3hBR+8r6/MjpKVwYcyAiJqE4DrSfeLRR3
- aloUxtKUiVBpq1ZxccnyvXP/F6/uHzgENxpQPxlz4NIflphtXVu+u38wx6RY1awpqaEK
- Dsg2RiE3Ftu7F9xeeA2gdK5ULX9YYM8m/2TKbfN2dp4FC/3lvdxTZaoUzSiqdBIMhEda
- Z9InO1HU3WgOAN8f3rpR5In3It7UtPytNb5kCP+afBYiRqSy/DZvpD1qOkwdQMaQdgax
- Nlhg==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=AQCsYnZi3DY9TiTI4P85l3reeCn4vOLQ8iWaWKtFgHw=;
+ fh=QO1XR8SRSRxsH7/K1KblRUUI/AW5w76MzEzab2Cv1gE=;
+ b=QLj+R5Byu6LGyp5S+eULsmY0ELG5p2DccnKPbHqC2YtbVcvvx5kQizoFo6U81Mw2u7
+ Ic0BG3HZfZsoPs3k+1x7Wb39BeWUatZuLxE8H9vKTec/wHuxg5oL10KS0YIPA0UWkf5t
+ nDvppF3qj/NqA43J1cG3gcEWakX3+KnCdEbWW7bknQUIxS1Ru6STjP7+cp8QlRLSryJK
+ m1ofHvdrsn11CukxJQJfxh5vNYn10KkfMmKoGoHXX9x/pZDUw6oBkwo3FgZTP5O1vAQN
+ tVVpG7wnEbxuPSrsdMx/sTolxX3irDUG478DI9Hp/vUQfVT8OHy31mVU3gSIyLk9v7uy
+ fEvA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1774881699; x=1775486499; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nCzH6YFhcZlIlUwu4/3cAQl/0E6G0EWmUj2Q/vw9NUU=;
- b=BBu6Owqbqsad1TkmitW127i4P4fbpBbCMsgVZroWVQVi87C4VAFMCuyr1f/112f4c3
- XPxsw6BdIUHuBxG1z6aVS0EJ0xOTacJeKMQLuFO0htGWDAHFIuWmemcxg/4pRvHye0wg
- AzSpWnrBZAdN82TvAdOUc4Qqr9vGbOSjYV2V2kPEor58/swalrEcyMkZBf1iw8dnf3QC
- Oh/QBy7kpVELdpjPjTUnogImk1yC83GiXKpHHEjhSFG9cTZWSEd/3cZpiUIevUZ9cZeR
- OcxmGl14CZQeu5vMNgVL3NWlU6tXrjJ39SSW+5yMrCrvhvs2ktG1a063tcO8Kabjoc9x
- Ophw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774881699; x=1775486499;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774882287; x=1775487087;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nCzH6YFhcZlIlUwu4/3cAQl/0E6G0EWmUj2Q/vw9NUU=;
- b=kwYXP4kEvIe4oNG/IuMnannvtLqzgft3GT1y06vJ18r0bSgqaD4BE0bvOzcRcwsXyQ
- vBjJk6EsC7Vr2pKVkgupHUwgNOxGlEzcBprPrfzPEiTi0NN3izIDWmMYSQB0UaC3rSOV
- w8S4baUjQDhRz0bwsPUVUkhhPK6LwAmJHbpxcLIPnVcm+3ks2gufSSZVcTJPr6JVVRMr
- QijgIPFf5VKJNp3tShXoVy1cUUTMgdsIpK6ycTFPvwDaHHr2esdsPPiwvIpE5n67PV8D
- /+tm8OpVDOokxCt/FSBkryJHDYzIzLExzlyi+4MrBBOYNvdH8VN/5xHJSmk2KrV0Lu00
- Fz7g==
+ bh=AQCsYnZi3DY9TiTI4P85l3reeCn4vOLQ8iWaWKtFgHw=;
+ b=ZuMVmqDhqZeWm8brg5kecxbh5bsZ+tZ69UiZJ2PZCrXz9UqVGqrXV+XzHHV4XF85MH
+ D1AZU50ooteEXwYvoo7rfI7piX6Y8BXrDsFfIw0GEJ5+TbqRqe+Bg3b+KV38j4PrJIVv
+ bJNZo+YcjoVJ6uRbMrRNIPsUghsmk3fFJR32km+RwZvF89N4ZgoveJzyjZ8pUW6dh4yb
+ 9xKDw2SLhg7X7Hx4RJ8ye6zAlOwRmg+jQN11SE7vDqDzK78A33+iMQb1jv4EyhKJrjCC
+ lcgSZo+EmTaHK1NCAHZ1FE6R/AICwTd9VJmk1k2SOw4jc1fbzWECu5He8r5fUy3EO1qn
+ lArQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774882287; x=1775487087;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=AQCsYnZi3DY9TiTI4P85l3reeCn4vOLQ8iWaWKtFgHw=;
+ b=j+FbDHBwzXrq2UJmcQjHKTn0ZPrKbYbZYm/wvrS//GXOrqbn+yNpbulXiJGQRz25W1
+ XKg3QUFr1w+QdHPyYh30h37cBzQhg0/6S7csud+z+oXAFhgY36MvQAoUyXk5BY//2Kah
+ 9wCFmoaqfQKm8W4Gxkcv5+sOG8+v7qOB2WHHRvn3xf0k1OzmimDNE7J5z+QKfuQMCfei
+ 5rKqua5DlR0wAMkUB22eWHjE9Z29eJT9mJVNxyARgYUWcNPDdv2ynWKk0sncpYzR+zxW
+ 6YIACz3D4M6D6QmGlsv72gIEYmySUN6K4je2pO98WyVI3PZvkBHh5oiPYjLkqwCUHTND
+ dSnQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUBLgM4lP/Imdg2jFKjtuLze/VN9qHU2ClbmFX+5QOrTdo246RBMIepYkZDCMqbdFcl4MUkcIs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxWNOdV6QG6OJeLyg2W3z5WuwiyysmyR1s3hbpnXHRt3Ju45LiU
- uZQlE5hm6Z49EHqUxAvB3VZ1tBLClWIRbsbUZteW6HBiV9ueLtep3d8NVHGyLeoNZzE2A5FG9Ic
- 9PkhSw4RAyGYJZPSzL47z9ymEk+nda4hiYZ7+np0=
-X-Gm-Gg: ATEYQzw43kfDksd+JizpfP9YAYZoEeNxxtZWGwQ7uUmoCMlgRQAMcI2xdReWaAsxmSj
- B5jJHJVv0wupdi8u/KX6ZfzcXijfExM07/rrGQIe5YRsDtp5N7CHhsF0K+1RtKuGaEk5OLzNTLM
- 4coHTy2MKD+cKoNl+3fTQa35xJ/wX088lSZ+UQpbaC3YhB8HD6nM5GobZf9mzhCq6abuBjIhku1
- ZI/rqkhUlFtpMhZGZMyZ9w36nO/xVcAA9yMrCUW/PUKNbAiHY7f3+RJskkCAbimZNTI9z4i5NzS
- 9LnvtSCa1MZOMvH8kFKR0drfDG1reYnJfKZKtHV3BCrLObmsnL0nGtIomRn4U/Z3lDAMDTh1gHN
- 8T75XTXeY+XBSRLa4pCwkS9PQes608N0heNMYxQ==
-X-Received: by 2002:a05:7022:458d:b0:128:d715:b717 with SMTP id
- a92af1059eb24-12ab285a8demr7077828c88.13.1774881698818; Mon, 30 Mar 2026
- 07:41:38 -0700 (PDT)
+ AJvYcCXErj8ea6u68+YzIrlAspZ1n0Czt9eMlScEbx1gnPiNV4CeachDCLwUoeDWlbfwS4C3DugrxKQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyEQmZqjoYVw0oEVvPRFzfZvTOhleRPFFO348+KqqCYJhcH/bc1
+ 7Y/GULAdLi7eSHEbFc2PK+tb11KAMLzpJGRto1eOI97b4yKrRkXvk5/JWyI4h6IjkPPxYFgsc8T
+ Z6UCxp/WFEPbCm1X+36HKKi+9ggOSjb+3gUgLyv08Ew==
+X-Gm-Gg: ATEYQzxAb7DCua/8xncM4QlTP70FQKM4a7ieLPGZybbT5biRxiLhM8zEjaoUiUc1UCQ
+ E4e/OW8Ejh3lAHXlr5WvfaznKkL+OHbRg36OMGf0x9fqBfKTU3FlYpue29K8+1l7aBq2yfjMMoP
+ ejwsvYkUUhqCR2NSxo+1j6mEA6B2SXLcNQJNZhkq9/kPCKxHB3KTwkOfx+/WI7s/yVYyOhrM5pw
+ WtGiyabwZBse0BV22/jedN3zXzCXTo3lof+JdX/1Ft/P8nilChxUxcGk+ZhpIQieTxB3qkV5vGI
+ 0NVlzoESY56BZ8VWvgu8BxZcIE5X13jxkN38OsQrefaUMGrK/l+foJR5/a2ZXqgwUvGZEUwD8S4
+ LwQ9niHHnnpaQb+Vo89+aNgUXqw==
+X-Received: by 2002:a17:906:3c42:b0:b9b:51ac:cc1f with SMTP id
+ a640c23a62f3a-b9b51acd1cemr542762866b.19.1774882287233; Mon, 30 Mar 2026
+ 07:51:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAOCHtYhr50ywU_ar6qFPYrwJeUbjE+GQC_OYO_W4Pc5A9iJ5-w@mail.gmail.com>
- <DHAEYEEVEBW7.304SKN4GDBP4B@ti.com>
- <CAOCHtYgan-p8PiuwKCPmDY=xaKvnGc+F1OZXgyDHFGg4F9NJ1Q@mail.gmail.com>
- <DHCAJ6L5XC77.9F2NK2OOEAT5@ti.com> <DHD3N5DPHPVI.159WWX3H4U3Q3@ti.com>
- <acaTPyGbaUQj7hk3@kehys.lan>
- <CAOCHtYidPpJMZeDj0KkLkuh6YYOFVAe80NMWWu5wbmV2ou+=UQ@mail.gmail.com>
- <acbXV--BvxNuZxEa@kehys.lan> <aceOvTK4JGQvET11@kehys.lan>
- <CAOCHtYhN42myMkq9zTUM2ETMP6oBA4mBAzPsYcOqVRG=ZskgfQ@mail.gmail.com>
- <acld1cniWiqp9dxB@kehys.lan>
-In-Reply-To: <acld1cniWiqp9dxB@kehys.lan>
-From: Robert Nelson <robertcnelson@gmail.com>
-Date: Mon, 30 Mar 2026 09:41:11 -0500
-X-Gm-Features: AQROBzAisk5nMsyYLSqnNJobaDu5pxPPqPBP4SIM5gRCOWS9odDgkbXBMUrYol8
-Message-ID: <CAOCHtYhvK6PZCUPNRM+xhfg-L+AaCVu=1pgDDcc8irJeG-hJmA@mail.gmail.com>
-Subject: Re: [PATCH 2/3] k3-am62-pocketbeagle2: add initial board support
-To: =?UTF-8?B?TWFya28gTcOka2Vsw6Q=?= <marko.makela@iki.fi>
-Cc: Randolph Sapp <rs@ti.com>, Erik Welsh <Erik.Welsh@octavosystems.com>, 
- Anshul Dalal <anshuld@ti.com>, bb@ti.com, nm@ti.com, trini@konsulko.com,
- afd@ti.com, u-boot@lists.denx.de
+References: <20260313-pinctrl-mtk-fix-mt8189-v1-0-607dd37fde37@baylibre.com>
+ <20260313-pinctrl-mtk-fix-mt8189-v1-3-607dd37fde37@baylibre.com>
+In-Reply-To: <20260313-pinctrl-mtk-fix-mt8189-v1-3-607dd37fde37@baylibre.com>
+From: Julien Stephan <jstephan@baylibre.com>
+Date: Mon, 30 Mar 2026 16:51:20 +0200
+X-Gm-Features: AQROBzApDShQOr6zp6y1dWmCMXr_DephGfY4eoShb5Ikmv3H8PgAhUp2F3sOHWc
+Message-ID: <CAEHHSvbnYRXEgO3SZpgFO6njwfbEx-ocSeB-izotqVyQBBx2dw@mail.gmail.com>
+Subject: Re: [PATCH 3/4] pinctrl: mediatek: print bias info along with pinmux
+To: David Lechner <dlechner@baylibre.com>
+Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,62 +122,207 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the magic numbers i got from Bryan at ti..
-
-> Here are the git revisions that I used of the above directories:
+Le ven. 13 mars 2026 =C3=A0 22:56, David Lechner <dlechner@baylibre.com> a =
+=C3=A9crit :
 >
-> u-boot: your ef03e35488377a32cdd4f76d1a03ef7f60c798ef
-> trusted-firmware-a: 8dae0862c502e08568a61a1050091fa9357f1240 (Mar 23)
-> optee_os: 1c0c7c06563e9be0ebc55b47cdb71422b02906a6 (Mar 23)
-> ti-linux-firmware: 12.00.00.07 (Mar 20)
-
-I'm just on tagged releases, will bump later..
-
+> Add functionality to be able to print pin bias settings along with the
+> pinmux setting.
 >
-> For podman run, I am bind-mounting the source directory tree using the
-> :O (overlay) option. So, even though I appear to run "in-source" build,
-> the original source directories outside the container will remain
-> unchanged. The files tiboot3.bin, tispl.bin, and u-boot.img are
-> generated by running the following commands inside the container:
+> This can be useful to debug why pins might not be working correctly.
 >
-> make -j$(nproc) -C trusted-firmware-a CROSS_COMPILE=aarch64-linux-gnu- \
-> ARCH=aarch64 PLAT=k3 SPD=opteed TARGET_BOARD=lite
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
+> ---
+>  drivers/pinctrl/mediatek/pinctrl-mtk-common.c | 96 +++++++++++++++++++++=
++++++-
+>  drivers/pinctrl/mediatek/pinctrl-mtk-common.h |  4 ++
+>  2 files changed, 98 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/pinctrl/mediatek/pinctrl-mtk-common.c b/drivers/pinc=
+trl/mediatek/pinctrl-mtk-common.c
+> index 1028b8a93f5..ef4acc946a8 100644
+> --- a/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
+> +++ b/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
+> @@ -237,9 +237,39 @@ static int mtk_get_pin_io_type(struct udevice *dev, =
+int pin,
+>         io_type->bias_set =3D priv->soc->io_type[io_n].bias_set;
+>         io_type->drive_set =3D priv->soc->io_type[io_n].drive_set;
+>         io_type->input_enable =3D priv->soc->io_type[io_n].input_enable;
+> +       io_type->get_pinconf =3D priv->soc->io_type[io_n].get_pinconf;
+>
+>         return 0;
+>  }
+> +
+> +static int mtk_pinconf_get(struct udevice *dev, u32 pin, char *buf, size=
+_t size)
+> +{
+> +       struct mtk_io_type_desc io_type;
+> +       int err, pos =3D 0;
+> +
+> +       if (!mtk_get_pin_io_type(dev, pin, &io_type)) {
+> +               pos +=3D snprintf(buf + pos, size - pos, " (%s)", io_type=
+.name);
 
-TFA: add: `K3_USART=0x6 BL32_BASE=0x80080000 PRELOADED_BL33_BASE=0x82000000`
+why +=3D ? pos is initialized to 0.  Same why buf +pos? and  size - pos?
 
->
-> make -j$(nproc) -C optee_os CROSS_COMPILE=arm-linux-gnueabihf- \
-> CROSS_COMPILE64=aarch64-linux-gnu- CFG_ARM64_core=y CFG_WITH_SOFTWARE_PRNG=y \
-> PLATFORM=k3-am62x
+> +               if (pos >=3D size)
+> +                       return pos;
+> +
+> +               if (io_type.get_pinconf) {
+> +                       err =3D io_type.get_pinconf(dev, pin, buf + pos, =
+size - pos);
+> +                       if (err < 0)
+> +                               return err;
+> +
+> +                       pos +=3D err;
+> +                       if (pos >=3D size)
+> +                               return pos;
 
-optee add: `CFG_CONSOLE_UART=0x6 CFG_TZDRAM_START=0x80080000 `
-CFG_WITH_SOFTWARE_PRNG can be removed
+Can't this be removed?
 
+> +               }
+> +       }
+> +
+> +       return pos;
+> +}
+> +#else
+> +static int mtk_pinconf_get(struct udevice *dev, u32 pin, char *buf, size=
+_t size)
+> +{
+> +       return 0;
+> +}
+>  #endif
 >
-> cd u-boot
-> make am62_pocketbeagle2_r5_defconfig &&
-> make -j$(nproc) CROSS_COMPILE=arm-linux-gnueabihf- \
-> BINMAN_INDIRS=$(pwd)/../ti-linux-firmware &&
+>  static int mtk_get_groups_count(struct udevice *dev)
+> @@ -270,12 +300,22 @@ static int mtk_get_pins_count(struct udevice *dev)
+>  static int mtk_get_pin_muxing(struct udevice *dev, unsigned int selector=
+,
+>                               char *buf, int size)
+>  {
+> -       int val, err;
+> +       int val, err, pos;
+> +
+>         err =3D mtk_hw_get_value(dev, selector, PINCTRL_PIN_REG_MODE, &va=
+l);
+>         if (err)
+>                 return err;
 >
-> make am62_pocketbeagle2_a53_defconfig &&
-> make -j$(nproc) CROSS_COMPILE=aarch64-linux-gnu- \
-> BINMAN_INDIRS=$(pwd)/../ti-linux-firmware \
-> BL31=$(pwd)/../trusted-firmware-a/build/k3/lite/release/bl31.bin \
-> TEE=$(pwd)/../optee_os/out/arm-plat-k3/core/tee-raw.bin
->
-> Based on reviewing your build script, I revised the above by adding
-> TFA_EXTRA_ARGS=K3_USART_0x6 to trusted-firmware-a and
-> CFG_CONSOLE_UART=0x6 to optee_os, but they made no difference.
-> Furthermore, I replaced tee-raw.bin with tee-pager_v2.bin: no change.
->
-> What am I doing wrong here?
->
-> With best regards,
->
->         Marko
+> -       snprintf(buf, size, "Aux Func.%d", val);
+> +       pos =3D snprintf(buf, size, "Aux Func.%d", val);
+> +       if (pos >=3D size)
+> +               return 0;
+> +
+> +       if (CONFIG_IS_ENABLED(PINCONF)) {
+
+You can drop this if, since you already define an empty
+mtk_pinconf_get() if PINCONF is not enabled
 
 
+> +               err =3D mtk_pinconf_get(dev, selector, buf + pos, size - =
+pos);
+> +               if (err < 0)
+> +                       return err;
+> +       }
+> +
+>         return 0;
+>  }
+>
+> @@ -670,6 +710,58 @@ static int mtk_pinconf_group_set(struct udevice *dev=
+,
+>
+>         return 0;
+>  }
+> +
+> +int mtk_pinconf_get_pu_pd(struct udevice *dev, u32 pin, char *buf, size_=
+t size)
+> +{
+> +       int err, pu, pd;
+> +
+> +       err =3D mtk_hw_get_value(dev, pin, PINCTRL_PIN_REG_PU, &pu);
+> +       if (err)
+> +               return err;
+> +
+> +       err =3D mtk_hw_get_value(dev, pin, PINCTRL_PIN_REG_PD, &pd);
+> +       if (err)
+> +               return err;
+> +
+> +       return snprintf(buf, size, " PU:%d PD:%d", pu, pd);
+> +}
+> +
+> +int mtk_pinconf_get_pupd_r1_r0(struct udevice *dev, u32 pin, char *buf, =
+size_t size)
+> +{
+> +       int err, r0, r1, pupd;
+> +
+> +       err =3D mtk_hw_get_value(dev, pin, PINCTRL_PIN_REG_PUPD, &pupd);
+> +       if (err)
+> +               return err;
+> +
+> +       err =3D mtk_hw_get_value(dev, pin, PINCTRL_PIN_REG_R1, &r1);
+> +       if (err)
+> +               return err;
+> +
+> +       err =3D mtk_hw_get_value(dev, pin, PINCTRL_PIN_REG_R0, &r0);
+> +       if (err)
+> +               return err;
+> +
+> +       return snprintf(buf, size, " PUPD:%d R1:%d R0:%d", pupd, r1, r0);
+> +}
+> +
+> +int mtk_pinconf_get_pu_pd_rsel(struct udevice *dev, u32 pin, char *buf, =
+size_t size)
+> +{
+> +       int pos, err, rsel;
+> +
+> +       pos =3D mtk_pinconf_get_pu_pd(dev, pin, buf, size);
+> +       if (pos < 0)
+> +               return pos;
+> +
+> +       if (pos >=3D size)
+> +               return pos;
 
--- 
-Robert Nelson
-https://rcn-ee.com/
+nit: Can we merge this with previous if() ?
+Or use intermediate err value as you do in  mtk_pinconf_get() ?
+
+> +
+> +       err =3D mtk_hw_get_value(dev, pin, PINCTRL_PIN_REG_RSEL, &rsel);
+> +       if (err)
+> +               return err;
+> +
+> +       return pos + snprintf(buf + pos, size - pos, " RSEL:%d", rsel);
+> +}
+>  #endif
+>
+>  static int mtk_pinctrl_pinmux_property_set(struct udevice *dev, u32 pinm=
+ux_group)
+> diff --git a/drivers/pinctrl/mediatek/pinctrl-mtk-common.h b/drivers/pinc=
+trl/mediatek/pinctrl-mtk-common.h
+> index 1215fb7094b..bd17964090a 100644
+> --- a/drivers/pinctrl/mediatek/pinctrl-mtk-common.h
+> +++ b/drivers/pinctrl/mediatek/pinctrl-mtk-common.h
+> @@ -204,6 +204,7 @@ struct mtk_io_type_desc {
+>                         bool pullup, u32 val);
+>         int (*drive_set)(struct udevice *dev, u32 pin, u32 arg);
+>         int (*input_enable)(struct udevice *dev, u32 pin, u32 arg);
+> +       int (*get_pinconf)(struct udevice *dev, u32 pin, char *buf, size_=
+t size);
+>  #endif
+>  };
+>
+> @@ -263,6 +264,9 @@ int mtk_pinconf_bias_set_v1(struct udevice *dev, u32 =
+pin, bool disable,
+>  int mtk_pinconf_input_enable_v1(struct udevice *dev, u32 pin, u32 arg);
+>  int mtk_pinconf_drive_set_v0(struct udevice *dev, u32 pin, u32 arg);
+>  int mtk_pinconf_drive_set_v1(struct udevice *dev, u32 pin, u32 arg);
+> +int mtk_pinconf_get_pu_pd(struct udevice *dev, u32 pin, char *buf, size_=
+t size);
+> +int mtk_pinconf_get_pupd_r1_r0(struct udevice *dev, u32 pin, char *buf, =
+size_t size);
+> +int mtk_pinconf_get_pu_pd_rsel(struct udevice *dev, u32 pin, char *buf, =
+size_t size);
+>
+>  #endif
+>
+>
+> --
+> 2.43.0
+>
