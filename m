@@ -4,71 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E5AEFF60F1
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 09:19:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46DDCFF60EF
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 10:01:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D218683F0A;
-	Tue, 31 Mar 2026 11:19:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
+	by phobos.denx.de (Postfix) with ESMTP id 3654B84090;
+	Tue, 31 Mar 2026 12:00:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="xqSDza3d";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="kuejoSJn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AF5B83F5B; Tue, 31 Mar 2026 11:19:50 +0200 (CEST)
-Received: from mx3.securetransport.de (mx3.securetransport.de
- [IPv6:2a01:4f8:c0c:92be::1])
+ id 12FCA840AA; Tue, 31 Mar 2026 12:00:57 +0200 (CEST)
+Received: from PAUP264CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170110002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FB3583E7A
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 11:19:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=dh-electronics.com
+ by phobos.denx.de (Postfix) with ESMTPS id B9A9783DBF
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 12:00:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=softathome.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1774948777;
- bh=uzPvl0jseOjbvh+nEwMgcuzRvtc2sgZEjiq+MaUzZao=;
- h=From:To:CC:Subject:Date:References:In-Reply-To:From;
- b=xqSDza3djEEJqXEZMSpUu6B9G9yXFKjTcp4On8XzxJy8S7F3o5E5NVyokrUohVN1e
- uE2nSVH9vFldQIOTdvhezAr2Q6F2hpNn0CnLzwydJapfpeLLg8RZSULj3PYbral35V
- Btw9EwEx8hyixVHZI/Xl4iFkU1UL42ejSaSucDA+oaFfQso4hD/pFc0b7V+2dmWUtm
- 8R2lxfuODJU3N9qXXw+sbymIp0wnRVIxl4EK71dgYeY9TWQfE1ZzyxoiN4DVAGmdsj
- d0T/CsQwkgqP7RSeTgw7oxr/pYq2agmpOuGMf6XlZbNAAfZVg29vP+uMVNO8Iq1QVO
- 7oxIjWvUQaSPQ==
-X-secureTransport-forwarded: yes
-From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Complaints-To: abuse@cubewerk.de
-To: Marek Vasut <marex@nabladev.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan
- <peng.fan@nxp.com>, Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini
- <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
-Subject: RE: [PATCH] board: dhelectronics: imx: Use second Ethernet MAC also
- from fuse
-Thread-Topic: [PATCH] board: dhelectronics: imx: Use second Ethernet MAC also
- from fuse
-Thread-Index: AQHcuFTCAYeM+Dh5A0K4haKIts4CsrW3q5OAgAHGg1CAACS3gIACOHIAgABacoCAACH7kIAABaOAgABQ+/CABlp8AIAFayOQ
-Date: Tue, 31 Mar 2026 09:19:35 +0000
-Message-ID: <61267e12e816481bb7192bb0a5a7b752@dh-electronics.com>
-References: <20260320102918.4011-1-cniedermaier@dh-electronics.com>
- <382f338c-020f-482d-80b8-5a39ad724843@nabladev.com>
- <b443e161b5db4abab8d8889135a345fa@dh-electronics.com>
- <941708e9-a2e6-4f8d-a15d-d1da8a91ae91@nabladev.com>
- <2eebac26eff54f9da7e2d01dbca71569@dh-electronics.com>
- <a40a11f9-f3f5-4eee-ab6e-c2597808c471@nabladev.com>
- <a7ebfe912f084176b79c54a2e9e3d8e3@dh-electronics.com>
- <2dca42bf-a247-4190-9439-14e14f65aec3@nabladev.com>
- <3a8724ffe4fa44808ac8a278e4a702f7@dh-electronics.com>
- <03fd5ca1-6581-4c50-8d50-2cfae6d98683@nabladev.com>
-In-Reply-To: <03fd5ca1-6581-4c50-8d50-2cfae6d98683@nabladev.com>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=philippe.reynes@softathome.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=WI51bgvWz+7JQXb/oMU7olezsp9wugAdM8Gzrve8206a7WR0ZiRw4vO8c218p1k7VweaVV0l3ugGyQJKobFF0FpXJqqA37iHVCdEcuoQXX+5Ta8bCAtDvTaFr0Q2No4R6aHjxzjRBGp+f0Zk+9jJ17HBT4SY129+TDUMw467gPj02v6rcQmqhqRT6NciaJO6rudewFFWesCVNGKLtYLeRkAU6BGRict9ExJ92t1qdWEZGk9H4t3yi9Koe2jjDNdJjcD1f3y1GjSjiQ+R7epbncGLylFOkZa1PtzsyFAot6ryd8tzd721Bzwqm3j94aXQxWBA8jhUWdJNr81F7CiiJQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ZTZWzDGwfK65LxDwOFXdUMbbyHDIvcnuXHYKPVjn/e0=;
+ b=ecJ40bo/zCMEN3Vi7NUbZqK9/WhMp4nVmkOQjalXAPQtfafzGKU+STG58rd7SZUuExHpGM7UsApRpLw7ALSTvMcVZBBrWJt5ekLx+XGcWD0xwfEuH4SXULtIfyy9t1O5/vcaZhBaMjEiN6x9wqbG43Ah4L6mmNlfpNlQLZcxeEYbDtcElz14vqTQ9TCOHVYeMOs5c3ptyUKXHr9UyXxuMclcKM3VX+ssQnoEUlk7vF5KX3ps2g12H5bFODyrjmHLlzx7cKvwJNZTym//5s1ogHfEVhlLXIUEtu31xAvpDeJI+n6M6uXEGYQ8j+VhG9fSrPxR/m3VofZTDsjY071d8A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 149.6.166.170) smtp.rcpttodomain=canonical.com smtp.mailfrom=softathome.com;
+ dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ZTZWzDGwfK65LxDwOFXdUMbbyHDIvcnuXHYKPVjn/e0=;
+ b=kuejoSJnPpiJp37sggQ1nxXh59Suy+r+0L4MgBof/NwPecSVg1TPAKilsiz5M2SKXmef+I+j/hi8OWY6sWkiQTvnKLmLGo0ra3kWSgGNFmV0wmeEF+rSUsS+h+X58kEQqtZrzsxlJZczPF3u7pV2dC7YFpeRfNYU5xCEdgTHes/LPO80el2G6C3/UO7Lm0q0eiYvqhIp5Hc5jT3sv1KfkSMkH9nRT+ovckbUUF9D1+oD9PQzqxBDulwfiiBTtl92TNGcgsRuRLaZJSnIgLa70cCLP2IfkjDG35xNvY8uqMfvCX1Hoq9ASfQo6b66NqmXmuoD8v+MKO4oo6noXC3zsA==
+Received: from PR3P192CA0029.EURP192.PROD.OUTLOOK.COM (2603:10a6:102:56::34)
+ by PATP264MB6790.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:533::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.15; Tue, 31 Mar
+ 2026 10:00:52 +0000
+Received: from PA3PEPF000089B8.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:56:cafe::d5) by PR3P192CA0029.outlook.office365.com
+ (2603:10a6:102:56::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.28 via Frontend Transport; Tue,
+ 31 Mar 2026 10:00:52 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
+ smtp.mailfrom=softathome.com; dkim=none (message not signed)
+ header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
+Received-SPF: Pass (protection.outlook.com: domain of softathome.com
+ designates 149.6.166.170 as permitted sender)
+ receiver=protection.outlook.com; client-ip=149.6.166.170;
+ helo=proxy.softathome.com; pr=C
+Received: from proxy.softathome.com (149.6.166.170) by
+ PA3PEPF000089B8.mail.protection.outlook.com (10.167.242.20) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.21
+ via Frontend Transport; Tue, 31 Mar 2026 10:00:52 +0000
+Received: from sah1lpt726.home (unknown [192.168.72.39])
+ by proxy.softathome.com (Postfix) with ESMTPSA id 850C420389;
+ Tue, 31 Mar 2026 12:00:52 +0200 (CEST)
+From: Philippe Reynes <philippe.reynes@softathome.com>
+To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
+ trini@konsulko.com, simon.glass@canonical.com
+Cc: u-boot@lists.denx.de,
+	Philippe Reynes <philippe.reynes@softathome.com>
+Subject: [PATCH v3 02/15] ecdsa: initial support of ecdsa using mbedtls
+Date: Tue, 31 Mar 2026 12:00:34 +0200
+Message-ID: <20260331100047.34618-3-philippe.reynes@softathome.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260331100047.34618-1-philippe.reynes@softathome.com>
+References: <20260331100047.34618-1-philippe.reynes@softathome.com>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA3PEPF000089B8:EE_|PATP264MB6790:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: 4d325948-975d-4bcc-16ee-08de8f0c64d6
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|36860700016|376014|18002099003|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info: qzvs8/gNk3u9oM3lTSisF5n3BHGJU/Jv7Nt8HgQ16KGvyVdGf/jNJaX6xzQbARa0rYpoh02Q1m2FXk+yOwTEL+rpDGMFrQw3pC0nJQCP8dGdh7pbdOoLOXAheoDIywqMnAE82p3gTbnLMMYrxHfdkd5v6HxVA5yw3zktQ5zDAPaLggKJjEox6cU8kcwk9DPvooPnCApS5sqe4nF79GyWbmFeYbHvsHniYnO5V2K1Iq3IDhNb0K1ge46OSqVHXiOZCb3aJ9D5snYKrSm8VkAgpRkCHIXP3k2DuIluic6ZzTqa0IR5+rnD50figq2tQHyo94dOSb52eXIFg6B2b/SmDOFPmtaBLLZ7lxYqzfRdTZk3EegKmMrjWYAUQxKtDyTqx6ZKnx1kVLZhWmc10oCZH1SBS05jQ7tGxq+HjYeZT+0eN1NmJFsD0QilDWs9vSACWbtV9Pv60Od7mcJSW0yNLNkRM0OkfE2x4Rzsb32bYcMa8U7Vfrxx/1R7aLGIMrxjDb00MA0wmJe0tgXN455AGS30X1164PeQdNv9XK9xJBtBlx7Cxfrjt5W6k4c3QI0XkmHiP1lLVSKHGv/2wV6BUlucBxZua7dBc+pltRLvjnHfLlQ70LxfXARt6VVKVXiZSo/YR9shvEVy17ErUym9dEDdNPFk9XrNjGiYjasuHDQl80ULHmSgDc8zIhTmiqnsMpeoMlKS/mhlg1Sf08SRiv82DQpFhkBARptC+Zpo3EQ1f0r+CfjWd912/bVlUqgswrZbxnWv7wLFpA1Pn5lGDQ==
+X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(18002099003)(22082099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: Vqod9rMG/6+NaOxgR9V8Lj7ZAtV6R7ErI+Be0pzq8Jh45O8pUmCpf1HhHNVUIwnPgZtAI8dTuyOLneuYhlVqhh3y3KmxLJdmAbDdKdEEOhOdDL8tHZ2J6O9By8iiIxONJqX2F0tZQDTgWuVgFDaPa8or+v+iyG57a0G+R8axWYh4FnOydKa4TL/193RK6sfDl4GwmUde8LmTwql7TrweI1mgMXU2o9npv9XTI8jyJtMndDmJW66Uvlu5rG1MURSOKK/T+UlVB/ydqRwZMSr3oM31SYuvY3jkj7VJ7DKOlU7NKIzpXLCoK25zbInYO3e/mtc/tyoD2aIaaC5egz48kDLgDZ6M5jy+zPp8UtR/k0W9D1eqSnIC3lJqAon/V4k6+3HZTKzdZiTrg42ruzRkEyYlH7o4R1GVo3V50LoWOl5w3icOTA5Qjg0NsoP+irHa
+X-OriginatorOrg: softathome.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2026 10:00:52.6839 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4d325948-975d-4bcc-16ee-08de8f0c64d6
+X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
+ Helo=[proxy.softathome.com]
+X-MS-Exchange-CrossTenant-AuthSource: PA3PEPF000089B8.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PATP264MB6790
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,76 +122,208 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RnJvbTogTWFyZWsgVmFzdXQgPG1hcmV4QG5hYmxhZGV2LmNvbT4NClNlbnQ6IFNhdHVyZGF5LCBN
-YXJjaCAyOCwgMjAyNiAxMjoxMiBBTQ0KPiBPbiAzLzI3LzI2IDExOjAyIFBNLCBDaHJpc3RvcGgg
-TmllZGVybWFpZXIgd3JvdGU6DQo+PiBGcm9tOiBNYXJlayBWYXN1dCA8bWFyZXhAbmFibGFkZXYu
-Y29tPg0KPj4gU2VudDogTW9uZGF5LCBNYXJjaCAyMywgMjAyNiA2OjIxIFBNDQo+Pj4gT24gMy8y
-My8yNiA1OjQ5IFBNLCBDaHJpc3RvcGggTmllZGVybWFpZXIgd3JvdGU6DQo+Pj4NCj4+PiBbLi4u
-XQ0KPj4+DQo+Pj4+PiBBcyBmb3IgdGhlIHJlc3QsIGl0IHJlYWxseSBib2lscyBkb3duIHRvIHRo
-ZSBvcmRlcmluZyBvZiBmYWxsYmFja3MsIGl0DQo+Pj4+PiBpcyBlaXRoZXI6DQo+Pj4+Pg0KPj4+
-Pj4gQSkNCj4+Pj4+IGZ1c2UxDQo+Pj4+PiBlZXByb20xDQo+Pj4+PiBmdXNlMCsxDQo+Pj4+PiBl
-ZXByb20wKzENCj4+Pj4+DQo+Pj4+PiBvcg0KPj4+Pj4NCj4+Pj4+IEIpDQo+Pj4+PiBmdXNlMQ0K
-Pj4+Pj4gZnVzZTArMQ0KPj4+Pj4gZWVwcm9tMQ0KPj4+Pj4gZWVwcm9tMCsxDQo+Pj4+Pg0KPj4+
-Pj4gVGhlIGZvbGxvd2luZyBvcmRlcmluZywgd2hpY2ggaXMgdGhlIG9yZGVyaW5nIGludHJvZHVj
-ZWQgYnkgdGhpcyBwYXRjaCwNCj4+Pj4+IGlzIGNvbmZ1c2luZzoNCj4+Pj4+DQo+Pj4+PiBmdXNl
-MQ0KPj4+Pj4gZWVwcm9tMQ0KPj4+Pj4gZWVwcm9tMCsxDQo+Pj4+PiBmdXNlMCsxDQo+Pj4+Pg0K
-Pj4+Pj4gU28gcGxlYXNlIHBpY2sgZWl0aGVyIEEpIG9yIEIpIGFib3ZlLiBJIGRvIG5vdCBzZWUg
-YW55IHBhcnRpY3VsYXINCj4+Pj4+IGFkdmFudGFnZSBvZiBlaXRoZXIgb2YgdGhlIG90aGVyLCBl
-eGNlcHQgbWF5YmUgQikgaW1wcm92ZXMgYm9vdCB0aW1lIGluDQo+Pj4+PiBjYXNlIGJvdGggZnVz
-ZSBibG9ja3MgYXJlIGJsb3duLCBiZWNhdXNlIGl0IGF2b2lkcyB0aGUgRUVQUk9NIEkyQyBhY2Nl
-c3MuDQo+Pj4+DQo+Pj4+IFRoZSBwcmV2ZW50aW9uIG9mIEkyQyBhY2Nlc3MgaXMgb25seSBhIG9u
-ZSB0aW1lIGVmZmVjdCwgYmVjYXVzZSB0aGVuIHRoZQ0KPj4+PiBNQUMgYWRkcmVzc2VzIHdpbGwg
-cHJvdmlkZWQgYnkgdGhlIGVudmlyb25tZW50Lg0KPj4+DQo+Pj4gV2hpY2ggaW5jcmVhc2VzIHRo
-ZSBzeXN0ZW0gYm9vdCB0aW1lLCB3aGljaCBpcyB1bmRlc2lyZWQuDQo+Pg0KPj4gSWYgYSBjdXN0
-b21lciBzZXF1ZW50aWFsbHkgZnVzZSBvbmx5IHRoZSBmaXJzdCBNQUMgYWRkcmVzcyBmcm9tIGEg
-TUFDIGFkZHJlc3MNCj4+IHBvb2wuIFRoZW4gdGhlIHNlY29uZCBNQUMgYWRkcmVzcyBvZiB0aGUg
-U29NIGlzIHRoZSBzYW1lIE1BQyBhZGRyZXNzIGFzIHRoZSBNQUMNCj4+IGFkZHJlc3MgZnJvbSB0
-aGUgbmV4dCBTb00ncyBmaXJzdCBNQUMgYWRkcmVzcy4gVGhhdCBpcyB2ZXJ5IGJhZC4gV2l0aCB0
-aGUgQSkNCj4+IGl0IGNhbiBiZSBhdm9pZGVkLCBiZWNhdXNlIHRoZSBzZWNvbmQgTUFDIGFkZHJl
-c3MgdGhlbiBpcyB0YWtlbiBmcm9tIHRoZSBFRVBST00uDQo+IA0KPiBUaGlzIGVkZ2UgY2FzZSBj
-YW4gYmUgZml4ZWQgb24gZmlyc3QgYm9vdCBpbiBhIGJvb3Qgc2NyaXB0LiBSZWFkIG91dCB0aGUN
-Cj4gZnVzZSB1c2luZyAic2V0ZXhwciB2YXIgKmFkZHIiLCBkZXRlY3Qgd2hldGhlciB0aGUgZnVz
-ZSBpcyBlbXB0eSB1c2luZw0KPiAiaWYgdGVzdCAuLi4iLCBhbmQgaWYgaXQgZW1wdHksIHRoZW4g
-cG9wdWxhdGUgaXRzIGNvbnRlbnQgd2l0aCBFRVBST00NCj4gY29udGVudC4gVGhpcyBzYXZlcyB5
-b3Ugb25lIGV4dHJhIEkyQyBvcGVyYXRpb24gb24gZXZlcnkgYm9vdCBhZnRlcndhcmQuDQoNCldp
-dGggdGhlIHJpZ2h0IG9yZGVyIGFsbCB0eXBpY2FsIHNjZW5hcmlvcyBjYW4gYmUgY292ZXJlZCBh
-bmQgYWxzbyB0aGUNCiJlZGdlIGNhc2UiIGlzIGF2b2lkZWQuDQoNCj4+IElmIEkgaGFkIHRvIGNo
-b29zZSBiZXR3ZWVuIHJlZHVjaW5nIHRoZSBib290IHRpbWUgb25jZSBhbmQgcHJldmVudGluZyBw
-b3RlbnRpYWwNCj4+IGR1cGxpY2F0ZSBNQUMgYWRkcmVzc2VzLCBJIHdvdWxkIHNheSB0aGF0IHBy
-ZXZlbnRpbmcgcG90ZW50aWFsIGR1cGxpY2F0ZSBNQUMNCj4+IGFkZHJlc3NlcyBpcyB0aGUgYmV0
-dGVyIG9wdGlvbi4gRnVydGhlcm1vcmUsIHRoZSBpc3N1ZSBvZiBkdXBsaWNhdGUgTUFDIGFkZHJl
-c3Nlcw0KPj4gaW4gdGhlIHN5c3RlbSBpcyBub3QgYSBoeXBvdGhldGljYWwgc2NlbmFyaW8sIGl0
-IGhhcyBhbHJlYWR5IG9jY3VycmVkIGluIHByYWN0aWNlLg0KPj4NCj4+Pj4gSWYgSSByZW1vdmUg
-dGhlIGVlcHJvbTArMSwgYmVjYXVzZSBpdCB3YXMgZm9yIHByb3RvdHlwZSBjb25maWd1cmF0aW9u
-cywNCj4+Pj4gbXkgcHJlZmVycmVkIG9yZGVyIHdvdWxkIGJlOg0KPj4+Pg0KPj4+PiBmdXNlMQ0K
-Pj4+PiBlZXByb20xDQo+Pj4+IGZ1c2UwKzENCj4+PiBlZXByb20wIGNhbiBub3QgYmUgcmVtb3Zl
-ZCwgdGhhdCBicmVha3MgYmFja3dhcmQgY29tcGF0aWJpbGl0eS4gQW5kIHRoZQ0KPj4+IG9yZGVy
-aW5nIG9mIGZ1c2UtZWVwcm9tLWZ1c2UgaXMgY29uZnVzaW5nIGFuZCBoYXMgdGhlIGJvb3QgdGlt
-ZSBpbmNyZWFzZQ0KPj4+IGRvd25zaWRlIG9mIEEpLg0KPj4NCj4+IEZvciB3aGljaCBTb00gc2hv
-dWxkIGJhY2t3YXJkIGNvbXBhdGliaWxpdHkgYmUgbWFpbnRhaW5lZCBoZXJlLiBUaGVyZSBpcw0K
-Pj4gbm8gU29NIGF0IHRoZSBjdXN0b21lcidzIHNpdGUgd2hlcmUgaXQgaXMgcmVxdWlyZWQuIEZv
-ciByZXYuMjAwIHRoZSBFRVBST00NCj4+IElEIHBhZ2UgaXMgdXNlZCwgZm9yIHJldi4xMDAgb25s
-eSBzb21lIGludGVybmFsIFNvTSBwcm90b3R5cGVzIHdpdGggdHdvDQo+PiBFdGhlcm5ldCBpbnRl
-cmZhY2VzIGhhZCBvbmx5IHRoZSBmaXJzdCBFRVBST00gcG9wdWxhdGVkLiBJdCdzIG5vdCB3b3J0
-aA0KPj4ga2VlcGluZyB0aGF0IGNvZGUuDQo+IA0KPiBTbyB5ZXMsIGVlcHJvbTAgY2FuIG5vdCBi
-ZSByZW1vdmVkLCBiZWNhdXNlIGl0IGFsc28gY29udGFpbnMgdGhlIFdMUC4NCg0KV2lsbCBkbyB0
-aGlzIGluIFYyLg0KDQo+Pj4gSSB3b3VsZCBzYXkgQikgaXMgdGhlIHdheSB0byBnbywgaXQgc2hv
-dWxkIGFsc28gY292ZXIgeW91ciByZXF1aXJlbWVudHMsDQo+Pj4ga2VlcHMgdGhlIGJvb3QgdGlt
-ZSBsb3cgaWYgYm90aCBmdXNlIGJhbmtzIGFyZSBmdXNlZCAod2hpY2ggY2FuIGJlIGZpeGVkDQo+
-Pj4gZXZlbiBvbiBleGlzdGluZyBoYXJkd2FyZSwgc2ltcGx5IHJlYWQgb3V0IGVlcHJvbSBjb250
-ZW50IGFuZCBmdXNlIGl0DQo+Pj4gaW50byBmdXNlIGJhbmsgMSksIGFuZCBpdCByZXRhaW5zIHRo
-ZSBwcmlvcml0eSBvcmRlcmluZyAoZW52LCBmdXNlLA0KPj4+IGVlcHJvbSkgd2l0aG91dCBtaXhp
-bmcgaXQgdXAuDQo+Pg0KPj4gVGhlIGNhc2UgdGhhdCBvbmx5IHRoZSBmaXJzdCBNQUMgYWRkcmVz
-cyBpcyBmdXNlZCBhbmQgbm90IHRoZSBzZWNvbmQgb25lIGlzDQo+PiBhIHNwZWNpYWwgY2FzZSwg
-YnV0IGlmIHRoaXMgaGFwcGVucywgd2l0aCB0aGUgb3JkZXIgQSkgYWJvdmUgeW91IGNhbiBwcmV2
-ZW50DQo+PiBkdXBsaWNhdGUgTUFDIGFkZHJlc3NlcyBmcm9tIGFwcGVhcmluZyBpbiB0aGUgc3lz
-dGVtLiBJbiBhZGRpdGlvbiwgaWYgeW91IHdhbnQNCj4+IHRvIGZpeCBpdCwgaXQncyBkYW5nZXJv
-dXMgdG8gZnVzZSB0aGUgc2Vjb25kIE1BQyBhZGRyZXNzIGF0IHRoZSBjdXN0b21lcidzDQo+PiBs
-b2NhdGlvbiwgYmVjYXVzZSBpZiBzb21ldGhpbmcgZ29lcyB3cm9uZyBkdXJpbmcgdGhlIGZ1c2lu
-ZywgdGhlIGRldmljZSBtdXN0DQo+PiBiZSByZXBsYWNlZCBvbi1zaXRlLiBUaGlzIGNhbiBhbHNv
-IGJlIGF2b2lkZWQgd2l0aCBvcmRlciBBKS4NCj4gSWYgdGhpcyBpcyBhIHNwZWNpYWwgY2FzZSwg
-dGhlbiBwbGVhc2UgY29udmVydCBpdCBpbnRvIGEgY29tbW9uIGNhc2UsIHNvDQo+IHRoZSBnZW5l
-cmljIGNvZGUgdXBzdHJlYW0gY2FuIGJlIGtlcHQgdGhhdCwgZ2VuZXJpYy4NCj4gDQo+IElmIHRo
-aXMgc3BlY2lhbCBjYXNlIGNhbiBub3QgYmUgY29udmVydGVkIHRvIGNvbW1vbiBjYXNlLCB0aGVu
-IGFkZCBsb2NhbA0KPiBwYXRjaCB0byBoYW5kbGUgdGhhdCBzcGVjaWZpYyBkZXZpY2UuDQoNCkkn
-bGwgdHJ5IHRvIGltcGxlbWVudCB0aGF0IGluIFYyLg0KDQoNClJlZ2FyZHMNCkNocmlzdG9waA0K
+Adds an initial support of ecdsa verify using mbedtls.
+
+Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+---
+v2:
+- rename sw_ecdsa.c to ecdsa.c
+v3:
+- rename sw_ecdsa_verify to ecdsa_hash_verify
+- stop on first group found
+- check signature len
+- use debug instead of printf
+- check function returns
+- fix memleaks in ecdsa_hash_verify
+
+ include/crypto/internal/ecdsa.h |  14 ++++
+ lib/mbedtls/Makefile            |   3 +
+ lib/mbedtls/ecdsa.c             | 141 ++++++++++++++++++++++++++++++++
+ 3 files changed, 158 insertions(+)
+ create mode 100644 include/crypto/internal/ecdsa.h
+ create mode 100644 lib/mbedtls/ecdsa.c
+
+diff --git a/include/crypto/internal/ecdsa.h b/include/crypto/internal/ecdsa.h
+new file mode 100644
+index 00000000000..d2edc006cc2
+--- /dev/null
++++ b/include/crypto/internal/ecdsa.h
+@@ -0,0 +1,14 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2026, Philippe Reynes <philippe.reynes@softathome.com>
++ */
++#ifndef __ECDSA_HELPER
++#define __ECDSA_HELPER
++
++struct ecdsa_public_key;
++
++int ecdsa_hash_verify(const struct ecdsa_public_key *pubkey,
++		      const void *hash, size_t hash_len,
++		      const void *signature, size_t sig_len);
++
++#endif
+diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
+index 5433e17cc64..6db06092cee 100644
+--- a/lib/mbedtls/Makefile
++++ b/lib/mbedtls/Makefile
+@@ -11,6 +11,9 @@ obj-$(CONFIG_$(PHASE_)SHA1_MBEDTLS) += sha1.o
+ obj-$(CONFIG_$(PHASE_)SHA256_MBEDTLS) += sha256.o
+ obj-$(CONFIG_$(PHASE_)SHA512_MBEDTLS) += sha512.o
+ 
++# shim layer for ecdsa
++obj-$(CONFIG_$(PHASE_)ECDSA_MBEDTLS) += ecdsa.o
++
+ # x509 libraries
+ obj-$(CONFIG_$(PHASE_)ASYMMETRIC_PUBLIC_KEY_MBEDTLS) += \
+ 	public_key.o
+diff --git a/lib/mbedtls/ecdsa.c b/lib/mbedtls/ecdsa.c
+new file mode 100644
+index 00000000000..c2ba5c3d72b
+--- /dev/null
++++ b/lib/mbedtls/ecdsa.c
+@@ -0,0 +1,141 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2026 Philippe Reynes <philippe.reynes@softathome.com>
++ */
++
++#include <crypto/ecdsa-uclass.h>
++#include "mbedtls_options.h" /* required to access private fields */
++#include <mbedtls/ecdsa.h>
++#include <mbedtls/ecp.h>
++
++static mbedtls_ecp_group_id ecdsa_search_group_id(const char *curve_name)
++{
++	mbedtls_ecp_group_id grp_id = MBEDTLS_ECP_DP_NONE;
++	const mbedtls_ecp_curve_info *info;
++
++	if (!curve_name)
++		goto out;
++
++	if (!strcmp(curve_name, "prime256v1"))
++		grp_id = MBEDTLS_ECP_DP_SECP256R1;
++
++	info = mbedtls_ecp_curve_list();
++	while (info && info->name) {
++		if (!strcmp(curve_name, info->name)) {
++			grp_id = info->grp_id;
++			break;
++		}
++		info++;
++	}
++
++ out:
++	return grp_id;
++}
++
++int ecdsa_hash_verify(const struct ecdsa_public_key *pubkey,
++		      const void *hash, size_t hash_len,
++		      const void *signature, size_t sig_len)
++{
++	mbedtls_ecp_group_id grp_id;
++	mbedtls_ecp_group grp;
++	const unsigned char *buf = hash;
++	size_t blen = hash_len;
++	mbedtls_ecp_point Q;
++	mbedtls_mpi r, s;
++	int key_len;
++	int err = -1;
++
++	if (!(pubkey->size_bits % 8))
++		key_len = pubkey->size_bits / 8;
++	else
++		key_len = pubkey->size_bits / 8 + 1;
++
++	/* check the signature len */
++	if (sig_len != 2 * key_len) {
++		debug("%s: sig len should be twice the key len (sig len = %ld, key len = %d)\n",
++		      __func__, sig_len, key_len);
++		err = -EINVAL;
++		goto out;
++	}
++
++	/* search the group */
++	grp_id = ecdsa_search_group_id(pubkey->curve_name);
++	if (grp_id == MBEDTLS_ECP_DP_NONE) {
++		debug("%s: curve name %s not found\n",
++		      __func__, pubkey->curve_name);
++		err = -EINVAL;
++		goto out;
++	}
++
++	/* init and load the group */
++	mbedtls_ecp_group_init(&grp);
++	err = mbedtls_ecp_group_load(&grp, grp_id);
++	if (err) {
++		err = -EINVAL;
++		goto out1;
++	}
++
++	/* prepare the pubkey */
++	mbedtls_ecp_point_init(&Q);
++	err = mbedtls_mpi_read_binary(&Q.X, pubkey->x, key_len);
++	if (err) {
++		debug("%s: could not read value x of the public key (err = %d)\n",
++		      __func__, err);
++		err = -EINVAL;
++		goto out2;
++	}
++	err = mbedtls_mpi_read_binary(&Q.Y, pubkey->y, key_len);
++	if (err) {
++		debug("%s: could not read value y of the public key (err = %d)\n",
++		      __func__, err);
++		err = -EINVAL;
++		goto out2;
++	}
++	mbedtls_mpi_lset(&Q.Z, 1);
++
++	/* check if the pubkey is valid */
++	err = mbedtls_ecp_check_pubkey(&grp, &Q);
++	if (err < 0) {
++		debug("%s: public key is invalid (err = %d)\n", __func__, err);
++		err = -EKEYREJECTED;
++		goto out2;
++	}
++
++	/* compute r */
++	mbedtls_mpi_init(&r);
++	err = mbedtls_mpi_read_binary(&r, signature, key_len);
++	if (err) {
++		debug("%s: could not read value r of the signature (err = %d)\n",
++		      __func__, err);
++		err = -EINVAL;
++		goto out3;
++	}
++
++	/* compute s */
++	mbedtls_mpi_init(&s);
++	err = mbedtls_mpi_read_binary(&s, (unsigned char *)signature + key_len,
++				      key_len);
++	if (err) {
++		debug("%s: could not read value s of the signature (err = %d)\n",
++		      __func__, err);
++		err = -EINVAL;
++		goto out4;
++	}
++
++	/* check the signature */
++	err = mbedtls_ecdsa_verify(&grp, buf, blen, &Q, &r, &s);
++	if (err)
++		err = -EINVAL;
++
++ out4:
++	mbedtls_mpi_free(&s);
++ out3:
++	mbedtls_mpi_free(&r);
++ out2:
++	mbedtls_ecp_point_free(&Q);
++ out1:
++	mbedtls_ecp_group_free(&grp);
++ out:
++
++	return err;
++}
+-- 
+2.43.0
+
