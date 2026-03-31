@@ -4,90 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93A8CFF60D9
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 08:02:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBDB9FF60D9
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 08:06:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CD01840BE;
-	Tue, 31 Mar 2026 10:01:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E4E1184020;
+	Tue, 31 Mar 2026 10:06:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bhKuy+hx";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="vGCfbgvp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC83F8408D; Tue, 31 Mar 2026 10:01:42 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 470288408D; Tue, 31 Mar 2026 10:06:55 +0200 (CEST)
+Received: from PAUP264CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170110002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65E5D84099
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 10:01:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1DC1184020
+ for <u-boot+nodisclaimer@lists.denx.de>; Tue, 31 Mar 2026 10:06:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=softathome.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-482f454be5bso60502745e9.0
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 01:01:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=paul.henrys_ext@softathome.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=RgJKeg8IkE5B1K+7KghWy52LYXiBYGmmJcfoUsLFTyhSzJXfcPUZgmxtsavbNt11sABwkeYo3YRYFNxe4n0fyB3uMD7BbRkBLOVc6wmdkVzahkWDNVpN5J4pWLOP0i6kDvph2GT3B7h7XImb7UoE2G6IHtS5nndIZdmYnsOR49RXdWNHndKFgoj5OiR6JxIzny43yxtJPlKckUQG0B6UZhhmYTehNyGZ8calaUvZuABnkbW0ZIJHn4EY6YeF8vJwE1bMaGveGJnNXEOyzr2ATSnUbkFsBgr9ZD0uOY3qH80bgLQNBddg+OGClIQvXJVtc6jOpS9mQYERQnxb0Fw/vw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MbSg09GIgTsGWF+cMXt7lEUpxp/ifoNm07w6RJKI/f4=;
+ b=NZjoorE9Z/6DRAq8hOAwPXrIVUj0sAgkzSlmTmeV08ii0Y5tz0YpIKAjJVCKryA3zGwI+YB3r/QRD0w+CkD6WsqYb8mzTc0QCCnyhibp08LK4gvt4ZUbhSbiB2um6iMmhTIaU5Y5a8oewyK9qRbd4Kdt4G0ahg8BpBC72eYLWdYYQJ/1TvUdK7WAJEPlXS0GnfEs3Cf3X8+2zu0JXiLQVXUmhGUebGbOuiKr8qVYapLhPnuk9WQNltrSHfXhqjMI3J0kpNXCcM5NXuAKRMTnUn+ghZlWe+ez29fea7fCrLUbM3F5qCEF2VNFVixmDukliGqkeUqRnf1bu3uNJFAMbw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 149.6.166.170) smtp.rcpttodomain=chromium.org smtp.mailfrom=softathome.com;
+ dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
+ (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1774944098; x=1775548898; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7oUxZQYLSGSVNDMCuRR2atuqUV38+bRliJUF+/W8O4A=;
- b=bhKuy+hxaBSTyuqov7bCBVC9r9Oc651d9PafAJXseKrnP7mq6FP5Ey97sK/xa2bCCa
- cIe8G77JHVlkI/hukMKbCEQ1mfKVbA4VAyhM6XC1FlUjl48+GGbXaaVM/a8g5vabSpCi
- RA3dHfVZKcVQEw0zS7ChrAMeWZltZ2u+32lai6ZANx3KNXAtwLlBL+g2XlNJqzIeknWQ
- DJx2d7ogePHXaN7IsxDQSSIL5htsFV7KFMttPSnQbhCV+WvlqvZ9EccbvVCj9CiA9Q7X
- NYLIbilk5w0gMaaeIEQAjW5OxXIesaNBdNhKaLGAYLWk7JDL0V/q0EpNQvmjasm7A4sp
- kxUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774944098; x=1775548898;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=7oUxZQYLSGSVNDMCuRR2atuqUV38+bRliJUF+/W8O4A=;
- b=dbYObwud+Ms2j1mWeR8SABviQKxLz7ePZ6ACgZf2diAvXh7WS3mt67Qr+bmkArtIgM
- fBZmF3La/ee6NTaPVrofNU3pqG/0gyB0C4rezOGQ8vcZOstcHUZnj9PLHVeek2zhAPqs
- LADvgrOV6PmGXexXlVnvKAm2VKVcsGI3GOlFvX5MOZtLUW4sm2QTxLPQYnUuGRALweY6
- J/sG3u0aZNW1hcce2nbKZpHPySCPrANG9Q+y6vXX2Mb3nUGDgE+GEHxps4As4fscHJ+T
- AfHRnAeKXZx1deOLgQyU10JjIE+tEksvhRO/TwJdg4jJ+pwgJQonKOSHgGlQ/zLxgZdc
- 2wSQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUhPl9ACGf0zem8nZPXREBxMZFYh3McEQYgbAukDOFHbulf5wV6bj/QLZvi7tc7n9tXts50Jmo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxeBtAFjNjZuCUdleoIaAhH+IKYOR6Muj6RMWjQY09bej3Z/vez
- 3P5r+PNdxSDZCeCtP+koB1xK+JSqEAkHqaloHRds8/zGjmWWccGQaLCvLGJHCTPT2DQ=
-X-Gm-Gg: ATEYQzz01gWPchZNJf5MQMcTC+mBMcywGqauXgq06QIW1btMekCnf9vqh33RuiWV0Vc
- zMn/S/S8DufrV0HdaHg5nHhnlJctsWs41sbwxSWV5XJ+uceK1F5DNQjazRsjfu0P/blRQUiooEO
- w+3vw0sb0ZzJ5te4PWlBmTstFEueZIVRePrv5Wt8x5oMS0Z553zl1a9ACBsVOHrTeWGoK6DKglK
- 59/xqloiwAEHGhOU1WNedyRBK9wqpJ1BU9N1mxQf9CYlnQmI6C5LxEbDaCidyu2iiWo2weARJJy
- nXvjMr3i2VfSw+UrPFvJ4oJxkx450ZBkaRmB1qYEfgwuIuMhgmpmhlV0vNzLhsPy5Sb6fx/igZ/
- T7HuFHhP9xuzTly3G36zNhJgXgWeFz2cldl+FUh8s2IeXZ5JcsbfVFIKG/HrQ65V9yh7S2xyl3+
- IB43V3U2NZ23fU9kScOHBpI9Hcbjghv3QIUSLEjPF7jPwcOaHRomr69QO47QeDAqDJAUWH2jqen
- V0V2g7C8n3OYAH9Ede/iXMUN6YZyI52TH7hXA/+TfcoXypdPaZSTrwgtFF8NzZsAamSmNNUnlrU
- KUnJkBJJvQrx5pjCBoyU3R5ua7ZG1IacwgQ9l8w5DnCKjaG7HVjuYSFpHDDOUTXDlo90gD1ixIq
- EvmseFkw8AoCcmXOOufVoUJRj1q7hjybsJTpwx0/t9mpJHHNV+U8PO3jum1hnP5/8d2lXSeg0aV
- k/6Lkw98LKJ2mjmsl2z9aOYT0yBKi/zLHNhkwmtzCTuNAxaOA+F/0ecqk+U71z
-X-Received: by 2002:a05:600c:a408:b0:47e:e59c:67c5 with SMTP id
- 5b1f17b1804b1-488783820d1mr31232785e9.8.1774944098362; 
- Tue, 31 Mar 2026 01:01:38 -0700 (PDT)
-Received: from hera ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4887c9250afsm10087065e9.36.2026.03.31.01.01.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Mar 2026 01:01:37 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: marek.vasut+renesas@mailbox.org,
-	trini@konsulko.com
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
-	u-boot@lists.denx.de
-Subject: [PATCH v2 4/4] common: Allow relocations on the top of the last bank
-Date: Tue, 31 Mar 2026 11:01:14 +0300
-Message-ID: <20260331080117.2370092-5-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260331080117.2370092-1-ilias.apalodimas@linaro.org>
-References: <20260331080117.2370092-1-ilias.apalodimas@linaro.org>
+ d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MbSg09GIgTsGWF+cMXt7lEUpxp/ifoNm07w6RJKI/f4=;
+ b=vGCfbgvpjauyrE8b44MTlAuMh/neI4O1IyGCwbQQ+K1iNAliL4f7lQgHS/Wg63DiqhFUG/h0xt7+U2lLzzzcw+zxTYdNmdVTRZIfWwRu73sp7t3pljR4ScFxyUFtWvPd242FpZmX+NAGiQld2SMmdX6HUMPYI4G8FJwdLJl5fTzkQfvWqCRyiR8SZbA93zil2E/BzB6MX7vN0hPrFysNC4Fb8NR8Ajzsr8v0D6lFSZGPh2xO3eD3blFW6DGt176b3xb40QEWhdXB7VRmNEGylxxCe0hPUC9W+K2aZYxnAVy+s6eSNP5JD7brb0h+YgCzPfm4ekYa0ESB4pXwD2mXbw==
+Received: from PR1P264CA0113.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:2cd::14)
+ by PARP264MB4633.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:42e::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.15; Tue, 31 Mar
+ 2026 08:06:47 +0000
+Received: from PA1PEPF000CC3FB.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:2cd:cafe::24) by PR1P264CA0113.outlook.office365.com
+ (2603:10a6:102:2cd::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.28 via Frontend Transport; Tue,
+ 31 Mar 2026 08:06:41 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
+ smtp.mailfrom=softathome.com; dkim=none (message not signed)
+ header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
+Received-SPF: Pass (protection.outlook.com: domain of softathome.com
+ designates 149.6.166.170 as permitted sender)
+ receiver=protection.outlook.com; client-ip=149.6.166.170;
+ helo=proxy.softathome.com; pr=C
+Received: from proxy.softathome.com (149.6.166.170) by
+ PA1PEPF000CC3FB.mail.protection.outlook.com (10.167.242.6) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.21
+ via Frontend Transport; Tue, 31 Mar 2026 08:06:47 +0000
+Received: from sah2lpt245.. (unknown [192.168.72.99])
+ by proxy.softathome.com (Postfix) with ESMTPSA id 250E0201BB;
+ Tue, 31 Mar 2026 10:06:47 +0200 (CEST)
+From: Paul HENRYS <paul.henrys_ext@softathome.com>
+To: u-boot+nodisclaimer@lists.denx.de
+Cc: sjg+nodisclaimer@chromium.org, Paul HENRYS <paul.henrys_ext@softathome.com>
+Subject: [PATCH v2 0/1] tools: u_boot_pylib: ensure all Python modules are
+ installed
+Date: Tue, 31 Mar 2026 10:06:35 +0200
+Message-ID: <20260331080636.380507-1-paul.henrys_ext@softathome.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA1PEPF000CC3FB:EE_|PARP264MB4633:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: 45790cbf-363a-4421-5efb-08de8efc74c2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|36860700016|376014|13003099007|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: ta180o2O7til/Aci68/MzYkdeICU+LFaQu6X2vgAh8YZ0GRLygAJ4w0rsqgrsAIgSFSAqdxoQE4hz/8C/XE5nGcMf0tK8KcQLfdluK8bf3QM5nZC1YmwPx+uhzcNWE71nINLTCiWpWjnRE+7QbIhiKBvnZXmuojDe5GNa4Or7QrL32RjXURrZxqSS42Va7RSQWtjT37yCoIuj/A9A4uEy5ZqW6r28yrddo9TD2HA7RyPglUILTix0x/Udnac1qo6gk2rJCoUM6M7sbl+0yYuofW5CvXBIWsAFGxxmxOxg0WeuQqjnL20np3sOyjeRiNeIyg8a2BZ5Y2qs4trLd0am1XllY5FMGyn0VpIyTM3UnTClNlb/ff7nLRqeMb2X/typ2fXWEZ6UktYGi3fCJ2XWHTltG6vuP4JVNarD3nzirVdClbK/5ZQXkaCeKFVNy0yKsNCYcQ+Lyc4D1y6XHxyzqehrM4GLWoFYjbYJZ9a1Zd9EBc37+E/uPaHHNSI8s+odrEeKtsCb3AJh2FCCSMXcsYJ+zvI85B9rHeMI5k/t/zuq4BzBTNERcPk9hxq0o3AnBSSPXYullgG04HuPd0ZriDNKgv95d/yQd3F0LSRsme8uN2lEED7IgUR9WxEYQw3+7IeizMhr1KMVfI3XE11x7TicvKSWwlRnNpg1wu5DPSsrfaF6IqpwlbGDq0Ia2EYigO+2GbomursyuSpYGqmX+wqXgKk6frr1LXLQH8O/W0=
+X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(13003099007)(18002099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 4t8ykmgfIYClXIgi0v18rz9F/SSseLDReYpkHNg2d9J/skSbK8SNNh2fcVlnJx/Lbfb/HuB2qB2ZYLJWGoSDrdUapEvC/9WxGzLhqOdpinTohORSBMPx1iMRx3dGgBrV4rI9KMllkkCkSGhNkHGab/MSnRaJlA5n7frtsJh8jcO/8VW3fsyIoYGs47oKT7hjKYSTH1GSsHkSLqop5HNFcj33zCJ8fR4ExcSHSSwERfyvEjzTJJwVLU8kY3meLuhYXcUGNFAIS/mnpTjEcXUVKvpXyITmxCkjrno/APcGXpGGagn9872gb2yxG6nJ6GUD+MBBqRlC56ok2i8q3TdrKNPLnY51Uhks2H5oPkhf3qpN+e11gdtIFS1UJ6/u1viP4njIrjuvNFwuM/iysBbOREcIMfvGnUISJ5oDdpSSEDkwSaozLFaz67C0mf7mHKhV
+X-OriginatorOrg: softathome.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2026 08:06:47.4469 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 45790cbf-363a-4421-5efb-08de8efc74c2
+X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
+ Helo=[proxy.softathome.com]
+X-MS-Exchange-CrossTenant-AuthSource: PA1PEPF000CC3FB.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PARP264MB4633
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,78 +119,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Right now we only relocate u-boot to the top of the first
-memory bank unless the board specific code overwrites it.
-This is problematic when loading big binaries as it
-fragments the contiguous memory space for no apparent reason.
+Add setuptools package configuration to pyproject.toml so that
+u_boot_pylib is installed as a proper Python package without changing
+the existing flat directory structure and making sure all modules are
+installed.
 
-It's worth noting that there are cases where we must not relocate
-above the 4GiB boundary (64bit hardware with 32bit only capable
-DMA). E.g This will break platforms, if the ethernet
-controller cannot DMA above 4 GiB, and once U-Boot does
-get relocated above 4 GiB, the packet buffer which is built
-into the U-Boot binary is also relocated above 4 GiB.
+Step to reproduce the issue without the patch:
+git clone https://source.denx.de/u-boot/u-boot.git
+cd u-boot
+python3 -m venv myenv
+source myenv/bin/activate
+pip3 install tools/u_boot_pylib/
+...
+error: Multiple top-level modules discovered in a flat-layout: ['command', 'terminal', 'test_util', 'tout', 'cros_subprocess', 'tools', 'gitutil'].
 
-Add a Kconfig option and allow the common code to relocate U-Boot
-to the top of the last discovered bank.
+Paul HENRYS:
+  tools: u_boot_pylib: ensure all Python modules are installed
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- Kconfig          |  7 +++++++
- common/board_f.c | 15 +++++++++++++++
- 2 files changed, 22 insertions(+)
+ tools/u_boot_pylib/pyproject.toml | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/Kconfig b/Kconfig
-index ce25ea24a60f..3ebdee1b2794 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -474,6 +474,13 @@ config SKIP_RELOCATE
- 	  Skips relocation of U-Boot allowing for systems that have extremely
- 	  limited RAM to run U-Boot.
- 
-+config RELOCATE_LAST_BANK
-+	bool "Relocate to the topmost memory address"
-+	help
-+	  When U-Boot relocates, it chooses the end of the first memory bank.
-+	  Enable this if you have multiple banks and want U-Boot to relocate
-+	  to the topmost memory address
-+
- endif # EXPERT
- 
- config PHYS_64BIT
-diff --git a/common/board_f.c b/common/board_f.c
-index df2b0dc899bf..4270f368e653 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -309,6 +309,8 @@ __weak int mach_cpu_init(void)
- /* Get the top of usable RAM */
- __weak phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- {
-+	int ret;
-+
- #if defined(CFG_SYS_SDRAM_BASE) && CFG_SYS_SDRAM_BASE > 0
- 	/*
- 	 * Detect whether we have so much RAM that it goes past the end of our
-@@ -321,6 +323,19 @@ __weak phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- 		 */
- 		return 0;
- #endif
-+	if (IS_ENABLED(CONFIG_RELOCATE_LAST_BANK)) {
-+		phys_addr_t old_top = gd->ram_top;
-+
-+		ret = fdtdec_setup_mem_ram_top();
-+		if (ret)
-+			debug("failed to relocate to ram top");
-+		ret = fdtdec_setup_ram_size();
-+		if (ret) {
-+			debug("failed to calculate RAM size");
-+			gd->ram_top = old_top;
-+		}
-+	}
-+
- 	return gd->ram_top;
- }
- 
 -- 
-2.53.0
+2.43.0
 
