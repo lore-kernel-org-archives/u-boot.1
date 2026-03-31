@@ -4,107 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3EFDFF60D9
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 08:07:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B503DFF60ED
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 08:50:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 650248408D;
-	Tue, 31 Mar 2026 10:06:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
+	by phobos.denx.de (Postfix) with ESMTP id 1F0CE83F0A;
+	Tue, 31 Mar 2026 10:50:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="iZEHVdQb";
+	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="ON8elqgv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9492884020; Tue, 31 Mar 2026 10:06:56 +0200 (CEST)
-Received: from PAUP264CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170110002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9BEFC83F5B; Tue, 31 Mar 2026 10:50:09 +0200 (CEST)
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
+ [IPv6:2607:f8b0:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A45584011
- for <u-boot+nodisclaimer@lists.denx.de>; Tue, 31 Mar 2026 10:06:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=softathome.com
+ by phobos.denx.de (Postfix) with ESMTPS id 6262683E7A
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 10:50:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.henrys_ext@softathome.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XW9jEwldsJ39+BSEsLAQXiy1W8g5rtfRWaVud6RdaV/wBDnQ/WmayEU5O/VypD/0teX8iCVo+pLz0HD4ojqCbSAQ7lBlTJRlfBB5ufw1haKHRjTkBboflQAwWY6izJXBHd39XC1Vt59v6H5nOSYnheWSXzLloirH7FJSsZxP5Lt4UkYjxEPf70YbaXlw9Zs6tvojcDuyir7mKYcSndKs7U7wr9P+65vcxBcJRxM1ZG3piiuhgqB3dsZha/1hIv6gnC6wqgusBNAMHYxR03xvPeROuZB1jp9Qjtr+tHx+Cm1N25G1fKaAGKTm+SqqFkHeMp3Rap6S9Gnw7tMET6bQww==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OqfoTbrOEFftoJY3Orc1dbWRv/k4XXsMUCzE8pCzOqM=;
- b=b5O0KkmMiOfZ/nOkW+Hgj+hThfbQ4jd+s0FD07q5xrwVJPipnL1SUOjsqvfeaNb3XAy+SA13NnPA/AtvwOr26u3aMYhR1SUDgXcJ23JKkYFbUFcvUgCy6/cR3RE9+v9DiHC4YLVRE8EXvIn5JsNCbf79Dspsuv2D2m5Ai/tvE32w8l7xGJIVI1CmthybIgnSGDkqIsBLorUxmTeugrR8i9tX7sZBfdaMHvygbUCrHMC663PPWCVfHOkTxvOjufsjSh4nTjSyXNmbQXTD3fnjdIGqu4HIrNzKx9cKwrjoHfclNqmtBIf+pVcyEE/hFvoha7YnPgQmfme55kcoPLuUnQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 149.6.166.170) smtp.rcpttodomain=chromium.org smtp.mailfrom=softathome.com;
- dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
- (message not signed); arc=none (0)
+ dmarc=none (p=none dis=none) header.from=thingy.jp
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-c76b6f9a50eso79074a12.2
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 01:50:05 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774947003; cv=none;
+ d=google.com; s=arc-20240605;
+ b=dYO5w/9o3/HuSPsGL87luwIVa9bwLobaeXjFU+/6sASC17bChYWsnHWitnCwIv+iox
+ AgCkCnIr5OJBHHkJ7Oa5xcsDDZlSSeD4QJi4L97V/e5wJmCcQr+nzzIyTKBqMzHwijuf
+ FWhz8SMOIi/e9kjdUHeJYGl3Ne5W6qlwbfqAWHqS/HBvDQ7s91rLp127TWp5+IImN3x/
+ XybeHOLji4yElZH6yfhaOTzVclLHMj3+3tj8Fpdy0EijVVRRp3i5Pp4wYeNp4WPvI0BO
+ sc7NAx6FITUsa4CSs3afSKRLqGv0v3UHvjUf+6bndX1Ev3mRQXHly7B5JKTL8nA5oEHN
+ CGtQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=6aHK+odiI6LGEHGyxobyVUxV+IHAzcI6HMKvCWb1nJo=;
+ fh=W1x0uTMIvGS5AsTgZqcvIAPG+pCgHeYTwhg5r90LtbM=;
+ b=Vk+Qr4ieITW3sSBdh6XH/wWX6ypHJnXRVnKq9qK0Tmth9PivK0SkouZVfCP5YGPwjq
+ ZwXygSVZ+s9bmaN8TIQsWXGXNxfuO2434wdAj21poQAT38mHwWOfpFxvx9cq//9NkFV2
+ D5V+2OneYlY05CVGuY+TlKaqe97AJ1GVEv795n7ib2Hzazk+hpbT2ZPfy9thZcklYlph
+ gJEwH10XqdLB1cy6k7ro1geE88UpucNQWdLft5uu+UH8M8zeRjJWlyRP6LxHOwO57+Yq
+ 15TO20SNBMBT2eucK092p17ema1Hsjr8KJfg82fS8acabnmbaa5WkzvHObXqPlYkgYZx
+ pCaQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OqfoTbrOEFftoJY3Orc1dbWRv/k4XXsMUCzE8pCzOqM=;
- b=iZEHVdQb2QK3JRk47GEif4whIJTfU0MzQHKJJ8daTrKfXXF89/p7WewmxvdZX3BiC8gIaSlr9NboXneaZH+CJbWr4ZmnWPqiGZIRCeDy1BzxolAndSOcassi335Uwr3OqDVYjhrTU+hzTvPRDk4YEk82WDTtHesD6u2efdM3zmzL4F//w28oIQ8NmPBWSCd3a7/LjS15xDwFl1zIGXGewHIzzRW2O1rnUmSzPaQgGG3//rZYdnn8VQ5vFfS+7KU2kFmC6cnN/bSOL6u5ry5Pyc3nXUNpuaIUFfDiqAU7AyUXsI0LYjvhFH9zFaozYVnFZf6ZstKszBKMYSLVTbvOrQ==
-Received: from MR1P264CA0180.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:58::13)
- by PARP264MB5692.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:4c1::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.20; Tue, 31 Mar
- 2026 08:06:48 +0000
-Received: from MR1PEPF00000D57.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:501:58:cafe::f6) by MR1P264CA0180.outlook.office365.com
- (2603:10a6:501:58::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.28 via Frontend Transport; Tue,
- 31 Mar 2026 08:06:44 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
- smtp.mailfrom=softathome.com; dkim=none (message not signed)
- header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
-Received-SPF: Pass (protection.outlook.com: domain of softathome.com
- designates 149.6.166.170 as permitted sender)
- receiver=protection.outlook.com; client-ip=149.6.166.170;
- helo=proxy.softathome.com; pr=C
-Received: from proxy.softathome.com (149.6.166.170) by
- MR1PEPF00000D57.mail.protection.outlook.com (10.167.241.4) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.21
- via Frontend Transport; Tue, 31 Mar 2026 08:06:47 +0000
-Received: from sah2lpt245.. (unknown [192.168.72.99])
- by proxy.softathome.com (Postfix) with ESMTPSA id 6A62A20389;
- Tue, 31 Mar 2026 10:06:47 +0200 (CEST)
-From: Paul HENRYS <paul.henrys_ext@softathome.com>
-To: u-boot+nodisclaimer@lists.denx.de
-Cc: sjg+nodisclaimer@chromium.org, Paul HENRYS <paul.henrys_ext@softathome.com>
-Subject: [PATCH v2 1/1] tools: u_boot_pylib: ensure all Python modules are
- installed
-Date: Tue, 31 Mar 2026 10:06:36 +0200
-Message-ID: <20260331080636.380507-2-paul.henrys_ext@softathome.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260331080636.380507-1-paul.henrys_ext@softathome.com>
-References: <20260331080636.380507-1-paul.henrys_ext@softathome.com>
+ d=thingy.jp; s=google; t=1774947003; x=1775551803; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6aHK+odiI6LGEHGyxobyVUxV+IHAzcI6HMKvCWb1nJo=;
+ b=ON8elqgvTs/YPi0SKkQAynA7decI43McycOKep0zN5qxuUj9gybcMuIbjS+OUa6URq
+ dzCOd2QtPEfm6fr8Q8Lx/sFNR8sPYhNcaSGKTmsrEp6hKF78HERKt9i10LXl6hZSOl3l
+ v4HfnEnUrUbyTLkeyqCk1QRXTwjtK6tQ2U4oY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774947003; x=1775551803;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6aHK+odiI6LGEHGyxobyVUxV+IHAzcI6HMKvCWb1nJo=;
+ b=C2CoBDGT7uE/bgYgN81VW3a8/fxH6+WDdqyFrVGmFC7cXrsC9JLCDwYr+h2X2UXmak
+ dzURt68QN8n1wEAHnZtxfAjgwDDfFKpTkx3GMIAKe1s0Mwsn7RABchS3/rb1gjqBwHkM
+ olbk05G9rjalT7NTBqqFEl73yCbTz7W9eAMk9BRagZ8Dt8dcvc89S7i19a9QmqTCbdOB
+ xMUc2GMFr+wKd4U0l3w1yRsxjIQnZU6a2gXXsAqfyoEBrPSfO9jOWXul9U8ktuEoIJE2
+ e3xchxPO+ZPtgWY/nVr1t0S+CiapWrPBVHNz4i4gNcP5VeNV2Y/en4Zu0ycKADt8crQg
+ C80w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV5p014VUTq3IdxNRCDVqTexit9GlhxfrR6+TIILLgPPxcbnRTrHrFxtgzKgVNAzKV4LPryDAo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxkgxqhbYsdknG86vFORPqgcGQvayjkApgRw6ZyANQxAZxH72CM
+ xJAu0lZtHWLotTWyzokacVCTgkQlJXJ2DmcZUxO+1lqfx+trv/YiiIVWHay4AxWsFG8mhorFcib
+ 4xcEkOjYwEzz0SHwzmDWwmPorecc/Lutt8T4/DvXrfQ==
+X-Gm-Gg: ATEYQzw1NdCAKRI9VGo4t1g2VDhyeAZ5IZzLNJlIU7145yjDEnk4/9UrRTk+TcZkFcG
+ 3JIKUZAMH8OGiNcGqR5h/p/5ak2M2TLWiAruwAg+eeMZ0kSCnIuF8c1bBd7kiuRa56TNZkxPirw
+ Xavk8BfuxRh5cueDc5a6Mm7gvBMGy/H2SYEq5NuJCaU9ohLOt4uRNUiqPGJpaoA6/YQW+Bhr599
+ 6a0Dgjxv7hLxLlU9VVeVwIMankTWVFQsZ3djNqPBkIcWaeEN/eMgmGURYch9NyL5sbnpnvgkd4z
+ QydWVUVvNvoihbatKbTGARbK0TmRvfbmVWjMUi/z
+X-Received: by 2002:a05:6300:210c:b0:39b:e1e5:a101 with SMTP id
+ adf61e73a8af0-39c87b5fe54mr13856778637.43.1774947003315; Tue, 31 Mar 2026
+ 01:50:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MR1PEPF00000D57:EE_|PARP264MB5692:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 80c4ee45-cab7-4db6-da74-08de8efc74f9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|376014|36860700016|13003099007|18002099003|56012099003|22082099003;
-X-Microsoft-Antispam-Message-Info: IggeEayy2N2AWmD+qv3xmtj1Rxqlc4uCFO+9t17cYhW8+liClxKHaBU68PrF0XX8Z8ffccBemZOrGsyjSw7yo4htn+b0+Ks9O/KnVy7RiSxCLLaZEmv5FoyX2yocvIIG1u6zE5dOvWgQY65iYK94e30UbY5kPQBE3k+tg8uk6xPzYofyFCOfx6A1EKepqZjTNwbNYh3jvt2ti4p8ORq+cpEzS6GK1nJXt+EvrxDry6BI6DiSGIEakycMGjlivB/O8LLjlMX8DtYeWGCWNQS91A2TjgYRpzJv/3DRodbfI0g0uJ1br6ncaSzxh7tqwaTG+JWRiQKxmj5N0EnnCx23RjpckcYVmLMFf9tvTRmTqRk5zn46JaNG6/DTJ54b5lfs8Mo7oAgRS4nmG892aLzTLLAvw7vWpZISMO7GpJahuDxXdgOjWwx9mva/1ZIibc6WjtbwAOWRKQpj8TKFwNM/MlUjJEN/BNuHU1CAbEbxUEFgvO5pOvG5u0ooTYLrk4iaLh812bFWCmHj3yEhlT1C4r5uRAgPwIR6HvEKh/8q3HgcwovXegjY9NDYuuP0KNMCF5GOXHAaWHjHBpDOlGJyYiFitKAR0v8Faw2SodLnfpbcqmBUh18PvBgCkNzImWYUk/ODleXIJx3vTvz68gvpXTP6Fo5uyRYx4UR4h9l3qpUM1Iac7/f3Xg4G4XWla4zOPiGXHw8zkCBI8rcSsFxaSg==
-X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(376014)(36860700016)(13003099007)(18002099003)(56012099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 8368Lq72RtKKD+dO4rKWb8/iBXywl55PJU1UteZfZRYoJN4O51DVhucqoIKwJH56jWhnEN+5sQKw23dMhqtqwdyqzAZAKgjSxz46zQzuwwSgntMFkQaAEkp+zzNfW0QgbZzws5n8s8xSoOYxgs78AcKM2F9AUs2L3hjwasohG9YJwSmJLy4/L055tz06ckVjkEt4R80OIqUAhVVwc8YF50E8B6RS+cQgt/Phd06Q153O0N88e5AB1hgOInANGmciad7FEeQE8pxF6iJuXHxUPISOKvkcKZ4ozVxdVRCDMN+AMvQL09iGb2UB1nftfoXzF3jeJxz0Aj7ugGpCcbteTMjq+q/fdxNStjHyjSyN7I3vvUQ5Kd4/8lw/Mx2nKmHEiSsogIehFAAbs9XJHT60ehsuAlSdGXkBebXGcfF+qBIFdlGQWaCQ9MkJlKzF0lOL
-X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2026 08:06:47.7975 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 80c4ee45-cab7-4db6-da74-08de8efc74f9
-X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
- Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: MR1PEPF00000D57.FRAP264.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PARP264MB5692
+References: <20260330220124.2747127-1-daniel@thingy.jp>
+ <b0e5de29-f7de-4dc1-be15-58a6039326ee@kernel-space.org>
+In-Reply-To: <b0e5de29-f7de-4dc1-be15-58a6039326ee@kernel-space.org>
+From: Daniel Palmer <daniel@thingy.jp>
+Date: Tue, 31 Mar 2026 17:49:51 +0900
+X-Gm-Features: AQROBzD6I-gLJykXs-ld-7xJNBpMd3BzsmzByRbJ1NXnMKaq5upu2mYLlcTVsts
+Message-ID: <CAFr9PX=fVUGNgPnJGgU3sdwnNuNSWTp75Ny4DbAh1AoTpG+11g@mail.gmail.com>
+Subject: Re: [PATCH v2] m68k: Add LTO support
+To: Angelo Dureghello <angelo@kernel-space.org>
+Cc: visitorckw@gmail.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,32 +110,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add setuptools package configuration to pyproject.toml so that
-u_boot_pylib is installed as a proper Python package without changing
-the existing flat directory structure and making sure all modules are
-installed.
+Hi Angelo,
 
-Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
----
- tools/u_boot_pylib/pyproject.toml | 6 ++++++
- 1 file changed, 6 insertions(+)
+On Tue, 31 Mar 2026 at 16:37, Angelo Dureghello <angelo@kernel-space.org> wrote:
+> > -DItype __ashldi3 (DItype u, word_type b)
+> > +__used DItype __ashldi3 (DItype u, word_type b)
+>
+> Why the above __used is needed ? This impacts all the coldfire builds.
+>
 
-diff --git a/tools/u_boot_pylib/pyproject.toml b/tools/u_boot_pylib/pyproject.toml
-index a860d134551..ed04d956b4e 100644
---- a/tools/u_boot_pylib/pyproject.toml
-+++ b/tools/u_boot_pylib/pyproject.toml
-@@ -21,5 +21,11 @@ classifiers = [
- "Homepage" = "https://docs.u-boot.org"
- "Bug Tracker" = "https://source.denx.de/groups/u-boot/-/issues"
- 
-+[tool.setuptools]
-+packages = ["u_boot_pylib"]
-+
-+[tool.setuptools.package-dir]
-+u_boot_pylib = ""
-+
- [tool.setuptools.package-data]
- u_boot_pylib = ["*.rst"]
--- 
-2.43.0
+At least for normal m68k the final link will fail because GCC has
+output references to the libgcc functions but LTO didn't think they
+were needed and discarded them already (example below). So this
+attribute is to tell GCC to keep them so the link completes. On
+coldfire is this giving you code you didn't have before? I guess that
+could be the case if coldfire doesn't need to emulate some things with
+libgcc.
 
+Cheers,
+
+Daniel
+
+
+Build with the "+__used DItype __ashldi3 (DItype u, word_type b)" hunk reverted:
+
+daniel@kinako:~/coding/cleantrees/u-boot$ make
+CROSS_COMPILE=m68k-linux-gnu- -j16
+ UPD     include/generated/timestamp_autogenerated.h
+ UPD     include/config/uboot.release
+ UPD     include/generated/version_autogenerated.h
+ LDS     u-boot.lds
+ CC      arch/m68k/lib/ashldi3.o
+ AR      arch/m68k/lib/lib.a
+ CC      cmd/version.o
+ CC      common/init/board_init.o
+ CC      common/version.o
+ AR      cmd/built-in.a
+ AR      common/init/built-in.a
+ AR      common/built-in.a
+ KSL     keep-syms-lto.c
+ KSLCC   keep-syms-lto.o
+ LTO     u-boot
+/usr/bin/m68k-linux-gnu-ld.bfd: /tmp/cciN6Tis.ltrans0.ltrans.o: in
+function `board_init_f':
+/home/daniel/coding/cleantrees/u-boot/common/board_f.c:213:(.text.board_init_f+0x3fc):
+undefined reference to `__ashldi3'
+/usr/bin/m68k-linux-gnu-ld.bfd:
+/tmp/cciN6Tis.ltrans0.ltrans.o:/home/daniel/coding/cleantrees/u-boot/common/board_f.c:213:(.text.board_init_f+0x404):
+undefined reference to `__ashldi3'
+/usr/bin/m68k-linux-gnu-ld.bfd: /tmp/cciN6Tis.ltrans1.ltrans.o: in
+function `virtio_uclass_child_pre_probe':
+/home/daniel/coding/cleantrees/u-boot/include/virtio.h:463:(.text.virtio_uclass_child_pre_probe+0x114):
+undefined reference to `__ashldi3'
+/usr/bin/m68k-linux-gnu-ld.bfd: /tmp/cciN6Tis.ltrans1.ltrans.o: in
+function `virtio_uclass_child_pre_probe':
+/home/daniel/coding/cleantrees/u-boot/drivers/virtio/virtio-uclass.c:311:(.text.virtio_uclass_child_pre_probe+0x160):
+undefined reference to `__ashldi3'
+/usr/bin/m68k-linux-gnu-ld.bfd:
+/home/daniel/coding/cleantrees/u-boot/drivers/virtio/virtio-uclass.c:321:(.text.virtio_uclass_child_pre_probe+0x1aa):
+undefined reference to `__ashldi3'
+/usr/bin/m68k-linux-gnu-ld.bfd:
+/tmp/cciN6Tis.ltrans1.ltrans.o:/home/daniel/coding/cleantrees/u-boot/drivers/virtio/virtio_blk.c:82:
+more undefined references to `__ashldi3' follow
+collect2: error: ld returned 1 exit status
+make: *** [Makefile:2096: u-boot] Error 1
