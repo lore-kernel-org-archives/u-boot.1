@@ -4,108 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FB7FFF60FF
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 10:03:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34FF01061B39
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 11:50:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21B5284159;
-	Tue, 31 Mar 2026 12:01:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
+	by phobos.denx.de (Postfix) with ESMTP id 5119983DA6;
+	Tue, 31 Mar 2026 13:50:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="FAt/s82y";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UKJzP/oi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6418C83DBF; Tue, 31 Mar 2026 12:01:11 +0200 (CEST)
-Received: from MRZP264CU002.outbound.protection.outlook.com
- (mail-francesouthazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4654283DBF; Tue, 31 Mar 2026 13:50:31 +0200 (CEST)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BAB3840AA
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 12:00:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=softathome.com
+ by phobos.denx.de (Postfix) with ESMTPS id 309EA83A41
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 13:50:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=philippe.reynes@softathome.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ds4v8ez6wVTjj++GoRSphZG59CXdglKwhvGTjS5xVjRAN/2ShFJgjZF8Dc4GtWsOLxaLW67QgdTcPRIdr3mdLR1pAanyERFwaddVY/3+68yDzojeiw+kFa8t7xGJQthYGlq5K/59ooeJS/DvMSibDwBqcdi0qQn+umCf4cHO8SNsVRZwdE6VxF8L81i2doU/zun4eg8yqzlNFdOESy+kjANzbF1Qg1tnQlgViwNFCjxKYXN8bcNzjpSI1/b47hnuIgQg1TFiUIHBQfS/TLd47YURVXIbWGo1X34zHawEd4pFEcp/QXoTuTE+VboErtrtYE/VjeT6iM0wQqmEZz7HDg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=N5f7OqhNUc3IUpW86XSRhfBWnVmY9+GufocW8WPBSjk=;
- b=EZvjKynncVy1sH3xXxNcTBmOkDMzIkSg1wj7HylVKgGEbChTYwvdj+MHnUW4kDSHgnMJWQiUR2s1CxZtYWKZ9k4rB9peFIrlLvpPxEv2LauDByg8W54hE1gKlfEV7gn6fAN4ThRWuoSMxsTPVPSa9e952pOVjFzszdyR4DCA5+NOeEsK7mdS0s2gsJ2AjBEgT3zBd6iQ2sv/ICkkUVhA/mpEGxz8tqU9B9HP2Ouwyq24/YKpoixwLF9SFRwaSRj7ZcXt2TWEPOlx09I72LqTZO0/4RldVKFyS1ucweZbFV467hUMIn0G2nPLE1IDwdlU6cQvF8Zrlx33TlAmn7UcbQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 149.6.166.170) smtp.rcpttodomain=canonical.com smtp.mailfrom=softathome.com;
- dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
- (message not signed); arc=none (0)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-59e5aa4ca41so3809352e87.2
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 04:50:29 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774957828; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Nn3jhdfpUR6/AIBWc6jDIn1ZnHHA3gIz1T2gcd5Uous5KkCDuwHK+tKyKaGzGmNpAk
+ nzndB53K2xRSl4IdgygnDY7Up5aalrGIckblcdJ1MDFrck7BERjAmEaqVkfGsgmN7TNr
+ Xme0a3DL/j0PGjZdXSBi2b0nmAVZGlDpM/YWppvdVFY6pbPyduInjHlXCM36HLR3/YHX
+ LSz7S4Wlv4UpuhojjxGBm8TIveid1LwvY6YSUNMPR7ZkH6bx1pyZrZtxtaYa+BIW8pa4
+ +oBmf9nfm30hhD+OmbATV9d3+Mnux3qTHFlz1s7mYCE9dIu2D7vT6Z1FTMLrCIMjkl9C
+ OVRw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=B/15gBUt/6HHGTv/ZscxGWtOHA3alFFoBR8IAVlX8YI=;
+ fh=KwUyhSwMbuqJnq4eiLKUni0v+aYMSLZPgPUfMf11DU0=;
+ b=Jg1Kn2IFHyVCYSJRdF5s/JAG8LzxassiJxSEMOrhPt20UaLOHThwm8QyAu1SpkqR8b
+ tXljJ37tergCSMdj7MbBb0mw4j35sHMmc51ZZqvhXFhSeqJjRAI6AsKFsYbghKFmN9JR
+ h7kNl0UqXMg82oROC1tMuHOLPb9wkDMLc6PPo7QNeLywI3q1eTGc/ORNTqlyf+ZHjWpy
+ utWrjgw6VLdEOdqUt6ijkxrvjBp9ZdDidcAxWCroms4RIAZ+bkRPYn995meJR48Ds6st
+ jOivNnm9JOtF3ZrvweiHXU/GTrBGFjO02DMKsgn4ewJUIgdJHgpxu+WQpp4T2SK70ffo
+ wljQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=N5f7OqhNUc3IUpW86XSRhfBWnVmY9+GufocW8WPBSjk=;
- b=FAt/s82ya6yZrzP37pZo513a/qOT9OlsQz1Jd4MMtI55a/D12tFT8RO5dHcIKDL6h4qKbMaJ7XaGBUdGVe0S47LiN7Py3WTZLdL3b9QeeXJv1HMX7OwhwX2zV5BENXnfrIUf5S1vZLZl9eWnX//2Ar3F74iCHhsvsFjF52XIqPkd/hHsT9/O8Wpv8DtqZ+f/vp3Ix4xQ1IfjS2RM+OBd3i7fh0wKntseQbEwatE2hddVLd+AVermGNjLIMh95gUo5GBhB5hjs1ZmR4LNJnxW9HL8V04nWtJO94dlH9Y/sRbjQcHUcSdLt9Luv3L8FSrK0KcEbNkuEI9AGvhC6fr9GQ==
-Received: from MR1P264CA0161.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:55::9) by
- MR1P264MB3410.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:26::16) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9769.15; Tue, 31 Mar 2026 10:00:53 +0000
-Received: from MR1PEPF00000D59.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:501:55:cafe::bb) by MR1P264CA0161.outlook.office365.com
- (2603:10a6:501:55::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.29 via Frontend Transport; Tue,
- 31 Mar 2026 10:00:48 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
- smtp.mailfrom=softathome.com; dkim=none (message not signed)
- header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
-Received-SPF: Pass (protection.outlook.com: domain of softathome.com
- designates 149.6.166.170 as permitted sender)
- receiver=protection.outlook.com; client-ip=149.6.166.170;
- helo=proxy.softathome.com; pr=C
-Received: from proxy.softathome.com (149.6.166.170) by
- MR1PEPF00000D59.mail.protection.outlook.com (10.167.241.6) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.21
- via Frontend Transport; Tue, 31 Mar 2026 10:00:53 +0000
-Received: from sah1lpt726.home (unknown [192.168.72.39])
- by proxy.softathome.com (Postfix) with ESMTPSA id 57D052092F;
- Tue, 31 Mar 2026 12:00:53 +0200 (CEST)
-From: Philippe Reynes <philippe.reynes@softathome.com>
-To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
- trini@konsulko.com, simon.glass@canonical.com
-Cc: u-boot@lists.denx.de,
-	Philippe Reynes <philippe.reynes@softathome.com>
-Subject: [PATCH v3 12/15] boot: pre-load: add support of ecdsa
-Date: Tue, 31 Mar 2026 12:00:44 +0200
-Message-ID: <20260331100047.34618-13-philippe.reynes@softathome.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260331100047.34618-1-philippe.reynes@softathome.com>
-References: <20260331100047.34618-1-philippe.reynes@softathome.com>
+ d=gmail.com; s=20251104; t=1774957828; x=1775562628; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=B/15gBUt/6HHGTv/ZscxGWtOHA3alFFoBR8IAVlX8YI=;
+ b=UKJzP/oiZektfLZcTb++Jzu4BE1C/+4o+lFANZ03BMLNoyTO/Inq9Sj1m2zxQpAZB1
+ JycfBfY/TXj070+GR7iGI8ox/12vz5j3f425J98rW0s6F1BOjCkrxBcs2kakLOaqJWXt
+ cjuwS+i4L/buJ+XE7LFCvJ4+W/+3mNDh6ctMgHAzUvqeA/9Pc9dy4jC5NV3/PAMl6QAD
+ lYc725/LBNKFRYfCkfu2b231WsdFScElIJhJ2NQeSY8ICdBLB48f5QRGLtuXgpODXooD
+ td5OrGfCfTqWT2Wa0HsaKavG8qIUAymCVhexJBsE7fhZU8oQuljb1dQ7zW1fay86wGaf
+ Z19g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774957828; x=1775562628;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=B/15gBUt/6HHGTv/ZscxGWtOHA3alFFoBR8IAVlX8YI=;
+ b=LX44TnZkpQUg+ZPDRFFZ0M+RJWADxDqsnnxVR/pstwlHn+CHEP3/r/RJr18eyLSie1
+ QY6VfMHaRPW8lgn9fQxsSkNKnbNDehKNnx+0cOViBtTV6zBKMEfJ4+vOJrInDqX7OYsn
+ bJ+d1RP3mVicmCSTipH9W8Xm9L2XN09eIxUUXMPjU1R65B/NmWLPf5peGRiLidbJTJwh
+ du1JQd6NKsqermOl1mPKGThQkkb8UMJTbxjiTpYrJcZ5E5dZxeh7fXwhTURURnf6qp/w
+ pu6+ZQdbwqZRR49OqHRAV7WZh8ySxM2l5bqzMgcNFc88R3yOR0p5KcX/O4f4dmDvRdAK
+ J2nQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU/kdIwx382mIYl9OlRiAdxtUOKkw688+jh3j+xciV8fmYGaigDp9JPoF7h1iTz6KCqk7HBo9w=@lists.denx.de
+X-Gm-Message-State: AOJu0YwJmGk7wKYy/0skP4ZhzOCr82M/tB89OUuhS9ii6ENXkGO8LInf
+ n/WccXwtjPfRsUsg7KpbD6iCxXhxV7mmSzFdFbXLBdxtWXh8rH7rIKT+5LOo02cWzpP9vmhMVM7
+ AIS4SHwoSzn87WlOQPEXk7mxXTGwDobk=
+X-Gm-Gg: ATEYQzzTM9rhtVddLzLvTvW8QqM5+9x28smyKbal/Ul+rp9daHKr6uypPUzJbhh4ztF
+ xuxcwVGQyPe6ifm61sDCmSWT1CWnnCRzTqRD1XYsYr1D3dQw26HmJzWGBFQruAUqvMPypE5Dtz8
+ i4cUsWYlrP5bu4TN+qijQ01mw1GpKdDBB21CJIT+PXZhAPHfPZetzjoH4BpKVPr44nKN4s/wfx+
+ zWthg3zU05XfJST8m8B4h2WrGYJXa1g/aQqnGDrqr6RUR2EZN8cXQxRxwK5PKgBFR13B4MIhpP3
+ I27sSNFQavWP2VihVZ6YU3jYH1d//u036uP29rxAjSMdCzFSP+8IS3p3elj8R+0RVvjLwds=
+X-Received: by 2002:ac2:4e01:0:b0:5a2:bef4:5dfe with SMTP id
+ 2adb3069b0e04-5a2bef45e38mr614498e87.9.1774957828031; Tue, 31 Mar 2026
+ 04:50:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MR1PEPF00000D59:EE_|MR1P264MB3410:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 4d718cf2-013a-4b51-02e0-08de8f0c6562
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700016|376014|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: GAQ9rdpp5SZbLKruxOjV56Fc0mZC4kr/ag0JpRRIPyTkbVaiiV28ToDzM2CMU+OG2Mc2H81APY3V44NsOpHCGh0SV6d4a0PlICNljYPHyVoHgcZ54/sv8uWf5hH8bEwL0VQi95rxl/GFYdjHqt34anvUSJjR+naqmD9CC+VMDhsFVMUnNO/++aDGRzqWK6S92ujIFp+I+rgDRVDGml1XpJbI+C1OW9H6HoxpabTvVbvWJkrJ081dBu+EYClVvzXlV031QUZWiLPWPPKl37pH8cPMBxNeH4XnskbEbJXQEGscLnDCPBj2cGi16yZ28kKGQ+VS99m1KJAu8LXozsXkYXqpF0ipsAaSDA9Knn8kDubOcMxFhYsBFBjdYIPWmmEJ4beXE//WZ8wiq7HtQJjEv4CT5tXNSFXUYvPp6oWQgTqJsa0wZmh/guVnTD/PFiJSQFSuuaSJ+sldyH2pAXR3EgIqqQ3cYblDz4rE/JmKV+HwjSIY9XolvEo+U5tOGiMf3UZPGK49ajkQf3xcq/FMRi+/lWFEzXbKfOeZbenZM6M1O3ioniLr3iMW6avZEvXpxBqvxkVks8KVxKsfpBAqE5AHdxtYw5/DM1pB2u2R5udBmXxYGGGaRUZ+pVxtt3fxtSzQvvr9q+ODef4uDfO0SyrbwCbuvncHueZVu5KWJlcCqwZhwrT4VwofKF1XIa/QUlf/JJD7SccskrjSm8bj1vZZ8J5KDWpdSCr5Wc3mjiMI6zy7YI+jR7VBowOfCisnanNQeVwaxH4XPHa55lLPBA==
-X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(18002099003)(22082099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: guHFnajIbywg66YazX2xRufMuVEPNrSHoicf17U1gSI1nBiW6eOJrNuhzN1xvkV8MVRDByKmdtIHJx1HnbpSZsGiwSvXuzQfdNMTxE4pmJAwWLCXdowI5gbENx8vweZK4IMotBlZZQMyOQLk72B4jKrI9Gkb2qsHy9gJg5N5vQZ/Uep5ut1a4Jxtp5HFNpCljLgM35LEMaKh/CSZqJige8QOZJtHxmcqOEmq+qrRwJ8WCqPNMyRcaRFRrlDatrqsptKLYKvZMGIZuVV/KqjsbYhk5ZMCOTI334soJQOOGgpDVykZQiDct1Ooyqx0NQ0mwnoAdUG4gGYPCjHBvaG1s9V7Ix6wcaukF/TwQOq1WUJJ+mIny/ckf7BJief7f+CDnkFInqO5mM4yvzZATdqk//ZoQhQ47ot/05GuvRFPkPpo8lPyLMvFH00G/DR8h0SW
-X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2026 10:00:53.5812 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4d718cf2-013a-4b51-02e0-08de8f0c6562
-X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
- Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: MR1PEPF00000D59.FRAP264.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR1P264MB3410
+References: <fcc606350e96e03911f6c67537853de1ad51dc10.camel@initse.com>
+ <861d61d6-3d35-47bf-9cea-21f7cfd13c1a@nabladev.com>
+ <24e183b2fc5419b9ed1685f49a67fb9822b1ad73.camel@initse.com>
+ <a5f735cc-e699-422a-b88d-e5fe33fc8b7b@nabladev.com>
+ <ea2937eabb137e2c5845bc451f7c28a827496eb3.camel@initse.com>
+ <CAOMZO5CsuTw92safK80f0v+0hPkOQvHVEfKZyqWvfdw7ghnxmg@mail.gmail.com>
+In-Reply-To: <CAOMZO5CsuTw92safK80f0v+0hPkOQvHVEfKZyqWvfdw7ghnxmg@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 31 Mar 2026 08:50:15 -0300
+X-Gm-Features: AQROBzADjs6ALJEZTAaX2BoeANYssAe-wY8MwwpJQE69LF6js3vKXQhvqO2lzxo
+Message-ID: <CAOMZO5AqeMmeWLXX3mPKceshw8T=fcFax7Ja=tfm0Qf6Mh_cOg@mail.gmail.com>
+Subject: Re: [REGRESSION] imx8mm_evk: FSPI build broken by 37e50627e
+To: Alexander Koch <akoch@initse.com>, "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,
+ Ye Li <ye.li@nxp.com>
+Cc: "marex@nabladev.com" <marex@nabladev.com>,
+ "tharvey@gateworks.com" <tharvey@gateworks.com>, 
+ U-Boot-Denx <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,98 +123,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Right now, u-boot can only boot image with a
-pre-load header with rsa. We add the support
-of ecdsa.
+Fixing the U-Boot list address.
 
-Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
----
-v3:
-- initial version
-
- boot/image-pre-load.c | 48 +++++++++++++++++++++++++++++++++----------
- 1 file changed, 37 insertions(+), 11 deletions(-)
-
-diff --git a/boot/image-pre-load.c b/boot/image-pre-load.c
-index 2f851ebb28c..73d740c4cf2 100644
---- a/boot/image-pre-load.c
-+++ b/boot/image-pre-load.c
-@@ -70,6 +70,18 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
- 	return 0;
- }
- #else
-+
-+static int is_ecdsa(const void *algo_name)
-+{
-+	struct crypto_algo *crypto = image_get_crypto_algo(algo_name);
-+	int ret = 0;
-+
-+	if (crypto && !strncmp(crypto->name, "ecdsa", strlen("ecdsa")))
-+		return 1;
-+
-+	return ret;
-+}
-+
- /*
-  * This function gathers information about the signature check
-  * that could be done before launching the image.
-@@ -114,11 +126,16 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
- 		goto out;
- 	}
- 
--	padding_name = fdt_getprop(gd_fdt_blob(), node,
--				   IMAGE_PRE_LOAD_PROP_PADDING_NAME, NULL);
--	if (!padding_name) {
--		log_info("INFO: no padding_name provided, so using pkcs-1.5\n");
--		padding_name = "pkcs-1.5";
-+	if (is_ecdsa(algo_name)) {
-+		padding_name = NULL;
-+	} else {
-+		padding_name = fdt_getprop(gd_fdt_blob(), node,
-+					   IMAGE_PRE_LOAD_PROP_PADDING_NAME,
-+					   NULL);
-+		if (!padding_name) {
-+			log_info("INFO: no padding_name provided, so using pkcs-1.5\n");
-+			padding_name = "pkcs-1.5";
-+		}
- 	}
- 
- 	sig_size = fdt_getprop(gd_fdt_blob(), node,
-@@ -129,12 +146,17 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
- 		goto out;
- 	}
- 
--	key = fdt_getprop(gd_fdt_blob(), node,
--			  IMAGE_PRE_LOAD_PROP_PUBLIC_KEY, &key_len);
--	if (!key) {
--		log_err("ERROR: no key for image pre-load sig check\n");
--		ret = -EINVAL;
--		goto out;
-+	if (is_ecdsa(algo_name)) {
-+		key = NULL;
-+		key_len = 0;
-+	} else {
-+		key = fdt_getprop(gd_fdt_blob(), node,
-+				  IMAGE_PRE_LOAD_PROP_PUBLIC_KEY, &key_len);
-+		if (!key) {
-+			log_err("ERROR: no key for image pre-load sig check\n");
-+			ret = -EINVAL;
-+			goto out;
-+		}
- 	}
- 
- 	info->algo_name		= (char *)algo_name;
-@@ -155,6 +177,10 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
- 	info->sig_info.crypto   = image_get_crypto_algo(info->sig_info.name);
- 	info->sig_info.key      = info->key;
- 	info->sig_info.keylen   = info->key_len;
-+	if (is_ecdsa(algo_name)) {
-+		info->sig_info.required_keynode = node;
-+		info->sig_info.fdt_blob = gd_fdt_blob();
-+	}
- 
-  out:
- 	return ret;
--- 
-2.43.0
-
+On Tue, Mar 31, 2026 at 8:47=E2=80=AFAM Fabio Estevam <festevam@gmail.com> =
+wrote:
+>
+> Adding Peng and Ye Li in case they could take a look.
+>
+> On Tue, Mar 31, 2026 at 6:24=E2=80=AFAM Alexander Koch <akoch@initse.com>=
+ wrote:
+> >
+> > >
+> > > Is it possible that binman patched some blob offset (maybe for the DR=
+AM
+> > > blobs) at the wrong offset due to the extra header ?
+> >
+> > I'm afraid it's not that easy. After a good amount of juggling around w=
+ith hex
+> > editors here are my findings:
+> >
+> > First of all, we can ignore the error message regarding 'fspi_header.bi=
+n' for
+> > now, that's definitely a different bug (the first `make` will generate =
+a
+> > 'flash.bin' without the header and the second one will add it in withou=
+t
+> > breaking anything else).
+> >
+> > Now I have compared the layout of 'flash.bin' from the last good commit
+> > (6509e007) to the one from the first bad commit (37e50627) and unfortun=
+ately
+> > they both look structurally identical:
+> >
+> > Good:
+> >  - FSPI header at offset 0x00
+> >    (from 'fspi_header.bin', 448 Bytes)
+> >  - SPL blob =3D SPL+DDR-FW at offset 0x1000
+> >    (from 'spl.bin', 188288 Bytes)
+> >  - FIT blob =3D U-Boot+ATF+DTB at offset 0x58c00
+> >    (from 'u-boot.itb', 729528 Bytes)
+> >
+> > Bad:
+> >  - FSPI header at offset 0x00
+> >    (from 'fspi_header.bin', 448 Bytes)
+> >  - SPL blob =3D SPL+DDR-FW at offset 0x1000
+> >    (from 'u-boot-spl-mkimage.bin', 185216 Bytes)
+> >  - FIT blob =3D U-Boot+ATF+DTB at offset 0x58c00
+> >    (from 'section.fit.fit', 729320 Bytes)
+> >
+> > So it seems binman is still right regarding the top-level structure of =
+the
+> > image.
+> >
+> > As I am not even seeing output from the SPL with the bad build I then h=
+ad a
+> > deeper look at the SPL blobs.
+> >
+> > Both do have the DDR firmware at identical offsets:
+> >
+> >  - 0x1c5c0: lpddr4_pmu_train_1d_imem.bin
+> >  - 0x243b4: lpddr4_pmu_train_1d_dmem.bin
+> >  - 0x24a38: lpddr4_pmu_train_2d_imem.bin
+> >  - 0x2a4f8: lpddr4_pmu_train_2d_dmem.bin
+> >
+> > Scrolling through the binary diff I'd say it's mostly build timestamps =
+and
+> > version strings that make up the difference. The 3072 Bytes that the wo=
+rking SPL
+> > blob is larger are all 0x00 again.
+> >
+> > My last idea was trying to inject the SPL blob from the working build i=
+nto
+> > 'flash.bin' from the broken build, to confirm it really is the SPL blob=
+ itself
+> > that is causing troubles.
+> >
+> > Lo and behold, that patched 'flash.bin' actually did boot and it did no=
+t only
+> > run the injected SPL part but also proper U-Boot as well as the ATF:
+> >
+> >
+> > -----------------------------------------------------------------------=
+-----
+> > U-Boot SPL 2024.07-rc1-00155-gef8cc500d15 (Mar 30 2026 - 19:18:36 +0200=
+)
+> > No pmic
+> > SEC0:  RNG instantiated
+> > WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeo=
+ut)
+> > Trying to boot from NOR
+> > NOTICE:  BL31: v2.6(release):lf-6.1.1-1.0.0-1-g874e9578a
+> > NOTICE:  BL31: Built : 14:40:27, Jul 15 2024
+> >
+> >
+> > U-Boot 2024.07-rc1-00156-gb550ac40df5 (Mar 30 2026 - 19:32:55 +0200)
+> >
+> > CPU:   Freescale i.MX8MMD rev1.0 at 1200 MHz
+> > Reset cause: POR
+> > Model: FSL i.MX8MM EVK board
+> > DRAM:  2 GiB
+> > Core:  78 devices, 22 uclasses, devicetree: separate
+> > WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeo=
+ut)
+> > MMC:   FSL_SDHC: 1, FSL_SDHC: 2
+> > Loading Environment from MMC... MMC: no card present
+> > *** Warning - No block device, using default environment
+> > -----------------------------------------------------------------------=
+-----
+> >
+> > (please ignore the commit hashes, I had to cherry-pick a pylibfdt fix t=
+o make
+> > the build run on my host system)
+> >
+> >
+> > So, any idea what might break the SPL blob itself in 37e50627e?
+> >
+> >
+> > Best regards,
+> >
+> > Alex
