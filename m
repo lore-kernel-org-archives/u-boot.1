@@ -4,56 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 697CDFF60CF
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 07:37:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9F24FF60DC
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 07:53:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 738268352B;
-	Tue, 31 Mar 2026 09:37:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
+	by phobos.denx.de (Postfix) with ESMTP id 2D94183F5B;
+	Tue, 31 Mar 2026 09:53:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="xmV867WW";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WczoaSbB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CE278352B; Tue, 31 Mar 2026 09:37:06 +0200 (CEST)
-Received: from mail.kernel-space.org (unknown
- [IPv6:2a03:4000:b:d08:14a9:1bff:fedc:75ad])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8F11983DBF; Tue, 31 Mar 2026 09:53:51 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D01AB80212
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 09:37:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=kernel-space.org
+ by phobos.denx.de (Postfix) with ESMTPS id 37A7F83DBF
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 09:53:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=angelo@kernel-space.org
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
- s=s1; t=1774942623;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=lTiMJOdO9IJYuLvqTTCr3heQ+yZXXoBfLRdK7D+yEJo=;
- b=xmV867WWdU9EHbP+s8uHQarVj9W7w3HPU8RqQHDUslSOjOyVtKBNxMa9cH8ogPSJcJQIy2
- z3FN+88f6q8p0T2Jsr/KRrs1aVVJFrWH7RrjC/0oJNxQPPsY2GtzkpHKLXhaVB4leuUcfY
- kUagnsFb0ebYOxJQKqF151pm8PfDJbQ=
-Received: from [IPV6:2a07:7e81:7daa:0:62cf:84ff:feee:627] (<unknown>
- [2a07:7e81:7daa:0:62cf:84ff:feee:627])
- by oreshnik (OpenSMTPD) with ESMTPSA id c0aefc93
- (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
- Tue, 31 Mar 2026 07:37:03 +0000 (UTC)
-Message-ID: <b0e5de29-f7de-4dc1-be15-58a6039326ee@kernel-space.org>
-Date: Tue, 31 Mar 2026 09:37:02 +0200
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-486b96760easo58705635e9.2
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 00:53:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1774943628; x=1775548428; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=PK6UpEMYRMPah6QsShwtT1bqZlzcg4BhvALhxxr1fnQ=;
+ b=WczoaSbBCHDBOxZ7EswJWYjBEkpotAv9K3Vfwa5WUXiY+cA2WXjcHaHpI7RY5HXcyv
+ +RjQ42xAHct2IRclCIDynnoj6JV5wChVjkrFIDBRvAof0mWabWLjTraDsBDbTmfEAYO8
+ k1anjHW4knjFZXmidNzdIWSiz4yeP1RgajAJcKWYRXHFWtIFbbcoe4E1wTUyJjKdb4NQ
+ fvq662ysXp3QCB+hn/bZv4KApAWHLNej98+I/xglBbSKD6aBxxIeWQ0miZzwYoXf9Nmb
+ /h3uK7IO9h3AyKdgBWJJ379TCsnXh4EUP2gs8DijLRjlCNsFDyadwHSNmB8EHRg0MA7M
+ heNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774943628; x=1775548428;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PK6UpEMYRMPah6QsShwtT1bqZlzcg4BhvALhxxr1fnQ=;
+ b=rW6tfvgoTIUbMn3LADuWuiyAHX2C5JVAG+HIeUtuJnmTidNnbDcOc7juRyM7DJt0zg
+ w+qsmNU5VLwxnWkJOi3Xr2wqeWKb29UFVV2a1Eqnc40ZG5Hm9jJ1CE8BS0DQVo2M39O7
+ N99ekb+2e/Wf/peayY6QRsh9uQaYrBQEkD+RsPC0tzlNXl7EsdehisHny6gwVyVTFE9p
+ 4dtCqIhmnaaSOgu0iwHYyQoRxfttH6oXTMxBnqyeWbHadQqNqZBz72fTwuu+Jm7+q6Br
+ y84tdmWIGCDFEhPxXpufe0//dn1YHx9P0BIvJugQKRrBFmbCGuVYMyOKaUqfGJy9mt80
+ SzEg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV2IpHGR5cMeZllwBkFm787Fdcmgfc4jjvH+0G5OIucdwj+weSZ5N8KDj6igp7FP4qT6iRxWxE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxh1iYb0xfs2HTY9VMMmowoN+MCfNvntBuJZouKkuPahI7dQ+sM
+ t7mgObX0c54SGoQPpN4q695FODlvHbVv5bY9gj7+EswIwd9C+P5ExcIP
+X-Gm-Gg: ATEYQzyJS7oKXG0MTBue+Sv8v/6XcTV0yqJKl+K5+x3Nx2zDwduRa5aXr1Z3R5T+WEF
+ 2jSUSKAjqqzyJnBM4Qxm7ZbdxfWJpTus0K6fZGubgxbVsLvHEnt+UKLErllQUjzWcouAdiSNvD+
+ nX1bCvUOWEbT6jMNT8yC2oyoag4Jqw+cI7A5CQAIrENcDjPlwB15byvNgeND50568CUdRo9C3kQ
+ DLDGiqef9phwukoj5SptdYKBIHhyUKK6iJ5Rd6TC7iWAdqM1QBzRi+KtMKxfbdFKe2yC5E01z4d
+ dx+0qb+znJAxvaxwQggBHKt87d58BkprgK6J5Zu6I7uUlhPg30+BU+9OgDtOQFqA569pF/FMHn1
+ oWz+MhWblHRsKPPXmSRcGFOn531C7qhm5YLh3UWbdiZ3/LcO948I6vDihehWdw8NOtWLfHaduoP
+ BaoDG4jhyUrwulDBPDQ2gTI2+W73o+18S49php8X9WquHDbKeVymo3koU=
+X-Received: by 2002:a05:600c:a292:b0:487:2439:b7be with SMTP id
+ 5b1f17b1804b1-4873d34639fmr65849285e9.6.1774943628065; 
+ Tue, 31 Mar 2026 00:53:48 -0700 (PDT)
+Received: from Ansuel-XPS24 (93-34-88-122.ip49.fastwebnet.it. [93.34.88.122])
+ by smtp.googlemail.com with ESMTPSA id
+ 5b1f17b1804b1-4887c561750sm23889915e9.2.2026.03.31.00.53.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 31 Mar 2026 00:53:47 -0700 (PDT)
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Christian Marangi <ansuelsmth@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Chen-Yu Tsai <wens@kernel.org>,
+ Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Justin Klaassen <justin@tidylabs.net>, Harsha Vardhan V M <h-vm@ti.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Sky Huang <SkyLake.Huang@mediatek.com>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>, u-boot@lists.denx.de
+Subject: [PATCH v4 0/5] misc: fs_loader: reorg and split to FS and FW loader +
+ FIP loader
+Date: Tue, 31 Mar 2026 09:53:19 +0200
+Message-ID: <20260331075338.2391-1-ansuelsmth@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] m68k: Add LTO support
-To: Daniel Palmer <daniel@thingy.jp>, visitorckw@gmail.com
-Cc: u-boot@lists.denx.de
-References: <20260330220124.2747127-1-daniel@thingy.jp>
-Content-Language: en-US, it
-From: Angelo Dureghello <angelo@kernel-space.org>
-In-Reply-To: <20260330220124.2747127-1-daniel@thingy.jp>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,230 +110,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Daniel,
+This series mainly rework the FS loader to permit reading firmware from
+container that are not exactly a readable filesystem.
 
-looks quite good to me, will re-test it asap, just have a questions:
+One scenario is when a firmware is shipped in a FIP container as
+a generic blob with an UUID.
 
-On 3/31/26 00:01, Daniel Palmer wrote:
-> Most m68k retro/homebrew machines will have limited flash/RAM
-> so having LTO working would be nice.
-> 
-> Not many changes are need really. Most of this is copy/paste
-> from the ARM32 version.
-> 
-> The major change is that the direct register usage of d7 for gd
-> needs to be hidden so that when LTO passes over everything it
-> doesn't see multiple instances of d7.
-> 
-> Signed-off-by: Daniel Palmer <daniel@thingy.jp>
-> ---
->  arch/Kconfig                        |  1 +
->  arch/m68k/config.mk                 |  8 ++++++--
->  arch/m68k/cpu/m680x0/cpu.c          |  2 +-
->  arch/m68k/include/asm/global_data.h | 19 +++++++++++++++++++
->  arch/m68k/lib/ashldi3.c             |  6 ++++--
->  arch/m68k/lib/lshrdi3.c             |  6 ++++--
->  arch/m68k/lib/muldi3.c              |  4 +++-
->  common/board_r.c                    |  4 ++--
->  common/init/board_init.c            |  4 ++--
->  9 files changed, 42 insertions(+), 12 deletions(-)
-> 
-> diff --git a/arch/Kconfig b/arch/Kconfig
-> index 4af0da2485fb..488de442f557 100644
-> --- a/arch/Kconfig
-> +++ b/arch/Kconfig
-> @@ -112,6 +112,7 @@ config ARM
->  
->  config M68K
->  	bool "M68000 architecture"
-> +	select ARCH_SUPPORTS_LTO
->  	select HAVE_PRIVATE_LIBGCC
->  	select USE_PRIVATE_LIBGCC
->  	select SYS_BOOT_GET_CMDLINE
-> diff --git a/arch/m68k/config.mk b/arch/m68k/config.mk
-> index 458953f97122..4d8c83b51cdb 100644
-> --- a/arch/m68k/config.mk
-> +++ b/arch/m68k/config.mk
-> @@ -8,9 +8,13 @@ ifneq ($(CONFIG_M680x0),y)
->  PLATFORM_CPPFLAGS += -fPIC
->  endif
->  KBUILD_LDFLAGS    += -n -pie
-> -PLATFORM_RELFLAGS += -ffunction-sections -fdata-sections
->  PLATFORM_RELFLAGS += -ffixed-d7
->  ifneq ($(CONFIG_M680x0),y)
->  PLATFORM_RELFLAGS += -msep-data
->  endif
-> -LDFLAGS_FINAL     += --gc-sections -pie
-> +LDFLAGS_FINAL     += -pie
-> +
-> +ifneq ($(LTO_ENABLE),y)
-> +PLATFORM_RELFLAGS += -ffunction-sections -fdata-sections
-> +LDFLAGS_FINAL     += --gc-sections
-> +endif
-> diff --git a/arch/m68k/cpu/m680x0/cpu.c b/arch/m68k/cpu/m680x0/cpu.c
-> index f60b932c7dd4..3f87076b8c3d 100644
-> --- a/arch/m68k/cpu/m680x0/cpu.c
-> +++ b/arch/m68k/cpu/m680x0/cpu.c
-> @@ -24,7 +24,7 @@ void m68k_virt_init_reserve(ulong base)
->  	for (i = 0; i < sizeof(*gd_ptr); i++)
->  		p[i] = 0;
->  
-> -	gd = gd_ptr;
-> +	arch_setup_gd(gd);
->  
->  	gd->malloc_base = base + sizeof(*gd_ptr);
->  }
-> diff --git a/arch/m68k/include/asm/global_data.h b/arch/m68k/include/asm/global_data.h
-> index aea2ccabe083..9150ed4ab466 100644
-> --- a/arch/m68k/include/asm/global_data.h
-> +++ b/arch/m68k/include/asm/global_data.h
-> @@ -32,6 +32,25 @@ struct arch_global_data {
->  
->  #include <asm-generic/global_data.h>
->  
-> +#if defined(LTO_ENABLE)
-> +/* If LTO is enabled we have to hide d7 to avoid multiple symbol declarations */
-> +#define DECLARE_GLOBAL_DATA_PTR
-> +#define gd	get_gd()
-> +
-> +static inline gd_t *get_gd(void)
-> +{
-> +	gd_t *gd_ptr;
-> +
-> +	__asm__ volatile("move.l %%d7, %0\n" : "=r" (gd_ptr));
-> +
-> +	return gd_ptr;
-> +}
-> +#else
->  #define DECLARE_GLOBAL_DATA_PTR     register gd_t *gd asm ("d7")
-> +#endif
-> +static inline void arch_setup_gd(gd_t *new_gd)
-> +{
-> +	__asm__ volatile("move.l %0, %%d7\n" : : "r" (new_gd));
-> +}
->  
->  #endif /* __ASM_GBL_DATA_H */
-> diff --git a/arch/m68k/lib/ashldi3.c b/arch/m68k/lib/ashldi3.c
-> index 9a4bc676bf4c..9e84bd0d9a07 100644
-> --- a/arch/m68k/lib/ashldi3.c
-> +++ b/arch/m68k/lib/ashldi3.c
-> @@ -6,6 +6,8 @@
->   * Copyright (C) 1989-2015 Free Software Foundation, Inc.
->   */
->  
-> +#include <linux/compiler_attributes.h>
-> +
->  #define BITS_PER_UNIT 8
->  
->  typedef		 int SItype	__attribute__ ((mode (SI)));
-> @@ -21,7 +23,7 @@ typedef union
->    DItype ll;
->  } DIunion;
->  
-> -DItype __ashldi3 (DItype u, word_type b)
-> +__used DItype __ashldi3 (DItype u, word_type b)
+FIP are mostly used on ARM in the context of ATF.
+In such context U-Boot is loaded as BL31 and the PHY firmware
+can't be stored in the FIT image for the kernel as U-Boot should
+not depend on the presence of the kernel to correctly enable PHY
+for Ethernet port.
 
-Why the above __used is needed ? This impacts all the coldfire builds. 
+To handle such case the PHY firmware is stored in FIP with a
+predictable UUID.
 
->  {
->  	DIunion w;
->  	word_type bm;
-> @@ -46,4 +48,4 @@ DItype __ashldi3 (DItype u, word_type b)
->  	}
->  
->  	return w.ll;
-> -}
-> \ No newline at end of file
-> +}
-> diff --git a/arch/m68k/lib/lshrdi3.c b/arch/m68k/lib/lshrdi3.c
-> index e639e676a269..53163bc5f83f 100644
-> --- a/arch/m68k/lib/lshrdi3.c
-> +++ b/arch/m68k/lib/lshrdi3.c
-> @@ -6,6 +6,8 @@
->   * Copyright (C) 1989-2015 Free Software Foundation, Inc.
->   */
->  
-> +#include <linux/compiler_attributes.h>
-> +
->  #define BITS_PER_UNIT 8
->  
->  typedef		 int SItype	__attribute__ ((mode (SI)));
-> @@ -21,7 +23,7 @@ typedef union
->    DItype ll;
->  } DIunion;
->  
-> -DItype __lshrdi3 (DItype u, word_type b)
-> +__used DItype __lshrdi3 (DItype u, word_type b)
->  {
->  	DIunion w;
->  	word_type bm;
-> @@ -46,4 +48,4 @@ DItype __lshrdi3 (DItype u, word_type b)
->  	}
->  
->  	return w.ll;
-> -}
-> \ No newline at end of file
-> +}
-> diff --git a/arch/m68k/lib/muldi3.c b/arch/m68k/lib/muldi3.c
-> index c42ca1d753e5..06af5533fde3 100644
-> --- a/arch/m68k/lib/muldi3.c
-> +++ b/arch/m68k/lib/muldi3.c
-> @@ -6,6 +6,8 @@
->   * Copyright (C) 1989, 1992, 1993, 1994, 1995 Free Software Foundation, Inc.
->   */
->  
-> +#include <linux/compiler_attributes.h>
-> +
->  #define SI_TYPE_SIZE 32
->  #define __BITS4 (SI_TYPE_SIZE / 4)
->  #define __ll_B (1L << (SI_TYPE_SIZE / 2))
-> @@ -54,7 +56,7 @@ typedef union
->  	DItype ll;
->  } DIunion;
->  
-> -DItype __muldi3 (DItype u, DItype v)
-> +__used DItype __muldi3 (DItype u, DItype v)
->  {
->  	DIunion w;
->  	DIunion uu, vv;
-> diff --git a/common/board_r.c b/common/board_r.c
-> index 76f9fc090fbe..58eb69005468 100644
-> --- a/common/board_r.c
-> +++ b/common/board_r.c
-> @@ -800,12 +800,12 @@ void board_init_r(gd_t *new_gd, ulong dest_addr)
->  	 * TODO(sjg@chromium.org): Consider doing this for all archs, or
->  	 * dropping the new_gd parameter.
->  	 */
-> -	if (CONFIG_IS_ENABLED(X86_64) && !IS_ENABLED(CONFIG_EFI_APP))
-> +	if ((CONFIG_IS_ENABLED(X86_64) && !IS_ENABLED(CONFIG_EFI_APP)) || CONFIG_IS_ENABLED(M68K))
->  		arch_setup_gd(new_gd);
->  
->  #if defined(CONFIG_RISCV)
->  	set_gd(new_gd);
-> -#elif !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_ARM64)
-> +#elif !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_ARM64) && !defined(CONFIG_M68K)
->  	gd = new_gd;
->  #endif
->  	gd->flags &= ~GD_FLG_LOG_READY;
-> diff --git a/common/init/board_init.c b/common/init/board_init.c
-> index 2a6f39f51adb..31b499ebad9c 100644
-> --- a/common/init/board_init.c
-> +++ b/common/init/board_init.c
-> @@ -14,10 +14,10 @@
->  DECLARE_GLOBAL_DATA_PTR;
->  
->  /*
-> - * Unfortunately x86, ARM and RISC-V can't compile this code as gd is defined
-> + * Unfortunately x86, ARM, RISC-V, M68K can't compile this code as gd is defined
->   * as macro and cannot be assigned.
->   */
-> -#if !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_RISCV)
-> +#if !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_RISCV) && !defined(CONFIG_M68K)
->  __weak void arch_setup_gd(struct global_data *gd_ptr)
->  {
->  	gd = gd_ptr;
+One example is with Airoha 8811H firmware where the FIP can
+have a blob with UUID "d39d2cf2-9bd0-3ca7-93e9-e71b4f9250b2".
+(generated from command "uuidgen -n @dns --md5 --name en8811h.bin")
 
+With these example DTS entry:
 
-Regards,
--- Angelo
+fs_loader0: fip-loader {
+	bootph-all;
+	compatible = "u-boot,fip-loader";
+	phandlepart = <&mmc0 0>;
+	partoffset = <0x100>;
+};
+
+mdio {
+  en8811: ethernet-phy@f {
+    reg = <0xf>;
+    firmware-name = "d39d2cf2-9bd0-3ca7-93e9-e71b4f9250b2";
+    firmware-loader = <&fs_loader0>;
+  };
+};
+
+And PHY driver using the get_fw_loader_from_node() and the
+common request_firmware_into_buf() it's possible to
+load the PHY firmware transparently by just declaring
+the required entry in the DTS.
+
+get_fw_loader_from_node() is implemented to actual get the
+loader from DT. This was something that was already in mind
+from when the FS loader was implemented but then it was
+never implemented in favor of a single loader per device.
+
+The first patch is a minor fixup for something that probably
+won't ever happen.
+
+The second one is a good reworking of the FS and FW loader
+moving the internal struct to a dedicated header. (this is
+really to enforce what drivers should use and what
+driver should not mess with)
+
+Then there is the request_firmware_size() new OP to get only
+the size of the firmware. Useful for case where the firmware
+size is not always the same and change across different version.
+(the patter might be get size -> alloc buffer -> get firmware).
+
+Then the FIP loader as a basic parser of FIP. This only
+read the FIP header, loop all the entry and search for a
+matching UUID. If nothing is found then no firmware blob.
+Very simple implementation.
+
+This is being CI tested on [0]
+
+[0] https://github.com/u-boot/u-boot/pull/884
+
+Changes v4:
+- Rebase on top of next
+Changes v3:
+- Add review tag where possible
+- Check blk_dread ret
+- Generalize mount_ubifs with generic_fw_loader_ubi_select
+- Fix some typo
+- Drop useless ubifs umount (nothing is mounted in FIP)
+Changes v2:
+- Better handle header include to fix compilation error
+  on some devices
+- Fix typo for ubifs fix commit
+
+Christian Marangi (5):
+  misc: fs_loader: fix ubifs not unmounted on dev_get_priv error
+  misc: fs_loader: reorganize and split to FS and FW loader
+  misc: fw_loader: implement generic get_fw_loader_from_node()
+  misc: fw_loader: introduce FIP loader driver
+  misc: fw_loader: implement request_firmware_size() OP
+
+ drivers/misc/Kconfig                     |  16 +
+ drivers/misc/Makefile                    |   2 +-
+ drivers/misc/fw_loader/Makefile          |   5 +
+ drivers/misc/fw_loader/fip_loader.c      | 576 +++++++++++++++++++++++
+ drivers/misc/{ => fw_loader}/fs_loader.c | 185 +++-----
+ drivers/misc/fw_loader/fw_loader.c       | 207 ++++++++
+ drivers/misc/fw_loader/internal.h        |  64 +++
+ include/dm/uclass-id.h                   |   3 +-
+ include/fs_loader.h                      |  47 +-
+ include/fw_loader.h                      |  43 ++
+ 10 files changed, 974 insertions(+), 174 deletions(-)
+ create mode 100644 drivers/misc/fw_loader/Makefile
+ create mode 100644 drivers/misc/fw_loader/fip_loader.c
+ rename drivers/misc/{ => fw_loader}/fs_loader.c (60%)
+ create mode 100644 drivers/misc/fw_loader/fw_loader.c
+ create mode 100644 drivers/misc/fw_loader/internal.h
+
+-- 
+2.53.0
 
