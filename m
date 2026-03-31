@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A59DFF60D9
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 08:02:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93A8CFF60D9
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 08:02:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD5D884099;
-	Tue, 31 Mar 2026 10:01:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4CD01840BE;
+	Tue, 31 Mar 2026 10:01:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yr7fzUOv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bhKuy+hx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADEA383F5B; Tue, 31 Mar 2026 10:01:40 +0200 (CEST)
+ id BC83F8408D; Tue, 31 Mar 2026 10:01:42 +0200 (CEST)
 Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
  [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 805B184011
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 10:01:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 65E5D84099
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 10:01:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
 Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-486fd3a577eso48850235e9.1
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 01:01:37 -0700 (PDT)
+ 5b1f17b1804b1-482f454be5bso60502745e9.0
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 01:01:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1774944097; x=1775548897; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1774944098; x=1775548898; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=X8qH+4/Z9p5lPWD2pDoZhs23SmQ5PbVpQBMoyMvrbOQ=;
- b=yr7fzUOvYb6p186PGnbZKQmI38Vamh/nWHtXS8j73YeMtX9tkdzGTHNdOFrV3l8xTs
- cZhYKr6Ezx7kPDBr7GNv6IOZru3qxGzp6tKC/Mhe3j/uIfPSUM55tymSkq5BdxdpBwhn
- Haky+CNrxASUS4P+iR1lwwTC4YGslAI68yxlF+DHYUJZAmX90NKZJO5EHbvi/0xxqoQK
- V93gF8qLsS1ikU/TwnG3WzTyIuH4vHSACXs16iJZ7Sw1WtNVmVYk5HuJMIM1DW1CxekX
- Aq/RAq58iyd8llP92JKTc/laCU3apgMSeFOaVMhoW7y71G0SAFtSpxTbW9Ydclulb91K
- Dxjw==
+ bh=7oUxZQYLSGSVNDMCuRR2atuqUV38+bRliJUF+/W8O4A=;
+ b=bhKuy+hxaBSTyuqov7bCBVC9r9Oc651d9PafAJXseKrnP7mq6FP5Ey97sK/xa2bCCa
+ cIe8G77JHVlkI/hukMKbCEQ1mfKVbA4VAyhM6XC1FlUjl48+GGbXaaVM/a8g5vabSpCi
+ RA3dHfVZKcVQEw0zS7ChrAMeWZltZ2u+32lai6ZANx3KNXAtwLlBL+g2XlNJqzIeknWQ
+ DJx2d7ogePHXaN7IsxDQSSIL5htsFV7KFMttPSnQbhCV+WvlqvZ9EccbvVCj9CiA9Q7X
+ NYLIbilk5w0gMaaeIEQAjW5OxXIesaNBdNhKaLGAYLWk7JDL0V/q0EpNQvmjasm7A4sp
+ kxUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774944097; x=1775548897;
+ d=1e100.net; s=20251104; t=1774944098; x=1775548898;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=X8qH+4/Z9p5lPWD2pDoZhs23SmQ5PbVpQBMoyMvrbOQ=;
- b=kDljxCFoLEE8UDezGICDzbkvK0Lm/P9pdn6xckXsyLzSkAwlbrAP0hadl66d/HbH0U
- 0gBlCqQer+Q/pSGmS9Y5LTEIof/U98Ur8gK/YRr5IqmpxtJxunyQXFQw/KHDYcdJhLxZ
- FNTY+T3q1TLWyZ/QSU0TMH1HNL0o3ZyM90ZygScvJUQxEoMXukM2i+ZHUdfD2V88Jr6k
- jCllrSQ8n4XIoKGyxU+hs/s2T7wekDRbddX5n7cCbHhWkpcTKU2a6NEP4Gr2wpGoxBIJ
- +2fuOLmeEOk2Ywl1sWefSC+DyrZ4ciF1zrtmNURruYSxp27r9w/K8UkeNBRDkoLcjwWX
- 7UeA==
+ bh=7oUxZQYLSGSVNDMCuRR2atuqUV38+bRliJUF+/W8O4A=;
+ b=dbYObwud+Ms2j1mWeR8SABviQKxLz7ePZ6ACgZf2diAvXh7WS3mt67Qr+bmkArtIgM
+ fBZmF3La/ee6NTaPVrofNU3pqG/0gyB0C4rezOGQ8vcZOstcHUZnj9PLHVeek2zhAPqs
+ LADvgrOV6PmGXexXlVnvKAm2VKVcsGI3GOlFvX5MOZtLUW4sm2QTxLPQYnUuGRALweY6
+ J/sG3u0aZNW1hcce2nbKZpHPySCPrANG9Q+y6vXX2Mb3nUGDgE+GEHxps4As4fscHJ+T
+ AfHRnAeKXZx1deOLgQyU10JjIE+tEksvhRO/TwJdg4jJ+pwgJQonKOSHgGlQ/zLxgZdc
+ 2wSQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXjQTq6YJsykIHlPboOwjFC96igjHDTssgdKVI1n21IKopDLEE/IUmLm9Mx0FkF0Ivf7TkCwUo=@lists.denx.de
-X-Gm-Message-State: AOJu0YwP/7ZWVCq/Kcc4YeRRSBTATkYzhIed9Dyg2YKFD/ebV8V1ecRr
- A0hXFX/hfvKdJuxaZSUjdNMW8mllJ/aX4U0AlC5+1Baimiy9XrC1VOnE3KEO1GJsGKw=
-X-Gm-Gg: ATEYQzzoMtCSNRT3gTZEetrGhZguMOyOMH+ektDh+9LtsFQKlDZy4RUvzvpvWalQrCj
- JXp0QRrAj6WuetN+euPXk9vANIbPf3nH8lsL5exhNKvULMnxxsn3QvoKJclB2DYGeQGE95n8Gx0
- KYLYHIHzbrY+svxDWbLqAtXtedM44Hz1IY+94hy7lRjbMYUf/RTK+cdF7pynkX0AWnzcvDK3tB7
- 7KeFfMMzTAVj/E8x/K1oXrrjKmy84PuFMiNBvbROGAkZsE1quuYt/mPGn86+gBXFs060CDbl4/t
- ZxDhXvI1eDFfk5eApg3qyPS9Y1iw6y+rNXrY5UXx49dUuo1amr5YKvFUERLjzgYwAuNfGcSIDHk
- NkctowqJjdg66CxOh3fUxTsw9odoueYvBDrrHLyn6Vml304ue888uRhdKUDsNmSAcNzLbDKseij
- jxBowUQeFF6zef4NBdnMAKG/6iAwpAUpIarz/66TLQCc/qPxkB1rSvZHMUJ3Jsn9naPV1hYOzEC
- MgAaT0VYNVveR06GF9p5aJgavGbi+UjMjHmFYyAejiomjbqzq6vNnMzwa0zqXh+1T5V8ElObmR8
- GLHGVjCgReCYGxHwcrfA8s9i2xCg4K5ThvA8XIBMG2qnjWZpTp6Fh+jqQyC4aDSrcYOwgPEMHGC
- k5BXtUwXy9QY7luuSb8SbQ//+bgmaw6l/AwojuiRH/GO6DN2eGf6l2JLE2q5sKRhEfSkaCC3UCj
- Bm1riwf4V3IUf5nVrtK034pl120Yj1rgrrvzMFB1F6sciU3xpZl1t7mDnVZy4k
-X-Received: by 2002:a05:600c:3d87:b0:487:2092:b2e0 with SMTP id
- 5b1f17b1804b1-48727d5a246mr255110825e9.1.1774944096794; 
- Tue, 31 Mar 2026 01:01:36 -0700 (PDT)
+ AJvYcCUhPl9ACGf0zem8nZPXREBxMZFYh3McEQYgbAukDOFHbulf5wV6bj/QLZvi7tc7n9tXts50Jmo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxeBtAFjNjZuCUdleoIaAhH+IKYOR6Muj6RMWjQY09bej3Z/vez
+ 3P5r+PNdxSDZCeCtP+koB1xK+JSqEAkHqaloHRds8/zGjmWWccGQaLCvLGJHCTPT2DQ=
+X-Gm-Gg: ATEYQzz01gWPchZNJf5MQMcTC+mBMcywGqauXgq06QIW1btMekCnf9vqh33RuiWV0Vc
+ zMn/S/S8DufrV0HdaHg5nHhnlJctsWs41sbwxSWV5XJ+uceK1F5DNQjazRsjfu0P/blRQUiooEO
+ w+3vw0sb0ZzJ5te4PWlBmTstFEueZIVRePrv5Wt8x5oMS0Z553zl1a9ACBsVOHrTeWGoK6DKglK
+ 59/xqloiwAEHGhOU1WNedyRBK9wqpJ1BU9N1mxQf9CYlnQmI6C5LxEbDaCidyu2iiWo2weARJJy
+ nXvjMr3i2VfSw+UrPFvJ4oJxkx450ZBkaRmB1qYEfgwuIuMhgmpmhlV0vNzLhsPy5Sb6fx/igZ/
+ T7HuFHhP9xuzTly3G36zNhJgXgWeFz2cldl+FUh8s2IeXZ5JcsbfVFIKG/HrQ65V9yh7S2xyl3+
+ IB43V3U2NZ23fU9kScOHBpI9Hcbjghv3QIUSLEjPF7jPwcOaHRomr69QO47QeDAqDJAUWH2jqen
+ V0V2g7C8n3OYAH9Ede/iXMUN6YZyI52TH7hXA/+TfcoXypdPaZSTrwgtFF8NzZsAamSmNNUnlrU
+ KUnJkBJJvQrx5pjCBoyU3R5ua7ZG1IacwgQ9l8w5DnCKjaG7HVjuYSFpHDDOUTXDlo90gD1ixIq
+ EvmseFkw8AoCcmXOOufVoUJRj1q7hjybsJTpwx0/t9mpJHHNV+U8PO3jum1hnP5/8d2lXSeg0aV
+ k/6Lkw98LKJ2mjmsl2z9aOYT0yBKi/zLHNhkwmtzCTuNAxaOA+F/0ecqk+U71z
+X-Received: by 2002:a05:600c:a408:b0:47e:e59c:67c5 with SMTP id
+ 5b1f17b1804b1-488783820d1mr31232785e9.8.1774944098362; 
+ Tue, 31 Mar 2026 01:01:38 -0700 (PDT)
 Received: from hera ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4887c9250afsm10087065e9.36.2026.03.31.01.01.35
+ 5b1f17b1804b1-4887c9250afsm10087065e9.36.2026.03.31.01.01.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Mar 2026 01:01:36 -0700 (PDT)
+ Tue, 31 Mar 2026 01:01:37 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: marek.vasut+renesas@mailbox.org,
 	trini@konsulko.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 3/4] fdtdec: Introduce fdtdec_setup_ram_size() to determine
- the memory size
-Date: Tue, 31 Mar 2026 11:01:13 +0300
-Message-ID: <20260331080117.2370092-4-ilias.apalodimas@linaro.org>
+Subject: [PATCH v2 4/4] common: Allow relocations on the top of the last bank
+Date: Tue, 31 Mar 2026 11:01:14 +0300
+Message-ID: <20260331080117.2370092-5-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260331080117.2370092-1-ilias.apalodimas@linaro.org>
 References: <20260331080117.2370092-1-ilias.apalodimas@linaro.org>
@@ -105,80 +104,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We previously added a fdtdec_setup_mem_ram_top() to determine the
-topmost address of the last DRAM bank. Similarly the overall memory
-size must be calculated when U-Boot gets relocated to the actual end of
-all available DRAM.
+Right now we only relocate u-boot to the top of the first
+memory bank unless the board specific code overwrites it.
+This is problematic when loading big binaries as it
+fragments the contiguous memory space for no apparent reason.
 
-Pre-patch:
-U-Boot 2026.04-rc5-00012-g5789f787c8a6-dirty (Mar 31 2026 - 09:13:34 +0300)
-DRAM:  4 GiB (total 8 GiB)
+It's worth noting that there are cases where we must not relocate
+above the 4GiB boundary (64bit hardware with 32bit only capable
+DMA). E.g This will break platforms, if the ethernet
+controller cannot DMA above 4 GiB, and once U-Boot does
+get relocated above 4 GiB, the packet buffer which is built
+into the U-Boot binary is also relocated above 4 GiB.
 
-Post-patch:
-U-Boot 2026.04-rc5-00012-g5789f787c8a6 (Mar 31 2026 - 09:12:59 +0300)
-DRAM:  8 GiB
+Add a Kconfig option and allow the common code to relocate U-Boot
+to the top of the last discovered bank.
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- include/fdtdec.h | 15 +++++++++++++++
- lib/fdtdec.c     | 18 ++++++++++++++++++
- 2 files changed, 33 insertions(+)
+ Kconfig          |  7 +++++++
+ common/board_f.c | 15 +++++++++++++++
+ 2 files changed, 22 insertions(+)
 
-diff --git a/include/fdtdec.h b/include/fdtdec.h
-index 26e40c3cdb46..9bccd70bbdb6 100644
---- a/include/fdtdec.h
-+++ b/include/fdtdec.h
-@@ -965,6 +965,21 @@ int fdtdec_setup_mem_ram_top(void);
-  * invalid
-  */
- int fdtdec_setup_memory_banksize(void);
-+/**
-+ * fdtdec_setup_ram_size() - decode and setup setup gd->ram_size to the sum of
-+ *			     all banks
-+ *
-+ * Decode the /memory 'reg' property to determine the memory available in all
-+ * banks and populate the global data ram_size with it.
-+ *
-+ * This function should be called from a boards board_get_usable_ram_top().
-+ * This helper function allows for boards to query the device tree for the
-+ * overall memory described in as the sum of all memory banks.
-+ *
-+ * Return: 0 if OK, -EINVAL if the /memory node or reg property is missing or
-+ * invalid
-+ */
-+int fdtdec_setup_ram_size(void);
+diff --git a/Kconfig b/Kconfig
+index ce25ea24a60f..3ebdee1b2794 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -474,6 +474,13 @@ config SKIP_RELOCATE
+ 	  Skips relocation of U-Boot allowing for systems that have extremely
+ 	  limited RAM to run U-Boot.
  
- /**
-  * fdtdec_set_ethernet_mac_address() - set MAC address for default interface
-diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-index bdb26d8fb75b..715662d27a8c 100644
---- a/lib/fdtdec.c
-+++ b/lib/fdtdec.c
-@@ -1142,6 +1142,24 @@ int fdtdec_setup_memory_banksize(void)
- 	return fdtdec_setup_mem_for_each_bank(fdtdec_setup_memory_banksize_bankfn);
++config RELOCATE_LAST_BANK
++	bool "Relocate to the topmost memory address"
++	help
++	  When U-Boot relocates, it chooses the end of the first memory bank.
++	  Enable this if you have multiple banks and want U-Boot to relocate
++	  to the topmost memory address
++
+ endif # EXPERT
+ 
+ config PHYS_64BIT
+diff --git a/common/board_f.c b/common/board_f.c
+index df2b0dc899bf..4270f368e653 100644
+--- a/common/board_f.c
++++ b/common/board_f.c
+@@ -309,6 +309,8 @@ __weak int mach_cpu_init(void)
+ /* Get the top of usable RAM */
+ __weak phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+ {
++	int ret;
++
+ #if defined(CFG_SYS_SDRAM_BASE) && CFG_SYS_SDRAM_BASE > 0
+ 	/*
+ 	 * Detect whether we have so much RAM that it goes past the end of our
+@@ -321,6 +323,19 @@ __weak phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+ 		 */
+ 		return 0;
+ #endif
++	if (IS_ENABLED(CONFIG_RELOCATE_LAST_BANK)) {
++		phys_addr_t old_top = gd->ram_top;
++
++		ret = fdtdec_setup_mem_ram_top();
++		if (ret)
++			debug("failed to relocate to ram top");
++		ret = fdtdec_setup_ram_size();
++		if (ret) {
++			debug("failed to calculate RAM size");
++			gd->ram_top = old_top;
++		}
++	}
++
+ 	return gd->ram_top;
  }
  
-+static void fdtdec_setup_total_ram_fn(struct resource *res, int bank)
-+{
-+	gd->ram_size += res->end - res->start + 1;
-+}
-+
-+int fdtdec_setup_ram_size(void)
-+{
-+	int ret;
-+	phys_addr_t old_size = gd->ram_size;
-+
-+	gd->ram_size = 0;
-+	ret = fdtdec_setup_mem_for_each_bank(fdtdec_setup_total_ram_fn);
-+	if (ret)
-+		gd->ram_size = old_size;
-+
-+	return ret;
-+}
-+
- static void fdtdec_setup_mem_size_base_lowest_bankfn(struct resource *res, int bank)
- {
- 	unsigned long base = (unsigned long)res->start;
 -- 
 2.53.0
 
