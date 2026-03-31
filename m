@@ -4,92 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31855FF60D5
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 07:00:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 697CDFF60CF
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 07:37:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43A7983DBF;
-	Tue, 31 Mar 2026 09:00:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 738268352B;
+	Tue, 31 Mar 2026 09:37:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="oD+YrEwz";
+	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="xmV867WW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38B5783DBF; Tue, 31 Mar 2026 09:00:36 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0CE278352B; Tue, 31 Mar 2026 09:37:06 +0200 (CEST)
+Received: from mail.kernel-space.org (unknown
+ [IPv6:2a03:4000:b:d08:14a9:1bff:fedc:75ad])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13A5580212
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 09:00:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D01AB80212
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 09:37:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=kernel-space.org
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4852c9b4158so42061495e9.0
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 00:00:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774940433; x=1775545233;
- darn=lists.denx.de; 
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EhrqRSZZS5c5HD6Jrlw70HA7qhN7sxdTI92yYmsmf0Q=;
- b=oD+YrEwzO9iUnJ4rPzBZK0zNmYXwYfQo0VxGOtzmy1GiQl0aLWY+0bQR0ElODaecH7
- aFWdDwJX+tXlcF7JvH04tc+HiFDFdYqlkMG/2GA5jpetlLLZ7pGT4GV0LGIiDqJQzLZh
- uhtRhFxMIbYfoWg6cxuxIkRr0Rdq1Wal19wnv020kqmjEtWlDdeuF+0SBf98vRSS8AQ9
- 5qkI7Ku7bawANSqPSzs/92jvk7Gl7XaZ8Oi9zgOe19ObyUNNwKsPLvdnJBRvZ2OVCSk8
- TPLGHRgQz9Jy7HxQEamn3lOTqHw31XdbQrsI0h5HH8WwAHn/wkoRhq/Bzk13uiuBzZAb
- 8NIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774940433; x=1775545233;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EhrqRSZZS5c5HD6Jrlw70HA7qhN7sxdTI92yYmsmf0Q=;
- b=B22qv6Yfv7DuSxJYR4Ntrd2/5JQgxLSPTW+fdOPxCF8el0OlmjZM8dbmiBshaf622Z
- v0+tmIi/jHNvCc3SfGHiY4va0J2CGNnVu0Tv2Jys16Ss3Tl4mWOmjUnVU0M+B0EZnFJ8
- MwEfpBKSEqCtvsJqWm0JURKXbNXcTjLT/JVyaU974pyEkAYLqRSs/7p6LUMHjpjDb2xW
- Uz8V5gykrzWo/ETCZZiFxPMf4Guqr4ioqYKY+YULEsyUfuV+83ipjjw3iHV4iwuQL9dl
- BIYc8+Lsfj/eRlyxaIUbRQls2wUfnRWv0Mn1GCXwsAnuufBAKFLzm3MrsUfcS9+IxT/Y
- msJg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVHbOxyBYEkTB56LTNcX1y2/CjiFsfCIjWsY7HvHCc9P65hReId37WkfnL6sa7BVh+4PIwVZgk=@lists.denx.de
-X-Gm-Message-State: AOJu0YymVBVR28ACfZGr80QCLv4vNGw+jiS/+AJ2j38bTxXRUD0tBOyR
- S2aUP/klMwl5fIuI53659WJfITzIVdAYo+7oM6yJ23wnVMFT4F8tphkfsV3LDgjXtfE=
-X-Gm-Gg: ATEYQzwuUkI1FlWGgOBQaZaDG82URRbldY1Xmys1GOVIyYSflDqHWwvNhBpG+eZ2alf
- 8CSLArYlDBLBRDHDq+ZP16cL8J4WcumEHOpnjkI+kKPNZdN8UKvWlZuNbVHo4nPYR8VbkU4m3YP
- g751DsMDqohyCdHtY1WibfLMx+fCvKtdjz/TgeFgQrE29225LiTJmhO1wq2Ck2+07eqsFiNPmVC
- EaF35+kluArJY1haDgMwfsQT9leAHXMBdiZ1mgfM2YEsm5lwxqyhHUgf/b4fNC7iM3tvhavHZK/
- fWY9tQMx3ThXIh/IifVcguNe5EjKlcNhvH904khiIlqp2dpXpAob6N4XuEiuYH4BBcxagrQCJ7W
- LX+OaPsa5AogeLMn7Ouz6mzvEPgvmTCj1rM3940awuReM9tw/+3gvPmM19jNqazE0xMJWKwK7gi
- 4JLCyc6Yv3lKx8JWB/HmvbdM8GVFU=
-X-Received: by 2002:a05:600c:a11a:b0:483:709e:f238 with SMTP id
- 5b1f17b1804b1-48727ee5405mr177189515e9.29.1774940433322; 
- Tue, 31 Mar 2026 00:00:33 -0700 (PDT)
-Received: from localhost ([195.52.184.245]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4887c884c10sm8806675e9.19.2026.03.31.00.00.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Mar 2026 00:00:32 -0700 (PDT)
-Mime-Version: 1.0
-Content-Type: multipart/signed;
- boundary=9a565b9683e0ac3540886abdc2bc590754cc48f5f2f6851fd83e60e14951;
- micalg=pgp-sha512; protocol="application/pgp-signature"
-Date: Tue, 31 Mar 2026 09:00:22 +0200
-Message-Id: <DHGRV9DE9A3T.1I61RAHP95WSW@baylibre.com>
-Cc: "Andrew Goodbody" <andrew.goodbody@linaro.org>, "Casey Connolly"
- <casey.connolly@linaro.org>, "Mattijs Korpershoek"
- <mkorpershoek@kernel.org>, "Michal Simek" <michal.simek@amd.com>, "Simon
- Glass" <sjg@chromium.org>, "Tom Rini" <trini@konsulko.com>
-Subject: Re: [PATCH] dm: Respect dma-ranges size
-From: "Markus Schneider-Pargmann" <msp@baylibre.com>
-To: "Marek Vasut" <marek.vasut@mailbox.org>, "Markus Schneider-Pargmann"
- <msp@baylibre.com>, "Marek Vasut" <marek.vasut+renesas@mailbox.org>,
- <u-boot@lists.denx.de>
-X-Mailer: aerc 0.21.0-126-g9e77103592fe
-References: <20260315235756.304972-1-marek.vasut+renesas@mailbox.org>
- <DHG5MITAHNOS.3KKMVUI98SAZ0@baylibre.com>
- <2c4f13c9-ff78-42c6-b770-71d06f59d522@mailbox.org>
-In-Reply-To: <2c4f13c9-ff78-42c6-b770-71d06f59d522@mailbox.org>
+ spf=pass smtp.mailfrom=angelo@kernel-space.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
+ s=s1; t=1774942623;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=lTiMJOdO9IJYuLvqTTCr3heQ+yZXXoBfLRdK7D+yEJo=;
+ b=xmV867WWdU9EHbP+s8uHQarVj9W7w3HPU8RqQHDUslSOjOyVtKBNxMa9cH8ogPSJcJQIy2
+ z3FN+88f6q8p0T2Jsr/KRrs1aVVJFrWH7RrjC/0oJNxQPPsY2GtzkpHKLXhaVB4leuUcfY
+ kUagnsFb0ebYOxJQKqF151pm8PfDJbQ=
+Received: from [IPV6:2a07:7e81:7daa:0:62cf:84ff:feee:627] (<unknown>
+ [2a07:7e81:7daa:0:62cf:84ff:feee:627])
+ by oreshnik (OpenSMTPD) with ESMTPSA id c0aefc93
+ (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
+ Tue, 31 Mar 2026 07:37:03 +0000 (UTC)
+Message-ID: <b0e5de29-f7de-4dc1-be15-58a6039326ee@kernel-space.org>
+Date: Tue, 31 Mar 2026 09:37:02 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] m68k: Add LTO support
+To: Daniel Palmer <daniel@thingy.jp>, visitorckw@gmail.com
+Cc: u-boot@lists.denx.de
+References: <20260330220124.2747127-1-daniel@thingy.jp>
+Content-Language: en-US, it
+From: Angelo Dureghello <angelo@kernel-space.org>
+In-Reply-To: <20260330220124.2747127-1-daniel@thingy.jp>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,108 +70,230 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---9a565b9683e0ac3540886abdc2bc590754cc48f5f2f6851fd83e60e14951
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+Hi Daniel,
 
-On Mon Mar 30, 2026 at 7:24 PM CEST, Marek Vasut wrote:
-> On 3/30/26 3:34 PM, Markus Schneider-Pargmann wrote:
->
-> Hello Markus,
->
->> On Mon Mar 16, 2026 at 12:57 AM CET, Marek Vasut wrote:
->>> Rework dev_phys_to_bus() and dev_bus_to_phys() to respect the size
->>> of the area specified in dma-ranges DT property. The area outside
->>> of ranges is remapped 1:1, while the area in the ranges is remapped
->>> according to the description in the dma-ranges property.
->>>
->>> Adjust the test to test the area within the remapped range, not area
->>> outside the remapped range, which was incorrect.
->>>
->>=20
->> Should this have a Fixes tag?
->>=20
->>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->>=20
->> Not a big expert, but this looks good to me:
->>=20
->> Reviewed-by: Markus Schneider-Pargmann <msp@baylibre.com>
->
-> This was broken long enough, so this should go into next so it would get=
-=20
-> sufficient testing before the next release.
->
-> [...]
->
->>> +++ b/include/dm/device.h
->>> @@ -166,8 +166,9 @@ enum {
->>>    *		When CONFIG_DEVRES is enabled, devm_kmalloc() and friends will
->>>    *		add to this list. Memory so-allocated will be freed
->>>    *		automatically when the device is removed / unbound
->>> - * @dma_offset: Offset between the physical address space (CPU's) and =
-the
->>> - *		device's bus address space
->>> + * @dma_cpu: DMA physical address space (CPU's)
->>> + * @dma_bus: DMA device's bus address space
->>> + * @dma_size: DMA window size
->>>    * @iommu: IOMMU device associated with this device
->>>    */
->>>   struct udevice {
->>> @@ -196,7 +197,9 @@ struct udevice {
->>>   	struct list_head devres_head;
->>>   #endif
->>>   #if CONFIG_IS_ENABLED(DM_DMA)
->>> -	ulong dma_offset;
->>> +	phys_addr_t dma_cpu;
->>> +	dma_addr_t dma_bus;
->>> +	u64 dma_size;
->>>   #endif
->
-> [...]
->
->>> +++ b/include/phys2bus.h
->>> @@ -21,17 +21,23 @@ static inline unsigned long bus_to_phys(unsigned lo=
-ng bus)
->>>   }
->>>   #endif
->>>  =20
->>> -#if CONFIG_IS_ENABLED(DM)
->>> +#if CONFIG_IS_ENABLED(DM_DMA)
->>=20
->> This is not related to the code changes right?
->
-> It is, see the matching hunk above and below why this is guarded by DM_DM=
-A .
+looks quite good to me, will re-test it asap, just have a questions:
 
-Ah thanks, yes, the macro had the check for DM_DMA, I missed that.
+On 3/31/26 00:01, Daniel Palmer wrote:
+> Most m68k retro/homebrew machines will have limited flash/RAM
+> so having LTO working would be nice.
+> 
+> Not many changes are need really. Most of this is copy/paste
+> from the ARM32 version.
+> 
+> The major change is that the direct register usage of d7 for gd
+> needs to be hidden so that when LTO passes over everything it
+> doesn't see multiple instances of d7.
+> 
+> Signed-off-by: Daniel Palmer <daniel@thingy.jp>
+> ---
+>  arch/Kconfig                        |  1 +
+>  arch/m68k/config.mk                 |  8 ++++++--
+>  arch/m68k/cpu/m680x0/cpu.c          |  2 +-
+>  arch/m68k/include/asm/global_data.h | 19 +++++++++++++++++++
+>  arch/m68k/lib/ashldi3.c             |  6 ++++--
+>  arch/m68k/lib/lshrdi3.c             |  6 ++++--
+>  arch/m68k/lib/muldi3.c              |  4 +++-
+>  common/board_r.c                    |  4 ++--
+>  common/init/board_init.c            |  4 ++--
+>  9 files changed, 42 insertions(+), 12 deletions(-)
+> 
+> diff --git a/arch/Kconfig b/arch/Kconfig
+> index 4af0da2485fb..488de442f557 100644
+> --- a/arch/Kconfig
+> +++ b/arch/Kconfig
+> @@ -112,6 +112,7 @@ config ARM
+>  
+>  config M68K
+>  	bool "M68000 architecture"
+> +	select ARCH_SUPPORTS_LTO
+>  	select HAVE_PRIVATE_LIBGCC
+>  	select USE_PRIVATE_LIBGCC
+>  	select SYS_BOOT_GET_CMDLINE
+> diff --git a/arch/m68k/config.mk b/arch/m68k/config.mk
+> index 458953f97122..4d8c83b51cdb 100644
+> --- a/arch/m68k/config.mk
+> +++ b/arch/m68k/config.mk
+> @@ -8,9 +8,13 @@ ifneq ($(CONFIG_M680x0),y)
+>  PLATFORM_CPPFLAGS += -fPIC
+>  endif
+>  KBUILD_LDFLAGS    += -n -pie
+> -PLATFORM_RELFLAGS += -ffunction-sections -fdata-sections
+>  PLATFORM_RELFLAGS += -ffixed-d7
+>  ifneq ($(CONFIG_M680x0),y)
+>  PLATFORM_RELFLAGS += -msep-data
+>  endif
+> -LDFLAGS_FINAL     += --gc-sections -pie
+> +LDFLAGS_FINAL     += -pie
+> +
+> +ifneq ($(LTO_ENABLE),y)
+> +PLATFORM_RELFLAGS += -ffunction-sections -fdata-sections
+> +LDFLAGS_FINAL     += --gc-sections
+> +endif
+> diff --git a/arch/m68k/cpu/m680x0/cpu.c b/arch/m68k/cpu/m680x0/cpu.c
+> index f60b932c7dd4..3f87076b8c3d 100644
+> --- a/arch/m68k/cpu/m680x0/cpu.c
+> +++ b/arch/m68k/cpu/m680x0/cpu.c
+> @@ -24,7 +24,7 @@ void m68k_virt_init_reserve(ulong base)
+>  	for (i = 0; i < sizeof(*gd_ptr); i++)
+>  		p[i] = 0;
+>  
+> -	gd = gd_ptr;
+> +	arch_setup_gd(gd);
+>  
+>  	gd->malloc_base = base + sizeof(*gd_ptr);
+>  }
+> diff --git a/arch/m68k/include/asm/global_data.h b/arch/m68k/include/asm/global_data.h
+> index aea2ccabe083..9150ed4ab466 100644
+> --- a/arch/m68k/include/asm/global_data.h
+> +++ b/arch/m68k/include/asm/global_data.h
+> @@ -32,6 +32,25 @@ struct arch_global_data {
+>  
+>  #include <asm-generic/global_data.h>
+>  
+> +#if defined(LTO_ENABLE)
+> +/* If LTO is enabled we have to hide d7 to avoid multiple symbol declarations */
+> +#define DECLARE_GLOBAL_DATA_PTR
+> +#define gd	get_gd()
+> +
+> +static inline gd_t *get_gd(void)
+> +{
+> +	gd_t *gd_ptr;
+> +
+> +	__asm__ volatile("move.l %%d7, %0\n" : "=r" (gd_ptr));
+> +
+> +	return gd_ptr;
+> +}
+> +#else
+>  #define DECLARE_GLOBAL_DATA_PTR     register gd_t *gd asm ("d7")
+> +#endif
+> +static inline void arch_setup_gd(gd_t *new_gd)
+> +{
+> +	__asm__ volatile("move.l %0, %%d7\n" : : "r" (new_gd));
+> +}
+>  
+>  #endif /* __ASM_GBL_DATA_H */
+> diff --git a/arch/m68k/lib/ashldi3.c b/arch/m68k/lib/ashldi3.c
+> index 9a4bc676bf4c..9e84bd0d9a07 100644
+> --- a/arch/m68k/lib/ashldi3.c
+> +++ b/arch/m68k/lib/ashldi3.c
+> @@ -6,6 +6,8 @@
+>   * Copyright (C) 1989-2015 Free Software Foundation, Inc.
+>   */
+>  
+> +#include <linux/compiler_attributes.h>
+> +
+>  #define BITS_PER_UNIT 8
+>  
+>  typedef		 int SItype	__attribute__ ((mode (SI)));
+> @@ -21,7 +23,7 @@ typedef union
+>    DItype ll;
+>  } DIunion;
+>  
+> -DItype __ashldi3 (DItype u, word_type b)
+> +__used DItype __ashldi3 (DItype u, word_type b)
 
-Best
-Markus
+Why the above __used is needed ? This impacts all the coldfire builds. 
 
->
->>>   #include <dm/device.h>
->>>  =20
->>>   static inline dma_addr_t dev_phys_to_bus(struct udevice *dev, phys_ad=
-dr_t phys)
->>>   {
->>> -	return phys - dev_get_dma_offset(dev);
->>> +	/* If the PA is in the remap range, apply remap. */
->>> +	if (phys >=3D dev->dma_cpu && phys < dev->dma_cpu + dev->dma_size)
->>> +		phys -=3D dev->dma_cpu - dev->dma_bus;
->>> +	return phys;
-> [...]
+>  {
+>  	DIunion w;
+>  	word_type bm;
+> @@ -46,4 +48,4 @@ DItype __ashldi3 (DItype u, word_type b)
+>  	}
+>  
+>  	return w.ll;
+> -}
+> \ No newline at end of file
+> +}
+> diff --git a/arch/m68k/lib/lshrdi3.c b/arch/m68k/lib/lshrdi3.c
+> index e639e676a269..53163bc5f83f 100644
+> --- a/arch/m68k/lib/lshrdi3.c
+> +++ b/arch/m68k/lib/lshrdi3.c
+> @@ -6,6 +6,8 @@
+>   * Copyright (C) 1989-2015 Free Software Foundation, Inc.
+>   */
+>  
+> +#include <linux/compiler_attributes.h>
+> +
+>  #define BITS_PER_UNIT 8
+>  
+>  typedef		 int SItype	__attribute__ ((mode (SI)));
+> @@ -21,7 +23,7 @@ typedef union
+>    DItype ll;
+>  } DIunion;
+>  
+> -DItype __lshrdi3 (DItype u, word_type b)
+> +__used DItype __lshrdi3 (DItype u, word_type b)
+>  {
+>  	DIunion w;
+>  	word_type bm;
+> @@ -46,4 +48,4 @@ DItype __lshrdi3 (DItype u, word_type b)
+>  	}
+>  
+>  	return w.ll;
+> -}
+> \ No newline at end of file
+> +}
+> diff --git a/arch/m68k/lib/muldi3.c b/arch/m68k/lib/muldi3.c
+> index c42ca1d753e5..06af5533fde3 100644
+> --- a/arch/m68k/lib/muldi3.c
+> +++ b/arch/m68k/lib/muldi3.c
+> @@ -6,6 +6,8 @@
+>   * Copyright (C) 1989, 1992, 1993, 1994, 1995 Free Software Foundation, Inc.
+>   */
+>  
+> +#include <linux/compiler_attributes.h>
+> +
+>  #define SI_TYPE_SIZE 32
+>  #define __BITS4 (SI_TYPE_SIZE / 4)
+>  #define __ll_B (1L << (SI_TYPE_SIZE / 2))
+> @@ -54,7 +56,7 @@ typedef union
+>  	DItype ll;
+>  } DIunion;
+>  
+> -DItype __muldi3 (DItype u, DItype v)
+> +__used DItype __muldi3 (DItype u, DItype v)
+>  {
+>  	DIunion w;
+>  	DIunion uu, vv;
+> diff --git a/common/board_r.c b/common/board_r.c
+> index 76f9fc090fbe..58eb69005468 100644
+> --- a/common/board_r.c
+> +++ b/common/board_r.c
+> @@ -800,12 +800,12 @@ void board_init_r(gd_t *new_gd, ulong dest_addr)
+>  	 * TODO(sjg@chromium.org): Consider doing this for all archs, or
+>  	 * dropping the new_gd parameter.
+>  	 */
+> -	if (CONFIG_IS_ENABLED(X86_64) && !IS_ENABLED(CONFIG_EFI_APP))
+> +	if ((CONFIG_IS_ENABLED(X86_64) && !IS_ENABLED(CONFIG_EFI_APP)) || CONFIG_IS_ENABLED(M68K))
+>  		arch_setup_gd(new_gd);
+>  
+>  #if defined(CONFIG_RISCV)
+>  	set_gd(new_gd);
+> -#elif !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_ARM64)
+> +#elif !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_ARM64) && !defined(CONFIG_M68K)
+>  	gd = new_gd;
+>  #endif
+>  	gd->flags &= ~GD_FLG_LOG_READY;
+> diff --git a/common/init/board_init.c b/common/init/board_init.c
+> index 2a6f39f51adb..31b499ebad9c 100644
+> --- a/common/init/board_init.c
+> +++ b/common/init/board_init.c
+> @@ -14,10 +14,10 @@
+>  DECLARE_GLOBAL_DATA_PTR;
+>  
+>  /*
+> - * Unfortunately x86, ARM and RISC-V can't compile this code as gd is defined
+> + * Unfortunately x86, ARM, RISC-V, M68K can't compile this code as gd is defined
+>   * as macro and cannot be assigned.
+>   */
+> -#if !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_RISCV)
+> +#if !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_RISCV) && !defined(CONFIG_M68K)
+>  __weak void arch_setup_gd(struct global_data *gd_ptr)
+>  {
+>  	gd = gd_ptr;
 
 
---9a565b9683e0ac3540886abdc2bc590754cc48f5f2f6851fd83e60e14951
-Content-Type: application/pgp-signature; name="signature.asc"
+Regards,
+-- Angelo
 
------BEGIN PGP SIGNATURE-----
-
-iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCactxBhsUgAAAAAAEAA5t
-YW51MiwyLjUrMS4xMiwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlPW
-EQEAtGGh0C6hlxhPs20XJPVDGFU/Z/m5bRcW3hy9ug+megEBAPyAQY1VtI2GZuEC
-MV3JsVH2HwME/HYfhLofQGaGk1QI
-=3j6u
------END PGP SIGNATURE-----
-
---9a565b9683e0ac3540886abdc2bc590754cc48f5f2f6851fd83e60e14951--
