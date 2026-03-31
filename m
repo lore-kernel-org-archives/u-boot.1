@@ -4,109 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34FF01061B39
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 11:50:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CF531061B37
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 12:18:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5119983DA6;
-	Tue, 31 Mar 2026 13:50:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7258483DA6;
+	Tue, 31 Mar 2026 14:18:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UKJzP/oi";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="vB3LBvGh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4654283DBF; Tue, 31 Mar 2026 13:50:31 +0200 (CEST)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5B29D83DA7; Tue, 31 Mar 2026 14:18:26 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 309EA83A41
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 13:50:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B7C3A83A41
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 14:18:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-59e5aa4ca41so3809352e87.2
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 04:50:29 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774957828; cv=none;
- d=google.com; s=arc-20240605;
- b=Nn3jhdfpUR6/AIBWc6jDIn1ZnHHA3gIz1T2gcd5Uous5KkCDuwHK+tKyKaGzGmNpAk
- nzndB53K2xRSl4IdgygnDY7Up5aalrGIckblcdJ1MDFrck7BERjAmEaqVkfGsgmN7TNr
- Xme0a3DL/j0PGjZdXSBi2b0nmAVZGlDpM/YWppvdVFY6pbPyduInjHlXCM36HLR3/YHX
- LSz7S4Wlv4UpuhojjxGBm8TIveid1LwvY6YSUNMPR7ZkH6bx1pyZrZtxtaYa+BIW8pa4
- +oBmf9nfm30hhD+OmbATV9d3+Mnux3qTHFlz1s7mYCE9dIu2D7vT6Z1FTMLrCIMjkl9C
- OVRw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=B/15gBUt/6HHGTv/ZscxGWtOHA3alFFoBR8IAVlX8YI=;
- fh=KwUyhSwMbuqJnq4eiLKUni0v+aYMSLZPgPUfMf11DU0=;
- b=Jg1Kn2IFHyVCYSJRdF5s/JAG8LzxassiJxSEMOrhPt20UaLOHThwm8QyAu1SpkqR8b
- tXljJ37tergCSMdj7MbBb0mw4j35sHMmc51ZZqvhXFhSeqJjRAI6AsKFsYbghKFmN9JR
- h7kNl0UqXMg82oROC1tMuHOLPb9wkDMLc6PPo7QNeLywI3q1eTGc/ORNTqlyf+ZHjWpy
- utWrjgw6VLdEOdqUt6ijkxrvjBp9ZdDidcAxWCroms4RIAZ+bkRPYn995meJR48Ds6st
- jOivNnm9JOtF3ZrvweiHXU/GTrBGFjO02DMKsgn4ewJUIgdJHgpxu+WQpp4T2SK70ffo
- wljQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1774957828; x=1775562628; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=B/15gBUt/6HHGTv/ZscxGWtOHA3alFFoBR8IAVlX8YI=;
- b=UKJzP/oiZektfLZcTb++Jzu4BE1C/+4o+lFANZ03BMLNoyTO/Inq9Sj1m2zxQpAZB1
- JycfBfY/TXj070+GR7iGI8ox/12vz5j3f425J98rW0s6F1BOjCkrxBcs2kakLOaqJWXt
- cjuwS+i4L/buJ+XE7LFCvJ4+W/+3mNDh6ctMgHAzUvqeA/9Pc9dy4jC5NV3/PAMl6QAD
- lYc725/LBNKFRYfCkfu2b231WsdFScElIJhJ2NQeSY8ICdBLB48f5QRGLtuXgpODXooD
- td5OrGfCfTqWT2Wa0HsaKavG8qIUAymCVhexJBsE7fhZU8oQuljb1dQ7zW1fay86wGaf
- Z19g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774957828; x=1775562628;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=B/15gBUt/6HHGTv/ZscxGWtOHA3alFFoBR8IAVlX8YI=;
- b=LX44TnZkpQUg+ZPDRFFZ0M+RJWADxDqsnnxVR/pstwlHn+CHEP3/r/RJr18eyLSie1
- QY6VfMHaRPW8lgn9fQxsSkNKnbNDehKNnx+0cOViBtTV6zBKMEfJ4+vOJrInDqX7OYsn
- bJ+d1RP3mVicmCSTipH9W8Xm9L2XN09eIxUUXMPjU1R65B/NmWLPf5peGRiLidbJTJwh
- du1JQd6NKsqermOl1mPKGThQkkb8UMJTbxjiTpYrJcZ5E5dZxeh7fXwhTURURnf6qp/w
- pu6+ZQdbwqZRR49OqHRAV7WZh8ySxM2l5bqzMgcNFc88R3yOR0p5KcX/O4f4dmDvRdAK
- J2nQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU/kdIwx382mIYl9OlRiAdxtUOKkw688+jh3j+xciV8fmYGaigDp9JPoF7h1iTz6KCqk7HBo9w=@lists.denx.de
-X-Gm-Message-State: AOJu0YwJmGk7wKYy/0skP4ZhzOCr82M/tB89OUuhS9ii6ENXkGO8LInf
- n/WccXwtjPfRsUsg7KpbD6iCxXhxV7mmSzFdFbXLBdxtWXh8rH7rIKT+5LOo02cWzpP9vmhMVM7
- AIS4SHwoSzn87WlOQPEXk7mxXTGwDobk=
-X-Gm-Gg: ATEYQzzTM9rhtVddLzLvTvW8QqM5+9x28smyKbal/Ul+rp9daHKr6uypPUzJbhh4ztF
- xuxcwVGQyPe6ifm61sDCmSWT1CWnnCRzTqRD1XYsYr1D3dQw26HmJzWGBFQruAUqvMPypE5Dtz8
- i4cUsWYlrP5bu4TN+qijQ01mw1GpKdDBB21CJIT+PXZhAPHfPZetzjoH4BpKVPr44nKN4s/wfx+
- zWthg3zU05XfJST8m8B4h2WrGYJXa1g/aQqnGDrqr6RUR2EZN8cXQxRxwK5PKgBFR13B4MIhpP3
- I27sSNFQavWP2VihVZ6YU3jYH1d//u036uP29rxAjSMdCzFSP+8IS3p3elj8R+0RVvjLwds=
-X-Received: by 2002:ac2:4e01:0:b0:5a2:bef4:5dfe with SMTP id
- 2adb3069b0e04-5a2bef45e38mr614498e87.9.1774957828031; Tue, 31 Mar 2026
- 04:50:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=stefan.roese@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4flRwY5hPJz9vHR;
+ Tue, 31 Mar 2026 14:18:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1774959502;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ReV8Z+rgFlAhV9l01YBWSKx+WzksgP9kQ/I44kb+gVM=;
+ b=vB3LBvGh0ZjzbQUK9pOKBrpd0aLRmWmkvqUflqJXT7195390ZT2w3AC0zk9UgbkAJn6ckh
+ ReHnBbuxivMPGR/ePccqId/i0J/u6Y3vOlbL2SwBMrj8svS8TuYyVoIv/ncqs8y4nomM10
+ Xn/+HIbo8x9yE6YhOnQzw8MnMpmN+u1GcLd/al/+VdNRvAW6osCUymSGc8a1ZAh19Lzh3P
+ aPLnJ3TgFR2UmNbwggIXl93ehiOi+59WUcNV9cZn65QgkJjKjE/ipOn1QodxFC1Abu2s8Y
+ KLXaSJX116PLrEcxHZzVX5wHzF9FzojYNFh8kxxBfzFEsylTArXmfW5DM8nAZQ==
+Message-ID: <b17c142e-edc2-48b4-9ec6-941564067aaf@mailbox.org>
+Date: Tue, 31 Mar 2026 14:18:18 +0200
 MIME-Version: 1.0
-References: <fcc606350e96e03911f6c67537853de1ad51dc10.camel@initse.com>
- <861d61d6-3d35-47bf-9cea-21f7cfd13c1a@nabladev.com>
- <24e183b2fc5419b9ed1685f49a67fb9822b1ad73.camel@initse.com>
- <a5f735cc-e699-422a-b88d-e5fe33fc8b7b@nabladev.com>
- <ea2937eabb137e2c5845bc451f7c28a827496eb3.camel@initse.com>
- <CAOMZO5CsuTw92safK80f0v+0hPkOQvHVEfKZyqWvfdw7ghnxmg@mail.gmail.com>
-In-Reply-To: <CAOMZO5CsuTw92safK80f0v+0hPkOQvHVEfKZyqWvfdw7ghnxmg@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 31 Mar 2026 08:50:15 -0300
-X-Gm-Features: AQROBzADjs6ALJEZTAaX2BoeANYssAe-wY8MwwpJQE69LF6js3vKXQhvqO2lzxo
-Message-ID: <CAOMZO5AqeMmeWLXX3mPKceshw8T=fcFax7Ja=tfm0Qf6Mh_cOg@mail.gmail.com>
-Subject: Re: [REGRESSION] imx8mm_evk: FSPI build broken by 37e50627e
-To: Alexander Koch <akoch@initse.com>, "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,
- Ye Li <ye.li@nxp.com>
-Cc: "marex@nabladev.com" <marex@nabladev.com>,
- "tharvey@gateworks.com" <tharvey@gateworks.com>, 
- U-Boot-Denx <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v1 1/5] arm: mach-mvebu: armada8k: add CPU and clock info
+ display
+To: Vincent Jardin <vjardin@free.fr>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+References: <cover.1773151972.git.vjardin@free.fr>
+ <d4e9220a405991b401071241ae82d8fded18bd1a.1773151972.git.vjardin@free.fr>
+Content-Language: en-US
+From: Stefan Roese <stefan.roese@mailbox.org>
+In-Reply-To: <d4e9220a405991b401071241ae82d8fded18bd1a.1773151972.git.vjardin@free.fr>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: d7scntoi7h3hh4h6kckaq953ikjt5wik
+X-MBO-RS-ID: 7d587c4129a5133b323
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,122 +77,286 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fixing the U-Boot list address.
+On 3/10/26 15:12, Vincent Jardin wrote:
+> Add CPU information display for Armada 8040 platforms.
+> 
+> The soc_info.c reads the AP806 Sample-At-Reset (SAR) register to
+> determine the PLL clock configuration and converts it to actual
+> CPU, DDR, and Fabric frequencies using the PLL frequency table.
+> It also reports LLC (Last Level Cache) status.
+> 
+> Based on soc_info.c from Marvell's U-Boot 2015.01 vendor tree.
+> 
+> Signed-off-by: Vincent Jardin <vjardin@free.fr>
 
-On Tue, Mar 31, 2026 at 8:47=E2=80=AFAM Fabio Estevam <festevam@gmail.com> =
-wrote:
->
-> Adding Peng and Ye Li in case they could take a look.
->
-> On Tue, Mar 31, 2026 at 6:24=E2=80=AFAM Alexander Koch <akoch@initse.com>=
- wrote:
-> >
-> > >
-> > > Is it possible that binman patched some blob offset (maybe for the DR=
-AM
-> > > blobs) at the wrong offset due to the extra header ?
-> >
-> > I'm afraid it's not that easy. After a good amount of juggling around w=
-ith hex
-> > editors here are my findings:
-> >
-> > First of all, we can ignore the error message regarding 'fspi_header.bi=
-n' for
-> > now, that's definitely a different bug (the first `make` will generate =
-a
-> > 'flash.bin' without the header and the second one will add it in withou=
-t
-> > breaking anything else).
-> >
-> > Now I have compared the layout of 'flash.bin' from the last good commit
-> > (6509e007) to the one from the first bad commit (37e50627) and unfortun=
-ately
-> > they both look structurally identical:
-> >
-> > Good:
-> >  - FSPI header at offset 0x00
-> >    (from 'fspi_header.bin', 448 Bytes)
-> >  - SPL blob =3D SPL+DDR-FW at offset 0x1000
-> >    (from 'spl.bin', 188288 Bytes)
-> >  - FIT blob =3D U-Boot+ATF+DTB at offset 0x58c00
-> >    (from 'u-boot.itb', 729528 Bytes)
-> >
-> > Bad:
-> >  - FSPI header at offset 0x00
-> >    (from 'fspi_header.bin', 448 Bytes)
-> >  - SPL blob =3D SPL+DDR-FW at offset 0x1000
-> >    (from 'u-boot-spl-mkimage.bin', 185216 Bytes)
-> >  - FIT blob =3D U-Boot+ATF+DTB at offset 0x58c00
-> >    (from 'section.fit.fit', 729320 Bytes)
-> >
-> > So it seems binman is still right regarding the top-level structure of =
-the
-> > image.
-> >
-> > As I am not even seeing output from the SPL with the bad build I then h=
-ad a
-> > deeper look at the SPL blobs.
-> >
-> > Both do have the DDR firmware at identical offsets:
-> >
-> >  - 0x1c5c0: lpddr4_pmu_train_1d_imem.bin
-> >  - 0x243b4: lpddr4_pmu_train_1d_dmem.bin
-> >  - 0x24a38: lpddr4_pmu_train_2d_imem.bin
-> >  - 0x2a4f8: lpddr4_pmu_train_2d_dmem.bin
-> >
-> > Scrolling through the binary diff I'd say it's mostly build timestamps =
-and
-> > version strings that make up the difference. The 3072 Bytes that the wo=
-rking SPL
-> > blob is larger are all 0x00 again.
-> >
-> > My last idea was trying to inject the SPL blob from the working build i=
-nto
-> > 'flash.bin' from the broken build, to confirm it really is the SPL blob=
- itself
-> > that is causing troubles.
-> >
-> > Lo and behold, that patched 'flash.bin' actually did boot and it did no=
-t only
-> > run the injected SPL part but also proper U-Boot as well as the ATF:
-> >
-> >
-> > -----------------------------------------------------------------------=
------
-> > U-Boot SPL 2024.07-rc1-00155-gef8cc500d15 (Mar 30 2026 - 19:18:36 +0200=
-)
-> > No pmic
-> > SEC0:  RNG instantiated
-> > WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeo=
-ut)
-> > Trying to boot from NOR
-> > NOTICE:  BL31: v2.6(release):lf-6.1.1-1.0.0-1-g874e9578a
-> > NOTICE:  BL31: Built : 14:40:27, Jul 15 2024
-> >
-> >
-> > U-Boot 2024.07-rc1-00156-gb550ac40df5 (Mar 30 2026 - 19:32:55 +0200)
-> >
-> > CPU:   Freescale i.MX8MMD rev1.0 at 1200 MHz
-> > Reset cause: POR
-> > Model: FSL i.MX8MM EVK board
-> > DRAM:  2 GiB
-> > Core:  78 devices, 22 uclasses, devicetree: separate
-> > WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeo=
-ut)
-> > MMC:   FSL_SDHC: 1, FSL_SDHC: 2
-> > Loading Environment from MMC... MMC: no card present
-> > *** Warning - No block device, using default environment
-> > -----------------------------------------------------------------------=
------
-> >
-> > (please ignore the commit hashes, I had to cherry-pick a pylibfdt fix t=
-o make
-> > the build run on my host system)
-> >
-> >
-> > So, any idea what might break the SPL blob itself in 37e50627e?
-> >
-> >
-> > Best regards,
-> >
-> > Alex
+Since this is based on the original Marvell source, I won't start to
+nitpick on minor coding issues. So:
+
+Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
+
+Thanks,
+Stefan
+
+> ---
+>   arch/arm/mach-mvebu/armada8k/Makefile   |   2 +-
+>   arch/arm/mach-mvebu/armada8k/cpu.c      |  10 ++
+>   arch/arm/mach-mvebu/armada8k/soc_info.c | 192 ++++++++++++++++++++++++
+>   arch/arm/mach-mvebu/armada8k/soc_info.h |  14 ++
+>   4 files changed, 217 insertions(+), 1 deletion(-)
+>   create mode 100644 arch/arm/mach-mvebu/armada8k/soc_info.c
+>   create mode 100644 arch/arm/mach-mvebu/armada8k/soc_info.h
+> 
+> diff --git a/arch/arm/mach-mvebu/armada8k/Makefile b/arch/arm/mach-mvebu/armada8k/Makefile
+> index 0a4756717a3..723239d9894 100644
+> --- a/arch/arm/mach-mvebu/armada8k/Makefile
+> +++ b/arch/arm/mach-mvebu/armada8k/Makefile
+> @@ -2,4 +2,4 @@
+>   #
+>   # Copyright (C) 2016 Stefan Roese <sr@denx.de>
+>   
+> -obj-y = cpu.o cache_llc.o dram.o
+> +obj-y = cpu.o cache_llc.o dram.o soc_info.o
+> diff --git a/arch/arm/mach-mvebu/armada8k/cpu.c b/arch/arm/mach-mvebu/armada8k/cpu.c
+> index 3eb93c82387..22767f143c2 100644
+> --- a/arch/arm/mach-mvebu/armada8k/cpu.c
+> +++ b/arch/arm/mach-mvebu/armada8k/cpu.c
+> @@ -15,6 +15,8 @@
+>   #include <asm/armv8/mmu.h>
+>   #include <mach/fw_info.h>
+>   
+> +#include "soc_info.h"
+> +
+>   /* Armada 7k/8k */
+>   #define MVEBU_RFU_BASE			(MVEBU_REGISTER(0x6f0000))
+>   #define RFU_GLOBAL_SW_RST		(MVEBU_RFU_BASE + 0x84)
+> @@ -111,3 +113,11 @@ int mmc_get_env_dev(void)
+>   
+>   	return CONFIG_ENV_MMC_DEVICE_INDEX;
+>   }
+> +
+> +int print_cpuinfo(void)
+> +{
+> +	soc_print_clock_info();
+> +	soc_print_soc_info();
+> +
+> +	return 0;
+> +}
+> diff --git a/arch/arm/mach-mvebu/armada8k/soc_info.c b/arch/arm/mach-mvebu/armada8k/soc_info.c
+> new file mode 100644
+> index 00000000000..a5c3b17cb7d
+> --- /dev/null
+> +++ b/arch/arm/mach-mvebu/armada8k/soc_info.c
+> @@ -0,0 +1,192 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2015 Marvell International Ltd.
+> + *
+> + * Marvell Armada 8K SoC info: SAR, Clock frequencies, LLC status
+> + * Ported from Marvell U-Boot 2015.01 to mainline U-Boot.
+> + */
+> +
+> +#include <config.h>
+> +#include <linux/types.h>
+> +#include <linux/kernel.h>
+> +#include <vsprintf.h>
+> +#include <asm/io.h>
+> +#include <asm/arch/soc.h>
+> +
+> +/* Clock frequency unit */
+> +#define MHz			1000000
+> +
+> +/* AP806 SAR (Sample-At-Reset) register */
+> +#define AP806_SAR_REG_BASE		(SOC_REGS_PHY_BASE + 0x6F4400)
+> +#define SAR_CLOCK_FREQ_MODE_OFFSET	0
+> +#define SAR_CLOCK_FREQ_MODE_MASK	(0x1f << SAR_CLOCK_FREQ_MODE_OFFSET)
+> +
+> +/* LLC (Last Level Cache) registers */
+> +#define LLC_BASE			(SOC_REGS_PHY_BASE + 0x8000)
+> +#define LLC_CTRL			0x100
+> +#define LLC_CTRL_EN			0x1
+> +#define LLC_EXCLUSIVE_EN		0x100
+> +
+> +/* MSS clock is fixed at 200MHz on AP806 */
+> +#define AP806_MSS_CLOCK			(200 * MHz)
+> +
+> +/* Clock ID indices in PLL frequency table */
+> +#define CPU_CLOCK_ID	0
+> +#define DDR_CLOCK_ID	1
+> +#define RING_CLOCK_ID	2
+> +
+> +/* Clocking options (SAR field values) */
+> +enum clocking_options {
+> +	CPU_2000_DDR_1200_RCLK_1200 = 0x0,
+> +	CPU_2000_DDR_1050_RCLK_1050 = 0x1,
+> +	CPU_1600_DDR_800_RCLK_800 = 0x4,
+> +	CPU_1800_DDR_1200_RCLK_1200 = 0x6,
+> +	CPU_1800_DDR_1050_RCLK_1050 = 0x7,
+> +	CPU_1600_DDR_900_RCLK_900 = 0x0b,
+> +	CPU_1600_DDR_1050_RCLK_1050 = 0x0d,
+> +	CPU_1600_DDR_900_RCLK_900_2 = 0x0e,
+> +	CPU_1000_DDR_650_RCLK_650 = 0x13,
+> +	CPU_1300_DDR_800_RCLK_800 = 0x14,
+> +	CPU_1300_DDR_650_RCLK_650 = 0x17,
+> +	CPU_1200_DDR_800_RCLK_800 = 0x19,
+> +	CPU_1400_DDR_800_RCLK_800 = 0x1a,
+> +	CPU_600_DDR_800_RCLK_800 = 0x1b,
+> +	CPU_800_DDR_800_RCLK_800 = 0x1c,
+> +	CPU_1000_DDR_800_RCLK_800 = 0x1d,
+> +};
+> +
+> +/*
+> + * PLL frequency table: maps SAR clock mode to actual frequencies.
+> + * Format: { CPU_freq, DDR_freq, RING_freq, SAR_value }
+> + */
+> +static const u32 pll_freq_tbl[16][4] = {
+> +	/* CPU */	/* DDR */	/* Ring */
+> +	{2000 * MHz,	1200 * MHz,	1200 * MHz,	CPU_2000_DDR_1200_RCLK_1200},
+> +	{2000 * MHz,	1050 * MHz,	1050 * MHz,	CPU_2000_DDR_1050_RCLK_1050},
+> +	{1800 * MHz,	1200 * MHz,	1200 * MHz,	CPU_1800_DDR_1200_RCLK_1200},
+> +	{1800 * MHz,	1050 * MHz,	1050 * MHz,	CPU_1800_DDR_1050_RCLK_1050},
+> +	{1600 * MHz,	1050 * MHz,	1050 * MHz,	CPU_1600_DDR_1050_RCLK_1050},
+> +	{1600 * MHz,	900 * MHz,	900 * MHz,	CPU_1600_DDR_900_RCLK_900_2},
+> +	{1300 * MHz,	800 * MHz,	800 * MHz,	CPU_1300_DDR_800_RCLK_800},
+> +	{1300 * MHz,	650 * MHz,	650 * MHz,	CPU_1300_DDR_650_RCLK_650},
+> +	{1600 * MHz,	800 * MHz,	800 * MHz,	CPU_1600_DDR_800_RCLK_800},
+> +	{1600 * MHz,	900 * MHz,	900 * MHz,	CPU_1600_DDR_900_RCLK_900},
+> +	{1000 * MHz,	650 * MHz,	650 * MHz,	CPU_1000_DDR_650_RCLK_650},
+> +	{1200 * MHz,	800 * MHz,	800 * MHz,	CPU_1200_DDR_800_RCLK_800},
+> +	{1400 * MHz,	800 * MHz,	800 * MHz,	CPU_1400_DDR_800_RCLK_800},
+> +	{600 * MHz,	800 * MHz,	800 * MHz,	CPU_600_DDR_800_RCLK_800},
+> +	{800 * MHz,	800 * MHz,	800 * MHz,	CPU_800_DDR_800_RCLK_800},
+> +	{1000 * MHz,	800 * MHz,	800 * MHz,	CPU_1000_DDR_800_RCLK_800}
+> +};
+> +
+> +/*
+> + * Get the clock frequency mode index from SAR register.
+> + * Returns index into pll_freq_tbl, or -1 if not found.
+> + */
+> +static int sar_get_clock_freq_mode(void)
+> +{
+> +	u32 i;
+> +	u32 clock_freq;
+> +
+> +	clock_freq = (readl(AP806_SAR_REG_BASE) & SAR_CLOCK_FREQ_MODE_MASK)
+> +			>> SAR_CLOCK_FREQ_MODE_OFFSET;
+> +
+> +	for (i = 0; i < ARRAY_SIZE(pll_freq_tbl); i++) {
+> +		if (pll_freq_tbl[i][3] == clock_freq)
+> +			return i;
+> +	}
+> +
+> +	pr_err("SAR: unsupported clock freq mode %d\n", clock_freq);
+> +	return -1;
+> +}
+> +
+> +/*
+> + * Get CPU clock frequency in Hz.
+> + */
+> +static u32 soc_cpu_clk_get(void)
+> +{
+> +	int mode = sar_get_clock_freq_mode();
+> +
+> +	if (mode < 0)
+> +		return 0;
+> +	return pll_freq_tbl[mode][CPU_CLOCK_ID];
+> +}
+> +
+> +/*
+> + * Get DDR clock frequency in Hz.
+> + */
+> +static u32 soc_ddr_clk_get(void)
+> +{
+> +	int mode = sar_get_clock_freq_mode();
+> +
+> +	if (mode < 0)
+> +		return 0;
+> +	return pll_freq_tbl[mode][DDR_CLOCK_ID];
+> +}
+> +
+> +/*
+> + * Get Ring (Fabric) clock frequency in Hz.
+> + */
+> +static u32 soc_ring_clk_get(void)
+> +{
+> +	int mode = sar_get_clock_freq_mode();
+> +
+> +	if (mode < 0)
+> +		return 0;
+> +	return pll_freq_tbl[mode][RING_CLOCK_ID];
+> +}
+> +
+> +/*
+> + * Get MSS clock frequency in Hz.
+> + */
+> +static u32 soc_mss_clk_get(void)
+> +{
+> +	return AP806_MSS_CLOCK;
+> +}
+> +
+> +/*
+> + * Get LLC status and mode.
+> + * Returns 1 if LLC is enabled, 0 otherwise.
+> + * If excl_mode is not NULL, sets it to 1 if exclusive mode is enabled.
+> + */
+> +static int llc_mode_get(int *excl_mode)
+> +{
+> +	u32 val;
+> +	int ret = 0, excl = 0;
+> +
+> +	val = readl(LLC_BASE + LLC_CTRL);
+> +	if (val & LLC_CTRL_EN) {
+> +		ret = 1;
+> +		if (val & LLC_EXCLUSIVE_EN)
+> +			excl = 1;
+> +	}
+> +	if (excl_mode)
+> +		*excl_mode = excl;
+> +
+> +	return ret;
+> +}
+> +
+> +/*
+> + * Print SoC clock information.
+> + */
+> +void soc_print_clock_info(void)
+> +{
+> +	printf("Clock:  CPU     %-4d [MHz]\n", soc_cpu_clk_get() / MHz);
+> +	printf("\tDDR     %-4d [MHz]\n", soc_ddr_clk_get() / MHz);
+> +	printf("\tFABRIC  %-4d [MHz]\n", soc_ring_clk_get() / MHz);
+> +	printf("\tMSS     %-4d [MHz]\n", soc_mss_clk_get() / MHz);
+> +}
+> +
+> +/*
+> + * Print SoC-specific information: DDR width and LLC status.
+> + */
+> +void soc_print_soc_info(void)
+> +{
+> +	int llc_en, llc_excl_mode;
+> +
+> +	printf("\tDDR 64 Bit width\n");
+> +
+> +	llc_en = llc_mode_get(&llc_excl_mode);
+> +	printf("\tLLC %s%s\n", llc_en ? "Enabled" : "Disabled",
+> +	       llc_excl_mode ? " (Exclusive Mode)" : "");
+> +}
+> diff --git a/arch/arm/mach-mvebu/armada8k/soc_info.h b/arch/arm/mach-mvebu/armada8k/soc_info.h
+> new file mode 100644
+> index 00000000000..41afe7a2508
+> --- /dev/null
+> +++ b/arch/arm/mach-mvebu/armada8k/soc_info.h
+> @@ -0,0 +1,14 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright (C) 2015 Marvell International Ltd.
+> + *
+> + * Marvell Armada 8K SoC info functions
+> + */
+> +
+> +#ifndef _ARMADA8K_SOC_INFO_H_
+> +#define _ARMADA8K_SOC_INFO_H_
+> +
+> +void soc_print_clock_info(void);
+> +void soc_print_soc_info(void);
+> +
+> +#endif /* _ARMADA8K_SOC_INFO_H_ */
+
