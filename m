@@ -4,185 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 490C7109B481
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 15:03:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0660BFF60F0
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 15:20:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5D3983DA6;
-	Tue, 31 Mar 2026 17:03:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 331B283DA6;
+	Tue, 31 Mar 2026 17:20:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Jrdd/Ke5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jgff7a1Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCFC583F5B; Tue, 31 Mar 2026 17:03:30 +0200 (CEST)
-Received: from SA9PR02CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170130001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10c::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3AC1B83E7A; Tue, 31 Mar 2026 17:20:30 +0200 (CEST)
+Received: from mail-vs1-xe2c.google.com (mail-vs1-xe2c.google.com
+ [IPv6:2607:f8b0:4864:20::e2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 793EC83A41
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 17:03:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D7FA83A41
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 17:20:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xslZaVXcwKRdzcJN4wWQRolWq4EZyurI6FPsNmmRLBt6tGNUMyl5+OiMKSruG/vYNRs30O2k6Oc61ZqEEegv/RgAsOBL3svFuepjINgn2cgPqBvI/yiTWXd1uGtSyhWudnb4qexhuxcFFU06PUkHKsxbUJYgL3zilDt7g2Si42KEDB6FffYnWVc5I8JR7DLVk0fRSxecaqIbxlruqSsxk/Dmo7nvCV8LNftuY4sCgLIxlB40AZP2jFeEJRid0yF4lQRyjcbFBoTsQFOEcRq/Bwd2ZY0j+f9oW3s77av1939DDhetvH60pfYMY409nHXNnS2JiZWrmta/X6ZQbETS/g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gHv8SmDQGg87f1ByYVBLHq9EqRXsxJkC0WJI3NMRqN4=;
- b=bAS7N7HxTmyXuSWlwYueByaq6Fm7PyCUG23/YkxMG8FT77wEoWxEgjrl5b02N8Xd/toGiXnXDrlmJLZEpx0Bi7dy7MKwb9x5FNfLdyNbaOYaqZFF2zpu55Y9tOsASSoxifdoXMxeqgEJdIDwhiF0vtS0RnxdcJkQIGN8kmPA54zKmF7Ne2AKF20+geVjhLIxpyCfhHbin3DdTK1RTpHJZjWV/Ksl9NDXPwSaT3AbBbExHO5eRxFrX38VcVRhESeE9/uN/3OIHrdL/9wv2TyTa/qKWrZ2zypo7e/rEIOpr9GLebDfN/0xqJ2hzXmhbFcGpDFpAJlwQktTOIdC55AJkg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gHv8SmDQGg87f1ByYVBLHq9EqRXsxJkC0WJI3NMRqN4=;
- b=Jrdd/Ke5Z9oOjKzd0bvK1uBC04R7ZLTsiVDU6pXYTkOm6I+gldlK03SbSFQ9uiyOK/AXTVUbvoAG8aSf+UM1kqIfqApwegZQxKTI1ctVYAtHV4HOuXC6AaE3PmYConaNFphb3IbfBOQ/ORHto3z/mmbpqdHEhX5qY3gP49sg8Ao=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
- by CH0PR12MB8506.namprd12.prod.outlook.com (2603:10b6:610:18a::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.16; Tue, 31 Mar
- 2026 15:03:20 +0000
-Received: from LV5PR12MB9779.namprd12.prod.outlook.com
- ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
- ([fe80::8ac8:e862:8ae9:9287%4]) with mapi id 15.20.9769.015; Tue, 31 Mar 2026
- 15:03:20 +0000
-Message-ID: <5769c248-5d76-4a45-80a7-2deda8a640b4@amd.com>
-Date: Tue, 31 Mar 2026 17:03:07 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/3] fwu: Call EFI stack initialization after preboot
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, git@amd.com, ilias.apalodimas@linaro.org,
- sjg@chromium.org, Casey Connolly <casey.connolly@linaro.org>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Padmarao Begari <padmarao.begari@amd.com>,
- Sughosh Ganu <sughosh.ganu@arm.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Yao Zi <me@ziyao.cc>
-References: <cover.1773840306.git.michal.simek@amd.com>
- <20260331142806.GA1235458@bill-the-cat>
- <13015773-7580-40DB-A865-3B490FDD183A@gmx.de>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- mpwx1d8=
-In-Reply-To: <13015773-7580-40DB-A865-3B490FDD183A@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VI1P189CA0017.EURP189.PROD.OUTLOOK.COM
- (2603:10a6:802:2a::30) To LV5PR12MB9779.namprd12.prod.outlook.com
- (2603:10b6:408:301::14)
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-vs1-xe2c.google.com with SMTP id
+ ada2fe7eead31-5ff05af29b4so2110407137.1
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 08:20:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774970426; cv=none;
+ d=google.com; s=arc-20240605;
+ b=TS3g9RDSOWJPcporUW78GV624iNxM9mJdRdiXORQzl50zQWA6cIv28VI40sho5pi4m
+ fsj7WxFDKglvhD9loBc6LFxrzPq5VJc2+P2HI/FQjEHLJBOkGBCTc+TGXnL+D/lRo/oA
+ eFtb6O2txCgs5+hz6+SWNxRjqHINo7HFh3eLkUtmCrvazy81lAgjgw9mUqdWhXPlRf2A
+ +w/4UYcunQBFvAuNqZAmaaK4CNKY7MJ0bDT4tnRINP0DDuhRw2T4xAysfCVy50qK9a2k
+ l77VGDbfWMS4G9KQqk0qwSnI7GlbqlTee+WXQCtMsNRCNNEWgxqb4iV27RdunJKPppkd
+ jTWw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=1TbimMmPLtqMyhRCyazBj0sWVYlhlBaNzEb69bTUwYk=;
+ fh=gcSkaxZUXzM2nPBPzXEdvcd3AKgHr6r9KiiWuipVEP8=;
+ b=ckgRwOurbZLFtiBaXW2CHLFof/cfnS4nlWI88aaMgl89FQpiwX6MCNUQpz7zxgigxQ
+ ahXhLsvKxncLCmTiKL8c3W1TlEfabJhvdBZZpyNXBY5gOeVQtvgY19vBL/edTKAhcC63
+ sXyH37BvV5vrt15veRoQUFbIQvEqfnRMvWuVPNsMPFSwMtfGw7CGdd6zCcgJYmFtTGXt
+ 0cXOEAHS4cT2vKIzb3XIpoezbqJbVsNODa+cHL7Y9TSWgaXZ7brm5RUywiV2FHda+qsK
+ UoHqznibHUdVfyVAVF98j7amnj3qlh+YdjOuz9gBTRl9ouz1xtf6c1AeDUu2dCrQ2Amj
+ swDA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1774970426; x=1775575226; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1TbimMmPLtqMyhRCyazBj0sWVYlhlBaNzEb69bTUwYk=;
+ b=jgff7a1YlkQDjZAL9uKJQ1XemcfMG2B6PPsDpLFR3QRUNQ10a5iTbIFRFuAu4Xq2Yh
+ sAaMERH540R2iv/NnM/2yuRpTZTqeFvBGCrNFpKIX3f2D4EWMJiLvY0pxJmytWjxRK0s
+ LF8TI4mU/qFro2FUEF9LVKO5g0jYVwLVSWelvodDVQzXa37a2J6OsBPJ/mykbK1WYUq9
+ Wc5KCfzNWatfhYZ4bjjK/kPUm0ru++/7kCBn4yIO7Qpp5CzP8wDfB8ZalUIEKFDMhH40
+ rC5HcFHlX2m5A4/7WbyGnOik+f4E4+Rg4X+LMvIbCKmsndlVhAKj1qfshkAL6514ZxvY
+ XfKQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774970426; x=1775575226;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=1TbimMmPLtqMyhRCyazBj0sWVYlhlBaNzEb69bTUwYk=;
+ b=PUA45Dnj1iEHo9IazufbiBUudgbBTV4B3OzFi2/QtPBSVatcJqHB0KsOyQXvlayoCM
+ NGKlLKbj1Oe35G+DNkusbtJjKQfZnsYLW5+R5HVSOYiyM0P+3LECqZxzo/Ej3/+XEizx
+ nf5+2OCs+bXVqmySlAdmCc1onqHAXpx4yfl9kYhUrzl3dZrVRZ2wNYPtheE2akUY6tQw
+ QWYNoagMLaurx7ruaX5O5lJ8hQX/XKCwTxmMOt6Ds2SfjBZeckcH3q9fGuS1mFERumoz
+ +l5MDd264hQ36N8383j2P7/UooLbCNUFfVg4y7tRW73Bl7141s3W/5izHg8oZthD9bCo
+ Bd6w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU3tX3hXBVrsu3gDVI/PgVNfpH1lA7IrNb0ngqbzC21S+C3jcRTNIz4/OZY9vVEusQT7zZ/A/Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx8UXqpWWQwgDbTj+I1qoFoJ+Y1lhfn/pTnNfq8/38zqDyqYh7W
+ zcyFLpWfVJQD7s0tGzJCNZK7V5bPMDmSCYU1B9G4noyCKZ05wSYmHMUFL87DTNEUehgZ1SfdzPX
+ Bcxu93RSXbsaQHpt98K+/XkBloimJ0Xk=
+X-Gm-Gg: ATEYQzzv8qQZl1b9LPMddkOz4WQJqpfC9QdUFMhoYvDY5itMlUxyz6V+EeFHZGeOyAD
+ 61nEeouOYJnm+PcYp2wMPlDMpcuBru9TiYR0LfvrrqZl5CfFvczgSBwVTno6eOAUMHaLxdINt4Y
+ vx8pPkQT8Kgd7J04m2wT6hrWi7eVr6BUIW1O6TBQsC6akxnuvT0e2Q/IAoyRv18fmZ4sM+h8XmZ
+ MsDJ0kyddRN4Bhgan/p4DKOiB1rLK0KSAr9LbrzHC9Wl7IXgkDxgE/q0Ur/dAqVe438ErbCmas5
+ d/dIeiae
+X-Received: by 2002:a05:6102:6045:b0:602:6784:3eef with SMTP id
+ ada2fe7eead31-604f931327fmr5675879137.28.1774970426039; Tue, 31 Mar 2026
+ 08:20:26 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|CH0PR12MB8506:EE_
-X-MS-Office365-Filtering-Correlation-Id: c1969ba4-a4f2-4bc4-07d1-08de8f36a56a
-X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|7416014|376014|1800799024|18002099003|56012099003|22082099003;
-X-Microsoft-Antispam-Message-Info: a4cdDijgL9iP+tDzbmnXCN+QC+KDg9gjUm+vkkqxM51AxXAqdRG1F+6Rvu6NqFL/h/NzREBOmdDJtchoMj2YiPThiOOiCDxveENkS4KOLUKdaoVRTr2pEN9gU97YwXGihRkGyUxcnmlsn8442y573C9UhwlzNAOiziMQ3oHy4zOFWaL82rZ9donKbYfiIEFuwLiuGevrUVI2/ktaxUGYz4dz3MwUikXPk2oG3vS4lvMr1vlB4CzXdZ3+cyKIab4EjwNj8YeO89XNJAr5nhXshJHbru1qzyo/ZgSf4aUg05e40Gd8iC5EyGJT4L+NmKOUGXe2njrn7vflNhLY8306yVeWR8CMn1U/2l2d1wiIVZX5hwjBZqmxVdDCrsWTeg7hlw0QB93NBvqalY7czUiLJhdneYZFxDr/YbGPXshNhJbtcUEKURhoBZezUWSaoxfP94duCn/UxJGoRRkJQZ7cx/jcAbof0+quJQxbuniLWIzrRCdp8VmlyREc7l/ZVc9XyPgU3Lg+lDDRCJ3kycN1LifKuDbRqtDTESJxgqUalMKf2c/l8q2jue5teBnAtgD2xgTmIgYeF6ieDWH0ELgvAmNbdCZHRGw3q89hsUKVrfJjqenveGJDywL1mqKGuhO3jawRjh+U9URkbEtCvnnZJEVP7srbO/BRsRjKNKa3uYrLTTRejEeQ+nHjOdj6gkRj2bKlE3Lp4BCf/ed3Mw8nvZo3BB/RdwNgRwnBAxwOUlE=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(7416014)(376014)(1800799024)(18002099003)(56012099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NGZFd20raGpPTWxlNnIrcmxrdVQ2Nk9WVlNjR2swQUxYVmczbm5jNlYvaXNo?=
- =?utf-8?B?WllCa1ZKdXlPcSthRlJucGJYZ2Rja3BvRHEvd0MyUXBRQ05NcEU4Z0xXd2Q5?=
- =?utf-8?B?aVRhRmdPaThMV1NQV3hac3NqT3FIMEplTFNnYUZSeGt6Z0VaQ29BMnpLNDVs?=
- =?utf-8?B?eXg5NHhjM1ZlaGRTMU4wOWVoYWtXMGx3SmNzeXhySXE0MkpTMW9obUJoMUxt?=
- =?utf-8?B?bllsd0JESWNzdlZWenIzTGUvYzhkMVVKZGdWU3RscHdiaGxVNU5mdDI0SGtB?=
- =?utf-8?B?OXEzRWVYUDFxVzhJZ0xkYzJETG9QTmtSNXFYMm0yelY0Skp6OW5NMXlUWHR0?=
- =?utf-8?B?UkE2UTBGMFJSdU9OeHhMNDlTaS96ZTVoZkxMYjBxR1Z5dFQ2a3Zsc0VBMDNv?=
- =?utf-8?B?eVpRKzA0REphM3p2N3pGczhRTnhJUGdJRFBYaGw0d0pia0xaZHFVdXF2UVl2?=
- =?utf-8?B?R2ZhWnpvcEd0eXFvWHVEMkJmUU9KM0FkNy94ekFFUFUzY0tOMlAvUk12Rkhs?=
- =?utf-8?B?VlVTQVJVM0p3TjNlMGVFUUMrMnVxZkFWNndqa1FNc3RjbVMxR2Rtb21GTWxo?=
- =?utf-8?B?QThaSUhrL1hZUEViZ2VYR0wwUEVCbm1UL05ZSzBiVVUvMWw2YWl4ZzU5MG15?=
- =?utf-8?B?d29oTDZhbmNlQkVqc1l0YzRmekU2V3EwTXJSbmJ0WDdIWVFKbnB5ejk2NzJK?=
- =?utf-8?B?eGVwZDZhMHAyUFdkZjdUNndFWVMzQ0M1WW1oVS9OWDRndHFsMmZQOXJxdGxW?=
- =?utf-8?B?UXU2NDNzbmlCWi9CREI3WWtxQjJDbXBib1dHSE5LZWo4KzV1MkV0STBTRjYz?=
- =?utf-8?B?Wm1GaGkxMllIdUwxNFNqNDFCaDkxQitMcDVMRlIzTWlIUndEZS8vOFF3L0Rq?=
- =?utf-8?B?a1ZDaVVJVnZxbkt4Y0kzQlRKTEpsUFowc1VldlM4eHNyejIveVVzcmxzQ0lD?=
- =?utf-8?B?d09FQ1dEOFF0aWhINDc3RkppcWN6LzlTWmk5WldCTm1MWWVMSWVMTWJoVzlm?=
- =?utf-8?B?WGhVTWY4TUxMSkNPVG5GUURGUGYzYktocjh5N3BYV002VzI2U09zQS9JeHBD?=
- =?utf-8?B?UEx5bU5JbEY4V3NsdEt5ekRYMXBxVTZERzJ0eFUxcWU3eXZ5N2lTOWsvR0NW?=
- =?utf-8?B?OW53ckxwNnZNd3FSa0tyTkVyUUl0dEJndERhUjVXZVl1V09hQ1pqcThqTGZB?=
- =?utf-8?B?c3BWQ0Jabi9IdHE2REY0RDluUmxFVkRkYlR4ZTY0L2tPVFNjN3lyTTVUWUJn?=
- =?utf-8?B?UVZoSVJOdFRWTWZyMDZjSUNTcVRKZUVRZDFzbm1RSWVFeHdJQnZndC9zRnd6?=
- =?utf-8?B?WGVYUUhqSDRwcFF5YndTUkFqZ05Iek5zbGw0YWt4WWJaUmZJS1lhK1c0blFk?=
- =?utf-8?B?UzF4RmViRUJDTm5lRmVxSkkxUml0TGZUMGNleE1NWTBEVk1jUU04ZnFGUlZY?=
- =?utf-8?B?bHNXZlNYUFQzTGx2d3lRUStQdWZmZDFwUVJPTEJMT3R0bHBLazZ5cFZzdU0y?=
- =?utf-8?B?UW91RU1OdHhzNkxWVUhEaWIyZmNqOGdWVmpBWjNIMUtKcGFEUHNFZlBBbm1z?=
- =?utf-8?B?d1p5c0lsOEcyaVV0K2p0ZXNxaTUxQno4NlZtVHpiMHdCcHFNOGh1WlR5bXNF?=
- =?utf-8?B?K3dMNXhUV2lsUGtOUWplVmFIUkkzRWdnSzZ1SzZJZVVpcG9mb3VZM2VmU0w1?=
- =?utf-8?B?Ty9STURIakhuOGNYbEdlYU9oK2xtQncxZENvTGVZZHdaWFdIbysyUytRajBp?=
- =?utf-8?B?K0V1T092clE1RnhBWnZMcXA0eU1YVzc2RElXbmZMcHRSZnhvd0hScks1WjJM?=
- =?utf-8?B?ZzdmcFFveWRpVThWYUEvMi9vZTVaTlRUeGR2cE9mTnJjdzZsYzh2RG1pVlpJ?=
- =?utf-8?B?eVlyY3ZtQ3lNcFdKd0ZWYjA4WUJYd3VYQjUwQ1hPV0Q2b2ZWaDg1MGFGaVdE?=
- =?utf-8?B?dytJRkw3UEhMcG1BZm1udkRKcndTNE8zWklvRTdVOUp5eE5tZXZDblYrK3Mx?=
- =?utf-8?B?ckN1aDhicHVySXBzeVVkVEMvdjlSaVlUazB6YnFkd2tnM2VQeXZaNStUN05r?=
- =?utf-8?B?ZkYxTDFzbzQyWU1uZWRHamF4MEdYZzZDTXpjNWtyWWR6Z0QrWE9TYlVocEkr?=
- =?utf-8?B?eTFxNVpTTzN3VlBVTTFjQU9pSC9WSHFjZ2NMdlpnbGZod2lCVkVqa0VQbDUv?=
- =?utf-8?B?TVliOWlmWXJyaTZENFdmWUdLeDk0YjNoS3N0WFZXM1MrNXl3NjVXc0xNMFRX?=
- =?utf-8?B?OWNmQ3VwRXNndWhQQmM2YXE2WFU1c1FXaVorMURiV0xYOGFKenpJYWJPRmpR?=
- =?utf-8?B?USs3LzZHVUVBRk05M2V5SnVmcGVFc0JQNWRBQ0VLSGdubEhMOHo1dz09?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c1969ba4-a4f2-4bc4-07d1-08de8f36a56a
-X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2026 15:03:20.1862 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /XYa2ZTWNZh/rwSrwNIy0xZyuoqjAUARpZ/bB3F6N1djQ1yx7WjEfrZRphEzOHKu
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR12MB8506
+References: <20260219132552.1499698-1-philippe.reynes@softathome.com>
+ <20260219132552.1499698-5-philippe.reynes@softathome.com>
+ <CAMDkj5xpnbA0m4XHZhxMeVRr8OvidUmJST8aAUSfR1bArnYn8A@mail.gmail.com>
+ <fdb2027c-c81d-4421-8f7f-13b75e733a45@softathome.com>
+In-Reply-To: <fdb2027c-c81d-4421-8f7f-13b75e733a45@softathome.com>
+From: Raymond Mao <raymondmaoca@gmail.com>
+Date: Tue, 31 Mar 2026 11:20:14 -0400
+X-Gm-Features: AQROBzAB4fpydiFz3MA2a-sOoriJ76gWrZsKWgcwKW1q9GruWDxg6IlHkKfTu5U
+Message-ID: <CAMDkj5zbfN_=Lzx8yo4CMBNb=rmTEEPngFTKXWeJqwqt4-pHUA@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 4/9] drivers: crypto: add software ecdsa support
+To: Philippe Reynes <philippe.reynes@softathome.com>
+Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -199,32 +119,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Philippe,
 
+On Tue, Mar 31, 2026 at 9:05=E2=80=AFAM Philippe Reynes
+<philippe.reynes@softathome.com> wrote:
+>
+> Hi Raymond,
+>
+>
+> Le 20/02/2026 =C3=A0 17:40, Raymond Mao a =C3=A9crit :
+> > This Mail comes from Outside of SoftAtHome: Do not answer, click links =
+or open attachments unless you recognize the sender and know the content is=
+ safe.
+> >
+> > Hi Philippe,
+> >
+> > On Thu, Feb 19, 2026 at 8:26=E2=80=AFAM Philippe Reynes
+> > <philippe.reynes@softathome.com> wrote:
+> >> Add an software ecdsa driver so it is
+> >> now possible to use ecdsa signature on
+> >> board without ecdsa hardware support.
+> >>
+> >> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+> >> ---
+> >> v2:
+> >> - no change
+> >>
+> >>   drivers/crypto/Kconfig          |  2 ++
+> >>   drivers/crypto/Makefile         |  1 +
+> >>   drivers/crypto/ecdsa/Kconfig    |  6 ++++++
+> >>   drivers/crypto/ecdsa/Makefile   |  6 ++++++
+> >>   drivers/crypto/ecdsa/ecdsa-sw.c | 33 +++++++++++++++++++++++++++++++=
+++
+> >>   5 files changed, 48 insertions(+)
+> >>   create mode 100644 drivers/crypto/ecdsa/Kconfig
+> >>   create mode 100644 drivers/crypto/ecdsa/Makefile
+> >>   create mode 100644 drivers/crypto/ecdsa/ecdsa-sw.c
+> >>
+> >> diff --git a/drivers/crypto/Kconfig b/drivers/crypto/Kconfig
+> >> index 0d58e3910fe..cf49e5c0f7e 100644
+> >> --- a/drivers/crypto/Kconfig
+> >> +++ b/drivers/crypto/Kconfig
+> >> @@ -12,4 +12,6 @@ source "drivers/crypto/nuvoton/Kconfig"
+> >>
+> >>   source "drivers/crypto/tegra/Kconfig"
+> >>
+> >> +source "drivers/crypto/ecdsa/Kconfig"
+> >> +
+> >>   endmenu
+> >> diff --git a/drivers/crypto/Makefile b/drivers/crypto/Makefile
+> >> index e4a4482b7f3..8170e4cae9c 100644
+> >> --- a/drivers/crypto/Makefile
+> >> +++ b/drivers/crypto/Makefile
+> >> @@ -4,6 +4,7 @@
+> >>   #      http://www.samsung.com/
+> >>
+> >>   obj-$(CONFIG_EXYNOS_ACE_SHA)   +=3D ace_sha.o
+> >> +obj-$(CONFIG_ECDSA) +=3D ecdsa/
+> >>   obj-y +=3D aes/
+> >>   obj-y +=3D rsa_mod_exp/
+> >>   obj-y +=3D fsl/
+> >> diff --git a/drivers/crypto/ecdsa/Kconfig b/drivers/crypto/ecdsa/Kconf=
+ig
+> >> new file mode 100644
+> >> index 00000000000..308824d8421
+> >> --- /dev/null
+> >> +++ b/drivers/crypto/ecdsa/Kconfig
+> >> @@ -0,0 +1,6 @@
+> >> +config ECDSA_SW
+> >> +       bool "Enable driver for ECDSA in software"
+> >> +       depends on ECDSA_MBEDTLS
+> >> +       help
+> >> +         Enable driver for ECDSA operations in software. Currently
+> >> +         it supports multiple ECDSA algorithm.
+> >
+> > Same comments as I placed in your patch [0/9], ECDSA_SW is not
+> > required and can be replaced by ECDSA_MBEDTLS.
+> I have discovered that this driver should also depend on ECDSA_VERIFY.
+> Otherwise we may define a driver (defined in this file) without a device
+> (defined in lib/ecdsa/ecdsa-verify.c),
+> and that leads to a crash =C3=A0 boot.
+> So I have kept this config in v3.
+>
 
-On 3/31/26 17:00, Heinrich Schuchardt wrote:
-> Am 31. März 2026 16:28:06 MESZ schrieb Tom Rini <trini@konsulko.com>:
->> On Wed, Mar 18, 2026 at 02:25:08PM +0100, Michal Simek wrote:
->>
->>> Hi,
->>>
->>> the whole series is trying to address issues we have on platforms where usb
->>> and ufs init are not done before efi initialization. This is happenin on
->>> platforms where A/B update is enabled. FWU code is called early and do EFI
->>> initialization before usb and ufs started that's why they are not visible.
->>>
->>> We are workarounding it by starting usb/ufs from board file but this should
->>> be more generic approach.
-> 
-> If a block device is created after EFI initialization an event handler creates an EFI handle.
+Can the implementation of RSA be a reference?
+It has RSA, RSA_VERIFY without coupling with impl '_SW' or '_MBEDTLS'.
 
-But capsules are not automatically taken.
+Raymond
 
-> Do have an example for QEMU to reproduce the issue.
-
-Nope. Only on our HW.
-
-> I am on vacation till April 11th. But maybe Ilias could  look at it.
-
-Enjoy.
-
-M
+> >
+> > Regards,
+> > Raymond
+> Regards,
+> Philippe
+>
+> >
+> >> diff --git a/drivers/crypto/ecdsa/Makefile b/drivers/crypto/ecdsa/Make=
+file
+> >> new file mode 100644
+> >> index 00000000000..8f9e5a767f8
+> >> --- /dev/null
+> >> +++ b/drivers/crypto/ecdsa/Makefile
+> >> @@ -0,0 +1,6 @@
+> >> +# SPDX-License-Identifier: GPL-2.0+
+> >> +#
+> >> +# Copyright (C) 2026 Philippe Reynes <philippe.reynes@softathome.com>
+> >> +#
+> >> +
+> >> +obj-$(CONFIG_ECDSA_SW) +=3D ecdsa-sw.o
+> >> diff --git a/drivers/crypto/ecdsa/ecdsa-sw.c b/drivers/crypto/ecdsa/ec=
+dsa-sw.c
+> >> new file mode 100644
+> >> index 00000000000..0d526371ecb
+> >> --- /dev/null
+> >> +++ b/drivers/crypto/ecdsa/ecdsa-sw.c
+> >> @@ -0,0 +1,33 @@
+> >> +// SPDX-License-Identifier: GPL-2.0+
+> >> +/*
+> >> + * Copyright (C) 2026 Philippe Reynes <philippe.reynes@softathome.com=
+>
+> >> + */
+> >> +#include <dm/device.h>
+> >> +#include <linux/types.h>
+> >> +#include <u-boot/ecdsa.h>
+> >> +#include <crypto/ecdsa-uclass.h>
+> >> +#include <dm/platdata.h>
+> >> +#include <crypto/internal/sw_ecdsa.h>
+> >> +
+> >> +static int ops_sw_ecdsa_verify(__always_unused struct udevice *dev,
+> >> +                              const struct ecdsa_public_key *pubkey,
+> >> +                              const void *hash, size_t hash_len,
+> >> +                              const void *signature, size_t sig_len)
+> >> +{
+> >> +       return sw_ecdsa_verify(pubkey, hash, hash_len, signature, sig_=
+len);
+> >> +}
+> >> +
+> >> +static const struct ecdsa_ops sw_ecdsa_ops =3D {
+> >> +       .verify =3D ops_sw_ecdsa_verify,
+> >> +};
+> >> +
+> >> +U_BOOT_DRIVER(sw_ecdsa) =3D {
+> >> +       .name   =3D "sw_ecdsa",
+> >> +       .id     =3D UCLASS_ECDSA,
+> >> +       .ops    =3D &sw_ecdsa_ops,
+> >> +       .flags  =3D DM_FLAG_PRE_RELOC,
+> >> +};
+> >> +
+> >> +U_BOOT_DRVINFO(sw_ecdsa) =3D {
+> >> +       .name =3D "sw_ecdsa",
+> >> +};
+> >> --
+> >> 2.43.0
+> >>
