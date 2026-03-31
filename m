@@ -4,83 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A103A10F92E6
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 18:15:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DF22FF60D5
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 19:41:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B002984020;
-	Tue, 31 Mar 2026 20:15:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DD2D983E7A;
+	Tue, 31 Mar 2026 21:41:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C8Z7LC2e";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EonUnTRw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4698C8403D; Tue, 31 Mar 2026 20:15:24 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id AEF1383F5B; Tue, 31 Mar 2026 21:41:55 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E2AC83E7A
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 20:15:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AF52D83AA9
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 21:41:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7d9b21d1461so137241a34.1
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 11:15:21 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-b932fe2e1a7so797103066b.1
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 12:41:53 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774986113; cv=none;
+ d=google.com; s=arc-20240605;
+ b=brZ8QEjvylR+kYsf/2C2T0W8G/tVMvlOkgYJIz6JIMHxFdUfkONysUF5WCcDH/MydZ
+ +2esyvUEGU19JBcZ+9CqRu91sL48nbyG0vn25Q85pRCpKyVJArxKInsJQZ+bUP6UV2y7
+ nf9E9VOwipGR3NTnoXiVCTzQ/3DdQ30tKLCDpeN0enSt5jzU2WkxZlhuXDqFLcz5y8+N
+ 7Bt6ap3335TGVVnHQPR4lhPGFDLw/N+BKPx9AZ2SjTGD+eZ7zVYyhsGg3Ddp7urz/0p3
+ YSz247DlpGfcHiD0/RZGDrUFQ+JMlCzEWWFZVitaXD2b8VYnya4/UkhXK4CJ1LhfwKGR
+ mtLA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=vC97TnjfI1VfvOe+ao+8NwbWlzNNdMkZFQkQk/xHeak=;
+ fh=FkuXq/OfkMip5YZlTI+LCSfno4mMtrRxTs7/A6NPiiY=;
+ b=N3D1Rzz1SwESjgFcdIPLYoIk7uktSg+GF0oiOZ/3ZynfSF8U11QaJ04riLQXy/GUyV
+ efWKIzWrRAF6SGz2bgakqcyKIYQYZAZPo8ihHbqJGTP+fxgnydEzEFOnguVd4ysQHKLS
+ 7lUgxAzb2eSQ7o0JPpje1e9tBsfWINWBkRSVKLDBwjqV4ttOEQakC+cKtX/H/0gZRsIX
+ mtJgttOF7BwlKd1NsmL4sKbcryZQ/tLuAuozN6R12IDDUIwzvCDKm+vK9vsyDBTeyb7G
+ o6R8e5JnHSaCjRJ2T6EH0Jjy6sMYD1OTbKyK66N82SgAvsKyHznadZMxqJLxJAbNYRGB
+ auWw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1774980920; x=1775585720; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lpWKAmJnvKna0xUop/IarW19Oa6cJUgmdkTd0hriSRY=;
- b=C8Z7LC2er16UhV10jwaBdTKSf4GLBTH2P+eRp359jjGOxqckSwRllUskKn0PceePqx
- 3pjXROL7MOR4EJLJdz5jq13tE7MN5Fg+lHMLUezVOvu1xMgzPTDzzuMu0Ec/QHwS9bGZ
- GH+xNMdanqlfxE14Rtfe+sW4qlIRreEOx50P0=
+ d=chromium.org; s=google; t=1774986113; x=1775590913; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vC97TnjfI1VfvOe+ao+8NwbWlzNNdMkZFQkQk/xHeak=;
+ b=EonUnTRwXbTJ4vpC3XadKWHwCNoB8d26wZGrpmOcHOw+72mhBTiAI0dolqqKtpmzW6
+ 4GRdoQRP2+P4gMe1VQXnbRhoYPRUYm28djRxmbQhP3yozjAIdXoEVTyD84zY80oqkqKt
+ zjs9hXeHw6v3qXypJGO/wS4On4Ff8zU4R1v2M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774980920; x=1775585720;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lpWKAmJnvKna0xUop/IarW19Oa6cJUgmdkTd0hriSRY=;
- b=tZdHdnflKgVjx3NEXzvZnPJZFtop4RWd+a7O983o17u5/dOMHDRUsjNcBGtb8g3jR4
- Qh4xUFG+4IVi1fl9onK37OnayVgr/Vat2QYENBuVnKNF9PzYX1wj9u/fa7gDPDoO65YM
- rKSyP+M0mBzJwrWIWghK2TA71KjMld40Hhdl489cTdaeMjdcOLsE75gQPnrwHVL+gk+V
- XEklg8ni2KKcQkcC8J9Q+blWOK43H1E+RGQpJQO8Wp/U1Cat79coOF2U8klVrwdba7dj
- eF0RKaRAHefy8TremWJhdV4sFn31cD53NRBRMEqd8U7LNO9jWL3r2PZl0NCP92HT40El
- 9vmw==
-X-Gm-Message-State: AOJu0Yyc6k+rzsNvjTk6RuqVthaAZmp88EA/GPxMJVflDbcNcQBpVjyW
- FozNXoJ1H/FYmRls7KH2TJNbXSjAbCJJdKIF2HJe/qachBEfbBLesdFKhGQXxdKDXc0=
-X-Gm-Gg: ATEYQzyF4oTmg6wPNpJBCJDldwYRwKtMlsDn6NlE6qJcOUg59C+jqGTvnuoB1sZHYzV
- NZOFRWBYtPPJKnbhHXvNH+jriezHqbL+OAdFDZ2xbyvUI4T3jNXNKE5TfG82ITMsMeN8LBtW48O
- pJBsmQjLZAwM07eqrp8HafsUMSDpuj5GVHWk6UiCKIAytxc0kRJ1ROgq2oC9MC6UlPvfeNUt3b8
- Z5azgdVMdbyQWrOGA3B45fwepSwRENw6OG7Ebg272zI71kv9QDVF8j2vlF4//fqWTa1w97NC/K9
- kO5nUfYfOaIpSUP68c8gj52uDpF9BonkIirMxNLqnCJakxLNbtfajraBzcsHwt0GY20tAFwA/Vo
- Tes2ovSNRNRsooBw857oDaIwydxP8wduDV9lpcZG0iOLGUW/YO4VaYUPeADTU8fEeypaIsbWxgW
- yhcgtxIvW/lysBbGg3iXgK8QLvETDyOrpLDbfL3n1u+VVhF20bagMRPrDGr6gSHOJg5GY7WthLz
- qzOo3FK59q2WeAWy/m78MbrHe4UFj7p962WO82WY3z1xiNK
-X-Received: by 2002:a05:6830:440a:b0:7d7:ddb9:670c with SMTP id
- 46e09a7af769-7db9a0bc397mr268239a34.9.1774980920022; 
- Tue, 31 Mar 2026 11:15:20 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7da0a8501c2sm9270071a34.25.2026.03.31.11.15.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Mar 2026 11:15:19 -0700 (PDT)
-Date: Tue, 31 Mar 2026 12:15:17 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Stefan Bosch <stefan_b@posteo.net>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] s5p4418_nanopi2: Drop unnecessary BOARD_EARLY_INIT_F usage
-Message-ID: <20260331181517.GE41863@bill-the-cat>
-References: <20260325190031.3428654-1-trini@konsulko.com>
- <37959750-b370-97cc-5f55-e0d6c045a8f0@posteo.net>
+ d=1e100.net; s=20251104; t=1774986113; x=1775590913;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vC97TnjfI1VfvOe+ao+8NwbWlzNNdMkZFQkQk/xHeak=;
+ b=OIqd0zAfISf5eeIncxJxrIIyhz0vJjQdPWah8sgbjD+zHHqYT69Y6uiY0nVyeLPDOk
+ b+z0ADK4krYA2vpcpIGVKWsE5LfNbCdAe+4xT6G85yW3kdhdBrN71ePrr/eXNiZFAy4X
+ Aa94lpiV/ofcplwQqgAgmz4GPP3vzW/SqHhZs8jvPSlPhDt/yUv/oq9+LuKOKmsqC9In
+ zB0Vu3IkKqyyWJviwqomePT0TXEU1ZYUnUx/wW7wFNkPq/OjrCrfwGhv71gu1VsaRBsA
+ wrVrOjllo3kKbFNBkbJMSNxSxshiaTxtYkmLtPjSFms4xbX7FFL97EUKS8FN5TFGwLMS
+ D5/w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU2OBy6nXaEEGwF8QGBwDpnPgn5j54zbgOFZ3ZCXy7wy/xs+Dg219eD0J9rqe+zKcWFo3uqOKk=@lists.denx.de
+X-Gm-Message-State: AOJu0YzgDq7z7kUw+wx9ybHJN0voVlIVYvvoOBdIjAFYJ20zjOmNwo5f
+ cSCsDhaLxFVavkuROxzOYiKC8izPIZOFTu2qmqBWXcsvamhXzlu1ISyqOI9DrSks677tvORqbi4
+ 1QPVegFqLDNfPggLfTGOHSRJLCiyFYkn25xO3BGbK
+X-Gm-Gg: ATEYQzxyLpbvfMajYqjH7VzknqDCrzRNEEe9bG56W9ufAjghvBQeo90ETkmy/d8OPWe
+ enAFUKf0ASRwS4TkxcuulE9+iSam924beUfHGujQ6qW6xtzxHOwu8U7FsYsc0Bupj3+wliNjhc/
+ 8+McvKHwlrhFBqr+YKlCe9GSg+owAIzXdkAMR1RmBK7Rt0VzIR40WwJKjUMgiY5yCiKy/Fds/Lf
+ QAWgzHYoVEejUAiyFFfkJuPyz+FtCGc9G1EY4CElB7dG/TReMZdyEbvLAEcU5bSyQzGX8Y0LClH
+ x3lFSA==
+X-Received: by 2002:a17:907:8b8a:b0:b8e:d4ed:5eab with SMTP id
+ a640c23a62f3a-b9c13b047c7mr62698666b.31.1774986113007; Tue, 31 Mar 2026
+ 12:41:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="hn/my3QCKpDuCkBG"
-Content-Disposition: inline
-In-Reply-To: <37959750-b370-97cc-5f55-e0d6c045a8f0@posteo.net>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260330171419.1117817-1-aswin.murugan@oss.qualcomm.com>
+ <20260330171419.1117817-2-aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <20260330171419.1117817-2-aswin.murugan@oss.qualcomm.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 31 Mar 2026 15:41:41 -0400
+X-Gm-Features: AQROBzDXIb8Bj0HEXBuTI5JaFvP6Ap_R-9_YsCEtZkm_-OO51MSXEwyz0-ypgLk
+Message-ID: <CAFLszTjMsRNZJKh7SanNnoDGChb-6jzLEDA0YB7n2Q7hCYkchw@mail.gmail.com>
+Subject: Re: [v3,1/7] misc: Add support for bit fields in NVMEM cells
+To: aswin.murugan@oss.qualcomm.com
+Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, sjg@chromium.org, seanga2@gmail.com, 
+ sughosh.ganu@arm.com, ilias.apalodimas@linaro.org, gchan9527@gmail.com, 
+ mkorpershoek@kernel.org, hs@nabladev.com, marek.vasut+renesas@mailbox.org, 
+ msp@baylibre.com, dinesh.maniyam@altera.com, peng.fan@nxp.com, 
+ quentin.schulz@cherry.de, kever.yang@rock-chips.com, 
+ jamie.gibbons@microchip.com, justin@tidylabs.net, xypron.glpk@gmx.de, 
+ n-francis@ti.com, h-vm@ti.com, ycliang@andestech.com, u-boot@lists.denx.de, 
+ u-boot-qcom@groups.io
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,69 +118,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Aswin,
 
---hn/my3QCKpDuCkBG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2026-03-30T17:14:12, Aswin Murugan <aswin.murugan@oss.qualcomm.com> wrote:
+> diff --git a/drivers/misc/nvmem.c b/drivers/misc/nvmem.c
+> @@ -121,13 +222,27 @@ int nvmem_cell_get_by_index(...)
+> -             dev_dbg(cell->nvmem, "missing address or size for %s\n",
+> +             dev_err(cell->nvmem, "missing address or size for %s\n",
 
-On Tue, Mar 31, 2026 at 05:40:01PM +0000, Stefan Bosch wrote:
+This change from 'dev_dbg' to 'dev_err' is unrelated to bit field
+support. Please can you either drop it or split it into its own patch?
 
-> Hi Tom,
->=20
-> thank you for the patch. You are right, board_early_init_f can be removed.
-> But where is CONFIG_BOARD_EARLY_INIT_F enabled, I didn't found it. Have I
-> missed something?
+> diff --git a/drivers/misc/nvmem.c b/drivers/misc/nvmem.c
+> @@ -12,55 +12,156 @@
+> +int nvmem_cell_write(struct nvmem_cell *cell, const void *buf, size_t size)
+> +{
+> ...
+> +             value = *(u32 *)buf;
+> +             value &= (1U << cell->nbits) - 1;
+> +             value <<= cell->bit_offset;
+> +
+> +             mask = ((1U << cell->nbits) - 1) << cell->bit_offset;
+> +
+> +             *(u32 *)buf = (current & ~mask) | value;
 
-This might be another case (since I sent out a dozen similar patches)
-where the platform wasn't actually enabling it either and so the commit
-message is wrong in that regard. I can fix that when applying if that's
-OK with you.
+You should not write to a const pointer.
 
->=20
-> Regards
-> Stefan
->=20
-> On 25.03.26 20:00, Tom Rini wrote:
-> > This platform enables CONFIG_BOARD_EARLY_INIT_F and then has a
-> > do-nothing board_early_init_f function. Change to not enabling the
-> > option and so not needing an empty function. >
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> > Cc: Stefan Bosch <stefan_b@posteo.net>
-> > ---
-> >   board/friendlyarm/nanopi2/board.c | 5 -----
-> >   1 file changed, 5 deletions(-)
-> >=20
-> > diff --git a/board/friendlyarm/nanopi2/board.c b/board/friendlyarm/nano=
-pi2/board.c
-> > index 4dff32e10d6b..ca8ae529ddf4 100644
-> > --- a/board/friendlyarm/nanopi2/board.c
-> > +++ b/board/friendlyarm/nanopi2/board.c
-> > @@ -406,11 +406,6 @@ __exit:
-> >    * call from u-boot
-> >    */
-> > -int board_early_init_f(void)
-> > -{
-> > -	return 0;
-> > -}
-> > -
-> >   int board_init(void)
-> >   {
-> >   	bd_hwrev_init();
+Second, when 'nbits == 32' the expression '(1U << cell->nbits) - 1' is
+undefined behaviour (shift equal to type width). I suspect you want
+something like 'GENMASK(cell->nbits - 1, 0)' for both read and write.
 
---=20
-Tom
+> diff --git a/drivers/misc/nvmem.c b/drivers/misc/nvmem.c
+> @@ -12,55 +12,156 @@
+> +     if ((cell->nbits && size < cell->size) || (!cell->nbits && size != cell->size)) {
 
---hn/my3QCKpDuCkBG
-Content-Type: application/pgp-signature; name="signature.asc"
+This condition is checked identically in both 'nvmem_cell_read' and
+'nvmem_cell_write'. For the bit field path you then require 'size ==
+MAX_NVMEM_CELL_SIZE' a few lines later, so 'size < cell->size' is
+always subsumed by that second check. Hard to follow How about
+consolidating the size checks so the requirements for each mode are
+clear in one place?
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCacwPNQAKCRAr4qD1Cr/k
-CgSIAP9ViTqVWbGJgFuvbfK4eoMsslrlC8A8iH3LRE7gQjVZ7gEAx445V9UsqUR+
-7W18Vz4UVLXi75HGn7wXK7WhPiOmkAk=
-=H9D2
------END PGP SIGNATURE-----
-
---hn/my3QCKpDuCkBG--
+Regards,
+Simon
