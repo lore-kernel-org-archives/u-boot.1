@@ -4,127 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6592A10F9300
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 21:10:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 364DE10F9304
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 21:33:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7FF584020;
-	Tue, 31 Mar 2026 23:10:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=garyguo.net
+	by phobos.denx.de (Postfix) with ESMTP id 6A9FC84020;
+	Tue, 31 Mar 2026 23:33:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=garyguo.net header.i=@garyguo.net header.b="vz1IroeF";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="pSKoe47Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48BD883F5B; Tue, 31 Mar 2026 21:19:07 +0200 (CEST)
-Received: from LO2P265CU024.outbound.protection.outlook.com
- (mail-uksouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c205::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7F1B184035; Tue, 31 Mar 2026 23:33:21 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37C9883AA9
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 21:19:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 71D3583F5B
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 23:33:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=garyguo.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=gary@garyguo.net
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=V3+sY0U4MTttV0Lgb/oaXVSyc3A6bI15z+7DOpFZmwK2ExDgNOU8gv6xKQC5N9h/UmgfbKrSZ+/FmuqOtZTwfTvpeoDtySLN0bMZademPBcyjp5rWK7JbLh7vsStIOLIUSzDBeMDGGKtZ3BtPhOTOKu/XdcZNDFfKbSc5kZuJ1NoYPqiQlJI8R9TaFpOwbj2tnnShiccVENFwy0aH2dmGSSEVwZJAjMilhe81ragNQagLKCZlLfYYfOQd/zKPDMVo2UAMLc94kPSguIrdr89yzZ8gaBMd7xo+rV1icVlVGb3/S2msg+jYNrpWyQ2plKeTBnh71K/htx+8083fl2kCw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=49SYE5aS3m+IKqFZ2yxqfx0bBw+TigmNtmQXm7GokKw=;
- b=R9Abm5iVI0siX+FJEbcI6Rq9rwb0dTWxpdbYgZPVwpkYPesNXuc60KNKYJ1DGoV707WJKC+h00KzLDmO6gQ3rcKG2/u4s4F4fNEgRwAolpK1s0avIDcixiRgf62jZQPHOAnQDwdYxrHXowVra9EMT9bdHl7cFA2xbwxS2eK67pWHFWag4jHlubkOJ6e3Ih/8ind23aATC9IkKJAP+4OWhTdGsmuQfFjz3Ay+Xyvt+5cFxrUruz1MBl3PiZR9fng5nF21Deb2eXZKI5KKraCbu07v5Kt3dLE6IyeN9UFO0YH5R0p59E64j7PdKdhS2bRbrLr4l10hZd1xJlLK04MfHQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=garyguo.net; dmarc=pass action=none header.from=garyguo.net;
- dkim=pass header.d=garyguo.net; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=garyguo.net;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=49SYE5aS3m+IKqFZ2yxqfx0bBw+TigmNtmQXm7GokKw=;
- b=vz1IroeFUPzLF1Hn4XvhQNrYpuOQ+AKFX4ZPwSMlt9l2xbR3lweeI22uC8Tcxxp91n8dgyIJj0fYSBz2dTF9EZvuAaYWfMf6LbmIZkuNzUYfs2lmg4//ns1wjWJT8bIJawjuDwEo3B2xV03+00EuRUDkNETM7pQjJVr98X0QZcE=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=garyguo.net;
-Received: from LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM (2603:10a6:600:488::16)
- by LO2P265MB3609.GBRP265.PROD.OUTLOOK.COM (2603:10a6:600:1b5::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.28; Tue, 31 Mar
- 2026 19:19:02 +0000
-Received: from LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM
- ([fe80::1c3:ceba:21b4:9986]) by LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM
- ([fe80::1c3:ceba:21b4:9986%4]) with mapi id 15.20.9769.014; Tue, 31 Mar 2026
- 19:19:02 +0000
-From: Gary Guo <gary@garyguo.net>
-To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- David Zang <davidzangcs@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, Gary Guo <gary@garyguo.net>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>, Simon Glass <sjg@chromium.org>,
- Javier Tia <javier.tia@linaro.org>,
- Martyn Welch <martyn.welch@collabora.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] efi_loader: support EFI_OS_INDICATIONS_BOOT_TO_FW_UI
-Date: Tue, 31 Mar 2026 20:18:51 +0100
-Message-ID: <20260331191853.44549-1-gary@garyguo.net>
-X-Mailer: git-send-email 2.51.2
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: DUZPR01CA0083.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:46a::19) To LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:488::16)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-66d65646c65so705157a12.1
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 14:33:19 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774992799; cv=none;
+ d=google.com; s=arc-20240605;
+ b=e8GPH8x+e/V2QCZRRlVnaVFyHd7R0sqEQFMx5T9JAWmdTxZ6e3nboGxnIqcGx30MXn
+ lMA8F/Y0ZDYcXoxdBYTPe2Uhk8d/bPczMkXNappdQ5peFcAbGU6xBl3T/QYY0h2nDRrz
+ CUsoFO7ma6o6zzgVnkWdXaAWce4W2cw9NqN7+osycIa8CR/Eggj4r3+zaNpfB8Oq7ta3
+ 4HRZyT2BlX3uxNLujZvjBXJBiVEAkZrUlI+vZM83OsyO7zlhxxaopfQ9z+DB3lAXbuVh
+ AJpItUpPmqEpSgNgw7nqu6uTBHarTBnb9CSsCfhw2wMrtiWq6u2G2bDDijRFKq8ssgn1
+ isSQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=0Y4QIRGv3tOqJSWLeC3gnhrjorDmgyjnb9ELE2YcPdI=;
+ fh=16cYdFODRNnwBkQ7u7RvpUZ+s4uHsvcSvsV3ZCVmlXw=;
+ b=CZkjNbakEfJBFxheD8pQ58jRoVH/dBAz1vG04dZrpACsTGqkr8Xcd+s1PP641MD7lq
+ T1rRdXkPx2vJi/jIk717WZj1ZRw9pTsYxyT1VWBWkg0IQpaasLxkGVRsUrMATcq8j0tZ
+ KSw3COWiYMC8N0ItJfYj+1pTlfh6awpxx7bQ20EUDPPodakuwHNSaHh6qJ6vyIiBMK4v
+ q5xmWEiRaEPBxxCyy23TP1obPAgqqpjKE5lCTXMfJUrdolFcW5YtrnIWuMGPBGi2B6nA
+ vdHPpz/3e+/SLDv+RhOnZ+Dn78U6B4oeQhkTM1vkDkIUh6gtj0gMHE5av3Yk/RLNpe7y
+ oU7Q==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1774992799; x=1775597599; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=0Y4QIRGv3tOqJSWLeC3gnhrjorDmgyjnb9ELE2YcPdI=;
+ b=pSKoe47Y0RQ9GFo0+GAsHm6OjLDa+8jjPPYNpYECQpk6PHeMF324n3NdX3iBv2Qd5D
+ mVr3p6wA7GYhVObqD+vM3Ysk39Iq6gfuinCy2H8snEf7aNduNH0zRJj3XIjrzPE/NWeB
+ Weg9iMmbdGyTP6qS8IDs/iL9drfM34Ir9QLSiJ2CMTQeVN84A3ZGfRbub0MPZZxAgfFf
+ GjRAZ0+vJ8reGatU4mB/QN7LfzgbRULxbB5DcD1KYZPQKlr+/ZBznu3iIctVyf7UZ3Zs
+ 6BG7K9q5sUOXkKIMbRJpiaJk/omsmQB0BQ+4XY+IcBBSb+WKQkoH81jB99w8SinVn5Ai
+ JiUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774992799; x=1775597599;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0Y4QIRGv3tOqJSWLeC3gnhrjorDmgyjnb9ELE2YcPdI=;
+ b=P/vIF0p68dJcARSFjLe93fvQuxVLbigOtEpnEKTuygE99LJKl2Hh5mhrD36Sw4zm+B
+ UDqZRNmSwQWjs81tCi9VA+K+I6wFwkaf0+ek+mVMlpZEwd1epLo0gF3pHLaUPtXlKaX3
+ B+uwHoZP4xeveYK0mIcXsILi1U4Bfvjl395F1nRr7RXpTHMifazYk+sCTbwIeqHdsJMh
+ eP0Sizk6FArjfGsG7QIUhNAvE8937eacSuJClj0cGt1M0yw80zCEnbYhc5q6sByBED1V
+ 0afAZhAnWCwJFm9XKNUrx7wRKMN6UviY5IYQcYaf1czCUBZXtA0LDgK7E0/KTq1K5dvz
+ 1B3A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVZjCNRA5MbrK5rzmyb7V/9n/Nkk8Yxroi9M6NqlsvxHYNPuJxVaD14G0NfAKOBzPYCXJUkrRQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyAZD2YQYpTejNqe1qfNBXrDdZyLPD/XxdOz5hmcEbpbK4Qq0gh
+ oQPDyhj1g0wwXKASI+CK2H1jn7ulXSAeOWo/2Mg2lY8Fm+I9G1W5CzTIj4XBsmLQ6ei8dceLxDA
+ 0QZlEJHNzDCK9vzxfFyb9tBza48QjRx4=
+X-Gm-Gg: ATEYQzwAdPfXW1Ty0pBZUU75aCTBF98ForGlZoSDma8SkCX+1w4k3TBWn/2ARzmNZ6b
+ lSTe7Q1UP/hmCrrH9SDYWGT6Ai7FG/0KP7DinMI5sFjguGMQyVV152ndfBYK3aUNLA40rRNH5jt
+ pb4AY+GSXeAgIWt/+Tn/9pGwlBhcaufMLvjKeHzYS5cRVq07W9LlRsSk9smI3XQeh8VY2LqGSwK
+ Oowwz2WrF/yWX30l+CoTsYjc3Z9LIYn+gD0pqY5F6PWqPPQinIE8eNfI89AUEu04T6KXetFowAH
+ C6mwoUceWw38/oV7wD4QiFh9l0f2qsvgCb9g/UtEF4y9zr6A4Gd1mAtARYxqPwGrLOwHu/1ADyH
+ pa/H/2LXRmxzcXbnkhEKHRAJl3Rb4qPLs9ZX8u8uKcdr7zeEgoVN9k8y+E8Rs2HljuG/R6ewNR/
+ oSJA1EHacULMs=
+X-Received: by 2002:aa7:c896:0:b0:66c:191e:3802 with SMTP id
+ 4fb4d7f45d1cf-66c3388f0b5mr1919307a12.16.1774992798626; Tue, 31 Mar 2026
+ 14:33:18 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LOVP265MB8871:EE_|LO2P265MB3609:EE_
-X-MS-Office365-Filtering-Correlation-Id: c5fd4b94-108d-4416-1fa6-08de8f5a5e50
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|376014|7416014|1800799024|18002099003|56012099003|921020; 
-X-Microsoft-Antispam-Message-Info: YRjvAug7GflenV/2bvlt9455jeOk+fsGgbGB/33Xj9zele6+OvSi/spM/NgiybufmX2gCtDJYfpNGCopv3+/sZAhR7aN6gFq13c6nb1I3C6KQkLciZca6e7gOSd47/VhxOWQVGCYLBXE1aUsxtyVJ2GyDYbLQRd4xXLJ8trTr/0cBwAErw879Q2HPw4kmjV9MczTIxsAOvLx28ZfzTYS1k+oolrBsTxGqnx2Stkz9vAQDMWDfes49ubrm9MC3lx50pOPq4qFlH9fG2O5uSxPnWprBQDF9wcI87h1z0qSkVbyTnBvw4dB2BukxYcqtR7/xa/uy1ukUs6uZFddFG2As1SQTaQSsRF9DC3QQzvZG1bq3cpw5K+w4/LvJSpultH1pxC//bkYnTGUBxZQvD3aMGlIkNBe2cXP5V5FXhBjJZN2ZKlUqxO0pUpE7hdv3hLQ7OzLdnFtwxOIxUZxnDik9yIz72BYreqj/5aUE4dcVN11kuqJSov2HjATSABgaMg/ev+ewJHhe0DvAvKP5iY45GOQMrg+Q5zH/bFNGTRzAf61vDFFn/Uh8M7w3Gfp4hsLXLXhcPsH+VFO907VBaa7YfitcuobopNjg9IN85GaxXG/+XXCFJdd0EGs8aKkdCPQdR+XqYXEP7CuyJJlBtWsN+fcfpPpJQVQcwfq1zxCX3rqKGCpnyZ2AEuXTsRiUXq0Gqpxu0LYd0Xa0oB2XJGOWLH3K9PZfNSskzirlYyqlQCxstZc9NuGFj19p7Wh83LbXpBhVsZ8OmB/AKWnBvsZBw==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(7416014)(1800799024)(18002099003)(56012099003)(921020);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?yQA2Vw5hkbGbkbUFKt7Yme/xpTfPEBFUPBnAZmlSMM/P6jFPmn0UybWv4hrh?=
- =?us-ascii?Q?/bJrQyNLueTzXmVkkSVEOpB765sJcgVvC8NQROsw3Y2T8nxh2GX+YunhTgXI?=
- =?us-ascii?Q?3HW6UjOj4Pu7HT5CxEJA2L9msRjihWOy+s7UiGqguCsKc50uCnWIYY1gG5bM?=
- =?us-ascii?Q?bhJ4aOuZinxVmnEcpjXj0tQ+tiEIe3bfFBNJmSTAg7yI0Z9c794rrtZaIOxB?=
- =?us-ascii?Q?ypCaziuKNzkcgEfB2LVKnHReF/H2C0Z65WvtY0GkUMrVuuC3634tH3DDM865?=
- =?us-ascii?Q?BIsKOLPDp/z2GQNkzLI+TqL5xLutIXAY5X4sIz9mrfnoccJ03W1hHB44pbo5?=
- =?us-ascii?Q?YbyDy9/AZu8LHb5iKlx5god/xgOsCS0HCZYC6d4NPQ2PD93sUGYgEhmnnpAp?=
- =?us-ascii?Q?gdi5nFXjyghVNcYQXgh6KNNMWOaDN/0Cbgoepv4mTGdg6PbXOSXrNR4LS+qt?=
- =?us-ascii?Q?Grgg0Oxm8oLkEE9AadmxzzjCKzItwGcwSs6rHLHyo5x4VO2fOS8jdQmROJfG?=
- =?us-ascii?Q?EwoCkwBu38yl53VqqdkSqSt+XGBTxopiLz5ZrKS1+lMAQYIiyzxxGPOGzXFf?=
- =?us-ascii?Q?cDDhsnE7UbiuJvHs/dYMv+Mb8VBO7CQOUQRtWy+TbYOtEGnZwmVDxPKpewbB?=
- =?us-ascii?Q?OPJr/tuZcvYW+AZaSQP62uoz0fO0W636t4YB0+4oElRSLHz3p/iCKohzT7Wu?=
- =?us-ascii?Q?RB/FAuRi68Q3fJAgQZFX4KXNocsbHk1HSIT0fWktXgRHJe2mrfHIda78Sxlj?=
- =?us-ascii?Q?vmVh3lFR0c9NbirKKRPt0u2NFITf2ToeEmsWs6wnodarZJVP3ng+utM4HIM8?=
- =?us-ascii?Q?BlZherZFVo4nvd7nww5heifqGL+29tqFwbI337WExtIiAWmIhhpOriWA3Hp9?=
- =?us-ascii?Q?/AdcsJLmyE0dPUD61IbKi+Gz8XAAMzil5R6AdLBWnlHevGUe+8qXdwfAlK0N?=
- =?us-ascii?Q?aFOTpIxypF/QeIyM+VtYdLQSjunvR8j35oXlUbuEBBoorvbS8ZZW8+7IcOOd?=
- =?us-ascii?Q?BBrHtrP5zgaVE7uKFMUNngtem4RYN/mLKgCu3M1kvSXlfhLI8us1HVW+G/oh?=
- =?us-ascii?Q?E9AdSu+dmzfHnfBkUN7ukUFoUAudMbKii+i5RH2OhzN8hy2e2vGqxEDry0E6?=
- =?us-ascii?Q?RaIjdx+m4OC6Y4nZbfCUNCkxKVRwyP0ETQJR+7Au3OjJfjIllXXG9/xDW6a1?=
- =?us-ascii?Q?hHLlwWwQZCzUtyQNgBYqbfzeX3mTMxjUyrthMf45SEl1Cs08OIIW9Ax5vJjl?=
- =?us-ascii?Q?4cqNFJ1hiziF2qKLdA+c9KR4QV8j7tDdx46ddqeZt1/SfCa0JJQCADOQ+aks?=
- =?us-ascii?Q?Yxsgahr64kZ3u9u8KVqrNxr3fUXpdI+ZFDn9+yi5i5YYN/wQNSOiq1K5+IQg?=
- =?us-ascii?Q?shPNeKvCblXi4yCHVMGQCNz/ERRcM0YLrnMoeDFHY6Z2C7nDjERlNyieBwdg?=
- =?us-ascii?Q?peMj2iZByY2jpNfy2hs6XRSVidJUWb2m7qpNPthA4HDjxk5k2XRD7HERVDE/?=
- =?us-ascii?Q?OofkrvgcyNnEc6Q94wskKcDELz9d1i52zsNbOwMtkxGiup9cjKylbimnbtqa?=
- =?us-ascii?Q?e4rvnYtX/gJyaszIly0BUUXsNAYQC2CRvn1VtHeq4W7S+/E1tul5XTjkrSa+?=
- =?us-ascii?Q?L73GXL15NXxtoqRu878lmEK8AtAyKxku7vCA8eCPPuP4MxEORWqRG9coS/t1?=
- =?us-ascii?Q?U5X0aEfJ9pbHze/KAaKeJ/5IaU/4N3MGIGDP8L21cUmCrSFu?=
-X-OriginatorOrg: garyguo.net
-X-MS-Exchange-CrossTenant-Network-Message-Id: c5fd4b94-108d-4416-1fa6-08de8f5a5e50
-X-MS-Exchange-CrossTenant-AuthSource: LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2026 19:19:02.6535 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: bbc898ad-b10f-4e10-8552-d9377b823d45
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: s9gGadWOiqh+iLMmiKmurmPDb2sTtZSptujQxtPhBDXF+F1x/gZjTmeRy5brqiqOVTLf6XEpQqcXwvEe2VOEHA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LO2P265MB3609
-X-Mailman-Approved-At: Tue, 31 Mar 2026 23:10:31 +0200
+References: <20260227152046.42DE068B05@verein.lst.de>
+ <20260227152348.BFF2568BFE@verein.lst.de>
+In-Reply-To: <20260227152348.BFF2568BFE@verein.lst.de>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Tue, 31 Mar 2026 22:33:07 +0100
+X-Gm-Features: AQROBzCKxoeAH-wp3zlHuVZd1HvMGvmcaltL-6mAEI41pM4sQc-QR3n4w1yeN-Y
+Message-ID: <CALeDE9M24UYMJYrFE=Fa7J5tmoo1tQadrnZJ6-zcjz0iqHzmXw@mail.gmail.com>
+Subject: Re: [PATCH 8/9] pci: brcmstb: rework iBAR handling
+To: Torsten Duwe <duwe@lst.de>
+Cc: Matthias Brugger <mbrugger@suse.com>, Tom Rini <trini@konsulko.com>, 
+ =?UTF-8?B?SmFuIMSMZXJtw6Fr?= <sairon@sairon.cz>, 
+ Andrea della Porta <andrea.porta@suse.com>, "Ivan T. Ivanov" <iivanov@suse.de>,
+ Stanimir Varbanov <stanimir.varbanov@suse.com>,
+ Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, 
+ Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Huan Zhou <me@per1cycle.org>, 
+ Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Joseph Chen <chenjh@rock-chips.com>, 
+ Elaine Zhang <zhangqing@rock-chips.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -141,131 +130,204 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-EFI variable OsIndications have a bit EFI_OS_INDICATIONS_BOOT_TO_FW_UI
-indicating that the OS (or next stage bootloader) requests booting into
-firmware UI instead of continuing autoboot process.
+Hi Torsten,
 
-Support it by having autoboot.c asking EFI bootmgr if boot should continue,
-which checks and clear the bit (so the next boot continue as normal).
+> Rework the setup of inbound PCIe windows: use the convenience functions
+> from Linux kernel commit ae6476c6de187 to calculate the BAR offsets and
+> factor out the setup code into a separate function.
+>
+> The Linux kernel first allocates and populates an array of inbound_win[]
+> and sets the BARs from it later, while U-Boot does it all on the fly,
+> in one go, so the code is not 1:1 comparable.
+>
+> Signed-off-by: Torsten Duwe <duwe@suse.de>
 
-With this change, systemd-boot will show a "Reboot Into Firmware Interface"
-option which will be able to drop back to u-boot. This can be useful if
-bootdelay is configured to be -2.
+So in testing I've found this is causing a regression on RPi4 USB, in
+particular with booting from USB storage, at least on my "Raspberry Pi
+4 Model B Rev 1.1" and a RPi400.
 
-Signed-off-by: Gary Guo <gary@garyguo.net>
----
- common/autoboot.c            |  4 +++-
- include/efi_loader.h         |  2 ++
- lib/efi_loader/efi_bootmgr.c | 45 ++++++++++++++++++++++++++++++++++++
- lib/efi_loader/efi_setup.c   |  4 ++++
- 4 files changed, 54 insertions(+), 1 deletion(-)
+The USB works fine up to the prior patch.
 
-diff --git a/common/autoboot.c b/common/autoboot.c
-index 1783ef92c94c..b889407612dc 100644
---- a/common/autoboot.c
-+++ b/common/autoboot.c
-@@ -11,6 +11,7 @@
- #include <cli.h>
- #include <command.h>
- #include <console.h>
-+#include <efi_loader.h>
- #include <env.h>
- #include <errno.h>
- #include <fdtdec.h>
-@@ -503,7 +504,8 @@ void autoboot_command(const char *s)
- {
- 	debug("### main_loop: bootcmd=\"%s\"\n", s ? s : "<UNDEFINED>");
- 
--	if (s && (stored_bootdelay == -2 ||
-+	if (s && !(IS_ENABLED(CONFIG_EFI_BOOTMGR) && efi_should_abort_autoboot()) &&
-+	    (stored_bootdelay == -2 ||
- 		 (stored_bootdelay != -1 && !abortboot(stored_bootdelay)))) {
- 		bool lock;
- 		int prev;
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 3e70ac070550..449697ad13b3 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -583,6 +583,8 @@ efi_status_t efi_bootmgr_get_unused_bootoption(u16 *buf,
- efi_status_t efi_bootmgr_update_media_device_boot_option(void);
- /* Delete selected boot option */
- efi_status_t efi_bootmgr_delete_boot_option(u16 boot_index);
-+/* Check if autoboot should be aborted based on EFI vars */
-+bool efi_should_abort_autoboot(void);
- /* Invoke EFI boot manager */
- efi_status_t efi_bootmgr_run(void *fdt);
- /* search the boot option index in BootOrder */
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index a687f4d8e85c..39f255ac9de4 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -1290,6 +1290,51 @@ out:
- 	return ret;
- }
- 
-+/**
-+ * efi_should_abort_autoboot() - check if autoboot should be aborted per EFI vars
-+ *
-+ * Return:	true if autoboot should abort
-+ */
-+bool efi_should_abort_autoboot(void)
-+{
-+	efi_status_t ret;
-+	u64 os_indications = 0x0;
-+	efi_uintn_t size;
-+	efi_status_t r;
-+
-+	/* Initialize EFI drivers */
-+	ret = efi_init_obj_list();
-+	if (ret != EFI_SUCCESS) {
-+		log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
-+			ret & ~EFI_ERROR_MASK);
-+		return false;
-+	}
-+
-+	size = sizeof(os_indications);
-+	r = efi_get_variable_int(u"OsIndications", &efi_global_variable_guid,
-+				 NULL, &size, &os_indications, NULL);
-+	if (r != EFI_SUCCESS || size != sizeof(os_indications))
-+		return false;
-+
-+	if (!(os_indications & EFI_OS_INDICATIONS_BOOT_TO_FW_UI))
-+		return false;
-+
-+	/* Clear the BOOT_TO_FW_UI so next boot returns to normal */
-+	os_indications &= ~EFI_OS_INDICATIONS_BOOT_TO_FW_UI;
-+	r = efi_set_variable_int(u"OsIndications",
-+				 &efi_global_variable_guid,
-+				 EFI_VARIABLE_NON_VOLATILE |
-+				 EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+				 EFI_VARIABLE_RUNTIME_ACCESS,
-+				 sizeof(os_indications),
-+				 &os_indications, false);
-+
-+	if (r != EFI_SUCCESS)
-+		log_err("Setting %ls failed\n", L"OsIndications");
-+
-+	return true;
-+}
-+
- /**
-  * efi_bootmgr_run() - execute EFI boot manager
-  * @fdt:	Flat device tree
-diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-index f06cf49e4435..0ad02e9fe0dd 100644
---- a/lib/efi_loader/efi_setup.c
-+++ b/lib/efi_loader/efi_setup.c
-@@ -156,6 +156,10 @@ static efi_status_t efi_init_os_indications(void)
- {
- 	u64 os_indications_supported = 0;
- 
-+	if (IS_ENABLED(CONFIG_EFI_BOOTMGR))
-+		os_indications_supported |=
-+			EFI_OS_INDICATIONS_BOOT_TO_FW_UI;
-+
- 	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
- 		os_indications_supported |=
- 			EFI_OS_INDICATIONS_CAPSULE_RESULT_VAR_SUPPORTED;
--- 
-2.51.2
+2026.04-rc5 with a USB drive I get this output:
 
+PCIe BRCM: link up, 5.0 Gbps x1 (SSC)
+starting USB...
+USB DWC2
+USB XHCI 1.00
+Bus usb@7e980000: 1 USB Device(s) found
+Bus xhci_pci: 3 USB Device(s) found
+       scanning usb for storage devices... 1 Storage Device(s) found
+
+2026.04-rc5 + your patches up to and including the iBar patch with a
+USB drive I get this output:
+
+PCIe BRCM: link up, 5.0 Gbps x1 (SSC)
+starting USB...
+USB DWC2
+Bus xhci_pci: Port not available.
+Bus usb@7e980000: 1 USB Device(s) found
+       scanning usb for storage devices... 0 Storage Device(s) found
+
+Let me know if there's anything I can help testing with.
+
+Cheers,
+Peter
+
+
+
+
+> ---
+>  drivers/pci/pcie_brcmstb.c | 107 ++++++++++++++++++++++++++++++-------
+>  1 file changed, 88 insertions(+), 19 deletions(-)
+>
+> diff --git a/drivers/pci/pcie_brcmstb.c b/drivers/pci/pcie_brcmstb.c
+> index 8a25fb04563..e5c848c9e8e 100644
+> --- a/drivers/pci/pcie_brcmstb.c
+> +++ b/drivers/pci/pcie_brcmstb.c
+> @@ -50,6 +50,29 @@
+>  #define SSC_STATUS_PLL_LOCK_MASK                       0x800
+>  #define SSC_STATUS_PLL_LOCK_SHIFT                      11
+>
+> +#define PCIE_RC_PL_PHY_CTL_15                          0x184c
+> +#define PCIE_RC_PL_PHY_CTL_15_DIS_PLL_PD_MASK          0x400000
+> +#define PCIE_RC_PL_PHY_CTL_15_PM_CLK_PERIOD_MASK       0xff
+> +
+> +#define PCIE_MISC_UBUS_CTRL                            0x40a4
+> +#define  PCIE_MISC_UBUS_CTRL_UBUS_PCIE_REPLY_ERR_DIS_MASK      BIT(13)
+> +#define  PCIE_MISC_UBUS_CTRL_UBUS_PCIE_REPLY_DECERR_DIS_MASK   BIT(19)
+> +#define PCIE_MISC_AXI_READ_ERROR_DATA                  0x4170
+> +#define PCIE_MISC_UBUS_TIMEOUT                         0x40A8
+> +#define PCIE_MISC_RC_CONFIG_RETRY_TIMEOUT              0x405c
+> +#define PCIE_MISC_RC_BAR4_CONFIG_LO                    0x40d4
+> +#define PCIE_MISC_RC_BAR4_CONFIG_HI                    0x40d8
+> +#define PCIE_MISC_UBUS_BAR_CONFIG_REMAP_HI_MASK                0xff
+> +#define PCIE_MISC_UBUS_BAR4_CONFIG_REMAP_HI            0x4110
+> +#define PCIE_MISC_UBUS_BAR_CONFIG_REMAP_ENABLE         0x1
+> +#define PCIE_MISC_UBUS_BAR_CONFIG_REMAP_LO_MASK                0xfffff000
+> +#define PCIE_MISC_UBUS_BAR4_CONFIG_REMAP_LO            0x410c
+> +
+> +#define PCIE_MISC_UBUS_BAR1_CONFIG_REMAP               0x40ac
+> +#define PCIE_MISC_UBUS_BAR2_CONFIG_REMAP               0x40b4
+> +#define  PCIE_MISC_UBUS_BAR2_CONFIG_REMAP_ACCESS_ENABLE_MASK   BIT(0)
+> +#define  MISC_CTRL_PCIE_RCB_MPS_MODE_MASK              0x400
+> +
+>  enum {
+>         RGR1_SW_INIT_1,
+>         EXT_CFG_INDEX,
+> @@ -437,17 +460,75 @@ static void brcm_pcie_set_outbound_win(struct brcm_pcie *pcie,
+>         writel(tmp, base + PCIE_MEM_WIN0_LIMIT_HI(win));
+>  }
+>
+> +static u32 brcm_bar_reg_offset(int bar)
+> +{
+> +       if (bar <= 3)
+> +               return PCIE_MISC_RC_BAR1_CONFIG_LO + 8 * (bar - 1);
+> +       else
+> +               return PCIE_MISC_RC_BAR4_CONFIG_LO + 8 * (bar - 4);
+> +}
+> +
+> +static u32 brcm_ubus_reg_offset(int bar)
+> +{
+> +       if (bar <= 3)
+> +               return PCIE_MISC_UBUS_BAR1_CONFIG_REMAP + 8 * (bar - 1);
+> +       else
+> +               return PCIE_MISC_UBUS_BAR4_CONFIG_REMAP_LO + 8 * (bar - 4);
+> +}
+> +
+> +static void brcm_pcie_set_inbound_windows(struct udevice *dev)
+> +{
+> +       struct brcm_pcie *pcie = dev_get_priv(dev);
+> +       void __iomem *base = pcie->base;
+> +       int i, ibar_no, ret;
+> +       u32 tmp;
+> +
+> +       ibar_no = 0;
+> +       /* pre-2712 chips leave the first entry empty */
+> +       if (pcie->pcie_cfg->type != BCM2712)
+> +               ibar_no++;
+> +
+> +       /* program inbound windows from OF property "dma-regions" */
+> +       for (i = 0; i < 7; i++, ibar_no++) {
+> +               u64 bar_cpu, bar_size, bar_pci;
+> +               struct pci_region region;
+> +               int ubus_bar_offset, rc_bar_offset;
+> +
+> +               ret = pci_get_dma_regions(dev, &region, i);
+> +               if (ret)        /* no region #i? Then we're done. */
+> +                       break;
+> +               ubus_bar_offset = brcm_ubus_reg_offset(ibar_no + 1);
+> +               rc_bar_offset = brcm_bar_reg_offset(ibar_no + 1);
+> +
+> +               bar_pci = region.bus_start;
+> +               bar_cpu = region.phys_start;
+> +               bar_size = region.size;
+> +
+> +               tmp = lower_32_bits(bar_pci);
+> +               u32p_replace_bits(&tmp, brcm_pcie_encode_ibar_size(bar_size),
+> +                                 RC_BAR2_CONFIG_LO_SIZE_MASK);
+> +               writel(tmp, base + rc_bar_offset);
+> +               writel(upper_32_bits(bar_pci), base + rc_bar_offset + 4);
+> +
+> +               tmp = lower_32_bits(bar_cpu) &
+> +                               PCIE_MISC_UBUS_BAR_CONFIG_REMAP_LO_MASK;
+> +               tmp |= PCIE_MISC_UBUS_BAR_CONFIG_REMAP_ENABLE;
+> +               writel(tmp, base + ubus_bar_offset);
+> +
+> +               tmp = upper_32_bits(bar_cpu) &
+> +                       PCIE_MISC_UBUS_BAR_CONFIG_REMAP_HI_MASK;
+> +               writel(tmp, base + ubus_bar_offset + 4);
+> +       }
+> +}
+> +
+>  static int brcm_pcie_probe(struct udevice *dev)
+>  {
+>         struct udevice *ctlr = pci_get_controller(dev);
+>         struct pci_controller *hose = dev_get_uclass_priv(ctlr);
+>         struct brcm_pcie *pcie = dev_get_priv(dev);
+>         void __iomem *base = pcie->base;
+> -       struct pci_region region;
+>         bool ssc_good = false;
+>         int num_out_wins = 0;
+> -       u64 rc_bar2_offset, rc_bar2_size;
+> -       unsigned int scb_size_val;
+>         int i, ret;
+>         u16 nlw, cls, lnksta;
+>         u32 tmp;
+> @@ -488,23 +569,9 @@ static int brcm_pcie_probe(struct udevice *dev)
+>                         MISC_CTRL_CFG_READ_UR_MODE_MASK |
+>                         MISC_CTRL_MAX_BURST_SIZE_128);
+>
+> -       pci_get_dma_regions(dev, &region, 0);
+> -       rc_bar2_offset = region.bus_start - region.phys_start;
+> -       rc_bar2_size = 1ULL << fls64(region.size - 1);
+> -
+> -       tmp = lower_32_bits(rc_bar2_offset);
+> -       u32p_replace_bits(&tmp, brcm_pcie_encode_ibar_size(rc_bar2_size),
+> -                         RC_BAR2_CONFIG_LO_SIZE_MASK);
+> -       writel(tmp, base + PCIE_MISC_RC_BAR2_CONFIG_LO);
+> -       writel(upper_32_bits(rc_bar2_offset),
+> -              base + PCIE_MISC_RC_BAR2_CONFIG_HI);
+> -
+> -       scb_size_val = rc_bar2_size ?
+> -                      ilog2(rc_bar2_size) - 15 : 0xf; /* 0xf is 1GB */
+> -
+> +       /* Enable 32GB memory to be accessed from PCIe in the SCB0 */
+>         tmp = readl(base + PCIE_MISC_MISC_CTRL);
+> -       u32p_replace_bits(&tmp, scb_size_val,
+> -                         MISC_CTRL_SCB0_SIZE_MASK);
+> +       u32p_replace_bits(&tmp, 20, MISC_CTRL_SCB0_SIZE_MASK);
+>         writel(tmp, base + PCIE_MISC_MISC_CTRL);
+>
+>         /* Disable the PCIe->GISB memory window (RC_BAR1) */
+> @@ -521,6 +588,8 @@ static int brcm_pcie_probe(struct udevice *dev)
+>         /* Clear any interrupts we find on boot */
+>         writel(0xffffffff, base + PCIE_MSI_INTR2_CLR);
+>
+> +       brcm_pcie_set_inbound_windows(dev);
+> +
+>         if (pcie->gen)
+>                 brcm_pcie_set_gen(pcie, pcie->gen);
+>
+> --
+> 2.51.0
+>
