@@ -4,97 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28412FF60DC
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 07:55:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C0E7FF60D9
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 08:01:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E623B83F5B;
-	Tue, 31 Mar 2026 09:55:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B4E2A83DBF;
+	Tue, 31 Mar 2026 10:01:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aC+KQWdm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dwQV5XvK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DAF984010; Tue, 31 Mar 2026 09:55:01 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 5A0758405B; Tue, 31 Mar 2026 10:01:34 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 872DE83F0A
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 09:54:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F9B483A41
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 10:01:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-486b9675d36so44680885e9.0
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 00:54:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4852a9c6309so45084845e9.0
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 01:01:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1774943699; x=1775548499; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:subject:cc
- :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=JQPCR6jt/Xi6mJj12VbTpZ7t527tMuKCIh3x3PzLHEQ=;
- b=aC+KQWdmWEiqLTyAprhIhR2p2pz2yTuP7KrhaGVum1gS6cVtB6lJRsDZH2GMTYvpxz
- cEHEwk6e8BeIUU00of8JtTMud9JDWwSja7oQOhVIplcIgOnCsuNhhkyjfidAImX7LKgc
- f+RdUHST4yVDJ1CJ0eDgPT7XtRDkF3AhqYnKQd79pvQ/LWbG7+qYiZZMGtlrmyuy+VE6
- rIM3uHs+ZWlt2FKRhI1nZ6EvJEO+ucFUvNF+tQXZhotVZRZK16rxre+x+6aYOYY8sgjR
- 4gLmotRSjobL52IQHEAr8n4oVCfQgSboiNZMprX51iIMin+Q+sJk6ZKyk+CJrMzpbp9d
- 2KIg==
+ d=linaro.org; s=google; t=1774944090; x=1775548890; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=q0jmWFb8kYEGW6uRdI3HDRIBSMmwvpkaB0JZ8W0D4MM=;
+ b=dwQV5XvK5SNEMsc45Tb/as9AEfz2cMeEI76KHy1jIWoJcUv6/jey3MjWTWuF74+ZrV
+ UYE460kaDOuc0N19hAUxfaofqqgHb6ycfv0AzWSFkIfh5QwvBtw/8nNkEuftxxvA8cRG
+ UFA7Nr0INs2DCeYmqahP8vPH32Sf1Tt4tlYRZQHelF/y9aw9WON51ij3iHtYunv4SsVw
+ eEiClKngMNBNbcmxbNzn7xvUYFCwZJqpaI4Y1ge4a3l1knrhE06KApnQ2HNy7S/x7v3i
+ xT+nWHUKQ/cEIPF5qjlqP8mHdnWvexElkt/e4JSNnZJZHoO+gbJIl15ESGKI4kjvqTir
+ yxBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774943699; x=1775548499;
- h=in-reply-to:content-disposition:mime-version:references:subject:cc
- :to:from:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=JQPCR6jt/Xi6mJj12VbTpZ7t527tMuKCIh3x3PzLHEQ=;
- b=l/bjT5hNGKgrnqfhQXZdXbuDzlBcWVWlRSqayHo4vc8JAhxn3KjALe6r/08XzwXNhM
- Fg0SP+EbgMn2hPoh7136gGB/UYu0C/whX0Vsdv9NouXlKQr/ipCwBMDT53n5VMhKan+4
- vQp6A8GvRLA/ztAIzUoSCKLLVPImH/O6iFIQvg5pHAKa+EFBcPBthHO2PsWD9qBxIOAC
- MvIx3ztC6U9c/7CncuPVczqMhNzoFctn0gfJotAGVoTHeqegF0cRTcsyEDN9SAec5VDN
- YB4FX84W8uRZSgCCu2n16ioICmuCqjg5FUU+vIstwJPQ8ayWNJcpHehf+6WoRM/yil3/
- +2XQ==
+ d=1e100.net; s=20251104; t=1774944090; x=1775548890;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=q0jmWFb8kYEGW6uRdI3HDRIBSMmwvpkaB0JZ8W0D4MM=;
+ b=QSg+nUR8aA4pYIreRPUr7681OcuILMBO/fRILNzSYsaDtbb8XQF+dQh/TzKQPkZ63F
+ XNnbbJKVkEkhRzs93eIdeRS7LPNYrDYSNWMPwTS/eHI2i4X7OSc4YV6IKRKg2m185Fzx
+ sdNSet4P5T3nC/00NxOxau0lu/8rAZL5Xpz4cBO89lEWZ5MIK41hclWxDnJwAeq+/jOj
+ WCFsEdlJ9Yq0gBHDhjAnXMHHN6G0neAe4hE8+4D4kH+ofbjyOtc+/6ITEUBH3v4YnOz3
+ FMJ5QfqQh+ogkrfIhEp6lM+/xLAaZ2/cmcqZDwRSsirQIOALp9++i59bP4sYs1Bcbztv
+ 4KLg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVj1ay/akzJgx0wfFaMZDjLzA9XCTyKo28M+Ef75yBeM0H1k0GPx3Gd6ekJzOlH86ufkKK1rO0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy3NTLdWHCV2AyDSVfm7djO59D4gUv1lH/RynB8NhrHbYhjpMJg
- cJ7an2KFwYbkqgdTWXZc9LYVpIY36U/DrshlnDjjuDB3+luxSwdb+zRw
-X-Gm-Gg: ATEYQzxfvFZd3+LIYS+SHy9a4baAEyVnxhmzrHiyY0xksmG+388HgufX8D2L77MDnNL
- jgu0rdfQ0tuftzpfSAMGJDH/a5fME63QyfWUsqWpsEeAC83kKT5v/KnDIBIK3Wew33w5nys1Lrg
- hN8hAIQnTkGUt5s3xKhbskQNz9L+zPe5fGtdJNeI/BvJy7UoDysVM63BQJAOOt2CTgX/7HiIjYC
- b+Hc2QbnvhCUg25Kh97VfLAF+WRISfalkL71eFm/es9RveUhwkUks9V1cG50yNy+myixpS9oa+q
- q81rr+6/++NqmbWUjXztvBVbd15bUzsNsH66qFQQJ2UY3VNIU4WI+g6xspWtO3XA+cBAxgwoP4m
- EwHD0IfRX7YWl3wuaxeTRW0B7rQeOBdtpLntXheeEGt+IFQ5ARZhbYgO0+jJI/pH3NX9Gh2LV+l
- GAYqF4pBGGl4tQNMcthiQOnFvpRR9zyPcjnmCR4GZ8ObKgV3cczgbk6w==
-X-Received: by 2002:a05:600c:c102:b0:485:ae14:8187 with SMTP id
- 5b1f17b1804b1-48727d594c9mr189776905e9.2.1774943698816; 
- Tue, 31 Mar 2026 00:54:58 -0700 (PDT)
-Received: from Ansuel-XPS. (93-34-88-122.ip49.fastwebnet.it. [93.34.88.122])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4887e93c0cfsm18389555e9.9.2026.03.31.00.54.57
+ AJvYcCU5LAT1XXcihp3EBqv2KrGlzEs+9/Sxsqi59WrYNAt5qM6UPqO97e2X7uPs9Nme3AAzJysaoaU=@lists.denx.de
+X-Gm-Message-State: AOJu0YzVJudDqafgO0f3jdvXl6bjUuFcmFVL0IKhgoktP2q/AoEkcrLS
+ ARtMjmHQUf2qbyUOtYSvBpYdWEuB04/JdhFzXx/pzTQV2Dy1PsNQ4/LAktkBzHlygScinCAB46m
+ zZKSQ
+X-Gm-Gg: ATEYQzwFjHrSU8+BimxSqGw+zqUJKxC0I/TEy1Ns2plGWiY7ueakWOOaZgsP2QIT8lE
+ dl5rJMoXE9f98xaRduJMaiSUd7h/dBQVfRF+oSkKUlGO4sQnGJscFm/wf+V1GD/nHZ3VNGjzMGq
+ MCWuLoM+diDXecKe4F9yCSNiQnRXuCuLh/SlZAwSXITTLv5RQ3sAJeCOhuEXvl7T4H9m3unC2js
+ Cz0AibLYpGBMQOsjFVj8Ls56q91O91kLb2b4zpJckha02WfoxAAmjFY+KQgAz8HvJzFyfV2cVwk
+ CnR43Xjf5WAct3Wps4YuhNWmVrRdhavEqlT6whvIZ4PAARpGhA/oe3PbegyZblLoa8GO+WMQV6H
+ SmaPNboP6kDGRMjOEzdwO7H0Q2PwConLx8mOpR8eY3Qn0gIt48gSiTT6VwlYi+UA3wEjelN3tNQ
+ rKTnJ2yDKqUt3rizhjobalRiM9XlhWx3QzUCJLcksyd+cGKc6CLLzkslH+AMwcwfu/lf2uaMg6m
+ NlmXNgUgyM+9ltFedvyUz1DYbd2PQcuxZN5fBoNSqmDkLwgGaEFDPC2XNPVVSQIqcvaToBI+cgI
+ Fjzqyr86IxKMpMt/WSOh97Fi04gfi/IfZEPdazkrM+qQjEdp3CfO89mJqVwIgfYHWCBcyUWM7/r
+ KDIJcycV7MFTgJ+YX0Cn7RZHxH3vokpJoB8AMfDZ9Pu8TodbGkCuaqF50DP4nS8Jv5KQbsLoKal
+ /g4L8VTV+uZbFb6zmfqDI0lyaVWd7DoBUI9RQN5KBvjzvQMkwIIbEG8v3qskvns4aFc8VEVmc=
+X-Received: by 2002:a05:600c:1d86:b0:483:7783:537b with SMTP id
+ 5b1f17b1804b1-4872807470fmr251941425e9.24.1774944090076; 
+ Tue, 31 Mar 2026 01:01:30 -0700 (PDT)
+Received: from hera ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4887c9250afsm10087065e9.36.2026.03.31.01.01.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Mar 2026 00:54:58 -0700 (PDT)
-Message-ID: <69cb7dd2.050a0220.2aae7.7d3f@mx.google.com>
-X-Google-Original-Message-ID: <act9z7ZV4xUgChIx@Ansuel-XPS.>
-Date: Tue, 31 Mar 2026 09:54:55 +0200
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- Peng Fan <peng.fan@nxp.com>, Casey Connolly <casey.connolly@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>,
- Jamie Gibbons <jamie.gibbons@microchip.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Justin Klaassen <justin@tidylabs.net>, Harsha Vardhan V M <h-vm@ti.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- "Lucien.Jheng" <lucienzx159@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v3 0/5] misc: fs_loader: reorg and split to FS and FW
- loader + FIP loader
-References: <20260317153614.18409-1-ansuelsmth@gmail.com>
- <20260330230757.GA1030901@bill-the-cat>
+ Tue, 31 Mar 2026 01:01:29 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: marek.vasut+renesas@mailbox.org,
+	trini@konsulko.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+	u-boot@lists.denx.de
+Subject: [PATCH v2 0/4] Relocate U-Boot in the last bank
+Date: Tue, 31 Mar 2026 11:01:10 +0300
+Message-ID: <20260331080117.2370092-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260330230757.GA1030901@bill-the-cat>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,81 +102,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Mar 30, 2026 at 05:07:57PM -0600, Tom Rini wrote:
-> On Tue, Mar 17, 2026 at 04:36:04PM +0100, Christian Marangi wrote:
-> 
-> > This series mainly rework the FS loader to permit reading firmware from
-> > container that are not exactly a readable filesystem.
-> > 
-> > One scenario is when a firmware is shipped in a FIP container as
-> > a generic blob with an UUID.
-> > 
-> > FIP are mostly used on ARM in the context of ATF.
-> > In such context U-Boot is loaded as BL31 and the PHY firmware
-> > can't be stored in the FIT image for the kernel as U-Boot should
-> > not depend on the presence of the kernel to correctly enable PHY
-> > for Ethernet port.
-> > 
-> > To handle such case the PHY firmware is stored in FIP with a
-> > predictable UUID.
-> > 
-> > One example is with Airoha 8811H firmware where the FIP can
-> > have a blob with UUID "d39d2cf2-9bd0-3ca7-93e9-e71b4f9250b2".
-> > (generated from command "uuidgen -n @dns --md5 --name en8811h.bin")
-> > 
-> > With these example DTS entry:
-> > 
-> > fs_loader0: fip-loader {
-> > 	bootph-all;
-> > 	compatible = "u-boot,fip-loader";
-> > 	phandlepart = <&mmc0 0>;
-> > 	partoffset = <0x100>;
-> > };
-> > 
-> > mdio {
-> >   en8811: ethernet-phy@f {
-> >     reg = <0xf>;
-> >     firmware-name = "d39d2cf2-9bd0-3ca7-93e9-e71b4f9250b2";
-> >     firmware-loader = <&fs_loader0>;
-> >   };
-> > };
-> > 
-> > And PHY driver using the get_fw_loader_from_node() and the
-> > common request_firmware_into_buf() it's possible to
-> > load the PHY firmware transparently by just declaring
-> > the required entry in the DTS.
-> > 
-> > get_fw_loader_from_node() is implemented to actual get the
-> > loader from DT. This was something that was already in mind
-> > from when the FS loader was implemented but then it was
-> > never implemented in favor of a single loader per device.
-> > 
-> > The first patch is a minor fixup for something that probably
-> > won't ever happen.
-> > 
-> > The second one is a good reworking of the FS and FW loader
-> > moving the internal struct to a dedicated header. (this is
-> > really to enforce what drivers should use and what
-> > driver should not mess with)
-> > 
-> > Then there is the request_firmware_size() new OP to get only
-> > the size of the firmware. Useful for case where the firmware
-> > size is not always the same and change across different version.
-> > (the patter might be get size -> alloc buffer -> get firmware).
-> > 
-> > Then the FIP loader as a basic parser of FIP. This only
-> > read the FIP header, loop all the entry and search for a
-> > matching UUID. If nothing is found then no firmware blob.
-> > Very simple implementation.
-> > 
-> > This is being CI tested on [0]
-> 
-> Both "git am" and "b4 shazam" fail to apply the second patch here, can
-> you please rebase on top of current next and repost? Thanks.
-> 
+Hi,
+This is v2 of [1]
 
-Sorry I was targetting master instead of next. Just sent v4 with the
-conflict fixed (it was the global declare dropped commit).
+There was a discussion recently on the mailing lists regarding our
+management of memory above ram_top [0]. The tl;dr is that we have two problems.
 
--- 
-	Ansuel
+The first one is that U-Boot always relocates to the top of the first available
+bank unless there's special board code to sidestep that. The second is we don't
+successfully deal with devices that can only do 32-bit DMA.
+
+This patch series deals with the first problem by adding a Kconfig option
+allowing platforms to relocate to the top of the last discovered bank.
+
+It's worth noting that this is easily testable with QEMU
+
+qemu-system-aarch64 -m 8192 -smp 2 -nographic -cpu cortex-a57 \
+    -machine virt,secure=off \
+    -bios u-boot.bin \
+    -device virtio-rng-pci \
+    -drive id=os,if=none,file="$image" \
+    -device virtio-blk-device,drive=os \
+    -object memory-backend-ram,id=ram0,size=4G \
+    -object memory-backend-ram,id=ram1,size=4G \
+    -numa node,memdev=ram0 \
+    -numa node,memdev=ram1
+
+# RELOCATE_LAST_BANK not set
+Hit any key to stop autoboot: 0
+=> bdinfo
+[...]
+relocaddr   = 0x000000013f66c000
+reloc off   = 0x000000013f66c000
+[...]
+lmb_dump_all:
+ memory.count = 0x1
+ memory[0]	[0x40000000-0x23fffffff], 0x200000000 bytes, flags: none
+ reserved.count = 0x2
+ reserved[0]	[0x13d507000-0x13d509fff], 0x3000 bytes, flags: no-notify, no-overwrite
+ reserved[1]	[0x13d50aff0-0x23fffffff], 0x102af5010 bytes, flags: no-overwrite
+devicetree  = board
+[...]
+TLB addr    = 0x000000013ffe0000
+irq_sp      = 0x000000013e50aff0
+sp start    = 0x000000013e50aff0
+Early malloc usage: e88 / 2000
+=>
+
+# RELOCATE_LAST_BANK enabled
+
+=> bdinfo
+[...]
+relocaddr   = 0x000000023f66c000
+reloc off   = 0x000000023f66c000
+[...]
+lmb_dump_all:
+ memory.count = 0x1
+ memory[0]	[0x40000000-0x23fffffff], 0x200000000 bytes, flags: none
+ reserved.count = 0x2
+ reserved[0]	[0x23d507000-0x23d509fff], 0x3000 bytes, flags: no-notify, no-overwrite
+ reserved[1]	[0x23d50aff0-0x23fffffff], 0x2af5010 bytes, flags: no-overwrite
+devicetree  = board
+[...]
+TLB addr    = 0x000000023ffe0000
+irq_sp      = 0x000000023e50aff0
+sp start    = 0x000000023e50aff0
+Early malloc usage: e88 / 2000
+=>
+
+[1] https://lore.kernel.org/u-boot/20260326115111.1631261-1-ilias.apalodimas@linaro.org/
+
+Changes since v1:
+- Adjusted the commit message of patch #4 and explain potential
+  breakages
+- ram_size recalculation is now split in its own function
+- Slighly better description of the Kconfig option
+- error checking on fdtdec_setup_mem_ram_top()
+
+Ilias Apalodimas (2):
+  fdtdec: Introduce fdtdec_setup_ram_size() to determine the memory size
+  common: Allow relocations on the top of the last bank
+
+Marek Vasut (2):
+  fdtdec: Deduplicate iterator function
+  fdtdec: Introduce fdtdec_setup_mem_ram_top() to determine end of
+    topmost DRAM bank
+
+ Kconfig          |   7 ++++
+ common/board_f.c |  15 +++++++
+ include/fdtdec.h |  31 ++++++++++++++
+ lib/fdtdec.c     | 105 ++++++++++++++++++++++++++++-------------------
+ 4 files changed, 115 insertions(+), 43 deletions(-)
+
+--
+2.53.0
+
