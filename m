@@ -4,62 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F33D109B461
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 12:49:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AD5E109B461
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 13:00:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 096BE83DA6;
-	Tue, 31 Mar 2026 14:49:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 0A34F83DA6;
+	Tue, 31 Mar 2026 15:00:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="d1EsZRgH";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="UXwXeduv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84B9683E7A; Tue, 31 Mar 2026 14:49:46 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id 0B7CD83DA7; Tue, 31 Mar 2026 15:00:47 +0200 (CEST)
+Received: from PAUP264CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170110002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C52D83A41
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 14:49:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B231483A41
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 15:00:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=softathome.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stefan.roese@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4flSck3CfSz9v0j;
- Tue, 31 Mar 2026 14:49:42 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1774961382;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=QQZ8tba+WesZqlZOizLfI1CmcqtLbzC8J0pGiZJhEWA=;
- b=d1EsZRgHRloFpglaqjI3PSBPqcTsTMpFmmCrfGCXQQTFudLcuXZhgNnRXFzlZ7FmLuwJBd
- 6L+ZO+LFsAiR9QEYgGhbRG7BK4clQQTl+KR0B9iOlBLJZ6De64EqAZS8RRE8nNkcUE1J8w
- ZQqJE6TolhCG28vn+wRU9n+WC+Uidi8efeEwizBHyKX7IGab0W/SMHCxbGyHtpFqMGED28
- cLKiFlg3LFrSW59rViIRHqx8KmhB1DZZucAZ/FyeQf1twpaorZY3jQBtkmTykTCy34syiX
- zXVPuBnfMASaB8kGi0OsfcHkFJ223crEz7ZC1yJsaRC0/RhK6oDjTwp+MLpeUA==
-Message-ID: <1e464bc7-64a7-404f-b27a-7ad8406b0798@mailbox.org>
-Date: Tue, 31 Mar 2026 14:49:40 +0200
-MIME-Version: 1.0
-Subject: Re: [PATCH v1 5/5] cmd: mvebu: add device serial and MAC address
- initialization
-To: Vincent Jardin <vjardin@free.fr>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>
-References: <cover.1773151972.git.vjardin@free.fr>
- <6bde7b2f2ad9eba4148be8d9422068ccd8ba294e.1773151972.git.vjardin@free.fr>
+ spf=pass smtp.mailfrom=philippe.reynes@softathome.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=t2aizaTeKCj0L8dLNQSGssXMHtTLeXrSpJkE5BqZm5px6dJ2BxYqHcF1tFx5q3/Bb6/bjxyxI44lxi/xsKQBaS4v0pi2JZ7a6GO1O7cWjSHjCGM837fRg+6IP7A8pTJ+tfeNCNdrzB0nzO32tsaVXs83Di7CKUbqEj3N7iFZ7x5LK4iFGcqB7S65Q7F5fGSDhV4WFy+Lda9mbiUHupYWRkS/UJJbL0dNxJ1K+8Cql2/lKZAoQPiApiEOUlrNo5dH5vfnhTCMVNkc/5mpN+ngQm5/A3EuuqTgw6f4gx8uowpd/El6DvqMF64WLn4GOEv1YYwRH4b5WzhG2jH2SwDVrQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=eNDmPKWzk0EarJ8jc2v/2WWtfXslva+BhA7+Dm1J9Ws=;
+ b=L5yFOvgCHCPXiXKhEyXCfUis6GABHaO2omDqspPyxmfCIqACAJwWdYYvZi8+vX5LK+pAbwY4AJCPue5vget+QZC2E+8VMdFMu1YQ17JLLezmBW5encuidHgnY0+6BwS8aqAAOH5yChZe3MuD+7aM6G1TEDOKS/yhxUs3BYwo19LCJkr5a/KRz/4HoUVI+BWTagB83+hXuJPOMpTL4/G36tjaUU67RvCVwH6OmvWVPQg4KQU8pVg87j4GYfiSUUUTvnFb06Q4Q5PUtF0oH5OdYDAK4xsxeqzEVYaFRs5B+U44iVWWk+Pl7CDSokJAHovEhs9WJ0iZ0vK1G7ZjBibU9Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=softathome.com; dmarc=pass action=none
+ header.from=softathome.com; dkim=pass header.d=softathome.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=eNDmPKWzk0EarJ8jc2v/2WWtfXslva+BhA7+Dm1J9Ws=;
+ b=UXwXeduvbsd/TubvSpmtt/dsCE6VzSqIUxo7Nd5XGTVcsAB2a65UqAE8eSs5dMb4b6eRwV4XmHr9ve9aZoZ82HVUBmDqeLUS7b1LH2rdZwR8RzD5RyQmpnawjlyzR0Uy935ZT+hr14no20STFfoDnxjpNkgriCu/6TMZ78MmrjiCgZJ+5rR5HjoDLcW4Prj/J8C2VdfxuQ34xXWitYXBtNe5c7ukEfK7Ikasz9HkpnWoDigVSWMEXNe3pzpKxHg4pmu2drA8EvmZ3NRvnjl6zxhdIB5zCPT/NZrEdPbKeHVVJsjD3bTM3815K0O/jvFOczsNyZ2t8eOPlezwmJYWLw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=softathome.com;
+Received: from PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1d0::9)
+ by PR0P264MB2712.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1d3::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.28; Tue, 31 Mar
+ 2026 13:00:42 +0000
+Received: from PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
+ ([fe80::6e14:438b:5c18:8557]) by PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
+ ([fe80::6e14:438b:5c18:8557%3]) with mapi id 15.20.9745.027; Tue, 31 Mar 2026
+ 13:00:42 +0000
+Message-ID: <5bfa6dbd-92f3-4aea-b248-b1696f064d5a@softathome.com>
+Date: Tue, 31 Mar 2026 15:00:41 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH v2 1/9] mbedtls: enable support of ecc
+To: Raymond Mao <raymondmaoca@gmail.com>
+Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com,
+ u-boot@lists.denx.de
+References: <20260219132552.1499698-1-philippe.reynes@softathome.com>
+ <20260219132552.1499698-2-philippe.reynes@softathome.com>
+ <CAMDkj5wK7H7kZ=3S_VZ3WiuTBF1LOEKE=cBvfkURLJVVhoG8OA@mail.gmail.com>
 Content-Language: en-US
-From: Stefan Roese <stefan.roese@mailbox.org>
-In-Reply-To: <6bde7b2f2ad9eba4148be8d9422068ccd8ba294e.1773151972.git.vjardin@free.fr>
+From: Philippe Reynes <philippe.reynes@softathome.com>
+In-Reply-To: <CAMDkj5wK7H7kZ=3S_VZ3WiuTBF1LOEKE=cBvfkURLJVVhoG8OA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 81dd159881de3af191a
-X-MBO-RS-META: y7nc4yoyf7mcgufbq91ypiwhsxnrmijs
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: PR3PR09CA0005.eurprd09.prod.outlook.com
+ (2603:10a6:102:b7::10) To PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:1d0::9)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PR0P264MB2741:EE_|PR0P264MB2712:EE_
+X-MS-Office365-Filtering-Correlation-Id: 75a1c4f8-b847-4e8b-1008-08de8f2583ab
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|10070799003|1800799024|376014|18002099003|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info: 5EIbZlnWYI/bRZ4NarzBzHtCBipUCvgzZVMT2SRetKBOZx7hVAMKGN9KmezXZZNUOFkV9N2o75VRD0Y4aLNZr7o00dPj2OhV07OONNq5i55KyIVrbEteykk0KaGqK8H07S46K4NoKlnBKuVkMO6OCT9crzhJl58iXNBfPhzznTgZ79FQidvL0X6ToOgyh4K4LgtyXzdftt9TDdQipxOcKLBP2uDzQDW3RLckebQ58ft5cqO8bAUhXvrt4KIWUcaf/54MhZk1uVHH5rUvqDpU5prMqsCL3rm5OS0rGeSEzVdMxwBX/L7V+u3JgdxS5+sC0xGmRx9HuJifGP+0v6yxpjQZT0MvZM9SISsoUy5Ytb5IEGNT+n7dqLK3MykjZSgPJ1G4/S0PZY6ypmUaNSJ2sl5W1+5v2uZcqYPv/sJrp2/dCbIK2swfsmq/RyDJN6HV5ebfKhhhePVE6Gqi33D/d42lwzwUE+sEbBhyQP7Wj2KxhIfOgyWTGBwMN9Q9ThqsJ8CC+VUWUWnYy2s/YJxEscS5iZw1Xw+qFKlqzxiM1Dk7PMfSwVr88nw2HNuPgQNEtXYoVjZmO0fGfQZPbi4iTaoGT6NGOxuWH2PjhbZf0aCS5tNWDKP8Yfsa7nat6ILUPjWqAARYx3OCPDJ4tICDUG83/BSffzJotdZfG8smfhOGTj8r9bIxPHTFz0MulRTamaB0FKNWsX453MeXpQyGvjeHm3MtsWf5YKWh3fB5PBM=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(10070799003)(1800799024)(376014)(18002099003)(22082099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YmhEYjBDaGhqVHY3M28rMGc3Q1NnMnI0ajV3dzhzZDJnQ0dyd3REODZmSmti?=
+ =?utf-8?B?Q05ybnp6R1RUekl0UVlla1B0VDZNNmFhMEp3VWV1Wms4ZnNMckJTb1A5Nmlo?=
+ =?utf-8?B?ejB0cElrZ09pUERaUnNHZWtvZTdndCtVakw2RHRyclI5U1Rrdi9uTnB2cHV5?=
+ =?utf-8?B?NVZ1aDJzREl2MmZxYUNJWXlDK2NGU0dta2VyalloaGFsRy83QzVGOTlYZytm?=
+ =?utf-8?B?SDkwK3VrVkdrOVluaEgrS095QXh1ZlpvRGhDZXIvbGpQaUJqTFZ6bzFmR2J6?=
+ =?utf-8?B?UFE1SGR2MENmYlpEWlN4ZEVKcWxESTdTanhQQzluUmFZUE5sOHUvN3Mwa2Jm?=
+ =?utf-8?B?amdZZlhRbGdIUnBCVzdpOTlSZzlndk0xcmNhUDhLVDFDN1NHc0MxMHJyNmNl?=
+ =?utf-8?B?UGcrUmVBNnVSTCtTWHJpNFluUU00bitGYittTHlzU1NxUkNwaHRjclpwUWd1?=
+ =?utf-8?B?dGZZeGtzeDRaZ3dqd3JVczdzSWtzY2NCTTRWbWtGVEVOTWQzR3lXUldHUFNi?=
+ =?utf-8?B?M1dveTUzeVhuUW0vbklZY2hncEJBOE90NkVmY0VrTlhQbEovMG9IN1FraVRS?=
+ =?utf-8?B?eHhQMWRGSmZ3SzgzcExLend6UG9WZmFPbUhhRWtQYUFYM2VVZnF2RGs5WGo4?=
+ =?utf-8?B?TkZxREdSYXg4c1YzZGJibnJRQnlmU2xrWmZSQzFXVm9HMEMxamZFaks1bEpR?=
+ =?utf-8?B?VkRmNzdHZ2tGMk5QQkYxbjh5Kzd3YjhFSWMzMlZ5VytxWEVBWXg3NmM3T2h4?=
+ =?utf-8?B?cUhOeEFDM3U2Yng3WUR4QlpTR0VtcHNEc3dKbGJRNGM2QmRkQ29LZlhvbFN4?=
+ =?utf-8?B?aitoekRxV1B6K1ZkaXBjdnpLbWdMZWZvZUNXVm4zUEJIemd3SS9GUlpNVStT?=
+ =?utf-8?B?MXczdWM2NWdlNUN5WnU3eXY0bG9ubVRjNVgxNFh4eWQ5WnBpcXpIb05RVXhW?=
+ =?utf-8?B?Snp0dGNyRm1BUDhJQkZRd25QRjRaL3dHNzh1b1cyZGtIMHpkTDVNQjY2b3JK?=
+ =?utf-8?B?THd0eFpZazFNQUhKM3B0OXh4eUFkK1Q0WlRCZmpwbTVrV1VqTmhMWmJCU1Js?=
+ =?utf-8?B?SWtxYXRGTitpdVladWZ4aVQrWVZNTFFHM2JnZlU4dkEwSkd0OE1taXNFbS8y?=
+ =?utf-8?B?Z1dQbGJ2Y0RVa2JHWCtIdDBrN0JkUTgrVkc4czV6cy90dHZxYTI4NmxZN2RH?=
+ =?utf-8?B?Wmk4WjJHaEdKM21xTG1uQVBtWlp6NnNFeW1jWHo2K3B6VFFiRTh5ZEFrVDZ5?=
+ =?utf-8?B?dTZtSXQ1TzVQaFBteDJaNkVrZHdrd3pkRU8yclM0SFZtbzNvTmRPdmc4QjB4?=
+ =?utf-8?B?Z3BUYlRPN3lUbVVEWmI0dWV6WWZ3NnlpUmgyNFhqSTdXdTNkdFEvK20vR0JS?=
+ =?utf-8?B?c3htRU56Vjl4VXhrcHJ3N0JLTUQzNXAxUVRaUDNhSEtyWVI0Q1BwTEVhd05M?=
+ =?utf-8?B?b1VURHYvQjR4eHZjeXV6eHVFejF2Yk5zaFlxMGp0NjBCTWNsSVlwemxKeUUv?=
+ =?utf-8?B?N1IweWtQWFZNeHJhRVBRRkJNZXhPZXB4OUMrOWk1bzVOUDYrNEd1c3RnOXcr?=
+ =?utf-8?B?RXp3YUlHVjJMUlpmdEhiWTl1NE51bjZoRkM5ek9DR3NsY3plYlcrL3kvK3JI?=
+ =?utf-8?B?bmhhd2NqREt5SnZWWmhVTVplaWN2RE5kWW4xVGpyNCtienU5NVlJVko0dExs?=
+ =?utf-8?B?Z1A2MTU1aDJPRkUrOENObzNydDZGYjcySnNRczRKZEsxc3VXeEg0aDRhT2ow?=
+ =?utf-8?B?bjlpeFRpY0VFR2FlRUFvY09RMWd0Rno2VWdHYzk2T3haRktURDNHSCtiM2Fw?=
+ =?utf-8?B?TXVGSDdlZkloNHdhT3R0bmtIRkNxdU9ickZMZFdSRjliTGRFOTJBUW1JQ1Ev?=
+ =?utf-8?B?T0pFc3RkUHBxR0ZVSnBxMnZqbXFLbUh4RHhnVE84ekdSNkZ6YmFXd05aMU9p?=
+ =?utf-8?B?eWQ2U3hMMS9HVDA0b0pwaStrUGU0MjBseUhDMTRpUkhRQkdoWEpVekJDbmxw?=
+ =?utf-8?B?dllybnZTVHFUbU4vc1lybE5qRnBTMk1TZGIwWHhqY2NZcHF5bGQ0Zmg0N2RM?=
+ =?utf-8?B?dFE0cVI4dmdkVlFnQWNNREYyME45c2FjZUw5akJPU0RLTFNEL0k3MjZyMkEx?=
+ =?utf-8?B?NVNrTnRPZlU2VHpmMlNKbTVaQmxjWm5UZmppelZwV0F5WGZERjJrU0N4a3o5?=
+ =?utf-8?B?WitOWTJRZE11d3pkb1ZEckNBdkY2UTMxZnFoT2tnOFowQzh6K1JXYVJqVktH?=
+ =?utf-8?B?SGNhT3hVZ3dEMWRxV0ZHWG9nZEZjN1J4dkhldHNTNnFzbzFOeVNQS0poNWk1?=
+ =?utf-8?B?eTBiMDZ2Q1pOZDVZUlpMaHhqT0pZOGdVaTFPZGZVQTRvc0tSK3F1d1RYMFo5?=
+ =?utf-8?Q?z0GGb6s77YCEzk5JTyQROmJwtq94Z3tCwjnQYlIbEsWOC?=
+X-MS-Exchange-AntiSpam-MessageData-1: UhNhUkUCpg+1spy3mYCVktEvut9PKrfS7aQ=
+X-OriginatorOrg: softathome.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 75a1c4f8-b847-4e8b-1008-08de8f2583ab
+X-MS-Exchange-CrossTenant-AuthSource: PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2026 13:00:42.1657 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ugOBrC08PCVjclTAYnuyQNRYfQl3TADgkzlJVigjESGCdqmGUYR30RUtKU5oVTHDbVEdvSGgSr/kb/Cmzt7lstahSeEVQHYUeyBK84CjJgM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR0P264MB2712
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,584 +152,267 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/10/26 15:12, Vincent Jardin wrote:
-> Read device identification data from a dedicated eMMC region. This
-> provides:
-> 
-> - Unique device serial number for identification and tracking
-> - Factory-programmed MAC address for network interfaces
-> - Bundle information for device variant identification
-> 
-> The serial structure includes CRC32 validation to detect corruption.
-> On read failure or invalid data, sensible defaults are used to ensure
-> the system remains bootable.
-> 
-> The fbxserial command provides two subcommands:
-> - fbxserial show: Display serial info (default)
-> - fbxserial init: Initialize ethaddr from serial info
-> 
-> Each network interface gets a unique MAC address by incrementing the
-> base address stored in the serial structure.
-> 
-> The board file hooks EVT_SETTINGS_R to automatically set MAC addresses
-> before network drivers probe, ensuring addresses are available without
-> manual intervention.
+Hi Raymond,
 
-Again my question, if this is mvebu specific? If not, it should perhaps
-be moved to the board directory. Or is useful for other boards (non
-mvebu) then perhaps even to cmd?
 
-Thanks,
-Stefan
+Sorry for this very later answer.
 
-> Signed-off-by: Vincent Jardin <vjardin@free.fr>
-> ---
->   board/freebox/nbx10g/board.c        |  16 ++
->   cmd/mvebu/Kconfig                   |  27 +++
->   cmd/mvebu/Makefile                  |   1 +
->   cmd/mvebu/nbx_fbxserial.c           | 289 ++++++++++++++++++++++++++++
->   configs/mvebu_nbx_88f8040_defconfig |   2 +
->   include/nbx_fbxserial.h             | 134 +++++++++++++
->   6 files changed, 469 insertions(+)
->   create mode 100644 cmd/mvebu/nbx_fbxserial.c
->   create mode 100644 include/nbx_fbxserial.h
-> 
-> diff --git a/board/freebox/nbx10g/board.c b/board/freebox/nbx10g/board.c
-> index 7080e386c38..2cdf5f68be5 100644
-> --- a/board/freebox/nbx10g/board.c
-> +++ b/board/freebox/nbx10g/board.c
-> @@ -8,6 +8,7 @@
->   
->   #include <config.h>
->   #include <dm.h>
-> +#include <event.h>
->   #include <init.h>
->   #include <asm/global_data.h>
->   #include <asm/gpio.h>
-> @@ -15,6 +16,7 @@
->   #include <asm/arch/cpu.h>
->   #include <asm/arch/soc.h>
->   #include <linux/delay.h>
-> +#include <nbx_fbxserial.h>
->   
->   DECLARE_GLOBAL_DATA_PTR;
->   
-> @@ -61,3 +63,17 @@ int board_late_init(void)
->   
->   	return 0;
->   }
-> +
-> +/*
-> + * Set MAC addresses from eMMC serial info before network driver probes.
-> + * EVT_SETTINGS_R is triggered after MMC is available but before
-> + * initr_net().
-> + */
-> +static int nbx_fbx_settings_r(void)
-> +{
-> +	nbx_fbx_init_ethaddr(0, CONFIG_NBX_MMC_PART_SERIAL_OFFSET);
-> +
-> +	return 0;
-> +}
-> +
-> +EVENT_SPY_SIMPLE(EVT_SETTINGS_R, nbx_fbx_settings_r);
-> diff --git a/cmd/mvebu/Kconfig b/cmd/mvebu/Kconfig
-> index ea03f581280..764e2e7de94 100644
-> --- a/cmd/mvebu/Kconfig
-> +++ b/cmd/mvebu/Kconfig
-> @@ -132,4 +132,31 @@ config MVEBU_MMC_PART_BANK1_SIZE
->   
->   endif
->   
-> +config CMD_NBX_FBXSERIAL
-> +	bool "NBX fbxserial command"
-> +	depends on ARMADA_8K && MMC_SDHCI_XENON
-> +	help
-> +	  Enable the NBX fbxserial command to read and display device
-> +	  serial information from eMMC. This includes:
-> +	  - Device serial number (type, version, manufacturer, date, number)
-> +	  - MAC address (used to set ethaddr environment variables)
-> +	  - Bundle information (if present)
-> +
-> +	  The serial info is stored at a fixed offset in the eMMC user area.
-> +
-> +	  Subcommands:
-> +	  - fbxserial show: display serial info (default)
-> +	  - fbxserial init: initialize ethaddr from serial info
-> +
-> +if CMD_NBX_FBXSERIAL
-> +
-> +config NBX_MMC_PART_SERIAL_OFFSET
-> +	hex "Serial info offset in eMMC"
-> +	default 0x800000
-> +	help
-> +	  Byte offset in eMMC where the serial info structure is stored.
-> +	  Default: 0x800000 (8MB)
-> +
-> +endif
-> +
->   endmenu
-> diff --git a/cmd/mvebu/Makefile b/cmd/mvebu/Makefile
-> index c096f507e26..b1dbd283c63 100644
-> --- a/cmd/mvebu/Makefile
-> +++ b/cmd/mvebu/Makefile
-> @@ -7,3 +7,4 @@
->   obj-$(CONFIG_CMD_MVEBU_BUBT) += bubt.o
->   obj-$(CONFIG_CMD_MVEBU_COMPHY_RX_TRAINING) += comphy_rx_training.o
->   obj-$(CONFIG_CMD_NBX_EMMCBOOT) += mvebu_emmcboot.o
-> +obj-$(CONFIG_CMD_NBX_FBXSERIAL) += nbx_fbxserial.o
-> diff --git a/cmd/mvebu/nbx_fbxserial.c b/cmd/mvebu/nbx_fbxserial.c
-> new file mode 100644
-> index 00000000000..baad5c56c10
-> --- /dev/null
-> +++ b/cmd/mvebu/nbx_fbxserial.c
-> @@ -0,0 +1,289 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * NBX Freebox Serial Info Support
-> + *
-> + * Copyright (C) 2026 Free Mobile, Freebox
-> + *
-> + * Reads device serial number and MAC address from eMMC.
-> + * The serial info is stored at a fixed offset in the eMMC user area.
-> + *
-> + * Serial format: TTTT-VV-M-(YY)WW-NN-NNNNN / FLAGS
-> + * Where:
-> + *   TTTT  = Device type (e.g., 9018)
-> + *   VV    = Board version
-> + *   M     = Manufacturer code (ASCII)
-> + *   YY    = Year (BCD)
-> + *   WW    = Week (1-53)
-> + *   NNNNN = Serial number
-> + *   FLAGS = Feature flags
-> + */
-> +
-> +#include <command.h>
-> +#include <env.h>
-> +#include <mmc.h>
-> +#include <malloc.h>
-> +#include <memalign.h>
-> +#include <string.h>
-> +#include <vsprintf.h>
-> +#include <u-boot/crc.h>
-> +#include <asm/byteorder.h>
-> +#include <linux/ctype.h>
-> +#include <nbx_fbxserial.h>
-> +
-> +/* Default serial info (Freebox OUI, type 9018) */
-> +static const struct nbx_fbx_serial nbx_fbxserial_default = {
-> +	.crc32		= 0,
-> +	.magic		= NBX_FBXSERIAL_MAGIC,
-> +	.struct_version	= NBX_FBXSERIAL_VERSION,
-> +	.len		= sizeof(struct nbx_fbx_serial),
-> +	.type		= 9018,
-> +	.version	= 0,
-> +	.manufacturer	= '_',
-> +	.year		= 0,
-> +	.week		= 0,
-> +	.number		= 0,
-> +	.flags		= 0,
-> +	.mac_addr_base	= { 0x00, 0x07, 0xCB, 0x00, 0x00, 0xFD },
-> +	.mac_count	= 1,
-> +	.random_data	= { 0 },
-> +	.last_modified	= 0,
-> +	.extinfo_count	= 0,
-> +};
-> +
-> +void nbx_fbxserial_set_default(struct nbx_fbx_serial *serial)
-> +{
-> +	memcpy(serial, &nbx_fbxserial_default, sizeof(*serial));
-> +}
-> +
-> +/*
-> + * Validate serial info structure
-> + */
-> +static int nbx_fbx_check_serial(struct nbx_fbx_serial *fs)
-> +{
-> +	unsigned int sum, len;
-> +
-> +	/* Check magic first */
-> +	if (be32_to_cpu(fs->magic) != NBX_FBXSERIAL_MAGIC) {
-> +		printf("Invalid magic for serial info (%08x != %08x)!\n",
-> +		       be32_to_cpu(fs->magic), NBX_FBXSERIAL_MAGIC);
-> +		return -1;
-> +	}
-> +
-> +	/* Check struct version */
-> +	if (be32_to_cpu(fs->struct_version) > NBX_FBXSERIAL_VERSION) {
-> +		printf("Version too big for fbxserial info (0x%08x)!\n",
-> +		       be32_to_cpu(fs->struct_version));
-> +		return -1;
-> +	}
-> +
-> +	/* Check for silly len */
-> +	len = be32_to_cpu(fs->len);
-> +	if (len > NBX_FBXSERIAL_MAX_SIZE) {
-> +		printf("Silly len for serial info (%d)\n", len);
-> +		return -1;
-> +	}
-> +
-> +	/* Validate CRC (crc32_no_comp: no one's complement) */
-> +	sum = crc32_no_comp(0, (void *)fs + 4, len - 4);
-> +	if (be32_to_cpu(fs->crc32) != sum) {
-> +		printf("Invalid checksum for serial info (%08x != %08x)\n",
-> +		       sum, be32_to_cpu(fs->crc32));
-> +		return -1;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +int nbx_fbx_read_serial(int dev_num, unsigned long offset,
-> +			struct nbx_fbx_serial *fs)
-> +{
-> +	struct mmc *mmc;
-> +	struct blk_desc *bd;
-> +	uint blk_start, blk_cnt;
-> +	uint n;
-> +
-> +	ALLOC_CACHE_ALIGN_BUFFER(char, buf, ALIGN(sizeof(*fs), 512));
-> +	mmc = find_mmc_device(dev_num);
-> +	if (!mmc) {
-> +		printf("No MMC device %d found\n", dev_num);
-> +		nbx_fbxserial_set_default(fs);
-> +		return -1;
-> +	}
-> +
-> +	if (mmc_init(mmc)) {
-> +		puts("MMC init failed\n");
-> +		nbx_fbxserial_set_default(fs);
-> +		return -1;
-> +	}
-> +
-> +	/* Switch to partition 0 (user data area) */
-> +	if (blk_select_hwpart_devnum(UCLASS_MMC, dev_num, 0)) {
-> +		puts("MMC partition switch failed\n");
-> +		nbx_fbxserial_set_default(fs);
-> +		return -1;
-> +	}
-> +
-> +	bd = mmc_get_blk_desc(mmc);
-> +	if (!bd) {
-> +		puts("Failed to get MMC block descriptor\n");
-> +		nbx_fbxserial_set_default(fs);
-> +		return -1;
-> +	}
-> +
-> +	blk_start = ALIGN(offset, bd->blksz) / bd->blksz;
-> +	blk_cnt = ALIGN(sizeof(*fs), bd->blksz) / bd->blksz;
-> +
-> +	n = blk_dread(bd, blk_start, blk_cnt, buf);
-> +	if (n != blk_cnt) {
-> +		printf("Failed to read serial info from MMC\n");
-> +		nbx_fbxserial_set_default(fs);
-> +		return -1;
-> +	}
-> +
-> +	memcpy(fs, buf, sizeof(*fs));
-> +
-> +	if (nbx_fbx_check_serial(fs) != 0) {
-> +		nbx_fbxserial_set_default(fs);
-> +		return -1;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +void nbx_fbx_dump_serial(struct nbx_fbx_serial *fs)
-> +{
-> +	int i;
-> +
-> +	printf("Serial: %04u-%02u-%c-(%02u)%02u-%02u-%05u / %08x\n",
-> +	       be16_to_cpu(fs->type),
-> +	       fs->version,
-> +	       isprint(fs->manufacturer) ? fs->manufacturer : '?',
-> +	       be16_to_cpu(fs->year) / 100,
-> +	       be16_to_cpu(fs->year) % 100,
-> +	       fs->week,
-> +	       be32_to_cpu(fs->number),
-> +	       be32_to_cpu(fs->flags));
-> +
-> +	printf("Mac:    %02X:%02X:%02X:%02X:%02X:%02X\n",
-> +	       fs->mac_addr_base[0],
-> +	       fs->mac_addr_base[1],
-> +	       fs->mac_addr_base[2],
-> +	       fs->mac_addr_base[3],
-> +	       fs->mac_addr_base[4],
-> +	       fs->mac_addr_base[5]);
-> +
-> +	/* Show bundle info */
-> +	for (i = 0; i < be32_to_cpu(fs->extinfo_count); i++) {
-> +		struct nbx_serial_extinfo *p;
-> +
-> +		if (i >= NBX_EXTINFO_MAX_COUNT)
-> +			break;
-> +
-> +		p = &fs->extinfos[i];
-> +		if (be32_to_cpu(p->type) == NBX_EXTINFO_TYPE_EXTDEV &&
-> +		    be32_to_cpu(p->u.extdev.type) == NBX_EXTDEV_TYPE_BUNDLE) {
-> +			/* Ensure null termination */
-> +			p->u.extdev.serial[sizeof(p->u.extdev.serial) - 1] = 0;
-> +			printf("Bundle: %s\n", p->u.extdev.serial);
-> +		}
-> +	}
-> +
-> +	printf("\n");
-> +}
-> +
-> +int nbx_fbx_init_ethaddr(int dev_num, unsigned long offset)
-> +{
-> +	struct nbx_fbx_serial fs;
-> +	char mac[32];
-> +	int ret;
-> +
-> +	ret = nbx_fbx_read_serial(dev_num, offset, &fs);
-> +
-> +	nbx_fbx_dump_serial(&fs);
-> +
-> +	/* Even on error, fs has default values set */
-> +	snprintf(mac, sizeof(mac), "%02x:%02x:%02x:%02x:%02x:%02x",
-> +		 fs.mac_addr_base[0], fs.mac_addr_base[1],
-> +		 fs.mac_addr_base[2], fs.mac_addr_base[3],
-> +		 fs.mac_addr_base[4], fs.mac_addr_base[5]);
-> +
-> +	env_set("ethaddr", mac);
-> +	env_set("eth1addr", mac);
-> +	env_set("eth2addr", mac);
-> +
-> +	return ret;
-> +}
-> +
-> +/*
-> + * fbxserial show - display serial info from eMMC
-> + */
-> +static int do_fbxserial_show(struct cmd_tbl *cmdtp, int flag, int argc,
-> +			     char *const argv[])
-> +{
-> +	struct nbx_fbx_serial fs;
-> +	int dev = 0;
-> +	unsigned long offset = CONFIG_NBX_MMC_PART_SERIAL_OFFSET;
-> +
-> +	if (argc >= 1)
-> +		dev = dectoul(argv[0], NULL);
-> +
-> +	if (argc >= 2)
-> +		offset = hextoul(argv[1], NULL);
-> +
-> +	if (nbx_fbx_read_serial(dev, offset, &fs) != 0)
-> +		printf("Warning: Using default serial info\n");
-> +
-> +	nbx_fbx_dump_serial(&fs);
-> +
-> +	return CMD_RET_SUCCESS;
-> +}
-> +
-> +/*
-> + * fbxserial init - initialize ethaddr from serial info
-> + */
-> +static int do_fbxserial_init(struct cmd_tbl *cmdtp, int flag, int argc,
-> +			     char *const argv[])
-> +{
-> +	int dev = 0;
-> +	unsigned long offset = CONFIG_NBX_MMC_PART_SERIAL_OFFSET;
-> +
-> +	if (argc >= 1)
-> +		dev = dectoul(argv[0], NULL);
-> +
-> +	if (argc >= 2)
-> +		offset = hextoul(argv[1], NULL);
-> +
-> +	return nbx_fbx_init_ethaddr(dev, offset);
-> +}
-> +
-> +static struct cmd_tbl cmd_fbxserial_sub[] = {
-> +	U_BOOT_CMD_MKENT(show, 3, 0, do_fbxserial_show, "", ""),
-> +	U_BOOT_CMD_MKENT(init, 3, 0, do_fbxserial_init, "", ""),
-> +};
-> +
-> +static int do_fbxserial(struct cmd_tbl *cmdtp, int flag, int argc,
-> +			char *const argv[])
-> +{
-> +	struct cmd_tbl *cp;
-> +
-> +	/* Default to 'show' if no subcommand */
-> +	if (argc < 2)
-> +		return do_fbxserial_show(cmdtp, flag, 0, NULL);
-> +
-> +	cp = find_cmd_tbl(argv[1], cmd_fbxserial_sub,
-> +			  ARRAY_SIZE(cmd_fbxserial_sub));
-> +
-> +	if (!cp)
-> +		return CMD_RET_USAGE;
-> +
-> +	return cp->cmd(cmdtp, flag, argc - 2, argv + 2);
-> +}
-> +
-> +U_BOOT_CMD(
-> +	fbxserial, 5, 0, do_fbxserial,
-> +	"NBX serial info and MAC address initialization",
-> +	"show [dev] [offset] - display serial info from eMMC\n"
-> +	"fbxserial init [dev] [offset] - initialize ethaddr from serial info\n"
-> +	"    dev    - MMC device number (default 0)\n"
-> +	"    offset - offset in eMMC in hex (default from Kconfig)"
-> +);
-> diff --git a/configs/mvebu_nbx_88f8040_defconfig b/configs/mvebu_nbx_88f8040_defconfig
-> index 2fd58e4ad64..c295094536e 100644
-> --- a/configs/mvebu_nbx_88f8040_defconfig
-> +++ b/configs/mvebu_nbx_88f8040_defconfig
-> @@ -21,6 +21,7 @@ CONFIG_PREBOOT="echo (CRC warning is normal: no env saved yet)"
->   CONFIG_SYS_PBSIZE=1048
->   CONFIG_SYS_CONSOLE_INFO_QUIET=y
->   CONFIG_DISPLAY_CPUINFO=y
-> +CONFIG_LAST_STAGE_INIT=y
->   CONFIG_SYS_PROMPT="nodebox10G>> "
->   CONFIG_SYS_MAXARGS=32
->   CONFIG_CMD_BOOTZ=y
-> @@ -41,6 +42,7 @@ CONFIG_CMD_CACHE=y
->   CONFIG_CMD_TIME=y
->   CONFIG_CMD_TIMER=y
->   CONFIG_CMD_NBX_EMMCBOOT=y
-> +CONFIG_CMD_NBX_FBXSERIAL=y
->   CONFIG_CMD_EXT2=y
->   CONFIG_CMD_EXT4=y
->   CONFIG_CMD_EXT4_WRITE=y
-> diff --git a/include/nbx_fbxserial.h b/include/nbx_fbxserial.h
-> new file mode 100644
-> index 00000000000..7628e658f5e
-> --- /dev/null
-> +++ b/include/nbx_fbxserial.h
-> @@ -0,0 +1,134 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * NBX Freebox Serial Info Support
-> + *
-> + * Copyright (C) 2026 Free Mobile, Freebox
-> + *
-> + * Reads device serial number and MAC address from eMMC.
-> + * Used to identify the board and set network MAC addresses.
-> + */
-> +
-> +#ifndef NBX_FBXSERIAL_H
-> +#define NBX_FBXSERIAL_H
-> +
-> +#include <linux/types.h>
-> +
-> +/*
-> + * Extended info structure - variable data depending on type
-> + */
-> +#define NBX_EXTINFO_SIZE		128
-> +#define NBX_EXTINFO_MAX_COUNT		16
-> +
-> +/* Extended info types */
-> +#define NBX_EXTINFO_TYPE_EXTDEV		1
-> +
-> +/* Extended device types */
-> +#define NBX_EXTDEV_TYPE_BUNDLE		1
-> +#define NBX_EXTDEV_TYPE_MAX		2
-> +
-> +struct nbx_serial_extinfo {
-> +	u32 type;
-> +
-> +	union {
-> +		/* extdev */
-> +		struct {
-> +			u32 type;
-> +			u32 model;
-> +			char serial[64];
-> +		} extdev;
-> +
-> +		/* raw access */
-> +		unsigned char data[NBX_EXTINFO_SIZE];
-> +	} u;
-> +} __packed;
-> +
-> +/*
-> + * Master serial structure
-> + */
-> +#define NBX_FBXSERIAL_VERSION		1
-> +#define NBX_FBXSERIAL_MAGIC		0x2d9521ab
-> +
-> +#define NBX_MAC_ADDR_SIZE		6
-> +#define NBX_RANDOM_DATA_SIZE		32
-> +
-> +/* Maximum size for CRC validation */
-> +#define NBX_FBXSERIAL_MAX_SIZE		8192
-> +
-> +struct nbx_fbx_serial {
-> +	u32 crc32;
-> +	u32 magic;
-> +	u32 struct_version;
-> +	u32 len;
-> +
-> +	/* Board serial */
-> +	u16 type;
-> +	u8 version;
-> +	u8 manufacturer;
-> +	u16 year;
-> +	u8 week;
-> +	u32 number;
-> +	u32 flags;
-> +
-> +	/* MAC address base */
-> +	u8 mac_addr_base[NBX_MAC_ADDR_SIZE];
-> +
-> +	/* MAC address count */
-> +	u8 mac_count;
-> +
-> +	/* Random data used to derive keys */
-> +	u8 random_data[NBX_RANDOM_DATA_SIZE];
-> +
-> +	/* Last update of data (seconds since epoch) */
-> +	u32 last_modified;
-> +
-> +	/* Count of following extinfo tags */
-> +	u32 extinfo_count;
-> +
-> +	/* Beginning of extended info */
-> +	struct nbx_serial_extinfo extinfos[NBX_EXTINFO_MAX_COUNT];
-> +} __packed;
-> +
-> +/**
-> + * nbx_fbxserial_set_default() - Initialize serial structure with defaults
-> + * @serial: Pointer to serial structure to initialize
-> + *
-> + * Sets the serial structure to default values (Freebox OUI, type 9018).
-> + * Used as fallback when serial info cannot be read from eMMC.
-> + */
-> +void nbx_fbxserial_set_default(struct nbx_fbx_serial *serial);
-> +
-> +/**
-> + * nbx_fbx_read_serial() - Read serial info from eMMC
-> + * @dev_num: MMC device number
-> + * @offset: Byte offset in eMMC where serial info is stored
-> + * @fs: Pointer to serial structure to fill
-> + *
-> + * Reads and validates the serial info from eMMC. On failure,
-> + * the structure is filled with default values.
-> + *
-> + * Return: 0 on success, negative on error (defaults still set)
-> + */
-> +int nbx_fbx_read_serial(int dev_num, unsigned long offset,
-> +			struct nbx_fbx_serial *fs);
-> +
-> +/**
-> + * nbx_fbx_dump_serial() - Print serial info to console
-> + * @fs: Pointer to serial structure to display
-> + *
-> + * Prints the serial number, MAC address, and bundle info (if present).
-> + */
-> +void nbx_fbx_dump_serial(struct nbx_fbx_serial *fs);
-> +
-> +/**
-> + * nbx_fbx_init_ethaddr() - Initialize Ethernet addresses from serial info
-> + * @dev_num: MMC device number
-> + * @offset: Byte offset in eMMC where serial info is stored
-> + *
-> + * Reads serial info and sets ethaddr, eth1addr, eth2addr environment
-> + * variables from the base MAC address in the serial structure.
-> + *
-> + * Return: 0 on success, negative on error
-> + */
-> +int nbx_fbx_init_ethaddr(int dev_num, unsigned long offset);
-> +
-> +#endif /* NBX_FBXSERIAL_H */
 
+Le 20/02/2026 à 16:18, Raymond Mao a écrit :
+> This Mail comes from Outside of SoftAtHome: Do not answer, click links or open attachments unless you recognize the sender and know the content is safe.
+>
+> Hi Philippe,
+>
+> On Thu, Feb 19, 2026 at 8:26 AM Philippe Reynes
+> <philippe.reynes@softathome.com> wrote:
+>> Enables the support of ecc in mbedtls.
+>>
+>> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+>> ---
+>> v2:
+>> - move ecdsa to MBEDTLS_LIB_X509
+>> - enhance depencendies
+>>
+>>   configs/amd_versal2_virt_defconfig       |  1 +
+>>   configs/qemu_arm64_lwip_defconfig        |  1 +
+>>   configs/starfive_visionfive2_defconfig   |  1 +
+>>   configs/xilinx_versal_net_virt_defconfig |  1 +
+>>   configs/xilinx_versal_virt_defconfig     |  1 +
+>>   configs/xilinx_zynqmp_kria_defconfig     |  1 +
+>>   configs/xilinx_zynqmp_virt_defconfig     |  1 +
+>>   lib/mbedtls/Kconfig                      | 16 ++++++++++++++++
+>>   lib/mbedtls/Makefile                     | 16 +++++++++-------
+>>   lib/mbedtls/mbedtls_def_config.h         | 18 ++++++++++++++++++
+>>   10 files changed, 50 insertions(+), 7 deletions(-)
+>>
+>> diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
+>> index 0344089030c..702bf28405d 100644
+>> --- a/configs/amd_versal2_virt_defconfig
+>> +++ b/configs/amd_versal2_virt_defconfig
+>> @@ -164,6 +164,7 @@ CONFIG_VIRTIO_MMIO=y
+>>   CONFIG_VIRTIO_NET=y
+>>   CONFIG_VIRTIO_BLK=y
+>>   CONFIG_MBEDTLS_LIB=y
+>> +CONFIG_ECDSA=y
+>>   CONFIG_TPM=y
+>>   # CONFIG_OPTEE_LIB is not set
+>>   CONFIG_TOOLS_MKFWUMDATA=y
+>> diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_lwip_defconfig
+>> index a974970c3d3..ab6302b67eb 100644
+>> --- a/configs/qemu_arm64_lwip_defconfig
+>> +++ b/configs/qemu_arm64_lwip_defconfig
+>> @@ -11,3 +11,4 @@ CONFIG_CMD_WGET=y
+>>   CONFIG_EFI_HTTP_BOOT=y
+>>   CONFIG_WGET_HTTPS=y
+>>   CONFIG_WGET_CACERT=y
+>> +CONFIG_ECDSA=y
+>> diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
+>> index a754134a313..508bd465704 100644
+>> --- a/configs/starfive_visionfive2_defconfig
+>> +++ b/configs/starfive_visionfive2_defconfig
+>> @@ -156,3 +156,4 @@ CONFIG_USB_GADGET=y
+>>   CONFIG_WDT=y
+>>   CONFIG_WDT_STARFIVE=y
+>>   CONFIG_MBEDTLS_LIB=y
+>> +CONFIG_ECDSA=y
+>> diff --git a/configs/xilinx_versal_net_virt_defconfig b/configs/xilinx_versal_net_virt_defconfig
+>> index 323b5606566..8b760beab03 100644
+>> --- a/configs/xilinx_versal_net_virt_defconfig
+>> +++ b/configs/xilinx_versal_net_virt_defconfig
+>> @@ -154,4 +154,5 @@ CONFIG_VIRTIO_MMIO=y
+>>   CONFIG_VIRTIO_NET=y
+>>   CONFIG_VIRTIO_BLK=y
+>>   CONFIG_MBEDTLS_LIB=y
+>> +CONFIG_ECDSA=y
+>>   CONFIG_TPM=y
+>> diff --git a/configs/xilinx_versal_virt_defconfig b/configs/xilinx_versal_virt_defconfig
+>> index 652121e27a0..6dd8620cf51 100644
+>> --- a/configs/xilinx_versal_virt_defconfig
+>> +++ b/configs/xilinx_versal_virt_defconfig
+>> @@ -168,5 +168,6 @@ CONFIG_VIRTIO_MMIO=y
+>>   CONFIG_VIRTIO_NET=y
+>>   CONFIG_VIRTIO_BLK=y
+>>   CONFIG_MBEDTLS_LIB=y
+>> +CONFIG_ECDSA=y
+>>   CONFIG_TPM=y
+>>   CONFIG_TOOLS_MKFWUMDATA=y
+>> diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
+>> index 8ad05e37189..d23452e96d0 100644
+>> --- a/configs/xilinx_zynqmp_kria_defconfig
+>> +++ b/configs/xilinx_zynqmp_kria_defconfig
+>> @@ -219,6 +219,7 @@ CONFIG_VIRTIO_BLK=y
+>>   CONFIG_BINMAN_DTB="./arch/arm/dts/zynqmp-binman-som.dtb"
+>>   CONFIG_PANIC_HANG=y
+>>   CONFIG_MBEDTLS_LIB=y
+>> +CONFIG_ECDSA=y
+>>   CONFIG_TPM=y
+>>   CONFIG_SPL_GZIP=y
+>>   CONFIG_TOOLS_MKFWUMDATA=y
+>> diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
+>> index bb79ddf989e..01370a215d4 100644
+>> --- a/configs/xilinx_zynqmp_virt_defconfig
+>> +++ b/configs/xilinx_zynqmp_virt_defconfig
+>> @@ -237,6 +237,7 @@ CONFIG_VIRTIO_BLK=y
+>>   CONFIG_BINMAN_DTB="./arch/arm/dts/zynqmp-binman.dtb"
+>>   CONFIG_PANIC_HANG=y
+>>   CONFIG_MBEDTLS_LIB=y
+>> +CONFIG_ECDSA=y
+>>   CONFIG_TPM=y
+>>   CONFIG_SPL_GZIP=y
+>>   CONFIG_TOOLS_MKFWUMDATA=y
+>> diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+>> index 789721ee6cd..8bf8809198f 100644
+>> --- a/lib/mbedtls/Kconfig
+>> +++ b/lib/mbedtls/Kconfig
+>> @@ -242,11 +242,16 @@ config MBEDTLS_LIB_X509
+>>          select X509_CERTIFICATE_PARSER_MBEDTLS if X509_CERTIFICATE_PARSER
+>>          select PKCS7_MESSAGE_PARSER_MBEDTLS if PKCS7_MESSAGE_PARSER
+>>          select MSCODE_PARSER_MBEDTLS if MSCODE_PARSER
+>> +       select ECDSA_MBEDTLS if ECDSA
+>>          help
+>>            Enable MbedTLS certificate libraries.
+>>
+>>   if MBEDTLS_LIB_X509
+>>
+>> +config BIGNUM_MBEDTLS
+>> +       bool
+>> +       default n
+>> +
+>>   config ASN1_DECODER_MBEDTLS
+>>          bool "ASN1 decoder with MbedTLS certificate library"
+>>          depends on MBEDTLS_LIB_X509 && ASN1_DECODER
+>> @@ -264,6 +269,7 @@ config RSA_PUBLIC_KEY_PARSER_MBEDTLS
+>>          bool "RSA public key parser with MbedTLS certificate library"
+>>          depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+>>          select ASN1_DECODER_MBEDTLS
+>> +       select BIGNUM_MBEDTLS
+>>          help
+>>            This option chooses MbedTLS certificate library for RSA public key
+>>            parser.
+>> @@ -292,6 +298,15 @@ config MSCODE_PARSER_MBEDTLS
+>>            This option chooses MbedTLS certificate library for MS authenticode
+>>            parser.
+>>
+>> +config ECDSA_MBEDTLS
+>> +       bool "Enable ECDSA support with MbedTLS certificate library"
+>> +       depends on MBEDTLS_LIB_X509
+>> +       select ASN1_DECODER
+> This should be ASN1_DECODER_MBEDTLS.
+
+It was my first try, but I reach an issue.
+If ASN1_DECODER is not selected and we select ASN1_DECODER_MBEDTLS, 
+there is a conflict because
+ASN1_DECODER_MBEDTLS depends on ASN1_DECODER. So to avoid this issue, I 
+have kept ASN1_DECODER in V3.
+
+Regards,
+Philippe
+
+
+>
+>
+>> +       select BIGNUM_MBEDTLS
+>> +       help
+>> +         This option enables support of ECDSA with the MbedTLS certificate
+>> +         library.
+>> +
+>>   endif # MBEDTLS_LIB_X509
+>>
+>>   config MBEDTLS_LIB_TLS
+>> @@ -301,6 +316,7 @@ config MBEDTLS_LIB_TLS
+>>          depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+>>          depends on ASN1_DECODER_MBEDTLS
+>>          depends on MBEDTLS_LIB
+>> +       depends on ECDSA_MBEDTLS
+>>          help
+>>            Enable MbedTLS TLS library. Required for HTTPs support
+>>            in wget
+>> diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
+>> index c5b445bd85c..5433e17cc64 100644
+>> --- a/lib/mbedtls/Makefile
+>> +++ b/lib/mbedtls/Makefile
+>> @@ -39,13 +39,14 @@ mbedtls_lib_crypto-$(CONFIG_$(PHASE_)HKDF_MBEDTLS) += \
+>>   # MbedTLS X509 library
+>>   obj-$(CONFIG_$(XPL_)MBEDTLS_LIB_X509) += mbedtls_lib_x509.o
+>>   mbedtls_lib_x509-y := $(MBEDTLS_LIB_DIR)/x509.o
+>> +mbedtls_lib_x509-$(CONFIG_$(PHASE_)BIGNUM_MBEDTLS) += \
+>> +       $(MBEDTLS_LIB_DIR)/bignum.o \
+>> +       $(MBEDTLS_LIB_DIR)/bignum_core.o
+>>   mbedtls_lib_x509-$(CONFIG_$(PHASE_)ASN1_DECODER_MBEDTLS) += \
+>>          $(MBEDTLS_LIB_DIR)/asn1parse.o \
+>>          $(MBEDTLS_LIB_DIR)/asn1write.o \
+>>          $(MBEDTLS_LIB_DIR)/oid.o
+>>   mbedtls_lib_x509-$(CONFIG_$(PHASE_)RSA_PUBLIC_KEY_PARSER_MBEDTLS) += \
+>> -       $(MBEDTLS_LIB_DIR)/bignum.o \
+>> -       $(MBEDTLS_LIB_DIR)/bignum_core.o \
+>>          $(MBEDTLS_LIB_DIR)/rsa.o \
+>>          $(MBEDTLS_LIB_DIR)/rsa_alt_helpers.o
+>>   mbedtls_lib_x509-$(CONFIG_$(PHASE_)ASYMMETRIC_PUBLIC_KEY_MBEDTLS) += \
+>> @@ -57,6 +58,12 @@ mbedtls_lib_x509-$(CONFIG_$(PHASE_)X509_CERTIFICATE_PARSER_MBEDTLS) += \
+>>          $(MBEDTLS_LIB_DIR)/x509_crt.o
+>>   mbedtls_lib_x509-$(CONFIG_$(PHASE_)PKCS7_MESSAGE_PARSER_MBEDTLS) += \
+>>          $(MBEDTLS_LIB_DIR)/pkcs7.o
+>> +mbedtls_lib_x509-$(CONFIG_$(PHASE_)ECDSA_MBEDTLS) += \
+>> +       $(MBEDTLS_LIB_DIR)/ecdsa.o \
+>> +       $(MBEDTLS_LIB_DIR)/ecp.o \
+>> +       $(MBEDTLS_LIB_DIR)/ecp_curves.o \
+>> +       $(MBEDTLS_LIB_DIR)/ecp_curves_new.o \
+>> +       $(MBEDTLS_LIB_DIR)/pk_ecc.o
+>>
+>>   #mbedTLS TLS support
+>>   obj-$(CONFIG_$(XPL_)MBEDTLS_LIB_TLS) += mbedtls_lib_tls.o
+>> @@ -64,7 +71,6 @@ mbedtls_lib_tls-y := \
+>>          $(MBEDTLS_LIB_DIR)/mps_reader.o \
+>>          $(MBEDTLS_LIB_DIR)/mps_trace.o \
+>>          $(MBEDTLS_LIB_DIR)/net_sockets.o \
+>> -       $(MBEDTLS_LIB_DIR)/pk_ecc.o \
+>>          $(MBEDTLS_LIB_DIR)/ssl_cache.o \
+>>          $(MBEDTLS_LIB_DIR)/ssl_ciphersuites.o \
+>>          $(MBEDTLS_LIB_DIR)/ssl_client.o \
+>> @@ -82,8 +88,4 @@ mbedtls_lib_tls-y := \
+>>          $(MBEDTLS_LIB_DIR)/cipher.o \
+>>          $(MBEDTLS_LIB_DIR)/cipher_wrap.o \
+>>          $(MBEDTLS_LIB_DIR)/ecdh.o \
+>> -       $(MBEDTLS_LIB_DIR)/ecdsa.o \
+>> -       $(MBEDTLS_LIB_DIR)/ecp.o \
+>> -       $(MBEDTLS_LIB_DIR)/ecp_curves.o \
+>> -       $(MBEDTLS_LIB_DIR)/ecp_curves_new.o \
+>>          $(MBEDTLS_LIB_DIR)/gcm.o \
+>> diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_config.h
+>> index dda3f4dd6e4..7d60bcc52aa 100644
+>> --- a/lib/mbedtls/mbedtls_def_config.h
+>> +++ b/lib/mbedtls/mbedtls_def_config.h
+>> @@ -89,6 +89,24 @@
+>>   #define MBEDTLS_ASN1_WRITE_C
+>>   #endif
+>>
+>> +#if CONFIG_IS_ENABLED(ECDSA_MBEDTLS)
+> In the 'mbedtls_def_config.h' file, we use the kconfigs without the
+> '_MBEDTLS' postfix.
+>
+> Regards,
+> Raymond
+>
+>> +#define MBEDTLS_ECDSA_C
+>> +#define MBEDTLS_ECP_C
+>> +#define MBEDTLS_BIGNUM_C
+>> +#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
+>> +#define MBEDTLS_ECP_DP_SECP192R1_ENABLED
+>> +#define MBEDTLS_ECP_DP_SECP224R1_ENABLED
+>> +#define MBEDTLS_ECP_DP_SECP256R1_ENABLED
+>> +#define MBEDTLS_ECP_DP_SECP384R1_ENABLED
+>> +#define MBEDTLS_ECP_DP_SECP521R1_ENABLED
+>> +#define MBEDTLS_ECP_DP_SECP192K1_ENABLED
+>> +#define MBEDTLS_ECP_DP_SECP224K1_ENABLED
+>> +#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
+>> +#define MBEDTLS_ECP_DP_BP256R1_ENABLED
+>> +#define MBEDTLS_ECP_DP_BP384R1_ENABLED
+>> +#define MBEDTLS_ECP_DP_BP512R1_ENABLED
+>> +#endif
+>> +
+>>   #endif /* #if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509) */
+>>
+>>   #if CONFIG_IS_ENABLED(MBEDTLS_LIB_TLS)
+>> --
+>> 2.43.0
+>>
