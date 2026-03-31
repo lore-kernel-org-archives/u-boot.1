@@ -4,145 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A6311061B37
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 12:20:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5610B1061B3C
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 12:35:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC18983DA6;
-	Tue, 31 Mar 2026 14:20:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 9897183DA6;
+	Tue, 31 Mar 2026 14:35:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="aRYVSug3";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Riz1lZrV";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="OcmGODpd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13F2983DBF; Tue, 31 Mar 2026 14:20:44 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id 0C81583DA7; Tue, 31 Mar 2026 14:35:36 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5031683A41
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 14:20:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id AD4D283A41
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 14:35:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 62V9h0nW4053882
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 12:20:39 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 5TTOHn4MEpCaN4mx4a7o8oNlL7AAGjOFBdk+dreqjB0=; b=aRYVSug3Y6faPFII
- fgEfZgtq0riksYu1nlgh8O6kPtzX7swTqvS2Vl+zuYq1PlYGxGjTlWZ0guX+dTRk
- /F0dzpZwQ6vJMjh2KdRLZOOxptJ/3eytNxNxWxvg64jIBbKd6gwx0iSsv02gz6iv
- pCx3mWApM3bXHc8x8cO6FQ6W9pfVJ8jwJKCmfON7iF26aYdLm4cLD0Ashn6mZ1zC
- yd5VeBedjsIXwQju1J9LKDf5xOGnkQfNE/Mdz/9OilwGAOUn7G4qPbc7KoepHGcE
- HHYw0GBQaeM54FMSyx0DJYj/wW4mtYMovUhAgcoKjLuFxZ/b99xc+717l930bOjG
- 3/bRpQ==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4d7xx3bh5w-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 12:20:39 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-2b0be75dfd4so72178665ad.1
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 05:20:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1774959639; x=1775564439; darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:cc:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=5TTOHn4MEpCaN4mx4a7o8oNlL7AAGjOFBdk+dreqjB0=;
- b=Riz1lZrVrO3pe1FuoQQZPpKJsy2IcI6i9XIU0LAA+R/JqMqopdzVtiQIia46eIKa2f
- 4h9HumkZbeRsLcRSn8NGXkCY777ZBN44YzzkrPZZxYUZF0Bvy5Iuf9+KL6F4Jy/8Dfo/
- Y1KmKLqkZ2cA9G+O/kHwJHBrb5QXXBVJRlxVqLYPqkWEzrRx0aWpZJyMo/P01VgmBQFZ
- DbMgX16rQjjdfZTIMW99RHBJPW8+CCP+i7zHn/Mx1lJaU36Zgeztq8BDchrb6ZulsBgD
- PBX1BfcxwtugOv9WX2uPuH9XSS682sqjCNeIKaWZh4eb62o3QZdyLbgyxmcBNy2c978J
- gYbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774959639; x=1775564439;
- h=content-transfer-encoding:in-reply-to:from:cc:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=5TTOHn4MEpCaN4mx4a7o8oNlL7AAGjOFBdk+dreqjB0=;
- b=Fa5VAzSTJZ3AriJ/o+NGopc+H4zh3k0EuPt0xaf4VlJK2nW11+2rUJW5jeadRzibYN
- spS3g/F4AJ6lurbsaiTkNU3KBmQHXDEUxeavwWL+y9Bw4yH01pDYNXe6jXZrLZt7nDeP
- c5LCQFy2Cb/f/YxykonDVPBHVa3hCuEowXXxiJC4EyY6JyuYjZGOXxz3gqkS7rn2mNkk
- +SgvujXadaO41BfD4YAJwDYiJyDcQkD6QRRGFfkhJUuAF7p61JfFM/2yUenJ0hGk4NtM
- HrN1WdUZNYd8i/J2lLWEdeDr5Q1rQY+fMWluM3AjfRamkGjnv5D1vFOPDZ3QKjXKwzP7
- +sSA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXOTmnfWIQSpwI0+6r+zaksN3Qq53Qo5um0z76GypnRe9a8wsdH4L6DONwzJbZcczvnD8vsnhw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzZBhyNzpKZCou51LNDKLcIWjm/6ruDLlTHhci1qgDcJOOXY3mi
- IPNnjR4JvS4q8s8h++tkzHwKhiN7yIMJ5rQWLRzMDKbWh8Ve3xH3BtuPTDNGPGsme5tKAxjYcAD
- /uNd2amz2Xppcug9V7bJ2SPCqJ32hq/Q874eIv//m9DHjTkzRxPWooD+s
-X-Gm-Gg: ATEYQzzP/4oUMRpK/Fn53xfikqndB44r3wurqIoZIAR3LICoqeGVRfDU/qY7W1QRDEg
- 5Ksp62n6zsvm7ReA9RzqvWoSmTc0h56ssIsxTQtVZW518HQU7PMItYuap9Xwg7pnWoJOczWhTpO
- P6fdJXykfspoUquMrNB0IPc06rSXA0SIrWwoxtwoCvM3rt1lo53W19AJL1mgJYUAEMAAp4VGADz
- X6fpcbBaqWcNA47jVI7q7zephte6DxVJJb5kbk83SNtLvMi6grfiWMpzUS8YHOIacQ/wsoNl1OG
- 5xJAFvEhzTiaGSv0YinGsGZnRp2rFOr6hKnbcSr8SwnhAXkrS1ERbIwSS5PkMDnGN89M++G9fUc
- 7n7aHBpnlE4MRLxERwYf1MBNBW8IORq/QAbM1Xhy/QB9a09OI9MJYww==
-X-Received: by 2002:a17:902:ce06:b0:2b2:58b6:3dae with SMTP id
- d9443c01a7336-2b258b644f5mr51954205ad.46.1774959638542; 
- Tue, 31 Mar 2026 05:20:38 -0700 (PDT)
-X-Received: by 2002:a17:902:ce06:b0:2b2:58b6:3dae with SMTP id
- d9443c01a7336-2b258b644f5mr51953725ad.46.1774959637859; 
- Tue, 31 Mar 2026 05:20:37 -0700 (PDT)
-Received: from [10.152.202.155] ([202.46.23.19])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b242765c7bsm113671955ad.49.2026.03.31.05.20.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 31 Mar 2026 05:20:37 -0700 (PDT)
-Message-ID: <f76ba324-a207-40c3-a66f-cc485ac923ff@oss.qualcomm.com>
-Date: Tue, 31 Mar 2026 17:50:28 +0530
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=stefan.roese@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4flSJM209Pz9v7V;
+ Tue, 31 Mar 2026 14:35:31 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1774960531;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=DSxP8xkOfsdotEYTEaxv3TZ8MGZAVBLDDTdmEKsBJtQ=;
+ b=OcmGODpdReyAXoB4dBGUXjQk3HV+TmOQ88NkNoA/p05m34R0pPbu8uuk/EQPlqtwFRnDEv
+ +yHo7V3Ef4yT2AYXk97HQkqlpssc24zFaypI+EqrS6skQUZ+KHUFsgDTdISqg32c03D72w
+ TMttEaDjyLx66TQMaNJ9Tc/UvnpxNP7cATm7+FbMH9UhF0fbq4gflSodJIsWDN4AQm7r4z
+ HP5kPzB7b/kSA/rGJHI9FJMj+2QsPqsVJJYMfVmTVN5jWoqGGgcFftA4GbEjzw25CyeGKF
+ t3zkLpwQue3eoAhxCXRV88F8nhKVKHBUHRCl7UExO7khJYvO51wou+NhCUMHIA==
+Message-ID: <288b1868-71ae-40f0-a3e5-a3dda3a1a8ff@mailbox.org>
+Date: Tue, 31 Mar 2026 14:35:25 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: =?UTF-8?Q?Re=3A_=5BPATCH_v3_0/7=5D_qcom=3A_Add_NVMEM_bitfield_suppo?=
- =?UTF-8?Q?rt_and_reboot=E2=80=91mode_integration?=
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-References: <20260330171419.1117817-1-aswin.murugan@oss.qualcomm.com>
- <D0D68612-F412-46C8-90DF-D33A6C655401@gmx.de>
+Subject: Re: [PATCH v1 2/5] board: freebox: add Nodebox 10G board support
+To: Vincent Jardin <vjardin@free.fr>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+References: <cover.1773151972.git.vjardin@free.fr>
+ <b5c6df1729a7bbb7619242b926ef5695d6f6fc48.1773151972.git.vjardin@free.fr>
 Content-Language: en-US
-Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- peng.fan@nxp.com, dinesh.maniyam@altera.com, sumit.garg@kernel.org,
- sjg@chromium.org, seanga2@gmail.com, sughosh.ganu@arm.com,
- ilias.apalodimas@linaro.org, gchan9527@gmail.com,
- mkorpershoek@kernel.org, marek.vasut+renesas@mailbox.org,
- hs@nabladev.com, msp@baylibre.com, quentin.schulz@cherry.de,
- jamie.gibbons@microchip.com, kever.yang@rock-chips.com,
- justin@tidylabs.net, n-francis@ti.com, h-vm@ti.com, ycliang@andestech.com
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-In-Reply-To: <D0D68612-F412-46C8-90DF-D33A6C655401@gmx.de>
+From: Stefan Roese <stefan.roese@mailbox.org>
+In-Reply-To: <b5c6df1729a7bbb7619242b926ef5695d6f6fc48.1773151972.git.vjardin@free.fr>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=ErbfbCcA c=1 sm=1 tr=0 ts=69cbbc17 cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10 a=5KLPUuaC_9wA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=hliXG8A0FrnRB4laLs0A:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-ORIG-GUID: Q6MSsDS9zjZN9Bc_YRrCMUsz_2O-_XTh
-X-Proofpoint-GUID: Q6MSsDS9zjZN9Bc_YRrCMUsz_2O-_XTh
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzMxMDEyMCBTYWx0ZWRfXzJP2o60K7gh4
- YFJ9t9c/FsYF0+IazLdJDWi7JHqTwNexe6+uzfZXUisyecvWv8SQHAN9dDdPjYSqfngzUUZ5pQ4
- KgOek5zX/12TO8ljgmvKEHg8Tyzo1F46BV1TC6qYuYHKZ8nhjTtP5N1kkoFKJmfhtFXVkxtMRff
- P8llQbWH8pbL6X+60wYPkzhe5T7D7Gutuexfq37OgkBWc4Viz7rwcflW7XDWp0xsduBGsibLBIm
- t+THT0CXPwzbwspl2sFh2zEZiu5Xg3DRBBdaN20qfw+0db2rHtoFVE+U8etsBoU9ICXWdAOkufM
- zQVLsNN6sYC/VFc+cRO2UVafiVgALT9jwjjd2P2ddwajIbqepFvNZha8Ixd1ExgiumCgF3hD+IM
- FEQlVeE0T+n0xhJU1jrm15q7YO8PMXVubOZJNRrIAfoWdkLkQGEqJBmFxCeq5gJeIVWhTxjcV21
- 3S77cEKSONol6F5mEJA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-03-31_02,2026-03-31_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 clxscore=1015 phishscore=0 spamscore=0 lowpriorityscore=0
- suspectscore=0 malwarescore=0 priorityscore=1501 impostorscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603310120
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 6d4fb37273a39ffd936
+X-MBO-RS-META: 1gmusr6eb4phs5igj3f7pzde6m6j1rri
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,133 +77,593 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 3/31/2026 12:44 AM, Heinrich Schuchardt wrote:
-> Am 30. März 2026 19:14:12 MESZ schrieb Aswin Murugan <aswin.murugan@oss.qualcomm.com>:
->> This patch series introduces bit-level granularity to NVMEM cells and
->> adds complete reboot-mode support for Qualcomm platforms that store
->> reboot reasons in PMIC registers.
->>
->> Qualcomm SoCs rely on PMIC-backed reboot reason storage to implement
->> features like "reboot bootloader" for entering fastboot mode. However,
->> these PMIC registers often pack multiple fields into a single byte,
->> requiring fine-grained bit access that the current NVMEM subsystem does
->> not support.
->>
->> In addition, PMIC generations differ in how reboot-related data is
->> stored: older PMICs use PON (Power On) registers, while newer ones
->> provide SDAM regions. This series introduces a unified, NVMEM-based
->> approach that works seamlessly across both architectures.
->>
->> This version also integrates reboot-mode handling into Qualcomm board
->> initialization, enabling automatic fastboot entry when the reboot reason
->> indicates bootloader mode.
->>
->> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-> It is unclear to me how endianness is handled in bitfields. Do you assume low-endianness or do you consider the system endianness? Please, ensure that the tests are executed on both low- and big-endian systems.
->
-> Best regards
->
-> Heinrich
->
->
->> ---
->> Changes in v3:
->> 1. Simplified bit field handling to maximum u32 size (32 bits).
->> 2. Enforced strict size matching (size == cell->size) when nbits == 0.
->> 3. Enhanced test function for NVMEM read & write
->> 4. Updated NVMEM API documentation
->>
->> Link to V2:
->> https://lore.kernel.org/all/20260213112717.1256823-1-aswin.murugan@oss.qualcomm.com/
->>
->> Changes in v2:
->> 1. Replaced custom reboot reason handling with the standard U-Boot
->>    reboot-mode subsystem, per review feedback.
->> 2. Added bit-field support to the NVMEM core using the new "bits"
->>    property.
->> 3. Introduced the Qualcomm SPMI SDAM driver for unified PMIC storage
->>    access.
->> 4. Updated the reboot-mode driver to support variable-sized NVMEM cells.
->> 5. Added device tree configuration for the QCS615 RIDE board.
->> 6. Enabled reboot-mode in qcom_defconfig.
->> 7. Integrated reboot-mode detection into Snapdragon board
->>    initialization:
->>    - Added qcom_handle_reboot_mode() in board_late_init() to enable
->>      automatic fastboot entry on "reboot bootloader".
->>
->> Link to v1:
->> https://lore.kernel.org/all/20260108065533.1143179-1-aswin.murugan@oss.qualcomm.com/
->> ---
->>
->>
->> Aswin Murugan (7):
->>   misc: Add support for bit fields in NVMEM cells
->>   misc: qcom: Add Qualcomm SPMI SDAM NVMEM driver
->>   mach-snapdragon: Integrate reboot-mode handling
->>   dts: qcs615-ride-u-boot.dtsi: Add reboot-mode support
->>   qcom_defconfig: Enable reboot-mode support in qcom_defconfig
->>   test: dm: add comprehensive tests for NVMEM bit field operations
->>   misc: update API documentation for bit field support in NVMEM
->>
->> arch/arm/dts/qcs615-ride-u-boot.dtsi |  26 ++++
->> arch/arm/mach-snapdragon/board.c     |  56 ++++++--
->> arch/sandbox/dts/test.dts            |  12 ++
->> configs/qcom_defconfig               |   3 +
->> drivers/misc/Kconfig                 |   8 ++
->> drivers/misc/Makefile                |   1 +
->> drivers/misc/nvmem.c                 | 159 ++++++++++++++++++---
->> drivers/misc/qcom-spmi-sdam.c        | 200 +++++++++++++++++++++++++++
->> include/nvmem.h                      |  28 +++-
->> test/dm/reboot-mode.c                | 137 ++++++++++++++++++
->> 10 files changed, 595 insertions(+), 35 deletions(-)
->> create mode 100644 drivers/misc/qcom-spmi-sdam.c
->>
-Hi Heinrich,
 
-Thank you for raising this concern.
-The proposed change explicitly interprets hardware bytes as 
-little‑endian when nbits is set, ensuring consistent and
-predictable behavior across architectures.
+On 3/10/26 15:12, Vincent Jardin wrote:
+> Add board support for the Freebox Nodebox 10G based on the Marvell
+> Armada 8040 SoC. This board features:
+> 
+> - Quad-core ARMv8 AP806 with dual CP110 companions
+> - eMMC storage via Xenon SDHCI controller
+> - 1G SGMII and 10G SFI Ethernet on CP0 and CP1
+> - I2C buses for peripheral access
+> - NS16550 UART console at 115200 baud
+> 
+> The implementation includes:
+> - Device tree for the Nodebox 10G hardware
+> - Dedicated board directory (board/freebox/nbx10g/)
+> - Board-specific Kconfig and defconfig
+> - Management PHY reset via GPIO in board_late_init()
+> 
+> Signed-off-by: Vincent Jardin <vjardin@free.fr>
+> ---
+>   arch/arm/dts/Makefile               |   1 +
+>   arch/arm/dts/armada-8040-nbx.dts    | 259 ++++++++++++++++++++++++++++
+
+Just curious:
+
+Is this available in mainline Linux as well? Or are there plans to do
+upstream it there?
+
+Ah, thinking about this. All this serdes / commphy device-tree stuff is
+most likely not compatible between U-Boot & Linux, correct?
+
+>   arch/arm/mach-mvebu/Kconfig         |   9 +
+>   board/freebox/nbx10g/Kconfig        |  12 ++
+>   board/freebox/nbx10g/MAINTAINERS    |  13 ++
+>   board/freebox/nbx10g/Makefile       |   3 +
+>   board/freebox/nbx10g/board.c        |  63 +++++++
+>   configs/mvebu_nbx_88f8040_defconfig |  73 ++++++++
+>   include/configs/nbx10g.h            |  29 ++++
+>   9 files changed, 462 insertions(+)
+>   create mode 100644 arch/arm/dts/armada-8040-nbx.dts
+>   create mode 100644 board/freebox/nbx10g/Kconfig
+>   create mode 100644 board/freebox/nbx10g/MAINTAINERS
+>   create mode 100644 board/freebox/nbx10g/Makefile
+>   create mode 100644 board/freebox/nbx10g/board.c
+>   create mode 100644 configs/mvebu_nbx_88f8040_defconfig
+>   create mode 100644 include/configs/nbx10g.h
+> 
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index 82ad3035308..1638d19e44d 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -180,6 +180,7 @@ dtb-$(CONFIG_ARCH_MVEBU) +=			\
+>   	armada-8040-clearfog-gt-8k.dtb		\
+>   	armada-8040-db.dtb			\
+>   	armada-8040-mcbin.dtb			\
+> +	armada-8040-nbx.dtb			\
+>   	armada-8040-puzzle-m801.dtb		\
+>   	cn9130-db-A.dtb				\
+>   	cn9130-db-B.dtb				\
+> diff --git a/arch/arm/dts/armada-8040-nbx.dts b/arch/arm/dts/armada-8040-nbx.dts
+> new file mode 100644
+> index 00000000000..bfa8927c5e5
+> --- /dev/null
+> +++ b/arch/arm/dts/armada-8040-nbx.dts
+> @@ -0,0 +1,259 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Device Tree file for NBX board (Freebox Nodebox10G)
+> + * Based on Marvell Armada 8040 SoC
+> + *
+> + * Copyright (C) 2024 Freebox SA
+> + */
+> +
+> +#include "armada-8040.dtsi"
+> +
+> +/ {
+> +	model = "NBX Armada 8040";
+> +	compatible = "nbx,armada8040", "marvell,armada8040";
+> +
+> +	chosen {
+> +		stdout-path = "serial0:115200n8";
+> +	};
+> +
+> +	aliases {
+> +		i2c0 = &cp0_i2c0;
+> +		i2c1 = &cp0_i2c1;
+> +		gpio0 = &ap_gpio0;
+> +		gpio1 = &cp0_gpio0;
+> +		gpio2 = &cp0_gpio1;
+> +	};
+> +
+> +	memory@00000000 {
+> +		device_type = "memory";
+> +		reg = <0x0 0x0 0x0 0x80000000>;  /* 2GB */
+> +	};
+> +};
+> +
+> +/* AP806 UART - active */
+> +&uart0 {
+> +	status = "okay";
+> +};
+> +
+> +/* AP806 pinctrl */
+> +&ap_pinctl {
+> +	/*
+> +	 * MPP Bus:
+> +	 * eMMC  [0-10]
+> +	 * UART0 [11,19]
+> +	 */
+> +		  /* 0 1 2 3 4 5 6 7 8 9 */
+> +	pin-func = < 1 1 1 1 1 1 1 1 1 1
+> +		     1 3 0 0 0 0 0 0 0 3 >;
+> +};
+> +
+> +/* AP806 on-board eMMC */
+> +&ap_sdhci0 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&ap_emmc_pins>;
+> +	bus-width = <8>;
+> +	non-removable;
+> +	status = "okay";
+> +};
+> +
+> +/* CP0 pinctrl */
+> +&cp0_pinctl {
+> +	/*
+> +	 * MPP Bus:
+> +	 * [0-31]  = 0xff: Keep default CP0_shared_pins
+> +	 * [32,34] GE_MDIO/MDC
+> +	 * [35-36] I2C1
+> +	 * [37-38] I2C0
+> +	 * [57-58] MSS I2C
+> +	 */
+> +		/*   0    1    2    3    4    5    6    7    8    9 */
+> +	pin-func = < 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
+> +		     0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
+> +		     0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
+> +		     0xff 0xff 7    0    7    2    2    2    2    0
+> +		     0    0    0    0    0    0    0    0    0    0
+> +		     0    0    0    0    0    0    0    2    2    0
+> +		     0    0    0 >;
+> +
+> +	cp0_smi_pins: cp0-smi-pins {
+> +		marvell,pins = <32 34>;
+> +		marvell,function = <7>;
+> +	};
+> +};
+> +
+> +/* CP0 I2C0 */
+> +&cp0_i2c0 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&cp0_i2c0_pins>;
+> +	status = "okay";
+> +	clock-frequency = <100000>;
+> +};
+> +
+> +/* CP0 I2C1 */
+> +&cp0_i2c1 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&cp0_i2c1_pins>;
+> +	status = "okay";
+> +	clock-frequency = <100000>;
+> +};
+> +
+> +/* CP0 MSS I2C0 - Management SubSystem I2C (pins 57-58, func 2) */
+> +&cp0_mss_i2c0 {
+> +	status = "okay";
+> +};
+> +
+> +/* CP0 MDIO for PHY */
+> +&cp0_mdio {
+> +	status = "okay";
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&cp0_smi_pins>;
+> +
+> +	nbx_phy0: ethernet-phy@0 {
+> +		reg = <0>;
+> +	};
+> +};
+> +
+> +/* CP0 ComPhy - SerDes configuration */
+> +&cp0_comphy {
+> +	/*
+> +	 * CP0 Serdes Configuration:
+> +	 * Lane 0-3: Unconnected
+> +	 * Lane 4:   SFI (10G Ethernet)
+> +	 * Lane 5:   SGMII2 (1G Ethernet)
+> +	 */
+> +	phy0 {
+> +		phy-type = <COMPHY_TYPE_UNCONNECTED>;
+> +	};
+> +	phy1 {
+> +		phy-type = <COMPHY_TYPE_UNCONNECTED>;
+> +	};
+> +	phy2 {
+> +		phy-type = <COMPHY_TYPE_UNCONNECTED>;
+> +	};
+> +	phy3 {
+> +		phy-type = <COMPHY_TYPE_UNCONNECTED>;
+> +	};
+> +	phy4 {
+> +		phy-type = <COMPHY_TYPE_SFI0>;
+> +		phy-speed = <COMPHY_SPEED_10_3125G>;
+> +	};
+> +	phy5 {
+> +		phy-type = <COMPHY_TYPE_SGMII2>;
+> +		phy-speed = <COMPHY_SPEED_1_25G>;
+> +	};
+> +};
+> +
+> +/* CP0 Ethernet - only eth2 (MAC3) is active via SGMII */
+> +&cp0_ethernet {
+> +	status = "okay";
+> +};
+> +
+> +&cp0_eth2 {
+> +	status = "okay";
+> +	phy = <&nbx_phy0>;
+> +	phy-mode = "sgmii";
+> +};
+> +
+> +/* CP0 UTMI PHY for USB */
+> +&cp0_utmi {
+> +	status = "okay";
+> +};
+> +
+> +&cp0_utmi0 {
+> +	status = "okay";
+> +};
+> +
+> +&cp0_utmi1 {
+> +	status = "okay";
+> +};
+> +
+> +/* CP0 USB3 Host controllers */
+> +&cp0_usb3_0 {
+> +	status = "okay";
+> +};
+> +
+> +&cp0_usb3_1 {
+> +	status = "okay";
+> +};
+> +
+> +/* CP1 pinctrl */
+> +&cp1_pinctl {
+> +	/*
+> +	 * MPP Bus:
+> +	 * [0-26]  = Unconfigured
+> +	 * [27-28] GE_MDIO/MDC
+> +	 * [29-30] MSS I2C
+> +	 * [31]    = Unconfigured
+> +	 * [32-62] = 0xff: Keep default CP1_shared_pins
+> +	 */
+> +		/*   0    1    2    3    4    5    6    7    8    9 */
+> +	pin-func = < 0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x0
+> +		     0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x0
+> +		     0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x8  0x8  0x8
+> +		     0x8  0x0  0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
+> +		     0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
+> +		     0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
+> +		     0xff 0xff 0xff>;
+> +
+> +	cp1_mss_i2c_pins: cp1-mss-i2c-pins {
+> +		marvell,pins = <29 30>;
+> +		marvell,function = <8>;
+> +	};
+> +};
+> +
+> +/* CP1 MSS I2C0 - Management SubSystem I2C (pins 29-30, func 8) */
+> +&cp1_mss_i2c0 {
+> +	status = "okay";
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&cp1_mss_i2c_pins>;
+> +};
+> +
+> +/* CP1 ComPhy - SerDes configuration */
+> +&cp1_comphy {
+> +	/*
+> +	 * CP1 Serdes Configuration:
+> +	 * Lane 0:   PCIe x1
+> +	 * Lane 1:   USB3 Host
+> +	 * Lane 2-3: Unconnected
+> +	 * Lane 4:   SFI (10G Ethernet)
+> +	 * Lane 5:   Unconnected
+> +	 */
+> +	phy0 {
+> +		phy-type = <COMPHY_TYPE_PEX0>;
+> +	};
+> +	phy1 {
+> +		phy-type = <COMPHY_TYPE_USB3_HOST0>;
+> +	};
+> +	phy2 {
+> +		phy-type = <COMPHY_TYPE_UNCONNECTED>;
+> +	};
+> +	phy3 {
+> +		phy-type = <COMPHY_TYPE_UNCONNECTED>;
+> +	};
+> +	phy4 {
+> +		phy-type = <COMPHY_TYPE_SFI0>;
+> +		phy-speed = <COMPHY_SPEED_10_3125G>;
+> +	};
+> +	phy5 {
+> +		phy-type = <COMPHY_TYPE_UNCONNECTED>;
+> +	};
+> +};
+> +
+> +/* CP1 PCIe x1 on lane 0 */
+> +&cp1_pcie0 {
+> +	status = "okay";
+> +};
+> +
+> +/* CP1 USB3 Host on lane 1 */
+> +&cp1_usb3_0 {
+> +	status = "okay";
+> +};
+> +
+> +/* CP1 UTMI PHY for USB */
+> +&cp1_utmi {
+> +	status = "okay";
+> +};
+> +
+> +&cp1_utmi0 {
+> +	status = "okay";
+> +};
+> diff --git a/arch/arm/mach-mvebu/Kconfig b/arch/arm/mach-mvebu/Kconfig
+> index b76510ab452..66e5f1788d6 100644
+> --- a/arch/arm/mach-mvebu/Kconfig
+> +++ b/arch/arm/mach-mvebu/Kconfig
+> @@ -166,6 +166,14 @@ config TARGET_MVEBU_ARMADA_8K
+>   	select BOARD_LATE_INIT
+>   	imply SCSI
+>   
+> +config TARGET_NBX10G
+> +	bool "Support Freebox Nodebox 10G"
+> +	select ARMADA_8K
+> +	select BOARD_LATE_INIT
+> +	help
+> +	  Enable support for the Freebox Nodebox 10G board based on the
+> +	  Marvell Armada 8040 SoC with dual CP110 companion chips.
+> +
+>   config TARGET_MVEBU_ALLEYCAT5
+>   	bool "Support AlleyCat 5 platforms"
+>   	select ALLEYCAT_5
+> @@ -508,5 +516,6 @@ config ARMADA_32BIT_SYSCON_SYSRESET
+>   
+>   source "board/solidrun/clearfog/Kconfig"
+>   source "board/kobol/helios4/Kconfig"
+> +source "board/freebox/nbx10g/Kconfig"
+>   
+>   endif
+> diff --git a/board/freebox/nbx10g/Kconfig b/board/freebox/nbx10g/Kconfig
+> new file mode 100644
+> index 00000000000..18a169761b7
+> --- /dev/null
+> +++ b/board/freebox/nbx10g/Kconfig
+> @@ -0,0 +1,12 @@
+> +if TARGET_NBX10G
+> +
+> +config SYS_BOARD
+> +	default "nbx10g"
+> +
+> +config SYS_VENDOR
+> +	default "freebox"
+> +
+> +config SYS_CONFIG_NAME
+> +	default "nbx10g"
+> +
+> +endif
+> diff --git a/board/freebox/nbx10g/MAINTAINERS b/board/freebox/nbx10g/MAINTAINERS
+> new file mode 100644
+> index 00000000000..4753a9a13bb
+> --- /dev/null
+> +++ b/board/freebox/nbx10g/MAINTAINERS
+> @@ -0,0 +1,13 @@
+> +NBX10G BOARD
+> +M:	Vincent Jardin <vjardin@free.fr>
+> +S:	Maintained
+> +F:	board/freebox/nbx10g/
+> +F:	configs/mvebu_nbx_88f8040_defconfig
+> +F:	arch/arm/dts/armada-8040-nbx.dts
+> +F:	arch/arm/dts/armada-8040-nbx-u-boot.dtsi
+> +F:	include/configs/nbx10g.h
+> +F:	cmd/mvebu/mvebu_emmcboot.c
+> +F:	cmd/mvebu/nbx_fbxserial.c
+> +F:	include/mvebu_imagetag.h
+> +F:	include/mvebu_nrboot.h
+> +F:	include/nbx_fbxserial.h
+> diff --git a/board/freebox/nbx10g/Makefile b/board/freebox/nbx10g/Makefile
+> new file mode 100644
+> index 00000000000..bf83bdf63ee
+> --- /dev/null
+> +++ b/board/freebox/nbx10g/Makefile
+> @@ -0,0 +1,3 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +
+> +obj-y	:= board.o
+> diff --git a/board/freebox/nbx10g/board.c b/board/freebox/nbx10g/board.c
+> new file mode 100644
+> index 00000000000..7080e386c38
+> --- /dev/null
+> +++ b/board/freebox/nbx10g/board.c
+> @@ -0,0 +1,63 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2017-2018 Freebox SA
+> + * Copyright (C) 2026 Free Mobile, Vincent Jardin <vjardin@free.fr>
+> + *
+> + * Freebox Nodebox 10G board support
+> + */
+> +
+> +#include <config.h>
+> +#include <dm.h>
+> +#include <init.h>
+> +#include <asm/global_data.h>
+> +#include <asm/gpio.h>
+> +#include <asm/io.h>
+> +#include <asm/arch/cpu.h>
+> +#include <asm/arch/soc.h>
+> +#include <linux/delay.h>
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+> +/* Management PHY reset GPIO */
+> +#define NBX_PHY_RESET_GPIO	83
+> +
+> +/* Nodebox 10G ASCII art logo */
+> +static const char * const nbx_logo =
+> +	"  _   _           _      _                 __  ___   _____\n"
+> +	" | \\ | |         | |    | |               /_ |/ _ \\ / ____|\n"
+> +	" |  \\| | ___   __| | ___| |__   _____  __  | | | | | |  __\n"
+> +	" | . ` |/ _ \\ / _` |/ _ \\ '_ \\ / _ \\ \\/ /  | | | | | | |_ |\n"
+> +	" | |\\  | (_) | (_| |  __/ |_) | (_) >  <   | | |_| | |__| |\n"
+> +	" |_| \\_|\\___/ \\__,_|\\___|_.__/ \\___/_/\\_\\  |_|\\___/ \\_____|\n";
+> +
+> +int checkboard(void)
+> +{
+> +	printf("%s\n", nbx_logo);
+> +	return 0;
+> +}
+> +
+> +int board_init(void)
+> +{
+> +	gd->bd->bi_boot_params = CFG_SYS_SDRAM_BASE + 0x100;
+
+Is this really needed? If not, this function can be dropped most likely.
+
+Other than this looks good:
+
+Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
+
+Thanks,
+Stefan
 
 
-On the read path, hardware data is treated as little‑endian, converted to
-CPU‑native endianness for bitfield extraction, and the final value is 
-returned
-in CPU‑native format:
-
-
-/* *Read: Hardware LE → CPU native → bit ops → return CPU native* */
-/* Interpret hardware bytes as little-endian for consistent bit field 
-operations */
-value = le32_to_cpu(*((__le32 *)buf));
-value >>= cell->bit_offset;
-/* Handle nbits == 32 specially to avoid undefined behavior */
-if (cell->nbits < 32)
-     value &= (1U << cell->nbits) - 1;
-/* Return value in CPU native endianness for caller */
-*(u32 *)buf = value;
-
-
-On the write path, both the existing hardware value and the caller‑provided
-value are handled in CPU‑native endianness during bit manipulation, and the
-final result is converted back to little‑endian before being written to
-hardware:
-
-*
-/* Write: HW(LE) → le32_to_cpu() → CPU native → bit ops → cpu_to_le32() 
-→ HW */*
-current = le32_to_cpu(*((__le32 *)&current));
-/* Caller provides value in CPU native endianness */
-value = *(u32 *)buf;
-value &= (1U << cell->nbits) - 1;
-value <<= cell->bit_offset;
-mask = ((1U << cell->nbits) - 1) << cell->bit_offset;
-*((__le32 *)buf) = cpu_to_le32((current & ~mask) | value);
-
-
-Hope this approach addresses the concern raised.
-
-Regards,
-
-Aswin
+> +	return 0;
+> +}
+> +
+> +int board_late_init(void)
+> +{
+> +	int ret;
+> +
+> +	/* Reset the management PHY */
+> +	ret = gpio_request(NBX_PHY_RESET_GPIO, "phy-reset");
+> +	if (ret) {
+> +		printf("Failed to request PHY reset GPIO: %d\n", ret);
+> +		return 0;
+> +	}
+> +
+> +	gpio_direction_output(NBX_PHY_RESET_GPIO, 0);
+> +	mdelay(100);
+> +	gpio_set_value(NBX_PHY_RESET_GPIO, 1);
+> +	mdelay(100);
+> +	gpio_free(NBX_PHY_RESET_GPIO);
+> +
+> +	return 0;
+> +}
+> diff --git a/configs/mvebu_nbx_88f8040_defconfig b/configs/mvebu_nbx_88f8040_defconfig
+> new file mode 100644
+> index 00000000000..975c53e9a92
+> --- /dev/null
+> +++ b/configs/mvebu_nbx_88f8040_defconfig
+> @@ -0,0 +1,73 @@
+> +CONFIG_ARM=y
+> +CONFIG_ARCH_CPU_INIT=y
+> +CONFIG_ARCH_MVEBU=y
+> +CONFIG_TEXT_BASE=0x00000000
+> +CONFIG_NR_DRAM_BANKS=2
+> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xff0000
+> +CONFIG_TARGET_NBX10G=y
+> +CONFIG_ENV_SIZE=0x10000
+> +CONFIG_ENV_OFFSET=0x180000
+> +CONFIG_DM_GPIO=y
+> +CONFIG_DEFAULT_DEVICE_TREE="armada-8040-nbx"
+> +CONFIG_FIT=y
+> +CONFIG_SYS_BOOTM_LEN=0x1000000
+> +CONFIG_SYS_LOAD_ADDR=0x800000
+> +CONFIG_PCI=y
+> +# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+> +# CONFIG_EFI_LOADER is not set
+> +CONFIG_USE_PREBOOT=y
+> +CONFIG_PREBOOT="echo (CRC warning is normal: no env saved yet)"
+> +CONFIG_SYS_PBSIZE=1048
+> +CONFIG_SYS_CONSOLE_INFO_QUIET=y
+> +CONFIG_DISPLAY_CPUINFO=y
+> +CONFIG_SYS_PROMPT="nodebox10G>> "
+> +CONFIG_SYS_MAXARGS=32
+> +CONFIG_CMD_BOOTZ=y
+> +# CONFIG_BOOTM_VXWORKS is not set
+> +# CONFIG_CMD_ELF is not set
+> +CONFIG_CMD_MEMTEST=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MISC=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_PCI=y
+> +# CONFIG_CMD_SF is not set
+> +CONFIG_CMD_USB=y
+> +CONFIG_CMD_DHCP=y
+> +CONFIG_CMD_MII=y
+> +CONFIG_CMD_PING=y
+> +CONFIG_CMD_CACHE=y
+> +CONFIG_CMD_TIME=y
+> +CONFIG_CMD_TIMER=y
+> +CONFIG_CMD_EXT2=y
+> +CONFIG_CMD_EXT4=y
+> +CONFIG_CMD_EXT4_WRITE=y
+> +CONFIG_CMD_FAT=y
+> +CONFIG_CMD_FS_GENERIC=y
+> +CONFIG_EFI_PARTITION=y
+> +CONFIG_ENV_OVERWRITE=y
+> +CONFIG_ENV_IS_IN_MMC=y
+> +CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+> +CONFIG_ARP_TIMEOUT=200
+> +CONFIG_NET_RETRY_COUNT=50
+> +CONFIG_NET_RANDOM_ETHADDR=y
+> +CONFIG_DM_I2C=y
+> +CONFIG_SYS_I2C_MVTWSI=y
+> +CONFIG_I2C_MUX=y
+> +CONFIG_MISC=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_XENON=y
+> +# CONFIG_SPI_FLASH is not set
+> +CONFIG_PHY_MARVELL=y
+> +CONFIG_PHY_GIGE=y
+> +CONFIG_MVPP2=y
+> +CONFIG_PCIE_DW_MVEBU=y
+> +CONFIG_PHY=y
+> +CONFIG_MVEBU_COMPHY_SUPPORT=y
+> +CONFIG_PINCTRL=y
+> +CONFIG_PINCTRL_ARMADA_8K=y
+> +CONFIG_SYS_NS16550=y
+> +CONFIG_USB=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_STORAGE=y
+> diff --git a/include/configs/nbx10g.h b/include/configs/nbx10g.h
+> new file mode 100644
+> index 00000000000..bd083b7e7d8
+> --- /dev/null
+> +++ b/include/configs/nbx10g.h
+> @@ -0,0 +1,29 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright (C) 2017-2018 Freebox SA
+> + * Copyright (C) 2026 Free Mobile, Vincent Jardin <vjardin@free.fr>
+> + *
+> + * Configuration for Freebox Nodebox 10G
+> + */
+> +
+> +#ifndef _CONFIG_NBX10G_H
+> +#define _CONFIG_NBX10G_H
+> +
+> +#include "mvebu_armada-8k.h"
+> +
+> +/* Override environment settings for NBX */
+> +#undef CFG_EXTRA_ENV_SETTINGS
+> +#define CFG_EXTRA_ENV_SETTINGS \
+> +	"hostname=nodebox10G\0" \
+> +	"ethrotate=no\0" \
+> +	"image_addr=0x7000000\0" \
+> +	"image_name=Image.nodebox10G\0" \
+> +	"fdt_addr=0x6f00000\0" \
+> +	"fdt_name=nodebox10G.dtb\0" \
+> +	"console=ttyS0,115200\0" \
+> +	"tftpboot=setenv bootargs console=${console} bank=tftp; " \
+> +		"dhcp ${image_addr} ${image_name}; " \
+> +		"tftp ${fdt_addr} ${fdt_name}; " \
+> +		"booti ${image_addr} - ${fdt_addr}\0"
+> +
+> +#endif /* _CONFIG_NBX10G_H */
 
