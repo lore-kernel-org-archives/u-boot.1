@@ -4,123 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E73941061B28
-	for <u-boot@archiver.kernel.org>; Mon, 30 Mar 2026 23:57:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA4E5FF60C2
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 05:28:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB39083E7A;
-	Tue, 31 Mar 2026 01:57:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E40D83DA7;
+	Tue, 31 Mar 2026 07:28:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rCQAZ+w5";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="mqt3z4gS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47AAC83F0A; Tue, 31 Mar 2026 01:57:29 +0200 (CEST)
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170100009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::9])
+ id AF94983DBF; Tue, 31 Mar 2026 07:28:04 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B6F68352B
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 01:57:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
+ by phobos.denx.de (Postfix) with ESMTPS id EB69883A41
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 07:28:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=aEGtgyvMfZct1PscbcoshLYfE4jw/uzepDfSuVlZ1ykH3TAS8De/g5emyymlvAb2z93TshRRziNXgYK5udIZsA5+NRGrqXRZp7w12xb5tkZ7yV/4n3rdnARMT9qo9Jswv9qCKhVOcAOizU1uq4UJz07M6nLTaQcwGDXWsEFC9FD4Pzlr/tRm9mizh/Sd9Ub3Ga9U+I3CmCEiZ5dhImZb7qB8vrKdJHVbDu5++TSQ3552SKYKzVaAVW3T6MuDETXtrmcea++7/yeAr1OmTWgKemtDDLUBZzHuxO/2ocYlw4Q+uP6cjwloK7URNeFq2Wg3HxCw5kgk175E7B3MSUa2/g==
+ b=SH4e8A9QlFTO4E8ZMwK/gKdeLFIhClTR6n45t41BP7mTx25LKqIQf6J8dUJktlg0CVoXTNOL9CVVMmoMldfszNO9gpaPtlH0qB9mBj4leGgTt7j99JRBt3lE3OFZkAVDz4/XdTNDeKSjgG8meCKL3RdggFbpNKzHLIs5+xJJo23vi6/i+yXRIJFcm1W0C1dSVOoqI1JbVcXM6W62FcwHwPyuHxqzbZC0kTibFE8VCPjwWVZ0bBEVUFLOvUVT2O+nlww+7fYzqTLKZJuSn4qbpoCjM7Q5RBjZo+BPTuarLsU9MdhgYUvm46+mB/AstQi3Qz+4T2LjP2CZfTBRLbZIhg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bcEAbtjGmxu7psCzOKeFoBErYWAJmdmuHlm4KuqokkM=;
- b=h+2krSeHY6hrPezM9dyKvABWeAMIm6j1p78oWtWYZJwRUAZM4Z1mSev6mmHNcX2xxABxMIzYXePjpgZnmbpjjmBx7Fe96qhN4DiRv/9C2pN1W4jC9SdAdgadfax6mFpYP9ULL8Po3BVY3ouuo0cUZNsOqr6pa10ryIN+ltSxrmNzR7RHGfsVpdHoBALVYv+gPZ00AhlAdZ8PhhHsDzRnhzwpRk5m+CHRzQB/L5VJhRxssRoC6uHC2psHS4ZFy3wgjfhQyFwfs/LnwuGxZRgtI9c8OuyrnlZDXrjKk9xuBLkhuk0vJhEvCBLj+jkmmh8iJXsGl4TEVRfcGX88BWqMQQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=ArYXAK9gPqO1Uo8nPVd1/1DajuOEoqN5Ix2qb6hrZI4=;
+ b=NRwIfg1Ko48KnVEDidwrgEALhxGSqWoNhxthFeFy2/cwzMoDe2gWQhX/CK0QD8QLTeH0RbFC+w3eKleM0UkS7XhQ+UGxVF7lNNt4DxSjHl9prF0vG4LYsZVmNL5VGrcUKm86UjwLCDXEVq6CCToCT7TTjnnXmkueK0agppEtBatxz9WiIXeyW27FCCQh55deqsgjj48r3JwgSmIgAjBTDFkIv6oRiNolBfcyqYDG5q8ylKJYufIt+SBwuASd6OKe5LI+jNUmuxmwhFJ2okeKGPYck5k4eJYN6ZM0uZYOED++WZTMckkox6j0oI6FzghF/F/UZeD76hDoxa7K+RIpOw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
+ dkim=pass header.d=phytec.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bcEAbtjGmxu7psCzOKeFoBErYWAJmdmuHlm4KuqokkM=;
- b=rCQAZ+w5FZ4gdfPYIGAZ4CrFM2xot/6FhgLgeuZBMRVWLXFeCHybZVH96DYz9zL5y4HA3lInwLUIayVbi+K6WUTR495VKiShPs9WuZyX8iRnTr/a1pxRKze6vGlN12VlXqDNDnHTj+4Wc5a6mxvbJHd5Vn52uihYcCFOxOVaJn8=
-Received: from SJ0PR13CA0166.namprd13.prod.outlook.com (2603:10b6:a03:2c7::21)
- by DS0PR10MB6126.namprd10.prod.outlook.com (2603:10b6:8:c6::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.28; Mon, 30 Mar
- 2026 23:57:21 +0000
-Received: from BY1PEPF0001AE1C.namprd04.prod.outlook.com
- (2603:10b6:a03:2c7:cafe::ec) by SJ0PR13CA0166.outlook.office365.com
- (2603:10b6:a03:2c7::21) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.28 via Frontend Transport; Mon,
- 30 Mar 2026 23:57:20 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- BY1PEPF0001AE1C.mail.protection.outlook.com (10.167.242.105) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9745.21 via Frontend Transport; Mon, 30 Mar 2026 23:57:20 +0000
-Received: from DFLE208.ent.ti.com (10.64.6.66) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 30 Mar
- 2026 18:57:05 -0500
-Received: from DFLE212.ent.ti.com (10.64.6.70) by DFLE208.ent.ti.com
- (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 30 Mar
- 2026 18:57:04 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 30 Mar 2026 18:57:04 -0500
-Received: from localhost (rs-desk.dhcp.ti.com [128.247.81.39])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62UNv4hs1217711;
- Mon, 30 Mar 2026 18:57:04 -0500
+ bh=ArYXAK9gPqO1Uo8nPVd1/1DajuOEoqN5Ix2qb6hrZI4=;
+ b=mqt3z4gScSi4W9XlB5/Bu4t06H+LDTadrVF/YHjCJBUN+Tboba/MIERQ0vkU4lSO4tQSQWxYF+fpd+lE+OfGzPRDu/AfQRInkBmsIG3KKTpIm6J5o43hgTI5cALaWwqsCRn8faoFDjEc4KFcpe5hm4zJsz66AgVGVNOWB5b5el6KoqpEKhEK/fUr0GmFNEPggU9/CwW4/TDWtpcpYKxcpVMY07qMtXlqOEHOESv1WKAAin6MXQUJ8xK6dwk91JVF8EAPFtOFn+jh5vvkBqpCxFTlqStajverVAURJRL7qEvrj1YKR0h09Kf9UJ2tzgCD8sFkqUFTkKXdhdeG7HjNtQ==
+Received: from VI2P195MB2491.EURP195.PROD.OUTLOOK.COM (2603:10a6:800:22f::14)
+ by AMBP195MB2790.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:6a5::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.15; Tue, 31 Mar
+ 2026 05:27:58 +0000
+Received: from VI2P195MB2491.EURP195.PROD.OUTLOOK.COM
+ ([fe80::1f1b:2a8e:8507:efa7]) by VI2P195MB2491.EURP195.PROD.OUTLOOK.COM
+ ([fe80::1f1b:2a8e:8507:efa7%4]) with mapi id 15.20.9769.011; Tue, 31 Mar 2026
+ 05:27:58 +0000
+From: Yannic Moog <Y.Moog@phytec.de>
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, NXP i.MX U-Boot Team
+ <uboot-imx@nxp.com>, "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Stefano Babic
+ <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, Tom Rini
+ <trini@konsulko.com>
+CC: Teresa Remmet <T.Remmet@phytec.de>, Benjamin Hahn <B.Hahn@phytec.de>,
+ Leonard Anderweit <L.Anderweit@phytec.de>, Peng Fan <peng.fan@nxp.com>
+Subject: Re: [PATCH v2 1/4] imx8mp: phyboard-pollux-rdk: Convert to DM_PMIC
+Thread-Topic: [PATCH v2 1/4] imx8mp: phyboard-pollux-rdk: Convert to DM_PMIC
+Thread-Index: AQHcwEN92dOpOmWvTkObH9NnHfIBorXIHbyA
+Date: Tue, 31 Mar 2026 05:27:58 +0000
+Message-ID: <d84c187f2f6d84378a1257af71c3b8436bdc8154.camel@phytec.de>
+References: <20260330-power-legacy-v2-0-47dde3182a2c@nxp.com>
+ <20260330-power-legacy-v2-1-47dde3182a2c@nxp.com>
+In-Reply-To: <20260330-power-legacy-v2-1-47dde3182a2c@nxp.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: VI2P195MB2491:EE_|AMBP195MB2790:EE_
+x-ms-office365-filtering-correlation-id: a75ab1e2-ead2-4160-fcd1-08de8ee64506
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|38070700021|18002099003|56012099003|22082099003;
+x-microsoft-antispam-message-info: ZHdqrby7GLxJlhjSmG/3n7JAjvWVQU7sIGIN13fLnsq2YR+tdwwJVcJ/DTQPOlJ8dmEv0gU90/aZQiIKLzut6C8Tbv8s/6FHctArSusZRLdMoV43iPzwiEvgR680dgZS9xnKLKXSY9eWpHb+9ydk2GkXgob1V06/bYULLj/srRLKYL9h0ySNZ5L3/HL+wM3v9fbDwHqSus2LI4wtRy0FXcE6nO2SwGft1yJv5kkvtZr96hzW3aBVxtOnJrSgXJ8kmaqkLfRPWqEyrvUGzhJgopGJwCq+wE5tZ9Nj/qBNf8TYPQWFozmDexNi7d8cot07BbV5zYez7T8TE0NrEtvklHwN98YSUTXJf7U2yay7y2IP0u8EUxEbdCZVpHe3rSlolhENxE3ITNrfWcf/8jwVyezK4OIvYLzz3pToHWHkuRG3rGGVXPIw5uBc4G7BYNZIGyCrJZjK2Q9DWJNvD6hGTNZhVgMqblVoPa5JmK0lZmAed0Jv0IKjVxMXW/rH8LCYaztdNtspwjn2fdUUpT9o2qpg1dIOj2ctWq/ZFLYRJmqlvwgtStTLWCltqOms9xiHIT1yTZWSZHfLJlXLIJQr4nt0d5r6mFBpf15TkMJXkLcdEb1ql1p4K34UZ8EctFraMX0ENCGGA/8XYApdN0CHXYEHXoJmxbLGk0mZU0zZmJxfc4OJ5p3pA4+7Jlkj9d9HWNW65BPS9BcsN/p7HYBAR5i31D7LbIFzyJmMy0/xDj3O9m8c9DgKWQtvI2L2RAKxIBlQhR9hhOzRL5FGnozICsUAWnuntNBIcBeCYHng++k=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:VI2P195MB2491.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(38070700021)(18002099003)(56012099003)(22082099003);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?TnZGSGxhVHFDdW45SWdxMENQcUE2eVQ1UWJXb3l4NXNXNndOUzdDSWhxc2Uw?=
+ =?utf-8?B?QlNRY1lUd0h0ck1idTFCYVgwdTNTVzBuQVZtOXRrRDZuYVRBOFpmbmJNRXpU?=
+ =?utf-8?B?QXpla3VtUktieE9jMnhEanNrckV4dDltWGxYUFg4VzhEbmdNeStwYjNpb3RQ?=
+ =?utf-8?B?Q2tXWHFnSmMyMkRwckMxTUFYWjZpMGZiN1MrdE9VbThSWkZib3QrRFp6aldo?=
+ =?utf-8?B?ZW1pOWFhdTFTakRSRWhxL0lSdVkwUkl6QjRtSjhLTk9nWlpxTEd1VU1Mb3Ey?=
+ =?utf-8?B?RThNbEVsSXRvRDN6Q3o4YVZteVZoSW83cTM4RTNJRDAybk5LTGFoczBCb3dK?=
+ =?utf-8?B?N0lBMVU3Y2F3cWZoakpmbktpUk55eXl2SmdLOElndWJpM25OWGNmejJiZmxr?=
+ =?utf-8?B?VjNaNUY0VEtxZlZMVG9EZW4vM2ZPOEttM2s0bHBiUVhrZ2o0YnlYakdXWlRF?=
+ =?utf-8?B?aXhiUWxybFhMSTFGL3BkUmJ6cHkvTVhONTdPQzBzVkdIYkg2c0VqVjdiamxi?=
+ =?utf-8?B?a1RCVTIvZW1PSGsrSE5vRU4va2NPSGhRZUpLZlpTUUl6U09LTjlBN1dIRm5q?=
+ =?utf-8?B?SE8xRnlJYVRPajI5bUtaWmRSdFJLNmVFSzI4ZnZNMjNwQXA5VXpwc294VVVS?=
+ =?utf-8?B?VVhlZ1ZIN3c3VC9hNVNlOU42N1FQdzJOS3AyQVdnb1RHelpwWVBkeTAvdWtM?=
+ =?utf-8?B?TUJadnRBWGU3Ry9tK3k4bVoxdmY0MjJNZDA4TkxNTjl0b2dVZ2hFRDBxeVp1?=
+ =?utf-8?B?L3ByRzNZVnN3UFNxa2phZ21OQ3hwYVlrQ2tDckg2TzhqNkpENGErTFFDcFRr?=
+ =?utf-8?B?R0NnbjZmVVI5RXhHSVlQdHJ5cURJbkVsL3hzdE9QVVZPTEJncGVqS0NURWFp?=
+ =?utf-8?B?UEk2aHFjTmNRY2JGQkE4UWZHZ1d2NXlmdkM5a1dPMkYvM1RMR0hoa0FyT2l0?=
+ =?utf-8?B?akxuT2ltVVFMd3cxOXo1WGxlUisvcGFoUkRZZkpDbHVVVTJBSzRzVHJsZ3Vk?=
+ =?utf-8?B?YkdiNXZ1QTVhU0ltbVcvc0pxQ3RyaERnUnd5bU4yVGoxNlVlaFltMU9INTE1?=
+ =?utf-8?B?NWFGYnpsbWxNSFBNaWN6RGdHcVBtdVpSdnRLdnJpOVU0QzN1K0d2dzIxb1Rw?=
+ =?utf-8?B?dUhMREp0c29pWHNiOW5kZWFmbzdOL3dwTGlWOFdPNVFFUEQzendrUWNjb0U2?=
+ =?utf-8?B?bDFmNjlDMFI0cVkvMVZyZ2gyMXFHVjAyVHJSMG9DVXJOVU5YaUdaZ2JvQ21r?=
+ =?utf-8?B?NnJnOGt0OXNXVWlLMXl3dFlra25jMnRjMGoxc2F0d2c4WExQalBHR040TjZ3?=
+ =?utf-8?B?Q05KUENvS2JPY21oZXdzalpkOWhvOGNqcGkxWUE0ZUNMeDRpQjZOVE01U2Np?=
+ =?utf-8?B?NE9Qbjg3MWlsSzRsbWZwZzdKVEFOL24rWW5obXZKdW1NU2RDR254SG9mczlQ?=
+ =?utf-8?B?N1VpcCsyeHhGUE1ZdkNZZ2FHQ1JWOHFVR0lJUDZsMklYZ3RuL0E1TXA0Nng3?=
+ =?utf-8?B?cTJBSmFZWUZFeE9JWWlwMUJoUitsNU8yVnNudDE0ZXphUHRJdlo5b3NqTVZt?=
+ =?utf-8?B?YUlTOHNJSGs3OXRGNFZ1b3c2UXNOUzhpVmR4NHJXQjFEbkVwbFpKYmo4RjRS?=
+ =?utf-8?B?TGhEZkp2eEIxc1AybmRhdEMycXBmNXdsdkVERVRPZTdJakJ3RDVXV3Y2L3dB?=
+ =?utf-8?B?M2pndzVBa3lsSVV5MGtNNVV3WWVMMC9pSHJab0srd1ViUVczaC9qcUhQU0RZ?=
+ =?utf-8?B?dHpUNmVhUGJZbDdlUkE4U2J1MldEVjRZMzVHWDhwajROR01nczVUY3pVcG5K?=
+ =?utf-8?B?bFVEdkx5NkRKRytBd3pkcHMrRUJiWFNNSXpkS3B2OWxJMWMzSnY2UWk3MGlu?=
+ =?utf-8?B?WjU3aEl1VXRkcFQrcUd2M0dZZXpFU1AxSUk2MjVaNmYrMEVCQVhWTEt4WDg0?=
+ =?utf-8?B?cElKSzVsQ0dsRVRCOHJCWThmdzhEb3hHSnQzL2tVYlhzZWVuRlNHVHZyZTh0?=
+ =?utf-8?B?VDlSUmxMTDY2VU1Nd003L1RleS9STVMwSGFJVldtd0xseGNkTmF0MjNYdjdU?=
+ =?utf-8?B?YUNKZDE2NG9kWHA1UnNibGRKOTExSURWS2IvbXJEMExuOUFNUlprMktWc1ZE?=
+ =?utf-8?B?alE1OUlJeHpFR1MvWURVWmR4clY2M25aRmxiVEY3dExlc29SWldReTE4OTk5?=
+ =?utf-8?B?dTZ2bWlHVXpZUFltczFnMG1MY1FPc2lxcGtZVDRiMjJ4M1l2RWhoK3F4dGpy?=
+ =?utf-8?B?OWZzenBMNURaSkcvME9FNlp4R05ZREFBaGFwQU15ZDVNYXo5NWlqcTF0c1lz?=
+ =?utf-8?Q?ExVvXylq3FWTdwUBdO?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <B66F4BC1C5497B4B9615CEF9A903DC20@EURP195.PROD.OUTLOOK.COM>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Mon, 30 Mar 2026 18:57:04 -0500
-Message-ID: <DHGIV5UK2POR.T98MMILTXQWC@ti.com>
-CC: Anshul Dalal <anshuld@ti.com>, <bb@ti.com>, <nm@ti.com>,
- <trini@konsulko.com>, <afd@ti.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 2/3] k3-am62-pocketbeagle2: add initial board support
-From: Randolph Sapp <rs@ti.com>
-To: Randolph Sapp <rs@ti.com>, Robert Nelson <robertcnelson@gmail.com>, "Erik
- Welsh" <Erik.Welsh@octavosystems.com>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260317223800.776581-1-rs@ti.com>
- <20260317223800.776581-3-rs@ti.com> <DH7I5D8U3GQX.1NAV7HTPAAJ8L@ti.com>
- <CAOCHtYhr50ywU_ar6qFPYrwJeUbjE+GQC_OYO_W4Pc5A9iJ5-w@mail.gmail.com>
- <DHAEYEEVEBW7.304SKN4GDBP4B@ti.com>
- <CAOCHtYgan-p8PiuwKCPmDY=xaKvnGc+F1OZXgyDHFGg4F9NJ1Q@mail.gmail.com>
- <DHCAJ6L5XC77.9F2NK2OOEAT5@ti.com> <DHD3N5DPHPVI.159WWX3H4U3Q3@ti.com>
-In-Reply-To: <DHD3N5DPHPVI.159WWX3H4U3Q3@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BY1PEPF0001AE1C:EE_|DS0PR10MB6126:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9c8693ad-4f0c-4115-15e5-08de8eb814a2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|36860700016|376014|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: dn/X8L61C7ObdGmoYXkHc1SbFNCfKH8gwafDD2CxfIlsjz5P6l46EmLsXDXGxhHGEd1JyME47S9hI7mzXSJGzWF5mxXg8BBNSThB0b7IKhIEpgEEYGi6x1R/b2EBwirLiL673Q2CWQq04xVaNds1Bmbp0KLCXhnPNPX5pYko5M2eaA4uC8d8Y+kZJPaNE7Ns0PomQG1P8ymJx5ibZALRWW73akjve8mLi8IfqGWUJ36T4Loo15evckc21Q6y/I7BwiQYkL7qYTN7BqitSTtusYPSiDZoEUuhZBQbWeTTTk46PCLj31kMKg68d3R6pb/Z1V9doDg1sc0hMnzmf8vohLllIh8Nh2mQxEAxy4tM6z4GZjtJT993ARdsijzNPIqLfiapHAzohkC/YMomr10YKHe2ajZ7g14cosmFE/0fzAUrHLCtQfV0GqW6uTBgHTsVdLiONvEefNDsKC4/42+KUd9bupqjflk46t/IcHA1GDk3HQFxwqckfWkWai9CILTpSSShW+qfJPLHILudYlFQuipEGW02QoxB/rcPXspjmPLPaEjhZnSPtS7nZbg2ymKX8pKxEX3wwF8iZD2bQSweSL8oQtPtsMknUMJwfmRSgbbmI3FmwSnGVK56B00TZDbnKro5iyn9h9uP1uvVrgugtlefOyyfrqnzqWH+Ft/kLvfwfd2p93C2d3ESKEHGuZzpY6BpjEniA3yALffKaeIzp1cQv8XsKZU6Kzb5AiPYG4c=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(36860700016)(376014)(56012099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: SN/Tx6PqMRU6Nxx9mYjtDTqY5iAu/Cr0C/6aqupnla5VYnNKCZv+MGw186UTouFWHSpMBIivM2XvCf2+3f2Qywv4vEQtVjGxORZMJSQOqP/3h9cIQdscCrl1IcVUpAOlYWqazUeSvkFrhMaUmrfWz3MId5g/vdjYfiedbzcB9NmROZkhsAV06mO8q0pOyqn13Cm/dHCABWkdm/Wck43QgbCSGa2IKRWauA4BxjcVGT2Y2TCwpe75eaJzJ6DYfm4TbpL/Nm08f0gOVnlxjasTkhLy6u+isdIgGqZeYADYOv3fcX85pAO9gISBiLClYV5VSfdRorlVdsmwbenUzX53L1bqoO8p4pkfZT+KH0wplrWhq+oJqK0QqSHd0via8odrP+E+3TO/KtaM+zx0dpPb5/I++NsdnPv552OMdXd+xzBe/o5NZIxwKNOLIQF1dy5Z
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Mar 2026 23:57:20.3110 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9c8693ad-4f0c-4115-15e5-08de8eb814a2
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BY1PEPF0001AE1C.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR10MB6126
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: VI2P195MB2491.EURP195.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: a75ab1e2-ead2-4160-fcd1-08de8ee64506
+X-MS-Exchange-CrossTenant-originalarrivaltime: 31 Mar 2026 05:27:58.4464 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: jL9UQHJbMIoP7v0AY0HseO0ZmwccF5x0W0hycqwQN+yKhZT3unYRjal9w8D5zb23CIz7vYuqofNLRUSAzELDLg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMBP195MB2790
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,180 +153,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu Mar 26, 2026 at 6:23 PM CDT, Randolph Sapp wrote:
-> On Wed Mar 25, 2026 at 7:34 PM CDT, Randolph Sapp wrote:
->> On Mon Mar 23, 2026 at 2:46 PM CDT, Robert Nelson wrote:
->>> On Mon, Mar 23, 2026 at 2:37=E2=80=AFPM Randolph Sapp <rs@ti.com> wrote=
-:
->>>> On Fri Mar 20, 2026 at 10:32 AM CDT, Robert Nelson wrote:
->>>> >> > +++ b/configs/am62_pocketbeagle2_a53_defconfig
->>>> >> > @@ -6,11 +6,11 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=3Dy
->>>> >> >  CONFIG_SPL_LIBGENERIC_SUPPORT=3Dy
->>>> >> >  CONFIG_NR_DRAM_BANKS=3D1
->>>> >> >  CONFIG_SOC_K3_AM625=3Dy
->> [snip]
->>>> >> > @@ -120,7 +115,8 @@ CONFIG_SYSRESET_TI_SCI=3Dy
->>>> >> >  CONFIG_EXT4_WRITE=3Dy
->>>> >> >  CONFIG_FS_FAT_MAX_CLUSTSIZE=3D16384
->>>> >> >  CONFIG_LZO=3Dy
->>>> >> > -CONFIG_EFI_SET_TIME=3Dy
->>>> >> > +CONFIG_SYS_MEM_TOP_HIDE=3D0x4000000
->>>> >>
->>>> >> Any reason why we are using TOP_HIDE here instead of just moving OP=
-TEE
->>>> >> lower in DDR like we do on the 512MiB AM6254atl EVM?
->>>> >
->>>> > Sorry, that is now a legacy setting before OPTEE finally got moved i=
-n
->>>> > v2026.01, as this had been developed thru v2025 u-boot releases..
->>>> >
->>>>
->>>> Well, it's worth noting that this change was not done in the usual way=
-, and
->>>> involves user interaction during the build beyond selecting a defconfi=
-g.
->>>>
->>>> https://texasinstruments.github.io/processor-sdk-doc/processor-sdk-lin=
-ux-AM62X/esd/docs/master/linux/Foundational_Components_ATF.html
->>>> https://git.ti.com/cgit/arago-project/meta-ti/tree/meta-ti-bsp/conf/ma=
-chine/am62xxsip-evm.conf
->>>>
->>>> Robert, are you alright with me making the requested changes?
->>>
->>> I guess as long as we document it. I know the Octavo OSD62-sip @Erik
->>> Welsh  will also be building on both am62xxsip and pocketbeagle2 based
->>> on the 512MB and then larger memory sizes (1G, 2G, etc.).
->>>
->>> Regards,
->>
->> Oh boy, adjusting the memory maps kept getting me out of memory errors i=
-n the
->> EFI flow that I knew should not be true. Found something fun: LMB reserv=
-ed
->> memory regions do not match EFI reserved memory regions. EFI's
->> efi_carve_out_dt_rsv is setting regions to be more strict that LMB's bas=
-e
->> requirements. When this occurs and an allocation runs into this discrepa=
-ncy,
->> that allocation and all future allocation requests in the EFI flow will =
-begin to
->> fail as they are repeatedly given the same LMB start address in the unap=
-proved
->> region.
->>
->> Randolph
->
-> Alright, looking into the allocation helpers it seems that
-> EFI_CONVENTIONAL_MEMORY can be remapped in efi_allocate_pages so long as =
-LMB
-> agrees that it's free. This aligns with my understanding of the UEFI spec=
- as
-> well. I dumped the EFI memory map and noticed there were 2 fragmented sec=
-tions
-> of EFI_CONVENTIONAL_MEMORY that it could still use.
->
-> Wired up efi_allocate_pages to go to those regions and attempt to allocat=
-e from
-> there in the even an LMB_MEM_ALLOC_MAX or LMB_MEM_ALLOC_ANY start failing=
-. Seems
-> to have worked, but now I'm seeing the following reported in the kernel:
->
-> [    0.048167] [Firmware Bug]: Unable to handle paging request in EFI run=
-time service
-> [    0.048246] ------------[ cut here ]------------
-> [    0.048249] WARNING: CPU: 0 PID: 1 at /usr/src/kernel/drivers/firmware=
-/efi/runtime-wrappers.c:341 __efi_queue_work+0xd4/0x108
-> [    0.048270] Modules linked in:
-> [    0.048285] CPU: 0 UID: 0 PID: 1 Comm: swapper/0 Tainted: G          I=
-         6.18.13-ti-00636-g30182cf3ac7d-dirty #1 PREEMPT=20
-> [    0.048296] Tainted: [I]=3DFIRMWARE_WORKAROUND
-> [    0.048299] Hardware name: beagle BeagleBoard.org PocketBeagle2/Beagle=
-Board.org PocketBeagle2, BIOS 2026.04-rc5-00003-gf1dace477fb8-dirty 04/01/2=
-026
-> [    0.048305] pstate: 60000005 (nZCv daif -PAN -UAO -TCO -DIT -SSBS BTYP=
-E=3D--)
-> [    0.048312] pc : __efi_queue_work+0xd4/0x108
-> [    0.048318] lr : __efi_queue_work+0xc0/0x108
-> [    0.048323] sp : ffff80008003bc80
-> [    0.048326] x29: ffff80008003bc80 x28: ffffad05b176bad4 x27: ffffad05b=
-16b00ac
-> [    0.048336] x26: ffffad05b1622e60 x25: ffffad05b1953000 x24: ffffad05b=
-1749050
-> [    0.048345] x23: 0000000000000004 x22: ffff80008003bd1e x21: ffff80008=
-003bd20
-> [    0.048353] x20: ffff80008003bd28 x19: ffffad05b19cd5d8 x18: fffffffff=
-ffe2f20
-> [    0.048362] x17: 0000000000007000 x16: ffff000001c065a0 x15: 000000000=
-0000000
-> [    0.048370] x14: 000000000000008a x13: ffff000001cf8090 x12: 000000000=
-0000001
-> [    0.048379] x11: 00000000000000c0 x10: 00000000000009f0 x9 : ffff80008=
-003bad0
-> [    0.048387] x8 : ffff000001cf8a50 x7 : 0000000000000001 x6 : 000000000=
-0000001
-> [    0.048395] x5 : 0000000000000000 x4 : 0000000000000000 x3 : 000000000=
-0000001
-> [    0.048403] x2 : 0000000000000000 x1 : 8000000000000015 x0 : 800000000=
-0000015
-> [    0.048413] Call trace:
-> [    0.048417]  __efi_queue_work+0xd4/0x108 (P)
-> [    0.048426]  virt_efi_get_next_variable+0x5c/0xac
-> [    0.048434]  efisubsys_init+0x148/0x390
-> [    0.048444]  do_one_initcall+0x60/0x1d4
-> [    0.048457]  kernel_init_freeable+0x248/0x2c4
-> [    0.048468]  kernel_init+0x20/0x140
-> [    0.048478]  ret_from_fork+0x10/0x20
-> [    0.048489] ---[ end trace 0000000000000000 ]---
->
-> U-boot itself doesn't report any errors, so I want to assume this is prob=
-ably a
-> configuration issue regarding something else I've forgotten to add.
->
-> Anyone got any quick/obvious comments before I start digging through more=
- of
-> that? Was my assumption about EFI_CONVENTIONAL_MEMORY incorrect? Is this,=
- as
-> unlikely as I think it is, actually just a known issue right now?
-
-Ugh, that took longer than it should have. Alright, what I did would have b=
-een
-correct if there weren't a few issues with other things. Primarily, this me=
-mory
-map for the am6254atl. The U-Boot stack overlaps 2 regions we carve out in
-device tree. LMB doesn't actually inform the user of this, and just keeps
-trucking, thinking that the general u-boot reservation will be good enough.
-
-Eventually, when some of the stack can be reclaimed, we will put some usefu=
-l
-things in these regions that were never properly reserved.
-
-What was driving me crazy was that the efiboot selftest reported that every=
-thing
-was okay except for the device tree region. Fun, what could have changed th=
-at?
-Well, that's just efi_carve_out_dt_rsv going back and trying to enforce thi=
-ngs
-LMB never did.
-
-Somehow we got it perfectly where copy_fdt would place the device tree squa=
-rely
-in a region that was reserved by the device tree itself. Anything else woul=
-dn't
-have been exposed to the user.
-
-So, I assume that kernel warning is actually a result of some EFI regions b=
-eing
-reclaimed by efi_carve_out_dt_rsv and the runtime blowing up because what i=
-t
-thought was a valid address is now in some reserved region.
-
-I've checked and am6254atl is also not able to reserve the
-wkup_r5fss0_core0_memory_region (0x9db00000) at startup due to the u-boot s=
-tack
-size. A ram top value of 0xa0000000 doesn't work with these reservations.
-
-Adjusting the CONFIG_STACK_SIZE won't help here, as it u-boot naturally ext=
-ends
-into the wkup_r5fss0_core0_memory_region on it's own. I was seeing a stack =
-size
-of 0x22184c0 locally at the time reservations were being setup.
+T24gTW9uLCAyMDI2LTAzLTMwIGF0IDIyOjA0ICswODAwLCBQZW5nIEZhbiAoT1NTKSB3cm90ZToK
+PiBGcm9tOiBQZW5nIEZhbiA8cGVuZy5mYW5AbnhwLmNvbT4KPiAKPiBDb252ZXJ0IHRoZSBib2Fy
+ZCB0byB1c2UgRE1fUE1JQyBpbnN0ZWFkIG9mIHRoZSBsZWdhY3kgU1BMIEkyQy9QTUlDCj4gaGFu
+ZGxpbmcuCj4gCj4gQ2hhbmdlcyBpbmNsdWRlOgo+IC0gRW5hYmxlIERNX1BNSUMsIERNX1BNSUNf
+UENBOTQ1MCwgYW5kIFNQTF9ETV9QTUlDX1BDQTk0NTAgaW4gZGVmY29uZmlnLgo+IC0gRHJvcCBs
+ZWdhY3kgU1BMIEkyQyBhbmQgUE1JQyBvcHRpb25zLgo+IC0gUmVtb3ZlIG1hbnVhbCBJMkMxIHBh
+ZCBzZXR1cCBhbmQgbGVnYWN5IHBvd2VyX3BjYTk0NTBfaW5pdCgpIHVzYWdlLgo+IC0gVXNlIERN
+LWJhc2VkIHBtaWNfZ2V0KCkgd2l0aCB0aGUgRFQgbm9kZSAicG1pY0AyNSIuCj4gLSBVcGRhdGUg
+UE1JQyByZWdpc3RlciBwcm9ncmFtbWluZyB0byB1c2Ugc3RydWN0IHVkZXZpY2UgQVBJLgo+IAo+
+IFNpZ25lZC1vZmYtYnk6IFBlbmcgRmFuIDxwZW5nLmZhbkBueHAuY29tPgoKVGhhbmsgeW91LCBQ
+ZW5nIQoKUmV2aWV3ZWQtYnk6IFlhbm5pYyBNb29nIDx5Lm1vb2dAcGh5dGVjLmRlPgpUZXN0ZWQt
+Ynk6IFlhbm5pYyBNb29nIDx5Lm1vb2dAcGh5dGVjLmRlPgoKPiAtLS0KPiDCoC4uLi9hcm0vZHRz
+L2lteDhtcC1waHlib2FyZC1wb2xsdXgtcmRrLXUtYm9vdC5kdHNpIHwgMjIgKysrKysrKysrKy0K
+PiDCoGJvYXJkL3BoeXRlYy9waHljb3JlX2lteDhtcC9zcGwuY8KgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgfCA0MyArKysrKysrLS0tLS0tLS0tLS0tLS0tCj4gwqBjb25maWdzL3Bo
+eWNvcmUtaW14OG1wX2RlZmNvbmZpZ8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCB8IDEwICsrLS0tCj4gwqAzIGZpbGVzIGNoYW5nZWQsIDM4IGluc2VydGlvbnMoKyksIDM3IGRl
+bGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS9hcmNoL2FybS9kdHMvaW14OG1wLXBoeWJvYXJk
+LXBvbGx1eC1yZGstdS1ib290LmR0c2kgYi9hcmNoL2FybS9kdHMvaW14OG1wLXBoeWJvYXJkLQo+
+IHBvbGx1eC1yZGstdS1ib290LmR0c2kKPiBpbmRleCA0ODA0YTIwNGU5Mi4uZTk0MDNkOWVhODIg
+MTAwNjQ0Cj4gLS0tIGEvYXJjaC9hcm0vZHRzL2lteDhtcC1waHlib2FyZC1wb2xsdXgtcmRrLXUt
+Ym9vdC5kdHNpCj4gKysrIGIvYXJjaC9hcm0vZHRzL2lteDhtcC1waHlib2FyZC1wb2xsdXgtcmRr
+LXUtYm9vdC5kdHNpCj4gQEAgLTM0LDYgKzM0LDE4IEBACj4gwqAJfTsKPiDCoH07Cj4gwqAKPiAr
+JnBpbmN0cmxfaTJjMSB7Cj4gKwlib290cGgtYWxsOwo+ICt9Owo+ICsKPiArJnBpbmN0cmxfcG1p
+YyB7Cj4gKwlib290cGgtYWxsOwo+ICt9Owo+ICsKPiArJnsvc29jQDAvYnVzQDMwODAwMDAwL2ky
+Y0AzMGEyMDAwMC9wbWljQDI1L3JlZ3VsYXRvcnN9IHsKPiArCWJvb3RwaC1hbGw7Cj4gK307Cj4g
+Kwo+IMKgJnJlZ191c2RoYzJfdm1tYyB7Cj4gwqAJYm9vdHBoLXByZS1yYW07Cj4gwqB9Owo+IEBA
+IC04MywxMSArOTUsMTEgQEAKPiDCoH07Cj4gwqAKPiDCoCZpMmMxIHsKPiAtCWJvb3RwaC1wcmUt
+cmFtOwo+ICsJYm9vdHBoLWFsbDsKPiDCoH07Cj4gwqAKPiDCoCZwbWljIHsKPiAtCWJvb3RwaC1w
+cmUtcmFtOwo+ICsJYm9vdHBoLWFsbDsKPiDCoH07Cj4gwqAKPiDCoCZ1c2JfZHdjM18wIHsKPiBA
+QCAtOTYsNiArMTA4LDEyIEBACj4gwqAKPiDCoCZ1c2RoYzIgewo+IMKgCWJvb3RwaC1wcmUtcmFt
+Owo+ICsJLyoKPiArCSAqIExETzUgb3V0cHV0IGRlcGVuZHMgb24gU0QyX1ZTRUwsIGJ1dCBubyB3
+YXkgdG8gcmVhZCBiYWNrIFNEMl9WU0VMCj4gKwkgKiB3aGVuIHVzaW5nIFNESEMgY29udHJvbGxl
+ciBWU0VMRUNUIHRvIGNvbnRyb2wgU0QyX1ZTRUwuIFNvIGRyb3AKPiArCSAqIHZxbW1jLXN1cHBs
+eSB0byBhdm9pZCBmc2xfZXNkaGNfaW14IHJlYWQgYmFjayB3cm9uZyB2b2x0YWdlLgo+ICsJICov
+Cj4gKwkvZGVsZXRlLXByb3BlcnR5LyB2cW1tYy1zdXBwbHk7Cj4gwqB9Owo+IMKgCj4gwqAmdXNk
+aGMzIHsKPiBkaWZmIC0tZ2l0IGEvYm9hcmQvcGh5dGVjL3BoeWNvcmVfaW14OG1wL3NwbC5jIGIv
+Ym9hcmQvcGh5dGVjL3BoeWNvcmVfaW14OG1wL3NwbC5jCj4gaW5kZXggZmM3YWVmZDAwNzMuLmZj
+NmY1MTA0OTI1IDEwMDY0NAo+IC0tLSBhL2JvYXJkL3BoeXRlYy9waHljb3JlX2lteDhtcC9zcGwu
+Ywo+ICsrKyBiL2JvYXJkL3BoeXRlYy9waHljb3JlX2lteDhtcC9zcGwuYwo+IEBAIC0xMTcsNDUg
+KzExNywzMiBAQCBvdXQ6Cj4gwqAJZGRyX2luaXQoJmRyYW1fdGltaW5nKTsKPiDCoH0KPiDCoAo+
+IC0jZGVmaW5lIEkyQ19QQURfQ1RSTCAoUEFEX0NUTF9EU0U2IHwgUEFEX0NUTF9IWVMgfCBQQURf
+Q1RMX1BVRSB8IFBBRF9DVExfUEUpCj4gLSNkZWZpbmUgUEMgTVVYX1BBRF9DVFJMKEkyQ19QQURf
+Q1RSTCkKPiAtc3RydWN0IGkyY19wYWRzX2luZm8gaTJjX3BhZF9pbmZvMSA9IHsKPiAtCS5zY2wg
+PSB7Cj4gLQkJLmkyY19tb2RlID0gTVg4TVBfUEFEX0kyQzFfU0NMX19JMkMxX1NDTCB8IFBDLAo+
+IC0JCS5ncGlvX21vZGUgPSBNWDhNUF9QQURfSTJDMV9TQ0xfX0dQSU81X0lPMTQgfCBQQywKPiAt
+CQkuZ3AgPSBJTVhfR1BJT19OUig1LCAxNCksCj4gLQl9LAo+IC0JLnNkYSA9IHsKPiAtCQkuaTJj
+X21vZGUgPSBNWDhNUF9QQURfSTJDMV9TREFfX0kyQzFfU0RBIHwgUEMsCj4gLQkJLmdwaW9fbW9k
+ZSA9IE1YOE1QX1BBRF9JMkMxX1NEQV9fR1BJTzVfSU8xNSB8IFBDLAo+IC0JCS5ncCA9IElNWF9H
+UElPX05SKDUsIDE1KSwKPiAtCX0sCj4gLX07Cj4gLQo+IMKgaW50IHBvd2VyX2luaXRfYm9hcmQo
+dm9pZCkKPiDCoHsKPiAtCXN0cnVjdCBwbWljICpwOwo+ICsJc3RydWN0IHVkZXZpY2UgKmRldjsK
+PiDCoAlpbnQgcmV0Owo+IMKgCj4gLQlyZXQgPSBwb3dlcl9wY2E5NDUwX2luaXQoMCwgMHgyNSk7
+Cj4gLQlpZiAocmV0KQo+IC0JCXByaW50ZigicG93ZXIgaW5pdCBmYWlsZWQiKTsKPiAtCXAgPSBw
+bWljX2dldCgiUENBOTQ1MCIpOwo+IC0JcG1pY19wcm9iZShwKTsKPiArCXJldCA9IHBtaWNfZ2V0
+KCJwbWljQDI1IiwgJmRldik7Cj4gKwlpZiAocmV0ID09IC1FTk9ERVYpIHsKPiArCQlwdXRzKCJO
+byBwbWljQDI1XG4iKTsKPiArCQlyZXR1cm4gMDsKPiArCX0KPiArCWlmIChyZXQgPCAwKQo+ICsJ
+CXJldHVybiByZXQ7Cj4gwqAKPiDCoAkvKiBCVUNLeE9VVF9EVlMwLzEgY29udHJvbCBCVUNLMTIz
+IG91dHB1dCAqLwo+IC0JcG1pY19yZWdfd3JpdGUocCwgUENBOTQ1MF9CVUNLMTIzX0RWUywgMHgy
+OSk7Cj4gKwlwbWljX3JlZ193cml0ZShkZXYsIFBDQTk0NTBfQlVDSzEyM19EVlMsIDB4MjkpOwo+
+IMKgCj4gwqAJLyogSW5jcmVhc2UgVkREX1NPQyBhbmQgVkREX0FSTSB0byBPRCB2b2x0YWdlIDAu
+OTVWICovCj4gLQlwbWljX3JlZ193cml0ZShwLCBQQ0E5NDUwX0JVQ0sxT1VUX0RWUzAsIDB4MUMp
+Owo+IC0JcG1pY19yZWdfd3JpdGUocCwgUENBOTQ1MF9CVUNLMk9VVF9EVlMwLCAweDFDKTsKPiAr
+CXBtaWNfcmVnX3dyaXRlKGRldiwgUENBOTQ1MF9CVUNLMU9VVF9EVlMwLCAweDFDKTsKPiArCXBt
+aWNfcmVnX3dyaXRlKGRldiwgUENBOTQ1MF9CVUNLMk9VVF9EVlMwLCAweDFDKTsKPiDCoAo+IMKg
+CS8qIFNldCBCVUNLMSBEVlMxIHRvIHN1c3BlbmQgY29udHJvbGxlZCB0aHJvdWdoIFBNSUNfU1RC
+WV9SRVEgKi8KPiAtCXBtaWNfcmVnX3dyaXRlKHAsIFBDQTk0NTBfQlVDSzFPVVRfRFZTMSwgMHgx
+NCk7Cj4gLQlwbWljX3JlZ193cml0ZShwLCBQQ0E5NDUwX0JVQ0sxQ1RSTCwgMHg1OSk7Cj4gKwlw
+bWljX3JlZ193cml0ZShkZXYsIFBDQTk0NTBfQlVDSzFPVVRfRFZTMSwgMHgxNCk7Cj4gKwlwbWlj
+X3JlZ193cml0ZShkZXYsIFBDQTk0NTBfQlVDSzFDVFJMLCAweDU5KTsKPiDCoAo+IMKgCS8qIFNl
+dCBXRE9HX0JfQ0ZHIHRvIGNvbGQgcmVzZXQgKi8KPiAtCXBtaWNfcmVnX3dyaXRlKHAsIFBDQTk0
+NTBfUkVTRVRfQ1RSTCwgMHhBMSk7Cj4gKwlwbWljX3JlZ193cml0ZShkZXYsIFBDQTk0NTBfUkVT
+RVRfQ1RSTCwgMHhBMSk7Cj4gwqAKPiDCoAlyZXR1cm4gMDsKPiDCoH0KPiBAQCAtMTkzLDggKzE4
+MCw2IEBAIHZvaWQgYm9hcmRfaW5pdF9mKHVsb25nIGR1bW15KQo+IMKgCj4gwqAJZW5hYmxlX3R6
+YzM4MCgpOwo+IMKgCj4gLQlzZXR1cF9pMmMoMCwgQ09ORklHX1NZU19JMkNfU1BFRUQsIDB4N2Ys
+ICZpMmNfcGFkX2luZm8xKTsKPiAtCj4gwqAJcG93ZXJfaW5pdF9ib2FyZCgpOwo+IMKgCj4gwqAJ
+LyogRERSIGluaXRpYWxpemF0aW9uICovCj4gZGlmZiAtLWdpdCBhL2NvbmZpZ3MvcGh5Y29yZS1p
+bXg4bXBfZGVmY29uZmlnIGIvY29uZmlncy9waHljb3JlLWlteDhtcF9kZWZjb25maWcKPiBpbmRl
+eCAyZmNmN2RiOWU1Yy4uNTFkOTczN2FmYjMgMTAwNjQ0Cj4gLS0tIGEvY29uZmlncy9waHljb3Jl
+LWlteDhtcF9kZWZjb25maWcKPiArKysgYi9jb25maWdzL3BoeWNvcmUtaW14OG1wX2RlZmNvbmZp
+Zwo+IEBAIC0xMCw3ICsxMCw2IEBAIENPTkZJR19TRl9ERUZBVUxUX1NQRUVEPTgwMDAwMDAwCj4g
+wqBDT05GSUdfRU5WX1NJWkU9MHgxMDAwMAo+IMKgQ09ORklHX0VOVl9PRkZTRVQ9MHgzQzAwMDAK
+PiDCoENPTkZJR19FTlZfU0VDVF9TSVpFPTB4MTAwMDAKPiAtQ09ORklHX1NZU19JMkNfTVhDX0ky
+QzE9eQo+IMKgQ09ORklHX0RNX0dQSU89eQo+IMKgQ09ORklHX0RFRkFVTFRfREVWSUNFX1RSRUU9
+ImZyZWVzY2FsZS9pbXg4bXAtcGh5Ym9hcmQtcG9sbHV4LXJkayIKPiDCoENPTkZJR19JTVg4TV9P
+UFRFRV9MT0FEX0FERFI9MHg3ZTAwMDAwMAo+IEBAIC0xMTMsOCArMTEyLDYgQEAgQ09ORklHX0ZB
+U1RCT09UX01NQ19VU0VSX1NVUFBPUlQ9eQo+IMKgQ09ORklHX0ZBU1RCT09UX01NQ19VU0VSX05B
+TUU9Im1tYzIiCj4gwqBDT05GSUdfTVhDX0dQSU89eQo+IMKgQ09ORklHX0RNX0kyQz15Cj4gLSMg
+Q09ORklHX1NQTF9ETV9JMkMgaXMgbm90IHNldAo+IC1DT05GSUdfU1BMX1NZU19JMkNfTEVHQUNZ
+PXkKPiDCoENPTkZJR19JMkNfRUVQUk9NPXkKPiDCoENPTkZJR19TWVNfSTJDX0VFUFJPTV9BRERS
+PTB4NTEKPiDCoENPTkZJR19TVVBQT1JUX0VNTUNfQk9PVD15Cj4gQEAgLTE0NCwxNSArMTQxLDE2
+IEBAIENPTkZJR19QSFlfSU1YOE1RX1VTQj15Cj4gwqBDT05GSUdfUElOQ1RSTD15Cj4gwqBDT05G
+SUdfU1BMX1BJTkNUUkw9eQo+IMKgQ09ORklHX1BJTkNUUkxfSU1YOE09eQo+IC1DT05GSUdfU1BM
+X1BPV0VSX0xFR0FDWT15Cj4gwqBDT05GSUdfUE9XRVJfRE9NQUlOPXkKPiDCoENPTkZJR19JTVg4
+TV9QT1dFUl9ET01BSU49eQo+IMKgQ09ORklHX0lNWDhNUF9IU0lPTUlYX0JMS0NUUkw9eQo+IC1D
+T05GSUdfUE9XRVJfUENBOTQ1MD15Cj4gK0NPTkZJR19ETV9QTUlDPXkKPiArQ09ORklHX0RNX1BN
+SUNfUENBOTQ1MD15Cj4gK0NPTkZJR19TUExfRE1fUE1JQ19QQ0E5NDUwPXkKPiDCoENPTkZJR19E
+TV9SRUdVTEFUT1I9eQo+ICtDT05GSUdfRE1fUkVHVUxBVE9SX1BDQTk0NTA9eQo+IMKgQ09ORklH
+X0RNX1JFR1VMQVRPUl9GSVhFRD15Cj4gwqBDT05GSUdfRE1fUkVHVUxBVE9SX0dQSU89eQo+IC1D
+T05GSUdfU1BMX1BPV0VSX0kyQz15Cj4gwqBDT05GSUdfRE1fUk5HPXkKPiDCoENPTkZJR19ETV9T
+RVJJQUw9eQo+IMKgQ09ORklHX01YQ19VQVJUPXkK
