@@ -4,86 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25D4CFF60C8
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 06:02:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95A31FF60C6
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 06:04:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 552E083DA7;
-	Tue, 31 Mar 2026 08:02:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E71FB83EB3;
+	Tue, 31 Mar 2026 08:04:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BiwDUHYO";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EkqH3ls5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 611A783DA7; Tue, 31 Mar 2026 05:25:39 +0200 (CEST)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3F9E883F0A; Tue, 31 Mar 2026 08:04:49 +0200 (CEST)
+Received: from BN8PR05CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9DF480433
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 05:25:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 70E3783DA7
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 08:04:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ngotra27101996@gmail.com
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-2b0afa0210bso26420925ad.2
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 20:25:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1774927534; x=1775532334; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=FCLFtUyqlK9HMbmyFRvcYFZGeZjuEwgIXOcldjl0dQE=;
- b=BiwDUHYO0TmzJWMyr1EFpuYUms0MPSzA8HmvSas41/bQdyneLi+zaCofoUBNWqtIQs
- SBm+2NxdtTe5ZMoV000a9WX+y2m04EUSTselz5dZOy7JyH4NHABTa6HcwKXZHbN4xKhM
- TUlmB3OKdPH6VEkmIT0Q8D3Ob4KKfp4fzFYvlnmccRSty5eNpZN4XUvMYqU9FPZG/jwm
- 4UkyY3HlBkfcsO7TR48fejHiw/+xpKG+UEvM+o+uwUgqxaIwgqQMI2EXCTU+sFGBMTeQ
- pIyNpNkDHEzmkTySwT0Tft+Ju3d3KwYZoSfZfNGlREyWasIqOJp7dKUtPx8ACbyc6U+1
- AIJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774927534; x=1775532334;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FCLFtUyqlK9HMbmyFRvcYFZGeZjuEwgIXOcldjl0dQE=;
- b=s39J0aFxpMklN4cD2i6LwPnXmw1Borjf8AgvBAn3lz70NqIlBzyCfKaPpcpdu5Bqyj
- ISn9+22EP21Kuyg4m+IzP0pWPzSmvhOL9PlCnxqz+KfZjl4EMhW/Ntwq7R8ZY5JyLb7e
- +JrvvQw7vacWlQl/Qq1TqUSYT8yEeJy9QyIqlf3lWlgDfqSi8SHTbUfePQF4pPz9L4gI
- vXCQFnGdETCm9wda28jowWH8Bz2nSv+hjt16LXPHV0vEtiXHxnLm8KBzGyaH3fzy+UMw
- 1t9Eo5yysUEWsy4+kBY3qfQ1xId1bBWvaqoIPovMQ2U0vUY4sAn4lOuO/KulNuvWrSZo
- rYIA==
-X-Gm-Message-State: AOJu0YwRiD+FVze0RBPldu/cx9Gfoy4ji9/ShxMPOcAKv0BUMyEKqaE9
- tf1EsXqLanCF6aoPjHLspS/HtqGd33pbgbHHd3JvWIcZ+Tp36BqnU8ZFz7Exg6bs
-X-Gm-Gg: ATEYQzwRVbJBCdOfiIlz2xX/akma2QLI2Udh56YS9Bg6vcSnA0xMAfpNEpVxjko1aqb
- hR+H87MxuTmzkp0sctbWEjFU0gcCwnufZlmGDZYQ/6q4S4Zqw8AFl7001PmOUCwRHN2g9D1MTHI
- t0ggQppAe9od7VTj+rMZZANAvsvfZFQaIMR9T0Grg6s3odqmCTA7YjoY45SDADswcViwrdR3MCn
- kycHAfKKz9orOqUJccykDwy/wyjiS/R0snpF+lvyMVsM5PcIhx9o0VwdWxKyVGhYKrJEIbf86Xg
- p7oY8fMfShQb8BQvC4bNwhi2A7S8MgeV1ZmFRVpFB3lYyIO2xuIAzX2x1rNFcXey3pJZdwYt4D2
- vXqP+SYcwke0RS7fbF+r0qdRkQ/84Qc20bHJTLj96OLmaey4WS12A6lQODMbRtCtMsZHWuv7G/6
- uJdBcxg1tD5KUg5bQMTQuNk6/NzzLvqDNNLjidoYVGWqfi55JC+Lm3Jf9NPT2ijI1aMmgYxuEsK
- w==
-X-Received: by 2002:a17:902:e885:b0:2b0:663f:6b53 with SMTP id
- d9443c01a7336-2b0cdc9b555mr149940405ad.13.1774927534228; 
- Mon, 30 Mar 2026 20:25:34 -0700 (PDT)
-Received: from MacBookAir.STASGS.RMIT.EDU.VN ([103.253.89.37])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b24268aa4fsm93715645ad.36.2026.03.30.20.25.31
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 30 Mar 2026 20:25:33 -0700 (PDT)
-From: Ngo Luong Thanh Tra <ngotra27101996@gmail.com>
-X-Google-Original-From: Ngo Luong Thanh Tra <S4210155@student.rmit.edu.au>
-To: u-boot@lists.denx.de
-Cc: Ngo Luong Thanh Tra <S4210155@student.rmit.edu.au>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Casey Connolly <casey.connolly@linaro.org>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2] common: cli_hush: fix console_buffer overflow on boot retry
-Date: Tue, 31 Mar 2026 10:25:11 +0700
-Message-ID: <20260331032525.62304-1-S4210155@student.rmit.edu.au>
-X-Mailer: git-send-email 2.53.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=rvx/ew5TcWM4wBfx/OSv6Gy6VQzj50BbESOrY5JEBfq7YBDo1/I9DMMxRYuBUX52l7iOaN5Er8BK+mra3zFB8usX/EaECc5mom8ntx8ePHzRVHLpPOp5xQal8FHP4MRIVd8Vxkpf+SXHH7heBlTLEAeBLMqGpfzvVmsZ+SQ1BWFqjciZ5dBNuCwE7ICBu94Vfk+QFMIslUHEzgEgWF9HeJ8hzLrpKfshRM7IL3xDzOiCLeN+0dKKgQD2ezzgpId9+3zpIsiTstQEqNWvHkh3Gzpj0F9DuBu3px5Eql5OILe5CLLrMoq+frY/22C6Pgs3MyZxgJVK3oBWpY4HkNlGbg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=M3NhH9HfN0GJSDVLmb702O5p09Wd0N6D9UhMQHQw+zg=;
+ b=Flz4zMOK0VvqQlatObb1JwqIajusPmCQ+ybHSkJuMxNVhltf/rVZZPARwJNUORbVYX5mTpwuyql7mmdujrntViRuTiSfb51K7wjYkwelvMib3GR+rpEkYYnq1WqnGixa5uXjZlVLwrsxapXo9wmGZ/ZF3Ub9xQlXRPDHEMJ/J2GiKfY+hwuFJvxD5zb3moWlSkjc/LZ53qH0VVKyzrghnzikUdEGSM26MpqC93KrfnDSAC0X5SgSC3pqS7E70EW18Sr3PmvHR0VAzOo6HnvFaVPRrll4K3Nv3K/TZERI7LZV35S0YGvICVtTKN/H2YKEcV/xEEncKzC8wZ3Mu7jCgQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=M3NhH9HfN0GJSDVLmb702O5p09Wd0N6D9UhMQHQw+zg=;
+ b=EkqH3ls5LOAn0bHU1XJhG3gcCIbwLaG4z7O79P2vOghF+VwYuyMsJb4JnbFoKy2coXhHMRnBe4mzddWZXk553yyGKO3aDRGeFLgiJjCe70ROS8vT5ZSmbj2zGHVohH7TsjFabjQQlTnRzuaNP4xtw75+gLs2I078j4zgTXJow1Y=
+Received: from SJ0PR03CA0347.namprd03.prod.outlook.com (2603:10b6:a03:39c::22)
+ by IA0PR10MB6844.namprd10.prod.outlook.com (2603:10b6:208:434::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.28; Tue, 31 Mar
+ 2026 06:04:43 +0000
+Received: from SJ1PEPF000023D7.namprd21.prod.outlook.com
+ (2603:10b6:a03:39c:cafe::3b) by SJ0PR03CA0347.outlook.office365.com
+ (2603:10b6:a03:39c::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.28 via Frontend Transport; Tue,
+ 31 Mar 2026 06:04:43 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ SJ1PEPF000023D7.mail.protection.outlook.com (10.167.244.72) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9791.0 via Frontend Transport; Tue, 31 Mar 2026 06:04:42 +0000
+Received: from DLEE204.ent.ti.com (157.170.170.84) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 31 Mar
+ 2026 01:04:41 -0500
+Received: from DLEE210.ent.ti.com (157.170.170.112) by DLEE204.ent.ti.com
+ (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 31 Mar
+ 2026 01:04:41 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE210.ent.ti.com
+ (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Tue, 31 Mar 2026 01:04:41 -0500
+Received: from [172.24.28.230] (lt5cg60819vj.dhcp.ti.com [172.24.28.230])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62V64cdm1731988;
+ Tue, 31 Mar 2026 01:04:39 -0500
+Message-ID: <c8a97353-0c3d-4d98-8252-c0bb91a658a5@ti.com>
+Date: Tue, 31 Mar 2026 11:34:38 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 31 Mar 2026 08:02:40 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] arm: Add ARMv8-M aarch32 support
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, <u-boot@lists.denx.de>
+CC: Casey Connolly <casey.connolly@linaro.org>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, "Jerome
+ Forissier" <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>,
+ <u-kumar1@ti.com>
+References: <20260329231442.332359-1-marek.vasut+renesas@mailbox.org>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20260329231442.332359-1-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000023D7:EE_|IA0PR10MB6844:EE_
+X-MS-Office365-Filtering-Correlation-Id: 046c0c20-401d-46c5-ce41-08de8eeb66fc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|376014|1800799024|82310400026|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: BFJQiqubWL6eBhPVpkc92pX4mk1YE6VcbAHfCptyYIBtni0RYHwUU3suOeT89QxlNcMa4quvON5wDml6Xy6LlM5id0klLXMWMXGojbvKpcd+ELzrPkrYRJrk+QMWah3nooEzfEZvWDS9ccrIu5LqK5RuIMbAf0tirH3dx4g6dtN+flUxuN5kp47p19SBdLCnVOSQfrB5N55poGbCtzXrH4+mTdMGthc/KHvVgIrcDV7VJ4e55Uegbuycmnpz0rcL1JQjX2idzaXvYaTJ7F4P2kLIf7hHFSnv1xjhskINUInq5JD64LvwcvR1ptSxkCLurTtSPuKXQbm0a2FQjfVpatvwVXv+n5kEmL8zc5GFB4ViIhzqM2RvigZV94Gxc/LaaBuzDWbe7NtK7FxtiuoKRQOCgodD3FbsvFG/A4WTboPGofXQSN4l42txVfFg/uFEn+3QucGk5rXa+Fosad8gM1BDUZOi/ZH8sd7aB7GRb+g30FsBYLE6DpBSRtf/TypCqBaBMaYTf8IcsPPTGW3G/0eifU1daq79+xaJn+bx1Y53sEi+M/zFsZDGZE2PNLbDUhUtvxz0wdb5fDSYuAlCKiR/J9q3rOTYTI0llzWwOqEjar297fZ/MJsM6XZwxZCG38Xw1z4R4fWwB6/7V5NtHMNax2+VDz0MZqhvA0W6BV1fMZA1W+6T1L8myKofxvUN14XRC9Y5fGG4AF2fyccyeEQpBC8FdJPkcUjGcidNjdYINjYx/smNZFLB8MVnokguhX57f8/Unj6TNy3JLfITKg==
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(36860700016)(376014)(1800799024)(82310400026)(56012099003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: wPb3hlCFyRWDIQc8O79nV3lhyl1h2zPDN8yTkdqBy+bCf9DS9hu4WncEsAqKcFjidmTTB0Nt4au121NZi3kvakKoFMNXfoR6MHEHvclxlhnfmeLFO6MXoN0xUtK+r9d7gYSPQBZ9+4OLivllgDg/cr9VqjEB6j/7KiL+VTKkjLSS7N/eCsqOw9W1NByKl3xhr5RvD8ye/hwGnH6YUuSrf+x/j5Epl87Wd7oXSIuNkWwvWc0HfM4UgGQflKRpZdqKIY43R2ceJUIN6qLYG4GBYgn8KuZhgNGtDUS4liS38KVWFga1sZYyv7JL7nkV1Sfj8gAdKdZIpRpT0rdae8prLwiJUJ8APtxfPKA5Vh50KRgSUpY/nUuGLzrQDQkUjFENPLfJt5RaNuHG9GW1+QuQ3TqkfNe41v3iNqzDqqwer4x1RhB8TZ1gUbdy+apsfMyd
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2026 06:04:42.8266 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 046c0c20-401d-46c5-ce41-08de8eeb66fc
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000023D7.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR10MB6844
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,106 +135,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add const_strcpy() macro to <linux/build_bug.h> that enforces at
-compile time that the destination is a char array (not a pointer),
-the source is a string literal, and the source fits in the
-destination including the NUL terminator. It uses __builtin_strcpy()
-so the compiler can optimize the copy.
 
-Fix the console_buffer extern declaration in <console.h> to include
-the array size so that sizeof(console_buffer) is valid at call sites.
 
-Replace the unbounded strcpy() in cli_hush.c with const_strcpy() to
-catch at compile time any configuration where CONFIG_SYS_CBSIZE is
-smaller than the boot retry command string.
+On 3/30/2026 4:44 AM, Marek Vasut wrote:
+> Add configuration for ARMv8-M aarch32 core, which are currently
+> Cortex-M23/M33 cores. These cores are treated similar to ARMv7-M
+> cores, except the code has to be compiled with matching compiler
+> -march=armv8-m.main flag . These cores have no MMU, they have MPU,
+> which is currently not configured.
+> 
+> Unlike ARMv7-M, these cores have 512 interrupt vectors. While the
+> SYS_ARM_ARCH should be set to 8, it is set to 7 because all of the
+> initialization code is built from from arch/arm/cpu/armv7m and not
+> armv8. Furthermore, CONFIG_ARM64 must be disabled, although DTs
+> for devices using these cores do come from arch/arm64/boot/dts .
+> 
+> To avoid excess duplication in Makefiles, introduce one new Kconfig
+> symbol, CPU_V7M_V8M. The CPU_V7M_V8M cover both ARMv7-M and ARMv8-M
+> cores.
+> 
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Casey Connolly <casey.connolly@linaro.org>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Jerome Forissier <jerome.forissier@arm.com> <jerome@forissier.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Udit Kumar <u-kumar1@ti.com>
+> Cc: u-boot@lists.denx.de
+> ---
+> V2: - Rename CPU_V78M to CPU_V7M_V8M
+>     - Isolate V7M specific and otherwise option bits in cpu.c
 
-Fixes: 657e19f8f2dd ("cli_hush: support running bootcmd on boot retry")
-Signed-off-by: Ngo Luong Thanh Tra <S4210155@student.rmit.edu.au>
-To: u-boot@lists.denx.de
----
+Thanks for v2 Marek,
+Apart of name of config discussion over v1 [0].
 
-Changes in v2:
-- Replace strlcpy() + BUILD_BUG_ON approach with a new const_strcpy()
-  macro that enforces compile-time safety for string literal copies
-- Fix console_buffer extern declaration in <console.h> to include
-  array size so sizeof(console_buffer) is valid at call sites
-- Address review from Rasmus Villemoes
+For changes,
+Acked-by: Udit Kumar <u-kumar1@ti.com>
 
- common/cli_hush.c         |  3 ++-
- include/console.h         |  3 ++-
- include/linux/build_bug.h | 23 +++++++++++++++++++++++
- 3 files changed, 27 insertions(+), 2 deletions(-)
+[0] :
+https://lore.kernel.org/all/30108d25-efd6-4ff6-9bfe-0dc55670a83f@mailbox.org/
 
-diff --git a/common/cli_hush.c b/common/cli_hush.c
-index 7bd6943d3ed..048577cb40a 100644
---- a/common/cli_hush.c
-+++ b/common/cli_hush.c
-@@ -84,6 +84,7 @@
- #include <cli_hush.h>
- #include <command.h>        /* find_cmd */
- #include <asm/global_data.h>
-+#include <linux/build_bug.h>
- #endif
- #ifndef __U_BOOT__
- #include <ctype.h>     /* isalpha, isdigit */
-@@ -1029,7 +1030,7 @@ static void get_user_input(struct in_str *i)
- #  ifdef CONFIG_RESET_TO_RETRY
- 	  do_reset(NULL, 0, 0, NULL);
- #  elif IS_ENABLED(CONFIG_RETRY_BOOTCMD)
--	strcpy(console_buffer, "run bootcmd\n");
-+	const_strcpy(console_buffer, "run bootcmd\n");
- # else
- #	error "This only works with CONFIG_RESET_TO_RETRY or CONFIG_BOOT_RETRY_COMMAND enabled"
- #  endif
-diff --git a/include/console.h b/include/console.h
-index 8d0d7bb8a4c..97ccf5e5f6a 100644
---- a/include/console.h
-+++ b/include/console.h
-@@ -10,8 +10,9 @@
- #include <stdbool.h>
- #include <stdio_dev.h>
- #include <linux/errno.h>
-+#include <config.h>
- 
--extern char console_buffer[];
-+extern char console_buffer[CONFIG_SYS_CBSIZE + 1];
- 
- /* common/console.c */
- int console_init_f(void);	/* Before relocation; uses the serial  stuff */
-diff --git a/include/linux/build_bug.h b/include/linux/build_bug.h
-index 20c2dc7f4bd..d775bf1bf91 100644
---- a/include/linux/build_bug.h
-+++ b/include/linux/build_bug.h
-@@ -76,4 +76,27 @@
- #define static_assert(expr, ...) __static_assert(expr, ##__VA_ARGS__, #expr)
- #define __static_assert(expr, msg, ...) _Static_assert(expr, msg)
- 
-+/**
-+ * const_strcpy - Copy a string literal to a char array with compile-time checks
-+ * @d: destination char array (must be a char array, not a pointer)
-+ * @s: source string literal
-+ *
-+ * Enforces at compile time that:
-+ * (a) @d is a char array, not a pointer
-+ * (b) @s is a string literal (adjacent string concatenation trick)
-+ * (c) @s fits in @d including the NUL terminator
-+ *
-+ * Uses __builtin_strcpy() so the compiler can optimize the copy into
-+ * immediate stores rather than emitting a function call.
-+ *
-+ * Note: @s is used twice in the macro expansion but this is intentional
-+ * and safe: the ("" s "") trick enforces at compile time that @s is a
-+ * string literal, and string literals have no side effects.
-+ */
-+#define const_strcpy(d, s) ({						\
-+	BUILD_BUG_ON(__builtin_types_compatible_p(typeof(d), char *));	\
-+	BUILD_BUG_ON(sizeof(d) < sizeof("" s ""));			\
-+	__builtin_strcpy(d, s);						\
-+})
-+
- #endif	/* _LINUX_BUILD_BUG_H */
--- 
-2.53.0
 
-base-commit: 42571a36b6eac469ee94e305c7e7062306fde423
-branch: fix/sys-cbsize-overflow-series
+> ---
+>  Makefile                         |  8 ++++++--
+>  arch/arm/Kconfig                 | 15 +++++++++++++--
+>  arch/arm/Makefile                |  2 ++
+>  arch/arm/cpu/armv7m/cpu.c        | 10 ++++++++--
+>  arch/arm/include/asm/armv7_mpu.h |  2 +-
+>  arch/arm/include/asm/unified.h   |  2 +-
+>  arch/arm/lib/Makefile            |  6 +++---
+>  arch/arm/lib/bootm.c             |  2 +-
+>  arch/arm/lib/crt0.S              |  2 +-
+>  arch/arm/lib/relocate.S          |  4 ++--
+>  arch/arm/lib/semihosting.S       |  2 +-
+>  arch/arm/lib/vectors_m.S         |  6 +++++-
+>  cmd/Kconfig                      |  2 +-
+>  dts/Makefile                     |  4 ++++
+>  lib/efi_selftest/Makefile        |  2 +-
+> [..]
+
