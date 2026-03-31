@@ -4,123 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7FB5FF60D8
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 06:58:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31855FF60D5
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 07:00:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7469483DBF;
-	Tue, 31 Mar 2026 08:58:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 43A7983DBF;
+	Tue, 31 Mar 2026 09:00:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="z7Idy4Pi";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="oD+YrEwz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4066E80212; Tue, 31 Mar 2026 08:58:22 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 38B5783DBF; Tue, 31 Mar 2026 09:00:36 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22E0D83DBF
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 08:58:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 13A5580212
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 09:00:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-43cf8d550bdso1853464f8f.0
- for <u-boot@lists.denx.de>; Mon, 30 Mar 2026 23:58:20 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4852c9b4158so42061495e9.0
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 00:00:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1774940299; x=1775545099; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=Ipg7k+VcSKKfX6yHOD/5tAPWgIkxZD+8Okh4YDMdg0s=;
- b=z7Idy4PiDT+YH8bCPJqaSIWphfDi+gnfXBUcEXV9D+TR3NURnoUUGk+DzPMPrqj2xy
- dugdFgLTtb7iIUz3y1zVNpBh7Dpx+i8Wrt88EvlCp5vU4Kizx4DlxyUVyCa3kZo6EJ8m
- UR96q+Ut5gnWFtYzJtPhuSsqx5J6IDk+tSyZRiL0NEsGUacnlctg2A3xsoxb3yRbjREk
- 523JWXbGt33lNwY9ccD2sxzPpqAWUsAna51ImdjCNhvFuQ5BVMA5L4UAhGPhQ+L08HXp
- qye5JX4et6SInHUJR9kNfXX3vlMq3oDoZQuBf/nt1hoOJDrCD4JcPvlWluY4x96ysA2C
- gXOg==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1774940433; x=1775545233;
+ darn=lists.denx.de; 
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=EhrqRSZZS5c5HD6Jrlw70HA7qhN7sxdTI92yYmsmf0Q=;
+ b=oD+YrEwzO9iUnJ4rPzBZK0zNmYXwYfQo0VxGOtzmy1GiQl0aLWY+0bQR0ElODaecH7
+ aFWdDwJX+tXlcF7JvH04tc+HiFDFdYqlkMG/2GA5jpetlLLZ7pGT4GV0LGIiDqJQzLZh
+ uhtRhFxMIbYfoWg6cxuxIkRr0Rdq1Wal19wnv020kqmjEtWlDdeuF+0SBf98vRSS8AQ9
+ 5qkI7Ku7bawANSqPSzs/92jvk7Gl7XaZ8Oi9zgOe19ObyUNNwKsPLvdnJBRvZ2OVCSk8
+ TPLGHRgQz9Jy7HxQEamn3lOTqHw31XdbQrsI0h5HH8WwAHn/wkoRhq/Bzk13uiuBzZAb
+ 8NIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774940299; x=1775545099;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Ipg7k+VcSKKfX6yHOD/5tAPWgIkxZD+8Okh4YDMdg0s=;
- b=gEzvcgmPntSAk2VOCS1MhG6x/zuTjZ8KgC5Nj7hrYs4ONcz2ck9BqWDkl83+kTDHha
- wc/ENEkk9QTVPrZ1J9aAT7VqjEI+w+J1nJbwk5Y3sMASuLaSlAPk6waWUWm8kyplrlHZ
- cX6ufqs5d11JKO5ClMM6VLp0B452qomBjk6TRI/oV7Le9yf/afJ3fcbO2eYHotWSytpM
- uuC1d0gI0qqAwdemnLI2b2aNJTky5kXzOEXdXct8M/5ooWEJtjrrKvRfZvARqAC/ZUPe
- NoqU9WkMhM32MWRbeYm9tqj+fRLqi9ha7PBsN4VjMm3pzNdS6IpnKoAv3RGKXm4EIUUp
- KYZw==
+ d=1e100.net; s=20251104; t=1774940433; x=1775545233;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EhrqRSZZS5c5HD6Jrlw70HA7qhN7sxdTI92yYmsmf0Q=;
+ b=B22qv6Yfv7DuSxJYR4Ntrd2/5JQgxLSPTW+fdOPxCF8el0OlmjZM8dbmiBshaf622Z
+ v0+tmIi/jHNvCc3SfGHiY4va0J2CGNnVu0Tv2Jys16Ss3Tl4mWOmjUnVU0M+B0EZnFJ8
+ MwEfpBKSEqCtvsJqWm0JURKXbNXcTjLT/JVyaU974pyEkAYLqRSs/7p6LUMHjpjDb2xW
+ Uz8V5gykrzWo/ETCZZiFxPMf4Guqr4ioqYKY+YULEsyUfuV+83ipjjw3iHV4iwuQL9dl
+ BIYc8+Lsfj/eRlyxaIUbRQls2wUfnRWv0Mn1GCXwsAnuufBAKFLzm3MrsUfcS9+IxT/Y
+ msJg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU+9gk297QW1/SZwVQvHBHbzjI/ShtODsSMDnA+3ii2sSQsaiUzbYO4FkUAE5Fohj8jc9CIIww=@lists.denx.de
-X-Gm-Message-State: AOJu0YyPpeNCa0732dVAD45PE1phZCa3dxtOec65d93GdD8vobhJ3JsJ
- m0gWuhQruOQrNm0zcuC4L/G37FP6ONE0rH5Jhfgp8m2o+R1qKpbGBO74x622wrFhOD4=
-X-Gm-Gg: ATEYQzwLX6WSjAXOCM0OK1AeQqhXkS9fCgcMm1e1ilY+d5eyFvYRUvJxqt/cOYBMrUt
- IKsRgOGMRFEU9H1GUA045Oxdy2isb2I9Bhh8pORy9hYf9LN9Vt+xlLfb3HxspDI9Fa5uFfcRgXW
- e4eAkk65TNklEAANtIsu1iViUNojhFd7JRAEZ2XMxiKYxxjvq+o90iyzzggfiHxHnzlNppygEis
- a+UeMwtsKXA547+LDQwXBtQhs/g2aP98uwqAtuBZ+sQA3+mJFZrszw847I3y9enJG2ziKQfx0hh
- g61eGzJFfdT/eYxeVyP6ngb7xqwbAerjKTK/U0mbgEOzmr5dXdpBVN7Y86eIHAfpSjys0vwhtGD
- gdglfphiIcStqm5NDHpgAvySpuFB465OnYeJnOobGE9pFR2z560joBjHzhr5EZMeaddk4oP5El4
- i2RlCS3E2kZWE59XsBQcK+2Wm7HvIGdAP/UDNNN+UKNtvEC0KjnMztSzuozVBH6TCXH0/7lIc5+
- 94E
-X-Received: by 2002:a05:6000:400d:b0:43d:dd7:364c with SMTP id
- ffacd0b85a97d-43d0dd73b7fmr792346f8f.47.1774940299420; 
- Mon, 30 Mar 2026 23:58:19 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:48dd:d660:22ab:efd?
- ([2a01:e0a:106d:1080:48dd:d660:22ab:efd])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43cf21e3602sm25273744f8f.4.2026.03.30.23.58.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 30 Mar 2026 23:58:19 -0700 (PDT)
-Message-ID: <33ab8dea-0505-4b9a-a74a-1b088377b95d@linaro.org>
-Date: Tue, 31 Mar 2026 08:58:18 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 2/6] ufs: mediatek: clean up zero terminator
-To: David Lechner <dlechner@baylibre.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Ryder Lee <ryder.lee@mediatek.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-References: <20260330-mtk-genio-720-ufs-v1-0-3bad8362ed70@baylibre.com>
- <20260330-mtk-genio-720-ufs-v1-2-3bad8362ed70@baylibre.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260330-mtk-genio-720-ufs-v1-2-3bad8362ed70@baylibre.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ AJvYcCVHbOxyBYEkTB56LTNcX1y2/CjiFsfCIjWsY7HvHCc9P65hReId37WkfnL6sa7BVh+4PIwVZgk=@lists.denx.de
+X-Gm-Message-State: AOJu0YymVBVR28ACfZGr80QCLv4vNGw+jiS/+AJ2j38bTxXRUD0tBOyR
+ S2aUP/klMwl5fIuI53659WJfITzIVdAYo+7oM6yJ23wnVMFT4F8tphkfsV3LDgjXtfE=
+X-Gm-Gg: ATEYQzwuUkI1FlWGgOBQaZaDG82URRbldY1Xmys1GOVIyYSflDqHWwvNhBpG+eZ2alf
+ 8CSLArYlDBLBRDHDq+ZP16cL8J4WcumEHOpnjkI+kKPNZdN8UKvWlZuNbVHo4nPYR8VbkU4m3YP
+ g751DsMDqohyCdHtY1WibfLMx+fCvKtdjz/TgeFgQrE29225LiTJmhO1wq2Ck2+07eqsFiNPmVC
+ EaF35+kluArJY1haDgMwfsQT9leAHXMBdiZ1mgfM2YEsm5lwxqyhHUgf/b4fNC7iM3tvhavHZK/
+ fWY9tQMx3ThXIh/IifVcguNe5EjKlcNhvH904khiIlqp2dpXpAob6N4XuEiuYH4BBcxagrQCJ7W
+ LX+OaPsa5AogeLMn7Ouz6mzvEPgvmTCj1rM3940awuReM9tw/+3gvPmM19jNqazE0xMJWKwK7gi
+ 4JLCyc6Yv3lKx8JWB/HmvbdM8GVFU=
+X-Received: by 2002:a05:600c:a11a:b0:483:709e:f238 with SMTP id
+ 5b1f17b1804b1-48727ee5405mr177189515e9.29.1774940433322; 
+ Tue, 31 Mar 2026 00:00:33 -0700 (PDT)
+Received: from localhost ([195.52.184.245]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4887c884c10sm8806675e9.19.2026.03.31.00.00.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 31 Mar 2026 00:00:32 -0700 (PDT)
+Mime-Version: 1.0
+Content-Type: multipart/signed;
+ boundary=9a565b9683e0ac3540886abdc2bc590754cc48f5f2f6851fd83e60e14951;
+ micalg=pgp-sha512; protocol="application/pgp-signature"
+Date: Tue, 31 Mar 2026 09:00:22 +0200
+Message-Id: <DHGRV9DE9A3T.1I61RAHP95WSW@baylibre.com>
+Cc: "Andrew Goodbody" <andrew.goodbody@linaro.org>, "Casey Connolly"
+ <casey.connolly@linaro.org>, "Mattijs Korpershoek"
+ <mkorpershoek@kernel.org>, "Michal Simek" <michal.simek@amd.com>, "Simon
+ Glass" <sjg@chromium.org>, "Tom Rini" <trini@konsulko.com>
+Subject: Re: [PATCH] dm: Respect dma-ranges size
+From: "Markus Schneider-Pargmann" <msp@baylibre.com>
+To: "Marek Vasut" <marek.vasut@mailbox.org>, "Markus Schneider-Pargmann"
+ <msp@baylibre.com>, "Marek Vasut" <marek.vasut+renesas@mailbox.org>,
+ <u-boot@lists.denx.de>
+X-Mailer: aerc 0.21.0-126-g9e77103592fe
+References: <20260315235756.304972-1-marek.vasut+renesas@mailbox.org>
+ <DHG5MITAHNOS.3KKMVUI98SAZ0@baylibre.com>
+ <2c4f13c9-ff78-42c6-b770-71d06f59d522@mailbox.org>
+In-Reply-To: <2c4f13c9-ff78-42c6-b770-71d06f59d522@mailbox.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,38 +101,113 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/30/26 22:42, David Lechner wrote:
-> Remove spurious blank line and trailing comma of the zero terminator at
-> the end of the devicetree compatible list.
-> 
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
-> ---
->   drivers/ufs/ufs-mediatek.c | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
-> 
-> diff --git a/drivers/ufs/ufs-mediatek.c b/drivers/ufs/ufs-mediatek.c
-> index 2cf65a3185c..268627d5863 100644
-> --- a/drivers/ufs/ufs-mediatek.c
-> +++ b/drivers/ufs/ufs-mediatek.c
-> @@ -397,8 +397,7 @@ static const struct udevice_id ufs_mtk_ids[] = {
->   	{ .compatible = "mediatek,mt6878-ufshci" },
->   	{ .compatible = "mediatek,mt8183-ufshci" },
->   	{ .compatible = "mediatek,mt8195-ufshci" },
-> -
-> -	{},
-> +	{ }
->   };
->   
->   U_BOOT_DRIVER(mediatek_ufshci) = {
-> 
+--9a565b9683e0ac3540886abdc2bc590754cc48f5f2f6851fd83e60e14951
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+On Mon Mar 30, 2026 at 7:24 PM CEST, Marek Vasut wrote:
+> On 3/30/26 3:34 PM, Markus Schneider-Pargmann wrote:
+>
+> Hello Markus,
+>
+>> On Mon Mar 16, 2026 at 12:57 AM CET, Marek Vasut wrote:
+>>> Rework dev_phys_to_bus() and dev_bus_to_phys() to respect the size
+>>> of the area specified in dma-ranges DT property. The area outside
+>>> of ranges is remapped 1:1, while the area in the ranges is remapped
+>>> according to the description in the dma-ranges property.
+>>>
+>>> Adjust the test to test the area within the remapped range, not area
+>>> outside the remapped range, which was incorrect.
+>>>
+>>=20
+>> Should this have a Fixes tag?
+>>=20
+>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>=20
+>> Not a big expert, but this looks good to me:
+>>=20
+>> Reviewed-by: Markus Schneider-Pargmann <msp@baylibre.com>
+>
+> This was broken long enough, so this should go into next so it would get=
+=20
+> sufficient testing before the next release.
+>
+> [...]
+>
+>>> +++ b/include/dm/device.h
+>>> @@ -166,8 +166,9 @@ enum {
+>>>    *		When CONFIG_DEVRES is enabled, devm_kmalloc() and friends will
+>>>    *		add to this list. Memory so-allocated will be freed
+>>>    *		automatically when the device is removed / unbound
+>>> - * @dma_offset: Offset between the physical address space (CPU's) and =
+the
+>>> - *		device's bus address space
+>>> + * @dma_cpu: DMA physical address space (CPU's)
+>>> + * @dma_bus: DMA device's bus address space
+>>> + * @dma_size: DMA window size
+>>>    * @iommu: IOMMU device associated with this device
+>>>    */
+>>>   struct udevice {
+>>> @@ -196,7 +197,9 @@ struct udevice {
+>>>   	struct list_head devres_head;
+>>>   #endif
+>>>   #if CONFIG_IS_ENABLED(DM_DMA)
+>>> -	ulong dma_offset;
+>>> +	phys_addr_t dma_cpu;
+>>> +	dma_addr_t dma_bus;
+>>> +	u64 dma_size;
+>>>   #endif
+>
+> [...]
+>
+>>> +++ b/include/phys2bus.h
+>>> @@ -21,17 +21,23 @@ static inline unsigned long bus_to_phys(unsigned lo=
+ng bus)
+>>>   }
+>>>   #endif
+>>>  =20
+>>> -#if CONFIG_IS_ENABLED(DM)
+>>> +#if CONFIG_IS_ENABLED(DM_DMA)
+>>=20
+>> This is not related to the code changes right?
+>
+> It is, see the matching hunk above and below why this is guarded by DM_DM=
+A .
 
-Thanks,
-Neil
+Ah thanks, yes, the macro had the check for DM_DMA, I missed that.
+
+Best
+Markus
+
+>
+>>>   #include <dm/device.h>
+>>>  =20
+>>>   static inline dma_addr_t dev_phys_to_bus(struct udevice *dev, phys_ad=
+dr_t phys)
+>>>   {
+>>> -	return phys - dev_get_dma_offset(dev);
+>>> +	/* If the PA is in the remap range, apply remap. */
+>>> +	if (phys >=3D dev->dma_cpu && phys < dev->dma_cpu + dev->dma_size)
+>>> +		phys -=3D dev->dma_cpu - dev->dma_bus;
+>>> +	return phys;
+> [...]
+
+
+--9a565b9683e0ac3540886abdc2bc590754cc48f5f2f6851fd83e60e14951
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCactxBhsUgAAAAAAEAA5t
+YW51MiwyLjUrMS4xMiwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlPW
+EQEAtGGh0C6hlxhPs20XJPVDGFU/Z/m5bRcW3hy9ug+megEBAPyAQY1VtI2GZuEC
+MV3JsVH2HwME/HYfhLofQGaGk1QI
+=3j6u
+-----END PGP SIGNATURE-----
+
+--9a565b9683e0ac3540886abdc2bc590754cc48f5f2f6851fd83e60e14951--
