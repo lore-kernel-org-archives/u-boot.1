@@ -4,86 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C0E7FF60D9
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 08:01:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2874EFF60D9
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 08:01:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4E2A83DBF;
-	Tue, 31 Mar 2026 10:01:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1D0F88407B;
+	Tue, 31 Mar 2026 10:01:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dwQV5XvK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vHGJopH8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A0758405B; Tue, 31 Mar 2026 10:01:34 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 222E18405B; Tue, 31 Mar 2026 10:01:36 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F9B483A41
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 10:01:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E83BE83F5B
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 10:01:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4852a9c6309so45084845e9.0
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 01:01:31 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4853c1ca73aso54709935e9.2
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 01:01:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1774944090; x=1775548890; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=q0jmWFb8kYEGW6uRdI3HDRIBSMmwvpkaB0JZ8W0D4MM=;
- b=dwQV5XvK5SNEMsc45Tb/as9AEfz2cMeEI76KHy1jIWoJcUv6/jey3MjWTWuF74+ZrV
- UYE460kaDOuc0N19hAUxfaofqqgHb6ycfv0AzWSFkIfh5QwvBtw/8nNkEuftxxvA8cRG
- UFA7Nr0INs2DCeYmqahP8vPH32Sf1Tt4tlYRZQHelF/y9aw9WON51ij3iHtYunv4SsVw
- eEiClKngMNBNbcmxbNzn7xvUYFCwZJqpaI4Y1ge4a3l1knrhE06KApnQ2HNy7S/x7v3i
- xT+nWHUKQ/cEIPF5qjlqP8mHdnWvexElkt/e4JSNnZJZHoO+gbJIl15ESGKI4kjvqTir
- yxBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774944090; x=1775548890;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1774944093; x=1775548893; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=q0jmWFb8kYEGW6uRdI3HDRIBSMmwvpkaB0JZ8W0D4MM=;
- b=QSg+nUR8aA4pYIreRPUr7681OcuILMBO/fRILNzSYsaDtbb8XQF+dQh/TzKQPkZ63F
- XNnbbJKVkEkhRzs93eIdeRS7LPNYrDYSNWMPwTS/eHI2i4X7OSc4YV6IKRKg2m185Fzx
- sdNSet4P5T3nC/00NxOxau0lu/8rAZL5Xpz4cBO89lEWZ5MIK41hclWxDnJwAeq+/jOj
- WCFsEdlJ9Yq0gBHDhjAnXMHHN6G0neAe4hE8+4D4kH+ofbjyOtc+/6ITEUBH3v4YnOz3
- FMJ5QfqQh+ogkrfIhEp6lM+/xLAaZ2/cmcqZDwRSsirQIOALp9++i59bP4sYs1Bcbztv
- 4KLg==
+ bh=l4V9/9WOOFlrhZHPpG8CFQJNwO5yyEuFwNtfZb1CCIg=;
+ b=vHGJopH8lenwNa2A0UzshTj37Mgajncz0qILEebf2/cWqoIussvclLRyLZFXjhe+tk
+ NSwucouMOjSOROgZJSMB38l6+hGOFhgul5ytDbuKpry/E0DBKC0uKYRCBweCxTzjbRLl
+ 7e9ImVVtWzPKnZdnTlz3LF2Tk9KySbjzR44IVZ3I5MFz7WEZA7D3RgFWzBwlzhXjaiO1
+ 7q68BhkvuihzzY4svNbYb1JPRFjoucAgomF951praWanEh8TuUlJJIhJQdJokC7A2VoL
+ fZPa6pvKG76uSS4J3F3ch9aIX9/LX6E6T7R9HGdTJbMAk3SJ2MH/iQj8oeWSKLUfedEJ
+ vXbQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774944093; x=1775548893;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=l4V9/9WOOFlrhZHPpG8CFQJNwO5yyEuFwNtfZb1CCIg=;
+ b=B7UTCYFI0Spbc+AYBy/lQksL8RU+oxC7AVl2KKcS9HNkfUge9Xpx4ElqHtxNDiHF9u
+ 9Q7+QTFL16e/OnxKB/3YnHEeQBOODpW+n/PYByBrYYYhHqvvwn0HgT3DHxAp9bVn+Xew
+ 5K7EfM07njLf9+BM2sXxP/0GfitXP7VrTALDYJaUoqz1CJ8irqJ00t5wXFyU/eB4vzR8
+ lLhkqrA5mCUA+jOUIRfeb0xj8uPYulXGhOPudwIUvaz3OWu4bOVDdLaptDHe8RFJDwL5
+ VRMkubWvmxOUKYIzqzTTUXXl1DWnYEdvAAebP1UTTU0/vOGEiszFURYQLb0aAUoqNSaY
+ XQag==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU5LAT1XXcihp3EBqv2KrGlzEs+9/Sxsqi59WrYNAt5qM6UPqO97e2X7uPs9Nme3AAzJysaoaU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzVJudDqafgO0f3jdvXl6bjUuFcmFVL0IKhgoktP2q/AoEkcrLS
- ARtMjmHQUf2qbyUOtYSvBpYdWEuB04/JdhFzXx/pzTQV2Dy1PsNQ4/LAktkBzHlygScinCAB46m
- zZKSQ
-X-Gm-Gg: ATEYQzwFjHrSU8+BimxSqGw+zqUJKxC0I/TEy1Ns2plGWiY7ueakWOOaZgsP2QIT8lE
- dl5rJMoXE9f98xaRduJMaiSUd7h/dBQVfRF+oSkKUlGO4sQnGJscFm/wf+V1GD/nHZ3VNGjzMGq
- MCWuLoM+diDXecKe4F9yCSNiQnRXuCuLh/SlZAwSXITTLv5RQ3sAJeCOhuEXvl7T4H9m3unC2js
- Cz0AibLYpGBMQOsjFVj8Ls56q91O91kLb2b4zpJckha02WfoxAAmjFY+KQgAz8HvJzFyfV2cVwk
- CnR43Xjf5WAct3Wps4YuhNWmVrRdhavEqlT6whvIZ4PAARpGhA/oe3PbegyZblLoa8GO+WMQV6H
- SmaPNboP6kDGRMjOEzdwO7H0Q2PwConLx8mOpR8eY3Qn0gIt48gSiTT6VwlYi+UA3wEjelN3tNQ
- rKTnJ2yDKqUt3rizhjobalRiM9XlhWx3QzUCJLcksyd+cGKc6CLLzkslH+AMwcwfu/lf2uaMg6m
- NlmXNgUgyM+9ltFedvyUz1DYbd2PQcuxZN5fBoNSqmDkLwgGaEFDPC2XNPVVSQIqcvaToBI+cgI
- Fjzqyr86IxKMpMt/WSOh97Fi04gfi/IfZEPdazkrM+qQjEdp3CfO89mJqVwIgfYHWCBcyUWM7/r
- KDIJcycV7MFTgJ+YX0Cn7RZHxH3vokpJoB8AMfDZ9Pu8TodbGkCuaqF50DP4nS8Jv5KQbsLoKal
- /g4L8VTV+uZbFb6zmfqDI0lyaVWd7DoBUI9RQN5KBvjzvQMkwIIbEG8v3qskvns4aFc8VEVmc=
-X-Received: by 2002:a05:600c:1d86:b0:483:7783:537b with SMTP id
- 5b1f17b1804b1-4872807470fmr251941425e9.24.1774944090076; 
- Tue, 31 Mar 2026 01:01:30 -0700 (PDT)
+ AJvYcCWx4ivltc5pxa/MMwY/cNg58W7FdA8l4YiUTo4murdOW8p8T0v3qfQ8q+NR5G6V4VsLoIoWbEs=@lists.denx.de
+X-Gm-Message-State: AOJu0YzaJgTKmt49/kz8ObAGJDbOBHJIQsxZuGsIGQCzxBtjzGM2xt8v
+ WdoKHCtBcemKodDIZUcflc0QXNxoJt5ZEnFZ1Lb+E5q6TEsXJORRwBiSObr3q77/8ow=
+X-Gm-Gg: ATEYQzyYPU9np3mO5K7SQ4BtzTmojxOjzfCNX2CFDLjaFddtCd7mDKe7t4aK8Pqo4G/
+ Nb+fPv7L0dE2EMGdYT6tj0Rw98X/ZfxvNstQsv4agE3VHEbBcdL8QtDbqESGnaB7NbImJ7xL/st
+ tNS+LgtGNSmdWv+Ov86saPq3je7VfCWtZKBmv1QkDZlz2BSfeaD2puKCrsl2/Q7Z7YzBCtmBGtY
+ J9zn12N6Fsf2aHmnrmuLSE/tTPLx71r1ct/6SpERnJFFcAlo36uGQGIDAwhwUHW00ZMlg+tmdsC
+ IR6YFCH2iU+4izplzuv4A1V88FKYW1vRjdsaV4QRVTFHbcz13qMWEc4cDm/Id5JH3igwM+zH9Ap
+ g2A1bEeQSSRdCBxyZdv1L5eqC6K9fXm1P42jZV5c0SGyx5zhtj5L20AcDBmpWo+0x+xt/weclTx
+ cD9gJVvcomSXnUBMCacDbdOEvmJMvbsxQrPQpf0dwZa2OaQLUDyWQHY3xiUx6hQQvPlR5bEPLdH
+ YtZL2oNhs/iWbM61S5R7B8DIMs+kApCMMG2C86hLHYkjIFHfj7JMYn0w7MGxSNNsB7HL1xrFd3J
+ kp2shYdOjbJkCcf9pCBsEspBlx9/7FPpxFk/C5EL/7Dq1tBVEaecTiBhg0WQcGWsfgg6/1w0PW3
+ I5ebVR6zdMq4kenOSH2esEhph63DEqQqx45RII/sV1ndAdlq4eLanheEf1/JjlmqVTuCz3RQ5pu
+ ROVI6dcMCps4eaMxiL8VPs0mKwejWLM//i/6hty0nD3USn3bNM2PwwB45wJ3QP
+X-Received: by 2002:a05:600c:4e08:b0:487:1fb4:7b3 with SMTP id
+ 5b1f17b1804b1-48727ef0cc2mr285408885e9.23.1774944093096; 
+ Tue, 31 Mar 2026 01:01:33 -0700 (PDT)
 Received: from hera ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4887c9250afsm10087065e9.36.2026.03.31.01.01.29
+ 5b1f17b1804b1-4887c9250afsm10087065e9.36.2026.03.31.01.01.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Mar 2026 01:01:29 -0700 (PDT)
+ Tue, 31 Mar 2026 01:01:31 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: marek.vasut+renesas@mailbox.org,
 	trini@konsulko.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 0/4] Relocate U-Boot in the last bank
-Date: Tue, 31 Mar 2026 11:01:10 +0300
-Message-ID: <20260331080117.2370092-1-ilias.apalodimas@linaro.org>
+Subject: [PATCH v2 1/4] fdtdec: Deduplicate iterator function
+Date: Tue, 31 Mar 2026 11:01:11 +0300
+Message-ID: <20260331080117.2370092-2-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260331080117.2370092-1-ilias.apalodimas@linaro.org>
+References: <20260331080117.2370092-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -102,98 +104,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-This is v2 of [1]
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-There was a discussion recently on the mailing lists regarding our
-management of memory above ram_top [0]. The tl;dr is that we have two problems.
+Both fdtdec_setup_memory_banksize() and fdtdec_setup_mem_size_base_lowest()
+implement the exact same iterator over all memory banks, the only difference
+is the body that is executed for each bank. Deduplicate the functionality
+into iterator function fdtdec_setup_mem_for_each_bank(), which takes a
+function pointer to a function which implements the body as a parameter.
+No functional change.
 
-The first one is that U-Boot always relocates to the top of the first available
-bank unless there's special board code to sidestep that. The second is we don't
-successfully deal with devices that can only do 32-bit DMA.
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+ lib/fdtdec.c | 77 ++++++++++++++++++++--------------------------------
+ 1 file changed, 30 insertions(+), 47 deletions(-)
 
-This patch series deals with the first problem by adding a Kconfig option
-allowing platforms to relocate to the top of the last discovered bank.
-
-It's worth noting that this is easily testable with QEMU
-
-qemu-system-aarch64 -m 8192 -smp 2 -nographic -cpu cortex-a57 \
-    -machine virt,secure=off \
-    -bios u-boot.bin \
-    -device virtio-rng-pci \
-    -drive id=os,if=none,file="$image" \
-    -device virtio-blk-device,drive=os \
-    -object memory-backend-ram,id=ram0,size=4G \
-    -object memory-backend-ram,id=ram1,size=4G \
-    -numa node,memdev=ram0 \
-    -numa node,memdev=ram1
-
-# RELOCATE_LAST_BANK not set
-Hit any key to stop autoboot: 0
-=> bdinfo
-[...]
-relocaddr   = 0x000000013f66c000
-reloc off   = 0x000000013f66c000
-[...]
-lmb_dump_all:
- memory.count = 0x1
- memory[0]	[0x40000000-0x23fffffff], 0x200000000 bytes, flags: none
- reserved.count = 0x2
- reserved[0]	[0x13d507000-0x13d509fff], 0x3000 bytes, flags: no-notify, no-overwrite
- reserved[1]	[0x13d50aff0-0x23fffffff], 0x102af5010 bytes, flags: no-overwrite
-devicetree  = board
-[...]
-TLB addr    = 0x000000013ffe0000
-irq_sp      = 0x000000013e50aff0
-sp start    = 0x000000013e50aff0
-Early malloc usage: e88 / 2000
-=>
-
-# RELOCATE_LAST_BANK enabled
-
-=> bdinfo
-[...]
-relocaddr   = 0x000000023f66c000
-reloc off   = 0x000000023f66c000
-[...]
-lmb_dump_all:
- memory.count = 0x1
- memory[0]	[0x40000000-0x23fffffff], 0x200000000 bytes, flags: none
- reserved.count = 0x2
- reserved[0]	[0x23d507000-0x23d509fff], 0x3000 bytes, flags: no-notify, no-overwrite
- reserved[1]	[0x23d50aff0-0x23fffffff], 0x2af5010 bytes, flags: no-overwrite
-devicetree  = board
-[...]
-TLB addr    = 0x000000023ffe0000
-irq_sp      = 0x000000023e50aff0
-sp start    = 0x000000023e50aff0
-Early malloc usage: e88 / 2000
-=>
-
-[1] https://lore.kernel.org/u-boot/20260326115111.1631261-1-ilias.apalodimas@linaro.org/
-
-Changes since v1:
-- Adjusted the commit message of patch #4 and explain potential
-  breakages
-- ram_size recalculation is now split in its own function
-- Slighly better description of the Kconfig option
-- error checking on fdtdec_setup_mem_ram_top()
-
-Ilias Apalodimas (2):
-  fdtdec: Introduce fdtdec_setup_ram_size() to determine the memory size
-  common: Allow relocations on the top of the last bank
-
-Marek Vasut (2):
-  fdtdec: Deduplicate iterator function
-  fdtdec: Introduce fdtdec_setup_mem_ram_top() to determine end of
-    topmost DRAM bank
-
- Kconfig          |   7 ++++
- common/board_f.c |  15 +++++++
- include/fdtdec.h |  31 ++++++++++++++
- lib/fdtdec.c     | 105 ++++++++++++++++++++++++++++-------------------
- 4 files changed, 115 insertions(+), 43 deletions(-)
-
---
+diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+index c38738b48c79..d820f75b031d 100644
+--- a/lib/fdtdec.c
++++ b/lib/fdtdec.c
+@@ -1092,7 +1092,7 @@ ofnode get_next_memory_node(ofnode mem)
+ 	return mem;
+ }
+ 
+-int fdtdec_setup_memory_banksize(void)
++static int fdtdec_setup_mem_for_each_bank(void (*bankfn)(struct resource *res, int bank))
+ {
+ 	int bank, ret, reg = 0;
+ 	struct resource res;
+@@ -1120,63 +1120,46 @@ int fdtdec_setup_memory_banksize(void)
+ 		if (ret != 0)
+ 			return -EINVAL;
+ 
+-		gd->bd->bi_dram[bank].start = (phys_addr_t)res.start;
+-		gd->bd->bi_dram[bank].size =
+-			(phys_size_t)(res.end - res.start + 1);
+-
+-		debug("%s: DRAM Bank #%d: start = 0x%llx, size = 0x%llx\n",
+-		      __func__, bank,
+-		      (unsigned long long)gd->bd->bi_dram[bank].start,
+-		      (unsigned long long)gd->bd->bi_dram[bank].size);
++		bankfn(&res, bank);
+ 	}
+ 
+ 	return 0;
+ }
+ 
+-int fdtdec_setup_mem_size_base_lowest(void)
++static void fdtdec_setup_memory_banksize_bankfn(struct resource *res, int bank)
+ {
+-	int bank, ret, reg = 0;
+-	struct resource res;
+-	unsigned long base;
+-	phys_size_t size;
+-	ofnode mem = ofnode_null();
++	gd->bd->bi_dram[bank].start = (phys_addr_t)res->start;
++	gd->bd->bi_dram[bank].size = (phys_size_t)(res->end - res->start + 1);
+ 
+-	gd->ram_base = (unsigned long)~0;
+-
+-	mem = get_next_memory_node(mem);
+-	if (!ofnode_valid(mem)) {
+-		debug("%s: Missing /memory node\n", __func__);
+-		return -EINVAL;
+-	}
+-
+-	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+-		ret = ofnode_read_resource(mem, reg++, &res);
+-		if (ret < 0) {
+-			reg = 0;
+-			mem = get_next_memory_node(mem);
+-			if (!ofnode_valid(mem))
+-				break;
+-
+-			ret = ofnode_read_resource(mem, reg++, &res);
+-			if (ret < 0)
+-				break;
+-		}
+-
+-		if (ret != 0)
+-			return -EINVAL;
++	debug("%s: DRAM Bank #%d: start = 0x%llx, size = 0x%llx\n",
++	      __func__, bank,
++	      (unsigned long long)gd->bd->bi_dram[bank].start,
++	      (unsigned long long)gd->bd->bi_dram[bank].size);
++}
+ 
+-		base = (unsigned long)res.start;
+-		size = (phys_size_t)(res.end - res.start + 1);
++int fdtdec_setup_memory_banksize(void)
++{
++	return fdtdec_setup_mem_for_each_bank(fdtdec_setup_memory_banksize_bankfn);
++}
+ 
+-		if (gd->ram_base > base && size) {
+-			gd->ram_base = base;
+-			gd->ram_size = size;
+-			debug("%s: Initial DRAM base %lx size %lx\n",
+-			      __func__, base, (unsigned long)size);
+-		}
++static void fdtdec_setup_mem_size_base_lowest_bankfn(struct resource *res, int bank)
++{
++	unsigned long base = (unsigned long)res->start;
++	phys_size_t size = (phys_size_t)(res->end - res->start + 1);
++
++	if (gd->ram_base > base && size) {
++		gd->ram_base = base;
++		gd->ram_size = size;
++		debug("%s: Initial DRAM base %lx size %lx\n",
++		      __func__, base, (unsigned long)size);
+ 	}
++}
+ 
+-	return 0;
++int fdtdec_setup_mem_size_base_lowest(void)
++{
++	gd->ram_base = (unsigned long)~0;
++
++	return fdtdec_setup_mem_for_each_bank(fdtdec_setup_mem_size_base_lowest_bankfn);
+ }
+ 
+ static int uncompress_blob(const void *src, ulong sz_src, void **dstp)
+-- 
 2.53.0
 
