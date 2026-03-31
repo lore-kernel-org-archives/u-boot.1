@@ -4,138 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCD97109B463
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 13:05:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A48C109B464
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 13:08:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5194883DA6;
-	Tue, 31 Mar 2026 15:05:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
+	by phobos.denx.de (Postfix) with ESMTP id C0CF283DA6;
+	Tue, 31 Mar 2026 15:08:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="hF4mzGpC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TIIBsT89";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F06284010; Tue, 31 Mar 2026 15:05:20 +0200 (CEST)
-Received: from MRZP264CU002.outbound.protection.outlook.com
- (mail-francesouthazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 80B8684011; Tue, 31 Mar 2026 10:10:23 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA77283A41
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 15:05:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=softathome.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0282D83DBF
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 10:10:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=philippe.reynes@softathome.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WPAIH2PLsVoe9yp0b11ums2tVPhryfUwpeH2BozJ5iXt/lNnrFWZtoYLpaE9/GvJtWVfT5crQeLQfdpCAed6IulOBgHDPFqHynCJjF0gcnY+lYbAUKUaPe0ZQyUfvNh3fxlawG3sc/E+INsSbkJiHYqXRoS6RwPKWqN9jJx0mJ25tOZoLox/bGj0GDkvj9t+7fneL0WJpyEInwCPnNwe9u5ss49uISUvByUbr2hnIAiYk/7cOG0kZB738U8MvMCthxU9zy6Rlp52SLwyldfYkH/zuY3jfKYW3DTxH+Z3aKSjcgcp1cGWqgMYIQkoRSSIbLk5d6pMsBaDlUx/l0P/aw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xZ0Nk2tMFVimC4jZMnbJmPvemFZke98yxh1Fx3Q5Qw4=;
- b=N2bf3icgfg3U1zF/4IPIJLgE0F6DWEpbt2zNHezMhWGK4SbImBArY9C5OZyPg9MP2WB4eh1EkuO6+CRllPSXiy46ej3A6ywLSrJSW5l9A8Q4ov0CcCy2XXoH1BDkSM0RCrRE4rZcGeO5QOtu+IMIRF/dd4v/o11Z7R25c5e8/Bvu+rGhX7r+46GABxbqC5vO+PXcAzApNT/ZkvNMNish4OOJguMZCFsiFMtNhliLYHIHdKpF0epirNkeXPQkyYSckVtin8rA0MOn0cR9KmqITQh/VsglnzeZwYnChLvuQmuC6ZXqIr+qFeY6bK3cXe2Jpc+r/vqZp2OKSf6eCdhlDQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=softathome.com; dmarc=pass action=none
- header.from=softathome.com; dkim=pass header.d=softathome.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=fra.schnyder@gmail.com
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-43cfb723793so1237396f8f.2
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 01:10:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xZ0Nk2tMFVimC4jZMnbJmPvemFZke98yxh1Fx3Q5Qw4=;
- b=hF4mzGpCSyjyj6JobVgB95n82Za1AY2OFQCngBp/pKMJuFuxeTEGUGKbAaqIumjeU8zxVZP+lrk0Nq0B/5yqPpTfL9s6OkYrDcJZFkWOWipJop/7mjbSk2/3u9ASLxFNaBxHcstKjXpmV8fuI8yWwJsZpIhDU90R6Us56LXda9xsU0Wd+Io1w1FMgnR18zqOqa+190+Zjo4R514wKR4B8EbzYWfv+3Vb4uDzEDTe5r2Xx8e8paa0Um5taPNReU1RQ6XqYf2dCBrCUCObvfwFxf0ozMyHm9DCrhetmYA65P8mGrkbdEPu6lVygDlAjdsQfHBMpYj+Ua842oo51nzE4w==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=softathome.com;
-Received: from PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1d0::9)
- by PR1P264MB3711.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:143::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.28; Tue, 31 Mar
- 2026 13:05:14 +0000
-Received: from PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
- ([fe80::6e14:438b:5c18:8557]) by PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
- ([fe80::6e14:438b:5c18:8557%3]) with mapi id 15.20.9745.027; Tue, 31 Mar 2026
- 13:05:14 +0000
-Message-ID: <fdb2027c-c81d-4421-8f7f-13b75e733a45@softathome.com>
-Date: Tue, 31 Mar 2026 15:05:13 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2 4/9] drivers: crypto: add software ecdsa support
-To: Raymond Mao <raymondmaoca@gmail.com>
-Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com,
- u-boot@lists.denx.de
-References: <20260219132552.1499698-1-philippe.reynes@softathome.com>
- <20260219132552.1499698-5-philippe.reynes@softathome.com>
- <CAMDkj5xpnbA0m4XHZhxMeVRr8OvidUmJST8aAUSfR1bArnYn8A@mail.gmail.com>
-Content-Language: en-US
-From: Philippe Reynes <philippe.reynes@softathome.com>
-In-Reply-To: <CAMDkj5xpnbA0m4XHZhxMeVRr8OvidUmJST8aAUSfR1bArnYn8A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: PR1P264CA0161.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:347::18) To PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:1d0::9)
+ d=gmail.com; s=20251104; t=1774944620; x=1775549420; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=NNYYRz/5uEQDjcGONCxhSYsVP23SxxdQszr6+bgYWQ0=;
+ b=TIIBsT89t7pnKAg6tLeYuhigmxCDkSw1mNxi7g4LKchMC8HEKo1SZ8lc3C+QP1zrFM
+ nkXRxeHqaOFxN3YuM4FgH45kjaDXcnd7xi+cgR9HxNxrK3kdmPbIQWEXzhPIk4LlBP7D
+ 4Wozx+RVrqP0KSZy+iJaYTd71E/aS0Hpz7jC4PBRHZlxbTdqZ23//YzCbGrI4dQV8R6t
+ oXCgp0qRoPS6nS5eamIonT47QNUi0qTtGwa/SPQKDdWTjmrP4x2QHU8nofoI5bPJeS23
+ NoBJkBma+qDvFg0/vY8+zu4bBAyCzl9KTRLhCi7KgKxMJvNGGdiQ3sezLLIGin49ihEG
+ 7iOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1774944620; x=1775549420;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NNYYRz/5uEQDjcGONCxhSYsVP23SxxdQszr6+bgYWQ0=;
+ b=AKG5d8u4hSAYj1pW8X4Ji0WvbyEzai3nOO6qt4Ai0IY+pcOzP0uLU6djbJWajJQYHP
+ gtXKxpkzXEvPIlJr2/K65XIXuxlxAPZ42+pwUsBAKpifKdBMkPeCQdnFT46TFUbkp2nZ
+ Ui5L4xn0ttlAXL7rcsb3cupLBblY5vC0CZz7TB4jTG17MsrArUupCqPtq/xhGmcMSPo8
+ n56rcCWdXwNhgB5xFKkLSIjG88RQ/nR1Yr8f7JRYjLnd4iruuOuj9vpUHK8Qb61zP2Mj
+ gq6mY+J7GEmusddd+jGcF7KvQtpTWQtLdmj5ds6WcYDe/DNBcqa3wM6xKXHHqZohXbol
+ lhsg==
+X-Gm-Message-State: AOJu0YwMNyGOOIkdMQnPatLS/FhDmz6WRxgemw0RjEF1u54Yc2CkkWvQ
+ 6lGKD6mWBzaUPQEI67H+LNSLbRBXt9aBp+5G7RUCgfhR5INdLMV6uNs8nixBN0G3
+X-Gm-Gg: ATEYQzx98dUpIeh8SG5mHLLXv8nySaI7m4l0U8gff2LOh8/3Q7w6RFUQoyfjhFR2kLz
+ FuAhczJRwqvgLL4K2RUMLi0IA6CEZArMETnrewWxsOK9oHsy9HkX/jsgxH1dXrc5kDsiZzAOL5h
+ Vdpk7sWhyN7C8r05kTEnfTuA4HPvv4SYNiwRNhOBdyHpShDl2LBFFllgZ4fmX9pOfehN6gZQMnX
+ fl1aqvSBaXyRITxbFGLaoUOZvGEaAUn2baDa6iY6i87x4qgwLm9xdKBQzWXDdz4vNhLWvqxpJeC
+ KwvGwPWMrmtyFbACJnKQc8Wnbam3aPv3k/XsupEvQY8kWXXaMK7I52sjJM6jyWZ01LuTDNePkJj
+ ROT/kYHU6Eeaw+KnJG/WZF5Z13kMdgc62YMqz1YY5g4XBxQMJ/xNu18q1duV6tOUTXMZZp/jzPo
+ jxqhYmoJFlm1WkOAa+EKElBBqWeDZ4KQGKkCtQKFXvuILbLEeLO4s+76WUxK/tIOiLJ3NIg1RVg
+ hPTp8vXW7UbQQk+XPmJ45RLVTcfsLfWBHuG41IgRXWN9v6H2n4phFfd/HRbI/CBvdbi+1G3x/Mi
+X-Received: by 2002:a05:6000:2283:b0:43d:934:82 with SMTP id
+ ffacd0b85a97d-43d093400c4mr3829363f8f.21.1774944620028; 
+ Tue, 31 Mar 2026 01:10:20 -0700 (PDT)
+Received: from [127.0.1.1]
+ (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43cf257cbc3sm25038614f8f.35.2026.03.31.01.10.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 31 Mar 2026 01:10:19 -0700 (PDT)
+From: Franz Schnyder <fra.schnyder@gmail.com>
+Date: Tue, 31 Mar 2026 10:10:10 +0200
+Subject: [PATCH] board: toradex: Quote variables in `test` cmd expression
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PR0P264MB2741:EE_|PR1P264MB3711:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0aa533c1-8b47-4132-859a-08de8f2625a2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|10070799003|376014|366016|1800799024|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: gQZlNihzatBGJheJS1qQHi0Ej+Yid1nMt6F/6SPS+WuhOqBp5ggqyDLmoXqB7nJxBkM+K5v+JktddmDCe9Z2f4Bp/C7ut+Wk9I47la67kHQ5HOKm6Sv3Q2xeJcsr4+qnPrvcoBi9kjmXex1iKEbjcLwJtzXT6X3prV9bWVPkA3KZe0MJ5e+LYWtstOj3yIBQg/H0tq2bDOHPgaqb9hRI0Jn0OEozgL+fChz+qnEcYsA9P1s9rUIdDF1Bh+7Hy4hglQzBJfD4k0je5iSp9mTywP8XCfsmRNw/OklRkBGYHL9MIkgDa4QJnnbRCv2ZcmIPOLZCqLEr0H4z3pT6td+MiDHMnSxPWu0wCtFMwEVHH0zq4mjWqsO1BZRUiJbUzyjQybkxtOMiEAr6+UbBIyPYA44ne6AQzJx3yXgU7gmjRHlFuvy/1sT+5Mh9PO713OjprjswvMMDJbzMdea/SUdiufkN0v4tR6Raq8fGQSwqYJ1BaeDJPxCKu9ApjdZKq0Bw5GCbz5taFqLyx99z3p+y12TEoKskWvpsidbXH3+79CQDr1S8T7Z6hHdvIfuzBAW0B0FTvK+TEx0+o0XLPP/nDXQL1wAdlJ4QeLcEFgmRd+/7EmKNQBIeRA6E0J4RuPQdk7+rMU/x5bNW/tzjIHPMHZJ6xHBpN1SfsE6BQU5xiVlVrGYBV02HLW3blYf5Rjqx
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(10070799003)(376014)(366016)(1800799024)(56012099003)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?R0ZEb0xmNytKSDdENWpmMXowQjd5UWtVWGJxalg0d085b20yRnFSZHBZTU9K?=
- =?utf-8?B?SXhyWGhVNGZnR1VkRE5UN0dkYlNZNGsrd0NkUXM3QUxQNXFFajFjMjRjRnNk?=
- =?utf-8?B?OXgvdUNWU2c1N1JqLzBEOVBCRklKVjFpc0UwRTYybzYwWWMrS3UvQzV4ZFor?=
- =?utf-8?B?a3VRVVQ4eFVCeVd1UGJCTjRvU3o3OVM0bC9pVEEyZVhUTnB5TGNyOUxYQzFy?=
- =?utf-8?B?YmNpelE5MmY5RG96Q1FzeGppV09Ua1VKVGJXeFBKY3V2TGxoRU1QeHgvQXZL?=
- =?utf-8?B?ZDNuSmdXOEUzRyt1TzRxQWZrbVAyVWd5QlRNNEhsbW1OY1Z0WGZTb2ZCQnJh?=
- =?utf-8?B?cUdkUU9Oa21taitMWm5BS0NhTzJLVTY3Y2dXVXlNNk5wN1BMTVdJM1NCRU5G?=
- =?utf-8?B?L1V4M1lDQWdDeFBoUitlT25jNUF3M3pJaUpDSVZRYlN6Ui9qSVZLVGhFRlVD?=
- =?utf-8?B?bXkvRXd4dFFITHBMbmdZZ0Y1d2VhTkJYWnVzUm5icUVidzcrY05ZKzZOOTdW?=
- =?utf-8?B?WjJCb0FhRWpWTUhsdVQ5SU00bzU2bDczUkRiQk5oVGlJa2tlcEZWb1JwY0Zj?=
- =?utf-8?B?UVhDU3Fab21zWVhYUmRVNisxc0gwSmU1MTZibXZ5VlM5M3F3d3lxR2JCeUgw?=
- =?utf-8?B?Q29aSlZTeU1nUzk4SEtOa2tpWVIvZ05iOTFtTE1XMTBodjk2azgybUFodFA2?=
- =?utf-8?B?ZXBSOWNrY25zanFaSWRlWW9ZME1pU0J0UnRJR1psc0hiTU0rWlhHRlpQMDJp?=
- =?utf-8?B?elpiWGtIVHQwcHBySUQwbVdISXVMNzllWHArTzQwOW9mU0FJRFAvSmhCS0Q5?=
- =?utf-8?B?R2U0dXErREtnTGFLbFVCK1hUOVB5Vm1kQWx4UmJvdEhUM2Q4a2lEaCtkeUFB?=
- =?utf-8?B?YmU4TXBmWjNzWXRDSDBzbmgrNm9pYmIxSmtqcEtSQzl3VmxwYzhGRnczVUdB?=
- =?utf-8?B?NFVIV1dubHVhNnlOeGJ6clpYc056N0R2bjRVSTBuV2ZTOUNNajZjb2lYSkpX?=
- =?utf-8?B?YmQzMDhFejZkY3VWVXBwdFpXOFRnek1vUVlCNUplUlRXRHZVWmY5aWlxd2lN?=
- =?utf-8?B?MnAvY08xVlFLSmt0blBKendTclprSWpKRGJDUlorMGxTRnNIV0ZWZ20ramIv?=
- =?utf-8?B?QVo4ME0rK1F6enA2Qk1NSmdwNDhZTHpuU0IvWnlmQ0RwNFJoOWl3NGlacGJK?=
- =?utf-8?B?VlVFUWZlbk5kMGhRT2svczVScUNEeXFaZ1NSYS9raVdSeVZGVWVpbVl6Qi81?=
- =?utf-8?B?aUozMTd6bUMrcGZIOURNOVRsNk5XQjdMNGRIaE93YUdGWHcyTzhsV0drZHdR?=
- =?utf-8?B?S1pWdndPaVArVVRRY05ELzV2alo4M0NJaUFQSFhtVW5CZzhQWmNndlJ6MFUv?=
- =?utf-8?B?dUhnQVZGcU5xc2FEeDFEREFoSGlWUVNNYkRYVFIySkU1WlRyWThObzczbmJj?=
- =?utf-8?B?Rk5VdjViWWVRVjBESkxBenpObTRJelROSlorUDd0Z0NGU2Z4R0NXSE1YdW12?=
- =?utf-8?B?YTlkekRablRSS0FxbitzS2lXVU80STUrdVNmTVZMNHNFRHB1UlBLSHp3ZUEx?=
- =?utf-8?B?Wis4S01ja3NUY25uTVlHbGI1SkxFQ25pYWNTSG96elBqRzJQOUxXSmRUdDU2?=
- =?utf-8?B?bExhYnNkZS9xM0xteTY5RnB3MGpWNmYvR1Z0aVVHSmZoQ3FVNS9HQWp0dytS?=
- =?utf-8?B?UGNSOGZldTZ6UDhEb0dRdUgzRlJ0THR6R2hwTWpZSXVtNTR1eUl5SENycnlL?=
- =?utf-8?B?WDBKNitqQVkxRVdmWVUyeUxERnhHbk51eXg1U1BiZGhrUDE5M0FYc0E2OG9N?=
- =?utf-8?B?ZWNHOWFQSE5uVCtTSDk3NmRsYXNpcEN5ejhjVjZIclJVMndrY1VObEEwVHNB?=
- =?utf-8?B?UVh5dFZFemF1Sm1maENRTHIxYjN4UXZUYlNKRlV2ck02Z1lsL2dKVk0xVG53?=
- =?utf-8?B?RnR4N1dKUWR3K25qMVROZHRHSFFTS1ZqS0R6MjhGNFJLOFhhYlpLWVpjOW9m?=
- =?utf-8?B?emRmeWc5YkVKRFVlYnhXZWFZaEplR04zdHcxN0wvWVNWcXlCTGtxM25tM2Rv?=
- =?utf-8?B?clRyU2ZhUFBYNWVuTGpEdmNSVC9GL2grUGZuZWlFZW56dG1oWGxraE1EdjZJ?=
- =?utf-8?B?R3ZIbFA3Z0tJR0R0dlZ6RDUxL2RGUFpzL3NkR1MrcU1FVlROWHUva2ZtVGF2?=
- =?utf-8?B?K01WaXlUK05LKzc5ZU9MSkNwS0Z3U0M4eTN2QWVieVRrTVNkZmpFRXROOGd2?=
- =?utf-8?B?c005SzFUR1RESWFTejZYL3FISGgvN0pTWXJ5MGs0bkdTWlNzcGpMOFN2cEM4?=
- =?utf-8?B?ZDhmell2SDVvSnA1SG0vaU1IVDJRc2dkYUNNRm5CVVVEQ01ZZjNHOFlMVW5R?=
- =?utf-8?Q?+g4wYDUB2N5ljAJ2yHMWP+vEtcJcInUXl9d9ZdeU/Isej?=
-X-MS-Exchange-AntiSpam-MessageData-1: 1Nh9baFlmhGSyggCIhR1cEhIEr9uB+dRpx4=
-X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0aa533c1-8b47-4132-859a-08de8f2625a2
-X-MS-Exchange-CrossTenant-AuthSource: PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2026 13:05:14.0046 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: s9j8lJb8QM2+GGEOdgikiZEna8Yoho9I8Yw3Uv0n5B/oVd3dJXbWyS9ESwVL3faScI2cgLsNMOBuqpc/tHJXyXyuTyzohSAKDk8+mpv1VTs=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR1P264MB3711
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260331-fix-test-cmd-empty-v1-1-56cb93fc8f43@toradex.com>
+X-B4-Tracking: v=1; b=H4sIAGGBy2kC/x2MywqAIBAAf0X23IIP8tCvRAfTtfbQA5UopH9PO
+ g7MTIVMiSnDICokujjzsTdQnQC/un0h5NAYtNRWGiMx8o2FckG/BaTtLA86beeeYjRWKWjhmah
+ Z/3Sc3vcDR7lEQmQAAAA=
+X-Change-ID: 20260330-fix-test-cmd-empty-a26b5eff3611
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Rasmus Villemoes <ravi@prevas.dk>, 
+ Franz Schnyder <franz.schnyder@toradex.com>
+X-Mailer: b4 0.14.3
+X-Mailman-Approved-At: Tue, 31 Mar 2026 15:08:26 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,137 +105,347 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
+From: Franz Schnyder <franz.schnyder@toradex.com>
 
+With correct POSIX handling, unquoted empty variables can turn the
+expression like
+	test -n ${fdtfile}
+into
+	test -n
 
-Le 20/02/2026 à 17:40, Raymond Mao a écrit :
-> This Mail comes from Outside of SoftAtHome: Do not answer, click links or open attachments unless you recognize the sender and know the content is safe.
->
-> Hi Philippe,
->
-> On Thu, Feb 19, 2026 at 8:26 AM Philippe Reynes
-> <philippe.reynes@softathome.com> wrote:
->> Add an software ecdsa driver so it is
->> now possible to use ecdsa signature on
->> board without ecdsa hardware support.
->>
->> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
->> ---
->> v2:
->> - no change
->>
->>   drivers/crypto/Kconfig          |  2 ++
->>   drivers/crypto/Makefile         |  1 +
->>   drivers/crypto/ecdsa/Kconfig    |  6 ++++++
->>   drivers/crypto/ecdsa/Makefile   |  6 ++++++
->>   drivers/crypto/ecdsa/ecdsa-sw.c | 33 +++++++++++++++++++++++++++++++++
->>   5 files changed, 48 insertions(+)
->>   create mode 100644 drivers/crypto/ecdsa/Kconfig
->>   create mode 100644 drivers/crypto/ecdsa/Makefile
->>   create mode 100644 drivers/crypto/ecdsa/ecdsa-sw.c
->>
->> diff --git a/drivers/crypto/Kconfig b/drivers/crypto/Kconfig
->> index 0d58e3910fe..cf49e5c0f7e 100644
->> --- a/drivers/crypto/Kconfig
->> +++ b/drivers/crypto/Kconfig
->> @@ -12,4 +12,6 @@ source "drivers/crypto/nuvoton/Kconfig"
->>
->>   source "drivers/crypto/tegra/Kconfig"
->>
->> +source "drivers/crypto/ecdsa/Kconfig"
->> +
->>   endmenu
->> diff --git a/drivers/crypto/Makefile b/drivers/crypto/Makefile
->> index e4a4482b7f3..8170e4cae9c 100644
->> --- a/drivers/crypto/Makefile
->> +++ b/drivers/crypto/Makefile
->> @@ -4,6 +4,7 @@
->>   #      http://www.samsung.com/
->>
->>   obj-$(CONFIG_EXYNOS_ACE_SHA)   += ace_sha.o
->> +obj-$(CONFIG_ECDSA) += ecdsa/
->>   obj-y += aes/
->>   obj-y += rsa_mod_exp/
->>   obj-y += fsl/
->> diff --git a/drivers/crypto/ecdsa/Kconfig b/drivers/crypto/ecdsa/Kconfig
->> new file mode 100644
->> index 00000000000..308824d8421
->> --- /dev/null
->> +++ b/drivers/crypto/ecdsa/Kconfig
->> @@ -0,0 +1,6 @@
->> +config ECDSA_SW
->> +       bool "Enable driver for ECDSA in software"
->> +       depends on ECDSA_MBEDTLS
->> +       help
->> +         Enable driver for ECDSA operations in software. Currently
->> +         it supports multiple ECDSA algorithm.
->
-> Same comments as I placed in your patch [0/9], ECDSA_SW is not
-> required and can be replaced by ECDSA_MBEDTLS.
-I have discovered that this driver should also depend on ECDSA_VERIFY.
-Otherwise we may define a driver (defined in this file) without a device 
-(defined in lib/ecdsa/ecdsa-verify.c),
-and that leads to a crash à boot.
-So I have kept this config in v3.
+The POSIX handling for single argument `test` evaluates it as true,
+so the fallback initialization will be skipped unexpectedly.
+Quoting variable expansions in `test` expressions will always result in
+correct behavior for empty and non-empty values.
+This change was triggered by
+commit 8b0619579b22 ("cmd: test: fix handling of single-argument form of test")
+The aim is to have a less fragile codebase that is not dependent on a
+quirk of the shell implementation.
 
->
-> Regards,
-> Raymond
-Regards,
-Philippe
+Use quoted variable expansions in `test` expressions throughout.
 
->
->> diff --git a/drivers/crypto/ecdsa/Makefile b/drivers/crypto/ecdsa/Makefile
->> new file mode 100644
->> index 00000000000..8f9e5a767f8
->> --- /dev/null
->> +++ b/drivers/crypto/ecdsa/Makefile
->> @@ -0,0 +1,6 @@
->> +# SPDX-License-Identifier: GPL-2.0+
->> +#
->> +# Copyright (C) 2026 Philippe Reynes <philippe.reynes@softathome.com>
->> +#
->> +
->> +obj-$(CONFIG_ECDSA_SW) += ecdsa-sw.o
->> diff --git a/drivers/crypto/ecdsa/ecdsa-sw.c b/drivers/crypto/ecdsa/ecdsa-sw.c
->> new file mode 100644
->> index 00000000000..0d526371ecb
->> --- /dev/null
->> +++ b/drivers/crypto/ecdsa/ecdsa-sw.c
->> @@ -0,0 +1,33 @@
->> +// SPDX-License-Identifier: GPL-2.0+
->> +/*
->> + * Copyright (C) 2026 Philippe Reynes <philippe.reynes@softathome.com>
->> + */
->> +#include <dm/device.h>
->> +#include <linux/types.h>
->> +#include <u-boot/ecdsa.h>
->> +#include <crypto/ecdsa-uclass.h>
->> +#include <dm/platdata.h>
->> +#include <crypto/internal/sw_ecdsa.h>
->> +
->> +static int ops_sw_ecdsa_verify(__always_unused struct udevice *dev,
->> +                              const struct ecdsa_public_key *pubkey,
->> +                              const void *hash, size_t hash_len,
->> +                              const void *signature, size_t sig_len)
->> +{
->> +       return sw_ecdsa_verify(pubkey, hash, hash_len, signature, sig_len);
->> +}
->> +
->> +static const struct ecdsa_ops sw_ecdsa_ops = {
->> +       .verify = ops_sw_ecdsa_verify,
->> +};
->> +
->> +U_BOOT_DRIVER(sw_ecdsa) = {
->> +       .name   = "sw_ecdsa",
->> +       .id     = UCLASS_ECDSA,
->> +       .ops    = &sw_ecdsa_ops,
->> +       .flags  = DM_FLAG_PRE_RELOC,
->> +};
->> +
->> +U_BOOT_DRVINFO(sw_ecdsa) = {
->> +       .name = "sw_ecdsa",
->> +};
->> --
->> 2.43.0
->>
+Signed-off-by: Franz Schnyder <franz.schnyder@toradex.com>
+---
+ board/toradex/aquila-am69/aquila-am69.env   | 6 +++---
+ board/toradex/smarc-imx8mp/smarc-imx8mp.env | 2 +-
+ board/toradex/smarc-imx95/smarc-imx95.env   | 2 +-
+ board/toradex/verdin-am62p/verdin-am62p.env | 6 +++---
+ configs/apalis-imx8_defconfig               | 2 +-
+ configs/apalis_imx6_defconfig               | 2 +-
+ configs/aquila-am69_a72_defconfig           | 2 +-
+ configs/colibri-imx6ull-emmc_defconfig      | 2 +-
+ configs/colibri-imx6ull_defconfig           | 2 +-
+ configs/colibri-imx8x_defconfig             | 2 +-
+ configs/colibri_imx6_defconfig              | 2 +-
+ configs/colibri_imx7_defconfig              | 2 +-
+ configs/colibri_imx7_emmc_defconfig         | 2 +-
+ configs/colibri_vf_defconfig                | 2 +-
+ configs/toradex-smarc-imx8mp_defconfig      | 2 +-
+ configs/toradex-smarc-imx95_defconfig       | 2 +-
+ configs/verdin-am62_a53_defconfig           | 2 +-
+ configs/verdin-am62p_a53_defconfig          | 2 +-
+ configs/verdin-imx8mm_defconfig             | 2 +-
+ configs/verdin-imx8mp_defconfig             | 2 +-
+ 20 files changed, 24 insertions(+), 24 deletions(-)
+
+diff --git a/board/toradex/aquila-am69/aquila-am69.env b/board/toradex/aquila-am69/aquila-am69.env
+index f8b7363dcf5..ac2828e0b58 100644
+--- a/board/toradex/aquila-am69/aquila-am69.env
++++ b/board/toradex/aquila-am69/aquila-am69.env
+@@ -21,21 +21,21 @@ dfu_alt_info_ram=
+ 
+ update_tiboot3=
+ 		askenv confirm Did you load tiboot3.bin (y/N)?;
+-		if test $confirm = y; then
++		if test "$confirm" = y; then
+ 			setexpr blkcnt ${filesize} + 0x1ff && setexpr blkcnt ${blkcnt} / 0x200;
+ 			mmc dev 0 1; mmc write ${loadaddr} 0x0 ${blkcnt};
+ 		fi
+ 
+ update_tispl=
+ 		askenv confirm Did you load tispl.bin (y/N)?;
+-		if test $confirm = y; then
++		if test "$confirm" = y; then
+ 			setexpr blkcnt ${filesize} + 0x1ff && setexpr blkcnt ${blkcnt} / 0x200;
+ 			mmc dev 0 1; mmc write ${loadaddr} 0x400 ${blkcnt};
+ 		fi
+ 
+ update_uboot=
+ 		askenv confirm Did you load u-boot.img (y/N)?;
+-		if test $confirm = y; then
++		if test "$confirm" = y; then
+ 			setexpr blkcnt ${filesize} + 0x1ff && setexpr blkcnt ${blkcnt} / 0x200;
+ 			mmc dev 0 1; mmc write ${loadaddr} 0x1400 ${blkcnt};
+ 		fi
+diff --git a/board/toradex/smarc-imx8mp/smarc-imx8mp.env b/board/toradex/smarc-imx8mp/smarc-imx8mp.env
+index 58f152e6b51..1480db8e5fc 100644
+--- a/board/toradex/smarc-imx8mp/smarc-imx8mp.env
++++ b/board/toradex/smarc-imx8mp/smarc-imx8mp.env
+@@ -13,7 +13,7 @@ scriptaddr=0x50280000
+ 
+ update_uboot=
+ 		askenv confirm Did you load flash.bin (y/N)?;
+-		if test $confirm = y; then
++		if test "$confirm" = y; then
+ 			setexpr blkcnt ${filesize} + 0x1ff && setexpr blkcnt
+ 			${blkcnt} / 0x200; mmc dev 0 1; mmc write ${loadaddr} 0x0
+ 			${blkcnt};
+diff --git a/board/toradex/smarc-imx95/smarc-imx95.env b/board/toradex/smarc-imx95/smarc-imx95.env
+index b94250bbc52..35d26b7cfba 100644
+--- a/board/toradex/smarc-imx95/smarc-imx95.env
++++ b/board/toradex/smarc-imx95/smarc-imx95.env
+@@ -13,7 +13,7 @@ scriptaddr=0x9c600000
+ 
+ update_uboot=
+ 		askenv confirm Did you load flash.bin (y/N)?;
+-		if test $confirm = y; then
++		if test "$confirm" = y; then
+ 			setexpr blkcnt ${filesize} + 0x1ff && setexpr blkcnt
+ 			${blkcnt} / 0x200; mmc dev 0 1; mmc write ${loadaddr} 0x0
+ 			${blkcnt};
+diff --git a/board/toradex/verdin-am62p/verdin-am62p.env b/board/toradex/verdin-am62p/verdin-am62p.env
+index f8b7363dcf5..ac2828e0b58 100644
+--- a/board/toradex/verdin-am62p/verdin-am62p.env
++++ b/board/toradex/verdin-am62p/verdin-am62p.env
+@@ -21,21 +21,21 @@ dfu_alt_info_ram=
+ 
+ update_tiboot3=
+ 		askenv confirm Did you load tiboot3.bin (y/N)?;
+-		if test $confirm = y; then
++		if test "$confirm" = y; then
+ 			setexpr blkcnt ${filesize} + 0x1ff && setexpr blkcnt ${blkcnt} / 0x200;
+ 			mmc dev 0 1; mmc write ${loadaddr} 0x0 ${blkcnt};
+ 		fi
+ 
+ update_tispl=
+ 		askenv confirm Did you load tispl.bin (y/N)?;
+-		if test $confirm = y; then
++		if test "$confirm" = y; then
+ 			setexpr blkcnt ${filesize} + 0x1ff && setexpr blkcnt ${blkcnt} / 0x200;
+ 			mmc dev 0 1; mmc write ${loadaddr} 0x400 ${blkcnt};
+ 		fi
+ 
+ update_uboot=
+ 		askenv confirm Did you load u-boot.img (y/N)?;
+-		if test $confirm = y; then
++		if test "$confirm" = y; then
+ 			setexpr blkcnt ${filesize} + 0x1ff && setexpr blkcnt ${blkcnt} / 0x200;
+ 			mmc dev 0 1; mmc write ${loadaddr} 0x1400 ${blkcnt};
+ 		fi
+diff --git a/configs/apalis-imx8_defconfig b/configs/apalis-imx8_defconfig
+index 6ab4dd3dc57..17090ac682b 100644
+--- a/configs/apalis-imx8_defconfig
++++ b/configs/apalis-imx8_defconfig
+@@ -25,7 +25,7 @@ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=1
+ CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile ${soc}-apalis${variant}-${fdt_board}.dtb"
++CONFIG_PREBOOT="test -n \"${fdtfile}\" || setenv fdtfile ${soc}-apalis${variant}-${fdt_board}.dtb"
+ CONFIG_SYS_CBSIZE=2048
+ CONFIG_SYS_PBSIZE=2068
+ CONFIG_LOG=y
+diff --git a/configs/apalis_imx6_defconfig b/configs/apalis_imx6_defconfig
+index cd9811aca61..791be4df283 100644
+--- a/configs/apalis_imx6_defconfig
++++ b/configs/apalis_imx6_defconfig
+@@ -31,7 +31,7 @@ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=1
+ CONFIG_BOOTCOMMAND="run distro_bootcmd; usb start; setenv stdout serial,vidconsole; setenv stdin serial,usbkbd"
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx6q-apalis${variant}-${fdt_board}.dtb"
++CONFIG_PREBOOT="test -n \"${fdtfile}\" || setenv fdtfile imx6q-apalis${variant}-${fdt_board}.dtb"
+ CONFIG_SYS_CBSIZE=1024
+ CONFIG_SYS_PBSIZE=1055
+ CONFIG_SYS_CONSOLE_OVERWRITE_ROUTINE=y
+diff --git a/configs/aquila-am69_a72_defconfig b/configs/aquila-am69_a72_defconfig
+index 0f85b228b06..0237a703813 100644
+--- a/configs/aquila-am69_a72_defconfig
++++ b/configs/aquila-am69_a72_defconfig
+@@ -34,7 +34,7 @@ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=1
+ CONFIG_BOOTCOMMAND="bootflow scan -b"
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile k3-am69-aquila-${fdt_board}.dtb"
++CONFIG_PREBOOT="test -n \"${fdtfile}\" || setenv fdtfile k3-am69-aquila-${fdt_board}.dtb"
+ CONFIG_LOG=y
+ # CONFIG_DISPLAY_BOARDINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+diff --git a/configs/colibri-imx6ull-emmc_defconfig b/configs/colibri-imx6ull-emmc_defconfig
+index 439ddeb8f0b..c54ff48fdf7 100644
+--- a/configs/colibri-imx6ull-emmc_defconfig
++++ b/configs/colibri-imx6ull-emmc_defconfig
+@@ -18,7 +18,7 @@ CONFIG_FIT_VERBOSE=y
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=1
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx6ull-colibri${variant}-${fdt_board}.dtb"
++CONFIG_PREBOOT="test -n \"${fdtfile}\" || setenv fdtfile imx6ull-colibri${variant}-${fdt_board}.dtb"
+ CONFIG_SYS_PBSIZE=547
+ CONFIG_SYS_CONSOLE_IS_IN_ENV=y
+ # CONFIG_DISPLAY_BOARDINFO is not set
+diff --git a/configs/colibri-imx6ull_defconfig b/configs/colibri-imx6ull_defconfig
+index 1c400f9534d..cda7a6ada3a 100644
+--- a/configs/colibri-imx6ull_defconfig
++++ b/configs/colibri-imx6ull_defconfig
+@@ -21,7 +21,7 @@ CONFIG_BOOTDELAY=1
+ CONFIG_OF_ENV_SETUP=y
+ CONFIG_BOOTCOMMAND="run ubiboot || run distro_bootcmd;"
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx6ull-colibri${variant}-${fdt_board}.dtb"
++CONFIG_PREBOOT="test -n \"${fdtfile}\" || setenv fdtfile imx6ull-colibri${variant}-${fdt_board}.dtb"
+ CONFIG_SYS_PBSIZE=547
+ CONFIG_SYS_CONSOLE_IS_IN_ENV=y
+ # CONFIG_DISPLAY_BOARDINFO is not set
+diff --git a/configs/colibri-imx8x_defconfig b/configs/colibri-imx8x_defconfig
+index fd6a6b47fcf..3300922b172 100644
+--- a/configs/colibri-imx8x_defconfig
++++ b/configs/colibri-imx8x_defconfig
+@@ -26,7 +26,7 @@ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=1
+ CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile ${soc}-colibri-${fdt_board}.dtb"
++CONFIG_PREBOOT="test -n \"${fdtfile}\" || setenv fdtfile ${soc}-colibri-${fdt_board}.dtb"
+ CONFIG_SYS_CBSIZE=2048
+ CONFIG_SYS_PBSIZE=2068
+ CONFIG_LOG=y
+diff --git a/configs/colibri_imx6_defconfig b/configs/colibri_imx6_defconfig
+index 0f5abb51f76..34037e1c134 100644
+--- a/configs/colibri_imx6_defconfig
++++ b/configs/colibri_imx6_defconfig
+@@ -30,7 +30,7 @@ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=1
+ CONFIG_BOOTCOMMAND="run distro_bootcmd; usb start; setenv stdout serial,vidconsole; setenv stdin serial,usbkbd"
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx6dl-colibri${variant}-${fdt_board}.dtb"
++CONFIG_PREBOOT="test -n \"${fdtfile}\" || setenv fdtfile imx6dl-colibri${variant}-${fdt_board}.dtb"
+ CONFIG_SYS_CBSIZE=1024
+ CONFIG_SYS_PBSIZE=1056
+ CONFIG_SYS_CONSOLE_OVERWRITE_ROUTINE=y
+diff --git a/configs/colibri_imx7_defconfig b/configs/colibri_imx7_defconfig
+index 2a3cb84c3b6..8a84f49f42f 100644
+--- a/configs/colibri_imx7_defconfig
++++ b/configs/colibri_imx7_defconfig
+@@ -22,7 +22,7 @@ CONFIG_BOOTDELAY=1
+ CONFIG_OF_ENV_SETUP=y
+ CONFIG_BOOTCOMMAND="run ubiboot ; echo ; echo ubiboot failed ; run distro_bootcmd;"
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile ${soc}-colibri${variant}-${fdt_board}.dtb "
++CONFIG_PREBOOT="test -n \"${fdtfile}\" || setenv fdtfile ${soc}-colibri${variant}-${fdt_board}.dtb "
+ CONFIG_SYS_PBSIZE=544
+ CONFIG_SYS_CONSOLE_IS_IN_ENV=y
+ # CONFIG_DISPLAY_BOARDINFO is not set
+diff --git a/configs/colibri_imx7_emmc_defconfig b/configs/colibri_imx7_emmc_defconfig
+index a95a3214d0c..4c661d4cda1 100644
+--- a/configs/colibri_imx7_emmc_defconfig
++++ b/configs/colibri_imx7_emmc_defconfig
+@@ -19,7 +19,7 @@ CONFIG_FIT_VERBOSE=y
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=1
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile ${soc}-colibri${variant}-${fdt_board}.dtb"
++CONFIG_PREBOOT="test -n \"${fdtfile}\" || setenv fdtfile ${soc}-colibri${variant}-${fdt_board}.dtb"
+ CONFIG_SYS_PBSIZE=544
+ CONFIG_SYS_CONSOLE_IS_IN_ENV=y
+ # CONFIG_DISPLAY_BOARDINFO is not set
+diff --git a/configs/colibri_vf_defconfig b/configs/colibri_vf_defconfig
+index 1364fe45291..4ce14baef4f 100644
+--- a/configs/colibri_vf_defconfig
++++ b/configs/colibri_vf_defconfig
+@@ -23,7 +23,7 @@ CONFIG_FDT_FIXUP_PARTITIONS=y
+ CONFIG_USE_BOOTCOMMAND=y
+ CONFIG_BOOTCOMMAND="run ubiboot || run distro_bootcmd;"
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile ${soc}-colibri-${fdt_board}.dtb"
++CONFIG_PREBOOT="test -n \"${fdtfile}\" || setenv fdtfile ${soc}-colibri-${fdt_board}.dtb"
+ CONFIG_SYS_PBSIZE=1056
+ CONFIG_LOGLEVEL=3
+ # CONFIG_DISPLAY_BOARDINFO is not set
+diff --git a/configs/toradex-smarc-imx8mp_defconfig b/configs/toradex-smarc-imx8mp_defconfig
+index 13a0e5f028b..7be67df3130 100644
+--- a/configs/toradex-smarc-imx8mp_defconfig
++++ b/configs/toradex-smarc-imx8mp_defconfig
+@@ -40,7 +40,7 @@ CONFIG_BOOTDELAY=1
+ CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_BOOTCOMMAND="bootflow scan -b"
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx8mp-toradex-smarc-dev.dtb"
++CONFIG_PREBOOT="test -n \"${fdtfile}\" || setenv fdtfile imx8mp-toradex-smarc-dev.dtb"
+ CONFIG_SYS_CBSIZE=2048
+ CONFIG_SYS_PBSIZE=2081
+ CONFIG_LOG=y
+diff --git a/configs/toradex-smarc-imx95_defconfig b/configs/toradex-smarc-imx95_defconfig
+index ad908949b59..4faff7977df 100644
+--- a/configs/toradex-smarc-imx95_defconfig
++++ b/configs/toradex-smarc-imx95_defconfig
+@@ -37,7 +37,7 @@ CONFIG_BOOTDELAY=1
+ CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_BOOTCOMMAND="bootflow scan -b"
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx95-toradex-smarc-${fdt_board}.dtb"
++CONFIG_PREBOOT="test -n \"${fdtfile}\" || setenv fdtfile imx95-toradex-smarc-${fdt_board}.dtb"
+ CONFIG_SYS_CBSIZE=2048
+ CONFIG_SYS_PBSIZE=2074
+ CONFIG_LOG=y
+diff --git a/configs/verdin-am62_a53_defconfig b/configs/verdin-am62_a53_defconfig
+index f04858099da..3f3cd2a53b1 100644
+--- a/configs/verdin-am62_a53_defconfig
++++ b/configs/verdin-am62_a53_defconfig
+@@ -34,7 +34,7 @@ CONFIG_FIT_VERBOSE=y
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=1
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile k3-am625-verdin-${variant}-${fdt_board}.dtb"
++CONFIG_PREBOOT="test -n \"${fdtfile}\" || setenv fdtfile k3-am625-verdin-${variant}-${fdt_board}.dtb"
+ CONFIG_LOG=y
+ # CONFIG_DISPLAY_BOARDINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+diff --git a/configs/verdin-am62p_a53_defconfig b/configs/verdin-am62p_a53_defconfig
+index 3dbffa78662..6cca7427485 100644
+--- a/configs/verdin-am62p_a53_defconfig
++++ b/configs/verdin-am62p_a53_defconfig
+@@ -36,7 +36,7 @@ CONFIG_BOOTDELAY=1
+ CONFIG_OF_BOARD_SETUP_EXTENDED=y
+ CONFIG_BOOTCOMMAND="bootflow scan -b"
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile k3-am62p5-verdin-${variant}-${fdt_board}.dtb"
++CONFIG_PREBOOT="test -n \"${fdtfile}\" || setenv fdtfile k3-am62p5-verdin-${variant}-${fdt_board}.dtb"
+ CONFIG_LOG=y
+ # CONFIG_DISPLAY_BOARDINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+diff --git a/configs/verdin-imx8mm_defconfig b/configs/verdin-imx8mm_defconfig
+index 45437205837..88f337bd347 100644
+--- a/configs/verdin-imx8mm_defconfig
++++ b/configs/verdin-imx8mm_defconfig
+@@ -33,7 +33,7 @@ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=1
+ CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx8mm-verdin-${variant}-${fdt_board}.dtb"
++CONFIG_PREBOOT="test -n \"${fdtfile}\" || setenv fdtfile imx8mm-verdin-${variant}-${fdt_board}.dtb"
+ CONFIG_SYS_CBSIZE=2048
+ CONFIG_SYS_PBSIZE=2081
+ CONFIG_LOG=y
+diff --git a/configs/verdin-imx8mp_defconfig b/configs/verdin-imx8mp_defconfig
+index 99749c50194..ca815b9de78 100644
+--- a/configs/verdin-imx8mp_defconfig
++++ b/configs/verdin-imx8mp_defconfig
+@@ -42,7 +42,7 @@ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=1
+ CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_USE_PREBOOT=y
+-CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx8mp-verdin-${variant}-${fdt_board}.dtb"
++CONFIG_PREBOOT="test -n \"${fdtfile}\" || setenv fdtfile imx8mp-verdin-${variant}-${fdt_board}.dtb"
+ CONFIG_SYS_CBSIZE=2048
+ CONFIG_SYS_PBSIZE=2081
+ CONFIG_LOG=y
+
+---
+base-commit: d9eee3d17882ec40f8ca5e231046bbf287ab4369
+change-id: 20260330-fix-test-cmd-empty-a26b5eff3611
+
+Best regards,
+-- 
+Franz Schnyder <franz.schnyder@toradex.com>
+
