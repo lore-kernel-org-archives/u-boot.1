@@ -4,101 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69FFB109B467
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 13:08:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86B2F109B474
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 14:28:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B31D84073;
-	Tue, 31 Mar 2026 15:08:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sifive.com
+	by phobos.denx.de (Postfix) with ESMTP id BDAB183DA6;
+	Tue, 31 Mar 2026 16:28:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sifive.com header.i=@sifive.com header.b="B7VdfhhV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IU1WSZoV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADF3B84011; Tue, 31 Mar 2026 15:01:19 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id 342D383DA7; Tue, 31 Mar 2026 16:28:13 +0200 (CEST)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 585E983A41
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 15:01:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C714A83A41
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 16:28:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sifive.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jimmy.ho@sifive.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-46708149af2so3231847b6e.0
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 06:01:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774962076; cv=none;
- d=google.com; s=arc-20240605;
- b=ba5Q7GkPhywGXzr/4cWDzjKY5xs/vMQmPHwOJ/IBjMG0//WDVWSdVuXo2BcudfkBRP
- uvM2w2l18YLLzpX8hT0e5xJYGu0YXy0G7LzUCZgBLV9ut3QeeggeVmZVvfIQkJ4D6nXE
- u+ySTi6+eo3uNTd0HOjeWRztoVvHyQ8Kc8BvYkKs+HQXeZEakC7Y/DorSoyh1lgBjpIO
- eE/ZsmrKdPHZoPAzPQaCbC9unGCeG49AwguvXzJ0z9nE7peKveyxWbHqeMngNYmY6mPX
- tOFF7a0iRdGcqJBAasZb6BkPJBL07Rn8FQDnHXhV4yBgTp6Qav0CF62d1Vkykh1dUYRR
- pqPg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=dVST5uMheWxMw8Coninb63X5eh+KXVwP+rKC9ThKQjc=;
- fh=U2Z2AAf+0KFq4rU93U2jM/ZGAPn6fMbRi+4UqR11gtw=;
- b=jOsQuaLq10ZtYdgwHZCOY+ohNUUadX865hGu03jEbtmZlD+gQFUYUiSZ/xwPDst63S
- K7JfoNqPgZLEILtt4OpU36g2FBKypUMAqb4Xvhm9UonoOWbwvYO+x0v4V6wwEjsgwlhA
- WuR0oO6n8c44oa9jTGIm/6g3sGx5sSWWmQGrTMvkd/Crbi1bn+2BXSCBy+QlbAmiV3/P
- hCwyko0xP/kJiNPOK6tBLFsbXc+59h2FrUPLFQvAgUvIXzcAxyJlOKzLfhovW69Scqt8
- K14/zkJYuI/5+OVQ7yTYJN0wtDEPT345iqzdA1SJbzn+uJuBnhuO+cKoNXeSIzL7J3Gr
- H8VA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-40ea611d1a4so2266200fac.2
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 07:28:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1774962076; x=1775566876; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dVST5uMheWxMw8Coninb63X5eh+KXVwP+rKC9ThKQjc=;
- b=B7VdfhhVT+lFnweuji/OUlO2hQnPJU7ofUKrVXML7YoM4X2O22wkGSazWq7MAMVQB3
- mighchKH+jMcZRQKeITjN2W5mH6/yxn/p9e2qSxmhecC1uVo+oi/LBZ6doLvdIqS4y9z
- bKbdgEwYU7hwtSHQh3cBnAefJKgDcKTEsgtc4nqg2IiyvYjuMCYkxEcUOcutJdEHhCUD
- LvzXiO9S5/TGLxeA3INCN+RNJFrxXOBt5mOpOlosZOJCNXtj0+v8QE09gVBIvHOr8+jb
- kJfY5wY9q42eileEqxqUKm21X6UWxusyXZZglcUG4uNLg/hTHema7R2HsTeeL3S0z0yo
- 9lIQ==
+ d=konsulko.com; s=google; t=1774967289; x=1775572089; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+AKTkWb4JidNcUmhseJnVh9x6XUWl9RepWqDkCG76wM=;
+ b=IU1WSZoVbiWDKk4HLOPloa9IeofP/4a/Od/eweKdVK2CIYGXMzkqKoAf9sh08yDl3d
+ TgTzsN50DxqGgRtvv/HocelsCXaNAZtX75I/o4qSQbqn8vnyrs4tRYLLRJZx+aBN26Uw
+ 1WycPB2qj8avaGckWvTnxTQGVGmkAPXBGRaWA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774962076; x=1775566876;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=dVST5uMheWxMw8Coninb63X5eh+KXVwP+rKC9ThKQjc=;
- b=Tnaqala0qFIWjlJVTm3z0JOOD8b8g5mZjWNwMCIJpIhqfsZkmOvSGHgM99EXzc9KVh
- 3C1HKqBjiuCBPCkax54Vpa5AI/Ay99AMI132nZJKErqN0CWWYq79DTE4970reKy8VLUT
- c9anInDcDW2AeRXzGlHQebRYyYZv+c5Xpk6rcwEM8J2z2Ai8O4hzPM+XC6A67VDxgyyP
- vxs7lmH9NQ/5wWGcNmHWaLe/g/K32KqzFE4VfGwI+CZwD++b9/2L81lvN5+X3rzbNaEW
- /syS47LvAdQV03wiMrL2saXFGa9tZqlCzwvojngBxAdMsaqPcDEsf7YjkVwzfqIluD3Z
- Aoyw==
-X-Gm-Message-State: AOJu0YyzBQN13LuDSjo3cQQrkTeyKQcl5Ozx3ku9D6xfGxDPK2Y5oEH9
- xKsr7YA011f/KV+ethF85r9bPD5e2CyyivhjxFnmgL2PoVokFWESiUhKU+nYAclkj8LMwLeT7nD
- UBc7Vva2YBUPNeWjMjMP+L7Lx26Ntre9QxScC3R48dw==
-X-Gm-Gg: ATEYQzy+wi9XkZoPiBt3SaydZEQyjqcZhIa/FvnjsSVd2YAIOrm3lMP/Kb5uluwGLj1
- nKLUWj/xZMBvx5sS0A3POmAoryRi0oMyizI4qH4mCGtsd0KMAJLCT9rf/7LrlbHTKr5PJnkOov4
- rUgnelaO1G4ADVDtmt5Y4hspQjZS2Mrjeh2Lu+yDL/fdmtFZdfLwUYbG9EKRh+YRbWF+DTTfgGr
- +JThv7zFHHtSjIBMuUKqnDWfyqeU9C75VYatOU4xT09uhp2v/2wtR5YgvcDOwZXCICTuu4Gk7nP
- pEc7GwqkLg==
-X-Received: by 2002:a05:6808:c2d1:b0:44d:9dc2:2be5 with SMTP id
- 5614622812f47-46a8a437609mr7402303b6e.21.1774962074431; Tue, 31 Mar 2026
- 06:01:14 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1774967289; x=1775572089;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+AKTkWb4JidNcUmhseJnVh9x6XUWl9RepWqDkCG76wM=;
+ b=MypjOuMLqOMubspCtGB9RTiR8SD3J6FrD7WkOjqO7AqMypx+fZiJJ/SljPlOMsjAjh
+ u3etAReG3KyCvmEncTJn0UriNgB/D5JV0yU1zhVSR2K9aCQjMY3dEH0MhR73dYlwGCNT
+ X9Th/S3K8Hbe3RQbHPJ2I+XiB58QxD6pyoqybaodQdofztYQC+3Y0u1y/9zW9dsc9M+b
+ wgnJp8zkPPPmny98FACY4rGkxiwdTbmEVQV9xZRhSmRoMRgHAceBA8I+rYUrWPtkpN/N
+ mjqbkbsqTJkAvx1M4oYsdmtDxk4ZN0z5FuZpdB+PPdYpVC6pzvaF3edZTO1coB6KI35H
+ +ZAg==
+X-Gm-Message-State: AOJu0YxprAcFCbbGGht7vJGIWLuboGhnMPTE+toqPcdr5l4G2G6T5jiK
+ awdEYkSNjUcJVDR/SDdioQMGpjuS3AoVADge7mHU5XKKF1LIBc54d0xmAyyWHM6NAL4=
+X-Gm-Gg: ATEYQzw2nAJGcVYuATIYePSfy4RcWdiRscHkgSL+echNBFzyNlpgcdHRehVTwGxLKJp
+ UKicPp3CvTb/b7b8gS+707S29N2bJxpJUvUvBDHW08fjXIxVrf2tApyKxcysDLZFCxx4yPUBmMP
+ BrILqN6fEmKUxZB4NUOi+Xlnrq6LsvCrSf0HNZZ4fRPzWZY9dIDP64omfogX8cQL6zkS447wgdZ
+ NAKMa7cw13w1VM+GgqJr3qmSy0VCOL+APnfuDeRA+RA0W153ka5ZPfnSjNBe+gLLV2pP1OkAQqA
+ vAHUxOGXFbxP8th8/083JiHg4qezsSvS29NLWXPTVzkLMyPzkvE2rFzHzJv4K9UuT9d4y+CDsEL
+ veu0iP4N+MozLC0VoEhgeFrQah4IQVo35TYlhIHh+4Hon3vivdTwujnVXSBeaBhF47jVeIH/yNK
+ Lw8dRLcnGrhdY4Bv40VFQpjauZc22r/VcNHj75RHfaU5Au3okhmPY9i/zY/279AWK6KKDW/obVI
+ 4Tds4j0FP8IAm0njVgT2z0g+C8WlNObav8mcY3A5RGHGuVJ
+X-Received: by 2002:a05:6870:f20d:b0:41b:f7f5:e887 with SMTP id
+ 586e51a60fabf-41cec27479emr9310158fac.24.1774967289424; 
+ Tue, 31 Mar 2026 07:28:09 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-41d04501478sm7362136fac.0.2026.03.31.07.28.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 31 Mar 2026 07:28:08 -0700 (PDT)
+Date: Tue, 31 Mar 2026 08:28:06 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@amd.com, xypron.glpk@gmx.de,
+ ilias.apalodimas@linaro.org, sjg@chromium.org,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Weijie Gao <weijie.gao@mediatek.com>, Yao Zi <me@ziyao.cc>
+Subject: Re: [PATCH v2 0/3] fwu: Call EFI stack initialization after preboot
+Message-ID: <20260331142806.GA1235458@bill-the-cat>
+References: <cover.1773840306.git.michal.simek@amd.com>
 MIME-Version: 1.0
-References: <20260119055523.13460-1-jimmy.ho@sifive.com>
- <aYnCoctRzE-DZyuT@swlinux02>
-In-Reply-To: <aYnCoctRzE-DZyuT@swlinux02>
-From: Jimmy Ho <jimmy.ho@sifive.com>
-Date: Tue, 31 Mar 2026 21:01:02 +0800
-X-Gm-Features: AQROBzDHw4yBmhQ1z3iZB4oiFqk-xbLV3rvuZRf10_AhVvpG1hRZvGWN0SEPqP0
-Message-ID: <CAJh9TSJpyDKezRZ0wEkjb-GEPkiAS1zOGfqm0mY2dzdhXZDf+A@mail.gmail.com>
-Subject: Re: [PATCH] driver: cache: Remove SiFive PL2 driver
-To: Leo Liang <ycliang@andestech.com>
-Cc: u-boot@lists.denx.de, greentime.hu@sifive.com, nick.hu@sifive.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 31 Mar 2026 15:08:26 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="nlUeZ3HRg1+4JIcL"
+Content-Disposition: inline
+In-Reply-To: <cover.1773840306.git.michal.simek@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,26 +103,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-just a friendly ping to see if this can be merged
 
-Best regards, jimmy ho
+--nlUeZ3HRg1+4JIcL
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 9, 2026 at 7:19=E2=80=AFPM Leo Liang <ycliang@andestech.com> wr=
-ote:
->
-> On Mon, Jan 19, 2026 at 01:55:23PM +0800, Jimmy Ho wrote:
-> > From: Nick Hu <nick.hu@sifive.com>
-> >
-> > Under single core boot platform, the secondary cores won't enter the
-> > u-boot spl. Therefore we move the pl2 driver from u-boot to the Opensbi=
-.
-> >
-> > Signed-off-by: Nick Hu <nick.hu@sifive.com>
-> > Signed-off-by: Jimmy Ho <jimmy.ho@sifive.com>
-> > ---
-> >  arch/riscv/lib/sifive_cache.c | 3 ---
-> >  drivers/cache/Kconfig         | 6 ------
-> >  drivers/cache/Makefile        | 1 -
-> >  3 files changed, 10 deletions(-)
->
-> Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+On Wed, Mar 18, 2026 at 02:25:08PM +0100, Michal Simek wrote:
+
+> Hi,
+>=20
+> the whole series is trying to address issues we have on platforms where u=
+sb
+> and ufs init are not done before efi initialization. This is happenin on
+> platforms where A/B update is enabled. FWU code is called early and do EFI
+> initialization before usb and ufs started that's why they are not visible.
+>=20
+> We are workarounding it by starting usb/ufs from board file but this shou=
+ld
+> be more generic approach.
+
+This doesn't build on current next:
+https://source.denx.de/u-boot/u-boot/-/jobs/1416493#L1001
+common/event.c:56:1: error: static assertion failed: "event type_name size"
+   56 | _Static_assert(ARRAY_SIZE(type_name) =3D=3D EVT_COUNT, "event type_=
+name size");
+      | ^~~~~~~~~~~~~~
+make[2]: *** [scripts/Makefile.build:271: common/event.o] Error 1
+make[1]: *** [Makefile:2201: common] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+--=20
+Tom
+
+--nlUeZ3HRg1+4JIcL
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCacvZ8wAKCRAr4qD1Cr/k
+CqPHAQC0lzhjTjCbTcfHrOdlSi+gwQImIa3cADiEJxvMbj3I4gEAmAopblGtnXvz
+vE/gALlSKgnklZ6AmttFai2qyLVNzAc=
+=YLqW
+-----END PGP SIGNATURE-----
+
+--nlUeZ3HRg1+4JIcL--
