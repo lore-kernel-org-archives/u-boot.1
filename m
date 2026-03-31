@@ -4,138 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AD5E109B461
-	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 13:00:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 339A5109B463
+	for <u-boot@archiver.kernel.org>; Tue, 31 Mar 2026 13:01:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A34F83DA6;
-	Tue, 31 Mar 2026 15:00:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
+	by phobos.denx.de (Postfix) with ESMTP id B9C6C84035;
+	Tue, 31 Mar 2026 15:01:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="UXwXeduv";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="igMd2f5/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B7CD83DA7; Tue, 31 Mar 2026 15:00:47 +0200 (CEST)
-Received: from PAUP264CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170110002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::2])
+ id EFD6683A41; Tue, 31 Mar 2026 15:01:23 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B231483A41
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 15:00:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=softathome.com
+ by phobos.denx.de (Postfix) with ESMTPS id 7607083A41
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 15:01:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=philippe.reynes@softathome.com
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=t2aizaTeKCj0L8dLNQSGssXMHtTLeXrSpJkE5BqZm5px6dJ2BxYqHcF1tFx5q3/Bb6/bjxyxI44lxi/xsKQBaS4v0pi2JZ7a6GO1O7cWjSHjCGM837fRg+6IP7A8pTJ+tfeNCNdrzB0nzO32tsaVXs83Di7CKUbqEj3N7iFZ7x5LK4iFGcqB7S65Q7F5fGSDhV4WFy+Lda9mbiUHupYWRkS/UJJbL0dNxJ1K+8Cql2/lKZAoQPiApiEOUlrNo5dH5vfnhTCMVNkc/5mpN+ngQm5/A3EuuqTgw6f4gx8uowpd/El6DvqMF64WLn4GOEv1YYwRH4b5WzhG2jH2SwDVrQ==
+ b=OcG8g3aenXVhaCH08FbBvWxenmUt8KRnZUcfmxYDKcPMKTs4hCmuuJ2xO2xNx+mWUarQlPZWuamas48GM4hr92iU/M8+LCni59FxcO02Nv06v+RfQBZPwDiLZHqBJTjydqw/NWRYxrYAJMqhKHobkyojQJYnbhVKGnpKCogR1TeY1QMpTKHEbU4NhyjKjbyw7bh0f1YuuLHmhqEYflXc5xWsWbraRBOHBqGIaSmAeF2qIZIxHF9IC/FAPM4fD2fp2sYH1QBQKquV/LkGYqYYuvk77UlDpaYVCrdpgunguU8566djkgfN9dz59YHLcWWDy0MNXxh9WxxwEB6kwJuZGg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=eNDmPKWzk0EarJ8jc2v/2WWtfXslva+BhA7+Dm1J9Ws=;
- b=L5yFOvgCHCPXiXKhEyXCfUis6GABHaO2omDqspPyxmfCIqACAJwWdYYvZi8+vX5LK+pAbwY4AJCPue5vget+QZC2E+8VMdFMu1YQ17JLLezmBW5encuidHgnY0+6BwS8aqAAOH5yChZe3MuD+7aM6G1TEDOKS/yhxUs3BYwo19LCJkr5a/KRz/4HoUVI+BWTagB83+hXuJPOMpTL4/G36tjaUU67RvCVwH6OmvWVPQg4KQU8pVg87j4GYfiSUUUTvnFb06Q4Q5PUtF0oH5OdYDAK4xsxeqzEVYaFRs5B+U44iVWWk+Pl7CDSokJAHovEhs9WJ0iZ0vK1G7ZjBibU9Q==
+ bh=Ot3qE6S+ffKFshHP5qJVNKHbH1HdH8kN4rTdwRlIsjA=;
+ b=LKg9o9wCDyleoUmD+oxisCsJ0+tojeOZqAVJYJlwXiVb5eVRu8rxU9iVxxz1QBjJrCVSgfZ44YDvxOEd/BfTjq8pawXny2RkTzO66HjhxBYOdCVCy6kLLOFZ18OjaYzUK8SmmQ1Ti0+ZsoHglOEKVIQHhymRXWZP4TFuOeEPKqIHlbtlPxMC1E/kZ/4SkKoyDc7qPZUc6KaVis3pMF//JDCbrKajm+YoUTmzpTZqVmXc8kiNLvwQEailirBrkJNfef/sb+cEdtFpooX3QrXJ97CJXQB+hQCVP9PPa1bEGYflctUp+ow49A+EitZOJBX7LfHScyC8tUGvATjMuWK/Qg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=softathome.com; dmarc=pass action=none
- header.from=softathome.com; dkim=pass header.d=softathome.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eNDmPKWzk0EarJ8jc2v/2WWtfXslva+BhA7+Dm1J9Ws=;
- b=UXwXeduvbsd/TubvSpmtt/dsCE6VzSqIUxo7Nd5XGTVcsAB2a65UqAE8eSs5dMb4b6eRwV4XmHr9ve9aZoZ82HVUBmDqeLUS7b1LH2rdZwR8RzD5RyQmpnawjlyzR0Uy935ZT+hr14no20STFfoDnxjpNkgriCu/6TMZ78MmrjiCgZJ+5rR5HjoDLcW4Prj/J8C2VdfxuQ34xXWitYXBtNe5c7ukEfK7Ikasz9HkpnWoDigVSWMEXNe3pzpKxHg4pmu2drA8EvmZ3NRvnjl6zxhdIB5zCPT/NZrEdPbKeHVVJsjD3bTM3815K0O/jvFOczsNyZ2t8eOPlezwmJYWLw==
+ bh=Ot3qE6S+ffKFshHP5qJVNKHbH1HdH8kN4rTdwRlIsjA=;
+ b=igMd2f5/XMbmAiaHQzcYSM0d7VsFDEtfBYKlX52utb1v2znOOPkuPdEiHYLc9me+dBxDtknt1fL0uY2SzTvmt5gTzwm7Oa6y+knBvyvuuMLCaMtm8XUhRh144KZzElizuu/yM2eM6oYQY46JtxvwHbmvEb3moeroMJJaa4YzkDE=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=softathome.com;
-Received: from PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1d0::9)
- by PR0P264MB2712.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1d3::5) with
- Microsoft SMTP Server (version=TLS1_2,
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by AS8PR04MB8657.eurprd04.prod.outlook.com (2603:10a6:20b:428::13)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.28; Tue, 31 Mar
- 2026 13:00:42 +0000
-Received: from PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
- ([fe80::6e14:438b:5c18:8557]) by PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
- ([fe80::6e14:438b:5c18:8557%3]) with mapi id 15.20.9745.027; Tue, 31 Mar 2026
- 13:00:42 +0000
-Message-ID: <5bfa6dbd-92f3-4aea-b248-b1696f064d5a@softathome.com>
-Date: Tue, 31 Mar 2026 15:00:41 +0200
+ 2026 13:01:18 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%4]) with mapi id 15.20.9745.027; Tue, 31 Mar 2026
+ 13:01:18 +0000
+Message-ID: <3b2d940f-d615-4747-95ff-ad53a61a884d@cherry.de>
+Date: Tue, 31 Mar 2026 15:01:16 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2 1/9] mbedtls: enable support of ecc
-To: Raymond Mao <raymondmaoca@gmail.com>
-Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com,
- u-boot@lists.denx.de
-References: <20260219132552.1499698-1-philippe.reynes@softathome.com>
- <20260219132552.1499698-2-philippe.reynes@softathome.com>
- <CAMDkj5wK7H7kZ=3S_VZ3WiuTBF1LOEKE=cBvfkURLJVVhoG8OA@mail.gmail.com>
+Subject: Re: [PATCH v3 4/7] dts: qcs615-ride-u-boot.dtsi: Add reboot-mode
+ support
+To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>, trini@konsulko.com,
+ casey.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@kernel.org,
+ sjg@chromium.org, seanga2@gmail.com, sughosh.ganu@arm.com,
+ ilias.apalodimas@linaro.org, gchan9527@gmail.com, mkorpershoek@kernel.org,
+ hs@nabladev.com, marek.vasut+renesas@mailbox.org, msp@baylibre.com,
+ dinesh.maniyam@altera.com, peng.fan@nxp.com, kever.yang@rock-chips.com,
+ jamie.gibbons@microchip.com, justin@tidylabs.net, xypron.glpk@gmx.de,
+ n-francis@ti.com, h-vm@ti.com, ycliang@andestech.com, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+References: <20260330171419.1117817-1-aswin.murugan@oss.qualcomm.com>
+ <20260330171419.1117817-5-aswin.murugan@oss.qualcomm.com>
 Content-Language: en-US
-From: Philippe Reynes <philippe.reynes@softathome.com>
-In-Reply-To: <CAMDkj5wK7H7kZ=3S_VZ3WiuTBF1LOEKE=cBvfkURLJVVhoG8OA@mail.gmail.com>
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260330171419.1117817-5-aswin.murugan@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: PR3PR09CA0005.eurprd09.prod.outlook.com
- (2603:10a6:102:b7::10) To PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:1d0::9)
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR04CA0118.eurprd04.prod.outlook.com
+ (2603:10a6:803:f0::16) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PR0P264MB2741:EE_|PR0P264MB2712:EE_
-X-MS-Office365-Filtering-Correlation-Id: 75a1c4f8-b847-4e8b-1008-08de8f2583ab
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AS8PR04MB8657:EE_
+X-MS-Office365-Filtering-Correlation-Id: a725dd51-fa49-4c8d-2606-08de8f259953
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|10070799003|1800799024|376014|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: 5EIbZlnWYI/bRZ4NarzBzHtCBipUCvgzZVMT2SRetKBOZx7hVAMKGN9KmezXZZNUOFkV9N2o75VRD0Y4aLNZr7o00dPj2OhV07OONNq5i55KyIVrbEteykk0KaGqK8H07S46K4NoKlnBKuVkMO6OCT9crzhJl58iXNBfPhzznTgZ79FQidvL0X6ToOgyh4K4LgtyXzdftt9TDdQipxOcKLBP2uDzQDW3RLckebQ58ft5cqO8bAUhXvrt4KIWUcaf/54MhZk1uVHH5rUvqDpU5prMqsCL3rm5OS0rGeSEzVdMxwBX/L7V+u3JgdxS5+sC0xGmRx9HuJifGP+0v6yxpjQZT0MvZM9SISsoUy5Ytb5IEGNT+n7dqLK3MykjZSgPJ1G4/S0PZY6ypmUaNSJ2sl5W1+5v2uZcqYPv/sJrp2/dCbIK2swfsmq/RyDJN6HV5ebfKhhhePVE6Gqi33D/d42lwzwUE+sEbBhyQP7Wj2KxhIfOgyWTGBwMN9Q9ThqsJ8CC+VUWUWnYy2s/YJxEscS5iZw1Xw+qFKlqzxiM1Dk7PMfSwVr88nw2HNuPgQNEtXYoVjZmO0fGfQZPbi4iTaoGT6NGOxuWH2PjhbZf0aCS5tNWDKP8Yfsa7nat6ILUPjWqAARYx3OCPDJ4tICDUG83/BSffzJotdZfG8smfhOGTj8r9bIxPHTFz0MulRTamaB0FKNWsX453MeXpQyGvjeHm3MtsWf5YKWh3fB5PBM=
+ ARA:13230040|376014|7416014|366016|1800799024|56012099003|18002099003|22082099003|921020;
+X-Microsoft-Antispam-Message-Info: ZBLrinFQOwtgi0vH909JGE9fBm+k/ChtuFFfA2XSDl532hVn9CVLGKVBWlwxLamcejaHaV+0Tjnq/B8tMRDveoKpoP3fD2Go3vdkRDf2D2Nw/kGm+yYcix39KbOdN3KfFzaez8D1ztQM7aTedUQ1plTyWIuvF+MbWgJruNjMJT8xoii5S3NmWT1IBasvXuHntgXWE1IzbcSjGLvw8hNL5Rsj/CiZK5oW31SMRZphHDr5e560ObTQNfy1nQ66MTofeVH/qtbRvY5XLZyto0uLThs4ma1tmu1xcP3++BLxErdZoE4WlvVlxtIL3CADxmH3Ct/fLGJxkSL3f0MiqPGxoVQCoDTo6JIt78Le7vpwb04G1HWdBBRjYzVAorlScRzTuJ7vASOeZrEqeXW3eeyTAGS71Nr1RsieDOFmnnkn6GQ3ZkEk2BoSLZA/PgUvYwq/svF7Q2iWaPtR31c48ZHVNnOWbttxmTZMz8jdv/FWeAa2HzWq8sNbeMokPCaGL4g3ufBTeTc22vsNNh3SvFe/OmqvGlg2KAURpwf4Kkxcia6YJTvkIDtVFf1zuUXcR0RtEhgUeOZVpdNLib86uIeLsUKyN/kGuIeRVlLTfvgv4/vlgtm9AAyL1x9saTomCbtSyuFapkjPCPGBblCvGuTjV4kzU68Ee/Xog9Znr6sqPCSRtSSCdrvjJMeFh1NHYgLXlz4PFw+Kig8+be2rc8CgnKJGzeuXEd8jha4jGku15EUzSF0t2ChSRa7bD2MMO9e8Z4fpXVMiYCBS4jPvbM9wJA==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(10070799003)(1800799024)(376014)(18002099003)(22082099003)(56012099003);
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(7416014)(366016)(1800799024)(56012099003)(18002099003)(22082099003)(921020);
  DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YmhEYjBDaGhqVHY3M28rMGc3Q1NnMnI0ajV3dzhzZDJnQ0dyd3REODZmSmti?=
- =?utf-8?B?Q05ybnp6R1RUekl0UVlla1B0VDZNNmFhMEp3VWV1Wms4ZnNMckJTb1A5Nmlo?=
- =?utf-8?B?ejB0cElrZ09pUERaUnNHZWtvZTdndCtVakw2RHRyclI5U1Rrdi9uTnB2cHV5?=
- =?utf-8?B?NVZ1aDJzREl2MmZxYUNJWXlDK2NGU0dta2VyalloaGFsRy83QzVGOTlYZytm?=
- =?utf-8?B?SDkwK3VrVkdrOVluaEgrS095QXh1ZlpvRGhDZXIvbGpQaUJqTFZ6bzFmR2J6?=
- =?utf-8?B?UFE1SGR2MENmYlpEWlN4ZEVKcWxESTdTanhQQzluUmFZUE5sOHUvN3Mwa2Jm?=
- =?utf-8?B?amdZZlhRbGdIUnBCVzdpOTlSZzlndk0xcmNhUDhLVDFDN1NHc0MxMHJyNmNl?=
- =?utf-8?B?UGcrUmVBNnVSTCtTWHJpNFluUU00bitGYittTHlzU1NxUkNwaHRjclpwUWd1?=
- =?utf-8?B?dGZZeGtzeDRaZ3dqd3JVczdzSWtzY2NCTTRWbWtGVEVOTWQzR3lXUldHUFNi?=
- =?utf-8?B?M1dveTUzeVhuUW0vbklZY2hncEJBOE90NkVmY0VrTlhQbEovMG9IN1FraVRS?=
- =?utf-8?B?eHhQMWRGSmZ3SzgzcExLend6UG9WZmFPbUhhRWtQYUFYM2VVZnF2RGs5WGo4?=
- =?utf-8?B?TkZxREdSYXg4c1YzZGJibnJRQnlmU2xrWmZSQzFXVm9HMEMxamZFaks1bEpR?=
- =?utf-8?B?VkRmNzdHZ2tGMk5QQkYxbjh5Kzd3YjhFSWMzMlZ5VytxWEVBWXg3NmM3T2h4?=
- =?utf-8?B?cUhOeEFDM3U2Yng3WUR4QlpTR0VtcHNEc3dKbGJRNGM2QmRkQ29LZlhvbFN4?=
- =?utf-8?B?aitoekRxV1B6K1ZkaXBjdnpLbWdMZWZvZUNXVm4zUEJIemd3SS9GUlpNVStT?=
- =?utf-8?B?MXczdWM2NWdlNUN5WnU3eXY0bG9ubVRjNVgxNFh4eWQ5WnBpcXpIb05RVXhW?=
- =?utf-8?B?Snp0dGNyRm1BUDhJQkZRd25QRjRaL3dHNzh1b1cyZGtIMHpkTDVNQjY2b3JK?=
- =?utf-8?B?THd0eFpZazFNQUhKM3B0OXh4eUFkK1Q0WlRCZmpwbTVrV1VqTmhMWmJCU1Js?=
- =?utf-8?B?SWtxYXRGTitpdVladWZ4aVQrWVZNTFFHM2JnZlU4dkEwSkd0OE1taXNFbS8y?=
- =?utf-8?B?Z1dQbGJ2Y0RVa2JHWCtIdDBrN0JkUTgrVkc4czV6cy90dHZxYTI4NmxZN2RH?=
- =?utf-8?B?Wmk4WjJHaEdKM21xTG1uQVBtWlp6NnNFeW1jWHo2K3B6VFFiRTh5ZEFrVDZ5?=
- =?utf-8?B?dTZtSXQ1TzVQaFBteDJaNkVrZHdrd3pkRU8yclM0SFZtbzNvTmRPdmc4QjB4?=
- =?utf-8?B?Z3BUYlRPN3lUbVVEWmI0dWV6WWZ3NnlpUmgyNFhqSTdXdTNkdFEvK20vR0JS?=
- =?utf-8?B?c3htRU56Vjl4VXhrcHJ3N0JLTUQzNXAxUVRaUDNhSEtyWVI0Q1BwTEVhd05M?=
- =?utf-8?B?b1VURHYvQjR4eHZjeXV6eHVFejF2Yk5zaFlxMGp0NjBCTWNsSVlwemxKeUUv?=
- =?utf-8?B?N1IweWtQWFZNeHJhRVBRRkJNZXhPZXB4OUMrOWk1bzVOUDYrNEd1c3RnOXcr?=
- =?utf-8?B?RXp3YUlHVjJMUlpmdEhiWTl1NE51bjZoRkM5ek9DR3NsY3plYlcrL3kvK3JI?=
- =?utf-8?B?bmhhd2NqREt5SnZWWmhVTVplaWN2RE5kWW4xVGpyNCtienU5NVlJVko0dExs?=
- =?utf-8?B?Z1A2MTU1aDJPRkUrOENObzNydDZGYjcySnNRczRKZEsxc3VXeEg0aDRhT2ow?=
- =?utf-8?B?bjlpeFRpY0VFR2FlRUFvY09RMWd0Rno2VWdHYzk2T3haRktURDNHSCtiM2Fw?=
- =?utf-8?B?TXVGSDdlZkloNHdhT3R0bmtIRkNxdU9ickZMZFdSRjliTGRFOTJBUW1JQ1Ev?=
- =?utf-8?B?T0pFc3RkUHBxR0ZVSnBxMnZqbXFLbUh4RHhnVE84ekdSNkZ6YmFXd05aMU9p?=
- =?utf-8?B?eWQ2U3hMMS9HVDA0b0pwaStrUGU0MjBseUhDMTRpUkhRQkdoWEpVekJDbmxw?=
- =?utf-8?B?dllybnZTVHFUbU4vc1lybE5qRnBTMk1TZGIwWHhqY2NZcHF5bGQ0Zmg0N2RM?=
- =?utf-8?B?dFE0cVI4dmdkVlFnQWNNREYyME45c2FjZUw5akJPU0RLTFNEL0k3MjZyMkEx?=
- =?utf-8?B?NVNrTnRPZlU2VHpmMlNKbTVaQmxjWm5UZmppelZwV0F5WGZERjJrU0N4a3o5?=
- =?utf-8?B?WitOWTJRZE11d3pkb1ZEckNBdkY2UTMxZnFoT2tnOFowQzh6K1JXYVJqVktH?=
- =?utf-8?B?SGNhT3hVZ3dEMWRxV0ZHWG9nZEZjN1J4dkhldHNTNnFzbzFOeVNQS0poNWk1?=
- =?utf-8?B?eTBiMDZ2Q1pOZDVZUlpMaHhqT0pZOGdVaTFPZGZVQTRvc0tSK3F1d1RYMFo5?=
- =?utf-8?Q?z0GGb6s77YCEzk5JTyQROmJwtq94Z3tCwjnQYlIbEsWOC?=
-X-MS-Exchange-AntiSpam-MessageData-1: UhNhUkUCpg+1spy3mYCVktEvut9PKrfS7aQ=
-X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 75a1c4f8-b847-4e8b-1008-08de8f2583ab
-X-MS-Exchange-CrossTenant-AuthSource: PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WjJUdXlVeHVLcDh6TUlra25OYk5rWUFweGwwVTFaTk1QUERhZzZta1MyUTh0?=
+ =?utf-8?B?K1ZIOHNMZGtUbVc0S2l4eHErN0xLcGYyeGRlK09ldjJKaVRtQkw4eFd5RVEv?=
+ =?utf-8?B?MDNWTWNVYjU3cUZvbXVKTWNKZDdaSytlMkNjTVVkNUFpUnp6QWUxRWw4T0pk?=
+ =?utf-8?B?aVp6Q0lOMDR1QUlpVFNpOHNYU00ydHFuVEErZDE4QlRJK2hyZi8rYkZqeDJJ?=
+ =?utf-8?B?OGtQdDlidmpLVTJxb1lyMlV0Zzhad2JIZlByc0c3ZVdsTXRndGRyMHJUU0hu?=
+ =?utf-8?B?Y3ZpSmR4Tmp5OTYrMVc1N2J4V1lEVlRKYk5TaG5VN3pMMFhDMlcrN094ZGVz?=
+ =?utf-8?B?TFo2dHJKeSs5YitwWExZRml6eFNVdmltL04yVmIxREZ3Umc1N1A4dEIzV1dM?=
+ =?utf-8?B?ZENYakswN2lQNFQ4TCtqdFUxOTUzaHpLVEQ3cnlEcVZsV0RFM01oT3R0ZStI?=
+ =?utf-8?B?OEI2cmsxUlBOL2RFUG5qdnBOcFZXZXdoRUVNejNtZGhQMUdicU82ejdqSlVv?=
+ =?utf-8?B?N29uVEFJMlhneGkySmVXQ0N6eldvaS9aUzBaUEN2UlJTOTIvd0xaeTZUWGlr?=
+ =?utf-8?B?OW5IaFpKcmpCR3RzRWpTUGM3Ry9iL00zckhNOGowQjBsUzg2dmh3T21vSFor?=
+ =?utf-8?B?SCt1TVdUQURMd0VxWTZYUUZsVGtxai9WUzhOdWtySEVyWHZDRGFvVGxvTjFD?=
+ =?utf-8?B?OGJIdUFDZGZYTVF3ZUFsOTBSTWpYWjRsZDQ1ZlZqR3luUE1iM09UaVRTTmNM?=
+ =?utf-8?B?WEJpQ3ZBdWdMTGJ4SUNqSmoybU93Q2VZMzFsbDk4YU9PakpTblQ3RXBDRXRj?=
+ =?utf-8?B?SDR5ZTlhVWtYVVEvNG5hekpnS0E1ZzJDR3Izc0pnckZtRXhUZGloenVTcjJI?=
+ =?utf-8?B?Z1EvZ3U0WEE1RHNjOXkrTnA4N0E3aWdCbWlGT245Q1RPNndyay94d1pVaGZz?=
+ =?utf-8?B?WHl5UTlWM0FOR1lVbWpHNDA2ZUU3cHVMM1N0Si9MZEpDd24wVXRvMEIrQkg3?=
+ =?utf-8?B?N3RMVWlWTXR1MlVsV3ZtdTFaWmNPdk9PNlliWElTV3RxTTlWOHUzU094V205?=
+ =?utf-8?B?d0dCZnBWMmI5YWFxSkduQmFXRmUvREpETS8wYmh2cDArNjNDTXNIWlNPUDVN?=
+ =?utf-8?B?VTJxcDVGUjNOUDB5bDJZZHR1TmlWMmpESmNLb0Q4REJLNnh5T2VHeHYrTEV1?=
+ =?utf-8?B?dnhyQkhmYkorcjlyTkFLcVBWR1Rrek4rVUgxWU5sb0ZCN2xrcmFMRnhDcW10?=
+ =?utf-8?B?d3BMNjlXc3RKVkFOVysrak9NelA4TGhrY1YzN1VSSDlyKzZlWVlMV1REWDh0?=
+ =?utf-8?B?QkFyOVZpdVduVXRMTHE1blp1eWdJd0h0dVRiS2pWZElsQzNlTUswU2lyZzU3?=
+ =?utf-8?B?OUZzME1TZG1kVEIwMTRiMjVDdWYzaksyaTkzc0tPbmpXK2gxejZ1a2pzWG1x?=
+ =?utf-8?B?Q3VvcXFSejJjOUF3VWl0amxRaXVGYVJUN3l0SUE3UXFHOGVWODBEZ3NDYjZB?=
+ =?utf-8?B?QnRoVW15ZlNCdXE3Q1FPSW12YmF1WlNoZ2l0bnhrYkY0US96bDUzMy9WdEI5?=
+ =?utf-8?B?T1IycHpKcFpZblo3VmN1R0h1SmdHZ1dyK1ZuWXBQQ3cyK2NVNGZiMjJvU09E?=
+ =?utf-8?B?WFp2aGt2U2RYdVRtN0Zpa2VMUXduQVluNW4vVlBpRm42YzFadFBhSnR2R21M?=
+ =?utf-8?B?OXhvMjBxbUI3RGxJc3dWSWRWb0lTQ0U2WHlka1cyQkswekNRbVdhWDJ5YlRo?=
+ =?utf-8?B?VjBOV0wwOC95Skhnb2xETHRhTEtGcldhR0VrRk5tdWJwMFNLb0gvQ0tTTHYr?=
+ =?utf-8?B?dzhzUVRWVkFQUnZpUHZQTEp6K3duVTY2SU9nNXg3d1hETGZQLzRmdHU0RXJO?=
+ =?utf-8?B?QjhKczhneHdMZjQ4QnhwRW5BZW53V2dZd3J0RVdsZ1IvdS8yZ1NhS1VGZnBp?=
+ =?utf-8?B?SVExbFRteDlBOWJLQkkrVmhKN2ZuNU9xYWdQaXFRaEQvL25wcTIvT1c5SkFG?=
+ =?utf-8?B?ZkJqVllPeFI3ZnF3ZE1KUjV5Nk1rbGxWZWtZNm14cUZENGdjbkZhNmRIcDV2?=
+ =?utf-8?B?cGN4aWlxTkd1SWN5RHVyL29GZWdKUkhtOWRhL2hMRkpQQTdNdFgzT2dNMWFR?=
+ =?utf-8?B?Rk5Lb2JRaGlXNmxyMkM0Ymlmc2hDZlZOSXBZV0x1Wm01eExXeU1ZOENMbVhI?=
+ =?utf-8?B?cTBUL1dxNVM1NVpFU0w1SjBNNkFKUitWeEgvdXdObG5ZVERYNElPY3M5Uk05?=
+ =?utf-8?B?MnRNN3M4ZDRTR0VvbkV4S05RR0VjaGxpdlZnUUVGNFVtWWNIRjg0K0p3NkVB?=
+ =?utf-8?B?S292WFZXQ3BsUmRlOVR6dnhuM3FRT0ZaOVlFeU9iTTFoYUh2SThwUT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: a725dd51-fa49-4c8d-2606-08de8f259953
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2026 13:00:42.1657 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2026 13:01:18.3537 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ugOBrC08PCVjclTAYnuyQNRYfQl3TADgkzlJVigjESGCdqmGUYR30RUtKU5oVTHDbVEdvSGgSr/kb/Cmzt7lstahSeEVQHYUeyBK84CjJgM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR0P264MB2712
+X-MS-Exchange-CrossTenant-UserPrincipalName: /mNbFc2vl2zcXgHixM9buyUBTlLM0jFKCHXYe+NxhJ0LXBlXuuO9yxuX/pVkuiibziej0Dy5+O5rRP/sdlpAOk4bGWoLtzQl0kkAAP/mJN4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8657
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,267 +155,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
+Hi Aswin,
 
+On 3/30/26 7:14 PM, Aswin Murugan wrote:
+> The PM8150 PMIC on this platform uses the older PON (Power On) register
+> architecture rather than dedicated SDAM regions found in newer PMIC
+> generations. To enable reboot-mode functionality with the unified
+> NVMEM-based approach, add a compatibility wrapper that exposes PON
+> registers through the SDAM NVMEM interface.
+> 
+> Add device tree configuration:
+> - NVMEM node with compatible "qcom,spmi-sdam" wrapping PON registers
+> - Uses 'ranges' property to map the PON register block at offset 0x800
+> - NVMEM cell at offset 0x8F (PON_SOFT_RB_SPARE register)
+> - 7-bit field (bits [7:1]) for reboot reason, preserving bit 0
+> - Mode mappings: bootloader=0x02, recovery=0x01
+> 
+> This wrapper allows the SDAM NVMEM driver to access PON registers
+> transparently, providing a unified interface for both PON-based (older)
+> and SDAM-based (newer) PMIC generations.
+> 
+> The PON_SOFT_RB_SPARE register persists across warm resets and is
+> automatically cleared on power cycle.
+> 
+> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> ---
+> Changes in v3:
+> 1. No change in v3
+> ---
+>   arch/arm/dts/qcs615-ride-u-boot.dtsi | 26 ++++++++++++++++++++++++++
+>   1 file changed, 26 insertions(+)
+> 
+> diff --git a/arch/arm/dts/qcs615-ride-u-boot.dtsi b/arch/arm/dts/qcs615-ride-u-boot.dtsi
+> index 68fffc70fcb..50784807cf4 100644
+> --- a/arch/arm/dts/qcs615-ride-u-boot.dtsi
+> +++ b/arch/arm/dts/qcs615-ride-u-boot.dtsi
+> @@ -11,4 +11,30 @@
+>   		      <0x0 0xc0000000 0x0 0xc0000000>,
+>   		      <0x1 0x80000000 0x1 0x00000000>;
+>   	};
+> +
+> +	reboot-mode {
+> +		compatible = "nvmem-reboot-mode";
+> +		nvmem-cells = <&reboot_reason>;
+> +		nvmem-cell-names = "reboot-mode";
+> +
+> +		mode-bootloader = <0x02>;
+> +		mode-recovery   = <0x01>;
+> +	};
+> +};
+> +
+> +&pm8150_0 {
+> +	/* Virtual NVMEM node for PON-based reboot reason storage */
+> +	nvram@800 {
+> +		compatible = "qcom,spmi-sdam";
+> +		reg = <0x800>;
+> +		#address-cells = <1>;
+> +		#size-cells = <1>;
+> +		ranges = <0x00 0x800 0x100>;
+> +
+> +		/* Reboot reason cell at PON_SOFT_RB_SPARE (0x88F) */
+> +		reboot_reason: reboot-reason@8f {
+> +			reg = <0x8f 0x1>;
+> +			bits = <0x01 0x07>;
+> +		};
+> +	};
 
-Sorry for this very later answer.
+How is that U-Boot-specific? We're trying to have as little as possible 
+in U-Boot-specific Device Trees and there exists a DTS in upstream 
+Linux. I see nvmem-reboot-mode has an upstream binding and driver and is 
+defined in a few other Qcom DTSIs as well. Same for qcom,spmi-sdam node. 
+So it'd be nice to motivate why this cannot be upstreamed to the Linux 
+kernel.
 
-
-Le 20/02/2026 à 16:18, Raymond Mao a écrit :
-> This Mail comes from Outside of SoftAtHome: Do not answer, click links or open attachments unless you recognize the sender and know the content is safe.
->
-> Hi Philippe,
->
-> On Thu, Feb 19, 2026 at 8:26 AM Philippe Reynes
-> <philippe.reynes@softathome.com> wrote:
->> Enables the support of ecc in mbedtls.
->>
->> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
->> ---
->> v2:
->> - move ecdsa to MBEDTLS_LIB_X509
->> - enhance depencendies
->>
->>   configs/amd_versal2_virt_defconfig       |  1 +
->>   configs/qemu_arm64_lwip_defconfig        |  1 +
->>   configs/starfive_visionfive2_defconfig   |  1 +
->>   configs/xilinx_versal_net_virt_defconfig |  1 +
->>   configs/xilinx_versal_virt_defconfig     |  1 +
->>   configs/xilinx_zynqmp_kria_defconfig     |  1 +
->>   configs/xilinx_zynqmp_virt_defconfig     |  1 +
->>   lib/mbedtls/Kconfig                      | 16 ++++++++++++++++
->>   lib/mbedtls/Makefile                     | 16 +++++++++-------
->>   lib/mbedtls/mbedtls_def_config.h         | 18 ++++++++++++++++++
->>   10 files changed, 50 insertions(+), 7 deletions(-)
->>
->> diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
->> index 0344089030c..702bf28405d 100644
->> --- a/configs/amd_versal2_virt_defconfig
->> +++ b/configs/amd_versal2_virt_defconfig
->> @@ -164,6 +164,7 @@ CONFIG_VIRTIO_MMIO=y
->>   CONFIG_VIRTIO_NET=y
->>   CONFIG_VIRTIO_BLK=y
->>   CONFIG_MBEDTLS_LIB=y
->> +CONFIG_ECDSA=y
->>   CONFIG_TPM=y
->>   # CONFIG_OPTEE_LIB is not set
->>   CONFIG_TOOLS_MKFWUMDATA=y
->> diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_lwip_defconfig
->> index a974970c3d3..ab6302b67eb 100644
->> --- a/configs/qemu_arm64_lwip_defconfig
->> +++ b/configs/qemu_arm64_lwip_defconfig
->> @@ -11,3 +11,4 @@ CONFIG_CMD_WGET=y
->>   CONFIG_EFI_HTTP_BOOT=y
->>   CONFIG_WGET_HTTPS=y
->>   CONFIG_WGET_CACERT=y
->> +CONFIG_ECDSA=y
->> diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
->> index a754134a313..508bd465704 100644
->> --- a/configs/starfive_visionfive2_defconfig
->> +++ b/configs/starfive_visionfive2_defconfig
->> @@ -156,3 +156,4 @@ CONFIG_USB_GADGET=y
->>   CONFIG_WDT=y
->>   CONFIG_WDT_STARFIVE=y
->>   CONFIG_MBEDTLS_LIB=y
->> +CONFIG_ECDSA=y
->> diff --git a/configs/xilinx_versal_net_virt_defconfig b/configs/xilinx_versal_net_virt_defconfig
->> index 323b5606566..8b760beab03 100644
->> --- a/configs/xilinx_versal_net_virt_defconfig
->> +++ b/configs/xilinx_versal_net_virt_defconfig
->> @@ -154,4 +154,5 @@ CONFIG_VIRTIO_MMIO=y
->>   CONFIG_VIRTIO_NET=y
->>   CONFIG_VIRTIO_BLK=y
->>   CONFIG_MBEDTLS_LIB=y
->> +CONFIG_ECDSA=y
->>   CONFIG_TPM=y
->> diff --git a/configs/xilinx_versal_virt_defconfig b/configs/xilinx_versal_virt_defconfig
->> index 652121e27a0..6dd8620cf51 100644
->> --- a/configs/xilinx_versal_virt_defconfig
->> +++ b/configs/xilinx_versal_virt_defconfig
->> @@ -168,5 +168,6 @@ CONFIG_VIRTIO_MMIO=y
->>   CONFIG_VIRTIO_NET=y
->>   CONFIG_VIRTIO_BLK=y
->>   CONFIG_MBEDTLS_LIB=y
->> +CONFIG_ECDSA=y
->>   CONFIG_TPM=y
->>   CONFIG_TOOLS_MKFWUMDATA=y
->> diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
->> index 8ad05e37189..d23452e96d0 100644
->> --- a/configs/xilinx_zynqmp_kria_defconfig
->> +++ b/configs/xilinx_zynqmp_kria_defconfig
->> @@ -219,6 +219,7 @@ CONFIG_VIRTIO_BLK=y
->>   CONFIG_BINMAN_DTB="./arch/arm/dts/zynqmp-binman-som.dtb"
->>   CONFIG_PANIC_HANG=y
->>   CONFIG_MBEDTLS_LIB=y
->> +CONFIG_ECDSA=y
->>   CONFIG_TPM=y
->>   CONFIG_SPL_GZIP=y
->>   CONFIG_TOOLS_MKFWUMDATA=y
->> diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
->> index bb79ddf989e..01370a215d4 100644
->> --- a/configs/xilinx_zynqmp_virt_defconfig
->> +++ b/configs/xilinx_zynqmp_virt_defconfig
->> @@ -237,6 +237,7 @@ CONFIG_VIRTIO_BLK=y
->>   CONFIG_BINMAN_DTB="./arch/arm/dts/zynqmp-binman.dtb"
->>   CONFIG_PANIC_HANG=y
->>   CONFIG_MBEDTLS_LIB=y
->> +CONFIG_ECDSA=y
->>   CONFIG_TPM=y
->>   CONFIG_SPL_GZIP=y
->>   CONFIG_TOOLS_MKFWUMDATA=y
->> diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
->> index 789721ee6cd..8bf8809198f 100644
->> --- a/lib/mbedtls/Kconfig
->> +++ b/lib/mbedtls/Kconfig
->> @@ -242,11 +242,16 @@ config MBEDTLS_LIB_X509
->>          select X509_CERTIFICATE_PARSER_MBEDTLS if X509_CERTIFICATE_PARSER
->>          select PKCS7_MESSAGE_PARSER_MBEDTLS if PKCS7_MESSAGE_PARSER
->>          select MSCODE_PARSER_MBEDTLS if MSCODE_PARSER
->> +       select ECDSA_MBEDTLS if ECDSA
->>          help
->>            Enable MbedTLS certificate libraries.
->>
->>   if MBEDTLS_LIB_X509
->>
->> +config BIGNUM_MBEDTLS
->> +       bool
->> +       default n
->> +
->>   config ASN1_DECODER_MBEDTLS
->>          bool "ASN1 decoder with MbedTLS certificate library"
->>          depends on MBEDTLS_LIB_X509 && ASN1_DECODER
->> @@ -264,6 +269,7 @@ config RSA_PUBLIC_KEY_PARSER_MBEDTLS
->>          bool "RSA public key parser with MbedTLS certificate library"
->>          depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
->>          select ASN1_DECODER_MBEDTLS
->> +       select BIGNUM_MBEDTLS
->>          help
->>            This option chooses MbedTLS certificate library for RSA public key
->>            parser.
->> @@ -292,6 +298,15 @@ config MSCODE_PARSER_MBEDTLS
->>            This option chooses MbedTLS certificate library for MS authenticode
->>            parser.
->>
->> +config ECDSA_MBEDTLS
->> +       bool "Enable ECDSA support with MbedTLS certificate library"
->> +       depends on MBEDTLS_LIB_X509
->> +       select ASN1_DECODER
-> This should be ASN1_DECODER_MBEDTLS.
-
-It was my first try, but I reach an issue.
-If ASN1_DECODER is not selected and we select ASN1_DECODER_MBEDTLS, 
-there is a conflict because
-ASN1_DECODER_MBEDTLS depends on ASN1_DECODER. So to avoid this issue, I 
-have kept ASN1_DECODER in V3.
-
-Regards,
-Philippe
-
-
->
->
->> +       select BIGNUM_MBEDTLS
->> +       help
->> +         This option enables support of ECDSA with the MbedTLS certificate
->> +         library.
->> +
->>   endif # MBEDTLS_LIB_X509
->>
->>   config MBEDTLS_LIB_TLS
->> @@ -301,6 +316,7 @@ config MBEDTLS_LIB_TLS
->>          depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
->>          depends on ASN1_DECODER_MBEDTLS
->>          depends on MBEDTLS_LIB
->> +       depends on ECDSA_MBEDTLS
->>          help
->>            Enable MbedTLS TLS library. Required for HTTPs support
->>            in wget
->> diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
->> index c5b445bd85c..5433e17cc64 100644
->> --- a/lib/mbedtls/Makefile
->> +++ b/lib/mbedtls/Makefile
->> @@ -39,13 +39,14 @@ mbedtls_lib_crypto-$(CONFIG_$(PHASE_)HKDF_MBEDTLS) += \
->>   # MbedTLS X509 library
->>   obj-$(CONFIG_$(XPL_)MBEDTLS_LIB_X509) += mbedtls_lib_x509.o
->>   mbedtls_lib_x509-y := $(MBEDTLS_LIB_DIR)/x509.o
->> +mbedtls_lib_x509-$(CONFIG_$(PHASE_)BIGNUM_MBEDTLS) += \
->> +       $(MBEDTLS_LIB_DIR)/bignum.o \
->> +       $(MBEDTLS_LIB_DIR)/bignum_core.o
->>   mbedtls_lib_x509-$(CONFIG_$(PHASE_)ASN1_DECODER_MBEDTLS) += \
->>          $(MBEDTLS_LIB_DIR)/asn1parse.o \
->>          $(MBEDTLS_LIB_DIR)/asn1write.o \
->>          $(MBEDTLS_LIB_DIR)/oid.o
->>   mbedtls_lib_x509-$(CONFIG_$(PHASE_)RSA_PUBLIC_KEY_PARSER_MBEDTLS) += \
->> -       $(MBEDTLS_LIB_DIR)/bignum.o \
->> -       $(MBEDTLS_LIB_DIR)/bignum_core.o \
->>          $(MBEDTLS_LIB_DIR)/rsa.o \
->>          $(MBEDTLS_LIB_DIR)/rsa_alt_helpers.o
->>   mbedtls_lib_x509-$(CONFIG_$(PHASE_)ASYMMETRIC_PUBLIC_KEY_MBEDTLS) += \
->> @@ -57,6 +58,12 @@ mbedtls_lib_x509-$(CONFIG_$(PHASE_)X509_CERTIFICATE_PARSER_MBEDTLS) += \
->>          $(MBEDTLS_LIB_DIR)/x509_crt.o
->>   mbedtls_lib_x509-$(CONFIG_$(PHASE_)PKCS7_MESSAGE_PARSER_MBEDTLS) += \
->>          $(MBEDTLS_LIB_DIR)/pkcs7.o
->> +mbedtls_lib_x509-$(CONFIG_$(PHASE_)ECDSA_MBEDTLS) += \
->> +       $(MBEDTLS_LIB_DIR)/ecdsa.o \
->> +       $(MBEDTLS_LIB_DIR)/ecp.o \
->> +       $(MBEDTLS_LIB_DIR)/ecp_curves.o \
->> +       $(MBEDTLS_LIB_DIR)/ecp_curves_new.o \
->> +       $(MBEDTLS_LIB_DIR)/pk_ecc.o
->>
->>   #mbedTLS TLS support
->>   obj-$(CONFIG_$(XPL_)MBEDTLS_LIB_TLS) += mbedtls_lib_tls.o
->> @@ -64,7 +71,6 @@ mbedtls_lib_tls-y := \
->>          $(MBEDTLS_LIB_DIR)/mps_reader.o \
->>          $(MBEDTLS_LIB_DIR)/mps_trace.o \
->>          $(MBEDTLS_LIB_DIR)/net_sockets.o \
->> -       $(MBEDTLS_LIB_DIR)/pk_ecc.o \
->>          $(MBEDTLS_LIB_DIR)/ssl_cache.o \
->>          $(MBEDTLS_LIB_DIR)/ssl_ciphersuites.o \
->>          $(MBEDTLS_LIB_DIR)/ssl_client.o \
->> @@ -82,8 +88,4 @@ mbedtls_lib_tls-y := \
->>          $(MBEDTLS_LIB_DIR)/cipher.o \
->>          $(MBEDTLS_LIB_DIR)/cipher_wrap.o \
->>          $(MBEDTLS_LIB_DIR)/ecdh.o \
->> -       $(MBEDTLS_LIB_DIR)/ecdsa.o \
->> -       $(MBEDTLS_LIB_DIR)/ecp.o \
->> -       $(MBEDTLS_LIB_DIR)/ecp_curves.o \
->> -       $(MBEDTLS_LIB_DIR)/ecp_curves_new.o \
->>          $(MBEDTLS_LIB_DIR)/gcm.o \
->> diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_config.h
->> index dda3f4dd6e4..7d60bcc52aa 100644
->> --- a/lib/mbedtls/mbedtls_def_config.h
->> +++ b/lib/mbedtls/mbedtls_def_config.h
->> @@ -89,6 +89,24 @@
->>   #define MBEDTLS_ASN1_WRITE_C
->>   #endif
->>
->> +#if CONFIG_IS_ENABLED(ECDSA_MBEDTLS)
-> In the 'mbedtls_def_config.h' file, we use the kconfigs without the
-> '_MBEDTLS' postfix.
->
-> Regards,
-> Raymond
->
->> +#define MBEDTLS_ECDSA_C
->> +#define MBEDTLS_ECP_C
->> +#define MBEDTLS_BIGNUM_C
->> +#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
->> +#define MBEDTLS_ECP_DP_SECP192R1_ENABLED
->> +#define MBEDTLS_ECP_DP_SECP224R1_ENABLED
->> +#define MBEDTLS_ECP_DP_SECP256R1_ENABLED
->> +#define MBEDTLS_ECP_DP_SECP384R1_ENABLED
->> +#define MBEDTLS_ECP_DP_SECP521R1_ENABLED
->> +#define MBEDTLS_ECP_DP_SECP192K1_ENABLED
->> +#define MBEDTLS_ECP_DP_SECP224K1_ENABLED
->> +#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
->> +#define MBEDTLS_ECP_DP_BP256R1_ENABLED
->> +#define MBEDTLS_ECP_DP_BP384R1_ENABLED
->> +#define MBEDTLS_ECP_DP_BP512R1_ENABLED
->> +#endif
->> +
->>   #endif /* #if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509) */
->>
->>   #if CONFIG_IS_ENABLED(MBEDTLS_LIB_TLS)
->> --
->> 2.43.0
->>
+Cheers,
+Quentin
