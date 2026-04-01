@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D0EC1076372
-	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 06:04:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 941AC1076372
+	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 06:04:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43F5084099;
-	Wed,  1 Apr 2026 08:04:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8A4DC84088;
+	Wed,  1 Apr 2026 08:04:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="rheRnHDK";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="jnXjDoGZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21FBF84090; Wed,  1 Apr 2026 08:04:36 +0200 (CEST)
-Received: from SN4PR0501CU005.outbound.protection.outlook.com
- (mail-southcentralusazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::3])
+ id DE685840B0; Wed,  1 Apr 2026 08:04:37 +0200 (CEST)
+Received: from PH7PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170100009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEF5584099
- for <u-boot@lists.denx.de>; Wed,  1 Apr 2026 08:04:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C8D1A83F5B
+ for <u-boot@lists.denx.de>; Wed,  1 Apr 2026 08:04:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dxPmyStRbWQolJv8+PUtRQO1xQyPRt4C4dZ3CDAkVo5aZBTeBjGwzoFlvSEt5Gq8cqSQWOQbJyX8rQX4MZIYUtpo7BCnyybZ9jMPg2bde7Q4tw1MGuwSvpK8F3YYv97n7h+8hkw0ps1lHWWJXkYXGAzy8li3gVPrOjmYAjKyjgMYmycEFNcmq1tnFQ+YkyzttvoCsk16RE7qxeN3SMYgdwlI4rtfZAXHjBugfJlJo0h7ESw9+dgO+Gm2TbQAe5uV3/cbIprOOWQEVYfe3OIxFLD/bXncSpdJYhLIBFWtQWb/Wl4I/Yk1vtq6j/0zZXZOTyaBcd80W0FfUKCLdU5GBA==
+ b=kiXjli1mzZxh1980EFNfXMrG1bGos8R5w63P8+G6NocROdoaz0nXHZIrW0cGuIbvrJ1z+PA7aTlriCA3RjpNb6NlurRdfKMR24ePAMVIxy8JvFVJ/RSE6GZWAzUj8ZQ3bL9zUUZT8mB0WgkyJJL0AAh60JGUf+ljhEKWrrydLyfMi6hzdrbipivYnTrWKY3RAsHEW38U/OiF3Ib0rv3NllAWe/e9ALDQeZRRcHOWz+UAtkYOugnUxF99LHJ4XBplyKnZUorLI6cW16bYOpDbTBhZOgCkoJudFae5tOkcI3Tcbq4epMcIXxfyk1BoIF5gzHE9G+nMpzd0d2qVrENPuA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Z1OiGqWBZktCmbBCo4ViYYvrNvysqb8tZncNw79epwE=;
- b=r8TRWbF6HC4E/hScoRtwxarmrrvfOIpi1R6qQLBWFMoyZBMFs3f+vStGn0miVRtbubPSW/p8nchqlkEvpRmm75vnLZk+GkOci4rxX5mb2HummxRCtKtzesO8YlAgFXFCAnlz8j1QKHpRprlqaP/JWA7U39F47W+mZkwsgLy52rYTbqoaK4cxHrHc5soy64wak4xVzuqbuZBtVzQ479MBccJvRgCczTLqCu5i53wDSI/BeyO/OEKCPP++OAb+boZiMITgmbJIu9Wrp+6DHZUDyjHuoZUngN8dICO+E139pCsL5RY+Ij31GWUxfEjs6obC/qz38CIF1Xwz+B3dLLMqeg==
+ bh=2idZQvoj7JcDQ8d+ASM96keYKVO8Y08LGZTBuiuMAco=;
+ b=xACLi3qOpw9lEA7qef+yUiwfwSDn6JQ0ldys1FXd8ezOysRlZdkvPUD/+ioY0ER80ulOfAdxE9KEbZDApZEHwjhJhFa0Iye4Sez9N0XaxAgAk2+8TJLBx4c44M0TZQPQSk3KAPeht3DNDyvcVymVLIBDDSsId6cuu+DwPAUAW5nYZUt1h4ChYxm+dlxHrKJFObvUArwtH8lW9Q+JX9eMVV9kvtt91dUtwSVJxY1FQ9XHWE/3LQrpB7fZNf+m4eFKwc092df3MTrPTXICzrUireMXlgenosZ+BlvDi+lK4E0H02cZPv4/qd+Jl426OQm8NmVReC4ThQM1H+K3L0nZ1A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Z1OiGqWBZktCmbBCo4ViYYvrNvysqb8tZncNw79epwE=;
- b=rheRnHDK+bZdBnaVCaiem211Ar+q6xHUo6y02bF+bJxkIXvRoOGr4HZMUs2dKPsXmVyH98NqH6W2oKg+BQ9X9OB5c5t3CoWg97fVY/gxomV+KlQ7KZ6wa0oai7HAoAgO/UASzqtwtqMRZCa9EDPBecWBwZR2t8OkueOAzVeH7pM=
-Received: from CH0PR08CA0019.namprd08.prod.outlook.com (2603:10b6:610:33::24)
- by BY5PR12MB4081.namprd12.prod.outlook.com (2603:10b6:a03:20e::21)
+ bh=2idZQvoj7JcDQ8d+ASM96keYKVO8Y08LGZTBuiuMAco=;
+ b=jnXjDoGZkm13PmeVOoI2JZo8SBXazG3ZszOKV+hsuoUZApHDi4wgqU9efv3oBGzrwYeuIaLZUtj2whthm9ttK8gQopHYfkSckZi0J+pCnvvrLJiIDPynckMzoLCJlLqMwcknZz01D7Sm4gHDzX5RIAgsLPKw5LdV6O8YoVy1Zws=
+Received: from CH0P221CA0039.NAMP221.PROD.OUTLOOK.COM (2603:10b6:610:11d::21)
+ by CH3PR12MB8728.namprd12.prod.outlook.com (2603:10b6:610:171::12)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.17; Wed, 1 Apr
- 2026 06:04:27 +0000
-Received: from CH1PEPF0000AD82.namprd04.prod.outlook.com
- (2603:10b6:610:33:cafe::fb) by CH0PR08CA0019.outlook.office365.com
- (2603:10b6:610:33::24) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.30 via Frontend Transport; Wed,
- 1 Apr 2026 06:03:59 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.15; Wed, 1 Apr
+ 2026 06:04:30 +0000
+Received: from CH1PEPF0000AD81.namprd04.prod.outlook.com
+ (2603:10b6:610:11d:cafe::b9) by CH0P221CA0039.outlook.office365.com
+ (2603:10b6:610:11d::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.28 via Frontend Transport; Wed,
+ 1 Apr 2026 06:04:25 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,63 +59,65 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
 Received: from satlexmb08.amd.com (165.204.84.17) by
- CH1PEPF0000AD82.mail.protection.outlook.com (10.167.244.91) with Microsoft
+ CH1PEPF0000AD81.mail.protection.outlook.com (10.167.244.89) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9769.17 via Frontend Transport; Wed, 1 Apr 2026 06:04:27 +0000
+ 15.20.9769.17 via Frontend Transport; Wed, 1 Apr 2026 06:04:30 +0000
 Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 1 Apr
- 2026 01:04:26 -0500
+ 2026 01:04:29 -0500
 Received: from localhost (10.180.168.240) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Wed, 1 Apr 2026 01:04:25 -0500
+ Transport; Wed, 1 Apr 2026 01:04:28 -0500
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@amd.com>, <xypron.glpk@gmx.de>,
  <ilias.apalodimas@linaro.org>, <sjg@chromium.org>
-CC: Casey Connolly <casey.connolly@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 2/3] event: Introduce EVT_POST_PREBOOT event
-Date: Wed, 1 Apr 2026 08:03:45 +0200
-Message-ID: <ae0079a2839dceef08f3324714d45fb48d5d7100.1775023421.git.michal.simek@amd.com>
+CC: Kory Maincent <kory.maincent@bootlin.com>, Padmarao Begari
+ <padmarao.begari@amd.com>, Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini
+ <trini@konsulko.com>
+Subject: [PATCH v3 3/3] fwu: Move boottime checks to EVT_POST_PREBOOT
+Date: Wed, 1 Apr 2026 08:03:46 +0200
+Message-ID: <7fec12cfc852b25785577b4871b11d5629a14a8e.1775023421.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1775023421.git.michal.simek@amd.com>
 References: <cover.1775023421.git.michal.simek@amd.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1976; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=T/cGva4hXoG7w9TnsMuwHQ2paQ0lMfy68D8biPoEpE8=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWSe2RoSKeIhKfNyWp9EempEd9CZ339f7J6b8dWe+cGUs
- NaDzyKjO0pZGMQ4GGTFFFmmM+k4rPl2banY8sh8mDmsTCBDGLg4BWAi768x/PfvvLGVWdBy9Z03
- s7fVqey3sHHO0Zh72tX11+NtDXdXPIlk+MPVNS1q+6ES6WSeyWoS+Z8u3hVVTdPdmK60Z2nd9YQ
- VGowA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=814; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=JGr8nXWnwZuEoGEdXLcS6H0JeuMU3j8/ahHXdAKSpZE=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWSe2RrKotS1PDFIPPqxoaDzpO9B7q1vtKbPsjjtM+9wh
+ 4iDTFFbRykLgxgHg6yYIst0Jh2HNd+uLRVbHpkPM4eVCWQIAxenAEzkegDDPzW7LK4N05ZNkw8L
+ i8tW29IhcTjjZ8Chr6kpG/715N6q8mf4K+8tLfV5TvnHzpLPk7i382+/mvWb96uZoTjTnXmCIpl
+ zmAE=
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD82:EE_|BY5PR12MB4081:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0605ae7b-462f-4e8c-c919-08de8fb48817
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD81:EE_|CH3PR12MB8728:EE_
+X-MS-Office365-Filtering-Correlation-Id: 53967fa9-c738-487d-f647-08de8fb489e0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|376014|36860700016|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: EUiHquzeUB2rilXZrbIdOByuJ+eiVWoqp3bMfuBKyOroFDrzKHTLLU/GQYfUYtYFxuBQjR41iozfN+otQAvfAiFkCqtfjccsykxawe3AUWG3hjULo8zUJkG985z/TR3+VKFFvHF5Q2FnoeQQ7CXaX1xdU+1w6DmNayaSLjy9+9gyWKp4Zi5oQoZdZ7OwFoBwXCgj3fsbDxRN3H6LyGL1pFEaE3WyToHPxsl95wmg7h3oR0xlFFgKtvJPWtwxPhKSai2NGYGbW3F1inP0WjnjX74XQfe+bdyFUnZYle8/QCx38KiabSdnDPDigz1jyQnQYDyVKlU9H8NLNmNRWuBeYD9TMKTjvm/0AL1582Xge9WmrOuDl5FInOPudHdCsRXJQd3KuRRVlXrAyybHT1fV02xpPA+03jpHHeUNJS9FBtY2e2UaXGRA0fMMzCBR+uI8/l09pWcbIknaxU/Yvz0/w0QFYrLVJQSZJ2cfTkkUQ9btD2KXMWt524A2Fv/IpxqEo3VKFbH+W4JNRc/zqBrDSrVXTELIa//JCMbb2zjdh6tuSNZplK82zTzS4jnezmPqo6DIkaVIorB44q+CEIGd8q26EDMLrkfzCKM7mNkKD4WZN4W4niApYBx0jN8s+cBMS5QO6wI8EEqzepzPTvNzIcp9afJKTNRSfH4jHyKQip1/g5QoQDQARk+aIg0xwch4BYRojRkkA8jcQr5IZjRyeX4nuXkfzjKRDrNtMYPMb7PlwQejsPTQdH1ZbpfEhM0d1P/j3m8+AxGyhYDTs5IVZw==
+ ARA:13230040|36860700016|1800799024|376014|82310400026|22082099003|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: 7PlxkddDKXqHc9ckPQ4vG9EoFu8UJxpEejIUCeo+23jZTXEWRGt9G7vAqoEB49kayCAMjevwUwB8gNx6qA+sqyT3myjIVg8B0eNrBcTYkBIZm9xgxKPwwPeoIFvDMmzZEmwAXs+SIdpLZR+jv5T42aveedCS+3/YiXc6A8aM/S+IwhHIOWGtxDL10KS9zauFiSdSWE0XtNvv7jjhZCY1Kl8zKHjroZPGMuuYFOtWorskC0cuXiuP32irLRmhZncy/slH7/gvNzoMRq/tIhX3Sc6JBx2GCvvtb1N4kerrNDD+shhw+chlPAgc5LoLxKZTAtuSzirrkcqc9Jnih3uJ3K9YYWhUBTzMvMwFoVFrEkO5a+w5d2QC1c3+9BtikMFIX0NftDdCpBZS6qxqOexIIbuVx6Pr7a1U5UMIH1xYN0DpkFEiD23YTaslU6L8/M3bcwmpbj1iGwKn6gxTJayi6dr61KYXeeRv6wO5+He/dNnJKydnEL0+jIB9U8isODBvXyTR296V1k32awn8dz0GxBIeYWk/XaQnD2MTLRGX6iMSuu1h6AZoiaThs1Z00vytAE27VXTfMVLJNCEW9rc3H1ejSr8Zc3MBy5P/AQ6sjKoXzeCXfDbxR1wmjNKGca8kZZSWNbYLhDUpqZSV2M3Q5fPeDe3Xg4veVxFcBBBQWSXPvv+cMt7tV3qhtYaH34BEABGRkM9EB9vEi5l3pDfKDmo2x1YMSKiyoRa+YUAHxfjnzRxFmAaLGfxbNmTJTHwKOZpXHsO32S7e2Lm+N/EIdQ==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(376014)(36860700016)(56012099003)(18002099003)(22082099003);
+ SFS:(13230040)(36860700016)(1800799024)(376014)(82310400026)(22082099003)(18002099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: sOvLI1hr8XgkZETd/cqB3VhkAjqxDbF8cqhjuodD3PQswg4p5zgywjZ51mYgp8FR9R8LP1Qxhxg+vE/QYeI8PGdOph8p6elU2OfxDO9YpztdO36Ns9iKG+iPKwv9KaTBvlByYCE+3viAZGMeZkxJ9j9mdI1p/MzoUngIBhBbYBYoDH9bn+JW2iifNWEmvJMYSW+NHSohWlFgW02y6Sh0O1GqR1ZU9Ka/JicyZOUJu059QX3IjQtdHbhZLbLAG413reVub82iox0Sjo3NWZ8bLNGxTyzYsRMBxtnWI8hEe2fWkqJjDkxSvKL61WVUEyCD1fDA4zfr+wubKlMNCpmYd3pR/qZZZ8xM9CfkdPMLQrFTi48MViDLyH4VNxczZL2EKdhU8f4OAZ5Kvojxj7j+Z7CA5Zq+JpIxqaEiJzLyCtnYREPQKdJqUW0523IGA4cL
+X-MS-Exchange-AntiSpam-MessageData-0: XtuDInwNaAjorfMKMnrOhFvV/xoc7zW5qG8WanTvT2+u30Sud/Q7Ldv3ryP40sWdd9RY6fnyDUWh/htIv4+OLBLhP3ae9fUR5hvsQc9ogl9CPL94vH1y9XmzIPkMC/5nqJUx97ZPR5MDkFcIMpRAK7fO+cr0uWRcCIXXzaSGhx6OPJZrlsLBG24tyclXrBwwpUlEHRMHXmw52F7mT2IjO4b1FV2rxp9UWgg5sM3Ho+4aug/FPIDub1YfOLjXHx3UcYI8kWr4tivelxY8bzo1bzTkQnySkdaVM++2x7D/d3HxgiDPfgpJKpoHG8SXQb4IK0JTvn+GUC0Ek7yDlbS/LZ3z9Xvuw3f+oHFfS47SRDXv39j0msiQ6qyC93L9u5F2CDVKhVR2aGlIiRyc7OeMKOqG99bsfIiEUp+V4e09RtmeNBBKDNQjL6ob1M7qb7FQ
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Apr 2026 06:04:27.3054 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0605ae7b-462f-4e8c-c919-08de8fb48817
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Apr 2026 06:04:30.2757 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 53967fa9-c738-487d-f647-08de8fb489e0
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD82.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD81.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4081
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8728
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,80 +134,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new EVT_POST_PREBOOT event type which is fired in main_loop()
-after the preboot command has been executed.
+Switch fwu_boottime_checks() from EVT_MAIN_LOOP to EVT_POST_PREBOOT
+because there is no reason to call FWU so early. FWU triggers EFI
+stack initialization before all devices are visible which prevents
+the EFI stack from scanning these devices and adding them to EFI
+variables.
 
 Signed-off-by: Michal Simek <michal.simek@amd.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v3:
-- add missing type_name extension
+(no changes since v1)
 
-Changes in v2:
-- check return value
+ lib/fwu_updates/fwu.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- common/event.c  | 3 +++
- common/main.c   | 4 ++++
- include/event.h | 9 +++++++++
- 3 files changed, 16 insertions(+)
-
-diff --git a/common/event.c b/common/event.c
-index 8d7513eb10b6..398e713d2f82 100644
---- a/common/event.c
-+++ b/common/event.c
-@@ -49,6 +49,9 @@ const char *const type_name[] = {
- 	/* main loop events */
- 	"main_loop",
+diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
+index 37c613014d18..e82600a29a40 100644
+--- a/lib/fwu_updates/fwu.c
++++ b/lib/fwu_updates/fwu.c
+@@ -796,4 +796,4 @@ static int fwu_boottime_checks(void)
  
-+	/* post preboot events */
-+	"post_preboot",
-+
- 	/* livetree has been built */
- 	"of_live_init",
- };
-diff --git a/common/main.c b/common/main.c
-index b0b6e74f5d3d..4b4504557f6e 100644
---- a/common/main.c
-+++ b/common/main.c
-@@ -19,6 +19,7 @@
- #include <net.h>
- #include <version_string.h>
- #include <efi_loader.h>
-+#include <event.h>
- 
- static void run_preboot_environment_command(void)
- {
-@@ -53,6 +54,9 @@ void main_loop(void)
- 	if (IS_ENABLED(CONFIG_USE_PREBOOT))
- 		run_preboot_environment_command();
- 
-+	if (event_notify_null(EVT_POST_PREBOOT))
-+		return;
-+
- 	if (IS_ENABLED(CONFIG_UPDATE_TFTP))
- 		update_tftp(0UL, NULL, NULL);
- 
-diff --git a/include/event.h b/include/event.h
-index 1d267f1d1054..3ce5f992b04e 100644
---- a/include/event.h
-+++ b/include/event.h
-@@ -153,6 +153,15 @@ enum event_t {
- 	 */
- 	EVT_MAIN_LOOP,
- 
-+	/**
-+	 * @EVT_POST_PREBOOT:
-+	 * This event is triggered in main_loop() after the preboot command
-+	 * has run, so that devices initialised by preboot (e.g. USB, UFS)
-+	 * are available to event handlers. Its parameter is NULL.
-+	 * A non-zero return value causes the boot to fail.
-+	 */
-+	EVT_POST_PREBOOT,
-+
- 	/**
- 	 * @EVT_OF_LIVE_BUILT:
- 	 * This event is triggered immediately after the live device tree has been
+ 	return 0;
+ }
+-EVENT_SPY_SIMPLE(EVT_MAIN_LOOP, fwu_boottime_checks);
++EVENT_SPY_SIMPLE(EVT_POST_PREBOOT, fwu_boottime_checks);
 -- 
 2.43.0
 
