@@ -4,108 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A39C71112242
-	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 23:23:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9742C1112241
+	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 23:24:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1EE684020;
-	Thu,  2 Apr 2026 01:23:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 1BC21839DF;
+	Thu,  2 Apr 2026 01:24:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y+8aKlL7";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="JxV88rfI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90B5284011; Thu,  2 Apr 2026 01:23:28 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C7ECB83D8A; Wed,  1 Apr 2026 21:16:38 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A67018408D
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 01:23:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DCAA483CE3
+ for <u-boot@lists.denx.de>; Wed,  1 Apr 2026 21:16:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-66e02a7ee78so396064a12.1
- for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 16:23:26 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775085806; cv=none;
- d=google.com; s=arc-20240605;
- b=fuBk7AUzfDNmRpX6x0RGyfq42qF0Wdv+1UZ+riKmwJge2J4KIy5huaSsjgE6RUjVrx
- ip1Ba3AXxG9sU5B5lZCiJp2PI/Vg8XjA4E7WZNIEDtmDBiCLVg5G4TRti7RC8F8clwYU
- 0cSxnNQW9zHIA+QGIYYzSkdKHHVqbqVsJ33kD/SqsoKweCfftztZ+Gb685R+rXCvrhV9
- nbB1xXu1oG8pS7CfB+98nc1Iqn5yFX8bYXW/V0QbPkjRkdV8yhEDdgm5ODg7CLXnkUei
- uWudvB+4gXA04wg4Qr5Q8OOIRg6ejDhpVeAaAbpMZysITbnYwC6SFvNua0wG9d/V6NXf
- Q/qw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=H4wMy8OcPA7S8mvu3dXr7gFOo6vHVEl2cTbZQIDBrUs=;
- fh=SGHXci2xJXT3h8As2/rDrB+mIGJ1RTnI7tx126xkHuw=;
- b=RaztwadPa3CevlGerqiYa/KE3i6Ge/H4tqQeKflSxHEeieC2z/SqwYDuXk4DsdECNH
- CrsItLneFwwL65Y52MknvwEJ2u8zRldWbDQNA4EqeDXD32brXgA3qwI8O9lPW4z7EPgm
- 0zC5MPfcURA7e/HgKf9bo83Hse8nwzgHcb8hHbx5A/p+4cgD3WYv1XGzh/qcznd3HrBq
- TQaV+VahhQ4SYhZrfsfUN8l6ksEWoG4nSICU24FwkqHkbTjq2xngxNCZG9oNGAuULcoI
- f+CYXZj9OOCV8xJIEnAsiuMampHdNJC6AaxTmChsRCpkDjChguxtXJR2O+F1ulpwbzLV
- CSCQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775085806; x=1775690606; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=H4wMy8OcPA7S8mvu3dXr7gFOo6vHVEl2cTbZQIDBrUs=;
- b=Y+8aKlL7XeMQaSxS5fc58ibcqJtwq5uRbyyHdqyNeavwqGNFy5ukCcQ0MiSB7CIdwg
- bb47LYDjs4fO38ADvstkYk0RUnOAhsE7tyOAhmLHGFdacXmt/ZqJFBLDlFNP+sr3iqBO
- hFFn3xO4ZXlzuJJMw2xkZ2LtNpL0ypGhTifo0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775085806; x=1775690606;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=H4wMy8OcPA7S8mvu3dXr7gFOo6vHVEl2cTbZQIDBrUs=;
- b=cCTRjUaIhfANd3oQKieoD9MNCyOavVWOQnzpMLcUHVRqX1EtcQorNdBkiXQ/gGgPqp
- 0rghAp7FPZldQPgx5ZXA2D0Dmvt+ebIxXBxZ4fxctut7DZyY0xNqyslwkOQVb+p4SC5l
- jhGYJWIrY+Vgya0JODYbiy1B/yXXY3Av40PxaneFFtkExTD3neVEPm/skHDVj/Ga6Dn8
- qNVq/QlZSY5F2QQ+Lx0TtMs8V8uB62XuNzCtiUo13JxVC+kjhb0+JTsZJthFCDIiQm2P
- xE0MbxOQF2+gs4CIeji9G9mznivNLEvMm079j2dt5pFUnAw5Fvnpwgl3M843QvgaPKY2
- RY2Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUDuh983B6R/t6WeGiEVOXeXHip3C6HleaYTs0GAJHpzwuhz2Zf7vPtqFKlDYRTpJZV2yOO7+c=@lists.denx.de
-X-Gm-Message-State: AOJu0YwvnqHXK3FW0VkjlequtUQ3bnD5hm+EPEzzfEeDrF6LMlNGDbdr
- yUrzcTaGFBMzzGTCIy2JNbB9VD7jMaoFaGIu0uM5TNRFXk/54dZzjXD4xK7PJKGW/U7dpcN+9o9
- GqjvUTzTXWJ00BX5GaKgSMJb12rDk3whbKRyRfyXm
-X-Gm-Gg: ATEYQzzRyBb4WvUzRyV9F5QSEHlR2l4WPYOk5/mpYfbnNsvHMRD0vk2qE4IvQIaIQjV
- TsSKwnufVZLXFJoZc7MQCLH8ihZIrMbA/mcUI2zNQTu4MC9S5NWvOhjZQoFhfGnlALChiXpaOJl
- gSsHFY01eOBsMixvCJdX8KQYISDcZRVSEFL/C3otQ+Gql8pTf0S8Z71O3Wd/4FymYZrhXJ2Mca4
- 4/iM+8OmSLNJ0/rmtVoIAWSDfqW+OJlfAYTXR1mNBptrZ0j6HOsdonrn1r7XXBG1yadlutTStTM
- IuPqUg==
-X-Received: by 2002:a17:907:d7ca:b0:b99:d2d9:da47 with SMTP id
- a640c23a62f3a-b9c1378f282mr362824966b.2.1775085805898; Wed, 01 Apr 2026
- 16:23:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 1DD7A112C70; Wed,  1 Apr 2026 21:16:36 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1775070996; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding:in-reply-to:references;
+ bh=oyFogTgRtUvaDDgj6DDgHY1Ox65CuvP8Dusr5r375o0=;
+ b=JxV88rfI+k3ZSxxCVptVjXFLaB2RiZ0G1s9FgNU/ESGdFgnNNghYa4xBLU5jFwoJqWxbAO
+ q0tS/uTGSFPd39vR5aLP95qMqp9fPyQXGKNCeSw1tZm/mYv5iesvYAoh4ss+YJvm+1Imro
+ CsWUWpLNsdV+nM6T06OUgiOxZQTbSgAqe5trPUPOmN9r0SZKqt9OwYzMrixrE99n/zQk4a
+ F7hVrxVLmISi+SvZOVHFj0+5LQLx5dXWrbibVWt1tcBsrbrL5CikjX4sWT5AgGdl48jnLn
+ P5hiKzGywCaAOF0NsjKmM0ubmBjtylRGBmDN8lpdpDjA/Hivjrq4IrdmnPCQ6A==
+From: Marek Vasut <marex@nabladev.com>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com
+Subject: [PATCH 2/4] arm64: imx8mp: Deduplicate DRAM size tables on DH i.MX8MP
+ DHCOM SoM
+Date: Wed,  1 Apr 2026 21:15:54 +0200
+Message-ID: <20260401191617.20141-2-marex@nabladev.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260401191617.20141-1-marex@nabladev.com>
+References: <20260401191617.20141-1-marex@nabladev.com>
 MIME-Version: 1.0
-References: <20260331075338.2391-1-ansuelsmth@gmail.com>
- <20260331075338.2391-3-ansuelsmth@gmail.com>
-In-Reply-To: <20260331075338.2391-3-ansuelsmth@gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 1 Apr 2026 19:23:08 -0400
-X-Gm-Features: AQROBzBxVbNvAZOT8wkxsq3VECZZ2k36JfW6XJBPq284EZ_3WUUbfr1Xe7HR9S4
-Message-ID: <CAFLszTgt05WWZ8RB7CY9aSa6t9YqazJiDhcNpU92YDRyR5aaBw@mail.gmail.com>
-Subject: Re: [v4,
- 2/5] misc: fs_loader: reorganize and split to FS and FW loader
-To: ansuelsmth@gmail.com
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Peng Fan <peng.fan@nxp.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Chen-Yu Tsai <wens@kernel.org>, Jamie Gibbons <jamie.gibbons@microchip.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Justin Klaassen <justin@tidylabs.net>,
- Harsha Vardhan V M <h-vm@ti.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Sky Huang <SkyLake.Huang@mediatek.com>, 
- "Lucien.Jheng" <lucienzx159@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
+X-Mailman-Approved-At: Thu, 02 Apr 2026 01:24:51 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,30 +68,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Christian,
+The DRAM size tables are shared by SPL and U-Boot proper, deduplicate
+those tables into lpddr4_timing.h . No functional change.
 
-On 2026-03-31T07:53:19, Christian Marangi <ansuelsmth@gmail.com> wrote:
-> misc: fs_loader: reorganize and split to FS and FW loader
-> misc: fs_loader: reorganize and split to FS and FW loader
->
-> In preparation to the introduction of variant of the FS loader,
-> reorganize and split the driver to generic fw_loader function and
-> specific fs_loader function. Create a dedicated directory for the loader
-> and move the internal structs and functions to a dedicated header file.
->
-> This will permit to reuse all the property and logic of FS loader
-> with container that are not exactly a readable filesystem.
->
-> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+Signed-off-by: Marek Vasut <marex@nabladev.com>
+---
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+---
+ board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c | 3 +--
+ board/dhelectronics/dh_imx8mp/lpddr4_timing.h     | 4 ++++
+ board/dhelectronics/dh_imx8mp/spl.c               | 3 +--
+ 3 files changed, 6 insertions(+), 4 deletions(-)
 
-> diff --git a/drivers/misc/fw_loader/fs_loader.c b/drivers/misc/fw_loader/fs_loader.c
-> new file mode 100644
-> @@ -0,0 +1,212 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> + /*
-> + * Copyright (C) 2018-2019 Intel Corporation <www.intel.com>
+diff --git a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
+index 3fe98d36f5b..3424be10936 100644
+--- a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
++++ b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
+@@ -28,12 +28,11 @@ int mach_cpu_init(void)
+ 
+ int board_phys_sdram_size(phys_size_t *size)
+ {
+-	const u16 memsz[] = { 512, 1024, 1536, 2048, 3072, 4096, 6144, 8192 };
+ 	const u8 ecc = readl(DDRC_ECCCFG0(0)) & DDRC_ECCCFG0_ECC_MODE_MASK;
+ 	u8 memcfg = dh_get_memcfg();
+ 
+ 	/* 896 kiB, i.e. 1 MiB without 12.5% reserved for in-band ECC */
+-	*size = (u64)memsz[memcfg] * (SZ_1M - (ecc ? (SZ_1M / 8) : 0));
++	*size = (u64)dh_imx8mp_dhcom_dram_size[memcfg] * (SZ_1M - (ecc ? (SZ_1M / 8) : 0));
+ 
+ 	return 0;
+ }
+diff --git a/board/dhelectronics/dh_imx8mp/lpddr4_timing.h b/board/dhelectronics/dh_imx8mp/lpddr4_timing.h
+index f8078051f2f..0f9f47bbe11 100644
+--- a/board/dhelectronics/dh_imx8mp/lpddr4_timing.h
++++ b/board/dhelectronics/dh_imx8mp/lpddr4_timing.h
+@@ -6,6 +6,10 @@
+ #ifndef __LPDDR4_TIMING_H__
+ #define __LPDDR4_TIMING_H__
+ 
++static const u16 dh_imx8mp_dhcom_dram_size[] = {
++	512, 1024, 1536, 2048, 3072, 4096, 6144, 8192
++};
++
+ extern struct dram_timing_info dh_imx8mp_dhcom_dram_timing_16g_x32;
+ extern struct dram_timing_info dh_imx8mp_dhcom_dram_timing_32g_x32;
+ 
+diff --git a/board/dhelectronics/dh_imx8mp/spl.c b/board/dhelectronics/dh_imx8mp/spl.c
+index d8a928639b2..ece790da66a 100644
+--- a/board/dhelectronics/dh_imx8mp/spl.c
++++ b/board/dhelectronics/dh_imx8mp/spl.c
+@@ -117,11 +117,10 @@ static struct dram_timing_info *dram_timing_info[8] = {
+ 
+ static void spl_dram_init(void)
+ {
+-	const u16 size[] = { 512, 1024, 1536, 2048, 3072, 4096, 6144, 8192 };
+ 	u8 memcfg = dh_get_memcfg();
+ 	int i;
+ 
+-	printf("DDR:   %d MiB [0x%x]\n", size[memcfg], memcfg);
++	printf("DDR:   %d MiB [0x%x]\n", dh_imx8mp_dhcom_dram_size[memcfg], memcfg);
+ 
+ 	if (!dram_timing_info[memcfg]) {
+ 		printf("Unsupported DRAM strapping, trying lowest supported. MEMCFG=0x%x\n",
+-- 
+2.53.0
 
-The leading space before `/*` breaks the block comment alignment.
-
-Regards,
-Simon
