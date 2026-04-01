@@ -4,47 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B33181112242
-	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 23:25:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7E2B1112242
+	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 23:25:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B0E784101;
+	by phobos.denx.de (Postfix) with ESMTP id 9B63384113;
 	Thu,  2 Apr 2026 01:24:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="MhiQ32Vu";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="GZdtbzvh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 636EB84099; Wed,  1 Apr 2026 23:02:48 +0200 (CEST)
+ id 8F1F580517; Wed,  1 Apr 2026 23:02:48 +0200 (CEST)
 Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5484E80517
+ by phobos.denx.de (Postfix) with ESMTPS id A1BA583CF5
  for <u-boot@lists.denx.de>; Wed,  1 Apr 2026 23:02:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marex@nabladev.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 7C73710E094; Wed,  1 Apr 2026 23:02:44 +0200 (CEST)
+ with ESMTPSA id DA150112C72; Wed,  1 Apr 2026 23:02:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1775077365; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=Zks0Ywk80WzOc4gTliB85hoAXzm4YrdFfM/d5Y95LK4=;
- b=MhiQ32VuDBT4NSK55pN/1wUo/jCMzM6uDuWHYz7zFtb4aQV7APVHWeQjjZC7uhXbd2EYRD
- ZdAitlJiGb0ty63RondIyyJPb3cfMsiXFqTHKZoBtSWMC2Wu4TG2GF2+vU7sXhn2BGWudh
- u0CQhxUrS6repcptqyFm0x8dmd0u6AUdmwvZo4FYsaPxJygu2xBaHSBSy/pdWqDU9H6V6e
- 1qa/nyn3wiyrTAPVd03e83kTEZqID7Y6kwwbFtUYiuch16P7TSJopX6rmW5seXuopEogxy
- h63cnKTyfgMbmljsh8CcwTAa1Hxc++djLZTQMwpPmgnl5kzrg55dPM4eO6C/2Q==
+ s=dkim; t=1775077366; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding:in-reply-to:references;
+ bh=oyFogTgRtUvaDDgj6DDgHY1Ox65CuvP8Dusr5r375o0=;
+ b=GZdtbzvhDEjLbYuJPTfV9MX032fkWiBKLWz8fhWTgiv7y/gEkGKuBrY6cky9qX/YJ4nrMG
+ 1wjrbh0F1u5o7HEXhA+zSUg+Umi1RVNKIAjCmAv3SyFcTLk6e6hk79ZggJpW4myqa8rN3x
+ FwdhJwIl+0djdCiZnQJVJzMdp7pk4Mvf3Q7DaGFgMf8WIMvSb3eSv85JaG3zS8wshDgeXM
+ xkmwtO0CJUr/2sa39XM/wE+uK5QUuAQNvY+9PEQ8iSaKrgWa4RU0yAerDkRV1cghG5Dfpb
+ rB+Nwm59HADBMmG1FnCi+C3rf0U8Ghm4CAAFlrGQFoIgjb1hByznVOCSuw0i+w==
 From: Marek Vasut <marex@nabladev.com>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
  Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
  u-boot@dh-electronics.com
-Subject: [PATCH 1/4] arm64: imx8mp: Fold inline ECC into spl.c on DH i.MX8MP
+Subject: [PATCH 2/4] arm64: imx8mp: Deduplicate DRAM size tables on DH i.MX8MP
  DHCOM SoM
-Date: Wed,  1 Apr 2026 23:02:17 +0200
-Message-ID: <20260401210238.60010-1-marex@nabladev.com>
+Date: Wed,  1 Apr 2026 23:02:18 +0200
+Message-ID: <20260401210238.60010-2-marex@nabladev.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260401210238.60010-1-marex@nabladev.com>
+References: <20260401210238.60010-1-marex@nabladev.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -65,10 +68,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The inline ECC configuration is identical for 2 GiB DRAM variants
-and 4 GiB DRAM variants of the SoM, no matter the rank count. Fold
-the ECC configuration directly into spl.c to simplify the upcoming
-deduplication. No functional change.
+The DRAM size tables are shared by SPL and U-Boot proper, deduplicate
+those tables into lpddr4_timing.h . No functional change.
 
 Signed-off-by: Marek Vasut <marex@nabladev.com>
 ---
@@ -78,108 +79,61 @@ Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@dh-electronics.com
 Cc: u-boot@lists.denx.de
 ---
- board/dhelectronics/dh_imx8mp/lpddr4_timing.h |  4 ---
- .../dh_imx8mp/lpddr4_timing_2G_32.c           | 14 ----------
- .../dh_imx8mp/lpddr4_timing_4G_32.c           | 14 ----------
- board/dhelectronics/dh_imx8mp/spl.c           | 26 +++++++++++++++++++
- 4 files changed, 26 insertions(+), 32 deletions(-)
+ board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c | 3 +--
+ board/dhelectronics/dh_imx8mp/lpddr4_timing.h     | 4 ++++
+ board/dhelectronics/dh_imx8mp/spl.c               | 3 +--
+ 3 files changed, 6 insertions(+), 4 deletions(-)
 
+diff --git a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
+index 3fe98d36f5b..3424be10936 100644
+--- a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
++++ b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
+@@ -28,12 +28,11 @@ int mach_cpu_init(void)
+ 
+ int board_phys_sdram_size(phys_size_t *size)
+ {
+-	const u16 memsz[] = { 512, 1024, 1536, 2048, 3072, 4096, 6144, 8192 };
+ 	const u8 ecc = readl(DDRC_ECCCFG0(0)) & DDRC_ECCCFG0_ECC_MODE_MASK;
+ 	u8 memcfg = dh_get_memcfg();
+ 
+ 	/* 896 kiB, i.e. 1 MiB without 12.5% reserved for in-band ECC */
+-	*size = (u64)memsz[memcfg] * (SZ_1M - (ecc ? (SZ_1M / 8) : 0));
++	*size = (u64)dh_imx8mp_dhcom_dram_size[memcfg] * (SZ_1M - (ecc ? (SZ_1M / 8) : 0));
+ 
+ 	return 0;
+ }
 diff --git a/board/dhelectronics/dh_imx8mp/lpddr4_timing.h b/board/dhelectronics/dh_imx8mp/lpddr4_timing.h
-index c4d51174a33..f8078051f2f 100644
+index f8078051f2f..0f9f47bbe11 100644
 --- a/board/dhelectronics/dh_imx8mp/lpddr4_timing.h
 +++ b/board/dhelectronics/dh_imx8mp/lpddr4_timing.h
-@@ -9,10 +9,6 @@
+@@ -6,6 +6,10 @@
+ #ifndef __LPDDR4_TIMING_H__
+ #define __LPDDR4_TIMING_H__
+ 
++static const u16 dh_imx8mp_dhcom_dram_size[] = {
++	512, 1024, 1536, 2048, 3072, 4096, 6144, 8192
++};
++
  extern struct dram_timing_info dh_imx8mp_dhcom_dram_timing_16g_x32;
  extern struct dram_timing_info dh_imx8mp_dhcom_dram_timing_32g_x32;
  
--typedef void (*scrub_func_t)(void);
--extern void dh_imx8mp_dhcom_dram_scrub_16g_x32(void);
--extern void dh_imx8mp_dhcom_dram_scrub_32g_x32(void);
--
- u8 dh_get_memcfg(void);
- 
- #define DDRC_ECCCFG0_ECC_MODE_MASK	0x7
-diff --git a/board/dhelectronics/dh_imx8mp/lpddr4_timing_2G_32.c b/board/dhelectronics/dh_imx8mp/lpddr4_timing_2G_32.c
-index add7a0bf23b..3cb868311f3 100644
---- a/board/dhelectronics/dh_imx8mp/lpddr4_timing_2G_32.c
-+++ b/board/dhelectronics/dh_imx8mp/lpddr4_timing_2G_32.c
-@@ -1853,17 +1853,3 @@ struct dram_timing_info dh_imx8mp_dhcom_dram_timing_16g_x32 = {
- 	.ddrphy_pie_num = ARRAY_SIZE(ddr_phy_pie),
- 	.fsp_table = { 3600, 400, 100, },
- };
--
--#if IS_ENABLED(CONFIG_IMX8M_DRAM_INLINE_ECC)
--void dh_imx8mp_dhcom_dram_scrub_16g_x32(void)
--{
--	ddrc_inline_ecc_scrub(0x0,0x3ffffff);
--	ddrc_inline_ecc_scrub(0x4000000,0x7ffffff);
--	ddrc_inline_ecc_scrub(0x8000000,0xbffffff);
--	ddrc_inline_ecc_scrub(0xc000000,0xfffffff);
--	ddrc_inline_ecc_scrub(0x10000000,0x13ffffff);
--	ddrc_inline_ecc_scrub(0x14000000,0x17ffffff);
--	ddrc_inline_ecc_scrub(0x18000000,0x1bffffff);
--	ddrc_inline_ecc_scrub_end(0x0,0x1fffffff);
--}
--#endif
-diff --git a/board/dhelectronics/dh_imx8mp/lpddr4_timing_4G_32.c b/board/dhelectronics/dh_imx8mp/lpddr4_timing_4G_32.c
-index 41b078f6e9f..3a475076e75 100644
---- a/board/dhelectronics/dh_imx8mp/lpddr4_timing_4G_32.c
-+++ b/board/dhelectronics/dh_imx8mp/lpddr4_timing_4G_32.c
-@@ -1857,17 +1857,3 @@ struct dram_timing_info dh_imx8mp_dhcom_dram_timing_32g_x32 = {
- 	.ddrphy_pie_num = ARRAY_SIZE(ddr_phy_pie),
- 	.fsp_table = { 3600, 400, 100, },
- };
--
--#if IS_ENABLED(CONFIG_IMX8M_DRAM_INLINE_ECC)
--void dh_imx8mp_dhcom_dram_scrub_32g_x32(void)
--{
--	ddrc_inline_ecc_scrub(0x0,0x7ffffff);
--	ddrc_inline_ecc_scrub(0x8000000,0xfffffff);
--	ddrc_inline_ecc_scrub(0x10000000,0x17ffffff);
--	ddrc_inline_ecc_scrub(0x18000000,0x1fffffff);
--	ddrc_inline_ecc_scrub(0x20000000,0x27ffffff);
--	ddrc_inline_ecc_scrub(0x28000000,0x2fffffff);
--	ddrc_inline_ecc_scrub(0x30000000,0x37ffffff);
--	ddrc_inline_ecc_scrub_end(0x0,0x3fffffff);
--}
--#endif
 diff --git a/board/dhelectronics/dh_imx8mp/spl.c b/board/dhelectronics/dh_imx8mp/spl.c
-index 727e1ff3774..d8a928639b2 100644
+index d8a928639b2..ece790da66a 100644
 --- a/board/dhelectronics/dh_imx8mp/spl.c
 +++ b/board/dhelectronics/dh_imx8mp/spl.c
-@@ -139,6 +139,32 @@ static void spl_dram_init(void)
- }
+@@ -117,11 +117,10 @@ static struct dram_timing_info *dram_timing_info[8] = {
  
- #if IS_ENABLED(CONFIG_IMX8M_DRAM_INLINE_ECC)
-+static void dh_imx8mp_dhcom_dram_scrub_16g_x32(void)
-+{
-+	ddrc_inline_ecc_scrub(0x0,0x3ffffff);
-+	ddrc_inline_ecc_scrub(0x4000000,0x7ffffff);
-+	ddrc_inline_ecc_scrub(0x8000000,0xbffffff);
-+	ddrc_inline_ecc_scrub(0xc000000,0xfffffff);
-+	ddrc_inline_ecc_scrub(0x10000000,0x13ffffff);
-+	ddrc_inline_ecc_scrub(0x14000000,0x17ffffff);
-+	ddrc_inline_ecc_scrub(0x18000000,0x1bffffff);
-+	ddrc_inline_ecc_scrub_end(0x0,0x1fffffff);
-+}
-+
-+static void dh_imx8mp_dhcom_dram_scrub_32g_x32(void)
-+{
-+	ddrc_inline_ecc_scrub(0x0,0x7ffffff);
-+	ddrc_inline_ecc_scrub(0x8000000,0xfffffff);
-+	ddrc_inline_ecc_scrub(0x10000000,0x17ffffff);
-+	ddrc_inline_ecc_scrub(0x18000000,0x1fffffff);
-+	ddrc_inline_ecc_scrub(0x20000000,0x27ffffff);
-+	ddrc_inline_ecc_scrub(0x28000000,0x2fffffff);
-+	ddrc_inline_ecc_scrub(0x30000000,0x37ffffff);
-+	ddrc_inline_ecc_scrub_end(0x0,0x3fffffff);
-+}
-+
-+typedef void (*scrub_func_t)(void);
-+
- static const scrub_func_t dram_scrub_fn[8] = {
- 	NULL,					/* 512 MiB */
- 	NULL,					/* 1024 MiB */
+ static void spl_dram_init(void)
+ {
+-	const u16 size[] = { 512, 1024, 1536, 2048, 3072, 4096, 6144, 8192 };
+ 	u8 memcfg = dh_get_memcfg();
+ 	int i;
+ 
+-	printf("DDR:   %d MiB [0x%x]\n", size[memcfg], memcfg);
++	printf("DDR:   %d MiB [0x%x]\n", dh_imx8mp_dhcom_dram_size[memcfg], memcfg);
+ 
+ 	if (!dram_timing_info[memcfg]) {
+ 		printf("Unsupported DRAM strapping, trying lowest supported. MEMCFG=0x%x\n",
 -- 
 2.53.0
 
