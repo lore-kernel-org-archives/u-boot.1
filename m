@@ -4,103 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CEA9D35144
-	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 06:44:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF325D35144
+	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 06:46:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5981E84010;
-	Wed,  1 Apr 2026 08:44:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1402A84010;
+	Wed,  1 Apr 2026 08:46:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QJy3Axq+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TocwNN7u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FC8C84010; Wed,  1 Apr 2026 08:44:11 +0200 (CEST)
-Received: from mail-yx1-xb12a.google.com (mail-yx1-xb12a.google.com
- [IPv6:2607:f8b0:4864:20::b12a])
+ id EC9CE8407B; Wed,  1 Apr 2026 08:46:33 +0200 (CEST)
+Received: from mail-yx1-xb136.google.com (mail-yx1-xb136.google.com
+ [IPv6:2607:f8b0:4864:20::b136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21DF383F5B
- for <u-boot@lists.denx.de>; Wed,  1 Apr 2026 08:44:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A18EA83F5B
+ for <u-boot@lists.denx.de>; Wed,  1 Apr 2026 08:46:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12a.google.com with SMTP id
- 956f58d0204a3-6501d242e3fso5576664d50.0
- for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 23:44:08 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775025847; cv=none;
+Received: by mail-yx1-xb136.google.com with SMTP id
+ 956f58d0204a3-6501d32b04bso5679612d50.2
+ for <u-boot@lists.denx.de>; Tue, 31 Mar 2026 23:46:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775025989; cv=none;
  d=google.com; s=arc-20240605;
- b=SK3TY/8KK7KP2xEGASu144By7pLxarRVy2dQkfrIsHt2hOWg3gDzSmR9rmbM7WyBVk
- erp6gYYurM8o7ywgQxTeMctq+vQIHqbUAsqeVfjGm0fdkUqptpNCALknarN7ANsUaneK
- YkiF54yeF996asFnBh4BDwEqu62FuWfj1+UNZec7+p1kRHUI2ymXg0E0+JEJj3RSIUdM
- JvCJAFZk3E8BTQ4248HCoZPVzJ46ne5afD2OJKr3B0XXAyuaClxKQoDIwX6ONrgjU+uy
- OtBSOYmj0huEas3JXnOvBLc2gahmrKQLa6o9XMcSE21Ak3bul+SoEPq/EupJr/AEKBRn
- kSHA==
+ b=CFYCrV8AghaJTQdvAjZWb8Vui9eHeM9/x0WcN0jTGGR1LNE2t4qvwNiUWlIe47qLGs
+ IVLkSK2dJjjPlxpyvyZY9qr2U9KvHbAgMGAhwOWtOvPuxTaXkLE8uWDtVtLd1CriqqPl
+ qkkFSc1R1jrSbGgM7YXtuib+cia0OWGj/jHRzpjjKXy/GBvPwjzFnA9oskyVFKQUVPEy
+ V614y1yoRebQbZUE3/6pV5TLPo1vrVF4FzzD3J7GE93pMzLY093cvN7HHPqmK6FjpGh7
+ quxLcCSFGUcoUgYAFL4dV3/95fJlz3o3iwLszM072fQ4JDwP7u8U8Ud+hxXwt+o4M5kP
+ O8yw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=jZcZT6ZIsMOsFcne9cUgyY6AhuzNt98aSWqOgcoGd0I=;
- fh=lSFpkYIYt00WImqZ2VAjRCTnKq9YqCMBEgnu2nAxKJk=;
- b=YjsAPURBTfkUgoCi1Rw5SnEcF5GcabH3q2s2lbwcblFy0WANvjJYRrNy9Fpla4KTSj
- xWgaXmLUzv1VK33RtWKa5YC3CpFvG0sO5qz4/gzrKTPJRtZPSGXQ3oWZoWESX5aloZ1t
- PYfLZaPO8AMRHmLuO6Kk3TIK9bk7+S6faI//kDT9dN9sFi+tqBSW1lKbQeerSTDad3QK
- h4yh4jo0xjw6wFR+vXrDtnOOWuPvWZTlqucznU8Pmslx9wpMyIf25vBw0Mk2wa+dtZDz
- 9Wf55YUG4AZUMEWywspYh/5g0a7xMim1OK5CseT+huNQU30eBHpIhRKDoMHTMl56Fhv3
- gnoA==; darn=lists.denx.de
+ bh=ti3U1MzmNGrdfnWD9mSYxfCiKpi0PZKQSBGaTnDH96w=;
+ fh=Daf52JUaAIdoTVuKkaT7OpA0KQ4DlZ1vf3ML9NFYNfI=;
+ b=L6V97zKnDjEms+OGk/6DZ/WE3/0sWhUaWVN7YBQAn7fg29kvTMflUE8kmbrwxr23x1
+ t7PKzwGJAR4T5gsCnWVmuzPEjiHlE0QOhKRO2uKmXig4cP+kB45H/OAKU8EX6/bFKyUt
+ FvTNaSkoz5nwWAnSSQ5PEjC/fenKGEX254Ou2Y+Oeccu2NCEC3i/eSw8v5bXduD7bLJS
+ 5PezOmN4Kw1v76CIimQ9XL7OkPh4EqLGpcvURNGKa0maxe0VAJpr9tw8cmgs50I05+ED
+ NmhmjDUb29U+0JIM5YqgC4EfEg5vFvb8Ib2MYkKY6e8gftap+zUrIi+QnatJPDTuzQWb
+ ipRA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1775025847; x=1775630647; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1775025989; x=1775630789; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jZcZT6ZIsMOsFcne9cUgyY6AhuzNt98aSWqOgcoGd0I=;
- b=QJy3Axq+fp2yV3MPEknlsvcnrEcF4qeTSipNGluzBR2QIQNcyT+LGmJidG6tNc40Yd
- ZPFNhN6rto/1zaFxAZCKouNv+2mDJhymNYewJqcUMYkHM04oB1hFN4pNhYDUHDeolvjH
- cxvhaWDtZaXRgsvwRlYyaFfTllB8KOGTGpnDwBW6imcxNIkz8S6ckdRHk/9O57LO4nJC
- juO7hf686rjk0Z8aqC2HcKUSEqFPgDxVzD91ZyNhe4Ciodz1RXKF0z2I9sMQg1Ie6ZLR
- ghgFyzMnMus+wIOhPzshkHg4jD5S+1WANTYOS6AM/+OkwQ8kKO8VxwLrS+0K19rwQr2F
- tb3Q==
+ bh=ti3U1MzmNGrdfnWD9mSYxfCiKpi0PZKQSBGaTnDH96w=;
+ b=TocwNN7uqgzQRoWgfmcX2T2E/JvmJv2VDGsJ3Uq6csDWvKwYVYg7udKToBTVPghsj/
+ dTIHaXFTzr6wrylfWmTp8D6mUQMALVwU9Bkjpp4Csg3H5Br3pATJ0qkgIBFMLdoKo3DP
+ bB9aU4xj1ORwrpLvbgtbjKzTYY1rdbX0HlmmhcAxCDR3KGVCwcVTdUHwha0lJ+hLTmI8
+ mNnAc4bYA1eoWDlKBqV5BRuNd6EUT/phQnthFzJg8nR61jhC3pEI474txCGUdHgXARUe
+ S0XaPbTcwF4EGYHBXn8slp7Hh48zB4xFttMf9UIKiKUHDLo49ZZ1WQJbUVzt5LwwjfYH
+ PV/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775025847; x=1775630647;
+ d=1e100.net; s=20251104; t=1775025989; x=1775630789;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jZcZT6ZIsMOsFcne9cUgyY6AhuzNt98aSWqOgcoGd0I=;
- b=iEXKnLETmRgIjnVC2nkm5pzcKEqBMo7Tl9aXO2Q9HtfrNuSptUUzyFiz+RMGrgY+P+
- IbNTdzyX0L1mGKxstNXwNY4Da4rPo20cENAwjG5hCeN9/CvVD11Y/OQLUCRMYoKBH08x
- bmlRyqvVB93VLRm5LpTSLdFHM39tZiaHd9NFM3fsuagp/JK9wYl2og5dXSegjWmGDq8L
- geKLnwfno3QPCaQSLVtdV27/wVtPo+BGK6DkOMfJ4YSrLqupZ5UsbUzW4Hi8Mm9d1plL
- RTzpAe3KYa8XTznw6l5WP3MIu7lvh7b4KfUPCr0uCFkeeTarS3WxD61oNq3FMYNlMTlU
- 0Iyw==
+ bh=ti3U1MzmNGrdfnWD9mSYxfCiKpi0PZKQSBGaTnDH96w=;
+ b=Xrr9MKup1pLzm8366KK29vO/H/d/ea0MeKlepZZmBiAxokzvGhLVzh1A6tu69zFxiL
+ r2W6pvyQCEUuku7OP42kZldio55xSlfmyOMZmY9fsznC4VX2r0cwETi6UYyPltJeebMn
+ A+oy97BypaqhmY7e2Kue3cs6VzMny63VEHamyPJMwYSJXGGg88KRm/ghtQQT4eONltg2
+ mpwvDxHqmljcPFyd+ipe2/cNoivI7hOPzdTazuYbBpSLkKSo614DSUBjm63bxuWHVtZ5
+ 3FjQdVgYcQXQr4HWNqOhg/XONqirvTEZwf5YSq9HcUYuUMBiG9IUFddA/V2NiDTWPAMX
+ eD1w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW5vzZoVs/yGyr2p6GSKaB5ObXTkETZEMKjIRrRh8Q1eEDojaMAZQCWIp/gp07oSAGPk4XtXVA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwuDR25ovpQR3+Cgwig3gPonS4fbev2ggkB2p0Z4/oyQZgclHZT
- NRxY/Y6iQ5IgsKAQL2FOsH16lvGoSmjcmMFtVeRle8GrHNDBaGoqj62uVQbO4KMNkrMz8T6lmZx
- wtCrmgKpG7q2bmY6/iErcz938L+p/2Z6YL670X/uDZjhcg76j1Fn2
-X-Gm-Gg: ATEYQzztBgHJ17lNbNxS58eBzOu2mIHUJHJ9xZog/ezfoJvOBQL7x+Ct2rQbrQiMyUg
- xdTi9RgX2vC2KJDjxcs9jK2OZwkXkVUo6mAjlUsA1U/9SRGk7RAMLHBNG8A2VE5L9MBDejY2y+Y
- dkXTisSnB9qed251PoWzRQ/jjdWoGzJVMijktRIBrFdvu0gHEMh/I6cs02hFU08o8mXV7MSfnqk
- FXOgihxVyvHnLG+rs2nu7Aj2va3D+E1hk5iGLMyawXV2mH/00eLLqp0NAakqaDrYZAWolVVXwRX
- LiMrN8l5rj+gx1zzGlIXY4+RXFhTVN5XLyWkydt7ykIjSTz/aAEyPvtSR0rnwK6Lz3dZxR7G2xB
- TfWcWMtT9xiuseT/+fDNTAnG5Yx9xp4W/rVscKxp5hCNf1xmCTLOt3zTJJl3YJ9crlI4+hmbVj0
- ukOtu0wK+oda8HFMUJdwOXNwSC4EFPut8ozzvqPbM0LfXa4uHg60AFixHnrAW87uLI3DTsnfVqn
- nNJnU8kRpR3zj8Ny6Y0/GVcLsSWsBbyiLt6/Ll8kM8TOT+4+NQHDysEij1/cLliY9kgeqiSC8ZG
- y0ljm3nxx+MI3bem3IWuae4y1aS3fCJ7j/qkbYqVDlq2
-X-Received: by 2002:a53:ad4c:0:b0:650:1c44:ccc5 with SMTP id
- 956f58d0204a3-6502fdd5842mr1786320d50.27.1775025846780; Tue, 31 Mar 2026
- 23:44:06 -0700 (PDT)
+ AJvYcCX1uj5YRQJ6/Qh2DYblhwv0XaMgxuaocyTP6KQorw0vRJL1Epz+EFbPGYxJAldTqPcEBnaxtlM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzpzH6XITvRxY3G2r2OmJvR4wymGezRncNlNPpFAWVFmriE/FSa
+ wqLwkQ1IgsJFFxnIWD2GJWzt+H5yApzepiuhL/mmsOUF81X7Te8Bi6AByy5cu/WM0ffcx2wGlxH
+ ieRR0eORoU4LaqrqovWVUFUmaezpTjzHY15JPvF7FcQ==
+X-Gm-Gg: ATEYQzx8AKOk6fkIMCNb8jT2eGllsMcDu2ci0qrN5rva58xOn6cR32DkWYRXDtBnoZ6
+ dIzYOHqT3rLY42FsBedK4u0iAFoPazORKgDhfcWzV7orI1CEAom61wDhLFIbT451naqHzvpaz5e
+ Ne48XnrPftmhnW6V+K7q7+3ko24RkRsTZIrb2P08D5yXP6D/hYdZQf8evPbJD1eS8eEFplfsYil
+ xJJv4Y5BoAjImXFdN32Qq+jq75kLzM1JtudkeBJrYu+qUu4uw1ER/GXcP0fTPZosrAoRQQjR+j+
+ iEopiiXeHRSr41BC/P/f/aPjUA1uw8cU41iN563dNAybcZWk2NH262Hew4fdS0EBUi+XNHRVubr
+ k4OZIeh9XrgX637k9hUZEZPDdF4jeJiqVRVqyXBFGtwr0G4iDYpSDn83lbnh9PdURSUfXO89l6l
+ gXowhk1Cbdxq7lBa0XX+Tc+ABZkiJdD90UtFd68LUhuKn5RRtDzWldpzAHnmq8DrIq4v7mpR4EO
+ PLnh0jqxN/xeAvNWkN4KUM0ej3pRnT8QzLH85yy6WGO7hYHNQ0KICCx98J8gGig1b8wfOORCFQQ
+ O2WS5Fk1zTZh0vuSVeiF4w9bRMdLq5oTVFd8V5hyVih/
+X-Received: by 2002:a05:690e:d0f:b0:64a:ee12:e7c3 with SMTP id
+ 956f58d0204a3-6502fe689abmr2423251d50.49.1775025989432; Tue, 31 Mar 2026
+ 23:46:29 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260331080117.2370092-1-ilias.apalodimas@linaro.org>
- <20260331080117.2370092-4-ilias.apalodimas@linaro.org>
- <cbe4109d-7290-4104-8142-076b3296e13a@mailbox.org>
-In-Reply-To: <cbe4109d-7290-4104-8142-076b3296e13a@mailbox.org>
+ <20260331080117.2370092-5-ilias.apalodimas@linaro.org>
+ <29fd4e34-2242-40a0-b8b3-29d1b88c7f95@mailbox.org>
+In-Reply-To: <29fd4e34-2242-40a0-b8b3-29d1b88c7f95@mailbox.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 1 Apr 2026 09:43:29 +0300
-X-Gm-Features: AQROBzAs17DRPQxI238ky9caEe4lFmwfVjzlZwRO0dS22VuvjHj0gSjRnvQkhxE
-Message-ID: <CAC_iWjLOJs-C4W=9EcY2DEVRde8Qqmmqb3b3h4+hGn1r9Pab+g@mail.gmail.com>
-Subject: Re: [PATCH v2 3/4] fdtdec: Introduce fdtdec_setup_ram_size() to
- determine the memory size
+Date: Wed, 1 Apr 2026 09:45:53 +0300
+X-Gm-Features: AQROBzChAaXJKedV6w2p-JjBw7YBJYhFb7_vannYSlNgzhH7Y3DVq2etLhkbyrM
+Message-ID: <CAC_iWjL0ArZkRUtvBVGQjFhk-ng9ZGBjQAf1wR6PrLAmRHE-bw@mail.gmail.com>
+Subject: Re: [PATCH v2 4/4] common: Allow relocations on the top of the last
+ bank
 To: Marek Vasut <marek.vasut@mailbox.org>
 Cc: marek.vasut+renesas@mailbox.org, trini@konsulko.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -123,48 +123,33 @@ X-Virus-Status: Clean
 On Wed, 1 Apr 2026 at 01:01, Marek Vasut <marek.vasut@mailbox.org> wrote:
 >
 > On 3/31/26 10:01 AM, Ilias Apalodimas wrote:
-> > We previously added a fdtdec_setup_mem_ram_top() to determine the
-> > topmost address of the last DRAM bank. Similarly the overall memory
-> > size must be calculated when U-Boot gets relocated to the actual end of
-> > all available DRAM.
-> >
-> > Pre-patch:
-> > U-Boot 2026.04-rc5-00012-g5789f787c8a6-dirty (Mar 31 2026 - 09:13:34 +0300)
-> > DRAM:  4 GiB (total 8 GiB)
-> >
-> > Post-patch:
-> > U-Boot 2026.04-rc5-00012-g5789f787c8a6 (Mar 31 2026 - 09:12:59 +0300)
-> > DRAM:  8 GiB
-> >
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> >   include/fdtdec.h | 15 +++++++++++++++
-> >   lib/fdtdec.c     | 18 ++++++++++++++++++
-> >   2 files changed, 33 insertions(+)
-> >
-> > diff --git a/include/fdtdec.h b/include/fdtdec.h
-> > index 26e40c3cdb46..9bccd70bbdb6 100644
-> > --- a/include/fdtdec.h
-> > +++ b/include/fdtdec.h
-> > @@ -965,6 +965,21 @@ int fdtdec_setup_mem_ram_top(void);
-> >    * invalid
-> >    */
-> >   int fdtdec_setup_memory_banksize(void);
-> > +/**
-> > + * fdtdec_setup_ram_size() - decode and setup setup gd->ram_size to the sum of
-> > + *                        all banks
-> > + *
-> > + * Decode the /memory 'reg' property to determine the memory available in all
-> > + * banks and populate the global data ram_size with it.
-> > + *
-> > + * This function should be called from a boards board_get_usable_ram_top().
 >
-> Is the board_get_usable_ram_top() really the right place to call this ?
-> It feels like it is being conflated with ram_top here too.
+> [...]
+>
+> > @@ -321,6 +323,19 @@ __weak phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+> >                */
+> >               return 0;
+> >   #endif
+> > +     if (IS_ENABLED(CONFIG_RELOCATE_LAST_BANK)) {
+> > +             phys_addr_t old_top = gd->ram_top;
+> > +
+> > +             ret = fdtdec_setup_mem_ram_top();
+> > +             if (ret)
+> > +                     debug("failed to relocate to ram top");
+> > +             ret = fdtdec_setup_ram_size();
+> > +             if (ret) {
+> > +                     debug("failed to calculate RAM size");
+> > +                     gd->ram_top = old_top;
+> This changes ram_size , why is this restoring ram_top ?
 
-I don't think so. You are effectively calculating the top address you
-should relocate to. You should also calculate the difference in
-ramsize. Those two should not be separated actions
+Because the actions of calculating a ram_top and ram_size should be
+bundled together imho. You are effectively calculating how much ram i
+have available and where should i relocate.
+So if one fails, the other should be restored.
 
-Thanks
+> Should this also restore gd->ram_size ?
+
+fdtdec_setup_ram_size() already does that in case it fails.
+
+Cheers
 /Ilias
