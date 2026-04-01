@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D032810FCAF0
-	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 22:10:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A7B310FCAF0
+	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 22:10:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 690E383CE3;
-	Thu,  2 Apr 2026 00:10:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ED3ED840AB;
+	Thu,  2 Apr 2026 00:10:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FCq5g0gc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gwpByh+H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B5C684056; Thu,  2 Apr 2026 00:10:19 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 92017840B5; Thu,  2 Apr 2026 00:10:39 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6652580517
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 00:10:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A694280517
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 00:10:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b7cf4a975d2so27713766b.2
- for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 15:10:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775081417; cv=none;
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-66a4c6bb6ecso443487a12.1
+ for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 15:10:37 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775081437; cv=none;
  d=google.com; s=arc-20240605;
- b=B2qFR1lzV6vTftKzvkstb8G/JRoZF+IcwMdEJouiiEwYcygDPjglhBfPASjQqFx6kx
- 0zYa6lUi4RuuAiGkV9RvkEtHAkxmqsTQuDZWZwbV2pCTGSUcW72RqBhro+C1LTy0yfhX
- KJEPujmSIGL1vmd92cK1psv94EwvNJGLV4ytD5RaVsm9aTVtCT87yRvMtSJoZzd5rmLr
- TMsfZ5/7loHjphyNwdgKRFn1wpn8OmmN5Su2vjucbueNQOWNq/DnxSnA1Bs4HygdJ+Nt
- UTGoHT0hIQOuQS3yL1wrmJoWjwB5X/43+/F6HRv2h9lep++RE/s97bdKDBZb/oaNFBLs
- r2mQ==
+ b=ctUAuM1EzXFQFZmC2p28v0WipcNCftyH3JRo2/oZ6KcTvntOalfh6ShIQXpcb95u5H
+ 1otO/Pergx3QNa3RmW6K+DeayJfAzI3cm/tHlHDMPBhWVVWISq95DemnVRgBFLsjDq6w
+ 8u6+Mpez1r93c+DNUz5t4YX9F1FXPP4BlgqjA5IRicP8SXBURc/5TGw6LI8vMZOA1GbI
+ 5r2Ce+NGbi3ISVT9tINeS9nu8DXDm3k4zmxV1QnO5PV2HAlMDVP9a8tr4p0go/+RUkFa
+ tdh8esb45DcyilWE+/8pI4bEmJ0FYDcxmVbDZrcafb7GYLewZbWdOd9yt8GFaBcvOla0
+ dylw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=mGEq07OdlCfGPCWklrKzJjzhv+q8BHvvWmsJ+BNwges=;
- fh=LMBg4xvMlGLaeyJ99UwfkurzK8eeVHh5v9dt3H6v40c=;
- b=XUXUn+kAW81okgg0dnAyoj/U6u/Fn0GU78pA3dHdU8xaRn3DM/zVQ15Es8VpCZxa/P
- U00TAQn6adv5+pESn1hNmrj8bOv14SnFyobiTIIDcsJ1hYAUnVE4eKBPo1susgN9Kddt
- pM6OLxtVMyLcFgYyLMN2MewEyWW5XugDmkQAnHU1AuvwvBFK6XWPLBv4zZiQR1r61Bxa
- 9+QGdM22k0x49OGqdqRBXYtp8sPSjWbknX0nm3z1X6nS+xMU8ttijX7QEigwLa+Gm/p1
- TRJJrL4ZzbaQEfy285myIpdzvXj9shk44aWsv2Pc1ZfVZTwfBOio8vnQrpuRjGqdsN1V
- Jsow==; darn=lists.denx.de
+ bh=lDJbPUCX82tu0mW/4jmISJwkk6+wpk9YShBkFsaGO1g=;
+ fh=i+iVFi2z6TKZDZgy4yVRKPCguV0SZyMjYi92eD5G7MU=;
+ b=flJHqP1qshsnLWrnS/gkvC3Qvvv8C4jdPG2UCr6auN6isRAjvjGPl/8uNFhNtw//VA
+ vz9QGkwI9wpjbYQYg7DGZGmpcI5S3swyXOhbb+CIlnpRlg++eLjxpUZXwHKYd24xuqni
+ Uci1UvYr9Ah5RB+JZCr5gZO65Cwu/U/x/cLYKisTmz0PNjjiHt5UE5AJYVuPXz+ZUNeT
+ qLr8sg7NPOfA1jfvKRthz4K4g7nuypbB4HpUK3ZUf4N8L7Mc1R32wuw1jnFN+LF1Tyvh
+ qMcSuUbELT/31+uVmXO6kheHDSvkgLcIbyVIXJ4Y/H6a5n5W+5+QbkwgR7xToEZpIEGu
+ s5fg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775081417; x=1775686217; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775081437; x=1775686237; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mGEq07OdlCfGPCWklrKzJjzhv+q8BHvvWmsJ+BNwges=;
- b=FCq5g0gcsOrXoZclpfi9M1wF4Z+8Q3+sFjYfzD4+yfWJgrHcbrYhRr9JYYicE2O3Q/
- Ua7JFd7XVtl/soHkbFUZpt6ix8F/zkvFpjrCj9QI3oUneJtIhJ8gH2xfURPmqZLXS4Vt
- kWr/0ulagd56PeJ0AYRVWN9PNbEG89ouGV6Us=
+ bh=lDJbPUCX82tu0mW/4jmISJwkk6+wpk9YShBkFsaGO1g=;
+ b=gwpByh+Hjt3OCRs7eQhW53DJ91VpgSSHSyaZEt2jgcHECJ1uLvUicF1Edai/FukRd+
+ RtT2Yp/6AXUSyMu3NpWhMdAL7LPkK1yvzZscmtvV+CkrmwgkSWbTqz9FZzSCB1ss3J8j
+ NcMQG4ui2YzNrl5jOVebTv24dKMTesuKJNLo8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775081417; x=1775686217;
+ d=1e100.net; s=20251104; t=1775081437; x=1775686237;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mGEq07OdlCfGPCWklrKzJjzhv+q8BHvvWmsJ+BNwges=;
- b=SGkgAQ6BwShB6N/uBJtzY3bch9M6r6fJO2VJzTa4qigvM9pwLoIowAjpAn1e8RjPK7
- /Anz2/feQuRqfAwWIFXVRIm9jkrUNG/8b+roCE9iW2THDzrDHzG+RVvL37IyxnKAnivV
- Y7VVpQwvn1nE2nVNhUVaVbgQ/6Kdg7SRF1ILWj7oTFe1Z3//ehXWK7HLxxBDvh8L++ly
- pb+J7MSiQmUqRr2SS5g9F9plMyiZ9MghEObhavSs52uuwGp57+Pz9bUdWvq1pBfDi7zO
- TOm1dY6BeDC7oo0t4dhtvEc3hy2hgjF5FZWUVkas5qiAQ0uiCykz8Kudsd3WxGk0+Kjc
- bMBg==
+ bh=lDJbPUCX82tu0mW/4jmISJwkk6+wpk9YShBkFsaGO1g=;
+ b=IvsEHBnTukpbU68xee3E7lY68R4s16eZQUlUHg41esjhT8nI1Q4i2c4Dh8qy7xwKFY
+ A2DsoQpeqXi9LWqbxs+5+RA8/WfB7utEBV8lbxikIvNvM5eimnCepKsjuEu+z88TTPDa
+ y1GxMh8Js5GFX8vpfprK4QgvnEYXgBV+kJbK+w6LXiwermOXHXY2EIymwuhjkA0B3Qso
+ x6M88r1QcRsGnqCbt5V9h8xVcjNXQkbAy7WlhbjKf+xuopHQ4g2MZGJ9mK0D9Qkak3L1
+ E5CbtOdNhy2/NtqbZdFTSGE9nB2nj451oFx+DU8f1s5ZiynZHjJ3RIF7x9XoF5BeeP8I
+ seBA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUp3axHMqqp5h2T8Oej/4dEHMQbTXozs934PSzuUSrya6ZfhATZcwJUcEmoKluQNAmMN5BfJw8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwXFryw4HZCOJEG/QTHnAaV56hhqSEufym020V56QP3f8gg6uL/
- j+sai1Wg+UlS0BBbYc+mmgttWDK/zh8Q0FNVXtRF+S7st2MTn111Wk1JePTYlcLf5MZfzK9Kl5S
- HJcp2xcVbV5mWML3SFBOJeuB7Q51FhFQLlT1h2a+K+iD/Z9o1bdjgVg==
-X-Gm-Gg: ATEYQzxS0GzABBhu51RgBNX30pu62NKKrsGKE8Z7O1dxkUuj+hrV5dnmXXPrORDtr6H
- ymbg9whUr+eA84bfp7M05nbNBLSnV8dJj5lpNSCXJ3p3He7W0NOAiiW6HDvsL+of+cxodVtWjhn
- ugAVCpy9kna09D1dgdmxqSfGCnmL19y8IDo04Qs/Qxh3eLyV8i/R3LelzNCxz1a5SjZxmEbzP3n
- rzY8rMJ9NJzxisPPZ2mtU+tLqLA25bLhYRqk/+QAk0Ar4zT9kE249UNodNAYL5zjsyiPAW9KJEa
- K6AQa0ef7e4tVp6P
-X-Received: by 2002:a17:907:e112:b0:b97:1009:7536 with SMTP id
- a640c23a62f3a-b9c138cdde6mr278501366b.15.1775081416782; Wed, 01 Apr 2026
- 15:10:16 -0700 (PDT)
+ AJvYcCXIMUJXi0ng42M2uVJxwnkLOTuLtxH06S0w1njOuzPtUU05tcSct9hbfrr8I6qGEaEi8aGYZys=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyzik5gbdQtv7EzfWN24NY94L6dIbC3+0jgfUtcjOyfSoo5ETmd
+ 2rOLmCFsiidStwqBMoMrm3uvhFLuvCTJqqyLEhbFdOV7eOtUs4X8XCMVpoF55VNqqiKhMe1Xik1
+ mkRIAu/yzeocoyL+ZJJnJWZ6s7oDN52aV1msoa+96
+X-Gm-Gg: ATEYQzzXpDL29mX3B58NlnehZEXxQmEAsjOreKfdNOoGPh9CbTRDRbpINSjkG4iy5xC
+ ysWTuke6zjeAyWtF3v6R3tjsG2OCrIb8DG8IZLvocQIvCMJ4Wbn8/6yddCrmdBgy5YSw33Mjjti
+ tiavYqPmMjS/3VDhBqYjSctB37tqwtPbMwwIQCsAOA92HsLLhc528iDMbHcli9JeBsfBHKX6Iwe
+ bdVogSJP4OirZw0T00m8o8WBgHVVS6L3lnQDxqXnqqByQ5qwUDBe30Zip6//FWtQQAeZvz0Hj+Y
+ KTW+UA==
+X-Received: by 2002:a17:906:2658:b0:b95:6687:4d15 with SMTP id
+ a640c23a62f3a-b9c13ca19bemr286442866b.42.1775081437163; Wed, 01 Apr 2026
+ 15:10:37 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260331100047.34618-1-philippe.reynes@softathome.com>
- <20260331100047.34618-8-philippe.reynes@softathome.com>
-In-Reply-To: <20260331100047.34618-8-philippe.reynes@softathome.com>
+ <20260331100047.34618-9-philippe.reynes@softathome.com>
+In-Reply-To: <20260331100047.34618-9-philippe.reynes@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 1 Apr 2026 18:09:47 -0400
-X-Gm-Features: AQROBzC8wFf1ROtwx5ac722-FadysIVE_65uhDYag0qXt-rUy3HFU1qgeV7HnNo
-Message-ID: <CAFLszTh5z5cMm+0BHds--QtYqya-FCKvtRP1UD+sqc4xsD4yfw@mail.gmail.com>
-Subject: Re: [v3,07/15] test: py: vboot: prepare integration test for ecdsa
+Date: Wed, 1 Apr 2026 18:10:24 -0400
+X-Gm-Features: AQROBzDk8SdGFl6NoKwaR0ad7RCC4THRqcL9P_yxgPBbW7NjH4csXy7RPR8vay8
+Message-ID: <CAFLszTjJTGTAMwT2Dvb=HX=dG_7JuvUwv7kyv+_F3_tWZYje2Q@mail.gmail.com>
+Subject: Re: [v3,08/15] test: vboot: add test for ecdsa
 To: philippe.reynes@softathome.com
 Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com, 
  trini@konsulko.com, simon.glass@canonical.com, u-boot@lists.denx.de
@@ -112,28 +112,21 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2026-03-31T10:00:34, Philippe Reynes <philippe.reynes@softathome.com> wrote:
-> test: py: vboot: prepare integration test for ecdsa
+> test: vboot: add test for ecdsa
 >
-> The vboot tests only consider rsa algo for signature.
-> To prepare the integration of ecdsa test, the signature
-> algo is now explicit.
+> This commit adds test case for ecdsa on fit, but not (yet) for
+> the global image signature (preload).
 >
 > Reviewed-by: Simon Glass <simon.glass@canonical.com>
 > Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 >
-> test/py/tests/test_fit_ecdsa.py                    |  2 +-
->  test/py/tests/test_vboot.py                        | 99 +++++++++++-----------
->  ...1-pss.its => sign-configs-sha1-rsa2048-pss.its} |  0
->  ...figs-sha1.its => sign-configs-sha1-rsa2048.its} |  0
->  ...ts => sign-configs-sha256-rsa2048-pss-prod.its} |  0
->  ...pss.its => sign-configs-sha256-rsa2048-pss.its} |  0
->  ...-sha256.its => sign-configs-sha256-rsa2048.its} |  0
->  ...-sha384.its => sign-configs-sha384-rsa3072.its} |  0
->  ...a1-pss.its => sign-images-sha1-rsa2048-pss.its} |  0
->  ...mages-sha1.its => sign-images-sha1-rsa2048.its} |  0
->  ...-pss.its => sign-images-sha256-rsa2048-pss.its} |  0
->  ...s-sha256.its => sign-images-sha256-rsa2048.its} |  0
->  ...s-sha384.its => sign-images-sha384-rsa3072.its} |  0
->  13 files changed, 51 insertions(+), 50 deletions(-)
+> test/py/tests/test_vboot.py                        | 29 ++++++++++++++
+>  .../tests/vboot/sign-configs-sha256-ecdsa256.its   | 45 ++++++++++++++++++++++
+>  .../tests/vboot/sign-configs-sha256-ecdsa384.its   | 45 ++++++++++++++++++++++
+>  .../tests/vboot/sign-configs-sha256-ecdsa521.its   | 45 ++++++++++++++++++++++
+>  .../py/tests/vboot/sign-images-sha256-ecdsa256.its | 42 ++++++++++++++++++++
+>  .../py/tests/vboot/sign-images-sha256-ecdsa384.its | 42 ++++++++++++++++++++
+>  .../py/tests/vboot/sign-images-sha256-ecdsa521.its | 42 ++++++++++++++++++++
+>  7 files changed, 290 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
