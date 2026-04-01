@@ -4,119 +4,154 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28426D35157
-	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 07:48:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9840D35157
+	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 08:01:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9668480517;
-	Wed,  1 Apr 2026 09:48:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 1CE5480517;
+	Wed,  1 Apr 2026 10:01:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kontron.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="YK5XziI5";
+	dkim=pass (2048-bit key; unprotected) header.d=kontron.de header.i=@kontron.de header.b="ddN3tPoU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E68684010; Wed,  1 Apr 2026 09:48:45 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id 0AB1983F5B; Wed,  1 Apr 2026 10:01:11 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F22680077
- for <u-boot@lists.denx.de>; Wed,  1 Apr 2026 09:48:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1ECE980077
+ for <u-boot@lists.denx.de>; Wed,  1 Apr 2026 10:01:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=none (p=none dis=none) header.from=kontron.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
+ spf=pass smtp.mailfrom=frieder.schrempf@kontron.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=l+smaxfabW5RxoZx41kEsF7U+dQXam/Ct4HjmEhCtnUVs6//W14deSgojDNTD8nTjr/MtUXq7OlragelCQO+g0gin/Ds5bRzZ6txI8A6WNO0e14edaikAOSfOma21h4qty/3Ql7RZFL21PZvf2oRDAKW6np1A9ZksaLU8LCxKE/8Zb6+Vu09otYS1UjokISnD1RAbPl+97NrfX7DyTn2jefyYY9abBWh8DkdhcmzgaahthubNe99epF5/x8BBwytZlv1Bfc+fajtKWg3y2ffeR/gRXhXmOnROdXMxhcVxqQ/1g3bQBo6Ns4QQIyCgEGSciRDBBHU/yR29rhMEEDrKQ==
+ b=R16n+gu7GtrPys3GuuvKbwQ95oubl67DpJdzvU0RZy62HZkw5lHs54LMOP68qMd38K95VTB4sX1FQBDbpSw6tABGrNA7tlPsc/rJColn62rXHSCtRyCNOt1f3fNkVlaI390Y8izTIsF0Kc48LyqfivGVa5B3h4AFSJvlc+JbY9CmlmSbiggRQ/EoK/049w6PG3MNjkOX+6y8D8cqYT/cS6EXimDLA0t4k8RbGW6ZE9J3FVbPG71EFBI4uBtE6NlMeMQc0jy0b+WBwv6J8VpSmDuIFogFXiWZU3bwFnE+C0UcDxKCRnTDy3OQc/HwjkuuM5vm4xXg/pRTIFQaSKcKxQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=83Hl5klw7LlJQkS9LFrC2E4FwwsKdZIaDZDQihD9E/8=;
- b=gopxNXVLyC7pKiGBx689IU7/kgQ5YRxNXcWZqPwe9FLLG9+CuooLNSCNlo6byh+jBGi6qmiDBeW6O5FmrizST6TT7MUEX/FFLA1KIYRO8VG4jJ+BYiGel03J2K2Uzi5ei3b24mVqmQAQIQ8lDLX6bPKCVcjTmdGGwCvwjNDjtG/hdmDmOtR5TsshUuE4kN8wb1kEwGX6eL0RGIfdLPg0TNv5og5OK4KZlDzRhbj2FTwu6OuomMjUwWpO+Ofyu4vSygpMbqIXUcZwVO/GLfnjzJIYZlzfsssYIJpMrVMOP1v+gHNHWszOhUFy2+TAOJ7SY1CZNCG/PphC0NngnOIJng==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=amarulasolutions.com
- smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
- header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
+ bh=6tEXQykmBO4Is8++YsFBBCFZuSOjc9W8VnoQOFfOl/M=;
+ b=rXeqEAIrzLZykgTyGE3buqy1qv7BEruGds2L/+tN3ZgeI1LXLvofgyM1ZpmzRd1tDAOtdkKo6YJBcMbXBZbOV5NTFtuirGVTDskZ8Ow4IodLpxeL63+tKTHHI9LNMlbXuZzmcvVcE94vDc/0TqXU8fEyTUc1HvDlobKqsTSB1r2ofzyKFajFKFlXRgF96kI3+hD/L8w9or7n9QjaMpifHyiXMjV+upk4Z9cDU2XGEhrrYO06OLOakXeAH1+JMGB5WsbBE86y9HdT69OcksPU+Neh8+2d+f4b45SZGllp8UfaGHfvp36gMRoi3m+unKnZSvS0OGrzU8fRAZzIYiZXhA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=kontron.de; dmarc=pass action=none header.from=kontron.de;
+ dkim=pass header.d=kontron.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kontron.de;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=83Hl5klw7LlJQkS9LFrC2E4FwwsKdZIaDZDQihD9E/8=;
- b=YK5XziI5KMjLADmQwh8jW6PnK+/D3Jb/Ts/34XrHlt8jhGqCVi0is3/E8i3jo/B1v2Oh+u/2KY/KWieCmx9OHUfJ7iFKwYuODk19VsYaDJRf2LXIMvyZCMmuabFtp7Hzs6483cbVlO/ezR8HiCmYuvNa/MTL8WgfxSpYWbgtIc/ii0D6Xkl5BL98f7oHo54FGjGlDwSvXF2xgVu6DNUA7891CnCsZcWzO/L0HdcV3Ntf/qVXznfn4swcWSxiKg0JPWBNxPrqi6zvpwZjnCwoncm5EIrvfzvLLn90btIMxzV0Lh8Iha7PinSqqqLsnXyxUQgPJ+znu1Hevm53ZpBMYQ==
-Received: from CWLP123CA0195.GBRP123.PROD.OUTLOOK.COM (2603:10a6:400:19c::23)
- by VI0PR10MB8522.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:213::10)
+ bh=6tEXQykmBO4Is8++YsFBBCFZuSOjc9W8VnoQOFfOl/M=;
+ b=ddN3tPoUG2VbcP6mlUM6uvpb6tbvssvqVjZRom+YAL/zHv6P4bbgtVrZgn5OOaxkFQC7nRmlrQoA/Lrq0YMqVq3aVqqzCZH3tgzLxN5GPO5SwSOtfZWtJ8sMxwULmBLj3cShozOzYVZXyhtrkhfPjgPdAHVEPIXIRmeYbTtRITk2iMevaBttOvxNJsSWF/tQ3mBrjYdZ79XEJOulKEZFDwAX8fdNXNv9n0wVDBv92hXW23RBge50fTedJMfvZiu5DKbttv3p3eYNB1cviyl4r37v8z3GlqdGuxWHU6bZFGV+xw4yvD1YAJJFOPSijyBuayDh6fJ7o0DtIZJfiutWew==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=kontron.de;
+Received: from AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:1fb::23)
+ by AS2PR10MB7686.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:645::20)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.28; Wed, 1 Apr
- 2026 07:48:40 +0000
-Received: from AMS0EPF0000019E.eurprd05.prod.outlook.com
- (2603:10a6:400:19c::4) by CWLP123CA0195.outlook.office365.com
- (2603:10a6:400:19c::23) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.30 via Frontend Transport; Wed,
- 1 Apr 2026 07:48:39 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- AMS0EPF0000019E.mail.protection.outlook.com (10.167.16.250) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9769.17 via Frontend Transport; Wed, 1 Apr 2026 07:48:39 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Wed, 1 Apr
- 2026 09:51:20 +0200
-Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Wed, 1 Apr
- 2026 09:48:38 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Wed, 1 Apr 2026 09:48:38 +0200
-Subject: [PATCH] ARM: stm32mp2: Factorize TAMP_FWU_BOOT_IDX_MASK/OFFSET
- definition
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.17; Wed, 1 Apr
+ 2026 08:01:01 +0000
+Received: from AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::a276:4ad7:962:da22]) by AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::a276:4ad7:962:da22%3]) with mapi id 15.20.9769.016; Wed, 1 Apr 2026
+ 08:01:01 +0000
+Message-ID: <fb79593d-3017-4169-a91f-85bf265c6039@kontron.de>
+Date: Wed, 1 Apr 2026 10:00:59 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] imx8mp: phyboard-pollux-rdk: Convert to DM_PMIC
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: Peng Fan <peng.fan@nxp.com>, Teresa Remmet <T.remmet@phytec.de>,
+ "sbabic@nabladev.com" <sbabic@nabladev.com>, Yannic Moog <Y.Moog@phytec.de>,
+ dl-uboot-imx <uboot-imx@nxp.com>, "trini@konsulko.com" <trini@konsulko.com>,
+ "festevam@gmail.com" <festevam@gmail.com>,
+ "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
+ Leonard Anderweit <L.Anderweit@phytec.de>,
+ "emanuele.ghidoli@toradex.com" <emanuele.ghidoli@toradex.com>,
+ Benjamin Hahn <B.Hahn@phytec.de>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ "matteo.lisi" <matteo.lisi@engicam.com>,
+ "abbaraju.manojsai@amarulasolutions.com"
+ <abbaraju.manojsai@amarulasolutions.com>
+References: <20260324-power-legacy-v1-0-ed432367817c@nxp.com>
+ <20260324-power-legacy-v1-1-ed432367817c@nxp.com>
+ <0c16dfd0d1cedc87bbac071030bbb4d6f04ff4af.camel@phytec.de>
+ <PAXPR04MB84596009AB3591BBE0AD49F98848A@PAXPR04MB8459.eurprd04.prod.outlook.com>
+ <5f44e3d45ac725c16c61a92fff527f9b7bea2fc4.camel@phytec.de>
+ <PAXPR04MB845968E9F7A73809AFAE21E18849A@PAXPR04MB8459.eurprd04.prod.outlook.com>
+ <fd99509a-315f-4c0d-b300-eba1308f7ff1@kontron.de>
+ <acnemXvnI7Ifs3Xp@shlinux89>
+Content-Language: en-US, de-DE
+From: Frieder Schrempf <frieder.schrempf@kontron.de>
+In-Reply-To: <acnemXvnI7Ifs3Xp@shlinux89>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-ID: <20260401-factorize_tamp_fwu_boot_defines-v1-1-ebecaf20ad6b@foss.st.com>
-X-B4-Tracking: v=1; b=H4sIANXNzGkC/x2NQQrDIBQFrxL+usJXmgZ6lVLExmf7F9GgJikNu
- Xuky2FgZqeCLCh073bKWKVIig30paPx4+IbSnxjMmxufGWtghtryvKDrW6abdgW+0qpWo8gEUU
- Z7gHPg/Ma1CpzbuL7Pzyex3ECztVgWXEAAAA=
-X-Change-ID: 20260401-factorize_tamp_fwu_boot_defines-205eed07ad1e
-To: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Marek Vasut <marek.vasut@mailbox.org>, "Dario
- Binacchi" <dario.binacchi@amarulasolutions.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>
-X-Mailer: b4 0.14.3
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: FR2P281CA0168.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:99::17) To AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:1fb::23)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF0000019E:EE_|VI0PR10MB8522:EE_
-X-MS-Office365-Filtering-Correlation-Id: 86dac98e-b78d-4d60-602e-08de8fc316c5
+X-MS-TrafficTypeDiagnostic: AM9PR10MB4277:EE_|AS2PR10MB7686:EE_
+X-MS-Office365-Filtering-Correlation-Id: 468ac665-970b-4508-3f6e-08de8fc4d08d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|36860700016|376014|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: GabE9lgb2n/rBaaXfZGgmVyWhkwnTW9EnAwYYn/EBwv4n290lRyyUtcyTUxWbrccOTN5o1/FRchxiQeTA5HXTN50is2PgMb5KmCvqe2wuCoRLEcebQySltfIHYoMfobhWmlF/rlp+FX11hh5V/yLAOmyGw1igL4CW85G36nFKK1ukWLOjhgW2dha9XN+49TZFvnrjurZPZQFrSIR4T08SxPUrtpHY3Ea3tCO5cdsehKchbDn7qRZ6Q8sq3+wA9XCYMowh4hAKCkvt7oq+fJbJNROvUzNrBbPBKMltGTvbsn0RsuVYFjBhcWqUqu7TVmSmcbbO4iNK4PwBQke22OAJ2NkcOkOixXuAZ2CwW+KNIR1cs/0iy2+AHeYrRkWoV1WSQ5v0TUzu5OJF9EC0jQaCK6rxggYspq0+UcPPMuVsirdGXW6KDxhiu9WFY2SosyFFqQbXGJIuiVpuH8LMriLvJEqRj+Jxa02J0PgbFN9JPxyzwVSnL2ZE5BOLNoT0zYsjqbk7ZllmD0nwn2nFZXLQuqL4tJ6um448gzH8erpWzzbATsG8bkZ70Mg45MFbtY4vFPqJs6RobEf7KiX2UHRlH+tHy5I0Bgvo3p249BYEywD0BfEplf2hUDzAt7ivB+RsklaJE7FIcRSOmzKBKtqZ47v/ZpSf7wsBh3xxleC2HIU7BdPOZc3ShIkUSgIRxBZxnWw3LOgcBZX3Na3BwJY5D9jHXd73Lfv1+hUGW6Rp9nb02sExNpw7kJzFhzom+9J9VilIMyeLCq0qJoo5m0jIA==
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(36860700016)(376014)(18002099003)(56012099003);
- DIR:OUT; SFP:1101; 
+ ARA:13230040|1800799024|366016|376014|7416014|18002099003|56012099003|22082099003;
+X-Microsoft-Antispam-Message-Info: /ZBbDxLbXxKrxOu6A+BiPB051jmRknE9GDd1VRWf4ZBRxNnfNlflVPa3Dl6/Qn4PxD10D34Frca6CQzikNPjCMAbYR2c92P09XRS0Pvxm8LP2pMtH9OtKb5c8HLj/oVTBiiHHnrZ0g+YF+Q21lC5BgxOJs7Pkf1VZmnjx85SOEWeZH3ENxxL9hdcQIWKhJz+VlPYVkpA+MOc41zN0oZ9rqoHpiApCS6mUNvHQ4I+xllaNlyexz3v6yLvOJBqJcqKm2zNO1gfSL91/QwOjTVuMkJjzPZXvXj0FaLfxPs4+g5MPueyqvH/qo4sxJiIbm2m50PxQVZ736srX7U8GiIRD3zjdRM5UwA0NKfzNilbgBi4ZEQSm2voVTqf2Y0PWhaIXgB+MQt0YMvasn9MmELJnITvEkal/7X9I4w8di/DkoF3tI9GhLT0vHZR2NE/f2Lecv+87QgziiF87SZ3KgfFHXYRDCcfTa43blni5fuwIhbYvOHaQMbQ7zt6aPQi9tb6l9K9MsiNk9NhuI6kKmEAMwGN1sQAUfbepOgyf4EL8kDgnz3gFVisT24CYFN+MJGBa7p5UTzK/2tl2Ifs4kqAUkcL1fdZCsuKXrsDdnq7pIFf6qw5Gj2ua1k+EBDGof9CFGoP7GX/6I6C2A4SoCF7beg8A7T+AIUHKLdwYlysVtIE5tk/F4Smusa/fBB8NHqZI/3aOTb7a/bM8jRqCVWzfaeYQPKmPGld/ZXFwAUw0hA=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(7416014)(18002099003)(56012099003)(22082099003);
+ DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: yW2bYb6O0ysFGsIyDs5i1RG5hbTI3m/q8PR1fJnGUYovVScmQduiQD9jctyxk5xs8HpskvmSxAvFbMNntCkU00AYLUz2JT3UUJLsEsJt7dwclJJxKWosmAds0MloTOJmuW2CotFN75b8Z+3PZNN//Tqub8QUv2anQ3dbNyHOopFPoPOxgNOeRWI9qE62jzOEKGdv1ol2ygKSnhoU8SMJndHxZjpp/frAMQPTkoGVMCurNw45/0EBFNJOUt9lsCl8FUNzWdowFzndv8/bgcPuBbRzV+004ySze7JTucG/26fvQDTdyUp5uIvlxr14dHxbpSnw0DnPrbjsIS5yiz3P8WzMZ9S9E4ALTMSCWTh2sCFfE/LRKEU0H/SniL/c7Qas9EMjN9rEuTRt49z3HFB85vKemI3nuaJgOk/NzlwpbvNPsxhJ02fI3pRK6eXPgRvZ
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Apr 2026 07:48:39.5762 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 86dac98e-b78d-4d60-602e-08de8fc316c5
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF0000019E.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR10MB8522
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?anYrR2lueTV4cFlVc0JDLzZEK0NSK0JvYmUzYW83V0FLOS92YzZ3N1ZFaXhF?=
+ =?utf-8?B?K3NkOWNxV3ZpS0ZRMlc1am9vNVIyd2RhcnpUVWdSTHZnNDAyTWdTTEFUUU9I?=
+ =?utf-8?B?aW1BSzdLNVpYVkUvNmpkMGNjUnFjMThzNDdCcXljT1JYU1pBckhad3ptWTNm?=
+ =?utf-8?B?Wk90Z3BSZWpWb2Mwd2VQaWRDNGJmcGRYcUZicGlydHlTaCtxWnNKR3VRMDZa?=
+ =?utf-8?B?WS9tMmg5RGJOTWE3SHY1MmlGYnFCa053Z1MrdmR5a094bCtnaW9uL1duUUQx?=
+ =?utf-8?B?UDhpWUN4N1ovTVhaYWxRUlNsQkxzaWpNOU1KWHlvMlFIdmV4RUVGRHBkditr?=
+ =?utf-8?B?NmpHb0pmYm15clVaMHpPbmNzMlhCcWhRM3hLRk5NRHJjdjhJZUhyZytLeWRr?=
+ =?utf-8?B?dWx4RU5oMEFqUU13R1RhUUpidkNqUmxCM1lLN3lxbHVxMTJzSE5sSVd6WElV?=
+ =?utf-8?B?Z1o0Nk9ubnI4bFFSeUwyd2FOWjczdzFLNGl1ODVUdDF5aWk3bDlneDcwa2c2?=
+ =?utf-8?B?UHVyeWo5L2YwZTNHYjFqSGlhbGtpcXFQTTBadm52MkxFZ2tGVWVOa25DQ2lO?=
+ =?utf-8?B?OE56NmRFMEFpQWozRnJWWmV3d1Nzb0M5d09RYUVsV0w3UVViM040M3BQUDF3?=
+ =?utf-8?B?RnZKeDl4Ylh6RGlxUHVPSGN6alN6WFRncmhPSkZrd1dlN3luQmRtLzUwMHk3?=
+ =?utf-8?B?RkZqYTMrY1RtenJtaUs1Tlg0VzU5UE8wS1UxUFlEdUc0bm1JWUFlZFVBdTNB?=
+ =?utf-8?B?TEtqTHZrYkI1b0RjZ1VOUnlaeFR0UEw0OENQQlhjQkpHT2x6MDdsU2h2RUNo?=
+ =?utf-8?B?Y1JmMmluOVhnQW9pWm1SLy94SWo1cWdlQkZtY1pEWGNZZEViNCtMTTNpLzgv?=
+ =?utf-8?B?L3ZZWDIydHZVekhOb1lBaFQ3bHQ3VmpOaTV5cHZ3RW01aWZMZVVyOGIrMEYy?=
+ =?utf-8?B?dGtmU201eldsQkJjQWw1UysxcUxUcVlqOW9HVUFFVjJXUWZsWWlhYUozazc2?=
+ =?utf-8?B?bXJBU3BiZTh2QnpINjAySEF2Q3g3eHpyMUE2b2hqeU1SSTBvOVkxSEZ2dVpE?=
+ =?utf-8?B?ekJZeW9lTzBIMDU5SjMxc3BHWmZoT0RLV0l5cnJxSXdnd2RSYlEwaGZZYVRx?=
+ =?utf-8?B?a1pISlVudk1vSGw3RmdwTmRKbVhaNWpkZzl3ZUtuRzJCRGNiQUVJcFdBRDh5?=
+ =?utf-8?B?cnRXckVWK21FSHE5YWZ1REVCY3FlV3cxVTBVWnRSQnhTMW9EVGNpY2hZL2p2?=
+ =?utf-8?B?RHZzM1N1QVQ1WTk3RzJRQlp3MWJQWWNiY3I2ck9WbHpaL3JnMFRDS2h1cDJM?=
+ =?utf-8?B?bHlqL21vTFFZem56R1p5QW41NlVMWVFzSGRqYmc2QVA4bEZZU3FISXRSOVlB?=
+ =?utf-8?B?S0R5QVlIVEhaZDk1dVFmU2RkcFhURlpxT3REdXUxU2dhVjhlTFBFNGpFVldi?=
+ =?utf-8?B?SUhMOTJkc09PdkptSjdzUEo1WFM2OEFaeFhWcFJRak1oUE5MdVlYNWJHQ01G?=
+ =?utf-8?B?U0xPMm03dlliYmkwY1FBVGFCYnZlSzRYVmMrcmJTZXMvOTJycURKdCtpTjI0?=
+ =?utf-8?B?VEQ1V0ZGQU5ncHc3UjJlZVd6Vm9LNWlUbHVQTmxqUm1tNys1UmZXR2VkY25G?=
+ =?utf-8?B?UDljSTZISU0yTHRXK280V2YxUW5EN09wNmRxaS9oeWFoY293SUVzcUhYdU9K?=
+ =?utf-8?B?QnRDWkR1aFJ2YXM3dGs0Zm5VNThLSVNzclI0Yko0aUpaOVhHeFc1Z3BlUUxt?=
+ =?utf-8?B?OEZaNGkzR3c1MkdZWCtYWUl1d1FITFkrU0djQThwQ21IenFUR2U2KzJLMFA4?=
+ =?utf-8?B?QXEveTkvd0NCOE94WkNraGxTLzJNdHl6UXpUM2pOTTZFdmlxNzZaWTdrWno0?=
+ =?utf-8?B?a3NDdkkxY3dZVkNpYllMM0kweG90Vnk5c2M4Z2pzbE1yeTJQNlZLT2pMd3lO?=
+ =?utf-8?B?SWVma1duVmJldlpONjZuYjluQkt1dXRMRURvd0VxK1BDRmhRVGFkSGEwUkpP?=
+ =?utf-8?B?eW1zeXhEVVZlRkRCLzdIZmR6YnI2QytYRVl0SUJlTElRRE9GQjc2VEJnNUFB?=
+ =?utf-8?B?QW1zMGtmME0vN1Eya0RqT1hOc0FwUDBTdkIydCtmY3VqL2FYWlRwTUR2M0cw?=
+ =?utf-8?B?K2NiOUlsQmJ0cVBTRGE0S0FQbkdnUC9xaGNZdjNiNHd4eWJTaUxMb1pqM3JD?=
+ =?utf-8?B?RkJpLzcvYUlvTWdyUk51UndmQW1QWEpNWUo4Y0dtczMzTmxUamFoZWpBMGxs?=
+ =?utf-8?B?TW1LakhFZDhqajMvUS9YUm53QkRnM0JmYk5UeGV3b3dZcXBvOWN3OVc1R0Qr?=
+ =?utf-8?B?ek5rTER6V01NWnMwaWJINGJQL1BOR0x0aDhlZFY4b2lldEFxU0xVaUxtdHpq?=
+ =?utf-8?Q?BW4t3KVhrl6pziwE=3D?=
+X-OriginatorOrg: kontron.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 468ac665-970b-4508-3f6e-08de8fc4d08d
+X-MS-Exchange-CrossTenant-AuthSource: AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Apr 2026 08:01:01.0040 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: p/lJR6qYBhMFC0thIRHP7mZ9DZZSsgHYaKsAhlOXOd0AliBDsIT/SKfL0QuNs3iLSkA8Wqm3KUNH+CsF+tcjT8gNSYEY2Sg7UYX6JEu+QZc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB7686
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,53 +168,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Factorize TAMP_FWU_BOOT_IDX_MASK and TAMP_FWU_BOOT_IDX_OFFSET
-definition which are common to STM32MP1 and STM32MP2 SoCs family.
+On 30.03.26 04:23, Peng Fan wrote:
+> Hi Frieder,
+> 
+> On Wed, Mar 25, 2026 at 08:40:26AM +0100, Frieder Schrempf wrote:
+>> On 25.03.26 04:50, Peng Fan wrote:
+>>>> Subject: Re: [PATCH 1/4] imx8mp: phyboard-pollux-rdk: Convert to
+>>>> DM_PMIC
+>>>>
+>>>> Hello Peng,
+>>>> Hello Yannic,
+>>>>
+>>>> Am Dienstag, dem 24.03.2026 um 13:33 +0000 schrieb Peng Fan:
+>>>>> Hi Yannic,
+>>>>>
+>>>>>> Subject: Re: [PATCH 1/4] imx8mp: phyboard-pollux-rdk: Convert to
+>>>>>> DM_PMIC
+>>>>>>
+>>>>>> Hi Peng,
+>>>>>>
+>>>>>> On Tue, 2026-03-24 at 18:30 +0800, Peng Fan (OSS) wrote:
+>>>>>>> From: Peng Fan <peng.fan@nxp.com>
+>>>>>>>
+>>>>>>> Convert the board to use DM_PMIC instead of the legacy SPL
+>>>>>> I2C/PMIC
+>>>>>>> handling.
+>>>>>>>
+>>>>>>> Changes include:
+>>>>>>> - Enable DM_PMIC, DM_PMIC_PCA9450, and
+>>>>>> SPL_DM_PMIC_PCA9450 in defconfig.
+>>>>>>> - Drop legacy SPL I2C and PMIC options.
+>>>>>>> - Remove manual I2C1 pad setup and legacy power_pca9450_init()
+>>>>>> usage.
+>>>>>>> - Use DM-based pmic_get() with the DT node "pmic@25".
+>>>>>>> - Update PMIC register programming to use struct udevice API.
+>>>>>>
+>>>>>> these changes break something.
+>>>>>>
+>>>>>> Getting
+>>>>>>
+>>>>>> Loading Environment from MMC... Card did not respond to voltage
+>>>>>> select! : -110
+>>>>>> *** Warning - No block device, using default environment
+>>>>>>
+>>>>>> and SD card is not accessible as a result. I also worked on this
+>>>>>> modernization and got the same result as with your commit. Have
+>>>> not
+>>>>>> had time to investigate the cause, yet.
+>>>>>
+>>>>> This change should not impact sd, unless pmic not probe correctly.
+>>>>> You may give a look on "regulators", "pmic" in U-Boot shell, to see
+>>>>> whether pmic is good.
+>>>>>
+>>>>> And you may also need to confirm, whether SD works or not without
+>>>> this
+>>>>> migration to DM_PMIC.
+>>>>
+>>>> I see the same issue. The error is gone when the patch is reverted again.
+>>>> PMIC probing is working but the voltage change of SD-Card is probably
+>>>> not.
+>>>> We have set
+>>>> dts/upstream/src/arm64/freescale/imx8mp-phycore-fpsc.dtsi:
+>>>> vqmmc-supply = <&ldo5>;
+>>>>
+>>>> which references the PMIC.
+>>>> The evk is not using this property.
+>>>
+>>> I tried to add vqmmc-supply for i.MX8MP-EVK, I not see issues.
+>>> Not sure why this property impacts phycore-fpsc.
+>>>
+>>> The only suspecting point is 
+>>>
+>>> -                       MX8MP_IOMUXC_GPIO1_IO04__USDHC2_VSELECT 0xc0
+>>> +                       MX8MP_IOMUXC_GPIO1_IO04__USDHC2_VSELECT 0x1c0
+>>>
+>>> No more ideas as of now.
+>>
+>> I'm pretty sure this issue is related to the VSELECT signal in some way.
+>>
+>> With MX8MP_IOMUXC_GPIO1_IO04__USDHC2_VSELECT being set, the SDHC
+>> controller controls the VSELECT signal that goes into the SD_VSEL input
+>> of the PMIC and switches the LDO5 between 1.8V and 3.3V. Internally the
+>> PMIC uses the state of SD_VSEL to decide which one of two voltage
+>> registers for LDO5 is used.
+>>
+>> When vqmmc-supply is set, the driver additionally sets the voltage by
+>> writing to the PMIC LDO5 voltage register. This can potentially cause
+>> conflicts and lead to an invalid state, where the driver thinks the card
+>> is in 1.8V state but the voltage is set to 3.3V or the other way round.
+>>
+>> One way to handle this, is to set the SION bit for the VSELECT signal
+>> and specify the sd-vsel-gpios property in the ldo5 node. This allows the
+>> PMIC driver to know about the current state of the VSELECT signal and
+>> use the correct voltage register when setting or getting the LDO5 voltage.
+>>
+>> Below you can find some pointers for additional information. I hope this
+>> helps to solve the issue on your board.
+>>
+>> Best regards
+>> Frieder
+>>
+>> Relevant U-Boot patchset:
+>> https://patchwork.ozlabs.org/project/uboot/cover/20250811131213.211124-1-frieder@fris.de/
+>>
+>> Relevant Kernel patchset:
+>> https://patchwork.kernel.org/project/linux-arm-kernel/cover/20241218152842.97483-1-frieder@fris.de/
+> 
+> I think this kernel patchset might be wrong.
+> 
+> GPIO1_04 is muxed as SD2_VSEL, reading GPIO1_04 will not able to get the PAD
+> value of SD2_VSEL.
+> 
+> I also tried in U-Boot on i.MX8MP-EVK.
+> u-boot=> mw 0x30330024 0x11 ==> set SION and MUX as SD2_VSELECT
+> u-boot=> md 0x30b500c0 1
+> 30b500c0: 2000780b      ==>BIT 1 is VSEL, already 1                       .x.
+> u-boot=> md 0x30330284 1
+> 30330284: 000000c0                             ....
+> u-boot=> mw 0x30330284 0x1d0  ==> Configure PAD
+> u-boot=> md 0x30200000 4       ==>Read back GPIO1
+> 30200000: 00001028 00000000 00001028 00000000  (.......(.......
+> 
+> value of GPIO1_IO4 is 0, not 1, but VSEL register is 1 in SDHC2.
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
- arch/arm/mach-stm32mp/include/mach/stm32.h | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
+I think you are right. I probably misinterpreted the documentation.
 
-diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
-index 7f349f3b68d..42e3735847a 100644
---- a/arch/arm/mach-stm32mp/include/mach/stm32.h
-+++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
-@@ -135,6 +135,9 @@ enum forced_boot_mode {
- /* TAMP registers */
- #define TAMP_BACKUP_REGISTER(x)		(STM32_TAMP_BASE + 0x100 + 4 * x)
- 
-+#define TAMP_FWU_BOOT_IDX_MASK		GENMASK(3, 0)
-+#define TAMP_FWU_BOOT_IDX_OFFSET	0
-+
- #ifdef CONFIG_STM32MP15X
- #define TAMP_BACKUP_MAGIC_NUMBER	TAMP_BACKUP_REGISTER(4)
- #define TAMP_BACKUP_BRANCH_ADDRESS	TAMP_BACKUP_REGISTER(5)
-@@ -144,9 +147,6 @@ enum forced_boot_mode {
- #define TAMP_BOOT_CONTEXT		TAMP_BACKUP_REGISTER(20)
- #define TAMP_BOOTCOUNT			TAMP_BACKUP_REGISTER(21)
- 
--#define TAMP_FWU_BOOT_IDX_MASK		GENMASK(3, 0)
--
--#define TAMP_FWU_BOOT_IDX_OFFSET	0
- #define TAMP_COPRO_STATE_OFF		0
- #define TAMP_COPRO_STATE_INIT		1
- #define TAMP_COPRO_STATE_CRUN		2
-@@ -196,8 +196,6 @@ enum forced_boot_mode {
- /* TAMP registers zone 3 RIF 1 (RW) at 96*/
- #define TAMP_BOOT_CONTEXT		TAMP_BACKUP_REGISTER(96)
- 
--#define TAMP_FWU_BOOT_IDX_MASK		GENMASK(3, 0)
--#define TAMP_FWU_BOOT_IDX_OFFSET	0
- #endif /* defined(CONFIG_STM32MP21X) || defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X) */
- 
- /* offset used for BSEC driver: misc_read and misc_write */
+> 
+> So with your kernel patchset, reading the voltage, it will always return 3.3v.
 
----
-base-commit: ba7bf918dafcd093ad733b07ba490baeb20cf5da
-change-id: 20260401-factorize_tamp_fwu_boot_defines-205eed07ad1e
+Not really. Reading the voltage in U-Boot works fine, which is why I
+thought this is correct. But I probably also misinterpreted my test
+results, as this only works by coincidence. We now always read from
+LDO5CTRL_L and this seems to have the correct value even if LDO5CTRL_H
+is actually in use.
 
-Best regards,
--- 
-Patrice Chotard <patrice.chotard@foss.st.com>
+UHS card:
+
+=> mmc dev 1
+switch to partitions #0, OK
+mmc1 is current device
+=> mmc info
+Device: FSL_SDHC
+Manufacturer ID: 27
+OEM: 5048
+Name: SD8GB
+Bus Speed: 200000000
+Mode: UHS SDR104 (208MHz)
+Rd Block Len: 512
+SD version 3.0
+High Capacity: Yes
+Capacity: 7.2 GiB
+Bus Width: 4-bit
+Erase Group Size: 512 Bytes
+=> regulator dev "NVCC_SD (LDO5)"
+dev: NVCC_SD (LDO5) @ LDO5
+=> regulator value
+1800000 uV
+
+HS card:
+
+=> mmc dev 1
+switch to partitions #0, OK
+mmc1 is current device
+=> mmc info
+Device: FSL_SDHC
+Manufacturer ID: 6f
+OEM: 303
+Name: CBADS
+Bus Speed: 50000000
+Mode: SD High Speed (50MHz)
+Rd Block Len: 512
+SD version 3.0
+High Capacity: Yes
+Capacity: 3.8 GiB
+Bus Width: 4-bit
+Erase Group Size: 512 Bytes
+=> regulator value
+3300000 uV
+
+
 
