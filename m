@@ -4,106 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 112A6D35173
-	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 10:45:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F34CED35162
+	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 11:18:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7575D83CF5;
-	Wed,  1 Apr 2026 12:45:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3368183CF5;
+	Wed,  1 Apr 2026 13:18:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Nc6nOLwc";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="HSoTzSTM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEB7483F5B; Wed,  1 Apr 2026 12:45:18 +0200 (CEST)
-Received: from mail-yx1-xb134.google.com (mail-yx1-xb134.google.com
- [IPv6:2607:f8b0:4864:20::b134])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D922F83F5B; Wed,  1 Apr 2026 13:18:33 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 690D883CE3
- for <u-boot@lists.denx.de>; Wed,  1 Apr 2026 12:45:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7947483CE3
+ for <u-boot@lists.denx.de>; Wed,  1 Apr 2026 13:18:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb134.google.com with SMTP id
- 956f58d0204a3-65005a8840dso7682864d50.0
- for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 03:45:16 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775040315; cv=none;
- d=google.com; s=arc-20240605;
- b=KVNtP4CRHGQIrHX2pJIjRlX03Dj0wZDAX6ELQiAwDQNt2Zcvjx+XuuPpE+w8JBl+by
- wOOdBpDkW69AnI3QBsalha3yCOM5S9+GDFqVA9/k/OhaLbEtDICqz0h6ljkSJkElKby0
- LXpMtZesQuvykB40oo6weDs8V76TzsI7L1pTI2ZXfUJs4/5uyVLiWpIRjhgdCMzpcnxJ
- OvhnQIA3lXjNhQ8EBUTzVO0xK7wla2QsU1+S9gEr2fQR1G3Z8hUPfTbgEOSk2PxumbA9
- Te/LVgl9v5s7KE8tGyA7s4tOhBOOMEjcpmzzD9SWYfu1oA0Si8XVUvA/lMmhOnzcvsGv
- mnQg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=mUePnJSeYJSzczOUTBklIp+cG41zE8x/PjWGF9h8M3w=;
- fh=5e8Mdu7gLIAgiwz1C9LTZYfyfbHximJ/pXztrpvnSA4=;
- b=WdovGxBkAZQeckVgvkgSOVosbMW/2yzw8mXAtuXOdN1uWCN2IZS/TJe8CDHm3MiIoC
- JTVoIqhzQ+Kjo8TwjJghNwQT2kLUTgBCVnURfLKJYhw8TXRaDlrMBYnLZG34CHmhnbrq
- wHflRzmnsJXF9B7DGF+Gks4GYiWLvLGEHT2NK5ThmFkyLkfmes+Xpe2Nt6tESIVh79F/
- 7lKBOSl4XsIwKQTnANOiOyIZ2CnL7i8H/g2qdP2vFu7YZkKi44YH0n3bdPPipywPoST0
- uzofSfotUGNjNZTr72LmNTpgR/GYH/wk/+d/nNQlJ15RmM+LiL2YPZDmnPnypQm0cWeg
- sI8w==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1775040315; x=1775645115; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mUePnJSeYJSzczOUTBklIp+cG41zE8x/PjWGF9h8M3w=;
- b=Nc6nOLwchhgYl7boc+RTzdsAOk/eRXZP6u1Xps21/6knZ3CHr1t6C+ZXxM34VSU9l0
- ONn996InU3ZT8nyjxNdZ02S3ipU2rlsm4jp6yoeRqcVUtXy6+6lyp7xp0mpCch3GtI3h
- oSyhrntvHaBitpGJFVv7TtcRTpQpYt7xZXhZFq0OD29MxviMUukvVWMckn0P018rBb17
- ZVHUsw/pXM0taOZRYNxuCaGfRnK51rmmcB/LE0byPDqErxc+gvLjzA/wk6dWKSF6yHY9
- R36IjD85Rur3hZ2/10g/dT0TmuH8rzqTUmKwr0IAbUifRFHXgk0sF6s6sDTa2F1FFd/V
- re4Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775040315; x=1775645115;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mUePnJSeYJSzczOUTBklIp+cG41zE8x/PjWGF9h8M3w=;
- b=Qd9BkefAdThaG8j4Ai4KsNkw+sAfd6eL3yZ3p24XP0+8VNWcyeZoHUQ9/fv2VtuBCH
- 57ZjATetttXRCWvmSfFARAurpNoFaE6yHPJi79k3icwCeYjpxmtB+e03vouBqEMUUdbe
- dNnnIfvwoHqhZckgbfzSxSgDWSc2cQw+r2ZDWJVf5Jr6d9QGpJ8umq+eMWAnJqfVJISk
- d+7rXynZ+rtgP1NF+xZftzHyZHWqbIGepccLNDd1nIwC6YPXrgF60/jIgUGYvDTJGbjY
- mxZuA+lPUNIsTVuorkj9x8gPOAdCp+6UNT1jQyercclx1cke112aE+bPmi+hmsetXswM
- hbSg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU30JH7WOCWbMjwcg+REiimYSASU71zMflOqbsCdRadICGw4Qwr7nV4D4HXIbAzq5Oa7xZ8oUY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxbtSGOJ7HlrzParwSbsUNvJFlZ9u/GHfwAdN/NPU9tOoMeTlEb
- rOqzxYYhV9yBJ/w/xCI9hpJX89QH7BYs2WAZkg71/N377MPEeWYXrZR7T+9BTIYIcpO4pOwi/cV
- h/uTyYIYjqKdAiZ5RVnmBHrZTZze+Quyc/JZdxhbuCA==
-X-Gm-Gg: ATEYQzxAKk1NLxjJeDdgapHga3kYAkASYQF7h3QIcofsvmW6vWev6216RFF5g4pmwms
- ohZAfWb2cn56A+feuOqW5vyWQj7kr5mSvjMv1eol4WpiZ4CC0jERtTsLfH12gV2TT0cwLzXsQ5x
- ciKd1LX6yDW8oAHMfX/yyBXiiT8o/eEXlmbtyMs5H6GMcv5RQ4oPKYWXg5apB1MYZ+eBUBt+jNp
- zzR9CM2I/84/cOeZu5yIa7bkE7I3IOmJlhBovuJ1Q/F1hRg6cnOL2EgQ3AtUc/uAGIYMDZY5VXZ
- 4TFYk3Att1iKDLTtMpz37NHPNn/oZdbHYOHAt9sgdvfJNjdjIMrK1xkSmf0gI7TQPrwFkQbx3bC
- 5d8FlF6pa/wXEt/2uZpcyqRuNuVrAfz6icjV/JK+iZUaYT7h/CeYmOjjymTUpXmO6gnnr/TPMF5
- GfWaRlHLVh04KPSNdCGgITCj9FCzp0RYOUq0BdGMCTg4gnNZyf5gf7rzveGgmveMZEnN46oatAT
- b5zkmB68bo150RTjr8hqUfoxzeWXuKUfoOF8Lc9czKd2osLUmEzQvm8v+aUHi3y5QOrnnvlM4in
- bnUUcvd85QPOFX4kfcC5XZ2SilRp+VJLU3hUMpVUi8UF
-X-Received: by 2002:a53:adce:0:b0:650:21cf:a43a with SMTP id
- 956f58d0204a3-6502fdd6cafmr1998735d50.7.1775040315110; Wed, 01 Apr 2026
- 03:45:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=dPH1Mi6Wf+GZ2TpExIJ+fzPUBFKzTGK6G9N7/IhWLS7dtFHpJE1R1ZX2uh00A4DBzUsBmVVqhSE+kW3Lw9JB5bU3/usCwTaOSmrYl663+mSa8M6Siw+ru69KvN4kS2pqDpdwCFfad6xbFdeUG+ByLc15Zu8df6PllWA77bQoT0X3D1/BAXHAADaBwHL5DXQWe6UD+o1Oya/7yrNbaHcdT7A6m6LVgYXx0GLtw00fWah1sk+tKoLcQ47NvGi0G2/aYRhs8SJkx1AqSdzLXY/0aL/YJQqn/q3X03k5HiGnOdyMZMeHyjrviU4RkexgTsunsVhdJymUuAlah9ckwKvc4w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=piB7PbbQkSEkJLk/QFGH7raIxiqgiPo2TH7Ju9goxUg=;
+ b=iZgeOUNWMjwdCS199BgW1H8yLlAxU6iHAj45lzhUmqA40PXH9QucLB2tgobKZRZZO8urMAymUG40yT/2uSnIElPuSEbScO5xoFupT43cMiDEDoZDT9Bx9PzdU5I1u7v2wrBCuEba0yxkC+lqi4Shtr1CGDZgkksaBWc4v9oSKPodwyrRu6utj91zdbqfS6Y6wJ2p71Kdsl1eAz+Tv1HWP3j3tmf5AMFC6qs7KMwK4hcvvRBIYFRQYWLvqMwaSNcO3xVH3GMIQkvSOiHdRPofp61NwCBxKjUvyjlT9PF9JMZNI9n1oUPq/spWvfcfTqnbNWk2bwRK7Tedy4nAY/xtkw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=piB7PbbQkSEkJLk/QFGH7raIxiqgiPo2TH7Ju9goxUg=;
+ b=HSoTzSTMWcxwxxr5K+3Bsl+6C0huF7+sA/6OxLtsuzZetwQG4qy9A8EKCr02XMcC/nb3K0iXeWla4qujhrsZccVlDNpnnUYZ9vZlijmTZZBHb/WTpH/yQOIvLOjCnb4M/SGdk55GdKqt2TVN+gxjN7Cva0DxxCb4qu09bJubAm8=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by DU6PR04MB11183.eurprd04.prod.outlook.com (2603:10a6:10:5c4::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.17; Wed, 1 Apr
+ 2026 11:18:26 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%4]) with mapi id 15.20.9745.027; Wed, 1 Apr 2026
+ 11:18:26 +0000
+Message-ID: <c9be55a1-39f4-43d3-8b5a-42da757a2d9d@cherry.de>
+Date: Wed, 1 Apr 2026 13:18:24 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] cli: flush stdin before enabling cli
+To: Gregor Herburger <gregor.herburger@linutronix.de>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Tom Rini <trini@konsulko.com>
+References: <20260331110413.1040527-1-gregor.herburger@linutronix.de>
+ <d65423f2-9dae-4bf6-a1d4-fcaed430ac7d@cherry.de>
+ <acz3iNHpmDrcv2gT@gregor-framework>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <acz3iNHpmDrcv2gT@gregor-framework>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0067.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:49::21) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
-References: <20260331080117.2370092-1-ilias.apalodimas@linaro.org>
- <20260331080117.2370092-5-ilias.apalodimas@linaro.org>
- <177503910100.1968416.1541488991356907095.b4-review@b4>
-In-Reply-To: <177503910100.1968416.1541488991356907095.b4-review@b4>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 1 Apr 2026 13:44:38 +0300
-X-Gm-Features: AQROBzBPva0KmScHb4EcUqo63i3a2v_z7VKnO65uTUv8NOSo_Xu3hcG0X8n19O0
-Message-ID: <CAC_iWjJBuqyXThg=VSjVRYb-iaMk5qKDk_vtifURSRkomfwonQ@mail.gmail.com>
-Subject: Re: [PATCH v2 4/4] common: Allow relocations on the top of the last
- bank
-To: Anshul Dalal <anshuld@ti.com>
-Cc: marek.vasut+renesas@mailbox.org, trini@konsulko.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|DU6PR04MB11183:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4b9307ca-860a-4fe4-5879-08de8fe064dc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|376014|10070799003|18002099003|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info: 4N88K0AzmbEbAEVnQgxCfPrOVAtUl44Zpxpplc+w3T0BXkbZh8XoD4YyqZkddETXe0f85TTiOSvBch/UvJ/SQzyfS1amUbwLsG8uc4mS7M9kHiqU4ydwcVfGadmDdPShcqvjBwxgNAOMWO4eppSpxc2qChR47VCcx1+2dnoyn3xcBHDTyaiRt9qwycWTKq/2iSe3cKFEXo2ciXNWYfsOnB4ESy1IJCIZLcSBvDZVD9885WUo1Ji9h0DuKfa5srifvYeDqNSLK0I6+a58lhYOGyXH5wPjP9RZ+Qn/Fr8SmHvEt3augbI2wNl6rNEnTuqlg9vGGaa13OxoPN1gOpvjnTaTFI8v3umxgbFNtSjQ2iMc6SguOqlnbs0rrH4n7ta8eLI6Zskj8/ru2gN1e8MTRz6A3YK0j6+iW6N5nFHJdrtrQSdjTYzMaZnBnQ2OlQuLvzQbd/efwRj/8ClFS9W8NX59H0fPpC4Su1jJFI9fIcSlrVSEw5nnQSbE9nmn6/ddER8JAQ4NW62ZyycaiHpu8TyG/08hADF8r3cSRlEKsu+xcBhORiHhwocP07zrg5IvDFwKZMrQg6Xsq+pCx+r4PCXWFp4Ljyu2NA+3sl97fUyYKFtuYXuIH/A9aX55Ty8bRYwYENtcHtztWS9Gl4v3ok7OyHmf9gbsG8lpYC5BLKYqQ/C6P9oXUKmiWDmep1MB8+iNXnKm+bKehC6voyY+1m/66DDQ3Y8TKA4blIBER+Y=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(10070799003)(18002099003)(22082099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OGEvZHNyYkw1ZE5LYkRVVWVQYU8zZ0tXVnd2RUVwc2xvUmIrYnhlWkhQM3p0?=
+ =?utf-8?B?b1JHWjZSdE00L295OHlpR3VVRmRLYU1kRkdLVmlVdlJHbkJzNXp6U3BuUXRK?=
+ =?utf-8?B?Z3RwdmtMamdEWmJhc3BWbHZ6cmtZQ3Y3R2xOTXhRVHlFR203TXVYU2ZqUTVX?=
+ =?utf-8?B?OHZHRmtBVkc3U3c2OUZDL0dSNVNFMDJ3WmpQU1RGdjFRTlFBekdWUmdXQzJr?=
+ =?utf-8?B?eWZFTWtieHJGTm5EQkNKRW9iSFNVMmVEeldrNUM0VkNmNEdpWDdjMVZteDRZ?=
+ =?utf-8?B?b1pyQlkvdGJxTkZDYlZBQWE3YzEyeElRMVlua2JtMUpacklNbW94SG1KZElQ?=
+ =?utf-8?B?R0RyempNUWxIOUlwbEk5RzBOQnpjQmhldHY4SllqMTBLdjVhNjVGa0FaVWpy?=
+ =?utf-8?B?S2dJWURYbFNHWUVHWC9BdVhHZE85eWdJblpSeEtVR0tYamZDTU5hT3V1M2FX?=
+ =?utf-8?B?SVZkV2RSMnlMTEE4d1E3aHpaaHV0MmVuaUF6TVhrU3o3SDNiUElJaXRVcDJU?=
+ =?utf-8?B?eGhHMGk0L05yZ0V1ZHdySHlWaWlnZ2RLMmZ5WkpuQ3UvWlBnNzRLVDhUaUJU?=
+ =?utf-8?B?eFJkaWFSSk9uRGIreHpFUUJubXNaZFJGand5eUJXczlOcTNtOVcwcExUNkhh?=
+ =?utf-8?B?YTBVbWJTWUR1OWUzVGFqVE45MUFIdnM4dzQ0Mk8wNjhiamJuYlJuZjJxZWZX?=
+ =?utf-8?B?UC9wbFJPMFovSnZLb2tpVWI4b2ptR3M3V0FHa2VRVm0wZkdKYXVoTmNjUTlG?=
+ =?utf-8?B?U2ZRS0JtQ1J2OHZJK2ZWQnRwKzFxTHBDbi9tVTZrWHNqSVpjcVZJbU5MdW5T?=
+ =?utf-8?B?ZWd1WjZHQzkxZHBKdFd4Z0l4a2Fhc1d6VWFaeGtkeWVCdW0xQWEwTFBNUVUy?=
+ =?utf-8?B?TFRQd3RhZGVic2FMa01Fem5lSXNIemNiOUUyK3Q0dC9NVXdIck1zdmlDdVp2?=
+ =?utf-8?B?WXJiaG1WQVN5YnIzT0Z3R0JsN2Vzd1dlMEpQdmFKc0IvTWJoZ1FlRUZFdEpj?=
+ =?utf-8?B?Q0IyNjhSdnAvRkJGSXFpWlUzWm4vUlJQRVZES3pLS1RtZXBuYkdQS2ZzQkp6?=
+ =?utf-8?B?UGk3b08vQTVXeFdYaWJFSFJxQXdPNTJGdnpINW1ScmZla1lpRlpVcHVNdmds?=
+ =?utf-8?B?OXJrK3lFMTFNdHhVWXQ3ajFPT3k1c0c0L3FQcTdMYmVhemRNNXRkdWs2MWZq?=
+ =?utf-8?B?SHNoRG1iVHVRWmFRUkpqSUtxYWR6OE9UM3BJbWx3QW1vbm5KQWM1NUNZRHJD?=
+ =?utf-8?B?Wk4vaGtwRlV1RHpSdmlkVWs3d3dGeW1ncy95MTdzM3R3SllmQ2VPNFFPMEQy?=
+ =?utf-8?B?Rjh2RFJRaFRKc2t5Vk1sVnRGTERVYjdVQmsvNUppN2lhSXE2eWN2ZDhsQUdu?=
+ =?utf-8?B?enNLYTVUbk9YcnZoS3dxM3hDWHU2QUJDQ29rUXR0RUZiUi9VWk8rdlduSysv?=
+ =?utf-8?B?WHAvMTJGMEFrMlZCd3hIYzk4VEtBL0dMUm41RVloUmRlZkx2NHVYWEJBaUJo?=
+ =?utf-8?B?dzRvdnYydS93TVF5ODAwOW4wcUphRFlMdHNmVlU4bzQ0YkRva00zV3lQZk9R?=
+ =?utf-8?B?eFlDVGhKdUtQalNDVzB3YWhjT1k3a3VZbGVFbU8zbzg0N0tCMFV6SkRMdlJ3?=
+ =?utf-8?B?UGpEVlVkRm9qN1dRWGd0MEllQTNWLzE1YmlOMFJYRWVmcXF4VFl0dXJHRllC?=
+ =?utf-8?B?VGRUbGlTMm5ZZTBvQzNlWmxIYVo0K2FCVUU3ZVQxNTMyT2NuMVRaWUQ0Y0hV?=
+ =?utf-8?B?c011c3A2K2JCZ3ZPUzFVN1ZobXJ4VGFtQW1kZ0d0NmR0QkxndnZpUDB4cC9C?=
+ =?utf-8?B?WGtsenJjNThKOHZmQ1hJOGxVQzhuVkdRTnVOanBLMEtyOEpkck0wTGRRbjB4?=
+ =?utf-8?B?TDI2ZkM2dlhMTGIzdUY1dTE5bVYxSkhPb3RFV1RVeG9PcU5qT01mK3JDMnY0?=
+ =?utf-8?B?eWJVcmRpb3Q4SmRINGVnTGRRdTlRbEZFSWJnbHczSVBFbkU0aFArY2hXQ0Qr?=
+ =?utf-8?B?WTN2NGdtWUQ0cUU4elZaRk9Sd2NkbUViRzBmdkFwbk9NV0t3VkFlemlBR1F2?=
+ =?utf-8?B?WEdhd2dobVF2Qm9uY09qSkJUNDhpcEFkSnIrLzEvNTVuemh1TnZqd2ZyWHV6?=
+ =?utf-8?B?anF2WksvNnRYNnJsbVI2M1BVdE1rK25XSTZmNzhJZUFhczNDRHQyN1ZpazB6?=
+ =?utf-8?B?cC92ZFJpaXQyUUxFUUk2UEM2c1ZhMTh5ODYwTCtZV202Wm9iSEEwRDRuSVJ3?=
+ =?utf-8?B?VWdhRUU3U1RsWkVrdWhHdkRIajMrekZzaGNjajExaE82VTBaMzU2YlhoemY2?=
+ =?utf-8?B?U1dFaURBOFl3eTE5NmROdElSR2FDYmIvOXZ3V3VmZXpKd3ozL1FKemwzVllu?=
+ =?utf-8?Q?n7TUF7m4mIPTm1VrItVikJTx8NILA73EsBx7b?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4b9307ca-860a-4fe4-5879-08de8fe064dc
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Apr 2026 11:18:26.2080 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ayJspia4d/XjduytZEJYHek0tNryV+YAlDVw2hIQY4aaztpuLJwQHmZhDBpkKSWPUhMoT6Qa+9AUJ763tsMoU1+RykUp0k6gVpPHw3VV8yk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU6PR04MB11183
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,47 +154,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anshul
+Hi Gregor,
 
-On Wed, 1 Apr 2026 at 13:25, Anshul Dalal <anshuld@ti.com> wrote:
->
-> On Tue, 31 Mar 2026 11:01:14 +0300, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
-> > diff --git a/common/board_f.c b/common/board_f.c
-> > index df2b0dc899b..4270f368e65 100644
-> > --- a/common/board_f.c
-> > +++ b/common/board_f.c
-> > @@ -321,6 +323,19 @@ __weak phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
-> >                */
-> >               return 0;
-> >  #endif
-> > +     if (IS_ENABLED(CONFIG_RELOCATE_LAST_BANK)) {
-> > +             phys_addr_t old_top = gd->ram_top;
-> > +
-> > +             ret = fdtdec_setup_mem_ram_top();
-> > +             if (ret)
-> > +                     debug("failed to relocate to ram top");
->
-> Should we not do an early exit here in case of failure?
+On 4/1/26 12:46 PM, Gregor Herburger wrote:
+> [You don't often get email from gregor.herburger@linutronix.de. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+> 
+>>> Currently there is no possibility to flush stdin after autocommands are
+>>> executed. If in the bootcmd the stdin is changed, e.g. from nulldev to
+>>> serial, it could happen that junk characters sit in the fifo and appear
+>>> on the cli.
+>>>
+>>> Add a option to clear stdin before starting the CLI.
+>>>
+>>
+>> Why does this need an option? I don't know enough (anything really) about
+>> the cli in general but the wording seems to indicate this fixes an issue or
+>> even a bug. Is there a case in which we wouldn't want to flush?
+> 
+> In our case the problem was in efi_console where query_console_serial
+> sent the escape sequence to stdout and stdin was set to nulldev and
+> therefore never received. In the bootcmd stdin was set to serial and the
+> response was seen on the cli. Thats how it was in our case. My first
+> approach was to check in efi_console to not send if stdin is nulldev.
+> But after more thoughts I implemented the current approach which flushes
+> stdin before starting cli. After all efi_console did exactly what was
+> configured in the environment.
+> 
+> I can think of two cases where stdin shouldn't be flushed:
+> * User typing commands before cli is reached.
 
-We discussed this on the RFC and we decided to still boot and just
-relocate to the old address
+I see we have flush_stdin() in common/autoboot.c already, with the same 
+implementation. Guarded by CONFIG_AUTOBOOT_FLUSH_STDIN. So I guess if we 
+have a knob for that, another knob for the cli_loop() part will at least 
+be consistent so fine by me. I kinda fail to see why we would not want 
+to flush, but /me shrugs.
 
->
-> > +             ret = fdtdec_setup_ram_size();
-> > +             if (ret) {
-> > +                     debug("failed to calculate RAM size");
-> > +                     gd->ram_top = old_top;
->
-> This should be redundant since fdtdec_setup_mem_ram_top already resets to
-> old_top in case of failure and fdtdec_setup_ram_size only modifies gd->ram_size.
->
-
-It's fdtdec_setup_ram_size() that fails here. We should reset ram_top.
-
-Take a look at the email thread though. Jonas & I had a discussion and
-I think I got a better idea for this patch
-
-Cheers
-/Ilias
-> --
-> Anshul Dalal <anshuld@ti.com>
+Cheers,
+Quentin
