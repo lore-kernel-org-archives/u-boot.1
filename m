@@ -4,128 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F16A7D35171
-	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 10:25:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 112A6D35173
+	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 10:45:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E9B6840B5;
-	Wed,  1 Apr 2026 12:25:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7575D83CF5;
+	Wed,  1 Apr 2026 12:45:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="X2alvPfK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Nc6nOLwc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C1C184090; Wed,  1 Apr 2026 12:25:19 +0200 (CEST)
-Received: from BL2PR02CU003.outbound.protection.outlook.com
- (mail-eastusazlp17011000f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c100::f])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CEB7483F5B; Wed,  1 Apr 2026 12:45:18 +0200 (CEST)
+Received: from mail-yx1-xb134.google.com (mail-yx1-xb134.google.com
+ [IPv6:2607:f8b0:4864:20::b134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27DA58407E
- for <u-boot@lists.denx.de>; Wed,  1 Apr 2026 12:25:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 690D883CE3
+ for <u-boot@lists.denx.de>; Wed,  1 Apr 2026 12:45:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SaAzz0KS4+sLcRWUa9IkKxElngtD/0jsgZ5pUUeW0CKAOGQ/RLqYIxrENBR/VLDEgzhgF8prmD864UI8K5zI8Zm36LcHIst/9ombAXRSuPzZ8TWg1S9cEUCZb4X+KzCWrhKVbbu7ljEg9m4Bafm9mbpryKIsWKCim9PZXGx/O8kVuV1EPPo/mLwsK2t1mY0yAFTo1QxXR5Xrgx+flVMOzRsk5cn2D/A+oN0Pc3D+97Gw2OqO+d7EpuXax+b0VCYWNuqu58Sh+qdibtxqyaISlP5sBHlcQYdhjVNTEqSj/N20KwKzJ6H4cdcRxtzTEqnj9tSNbhRyYaekyfnA8ix3kA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iahwMHNFwzrB8aDOtdj0LAvCGmXyuuTOcDxvvvPqyt4=;
- b=pJgoB33xDWiTMui9umgCg/2TRdgaoweis4EQtOhQXemmtGCI2SHkPxeZZebdiNKF2zs4js1tIe0elm3jH05u38WAMuzby7BnFUwZvuD48ST9fyW1ZfqNp8R+hS3/6oWoRqnkkZjZlAzhBCBUkLdJ+GIR6MtcLUbRq5HDqKvFY/4fWk7jsJgOzR3NaVkqgyLw2i1TSxRNCPt/usxm7opZhRNQb/3TxQIIxcNrTuiLPIKCkudXvV/FuGcJVG2fAZy+gceD+psNXBJNApzkYTue97qJZPL2u3QIpz74db0O1NFBTFbrcNKNWG7kIN5qxZMHtoJfRiF+KjAy3mY+S/qG2w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=mailbox.org smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iahwMHNFwzrB8aDOtdj0LAvCGmXyuuTOcDxvvvPqyt4=;
- b=X2alvPfKq+pwu9hozoc900BHqHDYnbhiTHSl+7K2V/CQpWVff+KFcfYMHXBEGtmkLF12eqVbmp6iijnXlw4i+Z/ZXg+yc2ZpUM2v/w7s8x4unIiQgHAgUDrODRfcHEjfBQk1uMTZg8HVhNoO8FGBtFer/fV7hDlLj342/xo6jKY=
-Received: from BN9PR03CA0435.namprd03.prod.outlook.com (2603:10b6:408:113::20)
- by CY8PR10MB6684.namprd10.prod.outlook.com (2603:10b6:930:93::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.28; Wed, 1 Apr
- 2026 10:25:14 +0000
-Received: from BN3PEPF0000B36D.namprd21.prod.outlook.com
- (2603:10b6:408:113:cafe::ab) by BN9PR03CA0435.outlook.office365.com
- (2603:10b6:408:113::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.30 via Frontend Transport; Wed,
- 1 Apr 2026 10:25:13 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- BN3PEPF0000B36D.mail.protection.outlook.com (10.167.243.164) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9791.0 via Frontend Transport; Wed, 1 Apr 2026 10:25:12 +0000
-Received: from DLEE214.ent.ti.com (157.170.170.117) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 1 Apr
- 2026 05:25:10 -0500
-Received: from DLEE213.ent.ti.com (157.170.170.116) by DLEE214.ent.ti.com
- (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 1 Apr
- 2026 05:25:10 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 1 Apr 2026 05:25:10 -0500
-Received: from localhost (ada0543016.dhcp.ti.com [172.24.233.9] (may be
- forged))
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 631AP9kc4093302;
- Wed, 1 Apr 2026 05:25:09 -0500
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb134.google.com with SMTP id
+ 956f58d0204a3-65005a8840dso7682864d50.0
+ for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 03:45:16 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775040315; cv=none;
+ d=google.com; s=arc-20240605;
+ b=KVNtP4CRHGQIrHX2pJIjRlX03Dj0wZDAX6ELQiAwDQNt2Zcvjx+XuuPpE+w8JBl+by
+ wOOdBpDkW69AnI3QBsalha3yCOM5S9+GDFqVA9/k/OhaLbEtDICqz0h6ljkSJkElKby0
+ LXpMtZesQuvykB40oo6weDs8V76TzsI7L1pTI2ZXfUJs4/5uyVLiWpIRjhgdCMzpcnxJ
+ OvhnQIA3lXjNhQ8EBUTzVO0xK7wla2QsU1+S9gEr2fQR1G3Z8hUPfTbgEOSk2PxumbA9
+ Te/LVgl9v5s7KE8tGyA7s4tOhBOOMEjcpmzzD9SWYfu1oA0Si8XVUvA/lMmhOnzcvsGv
+ mnQg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=mUePnJSeYJSzczOUTBklIp+cG41zE8x/PjWGF9h8M3w=;
+ fh=5e8Mdu7gLIAgiwz1C9LTZYfyfbHximJ/pXztrpvnSA4=;
+ b=WdovGxBkAZQeckVgvkgSOVosbMW/2yzw8mXAtuXOdN1uWCN2IZS/TJe8CDHm3MiIoC
+ JTVoIqhzQ+Kjo8TwjJghNwQT2kLUTgBCVnURfLKJYhw8TXRaDlrMBYnLZG34CHmhnbrq
+ wHflRzmnsJXF9B7DGF+Gks4GYiWLvLGEHT2NK5ThmFkyLkfmes+Xpe2Nt6tESIVh79F/
+ 7lKBOSl4XsIwKQTnANOiOyIZ2CnL7i8H/g2qdP2vFu7YZkKi44YH0n3bdPPipywPoST0
+ uzofSfotUGNjNZTr72LmNTpgR/GYH/wk/+d/nNQlJ15RmM+LiL2YPZDmnPnypQm0cWeg
+ sI8w==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1775040315; x=1775645115; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=mUePnJSeYJSzczOUTBklIp+cG41zE8x/PjWGF9h8M3w=;
+ b=Nc6nOLwchhgYl7boc+RTzdsAOk/eRXZP6u1Xps21/6knZ3CHr1t6C+ZXxM34VSU9l0
+ ONn996InU3ZT8nyjxNdZ02S3ipU2rlsm4jp6yoeRqcVUtXy6+6lyp7xp0mpCch3GtI3h
+ oSyhrntvHaBitpGJFVv7TtcRTpQpYt7xZXhZFq0OD29MxviMUukvVWMckn0P018rBb17
+ ZVHUsw/pXM0taOZRYNxuCaGfRnK51rmmcB/LE0byPDqErxc+gvLjzA/wk6dWKSF6yHY9
+ R36IjD85Rur3hZ2/10g/dT0TmuH8rzqTUmKwr0IAbUifRFHXgk0sF6s6sDTa2F1FFd/V
+ re4Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775040315; x=1775645115;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mUePnJSeYJSzczOUTBklIp+cG41zE8x/PjWGF9h8M3w=;
+ b=Qd9BkefAdThaG8j4Ai4KsNkw+sAfd6eL3yZ3p24XP0+8VNWcyeZoHUQ9/fv2VtuBCH
+ 57ZjATetttXRCWvmSfFARAurpNoFaE6yHPJi79k3icwCeYjpxmtB+e03vouBqEMUUdbe
+ dNnnIfvwoHqhZckgbfzSxSgDWSc2cQw+r2ZDWJVf5Jr6d9QGpJ8umq+eMWAnJqfVJISk
+ d+7rXynZ+rtgP1NF+xZftzHyZHWqbIGepccLNDd1nIwC6YPXrgF60/jIgUGYvDTJGbjY
+ mxZuA+lPUNIsTVuorkj9x8gPOAdCp+6UNT1jQyercclx1cke112aE+bPmi+hmsetXswM
+ hbSg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU30JH7WOCWbMjwcg+REiimYSASU71zMflOqbsCdRadICGw4Qwr7nV4D4HXIbAzq5Oa7xZ8oUY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxbtSGOJ7HlrzParwSbsUNvJFlZ9u/GHfwAdN/NPU9tOoMeTlEb
+ rOqzxYYhV9yBJ/w/xCI9hpJX89QH7BYs2WAZkg71/N377MPEeWYXrZR7T+9BTIYIcpO4pOwi/cV
+ h/uTyYIYjqKdAiZ5RVnmBHrZTZze+Quyc/JZdxhbuCA==
+X-Gm-Gg: ATEYQzxAKk1NLxjJeDdgapHga3kYAkASYQF7h3QIcofsvmW6vWev6216RFF5g4pmwms
+ ohZAfWb2cn56A+feuOqW5vyWQj7kr5mSvjMv1eol4WpiZ4CC0jERtTsLfH12gV2TT0cwLzXsQ5x
+ ciKd1LX6yDW8oAHMfX/yyBXiiT8o/eEXlmbtyMs5H6GMcv5RQ4oPKYWXg5apB1MYZ+eBUBt+jNp
+ zzR9CM2I/84/cOeZu5yIa7bkE7I3IOmJlhBovuJ1Q/F1hRg6cnOL2EgQ3AtUc/uAGIYMDZY5VXZ
+ 4TFYk3Att1iKDLTtMpz37NHPNn/oZdbHYOHAt9sgdvfJNjdjIMrK1xkSmf0gI7TQPrwFkQbx3bC
+ 5d8FlF6pa/wXEt/2uZpcyqRuNuVrAfz6icjV/JK+iZUaYT7h/CeYmOjjymTUpXmO6gnnr/TPMF5
+ GfWaRlHLVh04KPSNdCGgITCj9FCzp0RYOUq0BdGMCTg4gnNZyf5gf7rzveGgmveMZEnN46oatAT
+ b5zkmB68bo150RTjr8hqUfoxzeWXuKUfoOF8Lc9czKd2osLUmEzQvm8v+aUHi3y5QOrnnvlM4in
+ bnUUcvd85QPOFX4kfcC5XZ2SilRp+VJLU3hUMpVUi8UF
+X-Received: by 2002:a53:adce:0:b0:650:21cf:a43a with SMTP id
+ 956f58d0204a3-6502fdd6cafmr1998735d50.7.1775040315110; Wed, 01 Apr 2026
+ 03:45:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v2 3/4] fdtdec: Introduce fdtdec_setup_ram_size() to
- determine the memory size
-From: Anshul Dalal <anshuld@ti.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-CC: <marek.vasut+renesas@mailbox.org>, <trini@konsulko.com>,
- <u-boot@lists.denx.de>
-In-Reply-To: <20260331080117.2370092-4-ilias.apalodimas@linaro.org>
 References: <20260331080117.2370092-1-ilias.apalodimas@linaro.org>
- <20260331080117.2370092-4-ilias.apalodimas@linaro.org>
-Date: Wed, 1 Apr 2026 15:55:00 +0530
-Message-ID: <177503910099.1968416.14447346293143226977.b4-review@b4>
-X-Mailer: b4 0.15.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1775039103; l=553;
- i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
- bh=fbauF55P9RtcuMUMpEsH8d90QokgU3qeE56l7NPa4nU=;
- b=jcRQ0UjXt0Jro7VbZzQV/ojlQ8RO32pN1PsIsRKDAWFuI5zY/DI4NBEZcoLSQcqyQp3glTjby
- 96dFnwOv3SjCnaF9dRgq1YD3npA3LwlEUcP2ErYaf9VbDjVm7dLLmDy
-X-Developer-Key: i=anshuld@ti.com; a=ed25519;
- pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B36D:EE_|CY8PR10MB6684:EE_
-X-MS-Office365-Filtering-Correlation-Id: 41f11ae7-924e-4580-e969-08de8fd8f543
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700016|82310400026|1800799024|22082099003|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: uIcBAqXzXJ6WuBk6JgGFolYLVeOu7CAgykyEdcWZX4KEt+VkPniX/82IMvOZVsbYAIi5NmV6TTxe3ePl5n6aVa9HRPe4c5j3SHSzxHM9Ky+8nqQlJnldDdgb+XXUY1hxTrtnVY0ecuXa3d36O5Y+uNcsB3nXNet4azfcOcacfVlO8mBCH+APPsDsjL2NRSjprFreQSJeT2Qloh5rqDcnwC+vP8h8KMvouIg0ydbFk6Fj6/NuEH6qAKSA/QlbB7LagV0carXXpz4YI8cuGV6zQklkWZZkptjLPp73LWy7TRFgRwObJrCnTBOLOpxiz88r/tHnSWzEeS0q26W3/vde03efraIZQOLGXypGVYJS0PvVLPFixPrve8QNAT87vJNVs/w89i2AkI350Qy86/dknao7IHmOsFuoNdWpl1jfpEduaell0uHOicOoShxMorjlxjRFMUij/Zy2Pyehp+tpCh4JQayfq9Du7N+0DGjspol759YWov7wbkE8EfZXxE3V/2Fmavv+KwcZuPpVxw3LMj9QakshLTDW8vA8f22WZNs1/aqrJbjH+kncbkIPSseiDlG+2OZTfv9FRLKrqhOha/qasC1fDqTpAcBWQN10FsQxIn+7yfFPIwxY3yXq/4pl5YA2sstzeVczPatMciXGFw1ucX4kcQnAIl+4VKhY/qgqu9p5PXMUWubVfEHbet7MKQt/y+RapoeWTXuoqm7K4Vgp80R52b1c72Gb2WCTK54=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(376014)(36860700016)(82310400026)(1800799024)(22082099003)(18002099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 9CNWeQHRGz12rfV77tTWhr/mh01yUpTemDpjFPpCSgTTyv3o6pqYwBs4Z+ixJWEA2OK2JY+cX6NWLW4LCEuRdfeiuWRXCNm1Mme/etS5vD0rkkTkSkSM2+mxg9qWOI8b9KZ1f+5DLRUoD07RzrZR6hBW6CoYBUozNYozONYWF6shCu5/LLUlzfYOB+0xVrj5nSTk+MCn2vp+IMSDoXCfQgiuYeSANH61/08D1DaXLeDEfqyirrgJhrEAsHZlBxERDRpE8upUqaRODkGARKHUR0bbwyf16q0TJlxDuWxF6Hjc5KNN8KxrLx13D890j6V0kdVd12n7LRw9M03GNfgKyaSj19QaO3waykpWl4pUHtq1rqg0cqqCmlwdLnud1g+YSO0ezmstmU6vBMLhRL8fICR7/91bcN8XzJ09ASHEs6PuAsb9KTsSLOL2kfAKczTj
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Apr 2026 10:25:12.2616 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 41f11ae7-924e-4580-e969-08de8fd8f543
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B36D.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR10MB6684
+ <20260331080117.2370092-5-ilias.apalodimas@linaro.org>
+ <177503910100.1968416.1541488991356907095.b4-review@b4>
+In-Reply-To: <177503910100.1968416.1541488991356907095.b4-review@b4>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 1 Apr 2026 13:44:38 +0300
+X-Gm-Features: AQROBzBPva0KmScHb4EcUqo63i3a2v_z7VKnO65uTUv8NOSo_Xu3hcG0X8n19O0
+Message-ID: <CAC_iWjJBuqyXThg=VSjVRYb-iaMk5qKDk_vtifURSRkomfwonQ@mail.gmail.com>
+Subject: Re: [PATCH v2 4/4] common: Allow relocations on the top of the last
+ bank
+To: Anshul Dalal <anshuld@ti.com>
+Cc: marek.vasut+renesas@mailbox.org, trini@konsulko.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -142,19 +120,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 31 Mar 2026 11:01:13 +0300, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
-> We previously added a fdtdec_setup_mem_ram_top() to determine the
-> topmost address of the last DRAM bank. Similarly the overall memory
-> size must be calculated when U-Boot gets relocated to the actual end of
-> all available DRAM.
-> 
-> Pre-patch:
-> U-Boot 2026.04-rc5-00012-g5789f787c8a6-dirty (Mar 31 2026 - 09:13:34 +0300)
-> DRAM:  4 GiB (total 8 GiB)
-> 
-> [...]
+Hi Anshul
 
-Reviewed-by: Anshul Dalal <anshuld@ti.com>
+On Wed, 1 Apr 2026 at 13:25, Anshul Dalal <anshuld@ti.com> wrote:
+>
+> On Tue, 31 Mar 2026 11:01:14 +0300, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
+> > diff --git a/common/board_f.c b/common/board_f.c
+> > index df2b0dc899b..4270f368e65 100644
+> > --- a/common/board_f.c
+> > +++ b/common/board_f.c
+> > @@ -321,6 +323,19 @@ __weak phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+> >                */
+> >               return 0;
+> >  #endif
+> > +     if (IS_ENABLED(CONFIG_RELOCATE_LAST_BANK)) {
+> > +             phys_addr_t old_top = gd->ram_top;
+> > +
+> > +             ret = fdtdec_setup_mem_ram_top();
+> > +             if (ret)
+> > +                     debug("failed to relocate to ram top");
+>
+> Should we not do an early exit here in case of failure?
 
--- 
-Anshul Dalal <anshuld@ti.com>
+We discussed this on the RFC and we decided to still boot and just
+relocate to the old address
+
+>
+> > +             ret = fdtdec_setup_ram_size();
+> > +             if (ret) {
+> > +                     debug("failed to calculate RAM size");
+> > +                     gd->ram_top = old_top;
+>
+> This should be redundant since fdtdec_setup_mem_ram_top already resets to
+> old_top in case of failure and fdtdec_setup_ram_size only modifies gd->ram_size.
+>
+
+It's fdtdec_setup_ram_size() that fails here. We should reset ram_top.
+
+Take a look at the email thread though. Jonas & I had a discussion and
+I think I got a better idea for this patch
+
+Cheers
+/Ilias
+> --
+> Anshul Dalal <anshuld@ti.com>
