@@ -4,93 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5F7B10F6FDB
-	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 22:07:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7094510F6FDB
+	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 22:09:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BC5B83CE3;
-	Thu,  2 Apr 2026 00:07:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 02B6083CE3;
+	Thu,  2 Apr 2026 00:09:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oTqYwJz5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Yv9W8Lvb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0806283CF5; Thu,  2 Apr 2026 00:07:47 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 00ABF8408D; Thu,  2 Apr 2026 00:09:45 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1481980517
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 00:07:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 010CB80517
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 00:09:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-66ba9dfe83bso330528a12.3
- for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 15:07:44 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775081264; cv=none;
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b8f9568e074so36793766b.0
+ for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 15:09:42 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775081382; cv=none;
  d=google.com; s=arc-20240605;
- b=NfIGfUwzo74yeXLrZqX9njdEOLfAcJg+lBDnGmBFARuRFDBSPIlGYbbLhhYNxver6M
- dqNncRaVHXO7sHQKPlRGqOxonoFPMFsjuGVJSmB1eiZS009xe8K3Jc0T8LlZCpvOYDYQ
- 0Wm7GyQamh2bxZhvEGPMZ8QAtV3CGli6279+BRHwUJTtDPWnzZoN1LRsdNI0T7om2hRS
- 0uDaFlbb0ELpR53O9HBjKqlR4PeRoUYr+8d671HCIx+E0GMUCCfvvxQiclWRQYEhvqwp
- HAPvWyDfmoKWOFkKyVdq+vf6C6vE6FWjuOewG1uaDVqFJfzzArCB/5hk1hH/DZ52ccDh
- NaZg==
+ b=jBOgDh7eUzRsJTi3l5TsMluYHPh7qmnJx5CXUxkJQHlIEEBs82utNr32YrtLw6EdsW
+ iCYu+ZTVHb4jyBHtPvMC0b63YiAXujU8ZxcD64Q+bUIZS8ZMESVr8Q3s3Ia+UxdqyMob
+ VNMZ4lKKO9levnpgPipQOD6M3dlisTYt/PhdmrAia80jif5A6QaWDhm2o2kZk2uBenX9
+ BGEivj19P6cKHJRR4QuXuji29Q+w/wSanHuGuu9PNWOPnXNMC/Ot6DsjGanpYmK5G3nO
+ GBP5pigM/0NgnjiMHke/CdHwax3cRgm1Lxvw6NjffSOBqXwhB14RLAqSRGsjrq4m+8Mm
+ /Jrg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=fvYu0PLWjH1fwRqNfvVKduTE66Z62bX2fNUWbaze164=;
- fh=mZrpf71SDXGn9fIeVFiNgdonkuPwb1Sy1rTdAgGdg4U=;
- b=F9Ynzik1cEb1YcVP2lvjNz5WI8UyRgxms0GljyJ1pJywJPR1451W1Gediwcu2Banxi
- Mb/E+tm1ClrDWyPdF7xZEY+BjEFXYOxGEsIDnoCPTqdonKJVcKAZsCymathwo2IyLJ9G
- fXW/m513hNJIAuQgWrgDFAlk9gFkev142sZYKxAiuzLlUQ+hsA5oxPCeFGzbr6jlr7jR
- 3kPKYYvZFzd0uyKAVADP3vNGM8rjfPNPqWZ99TgzHCVd/nC0WIEfigwj+NbBwwMnOo3m
- zNjsL0MPf/W8Io4A2etPhyK7xwGzrRrgYKRx4vR7rOlu73cvx2urQtFvyJKDZ9z7jPEL
- 8LTg==; darn=lists.denx.de
+ bh=sEnyVlisOArVcxQRDH0TncvPYP7Z+CV+XaTRHWXMvDc=;
+ fh=C4vNWsekhYXEGt7XuLrL80wsS+2EksyJTFSgd/FaRmw=;
+ b=MZUmo6efTBktvcySnBUwxLuUJFvu/DnHbg+8SdDxmBdToZjZ8bSvqdB5mYFT9kBbBq
+ IxlPlVqjx71zOhyjShZvx2S0Gb05NuGdpsMxaPrQl1gCFa5U8q8Ga1AVabWrxmNbE05b
+ kOmdfn5mOg2/5/VbwKsgxoSdfXUuKGipdtvD4CVxkob5l6t+iYUwOLzvgnsyEkWdFXE2
+ MInk93lihm6YQlZdBLiczQDZgCO0SeMQZ4S6Satl7jirZVLWlJlGNR5oaiaaYRT8ggXx
+ MokBNGCkJL4uvr/lVOJHDVQ/EKU6xQxXya0jBx5Ag+8jWt3KHqSbwUssb3S5KkSPKY+4
+ ZBAw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775081264; x=1775686064; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775081382; x=1775686182; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fvYu0PLWjH1fwRqNfvVKduTE66Z62bX2fNUWbaze164=;
- b=oTqYwJz51Co3+zW5HizLRdG3CxjZkf8aeDvXQcFNOlTEAziPonFpsTnUdhCLCqtkYG
- aJlwxiR4F7rsMGXmW1pcBYBqPFtROoS0gAgf9RZ/stz6PP/TyuyAZJ0rlQawxPbJzX/q
- 9nG1I8Zithe7yQ3xlcimYFKhOWZgqft/CqSpc=
+ bh=sEnyVlisOArVcxQRDH0TncvPYP7Z+CV+XaTRHWXMvDc=;
+ b=Yv9W8LvbQgPXc6TVi3fUsUHXtvPw+5wQRkHFSF6OonGDJ+7QPgmY0CRbna10/juCto
+ GlGSYfsb4quDI2Au8BOzA4ravQt1oaZ80W1QCSbv83/Gd7pN0AvMIx5pKb8kBu5sb8hq
+ nfFFSP4QBfG2NM3tIcasVRfAiCAtnMs1f4jro=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775081264; x=1775686064;
+ d=1e100.net; s=20251104; t=1775081382; x=1775686182;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fvYu0PLWjH1fwRqNfvVKduTE66Z62bX2fNUWbaze164=;
- b=YvXdHbyfZ/ZSzMmD/p0Q4hpfY7f8zWaufMTZ65+6zT70p3bnUjT0aoUEQUKlQSTnHn
- oaa6JnS4VTrJGukqLY55fCdww2Wajz6sOHAm9MvZ9ecTKxIIMhbRTam+wYnTQYsje81s
- cUkyfe3BNfQZz2jPlYlrjtBPfL4dSoMMQK80af7Egn+kzYHjP0obkgsvXNilXiiIcsx/
- GhYZBOHaASoSfSYQDLt8uRMNep9Grkqgi0a7Htj3M6xWAkp1u4uor4lax1ahRbB2ui49
- A6qZHOF/VLoIzZptlgcj2GP/su9TlyCxO6sChVkMJGMTjfoHrYDbQ1NYQuDOTqRlRdf7
- MYAg==
+ bh=sEnyVlisOArVcxQRDH0TncvPYP7Z+CV+XaTRHWXMvDc=;
+ b=GZPr5fbunqgsJV8s67HDE5DjPaPQviqs1AQmW1JOSDMW6OVG0juob+6W1tY6tqrf20
+ bXli9CWRbh+e4RppeQM271SX09J0qHSxO2ASgtpqLcPmHY7+blIWhr9RcQcfT+VYzkHW
+ N4C19nXPuzHh8cs2RCMnTlNa6FptmdR/bg03vddO/dxuOfgdlviWN3opKf2kVCHumMki
+ Oo8cE/9ozM3USzF6a9Wg37k+FnmpMVs/TrvmmN22HUKw+1Ugli1Bls/GBmZrKiZWCAIw
+ xKhomgbw5KTSbIqDxhPAx/Spk+jyfCi0DQ4WtmvXHIp7xhHhWA+q73Y0E725FmdMppIy
+ 7l/w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXWYoioRXrM8y69Qz98d+gZ3kIIGu4z9xFseznXW2KmN3Em8xGgkOTCNGEbW7M/nUHGIscxboY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw/C6HaXphtN1c3fTRQ2m8AK5eX3iwA/jLYIXOswdN79ZgZOGQv
- LxFzk16xraNnMabgXGf19Z8FfKau7z1nu23o9ZbpL84rkxEEWYteV61LPX1BipLN4VuBkQtWgP0
- P/YYEpJuFGdsx9TOBkchDsKUstC4vJcJiTi/JOqKz
-X-Gm-Gg: ATEYQzwu6PDhfZy1H+ohrDiVztgU7igpJe8qF6Y7ZPgn0yIVXI423p3VdtzA7BcA4sT
- Gn3bgo9LO2d9ygLKR53gkZ2MPJWmjS7mpfCa5zDz/Wab+IC0CFimHX2SBGkBrXLVA+7k8BtVm3Y
- 1ubNUg2YI3KMhfu77cmIUcCuK7ygcranLLKqiUXA409TmtNMyeJLj6/iu/S0VsgRhEb+MF8dWAm
- egs2/2dL9C7RbmW2kDrTwaSYdHAmKSjuB1phHclJF7eqa//Jmykm7u4nNapRwMnWbpfunZYDr0s
- PXYPBg==
-X-Received: by 2002:a17:906:f58a:b0:b97:bc6b:7f21 with SMTP id
- a640c23a62f3a-b9c1337b179mr326896866b.0.1775081264317; Wed, 01 Apr 2026
- 15:07:44 -0700 (PDT)
+ AJvYcCX4sotDcNFu8jlAIaMUFVdrDcENQLbMh2VR05zbY5NDW4N2saqAuq/uxImutyz4vsYDT6inyxg=@lists.denx.de
+X-Gm-Message-State: AOJu0YyKWR2UsoaQXcC6l2VSsnGB2wbFlXhzeTNyXUpzkqSrc0HaM4go
+ Nsk/9q0dRq1IaP/nOTi+0q3Sb9q4jPMc43NdRdEYkymdFSyrXioi9zeNI6AwB8NceXn8ZSQzOaY
+ XRVc1kqvxFTj9Tt1mEjeEZhZLUaYv0e16xZbAwriY
+X-Gm-Gg: ATEYQzwd0O9zdF4Dv2+VaDF9AQPqRYl2e5MjpBqOsrp+2bqZZT3LshTjRLtdhdA+lWh
+ B0c2g3xCsXF9AqM5WK93vZYXBIIDoRXNrnlJfD6su30hG5pVqu8yAIVbdk6LV7zvazG6H/iuhd5
+ Wgq8FvbzLrBvbV3BB24nFyp934hGPnBeJJi/tcV5Dom3wp9/9+qigfhbPE96cwykcbwlhQ9qQHk
+ C8fh5iMo4YCGJ/7t65HV7Lx5weZiDNf6lMmPYIMezyf5r4WOifYMUl9kaUr8/JdI7L5rBnte/SD
+ jPuWrg==
+X-Received: by 2002:a17:907:a686:b0:b98:3b5d:e12b with SMTP id
+ a640c23a62f3a-b9c13928664mr396963766b.22.1775081382352; Wed, 01 Apr 2026
+ 15:09:42 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260331100047.34618-1-philippe.reynes@softathome.com>
- <20260331100047.34618-6-philippe.reynes@softathome.com>
-In-Reply-To: <20260331100047.34618-6-philippe.reynes@softathome.com>
+ <20260331100047.34618-7-philippe.reynes@softathome.com>
+In-Reply-To: <20260331100047.34618-7-philippe.reynes@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 1 Apr 2026 18:07:31 -0400
-X-Gm-Features: AQROBzCkdKL1v8J8voU9ZJOemW1eeqBbvJs3tbUO8bTtk8Yj5ot7Nhn-FjuKzfo
-Message-ID: <CAFLszTgcZtL=mfCu7KnzznRLn3CnU0BTGcei_n_BXZ6MgG1YBw@mail.gmail.com>
-Subject: Re: [v3,05/15] ecdsa: fix support of secp521r1
+Date: Wed, 1 Apr 2026 18:09:24 -0400
+X-Gm-Features: AQROBzAOsMxSOCyMmmsqgrFABl3SZAB33br5JBKKALsaCGdzn9NRPdV-o050-CA
+Message-ID: <CAFLszTizhB+XFVUogJTZygZEVFnqn8EzHiBFCtPF1DxrH04Bow@mail.gmail.com>
+Subject: Re: [v3,06/15] test: dm: ecdsa.c: clean this test as software ecdsa
+ is now implemented
 To: philippe.reynes@softathome.com
 Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com, 
  trini@konsulko.com, simon.glass@canonical.com, u-boot@lists.denx.de
@@ -114,18 +115,17 @@ X-Virus-Status: Clean
 Hi Philippe,
 
 On 2026-03-31T10:00:34, Philippe Reynes <philippe.reynes@softathome.com> wrote:
-> diff --git a/tools/image-sig-host.c b/tools/image-sig-host.c
-> @@ -84,7 +84,7 @@ struct crypto_algo crypto_algos[] = {
-> -             .name = "secp521r1",
-> +             .name = "ecdsa521",
+> diff --git a/test/dm/ecdsa.c b/test/dm/ecdsa.c
+> @@ -9,29 +9,15 @@ static int dm_test_ecdsa_verify(struct unit_test_state *uts)
+> -     ut_asserteq(-ENODEV, ecdsa_verify(&info, NULL, 0, NULL, 0));
 
-Raymond already raised this - Changing this to ecdsa521 breaks
-backwards compatibility - existing FIT images signed with algo =
-"sha256,secp521r1" will no longer verify.
+With the software ECDSA driver now available, this test would no
+longer return -ENODEV. Rather than just removing this assertion, could
+the test call ecdsa_verify() with valid test data and check for
+success? A DM test that exercises the full ecdsa_verify() path would
+be useful to ensure the driver binding works correctly.
 
-If consistency is desired, I suspect the better approach would be to
-support both names during verification (the old name for
-compatibility, the new name going forward). What do you think?
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
 Simon
