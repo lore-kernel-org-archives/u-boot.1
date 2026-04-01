@@ -4,119 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEB7DD35164
-	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 09:36:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 457C8D35164
+	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 09:36:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63F9383CE3;
-	Wed,  1 Apr 2026 11:36:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id CC11C840AA;
+	Wed,  1 Apr 2026 11:36:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="oWqeZCMG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ix8yALMN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E04F983CE3; Wed,  1 Apr 2026 11:36:12 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0935B84099; Wed,  1 Apr 2026 11:36:18 +0200 (CEST)
+Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
+ [IPv6:2607:f8b0:4864:20::b129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F4D280212
- for <u-boot@lists.denx.de>; Wed,  1 Apr 2026 11:36:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 97B398408D
+ for <u-boot@lists.denx.de>; Wed,  1 Apr 2026 11:36:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NA+5XBVw7Vuqy7d4I4hO+JoKhTrFUqWPwofOrpdBV3syt2Y7Xpzd8T2P2+VJWD7vFg3AUERVA3eTXDD2Wh2ar6TrKMESEQaGOb7M9/sb4rIPjYDrA0uYdWvWFytgZyMd0T/hqql8R4mtUoJknqvhnXQWP2LBFWLvcBOGDAwMYJPONMv1nZ/3MFbIJj2YY/+C3t2HKRYVswG7TrJWzEBXruA1sgzUSmqVzE7S8pzyE59Vg8yXYy5XHxsUnkfgG51UWVmRu7xD1QqntMe4x5pTwjdBj7vhWLSjx5zBoIuIHNE8SzR7ga2jUYu+C70LARzXjfbWqbS6pSA8cQG7L9p8EA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hOW/h7NSYdGP9ycfTPxiqDKOrLtg5WIfcKUctEQq4Mw=;
- b=Xd1UEOgiktMPile7qe/fGu+RgRFI+r3VPq7JQO1pfh6kYdg8gtzudoc/pNBRn6iyyDtxqeYWLomsDoSaEmZSJsEC3VqeGKxqIWupP1ftPotqYD4kSzCRICeC0NnEUr82thjEJOuxo91XPA1Y/wwOk1ismCl6U1OJUJIaJ7qTgrl7dQUs6SdzO5Oy1l/XjMlqcbZJ0BFV3S1JxqhfZQPvfk7VI0SaekhYS1gaxDmrNKbYMUyyDvPa9SdLzT+2NcbwMag0AVEA+jymkYLIubRBbmdoavqujZdXjTQufR5erPx2H3wsFsJjEZVWZlIGhdOpZ9ljXAtRixs97yXc5WyzfA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=gmail.com smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hOW/h7NSYdGP9ycfTPxiqDKOrLtg5WIfcKUctEQq4Mw=;
- b=oWqeZCMG4qsLv5GpSgg0Rb8nFk9NY/G9JTK1nnmasxlRuw/Ya1/Giio6PDyxLM/Eyx3Poi7QWM/Nva1HE+yPW6EzSUohNQHgTZs54gevsi6506CwJJivAjOxKDFxWT7lyrG652kSEWS7jG6aw+2kRKXp8KPten+goE9I9lzE1Z9+y1ZvxHm9gb45wfUnDkA3UUaSw/KBbvsW3cgyOb2pi8qSnWggqW+oYzQ4s9vUmCiDjUERMsdg8W7HtRBacOiwrZykVRQZ6NYjFROzKb0r5toDMKy7zMbnhJLeAMb5+L4FToUWosp9hKZHHTZj/tWlsnx71zY/Oix1VPLJGpbxsw==
-Received: from CWLP265CA0281.GBRP265.PROD.OUTLOOK.COM (2603:10a6:401:5c::29)
- by DB5PR10MB9786.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:650::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.24; Wed, 1 Apr
- 2026 09:36:06 +0000
-Received: from AM4PEPF00027A66.eurprd04.prod.outlook.com
- (2603:10a6:401:5c:cafe::fe) by CWLP265CA0281.outlook.office365.com
- (2603:10a6:401:5c::29) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.29 via Frontend Transport; Wed,
- 1 Apr 2026 09:36:05 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- AM4PEPF00027A66.mail.protection.outlook.com (10.167.16.91) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9769.17 via Frontend Transport; Wed, 1 Apr 2026 09:36:05 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Wed, 1 Apr
- 2026 11:38:43 +0200
-Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Wed, 1 Apr
- 2026 11:36:01 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Wed, 1 Apr 2026 11:36:02 +0200
-Subject: [PATCH] spi: add STM32MP23 OSPI support
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb129.google.com with SMTP id
+ 956f58d0204a3-65003f40a22so8470419d50.2
+ for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 02:36:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775036173; cv=none;
+ d=google.com; s=arc-20240605;
+ b=huQZrfv+2pNmTHNaGOl6+Ip0n5+N/WUX2+lnoHNe2FGUVv3BXYJXHhTCxq7f8dxs7X
+ 0Y2bhU5vSiZyJzSVoe+v+n2kc84AexyNvPavzks3d3CIb3saOtQevI6+jMw1PhnOGikt
+ HdH09ufZ0EgGsI6Qy4l8LZvkWoVHvC8rsFFALl1WD3XrWaFDS59tvvvR7pvwHCBVZiig
+ RrahxF2RxTFGnbpb8Xxa3T7O9J+FNh+QybntmDk4whAbm3g3J9hJki9Bp8TBM8PJTvee
+ MqBL5jdqFPwicq0v7OFQENF3V8fwAKe4OzT2otYQ6w8NiSK2fD5y+TuRW7UhI0gF16fH
+ rW/A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=hUMNcU84DASKyk28cGEFbV6fDTTbdkol9+H9MxBel/Q=;
+ fh=a7F6x3NQQp1EBjxPbpSwxRS/z/1eCH1canUoq2zE9lQ=;
+ b=VMmbA+1CxVN2J8XTMtCypzdmx/807OeugKRrXFCyXhejZDZUOVarHasEb1qvR+/tiY
+ bnAk7H7Y/BYJ2pvrBLb8jKHUK9sefRXLk9rL42vRMmQoArB1YsIDPZHpxkvgN1VM61p3
+ ixGDk4oGF387QONosuzFIjfS4D8bKNxMdYoPeit2K/E3wfjXy6DwhoFg8ewgYl/keTiK
+ NzB1jSKRHwmAU+1cfeO7oqvx6aj8w9gSfPxOUDZx3kclifiev/oOTCf0V3MF+oK2pCvg
+ lGu6POcjLh7qON5r2cUZry4tlEfurLemg1c1afGWPbNp2UGDTKP10Kq5FHeSj12YsnfW
+ m9lA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1775036173; x=1775640973; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=hUMNcU84DASKyk28cGEFbV6fDTTbdkol9+H9MxBel/Q=;
+ b=ix8yALMNI0NDNMV8QXA2qbmZ/txyYs+yEZdKz35w1lEwsPuPJjGSdUKSTabKurVKUh
+ 6A06krJoDpWgVFtF1vZH4RM6Ai5u3Hf3R6mvtgdMdJnh7bZXXYBsBj7nO+IOa53j/+jM
+ LCnbtPyJvoYnByOezkxlKa8coJm40hlv14/76FJyQj5J6Q7da3MnZTxyF5EgVcUavdqL
+ 7msXqyMY4exbCIhDgWsFxx+fHZPAgGbuJVJPBGyxdLRquO03/D8JrYtlmx2sjVY8INuM
+ 8m3aK4BgAf07dFRZZs8hxvPIzqPnNxMuNLDap/PQZVlE5M/bR1fFhdJKhbnAYvBq6eKA
+ Yx1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775036173; x=1775640973;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hUMNcU84DASKyk28cGEFbV6fDTTbdkol9+H9MxBel/Q=;
+ b=Mtu6/OkvNNMxtV5A4WkVIEG2fROkxMRmG8s97MX1YRWNOD1PmfyLUNTdXr4W8BoYvQ
+ gom3PhpMU8RxVY9Uy3U6zTiV/HO/gyKjrAQfYJqs1Pdl7smdebZYRC9Txjlsx9ND5n2s
+ CMqAEpG12J5ShTe2PHzcC7Fzrc1/EI4q2Y77dK2zcSveKPa/FkDBGsMjSX/OIANZO8OX
+ Y7vSV7MNFH/6SZZY20++q7JDWzOIGuhl53/FDUFTsQ2yiLjb3SixmO0WQ/hdwmpXHsOI
+ whXG6MX+TSvRkDUPpk3MRoh++zjZC6h60Ljm2YfTEWyp0iSkT6sSPwlTMXTI7j4KlpQe
+ hqrw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUiRi/+HOC3kyD9dRVthtTTatanWfTH2/hGbrUBiqSFGPSt+GFaVaOdT6x86wllX6VBwpXTaXk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw7x7vKakIp5oIlynq9JZ6cJ8Rbxa/mcu/1YJuf2JLYr0N21gsU
+ uhSIs+M8JWH9zrMP4E+00bFcNvsw2eKyP1TVIwBscHtb+mAvcygxmodW7B9iMwijqFkEo8RtY5l
+ 0x3ubiD+K67bUCnDETn87ODDl0iX52Tu9/6t/RTRwAKbzjaCa8A8K+ko=
+X-Gm-Gg: ATEYQzzUEO5ThaUA2OsrAW3/5tPb9FMthomGIg81qTZ1rDPe554nWX9ffSsoDEXtzjK
+ l8r7xN2Ur3lnd5BvSzU9xTySPKvb8eQsd/nAbjka3EGB4luooHAcN6XdGONq/HM/Z3OVnfE/7HP
+ j4sYustO/LN6Wx2F/Ll0JR/JXwdzqPJkwjtzLmaAJW0o0hNWReZVyzGIqQ4DAu8V29euGiu4HlP
+ IBXghftNZUhXOv3X89bWb3Aavd6DSHoGL5L3RSd+KVNKw7Jyr6+PwgMkvlv3SPs18M7WFyowcPd
+ p1XoClvDcVmMYHlOPTzLk5wYi7VoGe07Yj6jGIj8Kybwg8QRXIks4/dKp7SqtSj4Hdi2E5CaRR5
+ psJrjM9iYa5kr9A+O2umHQEmcbdoIQMfs17FdkVh7r8oqGg4e/GyJ9tdbASfqBwwW4GGzVDkgCw
+ ueU5s70PnSTjo619sV6Dceab0i2tgXP4azX39Edh43dD7BrdwfQfT4hRvO4fuoy4EusfGeOZJUl
+ t0a8f9RUgGgibOLp30KlI2GGg35Gt4IG/EYHCfa5RBMjXUaEvjKoeAfJutIDcO03S3m55V/zxYL
+ tEH6KWZQXJLnEAAwzPKSQeu0qRFXCca8lkIyfw18ggFa
+X-Received: by 2002:a05:690e:190d:b0:650:3783:4acd with SMTP id
+ 956f58d0204a3-65037834da1mr334409d50.38.1775036173252; Wed, 01 Apr 2026
+ 02:36:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20260401-add_stm32mp23_ospi_support-v1-1-4c73550eae3e@foss.st.com>
-X-B4-Tracking: v=1; b=H4sIAAHnzGkC/x3MSwqDMBAA0KuEWTeQjwr2KqWEYCbtLEyGjJaCe
- HeDy7d5Bwg2QoGnOqDhj4Rq6bAPBcs3lg9qSt3gjJvMYKyOKQXZVu9Wdj5UYQqyM9e2abukecp
- +jmM20ANumOl/56/3eV5DyfRNbAAAAA==
-X-Change-ID: 20260401-add_stm32mp23_ospi_support-1cd96f39a5f0
-To: <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Boon Khai Ng <boon.khai.ng@altera.com>,
- Stefan Roese <sr@denx.de>, Christian Marangi <ansuelsmth@gmail.com>, "Ralph
- Siemsen" <ralph.siemsen@linaro.org>, Patrice Chotard
- <patrice.chotard@foss.st.com>
-X-Mailer: b4 0.14.3
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM4PEPF00027A66:EE_|DB5PR10MB9786:EE_
-X-MS-Office365-Filtering-Correlation-Id: e2232160-120c-4bd1-5f5b-08de8fd21901
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|376014|1800799024|82310400026|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: FB/0miaUJR2uwj77vHbFC67q8ZGSIS9g/vQFkzOXwLT+h4MuAKRidX6PEVN1eVO9Rqlx/BZxBkjaoCYBKNuGdo9XaNFnv8QrF3zdh4YvNL4hvs5hGyBvNMHAsc9OvhEhi0V3uLaxMqy6DWCK7rUbTj9ckVL22v6yRqzoIu5JlhsvncPziZG2t6CxxmazN58LU8KG6DoVN3AIZmFKbPwAbPCOtQcbTV8OeHJzbj3IRvlqcu9oFVvh528gnJFO8lW+tNDPyTRqaZ1FV9FOEvhSU1whuNdPBYKUONnpLSWQwG7lZ2FeD7ym58x7rsiEn/f/St5m0gSNHfL6bYUUkshfC/qdYXLCBK1cIoRHcUC8ic0tJ87D2kQOlxj5foG8nBgVZgQ83OqPP1vXl47wpiIS7+sQmRoNmn8DVG4dwW/1qLRdcxzx/0zcpVPQMf1ABOORvcVx+c7XgNTzAMh+VLN5xRYGk9WfSnQK5Kkpu3yDLzl3mqLV1CGLgELiGtwYpIWSrDyl0mFfrUrTN8oZvIsLHo6axEiU7E7ZWIbkBwqGb0qBZEf0G4/I6OQRBOaCCfULc2rBqEsVC850l0cmVvt1JD5vxPr/QqTU0JeKM9i7qS6Q2CyM6OINGk3jsEWXvRhnUkwAdZB63sPCk/N6rnIlm51DJstL1Xwl33mDm0MqCNTmZugzWhASji9FB4g7rSVzNWQy14DJEuQh3DutYGY15RAkKTJM6lUsHRyXDL4cznhB8hxWINuMtnky00uXmegOmWjwsdVK68ZDhwHIVcU5hw==
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(376014)(1800799024)(82310400026)(18002099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: D4m0tM8/rxsG1VJQlt4QHSBuG7xSC4vJzojl52NjpSWJ4K4aUF3RrqA6qOTSZ1h9acEAImnPLbULJLjwBT4AVkqzTUulS+AkLUpud1gWBoU8siG9v8vjKbG84iAf1QbKnKKdfJbUeAkF5yilVzhLEV9B1waoMMx9WxHjzMHNIFNGZ/KXPIThi3v03uy6XkFHTxYTzAXAC3kGj30sDbiX+bzaYDVpThLkg4Fy0S4RbMXLWNIYGs+d/slg5KNNn6fVdti06lwlDAiplKTtDUWFDkoNPsSl5zIeykkYDBV7zmxhWl0HePDkTwlE5SPeVFUTwidc0S2KCBFoPCmyNYhKuIUFNjdu0eKSEDzl2tAMtbh9yqqqq1ECyM4DnoAuC4sR5htkz+7Ag8BWRw7VXcJZkzdWJDQ09qMep3uVbcOkJLTtl5S2QRP1DrCzdunY1Jdp
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Apr 2026 09:36:05.7772 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e2232160-120c-4bd1-5f5b-08de8fd21901
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00027A66.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5PR10MB9786
+References: <20260331080117.2370092-1-ilias.apalodimas@linaro.org>
+ <20260331080117.2370092-5-ilias.apalodimas@linaro.org>
+ <564fc8c9-90de-43ed-a312-5a92b16078df@kwiboo.se>
+ <CAC_iWjKRrL8CtU5Fu-ZM=Yg8XQztfC8e6TAoCY_SGX_Ds8xHCg@mail.gmail.com>
+ <3ed2db2d-bdbe-4ef2-980c-372a3e88fb31@kwiboo.se>
+ <CAC_iWjKXWx4QYAQm_vub5wHv92S_-SC2UepX4x9PP0SmG_t8RQ@mail.gmail.com>
+In-Reply-To: <CAC_iWjKXWx4QYAQm_vub5wHv92S_-SC2UepX4x9PP0SmG_t8RQ@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 1 Apr 2026 12:35:36 +0300
+X-Gm-Features: AQROBzDgC52qO51cVuigBuohIfcAoZ-KXC2J-UxUh1G1phZ0b8ropiYCPZR0blU
+Message-ID: <CAC_iWjKu-OeiweerDkwpUKE=cs917twDSoTuJvRS=94TpbfHWw@mail.gmail.com>
+Subject: Re: [PATCH v2 4/4] common: Allow relocations on the top of the last
+ bank
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: marek.vasut+renesas@mailbox.org, trini@konsulko.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,32 +123,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add STM32MP23 OSPI support.
+Replying to myself here but,
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
- drivers/spi/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Wed, 1 Apr 2026 at 12:21, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> On Wed, 1 Apr 2026 at 11:54, Jonas Karlman <jonas@kwiboo.se> wrote:
+> >
+> > On 4/1/2026 10:31 AM, Ilias Apalodimas wrote:
+> > > Hi Jonas
+> > >
+> > > [...]
+> > >
+> > >>>  #if defined(CFG_SYS_SDRAM_BASE) && CFG_SYS_SDRAM_BASE > 0
+> > >>>       /*
+> > >>>        * Detect whether we have so much RAM that it goes past the end of our
+> > >>> @@ -321,6 +323,19 @@ __weak phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+> > >>>                */
+> > >>>               return 0;
+> > >>>  #endif
+> > >>> +     if (IS_ENABLED(CONFIG_RELOCATE_LAST_BANK)) {
+> > >>> +             phys_addr_t old_top = gd->ram_top;
+> > >>> +
+> > >>> +             ret = fdtdec_setup_mem_ram_top();
+> > >>
+> > >> This seem to make assumption that memory is already fully described in
+> > >> FDT? Maybe this should instead be based on gd->bd->bi_dram, however that
+> > >> is possible initialized at a later initcall.
+> > >
+> > > It is. That was my first approach in fixing it, but the
+> > > gd->bd->bi_dram contained garbage at that point.
+> > >
+> > >>
+> > >> If I got the call chain correct board_get_usable_ram_top() is normally
+> > >> called from INITCALL(setup_dest_addr), and gd->bd->bi_dram banks are
+> > >> typically initialized in INITCALL(dram_init_banksize), a later initcall.
+> > >
+> > > Yes
+> > >
+> > >>
+> > >> On e.g. Rockchip there is no memory bank information in FDT at that
+> > >> stage and memory banks is populated to gd->bd->bi_dram based on
+> > >> information from dram init and only later possible added to the FDT for
+> > >> booting OS.
+> > >
+> > > And that happens after u-boot has relocated or before?
+> >
+> > gd->bd->bi_dram is populated during dram_init_banksize() so I think it
+> > should be almost just before u-boot is relocated.
+>
+> Ok I'll check that on QEMU. If that's true I think this is a better
+> approach overall. We can skip all the DT parsing and if the iformation
+> is  filled up before the reloc we can use that to decide on the top
+> reloc address. Which will also be useful in getting rid of bespoke
+> board ram init functions, like the one you have in rockpi.
 
-diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
-index 8c6c095a8cf..51909e3a8ff 100644
---- a/drivers/spi/Kconfig
-+++ b/drivers/spi/Kconfig
-@@ -550,7 +550,7 @@ config SPI_SUNXI
- 
- config STM32_OSPI
- 	bool "STM32MP2 OSPI driver"
--	depends on STM32MP25X && STM32_OMM
-+	depends on (STM32MP23X || STM32MP25X) && STM32_OMM
- 	help
- 	  Enable the STM32MP2 Octo-SPI (OSPI) driver. This driver can be
- 	  used to access the SPI NOR flash chips on platforms embedding
+So the calculations for ram_top are done ad-hoc in setup_dest_addr().
+The dram_init_banksize() gets called afterwards, but before the time
+we relocate. So I think I'll completely change the direction of this
+patchset.
 
----
-base-commit: ba7bf918dafcd093ad733b07ba490baeb20cf5da
-change-id: 20260401-add_stm32mp23_ospi_support-1cd96f39a5f0
+We can still apply #1 & #2 from Marek, since it's a cleanup. We can
+then add another INITCALL if the CONFIG_RELOCATE_LAST_BANK is enabled
+and calculate a new ram_top and and ram_size based on the discovered
+bank info. That will obviously disregard board_get_usable_ram_top()
+and will be generic for any board that selects it. But I think that's
+a convenient side effect, since we can start enabling it on boards,
+and if it works get rid of the board specific variants.
 
-Best regards,
--- 
-Patrice Chotard <patrice.chotard@foss.st.com>
-
+Thoughts?
+>
+> >
+> > I am not sure when or how, but the OS knows about the bank information
+> > populated to bi_dram, not sure if some fdt fixup is happening just
+> > before jumping to OS.
+>
+> Depends on how you boot. In the EFI world we add all the memory in the
+> memmap, but marked the regions above ram_top as reserved (but
+> reclaimable).
+> The OS then boots and can use the entire defined DRAM.
+>
+> >
+> > On Rockchip we keep gd->ram_top below 4 GiB to work around any >32-bit
+> > DMA issues, however we do populate ram_size and bi_dram with correct
+> > info gathered during the initial dram init (U-Boot TPL or external TPL).
+>
+> Yea, that's the next problem to fix. We already had a discussion with
+> Marek on how to fix this.
+>
+> Thanks
+> /Ilias
+> >
+> > Regards,
+> > Jonas
+> >
+> > >
+> > >>
+> > >> Rockchip does have a platform board_get_usable_ram_top() so this will
+> > >> not be an issue, but the new generic Kconfig option added here seem to
+> > >> have a dependency on FDT containing memory bank information, if I am not
+> > >> mistaken. Maybe something worth mentioning in help and commit message?
+> > >
+> > > I can amend the Kconfig option. However, people using that default
+> > > function are already aware of this.
+> > >
+> > > Thanks
+> > > /Ilias
+> > >>
+> > >> Regards,
+> > >> Jonas
+> > >>
+> > >>> +             if (ret)
+> > >>> +                     debug("failed to relocate to ram top");
+> > >>> +             ret = fdtdec_setup_ram_size();
+> > >>> +             if (ret) {
+> > >>> +                     debug("failed to calculate RAM size");
+> > >>> +                     gd->ram_top = old_top;
+> > >>> +             }
+> > >>> +     }
+> > >>> +
+> > >>>       return gd->ram_top;
+> > >>>  }
+> > >>>
+> > >>
+> >
