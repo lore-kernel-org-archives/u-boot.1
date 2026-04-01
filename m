@@ -4,51 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0C01D3517B
-	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 12:56:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E298D3517B
+	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 12:56:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2956840B0;
-	Wed,  1 Apr 2026 14:56:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 20A1F84088;
+	Wed,  1 Apr 2026 14:56:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="jKdS8Az7";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="SNvhRXCN";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65B9A83CE3; Wed,  1 Apr 2026 11:00:13 +0200 (CEST)
-Received: from inva020.nxp.com (inva020.nxp.com [92.121.34.13])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 79A2384056; Wed,  1 Apr 2026 07:32:59 +0200 (CEST)
+Received: from galois.linutronix.de (Galois.linutronix.de
+ [IPv6:2a0a:51c0:0:12e:550::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81BEB84010
- for <u-boot@lists.denx.de>; Wed,  1 Apr 2026 11:00:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 95F4383F5B
+ for <u-boot@lists.denx.de>; Wed,  1 Apr 2026 07:32:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=nxp.com
+ dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chunguang.li_2@nxp.com
-Received: from inva020.nxp.com (localhost [127.0.0.1])
- by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 4EB5F1A3CFB;
- Wed,  1 Apr 2026 11:00:11 +0200 (CEST)
-Received: from aprdc01srsp001v.ap-rdc01.nxp.com
- (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
- by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 179A51A3D25;
- Wed,  1 Apr 2026 11:00:11 +0200 (CEST)
-Received: from bjse.cn-bjs01.nxp.com (bjse.cn-bjs01.nxp.com [10.193.20.96])
- by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id 09A3D18002D1;
- Wed,  1 Apr 2026 17:00:08 +0800 (+08)
-From: chunguang.li_2@nxp.com
-To: trini@konsulko.com,
-	meenakshi.aggarwal@nxp.com,
-	andy.tang@nxp.com
-Cc: chunguang.li_2@nxp.com, ioana.ciornei@nxp.com,
- florinlaurentiu.chiculita@nxp.com, u-boot@lists.denx.de,
- mingkai.hu@nxp.com, Zhiqiang.Hou@nxp.com, pramod.kumar_1@nxp.com,
- camelia.groza@nxp.com, priyanka.jain@nxp.com, wasim.khan@nxp.com
-Subject: [PATCH 4/4] lx2160ardb: update env setting for unified boot.scr
-Date: Wed,  1 Apr 2026 16:59:47 +0800
-Message-ID: <20260401085947.1670191-4-chunguang.li_2@nxp.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260401085947.1670191-1-chunguang.li_2@nxp.com>
-References: <20260401085947.1670191-1-chunguang.li_2@nxp.com>
+ spf=pass smtp.mailfrom=gregor.herburger@linutronix.de
+Date: Wed, 1 Apr 2026 07:32:55 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1775021576;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=ywN+LVrbw+ievHbvPoPX7Xlx1QL6LS90lRrGEARhYtI=;
+ b=jKdS8Az7J/epu5cgGEYp+LZElVroqF+0DjjQVt2jbA6hPBEXuBnyrq7ixj5PJGroqEHp9Z
+ K9x17opHng7keZksYuWeScJVZhpwiEkfyuSLlzpufmDYoNtvfxJH63pTxj2161dCYC+wcl
+ yFJ3y3bXpXlS0uPwahRa+Ubni3vgLzUZLyaXEzZTfAosWQMb6v1tUMKHUy2sN2ILuNrHJF
+ H2zoMuarvl9pn7xmSTFat4gRMCQD/uUKvPqBzkOoK8w3Qqr7zX8XkMJ0btBtqUCv1RXmeq
+ fFN+tOJdpG+97S74QcV0PnQKt3BtzKUFA3Tpr6vLMfL7CU8vsdfhMp4wqXAaGQ==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1775021576;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=ywN+LVrbw+ievHbvPoPX7Xlx1QL6LS90lRrGEARhYtI=;
+ b=SNvhRXCN4lD5fO4EiCyNiPtdfWQX+TIgEeCHnuWteZybiHKPPLVmkurcLLLQcbFgfXiuwR
+ 53gZ1PR/cNtX1yAg==
+From: Gregor Herburger <gregor.herburger@linutronix.de>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH] cli: flush stdin before enabling cli
+Message-ID: <acyuBzOBAmAM5uz_@gregor-framework>
+References: <20260331110413.1040527-1-gregor.herburger@linutronix.de>
+ <20260331181124.GD41863@bill-the-cat>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 01 Apr 2026 14:56:02 +0200
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260331181124.GD41863@bill-the-cat>
+X-Mailman-Approved-At: Wed, 01 Apr 2026 14:56:19 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,54 +80,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Chunguang Li <chunguang.li_2@nxp.com>
+Hi Tom,
 
-Upstream-Status: Inappropriate
-Signed-off-by: Chunguang Li <chunguang.li_2@nxp.com>
+> Conceptually, good idea, thanks for doing it.
 
-Modify include/configs/lx2160ardb.h to update CFG_EXTRA_ENV_SETTINGS:
-- Add 'image', 'fdtfile', 'extra_bootargs' and 'extra_bootargs' environment
-  variables
+> > 
+> > ---
+> > 
+> >  cmd/Kconfig  | 7 +++++++
+> >  common/cli.c | 6 ++++++
+> >  2 files changed, 13 insertions(+)
+> > 
+> > diff --git a/cmd/Kconfig b/cmd/Kconfig
+> > index 322ebe600c5..e08fbf27358 100644
+> > --- a/cmd/Kconfig
+> > +++ b/cmd/Kconfig
+> > @@ -47,6 +47,13 @@ config HUSH_SELECTABLE
+> >  	default y if HUSH_OLD_PARSER && HUSH_MODERN_PARSER
+> >  endmenu
+> >  
+> > +config CMDLINE_FLUSH_STDIN
+> > +	bool "Enable flushing input before starting cli"
+> > +	default n
+> 
+> We don't need default n as that's the default.
+> > +	if (IS_ENABLED(CONFIG_CMDLINE_FLUSH_STDIN)) {
+> > +		while (tstc())
+> > +			(void)getchar();
+> > +	}
+> > +
+> >  #if CONFIG_IS_ENABLED(HUSH_PARSER)
+> >  	if (gd->flags & GD_FLG_HUSH_MODERN_PARSER)
+> >  		parse_and_run_file();
+> 
+> This is flush_stdin() from common/autoboot.c, but that's a static
+> function. We should find a better spot for that perhaps and then call it
+> when required.
 
-Modify include/config/lx2160a_common.h to update EXTRA_ENV_SETTINGS:
-- Modify 'console' environment
 
-This change unifies the boot script behavior across platforms and ensures
-consistent boot argument handling on lx2160ardb.
----
- include/configs/lx2160a_common.h | 2 +-
- include/configs/lx2160ardb.h     | 5 +++++
- 2 files changed, 6 insertions(+), 1 deletion(-)
-
-diff --git a/include/configs/lx2160a_common.h b/include/configs/lx2160a_common.h
-index 5620b903836..3fd9e3fc8d7 100644
---- a/include/configs/lx2160a_common.h
-+++ b/include/configs/lx2160a_common.h
-@@ -149,7 +149,7 @@
- 	"kernelhdr_addr_sd=0x3000\0"            \
- 	"kernel_size_sd=0x14000\0"              \
- 	"kernelhdr_size_sd=0x20\0"              \
--	"console=ttyAMA0,38400n8\0"		\
-+	"console=ttyAMA0,115200\0"		\
- 	BOOTENV					\
- 	"mcmemsize=0x70000000\0"		\
- 	XSPI_MC_INIT_CMD				\
-diff --git a/include/configs/lx2160ardb.h b/include/configs/lx2160ardb.h
-index 9d065d02bc5..b583bcc96fb 100644
---- a/include/configs/lx2160ardb.h
-+++ b/include/configs/lx2160ardb.h
-@@ -32,6 +32,11 @@
- 
- /* Initial environment variables */
- #define CFG_EXTRA_ENV_SETTINGS		\
-+	"board=lx2160ardb\0"		\
-+	"fdtfile=fsl-lx2160a-rdb.dtb\0"			\
-+	"image=Image\0"				\
-+	"extra_bootargs=pci=pcie_bus_perf\0"	\
-+	"console_dbg=earlycon=pl011,mmio32,0x21c0000\0"		\
- 	EXTRA_ENV_SETTINGS			\
- 	"boot_scripts=lx2160ardb_boot.scr\0"	\
- 	"boot_script_hdr=hdr_lx2160ardb_bs.out\0"	\
--- 
-2.34.1
-
+Thanks for the review. I will send a v2 to change this.
+Gregor
