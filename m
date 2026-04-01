@@ -4,55 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EDE6D35163
-	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 09:32:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F039D35163
+	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 09:34:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B667E83CE3;
-	Wed,  1 Apr 2026 11:32:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=philipmolloy.com
+	by phobos.denx.de (Postfix) with ESMTP id C9DE483CE3;
+	Wed,  1 Apr 2026 11:34:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=philipmolloy.com header.i=@philipmolloy.com header.b="Y9Kpb/RU";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Af/sJKBC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 282CF83CF5; Wed,  1 Apr 2026 11:32:06 +0200 (CEST)
-Received: from mail-244120.protonmail.ch (mail-244120.protonmail.ch
- [109.224.244.120])
+ id 51FEF84056; Wed,  1 Apr 2026 11:34:56 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7229480212
- for <u-boot@lists.denx.dE>; Wed,  1 Apr 2026 11:32:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=philipmolloy.com
+ by phobos.denx.de (Postfix) with ESMTPS id 408BF80212
+ for <u-boot@lists.denx.de>; Wed,  1 Apr 2026 11:34:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=philip@philipmolloy.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=philipmolloy.com;
- s=protonmail; t=1775035922; x=1775295122;
- bh=pHAhjfxvR7z9ppbANRv9UsI9EHunaTzk3SLK4uFiuK0=;
- h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=Y9Kpb/RUKZokvkMmi1Ejmh7PqeqeVuz9d0UtKd/4+bhuvry+0NZyhTR5erhPP/9op
- eMUI99h4iNyoSBtB837Q1YWJTR2OYXtJob9LbFhhnho+zBA7lTGFq6O57yMWUsfZka
- 4zJtW1nQPb8UnWm6F/JKYCTf9bRO+0ZlUMbtplWr196cgXKEpIJpfaR938w3DevIDA
- kT77dKNKANYKrR04BAKTTZlk7fXYlfLdVsp7BS/kTV3Kql2y5M0ep+zSESVLrfhIXT
- s1m82kWxj+EmTF3l/e8gfrsV7u3iXMFHufMkKfFQmyq/RlSpFL8vIui51HezDR4fFG
- iPxSOHNjIGjEw==
-Date: Wed, 01 Apr 2026 09:31:56 +0000
-To: u-boot@lists.denx.dE
-From: Philip Molloy <philip@philipmolloy.com>
-Cc: linux@analog.com, Philip Molloy <philip.molloy@analog.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Tom Rini <trini@konsulko.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-Subject: [PATCH] board: adi: Fix exception when using standalone SoM
-Message-ID: <20260401093354.3608142-1-philip@philipmolloy.com>
-Feedback-ID: 9117015:user:proton
-X-Pm-Message-ID: c3a644bc1bc34d659a943e48dc4b7f36aa4098b7
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=KS60+LiF5yY4m7LLC7enQTOAMqIl5GwDkjT7Bz67U731yfYCVJs1ejV6V0wVybVrHgnH3vhc++Ra5FPI/bh2KCWlNIFRxhKDOqIbOTRMT1tG5Y3Tcd1TTck61U9TKCE8mYzkgf2n5e+/GZ8Ds8xDwFHcvv6U15KqUEVSZhbmHI4A1/QW3oA189RxXOmsj9hfFVmm6tXCRGEqjYq4MjEf4OyLPT6FNyqlQEZolw6FWxaf1TH6+qbT0SxZvUeqJ2pRPH5rWeao60BhIOGx3S8/m4LXNpW4PJ3BIrMuM12rfCw1b0ykv9eO0OGrHFuLKGc17ObxKgvkjrTxkWOdiybsuQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=CXYVPNbw8u1LEiTUPgXpPMh3J8FzG8+JYieCj/cAHGQ=;
+ b=LbpnxBl/SrpsWMg8ibz/I4zWe+XbFWAh2phYEOLKbn+0UD3xC2R9oOPO11nXc8L7dEk6Tbm6Kz9qe3c+OQpgqWJj9a4hMoWAVuxVImzO9Jid/QJEkXBWknUA3mSfRFY+WB18ZX7h+uER5xXAjOOZVS1CD2uC2MEntcIMcpEQOpy+paNslvQLJXZ1mubIFGAb9SDL34ddO4mtOTe0vCkecbcUPioF3hwAb3ok5HHcRNem3FCusOOSTlb5l23Ee+BJ0hD206AmUfyFG6XfMPz7qeDLR1+2Hw6QtGVHqazE1XykWiS0Jpj1X6oyo/FI6bvLELYgSgTp+iZZNEoAj8Q4Cw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.59) smtp.rcpttodomain=denx.de smtp.mailfrom=foss.st.com; dmarc=fail
+ (p=none sp=none pct=100) action=none header.from=foss.st.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=CXYVPNbw8u1LEiTUPgXpPMh3J8FzG8+JYieCj/cAHGQ=;
+ b=Af/sJKBC6ZJP8OazbsR8Gieoa5yiWkmq6ejomXokaljTUdg9E9MBLT/BRWGdn07pAFefoGormD6kH7a0O9eTwvOG0/Gt/lxo1e3JkbyhseMg/zMvgn2p7gApPBUAaieLiSVfknKNTjVFH29vokWrbaFJ3Gvtl1p7FZ09hLvGZqCk1ggTq7jZrh+nGO4bAGUoVMrTr5HOj32a2OkTGVYCOw/Kva2/bZummDQno+2B5iXCT/okeExLDn8EnWfLBocbQczSxJWUtmrB9XAOLGLsC/j1cpJZDY+vMo0bV48hXwHoz7WOkflqMF9RJO7hlHzcRejw8npOZZ2iwXwuaoIFwg==
+Received: from CWLP123CA0235.GBRP123.PROD.OUTLOOK.COM (2603:10a6:400:19f::23)
+ by DB8PR10MB3782.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:16b::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.17; Wed, 1 Apr
+ 2026 09:34:49 +0000
+Received: from AMS1EPF00000047.eurprd04.prod.outlook.com
+ (2603:10a6:400:19f:cafe::88) by CWLP123CA0235.outlook.office365.com
+ (2603:10a6:400:19f::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.30 via Frontend Transport; Wed,
+ 1 Apr 2026 09:34:49 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ AMS1EPF00000047.mail.protection.outlook.com (10.167.16.135) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9769.17 via Frontend Transport; Wed, 1 Apr 2026 09:34:49 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Wed, 1 Apr
+ 2026 11:37:46 +0200
+Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Wed, 1 Apr
+ 2026 11:34:48 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+Date: Wed, 1 Apr 2026 11:34:48 +0200
+Subject: [PATCH] clk: stm32: Add STM32MP23 support
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20260401-add_stm32mp23_clock_support-v1-1-ff5fa33d8b67@foss.st.com>
+X-B4-Tracking: v=1; b=H4sIALjmzGkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDEwND3cSUlPjiklxjo9wCI+P45Jz85Oz44tKCgvyiEt2kJEMTCwNLIGF
+ oqAQ0oaAoNS2zAmx6dGxtLQDc+yHVbQAAAA==
+X-Change-ID: 20260401-add_stm32mp23_clock_support-bb1480914811
+To: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
+CC: Lukasz Majewski <lukma@denx.de>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Tom Rini <trini@konsulko.com>, Valentin Caron
+ <valentin.caron@foss.st.com>, Gabriel Fernandez
+ <gabriel.fernandez@foss.st.com>, Nicolas Le Bayon <nicolas.le.bayon@st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+X-Mailer: b4 0.14.3
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AMS1EPF00000047:EE_|DB8PR10MB3782:EE_
+X-MS-Office365-Filtering-Correlation-Id: df891fb4-5341-49aa-c87d-08de8fd1eb4c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|36860700016|82310400026|1800799024|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: diRB94akwRMc7zCGocZW+kJUKHwdSvmPIDRWfdrzwybeAwShpT3MUtRGZFb78a7/oxdtGR6Yvjk3jlQLL8kpUmHCn8Bm6bhBujcBCeth6JOJVv+1gWeyqbppDk/MsvoyY2/EnoJWf9ervjx8lc7rWg9LiNvUBdmhiMk46liusky3/8hI4FqdJfKEm/I8e9oa26udWbVrntnmIiFiwjfb22rGw44l5DvLiFKlN2ab2txg9SvfBqHEuDuyC0YDpE+CdAflTh4j3pQ5d/WIBkZK+KPtxstbB+p7tfct8D2xFcEDr8/zE+HggyKrWdI/8ZaSn19w0v40dmXQdUa3AytvBJzxMP0OytresRHXfkxP/EqYiSS3t+FSOWHK+OL/GhnKON6xsn3n1xaL5WuOyKZKn6fHtNv3ux+Ug4bhxhHeO3z67XDJ+9nPH3PrT4/DVT4VYUcZAD3N3v9OcuC2rPgRSkHPfn5fmd7YtC1WMmVzVOjT5Sx/jrkf7sjs47lBq3pMGEzXNVGdzH49C/Nli7PGMIwSChYEe4GEl2mqdSOaPTR/6+DaZ5sz5R5cR3ELnnUP3sYWPCn0khzM9QYQgUtjnA2gsafLqDPn5aOt6Zr2cVcRCXGFXS0zLGn2P/4w1TILIagKn27ev91lrNnnbjwHy9mUJppUylvIP2buOc3N0lNsRE73l8a6Z+ggNdpiMynIrrS3RfUSX87LfTB2QFen8S+1Ia+iM2ZQPLhiQmL0FDWpY4KTZQTt7EXykU/bySAgvgO4kPzaw4AQvkX43PsVtQ==
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(36860700016)(82310400026)(1800799024)(18002099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: Vv9mCyrbg7gEoulOHJ0m3eN62PvHQ64t/pA0yYHMbzM5Xtgm/m5SXOfJazjRhfBVcby6zJVV8gNIaQPkSspuCxeIfvZpDExP09920eTSuKVEGhOa/9NhQfzCAm0S6NHAIHhEZRYrilGv9flSIdEQVFzZx0GsokVqsSY9f0AL76GBcBXniEQQtjYch2n9AyKjRkoErTcMJKGif5AQ7DqZPbk5R6xabBiTNe/SpjDm3yjmCnvRVlrLJAdCgkWl4GkqtV+wQ3N6J4xhQcJe4n72nny9cOl8Df+RCJ5gnR25+ZjAkgx0Y3VGNZ94fQGjjqoUlIs/xd93p7pEu4tUzYmvk8zO2zlZUrLJpFB6C9ouYiqQbsnMxZRfAmrdFgm7pnZf7BXSXuIh20KKkTeMqcQL6XDBysbrcwk0MbExkLzklnszng+lPdGrW0xbYjKn7I6x
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Apr 2026 09:34:49.1012 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: df891fb4-5341-49aa-c87d-08de8fd1eb4c
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF00000047.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR10MB3782
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,109 +133,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Philip Molloy <philip.molloy@analog.com>
+Add STM32MP23 support.
 
-Although less common, ADSP SoM boards can be operated standalone without
-a carrier board. The SoM can be powered over USB-C by moving the jumper
-on JP1.
-
-The board configuration needs to be heavily refactored to reduce the
-number of defconfigs and leverage the devicetree. The TI DP83867
-support, which is dependent on that configuration, needs to be removed.
-Until then this change allows the same U-Boot binary to work correctly
-both with carrier boards and the standalone SoM.
-
-The carrier board initialization code in somcrr_ezkit.c and
-somcrr_ezlite.c calls gpio_hog_lookup_name() to find ethernet
-control GPIOs, but does not check if the lookup succeeds before
-using the returned pointers.
-
-When running on a standalone SoM without a carrier board, these
-GPIO hogs do not exist in the device tree. The gpio_hog_lookup_name()
-function returns -ENODEV and sets the pointer to NULL, but the code
-continues to call dm_gpio_set_value() with uninitialized pointers,
-causing a synchronous abort exception:
-
-  "Synchronous Abort" handler, esr 0x96000004
-  elr: 00000000960326c4 lr : 0000000096038d5c (reloc)
-
-Signed-off-by: Philip Molloy <philip.molloy@analog.com>
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
+ drivers/clk/stm32/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- board/adi/carriers/somcrr_ezkit.c  | 26 ++++++++++++--------------
- board/adi/carriers/somcrr_ezlite.c |  8 ++++----
- 2 files changed, 16 insertions(+), 18 deletions(-)
+diff --git a/drivers/clk/stm32/Kconfig b/drivers/clk/stm32/Kconfig
+index 4e488136eac..e63385d3051 100644
+--- a/drivers/clk/stm32/Kconfig
++++ b/drivers/clk/stm32/Kconfig
+@@ -49,7 +49,7 @@ config CLK_STM32MP21
+ config CLK_STM32MP25
+ 	bool "Enable RCC clock driver for STM32MP25"
+ 	depends on ARCH_STM32MP && CLK
+-	default y if STM32MP25X
++	default y if STM32MP23X || STM32MP25X
+ 	select CLK_STM32_CORE
+ 	help
+ 	  Enable the STM32 clock (RCC) driver. Enable support for
 
-diff --git a/board/adi/carriers/somcrr_ezkit.c b/board/adi/carriers/somcrr_=
-ezkit.c
-index 8b4d6a96c18..3cd5a6cd10b 100644
---- a/board/adi/carriers/somcrr_ezkit.c
-+++ b/board/adi/carriers/somcrr_ezkit.c
-@@ -13,13 +13,12 @@ void adi_somcrr_enable_ethernet(void)
- =09struct gpio_desc *eth1_reset;
- =09struct gpio_desc *gige_reset;
-=20
--=09gpio_hog_lookup_name("eth1-en", &eth1);
--=09gpio_hog_lookup_name("eth1-reset", &eth1_reset);
--=09gpio_hog_lookup_name("gige-reset", &gige_reset);
--
--=09dm_gpio_set_value(eth1, 1);
--=09dm_gpio_set_value(eth1_reset, 0);
--=09dm_gpio_set_value(gige_reset, 0);
-+=09if (!gpio_hog_lookup_name("eth1-en", &eth1))
-+=09=09dm_gpio_set_value(eth1, 1);
-+=09if (!gpio_hog_lookup_name("eth1-reset", &eth1_reset))
-+=09=09dm_gpio_set_value(eth1_reset, 0);
-+=09if (!gpio_hog_lookup_name("gige-reset", &gige_reset))
-+=09=09dm_gpio_set_value(gige_reset, 0);
- }
-=20
- void adi_somcrr_disable_ethernet(void)
-@@ -28,11 +27,10 @@ void adi_somcrr_disable_ethernet(void)
- =09struct gpio_desc *eth1_reset;
- =09struct gpio_desc *gige_reset;
-=20
--=09gpio_hog_lookup_name("eth1-en", &eth1);
--=09gpio_hog_lookup_name("eth1-reset", &eth1_reset);
--=09gpio_hog_lookup_name("gige-reset", &gige_reset);
--
--=09dm_gpio_set_value(eth1, 0);
--=09dm_gpio_set_value(eth1_reset, 1);
--=09dm_gpio_set_value(gige_reset, 1);
-+=09if (!gpio_hog_lookup_name("eth1-en", &eth1))
-+=09=09dm_gpio_set_value(eth1, 0);
-+=09if (!gpio_hog_lookup_name("eth1-reset", &eth1_reset))
-+=09=09dm_gpio_set_value(eth1_reset, 1);
-+=09if (!gpio_hog_lookup_name("gige-reset", &gige_reset))
-+=09=09dm_gpio_set_value(gige_reset, 1);
- }
-diff --git a/board/adi/carriers/somcrr_ezlite.c b/board/adi/carriers/somcrr=
-_ezlite.c
-index c0655574bab..1f1984cf912 100644
---- a/board/adi/carriers/somcrr_ezlite.c
-+++ b/board/adi/carriers/somcrr_ezlite.c
-@@ -11,14 +11,14 @@ void adi_somcrr_enable_ethernet(void)
- {
- =09struct gpio_desc *gige_reset;
-=20
--=09gpio_hog_lookup_name("eth0-reset", &gige_reset);
--=09dm_gpio_set_value(gige_reset, 0);
-+=09if (!gpio_hog_lookup_name("eth0-reset", &gige_reset))
-+=09=09dm_gpio_set_value(gige_reset, 0);
- }
-=20
- void adi_somcrr_disable_ethernet(void)
- {
- =09struct gpio_desc *gige_reset;
-=20
--=09gpio_hog_lookup_name("eth0-reset", &gige_reset);
--=09dm_gpio_set_value(gige_reset, 1);
-+=09if (!gpio_hog_lookup_name("eth0-reset", &gige_reset))
-+=09=09dm_gpio_set_value(gige_reset, 1);
- }
---=20
-2.52.0
+---
+base-commit: ba7bf918dafcd093ad733b07ba490baeb20cf5da
+change-id: 20260401-add_stm32mp23_clock_support-bb1480914811
 
-base-commit: c704af3c8b0f37929bce8c2a4bba27d6e89919c7
-branch: som-eth-abort
+Best regards,
+-- 
+Patrice Chotard <patrice.chotard@foss.st.com>
 
