@@ -4,99 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9A9E1112240
-	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 23:45:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB6C01112242
+	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 23:58:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26C26839DF;
-	Thu,  2 Apr 2026 01:45:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 2A3B980517;
+	Thu,  2 Apr 2026 01:58:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TtWDWZF3";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="AbYpXjOv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9BCE83CE3; Thu,  2 Apr 2026 01:45:13 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 2CC9A839DF; Thu,  2 Apr 2026 01:58:26 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A874480517
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 01:45:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB41F80212
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 01:58:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-b9382e59c0eso45982166b.0
- for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 16:45:11 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775087111; cv=none;
- d=google.com; s=arc-20240605;
- b=gLcpO8T6wgnzNoUZyRf6yoP04fbasn10fgDShsrmC/c/OU19yeIMlGlbV6nFbXr7Tq
- uMMQ6ftZtbEtGnx+NvW4AD7zK2E51x2rlk40Aoua5m0h2KvWa2bKZRlrc7Z9bGBNJBED
- NSBGuiwSgXyefwWiKZZDZuxRjYJY5MSFhvyx5xo+juhgazLRA5VBFDoiXUzhAMdR7W3J
- aNwCwfwmvzuRPfFBsn0oPJcA5IntIYzs/o6gPNobM1RJ3Ttc5ub6eSPom95GU5e8otjq
- j6qucBDTFx5n4JyG0ltm6EVODd+b7JLloqBBy8L+3F69rb6Eab+x3co85UlNYrN9sKlY
- HULA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=x7BKXqGss+b/3B3qnPXPt1sG+pGuFdXFfZIBbzdGvRM=;
- fh=ToXak3o3FxKjeN9zN6KF+Y7XD0fq/gRTAn22wDFBJO0=;
- b=jHyLOCbjgZZ4+XGauHL6YFG++Z9gpB4qSzr+IC4rxWApQovszF3FrgEuhmnK8WxFNZ
- EK3kUG71M3q5Cy61d6R9dOQDDdqKaLoxTyhk8qcrP0mxz43oYiw8+Ywl611G51Bt7hAe
- oBsxan5TU/EiQH5+iityuRod3rfOw2kqHJM0vLTdXgC1BocGDJm2OkvRtmtQsBCKau3/
- cC7Uuv1wYUh1seIIp7a5YsCQG7K4NO5tjRk1CnfpM7fLgsUtxSXERUvMU57ZGtc07Wnw
- Nfq6wPqWKL5ZwWthw2wewd8LTvK3TIidQPW/gndfWutugtEZrMK0HWKLIa6+t+wpom0n
- dkIg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7d74dbfe84cso215036a34.1
+ for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 16:58:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775087111; x=1775691911; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1775087902; x=1775692702;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=x7BKXqGss+b/3B3qnPXPt1sG+pGuFdXFfZIBbzdGvRM=;
- b=TtWDWZF3BEnYdAog/bniD9nDnGCAhgEUJI0XI6qT7zLWVNfvpRjLxLSnQ6V8Y60ZrJ
- HS/TLTRLdCVoW7V7MKG9A8r5llRYt1DoJK+yotnsLCVfAICoIwIAljnWb6XC1aveHr3B
- tSg1pOpwWfZ9Chr97VIHQNoBcuA3PBtIjyCWg=
+ bh=RCsbkBsZCpQtlsNZWvz8VuqDGKQYGELEdllt/tbEkRo=;
+ b=AbYpXjOvbMjcn3ASagQUn/h8otpa5NFIFZcNdJhVrx1uppKut4EP3n9iTf5Z8vpSIT
+ CtCqJxEhVmF8vwCERAi/NKC85PCmFCfD+a6bMvCob/WQBoTPgd9skChmqQXjBw2kBOZe
+ zxfl5xc6F5L5OBXWIrsUo49gMUvqnXSaIS7q+16eHc3iArh2ROf4ugi+ODFB+mCZhd+v
+ kMvAJQ3hsX0HRhuVjspXWzBDk5thkIIj+pDjjhKabH2h9ziPmODjS4XVQn31Dwwemfma
+ GBCYxCNEKTtQnL9G5IZwgrct7zUI4Y+0oOkYKii6Z4z//0wQOaJlDbIYHYZe3/4hwIij
+ EYUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775087111; x=1775691911;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20251104; t=1775087902; x=1775692702;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=x7BKXqGss+b/3B3qnPXPt1sG+pGuFdXFfZIBbzdGvRM=;
- b=jKijsiWHgCLxtSxLhhcHqBN9pYsglAeAFtL3FmgAhDGUvoxFHBk+f3x1d0ud2N1uDE
- ZX+aYawUN5amq0XJR51viYpfkbk1b6/KSMC9/FNWJc7rqRz+k6XBG67jSS8G2+V6ARpQ
- Veo7xSh96NGzPg5B9TRi98Uc9Ni9GQCTgC4+nsupX8e+SQdTCF7UgrN8FCfwR+KoB62E
- REDfcmqRe4+BtEIjvJsQ7HtKyE3NpOit12CJsN4DYa4qYPVMT6hkMeefX6tAB5YRENTV
- JXVmV3g565Tx/65KoFDTWMljIgCWPjVU3j1tuUN2wH/nl0TGKdQI0JUjgvDAYU3Tz/fH
- 0lLQ==
-X-Gm-Message-State: AOJu0YzwcsHQt+TKjsolFuCvuhPWhVvcBqRvbLevWUXlnbKPxvpR1Qp9
- X/+E0GGJMsdZ+XF1vBz3xrLXfvKrnD1TT0rkafr7/dETpscvTyrQPXFsm8HJfhuuHaubAuSMh37
- crV8jHTcavXfJs26CfgDkuXWB6n9aB97LyrHRkEoG
-X-Gm-Gg: ATEYQzzsJ8QgoWfaZNqy4mDGSvtQ+krBOw/4kIA0YXdwN4WwEF6UvUemH9Ad6tIpzf2
- 6ZWUoLOOzIdJFoNP/S0rOYzhqYI2Foesm4sjy+0n2UVs5T74SeZTKt3cqJinuS8sKjomM32I2e0
- 6vODBQxuveYQWfgbwxhZjHjO8G13+LwdfIQ9iPFiHa8ytcGCpiVCvi7umehcUNmycqYdb2yUDXA
- GiIwGoVGTM9G3CPLahg00hbwrYSsnG13MFK5jXNNavpqNEWa+Ys+3FHRUBe67lRVsZt2rnp4jz8
- PRxtew==
-X-Received: by 2002:a17:906:3b4b:b0:b98:6177:2eff with SMTP id
- a640c23a62f3a-b9c13b608a6mr307773766b.41.1775087110886; Wed, 01 Apr 2026
- 16:45:10 -0700 (PDT)
+ bh=RCsbkBsZCpQtlsNZWvz8VuqDGKQYGELEdllt/tbEkRo=;
+ b=ARoOClAMAuYtvCWgsYiwBlzVzOZ0C87jnYk5hQed0Uqib17LITUVIcizOBYdPkY94+
+ P/gO5aGW9tQw5SA34DQYgM2WkFulal+hEIc2/pQBLmcic+mPXlc3GhIQfOB1+Vef6Y51
+ QWgPfofiZ7ulcjrQmCKAmNRhziKvunpPeBPc/KK/j5r9qmdWCpDwMFsYFnZQzOPFpTc+
+ 9yDIkowwWOaLTiC5Cqvozo9wKuydeZM3lbcOc/20uCkfDxVaAFrwWqQ9I/bnWDhR1D0l
+ tVX6vtM0VQd72/4cavgPEYYBTaL6aiHfq3FlQtAbhJdEQtiDPfDtsG1OzfWw9CRfS+IN
+ XYZw==
+X-Gm-Message-State: AOJu0YwZxIDh2YdfJ8j0kC2JoEuHSVSnjC9pTNNn+DnPlE4J3d2NJiG2
+ 58jlJBx3SaGnAx8Qw9M6V+1RKGeuTYShjjvOt6GApfxVtLpbsBZjZm2nbSKRNMF9BYk=
+X-Gm-Gg: ATEYQzylqOcHjS1bZWcIjhFZcNESiCXdPeIspzHohpmkQUzyT/SqVID3+jQJ0hi6roS
+ lN5JKtdaCjjWhZtmhvbvooQjY3o0XI0+LL1wuirC5jkDZoacZ8IzvezPB/jazWbGTSI7TjiR0DX
+ JNV0GgbjSQwSgYvBEmkl4KTKSHEIYVSNDrNvB26D8F+qpOYgpfvtJRyiFS5g0qaR8PkpwLVibKn
+ PeIOR0wx7M+HfWnxALgh22X72pE460HeM2sEY02pyS+eraVnnHs97/MeY99kzTGjdnnEEmzK1Fn
+ d0QKqRhO7NRGHop/tGEhio9taZ5Q2X9BWW1icX7kpzjWcCYu8oxWJCU245z0jeP3z4RAJlyWpi9
+ cHk0tweLtCRj2q9o1HcYTSmRe+jR1b70GIXkDWV6y6r61x7sq9MBaHwbW6UJs2sWFOmyfKhelme
+ HrO1Y50Qs8TwfnKlIbCADfwahIPfi/
+X-Received: by 2002:a05:6830:82ad:b0:7d7:f5d5:1916 with SMTP id
+ 46e09a7af769-7db9923dd5bmr3660424a34.11.1775087902675; 
+ Wed, 01 Apr 2026 16:58:22 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:57c4:ef89:4ac4:d6d9])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7dba72fcb47sm996374a34.15.2026.04.01.16.58.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 01 Apr 2026 16:58:21 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+To: u-boot@lists.denx.de, Julien Stephan <jstephan@baylibre.com>
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Tom Rini <trini@konsulko.com>, Macpaul Lin <Macpaul.Lin@mediatek.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Julien Masson <jmasson@baylibre.com>, Peng Fan <peng.fan@nxp.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>
+In-Reply-To: <20260318-rename-genio-defconfigs-v2-0-1f77580d72f3@baylibre.com>
+References: <20260318-rename-genio-defconfigs-v2-0-1f77580d72f3@baylibre.com>
+Subject: Re: [PATCH v2 0/6] configs: mediatek: rename genio boards
+ defconfigs to match the device tree name
+Message-Id: <177508786926.837601.4215347526669285336.b4-ty@b4>
+Date: Wed, 01 Apr 2026 18:57:49 -0500
 MIME-Version: 1.0
-References: <CAJs94EYWoVAyWXexA=f_UwqUpo9zuxO6G6Tx7L7xPdciAVHW5A@mail.gmail.com>
- <CAFLszTjDnEoTP1fHdounqov_SYSDdr-Zpt7L_+-c9qb=c0F8JQ@mail.gmail.com>
- <CAJs94EYuFQJvdTjWZX1qWg9e7Qz_X_G7Bz017nucN1HtU1Mrcw@mail.gmail.com>
- <CAFLszTj7g-pYE6+Fw7=Vip-1dw0QK7+1tgjuUzNK_J1Yi4mW+g@mail.gmail.com>
- <CAJs94EZk3avSo=Oxdr4yqXCHDApvwUhR1VcUFf4GJ=Pq=O8CZA@mail.gmail.com>
-In-Reply-To: <CAJs94EZk3avSo=Oxdr4yqXCHDApvwUhR1VcUFf4GJ=Pq=O8CZA@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 1 Apr 2026 19:44:57 -0400
-X-Gm-Features: AQROBzBP1dJ_mgrsGb0xQ-4p8gs8hWiXwIDkRPvZX8FMtzOrqUQlx7UgKs_SXQU
-Message-ID: <CAFLszTgR=jt+P5NciLw80PaCseZZw=XMT-Ha+NHQFNXxfMfndg@mail.gmail.com>
-Subject: Re: Need help with FDT overlay
-To: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1269; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=9W5xRlhJL3rfE84EKlWPpFUoOGMn2+KnTs5+E3sKeIM=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpzbEVs4qK2yupP/YBv3fq02DBgYKZdaCHy7yri
+ 1M6Uj9BwbiJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCac2xFRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AbPcIAI0/qrIRvGo5aRTNcN9wMVzUbfGzxMnKlw8apDJ
+ 2H+rVbSGPm2Vp82GliUipy+jSVghiLVrSKYz5BJfUlmAmfD1llvh1y8ndFXjzMycz3bzMaTd/WD
+ 7dWCgKjI1KoXW1Q2utaVTa26BBqzxn8zsbLqwAy/uZrfAru/9xnr/W2/jvHSveT3g+4ggc2fCV1
+ RITdHuHYQeXOT5JPiRVkcFXMTifSW0b6ZG4E0vApqEkay4jS2UTTDBI6sbGNroKIGB4tiGtg1hb
+ RafhqqB/S7d7K+5rhkQ3GsS0QGlHN5BwF/kmfpkjB1vvL1oYPtIXUCQBkUz+V6AsrTNAvmfrMDp
+ gGsI=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,181 +120,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Matwey,
+On Wed, 18 Mar 2026 17:45:22 +0100, Julien Stephan wrote:
+> configs: mediatek: rename genio boards defconfigs to match the device tree name
+> 
+> Rename the defconfig file for various genio board to match the name of
+> the device tree. While at it, do some cleanup:
+> - introduce mt8188.config to factor genio-510/genio-700
+> - remove useless SYS_BOARD_CONFIG for genio-700
+> - set myself as maintainer
+> 
+> [...]
 
-On Sun, 22 Mar 2026 at 07:03, Matwey V. Kornilov
-<matwey.kornilov@gmail.com> wrote:
->
-> =D1=81=D0=B1, 21 =D0=BC=D0=B0=D1=80. 2026=E2=80=AF=D0=B3. =D0=B2 22:21, S=
-imon Glass <sjg@chromium.org>:
-> >
-> > Hi Matwey,
-> >
-> > On Sat, 21 Mar 2026 at 11:20, Matwey V. Kornilov
-> > <matwey.kornilov@gmail.com> wrote:
-> > >
-> > > I compile dtbo as the following;
-> > >
-> > > cpp -x assembler-with-cpp -I /home/matwey/lab/linux/include
-> > > overlay.dtso overlay.i
-> > > dtc -@ -O dtb -o overlay.dtbo overlay.i
-> > >
-> > > Decompiled overlay.dtbo looks like this:
-> > >
-> > > /dts-v1/;
-> > >
-> > > / {
-> > >
-> > >     fragment@0 {
-> > >         target =3D <0xffffffff>;
-> > >
-> > >         __overlay__ {
-> > >             status =3D "okay";
-> > >         };
-> > >     };
-> > >
-> > >     fragment@1 {
-> > >         target =3D <0xffffffff>;
-> > >
-> > >         __overlay__ {
-> > >             status =3D "okay";
-> > >         };
-> > >     };
-> > >
-> > >     fragment@2 {
-> > >         target-path =3D "/";
-> > >
-> > >         __overlay__ {
-> > >
-> > >             i2c-gpio {
-> > >                 compatible =3D "i2c-gpio";
-> > >                 sda-gpios =3D <0xffffffff 0x08 0x00 0x06>;
-> > >                 scl-gpios =3D <0xffffffff 0x08 0x0f 0x06>;
-> > >                 i2c-gpio,delay-us =3D <0x02>;
-> > >                 #address-cells =3D <0x01>;
-> > >                 #size-cells =3D <0x00>;
-> > >                 status =3D "okay";
-> > >                 phandle =3D <0x01>;
-> > >             };
-> > >         };
-> > >     };
-> > >
-> > >     __symbols__ {
-> > >         i2c_gpio =3D "/fragment@2/__overlay__/i2c-gpio";
-> > >     };
-> > >
-> > >     __fixups__ {
-> > >         i2c0 =3D "/fragment@0:target:0";
-> > >         i2c1 =3D "/fragment@1:target:0";
-> > >         pio =3D "/fragment@2/__overlay__/i2c-gpio:sda-gpios:0",
-> > > "/fragment@2/__overlay__/i2c-gpio:scl-gpios:0";
-> > >     };
-> > > };
-> > >
-> > >
-> > > I am not sure about the size. How do I check it correctly? Now, I jus=
-t do
-> > >
-> > > fdt resize 16384
-> > >
-> > > =D1=81=D0=B1, 21 =D0=BC=D0=B0=D1=80. 2026=E2=80=AF=D0=B3. =D0=B2 18:0=
-2, Simon Glass <sjg@chromium.org>:
-> > > >
-> > > > Hi Matwey,
-> > > >
-> > > > On Sat, 21 Mar 2026 at 06:55, Matwey V. Kornilov
-> > > > <matwey.kornilov@gmail.com> wrote:
-> > > > >
-> > > > > Hello,
-> > > > >
-> > > > > I am running U-boot 2026.01 with orangepi_zero2w config and I am
-> > > > > trying to apply my hand-written dtbo via fdt apply.
-> > > > > The issue is that the fdi apply command just hangs forever for me=
-. The
-> > > > > issue only appears when I try to append a new node to the root. H=
-ow
-> > > > > could I find what is going wrong here?
-> > > > >
-> > > > > The overlay source is the following:
-> > > > >
-> > > > > /dts-v1/;
-> > > > > /plugin/;
-> > > > >
-> > > > > #include <dt-bindings/i2c/i2c.h>
-> > > > > #include <dt-bindings/gpio/gpio.h>
-> > > > >
-> > > > >
-> > > > > &i2c0 {
-> > > > >     status =3D "okay";
-> > > > > };
-> > > > >
-> > > > > &i2c1 {
-> > > > >     status =3D "okay";
-> > > > > };
-> > > > >
-> > > > > &{/} {
-> > > > >     i2c_gpio: i2c-gpio {
-> > > > >         compatible =3D "i2c-gpio";
-> > > > >         sda-gpios =3D <&pio 8 0 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN=
-)>; // PI0  (29)
-> > > > >         scl-gpios =3D <&pio 8 15 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAI=
-N)>; // PI15 (31)
-> > > > >         i2c-gpio,delay-us =3D <2>;        /* ~100 kHz */
-> > > > >         #address-cells =3D <1>;
-> > > > >         #size-cells =3D <0>;
-> > > > >         status =3D "okay";
-> > > > >     };
-> > > > > };
-> > > > >
-> > > >
-> > > > Can you provide thte dtc command you are using to build this? Is th=
-ere
-> > > > enough spare space in the dtb? I'm not sure what would cause it to
-> > > > hang.
-> > > >
-> > > > Regards,
-> > > > Simon
-> >
-> > It might help to have the console log too. I can't see any way this
-> > can hang unless the addreses are wrong and something important is
-> > overwritten.
-> >
-> > Try this to see the address:
-> >
-> > fdt header
-> >
-> > Compare to 'meminfo' so you can tell that there is nothing important
-> > above the fdt. Also where do you load the overlay?
-> >
->
-> Hi,
->
-> I guess I found my mistake. I've been trying to apply the overlay to
-> ${fdtcontroladdr}. It has been working while I updated only existing
-> nodes.
+Applied to mediatek-for-next, thanks!
 
-OK good!
+[1/6] configs: mt8390_evk: remove useless CONFIG_SYS_BOARD
+      commit: dfa3f88b1cbfd061b426db74e203bd6a23dc007f
+[2/6] configs: mt8395_evk: rename to mt8395_genio_1200_evk_defconfig
+      commit: 62852f9bfe5bb68021350450a0c3144dddd863f1
+[3/6] configs: mt8370_evk: rename to mt8370_genio_510_evk_defconfig
+      commit: 74284bc305d80f8d2c9c5b1077a9d25cfffa41fa
+[4/6] configs: mt8390_evk: rename to mt8390_genio_700_evk_defconfig
+      commit: 031106b23d9efb091c9d022a4ba675af9fbe98f5
+[5/6] configs: mt8370/mt8390: introduce mt8188.config to avoid duplication
+      commit: aca2e27e56fe9d0d1d67f627586b8a630b5645d5
+[6/6] configs: mt8370/mt8390/mt8395 add myself as maintainer
+      commit: 09bd64e2c303dfefb97317526f76128d0fd4e31a
 
->
-> Now, I do the following:
->
-> cp.b ${fdtcontroladdr} ${fdt_addr_r} 0x8000
-> fdt addr ${fdt_addr_r}
-> fdt resize 10000
-> fdt apply ${fdtoverlay_addr_r}
->
-> I am not sure if there is a better way
+Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
 
-Seems OK.
-
->
->
-> > BTW U-Boot uses hex, so it should be 'fdt resize 4000'
->
-> Then doc/usage/fdt_overlays.rst should be improved because now it says
-> 'fdt resize 8192'.
-
-Yes, please send a patch!
-
-Regards,
-Simon
