@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0130F10F6FDB
-	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 22:47:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D3CE10F6FDB
+	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 22:48:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53B3084011;
-	Thu,  2 Apr 2026 00:47:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ABB6884011;
+	Thu,  2 Apr 2026 00:48:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K1lkYZMX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ayDp50+/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F0FA84020; Thu,  2 Apr 2026 00:47:24 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 768D684056; Thu,  2 Apr 2026 00:48:13 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C1AB83CF5
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 00:47:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C25083CF5
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 00:48:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b9bfcbaa81eso35563466b.1
- for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 15:47:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775083641; cv=none;
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-661b16ac011so498519a12.2
+ for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 15:48:11 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775083691; cv=none;
  d=google.com; s=arc-20240605;
- b=C4gQ3GSUehFwaamSBeYYBiCUakfIuAQa4hI+eMKKwNXG/CwKDSCupEw1dyoQdan5cP
- I92WNdnvq+wL4kMJ2cRhUm3uKzkCsH9EL6jkBG4Acd4pqFjGyRvX8Ugehn/H1OK1UDJV
- 71reMJpqa6Q2ZaNuNVdVNzFKVEZcZzzce+ksezXP884/9W4CZSbNhHyIEUaXzgD17JN3
- bCyJNourAEJXgz0J2PSFPiu0AiyjKVX5+yFNbRVp/fymV7BZ4aqzrH9lRQx8FqDyN8Ny
- 4Lp+AEQwsGRxRcoX6Pam+9Sitkr4gocEnc5u2xRfnXLxb8I0BT0P9s2Hv3S51qXSAsrQ
- kDug==
+ b=kpzAu/xWwpQcQmhSAmmda5SeJyA5955Ij1L/l5G3q+ywlSVkWFV4Put8f+5e/9GWNd
+ JJ1BEKo+0/8FjMm4HTiK5ZMShPkmzU7tdeNDVE2iJC1sx/JaeRh4bfLaMNjgT2yclyvo
+ cAycW7jnO9XABEfVGFZRUhvvdsJUv78pSbR1Mx+XPfp+ok+E75ALLs/zZOlHXpuqrN7A
+ f9f3lvO7UCN6Y3z4hMRsKCNa3JPGbuiEUEUsDVTZ1n+aZQPpUgFQXQ0hT7CG/Ug7dP7v
+ aP5Lj2k0PW9/70n3DYhhoRtEzqJj2AcEdRzEl3MSAB9wF344U6hSiTG2Zaqq17ZZhBb7
+ tElg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=eb5w7th9w5gh/w8wKM0Ssvm2USTOM6Vfh4xAmg/FnCU=;
- fh=KTCl5WEHMQPh0ByidW1UA8JUh8JpkZwJ62zNVEPI3Bs=;
- b=L2nHHMmeCzLnCY4O7Ceo62xD73jBjM/PwuxcpCwuOT1zKqgb0BXLMmrcrVWVKS2zO3
- kFcH8CFGUs7qiywHr1LmXN2dVueoCnkJQKnH+p/o6ecoA08nvCCfvUZ2GW47Xr1D5RIT
- nLW+sCMQhwGdlQAExUeF1JNsIh8OWCUFd1gn2LgI7AcNPlmXnNxV4uB78tCWDzJA8ZKn
- M7U7PQCA/CY64Pk/eSV7MsqmtTC9wrVoiE7/Tf8jzGtvmgKG0t4BE56td3hqN7slqCau
- oYlw3Rlugmrvjp0wUgSy+Xhcn+0fE5wR6vWLDTSzSHSvVpk0mB9F774voKxheqv7AqBn
- 1d2A==; darn=lists.denx.de
+ bh=iDUAW1cGucX4C78uaq1o2hWA6NsGf/y9YYd6ByvFTTg=;
+ fh=ZuNLB9bOHjzoAXeveGcaqsDQIpibu1NOZuvbRVR+bDY=;
+ b=Z8blN4IzRYcaKI2GT6D3ypnxvp5gl1yiQ9kXw+gceWWNx1kuXTLBWekg2eN1pDOVPQ
+ gqaDrDRKn/QDpZ2L1/sdnZN3BR8kv8kovSyONjIa6cUrDAEgivXfmI5SCFIJ1bTikmzW
+ Hww3xuc+oIGzayA0wnmv5pZCLy9T2adxg55PA/78pqj4eyO49okaH3eLcmqrQsh2kQGm
+ QrDSgm89CkDb9yeuJbFtl3bXGtY9+ba/qMAsBtR/l2i+pWT/Z6Mv38Nhxxhsq0wafEyb
+ WHC0aAT4i7q2uw4wdZcpqv5KcfyHfRzsEARqIpyg3byQwA0+u0jDEEZ0vkXbd1q9dEmn
+ InGw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775083641; x=1775688441; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775083691; x=1775688491; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=eb5w7th9w5gh/w8wKM0Ssvm2USTOM6Vfh4xAmg/FnCU=;
- b=K1lkYZMXVK6YtDlb58EIC4wYNuXcuFYBwCBw92P66cIj+ByB0Q6SsfdYZ3ZM1t+BKD
- 4Qxa4p3+xjYEa57tTbfEP8w9nDuzP+OlTqvC+pyKIV64te7y4kof9uvDVYRVO7wQdKj+
- aNkvlHad77FLKy9FL5Skb7rYjP+1MloMM5AaA=
+ bh=iDUAW1cGucX4C78uaq1o2hWA6NsGf/y9YYd6ByvFTTg=;
+ b=ayDp50+/NK3ae9+IMngSurJFwg/pPWYDo6D6CV4V+j3p7GX3Mjm18YG9pxQT9nPH+x
+ Xf6/D1nv1qPOtci4dnbHU4v/YDwcLZIlbTUm9bMoBqRlj4WqjO1syEd3HL3o+1nsSs1X
+ 5Vqd9PLvDHWixYpEi6uF3sF1vwiJBttqsWOzY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775083641; x=1775688441;
+ d=1e100.net; s=20251104; t=1775083691; x=1775688491;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eb5w7th9w5gh/w8wKM0Ssvm2USTOM6Vfh4xAmg/FnCU=;
- b=NR3mHdgT5vl2GfV/GJMEsjc/TOh2uNJBgW7/SNMSQ7tTz0gNNSqzyqB/AWLKhN+4DD
- +nv+fJMZA1NUgqLBlgjEd2IDfqyYaniaXTKP88kjbiZkx2oDbpMxH5c/zeoaD8LyXHje
- qdeYSwG8n38PeeyVjxZDPf1s4reij32XatyzAmCUH1V3d5lhdfm3QtWY6+FS906lNzZT
- USsitEo3VqZXuXfOi2IqNpNB/+gGLCP435/llXCK3TugaMSKyxwViP+JuiA1Ny2G50jw
- 2EvPQisYUh0eht9VtnD3Yy6p69iB1KSn+qdFrTpZ0dtE8YkCOA+N7rb8sX9KK+aT+/Yl
- /n6w==
+ bh=iDUAW1cGucX4C78uaq1o2hWA6NsGf/y9YYd6ByvFTTg=;
+ b=mnUUOAuY0Hv1nqF6LSYumjSYt/7187BCqt93fssZRCfRzWkZfRFlO33x4T7YPaRx/q
+ SKR6eDUhnkEDzku0k/Kuv0yhngP1ZMM49L6EDJbHdfE2P6q2cPwS/+ebRwCQcP/wM4T2
+ dPKHtOM/SKhQF0ovpVfld/0yxs8WQAlIH8Q9c2bHPzvJ8PI6dI35OivjfjjTkaitSc2m
+ w23BGXQPBklWtkh3DNqJPxbF/CJk/50GGFrmt6KaQ3rFy1uTVieEHDcmRLa0xACQ/PF3
+ PAJ0hRUb9VYYhkZstueuZz0T0xNM3ZfQ6tBT041TRgIhxaWRHnkHnMvX8AY+tGvxWY7j
+ AYnw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUnRPjtq+APevJ4Wet4XrrhJJ12jG2ordftGCTaXPSI35v+z6l4Y9FWGTlrXgwzm58PZa7rDwU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw2f4suhUqu8Jw0mSOu3l4esMwDcgPv967uRA/gf2Buy2YY5vqa
- E7JSD/eZeKd553o5nMFPQSXGuieD0NmD3P5CHXq0tVi0ZVPRy87tsLBUjAwZN+dBVVzjuz7mk+g
- iET2LOzSJ21Jx+qAVqyVdheQvqLRhbcyPr7h5qvoX
-X-Gm-Gg: ATEYQzzGftFjPSpFkv5GURWd81kC1g0uZYA+eaOHGI2K86kM11nBWPJ3LcxOqj47upV
- xKA3+E9twKWRMcTEobYpHc8Z88wNkQJfRKiuVnDE9VATJdSl/R7Jvjht9TY7hPPxvFI0T+dGMZP
- e1cBb1luKU1c6WzrumcaeZQPg09utGCISdlmJ0uiwEvkE+jViymiYu+TKtntdKX5ny1pviaNAcY
- f1q6RdBXsqps6/Tm8fyYaH81ESwhReRHctjx+feEwP9SnzEp3K8pSw/igpU11PPmn6ad40bp9OA
- 0v3DTw==
-X-Received: by 2002:a17:907:3895:b0:b98:435d:9939 with SMTP id
- a640c23a62f3a-b9c1379918cmr374253066b.9.1775083641522; Wed, 01 Apr 2026
- 15:47:21 -0700 (PDT)
+ AJvYcCXpEpA/Q0W522bc3z9tznTXh6QB7Nk5/9i9b9h2OiVvCK4SdwLNk4mK/TsbpHYQC8uVp9qwVLI=@lists.denx.de
+X-Gm-Message-State: AOJu0YwXPv/PoWLgG2KPQhMjp+Sqa0Wgs9H1s2zEKKkIOJTvfYWFIf1S
+ nNguCCtGF0uFue2AkUGyLhr/8W7geROxJaQ4D1IuSV+LU95/q8iPqXQQw/OsaTK7A1OUDPaRE8x
+ JjW/8cJx4imn2RW9MxHdwA9EPYLe6DpGJH4NusSCj
+X-Gm-Gg: ATEYQzxER7ucEA/bMdwWw8GF53uYKmmOUyHDjITWyAkVIU515/uJ3U4iM/UzSMdr2f7
+ 9LIBRBEGpEWsDS5xNkmTCjeBFDtNGbErbawhnx89FdF7f0VDZ+ylkiUCJGharjXiWMf/0RXNFrp
+ lnW/9AWgbgUIrDs18dDmmHweFuCnnBZvrm5FuFhU2wqBiglaCy7pyH+tChTr6g1SYYeH+FoRHhd
+ 3mOe2KdhgDTVZYLRr8xe6kWoyxRtNDmZoQ0Vy7VADatYkL+oYVIn4JZ5QfrPoNorYO0kC1NA5cc
+ aFRkVg==
+X-Received: by 2002:a17:906:ad7:b0:b98:4d8f:d968 with SMTP id
+ a640c23a62f3a-b9c138c10ffmr282274966b.12.1775083690627; Wed, 01 Apr 2026
+ 15:48:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260331100047.34618-1-philippe.reynes@softathome.com>
- <20260331100047.34618-13-philippe.reynes@softathome.com>
-In-Reply-To: <20260331100047.34618-13-philippe.reynes@softathome.com>
+ <20260331100047.34618-14-philippe.reynes@softathome.com>
+In-Reply-To: <20260331100047.34618-14-philippe.reynes@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 1 Apr 2026 18:47:07 -0400
-X-Gm-Features: AQROBzCh-XdEOmpT0OYzZBT-SwnVwFUv5yYs6W8wGMTcfcUivQLnoSXzBz1c6dY
-Message-ID: <CAFLszTiXam=fRk8Ne6LED3+s00Z5uwp_MbMUUGGc355GdgT_WA@mail.gmail.com>
-Subject: Re: [v3,12/15] boot: pre-load: add support of ecdsa
+Date: Wed, 1 Apr 2026 18:47:55 -0400
+X-Gm-Features: AQROBzA6qVDHjWUBsCuh04VEfVZPGzbM9lMfhvyVJsJioXcT7fJwrNvk5qbp4KQ
+Message-ID: <CAFLszThyctzvSL-qzPPuRJ4x-_jM22AxgcAeQa1A-ORQ0jB6vw@mail.gmail.com>
+Subject: Re: [v3,13/15] tools: preload_check_sign: add support of ecdsa
 To: philippe.reynes@softathome.com
 Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com, 
  trini@konsulko.com, simon.glass@canonical.com, u-boot@lists.denx.de
@@ -114,35 +114,41 @@ X-Virus-Status: Clean
 Hi Philippe,
 
 On 2026-03-31T10:00:34, Philippe Reynes <philippe.reynes@softathome.com> wrote:
-> diff --git a/boot/image-pre-load.c b/boot/image-pre-load.c
-> @@ -70,6 +70,18 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
-> +static int is_ecdsa(const void *algo_name)
-> +{
-> +     struct crypto_algo *crypto = image_get_crypto_algo(algo_name);
-> +     int ret = 0;
+> diff --git a/tools/preload_check_sign.c b/tools/preload_check_sign.c
+> @@ -144,6 +147,27 @@ int main(int argc, char **argv)
+> +     /* For ecdsa key, we have to update some values */
+> +     if (EVP_PKEY_id(pkey) == EVP_PKEY_EC) {
+> +             EC_KEY *ecdsa_key;
+> +             const EC_GROUP *group;
 > +
-> +     if (crypto && !strncmp(crypto->name, "ecdsa", strlen("ecdsa")))
-> +             return 1;
+> +             ecdsa_key = EVP_PKEY_get1_EC_KEY(pkey);
+> +             if (!ecdsa_key) {
+> +                     fprintf(stderr, "Can not extract ECDSA key\n");
+> +                     goto out;
+> +             }
+
+EVP_PKEY_get1_EC_KEY() increments the reference count on the returned
+EC_KEY, so you need to call EC_KEY_free(ecdsa_key) when done with it
+(see lib/ecdsa/ecdsa-libcrypto.c for the pattern). Otherwise this
+leaks memory.
+
+> diff --git a/tools/preload_check_sign.c b/tools/preload_check_sign.c
+> @@ -144,6 +147,27 @@ int main(int argc, char **argv)
+> +             ecdsa_key = EVP_PKEY_get1_EC_KEY(pkey);
+> +             if (!ecdsa_key) {
+> +                     fprintf(stderr, "Can not extract ECDSA key\n");
+> +                     goto out;
+> +             }
 > +
-> +     return ret;
-> +}
+> +             group = EC_KEY_get0_group(ecdsa_key);
+> +             if (!group) {
+> +                     fprintf(stderr, "Can not extract ECDSA group\n");
+> +                     goto out;
+> +             }
 
-This function is called three times in image_pre_load_sig_setup(),
-calling image_get_crypto_algo() each time.
-
-Coudl we call image_get_crypto_algo() once early in
-image_pre_load_sig_setup() and then check crypto->name directly in the
-conditional blocks? This also avoids looking up the algorithm
-repeatedly.
-
-Also, the return value pattern is a bit awkward - you initialise ret
-to 0 but never use it since you return 1 directly. Please can you
-simplify to just return the strncmp result (using !! to get 0/1), or
-use a simpler pattern like:
-
-if (crypto && !strncmp(crypto->name, "ecdsa", 5))
-   return 1;
-return 0;
+Both error paths are missing setting ret to EXIT_FAILURE before the
+goto. Without this, the tool exits with success even when these
+extractions fail.
 
 Regards,
 Simon
