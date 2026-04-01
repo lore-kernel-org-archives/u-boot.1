@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59AB910FCAF0
-	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 22:14:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10FFC10FCAD2
+	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 22:43:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C37CF83CE3;
-	Thu,  2 Apr 2026 00:14:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4310583CF5;
+	Thu,  2 Apr 2026 00:43:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O48l2+X3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O3mQBbJQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D75A840CB; Thu,  2 Apr 2026 00:14:35 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id B3A9983D8A; Thu,  2 Apr 2026 00:43:54 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE405839DF
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 00:14:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EF0FF839DF
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 00:43:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-66db0cf6a4aso485683a12.0
- for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 15:14:32 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775081672; cv=none;
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-b97e6e48b24so37730966b.2
+ for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 15:43:51 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775083431; cv=none;
  d=google.com; s=arc-20240605;
- b=CN0cH5K+nC0MstP9E0y8YyIv1GM9IqucxB1jvaxTuHDYe7UyX/xAVJ9r3NWPHczF3p
- ZSHq7B0/jx57lZyuB1DKEcQe61Izb1t1FV2G9mxiX5tigchPWlY7quivEld4zraUkZdj
- 7X4PAacYrA43+ndUcodqArW+hz11B8VK0ejgFAyiGX4BBhnVvnTHmd5SXTcjvMfVIEY2
- VlGyC71Z6/Vi+0n8vA/UcvkoiQXKm61+Rk670ePLAUEeBWGogXoqzwVdEvdo14i8bRnx
- 3tuVNaVBZDpVTZ2JdDDD9piloZ5NHMgy1jGu37ysLoZylXKA+b6JjW5Q1+0GXJeeYIqr
- ERoA==
+ b=OKJaIE+dr7kEdA7fiZTNlaaN6WlD+j6blX+bAwdTeO/id4a1XMYg1AC6yKRoBTUOTe
+ fhGBKrddTIlMY/J3nwmOOA45wTiTH7qtTK2VHdkcR0giJmLKFg4c9liW1McmwhZSFc0s
+ ceb+hgxg7JxUM7zdtuFTLXHT1SHrMOCFqaR2OgP0JpWPpFAjTcV4kbb669CPz7cgGolp
+ g3NGvXqcAmt8bZRW87ZHcvpHCFUI9q0t44gr/fifgclgow+KaKuGoh1yV2Z4YFXdbjNz
+ JB9M9DZz3ofUKLesukiTLmA4f4NmwVIwpkJoeT453nqdJnieweUVSVALUSKRzhmGLJH/
+ /nUg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=wvQhI16dYtHa366b5giYMg1G2/KyRSxTbxFeRuoqZt4=;
- fh=I4Y6k8DxQJxdWtf6slzkUPsLH7wXAVain7u8cXa04ZA=;
- b=kBDxuwHVFeaCiLrOtwTKD8ygeWnCHTF9DKMRwd+ifVDh100Tiwn7XsuRW7QRFOiNjj
- 4hjYQgFdty7qXt4Vn+CFGMjcu3tAYhRtzAzlc+cX6Ict2jM673mAz1ySLVkNBr05klVv
- dKrDP/aysj8UCFtWuPgm7eCcEM/0dJ9XQpvPb4xCEWRLYRzvja+kseu5BDOBRMmhvdVF
- ay65RGLSx2zYiT7fLve5MuIz/btERIs1rw4dDlt6mEC5qBHVpGPZTYhbLdUNgXK6vtx8
- OV8EO+epw/Pj7JFYYr+azFs54kdaFRw9cGBFwgIgr8i6izRGhbko/13OBWGMHBSfT3an
- HsTQ==; darn=lists.denx.de
+ bh=jfX0rySErWWJGW9ij5vjuK1VM06XJcKBKhNqBCfW28A=;
+ fh=kbLnxDkL9kx5xB4l0NU9NlWmGCI/+0mUCnXZmWQ32JI=;
+ b=Mic0Sg+UzimC84t3Fz+hffg7BiA0/DAn3UJ1pc6EbCkq+DQKaLX2/hGJZjvEFpPS1d
+ LqKpclwKVmsfIBj7DkKUeiJwp9PYS2IHf6F1eD7/9ptrXrqENmGJxVv51njrRK57thQ4
+ Pe9ii48awnauSdM7b3RV2OEj54IBGjTPBkhoP7AHv2Vg/6xjAqw/r5LCWb7W54KTGezt
+ E1K+Nt6nZvsXwTaslPne/MoiItCQ0W9W5ymTfXrqyeZ5XWXfaZXb+ALfLj+g7wX4ZJ1W
+ dtkpRHCnnTEkoi1K04E3XMt2J+X6npBnCr9YPoKPJcKxmYbgG+hDp3YuaIWfhJwZxg0w
+ Qcrw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775081672; x=1775686472; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775083431; x=1775688231; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wvQhI16dYtHa366b5giYMg1G2/KyRSxTbxFeRuoqZt4=;
- b=O48l2+X32toTZhFuJAFydcH4RfNHvXVs9icIqX2GO/o++C1ixh4uA5FjXaFQ85MAux
- 93+NwQpQWR+fboM/AbaebEub8dxwGd4jGkdR0LIL0FT2S2ZEwLoT77I1V0BL5Xhm2woJ
- QcmP+xoy48Ed3rbTBUcgTtiROZSD51VdiUFF4=
+ bh=jfX0rySErWWJGW9ij5vjuK1VM06XJcKBKhNqBCfW28A=;
+ b=O3mQBbJQ9sR2jupcW6ON4uSAzHhzIRrsMOecmiNCfLZPFkWa1hUvW6GMeQMktvLFVi
+ FgO5spcsYrcZXxFv/e3IiYjuf5Mnp8M3bxV/mandMQ/i2G5rF0Ei09IB5PUyF6ofZcLS
+ 1lZbA0K+OyEZLQyT20I7hrFKXNIAiUpOD7GQU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775081672; x=1775686472;
+ d=1e100.net; s=20251104; t=1775083431; x=1775688231;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wvQhI16dYtHa366b5giYMg1G2/KyRSxTbxFeRuoqZt4=;
- b=Yoqi72DpFXmfduE4D9SSz61RupRFybfbKdgicg2yiknbIavUm5qMu1Ga/+Sg3oNSYS
- 2B95GzO+6zjvr/WJRC3wvY87Cqdz+3uEbpZcpApQde0DfpAznfYYd6lrRmmLRlpL2YVu
- StsG90cxDBytQO6Q4JBEbmum69LtmRQTCKVYLzYOakmAO1UIjhhDGHq5e1paMxS8e3Uf
- LFU/lCCPs3aM3UZ7MaVEI1v1w8zNfXIBNFiuc84QkIStvRkGyrCB61vKtiBR8jdW/+JS
- 0j1FDU5TyNHTFUxegWXjPdKfsCOKGWHgb/2VgYzARzSeA3wOjt81WAiMeGyOG1+YRfiS
- gJlA==
+ bh=jfX0rySErWWJGW9ij5vjuK1VM06XJcKBKhNqBCfW28A=;
+ b=EV3pdaqxBwTAV6y7H5/Tomdv0+U0oRXCyhTDQT/iw5o4j2gYLERiElTyo3wDg1cLYU
+ WtxUNwUbnwg7mSoic7lkg3CXC5kBhVovr12S6MG59szezehbZNskxxO9X9sXBZgkqhg7
+ dRLIGdQayDd5j0vIi/lX7YYKSFX7V/+M34zGu0XUOXJevKvKvnsJJpFJm9PpbXppdqQd
+ SJatnEZ53JgM3oEQZP56jKNv/SWbiWChqjSv9OpemLVZsNGrnBMjn/mW+nWiCo9315NG
+ 0D//oYa2tQbFMzbdsz1epSBgwpDoMj0iBrChWQWmd6lfyuyILTRehk7/n6x6lH8TaZG+
+ nUhg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUhQQhiAxDD9akPZbQUPoPMjSMfZyQU0yUWkUUHHR6ae+6OoQ1p6PoMvHrWc1z7u4/Zfc2BQ08=@lists.denx.de
-X-Gm-Message-State: AOJu0YwIwfoIfFkfz7OanGTEZLPFEsh4OVgbmaN2n57QLeLVVYuVErj4
- uYsN33bSXXBmJgXu3DeQzdsXtdNbJwQoMEvrJxJwnqtDPSTSeOF+Fbx+Y/OepaU7WE/8Kfmz/Ij
- 8AUKB48oq/GbradWxHaqMNSlKAd5ru4H5IBTbKQj14ZB5xL8YqBAONQ==
-X-Gm-Gg: ATEYQzyUfjj4uqKmmrOAojAmrr//5IgE/vlxK8xmhdChTAXRarMwVo2O1QUQDJ07DOr
- j+/ng+72Qg5l2RQbf6PS+DjzbbOZvHw6BnvigJ3a+PbgCRUAJPkkczzMgaDRHhb3XnU0wf75iEY
- qQ9U5HMxzYpwGRqemyej3ZOp/xJ/UMEWmrhEgth6SQG+P/gGweyQxZmQ8551zKemvfD01DSOugQ
- sXV2ImaJb0U86RVd6LZuh6A3HefAVqfxuF6tARiwPGiL9TDBtvCan8EwamjIRh5Lu4grVsg5RIK
- MZWLoQ==
-X-Received: by 2002:a17:907:e118:b0:b9c:4af:dbe7 with SMTP id
- a640c23a62f3a-b9c13aed2b6mr242277066b.33.1775081672092; Wed, 01 Apr 2026
- 15:14:32 -0700 (PDT)
+ AJvYcCWpuZudU7KlIUrp4cJ0r6gwaU2KxhbJqsjnEMGqTR4fFFTMJsiWESZHvJvIW50PtTs+d1UO7aY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzGVG5fI2cB1NrQv14Chdet6KnqCBF6+A5AwWPdy4b5QpDDVXie
+ hDObvHKzNaevyLlsloInwBz3o/vk13FailCVOA49LY+o3LtWmxpwSPK/y5Hx8cU7x371rGQAeqc
+ JCJMIY1DadKBCBv4EVxrBPd5j4b+yGr2oFHYmpf//
+X-Gm-Gg: ATEYQzynCzV+MRVq55iAfKg2JXxY///qc8+CdLCYKfC3vQqm2qQzv1w9Zodf4a5mcLb
+ sEOU8RLFt+YyKhmVayhTCOgntCytE3KMUoPfYe3TcpSHjAp6LfrAXF6lcAfvQz1+NogCwdZ3qQ8
+ 1WJ89GyNk+P9yGYlPqByht8pHHNBPr1cldZeQSiys/Esq7A90gcRpzLq83JC+9F4UREgbP2nlCr
+ pvmDI0P+9ps8Hj5Si0ib9tmDLBymZO0rvpo5pUfJP8tqX6kS2bFutyIp2xCqy4NVz1szGrYgPFx
+ rQOutg==
+X-Received: by 2002:a17:907:c789:b0:b97:d126:c007 with SMTP id
+ a640c23a62f3a-b9c13b2c4a6mr344637766b.30.1775083431337; Wed, 01 Apr 2026
+ 15:43:51 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260331100047.34618-1-philippe.reynes@softathome.com>
- <20260331100047.34618-11-philippe.reynes@softathome.com>
-In-Reply-To: <20260331100047.34618-11-philippe.reynes@softathome.com>
+ <20260331100047.34618-12-philippe.reynes@softathome.com>
+In-Reply-To: <20260331100047.34618-12-philippe.reynes@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 1 Apr 2026 18:14:20 -0400
-X-Gm-Features: AQROBzCdvLBM7MRVD1x5c0LlLTfHKV31sx4kpcoACiXjt0d1Aq_1rFHUoYTvlg0
-Message-ID: <CAFLszTgdz9ZOZ=LD8gK2u3tUvtVr2s7GwwtiasOYH26SfRuQrw@mail.gmail.com>
-Subject: Re: [v3,10/15] tools: binman: pre-load: add support of ecdsa
+Date: Wed, 1 Apr 2026 18:43:38 -0400
+X-Gm-Features: AQROBzDb6sk8zAEEn9VR7xoJsMnChu5sJyrdDBUWEnmlZw_-Z5Nq8QARPMh7PuU
+Message-ID: <CAFLszTjokOBA+NB5zHLURq3jg5ZPLmgMro7CcYE5OBiru2h0Dg@mail.gmail.com>
+Subject: Re: [v3,11/15] tools: binman: pre-load: add test for ecdsa
 To: philippe.reynes@softathome.com
 Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com, 
  trini@konsulko.com, simon.glass@canonical.com, u-boot@lists.denx.de
@@ -114,67 +114,16 @@ X-Virus-Status: Clean
 Hi Philippe,
 
 On 2026-03-31T10:00:34, Philippe Reynes <philippe.reynes@softathome.com> wrote:
-> diff --git a/tools/binman/etype/pre_load.py b/tools/binman/etype/pre_load.py
-> @@ -152,6 +152,67 @@ class Entry_pre_load(Entry_collection):
-> +    def _CreateHeaderEcdsa(self, hash_name, sign_name, padding_name, key_name):
-> +        # Check hash and signature name/type
-> +        if hash_name not in SHAS:
-> +            self.Raise(hash_name + " is not supported")
-> +
-> +        # Read the key
-> +        key = ECC.import_key(tools.read_file(key_name))
-> +
-> +        # Check if the key has the expected size
-> +        # if key.size_in_bytes() != ECDSAS[sign_name]:
-> +        #    self.Raise("The key " + self.key_name + " don't have the expected size")
+> diff --git a/tools/binman/test/351_pre_load_ecdsa.dts b/tools/binman/test/351_pre_load_ecdsa.dts
+> new file mode 100644
+> @@ -0,0 +1,22 @@
 
-Please can you either enable this key size check or remove the
-commented-out code. Leaving dead code in isn't ideal and suggests the
-feature is incomplete. If there's a reason the check cannot work, a
-brief comment explaining why would be helpful.
+This patch adds test data files that are referenced by the test code
+in patch 10.
 
-> diff --git a/tools/binman/etype/pre_load.py b/tools/binman/etype/pre_load.py
-> @@ -152,6 +152,67 @@ class Entry_pre_load(Entry_collection):
-> +        # Compute the signature
-> +        signer = DSS.new(key, 'fips-186-3')
-> +        sig = signer.sign(hash_image)
-> +
-> +        # print("len = %d\n", len(sig))
-
-Please remove this debug line.
-
-> diff --git a/tools/binman/etype/pre_load.py b/tools/binman/etype/pre_load.py
-> @@ -152,6 +152,67 @@ class Entry_pre_load(Entry_collection):
-> +    def _CreateHeaderEcdsa(self, hash_name, sign_name, padding_name, key_name):
-
-The padding_name argument is passed here but never used in the
-function body. ECDSA does not use padding like RSA, so this parameter
-serves no purpose. Please can you either document that it is
-intentionally ignored (for API consistency) or remove it from the
-signature and update the caller.
-
-> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> @@ -5894,6 +5894,37 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-> +    def testPreLoadEcdsaInvalidSha(self):
-> +        """Test an image with a pre-load ecdsa header with an invalid hash"""
-> +        entry_args = {
-> +            'pre-load-key-path': os.path.join(self._binman_dir, 'test'),
-> +        }
-> +        with self.assertRaises(ValueError) as e:
-> +            self._DoReadFileDtb('352_pre_load_ecdsa_invalid_sha.dts',
-> +                                entry_args=entry_args)
-> +
-> +    def testPreLoadEcdsaInvalidAlgo(self):
-> +        """Test an image with a pre-load header with an invalid algo"""
-> +        with self.assertRaises(ValueError) as e:
-> +            data = self._DoReadFile('353_pre_load_ecdsa_invalid_algo.dts')
-
-The variable 'e' from assertRaises is captured but not used in either
-test. It would be good to verify the exception message contains the
-expected error text, similar to how testPreLoadNoKey() does with
-assertIn().
-
-Also exc is better as we try to avoid single-char var names.
+Please can you squash this patch into patch 10 or move the test data
+files to patch 10? It's fine to add new functionality and its tests in
+the same commit.
 
 Regards,
 Simon
