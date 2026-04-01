@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BFB4D2ED0A
-	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 14:17:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F33E107637F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 14:17:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A74FA840AA;
+	by phobos.denx.de (Postfix) with ESMTP id EC14284127;
 	Wed,  1 Apr 2026 16:15:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aRqKC1BM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Nxw0TQvQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC5CC84127; Wed,  1 Apr 2026 16:15:39 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 173E084137; Wed,  1 Apr 2026 16:15:41 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 135C283D8A
- for <u-boot@lists.denx.de>; Wed,  1 Apr 2026 16:15:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B527840AA
+ for <u-boot@lists.denx.de>; Wed,  1 Apr 2026 16:15:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4888244e9f9so13427365e9.0
- for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 07:15:38 -0700 (PDT)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-486fc4725f0so13022545e9.1
+ for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 07:15:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1775052937; x=1775657737; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1775052938; x=1775657738; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=dZJd8jcJ2QufDdsWwRqWjudJvGT1Zn2bs8g3ffveHCw=;
- b=aRqKC1BM6RqCKPdbXctnk3GSqQI6TgRJutRZFcKsXxPmqFjWwWB9B2PGHWDoPHI8dL
- OvAwyEeyrX1Cd0533YHdnI8vLRTmI8GD3oj+NodkqBv3OrL64vhKRdeyMLEb6So3fCjY
- hBx9BGkV8xiyr9TRd6ylI8xgyvf1RUanvYuEF9ax/PzdL1yj237IGE9Y7y3fxNqUmLil
- PJgR/NBQxpTCpcZX8Yuqz82leSzu6DtwpUVRO9LyQtljutE3Taoas3FmRyhCqyfGd0EY
- cD72x+kt9WPBLo59nzha4e9kX76rZ8Up4gQCO2Q2bCHznFAMqkhVqZK5I8sWOf+eMwyv
- /X3g==
+ :reply-to; bh=Zn1QgF+UBH7ig2aMz9R4BmUloIuxItZzikjPINQdHMU=;
+ b=Nxw0TQvQKE0tblS5pM4qntwmvQVPfv3DIJeVCTmmlbQlfNCLOW+aIGNIdBgLRA6sOH
+ XPyKpXstF1RigrVffAu3CVbFw5U1lrcRyB5h5LgxeTNAjVvzCqWhrl1CO2JdOUuLuVy6
+ GRPktcehlv0jritX73yY7o4+3KrzDK94TCyYUe0wPTt4oqgiP226EImYnuLS0e9MDuJE
+ rEhV6NXXEBdqTfcRLrhFjXSXmMm56TWwD5fJmY0Dq9J7SEqBwTOsI3aDH0CdBbPfLixW
+ Dl9dk5RofH6jfupCSMA4vVhWGci05hlZ7n+tYHBeg4xgtVxvBiRb370LXXMI/jLrF93y
+ s34Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775052937; x=1775657737;
+ d=1e100.net; s=20251104; t=1775052938; x=1775657738;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=dZJd8jcJ2QufDdsWwRqWjudJvGT1Zn2bs8g3ffveHCw=;
- b=RlNaC1+TpMUm7YCj7YhXLkJWt8Uval8QTRENNy9bPksV/GgHaYMq0SCHhNNd32LRJJ
- xLHNFA9L6J8YdOt+NnnrgLXXu6jsMCpvOoh19t8o3xymqZirXiR2xWAoUqpXbnr+t7Hq
- M/Xt5KCEUI0ibyAy8Rni7lli8AEubO5l8SPwKTQHo4hi8roVQxdUrA/+S6XV03lqa3Zm
- JjbH+HtgLhGiNy3odAOlKcHgDuPx1raF2iwcIHB3SzhOKKSn5uW0QGOejhzUrshqLR7a
- q83ZUlC9dcdl0+SaP6+9mQd8nPeO4tK0jBICdZFt3ncUEw+bcC0E9LdP8PCyasfzNkUc
- UGvA==
-X-Gm-Message-State: AOJu0YySyBQhh7ixG6DuQS8GlmpnpOgj5RsdX9juB4YDrin3Hqag5GUv
- fz3WVYdpi9UjcGU0gi4RcRW/u6V0CDUAkyY2magG2lJt4O5J7hWI3PnVKl7IVKUZG48=
-X-Gm-Gg: ATEYQzz3cAHyhp4bxH+zKST/rQbsIQnSsKiy6yyQtqg3BU03Pl1+4XI6enl8ny6ZkFc
- gcC9c/9LdgJxIcW/YkClxCuYS4sc1mWQmqxYom6jF+1Hs/+90hG8Ygli9aUUrnoUQoOB86uT7kI
- oqBKJf4RIijrf20DrcWuODZqTDuOJYwLkxHtzeCdgEBS2Js3+CX5sNZFRRsHBglSXzzGTGiMD8S
- 2fn3/kLrl4yw5XJ870gIE3UH5H8Eq02q4kIdc0chT74r14OO/KRoVEZUQnz3E2/RGA/gnNjb9im
- B9BNI2zROGP+ZC04YtVwTXvMbxfk6fGXs9rEntVWMEw4ON8r5D7KXWZ4b8DEfqbWUdaW5CRCm3C
- nZsDE847QZc+GSHBjkMVuMWz7Oh6XQ33EhREPND+Vfs5dSQ/2HgnVjdTCOaIE6kYDaBHc3Yg5za
- QZUtnBDfWTI9uYNMz+ZJgjmWU8TddMlLabFLvGy5aeuSxSV6K3An06wPZamLaJP0zc6RQR
-X-Received: by 2002:a05:600c:1e28:b0:487:2092:b2e0 with SMTP id
- 5b1f17b1804b1-48883569e63mr70615565e9.1.1775052937372; 
- Wed, 01 Apr 2026 07:15:37 -0700 (PDT)
+ bh=Zn1QgF+UBH7ig2aMz9R4BmUloIuxItZzikjPINQdHMU=;
+ b=R0KBQ+YFCduywMrm3oloz8A0xImRKNMu+rWk/KgwtjfJJVoXvAC7pCE6tyz3iMINFv
+ vsPSSne0J/GS6xp9/jOf5aHkuexpVlc3uFLIR/oNV6RSjd+e1r2jBKaCL0A+nMjF+JgM
+ Dv8b2yc89xuPwd345SbJtC3OFlzgXGaOMA9xX6fx3A5S8+0lYLCPpb8FAM1U62CUanDX
+ IHW7Atb5WF7P0SPREjJmtkPCkQBkSUQ1tKE+YDbzQkI0XhFg0z8BZXrI0T8uUviBH6M+
+ fL9jq1VPyxhI899NwyntNts/g2Fm5zLrgMVh7GlZmiUKUiRajfnLAG6ma7XdpHzvXeSB
+ QDmw==
+X-Gm-Message-State: AOJu0YzrozGn394yOFB0bWPSkruTbzB+p5n1IIEYkKpKPHQ6rXH/adgt
+ 1tzghHvfjbY0fjH5EXcZv+uxz7BJCElji/krEk2UCcOsT/FrHT03kBGN1vjiLe0N/Qk=
+X-Gm-Gg: ATEYQzx8XifwBy/X7/jbn3SNMVOz5OTxEZ2XF11B06XbfbkRzHPpPRpCjMXfl3Q9Hoq
+ MLjHWX2ssGJUH1LSrRPkehiaQaVyJOZN2hR4vAjQx9NncmQhDUzEPnBY0wvCkZLHGZfKjHFnudK
+ nWI5FYIloD9QoziQvDldKv6F9E87tpne+M7FWsA29B9KjDsXo+1Q7GH971v74g0/53lFZ00Csp6
+ +hHNKQy+zwUh2kgxhhOwrDwtntbNvdXdMB7BvYpZQjy6FdO+zRD7MTeD3VGkjw0q4cnYDDQUwGf
+ AtEx4dxrRSWzXSrupUxF5NZXFon9/FK0QA7NYl72o6AYkrWLfvK9QNyhRdV2oNpkWV6y3xy2Hsp
+ tfTHDtFih5bTJmbp4NLcZQfya9e9DkVTT9G5tse06Jb5OgscDLjttGRPSAsIyr9vk6zVD7B6+jQ
+ nn1RYC2nZ0bzjLnwcVgGAGeFnzk0TmyYn4FlHb2PI3Zqm554mpVGJPCQ0038zHlU8gBrkZ
+X-Received: by 2002:a05:600c:8b77:b0:485:3cef:d6ea with SMTP id
+ 5b1f17b1804b1-488835bc362mr61388775e9.13.1775052938528; 
+ Wed, 01 Apr 2026 07:15:38 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd86.dip0.t-ipconnect.de.
  [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4887c8bcaf8sm43224135e9.27.2026.04.01.07.15.36
+ 5b1f17b1804b1-4887c8bcaf8sm43224135e9.27.2026.04.01.07.15.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Apr 2026 07:15:36 -0700 (PDT)
+ Wed, 01 Apr 2026 07:15:37 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Wed, 01 Apr 2026 16:15:26 +0200
-Subject: [PATCH v2 10/11] compat: regulator: add enable/disable macros
+Date: Wed, 01 Apr 2026 16:15:27 +0200
+Subject: [PATCH v2 11/11] compat: math64: add abs_diff()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260401-casey-ccf-compat-v2-10-414d5b7f040b@linaro.org>
+Message-Id: <20260401-casey-ccf-compat-v2-11-414d5b7f040b@linaro.org>
 References: <20260401-casey-ccf-compat-v2-0-414d5b7f040b@linaro.org>
 In-Reply-To: <20260401-casey-ccf-compat-v2-0-414d5b7f040b@linaro.org>
 To: u-boot@lists.denx.de
@@ -89,13 +89,13 @@ Cc: Tom Rini <trini@konsulko.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>, 
  Raymond Mao <raymondmaoca@gmail.com>, Peng Fan <peng.fan@nxp.com>
 X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=850;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1206;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=w43IAJ/GgxcdhAfepdgBnfs8T9pBTj4C8IelGrdXjr4=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsyzGlXTdic8CFqycXKRyunSn81t30MfXj1y0Cn7xP+pH
- 71tPiy72FHKwiDIwSArpsgifmKZZdPay/Ya2xdcgJnDygQyhIGLUwAmYhDMyDDTl1nSrmHfsQOX
- tSKt7Hq93z037dnM17otWaZ9RpCwljLD/6ycco9/wYXTu1auSrhUvjd499KHJ326C66fl8uvebv
- k3HkA
+ bh=yarHnrRLw4B3Nkf5OgSsh1JbtkF80PzViaDD1jJC89M=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsyzGlVrv5vNbL8Xe/i/0NSzKQyWb2Kef5q3mclsep6hz
+ PGNily6HaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAifWmMDBNrOJZzdD5UTru4
+ JLDYIzvEW7fpfk7e972dW021L6oEezL8s77H61625yxDWHXr8+xb7y9Y3tpfXmPQ/0d16dnSNfv
+ e3gUA
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -114,30 +114,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These just wrap regulator_set_enable() and provide a closer analogue to
-the Linux API.
+Add the abs_diff() macro, copied directly from Linux 6.18.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- include/power/regulator.h | 3 +++
- 1 file changed, 3 insertions(+)
+ include/linux/math64.h | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
-diff --git a/include/power/regulator.h b/include/power/regulator.h
-index 8a914dfc74f4..4011fb1d254b 100644
---- a/include/power/regulator.h
-+++ b/include/power/regulator.h
-@@ -358,8 +358,11 @@ int regulator_get_enable(struct udevice *dev);
-  * Return: - 0 on success or -errno val if fails
-  */
- int regulator_set_enable(struct udevice *dev, bool enable);
+diff --git a/include/linux/math64.h b/include/linux/math64.h
+index eaa9fd5b9685..70a7ee3ff1d3 100644
+--- a/include/linux/math64.h
++++ b/include/linux/math64.h
+@@ -256,5 +256,24 @@ static inline u64 mul_u64_u32_div(u64 a, u32 mul, u32 divisor)
+ 	return rl.ll;
+ }
+ #endif /* mul_u64_u32_div */
  
-+#define regulator_enable(dev) regulator_set_enable(dev, true)
-+#define regulator_disable(dev) regulator_set_enable(dev, false)
++/**
++ * abs_diff - return absolute value of the difference between the arguments
++ * @a: the first argument
++ * @b: the second argument
++ *
++ * @a and @b have to be of the same type. With this restriction we compare
++ * signed to signed and unsigned to unsigned. The result is the subtraction
++ * the smaller of the two from the bigger, hence result is always a positive
++ * value.
++ *
++ * Return: an absolute value of the difference between the @a and @b.
++ */
++#define abs_diff(a, b) ({			\
++	typeof(a) __a = (a);			\
++	typeof(b) __b = (b);			\
++	(void)(&__a == &__b);			\
++	__a > __b ? (__a - __b) : (__b - __a);	\
++})
 +
- /**
-  * regulator_set_enable_if_allowed: set regulator enable state if allowed by
-  *					regulator
-  *
+ #endif /* _LINUX_MATH64_H */
 
 -- 
 2.51.0
