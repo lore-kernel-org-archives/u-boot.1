@@ -4,93 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 184E61112241
-	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 23:22:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A39C71112242
+	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 23:23:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D327839DF;
-	Thu,  2 Apr 2026 01:22:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id F1EE684020;
+	Thu,  2 Apr 2026 01:23:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FRUNRkCr";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y+8aKlL7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 365F383CF5; Thu,  2 Apr 2026 01:22:29 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 90B5284011; Thu,  2 Apr 2026 01:23:28 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4457B80517
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 01:22:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A67018408D
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 01:23:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-b9c3e2cf3c0so39057566b.1
- for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 16:22:27 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775085747; cv=none;
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-66e02a7ee78so396064a12.1
+ for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 16:23:26 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775085806; cv=none;
  d=google.com; s=arc-20240605;
- b=NMe4vmLBx+1NuvCoIrembyA4E0OKDOBHMSfokFMoa/49Nlddz6xz4XR7r9ZhPfUFcy
- 2xiXwJwhPoa3anZNGaHzs6vsbhNhpYd+pqW/mMB8cicH2QhOyLUt/LlfTDJoDOIQ2fRK
- P29Z4TCke98kBBtHq9O4YkxMZshHDrAu32AAEwmZDYmjq7BboHleirnMtZ7F1pOINuNF
- rFbaFKSXW5sw1SC9t1vGpNroUggDqHrOr9UhqiXsaCAiFWDj8MQIoGAs7n3tvBTMehLZ
- 98icDlGb5w7AzPVcvxApMf3deCY0N/xoouEsC+VfRlYJ+uJQYtDukxhPa8sfRizaQl95
- WOyA==
+ b=fuBk7AUzfDNmRpX6x0RGyfq42qF0Wdv+1UZ+riKmwJge2J4KIy5huaSsjgE6RUjVrx
+ ip1Ba3AXxG9sU5B5lZCiJp2PI/Vg8XjA4E7WZNIEDtmDBiCLVg5G4TRti7RC8F8clwYU
+ 0cSxnNQW9zHIA+QGIYYzSkdKHHVqbqVsJ33kD/SqsoKweCfftztZ+Gb685R+rXCvrhV9
+ nbB1xXu1oG8pS7CfB+98nc1Iqn5yFX8bYXW/V0QbPkjRkdV8yhEDdgm5ODg7CLXnkUei
+ uWudvB+4gXA04wg4Qr5Q8OOIRg6ejDhpVeAaAbpMZysITbnYwC6SFvNua0wG9d/V6NXf
+ Q/qw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Ru+VqHDTCjceattOvXFgSLjUgJWJztJFPRA4v9jhwcY=;
- fh=pb1V3rC/YOD1axA7yiOFKLmIQEYkcRc0AUeTYO1Qr4A=;
- b=FeVxrqnml2XTSqtCFaUv9NGRoT1ShdWpTe++67e7qRhikJWOzWReMn0SL0Tty//RF0
- pHtKd3gDicUfjGQXgxQDuVS6suZwdxN2t4Vs8Pg9miOVmJoZOssTvGrmgi3ORsWjiuvA
- waEO+CTNnSTZeYRBgekohtQEIQ9XK9VqKv5/5WBN2+0BllIu1zRBtasuPs8zV2OIwnQz
- 6spKrogZgHHwDQiALQLxNiS+AkECvKhQ6BTXgYfPtIx5UwB8LYdLgsKl57kHWDQiSDcI
- soUSPBsNJrV+1A9v5vj/+ytdWqyKsl4/NOXD1efwn5NVrBj/BF2NL265BB+VYfBi7up8
- F8tw==; darn=lists.denx.de
+ bh=H4wMy8OcPA7S8mvu3dXr7gFOo6vHVEl2cTbZQIDBrUs=;
+ fh=SGHXci2xJXT3h8As2/rDrB+mIGJ1RTnI7tx126xkHuw=;
+ b=RaztwadPa3CevlGerqiYa/KE3i6Ge/H4tqQeKflSxHEeieC2z/SqwYDuXk4DsdECNH
+ CrsItLneFwwL65Y52MknvwEJ2u8zRldWbDQNA4EqeDXD32brXgA3qwI8O9lPW4z7EPgm
+ 0zC5MPfcURA7e/HgKf9bo83Hse8nwzgHcb8hHbx5A/p+4cgD3WYv1XGzh/qcznd3HrBq
+ TQaV+VahhQ4SYhZrfsfUN8l6ksEWoG4nSICU24FwkqHkbTjq2xngxNCZG9oNGAuULcoI
+ f+CYXZj9OOCV8xJIEnAsiuMampHdNJC6AaxTmChsRCpkDjChguxtXJR2O+F1ulpwbzLV
+ CSCQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775085747; x=1775690547; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775085806; x=1775690606; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Ru+VqHDTCjceattOvXFgSLjUgJWJztJFPRA4v9jhwcY=;
- b=FRUNRkCriUy+owIm1L1mSWGpBGPJVp4meH11SGXutla78XbCVomIJweyxbiNL1o1cF
- nuLBgdncHv5lNcqo/YffB2ttnVDW9D1cDwiE2a7RWbTzGR7rkRPH+Q38O8gLi8amK6Ay
- i7dCGtCe+Ni2o3G7HUbONZe+PFwrWRZ2vzbi4=
+ bh=H4wMy8OcPA7S8mvu3dXr7gFOo6vHVEl2cTbZQIDBrUs=;
+ b=Y+8aKlL7XeMQaSxS5fc58ibcqJtwq5uRbyyHdqyNeavwqGNFy5ukCcQ0MiSB7CIdwg
+ bb47LYDjs4fO38ADvstkYk0RUnOAhsE7tyOAhmLHGFdacXmt/ZqJFBLDlFNP+sr3iqBO
+ hFFn3xO4ZXlzuJJMw2xkZ2LtNpL0ypGhTifo0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775085747; x=1775690547;
+ d=1e100.net; s=20251104; t=1775085806; x=1775690606;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ru+VqHDTCjceattOvXFgSLjUgJWJztJFPRA4v9jhwcY=;
- b=IyRdppPdr16sgkmcse5/wfpdcpq46ZeQq0z0S6ml1FtQnb0Z9nybmsmx6ng9z/oiDy
- Xrab9E+1/tDdhjB+v1Xah9V4lmh/XDQxYQGBGj7tL13pzql3xYhIMSsH7DSCdJovfA9Q
- AsLi3Paw0rvlBxkVtLE3d/PD+QmHrLKRH6IUzeFjlAIZVazseSSky0s+q9OjmEw8/vtv
- q8DEl6Sbd/Xzfo3Vtbjrjn/xKiAQtNR3+SOYDz/1Bci2oZGtPPhUrVmKRISGKl8WQhJ6
- P/qreVj2t0BTzrrUggws0hqw4UT9cu32Qhnbjdq9Yj5shnfIY7i2DOSTUt+dfxizBviY
- ySVg==
-X-Gm-Message-State: AOJu0Yy1uEG4CWdZ44awFzRY5RcgCl8nQQZs0yn37ykz/bRexHXn06m5
- Ub1Xg7U5VNwys794jjX2lCoBz6zs/AcZty6xcmBSdXmMXhaczBwI+7EGHuJxvBEuC+v4aXDQ2kJ
- ewinIczzdS2u+T0uPpkVL+OWvyGBWTlDf4zNV0wGhnPdkwm3MczY8Ig==
-X-Gm-Gg: ATEYQzwjbGO2335Z+YqXE5+U2BqgXYJEa5bSVcqHuMRLL4Ay4HHmV9yKIA+RAjVd+Rg
- QaPU7wSHOYFe9Z9YETO3Eys9iEJ8C6CuSirWTRE1i5Sx5C5LemugqVIUIq1Ah1pQpMzpadVt7JA
- R040DA1Y5ABW3xjPyWXo5lZt+sZ62mSQfAl20sPoxvgukLlm8PHfk8ACy2rz8jFfA7j+RONeCpK
- KwU9B9AwxvQkjw5cU7RFz7EmaG9fuIWr+ORF9TbZU2yNMhmAUxEgUAXrPJDcWmIeP6pYLMM8n3S
- rxYQXQ==
-X-Received: by 2002:a17:907:96aa:b0:b9c:12b0:2e38 with SMTP id
- a640c23a62f3a-b9c3edf5de3mr60752366b.1.1775085746708; Wed, 01 Apr 2026
- 16:22:26 -0700 (PDT)
+ bh=H4wMy8OcPA7S8mvu3dXr7gFOo6vHVEl2cTbZQIDBrUs=;
+ b=cCTRjUaIhfANd3oQKieoD9MNCyOavVWOQnzpMLcUHVRqX1EtcQorNdBkiXQ/gGgPqp
+ 0rghAp7FPZldQPgx5ZXA2D0Dmvt+ebIxXBxZ4fxctut7DZyY0xNqyslwkOQVb+p4SC5l
+ jhGYJWIrY+Vgya0JODYbiy1B/yXXY3Av40PxaneFFtkExTD3neVEPm/skHDVj/Ga6Dn8
+ qNVq/QlZSY5F2QQ+Lx0TtMs8V8uB62XuNzCtiUo13JxVC+kjhb0+JTsZJthFCDIiQm2P
+ xE0MbxOQF2+gs4CIeji9G9mznivNLEvMm079j2dt5pFUnAw5Fvnpwgl3M843QvgaPKY2
+ RY2Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUDuh983B6R/t6WeGiEVOXeXHip3C6HleaYTs0GAJHpzwuhz2Zf7vPtqFKlDYRTpJZV2yOO7+c=@lists.denx.de
+X-Gm-Message-State: AOJu0YwvnqHXK3FW0VkjlequtUQ3bnD5hm+EPEzzfEeDrF6LMlNGDbdr
+ yUrzcTaGFBMzzGTCIy2JNbB9VD7jMaoFaGIu0uM5TNRFXk/54dZzjXD4xK7PJKGW/U7dpcN+9o9
+ GqjvUTzTXWJ00BX5GaKgSMJb12rDk3whbKRyRfyXm
+X-Gm-Gg: ATEYQzzRyBb4WvUzRyV9F5QSEHlR2l4WPYOk5/mpYfbnNsvHMRD0vk2qE4IvQIaIQjV
+ TsSKwnufVZLXFJoZc7MQCLH8ihZIrMbA/mcUI2zNQTu4MC9S5NWvOhjZQoFhfGnlALChiXpaOJl
+ gSsHFY01eOBsMixvCJdX8KQYISDcZRVSEFL/C3otQ+Gql8pTf0S8Z71O3Wd/4FymYZrhXJ2Mca4
+ 4/iM+8OmSLNJ0/rmtVoIAWSDfqW+OJlfAYTXR1mNBptrZ0j6HOsdonrn1r7XXBG1yadlutTStTM
+ IuPqUg==
+X-Received: by 2002:a17:907:d7ca:b0:b99:d2d9:da47 with SMTP id
+ a640c23a62f3a-b9c1378f282mr362824966b.2.1775085805898; Wed, 01 Apr 2026
+ 16:23:25 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260331075338.2391-1-ansuelsmth@gmail.com>
-In-Reply-To: <20260331075338.2391-1-ansuelsmth@gmail.com>
+ <20260331075338.2391-3-ansuelsmth@gmail.com>
+In-Reply-To: <20260331075338.2391-3-ansuelsmth@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 1 Apr 2026 19:22:14 -0400
-X-Gm-Features: AQROBzADNYTM7CcJaK7l-5q5LDlu3OBLY6fLVzIC7rkTdqpj7GlLaUizPjHFUyw
-Message-ID: <CAFLszTjkgOT6vBYL9MfbJ0X46tc=efERKmG-wT__CWjNt2bt_w@mail.gmail.com>
-Subject: Re: [v4,0/5] misc: fs_loader: reorg and split to FS and FW loader +
- FIP loader
+Date: Wed, 1 Apr 2026 19:23:08 -0400
+X-Gm-Features: AQROBzBxVbNvAZOT8wkxsq3VECZZ2k36JfW6XJBPq284EZ_3WUUbfr1Xe7HR9S4
+Message-ID: <CAFLszTgt05WWZ8RB7CY9aSa6t9YqazJiDhcNpU92YDRyR5aaBw@mail.gmail.com>
+Subject: Re: [v4,
+ 2/5] misc: fs_loader: reorganize and split to FS and FW loader
 To: ansuelsmth@gmail.com
-Cc: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Peng Fan <peng.fan@nxp.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Chen-Yu Tsai <wens@kernel.org>, Jamie Gibbons <jamie.gibbons@microchip.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Justin Klaassen <justin@tidylabs.net>,
+ Harsha Vardhan V M <h-vm@ti.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Sky Huang <SkyLake.Huang@mediatek.com>, 
+ "Lucien.Jheng" <lucienzx159@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,21 +125,27 @@ X-Virus-Status: Clean
 Hi Christian,
 
 On 2026-03-31T07:53:19, Christian Marangi <ansuelsmth@gmail.com> wrote:
-> This series mainly rework the FS loader to permit reading firmware from
-> container that are not exactly a readable filesystem.
+> misc: fs_loader: reorganize and split to FS and FW loader
+> misc: fs_loader: reorganize and split to FS and FW loader
+>
+> In preparation to the introduction of variant of the FS loader,
+> reorganize and split the driver to generic fw_loader function and
+> specific fs_loader function. Create a dedicated directory for the loader
+> and move the internal structs and functions to a dedicated header file.
+>
+> This will permit to reuse all the property and logic of FS loader
+> with container that are not exactly a readable filesystem.
+>
+> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 
-Splitting out the generic firmware loader infra from the
-filesystem-specific code will make adding new loader types easier.
+> diff --git a/drivers/misc/fw_loader/fs_loader.c b/drivers/misc/fw_loader/fs_loader.c
+> new file mode 100644
+> @@ -0,0 +1,212 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> + /*
+> + * Copyright (C) 2018-2019 Intel Corporation <www.intel.com>
 
-Maybe move the request_firmware_size() patch (5) after the
-reorganisation patch 2. This would avoid patch 4 lacking the
-get_size() handler and then adding it in patch 5.
-
-doc/device-tree-bindings/misc/fs_loader.txt should be updated to
-mention the new FIP loader and its partoffset property
-
-Cover letter mentions request_firmware_size() comes 'then' after patch
-3, but the order seems to actually be different.
+The leading space before `/*` breaks the block comment alignment.
 
 Regards,
 Simon
