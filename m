@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9995D6AAE7
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 15:49:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95638D6AAE7
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 15:49:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0207C84181;
+	by phobos.denx.de (Postfix) with ESMTP id 6C1BC8418A;
 	Thu,  2 Apr 2026 17:48:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hDl7/aKO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DAkV9nzN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 238C08408D; Thu,  2 Apr 2026 17:29:06 +0200 (CEST)
-Received: from mail-qk1-x741.google.com (mail-qk1-x741.google.com
- [IPv6:2607:f8b0:4864:20::741])
+ id 3133484020; Thu,  2 Apr 2026 17:29:08 +0200 (CEST)
+Received: from mail-qk1-x742.google.com (mail-qk1-x742.google.com
+ [IPv6:2607:f8b0:4864:20::742])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5AE23840B0
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 17:29:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9120183F7D
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 17:29:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jcethrid@gmail.com
-Received: by mail-qk1-x741.google.com with SMTP id
- af79cd13be357-8cbc593a67aso103014685a.2
- for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 08:29:03 -0700 (PDT)
+Received: by mail-qk1-x742.google.com with SMTP id
+ af79cd13be357-8cfc2d1fdbfso90879485a.3
+ for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 08:29:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1775143741; x=1775748541; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1775143744; x=1775748544; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XgwaItLqHYJUe/4CYEABdIWRhA36JpyF6PQ7TQQ1XDY=;
- b=hDl7/aKOeRcPOGKC79pTZZ3cY5fkmVelXP0YK9m3NHpZ8LExNJ7i2oOaTp0oIqVWbf
- oNU8zO9C2bnPEgEoXM0f256mB/9ihGG769tgQwUq0tlECMGIHfmv6YqFlrJqEI+pAPqr
- r6qs23g5kTHRA85W6Gl+MddtWvEylQZfVt6dql2/DzyDWijYKYw+17N0/TFxOEERgeaJ
- I+qLOx5qkj9bOoTvae+JO+KDMcUbGA628qY4eRoU+boHChyqPca0jqQ/E3ea0omKDRsZ
- py8CbyW0++ZbqnodZz7T9ys8pDXsTk52rE/FgyWxRad1jKOIVVh/vJXOhd2grej+B1Ep
- qYlA==
+ bh=0UyqzTfrtNmu8mlcwq3THfL26yhZKHq1m4GJo51JMRI=;
+ b=DAkV9nzNFprcQYTwZa8M4Dymr6YkUgwvcohfj+ZH68R0W3Aarpa/I7ycJwY9HuzMT6
+ Vvpo5rFxFUPuj95u3PwU4rbZd75+ADP0NHfZUJkv3my45sg32NtxmJM44HmghBhTEpDM
+ 6DgfX9Nx1B+dhKgdJDX1SptPjyTGYw6t9o06IOPxslEI0Eowjh2E7eXpYZvG9GksPstj
+ drQ6sS8MjLRH5JzxkXdb27+RnUIZU1Vz74o495KJp6yTK0pN5WlM9SWddhx0ZmAAEx3q
+ Zb10E0PJxsmjIfeD5GmegsS3c6NI7ZbrhwssttGAHstprnMj9wZz0zDEDfbZ1tarrHgU
+ JrDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775143741; x=1775748541;
+ d=1e100.net; s=20251104; t=1775143744; x=1775748544;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=XgwaItLqHYJUe/4CYEABdIWRhA36JpyF6PQ7TQQ1XDY=;
- b=snUXKxSNILOXul+fGS7pI25V65uVY3kIMTdFkRZsQ4bUta4me7pX64sV0QsIj2MZaq
- SlxSIxcbHb/vp4yWit2dMs2AIB7X9PnqHumuhCObDtK9BKtf/+Lzh0yBuEILnpt1emIb
- DX54ud/lSJECZYEfVnFaWnR0L2gfSDvRobdRrXsygaCtO5uDts/lWYIr7BCayEnD3WHl
- 6qg/QgBP/ox+6jAeF9sHEQxwHsHHjajjIouZrpEPUqhvdp9RCzSwaf6blbZZbbueSQiJ
- rhzFvZ7n01Ovkbx355dtHbLosIu1WnHkNKXAjWuonEEschrcjG2iiUlTJbD2GGi3hGQC
- PsqQ==
-X-Gm-Message-State: AOJu0Yy3UBww4jRiUlVC8dF1QXzWvi7/LEvHf47CCv5nLCNZg4TZrn24
- ZDUMGDGTOfsnmSIaVkjT+P4s0peIkofaFshSrAk9Isc9GpZLVtuII4onr8RmQHZG
-X-Gm-Gg: ATEYQzxIE84YQYV18GKtngSC8ryhvt37g61SOeHzZmQvb8gzTnbiNRkKQLyyuo/a2SG
- K8IkmyM+5X+K3YpGfpzXOVqAnMffQdopEOiud+fhlHfHtZRgbNeCLjncDBBXA54PMFrcPrAhMjN
- dc/IKILdJGcm4myVbZM3J3/Asx2cksyFNOc6LPKMZ6/jQGnUPW6JWv305Tw0FguXs5YjLtgMVhG
- XfmyjjnCxB+jEqg1IF4uXn+SGwv7mPP3gXKepX46dmJfghrHvemEyCJAFjkg+kvaJNuLTfh0yYS
- 9rfYvTcr3ODK+6yRkyUsfPZebfI8IWYHpJFkQTxJq2AJS2gHqGKOjRYjwBply1wsKPc/0cTlWGC
- OXUBUWlaB64BK/8S4kF6TliYbL/Ozaqt1zzNX/EZZ/H3pLzfr2kZScRa4ykcV9qsCCOb6nCTo1Q
- Y2wyt2cG+sTH6yvQhpeK509JepGGZ7ilG9Sw==
-X-Received: by 2002:a05:620a:4002:b0:8d0:3add:30d8 with SMTP id
- af79cd13be357-8d2acc9a31bmr563436385a.52.1775143740642; 
- Thu, 02 Apr 2026 08:29:00 -0700 (PDT)
+ bh=0UyqzTfrtNmu8mlcwq3THfL26yhZKHq1m4GJo51JMRI=;
+ b=iz9jIUFKqiLt/EentIvUjhRtONJbgsU2pLSew0ltdWfh+8J82inW5QCMswCsIcDIsi
+ oncp6k5TJ6bu/5kwHQxEPYWoUEV/ksWDC96RBRCttHQEXrIXIZQwzCu0hr+q2MUd9YBH
+ /JbQDI08IK1YV70Pa24kUC/cy2/F8FPAcMXHZ1drvdAtxfIy/8pmkS6ZNuCexr13G63w
+ cu3SrZMnOZHDI7pbrgSUKbrOd7r6zNswdEyPnfCyKMjB3sqjJzaO0cDP2W/Va4zgJNvV
+ MfAdKxl9tSeBcscDKm1W5URpUQMCUqWY9osTaGb9QX+hHgNOtx+Y+0nG7Hlj9QdRP6Dc
+ zBpQ==
+X-Gm-Message-State: AOJu0Yyf6NK2/S3bgBizNfSyq78XWFJmohwx9wPSbjCVf65bCJ+ixoum
+ GndMHw4LnNgh7fLjX3Ys9utgBtr/bj5xgtYcig0IkpxVlwcrn/Wv9vOAwNLy1kne
+X-Gm-Gg: ATEYQzxoZ4AGLvdJQLy3oGt9sD6aRip3BLjCPjQFRx5jnRjAnW8z6ZBXJYsTk68VBgH
+ kt0YBUnYnyyrLDxyAvA4a8pOvothRdrY753IW2XUZhaLMcr9jPBw52CNdJGGk0XjFJxs75Xy8O3
+ DW0ay467K4sLYlpTSq1OD+kiu+X8fQjF9NM14p3tRkrHLy6Ilj1XhCx9p6MO81qQvH5gSalnx2O
+ 86yEOZjiqKvfeaQElbtV6q4JsST0kTzyz8SMUsx/98NLuGeRZQ4w9iKVzixTFYS84CwX7n8y5/u
+ 3nqMGKaF09lcWW/yzGrZrc1CRR5lWFm9+46l+iZMgSEQqmuiQH7ZkoriJRULwhV01GEsqVITsVz
+ qva0IhEj4ofkCAV1Atom/vfVvngHIP2emc0fQksFpMZVlde7YfntjaeV63YHjN3OgeisxYZoJ16
+ zb8X8bN09lOQU29cDSKD93taQ4gnup38qv8/2jV/cA0rQJ
+X-Received: by 2002:a05:620a:19a4:b0:8cf:db7b:6224 with SMTP id
+ af79cd13be357-8d1b5be0242mr1089003885a.59.1775143743426; 
+ Thu, 02 Apr 2026 08:29:03 -0700 (PDT)
 Received: from cethr-l01.localdomain ([136.56.120.109])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8d2a5393a07sm239037485a.4.2026.04.02.08.29.00
+ af79cd13be357-8d2a5393a07sm239037485a.4.2026.04.02.08.29.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Apr 2026 08:29:00 -0700 (PDT)
+ Thu, 02 Apr 2026 08:29:03 -0700 (PDT)
 From: Caleb Ethridge <jcethrid@gmail.com>
 To: u-boot@lists.denx.de
 Cc: malysagreg@gmail.com, trini@konsulko.com, linux@analog.com,
  philip@philipmolloy.com, Caleb Ethridge <caleb.ethridge@analog.com>
-Subject: [RESEND v2 08/13] mach-sc5xx: sc573: Rename EZKIT board to EZLITE
-Date: Thu,  2 Apr 2026 11:28:31 -0400
-Message-Id: <a69c86d8c65e9243154999e48d12e717998930a3.1775143241.git.jcethrid@gmail.com>
+Subject: [RESEND v2 10/13] mach-sc5xx: Update SPI bootargs for ubifs
+Date: Thu,  2 Apr 2026 11:28:33 -0400
+Message-Id: <7b4a41a72a0fc1b0a6c9b17fe5bbc050bf6c0170.1775143241.git.jcethrid@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1775143241.git.jcethrid@gmail.com>
 References: <cover.1775143241.git.jcethrid@gmail.com>
@@ -101,208 +101,148 @@ X-Virus-Status: Clean
 
 From: Caleb Ethridge <caleb.ethridge@analog.com>
 
-Rename the SC573 EZKIT board to EZLITE across the device tree,
-defconfig, board file, and related Kconfig/Makefile entries to
-match with release naming. EZKIT was used internally before the
-official product release.
+Update the bootargs used in SPI/OSPI bootmode
+to reflect change from jffs to ubifs for the
+SPI's filesystem.
 
 Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
 ---
- arch/arm/dts/Makefile                                     | 2 +-
- arch/arm/dts/{sc573-ezkit.dts => sc573-ezlite.dts}        | 4 ++--
- arch/arm/mach-sc5xx/Kconfig                               | 8 ++++----
- arch/arm/mach-sc5xx/init/dmcinit.c                        | 2 +-
- board/adi/{sc573-ezkit => sc573-ezlite}/Kconfig           | 8 ++++----
- board/adi/{sc573-ezkit => sc573-ezlite}/Makefile          | 2 +-
- .../sc573-ezkit.c => sc573-ezlite/sc573-ezlite.c}         | 0
- .../sc573-ezkit.env => sc573-ezlite/sc573-ezlite.env}     | 0
- configs/{sc573-ezkit_defconfig => sc573-ezlite_defconfig} | 2 +-
- doc/device-tree-bindings/arm/adi/adi,sc5xx.yaml           | 2 +-
- include/configs/{sc573-ezkit.h => sc573-ezlite.h}         | 4 ++--
- 11 files changed, 17 insertions(+), 17 deletions(-)
- rename arch/arm/dts/{sc573-ezkit.dts => sc573-ezlite.dts} (98%)
- rename board/adi/{sc573-ezkit => sc573-ezlite}/Kconfig (92%)
- rename board/adi/{sc573-ezkit => sc573-ezlite}/Makefile (79%)
- rename board/adi/{sc573-ezkit/sc573-ezkit.c => sc573-ezlite/sc573-ezlite.c} (100%)
- rename board/adi/{sc573-ezkit/sc573-ezkit.env => sc573-ezlite/sc573-ezlite.env} (100%)
- rename configs/{sc573-ezkit_defconfig => sc573-ezlite_defconfig} (98%)
- rename include/configs/{sc573-ezkit.h => sc573-ezlite.h} (79%)
+ board/adi/sc573-ezlite/sc573-ezlite.env         | 1 -
+ board/adi/sc584-ezkit/sc584-ezkit.env           | 1 -
+ board/adi/sc589-ezkit/sc589-ezkit.env           | 1 -
+ board/adi/sc589-mini/sc589-mini.env             | 1 -
+ board/adi/sc594-som-ezkit/sc594-som-ezkit.env   | 1 -
+ board/adi/sc594-som-ezlite/sc594-som-ezlite.env | 1 -
+ board/adi/sc598-som-ezkit/sc598-som-ezkit.env   | 1 -
+ board/adi/sc598-som-ezlite/sc598-som-ezlite.env | 1 -
+ include/env/adi/adi_boot.env                    | 5 ++---
+ 9 files changed, 2 insertions(+), 11 deletions(-)
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 82ad3035308..edd3c7574b9 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -1188,7 +1188,7 @@ dtb-$(CONFIG_TARGET_IMX8MM_CL_IOT_GATE_OPTEE) += imx8mm-cl-iot-gate-optee.dtb \
- 					imx8mm-cl-iot-gate-ied-tpm0.dtbo \
- 					imx8mm-cl-iot-gate-ied-tpm1.dtbo
- 
--dtb-$(CONFIG_TARGET_SC573_EZKIT) += sc573-ezkit.dtb
-+dtb-$(CONFIG_TARGET_SC573_EZLITE) += sc573-ezlite.dtb
- dtb-$(CONFIG_TARGET_SC584_EZKIT) += sc584-ezkit.dtb
- dtb-$(CONFIG_TARGET_SC589_MINI) += sc589-mini.dtb
- dtb-$(CONFIG_TARGET_SC589_EZKIT) += sc589-ezkit.dtb
-diff --git a/arch/arm/dts/sc573-ezkit.dts b/arch/arm/dts/sc573-ezlite.dts
-similarity index 98%
-rename from arch/arm/dts/sc573-ezkit.dts
-rename to arch/arm/dts/sc573-ezlite.dts
-index 4a3d1ed5c56..57604d707f7 100644
---- a/arch/arm/dts/sc573-ezkit.dts
-+++ b/arch/arm/dts/sc573-ezlite.dts
-@@ -9,8 +9,8 @@
- #include "sc57x.dtsi"
- 
- / {
--	model = "ADI SC573-EZKIT";
--	compatible = "adi,sc573-ezkit", "adi,sc57x";
-+	model = "ADI SC573-EZLITE";
-+	compatible = "adi,sc573-ezlite", "adi,sc57x";
- };
- 
- &i2c0 {
-diff --git a/arch/arm/mach-sc5xx/Kconfig b/arch/arm/mach-sc5xx/Kconfig
-index cae5e4ea5d6..776a8548117 100644
---- a/arch/arm/mach-sc5xx/Kconfig
-+++ b/arch/arm/mach-sc5xx/Kconfig
-@@ -22,7 +22,7 @@ config SC57X
- 	bool "SC57x series"
- 	select COMMON_CLK_ADI_SC57X
- 	select CPU_V7A
--	select TARGET_SC573_EZKIT
-+	select TARGET_SC573_EZLITE
- 
- config SC58X
- 	bool "SC58x series"
-@@ -49,8 +49,8 @@ endchoice
- 
- if SC57X
- 
--config TARGET_SC573_EZKIT
--	bool "Support SC573-EZKIT"
-+config TARGET_SC573_EZLITE
-+	bool "Support SC573-EZLITE"
- 
- endif
- 
-@@ -598,6 +598,6 @@ source "board/adi/sc594-som-ezlite/Kconfig"
- source "board/adi/sc589-ezkit/Kconfig"
- source "board/adi/sc589-mini/Kconfig"
- source "board/adi/sc584-ezkit/Kconfig"
--source "board/adi/sc573-ezkit/Kconfig"
-+source "board/adi/sc573-ezlite/Kconfig"
- 
- endif
-diff --git a/arch/arm/mach-sc5xx/init/dmcinit.c b/arch/arm/mach-sc5xx/init/dmcinit.c
-index 2bf2cc53a9f..f3d5c11f437 100644
---- a/arch/arm/mach-sc5xx/init/dmcinit.c
-+++ b/arch/arm/mach-sc5xx/init/dmcinit.c
-@@ -101,7 +101,7 @@
- 
- #ifdef CONFIG_TARGET_SC584_EZKIT
- 	#define DMC_PADCTL2_VALUE	0x0078283C
--#elif CONFIG_TARGET_SC573_EZKIT
-+#elif CONFIG_TARGET_SC573_EZLITE
- 	#define DMC_PADCTL2_VALUE	0x00782828
- #elif CONFIG_TARGET_SC589_MINI || CONFIG_TARGET_SC589_EZKIT
- 	#define DMC_PADCTL2_VALUE	0x00783C3C
-diff --git a/board/adi/sc573-ezkit/Kconfig b/board/adi/sc573-ezlite/Kconfig
-similarity index 92%
-rename from board/adi/sc573-ezkit/Kconfig
-rename to board/adi/sc573-ezlite/Kconfig
-index 328563c1296..f3b848ef0f7 100644
---- a/board/adi/sc573-ezkit/Kconfig
-+++ b/board/adi/sc573-ezlite/Kconfig
-@@ -2,19 +2,19 @@
- #
- # (C) Copyright 2024 - Analog Devices, Inc.
- 
--if TARGET_SC573_EZKIT
-+if TARGET_SC573_EZLITE
- 
- config SYS_BOARD
--	default "sc573-ezkit"
-+	default "sc573-ezlite"
- 
- config SYS_CONFIG_NAME
--	default "sc573-ezkit"
-+	default "sc573-ezlite"
- 
- config LDR_CPU
- 	default "ADSP-SC573-0.0"
- 
- config DEFAULT_DEVICE_TREE
--	default "sc573-ezkit"
-+	default "sc573-ezlite"
- 
- config ADI_IMAGE
- 	default "tiny"
-diff --git a/board/adi/sc573-ezkit/Makefile b/board/adi/sc573-ezlite/Makefile
-similarity index 79%
-rename from board/adi/sc573-ezkit/Makefile
-rename to board/adi/sc573-ezlite/Makefile
-index 0ea725b992b..77c55af6240 100644
---- a/board/adi/sc573-ezkit/Makefile
-+++ b/board/adi/sc573-ezlite/Makefile
-@@ -3,4 +3,4 @@
- # (C) Copyright 2025 - Analog Devices, Inc.
- #
- 
--obj-y	+= sc573-ezkit.o
-+obj-y	+= sc573-ezlite.o
-diff --git a/board/adi/sc573-ezkit/sc573-ezkit.c b/board/adi/sc573-ezlite/sc573-ezlite.c
-similarity index 100%
-rename from board/adi/sc573-ezkit/sc573-ezkit.c
-rename to board/adi/sc573-ezlite/sc573-ezlite.c
-diff --git a/board/adi/sc573-ezkit/sc573-ezkit.env b/board/adi/sc573-ezlite/sc573-ezlite.env
-similarity index 100%
-rename from board/adi/sc573-ezkit/sc573-ezkit.env
-rename to board/adi/sc573-ezlite/sc573-ezlite.env
-diff --git a/configs/sc573-ezkit_defconfig b/configs/sc573-ezlite_defconfig
-similarity index 98%
-rename from configs/sc573-ezkit_defconfig
-rename to configs/sc573-ezlite_defconfig
-index 905c22e1f6b..74967cc23af 100644
---- a/configs/sc573-ezkit_defconfig
-+++ b/configs/sc573-ezlite_defconfig
-@@ -45,7 +45,7 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_EMBED=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_USE_HOSTNAME=y
--CONFIG_HOSTNAME="sc573-ezkit"
-+CONFIG_HOSTNAME="sc573-ezlite"
- CONFIG_NET_RETRY_COUNT=20
- CONFIG_IP_DEFRAG=y
- CONFIG_SPL_CLK=y
-diff --git a/doc/device-tree-bindings/arm/adi/adi,sc5xx.yaml b/doc/device-tree-bindings/arm/adi/adi,sc5xx.yaml
-index df976c7ae73..ae3b5e6092a 100644
---- a/doc/device-tree-bindings/arm/adi/adi,sc5xx.yaml
-+++ b/doc/device-tree-bindings/arm/adi/adi,sc5xx.yaml
-@@ -18,7 +18,7 @@ properties:
-     oneOf:
-       - description: SC57X Series Boards
-         items:
--          - const: adi,sc573-ezkit
-+          - const: adi,sc573-ezlite
-           - const: adi,sc57x
- 
-       - description: SC58X Series Boards
-diff --git a/include/configs/sc573-ezkit.h b/include/configs/sc573-ezlite.h
-similarity index 79%
-rename from include/configs/sc573-ezkit.h
-rename to include/configs/sc573-ezlite.h
-index 42e42f8150b..590a8f06fb5 100644
---- a/include/configs/sc573-ezkit.h
-+++ b/include/configs/sc573-ezlite.h
-@@ -3,8 +3,8 @@
+diff --git a/board/adi/sc573-ezlite/sc573-ezlite.env b/board/adi/sc573-ezlite/sc573-ezlite.env
+index 4ee08deb1b3..c909b3b476a 100644
+--- a/board/adi/sc573-ezlite/sc573-ezlite.env
++++ b/board/adi/sc573-ezlite/sc573-ezlite.env
+@@ -3,7 +3,6 @@
   * (C) Copyright 2024 - Analog Devices, Inc.
   */
  
--#ifndef __CONFIG_SC573_EZKIT_H
--#define __CONFIG_SC573_EZKIT_H
-+#ifndef __CONFIG_SC573_EZLITE_H
-+#define __CONFIG_SC573_EZLITE_H
+-jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc573-ezkit.jffs2
+ adi_image_offset=0xd0000
+ loadaddr=CONFIG_SC5XX_LOADADDR
  
- /*
-  * Memory Settings
+diff --git a/board/adi/sc584-ezkit/sc584-ezkit.env b/board/adi/sc584-ezkit/sc584-ezkit.env
+index 20e5ee0eb76..1090d2731a5 100644
+--- a/board/adi/sc584-ezkit/sc584-ezkit.env
++++ b/board/adi/sc584-ezkit/sc584-ezkit.env
+@@ -3,7 +3,6 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
+-jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc584-ezkit.jffs2
+ adi_image_offset=0xd0000
+ loadaddr=CONFIG_SC5XX_LOADADDR
+ 
+diff --git a/board/adi/sc589-ezkit/sc589-ezkit.env b/board/adi/sc589-ezkit/sc589-ezkit.env
+index 6f314542ecc..02567830c16 100644
+--- a/board/adi/sc589-ezkit/sc589-ezkit.env
++++ b/board/adi/sc589-ezkit/sc589-ezkit.env
+@@ -3,7 +3,6 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
+-jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc589-ezkit.jffs2
+ adi_image_offset=0xd0000
+ loadaddr=CONFIG_SC5XX_LOADADDR
+ 
+diff --git a/board/adi/sc589-mini/sc589-mini.env b/board/adi/sc589-mini/sc589-mini.env
+index c5ea555411e..661c130b835 100644
+--- a/board/adi/sc589-mini/sc589-mini.env
++++ b/board/adi/sc589-mini/sc589-mini.env
+@@ -3,7 +3,6 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
+-jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc589-mini.jffs2
+ adi_image_offset=0xd0000
+ loadaddr=CONFIG_SC5XX_LOADADDR
+ 
+diff --git a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
+index 4d86eafe145..f787d972339 100644
+--- a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
++++ b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
+@@ -3,7 +3,6 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
+-jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc594-som-ezkit.jffs2
+ adi_image_offset=0x100000
+ loadaddr=CONFIG_SC5XX_LOADADDR
+ 
+diff --git a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
+index bfce3a9c9b0..9db35ac8d59 100644
+--- a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
++++ b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
+@@ -3,7 +3,6 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
+-jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc594-som-ezlite.jffs2
+ adi_image_offset=0x100000
+ loadaddr=CONFIG_SC5XX_LOADADDR
+ 
+diff --git a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
+index cbc5a57c755..f787d972339 100644
+--- a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
++++ b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
+@@ -3,7 +3,6 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
+-jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc598-som-ezkit.jffs2
+ adi_image_offset=0x100000
+ loadaddr=CONFIG_SC5XX_LOADADDR
+ 
+diff --git a/board/adi/sc598-som-ezlite/sc598-som-ezlite.env b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
+index cbf5d5e60f1..d5364df1613 100644
+--- a/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
++++ b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
+@@ -5,6 +5,5 @@
+ 
+ adi_image_offset=0x100000
+ loadaddr=CONFIG_SC5XX_LOADADDR
+-jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc598-som-ezlite.jffs2
+ 
+ #include <env/adi/adi_boot.env>
+diff --git a/include/env/adi/adi_boot.env b/include/env/adi/adi_boot.env
+index d6caa95325e..046f4f8a410 100644
+--- a/include/env/adi/adi_boot.env
++++ b/include/env/adi/adi_boot.env
+@@ -3,7 +3,6 @@
+  *
+  * - adi_image_offset, location of the fitImage on the SPI flash
+  * - loadaddr, where you want to load things
+- * - jffs2file, name of the jffs2 file for update, ex adsp-sc5xx-tiny-adsp-sc573.jffs2
+  */
+ 
+ #ifdef CONFIG_SC59X_64
+@@ -48,7 +47,7 @@ mmcboot=mmc rescan;
+ #endif
+ 
+ #if defined(USE_SPI)
+-spiargs=setenv bootargs root=/dev/mtdblock4 rw rootfstype=jffs2 ${adi_bootargs}; setenv sfdev CONFIG_SC_BOOT_SPI_BUS:CONFIG_SC_BOOT_SPI_SSEL
++spiargs=setenv bootargs rootfstype=ubifs root=ubi0:rootfs ubi.mtd=3 rw ${adi_bootargs}; setenv sfdev CONFIG_SC_BOOT_SPI_BUS:CONFIG_SC_BOOT_SPI_SSEL
+ spiboot=run spiargs;
+ 	sf probe ${sfdev};
+ 	sf read ${loadaddr} ${adi_image_offset} 0xF00000;
+@@ -56,7 +55,7 @@ spiboot=run spiargs;
+ #endif
+ 
+ #if defined(USE_OSPI)
+-ospiargs=setenv bootargs root=/dev/mtdblock4 rw rootfstype=jffs2 ${adi_bootargs}; setenv sfdev CONFIG_SC_BOOT_OSPI_BUS:CONFIG_SC_BOOT_OSPI_SSEL
++ospiargs=setenv bootargs rootfstype=ubifs root=ubi0:rootfs ubi.mtd=3 rw ${adi_bootargs}; setenv sfdev CONFIG_SC_BOOT_OSPI_BUS:CONFIG_SC_BOOT_OSPI_SSEL
+ ospiboot=run ospiargs;
+ 	sf probe ${sfdev};
+ 	sf read ${loadaddr} ${adi_image_offset} 0xF00000;
 -- 
 2.34.1
 
