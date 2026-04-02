@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8455D6AAF0
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 16:39:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CABCD6AAF2
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 16:40:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32A6B83F8F;
-	Thu,  2 Apr 2026 18:39:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EB69A83F8F;
+	Thu,  2 Apr 2026 18:40:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nMM192nf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Thwv7BcA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86252840F5; Thu,  2 Apr 2026 18:39:40 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 43A82840D8; Thu,  2 Apr 2026 18:40:30 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 859C083F7D
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 18:39:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 225AA83F7D
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 18:40:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-65c0891f4e9so1720396a12.1
- for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 09:39:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775147978; cv=none;
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-b9825ba7e8dso148742866b.3
+ for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 09:40:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775148027; cv=none;
  d=google.com; s=arc-20240605;
- b=XsxbGPnq9r5TReRL5bQkVpNqwgs9GJykcoLUE6vL0Ozt+njcAZw7H3SI8Qt3e9vr0x
- z/T1UY418Q1nUKvgBwaP0j9OVi2JBHjkXmYokxEWZh4GlxkW4Perq124M+q0FtyUEPbs
- 8x+Lj8S30nkZgcurGRfPrY71R4FkPvm4OXBYIKsFHO8FrWKnTK/lhDik3DsAsaRG8cKc
- orLDPReZRcGKo+uKXHKzbmaXKdCsOkG/F8K91IlJLghIeUb5cWGETNiVl09JcyeY+O3r
- ssQCi1db+iGdQvgVrrpj0J8MmPQm0svL/nSG+F0bIeHfDI7cbvDyEFzYDLI3iTp+tVSP
- A6XA==
+ b=M+YLNqHRYcFl+4X71PExObb0FAnEwwgup7HgqUPrZexWswE8q3s80r+XuoxAOlSjP+
+ VDgOwuxvRnrEB7UkuM50pk9DopVF3w1dx090ofg/6S6QcMfpWEj1Ups6Lu9e1QoJHFwd
+ M4dPFqovr/WwgAwVpIluzFoLMb+4rtwI15WZa4ZZe4zPaMU0haRjyRX36TyOo1X716/C
+ 2KnPU5bWel7HdW3H3DwaPm0njOz9ZmHVcb4eJ/LKSiWw4J++yonBYT5Rp5J/83GTpOWJ
+ cdZ8HEVFQ5bIZPgKJbIAp/JVNM9wuH04JRkEDJYmWPXUtyTXI3ZHPnIXQdqDN+SZuJ0q
+ MF7A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
- bh=Vw8tbd8h1gywUx+ZTV8KeTqgt/I1qUtF4J1DcUQUDGI=;
- fh=eKQCGjpYGCu1+wIlNspHoX8z2CU2UfWMTQ6onZW+Ic4=;
- b=g8EVtheMl4XQehXNKuNrnNjpQ+gT9oLXkouGodDbKfw0MUozJIAtQ5tq0SUUblQgZc
- J+SE4Vn/tqa2ykLwgrVXq+8TUeey81UyM0epmj99X0y6rZHOJEa5DC9lp4cGVLzTQ2VB
- 8OXlaEwTePBYRLKAadV9LWrvvFJS+CMnsbaIef0aIAFYejfEmaOAQjMys2KvzgsItgCl
- POqnfze0fraiTsKpEgCnB0dShrRkQbR6NYGnMEFHB9eCpSaBB5koV8bPYw5ervO4JaT0
- qcwIHRSmFdcdRZpK4WJcwFrum/1FE31ghEe1I02npuu1m7idiy71exNcwHZyiJaCBn05
- Aexg==; darn=lists.denx.de
+ bh=qOOIOJ7IDlU1o5dIGb8MLtNEFdGrYIJCU4x3knRrqdY=;
+ fh=0S+1xXUw/FuoKwRrebf8NjIdk6t+qE/l9BmETFX4MN8=;
+ b=CGHzbHwjvjTJr66ryLVZFjXM2xwcelOQxg/8SNvH0yXnL7JEJ/Xi3ReJgnu/zB3ENS
+ x2lvFGJLyPb04q1vU2sk4tk9DjBSJfB10PRl/87YE2w2/6+n3wPjjiN6hXD7jzaUR91k
+ 6u1FetDZcS6CxqjS/8byq2hTiVAAKty81UNWCycSJNeNm9fiICW8ZDWT/bdk6nqE16po
+ JrAh/TyE542TOBbqrQ5C2a3VPSSAZKyFQIA7oMeqdhwreVFVg+Lv3Bqucmrs74ljCD4M
+ HTkrC/mYLtbcdBvgvBUU8VcgHeojqeAof+ktF26V9+hzCCIBKaXLBIy8liaaX9ou36xR
+ tcpg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775147978; x=1775752778; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775148027; x=1775752827; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
  :date:message-id:reply-to;
- bh=Vw8tbd8h1gywUx+ZTV8KeTqgt/I1qUtF4J1DcUQUDGI=;
- b=nMM192nfH+Lvl4DIsyNaJQ7yajw9NBidOSeMm6Wih6xd0QkWc1StfWZ73ycvNdCqsp
- DrPzRVcX4D8R+cI4mA2dv0UxaI64EX0bjVzXBWwMNzJVgB4JBR43/DsCEAx2Ri+7v7sX
- j0ikRTnR/coxkl5vWzOZLqokD7gcI/d8EU+Hk=
+ bh=qOOIOJ7IDlU1o5dIGb8MLtNEFdGrYIJCU4x3knRrqdY=;
+ b=Thwv7BcAsl/OXJHqOt2zgWsju2hGDB82XUWMilpD/5xl2Pni1aRFzED93gQvkvp3Q5
+ lWkDqCH4hyEEPAWBrgjoWH1bfifZPrHcPx1Fn/ZbhoQrnemY+grbNWt+bAx1iveZHrgz
+ mXjNBUb+RKVbzb93HadGAwX56kirgGhSq+RXA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775147978; x=1775752778;
+ d=1e100.net; s=20251104; t=1775148027; x=1775752827;
  h=cc:to:subject:message-id:date:from:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Vw8tbd8h1gywUx+ZTV8KeTqgt/I1qUtF4J1DcUQUDGI=;
- b=YuPtmIzhdTIUWhQRf7exdw9ZGezRSlC/C+DLsBEylydX4INUzzd+stVwWc7POn0ID5
- L3Chk1jrcpNNQHArQWYqUDpVPhVsoZnXfzKncLUZtlILP3lrUuUS61yfB0o4bqw/8vJl
- 9yV5uP1hT6pt+ATlTg/qqdqoiIJsD1e17e1NnSMMoWpddqyRE/iQkHznkOeoRKRWNRtH
- zafUewrKLPnr1C1xnLs+N8T5GccnZCOJlUQiwAA7cQWhntsCzLW/AYAldUUFZ64tNQW8
- fIfRsMxApOw2DBz5Bv598MeH2hjlTGItaXmn1V9Cs3cABEvYaoeEJWRspzxz3Yil+Vz1
- UWEw==
+ bh=qOOIOJ7IDlU1o5dIGb8MLtNEFdGrYIJCU4x3knRrqdY=;
+ b=P5ezfzWOQ0oJy3g1d5vyPthTlBLFKNXLMg+8igqM0ILsm2LUd8VET6V1yqiAqQWIsf
+ mS1UZBgkfsOt6kodjFOtuXnlbeTInxSaXHtTyB5o2sx9aO9az27vJiN92o5CQCbpCYLD
+ xGOdkwxz9FEWVwC1tr+amHpb3hakFsebwunS6uS9jVwnvykFmoZINRmInT2BcyCCSXq5
+ lNSMh6PQB0RHTsbbWPFolwTgzv7IroY6d0Y4KNnPuDqTrvkkBTnW/X4Gz5xVteCugw4c
+ xMoe+wwbJasgIs6Nxpp2Hyybz0E0JUZAvAIQzw0EED1OO8OPC1/Y1yMVDK3x/p2OjjMO
+ DWZQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXmFxNkk2dB/OUCTuvI3aE7l6HE55ahmkHs8wRTSUpoiITy1yb2jaFbC6Ipf5z8dt9aLRtmyJ0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyA1yuwucO8Xdr8IyIsec1hY8MefJZbLCUN8WBFmxq6NAz2XwMY
- twAB3PCK80PZWfQgX7s/Zv659keENAlnajYaye/iZny+zAJFhaaaVJkwr8DwXhLBeFShkWthy89
- Vx3d7n2xIU1TeQmtEXhjGZJE5vmXgoKVMTc1LHN/C
-X-Gm-Gg: AeBDiev9eelVOIhonpw+MfQZRUY3i2v10cj+iImOEReZMwm9k9Ju9icfDTSvFDzGZDn
- 4jpkea1/NjMH37wSeR8Qb1NInCk0gVIUAWcddDlO4h03z+CPXMz5IV9KxYxmXXIqHKZVv8YC+3R
- T04Q2yLLwFQLoxoPKeTdIaukDf01TTQx1bzexvPjUt9ZVnoEcbA0JzhJWf6a9ExtHpxAqc6kcVG
- 2MUcr08RxLJirbjqsVFB161wyOvM/GUgwIlI/1VyUOni8NIJ65qgZT5b/sPS4pJIo4yogHwTOhy
- SDQWOZhuQFiuzf01
-X-Received: by 2002:a17:906:4912:b0:b98:695:ec53 with SMTP id
- a640c23a62f3a-b9c138c110amr426113266b.18.1775147977705; Thu, 02 Apr 2026
- 09:39:37 -0700 (PDT)
+ AJvYcCWk2SsTeD07oNc+fyCcMQ4k1YnASvcgA2OxcxCUJl/fzixPjlSwQD/Tbfn+gIgsgIOgll3igtk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwP1OoZIa09gnWFhzx3BoSHDQoQYNO9DGqvX6Z0Y8kRjyb7vl2Y
+ NFia32EZS7UAcYbnKnnXthjCZ+Tw79rlm7ManV7bJvbAYd7/uJxjm7+TZsM9Vf/wuHDdD54iAxH
+ N3OqjInIefvSNGix36y0KMsvF/ttSgDQfiHpP6/fN
+X-Gm-Gg: ATEYQzxtbQT37jzDahC1iaSu4k8aadie86nW4GQ/lcYnPHUYGCZtFcA8WsTb3K9CoVu
+ lW2xIgCsyilagoeCu+yX2Ep9ILnRaBVo1czojS1Xcngr7Ak93ayGTPmhZwJaza9KzooIctEtgMs
+ GxenLDDo4uNUEHe9oeSrIEmNqXU6LgUFrQEorENAM29yLI11xXy1LMa02rWXXxiaywx/s1Yx2jM
+ pqpWIdsjLww/LKNagcPa+hJkki4COkD95vGzAhTfM8EEyBra+Intyn7v/dOSl5KMU+c8YyXoeWP
+ H4E8vs/OTHoMwb4Z
+X-Received: by 2002:a17:907:d40b:b0:b97:acca:fcf6 with SMTP id
+ a640c23a62f3a-b9c139105eamr521236266b.23.1775148027456; Thu, 02 Apr 2026
+ 09:40:27 -0700 (PDT)
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Apr 2026 10:39:26 -0600
-X-Gm-Features: AQROBzCICW749bLfp2o3VwFXNjDZ0szojRC2Bv-M08kXUSgV7u3zG6cqEUh-I14
-Message-ID: <CAFLszTiODuyubCxA6YLg419+grHFhX_u3opd5fJUgg8h0+-Fng@mail.gmail.com>
-Subject: Re: [3/4] tools: mkimage: add dm-verity Merkle-tree generation
+Date: Thu, 2 Apr 2026 10:40:15 -0600
+X-Gm-Features: AQROBzDb4Hzi7k3DOLQY4kT7sl5c54kizu7JXnC4JPN8Z6p3U52mjDeuQVSVY30
+Message-ID: <CAFLszTi-H==WCgpJPgnATQ=HK9=azYF-p3KmpqjNcDH4Qz91XA@mail.gmail.com>
+Subject: Re: [4/4] doc: fit: add dm-verity boot parameter documentation
 To: Daniel Golle <daniel@makrotopia.org>
 Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
  Kory Maincent <kory.maincent@bootlin.com>, Simon Glass <sjg@chromium.org>, 
@@ -124,87 +124,61 @@ X-Virus-Status: Clean
 Hi Daniel,
 
 On 2026-04-02T03:08:27, Daniel Golle <daniel@makrotopia.org> wrote:
-> tools: mkimage: add dm-verity Merkle-tree generation
-> tools: mkimage: add dm-verity Merkle-tree generation
+> doc: fit: add dm-verity boot parameter documentation
+> doc: fit: add dm-verity boot parameter documentation
 >
-> When mkimage encounters a dm-verity subnode inside a component image
-> node it now automatically invokes veritysetup(8) with --no-superblock
-> to generate the Merkle hash tree, screen-scrapes the Root hash and Salt
-> from the tool output, and writes the computed properties back into the
-> FIT blob.
+> Add documentation for CONFIG_FIT_VERITY which allows U-Boot to
+> construct dm-mod.create= and dm-mod.waitfor= kernel command-line
+> parameters from dm-verity metadata embedded in FIT filesystem
+> sub-images.
 >
-> The user only needs to specify algorithm, data-block-size, and
-> hash-block-size in the ITS; mkimage fills in digest, salt,
-> num-data-blocks, and hash-start-block.  Because --no-superblock is
-> used, hash-start-block equals num-data-blocks with no off-by-one.
+> The new document covers the relationship between FIT loadable indices
+> and the /dev/fitN block devices that the Linux uImage.FIT block driver
+> creates, provides a complete .its example with a dm-verity-protected
+> SquashFS root filesystem, describes all required and optional dm-verity
+> subnode properties and explains how mkimage generates the verity
+> metadata automatically.
 >
-> The image data property is replaced with the expanded content (original
-> data followed directly by the hash tree) so that subsequent hash and
-> signature subnodes operate on the complete image.
+> dm-verity is only supported for external-data FIT images (mkimage -E);
+> mkimage aborts with an error if the flag is omitted.
 >
-> fit_image_add_verification_data() is restructured into two passes:
-> dm-verity first (may grow data), then hashes and signatures.
-> [...]
+> Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 
-> diff --git a/tools/image-host.c b/tools/image-host.c
-> @@ -626,6 +657,301 @@ int fit_image_cipher_data(...)
-> + * The expanded data (original + verity superblock + hash tree) is returned
-
-Since --no-superblock is passed to veritysetup, the output contains no
-superblock. The docstring should say "original data + hash tree" to
-match the actual behaviour.
-
-> diff --git a/tools/image-host.c b/tools/image-host.c
-> @@ -24,6 +26,35 @@
-> +static int fit_hex2bin(uint8_t *dst, const char *src, size_t count)
-> +{
-> +     while (count--) {
-> +             int hi, lo;
-> +             char c;
+> diff --git a/doc/usage/fit/dm-verity.rst b/doc/usage/fit/dm-verity.rst
+> @@ -0,0 +1,279 @@
+> +Below is a minimal ``.its`` file showing a kernel and a dm-verity-protected
+> +root filesystem packaged as a FIT. Only the three user-provided properties
+> +(``algo``, ``data-block-size``, ``hash-block-size``) are included; ``mkimage``
+> +computes and fills in ``digest``, ``salt``, ``num-data-blocks``, and
+> +``hash-start-block`` automatically (see `Generating verity metadata`_ below)::
 > +
-> +             c = *src++;
-> +             hi = (c >= '0' && c <= '9') ? c - '0' :
-> +                  (c >= 'a' && c <= 'f') ? c - 'a' + 10 :
-> +                  (c >= 'A' && c <= 'F') ? c - 'A' + 10 : -1;
+> +                dm-verity {
+> +                    data-block-size = <4096>;
+> +                    hash-block-size = <4096>;
+> +                    num-data-blocks = <3762>;
+> +                    hash-start-block = <3762>;
+> +                    algo = "sha256";
+> +                    digest = [8e 67 91 63 7f 93 cb b8 ...];
+> +                    salt = [aa 7b 11 f8 db 8f e2 e5 ...];
+> +                };
 
-There is an existing hex2bin() in include/hexdump.h - is that easily
-available to host tools?
+The text says only the three user-provided properties are included,
+but the example shows all properties including the computed ones.
+Please can you either:
 
-> diff --git a/tools/image-host.c b/tools/image-host.c
-> @@ -626,6 +657,301 @@ int fit_image_cipher_data(...)
-> +     int data_block_size, hash_block_size;
-> +     size_t num_data_blocks, hash_offset;
+- Show a minimal .its with only algo, data-block-size, and
+hash-block-size (matching what the user actually writes), or
+- Add a note that this is the output after mkimage processing and show
+the minimal input separately.
 
-num_data_blocks is size_t here but is later passed to
-fdt_setprop_u32(). On 64-bit hosts with images larger than 2TB (at
-512-byte blocks) this would silently truncate. Please can you either
-use uint32_t with an explicit overflow check, or add a check that
-(data_size / data_block_size) fits in 32 bits.
+> diff --git a/doc/usage/fit/dm-verity.rst b/doc/usage/fit/dm-verity.rst
+> @@ -0,0 +1,279 @@
+> +4. Reads back the expanded file (original data + verity superblock +
+> +   Merkle hash tree) and replaces the image's ``data`` property.
 
-> diff --git a/tools/image-host.c b/tools/image-host.c
-> @@ -626,6 +657,301 @@ int fit_image_cipher_data(...)
-> +     if (data_block_size < 512 || hash_block_size < 512) {
-> +             fprintf(stderr,
-> +                     "Invalid block sizes in dm-verity node of '%s'\n",
-> +                     image_name);
-> +             return -EINVAL;
-> +     }
-
-dm-verity requires block sizes to be powers of two. veritysetup will
-reject non-power-of-two values, but a clearer error from mkimage would
-help users. Please can you add a power-of-2 check here, something
-like:
-
-    if (data_block_size & (data_block_size - 1))
-
-> diff --git a/tools/fit_image.c b/tools/fit_image.c
-> @@ -470,6 +486,62 @@ static int fit_write_images(...)
-> +     /* Copy path -- FDT shifts after delprop */
-> +     snprintf(vfile_buf, sizeof(vfile_buf), "%s", vfile);
-> +     fdt_delprop(fdt, vn, "verity-data-file");
-
-Other uses of fdt_delprop() in this file check the return value -
-please do so here too.
+This contradicts the note at line 264-265 which correctly states that
+--no-superblock is used. Please can you remove the reference to the
+superblock here, since the code passes --no-superblock to veritysetup.
 
 Regards,
 Simon
