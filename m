@@ -4,94 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 049D5D6AB09
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 20:24:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BA26D6AB14
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 20:51:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68C3183D8A;
-	Thu,  2 Apr 2026 22:24:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B079D839DF;
+	Thu,  2 Apr 2026 22:51:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KbJEXU19";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pYw6wbzV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80BB083DC9; Thu,  2 Apr 2026 22:24:44 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A0CF483D8A; Thu,  2 Apr 2026 22:51:09 +0200 (CEST)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8255980212
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 22:24:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C60380212
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 22:51:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-b8f9568e074so207914566b.0
- for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 13:24:42 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775161482; cv=none;
- d=google.com; s=arc-20240605;
- b=i5Ej4wq5ZyEsSPmaOn3kXzKMMnquBuAh33NTwBtRDFizQ9qij2qiZFnELDiyBvkRMP
- VB7iWpA6/rHShJuzqcqAYreGA7CfuLbRwP/LNG7Kvq5howylsYCCtHTznqrBm75wGPH1
- rK4LIzPBMGOPl1Qlf3FN44B7LXrQ9qdB3f5OM0DVr3PkqHbD9W5qRTqgj4JERX8vuWdK
- zYguHUYONYobwPZP2Nqq3AybPSX+7o6bUp8XZ0wqa8rriDZ9plG7TC9Q9re0DECJAHke
- pCQu7DeK492kAz3jP18+ttU+44KXAKQ0STJ20ZgJ7cJu+fll6GHCsg/Lc6kqQe7ubjUP
- KXJQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=A/IVzdy4KnUfxB8L61O3vChwtKLyw3gQPvNXVcR2uWc=;
- fh=OvkrsbZBeB/Exy9J8o1bIukOuopxQoc+fHCwVReHlG8=;
- b=JY0RdhW+W5UBA1j03HTFyKY4caDOQsXGiZbhDkHw5nXYizUgBQo7i3yP9IPqFwcrG8
- mgW5BrN4K5B9msxgimwAs1/XEXm4YfDpiypCxXVb2VFjFoQBB+iQ1ivoa7FjPxvkwKwt
- Mi045mdd73/mj/zdhC3BIufn0koJObHxqIG1dcNV5/1Hznfqr8CvPlWrjtnSSaZrR6/S
- PXWkYU3s2g82H7bMEZ+l6conmHVZYhSwb4BpnpfG/iJcSKw9WOyIbcP5+cKQuxDR5pgI
- AN4TAA2+k2IrvjmvmsiF9ScjWSWjDenyXPwSSVCxKpJmLvXC7+aWJ++VeTSDULIwq0uf
- RdWg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775161482; x=1775766282; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=A/IVzdy4KnUfxB8L61O3vChwtKLyw3gQPvNXVcR2uWc=;
- b=KbJEXU19STxN/L70hTeVYDjHZiJGxhwFd0Ct39Jzy6ZgcCfJ7qtx+klAZoJMIIH3BJ
- xz2nkE0Rz5tNDGfR8w97+EB9BCHPSCnEqszhcAY1BnnRCwg/alDGPOH8KOYm729I9u14
- TsEw1CnwuxxdQwr7oFQm840v6Qily748rvvEI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775161482; x=1775766282;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=A/IVzdy4KnUfxB8L61O3vChwtKLyw3gQPvNXVcR2uWc=;
- b=a6Sr7GyPEuIrkD7RYAJWAUw4cH5mfPtNE3UuHaGRlI30TjD/ITTcgYhci89gSHT9tR
- M+F4yH7kkvLPQjljgVAq/gM4LAYhl2SFilSYbYtsZJ6OJIWA8hrdtU6HvjPa962kdSEB
- u0r74D7cy5LUS01Am/M1IGr+147hsoZkAfR1LZVakn87DIv+NAbBvKsQL7E8YLJDV1bd
- TEatO/oetfHnpsZ4mi+qVhMtO2mob80mu4XzkxaCjJfe6OGszoWq8MZCvQ6sbP3gBa8Q
- bm45XOt/8buMPMay+FrraJ2S1elC2tcIwl9y/SC0LbU+5FPc4FzE4Zs2hDa5dTZQ8orY
- YsvQ==
-X-Gm-Message-State: AOJu0YxvbOaII26o5Bw7QE9omM6aN6s700KXc1dstXNADotIzVrhh78A
- nke1OyAPM/4wenbteLN143LKW0hoyw+aVPVWyqcjd1iwX/YAJnqqoUlIL7L4I2wsVmm1wjnN6aO
- qHGebLV3+P1+sccl/j4smTaHEq5+5hrueXTil5iFW
-X-Gm-Gg: AeBDieszWFqfzgRFEgpc44pNK5qfrMC2eiJWW6fOshGe2KeApwAabqxhLdkhypEI8Lx
- LXMDRv6goG0BTADDeoB0bBpl3GACQBCN0iXxiie6Hf3SrnHbseGMnpsT9nSULghziOc+nvHnHpO
- fM6vnuDQaI09ZKdDxhGEJBzWi5KODCwIWfSa3oIT7JiMZGtu2j9m4JxeeHD9vJG517lwPBfp+EI
- vc1taXaEeYWrmLIO4k5wQxywr5BvvQnhwhT6L+G1ekOBlMqAd9tMi/+NSeCTt0sP7q44bllx4O9
- zWcCiA==
-X-Received: by 2002:a17:907:3f90:b0:b96:d904:9616 with SMTP id
- a640c23a62f3a-b9c679f0458mr13694166b.40.1775161481664; Thu, 02 Apr 2026
- 13:24:41 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=op8l8KSmNkar+BCSD1HX4ebh069LTgkOZj1qfIu9wXp0CMfcM0DpntUE+nZRlRogb0oz8pj8UC3HfPWZItUeJ6QjIFUvnm3Bulpn8ok1Pkxsib4u6xH0Su2xqozBCsZZx36//3Oc39mhhlXAKQr9kw5G3zXL5mYWK3y1+OJvXRkcoZv6KxVZ5K6ebClvO+0uu6tOTxtp8/7qhCFBY6r5bzJAgaQk2TP/qqTFgOXdOmqxu1xbMbf7IWdiMRGGbHTOBT07YzEgD/R1cnk/qWbkiZiEaVjuUj2ce/Szdp9dEQ2tBHiv2/scZJW2J+qc0+FvOBSqJ+mviuR78qHhGlHhwA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qPcdR6OSWBwSx+ineRTuwyCiZ31zPl1luX9VYddn5w8=;
+ b=zO2arXZQeBd+OHJoscjXIx7ooPTEscuv4YKkaHML6JJcjIt3pIBS/kGSe76F/va/Ok9PH25AEKpifIUTohfXxCLGX433hWTNBjmg5a9JaKztcCx769t+veFWgQjbZGdTm7saP5bYvq/FHAHR92DF+q6WsB/zJFJvm+CvADk8D+bk7jGKgtFdM9nyCiVosdwHobqDND7EErG9ykp0PIRedkGQ2zB1Kuz/SKmG/HRk4hmi3jPPnfmYF9/aH5ZvnbObkOKO4q9wwdcHlV7aw9S6T6b+mKTKK2Tzs1C7f4MWIJABSUQk0LVChH41SBm0N49gMBfo15tsutKnw+MCYlCM9Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qPcdR6OSWBwSx+ineRTuwyCiZ31zPl1luX9VYddn5w8=;
+ b=pYw6wbzVuO72D3DcL+O/N0Os+nI30aejiMQoOvQ1mBSCmeq6mPAaC8+qJBnlgwiHhpQSpe/vNjLKHatvR4fNPMSW+pjd4LzI+hCt8dVY5r+GckRwwUb66yGdLVjT+YYER+/468vXLlyGgnOUGS3IbgXl4yjR1XY+mki+DdoAqUM=
+Received: from SJ0PR03CA0149.namprd03.prod.outlook.com (2603:10b6:a03:33c::34)
+ by IA1PR10MB7216.namprd10.prod.outlook.com (2603:10b6:208:3f0::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.19; Thu, 2 Apr
+ 2026 20:51:01 +0000
+Received: from SJ1PEPF000026C6.namprd04.prod.outlook.com
+ (2603:10b6:a03:33c:cafe::66) by SJ0PR03CA0149.outlook.office365.com
+ (2603:10b6:a03:33c::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.29 via Frontend Transport; Thu,
+ 2 Apr 2026 20:51:01 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ SJ1PEPF000026C6.mail.protection.outlook.com (10.167.244.103) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9769.17 via Frontend Transport; Thu, 2 Apr 2026 20:51:00 +0000
+Received: from DLEE210.ent.ti.com (157.170.170.112) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 2 Apr
+ 2026 15:51:00 -0500
+Received: from DLEE211.ent.ti.com (157.170.170.113) by DLEE210.ent.ti.com
+ (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 2 Apr
+ 2026 15:51:00 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 2 Apr 2026 15:51:00 -0500
+Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.39])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 632Kp0bN2708543;
+ Thu, 2 Apr 2026 15:51:00 -0500
+From: <rs@ti.com>
+To: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
+ <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
+ <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
+ <ilias.apalodimas@linaro.org>
+CC: <u-boot@lists.denx.de>
+Subject: [PATCHv2 0/5] various memory related fixups
+Date: Thu, 2 Apr 2026 15:50:33 -0500
+Message-ID: <20260402205038.4005350-1-rs@ti.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-References: <20260323083928.1928856-1-ravi@prevas.dk>
-In-Reply-To: <20260323083928.1928856-1-ravi@prevas.dk>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Apr 2026 14:24:28 -0600
-X-Gm-Features: AQROBzBrV1PpswE_btYkEbiYB1NqUqBFuztBj5yDC2SHUkg1jV1uXjRLtLnrjfc
-Message-ID: <CAFLszTjR7sAcgDH_bOZ-zV42PESY9vhe3PRDGeHKXnvOfJk6jw@mail.gmail.com>
-Subject: Re: [PATCH] linker_lists.h: drop never used ll_start, ll_end macros
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000026C6:EE_|IA1PR10MB7216:EE_
+X-MS-Office365-Filtering-Correlation-Id: bb388cab-c32b-49c8-35f4-08de90f98c6f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|82310400026|36860700016|1800799024|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: rwwmOqQJssmN6z+5sb5BKdQG6KIyq2ka/rGI+YMcRQS9Gt6C4qW7C8fMdQ55O5ofJfVENSqArnXiuyltKUoYgqJPwnXIUFKdkmdA6lDHVVO++h4eNKo/eBo52nJ06Da4gkdxsgd+L+99CmSIyfSYpnQZ5BFpNHBYeN3I6KlsjTAuK20N2ypHoRoiawp+fWUrcOWsxDd3rNhtZV6YT+Rp6xvxBjjKif/cGBbvCmInpg/8MtDkgTqVGPBRlEh7QWdgEHWCtZMnkfJvhAREnyB/vbakJabnVE7E+4PrRVwndLzqwk55qgto39Lg9ij4VLhxyPkltSljEiuEl+W+oPLO+grsiNtNa3oZ79j4LvgWAOGyl8glKUAC+bIcIGBf/sO+MJQ4sHBWoemZu2hhKpG1KAEuykkXMZIdBrJXcgXVjhNv/3VoIY3LzRikk1pH7wVoLfh0Rofcv2Nrz0mFYS2zOzifvZXhHE1n7yiQrBLvI8fuHJ8YY6X5dMEu+5v4TXeF3RWkhp2SHEhvYs8wfmGawoserx5Y9zWUCjpvwHDIkTDv+LfWWr6+yXc4CPNaVDXZx7e4DrZHJlJisqzHorqQ2mfwzZu51hdC+laYEyha/YAClABxfQ6f2O+TwvGPRhqBBv0s7aYvs5oFoVVDMQJCizvg4mgcRXhhze/WPed4asU57//eG8MjOt/pTR+izl7HmeBkBblJb/IQe7CB5RoBXqMkpoijdM+LfPbovPo+zH+75r837jqd6WmSni8DzcG62VB6jGrXFuLKgsSwrFZqY67sSqTeRYHxL72aJCJOTqs=
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(36860700016)(1800799024)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: g384IzTfC18/Yel6InVGzemAcjivAZr8Lzy6/iGlFzLPAjjrN451Ec97a/GeSCZDA4bnEAIBp1AM/uvdLWCVY8MqzZrxBIea1gpXSBme9tx34SAl6liy2uKJ+/k7Q3pR2Lz84SKMtrvGsXq4Qr/MdetxtaufDYf8ieKWd9sCTHtb97u3Fb2VLczeTSOfd9KXisOmN9wo810W55QjuO9G72K5NPOKSpVvo8WyDA67KgJ8iNf5tCEM4Gflsz143cLpQW4B7Jfbs6QjEEsXpEiA4TE0JhgLg1oatg/8QQGuDD8ziTuHHOQrW/VRaVGXHKf7rFBXUMAwM1WXhia4QSdMbOb+ADU9KCIK2Vpu1qr3sHRqHWdGaMwlpQdtaPYAIYaykc2ctQktez9LgWO4LGmVrNjHt8kM3dZIkEqLejiq3FFHGu6SemuKa/O1Xj0QnugB
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2026 20:51:00.9325 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: bb388cab-c32b-49c8-35f4-08de90f98c6f
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000026C6.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB7216
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,24 +132,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-03-23T08:39:28, Rasmus Villemoes <ravi@prevas.dk> wrote:
-> linker_lists.h: drop never used ll_start, ll_end macros
-> linker_lists.h: drop never used ll_start, ll_end macros
->
-> These macros have AFAICT never been used at all. It's also far from
-> clear what purpose it could serve - for one thing, what _type would
-> one pass, other than void perhaps? The example using "struct
-> my_sub_cmd" seems misplaced, as how could one know that the first
-> linker list consists of those, and moreover, how would one know how
-> many there are?
->
-> The linker list concept is fragile enough on its own, there is no need
-> to have unused functionality lying around that may or may not bitrot
-> and certainly will confuse readers of linker_lists.h.
->
-> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
->
-> include/linker_lists.h | 50 --------------------------------------------------
->  1 file changed, 50 deletions(-)
+From: Randolph Sapp <rs@ti.com>
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Nitpicks and fixes from the discovery thread on adding PocketBeagle2 support
+[1]. This does a lot of general setup required for the device, but these
+modifications themselves aren't device specific. For those specifically
+interested in PocketBeagle2 support and don't care about these details, my
+development branch is public [2].
+
+That first patch may provoke some opinions, but honestly if that warning was
+still present I wouldn't have spent a week poking holes in both the EFI and LMB
+allocations systems. Please let me know if there is a specific usecase that it
+breaks though.
+
+[1] https://lore.kernel.org/all/DHHC66BBMD27.YHGIH43C6XBK@ti.com/
+[2] https://github.com/StaticRocket/u-boot/tree/feature/pocketbeagle2
+
+v2:
+	- Remove additional increment and decrement in lmb_free_fdt_regions
+	- Drop the patch to backfill EFI_CONVENTIONAL_MEMORY
+	- Adjust the removal loop nitpick patch description
+	- Change the reserve memory patch to use new end_addr_sp
+
+Randolph Sapp (5):
+  lmb: add LMB_FDT for fdt reserved regions
+  efi_dt_fixup: use fdtdec_get_bool
+  efi_selftest_memory: check for duplicates first
+  efi_mem_sort: skip unnecessary compare
+  memory: reserve from start_addr_sp to end_addr_sp
+
+ boot/image-fdt.c                       |  5 +-
+ common/board_f.c                       |  9 +++-
+ include/asm-generic/global_data.h      |  6 +++
+ include/lmb.h                          |  7 +++
+ lib/efi_loader/efi_dt_fixup.c          |  3 +-
+ lib/efi_loader/efi_memory.c            |  6 +--
+ lib/efi_selftest/efi_selftest_memory.c | 21 ++++----
+ lib/lmb.c                              | 66 +++++++++++++-------------
+ 8 files changed, 71 insertions(+), 52 deletions(-)
+
+-- 
+2.53.0
+
