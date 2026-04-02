@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ADA1CC6B3E
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 15:03:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FF6FD3943C
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 15:03:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6021840AA;
+	by phobos.denx.de (Postfix) with ESMTP id E974B840D8;
 	Thu,  2 Apr 2026 17:03:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A35C83D8A; Thu,  2 Apr 2026 05:51:53 +0200 (CEST)
-Received: from inva021.nxp.com (inva021.nxp.com [92.121.34.21])
+ id 079A683D8A; Thu,  2 Apr 2026 05:51:56 +0200 (CEST)
+Received: from inva020.nxp.com (inva020.nxp.com [92.121.34.13])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C51C80212
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 05:51:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F6BA839DF
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 05:51:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=chunguang.li_2@nxp.com
-Received: from inva021.nxp.com (localhost [127.0.0.1])
- by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id CD4582008E5;
- Thu,  2 Apr 2026 05:51:50 +0200 (CEST)
+Received: from inva020.nxp.com (localhost [127.0.0.1])
+ by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id DF4851A08BA;
+ Thu,  2 Apr 2026 05:51:53 +0200 (CEST)
 Received: from aprdc01srsp001v.ap-rdc01.nxp.com
  (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
- by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 985F22008DA;
- Thu,  2 Apr 2026 05:51:50 +0200 (CEST)
+ by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id A8D0F1A0751;
+ Thu,  2 Apr 2026 05:51:53 +0200 (CEST)
 Received: from bjse.cn-bjs01.nxp.com (bjse.cn-bjs01.nxp.com [10.193.20.96])
- by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id DFA4B1800097;
- Thu,  2 Apr 2026 11:51:48 +0800 (+08)
+ by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id 9D41B1800092;
+ Thu,  2 Apr 2026 11:51:51 +0800 (+08)
 From: chunguang.li_2@nxp.com
 To: trini@konsulko.com,
 	meenakshi.aggarwal@nxp.com,
@@ -40,9 +40,9 @@ Cc: chunguang.li_2@nxp.com, ioana.ciornei@nxp.com,
  florinlaurentiu.chiculita@nxp.com, u-boot@lists.denx.de,
  mingkai.hu@nxp.com, Zhiqiang.Hou@nxp.com, pramod.kumar_1@nxp.com,
  camelia.groza@nxp.com, priyanka.jain@nxp.com, wasim.khan@nxp.com
-Subject: [PATCH v2 2/4] ls1043a: add env variables to assist boot
-Date: Thu,  2 Apr 2026 11:51:30 +0800
-Message-ID: <20260402035132.1706521-2-chunguang.li_2@nxp.com>
+Subject: [PATCH v2 3/4] ls1046a: add env variables to assist boot
+Date: Thu,  2 Apr 2026 11:51:31 +0800
+Message-ID: <20260402035132.1706521-3-chunguang.li_2@nxp.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260402035132.1706521-1-chunguang.li_2@nxp.com>
 References: <20260402035132.1706521-1-chunguang.li_2@nxp.com>
@@ -67,38 +67,57 @@ X-Virus-Status: Clean
 
 From: Chunguang Li <chunguang.li_2@nxp.com>
 
-Add LS1043ARDB-specific variables to assist the boot process,
-and update the related common and LS1043AQDS settings accordingly.
+Add LS1046ARDB-specific variables to assist the boot flow,
+and update the related common and other LS1046A board settings
+accordingly.
 
 Signed-off-by: Chunguang Li <chunguang.li_2@nxp.com>
 ---
 v2:
  - Fix formatting.
- - Update description.
+ - Update the description.
 
- include/configs/ls1043a_common.h |  2 +-
- include/configs/ls1043aqds.h     |  5 +++++
- include/configs/ls1043ardb.h     | 10 ++++++++++
- 3 files changed, 16 insertions(+), 1 deletion(-)
+ include/configs/ls1046a_common.h |  2 +-
+ include/configs/ls1046afrwy.h    |  6 ++++++
+ include/configs/ls1046aqds.h     |  5 +++++
+ include/configs/ls1046ardb.h     | 10 ++++++++++
+ 4 files changed, 22 insertions(+), 1 deletion(-)
 
-diff --git a/include/configs/ls1043a_common.h b/include/configs/ls1043a_common.h
-index d82502d628e..e2412936b71 100644
---- a/include/configs/ls1043a_common.h
-+++ b/include/configs/ls1043a_common.h
-@@ -88,7 +88,7 @@
- #include <config_distro_bootcmd.h>
- 
+diff --git a/include/configs/ls1046a_common.h b/include/configs/ls1046a_common.h
+index 8666aff0f33..e99c677f2d1 100644
+--- a/include/configs/ls1046a_common.h
++++ b/include/configs/ls1046a_common.h
+@@ -83,7 +83,7 @@
+ #endif
+ #ifndef SPL_NO_MISC
  /* Initial environment variables */
 -#define CFG_EXTRA_ENV_SETTINGS		\
-+#define EXTRA_ENV_SETTINGS              \
++#define EXTRA_ENV_SETTINGS         \
  	"hwconfig=fsl_ddr:bank_intlv=auto\0"	\
- 	"fdt_high=0xffffffffffffffff\0"		\
- 	"initrd_high=0xffffffffffffffff\0"	\
-diff --git a/include/configs/ls1043aqds.h b/include/configs/ls1043aqds.h
-index 7ccbb20bf2e..c06e986e93f 100644
---- a/include/configs/ls1043aqds.h
-+++ b/include/configs/ls1043aqds.h
-@@ -295,6 +295,11 @@
+ 	"ramdisk_addr=0x800000\0"		\
+ 	"ramdisk_size=0x2000000\0"		\
+diff --git a/include/configs/ls1046afrwy.h b/include/configs/ls1046afrwy.h
+index 21804fc6654..07846c3bd25 100644
+--- a/include/configs/ls1046afrwy.h
++++ b/include/configs/ls1046afrwy.h
+@@ -70,6 +70,12 @@
+ /*
+  * Environment
+  */
++#ifndef SPL_NO_MISC
++/* Initial environment variables */
++#define CFG_EXTRA_ENV_SETTINGS      \
++	EXTRA_ENV_SETTINGS
++#endif
++
+ #define CFG_SYS_FSL_QSPI_BASE	0x40000000
+ 
+ #undef BOOT_TARGET_DEVICES
+diff --git a/include/configs/ls1046aqds.h b/include/configs/ls1046aqds.h
+index 4b4bd7cbe48..001118b8504 100644
+--- a/include/configs/ls1046aqds.h
++++ b/include/configs/ls1046aqds.h
+@@ -312,6 +312,11 @@
  /*
   * Environment
   */
@@ -108,27 +127,27 @@ index 7ccbb20bf2e..c06e986e93f 100644
 +	EXTRA_ENV_SETTINGS
 +#endif
  
- #include <asm/fsl_secure_boot.h>
- 
-diff --git a/include/configs/ls1043ardb.h b/include/configs/ls1043ardb.h
-index ef8fdc1912b..90caf8a1371 100644
---- a/include/configs/ls1043ardb.h
-+++ b/include/configs/ls1043ardb.h
-@@ -201,4 +201,14 @@
+ #ifdef CONFIG_TFABOOT
+ #define IFC_NAND_BOOTCOMMAND "run distro_bootcmd; run nand_bootcmd; "	\
+diff --git a/include/configs/ls1046ardb.h b/include/configs/ls1046ardb.h
+index b2a8bd5cf8a..dfe5270142d 100644
+--- a/include/configs/ls1046ardb.h
++++ b/include/configs/ls1046ardb.h
+@@ -132,4 +132,14 @@
  
  #include <asm/fsl_secure_boot.h>
  
 +#ifndef SPL_NO_MISC
 +/* Initial environment variables */
 +#define CFG_EXTRA_ENV_SETTINGS      \
-+	EXTRA_ENV_SETTINGS              \
-+	"board=ls1043ardb\0"            \
-+	"fdtfile=fsl-ls1043a-rdb-sdk.dtb\0"    \
++	EXTRA_ENV_SETTINGS				\
++	"board=ls1046ardb\0"            \
++	"fdtfile=fsl-ls1046a-rdb-sdk.dtb\0"     \
 +	"image=Image\0"					\
 +	"console_dbg=earlycon=uart8250,mmio,0x21c0500\0"
 +#endif
 +
- #endif /* __LS1043ARDB_H__ */
+ #endif /* __LS1046ARDB_H__ */
 -- 
 2.34.1
 
