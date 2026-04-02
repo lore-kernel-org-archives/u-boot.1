@@ -4,91 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDD9BD7309B
-	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 04:52:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B51E2D7309B
+	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 04:52:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DABD5840B0;
-	Fri,  3 Apr 2026 06:52:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2789C840F1;
+	Fri,  3 Apr 2026 06:52:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RIAZU/aJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YT7zBqzu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 608428408D; Thu,  2 Apr 2026 19:14:13 +0200 (CEST)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
+ id C62A983D8A; Thu,  2 Apr 2026 21:43:34 +0200 (CEST)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C81B83F7D
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 19:14:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 44A7480212
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 21:43:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jzhang918@gmail.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-8cbb6d5f780so121124085a.1
- for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 10:14:10 -0700 (PDT)
+ spf=pass smtp.mailfrom=visitorckw@gmail.com
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-82ce09b61beso617886b3a.0
+ for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 12:43:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1775150050; x=1775754850; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3sBCQC9Afuk0QIW6oH50X7J6BE7QPiz4KuoEJb7iW8M=;
- b=RIAZU/aJMUNY+IcIGv7WGxWlG1Ft5dwJOTrFcKsEcKfnoRIcZpAUc+v+4KBeoh0IZa
- CGJWuELT91kA2UZrknXZx9ewV1pXRS2B4eMRSS4rqw8J4/Uxow6Pc6B6dkoaYbVYfCVv
- ecHgMJGm0GCuns5TnRiHu6NbuwB0DqTyxuQw703JGhefAYTmojeSsf0FghkIKzF2Lkt6
- jkv6mONyHmNT6oH6jKykDAG0LywZc6xFYiBgbz2jMVqn5FuVQTB8pQrZAtE9bwKVEWKn
- f9bci8cy5W60MFYbIDYoffeW5XEB5yHzxGXXoG7u6Rdauhpu1w1tGD7n4z9/5CMYjVQa
- pZCQ==
+ d=gmail.com; s=20251104; t=1775159011; x=1775763811; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=YooiDk+MBi0fFonVp+HBxgIK6iDDTGbZY8IzDHoaVlc=;
+ b=YT7zBqzu6iyasaTrMf2aznRJYnUPHgvnhlfYbig2upHMRUpRQJzBVGWINN6eG9JNyG
+ ICAvJPW2Ljji3QXJdx1hRIfsOuxGrjdDk17CaT8jXDuu42Ct8VkCBJw/lqdJ56kr61pX
+ 7avqss54vJy07emmn97NBSQI4pBW7etXlM97ADuye5EIuKm3xvuGhlHZjNNcioOFyf4G
+ xNKdvYIVyfi8m0hqNLvPIap7Keczb966K2qCWsP+Hr6+Sr+k8q/s0WJlznzG4hK3qPy2
+ XSGIF3HgVUaYTuZs+BgiEuElqrRJS6hMu8dxuY65jBcDsnzG5YK0PM9wL3h1JK+Q6tpv
+ fXDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775150050; x=1775754850;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=3sBCQC9Afuk0QIW6oH50X7J6BE7QPiz4KuoEJb7iW8M=;
- b=oNA+d1f0GJZsemcdEL4kSZwtxwtDXsnVG9nL3RbOMEcajmTubT6gRb+ZO1z3Dn6wzw
- sVdHPgNL9qW34EDQhO3qYYBgAwHf6Y2S6LBixsygn2swe4FngTP8tpXRZITnfNYdoVpF
- iQVLhpoVjoXXzAIPr8eVB56enE1MOlDv6sKlqGUBk7Iwp8wsfHF6It4SkDCAuU2ePFzc
- gVqqUbFfG3dXKB9EJCTM1pMmp2xuUjbXIPLWxmoZ+p47yjYcnHEm8vIoTMzdTKKZUsvp
- ThJEGeM3vYEoY45v5Cv6FPTIAJFlQDRTM7mzCZxRwSgfuMfun7sWZvtvXsYkuoUsGCCz
- 4dLQ==
-X-Gm-Message-State: AOJu0Yzf0Xk05+Z2fCC/pvhYjSIsOx+UgbmDWMkzCmG7MxXz4YWx/2z4
- Ki0l5ABti4NDOl8+PGhY+2536gihU5XvXXil9v1nWKZr+IbDbrOZlOlUp7LcWx38
-X-Gm-Gg: AeBDievdseDAVsRrzkG1QoifT64dRbIKCv4fgHJ57zGx8954mRw7uydP1+WXLpCO5uv
- Rs8nWpSS+8u5Nr5Rpv+JgXC2FaA4SN5H50pUffinTMhTIhayRnn6bKUGspfe05zPrR7yZpBwSsL
- JmSNRzEyycBbI9uNqaFVVAgKYxN9e/q2o2Yl/KJMtYULPLCE18HQUFA4Wchs4weIR3ixgsJXvRd
- 4oHJyiFLHm2utO6aEXmdGf1+4yxli6Q3L4dgEKVnN3Jch7C8P/xPxS4kIGaG3+uU3CEc3pVA7JV
- ZOJF26db54aM5D8jy4w8pifz2ghrMFNzjSQwHIVRv262GUDI/EqasTNgvTE/rHpNhGSg4xtRqbr
- Momz/jsnFmPigZYxbiZkPthvKxOu/P6Vnle98BRQiQaNaGYNu7hA3Dl/eo66ifrMlUUmQrCF95Z
- pKNp459CPnkat2nXOsQ9Sm801okEx0RV7fGsnSk9eBjnqb77+7BJWTb4J5tno7uvnS
-X-Received: by 2002:a05:6214:4791:b0:896:fbdd:ef14 with SMTP id
- 6a1803df08f44-8a436d1d409mr114752576d6.12.1775150049737; 
- Thu, 02 Apr 2026 10:14:09 -0700 (PDT)
-Received: from P5510 (h96-61-12-172.cntcnh.broadband.dynamic.tds.net.
- [96.61.12.172]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8a5977e00b4sm27112226d6.47.2026.04.02.10.14.08
+ d=1e100.net; s=20251104; t=1775159011; x=1775763811;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YooiDk+MBi0fFonVp+HBxgIK6iDDTGbZY8IzDHoaVlc=;
+ b=tDqJ3rmGlec7MAesvgsU1LnedBr9c9RTPuQg/e3Ldht0g4IBujpU9w+9y4f22DIFcZ
+ 0Pkgek1YBKp4mAGY+SQfU+/yGVlaJuDQ+i9uKszyuo0oo78f/VahC65/Dfvdm7U7ji6z
+ PJFwxyz202dxwxudHZ87bDBNo9z/kmTNYYw13Xcxcg53Jfb1jlnnbuVGC4jtGWvyV0YU
+ WITWIyBSLFxkL7NGoNCSzJHIhdgdfCXQBHXvNVnp7CmY+Aat0GGhf+XuZpgEQ2F41fAD
+ c7fj4pSopa78WcXNV1cAVxEJdB5x9Cdy9AW3ZTT4eNq7MHXsovr7FMOSrjagI7WmhoU1
+ QUew==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX7SLl4DQ4hVVbqeYcwuWr9ZJbvGHGmUlQLDhi28Rb5RhSiVLTQei+hfdemtOX97/DSamYRo0A=@lists.denx.de
+X-Gm-Message-State: AOJu0YyJLMIPW2annomWYuI+Fq4qooC6LbbHXBtHAyp7M1n6aYHN2Dcw
+ TU79GgsASjoB8dGaMCpx4pQhGUKhLR2975gdDcCkD1nwNcUca86quPVJZJyymA==
+X-Gm-Gg: ATEYQzxvxYjgazR8bUYff+8NnXkzBdWmmneAFd8sRf30yvxj3+1wpaJy/QnZtqgYqR1
+ kaMTtANRic1JOhHzu/GL9FDAlawq1h2g7T8ishQKAOzAszjRMfJCAMhy4mTOmad32Vx5y/aqx+S
+ c9qFysjVb+5Ptc2iRZYrJHbkR9NjmarHLAMsjaGEDLipi/vX8caWNqiaF9qjx5hucrEWDvjBXqF
+ BQnMZETX5nmVSf/95oGbQjvGdms1m7XUJkVqoodl+eF8FWe0IAqry0yCGxo7ikvCU6wAKJxaJ9k
+ 7wgJZcZiMQCR20md1sqQckn46t24QVNwVxfp2Wb3SFEzwCjkZkiDT6IudV72iovLeNnjB8pp5eI
+ 2d7V1lgW75XJ1+Jdt7DwvuOwFUhduTTQ34lgsDLiVpopG1VGO+n3MWBJoAZeGFeefV/99obwgC2
+ U24lSBxP2e8bZVLqifA7DXb5lNOFQgvIa4DA==
+X-Received: by 2002:a05:6a00:3316:b0:823:9e5:855e with SMTP id
+ d2e1a72fcca58-82d0d74799bmr435031b3a.0.1775159010625; 
+ Thu, 02 Apr 2026 12:43:30 -0700 (PDT)
+Received: from google.com ([118.150.148.19]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-82cf9c706f7sm3899972b3a.47.2026.04.02.12.43.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Apr 2026 10:14:09 -0700 (PDT)
-From: Jie Zhang <jzhang918@gmail.com>
-To: u-boot@lists.denx.de
-Cc: jzhang918@gmail.com, Jie Zhang <jie.zhang@analog.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Tom Rini <trini@konsulko.com>, Caleb Ethridge <caleb.ethridge@analog.com>,
- Ozan Durgut <ozan.durgut@analog.com>,
- Philip Molloy <philip.molloy@analog.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>, linux@analog.com
-Subject: [PATCH 1/1] arm: dts: add/fix I2C controllers for sc5xx
-Date: Thu,  2 Apr 2026 13:13:16 -0400
-Message-ID: <20260402171330.165754-2-jzhang918@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260402171330.165754-1-jzhang918@gmail.com>
-References: <20260402171330.165754-1-jzhang918@gmail.com>
+ Thu, 02 Apr 2026 12:43:30 -0700 (PDT)
+Date: Fri, 3 Apr 2026 03:43:27 +0800
+From: Kuan-Wei Chiu <visitorckw@gmail.com>
+To: Daniel Palmer <daniel@0x0f.com>
+Cc: angelo@kernel-space.org, bmeng.cn@gmail.com, laurent@vivier.eu,
+ u-boot@lists.denx.de
+Subject: Re: [RFC PATCH 2/3] virtio: mmio: endian *fixes* *HACK*
+Message-ID: <ac7G35VDs5TV4GCP@google.com>
+References: <20260310135940.1756141-1-daniel@thingy.jp>
+ <20260310135940.1756141-3-daniel@thingy.jp>
+ <CAFr9PXn3abM6DcbfJBBbokBtQ02XrfK66jVtjCGo8+_V-mtkzw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAFr9PXn3abM6DcbfJBBbokBtQ02XrfK66jVtjCGo8+_V-mtkzw@mail.gmail.com>
 X-Mailman-Approved-At: Fri, 03 Apr 2026 06:52:30 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,228 +101,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jie Zhang <jie.zhang@analog.com>
+Hi Daniel,
 
-sc59x processors have 6 I2C controllers, but their devicetrees
-currently have only 3. The length of its register block should
-be 0x100 instead of 0x1000. All I2C nodes should be disabled in
-sc5xx.dtsi. They can be enabled in board devicetree files if
-they are used on the boards. Add missing I2C controllers and
-fix the above issues.
+On Sat, Mar 14, 2026 at 05:53:17PM +0900, Daniel Palmer wrote:
+> Hi all,
+> 
+> On Tue, 10 Mar 2026 at 23:01, Daniel Palmer <daniel@thingy.jp> wrote:
+> >
+> > From: Daniel Palmer <daniel@0x0f.com>
+> >
+> > This is an attempt to *fix* virtio mmio on the QEMU m68k virt machine.
+> > As far as I can tell all of the registers in the virtio mmio regions
+> > should be little endian so after reading them they need to be converted
+> > to big endian for the code to work on them? other parts of the code
+> > are also doing endian conversion so I'm not sure.
+> >
+> > Or QEMU is incorrectly giving big endian register values?
+> > ---
+> 
+> I have a patch for this in my Linux tree too so I sent that:
+> https://lore.kernel.org/lkml/20260314030612.1949420-1-daniel@thingy.jp/T/#mab66837bb90c30916fd0fc066245bdeb9918e96c
+> It would seem our versions of readl(), writel() etc are broken. For
+> Linux the nommu versions are broken, for u-boot it seems they are all
+> broken. By broken I mean they should be expecting a little endian
+> value from the access and then converting to the CPU endian. (I think)
+> 
 
-Signed-off-by: Jie Zhang <jie.zhang@analog.com>
----
- arch/arm/dts/sc573-ezlite.dts    |  2 ++
- arch/arm/dts/sc584-ezkit.dts     |  2 ++
- arch/arm/dts/sc589-ezkit.dts     |  2 ++
- arch/arm/dts/sc594-som.dtsi      | 13 +++++++++++++
- arch/arm/dts/sc598-som-revD.dtsi |  2 ++
- arch/arm/dts/sc598-som-revE.dtsi |  2 ++
- arch/arm/dts/sc598-som.dtsi      | 12 ++++++++++++
- arch/arm/dts/sc59x.dtsi          | 30 ++++++++++++++++++++++++++++++
- arch/arm/dts/sc5xx.dtsi          | 12 ++++++------
- 9 files changed, 71 insertions(+), 6 deletions(-)
+Sorry for the late reply.
 
-diff --git a/arch/arm/dts/sc573-ezlite.dts b/arch/arm/dts/sc573-ezlite.dts
-index 57604d707f7..f128c4f9697 100644
---- a/arch/arm/dts/sc573-ezlite.dts
-+++ b/arch/arm/dts/sc573-ezlite.dts
-@@ -14,6 +14,8 @@
- };
- 
- &i2c0 {
-+	status = "okay";
-+
- 	gpio_expander0: mcp23017@21 {
- 		compatible = "microchip,mcp23017";
- 		reg = <0x21>;
-diff --git a/arch/arm/dts/sc584-ezkit.dts b/arch/arm/dts/sc584-ezkit.dts
-index 176faa50672..3a6d60b3f29 100644
---- a/arch/arm/dts/sc584-ezkit.dts
-+++ b/arch/arm/dts/sc584-ezkit.dts
-@@ -13,6 +13,8 @@
- };
- 
- &i2c2 {
-+	status = "okay";
-+
- 	gpio_expander0: mcp23017@21 {
- 		compatible = "microchip,mcp23017";
- 		reg = <0x21>;
-diff --git a/arch/arm/dts/sc589-ezkit.dts b/arch/arm/dts/sc589-ezkit.dts
-index d8eb5b6f8fe..04ad8e44cbb 100644
---- a/arch/arm/dts/sc589-ezkit.dts
-+++ b/arch/arm/dts/sc589-ezkit.dts
-@@ -17,6 +17,8 @@
- &i2c0 {
- 	#address-cells = <1>;
- 	#size-cells = <0>;
-+	status = "okay";
-+
- 	gpio_expander0: mcp23017@21 {
- 		compatible = "microchip,mcp23017";
- 		reg = <0x21>;
-diff --git a/arch/arm/dts/sc594-som.dtsi b/arch/arm/dts/sc594-som.dtsi
-index 1c2adc601dd..c4373aea60f 100644
---- a/arch/arm/dts/sc594-som.dtsi
-+++ b/arch/arm/dts/sc594-som.dtsi
-@@ -79,6 +79,7 @@
- 
- &i2c2 {
- 	clocks = <&clk ADSP_SC594_CLK_CGU0_SCLK0>;
-+	status = "okay";
- 
- 	som_gpio_expander: mcp23017@21 {
- 		compatible = "microchip,mcp23017";
-@@ -153,6 +154,18 @@
- 	};
- };
- 
-+&i2c3 {
-+	clocks = <&clk ADSP_SC594_CLK_CGU0_SCLK0>;
-+};
-+
-+&i2c4 {
-+	clocks = <&clk ADSP_SC594_CLK_CGU0_SCLK0>;
-+};
-+
-+&i2c5 {
-+	clocks = <&clk ADSP_SC594_CLK_CGU0_SCLK0>;
-+};
-+
- &ospi {
- 	status = "okay";
- 
-diff --git a/arch/arm/dts/sc598-som-revD.dtsi b/arch/arm/dts/sc598-som-revD.dtsi
-index 26e272966ff..06d550b8532 100644
---- a/arch/arm/dts/sc598-som-revD.dtsi
-+++ b/arch/arm/dts/sc598-som-revD.dtsi
-@@ -8,6 +8,8 @@
- #include "sc598-som.dtsi"
- 
- &i2c2 {
-+	status = "okay";
-+
- 	som_gpio_expander: mcp23018@20 {
- 		compatible = "microchip,mcp23018";
- 		reg = <0x20>;
-diff --git a/arch/arm/dts/sc598-som-revE.dtsi b/arch/arm/dts/sc598-som-revE.dtsi
-index bec504102e7..1f48d52109b 100644
---- a/arch/arm/dts/sc598-som-revE.dtsi
-+++ b/arch/arm/dts/sc598-som-revE.dtsi
-@@ -8,6 +8,8 @@
- #include "sc598-som.dtsi"
- 
- &i2c2 {
-+	status = "okay";
-+
- 	som_gpio_expander: adp5587@34 {
- 		compatible = "adi,adp5587";
- 		reg = <0x34>;
-diff --git a/arch/arm/dts/sc598-som.dtsi b/arch/arm/dts/sc598-som.dtsi
-index bc212ef25cb..ac1f24c86c3 100644
---- a/arch/arm/dts/sc598-som.dtsi
-+++ b/arch/arm/dts/sc598-som.dtsi
-@@ -138,6 +138,18 @@
- 	clocks = <&clk ADSP_SC598_CLK_CGU0_SCLK0>;
- };
- 
-+&i2c3 {
-+	clocks = <&clk ADSP_SC598_CLK_CGU0_SCLK0>;
-+};
-+
-+&i2c4 {
-+	clocks = <&clk ADSP_SC598_CLK_CGU0_SCLK0>;
-+};
-+
-+&i2c5 {
-+	clocks = <&clk ADSP_SC598_CLK_CGU0_SCLK0>;
-+};
-+
- &spi2 {
- 	clocks = <&clk ADSP_SC598_CLK_SPI>;
- };
-diff --git a/arch/arm/dts/sc59x.dtsi b/arch/arm/dts/sc59x.dtsi
-index ff279cca2d1..64e5a1afc53 100644
---- a/arch/arm/dts/sc59x.dtsi
-+++ b/arch/arm/dts/sc59x.dtsi
-@@ -86,6 +86,36 @@
- 			pinctrl-0 = <&usb0_default>;
- 			status = "disabled";
- 		};
-+
-+		i2c3: i2c3@31001000 {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			compatible = "adi-i2c";
-+			reg = <0x31001000 0x100>;
-+			clock-names = "i2c";
-+			status = "disabled";
-+			bootph-pre-ram;
-+		};
-+
-+		i2c4: i2c4@31001100 {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			compatible = "adi-i2c";
-+			reg = <0x31001100 0x100>;
-+			clock-names = "i2c";
-+			status = "disabled";
-+			bootph-pre-ram;
-+		};
-+
-+		i2c5: i2c5@31001200 {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			compatible = "adi-i2c";
-+			reg = <0x31001200 0x100>;
-+			clock-names = "i2c";
-+			status = "disabled";
-+			bootph-pre-ram;
-+		};
- 	};
- };
- 
-diff --git a/arch/arm/dts/sc5xx.dtsi b/arch/arm/dts/sc5xx.dtsi
-index 072631e34f7..b821deddda7 100644
---- a/arch/arm/dts/sc5xx.dtsi
-+++ b/arch/arm/dts/sc5xx.dtsi
-@@ -140,9 +140,9 @@
- 			#address-cells = <1>;
- 			#size-cells = <0>;
- 			compatible = "adi-i2c";
--			reg = <0x31001400 0x1000>;
-+			reg = <0x31001400 0x100>;
- 			clock-names = "i2c";
--			status = "okay";
-+			status = "disabled";
- 			bootph-pre-ram;
- 		};
- 
-@@ -150,9 +150,9 @@
- 			#address-cells = <1>;
- 			#size-cells = <0>;
- 			compatible = "adi-i2c";
--			reg = <0x31001500 0x1000>;
-+			reg = <0x31001500 0x100>;
- 			clock-names = "i2c";
--			status = "okay";
-+			status = "disabled";
- 			bootph-pre-ram;
- 		};
- 
-@@ -160,9 +160,9 @@
- 			#address-cells = <1>;
- 			#size-cells = <0>;
- 			compatible = "adi-i2c";
--			reg = <0x31001600 0x1000>;
-+			reg = <0x31001600 0x100>;
- 			clock-names = "i2c";
--			status = "okay";
-+			status = "disabled";
- 			bootph-pre-ram;
- 		};
- 	};
--- 
-2.53.0
+So it sounds like we have to fix all the broken readl/writel() in both
+Linux and U-Boot first.
 
+For U-Boot, I think we need the following fix? (totally untested yet)
+
+diff --git a/arch/m68k/include/asm/io.h b/arch/m68k/include/asm/io.h
+index 35ad4a1c044..0106a57a03e 100644
+--- a/arch/m68k/include/asm/io.h
++++ b/arch/m68k/include/asm/io.h
+@@ -31,10 +31,10 @@
+ #define writew(b,addr)         ((*(volatile u16 *) (addr)) = (b))
+ #define writel(b,addr)         ((*(volatile u32 *) (addr)) = (b))
+ #else
+-#define readw(addr)            in_be16((volatile u16 *)(addr))
+-#define readl(addr)            in_be32((volatile u32 *)(addr))
+-#define writew(b,addr)         out_be16((volatile u16 *)(addr),(b))
+-#define writel(b,addr)         out_be32((volatile u32 *)(addr),(b))
++#define readw(addr)            in_le16((volatile u16 *)(addr))
++#define readl(addr)            in_le32((volatile u32 *)(addr))
++#define writew(b,addr)         out_le16((volatile u16 *)(addr),(b))
++#define writel(b,addr)         out_le32((volatile u32 *)(addr),(b))
+ #endif
+
+ /*
+
+
+Regards,
+Kuan-Wei
