@@ -4,77 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B602D6AAEC
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 18:46:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17496D6AAEC
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 18:46:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B966B840BE;
-	Thu,  2 Apr 2026 20:46:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7E9F383D8A;
+	Thu,  2 Apr 2026 20:46:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C5nj1e5p";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fQYDhcIz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45EC583F7D; Thu,  2 Apr 2026 20:46:03 +0200 (CEST)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id 76DFC84099; Thu,  2 Apr 2026 20:46:04 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8411E83F7D
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 20:45:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 048DB83CF5
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 20:46:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-4670676ba03so462675b6e.1
- for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 11:45:59 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7d744d9acbeso485071a34.1
+ for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 11:46:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1775155558; x=1775760358; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1775155560; x=1775760360; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=MFLwPfE09uOQ2yblcu9hYunZuhGfzr1Z/aNLVENL1b0=;
- b=C5nj1e5p8DJvo2Zjux74QY0n8g5pgNGGcBUpBkCTSDQORtT573owFcQ05RFkHXan7M
- F3iBIdQeTJj/lvUiv3C/oAdTIKxalsnaZsyYpLw1TrmudMYQxN8xL7XPhw+0qEsHHU24
- CUlhMtcQagnEJKTEyg+/roMKxhDOgUCFU6kTQ=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=imOIsDEI1LuedJfO9LCO10gRNRxuLRbTwvS3zQYfoaA=;
+ b=fQYDhcIzGOPfSw4ODtwfG3uwWT2KVP8NLQJA5uBkhd1oa27lyLyTAQfXDg2IQSDiqB
+ eQHFi7vfBvlHKdUiFGZyyka1wS/v5MqnMoFrNlApL1lap0REQojzW3xj+vDkXvATH+Kj
+ XM5iYekQ8pBZ95PNl8vsHYfCsiH5dINv5a6RU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775155558; x=1775760358;
+ d=1e100.net; s=20251104; t=1775155560; x=1775760360;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=MFLwPfE09uOQ2yblcu9hYunZuhGfzr1Z/aNLVENL1b0=;
- b=pheYK07JVGg1OBbU67g/uNerSa4BENRC289D4lBBQcl+IB+cduBT24ONZn/9UyGUIr
- DIYSCoQxi4eiLHfdz3QF1cBdrtdC/ObTu0SJx4uDA0RBxpDNnrybJjX9mAhX3nxZc2nI
- WG+lgQ1DST7ersqw/+pY2WpwFna37VGzzrkoi53cDXoOQCajp3UXHey8uRm3cZHDBh40
- A/IwvrQF8f6WPXmI2bZhk6oly9JDmkaEgeqQY10iN4wZyo75f57js2/4wX+F529HuX4p
- SenCgRMP86GH2U1/K6iLenjgso9fhe9MzvI0cEKMdBtpZW+Cb9orCZ15BgtmY9W8OZmS
- 6/zw==
-X-Gm-Message-State: AOJu0YzPDTV8DWLpv5cVOPuOmBvvuXJw0Obmh1jErQGjfdaPMFPaqCIR
- Eau/qybL9H9WFLeVGmCaMfGTtlJs3XMoYFBPABO71iCspYUe3doPEcQryn+8HA/UvrLPJMwnpoi
- oKYTGKNw=
-X-Gm-Gg: ATEYQzyNmkk+EkEM8xQGx4OAxLWUio9u9jkWYQGa8htAufrgRK9pB+RUqZNknkGLBM3
- g0vxUvrTGrh/LbpOEohABa5WE+nIVTinOE+N5iuZ1ICOjVXQzq2ZCSV7kaqwINXxhrmyOlImO+I
- UcfxUwNUjwRQwSKokkTAN0VIomyY6pLgnK/F0lzstsbLgXAlPMNBMD0QURjWPUUrPVEpCsOCa/7
- d3A/LbjaOTCbhdajOFD5DAA2mL6Gvxf/BtyxS8H0wanM3Hx4C/FsyRPDMVCbgdp6AV3JzbjGBYP
- YPmN0e7RsB5hn1YOzSVAPvrKu06S4W8YJOGZoH5+uoWML/9YeYxxkljHzIehB1u8g6PnvoL0nPP
- o9ocyIq5IK+VIrVivnjPT2HOMKAYykYrBxtfXge4ckEhZps2h5BkjbX/Wpysvg4WTtcSvI8g8Bw
- eYLdh/0dsiTXxw2E2NVhrBsSu2XT0Dtoii3A4sFjFJuHfkPEEh98yY1U85C6iadTxuiBtBs6GLt
- OyD5DddjEf9LtVhkkHdFCA8vWbWzYCEW5GmTaMsv24x6IeIQvUAgSSDjQ==
-X-Received: by 2002:a05:6808:221e:b0:467:455d:a86d with SMTP id
- 5614622812f47-46ef57fbea3mr278022b6e.13.1775155558204; 
- Thu, 02 Apr 2026 11:45:58 -0700 (PDT)
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=imOIsDEI1LuedJfO9LCO10gRNRxuLRbTwvS3zQYfoaA=;
+ b=jGdrPtlaxhpCBBVU4oJY3FVT+lKE0g+emSOzdY1+4r7St42LZ7K5LIGlfJNHPct3lu
+ 7/qjtcysUoMzl69DwkX8BTbDraHVBfsWRrNHmuqWC2KiNaRBDiEjxVRSevECIQkRERL4
+ 48LhDUWhfRNBtHEuF7uvI8oyUrQZuJ3Uec5buEdWQV8cwSD0dPS+9kfc2w3E4EClNa98
+ S/Ni015y0hL65tPedEM1ZFQlAuaYWHdvfaaVWeVlGQ9NRExvGuoYfLsqtBU4G7bMA18F
+ WWbY71byWYW/xuxVOgd5+EPkgDnNanMjw0vB4eYPymHX9MI7zxUg3d6WhRsRqpvuT4TU
+ nTKg==
+X-Gm-Message-State: AOJu0YwzK3KKqpIMrA4Kk4hcgUT5+F6X2XU1VDvow6uFqqO0bv4e+MTX
+ 9eWCp2lavQQS/Xi6TFK0/0EqA6+4DqUb4ocs8P41IakUZMwOvyGA2J1acqs7/zYCqlY=
+X-Gm-Gg: ATEYQzzH+Dlom/R8kph6LzKSWwQtYC860WQObws9m0AhiRp9fRanmeahtzNxvCiy0jW
+ C2GuDDhS4RsnvwVW8guumerhHIJV3Amr6HJLiTJdvtM9rEfGplDa5jKJVQobDLRM+Pu01m8HYgc
+ xR4tqXmR6P1gUidBtcZa8T8BVbxwoozLH7mI9XAA8+jZ/OsBMijVgXjUPPSXLT5Y5rE9UNnDxxH
+ 2Hj87JDVE/o9tc97NQR1vRt22o+R5/4pUKDtLYNReXwqSYpavIjDptfMiFZT59pCpYXrJxnix64
+ F+noCI4gyvD4i7zVbmvG9ghkwW8pgwjHojqB12NIJRFXLThXANH6g2W3JZrRhoN4g5CJlkx0DXs
+ 933qDbRdu+62cNuOCqUYn+Bx52Iwrnjcrg3LmrPCTwfYQp37bHHoEVkFafi7aTknYZ4pi9PXrdz
+ pWmqEnhqKSRQhpw+Scyhjhw53udT9keZKNUeroZCqnhTejXaqUCgFplw1Y8EP0nqoQI/8H3RbQ+
+ DTVvkxNskTzldt/a5vNYU/0OnKcD4VfjPKT0rU085KUqLEARzMwHW6L6A==
+X-Received: by 2002:a05:6808:4f64:b0:467:1c9e:2121 with SMTP id
+ 5614622812f47-46ef4f07163mr277735b6e.1.1775155559626; 
+ Thu, 02 Apr 2026 11:45:59 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-46d9044725dsm2085830b6e.8.2026.04.02.11.45.57
+ 5614622812f47-46d9044725dsm2085830b6e.8.2026.04.02.11.45.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Apr 2026 11:45:57 -0700 (PDT)
+ Thu, 02 Apr 2026 11:45:58 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20260319163336.1679890-1-trini@konsulko.com>
-References: <20260319163336.1679890-1-trini@konsulko.com>
-Subject: Re: [PATCH] serial: pl011: Remove legacy serial driver options
-Message-Id: <177515555746.1935668.6882882310761307231.b4-ty@konsulko.com>
-Date: Thu, 02 Apr 2026 12:45:57 -0600
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Anshul Dalal <anshuld@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, Udit Kumar <u-kumar1@ti.com>
+In-Reply-To: <20260329231557.332469-1-marek.vasut+renesas@mailbox.org>
+References: <20260329231557.332469-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH] arm: relocate: Make data-only relocation mode
+ non-user-configurable
+Message-Id: <177515555837.1935668.3910713476575027256.b4-ty@konsulko.com>
+Date: Thu, 02 Apr 2026 12:45:58 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,19 +100,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 19 Mar 2026 10:33:36 -0600, Tom Rini wrote:
+On Mon, 30 Mar 2026 01:15:16 +0200, Marek Vasut wrote:
 
-> There are no longer any users of the legacy non-DM pl01x serial driver.
-> This lets us remove both CONFIG_PL011_SERIAL as well as
-> CONFIG_PL011_SERIAL_RLCR references. We still have SPL users of the
-> non-DM portions of the code.
+> The data only relocation mode should be selected on per-SoC or per-core
+> basis, make these options non-user-configurable. The SoC or cores which
+> require this have to select this option using "default" keyword.
 > 
 > 
 
 Applied to u-boot/next, thanks!
 
-[1/1] serial: pl011: Remove legacy serial driver options
-      commit: 39214eb49b62c161796413f64a64c96e177c3bd8
+[1/1] arm: relocate: Make data-only relocation mode non-user-configurable
+      commit: 91c27b21b10f6cadc906af66355197e12409a543
 -- 
 Tom
 
