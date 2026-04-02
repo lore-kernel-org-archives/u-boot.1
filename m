@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58644D3943C
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 15:03:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ADA1CC6B3E
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 15:03:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 649C984020;
+	by phobos.denx.de (Postfix) with ESMTP id A6021840AA;
 	Thu,  2 Apr 2026 17:03:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2749083CF5; Thu,  2 Apr 2026 05:51:50 +0200 (CEST)
-Received: from inva020.nxp.com (inva020.nxp.com [92.121.34.13])
+ id 3A35C83D8A; Thu,  2 Apr 2026 05:51:53 +0200 (CEST)
+Received: from inva021.nxp.com (inva021.nxp.com [92.121.34.21])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A58880212
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 05:51:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C51C80212
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 05:51:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=chunguang.li_2@nxp.com
-Received: from inva020.nxp.com (localhost [127.0.0.1])
- by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id B9B121A08D8;
- Thu,  2 Apr 2026 05:51:47 +0200 (CEST)
+Received: from inva021.nxp.com (localhost [127.0.0.1])
+ by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id CD4582008E5;
+ Thu,  2 Apr 2026 05:51:50 +0200 (CEST)
 Received: from aprdc01srsp001v.ap-rdc01.nxp.com
  (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
- by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 831701A08BA;
- Thu,  2 Apr 2026 05:51:47 +0200 (CEST)
+ by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 985F22008DA;
+ Thu,  2 Apr 2026 05:51:50 +0200 (CEST)
 Received: from bjse.cn-bjs01.nxp.com (bjse.cn-bjs01.nxp.com [10.193.20.96])
- by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id C0A4E1800092;
- Thu,  2 Apr 2026 11:51:45 +0800 (+08)
+ by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id DFA4B1800097;
+ Thu,  2 Apr 2026 11:51:48 +0800 (+08)
 From: chunguang.li_2@nxp.com
 To: trini@konsulko.com,
 	meenakshi.aggarwal@nxp.com,
@@ -40,10 +40,12 @@ Cc: chunguang.li_2@nxp.com, ioana.ciornei@nxp.com,
  florinlaurentiu.chiculita@nxp.com, u-boot@lists.denx.de,
  mingkai.hu@nxp.com, Zhiqiang.Hou@nxp.com, pramod.kumar_1@nxp.com,
  camelia.groza@nxp.com, priyanka.jain@nxp.com, wasim.khan@nxp.com
-Subject: [PATCH v2 1/4] ls1028ardb: add env variables to assist boot
-Date: Thu,  2 Apr 2026 11:51:29 +0800
-Message-ID: <20260402035132.1706521-1-chunguang.li_2@nxp.com>
+Subject: [PATCH v2 2/4] ls1043a: add env variables to assist boot
+Date: Thu,  2 Apr 2026 11:51:30 +0800
+Message-ID: <20260402035132.1706521-2-chunguang.li_2@nxp.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260402035132.1706521-1-chunguang.li_2@nxp.com>
+References: <20260402035132.1706521-1-chunguang.li_2@nxp.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 02 Apr 2026 17:03:20 +0200
@@ -65,36 +67,68 @@ X-Virus-Status: Clean
 
 From: Chunguang Li <chunguang.li_2@nxp.com>
 
+Add LS1043ARDB-specific variables to assist the boot process,
+and update the related common and LS1043AQDS settings accordingly.
+
 Signed-off-by: Chunguang Li <chunguang.li_2@nxp.com>
 ---
 v2:
- - Fix formatting
+ - Fix formatting.
+ - Update description.
 
- include/configs/ls1028ardb.h | 4 ++++
- 1 file changed, 4 insertions(+)
+ include/configs/ls1043a_common.h |  2 +-
+ include/configs/ls1043aqds.h     |  5 +++++
+ include/configs/ls1043ardb.h     | 10 ++++++++++
+ 3 files changed, 16 insertions(+), 1 deletion(-)
 
-diff --git a/include/configs/ls1028ardb.h b/include/configs/ls1028ardb.h
-index 005667d20b6..965fd5246f8 100644
---- a/include/configs/ls1028ardb.h
-+++ b/include/configs/ls1028ardb.h
-@@ -54,6 +54,9 @@
- 	"board=ls1028ardb\0"			\
+diff --git a/include/configs/ls1043a_common.h b/include/configs/ls1043a_common.h
+index d82502d628e..e2412936b71 100644
+--- a/include/configs/ls1043a_common.h
++++ b/include/configs/ls1043a_common.h
+@@ -88,7 +88,7 @@
+ #include <config_distro_bootcmd.h>
+ 
+ /* Initial environment variables */
+-#define CFG_EXTRA_ENV_SETTINGS		\
++#define EXTRA_ENV_SETTINGS              \
  	"hwconfig=fsl_ddr:bank_intlv=auto\0"	\
- 	"fdtfile=fsl-ls1028a-rdb.dtb\0"         \
+ 	"fdt_high=0xffffffffffffffff\0"		\
+ 	"initrd_high=0xffffffffffffffff\0"	\
+diff --git a/include/configs/ls1043aqds.h b/include/configs/ls1043aqds.h
+index 7ccbb20bf2e..c06e986e93f 100644
+--- a/include/configs/ls1043aqds.h
++++ b/include/configs/ls1043aqds.h
+@@ -295,6 +295,11 @@
+ /*
+  * Environment
+  */
++#ifndef SPL_NO_MISC
++/* Initial environment variables */
++#define CFG_EXTRA_ENV_SETTINGS      \
++	EXTRA_ENV_SETTINGS
++#endif
+ 
+ #include <asm/fsl_secure_boot.h>
+ 
+diff --git a/include/configs/ls1043ardb.h b/include/configs/ls1043ardb.h
+index ef8fdc1912b..90caf8a1371 100644
+--- a/include/configs/ls1043ardb.h
++++ b/include/configs/ls1043ardb.h
+@@ -201,4 +201,14 @@
+ 
+ #include <asm/fsl_secure_boot.h>
+ 
++#ifndef SPL_NO_MISC
++/* Initial environment variables */
++#define CFG_EXTRA_ENV_SETTINGS      \
++	EXTRA_ENV_SETTINGS              \
++	"board=ls1043ardb\0"            \
++	"fdtfile=fsl-ls1043a-rdb-sdk.dtb\0"    \
 +	"image=Image\0"					\
-+	"extra_bootargs=iommu.passthrough=1 arm-smmu.disable_bypass=0\0"	\
-+	"othbootargs=video=1920x1080-32@60 cma=640M\0"    \
- 	"ramdisk_addr=0x800000\0"		\
- 	"ramdisk_size=0x2000000\0"		\
- 	"bootm_size=0x10000000\0"		\
-@@ -77,6 +80,7 @@
- 	"kernelhdr_addr_sd=0x3000\0"		\
- 	"kernelhdr_size_sd=0x20\0"		\
- 	"console=ttyS0,115200\0"                \
-+	"console_dbg=earlycon=uart8250,mmio,0x21c0500\0"		\
- 	BOOTENV					\
- 	"boot_scripts=ls1028ardb_boot.scr\0"    \
- 	"boot_script_hdr=hdr_ls1028ardb_bs.out\0"	\
++	"console_dbg=earlycon=uart8250,mmio,0x21c0500\0"
++#endif
++
+ #endif /* __LS1043ARDB_H__ */
 -- 
 2.34.1
 
