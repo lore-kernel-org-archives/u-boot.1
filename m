@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7BD8D39404
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 09:29:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3B41D39404
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 09:29:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73FF28414B;
+	by phobos.denx.de (Postfix) with ESMTP id B095C8419A;
 	Thu,  2 Apr 2026 11:29:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="EuIyl5Ml";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="J6H6fOGq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AEB4484198; Thu,  2 Apr 2026 11:29:41 +0200 (CEST)
+ id 9F7D3840BE; Thu,  2 Apr 2026 11:29:42 +0200 (CEST)
 Received: from MRWPR03CU001.outbound.protection.outlook.com
  (mail-francesouthazlp170110003.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c207::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D4AB84150
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 11:29:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1940383D8A
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 11:29:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=simona.toaca@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AjJJI5M6CtXqGOO+9vZJTzB6Rq6rLrdssI/+ZR5QNQarrDDdLG9q5wA7ccnJVsrUDjpdvIQZaZ8A1SLhBYolMAVO4rWDGntE1+sV2pke1x3z+apuXuPQcFBfclq2ITArCviFIN+J35kb/QI7zFRcx5OUyuMFq+QSPqJkbhePPvyu50I9BCEIcAHlUavVlAmQgAffNRhXAmse4E4DFYCV/LKJIvZoOoHzW0EPz9R1BIaFUfCNfQMxcuGqOCxEOVzJNihymb608uxKyfkpBSTeVJ/h24Jpn4qjPP3bo7os03zjMYAD9DD6Bh5gMmahyDsn7qYSGsPR2bpyB8IsZ83/FA==
+ b=GWNP3l+VkFhAdViHfL0MLI2zkK1KM9bFbjEZv+cTChAA9YXb0vDaFsdIZTveFVd080WTNThFebCInIErnbtQwq68JD7tsvxlpEARJ1I8ojlQFh4gPLcSajA80ML8woii4wUdB6kBgj3J3BUpnD7DuCmhg7/ToeKzIuNoZuYMRt0trU/1F0q6UGy3C+SsathvXcSvBuLvCblfHmcD+zJhtVPlsnK532hsuCGWARBFWplY1xO++tZHX54QdclwPmBhBYxW2ZOe1PRN5vkfZBlaFU7The1g9gdA3G1sd2+X0FMjk+0jky6r54S9TBtfvfKwTT9JxTuqomBAag8HVhOovQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jkExyOPCsQcfK1GFpAgs0n5uF/QaRcnHw7H7NZejhTQ=;
- b=BRal8ba3mIkbaQ1Pi3rR6kONeTdV2Znil5uyuJrinJZhHE3YhtI3z3Aufc358Y18UdURJ/5qAihTwmIS2KrsBCAOIKrhWNIv4rDJn6KMyrfL7i2Ne8FGHg3zmy8zmtucZ23427zNdY0J9/OqYkSOxMYv9IOxlIbFYml9qGdiGdxosxJqMihPjvxR1+S+BnBDNg2jiAWKVOylHRwRNLsqimpgP0F6twmajblMsSZ4ecX3BpiwPgL3FHUQkgLkgFHCppUjC/34squYE6KuY1B8wo93mVmZNDSonblGIw2imgOiKO+0yHM7feb5zw4BdopANcPWaWR1PzZW1HYQdgiD/Q==
+ bh=F6rzow2IZgXsnrz+oQcZmF3wY/SJFiyCs1SaT0AfMtA=;
+ b=kUP+s4MMKvvWLK3USarOvS9r60U0uZ4UcKvbOFgIsGlfoMYtFSp7VIZKu1EaLvfUGeF+Mt0Izus5cAA+xCr91rHQpOxpj3cMHq0a51u9FoNa6IXzuIS9g2EdvcoukKsGQM9tItGKk8WEWzfhrv/7JQYw8zn8yRlz0hdds/qsj5stQRGsbM+YmDZYDvRItkRyCWf+4i36wMoRIv4oOmhAxB//wunQREkvaBzj1Y5YH2QIgAa1MySWtrosGYTBdlI0w3+xGIzbwGFB+HCEOHbgsNZ2K0rnI8VnGRUw+1utWvX3m/w1ha9XC6Cayt4FCoJToFeeTORtAxCgAUzannYnTw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jkExyOPCsQcfK1GFpAgs0n5uF/QaRcnHw7H7NZejhTQ=;
- b=EuIyl5MlkiN8wwhbQVLZSp7QRVJua062TxDeypj8t5b6HBqBnvXRXgqIITWhOtlUEec6On585KHe/R5pG3Q/1eh82M74U7xDM1cFOMAjAsvGkGdD6mzh6WPKWru67Qy1V5DzbfvQbSPejpYjTqP+DTztKo5+97RCMpKqwJYPFMM3vbx5wDtBoATqSLlpmCju+fIpLDrB5wnegE5Ks/ac9BDXys/302m1Glvb3jtOP3oOQ4mPOH0sqbVB8b5C/hrObSMLj3hbTnNlUdZbl14C+GJzI/UwZvzQWYlj8MQ0HUVwH9K2SmNGwiB4AlJEOw3FMlCJ3An1hHKtAARrdM1lZA==
+ bh=F6rzow2IZgXsnrz+oQcZmF3wY/SJFiyCs1SaT0AfMtA=;
+ b=J6H6fOGq3fe4c2NwfW7ax9Lkh0eD634In1jfL6sNRqyI4bHg8Ru5hvPzBFtf/31UTy3HzWLP7otqVOosk1Y6mnXB5RTfQRebnlH3sXDRT7lbivU5VaknqzB3r9VPd9gGLNcE2T07EmDwQZhcLJwWdjvcj7zHoxM8WAj7+ZRaBejhNR2Lnn5QbzDin+yhKOxezNMvolUss6zDlCvjR1Gx/X+NTpzV0K8Y5cII7AF5NU6kDW04lAXGoyE++nJ1jbxT3ygIEd20o5jo/sWH2dSMJo1cE6FGYK1rJVHGRpCvzP+ZWXKeo+YI+uwDEDcTDOYI4REIICb9TpYecKZAm2XkrA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from VI0PR04MB11917.eurprd04.prod.outlook.com (2603:10a6:800:306::9)
  by AM7PR04MB7095.eurprd04.prod.outlook.com (2603:10a6:20b:11c::21)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.28; Thu, 2 Apr
- 2026 09:29:31 +0000
+ 2026 09:29:33 +0000
 Received: from VI0PR04MB11917.eurprd04.prod.outlook.com
  ([fe80::a506:3460:d2bc:26e7]) by VI0PR04MB11917.eurprd04.prod.outlook.com
  ([fe80::a506:3460:d2bc:26e7%4]) with mapi id 15.20.9769.016; Thu, 2 Apr 2026
- 09:29:30 +0000
+ 09:29:32 +0000
 From: "Simona Toaca (OSS)" <simona.toaca@oss.nxp.com>
 To: uboot-imx@nxp.com,
 	u-boot@lists.denx.de
@@ -62,9 +62,9 @@ Cc: Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com, peng.fan@nxp.com,
  sebastien.szymanski@armadeus.com, ravi@prevas.dk,
  joao.goncalves@toradex.com, ji.luo@nxp.com, semen.protsenko@linaro.org,
  tharvey@gateworks.com, qijian.guo@nxp.com
-Subject: [PATCH v3 2/6] arm: mach-imx: Add command to expose QB functionality
-Date: Thu,  2 Apr 2026 12:40:44 +0300
-Message-ID: <18e5f58dc65283a73c29c4b603a5b56f7c4d3e8a.1775121078.git.simona.toaca@nxp.com>
+Subject: [PATCH v3 3/6] configs: imx9{43, 5}: Enable SPI SFDP support
+Date: Thu,  2 Apr 2026 12:40:45 +0300
+Message-ID: <a711f4dd7adfcb7f08fd679c85ca42a93e39bb04.1775121078.git.simona.toaca@nxp.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1775121078.git.simona.toaca@nxp.com>
 References: <cover.1775121078.git.simona.toaca@nxp.com>
@@ -77,58 +77,58 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: VI0PR04MB11917:EE_|AM7PR04MB7095:EE_
-X-MS-Office365-Filtering-Correlation-Id: 60a8f2c0-0083-42d4-6140-08de909a57e1
+X-MS-Office365-Filtering-Correlation-Id: 78a936c6-8eae-4667-2512-08de909a58fc
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|366016|19092799006|376014|1800799024|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: SwHgqJrvGsiiwW250QwCE04mi7Yx16qoRadI52LUHglOvi58Hx3vuDjoIaVHSRt4OkHee4akWeIS34iOyPF0K7PyUmkAoeG/HmRnk4LTGlCFy8v5o2QagWzZlAGJiQOzuYXy4L9+SY9huBs8iC85SgqvLoL1EIdduZtB6ZjxpviihK6DME4LYd+TE4eKrQRsfKQplbbLouAgRTJ8mewMBFLzpEQ/o3iyyvciYWMQsW/NOj3e/saSqR3H8RIVmsG2PqeRhDVcSf1K9aibGkEaeTnj0FyYiaKl449SMBipT+0CKOQlqWkJdONzJbUIOuhRr87hq6h9uGr5t+NeSTf9+CiNoZQGQek6KB3qt0GCqPoYDyl7AQ3PB2ewFd+r1bUTxJJC9e1jTQWe8yJ/1WyxVaka6bltuGUhivcbOvHuEYO6LmfOsO0vXEuMQgkeJr+i7mfPzulUGcuHP+bHDqwOZ1ZiWqEeZe2bv7Y48MdB0cAiq+rJyl85sZuojyCfQM9s8DKDDR9aFSWa0dT9QKxCqK+lgIwHtQvPK6wlZcwCMXGpMJs8OkgpaMF06QklvybG4/BYU8MfLRgvY+5QbOH/KNi6p7rLlObAT685TcDHaZPmJxLIhRa6IkZZ52ngK++rKW5qbEFLNxfq/dSI70huljKtTJOKTBo0VonPoiLszz790+pBboXbogqL0WHyZiZ6V1mAPB8IXeyxhp5lcu31eoqnka5HZ27ZbRAROGlvTZg=
+X-Microsoft-Antispam-Message-Info: Pviy3vB9D7tldQUaZ0Q4X7BTYJ92kdopV1+/3Y2NQduamGC1PVqJUpcbXTXFVkD0jmxS/nn/qfBr0/b7vgLWeuhmTRkkzZvmNM5HQLHwbXZ5XvKTbvcNL9l0iM77WjDQiSTxTNyE7ZVcDIe1C3eegsBI3eJIzybN4PWAhYYHOkCTWZ7rJjMHSELntJZiYReE1/MThl/bhMxSq7lPa8esAIZuTgbm8Etj79Vr5T8LqP1mkADqulOMvfia/s6IMjYOdeWhQ1L7lLxodZrqLSlcIxhyX1MpZ3R5QartJYLgaJtbdaffwVrFuBlyy5VEjgF/ffblrfkWQbkwSB7eDDUTz3NHCn2YGYFj6NCy9HQ9Hj0YIcgzzJjOO02urFAPls4pmha7M+SMHEU1vdlv3V0w96hQguiMe8SMPSAZTclKHR6m2ilET5NZrkZHWJOH3yPHDeZQ87dHrbfo5LOI1VUAYYI8Nu7S2VbS4I5X3fB3AQvha9QHmZz1pP7vFg2E213uknm8EWF4+JvEcIOkxBuwYoS27EMI6AAOd2Usk7K4IHGZ9b2AcFvm0of37k7eHjmdYyonS14UXJ8qIHBkgtYoLxPEo88RE8jdqh2z+u8WyS2rF62/yyXrPrxBZjHlg8WEgqReCdK9AvyWUmS2Y+B9KIjxSEgIiaICbDODbtWCTvawBVQp3aXjIk714/fQ+Xlmf0lGPqN7HG07Kp/Pfjbmx0/L9Aqz1sy+MQGCrv7m5+w=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:VI0PR04MB11917.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(19092799006)(376014)(1800799024)(18002099003)(22082099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?MLVgtgBVETcnWh7o6iHB9j29KHHuPdu7copWDSxpYQ91Mj/ocribV/f7/+wY?=
- =?us-ascii?Q?8BYIJzLcq4EYBzCVT2q48hob0Eza5UnDiExFFiU0xiOyEhqrt+XLl8svFuxQ?=
- =?us-ascii?Q?JHpM+qaU6IhBFEumedAkaRjHchfdCK2sJMl0Sf9Cg/eby46+FCSJ+Wf1BsY3?=
- =?us-ascii?Q?SmlGMhH2mC0KmPJs/uJIVhVpvMsNyFBnKbAW1swgmCDjGwVvTzJ5xBKz+fa0?=
- =?us-ascii?Q?41x0mV10N03AIkdNbWHVviLFyQT8+LwVeqDd9MfhBZ5PGeFLXnscnrVLc67z?=
- =?us-ascii?Q?g84PfLAm5F283Q9KOFj5HOE5oILSbQHsG2jXriYoz8HHzg106U+Z1LaJLHE8?=
- =?us-ascii?Q?kzJ8J3HvCJKr2T5Gy9PvPoJgal46Ezji15ZK/A33IYBRQP6HToqyRFRJrQby?=
- =?us-ascii?Q?tHIkScWxdpRs4EiH+jqq5n/ARWCah9NXSAlHVhSFBilO4cZfechVNd3bCkUH?=
- =?us-ascii?Q?F7RgOHA6XpZn0cjxhDCTx1t6tuzM4od0z/c9jJFKTdaoaCtrK6BWJonACUdI?=
- =?us-ascii?Q?ZZs6eUOCuufeUtHZWOLeZ/f/tIAEimiEtX2/4rkhUJ7pS8kxySg5uuF1iC3W?=
- =?us-ascii?Q?+Gr+FNd0JdcggNokBQJWePat811EecjkX2lv/9SBmmvgYLkfsUtwKSKf7IbY?=
- =?us-ascii?Q?L0wxFjFbQ3uXFnUloCO6BSYWWafU0MixMJlJAO2lDroKtNDrb9hlJm8VTCb0?=
- =?us-ascii?Q?udV8ONxj7V05CIGo9QLIRkhRI+fwOqnAM697YzItRDaJ/UEGSrwH2U7LgEyQ?=
- =?us-ascii?Q?MeBlOGfS9u89ApDrseXHfjBNbsG3l4ajCRq5J5LwETgb3oAdWab4/LBUHNV6?=
- =?us-ascii?Q?U0DtjUNT04nz09CBqZUlju6SndKbST2HE2jVpPiK8ZT09TaXhhiXtac2gszo?=
- =?us-ascii?Q?U8I6uuoO7r1XrTXVfV2kOF/D8LxMz39XLNZHVzxJSH1mrMsV/odg5NW5Ra4z?=
- =?us-ascii?Q?AOP5bd39489Hcy0N8ey5BXfzuMEI6Y/RJ6XU78OoNd2lGkCQPoLCDJBTMndL?=
- =?us-ascii?Q?Eui+/rfIiilEmTNmr7T1ZA2cFFGmC+WUufaH2whZPJYM4cW2BqtIWfZV1/OG?=
- =?us-ascii?Q?QheQ0Vl1L23YDAstUvJxWjsAYrDd0CP7Wyx3loAzuuLWS2+DOaNhoNIKh87z?=
- =?us-ascii?Q?EU/GULpwzXOqvNgabSKoN01Ied4Zivzmt66psa6k0mRT3vbUDd+aq1TBm5uu?=
- =?us-ascii?Q?scgMe1VGvYzJJriiZMPF64lgOK9NtEuVTzMDyt47pj3I7bC9yCpxpR0VRJNX?=
- =?us-ascii?Q?9aOPZ0XYdQfa+pixaplaKopGs+DyiepA64VBWVkc/2h2oWzUf/i0eAq0VfdR?=
- =?us-ascii?Q?SXekbmJuxGOjJNSMUMymL9pEaaJcRAgbffxomUUvC6NXzKC7vJuYVHiSitHe?=
- =?us-ascii?Q?G/Z/+Fwfj+CJA8tjHp3X25ZYCQCdiN/yJ6zAhQnEMByOeBmAk31DwFobWlTl?=
- =?us-ascii?Q?aem8btyR1no7tbEQGkSB62Wx5JjpeXrqNr+lxGvyyU9QBDGJBlyXf4qiTxw/?=
- =?us-ascii?Q?U06Ii13lnvc4D4ncb1GNFTooe9fsO2SIgQfwvVLmkkb6XrhCGmCcUhC5tseH?=
- =?us-ascii?Q?xhEtPhSBm3F0U0icjlMrOboqzGGgNNOa0tdw3WibnfKGHBLY6xAtIjztIrWv?=
- =?us-ascii?Q?czqahyFdWhipUEtADrt7K3QPrEmMcu+PSTSes5zYGVNWlTYOsGe22zYKWgWb?=
- =?us-ascii?Q?Wln/Z+l/Sq3KCSiDZkvJ6AHV7bUI5GTZbHQesue3PazURPBtRXyJqRxUTTGg?=
- =?us-ascii?Q?CnxVPc5Zlg=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5EquIdRG0j+HmZnhoZ8uOq+uKvTpwD0p4jBRHgheSVDhH0M2U6dQgbbfd9pY?=
+ =?us-ascii?Q?kNcaGPO3eC2vtNllAeVyqp0Io4ZHTVC683XckYLar1Sk21xj4jV4LguJpQSj?=
+ =?us-ascii?Q?uUKWVG/QXDntvrPSqgqvpmUwo/aLGaxuTwC8gF0HtmJnBlQBiA2gD8J9lWFJ?=
+ =?us-ascii?Q?tQ6kieonBMkaT3e+iTW2Rcwp9J5vhHTeq5fQTPP1QshaCQL76GLOJ9yQayVm?=
+ =?us-ascii?Q?mJQwEDOMaS2kibtivih2YnCFDXzQWy5JyhNCz8LtXKbHDImiHigWxyynJj28?=
+ =?us-ascii?Q?kz2jKcVmziP4msL9CppI2hUGwtVSLuKNR4RNN8MUXtlJKmaggdtNbXf7ew+1?=
+ =?us-ascii?Q?kAJCwiZVgEJGhar5hn4gtKPM4PpLeQEj40ePRAUEa+qBz/s1xU9CTdphp5Ln?=
+ =?us-ascii?Q?uUxjCYEC7QhYVNXndOLaqkbDAc/gMM+LTm6HybdRX5hcH+rmWfWbUC9uCsJz?=
+ =?us-ascii?Q?6Nqkggo8N5a/AKOGVLtpxNXE8+QQK8hJfR5rMEcJ/V570ewxryeRIZkdT6pr?=
+ =?us-ascii?Q?rjQ7BGJo9myaCnXBCYwnM5hDK0z8kjw/2pw9qI+2lh6LWKySjF6pRQVghFtB?=
+ =?us-ascii?Q?tXwiv1ylhugZubzOXVHMuIyVw9pYX0syuBXH4zdAkbKm3IrVZW1yvAfgXRJO?=
+ =?us-ascii?Q?4pktD5s1wlEG6AOqHB+lUictFXxy9kIZCCONvnBFVYSpCa9Ghbn9F7P3WaEk?=
+ =?us-ascii?Q?eVl9OwyuEHUEAjRyOtSdLsussczGj6FETGYysV8oBV84bBIcbOBNyiecaMKA?=
+ =?us-ascii?Q?kQ2JXI6vXcrS0X6JncuOW6mctom+svttF6vGMvNyICqZ0CjqH5yRu8AQFWNo?=
+ =?us-ascii?Q?eQr4/lsNamJJAJ+qE1ELBamZ2fuE9w2VIag1OyeIyIzWw4KrKeUdNCrg+KZQ?=
+ =?us-ascii?Q?Jy6Cym3ozs/fUFyiMxu3f7vEOAB0xvvoYBl6gteTZihFzRE36E1TIT85JkCr?=
+ =?us-ascii?Q?tY2LjLXaQ6XVfkfxn1RR759txfpSZ7d8A8UtbZcms24rwcwKIBTaesvDOuZR?=
+ =?us-ascii?Q?R/TaWdB9PYyD5/iMR3PCTA+2f/p8oyeKqUK38gVJIXA3BleYM0vqC443Vgzw?=
+ =?us-ascii?Q?jWQcRN9JYeKrghN8Am/iT1htEyJhfRfSNJ7eUKqJOV+X63zGY7krDWy1atLA?=
+ =?us-ascii?Q?6S1r2m/Zg4Q9er7QFP5IbXdRWsOv9IyCxfA0FL1HbwK0iAYEJIDGZqko8CNo?=
+ =?us-ascii?Q?wUTCvcR0EYYc3vQcSbpkxuwByiF4Sv0+StiGAGGtseZw8UdcCX0D+1aq0bcY?=
+ =?us-ascii?Q?lhP9GE71zSdqKlPbihANwdr8P5DcxJ+pKRxwIeHM9DTJS8bFL8ujKyBJK7VL?=
+ =?us-ascii?Q?DEk90OytevrN1lk7FDe1epypNP8eOY8pfVXk+EGO/izWzMSnVIMdfhw4Mmmk?=
+ =?us-ascii?Q?D3ATcFbmAXw2rnzCqd8UzqmdY/MevwDx5dLuRQRMNPVQslheeuUSUDYxIeX5?=
+ =?us-ascii?Q?EX+WivQe71+hlqHjIS3qFoWa61D7oneEgd8JAyF8stvsGQ8lNRwWwBc/6WY2?=
+ =?us-ascii?Q?PPFh1ZROmIPTdwGjLyNvwxAkr8foBVDI7KgQLgGXoQ1E2/DICU57KI0h8Fzu?=
+ =?us-ascii?Q?+k7xuBrE2764lP49a/DlK1xQP6smE+1sf2aJdIYQctUyRO1b4lzs9WdtR/mP?=
+ =?us-ascii?Q?7rZBMXY38i6/It9kLsA8teJ0MYCZLW8yBG9udOkIl/4DaPBEYOlTHrlpg6IK?=
+ =?us-ascii?Q?gvMaHWKo8qDqyyJaent7nmfK8PprTudBBTP1hbcQagvn8lnaz75Epsbz+XbK?=
+ =?us-ascii?Q?g0hENtT0+A=3D=3D?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 60a8f2c0-0083-42d4-6140-08de909a57e1
+X-MS-Exchange-CrossTenant-Network-Message-Id: 78a936c6-8eae-4667-2512-08de909a58fc
 X-MS-Exchange-CrossTenant-AuthSource: VI0PR04MB11917.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2026 09:29:30.8505 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2026 09:29:32.8189 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: X4dQzCXrr3uBzmGODNlBpeRFQquhVQZzj//kbTLT4GNm8hpWt/+SOZ3NoSypeQTXbEeAK/RcknaiKzKghTne/A==
+X-MS-Exchange-CrossTenant-UserPrincipalName: 0JjsxS1pRIqI0iNSK+Ef6esWKXI/3YtQaFEQ4bfq4ZtV8T52l2/qM1WdGJ/y9/q9vvK6+GveSgaXwmfjAGFYmA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR04MB7095
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -148,213 +148,53 @@ X-Virus-Status: Clean
 
 From: Simona Toaca <simona.toaca@nxp.com>
 
-This command exposes 3 methods:
-- check -> checks if the data in volatile memory is valid
-	   (integrity check)
-- save  -> saves the data to non-volatile memory and
-	   erases the data in volatile memory
-- erase	-> erases the data in non-volatile memory
+In the context of saving Quickboot data to SPI
+NOR, this option needs to be enabled so that the
+erase size is parsed correctly.
 
-cmd_qb can be used either directly in the U-Boot console
-or in an uuu script to save the QB data during flashing.
-It supports specifying a different boot medium than the
-current boot device for saving the data.
-
-Signed-off-by: Viorel Suman <viorel.suman@nxp.com>
-Signed-off-by: Ye Li <ye.li@nxp.com>
 Signed-off-by: Simona Toaca <simona.toaca@nxp.com>
 ---
- arch/arm/mach-imx/Kconfig       |  11 +++
- arch/arm/mach-imx/Makefile      |   1 +
- arch/arm/mach-imx/cmd_qb.c      | 132 ++++++++++++++++++++++++++++++++
- arch/arm/mach-imx/imx9/Makefile |   4 +-
- 4 files changed, 147 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/mach-imx/cmd_qb.c
+ configs/imx943_evk_defconfig      | 1 +
+ configs/imx95_15x15_evk_defconfig | 1 +
+ configs/imx95_evk.config          | 1 +
+ 3 files changed, 3 insertions(+)
 
-diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-imx/Kconfig
-index e4014226582..48266cfd6e2 100644
---- a/arch/arm/mach-imx/Kconfig
-+++ b/arch/arm/mach-imx/Kconfig
-@@ -71,6 +71,17 @@ config CSF_SIZE
- 	  Define the maximum size for Command Sequence File (CSF) binary
- 	  this information is used to define the image boot data.
- 
-+config CMD_IMX_QB
-+	bool "Support the 'qb' command"
-+	default y
-+	depends on IMX94 || IMX95 || IMX952
-+	help
-+	  Enable qb command to write/erase DDR quick boot training
-+	  data to/from a chosen boot device. Using 'qb save/erase'
-+	  without arguments implies using the current boot device.
-+	  For use in uuu scripts, the boot device must be specified
-+	  explicitly.
-+
- config CMD_BMODE
- 	bool "Support the 'bmode' command"
- 	default y
-diff --git a/arch/arm/mach-imx/Makefile b/arch/arm/mach-imx/Makefile
-index bf6820de655..43febc10460 100644
---- a/arch/arm/mach-imx/Makefile
-+++ b/arch/arm/mach-imx/Makefile
-@@ -80,6 +80,7 @@ endif
- ifneq ($(CONFIG_XPL_BUILD),y)
- obj-$(CONFIG_CMD_BMODE) += cmd_bmode.o
- obj-$(CONFIG_CMD_HDMIDETECT) += cmd_hdmidet.o
-+obj-$(CONFIG_CMD_IMX_QB) += cmd_qb.o
- obj-$(CONFIG_CMD_DEKBLOB) += cmd_dek.o
- obj-$(CONFIG_CMD_NANDBCB) += cmd_nandbcb.o
- endif
-diff --git a/arch/arm/mach-imx/cmd_qb.c b/arch/arm/mach-imx/cmd_qb.c
-new file mode 100644
-index 00000000000..33e987f18e0
---- /dev/null
-+++ b/arch/arm/mach-imx/cmd_qb.c
-@@ -0,0 +1,132 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/**
-+ * Copyright 2024-2026 NXP
-+ */
-+#include <command.h>
-+#include <spl.h>
-+#include <stdlib.h>
-+
-+#include <asm/mach-imx/boot_mode.h>
-+#include <asm/mach-imx/sys_proto.h>
-+#include <asm/mach-imx/qb.h>
-+
-+static int get_board_boot_device(enum boot_device dev)
-+{
-+	switch (dev) {
-+	case SD1_BOOT:
-+	case MMC1_BOOT:
-+		return BOOT_DEVICE_MMC1;
-+	case SD2_BOOT:
-+	case MMC2_BOOT:
-+		return BOOT_DEVICE_MMC2;
-+	case USB_BOOT:
-+		return BOOT_DEVICE_BOARD;
-+	case QSPI_BOOT:
-+		return BOOT_DEVICE_SPI;
-+	default:
-+		return BOOT_DEVICE_NONE;
-+	}
-+}
-+
-+static void parse_qb_args(int argc, char * const argv[],
-+			  int *qb_dev, int qb_bootdev)
-+{
-+	long dev = -1;
-+	char *interface = "";
-+
-+	if (argc < 2) {
-+		/* qb save -> use boot device */
-+		*qb_dev = qb_bootdev;
-+	} else {
-+		interface = argv[1];
-+	}
-+
-+	if (argc == 3)
-+		dev = simple_strtol(argv[2], NULL, 10);
-+
-+	if (!strcmp(interface, "mmc") && dev >= 0 &&
-+	    dev <= (BOOT_DEVICE_MMC2_2 - BOOT_DEVICE_MMC1))
-+		*qb_dev = BOOT_DEVICE_MMC1 + dev;
-+	else if (!strcmp(interface, "spi"))
-+		*qb_dev = BOOT_DEVICE_SPI;
-+}
-+
-+static int do_qb(struct cmd_tbl *cmdtp, int flag, int argc,
-+		 char * const argv[], bool save)
-+{
-+	int ret = CMD_RET_FAILURE;
-+	enum boot_device boot_dev = UNKNOWN_BOOT;
-+	int qb_dev = BOOT_DEVICE_NONE, qb_bootdev;
-+
-+	boot_dev = get_boot_device();
-+	qb_bootdev = get_board_boot_device(boot_dev);
-+
-+	parse_qb_args(argc, argv, &qb_dev, qb_bootdev);
-+
-+	ret = qb(qb_dev, save);
-+
-+	return ret ? CMD_RET_FAILURE : CMD_RET_SUCCESS;
-+}
-+
-+static int do_qb_check(struct cmd_tbl *cmdtp, int flag,
-+		       int argc, char * const argv[])
-+{
-+	return qb_check() ? CMD_RET_SUCCESS : CMD_RET_FAILURE;
-+}
-+
-+static int do_qb_save(struct cmd_tbl *cmdtp, int flag,
-+		      int argc, char * const argv[])
-+{
-+	return do_qb(cmdtp, flag, argc, argv, true);
-+}
-+
-+static int do_qb_erase(struct cmd_tbl *cmdtp, int flag,
-+		       int argc, char * const argv[])
-+{
-+	return do_qb(cmdtp, flag, argc, argv, false);
-+}
-+
-+static struct cmd_tbl cmd_qb[] = {
-+	U_BOOT_CMD_MKENT(check, 1, 1, do_qb_check, "", ""),
-+	U_BOOT_CMD_MKENT(save,  3, 1, do_qb_save,  "", ""),
-+	U_BOOT_CMD_MKENT(erase, 3, 1, do_qb_erase, "", ""),
-+};
-+
-+static int do_qbops(struct cmd_tbl *cmdtp, int flag, int argc,
-+		    char *const argv[])
-+{
-+	struct cmd_tbl *cp;
-+
-+	cp = find_cmd_tbl(argv[1], cmd_qb, ARRAY_SIZE(cmd_qb));
-+
-+	/* Drop the qb command */
-+	argc--;
-+	argv++;
-+
-+	if (!cp) {
-+		printf("qb: %s: command not found\n", argv[0] ? argv[0] : " ");
-+		return CMD_RET_USAGE;
-+	}
-+
-+	if (argc > cp->maxargs) {
-+		printf("qb %s: too many arguments: %d > %d\n", cp->name,
-+		       argc - 1, cp->maxargs - 1);
-+		return CMD_RET_USAGE;
-+	}
-+
-+	if (flag == CMD_FLAG_REPEAT && !cmd_is_repeatable(cp)) {
-+		printf("qb %s: repeat flag set but command is not repeatable\n",
-+		       cp->name);
-+		return CMD_RET_SUCCESS;
-+	}
-+
-+	return cp->cmd(cmdtp, flag, argc, argv);
-+}
-+
-+U_BOOT_CMD(
-+	qb, 4, 1, do_qbops,
-+	"DDR Quick Boot sub system",
-+	"check - check if quick boot data is stored in mem by training flow\n"
-+	"qb save [interface] [dev]  - save quick boot data in NVM => trigger quick boot flow\n"
-+	"qb erase [interface] [dev] - erase quick boot data from NVM => trigger training flow\n"
-+);
-diff --git a/arch/arm/mach-imx/imx9/Makefile b/arch/arm/mach-imx/imx9/Makefile
-index d2e44f0d5f9..3e323a714c1 100644
---- a/arch/arm/mach-imx/imx9/Makefile
-+++ b/arch/arm/mach-imx/imx9/Makefile
-@@ -14,4 +14,6 @@ ifneq ($(CONFIG_SPL_BUILD),y)
- obj-y += imx_bootaux.o
- endif
- 
--obj-y += qb.o
-+ifneq ($(CONFIG_XPL_BUILD),y)
-+obj-$(CONFIG_CMD_IMX_QB) += qb.o
-+endif
+diff --git a/configs/imx943_evk_defconfig b/configs/imx943_evk_defconfig
+index 6acb49e47e2..624ee9b73d1 100644
+--- a/configs/imx943_evk_defconfig
++++ b/configs/imx943_evk_defconfig
+@@ -109,6 +109,7 @@ CONFIG_SUPPORT_EMMC_BOOT=y
+ CONFIG_FSL_USDHC=y
+ CONFIG_MTD=y
+ CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+ CONFIG_SPI_FLASH_SOFT_RESET=y
+ CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
+ CONFIG_SPI_FLASH_STMICRO=y
+diff --git a/configs/imx95_15x15_evk_defconfig b/configs/imx95_15x15_evk_defconfig
+index 38a855417d0..97eebe83639 100644
+--- a/configs/imx95_15x15_evk_defconfig
++++ b/configs/imx95_15x15_evk_defconfig
+@@ -120,6 +120,7 @@ CONFIG_MMC_HS400_SUPPORT=y
+ CONFIG_FSL_USDHC=y
+ CONFIG_MTD=y
+ CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+ CONFIG_SPI_FLASH_STMICRO=y
+ CONFIG_PHYLIB=y
+ CONFIG_PHY_AQUANTIA=y
+diff --git a/configs/imx95_evk.config b/configs/imx95_evk.config
+index 3db583cce59..0388d999cfa 100644
+--- a/configs/imx95_evk.config
++++ b/configs/imx95_evk.config
+@@ -121,6 +121,7 @@ CONFIG_MMC_HS400_SUPPORT=y
+ CONFIG_FSL_USDHC=y
+ CONFIG_MTD=y
+ CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+ CONFIG_SPI_FLASH_STMICRO=y
+ CONFIG_SPI_FLASH_MT35XU=y
+ CONFIG_PHYLIB=y
 -- 
 2.43.0
 
