@@ -4,56 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67DFA1112259
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 03:09:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54B3CCC6B03
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 07:01:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A017C84101;
-	Thu,  2 Apr 2026 05:09:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
+	by phobos.denx.de (Postfix) with ESMTP id 11C54839DF;
+	Thu,  2 Apr 2026 09:01:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9EEB840CB; Thu,  2 Apr 2026 05:09:32 +0200 (CEST)
-Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
- [IPv6:2a07:2ec0:3002::65])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id ADB9084056; Thu,  2 Apr 2026 09:00:56 +0200 (CEST)
+Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn
+ (mail-bjschn02on2070b.outbound.protection.partner.outlook.cn
+ [IPv6:2406:e500:4440:2::70b])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11D23840B0
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 05:09:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=makrotopia.org
+ by phobos.denx.de (Postfix) with ESMTPS id 4F78480212
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 09:00:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=daniel@makrotopia.org
-Received: from local
- by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
- (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1w88Ql-000000007hy-3ski; Thu, 02 Apr 2026 03:09:16 +0000
-Date: Thu, 2 Apr 2026 04:09:12 +0100
-From: Daniel Golle <daniel@makrotopia.org>
-To: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Kory Maincent <kory.maincent@bootlin.com>, Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Peng Fan <peng.fan@nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Daniel Golle <daniel@makrotopia.org>,
- Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- =?utf-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>,
- Benjamin ROBIN <dev@benjarobin.fr>, Aristo Chen <jj251510319013@gmail.com>,
- James Hilliard <james.hilliard1@gmail.com>,
- Frank Wunderlich <frank-w@public-files.de>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Rasmus Villemoes <ravi@prevas.dk>, Francois Berder <fberder@outlook.fr>,
- Shiji Yang <yangshiji66@outlook.com>, u-boot@lists.denx.de
-Subject: [PATCH 4/4] doc: fit: add dm-verity boot parameter documentation
-Message-ID: <d9c5939cd5b644daf950ee6e792b13484fada321.1775099118.git.daniel@makrotopia.org>
-References: <cover.1775099118.git.daniel@makrotopia.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+ spf=pass smtp.mailfrom=hal.feng@starfivetech.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=WRIPxcILqxiReS33pFZPoe2IDrA3Nk9EoQ34EUIFgm94MNrbd/fmPaWvLOWZq+WCKjU95Hcy5ipZGNzZEtmITXO3Bxt+Hz6hOPQHh5YnkPKqDfMK37NqdX/RLhi/o6Vsq0WASzYVLuh+Mnk9tiYOWvi0CMv5iim9M/64H7NVCnDeQAY8X81xXlV29Ys2vyGWx1W5upDWXi+YK4k9oCnlNGtBPcoPw7o+a8gIf4ngZXf+AvC9pdgU8x93bgX6gQ8t7j2Fjw5W5zlfBZKTdt9dB4zIzMkM8dyg9kk/xgIPC2D3nM6cQBh6dDqLxnJlESkQKV9ANEpRdsmfuC2xzG45ow==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=yjVmH5LJyKM8pDj0N9CyA938JLE2e7bfTCgZd9CbYKw=;
+ b=FvKaqGmsrOoGPbIKTZJfQ3S1FVMb7U0K1VrRvlZl0gLDcue1yIYLostIz2muZFR0oMPkD/HJMsqlbMieL/RDkoysM32uMOg6VJjbqLTAb/CFmJ4iUh5XBlX9/oeF5bqRWpsJ4LEF9vuk+PP/55N9ttWi2+WZe4/kLi7K4WMX4X/L/VrCvJnxeYaIWTmZjuIEOXuJ5nhiOL9r2/oU2Be33ql4QtfsPJbNWCtBYn6rBN9PYhzf1+/JxjZch/ma8XGIhYqUrHb9DqUqF2jotBlwN+kWv+rHcYJmr+QYl1dWEq97xiMO/nACu54qL3EggLzSaVCbx07Ha5I/RfIrkfGZqA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=starfivetech.com; dmarc=pass action=none
+ header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=starfivetech.com;
+Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:7::14) by ZQ2PR01MB1276.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:10::7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.19; Thu, 2 Apr
+ 2026 07:00:49 +0000
+Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ ([fe80::4386:5cc4:3bc4:4795]) by
+ ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn ([fe80::4386:5cc4:3bc4:4795%4])
+ with mapi id 15.20.9769.018; Thu, 2 Apr 2026 07:00:49 +0000
+From: Hal Feng <hal.feng@starfivetech.com>
+To: Leo Yu-Chi Liang <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
+ Rick Chen <rick@andestech.com>, Sumit Garg <sumit.garg@kernel.org>,
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, E Shattow <e@freeshell.de>
+Cc: Hal Feng <hal.feng@starfivetech.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH v1 1/2] configs: visionfive2: Add VisionFive 2 Lite eMMC DT to
+ OF_LIST
+Date: Thu,  2 Apr 2026 15:00:40 +0800
+Message-ID: <20260402070041.2418-2-hal.feng@starfivetech.com>
+X-Mailer: git-send-email 2.43.2
+In-Reply-To: <20260402070041.2418-1-hal.feng@starfivetech.com>
+References: <20260402070041.2418-1-hal.feng@starfivetech.com>
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <cover.1775099118.git.daniel@makrotopia.org>
+Content-Type: text/plain
+X-ClientProxiedBy: BJXPR01CA0055.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c211:12::22) To ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:7::14)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1276:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2c8853bb-12c2-4463-1942-08de90859207
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|52116014|38350700014|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: dC4be7+vIAtEAmwcn6QUK6/sCNcwbmYUMY85PyIYcThvkt0kc1ewbICmP1LzhZskpgWocP4IwFp7v2h/hGKMzyHap2Rr3JqEOAvYJ5DeHnkmWqetqTwfmjw48xFf0pqZQKGnH/CANdRRDwd7m8Xx7aca1Y9VWAkd5ZrPFEH6/Lx59hBiismNcGmGTibi8BEZOZMOTvCB/9ol/DSybe0uJJswZtj9ViEslklegjlLc34ZlatrOnjZ3apLb/cmU83926jIPfJtjPetWqVJ1wIB264mZ+WnRVlOhZ/RAPRj8IEQ2bgqGqB1EXgSlbGVQ/q/XO9CrqpKnaziDfWgfLCs713Ak+jrufmd5V7aJViqHd3oxAE+KchIP370of85FgOBFuaTBvhEeu3zmWkAxOutxlGgW6rIAuGZvBXoy+i4nyECWMdO2J/ZMZjyvkgMqSJadekJM26M5AWrdtZ4Y+z892kr6F8uz29W2feBhWR/69cJv+ElgYpIGh6BbokYE6kzfuI17ZohdtyDNmTSBFROnbqYLOaI1UhOmVGB52SIcITRe+KfBLkmLAHxC9hgubhwIdHzRCyuVC+w6VNzNjaL6A==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn; PTR:;
+ CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(52116014)(38350700014)(56012099003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?pQjUALzpGvzw6OB1iPJg5wgryhv5tptaNvv24xNKPgpVSl/X/rDPzfvDc8M/?=
+ =?us-ascii?Q?5/yW7FUHAMgeAkUuB/Z8oMHqm2K7J/IEuVb9h+C+TR352MIj1bV4TmQf504b?=
+ =?us-ascii?Q?KvFUtk2SILyjU1TDHTkrac4b/vAocNqJ8dUgwz5FaZxp3qN1JpTfzSZ+JN3K?=
+ =?us-ascii?Q?TmEC1XWmUl+exuXjxAnG25Nfc8VHAAfQexBbpaqf/8KbHVXKpQaQTYyqYDih?=
+ =?us-ascii?Q?B0CtXfpIRl2HaACuAr1E/3L7nibB4N0xm6SAynUKuxP/gCBK1RFxOlyJu01m?=
+ =?us-ascii?Q?0y6LFxiRzuU+PI7dqO1bX1bUjQdXtcCldEcQu2dKx/5A7ZNR0IyriVbqUB/7?=
+ =?us-ascii?Q?vDOyQr4tVbzbuh1nyPYviYmBhCBZAFUFpn4JweKv4D9/YyA9jwmo7epeuNMi?=
+ =?us-ascii?Q?nP9JkosTBfH3zU/xPVgpf5aNoWnyMQVHtmpuKakFwyo78NQjgbGQzlonBk6c?=
+ =?us-ascii?Q?bJTAPUXswDqEKSKUMjcR7mQSkQ3+WdEm04pOAZZbbWKd4xkHq62F2Lsp1lQt?=
+ =?us-ascii?Q?GQcdhb9gNyhfy6jhGTfI0dVfOKgWQM4g7nccB7GXyZZg/6fGX+Ky4iRwf90K?=
+ =?us-ascii?Q?Gu/gD4YXIMcW5vcv/faM8emTu83XfoOxsoUyc3FhHjcJN4pHxD6uL/qFooPN?=
+ =?us-ascii?Q?AlSJFJWxsvcyiToEI4VVOLDKODA16f9u7JVJ/+7JzQXcrFEEc5zBJsyLH36y?=
+ =?us-ascii?Q?TW/lZcpNG8XhSJ95d62DijlhwONy2l6rKPZNBvtGX2KI1DiKMj+0DCsEJxVP?=
+ =?us-ascii?Q?WCKIJ7aQmhC7JvSlDIiPHUbftPRCCLtNq2CsXcgGPC5/odGZ/dDUh/22leOI?=
+ =?us-ascii?Q?cpfS8iJwd8iS8N8IrzowY/xZ2LHH3O2i72Fm0foW4HhHH/Y06xOl/ab+XEnm?=
+ =?us-ascii?Q?UTAGHVKv2a5qGTmrSFFGfSN0yp1ZtT2Gl0qBuR6VOxxEbsc560//Az+7ipo4?=
+ =?us-ascii?Q?iIIqrG25Ao15fcA/OQPZ0tYffdJG95fqFg8fxlSPq+M4OyMikBr84NEUDUPQ?=
+ =?us-ascii?Q?wPX4URNQIWHzd8E+BwKt0P9QHFtP+VDXkTcJqaA6Pzq991b6+k83gK7kq9S4?=
+ =?us-ascii?Q?kQngc2gz2xJVGB6e2nSl/eTbTfWNS3aBT8e662LNgllawee/6wUhDqYX+TtK?=
+ =?us-ascii?Q?Z7kyeQe+QmWs2bOkSxtZ3vapEEwnVfluhpOuMvH3WlGkGUP3cxQv07BsnKtB?=
+ =?us-ascii?Q?fAnPDv1PxpAQ16p/qao3wXW3AR5pS48ZwjbgcE0dW5AbfE2XE0QlHshbs4Zz?=
+ =?us-ascii?Q?hM9KPx2kOviHqD9DeFRWf8pyfHacDo/5xInOiv/kA8nSCApEOKiWANBFPK21?=
+ =?us-ascii?Q?LT8PpmrSM5m8rRq9eSnVnMzFDrwGWLZVejftDeJJc1HzbZ7Rma/nNvwOp6mU?=
+ =?us-ascii?Q?0eprYKoBuCm9KB+POu0D9hyNVHZwRAeY207WvXpRSdtRxMSH2BzaDAXKjn9i?=
+ =?us-ascii?Q?u5kR6BpPuQhUt5gUhrxKBYfagYSDXE1xB70/iQBXVAouPIJKm3Jy9kGMDTDL?=
+ =?us-ascii?Q?ZDw8U5saW40DASVu0Ix88B7SR5Fu4s4+mnD78Fajbq+kjQlK7yoFTjgvHyir?=
+ =?us-ascii?Q?l3Ki/eW5Z1VGi35qawDT7HLxV3+YA8Ljgb4x6DGkLQjjqE4igwYU7inLwKGg?=
+ =?us-ascii?Q?5nMwM8ZYPqzvlGkKuEe/mYh7XFKOrqrkCOaUMF2mqv45VT4+G4afT4UB/yEo?=
+ =?us-ascii?Q?biijXnIs7sAGY17xw4R07nFKVeYxUVR+Y1Q3RD7q3POVLH4mQZutUqQVCmSQ?=
+ =?us-ascii?Q?J+oNP8ngaroF9zzhKgqFVrPr+gGSBbw=3D?=
+X-OriginatorOrg: starfivetech.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2c8853bb-12c2-4463-1942-08de90859207
+X-MS-Exchange-CrossTenant-AuthSource: ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2026 07:00:48.9307 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: tk40EDvOCyssEyBdLOB11hTdbZNMuQ2lSFbbRg7LYjByGWQC4/v3P0g6Y/22PkM/LRP+FNq30z+5+4SyFCmTGbmS1P/ukYgMjnqB+DtsSUM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1276
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,324 +134,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add documentation for CONFIG_FIT_VERITY which allows U-Boot to
-construct dm-mod.create= and dm-mod.waitfor= kernel command-line
-parameters from dm-verity metadata embedded in FIT filesystem
-sub-images.
+So the VisionFive 2 Lite eMMC DT will be built and merged into FIT.
 
-The new document covers the relationship between FIT loadable indices
-and the /dev/fitN block devices that the Linux uImage.FIT block driver
-creates, provides a complete .its example with a dm-verity-protected
-SquashFS root filesystem, describes all required and optional dm-verity
-subnode properties and explains how mkimage generates the verity
-metadata automatically.
-
-dm-verity is only supported for external-data FIT images (mkimage -E);
-mkimage aborts with an error if the flag is omitted.
-
-Signed-off-by: Daniel Golle <daniel@makrotopia.org>
+Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
 ---
- doc/usage/fit/dm-verity.rst | 279 ++++++++++++++++++++++++++++++++++++
- doc/usage/fit/index.rst     |   1 +
- 2 files changed, 280 insertions(+)
- create mode 100644 doc/usage/fit/dm-verity.rst
+ configs/starfive_visionfive2_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/doc/usage/fit/dm-verity.rst b/doc/usage/fit/dm-verity.rst
-new file mode 100644
-index 00000000000..99f9ea66286
---- /dev/null
-+++ b/doc/usage/fit/dm-verity.rst
-@@ -0,0 +1,279 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+FIT dm-verity Boot Parameters
-+=============================
-+
-+Introduction
-+------------
-+
-+Linux's dm-verity device-mapper target provides transparent integrity
-+checking of block devices using a Merkle tree.  It is commonly used to
-+protect read-only root filesystems such as SquashFS images.
-+
-+When a FIT image packages the root filesystem as a loadable sub-image of
-+type ``filesystem`` (``IH_TYPE_FILESYSTEM``), the verity metadata can be
-+stored alongside the image data in a ``dm-verity`` subnode.  U-Boot reads
-+this metadata at boot time and generates the kernel command-line parameters
-+that Linux needs to activate the verity target, eliminating the need for
-+an initramfs or userspace helper to set up dm-verity.
-+
-+This feature is enabled by ``CONFIG_FIT_VERITY`` (see ``boot/Kconfig``).
-+
-+Prerequisites
-+-------------
-+
-+* **Linux uImage.FIT block driver** – the kernel must include the FIT block
-+  driver that exposes loadable sub-images as ``/dev/fit0``, ``/dev/fit1``,
-+  etc.  The driver assigns device numbers in the order loadables appear in
-+  the FIT configuration.
-+
-+* **dm-verity support in the kernel** – ``CONFIG_DM_VERITY`` must be
-+  enabled so the kernel can process the ``dm-mod.create=`` parameter.
-+
-+* **CONFIG_FIT_VERITY** enabled in U-Boot.
-+
-+How it works
-+------------
-+
-+The implementation is split into a **build** phase and an **apply** phase,
-+both of which run automatically within the ``bootm`` state machine.  No
-+boot method needs to call verity functions explicitly.
-+
-+**Build phase** (``BOOTM_STATE_FINDOTHER`` → ``boot_get_loadable()``)
-+
-+1. After all loadable sub-images have been loaded,
-+   ``fit_verity_build_cmdline()`` iterates the configuration's
-+   ``loadables`` list.
-+
-+2. For each loadable that is an ``IH_TYPE_FILESYSTEM`` image **and**
-+   contains a ``dm-verity`` child node, a dm-verity target specification is
-+   built by the helper ``fit_verity_build_target()``.
-+
-+3. The dm-verity target references ``/dev/fitN``, where *N* is the
-+   zero-based index of the loadable in the configuration.  This matches the
-+   numbering used by the Linux FIT block driver.
-+
-+4. The resulting fragments are stored in ``struct bootm_headers``:
-+
-+   ``images->dm_mod_create``
-+     The full dm-verity target table.  Multiple targets are separated by
-+     ``;``.
-+
-+   ``images->dm_mod_waitfor``
-+     Comma-separated list of ``/dev/fitN`` devices so the kernel waits for
-+     the underlying FIT block devices to appear before activating
-+     device-mapper.
-+
-+**Apply phase** (``BOOTM_STATE_OS_PREP``)
-+
-+5. Just before ``bootm_process_cmdline_env()`` processes the ``bootargs``
-+   environment variable, ``fit_verity_apply_bootargs()`` appends the
-+   ``dm-mod.create=`` and ``dm-mod.waitfor=`` parameters.
-+
-+**Bootmeth integration**
-+
-+  Because the fragments are stored in ``struct bootm_headers``, a boot
-+  method can check ``fit_verity_active(images)`` between bootm state
-+  invocations.  A typical pattern splits ``bootm_run_states()`` into two
-+  calls -- one for ``START|FINDOS|FINDOTHER|LOADOS`` and one for
-+  ``OS_PREP|OS_GO`` -- and inspects ``fit_verity_active()`` in
-+  between to decide whether to add a ``root=`` parameter pointing at the
-+  dm-verity device.
-+
-+FIT image source (.its) example
-+-------------------------------
-+
-+Below is a minimal ``.its`` file showing a kernel and a dm-verity-protected
-+root filesystem packaged as a FIT. Only the three user-provided properties
-+(``algo``, ``data-block-size``, ``hash-block-size``) are included; ``mkimage``
-+computes and fills in ``digest``, ``salt``, ``num-data-blocks``, and
-+``hash-start-block`` automatically (see `Generating verity metadata`_ below)::
-+
-+    /dts-v1/;
-+
-+    / {
-+        description = "Kernel + dm-verity rootfs";
-+        #address-cells = <1>;
-+
-+        images {
-+            kernel {
-+                description = "Linux kernel";
-+                data = /incbin/("./Image.gz");
-+                type = "kernel";
-+                arch = "arm64";
-+                os = "linux";
-+                compression = "gzip";
-+                load = <0x44000000>;
-+                entry = <0x44000000>;
-+            };
-+
-+            fdt {
-+                description = "Device tree blob";
-+                data = /incbin/("./board.dtb");
-+                type = "flat_dt";
-+                arch = "arm64";
-+                compression = "none";
-+            };
-+
-+            rootfs {
-+                description = "SquashFS root filesystem";
-+                data = /incbin/("./rootfs.squashfs");
-+                type = "filesystem";
-+                arch = "arm64";
-+                compression = "none";
-+
-+                dm-verity {
-+                    data-block-size = <4096>;
-+                    hash-block-size = <4096>;
-+                    num-data-blocks = <3762>;
-+                    hash-start-block = <3762>;
-+                    algo = "sha256";
-+                    digest = [8e 67 91 63 7f 93 cb b8 1f c4 52 99 e2 03 cb e8
-+                              5c a2 e4 7a 38 f5 05 1b dd ee ce 92 d7 b1 c9 f9];
-+                    salt = [aa 7b 11 f8 db 8f e2 e5 bf d4 ec a1 d1 8a 22 b5
-+                            de 7e a3 9d 2e 1b 93 bb 72 72 ce 0c 6c a3 cc 8e];
-+                };
-+            };
-+        };
-+
-+        configurations {
-+            default = "config-1";
-+            config-1 {
-+                description = "Boot with dm-verity rootfs";
-+                kernel = "kernel";
-+                fdt = "fdt";
-+                loadables = "rootfs";
-+            };
-+        };
-+    };
-+
-+With this configuration U-Boot produces a kernel command line similar to::
-+
-+    dm-mod.create="rootfs,,, ro,0 <data_sectors> verity 1 \
-+        /dev/fit0 /dev/fit0 4096 4096 3762 3762 sha256 \
-+        8e6791637f93cbb81fc45299e203cbe85ca2e47a38f5051bddeece92d7b1c9f9 \
-+        aa7b11f8db8fe2e5bfd4eca1d18a22b5de7ea39d2e1b93bb7272ce0c6ca3cc8e" \
-+    dm-mod.waitfor=/dev/fit0
-+
-+dm-verity subnode properties
-+----------------------------
-+
-+User-provided properties (required in the ``.its``):
-+
-+.. list-table::
-+   :header-rows: 1
-+   :widths: 20 15 65
-+
-+   * - Property
-+     - Type
-+     - Description
-+   * - ``algo``
-+     - string
-+     - Hash algorithm name, e.g. ``"sha256"``.
-+   * - ``data-block-size``
-+     - u32
-+     - Data block size in bytes (>= 512, typically 4096).
-+   * - ``hash-block-size``
-+     - u32
-+     - Hash block size in bytes (>= 512, typically 4096).
-+
-+Computed properties (filled in by ``mkimage``):
-+
-+.. list-table::
-+   :header-rows: 1
-+   :widths: 20 15 65
-+
-+   * - Property
-+     - Type
-+     - Description
-+   * - ``num-data-blocks``
-+     - u32
-+     - Number of data blocks in the filesystem image (computed from the
-+       image size and ``data-block-size``).
-+   * - ``hash-start-block``
-+     - u32
-+     - Offset in ``hash-block-size``-sized blocks from the start of the
-+       sub-image to the root block of the hash tree.
-+   * - ``digest``
-+     - byte array
-+     - Root hash of the Merkle tree, stored as raw bytes. Length must match
-+       the output size of ``algo``.
-+   * - ``salt``
-+     - byte array
-+     - Salt used when computing the Merkle tree, stored as raw bytes.
-+
-+Optional boolean properties (when present, they are collected and appended
-+as dm-verity optional parameters with hyphens converted to underscores):
-+
-+.. list-table::
-+   :header-rows: 1
-+   :widths: 30 70
-+
-+   * - Property
-+     - Description
-+   * - ``restart-on-corruption``
-+     - Restart the system on data corruption.
-+   * - ``panic-on-corruption``
-+     - Panic the system on data corruption.
-+   * - ``restart-on-error``
-+     - Restart the system on I/O error.
-+   * - ``panic-on-error``
-+     - Panic the system on I/O error.
-+   * - ``check-at-most-once``
-+     - Verify data blocks only on first read.
-+
-+These values are the same ones produced by ``veritysetup format`` and can
-+typically be obtained from its output or from the verity superblock.
-+The ``digest`` and ``salt`` byte arrays correspond to the hex-encoded
-+``Root hash`` and ``Salt`` printed by ``veritysetup format``.
-+
-+Generating verity metadata
-+--------------------------
-+
-+``mkimage`` automates the entire process.  When it encounters a
-+``dm-verity`` subnode, it:
-+
-+1. Writes the embedded image data to a temporary file.
-+2. Runs ``veritysetup format`` with the user-supplied algorithm and
-+   block sizes.
-+3. Parses ``Root hash`` and ``Salt`` from ``veritysetup`` stdout.
-+4. Reads back the expanded file (original data + verity superblock +
-+   Merkle hash tree) and replaces the image's ``data`` property.
-+5. Writes the computed ``digest``, ``salt``, ``num-data-blocks``, and
-+   ``hash-start-block`` properties into the ``dm-verity`` subnode.
-+
-+Images with ``dm-verity`` subnodes **must** use external data layout
-+(``mkimage -E``).  ``mkimage`` will abort with an error if ``-E`` is
-+not specified.
-+
-+Usage::
-+
-+    # Create the filesystem image
-+    mksquashfs rootfs/ rootfs.squashfs -comp xz
-+
-+    # Build the FIT (dm-verity is computed automatically)
-+    mkimage -E -f image.its image.itb
-+
-+``veritysetup`` (from the cryptsetup_ package) must be installed on
-+the build host.
-+
-+.. _cryptsetup: https://gitlab.com/cryptsetup/cryptsetup
-+
-+.. note::
-+
-+   ``veritysetup format`` is invoked with ``--no-superblock``, so no
-+   on-disk superblock is written between the data and hash regions.
-+   The Merkle hash tree is appended directly to the image data within
-+   the FIT external data section.  Consequently ``hash-start-block``
-+   equals ``num-data-blocks``.
-+
-+Kconfig
-+-------
-+
-+``CONFIG_FIT_VERITY``
-+  Depends on ``CONFIG_FIT`` and ``CONFIG_OF_LIBFDT``.
-+  When enabled, ``fit_verity_build_cmdline()`` and
-+  ``fit_verity_apply_bootargs()`` are compiled into the boot path.
-+  When disabled, the functions are static inlines returning 0, so there
-+  is no code-size impact.  Works with both the ``bootm`` command and
-+  BOOTSTD boot methods.
-diff --git a/doc/usage/fit/index.rst b/doc/usage/fit/index.rst
-index 6c78d8584ed..d17582b1d64 100644
---- a/doc/usage/fit/index.rst
-+++ b/doc/usage/fit/index.rst
-@@ -11,6 +11,7 @@ images that it reads and boots. Documentation about FIT is available in
-     :maxdepth: 1
- 
-     beaglebone_vboot
-+    dm-verity
-     howto
-     kernel_fdt
-     kernel_fdts_compressed
+diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
+index 74a24dfd074..b6b3108ac5c 100644
+--- a/configs/starfive_visionfive2_defconfig
++++ b/configs/starfive_visionfive2_defconfig
+@@ -80,7 +80,7 @@ CONFIG_WGET_HTTPS=y
+ CONFIG_CMD_BOOTSTAGE=y
+ CONFIG_OF_BOARD=y
+ CONFIG_DEVICE_TREE_INCLUDES="starfive-visionfive2-u-boot.dtsi"
+-CONFIG_OF_LIST="starfive/jh7110-deepcomputing-fml13v01 starfive/jh7110-milkv-mars starfive/jh7110-milkv-marscm-emmc starfive/jh7110-milkv-marscm-lite starfive/jh7110-orangepi-rv starfive/jh7110-pine64-star64 starfive/jh7110-starfive-visionfive-2-v1.2a starfive/jh7110-starfive-visionfive-2-v1.3b starfive/jh7110-starfive-visionfive-2-lite"
++CONFIG_OF_LIST="starfive/jh7110-deepcomputing-fml13v01 starfive/jh7110-milkv-mars starfive/jh7110-milkv-marscm-emmc starfive/jh7110-milkv-marscm-lite starfive/jh7110-orangepi-rv starfive/jh7110-pine64-star64 starfive/jh7110-starfive-visionfive-2-v1.2a starfive/jh7110-starfive-visionfive-2-v1.3b starfive/jh7110-starfive-visionfive-2-lite starfive/jh7110-starfive-visionfive-2-lite-emmc"
+ CONFIG_MULTI_DTB_FIT=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_SPI_FLASH=y
 -- 
-2.53.0
+2.43.2
+
