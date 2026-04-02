@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A3AB1112246
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 01:32:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A410D1112246
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 01:32:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFCED83D8A;
-	Thu,  2 Apr 2026 03:32:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E11A384020;
+	Thu,  2 Apr 2026 03:32:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CbtOQGzf";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EwiRUyHz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80E7F83F7D; Thu,  2 Apr 2026 03:32:33 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id B245984056; Thu,  2 Apr 2026 03:32:49 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CD5680517
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 03:32:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3742680517
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 03:32:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-66a87f29614so68761a12.2
- for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 18:32:31 -0700 (PDT)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-66b832bd439so48407a12.3
+ for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 18:32:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1775093551; x=1775698351; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1775093567; x=1775698367; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=lLkAFOgsZZx2THCGIorQ5aZlMSxba6nPnHjhixmmauI=;
- b=CbtOQGzf4LcfChjum6mtRjj690AG2yYOpfK5k72x2rpUBNOnEkFlnU6E/uhOLuY0Qd
- fuv1RbTMV3T/iKVfIqTvfYU2cGcAlDtD6q22Z/TI+fiJVZ928YsET/5jc61ws0UE68lH
- UzKliOEO2hR8KTYp3m3oD3ljsFT3Pskw9V03cd4s3pHaYwTVbCxUEouNRN8q/EM7Ekfq
- g7FWapsPllNpf4H2jcr+8DFURfV/28CvbXq9ps9Fe6/1+1ff6r7KTw6HQJrqk2yit3SR
- XsFVwxXGSpAhVpp4jzjqV3x0PY1OJlTOuA2CJ5UTzUZg/wsizgSqqAiY8jvjuPxnhbNB
- 0+OQ==
+ bh=2WNZqqkErTr85DZppPKsaFugJzxmknNbHYoC1x3jFEw=;
+ b=EwiRUyHzEnFbK+s8uTsA/JHca6t/XcbinLuPll/QB0lHPqNNy2BmEYNeiy64QlBoq8
+ 60HG/lXHxBPNNOQ7XsOZLqBeEciDm9jI9l0Z8DWY5m5T5f1oSqSMtfnDjk5bjjg8MDNc
+ 67Ya2fRRSGAzLXu5hXH27+IMBkv9pezXzwqC7zwC+U/moUq5s33KqhWlknzjKWOoT4BC
+ 6isn6qTycwKnoFT5d9syB0AGgOLoM+PK+ZXIzA58KT/2v4LFE5Ze01z/odzgycWI9fxD
+ N6PVroUvkVgDf+PA98NEATiqkBVvWhZj1TWBXBWYgD5tmmwSczIGmTQasGiquHh9uC/g
+ WQVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775093551; x=1775698351;
+ d=1e100.net; s=20251104; t=1775093567; x=1775698367;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=lLkAFOgsZZx2THCGIorQ5aZlMSxba6nPnHjhixmmauI=;
- b=Qk37Wci0p4dRHvekiULa/bZaw/vurlv9HNj/FPWRxRZ29WSfug19w+wOMpTKfXawyi
- nh+922sLiWsSxvHIoI6pxbDFYlE1JJteko+UDfdPe8gabGBJYN+72Dq0UxWYZntvpQT2
- FLZWf5KagYdp/MsaIVjggUAdXxwmw2ywWwCVTkVqqlPW/nzFdRC4HcDH8zdVnTULcsbd
- djdR6h5V+TsJy+L8gFjdsD2FHZ5u9pG1G1pSIMAQfpoKHzPrZUQV5VMwTYJhivXBexPI
- O5dZzbqchXRYsWknN5k3dGF1oVpED7hoTKwV+2GtbU5YuExfGsb3tiG/LR0GxP1AMvo8
- jF9g==
+ bh=2WNZqqkErTr85DZppPKsaFugJzxmknNbHYoC1x3jFEw=;
+ b=XwgK5a2txRn1LcsjfSmFE8r1kg7JznUOQInAgTzxeH6AMAUKRbfwuXWEaO57p3s88C
+ K4nvfHwyORg3vGtsmIsaDZyRomDZa0OSW5GLGgj8JbaZ3IGGyCyaOtcOcx3fVUZFNEJq
+ buVUM226uRYmdVt2HUNBpb079P87U4rkm+xEpbL8vfUk6PwsppSHssrxIk7d6p3boDDo
+ FdEZMKoA5kytxVbul/cnprWK3F2hJAfBVghhwnvHr323SmHAdkZnSYEKMT5h1y9OQFk0
+ 9UhenQK0Pg0ug1/4UhTD4YnO3nlJB4I1Cb/hKWXQ5xUeKO/UPSTtZR2s81VX5gRoZIOV
+ XiLA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVm7oexAS86VgB78EMQ8CcnS9LNEQOhraYrIsPTXhzKrmf1+daUU5zTBQJqxJH50iShICGanRU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw7ufprzL6aLLxdLbVIQOvOaJrTkZv860Axw57u1eLqkj5clUIb
- UDhADFxXTpBVbpibtBh+x7Rsdw1nE5XcRrXHdxl6RPad5biYcfSEr8eq
-X-Gm-Gg: ATEYQzxukWmPDvW0pE2WYO3oyonpJWOEhjWy9LpNIiO/N3by/U3oVZu19EBvzo2g1Ec
- vH5f3Ce15TQEIOpRpgqH0ymnb6TVrbcPxlTB+XRfngqS9b0iuHG8L/cnTw+v/gF1RQ9M/y8wkse
- wHPP8mUkKlag4W2/46mTN5HpC2BbATw6XfMBY/0e/lRdwsu5L7Iq/R9RGKHZSJZdArX5cwm4Fhi
- XbQVgB5wElfMlzwxoCYBQqQcuVKKk6GWTyAL6i5Wo9X1b79VgdJS6MQDUvJb1f8IpoGs04F9SB5
- EicGOXOnHNfDsR7n+gVKYZ6NJ9Xthqf/TVqvySNC8E/n+jO6XiAxFCthrFh7P103JcZBcdFHeSx
- tAs5kEtUr51cbDrRA/1MBv0uTpu724MDK4V5Vnn8n+Ko3lhsZYAEXH3suRekc/17WgTqlha6OKi
- g2jPdQPuC1pam+wKVq4StTiy5FWxQa2bAry018Ib7Dp7Hu2f5QgrucUpZAZ42SiiZCVl1Ezpc0
-X-Received: by 2002:a17:907:6d05:b0:b9b:52d4:40fb with SMTP id
- a640c23a62f3a-b9c13cc2521mr142418566b.5.1775093550181; 
- Wed, 01 Apr 2026 18:32:30 -0700 (PDT)
+ AJvYcCXU2viD/Ne2SCWO3duTOsDe1PJsoY/IL5R8f2ZGhwNpZ7k4TA+1kv3m46lACXqk5oc+rEFlMZE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwG1NeyHDZ0JSSneV+w74CClGIZV9VI0nSb9mA/q/6zXpiwqQ+G
+ pVh3gT3Dgxs+TaOGYq13gPAjKtuT9Qwp+ZuUq3Ki0NXsXwbzPw/v2bgZ
+X-Gm-Gg: ATEYQzxNqAuyx8p/KA9jad/3c5WamY7aTI5eZqmXV5jnsUq1HC0covh+wbUvdd74lwr
+ bKyd7Vzd4M3byAZqb4imyJD/Eu4XwVoKdp70tQFPcNLqqG4vLv6G0PPluH/8zydZFceAlW51idA
+ w5X+YlV/8qCNSjL2KtAvDd7RjQEts5K89tg3ZieCAx9Gqs7gagcXMSycWeEdIscCxk9MgyIs1F/
+ LuJ3JrzekjHYoerFJixrQW9pDzediqN5cy/UNno6F9x1Rkjo15fThsFuNoqmxL90gBCaj4q8lcA
+ swEItddIHwzPS4d7Yoa4b+kYwdpQ1XuTILY50D4csfZ9yDJkOof0jxhEbAoV3m9LBFWdIiVcDXf
+ T5/EhN2rUTkkozDkf4RQguiHvlBetL1nikJ9sbIYlQkznpFAX+nmulmZ/ElQ9pVEKsVI39m9ZnG
+ Yr5WdVxUazFPUkH9754fbTyAR0nzZS1rmG5dy37VLYBo+5OxI0H+vjSluLGmxivg==
+X-Received: by 2002:a05:6402:350f:b0:66b:eb29:4195 with SMTP id
+ 4fb4d7f45d1cf-66daffb12a6mr1344105a12.1.1775093566316; 
+ Wed, 01 Apr 2026 18:32:46 -0700 (PDT)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b9c3c97218esm39367666b.9.2026.04.01.18.32.26
+ 4fb4d7f45d1cf-66e034bc112sm269190a12.25.2026.04.01.18.32.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 01 Apr 2026 18:32:27 -0700 (PDT)
-Message-ID: <0e0acf7c-69d6-4f98-80b8-1fcb3dc859f4@gmail.com>
-Date: Thu, 2 Apr 2026 03:32:26 +0200
+ Wed, 01 Apr 2026 18:32:44 -0700 (PDT)
+Message-ID: <b127c1c7-61e8-49fc-b10b-a1acd23644eb@gmail.com>
+Date: Thu, 2 Apr 2026 03:32:42 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [RFC PATCH v1 1/2] phy: rockchip: add phy-rockchip-usb2.c
+Subject: [RFC PATCH v1 2/2] usb: phy: remove rockchip_usb2_phy.c
 To: kever.yang@rock-chips.com
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, trini@konsulko.com,
  hl@rock-chips.com, jernej.skrabec@gmail.com, w.egorov@phytec.de,
@@ -106,478 +106,740 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add phy-rockchip-usb2.c driver with support
-for RK3066, RK3188 and RK3288 pdata.
+Remove rockchip_usb2_phy.c and replace it by phy-rockchip-usb2.c
+Adjust defconfigs. Enable CONFIG_DM_RESET where needed to compile
+th phy driver. Move usbphy node to the DT root in order to be found
+by the generic_phy_get_by_index() function. Remove a variable no
+longer needed from an include file.
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 ---
- drivers/phy/rockchip/Kconfig             |  28 +-
- drivers/phy/rockchip/Makefile            |   5 +-
- drivers/phy/rockchip/phy-rockchip-usb2.c | 379 +++++++++++++++++++++++
- 3 files changed, 400 insertions(+), 12 deletions(-)
- create mode 100644 drivers/phy/rockchip/phy-rockchip-usb2.c
+ arch/arm/dts/rk3066a-u-boot.dtsi    |  29 +++++++
+ arch/arm/dts/rk3188-u-boot.dtsi     |  29 +++++++
+ arch/arm/dts/rk3288-u-boot.dtsi     |  40 ++++++++++
+ arch/arm/mach-rockchip/board.c      |  28 -------
+ configs/chromebit_mickey_defconfig  |   2 +-
+ configs/chromebook_jerry_defconfig  |   2 +-
+ configs/chromebook_minnie_defconfig |   2 +-
+ configs/chromebook_speedy_defconfig |   2 +-
+ configs/evb-rk3288-rk808_defconfig  |   2 +-
+ configs/firefly-rk3288_defconfig    |   4 +-
+ configs/miqi-rk3288_defconfig       |   4 +-
+ configs/mk808_defconfig             |   2 +-
+ configs/phycore-rk3288_defconfig    |   3 +-
+ configs/popmetal-rk3288_defconfig   |   3 +-
+ configs/rock-pi-n8-rk3288_defconfig |   2 +-
+ configs/rock2_defconfig             |   3 +-
+ configs/rock_defconfig              |   3 +-
+ configs/tinker-rk3288_defconfig     |   4 +-
+ configs/tinker-s-rk3288_defconfig   |   4 +-
+ configs/vyasa-rk3288_defconfig      |   2 +-
+ drivers/usb/phy/Kconfig             |   3 -
+ drivers/usb/phy/Makefile            |   1 -
+ drivers/usb/phy/rockchip_usb2_phy.c | 113 ----------------------------
+ include/usb/dwc2_udc.h              |   1 -
+ 24 files changed, 122 insertions(+), 166 deletions(-)
+ delete mode 100644 drivers/usb/phy/rockchip_usb2_phy.c
 
-diff --git a/drivers/phy/rockchip/Kconfig b/drivers/phy/rockchip/Kconfig
-index 80128335d52f..745e0ea67b8d 100644
---- a/drivers/phy/rockchip/Kconfig
-+++ b/drivers/phy/rockchip/Kconfig
-@@ -27,7 +27,7 @@ config PHY_ROCKCHIP_INNO_USB2
- 	  Support for Rockchip USB2.0 PHY with Innosilicon IP block.
+diff --git a/arch/arm/dts/rk3066a-u-boot.dtsi b/arch/arm/dts/rk3066a-u-boot.dtsi
+index d99db7853b59..994c0d44f3f5 100644
+--- a/arch/arm/dts/rk3066a-u-boot.dtsi
++++ b/arch/arm/dts/rk3066a-u-boot.dtsi
+@@ -7,3 +7,32 @@
+ 	status = "disabled";
+ };
 
- config PHY_ROCKCHIP_NANENG_COMBOPHY
--	bool "Support Rockchip NANENG combo PHY Driver"
-+	bool "Rockchip NANENG combo PHY Driver"
- 	depends on ARCH_ROCKCHIP
- 	select PHY
- 	help
-@@ -41,26 +41,34 @@ config PHY_ROCKCHIP_PCIE
- 	  Enable this to support the Rockchip PCIe PHY.
++&grf {
++	/delete-node/ usbphy;
++};
++
++/ {
++	usbphy: usbphy {
++		compatible = "rockchip,rk3066a-usb-phy";
++		rockchip,grf = <&grf>;
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		usbphy0: usb-phy@17c {
++			reg = <0x17c>;
++			clocks = <&cru SCLK_OTGPHY0>;
++			clock-names = "phyclk";
++			#clock-cells = <0>;
++			#phy-cells = <0>;
++		};
++
++		usbphy1: usb-phy@188 {
++			reg = <0x188>;
++			clocks = <&cru SCLK_OTGPHY1>;
++			clock-names = "phyclk";
++			#clock-cells = <0>;
++			#phy-cells = <0>;
++		};
++	};
++};
++
+diff --git a/arch/arm/dts/rk3188-u-boot.dtsi b/arch/arm/dts/rk3188-u-boot.dtsi
+index 8f2849dda241..905ebaea7915 100644
+--- a/arch/arm/dts/rk3188-u-boot.dtsi
++++ b/arch/arm/dts/rk3188-u-boot.dtsi
+@@ -10,7 +10,36 @@
+ 	compatible = "rockchip,gpio-bank";
+ };
 
- config PHY_ROCKCHIP_SNPS_PCIE3
--	bool "Rockchip Snps PCIe3 PHY Driver"
--	depends on PHY && ARCH_ROCKCHIP
-+	bool "Rockchip SNPS PCIe3 PHY Driver"
-+	depends on ARCH_ROCKCHIP
-+	select PHY
- 	help
- 	  Support for Rockchip PCIe3 PHY with Synopsys IP block.
- 	  It could support PCIe Gen3 single root complex, and could
- 	  also be able splited into multiple combinations of lanes.
++&grf {
++	/delete-node/ usbphy;
++};
++
+ &pmu {
+ 	compatible = "rockchip,rk3188-pmu", "syscon", "simple-mfd";
+ };
 
--config PHY_ROCKCHIP_USBDP
--	tristate "Rockchip USBDP COMBO PHY Driver"
-+config PHY_ROCKCHIP_TYPEC
-+	bool "Rockchip TYPEC PHY Driver"
- 	depends on ARCH_ROCKCHIP
- 	select PHY
- 	help
--	  Enable this to support the Rockchip USB3.0/DP
--	  combo PHY with Samsung IP block.
-+	  Enable this to support the Rockchip USB TYPEC PHY.
++/ {
++	usbphy: usbphy {
++		compatible = "rockchip,rk3188-usb-phy";
++		rockchip,grf = <&grf>;
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		usbphy0: usb-phy@10c {
++			reg = <0x10c>;
++			clocks = <&cru SCLK_OTGPHY0>;
++			clock-names = "phyclk";
++			#clock-cells = <0>;
++			#phy-cells = <0>;
++		};
++
++		usbphy1: usb-phy@11c {
++			reg = <0x11c>;
++			clocks = <&cru SCLK_OTGPHY1>;
++			clock-names = "phyclk";
++			#clock-cells = <0>;
++			#phy-cells = <0>;
++		};
++	};
++};
++
+diff --git a/arch/arm/dts/rk3288-u-boot.dtsi b/arch/arm/dts/rk3288-u-boot.dtsi
+index bb0078588fe8..e61746b5b2a8 100644
+--- a/arch/arm/dts/rk3288-u-boot.dtsi
++++ b/arch/arm/dts/rk3288-u-boot.dtsi
+@@ -68,6 +68,7 @@
 
--config PHY_ROCKCHIP_TYPEC
--	bool "Rockchip TYPEC PHY Driver"
-+config PHY_ROCKCHIP_USB2
-+	bool "Rockchip USB2 PHY"
- 	depends on ARCH_ROCKCHIP
- 	select PHY
- 	help
--	  Enable this to support the Rockchip USB TYPEC PHY.
-+	  Support for Rockchip USB 2.0 PHY.
-+
-+config PHY_ROCKCHIP_USBDP
-+	tristate "Rockchip USBDP COMBO PHY Driver"
-+	depends on ARCH_ROCKCHIP
-+	select PHY
-+	help
-+	  Enable this to support the Rockchip USB3.0/DP
-+	  combo PHY with Samsung IP block.
+ &grf {
+ 	bootph-all;
++	/delete-node/ usbphy;
+ };
 
- endmenu
-diff --git a/drivers/phy/rockchip/Makefile b/drivers/phy/rockchip/Makefile
-index 04200174254e..f296dc8f3d2a 100644
---- a/drivers/phy/rockchip/Makefile
-+++ b/drivers/phy/rockchip/Makefile
-@@ -3,11 +3,12 @@
- # Copyright (C) 2020 Amarula Solutions(India)
- #
+ &pmu {
+@@ -105,3 +106,42 @@
+ &xin24m {
+ 	bootph-all;
+ };
++
++/ {
++	usbphy: usbphy {
++		compatible = "rockchip,rk3288-usb-phy";
++		rockchip,grf = <&grf>;
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		usbphy0: usb-phy@320 {
++			#phy-cells = <0>;
++			reg = <0x320>;
++			clocks = <&cru SCLK_OTGPHY0>;
++			clock-names = "phyclk";
++			#clock-cells = <0>;
++			resets = <&cru SRST_USBOTG_PHY>;
++			reset-names = "phy-reset";
++		};
++
++		usbphy1: usb-phy@334 {
++			#phy-cells = <0>;
++			reg = <0x334>;
++			clocks = <&cru SCLK_OTGPHY1>;
++			clock-names = "phyclk";
++			#clock-cells = <0>;
++			resets = <&cru SRST_USBHOST0_PHY>;
++			reset-names = "phy-reset";
++		};
++
++		usbphy2: usb-phy@348 {
++			#phy-cells = <0>;
++			reg = <0x348>;
++			clocks = <&cru SCLK_OTGPHY2>;
++			clock-names = "phyclk";
++			#clock-cells = <0>;
++			resets = <&cru SRST_USBHOST1_PHY>;
++			reset-names = "phy-reset";
++		};
++	};
++};
+diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
+index 2e6bb38b9235..1538f4fef081 100644
+--- a/arch/arm/mach-rockchip/board.c
++++ b/arch/arm/mach-rockchip/board.c
+@@ -269,34 +269,6 @@ int board_usb_init(int index, enum usb_init_type init)
+ 	}
+ 	otg_data.regs_otg = ofnode_get_addr(node);
 
-+obj-$(CONFIG_PHY_ROCKCHIP_INNO_DSIDPHY)	+= phy-rockchip-inno-dsidphy.o
- obj-$(CONFIG_PHY_ROCKCHIP_INNO_HDMI)	+= phy-rockchip-inno-hdmi.o
- obj-$(CONFIG_PHY_ROCKCHIP_INNO_USB2)	+= phy-rockchip-inno-usb2.o
- obj-$(CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY) += phy-rockchip-naneng-combphy.o
- obj-$(CONFIG_PHY_ROCKCHIP_PCIE)		+= phy-rockchip-pcie.o
- obj-$(CONFIG_PHY_ROCKCHIP_SNPS_PCIE3)	+= phy-rockchip-snps-pcie3.o
- obj-$(CONFIG_PHY_ROCKCHIP_TYPEC)	+= phy-rockchip-typec.o
--obj-$(CONFIG_PHY_ROCKCHIP_INNO_DSIDPHY)	+= phy-rockchip-inno-dsidphy.o
--obj-$(CONFIG_PHY_ROCKCHIP_USBDP) += phy-rockchip-usbdp.o
-+obj-$(CONFIG_PHY_ROCKCHIP_USB2)		+= phy-rockchip-usb2.o
-+obj-$(CONFIG_PHY_ROCKCHIP_USBDP)	+= phy-rockchip-usbdp.o
-diff --git a/drivers/phy/rockchip/phy-rockchip-usb2.c b/drivers/phy/rockchip/phy-rockchip-usb2.c
-new file mode 100644
-index 000000000000..4f02cd18b302
---- /dev/null
-+++ b/drivers/phy/rockchip/phy-rockchip-usb2.c
-@@ -0,0 +1,379 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+#include <clk.h>
-+#include <dm.h>
-+#include <dm/device.h>
-+#include <dm/lists.h>
-+#include <generic-phy.h>
-+#include <power/regulator.h>
-+#include <regmap.h>
-+#include <reset.h>
-+#include <syscon.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+#define BIT_WRITEABLE_SHIFT	16
-+#define usleep_range(a, b) udelay((b))
-+
-+struct usbphy_reg {
-+	unsigned int offset;
-+	unsigned int bitend;
-+	unsigned int bitstart;
-+	unsigned int disable;
-+	unsigned int enable;
-+};
-+
-+struct rockchip_usbphy_port_cfg {
-+	int num_phys;
-+	struct usbphy_reg port_reset;
-+	struct usbphy_reg soft_con;
-+	struct usbphy_reg suspend;
-+};
-+
-+struct rockchip_usb_phy {
-+	ofnode node;
-+	unsigned int reg;
-+	struct clk clock;
-+	struct reset_ctl reset;
-+	struct udevice *vbus_supply;
-+};
-+
-+struct rockchip_usbphy_priv {
-+	struct device *dev;
-+	struct regmap *grf_regmap;
-+	const struct rockchip_usbphy_port_cfg *port_cfg;
-+	struct rockchip_usb_phy *usb_phy;
-+};
-+
-+static void rockchip_usbphy_property_enable(struct phy *phy, const struct usbphy_reg *reg, bool en)
-+{
-+	struct udevice *parent = phy->dev->parent;
-+	struct rockchip_usbphy_priv *priv = dev_get_priv(parent);
-+	unsigned int val, mask, tmp;
-+
-+	tmp = en ? reg->enable : reg->disable;
-+	mask = GENMASK(reg->bitend, reg->bitstart);
-+	val = (tmp << reg->bitstart) | (mask << BIT_WRITEABLE_SHIFT);
-+
-+	regmap_write(priv->grf_regmap,
-+		     priv->usb_phy[phy->id].reg + reg->offset, val);
-+}
-+
-+static const struct rockchip_usbphy_port_cfg *rockchip_usbphy_get_port_cfg(struct phy *phy)
-+{
-+	struct udevice *parent = phy->dev->parent;
-+	struct rockchip_usbphy_priv *priv = dev_get_priv(parent);
-+
-+	return priv->port_cfg;
-+}
-+
-+static int rockchip_usbphy_power_on(struct phy *phy)
-+{
-+	struct udevice *parent = phy->dev->parent;
-+	struct rockchip_usbphy_priv *priv = dev_get_priv(parent);
-+	const struct rockchip_usbphy_port_cfg *port_cfg = rockchip_usbphy_get_port_cfg(phy);
-+	int ret;
-+
-+	if (priv->usb_phy[phy->id].vbus_supply) {
-+		ret = regulator_set_enable(priv->usb_phy[phy->id].vbus_supply, true);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	/* Exit suspend. */
-+	rockchip_usbphy_property_enable(phy, &port_cfg->suspend, false);
-+	usleep_range(1500, 2000);
-+
-+	return 0;
-+}
-+
-+static int rockchip_usbphy_power_off(struct phy *phy)
-+{
-+	struct udevice *parent = phy->dev->parent;
-+	struct rockchip_usbphy_priv *priv = dev_get_priv(parent);
-+	const struct rockchip_usbphy_port_cfg *port_cfg = rockchip_usbphy_get_port_cfg(phy);
-+
-+	/* Enter suspend. */
-+	rockchip_usbphy_property_enable(phy, &port_cfg->suspend, true);
-+
-+	if (!priv->usb_phy[phy->id].vbus_supply)
-+		return 0;
-+
-+	return regulator_set_enable(priv->usb_phy[phy->id].vbus_supply, false);
-+}
-+
-+static inline int rockchip_usbphy_reset_assert(struct reset_ctl *rst)
-+{
-+	if (rst)
-+		return reset_assert(rst);
-+	else
-+		return 0;
-+}
-+
-+static inline int rockchip_usbphy_reset_deassert(struct reset_ctl *rst)
-+{
-+	if (rst)
-+		return reset_deassert(rst);
-+	else
-+		return 0;
-+}
-+
-+#define reset_control_assert(rst) rockchip_usbphy_reset_assert(rst)
-+#define reset_control_deassert(rst) rockchip_usbphy_reset_deassert(rst)
-+
-+static int rockchip_usbphy_reset(struct phy *phy)
-+{
-+	struct udevice *parent = phy->dev->parent;
-+	struct rockchip_usbphy_priv *priv = dev_get_priv(parent);
-+
-+	if (reset_valid(&priv->usb_phy[phy->id].reset)) {
-+		reset_control_assert(&priv->usb_phy[phy->id].reset);
-+		udelay(10);
-+		reset_control_deassert(&priv->usb_phy[phy->id].reset);
-+	}
-+
-+	return 0;
-+}
-+
-+static int rockchip_usbphy_init(struct phy *phy)
-+{
-+	struct udevice *parent = phy->dev->parent;
-+	struct rockchip_usbphy_priv *priv = dev_get_priv(parent);
-+	const struct rockchip_usbphy_port_cfg *port_cfg = rockchip_usbphy_get_port_cfg(phy);
-+	int ret;
-+
-+	ret = clk_enable(&priv->usb_phy[phy->id].clock);
-+	if (ret) {
-+		debug("failed to enable phyclk\n");
-+		return ret;
-+	}
-+
-+	/* Disable software control. */
-+	rockchip_usbphy_property_enable(phy, &port_cfg->soft_con, false);
-+
-+	/* Reset OTG port. */
-+	rockchip_usbphy_property_enable(phy, &port_cfg->port_reset, true);
-+	mdelay(1);
-+	rockchip_usbphy_property_enable(phy, &port_cfg->port_reset, false);
-+	udelay(1);
-+	return 0;
-+}
-+
-+static int rockchip_usbphy_exit(struct phy *phy)
-+{
-+	struct udevice *parent = phy->dev->parent;
-+	struct rockchip_usbphy_priv *priv = dev_get_priv(parent);
-+	const struct rockchip_usbphy_port_cfg *port_cfg = rockchip_usbphy_get_port_cfg(phy);
-+
-+	/* Enable software control. */
-+	rockchip_usbphy_property_enable(phy, &port_cfg->soft_con, true);
-+
-+	clk_disable(&priv->usb_phy[phy->id].clock);
-+
-+	return 0;
-+}
-+
-+static int rockchip_usbphy_of_xlate(struct phy *phy, struct ofnode_phandle_args *args)
-+{
-+	struct udevice *parent = phy->dev->parent;
-+	struct rockchip_usbphy_priv *priv = dev_get_priv(parent);
-+	int id;
-+
-+	if (args->args_count != 0) {
-+		debug("invalid number of arguments\n");
-+		return -EINVAL;
-+	}
-+
-+	for (id = 0; id < priv->port_cfg->num_phys; id++) {
-+		if (of_live_active()) {
-+			if (args->node.np == priv->usb_phy[id].node.np) {
-+				phy->id = id;
-+				break;
-+			}
-+		} else {
-+			if (args->node.of_offset == priv->usb_phy[id].node.of_offset) {
-+				phy->id = id;
-+				break;
-+			}
-+		}
-+	}
-+
-+	if (id >= priv->port_cfg->num_phys) {
-+		debug("failed to get phy id\n");
-+		return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+
-+static int rockchip_usbphy_get_regulator(ofnode node, char *supply_name,
-+					 struct udevice **regulator)
-+{
-+	struct ofnode_phandle_args regulator_phandle;
-+	int ret;
-+
-+	ret = ofnode_parse_phandle_with_args(node, supply_name,
-+					     NULL, 0, 0,
-+					     &regulator_phandle);
-+	if (ret)
-+		return ret;
-+
-+	ret = uclass_get_device_by_ofnode(UCLASS_REGULATOR,
-+					  regulator_phandle.node,
-+					  regulator);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+static int rockchip_usbphy_init_port(struct rockchip_usbphy_priv *priv,
-+				     ofnode node, unsigned int id)
-+{
-+	unsigned int reg;
-+	int ret;
-+
-+	if (ofnode_read_u32(node, "reg", &reg)) {
-+		debug("missing reg property\n");
-+		return -EINVAL;
-+	}
-+
-+	priv->usb_phy[id].node = node;
-+	priv->usb_phy[id].reg = reg;
-+
-+	ret = reset_get_by_index_nodev(node, 0, &priv->usb_phy[id].reset);
-+	if (ret)
-+		debug("failed to get phy-reset\n");
-+
-+	ret = clk_get_by_index_nodev(node, 0, &priv->usb_phy[id].clock);
-+	if (ret) {
-+		debug("failed to get phyclk clock\n");
-+		return ret;
-+	}
-+
-+	ret = rockchip_usbphy_get_regulator(node, "vbus-supply", &priv->usb_phy[id].vbus_supply);
-+	if (ret)
-+		debug("failed to get vbus-supply\n");
-+
-+	return 0;
-+}
-+
-+static int rockchip_usbphy_probe(struct udevice *dev)
-+{
-+	struct rockchip_usbphy_priv *priv = dev_get_priv(dev);
-+	const struct rockchip_usbphy_port_cfg *port_cfg;
-+	int ret, i = 0;
-+	ofnode node;
-+
-+	port_cfg = (const struct rockchip_usbphy_port_cfg *)dev_get_driver_data(dev);
-+	if (!port_cfg)
-+		return -EINVAL;
-+
-+	priv->usb_phy = kcalloc(port_cfg->num_phys, sizeof(struct rockchip_usb_phy), GFP_KERNEL);
-+
-+	priv->port_cfg = port_cfg;
-+
-+	if (dev_read_bool(dev, "rockchip,grf"))
-+		priv->grf_regmap = syscon_regmap_lookup_by_phandle(dev, "rockchip,grf");
-+	else
-+		priv->grf_regmap = syscon_get_regmap(dev_get_parent(dev));
-+	if (IS_ERR(priv->grf_regmap))
-+		return PTR_ERR(priv->grf_regmap);
-+
-+	dev_for_each_subnode(node, dev) {
-+		if (!ofnode_valid(node)) {
-+			debug("subnode %s not found\n", dev->name);
-+			return -ENXIO;
-+		}
-+
-+		if (i >= port_cfg->num_phys) {
-+			debug("subnode max:%d\n", port_cfg->num_phys);
-+			return -ENXIO;
-+		}
-+
-+		ret = rockchip_usbphy_init_port(priv, node, i++);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static int rockchip_usbphy_bind(struct udevice *dev)
-+{
-+	struct udevice *usbphy_dev;
-+	ofnode node;
-+	const char *name;
-+	int ret = 0;
-+
-+	dev_for_each_subnode(node, dev) {
-+		if (!ofnode_valid(node)) {
-+			debug("subnode %s not found\n", dev->name);
-+			return -ENXIO;
-+		}
-+
-+		name = ofnode_get_name(node);
-+		debug("subnode %s\n", name);
-+
-+		ret = device_bind_driver_to_node(dev, "rockchip_usbphy_port",
-+						 name, node, &usbphy_dev);
-+		if (ret) {
-+			debug("'%s' cannot bind 'rockchip_usbphy_port'\n", name);
-+			return ret;
-+		}
-+	}
-+
-+	return ret;
-+}
-+
-+static struct phy_ops rockchip_usbphy_ops = {
-+	.init		= rockchip_usbphy_init,
-+	.exit		= rockchip_usbphy_exit,
-+	.power_on	= rockchip_usbphy_power_on,
-+	.power_off	= rockchip_usbphy_power_off,
-+	.reset		= rockchip_usbphy_reset,
-+	.of_xlate	= rockchip_usbphy_of_xlate,
-+};
-+
-+static const struct rockchip_usbphy_port_cfg rk3066a_pdata = {
-+	.num_phys	= 2,
-+	.port_reset	= {0x00, 12, 12, 0, 1},
-+	.soft_con	= {0x08, 2, 2, 0, 1},
-+	.suspend	= {0x08, 8, 3, (0x01 << 3), (0x2A << 3)},
-+};
-+
-+static const struct rockchip_usbphy_port_cfg rk3188_pdata = {
-+	.num_phys	= 2,
-+	.port_reset	= {0x00, 12, 12, 0, 1},
-+	.soft_con	= {0x08, 2, 2, 0, 1},
-+	.suspend	= {0x0c, 5, 0, 0x01, 0x2A},
-+};
-+
-+static const struct rockchip_usbphy_port_cfg rk3288_pdata = {
-+	.num_phys	= 3,
-+	.port_reset	= {0x00, 12, 12, 0, 1},
-+	.soft_con	= {0x08, 2, 2, 0, 1},
-+	.suspend	= {0x0c, 5, 0, 0x01, 0x2A},
-+};
-+
-+static const struct udevice_id rockchip_usbphy_ids[] = {
-+	{ .compatible = "rockchip,rk3066a-usb-phy", .data = (ulong)&rk3066a_pdata },
-+	{ .compatible = "rockchip,rk3188-usb-phy", .data = (ulong)&rk3188_pdata },
-+	{ .compatible = "rockchip,rk3288-usb-phy", .data = (ulong)&rk3288_pdata },
-+	{}
-+};
-+
-+U_BOOT_DRIVER(rockchip_usbphy_port) = {
-+	.name		= "rockchip_usbphy_port",
-+	.id		= UCLASS_PHY,
-+	.ops		= &rockchip_usbphy_ops,
-+};
-+
-+U_BOOT_DRIVER(rockchip_usbphy) = {
-+	.name		= "rockchip_usbphy",
-+	.id		= UCLASS_NOP,
-+	.of_match	= rockchip_usbphy_ids,
-+	.probe		= rockchip_usbphy_probe,
-+	.bind		= rockchip_usbphy_bind,
-+	.priv_auto	= sizeof(struct rockchip_usbphy_priv),
-+};
+-#ifdef CONFIG_ROCKCHIP_USB2_PHY
+-	int ret;
+-	u32 phandle, offset;
+-	ofnode phy_node;
+-
+-	ret = ofnode_read_u32(node, "phys", &phandle);
+-	if (ret)
+-		return ret;
+-
+-	node = ofnode_get_by_phandle(phandle);
+-	if (!ofnode_valid(node)) {
+-		debug("Not found usb phy device\n");
+-		return -ENODEV;
+-	}
+-
+-	phy_node = ofnode_get_parent(node);
+-	if (!ofnode_valid(node)) {
+-		debug("Not found usb phy device\n");
+-		return -ENODEV;
+-	}
+-
+-	otg_data.phy_of_node = phy_node;
+-	ret = ofnode_read_u32(node, "reg", &offset);
+-	if (ret)
+-		return ret;
+-	otg_data.regs_phy =  offset +
+-		(u32)syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
+-#endif
+ 	return dwc2_udc_probe(&otg_data);
+ }
+
+diff --git a/configs/chromebit_mickey_defconfig b/configs/chromebit_mickey_defconfig
+index 60ceae8f1531..b574f8bceebd 100644
+--- a/configs/chromebit_mickey_defconfig
++++ b/configs/chromebit_mickey_defconfig
+@@ -82,6 +82,7 @@ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_SPI_FLASH_GIGADEVICE=y
+ CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_PHY_ROCKCHIP_USB2=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCONF=y
+ CONFIG_SPL_PINCTRL=y
+@@ -102,7 +103,6 @@ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ # CONFIG_SPL_DM_USB is not set
+ CONFIG_USB_DWC2=y
+-CONFIG_ROCKCHIP_USB2_PHY=y
+ CONFIG_VIDEO=y
+ # CONFIG_VIDEO_BPP8 is not set
+ CONFIG_CONSOLE_TRUETYPE=y
+diff --git a/configs/chromebook_jerry_defconfig b/configs/chromebook_jerry_defconfig
+index 5e89311affe3..9f0d4d94cbca 100644
+--- a/configs/chromebook_jerry_defconfig
++++ b/configs/chromebook_jerry_defconfig
+@@ -82,6 +82,7 @@ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_SPI_FLASH_GIGADEVICE=y
+ CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_PHY_ROCKCHIP_USB2=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCONF=y
+ CONFIG_SPL_PINCTRL=y
+@@ -106,7 +107,6 @@ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ # CONFIG_SPL_DM_USB is not set
+ CONFIG_USB_DWC2=y
+-CONFIG_ROCKCHIP_USB2_PHY=y
+ CONFIG_VIDEO=y
+ # CONFIG_VIDEO_BPP8 is not set
+ CONFIG_CONSOLE_TRUETYPE=y
+diff --git a/configs/chromebook_minnie_defconfig b/configs/chromebook_minnie_defconfig
+index 6e0158fd4a9e..ae8c1d3fc9a1 100644
+--- a/configs/chromebook_minnie_defconfig
++++ b/configs/chromebook_minnie_defconfig
+@@ -83,6 +83,7 @@ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_SPI_FLASH_GIGADEVICE=y
+ CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_PHY_ROCKCHIP_USB2=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCONF=y
+ CONFIG_SPL_PINCTRL=y
+@@ -107,7 +108,6 @@ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ # CONFIG_SPL_DM_USB is not set
+ CONFIG_USB_DWC2=y
+-CONFIG_ROCKCHIP_USB2_PHY=y
+ CONFIG_VIDEO=y
+ # CONFIG_VIDEO_BPP8 is not set
+ CONFIG_CONSOLE_TRUETYPE=y
+diff --git a/configs/chromebook_speedy_defconfig b/configs/chromebook_speedy_defconfig
+index 86f1399c0e3c..7b4258f18427 100644
+--- a/configs/chromebook_speedy_defconfig
++++ b/configs/chromebook_speedy_defconfig
+@@ -83,6 +83,7 @@ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_SPI_FLASH_GIGADEVICE=y
+ CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_PHY_ROCKCHIP_USB2=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCONF=y
+ CONFIG_SPL_PINCTRL=y
+@@ -107,7 +108,6 @@ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ # CONFIG_SPL_DM_USB is not set
+ CONFIG_USB_DWC2=y
+-CONFIG_ROCKCHIP_USB2_PHY=y
+ CONFIG_VIDEO=y
+ # CONFIG_VIDEO_BPP8 is not set
+ CONFIG_CONSOLE_TRUETYPE=y
+diff --git a/configs/evb-rk3288-rk808_defconfig b/configs/evb-rk3288-rk808_defconfig
+index 2112e475ad31..5244c42b7b4e 100644
+--- a/configs/evb-rk3288-rk808_defconfig
++++ b/configs/evb-rk3288-rk808_defconfig
+@@ -71,6 +71,7 @@ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_GMAC_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_USB2=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_DM_PMIC=y
+@@ -85,7 +86,6 @@ CONFIG_SYS_NS16550_MEM32=y
+ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ CONFIG_USB_DWC2=y
+-CONFIG_ROCKCHIP_USB2_PHY=y
+ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_DWC2_OTG=y
+ CONFIG_VIDEO=y
+diff --git a/configs/firefly-rk3288_defconfig b/configs/firefly-rk3288_defconfig
+index 54e3c41f3ccf..0999bf03d60a 100644
+--- a/configs/firefly-rk3288_defconfig
++++ b/configs/firefly-rk3288_defconfig
+@@ -62,11 +62,12 @@ CONFIG_MISC=y
+ CONFIG_ROCKCHIP_EFUSE=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+-CONFIG_PHY_REALTEK=y
+ CONFIG_DM_ETH_PHY=y
+ CONFIG_PHY_GIGE=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_GMAC_ROCKCHIP=y
++CONFIG_PHY_REALTEK=y
++CONFIG_PHY_ROCKCHIP_USB2=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_DM_PMIC=y
+@@ -82,7 +83,6 @@ CONFIG_SYS_NS16550_MEM32=y
+ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ CONFIG_USB_DWC2=y
+-CONFIG_ROCKCHIP_USB2_PHY=y
+ CONFIG_USB_KEYBOARD=y
+ CONFIG_USB_HOST_ETHER=y
+ CONFIG_USB_ETHER_ASIX=y
+diff --git a/configs/miqi-rk3288_defconfig b/configs/miqi-rk3288_defconfig
+index 4cbd4b97172a..827f1ae159e1 100644
+--- a/configs/miqi-rk3288_defconfig
++++ b/configs/miqi-rk3288_defconfig
+@@ -59,11 +59,12 @@ CONFIG_MISC=y
+ CONFIG_ROCKCHIP_EFUSE=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+-CONFIG_PHY_REALTEK=y
+ CONFIG_DM_ETH_PHY=y
+ CONFIG_PHY_GIGE=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_GMAC_ROCKCHIP=y
++CONFIG_PHY_REALTEK=y
++CONFIG_PHY_ROCKCHIP_USB2=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_DM_PMIC=y
+@@ -79,7 +80,6 @@ CONFIG_SYS_NS16550_MEM32=y
+ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ CONFIG_USB_DWC2=y
+-CONFIG_ROCKCHIP_USB2_PHY=y
+ CONFIG_USB_KEYBOARD=y
+ CONFIG_USB_HOST_ETHER=y
+ CONFIG_USB_ETHER_ASIX=y
+diff --git a/configs/mk808_defconfig b/configs/mk808_defconfig
+index b983128e1def..3b63e5f930bb 100644
+--- a/configs/mk808_defconfig
++++ b/configs/mk808_defconfig
+@@ -92,6 +92,7 @@ CONFIG_MMC_UHS_SUPPORT=y
+ CONFIG_SPL_MMC_UHS_SUPPORT=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_USB2=y
+ CONFIG_PINCTRL=y
+ CONFIG_DM_PMIC=y
+ # CONFIG_SPL_PMIC_CHILDREN is not set
+@@ -111,7 +112,6 @@ CONFIG_TPL_TIMER=y
+ CONFIG_DESIGNWARE_APB_TIMER=y
+ CONFIG_USB=y
+ CONFIG_USB_DWC2=y
+-CONFIG_ROCKCHIP_USB2_PHY=y
+ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_DWC2_OTG=y
+ CONFIG_USB_FUNCTION_ROCKUSB=y
+diff --git a/configs/phycore-rk3288_defconfig b/configs/phycore-rk3288_defconfig
+index a374f90982e0..bafe49818637 100644
+--- a/configs/phycore-rk3288_defconfig
++++ b/configs/phycore-rk3288_defconfig
+@@ -9,6 +9,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x100000
+ CONFIG_SF_DEFAULT_SPEED=20000000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3288-phycore-rdk"
++CONFIG_DM_RESET=y
+ CONFIG_SYS_MONITOR_LEN=614400
+ CONFIG_ROCKCHIP_RK3288=y
+ CONFIG_SPL_ROCKCHIP_BACK_TO_BROM=y
+@@ -68,6 +69,7 @@ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_GMAC_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_USB2=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_DM_PMIC=y
+@@ -82,7 +84,6 @@ CONFIG_SYS_NS16550_MEM32=y
+ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ CONFIG_USB_DWC2=y
+-CONFIG_ROCKCHIP_USB2_PHY=y
+ CONFIG_USB_HOST_ETHER=y
+ CONFIG_USB_ETHER_ASIX=y
+ CONFIG_USB_ETHER_SMSC95XX=y
+diff --git a/configs/popmetal-rk3288_defconfig b/configs/popmetal-rk3288_defconfig
+index 52d38f4108c3..a4d0bd705fdf 100644
+--- a/configs/popmetal-rk3288_defconfig
++++ b/configs/popmetal-rk3288_defconfig
+@@ -9,6 +9,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x100000
+ CONFIG_SF_DEFAULT_SPEED=20000000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3288-popmetal"
++CONFIG_DM_RESET=y
+ CONFIG_SYS_MONITOR_LEN=614400
+ CONFIG_ROCKCHIP_RK3288=y
+ CONFIG_SPL_ROCKCHIP_BACK_TO_BROM=y
+@@ -64,6 +65,7 @@ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_GMAC_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_USB2=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_DM_PMIC=y
+@@ -78,7 +80,6 @@ CONFIG_SYS_NS16550_MEM32=y
+ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ CONFIG_USB_DWC2=y
+-CONFIG_ROCKCHIP_USB2_PHY=y
+ CONFIG_USB_HOST_ETHER=y
+ CONFIG_USB_ETHER_ASIX=y
+ CONFIG_USB_ETHER_SMSC95XX=y
+diff --git a/configs/rock-pi-n8-rk3288_defconfig b/configs/rock-pi-n8-rk3288_defconfig
+index 242aa89bcce0..71749c3b8741 100644
+--- a/configs/rock-pi-n8-rk3288_defconfig
++++ b/configs/rock-pi-n8-rk3288_defconfig
+@@ -63,6 +63,7 @@ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_GMAC_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_USB2=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_DM_PMIC=y
+@@ -81,7 +82,6 @@ CONFIG_USB=y
+ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_EHCI_GENERIC=y
+ CONFIG_USB_DWC2=y
+-CONFIG_ROCKCHIP_USB2_PHY=y
+ CONFIG_USB_KEYBOARD=y
+ # CONFIG_USB_KEYBOARD_FN_KEYS is not set
+ CONFIG_USB_GADGET=y
+diff --git a/configs/rock2_defconfig b/configs/rock2_defconfig
+index 025b55e2171b..6ebda3a36992 100644
+--- a/configs/rock2_defconfig
++++ b/configs/rock2_defconfig
+@@ -9,6 +9,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x100000
+ CONFIG_SF_DEFAULT_SPEED=20000000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3288-rock2-square"
++CONFIG_DM_RESET=y
+ CONFIG_SYS_MONITOR_LEN=614400
+ CONFIG_ROCKCHIP_RK3288=y
+ CONFIG_SPL_ROCKCHIP_BACK_TO_BROM=y
+@@ -65,6 +66,7 @@ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_GMAC_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_USB2=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_DM_PMIC=y
+@@ -80,7 +82,6 @@ CONFIG_SYS_NS16550_MEM32=y
+ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ CONFIG_USB_DWC2=y
+-CONFIG_ROCKCHIP_USB2_PHY=y
+ CONFIG_USB_KEYBOARD=y
+ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_DWC2_OTG=y
+diff --git a/configs/rock_defconfig b/configs/rock_defconfig
+index 71e504713c16..753deb349afd 100644
+--- a/configs/rock_defconfig
++++ b/configs/rock_defconfig
+@@ -12,6 +12,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x60100000
+ CONFIG_SF_DEFAULT_SPEED=20000000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3188-radxarock"
++CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3188=y
+ # CONFIG_ROCKCHIP_STIMER is not set
+ CONFIG_TARGET_ROCK=y
+@@ -53,6 +54,7 @@ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_LED=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_USB2=y
+ CONFIG_PINCTRL=y
+ CONFIG_DM_PMIC=y
+ # CONFIG_SPL_PMIC_CHILDREN is not set
+@@ -68,7 +70,6 @@ CONFIG_TIMER=y
+ CONFIG_SPL_TIMER=y
+ CONFIG_ROCKCHIP_TIMER=y
+ CONFIG_USB=y
+-CONFIG_ROCKCHIP_USB2_PHY=y
+ CONFIG_RANDOM_UUID=y
+ CONFIG_SPL_TINY_MEMSET=y
+ CONFIG_CMD_DHRYSTONE=y
+diff --git a/configs/tinker-rk3288_defconfig b/configs/tinker-rk3288_defconfig
+index 2e701a5ff722..a1d8acc70e3c 100644
+--- a/configs/tinker-rk3288_defconfig
++++ b/configs/tinker-rk3288_defconfig
+@@ -62,11 +62,12 @@ CONFIG_ROCKCHIP_EFUSE=y
+ CONFIG_I2C_EEPROM=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+-CONFIG_PHY_REALTEK=y
+ CONFIG_DM_ETH_PHY=y
+ CONFIG_PHY_GIGE=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_GMAC_ROCKCHIP=y
++CONFIG_PHY_REALTEK=y
++CONFIG_PHY_ROCKCHIP_USB2=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_DM_PMIC=y
+@@ -81,7 +82,6 @@ CONFIG_SYS_NS16550_MEM32=y
+ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ CONFIG_USB_DWC2=y
+-CONFIG_ROCKCHIP_USB2_PHY=y
+ CONFIG_USB_KEYBOARD=y
+ CONFIG_USB_HOST_ETHER=y
+ CONFIG_USB_ETHER_ASIX=y
+diff --git a/configs/tinker-s-rk3288_defconfig b/configs/tinker-s-rk3288_defconfig
+index 816903c8430e..902742b73bf0 100644
+--- a/configs/tinker-s-rk3288_defconfig
++++ b/configs/tinker-s-rk3288_defconfig
+@@ -62,11 +62,12 @@ CONFIG_ROCKCHIP_EFUSE=y
+ CONFIG_I2C_EEPROM=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+-CONFIG_PHY_REALTEK=y
+ CONFIG_DM_ETH_PHY=y
+ CONFIG_PHY_GIGE=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_GMAC_ROCKCHIP=y
++CONFIG_PHY_REALTEK=y
++CONFIG_PHY_ROCKCHIP_USB2=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_DM_PMIC=y
+@@ -81,7 +82,6 @@ CONFIG_SYS_NS16550_MEM32=y
+ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ CONFIG_USB_DWC2=y
+-CONFIG_ROCKCHIP_USB2_PHY=y
+ CONFIG_USB_KEYBOARD=y
+ CONFIG_USB_HOST_ETHER=y
+ CONFIG_USB_ETHER_ASIX=y
+diff --git a/configs/vyasa-rk3288_defconfig b/configs/vyasa-rk3288_defconfig
+index 1d7e22653608..a0e160e6d70c 100644
+--- a/configs/vyasa-rk3288_defconfig
++++ b/configs/vyasa-rk3288_defconfig
+@@ -72,6 +72,7 @@ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_GMAC_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_USB2=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_DM_PMIC=y
+@@ -87,7 +88,6 @@ CONFIG_SYS_NS16550_MEM32=y
+ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ CONFIG_USB_DWC2=y
+-CONFIG_ROCKCHIP_USB2_PHY=y
+ CONFIG_USB_KEYBOARD=y
+ CONFIG_USB_HOST_ETHER=y
+ CONFIG_USB_ETHER_ASIX=y
+diff --git a/drivers/usb/phy/Kconfig b/drivers/usb/phy/Kconfig
+index c505862f1e15..9c91f63786ac 100644
+--- a/drivers/usb/phy/Kconfig
++++ b/drivers/usb/phy/Kconfig
+@@ -7,6 +7,3 @@ comment "USB Phy"
+
+ config TWL4030_USB
+ 	bool "TWL4030 PHY"
+-
+-config ROCKCHIP_USB2_PHY
+-	bool "Rockchip USB2 PHY"
+diff --git a/drivers/usb/phy/Makefile b/drivers/usb/phy/Makefile
+index b67a70bbe8ed..cf6109dee610 100644
+--- a/drivers/usb/phy/Makefile
++++ b/drivers/usb/phy/Makefile
+@@ -4,4 +4,3 @@
+ # Tom Rix <Tom.Rix@windriver.com>
+
+ obj-$(CONFIG_TWL4030_USB) += twl4030.o
+-obj-$(CONFIG_ROCKCHIP_USB2_PHY) += rockchip_usb2_phy.o
+diff --git a/drivers/usb/phy/rockchip_usb2_phy.c b/drivers/usb/phy/rockchip_usb2_phy.c
+deleted file mode 100644
+index bdbd0d44813a..000000000000
+--- a/drivers/usb/phy/rockchip_usb2_phy.c
++++ /dev/null
+@@ -1,113 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Copyright 2016 Rockchip Electronics Co., Ltd
+- */
+-
+-#include <hang.h>
+-#include <log.h>
+-#include <asm/io.h>
+-#include <linux/bitops.h>
+-#include <linux/delay.h>
+-
+-#include "../gadget/dwc2_udc_otg_priv.h"
+-
+-#define BIT_WRITEABLE_SHIFT	16
+-
+-struct usb2phy_reg {
+-	unsigned int offset;
+-	unsigned int bitend;
+-	unsigned int bitstart;
+-	unsigned int disable;
+-	unsigned int enable;
+-};
+-
+-/**
+- * struct rockchip_usb2_phy_cfg: usb-phy port configuration
+- * @port_reset: usb otg per-port reset register
+- * @soft_con: software control usb otg register
+- * @suspend: phy suspend register
+- */
+-struct rockchip_usb2_phy_cfg {
+-	struct usb2phy_reg port_reset;
+-	struct usb2phy_reg soft_con;
+-	struct usb2phy_reg suspend;
+-};
+-
+-struct rockchip_usb2_phy_dt_id {
+-	char		compatible[128];
+-	const void	*data;
+-};
+-
+-static const struct rockchip_usb2_phy_cfg rk3066a_pdata = {
+-	.port_reset	= {0x00, 12, 12, 0, 1},
+-	.soft_con	= {0x08, 2, 2, 0, 1},
+-	.suspend	= {0x08, 8, 3, (0x01 << 3), (0x2A << 3)},
+-};
+-
+-static const struct rockchip_usb2_phy_cfg rk3288_pdata = {
+-	.port_reset     = {0x00, 12, 12, 0, 1},
+-	.soft_con       = {0x08, 2, 2, 0, 1},
+-	.suspend	= {0x0c, 5, 0, 0x01, 0x2A},
+-};
+-
+-static struct rockchip_usb2_phy_dt_id rockchip_usb2_phy_dt_ids[] = {
+-	{ .compatible = "rockchip,rk3066a-usb-phy", .data = &rk3066a_pdata },
+-	{ .compatible = "rockchip,rk3188-usb-phy", .data = &rk3288_pdata },
+-	{ .compatible = "rockchip,rk3288-usb-phy", .data = &rk3288_pdata },
+-	{}
+-};
+-
+-static void property_enable(struct dwc2_plat_otg_data *pdata,
+-				  const struct usb2phy_reg *reg, bool en)
+-{
+-	unsigned int val, mask, tmp;
+-
+-	tmp = en ? reg->enable : reg->disable;
+-	mask = GENMASK(reg->bitend, reg->bitstart);
+-	val = (tmp << reg->bitstart) | (mask << BIT_WRITEABLE_SHIFT);
+-
+-	writel(val, pdata->regs_phy + reg->offset);
+-}
+-
+-void otg_phy_init(struct dwc2_udc *dev)
+-{
+-	struct dwc2_plat_otg_data *pdata = dev->pdata;
+-	struct rockchip_usb2_phy_cfg *phy_cfg = NULL;
+-	struct rockchip_usb2_phy_dt_id *of_id;
+-	int i;
+-
+-	for (i = 0; i < ARRAY_SIZE(rockchip_usb2_phy_dt_ids); i++) {
+-		of_id = &rockchip_usb2_phy_dt_ids[i];
+-		if (ofnode_device_is_compatible(pdata->phy_of_node,
+-						of_id->compatible)){
+-			phy_cfg = (struct rockchip_usb2_phy_cfg *)of_id->data;
+-			break;
+-		}
+-	}
+-	if (!phy_cfg) {
+-		debug("Can't find device platform data\n");
+-
+-		hang();
+-		return;
+-	}
+-	pdata->priv = phy_cfg;
+-	/* disable software control */
+-	property_enable(pdata, &phy_cfg->soft_con, false);
+-
+-	/* reset otg port */
+-	property_enable(pdata, &phy_cfg->port_reset, true);
+-	mdelay(1);
+-	property_enable(pdata, &phy_cfg->port_reset, false);
+-	udelay(1);
+-}
+-
+-void otg_phy_off(struct dwc2_udc *dev)
+-{
+-	struct dwc2_plat_otg_data *pdata = dev->pdata;
+-	struct rockchip_usb2_phy_cfg *phy_cfg = pdata->priv;
+-
+-	/* enable software control */
+-	property_enable(pdata, &phy_cfg->soft_con, true);
+-	/* enter suspend */
+-	property_enable(pdata, &phy_cfg->suspend, true);
+-}
+diff --git a/include/usb/dwc2_udc.h b/include/usb/dwc2_udc.h
+index aa37e957b47c..c8610ef8c98a 100644
+--- a/include/usb/dwc2_udc.h
++++ b/include/usb/dwc2_udc.h
+@@ -15,7 +15,6 @@
+
+ struct dwc2_plat_otg_data {
+ 	void		*priv;
+-	ofnode		phy_of_node;
+ 	int		(*phy_control)(int on);
+ 	uintptr_t	regs_phy;
+ 	uintptr_t	regs_otg;
 --
 2.39.5
 
