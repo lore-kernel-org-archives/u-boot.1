@@ -4,100 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BB46D6AB16
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 21:02:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D20FD6AB10
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 22:27:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92B23839DF;
-	Thu,  2 Apr 2026 23:02:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 4F2FD839DF;
+	Fri,  3 Apr 2026 00:27:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eH5eK/6J";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="pF8G5T8t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FC6283D8A; Thu,  2 Apr 2026 23:02:53 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 9CD3483D8A; Fri,  3 Apr 2026 00:27:18 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1533780212
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 23:02:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 483A383693
+ for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 00:27:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-b9c3a9fe80fso167706966b.3
- for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 14:02:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775163770; cv=none;
- d=google.com; s=arc-20240605;
- b=OJ4z6JdykrK4F9l+hOckm9iQmeMVUQ21dHCg4cU1sgOw1p817EIzLneTSlGSSuTNws
- 6PqrjNQt0jWfPnh8naok/CJp34v5WK0H5DrD42B0PefKqCgeMlhr1cQwdo9Gaavj0hrh
- tMBsb7FA4H6DPCXo5Y84sc9B8Y2ZNXZO8vyBgtstVnvoUSU6FcMp5162raLw3TS3nX0z
- v0P0RyrcAI7slXIzEhnJLXtGIAJ9crOdKuaZ0B5jyhGgJtqHqP5NVhz2LmWB19J0dAFd
- bLHzgXguZWFbMfRCYhg3BiddIGoEve+d/8KFeayftZB2DDiVXURNfeeQbglW0sGM67RR
- 539g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=wkPR6nDmi7kkqZbr/RmciiSqUb3HBt7kfi+TO2VRX7A=;
- fh=Mz5s5K59ndiEsTzp70nmcZ5z7uPKj3RlsrKeilXMiyI=;
- b=ZxO/qU/C9kxUAWzLr6r/sqTEC4m0UhBfxk+Hm4xFlec9EgzP5qzxFEYMsIXPaqkSDq
- a2HNq3nkK5TGiNMtu7cB40FeqVPmbbuOeJPOne896Q0sXqYwvsqoG92rT2VSse8kMxze
- lV+QlqF+P8AfHE2VPn6D6SSKuubymF1RScE+d/hNU3ExcEjVzb4r+/JvNzI0HRnffmke
- BuwtpBRPJKjuJMI2pIo4bHRGcd8i8rzL2aTSauNHIAAfGqkIRso8cfvGMXV0f7NWevM/
- m0yzo1c8HYSfgjraNdt7X38WfiPT2Ozyzgmzbb6nOYxF9X6rbuK73tVKKqs6dPVl33lU
- FJng==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-89fc349b5c2so13396296d6.0
+ for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 15:27:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775163770; x=1775768570; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wkPR6nDmi7kkqZbr/RmciiSqUb3HBt7kfi+TO2VRX7A=;
- b=eH5eK/6JESShSJ4pzzNpuQzICNRco7KO1n7A5boOFlmF3aVJj6DaUAW3qhq5zOvLGz
- 3ht2egYvGXxs7jRiTiwJ5vutasbDwQm1UyiBK1F7z7+miW3tscjSGKztlE4Gd5dKkC+j
- tdrWn6PL0Q8m58H4UGoF5/ZFD9p4EO85qSaoc=
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1775168835; x=1775773635;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=LIJ9bNZn/uPyq9eMP/yUtkSEqaZPfa/Xw2X5QGfA2O0=;
+ b=pF8G5T8teLJdlBTKKAfjz0h3+nEAac54mbal+4mgu4XcMVMAu42cbdCZz+0lb9PoPA
+ WHHJjGdUvm2rP99xKkQfXQrqfDXH1a7NcPcqzQZfpfK+19qie87h8VJ8VpoIJHv1snBT
+ XYAXKuI3Ie61DLa9o7UnUJoKowp/ksadYcHHCBSDEVHaDmiVhUpl4jyqNEihOuLC+bL/
+ DiGqK4X0ZG5eI/gFiSJQK1exVaa2dIa6GLB9cpZPFOIQanCjDCEr8MbZtqVEG804KVJd
+ NtFc1TpzGD7+l7Izd/sMjSgDR3DaO6ypOFXGsjUiDqzgCo1eKl2OFr7Je2DPK0ZsIO8n
+ nMCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775163770; x=1775768570;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=wkPR6nDmi7kkqZbr/RmciiSqUb3HBt7kfi+TO2VRX7A=;
- b=VUSkgeguns9VFY2cazq/p9Kz+l6LtjpK83XRnO03n6ouPiNyMHcETAnqbx9xa9yBRc
- 3fcTX3NUqmDrdhrTLfwPniQoIGmZ2OZVQ0zlE4LtUdZ3QUGBwlSd6wwqOmybk1UP3He0
- aPnHj8z7MMs4xZlLuWOPeDcrN+smbvC035+LOrXmxjqi+UAB5eTCMrmovzri3twEvli4
- P1j+h46tpVU4SrQ5StSQBA4tlO7l/Jpz6SmXDXi+fJ+JuRGgWeg/ek+LZmsKlSKLBkqN
- 74HL84F9Eip6+OdW84rhPynAzXHjCpphwNi+wcZ7vpqCZmwTpZIA7BB7QEVUXc6IkjoO
- lz/Q==
-X-Gm-Message-State: AOJu0YxaNqRm/v/LZHR4Ec4NnGtuwfEaaetgCl2sSaa7lt5ZWoSjsY/O
- OXDsHFG8qy6hYdjuZNIPMxPFvmD/5XTR5weEWJerw96GNsYebgoIv544JXdzBU1zyO6M7BgjIAI
- nu1KEDYJPg6q8A8sSfk2gqzqCwnU0lT+UdGAMT2QH
-X-Gm-Gg: ATEYQzw0wFjheMTrY9HuiDENdiT00aXjrsZm4qZhBXfy36qlNy01WRo0/+t6gAIDaBd
- tVgINKRE4ODXp0qfm4fuz2vC5UIst1y7IVzbJmHr/lzpEvK0f1pczXATzOvWKk2BF7kuIg0UxUq
- 2BU/66I2U2eww5bgeO6WuprkwBi3qsYu9s6GpEBRywS6z7W/XJDyJo/+YafODNWdNFrDxeNmsde
- HonAerRch39wIYszaHBJX17zfeEeGdrCa7c4mqkdPsnx/EVjK6fSO2hk67sVgTDeUZkQzMiXDmS
- +rV4Sw==
-X-Received: by 2002:a17:907:d07:b0:b9b:fa57:d5b0 with SMTP id
- a640c23a62f3a-b9c679f4ae8mr17216966b.43.1775163770397; Thu, 02 Apr 2026
- 14:02:50 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1775168835; x=1775773635;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LIJ9bNZn/uPyq9eMP/yUtkSEqaZPfa/Xw2X5QGfA2O0=;
+ b=HJb4WxElQoY0lrtOgviVS3AQG9eYwoF95k/J30NOCRqbIb8t2VD/yLIgeO4tXJpwAV
+ dn0cecyaK95zJ5djewCEad6SqZWpKVCGTPDZKCC2j5AedsBZdwHARzI7rFxYNxdYb3VB
+ 79sF2QLi7uURT2gM4HACjM/zD8dFFht1Ka+NInh9jpTFOyccNoqMjHbTOxMp/JeJtVMX
+ Cy7R1ChP5XKMBLdtAnwO61L+tPyI9Qb+sw+GRHOe3S/R7g5Tyg9AfZKTw6GTV5eWKHkS
+ BK/WnytvnHsRQwekfjRfFuGd86CiluX1Hn1Yi/em3AhnkldOYrFX/WBgtpnRrhFqEZUH
+ lB5g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVGeeArsMGVpyuasx3w7fqsKxRfsHivJgTbxPFk/v9iCBgX4DbTHdGR6WK3GMKxJjKv9IZJpMQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwyyhNAEbbK4GwkXV8DbMua8eULAJ5R+GtTStkBd0DbkOWYaV/h
+ MHUQPhBrwuLbe7C2KCgoC9zEaQM9St9dmwmJZi5OZm93bcR22GZjxnY4E9FZhpVK79U=
+X-Gm-Gg: AeBDievwLeHIL//smJLiu9loNKe7vcXsVEbOFL91XMRmMxLoXvAfDIIj4VVw90SkOfz
+ 6A/LA5kJhXgTSZKgHReJArHQNhziUSOydwdE3pXSj2BxiDOpihpZ0HbcY50t2uRme3gO53IPmiS
+ 3qgVJ+eeGH7mcdUiDaYn985LPAbjfi4LVmd6/APCtTZ/HtDl4jfppOpCttYrheR7T2cg8mgMYfZ
+ 7icVYzofbkMtQUiZGFyYuSuK5EFO4zGQESZngSY15X6QZNwxyLREsWaRmYZl5gcQAjBRsWDxt8a
+ oArWtVabC/Nb6DcUI1utwfSYKdJ1RJ+iiqF5rm1dKrx50r9gCwmm5s9tuE0hH0I54CTjazUQec6
+ hZJFf/H1N0Uk6xoDADKmk3fBjLU7UE9YvCXHDKxyPEopsMFOfLvBQqegFwclW1I8UOOdZMNBciV
+ ed7I0fOQFohYthABv66VRjKb0Ms135A5jRs0rHj7tnLtp0dPTQyav33GjMxp5mUPgbcxTRmacgq
+ g==
+X-Received: by 2002:ad4:5962:0:b0:8a6:2d77:770 with SMTP id
+ 6a1803df08f44-8a7025b8277mr17131186d6.22.1775168835004; 
+ Thu, 02 Apr 2026 15:27:15 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:c815:fab5:7fb3:5a56?
+ ([2600:8803:e7e4:500:c815:fab5:7fb3:5a56])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-8a593bf4b0fsm34052686d6.15.2026.04.02.15.27.13
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 02 Apr 2026 15:27:14 -0700 (PDT)
+Message-ID: <8c016bc9-342a-4148-8a0b-afb7ac03ab80@baylibre.com>
+Date: Thu, 2 Apr 2026 17:27:12 -0500
 MIME-Version: 1.0
-References: <20260324-boot-fit-fix-8-byte-alignement-for-overlays-v1-1-257b132b6bda@baylibre.com>
-In-Reply-To: <20260324-boot-fit-fix-8-byte-alignement-for-overlays-v1-1-257b132b6bda@baylibre.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Apr 2026 15:02:37 -0600
-X-Gm-Features: AQROBzAX4T1oEd0TW0TwW9TDVjb-zBQFnJy1chdw_2ywmqRDGHLqA1fBlcit2fI
-Message-ID: <CAFLszTjWKDezUj5Lq-UfGBLmV+0=hFHANit6-cMDTCSEm7ni+g@mail.gmail.com>
-Subject: Re: [PATCH] boot/fit: remove useless else branch
-To: jstephan@baylibre.com
-Cc: u-boot@lists.denx.de, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- James Hilliard <james.hilliard1@gmail.com>,
- David Lechner <dlechner@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/9] MT8195: add ufs support
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Chris-QJ Chen <chris-qj.chen@mediatek.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Bo-Chen Chen <rex-bc.chen@mediatek.com>, u-boot@lists.denx.de,
+ Julien Stephan <jstephan@baylibre.com>
+References: <20260318-mt8195-add-ufs-support-v2-0-f18eeeeb0e72@baylibre.com>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <20260318-mt8195-add-ufs-support-v2-0-f18eeeeb0e72@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,45 +119,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Julien,
+On 3/18/26 11:50 AM, Julien Stephan wrote:
+> This series adds ufs support MT8195.
+> I also include in this series some cleanup on phy-mtk-ufs.c phy driver
+> and ufs-mediatek.c mediatek ufs driver, and pmic support for MT8195.
+> 
 
-On 2026-03-24T15:33:45, Julien Stephan <jstephan@baylibre.com> wrote:
-> boot/fit: remove useless else branch
->
-> The assignment of load =3D data is already performed before the
-> if=E2=80=93elseif logic, making the additional assignment in the else
-> branch unnecessary.
->
-> Remove the redundant statement to simplify
-> the control flow and improve readability.
->
-> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+...
 
-> diff --git a/boot/image-fit.c b/boot/image-fit.c
-> @@ -2281,8 +2281,6 @@ int fit_image_load(struct bootm_headers *images, ul=
-ong addr,
-> -     } else {
-> -             load =3D data;    /* No load address specified */
->       }
+> Julien Stephan (9):
+>       drivers: phy: phy-mtk-ufs: cleanup headers
+>       drivers: phy: phy-mtk-ufs: use tab to indent defines
+>       drivers: phy: phy-mtk-ufs: use clk_bulk functions
+>       drivers: phy: phy-mtk-ufs: disable clk in power_off
+>       drivers: phy: phy-mtk-ufs: do not alloc priv with priv_auto
+>       drivers: ufs: ufs-mediatek: fix phy handling
+>       drivers: ufs: ufs-mediatek: implement clocking
+>       drivers: ufs: ufs-mediatek: add MT8195 compatible
+>       configs: add new defconfig for mt8395_genio_1200_evk_ufs
+> 
+>  board/mediatek/MAINTAINERS                  |   4 +-
+>  configs/mt8195.config                       |  24 ++++++
+>  configs/mt8395_genio_1200_evk_defconfig     |  26 +-----
+>  configs/mt8395_genio_1200_evk_ufs_defconfig |  13 +++
+>  drivers/phy/phy-mtk-ufs.c                   | 128 ++++++++++++----------------
+>  drivers/ufs/ufs-mediatek.c                  |  40 ++++++---
+>  drivers/ufs/ufs-mediatek.h                  |   2 +-
+>  7 files changed, 123 insertions(+), 114 deletions(-)
+> ---
+> base-commit: 142c805d470cd02470146d6d70aa9c522d4da16c
+> change-id: 20260311-mt8195-add-ufs-support-535ebedbb323
+> prerequisite-message-id: <20260318-rename-genio-defconfigs-v1-1-1440312442f0@baylibre.com>
+> prerequisite-patch-id: 76f64e540256592f97d1b274e6072dde36fee2f9
+> 
+> Best regards,
 
-This else branch is not redundant. When fit_image_get_load() succeeds,
-it writes to load, so load contains the value from the FIT image, not
-data.
+Hi Neil,
 
-The else branch is reached when load_op =3D=3D FIT_LOAD_OPTIONAL_NON_ZERO
-and !load - here the code intentionally resets load back to data,
-meaning 'ignore a zero load address and load in place instead'.
+Is it OK if we take this one through the MediaTek tree?
 
-With your patch, load would remain 0, causing problems in the caller
-(e.g. the check at line 2316 would see load !=3D data and attempt to
-memcpy() to address 0).
-
-The comment "No load address specified" is misleading since we only
-reach this branch when the load address WAS specified but was zero. If
-you want to clean this up, please update the comment!
-
-It also makes me wonder if we are lacking a test in this area.
-
-Regards,
-Simon
