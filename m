@@ -4,91 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC56ED6AAF5
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 17:13:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B40DD6AAF5
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 17:32:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D139C84020;
-	Thu,  2 Apr 2026 19:13:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7D1B784020;
+	Thu,  2 Apr 2026 19:32:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FfOu8m/i";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jkVDk4Iv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CB4E84056; Thu,  2 Apr 2026 19:13:03 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E6ED384056; Thu,  2 Apr 2026 19:32:33 +0200 (CEST)
+Received: from CO1PR03CU002.outbound.protection.outlook.com
+ (mail-westus2azlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c005::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC8CC83F7D
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 19:13:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5865983F7D
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 19:32:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7d4c383f2fcso1034244a34.0
- for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 10:13:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1775149979; x=1775754779; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=M9oAIkWDRA4pD7XQWh0KZGeadQXyFpz7iSX9sqxwoIM=;
- b=FfOu8m/i36Ob0cWOJKSRNpGcfVDdBZ7plKRoavmloBYmdZTEMcY1um/xCw+2NkeHyG
- /xBZXsSb1eCGks9U1Isn8IcfWKai/Rja0s2zPQh/T69dGhbjq4eP9F1OYexOlkGnr7On
- EIPF9Da8+g0t51lzuZf3PMN/2BHXZ9HYCpkGQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775149979; x=1775754779;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=M9oAIkWDRA4pD7XQWh0KZGeadQXyFpz7iSX9sqxwoIM=;
- b=i61g4AdVyW2H06dgMO9bgrU5ZI0INMYV3LCj6y1GungVnwAWbxdyFz1oEokAhOhoCa
- /DNG9KkWGbAi9wfTCcwN6qfXBzNBGadHWuFg3OPzY3OblkzZhbvxKoYeI13jjcllovgf
- L/+biALestN5dhu4ij2if+Dc7ydRLtFCTEqsdTtsO54xiO4pkR21AASbgKvz2niOG9m9
- 252TTJ6i36BMECTPf/yVpD7FZiZ/CNZw0cl5tt0vyuWupqPP70jWPRm9Upbvjit9QHZm
- B8+lH/RaQq09NC06RDjuo2I2iY183X/bH+UkKmX7Cp39srmE1OMv86U31bTK0QgPAXKM
- CbWA==
-X-Gm-Message-State: AOJu0Yy5PSfcVnOwjR25gi1ekBTXva5es1MOHFuJ/MHgtwm2zqa8QZA9
- wmemVMEijEdU2FCo/MgU5K7BGluosD7v9Lg7EqiK/5nK9iFYVfFtOBbNBU+zy4oUpTk=
-X-Gm-Gg: ATEYQzy2/VJijRqPNZ0hPVrF3GohomV1UwcizS6wLopDTNCoXozfCno3RYd+D5RTu21
- 3/++BTtn2UrV6m8wvAx2ztHq23j/GmQjxzR1oHAAwnLsXTdfJTQpEP7EXKwos58ahKdI+CB/vp+
- DPRZq77sC3yloRLwHd0im0Vxq0hw7/wXh8Y4LC/4eeIzKHMnNV+jNH12XkHpDhhRA9JonLw7SDw
- M06rhQ+IgQeyjG7uG0Xpdes4j/tYYRa9+mXAzWWyEESfgWbd3rJFwulbCvn6oBbLj35+769tNEU
- xz1iHIbMr+YeLAaqwWc1pAr+xL3eAUBqu6n/mFbCaO+vmu0I1GALM+sKyayMowvmVnr3uG2WFzL
- WYNR7sslFJrJRuXjMXuRmuuq7Z3zeEvGP/MszehkjEFZbwAlzN/FNU26C+fGx0WfUompSWfKBdS
- WXb/oY6DzFym83b/emWM1HAl3DtSn5k36LbLY7XmQi5ICO8tUcJy82ars114enDePN3boTLoDC6
- bN6srS087cLj4caK13bK9mfsUfj45DNuzZvNUndCKx6NDNY
-X-Received: by 2002:a05:6830:6a14:b0:7d7:d11d:3b38 with SMTP id
- 46e09a7af769-7dbb7517ad3mr61642a34.19.1775149979358; 
- Thu, 02 Apr 2026 10:12:59 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7dba7371b07sm2480638a34.24.2026.04.02.10.12.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Apr 2026 10:12:58 -0700 (PDT)
-Date: Thu, 2 Apr 2026 11:12:56 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Boon Khai Ng <boon.khai.ng@altera.com>
-Cc: U-boot Openlist <u-boot@lists.denx.de>,
- "Lucien . Jheng" <lucienzx159@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peng Fan <peng.fan@nxp.com>, Sky Huang <SkyLake.Huang@mediatek.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Weijie Gao <weijie.gao@mediatek.com>, Yao Zi <me@ziyao.cc>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>,
- Kok Kiang Hea <kok.kiang.hea@altera.com>
-Subject: Re: [PATCH v1] misc: fs_loader: Add QSPI RAW partition loading support
-Message-ID: <20260402171256.GA1914552@bill-the-cat>
-References: <20260319100256.965-1-boon.khai.ng@altera.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=cBMzN9mqxa8ZPqJBgnaLUmNPrzAjpzhmM9sSag8ov7p8QkOPBK3hsm234WDBwpPseVw6XO38Hte6KhbQYvtltFQs0I9bcHLlNRN8slh4S4e5BNeNkJzukmSViavS06vHTgaFWjrqwMPisj75gy3nt0maSeeAGMZmIp9R3JqNUA/kTskZBqeRR8vzJ3hVb8O4GW338P5ui4fISFNJU+UNjGEiK7lPZ2V7xmweKaSkUWZ7rtbgUwgyov+DRP5LL+McjmxNwtGJqb6n8Y5rtJjcac1aMcrprul/HOD8xdN3sTrLYrwrQ6HecdVCWhXS7Mla5u07RA/t29mmvgvIYNn5ew==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=AldNSiHT1xIauL47sHGbA4vBegvlXSPdM9aUfuE2lxg=;
+ b=D6d5jPvc/Yjr2UhA3PeTX0r4u6RLUEadm21yBup8/fBSBUkEq5uq3FL84+NFQ1HmEk1f8/e3yAlaJuC/wxv3rfUex0b+Ao4rV/4hDtgPj++j7P52Pd5WwH1yLXF11Guch29fw2fHUQmH0161BWawyL/88sLzKYyf393l4jAbNUNaaP4bHn3csp/sS6gvnbhNgp5cUSeUJ1BgtewALUh+0Tf2W9p9utGAK+uRTJIHxDfvD/fsvlsYR1yU5disBw5iHJ3d29vWa70nOWU8/GWUs07RIG6MOs9LORLPTXbCj5eQCv0Xsp5ToWEF0SXxcUiQIpQ7xfJwd2Oq76Mq/hSNdQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=AldNSiHT1xIauL47sHGbA4vBegvlXSPdM9aUfuE2lxg=;
+ b=jkVDk4IvO8u98RrWJeO4PvW/xcGoEiHP++MDyYpkSLl8iu7Nh+I3oKDBwQDxvqsbs20jx0OBvPEATbMMuTNscBteSeMiefEKdZxWLQpp+rzucyqya9YZxKGFjwmsxcx/DaBGFa0lHTUm36yq4LOAHWWfXoxgi39Nla0EPsd2SaI=
+Received: from CY8PR10CA0006.namprd10.prod.outlook.com (2603:10b6:930:4f::29)
+ by SJ2PR10MB7656.namprd10.prod.outlook.com (2603:10b6:a03:53e::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.20; Thu, 2 Apr
+ 2026 17:32:27 +0000
+Received: from DM2PEPF00003FC5.namprd04.prod.outlook.com
+ (2603:10b6:930:4f:cafe::10) by CY8PR10CA0006.outlook.office365.com
+ (2603:10b6:930:4f::29) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.20 via Frontend Transport; Thu,
+ 2 Apr 2026 17:32:27 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ DM2PEPF00003FC5.mail.protection.outlook.com (10.167.23.23) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9769.17 via Frontend Transport; Thu, 2 Apr 2026 17:32:25 +0000
+Received: from DFLE214.ent.ti.com (10.64.6.72) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 2 Apr
+ 2026 12:32:25 -0500
+Received: from DFLE205.ent.ti.com (10.64.6.63) by DFLE214.ent.ti.com
+ (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 2 Apr
+ 2026 12:32:25 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE205.ent.ti.com
+ (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 2 Apr 2026 12:32:25 -0500
+Received: from localhost (rs-desk.dhcp.ti.com [128.247.81.39])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 632HWPmL2424703;
+ Thu, 2 Apr 2026 12:32:25 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="GzEh8iLGaVnHOIBx"
-Content-Disposition: inline
-In-Reply-To: <20260319100256.965-1-boon.khai.ng@altera.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Thu, 2 Apr 2026 12:32:25 -0500
+Message-ID: <DHIUKA2JVA4H.V11Z7EF0I1A1@ti.com>
+From: Randolph Sapp <rs@ti.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, <rs@ti.com>
+CC: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
+ <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
+ <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
+ <u-boot@lists.denx.de>
+Subject: Re: [PATCH 5/6] efi_memory: backfill EFI_CONVENTIONAL_MEMORY
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20260402001410.3736815-1-rs@ti.com>
+ <20260402001410.3736815-6-rs@ti.com>
+ <CAC_iWjKbeph+3M=GDy3_KeprSaUTVd3375O3Ny9GPV14XNBUgg@mail.gmail.com>
+In-Reply-To: <CAC_iWjKbeph+3M=GDy3_KeprSaUTVd3375O3Ny9GPV14XNBUgg@mail.gmail.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM2PEPF00003FC5:EE_|SJ2PR10MB7656:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4fc79e4f-c6a0-45f7-6189-08de90ddce7d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|36860700016|82310400026|1800799024|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: 5gz9xjRIjEcQhl8pA3NbacjDZ0928iF3OG7FIlZ2dtByEAD264DhCC4wz0kd0ucXUHOy7UApgv+0unaknHWdfI3KAxzI1J+0Lyo6gmGTNiZEvip2AcXZpTLqywPVUcLLGW8U8kOQvxu7CqY2PR77rBavuadrsWLf8HDc+xcRMhjfVEHjRiknBBeWg+VYH92Gl0CmgHjfVVVR2dWIoGfZ/g9vSCRShcWMXU1KRc4o5ZdCxxXvA4kQlGa+bhcbxzu9gWQqJWSwXWyM4DUMAk2vOHfFVRnnlfogW8NYcThCenRREvUJ7sFWiv3Lv9bIuALP4eTv8wNCMHpSk67QOV9mG+dIR3rVTZnBv4Qv2162g7tXdf3WKEpd0yUznxj0dNVj6x4xztQIPeJESU1ElpdjNNCzXbTp6BwG9PeB94kOGkfs4UGpF+tZYi9QPVlW2rH+0ckSvdCMOxP0dBIL0eZ+f/xyDwwJSfgKl7jmM8M2BDQxCZesN/aSLu7WM0qYH4WYNTdP3U0Nylgl+G3iRFKSH38hwSNj8MTkThnzv9hkS/lt8P/IFudMTzYK7FzNg3e45XWbRkeTHYFFqgSVbOvJLufJVP+4rZmetJUWdL4AzLBKFn07EkhkmkYu2tSJztlDfqhyZaYPyHAoLWV+fXn/Mdb3cosfes8As6434PXyxZslIl/PHxRUwnjYpX/vT8NHL5C9fe/6cR+Hi1VQz1P0tKqCJFxSVc+FQs4KKwURdcnN0khaXAj7JxIjWLSHgzDK3TwVpEP9As+ziVmiOKa++g==
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(376014)(36860700016)(82310400026)(1800799024)(56012099003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: PjU+5RmEoEUQrBttmN58Vbrc4+oszj+zExzvcXU3NJOur+eOO43rlLmverF+Zk4mhrDLwLAZGOHmfMa9oZtyhSO/TmsaseTeAdlw+XujFtH8cTS1Ee1Fjg67uYwghj1Py5nrghMJxpXh/r9JuIEeaVuDUAu/4GAMnJkLXMmNorkALy86ROYaiHVCX3SZuaZ9IMM0cGEmhn24b75MuYxccxx/knYg8tQrsClqp0ukzO/8N0UVYdUorP9DOH+hJXKvTEQqJNQx2LzHL7zj8z3rTouCmjeMa1U8ao5mEQUFx+4TvChmZSMkm9kkHfUbLYj9y5U995fgTbdn90YGGnHsn7IdKB0BJnCVdy4+f8dGPPTiYF1Q/JT57HBSXubbjuNZG6R/86iv0KNAsmsmOUmFNiDFbXN77SVS7PtxIPekP9nAHGSMt8dkCzKG0BlkTOUK
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2026 17:32:25.8716 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4fc79e4f-c6a0-45f7-6189-08de90ddce7d
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: DM2PEPF00003FC5.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR10MB7656
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,64 +135,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu Apr 2, 2026 at 3:53 AM CDT, Ilias Apalodimas wrote:
+> Hi Randolph
+>
+> On Thu, 2 Apr 2026 at 03:14, <rs@ti.com> wrote:
+>>
+>> From: Randolph Sapp <rs@ti.com>
+>>
+>> Backfill any fragmented EFI_CONVENTIONAL_MEMORY when LMB allocations
+>> start to fail. This may be a low memory environment, or maybe LMB is
+>> running up against a tricky reserved region.
+>>
+>> Signed-off-by: Randolph Sapp <rs@ti.com>
+>> ---
+>>  lib/efi_loader/efi_memory.c | 35 +++++++++++++++++++++++++++++++++--
+>>  1 file changed, 33 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+>> index 882366a9f8a..f07cc39b157 100644
+>> --- a/lib/efi_loader/efi_memory.c
+>> +++ b/lib/efi_loader/efi_memory.c
+>> @@ -441,6 +441,27 @@ static efi_status_t efi_check_allocated(u64 addr, b=
+ool must_be_allocated)
+>>         return EFI_NOT_FOUND;
+>>  }
+>>
+>> +/**
+>> + * efi_get_conventional_start - find the highest conventional region st=
+art
+>> + *                              address with at least the specified num=
+ber of
+>> + *                              pages
+>> + *
+>> + * @pages:                      number of pages required to be in that =
+carveout
+>> + * Return:                      starting address of the give carveout
+>> + */
+>> +static u64 efi_get_conventional_start(u64 pages)
+>> +{
+>> +       struct efi_mem_list *item;
+>> +
+>> +       list_for_each_entry(item, &efi_mem, link) {
+>> +               if (item->desc.type !=3D EFI_CONVENTIONAL_MEMORY)
+>> +                       continue;
+>> +               if (item->desc.num_pages >=3D pages)
+>> +                       return item->desc.physical_start;
+>> +       }
+>> +       return 0;
+>
+> We've been bitten by this in the past and although unlikely 0 is a
+> valid address for some hardware. Can we return something different if
+> we don't find a match? UINT64_MAX perhaps?
+>
+>> +}
+>> +
+>>  /**
+>>   * efi_allocate_pages - allocate memory pages
+>>   *
+>> @@ -507,10 +528,20 @@ efi_status_t efi_allocate_pages(enum efi_allocate_=
+type type,
+>>         /* Reserve that map in our memory maps */
+>>         ret =3D efi_update_memory_map(efi_addr, pages, memory_type, true=
+, false);
+>
+> In theory the lmb and the EFI maps are in sync. I haven't checked
+> close enough yet, but do you have cases where lmb_alloc worked and
+> updating the efi memory map failed?
 
---GzEh8iLGaVnHOIBx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fair point. Now that I've fixed the FDT warning I should probably check if =
+I can
+actually reproduce the issue that actually required this.
 
-On Thu, Mar 19, 2026 at 06:02:56PM +0800, Boon Khai Ng wrote:
+>>         if (ret !=3D EFI_SUCCESS) {
+>> -               /* Map would overlap, bail out */
+>> +               /* Map would overlap, try something else */
+>>                 lmb_free(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
+>>                 unmap_sysmem((void *)(uintptr_t)efi_addr);
+>> -               return  EFI_OUT_OF_RESOURCES;
+>> +
+>> +               /* See if there is any EFI_CONVENTIONAL_MEMORY allocatio=
+ns */
+>> +               if (type !=3D EFI_ALLOCATE_ADDRESS) {
+>
+> Can you please inverse this. It's going to reduce the identation.
+> if (type =3D=3D EFI_ALLOCATE_ADDRESS)
+>> +                       *memory =3D efi_get_conventional_start(pages);
+>> +                       if (*memory !=3D 0)
+>
+> Same here
+>
+>> +                               return efi_allocate_pages(EFI_ALLOCATE_A=
+DDRESS,
+>> +                                                         memory_type, p=
+ages,
+>> +                                                         memory);
+>> +               }
+>> +
+>> +               return EFI_OUT_OF_RESOURCES;
+>>         }
+>>
+>>         *memory =3D efi_addr;
+>> --
+>> 2.53.0
+>>
+>
+> Thanks
+> /Ilias
 
-> Enhanced the generic firmware loader to support QSPI RAW partition
-> loading. This would enable FPGA configuration bitstream loading
-> from QSPI RAW partition to program FPGA.
->=20
-> Signed-off-by: Tien Fong Chee <tien.fong.chee@altera.com>
-> Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
-> ---
->  drivers/misc/fs_loader.c | 111 +++++++++++++++++++++++++++++++--------
->  include/fs_loader.h      |  35 ++++++++++++
->  2 files changed, 123 insertions(+), 23 deletions(-)
-
-Building this on sandbox gives:
-drivers/misc/fs_loader.c: In function 'fs_loader_probe':
-drivers/misc/fs_loader.c:310:68: error: passing argument 3 of 'spi_flash_pr=
-obe_bus_cs' makes pointer from integer without a cast [-Werror=3Dint-conver=
-sion]
-  310 |                                                      plat->sfconfig=
-=2Espeed,
-      |                                                      ~~~~~~~~~~~~~~=
-^~~~~~
-      |                                                                    |
-      |                                                                    =
-u32 {aka unsigned int}
-In file included from drivers/misc/fs_loader.c:22:
-include/spi_flash.h:105:45: note: expected 'struct udevice **' but argument=
- is of type 'u32' {aka 'unsigned int'}
-  105 |                            struct udevice **devp);
-      |                            ~~~~~~~~~~~~~~~~~^~~~
-drivers/misc/fs_loader.c:308:31: error: too many arguments to function 'spi=
-_flash_probe_bus_cs'
-  308 |                         ret =3D spi_flash_probe_bus_cs(plat->sfconf=
-ig.bus,
-      |                               ^~~~~~~~~~~~~~~~~~~~~~
-include/spi_flash.h:104:5: note: declared here
-  104 | int spi_flash_probe_bus_cs(unsigned int busnum, unsigned int cs,
-
-Please fix, thanks.
-
---=20
-Tom
-
---GzEh8iLGaVnHOIBx
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCac6jjwAKCRAr4qD1Cr/k
-CgQAAP4pGcpeTbDeCN4ltsyxKjTyvnH1wU7Jds4CcIn6ZhcrlwD/ePluu+Pnd9U5
-uhrMH4MW0DQsm4cZdUsWG21r9PoZjQg=
-=0u/1
------END PGP SIGNATURE-----
-
---GzEh8iLGaVnHOIBx--
