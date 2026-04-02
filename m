@@ -4,121 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E2EFD6AAFF
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 19:15:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3756AD6AAFF
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 19:21:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 552BA83D8A;
-	Thu,  2 Apr 2026 21:15:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A510983D8A;
+	Thu,  2 Apr 2026 21:21:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jkO7j2q3";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uTyoJMYW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E77983F7D; Thu,  2 Apr 2026 21:15:39 +0200 (CEST)
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170100009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::9])
+ id 550BB83DC9; Thu,  2 Apr 2026 21:21:42 +0200 (CEST)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8619F83CF5
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 21:15:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D15C83CF5
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 21:21:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=kMvmTPpDcKlUEYykAt6yHoxJO/XxCws38hcAHqQGI85qQV7JQPdeMg9aCfEgfjJXRJMQHunechwmIUZ4BEYUo3BWoPX3VUJOu8FqVRFmJrB90iVZXTY/eLYcXy9RVI04UZw8SSTB11jeAGhQyGvJeSgGyw5iSaiWY82zw4t/Tlk0Eb1k8czxS/DMC0YIdL/xOn1dHeLf/PqMTgB2GedCk7Kcu9aGTC0rhDG/5B67v/mR3D+UkK0yc1x2CVMdO9Yv8Hv2LYBXIICe6fR4dDb3Cq5cV0dHAswjtpvXQI5xhZrHQ68EfU89idE2ttxt/V7ul72eq7Yx39lkmuAOOYwoHg==
+ b=w73AAFsDEU8sqDQ8R0AWmwlXsL3y+MpwegSzZTKKkmu3PFvp7uT1TpZE8h/hz2h7Qhun2C94K29hCAj9sZwA+dz9vEeggL1qu4ewFgqzce8rseqgxhf75mLQX+EkUEiP8OpXUNBeJ5zjWKwtxv280dJr8WVEqkDrsdvnSf0JxtIkvDiQktBwV1V+TVShDC2H8JDjRkze+mkl+0lVt0VBjVRv1ZnU+dxJo+YSFU40Ev3ADWapDAH9b2mcPT4urFXlJz3SJTysT2F1JYumIZo81ZtpSvrj+a1Uoa951Q0jeb6rqSf6S0q8P6hXxM58ZOn6LaStWIR3d2BcrWHcIP2lGw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MK9L54bKJ74o4nLp8LDoeR8HspHlBWx4vzuBObIizzw=;
- b=EaWNlBNvp4DccSDOzWXBK/Ykmik7FgnXgOfkn7q5muPCj3HgYH2gT6Z5+Ft4zIx2Qgr9KUmMd1LB92fi39/yhL2LR2k2xGBBl7byY6Fy62GV/dFtF/fPsy0o2O+pLfrzNmRXUnvL1NQxrqD8nBwFRq981MRjSfFZXPqHQMH05Jfog/aIdK1MfUHnYMNxBOpTu6JZLNhI81prQNPhPkw+El7qh7IgxjEjUhqCo4RmlAEDiU/86R0mGFyW/iGD7pAl4UJ2IDwbVgiijJ9V7t9WjlQTEz95Pg6Ipi3dypjdl7APkLz3L3yRhCzVGDGTLoYGmXtcVjazrH/X75lG7e806g==
+ bh=en8A6/fLVjBdZyT+z3/5/BSfG+X7aA+VIjHq9uCxdZU=;
+ b=JDhaiEfoyvIw8EtPv9ZRQEciVSPl7t1Aj483GETtdZz09h7pjU4+NHVbeBxuGWRADU2EhvaQqF6l1ELpMGMJAEl5ZEq8dmGBFOBK5p4bIuYRXg+608jEMVv160Ca7xn6AObIuxKHhTpJw1h1rLyvGk4ZT9R09GUBq2tN0Va0rkVF79st1lQYf1tKnLhJC3222dprbrTgs9afeSQPOcN7HjM1hmZG6X8oztsRfPNSC+RgLkhZDefjuM7t3UM1rHfUDHYrjFwqw15Fkka8mItnDCvaocT3PwNFeD229Sag+KLeb9Vxhk6KT0uVtVVmA4+8fllZAMwF913mSOulIVk0YA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MK9L54bKJ74o4nLp8LDoeR8HspHlBWx4vzuBObIizzw=;
- b=jkO7j2q38n6kmDPuOy5MpwECnamUlxjxHQgiNyVdU+Yxqu66A7a+jNfrA6T84xKC3t5xE+oOU4pJgaeUfd0szlq6un2LLoBajzCYoDKdEGlZ2MOjCftbdO3z+B5ezm3A+ms/nY09HO8GkDXb30a50rN7QyNAE7q+jAZY8NqweWE=
-Received: from MN0P220CA0010.NAMP220.PROD.OUTLOOK.COM (2603:10b6:208:52e::20)
- by CH0PR10MB5082.namprd10.prod.outlook.com (2603:10b6:610:c1::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.17; Thu, 2 Apr
- 2026 19:15:32 +0000
-Received: from BN1PEPF0000468E.namprd05.prod.outlook.com
- (2603:10b6:208:52e:cafe::6d) by MN0P220CA0010.outlook.office365.com
- (2603:10b6:208:52e::20) with Microsoft SMTP Server (version=TLS1_3,
+ bh=en8A6/fLVjBdZyT+z3/5/BSfG+X7aA+VIjHq9uCxdZU=;
+ b=uTyoJMYWQtDAK3yjGbflu1sHXS9BnZvyCScDNm5vuJkBix9Kez1woUtlJXzbT+u33F+Zq1RLhN+xkJFz3xbbUKC+k5CdtUyGpvb1bNUhywVvGvxAAwygNvwo4S5akszHQmIU9fm2FAWZ/YvfGbeEs/xPQdlbaFp+szpe4F2WS+M=
+Received: from BY3PR10CA0022.namprd10.prod.outlook.com (2603:10b6:a03:255::27)
+ by SJ0PR10MB4653.namprd10.prod.outlook.com (2603:10b6:a03:2d7::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.20; Thu, 2 Apr
+ 2026 19:21:37 +0000
+Received: from SJ5PEPF000001F2.namprd05.prod.outlook.com
+ (2603:10b6:a03:255:cafe::30) by BY3PR10CA0022.outlook.office365.com
+ (2603:10b6:a03:255::27) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.18 via Frontend Transport; Thu,
- 2 Apr 2026 19:15:32 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ 2 Apr 2026 19:21:37 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- BN1PEPF0000468E.mail.protection.outlook.com (10.167.243.139) with Microsoft
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ SJ5PEPF000001F2.mail.protection.outlook.com (10.167.242.70) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9769.17 via Frontend Transport; Thu, 2 Apr 2026 19:15:29 +0000
-Received: from DFLE214.ent.ti.com (10.64.6.72) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9769.17 via Frontend Transport; Thu, 2 Apr 2026 19:21:36 +0000
+Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 2 Apr
- 2026 14:15:25 -0500
-Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE214.ent.ti.com
- (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 14:21:36 -0500
+Received: from DLEE200.ent.ti.com (157.170.170.75) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 2 Apr
- 2026 14:15:25 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 14:21:36 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE200.ent.ti.com
+ (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 2 Apr 2026 14:15:25 -0500
+ Transport; Thu, 2 Apr 2026 14:21:36 -0500
 Received: from localhost (rs-desk.dhcp.ti.com [128.247.81.39])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 632JFPTp3033919;
- Thu, 2 Apr 2026 14:15:25 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 632JLZsR3042246;
+ Thu, 2 Apr 2026 14:21:35 -0500
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="UTF-8"
-Date: Thu, 2 Apr 2026 14:15:25 -0500
-Message-ID: <DHIWR5815YIB.2M5I1ZPQKVT8T@ti.com>
+Date: Thu, 2 Apr 2026 14:21:35 -0500
+Message-ID: <DHIWVVH1JXD5.11ARAOXG1SPKS@ti.com>
 CC: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
  <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
  <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
  <u-boot@lists.denx.de>
-Subject: Re: [PATCH 6/6] memory: reserve from start_addr_sp to relocaddr
+Subject: Re: [PATCH 4/6] efi_memory: nitpick removal loop
 From: Randolph Sapp <rs@ti.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, <rs@ti.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Randolph Sapp <rs@ti.com>
 X-Mailer: aerc 0.21.0-0-g5549850facc2
 References: <20260402001410.3736815-1-rs@ti.com>
- <20260402001410.3736815-7-rs@ti.com>
- <CAC_iWj+VbbyyJS57DBMwbkCK2LoZi2WXu4pS11hRL+jzXXPpwA@mail.gmail.com>
-In-Reply-To: <CAC_iWj+VbbyyJS57DBMwbkCK2LoZi2WXu4pS11hRL+jzXXPpwA@mail.gmail.com>
+ <20260402001410.3736815-5-rs@ti.com>
+ <CAC_iWjK8BNOtyreZR6WRO98z673hthQENN9Fp73+igzaifUuLQ@mail.gmail.com>
+ <DHIUPNVL4BG7.1UZWSP0MV8LBE@ti.com>
+ <CAC_iWjLJc68iL0swF8XcJK8x27aL2DR9bRBvq0VW21-CTXx2jg@mail.gmail.com>
+In-Reply-To: <CAC_iWjLJc68iL0swF8XcJK8x27aL2DR9bRBvq0VW21-CTXx2jg@mail.gmail.com>
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF0000468E:EE_|CH0PR10MB5082:EE_
-X-MS-Office365-Filtering-Correlation-Id: 95bbb6fb-d87c-49d3-5933-08de90ec347d
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001F2:EE_|SJ0PR10MB4653:EE_
+X-MS-Office365-Filtering-Correlation-Id: 68fe7ad7-eaf5-44a1-1ae1-08de90ed0f33
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|1800799024|82310400026|376014|22082099003|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: ghP6JZN6uKpBpW7XMelC7ywNlz/ppyoW/PJT+TCCtycCJt9fwfH71v5VtZvqYSH3k0pzT3Hm2i7L7oU2PD+RUgc7GFqXb+AXtrnc2cCKgJ86T5imtbWbFIErUXp1fs7EqybJg4fCr7mqguSgdnytUyA/XeEaWbSNxAyMi9KMBy6wXquBfBwQBWpJk71E9uhVzoESxceVzVgrjai+mspvraJ5GnvwRJ70J6PIqQZvDaZ26tlan/1jYmaejS3X3dtLZG5eT1273f2xqgY7XvQomqRE8KuBDeKZL8Nb0IqRWa5Qme8V9RRrSHKl2KmAHa4F82qzE36mfEJCsfNzq24qfW+IY2K0dKVDFazHGpxFxjb7FwxU8+dxhOMAq0A84agJTYZL/fmbmXebT9/JJw5blv0kJZE9qer+QkeunVI0GsroEppgjyUB2/msbT4AW+8RPAwj+lrBIqe5cjs7z9ifsCA1kXJyp7+XReG+DNYuqxm3o5J1aZVvfM42gQlkm+RV33rvyNBIE7pEkBupO03aefCxSPwIlrHS/1JDHA53rAQsGZdPbQVBRkoXz4auXurU4LBT/Fb3gBVXM+HGhAxmH49Xfg9gOCOqyLRO2iqZ4hKkQIHe+Y/6cLQL2TqjNyTg6ojd9enrSOXEBt7WI86xYhu5fEjoIh6VNRRgz4TDvX56/e8M1K4owXyK5wk2XkVEcBCk4yPm4uZUt5D0iqkCrK4eWhRlLZ6c3jH351NrxfjHMuAi//v19KO2QZfHqkFNmP7BJQ2tnE0l3S9N6LcJMw==
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(36860700016)(1800799024)(82310400026)(376014)(22082099003)(56012099003)(18002099003);
+ ARA:13230040|82310400026|36860700016|376014|1800799024|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: HnR6q6itPSI/YCKM20csYnsiQ3WI3fUMlzVEey4MeY3bRFKDOdfvZC141OH4lpJIrP/dCEJJvHvD56wcZo1fYSa0S8U+vk0/pPrVCf2mK3oGV2v9JkMwgB+WsDuBO/jL6m49e2tKh2hEHU5yklUAiG/BYZoLkz0Hh/MmSho/IS69vzNRKPDQ/c+k2Yd8UzqQD5Z1I30ezxovrBQ7x5XbKkADny54VPERafptD3hRZfyIlLRS/oJSI/gQmuBSMJns9FyrbAjdpOb+tQiE8J6xVBjtctC0UyEnJGAV/U7Qo11VQ7xlFTHKGPjaR4zwRncHEDewpNjMfKJpYiD1c4yeQ4iui6qs33W1PfhTDmqtQr5j1CaKFjH7Eo5enm7451obkwqSo6Dl7+wQltsjxoqOIt5f5J04yxuSx8nMiNflnDul4YnXOEg3y2+q7opKI7WiC5yNRrDqijN/lNO77MfmSJd/4jas6ShyENZjYfu6sI8G5yHtYUqsez6a0aaWn1SbZOCFR5sV89NqkXyfKeGURk69yfxzRrmTTryIds5z+PQgcl+FQbI7QDC8z9HScKCwu3aiUODOJBgVWdzuvzOztPO8Jh3+0SjhSzqAnXFbmdoTxt8E0Uaw+KZy7Ql0TTJRHIRuquFgvfZP6prXputwrRgJ43ospFsc+AFhFp6xnyXev+wcGUQrktvpAi/Wt3vCedHlfkex/hozQgbcJzU8w8WWkJ1wb87z0BfoMqR5R0ldteMJICFSyaoLv+HKpwNMw7DnGHdOE75b37cALv5lwQ==
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(56012099003)(22082099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: NVMTnfL352i+ts/lZ+qMnvNjBu5tHyLPAqPuiBqXMZG/rZ/Xbv4Ga3Mh0HOG28gR/DiO8AO87ywG5y8FkpqWPKzAEEDOFHdtFMmDeK2szWtfYpx/9XcnQ1CkiibCdXuoASz3D6A4h3O6znzFQ4KdYFQLzKeGmjUYJxF2rFYIr5h7suYc/IYSrwBqQ3UEOuWNMy5hDznTVS3bM/AiwIDvZ5ZSQG56M4PAFMXqEusa6FkuOM57KGIB6rM+qVnNfBDtI9Kx8gqU2/bInoniTm9ay6Muiylinh3280VRIhf22HwzIEZ/C8EFwK3o+wyGXD56LIUx+USeuIMQmL6W4IEfAGgLrU0K4xakDKB5RIRh2kEIC2JQSbtzcJmBPeWe7LEHuUGme/gs2fikbqbgCBeuNYkw7wq8QJijPRI85yoRCK9KVTGQRmiS2YLCz0km4rrj
+X-MS-Exchange-AntiSpam-MessageData-0: F60E/rpcrq9vd7JqrfAf8FeBpyZ0DA7Bm1mVj8fkDrUPwOpWOE3FGUCkQctcRsksjiHemBDo6bE+iVVC/m2YCYdD2idwHg/Sw7usVzyDd1dr51mjQs0deXYchPYU0uxBuw547NveePrX6n9h0YHzrfLNsFJlZZ+VvkktVHjFSGMH1gOu+7Q2WA0SgpJ0DaugD8j0H0hoSF9XMSZRHBrM/9Oy1eAUuNKTOnmxnGo1t+6dyTjEvSjVousmxELQuzoqpjlYw7X81z+qUUytCpK/wYY1wiW3cyGE12vV2UVYymLqsoGt73+zvCGNlQl7DmV+G33jJZlTjS+SU6HSRtuCEI44u/IYzXrMjgnrpTfEy0wtV9uAVQhzveIfJn+ue/OuxPZha932Y++gnguWWfxzl1wYkO606ItBOWivm/ObZAVogWxLa/BJuPoNIo2+voUf
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2026 19:15:29.9305 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 95bbb6fb-d87c-49d3-5933-08de90ec347d
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2026 19:21:36.8404 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 68fe7ad7-eaf5-44a1-1ae1-08de90ed0f33
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF0000468E.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001F2.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR10MB5082
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB4653
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,88 +138,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu Apr 2, 2026 at 4:21 AM CDT, Ilias Apalodimas wrote:
-> On Thu, 2 Apr 2026 at 03:14, <rs@ti.com> wrote:
+On Thu Apr 2, 2026 at 2:02 PM CDT, Ilias Apalodimas wrote:
+> On Thu, 2 Apr 2026 at 20:39, Randolph Sapp <rs@ti.com> wrote:
 >>
->> From: Randolph Sapp <rs@ti.com>
+>> On Thu Apr 2, 2026 at 4:04 AM CDT, Ilias Apalodimas wrote:
+>> > I don't mind merging this, but why is the current code flawed?
+>> >
+>> > Looking at the function even if prevmem contains a previous valid
+>> > entry the check will fail
+>> >
+>> > if ((desc_get_end(cur) =3D=3D prev->physical_start) &&
+>> >     (prev->type =3D=3D cur->type) &&
+>> >     (prev->attribute =3D=3D cur->attribute)) {
+>> >
+>> > and re-assign prevmem.
+>> >
+>> > So please adjust the commit message if you want this merged.
+>> >
+>> > Thanks
+>> > /Ilias
 >>
->> Reserve the memory from gd->start_addr_sp - CONFIG_STACK_SIZE to
->> gd->relocaddr instead of gd->ram_top. This allows platform specific
->> relocation addresses to work without unnecessarily painting over a large
->> range.
+>> Ah, not really that it is "flawed" right now, but more so that we should=
+ never
+>> even have to think about that occurrence, because at best it's an unnece=
+ssary
+>> compare. Why waste time trying to defend or attack a line of code that s=
+imply
+>> shouldn't exist?
 >
-> This hangs when trying to boot with UEFI on QEMU aarch64.
-> With the qemu_arm64_lwip_defconfig and this command line
+> Not attacking anything. But the commit message wasn't as clear and I
+> ended up looking all the code. Chances are this is going to happen if
+> someone reads that commit message in a few moths. So something along
+> the lines of "This not currently a problem but ...." etc is what we
+> should have in that commit.
 >
-> qemu-system-aarch64 -m 8192 -smp 2 -nographic -cpu cortex-a57 \
->     -machine virt,secure=3Doff \
->     -bios u-boot.bin \
->     -device virtio-rng-pci \
->     -drive id=3Dos,if=3Dnone,file=3Dmy.iso \
->     -device virtio-blk-device,drive=3Dos \
->     -object memory-backend-ram,id=3Dram0,size=3D4G \
->     -object memory-backend-ram,id=3Dram1,size=3D4G \
->     -numa node,memdev=3Dram0 \
->     -numa node,memdev=3Dram1
->
-> It also hangs when trying to initialize the EFI subsystem in general,
-> e.g 'efidebug memmap', probably because some EFI code is relocated on
-> the region you exlcuded.
->
-> Thanks
+> Cheers
 > /Ilias
 
-Thanks for the QEMU testcase. I see now there are a few cases where
-gd->relocaddr can actually be decremented, meaning we won't actually cover =
-the
-entire u-boot memory region. I've added a new global data struct member
-(end_addr_sp, but if anyone has any better name feel free to comment) to tr=
-ack
-the original value of relocaddr set by setup_dest_addr and it works like a
-charm.
+I didn't mean for it to sound as if you were attacking it. Change requests =
+(like
+this patch) are always the "attack." I'm just being lazy and saying I didn'=
+t
+want to parse this and come up with some specific scenario where it could b=
+e a
+problem.
 
-I also realized that means I could cut out the PRAM and all of that bank
-specific logic in lmb_reserve_uboot_region now, so that's cool.
+I'll adjust the description to indicate the *usually* unnecessary compariso=
+n
+that's occurring right now. Should be a good enough justification on it's o=
+wn.
 
 >>
->> Signed-off-by: Randolph Sapp <rs@ti.com>
->> ---
->>  lib/efi_loader/efi_memory.c | 4 ++--
->>  lib/lmb.c                   | 2 +-
->>  2 files changed, 3 insertions(+), 3 deletions(-)
->>
->> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
->> index f07cc39b157..57691d15758 100644
->> --- a/lib/efi_loader/efi_memory.c
->> +++ b/lib/efi_loader/efi_memory.c
->> @@ -915,8 +915,8 @@ static void add_u_boot_and_runtime(void)
->>         /* Add U-Boot */
->>         uboot_start =3D ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
->>                        uboot_stack_size) & ~EFI_PAGE_MASK;
->> -       uboot_pages =3D ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
->> -                      uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
->> +       uboot_pages =3D ((gd->relocaddr - uboot_start) + EFI_PAGE_MASK) =
->>
->> +                     EFI_PAGE_SHIFT;
->>         efi_update_memory_map(uboot_start, uboot_pages, EFI_BOOT_SERVICE=
-S_CODE,
->>                               false, false);
->>  #if defined(__aarch64__)
->> diff --git a/lib/lmb.c b/lib/lmb.c
->> index 542bb11dcf5..0df8157db7f 100644
->> --- a/lib/lmb.c
->> +++ b/lib/lmb.c
->> @@ -540,7 +540,7 @@ static void lmb_reserve_uboot_region(void)
->>         ulong pram =3D 0;
->>
->>         rsv_start =3D gd->start_addr_sp - CONFIG_STACK_SIZE;
->> -       end =3D gd->ram_top;
->> +       end =3D gd->relocaddr;
->>
->>         /*
->>          * Reserve memory from aligned address below the bottom of U-Boo=
-t stack
->> --
->> 2.53.0
+>> > On Thu, 2 Apr 2026 at 03:14, <rs@ti.com> wrote:
+>> >>
+>> >> From: Randolph Sapp <rs@ti.com>
+>> >>
+>> >> I don't even want to think about the possibility of this pointer
+>> >> containing a reference to something from a previous iteration.
+>> >>
+>> >> Signed-off-by: Randolph Sapp <rs@ti.com>
+>> >> ---
+>> >>  lib/efi_loader/efi_memory.c | 2 +-
+>> >>  1 file changed, 1 insertion(+), 1 deletion(-)
+>> >>
+>> >> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.=
+c
+>> >> index b77c2f980cc..882366a9f8a 100644
+>> >> --- a/lib/efi_loader/efi_memory.c
+>> >> +++ b/lib/efi_loader/efi_memory.c
+>> >> @@ -129,13 +129,13 @@ static uint64_t desc_get_end(struct efi_mem_des=
+c *desc)
+>> >>  static void efi_mem_sort(void)
+>> >>  {
+>> >>         struct efi_mem_list *lmem;
+>> >> -       struct efi_mem_list *prevmem =3D NULL;
+>> >>         bool merge_again =3D true;
+>> >>
+>> >>         list_sort(NULL, &efi_mem, efi_mem_cmp);
+>> >>
+>> >>         /* Now merge entries that can be merged */
+>> >>         while (merge_again) {
+>> >> +               struct efi_mem_list *prevmem =3D NULL;
+>> >>                 merge_again =3D false;
+>> >>                 list_for_each_entry(lmem, &efi_mem, link) {
+>> >>                         struct efi_mem_desc *prev;
+>> >> --
+>> >> 2.53.0
+>> >>
 >>
 
