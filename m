@@ -4,105 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D20FD6AB10
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 22:27:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03135D6AB10
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 23:30:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F2FD839DF;
-	Fri,  3 Apr 2026 00:27:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 2E69784056;
+	Fri,  3 Apr 2026 01:30:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="pF8G5T8t";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qNfZ1zRO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CD3483D8A; Fri,  3 Apr 2026 00:27:18 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id D45FB84056; Fri,  3 Apr 2026 01:30:35 +0200 (CEST)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 483A383693
- for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 00:27:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7DE69839DF
+ for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 01:30:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-89fc349b5c2so13396296d6.0
- for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 15:27:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-67bbea1e090so864121eaf.3
+ for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 16:30:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1775168835; x=1775773635;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=LIJ9bNZn/uPyq9eMP/yUtkSEqaZPfa/Xw2X5QGfA2O0=;
- b=pF8G5T8teLJdlBTKKAfjz0h3+nEAac54mbal+4mgu4XcMVMAu42cbdCZz+0lb9PoPA
- WHHJjGdUvm2rP99xKkQfXQrqfDXH1a7NcPcqzQZfpfK+19qie87h8VJ8VpoIJHv1snBT
- XYAXKuI3Ie61DLa9o7UnUJoKowp/ksadYcHHCBSDEVHaDmiVhUpl4jyqNEihOuLC+bL/
- DiGqK4X0ZG5eI/gFiSJQK1exVaa2dIa6GLB9cpZPFOIQanCjDCEr8MbZtqVEG804KVJd
- NtFc1TpzGD7+l7Izd/sMjSgDR3DaO6ypOFXGsjUiDqzgCo1eKl2OFr7Je2DPK0ZsIO8n
- nMCQ==
+ d=konsulko.com; s=google; t=1775172632; x=1775777432; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=F9xn209HskEDpt/3irU0LktCdgZQoDrSklpTzgYC/6Y=;
+ b=qNfZ1zROdq7sEvY1b0bfrUkDDDb7D71niw5+lLYSl9qWmIWtycubBky7eHVEWmmxhH
+ YD1uzUUm0h9otDkQy+24dPdUXWa94GkM/9YvRkBZRPluK35WyoXqmsJkgEc693n0jlUY
+ 08qGmWiiTmfactXA2CU8Y/QhhObJ7TMyU9bkE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775168835; x=1775773635;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=LIJ9bNZn/uPyq9eMP/yUtkSEqaZPfa/Xw2X5QGfA2O0=;
- b=HJb4WxElQoY0lrtOgviVS3AQG9eYwoF95k/J30NOCRqbIb8t2VD/yLIgeO4tXJpwAV
- dn0cecyaK95zJ5djewCEad6SqZWpKVCGTPDZKCC2j5AedsBZdwHARzI7rFxYNxdYb3VB
- 79sF2QLi7uURT2gM4HACjM/zD8dFFht1Ka+NInh9jpTFOyccNoqMjHbTOxMp/JeJtVMX
- Cy7R1ChP5XKMBLdtAnwO61L+tPyI9Qb+sw+GRHOe3S/R7g5Tyg9AfZKTw6GTV5eWKHkS
- BK/WnytvnHsRQwekfjRfFuGd86CiluX1Hn1Yi/em3AhnkldOYrFX/WBgtpnRrhFqEZUH
- lB5g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVGeeArsMGVpyuasx3w7fqsKxRfsHivJgTbxPFk/v9iCBgX4DbTHdGR6WK3GMKxJjKv9IZJpMQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwyyhNAEbbK4GwkXV8DbMua8eULAJ5R+GtTStkBd0DbkOWYaV/h
- MHUQPhBrwuLbe7C2KCgoC9zEaQM9St9dmwmJZi5OZm93bcR22GZjxnY4E9FZhpVK79U=
-X-Gm-Gg: AeBDievwLeHIL//smJLiu9loNKe7vcXsVEbOFL91XMRmMxLoXvAfDIIj4VVw90SkOfz
- 6A/LA5kJhXgTSZKgHReJArHQNhziUSOydwdE3pXSj2BxiDOpihpZ0HbcY50t2uRme3gO53IPmiS
- 3qgVJ+eeGH7mcdUiDaYn985LPAbjfi4LVmd6/APCtTZ/HtDl4jfppOpCttYrheR7T2cg8mgMYfZ
- 7icVYzofbkMtQUiZGFyYuSuK5EFO4zGQESZngSY15X6QZNwxyLREsWaRmYZl5gcQAjBRsWDxt8a
- oArWtVabC/Nb6DcUI1utwfSYKdJ1RJ+iiqF5rm1dKrx50r9gCwmm5s9tuE0hH0I54CTjazUQec6
- hZJFf/H1N0Uk6xoDADKmk3fBjLU7UE9YvCXHDKxyPEopsMFOfLvBQqegFwclW1I8UOOdZMNBciV
- ed7I0fOQFohYthABv66VRjKb0Ms135A5jRs0rHj7tnLtp0dPTQyav33GjMxp5mUPgbcxTRmacgq
- g==
-X-Received: by 2002:ad4:5962:0:b0:8a6:2d77:770 with SMTP id
- 6a1803df08f44-8a7025b8277mr17131186d6.22.1775168835004; 
- Thu, 02 Apr 2026 15:27:15 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:c815:fab5:7fb3:5a56?
- ([2600:8803:e7e4:500:c815:fab5:7fb3:5a56])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8a593bf4b0fsm34052686d6.15.2026.04.02.15.27.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 02 Apr 2026 15:27:14 -0700 (PDT)
-Message-ID: <8c016bc9-342a-4148-8a0b-afb7ac03ab80@baylibre.com>
-Date: Thu, 2 Apr 2026 17:27:12 -0500
+ d=1e100.net; s=20251104; t=1775172632; x=1775777432;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=F9xn209HskEDpt/3irU0LktCdgZQoDrSklpTzgYC/6Y=;
+ b=bthuNd7Cu/qha/aLuBaFpA1UMb0cUopxG6cuqkjOBKhy2Dbsi+oO7qL903vIfC2FiZ
+ Hcy2nMXTe9FfpUWZGCDgn0ag5U7mMwzbqkY8jIPHbQCiqXJzcaaiqlRpf75KtDB77ilB
+ y6calh42DhoHaQo2yyAK10MGaidqZ7QU6DylMaMDAUPGNNuTiIZ7mPNtZ5FVl1wanmwR
+ svJsyXA5c2MILm8d/8ZWME9+8u+vVD4Mhj2A7MVbx7KYWwakHPdsS8Jzb3yAI7rhG3+Z
+ ia0uyzy+Pu8DqRUCqvFfuaEzyyyTwj91XWabF19cjrhP1aYFUjYZwFyh3kZlOlGaOS2B
+ AVYw==
+X-Gm-Message-State: AOJu0YxCaZa9cn+r3RK/ChSzK1sO0a8GiYPteVUVjYXqcawBdCNSZLFt
+ Xnx4whZexpbmWnph1aPwI4nyCkCVYL9Z8kvebW1tZMkawrjkE/IKMJfd6xgEog7EKyrOdzL7t81
+ JSke7thw=
+X-Gm-Gg: ATEYQzy5V+yPvsXs6NZEorOEn4kJ6XVuATwAGTJs4oHsu1reLpQMrmPkVSXtVebNJkG
+ SlvSD0KUGfSBXCcCjtxsUVKmExvRpcCX88bv4uLSVenvS2kh6PN1lk3uasLllNJtuV2DvjWj4tl
+ VpRzWtiUK2OgeFKZ8GwLpNPVXEBXJwsy+LsIXUpum8LVVBfMamHGNgoh9a+eH85O2+K6eO17Hxn
+ Qie7DY+qo/c5qzoqW+3HDzhd+OUlUY1O3rTseCOZ2SA2vlU3/lD9g1EvmkZ0GXKTV3MfEk++G7q
+ 16Dp6PwxYLM88rs+435xXgCUb/ed/6eTnErMvqaaFzFbeMt13POLvlFvZQexyKgfZnC6GsbwBAZ
+ mh0pMHklzTHa2enztGPKj5vEF/NEEHK+y9T/Eeta0Gc/jzUyzQWcKv7s+4uGSOA7fS1rVfXHMJx
+ wub18x0UICnZYNauA9uXn8ToWfl1zts8WxBwrNrsKjnNytiH72MuCDsbGfifZ7Ha3GFOK1b7Q7h
+ UbUC7c9xfaWhUZS+E1iPPas4XLsqeH86AHkcd9yacqQD5A=
+X-Received: by 2002:a05:6820:210d:b0:67e:33a2:5963 with SMTP id
+ 006d021491bc7-6821d33c707mr672927eaf.15.1775172632250; 
+ Thu, 02 Apr 2026 16:30:32 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-680a882d96dsm2817787eaf.9.2026.04.02.16.30.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Apr 2026 16:30:31 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Rasmus Villemoes <ravi@prevas.dk>
+Cc: Anshul Dalal <anshuld@ti.com>, Franz Schnyder <franz.schnyder@toradex.com>
+In-Reply-To: <20260330140106.401876-1-ravi@prevas.dk>
+References: <20260330140106.401876-1-ravi@prevas.dk>
+Subject: Re: [PATCH] cmd: test: add bug-compatibility special case for
+ 'test -n'
+Message-Id: <177517263142.1999166.6862793659438293352.b4-ty@konsulko.com>
+Date: Thu, 02 Apr 2026 17:30:31 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/9] MT8195: add ufs support
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>,
- Julien Masson <jmasson@baylibre.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Chris-QJ Chen <chris-qj.chen@mediatek.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Bo-Chen Chen <rex-bc.chen@mediatek.com>, u-boot@lists.denx.de,
- Julien Stephan <jstephan@baylibre.com>
-References: <20260318-mt8195-add-ufs-support-v2-0-f18eeeeb0e72@baylibre.com>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260318-mt8195-add-ufs-support-v2-0-f18eeeeb0e72@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,42 +98,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/18/26 11:50 AM, Julien Stephan wrote:
-> This series adds ufs support MT8195.
-> I also include in this series some cleanup on phy-mtk-ufs.c phy driver
-> and ufs-mediatek.c mediatek ufs driver, and pmic support for MT8195.
+On Mon, 30 Mar 2026 16:01:06 +0200, Rasmus Villemoes wrote:
+
+> It turns out that there is lots of code in the wild, including in the
+> U-Boot tree itself, which used to rely on
 > 
-
-...
-
-> Julien Stephan (9):
->       drivers: phy: phy-mtk-ufs: cleanup headers
->       drivers: phy: phy-mtk-ufs: use tab to indent defines
->       drivers: phy: phy-mtk-ufs: use clk_bulk functions
->       drivers: phy: phy-mtk-ufs: disable clk in power_off
->       drivers: phy: phy-mtk-ufs: do not alloc priv with priv_auto
->       drivers: ufs: ufs-mediatek: fix phy handling
->       drivers: ufs: ufs-mediatek: implement clocking
->       drivers: ufs: ufs-mediatek: add MT8195 compatible
->       configs: add new defconfig for mt8395_genio_1200_evk_ufs
+>   test -n $somevar
 > 
->  board/mediatek/MAINTAINERS                  |   4 +-
->  configs/mt8195.config                       |  24 ++++++
->  configs/mt8395_genio_1200_evk_defconfig     |  26 +-----
->  configs/mt8395_genio_1200_evk_ufs_defconfig |  13 +++
->  drivers/phy/phy-mtk-ufs.c                   | 128 ++++++++++++----------------
->  drivers/ufs/ufs-mediatek.c                  |  40 ++++++---
->  drivers/ufs/ufs-mediatek.h                  |   2 +-
->  7 files changed, 123 insertions(+), 114 deletions(-)
-> ---
-> base-commit: 142c805d470cd02470146d6d70aa9c522d4da16c
-> change-id: 20260311-mt8195-add-ufs-support-535ebedbb323
-> prerequisite-message-id: <20260318-rename-genio-defconfigs-v1-1-1440312442f0@baylibre.com>
-> prerequisite-patch-id: 76f64e540256592f97d1b274e6072dde36fee2f9
+> to yield false when $somevar is not defined or empty. See for example
+> all the occurrences of 'test -n $fdtfile'. That was really only a
+> quirk of the implementation that refused calls with argc < 3, and not
+> because it was interpreted as
 > 
-> Best regards,
+> [...]
 
-Hi Neil,
+Applied to u-boot/next, thanks!
 
-Is it OK if we take this one through the MediaTek tree?
+[1/1] cmd: test: add bug-compatibility special case for 'test -n'
+      commit: f7e7c55e53e80100c327b9cb0512c069acf80ab5
+-- 
+Tom
+
 
