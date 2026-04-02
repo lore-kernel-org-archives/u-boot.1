@@ -4,101 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58A99CC6B36
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 08:54:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29468CC6B35
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 09:04:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9C37839DF;
-	Thu,  2 Apr 2026 10:54:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 30B07839DF;
+	Thu,  2 Apr 2026 11:04:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sKwbVZLo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="g4BmRl4K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AC1B83CF5; Thu,  2 Apr 2026 10:54:10 +0200 (CEST)
-Received: from mail-yx1-xb135.google.com (mail-yx1-xb135.google.com
- [IPv6:2607:f8b0:4864:20::b135])
+ id 05E9683CF5; Thu,  2 Apr 2026 11:04:56 +0200 (CEST)
+Received: from mail-yx1-xb130.google.com (mail-yx1-xb130.google.com
+ [IPv6:2607:f8b0:4864:20::b130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACB4280212
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 10:54:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A57A280212
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 11:04:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb135.google.com with SMTP id
- 956f58d0204a3-650182d19e0so732501d50.1
- for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 01:54:06 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775120045; cv=none;
+Received: by mail-yx1-xb130.google.com with SMTP id
+ 956f58d0204a3-6501725d888so511928d50.0
+ for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 02:04:52 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775120691; cv=none;
  d=google.com; s=arc-20240605;
- b=I5uNn3c7coftp/+HB7h8ucogkwiDg593ks/SCDSPj2cCdQkXvvDgkXgCrk0domHj6S
- L4cmHMMjFSyDLDAEt7zR0sPF8D9Oj6TRqZAHta/98wv8fWRaH3AxyOxHXWnDsjZ5IciT
- 6RyHhfdboYk3+Mo+4Z1TMsffPXsomwFqmXPFMOm+j08jMhO0XC60izcfrBUJ8HQGlMD6
- iKrENadBG5bH9uSo9qkhlObYhLB1ZKehiDVm4vvNzGdFGWSN3Ad+4UXsZtUf/33SioSn
- Vv+YcXSj0dkhSPkKZYGAtGkci0fYLXMoX+Vo9dC2G2sG8ff6q3jeJYv+85YyalBHTHuz
- vcNA==
+ b=PO3FF3d7Q3IT9Xw3rOcOhxT7vzs82b2iaYiFHZTdt8LVyStoCdOybSFAFjz+XRbxRT
+ tOu2JtTQZkzURyhdRpmLftnOsesBQedegAHzg2aOkwY/wkPXNcjp1oJi6k2ip61afMe0
+ m0pwulF4fKRyLn1etKVngNi57EbbY5eUInPtuFgdlDwgCFj7+qS0cY/7r7PElIdjYyVh
+ 2ClyS3PSvPF3t2+gUMCxDnUdiV723MIF8wjZKLvHIGj8I5H0saFaA32ZQTlahr8q6/uB
+ BA9TG0bpQWJjMvW/rSL51Gzw9exzJPTfSGU4miP9PFdA7vIYNjwbgSYTVYWM53djdAKz
+ 9Iug==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=CH/zdqpDm0wm+XK+T+ycCTaVLcwfcswyn65di7+LBhA=;
- fh=bF0/D4lI7iihEPBF+JxHOYqOKuhqjj3MWLIT9zEhIKc=;
- b=k2kQFu2G4LTH+EA6RkEcIlOmkIzwWCQjpbyim+6lItdBgr0R43C5iavr1m4HWUUXfM
- rLkPW7UWHMncY7YYB5p1jqVs4xgUb/srObgDk+oc0X8V/C4/H/ZoHF94/oWdvRsInirH
- 3tjs7MJu2ouJdhgvPME1uqdYIC7R41DLecFUunLXeAjoGpsWUg/X2gYtRx66SRFyJ/9A
- OyefpMcTHhbIecsb8BqakV7nnR8LS1zSUUJGz3aCjVUjMOpx/b8/9zHB10LAu/rK9Bfm
- 4XZYScERiKcCQASEQJ86YIhcMoI7GWahjuPebQb7BSB/FzjVdA11tZSiCcWJ4t3CjQnH
- IZeA==; darn=lists.denx.de
+ bh=KlPtGG27Z8TIHJBCC8bqnmdkPFi1ROhG+H01g4+PYxg=;
+ fh=PMru3HCAagitSHttkn7gCVctqhCMf74RlLIZPxxmfF0=;
+ b=WYrsiMMazgw78KttnUmBDAYyNzr57IMu0JOIW9Dz6m+zci17Rzly8Mpw4hu1f1rhnu
+ PxxRK7+ejLn/gjZjPBKEBUY+NJVoYk10D+bf5H5awkTca16WC4TwrOj8Ua7cpex+kho3
+ xgp+Pdg52PgW1BP489amw88hgQgpg5aj+6z5yzq08ATaYeCBMvEbNgEWDfTVaUFXJ/i2
+ A/w2feXbuRShbbuUXMHpsTQ6Ghk3R08EYw+f++kEds+6imB1MAYVohnpJQPamDG+fCnI
+ VgwaquI0mJ1kmjkOBlS+Jg7hgPVB/G6dgd0KXxB5xGUiZNqnLn73iLlTz6vTY1uVnnur
+ S79w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1775120045; x=1775724845; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1775120691; x=1775725491; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CH/zdqpDm0wm+XK+T+ycCTaVLcwfcswyn65di7+LBhA=;
- b=sKwbVZLo6QrS+PnmptWMzsGRxQJ25boZQ7aTlRvzqVDlhDtiMLStDtyCyu3UR8h/of
- 8awJgSCqRaD/b85/V6q1ne5KGHT03CaAK+xaV8SkrpNjEIMUMzsareWYH4ju4FEHThH0
- vQDBaMX6Fgb8KeKmB3c+iQLg082d2LhwjhJpSJTLtrgCNZUZR+mdRuYdIdSIf5zXnmPj
- ayi4h45FmA+0xDIJCgd30DvtSzcj3BADZKFwbG6u3z1lWtkkahfqv+I+Cvxy0LRmmPLl
- Zww89Q70XNWh7LyNTbOd/RFeDDcXqwNYTqeE6iQHwMcThU+6C5EXS8sdpaQWR4hBdys+
- bL4g==
+ bh=KlPtGG27Z8TIHJBCC8bqnmdkPFi1ROhG+H01g4+PYxg=;
+ b=g4BmRl4KR+o/9AaZfQpOMqRt+3VVnFauwmIQdcEMM66EqTehjv0iMlEZ4lJvvoZFZ1
+ OeG1lAIybBQ8aWnAC7VLG6dxQVU6KrJOFtxQe+gMEWdoroDJmPMdOUhls8KUGIQV5hCN
+ bm9HksBq8HLXSNeVIdi/UnfURDlwvHmsYGpI0pLZ1T+7Kwq3JPVVwsY37cSHZWFQhVdn
+ 5DUvR531mpTxHXdDnNN+oQ4OHgHTVTzHVvoDU3q4BLFQJQBrsg1j32FYmqALd8ObRq7o
+ q79z5d17SxS1YOCSpSHkDBAGReRD3WVn+7AwMsOeTJlNkq+PWB4PWMW5jwCGbeh+qd9Q
+ 6WEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775120045; x=1775724845;
+ d=1e100.net; s=20251104; t=1775120691; x=1775725491;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CH/zdqpDm0wm+XK+T+ycCTaVLcwfcswyn65di7+LBhA=;
- b=iF4ym98fC2v8ynJAlAIuvyxkoXHhM9VptNS7rWH5Nr8wI2AiAssU/R3QVUiokbbTdm
- oqU1vosmynB8caKP+yie6yEm9woZXQRwy+I7C5Po/DyBm8bPD2hRkh5HFZhoCg8K03XZ
- niULdwzKZdcNMeh2SS13lnkPXjmkH9Ih2/uHSC+pM/Qe87TMH6DFCnHJ1nhITDzhtOmc
- 7n8HuNCWzIIDlzq19EgZeKmYI8Q06csBZBuCnfDJutBDk0ePCf6O0nVo5f7EMWk4laGa
- 3RqcypmESKM/tt8FIjFlRT0elpVlOzuVN0t1Cb4DI1MX5IDXoISkyC2ZufQIvj0sHpTf
- N5Cg==
+ bh=KlPtGG27Z8TIHJBCC8bqnmdkPFi1ROhG+H01g4+PYxg=;
+ b=Yi6BKHinEAkzLx1JqpP2h4YQd7vkQ4d+EQ9ZCO5vEwpzRq8BVfroNlBHNrRNxzd5/C
+ SJ+rRUYzdC3xFp60BabxW79AB4gvmYXwgBPrX6YdQrUBIiy7OGz5Rpv4yF08RcJqZe3J
+ kHaDYYErbT3evldOdOHtAppeIk6EVxGVe1safV2uhXKDWawCo9o/1JjhdP1+JNbRgZl/
+ sj+kTxufn6pFDUuyVY3ZECYlqtjdC67yAXDDVMjbGMeajtwwnxtDHejE6ve3q46S/+Ep
+ Gv4sCFAaIotXoJcTrOzOoog7nSOPGUYeD27aBC/vDPpTV55dC/NLPuUzDRcF5Sp4Juhh
+ ivTQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVuQAaUh/GUaYgvHQ6lE1ibxFdcMcDfPXWx0s820weltSI5YsgqelozHAF2W1ZV/tB5PZO6ICs=@lists.denx.de
-X-Gm-Message-State: AOJu0YwYlpJm3Y5TwahNwCwDDW1JzmqT3zfz0Bi5drcX3+k2t+6JZdv9
- gKyeDQ8vrynkUGQza+6kuvYD1ZviTt0Ca5WbLr+0lD+hsRAgdiUgwgW2dZvFgnwAwdz9Y4ebVjy
- MnaCUiL66hSVdkRUoe9mN7vDeaVsllwkbMVHrv4Vokg==
-X-Gm-Gg: AeBDietaCmsosl1as9IHWOydf7tN4JmCzTmh1LCtRBHk7vIRAxoKK848igMb2zxNklE
- 5rGc3XMPmnqXw3A6uCSpsNyti+0ctVq1ABKX4DSeCLrF4N7+Bj14aQdIMDTJMpRAaOZNFNzWQqW
- pbbUTiVZkyPgXgSro+w2nGcUXvK2f5x/2wtLnIH5NwBySCMZnPapM6WYHffWQryursdIaLQMBUP
- LuP9Zi+Xxh+xa4+5T2bnkP52PxlmSL6UfsNyytj+bHDU1ek0grzybpFMnsvYCUuGvNEey8tyj01
- EfvenyWEhbUXAVbBAbQY3Gofrjje9lJ6ZR3FmDJFMoj7FxYErALPPAKOVUZLAZnf8qPZaf5lJdt
- uo32JDNEUmwKmm6bHOVIFNb+JeoykOlC0JK7T2LKdtv5EEUYsiM4gocyqBshf7QOd5ycDZDCROc
- DrbXUhB+DwsrmUvA8ikzel6lonyIpeK6+Uvx3OHgTmtkMzxO+yADRenBQrpndRafMFwu5OJJXfy
- WEj0bXu0m/5+t62vm6zUuYhPBxJO2GR88M1DhMOT0+4XMe/zmACzMTd0p1Nh8KpKqw8JYa0hBe6
- 3QPjZqUkblCLJ8P9lc+vGp1/fnPOmpeMcrDM+O+Pk5db
-X-Received: by 2002:a05:690e:4192:b0:650:36e6:2ace with SMTP id
- 956f58d0204a3-65036e62e0cmr5275716d50.31.1775120045394; Thu, 02 Apr 2026
- 01:54:05 -0700 (PDT)
+ AJvYcCV8h3qmkJ3FJfzLT5wZkdbwqQPd/evbx8dpfOYVgheG4kr0BlceVxA8HdlqQVtqWXmKpAtsk8U=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz94uYCu6T6lrbF1T3xcbHZWj6DWHJ2TLgUtFMIJmAk4FtYuyOC
+ v9NrRxZpGI1r1ahGyUv7XoQLRIrWsuz9IPPHf0EhZmEnCkJAJ0ivae/RT1gaFDsRofsigCUuljE
+ fNak23kOhxzdhajP/cnJD+Ao4hsloF0giuNXDWanvCw==
+X-Gm-Gg: AeBDieuODn0WcsVzovxWXd4PpKRJlWEaxR7/qOrqkuP0RunGKCT06flnv01oDPmUQv0
+ JJzlveY0FDxiDIw1fAUg9b5u7dnz2HnfX7mHC72DcnKNmDpO1xkA9XoJMQ0OAmbeMjYGt8S5goA
+ 8q6ScFtKM7qsg+DAJgucxd+Sbel45XABy2LItHx1v7MPfASve/pZ/ka6AvpPQsqLNaJ4duC+D5G
+ tgkfIXHnGz97sscTC2hC7ur3RQBJ8TU8ISGpbf2KdP+o0Ghiv9h/yRFlIF9wmNuxUd8RyLxNvxf
+ tIx7oYOdrI4eeqLMedE1+Lr+tkcE4A97IoUYAiJSZ4yx1+Vh1p+lVpBj49F+oSE9fS3qgjB2u7D
+ D+CNYMvKV5PhocABlzWpMTLaanp/XXoG7aZeXEIjtiHzTLvoB5X8V8rJGH2yVT9n09LEc5tqDMI
+ lJiGDG+JzwDC+B/MdK5CANRNOZ0pE3moufdboG5YcF8FzfXu6OiNtI2pEkflCs7WGbzDgBis9Yp
+ nwHRpDW7MPuhX8OvW7LEDjsbeaj7Ym+U6A9/Pb2GSP8NooIk6HoXyLmFS1sJyxZkg3puE0wZs46
+ gP2z2RPImnXbJXFq87xvWchhfIZO7T9KYb4M6Pq6xrpU
+X-Received: by 2002:a53:ab09:0:b0:64d:5742:5ab0 with SMTP id
+ 956f58d0204a3-6502fe54682mr4844788d50.43.1775120691253; Thu, 02 Apr 2026
+ 02:04:51 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260402001410.3736815-1-rs@ti.com>
- <20260402001410.3736815-6-rs@ti.com>
-In-Reply-To: <20260402001410.3736815-6-rs@ti.com>
+ <20260402001410.3736815-5-rs@ti.com>
+In-Reply-To: <20260402001410.3736815-5-rs@ti.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 2 Apr 2026 11:53:29 +0300
-X-Gm-Features: AQROBzAGYw3W20kdxLrta_gtoSmUXXJIm988S1GGEW0lgoYCGQQIMJdBbRAlb20
-Message-ID: <CAC_iWjKbeph+3M=GDy3_KeprSaUTVd3375O3Ny9GPV14XNBUgg@mail.gmail.com>
-Subject: Re: [PATCH 5/6] efi_memory: backfill EFI_CONVENTIONAL_MEMORY
+Date: Thu, 2 Apr 2026 12:04:14 +0300
+X-Gm-Features: AQROBzAtbhduReeBGz8pFXUN9EmOeHEo6jVa_8ICLyLfQP25HVNIUglrJSJCO4s
+Message-ID: <CAC_iWjK8BNOtyreZR6WRO98z673hthQENN9Fp73+igzaifUuLQ@mail.gmail.com>
+Subject: Re: [PATCH 4/6] efi_memory: nitpick removal loop
 To: rs@ti.com
 Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
  Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
@@ -120,95 +120,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Randolph
+I don't mind merging this, but why is the current code flawed?
+
+Looking at the function even if prevmem contains a previous valid
+entry the check will fail
+
+if ((desc_get_end(cur) == prev->physical_start) &&
+    (prev->type == cur->type) &&
+    (prev->attribute == cur->attribute)) {
+
+and re-assign prevmem.
+
+So please adjust the commit message if you want this merged.
+
+Thanks
+/Ilias
 
 On Thu, 2 Apr 2026 at 03:14, <rs@ti.com> wrote:
 >
 > From: Randolph Sapp <rs@ti.com>
 >
-> Backfill any fragmented EFI_CONVENTIONAL_MEMORY when LMB allocations
-> start to fail. This may be a low memory environment, or maybe LMB is
-> running up against a tricky reserved region.
+> I don't even want to think about the possibility of this pointer
+> containing a reference to something from a previous iteration.
 >
 > Signed-off-by: Randolph Sapp <rs@ti.com>
 > ---
->  lib/efi_loader/efi_memory.c | 35 +++++++++++++++++++++++++++++++++--
->  1 file changed, 33 insertions(+), 2 deletions(-)
+>  lib/efi_loader/efi_memory.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
 > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index 882366a9f8a..f07cc39b157 100644
+> index b77c2f980cc..882366a9f8a 100644
 > --- a/lib/efi_loader/efi_memory.c
 > +++ b/lib/efi_loader/efi_memory.c
-> @@ -441,6 +441,27 @@ static efi_status_t efi_check_allocated(u64 addr, bool must_be_allocated)
->         return EFI_NOT_FOUND;
->  }
+> @@ -129,13 +129,13 @@ static uint64_t desc_get_end(struct efi_mem_desc *desc)
+>  static void efi_mem_sort(void)
+>  {
+>         struct efi_mem_list *lmem;
+> -       struct efi_mem_list *prevmem = NULL;
+>         bool merge_again = true;
 >
-> +/**
-> + * efi_get_conventional_start - find the highest conventional region start
-> + *                              address with at least the specified number of
-> + *                              pages
-> + *
-> + * @pages:                      number of pages required to be in that carveout
-> + * Return:                      starting address of the give carveout
-> + */
-> +static u64 efi_get_conventional_start(u64 pages)
-> +{
-> +       struct efi_mem_list *item;
-> +
-> +       list_for_each_entry(item, &efi_mem, link) {
-> +               if (item->desc.type != EFI_CONVENTIONAL_MEMORY)
-> +                       continue;
-> +               if (item->desc.num_pages >= pages)
-> +                       return item->desc.physical_start;
-> +       }
-> +       return 0;
-
-We've been bitten by this in the past and although unlikely 0 is a
-valid address for some hardware. Can we return something different if
-we don't find a match? UINT64_MAX perhaps?
-
-> +}
-> +
->  /**
->   * efi_allocate_pages - allocate memory pages
->   *
-> @@ -507,10 +528,20 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
->         /* Reserve that map in our memory maps */
->         ret = efi_update_memory_map(efi_addr, pages, memory_type, true, false);
-
-In theory the lmb and the EFI maps are in sync. I haven't checked
-close enough yet, but do you have cases where lmb_alloc worked and
-updating the efi memory map failed?
-
->         if (ret != EFI_SUCCESS) {
-> -               /* Map would overlap, bail out */
-> +               /* Map would overlap, try something else */
->                 lmb_free(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
->                 unmap_sysmem((void *)(uintptr_t)efi_addr);
-> -               return  EFI_OUT_OF_RESOURCES;
-> +
-> +               /* See if there is any EFI_CONVENTIONAL_MEMORY allocations */
-> +               if (type != EFI_ALLOCATE_ADDRESS) {
-
-Can you please inverse this. It's going to reduce the identation.
-if (type == EFI_ALLOCATE_ADDRESS)
-> +                       *memory = efi_get_conventional_start(pages);
-> +                       if (*memory != 0)
-
-Same here
-
-> +                               return efi_allocate_pages(EFI_ALLOCATE_ADDRESS,
-> +                                                         memory_type, pages,
-> +                                                         memory);
-> +               }
-> +
-> +               return EFI_OUT_OF_RESOURCES;
->         }
+>         list_sort(NULL, &efi_mem, efi_mem_cmp);
 >
->         *memory = efi_addr;
+>         /* Now merge entries that can be merged */
+>         while (merge_again) {
+> +               struct efi_mem_list *prevmem = NULL;
+>                 merge_again = false;
+>                 list_for_each_entry(lmem, &efi_mem, link) {
+>                         struct efi_mem_desc *prev;
 > --
 > 2.53.0
 >
-
-Thanks
-/Ilias
