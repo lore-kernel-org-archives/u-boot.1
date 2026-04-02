@@ -4,94 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7E70D6AAF4
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 18:27:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1001DD6AAEC
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 18:46:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D867683D8A;
-	Thu,  2 Apr 2026 20:27:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 43693840F1;
+	Thu,  2 Apr 2026 20:46:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fek9BjzT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bQN6gdhR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21DF083F7D; Thu,  2 Apr 2026 20:27:46 +0200 (CEST)
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com
- [209.85.208.45])
+ id C004B84056; Thu,  2 Apr 2026 20:46:00 +0200 (CEST)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE41A83CF5
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 20:27:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A42F383CF5
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 20:45:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-f45.google.com with SMTP id
- 4fb4d7f45d1cf-6634bb959a2so1672512a12.1
- for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 11:27:43 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775154463; cv=none;
- d=google.com; s=arc-20240605;
- b=YmWUPyQ37z0TOTD+KpJIDwwqvMjiq4fgSIc41qZpcfUShjF+RsjTMM+wvxt7o0Vn0f
- r0xRYNteI44vR0Gkkw+YlC9OrxXMXXh6ZRUgXLC21Sm7z5sXkSriScRB1Euq+CEBBdRo
- pzv/QFlSx/AfzzqGNEc1M5a8O+pLxKWs2DXHe71FdaH7olX9l9SaDrIXx/ffid4FneEi
- ZD2iU+DDDA5AZ8uVbQ+sf3WBr5C51bTjItIDnQGRj2YffEykydvwuZE7muffklvoYF87
- 28wQatnvBddVPknx48cx3leXtfpgeltN2ZRuQ3PD0kxda1NV1ZXk9vBX9QnUwves1uxr
- Xjzw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=xT9J/YOXA402kaSWI8a+0zHf223BdZDW3q8d9Rh8HA4=;
- fh=UsL9Rnwow6VFQ00e4ZtgfmC90jjXKxMVzqeN8RRQXVk=;
- b=iGe6gm4KQQ2T5l93v1PkNLwh2Vs+xaEXAnZHxEHCUAb59ybfzP+Px5hhBlIAdmP6Wd
- MGxKNBJA8+mz41mNpiCQa2bmyjZPaH5DzxpVQFergEXR+PC4sf5VzxBt3RyXLMc2y7PA
- 55ezbtFPqmGTDOxQdaQLAAxX/AYVZOp0Zzf0lcKxjzS4UCSosu/P2LAYp4K4ct6gyqYQ
- yRf3MZnXXsTmKqVv2uBXnsyIxR8SvQR+UEUWyPnjGITaSW0HWvCwwSJ4E8gh1FQPKzKY
- 9XiD/6hqPzjHB8Vr0Vx1XaTm7+flTy1E7m3o8h4gfHgjt+bj215RqT11kCfs6eBFyAQG
- NOgQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-4645dde00a7so1756195b6e.1
+ for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 11:45:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775154463; x=1775759263; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xT9J/YOXA402kaSWI8a+0zHf223BdZDW3q8d9Rh8HA4=;
- b=fek9BjzTYiM041/o2rhqdaMXg9wgoM/KNvSDYBfgm+KbhzgEruQqoaVFJruSBuAGN6
- pUryC2gbh5UXBxdY7k0AzUyNqrFTd32kW5SuPr7PrEJiwVTPAGXf6/cL0+5WCnVh1JLO
- k2VZDtxxm0qxpIR+qgYuwmjjCzo3dQuXM9iEA=
+ d=konsulko.com; s=google; t=1775155557; x=1775760357; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=IKxyjCvIJpEgSrsgg8MIB136uBH96o+NxDfQjgk6uqk=;
+ b=bQN6gdhRFDKZ+pLO+yQS+wyuWly1bQ2TWdj4fZx3gZgsEezfU7n+pyfZChMedYaXVL
+ 6nf78zqCccER9LbfyvAg9/U/ND1Z/nhoE+HetTL07oUaLsovy2/suiUEVWfd7JP9hQ5u
+ 97g6ipTbQ09UyYk9tRGQS5civH7g4ALanZ4VE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775154463; x=1775759263;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xT9J/YOXA402kaSWI8a+0zHf223BdZDW3q8d9Rh8HA4=;
- b=H5ODbp8OFNaQQPi92eW4amOd6H2lQvmSklbDaKDeJZ+Fxl6tbF1ses2gDuT0YvEVDd
- SzsvX4KAs4hdabQ9aNymA12mdGBvEIspy+3IxQuw4eCs+MKk/jLBjEVOk2FtANyT1n1h
- h3WSjN+14g2ziQKk2jdRVlie4dkJPTwkKCaIV7V8yVi9Lzxw4MZZmxxD9KhTmhOHnoFM
- onfxHoYjYdeGNh0zOMkofoQRen3QV58zyTStqfNdkf6wRjrepdKuXWXDF8ISkBmsbieD
- WwhcNJQLchlbyEsQRSHjDkj3yAwR0u7szxKKG8cODinN0mQgdpX7cUfded5vjvkJEo1n
- xcwg==
-X-Gm-Message-State: AOJu0YyIFzvTa9JTA+scPIw+xGL5SEO3zT/xpXcJ0qUDAGODe0Xhlmga
- luqJRE9e0fsl4qUCN50xjFOmXoVGAo3Uqv9SLOdc0M4DpbIWgcbi42pjTaEt6pWn6EF22Ra8/y8
- f0g8hoh7PSTjHns9ZjkerPQWcwuoZmJYUUsoxucJCMDZ79lTq8+E=
-X-Gm-Gg: ATEYQzyIKbZAYpvsmVZoMy594a6B3jcRQFi2iAIgu9YiW2cHqG8d1YiD3Tu+34136kl
- 8IVOsT3DOzi8olzJoxI+Idn7PAes4GjZZJhujUfRWDST+K+7nDo4ZZOqAf5gwj18G83EORflVY6
- ar+OlCItEuDyfIttkBdFsvlFNA0thNcm1oXFJHbJ2LNbm4tiM1N3Mtyi6usViwKOCzXwRcfFyM8
- dJrsLbMEw2OhtCc8ANSrRWpZgIv6oHD1YjbSbTbENOmdVn7wLT+OBnNFmkdzllXHhfwtOXdD6yV
- kGaD2w==
-X-Received: by 2002:a17:907:c294:b0:b9c:60bc:eafd with SMTP id
- a640c23a62f3a-b9c60bcee86mr56209366b.34.1775154463173; Thu, 02 Apr 2026
- 11:27:43 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1775155557; x=1775760357;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=IKxyjCvIJpEgSrsgg8MIB136uBH96o+NxDfQjgk6uqk=;
+ b=qeaLF/sg/rRSf2kGGBylp+pwODRDti01+gE254QVT/uftZiEVH9mJyHaO835JXD74I
+ b+APm73mbqVOX/iHo7aKnxFbH36OJZkLRJzxkDRMvZI+zmBdEqIV0jZIXn/dSIQMlyhH
+ 8WG/bZ8mB0UFHRSWuECmTQdGTnHxrU+69922RYYOiCYngF7FncvI8df6XZH07apLuZI6
+ NQCczM24QlQOBPwAoUz2TPp8IdfdwfipzAQXs8MuZJ5ishwu3jf4s7ls1eivqdpFqLMG
+ yYHWL3eY/mJmdtGWWv1jSsJl7L8At9yQtXQqJU2SItdnoTwyi7I+sBJD0b8cu7aoXBPX
+ 4k4A==
+X-Gm-Message-State: AOJu0YxJNGuCbsRmC3KfuL8z9cLUc9w7vZWWv4LR1CzGntIdlWZ9E8NJ
+ /aFlgvmng0yYT686evDf+osJ69xcHunoT0OefgVcmVWT5dzqP9M/Z8CQbS8tEUsWUfPf5s+BSpD
+ 9ZkT0D94=
+X-Gm-Gg: ATEYQzwhN4hRCaz6kvUu5plxbqEz4Q6qMnjDG6aaVQKJHblII6RGAUd1ckTTYb/QmGw
+ TtRgA29eJqzpZw5/AMdpTzwdzELIP5rYSLXaH5n5MoXbGoFrN0gyJ2sOgtyOXD6IrBK6FjoaOiT
+ xO+iFfbqNTjj+4iSaQmz7eqneDbcwpoVeLgu2ZeqUW4mqmn3V3YU2LHchZ6JVieWjXTk4U5wSgN
+ KTjbyIbZsrevq6y0HnrKMDvxp0Qn4/AS10etuMsnv1qDGkC4mqGWq5/8N2ygnLX0/EyEjq5l3ju
+ w/kGAX/gWYxAUPpCTF2wkuZ4d98aB1NEi4bwb6C7qKScfkwq2VUcSTBTCjxcti/EMgFraMcSEqb
+ AQHI49Xc6yHIk+4+6qmTu5AiAXHR+lIYPjtCnZILII/cuhTWaA8g6MrJVRXcjWgwjUKyx+iVfD4
+ 6+/TaGbh9kPI/vyIQPrVHCCFJkuOYr75r6Q8eyP8Dot5JMS0kHVLaCkzbPHf13Mj0aYYifDmXyf
+ qEs0f/FSo0WXXGlzTCff8AVvDnMPad06uuXFeDElmsm71CM9NOt4Xd+sg==
+X-Received: by 2002:a05:6808:2203:b0:467:f1e5:a294 with SMTP id
+ 5614622812f47-46f00b46690mr162622b6e.4.1775155557344; 
+ Thu, 02 Apr 2026 11:45:57 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-46d9044725dsm2085830b6e.8.2026.04.02.11.45.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Apr 2026 11:45:56 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Neil Berkman <neil@xuku.com>
+In-Reply-To: <20260318211515.35246-1-neil@xuku.com>
+References: <20260318211515.35246-1-neil@xuku.com>
+Subject: Re: [PATCH] env: flash: add catch-all for unrecognized flags in
+ env_flash_init()
+Message-Id: <177515555639.1935668.12528563896137657901.b4-ty@konsulko.com>
+Date: Thu, 02 Apr 2026 12:45:56 -0600
 MIME-Version: 1.0
-References: <20260330140106.401876-1-ravi@prevas.dk>
-In-Reply-To: <20260330140106.401876-1-ravi@prevas.dk>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Apr 2026 12:27:30 -0600
-X-Gm-Features: AQROBzCvOQdQkjatGqv0zhtugnD5V3OeVqPIeJH2QoCrzzc94lz11FAqAbp7UyA
-Message-ID: <CAFLszThhMiXoqD4Gkd-735y0r=-1sbzkqDVUYREtvkaG8bk=Pw@mail.gmail.com>
-Subject: Re: cmd: test: add bug-compatibility special case for 'test -n'
-To: ravi@prevas.dk
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Anshul Dalal <anshuld@ti.com>, Franz Schnyder <franz.schnyder@toradex.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,45 +96,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-03-30T14:01:06, Rasmus Villemoes <ravi@prevas.dk> wrote:
-> cmd: test: add bug-compatibility special case for 'test -n'
-> cmd: test: add bug-compatibility special case for 'test -n'
->
-> It turns out that there is lots of code in the wild, including in the
-> U-Boot tree itself, which used to rely on
->
->   test -n $somevar
->
-> to yield false when $somevar is not defined or empty. See for example
-> all the occurrences of 'test -n $fdtfile'. That was really only a
-> quirk of the implementation that refused calls with argc < 3, and not
-> because it was interpreted as
->
->   test -n "$somevar"
->
-> which is how this should be spelled.
->
-> While not exactly conforming to POSIX, we can accomodate such scripts
-> by special-casing a single argument "-n" to be interpreted as if it
-> comes from code as above with empty $somevar.
->
-> Since we only just added the ability to test a string for emptiness
-> using the single-argument form, it is very unlikely that there is code
-> doing
->
->   test "$str"
->
-> which would now fail if $str happens to be exactly "-n"; such a test
-> should really always be spelled
->
->   test -n "$str"
->
-> Fixes: 8b0619579b2 ("cmd: test: fix handling of single-argument form of test")
-> Reported-by: Franz Schnyder <franz.schnyder@toradex.com>
-> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
->
-> cmd/test.c     | 15 ++++++++++++++-
->  test/hush/if.c |  8 ++++++++
->  2 files changed, 22 insertions(+), 1 deletion(-)
+On Wed, 18 Mar 2026 14:15:15 -0700, Neil Berkman wrote:
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> When both environment copies have valid CRCs but the flag bytes do not
+> match any recognized pair, env_flash_init() falls through without
+> setting gd->env_addr or gd->env_valid. This is a problem because:
+> 
+> 1. env_init() then sets gd->env_addr = &default_environment (in RAM).
+> 
+> 2. In env_flash_load(), the pointer comparison
+>    gd->env_addr != &flash_addr->data evaluates true (RAM != flash),
+>    triggering the pointer swap that selects the secondary copy.
+> 
+> [...]
+
+Applied to u-boot/next, thanks!
+
+[1/1] env: flash: add catch-all for unrecognized flags in env_flash_init()
+      commit: ff7039032b7de3549b9b287b2c000c9e96c60380
+-- 
+Tom
+
+
