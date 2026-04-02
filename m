@@ -4,121 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7E77D6AAEC
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 17:39:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7E70D6AAF4
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 18:27:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFFC483F7D;
-	Thu,  2 Apr 2026 19:39:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D867683D8A;
+	Thu,  2 Apr 2026 20:27:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UQdiytKd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fek9BjzT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F361684020; Thu,  2 Apr 2026 19:39:37 +0200 (CEST)
-Received: from CH4PR04CU002.outbound.protection.outlook.com
- (mail-northcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 21DF083F7D; Thu,  2 Apr 2026 20:27:46 +0200 (CEST)
+Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com
+ [209.85.208.45])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EFCF83D8A
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 19:39:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE41A83CF5
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 20:27:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Vls1AsYOr3pYzVhRSZCnu6qxZkbQb+W8M3KnUzOlL+yN3JML9rj9Q+GV2F3oncSTdhIXq24gDdqn21eJynfhruWLcziRZ2KuxwaDm7jGLnjY/TAQhEU6YyYEN8cNryuUG+YYyvc5Q5QM5evsE85Ysgv9y2NqxahPoeAinTs6AFqb7javHC1C1js9r08d1tapbqvPEASqpRswgBp6Dt9K4EV6XABH4SFC+yGlsZpEtsPxYHYhX2d4Kv4CAJuO0TzRWZOVMJw5gVzGrsc+karixbn6kYrIHCpqCoWUM+oux/5rGR45kRuviSiv+JorOG0xzrZioPbo7aU1xh/HuyfO4g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6A4+qFL8M96mXEsh40exBvaHWDnwa1CTYkHWQPiBaFg=;
- b=QuqdBWVuM5R5iHmb64nAeEyhsL2/Ob75Q0uNBzxdnvSnVfpnrcgDsgk8z9gGGtEBmlJmoixTN2j+HXELIpQpWAvqMIo1qQCCg+3crBOpRdGTR+6EPjkmXv3jvgdOgM6kM3FizitiXdkEO0m22I2Sem7nNsE9/Q+bocu40nXcDj5hHAd9XQX6fXNrHoeVbI+kWtCgp5Cdim9obSD5Pzahc+dAT4LKI/sE5Lmr1kTjdT7KsTKlDuoanIhl4IKm8eiyyi3ktUIR3pwTg7a/2a9M0qwDq+jtqvfaE+SBNmsMzP0se85Xa9QhP9JNbJy50q36JYV4++0V1+h9jI8uKbnTYQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6A4+qFL8M96mXEsh40exBvaHWDnwa1CTYkHWQPiBaFg=;
- b=UQdiytKdkOcOlokqJAUZuREZjpzUWgt0EYUySFWlucly0o9STGxFEVL8mYQwbwuAS82AW2NQYxZhUokcVbXEkBswxd/GFstVROtxrDao1ZD520NDhcDjS+AJUvdVkOBnM/gJm7NcO1XpF5lhMSGC1+O9asorKQRDnW5/D3rkC+4=
-Received: from PH7P220CA0037.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:32b::18)
- by MW4PR10MB6631.namprd10.prod.outlook.com (2603:10b6:303:22c::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.17; Thu, 2 Apr
- 2026 17:39:31 +0000
-Received: from CH3PEPF0000000A.namprd04.prod.outlook.com
- (2603:10b6:510:32b:cafe::c3) by PH7P220CA0037.outlook.office365.com
- (2603:10b6:510:32b::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.18 via Frontend Transport; Thu,
- 2 Apr 2026 17:39:29 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- CH3PEPF0000000A.mail.protection.outlook.com (10.167.244.37) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9769.17 via Frontend Transport; Thu, 2 Apr 2026 17:39:28 +0000
-Received: from DFLE215.ent.ti.com (10.64.6.73) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 2 Apr
- 2026 12:39:27 -0500
-Received: from DFLE215.ent.ti.com (10.64.6.73) by DFLE215.ent.ti.com
- (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 2 Apr
- 2026 12:39:27 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE215.ent.ti.com
- (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 2 Apr 2026 12:39:27 -0500
-Received: from localhost (rs-desk.dhcp.ti.com [128.247.81.39])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 632HdR7e2435419;
- Thu, 2 Apr 2026 12:39:27 -0500
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-f45.google.com with SMTP id
+ 4fb4d7f45d1cf-6634bb959a2so1672512a12.1
+ for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 11:27:43 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775154463; cv=none;
+ d=google.com; s=arc-20240605;
+ b=YmWUPyQ37z0TOTD+KpJIDwwqvMjiq4fgSIc41qZpcfUShjF+RsjTMM+wvxt7o0Vn0f
+ r0xRYNteI44vR0Gkkw+YlC9OrxXMXXh6ZRUgXLC21Sm7z5sXkSriScRB1Euq+CEBBdRo
+ pzv/QFlSx/AfzzqGNEc1M5a8O+pLxKWs2DXHe71FdaH7olX9l9SaDrIXx/ffid4FneEi
+ ZD2iU+DDDA5AZ8uVbQ+sf3WBr5C51bTjItIDnQGRj2YffEykydvwuZE7muffklvoYF87
+ 28wQatnvBddVPknx48cx3leXtfpgeltN2ZRuQ3PD0kxda1NV1ZXk9vBX9QnUwves1uxr
+ Xjzw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=xT9J/YOXA402kaSWI8a+0zHf223BdZDW3q8d9Rh8HA4=;
+ fh=UsL9Rnwow6VFQ00e4ZtgfmC90jjXKxMVzqeN8RRQXVk=;
+ b=iGe6gm4KQQ2T5l93v1PkNLwh2Vs+xaEXAnZHxEHCUAb59ybfzP+Px5hhBlIAdmP6Wd
+ MGxKNBJA8+mz41mNpiCQa2bmyjZPaH5DzxpVQFergEXR+PC4sf5VzxBt3RyXLMc2y7PA
+ 55ezbtFPqmGTDOxQdaQLAAxX/AYVZOp0Zzf0lcKxjzS4UCSosu/P2LAYp4K4ct6gyqYQ
+ yRf3MZnXXsTmKqVv2uBXnsyIxR8SvQR+UEUWyPnjGITaSW0HWvCwwSJ4E8gh1FQPKzKY
+ 9XiD/6hqPzjHB8Vr0Vx1XaTm7+flTy1E7m3o8h4gfHgjt+bj215RqT11kCfs6eBFyAQG
+ NOgQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1775154463; x=1775759263; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=xT9J/YOXA402kaSWI8a+0zHf223BdZDW3q8d9Rh8HA4=;
+ b=fek9BjzTYiM041/o2rhqdaMXg9wgoM/KNvSDYBfgm+KbhzgEruQqoaVFJruSBuAGN6
+ pUryC2gbh5UXBxdY7k0AzUyNqrFTd32kW5SuPr7PrEJiwVTPAGXf6/cL0+5WCnVh1JLO
+ k2VZDtxxm0qxpIR+qgYuwmjjCzo3dQuXM9iEA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775154463; x=1775759263;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xT9J/YOXA402kaSWI8a+0zHf223BdZDW3q8d9Rh8HA4=;
+ b=H5ODbp8OFNaQQPi92eW4amOd6H2lQvmSklbDaKDeJZ+Fxl6tbF1ses2gDuT0YvEVDd
+ SzsvX4KAs4hdabQ9aNymA12mdGBvEIspy+3IxQuw4eCs+MKk/jLBjEVOk2FtANyT1n1h
+ h3WSjN+14g2ziQKk2jdRVlie4dkJPTwkKCaIV7V8yVi9Lzxw4MZZmxxD9KhTmhOHnoFM
+ onfxHoYjYdeGNh0zOMkofoQRen3QV58zyTStqfNdkf6wRjrepdKuXWXDF8ISkBmsbieD
+ WwhcNJQLchlbyEsQRSHjDkj3yAwR0u7szxKKG8cODinN0mQgdpX7cUfded5vjvkJEo1n
+ xcwg==
+X-Gm-Message-State: AOJu0YyIFzvTa9JTA+scPIw+xGL5SEO3zT/xpXcJ0qUDAGODe0Xhlmga
+ luqJRE9e0fsl4qUCN50xjFOmXoVGAo3Uqv9SLOdc0M4DpbIWgcbi42pjTaEt6pWn6EF22Ra8/y8
+ f0g8hoh7PSTjHns9ZjkerPQWcwuoZmJYUUsoxucJCMDZ79lTq8+E=
+X-Gm-Gg: ATEYQzyIKbZAYpvsmVZoMy594a6B3jcRQFi2iAIgu9YiW2cHqG8d1YiD3Tu+34136kl
+ 8IVOsT3DOzi8olzJoxI+Idn7PAes4GjZZJhujUfRWDST+K+7nDo4ZZOqAf5gwj18G83EORflVY6
+ ar+OlCItEuDyfIttkBdFsvlFNA0thNcm1oXFJHbJ2LNbm4tiM1N3Mtyi6usViwKOCzXwRcfFyM8
+ dJrsLbMEw2OhtCc8ANSrRWpZgIv6oHD1YjbSbTbENOmdVn7wLT+OBnNFmkdzllXHhfwtOXdD6yV
+ kGaD2w==
+X-Received: by 2002:a17:907:c294:b0:b9c:60bc:eafd with SMTP id
+ a640c23a62f3a-b9c60bcee86mr56209366b.34.1775154463173; Thu, 02 Apr 2026
+ 11:27:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+References: <20260330140106.401876-1-ravi@prevas.dk>
+In-Reply-To: <20260330140106.401876-1-ravi@prevas.dk>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 2 Apr 2026 12:27:30 -0600
+X-Gm-Features: AQROBzCvOQdQkjatGqv0zhtugnD5V3OeVqPIeJH2QoCrzzc94lz11FAqAbp7UyA
+Message-ID: <CAFLszThhMiXoqD4Gkd-735y0r=-1sbzkqDVUYREtvkaG8bk=Pw@mail.gmail.com>
+Subject: Re: cmd: test: add bug-compatibility special case for 'test -n'
+To: ravi@prevas.dk
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Anshul Dalal <anshuld@ti.com>, Franz Schnyder <franz.schnyder@toradex.com>
 Content-Type: text/plain; charset="UTF-8"
-Date: Thu, 2 Apr 2026 12:39:27 -0500
-Message-ID: <DHIUPNVL4BG7.1UZWSP0MV8LBE@ti.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, <rs@ti.com>
-CC: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
- <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
- <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH 4/6] efi_memory: nitpick removal loop
-From: Randolph Sapp <rs@ti.com>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260402001410.3736815-1-rs@ti.com>
- <20260402001410.3736815-5-rs@ti.com>
- <CAC_iWjK8BNOtyreZR6WRO98z673hthQENN9Fp73+igzaifUuLQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjK8BNOtyreZR6WRO98z673hthQENN9Fp73+igzaifUuLQ@mail.gmail.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PEPF0000000A:EE_|MW4PR10MB6631:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5b481655-b7bd-47eb-dc3e-08de90deca43
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700016|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: Qzj74Z+LkMqZSycjsyhgg85BRx1cH8zukIP7Su36u7OsM5oxmMmBIiI85HvGQBx1+hiukrZh12Zi6b30te+xprPdExA4/8SKKqSzgCNcJocn0AOC97mLpUJ9wy+lnOwTl4Tv5TFTcXonGjWbwrSv+NVVjDHvGyC4YojhvwyFcw5PBAyB2geX8zWL5IHjzxJkloxMDLAQyTSd+m/IonSFahsPgjC02JruXxt+pgTtUajUnNOBAmpq545MkW35hW6LjA56VEoseViuSgx4nrbwwWic7iAP5JPnLG5fx9Bs0ZFj/RAkKyhFAln+cakYCxdvXG4ONujcZ2zcPMBf79eQnQVyouzRcUvD34kvvuh+5CF0IPH5+21rU6SPxSQcbvKEhYNjmOfomXUqkjiof3H+o660FVL5SGL+y4aK8MPo5dbZ+/c7MYNCDjpIERxkTd/hYfw5tdZBvmujU4VUtYgGwMqXh7lO4HDl44XUGvIpZFA86ljGDuK7LykAMoMOb2nOrFTGHt1oZ02lczORisMtUSS8CzbpOXu9rloqtrgJUONEt1Xb3kgMxuSTIRLgmwHF3W9xEnzTOgo+dcvY9VUGQbRCylx/8u/MOWWU9hKW4K4SIjqkEI9namMqF7uC0qjGyutzoPnrljK9uDwk5ATiEpqcDyWP9Db91mmejKH+ux+8K7FvTtPRcj/nROFhOEAXL/lSD2v8dj0t1ChAaQov+boBpEsDflAU022pvCNPjNwQDCtmDv1MlKvaYCrFLinxop/MpCkWEJPzOcZp3Q44KA==
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700016)(18002099003)(22082099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: kDoUrrf4gfGEhmWfCrGbArssIbhlF4om5D2WXdJbwo3EUjlb6v8O3Fngvdr6mT/kTtL1D1PA+L/yPNwkdIYBBO8lmZF69nk1AAPRjN074QJiRFE2g8r1qMPedKZRbQJo7T0lqpy1D9IKpQOgSbpl1v9SuHRBfJnvxs4AnVKJ1rUZe+M+efiEXZnO/FJwAA5DFanrW/wkP/ec7wTjytSAevQlbJ77XJQaj3ySStZaM8Z8QMG26GTONJifvzbrPmeT9/rTBM/QfIO4SgDrw3vJ7z/2EWs7xjiIi5f2qkaGE/bW5pUVfWAtR1JXteLRvdb2Yky9lCTwLWzgRZBB82gc2R9cE7/x2Qi34iSUdsB91xA1ylbj8/cznqQ/b8HMyTonx3Z/SJPibOWJNNRVxNYMq3o9LycKEaSppN4XuK/+nCcSAJNGKjAV/57CEs7mRrDz
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2026 17:39:28.2769 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5b481655-b7bd-47eb-dc3e-08de90deca43
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH3PEPF0000000A.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR10MB6631
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,64 +108,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu Apr 2, 2026 at 4:04 AM CDT, Ilias Apalodimas wrote:
-> I don't mind merging this, but why is the current code flawed?
+On 2026-03-30T14:01:06, Rasmus Villemoes <ravi@prevas.dk> wrote:
+> cmd: test: add bug-compatibility special case for 'test -n'
+> cmd: test: add bug-compatibility special case for 'test -n'
 >
-> Looking at the function even if prevmem contains a previous valid
-> entry the check will fail
+> It turns out that there is lots of code in the wild, including in the
+> U-Boot tree itself, which used to rely on
 >
-> if ((desc_get_end(cur) =3D=3D prev->physical_start) &&
->     (prev->type =3D=3D cur->type) &&
->     (prev->attribute =3D=3D cur->attribute)) {
+>   test -n $somevar
 >
-> and re-assign prevmem.
+> to yield false when $somevar is not defined or empty. See for example
+> all the occurrences of 'test -n $fdtfile'. That was really only a
+> quirk of the implementation that refused calls with argc < 3, and not
+> because it was interpreted as
 >
-> So please adjust the commit message if you want this merged.
+>   test -n "$somevar"
 >
-> Thanks
-> /Ilias
+> which is how this should be spelled.
+>
+> While not exactly conforming to POSIX, we can accomodate such scripts
+> by special-casing a single argument "-n" to be interpreted as if it
+> comes from code as above with empty $somevar.
+>
+> Since we only just added the ability to test a string for emptiness
+> using the single-argument form, it is very unlikely that there is code
+> doing
+>
+>   test "$str"
+>
+> which would now fail if $str happens to be exactly "-n"; such a test
+> should really always be spelled
+>
+>   test -n "$str"
+>
+> Fixes: 8b0619579b2 ("cmd: test: fix handling of single-argument form of test")
+> Reported-by: Franz Schnyder <franz.schnyder@toradex.com>
+> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+>
+> cmd/test.c     | 15 ++++++++++++++-
+>  test/hush/if.c |  8 ++++++++
+>  2 files changed, 22 insertions(+), 1 deletion(-)
 
-Ah, not really that it is "flawed" right now, but more so that we should ne=
-ver
-even have to think about that occurrence, because at best it's an unnecessa=
-ry
-compare. Why waste time trying to defend or attack a line of code that simp=
-ly
-shouldn't exist?
-
-> On Thu, 2 Apr 2026 at 03:14, <rs@ti.com> wrote:
->>
->> From: Randolph Sapp <rs@ti.com>
->>
->> I don't even want to think about the possibility of this pointer
->> containing a reference to something from a previous iteration.
->>
->> Signed-off-by: Randolph Sapp <rs@ti.com>
->> ---
->>  lib/efi_loader/efi_memory.c | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
->> index b77c2f980cc..882366a9f8a 100644
->> --- a/lib/efi_loader/efi_memory.c
->> +++ b/lib/efi_loader/efi_memory.c
->> @@ -129,13 +129,13 @@ static uint64_t desc_get_end(struct efi_mem_desc *=
-desc)
->>  static void efi_mem_sort(void)
->>  {
->>         struct efi_mem_list *lmem;
->> -       struct efi_mem_list *prevmem =3D NULL;
->>         bool merge_again =3D true;
->>
->>         list_sort(NULL, &efi_mem, efi_mem_cmp);
->>
->>         /* Now merge entries that can be merged */
->>         while (merge_again) {
->> +               struct efi_mem_list *prevmem =3D NULL;
->>                 merge_again =3D false;
->>                 list_for_each_entry(lmem, &efi_mem, link) {
->>                         struct efi_mem_desc *prev;
->> --
->> 2.53.0
->>
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
