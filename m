@@ -4,50 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C8ECD39432
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 14:39:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94D12D3943C
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 15:03:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4938C83CF5;
-	Thu,  2 Apr 2026 16:39:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
+	by phobos.denx.de (Postfix) with ESMTP id 00D0E83CF5;
+	Thu,  2 Apr 2026 17:03:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mainlining.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="rJ6PE71e";
+	dkim=pass (2048-bit key; unprotected) header.d=mainlining.org header.i=@mainlining.org header.b="GM52vJkC";
+	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="DzY1hNs2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BB5983D8A; Thu,  2 Apr 2026 16:39:32 +0200 (CEST)
-Received: from mx2.securetransport.de (mx2.securetransport.de
- [IPv6:2a03:4000:13:6c7::1])
- by phobos.denx.de (Postfix) with ESMTP id 9014B839DF
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 16:39:28 +0200 (CEST)
+ id 9588283CF5; Thu,  2 Apr 2026 05:33:58 +0200 (CEST)
+Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CD1280212
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 05:33:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=dh-electronics.com
+ header.from=mainlining.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1775140762;
- bh=rMcf3Wptn2ecwhk96mr/GjI3Zc8NvFJ6//paLdTMVQg=;
- h=From:To:CC:Subject:Date:From;
- b=rJ6PE71eLXb/I940eC/L4kSD8v+exg9XdCE/ZGNfBXkBzDfcI9XESwhGxs3C33zxg
- DrCm6NmiKU/reKm5PGZPREdIlNH1DyteX+pJXQvHG9ntMBibw+2478YSRvDODcFhZf
- XaJWYRIUV0cbGlMmwzxtVsMOEvKZ8FIq6EGUQZEFTFK55iJP2+MwVGw0H+CJEHj0ms
- zZ/GOaXQbomvehYAXBmsqz0evxD/A5hYItOUd/GsOwmBfESIsu0g5cWkd/e20xoXOm
- dJuYuwINH4Q6pdHxIAFJb7N+Fmsa3WsDYHLbvLAnSL7s6iFpBkzG9NsjOfut2ceIjd
- 575h6Zl/YE+lA==
-From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-To: <u-boot@lists.denx.de>
-CC: Christoph Niedermaier <cniedermaier@dh-electronics.com>, Peng Fan
- <peng.fan@nxp.com>, Marek Vasut <marex@nabladev.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Sam Protsenko <semen.protsenko@linaro.org>,
- Tom Rini <trini@konsulko.com>, <u-boot@dh-electronics.com>
-Subject: [PATCH V2] board: dhelectronics: imx: Use second Ethernet MAC also
- from fuse
-Date: Thu, 2 Apr 2026 16:37:53 +0200
-Message-ID: <20260402143753.40142-1-cniedermaier@dh-electronics.com>
-X-klartext: yes
+ spf=pass smtp.mailfrom=dang.huynh@mainlining.org
+DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
+ c=relaxed/relaxed; 
+ h=Message-ID:Subject:To:From:Date; t=1775100826; bh=6ndsqffAB2IrLCAgTy2tk3v
+ h5JdeOEXV7+TVhRNoOsc=; b=GM52vJkCgGs/RoteY+xkNNHBRfR9sXI0eLEH2/cZ7Ugkrm4wY/
+ cz4HMoftnpraLLeUeSPBK+cl7chV4kjFYe+AxBzSUrSLpNM+2ENSV/bYHtFbDdth4Hva4UcClgU
+ OxAo/uQmzRAnU/d/oDpCrDvAAAB9A98Z0RHxYaKXdIUaIj5XEHQDxivk2CxsEWzq82h6rSOfRTI
+ OAe5sAIkadmzxWvqffdzXCL/myzZedStwzF3rbkS1UzpWp/V5JMpN32DJiIZVU0TdG+/jdBLthl
+ DKpHF3GHmWziFVMZWcHhZz+ZzWfyu4tbJP4Zx0irElmu+zRwVkVeXhK7Bt3P5gvEmxw==;
+DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
+ c=relaxed/relaxed; 
+ h=Message-ID:Subject:To:From:Date; t=1775100826; bh=6ndsqffAB2IrLCAgTy2tk3v
+ h5JdeOEXV7+TVhRNoOsc=; b=DzY1hNs2/jAw/MYN5g6KDsD42LL5ruJbfUVFPP0lHqCvSlrDrC
+ YUpIiClx2IpmLlLO/8vCnhnyNh/2kDUi2jDA==;
+Date: Thu, 2 Apr 2026 10:33:37 +0700
+From: Dang Huynh <dang.huynh@mainlining.org>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de, Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Alexander Graf <agraf@csgraf.de>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Ondrej Jirman <megi@xff.cz>,
+ Ion Agorria <ion@agorria.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Dragan Simic <dsimic@manjaro.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Jonas Karlman <jonas@kwiboo.se>,
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Piotr Zalewski <pZ010001011111@proton.me>
+Subject: Re: [PATCH v6 07/12] video: rockchip: vop2: Add video bridge support
+Message-ID: <ac3in2oxAtzvprak@meltbook-pro>
+References: <20251108-vop2-pt2-v6-0-d04c699262fb@mainlining.org>
+ <20251108-vop2-pt2-v6-7-d04c699262fb@mainlining.org>
+ <CALeDE9OTnFa4gs1XnGsdN2X0Db2aYAsSLafr8pYf+MQuRSpuXQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CALeDE9OTnFa4gs1XnGsdN2X0Db2aYAsSLafr8pYf+MQuRSpuXQ@mail.gmail.com>
+X-Mailman-Approved-At: Thu, 02 Apr 2026 17:03:20 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,130 +82,191 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently, the board specific code evaluates only the first Ethernet
-MAC address fuse, regardless of whether the first or second MAC
-address is requested. When the function for determine the second
-Ethernet MAC address is looking for the fused MAC address, it only
-reads the first MAC address fuse and increment it by one to set
-the second Ethernet MAC address. That is not the expected behavior
-when two MAC addresses are fused, because this causes the second
-fused MAC address to be ignored. Change this so that the second
-fused MAC address will be used.
+Hi Peter,
 
-In addition, the handling of the MAC address for early prototypes
-will be removed, as such SoMs were not used by customers.
+On Wed, Mar 04, 2026 at 12:29:27PM +0000, Peter Robinson wrote:
+> Hey Dang,
+> 
+> Finally started to play with this patch set.
+> 
+> > From: Dang Huynh <dang.huynh@mainlining.org>
+> >
+> > Add support for video bridge to VOP2 so we can use the MIPI DSI
+> > bridge driver that we have.
+> 
+> I see a link failure when using this patch set with the
+> anbernic-rgxx3-rk3566_defconfig using 2026.04-rc3.
+> 
+> /usr/bin/ld.bfd: drivers/video/rockchip/rk_vop2.o: in function
+> `rk_display_init':
+> /builddir/build/BUILD/uboot-tools-2026.04-build/u-boot-2026.04-rc3/drivers/video/rockchip/rk_vop2.c:422:(.text.rk_vop2_probe+0x360):
+> undefined reference to `display_in_use'
+> /usr/bin/ld.bfd:
+> /builddir/build/BUILD/uboot-tools-2026.04-build/u-boot-2026.04-rc3/drivers/video/rockchip/rk_vop2.c:437:(.text.rk_vop2_probe+0x388):
+> undefined reference to `display_read_timing'
+> /usr/bin/ld.bfd:
+> /builddir/build/BUILD/uboot-tools-2026.04-build/u-boot-2026.04-rc3/drivers/video/rockchip/rk_vop2.c:492:(.text.rk_vop2_probe+0x794):
+> undefined reference to `display_enable'
 
-Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
----
-Cc: Marek Vasut <marex@nabladev.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
----
-V2: - Change the commit message to be more precise
-    - Move index to the end of parameters to be consistent to the STM32MP plattform
-    - Remove fallback where the first MAC address fuse incremented by one is used
-    - Remove MAC Adress treatmeant for early prototypes
----
- board/dhelectronics/common/dh_imx.c             |  4 ++--
- board/dhelectronics/common/dh_imx.h             |  3 ++-
- board/dhelectronics/dh_imx6/dh_imx6.c           |  2 +-
- .../dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c | 17 +++--------------
- 4 files changed, 8 insertions(+), 18 deletions(-)
+Interestingly on my machine, it shows:
+/usr/lib/gcc/aarch64-linux-gnu/15.1.0/../../../../aarch64-linux-gnu/bin/ld: /tmp/cceER6YV.ltrans9.ltrans.o: in function `rk3568_vop_probe':
+/media/LARGE_DATA/Work/pinetab2/u-boot/drivers/video/rockchip/rk_vop2.c:424:(.text.rk3568_vop_probe+0x43c): undefined reference to `display_in_use'
+/usr/lib/gcc/aarch64-linux-gnu/15.1.0/../../../../aarch64-linux-gnu/bin/ld: /tmp/cceER6YV.ltrans9.ltrans.o:
+/media/LARGE_DATA/Work/pinetab2/u-boot/drivers/video/rockchip/rk_vop2.c:439:(.text.rk3568_vop_probe+0x464): undefined reference to `display_read_timing'
+/usr/lib/gcc/aarch64-linux-gnu/15.1.0/../../../../aarch64-linux-gnu/bin/ld: /tmp/cceER6YV.ltrans9.ltrans.o:
+/media/LARGE_DATA/Work/pinetab2/u-boot/drivers/video/rockchip/rk_vop2.c:494:(.text.rk3568_vop_probe+0x88c): undefined reference to `display_enable'
+collect2: fatal error: ld terminated with signal 11 [Segmentation fault], core dumped
+compilation terminated.
 
-diff --git a/board/dhelectronics/common/dh_imx.c b/board/dhelectronics/common/dh_imx.c
-index 3d6487dd0d8..50404a66f9d 100644
---- a/board/dhelectronics/common/dh_imx.c
-+++ b/board/dhelectronics/common/dh_imx.c
-@@ -10,13 +10,13 @@
- #include <net.h>
- #include "dh_imx.h"
- 
--int dh_imx_get_mac_from_fuse(unsigned char *enetaddr)
-+int dh_imx_get_mac_from_fuse(unsigned char *enetaddr, int index)
- {
- 	/*
- 	 * If IIM fuses contain valid MAC address, use it.
- 	 * The IIM MAC address fuses are NOT programmed by default.
- 	 */
--	imx_get_mac_from_fuse(0, enetaddr);
-+	imx_get_mac_from_fuse(index, enetaddr);
- 	if (!is_valid_ethaddr(enetaddr))
- 		return -EINVAL;
- 
-diff --git a/board/dhelectronics/common/dh_imx.h b/board/dhelectronics/common/dh_imx.h
-index 284f8637fb8..be2ff5e076c 100644
---- a/board/dhelectronics/common/dh_imx.h
-+++ b/board/dhelectronics/common/dh_imx.h
-@@ -7,6 +7,7 @@
-  * dh_imx_get_mac_from_fuse - Get MAC address from fuse and write it to env
-  *
-  * @enetaddr: buffer where address is to be stored
-+ * @index: index of MAC address in fuse (starts with 0)
-  * Return: 0 if OK, other value on error
-  */
--int dh_imx_get_mac_from_fuse(unsigned char *enetaddr);
-+int dh_imx_get_mac_from_fuse(unsigned char *enetaddr, int index);
-diff --git a/board/dhelectronics/dh_imx6/dh_imx6.c b/board/dhelectronics/dh_imx6/dh_imx6.c
-index 234824b38c2..c9e8107685a 100644
---- a/board/dhelectronics/dh_imx6/dh_imx6.c
-+++ b/board/dhelectronics/dh_imx6/dh_imx6.c
-@@ -94,7 +94,7 @@ int dh_setup_mac_address(struct eeprom_id_page *eip)
- 	if (dh_get_mac_is_enabled("ethernet0"))
- 		return 0;
- 
--	if (!dh_imx_get_mac_from_fuse(enetaddr))
-+	if (!dh_imx_get_mac_from_fuse(enetaddr, 0))
- 		goto out;
- 
- 	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0"))
-diff --git a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-index 5c35a5bf447..a9153418314 100644
---- a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-+++ b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-@@ -50,7 +50,7 @@ static int dh_imx8_setup_ethaddr(struct eeprom_id_page *eip)
- 	if (dh_get_mac_is_enabled("ethernet0"))
- 		return 0;
- 
--	if (!dh_imx_get_mac_from_fuse(enetaddr))
-+	if (!dh_imx_get_mac_from_fuse(enetaddr, 0))
- 		goto out;
- 
- 	if (!dh_get_value_from_eeprom_buffer(DH_MAC0, enetaddr, sizeof(enetaddr), eip))
-@@ -75,8 +75,8 @@ static int dh_imx8_setup_eth1addr(struct eeprom_id_page *eip)
- 	if (dh_get_mac_is_enabled("ethernet1"))
- 		return 0;
- 
--	if (!dh_imx_get_mac_from_fuse(enetaddr))
--		goto increment_out;
-+	if (!dh_imx_get_mac_from_fuse(enetaddr, 1))
-+		goto out;
- 
- 	if (!dh_get_value_from_eeprom_buffer(DH_MAC1, enetaddr, sizeof(enetaddr), eip))
- 		goto out;
-@@ -84,19 +84,8 @@ static int dh_imx8_setup_eth1addr(struct eeprom_id_page *eip)
- 	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom1"))
- 		goto out;
- 
--	/*
--	 * Populate second ethernet MAC from first ethernet EEPROM with MAC
--	 * address LSByte incremented by 1. This is only used on SoMs without
--	 * second ethernet EEPROM, i.e. early prototypes.
--	 */
--	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0"))
--		goto increment_out;
--
- 	return -ENXIO;
- 
--increment_out:
--	enetaddr[5]++;
--
- out:
- 	return eth_env_set_enetaddr("eth1addr", enetaddr);
- }
--- 
-2.30.2
+Perhaps this is a linker bug? Removing rk_vop2.o from Makefile
+makes it build perfectly fine though.
 
+Though, I don't think there are any devices that uses VOP and
+doesn't have a display, so I think we should make CONFIG_DISPLAY
+a requirement.
+
+
+> 
+> Cheers,
+> Peter
+> 
+> 
+> > Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> > Signed-off-by: Dang Huynh <dang.huynh@mainlining.org>
+> > ---
+> >  drivers/video/rockchip/rk_vop2.c | 81 +++++++++++++++++++++++++++++-----------
+> >  1 file changed, 59 insertions(+), 22 deletions(-)
+> >
+> > diff --git a/drivers/video/rockchip/rk_vop2.c b/drivers/video/rockchip/rk_vop2.c
+> > index 992f215d416..156daafa0c3 100644
+> > --- a/drivers/video/rockchip/rk_vop2.c
+> > +++ b/drivers/video/rockchip/rk_vop2.c
+> > @@ -13,10 +13,12 @@
+> >  #include <dm/device_compat.h>
+> >  #include <edid.h>
+> >  #include <log.h>
+> > +#include <panel.h>
+> >  #include <regmap.h>
+> >  #include <reset.h>
+> >  #include <syscon.h>
+> >  #include <video.h>
+> > +#include <video_bridge.h>
+> >  #include <asm/global_data.h>
+> >  #include <asm/gpio.h>
+> >  #include <asm/io.h>
+> > @@ -291,6 +293,7 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode vp_node)
+> >         int vop_id, port_id, win_id;
+> >         struct display_timing timing;
+> >         struct udevice *disp;
+> > +       struct udevice *bridge;
+> >         int ret;
+> >         u32 remote_phandle;
+> >         struct display_plat *disp_uc_plat;
+> > @@ -357,8 +360,11 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode vp_node)
+> >                         return -EINVAL;
+> >                 }
+> >
+> > +               if (IS_ENABLED(CONFIG_VIDEO_BRIDGE))
+> > +                       uclass_find_device_by_ofnode(UCLASS_VIDEO_BRIDGE, remote, &bridge);
+> > +
+> >                 uclass_find_device_by_ofnode(UCLASS_DISPLAY, remote, &disp);
+> > -               if (disp)
+> > +               if (disp || bridge)
+> >                         break;
+> >         };
+> >         compat = ofnode_get_property(remote, "compatible", NULL);
+> > @@ -390,27 +396,49 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode vp_node)
+> >         if (ret < 0)
+> >                 return ret;
+> >
+> > -       disp_uc_plat = dev_get_uclass_plat(disp);
+> > -       debug("Found device '%s', disp_uc_priv=%p\n", disp->name, disp_uc_plat);
+> > -       if (display_in_use(disp)) {
+> > -               debug("   - device in use\n");
+> > -               return -EBUSY;
+> > -       }
+> > +       if (bridge) {
+> > +               /* video bridge detected, probe it */
+> > +               ret = device_probe(bridge);
+> > +               if (ret) {
+> > +                       dev_err(dev, "Failed to probe video bridge: %d\n", ret);
+> > +                       return ret;
+> > +               }
+> >
+> > -       disp_uc_plat->source_id = vop_id;
+> > -       disp_uc_plat->src_dev = dev;
+> > +               /* Attach the DSI controller and the display to the bridge. */
+> > +               ret = video_bridge_attach(bridge);
+> > +               if (ret) {
+> > +                       dev_err(dev, "Failed to attach video bridge: %d\n", ret);
+> > +                       return ret;
+> > +               }
+> >
+> > -       ret = device_probe(disp);
+> > -       if (ret) {
+> > -               debug("%s: device '%s' display won't probe (ret=%d)\n",
+> > -                     __func__, dev->name, ret);
+> > -               return ret;
+> > -       }
+> > +               ret = video_bridge_get_display_timing(bridge, &timing);
+> > +               if (ret) {
+> > +                       dev_err(dev, "Failed to read timings: %d\n", ret);
+> > +                       return ret;
+> > +               }
+> > +       } else {
+> > +               disp_uc_plat = dev_get_uclass_plat(disp);
+> > +               debug("Found device '%s', disp_uc_priv=%p\n", disp->name, disp_uc_plat);
+> > +               if (display_in_use(disp)) {
+> > +                       debug("   - device in use\n");
+> > +                       return -EBUSY;
+> > +               }
+> >
+> > -       ret = display_read_timing(disp, &timing);
+> > -       if (ret) {
+> > -               debug("%s: Failed to read timings\n", __func__);
+> > -               return ret;
+> > +               disp_uc_plat->source_id = vop_id;
+> > +               disp_uc_plat->src_dev = dev;
+> > +
+> > +               ret = device_probe(disp);
+> > +               if (ret) {
+> > +                       debug("%s: device '%s' display won't probe (ret=%d)\n",
+> > +                             __func__, dev->name, ret);
+> > +                       return ret;
+> > +               }
+> > +
+> > +               ret = display_read_timing(disp, &timing);
+> > +               if (ret) {
+> > +                       debug("%s: Failed to read timings\n", __func__);
+> > +                       return ret;
+> > +               }
+> >         }
+> >
+> >         /* Set clock rate on video port to display timings */
+> > @@ -453,9 +481,18 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode vp_node)
+> >
+> >         rkvop2_mode_set(dev, &timing, vop_id, port_id, platdata);
+> >
+> > -       ret = display_enable(disp, 1 << l2bpp, &timing);
+> > -       if (ret)
+> > -               return ret;
+> > +       if (bridge) {
+> > +               /* Attach the DSI controller and the display to the bridge. */
+> > +               ret = video_bridge_set_backlight(bridge, 60);
+> > +               if (ret) {
+> > +                       dev_err(dev, "Failed to start the video bridge: %d\n", ret);
+> > +                       return ret;
+> > +               }
+> > +       } else {
+> > +               ret = display_enable(disp, 1 << l2bpp, &timing);
+> > +               if (ret)
+> > +                       return ret;
+> > +       }
+> >
+> >         uc_priv->xsize = timing.hactive.typ;
+> >         uc_priv->ysize = timing.vactive.typ;
+> >
+> > --
+> > 2.51.2
+> >
+> >
