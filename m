@@ -4,85 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AA6AD6AAF4
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 18:46:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E98F0D6AAF9
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 19:03:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05E9E840AA;
-	Thu,  2 Apr 2026 20:46:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6065683D8A;
+	Thu,  2 Apr 2026 21:03:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tB/ESfUg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Mseo4CLD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A60983CF5; Thu,  2 Apr 2026 20:46:05 +0200 (CEST)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id D58DB83F7D; Thu,  2 Apr 2026 21:03:27 +0200 (CEST)
+Received: from mail-yx1-xb12d.google.com (mail-yx1-xb12d.google.com
+ [IPv6:2607:f8b0:4864:20::b12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B3FF8408D
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 20:46:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7321A83CF5
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 21:03:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-467161c4a1cso420914b6e.3
- for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 11:46:02 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12d.google.com with SMTP id
+ 956f58d0204a3-650182d19e0so1467175d50.1
+ for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 12:03:25 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775156604; cv=none;
+ d=google.com; s=arc-20240605;
+ b=FqRN6sIXQg0qL0gFVk3kfFF5RDGfjL7UAeT1ynzJz/wY4Lw9JRyAoE9oxVo7x/gwN7
+ nTjWhxtjQJqit17e9hE84CWVdpt4eEK06YnN1oCjj90L9/UOjZzIjV3sJji+NSc49rzS
+ FV332oaEbuqsvOBnEwVJfKQNuuhgyw38BTqo/L0Dh7ftGthSwGk9H7QgjIJ3tNWx713o
+ FwE0Rif6P8eSCH5trK47yoxqu3a1TEeGSPvjuyE9aJvTLgdHYKogX6ipR19958LlNqoD
+ p554X/7hx48cYAzqtXvrhG+l8kQqPy5ORTC5f4mEpKkMSP7apPPBrjzHd9dIuI/GH8ja
+ GIQQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=VvuXqt/chSpdUfEngroSM8nyMeTpxZoGJ7RwY7KlItc=;
+ fh=m1rskiUu/mu1I7yczGCU4nW6RO0i8CefNt/5WSEl7m0=;
+ b=TC9Ct+M91cgchubXfQUA4zO/21tagQGF4oN7TZLVphTmmpim37yvr7wvFfPci6VXSy
+ gH8oHm8bXfyR9vt2jyA2Y1FM6JDoHEu+e7LWEP4he888TafrK47LPcJgoM6S4kO95j8+
+ teQLWg+kMZSFZZoVfHBZ3ywBwmAF50RbPe5on62XIlFHBMiLl6xwkfivpMY/p/PEhRpH
+ e2auTxV4I2w80s0q7akJQs7O7SpJEQi8qyI0LLbf6MUcaMhrmJqrdoN6vdTbHwLx16tg
+ e900bzWWBNO3cGicWjYWMnWl00/ihtgI8aDFoixfEUppYy+FuPNQJsF4SmDD+adOjFDV
+ b1Aw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1775155561; x=1775760361; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YyyJXvd+h8KPsOp8B38LjX2j25+nRs6GL+9EfF9VVio=;
- b=tB/ESfUgPyXsI+HhBn/yBqlK9BSx7wZf7ZQ95/rPh7JtVmFP2DzwrbMnw7xFx92cZi
- QN9OtgbEAiiVsXAjZKRN1nZsBOPi53jyYNEzINOyKrxF087IU3Ih8OPSOKp0ZehZdyVo
- UrbQAEyXYxXdFbz3Y/Dez4PxsBMJOxaC+z7RM=
+ d=linaro.org; s=google; t=1775156604; x=1775761404; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=VvuXqt/chSpdUfEngroSM8nyMeTpxZoGJ7RwY7KlItc=;
+ b=Mseo4CLD3sH/K7J9MiKzngsgiUV2i2jEbXF3Y042GXKNVdDLbfRlrRUHkLZMSkWphl
+ rrY1gZMLcAeWfZkbgI+ZUA944ONdeOUp0PlTwLOoL3zvejn6G7XNTjPlG2gu/AlrxlW7
+ JiC8YCeH3hpcPpfHBmopewDPC4XFgyzBoaqXYB8lN2qjhPsVPcfwbhBWs3mlzJKtU2Wy
+ Jejj1Dv361AJupc3S7ugdacvSJdzkhNDyAPIuTdTjg3gQft70qmC6Grnlow901+erQ8R
+ V8nGkQQILV51sc/gsvtoGr1/Ucu2EWIJNX6CyEybHyi5l6UyvPcxkTnfPS/YpI+NJ1Ol
+ 9vUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775155561; x=1775760361;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=YyyJXvd+h8KPsOp8B38LjX2j25+nRs6GL+9EfF9VVio=;
- b=iOoMxlxKD8PlH5CbhHZkHrDuFxGMpelplpZx1a5kLvDwG86ctyYy9ZeBpPYRJc2LlR
- P/zCmj3MbiCp/hx0t6E/E1Q3HK/hBcQHdBBvZKnQ3QqaMNO3ihy6/kzO+6qOS8WavFYS
- +gB9qFfrMexHAykgUpzcR8s+oLMumZswlB43VabixQCQaC+77BHjl9ijNhhbX3KfqvOp
- y6e7i8cjDB+9tje5Hq56ik6bHNipvFXQ0nBPJITpGCVfHZvzQa0+FxWzwz5XWW5OryFI
- mn+hyASoq1AWTLvMmZDsKklIDptqgXurT6u5FB+ALI8SLzKHHJBZaRlZPApJHz5EMvYX
- ml5g==
-X-Gm-Message-State: AOJu0YxTFzchAFo8B3e6RPvuUEe7XzSs0h8hSoR1c/vnCSIdHpv3ATIT
- zRoaPn4BbWcPPr8ZBT4jneR2BnV3KfA8lVVIvXAhTfLA9Cdl7b/XwhJ1gZMS37VpvaA=
-X-Gm-Gg: ATEYQzzY2Y41QAxWP7qZOjRqkjZrCoQLkh38+SFO5VQTogXkTOPEL0+bGpSHptxZvgq
- E2ky8ugtLAYE1kEiQ1ktr5a9RjfF75QI26z8kA7Lc1VYA9BgLG1tzsrOyuavw0AUutZuuZOVFPr
- S8163xf9zMA9WvaMJyS0gFWqpwgMiJg9/0dgQ3lYcN9IA9bS5mYagN07uRDAvgiAapzPiJCfKbL
- zfVspPPJPY4j8jLQyj3Ce/C0fGfoxDtGacyK6H7fNx9agYU3tlXQVuZ/X7PMzwZyzXbCtrKK/hd
- f3EpSpTSvwDeCfS3KlO/PNKc5pVGdJ6nzPqi70HTVQfWEok5HPG5dyUUj/nJbz5pyOnP2M30ejd
- HrXB/BzR6+Y/K3mBNhRWyCNIRr5tAPFw1BBc0ZJhyYyKMtxdKBs+elyJtXSOzI9t9p9eqKxYWJc
- b5TIpZg3wzj3kB5B4G+tvW4cYNY3ht8wj5IILZeYdTPe+McaygdXfgSKXdeh0j7WdHcRe0iyEn3
- lKgrB6z+r43U/7FNDXYugVvUulT8gLoFi4EOS1lsv3qY7Xn5pc40TwrOw==
-X-Received: by 2002:a05:6808:f8e:b0:463:8a49:ca7a with SMTP id
- 5614622812f47-46ef871d0demr268718b6e.52.1775155561037; 
- Thu, 02 Apr 2026 11:46:01 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-46d9044725dsm2085830b6e.8.2026.04.02.11.45.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Apr 2026 11:46:00 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, fra.schnyder@gmail.com, hs@nabladev.com, 
- krzysztof.kozlowski@oss.qualcomm.com, Markus.Niebel@ew.tq-group.com, 
- Max.Merchel@ew.tq-group.com, peng.fan@oss.nxp.com, 
- tomas.alvarez-vanoli@hitachienergy.com
-In-Reply-To: <20260402163227.1538209-1-festevam@gmail.com>
-References: <20260402163227.1538209-1-festevam@gmail.com>
-Subject: Re: [GIT PULL] Please pull u-boot-imx-next-20260402
-Message-Id: <177515555985.1935668.4677805637251142330.b4-ty@konsulko.com>
-Date: Thu, 02 Apr 2026 12:45:59 -0600
+ d=1e100.net; s=20251104; t=1775156604; x=1775761404;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VvuXqt/chSpdUfEngroSM8nyMeTpxZoGJ7RwY7KlItc=;
+ b=Rw4JEvvDREroth1xvBlKs739iDhv4QSZlg0tlyQ4a/bu785krleCZ3gM61SHUWuNEy
+ ykOO5d/R0O7lm9IGsRCAi8sZtsugV8ZsdsOq/tJrx1jfjpG7JqmTnmCPwt98za5+dzF0
+ wSFASj+QOD6zKi0HhzzfeUmFnwhK8N3vdcIbLazMHbE8kb4mY38bOb/w4IpvLgYiBIoY
+ 33PL7H3wO1UFK+uzmNXNlOJ1nZXasjx4tlKFXOIXpEfdndvCqHwJQRTcaGbaWKfYh/jt
+ EeVH3YT/2igRfzS4mB6KwEUzpIQp//yLmcuwSI0KjaDbPPaRNBAJJRFrxR0PrsL7rGIM
+ 4hdA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWca4raaji3nd0USA+6CLf8gOif01q4t/vFOEk2d/zWcbAwALeblFE3tbJ/a3TcTiDra8ND/5I=@lists.denx.de
+X-Gm-Message-State: AOJu0YxBz+mlBC69ndF7J5NrED5KYSnMUNWDMBzfPGihtiyh52LL6PMS
+ z/VkGZELkM7ptSziuW9srnWGzHiEuZpc87032FF2E8LKViVvWVAg5BbQ1CdzVGpXVFWQ/J0a6f0
+ o3FXcDuffcKQF1z6rs1OHH8x68G/jEQbq1E1fWq0GBQ==
+X-Gm-Gg: AeBDiesn2oJXus932whHWZRMIB3jDknO88rlYhkG75K5FSNmVSht9OFu2RVzrD+9aGh
+ wKulkeGV/BB3Ofe+XIKEk+LCqO9c7agWnBWUPEeFdALJHmAE9On3ZEKdLpxr3W8LdLkesWMjC9f
+ F4MkMHa+KyblwZ9uxfGOrD1ayPmNeiurgbChtLFyKoFxDF5w/m1SizXpdhfDoGAa4YDfQZpfFJS
+ zhHZJ4qmhZqMk/lcvL63vS8gC7dV2L97q0lfYDUyWFdh/IoxeWy9cp3lIyjJYI+UzQvmh8txFrc
+ LF4BHOxPcl5TMutrwpNUC1WZY2j4hr8dRbu33LPCbT5bu91THOFE10bZIK7kB9Z/FKiYhxc3SYE
+ 21pKWRHpQOe25ue64vEemqtBe8wZY04EG4kMtzgXC5+U/OKQsiv83lVa1VR6jqQiZaq/5kz573Z
+ YWcWkwBayvRWrIUGmOkETjPp5yp5ocRHdOWZt01RfVIHZdxEEL8lp2zBRpOytznXb8sEqDgEmiN
+ pBO52hE5irtksVbA3RMBnay/vYnZAZmbE7PU1u2DVToQqCz3+U4s1OjVEA6hcAn+mXOvtyW2wiS
+ cQl2ewDKWNszTMim6e2ogtuEzD2yS36SHFF6DviPMRs=
+X-Received: by 2002:a05:690e:144d:b0:64c:ea3d:a895 with SMTP id
+ 956f58d0204a3-650488b70ffmr79702d50.61.1775156604006; Thu, 02 Apr 2026
+ 12:03:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+References: <20260402001410.3736815-1-rs@ti.com>
+ <20260402001410.3736815-5-rs@ti.com>
+ <CAC_iWjK8BNOtyreZR6WRO98z673hthQENN9Fp73+igzaifUuLQ@mail.gmail.com>
+ <DHIUPNVL4BG7.1UZWSP0MV8LBE@ti.com>
+In-Reply-To: <DHIUPNVL4BG7.1UZWSP0MV8LBE@ti.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 2 Apr 2026 22:02:48 +0300
+X-Gm-Features: AQROBzCLLhC-M3knGm0rnWBi3soX6T9lpQyA-gh_fmRZGTu0EuJbnFt_u83vvL4
+Message-ID: <CAC_iWjLJc68iL0swF8XcJK8x27aL2DR9bRBvq0VW21-CTXx2jg@mail.gmail.com>
+Subject: Re: [PATCH 4/6] efi_memory: nitpick removal loop
+To: Randolph Sapp <rs@ti.com>
+Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
+ Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
+ afd@ti.com, xypron.glpk@gmx.de, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,21 +122,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 2 Apr 2026 13:32:27 -0300, Fabio Estevam wrote:
+On Thu, 2 Apr 2026 at 20:39, Randolph Sapp <rs@ti.com> wrote:
+>
+> On Thu Apr 2, 2026 at 4:04 AM CDT, Ilias Apalodimas wrote:
+> > I don't mind merging this, but why is the current code flawed?
+> >
+> > Looking at the function even if prevmem contains a previous valid
+> > entry the check will fail
+> >
+> > if ((desc_get_end(cur) == prev->physical_start) &&
+> >     (prev->type == cur->type) &&
+> >     (prev->attribute == cur->attribute)) {
+> >
+> > and re-assign prevmem.
+> >
+> > So please adjust the commit message if you want this merged.
+> >
+> > Thanks
+> > /Ilias
+>
+> Ah, not really that it is "flawed" right now, but more so that we should never
+> even have to think about that occurrence, because at best it's an unnecessary
+> compare. Why waste time trying to defend or attack a line of code that simply
+> shouldn't exist?
 
-> Please pull from u-boot-imx/next, thanks.
-> 
-> The following changes since commit 98cf83d81617f489d7ff7bf78d33e693e2799254:
-> 
->   Merge tag 'net-20260331' of https://source.denx.de/u-boot/custodians/u-boot-net into next (2026-03-31 13:06:00 -0600)
-> 
-> are available in the Git repository at:
-> 
-> [...]
+Not attacking anything. But the commit message wasn't as clear and I
+ended up looking all the code. Chances are this is going to happen if
+someone reads that commit message in a few moths. So something along
+the lines of "This not currently a problem but ...." etc is what we
+should have in that commit.
 
-Merged into u-boot/next, thanks!
-
--- 
-Tom
-
-
+Cheers
+/Ilias
+>
+> > On Thu, 2 Apr 2026 at 03:14, <rs@ti.com> wrote:
+> >>
+> >> From: Randolph Sapp <rs@ti.com>
+> >>
+> >> I don't even want to think about the possibility of this pointer
+> >> containing a reference to something from a previous iteration.
+> >>
+> >> Signed-off-by: Randolph Sapp <rs@ti.com>
+> >> ---
+> >>  lib/efi_loader/efi_memory.c | 2 +-
+> >>  1 file changed, 1 insertion(+), 1 deletion(-)
+> >>
+> >> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> >> index b77c2f980cc..882366a9f8a 100644
+> >> --- a/lib/efi_loader/efi_memory.c
+> >> +++ b/lib/efi_loader/efi_memory.c
+> >> @@ -129,13 +129,13 @@ static uint64_t desc_get_end(struct efi_mem_desc *desc)
+> >>  static void efi_mem_sort(void)
+> >>  {
+> >>         struct efi_mem_list *lmem;
+> >> -       struct efi_mem_list *prevmem = NULL;
+> >>         bool merge_again = true;
+> >>
+> >>         list_sort(NULL, &efi_mem, efi_mem_cmp);
+> >>
+> >>         /* Now merge entries that can be merged */
+> >>         while (merge_again) {
+> >> +               struct efi_mem_list *prevmem = NULL;
+> >>                 merge_again = false;
+> >>                 list_for_each_entry(lmem, &efi_mem, link) {
+> >>                         struct efi_mem_desc *prev;
+> >> --
+> >> 2.53.0
+> >>
+>
