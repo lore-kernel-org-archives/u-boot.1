@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17496D6AAEC
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 18:46:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AA6AD6AAF4
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 18:46:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E9F383D8A;
-	Thu,  2 Apr 2026 20:46:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 05E9E840AA;
+	Thu,  2 Apr 2026 20:46:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fQYDhcIz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tB/ESfUg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76DFC84099; Thu,  2 Apr 2026 20:46:04 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 9A60983CF5; Thu,  2 Apr 2026 20:46:05 +0200 (CEST)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 048DB83CF5
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 20:46:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B3FF8408D
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 20:46:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7d744d9acbeso485071a34.1
- for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 11:46:00 -0700 (PDT)
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-467161c4a1cso420914b6e.3
+ for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 11:46:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1775155560; x=1775760360; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1775155561; x=1775760361; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=imOIsDEI1LuedJfO9LCO10gRNRxuLRbTwvS3zQYfoaA=;
- b=fQYDhcIzGOPfSw4ODtwfG3uwWT2KVP8NLQJA5uBkhd1oa27lyLyTAQfXDg2IQSDiqB
- eQHFi7vfBvlHKdUiFGZyyka1wS/v5MqnMoFrNlApL1lap0REQojzW3xj+vDkXvATH+Kj
- XM5iYekQ8pBZ95PNl8vsHYfCsiH5dINv5a6RU=
+ bh=YyyJXvd+h8KPsOp8B38LjX2j25+nRs6GL+9EfF9VVio=;
+ b=tB/ESfUgPyXsI+HhBn/yBqlK9BSx7wZf7ZQ95/rPh7JtVmFP2DzwrbMnw7xFx92cZi
+ QN9OtgbEAiiVsXAjZKRN1nZsBOPi53jyYNEzINOyKrxF087IU3Ih8OPSOKp0ZehZdyVo
+ UrbQAEyXYxXdFbz3Y/Dez4PxsBMJOxaC+z7RM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775155560; x=1775760360;
+ d=1e100.net; s=20251104; t=1775155561; x=1775760361;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=imOIsDEI1LuedJfO9LCO10gRNRxuLRbTwvS3zQYfoaA=;
- b=jGdrPtlaxhpCBBVU4oJY3FVT+lKE0g+emSOzdY1+4r7St42LZ7K5LIGlfJNHPct3lu
- 7/qjtcysUoMzl69DwkX8BTbDraHVBfsWRrNHmuqWC2KiNaRBDiEjxVRSevECIQkRERL4
- 48LhDUWhfRNBtHEuF7uvI8oyUrQZuJ3Uec5buEdWQV8cwSD0dPS+9kfc2w3E4EClNa98
- S/Ni015y0hL65tPedEM1ZFQlAuaYWHdvfaaVWeVlGQ9NRExvGuoYfLsqtBU4G7bMA18F
- WWbY71byWYW/xuxVOgd5+EPkgDnNanMjw0vB4eYPymHX9MI7zxUg3d6WhRsRqpvuT4TU
- nTKg==
-X-Gm-Message-State: AOJu0YwzK3KKqpIMrA4Kk4hcgUT5+F6X2XU1VDvow6uFqqO0bv4e+MTX
- 9eWCp2lavQQS/Xi6TFK0/0EqA6+4DqUb4ocs8P41IakUZMwOvyGA2J1acqs7/zYCqlY=
-X-Gm-Gg: ATEYQzzH+Dlom/R8kph6LzKSWwQtYC860WQObws9m0AhiRp9fRanmeahtzNxvCiy0jW
- C2GuDDhS4RsnvwVW8guumerhHIJV3Amr6HJLiTJdvtM9rEfGplDa5jKJVQobDLRM+Pu01m8HYgc
- xR4tqXmR6P1gUidBtcZa8T8BVbxwoozLH7mI9XAA8+jZ/OsBMijVgXjUPPSXLT5Y5rE9UNnDxxH
- 2Hj87JDVE/o9tc97NQR1vRt22o+R5/4pUKDtLYNReXwqSYpavIjDptfMiFZT59pCpYXrJxnix64
- F+noCI4gyvD4i7zVbmvG9ghkwW8pgwjHojqB12NIJRFXLThXANH6g2W3JZrRhoN4g5CJlkx0DXs
- 933qDbRdu+62cNuOCqUYn+Bx52Iwrnjcrg3LmrPCTwfYQp37bHHoEVkFafi7aTknYZ4pi9PXrdz
- pWmqEnhqKSRQhpw+Scyhjhw53udT9keZKNUeroZCqnhTejXaqUCgFplw1Y8EP0nqoQI/8H3RbQ+
- DTVvkxNskTzldt/a5vNYU/0OnKcD4VfjPKT0rU085KUqLEARzMwHW6L6A==
-X-Received: by 2002:a05:6808:4f64:b0:467:1c9e:2121 with SMTP id
- 5614622812f47-46ef4f07163mr277735b6e.1.1775155559626; 
- Thu, 02 Apr 2026 11:45:59 -0700 (PDT)
+ bh=YyyJXvd+h8KPsOp8B38LjX2j25+nRs6GL+9EfF9VVio=;
+ b=iOoMxlxKD8PlH5CbhHZkHrDuFxGMpelplpZx1a5kLvDwG86ctyYy9ZeBpPYRJc2LlR
+ P/zCmj3MbiCp/hx0t6E/E1Q3HK/hBcQHdBBvZKnQ3QqaMNO3ihy6/kzO+6qOS8WavFYS
+ +gB9qFfrMexHAykgUpzcR8s+oLMumZswlB43VabixQCQaC+77BHjl9ijNhhbX3KfqvOp
+ y6e7i8cjDB+9tje5Hq56ik6bHNipvFXQ0nBPJITpGCVfHZvzQa0+FxWzwz5XWW5OryFI
+ mn+hyASoq1AWTLvMmZDsKklIDptqgXurT6u5FB+ALI8SLzKHHJBZaRlZPApJHz5EMvYX
+ ml5g==
+X-Gm-Message-State: AOJu0YxTFzchAFo8B3e6RPvuUEe7XzSs0h8hSoR1c/vnCSIdHpv3ATIT
+ zRoaPn4BbWcPPr8ZBT4jneR2BnV3KfA8lVVIvXAhTfLA9Cdl7b/XwhJ1gZMS37VpvaA=
+X-Gm-Gg: ATEYQzzY2Y41QAxWP7qZOjRqkjZrCoQLkh38+SFO5VQTogXkTOPEL0+bGpSHptxZvgq
+ E2ky8ugtLAYE1kEiQ1ktr5a9RjfF75QI26z8kA7Lc1VYA9BgLG1tzsrOyuavw0AUutZuuZOVFPr
+ S8163xf9zMA9WvaMJyS0gFWqpwgMiJg9/0dgQ3lYcN9IA9bS5mYagN07uRDAvgiAapzPiJCfKbL
+ zfVspPPJPY4j8jLQyj3Ce/C0fGfoxDtGacyK6H7fNx9agYU3tlXQVuZ/X7PMzwZyzXbCtrKK/hd
+ f3EpSpTSvwDeCfS3KlO/PNKc5pVGdJ6nzPqi70HTVQfWEok5HPG5dyUUj/nJbz5pyOnP2M30ejd
+ HrXB/BzR6+Y/K3mBNhRWyCNIRr5tAPFw1BBc0ZJhyYyKMtxdKBs+elyJtXSOzI9t9p9eqKxYWJc
+ b5TIpZg3wzj3kB5B4G+tvW4cYNY3ht8wj5IILZeYdTPe+McaygdXfgSKXdeh0j7WdHcRe0iyEn3
+ lKgrB6z+r43U/7FNDXYugVvUulT8gLoFi4EOS1lsv3qY7Xn5pc40TwrOw==
+X-Received: by 2002:a05:6808:f8e:b0:463:8a49:ca7a with SMTP id
+ 5614622812f47-46ef871d0demr268718b6e.52.1775155561037; 
+ Thu, 02 Apr 2026 11:46:01 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-46d9044725dsm2085830b6e.8.2026.04.02.11.45.58
+ 5614622812f47-46d9044725dsm2085830b6e.8.2026.04.02.11.45.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Apr 2026 11:45:58 -0700 (PDT)
+ Thu, 02 Apr 2026 11:46:00 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Anshul Dalal <anshuld@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jesse Taube <mr.bossman075@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, Udit Kumar <u-kumar1@ti.com>
-In-Reply-To: <20260329231557.332469-1-marek.vasut+renesas@mailbox.org>
-References: <20260329231557.332469-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] arm: relocate: Make data-only relocation mode
- non-user-configurable
-Message-Id: <177515555837.1935668.3910713476575027256.b4-ty@konsulko.com>
-Date: Thu, 02 Apr 2026 12:45:58 -0600
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, fra.schnyder@gmail.com, hs@nabladev.com, 
+ krzysztof.kozlowski@oss.qualcomm.com, Markus.Niebel@ew.tq-group.com, 
+ Max.Merchel@ew.tq-group.com, peng.fan@oss.nxp.com, 
+ tomas.alvarez-vanoli@hitachienergy.com
+In-Reply-To: <20260402163227.1538209-1-festevam@gmail.com>
+References: <20260402163227.1538209-1-festevam@gmail.com>
+Subject: Re: [GIT PULL] Please pull u-boot-imx-next-20260402
+Message-Id: <177515555985.1935668.4677805637251142330.b4-ty@konsulko.com>
+Date: Thu, 02 Apr 2026 12:45:59 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -100,18 +99,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 30 Mar 2026 01:15:16 +0200, Marek Vasut wrote:
+On Thu, 2 Apr 2026 13:32:27 -0300, Fabio Estevam wrote:
 
-> The data only relocation mode should be selected on per-SoC or per-core
-> basis, make these options non-user-configurable. The SoC or cores which
-> require this have to select this option using "default" keyword.
+> Please pull from u-boot-imx/next, thanks.
 > 
+> The following changes since commit 98cf83d81617f489d7ff7bf78d33e693e2799254:
 > 
+>   Merge tag 'net-20260331' of https://source.denx.de/u-boot/custodians/u-boot-net into next (2026-03-31 13:06:00 -0600)
+> 
+> are available in the Git repository at:
+> 
+> [...]
 
-Applied to u-boot/next, thanks!
+Merged into u-boot/next, thanks!
 
-[1/1] arm: relocate: Make data-only relocation mode non-user-configurable
-      commit: 91c27b21b10f6cadc906af66355197e12409a543
 -- 
 Tom
 
