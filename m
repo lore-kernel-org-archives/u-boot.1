@@ -4,105 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB90ED39422
-	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 13:37:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94796D39422
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 13:37:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABD5B84011;
-	Thu,  2 Apr 2026 15:37:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 08E958408D;
+	Thu,  2 Apr 2026 15:37:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H242wfI2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AXQshvrx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63EF0839DF; Thu,  2 Apr 2026 15:37:25 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id F212C8408D; Thu,  2 Apr 2026 15:37:36 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40F2584011
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 15:37:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F2FDF839DF
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 15:37:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-b9bfcbaa81eso126072666b.1
- for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 06:37:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775137043; cv=none;
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-b9a0762ed5fso140647666b.1
+ for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 06:37:34 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775137054; cv=none;
  d=google.com; s=arc-20240605;
- b=U1YcFA5EGh3tA8O7Vd4BXvv8REBIRwpqE82eZOVx1CV7s6NBeenACVAvYJn2B+L4Hu
- CX+S60zMBZAhn3ASwUYBWRp6EmoN2/GYd/LYjRxy9VfhTddkz7/UWeyMQlzcI1/LKV2+
- Qc+jqOqN/d3CfC9SfXCGSSPKmyeMxBKEiHv9fsE/zuhdjYot5iENjDBGOJwjFmzxhoCD
- fs9tJ4Dlb0kJu27KcE+fsdGou4CxL4pnJf5mfpgh+j/IRHXC3XXATuA8Hpr+UkepxbcA
- OtKmoT5dZtdqGZlZFlhs0HK1yqqQNEaqIOrSPTa5Tps/fidRpRcx1tTzHmybVRxaTN8o
- dr9A==
+ b=DraXNoblGjoYTY0GmjjPUkJy3z3nfXALd7yBrnTrUVDK1DqXTFJMGtMz3ruuuP2/VL
+ N8BcLtYALUtSIaRNmrqZoq730+mYg/PUiJmysYmajhH7mxYZ8wT2f1jNPNjszbgluZdL
+ a6IkjYbLakJzpiTrA5MyNVVpzhOd5qKe2eCpuAK1tqKACMFYnpx3mcvPu8cmjg+0YDNz
+ BmsdBUAyYPnn0FvtaOGjoMrwn7FXiXaV5Q0aL7+q0F0Sl2s4RJOBbyG3V75HhEp5gl+g
+ WtbSNT/gzshsiqJvQYw9cdnxds6ujlyw+UwnRtjcPXp/t0mwMpHdQD/jtoEbFXuIn+yf
+ 330Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=sipF2Xns8faJirVqNvRaNVPTQFvyhVN28Rpam8dmrMk=;
- fh=WbrZUk7whje7UjbUyyUBrQjEqBWWfsdTB9ohTXNwJeY=;
- b=SQMhyUVfD93S/JW/mPyEbhzOu9xx/HJzg5vnYp5cGnWQiIa6o/v5xYBAk0TsABVSrm
- QLy2fYIyaiGjMl+nhVfZ3FVJQbseAOMtcJwexKenFzqMm+yZH3CKKD4ILQkaDIBen99L
- 7C03B3woOz1PHRz4VM+bIMpllEHMXOnAz6kvULT2nU8zCDHs2PV1YxwzZEJLUBVmV/pd
- qasKd8TeKpyLV0qkLgd3SUbikTZ+JhQh+jPbfXDsNZaMh6gpcgJs5DzB8qAUV69bdpIh
- QniR9uFfTo+xf5zp7s0AqssabrZiSszAvGDHWZat/J74vT7li3yl8tPAYuTclqtxXIfW
- qxYw==; darn=lists.denx.de
+ bh=Dbo7sFyDXejGGCog0CY7NW2PuCXT7AGvqCe7WGU3sXM=;
+ fh=TMhL9ER88JxMwD5Aj81QfGRuuSvL8Z9mvNybV8GT7fU=;
+ b=cPFkKMkH0ZgsamGhwvlVxSiXiSDtZmfPIf8SGqynOLAp83FR16QmBhp4Zaq3y8yvIu
+ Ks3CYHXfsH0uh19X95IEmRWjAtPgsu0B2WBF25FfoMJ7rCErpN3uEij5u2/7nWnKRTtY
+ ysawRcfioSx/kM7x5qMycjQa/SNAcv8SjWq56oC2XsyA3N2ODI/FUwQqdwasof/7I20S
+ ogYZN6LYB9+F0Wgya7GdzMfna/HT6GGanfYdBfQS3FO8M755E+7WS638/3cSFyKtqJnl
+ 3XulPAhBp8PAJrlmo90K02NYt2iji+Zo5UZab6RSOmxyc42xU+RAomfD3NgeIKz6W0V3
+ TSkA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775137043; x=1775741843; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775137054; x=1775741854; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=sipF2Xns8faJirVqNvRaNVPTQFvyhVN28Rpam8dmrMk=;
- b=H242wfI2JYLeFfg0JBeV1/9dFC9Mqa1kiagiyREKoUuw8dfMz5KCENpsszGRUOqV68
- BwR26pK0rce0U7mKoscnwbRxurNjBsCguxVsWQ7UCFe+q32+64xzIODDuE9I9Bvc+OnX
- oP+LkPGwhhtwbPWT5FwEDU/KvLO7+d98UeMus=
+ bh=Dbo7sFyDXejGGCog0CY7NW2PuCXT7AGvqCe7WGU3sXM=;
+ b=AXQshvrxE23NImX8nygrS/VbJ+GYSbhgs/pHPJDCf3nWZKCPyoPE2eG84D9I3p2jBJ
+ x9I0PhYlbajtNh4z+Br4nDUCtPa7A68yiNrPIDi4xe1QYb3CFmTmGWzNWlT4jadTvprX
+ mz8rzCHegspRp2+veeJihpjnmkZxCoKbvR/nY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775137043; x=1775741843;
+ d=1e100.net; s=20251104; t=1775137054; x=1775741854;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sipF2Xns8faJirVqNvRaNVPTQFvyhVN28Rpam8dmrMk=;
- b=YK5GYo8c2fpuZ4yDdB64OsG7iwiMEjDQeeMrFv6U7a2ILx+5iXMgCjAgVXwQ6ac4XM
- ch6yLIKyUHHuUxlSi79NYg+vRf13XGTmokvgGSl2HG+8mSnFuIBo2gxMHA9wMcpmMcAo
- qCwbJhEKLHQXJfEfpFtCdA0y+B0GC4S17mlFc/KtTlXhx+smDVnsZS2ejMghUudkS9Bh
- 8t9KcMi4ZZ990lyw4eoPRsq0ds1r4CZ9js1M3ewB064kmZezJHRzRN5Lh5EMdjTi0bmr
- Pn0JYHmCPhg/BA9lfkff8eCaJYv6H3atIAxR81AUBDEASQnoBh/xm0k/utg4FrcWacd4
- CXDw==
+ bh=Dbo7sFyDXejGGCog0CY7NW2PuCXT7AGvqCe7WGU3sXM=;
+ b=VKPpu7+hkt7wJjJyzB442fqL7I9YByd02nvQ07l9nOZL6fRVST3EFcTs27KNgHKimS
+ UPPic2Eb1tYSeFQKgsmfjyQUVcAvpxd3VWiTP+6wg9Uolf1x658vwMPdi7COnYn50xao
+ BfUWFlOE4DdiYHOvTldcRbD91bixOg2StzsQMYU6bOxrk7IlFZuJdmrDQ9ULbT7VCpSC
+ Ox1zO6+HjhzzLdxXKOqdLA0VuMcWUqvkPkCstDOIZx3uw2l28QNz/eRkJBPO/jXpRUwP
+ 8O06gMlYNXrqIzURkBEprq1HcClRsGZSQUF6sx1REUQMasXhS9ppfkoszUCpCL+FJhzR
+ pBiA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW4trMYaaWegBR9YbvSaKp5PrOoqLetcRm54MkZyltE3phdMv58IpkhO3RzMFrfUSKHBv2bGMI=@lists.denx.de
-X-Gm-Message-State: AOJu0YxDFGLN5T4YH0oYkPzZ88sC4nrwDxreYYeo5UIcibpl9SMN92N3
- BsigB7KNdrzdIXKzdvh3H04IF/XbEo5kBkxnCDGFzSwTeW+Pngn4hPPK8O3+5MdWGIMxjUjdjG8
- ++Jc8/ST3aJq7dwcI0GjZe86+C+/9zSo3vos0BFEn
-X-Gm-Gg: ATEYQzzlZ/dmZc1ya0etDjCnY1TvXUs5CMGadQFjFlZpAXjYoRC8LVNuQ8AK2ZOztIv
- F4CcB/xrPSIzcrNCVA49DLEWxMANBE2HaRhhZsALYp1N4SPjkfEjEJ4fhizZC3MyQISFH5Io80y
- /AsKfP95t9286V8OejlHv6zCVMgl/j7hATyt6E5txjfaxduv3Frm23fvm6+HEdOK+lEU3k6OLYX
- HbxlJXcnM7aPhFGdEdRxVJqtCpkvDyuQP81PFjya6tc4ogp+MgBnZzUyfty6lRMCjDi5q/bw9Yo
- BxiVaA==
-X-Received: by 2002:a17:907:3895:b0:b98:13a:c92e with SMTP id
- a640c23a62f3a-b9c1379a41bmr562182966b.2.1775137042534; Thu, 02 Apr 2026
- 06:37:22 -0700 (PDT)
+ AJvYcCUkAWd8gyhonv6TGjpYaYbHhn0OIJnlErrStahbFjlRPQ9sOUypnDMqQSTXhMLj3Vapi6h2Gj4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxBl8/2F/5EJqBcnJ1kzyvXYjqBjZlVGq+AoyHuTiLDW0a5DJxG
+ 6S8VEl5wZa3k8Ev7sGIVW1VtbsOptDD4QknLySkiaaCeBQwRp3ptEHB1ZGcow7EkUcsOxulcZTC
+ lo97hklmHJj4Eqxt3sbOZ1gAiSiFvA3fKVtslXn+K
+X-Gm-Gg: ATEYQzxqNJ0Bg9ijcTqDINGDD4o0XDrckLgPPiPeiQleZZj2iX4hXWYzWRrERK+2OyF
+ 8KWLc1M7MlORHEBEqHyZyiRK83Z37x7wNnxE+ySLs+Xg7VRodoE46yKKR0C4MArT0y0M/6Y5sD2
+ XkNkP5A4h95G7vun7A91RrSCzcE2m+HIIqgNZHr6iAIzNblMqlZ1g0f8jmOHbpvBSQHYWbWmDUE
+ WVIlZUg9hLXQulzF7eePdLXHTfbzOsBVvZTWjY+pk6ylvtEXip2rMyjQ61T44LBf3C3nYe1AOcd
+ V+iwtQ==
+X-Received: by 2002:a17:907:3c88:b0:b9b:9e51:ec9a with SMTP id
+ a640c23a62f3a-b9c46de6617mr105663366b.7.1775137054361; Thu, 02 Apr 2026
+ 06:37:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <32f53e6008a389884ee406ebba1a206e73ac29af.1775023814.git.michal.simek@amd.com>
- <7d08e7ad-bd02-412a-a3d1-30a5edc27bbe@arm.com>
- <e096202a-17f5-4c0b-919a-45f2d232757b@amd.com>
- <7876118d-d702-4b1a-a289-e230bc47f5e9@arm.com>
-In-Reply-To: <7876118d-d702-4b1a-a289-e230bc47f5e9@arm.com>
+References: <20260331100047.34618-1-philippe.reynes@softathome.com>
+ <20260331100047.34618-5-philippe.reynes@softathome.com>
+In-Reply-To: <20260331100047.34618-5-philippe.reynes@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Apr 2026 07:37:09 -0600
-X-Gm-Features: AQROBzB2S2VsvLtO8iRH-g_3rpxyQu6HJYO2oJv78fSgui07h8YOH1t9asVjm_Q
-Message-ID: <CAFLszTgvJOuzhuWwwrAeEvku_96OsjHbF4N5Vj101PTfoGzo7A@mail.gmail.com>
-Subject: Re: [PATCH] .mailmap: Fix Jerome's entry
-To: Jerome Forissier <jerome.forissier@arm.com>
-Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@amd.com, 
- Abbarapu Venkatesh Yadav <venkyada@qti.qualcomm.com>, 
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, 
- Heiko Schocher <hs@nabladev.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Linus Walleij <linusw@kernel.org>, Sam Protsenko <semen.protsenko@linaro.org>, 
- Stefan Roese <stefan.roese@mailbox.org>, Stefano Babic <sbabic@nabladev.com>, 
- Tom Rini <trini@konsulko.com>, Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- nd@arm.com
+Date: Thu, 2 Apr 2026 07:37:22 -0600
+X-Gm-Features: AQROBzBwpGnwM3xqQcuplvVHHglYgfC2RWJbFwmWmKLdQPI4Te1FRf-1BXi5J4k
+Message-ID: <CAFLszTibji9gQMXi93byZynAZXr_7Y5pAX3Zhg1kSV_o0TD9=w@mail.gmail.com>
+Subject: Re: [v3,04/15] drivers: crypto: add software ecdsa support
+To: philippe.reynes@softathome.com
+Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com, 
+ trini@konsulko.com, simon.glass@canonical.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -120,54 +111,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 1 Apr 2026 at 03:26, Jerome Forissier <jerome.forissier@arm.com> wrote:
->
->
->
-> On 01/04/2026 09:22, Michal Simek wrote:
-> >
-> >
-> > On 4/1/26 09:20, Jerome Forissier wrote:
-> >> Hi Michal,
-> >>
-> >> On 01/04/2026 08:10, Michal Simek wrote:
-> >>> When patman is used email address is composed together with both email
-> >>> address from .mailmal file. Having two commit emails is not proper format.
-> >>>
-> >>> Error:
-> >>> error: unable to extract a valid address from: Jerome Forissier
-> >>> <jerome.forissier@arm.comjerome@forissier.org>
-> >>>
-> >>> Fixes: f2566c3a71a5 ("MAINTAINERS: update my email address")
-> >>> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> >>> ---
-> >>>
-> >>>   .mailmap | 3 ++-
-> >>>   1 file changed, 2 insertions(+), 1 deletion(-)
-> >>>
-> >>> diff --git a/.mailmap b/.mailmap
-> >>> index 31d4970fff77..6ac4b9b9e5ef 100644
-> >>> --- a/.mailmap
-> >>> +++ b/.mailmap
-> >>> @@ -69,7 +69,8 @@ Jagan Teki <jagannadha.sutradharudu-teki@xilinx.com>
-> >>>   Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de> <jakob.unterwurzacher@theobroma-systems.com>
-> >>>   Jay Buddhabhatti <jay.buddhabhatti@amd.com> <jay.buddhabhatti@xilinx.com>
-> >>>   Jernej Skrabec <jernej.skrabec@gmail.com> <jernej.skrabec@siol.net>
-> >>> -Jerome Forissier <jerome.forissier@arm.com> <jerome@forissier.org> <jerome.forissier@linaro.org>
-> >>> +Jerome Forissier <jerome.forissier@arm.com> <jerome@forissier.org>
-> >>> +Jerome Forissier <jerome.forissier@arm.com> <jerome.forissier@linaro.org>
-> >>>   John Linn <john.linn@amd.com> <john.linn@xilinx.com>
-> >>>   Jyotheeswar Reddy Mutthareddyvari <jyotheeswar.reddy.mutthareddyvari@amd.com> <jyothee@xilinx.com>
-> >>>   Jyotheeswar Reddy Mutthareddyvari <jyotheeswar.reddy.mutthareddyvari@amd.com> <jyotheeswar.reddy.mutthareddyvari@xilinx.com>
-> >>
-> >> Thanks for fixing this.
-> >
-> > Is this any official tag? :-)
->
-> Yes it is. Ah, I need more coffee :)
->
-> Acked-by: Jerome Forissier <jerome.forissier@arm.com>
+Hi Philippe,
 
-Thanks, I hit this too.
+On 2026-03-31T10:00:34, Philippe Reynes <philippe.reynes@softathome.com> wrote:
+> diff --git a/drivers/crypto/ecdsa/Kconfig b/drivers/crypto/ecdsa/Kconfig
+> +config ECDSA_SW
+> +     bool "Enable driver for ECDSA in software"
+> +     depends on ECDSA_MBEDTLS
+> +     depends on ECDSA_VERIFY
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Raymond has already pointed out on the cover letter that ECDSA_SW may
+be unnecessary given this is a MbedTLS-only solution. If a future
+non-MbedTLS software implementation is anticipated, this separation
+makes sense, but please consider his suggestion to simplify and use
+ECDSA_MBEDTLS directly.
+
+> diff --git a/drivers/crypto/ecdsa/Kconfig b/drivers/crypto/ecdsa/Kconfig
+> +     help
+> +       Enable driver for ECDSA operations in software. Currently
+> +       it supports multiple ECDSA algorithm.
+
+\ No newline at end of file
+
+Please add a trailing newline to the Kconfig file. Also "multiple
+ECDSA algorithm" should be "multiple ECDSA algorithms" (plural).
+
+> diff --git a/drivers/crypto/ecdsa/ecdsa-sw.c b/drivers/crypto/ecdsa/ecdsa-sw.c
+> +U_BOOT_DRVINFO(sw_ecdsa) = {
+> +     .name = "sw_ecdsa",
+> +};
+
+This file also needs a trailing newline.
+
+> diff --git a/drivers/crypto/ecdsa/ecdsa-sw.c b/drivers/crypto/ecdsa/ecdsa-sw.c
+> +#include <dm/device.h>
+> +#include <linux/types.h>
+> +#include <u-boot/ecdsa.h>
+> +#include <crypto/ecdsa-uclass.h>
+> +#include <dm/platdata.h>
+> +#include <crypto/internal/ecdsa.h>
+
+Please sort the includes alphabetically as per U-Boot convention. Also
+<dm.h> is the standard include for driver model, rather than the
+individual <dm/device.h> and <dm/platdata.h> headers.
+
+>     drivers: crypto: add software ecdsa support
+>
+>     Add an software ecdsa driver so it is
+
+Add a software
+
+Regards,
+Simon
