@@ -4,106 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB6C01112242
-	for <u-boot@archiver.kernel.org>; Wed,  1 Apr 2026 23:58:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC1C01112246
+	for <u-boot@archiver.kernel.org>; Thu,  2 Apr 2026 00:14:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A3B980517;
-	Thu,  2 Apr 2026 01:58:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 1BAF38407E;
+	Thu,  2 Apr 2026 02:14:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="AbYpXjOv";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FA6JluZJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CC9A839DF; Thu,  2 Apr 2026 01:58:26 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B6AC384056; Thu,  2 Apr 2026 02:14:30 +0200 (CEST)
+Received: from CY3PR05CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB41F80212
- for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 01:58:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 781FB80517
+ for <u-boot@lists.denx.de>; Thu,  2 Apr 2026 02:14:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7d74dbfe84cso215036a34.1
- for <u-boot@lists.denx.de>; Wed, 01 Apr 2026 16:58:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1775087902; x=1775692702;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RCsbkBsZCpQtlsNZWvz8VuqDGKQYGELEdllt/tbEkRo=;
- b=AbYpXjOvbMjcn3ASagQUn/h8otpa5NFIFZcNdJhVrx1uppKut4EP3n9iTf5Z8vpSIT
- CtCqJxEhVmF8vwCERAi/NKC85PCmFCfD+a6bMvCob/WQBoTPgd9skChmqQXjBw2kBOZe
- zxfl5xc6F5L5OBXWIrsUo49gMUvqnXSaIS7q+16eHc3iArh2ROf4ugi+ODFB+mCZhd+v
- kMvAJQ3hsX0HRhuVjspXWzBDk5thkIIj+pDjjhKabH2h9ziPmODjS4XVQn31Dwwemfma
- GBCYxCNEKTtQnL9G5IZwgrct7zUI4Y+0oOkYKii6Z4z//0wQOaJlDbIYHYZe3/4hwIij
- EYUw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775087902; x=1775692702;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=RCsbkBsZCpQtlsNZWvz8VuqDGKQYGELEdllt/tbEkRo=;
- b=ARoOClAMAuYtvCWgsYiwBlzVzOZ0C87jnYk5hQed0Uqib17LITUVIcizOBYdPkY94+
- P/gO5aGW9tQw5SA34DQYgM2WkFulal+hEIc2/pQBLmcic+mPXlc3GhIQfOB1+Vef6Y51
- QWgPfofiZ7ulcjrQmCKAmNRhziKvunpPeBPc/KK/j5r9qmdWCpDwMFsYFnZQzOPFpTc+
- 9yDIkowwWOaLTiC5Cqvozo9wKuydeZM3lbcOc/20uCkfDxVaAFrwWqQ9I/bnWDhR1D0l
- tVX6vtM0VQd72/4cavgPEYYBTaL6aiHfq3FlQtAbhJdEQtiDPfDtsG1OzfWw9CRfS+IN
- XYZw==
-X-Gm-Message-State: AOJu0YwZxIDh2YdfJ8j0kC2JoEuHSVSnjC9pTNNn+DnPlE4J3d2NJiG2
- 58jlJBx3SaGnAx8Qw9M6V+1RKGeuTYShjjvOt6GApfxVtLpbsBZjZm2nbSKRNMF9BYk=
-X-Gm-Gg: ATEYQzylqOcHjS1bZWcIjhFZcNESiCXdPeIspzHohpmkQUzyT/SqVID3+jQJ0hi6roS
- lN5JKtdaCjjWhZtmhvbvooQjY3o0XI0+LL1wuirC5jkDZoacZ8IzvezPB/jazWbGTSI7TjiR0DX
- JNV0GgbjSQwSgYvBEmkl4KTKSHEIYVSNDrNvB26D8F+qpOYgpfvtJRyiFS5g0qaR8PkpwLVibKn
- PeIOR0wx7M+HfWnxALgh22X72pE460HeM2sEY02pyS+eraVnnHs97/MeY99kzTGjdnnEEmzK1Fn
- d0QKqRhO7NRGHop/tGEhio9taZ5Q2X9BWW1icX7kpzjWcCYu8oxWJCU245z0jeP3z4RAJlyWpi9
- cHk0tweLtCRj2q9o1HcYTSmRe+jR1b70GIXkDWV6y6r61x7sq9MBaHwbW6UJs2sWFOmyfKhelme
- HrO1Y50Qs8TwfnKlIbCADfwahIPfi/
-X-Received: by 2002:a05:6830:82ad:b0:7d7:f5d5:1916 with SMTP id
- 46e09a7af769-7db9923dd5bmr3660424a34.11.1775087902675; 
- Wed, 01 Apr 2026 16:58:22 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:57c4:ef89:4ac4:d6d9])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7dba72fcb47sm996374a34.15.2026.04.01.16.58.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Apr 2026 16:58:21 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-To: u-boot@lists.denx.de, Julien Stephan <jstephan@baylibre.com>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Tom Rini <trini@konsulko.com>, Macpaul Lin <Macpaul.Lin@mediatek.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Julien Masson <jmasson@baylibre.com>, Peng Fan <peng.fan@nxp.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>
-In-Reply-To: <20260318-rename-genio-defconfigs-v2-0-1f77580d72f3@baylibre.com>
-References: <20260318-rename-genio-defconfigs-v2-0-1f77580d72f3@baylibre.com>
-Subject: Re: [PATCH v2 0/6] configs: mediatek: rename genio boards
- defconfigs to match the device tree name
-Message-Id: <177508786926.837601.4215347526669285336.b4-ty@b4>
-Date: Wed, 01 Apr 2026 18:57:49 -0500
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=NbAM191rGJ/0id+tcboGcSKzM8KzIs5hYSeSwEE+Hm5JS381HZdaQ2QriDIUlZBkMaFQ8xyA2vG1B2qslndImQJVMVwcYSLEI088oydx0VbVYftPPd0w35nWjLGWRiIS9SzXIXG8tCvyULI1Yo0GcEv42BBi7ajjEYCEOlPGUEPvaPfHrfSWXEhS8dJBw4EzXC+46EPk5Y2aMQ0XrahBBic07uK0cQaOY8Fgq+Q/LR7NAqDTz8ld0DZGd/hzXUVfJM0mnTZbo/rC0K+hAnbXLzQ8Z+mgrD5Q0OHshrucOZVW0bpSf2daS4q1mfYS40nLpbGrXOgAAJRmefq/owDd6A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/By1qUn9HjRY/3hOAoktC2wR8M3AXnop+rAiqZixiR4=;
+ b=fwl94HdXukN8s08e78MB+mkRdOJkB1zCm8HvNlEzlhIKRfFGF72Onpl6BHfL9EqiKanhlNvjSZ2JQKeHtrqM8XERsbW2fwH7ZSOAfNdOv8rOY/PzXqw7e30KFe3dlTOODKjT8A9LwjEBb8jZNSJLO5+YQm+7Y35jCCl49EfnNmRvpPiruem3Yw+Cg51XBZ/aKYHRxuImlKoAiDKtwV/eO6IWlSdIO2zD8c9pOPYbJnZGITlsMkFwQ4Ub72blHU0IpJm0fMyd5kB0a25hMeOTrsLB08ivwPk6rzMRcNpVQhAfW1qPbD+34uoG0e3bQPfboo0OlpccTqnX7RroW4M1UQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/By1qUn9HjRY/3hOAoktC2wR8M3AXnop+rAiqZixiR4=;
+ b=FA6JluZJF88RnX0r5jgJwPr0OQDaF5Tg+9kXtcnvVJ1pXCuWEgjTD5X7/PkZsYawxAhS6KAZ3PLYiMZdubBxZMI+Tl0s01mJqh1ygcxvyNYFfsLyTjcLvh0qcC1IHIHjtUNoCUyGnJLOGt7FPLvmm0j6yT9Wey/xgP881K2x4Eg=
+Received: from PH7P220CA0089.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:32c::14)
+ by MN2PR10MB4381.namprd10.prod.outlook.com (2603:10b6:208:1d3::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.17; Thu, 2 Apr
+ 2026 00:14:22 +0000
+Received: from SJ1PEPF000023D5.namprd21.prod.outlook.com
+ (2603:10b6:510:32c:cafe::18) by PH7P220CA0089.outlook.office365.com
+ (2603:10b6:510:32c::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.30 via Frontend Transport; Thu,
+ 2 Apr 2026 00:14:18 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ SJ1PEPF000023D5.mail.protection.outlook.com (10.167.244.70) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9791.0 via Frontend Transport; Thu, 2 Apr 2026 00:14:21 +0000
+Received: from DFLE208.ent.ti.com (10.64.6.66) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 1 Apr
+ 2026 19:14:21 -0500
+Received: from DFLE208.ent.ti.com (10.64.6.66) by DFLE208.ent.ti.com
+ (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 1 Apr
+ 2026 19:14:20 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE208.ent.ti.com
+ (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 1 Apr 2026 19:14:20 -0500
+Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.39])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6320EKsA1004385;
+ Wed, 1 Apr 2026 19:14:20 -0500
+From: <rs@ti.com>
+To: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
+ <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
+ <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
+ <ilias.apalodimas@linaro.org>
+CC: <u-boot@lists.denx.de>
+Subject: [PATCH 0/6] various memory related fixups
+Date: Wed, 1 Apr 2026 19:14:04 -0500
+Message-ID: <20260402001410.3736815-1-rs@ti.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1269; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=9W5xRlhJL3rfE84EKlWPpFUoOGMn2+KnTs5+E3sKeIM=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpzbEVs4qK2yupP/YBv3fq02DBgYKZdaCHy7yri
- 1M6Uj9BwbiJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCac2xFRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AbPcIAI0/qrIRvGo5aRTNcN9wMVzUbfGzxMnKlw8apDJ
- 2H+rVbSGPm2Vp82GliUipy+jSVghiLVrSKYz5BJfUlmAmfD1llvh1y8ndFXjzMycz3bzMaTd/WD
- 7dWCgKjI1KoXW1Q2utaVTa26BBqzxn8zsbLqwAy/uZrfAru/9xnr/W2/jvHSveT3g+4ggc2fCV1
- RITdHuHYQeXOT5JPiRVkcFXMTifSW0b6ZG4E0vApqEkay4jS2UTTDBI6sbGNroKIGB4tiGtg1hb
- RafhqqB/S7d7K+5rhkQ3GsS0QGlHN5BwF/kmfpkjB1vvL1oYPtIXUCQBkUz+V6AsrTNAvmfrMDp
- gGsI=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000023D5:EE_|MN2PR10MB4381:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9608d467-c9ac-46f6-a536-08de904cca2e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700016|82310400026|376014|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 5MqkKf5zyS9+VcOoADmA202JjHrgE2kKUcN8FJG6EMr3dxHYcypGjKe4UKKBRF6g5nPdPK8Bdq0+GzNOkjRbKyg8cTl3Cx1AuDV0ouD2tM49XRpHRo7luOM+69RqMx9jlNOHdl1ObFbCTcBmR7F79dsDKQ1CWVtGpsdacLYQLH48M16jNe/7KWsGgkumuNnpp7Cu3g8V+02hy9kQETi2NX/K5PQlF4GapSfh0GQSRlxXgy21LG9FxW9SgtY/6lWptEZvKFnMEwMbuelo9K1t4QFNJdzxQSGaC2NeeI8TNNOcOXeiEXD47vI4SlZt3IbI8NOj4V0dtsodr7oLsvlaejIQlwPqKOVvZ7AOcJ4IWm6OiAKo8yA0J0dxvCcYhVXgIcnUJ6JGgSwR5FcQyg+k9Mp/iaUPs4U3P0XIw8yXVunZ4GT8sYom4zOcr4+qmr7uyom2iFcFCT+bd5EuwVCl80ucB78G7S7VYAc9lhQj5zdLx7vNhlZwMVVYEPBtn5uRjMWLDKj9TzhObYXpRLz5jNtHIkvwdO7qqybIWOiwDBrXiVduU2HNEpcw2K3Y2heoU5e12McPolF1ngkGwKeIMY1GbmghV+rykd0KXG855ly5CUnxHSrqZLQUKYaOYg9vpX9/ve1xZiFk8Lb3BRKQB9wVvFf32ev2csrmekvkAy38nJTL7beRkBq9u21UCgS50xwwHiB6o0jY9XoKlF6ep7W8Z1aQhcKx0Yfv8Ge4iJ0y4EI+pP6aM0GYN9NuvAqHNyAPrjbCmx5GKtkiYMT09Gbx7BeU7pu+9aKj6MGZQao=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700016)(82310400026)(376014)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: VFYehllgHMiznrH9pRkNo7V087YJafRJRt6W6Sy1ui2a/XEqEt9jwPPfINxwVzyVnmU37mBQ3h5bYhJoV/DyPXpgMdYM2VqkgrhdnDJA9RFrJqcgUFhfPkHNdBayX9uBSt3K11BLwHujPnsN4i5+bQySdZOiwYGRHC+EH8lu6k77+ioMWbheK0Jo4/wRjIaTQro2PoR85Dad4zCEzO60ett+9rCPo2wxitySljya/fyx6StL6xy8BCMgWPPJd4yLVNosAr+hvansa12t/es3hi6FQWiBFjJv7VXrmxbqV16Tv+9iDyi4Am1nyrkB+ZBqr7zLPT6odvKvKKjurQchfZKaDhLyLZG6ksEQOwzOlri7JWpHwPapojkIQ6wglX+OJcVdKiQfsZ9pk3wR4rHxfKLajnyBl5gPAwUrPUyMFNSNm2TVYYEYGDa+mBx8iuWn
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2026 00:14:21.5864 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9608d467-c9ac-46f6-a536-08de904cca2e
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000023D5.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR10MB4381
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,33 +131,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 18 Mar 2026 17:45:22 +0100, Julien Stephan wrote:
-> configs: mediatek: rename genio boards defconfigs to match the device tree name
-> 
-> Rename the defconfig file for various genio board to match the name of
-> the device tree. While at it, do some cleanup:
-> - introduce mt8188.config to factor genio-510/genio-700
-> - remove useless SYS_BOARD_CONFIG for genio-700
-> - set myself as maintainer
-> 
-> [...]
+From: Randolph Sapp <rs@ti.com>
 
-Applied to mediatek-for-next, thanks!
+Nitpicks and fixes from the discovery thread on adding PocketBeagle2 support
+[1]. This does a lot of general setup required for the device, but these
+modifications themselves aren't device specific. For those specifically
+interested in PocketBeagle2 support and don't care about these details, my
+development branch is public [2].
 
-[1/6] configs: mt8390_evk: remove useless CONFIG_SYS_BOARD
-      commit: dfa3f88b1cbfd061b426db74e203bd6a23dc007f
-[2/6] configs: mt8395_evk: rename to mt8395_genio_1200_evk_defconfig
-      commit: 62852f9bfe5bb68021350450a0c3144dddd863f1
-[3/6] configs: mt8370_evk: rename to mt8370_genio_510_evk_defconfig
-      commit: 74284bc305d80f8d2c9c5b1077a9d25cfffa41fa
-[4/6] configs: mt8390_evk: rename to mt8390_genio_700_evk_defconfig
-      commit: 031106b23d9efb091c9d022a4ba675af9fbe98f5
-[5/6] configs: mt8370/mt8390: introduce mt8188.config to avoid duplication
-      commit: aca2e27e56fe9d0d1d67f627586b8a630b5645d5
-[6/6] configs: mt8370/mt8390/mt8395 add myself as maintainer
-      commit: 09bd64e2c303dfefb97317526f76128d0fd4e31a
+That first patch may provoke some opinions, but honestly if that warning was
+still present I wouldn't have spent a week poking holes in both the EFI and LMB
+allocations systems. Please let me know if there is a specific usecase that it
+breaks though.
 
-Best regards,
+[1] https://lore.kernel.org/all/DHHC66BBMD27.YHGIH43C6XBK@ti.com/
+[2] https://github.com/StaticRocket/u-boot/tree/feature/pocketbeagle2
+
+Randolph Sapp (6):
+  lmb: add LMB_FDT for fdt reserved regions
+  efi_dt_fixup: use fdtdec_get_bool
+  efi_selftest_memory: check for duplicates first
+  efi_memory: nitpick removal loop
+  efi_memory: backfill EFI_CONVENTIONAL_MEMORY
+  memory: reserve from start_addr_sp to relocaddr
+
+ boot/image-fdt.c                       |  5 +++-
+ include/lmb.h                          |  7 +++++
+ lib/efi_loader/efi_dt_fixup.c          |  3 +-
+ lib/efi_loader/efi_memory.c            | 41 ++++++++++++++++++++++----
+ lib/efi_selftest/efi_selftest_memory.c | 21 +++++++------
+ lib/lmb.c                              | 25 +++++++++++++++-
+ 6 files changed, 82 insertions(+), 20 deletions(-)
+
 -- 
-David Lechner <dlechner@baylibre.com>
+2.53.0
 
