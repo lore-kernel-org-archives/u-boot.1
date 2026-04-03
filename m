@@ -4,53 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FF7CE85371
-	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 16:27:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C71D9E85379
+	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 16:29:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 527278418C;
-	Fri,  3 Apr 2026 18:26:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
+	by phobos.denx.de (Postfix) with ESMTP id 108B0840B0;
+	Fri,  3 Apr 2026 18:29:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="lwEQIhCD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IjgAXOk5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDE7E840BE; Fri,  3 Apr 2026 18:25:58 +0200 (CEST)
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EF3E7840D8; Fri,  3 Apr 2026 18:29:13 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4C738413A
- for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 18:25:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3473983CF5
+ for <u-boot+nodisclaimer@lists.denx.de>; Fri,  3 Apr 2026 18:29:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sgdfkk@163.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=PY
- yX9HF2cGo2r2WULwPbWHF2s/9BE0pw9IfILZ4h1xU=; b=lwEQIhCDRrwXKlpkRX
- YwtbCHpKainqTy+USMt18BE736wo8RLctXUww9Pqg7wilO+i81ch8Tlxs4zREvtm
- TKtwvwcU/TYdYM7ewLnvjY73QcLRgwB3TTDCDUVqWOTyyOAC1BKkiojdttk7zY5x
- HHXDqVtZb7OWxqXVM4Jp3ibdM=
-Received: from server-e.. (unknown [])
- by gzsmtp3 (Coremail) with SMTP id PigvCgAnAXQF6s9pHqSgBw--.137S6;
- Sat, 04 Apr 2026 00:25:48 +0800 (CST)
-From: sgdfkk@163.com
-To: u-boot@lists.denx.de
-Cc: Du Huanpeng <u74147@gmail.com>
-Subject: [PATCH v7 4/7] mips: loongson: ls1c300 board support
-Date: Sat,  4 Apr 2026 00:25:38 +0800
-Message-ID: <20260403162541.86608-5-sgdfkk@163.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260403162541.86608-1-sgdfkk@163.com>
-References: <20260403162541.86608-1-sgdfkk@163.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-66dd1b5bb6aso3541107a12.2
+ for <u-boot+nodisclaimer@lists.denx.de>; Fri, 03 Apr 2026 09:29:11 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775233750; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Vq2OP/k3KSowXvQ4aPmrjIiuOsrhL2s+n3R/7toAsHNvWf+VZ53vkKuw4KpPrgbwjj
+ GWe8B1bnOYKct8HhJUiuqt5VSCmaegIL4K68rHsBA72hiEINwKDsH+aOrxIq1u3155x1
+ dQI4gmDW3Hjzl+Peifr5STYosjRkdxyJLHviqbxLt7yhV9QsEWU5mJOWOh0U2R9MmfbJ
+ 0PgTBzgPYqxED8zhf2stjbSJK0TiOELWWgOrvs784hWt/u7HRgGWrFveDsV1TtO057iD
+ EdwSWc8Xm+ZV7GykvClq6Z2oXOAwsfsNI3rWq8lXtlU/aUQHl+RIzp+oHdbqqaJ/343S
+ XM3g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=jdG/NG0dU5/SfYTrQZqx8wfXjrEbl2dYHS83u0x2fZ0=;
+ fh=Qepf2wxjiXC8Q9eKk6EeMKDlS6GLjE/sRjG6l+q3ubc=;
+ b=Qrgt2iuXQlXLmFyuMgZD+jXKi9JjKgwY74NQQB81GzABJB6TKiyGOo4J1HHU7ftDAD
+ +E1r+HJ0I7WpfmilmgKHKWe/GRkqAC3Wms00UeqeFQxXaqh8XZJZN9Y8C4Ujb3ZdXOc0
+ F4ykXork+wPTetgQ3qP+E9vje1T/RlHReBniYSPd9IVANyxwG64fU/lEnbdckqgSm50F
+ VAwBLobO0K8V4LN2MN66yI5IrzPQT8w1TbKYPnOh7xhtQMI76tsVVOQHXL1g8FU2Q7Z9
+ RKhWa0gCq6+jxyB5oPEdMKsPBKdB29L0DnKv9BCMfIGgt2/lpEFvgaxlOAZweHN4W7Wt
+ pHMg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1775233750; x=1775838550; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=jdG/NG0dU5/SfYTrQZqx8wfXjrEbl2dYHS83u0x2fZ0=;
+ b=IjgAXOk5rzEqgXr2fMV9AqJt16HqWhXr/oSaNSbJpb621X64WKOz6PiATikzg40i0V
+ NOKVMhlZx4NZiyK/843XYtnAvcU/zA35lZuWNXj8kWyLbxBi9X0lAgGGPRtXFCfFRFDz
+ tVas7eJwgpsKhBgcFJuqzkh+mB/VXqCXbx7GA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775233750; x=1775838550;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jdG/NG0dU5/SfYTrQZqx8wfXjrEbl2dYHS83u0x2fZ0=;
+ b=H0KO70xVgrKFIm9/SnM2rDycUD+W7R+Hdmw+Zia6eNAUb7qd/FJVHyivj047Ut1mlr
+ KzVSYdvEMql8VetazDxrRsqOVCMengUUGUgvaMCwiEy4qUy5XLSw0H2R5A1dI/XROWm3
+ CtbRFH4xMP6L4ABIOb6o3OsRMYSTbzFXxxKHo/tsJn0TS2a32hr3ypeasGYkvN0VWg+s
+ NnM0vzdmdJ84I4pLpOXyIl162zSHA+tH0uReT0WkEn41YOWqVDhqcwtbrQkDchN+HCtK
+ uYXTjkA/BUYGrX7TnmB2AZn/qryEl2c5Wtd2hXY7sSb+vX8tyd+TIZa7/Cpcgl+ypjTu
+ W+wA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXz4qO6Aewl03hYKKPZzw+Jy9NoGThFDTn4cVAwsO3Yaqid+dA+naQrWIBxsPsiEroMOSTuQbs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx8OWSnKhz8krmAur1tdjkEqf5nqgr9XCkSzN0P6nEdasYBmJuQ
+ W70kCSMoTmdA3dKNR9IIm+WXljtrPUqYvLfudvawaIIPBM2AkHqSE13xqTPonjJC3kjo88klTQZ
+ EM6faH21rJKQ9+fw8x7L2qVo8+ArWSYRmdfsXP4D8
+X-Gm-Gg: AeBDietWCmHyjkAIUQQeMfE9FfBB0MKHVw+0elQF4UcCVDl/jjf9xY4o3B50oGcjE0N
+ QBiamRFbuf6JPKt2LjBl1Bx8yJiwppwlbpAqkW8/u4PhN7FXqbrxaoZhY2JjIXVQGzYJ5EjKBPX
+ ylseP1i9EfxhotL2fS1oobJ2yl+clt/6tuAR3V7Q30PC/TN7z8ddGRXVwYSZZoKy/apOLSX6A9W
+ blsWnK3xXlssmxAWNknNr8tiuOY61LM3nChyW1YIW2lR8kPvm9oDj/A988wks64jSo87cbxLTwM
+ bxxjDIcULB0cwQnz
+X-Received: by 2002:a17:907:c819:b0:b9c:5357:15e1 with SMTP id
+ a640c23a62f3a-b9c679a5e68mr195970766b.38.1775233750426; Fri, 03 Apr 2026
+ 09:29:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: PigvCgAnAXQF6s9pHqSgBw--.137S6
-X-Coremail-Antispam: 1Uf129KBjvJXoW3JFW8Xr47Xr1xXF15uryDKFg_yoW7tryrpr
- n2kF4rGr48Jw47GrZ3uFyDWFn0yw4kuFWUuFnFgr1rAr97Aa18CFnIya13try3XrWkJrW8
- ZF93WF4akFWDXw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UKzuXUUUUU=
-X-Originating-IP: [240e:3b0:4805:581::3001]
-X-CM-SenderInfo: xvjgwyrn6rljoofrz/xtbCvwwMY2nP6gzISQAA3d
+References: <20260330141852.984717-1-paul.henrys_ext@softathome.com>
+ <CAFLszTgfN-+Y7K1ZkQS947BdMBFtPqOLof8tsU7b4JzCKJbBJQ@mail.gmail.com>
+ <5b2347e9-1168-468a-a762-ebbf80251df6@softathome.com>
+In-Reply-To: <5b2347e9-1168-468a-a762-ebbf80251df6@softathome.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 3 Apr 2026 10:28:58 -0600
+X-Gm-Features: AQROBzA1ThTq3MvuCRdfi1mK3PMtPrc06Wh8HqyAtJ4VCi1PVHoXSTi4syp9-uo
+Message-ID: <CAFLszThHzK=q9wkY+5bTJJzCMc_+rEsSs-tj7P_Kj9PYd-DRPg@mail.gmail.com>
+Subject: Re: [PATCH 0/1] u_boot_pylib: disable standalone module detection
+To: Paul HENRYS <paul.henrys_ext@softathome.com>
+Cc: sjg+nodisclaimer@chromium.org, u-boot+nodisclaimer@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,196 +111,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Du Huanpeng <u74147@gmail.com>
+Hi Paul,
 
-- 64MiB SDRAM K9F1G08
-- 4MiB spi flash
-- ethernet DM9161CEP
-- UART2 console
+No worries, sorry I missed the other patch!
 
-Signed-off-by: Du Huanpeng <u74147@gmail.com>
----
- board/loongson/ls1c300-eval/Kconfig     | 12 ++++++
- board/loongson/ls1c300-eval/MAINTAINERS |  7 ++++
- board/loongson/ls1c300-eval/Makefile    |  3 ++
- board/loongson/ls1c300-eval/board.c     | 19 +++++++++
- configs/ls1c300_defconfig               | 52 +++++++++++++++++++++++++
- include/configs/ls1c300.h               | 38 ++++++++++++++++++
- 6 files changed, 131 insertions(+)
- create mode 100644 board/loongson/ls1c300-eval/Kconfig
- create mode 100644 board/loongson/ls1c300-eval/MAINTAINERS
- create mode 100644 board/loongson/ls1c300-eval/Makefile
- create mode 100644 board/loongson/ls1c300-eval/board.c
- create mode 100644 configs/ls1c300_defconfig
- create mode 100644 include/configs/ls1c300.h
+- Simon
 
-diff --git a/board/loongson/ls1c300-eval/Kconfig b/board/loongson/ls1c300-eval/Kconfig
-new file mode 100644
-index 00000000000..e427570a836
---- /dev/null
-+++ b/board/loongson/ls1c300-eval/Kconfig
-@@ -0,0 +1,12 @@
-+if BOARD_LS1C300
-+
-+config SYS_BOARD
-+	default "ls1c300-eval"
-+
-+config SYS_VENDOR
-+	default "loongson"
-+
-+config SYS_CONFIG_NAME
-+	default "ls1c300"
-+
-+endif
-diff --git a/board/loongson/ls1c300-eval/MAINTAINERS b/board/loongson/ls1c300-eval/MAINTAINERS
-new file mode 100644
-index 00000000000..d3498b18e2b
---- /dev/null
-+++ b/board/loongson/ls1c300-eval/MAINTAINERS
-@@ -0,0 +1,7 @@
-+LS1C300_EVAL BOARD
-+M:	Du Huanpeng <u74147@gmail.com>
-+S:	Maintained
-+F:	board/loongson/ls1c300-eval/
-+F:	include/configs/ls1c300.h
-+F:	configs/ls1c300_defconfig
-+F:	arch/mips/dts/ls1c300-eval.dts
-diff --git a/board/loongson/ls1c300-eval/Makefile b/board/loongson/ls1c300-eval/Makefile
-new file mode 100644
-index 00000000000..db129c5abae
---- /dev/null
-+++ b/board/loongson/ls1c300-eval/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier: GPL-2.0
-+
-+obj-y += board.o
-diff --git a/board/loongson/ls1c300-eval/board.c b/board/loongson/ls1c300-eval/board.c
-new file mode 100644
-index 00000000000..0eb5df1dc7b
---- /dev/null
-+++ b/board/loongson/ls1c300-eval/board.c
-@@ -0,0 +1,19 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2020-2026 Du Huanpeng <u74147@gmail.com>
-+ */
-+
-+#include <mach/serial.h>
-+
-+#if defined(CONFIG_DEBUG_UART_BOARD_INIT)
-+
-+#define UART2_RX	36
-+#define UART2_TX	37
-+#define AFUNC		2
-+
-+void board_debug_uart_init(void)
-+{
-+	gpio_set_alternate(UART2_TX, AFUNC);
-+	gpio_set_alternate(UART2_RX, AFUNC);
-+}
-+#endif
-diff --git a/configs/ls1c300_defconfig b/configs/ls1c300_defconfig
-new file mode 100644
-index 00000000000..22d6f18cac4
---- /dev/null
-+++ b/configs/ls1c300_defconfig
-@@ -0,0 +1,52 @@
-+CONFIG_MIPS=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_TEXT_BASE=0x80200000
-+CONFIG_SYS_MALLOC_F_LEN=0x40000
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_ENV_SIZE=0x1000
-+CONFIG_DEFAULT_DEVICE_TREE="ls1c300-eval"
-+CONFIG_DM_RESET=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_TEXT_BASE=0xbfc00000
-+CONFIG_SPL_BSS_START_ADDR=0x80010000
-+CONFIG_SPL_BSS_MAX_SIZE=0x10000
-+CONFIG_SYS_LOAD_ADDR=0x80010000
-+CONFIG_WATCHDOG_TIMEOUT_MSECS=3000
-+CONFIG_SPL_SIZE_LIMIT=0x100000
-+CONFIG_SPL=y
-+CONFIG_ARCH_LSMIPS=y
-+CONFIG_SPL_PAYLOAD="u-boot.img"
-+CONFIG_ROM_EXCEPTION_VECTORS=y
-+CONFIG_RESTORE_EXCEPTION_VECTOR_BASE=y
-+CONFIG_MIPS_BOOT_FDT=y
-+CONFIG_FIT=y
-+# CONFIG_ARCH_FIXUP_FDT_MEMORY is not set
-+CONFIG_LOGLEVEL=9
-+CONFIG_DISPLAY_CPUINFO=y
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x10000
-+CONFIG_SPL_PAD_TO=0
-+CONFIG_SPL_LEGACY_IMAGE_CRC_CHECK=y
-+CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_NOR_SUPPORT=y
-+# CONFIG_CMD_ELF is not set
-+# CONFIG_CMD_XIMG is not set
-+# CONFIG_CMD_CRC32 is not set
-+CONFIG_CMD_CLK=y
-+# CONFIG_CMD_LOADS is not set
-+CONFIG_OF_EMBED=y
-+CONFIG_CLK=y
-+CONFIG_SPL_CLK_CCF=y
-+# CONFIG_INPUT is not set
-+# CONFIG_POWER is not set
-+CONFIG_CONS_INDEX=2
-+CONFIG_SPL_SYS_NS16550_SERIAL=y
-+CONFIG_SYS_NS16550_REG_SIZE=-1
-+CONFIG_SPI=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_WATCHDOG=y
-+CONFIG_SYSRESET_WATCHDOG_AUTO=y
-+CONFIG_WDT_LOONGSON=y
-+# CONFIG_GZIP is not set
-diff --git a/include/configs/ls1c300.h b/include/configs/ls1c300.h
-new file mode 100644
-index 00000000000..488d1c40330
---- /dev/null
-+++ b/include/configs/ls1c300.h
-@@ -0,0 +1,38 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (C) 2020 MediaTek Inc.
-+ *
-+ * Author: Gao Weijie <weijie.gao@mediatek.com>
-+ * based on: include/configs/mt7628.h
-+ * Copyright (C) 2022-2023 Du Huanpeng <u74147@gmail.com>
-+ */
-+
-+#ifndef __CONFIG_LS1C300_H__
-+#define __CONFIG_LS1C300_H__
-+
-+#define CFG_SYS_SDRAM_BASE		0x80200000
-+#define CFG_SYS_INIT_SP_OFFSET		0x2000
-+
-+/* SPL */
-+#if defined(CONFIG_SPL_BUILD)
-+
-+/* Serial SPL */
-+#if defined(CONFIG_SPL_SERIAL)
-+#define CFG_SYS_NS16550_CLK		66000000
-+#define CFG_SYS_NS16550_COM1		0xbfe44000
-+#define CFG_SYS_NS16550_COM2		0xbfe48000
-+#define CFG_SYS_NS16550_COM3		0xbfe4c000
-+#define CFG_SYS_NS16550_COM4		0xbfe4c400
-+#define CFG_SYS_NS16550_COM5		0xbfe4c500
-+#define CFG_SYS_NS16550_COM6		0xbfe4c600
-+#endif
-+
-+#define CFG_MALLOC_F_ADDR		0x80100000	/* FIXME: find a proper place */
-+#define CFG_SYS_UBOOT_BASE		0xbd000000
-+
-+#endif
-+
-+/* Serial common */
-+#define CFG_SYS_BAUDRATE_TABLE	{ 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600 }
-+
-+#endif /* __CONFIG_LS1C300_H__ */
--- 
-2.43.0
-
+On Fri, 3 Apr 2026 at 07:26, Paul HENRYS <paul.henrys_ext@softathome.com> wrote:
+>
+> Hi Simon,
+>
+> My apologies. I actually sent the wrong patch and in principle it was
+> also sent to the mailing list but this first version should be discarded
+> and the second version reviewed. Unfortunately, when I sent the patch
+> version 2, I forgot to add the reference of the first patch series...
+> The second version of this patch series is
+> https://patchwork.ozlabs.org/project/uboot/patch/20260331080636.380507-2-paul.henrys_ext@softathome.com/.
+> Sorry again for the mess...
+>
+> Kind regards,
+> Paul
+>
+> On 03/04/2026 15:18, Simon Glass wrote:
+> > Hi Paul,
+> >
+> > Can you please send this to the mailing list too?
+> >
+> > Regards,
+> > Simon
+> >
+> > On Mon, 30 Mar 2026 at 08:19, Paul HENRYS
+> > <paul.henrys_ext@softathome.com> wrote:
+> >> Do not try to detect standalone python modules at the top level, so setuptools
+> >> stops searching for: command, terminal, ... as independent modules and instead
+> >> relies on package discovery.
+> >>
+> >> Steps to reproduce the issue without the patch:
+> >>
+> >> git clone https://source.denx.de/u-boot/u-boot.git
+> >> cd u-boot
+> >> python3 -m venv myenv
+> >> source myenv/bin/activate
+> >> pip3 install tools/u_boot_pylib/
+> >> ...
+> >> error: Multiple top-level modules discovered in a flat-layout: ['command', 'terminal', 'test_util', 'tout', 'cros_subprocess', 'tools', 'gitutil'].
+> >>
+> >> Paul HENRYS:
+> >>    tools: u_boot_pylib: disable standalone module detection
+> >>
+> >>   tools/u_boot_pylib/pyproject.toml | 3 +++
+> >>   1 file changed, 3 insertions(+)
+> >>
+> >> --
+> >> 2.43.0
+> >>
