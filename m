@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 010DED73087
-	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 02:25:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E08ED73086
+	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 02:26:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0E5F840B0;
-	Fri,  3 Apr 2026 04:25:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 165EE8412A;
+	Fri,  3 Apr 2026 04:25:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="kMfzrgOn";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="i8EaeASr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAF4C83D8A; Fri,  3 Apr 2026 04:25:50 +0200 (CEST)
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazlp170120007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c101::7])
+ id 7614384106; Fri,  3 Apr 2026 04:25:52 +0200 (CEST)
+Received: from SA9PR02CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170130001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10c::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B52583D8A
- for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 04:25:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CF2883693
+ for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 04:25:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eylV6vTH1rlYKXowmrECfTtxG94DafupiXC3RBMc1CEAY4xMyrDD4CxF9+ILsq5OO1G47TyyZ51GdoS5lNrZvxgkDHVE1giLnYCSsv96I7maKyBj3LHV0XGCz5+uhWWVrvc+K6dJ/ekiYJSyz1RwraX+jjB8Vowv2QQ/ajEjT5CDp3Rj4/dGJX7fxam+nKNCOFpGaoqw/Tdl2AMlM26vAIIAfsFhc0Io9j8C+Zrr4ght5y3vgUEJQvZ/mYkTs5vIITj1roraJr43dKbG8IXF5VoMFHSmZ50vPU7rOFh3zno/5dQaWGldN8mCehCPcIKzagQ8lIO2oNyqV430V8cS+A==
+ b=CO9kx4t9rx6duPuMyDUArA/BPXI19TpzZs8ImFH3qag5NMqpxLniUqWGWSWj+D5qTGFUB8LEs+sTC7F4EIjtwVMgRSJnxFWAnFoHiJkB4kGMgcZmuY1kivsbtF5qusdLpW6LNfbZ/FUqpKY8BDp4M2bMuPcK6BOjzfZzJ4DGEUEqv/JZJgdFwLxGXw6GJdWwHZ6wYTHXFV7HFT2NrNbC8L6x0C9PW0YAyNrW6M1iPYLYWelF7K0Cmm3XB/0WTYnLQiFB6+RBt5GMimsJt2Rrvc/Gt3GNr9RkmIR937VrnfTa45fFrsS/D2dB9NnTeHUINRwylE9DG2CQSyKqhwSa3w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xTr8MgYKfxtqokDFzQ/Tqr2L38u7QjtEQKTEB+/Bxt4=;
- b=a7WrQADrHONG5YBpxyjbILMZFma6FdhKdYEwmOiHr4Rwrj/bGa0enMIDZCMUt9uFwDra3nc1hzoRma6t0SACqvoHQWg+KbOIZd7T8IHe8hHgDvrfTpNvhlTiv00YYCm4CilmyCqFjMKmj2gp7U++ob/ekbLipe81SyXr8lVZ8/mq8pAE3SkKwZznPrrq8fFXcOI7Mcb2oxzURP3aDBlEb2OuAjtDZjf51Kg6loWnCJI132Os3gqI0auzHBmPenYTItQ6vx7KaVttk7YAUhzkMkww4E48zIo1RMcTs7hgTpzqRJmK/a2GaYp7Zx09G9HDGF0OFZKq3gyZkgHnXVh6rA==
+ bh=G9pKPs55n0g9ZXv6WIFXpwj1brmkB7vuP59xWSfjVN0=;
+ b=k7nnOagZrDySokvl4XcWnkdSL20qpS1+mYQichE8RU2NAtGrffKQXBZbg2VLKkX7OalNstCk7wMMAX0DJNllJbTFjNk0Or0kKsQJoErtBXCZQ5xzY6Xp5cREt6IhRiMMjIYqz7quhDL/iJQTD2OfJfOGVOA42xefE9f8F30+7VtPbxiMSBHzXRvqt8VbD8dj/TTWH9mfHvix1Yebk702Gy0ZHzVQ3KjcviGNI9CbRNLuv/O22eHAzp7pUVx+x7UYjugN47UJu+h84jexEfiBaJmQNTKO8z3SIT7NNstRAqGKRGuIl17DSNWPacLqsWkdse9qVBTvVpo4aOZ3ACxadA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xTr8MgYKfxtqokDFzQ/Tqr2L38u7QjtEQKTEB+/Bxt4=;
- b=kMfzrgOnHIvuvPX+bapzFmptpCsSm5c9CgXDYWOJQOQEuZL9UomAOHDIBr5qio7yFU7pzK+R5nWmHZUFjC8we0TwzivUutl7CNvXWU5k0/NXxp5PAh+IT5RcKnPf/+sBI59I7IGuNBibRKGC/jnjGm9QtKJm75RehxntyUfYD89YAd93NCbw+Y13KxipJVtHlPOzAeGHIruuNi8i11igRCNp+ngKDL+jlUD/5NtCch+4ZeFyozqu3DWXK7MmTLW4QlLeX+01YY8vCkErtRof2aVBW4cl1TxUmoweOkxGLPtXJCC4s6QLkhpF6+KU9xM6nNB8GUYM7XgGGtCYUV+GdQ==
+ bh=G9pKPs55n0g9ZXv6WIFXpwj1brmkB7vuP59xWSfjVN0=;
+ b=i8EaeASrzhAPlEbKG/a3cJ7fgw6kSXb7D8h2kLvkhbStmlud/nH+MG0epCqk/HxQ1ZbSPqVFLGveGyfvvR/WbxBS/zfvoxCTDYJqcCcQtjTlLST+UQ8Pasmbav2DTjCVDvT3MZ7TypWbbxA4yxpehGR1S/QLGJ8dGBOEdBrbFwCCohlDa1naYb+ZodGFfNtXLS0W8utSW/tKSSPbN0+dFsPCTmsyhdTdrXas9NwqvcPNNzXhqaY0xIhXj5qbbM+AqWT39ysuwMg9KM9L1eH6josLQZgZeaYdXmfMNqY2c3ZIxK32utExS8KGLQztyZrIzXSCMXfteJPow2MSFHf9Kg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
  by SJ0PR03MB5421.namprd03.prod.outlook.com (2603:10b6:a03:289::7)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.18; Fri, 3 Apr
- 2026 02:25:45 +0000
+ 2026 02:25:46 +0000
 Received: from PH7PR03MB7063.namprd03.prod.outlook.com
  ([fe80::f6cf:4203:1cbc:cd21]) by PH7PR03MB7063.namprd03.prod.outlook.com
  ([fe80::f6cf:4203:1cbc:cd21%4]) with mapi id 15.20.9745.025; Fri, 3 Apr 2026
- 02:25:45 +0000
+ 02:25:46 +0000
 From: alif.zakuan.yuslaimi@altera.com
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
@@ -61,10 +61,10 @@ Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
  Lukasz Majewski <lukma@denx.de>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
  Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-Subject: [PATCH v1 1/9] arch: arm: dts: stratix10: Switch to using upstream
- Linux DT config
-Date: Thu,  2 Apr 2026 19:25:05 -0700
-Message-ID: <20260403022513.9446-2-alif.zakuan.yuslaimi@altera.com>
+Subject: [PATCH v1 2/9] configs: stratix10: Combine defconfig for all boot
+ flashes
+Date: Thu,  2 Apr 2026 19:25:06 -0700
+Message-ID: <20260403022513.9446-3-alif.zakuan.yuslaimi@altera.com>
 X-Mailer: git-send-email 2.43.7
 In-Reply-To: <20260403022513.9446-1-alif.zakuan.yuslaimi@altera.com>
 References: <20260403022513.9446-1-alif.zakuan.yuslaimi@altera.com>
@@ -76,57 +76,57 @@ X-ClientProxiedBy: SJ0PR03CA0001.namprd03.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|SJ0PR03MB5421:EE_
-X-MS-Office365-Filtering-Correlation-Id: ee91a907-26a6-4c4c-87fe-08de91284f64
+X-MS-Office365-Filtering-Correlation-Id: 52a19ed3-3a8e-4663-5adf-08de91284ff5
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|366016|13003099007|56012099003|18002099003|22082099003|55112099003;
-X-Microsoft-Antispam-Message-Info: X7AkYKHS3X+GMDQ5CYYcwf/iXOa8ov2nbbUQQj+SPzKpUgGo12XsJHj+JOAtFclSBOoU/4ZSz+rjXWgS3jixNWB5o6nwYXyXHtEXnqGqJa5c6qlXhVLUDKP1c3bjnSqp6ERUnO69TD6EGIdb6kY2n+z+2lGDvF+8vnQcQxHUdn031JOceSER0iX0bjntATs27/vb4P46GEto/9y4oNJX7Q3RA9GRIoI9H4/qnToTSD4pYP0rFkJy8uEzhckg33Du51nyUfGuE1S/MIirU+yJyO1KUY/UCnm06IO/IPejGIn8rdRDvRc0kPcJjNUpMjQmlVup/4nRF8EXrXyt+HKAyLNbIFwLByiAHusVPv454KExogh2w0p3qrncPazDBKqh21S+HE17YuCed9upfchRtwIFRQJd9kNV9Df4oiwI6Hj5my4Nm6b1BXxRg2FopPVvDMoWehujpftac9ilHAOD6TLNoHUnVSNT8ahBIu+3e1rTme8Hm+k8uTDO7cp1yakEbeaO/nKRg9rKGXRg8aXqzZrTHbEyskzExZgIJ7k6F1nZBj4kUzojobkkkstLHsUSxkZc2n3rLpvoTtY8heKtyncodDIaFo2XbSLVN6Dv7ZwbEVhSKVUizV5Hf+UAt49DQbCQcQy99KQ9GpOohQbwJj8cLBUCO8HZnbrRtD5mfetps2nLI58i+2XDH73DW/cw
+ ARA:13230040|1800799024|376014|366016|56012099003|18002099003|22082099003|55112099003;
+X-Microsoft-Antispam-Message-Info: NK5zvWCjGqJ4Kx0mEGbWOYYkKH96CAyM9Qy/VxDqPtapswufO3LIIvRAlAyPEoxe4Ku9u8xbh6dMdVCDR4a56aUETpFAUAdi9KqGsfB/LgErvZyPAZJ45NoSTafrotSwE87wFEiRkNUlw/1P4UecGouZgTS4J6NlqwlZ2n4fzF3l3OGvuIcoY9uKPvq2fVZAA354g2Zmr+8RwYCx79KPgt/jQzJmzqWpB57fqPn/WLLqDeJPGQ0uybqLaEuNBICOWLILH62fELkagDm82pT9/WmDErR3Kt48fpWFRsEaD/+sSy+wbfauEM2V74VWl9AewbRmFY9Fc/KVskEklGKWIWyFcQ49iqWnhbHPlEQ1o/DtG2aks7WLHeAtDwVBq+E86P7xCOS47dBQIRH7LANRCxpLFQJYJ03Iufjt5ycdQ5NvBiY/RdJXpmRQcUiZ3atPW+NWPHddpn3f6TcgjlCWgBSl4isENwfT4HsXhlYfWxas4aHj9vrpBGnhiv7b1Kq956dsWUHDU9gvoJBQjeAoH7892VcejWpb/xyknC7QUk+yMjyF7I456ahDz3XYC0hPCLazhVNPnLO2UnnOpZgDUMwBw/GvS4l0P1w80sOrPeCpEdPCo7Skc03GS7bb5yZ6CFUtwA5W8N6kn+iPBDFl+eIEIMOt2yPCLM/8Q0p+gdTAu6ezSsOwy2s79EG++aerJSC8PTP/HYQ8DjikhHsb0c1agWwexuIHSmXquGZ/f7c=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(13003099007)(56012099003)(18002099003)(22082099003)(55112099003);
+ SFS:(13230040)(1800799024)(376014)(366016)(56012099003)(18002099003)(22082099003)(55112099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?iC8DxHIaH9UDdv/8eOR6hNjWZnLYazMDR27kNRdDfoms/aK7B5Rc1hZ8rWZE?=
- =?us-ascii?Q?2rvXSVYHgwXHCiNDoWV/OkEd25K1yQt6KyBpRyjKGeqXKw5cYCJlnLoi+ZPL?=
- =?us-ascii?Q?5M3DJAnOAULemTqpwBC4lYDB2uz/CmKNHY7lhYXyn3rqH6xfxYlaRfFjtE0M?=
- =?us-ascii?Q?TuPmy37fAfJEXJ/zcFQjssBv36sp9UacHi5RmQTr8BlXcFFv2Q0KOk7kfne5?=
- =?us-ascii?Q?CdfH6CE6pQhRTV1PcpMMFsGCy7/f58+6gldcJe6IXohtoOXprBcyKzGKqWob?=
- =?us-ascii?Q?FTnlJwlfla8RHinYvQoVtguC7vALdhr5SNv717TNpVmH/DrZRHwb6qXqksir?=
- =?us-ascii?Q?9D67llJb7Y5vsCcHJqcEp2wsUCQ1dPYHmZjMoZqNhBHH+hMSEtVifNQeXG66?=
- =?us-ascii?Q?eHlE+h7tGtrMvLONMDbWQ7OYCawJ6ftt4G4svb6nWIs3oxEdKg63w1i2Eep3?=
- =?us-ascii?Q?hQ7KS+Ncraz3nFlxtXRxvRIsO95Rx+ZzKP3vwh0M8XnANQ1zV2eurm45IvXk?=
- =?us-ascii?Q?dvDNHad37Akc0krPc8e3iSPivCTcjFZc27WCalcYstuEUMbzUbx+pbLQa4YR?=
- =?us-ascii?Q?fdPFR/F8O6ZI8MFez3qt4MqD6eeovZbrhFdy2DwHuC5GYKaGV3Vdfrk68/nM?=
- =?us-ascii?Q?/4AnEIVL6/9mOb3v1JUe+39w2fV4Y3JAlrsKEVjmgyJYg5xt2oWSo/Jz3wmK?=
- =?us-ascii?Q?2n+Nn7z4/nQF6RoWKUmU0m859MenH/Ok/j+V5rbDGK2GHQD445KUbUg/Ei/7?=
- =?us-ascii?Q?ZWmPMwxKEfjCcwCEyBJEXWlG1rNXyCxC8+XXxEtGU3Ejr3LcaU+KBnV92u1I?=
- =?us-ascii?Q?rvG+g0QbG/zVYH8zI+syzfqBu3io9hleT/4Dc5NBUCSEMVnmrW11KwRirJvy?=
- =?us-ascii?Q?vlIWi+JJTcMiUNm86Qi55VPA+BRNQDopDyAUDYS0s/mN+VLb7TLS2nq7bDER?=
- =?us-ascii?Q?mOoOMYiIBDxI2afxNa3vYMlVQpCOlyR/NVQ/lX9HKG8QeXQRVoKRz8xNXuqA?=
- =?us-ascii?Q?gVKSBahGFk7jTbQrgoIzVCqojkL8WBPIoNx3myilXEbFcROuslYVl2RtT6/g?=
- =?us-ascii?Q?WGa9VxvkPZXOLymZU/ojEwaryLwszD7jK0VhgUhviMquzG27uAcJUeZNx+n5?=
- =?us-ascii?Q?EclLo/HOLl0m5aMCIbVVRkyP+tMGnEoMKjw2PPGne5cNTVLeOmGPlf6iVxgD?=
- =?us-ascii?Q?ptvj6E8mlrsJOYNHrnOyJdS1QCGqcpI2rLGqQnEfSIkJ/le0tfKPM72bHvMA?=
- =?us-ascii?Q?w9p1aCO4TNFy3uhyKXyGXODPLVxs4VdZt72BrdbV4CjXXbULynUTYE7JGagn?=
- =?us-ascii?Q?p/LkWXQRKzGYBCpHZpYCpI2RXHkPDiUMSXceLMIz7X111Sktll/JOnfGL735?=
- =?us-ascii?Q?O3TAvcialz9wWySOGORXXz4nOH3pYqmo5wAdRBeX0861tXWHrvZPsVT0DC/r?=
- =?us-ascii?Q?LjX9PLqqceQLu4X5rCA3NmO2Vee9fLNKyETdYuiddHQATg8d5dLhfLZk+WlS?=
- =?us-ascii?Q?TwaCvwwM9NhCsJlEjMon8AyilxMbivnSMgvTzzhvsXH9LJ+auPgQGz2wejJ+?=
- =?us-ascii?Q?Fxpey8K9CsvzwxznMgwtAjXvv8kgb6D+98LkZteopnSMYTc8rEdy1T/obkcW?=
- =?us-ascii?Q?O+zRd6FF8BRfYmS4+z75vwvcC4IAr0lR1dE287cH5Pe314jCf4V7O17u48Wb?=
- =?us-ascii?Q?RbekFMQY0D0KhPozlt3A9ruF3ebaKH2BJktGYcJq4OzEcra3wMPt8a7g5zgJ?=
- =?us-ascii?Q?iwShZALgYQslx61+XN1UvDnNOr8Mfdo=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?tFeX5y7bBr0k7TJWDVMwbkzz4QRbADZiPa6UmGzQjH5fyM5pOgL4n9rdx/DM?=
+ =?us-ascii?Q?5cID5BDQYrojN8ZZlIJoIHhaHmN1Di5qBi7/RNyZcbzH3xwLh/UcDX+FQ8rT?=
+ =?us-ascii?Q?tuqZ5qIEYVzxwVXUycQHdSy4/K8r+oTh3PQ3yWOFNhLzBtfVW1H/YE0ZIuJw?=
+ =?us-ascii?Q?CW/ubzNLrKwxWnRFPp+Qb0a5+yF4tOXT1RUgXk1FdrbmeIpGC5POUc3TUCGx?=
+ =?us-ascii?Q?BnK4lErbEVdYS6FPkC0vyRENic5Xx1o0uc/I72aEyuXUPMNKPBduB0CKiu+G?=
+ =?us-ascii?Q?0YxN4gV9rzBIboyYFv22iZezQAvW5wVbEQTGQ5P+KulDkZHhgx1so1s6KFRq?=
+ =?us-ascii?Q?gHOR76cf69NgsrYDY+9b+/4O5kIGZKpHtvggVxCJBoAeI1/48mq3wBAfyj71?=
+ =?us-ascii?Q?rQFiy8lx2L+cIWE505wjQsnykPH4x+IekTcLkO/IEdkiAA8McuknaphQ/yE9?=
+ =?us-ascii?Q?Hh4cSMxwLsoNtofCFGwkTV3Ar8GI/7GxecorKl6pXknTLGVOoKePyo/to3HY?=
+ =?us-ascii?Q?Iyvn1VDOhy2K+oXeLvGGz05SG0bkm7q6ihPzFQJLDP7qHcjC4SWTgf72oCRg?=
+ =?us-ascii?Q?Vid2wyki4feUqrjGEogGTLR78JHsZzDr1cVjUex2bAm65r1t7SF+IBzfRQPc?=
+ =?us-ascii?Q?nYMAZNiPjbIX/6RI5j1zGQ1rzXAw24k+La5Js6t6YypOYxTLNMsO1h1qjWfD?=
+ =?us-ascii?Q?jjsxb3sZLKq4g6S2GInOY3yk42xpjcp/+48UOol92g/AcOTHcy0PjjlAVOTo?=
+ =?us-ascii?Q?wbD6N4OS8J33XD3QNgH4tmZqbGuQLSGXKhdBaksdzQt+ewrg0Fn5Z+l/om79?=
+ =?us-ascii?Q?XhjbdiIpnD6vugp6le+7GW+hiz/GDodQrc8G1+pZM6moVkTyDOHLEP1oUenP?=
+ =?us-ascii?Q?+BR8FrhKvz3mUjPEPAvLrzCLBZmgVak+eeXO3LAIGVmx6Q1F1H0UTyiDr5DC?=
+ =?us-ascii?Q?mPCStlQfowvhx4+W9DOeRDfU1X2bFXPqlU96yRQdXMmIcsymyQWCZ5fZ1K4E?=
+ =?us-ascii?Q?7lokcYTIkmhLLnMLNOX3IOPFuzH4RFFmP8DPalf8Kp5b9yDGbV6djXENv1DF?=
+ =?us-ascii?Q?dHQje9ms0zfhcdBuXdCJeRPZ5mJ+PdihjaMzdqbgcUyF60W/0+5XtvRLotA4?=
+ =?us-ascii?Q?91VGon52vFYS1BmBSpPtW6rYZ/uS/KNrjWBmzFya1PCHUW3fcXK0KEFh3bws?=
+ =?us-ascii?Q?vij5IE+W3yebMfcWrAg1rBMkktD2XY7kfH1MxleIv6rccQI9upr2HBnvD2WU?=
+ =?us-ascii?Q?/QJPw41ccLx17yKr41V5Im6e7dtjXr+F/B6lotuqs9OpVL7yOcZTtxZHdOg1?=
+ =?us-ascii?Q?hx+xU+n7jRKep4vD+7QqnBDnTz8ydWeKdG7nI3Y3lJ9Gm4H4PeYJdgDZI1KE?=
+ =?us-ascii?Q?g601qrSMTBsGV5LfbXo8vArio9P0PowQaV1VBI1zHRVekjvC9nIh9oMv73s1?=
+ =?us-ascii?Q?SpScOS1Q1ATryQLPr1gU9DrUg7rhuub0v22kZb0mDGkpziBFYdqyArEa2QJ3?=
+ =?us-ascii?Q?FVBF9fc+ey8GYUtAdbrvItAB54nWN2udz4DVQl7Qu0CuvRieHMOts8B3Nrqs?=
+ =?us-ascii?Q?rk9YCI7eL8lrC0oG0Lc6XYFWWb2yaukwKh75gGcD3wu2s98rmXKii4a1+wDL?=
+ =?us-ascii?Q?MMhphtGif4zwotSTkyGFdxPLyPwFMB/dT5bFX1B6iWd6HpILSKpxmTHYEV6A?=
+ =?us-ascii?Q?FgrmDxm+3C7sns2EWWtLcl/trqouQtM7Ho46JvYkgH5+xCcLq6F8VL6e0mW0?=
+ =?us-ascii?Q?AkDzz7MQjVptVQXtMuJa1suWPm2wx54=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ee91a907-26a6-4c4c-87fe-08de91284f64
+X-MS-Exchange-CrossTenant-Network-Message-Id: 52a19ed3-3a8e-4663-5adf-08de91284ff5
 X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2026 02:25:45.3247 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2026 02:25:46.2008 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cGnPWQ71yYfZt+jIePhRohR8DkuzHWxR+AOS82/cJLBD3ix7ytCS5xJyGVdLw6qRORKg8OgxW1osIb7WIeVWwlnedjUvTuCcT/G2EpaHYhc=
+X-MS-Exchange-CrossTenant-UserPrincipalName: c76XSjQoVR2VhGUwTMvO2xMFdQglZVWw2PpNlgPvLM5ns2eGf6M9MIq1pvops5EsSAG08SsddBsdUuMHKZaA0Rh4ptGLfVHwIhnzntJoB/o=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB5421
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -146,994 +146,272 @@ X-Virus-Status: Clean
 
 From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 
-Migrate the legacy Stratix10 platform to use the upstream Linux device tree
-configuration. This helps reduce maintenance overhead and aligns U-Boot
-with the Linux kernel's DTS hierarchy and naming conventions.
+Combine all MMC and QSPI configs into single defconfig which is named
+as "socfpga_stratix10_defconfig". This will be the default defconfig to
+use.
 
-This change improves consistency between U-Boot and Linux by removing
-custom/legacy DTS handling and instead relying on the standardized
-definitions provided by the upstream Linux DTS.
+This will support booting from all three flashes using ARM Trusted Firmware
+(ATF) as the secure runtime monitor.
 
 Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-
-# Conflicts:
-#	configs/socfpga_stratix10_defconfig
 ---
- arch/arm/dts/Makefile                         |   3 +-
- arch/arm/dts/socfpga_stratix10-u-boot.dtsi    | 158 +++++++
- arch/arm/dts/socfpga_stratix10.dtsi           | 430 ------------------
- .../dts/socfpga_stratix10_socdk-u-boot.dtsi   | 149 +++++-
- arch/arm/dts/socfpga_stratix10_socdk.dts      | 143 ------
- configs/socfpga_stratix10_defconfig           |   3 +-
- 6 files changed, 292 insertions(+), 594 deletions(-)
- delete mode 100644 arch/arm/dts/socfpga_stratix10.dtsi
- delete mode 100644 arch/arm/dts/socfpga_stratix10_socdk.dts
+ configs/socfpga_stratix10_atf_defconfig | 90 ----------------------
+ configs/socfpga_stratix10_defconfig     | 99 +++++++++++++++----------
+ 2 files changed, 58 insertions(+), 131 deletions(-)
+ delete mode 100644 configs/socfpga_stratix10_atf_defconfig
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index d90e02ca4e5..91da88481fa 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -460,8 +460,7 @@ dtb-$(CONFIG_ARCH_SOCFPGA) +=				\
- 	socfpga_cyclone5_vining_fpga.dtb		\
- 	socfpga_cyclone5_ac501soc.dtb			\
- 	socfpga_cyclone5_ac550soc.dtb			\
--	socfpga_n5x_socdk.dtb				\
--	socfpga_stratix10_socdk.dtb
-+	socfpga_n5x_socdk.dtb
- 
- dtb-$(CONFIG_TARGET_DRA7XX_EVM) += dra72-evm.dtb dra7-evm.dtb	\
- 	dra72-evm-revc.dtb dra71-evm.dtb dra76-evm.dtb
-diff --git a/arch/arm/dts/socfpga_stratix10-u-boot.dtsi b/arch/arm/dts/socfpga_stratix10-u-boot.dtsi
-index 3e3a3780469..a3b4c0564f9 100644
---- a/arch/arm/dts/socfpga_stratix10-u-boot.dtsi
-+++ b/arch/arm/dts/socfpga_stratix10-u-boot.dtsi
-@@ -3,6 +3,164 @@
-  * U-Boot additions
-  *
-  * Copyright (C) 2020 Intel Corporation <www.intel.com>
-+ * Copyright (C) 2026 Altera Corporation <www.altera.com>
-  */
- 
- #include "socfpga_soc64_fit-u-boot.dtsi"
-+
-+/{
-+	aliases {
-+		spi0 = &qspi;
-+		i2c0 = &i2c1;
-+		freeze_br0 = &freeze_controller;
-+	};
-+
-+	memory@0 {
-+		device_type = "memory";
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		bootph-all;
-+	};
-+
-+	pmu {
-+		compatible = "arm,armv8-pmuv3";
-+	};
-+
-+	soc@0 {
-+		bootph-all;
-+
-+		freeze_controller: freeze_controller@f9000450 {
-+			compatible = "altr,freeze-bridge-controller";
-+			reg = <0xf9000450 0x00000010>;
-+			status = "disabled";
-+		};
-+	};
-+};
-+
-+&clkmgr {
-+	bootph-all;
-+};
-+
-+&gmac0 {
-+	compatible = "altr,socfpga-stmmac", "snps,dwmac-3.74a", "snps,dwmac";
-+	reset-names = "stmmaceth", "stmmaceth-ocp";
-+	clocks = <&clkmgr STRATIX10_EMAC0_CLK>;
-+	clock-names = "stmmaceth";
-+	/* PHY delays is configured via skew properties */
-+	phy-mode = "rgmii";
-+	max-frame-size = <3800>;
-+	status = "okay";
-+
-+	mdio0 {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+		compatible = "snps,dwmac-mdio";
-+	};
-+};
-+
-+&gmac1 {
-+	compatible = "altr,socfpga-stmmac", "snps,dwmac-3.74a", "snps,dwmac";
-+	reset-names = "stmmaceth", "stmmaceth-ocp";
-+	altr,sysmgr-syscon = <&sysmgr 0x48 0>;
-+	clocks = <&clkmgr STRATIX10_EMAC1_CLK>;
-+	clock-names = "stmmaceth";
-+	status = "disabled";
-+};
-+
-+&gmac2 {
-+	compatible = "altr,socfpga-stmmac", "snps,dwmac-3.74a", "snps,dwmac";
-+	reset-names = "stmmaceth", "stmmaceth-ocp";
-+	altr,sysmgr-syscon = <&sysmgr 0x4c 0>;
-+	clocks = <&clkmgr STRATIX10_EMAC2_CLK>;
-+	clock-names = "stmmaceth";
-+	status = "disabled";
-+};
-+
-+&i2c0 {
-+	reset-names = "i2c";
-+};
-+
-+&i2c1 {
-+	reset-names = "i2c";
-+	status = "okay";
-+};
-+
-+&i2c2 {
-+	reset-names = "i2c";
-+};
-+
-+&i2c3 {
-+	reset-names = "i2c";
-+};
-+
-+&mmc {
-+	resets = <&rst SDMMC_RESET>, <&rst SDMMC_OCP_RESET>;
-+	fifo-mode;
-+};
-+
-+&porta {
-+	bank-name = "porta";
-+};
-+
-+&portb {
-+	bank-name = "portb";
-+};
-+
-+&qspi {
-+	bootph-all;
-+	compatible = "cdns,qspi-nor";
-+	flash0: flash@0 {
-+	};
-+};
-+
-+&flash0 {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+	compatible = "jedec,spi-nor";
-+};
-+
-+&rst {
-+	compatible = "altr,rst-mgr";
-+	altr,modrst-offset = <0x20>;
-+	bootph-all;
-+};
-+
-+&sdr {
-+	compatible = "altr,sdr-ctl-s10";
-+	reg = <0xf8000400 0x80>,
-+	      <0xf8010000 0x190>,
-+	      <0xf8011000 0x500>;
-+	resets = <&rst DDRSCH_RESET>;
-+	bootph-all;
-+};
-+
-+&uart0 {
-+	bootph-all;
-+	clock-frequency = <100000000>;
-+};
-+
-+&watchdog0 {
-+	bootph-all;
-+};
-+
-+&usb0 {
-+	compatible = "snps,dwc2";
-+};
-+
-+&usb1 {
-+	compatible = "snps,dwc2";
-+};
-+
-+&spi0 {
-+	compatible = "intel,stratix10-spi",
-+		     "snps,dw-apb-ssi-4.00a", "snps,dw-apb-ssi";
-+};
-+
-+&spi1 {
-+	compatible = "intel,stratix10-spi",
-+		     "snps,dw-apb-ssi-4.00a", "snps,dw-apb-ssi";
-+};
-+
-+&binman {
-+	/delete-node/ kernel;
-+};
-diff --git a/arch/arm/dts/socfpga_stratix10.dtsi b/arch/arm/dts/socfpga_stratix10.dtsi
+diff --git a/configs/socfpga_stratix10_atf_defconfig b/configs/socfpga_stratix10_atf_defconfig
 deleted file mode 100644
-index ea80d1bed15..00000000000
---- a/arch/arm/dts/socfpga_stratix10.dtsi
+index 206343885d9..00000000000
+--- a/configs/socfpga_stratix10_atf_defconfig
 +++ /dev/null
-@@ -1,430 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0
--/*
-- * Copyright (C) 2018 Intel Corporation
-- */
--
--/dts-v1/;
--#include <dt-bindings/reset/altr,rst-mgr-s10.h>
--#include <dt-bindings/gpio/gpio.h>
--
--/ {
--	compatible = "altr,socfpga-stratix10";
--	#address-cells = <2>;
--	#size-cells = <2>;
--
--	cpus {
--		#address-cells = <1>;
--		#size-cells = <0>;
--
--		cpu0: cpu@0 {
--			compatible = "arm,cortex-a53", "arm,armv8";
--			device_type = "cpu";
--			enable-method = "psci";
--			reg = <0x0>;
--		};
--
--		cpu1: cpu@1 {
--			compatible = "arm,cortex-a53", "arm,armv8";
--			device_type = "cpu";
--			enable-method = "psci";
--			reg = <0x1>;
--		};
--
--		cpu2: cpu@2 {
--			compatible = "arm,cortex-a53", "arm,armv8";
--			device_type = "cpu";
--			enable-method = "psci";
--			reg = <0x2>;
--		};
--
--		cpu3: cpu@3 {
--			compatible = "arm,cortex-a53", "arm,armv8";
--			device_type = "cpu";
--			enable-method = "psci";
--			reg = <0x3>;
--		};
--	};
--
--	pmu {
--		compatible = "arm,armv8-pmuv3";
--		interrupts = <0 120 8>,
--			     <0 121 8>,
--			     <0 122 8>,
--			     <0 123 8>;
--		interrupt-affinity = <&cpu0>,
--				     <&cpu1>,
--				     <&cpu2>,
--				     <&cpu3>;
--		interrupt-parent = <&intc>;
--	};
--
--	psci {
--		compatible = "arm,psci-0.2";
--		method = "smc";
--	};
--
--	intc: intc@fffc1000 {
--		compatible = "arm,gic-400", "arm,cortex-a15-gic";
--		#interrupt-cells = <3>;
--		interrupt-controller;
--		reg = <0x0 0xfffc1000 0x0 0x1000>,
--		      <0x0 0xfffc2000 0x0 0x2000>,
--		      <0x0 0xfffc4000 0x0 0x2000>,
--		      <0x0 0xfffc6000 0x0 0x2000>;
--	};
--
--	soc {
--		#address-cells = <1>;
--		#size-cells = <1>;
--		compatible = "simple-bus";
--		device_type = "soc";
--		interrupt-parent = <&intc>;
--		ranges = <0 0 0 0xffffffff>;
--		bootph-all;
--
--		clkmgr: clkmgr@ffd10000 {
--			compatible = "altr,clk-mgr";
--			reg = <0xffd10000 0x1000>;
--		};
--
--		gmac0: ethernet@ff800000 {
--			compatible = "altr,socfpga-stmmac", "snps,dwmac-3.74a", "snps,dwmac";
--			reg = <0xff800000 0x2000>;
--			interrupts = <0 90 4>;
--			interrupt-names = "macirq";
--			mac-address = [00 00 00 00 00 00];
--			resets = <&rst EMAC0_RESET>, <&rst EMAC0_OCP_RESET>;
--			reset-names = "stmmaceth";
--			altr,sysmgr-syscon = <&sysmgr 0x44 0>;
--			status = "disabled";
--		};
--
--		gmac1: ethernet@ff802000 {
--			compatible = "altr,socfpga-stmmac", "snps,dwmac-3.74a", "snps,dwmac";
--			reg = <0xff802000 0x2000>;
--			interrupts = <0 91 4>;
--			interrupt-names = "macirq";
--			mac-address = [00 00 00 00 00 00];
--			resets = <&rst EMAC1_RESET>, <&rst EMAC1_OCP_RESET>;
--			reset-names = "stmmaceth";
--			altr,sysmgr-syscon = <&sysmgr 0x48 0>;
--			status = "disabled";
--		};
--
--		gmac2: ethernet@ff804000 {
--			compatible = "altr,socfpga-stmmac", "snps,dwmac-3.74a", "snps,dwmac";
--			reg = <0xff804000 0x2000>;
--			interrupts = <0 92 4>;
--			interrupt-names = "macirq";
--			mac-address = [00 00 00 00 00 00];
--			resets = <&rst EMAC2_RESET>, <&rst EMAC2_OCP_RESET>;
--			reset-names = "stmmaceth";
--			altr,sysmgr-syscon = <&sysmgr 0x4c 0>;
--			status = "disabled";
--		};
--
--		gpio0: gpio@ffc03200 {
--			#address-cells = <1>;
--			#size-cells = <0>;
--			compatible = "snps,dw-apb-gpio";
--			reg = <0xffc03200 0x100>;
--			resets = <&rst GPIO0_RESET>;
--			status = "disabled";
--
--			porta: gpio-controller@0 {
--				compatible = "snps,dw-apb-gpio-port";
--				gpio-controller;
--				#gpio-cells = <2>;
--				snps,nr-gpios = <24>;
--				reg = <0>;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				interrupts = <0 110 4>;
--				bank-name = "porta";
--			};
--		};
--
--		gpio1: gpio@ffc03300 {
--			#address-cells = <1>;
--			#size-cells = <0>;
--			compatible = "snps,dw-apb-gpio";
--			reg = <0xffc03300 0x100>;
--			resets = <&rst GPIO1_RESET>;
--			status = "disabled";
--
--			portb: gpio-controller@0 {
--				compatible = "snps,dw-apb-gpio-port";
--				gpio-controller;
--				#gpio-cells = <2>;
--				snps,nr-gpios = <24>;
--				reg = <0>;
--				interrupt-controller;
--				#interrupt-cells = <2>;
--				interrupts = <0 111 4>;
--				bank-name = "portb";
--			};
--		};
--
--		i2c0: i2c@ffc02800 {
--			#address-cells = <1>;
--			#size-cells = <0>;
--			compatible = "snps,designware-i2c";
--			reg = <0xffc02800 0x100>;
--			interrupts = <0 103 4>;
--			resets = <&rst I2C0_RESET>;
--			reset-names = "i2c";
--			status = "disabled";
--		};
--
--		i2c1: i2c@ffc02900 {
--			#address-cells = <1>;
--			#size-cells = <0>;
--			compatible = "snps,designware-i2c";
--			reg = <0xffc02900 0x100>;
--			interrupts = <0 104 4>;
--			resets = <&rst I2C1_RESET>;
--			reset-names = "i2c";
--			status = "disabled";
--		};
--
--		i2c2: i2c@ffc02a00 {
--			#address-cells = <1>;
--			#size-cells = <0>;
--			compatible = "snps,designware-i2c";
--			reg = <0xffc02a00 0x100>;
--			interrupts = <0 105 4>;
--			resets = <&rst I2C2_RESET>;
--			reset-names = "i2c";
--			status = "disabled";
--		};
--
--		i2c3: i2c@ffc02b00 {
--			#address-cells = <1>;
--			#size-cells = <0>;
--			compatible = "snps,designware-i2c";
--			reg = <0xffc02b00 0x100>;
--			interrupts = <0 106 4>;
--			resets = <&rst I2C3_RESET>;
--			reset-names = "i2c";
--			status = "disabled";
--		};
--
--		i2c4: i2c@ffc02c00 {
--			#address-cells = <1>;
--			#size-cells = <0>;
--			compatible = "snps,designware-i2c";
--			reg = <0xffc02c00 0x100>;
--			interrupts = <0 107 4>;
--			resets = <&rst I2C4_RESET>;
--			reset-names = "i2c";
--			status = "disabled";
--		};
--
--		mmc: dwmmc0@ff808000 {
--			#address-cells = <1>;
--			#size-cells = <0>;
--			compatible = "altr,socfpga-dw-mshc";
--			reg = <0xff808000 0x1000>;
--			interrupts = <0 96 4>;
--			fifo-depth = <0x400>;
--			resets = <&rst SDMMC_RESET>, <&rst SDMMC_OCP_RESET>;
--			bootph-all;
--			status = "disabled";
--		};
--
--		nand: nand@ffb90000 {
--			#address-cells = <1>;
--			#size-cells = <0>;
--			compatible = "altr,socfpga-denali-nand";
--			reg = <0xffb90000 0x10000>,
--			      <0xffb80000 0x1000>;
--			reg-names = "nand_data", "denali_reg";
--			interrupts = <0 97 4>;
--			resets = <&rst NAND_RESET>, <&rst NAND_OCP_RESET>;
--			status = "disabled";
--		};
--
--		ocram: sram@ffe00000 {
--			compatible = "mmio-sram";
--			reg = <0xffe00000 0x100000>;
--		};
--
--		qspi: spi@ff8d2000 {
--			compatible = "cdns,qspi-nor";
--			#address-cells = <1>;
--			#size-cells = <0>;
--			reg = <0xff8d2000 0x100>,
--			      <0xff900000 0x100000>;
--			interrupts = <0 3 4>;
--			cdns,fifo-depth = <128>;
--			cdns,fifo-width = <4>;
--			cdns,trigger-address = <0x00000000>;
--			status = "disabled";
--		};
--
--		rst: rstmgr@ffd11000 {
--			#reset-cells = <1>;
--			compatible = "altr,rst-mgr";
--			reg = <0xffd11000 0x1000>;
--			altr,modrst-offset = <0x20>;
--			bootph-all;
--		};
--
--		sdr: sdr@f8000400 {
--			 compatible = "altr,sdr-ctl-s10";
--			 reg = <0xf8000400 0x80>,
--			       <0xf8010000 0x190>,
--			       <0xf8011000 0x500>;
--			 resets = <&rst DDRSCH_RESET>;
--			 bootph-all;
--		 };
--
--		spi0: spi@ffda4000 {
--			compatible = "intel,stratix10-spi",
--				     "snps,dw-apb-ssi-4.00a", "snps,dw-apb-ssi";
--			#address-cells = <1>;
--			#size-cells = <0>;
--			reg = <0xffda4000 0x1000>;
--			interrupts = <0 99 4>;
--			resets = <&rst SPIM0_RESET>;
--			reg-io-width = <4>;
--			num-chipselect = <4>;
--			bus-num = <0>;
--			status = "disabled";
--		};
--
--		spi1: spi@ffda5000 {
--			compatible = "intel,stratix10-spi",
--				     "snps,dw-apb-ssi-4.00a", "snps,dw-apb-ssi";
--			#address-cells = <1>;
--			#size-cells = <0>;
--			reg = <0xffda5000 0x1000>;
--			interrupts = <0 100 4>;
--			resets = <&rst SPIM1_RESET>;
--			reg-io-width = <4>;
--			num-chipselect = <4>;
--			bus-num = <0>;
--			status = "disabled";
--		};
--
--		sysmgr: sysmgr@ffd12000 {
--			compatible = "altr,sys-mgr", "syscon";
--			reg = <0xffd12000 0x1000>;
--		};
--
--		/* Local timer */
--		timer {
--			compatible = "arm,armv8-timer";
--			interrupts = <1 13 0xf08>,
--				     <1 14 0xf08>,
--				     <1 11 0xf08>,
--				     <1 10 0xf08>;
--		};
--
--		timer0: timer0@ffc03000 {
--			compatible = "snps,dw-apb-timer";
--			interrupts = <0 113 4>;
--			reg = <0xffc03000 0x100>;
--		};
--
--		timer1: timer1@ffc03100 {
--			compatible = "snps,dw-apb-timer";
--			interrupts = <0 114 4>;
--			reg = <0xffc03100 0x100>;
--		};
--
--		timer2: timer2@ffd00000 {
--			compatible = "snps,dw-apb-timer";
--			interrupts = <0 115 4>;
--			reg = <0xffd00000 0x100>;
--		};
--
--		timer3: timer3@ffd00100 {
--			compatible = "snps,dw-apb-timer";
--			interrupts = <0 116 4>;
--			reg = <0xffd00100 0x100>;
--		};
--
--		uart0: serial0@ffc02000 {
--			compatible = "snps,dw-apb-uart";
--			reg = <0xffc02000 0x100>;
--			interrupts = <0 108 4>;
--			reg-shift = <2>;
--			reg-io-width = <4>;
--			resets = <&rst UART0_RESET>;
--			clock-frequency = <100000000>;
--			bootph-all;
--			status = "disabled";
--		};
--
--		uart1: serial1@ffc02100 {
--			compatible = "snps,dw-apb-uart";
--			reg = <0xffc02100 0x100>;
--			interrupts = <0 109 4>;
--			reg-shift = <2>;
--			reg-io-width = <4>;
--			resets = <&rst UART1_RESET>;
--			status = "disabled";
--		};
--
--		usbphy0: usbphy@0 {
--			#phy-cells = <0>;
--			compatible = "usb-nop-xceiv";
--			status = "okay";
--		};
--
--		usb0: usb@ffb00000 {
--			compatible = "snps,dwc2";
--			reg = <0xffb00000 0x40000>;
--			interrupts = <0 93 4>;
--			phys = <&usbphy0>;
--			phy-names = "usb2-phy";
--			resets = <&rst USB0_RESET>, <&rst USB0_OCP_RESET>;
--			reset-names = "dwc2", "dwc2-ecc";
--			status = "disabled";
--		};
--
--		usb1: usb@ffb40000 {
--			compatible = "snps,dwc2";
--			reg = <0xffb40000 0x40000>;
--			interrupts = <0 94 4>;
--			phys = <&usbphy0>;
--			phy-names = "usb2-phy";
--			resets = <&rst USB1_RESET>, <&rst USB1_OCP_RESET>;
--			reset-names = "dwc2", "dwc2-ecc";
--			status = "disabled";
--		};
--
--		watchdog0: watchdog@ffd00200 {
--			compatible = "snps,dw-wdt";
--			reg = <0xffd00200 0x100>;
--			interrupts = <0 117 4>;
--			resets = <&rst WATCHDOG0_RESET>;
--			status = "disabled";
--		};
--
--		watchdog1: watchdog@ffd00300 {
--			compatible = "snps,dw-wdt";
--			reg = <0xffd00300 0x100>;
--			interrupts = <0 118 4>;
--			resets = <&rst WATCHDOG1_RESET>;
--			status = "disabled";
--		};
--
--		watchdog2: watchdog@ffd00400 {
--			compatible = "snps,dw-wdt";
--			reg = <0xffd00400 0x100>;
--			interrupts = <0 125 4>;
--			resets = <&rst WATCHDOG2_RESET>;
--			status = "disabled";
--		};
--
--		watchdog3: watchdog@ffd00500 {
--			compatible = "snps,dw-wdt";
--			reg = <0xffd00500 0x100>;
--			interrupts = <0 126 4>;
--			resets = <&rst WATCHDOG3_RESET>;
--			status = "disabled";
--		};
--	};
--};
-diff --git a/arch/arm/dts/socfpga_stratix10_socdk-u-boot.dtsi b/arch/arm/dts/socfpga_stratix10_socdk-u-boot.dtsi
-index ef0df769762..bbe1a6e292a 100644
---- a/arch/arm/dts/socfpga_stratix10_socdk-u-boot.dtsi
-+++ b/arch/arm/dts/socfpga_stratix10_socdk-u-boot.dtsi
-@@ -3,47 +3,160 @@
-  * U-Boot additions
-  *
-  * Copyright (C) 2019-2022 Intel Corporation <www.intel.com>
-+ * Copyright (C) 2026 Altera Corporation <www.altera.com>
-  */
- 
- #include "socfpga_stratix10-u-boot.dtsi"
- 
- /{
--	aliases {
--		spi0 = &qspi;
--		freeze_br0 = &freeze_controller;
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+		u-boot,spl-boot-order = &mmc,&flash0,&nand;
- 	};
- 
--	soc {
--		freeze_controller: freeze_controller@f9000450 {
--			compatible = "altr,freeze-bridge-controller";
--			reg = <0xf9000450 0x00000010>;
--			status = "disabled";
-+	memory@0 {
-+		/* 4GB */
-+		reg = <0 0x00000000 0 0x80000000>,
-+		      <1 0x80000000 0 0x80000000>;
-+	};
-+};
-+
-+&qspi {
-+	status = "okay";
-+};
-+
-+&gmac0 {
-+	mdio0 {
-+		ethernet_phy0: ethernet-phy@0 {
-+			reg = <4>;
-+			txd0-skew-ps = <0>; /* -420ps */
-+			txd1-skew-ps = <0>; /* -420ps */
-+			txd2-skew-ps = <0>; /* -420ps */
-+			txd3-skew-ps = <0>; /* -420ps */
-+			rxd0-skew-ps = <420>; /* 0ps */
-+			rxd1-skew-ps = <420>; /* 0ps */
-+			rxd2-skew-ps = <420>; /* 0ps */
-+			rxd3-skew-ps = <420>; /* 0ps */
-+			txen-skew-ps = <0>; /* -420ps */
-+			txc-skew-ps = <900>; /* 0ps */
-+			rxdv-skew-ps = <420>; /* 0ps */
-+			rxc-skew-ps = <1680>; /* 780ps */
- 		};
- 	};
- };
- 
--&clkmgr {
-+&mmc {
-+	drvsel = <3>;
-+	smplsel = <2>;
- 	bootph-all;
- };
- 
- &qspi {
--	status = "okay";
--	bootph-all;
-+	/delete-property/ clocks;
- };
- 
- &flash0 {
--	compatible = "jedec,spi-nor";
--	spi-max-frequency = <100000000>;
-+	reg = <0>;
- 	spi-tx-bus-width = <4>;
- 	spi-rx-bus-width = <4>;
-+	spi-max-frequency = <50000000>;
- 	bootph-all;
-+
-+	m25p,fast-read;
-+	cdns,page-size = <256>;
-+	cdns,block-size = <16>;
-+	cdns,read-delay = <1>;
-+	cdns,tshsl-ns = <50>;
-+	cdns,tsd2d-ns = <50>;
-+	cdns,tchsh-ns = <4>;
-+	cdns,tslch-ns = <4>;
-+	/delete-property/ cdns,read-delay;
-+
-+	partitions {
-+		compatible = "fixed-partitions";
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+
-+		qspi_boot: partition@0 {
-+			label = "u-boot";
-+			reg = <0x0 0x04200000>;
-+		};
-+
-+		root: partition@4200000 {
-+			label = "root";
-+			reg = <0x04200000 0x0BE00000>;
-+		};
-+	};
- };
- 
--&sysmgr {
--	bootph-all;
-+&fdt_0_blob {
-+	filename = "dts/upstream/src/arm64/altera/socfpga_stratix10_socdk.dtb";
- };
- 
--&watchdog0 {
--	status = "okay";
--	bootph-all;
-+&images {
-+	fdt-1 {
-+		description = "socfpga_socdk_nand";
-+		type = "flat_dt";
-+		compression = "none";
-+		fdt_1_blob: blob-ext {
-+			filename = "dts/upstream/src/arm64/altera/socfpga_stratix10_socdk_nand.dtb";
-+		};
-+		hash {
-+			algo = "crc32";
-+		};
-+	};
-+
-+	fdt-2 {
-+		description = "socfpga_socdk_emmc";
-+		type = "flat_dt";
-+		compression = "none";
-+		fdt_2_blob: blob-ext {
-+			filename = "dts/upstream/src/arm64/altera/socfpga_stratix10_socdk_emmc.dtb";
-+		};
-+		hash {
-+			algo = "crc32";
-+		};
-+	};
-+};
-+
-+&board_config {
-+	board-1 {
-+		description = "board_1";
-+		firmware = "atf";
-+		loadables = "uboot";
-+		fdt = "fdt-1";
-+		signature {
-+			algo = "crc32";
-+			key-name-hint = "dev";
-+			sign-images = "atf", "uboot", "fdt-1";
-+		};
-+	};
-+
-+	board-2 {
-+		description = "board_2";
-+		firmware = "atf";
-+		loadables = "uboot";
-+		fdt = "fdt-2";
-+		signature {
-+			algo = "crc32";
-+			key-name-hint = "dev";
-+			sign-images = "atf", "uboot", "fdt-2";
-+		};
-+	};
-+
-+	board-4 {
-+		description = "board_4";
-+		firmware = "atf";
-+		loadables = "uboot";
-+		fdt = "fdt-0";
-+		signature {
-+			algo = "crc32";
-+			key-name-hint = "dev";
-+			sign-images = "atf", "uboot", "fdt-0";
-+		};
-+	};
-+};
-+
-+&binman {
-+	/delete-node/ kernel;
- };
-diff --git a/arch/arm/dts/socfpga_stratix10_socdk.dts b/arch/arm/dts/socfpga_stratix10_socdk.dts
-deleted file mode 100644
-index 864f4093ef8..00000000000
---- a/arch/arm/dts/socfpga_stratix10_socdk.dts
-+++ /dev/null
-@@ -1,143 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0
--/*
-- * Copyright (C) 2018 Intel Corporation
-- */
--
--#include "socfpga_stratix10.dtsi"
--
--/ {
--	model = "SoCFPGA Stratix 10 SoCDK";
--
--	aliases {
--		ethernet0 = &gmac0;
--		i2c0 = &i2c1;
--		serial0 = &uart0;
--	};
--
--	chosen {
--		stdout-path = "serial0:115200n8";
--	};
--
--	leds {
--		compatible = "gpio-leds";
--		hps0 {
--			label = "hps_led0";
--			gpios = <&portb 20 GPIO_ACTIVE_HIGH>;
--		};
--
--		hps1 {
--			label = "hps_led1";
--			gpios = <&portb 19 GPIO_ACTIVE_HIGH>;
--		};
--
--		hps2 {
--			label = "hps_led2";
--			gpios = <&portb 21 GPIO_ACTIVE_HIGH>;
--		};
--	};
--
--	memory {
--		#address-cells = <2>;
--		#size-cells = <2>;
--		device_type = "memory";
--		/* 4GB */
--		reg = <0 0x00000000 0 0x80000000>,
--		      <1 0x80000000 0 0x80000000>;
--		bootph-all;
--	};
--};
--
--&gpio1 {
--	status = "okay";
--};
--
--&gmac0 {
--	status = "okay";
--	phy-mode = "rgmii";
--	phy-handle = <&phy0>;
--
--	max-frame-size = <3800>;
--
--	mdio0 {
--		#address-cells = <1>;
--		#size-cells = <0>;
--		compatible = "snps,dwmac-mdio";
--		phy0: ethernet-phy@0 {
--			reg = <4>;
--
--			txd0-skew-ps = <0>; /* -420ps */
--			txd1-skew-ps = <0>; /* -420ps */
--			txd2-skew-ps = <0>; /* -420ps */
--			txd3-skew-ps = <0>; /* -420ps */
--			rxd0-skew-ps = <420>; /* 0ps */
--			rxd1-skew-ps = <420>; /* 0ps */
--			rxd2-skew-ps = <420>; /* 0ps */
--			rxd3-skew-ps = <420>; /* 0ps */
--			txen-skew-ps = <0>; /* -420ps */
--			txc-skew-ps = <900>; /* 0ps */
--			rxdv-skew-ps = <420>; /* 0ps */
--			rxc-skew-ps = <1680>; /* 780ps */
--		};
--	};
--};
--
--&i2c1 {
--	status = "okay";
--};
--
--&mmc {
--	status = "okay";
--	cap-sd-highspeed;
--	cap-mmc-highspeed;
--	broken-cd;
--	bus-width = <4>;
--	drvsel = <3>;
--	smplsel = <2>;
--};
--
--&qspi {
--	flash0: flash@0 {
--		#address-cells = <1>;
--		#size-cells = <1>;
--		compatible = "n25q00a";
--		reg = <0>;
--		spi-max-frequency = <50000000>;
--
--		m25p,fast-read;
--		cdns,page-size = <256>;
--		cdns,block-size = <16>;
--		cdns,read-delay = <1>;
--		cdns,tshsl-ns = <50>;
--		cdns,tsd2d-ns = <50>;
--		cdns,tchsh-ns = <4>;
--		cdns,tslch-ns = <4>;
--
--		partitions {
--			compatible = "fixed-partitions";
--			#address-cells = <1>;
--			#size-cells = <1>;
--
--			qspi_boot: partition@0 {
--				label = "Boot and fpga data";
--				reg = <0x0 0x4000000>;
--			};
--
--			qspi_rootfs: partition@4000000 {
--				label = "Root Filesystem - JFFS2";
--				reg = <0x4000000 0x4000000>;
--			};
--		};
--	};
--};
--
--&uart0 {
--	status = "okay";
--};
--
--&usb0 {
--	status = "okay";
--};
--
--&watchdog0 {
--	status = "okay";
--};
+@@ -1,90 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_COUNTER_FREQUENCY=400000000
+-CONFIG_ARCH_SOCFPGA=y
+-CONFIG_TEXT_BASE=0x200000
+-CONFIG_SYS_MALLOC_LEN=0x500000
+-CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+-CONFIG_SF_DEFAULT_MODE=0x2003
+-CONFIG_ENV_SIZE=0x1000
+-CONFIG_ENV_OFFSET=0x200
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="socfpga_stratix10_socdk"
+-CONFIG_DM_RESET=y
+-CONFIG_SPL_STACK=0xffe3f000
+-CONFIG_SPL_TEXT_BASE=0xFFE00000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x3ff00000
+-CONFIG_SPL_BSS_MAX_SIZE=0x100000
+-CONFIG_SYS_BOOTM_LEN=0x2000000
+-CONFIG_SYS_LOAD_ADDR=0x02000000
+-CONFIG_TARGET_SOCFPGA_STRATIX10_SOCDK=y
+-CONFIG_IDENT_STRING="socfpga_stratix10"
+-CONFIG_SPL_FS_FAT=y
+-CONFIG_REMAKE_ELF=y
+-CONFIG_FIT=y
+-CONFIG_SPL_FIT_SIGNATURE=y
+-CONFIG_SPL_LOAD_FIT=y
+-CONFIG_SPL_LOAD_FIT_ADDRESS=0x02000000
+-CONFIG_BOOTDELAY=5
+-CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="earlycon"
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="run fatscript; run mmcfitload; run mmcfitboot"
+-CONFIG_SYS_PBSIZE=2085
+-CONFIG_SPL_MAX_SIZE=0x40000
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_HAVE_INIT_STACK=y
+-CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x3fa00000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x500000
+-CONFIG_SPL_SPI_LOAD=y
+-CONFIG_SYS_SPI_U_BOOT_OFFS=0x02000000
+-CONFIG_SPL_ATF=y
+-CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+-CONFIG_SPL_TARGET="spl/u-boot-spl-dtb.hex"
+-CONFIG_HUSH_PARSER=y
+-CONFIG_SYS_PROMPT="SOCFPGA_STRATIX10 # "
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_SPI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_DHCP=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-CONFIG_CMD_CACHE=y
+-CONFIG_CMD_EXT4=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_FS_GENERIC=y
+-CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_SPL_DM_SEQ_ALIAS=y
+-CONFIG_SPL_ALTERA_SDRAM=y
+-CONFIG_DWAPB_GPIO=y
+-CONFIG_DM_I2C=y
+-CONFIG_SYS_I2C_DW=y
+-CONFIG_SYS_MMC_MAX_BLK_COUNT=256
+-CONFIG_MMC_DW=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_PHY_MICREL=y
+-CONFIG_PHY_MICREL_KSZ90X1=y
+-CONFIG_ETH_DESIGNWARE=y
+-CONFIG_MII=y
+-CONFIG_SYS_NS16550_MEM32=y
+-CONFIG_SPI=y
+-CONFIG_CADENCE_QSPI=y
+-CONFIG_DESIGNWARE_SPI=y
+-CONFIG_USB=y
+-CONFIG_USB_DWC2=y
+-CONFIG_USB_STORAGE=y
+-CONFIG_DESIGNWARE_WATCHDOG=y
+-CONFIG_WDT=y
+-# CONFIG_SPL_USE_TINY_PRINTF is not set
+-CONFIG_PANIC_HANG=y
+-CONFIG_SPL_CRC32=y
 diff --git a/configs/socfpga_stratix10_defconfig b/configs/socfpga_stratix10_defconfig
-index e360048078c..ef21dc92493 100644
+index ef21dc92493..02a1875a72e 100644
 --- a/configs/socfpga_stratix10_defconfig
 +++ b/configs/socfpga_stratix10_defconfig
-@@ -10,7 +10,8 @@ CONFIG_SF_DEFAULT_MODE=0x2003
- CONFIG_ENV_SIZE=0x1000
- CONFIG_ENV_OFFSET=0x200
+@@ -1,93 +1,110 @@
+ CONFIG_ARM=y
+ CONFIG_COUNTER_FREQUENCY=400000000
++CONFIG_SPL_LDSCRIPT="arch/arm/mach-socfpga/u-boot-spl-soc64.lds"
+ CONFIG_ARCH_SOCFPGA=y
+-CONFIG_TEXT_BASE=0x1000
+-CONFIG_SYS_MALLOC_LEN=0x500000
++CONFIG_TEXT_BASE=0x200000
++CONFIG_SYS_MALLOC_F_LEN=0x2000
+ CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x101000
+-CONFIG_SF_DEFAULT_MODE=0x2003
+-CONFIG_ENV_SIZE=0x1000
+-CONFIG_ENV_OFFSET=0x200
++CONFIG_ENV_SIZE=0x2000
++CONFIG_ENV_OFFSET=0x04100000
++CONFIG_ENV_SECT_SIZE=0x20000
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x04000000
  CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="socfpga_stratix10_socdk"
-+CONFIG_DEFAULT_DEVICE_TREE="altera/socfpga_stratix10_socdk"
-+CONFIG_OF_UPSTREAM=y
- CONFIG_DM_RESET=y
- CONFIG_SPL_STACK=0xffe3f000
+ CONFIG_DEFAULT_DEVICE_TREE="altera/socfpga_stratix10_socdk"
+ CONFIG_OF_UPSTREAM=y
+-CONFIG_DM_RESET=y
+-CONFIG_SPL_STACK=0xffe3f000
  CONFIG_SPL_TEXT_BASE=0xFFE00000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x3ff00000
+-CONFIG_SPL_BSS_MAX_SIZE=0x100000
+-CONFIG_SYS_BOOTM_LEN=0x2000000
+-CONFIG_SYS_LOAD_ADDR=0x02000000
+ CONFIG_TARGET_SOCFPGA_STRATIX10_SOCDK=y
+ CONFIG_IDENT_STRING="socfpga_stratix10"
+ CONFIG_SPL_FS_FAT=y
+-# CONFIG_PSCI_RESET is not set
+-CONFIG_SYS_MEMTEST_START=0x00000000
+-CONFIG_SYS_MEMTEST_END=0x3fe00000
+-CONFIG_OPTIMIZE_INLINING=y
+-CONFIG_SPL_OPTIMIZE_INLINING=y
+-CONFIG_REMAKE_ELF=y
++CONFIG_DISTRO_DEFAULTS=y
++CONFIG_FIT=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x02000000
++# CONFIG_USE_SPL_FIT_GENERATOR is not set
++CONFIG_QSPI_BOOT=y
+ CONFIG_BOOTDELAY=5
+ CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="earlycon"
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="run fatscript; run mmcload; run linux_qspi_enable; run mmcboot"
+-CONFIG_SYS_PBSIZE=2085
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x3ff00000
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+ CONFIG_SPL_HAVE_INIT_STACK=y
++CONFIG_SPL_STACK=0xffe3f000
+ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+ CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x3fa00000
+ CONFIG_SPL_SYS_MALLOC_SIZE=0x500000
++CONFIG_SPL_BSS_MAX_SIZE=0x100000
++CONFIG_BOOTARGS="earlycon panic=-1"
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_CRC32=y
++CONFIG_SPL_MTD=y
++CONFIG_SPL_MTD_SUPPORT=y
+ CONFIG_SPL_SPI_LOAD=y
+-CONFIG_SYS_SPI_U_BOOT_OFFS=0x3C00000
+-CONFIG_SPL_TARGET="spl/u-boot-spl-dtb.hex"
+-CONFIG_HUSH_PARSER=y
++CONFIG_SPL_ATF=y
++CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_SYS_PROMPT="SOCFPGA_STRATIX10 # "
++CONFIG_CMD_NVEDIT_SELECT=y
+ CONFIG_CMD_MEMTEST=y
++# CONFIG_CMD_FLASH is not set
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
++CONFIG_CMD_MTD=y
+ CONFIG_CMD_SPI=y
+ CONFIG_CMD_USB=y
+-CONFIG_CMD_WDT=y
+-CONFIG_CMD_DHCP=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+ CONFIG_CMD_CACHE=y
+-CONFIG_CMD_EXT4=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_FS_GENERIC=y
+-CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="Image"
++CONFIG_SPL_SPI_FLASH_MTD=y
++CONFIG_SPI_FLASH_MTD=y
++# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
++CONFIG_CMD_UBI=y
++CONFIG_CMD_UBIFS=y
++CONFIG_MTD_UBI=y
++CONFIG_MTD_UBI_WL_THRESHOLD=4096
++CONFIG_MTD_UBI_BEB_LIMIT=20
++# CONFIG_ISO_PARTITION is not set
++# CONFIG_EFI_PARTITION is not set
++CONFIG_OF_LIST=""
++CONFIG_ENV_IS_IN_FAT=y
++CONFIG_ENV_IS_IN_UBI=y
++CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
++CONFIG_ENV_UBI_PART="root"
++CONFIG_ENV_UBI_VOLUME="env"
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_SPL_ALTERA_SDRAM=y
++CONFIG_FPGA_INTEL_PR=y
+ CONFIG_DWAPB_GPIO=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_DW=y
+-CONFIG_SYS_MMC_MAX_BLK_COUNT=256
++CONFIG_MISC=y
+ CONFIG_MMC_DW=y
++CONFIG_SYS_MMC_MAX_BLK_COUNT=256
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_SF_DEFAULT_MODE=0x2003
+ CONFIG_SPI_FLASH_SPANSION=y
+ CONFIG_SPI_FLASH_STMICRO=y
+ CONFIG_PHY_MICREL=y
+ CONFIG_PHY_MICREL_KSZ90X1=y
++CONFIG_DM_ETH=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_MII=y
++CONFIG_DM_RESET=y
+ CONFIG_SYS_NS16550_MEM32=y
+ CONFIG_SPI=y
+ CONFIG_CADENCE_QSPI=y
+ CONFIG_DESIGNWARE_SPI=y
+ CONFIG_USB=y
++CONFIG_DM_USB=y
+ CONFIG_USB_DWC2=y
+-CONFIG_USB_STORAGE=y
+ CONFIG_DESIGNWARE_WATCHDOG=y
+ CONFIG_WDT=y
+ # CONFIG_SPL_USE_TINY_PRINTF is not set
+ CONFIG_PANIC_HANG=y
+-CONFIG_SPL_CRC32=y
++# CONFIG_TOOLS_MKEFICAPSULE is not set
 -- 
 2.43.7
 
