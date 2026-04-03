@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5EA0E85371
-	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 16:26:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89EA0E85379
+	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 16:26:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AC0F84150;
-	Fri,  3 Apr 2026 18:26:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EF90B84181;
+	Fri,  3 Apr 2026 18:26:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="HmDOGogs";
+	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="ibXwqdvE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E05F84120; Fri,  3 Apr 2026 18:25:56 +0200 (CEST)
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.2])
+ id 8804D84105; Fri,  3 Apr 2026 18:25:56 +0200 (CEST)
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F17DF84129
+ by phobos.denx.de (Postfix) with ESMTPS id 608E884118
  for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 18:25:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sgdfkk@163.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=cq
- dl/LKXm83Ps+WPoF0u7l8My3zpM3X7QFaLQgTnaa8=; b=HmDOGogsGDuhfBcDeh
- ak1XfCOD0HFRxnd0HKavIW743xoxms0OflB9K3yWoYD0lN6z/0lcUFCkGSohvdUU
- NK3cn4hKdGg7mE0O5bJ4GIOE+Y+ikeX69WeVYP1umy1WqbImzykhI1hBu1C4JkkG
- TqtB/N9trvtcTFi0T8TIo11J4=
+ s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=of
+ 5OShH0/01X2M4+qgw1fbWooJ6uzl9sPzdbS4gX1rU=; b=ibXwqdvE6fQWdzB8fm
+ 3z6QmoXMJpDua2owVimLCeA51AUHGfpaea3nNovLCCOsTbnSzGrNTmWmNomZ66bn
+ G1qWM8AvOKKkF4S52DFov2evBBuOY2CrlXYu7mI0zVySWHii6Ie8ZohhNWxeAOH4
+ YMokEEuBx9tVTRduA8xs92AyQ=
 Received: from server-e.. (unknown [])
- by gzsmtp3 (Coremail) with SMTP id PigvCgAnAXQF6s9pHqSgBw--.137S8;
+ by gzsmtp3 (Coremail) with SMTP id PigvCgAnAXQF6s9pHqSgBw--.137S9;
  Sat, 04 Apr 2026 00:25:49 +0800 (CST)
 From: sgdfkk@163.com
 To: u-boot@lists.denx.de
 Cc: Du Huanpeng <u74147@gmail.com>
-Subject: [PATCH v7 6/7] mips: loongson: add watchdog driver
-Date: Sat,  4 Apr 2026 00:25:40 +0800
-Message-ID: <20260403162541.86608-7-sgdfkk@163.com>
+Subject: [PATCH v7 7/7] mips: loongson: ls1c300 dts and bindings
+Date: Sat,  4 Apr 2026 00:25:41 +0800
+Message-ID: <20260403162541.86608-8-sgdfkk@163.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260403162541.86608-1-sgdfkk@163.com>
 References: <20260403162541.86608-1-sgdfkk@163.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: PigvCgAnAXQF6s9pHqSgBw--.137S8
-X-Coremail-Antispam: 1Uf129KBjvJXoWxZw17AFWkKr1DtryUtF48Xrb_yoWrtw4fpF
- 4Sy34FgrW7tr47WrZ3JayDXFs8C3yY9Fy3tFyxGw1rurnxAF98X395KF9rta97Zry3JrW5
- Zay8KFy8Ga15CrDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UBuWLUUUUU=
+X-CM-TRANSID: PigvCgAnAXQF6s9pHqSgBw--.137S9
+X-Coremail-Antispam: 1Uf129KBjvJXoW3AF1UZr17urW7Cr45Gr15Arb_yoWxCF1Upw
+ 1qkFZ5tr40vF129w1F9a48JF1fJFW0kFy7J3ZFqFy8Cw13KFWjyF1fKaySqFy3Xr48Z3yx
+ XFZrX34jvFsFvw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07Um4E_UUUUU=
 X-Originating-IP: [240e:3b0:4805:581::3001]
-X-CM-SenderInfo: xvjgwyrn6rljoofrz/xtbCvw0MY2nP6g3IYQAA31
+X-CM-SenderInfo: xvjgwyrn6rljoofrz/xtbC5w0MY2nP6g28pgAA3e
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,180 +69,282 @@ X-Virus-Status: Clean
 
 From: Du Huanpeng <u74147@gmail.com>
 
-supports watchdog in loongson mips embedded SoCs
+- ls1c300 dtsi
+- ls1c300-eval board dts
+- clk binding header
+- reset binding header
 
 Signed-off-by: Du Huanpeng <u74147@gmail.com>
 ---
- drivers/watchdog/Kconfig        |   8 ++
- drivers/watchdog/Makefile       |   1 +
- drivers/watchdog/loongson_wdt.c | 127 ++++++++++++++++++++++++++++++++
- 3 files changed, 136 insertions(+)
- create mode 100644 drivers/watchdog/loongson_wdt.c
+ arch/mips/dts/loongson32-ls1c300b.dtsi    | 151 ++++++++++++++++++++++
+ arch/mips/dts/ls1c300-eval.dts            |  30 +++++
+ include/dt-bindings/clock/ls1c300-clk.h   |  18 +++
+ include/dt-bindings/reset/ls1c300-reset.h |  36 ++++++
+ 4 files changed, 235 insertions(+)
+ create mode 100644 arch/mips/dts/loongson32-ls1c300b.dtsi
+ create mode 100644 arch/mips/dts/ls1c300-eval.dts
+ create mode 100644 include/dt-bindings/clock/ls1c300-clk.h
+ create mode 100644 include/dt-bindings/reset/ls1c300-reset.h
 
-diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-index 416d29d256a..beba5475e03 100644
---- a/drivers/watchdog/Kconfig
-+++ b/drivers/watchdog/Kconfig
-@@ -214,6 +214,14 @@ config SPL_WDT_GPIO
- 	help
- 	  Support for external watchdog fed by toggling a gpio in SPL.
- 
-+config WDT_LOONGSON
-+	bool "Loongson MIPS watchdog timer support"
-+	depends on WDT
-+	help
-+	  Select this to enable watchdog timer for Loongson SoCs.
-+	  The watchdog timer is stopped when initialized.
-+	  It performs full SoC reset.
-+
- config WDT_MAX6370
- 	bool "MAX6370 watchdog timer support"
- 	depends on WDT
-diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-index 02e2674f8af..e9ffb417050 100644
---- a/drivers/watchdog/Makefile
-+++ b/drivers/watchdog/Makefile
-@@ -33,6 +33,7 @@ obj-$(CONFIG_WDT_DA9063) += da9063-wdt.o
- obj-$(CONFIG_WDT_DAVINCI) += davinci_wdt.o
- obj-$(CONFIG_WDT_FTWDT010) += ftwdt010_wdt.o
- obj-$(CONFIG_$(SPL_TPL_)WDT_GPIO) += gpio_wdt.o
-+obj-$(CONFIG_WDT_LOONGSON) += loongson_wdt.o
- obj-$(CONFIG_WDT_MAX6370) += max6370_wdt.o
- obj-$(CONFIG_WDT_MCF) += mcf_wdt.o
- obj-$(CONFIG_WDT_MESON_GXBB) += meson_gxbb_wdt.o
-diff --git a/drivers/watchdog/loongson_wdt.c b/drivers/watchdog/loongson_wdt.c
+diff --git a/arch/mips/dts/loongson32-ls1c300b.dtsi b/arch/mips/dts/loongson32-ls1c300b.dtsi
 new file mode 100644
-index 00000000000..4d34d70296e
+index 00000000000..26b0c707459
 --- /dev/null
-+++ b/drivers/watchdog/loongson_wdt.c
-@@ -0,0 +1,127 @@
++++ b/arch/mips/dts/loongson32-ls1c300b.dtsi
+@@ -0,0 +1,151 @@
++// SPDX-License-Identifier: GPL-2.0
++#include <dt-bindings/clock/ls1c300-clk.h>
++#include <dt-bindings/reset/ls1c300-reset.h>
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++	compatible = "loongson,ls1c300-soc";
++
++	cpus {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		cpu@0 {
++			device_type = "cpu";
++			reg = <0>;
++			compatible = "loongson,gs232", "mips,mips4Kc";
++			clocks = <&acc CLK_CPU_THROT>;
++		};
++	};
++
++	clocks {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		bootph-all;
++
++
++		xtal: oscillator {
++			compatible = "fixed-clock";
++			clock-frequency = <24000000>;
++			#clock-cells = <0>;
++		};
++	};
++
++	soc {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		compatible = "simple-bus";
++		ranges;
++
++		acc: clock-controller@1fe78030 {
++			compatible = "loongson,ls1c300-clk";
++			clocks = <&xtal>;
++			#clock-cells = <1>;
++			reg = <0x1fe78030 0x8>, <0x1fe7c010 0x4>;
++			bootph-all;
++		};
++
++		uart0: serial@1fe40000 {
++			compatible = "loongson,ls1c300-uart", "ns16550a";
++			clocks = <&acc CLK_APB>;
++			reg = <0x1fe40000 0x100>;
++			status = "disabled";
++		};
++
++		uart1: serial@1fe44000 {
++			compatible = "loongson,ls1c300-uart", "ns16550a";
++			clocks = <&acc CLK_APB>;
++			reg = <0x1fe44000 0x100>;
++			status = "disabled";
++		};
++
++		uart2: serial@1fe48000 {
++			compatible = "loongson,ls1c300-uart", "ns16550a";
++			clocks = <&acc CLK_APB>;
++			reg = <0x1fe48000 0x100>;
++			resets = <&shut_ctrl UART2_SHUT>;
++			reset-names = "uart2";
++			status = "disabled";
++		};
++
++		uart3: serial@1fe4c000 {
++			compatible = "loongson,ls1c300-uart", "ns16550a";
++			clocks = <&acc CLK_APB>;
++			reg = <0x1fe4c000 0x100>;
++			status = "disabled";
++		};
++
++		uart4:  serial@1fe4c400 {
++			compatible = "loongson,ls1c300-uart", "ns16550a";
++			clocks = <&acc CLK_APB>;
++			reg = <0x1fe4c400 0x100>;
++			status = "disabled";
++		};
++
++		uart5:  serial@1fe4c500 {
++			compatible = "loongson,ls1c300-uart", "ns16550a";
++			clocks = <&acc CLK_APB>;
++			reg = <0x1fe4c500 0x100>;
++			status = "disabled";
++		};
++
++		uart6:  serial@1fe4c600 {
++			compatible = "loongson,ls1c300-uart", "ns16550a";
++			clocks = <&acc CLK_APB>;
++			reg = <0x1fe4c600 0x100>;
++			status = "disabled";
++		};
++
++		uart7:  serial@1fe4c700 {
++			compatible = "loongson,ls1c300-uart", "ns16550a";
++			clocks = <&acc CLK_APB>;
++			reg = <0x1fe4c700 0x100>;
++			status = "disabled";
++		};
++
++		uart8:  serial@1fe4c800 {
++			compatible = "loongson,ls1c300-uart", "ns16550a";
++			clocks = <&acc CLK_APB>;
++			reg = <0x1fe4c800 0x100>;
++			status = "disabled";
++		};
++
++		uart9:  serial@1fe4c900 {
++			compatible = "loongson,ls1c300-uart", "ns16550a";
++			clocks = <&acc CLK_APB>;
++			reg = <0x1fe4c900 0x100>;
++			status = "disabled";
++		};
++
++		uart10: serial@1fe4ca00 {
++			compatible = "loongson,ls1c300-uart", "ns16550a";
++			clocks = <&acc CLK_APB>;
++			reg = <0x1fe4ca00 0x100>;
++			status = "disabled";
++		};
++
++		uart11: serial@1fe4cb00 {
++			compatible = "loongson,ls1c300-uart", "ns16550a";
++			clocks = <&acc CLK_APB>;
++			reg = <0x1fe4cb00 0x100>;
++			status = "disabled";
++		};
++
++		wdt: watchdog@1fe5c060 {
++			compatible = "loongson,ls1c300-wdt";
++			clocks = <&acc CLK_APB>;
++			reg = <0x1fe5c060 0x10>;
++		};
++
++		reset-controller {
++			compatible = "wdt-reboot";
++			wdt = <&wdt>;
++		};
++
++		shut_ctrl: reset-controller@1fd00420 {
++			compatible = "loongson,shut_ctrl";
++			reg = <0x1fd00420 0x4>;
++			#reset-cells = <1>;
++		};
++	};
++};
+diff --git a/arch/mips/dts/ls1c300-eval.dts b/arch/mips/dts/ls1c300-eval.dts
+new file mode 100644
+index 00000000000..cc3c267a5bf
+--- /dev/null
++++ b/arch/mips/dts/ls1c300-eval.dts
+@@ -0,0 +1,30 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * Watchdog driver for MediaTek SoCs
-+ *
-+ * Copyright (C) 2018 MediaTek Inc.
-+ * Author: Ryder Lee <ryder.lee@mediatek.com>
-+ *
-+ * based on: drivers/watchdog/mtk_wdt.c
-+ * Copyright (C) 2020-2026 Du Huanpeng <u74147@gmail.com>
++ * Copyright (C) 2022 Du Huanpeng <u74147@gmail.com>
 + */
 +
-+#include <dm.h>
-+#include <hang.h>
-+#include <wdt.h>
-+#include <asm/io.h>
-+#include <clk.h>
-+#include <dm/device_compat.h>
-+#include <linux/time.h>
++/dts-v1/;
 +
-+struct loongson_wdt_priv {
-+	void __iomem *base;
-+#define WDT_EN		0
-+#define WDT_TIMER	4
-+#define WDT_SET		8
-+	ulong clock;
-+	unsigned long timeout;
++#include "loongson32-ls1c300b.dtsi"
++
++/ {
++	compatible = "lsmips,ls1c300-soc";
++	model = "ls1c300-eval";
++
++	aliases {
++		serial0 = &uart2;
++	};
++
++	memory@80000000 {
++		device_type = "memory";
++		reg = <0x80000000 0x4000000>;
++	};
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++	};
 +};
 +
-+static int loongson_wdt_reset(struct udevice *dev)
-+{
-+	struct loongson_wdt_priv *priv = dev_get_priv(dev);
-+
-+	writel(priv->timeout, priv->base + WDT_TIMER);
-+	writel(1, priv->base + WDT_SET);
-+
-+	return 0;
-+}
-+
-+static int loongson_wdt_stop(struct udevice *dev)
-+{
-+	struct loongson_wdt_priv *priv = dev_get_priv(dev);
-+
-+	writel(0, priv->base + WDT_EN);
-+	return 0;
-+}
-+
-+static int loongson_wdt_expire_now(struct udevice *dev, ulong flags)
-+{
-+	struct loongson_wdt_priv *priv = dev_get_priv(dev);
-+
-+	writel(1, priv->base + WDT_EN);
-+	writel(1, priv->base + WDT_TIMER);
-+	writel(1, priv->base + WDT_SET);
-+
-+	hang();
-+	return 0;
-+}
-+
-+static int loongson_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
-+{
-+	struct loongson_wdt_priv *priv = dev_get_priv(dev);
-+	unsigned int timeout;
-+
-+	timeout = U32_MAX / (priv->clock / MSEC_PER_SEC);
-+
-+	if (timeout < timeout_ms)
-+		timeout = U32_MAX;
-+	else
-+		timeout = timeout_ms * (priv->clock / MSEC_PER_SEC);
-+
-+	debug("WDT: reload  = %08x\n", timeout);
-+
-+	writel(1, priv->base + WDT_EN);
-+	writel(timeout, priv->base + WDT_TIMER);
-+	writel(1, priv->base + WDT_SET);
-+
-+	priv->timeout = timeout;
-+
-+	return 0;
-+}
-+
-+static int loongson_wdt_probe(struct udevice *dev)
-+{
-+	struct loongson_wdt_priv *priv = dev_get_priv(dev);
-+	struct clk cl;
-+	ulong clock;
-+
-+	priv->base = dev_remap_addr(dev);
-+	if (!priv->base)
-+		return -ENOENT;
-+
-+	if (clk_get_by_index(dev, 0, &cl) == 0)
-+		clock = clk_get_rate(&cl);
-+
-+	debug("WDT: clock = %ld\n", clock);
-+
-+	if (IS_ERR_VALUE(clock)) {
-+		dev_err(dev, "failed to get rate\n");
-+		return clock;
-+	}
-+
-+	priv->clock = clock;
-+	writel(0, priv->base + WDT_EN);
-+	return 0;
-+}
-+
-+static const struct wdt_ops loongson_wdt_ops = {
-+	.start = loongson_wdt_start,
-+	.reset = loongson_wdt_reset,
-+	.stop = loongson_wdt_stop,
-+	.expire_now = loongson_wdt_expire_now,
++&uart2 {
++	status = "okay";
 +};
+diff --git a/include/dt-bindings/clock/ls1c300-clk.h b/include/dt-bindings/clock/ls1c300-clk.h
+new file mode 100644
+index 00000000000..170728693be
+--- /dev/null
++++ b/include/dt-bindings/clock/ls1c300-clk.h
+@@ -0,0 +1,18 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Copyright (C) 2022 Du Huanpeng <u74147@gmail.com>
++ */
 +
-+static const struct udevice_id loongson_wdt_ids[] = {
-+	{ .compatible = "loongson,ls1c300-wdt"},
-+	{}
-+};
++#ifndef __DT_BINDINGS_LS1C300_CLK_H__
++#define __DT_BINDINGS_LS1C300_CLK_H__
 +
-+U_BOOT_DRIVER(loongson_wdt) = {
-+	.name = "loongson_wdt",
-+	.id = UCLASS_WDT,
-+	.of_match = loongson_wdt_ids,
-+	.priv_auto = sizeof(struct loongson_wdt_priv),
-+	.probe = loongson_wdt_probe,
-+	.ops = &loongson_wdt_ops,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
++#define CLK_XTAL	0
++#define CLK_PLL		1
++#define CLK_CPU		2
++#define CLK_APB		3
++#define CLK_CAMERA	4
++#define CLK_PIX		5
++#define CLK_AXIMUX	6
++#define CLK_CPU_THROT	7
++
++#endif /* __DT_BINDINGS_LS1C300_CLK_H__ */
+diff --git a/include/dt-bindings/reset/ls1c300-reset.h b/include/dt-bindings/reset/ls1c300-reset.h
+new file mode 100644
+index 00000000000..44734ee50a9
+--- /dev/null
++++ b/include/dt-bindings/reset/ls1c300-reset.h
+@@ -0,0 +1,36 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Copyright (C) 2022 Du Huanpeng <u74147@gmail.com>
++ */
++
++#ifndef _DT_BINDINGS_LS1C300_RESET_H_
++#define _DT_BINDINGS_LS1C300_RESET_H_
++
++#define ADC_SHUT        25
++#define SDIO_SHUT       24
++#define DMA2_SHUT       23
++#define DMA1_SHUT       22
++#define DMA0_SHUT       21
++#define SPI1_SHUT       20
++#define SPI0_SHUT       19
++#define I2C2_SHUT       18
++#define I2C1_SHUT       17
++#define I2C0_SHUT       16
++#define AC97_SHUT       15
++#define I2S_SHUT        14
++#define UART3_SHUT      13
++#define UART2_SHUT      12
++#define UART1_SHUT      11
++#define UART0_SHUT      10
++#define CAN1_SHUT       9
++#define CAN0_SHUT       8
++#define ECC_SHUT        7
++#define MAC_SHUT        6
++#define USBHOST_SHUT    5
++#define USBOTG_SHUT     4
++#define SDRAM_SHUT      3
++#define SRAM_SHUT       2
++#define CAM_SHUT        1
++#define LCD_SHUT        0
++
++#endif  /* _DT_BINDINGS_LS1C300_RESET_H_*/
 -- 
 2.43.0
 
