@@ -4,90 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36FEEE85367
-	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 14:54:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8382BE85379
+	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 15:37:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 540CF83642;
-	Fri,  3 Apr 2026 16:54:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B72B883CF5;
+	Fri,  3 Apr 2026 17:37:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TlYSLhgG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="qUOU+b6k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A896483F9D; Fri,  3 Apr 2026 16:54:01 +0200 (CEST)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id 94A5783F9D; Fri,  3 Apr 2026 17:37:41 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F955800AE
- for <u-boot+nodisclaimer@lists.denx.de>; Fri,  3 Apr 2026 16:53:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 576DC83642
+ for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 17:37:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-4671cbce465so793565b6e.3
- for <u-boot+nodisclaimer@lists.denx.de>; Fri, 03 Apr 2026 07:53:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=matwey.kornilov@gmail.com
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-5a3cc771c26so507827e87.3
+ for <u-boot@lists.denx.de>; Fri, 03 Apr 2026 08:37:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1775228038; x=1775832838; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VxaJi/RPnjglFt4tObsc+yqW31b2VkGyeX7x/VJeHuM=;
- b=TlYSLhgGaDGapZQp5VJhBbxRCdSIcqZKafEwIEDgFW8p7prV9XY1n/fEH1u4M7QxXZ
- RpWKk16UHAApuCkeNiNaD35nJ23DZ54SorXWeRIvlWx5OiGFKay1iGcehnpMDwHi2MfR
- b7GErn/Ey2yRxPrGAqIqH5pxGMS61Xn3OMsEM=
+ d=gmail.com; s=20251104; t=1775230658; x=1775835458; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2NlfOAQh+ZO1BcuhSiLiXo/PiglUWWxH3Qxg5b7bUOg=;
+ b=qUOU+b6k7VWxlZRcrRjxA7T1N7tsDr5svhNIqlvVeTlkDA5GpCb90YiMzHnJnr2sSz
+ RxU1GKjpDjZFnw5FdK4CsNoQgvejZugAcljvooqV4mp5uQpmBPUBTqdhjhBYgQ+VaSYs
+ au94B8ZjfzDeM5fdJWwsvOj1ev1p+hUdnOBvf/7Now0cYYm62v1J1MHxvEdFzdxohHgT
+ OkbvvCEPNZKi33mBSkK4TDPIrscng1yaKS4Kqfms5za/lK4nFf1b/vo37D37XSKXrKAy
+ ijexFlgS8I9Qgk36OWfxL3NquvTZPES06gAC8WvDgDDkxY6luF6+f/lbTwXHw9QrgnIf
+ i86g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775228038; x=1775832838;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VxaJi/RPnjglFt4tObsc+yqW31b2VkGyeX7x/VJeHuM=;
- b=dCCNj4mXHziB6jdq75J23f760ODoeJ3wSVbRvovGGkSnWxnU2vTFo2uXo844LLubd/
- TU2YgYha2YBVazrwN6Bq55US+/DKdyh2+M1nDXgcNozvrvkrol63VKweUiYWyrfwOvUS
- WmYdU4Tqm+VAwW/I/4+zLpeRxJMm/xyeBXs/qfoSxfUQzikp1S5VUSuxKeM/RbyfFTKj
- bP66YAyrwKP0YgDm863G3kGM+jlyNr5gr6ucnb0qvVjG2SvPqR5dSM4ogN/wEztK6MAU
- JpI2zASHlwpf9zX22Jxc280Kj87a0vflruJV7gbWKKQ71b6A0jUbO3Ivtl+XmKTPTYSc
- E0ww==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW7nD9arIwVD0Exm6rr7YxU8HeBFrr3skGbHBmDl6hr9ajPettwKc8OmvZEoDaX3WoQpmZYoxs=@lists.denx.de
-X-Gm-Message-State: AOJu0YyV7IajaITFy249mLM4+mh1LemEwJPXQncdC1Kth24rNkd12qjn
- 41w+XuZqoMSAzcY3kOdKxm6jeFpEL8bxYQndYGy+OZEFBR9SILu4EpwTHbgLEn2O3aE=
-X-Gm-Gg: ATEYQzxQktWQbqxbGCSO3jtPUs3VE/JRnDdX8x6qwfsZPxgVipDUdGeRXNQeSJSbPly
- x9+ole3tSNYxDC6Esgy8ybiT+RZKqZQ9cAaNUfZThLAbLiIDlIsb3wRq+7JUXghWsoWFu7dXWFx
- aFUtAtNnsECvFBTmenRcr1cSmu6FB4AyyhpCUzkwGIXfGElR1KC4NF4bYzhEdq+g8HtXX5pv6fH
- vDbnPxHP2/CK7u4QYE9N8eNjlyf6CqECme9srgQqpz1b3H2b8u3IFwDpQyqFMWHCGpXFuWywzIK
- 8I6Gl8Be2jaPsUS1Mv84cyspuZFGGnFZsf417NDRv0nx5Yv1bhSyLDnXa9gfS9hNhSvEwqDx4JN
- PyZ1FWMHMyXS8RvfZnmCX0Qi+4DGP7YmYmGypczC71xNRCCM8sW49kmyjXH45neLl7vvOLQTp2v
- scP3urUkv4/aTrpWgrnbZ5CwyXJX/3vmR6wVxB8v6gFdu7rhpfTYdL8uJvJlATjBD3XsF+kR1GD
- hcOyVkePTknu6K0uTvHCTHHnh4FvTiJAYRaWfE55fhitGLl
-X-Received: by 2002:a05:6808:159b:b0:460:f435:2a71 with SMTP id
- 5614622812f47-46ef8218f3dmr1765273b6e.46.1775228038096; 
- Fri, 03 Apr 2026 07:53:58 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-46d92f66ca2sm3522057b6e.13.2026.04.03.07.53.56
+ d=1e100.net; s=20251104; t=1775230658; x=1775835458;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=2NlfOAQh+ZO1BcuhSiLiXo/PiglUWWxH3Qxg5b7bUOg=;
+ b=BPxIkN3FH6eOZBg2JaeESL9M9oFKFZjnOhreHQ2D0RmyBSZ34HEd8IGC3FLBDfiyin
+ viNUjYPxqLwyEbWvEnrd7J6Hqg7fqCV/fIUKEmCqkMLobesdRVwCD0WoNK+9rVg2KzWN
+ jwsgmZHw7uBiWN/y1/YGzRCzcx2ysR9FYI0wfpuq8I6ZmfE1eLFH9JEObnJNhm750fUo
+ d+U+ORE0YfQ3E2C6uxx1/L5yGHTpC4cplmNBrbOYsUKDdrXDpBKovjd+0HJRKndIwIPB
+ 9v84TIx1zyw6NboJPqWrzu4xhdP0vBJWSi5GFrR0Qmh+KeXQb+Z/MGIXVjau0l+RqAqS
+ JV6A==
+X-Gm-Message-State: AOJu0Yzkam1P5fdRZ9/JfOGafjpFEF3MQMr5o99rmW+m1K7V9znrnOBJ
+ /i1yOsUf7EKrwfc6WnEpsDcQbVy6vwQgxr1fWWs6yxuQ7oKpuy5btCEH
+X-Gm-Gg: AeBDiesUy+wR4wRsW5iDkaW9ILcW2ttxduKcz6lDIRlJN3ETOabQ7t/C8aFeajCOWlL
+ QcAZzXwcbqJKNmavzxtT8OR7XvOGXkGk42ZAy2L4ddzjD4Lxfh1PrHZ62KGNLiUNlgtP6aH7na1
+ SCnnThySWbPnZVAHzlnVUvbTqSFe6B+TMbsXX+O91Of5iaGFwcOG6UG8X4dGFYZhOmx9g1wzRY2
+ H0rOK9iQhVJqVXHuWx2NgW/EZWJIisi81DV9UpVsbqc77/bbU/7aeAhmgM2aR+XNDg9D4dl4UrX
+ skerrz7770cs8AV0W/Vk0OpND28XyoQSU/RIQb/RLv+qXhjYj3VpHxfHsS1SklCUupusuplcKeU
+ oOMW2HwdZcequxaZAqaTZa5GMxQr4ZSo8175PyE68+O3pdGO7+hI2KSpNSQuOgwsp6c2OmeBsE4
+ Nk9sPn2RYwLpU6Cvncg3yyNPPFheI/EyjX5k+o
+X-Received: by 2002:a05:6512:1381:b0:5a2:a174:8958 with SMTP id
+ 2adb3069b0e04-5a337591c67mr1431713e87.35.1775230658214; 
+ Fri, 03 Apr 2026 08:37:38 -0700 (PDT)
+Received: from alpha.local ([95.165.9.19]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5a2c6ca3100sm1533912e87.35.2026.04.03.08.37.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Apr 2026 07:53:57 -0700 (PDT)
-Date: Fri, 3 Apr 2026 08:53:54 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Paul HENRYS <paul.henrys_ext@softathome.com>
-Cc: trini+nodisclaimer@konsulko.com, sjg+nodisclaimer@chromium.org,
- alpernebiyasak+nodisclaimer@gmail.com,
- philippe.reynes+nodisclaimer@softathome.com,
- u-boot+nodisclaimer@lists.denx.de
-Subject: Re: [PATCH v3 1/3] tools: binman: Test signing an encrypted FIT with
- a preload header
-Message-ID: <20260403145354.GJ41863@bill-the-cat>
-References: <20260402192431.2421155-1-yan.wang@softathome.com>
- <20260403073251.1051533-1-paul.henrys_ext@softathome.com>
- <cb03b1c9-5387-4d20-91b2-1f41b6fe6d14@softathome.com>
+ Fri, 03 Apr 2026 08:37:37 -0700 (PDT)
+From: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
+To: sjg@chromium.org
+Cc: u-boot@lists.denx.de,
+	"Matwey V. Kornilov" <matwey.kornilov@gmail.com>
+Subject: [PATCH] doc: Fix fdt resize argument in fdt_overlays.rst
+Date: Fri,  3 Apr 2026 18:37:33 +0300
+Message-ID: <20260403153733.95117-1-matwey.kornilov@gmail.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <CAFLszTgR=jt+P5NciLw80PaCseZZw=XMT-Ha+NHQFNXxfMfndg@mail.gmail.com>
+References: <CAFLszTgR=jt+P5NciLw80PaCseZZw=XMT-Ha+NHQFNXxfMfndg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vSx3ajQrQAmQ2XYl"
-Content-Disposition: inline
-In-Reply-To: <cb03b1c9-5387-4d20-91b2-1f41b6fe6d14@softathome.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,34 +97,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The argument is parsed as hexadecimal number.
 
---vSx3ajQrQAmQ2XYl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Link: https://lists.denx.de/pipermail/u-boot/2026-April/613799.html
 
-On Fri, Apr 03, 2026 at 09:41:47AM +0200, Paul HENRYS wrote:
-> Hi Tom,
->=20
-> Just after pushing the v3 I realized that this test would better go under
-> tools/binman/test/security/ instead of tools/binman/test/fit/.
-> I am going to push a v4 with this change. Sorry for the inconvenience.
+Signed-off-by: Matwey V. Kornilov <matwey.kornilov@gmail.com>
+---
+ doc/usage/fdt_overlays.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Thanks. It looks like there might be a v5, so please add a cover letter
-too, this will be used as part of merging the series.
+diff --git a/doc/usage/fdt_overlays.rst b/doc/usage/fdt_overlays.rst
+index 15ebd17ccb1..730cb85b39a 100644
+--- a/doc/usage/fdt_overlays.rst
++++ b/doc/usage/fdt_overlays.rst
+@@ -104,11 +104,11 @@ Manually Loading and Applying Overlays
+ 
+     => fdt addr $fdtaddr
+ 
+-4. Grow it enough so it can encompass all applied overlays
++4. Grow it enough so it can encompass all applied overlays (the argument in hex)
+ 
+ ::
+ 
+-    => fdt resize 8192
++    => fdt resize 2000
+ 
+ 5. You are now ready to apply the overlay.
+ 
+-- 
+2.51.0
 
---=20
-Tom
-
---vSx3ajQrQAmQ2XYl
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCac/UfwAKCRAr4qD1Cr/k
-CsaRAP96WZoFOrpac6pideEWJIkBcMnL5RdBiFy6Zw1S0t3fGQD/bbTutiszsx5V
-3JOPx045uxuQ+7EJk5S37zxiuztBCwk=
-=0k6P
------END PGP SIGNATURE-----
-
---vSx3ajQrQAmQ2XYl--
