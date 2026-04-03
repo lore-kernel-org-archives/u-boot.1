@@ -4,108 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B08C5D730A2
-	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 05:29:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D86CD730B1
+	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 07:33:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E500384020;
-	Fri,  3 Apr 2026 07:29:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 656DF8407E;
+	Fri,  3 Apr 2026 09:33:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zUPySWUw";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="nbaju0Qd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A5428407E; Fri,  3 Apr 2026 07:29:19 +0200 (CEST)
-Received: from mail-yx1-xb135.google.com (mail-yx1-xb135.google.com
- [IPv6:2607:f8b0:4864:20::b135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F17AA8382A; Fri,  3 Apr 2026 09:33:39 +0200 (CEST)
+Received: from PR0P264CU014.outbound.protection.outlook.com
+ (mail-francecentralazlp170120004.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C6D183DC9
- for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 07:29:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB6AA8382A
+ for <u-boot+nodisclaimer@lists.denx.de>; Fri,  3 Apr 2026 09:33:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=softathome.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb135.google.com with SMTP id
- 956f58d0204a3-64e87a81639so1487914d50.0
- for <u-boot@lists.denx.de>; Thu, 02 Apr 2026 22:29:15 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775194155; cv=none;
- d=google.com; s=arc-20240605;
- b=Lqhzsgu8uxtV7yCVAh8j57Erdme6/9vd/8yk3ZVw/TP/5rwD87f9nEgyYq+0bmtLhw
- zx8Vo204sEdwGGGMaSwAnAZTsnZzytd2n0F8CNGgU37y909qEHbE+FmRJRSHRP1qE39N
- mo056/0wJzv2TtwEKV5CbXuqTuOmyDKQ00RH+3cYTqwy6yfsAmOlyRw7frNndZ9ESjww
- jMPVNRwhTJ6CGVP65eaIfGIj6vPKlzaHtqoFWbr7Deg9oBO7g+2KE7vmdky+1kvO6eLT
- 1TlVWeJLDLa6S+sujvOY0njN1iR/dbtQV7SCxphxdtuj8eIjyLvL+FBcrtffFH4GSDR6
- t4FA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=WqGykn2gzJV7VsjK2igi0j6beAQhZTlyWpRkV+6c8n0=;
- fh=xQzR5o2A8M9wqiA8Fg5jB1ICrTFdmVPV658WtdmuFdI=;
- b=ZztXgI2k8ZUO2GlnUln8X3kWzzvdiNPV+c1eDdz1jNpVe4mlBbukoQfi/TrXvSYQiE
- ADCVkDFLk0EqR5PjvJvwW9urOX52BtHqikvkrKHRyepb97L0gsXVHNcnwTDA+puBp+yg
- cgmrkWqa3iezZj3ijCT5nMIUSUYM6pmieOTIIx97ALscMqt0q8Fvo4vIjl1KCiswG1Cm
- PRxpv7695I1mfQrEbNFCsLpzlKbeCdf+iPnC976lHTWGzU4Jv5lG57zVzWxuWq/KQFja
- MBU6hHA25TxZ87m21/71yHtKoHXsl2s027ih4U6W01BjNOAiT18ANToHWypsYlKKhkGF
- tRiw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=paul.henrys_ext@softathome.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=wNozeYs3lzwbkj5MJqaen65jwq0Rst3F4tHVk/fMxLT91mGe0lyGSOCoNs1ZsI28YkY4UvG6vSjjowvJDAsDPVlBJJJBoDIRvsxdzePP7CJ0u4Nzh7G/zK2HaIfNfQH2KMnrFwuPVn1Dv4SLL1cOzRYEMWs+csmmUDwyh9z6GxDLSKvxP2d8E+e0mvU0mn3nSkRfPj4a8R1jHJpGLKjt+OZ5qztRoOeqfABf3qeSZBqzo+ho+2u9et5lk5oPaHfzA8l59Z4WiV9q138dnT0chfLNrgwKR+P9lwe/6zxT7+idWPuoU9Edw8X+OaQQv0E52+kYdwFBJl8idbZpaUeLSQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=QjKHR9fWn8V8LabvbbqGetYQDv/vA3oaKK/vfkFQsEU=;
+ b=UuHnwLITdJ15SKA1bjNWn4Z26XzReqs2foo6/fAma5u4YQz/tPDyCBvT85UzzeyDo94kUjDew2+G9fTofV/auAxA/047mixTnCJus5+ZXcbSSuC4sKjL0tnqfbL3vWCF3zK6E3rDxRiZY0+hqbhRDH8CIA1Z/S2P8ET7lg6FqBK5cODH0Kd+e87a+VYLFfoi27KiRWSdmDUfwFYt9hPfnXpFQ1JexM1GUnfTQOjlAWeu+I/xtjXOnfh8ZyMaK7m/C08NL9u/kxlEn/NfxZuOUDHZtEByOsq8y+I7YpL9gFnZu3WSMwCyjwgTd841jw8i1d9xbHN8fTpYdWJiz7wbhA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 149.6.166.170) smtp.rcpttodomain=chromium.org smtp.mailfrom=softathome.com;
+ dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
+ (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1775194155; x=1775798955; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WqGykn2gzJV7VsjK2igi0j6beAQhZTlyWpRkV+6c8n0=;
- b=zUPySWUwhi/GqT61kSmbePeT71jwsP9B4etBxrWVb+qvVXM0FzhU/eXdZxe9odxEI4
- xN7Dual4mP8ONx3WhV3xkGbSrUCJZoVowqWaAcXnJZOiytGrdqAWp9PLwEPw0PrM3amD
- j6pr4XDEE7UowfU8KEbooUDKRhebRpmZuSLD9TNKrZ0Zun5XePcEFh4CVqB5XwAwuOOn
- 2Ne2R4pqVeucwfUBD9MvLLY+mfYlH3MnPSmL1CVb8ZLkXtau62+SwAUSumlQcZrYkCg4
- dmBT8JfhlBRka6CWtLR+jCf1GJeSltTIGmVXOCJhTSn3/zymlzvXEh4MkwYON9bjVLVv
- V/YQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775194155; x=1775798955;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WqGykn2gzJV7VsjK2igi0j6beAQhZTlyWpRkV+6c8n0=;
- b=OYzjqkoEyYfKLQjEKGXJD3FRofA1c0Z5Fc49PshZzIp3/HeTEqBe+ObV4rF43X6ET3
- LyPkFfB5vwA3ucLfENKhm6/4MGRGH3JUOgFGn5xoow8Ki2BTWXVSiNeZBfMRfZsUkfLM
- oEDFGuJ0lgRehYx6ZrcAR1GHURW7g/nRg7LWSLLQxTHCS1r+NHIM7S9M5bblX9t/w0MJ
- jmRT7aOhKNUEysZpLzwMv3dkih37lKtbDII3Q9FB+B31nYUSUK2mMVFV+48Sq6WWevNo
- 8YHQAXEEf55brvt7ANogS1XullpY65PadzPOk7lCeU0jXnNhCgn7ysZeqnvUsu9DR+Vt
- nMFg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWvsf396tNthTxvDF7lwtvs/am1T/ZV8Dn1hqAfb+qDZfYPyUpFQt18pss8IMQ3J8/e7zuFpjE=@lists.denx.de
-X-Gm-Message-State: AOJu0YzykGfuCn9MrbPRBrqHPLJ8z6pRlJ/XeoiGbL+2FhdPxRRU1RXd
- qbEw+KopDpKZO+YrEy+/fXTtw35M+LrCBlCGVmmz6DxClBeaclC3fnq4/SOdOVwpqxv7IpZPMaQ
- jU7UixP4aSEzbT03rL4jDNufPlpKranOfJglOpXoF2g==
-X-Gm-Gg: AeBDiesVv+v5vAGux8JcwM7HSRAiJ9KiSnxhC8kn+pcsAl9icEUqI2L9N30GZzoGAxT
- iqfjY6rt1nxpK1AutewXC2UOVlamKgCtktIC/sgIa208Mz7rYNmugp7gxYhfnDnke680rpikgka
- FxbbJo8mWsZpDmPd/VQUMB5WyZK0bcSwSfyCF1d0iW+RMIv9hF46vf9/yyq6ePt5+GBFcOiyQZf
- eEA1aI+IoD5URyqpyG2G1gPtBY5ADebu6Vn1cMYRR7QzI8xD7F1Bkrb60WBBMD/ZnjjZ+FahHS7
- fUjmh9IjHSLE8RQ6abj/2+KpMmV51f50wEUgmZ0BR1CzmvUU7pjUEClQibeB4tZgsnsmdWwvrlv
- +PtkOe9brK3XlXBPIkrSniZJCeZl/6ToHojJ0ZYlpVrjCM38Z8sD0T3MwsvmJUXYzXnCN6PfPHA
- RKGsLHGCqF17nrmivTQ0FTwT5MPcPl35sd+ehKY5D9koxRIrmXb34lzDobq7TXNUpl6EBRsNWZT
- B6gPByHBBEZRHb3NZ2+gy4vgA/tGvAWAzM1hSRyeKxS1g+88c04co3MHvtivgqtykrEdIe0TphA
- wfM7c3+LhIEZ1D9pHCKMvNLbl2wwNqq/HVhxLTSLaAD3
-X-Received: by 2002:a53:b702:0:b0:650:1d21:d6af with SMTP id
- 956f58d0204a3-6504880fe6dmr1139942d50.40.1775194154811; Thu, 02 Apr 2026
- 22:29:14 -0700 (PDT)
+ d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QjKHR9fWn8V8LabvbbqGetYQDv/vA3oaKK/vfkFQsEU=;
+ b=nbaju0QdbJeyDHyaQ2BsJK4jEr67IbS8zgrjnTRl550thAdoZKbfo2wfV84XpleMwAuDMpd9MluqWRnHaxT+Qc+iChJuIOchjq4VXxs0vcWa8G7Fa0XH3CTv4CKQexy/GpjkyPXkmGjIisZHcnX75owETPeqMtVsXnXUTC2g66zyXua7FF8jBlEof67XAoPT+X1nBvihe1448dkzsqddodNvxkHkiAO6DKFGuW0ptyjEecBRXjUFuqspmXX0K4oZJAYfQ7NYDNb0x8+ek1nrOijoI3mWW/llomWdURRx6r6ac7UJQ/hYtaOVAW1w5XX8HkCy1Jwpi49hhw0+Q+MSiQ==
+Received: from PA7P264CA0007.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:2d3::11)
+ by PARP264MB4529.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:42e::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.20; Fri, 3 Apr
+ 2026 07:33:35 +0000
+Received: from PA2PEPF00019232.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:2d3:cafe::2) by PA7P264CA0007.outlook.office365.com
+ (2603:10a6:102:2d3::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.21 via Frontend Transport; Fri,
+ 3 Apr 2026 07:33:35 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
+ smtp.mailfrom=softathome.com; dkim=none (message not signed)
+ header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
+Received-SPF: Pass (protection.outlook.com: domain of softathome.com
+ designates 149.6.166.170 as permitted sender)
+ receiver=protection.outlook.com; client-ip=149.6.166.170;
+ helo=proxy.softathome.com; pr=C
+Received: from proxy.softathome.com (149.6.166.170) by
+ PA2PEPF00019232.mail.protection.outlook.com (10.167.242.38) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.17
+ via Frontend Transport; Fri, 3 Apr 2026 07:33:35 +0000
+Received: from sah2lpt245.. (unknown [192.168.72.220])
+ by proxy.softathome.com (Postfix) with ESMTPSA id 95A282018F;
+ Fri,  3 Apr 2026 09:33:34 +0200 (CEST)
+From: Paul HENRYS <paul.henrys_ext@softathome.com>
+To: u-boot+nodisclaimer@lists.denx.de
+Cc: sjg+nodisclaimer@chromium.org, trini+nodisclaimer@konsulko.com,
+ alpernebiyasak+nodisclaimer@gmail.com,
+ philippe.reynes+nodisclaimer@softathome.com,
+ Paul HENRYS <paul.henrys_ext@softathome.com>
+Subject: [PATCH v3 1/3] tools: binman: Test signing an encrypted FIT with a
+ preload header
+Date: Fri,  3 Apr 2026 09:32:49 +0200
+Message-ID: <20260403073251.1051533-1-paul.henrys_ext@softathome.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260402192431.2421155-1-yan.wang@softathome.com>
+References: <20260402192431.2421155-1-yan.wang@softathome.com>
 MIME-Version: 1.0
-References: <20260402001410.3736815-1-rs@ti.com>
- <20260402001410.3736815-6-rs@ti.com>
- <CAC_iWjKbeph+3M=GDy3_KeprSaUTVd3375O3Ny9GPV14XNBUgg@mail.gmail.com>
- <DHIUKA2JVA4H.V11Z7EF0I1A1@ti.com> <DHIXO2TK649C.JAGU2F3IZ91S@ti.com>
-In-Reply-To: <DHIXO2TK649C.JAGU2F3IZ91S@ti.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 3 Apr 2026 08:28:38 +0300
-X-Gm-Features: AQROBzBNedgA44ltInNrKP2PriFc14R5Q_MMmIOWYTogGGteQr1jNbi_b6KeoSk
-Message-ID: <CAC_iWjK=Fx80=Zh73f01oLvQETd8qiuqWyVXCDDpQcwC=BDdtQ@mail.gmail.com>
-Subject: Re: [PATCH 5/6] efi_memory: backfill EFI_CONVENTIONAL_MEMORY
-To: Randolph Sapp <rs@ti.com>
-Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
- Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
- afd@ti.com, xypron.glpk@gmx.de, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA2PEPF00019232:EE_|PARP264MB4529:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: c4d6a841-e8e9-443e-c12d-08de9153506c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|376014|36860700016|1800799024|17002099007|18002099003|56012099003|22082099003;
+X-Microsoft-Antispam-Message-Info: z46loZRJn1AjNkTuY3FyT2V3L5rqfQMtdP/b4Jogyv3FJZKVQhUqyTxqf/uYqXIhxiVQW3idOvOht2W6kSJXMRCu8cP4lC2+fj/I8nmjFnoxKw0a7FIgwl4v6NO/Z15gxuJ75dIjhtZUeJMyt3LLeuHiGQRPSLO8bmpmJoRclDC1D3gfAlhlzXJyQNRlduT0hItQonxrWrmQ7OGnPYTTEGq16OEE3PL6K/SRdFfVBJlNk1uhTz3RqwdY3bh2P6VivrGHKpHL4KuO90N0A5GejjvrrYjiLPf1cx/UoF9XbaXMB51kK+c+oVs+1tbTzeb2IGgyw4XvoLYoMqE3VFcUvVB3RDjY/EmmU9JGXb+S4Ugl9nvVfrmUKqASZ/Ogcw6Vr6JvucFFl3MPNeyrTT/k73zkMe3jwH8bnm61NQQkPUWnRbC18zg/gsSEZEx6LkTt9qIyZ3UpljV5+DbaRE9tuD8Ua7lbiff5hxtoffE/l45/rcACoayIvW3f+CuBVbiiQzm8iq4uobsIWyQxQ0Dv7KBgCswo+XFr5w7Z2evWY+5r/GWxSJgFmdBylQiwdGKmbz4WINl7TVWEyBmady13SUQhg8DWkG3R8o3bi8BTcujCqgcnMfQqV7qK0Y9a864qJvH/ezrYOnFyA6nwDt4QqH5K6r6xwwdv8fg10iVVkLTtCwF76b0DQdwGFAWuv2kAz/yO/qDAJ5tK3VmLagcXqjaDzCqFrXkn6mg+pxlzE7hi/lXgRoynyLMqe5XKcI1/zc41u/EBcEK6fbbrW/Ovbg==
+X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(36860700016)(1800799024)(17002099007)(18002099003)(56012099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: HOt1PVmIHWGW2ayD7nz78TbT65CCNhK8s1mvVqku79pMorWe8jxwf+4bPjYhPDyrOPUfcg8tqRdzKvIFxpE2AHIrEnJlt6ptYx9abWBhFMZlP5rz1Mu1yXIDiWNSAYjV4g3F7KKrFfsu7OAseySsD64ZZ8gmEU5lLRE7wpaIvE8X3m97FAXYuv3MrDQI1/2D7bu/lJvQB/opD0GhlWU5t/XyU3CXEOjoF0PcaNKiTWNsKolSAkphnhWdc9KwmmwM8HpYkvhci0nt7uNgKUlEfjv+Lv5mAxiLDhHJqIRLelprgx1Fhf3gl874p4TU2dbYdBuMbR+4tfL09FF6AjW/vJVEVZFkx8Wixz9ruMT7DnrqY+/VDAtyPyjJl8diGAoDT1oB2wQgB2lVBSiOQiGQiHk+D/zQvLvO+NPTO7aLMham5LEcPq87MqKWxJd8TRFU
+X-OriginatorOrg: softathome.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2026 07:33:35.0332 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c4d6a841-e8e9-443e-c12d-08de9153506c
+X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
+ Helo=[proxy.softathome.com]
+X-MS-Exchange-CrossTenant-AuthSource: PA2PEPF00019232.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PARP264MB4529
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,71 +124,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-[...]
+Add a test to verify the preload header correctly signs an encrypted
+FIT. This test exercises the case where encryption uses random IVs that
+would change between mkimage calls.
 
-> >>
-> >>> +}
-> >>> +
-> >>>  /**
-> >>>   * efi_allocate_pages - allocate memory pages
-> >>>   *
-> >>> @@ -507,10 +528,20 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
-> >>>         /* Reserve that map in our memory maps */
-> >>>         ret = efi_update_memory_map(efi_addr, pages, memory_type, true, false);
-> >>
-> >> In theory the lmb and the EFI maps are in sync. I haven't checked
-> >> close enough yet, but do you have cases where lmb_alloc worked and
-> >> updating the efi memory map failed?
-> >
-> > Fair point. Now that I've fixed the FDT warning I should probably check if I can
-> > actually reproduce the issue that actually required this.
->
-> Yeah, this patch isn't necessary anymore. I suppose it should be dropped as it
-> would potentially mask any discrepancies between the two maps.
+Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
+---
+Changes for v3:
+- Rebase against 'next' branch
+- Move test in tools/binman/test/fit without a numeric prefix
+- Update encryption key path passed to _DoReadFileDtb()
 
-Yea and if we really need a similar fix in the future, it's best if we
-put in the lmb core code.
+ tools/binman/ftest.py                         | 21 +++++++
+ .../test/fit/pre_load_fit_encrypted.dts       | 63 +++++++++++++++++++
+ 2 files changed, 84 insertions(+)
+ create mode 100644 tools/binman/test/fit/pre_load_fit_encrypted.dts
 
->
-> Out of curiosity, is there any plan to merge the EFI and LMB allocators more in
-> the future, or is the current layering scheme the furthest we want to go?
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index ca5149ee654..301c7705837 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -5895,6 +5895,27 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+             data = self._DoReadFileDtb('security/pre_load_invalid_key.dts',
+                                        entry_args=entry_args)
+ 
++    def testPreLoadEncryptedFit(self):
++        """Test an encrypted FIT image with a pre-load header"""
++        entry_args = {
++            'pre-load-key-path': os.path.join(self._binman_dir, 'test'),
++        }
++        data = tools.read_file(self.TestFile("fit/aes256.bin"))
++        self._MakeInputFile("keys/aes256.bin", data)
++
++        keys_subdir = os.path.join(self._indir, "keys")
++        data = self._DoReadFileDtb(
++            'fit/pre_load_fit_encrypted.dts', entry_args=entry_args,
++            extra_indirs=[keys_subdir])[0]
++
++        image_fname = tools.get_output_filename('image.bin')
++        is_signed = self._CheckPreload(image_fname, self.TestFile("dev.key"))
++
++        self.assertEqual(PRE_LOAD_MAGIC, data[:len(PRE_LOAD_MAGIC)])
++        self.assertEqual(PRE_LOAD_VERSION, data[4:4 + len(PRE_LOAD_VERSION)])
++        self.assertEqual(PRE_LOAD_HDR_SIZE, data[8:8 + len(PRE_LOAD_HDR_SIZE)])
++        self.assertEqual(is_signed, True)
++
+     def _CheckSafeUniqueNames(self, *images):
+         """Check all entries of given images for unsafe unique names"""
+         for image in images:
+diff --git a/tools/binman/test/fit/pre_load_fit_encrypted.dts b/tools/binman/test/fit/pre_load_fit_encrypted.dts
+new file mode 100644
+index 00000000000..f5e9bf9426c
+--- /dev/null
++++ b/tools/binman/test/fit/pre_load_fit_encrypted.dts
+@@ -0,0 +1,63 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		pre-load {
++			content = <&image>;
++			algo-name = "sha256,rsa2048";
++			key-name = "dev.key";
++			header-size = <4096>;
++			version = <0x11223344>;
++		};
++
++		image: fit {
++			fit,encrypt;
++			description = "Test a FIT with encrypted data and signed with a preload";
++			#address-cells = <1>;
++
++			images {
++				u-boot {
++					description = "U-Boot";
++					type = "firmware";
++					arch = "arm64";
++					os = "U-Boot";
++					compression = "none";
++					load = <00000000>;
++					entry = <00000000>;
++					cipher {
++						algo = "aes256";
++						key-name-hint = "aes256";
++					};
++					u-boot-nodtb {
++					};
++				};
++				fdt-1 {
++					description = "Flattened Device Tree blob";
++					type = "flat_dt";
++					arch = "arm64";
++					compression = "none";
++					cipher {
++						algo = "aes256";
++						key-name-hint = "aes256";
++					};
++					u-boot-dtb {
++					};
++				};
++			};
++
++			configurations {
++				default = "conf-1";
++				conf-1 {
++					description = "Boot U-Boot with FDT blob";
++					firmware = "u-boot";
++					fdt = "fdt-1";
++				};
++			};
++		};
++	};
++};
+-- 
+2.43.0
 
-We do, but havent due to lack of time. It's been a while since I
-discussed this with Heinrich but iirc the only thing missing is for
-lmb to be aware of the memory flags EFI expects.
-
-/Ilias
->
-> >>>         if (ret != EFI_SUCCESS) {
-> >>> -               /* Map would overlap, bail out */
-> >>> +               /* Map would overlap, try something else */
-> >>>                 lmb_free(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
-> >>>                 unmap_sysmem((void *)(uintptr_t)efi_addr);
-> >>> -               return  EFI_OUT_OF_RESOURCES;
-> >>> +
-> >>> +               /* See if there is any EFI_CONVENTIONAL_MEMORY allocations */
-> >>> +               if (type != EFI_ALLOCATE_ADDRESS) {
-> >>
-> >> Can you please inverse this. It's going to reduce the identation.
-> >> if (type == EFI_ALLOCATE_ADDRESS)
-> >>> +                       *memory = efi_get_conventional_start(pages);
-> >>> +                       if (*memory != 0)
-> >>
-> >> Same here
-> >>
-> >>> +                               return efi_allocate_pages(EFI_ALLOCATE_ADDRESS,
-> >>> +                                                         memory_type, pages,
-> >>> +                                                         memory);
-> >>> +               }
-> >>> +
-> >>> +               return EFI_OUT_OF_RESOURCES;
-> >>>         }
-> >>>
-> >>>         *memory = efi_addr;
-> >>> --
-> >>> 2.53.0
-> >>>
-> >>
-> >> Thanks
-> >> /Ilias
->
