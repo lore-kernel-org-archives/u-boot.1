@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89EA0E85379
-	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 16:26:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FF7CE85371
+	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 16:27:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF90B84181;
-	Fri,  3 Apr 2026 18:26:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 527278418C;
+	Fri,  3 Apr 2026 18:26:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="ibXwqdvE";
+	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="lwEQIhCD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8804D84105; Fri,  3 Apr 2026 18:25:56 +0200 (CEST)
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.2])
+ id BDE7E840BE; Fri,  3 Apr 2026 18:25:58 +0200 (CEST)
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 608E884118
- for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 18:25:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C4C738413A
+ for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 18:25:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sgdfkk@163.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=of
- 5OShH0/01X2M4+qgw1fbWooJ6uzl9sPzdbS4gX1rU=; b=ibXwqdvE6fQWdzB8fm
- 3z6QmoXMJpDua2owVimLCeA51AUHGfpaea3nNovLCCOsTbnSzGrNTmWmNomZ66bn
- G1qWM8AvOKKkF4S52DFov2evBBuOY2CrlXYu7mI0zVySWHii6Ie8ZohhNWxeAOH4
- YMokEEuBx9tVTRduA8xs92AyQ=
+ s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=PY
+ yX9HF2cGo2r2WULwPbWHF2s/9BE0pw9IfILZ4h1xU=; b=lwEQIhCDRrwXKlpkRX
+ YwtbCHpKainqTy+USMt18BE736wo8RLctXUww9Pqg7wilO+i81ch8Tlxs4zREvtm
+ TKtwvwcU/TYdYM7ewLnvjY73QcLRgwB3TTDCDUVqWOTyyOAC1BKkiojdttk7zY5x
+ HHXDqVtZb7OWxqXVM4Jp3ibdM=
 Received: from server-e.. (unknown [])
- by gzsmtp3 (Coremail) with SMTP id PigvCgAnAXQF6s9pHqSgBw--.137S9;
- Sat, 04 Apr 2026 00:25:49 +0800 (CST)
+ by gzsmtp3 (Coremail) with SMTP id PigvCgAnAXQF6s9pHqSgBw--.137S6;
+ Sat, 04 Apr 2026 00:25:48 +0800 (CST)
 From: sgdfkk@163.com
 To: u-boot@lists.denx.de
 Cc: Du Huanpeng <u74147@gmail.com>
-Subject: [PATCH v7 7/7] mips: loongson: ls1c300 dts and bindings
-Date: Sat,  4 Apr 2026 00:25:41 +0800
-Message-ID: <20260403162541.86608-8-sgdfkk@163.com>
+Subject: [PATCH v7 4/7] mips: loongson: ls1c300 board support
+Date: Sat,  4 Apr 2026 00:25:38 +0800
+Message-ID: <20260403162541.86608-5-sgdfkk@163.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260403162541.86608-1-sgdfkk@163.com>
 References: <20260403162541.86608-1-sgdfkk@163.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: PigvCgAnAXQF6s9pHqSgBw--.137S9
-X-Coremail-Antispam: 1Uf129KBjvJXoW3AF1UZr17urW7Cr45Gr15Arb_yoWxCF1Upw
- 1qkFZ5tr40vF129w1F9a48JF1fJFW0kFy7J3ZFqFy8Cw13KFWjyF1fKaySqFy3Xr48Z3yx
- XFZrX34jvFsFvw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07Um4E_UUUUU=
+X-CM-TRANSID: PigvCgAnAXQF6s9pHqSgBw--.137S6
+X-Coremail-Antispam: 1Uf129KBjvJXoW3JFW8Xr47Xr1xXF15uryDKFg_yoW7tryrpr
+ n2kF4rGr48Jw47GrZ3uFyDWFn0yw4kuFWUuFnFgr1rAr97Aa18CFnIya13try3XrWkJrW8
+ ZF93WF4akFWDXw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UKzuXUUUUU=
 X-Originating-IP: [240e:3b0:4805:581::3001]
-X-CM-SenderInfo: xvjgwyrn6rljoofrz/xtbC5w0MY2nP6g28pgAA3e
+X-CM-SenderInfo: xvjgwyrn6rljoofrz/xtbCvwwMY2nP6gzISQAA3d
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,282 +69,194 @@ X-Virus-Status: Clean
 
 From: Du Huanpeng <u74147@gmail.com>
 
-- ls1c300 dtsi
-- ls1c300-eval board dts
-- clk binding header
-- reset binding header
+- 64MiB SDRAM K9F1G08
+- 4MiB spi flash
+- ethernet DM9161CEP
+- UART2 console
 
 Signed-off-by: Du Huanpeng <u74147@gmail.com>
 ---
- arch/mips/dts/loongson32-ls1c300b.dtsi    | 151 ++++++++++++++++++++++
- arch/mips/dts/ls1c300-eval.dts            |  30 +++++
- include/dt-bindings/clock/ls1c300-clk.h   |  18 +++
- include/dt-bindings/reset/ls1c300-reset.h |  36 ++++++
- 4 files changed, 235 insertions(+)
- create mode 100644 arch/mips/dts/loongson32-ls1c300b.dtsi
- create mode 100644 arch/mips/dts/ls1c300-eval.dts
- create mode 100644 include/dt-bindings/clock/ls1c300-clk.h
- create mode 100644 include/dt-bindings/reset/ls1c300-reset.h
+ board/loongson/ls1c300-eval/Kconfig     | 12 ++++++
+ board/loongson/ls1c300-eval/MAINTAINERS |  7 ++++
+ board/loongson/ls1c300-eval/Makefile    |  3 ++
+ board/loongson/ls1c300-eval/board.c     | 19 +++++++++
+ configs/ls1c300_defconfig               | 52 +++++++++++++++++++++++++
+ include/configs/ls1c300.h               | 38 ++++++++++++++++++
+ 6 files changed, 131 insertions(+)
+ create mode 100644 board/loongson/ls1c300-eval/Kconfig
+ create mode 100644 board/loongson/ls1c300-eval/MAINTAINERS
+ create mode 100644 board/loongson/ls1c300-eval/Makefile
+ create mode 100644 board/loongson/ls1c300-eval/board.c
+ create mode 100644 configs/ls1c300_defconfig
+ create mode 100644 include/configs/ls1c300.h
 
-diff --git a/arch/mips/dts/loongson32-ls1c300b.dtsi b/arch/mips/dts/loongson32-ls1c300b.dtsi
+diff --git a/board/loongson/ls1c300-eval/Kconfig b/board/loongson/ls1c300-eval/Kconfig
 new file mode 100644
-index 00000000000..26b0c707459
+index 00000000000..e427570a836
 --- /dev/null
-+++ b/arch/mips/dts/loongson32-ls1c300b.dtsi
-@@ -0,0 +1,151 @@
-+// SPDX-License-Identifier: GPL-2.0
-+#include <dt-bindings/clock/ls1c300-clk.h>
-+#include <dt-bindings/reset/ls1c300-reset.h>
++++ b/board/loongson/ls1c300-eval/Kconfig
+@@ -0,0 +1,12 @@
++if BOARD_LS1C300
 +
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+	compatible = "loongson,ls1c300-soc";
++config SYS_BOARD
++	default "ls1c300-eval"
 +
-+	cpus {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+		cpu@0 {
-+			device_type = "cpu";
-+			reg = <0>;
-+			compatible = "loongson,gs232", "mips,mips4Kc";
-+			clocks = <&acc CLK_CPU_THROT>;
-+		};
-+	};
++config SYS_VENDOR
++	default "loongson"
 +
-+	clocks {
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		bootph-all;
++config SYS_CONFIG_NAME
++	default "ls1c300"
 +
-+
-+		xtal: oscillator {
-+			compatible = "fixed-clock";
-+			clock-frequency = <24000000>;
-+			#clock-cells = <0>;
-+		};
-+	};
-+
-+	soc {
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		compatible = "simple-bus";
-+		ranges;
-+
-+		acc: clock-controller@1fe78030 {
-+			compatible = "loongson,ls1c300-clk";
-+			clocks = <&xtal>;
-+			#clock-cells = <1>;
-+			reg = <0x1fe78030 0x8>, <0x1fe7c010 0x4>;
-+			bootph-all;
-+		};
-+
-+		uart0: serial@1fe40000 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe40000 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart1: serial@1fe44000 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe44000 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart2: serial@1fe48000 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe48000 0x100>;
-+			resets = <&shut_ctrl UART2_SHUT>;
-+			reset-names = "uart2";
-+			status = "disabled";
-+		};
-+
-+		uart3: serial@1fe4c000 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe4c000 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart4:  serial@1fe4c400 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe4c400 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart5:  serial@1fe4c500 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe4c500 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart6:  serial@1fe4c600 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe4c600 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart7:  serial@1fe4c700 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe4c700 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart8:  serial@1fe4c800 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe4c800 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart9:  serial@1fe4c900 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe4c900 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart10: serial@1fe4ca00 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe4ca00 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart11: serial@1fe4cb00 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe4cb00 0x100>;
-+			status = "disabled";
-+		};
-+
-+		wdt: watchdog@1fe5c060 {
-+			compatible = "loongson,ls1c300-wdt";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe5c060 0x10>;
-+		};
-+
-+		reset-controller {
-+			compatible = "wdt-reboot";
-+			wdt = <&wdt>;
-+		};
-+
-+		shut_ctrl: reset-controller@1fd00420 {
-+			compatible = "loongson,shut_ctrl";
-+			reg = <0x1fd00420 0x4>;
-+			#reset-cells = <1>;
-+		};
-+	};
-+};
-diff --git a/arch/mips/dts/ls1c300-eval.dts b/arch/mips/dts/ls1c300-eval.dts
++endif
+diff --git a/board/loongson/ls1c300-eval/MAINTAINERS b/board/loongson/ls1c300-eval/MAINTAINERS
 new file mode 100644
-index 00000000000..cc3c267a5bf
+index 00000000000..d3498b18e2b
 --- /dev/null
-+++ b/arch/mips/dts/ls1c300-eval.dts
-@@ -0,0 +1,30 @@
++++ b/board/loongson/ls1c300-eval/MAINTAINERS
+@@ -0,0 +1,7 @@
++LS1C300_EVAL BOARD
++M:	Du Huanpeng <u74147@gmail.com>
++S:	Maintained
++F:	board/loongson/ls1c300-eval/
++F:	include/configs/ls1c300.h
++F:	configs/ls1c300_defconfig
++F:	arch/mips/dts/ls1c300-eval.dts
+diff --git a/board/loongson/ls1c300-eval/Makefile b/board/loongson/ls1c300-eval/Makefile
+new file mode 100644
+index 00000000000..db129c5abae
+--- /dev/null
++++ b/board/loongson/ls1c300-eval/Makefile
+@@ -0,0 +1,3 @@
++# SPDX-License-Identifier: GPL-2.0
++
++obj-y += board.o
+diff --git a/board/loongson/ls1c300-eval/board.c b/board/loongson/ls1c300-eval/board.c
+new file mode 100644
+index 00000000000..0eb5df1dc7b
+--- /dev/null
++++ b/board/loongson/ls1c300-eval/board.c
+@@ -0,0 +1,19 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * Copyright (C) 2022 Du Huanpeng <u74147@gmail.com>
++ * Copyright (C) 2020-2026 Du Huanpeng <u74147@gmail.com>
 + */
 +
-+/dts-v1/;
++#include <mach/serial.h>
 +
-+#include "loongson32-ls1c300b.dtsi"
++#if defined(CONFIG_DEBUG_UART_BOARD_INIT)
 +
-+/ {
-+	compatible = "lsmips,ls1c300-soc";
-+	model = "ls1c300-eval";
++#define UART2_RX	36
++#define UART2_TX	37
++#define AFUNC		2
 +
-+	aliases {
-+		serial0 = &uart2;
-+	};
-+
-+	memory@80000000 {
-+		device_type = "memory";
-+		reg = <0x80000000 0x4000000>;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+	};
-+};
-+
-+&uart2 {
-+	status = "okay";
-+};
-diff --git a/include/dt-bindings/clock/ls1c300-clk.h b/include/dt-bindings/clock/ls1c300-clk.h
++void board_debug_uart_init(void)
++{
++	gpio_set_alternate(UART2_TX, AFUNC);
++	gpio_set_alternate(UART2_RX, AFUNC);
++}
++#endif
+diff --git a/configs/ls1c300_defconfig b/configs/ls1c300_defconfig
 new file mode 100644
-index 00000000000..170728693be
+index 00000000000..22d6f18cac4
 --- /dev/null
-+++ b/include/dt-bindings/clock/ls1c300-clk.h
-@@ -0,0 +1,18 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Copyright (C) 2022 Du Huanpeng <u74147@gmail.com>
-+ */
-+
-+#ifndef __DT_BINDINGS_LS1C300_CLK_H__
-+#define __DT_BINDINGS_LS1C300_CLK_H__
-+
-+#define CLK_XTAL	0
-+#define CLK_PLL		1
-+#define CLK_CPU		2
-+#define CLK_APB		3
-+#define CLK_CAMERA	4
-+#define CLK_PIX		5
-+#define CLK_AXIMUX	6
-+#define CLK_CPU_THROT	7
-+
-+#endif /* __DT_BINDINGS_LS1C300_CLK_H__ */
-diff --git a/include/dt-bindings/reset/ls1c300-reset.h b/include/dt-bindings/reset/ls1c300-reset.h
++++ b/configs/ls1c300_defconfig
+@@ -0,0 +1,52 @@
++CONFIG_MIPS=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_TEXT_BASE=0x80200000
++CONFIG_SYS_MALLOC_F_LEN=0x40000
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=1
++CONFIG_ENV_SIZE=0x1000
++CONFIG_DEFAULT_DEVICE_TREE="ls1c300-eval"
++CONFIG_DM_RESET=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_TEXT_BASE=0xbfc00000
++CONFIG_SPL_BSS_START_ADDR=0x80010000
++CONFIG_SPL_BSS_MAX_SIZE=0x10000
++CONFIG_SYS_LOAD_ADDR=0x80010000
++CONFIG_WATCHDOG_TIMEOUT_MSECS=3000
++CONFIG_SPL_SIZE_LIMIT=0x100000
++CONFIG_SPL=y
++CONFIG_ARCH_LSMIPS=y
++CONFIG_SPL_PAYLOAD="u-boot.img"
++CONFIG_ROM_EXCEPTION_VECTORS=y
++CONFIG_RESTORE_EXCEPTION_VECTOR_BASE=y
++CONFIG_MIPS_BOOT_FDT=y
++CONFIG_FIT=y
++# CONFIG_ARCH_FIXUP_FDT_MEMORY is not set
++CONFIG_LOGLEVEL=9
++CONFIG_DISPLAY_CPUINFO=y
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x10000
++CONFIG_SPL_PAD_TO=0
++CONFIG_SPL_LEGACY_IMAGE_CRC_CHECK=y
++CONFIG_SPL_SYS_MALLOC_SIMPLE=y
++CONFIG_SPL_NOR_SUPPORT=y
++# CONFIG_CMD_ELF is not set
++# CONFIG_CMD_XIMG is not set
++# CONFIG_CMD_CRC32 is not set
++CONFIG_CMD_CLK=y
++# CONFIG_CMD_LOADS is not set
++CONFIG_OF_EMBED=y
++CONFIG_CLK=y
++CONFIG_SPL_CLK_CCF=y
++# CONFIG_INPUT is not set
++# CONFIG_POWER is not set
++CONFIG_CONS_INDEX=2
++CONFIG_SPL_SYS_NS16550_SERIAL=y
++CONFIG_SYS_NS16550_REG_SIZE=-1
++CONFIG_SPI=y
++CONFIG_SYSRESET=y
++CONFIG_SYSRESET_WATCHDOG=y
++CONFIG_SYSRESET_WATCHDOG_AUTO=y
++CONFIG_WDT_LOONGSON=y
++# CONFIG_GZIP is not set
+diff --git a/include/configs/ls1c300.h b/include/configs/ls1c300.h
 new file mode 100644
-index 00000000000..44734ee50a9
+index 00000000000..488d1c40330
 --- /dev/null
-+++ b/include/dt-bindings/reset/ls1c300-reset.h
-@@ -0,0 +1,36 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
++++ b/include/configs/ls1c300.h
+@@ -0,0 +1,38 @@
++/* SPDX-License-Identifier: GPL-2.0 */
 +/*
-+ * Copyright (C) 2022 Du Huanpeng <u74147@gmail.com>
++ * Copyright (C) 2020 MediaTek Inc.
++ *
++ * Author: Gao Weijie <weijie.gao@mediatek.com>
++ * based on: include/configs/mt7628.h
++ * Copyright (C) 2022-2023 Du Huanpeng <u74147@gmail.com>
 + */
 +
-+#ifndef _DT_BINDINGS_LS1C300_RESET_H_
-+#define _DT_BINDINGS_LS1C300_RESET_H_
++#ifndef __CONFIG_LS1C300_H__
++#define __CONFIG_LS1C300_H__
 +
-+#define ADC_SHUT        25
-+#define SDIO_SHUT       24
-+#define DMA2_SHUT       23
-+#define DMA1_SHUT       22
-+#define DMA0_SHUT       21
-+#define SPI1_SHUT       20
-+#define SPI0_SHUT       19
-+#define I2C2_SHUT       18
-+#define I2C1_SHUT       17
-+#define I2C0_SHUT       16
-+#define AC97_SHUT       15
-+#define I2S_SHUT        14
-+#define UART3_SHUT      13
-+#define UART2_SHUT      12
-+#define UART1_SHUT      11
-+#define UART0_SHUT      10
-+#define CAN1_SHUT       9
-+#define CAN0_SHUT       8
-+#define ECC_SHUT        7
-+#define MAC_SHUT        6
-+#define USBHOST_SHUT    5
-+#define USBOTG_SHUT     4
-+#define SDRAM_SHUT      3
-+#define SRAM_SHUT       2
-+#define CAM_SHUT        1
-+#define LCD_SHUT        0
++#define CFG_SYS_SDRAM_BASE		0x80200000
++#define CFG_SYS_INIT_SP_OFFSET		0x2000
 +
-+#endif  /* _DT_BINDINGS_LS1C300_RESET_H_*/
++/* SPL */
++#if defined(CONFIG_SPL_BUILD)
++
++/* Serial SPL */
++#if defined(CONFIG_SPL_SERIAL)
++#define CFG_SYS_NS16550_CLK		66000000
++#define CFG_SYS_NS16550_COM1		0xbfe44000
++#define CFG_SYS_NS16550_COM2		0xbfe48000
++#define CFG_SYS_NS16550_COM3		0xbfe4c000
++#define CFG_SYS_NS16550_COM4		0xbfe4c400
++#define CFG_SYS_NS16550_COM5		0xbfe4c500
++#define CFG_SYS_NS16550_COM6		0xbfe4c600
++#endif
++
++#define CFG_MALLOC_F_ADDR		0x80100000	/* FIXME: find a proper place */
++#define CFG_SYS_UBOOT_BASE		0xbd000000
++
++#endif
++
++/* Serial common */
++#define CFG_SYS_BAUDRATE_TABLE	{ 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600 }
++
++#endif /* __CONFIG_LS1C300_H__ */
 -- 
 2.43.0
 
