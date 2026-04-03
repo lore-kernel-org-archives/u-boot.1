@@ -4,53 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C592E85389
-	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 20:12:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A62EDE85389
+	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 20:12:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 071CD84148;
+	by phobos.denx.de (Postfix) with ESMTP id 6CE8884159;
 	Fri,  3 Apr 2026 22:12:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="K7UFiqam";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="sGu9fBQu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51076840B0; Fri,  3 Apr 2026 18:17:37 +0200 (CEST)
+ id C7926840D8; Fri,  3 Apr 2026 18:17:39 +0200 (CEST)
 Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D443840BE
- for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 18:17:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E1744840B0
+ for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 18:17:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 219EF1A312C;
- Fri,  3 Apr 2026 16:17:35 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 96C1A1A312C;
+ Fri,  3 Apr 2026 16:17:37 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id E5A6B603C1;
- Fri,  3 Apr 2026 16:17:34 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 6D8AB603C1;
+ Fri,  3 Apr 2026 16:17:37 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E7527104500FB; 
- Fri,  3 Apr 2026 18:17:31 +0200 (CEST)
+ with ESMTPSA id 5E7A9104500FA; 
+ Fri,  3 Apr 2026 18:17:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1775233053; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1775233056; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=YO42xbktUsPrHBThgiIhW61sF+mYEovHRhUi2OBXEHE=;
- b=K7UFiqamDSnHzWwAdqGEZJUAuoycPgtTOg19UzYdIG7CamPsaL6poX1ha5gmSzdyHlVpQD
- fgysOBbdeJT5kqin4K5HC64yJdiIfbGpaM0WgGHBrEvTwqq97ISgnvngoPqaFlNiW0nk/Q
- 4iTeaE1HR1CdTKyE50O8bqPI6Qj6TUdjauUxazDHMWGQVKdCrtD2Z4yxQOb6Dd9YBBSJd4
- h7aB0Tf/L3imVdIApEc8YzWo0zoILT75pTm6G3lBBptmkaeJ2+qaK/80nwy0LGF6eKDMAW
- MKuVdQg7rMbsTLDW5mjtgeYNDeUmze5RevSOVVV4NGhrsRsN5KmNQF7OeZGtLQ==
+ bh=gQcHQJoz24TyUAw4tN/RD2C66izTzhrqFZzYFIUF/ig=;
+ b=sGu9fBQutTS5UTjca4dNmEJJtwIeOqdc+zbPoQKTwLKLjbczjWYXP3qHtBOuHE7Eb8Kf9S
+ rY5bPLMJfNeYaeRA3Y9HOsBUDKginf3QhHpH7qN6SD0VEWo8EwguB7tGNUBVIx8PcZ2wfa
+ TKRLrKHZ4EBcOcztVAAwIpKw6PDicalybdpo91WY+4xggp9RThLbOwc/O/brLJG8fffYW4
+ psESNImynwjPvesShZxnE5ePBjHrFmAYxCagBCwKXF2G0+ADQDpHXbR8tGe8ViDyNpDTZ2
+ Edmt+eI3BoTLhlsjt3MYT/x1xi34Kgp+rTVlQktV67nzgrqiT9BdM6ve6kdEjw==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Fri, 03 Apr 2026 18:17:10 +0200
-Subject: [PATCH 2/3] mtd: spinand: winbond: Add missing QE bit on W25NxxJW
- devices
+Date: Fri, 03 Apr 2026 18:17:11 +0200
+Subject: [PATCH 3/3] mtd: spinand: winbond: Clarify when to enable the HS bit
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260403-winbond-ma35d1-v1-2-e2b08c4c5e35@bootlin.com>
+Message-Id: <20260403-winbond-ma35d1-v1-3-e2b08c4c5e35@bootlin.com>
 References: <20260403-winbond-ma35d1-v1-0-e2b08c4c5e35@bootlin.com>
 In-Reply-To: <20260403-winbond-ma35d1-v1-0-e2b08c4c5e35@bootlin.com>
 To: u-boot@lists.denx.de, Frieder Schrempf <frieder.schrempf@kontron.de>
@@ -82,36 +81,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These devices have a bit in their status register to enable the Quad
-capability, make sure it is set when using quad mode.
+Above 104MHz when in fast dual or quad I/O reads, the delay between
+address and data cycles is too short. It is possible to reach higher
+frequencies, up to 166MHz, by adding a few more dummy cycles through the
+setting of the HS bit. Improve the condition for enabling this bit, and
+also make sure we set it at soon as we go over 104MHz.
 
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
- drivers/mtd/nand/spi/winbond.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+This is a port from Linux.
+---
+ drivers/mtd/nand/spi/winbond.c | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/mtd/nand/spi/winbond.c b/drivers/mtd/nand/spi/winbond.c
-index a89aaec516b7..79c3354efb65 100644
+index 79c3354efb65..accb46dfeb03 100644
 --- a/drivers/mtd/nand/spi/winbond.c
 +++ b/drivers/mtd/nand/spi/winbond.c
-@@ -398,7 +398,7 @@ static const struct spinand_info winbond_spinand_table[] = {
- 		     SPINAND_INFO_OP_VARIANTS(&read_cache_dual_quad_dtr_variants,
- 					      &write_cache_variants,
- 					      &update_cache_variants),
--		     0,
-+		     SPINAND_HAS_QE_BIT,
- 		     SPINAND_ECCINFO(&w25m02gv_ooblayout, NULL),
- 		     SPINAND_CONFIGURE_CHIP(w25n0xjw_hs_cfg)),
- 	SPINAND_INFO("W25N01KV", /* 3.3V */
-@@ -458,7 +458,7 @@ static const struct spinand_info winbond_spinand_table[] = {
- 		     SPINAND_INFO_OP_VARIANTS(&read_cache_dual_quad_dtr_variants,
- 					      &write_cache_variants,
- 					      &update_cache_variants),
--		     0,
-+		     SPINAND_HAS_QE_BIT,
- 		     SPINAND_ECCINFO(&w25m02gv_ooblayout, NULL),
- 		     SPINAND_CONFIGURE_CHIP(w25n0xjw_hs_cfg)),
- 	SPINAND_INFO("W25N02KV", /* 3.3V */
+@@ -261,16 +261,19 @@ static int w25n0xjw_hs_cfg(struct spinand_device *spinand)
+ 	u8 sr4;
+ 	int ret;
+ 
++	/*
++	 * SDR dual and quad I/O operations over 104MHz require the HS bit to
++	 * enable a few more dummy cycles.
++	 */
+ 	op = spinand->op_templates.read_cache;
+ 	if (op->cmd.dtr || op->addr.dtr || op->dummy.dtr || op->data.dtr)
+ 		hs = false;
+-	else if (op->cmd.buswidth == 1 && op->addr.buswidth == 1 &&
+-		 op->dummy.buswidth == 1 && op->data.buswidth == 1)
++	else if (op->cmd.buswidth != 1 || op->addr.buswidth != 1)
++		hs = false;
++	else if (op->max_freq && op->max_freq <= 104 * HZ_PER_MHZ)
+ 		hs = false;
+-	else if (!op->max_freq)
+-		hs = true;
+ 	else
+-		hs = false;
++		hs = true;
+ 
+ 	ret = spinand_read_reg_op(spinand, W25N0XJW_SR4, &sr4);
+ 	if (ret)
 
 -- 
 2.53.0
