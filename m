@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F3ECD73087
-	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 02:26:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D1D2D73086
+	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 02:26:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A544684120;
+	by phobos.denx.de (Postfix) with ESMTP id E77EB84142;
 	Fri,  3 Apr 2026 04:26:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="kahtj+la";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="VqF1iWQP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC02B83D8A; Fri,  3 Apr 2026 04:25:57 +0200 (CEST)
+ id 708E783D8A; Fri,  3 Apr 2026 04:25:58 +0200 (CEST)
 Received: from CY7PR03CU001.outbound.protection.outlook.com
  (mail-westcentralusazlp170100005.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c112::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77CEF83693
- for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 04:25:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A2FA4840BE
+ for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 04:25:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fiTqDawSf/xBgMBuqY3gZEH+eMm6lZZITEryADZDv9e0CgG8hlVUcW/lX+n0e8nhOZfk9fBmU0rwbxMNf48PxCVL9/lLKpiHt+MPArBk+JkjkKITGH25KnSEKiq/hZFhjvtut6/6xd2KsggGj4CmgWoQ/XXDvniimC2cpvpyB0tzG7hmShDZsYuWzCv7uKENPWoaBZ+dvfdN5g3QIcTJnCa34oOBYTtlaKvXe0oErBcQqSR7sbj5+KcF/5OUDXz9in45KTbSCXtpRFJSI2+kXtGufOBtAVfvXJG9JHRUF/+Okeig6vBq1lAUY80aEeQo1Cvdm0h6k1U8nvfZ7UQ7YQ==
+ b=a8wAdNHPFJj+3/XaoTs8Os0bk1hLlIWicPhFp6MxBZ8aHY6hMRIhMW+5kdKdx8fWfG44Kdecc91ywuJqZUFzJ9nxHtcIV5TqPW9+7a6d3z5YMqGm9TqTf0mPCzOClqBkvWcE3p+Ry8Wsw9Lt3RbE6eMxN2GtfhMp6B2qkMYG7OJuBw/d+CDcErzD1LsN/vLYOhKizGuZPpKpkLScF5MvBuXzp+nuCOwM1ziLeTki46TqlQCeA61KOQSjedsVgNyIjeG8CjeCLvk00/MIVhLG+FMQCrJPxzTKTUyz0ODM9XZ+SM8/f7PjrePPOjf4eOX9gkDThP6mSm7UoSMfopei8A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ydnW47IddL/9NHhXaj2vvUMpzgeRef/TwHkyQ9G5JYY=;
- b=LjPKIzu42w5lxpMtHLVXdT4dTlCk19ehn5Hlwbo61TlpkWcj02RrfINq6h7XZ3Ryj3K2inqZ8pEFSyS74czlgwAZN/TtheZLyeFckBeTuhla6fZR3wwxQd+SbuTawIi42oo7j2MtxsrHT6c3AenaRuUQXW/gf5RmxwtK1x5zxZBdYu1EI3h4lmnB8QHc+ZGPR63g5gnYaZdHisUxRuBtydmQQWejL6BI6QI+v4IQG2spd5rG/kZGGnCNzWdPlFP89ChjFAMkiFjNzrYlNdgpLkit3IXPz76dqhPaLZz3dhr4WbQg8kbqGQZp5mKOBQdARn8gwdrgvhpqJhNCusU5sA==
+ bh=GpcNrYga8FWpIk1fn7kWlT2pfR6yflbtyxzuoJvFecY=;
+ b=eCkSXMgAZpxRvQrr+zdlL40EAAx+ri9XbZdFFgHDV/xsO+6IjjAQoLZib76DJqXMqyCHNNyVH7+U7IB4b1a00PG7cF1ueDhfN+NeH+2pqitorB6Jyu5z4Lrq2daBR9hw6LmSC6jDx2Fq3eqSeZqpHKdKnL6H4tesKFoqJHfPmtsBjyQUYKWCUQpWvVoDkDpoPZDZdIODJ60EwTlu6lVVDsR0CksPSe7GDvDIO6nl64oSPxZk1vH9usMq/VNbfRKYARdWGNB4ExlnShG2WcLJm2dLBIB83TmMNdKGE5i5EXCY91C06rFZWPzYGv/OaQ/adtvFKqx1kA32fV6PFTJ/bw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ydnW47IddL/9NHhXaj2vvUMpzgeRef/TwHkyQ9G5JYY=;
- b=kahtj+lahuEsfDTMQ1obA6ulMZlRtu9mzvn/x5g1hodyV2KHtEp9hT92MCSkb9+qZEv1ui0Y6bxFYL2C6IOsA8EluXcB3O86hz6f8FuckVhE6EHBSx8a44XBg+KO6KqldEUhhfbcQAEXRPbYOC286iHm6SZgpNV+Nhs+15CKPF7ocLpVPDY2PWWkwm5/ECUNWReI5OUvWd1B/lpUvhwzekXDKho0T90dCIEof2vIR7dno50OZTC94sypeTi2TZhToqLAQbDShd2dp/jWj7evBcrkCEQ5brH0jIdvfgMugNzmv8P+Vl2vrL5+K5k5tkXu25NhVZmaYPxWzQ5qU2x/Zw==
+ bh=GpcNrYga8FWpIk1fn7kWlT2pfR6yflbtyxzuoJvFecY=;
+ b=VqF1iWQPfiUMGByNWSBNHFSSdI+gNTcGTECtLFR0APDTt2pJzPVVQV/frUNuCXnAJCmsT56bqt198a3ohwe36H1WjmEjizv4EBf6kbOm0rMbSlBm4EiOa71PKj18ksKlWgYOtrgOxf2eXITBBoEsFIiCaOb7DBtx+2FqwdAu+DZXHHW6FDxvWhmKQIl56br3cajdMF5aK2jf9oHgSrW+XISugb+rmu4D2jpSuVUi5V0+D/nrjefqceg1ZQJwqX4e8tHs7VvP7lgp9bR5SCSeKdD90q7kxmiuQc11yAStxBY5JHhTwK8JF4BD7WsSAlsc9j7OK3+L1Xir8uq97wNGiA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
  by DSWPR03MB989164.namprd03.prod.outlook.com (2603:10b6:8:362::12)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.18; Fri, 3 Apr
- 2026 02:25:51 +0000
+ 2026 02:25:49 +0000
 Received: from PH7PR03MB7063.namprd03.prod.outlook.com
  ([fe80::f6cf:4203:1cbc:cd21]) by PH7PR03MB7063.namprd03.prod.outlook.com
  ([fe80::f6cf:4203:1cbc:cd21%4]) with mapi id 15.20.9745.025; Fri, 3 Apr 2026
- 02:25:51 +0000
+ 02:25:49 +0000
 From: alif.zakuan.yuslaimi@altera.com
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
@@ -61,9 +61,10 @@ Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
  Lukasz Majewski <lukma@denx.de>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
  Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-Subject: [PATCH v1 7/9] clk: s10: Refactor S10 clock driver
-Date: Thu,  2 Apr 2026 19:25:11 -0700
-Message-ID: <20260403022513.9446-8-alif.zakuan.yuslaimi@altera.com>
+Subject: [PATCH v1 5/9] arm: socfpga: s10: Enable system manager driver for
+ Stratix10
+Date: Thu,  2 Apr 2026 19:25:09 -0700
+Message-ID: <20260403022513.9446-6-alif.zakuan.yuslaimi@altera.com>
 X-Mailer: git-send-email 2.43.7
 In-Reply-To: <20260403022513.9446-1-alif.zakuan.yuslaimi@altera.com>
 References: <20260403022513.9446-1-alif.zakuan.yuslaimi@altera.com>
@@ -75,57 +76,57 @@ X-ClientProxiedBy: SJ0PR03CA0001.namprd03.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|DSWPR03MB989164:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1aa51313-2d47-4725-a9c3-08de912852d0
+X-MS-Office365-Filtering-Correlation-Id: 5809ffb1-56d8-4b7a-184a-08de912851ca
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|366016|1800799024|376014|13003099007|55112099003|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: ClH3xCbk+VbPSqwD0IPTDUnX1Tp+1LbBQzbvXX+s7iCUJPN56qg2pagil00KetmEw5Xgzo1T7PHlRpfkzzSBEatpLk1xsiQWOf0JS4YgOm9vgMlMtXL38lxCH2pEyMdUvxk+E7gYJt8FbOp48sYRm/uz6i3iQnyDZLsrqzYFZ6YKxuTBvmfbTBT4RLktp9LdJvYaDnz9jyq7iqYWwx28aXnQKnWH7Eiw+Q+ut06CtrXpi7fi/88PsNQw7AJaetKSlAimd1GVF7/0i7336rlV3LAZdLe7JBX5DUSx0hsvfd4XxfdN7vnS8yCu44FLE92zTeRwA4HR86dO+bkioV4wq2nBqO7/9la6/Bx0Iq6qGmLbxfzp0WDZYxVDRh75Nt6wkGSwDvofZhTs0U9PQ6bDrhZNYzSzAKp8coSLfHitAetHWFL6ZJC+91y1cNZPfvIewGlgEQe1tFECsOYpdNh8vgFe7wp20fXtL9wGsf0Y8VHi4Gil1vXuNitIP8+6NbRLseuRoiUIeAgujYfWQQZZs6zzU7Kzasqy1xLuQ+old/ufR1mAw/EPHmv1FVhu4gXfEcSix7t87youwtxO7KaFTjjd8vzu4lMRcWfRxyk82yy179pioBLkmdTTiziDKxdSHgQK/adkRp7/4HN0EwWFJJej3rwAAp+LcyxzoD/Ba584pP1MbEdr2ltExGImLyf7
+X-Microsoft-Antispam-Message-Info: KSPHbGKSBykkFMFlMCzdRj7uL/+bVAJnD/E7mKvgyM4Sl9DkkWyyhS8UmoojM5CvWGUak3x2aUXI2/YNm3+ziJJ9sUPx2xrJAIgnqRkuwyWP+ibV6fuonMU4Z+q0PnfVhGQAmqCGiffmy0icuPCwD7Qv2T20p4OpD+QkpDH6GJ/b8aMrmGXL+bkIdpuoaQCNKgnMudzRKdcfQBO6piVebvCLOVseVYjJbe3tZcTYIpN1ycSyYyEGAM8m3YfTBeNdUZ6eo0l9mhtHJidpMHWhyjxLLdAD+cgZ0QXOFhPLseJhtRBPn16OibpoCQYIOxb0s6Ur5wQvoaqx+di8PX4BCUlo2O/6w5Tz/iuFuesJlDZK47tk080asCzuERNiKBx7teFyzcF+uQV0dB1PkD1QLNDRCbOn82luX6xAKTNrn8KTPS9yo9bmvxHk7Uc3YoAENAyQJlEmXQQ465eqkMaj+m8NHNFVs01o/P7Vc31RVRYc5aMFyrGMypvPNbrRouaFdP3/woJDCVcVslIN0xJUkCblpwm5W+nAis2BJ4HmUOzVIfy/lw0nGOIFFVO9JaQLIEzfie/N2REo3krpgDRUFS8I9c9EtJ4LRtke0N56Hfk+9Nb02eAkQShHPqSwCBFvKkZbUnrVTY9TphTpg4RwTwMDcyRU8UsEb072vI5+EF78XvFabp2eld4NR/W7i1FY
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(1800799024)(376014)(13003099007)(55112099003)(56012099003)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?MNJ6Tx97avA7N1xGFmRXvT4+z1mct1sPD8RmGzfRXmq6dIEnrs+AS/zTnTL0?=
- =?us-ascii?Q?kjxHxlU6+EKSbQlW9NOWhJ+IOLK1rzkGmon7FY8XjCTcwN/4LZP5S4CaVu35?=
- =?us-ascii?Q?sBiY7wViO/zxyeF5Iu2GMCmofTVnnR/UNuzJsEDxxfinzLB+wHD5RTqi4TH/?=
- =?us-ascii?Q?MF+fldy5MAXTXnZKMhTCh+9Jmza6cjtJHkgf94o30uya23FlBx1aM+J5ZghB?=
- =?us-ascii?Q?TlkeeNez1E7cw2apSzoAOSlLF9odkrwfq46HTIyQWGziJjag9UtWNiSuNuPB?=
- =?us-ascii?Q?Cb8iDTCOqTHDc9PrWgCkxD+hugur0aSX2SlEd58/QT85ucIgBfVNQ00Fndhl?=
- =?us-ascii?Q?2g6M1Xp3mSItQ8GxIVVVylgkELOL3G11d06L8uHBdSxVn60TMLUik1qc1DUR?=
- =?us-ascii?Q?SwYJA1MkmVsraj8JvV8NctRg4o1/Xq5ohA8OZ9dVf4UDH3RLVVEmbu4YK2h/?=
- =?us-ascii?Q?YsG9nF+N79p4AxwcPWSxlzVTnn1j59zmAPPZ8Ry2MH+ICxhMKBhKOz0s5BEq?=
- =?us-ascii?Q?F+7w4f/et/x+JMki00bFOEuuAX2DXtyIPuZw7CzTtCslq/OYSLMjUASJHgtC?=
- =?us-ascii?Q?OzRZjWyZOt+wdG8w231JKL3Unn5Dc+W+QMPlZHq+tZHU7ar0QETZrYFVpc4O?=
- =?us-ascii?Q?3bCpjrGhM7UbyCMFS7wU0OHzpXC6gt+pv8mqO5QQLwRXCjHh2Tj18CgOMeu1?=
- =?us-ascii?Q?r/aUnJa7G0unvSoJphuezguxVTA0BAnixlT7x92aT/EFTnQL5+4HU5HNZkfX?=
- =?us-ascii?Q?Xv589g97iK3XWbs3nFNkmWoYVfSAZtve+b7c+EPjPZ/ZU8Kx63cmaGcrDbOh?=
- =?us-ascii?Q?0pnIgnLq1gMzdZBeb+0PJhUJnJd62SfbW4yHE060VYkbE3of0RRkTgiyJY0L?=
- =?us-ascii?Q?PsqhRnIQULDPP1QZ1pcroK6/PxvzsOPXp8jz59qCN8N7Mbxgbo9tqbdQXNA7?=
- =?us-ascii?Q?617HAezxuoA6FyG5opMnnFIFSFWwqsExwaMI4zQE7NSgKGWV9A6sWC/rSnmV?=
- =?us-ascii?Q?nL3/hPdqPvRXz4fRbyB2vgFocN0qOfxPhQgzytrv2VHDnWIx7scsTywHX1NG?=
- =?us-ascii?Q?PJq1VKkUtg3nHeg9YmFSGE0///NXJTHvWp3fmIZQ2IzzGFsM4yCKofYfuggR?=
- =?us-ascii?Q?/0D6pBrIKxmho/wBbhkBNrvt1qJABAamuge/usqUEBSN2TVEtUSPhCAEw+qT?=
- =?us-ascii?Q?ZYq0LZw+ASvTaLAJaazHdqjZvJXcPGrIEpfcW0rlTKwjzjyJhDMsgCYkE+ne?=
- =?us-ascii?Q?0l6g7GaUJjBH80nBtmK8YeXrF3a4UBII6bec41xSHPNh2DgSbGnQHgrMf7Yv?=
- =?us-ascii?Q?lzTRj9kZGQDRNrmNMPGe6D5UXqEyzU7CnHptChEbS64NZ/ww0loQ5ooyF+IB?=
- =?us-ascii?Q?H4i+UjgEOK7YXea82g0onE4D5bBSGHclxVVIJYP+QDu2xydPwoxcuwol+VPO?=
- =?us-ascii?Q?FF7+xaXvvjeHsAacFU764fxweTrkklT7nrKaggVN1n3m2h5ex66vOj9HhXom?=
- =?us-ascii?Q?Z1BRqVQgV2rxyF9QypBnAdfxrw1VTLQzHWvoYT9JaKHC5Zpg3mFjsDQoU4dU?=
- =?us-ascii?Q?Z3hiwYFXt1hW94O1DpCwZSuYXzTEpb1ImOVx0hRoOAqwfyZuOVqHyxg4DI5I?=
- =?us-ascii?Q?qPhfRlqzj4d+KiF1ILMQA6Vwardaq71zHyct9wYyrR0YB1qOj2YP5JB6DyR3?=
- =?us-ascii?Q?0Adhb6AjcoAde37rtxwXxtSiC7+3jDBTTx3pQTH41eiKGR4jm/RpnNQZqjyL?=
- =?us-ascii?Q?rt8rt/DYTkLAVIWZ+2Ra//+P0jmLlvo=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ImLbNTqIuuC3aXBYyl7dbPL229kErkbC0dYInz2Zav32JA0Ziu8Www30h9FS?=
+ =?us-ascii?Q?95R5Wzs+sZnxAUEXc8KH6YWBpc11LcvYEY+Jc2GZksAdNNPYQa2JhU29ZPxZ?=
+ =?us-ascii?Q?Tyd619/gDGmYaKMRS3fEByGr18SsJarWDXUwBMYTRAU0u1Uqz/etLDxKw2pE?=
+ =?us-ascii?Q?0bgW5p9ymoSiw3m0rzm0G02fAC/Jpy6rPqaW1CQD1/jxMLXVeGdUSB8IC/f+?=
+ =?us-ascii?Q?3C4M5rx0sbdAaBkut1BcGf6EN0p+NJoB/ZVcLW4WQa4981oLfN4ptQimwDNy?=
+ =?us-ascii?Q?0iFx2CO4nmEm3fAdIqGPlwwV1Tu6Un4ge+lpQgqYfiwGM9F1jIpD9UECZjMk?=
+ =?us-ascii?Q?w1aVX98JkFj1oIyVNH8KlC7V3Y427HJqktWJIcftJU2jV+v9xc8aQzumjIyl?=
+ =?us-ascii?Q?2BYhallz7sxaHnVN/RQHn8FgF3laxc8sixrfbBkCnNa5/Y9OLmZ0MleIW+50?=
+ =?us-ascii?Q?e37wWvDMCPEAMiWAWd13OjP0AXugeUdQDrICnwCACvpq6lmaIlP9yyY1vCAH?=
+ =?us-ascii?Q?OLE3ZN994VWdzY4UySLhh9T6W424Gcuo0ZaibQ/C9Hj1Aa6yUeITBtJOCJ+r?=
+ =?us-ascii?Q?cB8OXYhGFpKjjMlG6nsjU5p9zkg9uB9Pq3epvhoGUV59eoO1MNtnU27U4/U+?=
+ =?us-ascii?Q?11QhkIF4jmoUZdFz8RfxWRN1MKhWRooeKXcNMOju6j8ayA5w0QOee4NUkQpz?=
+ =?us-ascii?Q?PNRLLVvO6FJTBBML+1ELmSuozElHhkwj6XBsOFXeMp/ndMTEmCF1HAgBzW/2?=
+ =?us-ascii?Q?5sZ7w8Q/trHEJKen9EJpmX9JyNGM5oDkMPWRhA/El70kHurT9FKljeCwfFkH?=
+ =?us-ascii?Q?BiXc5bKIu0J7qxk1+OPYT/a1HoJwT+5FtVSGclJEU6UeWinr0OacGvGso/oS?=
+ =?us-ascii?Q?S7tvmw+agre4zrvxY//DFCcUv5KlzJ96s+hxfl17vbwJ9gth3u3Mjd6xB+fh?=
+ =?us-ascii?Q?fExw0151uHm+npcvQCm76m7SKHJ6vBNYWENksFu+929dwC8AOhJGElFE0Mkn?=
+ =?us-ascii?Q?pOtO8DAEAEa4j83vqYIyOijUtaXdCcFILWeTT9etMW4D/LbJlRXmGjrvDrEg?=
+ =?us-ascii?Q?dDwvzwQz/U5YcEneey1/Z82DH7XXJVNISYP1EP/uTMwXP2a8z2+equ54IwAy?=
+ =?us-ascii?Q?D4f3fWgSEEpVIqQgzZynDfOL+m6hZmSsMknmSVpBWNGumyqC7uB/fpVN5GhW?=
+ =?us-ascii?Q?+Qd3edzQhzBof93Qj4IPgrE4JP6SFrvfPVLpoZzrGVtE3YBj5zuWexKGkl4z?=
+ =?us-ascii?Q?bHgbyJe8HGSIdL107GmaObcirwWeJtnLgwgTG5uYEDLOeNp0FafsECeq52zL?=
+ =?us-ascii?Q?KuDqOZPf52ECa8Bw1MZHO1i3XpuCdhWlm9jupxddPCSXoQE9wCdroiJWRLZO?=
+ =?us-ascii?Q?vXc8WpxKKcJCL31pcqRPZXkyV+clzxMwNAVx1QOADArEEjzK/uhX3ckJCf+J?=
+ =?us-ascii?Q?zH25oxy1+bgaL/NbiLpd+0yZFHRcoWUiBBhfeVJEvS6aD7fx0NSmAhiYXtlX?=
+ =?us-ascii?Q?LA+T8rCGf6rQXkAMTJfkwXxiXBJD1eLArDQXg/V8yMSik7zwxvnyusJYqotg?=
+ =?us-ascii?Q?pvSoe4eBWTYA4oNM7ejhBP71XakyM3rlEZ4Go3gD8RWuGOEVqSPV984c3M9p?=
+ =?us-ascii?Q?7YA6FXmkfXUfFa8YrIe64s2DK8upzxXFi0O5ca+UX+MPnvNnvJP74gfVMefA?=
+ =?us-ascii?Q?J224GKYKJrIKU+JC0PCW7GUIM1L+20T0e7UpC+qMjwWnLdoZHq1CrrRpIMWw?=
+ =?us-ascii?Q?K5nIc123AZaisYwSOogZvl+ZH/55wtc=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1aa51313-2d47-4725-a9c3-08de912852d0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5809ffb1-56d8-4b7a-184a-08de912851ca
 X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2026 02:25:51.1589 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2026 02:25:49.3198 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0medEJDdNvaYyVCPRNtLW/u9CnDZjFl/bVhrxa5neuO5eLM0AxxrrpgN/Yrmqd4h+nE9sBtTiJZmz3E+QDk9Hk6CkawUPVNSqsVpCG7kN1k=
+X-MS-Exchange-CrossTenant-UserPrincipalName: uOIvOdXwSZ2aASh2Aej7WCOLTRBz4rs/aAFIFygtnfUZ8M5wVxqIiNbjiE9sZVXkMiSbNm43DRoG1706uYK2JPZ9KmBzo/hMPU+br0ixahI=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSWPR03MB989164
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -145,1585 +146,143 @@ X-Virus-Status: Clean
 
 From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 
-Refactor Stratix10 clock manager driver to support driver model, following
-Agilex clock driver.
+The base address of system manager can be retrieved
+using DT framework through the system manager driver.
 
-Create a new clock driver, clk-s10.c, for Stratix10 which supports the
-driver model. This allows several APIs such as enable/disable clock, and
-get clock rate to be supported.
-
-This driver will be initialized during SPL to bring up the clock as early
-as possible. The clock initialization process are refactored into this new
-driver from clock_manager_s10.c during clock driver probe.
-
-Excluding Stratix10 from legacy method of obtaining clkmgr base address in
-mach-socfpga/misc.c as the base address is already obtained during clock
-driver probe during SPL initialization.
+Enable system manager support for Stratix10 by probing the
+system manager driver to initialize during SPL boot up.
 
 Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 ---
- MAINTAINERS                                   |   1 +
- arch/arm/mach-socfpga/Kconfig                 |   2 +
- arch/arm/mach-socfpga/clock_manager_s10.c     | 449 ++-----------
- .../include/mach/clock_manager_s10.h          | 176 +-----
- arch/arm/mach-socfpga/misc.c                  |   3 +-
- arch/arm/mach-socfpga/spl_s10.c               |   7 +-
- drivers/clk/altera/Makefile                   |   1 +
- drivers/clk/altera/clk-s10.c                  | 591 ++++++++++++++++++
- drivers/clk/altera/clk-s10.h                  | 202 ++++++
- 9 files changed, 861 insertions(+), 571 deletions(-)
- create mode 100644 drivers/clk/altera/clk-s10.c
- create mode 100644 drivers/clk/altera/clk-s10.h
+ MAINTAINERS                                |  1 +
+ arch/arm/dts/socfpga_stratix10-u-boot.dtsi |  6 ++++++
+ arch/arm/mach-socfpga/Makefile             |  1 +
+ arch/arm/mach-socfpga/misc.c               |  3 ++-
+ arch/arm/mach-socfpga/spl_s10.c            |  1 +
+ board/altera/stratix10-socdk/Makefile      |  7 +++++++
+ board/altera/stratix10-socdk/socfpga.c     | 12 ++++++++++++
+ configs/socfpga_stratix10_defconfig        |  1 +
+ 8 files changed, 31 insertions(+), 1 deletion(-)
+ create mode 100644 board/altera/stratix10-socdk/Makefile
+ create mode 100644 board/altera/stratix10-socdk/socfpga.c
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index c58d8f85e33..863e0b763d8 100644
+index d2508d90c33..c58d8f85e33 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -159,6 +159,7 @@ F:	arch/arm/mach-socfpga/
- F:	board/altera/stratix10-socdk/
+@@ -156,6 +156,7 @@ S:	Maintained
+ T:	git https://source.denx.de/u-boot/custodians/u-boot-socfpga.git
+ F:	arch/arm/dts/socfpga_*
+ F:	arch/arm/mach-socfpga/
++F:	board/altera/stratix10-socdk/
  F:	board/intel/agilex-socdk/
  F:	configs/socfpga_*
-+F:	drivers/clk/altera/
  F:	drivers/ddr/altera/
- F:	drivers/power/domain/altr-pmgr-agilex5.c
- F:	drivers/sysreset/sysreset_socfpga*
-diff --git a/arch/arm/mach-socfpga/Kconfig b/arch/arm/mach-socfpga/Kconfig
-index aec0fb7b1c8..c7ecdc4055f 100644
---- a/arch/arm/mach-socfpga/Kconfig
-+++ b/arch/arm/mach-socfpga/Kconfig
-@@ -149,8 +149,10 @@ config ARCH_SOCFPGA_STRATIX10
- 	select ARMV8_MULTIENTRY
- 	select ARMV8_SET_SMPEN
- 	select BINMAN if SPL_ATF
-+	select CLK
- 	select FPGA_INTEL_SDM_MAILBOX
- 	select GICV2
-+	select SPL_CLK if SPL
- 	select ARCH_SOCFPGA_SOC64
+diff --git a/arch/arm/dts/socfpga_stratix10-u-boot.dtsi b/arch/arm/dts/socfpga_stratix10-u-boot.dtsi
+index ad4b383f704..89fa0e829f6 100644
+--- a/arch/arm/dts/socfpga_stratix10-u-boot.dtsi
++++ b/arch/arm/dts/socfpga_stratix10-u-boot.dtsi
+@@ -13,6 +13,7 @@
+ 	aliases {
+ 		spi0 = &qspi;
+ 		i2c0 = &i2c1;
++		sysmgr = &sysmgr;
+ 		freeze_br0 = &freeze_controller;
+ 	};
  
- choice
-diff --git a/arch/arm/mach-socfpga/clock_manager_s10.c b/arch/arm/mach-socfpga/clock_manager_s10.c
-index fd27470f967..df636f14f93 100644
---- a/arch/arm/mach-socfpga/clock_manager_s10.c
-+++ b/arch/arm/mach-socfpga/clock_manager_s10.c
-@@ -1,425 +1,78 @@
- // SPDX-License-Identifier: GPL-2.0
- /*
-- * Copyright (C) 2016-2023 Intel Corporation <www.intel.com>
-+ * Copyright (C) 2026 Altera Corporation <www.altera.com>
-  *
-  */
+@@ -283,6 +284,11 @@
+ 	};
+ };
  
--#include <compiler.h>
--#include <dm/device.h>
--#include <linux/errno.h>
--#include <asm/io.h>
-+#include <clk.h>
-+#include <dm.h>
-+#include <log.h>
-+#include <malloc.h>
- #include <asm/arch/clock_manager.h>
--#include <asm/arch/handoff_soc64.h>
- #include <asm/arch/system_manager.h>
-+#include <asm/io.h>
-+#include <dt-bindings/clock/stratix10-clock.h>
- 
--/*
-- * function to write the bypass register which requires a poll of the
-- * busy bit
-- */
--static void cm_write_bypass_mainpll(u32 val)
--{
--	writel(val, socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_BYPASS);
--	cm_wait_for_fsm();
--}
--
--static void cm_write_bypass_perpll(u32 val)
--{
--	writel(val, socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_BYPASS);
--	cm_wait_for_fsm();
--}
--
--/* function to write the ctrl register which requires a poll of the busy bit */
--static void cm_write_ctrl(u32 val)
--{
--	writel(val, socfpga_get_clkmgr_addr() + CLKMGR_S10_CTRL);
--	cm_wait_for_fsm();
--}
--
--/*
-- * Setup clocks while making no assumptions about previous state of the clocks.
-- */
--void cm_basic_init(const struct cm_config * const cfg)
--{
--	u32 mdiv, refclkdiv, mscnt, hscnt, vcocalib;
--
--	if (cfg == 0)
--		return;
--
--	/* Put all plls in bypass */
--	cm_write_bypass_mainpll(CLKMGR_BYPASS_MAINPLL_ALL);
--	cm_write_bypass_perpll(CLKMGR_BYPASS_PERPLL_ALL);
--
--	/* setup main PLL dividers where calculate the vcocalib value */
--	mdiv = (cfg->main_pll_fdbck >> CLKMGR_FDBCK_MDIV_OFFSET) &
--		CLKMGR_FDBCK_MDIV_MASK;
--	refclkdiv = (cfg->main_pll_pllglob >> CLKMGR_PLLGLOB_REFCLKDIV_OFFSET) &
--		     CLKMGR_PLLGLOB_REFCLKDIV_MASK;
--	mscnt = CLKMGR_MSCNT_CONST / (CLKMGR_MDIV_CONST + mdiv) / refclkdiv;
--	hscnt = (mdiv + CLKMGR_MDIV_CONST) * mscnt / refclkdiv -
--		CLKMGR_HSCNT_CONST;
--	vcocalib = (hscnt & CLKMGR_VCOCALIB_HSCNT_MASK) |
--		   ((mscnt & CLKMGR_VCOCALIB_MSCNT_MASK) <<
--		   CLKMGR_VCOCALIB_MSCNT_OFFSET);
--
--	writel((cfg->main_pll_pllglob & ~CLKMGR_PLLGLOB_PD_MASK &
--		~CLKMGR_PLLGLOB_RST_MASK),
--		socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_PLLGLOB);
--	writel(cfg->main_pll_fdbck,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_FDBCK);
--	writel(vcocalib,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_VCOCALIB);
--	writel(cfg->main_pll_pllc0,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_PLLC0);
--	writel(cfg->main_pll_pllc1,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_PLLC1);
--	writel(cfg->main_pll_nocdiv,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_NOCDIV);
--
--	/* setup peripheral PLL dividers */
--	/* calculate the vcocalib value */
--	mdiv = (cfg->per_pll_fdbck >> CLKMGR_FDBCK_MDIV_OFFSET) &
--		CLKMGR_FDBCK_MDIV_MASK;
--	refclkdiv = (cfg->per_pll_pllglob >> CLKMGR_PLLGLOB_REFCLKDIV_OFFSET) &
--		     CLKMGR_PLLGLOB_REFCLKDIV_MASK;
--	mscnt = CLKMGR_MSCNT_CONST / (CLKMGR_MDIV_CONST + mdiv) / refclkdiv;
--	hscnt = (mdiv + CLKMGR_MDIV_CONST) * mscnt / refclkdiv -
--		CLKMGR_HSCNT_CONST;
--	vcocalib = (hscnt & CLKMGR_VCOCALIB_HSCNT_MASK) |
--		   ((mscnt & CLKMGR_VCOCALIB_MSCNT_MASK) <<
--		   CLKMGR_VCOCALIB_MSCNT_OFFSET);
--
--	writel((cfg->per_pll_pllglob & ~CLKMGR_PLLGLOB_PD_MASK &
--		~CLKMGR_PLLGLOB_RST_MASK),
--		socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_PLLGLOB);
--	writel(cfg->per_pll_fdbck,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_FDBCK);
--	writel(vcocalib,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_VCOCALIB);
--	writel(cfg->per_pll_pllc0,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_PLLC0);
--	writel(cfg->per_pll_pllc1,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_PLLC1);
--	writel(cfg->per_pll_emacctl,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_EMACCTL);
--	writel(cfg->per_pll_gpiodiv,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_GPIODIV);
--
--	/* Take both PLL out of reset and power up */
--	setbits_le32(socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_PLLGLOB,
--		     CLKMGR_PLLGLOB_PD_MASK | CLKMGR_PLLGLOB_RST_MASK);
--	setbits_le32(socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_PLLGLOB,
--		     CLKMGR_PLLGLOB_PD_MASK | CLKMGR_PLLGLOB_RST_MASK);
--
--#define LOCKED_MASK \
--	(CLKMGR_STAT_MAINPLL_LOCKED | \
--	CLKMGR_STAT_PERPLL_LOCKED)
--
--	cm_wait_for_lock(LOCKED_MASK);
--
--	/*
--	 * Dividers for C2 to C9 only init after PLLs are lock. As dividers
--	 * only take effect upon value change, we shall set a maximum value as
--	 * default value.
--	 */
--	writel(0xff, socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_MPUCLK);
--	writel(0xff, socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_NOCCLK);
--	writel(0xff, socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_CNTR2CLK);
--	writel(0xff, socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_CNTR3CLK);
--	writel(0xff, socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_CNTR4CLK);
--	writel(0xff, socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_CNTR5CLK);
--	writel(0xff, socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_CNTR6CLK);
--	writel(0xff, socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_CNTR7CLK);
--	writel(0xff, socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_CNTR8CLK);
--	writel(0xff, socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_CNTR9CLK);
--	writel(0xff, socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_CNTR2CLK);
--	writel(0xff, socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_CNTR3CLK);
--	writel(0xff, socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_CNTR4CLK);
--	writel(0xff, socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_CNTR5CLK);
--	writel(0xff, socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_CNTR6CLK);
--	writel(0xff, socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_CNTR7CLK);
--	writel(0xff, socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_CNTR8CLK);
--	writel(0xff, socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_CNTR9CLK);
--
--	writel(cfg->main_pll_mpuclk,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_MPUCLK);
--	writel(cfg->main_pll_nocclk,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_NOCCLK);
--	writel(cfg->main_pll_cntr2clk,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_CNTR2CLK);
--	writel(cfg->main_pll_cntr3clk,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_CNTR3CLK);
--	writel(cfg->main_pll_cntr4clk,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_CNTR4CLK);
--	writel(cfg->main_pll_cntr5clk,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_CNTR5CLK);
--	writel(cfg->main_pll_cntr6clk,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_CNTR6CLK);
--	writel(cfg->main_pll_cntr7clk,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_CNTR7CLK);
--	writel(cfg->main_pll_cntr8clk,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_CNTR8CLK);
--	writel(cfg->main_pll_cntr9clk,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_CNTR9CLK);
--	writel(cfg->per_pll_cntr2clk,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_CNTR2CLK);
--	writel(cfg->per_pll_cntr3clk,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_CNTR3CLK);
--	writel(cfg->per_pll_cntr4clk,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_CNTR4CLK);
--	writel(cfg->per_pll_cntr5clk,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_CNTR5CLK);
--	writel(cfg->per_pll_cntr6clk,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_CNTR6CLK);
--	writel(cfg->per_pll_cntr7clk,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_CNTR7CLK);
--	writel(cfg->per_pll_cntr8clk,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_CNTR8CLK);
--	writel(cfg->per_pll_cntr9clk,
--	       socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_CNTR9CLK);
--
--	/* Take all PLLs out of bypass */
--	cm_write_bypass_mainpll(0);
--	cm_write_bypass_perpll(0);
--
--	/* clear safe mode / out of boot mode */
--	cm_write_ctrl(readl(socfpga_get_clkmgr_addr() + CLKMGR_S10_CTRL) &
--		      ~(CLKMGR_CTRL_SAFEMODE));
--
--	/* Now ungate non-hw-managed clocks */
--	writel(~0, socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_EN);
--	writel(~0, socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_EN);
--
--	/* Clear the loss of lock bits (write 1 to clear) */
--	writel(CLKMGR_INTER_PERPLLLOST_MASK |
--		      CLKMGR_INTER_MAINPLLLOST_MASK,
--		      socfpga_get_clkmgr_addr() + CLKMGR_S10_INTRCLR);
--}
--
--static unsigned long cm_get_main_vco_clk_hz(void)
-+static ulong cm_get_rate_dm(u32 id)
- {
--	 unsigned long fref, refdiv, mdiv, reg, vco;
--
--	reg = readl(socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_PLLGLOB);
--
--	fref = (reg >> CLKMGR_PLLGLOB_VCO_PSRC_OFFSET) &
--		CLKMGR_PLLGLOB_VCO_PSRC_MASK;
--	switch (fref) {
--	case CLKMGR_VCO_PSRC_EOSC1:
--		fref = cm_get_osc_clk_hz();
--		break;
--	case CLKMGR_VCO_PSRC_INTOSC:
--		fref = cm_get_intosc_clk_hz();
--		break;
--	case CLKMGR_VCO_PSRC_F2S:
--		fref = cm_get_fpga_clk_hz();
--		break;
-+	struct udevice *dev;
-+	struct clk clk;
-+	ulong rate;
-+	int ret;
++&sysmgr {
++	compatible = "altr,sys-mgr", "syscon";
++	bootph-all;
++};
 +
-+	ret = uclass_get_device_by_driver(UCLASS_CLK,
-+					  DM_DRIVER_GET(socfpga_s10_clk),
-+					  &dev);
-+	if (ret)
-+		return 0;
-+
-+	clk.id = id;
-+	ret = clk_request(dev, &clk);
-+	if (ret < 0)
-+		return 0;
-+
-+	rate = clk_get_rate(&clk);
-+
-+	if ((rate == (unsigned long)-ENOSYS) ||
-+	    (rate == (unsigned long)-ENXIO) ||
-+	    (rate == (unsigned long)-EIO)) {
-+		debug("%s id %u: clk_get_rate err: %ld\n",
-+		      __func__, id, rate);
-+		return 0;
- 	}
+ &uart0 {
+ 	bootph-all;
+ 	clock-frequency = <100000000>;
+diff --git a/arch/arm/mach-socfpga/Makefile b/arch/arm/mach-socfpga/Makefile
+index b6f35ddacc4..962dce67c64 100644
+--- a/arch/arm/mach-socfpga/Makefile
++++ b/arch/arm/mach-socfpga/Makefile
+@@ -39,6 +39,7 @@ obj-y	+= system_manager_soc64.o
+ obj-y	+= timer_s10.o
+ obj-y	+= wrap_handoff_soc64.o
+ obj-y	+= wrap_pll_config_soc64.o
++obj-y	+= altera-sysmgr.o
+ endif
  
--	refdiv = (reg >> CLKMGR_PLLGLOB_REFCLKDIV_OFFSET) &
--		  CLKMGR_PLLGLOB_REFCLKDIV_MASK;
--
--	reg = readl(socfpga_get_clkmgr_addr() + CLKMGR_S10_MAINPLL_FDBCK);
--	mdiv = (reg >> CLKMGR_FDBCK_MDIV_OFFSET) & CLKMGR_FDBCK_MDIV_MASK;
--
--	vco = fref / refdiv;
--	vco = vco * (CLKMGR_MDIV_CONST + mdiv);
--	return vco;
-+	return rate;
- }
- 
--static unsigned long cm_get_per_vco_clk_hz(void)
-+static u32 cm_get_rate_dm_khz(u32 id)
- {
--	unsigned long fref, refdiv, mdiv, reg, vco;
--
--	reg = readl(socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_PLLGLOB);
--
--	fref = (reg >> CLKMGR_PLLGLOB_VCO_PSRC_OFFSET) &
--		CLKMGR_PLLGLOB_VCO_PSRC_MASK;
--	switch (fref) {
--	case CLKMGR_VCO_PSRC_EOSC1:
--		fref = cm_get_osc_clk_hz();
--		break;
--	case CLKMGR_VCO_PSRC_INTOSC:
--		fref = cm_get_intosc_clk_hz();
--		break;
--	case CLKMGR_VCO_PSRC_F2S:
--		fref = cm_get_fpga_clk_hz();
--		break;
--	}
--
--	refdiv = (reg >> CLKMGR_PLLGLOB_REFCLKDIV_OFFSET) &
--		  CLKMGR_PLLGLOB_REFCLKDIV_MASK;
--
--	reg = readl(socfpga_get_clkmgr_addr() + CLKMGR_S10_PERPLL_FDBCK);
--	mdiv = (reg >> CLKMGR_FDBCK_MDIV_OFFSET) & CLKMGR_FDBCK_MDIV_MASK;
--
--	vco = fref / refdiv;
--	vco = vco * (CLKMGR_MDIV_CONST + mdiv);
--	return vco;
-+	return cm_get_rate_dm(id) / 1000;
- }
- 
- unsigned long cm_get_mpu_clk_hz(void)
- {
--	unsigned long clock = readl(socfpga_get_clkmgr_addr() +
--				    CLKMGR_S10_MAINPLL_MPUCLK);
--
--	clock = (clock >> CLKMGR_CLKSRC_OFFSET) & CLKMGR_CLKSRC_MASK;
--
--	switch (clock) {
--	case CLKMGR_CLKSRC_MAIN:
--		clock = cm_get_main_vco_clk_hz();
--		clock /= (readl(socfpga_get_clkmgr_addr() +
--				CLKMGR_S10_MAINPLL_PLLC0) &
--			  CLKMGR_PLLC0_DIV_MASK);
--		break;
--
--	case CLKMGR_CLKSRC_PER:
--		clock = cm_get_per_vco_clk_hz();
--		clock /= (readl(socfpga_get_clkmgr_addr() +
--				CLKMGR_S10_PERPLL_PLLC0) &
--			  CLKMGR_CLKCNT_MSK);
--		break;
--
--	case CLKMGR_CLKSRC_OSC1:
--		clock = cm_get_osc_clk_hz();
--		break;
--
--	case CLKMGR_CLKSRC_INTOSC:
--		clock = cm_get_intosc_clk_hz();
--		break;
--
--	case CLKMGR_CLKSRC_FPGA:
--		clock = cm_get_fpga_clk_hz();
--		break;
--	}
--
--	clock /= 1 + (readl(socfpga_get_clkmgr_addr() +
--			    CLKMGR_S10_MAINPLL_MPUCLK) & CLKMGR_CLKCNT_MSK);
--	return clock;
--}
--
--unsigned int cm_get_l3_main_clk_hz(void)
--{
--	u32 clock = readl(socfpga_get_clkmgr_addr() +
--			  CLKMGR_S10_MAINPLL_NOCCLK);
--
--	clock = (clock >> CLKMGR_CLKSRC_OFFSET) & CLKMGR_CLKSRC_MASK;
--
--	switch (clock) {
--	case CLKMGR_CLKSRC_MAIN:
--		clock = cm_get_main_vco_clk_hz();
--		clock /= (readl(socfpga_get_clkmgr_addr() +
--				CLKMGR_S10_MAINPLL_PLLC1) &
--			  CLKMGR_PLLC0_DIV_MASK);
--		break;
--
--	case CLKMGR_CLKSRC_PER:
--		clock = cm_get_per_vco_clk_hz();
--		clock /= (readl(socfpga_get_clkmgr_addr() +
--			  CLKMGR_S10_PERPLL_PLLC1) & CLKMGR_CLKCNT_MSK);
--		break;
--
--	case CLKMGR_CLKSRC_OSC1:
--		clock = cm_get_osc_clk_hz();
--		break;
--
--	case CLKMGR_CLKSRC_INTOSC:
--		clock = cm_get_intosc_clk_hz();
--		break;
--
--	case CLKMGR_CLKSRC_FPGA:
--		clock = cm_get_fpga_clk_hz();
--		break;
--	}
--
--	clock /= 1 + (readl(socfpga_get_clkmgr_addr() +
--		      CLKMGR_S10_MAINPLL_NOCCLK) & CLKMGR_CLKCNT_MSK);
--	return clock;
--}
--
--unsigned int cm_get_mmc_controller_clk_hz(void)
--{
--	u32 clock = readl(socfpga_get_clkmgr_addr() +
--			  CLKMGR_S10_PERPLL_CNTR6CLK);
--
--	clock = (clock >> CLKMGR_CLKSRC_OFFSET) & CLKMGR_CLKSRC_MASK;
--
--	switch (clock) {
--	case CLKMGR_CLKSRC_MAIN:
--		clock = cm_get_l3_main_clk_hz();
--		clock /= 1 + (readl(socfpga_get_clkmgr_addr() +
--				    CLKMGR_S10_MAINPLL_CNTR6CLK) &
--			      CLKMGR_CLKCNT_MSK);
--		break;
--
--	case CLKMGR_CLKSRC_PER:
--		clock = cm_get_l3_main_clk_hz();
--		clock /= 1 + (readl(socfpga_get_clkmgr_addr() +
--				    CLKMGR_S10_PERPLL_CNTR6CLK) &
--			      CLKMGR_CLKCNT_MSK);
--		break;
--
--	case CLKMGR_CLKSRC_OSC1:
--		clock = cm_get_osc_clk_hz();
--		break;
--
--	case CLKMGR_CLKSRC_INTOSC:
--		clock = cm_get_intosc_clk_hz();
--		break;
--
--	case CLKMGR_CLKSRC_FPGA:
--		clock = cm_get_fpga_clk_hz();
--		break;
--	}
--	return clock / 4;
--}
--
--unsigned int cm_get_l4_sp_clk_hz(void)
--{
--	u32 clock = cm_get_l3_main_clk_hz();
--
--	clock /= (1 << ((readl(socfpga_get_clkmgr_addr() +
--			       CLKMGR_S10_MAINPLL_NOCDIV) >>
--			 CLKMGR_NOCDIV_L4SPCLK_OFFSET) & CLKMGR_CLKCNT_MSK));
--	return clock;
--}
--
--unsigned int cm_get_spi_controller_clk_hz(void)
--{
--	u32 clock = cm_get_l3_main_clk_hz();
--
--	clock /= (1 << ((readl(socfpga_get_clkmgr_addr() +
--			       CLKMGR_S10_MAINPLL_NOCDIV) >>
--			 CLKMGR_NOCDIV_L4MAIN_OFFSET) & CLKMGR_CLKCNT_MSK));
--	return clock;
-+	return cm_get_rate_dm(STRATIX10_MPU_CLK);
- }
- 
- unsigned int cm_get_l4_sys_free_clk_hz(void)
- {
--	return cm_get_l3_main_clk_hz() / 4;
--}
--
--/*
-- * Override weak dw_spi_get_clk implementation in designware_spi.c driver
-- */
--
--int dw_spi_get_clk(struct udevice *bus, ulong *rate)
--{
--	*rate = cm_get_spi_controller_clk_hz();
--	if (!*rate) {
--		printf("SPI: clock rate is zero");
--		return -EINVAL;
--	}
--
--	return 0;
-+	return cm_get_rate_dm(STRATIX10_L4_SYS_FREE_CLK);
- }
- 
- void cm_print_clock_quick_summary(void)
- {
--	printf("MPU         %d kHz\n", (u32)(cm_get_mpu_clk_hz() / 1000));
--	printf("L3 main     %d kHz\n", cm_get_l3_main_clk_hz() / 1000);
--	printf("Main VCO    %d kHz\n", (u32)(cm_get_main_vco_clk_hz() / 1000));
--	printf("Per VCO     %d kHz\n", (u32)(cm_get_per_vco_clk_hz() / 1000));
--	printf("EOSC1       %d kHz\n", cm_get_osc_clk_hz() / 1000);
--	printf("HPS MMC     %d kHz\n", cm_get_mmc_controller_clk_hz() / 1000);
--	printf("UART        %d kHz\n", cm_get_l4_sp_clk_hz() / 1000);
-+	printf("MPU         %d kHz\n",
-+	       cm_get_rate_dm_khz(STRATIX10_MPU_CLK));
-+	printf("L3 main     %d kHz\n",
-+	       cm_get_rate_dm_khz(STRATIX10_NOC_CLK));
-+	printf("Main VCO    %d kHz\n",
-+	       cm_get_rate_dm_khz(STRATIX10_MAIN_PLL_CLK));
-+	printf("Per VCO     %d kHz\n",
-+	       cm_get_rate_dm_khz(STRATIX10_PERIPH_PLL_CLK));
-+	printf("EOSC1       %d kHz\n",
-+	       cm_get_rate_dm_khz(STRATIX10_OSC1));
-+	printf("HPS MMC     %d kHz\n",
-+	       cm_get_rate_dm_khz(STRATIX10_SDMMC_CLK));
-+	printf("UART        %d kHz\n",
-+	       cm_get_rate_dm_khz(STRATIX10_L4_SP_CLK));
- }
-diff --git a/arch/arm/mach-socfpga/include/mach/clock_manager_s10.h b/arch/arm/mach-socfpga/include/mach/clock_manager_s10.h
-index 5dcbda9473e..e5ff0648b86 100644
---- a/arch/arm/mach-socfpga/include/mach/clock_manager_s10.h
-+++ b/arch/arm/mach-socfpga/include/mach/clock_manager_s10.h
-@@ -1,177 +1,13 @@
--/* SPDX-License-Identifier: GPL-2.0
-- *
-- * Copyright (C) 2016-2019 Intel Corporation <www.intel.com>
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (C) 2026 Altera Corporation <www.altera.com>
-  *
-  */
- 
--#ifndef	_CLOCK_MANAGER_S10_
--#define	_CLOCK_MANAGER_S10_
-+#ifndef _CLOCK_MANAGER_S10_
-+#define _CLOCK_MANAGER_S10_
- 
- #include <asm/arch/clock_manager_soc64.h>
--#include <linux/bitops.h>
--
--/* Clock speed accessors */
--unsigned long cm_get_sdram_clk_hz(void);
--unsigned int cm_get_l4_sp_clk_hz(void);
--unsigned int cm_get_mmc_controller_clk_hz(void);
--unsigned int cm_get_spi_controller_clk_hz(void);
--
--struct cm_config {
--	/* main group */
--	u32 main_pll_mpuclk;
--	u32 main_pll_nocclk;
--	u32 main_pll_cntr2clk;
--	u32 main_pll_cntr3clk;
--	u32 main_pll_cntr4clk;
--	u32 main_pll_cntr5clk;
--	u32 main_pll_cntr6clk;
--	u32 main_pll_cntr7clk;
--	u32 main_pll_cntr8clk;
--	u32 main_pll_cntr9clk;
--	u32 main_pll_nocdiv;
--	u32 main_pll_pllglob;
--	u32 main_pll_fdbck;
--	u32 main_pll_pllc0;
--	u32 main_pll_pllc1;
--	u32 spare;
--
--	/* peripheral group */
--	u32 per_pll_cntr2clk;
--	u32 per_pll_cntr3clk;
--	u32 per_pll_cntr4clk;
--	u32 per_pll_cntr5clk;
--	u32 per_pll_cntr6clk;
--	u32 per_pll_cntr7clk;
--	u32 per_pll_cntr8clk;
--	u32 per_pll_cntr9clk;
--	u32 per_pll_emacctl;
--	u32 per_pll_gpiodiv;
--	u32 per_pll_pllglob;
--	u32 per_pll_fdbck;
--	u32 per_pll_pllc0;
--	u32 per_pll_pllc1;
--
--	/* incoming clock */
--	u32 hps_osc_clk_hz;
--	u32 fpga_clk_hz;
--};
--
--void cm_basic_init(const struct cm_config * const cfg);
--
--/* Control status */
--#define CLKMGR_S10_CTRL					0x00
--#define CLKMGR_S10_STAT					0x04
--#define CLKMGR_S10_INTRCLR				0x14
--/* Mainpll group */
--#define CLKMGR_S10_MAINPLL_EN				0x30
--#define CLKMGR_S10_MAINPLL_BYPASS			0x3c
--#define CLKMGR_S10_MAINPLL_MPUCLK			0x48
--#define CLKMGR_S10_MAINPLL_NOCCLK			0x4c
--#define CLKMGR_S10_MAINPLL_CNTR2CLK			0x50
--#define CLKMGR_S10_MAINPLL_CNTR3CLK			0x54
--#define CLKMGR_S10_MAINPLL_CNTR4CLK			0x58
--#define CLKMGR_S10_MAINPLL_CNTR5CLK			0x5c
--#define CLKMGR_S10_MAINPLL_CNTR6CLK			0x60
--#define CLKMGR_S10_MAINPLL_CNTR7CLK			0x64
--#define CLKMGR_S10_MAINPLL_CNTR8CLK			0x68
--#define CLKMGR_S10_MAINPLL_CNTR9CLK			0x6c
--#define CLKMGR_S10_MAINPLL_NOCDIV			0x70
--#define CLKMGR_S10_MAINPLL_PLLGLOB			0x74
--#define CLKMGR_S10_MAINPLL_FDBCK			0x78
--#define CLKMGR_S10_MAINPLL_MEMSTAT			0x80
--#define CLKMGR_S10_MAINPLL_PLLC0			0x84
--#define CLKMGR_S10_MAINPLL_PLLC1			0x88
--#define CLKMGR_S10_MAINPLL_VCOCALIB			0x8c
--/* Periphpll group */
--#define CLKMGR_S10_PERPLL_EN				0xa4
--#define CLKMGR_S10_PERPLL_BYPASS			0xb0
--#define CLKMGR_S10_PERPLL_CNTR2CLK			0xbc
--#define CLKMGR_S10_PERPLL_CNTR3CLK			0xc0
--#define CLKMGR_S10_PERPLL_CNTR4CLK			0xc4
--#define CLKMGR_S10_PERPLL_CNTR5CLK			0xc8
--#define CLKMGR_S10_PERPLL_CNTR6CLK			0xcc
--#define CLKMGR_S10_PERPLL_CNTR7CLK			0xd0
--#define CLKMGR_S10_PERPLL_CNTR8CLK			0xd4
--#define CLKMGR_S10_PERPLL_CNTR9CLK			0xd8
--#define CLKMGR_S10_PERPLL_EMACCTL			0xdc
--#define CLKMGR_S10_PERPLL_GPIODIV			0xe0
--#define CLKMGR_S10_PERPLL_PLLGLOB			0xe4
--#define CLKMGR_S10_PERPLL_FDBCK				0xe8
--#define CLKMGR_S10_PERPLL_MEMSTAT			0xf0
--#define CLKMGR_S10_PERPLL_PLLC0				0xf4
--#define CLKMGR_S10_PERPLL_PLLC1				0xf8
--#define CLKMGR_S10_PERPLL_VCOCALIB			0xfc
--
--#define CLKMGR_STAT					CLKMGR_S10_STAT
--#define CLKMGR_INTER					CLKMGR_S10_INTER
--#define CLKMGR_PERPLL_EN				CLKMGR_S10_PERPLL_EN
--
--#define CLKMGR_CTRL_SAFEMODE				BIT(0)
--#define CLKMGR_BYPASS_MAINPLL_ALL			0x00000007
--#define CLKMGR_BYPASS_PERPLL_ALL			0x0000007f
--
--#define CLKMGR_INTER_MAINPLLLOCKED_MASK			0x00000001
--#define CLKMGR_INTER_PERPLLLOCKED_MASK			0x00000002
--#define CLKMGR_INTER_MAINPLLLOST_MASK			0x00000004
--#define CLKMGR_INTER_PERPLLLOST_MASK			0x00000008
--#define CLKMGR_STAT_BUSY				BIT(0)
--#define CLKMGR_STAT_MAINPLL_LOCKED			BIT(8)
--#define CLKMGR_STAT_PERPLL_LOCKED			BIT(9)
--
--#define CLKMGR_PLLGLOB_PD_MASK				0x00000001
--#define CLKMGR_PLLGLOB_RST_MASK				0x00000002
--#define CLKMGR_PLLGLOB_VCO_PSRC_MASK			0x3
--#define CLKMGR_PLLGLOB_VCO_PSRC_OFFSET			16
--#define CLKMGR_VCO_PSRC_EOSC1				0
--#define CLKMGR_VCO_PSRC_INTOSC				1
--#define CLKMGR_VCO_PSRC_F2S				2
--#define CLKMGR_PLLGLOB_REFCLKDIV_MASK			0x3f
--#define CLKMGR_PLLGLOB_REFCLKDIV_OFFSET			8
--
--#define CLKMGR_CLKSRC_MASK				0x7
--#define CLKMGR_CLKSRC_OFFSET				16
--#define CLKMGR_CLKSRC_MAIN				0
--#define CLKMGR_CLKSRC_PER				1
--#define CLKMGR_CLKSRC_OSC1				2
--#define CLKMGR_CLKSRC_INTOSC				3
--#define CLKMGR_CLKSRC_FPGA				4
--#define CLKMGR_CLKCNT_MSK				0x7ff
--
--#define CLKMGR_FDBCK_MDIV_MASK				0xff
--#define CLKMGR_FDBCK_MDIV_OFFSET			24
--
--#define CLKMGR_PLLC0_DIV_MASK				0xff
--#define CLKMGR_PLLC1_DIV_MASK				0xff
--#define CLKMGR_PLLC0_EN_OFFSET				27
--#define CLKMGR_PLLC1_EN_OFFSET				24
--
--#define CLKMGR_NOCDIV_L4MAIN_OFFSET			0
--#define CLKMGR_NOCDIV_L4MPCLK_OFFSET			8
--#define CLKMGR_NOCDIV_L4SPCLK_OFFSET			16
--#define CLKMGR_NOCDIV_CSATCLK_OFFSET			24
--#define CLKMGR_NOCDIV_CSTRACECLK_OFFSET			26
--#define CLKMGR_NOCDIV_CSPDBGCLK_OFFSET			28
--
--#define CLKMGR_NOCDIV_L4SPCLK_MASK			0x3
--#define CLKMGR_NOCDIV_DIV1				0
--#define CLKMGR_NOCDIV_DIV2				1
--#define CLKMGR_NOCDIV_DIV4				2
--#define CLKMGR_NOCDIV_DIV8				3
--#define CLKMGR_CSPDBGCLK_DIV1				0
--#define CLKMGR_CSPDBGCLK_DIV4				1
--
--#define CLKMGR_MSCNT_CONST				200
--#define CLKMGR_MDIV_CONST				6
--#define CLKMGR_HSCNT_CONST				9
--
--#define CLKMGR_VCOCALIB_MSCNT_MASK			0xff
--#define CLKMGR_VCOCALIB_MSCNT_OFFSET			9
--#define CLKMGR_VCOCALIB_HSCNT_MASK			0xff
--
--#define CLKMGR_EMACCTL_EMAC0SEL_OFFSET			26
--#define CLKMGR_EMACCTL_EMAC1SEL_OFFSET			27
--#define CLKMGR_EMACCTL_EMAC2SEL_OFFSET			28
--
--#define CLKMGR_PERPLLGRP_EN_SDMMCCLK_MASK		0x00000020
-+#include "../../../../../drivers/clk/altera/clk-s10.h"
- 
- #endif /* _CLOCK_MANAGER_S10_ */
+ ifdef CONFIG_ARCH_SOCFPGA_AGILEX
 diff --git a/arch/arm/mach-socfpga/misc.c b/arch/arm/mach-socfpga/misc.c
-index 418d7dfb572..6d7128c77be 100644
+index 1eef7893e54..418d7dfb572 100644
 --- a/arch/arm/mach-socfpga/misc.c
 +++ b/arch/arm/mach-socfpga/misc.c
-@@ -276,7 +276,8 @@ void socfpga_get_managers_addr(void)
- 					    &socfpga_clkmgr_base);
- 	else if (!IS_ENABLED(CONFIG_ARCH_SOCFPGA_AGILEX) &&
- 		 !IS_ENABLED(CONFIG_ARCH_SOCFPGA_AGILEX7M) &&
--		 !IS_ENABLED(CONFIG_ARCH_SOCFPGA_AGILEX5))
-+		 !IS_ENABLED(CONFIG_ARCH_SOCFPGA_AGILEX5) &&
-+		 !IS_ENABLED(CONFIG_ARCH_SOCFPGA_STRATIX10))
- 		ret = socfpga_get_base_addr("altr,clk-mgr",
- 					    &socfpga_clkmgr_base);
+@@ -263,7 +263,8 @@ void socfpga_get_managers_addr(void)
  
+ 	if (!IS_ENABLED(CONFIG_ARCH_SOCFPGA_AGILEX) &&
+ 	    !IS_ENABLED(CONFIG_ARCH_SOCFPGA_AGILEX7M) &&
+-	    !IS_ENABLED(CONFIG_ARCH_SOCFPGA_AGILEX5)) {
++	    !IS_ENABLED(CONFIG_ARCH_SOCFPGA_AGILEX5) &&
++	    !IS_ENABLED(CONFIG_ARCH_SOCFPGA_STRATIX10)) {
+ 		ret = socfpga_get_base_addr("altr,sys-mgr",
+ 					    &socfpga_sysmgr_base);
+ 		if (ret)
 diff --git a/arch/arm/mach-socfpga/spl_s10.c b/arch/arm/mach-socfpga/spl_s10.c
-index b05bec2cbc1..ace029557f3 100644
+index ce1d5d4c8ff..b05bec2cbc1 100644
 --- a/arch/arm/mach-socfpga/spl_s10.c
 +++ b/arch/arm/mach-socfpga/spl_s10.c
-@@ -37,7 +37,6 @@ u32 reset_flag(void)
+@@ -48,6 +48,7 @@ void board_init_f(ulong dummy)
+ 	if (ret)
+ 		hang();
  
- void board_init_f(ulong dummy)
- {
--	const struct cm_config *cm_default_cfg = cm_get_default_config();
- 	int ret;
- 	struct udevice *dev;
++	socfpga_get_sys_mgr_addr();
+ 	socfpga_get_managers_addr();
  
-@@ -75,7 +74,11 @@ void board_init_f(ulong dummy)
- 	sysmgr_pinmux_init();
- 
- 	/* configuring the HPS clocks */
--	cm_basic_init(cm_default_cfg);
-+	ret = uclass_get_device(UCLASS_CLK, 0, &dev);
-+	if (ret) {
-+		debug("Clock init failed: %d\n", ret);
-+		hang();
-+	}
- 
- #ifdef CONFIG_DEBUG_UART
- 	socfpga_per_reset(SOCFPGA_RESET(UART0), 0);
-diff --git a/drivers/clk/altera/Makefile b/drivers/clk/altera/Makefile
-index 693446b3d89..e961d059820 100644
---- a/drivers/clk/altera/Makefile
-+++ b/drivers/clk/altera/Makefile
-@@ -9,3 +9,4 @@ obj-$(CONFIG_ARCH_SOCFPGA_ARRIA10) += clk-arria10.o
- obj-$(CONFIG_ARCH_SOCFPGA_N5X) += clk-n5x.o
- obj-$(CONFIG_ARCH_SOCFPGA_N5X) += clk-mem-n5x.o
- obj-$(CONFIG_ARCH_SOCFPGA_AGILEX5) += clk-agilex5.o
-+obj-$(CONFIG_ARCH_SOCFPGA_STRATIX10) += clk-s10.o
-diff --git a/drivers/clk/altera/clk-s10.c b/drivers/clk/altera/clk-s10.c
+ 	/* Ensure watchdog is paused when debugging is happening */
+diff --git a/board/altera/stratix10-socdk/Makefile b/board/altera/stratix10-socdk/Makefile
 new file mode 100644
-index 00000000000..73c9b3556a0
+index 00000000000..416c121406a
 --- /dev/null
-+++ b/drivers/clk/altera/clk-s10.c
-@@ -0,0 +1,591 @@
++++ b/board/altera/stratix10-socdk/Makefile
+@@ -0,0 +1,7 @@
++#
++# Copyright (C) 2026 Altera Corporation <www.altera.com>
++#
++# SPDX-License-Identifier:	GPL-2.0
++#
++
++obj-y	:= socfpga.o
+diff --git a/board/altera/stratix10-socdk/socfpga.c b/board/altera/stratix10-socdk/socfpga.c
+new file mode 100644
+index 00000000000..f8facf79204
+--- /dev/null
++++ b/board/altera/stratix10-socdk/socfpga.c
+@@ -0,0 +1,12 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
 + * Copyright (C) 2026 Altera Corporation <www.altera.com>
-+ *
 + */
 +
-+#include <log.h>
-+#include <wait_bit.h>
-+#include <asm/io.h>
-+#include <asm/system.h>
-+#include <clk-uclass.h>
-+#include <dm.h>
-+#include <dm/lists.h>
-+#include <dm/util.h>
-+#include <dt-bindings/clock/stratix10-clock.h>
-+#include <linux/bitfield.h>
-+#include <linux/bitops.h>
-+#include <asm/arch/clock_manager.h>
++#include <asm/arch/misc.h>
 +
-+struct socfpga_clk_plat {
-+	void __iomem *regs;
-+	int pllgrp;
-+	int bitmask;
-+};
-+
-+/*
-+ * function to write the bypass register which requires a poll of the
-+ * busy bit
-+ */
-+static void clk_write_bypass_mainpll(struct socfpga_clk_plat *plat, u32 val)
++int board_early_init_f(void)
 +{
-+	void __iomem *base = plat->regs;
-+
-+	CM_REG_WRITEL(plat, val, CLKMGR_MAINPLL_BYPASS);
-+
-+	wait_for_bit_le32(base + CLKMGR_STAT,
-+			  CLKMGR_STAT_BUSY, false, 20000, false);
-+}
-+
-+static void clk_write_bypass_perpll(struct socfpga_clk_plat *plat, u32 val)
-+{
-+	void __iomem *base = plat->regs;
-+
-+	CM_REG_WRITEL(plat, val, CLKMGR_PERPLL_BYPASS);
-+
-+	wait_for_bit_le32(base + CLKMGR_STAT,
-+			  CLKMGR_STAT_BUSY, false, 20000, false);
-+}
-+
-+/* function to write the ctrl register which requires a poll of the busy bit */
-+static void clk_write_ctrl(struct socfpga_clk_plat *plat, u32 val)
-+{
-+	void __iomem *base = plat->regs;
-+
-+	CM_REG_WRITEL(plat, val, CLKMGR_CTRL);
-+
-+	wait_for_bit_le32(base + CLKMGR_STAT,
-+			  CLKMGR_STAT_BUSY, false, 20000, false);
-+}
-+
-+/*
-+ * Setup clocks while making no assumptions about previous state of the clocks.
-+ */
-+static void clk_basic_init(struct udevice *dev,
-+			   const struct cm_config * const cfg)
-+{
-+	struct socfpga_clk_plat *plat = dev_get_plat(dev);
-+	u32 mdiv, refclkdiv, mscnt, hscnt, vcocalib;
-+	uintptr_t base_addr = (uintptr_t)plat->regs;
-+
-+	if (!cfg)
-+		return;
-+
-+	/* Put all plls in bypass */
-+	clk_write_bypass_mainpll(plat, CLKMGR_BYPASS_MAINPLL_ALL);
-+	clk_write_bypass_perpll(plat, CLKMGR_BYPASS_PERPLL_ALL);
-+
-+	/* setup main PLL dividers where calculate the vcocalib value */
-+	mdiv = (cfg->main_pll_fdbck >> CLKMGR_FDBCK_MDIV_OFFSET) &
-+		CLKMGR_FDBCK_MDIV_MASK;
-+	refclkdiv = (cfg->main_pll_pllglob >> CLKMGR_PLLGLOB_REFCLKDIV_OFFSET) &
-+		     CLKMGR_PLLGLOB_REFCLKDIV_MASK;
-+	mscnt = CLKMGR_MSCNT_CONST / (CLKMGR_MDIV_CONST + mdiv) / refclkdiv;
-+	hscnt = (mdiv + CLKMGR_MDIV_CONST) * mscnt / refclkdiv -
-+		CLKMGR_HSCNT_CONST;
-+	vcocalib = (hscnt & CLKMGR_VCOCALIB_HSCNT_MASK) |
-+		   ((mscnt & CLKMGR_VCOCALIB_MSCNT_MASK) <<
-+		   CLKMGR_VCOCALIB_MSCNT_OFFSET);
-+
-+	writel((cfg->main_pll_pllglob & ~CLKMGR_PLLGLOB_PD_MASK &
-+		~CLKMGR_PLLGLOB_RST_MASK),
-+		base_addr + CLKMGR_MAINPLL_PLLGLOB);
-+	writel(cfg->main_pll_fdbck,
-+	       base_addr + CLKMGR_MAINPLL_FDBCK);
-+	writel(vcocalib,
-+	       base_addr + CLKMGR_MAINPLL_VCOCALIB);
-+	writel(cfg->main_pll_pllc0,
-+	       base_addr + CLKMGR_MAINPLL_PLLC0);
-+	writel(cfg->main_pll_pllc1,
-+	       base_addr + CLKMGR_MAINPLL_PLLC1);
-+	writel(cfg->main_pll_nocdiv,
-+	       base_addr + CLKMGR_MAINPLL_NOCDIV);
-+
-+	/* setup peripheral PLL dividers */
-+	/* calculate the vcocalib value */
-+	mdiv = (cfg->per_pll_fdbck >> CLKMGR_FDBCK_MDIV_OFFSET) &
-+		CLKMGR_FDBCK_MDIV_MASK;
-+	refclkdiv = (cfg->per_pll_pllglob >> CLKMGR_PLLGLOB_REFCLKDIV_OFFSET) &
-+		     CLKMGR_PLLGLOB_REFCLKDIV_MASK;
-+	mscnt = CLKMGR_MSCNT_CONST / (CLKMGR_MDIV_CONST + mdiv) / refclkdiv;
-+	hscnt = (mdiv + CLKMGR_MDIV_CONST) * mscnt / refclkdiv -
-+		CLKMGR_HSCNT_CONST;
-+	vcocalib = (hscnt & CLKMGR_VCOCALIB_HSCNT_MASK) |
-+		   ((mscnt & CLKMGR_VCOCALIB_MSCNT_MASK) <<
-+		   CLKMGR_VCOCALIB_MSCNT_OFFSET);
-+
-+	writel((cfg->per_pll_pllglob & ~CLKMGR_PLLGLOB_PD_MASK &
-+		~CLKMGR_PLLGLOB_RST_MASK),
-+		base_addr + CLKMGR_PERPLL_PLLGLOB);
-+	writel(cfg->per_pll_fdbck,
-+	       base_addr + CLKMGR_PERPLL_FDBCK);
-+	writel(vcocalib,
-+	       base_addr + CLKMGR_PERPLL_VCOCALIB);
-+	writel(cfg->per_pll_pllc0,
-+	       base_addr + CLKMGR_PERPLL_PLLC0);
-+	writel(cfg->per_pll_pllc1,
-+	       base_addr + CLKMGR_PERPLL_PLLC1);
-+	writel(cfg->per_pll_emacctl,
-+	       base_addr + CLKMGR_PERPLL_EMACCTL);
-+	writel(cfg->per_pll_gpiodiv,
-+	       base_addr + CLKMGR_PERPLL_GPIODIV);
-+
-+	/* Take both PLL out of reset and power up */
-+	setbits_le32(base_addr + CLKMGR_MAINPLL_PLLGLOB,
-+		     CLKMGR_PLLGLOB_PD_MASK | CLKMGR_PLLGLOB_RST_MASK);
-+	setbits_le32(base_addr + CLKMGR_PERPLL_PLLGLOB,
-+		     CLKMGR_PLLGLOB_PD_MASK | CLKMGR_PLLGLOB_RST_MASK);
-+
-+	wait_for_bit_le32((const void *)(base_addr + CLKMGR_STAT),
-+			  CLKMGR_STAT_ALLPLL_LOCKED_MASK, true, 20000, false);
-+
-+	/*
-+	 * Dividers for C2 to C9 only init after PLLs are lock. As dividers
-+	 * only take effect upon value change, we shall set a maximum value as
-+	 * default value.
-+	 */
-+	writel(0xff, base_addr + CLKMGR_MAINPLL_MPUCLK);
-+	writel(0xff, base_addr + CLKMGR_MAINPLL_NOCCLK);
-+	writel(0xff, base_addr + CLKMGR_MAINPLL_CNTR2CLK);
-+	writel(0xff, base_addr + CLKMGR_MAINPLL_CNTR3CLK);
-+	writel(0xff, base_addr + CLKMGR_MAINPLL_CNTR4CLK);
-+	writel(0xff, base_addr + CLKMGR_MAINPLL_CNTR5CLK);
-+	writel(0xff, base_addr + CLKMGR_MAINPLL_CNTR6CLK);
-+	writel(0xff, base_addr + CLKMGR_MAINPLL_CNTR7CLK);
-+	writel(0xff, base_addr + CLKMGR_MAINPLL_CNTR8CLK);
-+	writel(0xff, base_addr + CLKMGR_MAINPLL_CNTR9CLK);
-+	writel(0xff, base_addr + CLKMGR_PERPLL_CNTR2CLK);
-+	writel(0xff, base_addr + CLKMGR_PERPLL_CNTR3CLK);
-+	writel(0xff, base_addr + CLKMGR_PERPLL_CNTR4CLK);
-+	writel(0xff, base_addr + CLKMGR_PERPLL_CNTR5CLK);
-+	writel(0xff, base_addr + CLKMGR_PERPLL_CNTR6CLK);
-+	writel(0xff, base_addr + CLKMGR_PERPLL_CNTR7CLK);
-+	writel(0xff, base_addr + CLKMGR_PERPLL_CNTR8CLK);
-+	writel(0xff, base_addr + CLKMGR_PERPLL_CNTR9CLK);
-+
-+	writel(cfg->main_pll_mpuclk,
-+	       base_addr + CLKMGR_MAINPLL_MPUCLK);
-+	writel(cfg->main_pll_nocclk,
-+	       base_addr + CLKMGR_MAINPLL_NOCCLK);
-+	writel(cfg->main_pll_cntr2clk,
-+	       base_addr + CLKMGR_MAINPLL_CNTR2CLK);
-+	writel(cfg->main_pll_cntr3clk,
-+	       base_addr + CLKMGR_MAINPLL_CNTR3CLK);
-+	writel(cfg->main_pll_cntr4clk,
-+	       base_addr + CLKMGR_MAINPLL_CNTR4CLK);
-+	writel(cfg->main_pll_cntr5clk,
-+	       base_addr + CLKMGR_MAINPLL_CNTR5CLK);
-+	writel(cfg->main_pll_cntr6clk,
-+	       base_addr + CLKMGR_MAINPLL_CNTR6CLK);
-+	writel(cfg->main_pll_cntr7clk,
-+	       base_addr + CLKMGR_MAINPLL_CNTR7CLK);
-+	writel(cfg->main_pll_cntr8clk,
-+	       base_addr + CLKMGR_MAINPLL_CNTR8CLK);
-+	writel(cfg->main_pll_cntr9clk,
-+	       base_addr + CLKMGR_MAINPLL_CNTR9CLK);
-+	writel(cfg->per_pll_cntr2clk,
-+	       base_addr + CLKMGR_PERPLL_CNTR2CLK);
-+	writel(cfg->per_pll_cntr3clk,
-+	       base_addr + CLKMGR_PERPLL_CNTR3CLK);
-+	writel(cfg->per_pll_cntr4clk,
-+	       base_addr + CLKMGR_PERPLL_CNTR4CLK);
-+	writel(cfg->per_pll_cntr5clk,
-+	       base_addr + CLKMGR_PERPLL_CNTR5CLK);
-+	writel(cfg->per_pll_cntr6clk,
-+	       base_addr + CLKMGR_PERPLL_CNTR6CLK);
-+	writel(cfg->per_pll_cntr7clk,
-+	       base_addr + CLKMGR_PERPLL_CNTR7CLK);
-+	writel(cfg->per_pll_cntr8clk,
-+	       base_addr + CLKMGR_PERPLL_CNTR8CLK);
-+	writel(cfg->per_pll_cntr9clk,
-+	       base_addr + CLKMGR_PERPLL_CNTR9CLK);
-+
-+	/* Take all PLLs out of bypass */
-+	clk_write_bypass_mainpll(plat, 0);
-+	clk_write_bypass_perpll(plat, 0);
-+
-+	/* clear safe mode / out of boot mode */
-+	clk_write_ctrl(plat, readl(base_addr + CLKMGR_CTRL) &
-+		      ~(CLKMGR_CTRL_SAFEMODE));
-+
-+	/* Now ungate non-hw-managed clocks */
-+	writel(~0, base_addr + CLKMGR_MAINPLL_EN);
-+	writel(~0, base_addr + CLKMGR_PERPLL_EN);
-+
-+	/* Clear the loss of lock bits (write 1 to clear) */
-+	writel(CLKMGR_INTER_PERPLLLOST_MASK |
-+		      CLKMGR_INTER_MAINPLLLOST_MASK,
-+		      base_addr + CLKMGR_INTRCLR);
-+}
-+
-+static u64 clk_get_vco_clk_hz(struct socfpga_clk_plat *plat,
-+			      u32 pllglob_reg, u32 fdbck_reg)
-+{
-+	 u64 fref, refdiv, mdiv, reg, vco;
-+
-+	reg = CM_REG_READL(plat, pllglob_reg);
-+
-+	fref = (reg >> CLKMGR_PLLGLOB_VCO_PSRC_OFFSET) &
-+		CLKMGR_PLLGLOB_VCO_PSRC_MASK;
-+
-+	switch (fref) {
-+	case CLKMGR_VCO_PSRC_EOSC1:
-+		fref = cm_get_osc_clk_hz();
-+		break;
-+	case CLKMGR_VCO_PSRC_INTOSC:
-+		fref = cm_get_intosc_clk_hz();
-+		break;
-+	case CLKMGR_VCO_PSRC_F2S:
-+		fref = cm_get_fpga_clk_hz();
-+		break;
-+	}
-+
-+	refdiv = (reg >> CLKMGR_PLLGLOB_REFCLKDIV_OFFSET) &
-+		  CLKMGR_PLLGLOB_REFCLKDIV_MASK;
-+
-+	reg = CM_REG_READL(plat, fdbck_reg);
-+	mdiv = (reg >> CLKMGR_FDBCK_MDIV_OFFSET) & CLKMGR_FDBCK_MDIV_MASK;
-+
-+	vco = fref / refdiv;
-+	vco = vco * (CLKMGR_MDIV_CONST + mdiv);
-+
-+	return vco;
-+}
-+
-+static u64 clk_get_main_vco_clk_hz(struct socfpga_clk_plat *plat)
-+{
-+	return clk_get_vco_clk_hz(plat, CLKMGR_MAINPLL_PLLGLOB,
-+				 CLKMGR_MAINPLL_FDBCK);
-+}
-+
-+static u64 clk_get_per_vco_clk_hz(struct socfpga_clk_plat *plat)
-+{
-+	return clk_get_vco_clk_hz(plat, CLKMGR_PERPLL_PLLGLOB,
-+				 CLKMGR_PERPLL_FDBCK);
-+}
-+
-+static u32 clk_get_5_1_clk_src(struct socfpga_clk_plat *plat, u64 reg)
-+{
-+	u32 clksrc = CM_REG_READL(plat, reg);
-+
-+	return (clksrc >> CLKMGR_CLKSRC_OFFSET) & CLKMGR_CLKSRC_MASK;
-+}
-+
-+static u64 clk_get_mpu_clk_hz(struct socfpga_clk_plat *plat)
-+{
-+	u64 clock;
-+	u32 clklsrc = clk_get_5_1_clk_src(plat, CLKMGR_MAINPLL_MPUCLK);
-+
-+	switch (clklsrc) {
-+	case CLKMGR_CLKSRC_MAIN:
-+		clock = clk_get_main_vco_clk_hz(plat);
-+		clock /= (CM_REG_READL(plat, CLKMGR_MAINPLL_PLLC0) &
-+			  CLKMGR_PLLC0_DIV_MASK);
-+		break;
-+	case CLKMGR_CLKSRC_PER:
-+		clock = clk_get_per_vco_clk_hz(plat);
-+		clock /= (CM_REG_READL(plat, CLKMGR_PERPLL_PLLC0) &
-+			  CLKMGR_CLKCNT_MSK);
-+		break;
-+	case CLKMGR_CLKSRC_OSC1:
-+		clock = cm_get_osc_clk_hz();
-+		break;
-+	case CLKMGR_CLKSRC_INTOSC:
-+		clock = cm_get_intosc_clk_hz();
-+		break;
-+	case CLKMGR_CLKSRC_FPGA:
-+		clock = cm_get_fpga_clk_hz();
-+		break;
-+	default:
-+		return 0;
-+	}
-+
-+	clock /= 1 + (CM_REG_READL(plat, CLKMGR_MAINPLL_MPUCLK) &
-+		 CLKMGR_CLKCNT_MSK);
-+
-+	return clock;
-+}
-+
-+static u32 clk_get_l3_main_clk_hz(struct socfpga_clk_plat *plat)
-+{
-+	u64 clock;
-+	u32 clklsrc = clk_get_5_1_clk_src(plat, CLKMGR_MAINPLL_NOCCLK);
-+
-+	switch (clklsrc) {
-+	case CLKMGR_CLKSRC_MAIN:
-+		clock = clk_get_main_vco_clk_hz(plat);
-+		clock /= (CM_REG_READL(plat, CLKMGR_MAINPLL_PLLC1) &
-+			  CLKMGR_PLLC0_DIV_MASK);
-+		break;
-+	case CLKMGR_CLKSRC_PER:
-+		clock = clk_get_per_vco_clk_hz(plat);
-+		clock /= (CM_REG_READL(plat, CLKMGR_PERPLL_PLLC1) &
-+			  CLKMGR_CLKCNT_MSK);
-+		break;
-+	case CLKMGR_CLKSRC_OSC1:
-+		clock = cm_get_osc_clk_hz();
-+		break;
-+	case CLKMGR_CLKSRC_INTOSC:
-+		clock = cm_get_intosc_clk_hz();
-+		break;
-+	case CLKMGR_CLKSRC_FPGA:
-+		clock = cm_get_fpga_clk_hz();
-+		break;
-+	default:
-+		return 0;
-+	}
-+
-+	clock /= 1 + (CM_REG_READL(plat, CLKMGR_MAINPLL_NOCCLK) &
-+		 CLKMGR_CLKCNT_MSK);
-+
-+	return clock;
-+}
-+
-+static u32 clk_get_sdmmc_clk_hz(struct socfpga_clk_plat *plat)
-+{
-+	u32 clock;
-+	u32 clklsrc = clk_get_5_1_clk_src(plat, CLKMGR_PERPLL_CNTR6CLK);
-+
-+	switch (clklsrc) {
-+	case CLKMGR_CLKSRC_MAIN:
-+		clock = clk_get_l3_main_clk_hz(plat);
-+		clock /= 1 + (CM_REG_READL(plat, CLKMGR_MAINPLL_CNTR6CLK) & CLKMGR_CLKCNT_MSK);
-+		break;
-+	case CLKMGR_CLKSRC_PER:
-+		clock = clk_get_l3_main_clk_hz(plat);
-+		clock /= 1 + (CM_REG_READL(plat, CLKMGR_PERPLL_CNTR6CLK) & CLKMGR_CLKCNT_MSK);
-+		break;
-+	case CLKMGR_CLKSRC_OSC1:
-+		clock = cm_get_osc_clk_hz();
-+		break;
-+	case CLKMGR_CLKSRC_INTOSC:
-+		clock = cm_get_intosc_clk_hz();
-+		break;
-+	case CLKMGR_CLKSRC_FPGA:
-+		clock = cm_get_fpga_clk_hz();
-+		break;
-+	default:
-+		return 0;
-+	}
-+
-+	return clock / 4;
-+}
-+
-+static u32 clk_get_l4_sp_clk_hz(struct socfpga_clk_plat *plat)
-+{
-+	u64 clock = clk_get_l3_main_clk_hz(plat);
-+
-+	clock /= BIT((CM_REG_READL(plat, CLKMGR_MAINPLL_NOCDIV) >>
-+		      CLKMGR_NOCDIV_L4SPCLK_OFFSET) &
-+		      CLKMGR_CLKCNT_MSK);
-+
-+	return clock;
-+}
-+
-+static u32 clk_get_l4_sys_free_clk_hz(struct socfpga_clk_plat *plat)
-+{
-+	if (CM_REG_READL(plat, CLKMGR_STAT) & CLKMGR_STAT_BOOTMODE)
-+		return clk_get_l3_main_clk_hz(plat) / 2;
-+
-+	return clk_get_l3_main_clk_hz(plat) / 4;
-+}
-+
-+static ulong socfpga_clk_get_rate(struct clk *clk)
-+{
-+	struct socfpga_clk_plat *plat = dev_get_plat(clk->dev);
-+
-+	switch (clk->id) {
-+	case STRATIX10_MPU_CLK:
-+		return clk_get_mpu_clk_hz(plat);
-+	case STRATIX10_NOC_CLK:
-+		return clk_get_l3_main_clk_hz(plat);
-+	case STRATIX10_MAIN_PLL_CLK:
-+		return clk_get_main_vco_clk_hz(plat);
-+	case STRATIX10_PERIPH_PLL_CLK:
-+		return clk_get_per_vco_clk_hz(plat);
-+	case STRATIX10_OSC1:
-+		return cm_get_osc_clk_hz();
-+	case STRATIX10_SDMMC_CLK:
-+		return clk_get_sdmmc_clk_hz(plat);
-+	case STRATIX10_L4_SP_CLK:
-+		return clk_get_l4_sp_clk_hz(plat);
-+	case STRATIX10_L4_SYS_FREE_CLK:
-+		return clk_get_l4_sys_free_clk_hz(plat);
-+	default:
-+		return -ENXIO;
-+	}
-+}
-+
-+static int bitmask_from_clk_id(struct clk *clk)
-+{
-+	struct socfpga_clk_plat *plat = dev_get_plat(clk->dev);
-+
-+	switch (clk->id) {
-+	case STRATIX10_MPU_CLK:
-+		plat->pllgrp = CLKMGR_MAINPLL_EN;
-+		plat->bitmask = CLKMGR_MAINPLLGRP_EN_MPUCLK_MASK;
-+		break;
-+	case STRATIX10_L4_MAIN_CLK:
-+		plat->pllgrp = CLKMGR_MAINPLL_EN;
-+		plat->bitmask = CLKMGR_MAINPLLGRP_EN_L4MAINCLK_MASK;
-+		break;
-+	case STRATIX10_L4_MP_CLK:
-+	case STRATIX10_NAND_X_CLK:
-+		plat->pllgrp = CLKMGR_MAINPLL_EN;
-+		plat->bitmask = CLKMGR_MAINPLLGRP_EN_L4MPCLK_MASK;
-+		break;
-+	case STRATIX10_L4_SP_CLK:
-+		plat->pllgrp = CLKMGR_MAINPLL_EN;
-+		plat->bitmask = CLKMGR_MAINPLLGRP_EN_L4SPCLK_MASK;
-+		break;
-+	case STRATIX10_CS_AT_CLK:
-+		plat->pllgrp = CLKMGR_MAINPLL_EN;
-+		plat->bitmask = CLKMGR_MAINPLLGRP_EN_CSCLK_MASK;
-+		break;
-+	case STRATIX10_CS_TRACE_CLK:
-+		plat->pllgrp = CLKMGR_MAINPLL_EN;
-+		plat->bitmask = CLKMGR_MAINPLLGRP_EN_CSCLK_MASK;
-+		break;
-+	case STRATIX10_CS_PDBG_CLK:
-+		plat->pllgrp = CLKMGR_MAINPLL_EN;
-+		plat->bitmask = CLKMGR_MAINPLLGRP_EN_CSCLK_MASK;
-+		break;
-+	case STRATIX10_CS_TIMER_CLK:
-+		plat->pllgrp = CLKMGR_MAINPLL_EN;
-+		plat->bitmask = CLKMGR_MAINPLLGRP_EN_CSTIMERCLK_MASK;
-+		break;
-+	case STRATIX10_S2F_USER0_CLK:
-+		plat->pllgrp = CLKMGR_MAINPLL_EN;
-+		plat->bitmask = CLKMGR_MAINPLLGRP_EN_S2FUSER0CLK_MASK;
-+		break;
-+	case STRATIX10_EMAC0_CLK:
-+		plat->pllgrp = CLKMGR_PERPLL_EN;
-+		plat->bitmask = CLKMGR_PERPLLGRP_EN_EMAC0CLK_MASK;
-+		break;
-+	case STRATIX10_EMAC1_CLK:
-+		plat->pllgrp = CLKMGR_PERPLL_EN;
-+		plat->bitmask = CLKMGR_PERPLLGRP_EN_EMAC1CLK_MASK;
-+		break;
-+	case STRATIX10_EMAC2_CLK:
-+		plat->pllgrp = CLKMGR_PERPLL_EN;
-+		plat->bitmask = CLKMGR_PERPLLGRP_EN_EMAC2CLK_MASK;
-+		break;
-+	case STRATIX10_EMAC_PTP_CLK:
-+		plat->pllgrp = CLKMGR_PERPLL_EN;
-+		plat->bitmask = CLKMGR_PERPLLGRP_EN_EMACPTPCLK_MASK;
-+		break;
-+	case STRATIX10_GPIO_DB_CLK:
-+		plat->pllgrp = CLKMGR_PERPLL_EN;
-+		plat->bitmask = CLKMGR_PERPLLGRP_EN_GPIODBCLK_MASK;
-+		break;
-+	case STRATIX10_SDMMC_CLK:
-+		plat->pllgrp = CLKMGR_PERPLL_EN;
-+		plat->bitmask = CLKMGR_PERPLLGRP_EN_SDMMCCLK_MASK;
-+		break;
-+	case STRATIX10_S2F_USER1_CLK:
-+		plat->pllgrp = CLKMGR_PERPLL_EN;
-+		plat->bitmask = CLKMGR_PERPLLGRP_EN_S2FUSER1CLK_MASK;
-+		break;
-+	case STRATIX10_PSI_REF_CLK:
-+		plat->pllgrp = CLKMGR_PERPLL_EN;
-+		plat->bitmask = CLKMGR_PERPLLGRP_EN_PSIREFCLK_MASK;
-+		break;
-+	case STRATIX10_USB_CLK:
-+		plat->pllgrp = CLKMGR_PERPLL_EN;
-+		plat->bitmask = CLKMGR_PERPLLGRP_EN_USBCLK_MASK;
-+		break;
-+	case STRATIX10_SPI_M_CLK:
-+		plat->pllgrp = CLKMGR_PERPLL_EN;
-+		plat->bitmask = CLKMGR_PERPLLGRP_EN_SPIMCLK_MASK;
-+		break;
-+	case STRATIX10_NAND_CLK:
-+		plat->pllgrp = CLKMGR_PERPLL_EN;
-+		plat->bitmask = CLKMGR_PERPLLGRP_EN_NANDCLK_MASK;
-+		break;
-+	case STRATIX10_L4_SYS_FREE_CLK:
-+		return -EOPNOTSUPP;
-+	default:
-+		return -ENXIO;
-+	}
-+
++	socfpga_get_sys_mgr_addr();
 +	return 0;
 +}
-+
-+static int socfpga_clk_enable(struct clk *clk)
-+{
-+	struct socfpga_clk_plat *plat = dev_get_plat(clk->dev);
-+	uintptr_t base_addr = (uintptr_t)plat->regs;
-+	int ret;
-+
-+	ret = bitmask_from_clk_id(clk);
-+	if (ret == -EOPNOTSUPP)
-+		return 0;
-+
-+	if (ret)
-+		return ret;
-+
-+	setbits_le32(base_addr + plat->pllgrp, plat->bitmask);
-+
-+	return 0;
-+}
-+
-+static int socfpga_clk_disable(struct clk *clk)
-+{
-+	struct socfpga_clk_plat *plat = dev_get_plat(clk->dev);
-+	uintptr_t base_addr = (uintptr_t)plat->regs;
-+	int ret;
-+
-+	ret = bitmask_from_clk_id(clk);
-+	if (ret == -EOPNOTSUPP)
-+		return 0;
-+
-+	if (ret)
-+		return ret;
-+
-+	clrbits_le32(base_addr + plat->pllgrp, plat->bitmask);
-+
-+	return 0;
-+}
-+
-+static int socfpga_clk_probe(struct udevice *dev)
-+{
-+	const struct cm_config *cm_default_cfg = cm_get_default_config();
-+
-+	clk_basic_init(dev, cm_default_cfg);
-+
-+	return 0;
-+}
-+
-+static int socfpga_clk_of_to_plat(struct udevice *dev)
-+{
-+	struct socfpga_clk_plat *plat = dev_get_plat(dev);
-+	fdt_addr_t addr;
-+
-+	addr = dev_read_addr(dev);
-+	if (addr == FDT_ADDR_T_NONE)
-+		return -EINVAL;
-+	plat->regs = (void __iomem *)addr;
-+
-+	return 0;
-+}
-+
-+static struct clk_ops socfpga_clk_ops = {
-+	.enable		= socfpga_clk_enable,
-+	.disable	= socfpga_clk_disable,
-+	.get_rate	= socfpga_clk_get_rate,
-+};
-+
-+static const struct udevice_id socfpga_clk_match[] = {
-+	{ .compatible = "intel,stratix10-clkmgr" },
-+	{}
-+};
-+
-+U_BOOT_DRIVER(socfpga_s10_clk) = {
-+	.name		= "clk-s10",
-+	.id		= UCLASS_CLK,
-+	.of_match	= socfpga_clk_match,
-+	.ops		= &socfpga_clk_ops,
-+	.probe		= socfpga_clk_probe,
-+	.of_to_plat = socfpga_clk_of_to_plat,
-+	.plat_auto	= sizeof(struct socfpga_clk_plat),
-+};
-diff --git a/drivers/clk/altera/clk-s10.h b/drivers/clk/altera/clk-s10.h
-new file mode 100644
-index 00000000000..f5be1e68500
---- /dev/null
-+++ b/drivers/clk/altera/clk-s10.h
-@@ -0,0 +1,202 @@
-+/* SPDX-License-Identifier: GPL-2.0
-+ *
-+ * Copyright (C) 2026 Altera Corporation <www.altera.com>
-+ *
-+ */
-+
-+#ifndef	_CLK_S10_
-+#define	_CLK_S10_
-+
-+#ifndef __ASSEMBLY__
-+#include <linux/bitops.h>
-+#endif
-+
-+#define COUNTER_FREQUENCY_REAL	400000000
-+
-+#define CM_REG_READL(plat, reg)				\
-+	readl((plat)->regs + (reg))
-+
-+#define CM_REG_WRITEL(plat, data, reg)			\
-+	writel(data, (plat)->regs + (reg))
-+
-+#define CM_REG_CLRBITS(plat, reg, clear)		\
-+	clrbits_le32((plat)->regs + (reg), (clear))
-+
-+#define CM_REG_SETBITS(plat, reg, set)			\
-+	setbits_le32((plat)->regs + (reg), (set))
-+
-+struct cm_config {
-+	/* main group */
-+	u32 main_pll_mpuclk;
-+	u32 main_pll_nocclk;
-+	u32 main_pll_cntr2clk;
-+	u32 main_pll_cntr3clk;
-+	u32 main_pll_cntr4clk;
-+	u32 main_pll_cntr5clk;
-+	u32 main_pll_cntr6clk;
-+	u32 main_pll_cntr7clk;
-+	u32 main_pll_cntr8clk;
-+	u32 main_pll_cntr9clk;
-+	u32 main_pll_nocdiv;
-+	u32 main_pll_pllglob;
-+	u32 main_pll_fdbck;
-+	u32 main_pll_pllc0;
-+	u32 main_pll_pllc1;
-+	u32 spare;
-+
-+	/* peripheral group */
-+	u32 per_pll_cntr2clk;
-+	u32 per_pll_cntr3clk;
-+	u32 per_pll_cntr4clk;
-+	u32 per_pll_cntr5clk;
-+	u32 per_pll_cntr6clk;
-+	u32 per_pll_cntr7clk;
-+	u32 per_pll_cntr8clk;
-+	u32 per_pll_cntr9clk;
-+	u32 per_pll_emacctl;
-+	u32 per_pll_gpiodiv;
-+	u32 per_pll_pllglob;
-+	u32 per_pll_fdbck;
-+	u32 per_pll_pllc0;
-+	u32 per_pll_pllc1;
-+
-+	/* incoming clock */
-+	u32 hps_osc_clk_hz;
-+	u32 fpga_clk_hz;
-+};
-+
-+/* Control status */
-+#define CLKMGR_CTRL					0x00
-+#define CLKMGR_STAT					0x04
-+#define CLKMGR_INTRCLR				0x14
-+/* Mainpll group */
-+#define CLKMGR_MAINPLL_EN				0x30
-+#define CLKMGR_MAINPLL_BYPASS			0x3c
-+#define CLKMGR_MAINPLL_MPUCLK			0x48
-+#define CLKMGR_MAINPLL_NOCCLK			0x4c
-+#define CLKMGR_MAINPLL_CNTR2CLK			0x50
-+#define CLKMGR_MAINPLL_CNTR3CLK			0x54
-+#define CLKMGR_MAINPLL_CNTR4CLK			0x58
-+#define CLKMGR_MAINPLL_CNTR5CLK			0x5c
-+#define CLKMGR_MAINPLL_CNTR6CLK			0x60
-+#define CLKMGR_MAINPLL_CNTR7CLK			0x64
-+#define CLKMGR_MAINPLL_CNTR8CLK			0x68
-+#define CLKMGR_MAINPLL_CNTR9CLK			0x6c
-+#define CLKMGR_MAINPLL_NOCDIV			0x70
-+#define CLKMGR_MAINPLL_PLLGLOB			0x74
-+#define CLKMGR_MAINPLL_FDBCK			0x78
-+#define CLKMGR_MAINPLL_MEMSTAT			0x80
-+#define CLKMGR_MAINPLL_PLLC0			0x84
-+#define CLKMGR_MAINPLL_PLLC1			0x88
-+#define CLKMGR_MAINPLL_VCOCALIB			0x8c
-+/* Periphpll group */
-+#define CLKMGR_PERPLL_EN				0xa4
-+#define CLKMGR_PERPLL_BYPASS			0xb0
-+#define CLKMGR_PERPLL_CNTR2CLK			0xbc
-+#define CLKMGR_PERPLL_CNTR3CLK			0xc0
-+#define CLKMGR_PERPLL_CNTR4CLK			0xc4
-+#define CLKMGR_PERPLL_CNTR5CLK			0xc8
-+#define CLKMGR_PERPLL_CNTR6CLK			0xcc
-+#define CLKMGR_PERPLL_CNTR7CLK			0xd0
-+#define CLKMGR_PERPLL_CNTR8CLK			0xd4
-+#define CLKMGR_PERPLL_CNTR9CLK			0xd8
-+#define CLKMGR_PERPLL_EMACCTL			0xdc
-+#define CLKMGR_PERPLL_GPIODIV			0xe0
-+#define CLKMGR_PERPLL_PLLGLOB			0xe4
-+#define CLKMGR_PERPLL_FDBCK				0xe8
-+#define CLKMGR_PERPLL_MEMSTAT			0xf0
-+#define CLKMGR_PERPLL_PLLC0				0xf4
-+#define CLKMGR_PERPLL_PLLC1				0xf8
-+#define CLKMGR_PERPLL_VCOCALIB			0xfc
-+
-+#define CLKMGR_CTRL_SAFEMODE				BIT(0)
-+#define CLKMGR_BYPASS_MAINPLL_ALL			0x00000007
-+#define CLKMGR_BYPASS_PERPLL_ALL			0x0000007f
-+
-+#define CLKMGR_INTER_MAINPLLLOCKED_MASK			0x00000001
-+#define CLKMGR_INTER_PERPLLLOCKED_MASK			0x00000002
-+#define CLKMGR_INTER_MAINPLLLOST_MASK			0x00000004
-+#define CLKMGR_INTER_PERPLLLOST_MASK			0x00000008
-+#define CLKMGR_STAT_BUSY				BIT(0)
-+#define CLKMGR_STAT_MAINPLL_LOCKED			BIT(8)
-+#define CLKMGR_STAT_PERPLL_LOCKED			BIT(9)
-+#define CLKMGR_STAT_BOOTMODE			BIT(16)
-+
-+#define CLKMGR_STAT_ALLPLL_LOCKED_MASK		\
-+	(CLKMGR_STAT_MAINPLL_LOCKED | CLKMGR_STAT_PERPLL_LOCKED)
-+
-+#define CLKMGR_PLLGLOB_PD_MASK				0x00000001
-+#define CLKMGR_PLLGLOB_RST_MASK				0x00000002
-+#define CLKMGR_PLLGLOB_VCO_PSRC_MASK			0x3
-+#define CLKMGR_PLLGLOB_VCO_PSRC_OFFSET			16
-+#define CLKMGR_VCO_PSRC_EOSC1				0
-+#define CLKMGR_VCO_PSRC_INTOSC				1
-+#define CLKMGR_VCO_PSRC_F2S				2
-+#define CLKMGR_PLLGLOB_REFCLKDIV_MASK			0x3f
-+#define CLKMGR_PLLGLOB_REFCLKDIV_OFFSET			8
-+
-+#define CLKMGR_CLKSRC_MASK				0x7
-+#define CLKMGR_CLKSRC_OFFSET				16
-+#define CLKMGR_CLKSRC_MAIN				0
-+#define CLKMGR_CLKSRC_PER				1
-+#define CLKMGR_CLKSRC_OSC1				2
-+#define CLKMGR_CLKSRC_INTOSC				3
-+#define CLKMGR_CLKSRC_FPGA				4
-+#define CLKMGR_CLKCNT_MSK				0x7ff
-+
-+#define CLKMGR_FDBCK_MDIV_MASK				0xff
-+#define CLKMGR_FDBCK_MDIV_OFFSET			24
-+
-+#define CLKMGR_PLLC0_DIV_MASK				0xff
-+#define CLKMGR_PLLC1_DIV_MASK				0xff
-+#define CLKMGR_PLLC0_EN_OFFSET				27
-+#define CLKMGR_PLLC1_EN_OFFSET				24
-+
-+#define CLKMGR_NOCDIV_L4MAIN_OFFSET			0
-+#define CLKMGR_NOCDIV_L4MPCLK_OFFSET			8
-+#define CLKMGR_NOCDIV_L4SPCLK_OFFSET			16
-+#define CLKMGR_NOCDIV_CSATCLK_OFFSET			24
-+#define CLKMGR_NOCDIV_CSTRACECLK_OFFSET			26
-+#define CLKMGR_NOCDIV_CSPDBGCLK_OFFSET			28
-+
-+#define CLKMGR_NOCDIV_L4SPCLK_MASK			0x3
-+#define CLKMGR_NOCDIV_DIV1				0
-+#define CLKMGR_NOCDIV_DIV2				1
-+#define CLKMGR_NOCDIV_DIV4				2
-+#define CLKMGR_NOCDIV_DIV8				3
-+#define CLKMGR_CSPDBGCLK_DIV1				0
-+#define CLKMGR_CSPDBGCLK_DIV4				1
-+
-+#define CLKMGR_MSCNT_CONST				200
-+#define CLKMGR_MDIV_CONST				6
-+#define CLKMGR_HSCNT_CONST				9
-+
-+#define CLKMGR_VCOCALIB_MSCNT_MASK			0xff
-+#define CLKMGR_VCOCALIB_MSCNT_OFFSET			9
-+#define CLKMGR_VCOCALIB_HSCNT_MASK			0xff
-+
-+#define CLKMGR_EMACCTL_EMAC0SEL_OFFSET			26
-+#define CLKMGR_EMACCTL_EMAC1SEL_OFFSET			27
-+#define CLKMGR_EMACCTL_EMAC2SEL_OFFSET			28
-+
-+#define CLKMGR_MAINPLLGRP_EN_MPUCLK_MASK		BIT(0)
-+#define CLKMGR_MAINPLLGRP_EN_L4MAINCLK_MASK		BIT(1)
-+#define CLKMGR_MAINPLLGRP_EN_L4MPCLK_MASK		BIT(2)
-+#define CLKMGR_MAINPLLGRP_EN_L4SPCLK_MASK		BIT(3)
-+#define CLKMGR_MAINPLLGRP_EN_CSCLK_MASK		BIT(4)
-+#define CLKMGR_MAINPLLGRP_EN_CSTIMERCLK_MASK		BIT(5)
-+#define CLKMGR_MAINPLLGRP_EN_S2FUSER0CLK_MASK		BIT(6)
-+
-+#define CLKMGR_PERPLLGRP_EN_EMAC0CLK_MASK		BIT(0)
-+#define CLKMGR_PERPLLGRP_EN_EMAC1CLK_MASK		BIT(1)
-+#define CLKMGR_PERPLLGRP_EN_EMAC2CLK_MASK		BIT(2)
-+#define CLKMGR_PERPLLGRP_EN_EMACPTPCLK_MASK		BIT(3)
-+#define CLKMGR_PERPLLGRP_EN_GPIODBCLK_MASK		BIT(4)
-+#define CLKMGR_PERPLLGRP_EN_SDMMCCLK_MASK		BIT(5)
-+#define CLKMGR_PERPLLGRP_EN_S2FUSER1CLK_MASK		BIT(6)
-+#define CLKMGR_PERPLLGRP_EN_PSIREFCLK_MASK		BIT(7)
-+#define CLKMGR_PERPLLGRP_EN_USBCLK_MASK		BIT(8)
-+#define CLKMGR_PERPLLGRP_EN_SPIMCLK_MASK		BIT(9)
-+#define CLKMGR_PERPLLGRP_EN_NANDCLK_MASK		BIT(10)
-+
-+#endif /* _CLK_S10_ */
+diff --git a/configs/socfpga_stratix10_defconfig b/configs/socfpga_stratix10_defconfig
+index 6a6f1d98c16..726dd7d7c9f 100644
+--- a/configs/socfpga_stratix10_defconfig
++++ b/configs/socfpga_stratix10_defconfig
+@@ -28,6 +28,7 @@ CONFIG_USE_BOOTARGS=y
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
++CONFIG_BOARD_EARLY_INIT_F=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x3ff00000
 -- 
 2.43.7
 
