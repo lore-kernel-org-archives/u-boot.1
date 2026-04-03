@@ -4,51 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41BA8E85371
-	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 16:26:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FD98E85379
+	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 16:26:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4E1D840F1;
-	Fri,  3 Apr 2026 18:25:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EB19684154;
+	Fri,  3 Apr 2026 18:25:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="mfNM+G2l";
+	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="jAm419YR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C80B584142; Fri,  3 Apr 2026 18:25:53 +0200 (CEST)
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
+ id DF62C84120; Fri,  3 Apr 2026 18:25:55 +0200 (CEST)
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 194C383DC9
- for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 18:25:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 06826840BE
+ for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 18:25:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sgdfkk@163.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=TT
- pmrImfxd5wgzVNhuGFctk9QO6fKNgNZJuabJPxe/8=; b=mfNM+G2lMINOQVq12p
- a/F6VWWbboLpv0umK74aRhai/C03V927dBtpUlwHEtSZirgd3Ejtyg/4wyOMEpYz
- /Riqa/5oRRN04SwbY9P79IE83E/B7Lc/VIhonY7Ob6DfoU3rPTZGhqBUUvpvNpDH
- 5jIP7z6ysekPmx5TTKOIFLthU=
+ s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=bR
+ gf4tHx2QPaRnplCllVjIny7siKEOzymzrQuqq67/E=; b=jAm419YRE7pe9WCyzK
+ 6lUdWumg5JWj1qS86fd/jnVEP8K9VKvs7CtvHsXLWfkxzq22LC9WG3ROHDovPI0k
+ j21TiJ5seEWniYjrj9bX9a8UfdGUGhbBiH/dr4hQxQU6l1KBT5+oLMOCah6w6sxz
+ lY0aKa3kHUdbx+m6VRIxYm+8s=
 Received: from server-e.. (unknown [])
- by gzsmtp3 (Coremail) with SMTP id PigvCgAnAXQF6s9pHqSgBw--.137S2;
- Sat, 04 Apr 2026 00:25:46 +0800 (CST)
+ by gzsmtp3 (Coremail) with SMTP id PigvCgAnAXQF6s9pHqSgBw--.137S4;
+ Sat, 04 Apr 2026 00:25:47 +0800 (CST)
 From: sgdfkk@163.com
 To: u-boot@lists.denx.de
 Cc: Du Huanpeng <u74147@gmail.com>
-Subject: [PATCH v7 0/7] add loongson mips ls1c300 initial support
-Date: Sat,  4 Apr 2026 00:25:34 +0800
-Message-ID: <20260403162541.86608-1-sgdfkk@163.com>
+Subject: [PATCH v7 2/7] mips: loongson: lowlevel initialize
+Date: Sat,  4 Apr 2026 00:25:36 +0800
+Message-ID: <20260403162541.86608-3-sgdfkk@163.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260403162541.86608-1-sgdfkk@163.com>
+References: <20260403162541.86608-1-sgdfkk@163.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: PigvCgAnAXQF6s9pHqSgBw--.137S2
-X-Coremail-Antispam: 1Uf129KBjvJXoWxXry3KF4fAF4xKFyrCFW8Xrb_yoW5uryxpw
- s0ya1rGr4jvry7Arn3tFyUXr4rA34rGrZI9FsFqr1rWas2v3WUCFs3Ja47tr43AFW8JFy8
- XF1ruF47GanFk3JanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UWrWwUUUUU=
+X-CM-TRANSID: PigvCgAnAXQF6s9pHqSgBw--.137S4
+X-Coremail-Antispam: 1Uf129KBjvJXoW3GrWrCw1rXrW8Gw1xZw45GFg_yoWxCr4Dpr
+ 1jkay5tw18Ga17Wwn3KF1rKr13JFnYgryYyrnrXr48uF4xJw1xGFWqgw43tr9xXFsYyayr
+ JrykXa1j939rZw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07U9NVgUUUUU=
 X-Originating-IP: [240e:3b0:4805:581::3001]
-X-CM-SenderInfo: xvjgwyrn6rljoofrz/xtbCwAoLYmnP6grVOQAA3J
+X-CM-SenderInfo: xvjgwyrn6rljoofrz/xtbC5wsLYmnP6gu8VwAA3p
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,72 +69,259 @@ X-Virus-Status: Clean
 
 From: Du Huanpeng <u74147@gmail.com>
 
----
-Du Huanpeng (7):
-  mips: loongson: minimal initial SoC support
-  mips: loongson: lowlevel initialize
-  mips: loongson: lowlevel debug serial
-  mips: loongson: ls1c300 board support
-  mips: loongson: add clk driver
-  mips: loongson: add watchdog driver
-  mips: loongson: ls1c300 dts and bindings
+- pll
+- spi controller
+- sdram
 
- MAINTAINERS                                   |   9 +
- arch/mips/Kconfig                             |  11 ++
- arch/mips/Makefile                            |   1 +
- arch/mips/dts/loongson32-ls1c300b.dtsi        | 151 ++++++++++++++
- arch/mips/dts/ls1c300-eval.dts                |  30 +++
- arch/mips/mach-loongson/Kconfig               |  69 +++++++
- arch/mips/mach-loongson/Makefile              |   6 +
- arch/mips/mach-loongson/cpu.c                 |  19 ++
- arch/mips/mach-loongson/include/mach/serial.h |  16 ++
- arch/mips/mach-loongson/ls1c300/Makefile      |   7 +
- arch/mips/mach-loongson/ls1c300/gpio.c        |  66 +++++++
- arch/mips/mach-loongson/ls1c300/init.c        |  61 ++++++
- .../mach-loongson/ls1c300/lowlevel_init.S     | 134 +++++++++++++
- arch/mips/mach-loongson/ls1c300/sdram.S       |  95 +++++++++
- arch/mips/mach-loongson/ls1c300/serial.c      | 104 ++++++++++
- arch/mips/mach-loongson/spl.c                 |  46 +++++
- board/loongson/ls1c300-eval/Kconfig           |  12 ++
- board/loongson/ls1c300-eval/MAINTAINERS       |   7 +
- board/loongson/ls1c300-eval/Makefile          |   3 +
- board/loongson/ls1c300-eval/board.c           |  19 ++
- configs/ls1c300_defconfig                     |  52 +++++
- drivers/clk/Makefile                          |   1 +
- drivers/clk/loongson/Makefile                 |   3 +
- drivers/clk/loongson/clk-ls1c300.c            | 186 ++++++++++++++++++
- drivers/watchdog/Kconfig                      |   8 +
- drivers/watchdog/Makefile                     |   1 +
- drivers/watchdog/loongson_wdt.c               | 127 ++++++++++++
- include/configs/ls1c300.h                     |  38 ++++
- include/dt-bindings/clock/ls1c300-clk.h       |  18 ++
- include/dt-bindings/reset/ls1c300-reset.h     |  36 ++++
- 30 files changed, 1336 insertions(+)
- create mode 100644 arch/mips/dts/loongson32-ls1c300b.dtsi
- create mode 100644 arch/mips/dts/ls1c300-eval.dts
- create mode 100644 arch/mips/mach-loongson/Kconfig
- create mode 100644 arch/mips/mach-loongson/Makefile
- create mode 100644 arch/mips/mach-loongson/cpu.c
- create mode 100644 arch/mips/mach-loongson/include/mach/serial.h
- create mode 100644 arch/mips/mach-loongson/ls1c300/Makefile
- create mode 100644 arch/mips/mach-loongson/ls1c300/gpio.c
- create mode 100644 arch/mips/mach-loongson/ls1c300/init.c
+Signed-off-by: Du Huanpeng <u74147@gmail.com>
+---
+ .../mach-loongson/ls1c300/lowlevel_init.S     | 134 ++++++++++++++++++
+ arch/mips/mach-loongson/ls1c300/sdram.S       |  95 +++++++++++++
+ 2 files changed, 229 insertions(+)
  create mode 100644 arch/mips/mach-loongson/ls1c300/lowlevel_init.S
  create mode 100644 arch/mips/mach-loongson/ls1c300/sdram.S
- create mode 100644 arch/mips/mach-loongson/ls1c300/serial.c
- create mode 100644 arch/mips/mach-loongson/spl.c
- create mode 100644 board/loongson/ls1c300-eval/Kconfig
- create mode 100644 board/loongson/ls1c300-eval/MAINTAINERS
- create mode 100644 board/loongson/ls1c300-eval/Makefile
- create mode 100644 board/loongson/ls1c300-eval/board.c
- create mode 100644 configs/ls1c300_defconfig
- create mode 100644 drivers/clk/loongson/Makefile
- create mode 100644 drivers/clk/loongson/clk-ls1c300.c
- create mode 100644 drivers/watchdog/loongson_wdt.c
- create mode 100644 include/configs/ls1c300.h
- create mode 100644 include/dt-bindings/clock/ls1c300-clk.h
- create mode 100644 include/dt-bindings/reset/ls1c300-reset.h
 
+diff --git a/arch/mips/mach-loongson/ls1c300/lowlevel_init.S b/arch/mips/mach-loongson/ls1c300/lowlevel_init.S
+new file mode 100644
+index 00000000000..8d9ba97130c
+--- /dev/null
++++ b/arch/mips/mach-loongson/ls1c300/lowlevel_init.S
+@@ -0,0 +1,134 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright (C) 2020 MediaTek Inc.
++ *
++ * Author:  Gao Weijie <weijie.gao@mediatek.com>
++ *
++ * Copyright (C) 2020-2023 Du Huanpeng <u74147@gmail.com>
++ */
++
++#include <config.h>
++#include <asm-offsets.h>
++#include <asm/cacheops.h>
++#include <asm/regdef.h>
++#include <asm/mipsregs.h>
++#include <asm/addrspace.h>
++#include <asm/asm.h>
++#include <linux/sizes.h>
++
++/* PLL control register */
++#define NAND_BASE	0xbfe70000
++#define START_FREQ	0x8030
++#define CLK_DIV_PARAM	0x8034
++#define CPU_THROT	0xc010
++
++/* START_FREQ */
++#define PLL_VALID	31
++#define Reserved_24	24
++#define FRAC_N		16
++#define M_PLL		8
++#define Reserved_4	4
++#define RST_TIME	2
++#define SDRAM_DIV	0
++ #define SDRAM_DIV2	0
++ #define SDRAM_DIV4	1
++ #define SDRAM_DIV3	2
++
++/* CLK_DIV_PARAM */
++#define PIX_DIV		24
++#define CAM_DIV		16
++#define CPU_DIV		8
++#define PIX_DIV_VALID	5
++#define PIX_SEL		4
++#define CAM_DIV_VALID	3
++#define CAM_SEL		2
++#define CPU_DIV_VALID	1
++#define CPU_SEL		0
++
++/* Document:
++ * Freq_PLL = XIN *(M_PLL + FRAC_N)/4
++ */
++#define XIN			24000000
++#define PLL_VALID_1		(1<<PLL_VALID)
++#define PREP_M_PLL(Freq_PLL)	(((Freq_PLL * 4) / XIN) << M_PLL)
++#define PREP_SDRAM_DIV(div)	(div<<SDRAM_DIV)
++#define PREP_CPU_DIV(div1)	((0x80|div1)<<CPU_DIV | (div1&&div1)<<CPU_DIV_VALID)
++#define PREP_PIX_DIV(div2)	(div2<<PIX_DIV)
++#define PREP_CAM_DIV(div3)	(div3<<CAM_DIV)
++
++/* PLL @264MHz, CPU @132MHz, SDRAM @66MHz */
++#define CFG_START_FREQ		(PLL_VALID_1 | PREP_M_PLL(264000000) | SDRAM_DIV2)
++#define CFG_CLK_DIV_PARAM	(PREP_CPU_DIV(2) | PREP_PIX_DIV(0x24) | PREP_CAM_DIV(0x24))
++#define CFG_CPU_THROT		15
++
++/* SPI0 control register */
++#define SPI0_BASE		0xbfe80000
++#define SPCR			0
++#define SPSR			1
++#define TxFIFO			2
++#define RxFIFO			2
++#define SPER			3
++#define SFC_PARAM		4
++    #define CLK_DIV		4
++    #define DUAL_IO		3
++    #define FAST_READ		2
++    #define BURST_EN		1
++    #define MEMORY_EN		0
++#define SFC_SOFTCS		5
++#define SFC_TIMING		6
++    #define T_FAST		2
++    #define T_CSH		0
++
++	.set noreorder
++LEAF(ls1c300_pll_init)
++#if !CONFIG_IS_ENABLED(SKIP_LOWLEVEL_INIT)
++	li	t0, NAND_BASE
++	li	t1, CFG_START_FREQ
++	li	t2, CFG_CLK_DIV_PARAM
++	li	t3, CFG_CPU_THROT
++
++	sw	t3, CPU_THROT (t0)
++	sw	t2, CLK_DIV_PARAM (t0)
++	sw	t1, START_FREQ (t0)
++
++	ori	t2, 1<<CPU_SEL
++	sw	t2, CLK_DIV_PARAM (t0)
++#endif
++	jr	ra
++	 nop
++END(ls1c300_pll_init)
++
++LEAF(ls1c300_spi_init)
++#if !CONFIG_IS_ENABLED(SKIP_LOWLEVEL_INIT)
++	li	t0, SPI0_BASE
++	li	t1, (1<<MEMORY_EN) | (1<<BURST_EN) | (1<<FAST_READ) | (1<<DUAL_IO)
++	sb	t1, SFC_PARAM (t0)
++	li	t2, (1<<T_FAST) | (1<<T_CSH)
++	sb	t2, SFC_TIMING (t0)
++#endif
++	jr	ra
++	  nop
++END(ls1c300_spi_init)
++
++NESTED(lowlevel_init, 0, ra)
++	/* Save ra and do real lowlevel initialization */
++	move	s0, ra
++	/* Setup PLL @264MHz */
++	PTR_LA	t9, ls1c300_pll_init
++	jalr	t9
++	  nop
++
++	/* Setup SPI Dual IO@33MHz */
++	PTR_LA	t9, ls1c300_spi_init
++	jalr	t9
++	  nop
++
++	/* Setup external SDRAM @66MHz */
++	PTR_LA	t9, ls1c300_sdram_init
++	jalr	t9
++	  nop
++
++	move	ra, s0
++	jr	ra
++	 nop
++END(lowlevel_init)
+diff --git a/arch/mips/mach-loongson/ls1c300/sdram.S b/arch/mips/mach-loongson/ls1c300/sdram.S
+new file mode 100644
+index 00000000000..0dadd41adea
+--- /dev/null
++++ b/arch/mips/mach-loongson/ls1c300/sdram.S
+@@ -0,0 +1,95 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright (C) 2020-2023 Du Huanpeng <u74147@gmail.com>
++ */
++
++#include <config.h>
++#include <asm-offsets.h>
++#include <asm/cacheops.h>
++#include <asm/regdef.h>
++#include <asm/mipsregs.h>
++#include <asm/addrspace.h>
++#include <asm/asm.h>
++#include <linux/sizes.h>
++
++/* sdram control 64 bit register */
++#define SD_CONFIG	0xbfd00000
++#define SD_CONFIGHI	0x414
++#define SD_CONFIGLO	0x410
++
++#define VALID		41
++#define HANG_UP		40
++#define DEF_SEL		39
++#define TWR		37
++#define TREF		25
++#define TRAS		21
++#define TRFC		17
++#define TRP		14
++#define TCL		11
++#define TRCD		8
++
++#define SD_BIT		6
++  #define SD_8BIT       (0<<SD_BIT)
++  #define SD_16BIT      (1<<SD_BIT)
++  #define SD_32BIT      (2<<SD_BIT)
++#define SD_CSIZE	3
++  #define SD_CSIZE_512	(0<<SD_CSIZE)
++  #define SD_CSIZE_1K	(1<<SD_CSIZE)
++  #define SD_CSIZE_2K	(2<<SD_CSIZE)
++  #define SD_CSIZE_4K	(3<<SD_CSIZE)
++  #define SD_CSIZE_256	(7<<SD_CSIZE)
++#define SD_RSIZE	0
++  #define SD_RSIZE_2K	(0<<SD_RSIZE)
++  #define SD_RSIZE_4K	(1<<SD_RSIZE)
++  #define SD_RSIZE_8K	(2<<SD_RSIZE)
++  #define SD_RSIZE_16K	(3<<SD_RSIZE)
++
++#define SD_CFG_1(tWR, tREF, tRAS, tRFC, tRP, tCL, tRCD) \
++	((tWR<<TWR)|(tREF<<TREF)|(tRAS<<TRAS)|(tRFC<<TRFC)|(tRP<<TRP)|(tCL<<TCL)|(tRCD<<TRCD))
++#define CFG_SD_0(b, c, r) \
++	((b<<SD_BIT)|(c<<SD_CSIZE)|(r<<SD_RSIZE))
++/*
++ * recommended values by ls1c300 user manual,
++ * tweak to fit your board.
++ */
++#define SD_CONFIG_133MHz	SD_CFG_1(2, 0x818, 6, 8, 3, 3, 3)
++#define SD_CONFIG_100MHz	SD_CFG_1(2, 0x620, 5, 6, 2, 3, 2)
++#define SD_CONFIG_75MHz		SD_CFG_1(1, 0x494, 4, 5, 2, 2, 2)
++#define SD_CONFIG_33MHz		SD_CFG_1(1, 0x204, 2, 2, 1, 2, 1)
++
++#define SD_CONFIG_66MHz		SD_CFG_1(1, 0x401, 4, 4, 2, 2, 2)
++
++#define SD_CONFIG64	(SD_CONFIG_66MHz | SD_16BIT | SD_CSIZE_1K | SD_RSIZE_8K)
++#define CFG_SDCONFIGHI	(SD_CONFIG64 /(1<<32))
++#define CFG_SDCONFIGLO	(SD_CONFIG64 %(1<<32))
++
++	.set noreorder
++/*
++ * Loongson ls1c300 SoC do not have onchip sram for initial stack,
++ * initialize the external sdram on reset as early as possiable.
++ */
++LEAF(ls1c300_sdram_init)
++#if !CONFIG_IS_ENABLED(SKIP_LOWLEVEL_INIT)
++	li	t0, SD_CONFIG
++	li	t1, CFG_SDCONFIGLO
++	li	t2, CFG_SDCONFIGHI
++
++/* store twice as the hardware manual required. */
++	sw	t1, SD_CONFIGLO (t0)
++	sw	t2, SD_CONFIGHI (t0)
++	sync
++
++	sw	t1, SD_CONFIGLO (t0)
++	sw	t2, SD_CONFIGHI (t0)
++	sync
++
++	ori	t2, 1<<(VALID-32)
++	sw	t1, SD_CONFIGLO (t0)
++	sw	t2, SD_CONFIGHI (t0)
++	sync
++#endif
++	jr	ra
++	 nop
++END(ls1c300_sdram_init)
++
++
 -- 
 2.43.0
 
