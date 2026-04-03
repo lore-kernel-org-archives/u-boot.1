@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 262B8E7E36D
-	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 11:02:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD3FFE7E36F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 11:02:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E2F7840D8;
-	Fri,  3 Apr 2026 13:02:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C79B2840BE;
+	Fri,  3 Apr 2026 13:02:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="XMw68/yn";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="t+vrOHEx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C78B840F1; Fri,  3 Apr 2026 13:02:01 +0200 (CEST)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
+ id 54D7284105; Fri,  3 Apr 2026 13:02:09 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51CC7840BE
- for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 13:01:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D347F8341A
+ for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 13:02:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SCnGkFkUoH68yM5ydCNIr+rQGoZilPM4P3GgF2KrJmjyzA2SwRxwzTRvQnvA4GlcTHm2BfANPSKg2gF7g0thFfr3thJlGtktuVrUU2MFxb52r0xcKB7bFc0vFuCbI4myY8XP8R14vjL480ViIOlJIApr9N82is9YvC7AR/0kvGAF8Esp7PUJEZfFHczcWPHzKFN/8DVdZT8ux8z9qLRdxJ92J3oVvQTHjuGoDwkTQCMpF5EJr59a82jfwU9ONgWxQZWWv+iUIF/DwVx71jTUs/oJlyWeiuxSGOST7qK6bcuea3kfNNgXwLHFbkG6Lgj6azZDTjOLlds9ue20lGy8zw==
+ b=jioFV7BZ/ofiXDjdHzdo0yeIO5tJeDlQ1Z/7RDX629rdom3e0RW74Ny+E1OYaPwUJy1cPezuYwYxcnc6OW/8VqkB43mikL96v0TZdhqu5r0uxHSfVnMTHPpmsbQBWBUjW5sLPPZzCshbGNLDeZ6cC7RaeDIxRNyOfcH+0vumYApd6fC7brG2YPKGkpCuNofdXXZZ+kpt9ji8S9BvNWErv1MNPf5SG0Wqb3b6HeNL8IaE3OFKV7XFaetjv/TCnf/k7wMMtstsBcL17HkGHDTglaPIE8cI73yPAL8MT/OP/P/nz5A8LrAo7cC4w2j98hgylcAxSFEUPe+W1m37pH/6aw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/4PyCOxiw9ABSCDvALWidZbiivprLALahOBYh6NJQP0=;
- b=foCb0Y+stRblrVU4DqGFlNySB9ixf5h9c7LfifyB6wKuq3Xvl25NKEK01YtfFb6gs4rMZ0At5FUls5JoMHVxIzpFldOjaX7By3YjqG+IV8vNCbk9P+0Hi0xsw0bgMavOg3QVZlByJmt0qdLRoJjN4Sl+fI4yyJS5llVbMc8cHwYuU3a8zA59a1N+T3TtZiLHkg4CC/U+4oA5dNS9l2eNcGsAmWlrsP8jSe5cQGJmCSijDZ+gB6WPdDXwz+qpfpvZRJF/KuAP3nafpKxvRtwVgIiitiRSXQDXeJDll8Nn8p10BDV6N2u8Ul5DzIL9/riK6WqC0usqpuyUfZHeaW5+QA==
+ bh=u+UEY382Tz0j7ldUUBmT8HnTG9bYf4fefXdqVo7kndA=;
+ b=bTICz/jLZsb9f7Ege3eD0/+EoQh2M3k0TwgH+PXSsHgjfpT7EHH8eGb5V2+/UUMqbCAFgsktL3UslfT+Z3im2S5dKJ36ICxjdE6LOD+NA2Si1zF7be8mpobWmaOa6PLIuU+nV/gyZZ1eSZJD9yW2PLX3/t2EuDfs/pagIxYW2lOE8/hWVvDKa7CgLBtTw9Nk5bWqxc2ni+DBohy850ASrLF8B3FEX0yQQPmkqc1F9REZtn83qsh7lRKwU8QM7SfBu/y/2XXOng3QxI4sf+J/lOCUosbsBmCrc5QC+rhzxWV6Hc3YpvCASdHAFMiO8kWX9fzGqKlH8gEc8o9Xbk/WuA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/4PyCOxiw9ABSCDvALWidZbiivprLALahOBYh6NJQP0=;
- b=XMw68/yndHIubRkoOsx/74vnNMcv3X6uMr1AfTSUCmxqHaF4LSvk1S+qep6GmQ67a8YjR7j/CR71+5V8w0QScMh9/yba01vx7J11lHOZfQFOhiVo2ZwsAg/WVdgiQS977RTwaW3n3GzaBVAc6vegxJsHpXRDkn8st+HdsyIqgg/xLr/j0V0UH8vbEv6tQ280Wz4vIeY/VDNH4grok76+9Q4GV1k/QXaBD4B8NwcA4K1c0WsanmuAjVV5d3or+zf8CtY9hY+JLL1kX+3JMFNQDY6AwNvEpFKoLqxZW1XqTZrbmI8RUP/S1si+PJrR9q4FGgEGJGCpjs4ZoiwCMT45IQ==
+ bh=u+UEY382Tz0j7ldUUBmT8HnTG9bYf4fefXdqVo7kndA=;
+ b=t+vrOHExjG8q65Rgq92CZ9iwtkEJI4tF+o3pgltWPnD+gsdEQ4K2uu+1Y5q1FwNsIRYnRQhLS3NWBzuOkXk25rPp36r2GFYrgTtr2nwtW71jaX1WVzOnVAZ7pwn6oK67fWGfoLE7T9rfEAwiD89Xd3Gpc25pZtF4uAUHHx+bDeRIyGajmRWjnbKUtT8zDJHPJ2sSVGO4xoU8Ajcec2HHxjxgYhnvExnNga13mchoDagSqsyXasUI2MU488xRh6jeF4J7/J0ymahlJDsvxmRhoZVKm1rlZ2A+jX+BNpGvbh51VXkq4CsG3ndNH49e/zzDjAv0s1/VJbG0Nd9oGP4cKg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
  by AS8PR04MB7766.eurprd04.prod.outlook.com (2603:10a6:20b:2aa::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.28; Fri, 3 Apr
- 2026 11:01:57 +0000
+ 2026 11:02:03 +0000
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::cf3:c5b0:7a0c:d11b]) by PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::cf3:c5b0:7a0c:d11b%5]) with mapi id 15.20.9769.016; Fri, 3 Apr 2026
- 11:01:57 +0000
+ 11:02:03 +0000
 From: alice.guo@oss.nxp.com
-Date: Fri, 03 Apr 2026 17:41:27 +0800
-Subject: [PATCH v1 2/3] net: fsl_enetc: Add support for i.MX952
+Date: Fri, 03 Apr 2026 17:41:28 +0800
+Subject: [PATCH v1 3/3] imx952_evk: Enable ENETC0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260403-enetc-v1-2-e42ae28ae3fe@nxp.com>
+Message-Id: <20260403-enetc-v1-3-e42ae28ae3fe@nxp.com>
 References: <20260403-enetc-v1-0-e42ae28ae3fe@nxp.com>
 In-Reply-To: <20260403-enetc-v1-0-e42ae28ae3fe@nxp.com>
 To: Marek Vasut <marex@nabladev.com>, Tim Harvey <tharvey@gateworks.com>, 
@@ -85,67 +85,67 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|AS8PR04MB7766:EE_
-X-MS-Office365-Filtering-Correlation-Id: f0bf463f-3a5d-4594-23fb-08de91706c2d
+X-MS-Office365-Filtering-Correlation-Id: e9d4b21f-4bcf-414f-8036-08de91706fef
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|366016|19092799006|7416014|376014|52116014|38350700014|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: kWv89q4jtyNn1ZzFqSOg43j0lV0Puk9cOCwltuluCWNFvngke9DExU46uwMYQacFr5t93luRKnVoI8mo8bJBWGKnMH4+oTi64y+YBUoph2BdC8zneiBF6NudCYaUftXLNrsi2WIskjfBSbtmAZO7fHGNCmVymw6xL/LuMkCu2KQfxWkRhHBxC19N64h/KW+xMTfUll++OMx6IlqmSAt1+gzpyaK0cdwtdzArDFQr2fMcOYL8GRrAVIBiwVzaPKZC/27m27z0hG1OFHtypPGKIWro8hGan6bZ1N7COzIHNwULQdgNWDEyG8F4DrU9+6HADEqWT7sObLW6Mb5Mai+nLmKS+RYR1+Stske5NSwIZqYUvoi231+mLtpvyiWAxK2HMBS2BUn4g42KmSiLD/kaCFeI7upglMoPa005hvW9/Do5PuHIoWmqkl4kSAPHcX50XnRJQW+t1KqLKSRukHYX8v8rRxF/njkaqClKcmfkFu486Wbdvbf2915ltYijfLSSn33E2DNUb2IyAiJORbm5Byqp2imIGjVDnQFjAUe2k/BqGxssgp5ZBQmX2Y0fLQ6GEpOMLPm2NBBqZIe/dMk5zGp7mwKh3mOlMKU1gA18boCwyWzJZEUkIdNRlPSUubL9axeOzGbjVrYXvXCmcsimnml4vhlG9QyabhkNbSYV3kaKOHTzEeyWjA56kAeFLn3amgkWLFTOTby/zwksN87gHtAD0+pq7iwTVZv/fq6KCG4Vjg1NtAgJ2BEYa4byb7MYKf/CoVNirmQCGaqmbpaXPrsloIegzbJmCnwPlAphDIg=
+X-Microsoft-Antispam-Message-Info: opxVm0VJx4irsnaO2gvV857hHPxbYpCHBTr708Wy6NbOpfElEI/saRno91D3M2OHJTuQRlExSwTi+9DNjymDSdE0igaKihQx3KJ1FGse4PhwYezo7Stm8Jb4grCQDYjn3TJaJDUUDfURV2i1cZI0/CU1k0MdOGaeg6neP/25FcCty4srkGR9WpQY65V4jUJW74dvTXBtC34BoparLqfDFz/Bwrt593pJ09EP7+if0krPnlFGXpROTkzuja7cPCH7tnzohPkljIMCLpcTXV38tpblJpcIEtkDkpxF1I8569igA11MINKFIG+dRZYIb6uIsl4SKp4l7MdYokaqm6QZglMbiJMc7tug92pzIkNGDF1yCKShaTqaEng/zTmvf5SwVZM59CL41q8MB0uMx/1vYhl6i8tNapaXLPbS2otaot+ftKIUTNRunkqeQIllkJcjeDeF31rw4Ae9ubgvOu6dYvvuMDXofRhnuTXjQbaLgVt4vXaQJBTN0hqHUDIVqhvuHPFIsPwY2YoCj/BZlQKt50PTb5vzSWlIUp+npuAorfDLjjOfqJTOFOzZ2lWg2nTsRCjQ08SAjPXNysQ3NchtArKHhZzt2ms56TrjLMn3WsiUhJS49tAnvkZpiOD+M+1DplZTITFZeOT5JxojmD8MA8hBoEAfwjfaw40arrZjAEwls8zOyP2jjrMKQwwBTF3eW+bFWzfpo33pknqM+IgGM3c/5EN/pnMXxGdTgbLDf4Ljbdk8JroDUKU/MdttrL1857LrAGMKTC7bslyAYQn9+jXvQcpYNitsJ8Wl7JPQsVo=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(366016)(19092799006)(7416014)(376014)(52116014)(38350700014)(56012099003)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eHduRnZKMCtZeUk5ZXhiZ1poSGxYK0g1a2NNNFpNNlQrT2E1L3M4YXZGK3Nm?=
- =?utf-8?B?TVl3UHJRTEtRNk9hTUkwMFlWREhrclkwdHJmd3NxNlF0dE5mSnFKVHhIWW0y?=
- =?utf-8?B?Y2w4cU5yKzF1VDl5TDdVRXVKZ244WGpXSE1kZGVZdXI2MkpTeXNjQVkrR3lE?=
- =?utf-8?B?T0NIa0NzMUY0Q0FPM0x5M3BmVTUzd2ZNT1BwL2VsdUxwN2E1anE4TmJBWWt6?=
- =?utf-8?B?RVdsODFGSHB1aThCYkprWlRRSWNjNlVkZ2ovbnVuTUhpOTJZd2IvQllPNk1X?=
- =?utf-8?B?Z2cwMnBzWGdlM1QxR082amJnekFHZVQ3cEE5TTlZTHhjUjl0bVhBS2NCM0tx?=
- =?utf-8?B?YjQrZ2dMUFpiYUlaZ2RVRmdrcmlVMWlPSUZGeDdSWUswNHRLWS9JZWEycE5h?=
- =?utf-8?B?bXgyV3V3WUlZdHRXYmtrWkZpUlluRWRwYUlXaDcwU2djQzMzUzI3QTM3UGJM?=
- =?utf-8?B?WUgxTzhLK09FN20yTTFWNGhKRld5YWs3UW5XaXdpS0tlTVlRL3B0Tzd6Mm5v?=
- =?utf-8?B?M25qbHgwbWMyWCtsQjdtNEs5TGZub2lWa1pDaWRyTW4wS0k0QWtNK1Y0TDNQ?=
- =?utf-8?B?QmJhU0RhRW40Z1drWjZTaU8rWHdMdXFLY1IvV0ZqVm53ZnU5NUV6QysxYnVW?=
- =?utf-8?B?MEw0Qmp6RDNoM0Z6R3Y3eGJJQjRkd1RiTW5MR0NaYTZNeTlqYTlGZm5wRFdL?=
- =?utf-8?B?aGluSUdRVVlyaVJiK0pRbjdXcGlNaW1mcXR6bnpHVFlQSzJGb0ZlS1BKY2pS?=
- =?utf-8?B?VHo1elN3VEMrbXdXOCtGWUFiSFAxZ2FJWmN6OStZQzRBZDZ1Uk15WEFqVDNU?=
- =?utf-8?B?WlRPcjBTdWRmd1Y1SUUzVkU5UWZ4UTN1OGJzNkpCQzJDUlVrdDNkd3hBd0pL?=
- =?utf-8?B?OUwxbXkvUmMvN0JBc1hycmRoMFljVnpPQkwrejZqN1FWaytER0xia0x1K1Qr?=
- =?utf-8?B?Sk5zcW5NUklIUE5tTWhsRWFiRjdXV2dCNlhSNHdBTWo0YkdMNk4xOUcrSzMw?=
- =?utf-8?B?ckpvVTFGRjV6d29YdzlkM3dPaUpQSjFlYTByb3FLanFnTGZHZ3BNTGVsc0d4?=
- =?utf-8?B?bzFGTkVGbUV6OEZabHF6SDN3WHhLc1dhKzlybTQ0Zm8xQTFBZ2Z2anU1NWFV?=
- =?utf-8?B?K0JuN1BNZnNUYkowV29RMU1uZWVjeDhnbmFPRnRMMGVSRmpETjhKYUg1by9B?=
- =?utf-8?B?OG5lVEFKdEFHb3Q0VllSd1Bvay9vYzJRbG42Z1V2QVFiV21QVGk2ZHlVbDRO?=
- =?utf-8?B?TlZBRUYzZy9lZlB4Rlh0cS9uVlozdlZyRk54eFE4RVQvTFBZZjdwU0s5ZjFG?=
- =?utf-8?B?T01tdE1pSHkvb3IzeTJkLzUzNVBTT1l6bEVWRzJJZWM1Q1MwWFM4SElFc29a?=
- =?utf-8?B?NU85N0JRYmVUU2VoY1hCbHh1dk9aK3hjVVUvRXFRY29jMnE2d1lRMnQ0aSt3?=
- =?utf-8?B?K2xDSUpkbWNFWWpiRnM3bXJDanVXdkxzNEhHMlUrRjVHc21qZlJQY1Qxc08w?=
- =?utf-8?B?T200cG90WXZiKzFsUHJhd2ZOMVcwNWFkNzRqMkE1L2NwSVR2OVhJU2pDY2hY?=
- =?utf-8?B?eVo1M0ZwUUY3L1dQSzFBejRYWjZDYzJrcmNWZmNwRVF6L2pCNjQySGM0cVVh?=
- =?utf-8?B?TC8zYjl4Y1RFZHlFTUE2MHVxUkNlM0FpYlZTWC96S0M4QW0wWlhsYlJYRkVS?=
- =?utf-8?B?UmlPenZYWE00SUxxMnl2R3JpRHJ2RDBpcUJxaXJucFYvUEpUZk5oZ3RKeWI3?=
- =?utf-8?B?L3RYRTl4TTl5cVNOZ0FhZjhiQytZQ2Q2dTU2MGluVXh4cWljRDVOZjdJYUEy?=
- =?utf-8?B?aFZ2OEJBVjhjam0yVG1GOVlOWU1rb25XQ2J5bFRvSHB6S3VrQmV0NzhzMGZG?=
- =?utf-8?B?NHhZQlRHVEpBcW1zQmRmNkVsT2dKT21UUUNkMHpyWVFYcllxeVdjaGQ2V3N6?=
- =?utf-8?B?V0M1emxlRGhyR1RFVXVxcytsclczci9zL0VrTnRob3ArdDZhbkRpbEFwY01V?=
- =?utf-8?B?Q0RDbnBpQi9KWnRTRUQzczU2amhnVUdiK08zNVBOeDRDM0tXOEZOenhKSHJ0?=
- =?utf-8?B?dGQ4dTh1Sk5saGN4N1drZFltcERRcEQwQUM2UTEwY21VWTU2bGh2ZllKZmhE?=
- =?utf-8?B?RW9tVG1TdEMxUUM1T3BiclZTZ09XT2FqZ0pWM1c3YWllNnVXRWFMM2Rib1li?=
- =?utf-8?B?cHpxSWF4ajhoNUdMdzNSa0hmM1ZxdHg5RnNCaTQvZktiTDMwempYM1hMVmpp?=
- =?utf-8?B?dXFQdUViTWtYRWFoZEd0d082MXBBNGwwOWRoVTFYM1BPcEJ2RHkzaEl1OGNJ?=
- =?utf-8?B?MWlZNW5lak8xOEswbGJaN1ZaQndhTG5SdkNVQm5DdmpBbVhrbjN5QT09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NHdnaHo3d0VvM0FqbFBkbnFFaDZveFJNYjV6YmgrQkwrOWZPT1ZLbURpR05k?=
+ =?utf-8?B?Y21WcldVbmxpQmkxZzBUZjZNQWJLMUl3WSt6WGs3aFpHNy9lVXhmNVIyckFT?=
+ =?utf-8?B?c3k1bFNnS3pnM0N2SVdKcHdUR1o2UVVBMnp6MU04aXhlQUxxVm9wazBrU0hF?=
+ =?utf-8?B?SjZxdk9rNFYrNCs0cGlVZ2pBWm8rZzhhak1vVjcybUNXRG9XWDBYZ3ZMaklm?=
+ =?utf-8?B?dVJNRklmVVI2MERCd3BCYzZXZDVyL2FJTE90QjlFU29mdFRzR1A2aEtFSDZx?=
+ =?utf-8?B?VTE0aitobVU2RWJTU3oyT3BwUkQ2cXpCM2JONU4yR0xSUkY3SUFPb01NZ3FH?=
+ =?utf-8?B?SURkVkIycmN6a1VETG5ONWJmNEtRbEh2dFMxY2E5RGVEa0plODNjcGhLWXpJ?=
+ =?utf-8?B?VEYwRzJkL1FxREZmb0duUWpzMVlRNnJpVWFNdGhIOVBXSTRBdlJXdVYyYllr?=
+ =?utf-8?B?cThHcm04MXN4U2RmNzc4NU1VOUxlVWtKd0NORlJmOFh1S3JNS0FTdDcxTzYx?=
+ =?utf-8?B?UHFQanRPRmI0RkNXMkZmSTNMY1hkNjhmbnZTVDR2d1VaUmJZUnh0bGdEbUdz?=
+ =?utf-8?B?VENnMGJyUmF2Q2E5S2VXc0F1cnVnc2hFMndOdzM5RUxmTWlGSERWVmxValNh?=
+ =?utf-8?B?NWhkN2pETjJJTmRLS1pNakozTkQxa3M1cm4wVWpZbGNCMXRpNmVJZ3ZVdTRx?=
+ =?utf-8?B?Zm1HQXNJdkpNUFAyUFF0T2ZnWXRvSEp2Rmh5NkdqcGNQdGVQWUdPSWYxMG42?=
+ =?utf-8?B?SElPME5UVUxrMDAxd2R1MGg1TThDemtpbTlZMXB3L2J0S0Rpem1oQjA3V3Vx?=
+ =?utf-8?B?VDVGdFZwWjN5THNiOWFnMmozdHBrbmNaWHhZbzgyemtLNGZNK1dzZXVQajVN?=
+ =?utf-8?B?dUZ1Y0ZDdG5TNUdqS2hwK2dHeEVzRVp1QmI4ZklWTWFrYjFOc2d3V1liNFJn?=
+ =?utf-8?B?UERsaW03SGlXd20wN05QaXg4SFRRNTdmMXpXT1JMdEVnRC80YjBDeEU1U3Rj?=
+ =?utf-8?B?Y3ZoWml2bk8wOWdyTThXYTdHbXlVS3piKzhOaFBsQUZaVXdJOVdON3p1SU5s?=
+ =?utf-8?B?QWxuUXp4c2plSEZoVTlBam0zVitIUlZFOEZhalFjcmlFb2dhVlNhRzFmK2NW?=
+ =?utf-8?B?bkJweE1aZlhLQWVQYlQ3OEw4V25KMlpxZEVrQ2lDWk1EZWhRKzZ5UCtxWUZh?=
+ =?utf-8?B?WGdQcnF5QXRUNzZ6NkxBQW1TekFXdTJJWm1hYWpwZ0NjL2VSUUhxcndUa0NF?=
+ =?utf-8?B?dFFmQzNMS0tQSWN3dktpZmZtY2FOMWN6alFiZWZQeWdBUmMyY2M0MkpJYk56?=
+ =?utf-8?B?dkhXRzF1emk2cDE4RHpvTXQyejMyNGFjN09VRW91dW03cEZYL05PM0hMbVho?=
+ =?utf-8?B?alVCdlYzUXJMZXFFb1NGdm80bTZCMmd4aWNzRk9PViszM3FIc2plU3ZPcDRp?=
+ =?utf-8?B?MDR0UVZwc01yQW93UnRxbGFVQU1DZy9HWGI5K1VuWnZha3NFVDJ3N0xSMUx0?=
+ =?utf-8?B?TFRHdi9VVFJwbG5kQmdzN3hmU05sWWVyRHNvUGpaMkxOVUd3OEJkWGJQSWda?=
+ =?utf-8?B?ZUlycDgrZEJrb0JjSTd2ZjFtZWFkRTRGYlFQRGxEaE9SSC9hK0wyYzMxOG9J?=
+ =?utf-8?B?bGYxNmtzRno0a20wbm1ramxuQklOK3A5VDZndUpqbVIxUWdZSFpGSEc3MVV6?=
+ =?utf-8?B?MkI5NHlldXVjem1nSi8wY3pTVHhGakE2b0g0MmREblZmWHZvVGo4Wk01OEVp?=
+ =?utf-8?B?cWtnQTlMbTQ1Kys2b1cwd1NTb3NHT2M1RUs4dzk1bW1sZG9UZ2VPbWF1T0JO?=
+ =?utf-8?B?Q0djczZwMW1ZSXhVbSs2R1V0OFZNMmpLNzFUZ2JPcUVlRHUrOFlsbkhRR2l5?=
+ =?utf-8?B?MFRQWTY5T080akF1NE15dE0xQXo4QTgzcHZGTlNmN3F0RWlSNkNJbnA3bmpt?=
+ =?utf-8?B?dG1aZ21JYXJLNFVjQ2pFNUdIY2duTzQ1NE0xaDJsbEZYUHhtRG9HclJlZnM5?=
+ =?utf-8?B?SEhPdVY4NXlCMGRLQW1peEtFQ2QwaEtxR2Rld1puOXpuT2VFeXVtRno1Nk90?=
+ =?utf-8?B?dUNiVEVYSEpWdTRFS1VobVYyQm9jUUtrcytpR0hNelJWVFA1UlJvMjIvWmF0?=
+ =?utf-8?B?d1dSMnlKdDkvdDdhai9Wb1RDRjVhZmY3SHlPTG5TWXVUVEc5TnpWTDBWZmxT?=
+ =?utf-8?B?ekZSanIwS3VUOFo4ek1LUHl1ekwrVU5RTkQ0T04ya1Q4anl0TDBMZGtxK29G?=
+ =?utf-8?B?MzQ0UzNrdFQwRmZKT0JsMlV4YkpRWTlDaHpYNnRtVzY1b0VuQTBPREJpUXNX?=
+ =?utf-8?B?NDNzUDJoS0FtSEZHQ3N0N3J1OHV3RFlkTHVNWkpsV1VGRCt4Zk5VZz09?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f0bf463f-3a5d-4594-23fb-08de91706c2d
+X-MS-Exchange-CrossTenant-Network-Message-Id: e9d4b21f-4bcf-414f-8036-08de91706fef
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2026 11:01:57.1584 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2026 11:02:03.4721 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: yfyvxUBMTUvNaxCNjdwa7bwrCYTwwYXNqa1BVpxDG0ZKLaoHXsho2WVGtGi/7wN5ZqVzGWcU/8eh+dyIHHG/xQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: afNZeA4QQ8dxM96hkvoFc9dwqccw0GnjvBN7dPE7ed60MNcflFCIfTCLRzIjGJTPNakBZmibe+6QQIUQrvlTgQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7766
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -163,191 +163,254 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ye Li <ye.li@nxp.com>
+From: Alice Guo <alice.guo@nxp.com>
 
-Extend ENETC driver to support i.MX952 platform where 2 ENETC
-controllers are located on different PCIe buses.
+Enable ENETC0 functionality on the i.MX952 EVK board.
 
-Key changes:
-- Add enetc_dev_id_imx() to derive device ID from device tree "reg"
-  property for i.MX952, mapping bus_devfn values 0x0 and 0x100 to device
-  IDs 0 and 1 respectively
-- Implement imx952_netcmix_init() to configure MII protocol and PCS
-  settings based on PHY mode parsed from device tree
-- Add i.MX952 to FSL_ENETC_NETC_BLK_CTRL Kconfig dependencies
-
-Signed-off-by: Ye Li <ye.li@nxp.com>
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
 ---
- drivers/net/Kconfig                   |  4 +-
- drivers/net/fsl_enetc.c               | 28 +++++++++++++-
- drivers/net/fsl_enetc_netc_blk_ctrl.c | 72 +++++++++++++++++++++++++++++++++++
- 3 files changed, 101 insertions(+), 3 deletions(-)
+ arch/arm/dts/imx952-evk-u-boot.dtsi |  94 +++++++++++++++++++++++++++++++++
+ arch/arm/dts/imx952-u-boot.dtsi     | 100 ++++++++++++++++++++++++++++++++++++
+ configs/imx952_evk_defconfig        |   3 ++
+ 3 files changed, 197 insertions(+)
 
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index ed07e286676..4da10ed1289 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -1018,8 +1018,8 @@ config FSL_ENETC
- config FSL_ENETC_NETC_BLK_CTRL
- 	bool "NXP ENETC NETC blocks control driver"
- 	depends on FSL_ENETC
--	depends on IMX95 || IMX94
--	default y if IMX95 || IMX94
-+	depends on IMX95 || IMX94 || IMX952
-+	default y if IMX95 || IMX94 || IMX952
- 	help
- 	  This driver configures Integrated Endpoint Register Block (IERB) and
- 	  Privileged Register Block (PRB) of NETC. For i.MX platforms, it also
-diff --git a/drivers/net/fsl_enetc.c b/drivers/net/fsl_enetc.c
-index 766aea035d3..a1569b9d989 100644
---- a/drivers/net/fsl_enetc.c
-+++ b/drivers/net/fsl_enetc.c
-@@ -67,10 +67,36 @@ static int enetc_is_ls1028a(struct udevice *dev)
- 	       pplat->vendor == PCI_VENDOR_ID_FREESCALE;
- }
+diff --git a/arch/arm/dts/imx952-evk-u-boot.dtsi b/arch/arm/dts/imx952-evk-u-boot.dtsi
+index b872c3a7273..2a1770e694a 100644
+--- a/arch/arm/dts/imx952-evk-u-boot.dtsi
++++ b/arch/arm/dts/imx952-evk-u-boot.dtsi
+@@ -5,6 +5,100 @@
  
-+static int enetc_dev_id_imx(struct udevice *dev)
-+{
-+	if (IS_ENABLED(CONFIG_IMX952)) {
-+		int bus_devfn;
-+		u32 reg[5];
-+		int error;
-+
-+		error = ofnode_read_u32_array(dev_ofnode(dev), "reg", reg, ARRAY_SIZE(reg));
-+		if (error)
-+			return error;
-+
-+		bus_devfn = (reg[0] >> 8) & 0xffff;
-+
-+		switch (bus_devfn) {
-+		case 0:
-+			return 0;
-+		case 0x100:
-+			return 1;
-+		default:
-+			return -EINVAL;
-+		}
-+	}
-+
-+	return PCI_DEV(pci_get_devfn(dev)) >> 3;
-+}
-+
- static int enetc_dev_id(struct udevice *dev)
- {
- 	if (enetc_is_imx95(dev))
--		return PCI_DEV(pci_get_devfn(dev)) >> 3;
-+		return enetc_dev_id_imx(dev);
- 	if (enetc_is_ls1028a(dev))
- 		return PCI_FUNC(pci_get_devfn(dev));
+ #include "imx952-u-boot.dtsi"
  
-diff --git a/drivers/net/fsl_enetc_netc_blk_ctrl.c b/drivers/net/fsl_enetc_netc_blk_ctrl.c
-index 8577bb75632..0c87d80ea5c 100644
---- a/drivers/net/fsl_enetc_netc_blk_ctrl.c
-+++ b/drivers/net/fsl_enetc_netc_blk_ctrl.c
-@@ -35,6 +35,7 @@
- #define  MII_PROT_RGMII			0x2
- #define  MII_PROT_SERIAL		0x3
- #define  MII_PROT(port, prot)		(((prot) & 0xf) << ((port) << 2))
-+#define  MII_PROT_GET(reg, port)	(((reg) >> ((port) << 2)) & 0xf)
- 
- #define IMX95_CFG_LINK_PCS_PROT(a)	(0x8 + (a) * 4)
- #define PCS_PROT_1G_SGMII		BIT(0)
-@@ -97,6 +98,9 @@
- #define IMX94_TIMER1_ID			1
- #define IMX94_TIMER2_ID			2
- 
-+#define IMX952_ENETC0_BUS_DEVFN		0x0
-+#define IMX952_ENETC1_BUS_DEVFN		0x100
-+
- /* Flags for different platforms */
- #define NETC_HAS_NETCMIX		BIT(0)
- 
-@@ -567,6 +571,69 @@ static int netc_prb_check_error(struct netc_blk_ctrl *priv)
- 	return 0;
- }
- 
-+static int imx952_netcmix_init(struct udevice *dev)
-+{
-+	struct netc_blk_ctrl *priv = dev_get_priv(dev);
-+	ofnode child, gchild;
-+	phy_interface_t interface;
-+	int bus_devfn, mii_proto;
-+	u32 val;
-+
-+	/* Default setting */
-+	val = MII_PROT(0, MII_PROT_RGMII) | MII_PROT(1, MII_PROT_RGMII);
-+
-+	/* Update the link MII protocol through parsing phy-mode */
-+	dev_for_each_subnode(child, dev) {
-+		if (!ofnode_is_enabled(child))
-+			continue;
-+
-+		ofnode_for_each_subnode(gchild, child) {
-+			if (!ofnode_is_enabled(gchild))
-+				continue;
-+
-+			if (!ofnode_device_is_compatible(gchild, "pci1131,e101"))
-+				continue;
-+
-+			bus_devfn = netc_of_pci_get_bus_devfn(gchild);
-+			if (bus_devfn < 0)
-+				return -EINVAL;
-+
-+			interface = ofnode_read_phy_mode(gchild);
-+			if (interface == -1)
-+				continue;
-+
-+			mii_proto = netc_get_link_mii_protocol(interface);
-+			if (mii_proto < 0)
-+				return -EINVAL;
-+
-+			switch (bus_devfn) {
-+			case IMX952_ENETC0_BUS_DEVFN:
-+				val &= ~CFG_LINK_MII_PORT_0;
-+				val |= FIELD_PREP(CFG_LINK_MII_PORT_0, mii_proto);
-+				break;
-+			case IMX952_ENETC1_BUS_DEVFN:
-+				val &= ~CFG_LINK_MII_PORT_1;
-+				val |= FIELD_PREP(CFG_LINK_MII_PORT_1, mii_proto);
-+				break;
-+			default:
-+				return -EINVAL;
-+			}
-+		}
-+	}
-+
-+	if (MII_PROT_GET(val, 1) == MII_PROT_SERIAL) {
-+		/* Configure Link I/O variant */
-+		netc_reg_write(priv->netcmix, IMX95_CFG_LINK_IO_VAR,
-+			       IO_VAR(1, IO_VAR_16FF_16G_SERDES));
-+		/* Configure Link 2 PCS protocol */
-+		netc_reg_write(priv->netcmix, IMX95_CFG_LINK_PCS_PROT(1),
-+			       PCS_PROT_2500M_SGMII);
-+	}
-+	netc_reg_write(priv->netcmix, IMX95_CFG_LINK_MII_PROT, val);
-+
-+	return 0;
-+}
-+
- static const struct netc_devinfo imx95_devinfo = {
- 	.netcmix_init = imx95_netcmix_init,
- 	.ierb_init = imx95_ierb_init,
-@@ -578,9 +645,14 @@ static const struct netc_devinfo imx94_devinfo = {
- 	.xpcs_port_init = imx94_netc_xpcs_port_init,
- };
- 
-+static const struct netc_devinfo imx952_devinfo = {
-+	.netcmix_init = imx952_netcmix_init,
++&enetc0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_enetc0>;
++	phy-handle = <&ethphy0>;
++	phy-mode = "rgmii-id";
++	status = "okay";
 +};
 +
- static const struct udevice_id netc_blk_ctrl_match[] = {
- 	{ .compatible = "nxp,imx95-netc-blk-ctrl", .data = (ulong)&imx95_devinfo },
- 	{ .compatible = "nxp,imx94-netc-blk-ctrl", .data = (ulong)&imx94_devinfo },
-+	{ .compatible = "nxp,imx952-netc-blk-ctrl", .data = (ulong)&imx952_devinfo },
- 	{},
++&lpi2c6 {
++	clock-frequency = <100000>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_lpi2c6>;
++	status = "okay";
++
++	pcal6416: gpio@21 {
++		compatible = "nxp,pcal6416";
++		#gpio-cells = <2>;
++		gpio-controller;
++		reg = <0x21>;
++		interrupt-controller;
++		#interrupt-cells = <2>;
++		interrupt-parent = <&gpio2>;
++		interrupts = <10 IRQ_TYPE_LEVEL_LOW>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_pcal6416>;
++		vcc-supply = <&reg_3p3v>;
++	};
++};
++
++&netc_blk_ctrl {
++	status = "okay";
++};
++
++&netc_bus0 {
++	status = "okay";
++};
++
++&netc_emdio {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_emdio>;
++	status = "okay";
++
++	ethphy0: ethernet-phy@1 {
++		reg = <1>;
++		reset-gpios = <&pcal6416 13 GPIO_ACTIVE_LOW>;
++		reset-assert-us = <10000>;
++		reset-deassert-us = <80000>;
++		realtek,clkout-disable;
++	};
++};
++
++&netc_timer {
++	status = "okay";
++};
++
+ &wdog3 {
+ 	status = "disabled";
+ };
++
++&scmi_iomuxc {
++	pinctrl_lpi2c6: lpi2c6grp {
++		fsl,pins = <
++			IMX952_PAD_GPIO_IO02__WAKEUPMIX_TOP_LPI2C6_SDA		0x40000b9e
++			IMX952_PAD_GPIO_IO03__WAKEUPMIX_TOP_LPI2C6_SCL		0x40000b9e
++		>;
++	};
++
++	pinctrl_pcal6416: pcal6416grp {
++		fsl,pins = <
++			IMX952_PAD_GPIO_IO10__WAKEUPMIX_TOP_GPIO2_IO_10		0x31e
++		>;
++	};
++
++	pinctrl_emdio: emdiogrp{
++		fsl,pins = <
++			IMX952_PAD_ENET1_MDC__NETCMIX_TOP_NETC_MDC		0x50e
++			IMX952_PAD_ENET1_MDIO__NETCMIX_TOP_NETC_MDIO		0x90e
++		>;
++	};
++
++	pinctrl_enetc0: enetc0grp {
++		fsl,pins = <
++			IMX952_PAD_ENET1_TD3__NETCMIX_TOP_ETH0_RGMII_TD3	0x50e
++			IMX952_PAD_ENET1_TD2__NETCMIX_TOP_ETH0_RGMII_TD2	0x50e
++			IMX952_PAD_ENET1_TD1__NETCMIX_TOP_ETH0_RGMII_TD1	0x50e
++			IMX952_PAD_ENET1_TD0__NETCMIX_TOP_ETH0_RGMII_TD0	0x50e
++			IMX952_PAD_ENET1_TX_CTL__NETCMIX_TOP_ETH0_RGMII_TX_CTL	0x50e
++			IMX952_PAD_ENET1_TXC__NETCMIX_TOP_ETH0_RGMII_TX_CLK	0x58e
++			IMX952_PAD_ENET1_RX_CTL__NETCMIX_TOP_ETH0_RGMII_RX_CTL	0x50e
++			IMX952_PAD_ENET1_RXC__NETCMIX_TOP_ETH0_RGMII_RX_CLK	0x58e
++			IMX952_PAD_ENET1_RD0__NETCMIX_TOP_ETH0_RGMII_RD0	0x50e
++			IMX952_PAD_ENET1_RD1__NETCMIX_TOP_ETH0_RGMII_RD1	0x50e
++			IMX952_PAD_ENET1_RD2__NETCMIX_TOP_ETH0_RGMII_RD2	0x50e
++			IMX952_PAD_ENET1_RD3__NETCMIX_TOP_ETH0_RGMII_RD3	0x50e
++		>;
++	};
++};
+diff --git a/arch/arm/dts/imx952-u-boot.dtsi b/arch/arm/dts/imx952-u-boot.dtsi
+index e977014992e..179e287dbf2 100644
+--- a/arch/arm/dts/imx952-u-boot.dtsi
++++ b/arch/arm/dts/imx952-u-boot.dtsi
+@@ -223,6 +223,106 @@
+ 
+ &{/soc} {
+ 	bootph-all;
++
++	netc_blk_ctrl: netc-blk-ctrl@4cd20000 {
++		compatible = "nxp,imx952-netc-blk-ctrl";
++		reg = <0x0 0x4cd20000 0x0 0x10000>,
++		      <0x0 0x4cd30000 0x0 0x10000>,
++		      <0x0 0x4c81000c 0x0 0x1c>;
++		reg-names = "ierb", "prb", "netcmix";
++		#address-cells = <2>;
++		#size-cells = <2>;
++		ranges;
++		power-domains = <&scmi_devpd IMX952_PD_NETC>;
++		assigned-clocks = <&scmi_clk IMX952_CLK_ENET>,
++				  <&scmi_clk IMX952_CLK_ENETREF>;
++		assigned-clock-parents = <&scmi_clk IMX952_CLK_SYSPLL1_PFD2>,
++					 <&scmi_clk IMX952_CLK_SYSPLL1_PFD0>;
++		assigned-clock-rates = <666666666>, <250000000>;
++		clocks = <&scmi_clk IMX952_CLK_CGC_NETC>;
++		clock-names = "ipg";
++
++		netc_bus0: pcie@4ca00000 {
++			compatible = "pci-host-ecam-generic";
++			reg = <0x0 0x4ca00000 0x0 0x100000>;
++			#address-cells = <3>;
++			#size-cells = <2>;
++			device_type = "pci";
++			linux,pci-domain = <0>;
++			bus-range = <0x0 0x0>;
++			msi-map = <0x000 &its 0x60 0x1>, //ENETC0 PF
++				  <0x001 &its 0x62 0x1>, //NETC Timer
++				  <0x002 &its 0x63 0x1>, //EMDIO
++				  <0x040 &its 0x64 0x1>; //ENETC0 VF
++				  /* ENETC0 BAR0 - non-prefetchable memory */
++			ranges = <0x82000000 0x0 0x4cc00000  0x0 0x4cc00000  0x0 0x40000
++				  /* Timer and EMDIO BAR0/2 and ENETC0 VF BAR0 - non-prefetchable memory */
++				  0x82000000 0x0 0x4cc80000  0x0 0x4cc80000  0x0 0x70000
++				  /* ENETC0 VF BAR2 - non-prefetchable memory */
++				  0x82000000 0x0 0x4cd00000  0x0 0x4cd00000  0x0 0x10000>;
++
++			enetc0: ethernet@0,0 {
++				compatible = "pci1131,e101";
++				reg = <0x00000 0 0 0 0>;
++				clocks = <&scmi_clk IMX952_CLK_ENETREF>;
++				clock-names = "ref";
++				status = "disabled";
++			};
++
++			netc_timer: ethernet@0,1 {
++				compatible = "pci1131,ee02";
++				reg = <0x00100 0 0 0 0>;
++				status = "disabled";
++			};
++
++			netc_emdio: mdio@0,2 {
++				compatible = "pci1131,ee00";
++				reg = <0x00200 0 0 0 0>;
++				#address-cells = <1>;
++				#size-cells = <0>;
++				status = "disabled";
++			};
++
++			rcec@1,0 {
++				compatible = "pci1131,e001";
++				reg = <0x00800 0 0 0 0>;
++				interrupts = <GIC_SPI 304 IRQ_TYPE_LEVEL_HIGH>;
++			};
++		};
++
++		netc_bus1: pcie@4cb00000 {
++			compatible = "pci-host-ecam-generic";
++			reg = <0x0 0x4cb00000 0x0 0x100000>;
++			#address-cells = <3>;
++			#size-cells = <2>;
++			device_type = "pci";
++			linux,pci-domain = <1>;
++			bus-range = <0x1 0x1>;
++			msi-map = <0x100 &its 0x61 0x1>, //ENETC1 PF
++				  <0x140 &its 0x65 0x1>; //ENETC1 VF
++				  /* ENETC1 BAR0 - non-prefetchable memory */
++			ranges = <0x82000000 0x0 0x4cc40000  0x0 0x4cc40000  0x0 0x40000
++				  /* ENETC1: VF BAR0 - non-prefetchable memory */
++				  0x82000000 0x0 0x4ccf0000  0x0 0x4ccf0000  0x0 0x10000
++				  /* ENETC1: VF BAR2 - non-prefetchable memory */
++				  0x82000000 0x0 0x4cd10000  0x0 0x4cd10000  0x0 0x10000>;
++			power-domains = <&scmi_devpd IMX952_PD_NETC>;
++
++			enetc1: ethernet@0,0 {
++				compatible = "pci1131,e101";
++				reg = <0x10000 0 0 0 0>;
++				clocks = <&scmi_clk IMX952_CLK_ENETREF>;
++				clock-names = "ref";
++				status = "disabled";
++			};
++
++			rcec@1,0 {
++				compatible = "pci1131,e001";
++				reg = <0x10800 0 0 0 0>;
++				interrupts = <GIC_SPI 305 IRQ_TYPE_LEVEL_HIGH>;
++			};
++		};
++	};
  };
  
+ &sram0 {
+diff --git a/configs/imx952_evk_defconfig b/configs/imx952_evk_defconfig
+index a700aea67a1..c03f3dec89d 100644
+--- a/configs/imx952_evk_defconfig
++++ b/configs/imx952_evk_defconfig
+@@ -40,6 +40,7 @@ CONFIG_DEFAULT_FDT_FILE="freescale/imx952-evk.dtb"
+ CONFIG_SYS_CBSIZE=2048
+ CONFIG_SYS_PBSIZE=2074
+ CONFIG_BOARD_LATE_INIT=y
++CONFIG_PCI_INIT_R=y
+ CONFIG_SPL_MAX_SIZE=0x30000
+ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_LOAD_IMX_CONTAINER=y
+@@ -111,6 +112,8 @@ CONFIG_DM_PCA953X=y
+ CONFIG_ADP5585_GPIO=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_IMX_LPI2C=y
++CONFIG_I2C_MUX=y
++CONFIG_I2C_MUX_PCA954x=y
+ CONFIG_IMX_MU_MBOX=y
+ CONFIG_SUPPORT_EMMC_RPMB=y
+ CONFIG_SUPPORT_EMMC_BOOT=y
 
 -- 
 2.43.0
