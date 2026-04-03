@@ -4,92 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86094E8536A
-	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 13:19:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D4E8E8536A
+	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 13:21:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C06983642;
-	Fri,  3 Apr 2026 15:19:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BF77983DC9;
+	Fri,  3 Apr 2026 15:21:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EyTneUL0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OZRiOSdH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 089468382A; Fri,  3 Apr 2026 15:19:08 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 18C838407E; Fri,  3 Apr 2026 15:21:34 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FD798341A
- for <u-boot+nodisclaimer@lists.denx.de>; Fri,  3 Apr 2026 15:19:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA6B583642
+ for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 15:21:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-b8f97c626aaso318128366b.2
- for <u-boot+nodisclaimer@lists.denx.de>; Fri, 03 Apr 2026 06:19:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775222345; cv=none;
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-b980785a0bfso238900266b.3
+ for <u-boot@lists.denx.de>; Fri, 03 Apr 2026 06:21:31 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775222491; cv=none;
  d=google.com; s=arc-20240605;
- b=Ov/eyMntdrKRxkRzhLVBhGCpjKpLC6xn0KRpEE6KxLTnHkzs5Adc62vAKIKe3HzdAu
- CgVqL2HXP7uetwmcv2prC5HPZ7BFJs0iNO37Vj3kTJTibY8MPPk2xuZ/sOP2lysmTEsf
- PWl/PrvmgNcnO0EiZp+F92n/G6ou/VqtxpN5s/sDmsG2uhpfVlTZFxjPF8MgfpGYOt4D
- S6YfTQucmj2niDBk2Csww4qUH0Jsq5hivzD43Wi4UhezlHNN1OgB+EVvrlTZfxFRV63O
- 8VzrA3Bj104SBmulXzLVCQyOtD+RKRVnOCpqbFsgnmOxW5wTl5anCe4tJSQWv/vXcrLZ
- m80A==
+ b=OW0CoK2Y16ZwpeVeRkdpr3tF01iqfYFZt3bhbx9PT/GxbtbLfoNphMZanD5sXYXoom
+ yYVHxroUOeivX9fbWlgd0meoL+05tdV6h01g1baOg6MtKHbseAnptz+J92CyAjlAO/1p
+ Y8t6TVq6WMWe7TE1gM6cuUuHAjEkB/OR/J7owiSTkruGPVi0XqO0eHqXFELC4OL8i6zn
+ tp8nWv45ZMQFzLwjQEpCwIVURmZaW38HsF9Qe0z4EJzlK/o3xcXu4K2gFklHHgo3bBdm
+ a/ylDW9lM0GufQJNTPaATGrJpCRzCyHqKFt1FwXdkZwZoJ9CHSxw/iUUpxzqxMAdja46
+ mmQg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=IZn/uk8/ScR+0b0BieN3kkXFpqM+zLUzrT5Byl8BLKU=;
- fh=CEYrxjkbFXXamzaU0tA37GtKS4sPdQpI7NNuBtjunMc=;
- b=DSmHXXsDDVNNIdARFCCgr0Gpc1AuwhwMaPnK+3b3U2F/hXad8EuNw/5mtEaoyuXJjd
- L3Xq9HD+HY18rEhUG27yWSfBmOaLfl3QdJgolSeT+m9bLQodtLrW2BqeAt83Yj6Ew4RJ
- TgTZSP7m+nrFwP7QpIkAfhqqFut6dj8wlrK+EJPw2Ab+8VSU0vLuvvwbDO4JEQlSojKk
- GBxe+yAUxvd2rRyQCuG0iwDmDTwa0kK3orGvjUWhuxDapfX9DXt3QafS246dC+BPWxdx
- fehpZ3E2k3BWYGuELIC8Z/W5r9gsU8u9WBXMXN059W3wYhylmJevEFiV0cL83PKs+5LV
- j4Ow==; darn=lists.denx.de
+ bh=eWBIbtU+ViD5dwNrZAetFbwwYusA5fBDMX8u787DLA8=;
+ fh=5aZ/Uc5Ywtkf/zmUnQVnxrdfy0B6r4qSK4qv4k7beVk=;
+ b=N4fKgj9CF2arMOwTKKwjrCcFrC/5iuYZwQJLnnBIdJjS+fFK4PyDBbdRmRkZHXItjM
+ sTe6Qbdby+/U7a06VIyw/+94Ggl8pmyarVs+g9Om0i4dCl49b5vMqJNDkVL2qi/KWYNm
+ ANfOvKwL8gVpk4lZ9BXX9KNMiTS39rnIkgopUXnXbjeN5/SXM8oUw6pqDUPqN6H5oEV0
+ nc0MIxoRInsM3rPBTSLYr1U7fmbAFq1mUfFIn1GIx0EG9a2wbn9JSyxVgbddDVDT3k4a
+ pfxofUwcDCu4532czu6gu6tpniy+eJhXo8/WJBKnmf9P2XK3vQWJeX7aVsBKPLNUYidR
+ 1Upg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775222345; x=1775827145; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775222491; x=1775827291; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IZn/uk8/ScR+0b0BieN3kkXFpqM+zLUzrT5Byl8BLKU=;
- b=EyTneUL0+LZZZOa8NQpI2ic0GcIXMhorrmj65/CmpV96HpCgaSKa5kUxvP/z+4ZLko
- bkWkcUsEjMiN3l7+c7kknedsbpr11GwqugDTfTlNtLmEmPGV6KjPb2P0I3kQwTT5irJR
- hkTCYucf3ouHnbimCJoR2lOtlgTyioXVQNHtY=
+ bh=eWBIbtU+ViD5dwNrZAetFbwwYusA5fBDMX8u787DLA8=;
+ b=OZRiOSdHDTgvEJIhH+MJab74KKegAnh0lIeYH2L3YCP7xvOWiDFZHtgUMukN6AnO/l
+ ZkZY1WpUABPItTc35HnfWGxNXOmeCYhHi4R96X3ao8e05oVl2uZu80XG5SNZoUEM/33B
+ 2Gl1wx3n+5SzHkEBr4MjLkT99aVEHi6IDuaiM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775222345; x=1775827145;
+ d=1e100.net; s=20251104; t=1775222491; x=1775827291;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IZn/uk8/ScR+0b0BieN3kkXFpqM+zLUzrT5Byl8BLKU=;
- b=FgG1LMHcmXCSTMn4CWMUKLauUL5V1WNFRwSvdPGs5nerAjB/W4tkqhlbbcDklhlE5w
- vmy0J6CuEWDSyf9ZV8TbIRPpAKcynpn2nKPelLDMNu5u8EIlL7x6sVphZwRCzI18PbMg
- qr1icS49P4chfaDvV0jw2IU7azCsHmpulJVXcbtttBpkWRnsqIsq/zhGzwa04TLkjkKa
- RlHvGMcc6zOrB86omQGL4MPA2KSB8eVLKZFiFh2G5rh5FMorTICD+LiQw2fAN9fT8Lsg
- 6q1Mu1Qrxg4eJLugNie1b1qQyTiJ1gtT96xaV3dDmSvIUgjKrWvWtdf3odkqLF38ke8Z
- KTEg==
-X-Gm-Message-State: AOJu0YwMoGMJiFhHq+2VMyCaazZLtSk+6HtR8q3rrtxNmpI2iWWkon5r
- WBSvKk9zhcEyTr164ca1UKDHeVYouGaIXDs4qkeFnTOq31vJIs3apYWZ5NIRIsqEyHrhd8ZuUuk
- KKEVGclYt81AM7G6w1yr3RctIzPXPMh9ZmgkKXLFc
-X-Gm-Gg: AeBDievgS9te4rXmxJrrRKHHh/BvN58s4Ohr6Jp/DG5GnhjdtUtiCIALtc64Hu3FU4n
- aXIMNUKanXEJ0piyLfMCthTlCqN8IGFMI2e0RVxB6MwFiVnvilDQQjVBU73VF28yw8T+0aJnrM0
- aJBHhMIZefPI91ABfhs1BvZ0+XZtQ05cq1tuqh26AphMtczKzezV4Q9bwjOWD8XMolzhY9pvGOv
- tAwCBsT0KNuk8uhrSt1yq6Kopx2ZGD34JkgMKNMdjSl7QPs4S5hhH9WyJFdkkH7+6ec9f+B5VoQ
- yXt7RA==
-X-Received: by 2002:a17:906:f581:b0:b99:1074:750 with SMTP id
- a640c23a62f3a-b9c679e55d3mr155336466b.39.1775222344640; Fri, 03 Apr 2026
- 06:19:04 -0700 (PDT)
+ bh=eWBIbtU+ViD5dwNrZAetFbwwYusA5fBDMX8u787DLA8=;
+ b=mrsgcFkRvMAIwmWBP7N9RecvCieNhXyuxwEfR2OyG0B6QLsR24w1OF0obf9toGDNOy
+ F0goMOa9eGEdwmJDPWj3HFJsJODamKF0Zn0/yvSd4qlTY2pRxg7KtLpJeP5NHOrzUdXk
+ tY3/buZVEJQ9H6Far3vmqkvTpp/LRggfspNbcngwgYd9UF7aIjV/G8D32Q1TPvlmQ2Rn
+ NNAqvshQCql/LJwiAVdYwTHRwDvJD63Wk0aT9euz+YrthJB9rFQe9bU5reax1mkat4OL
+ moncotHLhcjdHrB6h90oKx8kilF6idAInjq3LXQdBwA7KtIUmIqP4DuvByuFBlELgtz+
+ 2HGw==
+X-Gm-Message-State: AOJu0Yz/jKRcxhnaeIb0PcGeNtV+z7kLFKTeWKWlIYP4jnbJHAYAHV9S
+ 2A7pm//GGvxO7vOsyHkCC2Xvx8HqHaM0+9RNCRAczgMhlehITv6s56/ze3UVy5BpBBeUiZG16aT
+ pRWj/7Vp1n76I3vfmnBEXlR0y3Cey6K1T1P6VMiir
+X-Gm-Gg: AeBDiesKxJzHyzh4mtPqBtu1E3X1Sb3w2r4ZmPh1oec1wze7/Lh2iTLUrCQ6T2s/6DF
+ R2cPFxUWHRPoZhOpIWl14hZZ+54C6HG1dEioHY97sCYLFM985uiW4NDx37twYQm96ElTSEc61FU
+ F3VDOwk204sm6QdAUZCgeiOhr8ivlgKQMxjaka4TWf3QPe6WdpWhXxRueOq9fUPVYoR0WRg+gY/
+ X6r/DDB+RIY+ca2gPVFcQgJ1j6XOogWNhKFic5WiM9ubME5+hZf5E/4UO20oYiMymZu6LehWZUW
+ tPxMWg==
+X-Received: by 2002:a17:907:d06:b0:b97:98b3:67ce with SMTP id
+ a640c23a62f3a-b9c677fc14bmr143566766b.32.1775222491135; Fri, 03 Apr 2026
+ 06:21:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260330141852.984717-1-paul.henrys_ext@softathome.com>
-In-Reply-To: <20260330141852.984717-1-paul.henrys_ext@softathome.com>
+References: <20260331032525.62304-1-S4210155@student.rmit.edu.au>
+In-Reply-To: <20260331032525.62304-1-S4210155@student.rmit.edu.au>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 3 Apr 2026 07:18:52 -0600
-X-Gm-Features: AQROBzCV6scroSPPOp3-B4-Ho7Azr-vE2yNEjxUcdsRmNFO0dHY-yXzEHZ5FugU
-Message-ID: <CAFLszTgfN-+Y7K1ZkQS947BdMBFtPqOLof8tsU7b4JzCKJbBJQ@mail.gmail.com>
-Subject: Re: [PATCH 0/1] u_boot_pylib: disable standalone module detection
-To: Paul HENRYS <paul.henrys_ext@softathome.com>
-Cc: u-boot+nodisclaimer@lists.denx.de, sjg+nodisclaimer@chromium.org
+Date: Fri, 3 Apr 2026 07:21:19 -0600
+X-Gm-Features: AQROBzBC9DwqKpu69p5Z63efmtfNYztyxQSA6dprzoXiWiFsgklvIR305wiHcJs
+Message-ID: <CAFLszTgMH2hH--g3fe9mmpWuyBo9oQ3f6aQTOsRvnLFx37mhdg@mail.gmail.com>
+Subject: Re: [PATCH v2] common: cli_hush: fix console_buffer overflow on boot
+ retry
+To: ngotra27101996@gmail.com
+Cc: u-boot@lists.denx.de, Ngo Luong Thanh Tra <S4210155@student.rmit.edu.au>, 
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,36 +111,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Paul,
+Hi,
 
-Can you please send this to the mailing list too?
+On 2026-03-31T03:25:11, Ngo Luong Thanh Tra <ngotra27101996@gmail.com> wrote:
+> common: cli_hush: fix console_buffer overflow on boot retry
+>
+> Add const_strcpy() macro to <linux/build_bug.h> that enforces at
+> compile time that the destination is a char array (not a pointer),
+> the source is a string literal, and the source fits in the
+> destination including the NUL terminator. It uses __builtin_strcpy()
+> so the compiler can optimize the copy.
+>
+> Fix the console_buffer extern declaration in <console.h> to include
+> the array size so that sizeof(console_buffer) is valid at call sites.
+>
+> Replace the unbounded strcpy() in cli_hush.c with const_strcpy() to
+> catch at compile time any configuration where CONFIG_SYS_CBSIZE is
+> smaller than the boot retry command string.
+>
+> Fixes: 657e19f8f2dd ("cli_hush: support running bootcmd on boot retry")
+> Signed-off-by: Ngo Luong Thanh Tra <S4210155@student.rmit.edu.au>
+> To: u-boot@lists.denx.de
+> Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+
+> diff --git a/include/linux/build_bug.h b/include/linux/build_bug.h
+> @@ -76,4 +76,27 @@
+> +#define const_strcpy(d, s) ({                                                \
+> +     BUILD_BUG_ON(__builtin_types_compatible_p(typeof(d), char *));  \
+
+The macro checks that d is not char * but not const char * so if
+someone passes a const char array, the first BUILD_BUG_ON passes
+(since const char[] becomes const char *, not char *), but
+__builtin_strcpy() would still fail because it cannot write to const
+memory. The error message would be less clear though.
+
+How about a check for const char * as well:
+
+    BUILD_BUG_ON(__builtin_types_compatible_p(typeof(d), char *));
+    BUILD_BUG_ON(__builtin_types_compatible_p(typeof(d), const char *));
 
 Regards,
 Simon
-
-On Mon, 30 Mar 2026 at 08:19, Paul HENRYS
-<paul.henrys_ext@softathome.com> wrote:
->
-> Do not try to detect standalone python modules at the top level, so setuptools
-> stops searching for: command, terminal, ... as independent modules and instead
-> relies on package discovery.
->
-> Steps to reproduce the issue without the patch:
->
-> git clone https://source.denx.de/u-boot/u-boot.git
-> cd u-boot
-> python3 -m venv myenv
-> source myenv/bin/activate
-> pip3 install tools/u_boot_pylib/
-> ...
-> error: Multiple top-level modules discovered in a flat-layout: ['command', 'terminal', 'test_util', 'tout', 'cros_subprocess', 'tools', 'gitutil'].
->
-> Paul HENRYS:
->   tools: u_boot_pylib: disable standalone module detection
->
->  tools/u_boot_pylib/pyproject.toml | 3 +++
->  1 file changed, 3 insertions(+)
->
-> --
-> 2.43.0
->
