@@ -4,96 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D4E8E8536A
-	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 13:21:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9EAEE8536A
+	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 13:22:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF77983DC9;
-	Fri,  3 Apr 2026 15:21:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3C0F5840AB;
+	Fri,  3 Apr 2026 15:22:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OZRiOSdH";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C+n07baR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18C838407E; Fri,  3 Apr 2026 15:21:34 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id DB160840BE; Fri,  3 Apr 2026 15:22:08 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA6B583642
- for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 15:21:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E95A383DC9
+ for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 15:22:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-b980785a0bfso238900266b.3
- for <u-boot@lists.denx.de>; Fri, 03 Apr 2026 06:21:31 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775222491; cv=none;
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-b982518b73fso294450166b.1
+ for <u-boot@lists.denx.de>; Fri, 03 Apr 2026 06:22:06 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775222526; cv=none;
  d=google.com; s=arc-20240605;
- b=OW0CoK2Y16ZwpeVeRkdpr3tF01iqfYFZt3bhbx9PT/GxbtbLfoNphMZanD5sXYXoom
- yYVHxroUOeivX9fbWlgd0meoL+05tdV6h01g1baOg6MtKHbseAnptz+J92CyAjlAO/1p
- Y8t6TVq6WMWe7TE1gM6cuUuHAjEkB/OR/J7owiSTkruGPVi0XqO0eHqXFELC4OL8i6zn
- tp8nWv45ZMQFzLwjQEpCwIVURmZaW38HsF9Qe0z4EJzlK/o3xcXu4K2gFklHHgo3bBdm
- a/ylDW9lM0GufQJNTPaATGrJpCRzCyHqKFt1FwXdkZwZoJ9CHSxw/iUUpxzqxMAdja46
- mmQg==
+ b=kh44eFCFl8gByINaAcpkAarmhVEQ1LlhWWXV6WZXVXDb0HZ744h+m+3yVUwhJCtBoq
+ bFCPICYNnXt6TYVRV7+xe766u3sdw3HNnbaDhJb6Upb2TdQIeDZTmMGvmPEmyb9UY3jH
+ uEPzoBXikcoI42HQXaQZn95e2Nrv6XN0cIqNmwRFCDaR9/O1E3LlROMu2UuqY0TIwD0H
+ 8TPmPQClPEsqAxB69/V/hWwUF/V3IQFoLWw6poBtKp5xY0uewpf+BPg/YC1hjuP590zZ
+ B+nQuudiS9rNhsyaKS8v4y9xw5QUI/DFmlV8SbPTO17SUBjyPR1z0mSq00MmqbYeyP5J
+ 1ujQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=eWBIbtU+ViD5dwNrZAetFbwwYusA5fBDMX8u787DLA8=;
- fh=5aZ/Uc5Ywtkf/zmUnQVnxrdfy0B6r4qSK4qv4k7beVk=;
- b=N4fKgj9CF2arMOwTKKwjrCcFrC/5iuYZwQJLnnBIdJjS+fFK4PyDBbdRmRkZHXItjM
- sTe6Qbdby+/U7a06VIyw/+94Ggl8pmyarVs+g9Om0i4dCl49b5vMqJNDkVL2qi/KWYNm
- ANfOvKwL8gVpk4lZ9BXX9KNMiTS39rnIkgopUXnXbjeN5/SXM8oUw6pqDUPqN6H5oEV0
- nc0MIxoRInsM3rPBTSLYr1U7fmbAFq1mUfFIn1GIx0EG9a2wbn9JSyxVgbddDVDT3k4a
- pfxofUwcDCu4532czu6gu6tpniy+eJhXo8/WJBKnmf9P2XK3vQWJeX7aVsBKPLNUYidR
- 1Upg==; darn=lists.denx.de
+ bh=j9dMIh+0L/7Jy5htshT+H6N0DXPXpIDGRGCI4xR3cdE=;
+ fh=2Ai/DF/OygrgX5KD/xptwaXayaptkAAlqyY5KCXDcm8=;
+ b=Xq/DO3CTKzcICATWVs4hhJLJsY9lioQrY9Bc4/mP9EFOCbvcsqKuhZnQV5U8t7fTGd
+ 5JKWrGWoVlf07NWUXWOcGOVk+mcWpiE9jSmxiv5xaqHhg1aOgrxihEJmGoG6wh9XPS9E
+ RktPg9J1UDWSu+1tH1ROTp3dmczsBPR3cxgXI/4kWwmljiIcp2Cw8Lk8xYgPcYc6Y2wj
+ YWJ3GqQ3FVggwNVQO4WAtG/OD2YNuIvsmcpzWUnrt/JQcBo21QyuEI3p0O2IC+efhSM2
+ HvR9J6oRASZy723woLz5Z4Ds3zl9y4EgVzBh4DT4vyaNY4p3Ht4qjH8Bcr7E7SWggv5u
+ v2aQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775222491; x=1775827291; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775222526; x=1775827326; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=eWBIbtU+ViD5dwNrZAetFbwwYusA5fBDMX8u787DLA8=;
- b=OZRiOSdHDTgvEJIhH+MJab74KKegAnh0lIeYH2L3YCP7xvOWiDFZHtgUMukN6AnO/l
- ZkZY1WpUABPItTc35HnfWGxNXOmeCYhHi4R96X3ao8e05oVl2uZu80XG5SNZoUEM/33B
- 2Gl1wx3n+5SzHkEBr4MjLkT99aVEHi6IDuaiM=
+ bh=j9dMIh+0L/7Jy5htshT+H6N0DXPXpIDGRGCI4xR3cdE=;
+ b=C+n07baRupM8cjwjACByCdY7s5WzY3BXPNarJlCGvhwYbX8tQKI1XWIvw136nl0Ru2
+ 4yr7n5DNbGxOMEn5YbB5qnA9sQsRQEBrofqFUBWcz6WDhkxt6yRle2btwZVqZDjMYMmg
+ vA1oVzDYOVWemhqsCESkqaBBvNkIhrR135F28=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775222491; x=1775827291;
+ d=1e100.net; s=20251104; t=1775222526; x=1775827326;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eWBIbtU+ViD5dwNrZAetFbwwYusA5fBDMX8u787DLA8=;
- b=mrsgcFkRvMAIwmWBP7N9RecvCieNhXyuxwEfR2OyG0B6QLsR24w1OF0obf9toGDNOy
- F0goMOa9eGEdwmJDPWj3HFJsJODamKF0Zn0/yvSd4qlTY2pRxg7KtLpJeP5NHOrzUdXk
- tY3/buZVEJQ9H6Far3vmqkvTpp/LRggfspNbcngwgYd9UF7aIjV/G8D32Q1TPvlmQ2Rn
- NNAqvshQCql/LJwiAVdYwTHRwDvJD63Wk0aT9euz+YrthJB9rFQe9bU5reax1mkat4OL
- moncotHLhcjdHrB6h90oKx8kilF6idAInjq3LXQdBwA7KtIUmIqP4DuvByuFBlELgtz+
- 2HGw==
-X-Gm-Message-State: AOJu0Yz/jKRcxhnaeIb0PcGeNtV+z7kLFKTeWKWlIYP4jnbJHAYAHV9S
- 2A7pm//GGvxO7vOsyHkCC2Xvx8HqHaM0+9RNCRAczgMhlehITv6s56/ze3UVy5BpBBeUiZG16aT
- pRWj/7Vp1n76I3vfmnBEXlR0y3Cey6K1T1P6VMiir
-X-Gm-Gg: AeBDiesKxJzHyzh4mtPqBtu1E3X1Sb3w2r4ZmPh1oec1wze7/Lh2iTLUrCQ6T2s/6DF
- R2cPFxUWHRPoZhOpIWl14hZZ+54C6HG1dEioHY97sCYLFM985uiW4NDx37twYQm96ElTSEc61FU
- F3VDOwk204sm6QdAUZCgeiOhr8ivlgKQMxjaka4TWf3QPe6WdpWhXxRueOq9fUPVYoR0WRg+gY/
- X6r/DDB+RIY+ca2gPVFcQgJ1j6XOogWNhKFic5WiM9ubME5+hZf5E/4UO20oYiMymZu6LehWZUW
- tPxMWg==
-X-Received: by 2002:a17:907:d06:b0:b97:98b3:67ce with SMTP id
- a640c23a62f3a-b9c677fc14bmr143566766b.32.1775222491135; Fri, 03 Apr 2026
- 06:21:31 -0700 (PDT)
+ bh=j9dMIh+0L/7Jy5htshT+H6N0DXPXpIDGRGCI4xR3cdE=;
+ b=J25rkRjhh7SpwSnwEEd7QICTjpy29Htp3+kKEAs9nF0hu2it30nDxVRqGTRg0OOmh1
+ e2E3VI7MnpWSfCbJQkzpIKMMjKkIRXzt/BIWdQzdUCBpSpN6g+yMdo72QuEMlvDRuc4d
+ KpnA7E7FAwWXNaAQOCrB1tSoXHyZvSItpGRTSK0zKzwXb/bUc5DSkfsthx2DVz1YsCPe
+ CjpBAQjMG9TAPDi87SjhxvOhpsktk2a8GWzKjsiNNJ+iTPKcaRJWgx3w5RwQtSyQIuTk
+ ikYEPZO/NCmnC+/MpHdVrC3srutUj1Fjh3rrQis0qO50SHLqtY0HNrD1beBE475vbJcj
+ hHGA==
+X-Gm-Message-State: AOJu0YzNwMbTJ0zu5QAgnkOAzVTL+eSAZR6PKlXMFK41D0IkYau1y687
+ yZzSYWJgV2zIxxDc64fQrlch4jopMKZHe+um0XSKzVRgNhcR/r1x7+h8Su/Ry/9z4oNw24vQIIK
+ wkS/kb9E3p4htQUr5fPaFsuG/01ME0UaHjOQZNgRK
+X-Gm-Gg: AeBDievVs0oI9Ec6WiAXWcumDjNzUDsM+LcrwK7H50vjpbEvr+/mQuVLcYfCP7F9doA
+ iT0XqKEdjjAGQ1Igs6ZvPw7F4UsHcMAGo+aJH2D/X4IkO90x4j7eg7Fw3waUdUMBnfRPabtjcIu
+ grJIIljOjhjSdRWOGAkbJR3UXzMIxtTWHyTreiPeetJCVn2ks3649YnI0v8+u9lN45EfEe2RF8z
+ ZZE3CCv7VnAABLI6GNgMN/z+31Eb4oh6dM0YgeldTbhvNUHodsAb8ZbKer2E/9rzPa2MapqcnLm
+ 8/eIZintX9FwC5tT
+X-Received: by 2002:a17:906:6a10:b0:b9c:1667:e17 with SMTP id
+ a640c23a62f3a-b9c674229a9mr151240566b.7.1775222526220; Fri, 03 Apr 2026
+ 06:22:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260331032525.62304-1-S4210155@student.rmit.edu.au>
-In-Reply-To: <20260331032525.62304-1-S4210155@student.rmit.edu.au>
+References: <20260403073251.1051533-1-paul.henrys_ext@softathome.com>
+ <20260403075528.1150196-1-paul.henrys_ext@softathome.com>
+ <20260403075528.1150196-2-paul.henrys_ext@softathome.com>
+In-Reply-To: <20260403075528.1150196-2-paul.henrys_ext@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 3 Apr 2026 07:21:19 -0600
-X-Gm-Features: AQROBzBC9DwqKpu69p5Z63efmtfNYztyxQSA6dprzoXiWiFsgklvIR305wiHcJs
-Message-ID: <CAFLszTgMH2hH--g3fe9mmpWuyBo9oQ3f6aQTOsRvnLFx37mhdg@mail.gmail.com>
-Subject: Re: [PATCH v2] common: cli_hush: fix console_buffer overflow on boot
- retry
-To: ngotra27101996@gmail.com
-Cc: u-boot@lists.denx.de, Ngo Luong Thanh Tra <S4210155@student.rmit.edu.au>, 
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Casey Connolly <casey.connolly@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Date: Fri, 3 Apr 2026 07:21:52 -0600
+X-Gm-Features: AQROBzA225IYMQH_l8giCKpwrApTMbtvPavKyIUGER3MjMUvgUEfgBJ-bPvXKmg
+Message-ID: <CAFLszTiQQ2rGrNcuQ_oQPb8xBt72XZ-Sq88bkZ0eDK9x7X8SBQ@mail.gmail.com>
+Subject: Re: [PATCH v4 2/3] binman: Generate preload header and sign data only
+ once
+To: paul.henrys_ext@softathome.com
+Cc: u-boot+nodisclaimer@lists.denx.de, sjg+nodisclaimer@chromium.org, 
+ trini+nodisclaimer@konsulko.com, alpernebiyasak+nodisclaimer@gmail.com, 
+ philippe.reynes+nodisclaimer@softathome.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,44 +112,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Paul,
 
-On 2026-03-31T03:25:11, Ngo Luong Thanh Tra <ngotra27101996@gmail.com> wrote:
-> common: cli_hush: fix console_buffer overflow on boot retry
+On 2026-04-03T07:55:27, Paul HENRYS <paul.henrys_ext@softathome.com> wrote:
+> binman: Generate preload header and sign data only once
 >
-> Add const_strcpy() macro to <linux/build_bug.h> that enforces at
-> compile time that the destination is a char array (not a pointer),
-> the source is a string literal, and the source fits in the
-> destination including the NUL terminator. It uses __builtin_strcpy()
-> so the compiler can optimize the copy.
+> To optimize preload generation, generate the header and signatures only
+> after all data has been collected. This avoids signing the data multiple
+> times.
 >
-> Fix the console_buffer extern declaration in <console.h> to include
-> the array size so that sizeof(console_buffer) is valid at call sites.
+> Since header_size is known upfront (from __init__), set the preload
+> header size in ObtainContents() to avoid an extra packing pass when
+> ProcessContentsUpdate() detects the size changed from 0 to header_size.
 >
-> Replace the unbounded strcpy() in cli_hush.c with const_strcpy() to
-> catch at compile time any configuration where CONFIG_SYS_CBSIZE is
-> smaller than the boot retry command string.
+> This reduces unnecessary repacking and signing operations.
 >
-> Fixes: 657e19f8f2dd ("cli_hush: support running bootcmd on boot retry")
-> Signed-off-by: Ngo Luong Thanh Tra <S4210155@student.rmit.edu.au>
-> To: u-boot@lists.denx.de
-> Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+> Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
 
-> diff --git a/include/linux/build_bug.h b/include/linux/build_bug.h
-> @@ -76,4 +76,27 @@
-> +#define const_strcpy(d, s) ({                                                \
-> +     BUILD_BUG_ON(__builtin_types_compatible_p(typeof(d), char *));  \
+> diff --git a/tools/binman/etype/pre_load.py b/tools/binman/etype/pre_load.py
+> @@ -152,14 +152,14 @@ class Entry_pre_load(Entry_collection):
+> +    def ObtainContents(self):
+> +        """Only set the known size of the preload header. The data will be
+> +        generated later on in ProcessContents() when the data from every entries
+> +        can be retrieved.
+> +        """
+> +        self.contents_size = self.header_size
+> +        return True
 
-The macro checks that d is not char * but not const char * so if
-someone passes a const char array, the first BUILD_BUG_ON passes
-(since const char[] becomes const char *, not char *), but
-__builtin_strcpy() would still fail because it cannot write to const
-memory. The error message would be less clear though.
+Setting contents_size without calling SetContents() is unusual. Most
+entry types provide placeholder data so GetData() returns something
+valid rather than None. While section.py handles None by substituting
+pad bytes, this feels like relying on a side-effect.
 
-How about a check for const char * as well:
+Please can you call SetContents() with placeholder data of header_size
+length instead, similar to image_header? That would be more consistent
+with other entry types.
 
-    BUILD_BUG_ON(__builtin_types_compatible_p(typeof(d), char *));
-    BUILD_BUG_ON(__builtin_types_compatible_p(typeof(d), const char *));
+Also the docstring should have the summary on the first line per
+Python conventions.
 
 Regards,
 Simon
