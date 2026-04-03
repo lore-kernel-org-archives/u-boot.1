@@ -4,97 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9EAEE8536A
-	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 13:22:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 050E1E8536A
+	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 13:22:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C0F5840AB;
-	Fri,  3 Apr 2026 15:22:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3125483DC9;
+	Fri,  3 Apr 2026 15:22:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C+n07baR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WWU/Wvve";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB160840BE; Fri,  3 Apr 2026 15:22:08 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 53D5083642; Fri,  3 Apr 2026 15:22:18 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E95A383DC9
- for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 15:22:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 012B484106
+ for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 15:22:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b982518b73fso294450166b.1
- for <u-boot@lists.denx.de>; Fri, 03 Apr 2026 06:22:06 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775222526; cv=none;
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-b9c3e2cf3c0so277279566b.1
+ for <u-boot@lists.denx.de>; Fri, 03 Apr 2026 06:22:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775222535; cv=none;
  d=google.com; s=arc-20240605;
- b=kh44eFCFl8gByINaAcpkAarmhVEQ1LlhWWXV6WZXVXDb0HZ744h+m+3yVUwhJCtBoq
- bFCPICYNnXt6TYVRV7+xe766u3sdw3HNnbaDhJb6Upb2TdQIeDZTmMGvmPEmyb9UY3jH
- uEPzoBXikcoI42HQXaQZn95e2Nrv6XN0cIqNmwRFCDaR9/O1E3LlROMu2UuqY0TIwD0H
- 8TPmPQClPEsqAxB69/V/hWwUF/V3IQFoLWw6poBtKp5xY0uewpf+BPg/YC1hjuP590zZ
- B+nQuudiS9rNhsyaKS8v4y9xw5QUI/DFmlV8SbPTO17SUBjyPR1z0mSq00MmqbYeyP5J
- 1ujQ==
+ b=B+ff65EWvEcA8dgNRdn6iHnPzZLPy8oyupT0EJ1ymGSawm66TdwvMWR8rLveTAMbdS
+ gMxc4TMZdGqf2SNGQHC6x6jbEJoUy6pzqKVJYxrKrVXc6wAEjTyV4+wSiW0zg6y8w+Oe
+ 9R+EmMnbAoXaeJ40Ox0sFMdbTu3qp/RNNmx8udiBN8JPxI3R9cz/BWHyo0BIeIom/YlJ
+ BVsU9XSk15NbkaZ+kNl2bWVpXCh9395bnmR9sxeVf77cKm7AhPQsif4LIiI6/5gPD08f
+ XLl+gy5RbHn0gxUZSLeQfZWxTpjP2bpfACKp1Liu/SThFVPnFPGBSuceIbcKt3cpcRwo
+ CTYw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=j9dMIh+0L/7Jy5htshT+H6N0DXPXpIDGRGCI4xR3cdE=;
- fh=2Ai/DF/OygrgX5KD/xptwaXayaptkAAlqyY5KCXDcm8=;
- b=Xq/DO3CTKzcICATWVs4hhJLJsY9lioQrY9Bc4/mP9EFOCbvcsqKuhZnQV5U8t7fTGd
- 5JKWrGWoVlf07NWUXWOcGOVk+mcWpiE9jSmxiv5xaqHhg1aOgrxihEJmGoG6wh9XPS9E
- RktPg9J1UDWSu+1tH1ROTp3dmczsBPR3cxgXI/4kWwmljiIcp2Cw8Lk8xYgPcYc6Y2wj
- YWJ3GqQ3FVggwNVQO4WAtG/OD2YNuIvsmcpzWUnrt/JQcBo21QyuEI3p0O2IC+efhSM2
- HvR9J6oRASZy723woLz5Z4Ds3zl9y4EgVzBh4DT4vyaNY4p3Ht4qjH8Bcr7E7SWggv5u
- v2aQ==; darn=lists.denx.de
+ bh=wJ353VM6GGFoQkksQZ/fGTbFeFTgeGyCLoBGXMvL8Og=;
+ fh=GoI+sirgUYAsy875+zYsOf9xP8IMILer9nqBWQEMKjo=;
+ b=Tkll66yr4guQ3dIxXgmrKHohJtLsQJgn7VFIM4qX+qsBuhQGRkSyg0PwsGl3QXnZde
+ 6pw6qP8XfxfqVNN1ooinhhX6SwZzpSmgq06vk7CCWaKZHmWqwp792scoWL9nb3awouML
+ Kjr66XAevVYAOMuPdzTVWpo2SxIkjvGfFEz8Rq46TiUjcyk3nMyqVIwrLjbDv42inLOg
+ OaCGO/JTILLUpobWAXtwy2UfwAPA9y6eVn6foCQqC76YWxe9bhLs2BvclRH8si0kffg8
+ f4RupSZbGhOxBOx8AI+fJeuBH0kS+MClL7ZX5bCEzbmpyBGrEH6ttdzNKCeEY8AI0Ijm
+ QuwQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775222526; x=1775827326; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775222535; x=1775827335; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=j9dMIh+0L/7Jy5htshT+H6N0DXPXpIDGRGCI4xR3cdE=;
- b=C+n07baRupM8cjwjACByCdY7s5WzY3BXPNarJlCGvhwYbX8tQKI1XWIvw136nl0Ru2
- 4yr7n5DNbGxOMEn5YbB5qnA9sQsRQEBrofqFUBWcz6WDhkxt6yRle2btwZVqZDjMYMmg
- vA1oVzDYOVWemhqsCESkqaBBvNkIhrR135F28=
+ bh=wJ353VM6GGFoQkksQZ/fGTbFeFTgeGyCLoBGXMvL8Og=;
+ b=WWU/WvverC0xAZZT1wstBcGC4QHF2cgC1PYO2POfEn5hR/WSF/Yt7cFSsZa5c5bV9b
+ E5KabZ7emO2pD41nhS4FUbs2USktYK+SdDbHKLp36Ix7EpspKZy6XUe/iiLUckxTMjAl
+ RiUilijAvgNUMVKX124hBtjpzraDdxyqCBXTs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775222526; x=1775827326;
+ d=1e100.net; s=20251104; t=1775222535; x=1775827335;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=j9dMIh+0L/7Jy5htshT+H6N0DXPXpIDGRGCI4xR3cdE=;
- b=J25rkRjhh7SpwSnwEEd7QICTjpy29Htp3+kKEAs9nF0hu2it30nDxVRqGTRg0OOmh1
- e2E3VI7MnpWSfCbJQkzpIKMMjKkIRXzt/BIWdQzdUCBpSpN6g+yMdo72QuEMlvDRuc4d
- KpnA7E7FAwWXNaAQOCrB1tSoXHyZvSItpGRTSK0zKzwXb/bUc5DSkfsthx2DVz1YsCPe
- CjpBAQjMG9TAPDi87SjhxvOhpsktk2a8GWzKjsiNNJ+iTPKcaRJWgx3w5RwQtSyQIuTk
- ikYEPZO/NCmnC+/MpHdVrC3srutUj1Fjh3rrQis0qO50SHLqtY0HNrD1beBE475vbJcj
- hHGA==
-X-Gm-Message-State: AOJu0YzNwMbTJ0zu5QAgnkOAzVTL+eSAZR6PKlXMFK41D0IkYau1y687
- yZzSYWJgV2zIxxDc64fQrlch4jopMKZHe+um0XSKzVRgNhcR/r1x7+h8Su/Ry/9z4oNw24vQIIK
- wkS/kb9E3p4htQUr5fPaFsuG/01ME0UaHjOQZNgRK
-X-Gm-Gg: AeBDievVs0oI9Ec6WiAXWcumDjNzUDsM+LcrwK7H50vjpbEvr+/mQuVLcYfCP7F9doA
- iT0XqKEdjjAGQ1Igs6ZvPw7F4UsHcMAGo+aJH2D/X4IkO90x4j7eg7Fw3waUdUMBnfRPabtjcIu
- grJIIljOjhjSdRWOGAkbJR3UXzMIxtTWHyTreiPeetJCVn2ks3649YnI0v8+u9lN45EfEe2RF8z
- ZZE3CCv7VnAABLI6GNgMN/z+31Eb4oh6dM0YgeldTbhvNUHodsAb8ZbKer2E/9rzPa2MapqcnLm
- 8/eIZintX9FwC5tT
-X-Received: by 2002:a17:906:6a10:b0:b9c:1667:e17 with SMTP id
- a640c23a62f3a-b9c674229a9mr151240566b.7.1775222526220; Fri, 03 Apr 2026
- 06:22:06 -0700 (PDT)
+ bh=wJ353VM6GGFoQkksQZ/fGTbFeFTgeGyCLoBGXMvL8Og=;
+ b=JmzKPvNogPdidZm1dBb9eu99IUAzkIl/5M6raCf5FtZodp9eD2hcRln1awMjucoQdw
+ QRUtlBBp2VVmrYFjoz/NkigF1oUYWLvrY+OxgY5W9cM2m27aBZXIOKdTuc0qAIL1V+Ey
+ xqMS3dKfcPZJrZi0l7wCD+O9fsuiIXxx8MqDg3mVIFZKdgkqM3/LP8XW4ErASKa+HRPX
+ IIOA+sOsDmEHhxv3kvtXRvGAjsaIdKB/3rLzMr2bw4UwGLN/48Qj7RwvosL4+ctG65KM
+ cvJNQY53et2eywvGkhEwDEbk/7J9pITxEjYC0pMXERGAxAGOQte/rzs3osblcDIPbOCH
+ DN/A==
+X-Gm-Message-State: AOJu0YxJB6MEocxTMmQKiF7nyGRwJFilDKVfWo6DLTANiFWTXBH+LXue
+ IDG1YOKuhHsok46t1+oygGJlaA4aEbHegSPVFOVNDYvCUVs+2CL7C7I39Eaj9G/0NU+lXTDhiOO
+ VVxQw4tj3KcdGLl4rKly3cq8APkVLZz/yC+Pxu9AG
+X-Gm-Gg: AeBDievjDlOAxH5WDWn32wC8GSt6iRC9/ZW1NT9wl3cDQFpyNQxc/AOlpziRKePkfCh
+ HkA+CuMlM9o56YJQEG2oxbV2aISxwsPOOF0CB5TzokGku9c4NGr+a/jh7bou76KgtZSQHuC8JR1
+ k/VTjigRusJYldeNixW/S2Xlcdr0NfdYt1uzF2DpAPVFX6FvIUvI5851xdgsYHF/5HMjOtADjiW
+ UP5skiqFoq19z01M3/uYaA5d1eAlE53kaJoFS72ynFlx1sOYm+eYDQosSF5clWLP9vHA+w6BdJD
+ 1s8dVw==
+X-Received: by 2002:a17:906:5999:b0:b9c:4fc9:87db with SMTP id
+ a640c23a62f3a-b9c679add8cmr102206766b.30.1775222535354; Fri, 03 Apr 2026
+ 06:22:15 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260403073251.1051533-1-paul.henrys_ext@softathome.com>
  <20260403075528.1150196-1-paul.henrys_ext@softathome.com>
- <20260403075528.1150196-2-paul.henrys_ext@softathome.com>
-In-Reply-To: <20260403075528.1150196-2-paul.henrys_ext@softathome.com>
+ <20260403075528.1150196-3-paul.henrys_ext@softathome.com>
+In-Reply-To: <20260403075528.1150196-3-paul.henrys_ext@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 3 Apr 2026 07:21:52 -0600
-X-Gm-Features: AQROBzA225IYMQH_l8giCKpwrApTMbtvPavKyIUGER3MjMUvgUEfgBJ-bPvXKmg
-Message-ID: <CAFLszTiQQ2rGrNcuQ_oQPb8xBt72XZ-Sq88bkZ0eDK9x7X8SBQ@mail.gmail.com>
-Subject: Re: [PATCH v4 2/3] binman: Generate preload header and sign data only
- once
+Date: Fri, 3 Apr 2026 07:22:01 -0600
+X-Gm-Features: AQROBzCZiPzSt2H50B9c6T1E7nOXlGL2iZnvHJt5J6m7t80DP_Qg-pftTBMsHDU
+Message-ID: <CAFLszThduP4SAskvH0MO1vM-=6o9-WLguPiHbw1RTiFAfoCpnw@mail.gmail.com>
+Subject: Re: [PATCH v4 3/3] binman: collection: Set build_done on referenced
+ entries
 To: paul.henrys_ext@softathome.com
 Cc: u-boot+nodisclaimer@lists.denx.de, sjg+nodisclaimer@chromium.org, 
  trini+nodisclaimer@konsulko.com, alpernebiyasak+nodisclaimer@gmail.com, 
- philippe.reynes+nodisclaimer@softathome.com, u-boot@lists.denx.de
+ philippe.reynes+nodisclaimer@softathome.com, 
+ yan wang <yan.wang@softathome.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -112,44 +113,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Paul,
-
 On 2026-04-03T07:55:27, Paul HENRYS <paul.henrys_ext@softathome.com> wrote:
-> binman: Generate preload header and sign data only once
+> binman: collection: Set build_done on referenced entries
 >
-> To optimize preload generation, generate the header and signatures only
-> after all data has been collected. This avoids signing the data multiple
-> times.
+> The collection etype uses phandles in the 'content' property to
+> reference other entries. Mark each referenced entry with build_done
+> to avoid rebuilding the same entry data multiple times.
 >
-> Since header_size is known upfront (from __init__), set the preload
-> header size in ObtainContents() to avoid an extra packing pass when
-> ProcessContentsUpdate() detects the size changed from 0 to header_size.
+> This is important for cases where rebuilding may change the data
+> content, e.g. due to timestamps or random IVs in encryption.
 >
-> This reduces unnecessary repacking and signing operations.
+> Refactor GetContentsByPhandle() to return both the entry object and
+> its data.
 >
-> Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
+> Signed-off-by: yan wang <yan.wang@softathome.com>
+>
+> tools/binman/etype/collection.py | 8 ++++++--
+>  tools/binman/etype/section.py    | 5 +++--
+>  2 files changed, 9 insertions(+), 4 deletions(-)
 
-> diff --git a/tools/binman/etype/pre_load.py b/tools/binman/etype/pre_load.py
-> @@ -152,14 +152,14 @@ class Entry_pre_load(Entry_collection):
-> +    def ObtainContents(self):
-> +        """Only set the known size of the preload header. The data will be
-> +        generated later on in ProcessContents() when the data from every entries
-> +        can be retrieved.
-> +        """
-> +        self.contents_size = self.header_size
-> +        return True
-
-Setting contents_size without calling SetContents() is unusual. Most
-entry types provide placeholder data so GetData() returns something
-valid rather than None. While section.py handles None by substituting
-pad bytes, this feels like relying on a side-effect.
-
-Please can you call SetContents() with placeholder data of header_size
-length instead, similar to image_header? That would be more consistent
-with other entry types.
-
-Also the docstring should have the summary on the first line per
-Python conventions.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
