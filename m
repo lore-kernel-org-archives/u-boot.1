@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82786E85371
-	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 16:26:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 281BDE85379
+	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 16:26:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 354178416F;
-	Fri,  3 Apr 2026 18:25:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E0414840D8;
+	Fri,  3 Apr 2026 18:26:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="Jar2xi9W";
+	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="ZPf1OrBc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEF1984148; Fri,  3 Apr 2026 18:25:55 +0200 (CEST)
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
+ id DF38384113; Fri,  3 Apr 2026 18:25:55 +0200 (CEST)
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DDF6840F1
+ by phobos.denx.de (Postfix) with ESMTPS id B96148412A
  for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 18:25:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sgdfkk@163.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=+R
- RctQiDz10VO7hYlJBBD3FZic+A0WGqjtUyOAGP5Sw=; b=Jar2xi9WREcy4dZv3J
- 8ZDMS7AwYohT4/n+hPgmKhGU+v3JIV2kI4XbpdpXEmC+uoR0WGNE3If1Q9cxqgYU
- W3RF3WBCnyOX2D3LWltuSH0j3uadeOWV/XagcfnwkriDxOue4OE+Ln75m3FiX13N
- 8cucAC7GPIzXPAJQhsyEobS/s=
+ s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=Y8
+ 4239WcusOVETQkP2aaviIZ6D2nXxGGjtUZkDjPhdY=; b=ZPf1OrBcqYe8qJ61Ev
+ QRfgENDpJgFMYq4UufX2rhQmA7YYdt+Q+GEGlDm70g6Msdk4nsp2dlD/j1Ga39kU
+ VaiWEjEIPkyagzH0kT7KGcE5GZwjqHmST7f/E/R4J+zWukXy6SxM77WVHr/qQVbh
+ sTUMlVefXcHII8/x4bN1gLIeo=
 Received: from server-e.. (unknown [])
- by gzsmtp3 (Coremail) with SMTP id PigvCgAnAXQF6s9pHqSgBw--.137S5;
+ by gzsmtp3 (Coremail) with SMTP id PigvCgAnAXQF6s9pHqSgBw--.137S7;
  Sat, 04 Apr 2026 00:25:48 +0800 (CST)
 From: sgdfkk@163.com
 To: u-boot@lists.denx.de
 Cc: Du Huanpeng <u74147@gmail.com>
-Subject: [PATCH v7 3/7] mips: loongson: lowlevel debug serial
-Date: Sat,  4 Apr 2026 00:25:37 +0800
-Message-ID: <20260403162541.86608-4-sgdfkk@163.com>
+Subject: [PATCH v7 5/7] mips: loongson: add clk driver
+Date: Sat,  4 Apr 2026 00:25:39 +0800
+Message-ID: <20260403162541.86608-6-sgdfkk@163.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260403162541.86608-1-sgdfkk@163.com>
 References: <20260403162541.86608-1-sgdfkk@163.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: PigvCgAnAXQF6s9pHqSgBw--.137S5
-X-Coremail-Antispam: 1Uf129KBjvJXoWxtw1UZrWrCw1fJr4kGFy3urg_yoW7XFy7pF
- 1xAan5KF4DXw47KasYy3WkGrnxtrs5Jry7JFnrXF1ru3Z7t3Z5CF42kFn0vrW3JFZ5GrWF
- 9ayavrW2gas7Zw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07j0yIUUUUUU=
+X-CM-TRANSID: PigvCgAnAXQF6s9pHqSgBw--.137S7
+X-Coremail-Antispam: 1Uf129KBjvJXoWxKF4DJry7XF4DWr15Ar45trb_yoW7KF4xpa
+ nYkFWrKr4Yq3y7G3WfJFyUJFySkF10yFyUurZFga4SkFnxAF4jqFs2ga43tF45CF97X3yY
+ q3WqgrWxCFZFvaUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UdcTQUUUUU=
 X-Originating-IP: [240e:3b0:4805:581::3001]
-X-CM-SenderInfo: xvjgwyrn6rljoofrz/xtbC5wwMY2nP6gy8aQAA3R
+X-CM-SenderInfo: xvjgwyrn6rljoofrz/xtbC6A0MY2nP6g25MwAA3B
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,223 +69,230 @@ X-Virus-Status: Clean
 
 From: Du Huanpeng <u74147@gmail.com>
 
-set pin to uart alternate function and enable uart for lowlevel debug,
-also future pinctrl driver can base on this code.
+clk driver loongson mips for embedded SoC ls1c300
 
 Signed-off-by: Du Huanpeng <u74147@gmail.com>
 ---
- arch/mips/mach-loongson/include/mach/serial.h |  16 +++
- arch/mips/mach-loongson/ls1c300/gpio.c        |  66 +++++++++++
- arch/mips/mach-loongson/ls1c300/serial.c      | 104 ++++++++++++++++++
- 3 files changed, 186 insertions(+)
- create mode 100644 arch/mips/mach-loongson/include/mach/serial.h
- create mode 100644 arch/mips/mach-loongson/ls1c300/gpio.c
- create mode 100644 arch/mips/mach-loongson/ls1c300/serial.c
+ drivers/clk/Makefile               |   1 +
+ drivers/clk/loongson/Makefile      |   3 +
+ drivers/clk/loongson/clk-ls1c300.c | 186 +++++++++++++++++++++++++++++
+ 3 files changed, 190 insertions(+)
+ create mode 100644 drivers/clk/loongson/Makefile
+ create mode 100644 drivers/clk/loongson/clk-ls1c300.c
 
-diff --git a/arch/mips/mach-loongson/include/mach/serial.h b/arch/mips/mach-loongson/include/mach/serial.h
+diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+index 5f0c0d8a5c2..e19bb17276e 100644
+--- a/drivers/clk/Makefile
++++ b/drivers/clk/Makefile
+@@ -23,6 +23,7 @@ obj-y += ti/
+ obj-$(CONFIG_CLK_THEAD) += thead/
+ obj-$(CONFIG_$(PHASE_)CLK_INTEL) += intel/
+ obj-$(CONFIG_ARCH_ASPEED) += aspeed/
++obj-$(CONFIG_ARCH_LSMIPS) += loongson/
+ obj-$(CONFIG_ARCH_MEDIATEK) += mediatek/
+ obj-$(CONFIG_ARCH_MESON) += meson/
+ obj-$(CONFIG_ARCH_MTMIPS) += mtmips/
+diff --git a/drivers/clk/loongson/Makefile b/drivers/clk/loongson/Makefile
 new file mode 100644
-index 00000000000..7afe5788cb7
+index 00000000000..0a47269cd30
 --- /dev/null
-+++ b/arch/mips/mach-loongson/include/mach/serial.h
-@@ -0,0 +1,16 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (C) 2020 MediaTek Inc.
-+ *
-+ * Author:  Gao Weijie <weijie.gao@mediatek.com>
-+ *
-+ * Copyright (C) 2022 Du Huanpeng <u74147@gmail.com>
-+ */
++++ b/drivers/clk/loongson/Makefile
+@@ -0,0 +1,3 @@
++# SPDX-License-Identifier: GPL-2.0
 +
-+#ifndef __LSMIPS_SERIAL_H_
-+#define __LSMIPS_SERIAL_H_
-+
-+void loongson_spl_serial_init(void);
-+int gpio_set_alternate(int gpio, int func);
-+
-+#endif /* __LSMIPS_SERIAL_H_ */
-diff --git a/arch/mips/mach-loongson/ls1c300/gpio.c b/arch/mips/mach-loongson/ls1c300/gpio.c
++obj-$(CONFIG_SOC_LS1C300) += clk-ls1c300.o
+diff --git a/drivers/clk/loongson/clk-ls1c300.c b/drivers/clk/loongson/clk-ls1c300.c
 new file mode 100644
-index 00000000000..7f160408382
+index 00000000000..0aa7470fe28
 --- /dev/null
-+++ b/arch/mips/mach-loongson/ls1c300/gpio.c
-@@ -0,0 +1,66 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2022 Du Huanpeng <u74147@gmail.com>
-+ */
-+
-+#include <linux/errno.h>
-+#include <asm/bitops.h>
-+
-+#define CBUS_FIRST0	0xbfd011c0
-+#define CBUS_SECOND0	0xbfd011d0
-+#define CBUS_THIRD0	0xbfd011e0
-+#define CBUS_FOURTHT0	0xbfd011f0
-+#define CBUS_FIFTHT0	0xbfd01200
-+
-+#define CBUS_FIRST1	0xbfd011c4
-+#define CBUS_SECOND1	0xbfd011d4
-+#define CBUS_THIRD1	0xbfd011e4
-+#define CBUS_FOURTHT1	0xbfd011f4
-+#define CBUS_FIFTHT1	0xbfd01204
-+
-+#define CBUS_FIRST2	0xbfd011c8
-+#define CBUS_SECOND2	0xbfd011d8
-+#define CBUS_THIRD2	0xbfd011e8
-+#define CBUS_FOURTHT2	0xbfd011f8
-+#define CBUS_FIFTHT2	0xbfd01208
-+
-+#define CBUS_FIRST3	0xbfd011cc
-+#define CBUS_SECOND3	0xbfd011dc
-+#define CBUS_THIRD3	0xbfd011ec
-+#define CBUS_FOURTHT3	0xbfd011fc
-+#define CBUS_FIFTHT3	0xbfd0120c
-+
-+/*
-+ * pinmux for debug uart and spl only, for others, please
-+ * use a pinctrl driver and device-tree for pin muxing.
-+ *
-+ * @gpio: gpio number
-+ * @func: alternate function 1 to 5, 0 for GPIO.
-+ */
-+
-+int gpio_set_alternate(int gpio, int func)
-+{
-+	volatile void __iomem *addr;
-+	int i;
-+
-+	if (gpio < 0 || gpio > 104)
-+		return -ENODEV;
-+	if (func < 0 || func > 5)
-+		return -EINVAL;
-+
-+	if (func) {
-+		i = func - 1;
-+		addr = (void *)CBUS_FIRST0 + i * 16;
-+		set_bit(gpio, addr);
-+	} else {
-+		/* GPIO, clear CBUS 1 ~ 5 */
-+		i = 5;
-+	}
-+
-+	while (i--) {
-+		addr = (void *)CBUS_FIRST0 + 16 * i;
-+		clear_bit(gpio, addr);
-+	}
-+
-+	return 0;
-+}
-diff --git a/arch/mips/mach-loongson/ls1c300/serial.c b/arch/mips/mach-loongson/ls1c300/serial.c
-new file mode 100644
-index 00000000000..a7697574dad
---- /dev/null
-+++ b/arch/mips/mach-loongson/ls1c300/serial.c
-@@ -0,0 +1,104 @@
++++ b/drivers/clk/loongson/clk-ls1c300.c
+@@ -0,0 +1,186 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
++ * reference:
++ *   drivers/clk/microchip/mpfs_clk.c
++ *   drivers/clk/clk_octeon.c
++ *
 + * Copyright (C) 2020-2026 Du Huanpeng <u74147@gmail.com>
 + */
 +
-+#include <mach/serial.h>
-+#include <linux/kernel.h>
++#include <clk-uclass.h>
++#include <dm.h>
++#include <dt-bindings/clock/ls1c300-clk.h>
++#include <linux/bitops.h>
++#include <linux/bitfield.h>
++#include <linux/io.h>
++#include <linux/clk-provider.h>
 +
-+struct uart_pin_config {
-+	char port;
-+	char afunc;
-+	char rx;
-+	char tx;
++/* PLL/SDRAM Frequency Configuration Register */
++#define START_FREQ	0
++#define CLK_DIV_PARAM	4
++
++/* START_FREQ */
++#define	PLL_VALID	BIT(31)
++#define	RESERVED0	GENMASK(30, 24)
++#define	FRAC_N		GENMASK(23, 16)
++#define	M_PLL		GENMASK(15, 8)
++#define	RESERVED1	GENMASK(7, 4)
++#define	RST_TIME	GENMASK(3, 2)
++#define	SDRAM_DIV	GENMASK(1, 0)
++/* CLK_DIV_PARAM */
++#define	PIX_DIV		GENMASK(31, 24)
++#define	CAM_DIV		GENMASK(23, 16)
++#define	CPU_DIV		GENMASK(15, 8)
++#define	RESERVED2	GENMASK(7, 6)
++#define	PIX_DIV_VALID	BIT(5)
++#define	PIX_SEL		BIT(4)
++#define	CAM_DIV_VALID	BIT(3)
++#define	CAM_SEL		BIT(2)
++#define	CPU_DIV_VALID	BIT(1)
++#define	CPU_SEL		BIT(0)
++/* CPU_THROT */
++#define	CPU_THROT	GENMASK(3, 0)
++
++struct ls1c300_clk_priv {
++	struct clk pll;
++	struct clk throt;
 +};
 +
-+struct uart_pin_config con[] = {
-+#if CONFIG_CONS_INDEX == 0
-+	{ 0, 2, 74, 75 },
-+	{ 0, 3, 23, 24 },
-+	{ 0, 3, 99, 100 },
-+
-+#elif CONFIG_CONS_INDEX == 1
-+	{ 1, 1, 17, 18 },
-+	{ 1, 1, 101, 102 },
-+	{ 1, 2, 40, 41 },
-+	{ 1, 4, 2, 3 },
-+
-+#elif CONFIG_CONS_INDEX == 2
-+	{ 2, 2, 36, 37 },
-+	{ 2, 2, 42, 43 },
-+	{ 2, 3, 27, 28 },
-+	{ 2, 3, 103, 104 },
-+	{ 2, 4, 4, 5 },
-+
-+#elif CONFIG_CONS_INDEX == 3
-+	{ 3, 2, 17, 18 },
-+	{ 3, 2, 33, 34 },
-+	{ 3, 2, 44, 45 },
-+	{ 3, 4, 0, 1 },
-+
-+#elif CONFIG_CONS_INDEX == 4
-+	{ 4, 5, 23, 24 },
-+	{ 4, 5, 58, 59 },
-+	{ 4, 5, 80, 79 },
-+
-+#elif CONFIG_CONS_INDEX == 5
-+	{ 5, 5, 25, 26 },
-+	{ 5, 5, 60, 61 },
-+	{ 5, 5, 81, 78 },
-+
-+#elif CONFIG_CONS_INDEX == 6
-+	{ 6, 5, 27, 46 },
-+	{ 6, 5, 62, 63 },
-+
-+#elif CONFIG_CONS_INDEX == 7
-+	{ 7, 5, 57, 56 },
-+	{ 7, 5, 64, 65 },
-+	{ 7, 5, 87, 88 },
-+
-+#elif CONFIG_CONS_INDEX == 8
-+	{ 8, 5, 55, 54 },
-+	{ 8, 5, 66, 67 },
-+	{ 8, 5, 89, 90 },
-+
-+#elif CONFIG_CONS_INDEX == 9
-+	{ 9, 5, 53, 52 },
-+	{ 9, 5, 68, 69 },
-+	{ 9, 5, 85, 86 },
-+
-+#elif CONFIG_CONS_INDEX == 10
-+	{ 10, 5, 51, 50 },
-+	{ 10, 5, 70, 71 },
-+	{ 10, 5, 84, 82 },
-+
-+#elif CONFIG_CONS_INDEX == 11
-+	{ 11, 5, 49, 48 },
-+	{ 11, 5, 72, 73 },
-+#endif /* CONFIG_CONS_INDEX */
++static const struct clk_div_table sdram_div_table[] = {
++	{.val = 0, .div = 2},
++	{.val = 1, .div = 4},
++	{.val = 2, .div = 3},
++	{.val = 3, .div = 3},
 +};
 +
-+#define UART2_RX	36
-+#define UART2_TX	37
-+#define AFUNC		2
-+
-+void loongson_spl_serial_init(void)
++ulong ls1c300_pll_get_rate(struct clk *clk)
 +{
-+#if defined(CONFIG_SPL_SERIAL)
-+	int pin_rx, pin_tx;
-+	int afunc;
++	unsigned int mult;
++	long long parent_rate;
++	void *base;
++	unsigned int val;
 +
-+	if (CONFIG_CONS_PIN < ARRAY_SIZE(con)) {
-+		pin_rx = con[CONFIG_CONS_PIN].rx;
-+		pin_tx = con[CONFIG_CONS_PIN].tx;
-+		afunc = con[CONFIG_CONS_PIN].afunc;
-+	} else {
-+		pin_rx = UART2_RX;
-+		pin_tx = UART2_TX;
-+		afunc = AFUNC;
-+	}
++	parent_rate = clk_get_parent_rate(clk);
++	base = (void *)clk->data;
 +
-+	gpio_set_alternate(pin_rx, afunc);
-+	gpio_set_alternate(pin_tx, afunc);
-+#endif /* CONFIG_SPL_SERIAL */
++	val = readl(base + START_FREQ);
++	mult = FIELD_GET(FRAC_N, val) + FIELD_GET(M_PLL, val);
++	return (mult * parent_rate) / 4;
 +}
++
++static ulong ls1c300_clk_get_rate(struct clk *clk)
++{
++	struct clk *cl;
++	ulong rate;
++	int err;
++
++	err = clk_get_by_id(clk->id, &cl);
++	if (err)
++		return err;
++
++	rate = clk_get_rate(cl);
++	return rate;
++}
++
++static int ls1c300_clk_probe(struct udevice *dev)
++{
++	void __iomem *base;
++	void __iomem *cpu_throt;
++	void __iomem *addr;
++
++	struct ls1c300_clk_priv *priv;
++
++	struct clk *cl, clk;
++	const char *parent_name;
++	int flags;
++	int ret;
++
++	base = dev_remap_addr_index(dev, 0);
++	cpu_throt  = dev_remap_addr_index(dev, 1);
++
++	ret = clk_get_by_index(dev, 0, &clk);
++	if (ret)
++		return ret;
++
++	ret = clk_get_rate(&clk);
++	parent_name = clk.dev->name;
++
++	priv = dev_get_priv(dev);
++	cl = &priv->pll;
++	cl->data = (unsigned long)base;
++	ret = clk_register(cl, "clk_ls1c300_pll", "pll", parent_name);
++	clk_dm(CLK_PLL, cl);
++
++	addr = base + CLK_DIV_PARAM;
++	flags = CLK_DIVIDER_ONE_BASED | CLK_DIVIDER_ALLOW_ZERO;
++	cl = clk_register_divider(NULL, "cpu_div", "pll", 0, addr,  8, 7, flags);
++	clk_dm(CLK_CPU, cl);
++	cl = clk_register_divider(NULL, "cam_div", "pll", 0, addr, 16, 7, flags);
++	clk_dm(CLK_CAMERA, cl);
++	cl = clk_register_divider(NULL, "pix_div", "pll", 0, addr, 24, 7, flags);
++	clk_dm(CLK_PIX, cl);
++
++	cl = &priv->throt;
++	cl->data = (unsigned long)cpu_throt;
++	ret = clk_register(cl, "clk_cpu_throt", "cpu_throt_factor", "cpu_div");
++	clk_dm(CLK_CPU_THROT, cl);
++
++	addr = base + START_FREQ;
++	cl = clk_register_divider(NULL, "sdram_div", "cpu_div", 0, addr, 0, 2, 0);
++	to_clk_divider(cl)->table = sdram_div_table;
++	clk_dm(CLK_APB, cl);
++
++	return 0;
++}
++
++static ulong cpu_throt_get_rate(struct clk *clk)
++{
++	void __iomem *cpu_throt;
++	long long parent_rate;
++	ulong ret;
++
++	parent_rate = clk_get_parent_rate(clk);
++	cpu_throt = (void *)clk->data;
++
++	ret = readl(cpu_throt) + 1;
++	ret = parent_rate * ret / 16;
++	return ret;
++}
++
++static const struct udevice_id ls1c300_clk_ids[] = {
++	{ .compatible = "loongson,ls1c300-clk" },
++	{ }
++};
++
++static const struct clk_ops clk_cpu_throt_ops = {
++	.get_rate = cpu_throt_get_rate,
++};
++
++static const struct clk_ops clk_ls1c300_pll_ops = {
++	.get_rate = ls1c300_pll_get_rate,
++};
++
++static const struct clk_ops ls1c300_clk_ops = {
++	.get_rate = ls1c300_clk_get_rate,
++};
++
++U_BOOT_DRIVER(clk_ls1c300_cpu_throt) = {
++	.name	= "clk_cpu_throt",
++	.id	= UCLASS_CLK,
++	.ops	= &clk_cpu_throt_ops,
++};
++
++U_BOOT_DRIVER(clk_ls1c300_pll) = {
++	.name	= "clk_ls1c300_pll",
++	.id	= UCLASS_CLK,
++	.ops	= &clk_ls1c300_pll_ops,
++};
++
++U_BOOT_DRIVER(ls1c300_clk) = {
++	.name = "clk_ls1c300",
++	.id = UCLASS_CLK,
++	.of_match = ls1c300_clk_ids,
++	.probe = ls1c300_clk_probe,
++	.priv_auto = sizeof(struct ls1c300_clk_priv),
++	.ops = &ls1c300_clk_ops,
++};
 -- 
 2.43.0
 
