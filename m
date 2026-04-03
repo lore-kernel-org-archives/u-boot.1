@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E08ED73086
-	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 02:26:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A977D73087
+	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 02:26:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 165EE8412A;
-	Fri,  3 Apr 2026 04:25:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 434AA840AB;
+	Fri,  3 Apr 2026 04:25:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="i8EaeASr";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="Bojz9BtI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7614384106; Fri,  3 Apr 2026 04:25:52 +0200 (CEST)
-Received: from SA9PR02CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170130001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10c::1])
+ id D0C9D8408D; Fri,  3 Apr 2026 04:25:53 +0200 (CEST)
+Received: from SN4PR0501CU005.outbound.protection.outlook.com
+ (mail-southcentralusazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2CF2883693
+ by phobos.denx.de (Postfix) with ESMTPS id CE0A48408D
  for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 04:25:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CO9kx4t9rx6duPuMyDUArA/BPXI19TpzZs8ImFH3qag5NMqpxLniUqWGWSWj+D5qTGFUB8LEs+sTC7F4EIjtwVMgRSJnxFWAnFoHiJkB4kGMgcZmuY1kivsbtF5qusdLpW6LNfbZ/FUqpKY8BDp4M2bMuPcK6BOjzfZzJ4DGEUEqv/JZJgdFwLxGXw6GJdWwHZ6wYTHXFV7HFT2NrNbC8L6x0C9PW0YAyNrW6M1iPYLYWelF7K0Cmm3XB/0WTYnLQiFB6+RBt5GMimsJt2Rrvc/Gt3GNr9RkmIR937VrnfTa45fFrsS/D2dB9NnTeHUINRwylE9DG2CQSyKqhwSa3w==
+ b=ku8Yz5JEU/UdoYfYjeyewBfV1XbdIoBGk4WObeAv2z+nM8jPRxAqLLAqw6Nd8/1p2JdAN/4w37AGdWiGRZplABTjQ0gbrg/XFchauN8xZ2cSdO5wjfOzQ6GjMigaPV1rI4wrvgcX9v0hxRm3XHTMNx1RekWZL71PioVvMnMMO02HqRiF9eiqZVNuuzn7YSkMqRobAmtCcpun9q9qf/u8YjDyG9oKBHDlH0tnpOTqxdyCf/xoQ3vw//2Q8/HKatqDVgsv+ZJ9tZpvudKcG+UYZUEfIqMBg5ML6dA8C/1mBorTKavbxz6/WCtOoLOQ/sz16yIGrCI7MNG0CHn/ke5hjw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=G9pKPs55n0g9ZXv6WIFXpwj1brmkB7vuP59xWSfjVN0=;
- b=k7nnOagZrDySokvl4XcWnkdSL20qpS1+mYQichE8RU2NAtGrffKQXBZbg2VLKkX7OalNstCk7wMMAX0DJNllJbTFjNk0Or0kKsQJoErtBXCZQ5xzY6Xp5cREt6IhRiMMjIYqz7quhDL/iJQTD2OfJfOGVOA42xefE9f8F30+7VtPbxiMSBHzXRvqt8VbD8dj/TTWH9mfHvix1Yebk702Gy0ZHzVQ3KjcviGNI9CbRNLuv/O22eHAzp7pUVx+x7UYjugN47UJu+h84jexEfiBaJmQNTKO8z3SIT7NNstRAqGKRGuIl17DSNWPacLqsWkdse9qVBTvVpo4aOZ3ACxadA==
+ bh=0A0rj6e/TfgLER1MnxlUAdEddJb7avQ02Q1xgC5rVaQ=;
+ b=x1rZ34II18MrYDlaWwrqpnKFISxUF41rh/mnDbwdNDRSmtOq8IviHQ+W/+3GdYOYxVZY6pvseGq85oFQzita58x1AVOksHT2TiB9gdNCcmBAIvP0H0BW2kvsGffYWXLmTPLm6+yUlwRYpeVe+hYPwmz0jmSdSU8CBi/2aqJykExs69gf1ivK4kCm3hF3fvtlyBQk+BP+aTENy1eRXAqgFK1r/i9RkJp+46hkXczEb8n3Xj6WM00Xgalg0FkTC0LtPvzhBJiRK1IrHe9TGjJbT1xtSkV9bt8Pxxoy2VcsHGHb2aEir38tHz0+g+BolVakvTZhH5gJNcAoDVTHPIpBKg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=G9pKPs55n0g9ZXv6WIFXpwj1brmkB7vuP59xWSfjVN0=;
- b=i8EaeASrzhAPlEbKG/a3cJ7fgw6kSXb7D8h2kLvkhbStmlud/nH+MG0epCqk/HxQ1ZbSPqVFLGveGyfvvR/WbxBS/zfvoxCTDYJqcCcQtjTlLST+UQ8Pasmbav2DTjCVDvT3MZ7TypWbbxA4yxpehGR1S/QLGJ8dGBOEdBrbFwCCohlDa1naYb+ZodGFfNtXLS0W8utSW/tKSSPbN0+dFsPCTmsyhdTdrXas9NwqvcPNNzXhqaY0xIhXj5qbbM+AqWT39ysuwMg9KM9L1eH6josLQZgZeaYdXmfMNqY2c3ZIxK32utExS8KGLQztyZrIzXSCMXfteJPow2MSFHf9Kg==
+ bh=0A0rj6e/TfgLER1MnxlUAdEddJb7avQ02Q1xgC5rVaQ=;
+ b=Bojz9BtIGIEoXrjJ3HFWKsIUaG2cyHw4F6EgiXJwJI4a4cJhUslwsvuQv8gWV1pW0dzHQwXnqp83nmIOghPkwmGyT7sC1MclliQtde1sfbXCulDQtiwQ+07R2nfDZbug/GZv0MwPFOK2Jlz4CTXRV2mi5c8IhG+8v+pvXerYbKa6VFcz/VuqohQqd8jqDLT2xHodG8YCN5xwWk7Vo3CQ80IhHO3uDmuHaULTtRcLZF5pzHfL5jPA92DTcjvumh9T/OalDOn2fJM2F8ad0tBu5cVk7SkrAt2+hkdbw0ABlLWt8i5rsyGrZG9ceaxzKoj/p9Ox5565aLXcObUhuTYFfA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
- by SJ0PR03MB5421.namprd03.prod.outlook.com (2603:10b6:a03:289::7)
+ by BN8PR03MB5044.namprd03.prod.outlook.com (2603:10b6:408:7e::12)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.18; Fri, 3 Apr
- 2026 02:25:46 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.17; Fri, 3 Apr
+ 2026 02:25:47 +0000
 Received: from PH7PR03MB7063.namprd03.prod.outlook.com
  ([fe80::f6cf:4203:1cbc:cd21]) by PH7PR03MB7063.namprd03.prod.outlook.com
  ([fe80::f6cf:4203:1cbc:cd21%4]) with mapi id 15.20.9745.025; Fri, 3 Apr 2026
- 02:25:46 +0000
+ 02:25:47 +0000
 From: alif.zakuan.yuslaimi@altera.com
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
@@ -61,10 +61,10 @@ Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
  Lukasz Majewski <lukma@denx.de>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
  Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-Subject: [PATCH v1 2/9] configs: stratix10: Combine defconfig for all boot
- flashes
-Date: Thu,  2 Apr 2026 19:25:06 -0700
-Message-ID: <20260403022513.9446-3-alif.zakuan.yuslaimi@altera.com>
+Subject: [PATCH v1 3/9] arm: socfpga: Move firmware register settings from
+ source code to device tree
+Date: Thu,  2 Apr 2026 19:25:07 -0700
+Message-ID: <20260403022513.9446-4-alif.zakuan.yuslaimi@altera.com>
 X-Mailer: git-send-email 2.43.7
 In-Reply-To: <20260403022513.9446-1-alif.zakuan.yuslaimi@altera.com>
 References: <20260403022513.9446-1-alif.zakuan.yuslaimi@altera.com>
@@ -75,59 +75,59 @@ X-ClientProxiedBy: SJ0PR03CA0001.namprd03.prod.outlook.com
  (2603:10b6:510:2a4::6)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|SJ0PR03MB5421:EE_
-X-MS-Office365-Filtering-Correlation-Id: 52a19ed3-3a8e-4663-5adf-08de91284ff5
+X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|BN8PR03MB5044:EE_
+X-MS-Office365-Filtering-Correlation-Id: be4abe62-efa1-4ad0-1711-08de91285079
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|366016|56012099003|18002099003|22082099003|55112099003;
-X-Microsoft-Antispam-Message-Info: NK5zvWCjGqJ4Kx0mEGbWOYYkKH96CAyM9Qy/VxDqPtapswufO3LIIvRAlAyPEoxe4Ku9u8xbh6dMdVCDR4a56aUETpFAUAdi9KqGsfB/LgErvZyPAZJ45NoSTafrotSwE87wFEiRkNUlw/1P4UecGouZgTS4J6NlqwlZ2n4fzF3l3OGvuIcoY9uKPvq2fVZAA354g2Zmr+8RwYCx79KPgt/jQzJmzqWpB57fqPn/WLLqDeJPGQ0uybqLaEuNBICOWLILH62fELkagDm82pT9/WmDErR3Kt48fpWFRsEaD/+sSy+wbfauEM2V74VWl9AewbRmFY9Fc/KVskEklGKWIWyFcQ49iqWnhbHPlEQ1o/DtG2aks7WLHeAtDwVBq+E86P7xCOS47dBQIRH7LANRCxpLFQJYJ03Iufjt5ycdQ5NvBiY/RdJXpmRQcUiZ3atPW+NWPHddpn3f6TcgjlCWgBSl4isENwfT4HsXhlYfWxas4aHj9vrpBGnhiv7b1Kq956dsWUHDU9gvoJBQjeAoH7892VcejWpb/xyknC7QUk+yMjyF7I456ahDz3XYC0hPCLazhVNPnLO2UnnOpZgDUMwBw/GvS4l0P1w80sOrPeCpEdPCo7Skc03GS7bb5yZ6CFUtwA5W8N6kn+iPBDFl+eIEIMOt2yPCLM/8Q0p+gdTAu6ezSsOwy2s79EG++aerJSC8PTP/HYQ8DjikhHsb0c1agWwexuIHSmXquGZ/f7c=
+ ARA:13230040|376014|366016|1800799024|22082099003|56012099003|18002099003|55112099003;
+X-Microsoft-Antispam-Message-Info: +oQza/BjVOdYm2STPCLoMdfemo6Nid8M/hyahi82zGBIdY20N+dwRt57F7NG2RI3a05FuoO9n3Ze/jk9OnQTWSfKe4SlPYWIAmmO0rsDy4k4t2TvAU1pOYTjM3xvah21BsBXFkX0BwPvtM0JEOUPOxv/MMS4XZWPp33A9PsirIm/eHS3GjK41PBfAjnW77v0uaP6wgomcC5hMddvX1P5T/uw12LNkK99VeLio01DcWfQww22zVwVA4HRtupy+TTs+uHiOSeTyDR3FYSoNyLjaUw4gMqJHPmR8IRUubuKAZi5aS9sh41LVoayq+Qmu0tczO68Eab9XFEtV0jyBn1P5o3JctzRt7VSmuW/Kz+TNXLvbJCGXIHgRatSeIxOkD0LDNzuTGqrdtcawJ0y/Hz0fHWkRHz6goNmqB217IZZMi9nRHucVgMu9zhJY98t5qJMIENcUou4iAIqFKg/TjJtkRBPzsyxgmuXFKDhSUdpEQ25yJEwbHS+jNMW7GVIA4QkNe5LExojJ5qVx0apGX6G/UHmE5vpFvKyoq5oTLCicX6KeCu+EpxwoBicyHNL41KwsXBjbVb5JjUs7waF4BI+Md4Wovs5ep8+ZgMO7qhggBO4etFw8WY/IXJyb9HHyJXKwl1YTz1FkVCfNCP/fvVPgUogISB8MVtW79IGL5zzHdIdJpPAuj8zXHuz4GguShu7
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(56012099003)(18002099003)(22082099003)(55112099003);
+ SFS:(13230040)(376014)(366016)(1800799024)(22082099003)(56012099003)(18002099003)(55112099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?tFeX5y7bBr0k7TJWDVMwbkzz4QRbADZiPa6UmGzQjH5fyM5pOgL4n9rdx/DM?=
- =?us-ascii?Q?5cID5BDQYrojN8ZZlIJoIHhaHmN1Di5qBi7/RNyZcbzH3xwLh/UcDX+FQ8rT?=
- =?us-ascii?Q?tuqZ5qIEYVzxwVXUycQHdSy4/K8r+oTh3PQ3yWOFNhLzBtfVW1H/YE0ZIuJw?=
- =?us-ascii?Q?CW/ubzNLrKwxWnRFPp+Qb0a5+yF4tOXT1RUgXk1FdrbmeIpGC5POUc3TUCGx?=
- =?us-ascii?Q?BnK4lErbEVdYS6FPkC0vyRENic5Xx1o0uc/I72aEyuXUPMNKPBduB0CKiu+G?=
- =?us-ascii?Q?0YxN4gV9rzBIboyYFv22iZezQAvW5wVbEQTGQ5P+KulDkZHhgx1so1s6KFRq?=
- =?us-ascii?Q?gHOR76cf69NgsrYDY+9b+/4O5kIGZKpHtvggVxCJBoAeI1/48mq3wBAfyj71?=
- =?us-ascii?Q?rQFiy8lx2L+cIWE505wjQsnykPH4x+IekTcLkO/IEdkiAA8McuknaphQ/yE9?=
- =?us-ascii?Q?Hh4cSMxwLsoNtofCFGwkTV3Ar8GI/7GxecorKl6pXknTLGVOoKePyo/to3HY?=
- =?us-ascii?Q?Iyvn1VDOhy2K+oXeLvGGz05SG0bkm7q6ihPzFQJLDP7qHcjC4SWTgf72oCRg?=
- =?us-ascii?Q?Vid2wyki4feUqrjGEogGTLR78JHsZzDr1cVjUex2bAm65r1t7SF+IBzfRQPc?=
- =?us-ascii?Q?nYMAZNiPjbIX/6RI5j1zGQ1rzXAw24k+La5Js6t6YypOYxTLNMsO1h1qjWfD?=
- =?us-ascii?Q?jjsxb3sZLKq4g6S2GInOY3yk42xpjcp/+48UOol92g/AcOTHcy0PjjlAVOTo?=
- =?us-ascii?Q?wbD6N4OS8J33XD3QNgH4tmZqbGuQLSGXKhdBaksdzQt+ewrg0Fn5Z+l/om79?=
- =?us-ascii?Q?XhjbdiIpnD6vugp6le+7GW+hiz/GDodQrc8G1+pZM6moVkTyDOHLEP1oUenP?=
- =?us-ascii?Q?+BR8FrhKvz3mUjPEPAvLrzCLBZmgVak+eeXO3LAIGVmx6Q1F1H0UTyiDr5DC?=
- =?us-ascii?Q?mPCStlQfowvhx4+W9DOeRDfU1X2bFXPqlU96yRQdXMmIcsymyQWCZ5fZ1K4E?=
- =?us-ascii?Q?7lokcYTIkmhLLnMLNOX3IOPFuzH4RFFmP8DPalf8Kp5b9yDGbV6djXENv1DF?=
- =?us-ascii?Q?dHQje9ms0zfhcdBuXdCJeRPZ5mJ+PdihjaMzdqbgcUyF60W/0+5XtvRLotA4?=
- =?us-ascii?Q?91VGon52vFYS1BmBSpPtW6rYZ/uS/KNrjWBmzFya1PCHUW3fcXK0KEFh3bws?=
- =?us-ascii?Q?vij5IE+W3yebMfcWrAg1rBMkktD2XY7kfH1MxleIv6rccQI9upr2HBnvD2WU?=
- =?us-ascii?Q?/QJPw41ccLx17yKr41V5Im6e7dtjXr+F/B6lotuqs9OpVL7yOcZTtxZHdOg1?=
- =?us-ascii?Q?hx+xU+n7jRKep4vD+7QqnBDnTz8ydWeKdG7nI3Y3lJ9Gm4H4PeYJdgDZI1KE?=
- =?us-ascii?Q?g601qrSMTBsGV5LfbXo8vArio9P0PowQaV1VBI1zHRVekjvC9nIh9oMv73s1?=
- =?us-ascii?Q?SpScOS1Q1ATryQLPr1gU9DrUg7rhuub0v22kZb0mDGkpziBFYdqyArEa2QJ3?=
- =?us-ascii?Q?FVBF9fc+ey8GYUtAdbrvItAB54nWN2udz4DVQl7Qu0CuvRieHMOts8B3Nrqs?=
- =?us-ascii?Q?rk9YCI7eL8lrC0oG0Lc6XYFWWb2yaukwKh75gGcD3wu2s98rmXKii4a1+wDL?=
- =?us-ascii?Q?MMhphtGif4zwotSTkyGFdxPLyPwFMB/dT5bFX1B6iWd6HpILSKpxmTHYEV6A?=
- =?us-ascii?Q?FgrmDxm+3C7sns2EWWtLcl/trqouQtM7Ho46JvYkgH5+xCcLq6F8VL6e0mW0?=
- =?us-ascii?Q?AkDzz7MQjVptVQXtMuJa1suWPm2wx54=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?83Djbyp5ep63sJh23zKYs/ieeMFAVxCfqbrVHhk3P9JXeMNh86anTesFesF5?=
+ =?us-ascii?Q?fXw+ngB2ZVMCDMUVbI/Y1REVW3TfXxBUqh2X1lXs9DShkw7tOBkM0BXFk53G?=
+ =?us-ascii?Q?6xPgyDskFR4LcECKelKbPw+jM+vR91zV4QJF6dYkEjV7M/lSC4D2XbhgiLzU?=
+ =?us-ascii?Q?wNEwVm2lkmaOqhTSTPq6mc8xJP8HGgqQ6126QpZBIDayc/nz0TZeSnOm4aYs?=
+ =?us-ascii?Q?hRGLjeXwN6X/bMOcY0Hwm0ycBSwnEKzGgG+W5BkBGlEPqtEr6oiSeX5PqczZ?=
+ =?us-ascii?Q?DEjcQbb9/+kTORNUkFu0+B6gZHUVcl/4c99PtWGpC666SZnYguJOzIHFCODr?=
+ =?us-ascii?Q?1L2pkG9S1ZXN+9ynMDM9o+fhdpk97tnslZv2+/7nbVihMWybxp00FMfebtnW?=
+ =?us-ascii?Q?Lkpq+0ElP3a4k1UX1JWr8gSqVrmUIcPhVhH0TzpXLZZGrgKMaIQgNUCPzGga?=
+ =?us-ascii?Q?jRqsCdHCMhh/taS9pNCRnRsLRAJcozlYtt3+gTdL4VZQX5z1rFiJZfndCMQT?=
+ =?us-ascii?Q?DCG656/Tf7uJ5HKodxQw4NYGKZ1EwZH6nEPy2m27xXrxp1Nw/MisM/xMdC+1?=
+ =?us-ascii?Q?RiSuMgz0C9hPoEFB71+BkA0R/8vgaY+nXV0CjpOkE+UJzppNut64deSRtykb?=
+ =?us-ascii?Q?jE/bFSIqjL3QDw6gD9GjKXZWAwxLMY8y+3XOfIAGrn2ElQwxIOkgkx54GoKp?=
+ =?us-ascii?Q?bnhaIv/eOVBJYPAin85wQPxJJbhT5dLRwk4kS+wSf3AT4n4pSzN9q+nLAJXu?=
+ =?us-ascii?Q?OufZ4CDjkqrwVwP1PuYi8jXOJJsuUlPGDSFXss9FvolfSRHV2yY6dRpS/zkC?=
+ =?us-ascii?Q?5YBPXiwgfb4Sn7Llc5PcA27aSGrOgm6Z+fNji6B2oT41TTZE34Zj8vN1VKlu?=
+ =?us-ascii?Q?sjXNv4kMNZEW86W/WJOU/nibXoF9I3ti3J/l3bax3OZueB7qOcf4eO3XgGrR?=
+ =?us-ascii?Q?S/MvK0kkq0HuscejOw/O661zDfu35zjbO+uGyJ3TBb/7P7fenjFAyO8o95AA?=
+ =?us-ascii?Q?mRtqW2Iak8qVndA/JRUSu/h7IJ/lv/n7otsBvgNY8Z5WO2FF/OKTbl0+uRTk?=
+ =?us-ascii?Q?7ATzfSIlTg4dIAG67Mf2u2P9tRIGq3ck2/BNPopgwE4BPkR4KwdzTV1Nhq3p?=
+ =?us-ascii?Q?/ib8sd3InOhxqz6oMjXMrjF77MTkxaSGmX9Uj0fSKUuwy+O/U43IfgLnXuo+?=
+ =?us-ascii?Q?rB7s4ECV6CF+PvHRA37l3pKiGc/5/E9jopn43A32+nzfM4cMcR52oNLVIBb3?=
+ =?us-ascii?Q?GXDX3j5nqtXwm19EXg4ZGLriJ8I3oqrtuxhPLBF32K6aa+WbkCM2GNDKB27v?=
+ =?us-ascii?Q?6gl5sXEXIOEQ6E+aLWlMtS/nMhS1m4uEIEimNI8gmyU1ECaOSHW1zotuf8ZC?=
+ =?us-ascii?Q?6oLAEvGrsQntENJC5m4yKIhE7JK7CA0yqhU4HJJ0XHKOn4u8LQfaj5m+XzKv?=
+ =?us-ascii?Q?W4QnVCsRrLv4j+iYLfGwANtHR+MWukSRBZpaSYvYbXgrD/ZWkg4va+jROoYK?=
+ =?us-ascii?Q?QLf5ghMOCQBj5f5Qr4MlM4egzyYen6Q13BNpSQnCFyFR25iB3OhFC2LQ3xtZ?=
+ =?us-ascii?Q?5UEOakRqX/CpvqOl/GgVR2woImf+O9ztc4voHePeNPQrtET/BPad2MrvkHTG?=
+ =?us-ascii?Q?xTyAFLWxO+c3t6xDbd2peUYWrvmpi+FwrOJwhBm3YTSvr7o8apxpttH7o/R0?=
+ =?us-ascii?Q?unWKtjp0HPoT3gbLuI0At6GNeXKItg7Z6ikXMwNaVd2vduoHCjMsDaW3CHYj?=
+ =?us-ascii?Q?cOnRZ2SAw1H1snQ1DB1S9Yr/IWi0Kyc=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 52a19ed3-3a8e-4663-5adf-08de91284ff5
+X-MS-Exchange-CrossTenant-Network-Message-Id: be4abe62-efa1-4ad0-1711-08de91285079
 X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2026 02:25:46.2008 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2026 02:25:46.9894 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: c76XSjQoVR2VhGUwTMvO2xMFdQglZVWw2PpNlgPvLM5ns2eGf6M9MIq1pvops5EsSAG08SsddBsdUuMHKZaA0Rh4ptGLfVHwIhnzntJoB/o=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB5421
+X-MS-Exchange-CrossTenant-UserPrincipalName: upz9YrQTBvmXGwhZ/EkORMUV2TyC2t3auppwHRFabOBfy1GqOmAQHIlWhkxJ+PMmd9ofccPtS632fY7/VJT6fKr0XNfEqa5+lJfDJa/p9eU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8PR03MB5044
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,272 +146,291 @@ X-Virus-Status: Clean
 
 From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 
-Combine all MMC and QSPI configs into single defconfig which is named
-as "socfpga_stratix10_defconfig". This will be the default defconfig to
-use.
+Migrate the CCU, firewall, and high privilege register configurations from
+hardcoded values in the source code to the device tree.
 
-This will support booting from all three flashes using ARM Trusted Firmware
-(ATF) as the secure runtime monitor.
+This helps to centralize hardware configuration, improves maintainability,
+and allows easier customization for different platforms.
 
 Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 ---
- configs/socfpga_stratix10_atf_defconfig | 90 ----------------------
- configs/socfpga_stratix10_defconfig     | 99 +++++++++++++++----------
- 2 files changed, 58 insertions(+), 131 deletions(-)
- delete mode 100644 configs/socfpga_stratix10_atf_defconfig
+ arch/arm/dts/socfpga_stratix10-u-boot.dtsi | 149 +++++++++++++++++++++
+ arch/arm/mach-socfpga/spl_s10.c            |  29 ++--
+ drivers/ddr/altera/sdram_s10.c             |  44 ------
+ 3 files changed, 165 insertions(+), 57 deletions(-)
 
-diff --git a/configs/socfpga_stratix10_atf_defconfig b/configs/socfpga_stratix10_atf_defconfig
-deleted file mode 100644
-index 206343885d9..00000000000
---- a/configs/socfpga_stratix10_atf_defconfig
-+++ /dev/null
-@@ -1,90 +0,0 @@
--CONFIG_ARM=y
--CONFIG_COUNTER_FREQUENCY=400000000
--CONFIG_ARCH_SOCFPGA=y
--CONFIG_TEXT_BASE=0x200000
--CONFIG_SYS_MALLOC_LEN=0x500000
--CONFIG_NR_DRAM_BANKS=2
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
--CONFIG_SF_DEFAULT_MODE=0x2003
--CONFIG_ENV_SIZE=0x1000
--CONFIG_ENV_OFFSET=0x200
--CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="socfpga_stratix10_socdk"
--CONFIG_DM_RESET=y
--CONFIG_SPL_STACK=0xffe3f000
--CONFIG_SPL_TEXT_BASE=0xFFE00000
--CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x3ff00000
--CONFIG_SPL_BSS_MAX_SIZE=0x100000
--CONFIG_SYS_BOOTM_LEN=0x2000000
--CONFIG_SYS_LOAD_ADDR=0x02000000
--CONFIG_TARGET_SOCFPGA_STRATIX10_SOCDK=y
--CONFIG_IDENT_STRING="socfpga_stratix10"
--CONFIG_SPL_FS_FAT=y
--CONFIG_REMAKE_ELF=y
--CONFIG_FIT=y
--CONFIG_SPL_FIT_SIGNATURE=y
--CONFIG_SPL_LOAD_FIT=y
--CONFIG_SPL_LOAD_FIT_ADDRESS=0x02000000
--CONFIG_BOOTDELAY=5
--CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="earlycon"
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="run fatscript; run mmcfitload; run mmcfitboot"
--CONFIG_SYS_PBSIZE=2085
--CONFIG_SPL_MAX_SIZE=0x40000
--# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
--CONFIG_SPL_HAVE_INIT_STACK=y
--CONFIG_SPL_SYS_MALLOC=y
--CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
--CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x3fa00000
--CONFIG_SPL_SYS_MALLOC_SIZE=0x500000
--CONFIG_SPL_SPI_LOAD=y
--CONFIG_SYS_SPI_U_BOOT_OFFS=0x02000000
--CONFIG_SPL_ATF=y
--CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
--CONFIG_SPL_TARGET="spl/u-boot-spl-dtb.hex"
--CONFIG_HUSH_PARSER=y
--CONFIG_SYS_PROMPT="SOCFPGA_STRATIX10 # "
--CONFIG_CMD_MEMTEST=y
--CONFIG_CMD_GPIO=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_SPI=y
--CONFIG_CMD_USB=y
--CONFIG_CMD_DHCP=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
--CONFIG_CMD_CACHE=y
--CONFIG_CMD_EXT4=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_FS_GENERIC=y
--CONFIG_ENV_IS_IN_MMC=y
--CONFIG_ENV_RELOC_GD_ENV_ADDR=y
--CONFIG_NET_RANDOM_ETHADDR=y
--CONFIG_SPL_DM_SEQ_ALIAS=y
--CONFIG_SPL_ALTERA_SDRAM=y
--CONFIG_DWAPB_GPIO=y
--CONFIG_DM_I2C=y
--CONFIG_SYS_I2C_DW=y
--CONFIG_SYS_MMC_MAX_BLK_COUNT=256
--CONFIG_MMC_DW=y
--CONFIG_SPI_FLASH_SPANSION=y
--CONFIG_SPI_FLASH_STMICRO=y
--CONFIG_PHY_MICREL=y
--CONFIG_PHY_MICREL_KSZ90X1=y
--CONFIG_ETH_DESIGNWARE=y
--CONFIG_MII=y
--CONFIG_SYS_NS16550_MEM32=y
--CONFIG_SPI=y
--CONFIG_CADENCE_QSPI=y
--CONFIG_DESIGNWARE_SPI=y
--CONFIG_USB=y
--CONFIG_USB_DWC2=y
--CONFIG_USB_STORAGE=y
--CONFIG_DESIGNWARE_WATCHDOG=y
--CONFIG_WDT=y
--# CONFIG_SPL_USE_TINY_PRINTF is not set
--CONFIG_PANIC_HANG=y
--CONFIG_SPL_CRC32=y
-diff --git a/configs/socfpga_stratix10_defconfig b/configs/socfpga_stratix10_defconfig
-index ef21dc92493..02a1875a72e 100644
---- a/configs/socfpga_stratix10_defconfig
-+++ b/configs/socfpga_stratix10_defconfig
-@@ -1,93 +1,110 @@
- CONFIG_ARM=y
- CONFIG_COUNTER_FREQUENCY=400000000
-+CONFIG_SPL_LDSCRIPT="arch/arm/mach-socfpga/u-boot-spl-soc64.lds"
- CONFIG_ARCH_SOCFPGA=y
--CONFIG_TEXT_BASE=0x1000
--CONFIG_SYS_MALLOC_LEN=0x500000
-+CONFIG_TEXT_BASE=0x200000
-+CONFIG_SYS_MALLOC_F_LEN=0x2000
- CONFIG_NR_DRAM_BANKS=2
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x101000
--CONFIG_SF_DEFAULT_MODE=0x2003
--CONFIG_ENV_SIZE=0x1000
--CONFIG_ENV_OFFSET=0x200
-+CONFIG_ENV_SIZE=0x2000
-+CONFIG_ENV_OFFSET=0x04100000
-+CONFIG_ENV_SECT_SIZE=0x20000
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0x04000000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="altera/socfpga_stratix10_socdk"
- CONFIG_OF_UPSTREAM=y
--CONFIG_DM_RESET=y
--CONFIG_SPL_STACK=0xffe3f000
- CONFIG_SPL_TEXT_BASE=0xFFE00000
--CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x3ff00000
--CONFIG_SPL_BSS_MAX_SIZE=0x100000
--CONFIG_SYS_BOOTM_LEN=0x2000000
--CONFIG_SYS_LOAD_ADDR=0x02000000
- CONFIG_TARGET_SOCFPGA_STRATIX10_SOCDK=y
- CONFIG_IDENT_STRING="socfpga_stratix10"
- CONFIG_SPL_FS_FAT=y
--# CONFIG_PSCI_RESET is not set
--CONFIG_SYS_MEMTEST_START=0x00000000
--CONFIG_SYS_MEMTEST_END=0x3fe00000
--CONFIG_OPTIMIZE_INLINING=y
--CONFIG_SPL_OPTIMIZE_INLINING=y
--CONFIG_REMAKE_ELF=y
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_FIT=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x02000000
-+# CONFIG_USE_SPL_FIT_GENERATOR is not set
-+CONFIG_QSPI_BOOT=y
- CONFIG_BOOTDELAY=5
- CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="earlycon"
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="run fatscript; run mmcload; run linux_qspi_enable; run mmcboot"
--CONFIG_SYS_PBSIZE=2085
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
- CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_START_ADDR=0x3ff00000
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
- CONFIG_SPL_HAVE_INIT_STACK=y
-+CONFIG_SPL_STACK=0xffe3f000
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x3fa00000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x500000
-+CONFIG_SPL_BSS_MAX_SIZE=0x100000
-+CONFIG_BOOTARGS="earlycon panic=-1"
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_CRC32=y
-+CONFIG_SPL_MTD=y
-+CONFIG_SPL_MTD_SUPPORT=y
- CONFIG_SPL_SPI_LOAD=y
--CONFIG_SYS_SPI_U_BOOT_OFFS=0x3C00000
--CONFIG_SPL_TARGET="spl/u-boot-spl-dtb.hex"
--CONFIG_HUSH_PARSER=y
-+CONFIG_SPL_ATF=y
-+CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
- CONFIG_SYS_PROMPT="SOCFPGA_STRATIX10 # "
-+CONFIG_CMD_NVEDIT_SELECT=y
- CONFIG_CMD_MEMTEST=y
-+# CONFIG_CMD_FLASH is not set
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
-+CONFIG_CMD_MTD=y
- CONFIG_CMD_SPI=y
- CONFIG_CMD_USB=y
--CONFIG_CMD_WDT=y
--CONFIG_CMD_DHCP=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
- CONFIG_CMD_CACHE=y
--CONFIG_CMD_EXT4=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_FS_GENERIC=y
--CONFIG_ENV_IS_IN_MMC=y
--CONFIG_ENV_RELOC_GD_ENV_ADDR=y
--CONFIG_USE_BOOTFILE=y
--CONFIG_BOOTFILE="Image"
-+CONFIG_SPL_SPI_FLASH_MTD=y
-+CONFIG_SPI_FLASH_MTD=y
-+# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
-+CONFIG_CMD_UBI=y
-+CONFIG_CMD_UBIFS=y
-+CONFIG_MTD_UBI=y
-+CONFIG_MTD_UBI_WL_THRESHOLD=4096
-+CONFIG_MTD_UBI_BEB_LIMIT=20
-+# CONFIG_ISO_PARTITION is not set
-+# CONFIG_EFI_PARTITION is not set
-+CONFIG_OF_LIST=""
-+CONFIG_ENV_IS_IN_FAT=y
-+CONFIG_ENV_IS_IN_UBI=y
-+CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
-+CONFIG_ENV_UBI_PART="root"
-+CONFIG_ENV_UBI_VOLUME="env"
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_SPL_ALTERA_SDRAM=y
-+CONFIG_FPGA_INTEL_PR=y
- CONFIG_DWAPB_GPIO=y
- CONFIG_DM_I2C=y
- CONFIG_SYS_I2C_DW=y
--CONFIG_SYS_MMC_MAX_BLK_COUNT=256
-+CONFIG_MISC=y
- CONFIG_MMC_DW=y
-+CONFIG_SYS_MMC_MAX_BLK_COUNT=256
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_SF_DEFAULT_MODE=0x2003
- CONFIG_SPI_FLASH_SPANSION=y
- CONFIG_SPI_FLASH_STMICRO=y
- CONFIG_PHY_MICREL=y
- CONFIG_PHY_MICREL_KSZ90X1=y
-+CONFIG_DM_ETH=y
- CONFIG_ETH_DESIGNWARE=y
- CONFIG_MII=y
-+CONFIG_DM_RESET=y
- CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SPI=y
- CONFIG_CADENCE_QSPI=y
- CONFIG_DESIGNWARE_SPI=y
- CONFIG_USB=y
-+CONFIG_DM_USB=y
- CONFIG_USB_DWC2=y
--CONFIG_USB_STORAGE=y
- CONFIG_DESIGNWARE_WATCHDOG=y
- CONFIG_WDT=y
- # CONFIG_SPL_USE_TINY_PRINTF is not set
- CONFIG_PANIC_HANG=y
--CONFIG_SPL_CRC32=y
-+# CONFIG_TOOLS_MKEFICAPSULE is not set
+diff --git a/arch/arm/dts/socfpga_stratix10-u-boot.dtsi b/arch/arm/dts/socfpga_stratix10-u-boot.dtsi
+index a3b4c0564f9..ad4b383f704 100644
+--- a/arch/arm/dts/socfpga_stratix10-u-boot.dtsi
++++ b/arch/arm/dts/socfpga_stratix10-u-boot.dtsi
+@@ -6,6 +6,7 @@
+  * Copyright (C) 2026 Altera Corporation <www.altera.com>
+  */
+ 
++#include "socfpga_soc64_u-boot.dtsi"
+ #include "socfpga_soc64_fit-u-boot.dtsi"
+ 
+ /{
+@@ -134,6 +135,154 @@
+ 	bootph-all;
+ };
+ 
++&socfpga_l3interconnect_firewall {
++	i_ccu_noc_registers@f7000000 {
++		reg = <0xf7000000 0x00049e60>;
++		intel,offset-settings =
++			/* Enable access to DDR reg from CPU */
++			<0x0004400 0xF8000000 0xffffffff>,
++
++			/* Enable access to DDR region from CPU */
++			<0x00045c0 0x00000000 0xffffffdf>,
++			<0x00045e0 0x00000000 0xffffffdf>,
++			<0x0004600 0x00000000 0xffffffdf>,
++			<0x0004620 0x00000000 0xffffffdf>,
++			<0x0004640 0x00000000 0xffffffdf>,
++			<0x0004660 0x00000000 0xffffffdf>,
++
++			/* Disable ocram security at CCU for non secure access */
++			<0x0004688 0xfffc0000 0xffffffcf>,
++			<0x0018628 0xfffc0000 0xffffffcf>,
++
++			/* Enable access to DDR region from IO master */
++			<0x00018560 0x00000000 0xffffffdf>,
++			<0x00018580 0x00000000 0xffffffdf>,
++			<0x000185a0 0x00000000 0xffffffdf>,
++			<0x000185c0 0x00000000 0xffffffdf>,
++			<0x000185e0 0x00000000 0xffffffdf>,
++			<0x00018600 0x00000000 0xffffffdf>,
++
++			/* Enable access to DDR region from TCU */
++			<0x0002c520 0x00000000 0xffffffdf>,
++			<0x0002c540 0x00000000 0xffffffdf>,
++			<0x0002c560 0x00000000 0xffffffdf>,
++			<0x0002c580 0x00000000 0xffffffdf>,
++			<0x0002c5a0 0x00000000 0xffffffdf>,
++			<0x0002c5c0 0x00000000 0xffffffdf>,
++
++			/* Enable access to DDR region from FPGA */
++			<0x000105a0 0x00000000 0xffffffdf>,
++			<0x000105c0 0x00000000 0xffffffdf>,
++			<0x000105e0 0x00000000 0xffffffdf>,
++			<0x00010600 0x00000000 0xffffffdf>,
++			<0x00010620 0x00000000 0xffffffdf>,
++			<0x00010640 0x00000000 0xffffffdf>;
++		bootph-all;
++	};
++
++	/*
++	 * Both firewall and QOS regs accessed by CPU in MPFE has
++	 * dependency on CCU configuration above.
++	 *
++	 * Below are all fpga2sdram firewall settings with default
++	 * reset value for the sake of easy reference by users.
++	 * Users may choose to remove any of these register configurations
++	 * that they do not require in their specific implementation.
++	 */
++	soc_noc_fw_ddr_fpga2sdram_inst_0_ddr_scr@f8020200 {
++		reg = <0xf8020200 0x00000050>;
++		intel,offset-settings =
++			<0x0000000 0x00000000 0x0000000f>,
++			<0x0000004 0x00000000 0x0000000f>,
++			<0x0000008 0x00000000 0x0000000f>,
++			<0x0000010 0x00000000 0xffff0000>,
++			<0x0000014 0x00000000 0x0000001f>,
++			<0x0000018 0x00000000 0xffff0000>,
++			<0x000001c 0x00000000 0x0000001f>,
++			<0x0000020 0x00000000 0xffff0000>,
++			<0x0000024 0x00000000 0x0000001f>,
++			<0x0000028 0x00000000 0xffff0000>,
++			<0x000002c 0x00000000 0x0000001f>,
++			<0x0000030 0x00000000 0xffff0000>,
++			<0x0000034 0x00000000 0x0000001f>,
++			<0x0000038 0x00000000 0xffff0000>,
++			<0x000003c 0x00000000 0x0000001f>,
++			<0x0000040 0x00000000 0xffff0000>,
++			<0x0000044 0x00000000 0x0000001f>,
++			<0x0000048 0x00000000 0xffff0000>,
++			<0x000004c 0x00000000 0x0000001f>;
++		bootph-all;
++	};
++
++	soc_noc_fw_ddr_fpga2sdram_inst_1_ddr_scr@f8020300 {
++		reg = <0xf8020300 0x00000050>;
++		intel,offset-settings =
++			<0x0000000 0x00000000 0x0000000f>,
++			<0x0000004 0x00000000 0x0000000f>,
++			<0x0000008 0x00000000 0x0000000f>,
++			<0x0000010 0x00000000 0xffff0000>,
++			<0x0000014 0x00000000 0x0000001f>,
++			<0x0000018 0x00000000 0xffff0000>,
++			<0x000001c 0x00000000 0x0000001f>,
++			<0x0000020 0x00000000 0xffff0000>,
++			<0x0000024 0x00000000 0x0000001f>,
++			<0x0000028 0x00000000 0xffff0000>,
++			<0x000002c 0x00000000 0x0000001f>,
++			<0x0000030 0x00000000 0xffff0000>,
++			<0x0000034 0x00000000 0x0000001f>,
++			<0x0000038 0x00000000 0xffff0000>,
++			<0x000003c 0x00000000 0x0000001f>,
++			<0x0000040 0x00000000 0xffff0000>,
++			<0x0000044 0x00000000 0x0000001f>,
++			<0x0000048 0x00000000 0xffff0000>,
++			<0x000004c 0x00000000 0x0000001f>;
++		bootph-all;
++	};
++
++	soc_noc_fw_ddr_fpga2sdram_inst_2_ddr_scr@f8020400 {
++		reg = <0xf8020400 0x00000050>;
++		intel,offset-settings =
++			<0x0000000 0x00000000 0x0000000f>,
++			<0x0000004 0x00000000 0x0000000f>,
++			<0x0000008 0x00000000 0x0000000f>,
++			<0x0000010 0x00000000 0xffff0000>,
++			<0x0000014 0x00000000 0x0000001f>,
++			<0x0000018 0x00000000 0xffff0000>,
++			<0x000001c 0x00000000 0x0000001f>,
++			<0x0000020 0x00000000 0xffff0000>,
++			<0x0000024 0x00000000 0x0000001f>,
++			<0x0000028 0x00000000 0xffff0000>,
++			<0x000002c 0x00000000 0x0000001f>,
++			<0x0000030 0x00000000 0xffff0000>,
++			<0x0000034 0x00000000 0x0000001f>,
++			<0x0000038 0x00000000 0xffff0000>,
++			<0x000003c 0x00000000 0x0000001f>,
++			<0x0000040 0x00000000 0xffff0000>,
++			<0x0000044 0x00000000 0x0000001f>,
++			<0x0000048 0x00000000 0xffff0000>,
++			<0x000004c 0x00000000 0x0000001f>;
++		bootph-all;
++	};
++
++	/*
++	 * Example of ccu_mem0_I_main QOS settings with
++	 * default reset value for the sake of easy reference
++	 * by users. Users may choose to remove any of these register
++	 * configurations that they do not require in their specific
++	 * implementation.
++	 */
++	soc_ddr_scheduler_inst_0_ccu_mem0_I_main_QosGenerator@f8022080 {
++		reg = <0xf8022080 0x0000001c>;
++		intel,offset-settings =
++			<0x0000008 0x00000000 0x00000303>,
++			<0x000000c 0x00000001 0x00000003>,
++			<0x0000010 0x00000BFE 0x00001fff>,
++			<0x0000014 0x00000008 0x000003ff>,
++			<0x0000018 0x00000000 0x00000007>;
++		bootph-all;
++	};
++};
++
+ &uart0 {
+ 	bootph-all;
+ 	clock-frequency = <100000000>;
+diff --git a/arch/arm/mach-socfpga/spl_s10.c b/arch/arm/mach-socfpga/spl_s10.c
+index a0d3c96d456..8ab80740c6e 100644
+--- a/arch/arm/mach-socfpga/spl_s10.c
++++ b/arch/arm/mach-socfpga/spl_s10.c
+@@ -25,6 +25,7 @@ void board_init_f(ulong dummy)
+ {
+ 	const struct cm_config *cm_default_cfg = cm_get_default_config();
+ 	int ret;
++	struct udevice *dev;
+ 
+ 	ret = spl_early_init();
+ 	if (ret)
+@@ -67,22 +68,24 @@ void board_init_f(ulong dummy)
+ 	print_reset_info();
+ 	cm_print_clock_quick_summary();
+ 
+-	firewall_setup();
++	ret = uclass_get_device_by_name(UCLASS_NOP, "socfpga-system-mgr-firewall", &dev);
++	if (ret) {
++		printf("System manager firewall configuration failed: %d\n", ret);
++		hang();
++	}
+ 
+-	/* disable ocram security at CCU for non secure access */
+-	clrbits_le32(CCU_REG_ADDR(CCU_CPU0_MPRT_ADMASK_MEM_RAM0),
+-		     CCU_ADMASK_P_MASK | CCU_ADMASK_NS_MASK);
+-	clrbits_le32(CCU_REG_ADDR(CCU_IOM_MPRT_ADMASK_MEM_RAM0),
+-		     CCU_ADMASK_P_MASK | CCU_ADMASK_NS_MASK);
++	ret = uclass_get_device_by_name(UCLASS_NOP, "socfpga-l3interconnect-firewall", &dev);
++	if (ret) {
++		printf("L3 interconnect firewall configuration failed: %d\n", ret);
++		hang();
++	}
+ 
+ #if CONFIG_IS_ENABLED(ALTERA_SDRAM)
+-		struct udevice *dev;
+-
+-		ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+-		if (ret) {
+-			debug("DRAM init failed: %d\n", ret);
+-			hang();
+-		}
++	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
++	if (ret) {
++		debug("DRAM init failed: %d\n", ret);
++		hang();
++	}
+ #endif
+ 
+ #ifdef CONFIG_CADENCE_QSPI
+diff --git a/drivers/ddr/altera/sdram_s10.c b/drivers/ddr/altera/sdram_s10.c
+index 4ac4c79e0ac..1497a8e4aab 100644
+--- a/drivers/ddr/altera/sdram_s10.c
++++ b/drivers/ddr/altera/sdram_s10.c
+@@ -78,50 +78,6 @@ int sdram_mmr_init_full(struct udevice *dev)
+ 	phys_size_t hw_size;
+ 	struct bd_info bd = {0};
+ 
+-	/* Enable access to DDR from CPU master */
+-	clrbits_le32(CCU_REG_ADDR(CCU_CPU0_MPRT_ADBASE_DDRREG),
+-		     CCU_ADBASE_DI_MASK);
+-	clrbits_le32(CCU_REG_ADDR(CCU_CPU0_MPRT_ADBASE_MEMSPACE0),
+-		     CCU_ADBASE_DI_MASK);
+-	clrbits_le32(CCU_REG_ADDR(CCU_CPU0_MPRT_ADBASE_MEMSPACE1A),
+-		     CCU_ADBASE_DI_MASK);
+-	clrbits_le32(CCU_REG_ADDR(CCU_CPU0_MPRT_ADBASE_MEMSPACE1B),
+-		     CCU_ADBASE_DI_MASK);
+-	clrbits_le32(CCU_REG_ADDR(CCU_CPU0_MPRT_ADBASE_MEMSPACE1C),
+-		     CCU_ADBASE_DI_MASK);
+-	clrbits_le32(CCU_REG_ADDR(CCU_CPU0_MPRT_ADBASE_MEMSPACE1D),
+-		     CCU_ADBASE_DI_MASK);
+-	clrbits_le32(CCU_REG_ADDR(CCU_CPU0_MPRT_ADBASE_MEMSPACE1E),
+-		     CCU_ADBASE_DI_MASK);
+-
+-	/* Enable access to DDR from IO master */
+-	clrbits_le32(CCU_REG_ADDR(CCU_IOM_MPRT_ADBASE_MEMSPACE0),
+-		     CCU_ADBASE_DI_MASK);
+-	clrbits_le32(CCU_REG_ADDR(CCU_IOM_MPRT_ADBASE_MEMSPACE1A),
+-		     CCU_ADBASE_DI_MASK);
+-	clrbits_le32(CCU_REG_ADDR(CCU_IOM_MPRT_ADBASE_MEMSPACE1B),
+-		     CCU_ADBASE_DI_MASK);
+-	clrbits_le32(CCU_REG_ADDR(CCU_IOM_MPRT_ADBASE_MEMSPACE1C),
+-		     CCU_ADBASE_DI_MASK);
+-	clrbits_le32(CCU_REG_ADDR(CCU_IOM_MPRT_ADBASE_MEMSPACE1D),
+-		     CCU_ADBASE_DI_MASK);
+-	clrbits_le32(CCU_REG_ADDR(CCU_IOM_MPRT_ADBASE_MEMSPACE1E),
+-		     CCU_ADBASE_DI_MASK);
+-
+-	/* Enable access to DDR from TCU */
+-	clrbits_le32(CCU_REG_ADDR(CCU_TCU_MPRT_ADBASE_MEMSPACE0),
+-		     CCU_ADBASE_DI_MASK);
+-	clrbits_le32(CCU_REG_ADDR(CCU_TCU_MPRT_ADBASE_MEMSPACE1A),
+-		     CCU_ADBASE_DI_MASK);
+-	clrbits_le32(CCU_REG_ADDR(CCU_TCU_MPRT_ADBASE_MEMSPACE1B),
+-		     CCU_ADBASE_DI_MASK);
+-	clrbits_le32(CCU_REG_ADDR(CCU_TCU_MPRT_ADBASE_MEMSPACE1C),
+-		     CCU_ADBASE_DI_MASK);
+-	clrbits_le32(CCU_REG_ADDR(CCU_TCU_MPRT_ADBASE_MEMSPACE1D),
+-		     CCU_ADBASE_DI_MASK);
+-	clrbits_le32(CCU_REG_ADDR(CCU_TCU_MPRT_ADBASE_MEMSPACE1E),
+-		     CCU_ADBASE_DI_MASK);
+-
+ 	/* this enables nonsecure access to DDR */
+ 	/* mpuregion0addr_limit */
+ 	FW_MPU_DDR_SCR_WRITEL(0xFFFF0000, FW_MPU_DDR_SCR_MPUREGION0ADDR_LIMIT);
 -- 
 2.43.7
 
