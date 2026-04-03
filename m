@@ -4,111 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63A80E7E36C
-	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 10:38:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5013AE7E36D
+	for <u-boot@archiver.kernel.org>; Fri,  3 Apr 2026 11:01:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9EAB78382A;
-	Fri,  3 Apr 2026 12:38:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 987A083642;
+	Fri,  3 Apr 2026 13:01:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="b/veZnUq";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="l3NOjerA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2BF583CF5; Fri,  3 Apr 2026 12:38:55 +0200 (CEST)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6C5058382A; Fri,  3 Apr 2026 13:01:49 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35EC38341A
- for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 12:38:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 75EEF8341A
+ for <u-boot@lists.denx.de>; Fri,  3 Apr 2026 13:01:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-7982c3b7dfcso16764657b3.0
- for <u-boot@lists.denx.de>; Fri, 03 Apr 2026 03:38:52 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775212731; cv=none;
- d=google.com; s=arc-20240605;
- b=cDqYsogj/dZ3GrHCh72fpxwLoMckK2dSWhmVE4u7tji7MuRsVomwfEXMgxUvbijvhv
- Jm5ZFE7JQPPtNhgCJoIGcWJrf4rCcvsCZiQS+7Resft5UamiAZna28Yk+sra48ReybJB
- n1kvlaF8DoeVw+1Lc3KfY3rYWtluEdeIFXFRKhOSuVKFy+siWs4EyRjQ8Vk4RdkZLirr
- rJiKKZqcXmLynLTr8HB6SWRE7lJOPgzN9kZOlAvDLX5POlFpAit7JSSBYmkeHJyCGi2m
- wZY+kBl8BTLfq0eBArtkK41KhRekfa/1cZ4P+lQtRREagtbIgeyP3ulM28VmGabeT/LZ
- KXow==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=LFXFo2j3wCWNcOfaxqjH7xcOKj11n69xpXFWOWFynR0=;
- fh=IWuYNzG2k4tuL9tbJotFS213vGbD+VOv8VShiovKyNA=;
- b=NwHqWGgGmujb7dzmbNeI4i1mBH8anoO+L3Iq62CCuxxNYEX9YKxpMhU6jicdfvLxkZ
- qlm7Md7jxXJ6XoKEspsRPIGYOJBlreJwT2CtxoPG8yBRe+i6TYbyfeUcG0v552MOHGQE
- v2v7+OhcokLCkwUWwHcnzJZwzJgU75OZUjakg74Z/qzAKLa5rnkAXY8t6nn3zs5h1sTI
- 0szkbZ/Y2uLjRupEDZlJhMoClkx+Us/vF4tXkbo0F9Yqb4vVZirQoOOnC8ekChflOyJL
- GjuzfJuuhy2y8818Mz+Uf+8qhxu9AhYwRBDpYOKy+SeVEZMroX46TRfOZ7J9IyGcl89t
- Zc2A==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1775212731; x=1775817531; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LFXFo2j3wCWNcOfaxqjH7xcOKj11n69xpXFWOWFynR0=;
- b=b/veZnUq/CK7nmS385FacEBq3W3VqjU6yNooKdYeJJyKgQmPitLFG2Jz+/SeEJvuv9
- EGk9d5RRJCm+kcq71T4aNgtjrqkTT3rjgYySdcmxrKH9YbJdP9u+qfth/1VSkpmEoMxw
- iOxE8q6NQq7UuO73Fohdxafl7onjpCVPKxZzfTuZmBGQqTwQ4r/rXy5AQA0v0hkoTl/X
- NeccUxTG8JlgAJRY6j6iV14wPF/jpSOKBIzrimm2IF27GHEHjSe9ZZ9egr5aZdYIMzPC
- ekI0+J43+5z9ed1sMN/dDrgLbTacgFgKmXUWLDPdeQzRj+/LIh4Vi1iydrh6sy93ve1V
- /pSw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775212731; x=1775817531;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=LFXFo2j3wCWNcOfaxqjH7xcOKj11n69xpXFWOWFynR0=;
- b=LaxwzqERXFh6d5NCpAMt0tG5xj3lclhdMi2sewYe/ixtj2pTzStv79zT1RDPXwkTn5
- ABseo00OGjcr1KcfCne0TVGtKyT8ZiFp9wB79RH4RD1jEmvAzFjV5i7C8D7tTiHdIKt/
- aLYv6U3EU1BKeGeac28h9/q0mE6dBzYEeg2ynak/0UYhs+/U1BPWZp93aShJe/4ogIru
- kfWZgeAX9mcC6LEe6hzvLd/N4M19zFKhtiTYHtWf3Cyd6/60WH0VrzHWmlETdvqZKFme
- pu/cvWTKCS4R60FXRxfvj9KcYPUs5/z/Vxep8v6JtiaopSlm+2CWUJ2OB0lUsflWLQec
- FqjQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVgKLB/fQxlMaIpAmOXOGmlFOAus5+AD5oOK0prVHJLknQjNTNaLtE3AvshPq7RRun18gQddSY=@lists.denx.de
-X-Gm-Message-State: AOJu0YyxifXQa7zhLk7Qs6LhuDQlY6PsvNXsy1DjXPyY9jpLruyJtbOG
- ax1Mpiqt8NW+kiIWkltHfJRgM3hx1cAXgJBvE+Y9uMfzdnsJyU8kEUfwA1ukHpqQ6QjE2pmksLT
- vlGvjLpG4k+JwJ0sBAT2HzgDyadY8BuGlna1ygxyosSppZWUPdb65
-X-Gm-Gg: AeBDievT1R3bQkFaKxH3zsNgPMyvMosdtQmL/8m4a8JMG37sqc1sVpgv8+C2olraVkW
- G88MNPgbUqKUtk04urB92L0kvTncQCgcNxTTUdgnP01iwVElkyI3/D1kBB41Nf6HrA7IObr0zrN
- DRhr3ANILSWOJy/Yxg+j6KJ/iNX9sqASqbSMfiCTthxEe5u5IfObtO+LmadxgST0WOuDHvSXhSA
- ITVRrBpoWvaFUIF5RqKOZAeTuJ1t26JDQuGBjGfsV49256u+pd/as+cO3m7Qojvxq5rS+IFwz6p
- 05N8Ol9FPY9x1aO64F8oBcp4r0he3LP8yrPR8h9DjxO8AEAr8PCv7VbnOmr3LunjPaK0MQehppi
- m0DfHa0dGCH2H4laa4BQuztYRThjq0zA1G1gX9/uCda5RZtCR7SdqY64HWIkbD36xYdwI5vs+gA
- QEJEg9z6bj5TKk2agb/MVvh221s8L9eVKfsfqQ//XTriLdFU3zpAWUEPGdCEcHjO/9fm34bGCua
- lstvR6w/W2wndwF8m1Ud8EkFc1iAnWbCxKVp8+HPiozzeMHRFsoGzt08rRLxXOmnHI8J+nTvrkG
- Tly5qAOLsCfjBLOGIdoAozPtKvCDq/a6KEPE1RLqC8Bg
-X-Received: by 2002:a05:690c:dd6:b0:79b:cf31:9767 with SMTP id
- 00721157ae682-7a4d2ff0c6bmr25760397b3.3.1775212730856; Fri, 03 Apr 2026
- 03:38:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=K77LIaiC+tCEoR/5ZTCMHKvKm+V2czbl17+ScUpPEYjci1ehxOR5DTedGiJwgn8XWT/udwG99GNKxVqRNn8ZUuu3IjAtlQM270NiUEy9e/d9+RiNKpKHZFGaHzzrs7v6CgkcVDvqP8apVBWv3EZxtxyAk4nv/M0JSjeZt9TD0US++PrI07LVWr6onAtm33761PiIr58fRtpZda8J8pn0/s9lOA2L0jKHqQEbTzrN0l3bLz+19WvWpgoGFTk6rws4+qwfzFs8Y6X1qhJyVny8tKegw9P+v6h5Qat4NQ4aMEMi1/zNVBMu2jlHRrOunCPzyvuWz+Y3A7qmurMrVHMIiA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Su8X8EZOTKuxhuEAmxLsJkd/akO3maxVMEDuz76vpe0=;
+ b=jfbk0t7QH25/Wqvib9CF9HVLquvEv+IZuhI30QszlcsgDYABe5gX6meVr50ylsm/zG/14eDETMcpZuW/hNWg72L6dSjciASs19bGsSMha2IKfwJY5nXQ/nnv8p2fF0hA4Z/CU0JyDqISzLDFP1+m7bLK19zNrxW2xMWP/aqybIkfMjjqJ7tXqWgOnwiRnKUloNtPumH7F3NbRHbq8OpGmBNtRYFInUCCG8TviNveXteLLhuDhNW7khN3LCWEGutpIsMTPYkTog8odjnzdDXAchGjvAnc/AJrW9C+a9C8SFy55zSJUxddOe7tiNrr5Iu8FX39frM43K8HzadYffLo9g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Su8X8EZOTKuxhuEAmxLsJkd/akO3maxVMEDuz76vpe0=;
+ b=l3NOjerAvXycP4qbXmlMxXqjy2uajNC84D66RAFxqCbQUeSkRNrubs8d8VQ/e45isg9jE+TcAjkGb8eLgzPsUjB2tTn3injDKhKQLrBt2djDstdugKD14y0mzpl6r3HLKFvsY4BRLCR20iT70Fsp5ZyGclDSZjjzHiNr9ECO/vrw5dX6FI3CYvx6cIqPlHf2NPFIkSdIZaaK1yv709a70bv5of4jQMAyPPZzq3TqMBhoSODMM5LYHCm33hxVL0H+WpE77E1epkhAV6S0iNabrdOZosvtXDCxFiCw6VsPaQ0Rn/mm2c5WTjUD93kgsQ0kBYnY/CRwEK9vZO0UiC7ECg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
+ by AS8PR04MB7766.eurprd04.prod.outlook.com (2603:10a6:20b:2aa::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.28; Fri, 3 Apr
+ 2026 11:01:44 +0000
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::cf3:c5b0:7a0c:d11b]) by PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::cf3:c5b0:7a0c:d11b%5]) with mapi id 15.20.9769.016; Fri, 3 Apr 2026
+ 11:01:44 +0000
+From: alice.guo@oss.nxp.com
+Subject: [PATCH 0/3] Enable ENETC on i.MX952 EVK
+Date: Fri, 03 Apr 2026 17:41:25 +0800
+Message-Id: <20260403-enetc-v1-0-e42ae28ae3fe@nxp.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAEWLz2kC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDEwNj3dS81JJk3SSjFAuDNBOjpEQjYyWg2oKi1LTMCrA50UplhkqxtbU
+ ASfbfFlsAAAA=
+To: Marek Vasut <marex@nabladev.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Ye Li <ye.li@nxp.com>, u-boot@lists.denx.de, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Jerome Forissier <jerome.forissier@arm.com>, 
+ Tom Rini <trini@konsulko.com>, 
+ Thomas Schaefer <thomas.schaefer@kontron.com>, 
+ Michael Walle <mwalle@kernel.org>, Clark Wang <xiaoning.wang@nxp.com>, 
+ Christian Marangi <ansuelsmth@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Robert Marko <robert.marko@sartura.hr>, Yao Zi <me@ziyao.cc>, 
+ Heiko Thiery <heiko.thiery@gmail.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>, 
+ Jacky Bai <ping.bai@nxp.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ Alice Guo <alice.guo@nxp.com>
+X-Mailer: b4 0.13.0
+X-ClientProxiedBy: SG2PR03CA0093.apcprd03.prod.outlook.com
+ (2603:1096:4:7c::21) To PAXPR04MB9644.eurprd04.prod.outlook.com
+ (2603:10a6:102:242::11)
 MIME-Version: 1.0
-References: <20260331191853.44549-1-gary@garyguo.net>
- <4C76330D-3EE4-4505-AB3B-9E89A3A4B18C@gmx.de>
-In-Reply-To: <4C76330D-3EE4-4505-AB3B-9E89A3A4B18C@gmx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 3 Apr 2026 13:38:13 +0300
-X-Gm-Features: AQROBzBUhgeuV2TADVhZewSzEQpnfZInwQhVK_Y29VHDGyo1dnQrZWCxBMrLr9I
-Message-ID: <CAC_iWjKeYzBNnoAS9N1T923w7SHgryeQu4kYyxa6EB843Qd1OQ@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: support EFI_OS_INDICATIONS_BOOT_TO_FW_UI
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Gary Guo <gary@garyguo.net>, Tom Rini <trini@konsulko.com>, 
- David Zang <davidzangcs@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Javier Tia <javier.tia@linaro.org>, Martyn Welch <martyn.welch@collabora.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|AS8PR04MB7766:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0575125d-8ef6-451c-0d24-08de9170645f
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|19092799006|7416014|376014|52116014|38350700014|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: Z9nowdpDliDgd/dbSnyXfZYBZTQFtAgmH9L2pygN2w96WAOHouwKBry1Q5NlSUMinXOBl/oTqY5T76ZBrlIEVbMvJh9tfWiLaZgUN/FZ/+dOzvvIbvGu7RKEUO+OY8rvk9f44NXct9BE78IBAFxbbwtoZkPmfOnjDLBBkwABPvCipszcmZhIBwNfXvYHgZpND2qqJCRxNmpIF+FJVA+0Xj5KxhVjQwwTFyqwvc8KjI0k9XksgLVMyDiFPXhtGC1c1r3fDGOxUybtNIZxJDe3Me3fzYiCdH9OXVkD+nQYlomI5RHq2djF3hf5wLKFw4I/5EhaekV3nSNIJfpuF7dKzJIJHjXxn1jnaTdABS3HCuBceq00aBurcMKlx7UCSCmQjq62hbrVwA8IWnxDMpO0G05r7TjI7ZY04xKfbTRMRRJ7gFQBwv/SYjHd4fvqdwjhEP9HfxaGTOp/KDoWnL3hydNevu+jF937fnhju5m+87IpNMVapRsIeYACDTEmCymbgUHcTAwAXMuIzmqBNKW4uXfTIf+o9otZGQbKNVZWo+63KD2YILCAHSeSW/Q8P1f5GYlkdgF7YirhOi1e3AKH6uaeCLlRWiGg9kBYgMTubi35pMIpGWcK9CKS6mUH9+MbFaQ+5sQZ95own1gcGSZXZAcFOnTHPM/AxFddmFZeler8pSGIYJKxY7VEe4nM0eWXpW4vEY6PS+GfyWTsOFXsv6ibB48OWL6qf3VJdmFhl1VQ8A0K+fWOCrNabES80lK4NRVgCZAgdlI7yBKHPVNUoal4hl8GP4WZYw+y14kx3Is=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(19092799006)(7416014)(376014)(52116014)(38350700014)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?THRZWXhJK08yaXJBNUVXNW1SSmxqS1JCVkRidUJnbTdvaFBZdnVkbTlzaWQz?=
+ =?utf-8?B?d3U4UnFFNStPQW9PTDZuaUdkeXBMVG5vNy9MSGt4cFdmb1lrem9TeFVUM2xI?=
+ =?utf-8?B?VUdmdTlnNytwbmlzeHh2ZktLRVlWdXErNWxzN1plRmNpbStUaE4wTW5GSFdi?=
+ =?utf-8?B?eitKSXd1cFV0eko0UXdqMWlVNXZLZzdUR3hSQ3NKR3A4cmdGV052WHRLTFFj?=
+ =?utf-8?B?YVFSK1haR1lMUFY1ZHhFK0lCdC9MZHFIbFl5bUhZSFdBdTFTOGt5UFFPZHM0?=
+ =?utf-8?B?U1ROUjJMNGdlK3FxT0QwcGtpZDRCOE9Pc1Roc1ZQNXZtdUEvZ1NpMjFQOGhj?=
+ =?utf-8?B?cE1WQmViYU1sQW5aY2g2RHh6QjJRVXR6OGVIbjEvYy9uSThqWFl0dFpXYXVz?=
+ =?utf-8?B?cWl3L2pkTnBCck5hTmRudUh5QjNWekN6QzU4QXpnL2tVbnlEc29KZGtkdmdv?=
+ =?utf-8?B?Y2c4UE1jdjNOYm5VaUQ3eTJZeTRBZVlWOUNOZnFhZzV4SmN4TEx3REkrNnls?=
+ =?utf-8?B?Q2RhejJzcTc2RWtRVnVIOW5Jd2c5TzZRUEZYZ2tBNmhNaG12U0VvQVVkS3hP?=
+ =?utf-8?B?THpYajNnU2JDRWZ3SEZzTk5jOGQ2c1Q3YkVHM0lOcDdJMDhTTWcxV0pLcVll?=
+ =?utf-8?B?YXpmKzNBdDc0WEl2MFVtYzBNS0ZINjl0RHNSMzl4S1JwNWdZMTg1K3p2aDF2?=
+ =?utf-8?B?Z3N0blJTN2dzeUpJTGdETFFsNGxYczFQaVErRlBxS1NKUGtYaUcwa1Bjdy9u?=
+ =?utf-8?B?OTNkTCtSbkcvb2Y1ME1Zc0U1YWpBQW5XS0QwZ3Jya0xlSkE0U1A2UFQ0T3RH?=
+ =?utf-8?B?d0cxcEFqb1ZYM04zbzIvNVdLNnhGNitTUjJ4MVVUcEZvRXFwMER2aUQyMnYr?=
+ =?utf-8?B?QW9jc2tDRW9XZVVhclhxaDIyY1lNUmR2OUY2THFFUHUya000VWJOc3Bidzds?=
+ =?utf-8?B?VllPazFMK0lYKzhWK0RNL3BMY3ZVdE1ZODhtRGFUVVB1L0pEbmZTUmpUcHB5?=
+ =?utf-8?B?QU95WERuWmdNRTBVSm9BNjVtU3RaNVRuNkJVK2I3Y1lIQWRBS2FYRGtzdSs2?=
+ =?utf-8?B?dHIvMjZKdUlUTE1JRFFPc01YT20vU2xqakZVdndYTjVjNUdjS1BtMnUyZUl4?=
+ =?utf-8?B?eXNUdEJ6aytYeHFQVGprYk4xWDhUamdrT3FtME9kSHhjUFlNNXF1c3lJQk5a?=
+ =?utf-8?B?b2xsK0c5dGlSNU9NVjBsVXpiajBSRlJKS0pYa0JWVE1SR3dWQjFFcVM0ZmxR?=
+ =?utf-8?B?L3hVbGxBWmlRSHR3clQ0amRpZ01uMytGZVpVMnFpNTkrZms1OWM3Z0p4cEVN?=
+ =?utf-8?B?b2pmSTI5NCtmaDZvam10ZzNRMXhYRFpaT1pWUHRUeTJUNExrZmFjMnQ2cjFC?=
+ =?utf-8?B?cHpUMjhJT2JEQ1BhbGt0NmdlenN2MktrMisxcHJQUzNBT1VDczh6NkJGRFdp?=
+ =?utf-8?B?TmhHb25LL01BVEZWcldaZE8vWVI5QVBPTEJLUzN1KzFqT1cyeFZxTUFEakhl?=
+ =?utf-8?B?a0RoQ2hMQzI4SDVVSkpPZzJiRjJWODFZMkhvUU51TjUyWS9sNnlWZkJTYUJF?=
+ =?utf-8?B?bnZiODRMRE1paDAxWnZLTitjbnpFY2d5UXRROFQrZzc0SnFGbzZKRGxBdEV4?=
+ =?utf-8?B?OGVoYWhTTEJmQVFiYWhwYUpnOW93dUdsWmVlSWxoak9DWEZZSGljelNTZDlF?=
+ =?utf-8?B?Qm1iTUNJbHR3ZFpYNjJVMEJvekN3THQvQTE5bVNCRlZ4eStCK1RMYTJDVkNi?=
+ =?utf-8?B?eEhCVFlpd2JnendVK2ZOVHRhQUtjVXc2WG1LL3RKdzJWK3hEQ01FSjVzdUht?=
+ =?utf-8?B?amNWNFlaQlc5MlVkUEhmUjkvUTEzN2pJcDFOK0R6cWFqcm9mMng2UllpSVpO?=
+ =?utf-8?B?cTdYd2JqS3BFalpQMXV4TStxL09tWDFwMldTYVpRcnNtcDVSV3hxYlhLNHA0?=
+ =?utf-8?B?YXdVK1B6YzJyaEJBTUN0d0ZRejVQK3BSVngvWlViQmRyRllKTTFDK0hnLzVv?=
+ =?utf-8?B?d1V5bHhjMW0vMTZ3d0duRlBmQWNyZlJSbmxVdytNWEhzaEw3R0JjZ0xDU2NB?=
+ =?utf-8?B?MlQwakR4V2ZueFJ6UEwyRmtBY0Z5L2Z0OUJNZWRwVTVBek9NSnpXYXZqbmZn?=
+ =?utf-8?B?YmJ6Z0g2bUJZUkIyNWpNNnVENmZJcE05N0xiRlYwN1hYdUdaSFNKSTM0djBE?=
+ =?utf-8?B?YUtsbVVyR05nUjVnOXBSS0dIc3NReEtXK0lGVkpDMlkyUFptN1Exc3lWUG9F?=
+ =?utf-8?B?WU9IZFVEZUZUNVNiYXJoTnF1QXF3NzBCek83b3Y3eEN0ZnFoNTNoR0hHUmRu?=
+ =?utf-8?B?bytYME1oZ2tXektyVmoxdWdpSzJsV3BQdFI1SWEzWnFvc0xlMWtlQT09?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0575125d-8ef6-451c-0d24-08de9170645f
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2026 11:01:44.1587 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 0IA2hsfWTRxos0UGW7T3lIYd7WnpB6KXZvsfky9ugXAnTBy86jkXINYUSoSj1kbxB2AxRgcYDGY6E9AQ+d9S7A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7766
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,168 +164,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Signed-off-by: Alice Guo <alice.guo@nxp.com>
+---
+Alice Guo (1):
+      imx952_evk: Enable ENETC0
 
-On Fri, 3 Apr 2026 at 13:30, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote=
-:
->
-> Am 31. M=C3=A4rz 2026 21:18:51 MESZ schrieb Gary Guo <gary@garyguo.net>:
-> >EFI variable OsIndications have a bit EFI_OS_INDICATIONS_BOOT_TO_FW_UI
-> >indicating that the OS (or next stage bootloader) requests booting into
-> >firmware UI instead of continuing autoboot process.
-> >
-> >Support it by having autoboot.c asking EFI bootmgr if boot should contin=
-ue,
-> >which checks and clear the bit (so the next boot continue as normal).
-> >
-> >With this change, systemd-boot will show a "Reboot Into Firmware Interfa=
-ce"
-> >option which will be able to drop back to u-boot. This can be useful if
-> >bootdelay is configured to be -2.
-> >
-> >Signed-off-by: Gary Guo <gary@garyguo.net>
->
-> Thank you Gary for the patch. I am currently on travel and will have to l=
-ook at it once I have returned.
+Clark Wang (1):
+      net: fsl_enetc: fix the duplex setting on the iMX platform
 
-On vacation here as well. I'll be off next week as well, nut I might
-have time to take a closer look
+Ye Li (1):
+      net: fsl_enetc: Add support for i.MX952
 
->
-> @Ilias
-> Should we preferably integrate the detection of this bit into efi_init_ea=
-rly()?
+ arch/arm/dts/imx952-evk-u-boot.dtsi   |  94 ++++++++++++++++++++++++++++++++
+ arch/arm/dts/imx952-u-boot.dtsi       | 100 ++++++++++++++++++++++++++++++++++
+ configs/imx952_evk_defconfig          |   3 +
+ drivers/net/Kconfig                   |   4 +-
+ drivers/net/fsl_enetc.c               |  46 ++++++++++++----
+ drivers/net/fsl_enetc_netc_blk_ctrl.c |  72 ++++++++++++++++++++++++
+ 6 files changed, 307 insertions(+), 12 deletions(-)
+---
+base-commit: f7e7c55e53e80100c327b9cb0512c069acf80ab5
+change-id: 20260403-enetc-b2d80f42ba23
 
-Which part? This patch also touched EFI variables, which are not
-initialized in the eraly code.
+Best regards,
+-- 
+Alice Guo <alice.guo@nxp.com>
 
-Thanks
-/Ilias
->
-> Best regards
->
-> Heinrich
->
->
->
-> >---
-> > common/autoboot.c            |  4 +++-
-> > include/efi_loader.h         |  2 ++
-> > lib/efi_loader/efi_bootmgr.c | 45 ++++++++++++++++++++++++++++++++++++
-> > lib/efi_loader/efi_setup.c   |  4 ++++
-> > 4 files changed, 54 insertions(+), 1 deletion(-)
-> >
-> >diff --git a/common/autoboot.c b/common/autoboot.c
-> >index 1783ef92c94c..b889407612dc 100644
-> >--- a/common/autoboot.c
-> >+++ b/common/autoboot.c
-> >@@ -11,6 +11,7 @@
-> > #include <cli.h>
-> > #include <command.h>
-> > #include <console.h>
-> >+#include <efi_loader.h>
-> > #include <env.h>
-> > #include <errno.h>
-> > #include <fdtdec.h>
-> >@@ -503,7 +504,8 @@ void autoboot_command(const char *s)
-> > {
-> >       debug("### main_loop: bootcmd=3D\"%s\"\n", s ? s : "<UNDEFINED>")=
-;
-> >
-> >-      if (s && (stored_bootdelay =3D=3D -2 ||
-> >+      if (s && !(IS_ENABLED(CONFIG_EFI_BOOTMGR) && efi_should_abort_aut=
-oboot()) &&
-> >+          (stored_bootdelay =3D=3D -2 ||
-> >                (stored_bootdelay !=3D -1 && !abortboot(stored_bootdelay=
-)))) {
-> >               bool lock;
-> >               int prev;
-> >diff --git a/include/efi_loader.h b/include/efi_loader.h
-> >index 3e70ac070550..449697ad13b3 100644
-> >--- a/include/efi_loader.h
-> >+++ b/include/efi_loader.h
-> >@@ -583,6 +583,8 @@ efi_status_t efi_bootmgr_get_unused_bootoption(u16 *=
-buf,
-> > efi_status_t efi_bootmgr_update_media_device_boot_option(void);
-> > /* Delete selected boot option */
-> > efi_status_t efi_bootmgr_delete_boot_option(u16 boot_index);
-> >+/* Check if autoboot should be aborted based on EFI vars */
-> >+bool efi_should_abort_autoboot(void);
-> > /* Invoke EFI boot manager */
-> > efi_status_t efi_bootmgr_run(void *fdt);
-> > /* search the boot option index in BootOrder */
-> >diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> >index a687f4d8e85c..39f255ac9de4 100644
-> >--- a/lib/efi_loader/efi_bootmgr.c
-> >+++ b/lib/efi_loader/efi_bootmgr.c
-> >@@ -1290,6 +1290,51 @@ out:
-> >       return ret;
-> > }
-> >
-> >+/**
-> >+ * efi_should_abort_autoboot() - check if autoboot should be aborted pe=
-r EFI vars
-> >+ *
-> >+ * Return:    true if autoboot should abort
-> >+ */
-> >+bool efi_should_abort_autoboot(void)
-> >+{
-> >+      efi_status_t ret;
-> >+      u64 os_indications =3D 0x0;
-> >+      efi_uintn_t size;
-> >+      efi_status_t r;
-> >+
-> >+      /* Initialize EFI drivers */
-> >+      ret =3D efi_init_obj_list();
-> >+      if (ret !=3D EFI_SUCCESS) {
-> >+              log_err("Error: Cannot initialize UEFI sub-system, r =3D =
-%lu\n",
-> >+                      ret & ~EFI_ERROR_MASK);
-> >+              return false;
-> >+      }
-> >+
-> >+      size =3D sizeof(os_indications);
-> >+      r =3D efi_get_variable_int(u"OsIndications", &efi_global_variable=
-_guid,
-> >+                               NULL, &size, &os_indications, NULL);
-> >+      if (r !=3D EFI_SUCCESS || size !=3D sizeof(os_indications))
-> >+              return false;
-> >+
-> >+      if (!(os_indications & EFI_OS_INDICATIONS_BOOT_TO_FW_UI))
-> >+              return false;
-> >+
-> >+      /* Clear the BOOT_TO_FW_UI so next boot returns to normal */
-> >+      os_indications &=3D ~EFI_OS_INDICATIONS_BOOT_TO_FW_UI;
-> >+      r =3D efi_set_variable_int(u"OsIndications",
-> >+                               &efi_global_variable_guid,
-> >+                               EFI_VARIABLE_NON_VOLATILE |
-> >+                               EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> >+                               EFI_VARIABLE_RUNTIME_ACCESS,
-> >+                               sizeof(os_indications),
-> >+                               &os_indications, false);
-> >+
-> >+      if (r !=3D EFI_SUCCESS)
-> >+              log_err("Setting %ls failed\n", L"OsIndications");
-> >+
-> >+      return true;
-> >+}
-> >+
-> > /**
-> >  * efi_bootmgr_run() - execute EFI boot manager
-> >  * @fdt:      Flat device tree
-> >diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-> >index f06cf49e4435..0ad02e9fe0dd 100644
-> >--- a/lib/efi_loader/efi_setup.c
-> >+++ b/lib/efi_loader/efi_setup.c
-> >@@ -156,6 +156,10 @@ static efi_status_t efi_init_os_indications(void)
-> > {
-> >       u64 os_indications_supported =3D 0;
-> >
-> >+      if (IS_ENABLED(CONFIG_EFI_BOOTMGR))
-> >+              os_indications_supported |=3D
-> >+                      EFI_OS_INDICATIONS_BOOT_TO_FW_UI;
-> >+
-> >       if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
-> >               os_indications_supported |=3D
-> >                       EFI_OS_INDICATIONS_CAPSULE_RESULT_VAR_SUPPORTED;
->
