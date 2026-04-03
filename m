@@ -4,54 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F8DFE88D86
-	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 06:31:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8C25E88D87
+	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 06:31:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3AB3B84154;
+	by phobos.denx.de (Postfix) with ESMTP id 8294384180;
 	Sat,  4 Apr 2026 08:31:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="sKW/Nq7e";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="SUNnaknF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10F878407E; Sat,  4 Apr 2026 01:19:38 +0200 (CEST)
-Received: from mxd-3-715.seznam.cz (mxd-3-715.seznam.cz
- [IPv6:2a02:598:96:8a00::1200:715])
+ id 0B94984132; Sat,  4 Apr 2026 01:19:38 +0200 (CEST)
+Received: from mxd-1-a04.seznam.cz (mxd-1-a04.seznam.cz
+ [IPv6:2a02:598:128:8a00::1000:a04])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEA2984106
- for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 01:19:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB6B9807C0
+ for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 01:19:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael.srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-7644845457-lgzgl
- (smtpc-mxd-7644845457-lgzgl [2a02:598:96:8a00::1200:715])
- id 4f5cc2c2145296ab4ef50e9c; Sat, 04 Apr 2026 01:18:49 +0200 (CEST)
+Received: from email.seznam.cz by smtpc-mxd-7644845457-4tx79
+ (smtpc-mxd-7644845457-4tx79 [2a02:598:128:8a00::1000:a04])
+ id 241991237f17c54a25b05d7d; Sat, 04 Apr 2026 01:18:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1775258329; bh=p1cSHdBsnlMgeKcwxyPOFzchwk4SqNmAI+8sHa9bFEo=;
- h=From:Date:Subject:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Message-Id:To:Cc;
- b=sKW/Nq7eeRzFHJTGsWU0XG+FJvQPw2f8LsYdGTzq/5I7R8cdeQfPjJfav+rvopEn7
- iBRPWfrPAY9NdXhZf5J0RQMab905RFTcWtJDpIEHzK/SCs3OTYN8P80OXUbEQEjUiD
- LF+2O7QGTe53RTuG1HA/EvZNZWtMJT1KpkrpPszJFGRkUHYCw3SLy33++voOu0KOh8
- RHXgYhrqwD+O8XcJBxoHLsuJJZLX5cww/I8Jjqzq+sIKTINuXiOUTFc3QOul02Tux3
- 3KBdix1595oaIJFKF2POwXXE8G3VH2qfPsdg6/JzqTzD/fs5Gh3H2OzSq8FXDkCTzq
- snQ2RWv2lIVWw==
+ t=1775258322; bh=XLKn1i+bNOWsMbz4XTfkf0NDUc7kl447vME44vPNpVA=;
+ h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:To:Cc;
+ b=SUNnaknFnsiU/90hNGUyXolUhvnPmSvggaqODVT42FlxxhlOCE/RtDimBNpSKsoyQ
+ C9hHOL0hFi3D018UTW5oH3EkZyw8fTU14KEa1SvwB10u9hLnKUrTeAyw8tgzxX453L
+ zJZYUhW4I/YVSTtvNwlz8qYz2aUjyEdz0GJAOO9BJqoXkzNAGK5vAJaaVhhaJA+bGh
+ +l8SjkhHTGY1rMOwBX5bRqS5+Mu3o4yeyfsq4AOHKIn4FRSwSqZDO6VZRp1cy0W/KE
+ smROJjsC3dAmtZbbVX+HZTvuMCFhxJlWL7P2wkp0NDFaNgEXdOhYy/w7xXxf7SstDP
+ Qtq6TVQ7py2lA==
 Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
  by smtpd-relay-789d8dfb5c-z7n27 (szn-email-smtpd/2.0.71) with ESMTPA
- id b73469ef-8094-408d-8a67-5cd8883c475c;
- Sat, 04 Apr 2026 01:18:29 +0200
+ id 1b7959c0-ce5b-4dbe-bf39-113a3a0e2253;
+ Sat, 04 Apr 2026 01:18:28 +0200
 From: michael.srba@seznam.cz
-Date: Sat, 04 Apr 2026 01:18:16 +0200
-Subject: [PATCH 1/5] Makefile: add SPL_REMAKE_ELF_LDSCRIPT feature
+Subject: [PATCH 0/5] Add SPL support for Qualcomm platforms, starting with
+ sdm845
+Date: Sat, 04 Apr 2026 01:18:15 +0200
+Message-Id: <20260404-qcom_spl-v1-0-9e6c2ac66587@seznam.cz>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260404-qcom_spl-v1-1-9e6c2ac66587@seznam.cz>
-References: <20260404-qcom_spl-v1-0-9e6c2ac66587@seznam.cz>
-In-Reply-To: <20260404-qcom_spl-v1-0-9e6c2ac66587@seznam.cz>
+X-B4-Tracking: v=1; b=H4sIALdK0GkC/yXM7QpAQBCF4VvR/La11ia5FUlrDUY+d5CSe7f4+
+ dR7zgWMjpAhCy5weBDTPHlEYQC2M1OLgmpvUFIlUstYrHYeS14GIVOVpDqujI4s+Hxx2ND5XeX
+ Fb96rHu327uG+H9jU73FsAAAA
+X-Change-ID: 20260403-qcom_spl-0826843ba41c
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
  u-boot-qcom@groups.io
 Cc: Tom Rini <trini@konsulko.com>, 
@@ -104,78 +107,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Michael Srba <Michael.Srba@seznam.cz>
+[ context ]
 
-On some platforms (at least Qualcomm), the bootrom expects an ELF file.
-Since the contents of the ELF file are platform specific, add a config
-option that allows specifying a linker script to use to produce the
-ELF file.
+Different generations of Qualcomm SoCs have differences in the boot
+process. msm8916 (and similar) are quite straightforward:
+[EL3]bootrom->sbl1->tz->[EL2]hyp->[EL1]aboot->linux (omitting non-AP
+cores). msm8998, sdm845, kodiak and simiar are a bit more involved:
+[EL3]bootrom->xbl_sec->[EL1]xbl_loader->[EL3]tz->[EL2]hyp->[EL1]uefi
+->ABL->linux. Newer platforms like hamoa are even more involved.
+
+Currently, u-boot proper can run in place of Linux, in place
+of aboot, or in place of hyp. The option to run in place
+of Linux is necessary because >99% of OEMs do not consider
+the sale of a device to an end user a transfer of ownership,
+that is, they sell the device with a hash of their public key
+pre-burnt in the fuses.
+
+[ end of context ]
+
+U-Boot SPL, as it will be built using the defconfig added in this series,
+replaces xbl_loader. If support for msm8916 or a similar platform
+is added, it would replace sbl1. This will obviously only work on
+the <1% of devices whose manufacturers consider the sale a transfer
+of ownership, and of course most SBCs.
+
+Unfortunately, starting with (iirc) msm8998, and getting progressively
+worse, Qualcomm no longer consider a sale of their SoC a transfer
+of ownership either. While it's possible to execute your code
+in EL3 using either jtag or a patched devcfg, the former is impractical
+while the latter is irrelevant for the purposes of running u-boot SPL
+since the devcfg is parsed by trustzone. (this of course only applies
+to the <1% of the devices where the OEM didn't lock the device down
+prior to sale)
+
+Given the above, this series uses an unintended feature in old builds
+of xbl_sec which allows us to elevate to EL3. We also check if we
+happen to already be running in EL3, in which case we proceed normally.
+This can be the case e.g if JTAG was used to jump to u-boot SPL in EL3,
+which may be the only option on e.g. kodiak. (Running in EL1 is not
+really viable, because xbl_sec+xbl_loader are effectively sbl1 split
+in half and replacing only one doesn't make much sense)
+
+For now, only usb dfu is supported to load the next stage. Since we
+don't support ram initialization, the next stage will need to run from
+SRAM too, which is currently not supported. Additional patches will
+be needed to make that work, at which point it will be possible
+to use u-boot as a ufs/emmc programmer with zero proprietary code
+in the boot chain (sans bootrom and part of xbl_sec, but the latter and
+technically even the former could be skipped with JTAG)
 
 Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 ---
- Makefile           | 23 +++++++++++++++++++++++
- common/spl/Kconfig |  6 ++++++
- 2 files changed, 29 insertions(+)
+Michael Srba (5):
+      Makefile: add SPL_REMAKE_ELF_LDSCRIPT feature
+      of_live: support in SPL
+      drivers: allow clk_stub and spmi in SPL
+      mach-snapdragon: support building SPL
+      dts: add empty .dtsi for shift-axolotl
 
-diff --git a/Makefile b/Makefile
-index f232d8b4ea2..85cd6137bca 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1231,6 +1231,9 @@ ifneq ($(CONFIG_SPL_TARGET),)
- INPUTS-$(CONFIG_SPL) += $(CONFIG_SPL_TARGET:"%"=%)
- endif
- INPUTS-$(CONFIG_REMAKE_ELF) += u-boot.elf
-+ifneq ($(CONFIG_SPL_REMAKE_ELF_LDSCRIPT),)
-+INPUTS-y += spl/u-boot-spl.elf
-+endif
- INPUTS-$(CONFIG_EFI_APP) += u-boot-app.efi
- INPUTS-$(CONFIG_EFI_STUB) += u-boot-payload.efi
- 
-@@ -2005,6 +2008,26 @@ u-boot-elf.lds: arch/u-boot-elf.lds prepare FORCE
- 	$(call if_changed_dep,cpp_lds)
- 
- PHONY += prepare0
-+
-+ifeq ($(CONFIG_SPL),y)
-+ifneq ($(CONFIG_SPL_REMAKE_ELF_LDSCRIPT),)
-+
-+SPL_REMAKE_ELF_LDSCRIPT := $(addprefix $(srctree)/,$(CONFIG_SPL_REMAKE_ELF_LDSCRIPT:"%"=%))
-+
-+spl/u-boot-spl-elf.lds: $(SPL_REMAKE_ELF_LDSCRIPT) FORCE
-+	$(call if_changed_dep,cpp_lds)
-+
-+quiet_cmd_u-boot-spl-elf ?= LD      $@
-+	cmd_u-boot-spl-elf ?= $(LD) spl/u-boot-spl-elf.o -o $@ \
-+	-T spl/u-boot-spl-elf.lds --defsym=$(CONFIG_PLATFORM_ELFENTRY)=$(CONFIG_SPL_TEXT_BASE) \
-+	-Ttext=$(CONFIG_SPL_TEXT_BASE) -z max-page-size=0x1000
-+spl/u-boot-spl.elf: spl/u-boot-spl.bin spl/u-boot-spl-elf.lds
-+	$(Q)$(OBJCOPY) -I binary $(PLATFORM_ELFFLAGS) $< spl/u-boot-spl-elf.o
-+	$(call if_changed,u-boot-spl-elf)
-+
-+endif
-+endif
-+
- # MediaTek's ARM-based u-boot needs a header to contains its load address
- # which is parsed by the BootROM.
- # If the SPL build is enabled, the header will be added to the spl binary,
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 2998b7acb75..9eeb56cb68b 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -247,6 +247,12 @@ config SPL_HANDOFF
- 	  proper. Also SPL can receive information from TPL in the same place
- 	  if that is enabled.
- 
-+config SPL_REMAKE_ELF_LDSCRIPT
-+	string "Linker script to run with u-boot-spl.bin as input"
-+	help
-+	  This allows specifying a linker script that will act on u-boot-spl.bin
-+	  (see also REMAKE_ELF)
-+
- config SPL_LDSCRIPT
- 	string "Linker script for the SPL stage"
- 	default "arch/arm/cpu/arm926ejs/sunxi/u-boot-spl.lds" if MACH_SUNIV
+ Makefile                                           |  23 ++++
+ arch/arm/Kconfig                                   |   6 +-
+ arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi      |   4 +
+ arch/arm/dts/sdm845-u-boot.dtsi                    |  16 +++
+ arch/arm/mach-snapdragon/Kconfig                   |  98 +++++++++++++++-
+ arch/arm/mach-snapdragon/board.c                   |  26 +++++
+ arch/arm/mach-snapdragon/include/mach/boot0.h      |  61 ++--------
+ .../mach-snapdragon/include/mach/msm8916_boot0.h   |  54 +++++++++
+ .../include/mach/sdm845_spl_boot0.h                | 120 +++++++++++++++++++
+ arch/arm/mach-snapdragon/u-boot-spl-elf-sdm845.lds |  25 ++++
+ board/qualcomm/sdm845_spl.env                      |   1 +
+ common/spl/Kconfig                                 |   6 +
+ common/spl/spl.c                                   |  10 ++
+ configs/sdm845_spl_defconfig                       | 130 +++++++++++++++++++++
+ doc/board/qualcomm/index.rst                       |   1 +
+ doc/board/qualcomm/spl.rst                         |  70 +++++++++++
+ drivers/Makefile                                   |   2 +-
+ drivers/clk/Kconfig                                |   6 +
+ drivers/spmi/Kconfig                               |   6 +
+ dts/Kconfig                                        |   5 +
+ lib/Makefile                                       |   2 +-
+ 21 files changed, 616 insertions(+), 56 deletions(-)
+---
+base-commit: 4dc4080805fac1b1ed7606ce3bc8fb44a6d59d5e
+change-id: 20260403-qcom_spl-0826843ba41c
 
--- 
-2.53.0
+Best regards,
+--  
+Michael Srba <Michael.Srba@seznam.cz>
 
