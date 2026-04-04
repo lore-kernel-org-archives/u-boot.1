@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCF6AE88D9D
-	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 14:03:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0691AE88D9D
+	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 14:04:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B199383B8F;
-	Sat,  4 Apr 2026 16:03:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 16FD983B48;
+	Sat,  4 Apr 2026 16:03:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c7JTk7PA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="k8Frh7uQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1523783B48; Sat,  4 Apr 2026 16:03:52 +0200 (CEST)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id A9306840AA; Sat,  4 Apr 2026 16:03:55 +0200 (CEST)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 926DB80325
- for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 16:03:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 709A480325
+ for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 16:03:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-47018d34159so717924b6e.2
- for <u-boot@lists.denx.de>; Sat, 04 Apr 2026 07:03:49 -0700 (PDT)
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-40efc77933fso1722559fac.3
+ for <u-boot@lists.denx.de>; Sat, 04 Apr 2026 07:03:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775311427; x=1775916227; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=42FxQj2TKMGniHmxtZFTWufm/LIfUCfBUHzwtEvIZfI=;
- b=c7JTk7PAChsDCBZ/YpqrQ7PmPOBY+bLAQ/eeIULiUltCcZBGgZ+PAqY7Erj+vBijp1
- LAAanqzUiOrhqfS+RmQFf5J8soX8P+HMCCbJJJZgmTJoCJa5YZURV6mp00xbFOGk4KIi
- wMKuuxipkrXPPHyGSsf3FfjRwDfgRNuWKiz3I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775311427; x=1775916227;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1775311431; x=1775916231; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=42FxQj2TKMGniHmxtZFTWufm/LIfUCfBUHzwtEvIZfI=;
- b=bPnz8/BT095Gojipib9RRBqYWPLYmaqJBnEeR4gLEiXJPbFQbZTh2ak9LWSp8s6gbl
- BzOkj7NebwbueYGmSS5mI/Xau+HS7wtwcEVmp9R6aVGqVqCI4tUpDlgWbsET0zzWVF5l
- Y3K2SVwkW0Is/wGMRc1byDf3xf9tVUJ7g1H19MvTHFGHKYa9iluChUHAbVU+g00oofBd
- FMskV3Oh5NLLf4zAnf3Eyn/PswYr9tr64xUTj8eUwXGw594fMR4xihla17cLEix3/yX4
- bgW0oChkeMIqZlFoHiviHfLLq9A6nQjue9u5AIqac5ZmyAKrFyzX6d4jOnt8AFfqBvHV
- xsHw==
-X-Gm-Message-State: AOJu0Yw8rLr7tLte3koji0KnNUbmaHDVWWT0qgtgMgHL2ePutELFjUuq
- jb/JSSzkfTRODCzfzvSI/Cmd4WJ9Ebi5yWHM9mpGPals0ugwqaoEELmK+Iznkfrly0XEaEZsKtZ
- fY8M=
-X-Gm-Gg: AeBDievnBhoDavxQm5zpLl9PHdR2hri6eUivi0/X4q0yTyV3uDisDAOYTFOrYGxHj/p
- rNDKCGVxTvp4s7uYy8aQu8Rvdbgo8MqpbObMit9sHqM03Nt1lWot4m7qlofpfrLCwaywMiSURsa
- FF4d7A3dUZuKu4qDCQa/H30pgD05PMEooxxt6yLSHaQvR1VLFU8DESoELadudAlvyi094HpntpG
- NMz8zmGlOZJPXZ8KGfkaH5Wn3fHN4RGaoMMdjVdFy659ggS1kVOfji00F2C2WHvpuSf4+9Jt4Dn
- 1ZnVSeVokw3LJwuM58zzSX9oTqse/jZFg7sGGrJFfuqvOsR2wOzncIxAH2yMXp5JvvhVYvH7+tW
- HyZ/3f/x7fT/0e6XBZnI3wWvm3heu/FJZjEfa+EovqOl3OOCWjmBH5q77bjIbebEzYXt7d9Wz6/
- k66kp0FSkrhUq/AI3stv5izN8faB5x
-X-Received: by 2002:a05:6870:1616:b0:41c:9eb4:cec5 with SMTP id
- 586e51a60fabf-4230ffb8ebcmr3576695fac.29.1775311427060; 
- Sat, 04 Apr 2026 07:03:47 -0700 (PDT)
+ bh=OCSzA3zLHBWTczbsOx7QtwIfFwAR3aipzS+RhcQ445M=;
+ b=k8Frh7uQFcsEOcNMtgw1a7JxeFBWGOj4lIJ0MeD//Sioi3O0nGI6iMdK8cn16dDIC9
+ PZNyFt+i4x6L5hwBMa55FO1rCBtML/6p9dD7rIEj5mKPKYCPT6wY7apDKVkq/GvtXLiK
+ t5sj6O9yzycFvrZDSvfzosU+GaXvFeZKmjgRw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775311431; x=1775916231;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=OCSzA3zLHBWTczbsOx7QtwIfFwAR3aipzS+RhcQ445M=;
+ b=H2FYPxi5HEo4QDyuz1b8lCxnVgET2aneQue8RDaY9ml+SvzjAP7VHzx/zVByT+UWgK
+ cWddRrw7hg9+u24Z7zH26rPTkJe6wjH7POxUWqsnNElarX0QkEW/Qky5C12Rdg8vsIMV
+ 1n8fFKTPPV/oJ/2Beq/BKqAMd2tJ15XcvwuCAVCIDkBwJ1nVsblEzuVDp1Y4gezlPmZY
+ tB6ORsiEAAYhewk+jV4hw24vpU8hWi7Y/OCRCOeuN2yVS6rW2cWU8K9Nl6MzN0Ilc61T
+ VOt2vlbZfLq4pj1iDg1d83XuRpdfUzk/rT7SvCu9rxa8iOoIwahmNqNrbVrFKurxa5uz
+ hbiQ==
+X-Gm-Message-State: AOJu0Ywh5MJtDPIOlZWJ2UzKRUhFSfQlQz7BOs+QTaSJIi66rU6MMwCq
+ qI6f+x/OF8SdQR+737Y86aa5/PKcUIgybnRBzYf/CUlDn6OIqU4rGJAwmdh0cvQmi6EB2r5B1uN
+ bwpU=
+X-Gm-Gg: AeBDieskkUKAXF2NN4hCwfdUVS82onA+7e0BiHjVS7iJ6K+sABeoA+KNYc7i5J+zXjr
+ xnOyZVCL8x08rMRfwe+HQ0Z3TkGVmzM94iOxx1+oaLDlmAJpJ8ANESkz43dvomL3/IqM+9LFhE9
+ yS9ZWEQLRqGsDHfgroUUOzUEBnOEd7oq9Ry7omUYFEJB3Yw1mSRNZILPy7859ZOQMYyKAwzBhTV
+ ouEAc48KqETzAej/KlP8c0mfWM5LeqPmkVZYxV8PpVcqHN9igtLJoAe3Jeh8QnHOdyP/PNnYi6U
+ rCgpVWEZHr/oQjNu0EnsZtbJj1NsNWVQZH2F21wQ8OXz8djbixsYHjLWjb61o/xAElmTY1P7WdW
+ s6ZSSY3nyddX9v5arWcF4kiUTg0Y10LEjgHTsMHkiZQPKoKLMn+VjHRA9HFxRUpZZC8WyuAg8ox
+ a/PQbWmaVFktdSPXST+Q==
+X-Received: by 2002:a05:6870:934a:b0:417:5a8c:feba with SMTP id
+ 586e51a60fabf-4230fcbd3ebmr3772651fac.12.1775311431385; 
+ Sat, 04 Apr 2026 07:03:51 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4232eb3d0e4sm2348235fac.6.2026.04.04.07.03.45
+ 586e51a60fabf-4232eb3d0e4sm2348235fac.6.2026.04.04.07.03.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Apr 2026 07:03:45 -0700 (PDT)
+ Sat, 04 Apr 2026 07:03:50 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>,
  Christian Taedcke <christian.taedcke@weidmueller.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
- Martin Schwan <m.schwan@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 00/14] test: Convert tests to use FsHelper and DiskHelper
-Date: Sat,  4 Apr 2026 08:03:04 -0600
-Message-ID: <20260404140328.3724864-1-sjg@chromium.org>
+Subject: [PATCH 01/14] test: Add a helper class to create disk images
+Date: Sat,  4 Apr 2026 08:03:05 -0600
+Message-ID: <20260404140328.3724864-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260404140328.3724864-1-sjg@chromium.org>
+References: <20260404140328.3724864-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,60 +95,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds a DiskHelper class and converts most test code to use
-FsHelper and DiskHelper instead of calling mk_fs() and setup_image()
-directly.
+Provide a way to create disk images which consist of multiple filesystem
+images.
 
-The FsHelper class (already upstream) provides a cleaner interface for
-creating filesystem images, handling temporary directories and cleanup
-automatically. The new DiskHelper class builds on this, creating
-partitioned disk images from one or more FsHelper filesystems.
+Include a cur_dir option to place the disk image in the current
+directory rather than in the persistent-data directory. This matches the
+behaviour of setup_image() which places disk images in source_dir where
+sandbox expects to find them. This flag is a temporary feature and
+should be removed once all tests are migrated to use the persistent-data
+directory instead.
 
-DiskHelper includes a cur_dir flag to place the disk image in the
-current directory rather than the persistent-data directory. This
-matches the behaviour of setup_image() which places disk images in
-source_dir where sandbox expects to find them. This flag is needed for
-now and should be removed in a follow-up once all tests are migrated to
-use the persistent-data directory instead.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-With these helpers, test-setup code becomes shorter, more consistent and
-easier to follow. Manual sfdisk/dd/cleanup sequences are replaced by a
-few method calls.
+ test/py/tests/fs_helper.py | 92 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 92 insertions(+)
 
-The series also fixes a broken fs_obj_fat fixture where a stale
-size_gran argument is silently causing the test to be skipped.
-
-A few EFI test fixtures (efi_capsule, efi_secboot, eficonfig) still use
-mk_fs() directly; these are left for a follow-up series since they would
-benefit from a full DiskHelper conversion.
-
-
-Simon Glass (14):
-  test: Add a helper class to create disk images
-  test: fs_helper: Skip empty srcdir when creating a filesystem
-  test: Fix broken fs_obj_fat fixture
-  test: Convert test_cat to use FsHelper
-  test: Convert test_xxd to use FsHelper
-  test: Convert test_efi_bootmgr to use FsHelper
-  test: Convert setup_bootmenu_image() to use FsHelper
-  test: Split out core of Fedora image into a new function
-  test: Convert setup_bootflow_image() to use FsHelper
-  test: Convert setup_efi_image() to use FsHelper
-  test: Convert test_ut_dm_init() to use FsHelper
-  test: Rename setup_bootflow_image()
-  test: Convert setup_rauc_image() to use FsHelper
-  test: Convert test_fs fixtures to use FsHelper
-
- test/py/tests/fs_helper.py        |  95 +++++++++++++-
- test/py/tests/test_cat.py         |  27 ++--
- test/py/tests/test_efi_bootmgr.py |  38 +++---
- test/py/tests/test_fs/conftest.py | 198 ++++++++++--------------------
- test/py/tests/test_ut.py          | 190 +++++++++++++++-------------
- test/py/tests/test_xxd.py         |  28 ++---
- 6 files changed, 288 insertions(+), 288 deletions(-)
-
+diff --git a/test/py/tests/fs_helper.py b/test/py/tests/fs_helper.py
+index 800376b1e7d..e323a97b220 100644
+--- a/test/py/tests/fs_helper.py
++++ b/test/py/tests/fs_helper.py
+@@ -97,6 +97,98 @@ class FsHelper:
+         self.cleanup()
+ 
+ 
++class DiskHelper:
++    """Helper class for creating disk images containing filesytems
++
++    Usage:
++        with DiskHelper(ubman.config, 0, 'mmc') as img, \
++                FsHelper(ubman.config, 'ext1', 1, 'mmc') as fsh:
++            # Write files to fsh.srcdir
++            ...
++
++            # Create the filesystem
++            fsh.mk_fs()
++
++            # Add this filesystem to the disk
++            img.add_fs(fsh, DiskHelper.VFAT)
++
++            # Add more filesystems as needed (add another 'with' clause)
++            ...
++
++            # Get the final disk image
++            data = img.create()
++    """
++
++    # Partition-type codes
++    VFAT  = 0xc
++    EXT4  = 0x83
++
++    def __init__(self, config, devnum, prefix, cur_dir=False):
++        """Set up a new disk image
++
++        Args:
++            config (u_boot_config): U-Boot configuration
++            devnum (int): Device number (for filename)
++            prefix (str): Prefix string of volume's file name
++            cur_dir (bool): True to put the file in the current directory,
++                instead of the persistent-data directory
++        """
++        self.fs_list = []
++        self.fname = os.path.join('' if cur_dir else config.persistent_data_dir,
++                                  f'{prefix}{devnum}.img')
++
++    def add_fs(self, fs_img, part_type, bootable=False):
++        """Add a new filesystem
++
++        Args:
++            fs_img (FsHelper): Filesystem to add
++            part_type (DiskHelper.FAT or DiskHelper.EXT4): Partition type
++            bootable (bool): True to set the 'bootable' flat
++        """
++        self.fs_list.append([fs_img, part_type, bootable])
++
++    def create(self):
++        """Create the disk image
++
++        Create an image with a partition table and the filesystems
++        """
++        spec = ''
++        pos = 1   # Reserve 1MB for the partition table itself
++        for fsi, part_type, bootable in self.fs_list:
++            if spec:
++                spec += '\n'
++            spec += f'type={part_type:x}, size={fsi.size_mb}M, start={pos}M'
++            if bootable:
++                spec += ', bootable'
++            pos += fsi.size_mb
++
++        img_size = pos
++        try:
++            check_call(f'qemu-img create {self.fname} {img_size}M', shell=True)
++            check_call(f'printf "{spec}" | sfdisk {self.fname}', shell=True)
++        except CalledProcessError:
++            os.remove(self.fname)
++            raise
++
++        pos = 1   # Reserve 1MB for the partition table itself
++        for fsi, part_type, bootable in self.fs_list:
++            check_call(
++                f'dd if={fsi.fs_img} of={self.fname} bs=1M seek={pos} conv=notrunc',
++                shell=True)
++            pos += fsi.size_mb
++        return self.fname
++
++    def cleanup(self, remove_full_img=False):
++        """Remove created file"""
++        os.remove(self.fname)
++
++    def __enter__(self):
++        return self
++
++    def __exit__(self, extype, value, traceback):
++        self.cleanup()
++
++
+ def mk_fs(config, fs_type, size, prefix, src_dir=None, fs_img=None, quiet=False):
+     """Create a file system volume
+ 
 -- 
 2.43.0
 
-base-commit: 1c1bfb1cf34bbb2a5717eb6995c55093279f9341
-branch: testfsa
