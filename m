@@ -4,67 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B871E88D70
-	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 05:10:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52F6EE88D85
+	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 05:52:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59C9084178;
-	Sat,  4 Apr 2026 07:10:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id B376383C14;
+	Sat,  4 Apr 2026 07:52:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="S9UwqaP4";
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="GlS74Gjq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 330D284189; Sat,  4 Apr 2026 07:10:01 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 0E2E0840AA; Sat,  4 Apr 2026 07:52:54 +0200 (CEST)
+Received: from sender4-op-o16.zoho.com (sender4-op-o16.zoho.com
+ [136.143.188.16])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E734884172
- for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 07:09:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4fnkDP5WtGz9txV;
- Sat,  4 Apr 2026 07:09:57 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1775279397;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=euE9iNynuu+iEn+DDDUjDoj6OxATP25pf4XOH7pFQPg=;
- b=S9UwqaP4id3GUJDCDnrEnLZoY+FvN7+N0dHDI4+PIwkSsSC2H0KI/WqKhTB9W7jMhf/fSl
- jZqG1T2t0now2Ub+DAjl/cszCQ74sg6ujdOF+8j6sBT0InDOrQUOiMT80TGxSw+vHmMAP+
- Za+NySKmtChiczCuaUePXmnOxKdMHxGrpSFEztIBpUh+IOBNnFc1Je3iLGyKhDtb6HOwBM
- caVQWhmIyHAczSh+ZvhN1dbZEgPTvG7BtpoUzWPB2FuWU6uD8oxuiGiPtF2UGKmVkILxuH
- RGgWcCVo5+2VnbhkR6v4Peh4itAEdJTovIvZE00N6JT8ehdeGcHWUvdZCi5cuA==
-Message-ID: <7c546ff6-8d17-412b-99fe-42a786b02929@mailbox.org>
-Date: Sat, 4 Apr 2026 01:27:44 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 320E483642
+ for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 07:52:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
+ARC-Seal: i=1; a=rsa-sha256; t=1775281967; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=AS1UMSztue3woEU+2JgZTPdCmaNOnktnLw965uL/rR7noZ4mxtLKnudYbQhNwgkzXRpdgJTO+IyS61bBy8TKKXUcsNYziUVNDQes7RkRj1sCQ61b9VxJEswSjZ8dvg6iS+MleajU14BVS7kIjDq7GkQzNiGuS8n3aga3wJtT6h0=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1775281967;
+ h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=SbjGd2Nvn0TtM0wOtRvvLx8r4MY3fUNNiqW1rBpBHPs=; 
+ b=hqEmx72mKzyfngBBVhwppOxoXHZXS3Z3cenxh4GE7/l+STgUG9EOTYh584f+6cfdp7gdmOO/CCiSWJNneWMI5ZEEskT8WYutZIo1PUtFFdKU3HBCmDmTJwypU+kblqBnP97VJVtN+8Flcy9XBOuTiSeHEAjPoYNMCArmCP9UziM=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1775281967; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+ bh=SbjGd2Nvn0TtM0wOtRvvLx8r4MY3fUNNiqW1rBpBHPs=;
+ b=GlS74Gjqry8moIR3AiaQkOKBimcUcehhqWDYVCadKBzUW2CAZigXe44qZfvq71+0
+ YyMcePB7/iAzcrRkjq1cpFX+qaU9doCDUaeDVk2G3Uixk8TgtAMumwrQWkC2u90lAIK
+ KrHOOewFaehgJFWMPhmXnNBgJ9YGowWtjpdmb6hc=
+Received: by mx.zohomail.com with SMTPS id 1775281964441566.2147470795677;
+ Fri, 3 Apr 2026 22:52:44 -0700 (PDT)
+Date: Sat, 4 Apr 2026 05:52:24 +0000
+From: Yao Zi <me@ziyao.cc>
+To: Lobanokivan11 <lobanokivan11@gmail.com>, u-boot@lists.denx.de
+Cc: u-boot-qcom@groups.io, casey.connolly@linaro.org,
+ neil.armstrong@linaro.org, sumit.garg@kernel.org, trini@konsulko.com
+Subject: Re: [PATCH] xiaomi pad 5 support
+Message-ID: <adCnGAUnLRcZExgp@pie>
+References: <20260403160127.10605-1-lobanokivan11@gmail.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH v3 5/6] doc: board: nxp: Add Quickboot documentation
-To: "Simona Toaca (OSS)" <simona.toaca@oss.nxp.com>, uboot-imx@nxp.com,
- u-boot@lists.denx.de
-Cc: Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com,
- peng.fan@nxp.com, alice.guo@nxp.com, viorel.suman@nxp.com,
- simona.toaca@nxp.com, ye.li@nxp.com, ping.bai@nxp.com,
- sebastien.szymanski@armadeus.com, ravi@prevas.dk,
- joao.goncalves@toradex.com, ji.luo@nxp.com, semen.protsenko@linaro.org,
- tharvey@gateworks.com, qijian.guo@nxp.com
-References: <cover.1775121078.git.simona.toaca@nxp.com>
- <bf216cd8652419e9ce7b9133775a2ea4509fe763.1775121078.git.simona.toaca@nxp.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <bf216cd8652419e9ce7b9133775a2ea4509fe763.1775121078.git.simona.toaca@nxp.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: scmq4bh7nje88f1j481whg5etbo4fwog
-X-MBO-RS-ID: 197a052279d622b3643
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260403160127.10605-1-lobanokivan11@gmail.com>
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,51 +74,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/2/26 11:40 AM, Simona Toaca (OSS) wrote:
+On Fri, Apr 03, 2026 at 07:01:26PM +0300, Lobanokivan11 wrote:
+> ---
+>  board/qualcomm/xiaomi-nabu.env                |   11 +
+>  configs/xiaomi-nabu_defconfig                 |    6 +
+>  dts/upstream/src/arm64/qcom/pm8150.dtsi       |   10 +-
+>  dts/upstream/src/arm64/qcom/pm8150b.dtsi      |    8 +
 
-[...]
+Devicetree (and bindings) in dts/ are pulled from devicetree
+upstream[1] (i.e., Linux kernel), and you shouldn't directly modify
+files in it. If you need a commit in dts upstream that hasn't
+synchronized into U-Boot yet, tools/update-subtree.sh might be used for
+cherry-picking one commit once it has landed in Linux master.
 
-> +DDR QuickBoot flow
-> +------------------
+However, I don't see such changes to pm8150(b).dtsi in Linux 7.0-rc6, so
+you might want to push the changes to Linux upstream first.
+
+>  .../src/arm64/qcom/sm8150-oneplus-common.dtsi |  545 ++++++++
+>  .../arm64/qcom/sm8150-oneplus-guacamole.dts   |   70 +
+>  .../src/arm64/qcom/sm8150-oneplus-hotdogb.dts |   65 +
+>  .../src/arm64/qcom/sm8150-wcd9340.dtsi        |   86 ++
+>  .../src/arm64/qcom/sm8150-xiaomi-cepheus.dts  |  575 ++++++++
+>  .../src/arm64/qcom/sm8150-xiaomi-nabu.dts     | 1175 +++++++++++++++++
+>  dts/upstream/src/arm64/qcom/sm8150.dtsi       |  102 ++
+>  11 files changed, 2652 insertions(+), 1 deletion(-)
+>  create mode 100644 board/qualcomm/xiaomi-nabu.env
+>  create mode 100644 configs/xiaomi-nabu_defconfig
+>  create mode 100644 dts/upstream/src/arm64/qcom/sm8150-oneplus-common.dtsi
+>  create mode 100644 dts/upstream/src/arm64/qcom/sm8150-oneplus-guacamole.dts
+>  create mode 100644 dts/upstream/src/arm64/qcom/sm8150-oneplus-hotdogb.dts
+>  create mode 100644 dts/upstream/src/arm64/qcom/sm8150-wcd9340.dtsi
+>  create mode 100644 dts/upstream/src/arm64/qcom/sm8150-xiaomi-cepheus.dts
+>  create mode 100644 dts/upstream/src/arm64/qcom/sm8150-xiaomi-nabu.dts
+
+What's the relationship between Xiaomi Pad 5 and
+"oneplus-guacamole/hotdogb"? The latter doesn't seem to match subject of
+the patch, which is "xiaomi pad 5 support". You probably want to have a
+separate commit for the non-xiaomi stuff.
+
+And, for the same reason as above, you should neither create files in
+dts/ manually. I don't think these devicetrees have been in upstream,
+either. An alternative is to put them in arch/arm/dts instead, but it'll
+still be nice to have them upstreamed first.
+
+...
+
+> diff --git a/dts/upstream/src/arm64/qcom/pm8150.dtsi b/dts/upstream/src/arm64/qcom/pm8150.dtsi
+> index d2568686a09..c3411b308e3 100644
+> --- a/dts/upstream/src/arm64/qcom/pm8150.dtsi
+> +++ b/dts/upstream/src/arm64/qcom/pm8150.dtsi
+> @@ -116,13 +116,21 @@
+>  			status = "disabled";
+>  		};
+>  
+> -		rtc@6000 {
+> +		pm8150_rtc: rtc@6000 {
+>  			compatible = "qcom,pm8941-rtc";
+>  			reg = <0x6000>, <0x6100>;
+>  			reg-names = "rtc", "alarm";
+>  			interrupts = <0x0 0x61 0x1 IRQ_TYPE_NONE>;
+>  		};
+
+It's possible to refer a devicetree node by using its full path, which
+may help if you decide not to upstream changes in pm8150.dtsi first.
+
+> +		pm8150_sdam_2: sdam@b100 {
+> +			compatible = "qcom,spmi-sdam";
+> +			reg = <0xb100>;
+> +			#address-cells = <1>;
+> +			#size-cells = <1>;
+> +			status = "disabled";
+> +		};
 > +
-> +Some NXP boards (which use OEI - iMX943, iMX95, iMX952 etc.) support saving
+>  		pm8150_gpios: gpio@c000 {
+>  			compatible = "qcom,pm8150-gpio", "qcom,spmi-gpio";
+>  			reg = <0xc000>;
 
-boards or SoCs ? I think SoCs ?
+Regards,
+Yao Zi
 
-> +DDR training data (collected by OEI during Training flow) from volatile
-> +to non-volatile memory, which is then available to OEI at next cold reboot.
-> +OEI uses the saved data to run Quickboot flow and avoid training the DDR again.
-> +This significantly reduces the boot time.
-> +
-> +The location of the qb data in NVM is a space left in the bootloader by
-> +mkimage, with the size of 64K. The qb command searches for this space to
-> +save the data. Thus, the NVM should also be a boot device.
-> +
-> +U-Boot provides no authentication for qb data, only its integrity
-> +is verified via the CRC32. The authentication is done in OEI. With
-> +the exception of iMX95 A0/A1, which use CRC32 as well for verifying
-> +the data, the rest of the boards use ELE to verify the MAC stored
-
-SoCs or SoC revisions ?
-
-[...]
-
-> +2. using qb command in U-Boot console (by enabling CONFIG_CMD_IMX_QB)
-> +
-> +- supports saving on the current boot device, or on another, specified device.
-> +- if flashing via uuu, the command can be added in an uuu script (boot device needs to be specified)
-> +- use 'qb erase' to force DDR re-training
-> +- use for: saving qb data during flashing / controlling the NVM to save to / forcing re-training
-> +
-> +::
-> +
-> +        # To save/erase on current boot device
-> +        => qb save/erase
-> +
-> +        # To save/erase on other boot device
-> +        => qb save/erase mmc 0 # eMMC
-> +        => qb save/erase mmc 1 # SD
-> +        => qb save/erase spi   # NOR SPI
-
-It would be good to have a way to instruct QB to save the data into 
-backup location.
+[1]: https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git
