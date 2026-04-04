@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDC72E88D9D
-	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 14:05:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A046ED7308D
+	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 14:05:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA73D841BC;
-	Sat,  4 Apr 2026 16:04:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 42A91841B9;
+	Sat,  4 Apr 2026 16:04:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V71nIZ6C";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TopcSAEa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCEDB841B9; Sat,  4 Apr 2026 16:04:23 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 97F5583B48; Sat,  4 Apr 2026 16:04:26 +0200 (CEST)
+Received: from mail-oa1-x41.google.com (mail-oa1-x41.google.com
+ [IPv6:2001:4860:4864:20::41])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B54CB8419C
- for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 16:04:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5EA8F8419C
+ for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 16:04:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7d91f82d819so2578155a34.1
- for <u-boot@lists.denx.de>; Sat, 04 Apr 2026 07:04:21 -0700 (PDT)
+Received: by mail-oa1-x41.google.com with SMTP id
+ 586e51a60fabf-4042fe53946so1060995fac.3
+ for <u-boot@lists.denx.de>; Sat, 04 Apr 2026 07:04:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775311460; x=1775916260; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775311462; x=1775916262; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6B4yq9xnv3WRjcpD046dzaCjmel6C6PtA391PIoNSkI=;
- b=V71nIZ6C2cjzkWO8Yy7D8vxZjBbsLDMywL5ZEdcYAC+b6cPv1RN/Plbw6pVCA5UGiz
- 8P6F08wJD4VpdRO3pmNoY+k4qohOGbjKHMxmsApPqYlwB+bCu+FTxsuJ9fy673lPCWU0
- 6y8+DiXMQg1yQX7HGEu4S2/BnHXzFU+o40KIE=
+ bh=CVocBM7IQcbPlxxWNehuDzdP9lwa2qDFmTrtBFCUSuU=;
+ b=TopcSAEaV83mhnZfYAJYvuaaKfeSBHOSAP3/CkwLi4l9VkIekW/SNGrnRLKz8vsSeq
+ ENRG2Q3IjVtko06o4LhDg9IZWkFOUvuTYPeYobmhR40BDK+QMeiFAAZj6Fl78i5vf3Mx
+ bgFnUVkjeOfpd5astcJ+mH9cDDLFU8PcpTzOI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775311460; x=1775916260;
+ d=1e100.net; s=20251104; t=1775311462; x=1775916262;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=6B4yq9xnv3WRjcpD046dzaCjmel6C6PtA391PIoNSkI=;
- b=bC2V0y27NER21aNHnofCPbOS4Wo1aLi6g76hxRv4ZyE+lhmXW4TjwYOMMgFfm71xgU
- q2i3GBjxXShcb1ZiC6Q2dhaGuO8fyqmZ0CeSKO/7RzumyctUv2U0WP+nJIWYftSzOaka
- axIx5EVTVmJGezFTPbJYdTIK9IueM+RQWzZVp/F5d2KJZJoeMZ129Bm+0EnR4iYTc2LT
- xHvSq6qc5nFXqlbtMCDT636EXm1uiPS7d92268mHvNphWfwOgDXwh67mqYzFyVBsH3hc
- gperq0/MWmOV10BgYfT1rQebCDSTiXic3/1wGzkK3UzVMG8udLbrRo/vnfMDUU1AIto+
- gjOg==
-X-Gm-Message-State: AOJu0YwasoYxI0hPu9hXlgFEPCOd7tn1SycQhj+UosQOtCOPkLrKpWSk
- poZakKhDRns5ye+yxbsiBPgeU9WZs5JoiC0HHdEbjh7PXbUEOx9dTpZO9QGxZtc13kOapOpGS3c
- bWQ4=
-X-Gm-Gg: AeBDietRdZw9wWZsCMFSlLzfBXPMPPgkKlcT6bFNkqhI7M4TLoSSqe+A6u2g0V7mQFN
- mOoiGZwoljqaSxK9RkyTZdzZC/+OmxoAOescxqDe/liB/diDLMJW/ywfEoO6oHz0x4KRmmHQTjZ
- IsnPlfAhjvToM8zGlnd8zWkdfhYgCj+yBcan12i1BM3pZ+SBdes3HxpkJHdnnN6bk9O0SMNo3vi
- xqpRlc6DjShWSrq11+9lDyMHheNF6hTdfbMeqfXhyzU76m4hpa/rnDM8e+kxkkGfpSM7jzVb043
- 8mQUk4RoI82E+nIm8LfIJSDpcY3HmThXXQd86H+iEUrWcmaAztZ74pWeEB0rE6ZHmI7WHj4kYCc
- 4TvFNG2JtEne1n1VddmJr5/gQvJOnBepeIIbNvXyKTdCqvoBJ/ebXRi2IG8h2xBhZY/T86GptcL
- Jro0Dz2gbmrcLZl/CN5A==
-X-Received: by 2002:a05:6871:289b:b0:41b:f608:177f with SMTP id
- 586e51a60fabf-4230fd5bf56mr3665606fac.17.1775311459885; 
- Sat, 04 Apr 2026 07:04:19 -0700 (PDT)
+ bh=CVocBM7IQcbPlxxWNehuDzdP9lwa2qDFmTrtBFCUSuU=;
+ b=TYFptvzgTefjzHSe7B4YA/rm6f533IL3VE1f2cnVKnS7NKJ1l+C6Q/4np7iZaqG6fo
+ fZSe7h4q4OgbAakZlqUvrXEByE6Xa4UkD8VBBt+LFPNBvUzVjfh3Bcwmhvs4FjOTFBuo
+ jPppSbYyXkyFPNW2pWTSHLtgAI5iD9aczaeUA1mt2m2Zv7vngAhZshlqIv/H9P55al+o
+ g+1z1Nfmdj/QvX8Q8smhVjAwudQJ4q/HNNKL2FyQpkfTOqSqJnouRWkz6Xq1mTsVx+TK
+ FTPMRZpqQn1BnR4jghrPV03Tj7/18e48LnB/f1D2wvGB9JxMgOX0ZzGAAxMVw/mswRn2
+ x1qQ==
+X-Gm-Message-State: AOJu0Yz+Wrkg+XOm5SQvOOHgVaNkQscwH8kHFlzuCTxeEpZXRzNC06Ru
+ jaoyO7WaDYC9rRlKczEmInXyFmc2Ntl85B9cC1ZPctRxX+e2SCKK/f3Vu3so4+BlKq6EHedAIsx
+ +lp7xXKGM
+X-Gm-Gg: AeBDietFRU0M6Odkc7ziLmF2vy7g6QVAY6ttpdrPGTiNnhMFkGMbr7gp9Z8gNpnoJBB
+ vE9QgLdgj6PJwn4908COcJJfdIp4bTi+aA5RikEtFtXa+QNpB2pRFYLfb+x2Fy8QB4um0dOmYlh
+ DUgbqD0euNeGg9DwrQC6dVZTx/eS0AWtKr5LKx188spywhPMIFcZRuyzcsbLqq9QwL908+ZxeJQ
+ wewfFKSQ7kGtflrL/O+rmqiD88K0FvZ0TNEc9biIeinM2IzZLJ/dVnzHNCGLfA7MsS+ivAJv3sn
+ PyrdK4MrQa5OP5hwAolxVpc8yTraqGID121eW2Q6lJO33jBEMeq8r0xq1fZpez92I/Zn0LL0vDK
+ A0WYh3dPJXlND3CCDxI2PWrhVen0NI1wSOW7EKYCsUgV7Dp3rGCAUA4fMI8F0lyGVfMa9RehFLP
+ pXbVXQF9wROruvo21OFGJMQ0tL5xL1
+X-Received: by 2002:a05:6870:e087:b0:41b:e72e:c115 with SMTP id
+ 586e51a60fabf-4230fbf02e2mr3362949fac.1.1775311462472; 
+ Sat, 04 Apr 2026 07:04:22 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4232eb3d0e4sm2348235fac.6.2026.04.04.07.04.17
+ 586e51a60fabf-4232eb3d0e4sm2348235fac.6.2026.04.04.07.04.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Apr 2026 07:04:18 -0700 (PDT)
+ Sat, 04 Apr 2026 07:04:20 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -73,9 +73,9 @@ Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Martin Schwan <m.schwan@phytec.de>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 12/14] test: Rename setup_bootflow_image()
-Date: Sat,  4 Apr 2026 08:03:16 -0600
-Message-ID: <20260404140328.3724864-13-sjg@chromium.org>
+Subject: [PATCH 13/14] test: Convert setup_rauc_image() to use FsHelper
+Date: Sat,  4 Apr 2026 08:03:17 -0600
+Message-ID: <20260404140328.3724864-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260404140328.3724864-1-sjg@chromium.org>
 References: <20260404140328.3724864-1-sjg@chromium.org>
@@ -97,37 +97,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The name of this is fairly vague. Use 'extlinux' so that it is clear
-that it relates to that format.
+Use FsHelper and DiskHelper to create the RAUC A/B disk image. This
+replaces the manual sfdisk and dd commands, making the code shorter
+and easier to follow.
+
+The same boot and root filesystems are added twice to produce the
+A/B partition layout.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/py/tests/test_ut.py | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ test/py/tests/test_ut.py | 50 +++++++++++++++-------------------------
+ 1 file changed, 18 insertions(+), 32 deletions(-)
 
 diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-index 9b7f1c6f3fc..a858f2c2d13 100644
+index a858f2c2d13..dce5a37dd35 100644
 --- a/test/py/tests/test_ut.py
 +++ b/test/py/tests/test_ut.py
-@@ -159,7 +159,7 @@ booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
-     fsh.cleanup()
+@@ -585,48 +585,34 @@ def setup_efi_image(ubman):
+ def setup_rauc_image(ubman):
+     """Create a 40MB disk image with an A/B RAUC system on it"""
+     mmc_dev = 10
+-    fname = os.path.join(ubman.config.source_dir, f'mmc{mmc_dev}.img')
+-    mnt = ubman.config.persistent_data_dir
+-
+-    spec = 'type=c, size=8M, start=1M, bootable\n' \
+-           'type=83, size=10M\n' \
+-           'type=c, size=8M, bootable\n' \
+-           'type=83, size=10M'
  
+-    utils.run_and_log(ubman, f'qemu-img create {fname} 40M')
+-    utils.run_and_log(ubman, ['sh', '-c', f'printf "{spec}" | sfdisk {fname}'])
++    boot = FsHelper(ubman.config, 'fat32', 8, 'rauc_boot')
++    boot.setup()
  
--def setup_bootflow_image(ubman, devnum, basename, vmlinux, initrd, dtbdir,
-+def setup_extlinux_image(ubman, devnum, basename, vmlinux, initrd, dtbdir,
-                          script):
-     """Create a 20MB disk image with a single FAT partition
+     # Generate boot script
+     script = '# dummy boot script'
+-    bootdir = os.path.join(mnt, 'boot')
+-    utils.run_and_log(ubman, f'mkdir -p {bootdir}')
+-    cmd_fname = os.path.join(bootdir, 'boot.cmd')
+-    scr_fname = os.path.join(bootdir, 'boot.scr')
++    cmd_fname = os.path.join(boot.srcdir, 'boot.cmd')
++    scr_fname = os.path.join(boot.srcdir, 'boot.scr')
+     with open(cmd_fname, 'w', encoding='ascii') as outf:
+         print(script, file=outf)
  
-@@ -236,7 +236,7 @@ label Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
-         append ro root=UUID=9732b35b-4cd5-458b-9b91-80f7047e0b8a rhgb quiet LANG=en_US.UTF-8 cma=192MB cma=256MB
-         fdtdir /%s/
-         initrd /%s''' % (vmlinux, dtbdir, initrd)
--    setup_bootflow_image(ubman, devnum, basename, vmlinux, initrd, dtbdir,
-+    setup_extlinux_image(ubman, devnum, basename, vmlinux, initrd, dtbdir,
-                          script)
+     mkimage = os.path.join(ubman.config.build_dir, 'tools/mkimage')
+     utils.run_and_log(
+         ubman, f'{mkimage} -C none -A arm -T script -d {cmd_fname} {scr_fname}')
+-    utils.run_and_log(ubman, f'rm -f {cmd_fname}')
+-
+-    # Generate empty rootfs
+-    rootdir = os.path.join(mnt, 'root')
+-    utils.run_and_log(ubman, f'mkdir -p {rootdir}')
+-
+-    # Create boot filesystem image with boot script in it and copy to disk image
+-    fsfile = f'rauc_boot.fat32.img'
+-    fs_helper.mk_fs(ubman.config, 'fat32', 0x800000, fsfile.split('.')[0], bootdir)
+-    utils.run_and_log(ubman, f'dd if={mnt}/{fsfile} of=mmc{mmc_dev}.img bs=1M seek=1 conv=notrunc')
+-    utils.run_and_log(ubman, f'dd if={mnt}/{fsfile} of=mmc{mmc_dev}.img bs=1M seek=19 conv=notrunc')
+-    utils.run_and_log(ubman, f'rm -f {scr_fname}')
+-
+-    # Create empty root filesystem image and copy to disk image
+-    fsfile = f'rauc_root.ext4.img'
+-    fs_helper.mk_fs(ubman.config, 'ext4', 0xa00000, fsfile.split('.')[0], rootdir)
+-    utils.run_and_log(ubman, f'dd if={mnt}/{fsfile} of=mmc{mmc_dev}.img bs=1M seek=9 conv=notrunc')
+-    utils.run_and_log(ubman, f'dd if={mnt}/{fsfile} of=mmc{mmc_dev}.img bs=1M seek=27 conv=notrunc')
+-    utils.run_and_log(ubman, f'rm -f {fsfile}')
++    os.remove(cmd_fname)
++    boot.mk_fs()
++
++    root = FsHelper(ubman.config, 'ext4', 10, 'rauc_root')
++    root.mk_fs()
++
++    img = DiskHelper(ubman.config, mmc_dev, 'mmc', True)
++    img.add_fs(boot, DiskHelper.VFAT, bootable=True)
++    img.add_fs(root, DiskHelper.EXT4)
++    img.add_fs(boot, DiskHelper.VFAT, bootable=True)
++    img.add_fs(root, DiskHelper.EXT4)
++    img.create()
++    boot.cleanup()
++    root.cleanup()
  
- def setup_cros_image(ubman):
+ @pytest.mark.buildconfigspec('cmd_bootflow')
+ @pytest.mark.buildconfigspec('sandbox')
 -- 
 2.43.0
 
