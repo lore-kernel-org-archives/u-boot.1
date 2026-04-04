@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07BECE88D9D
-	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 14:05:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDC72E88D9D
+	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 14:05:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DA1C8416F;
-	Sat,  4 Apr 2026 16:04:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CA73D841BC;
+	Sat,  4 Apr 2026 16:04:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h0M0SZGw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V71nIZ6C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EEBD184199; Sat,  4 Apr 2026 16:04:20 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id DCEDB841B9; Sat,  4 Apr 2026 16:04:23 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D454283B8F
- for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 16:04:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B54CB8419C
+ for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 16:04:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-42306f82341so1217285fac.2
- for <u-boot@lists.denx.de>; Sat, 04 Apr 2026 07:04:18 -0700 (PDT)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7d91f82d819so2578155a34.1
+ for <u-boot@lists.denx.de>; Sat, 04 Apr 2026 07:04:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775311457; x=1775916257; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775311460; x=1775916260; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=k6QRmtDfl1DlpkNDVWBCNtwtrRo05c+noizQvruuXLs=;
- b=h0M0SZGwgU545kH94mj7g2xmCfkifydWRKeENm6tfe0VWHaslHhj1ry01OUSonw/mr
- mD3JlmZSf3EQ+8Iraw/I1T1sIIaVBRMdCaGb9uiNK9Pnzc19EUxf0wfBy4nDkJQh0Ogc
- PIQzU1pxATfRd4csyLmqqONq2fe7jfr7xxYq4=
+ bh=6B4yq9xnv3WRjcpD046dzaCjmel6C6PtA391PIoNSkI=;
+ b=V71nIZ6C2cjzkWO8Yy7D8vxZjBbsLDMywL5ZEdcYAC+b6cPv1RN/Plbw6pVCA5UGiz
+ 8P6F08wJD4VpdRO3pmNoY+k4qohOGbjKHMxmsApPqYlwB+bCu+FTxsuJ9fy673lPCWU0
+ 6y8+DiXMQg1yQX7HGEu4S2/BnHXzFU+o40KIE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775311457; x=1775916257;
+ d=1e100.net; s=20251104; t=1775311460; x=1775916260;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=k6QRmtDfl1DlpkNDVWBCNtwtrRo05c+noizQvruuXLs=;
- b=V3NVElEX011eqPVGb95MpmP8awOQKfrZEw5EUERvdzUSA6UsR/ImFU0hi9HR2mylvi
- cLVqid5nc2eNL3w9jgg1+gtYoqgZ7GuwOAKFnUkPJXSa84OUopBefc46cydvd5s7MpAq
- E2cy0nXKb6dJVpkpdUbLVHTTRWthtpMMz2wRhpKIVgNMmgdc7gUVUrc4o7kM2H2jdqAH
- 8co4ThYmbo72Ugnfb1U8/3LX2xZpiSHX/VpjwsfFXJtbLJ0h+LsKpJ7Y3UKmT/6wZ9N0
- dDXzTsQDssUfDGdSgHmg9DhyYx4KYTFCrQK2AEKncLe1edl96BQC8bzJtuYXMv14YUc/
- O5wQ==
-X-Gm-Message-State: AOJu0YxvqeaeZ3tCz5LMnKtnszIU/cChlymTRLKnB5s1nPQ5+Qv02pPI
- afVR5N0Vhqg6Zb8I+u6xvyFeiy9slqiT3IK4PuOiPuazVrT29k6yL8P21BHRm/Imp7+T+C7jxAY
- tHVA=
-X-Gm-Gg: AeBDiet/fbBAN/UevWTJIdPPRmvoq7hLGl90L8OA2OldjwpF3brCL7Fwjih7hQ51T1D
- 6g0cJDbR0F0U0XQrF4w+DMvzbYQWdCTu7ByUgLRe7p+/q8AKO5au1/7sUvBZurieFX4sWtAxbGV
- VrxkLMk80Z+D45v14l9fAY69x0fW/T5v+PZA9m0X14xjBcds1qSr+QmJyfEbg28F9ZtG//1dtJn
- G5A3W/xv1q4BqAVo2OXrJPWWPSSiVGwCBRyBR5q9pojHOGp3ouqoh5NytXB4g+oVH5u1Nx6oip1
- QMxitJffRUYhK/uWc4vDauHZ37vYdhYw9VWMekktBUBuwaih2yG0sQeQQ53GyhmeI509R1UBvR8
- EGkrCizvqmmw9DdeM9hnWVHWYbG7Mu8h5a5QfrxAZFfYsJQfz1RMJ+LV+yH+h4bnTM/voTahbMe
- As5YE0btaMnS6ZebvtyA==
-X-Received: by 2002:a05:6871:5b19:b0:41c:46c7:2e78 with SMTP id
- 586e51a60fabf-4230ff86db8mr3530606fac.23.1775311456849; 
- Sat, 04 Apr 2026 07:04:16 -0700 (PDT)
+ bh=6B4yq9xnv3WRjcpD046dzaCjmel6C6PtA391PIoNSkI=;
+ b=bC2V0y27NER21aNHnofCPbOS4Wo1aLi6g76hxRv4ZyE+lhmXW4TjwYOMMgFfm71xgU
+ q2i3GBjxXShcb1ZiC6Q2dhaGuO8fyqmZ0CeSKO/7RzumyctUv2U0WP+nJIWYftSzOaka
+ axIx5EVTVmJGezFTPbJYdTIK9IueM+RQWzZVp/F5d2KJZJoeMZ129Bm+0EnR4iYTc2LT
+ xHvSq6qc5nFXqlbtMCDT636EXm1uiPS7d92268mHvNphWfwOgDXwh67mqYzFyVBsH3hc
+ gperq0/MWmOV10BgYfT1rQebCDSTiXic3/1wGzkK3UzVMG8udLbrRo/vnfMDUU1AIto+
+ gjOg==
+X-Gm-Message-State: AOJu0YwasoYxI0hPu9hXlgFEPCOd7tn1SycQhj+UosQOtCOPkLrKpWSk
+ poZakKhDRns5ye+yxbsiBPgeU9WZs5JoiC0HHdEbjh7PXbUEOx9dTpZO9QGxZtc13kOapOpGS3c
+ bWQ4=
+X-Gm-Gg: AeBDietRdZw9wWZsCMFSlLzfBXPMPPgkKlcT6bFNkqhI7M4TLoSSqe+A6u2g0V7mQFN
+ mOoiGZwoljqaSxK9RkyTZdzZC/+OmxoAOescxqDe/liB/diDLMJW/ywfEoO6oHz0x4KRmmHQTjZ
+ IsnPlfAhjvToM8zGlnd8zWkdfhYgCj+yBcan12i1BM3pZ+SBdes3HxpkJHdnnN6bk9O0SMNo3vi
+ xqpRlc6DjShWSrq11+9lDyMHheNF6hTdfbMeqfXhyzU76m4hpa/rnDM8e+kxkkGfpSM7jzVb043
+ 8mQUk4RoI82E+nIm8LfIJSDpcY3HmThXXQd86H+iEUrWcmaAztZ74pWeEB0rE6ZHmI7WHj4kYCc
+ 4TvFNG2JtEne1n1VddmJr5/gQvJOnBepeIIbNvXyKTdCqvoBJ/ebXRi2IG8h2xBhZY/T86GptcL
+ Jro0Dz2gbmrcLZl/CN5A==
+X-Received: by 2002:a05:6871:289b:b0:41b:f608:177f with SMTP id
+ 586e51a60fabf-4230fd5bf56mr3665606fac.17.1775311459885; 
+ Sat, 04 Apr 2026 07:04:19 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4232eb3d0e4sm2348235fac.6.2026.04.04.07.04.14
+ 586e51a60fabf-4232eb3d0e4sm2348235fac.6.2026.04.04.07.04.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Apr 2026 07:04:15 -0700 (PDT)
+ Sat, 04 Apr 2026 07:04:18 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -73,9 +73,9 @@ Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Martin Schwan <m.schwan@phytec.de>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 11/14] test: Convert test_ut_dm_init() to use FsHelper
-Date: Sat,  4 Apr 2026 08:03:15 -0600
-Message-ID: <20260404140328.3724864-12-sjg@chromium.org>
+Subject: [PATCH 12/14] test: Rename setup_bootflow_image()
+Date: Sat,  4 Apr 2026 08:03:16 -0600
+Message-ID: <20260404140328.3724864-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260404140328.3724864-1-sjg@chromium.org>
 References: <20260404140328.3724864-1-sjg@chromium.org>
@@ -97,7 +97,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the helper here, for consistency.
+The name of this is fairly vague. Use 'extlinux' so that it is clear
+that it relates to that format.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
@@ -106,20 +107,27 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-index ad84fb56b85..9b7f1c6f3fc 100644
+index 9b7f1c6f3fc..a858f2c2d13 100644
 --- a/test/py/tests/test_ut.py
 +++ b/test/py/tests/test_ut.py
-@@ -542,8 +542,8 @@ def test_ut_dm_init(ubman):
-         utils.run_and_log(
-             ubman, f'sfdisk {fn}', stdin=b'type=83')
+@@ -159,7 +159,7 @@ booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
+     fsh.cleanup()
  
--    fs_helper.mk_fs(ubman.config, 'ext2', 0x200000, '2MB', None)
--    fs_helper.mk_fs(ubman.config, 'fat32', 0x100000, '1MB', None)
-+    FsHelper(ubman.config, 'ext2', 2, '2MB').mk_fs()
-+    FsHelper(ubman.config, 'fat32', 1, '1MB').mk_fs()
  
-     mmc_dev = 6
-     fn = os.path.join(ubman.config.source_dir, f'mmc{mmc_dev}.img')
+-def setup_bootflow_image(ubman, devnum, basename, vmlinux, initrd, dtbdir,
++def setup_extlinux_image(ubman, devnum, basename, vmlinux, initrd, dtbdir,
+                          script):
+     """Create a 20MB disk image with a single FAT partition
+ 
+@@ -236,7 +236,7 @@ label Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
+         append ro root=UUID=9732b35b-4cd5-458b-9b91-80f7047e0b8a rhgb quiet LANG=en_US.UTF-8 cma=192MB cma=256MB
+         fdtdir /%s/
+         initrd /%s''' % (vmlinux, dtbdir, initrd)
+-    setup_bootflow_image(ubman, devnum, basename, vmlinux, initrd, dtbdir,
++    setup_extlinux_image(ubman, devnum, basename, vmlinux, initrd, dtbdir,
+                          script)
+ 
+ def setup_cros_image(ubman):
 -- 
 2.43.0
 
