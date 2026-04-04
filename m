@@ -4,99 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 623EAE88D6E
-	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 01:49:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42281E88D7A
+	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 03:56:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77DCE839D5;
-	Sat,  4 Apr 2026 03:49:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0x0f.com
+	by phobos.denx.de (Postfix) with ESMTP id DABA38407E;
+	Sat,  4 Apr 2026 05:56:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=0x0f.com header.i=@0x0f.com header.b="qC3vELNR";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="ThYLjRa+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C37983642; Sat,  4 Apr 2026 03:49:20 +0200 (CEST)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A6C7A840AA; Sat,  4 Apr 2026 05:56:29 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4890E83642
- for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 03:49:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ACD8883B8F
+ for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 05:56:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0x0f.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-c70c112cb61so1312648a12.0
- for <u-boot@lists.denx.de>; Fri, 03 Apr 2026 18:49:15 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775267354; cv=none;
- d=google.com; s=arc-20240605;
- b=TYQFnHA7ekmRNE0u2Z5/P5SXjNZgiNxpKG6t27iDYpvR/Y41UfGXHh7jW+xxagr+eF
- 6Esvf8/ZtsYtkLwDlM5iREBo/N025yTxdos/h3j7F8vWMJG2mmS40SMVlze9mEU8Z1jk
- VGULhmT92WGf4kx+TAsbdX51Zxus+qPo6GfJ8SAZqEPY4uKTeWmBRyptYFcuFx1Zb4C1
- QZ8OzazAPr2f8p1ibD6b4l+cDW/m20B68D6P3x5ghQdaO0IV2wf5+xhG5c6TVio/otaR
- +lsie6LC/Izbx7X7IvZuHR1QgF/Sj0q2EpsUR4EP9umGrwcynwR/mrxb6F5DYm6jQGHl
- 2fAQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=D+P4tiE4DWcxv7dGzcj6pC1xHzEspJzUlpt8l65BfsI=;
- fh=SzBzyNi005PpH/XaxKiLZXzYaFVsaS2YRuavy5x6t1Y=;
- b=CC1VC6nrBuhr/En8Yi4xfAacyIHgoGageJcWkwTbZjqpJCdUatX9JngiZ1qJYtVbCK
- GLukR51+/pBx4KMY2XsCVayP5O1N2D1108OSJHQzdKlytjc2wL3HN9RX/Fsknii/ZFOm
- 2tvHHHnEhKS7rhiJmle0EaQkBTNH6ghoakcr0GnMvvEXK0yGSy9ApAUw5J6bOfJ+eCrV
- ubO/H3npDeGuXgYqZjOFG48nRD8bKy9vnM/OjvIZGgQLzB0qxeA5W9ZlNpnpfoZlGlKK
- mRrMRWkWlJYGPxtii4ygua61Zbn8kFGoSfpluM/joxyY35ok4KPXKut7VLYyABvTrRom
- aiPw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=0x0f.com; s=google; t=1775267354; x=1775872154; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=D+P4tiE4DWcxv7dGzcj6pC1xHzEspJzUlpt8l65BfsI=;
- b=qC3vELNRl5c4XgDbIPxdnihuPTcz5DKSG7Hb0zyuBp95FKoEudob+LyViGCoh9FGjW
- ZN415BOAgd5pDAg3BVih00xophXO8BP2gg/G8MUUB4VLVA1blir9MN/bdL2r0ua5NtOO
- RqzmI0g8HOt319XL/rFbmsEjo86Gr8mFNxL3Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775267354; x=1775872154;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=D+P4tiE4DWcxv7dGzcj6pC1xHzEspJzUlpt8l65BfsI=;
- b=hekMYqkWWEqo2BjQSotHNEjHhmDhZ6LDn2rcuPi+qSn+NmONV/oouZQ937jkiJXgpc
- wjb0LX+xlo5OkpFsiNC+4n0Y275SnVdNBJvmAT+txwaXnk6BE5BEYCn++Twt7JtcsjSc
- 2aoB2Fk8EwznEaDcXzzwecavQGN2qSAAStC7Qa72pg7i6A9/wURbRgsPRaVvmCwIWaSe
- B1e7K4fmqwsZxPSj/6NBaFtxIACMIvrD90pD188L5vQcE6ShF6W43u2+V5nSIkHpkxil
- YYofRxSx0qS19wyuXmLx6A1cvssckj3tHHQi211rslhtmqX/g7hFx04PpgPQC03Uw+8A
- fRDA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWMP/1jsWh6nEkl9MOoTB+En9lzYtxBjNFFWPfvBm0w6G8OtlWYKjrqEtUdBcS4vyDLiLwBrX0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyPxbkjGoQGvK+yVP6rsDA2+xBZmjp3Qoe6u6eb5twYM5kJRrB+
- 7RDfXt4YO5H+BeDOxlaO6CYtYSCZ6vF6EUEGXavB1PahUCxDghKt1NKIB+ac/0zpwJR8Eq+mcjc
- I5dVYYVLjOjL7yBmmnjmXc+A7fQHK9Pbkj51/swtg9A==
-X-Gm-Gg: AeBDiesn8Rtxz7rQVEtDkewGhxJRn06emz9wC7P8wL+N/Hr4WiKo1MJ63UDXsMoJ/xu
- DAqpMDzJD/MjJ+S91WK3s3PuWjPkdPBsnAHK26SqtFMeBZN0jCZa2pbSKt6PRUzqyjbKi1YR6pT
- cCRFSgX0Mfo0RQR3kJpT2jgSCyKI8BLQpgJSCwHK7Jdvhr5mpHUQiSR7zmpIrsLxphiPPJLdAfv
- sDdefoIp6nmGl+4oSEantTl+p9U8L+SCi6kxym56T3K1dMxZoNKkzr/vDyJeuTj0X2G7V/uuV/5
- WY2D
-X-Received: by 2002:a05:6a20:6a28:b0:398:8db5:4131 with SMTP id
- adf61e73a8af0-39f2ed95189mr4661613637.9.1775267354346; Fri, 03 Apr 2026
- 18:49:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 97AC3113080; Sat,  4 Apr 2026 05:56:25 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1775274986;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=Pj5MdMAj5Fn8VgA43k39q50cavxcH96WqRQ0J8y3tt0=;
+ b=ThYLjRa+lw1uGJBTEbfRMd2bEjtEllZwSgthVc6/527pCF3oREPZsCVCLxSjN45Ed7UoBS
+ c/mAbd3uELF8vNrl9zVbMySpFCyLjH5ZVBe0ghq/BYrjPLenokZg0Lh0Dg/NaUBP/okBmz
+ ygiIHrOTxBVPpWRInPhuxljQYZFu+vaQgzSzDJyiPf2Xzik6Cd6ivpJcII8b2TATc8kdXQ
+ IWzchjOuWZvZhkss381OpjPaXikbJysOyfIjwndy68Ngf0BDvkbtBJFYkvOStVSYW/TLF5
+ 2lZS/n7k1VOOTvLbaQeAAS1KrJnbiZnErCS90JH0xR3aQ8yQ2xq3fEPeyRDQTA==
+Message-ID: <b884d242-6be2-4783-81d3-0bd55c81a216@nabladev.com>
+Date: Sat, 4 Apr 2026 05:56:25 +0200
 MIME-Version: 1.0
-References: <20260310135940.1756141-1-daniel@thingy.jp>
- <20260310135940.1756141-3-daniel@thingy.jp>
- <CAFr9PXn3abM6DcbfJBBbokBtQ02XrfK66jVtjCGo8+_V-mtkzw@mail.gmail.com>
- <ac7G35VDs5TV4GCP@google.com>
-In-Reply-To: <ac7G35VDs5TV4GCP@google.com>
-From: Daniel Palmer <daniel@0x0f.com>
-Date: Sat, 4 Apr 2026 10:49:03 +0900
-X-Gm-Features: AQROBzCdtAh93lsJYk3koiGpTTCbbY4IzpMc4CN5I-nR68JcFwKkunz5NK14ffU
-Message-ID: <CAFr9PX=FgjwkTPN5wwquxKW7y8XZGp2BKCw5i1c4YKP3-3eNpQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 2/3] virtio: mmio: endian *fixes* *HACK*
-To: Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: angelo@kernel-space.org, bmeng.cn@gmail.com, laurent@vivier.eu, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [REGRESSION] imx8mm_evk: FSPI build broken by 37e50627e
+To: Alexander Koch <akoch@initse.com>, "festevam@gmail.com"
+ <festevam@gmail.com>, "peng.fan@oss.nxp.com" <peng.fan@oss.nxp.com>,
+ "ye.li@nxp.com" <ye.li@nxp.com>, Simon Glass <sjg@chromium.org>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "tharvey@gateworks.com" <tharvey@gateworks.com>
+References: <fcc606350e96e03911f6c67537853de1ad51dc10.camel@initse.com>
+ <861d61d6-3d35-47bf-9cea-21f7cfd13c1a@nabladev.com>
+ <24e183b2fc5419b9ed1685f49a67fb9822b1ad73.camel@initse.com>
+ <a5f735cc-e699-422a-b88d-e5fe33fc8b7b@nabladev.com>
+ <ea2937eabb137e2c5845bc451f7c28a827496eb3.camel@initse.com>
+ <CAOMZO5CsuTw92safK80f0v+0hPkOQvHVEfKZyqWvfdw7ghnxmg@mail.gmail.com>
+ <CAOMZO5AqeMmeWLXX3mPKceshw8T=fcFax7Ja=tfm0Qf6Mh_cOg@mail.gmail.com>
+ <032b2f81f63f0fa9f3f5910edd4222932b4a4741.camel@initse.com>
+Content-Language: en-US
+From: Marek Vasut <marex@nabladev.com>
+In-Reply-To: <032b2f81f63f0fa9f3f5910edd4222932b4a4741.camel@initse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,59 +77,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kuan-Wei,
+On 4/3/26 9:23 PM, Alexander Koch wrote:
+> I think I have narrowed down the cause for the broken SPL blob but I don't fully
+> understand it.
+> 
+> Comparing hexdumps of the last working SPL+DDR blob and the first broken one we
+> can see three chunks of difference:
+> 
+> 1) two bytes near the IVT
+> 2) U-Boot version string and compile timestamp
+> 3) four bytes around offset 0x18b50 (striped at 16 bytes)
+> 
+> Let's ignore number 2) as that is expected and focus on 1) and 3).
+> 
+> For the first difference we have at offset 0x20 in spl.bin (0x1020 in
+> flash.bin):
+> 
+>    good: 0000 0020:  C0 0F 7E 00 00 DC 02 00
+>     bad: 0000 0020:  C0 1B 7E 00 00 D0 02 00
+> 
+> I first thought it could be the boot data pointer not reflecting the FSPI config
+> blob offset but if I read `struct ivt` correctly this is actually _after_ the
+> IVT itself.
+> 
+> So I patched these two bytes in the broken 'flash.bin' and that made the SPL run
+> (while console output still stopped before ATF).
 
-On Fri, 3 Apr 2026 at 04:43, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
-> >
-> > I have a patch for this in my Linux tree too so I sent that:
-> > https://lore.kernel.org/lkml/20260314030612.1949420-1-daniel@thingy.jp/T/#mab66837bb90c30916fd0fc066245bdeb9918e96c
-> > It would seem our versions of readl(), writel() etc are broken. For
-> > Linux the nommu versions are broken, for u-boot it seems they are all
-> > broken. By broken I mean they should be expecting a little endian
-> > value from the access and then converting to the CPU endian. (I think)
-> >
->
-> Sorry for the late reply.
->
-> So it sounds like we have to fix all the broken readl/writel() in both
-> Linux and U-Boot first.
->
-> For U-Boot, I think we need the following fix? (totally untested yet)
->
-> diff --git a/arch/m68k/include/asm/io.h b/arch/m68k/include/asm/io.h
-> index 35ad4a1c044..0106a57a03e 100644
-> --- a/arch/m68k/include/asm/io.h
-> +++ b/arch/m68k/include/asm/io.h
-> @@ -31,10 +31,10 @@
->  #define writew(b,addr)         ((*(volatile u16 *) (addr)) = (b))
->  #define writel(b,addr)         ((*(volatile u32 *) (addr)) = (b))
->  #else
-> -#define readw(addr)            in_be16((volatile u16 *)(addr))
-> -#define readl(addr)            in_be32((volatile u32 *)(addr))
-> -#define writew(b,addr)         out_be16((volatile u16 *)(addr),(b))
-> -#define writel(b,addr)         out_be32((volatile u32 *)(addr),(b))
-> +#define readw(addr)            in_le16((volatile u16 *)(addr))
-> +#define readl(addr)            in_le32((volatile u32 *)(addr))
-> +#define writew(b,addr)         out_le16((volatile u16 *)(addr),(b))
-> +#define writel(b,addr)         out_le32((volatile u32 *)(addr),(b))
->  #endif
->
->  /*
+board/nxp/imx8mm_evk/imximage-8mm-lpddr4.cfg:LOADER 
+u-boot-spl-ddr.bin      0x7E1000
 
-Doing this might fix virtio but break anything that relies on the
-current behaviour. At least in Linux Coldfire has hacks in its io
-macros to retain the broken behaviour for certain places but have the
-correct behaviour for others (PCI I guess).
-Since MMU-abled classic m68k seems to have the correct behaviour in
-Linux I think we should split the u-boot io macros into Coldfire and
-classic m68k and make classic m68k match Linux. That will avoid
-breaking anything in coldfire that uses the io macros and depends on
-the current behavior. But I guess we might need to revisit the pieces
-you added for the virt machine to make sure they still work.
+configs/imx8mm_evk_defconfig:CONFIG_SPL_TEXT_BASE=0x7E1000
 
-nommu classic m68k is broken in Linux but I intend to send a patch to
-make it match MMU classic m68k.
+It seems the SPL entry point address somehow changed ... from 0x7e0fc0 
+to 0x7e1bc0 .. the delta is 0xc00 , does that fit into some offset in 
+the imx8mm-u-boot.dtsi binman node ?
 
-Cheers,
+> The second chunk of interest is at offset 0x18b50 in spl.bin (0x19b50 in
+> flash.bin):
+> 
+> good:
+>    0001 8B50:  B8 C4 80 00 00 00 00 00
+>    0001 8B60:  F8 69 80 00 00 00 00 00
+>    0001 8B70:  74 63 80 00 00 00 00 00
+>    0001 8B80:  80 E5 7F 00 00 00 00 00
+> 
+> bad:
+>    0001 8B50:  B8 D4 80 00 00 00 00 00
+>    0001 8B60:  F8 79 80 00 00 00 00 00
+>    0001 8B70:  74 73 80 00 00 00 00 00
+>    0001 8B80:  80 F5 7F 00 00 00 00 00
+> 
+> After patching those 4 bytes I got ATF and U-Boot proper running so I'd consider
+> that flash.bin fixed.
+> 
+> Can anybody tell me what we have in those two locations?
+These locations are offsets of the lpddr4_pmu_train_* DRAM init blobs , 
+see arch/arm/dts/imx8mm-u-boot.dtsi . When binman bundles those blobs 
+together with SPL, it patches the locations of those blobs into the SPL 
+binary. It seems it patches in the wrong offsets ... offset by 0x1000 
+Bytes , isn't that the size of the FSPI page ?
 
-Daniel
+Thank you for investigating this problem, it is much appreciated !
+
++CC Simon, maybe he can help with binman ?
