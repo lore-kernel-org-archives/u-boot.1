@@ -4,123 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A5B6E88D72
-	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 00:08:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 623EAE88D6E
+	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 01:49:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02C9C839A8;
-	Sat,  4 Apr 2026 02:08:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 77DCE839D5;
+	Sat,  4 Apr 2026 03:49:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0x0f.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rLtbYo+H";
+	dkim=pass (1024-bit key; unprotected) header.d=0x0f.com header.i=@0x0f.com header.b="qC3vELNR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 919E983B8F; Sat,  4 Apr 2026 02:08:16 +0200 (CEST)
-Received: from MW6PR02CU001.outbound.protection.outlook.com
- (mail-westus2azlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c007::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5C37983642; Sat,  4 Apr 2026 03:49:20 +0200 (CEST)
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
+ [IPv6:2607:f8b0:4864:20::530])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D34280077
- for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 02:08:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4890E83642
+ for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 03:49:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UL/WbUkTU/Oy1aIdSBQnQOGySkNL85GwW5gMtaqpBPCKt0iV2+L4bxnFMOfDqmhkp3ZIzAg9ScqT/O834S5wnVUG6Zepv+xH7TEQ+AAgwjN0vJWOkThgkxPicz08AcvWKSKz2JZtb/DDyon1n2S0Vn8d7hBw6WQR8XMH4DwPTTBjJ/44InvgcOgNaaMuIkPle7JmPDHqmCi21C/NrBbWwjaETXyARmh40M0S1YJ2b7OXR8xJ9gko25ZIStGeuoNXgQrEFRHCUMzt66KowA7JuWXwgMZ2yn0OumO69O70BZMKfgoRM7A7WWzs+mCHxGeBbmQGNfzKNivot1sFlxsDFQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=z6SGK2Zo1VDN3sVSZeP/X/iX2HvFv8rhqCRwbrX5AfQ=;
- b=R65kTpvq72lkkXAjBboIz8vbUuozDp/mhuWq+7h7WL0QK0fbB2b0bxCJTwrGMzFfp/FCampZ2ftYJ+W+JU6ei7B+aLqg2HB1ctcO9VZ0/KHsgyr1i8zQrhdlrj3xAI8J9Gxz/WqnXnxWW5G0uyP2SND9XjgxPLQcKcTTbvCa9mHI+GBA589sDxtNqYVF6zHGu2xEH2X05fjSLKsJ2fUW9yGaPH7263p15kbW+XugRbYLF76fwI9TbvudN3ZLGjx7tKjCysRJDGEEY9PFfVei5os4FKxISvy4KOJCLDRBqUmBNk8hQPg+TgvZS5inftiEp2iaiMI2OskyIXVthti5DQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=z6SGK2Zo1VDN3sVSZeP/X/iX2HvFv8rhqCRwbrX5AfQ=;
- b=rLtbYo+HcW/XQiB/hjVPihCNmmnBR2IOF3OqnKE95FGXdSklnZW9orPCi5JQyDnUdzNKm7D78Z/CylaX6U5wBqcajk1A+rNLH0xsYsjNdtqC2KWq0OhL1OqdacqdY77xM66pl1p4CetI/xUyilwLK1bN5j3qMVZAlS7hC9nqPC0=
-Received: from CH2PR14CA0035.namprd14.prod.outlook.com (2603:10b6:610:56::15)
- by MN6PR10MB7520.namprd10.prod.outlook.com (2603:10b6:208:478::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.17; Sat, 4 Apr
- 2026 00:08:09 +0000
-Received: from CH3PEPF0000000D.namprd04.prod.outlook.com
- (2603:10b6:610:56:cafe::55) by CH2PR14CA0035.outlook.office365.com
- (2603:10b6:610:56::15) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9745.29 via Frontend Transport; Sat,
- 4 Apr 2026 00:08:09 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- CH3PEPF0000000D.mail.protection.outlook.com (10.167.244.43) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9745.21 via Frontend Transport; Sat, 4 Apr 2026 00:08:07 +0000
-Received: from DFLE211.ent.ti.com (10.64.6.69) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 3 Apr
- 2026 19:08:06 -0500
-Received: from DFLE208.ent.ti.com (10.64.6.66) by DFLE211.ent.ti.com
- (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 3 Apr
- 2026 19:08:06 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE208.ent.ti.com
- (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 3 Apr 2026 19:08:06 -0500
-Received: from localhost ([10.249.32.65])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 634086R9707898;
- Fri, 3 Apr 2026 19:08:06 -0500
+ dmarc=none (p=none dis=none) header.from=0x0f.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-c70c112cb61so1312648a12.0
+ for <u-boot@lists.denx.de>; Fri, 03 Apr 2026 18:49:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775267354; cv=none;
+ d=google.com; s=arc-20240605;
+ b=TYQFnHA7ekmRNE0u2Z5/P5SXjNZgiNxpKG6t27iDYpvR/Y41UfGXHh7jW+xxagr+eF
+ 6Esvf8/ZtsYtkLwDlM5iREBo/N025yTxdos/h3j7F8vWMJG2mmS40SMVlze9mEU8Z1jk
+ VGULhmT92WGf4kx+TAsbdX51Zxus+qPo6GfJ8SAZqEPY4uKTeWmBRyptYFcuFx1Zb4C1
+ QZ8OzazAPr2f8p1ibD6b4l+cDW/m20B68D6P3x5ghQdaO0IV2wf5+xhG5c6TVio/otaR
+ +lsie6LC/Izbx7X7IvZuHR1QgF/Sj0q2EpsUR4EP9umGrwcynwR/mrxb6F5DYm6jQGHl
+ 2fAQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=D+P4tiE4DWcxv7dGzcj6pC1xHzEspJzUlpt8l65BfsI=;
+ fh=SzBzyNi005PpH/XaxKiLZXzYaFVsaS2YRuavy5x6t1Y=;
+ b=CC1VC6nrBuhr/En8Yi4xfAacyIHgoGageJcWkwTbZjqpJCdUatX9JngiZ1qJYtVbCK
+ GLukR51+/pBx4KMY2XsCVayP5O1N2D1108OSJHQzdKlytjc2wL3HN9RX/Fsknii/ZFOm
+ 2tvHHHnEhKS7rhiJmle0EaQkBTNH6ghoakcr0GnMvvEXK0yGSy9ApAUw5J6bOfJ+eCrV
+ ubO/H3npDeGuXgYqZjOFG48nRD8bKy9vnM/OjvIZGgQLzB0qxeA5W9ZlNpnpfoZlGlKK
+ mRrMRWkWlJYGPxtii4ygua61Zbn8kFGoSfpluM/joxyY35ok4KPXKut7VLYyABvTrRom
+ aiPw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=0x0f.com; s=google; t=1775267354; x=1775872154; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=D+P4tiE4DWcxv7dGzcj6pC1xHzEspJzUlpt8l65BfsI=;
+ b=qC3vELNRl5c4XgDbIPxdnihuPTcz5DKSG7Hb0zyuBp95FKoEudob+LyViGCoh9FGjW
+ ZN415BOAgd5pDAg3BVih00xophXO8BP2gg/G8MUUB4VLVA1blir9MN/bdL2r0ua5NtOO
+ RqzmI0g8HOt319XL/rFbmsEjo86Gr8mFNxL3Q=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775267354; x=1775872154;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=D+P4tiE4DWcxv7dGzcj6pC1xHzEspJzUlpt8l65BfsI=;
+ b=hekMYqkWWEqo2BjQSotHNEjHhmDhZ6LDn2rcuPi+qSn+NmONV/oouZQ937jkiJXgpc
+ wjb0LX+xlo5OkpFsiNC+4n0Y275SnVdNBJvmAT+txwaXnk6BE5BEYCn++Twt7JtcsjSc
+ 2aoB2Fk8EwznEaDcXzzwecavQGN2qSAAStC7Qa72pg7i6A9/wURbRgsPRaVvmCwIWaSe
+ B1e7K4fmqwsZxPSj/6NBaFtxIACMIvrD90pD188L5vQcE6ShF6W43u2+V5nSIkHpkxil
+ YYofRxSx0qS19wyuXmLx6A1cvssckj3tHHQi211rslhtmqX/g7hFx04PpgPQC03Uw+8A
+ fRDA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWMP/1jsWh6nEkl9MOoTB+En9lzYtxBjNFFWPfvBm0w6G8OtlWYKjrqEtUdBcS4vyDLiLwBrX0=@lists.denx.de
+X-Gm-Message-State: AOJu0YyPxbkjGoQGvK+yVP6rsDA2+xBZmjp3Qoe6u6eb5twYM5kJRrB+
+ 7RDfXt4YO5H+BeDOxlaO6CYtYSCZ6vF6EUEGXavB1PahUCxDghKt1NKIB+ac/0zpwJR8Eq+mcjc
+ I5dVYYVLjOjL7yBmmnjmXc+A7fQHK9Pbkj51/swtg9A==
+X-Gm-Gg: AeBDiesn8Rtxz7rQVEtDkewGhxJRn06emz9wC7P8wL+N/Hr4WiKo1MJ63UDXsMoJ/xu
+ DAqpMDzJD/MjJ+S91WK3s3PuWjPkdPBsnAHK26SqtFMeBZN0jCZa2pbSKt6PRUzqyjbKi1YR6pT
+ cCRFSgX0Mfo0RQR3kJpT2jgSCyKI8BLQpgJSCwHK7Jdvhr5mpHUQiSR7zmpIrsLxphiPPJLdAfv
+ sDdefoIp6nmGl+4oSEantTl+p9U8L+SCi6kxym56T3K1dMxZoNKkzr/vDyJeuTj0X2G7V/uuV/5
+ WY2D
+X-Received: by 2002:a05:6a20:6a28:b0:398:8db5:4131 with SMTP id
+ adf61e73a8af0-39f2ed95189mr4661613637.9.1775267354346; Fri, 03 Apr 2026
+ 18:49:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+References: <20260310135940.1756141-1-daniel@thingy.jp>
+ <20260310135940.1756141-3-daniel@thingy.jp>
+ <CAFr9PXn3abM6DcbfJBBbokBtQ02XrfK66jVtjCGo8+_V-mtkzw@mail.gmail.com>
+ <ac7G35VDs5TV4GCP@google.com>
+In-Reply-To: <ac7G35VDs5TV4GCP@google.com>
+From: Daniel Palmer <daniel@0x0f.com>
+Date: Sat, 4 Apr 2026 10:49:03 +0900
+X-Gm-Features: AQROBzCdtAh93lsJYk3koiGpTTCbbY4IzpMc4CN5I-nR68JcFwKkunz5NK14ffU
+Message-ID: <CAFr9PX=FgjwkTPN5wwquxKW7y8XZGp2BKCw5i1c4YKP3-3eNpQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 2/3] virtio: mmio: endian *fixes* *HACK*
+To: Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: angelo@kernel-space.org, bmeng.cn@gmail.com, laurent@vivier.eu, 
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Date: Fri, 3 Apr 2026 19:08:06 -0500
-Message-ID: <DHJXLS85SGO8.7U7T6E8CCW6P@ti.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Randolph Sapp <rs@ti.com>
-CC: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
- <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
- <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH 5/6] efi_memory: backfill EFI_CONVENTIONAL_MEMORY
-From: Randolph Sapp <rs@ti.com>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260402001410.3736815-1-rs@ti.com>
- <20260402001410.3736815-6-rs@ti.com>
- <CAC_iWjKbeph+3M=GDy3_KeprSaUTVd3375O3Ny9GPV14XNBUgg@mail.gmail.com>
- <DHIUKA2JVA4H.V11Z7EF0I1A1@ti.com> <DHIXO2TK649C.JAGU2F3IZ91S@ti.com>
- <CAC_iWjK=Fx80=Zh73f01oLvQETd8qiuqWyVXCDDpQcwC=BDdtQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjK=Fx80=Zh73f01oLvQETd8qiuqWyVXCDDpQcwC=BDdtQ@mail.gmail.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PEPF0000000D:EE_|MN6PR10MB7520:EE_
-X-MS-Office365-Filtering-Correlation-Id: bc172765-10bd-4079-3342-08de91de4018
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|82310400026|1800799024|376014|22082099003|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: vKpZwTw2qQwcgrJEr8ArITQgXblHJpzEroIg4WPI2NKUH1SkYzbOGAShqSl+5DqENxkkBLWqBLiYgn4VieXUz6spv4EQniM/+BPGLrQtvm8DVwHkaxmpYiDFg4bar1tspgZ8v5EddCcd1AsUIc402+WihP+JRIK9m/Mnr1WraqL41nQ1EcTBokgad8iA+IMgPwIINIex2SWkLI+fwtmJ5/v0ohzotwWn+Ax7dRtmRfw6csdVEeBa0V2XMknMpvE/+CW/bcZYBZlIs5u2Q/cUQ5WDyOm1WAqAh9rznhlzYuOHeTPVpgMCpQV66WBq6dfspx3kTCktIkyY3LQfQ8MvN9w324blirMRP92f0cH9hTyFIFib5GLPvRw4qvYViTT7mqYEdsDJfg0m5dyadRa54jdpY4XVMMxue0taStR8wSXwmz3EH92MESdCLIJbkGI6XfM48vSHu++Ns4kE1OEZOcEGfNaNPoUa2v8u9ZeYl6e8yPGH6YbB0DPoaMKmrM+34+BYqhjp9L639lq/sIxDsIElLds9aElik5kaybeI+auH2dJCVtpScsKcSRJh+oKl3p2XY1HwW5IRJixQg2Q20LQZtnh7VotWNS1AN65SKnEBz/bzsURwOb3m7zyYrKShmk43ba/PP0WxT6iEMwmHgZ0MODU7/TgeNvsiiU4FjWr0ihzD6WLv+1nzOJsa+CZ8ZLDNpp2ZUiV5xr3AeRQZr3n7h5kSn9UpksI5A1dlOmIErBNd+5ix28tatrUPfVsbapF7U38DiEFUwy8g5xICDg==
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(36860700016)(82310400026)(1800799024)(376014)(22082099003)(18002099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: +8XuXeHm5E8mmnl/+RUwW/OWETcO68JrQjrBfHowRrf4cVSOmX1qg5NMaxNiuD1csNMW2cY03vcGn2canUXW1E89IzNyGA1p9hU3m+1wInAIGj6DQ/6Fg3K1GA8YWE4b2d/xvJmDc9plXHGAaEt+Wblf29IfVyd1KMmCkXQhfTZhlA3yWJ0e8DT1/GQRphB00sqiAqxUVzJ+kJG/jeWDST51yBH5SmBr5dFtbFmt84KZ4IrrYPcq+HIWQElyeFUjYLcw/lteoDAa1VPUgQkjEb3ryY+2ixnICAL6+xfbpB2SUYv06rkG3FH3fc3ZVTql2b1hOIQHagPE6Glu588c4v6+yqJHZ+EYh3kEMtCZ0sdWBWmfCzZcaHjIUZxaknPZl8pQGx2pShCIWflbY4JBVzg7AtekxBTT/P4Fcd/FLkD7TaS5lsdoGMANHE/i6ji4
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Apr 2026 00:08:07.6235 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: bc172765-10bd-4079-3342-08de91de4018
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH3PEPF0000000D.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN6PR10MB7520
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,95 +113,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri Apr 3, 2026 at 12:28 AM CDT, Ilias Apalodimas wrote:
-> [...]
->
->> >>
->> >>> +}
->> >>> +
->> >>>  /**
->> >>>   * efi_allocate_pages - allocate memory pages
->> >>>   *
->> >>> @@ -507,10 +528,20 @@ efi_status_t efi_allocate_pages(enum efi_alloc=
-ate_type type,
->> >>>         /* Reserve that map in our memory maps */
->> >>>         ret =3D efi_update_memory_map(efi_addr, pages, memory_type, =
-true, false);
->> >>
->> >> In theory the lmb and the EFI maps are in sync. I haven't checked
->> >> close enough yet, but do you have cases where lmb_alloc worked and
->> >> updating the efi memory map failed?
->> >
->> > Fair point. Now that I've fixed the FDT warning I should probably chec=
-k if I can
->> > actually reproduce the issue that actually required this.
->>
->> Yeah, this patch isn't necessary anymore. I suppose it should be dropped=
- as it
->> would potentially mask any discrepancies between the two maps.
->
-> Yea and if we really need a similar fix in the future, it's best if we
-> put in the lmb core code.
->
->>
->> Out of curiosity, is there any plan to merge the EFI and LMB allocators =
-more in
->> the future, or is the current layering scheme the furthest we want to go=
-?
->
-> We do, but havent due to lack of time. It's been a while since I
-> discussed this with Heinrich but iirc the only thing missing is for
-> lmb to be aware of the memory flags EFI expects.
->
-> /Ilias
+Hi Kuan-Wei,
 
-I mean, trimming the last x bits off of the LMB allocation flag value to st=
-ore
-the current EFI enum is a little bit of a hack, but honestly it'll allow th=
-e
-current allocation coalescence logic to continue to work as-is. It would ju=
-st
-need helpers to store and retrieve the enum type for the code that actually
-cares about the EFI memory types. I could look into doing that if you guys =
-think
-that's a valid approach, or if you've got other ideas.
+On Fri, 3 Apr 2026 at 04:43, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
+> >
+> > I have a patch for this in my Linux tree too so I sent that:
+> > https://lore.kernel.org/lkml/20260314030612.1949420-1-daniel@thingy.jp/T/#mab66837bb90c30916fd0fc066245bdeb9918e96c
+> > It would seem our versions of readl(), writel() etc are broken. For
+> > Linux the nommu versions are broken, for u-boot it seems they are all
+> > broken. By broken I mean they should be expecting a little endian
+> > value from the access and then converting to the CPU endian. (I think)
+> >
+>
+> Sorry for the late reply.
+>
+> So it sounds like we have to fix all the broken readl/writel() in both
+> Linux and U-Boot first.
+>
+> For U-Boot, I think we need the following fix? (totally untested yet)
+>
+> diff --git a/arch/m68k/include/asm/io.h b/arch/m68k/include/asm/io.h
+> index 35ad4a1c044..0106a57a03e 100644
+> --- a/arch/m68k/include/asm/io.h
+> +++ b/arch/m68k/include/asm/io.h
+> @@ -31,10 +31,10 @@
+>  #define writew(b,addr)         ((*(volatile u16 *) (addr)) = (b))
+>  #define writel(b,addr)         ((*(volatile u32 *) (addr)) = (b))
+>  #else
+> -#define readw(addr)            in_be16((volatile u16 *)(addr))
+> -#define readl(addr)            in_be32((volatile u32 *)(addr))
+> -#define writew(b,addr)         out_be16((volatile u16 *)(addr),(b))
+> -#define writel(b,addr)         out_be32((volatile u32 *)(addr),(b))
+> +#define readw(addr)            in_le16((volatile u16 *)(addr))
+> +#define readl(addr)            in_le32((volatile u32 *)(addr))
+> +#define writew(b,addr)         out_le16((volatile u16 *)(addr),(b))
+> +#define writel(b,addr)         out_le32((volatile u32 *)(addr),(b))
+>  #endif
+>
+>  /*
 
->>
->> >>>         if (ret !=3D EFI_SUCCESS) {
->> >>> -               /* Map would overlap, bail out */
->> >>> +               /* Map would overlap, try something else */
->> >>>                 lmb_free(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
->> >>>                 unmap_sysmem((void *)(uintptr_t)efi_addr);
->> >>> -               return  EFI_OUT_OF_RESOURCES;
->> >>> +
->> >>> +               /* See if there is any EFI_CONVENTIONAL_MEMORY alloc=
-ations */
->> >>> +               if (type !=3D EFI_ALLOCATE_ADDRESS) {
->> >>
->> >> Can you please inverse this. It's going to reduce the identation.
->> >> if (type =3D=3D EFI_ALLOCATE_ADDRESS)
->> >>> +                       *memory =3D efi_get_conventional_start(pages=
-);
->> >>> +                       if (*memory !=3D 0)
->> >>
->> >> Same here
->> >>
->> >>> +                               return efi_allocate_pages(EFI_ALLOCA=
-TE_ADDRESS,
->> >>> +                                                         memory_typ=
-e, pages,
->> >>> +                                                         memory);
->> >>> +               }
->> >>> +
->> >>> +               return EFI_OUT_OF_RESOURCES;
->> >>>         }
->> >>>
->> >>>         *memory =3D efi_addr;
->> >>> --
->> >>> 2.53.0
->> >>>
->> >>
->> >> Thanks
->> >> /Ilias
->>
+Doing this might fix virtio but break anything that relies on the
+current behaviour. At least in Linux Coldfire has hacks in its io
+macros to retain the broken behaviour for certain places but have the
+correct behaviour for others (PCI I guess).
+Since MMU-abled classic m68k seems to have the correct behaviour in
+Linux I think we should split the u-boot io macros into Coldfire and
+classic m68k and make classic m68k match Linux. That will avoid
+breaking anything in coldfire that uses the io macros and depends on
+the current behavior. But I guess we might need to revisit the pieces
+you added for the virt machine to make sure they still work.
 
+nommu classic m68k is broken in Linux but I intend to send a patch to
+make it match MMU classic m68k.
+
+Cheers,
+
+Daniel
