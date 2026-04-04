@@ -4,91 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CE0FD7308D
-	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 15:28:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A173E63FED
+	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 18:25:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B729184180;
-	Sat,  4 Apr 2026 17:27:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F1388341A;
+	Sat,  4 Apr 2026 20:25:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="j0CpTbU+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nMgtucl9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 492C284129; Sat,  4 Apr 2026 17:27:07 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id BA7FA83A8C; Sat,  4 Apr 2026 20:25:29 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B42483A8C
- for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 17:27:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-43cf906b007so1483612f8f.0
- for <u-boot@lists.denx.de>; Sat, 04 Apr 2026 08:27:05 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B1A6807C0
+ for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 20:25:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7dbca22dbfeso436972a34.1
+ for <u-boot@lists.denx.de>; Sat, 04 Apr 2026 11:25:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1775316424; x=1775921224;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1775327126; x=1775931926; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pvGO0HArPxKblfO1hvPOj1oWNQ73LOhu35jHyXZXYrs=;
- b=j0CpTbU+1HsmuWshvi5WVETq97en7oyTSjWFR4O0p1Iu+5ArlVGegYvQgoiojjr0s5
- S3MUfPid8561P18HV8QuaS/MyxhWJpyXARsb2JN6bS5MlVkxAIe0S7wPvfQojjNzPVu4
- TyhXcPIVWbboYY4AE+nPJBvI4CKaRNRqUW3CM=
+ bh=GHLNpx1bI7P9/jMhKwQTVjNf6a57bj2rajwbWKb7LbI=;
+ b=nMgtucl9DIBaCnMjWAvRapCEBUo1zx5NTvfJuKBXbjxMpy+SCIqkQGnWC3UbF5Axhg
+ CZtbSY3K5u77031e9IfekpNdsz2QIVJyCf/uVNo3+xBdIEKoNkmNiFoBOJ2T7jikaHRZ
+ NkRnPxnxMJjxmWtLyU7TlutoR6gP7wpoRn/+A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775316424; x=1775921224;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20251104; t=1775327126; x=1775931926;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=pvGO0HArPxKblfO1hvPOj1oWNQ73LOhu35jHyXZXYrs=;
- b=tCJZDWd0Y6VThbUgjXOwuVSbEsWzK7u4JYW1HEbQsEHWb7S4BuS3h4znebOgrIViv1
- /kR7zFSl9YaQcYwJEQxuld9hC25UtYABb8qnAOY0PhbAUd5MKMnr+7FHsRvff/ZTK1mW
- l8VXhgP0AohurU/kPA5mAkSYToRKFDrU3cfV7s79WyYQdmHY+sTKIA2bKLQtu80Mb32W
- AIzSfvsIlYUPjHAL50TKsRfUs1KN4/6FaErg+PSQSaPPkJ8IBvnGAWGz9x5EgrOJX66F
- v3dM2+W6t22qNOhdMIGXaaee6KnTqNwHfL/ptB6P/hSZ8iedlDIfgj9ZKNONRE0kPBRO
- SxLg==
-X-Gm-Message-State: AOJu0Yxecr0KsFdEVGHQV8Z4/PCW6doyde3l0y+P7OMg8L77I0/zuNZS
- BbdLN5V55f3xpzIW+GUD4xTP6NUPCtyTDkPhJhMeBrN0cNZ7tzR1YbrHLSYlmgeq4qbBj7n2yEm
- vSRNS
-X-Gm-Gg: AeBDietzk1zETEIIRGmXyzBWUwxKqQBccCy+RxdZs9hYzIZwjtT8XGjXpE8ol1LjdXE
- Cv3A3ulmnC+9ElJ/DYRCG/h7vPkHIWGd+EoDpZiV0uSQ+uSr4FF/2YkFZ+ghGy9448E/imSA43E
- O/a2b/6yusuSBUR62OQS8pIkHdmKWLRz0YOrqaUHpCIvQnJpzqavxHcQIHBSo1dXunnGwYHrGJ4
- yr29G8EqDEEa37Vrmks2yKlOsR5jawyDWqaHBkgBkn85NViPbjBMCDMfkX7MpH5mrY6zxGwnVFz
- YZskYn5ME/FSQ3Dqpr0PbTdck/D1rm67+jRgDAYmZtVd1tu5ueZWVdxNRgVCTC4ZmN2LQktmxOT
- 7PXBdjskugBFjjend1e7xxYay31s5yEXxns6wKE3gE4PR6Gl2ZzCjP+e24bomjC9DptZMXy3q2N
- 5n5ODwVM/xGfLKM3NuOXFw6sHH25TyNWAFLRt6xSfmATmKiJy1qeHGUx0NRn1EdGwP9jN3zWKwr
- ZoyuHKm+rZupfdVHVb6lyXldGpIjV4OUqw+U30K8Cgb/ozNZ89LnXSmrZfAqFQmhvxM3HFpxtKi
- 8vdN+5JT0YEo8605Y9KDr5hh
-X-Received: by 2002:adf:ec4c:0:b0:43d:30d1:857c with SMTP id
- ffacd0b85a97d-43d30d1859bmr4013249f8f.7.1775316424542; 
- Sat, 04 Apr 2026 08:27:04 -0700 (PDT)
-Received: from dario-ThinkPad-P14s-Gen-5.homenet.telecomitalia.it
- (host-87-9-100-184.retail.telecomitalia.it. [87.9.100.184])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43d1e4f1a99sm28059462f8f.32.2026.04.04.08.27.03
+ bh=GHLNpx1bI7P9/jMhKwQTVjNf6a57bj2rajwbWKb7LbI=;
+ b=Kpgjy5fIl71NSxi9MJkTVdHSauJFMd9wRPm8hNjKHVR/Z322KDewc4LAPBCS9HIKD/
+ 4sHeLmnKWVoGABdvnZlFkp+uXEi/qVekQmy3ZTpPwPFOHcE0kJhUeifR65LKtCEoscxz
+ sYApmcyOr1Bw73IJiWQ52e8Vc2lmEnlCY4mKwKKDMabGTPrxi3OJW1hQs9GyQmhBnqij
+ s7wX+CLMTSzMPOoCx3L5832fgUP1wrKkJvWyZT+G/z+5CBISC20sa0XQ4usxkGqCVq7a
+ pJav1JHUw4KMTIcI9iA0g+S/IJLZporSI2n64zO7gMdnijVWE9axn6/Ak6HbHhRzoBNF
+ jPqA==
+X-Gm-Message-State: AOJu0YyFt3hf46jVAN/kg/i/n24Op5qZubwkXJgnWnXDcrAp0O/mKM0C
+ DH51la2DlZZOuYoSmHVihus3m7Hbc8IkcavmJgRKtIwPc/e8CU+KoOiLAF1zZWOkJ5Y=
+X-Gm-Gg: AeBDietVbQlZClZ7V13Uzd/uelMxMB57bs2TsWMv/7M20h34XdvIqTLd+qFSDCTv3/m
+ iQYueE7HGlRZn8LScu1+Q+NzyiK5gGaLzOWR5JQZNF16T2uxjlh734a+mqecW3h1E1k7HCAN7g4
+ npMmbD440y10Sd40KIyBqKmvm4Pm6xE8Hgxs6mg/wFGqFCoPKX5Zhj+k0PvQ5i86Mh2gdG4rU2p
+ rAkep2qmTgHRswVXN/z0bzPYJ2xZqf5TzBRWrdwEjkMXnyhtp5ALI37EU+oLnYN/1+FyfI088QG
+ Cry3qxNuzh/0QoHJrqVY8uUiqgN6Ra0ekDjZJzOI+tuWrVr8qQR5/NPjOiSGrLRRCtIamuKnoda
+ /N4kmkUglrHVu4RQZ5Quuc/U5zA8zf2SMS9LmnRrEj6DH9iPt9fJnePm8KhB/G+b61t2MD4xDn5
+ Q6KzCJPVo5DTUmNyLoMPDSiDYHDIbIkXGQfOOTbG4C6KG/Q1AZc3yzycfF2MJqrxPc1Fxd4TNub
+ Apuws5a+D9QvOW1eBUqM0X4bzKKjAqy6bjbqgnLWwktY2c=
+X-Received: by 2002:a05:6808:1808:b0:468:9c8:791b with SMTP id
+ 5614622812f47-46ef73079e8mr3624702b6e.33.1775327126266; 
+ Sat, 04 Apr 2026 11:25:26 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-46d90447177sm5406801b6e.7.2026.04.04.11.25.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Apr 2026 08:27:04 -0700 (PDT)
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-To: u-boot@lists.denx.de
-Cc: linux-amarula@amarulasolutions.com,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH v2 7/7] board: st: stm32mp25: support dynamic A/B bank bootup
-Date: Sat,  4 Apr 2026 17:23:34 +0200
-Message-ID: <20260404152640.3297713-8-dario.binacchi@amarulasolutions.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260404152640.3297713-1-dario.binacchi@amarulasolutions.com>
-References: <20260404152640.3297713-1-dario.binacchi@amarulasolutions.com>
+ Sat, 04 Apr 2026 11:25:25 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, n-francis@ti.com, 
+ Prasanth Babu Mantena <p-mantena@ti.com>
+Cc: u-kumar1@ti.com, vigneshr@ti.com, s-vadapalli@ti.com
+In-Reply-To: <20260312133247.2192335-1-p-mantena@ti.com>
+References: <20260312133247.2192335-1-p-mantena@ti.com>
+Subject: Re: [PATCH] Revert "usb: cdns3: use VBUS Valid to determine role
+ for dr_mode OTG"
+Message-Id: <177532712490.2577589.16492260809067949903.b4-ty@konsulko.com>
+Date: Sat, 04 Apr 2026 12:25:24 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,95 +98,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable automatic detection of the active A/B bank by retrieving
-partition GUIDs from FWU metadata.
+On Thu, 12 Mar 2026 19:02:47 +0530, Prasanth Babu Mantena wrote:
 
-This ensures the system correctly identifies the bootable partitions
-even in multi-bank scenarios, falling back to a standard bootable flag
-scan if the UUIDs are missing.
+> While USB DFU boot works with this patch, but the non USB boot modes like
+> SD Boot and flash boot fails for J784S4 EVM device.
+> 
+> So, Reverting this patch.
+> 
+> This reverts commit bfb530e06ca6c19f66c079601e568c761a001993.
+> 
+> [...]
 
-To enable A/B bank bootup on stm32mp25 boards, add the following Kconfig
-options to the stm32mp25_defconfig:
+Applied to u-boot/master, thanks!
 
- CONFIG_FWU_MULTI_BANK_UPDATE=y
- CONFIG_FWU_MDATA=y
- CONFIG_FWU_NUM_BANKS=2
- CONFIG_FWU_NUM_IMAGES_PER_BANK=3
- CONFIG_CMD_FWU_METADATA=y
- CONFIG_FWU_MDATA_V2=y
-
-Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-
----
-
-Changes in v2:
-- Pass efi_guid_t by pointer in fwu_mdata_get_image_guid() calls.
-
- board/st/stm32mp2/stm32mp2.c          | 25 +++++++++++++++++++++++++
- include/configs/stm32mp25_st_common.h | 15 +++++++++++++++
- 2 files changed, 40 insertions(+)
-
-diff --git a/board/st/stm32mp2/stm32mp2.c b/board/st/stm32mp2/stm32mp2.c
-index 43bc583378e6..cb9a33252212 100644
---- a/board/st/stm32mp2/stm32mp2.c
-+++ b/board/st/stm32mp2/stm32mp2.c
-@@ -208,4 +208,29 @@ void fwu_plat_get_bootidx(uint *boot_idx)
- 	*boot_idx = (readl(TAMP_FWU_BOOT_INFO_REG) >>
- 		    TAMP_FWU_BOOT_IDX_OFFSET) & TAMP_FWU_BOOT_IDX_MASK;
- }
-+
-+int fwu_platform_hook(struct udevice *dev, struct fwu_data *data)
-+{
-+	uint boot_idx;
-+	efi_guid_t boot_uuid, root_uuid;
-+	const efi_guid_t boot_type_guid = PARTITION_XBOOTLDR;
-+	const efi_guid_t root_type_guid =
-+		PARTITION_LINUX_FILE_SYSTEM_DATA_GUID;
-+	char uuidbuf[UUID_STR_LEN + 1];
-+
-+	fwu_plat_get_bootidx(&boot_idx);
-+
-+	if (!fwu_mdata_get_image_guid(&boot_uuid, &boot_type_guid,
-+				      boot_idx) &&
-+	    !fwu_mdata_get_image_guid(&root_uuid, &root_type_guid,
-+				      boot_idx)) {
-+		uuid_bin_to_str(boot_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
-+		env_set("boot_partuuid", uuidbuf);
-+
-+		uuid_bin_to_str(root_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
-+		env_set("root_partuuid", uuidbuf);
-+	}
-+
-+	return 0;
-+}
- #endif /* CONFIG_FWU_MULTI_BANK_UPDATE */
-diff --git a/include/configs/stm32mp25_st_common.h b/include/configs/stm32mp25_st_common.h
-index cb679eb1be22..0b0267ae99b0 100644
---- a/include/configs/stm32mp25_st_common.h
-+++ b/include/configs/stm32mp25_st_common.h
-@@ -8,7 +8,22 @@
- #ifndef __CONFIG_STM32MP25_ST_COMMON_H__
- #define __CONFIG_STM32MP25_ST_COMMON_H__
- 
-+#ifdef CONFIG_FWU_MULTI_BANK_UPDATE
-+#define SCAN_DEV_FOR_BOOT_PARTS \
-+	"setenv devplist; " \
-+	"env exists boot_partuuid && " \
-+		"part number ${devtype} ${devnum} ${boot_partuuid} devplist; " \
-+	"env exists devplist || " \
-+		"part list ${devtype} ${devnum} -bootable devplist; "
-+
-+#define ST_STM32MP25_FWU_ENV \
-+	"altbootcmd=${bootcmd}\0"
-+#else
-+#define ST_STM32MP25_FWU_ENV
-+#endif
-+
- #define STM32MP_BOARD_EXTRA_ENV \
-+	ST_STM32MP25_FWU_ENV \
- 	"usb_pgood_delay=2000\0" \
- 	"console=ttySTM0\0"
- 
+[1/1] Revert "usb: cdns3: use VBUS Valid to determine role for dr_mode OTG"
+      commit: 214aababe07de0598bd26ecb0c8fb2e2843ff7d5
 -- 
-2.43.0
+Tom
+
 
