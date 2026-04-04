@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9994AD7308D
-	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 14:04:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59B68E88D9D
+	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 14:04:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 478CC84101;
-	Sat,  4 Apr 2026 16:04:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8089484154;
+	Sat,  4 Apr 2026 16:04:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i4eZLgRl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ONaLc1Ee";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3517780325; Sat,  4 Apr 2026 16:04:07 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id 41B4584020; Sat,  4 Apr 2026 16:04:09 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F83C84020
- for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 16:04:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 189F184101
+ for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 16:04:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-40ea36b56b7so2226874fac.3
- for <u-boot@lists.denx.de>; Sat, 04 Apr 2026 07:04:05 -0700 (PDT)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7dbba5076c8so675308a34.0
+ for <u-boot@lists.denx.de>; Sat, 04 Apr 2026 07:04:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775311443; x=1775916243; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775311445; x=1775916245; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hqcYtr6SzE9QNvTzAXzmYoBRESuvyalgh5HvXZtNODA=;
- b=i4eZLgRlkzY7a6fQsUng0qB2p7cw1UMhPaAG8mG0watipPJM4Y99Hh1/uvDwRJ4OZP
- 2ikWKzPkosAp1s/7r3HzHm2WwcJUdf9cX4jFvqBSusc/xYePDYDxTu9Sooj7VqxO3g6E
- RdFQpuOiKVw3D45PFIl/JwwD/Vcb3auJw2Hsg=
+ bh=sItkOvvhVkwURHZFcKDrDWPJB/dJVW+Pw1ZmN22mN2c=;
+ b=ONaLc1Eeb6KC6/xiLAfPT/V+1yUgtIC5x24puwq8SSN+ASwlFcUl+sXv61Z6rbkiCW
+ V+wkIqIL1CblwYXPoAfTj8z9wSocHgm++Bs5xWvNS8ReoA0zOk8d10IJ9MfmCOydUxwe
+ hxWaKv7+PCeFLYir6V6vi1b6EKxiMpzf3JUR8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775311443; x=1775916243;
+ d=1e100.net; s=20251104; t=1775311445; x=1775916245;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=hqcYtr6SzE9QNvTzAXzmYoBRESuvyalgh5HvXZtNODA=;
- b=iKM3ac8npm8NjVb/Vq0nOwpc2r5SKKhF5n3Rnxb6szeONMTXqAZc7S8OwbVsWOMnPj
- aJBrTuBGygnriJgmwLNi1n/nUKi3w53gzlg6RvPL+hp1XJrVr+VpkMiQ5ohICCucXqQu
- N+szi1xOXr2u9kGl2vyR/9PrASBnthkwQjhrrm9sjACjxeGhurZOPs6HsDcPTIgA8lOr
- B/slKIuYNJgnk8oJL8aeZckBoGdAnwnqbmzL1DIOCku4WsSfOYnDRXBegFcgSYpjcrfT
- R1meHCvAXE2K6dyWVep8G1M8HkambpByAI4iY/ibAUsR+KGoxyrcQwH3J99unHuut83V
- 4NwQ==
-X-Gm-Message-State: AOJu0Yw1QhfbqrERS26Iecv2xF4BZornNC3EuccD9F92n+EVSORSME5r
- qrlds2JrFPpbWWmSzyrUFIahkKtXoAmDx2Z0uUxehmsCXpKziUDiblslJgzAaPQntzFqU7uC+UU
- PRhM=
-X-Gm-Gg: AeBDievqIUBWIbNH4TceUcxQQQrtG4nrD7+yCMwOchlB4y5po5MlomniA1XcsAYhAGR
- 937yLhxDv1aCeyprzn0Pl5My9VeSgI/+o0uXAesUxnytXieBVtN+hidlc1z5sSgfjf6lPAUYaPs
- E9zWFW7oKI2MIRDwXBwrcZABAnCkQZ/NliAcAAqT/Akv9a+YMLt1MLuJi5UVzqxGLdUft0iywSi
- mziHShBnb+qn400VnBkY+Y5Wpw7BIlrtYZYhU0Mli+nDd+wYEUQKjTSBQyyLFlNk21Ge+dUCtWD
- ulW18eEJnG2AWGBZvNFlO3JFMRPIU3BCQ55r6QNuSmBwbQ6Rc0n4Zvy256t01d9rQEmkCFdqNlj
- uiWeYbUrfOZzotmLHolDxbCbqOgGuufmj+ymmkwV83MhoLfxWTarBDG9pqC6F9AQ4hcBmxH3c++
- 1+qD2Zn3fKQvBpYeMRq1sS+eQVDKJf
-X-Received: by 2002:a05:6870:f203:b0:416:3d80:fb76 with SMTP id
- 586e51a60fabf-4230ffc22f7mr3636832fac.28.1775311443137; 
- Sat, 04 Apr 2026 07:04:03 -0700 (PDT)
+ bh=sItkOvvhVkwURHZFcKDrDWPJB/dJVW+Pw1ZmN22mN2c=;
+ b=SrwsOFcem+7NlmrLbUw5MTYpLqS3YSsnbEiGts/9AvqYrEImp7JkF0qQKQ6JAgDd3E
+ Htazoebkcw2E4bP0wjNluh0O4n3TCPEApf7ct2Z9BvY+1jlhs4LHcs/+Gzec/jn8ykzm
+ nAgV2+NbuJXQIk+stbeImxFfLTZxzCTpN8e2Ml0kTKfLMV7hqVhAv2UN2jAj+JwUx0F6
+ QgWqhTDp71sqTvnmBXUImyGxDc6/is9uVA/CB1XKKWJohSOARLhPC8NX4wtg2HxAMx60
+ sqqniWo0hV/IwcHUMA7lryjkp5m6LbNytSW15Fhafz9KplRS6dSdUIo/4HBP/URwPMi3
+ PUtA==
+X-Gm-Message-State: AOJu0Yzj3UBtSkzFIhN3AioEB5yybuhJVbMfM/q6zn+d0C43Ee3ts3Hx
+ Tk3h3Ggr+BNjr7SqgjfvEiiF+G+C3B9UZt34oC1z88UwBTENf9kDwYGgfQLgM1JyT65o0cBYaCB
+ A2QU=
+X-Gm-Gg: AeBDievflrpgN7SxXd8SENqj+cjjqJod9ubcw9nD1HrsSttEFTvbmWXty/T0f4csaCj
+ jVy8O0t1GkqWhUgL0W8sxTBhieLnXQtVF5pLql2XblqKgZj4RCJimncnIQCfoEJcJ0JTd3U/0kA
+ w/4Pqeb/JeMguQfdJJ4tVKC6i4sjzqpK3kFv3jEU1c40LcFdrs0Up0S8bMEqoLkt4/QJsZOaZgZ
+ +SNFVvSewOoDQj1bFbuOoVmjpWP9jAVeXBLN6kPFfEJSVL6fOf2NwJ0YQykK1pMnkMJdyLk2SBZ
+ 302qVga085/LhNmzntUK4ykTdyi96jh7cEX19tj7/GcLb97h+cB5jay1TqnH62M7BSXWWnmJ5iS
+ xXmN++0NaWaPfTZ7AtD2L93Ljme05IOilTBttnX7XyyUhxjEkotpM4K8YWy6/lFGepff9jWt7VY
+ lqXyHT8vP7l7JTwxI/7g==
+X-Received: by 2002:a05:6870:529:b0:423:1858:63e1 with SMTP id
+ 586e51a60fabf-423185883famr2979528fac.31.1775311444961; 
+ Sat, 04 Apr 2026 07:04:04 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4232eb3d0e4sm2348235fac.6.2026.04.04.07.04.01
+ 586e51a60fabf-4232eb3d0e4sm2348235fac.6.2026.04.04.07.04.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Apr 2026 07:04:02 -0700 (PDT)
+ Sat, 04 Apr 2026 07:04:04 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 06/14] test: Convert test_efi_bootmgr to use FsHelper
-Date: Sat,  4 Apr 2026 08:03:10 -0600
-Message-ID: <20260404140328.3724864-7-sjg@chromium.org>
+Subject: [PATCH 07/14] test: Convert setup_bootmenu_image() to use FsHelper
+Date: Sat,  4 Apr 2026 08:03:11 -0600
+Message-ID: <20260404140328.3724864-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260404140328.3724864-1-sjg@chromium.org>
 References: <20260404140328.3724864-1-sjg@chromium.org>
@@ -95,74 +97,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Simplify this test by using the helper.
+Simplify this test-setup code by using the helper.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/py/tests/test_efi_bootmgr.py | 38 ++++++++++++-------------------
- 1 file changed, 14 insertions(+), 24 deletions(-)
+ test/py/tests/test_ut.py | 17 +++++++++--------
+ 1 file changed, 9 insertions(+), 8 deletions(-)
 
-diff --git a/test/py/tests/test_efi_bootmgr.py b/test/py/tests/test_efi_bootmgr.py
-index 4c10cbdf17d..7d1f3f16d00 100644
---- a/test/py/tests/test_efi_bootmgr.py
-+++ b/test/py/tests/test_efi_bootmgr.py
-@@ -5,7 +5,7 @@
- import shutil
- import pytest
- from subprocess import call, check_call, CalledProcessError
--from tests import fs_helper
-+from tests.fs_helper import DiskHelper, FsHelper
+diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
+index 98641a46c1d..a1c4af1b096 100644
+--- a/test/py/tests/test_ut.py
++++ b/test/py/tests/test_ut.py
+@@ -17,6 +17,7 @@ import pytest
+ import utils
+ # pylint: disable=E0611
+ from tests import fs_helper
++from fs_helper import DiskHelper, FsHelper
+ from test_android import test_abootimg
  
- @pytest.mark.boardspec('sandbox')
- @pytest.mark.buildconfigspec('cmd_efidebug')
-@@ -20,22 +20,19 @@ def test_efi_bootmgr(ubman):
-     Args:
-         ubman -- U-Boot console
+ def mkdir_cond(dirname):
+@@ -45,7 +46,6 @@ def setup_bootmenu_image(ubman):
+     This is modelled on Armbian 22.08 Jammy
      """
--    try:
--        efi_bootmgr_data, mnt = fs_helper.setup_image(ubman, 0, 0xc,
--                                                      basename='test_efi_bootmgr')
--
--        with open(mnt + '/initrd-1.img', 'w', encoding = 'ascii') as file:
--            file.write("initrd 1")
--
--        with open(mnt + '/initrd-2.img', 'w', encoding = 'ascii') as file:
--            file.write("initrd 2")
--
--        shutil.copyfile(ubman.config.build_dir + '/lib/efi_loader/initrddump.efi',
--                        mnt + '/initrddump.efi')
--
--        fsfile = fs_helper.mk_fs(ubman.config, 'vfat', 0x100000,
--                                 'test_efi_bootmgr', mnt)
--        check_call(f'dd if={fsfile} of={efi_bootmgr_data} bs=1M seek=1', shell=True)
-+    with DiskHelper(ubman.config, 0, 'test_efi_bootmgr') as img, \
-+            FsHelper(ubman.config, 'vfat', 1, 'test_efi_bootmgr') as fsh:
-+        with open(f'{fsh.srcdir}/initrd-1.img', 'w', encoding = 'ascii') as outf:
-+            outf.write("initrd 1")
-+        with open(f'{fsh.srcdir}/initrd-2.img', 'w', encoding = 'ascii') as outf:
-+            outf.write("initrd 2")
-+        shutil.copyfile(
-+            ubman.config.build_dir + '/lib/efi_loader/initrddump.efi',
-+            f'{fsh.srcdir}/initrddump.efi')
-+        fsh.mk_fs()
-+
-+        img.add_fs(fsh, DiskHelper.VFAT)
-+        efi_bootmgr_data = img.create()
+     mmc_dev = 4
+-    fname, mnt = fs_helper.setup_image(ubman, mmc_dev, 0x83)
  
-         ubman.run_command(cmd = f'host bind 0 {efi_bootmgr_data}')
+     script = '''# DO NOT EDIT THIS FILE
+ #
+@@ -121,7 +121,9 @@ booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
+ # Recompile with:
+ # mkimage -C none -A arm -T script -d /boot/boot.cmd /boot/boot.scr
+ '''
+-    bootdir = os.path.join(mnt, 'boot')
++    fsh = FsHelper(ubman.config, 'ext4', 18, 'mmc')
++    fsh.setup()
++    bootdir = os.path.join(fsh.srcdir, 'boot')
+     mkdir_cond(bootdir)
+     cmd_fname = os.path.join(bootdir, 'boot.cmd')
+     scr_fname = os.path.join(bootdir, 'boot.scr')
+@@ -150,13 +152,12 @@ booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
+     utils.run_and_log(
+         ubman, f'echo here {kernel} {symlink}')
+     os.symlink(kernel, symlink)
++    fsh.mk_fs()
++    img = DiskHelper(ubman.config, mmc_dev, 'mmc', True)
++    img.add_fs(fsh, DiskHelper.EXT4)
++    img.create()
++    fsh.cleanup()
  
-@@ -61,10 +58,3 @@ def test_efi_bootmgr(ubman):
+-    fsfile = 'ext18M.img'
+-    utils.run_and_log(ubman, f'fallocate -l 18M {fsfile}')
+-    utils.run_and_log(ubman, f'mkfs.ext4 {fsfile} -d {mnt}')
+-    copy_partition(ubman, fsfile, fname)
+-    utils.run_and_log(ubman, f'rm -rf {mnt}')
+-    utils.run_and_log(ubman, f'rm -f {fsfile}')
  
-         ubman.run_command(cmd = 'efidebug boot rm 0001')
-         ubman.run_command(cmd = 'efidebug boot rm 0002')
--    except CalledProcessError as err:
--        pytest.skip('Preparing test_efi_bootmgr image failed')
--        call('rm -f %s' % efi_bootmgr_data, shell=True)
--        return
--    finally:
--        call('rm -rf %s' % mnt, shell=True)
--        call('rm -f %s' % efi_bootmgr_data, shell=True)
+ def setup_bootflow_image(ubman):
+     """Create a 20MB disk image with a single FAT partition"""
 -- 
 2.43.0
 
