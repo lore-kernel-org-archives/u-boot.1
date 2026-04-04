@@ -4,78 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92582D7308D
-	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 14:06:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ABF5D73094
+	for <u-boot@archiver.kernel.org>; Sat,  4 Apr 2026 15:27:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81842841CD;
-	Sat,  4 Apr 2026 16:04:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 6C8CB84020;
+	Sat,  4 Apr 2026 17:26:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PY+ON3g8";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="YZ5hy6Vc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BA56841D6; Sat,  4 Apr 2026 16:04:29 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id 176B6807C0; Sat,  4 Apr 2026 17:26:57 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6A668419C
- for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 16:04:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7dbcb467f2bso760345a34.3
- for <u-boot@lists.denx.de>; Sat, 04 Apr 2026 07:04:26 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 87B88807C0
+ for <u-boot@lists.denx.de>; Sat,  4 Apr 2026 17:26:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-43cfbd17589so2118373f8f.0
+ for <u-boot@lists.denx.de>; Sat, 04 Apr 2026 08:26:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775311464; x=1775916264; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ms9VRvuYO6+TEJI4Bs1br1pfUz6gOiYXR50tIbdNYPM=;
- b=PY+ON3g8xB7rePevPwajBESJhvzWbh8MkAQOYXESxFtfrY8MvVOIRxIdg2y+V62wbX
- FzER3r52JBlarR1ITMUH3i+wIGTL5Fre31Oz55s91fzGaEyvJ7tNnbOrvp6hxco/wypd
- X7fi44Okny33gs6nQvV0G1i4pogDp+mitaBcU=
+ d=amarulasolutions.com; s=google; t=1775316413; x=1775921213;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=IY0IgVlmnddhQ9ALEN+0fIKmuZ2Q12FXzs7AS6INRAw=;
+ b=YZ5hy6VcJQ73eLrt2skV0CVl9zpM71AEXFLQ8sG8gz3n73GwWh1d20+K5572dPpgfq
+ bXl0EONd2RBdM7ocOYu0ax9z6kFNN/p8FP64MrhC8UeWIEbAvJUALY56i5PiZltd/Zvc
+ nImdVUvuqWnA59Nj8ksBHu71vCFZYUeoqsvaM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775311464; x=1775916264;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=ms9VRvuYO6+TEJI4Bs1br1pfUz6gOiYXR50tIbdNYPM=;
- b=Qy+K4w7h87ANjxncotGQKI6B+2O1VOklNl9z+VVB1zzdNf0H7cuJNVoARExCHduomB
- zljWRpNegk6QkUXaT9J/lHejGwvuiReBcb4r42TPem0c1DSgs2YGH+J3uSnkaaxJ6OmZ
- KlE1bI4X0q8tdvcdEbQ3pZudTUlni/kgtjekMMaVRmU3Q8UhcicIz/M+eHcoSWQ3Ool2
- z82LMgb2ne4bi/RkkiwmYjBYbSFgQjV0b4WpW8biEl4JntNWI93RWEFRuMLgC8OG6jCw
- FJGG/Ss1IeK2xghcFc3mgQrsi2IeHgHxrOXMSTo+8WIeP6rhVFSfdhtmF5iAzaxFBhzx
- csrQ==
-X-Gm-Message-State: AOJu0Yz2H07lUgIVBp+iiDJ1kRTHP5GprZPqwIOWdAWIyJM9G4uxntJz
- spplPwNCXCRHLCtIMmXhH8nkY81ZxBNu2pbuwuLy+WkbCX2hGN+z4E6WvSCyrkE+ogjGpOTtWLU
- rOwE=
-X-Gm-Gg: AeBDiesRVAwaPKe6t3GOGH7uw10EqDYsYmWqQbCx4F/KQppzBLAS+vML0g+5uwC35u1
- OEUzc2XbIzIQkLGm6JFahAkiT1fwElggZxqQp3fIlK87jwwcfqQZ3JBbuwr55QXNjiuvwjL99II
- eNCyIQiAltVw717xTToMn3rCpakX3oGIRVEEYE7QNSv+YCmLdoaZdlbU0H3X2CFUPcN7/QvPf+Y
- w9T6lADNvbJX90dC2n0FCIy4H9m8rDNcffNEtiMvk0znW9YgRxk1k+9ASayL08Ar3In8mvzAYVo
- 3YZx71ORy8gdGx6Ddge9xr08cpf510n7YTtWiC/j+mge90Y9KiQcEguUTzT8XsiRVuXdIaaCZyC
- aoebuPCGEVGzdOeuykk1QNv9GJX/Y846R0Z4tk7HycqQYpJ2wy0Wl53ncGOO15kvlolJkAebpGI
- J0B83kycQ5KORVJuP/Pw==
-X-Received: by 2002:a05:6870:ff96:b0:41b:cc55:c398 with SMTP id
- 586e51a60fabf-4230fcd57b8mr3668204fac.15.1775311464259; 
- Sat, 04 Apr 2026 07:04:24 -0700 (PDT)
-Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4232eb3d0e4sm2348235fac.6.2026.04.04.07.04.23
+ d=1e100.net; s=20251104; t=1775316413; x=1775921213;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IY0IgVlmnddhQ9ALEN+0fIKmuZ2Q12FXzs7AS6INRAw=;
+ b=LOo2uAsylJYD0HP44ua5CPEbaAOx09Jqk/GEuuRVy4cJ0P/iYG04DOc9rSJ29Uc0AE
+ pYXg9qyIfNBk9iyhhX9NeGjid+kuDHc7IVFYCQ5g4DKsDljn5AKg/HzG/mdA4Rwcv61S
+ GTivCdu5oMgwsMmhvZ53wjjSdWMOoxG+iprn42PG5Fm48mAqGZ1Y2R/2quf0ucs2W1o9
+ 73XW/rYfWC/tBaPZ+CICeEh7Yvm/a8Z1AM893urgrqf+WNkDbdzMSqzbYwZKn8Y8Irg3
+ snEVjxS25HgTdXDwaEfn6Xbm2CxEXeT6sXiHyQnBNcmstLTf01u6ClECclRUQb2lXBcs
+ d1cw==
+X-Gm-Message-State: AOJu0YwORjwZP8X0KPOs5xGjTl1ngAuBVGmjzawZsTwUolLt4qxqsXmT
+ nxxOcIXQjaHaoGVLLo//Zvht93LGaiVTSVcSTv7fPj9YGCIcGWqW1fYZBj1yf8FekQSdUFMbyna
+ fVxHi
+X-Gm-Gg: AeBDieuCs1P8wtzHH/OZXS0oQXvpPgJhTGnb713p8MFW9m9JF7k4hoLMqkEN8go5zeA
+ rKp9iJtWfvO2PONc+GqYZfTqIvyGKRO4TSMQWRAW1AVGxXcTK+r4vAIKYF3XMZ1WCEJ5IlK80bI
+ lJsLMeV7bQ/jIXWKraCh+udTS1Fj/i2AchbOn0fTq4XTVs6Mqf5FDkAUNzEyJv08vljVOkzlGhM
+ /aPcyFn9Q2/MajgOfD7s+jv3f+e3w5j9WaWhKV1jRQ5DYt1mphz3GDbgenEDYvC2NGNNYKP2NMo
+ bFkpPj2CBiq94dtcOxB9Grde9WMwXfwN8bfjtHnVSGUU+ROYZqOjhuJzLZ4VJLYg1OUAjwiOqJY
+ 1sH2Z8/9tkkXWvEeSDvrIPQKgpz9Qw/Fj9ururkMk6kpWq5BbossLDOCrOJsP5lEawapGtcLPMX
+ DH49yAU3jLdYLP2hAjpr2X8aRsm+5p8q+Lr5l2qP+0ynhv0RhnqbX8muxWiMITfEdbeu9WlUQkL
+ zZXuLMN71s0mMhx2rSXHiee3f9xR0EBOc3TCPoZcN2HeupWQYGH+inImwCCxJ/gWLHLLc4vYjYb
+ aEnvui7Wby+9NPwB3UmmlWdGgHkkIM8evXU=
+X-Received: by 2002:a05:6000:40ca:b0:43b:8f38:3b88 with SMTP id
+ ffacd0b85a97d-43d292e7101mr10522763f8f.25.1775316412511; 
+ Sat, 04 Apr 2026 08:26:52 -0700 (PDT)
+Received: from dario-ThinkPad-P14s-Gen-5.homenet.telecomitalia.it
+ (host-87-9-100-184.retail.telecomitalia.it. [87.9.100.184])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43d1e4f1a99sm28059462f8f.32.2026.04.04.08.26.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Apr 2026 07:04:23 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
+ Sat, 04 Apr 2026 08:26:51 -0700 (PDT)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 14/14] test: Convert test_fs fixtures to use FsHelper
-Date: Sat,  4 Apr 2026 08:03:18 -0600
-Message-ID: <20260404140328.3724864-15-sjg@chromium.org>
+Cc: linux-amarula@amarulasolutions.com,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH v2 0/7] Support metadata-driven A/B boot for STM32MP25
+Date: Sat,  4 Apr 2026 17:23:27 +0200
+Message-ID: <20260404152640.3297713-1-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260404140328.3724864-1-sjg@chromium.org>
-References: <20260404140328.3724864-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,436 +113,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace all direct calls to the mk_fs() function with FsHelper in the
-filesystem test fixtures. Each fixture now creates an FsHelper instance,
-populates its srcdir with test files, then calls mk_fs() on the object.
+This series, the mainline version of [1], provides the necessary changes
+in U-Boot to support the metadata-driven A/B update flow for STM32MP25
+boards. It implements the logic required to dynamically select the boot
+bank based on FWU metadata.
 
-This removes manual scratch-directory management and cleanup code, since
-FsHelper handles the source directory and image-file lifecycle.
+These changes are designed to be backward compatible while providing
+the necessary infrastructure for the A/B scheme.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+The series has been tested on the STM32MP257F-EV1 board.
 
- test/py/tests/test_fs/conftest.py | 198 ++++++++++--------------------
- 1 file changed, 64 insertions(+), 134 deletions(-)
+Additionally, some patches in the series propose changes with
+general-purpose utility:
 
-diff --git a/test/py/tests/test_fs/conftest.py b/test/py/tests/test_fs/conftest.py
-index cc5c0fc3756..ba125cc7073 100644
---- a/test/py/tests/test_fs/conftest.py
-+++ b/test/py/tests/test_fs/conftest.py
-@@ -9,7 +9,7 @@ import re
- from subprocess import call, check_call, check_output, CalledProcessError
- from fstest_defs import *
- # pylint: disable=E0611
--from tests import fs_helper
-+from tests.fs_helper import FsHelper
- 
- supported_fs_basic = ['fat16', 'fat32', 'exfat', 'ext4', 'fs_generic']
- supported_fs_ext = ['fat12', 'fat16', 'fat32', 'exfat', 'fs_generic']
-@@ -200,33 +200,26 @@ def fs_obj_basic(request, u_boot_config):
-     fs_type = request.param
-     fs_cmd_prefix = fstype_to_prefix(fs_type)
-     fs_cmd_write = 'save' if fs_type == 'fs_generic' or fs_type == 'exfat' else 'write'
--    fs_img = ''
- 
-     fs_ubtype = fstype_to_ubname(fs_type)
-     check_ubconfig(u_boot_config, fs_ubtype)
- 
--    scratch_dir = u_boot_config.persistent_data_dir + '/scratch'
--
--    small_file = scratch_dir + '/' + SMALL_FILE
--    big_file = scratch_dir + '/' + BIG_FILE
--
-+    fsh = FsHelper(u_boot_config, fs_type, 3072, '3GB')
-     try:
--        check_call('mkdir -p %s' % scratch_dir, shell=True)
--    except CalledProcessError as err:
--        pytest.skip('Preparing mount folder failed for filesystem: ' + fs_type + '. {}'.format(err))
--        call('rm -f %s' % fs_img, shell=True)
--        return
-+        fsh.setup()
-+
-+        small_file = fsh.srcdir + '/' + SMALL_FILE
-+        big_file = fsh.srcdir + '/' + BIG_FILE
- 
--    try:
-         # Create a subdirectory.
--        check_call('mkdir %s/SUBDIR' % scratch_dir, shell=True)
-+        check_call('mkdir %s/SUBDIR' % fsh.srcdir, shell=True)
- 
-         # Create big file in this image.
-         # Note that we work only on the start 1MB, couple MBs in the 2GB range
-         # and the last 1 MB of the huge 2.5GB file.
-         # So, just put random values only in those areas.
-         check_call('dd if=/dev/urandom of=%s bs=1M count=1'
--	    % big_file, shell=True)
-+            % big_file, shell=True)
-         check_call('dd if=/dev/urandom of=%s bs=1M count=2 seek=2047'
-             % big_file, shell=True)
-         check_call('dd if=/dev/urandom of=%s bs=1M count=1 seek=2499'
-@@ -234,65 +227,54 @@ def fs_obj_basic(request, u_boot_config):
- 
-         # Create a small file in this image.
-         check_call('dd if=/dev/urandom of=%s bs=1M count=1'
--	    % small_file, shell=True)
--
--        # Delete the small file copies which possibly are written as part of a
--        # previous test.
--        # check_call('rm -f "%s.w"' % MB1, shell=True)
--        # check_call('rm -f "%s.w2"' % MB1, shell=True)
-+            % small_file, shell=True)
- 
-         # Generate the md5sums of reads that we will test against small file
-         out = check_output(
-             'dd if=%s bs=1M skip=0 count=1 2> /dev/null | md5sum'
--	    % small_file, shell=True).decode()
-+            % small_file, shell=True).decode()
-         md5val = [ out.split()[0] ]
- 
-         # Generate the md5sums of reads that we will test against big file
-         # One from beginning of file.
-         out = check_output(
-             'dd if=%s bs=1M skip=0 count=1 2> /dev/null | md5sum'
--	    % big_file, shell=True).decode()
-+            % big_file, shell=True).decode()
-         md5val.append(out.split()[0])
- 
-         # One from end of file.
-         out = check_output(
-             'dd if=%s bs=1M skip=2499 count=1 2> /dev/null | md5sum'
--	    % big_file, shell=True).decode()
-+            % big_file, shell=True).decode()
-         md5val.append(out.split()[0])
- 
-         # One from the last 1MB chunk of 2GB
-         out = check_output(
-             'dd if=%s bs=1M skip=2047 count=1 2> /dev/null | md5sum'
--	    % big_file, shell=True).decode()
-+            % big_file, shell=True).decode()
-         md5val.append(out.split()[0])
- 
-         # One from the start 1MB chunk from 2GB
-         out = check_output(
-             'dd if=%s bs=1M skip=2048 count=1 2> /dev/null | md5sum'
--	    % big_file, shell=True).decode()
-+            % big_file, shell=True).decode()
-         md5val.append(out.split()[0])
- 
-         # One 1MB chunk crossing the 2GB boundary
-         out = check_output(
-             'dd if=%s bs=512K skip=4095 count=2 2> /dev/null | md5sum'
--	    % big_file, shell=True).decode()
-+            % big_file, shell=True).decode()
-         md5val.append(out.split()[0])
- 
--        try:
--            # 3GiB volume
--            fs_img = fs_helper.mk_fs(u_boot_config, fs_type, 0xc0000000, '3GB', scratch_dir)
--        except CalledProcessError as err:
--            pytest.skip('Creating failed for filesystem: ' + fs_type + '. {}'.format(err))
--            return
-+        fsh.mk_fs()
- 
-     except CalledProcessError as err:
-         pytest.skip('Setup failed for filesystem: ' + fs_type + '. {}'.format(err))
-         return
-     else:
--        yield [fs_ubtype, fs_cmd_prefix, fs_cmd_write, fs_img, md5val]
-+        yield [fs_ubtype, fs_cmd_prefix, fs_cmd_write, fsh.fs_img, md5val]
-     finally:
--        call('rm -rf %s' % scratch_dir, shell=True)
--        call('rm -f %s' % fs_img, shell=True)
-+        fsh.cleanup()
- 
- #
- # Fixture for extended fs test
-@@ -312,26 +294,19 @@ def fs_obj_ext(request, u_boot_config):
-     fs_type = request.param
-     fs_cmd_prefix = fstype_to_prefix(fs_type)
-     fs_cmd_write = 'save' if fs_type == 'fs_generic' or fs_type == 'exfat' else 'write'
--    fs_img = ''
- 
-     fs_ubtype = fstype_to_ubname(fs_type)
-     check_ubconfig(u_boot_config, fs_ubtype)
- 
--    scratch_dir = u_boot_config.persistent_data_dir + '/scratch'
--
--    min_file = scratch_dir + '/' + MIN_FILE
--    tmp_file = scratch_dir + '/tmpfile'
--
-+    fsh = FsHelper(u_boot_config, fs_type, 128, '128MB')
-     try:
--        check_call('mkdir -p %s' % scratch_dir, shell=True)
--    except CalledProcessError as err:
--        pytest.skip('Preparing mount folder failed for filesystem: ' + fs_type + '. {}'.format(err))
--        call('rm -f %s' % fs_img, shell=True)
--        return
-+        fsh.setup()
-+
-+        min_file = fsh.srcdir + '/' + MIN_FILE
-+        tmp_file = fsh.srcdir + '/tmpfile'
- 
--    try:
-         # Create a test directory
--        check_call('mkdir %s/dir1' % scratch_dir, shell=True)
-+        check_call('mkdir %s/dir1' % fsh.srcdir, shell=True)
- 
-         # Create a small file and calculate md5
-         check_call('dd if=/dev/urandom of=%s bs=1K count=20'
-@@ -370,21 +345,15 @@ def fs_obj_ext(request, u_boot_config):
- 
-         check_call('rm %s' % tmp_file, shell=True)
- 
--        try:
--            # 128MiB volume
--            fs_img = fs_helper.mk_fs(u_boot_config, fs_type, 0x8000000, '128MB', scratch_dir)
--        except CalledProcessError as err:
--            pytest.skip('Creating failed for filesystem: ' + fs_type + '. {}'.format(err))
--            return
-+        fsh.mk_fs()
- 
-     except CalledProcessError:
-         pytest.skip('Setup failed for filesystem: ' + fs_type)
-         return
-     else:
--        yield [fs_ubtype, fs_cmd_prefix, fs_cmd_write, fs_img, md5val]
-+        yield [fs_ubtype, fs_cmd_prefix, fs_cmd_write, fsh.fs_img, md5val]
-     finally:
--        call('rm -rf %s' % scratch_dir, shell=True)
--        call('rm -f %s' % fs_img, shell=True)
-+        fsh.cleanup()
- 
- #
- # Fixture for mkdir test
-@@ -403,20 +372,19 @@ def fs_obj_mkdir(request, u_boot_config):
-     """
-     fs_type = request.param
-     fs_cmd_prefix = fstype_to_prefix(fs_type)
--    fs_img = ''
- 
-     fs_ubtype = fstype_to_ubname(fs_type)
-     check_ubconfig(u_boot_config, fs_ubtype)
- 
-+    fsh = FsHelper(u_boot_config, fs_type, 128, '128MB')
-     try:
--        # 128MiB volume
--        fs_img = fs_helper.mk_fs(u_boot_config, fs_type, 0x8000000, '128MB', None)
-+        fsh.mk_fs()
-     except:
-         pytest.skip('Setup failed for filesystem: ' + fs_type)
-         return
-     else:
--        yield [fs_ubtype, fs_cmd_prefix, fs_img]
--    call('rm -f %s' % fs_img, shell=True)
-+        yield [fs_ubtype, fs_cmd_prefix, fsh.fs_img]
-+    fsh.cleanup()
- 
- #
- # Fixture for unlink test
-@@ -435,57 +403,44 @@ def fs_obj_unlink(request, u_boot_config):
-     """
-     fs_type = request.param
-     fs_cmd_prefix = fstype_to_prefix(fs_type)
--    fs_img = ''
- 
-     fs_ubtype = fstype_to_ubname(fs_type)
-     check_ubconfig(u_boot_config, fs_ubtype)
- 
--    scratch_dir = u_boot_config.persistent_data_dir + '/scratch'
--
-+    fsh = FsHelper(u_boot_config, fs_type, 128, '128MB')
-     try:
--        check_call('mkdir -p %s' % scratch_dir, shell=True)
--    except CalledProcessError as err:
--        pytest.skip('Preparing mount folder failed for filesystem: ' + fs_type + '. {}'.format(err))
--        call('rm -f %s' % fs_img, shell=True)
--        return
-+        fsh.setup()
- 
--    try:
-         # Test Case 1 & 3
--        check_call('mkdir %s/dir1' % scratch_dir, shell=True)
-+        check_call('mkdir %s/dir1' % fsh.srcdir, shell=True)
-         check_call('dd if=/dev/urandom of=%s/dir1/file1 bs=1K count=1'
--                                    % scratch_dir, shell=True)
-+                                    % fsh.srcdir, shell=True)
-         check_call('dd if=/dev/urandom of=%s/dir1/file2 bs=1K count=1'
--                                    % scratch_dir, shell=True)
-+                                    % fsh.srcdir, shell=True)
- 
-         # Test Case 2
--        check_call('mkdir %s/dir2' % scratch_dir, shell=True)
-+        check_call('mkdir %s/dir2' % fsh.srcdir, shell=True)
-         for i in range(0, 20):
-             check_call('mkdir %s/dir2/0123456789abcdef%02x'
--                                    % (scratch_dir, i), shell=True)
-+                                    % (fsh.srcdir, i), shell=True)
- 
-         # Test Case 4
--        check_call('mkdir %s/dir4' % scratch_dir, shell=True)
-+        check_call('mkdir %s/dir4' % fsh.srcdir, shell=True)
- 
-         # Test Case 5, 6 & 7
--        check_call('mkdir %s/dir5' % scratch_dir, shell=True)
-+        check_call('mkdir %s/dir5' % fsh.srcdir, shell=True)
-         check_call('dd if=/dev/urandom of=%s/dir5/file1 bs=1K count=1'
--                                    % scratch_dir, shell=True)
-+                                    % fsh.srcdir, shell=True)
- 
--        try:
--            # 128MiB volume
--            fs_img = fs_helper.mk_fs(u_boot_config, fs_type, 0x8000000, '128MB', scratch_dir)
--        except CalledProcessError as err:
--            pytest.skip('Creating failed for filesystem: ' + fs_type + '. {}'.format(err))
--            return
-+        fsh.mk_fs()
- 
-     except CalledProcessError:
-         pytest.skip('Setup failed for filesystem: ' + fs_type)
-         return
-     else:
--        yield [fs_ubtype, fs_cmd_prefix, fs_img]
-+        yield [fs_ubtype, fs_cmd_prefix, fsh.fs_img]
-     finally:
--        call('rm -rf %s' % scratch_dir, shell=True)
--        call('rm -f %s' % fs_img, shell=True)
-+        fsh.cleanup()
- 
- #
- # Fixture for symlink fs test
-@@ -503,26 +458,19 @@ def fs_obj_symlink(request, u_boot_config):
-         volume file name and  a list of MD5 hashes.
-     """
-     fs_type = request.param
--    fs_img = ''
- 
-     fs_ubtype = fstype_to_ubname(fs_type)
-     check_ubconfig(u_boot_config, fs_ubtype)
- 
--    scratch_dir = u_boot_config.persistent_data_dir + '/scratch'
--
--    small_file = scratch_dir + '/' + SMALL_FILE
--    medium_file = scratch_dir + '/' + MEDIUM_FILE
--
-+    fsh = FsHelper(u_boot_config, fs_type, 1024, '1GB')
-     try:
--        check_call('mkdir -p %s' % scratch_dir, shell=True)
--    except CalledProcessError as err:
--        pytest.skip('Preparing mount folder failed for filesystem: ' + fs_type + '. {}'.format(err))
--        call('rm -f %s' % fs_img, shell=True)
--        return
-+        fsh.setup()
-+
-+        small_file = fsh.srcdir + '/' + SMALL_FILE
-+        medium_file = fsh.srcdir + '/' + MEDIUM_FILE
- 
--    try:
-         # Create a subdirectory.
--        check_call('mkdir %s/SUBDIR' % scratch_dir, shell=True)
-+        check_call('mkdir %s/SUBDIR' % fsh.srcdir, shell=True)
- 
-         # Create a small file in this image.
-         check_call('dd if=/dev/urandom of=%s bs=1M count=1'
-@@ -542,21 +490,15 @@ def fs_obj_symlink(request, u_boot_config):
-             % medium_file, shell=True).decode()
-         md5val.extend([out.split()[0]])
- 
--        try:
--            # 1GiB volume
--            fs_img = fs_helper.mk_fs(u_boot_config, fs_type, 0x40000000, '1GB', scratch_dir)
--        except CalledProcessError as err:
--            pytest.skip('Creating failed for filesystem: ' + fs_type + '. {}'.format(err))
--            return
-+        fsh.mk_fs()
- 
-     except CalledProcessError:
-         pytest.skip('Setup failed for filesystem: ' + fs_type)
-         return
-     else:
--        yield [fs_ubtype, fs_img, md5val]
-+        yield [fs_ubtype, fsh.fs_img, md5val]
-     finally:
--        call('rm -rf %s' % scratch_dir, shell=True)
--        call('rm -f %s' % fs_img, shell=True)
-+        fsh.cleanup()
- 
- #
- # Fixture for rename test
-@@ -584,21 +526,15 @@ def fs_obj_rename(request, u_boot_config):
-         return out.decode().split()[0]
- 
-     fs_type = request.param
--    fs_img = ''
- 
-     fs_ubtype = fstype_to_ubname(fs_type)
-     check_ubconfig(u_boot_config, fs_ubtype)
- 
--    mount_dir = u_boot_config.persistent_data_dir + '/scratch'
--
-+    fsh = FsHelper(u_boot_config, fs_type, 128, '128MB')
-     try:
--        check_call('mkdir -p %s' % mount_dir, shell=True)
--    except CalledProcessError as err:
--        pytest.skip('Preparing mount folder failed for filesystem: ' + fs_type + '. {}'.format(err))
--        call('rm -f %s' % fs_img, shell=True)
--        return
-+        fsh.setup()
-+        mount_dir = fsh.srcdir
- 
--    try:
-         md5val = {}
-         # Test Case 1
-         check_call('mkdir %s/test1' % mount_dir, shell=True)
-@@ -657,21 +593,15 @@ def fs_obj_rename(request, u_boot_config):
-         new_rand_file('%s/test11/dir1/file1' % mount_dir)
-         md5val['test11'] = file_hash('%s/test11/dir1/file1' % mount_dir)
- 
--        try:
--            # 128MiB volume
--            fs_img = fs_helper.mk_fs(u_boot_config, fs_type, 0x8000000, '128MB', mount_dir)
--        except CalledProcessError as err:
--            pytest.skip('Creating failed for filesystem: ' + fs_type + '. {}'.format(err))
--            return
-+        fsh.mk_fs()
- 
-     except CalledProcessError:
-         pytest.skip('Setup failed for filesystem: ' + fs_type)
-         return
-     else:
--        yield [fs_ubtype, fs_img, md5val]
-+        yield [fs_ubtype, fsh.fs_img, md5val]
-     finally:
--        call('rm -rf %s' % mount_dir, shell=True)
--        call('rm -f %s' % fs_img, shell=True)
-+        fsh.cleanup()
- 
- #
- # Fixture for fat test
-@@ -697,19 +627,19 @@ def fs_obj_fat(request, u_boot_config):
-     MIN_FAT16_SIZE = 8208 * 1024
- 
-     fs_type = request.param
--    fs_img = ''
- 
-     fs_ubtype = fstype_to_ubname(fs_type)
-     check_ubconfig(u_boot_config, fs_ubtype)
- 
-     fs_size = MAX_FAT12_SIZE if fs_type == 'fat12' else MIN_FAT16_SIZE
-+    size_mb = (fs_size + (1 << 20) - 1) >> 20
- 
-+    fsh = FsHelper(u_boot_config, fs_type, size_mb, f'{fs_size}')
-     try:
--        # the volume size depends on the filesystem
--        fs_img = fs_helper.mk_fs(u_boot_config, fs_type, fs_size, f'{fs_size}')
-+        fsh.mk_fs()
-     except:
-         pytest.skip('Setup failed for filesystem: ' + fs_type)
-         return
-     else:
--        yield [fs_ubtype, fs_img]
--    call('rm -f %s' % fs_img, shell=True)
-+        yield [fs_ubtype, fsh.fs_img]
-+    fsh.cleanup()
+ 1/7 lib: uuid: add partition type GUID for extended bootloader
+ 4/7 cmd: part: support lookup by UUID in 'part number'
+ 6/7 fwu: add helper to get image GUID by type and bank index
+
+[1] https://github.com/STMicroelectronics/u-boot/pull/6
+
+Changes in v2:
+- Add links to the XBOOTLDR specification in the commit message of patch
+   1/7 lib: uuid: add partition type GUID for extended bootloader.
+- Update help for 'part start', 'part size' to mention UUID.
+- Add kerneldoc comment for fwu_mdata_get_image_guid().
+- Pass efi_guid_t by pointer in fwu_mdata_get_image_guid().
+- Add patches:
+   5/7 test: cmd: part: add UUID lookup tests
+   3/7 test: cmd: add unit tests for part command
+   2/7 test: dm: part: add test for part_get_info_by_uuid
+
+Dario Binacchi (7):
+  lib: uuid: add partition type GUID for extended bootloader
+  test: dm: part: add test for part_get_info_by_uuid
+  test: cmd: add unit tests for part command
+  cmd: part: support lookup by UUID
+  test: cmd: part: add UUID lookup tests
+  fwu: add helper to get image GUID by type and bank index
+  board: st: stm32mp25: support dynamic A/B bank bootup
+
+ board/st/stm32mp2/stm32mp2.c          |  25 ++++
+ cmd/part.c                            |  12 +-
+ doc/README.gpt                        |   2 +
+ include/configs/stm32mp25_st_common.h |  15 ++
+ include/fwu.h                         |   3 +
+ include/part_efi.h                    |   3 +
+ lib/fwu_updates/fwu.c                 |  33 +++++
+ lib/uuid.c                            |   1 +
+ test/cmd/Makefile                     |   1 +
+ test/cmd/part.c                       | 204 ++++++++++++++++++++++++++
+ test/dm/part.c                        |  53 +++++++
+ 11 files changed, 348 insertions(+), 4 deletions(-)
+ create mode 100644 test/cmd/part.c
+
 -- 
 2.43.0
 
+base-commit: 4dc4080805fac1b1ed7606ce3bc8fb44a6d59d5e
+branch: fwupdate-ab
