@@ -4,82 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4E87E64011
-	for <u-boot@archiver.kernel.org>; Sun,  5 Apr 2026 04:32:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BC7EE64012
+	for <u-boot@archiver.kernel.org>; Sun,  5 Apr 2026 04:38:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 387C884020;
-	Sun,  5 Apr 2026 06:32:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DBE9C807C0;
+	Sun,  5 Apr 2026 06:38:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="LswtDln5";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Hdu6/YV5";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="YQvtp9f2";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="g3uG6dji";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1161C8341A; Sun,  5 Apr 2026 06:32:49 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id 9449B83D17; Sun,  5 Apr 2026 06:38:08 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2795B8341A
- for <u-boot@lists.denx.de>; Sun,  5 Apr 2026 06:32:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E46D84144
+ for <u-boot@lists.denx.de>; Sun,  5 Apr 2026 06:38:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4fpKM25pm5z9v5y;
- Sun,  5 Apr 2026 06:32:46 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4fpKT54GKgz9tYP;
+ Sun,  5 Apr 2026 06:38:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1775363566;
+ s=mail20150812; t=1775363881;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=CG8WMjxGp6ZrJT9sDvV0ZqpbSOt8uWF9/9hMs/TY7+I=;
- b=LswtDln5gmPZ9em/3WQC9Nqyp4a1urj38sz8VhrnsnABf/iQpoR2GbjSpK7XvhpTtOLhF7
- L8YfAkCijUk6VnXncmvje8tPNSAF+zqbPg3gPLNt+DUu7TMQ3CxJypGZXF0ATOAkPL3Cbn
- mhWuvgLR70QardCwtw9u0e5Z1SLFHttxyZbDSYV4wXD7+QxKwxNPytvXFc8H/bQoGFuPpD
- I92pTVKhA6ACsV8hziPRaBtOfpdAh7bGQkQN+STZwgxYrj1lYapC80U9UbZap6Ac8/3dCu
- iOv/VxzNBrSeMeMeuPBP0KWkLBcFaT7LEBQUVbX9Kr7H8ZFGxDdw5aSRnMY9mg==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="Hdu6/YV5";
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <3b93c2f7-e83f-4cdc-8481-089aceb9cf48@mailbox.org>
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=9D1Gr32F9GQxGBy/yotX5hITDCubI9uzgu9D5Yu6Ns8=;
+ b=YQvtp9f2MTI8s2wEUfSmYMZoV0OssOOH6EHA6eaIElBJWD4x30yS3cHYElNu5gm0bTb6m5
+ 8HY8JcSBxcHD/cxaD9gpcMuQGmOKAcel5Qv8Q2nD+idS43JJHMv1xm3CqbIKgWGchdW0v3
+ 0P7NvdZUltTc+I4tShkA8NZCPj4zgntGb4yduqvpZW8LRDAWMQYZab1F/q1Z0H3zw4sQr4
+ gmp/IF1P2VqDbHDvKNgW6/GFk/zX4SF7qyXBdqpBA/gqZQu0Sq8PI0LhhmIYMwg1VKtAWF
+ 5UNJxaNBgZ9wySTfMyAsGjoRpx7FT0yqj6/J3YS4ZV2BziVdi1UxPT3BmvvdkQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1775363565;
+ s=mail20150812; t=1775363879;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=CG8WMjxGp6ZrJT9sDvV0ZqpbSOt8uWF9/9hMs/TY7+I=;
- b=Hdu6/YV5kPv3sMoNJzOVwOxD7DFJghhqSF4xe8lIZCdMeE8WWUmc0Cl+UFXxsuKQ4fle68
- c1cJdVMhti+JHHBUT5I0jLDCq5bLmUDtNDKasSRdzXg06x8aYvIlkIdYl9JTwktUPXNTys
- vrgbySBhvAtx7Aaa31FQku9ljvffFsFzl5DCVTgiM9o3E2RSDugyUS9nHG90aJUDwfkA/A
- PAcRjT/NgXm8kx2+YKcDeX4jZPCh1V6rrYsACjyrqSPkaqcDHQymrFpZhXvcxqz33N6V4Q
- 8ffJYYOPcXwvv8uGWwidPpeNCs+Ldn4uv0wJfhLkCq2BA4O2OuKiVhs/SpB8ww==
-Date: Sun, 5 Apr 2026 06:01:32 +0200
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=9D1Gr32F9GQxGBy/yotX5hITDCubI9uzgu9D5Yu6Ns8=;
+ b=g3uG6djidr06LaxZijTHvXzXyrH81VThtyLXzxpq7z0ImVUG6cygR2vQ/8cC09DpNph2Qh
+ ko2ziO5Z5c1nUMzfQ0qnmcH95ZD3FTR7Wn1/JSJpLFo6oVmxBWgX6JImsAiJUS4AEp4mqJ
+ 5nlnUiXoFKd2J8dMs3E7EBP6u2GQuVogUh3ByvGogawVyCDU8vPV4tedkFnN1MED3APTzk
+ bcLkQlkk16YLgpo3rPyChIe8yS3pY+8jPkmTomPW4e1OI/AU0wE9Uwje2Y8FleEfAbZAaq
+ ZL3v9M4mXmK8+lSMc5FUwNcazlgJWdlH6lMycrr0yGGNtOkRmO1iZfpNK0l8mQ==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PULL] u-boot-sh/master
+Date: Sun,  5 Apr 2026 06:33:57 +0200
+Message-ID: <20260405043751.350594-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH v1 4/4] common: Add an optionto relocate on ram top
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, trini@konsulko.com
-Cc: marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, anshuld@ti.com,
- sjg@chromium.org, u-boot@lists.denx.de
-References: <20260403090109.3564638-1-ilias.apalodimas@linaro.org>
- <20260403090109.3564638-5-ilias.apalodimas@linaro.org>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260403090109.3564638-5-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: ttsxdod3rn944uors77mqqnwg413abba
-X-MBO-RS-ID: 41e3662cc01eb90c268
-X-Rspamd-Queue-Id: 4fpKM25pm5z9v5y
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: ef03ffc1faf22660930
+X-MBO-RS-META: ze9my1fj45ebf35o5untwkw3e1zet4c8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,26 +82,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/3/26 11:01 AM, Ilias Apalodimas wrote:
+Two trivial fixes for 2026.04 , one fix for possible NULL pointer dereference
+which was not triggered thus far but got detected on Gen5 RSIP, and one basic
+disablement of SCIF1 in DT to which a driver was never bound. But it would be
+nice to have them corrected.
 
-[...]
+The following changes since commit 214aababe07de0598bd26ecb0c8fb2e2843ff7d5:
 
-> @@ -353,8 +357,19 @@ static int setup_ram_config(void)
->   	 */
->   	gd->ram_size -= CONFIG_SYS_MEM_TOP_HIDE;
->   #endif
-> +#if CONFIG_IS_ENABLED(RELOC_ADDR_TOP)
-> +	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-> +		if (gd->ram_top <= gd->bi_dram[bank].start)
-> +			gd->ram_top = gd->bi_dram[bank].start +
-> +					gd->bi_dram[bank].size;
-> +		total_size += gd->bi_dram[bank].size;
-> +	}
-> +
-> +	gd->ram_size = total_size;
-> +#else
->   	gd->ram_top = gd->ram_base + get_effective_memsize();
->   	gd->ram_top = board_get_usable_ram_top(gd->mon_len);
-> +#endif
-It would be nice if we could get rid of this ifdeffery and align the two 
-branches of the code, but otherwise this looks nice.
+  Revert "usb: cdns3: use VBUS Valid to determine role for dr_mode OTG" (2026-04-03 17:50:16 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+
+for you to fetch changes up to d8bd70741f0d0258088a306c39bf8af3c1be3c4b:
+
+  arm64: dts: renesas: Disable SCIF1 in Renesas R-Car X5H R8A78000 SoC DT (2026-04-04 23:46:31 +0200)
+
+----------------------------------------------------------------
+Marek Vasut (2):
+      net: rswitch: Avoid NULL pointer dereference during PHY access
+      arm64: dts: renesas: Disable SCIF1 in Renesas R-Car X5H R8A78000 SoC DT
+
+ arch/arm/dts/r8a78000.dtsi | 2 +-
+ drivers/net/rswitch.c      | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
