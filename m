@@ -4,105 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22347E64002
-	for <u-boot@archiver.kernel.org>; Sun,  5 Apr 2026 09:14:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B09DE64019
+	for <u-boot@archiver.kernel.org>; Sun,  5 Apr 2026 10:42:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C82A80433;
-	Sun,  5 Apr 2026 11:14:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 1C6B480433;
+	Sun,  5 Apr 2026 12:42:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="BXuEKpMx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AO/a0gEZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6155F83C14; Sun,  5 Apr 2026 11:14:16 +0200 (CEST)
-Received: from mail-yx1-xb132.google.com (mail-yx1-xb132.google.com
- [IPv6:2607:f8b0:4864:20::b132])
+ id 3735E807C0; Sun,  5 Apr 2026 12:42:52 +0200 (CEST)
+Received: from mail-ot1-x341.google.com (mail-ot1-x341.google.com
+ [IPv6:2607:f8b0:4864:20::341])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F34280325
- for <u-boot@lists.denx.de>; Sun,  5 Apr 2026 11:14:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id B7A38800AE
+ for <u-boot@lists.denx.de>; Sun,  5 Apr 2026 12:42:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-yx1-xb132.google.com with SMTP id
- 956f58d0204a3-6501e465a8eso3349142d50.1
- for <u-boot@lists.denx.de>; Sun, 05 Apr 2026 02:14:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775380453; cv=none;
- d=google.com; s=arc-20240605;
- b=VXT+KG8hBfpS2Lona7tQ702a1CiwCprpIP1lu6tVqr3MOalohRZc544Ujt7ZCTGf7P
- 2uSKTIWtJHGdnDp6J0We3kM2CHOZf8O6A/4b4iJrzvntg8NOU43BVNXPjpQL3m87twbh
- 6d+zbOwRle2V1fiwvv7sBXx7ig1dAygfLe5h3hDmHwNbx/lehqRqzWsXcMr18f9uP6Mr
- IvNjLpLmu7bF26/BXNK3A7JfXWrfTm1TW+PS/I8tc7DPG5/gZR/ylXxf/pQCAyq2+yjd
- GGswW6UzMuMef4UsuNHbFMVTnOJ2CcEGZf40lyp8M1fJvKIvc/H0c0OqMH1ds3TjhvkP
- rxwg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=WGkDRaOKzqC5piiGkrX/4nUZcpWRZnFtO9KJK5Rs+0g=;
- fh=BnpnyMJV8JwsLeyI2TPSjexZl4eVT43xfeL1DZOEHq4=;
- b=CsBJ41PKmIB1bnQf9awRjXabKH9dC1rxA4Ovt+NHegp/1TCeqBux1v3Fdj7S0h9rBF
- 9tpYGf6xfLScHPePKqWIMHq7VwxHMcZpgF6bCzEaQKfzxz5m+nKIx7rRq0vGKiM3Apgg
- jalEpOkjXZWfujsS4rWFEegGiXy/ZOtn368/T8JeYKr0STwEOCyieDura2U37fF4VeNO
- dbBHsrVcRcAkJM3gk+bIifMZwe4Oo+Zd7+Rzkxrn3pzU3rOgDMUtis4yKwmBB/t/qboP
- CHMuVSA7J+0a3GuTvFmwEUYLVupXodpxGyXyKMRCVQd3Wpk4pGG5O1njvuw0vOIKjWBh
- Q6aA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x341.google.com with SMTP id
+ 46e09a7af769-7d7eb85fb81so3291880a34.0
+ for <u-boot@lists.denx.de>; Sun, 05 Apr 2026 03:42:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1775380453; x=1775985253;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WGkDRaOKzqC5piiGkrX/4nUZcpWRZnFtO9KJK5Rs+0g=;
- b=BXuEKpMx72G9UuqH7cYlBHtAkM6PRodVDofRh+GnNewcZgnPUeh5TrEZWJhHc1Dv6Y
- OtNoM9ZTWbbfFIjZX+wLj7KDXVZWfXOXjYFVD3tz7F1Qwdnzt+G9Yh8/JqubnRssteC2
- F76MFcpD8Mpkb5ADZEijpSuxd+TMXixpO8gtA=
+ d=chromium.org; s=google; t=1775385767; x=1775990567; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=V0pF/sW85/TPD/KT3wrN6ymxhpcgFc9Kx5J+K+5G3pc=;
+ b=AO/a0gEZy9ilqVxBlLhr69uig2mVmeE73y36YNpNqHcbnK9xjCQyEmfVna3A7KI+nO
+ B5zZhlM3Okj6oKrMNkZessr+W0Wl+t1SEZ9davPbZ+Dw+EgOqxgfnn1XqkX3vQbMS31/
+ 5MPCX1ucVTITzByyFMjNcPZas6ZwLqr5Q7UsA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775380453; x=1775985253;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=WGkDRaOKzqC5piiGkrX/4nUZcpWRZnFtO9KJK5Rs+0g=;
- b=YNgISvzo4/O/5/Q7wCoOfinmsFBSkqoFG302uOu6LLEvx2UQE+6yV0I2Hgmkb7daak
- gpDqSTxCcOZspFvH8ighPkgrnNNZfkcCumieC5TXH2+k9YAMR7hKbLJ2BDsW9RE/y0+J
- CiYiqAdrxihlOGFay3C3kJ9HCJGs0a5CUIlDWe1jxdYke4NYz9DxGoX9CZtLT0Zl/F/O
- Meaq2jqhqrzeHMwA7N0cX1QujEUeWY+RYRunBX/Qz1ylEyv6CqiX0WiiOvlZWrvgBpu5
- 6DCT6DSybKrO2Jh8si7UouP7eX4VeP727osd0F0J25sL97LF4tH6cUl5URm5keKfangv
- NbJw==
-X-Gm-Message-State: AOJu0YwAvHsTBnS4QCblVfZ8it0jk51FxOhfyJxKa+qSio0O18Z9QRjf
- ZfS5FTzQ+g88BnNbuZ4B/eVmkMXE20m1s4GEOcDXWoBbf7tbvQOVrxgqDJlNh73tL05vTyOs7Yd
- GyR24yd2IURLZ3bZQGMcuDKjw8MYU/OFqgoi7q7OWUQ==
-X-Gm-Gg: AeBDiessl4BNaZWym1jCESj85yOTLC8ozjSZFddyVrsZe6Nf1Z37CAcTHDJg2j9X5Fv
- yqj/2w8UUB81rGhvthuMVv/ptty/5slFBT0IGnpSyOkWoIyx9n85Y3xh2I91ZohAIDpmmHsy5Jg
- FrWqDfkRUWFqD3KvRk3qb01bJU1QxncCtpIKJRHvUSF3+/V6ylcldNu9zB/+5YEYAGGzzfjFtnz
- 89Rh0MtF4UXXDxqlXKurI+gm/+DEhQCWRHPG0KqTXHpXy4a228NOJIE+0LeZxB3OUENBcNtL882
- eo82AX7AQ5A4Z6U0LQK8cbAzyZgD9FhngilP
-X-Received: by 2002:a05:690e:bc6:b0:650:1d03:4126 with SMTP id
- 956f58d0204a3-6503d735d1fmr9906195d50.2.1775380453008; Sun, 05 Apr 2026
- 02:14:13 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1775385767; x=1775990567;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=V0pF/sW85/TPD/KT3wrN6ymxhpcgFc9Kx5J+K+5G3pc=;
+ b=YEUXx22Neg1EOAFHYTc64ByoMJi7aW1UVC3t9MlY+8djqWHETdQLdHaDN2h+y8kzCz
+ 868M6uBnNvoC8dfA/xWGblEcK91xMQo0KFKgqYDU8Wt/gr2+3wfLDOryS52SIWC9GXHy
+ xJFvxcnjcQjnW/E8XkHxqrbmXdCnnyP3NZMUS18+cxYNp+T70uZ6rSRzEkVcgeCbNcZK
+ ZRcKVdhRSC+hb963r0rLY8Fz7R2aee5hAEwXgyVHaIP9bZXJdhA+sf25pZHB4AIFVnhY
+ vC2Y15zVR0PEiD0p9wJ06OSl4VLG0bgRYNt9XruOY6L79aKwdDbrO+XTqGeRIDFgVjdn
+ JcFg==
+X-Gm-Message-State: AOJu0Yw2ag0xVTOkbvss7iJLQhk0IkhuxpM+qNVYNG8fRUw47FGBc7WE
+ EznDZjLE05ORo7gmGvxKfjWlTa4q1GBFUxlpT2aYbG2rKIJxcRHOJzuSS73mEMEk/VWg6xxtwxe
+ +//p0BbP0
+X-Gm-Gg: AeBDiesFkZ6hBaxwCLEqA55lXtZl0b6hPs//DmhzUeCvDHTidj4GfoLYVhRz64w3wjR
+ HD1uX+Z62FWdUi6JNvAEP0agf7XbI9z8wxQWXfUdMOAsyt1FkrMNTUkPjQV88feRN+PWKLhkF52
+ eQT38BrgGtMyiz4WmHSHvZafMr8p803rDjRYE8wZQ9IfpBOsgSfhcQ3eA07mL2G+CFarQlLGnz3
+ 4QLl+HQsXP6dtEqjOSNw3maRhif9IUXWRQwB1F+RFMJALjTluISYRDF/R+9LM2Wc/rNMPG9eSdt
+ tzBH87idu/nGFgFEm63rbvDz4KIRmlHBamZwDMYHaXcMnbftkyUdAb1pFuAWOv/V44dI4sq8w9l
+ S5qchw1LUORqOS6wCOW1srg54d1yT1Gz3U0kQFhjIOmbeaFS6t8FxMRlx0sIQ5W8eTObdOCI9KA
+ /1fDhfJJRqhY4lZxdjSw==
+X-Received: by 2002:a05:6820:81e:b0:682:b064:ecf3 with SMTP id
+ 006d021491bc7-682b064ef39mr3856669eaf.3.1775385767448; 
+ Sun, 05 Apr 2026 03:42:47 -0700 (PDT)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-42330d4a3c1sm3914436fac.1.2026.04.05.03.42.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 05 Apr 2026 03:42:45 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Richard Genoud <richard.genoud@bootlin.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>
+Subject: [PATCH v3 1/2] kbuild: Move U-Boot .incbin rules to
+ Makefile.lib-u-boot
+Date: Sun,  5 Apr 2026 04:42:20 -0600
+Message-ID: <20260405104224.530051-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260403-winbond-ma35d1-v1-0-e2b08c4c5e35@bootlin.com>
- <20260403-winbond-ma35d1-v1-3-e2b08c4c5e35@bootlin.com>
-In-Reply-To: <20260403-winbond-ma35d1-v1-3-e2b08c4c5e35@bootlin.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Sun, 5 Apr 2026 11:13:59 +0200
-X-Gm-Features: AQROBzBX0y04TOT1c3bvZPxP2SKS8CeFeXUIPi81122PwYWRGTmofHhE4pvNA7Q
-Message-ID: <CAOf5uwmq-KodpbD4E4PsZXBAGsxLLPaFgRtr969f03=0_aL0+w@mail.gmail.com>
-Subject: Re: [PATCH 3/3] mtd: spinand: winbond: Clarify when to enable the HS
- bit
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: u-boot@lists.denx.de, Frieder Schrempf <frieder.schrempf@kontron.de>, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, Tom Rini <trini@konsulko.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Christian Marangi <ansuelsmth@gmail.com>, Steam Lin <stlin2@winbond.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,77 +103,267 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+The font, splash-screen and EFI .incbin wrapper rules are U-Boot
+additions that do not exist in the upstream Linux kbuild. Keeping them
+in scripts/Makefile.lib makes re-syncing with Linux harder than it needs
+to be, as every sync must manually preserve the U-Boot additions.
 
-On Fri, Apr 3, 2026 at 6:17=E2=80=AFPM Miquel Raynal <miquel.raynal@bootlin=
-.com> wrote:
->
-> Above 104MHz when in fast dual or quad I/O reads, the delay between
-> address and data cycles is too short. It is possible to reach higher
-> frequencies, up to 166MHz, by adding a few more dummy cycles through the
-> setting of the HS bit. Improve the condition for enabling this bit, and
-> also make sure we set it at soon as we go over 104MHz.
->
-> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> ---
-> This is a port from Linux.
-> ---
->  drivers/mtd/nand/spi/winbond.c | 13 ++++++++-----
->  1 file changed, 8 insertions(+), 5 deletions(-)
->
-> diff --git a/drivers/mtd/nand/spi/winbond.c b/drivers/mtd/nand/spi/winbon=
-d.c
-> index 79c3354efb65..accb46dfeb03 100644
-> --- a/drivers/mtd/nand/spi/winbond.c
-> +++ b/drivers/mtd/nand/spi/winbond.c
-> @@ -261,16 +261,19 @@ static int w25n0xjw_hs_cfg(struct spinand_device *s=
-pinand)
->         u8 sr4;
->         int ret;
->
-> +       /*
-> +        * SDR dual and quad I/O operations over 104MHz require the HS bi=
-t to
-> +        * enable a few more dummy cycles.
-> +        */
->         op =3D spinand->op_templates.read_cache;
->         if (op->cmd.dtr || op->addr.dtr || op->dummy.dtr || op->data.dtr)
->                 hs =3D false;
-> -       else if (op->cmd.buswidth =3D=3D 1 && op->addr.buswidth =3D=3D 1 =
-&&
-> -                op->dummy.buswidth =3D=3D 1 && op->data.buswidth =3D=3D =
-1)
-> +       else if (op->cmd.buswidth !=3D 1 || op->addr.buswidth !=3D 1)
-> +               hs =3D false;
-> +       else if (op->max_freq && op->max_freq <=3D 104 * HZ_PER_MHZ)
->                 hs =3D false;
-> -       else if (!op->max_freq)
-> -               hs =3D true;
->         else
-> -               hs =3D false;
-> +               hs =3D true;
->
+Move these rules into a new scripts/Makefile.lib-u-boot and include it
+from Makefile.build and Makefile.xpl, right after the existing
+Makefile.lib include.
 
-Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+This is a pure code-move with no functional change.
 
+Suggested-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
 
->         ret =3D spinand_read_reg_op(spinand, W25N0XJW_SR4, &sr4);
->         if (ret)
->
-> --
-> 2.53.0
->
+(no changes since v2)
 
+Changes in v2:
+- Split out of the relative-path patch as requested by Tom Rini
 
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+ scripts/Makefile.build      |  1 +
+ scripts/Makefile.lib        | 94 ------------------------------------
+ scripts/Makefile.lib-u-boot | 96 +++++++++++++++++++++++++++++++++++++
+ scripts/Makefile.xpl        |  1 +
+ 4 files changed, 98 insertions(+), 94 deletions(-)
+ create mode 100644 scripts/Makefile.lib-u-boot
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+diff --git a/scripts/Makefile.build b/scripts/Makefile.build
+index 8da9851d430..e625f99986e 100644
+--- a/scripts/Makefile.build
++++ b/scripts/Makefile.build
+@@ -65,6 +65,7 @@ ccflags-y  += $(PLATFORM_CPPFLAGS)
+ cppflags-y += $(PLATFORM_CPPFLAGS)
+ 
+ include $(srctree)/scripts/Makefile.lib
++include $(srctree)/scripts/Makefile.lib-u-boot
+ 
+ # Do not include hostprogs rules unless needed.
+ # $(sort ...) is used here to remove duplicated words and excessive spaces.
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index 7386353e0cc..b8969b7de54 100644
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -508,100 +508,6 @@ $(multi-dtb-y): FORCE
+ 	$(call if_changed,fdtoverlay)
+ $(call multi_depend, $(multi-dtb-y), .dtb, -dtbs)
+ 
+-# Fonts
+-# ---------------------------------------------------------------------------
+-
+-# Generate an assembly file to wrap the font data
+-quiet_cmd_S_ttf= TTF     $@
+-# Modified for U-Boot
+-cmd_S_ttf=						\
+-(							\
+-	echo '.section .rodata.ttf.init,"a"';		\
+-	echo '.balign 16';				\
+-	echo '.global __ttf_$(*F)_begin';		\
+-	echo '__ttf_$(*F)_begin:';			\
+-	echo '.incbin "$<" ';				\
+-	echo '__ttf_$(*F)_end:';			\
+-	echo '.global __ttf_$(*F)_end';			\
+-	echo '.balign 16';				\
+-) > $@
+-
+-$(obj)/%.S: $(src)/%.ttf
+-	$(call cmd,S_ttf)
+-
+-# Splash logos
+-# ---------------------------------------------------------------------------
+-
+-# Generate an assembly file to wrap the splash data
+-quiet_cmd_S_splash= TTF     $@
+-# Modified for U-Boot
+-cmd_S_splash=						\
+-(							\
+-	echo '.section .rodata.splash.init,"a"';		\
+-	echo '.balign 16';				\
+-	echo '.global __splash_$(*F)_begin';		\
+-	echo '__splash_$(*F)_begin:';			\
+-	echo '.incbin "$<" ';				\
+-	echo '__splash_$(*F)_end:';			\
+-	echo '.global __splash_$(*F)_end';			\
+-	echo '.balign 16';				\
+-) > $@
+-
+-$(obj)/%.S: $(src)/%.bmp
+-	$(call cmd,S_splash)
+-
+-# EFI applications
+-# A Makefile target *.efi is built as EFI application.
+-# A Makefile target *_efi.S wraps *.efi as built-in EFI application.
+-# ---------------------------------------------------------------------------
+-
+-# Generate an assembly file to wrap the EFI app
+-cmd_S_efi=					\
+-(						\
+-	echo '.section .rodata.$*.init,"a"';	\
+-	echo '.balign 16';			\
+-	echo '.global __efi_$*_begin';		\
+-	echo '__efi_$*_begin:';			\
+-	echo '.incbin "$<" ';			\
+-	echo '__efi_$*_end:';			\
+-	echo '.global __efi_$*_end';		\
+-	echo '.balign 16';			\
+-) > $@
+-
+-$(obj)/%_efi.S: $(obj)/%.efi
+-	$(call cmd,S_efi)
+-
+-quiet_cmd_efi_objcopy = OBJCOPY $@
+-cmd_efi_objcopy = $(OBJCOPY) -j .header -j .text -j .sdata -j .data \
+-		-j .dynamic -j .dynstr  -j .dynsym -j .rel* -j .reloc \
+-		$(if $(EFI_TARGET),$(EFI_TARGET),-O binary) $^ $@
+-
+-$(obj)/%.efi: $(obj)/%_efi.so
+-	$(call cmd,efi_objcopy)
+-
+-KBUILD_EFILDFLAGS = -nostdlib -zexecstack -znocombreloc -znorelro
+-KBUILD_EFILDFLAGS += $(call ld-option,--no-warn-rwx-segments)
+-quiet_cmd_efi_ld = LD      $@
+-cmd_efi_ld = $(LD) $(KBUILD_EFILDFLAGS) -L $(srctree) -T $(EFI_LDS_PATH) \
+-		-shared -Bsymbolic -s $^ $(PLATFORM_LIBGCC) -o $@
+-
+-EFI_LDS_PATH = arch/$(ARCH)/lib/$(EFI_LDS)
+-
+-$(obj)/efi_crt0.o: $(srctree)/arch/$(ARCH)/lib/$(EFI_CRT0:.o=.S) FORCE
+-	$(call if_changed_dep,as_o_S)
+-
+-$(obj)/efi_reloc.o: $(srctree)/arch/$(ARCH)/lib/$(EFI_RELOC:.o=.c) $(recordmcount_source) FORCE
+-	$(call cmd,force_checksrc)
+-	$(call if_changed_rule,cc_o_c)
+-
+-$(obj)/%_efi.so: $(obj)/%.o $(obj)/efi_crt0.o $(obj)/efi_reloc.o $(obj)/efi_freestanding.o
+-	$(call cmd,efi_ld)
+-
+-targets += $(obj)/efi_crt0.o $(obj)/efi_reloc.o $(obj)/efi_freestanding.o
+-
+-CFLAGS_REMOVE_efi_reloc.o := $(LTO_CFLAGS)
+-CFLAGS_REMOVE_efi_freestanding.o := $(LTO_CFLAGS)
+-
+ # ACPI
+ # ---------------------------------------------------------------------------
+ #
+diff --git a/scripts/Makefile.lib-u-boot b/scripts/Makefile.lib-u-boot
+new file mode 100644
+index 00000000000..c55f8d8e0c3
+--- /dev/null
++++ b/scripts/Makefile.lib-u-boot
+@@ -0,0 +1,96 @@
++# SPDX-License-Identifier: GPL-2.0
++#
++# U-Boot-specific rules for embedding binary data via .incbin
++# These are split out of Makefile.lib to simplify kbuild re-syncs.
++
++# Fonts
++# ---------------------------------------------------------------------------
++
++# Generate an assembly file to wrap the font data
++quiet_cmd_S_ttf= TTF     $@
++cmd_S_ttf=						\
++(							\
++	echo '.section .rodata.ttf.init,"a"';		\
++	echo '.balign 16';				\
++	echo '.global __ttf_$(*F)_begin';		\
++	echo '__ttf_$(*F)_begin:';			\
++	echo '.incbin "$<" ';				\
++	echo '__ttf_$(*F)_end:';			\
++	echo '.global __ttf_$(*F)_end';			\
++	echo '.balign 16';				\
++) > $@
++
++$(obj)/%.S: $(src)/%.ttf
++	$(call cmd,S_ttf)
++
++# Splash logos
++# ---------------------------------------------------------------------------
++
++# Generate an assembly file to wrap the splash data
++quiet_cmd_S_splash= TTF     $@
++cmd_S_splash=						\
++(							\
++	echo '.section .rodata.splash.init,"a"';	\
++	echo '.balign 16';				\
++	echo '.global __splash_$(*F)_begin';		\
++	echo '__splash_$(*F)_begin:';			\
++	echo '.incbin "$<" ';				\
++	echo '__splash_$(*F)_end:';			\
++	echo '.global __splash_$(*F)_end';		\
++	echo '.balign 16';				\
++) > $@
++
++$(obj)/%.S: $(src)/%.bmp
++	$(call cmd,S_splash)
++
++# EFI applications
++# A Makefile target *.efi is built as EFI application.
++# A Makefile target *_efi.S wraps *.efi as built-in EFI application.
++# ---------------------------------------------------------------------------
++
++# Generate an assembly file to wrap the EFI app
++cmd_S_efi=					\
++(						\
++	echo '.section .rodata.$*.init,"a"';	\
++	echo '.balign 16';			\
++	echo '.global __efi_$*_begin';		\
++	echo '__efi_$*_begin:';			\
++	echo '.incbin "$<" ';			\
++	echo '__efi_$*_end:';			\
++	echo '.global __efi_$*_end';		\
++	echo '.balign 16';			\
++) > $@
++
++$(obj)/%_efi.S: $(obj)/%.efi
++	$(call cmd,S_efi)
++
++quiet_cmd_efi_objcopy = OBJCOPY $@
++cmd_efi_objcopy = $(OBJCOPY) -j .header -j .text -j .sdata -j .data \
++		-j .dynamic -j .dynstr  -j .dynsym -j .rel* -j .reloc \
++		$(if $(EFI_TARGET),$(EFI_TARGET),-O binary) $^ $@
++
++$(obj)/%.efi: $(obj)/%_efi.so
++	$(call cmd,efi_objcopy)
++
++KBUILD_EFILDFLAGS = -nostdlib -zexecstack -znocombreloc -znorelro
++KBUILD_EFILDFLAGS += $(call ld-option,--no-warn-rwx-segments)
++quiet_cmd_efi_ld = LD      $@
++cmd_efi_ld = $(LD) $(KBUILD_EFILDFLAGS) -L $(srctree) -T $(EFI_LDS_PATH) \
++		-shared -Bsymbolic -s $^ $(PLATFORM_LIBGCC) -o $@
++
++EFI_LDS_PATH = arch/$(ARCH)/lib/$(EFI_LDS)
++
++$(obj)/efi_crt0.o: $(srctree)/arch/$(ARCH)/lib/$(EFI_CRT0:.o=.S) FORCE
++	$(call if_changed_dep,as_o_S)
++
++$(obj)/efi_reloc.o: $(srctree)/arch/$(ARCH)/lib/$(EFI_RELOC:.o=.c) $(recordmcount_source) FORCE
++	$(call cmd,force_checksrc)
++	$(call if_changed_rule,cc_o_c)
++
++$(obj)/%_efi.so: $(obj)/%.o $(obj)/efi_crt0.o $(obj)/efi_reloc.o $(obj)/efi_freestanding.o
++	$(call cmd,efi_ld)
++
++targets += $(obj)/efi_crt0.o $(obj)/efi_reloc.o $(obj)/efi_freestanding.o
++
++CFLAGS_REMOVE_efi_reloc.o := $(LTO_CFLAGS)
++CFLAGS_REMOVE_efi_freestanding.o := $(LTO_CFLAGS)
+diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
+index c5ddf64c73f..862a8e6f231 100644
+--- a/scripts/Makefile.xpl
++++ b/scripts/Makefile.xpl
+@@ -88,6 +88,7 @@ include $(srctree)/config.mk
+ include $(srctree)/arch/$(ARCH)/Makefile
+ 
+ include $(srctree)/scripts/Makefile.lib
++include $(srctree)/scripts/Makefile.lib-u-boot
+ 
+ # Enable garbage collection of un-used sections for SPL
+ KBUILD_CFLAGS += -ffunction-sections -fdata-sections
+-- 
+2.43.0
+
+base-commit: 1c1bfb1cf34bbb2a5717eb6995c55093279f9341
+branch: font-us3
