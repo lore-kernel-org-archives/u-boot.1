@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A32D3E9D800
-	for <u-boot@archiver.kernel.org>; Sun,  5 Apr 2026 20:17:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9F1BE9D812
+	for <u-boot@archiver.kernel.org>; Sun,  5 Apr 2026 20:17:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FC1A8407E;
+	by phobos.denx.de (Postfix) with ESMTP id 59E04840BE;
 	Sun,  5 Apr 2026 22:17:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="oU8w4+BY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KwI6sQo0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB51D8394E; Sun,  5 Apr 2026 16:51:04 +0200 (CEST)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
+ id 911628352B; Sun,  5 Apr 2026 16:51:08 +0200 (CEST)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6C488341A
- for <u-boot@lists.denx.de>; Sun,  5 Apr 2026 16:51:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0AC368341A
+ for <u-boot@lists.denx.de>; Sun,  5 Apr 2026 16:51:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=lucienzx159@gmail.com
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-35d99bae2ebso2856845a91.3
- for <u-boot@lists.denx.de>; Sun, 05 Apr 2026 07:51:00 -0700 (PDT)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-35d9827661bso1551963a91.3
+ for <u-boot@lists.denx.de>; Sun, 05 Apr 2026 07:51:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1775400659; x=1776005459; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1775400664; x=1776005464; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7WZN/Hkcq7MSmV5F0vael9It/JztFoUAXL5o6yMeQQE=;
- b=oU8w4+BY0be5HPdvEeAduyJe9DIyaY3FH7P/812qTZqF0PF+/oUh7ksDwGlSKcmA+T
- LWpldYo9+/1d6gMW3EzRpzxzNYBkc+C0QuNsWRcSXHNjFry5qYknaS5Z2YfOvZGQiP2c
- EU1yfVmZCUV9yyS8Rcjn7NIwqW0UDe+hXPeUjDjI/HP9p6T3EMeGRq+QKo4rr+/eucpE
- GIeYR4hypQsRtUuUhthZQECSnYGbFJt5H0qCfb45E/zRYXbfR+CtBywHbORESoTQ+7Wc
- HC7WHJPtrvjHeOpLT0sBtfBiHLr9s3FwIWnLDWoBSZY+3AsfoGdsW8DYyRpIAQeLGDnk
- lggA==
+ bh=0xYHCR7KKs1F3PTp/+hbSZtkNbzPHb+6RNFweXTPGT4=;
+ b=KwI6sQo0h0CNEqRwbXL5ScrcxWyKwmxBD177D3b3/xHnKnQIbKHKn9Y0pjZEoPL/80
+ GsFmXsVqge26diRf/OjP+KzCc/avIV5lcOeVLwJOjVp6TmHsowCl9MQHyU/13JmeYAss
+ vZ7N7fQZCvUSRlP5CVCaguWVhrYyf4CUORhwUdMSIchNwwJRjjx56f6lnzOL0lLSnJtj
+ jIvW9fx87kuchbfVfrLAh+AlntJHEO7ykk79WibYi9u57iw3+MtJ7dY5A8TmRPc4Oda5
+ 7jRLbU8Cgph8cayOvY8XZVZl+cE0n3FDLPeuvxksye7PKNxabfEhlnauTuIbAkwO2hoQ
+ EzUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775400659; x=1776005459;
+ d=1e100.net; s=20251104; t=1775400664; x=1776005464;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=7WZN/Hkcq7MSmV5F0vael9It/JztFoUAXL5o6yMeQQE=;
- b=C42IbAmELSXBlwCkCVW0bW4LuGa1wTtC8psVrDRJsOqLL3UCq52QIdHYSW68eRnbN8
- 3sSEKaPTxdn4vOhD84ic/xaFAPTcIcTwY4VkzEID4Ok4R8ToStaUp1pkUFg0eiX3V48P
- Wxz3/Fw8es91dZEBQbdDhkASB3DjDnree8gkq8avJukj+i996SxDDA2fzVAS3tC7YeoU
- 0LVnCYhM6DMhNCkBxwWaw2ckzGXI3GhmOKpu5sr0ogyCkbxaOax2zzr+gG8RFTIqs3fP
- cjI4eCWaIuT8GLg9jAAms7/EgnFGgIZH36tX7qg9/LwOv8AYQ7I8EEMDW/JraW/tl9ly
- 0LiQ==
+ bh=0xYHCR7KKs1F3PTp/+hbSZtkNbzPHb+6RNFweXTPGT4=;
+ b=nO9sSQfQZlF0dg5+LOmnyMrm4mUtjo5TKQz22f/+VY6ADyzV65Jv6F+NHGiiQAttBu
+ b9XH9vd6PdKO6I2cUYs5/cpxCQtX4u30c6UO+jz5gu4XIgJTvQbJEU2QmmSpY+K2M03K
+ LlwwBQYCuRHhlHa+Jz+HMfGT1uOMvV1wSAR8YWxkxw6uaL6RpO+89Vt/MY7Xc7+ubfP7
+ H9qDMvN6sSok1CwTErxCyxbg4HyKyNqRxPLAhuvQhE0KGhSOAbJ2BNBCcWWML3JpG7TY
+ 4YxdmExWNKp4b4HXett8ex1QMqSdsQ8Ey72uiNlsdIelAWeYkLEEPKE48ldhyhr7l9x3
+ RFDg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUpfg7zbTKWE6laTibK1OkQYrBM9O/9+hGdiEStZ0/yqocuPy8TZrcbpoY95VYzQ0klPatXoYM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzXGfjApO4qgDeKl/zhG/FEuHg+Ik1zC9VsWXk4NquC4X63S0T8
- O3dP0H0jnxz8LjrNaFV5ZMkfddyAJdCfUoLZMEvZ+T2ysidPfBGo359s
-X-Gm-Gg: AeBDieuFsN7vBuAKSVpZh0Wvad1tmFlAAZyX36oLq+B/nEz8BeNBac5Mg+/cXCWEq8f
- aJiLmQ1LxWqWHjCJCGpglvGx74Uov1hoHgtuM1Mxu6JkL6CrMqiUy3EdHesEbiUU8ht5OR7ZbfQ
- HB85+qB6h3TalfAgj4u6PXCdFEaFGXqw29CvEtJPrFR0WakqPDsLWA7/ZR64+F63G7B8XAXr4ZK
- 486++513yxyZtqTN5j3tM6ASJHpBzAMRDZwPwe5T/z4EG2wdjiP29XGO9PHEQ6VpmfzCPhtJfJe
- pAcHMG+YPD4CPhcns6R7U6bVuAhEtH3w/f4dkSzUlsUDkKNdvVNJTiYF+5JiEGRr3yxSbkQdGzJ
- 9+QujiWKP7ohXkSwziqPV+dWGsKe7cmiHsSGGBPp8g04lrz/yzn/HccxPOaM+7koswKdnISnZDq
- Ujtt1Z8Wb4fhl2PmEYu96A1D+N6ukisuFHvm1HVgvUh6pawF8obbFfzVuItGpAYwPe6pIqxNh8Y
- Vzvp4JIGnHAYIraYvq19Q==
-X-Received: by 2002:a17:90b:1dcc:b0:35b:929f:7e92 with SMTP id
- 98e67ed59e1d1-35de68ce5d0mr8917628a91.18.1775400659155; 
- Sun, 05 Apr 2026 07:50:59 -0700 (PDT)
+ AJvYcCWJbmqEomnS005hl4V3F6InKH1FKtm98spEnNzAvjuCI/vy60RaVdr7RBjWgmitnxMvgS++eH0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwR1ADvpw+JMMdLNkkdF7TbmUbA10pb4Qb6BP6cGikgnkJ6A9Mp
+ 2FlrYird1fmuFvwUcye26WHLblgWM92HqTTLZGNoXhz/HXYY3gQltJJY
+X-Gm-Gg: AeBDieuCtjqV9kHViL2GGZCD6G6uNiQ+7q6D1dL3GgGMQs83wmmqu8G40EIDcgrTfQc
+ gkeeXw1Oz3ixNQH2b9+bPHaFSMQ9PIX8/nrW9KRqbfumMI0LId26WAXy4Zkwb5oG5Wx7L4KxjQV
+ phB1x3GMTx7Kt5sxC7dIyDN55WyvWDBaS9pvwGxCQEWliSbQoD6YOoqVdvETnCB42ri9T6RS198
+ lKI1uWKC4JIzEF8ZHOlTTaPqOXVV16pvQsXV9g+oaIeCemrX65k1XYjDWqvfP/BqjPunrEID7DV
+ 2FiDFbXUT2YzY3dwEVhyV17muImNuS9g7l9WOQ2QGKCDd4z02wr3RwcVZvzCfvyAxd5meAEAxNa
+ Plg2Y9lyPWKbgRvE2e97vH2Khfvqda6Vu4lYokxnUbTo0a9qQnyzoDsJp0kp7K224anB1cWICx7
+ DzAccCZ5w4gIu5wTAOwUO/Z6MHEK004QzvU7SkDN5GiN0CjSaONebWopYJ2gNRCF4VbozKwiXTc
+ FZgBakALwEMrR0zzUAn5w==
+X-Received: by 2002:a17:90b:1e44:b0:35b:e56e:b58b with SMTP id
+ 98e67ed59e1d1-35de6940d3bmr9558488a91.15.1775400664459; 
+ Sun, 05 Apr 2026 07:51:04 -0700 (PDT)
 Received: from localhost.localdomain (124-218-201-66.cm.dynamic.apol.com.tw.
  [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-35dbe959358sm15333261a91.13.2026.04.05.07.50.55
+ 98e67ed59e1d1-35dbe959358sm15333261a91.13.2026.04.05.07.51.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 Apr 2026 07:50:58 -0700 (PDT)
+ Sun, 05 Apr 2026 07:51:04 -0700 (PDT)
 From: "Lucien.Jheng" <lucienzx159@gmail.com>
 To: trini@konsulko.com, jerome.forissier@arm.com, sumit.garg@kernel.org,
  marek.vasut+renesas@mailbox.org, vladimir.oltean@nxp.com
@@ -80,14 +80,14 @@ Cc: ericwouds@gmail.com, kabel@kernel.org, frank-w@public-files.de,
  daniel@makrotopia.org, ansuelsmth@gmail.com, mkorpershoek@kernel.org,
  skylake.huang@mediatek.com, lucien.jheng@airoha.com, u-boot@lists.denx.de,
  "Lucien.Jheng" <lucienzx159@gmail.com>
-Subject: [PATCH v3 2/4] net: phy: air_en8811h: use standard
- rx-polarity/tx-polarity properties
-Date: Sun,  5 Apr 2026 22:49:42 +0800
-Message-Id: <20260405144944.41074-3-lucienzx159@gmail.com>
+Subject: [PATCH v3 3/4] test: dm: add PHY common props unit tests
+Date: Sun,  5 Apr 2026 22:49:43 +0800
+Message-Id: <20260405144944.41074-4-lucienzx159@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260405144944.41074-1-lucienzx159@gmail.com>
 References: <20260405144944.41074-1-lucienzx159@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sun, 05 Apr 2026 22:17:12 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -106,118 +106,431 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace the proprietary airoha,pnswap-rx / airoha,pnswap-tx boolean
-device tree properties with the standard rx-polarity and tx-polarity
-properties defined in phy-common-props.yaml.
+Add obj-$(CONFIG_PHY_COMMON_PROPS) build entry in test/dm/Makefile and
+sandbox DM unit tests for the PHY common properties library, covering
+rx/tx polarity lookups for all relevant cases:
 
-Backward compatibility is maintained by reading the legacy boolean
-properties first and passing them as the default_pol argument to
-phy_get_rx/tx_polarity(). If the standard properties are absent the
-legacy values are used transparently, so existing device trees remain
-functional without modification.
+  - missing property (defaults to PHY_POL_NORMAL)
+  - single value without names array (applies to all modes)
+  - count mismatch between values and names arrays (-EINVAL)
+  - name found by exact match
+  - name not found with no "default" fallback (-EINVAL)
+  - name not found with a "default" entry (uses fallback value)
+  - unsupported polarity value (-EOPNOTSUPP)
 
-Link: https://git.kernel.org/linus/66d8a334b57e64e43810623b3d88f0ce9745270b
+Ported from Linux KUnit test:
+  linux/drivers/phy/phy-common-props-test.c
+
 Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
 ---
- drivers/net/phy/airoha/Kconfig      |  1 +
- drivers/net/phy/airoha/air_en8811.c | 58 ++++++++++++++++++++++-------
- 2 files changed, 45 insertions(+), 14 deletions(-)
 
-diff --git a/drivers/net/phy/airoha/Kconfig b/drivers/net/phy/airoha/Kconfig
-index da8747939e3..4139df343ad 100644
---- a/drivers/net/phy/airoha/Kconfig
-+++ b/drivers/net/phy/airoha/Kconfig
-@@ -7,6 +7,7 @@ config PHY_AIROHA_EN8811
- 	depends on PHY_AIROHA
- 	depends on SUPPORTS_FW_LOADER
- 	select FW_LOADER
-+	select PHY_COMMON_PROPS
- 	help
- 	  AIROHA EN8811H supported.
- 	  AIROHA AN8811HB supported.
-diff --git a/drivers/net/phy/airoha/air_en8811.c b/drivers/net/phy/airoha/air_en8811.c
-index 0b974472732..0a56ee0bdf3 100644
---- a/drivers/net/phy/airoha/air_en8811.c
-+++ b/drivers/net/phy/airoha/air_en8811.c
-@@ -23,6 +23,7 @@
- #include <linux/compat.h>
- #include <dm/device_compat.h>
- #include <u-boot/crc.h>
+```test log```
+執行 phy common props 測試...
+Bloblist at 100 not found (err=-2)
+pinctrl_select_state_full() sandbox_serial serial: pinctrl_select_state_full: uclass_get_device_by_phandle_id: err=-19
+
+
+U-Boot 2026.01-rc5--g11ad53c5213e-dirty (Mar 22 2026 - 22:31:17 +0800)
+
+Reset Status: WARM Reset Status: COLD
+Model: sandbox
+DRAM:  256 MiB
+Core:  294 devices, 105 uclasses, devicetree: board, universal payload active
+WDT:   Not starting wdt-gpio-toggle
+WDT:   Not starting wdt-gpio-level
+WDT:   Not starting wdt@0
+NAND:  4100 MiB
+MMC:   Can't map file 'mmc1.img': Invalid argument
+   sandbox_mmc_probe() mmc1: Unable to map file 'mmc1.img'
+Can't map file 'mmc1.img': Invalid argument
+   sandbox_mmc_probe() mmc1: Unable to map file 'mmc1.img'
+           mmc_probe() mmc1 - probe failed: -1
+mmc2: 2 (SD)Can't map file 'mmc1.img': Invalid argument
+   sandbox_mmc_probe() mmc1: Unable to map file 'mmc1.img'
+, mmc0: 0 (SD)
+Loading Environment from nowhere... OK
+In:    serial
+Out:   serial,vidconsole
+Err:   serial,vidconsole
+Model: sandbox
+Net:   eth0: eth@10002000, eth5: eth@10003000, eth3: sbe5, eth6: eth@10004000, eth8: phy-test-eth, eth4: dsa-test-eth, eth2: lan0, eth7: lan1
+
+Test: phy_common_props_rx_find_by_name: phy_common_props.c
+Test: phy_common_props_rx_find_by_name: phy_common_props.c (flat tree)
+Test: phy_common_props_rx_missing: phy_common_props.c
+Test: phy_common_props_rx_missing: phy_common_props.c (flat tree)
+Test: phy_common_props_rx_more_names: phy_common_props.c
+Test: phy_common_props_rx_more_names: phy_common_props.c (flat tree)
+Test: phy_common_props_rx_more_values: phy_common_props.c
+Test: phy_common_props_rx_more_values: phy_common_props.c (flat tree)
+Test: phy_common_props_rx_no_default: phy_common_props.c
+Test: phy_common_props_rx_no_default: phy_common_props.c (flat tree)
+Test: phy_common_props_rx_single_value: phy_common_props.c
+Test: phy_common_props_rx_single_value: phy_common_props.c (flat tree)
+Test: phy_common_props_rx_unsupported: phy_common_props.c
+Test: phy_common_props_rx_unsupported: phy_common_props.c (flat tree)
+Test: phy_common_props_rx_with_default: phy_common_props.c
+Test: phy_common_props_rx_with_default: phy_common_props.c (flat tree)
+Test: phy_common_props_tx_find_by_name: phy_common_props.c
+Test: phy_common_props_tx_find_by_name: phy_common_props.c (flat tree)
+Test: phy_common_props_tx_missing: phy_common_props.c
+Test: phy_common_props_tx_missing: phy_common_props.c (flat tree)
+Test: phy_common_props_tx_more_names: phy_common_props.c
+Test: phy_common_props_tx_more_names: phy_common_props.c (flat tree)
+Test: phy_common_props_tx_more_values: phy_common_props.c
+Test: phy_common_props_tx_more_values: phy_common_props.c (flat tree)
+Test: phy_common_props_tx_no_default: phy_common_props.c
+Test: phy_common_props_tx_no_default: phy_common_props.c (flat tree)
+Test: phy_common_props_tx_single_value: phy_common_props.c
+Test: phy_common_props_tx_single_value: phy_common_props.c (flat tree)
+Test: phy_common_props_tx_unsupported: phy_common_props.c
+Test: phy_common_props_tx_unsupported: phy_common_props.c (flat tree)
+Test: phy_common_props_tx_with_default: phy_common_props.c
+Test: phy_common_props_tx_with_default: phy_common_props.c (flat tree)
+Tests run: 16, 37 ms, average: 2 ms, failures: 0
+
+ test/dm/Makefile           |   1 +
+ test/dm/phy_common_props.c | 319 +++++++++++++++++++++++++++++++++++++
+ 2 files changed, 320 insertions(+)
+ create mode 100644 test/dm/phy_common_props.c
+
+diff --git a/test/dm/Makefile b/test/dm/Makefile
+index 771b703b737..d69b0e08d66 100644
+--- a/test/dm/Makefile
++++ b/test/dm/Makefile
+@@ -88,6 +88,7 @@ obj-$(CONFIG_P2SB) += p2sb.o
+ obj-$(CONFIG_PCI_ENDPOINT) += pci_ep.o
+ obj-$(CONFIG_PCH) += pch.o
+ obj-$(CONFIG_PHY) += phy.o
++obj-$(CONFIG_PHY_COMMON_PROPS) += phy_common_props.o
+ ifneq ($(CONFIG_PINMUX),)
+ obj-$(CONFIG_PINCONF) += pinmux.o
+ endif
+diff --git a/test/dm/phy_common_props.c b/test/dm/phy_common_props.c
+new file mode 100644
+index 00000000000..21f5042b7a0
+--- /dev/null
++++ b/test/dm/phy_common_props.c
+@@ -0,0 +1,319 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * U-Boot sandbox DM tests for PHY common props
++ *
++ * Ported from Linux KUnit test:
++ *   linux/drivers/phy/phy-common-props-test.c
++ *
++ * Copyright 2025-2026 NXP
++ */
++#include <dm.h>
++#include <dm/ofnode.h>
++#include <dm/test.h>
++#include <linux/bitops.h>
 +#include <linux/phy/phy-common-props.h>
- 
- /* MII Registers */
- #define AIR_AUX_CTRL_STATUS		0x1d
-@@ -1046,6 +1047,47 @@ static int air_leds_init(struct phy_device *phydev, int num, u16 dur, int mode)
- 	return 0;
- }
- 
-+static int en8811h_config_serdes_polarity(struct phy_device *phydev)
++#include <dt-bindings/phy/phy.h>
++#include <test/test.h>
++#include <test/ut.h>
++
++/* --- RX polarity tests -------------------------------------------------- */
++
++/* Test: rx-polarity property is missing => default PHY_POL_NORMAL */
++static int dm_test_phy_common_props_rx_missing(struct unit_test_state *uts)
 +{
-+	ofnode node = phy_get_ofnode(phydev);
-+	unsigned int pol, default_pol;
-+	u32 pbus_value = 0;
++	ofnode node = ofnode_path("/phy-common-props-missing");
++	unsigned int val;
 +	int ret;
 +
-+	if (!ofnode_valid(node))
-+		return 0;
++	ut_assert(ofnode_valid(node));
 +
-+	default_pol = PHY_POL_NORMAL;
-+	if (ofnode_read_bool(node, "airoha,pnswap-rx"))
-+		default_pol = PHY_POL_INVERT;
++	ret = phy_get_manual_rx_polarity(node, "sgmii", &val);
++	ut_asserteq(0, ret);
++	ut_asserteq(PHY_POL_NORMAL, val);
 +
-+	ret = phy_get_rx_polarity(node,
-+				  phy_interface_strings[phydev->interface],
-+				  BIT(PHY_POL_NORMAL) | BIT(PHY_POL_INVERT),
-+				  default_pol, &pol);
-+	if (ret)
-+		return ret;
-+	if (pol == PHY_POL_INVERT)
-+		pbus_value |= EN8811H_POLARITY_RX_REVERSE;
-+
-+	default_pol = PHY_POL_NORMAL;
-+	if (ofnode_read_bool(node, "airoha,pnswap-tx"))
-+		default_pol = PHY_POL_INVERT;
-+
-+	ret = phy_get_tx_polarity(node,
-+				  phy_interface_strings[phydev->interface],
-+				  BIT(PHY_POL_NORMAL) | BIT(PHY_POL_INVERT),
-+				  default_pol, &pol);
-+	if (ret)
-+		return ret;
-+	if (pol == PHY_POL_NORMAL)
-+		pbus_value |= EN8811H_POLARITY_TX_NORMAL;
-+
-+	return air_buckpbus_reg_modify(phydev, EN8811H_POLARITY,
-+				       EN8811H_POLARITY_RX_REVERSE |
-+				       EN8811H_POLARITY_TX_NORMAL, pbus_value);
++	return 0;
 +}
 +
- static int en8811h_config(struct phy_device *phydev)
- {
- 	struct en8811h_priv *priv = phydev->priv;
-@@ -1081,20 +1123,8 @@ static int en8811h_config(struct phy_device *phydev)
- 	if (ret < 0)
- 		return ret;
- 
--	/* Serdes polarity */
--	pbus_value = 0;
--	if (ofnode_read_bool(node, "airoha,pnswap-rx"))
--		pbus_value |=  EN8811H_POLARITY_RX_REVERSE;
--	else
--		pbus_value &= ~EN8811H_POLARITY_RX_REVERSE;
--	if (ofnode_read_bool(node, "airoha,pnswap-tx"))
--		pbus_value &= ~EN8811H_POLARITY_TX_NORMAL;
--	else
--		pbus_value |=  EN8811H_POLARITY_TX_NORMAL;
--	ret = air_buckpbus_reg_modify(phydev, EN8811H_POLARITY,
--				      EN8811H_POLARITY_RX_REVERSE |
--				      EN8811H_POLARITY_TX_NORMAL,
--				      pbus_value);
-+	/* Configure Serdes polarity from device tree */
-+	ret = en8811h_config_serdes_polarity(phydev);
- 	if (ret < 0)
- 		return ret;
- 
--- 
++DM_TEST(dm_test_phy_common_props_rx_missing, UTF_SCAN_FDT);
++
++/* Test: rx-polarity has more values than rx-polarity-names => -EINVAL */
++static int dm_test_phy_common_props_rx_more_values(struct unit_test_state *uts)
++{
++	ofnode node = ofnode_path("/phy-common-props-more-values");
++	unsigned int val;
++	int ret;
++
++	ut_assert(ofnode_valid(node));
++
++	ret = phy_get_manual_rx_polarity(node, "sgmii", &val);
++	ut_asserteq(-EINVAL, ret);
++
++	return 0;
++}
++
++DM_TEST(dm_test_phy_common_props_rx_more_values, UTF_SCAN_FDT);
++
++/* Test: rx-polarity has 1 value and rx-polarity-names does not exist */
++static int dm_test_phy_common_props_rx_single_value(struct unit_test_state *uts)
++{
++	ofnode node = ofnode_path("/phy-common-props-single");
++	unsigned int val;
++	int ret;
++
++	ut_assert(ofnode_valid(node));
++
++	ret = phy_get_manual_rx_polarity(node, "sgmii", &val);
++	ut_asserteq(0, ret);
++	ut_asserteq(PHY_POL_INVERT, val);
++
++	return 0;
++}
++
++DM_TEST(dm_test_phy_common_props_rx_single_value, UTF_SCAN_FDT);
++
++/* Test: rx-polarity-names has more values than rx-polarity => -EINVAL */
++static int dm_test_phy_common_props_rx_more_names(struct unit_test_state *uts)
++{
++	ofnode node = ofnode_path("/phy-common-props-more-names");
++	unsigned int val;
++	int ret;
++
++	ut_assert(ofnode_valid(node));
++
++	ret = phy_get_manual_rx_polarity(node, "sgmii", &val);
++	ut_asserteq(-EINVAL, ret);
++
++	return 0;
++}
++
++DM_TEST(dm_test_phy_common_props_rx_more_names, UTF_SCAN_FDT);
++
++/* Test: valid arrays, find polarity by mode name */
++static int dm_test_phy_common_props_rx_find_by_name(struct unit_test_state *uts)
++{
++	ofnode node = ofnode_path("/phy-common-props-find-by-name");
++	unsigned int val;
++	int ret;
++
++	ut_assert(ofnode_valid(node));
++
++	ret = phy_get_manual_rx_polarity(node, "sgmii", &val);
++	ut_asserteq(0, ret);
++	ut_asserteq(PHY_POL_NORMAL, val);
++
++	ret = phy_get_manual_rx_polarity(node, "2500base-x", &val);
++	ut_asserteq(0, ret);
++	ut_asserteq(PHY_POL_INVERT, val);
++
++	/* "usb-ss" has PHY_POL_AUTO; auto is supported here */
++	ret = phy_get_rx_polarity(node, "usb-ss", BIT(PHY_POL_AUTO),
++				  PHY_POL_AUTO, &val);
++	ut_asserteq(0, ret);
++	ut_asserteq(PHY_POL_AUTO, val);
++
++	return 0;
++}
++
++DM_TEST(dm_test_phy_common_props_rx_find_by_name, UTF_SCAN_FDT);
++
++/* Test: name not found, no "default" entry => -EINVAL */
++static int dm_test_phy_common_props_rx_no_default(struct unit_test_state *uts)
++{
++	ofnode node = ofnode_path("/phy-common-props-no-default");
++	unsigned int val;
++	int ret;
++
++	ut_assert(ofnode_valid(node));
++
++	ret = phy_get_manual_rx_polarity(node, "sgmii", &val);
++	ut_asserteq(-EINVAL, ret);
++
++	return 0;
++}
++
++DM_TEST(dm_test_phy_common_props_rx_no_default, UTF_SCAN_FDT);
++
++/* Test: name not found, "default" entry exists => use default polarity */
++static int dm_test_phy_common_props_rx_with_default(struct unit_test_state *uts)
++{
++	ofnode node = ofnode_path("/phy-common-props-with-default");
++	unsigned int val;
++	int ret;
++
++	ut_assert(ofnode_valid(node));
++
++	ret = phy_get_manual_rx_polarity(node, "sgmii", &val);
++	ut_asserteq(0, ret);
++	ut_asserteq(PHY_POL_INVERT, val);
++
++	return 0;
++}
++
++DM_TEST(dm_test_phy_common_props_rx_with_default, UTF_SCAN_FDT);
++
++/* Test: polarity value found but not in supported set => -EOPNOTSUPP */
++static int dm_test_phy_common_props_rx_unsupported(struct unit_test_state *uts)
++{
++	ofnode node = ofnode_path("/phy-common-props-unsupported");
++	unsigned int val;
++	int ret;
++
++	ut_assert(ofnode_valid(node));
++
++	ret = phy_get_manual_rx_polarity(node, "sgmii", &val);
++	ut_asserteq(-EOPNOTSUPP, ret);
++
++	return 0;
++}
++
++DM_TEST(dm_test_phy_common_props_rx_unsupported, UTF_SCAN_FDT);
++
++/* --- TX polarity tests -------------------------------------------------- */
++
++/* Test: tx-polarity property is missing => default PHY_POL_NORMAL */
++static int dm_test_phy_common_props_tx_missing(struct unit_test_state *uts)
++{
++	ofnode node = ofnode_path("/phy-common-props-missing");
++	unsigned int val;
++	int ret;
++
++	ut_assert(ofnode_valid(node));
++
++	ret = phy_get_manual_tx_polarity(node, "sgmii", &val);
++	ut_asserteq(0, ret);
++	ut_asserteq(PHY_POL_NORMAL, val);
++
++	return 0;
++}
++
++DM_TEST(dm_test_phy_common_props_tx_missing, UTF_SCAN_FDT);
++
++/* Test: tx-polarity has more values than tx-polarity-names => -EINVAL */
++static int dm_test_phy_common_props_tx_more_values(struct unit_test_state *uts)
++{
++	ofnode node = ofnode_path("/phy-common-props-more-values");
++	unsigned int val;
++	int ret;
++
++	ut_assert(ofnode_valid(node));
++
++	ret = phy_get_manual_tx_polarity(node, "sgmii", &val);
++	ut_asserteq(-EINVAL, ret);
++
++	return 0;
++}
++
++DM_TEST(dm_test_phy_common_props_tx_more_values, UTF_SCAN_FDT);
++
++/* Test: tx-polarity has 1 value and tx-polarity-names does not exist */
++static int dm_test_phy_common_props_tx_single_value(struct unit_test_state *uts)
++{
++	ofnode node = ofnode_path("/phy-common-props-single");
++	unsigned int val;
++	int ret;
++
++	ut_assert(ofnode_valid(node));
++
++	ret = phy_get_manual_tx_polarity(node, "sgmii", &val);
++	ut_asserteq(0, ret);
++	ut_asserteq(PHY_POL_INVERT, val);
++
++	return 0;
++}
++
++DM_TEST(dm_test_phy_common_props_tx_single_value, UTF_SCAN_FDT);
++
++/* Test: tx-polarity-names has more values than tx-polarity => -EINVAL */
++static int dm_test_phy_common_props_tx_more_names(struct unit_test_state *uts)
++{
++	ofnode node = ofnode_path("/phy-common-props-more-names");
++	unsigned int val;
++	int ret;
++
++	ut_assert(ofnode_valid(node));
++
++	ret = phy_get_manual_tx_polarity(node, "sgmii", &val);
++	ut_asserteq(-EINVAL, ret);
++
++	return 0;
++}
++
++DM_TEST(dm_test_phy_common_props_tx_more_names, UTF_SCAN_FDT);
++
++/* Test: valid arrays, find polarity by mode name */
++static int dm_test_phy_common_props_tx_find_by_name(struct unit_test_state *uts)
++{
++	ofnode node = ofnode_path("/phy-common-props-find-by-name");
++	unsigned int val;
++	int ret;
++
++	ut_assert(ofnode_valid(node));
++
++	ret = phy_get_manual_tx_polarity(node, "sgmii", &val);
++	ut_asserteq(0, ret);
++	ut_asserteq(PHY_POL_NORMAL, val);
++
++	ret = phy_get_manual_tx_polarity(node, "2500base-x", &val);
++	ut_asserteq(0, ret);
++	ut_asserteq(PHY_POL_INVERT, val);
++
++	ret = phy_get_manual_tx_polarity(node, "1000base-x", &val);
++	ut_asserteq(0, ret);
++	ut_asserteq(PHY_POL_NORMAL, val);
++
++	return 0;
++}
++
++DM_TEST(dm_test_phy_common_props_tx_find_by_name, UTF_SCAN_FDT);
++
++/* Test: name not found, no "default" entry => -EINVAL */
++static int dm_test_phy_common_props_tx_no_default(struct unit_test_state *uts)
++{
++	ofnode node = ofnode_path("/phy-common-props-no-default");
++	unsigned int val;
++	int ret;
++
++	ut_assert(ofnode_valid(node));
++
++	ret = phy_get_manual_tx_polarity(node, "sgmii", &val);
++	ut_asserteq(-EINVAL, ret);
++
++	return 0;
++}
++
++DM_TEST(dm_test_phy_common_props_tx_no_default, UTF_SCAN_FDT);
++
++/* Test: name not found, "default" entry exists => use default polarity */
++static int dm_test_phy_common_props_tx_with_default(struct unit_test_state *uts)
++{
++	ofnode node = ofnode_path("/phy-common-props-with-default");
++	unsigned int val;
++	int ret;
++
++	ut_assert(ofnode_valid(node));
++
++	ret = phy_get_manual_tx_polarity(node, "sgmii", &val);
++	ut_asserteq(0, ret);
++	ut_asserteq(PHY_POL_INVERT, val);
++
++	return 0;
++}
++
++DM_TEST(dm_test_phy_common_props_tx_with_default, UTF_SCAN_FDT);
++
++/* Test: polarity value found but not in supported set => -EOPNOTSUPP */
++static int dm_test_phy_common_props_tx_unsupported(struct unit_test_state *uts)
++{
++	ofnode node = ofnode_path("/phy-common-props-unsupported");
++	unsigned int val;
++	int ret;
++
++	ut_assert(ofnode_valid(node));
++
++	ret = phy_get_manual_tx_polarity(node, "sgmii", &val);
++	ut_asserteq(-EOPNOTSUPP, ret);
++
++	return 0;
++}
++
++DM_TEST(dm_test_phy_common_props_tx_unsupported, UTF_SCAN_FDT);
+--
 2.34.1
 
