@@ -4,92 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60FF2E63FE8
-	for <u-boot@archiver.kernel.org>; Sun,  5 Apr 2026 12:02:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89FDFE63FE8
+	for <u-boot@archiver.kernel.org>; Sun,  5 Apr 2026 12:03:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6F9F8352B;
-	Sun,  5 Apr 2026 14:02:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0B74283C5E;
+	Sun,  5 Apr 2026 14:03:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FRcbHKp5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NITwheqc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A3898394E; Sun,  5 Apr 2026 14:02:40 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id C2B4183CD3; Sun,  5 Apr 2026 14:03:02 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 175EE8341A
- for <u-boot@lists.denx.de>; Sun,  5 Apr 2026 14:02:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FD9B8341A
+ for <u-boot@lists.denx.de>; Sun,  5 Apr 2026 14:03:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-b980785a0bfso398449766b.3
- for <u-boot@lists.denx.de>; Sun, 05 Apr 2026 05:02:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775390557; cv=none;
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-6634bb959a2so4177564a12.1
+ for <u-boot@lists.denx.de>; Sun, 05 Apr 2026 05:03:00 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775390580; cv=none;
  d=google.com; s=arc-20240605;
- b=KMv34+K5Pz8I6VGY9jU/1e3VhZVX6eh/Pjd/gfoN4DqOWbBy6hj81lJiYkFwZn1kUJ
- H3RHBDeDhF40W2mCJUQVgn8duDu7ZOI+eznGWHxWnRTfKGdj/B3lP50fyNAmgKgEgOda
- 6n19CSMKXiILkQz99YRRGfqJmL3LA1zZZPh5OeH68emhKlqvgb0pQfV9rbFlZFXR/PXv
- lOSNawdn6aJFxC2gYLTYiFh0cXNzynPSNKGp7Q5a9vpdLWT9fegLWhSsfqCmMPkq1arz
- Nd+smpoWb9uypc7wbg5THJuYGSjqOu306eIRqNtE0PwLauh+y5ies9Y0LnArwif6q6zu
- 2Rpw==
+ b=Fl9nUOmHiXZyVmEoCRKeMHQA15431DEMMLq97Wc/rXdssn9jyQLP2hV1dMG4k1G25c
+ 39UvmgA+pixFrRQmlzRY87CawxXzyg2274+kZCyyTGihRkz0vUyXgkQCMlrPb3m3Aurd
+ 1kyJlY+3Cxq1kOBZ57YqKJUqMY7fHaZ1uVx/02hVcbX6A1loVBqf3KdPC/nDXak3kv+9
+ HVc8cZi0s8x8Golef9ahunxnwf2SuC978IfBRhdOR47vG6CpCPPf3nptuMG4Y+DyEMlE
+ Y/pQlF3ERIg25jVDyU+zdcgyGMBdxWbSj8496sn5b/hp4cFN297NyCdOxIA0SGqHS3hh
+ tvyQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=CdYkTbRD9uP1oFykSEca344H3nhGE8/y2IqBzpkGhL4=;
- fh=pFMYuUCQS2Qz6N1SFX5dob5zji0yi5jFd5G7HT/pODk=;
- b=AR3aiWT6CmEZpuQIm6iu+145nFNvH2aTN2QjJ/LI5cn0eQ/H9HhOH1UvRNy7nEwIbt
- Rp8n5PX0yWC0rwOrwGBkt/f1/lISJTy1FzZYbzcY+e3NCwfgVWuloUL1Qh2n2F13SLRZ
- DXwCPRldf48b8bSJ7O/GunY3Latz8sJg7Y2PsHVnoaJmSbRNw0YaYxz1IhxJC3HgKczu
- 1x/FFpVKuxtybWHpxd5/xMmdjcULakwhX9M8o2U88e8w+JmXvx2Y99s09kUfLO6MNgw4
- TqcpOa05fsQym3R9sldkBAtfKlhp03wzZFv4RQCq05rfdcd7xxV77bBMJree3HB8kQ39
- pcIQ==; darn=lists.denx.de
+ bh=FIGWcGBRoHzWX6+lMB4i4zyOQLYeDODZS7KdxlUnKYQ=;
+ fh=AWI3faAHHo6lP0H2cSbUS38UAQsKxdqj/96Ex97tx8M=;
+ b=Yz0GiQCIdyqByy2BtvpHdJLlLgKcqPw3zW5MVFBfYU2gp2GhVlhUCKoliHF34jepJZ
+ Bx7n9z35fpGByyIORzNGaMFeNo08zt7PMRlkLTxOJxA5Q2wumNppu9HCzUsF3WgQoDMK
+ A+1lsHM5fij2xHHRjbOqYNgiGMa9w4sBnoVp8sdYi7lM+MnZzm3iKsgFfP1DZ2gT1T4a
+ 0XTpYWY0KR+rtjzf7IWblE8W/uczO/Zdrz4Mq8D2RuNElqhAs9ZEFMtVSoFmFlamDr+o
+ uTuAaQK0R5FiKHFnBHb4qWjiqRaXJp/h5EKeAK4G2QK32XYVxjTAeEkY+Tp4/H584Jdl
+ Krzw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775390557; x=1775995357; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775390580; x=1775995380; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CdYkTbRD9uP1oFykSEca344H3nhGE8/y2IqBzpkGhL4=;
- b=FRcbHKp5e3y7D4MFqfL+tHtEt4EkWILJCtUyluo1lh0dKyQlcQXhhdOJnM+qqh7qip
- d9psFiG5DHU2jdYx1s0Dz3X3zJAGBgHElByB1bxywSoh8w8Mr+WOGERdaD0tXKbCUFCb
- Ist/zFSmk7NBX/8Zr7wgLi0Xjv8eAlfVQvCLc=
+ bh=FIGWcGBRoHzWX6+lMB4i4zyOQLYeDODZS7KdxlUnKYQ=;
+ b=NITwheqc7usAJ2uNx+X49vORsl08tRhzLQxLwNxpZZiTXqP3S3qcNlxtwc3mTN9FQM
+ A6ajJV94sisXcSeofrC/8MyCSRWUCMCi9BQTyLaanHRmGP6bdPgy7U07wDquYWiShUHi
+ 8zihcsTA1mvcGLeHDGvRzlPYz0KFdKwj/vEE8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775390557; x=1775995357;
+ d=1e100.net; s=20251104; t=1775390580; x=1775995380;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CdYkTbRD9uP1oFykSEca344H3nhGE8/y2IqBzpkGhL4=;
- b=JIQ1EIECfF66iMNtOvlJ6voaC6J7GqcVZA/jlE3Z9L9uFl5FCSBkuYBXXfC+ueEGUk
- NPJBxPlv1Fa6635drXHca6zTL1ga7tWnVNOXDZ1e442QJmr3c6VcNj4lVIBLPeAzIZnm
- HNIe28LDvNkPtvU+YNc3l8hCE4UCQx9/0X3lOEzpY8IB7iTEh0h+hT5NenikWYfAu69r
- 1vvnC8lxcAP0dNpllhUBEUPPw6bddTWi8QDNB1pSQQL3JbQpvKNvNxb27KZxr9Adfal7
- yC1Mbh60ySO61XWwvnXfr99tIsvyaeMEf0IsB3frabLjxz4RBYv9goOooLb3GaoXABLv
- QVMQ==
-X-Gm-Message-State: AOJu0Yw/OoPsgtlLG9ZTT6RFypBQ2oro0NmxoCmOkzfI9VkrUoKR4bGU
- 3S69EUi/w+5ATnODJ94VbWct082+dSuPCHA0ZTZJYbPXKvgThbVTVBxRzQS9lD6xuopDdXPZyZG
- 62QsUSCu7Vxg4XDeah3m93O6SWge02e4AM7Gp+xLh
-X-Gm-Gg: AeBDietBU6EKarUympNmlC582AXB1L+ItWl1CMFTdBK9BM+sCt05AX5PG5hj3DoFa+N
- X/0AzRGFH9xOEXcXS7e/8FPyND9eI7H69KvtwrsaSPU8UHX8v6zfsNciLJsKNPR6yKbkJC5p8oz
- FfjLGp3vVcl134DcBegGUga/eNDgzIhrBCjaA2jLV3wKZeLPlu/alH7WHEJreUI7TcVbcpdIG8i
- FdMDwIGsTmTayxTyfEcEpXJlpT1jRD8VPZKXKiaQIkDTbeVpkjAzT6LctWcDujpOiYN9F6q8eKw
- HSte9yIWDmrnUMpG
-X-Received: by 2002:a17:907:3f21:b0:b9c:cb04:9fe6 with SMTP id
- a640c23a62f3a-b9ccb04a3dfmr22808966b.14.1775390557430; Sun, 05 Apr 2026
- 05:02:37 -0700 (PDT)
+ bh=FIGWcGBRoHzWX6+lMB4i4zyOQLYeDODZS7KdxlUnKYQ=;
+ b=IL7y3A9nlGegkyH/yjy1tQqYQaYFwQpVfj9IBouWGf6xxn/hxPO8TqGAgHIsmeMZT9
+ gtcJ4waF10ftz3wtVFNK8z0493Ta5cUco2WjrUwOJiH4os79CRn6UgLGlU+5cO4oLweD
+ fcTKZXasgtXWt0i12QuQ3ZYdG8Yb9kR3lFRrpcw4zsCk6/XX65sEdy3rkqkA8qwIffvS
+ NWQ30aFUgr2RaLyqY1skAheqMKPvgQaFf72rEWzIURUQuDPAqTYbl+UNzsldakVDz3JN
+ 1F7nZfYSPHKIUd7WijQt+Ri5nTto2H2/TnK1Pa9hoNb9PhFhBdkxi6S/YF7USpnfWu1J
+ n92w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVNw/T5WJ7SMgytYC8SOJaVvIDbSyudBlUCp5ma+QBCEcWZ1LRQCSilmTFOKZjW7XUIEICJc3I=@lists.denx.de
+X-Gm-Message-State: AOJu0YwWSERl0zWMfrLpzzvUHl1q9dcM4IwyeCp17Y+KN3BYLTcKaU2i
+ fL/Nx3KfyiQmDHWQD5eXdU71QRb6ddtdvnmw65atp8eTZQ+lH59CQa0kUMoRb+tYKTJxm60QrLy
+ HLpEpee716nzDN6DOQtTuFoYN8ISBoNetKl/oRIBg
+X-Gm-Gg: AeBDietr1gNx+eeBBsqxjdj1OkARwIPgSsRA/02TaVQkrIZX7FVSWYrfxqVuWaNvB2I
+ uEWSmdpoReJZswneWatwhFoZXHBMs2Hi5P3bhVptDxdJ0QrvEsRg6uQJwaNieYVi8ss3c5vgggD
+ JogbI5DlH91hYFaI2AFm/u7lMtXskG99qc1guoWdoDpaoAwle862KNzrZYBQAqOXnupM/FZQrXt
+ rZArLyQ9D551IxA+h62NoUCNPj0wjJj2EuX3NuY6svoelAg24gGvEUG8fwugoR+R7iSLCJX+9UA
+ kxxiCA==
+X-Received: by 2002:a17:907:1b07:b0:b9c:8618:a8b6 with SMTP id
+ a640c23a62f3a-b9c8618afb1mr263932266b.3.1775390579815; Sun, 05 Apr 2026
+ 05:02:59 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260403090109.3564638-1-ilias.apalodimas@linaro.org>
-In-Reply-To: <20260403090109.3564638-1-ilias.apalodimas@linaro.org>
+ <20260403090109.3564638-3-ilias.apalodimas@linaro.org>
+In-Reply-To: <20260403090109.3564638-3-ilias.apalodimas@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 5 Apr 2026 06:02:25 -0600
-X-Gm-Features: AQROBzC7EUOELBEKBVf1TPxplTfYU1wl8WFjp8S8eUMKLXiZMZYQlvB1wQj-ZxI
-Message-ID: <CAFLszThj+RqF2RKpYqqsd+_30iOaDt8Wd=S--bpQKST2fipCmA@mail.gmail.com>
-Subject: Re: [v1,0/4] Relocate U-Boot in the last bank
+Date: Sun, 5 Apr 2026 06:02:48 -0600
+X-Gm-Features: AQROBzApbNw2MyaMhB7qwbp1pWn2hEH0zg0EG9Z10c449PXz1BFeJVHHK5c0WIU
+Message-ID: <CAFLszTga-MxOAVzYej7j85t8m_M4izegidfBqnQTZd+pvvJNpw@mail.gmail.com>
+Subject: Re: [PATCH v1 2/4] common: move ram_base calculation to independent
+ INITCALL()
 To: ilias.apalodimas@linaro.org
-Cc: u-boot@lists.denx.de
+Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, 
+ anshuld@ti.com, sjg@chromium.org, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,39 +112,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
-
 On 2026-04-03T09:01:02, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
-> This is a different and cleaner approach for [1].
-
-BTW I had a bit of trouble applying this - if you use patman it will
-show the base commit in the cover letter.
-
+> common: move ram_base calculation to independent INITCALL()
 >
-> The main difference with the previous patches is that instead or retrofitting
-> the relocation code with the existing codebase, it's much easier to implement
-> if we just move the bi_dram[] from bd to gd.
+> Currently, ram_base is calculated within setup_dest_addr().
+> However, upcoming patches that enable U-Boot relocation to the highest
+> DRAM bank require ram_base to be initialized earlier.
+>
+> The default dram_init_banksize() definition relies on ram_base
+> to calculate the start of the first bank. But following patches
+> will move that function to execute immediately before setup_dest_addr().
+>
+> So let's split the ram_base initialization in its own INITCALL.
+>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>
+> common/board_f.c | 12 +++++++++---
+>  1 file changed, 9 insertions(+), 3 deletions(-)
 
-I agree moving bi_dram[] to gd is cleaner.
-
-> Patch #4 - Adds the Kconfig option and code to allow us to relocate in top
->            memory banks
-
-When RELOC_ADDR_TOP is enabled, board_get_usable_ram_top() is skipped.
-Many boards use this to enforce platform-specific constraints, such as
-keeping relocation below 4 GiB for DMA-limited hardware. Bypassing it
-could break those platforms.
-
-I suspect we need to call board_get_usable_ram_top() in both paths, or
-provide a way for boards to constrain the top address when
-RELOC_ADDR_TOP is enabled. What do you think?
-
-> +config RELOC_ADDR_TOP
-> +     bool "Relocate to the topmost memory address"
-> +     help
-
-The help text should mention the 32-bit DMA caveat so users understand
-this may break platforms with DMA-limited devices.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
