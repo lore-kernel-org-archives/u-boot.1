@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A4BBE9D812
-	for <u-boot@archiver.kernel.org>; Sun,  5 Apr 2026 20:18:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EA61E9D800
+	for <u-boot@archiver.kernel.org>; Sun,  5 Apr 2026 20:18:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC1F284105;
-	Sun,  5 Apr 2026 22:17:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AE58E807C0;
+	Sun,  5 Apr 2026 22:17:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QZUTlIiU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RsQ3Oboq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07F1783C5E; Sun,  5 Apr 2026 21:59:31 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 15BE683CD3; Sun,  5 Apr 2026 21:59:32 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25F91807C0
- for <u-boot@lists.denx.de>; Sun,  5 Apr 2026 21:59:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31AA983A41
+ for <u-boot@lists.denx.de>; Sun,  5 Apr 2026 21:59:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=simons.philippe@gmail.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-66e6d9610d8so2261576a12.0
- for <u-boot@lists.denx.de>; Sun, 05 Apr 2026 12:59:29 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-b9c745e18a0so456511966b.1
+ for <u-boot@lists.denx.de>; Sun, 05 Apr 2026 12:59:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1775419168; x=1776023968; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=aZAwkmDl6amBZHDrp46ZQo2/Wpd2Y1GdD0aEUJKGS2Q=;
- b=QZUTlIiUtQrB4jmg7I9xkNIej9YTPtpiNeDyODJcPdmRHkBUfH8lAYXLxMrbw6XsDk
- zdBmaDLFsp5qippJMmwAoCsFxhD61H2Wwb+jRrSfK19naVAZKYjUhUiXFxmCuzGJrZdh
- pIDpFdjgR4C+oqOThWWWRR4/dPM49ZX2j+LEuGQMrY9KYCmj3ftFb/q27R6HgVEkatIV
- K1rmRG9nzCaAcusBLs5VnGJkqniYdP6hM7nzdi5wDaaVMYzi/nWl2aI2Yft1BkpsTb3T
- oe9igCk+PAhFRJX0/72EpIV95sGYD0XvpZhvMXVx/AVUVOCjDBWtv11oP9+id8dnY6rK
- 3odw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775419168; x=1776023968;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1775419170; x=1776023970; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aZAwkmDl6amBZHDrp46ZQo2/Wpd2Y1GdD0aEUJKGS2Q=;
- b=a5TcvidzUvkhjmlxdF16rL7so42LcQiuy0+tBXE8/Bt/TIXlr8UfZKiguxKrCt1/hy
- Uk8VvjJJu7KIJQWo0ZOJ1ynkKW+1wan9Jrl+fq88arOoNXBOIRQiA73od4a3A2tS3E7B
- 8agkeGr0NF6vWeNcky3MEvNOa3q0x59yf6KNRF1OJym7oqkrhfpPb34hUMrVDSfPaR1s
- 0jIyN0EtYoc9ZhpfRSMS8xeXn8Fw8hB7d+LfpHr547oyJXXbxbwLmjDQXK/s/lHfDAy/
- 8onexKpmDrW2CZ6c8mSfCq4DrtVDTJ6F1csKUd1wyVcKyukhMq0S5gntQjFMA9S31vDG
- 848Q==
+ bh=aMc5kXl3weurPF0mKftZUD8fbnFIJScXSWMm4hhZUyg=;
+ b=RsQ3OboqyFTIXHWRDlHQSrSYUCg8el7oT3rB3YPRN8z/gTOFWxGGrVN7WOPAWWoGqB
+ P1QwetvmHTOs395gZ0zq5SeVMdvd+UkQoiH9tBlcpam/G+pCs6yKy4IziMz8saESJVrZ
+ lqr8krRJl4HXKr66avPD8l5PmJVrN8O0O6uRNgFRSo28D5KBAHWmHjGvhV5+RgSwuF/7
+ RdMBXCRBn19IkDhfkD8W4ViLjvskgIXx6uH9ihOTCCZoh5lhkq9cUHJx8c/SowMObW5F
+ D/BzcvH8ja1JULMdUPfKjZ8Ch6f+U9V18SNis6rT87228sBLZnAB3wvQCvUZkLC1QvuT
+ lvvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775419170; x=1776023970;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=aMc5kXl3weurPF0mKftZUD8fbnFIJScXSWMm4hhZUyg=;
+ b=SRMt5jmkbUeWfqS/k//FeC924JOvsFyXDUm7HBJTpjuxdFFBI9alFwYYTfQjp5dmnX
+ sF8MgYSXk6Gu4nUcDATmUqQZXrEyDW36OsUnuXZPf5hZs33wX6kzZp0REvJiWUkJ6jFz
+ 3DGx3dbvXpbpc1FlBajG0nym2P1vgQgfwFYhhCt1iFk/IxKYlIUZK77x7KUJGRabNSXZ
+ SYAzp768Bd2TQD76zP25NCHEQrQS55Q1KBWPZvaBc5paQw7cCg2uMRhWb69oiThv+5F6
+ d0R/COehwDJMkD6v+BWzVu6iipra+hKlwUio4xZLsMoa/XjUo/k0y06skmjS1j36t4li
+ bXyQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX3fyS2xrHtbO6xJvuv7trpgtGgqNm2WB55mKT8kVkbzCcLr3ZzrT+2SdX3MDNH2HJyaYgUPV8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzBKFXnucQB1RbQu1wNwordD97FhfC0Ug2L+KtYnJqTIeHVGkw7
- qGGhHrHNONXppDCLg/NKOUjegwi8aE/urxx/eJjxpqfNXTUkO2llyprH
-X-Gm-Gg: AeBDievlbjj7jOW5k1bhOGFC2VK7BuztsqeSafjtyWFzg1fCHMtOnYJfyQARsm8yBzx
- whUjuU9jqIUz+FEw1nreAiV2SglqyaCm7W+/zxBsdTWm2T/FiEUyv3CorHGNb0m7D4Gy1FIlE32
- /KyyhanOYhLHgYiDNqRNut+ogvLZHlcjpMDBWQygIG0qSW8h1u0SaYLmldabJUpSJ5QttMWCVlO
- u7WQJiXtvdIBL3nEj/ddgnzE2AqAOJhNK55yXcXtbqzfGgC1XLsz/QxeQUaVjRD+zNoM18nXIHM
- /vq45JjuQtnLZQNt9VPwTxp9vQNQ0IenY/SyiGV5xUXZxW0w8+1xuW6oHC8sILI9NidOqYy3VTq
- nRH0RzEIOjA9bHemdL6/f3rvigKu30vu8Ad04GIexIQSJeAPNipCkguFhKQnyIykUadTm8vpVKS
- LCmm55cMSuVTgrNYkypaRf002kqRa3dxo++KKyGBZ/qdrkssvAWTSQd82ep9QVzNWOEumbUY408
- NvrRjt8Vg==
-X-Received: by 2002:a17:907:6184:b0:b9c:116e:eea1 with SMTP id
- a640c23a62f3a-b9c67927218mr316330866b.36.1775419168282; 
- Sun, 05 Apr 2026 12:59:28 -0700 (PDT)
+ AJvYcCVas+swttlPjMOT6O+meK25yLDqKSqb1Iqx93FgVENrIsiNYSNEJVnVz0/0GqyvQqoBsJhXX1o=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy1rna1Y7ldEbLwQd5Ro/b7/ogI5doW0FYTFNNG/RPTNXE3FxJV
+ s3J6U6xBilErn2YZotY+iCLTzLz5EWVuzOLFBD++ZZ00/+4F0sfTvngh
+X-Gm-Gg: AeBDieuA9vGC9hlUfmbgjZf3/XgcpHSwBuPGYVimH5OplsMbVV0Jtxq3N1ZSmeITsgG
+ Gqu13KWFEA2Fdv5oJlly9/wLDz3m7AXcCGvZrzkboK/NfMZ3kqG0vYXKpGhLHs88HKrwWRga+5V
+ KwTmacb61Bw/Dc68xPbZEhCQuCLURGZ+/bEFDQCcj8m1vLJUPmjKIPCRVAVsw1PXbNTSAfNqDyQ
+ ZRKgy1LuXFmTXyazjzI/DmmPwlnHKS6sYKNUyVslgAqEyWvuLuBYv6fKCl3cVbpcGlFu2mQAFgn
+ q5xoqD3FnhRopdL2bJndke5bldf/siqn0zO5Lj954dMvnEb9Ahv4dvshajJqTkhGZGGPCZryrpV
+ epv1pAi510QrsNlIuVpQhQzBd1rHAPb4ZVDnRXfL42KF2Tqr/hyMZIWzg5Fdjxh0quMzz7IZK9N
+ J6o9luJUONMBNqf4fFI9ZGhDf/w/vZSIAXrQXjviMhVMQbBh3XJkNxrLkANjEDGjsFKflUisveq
+ +ttqwYQxg==
+X-Received: by 2002:a17:907:9727:b0:b98:284b:53b with SMTP id
+ a640c23a62f3a-b9c65867709mr472771166b.14.1775419169474; 
+ Sun, 05 Apr 2026 12:59:29 -0700 (PDT)
 Received: from bob-linux.lan (113.73-65-87.adsl-dyn.isp.belgacom.be.
  [87.65.73.113]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b9c3c97209csm421157066b.12.2026.04.05.12.59.27
+ a640c23a62f3a-b9c3c97209csm421157066b.12.2026.04.05.12.59.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 Apr 2026 12:59:27 -0700 (PDT)
+ Sun, 05 Apr 2026 12:59:28 -0700 (PDT)
 From: Philippe Simons <simons.philippe@gmail.com>
 To: Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>
@@ -82,10 +83,12 @@ Cc: Jernej Skrabec <jernej.skrabec@gmail.com>,
  Philippe Simons <simons.philippe@gmail.com>,
  Samuel Holland <samuel@sholland.org>,
  Mikhail Kalashnikov <iuncuim@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH 0/2] Fix LPDDR3 H616 TPR6 parsing
-Date: Sun,  5 Apr 2026 21:59:25 +0200
-Message-ID: <20260405195927.2837914-1-simons.philippe@gmail.com>
+Subject: [PATCH 1/2] sunxi: H616: dram: fix LPDDR3 TPR6 parsing
+Date: Sun,  5 Apr 2026 21:59:26 +0200
+Message-ID: <20260405195927.2837914-2-simons.philippe@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260405195927.2837914-1-simons.philippe@gmail.com>
+References: <20260405195927.2837914-1-simons.philippe@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sun, 05 Apr 2026 22:17:20 +0200
@@ -105,17 +108,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Vendor TPR6 parameter is currently incorrectly parsed in H616 dram code.
-Fix that and adjust Kconfig default value accordingly.
+From: Jernej Skrabec <jernej.skrabec@gmail.com>
 
-Philippe Simons (2):
-  sunxi: H616: dram: fix LPDDR3 TPR6 parsing
-  sunxi: fix DRAM_SUNXI_TPR6 default value
+When a user copies the vendor value of tpr6 into the mainline U-Boot,
+the code parses the tpr6 parameter incorrectly and writes the wrong value.
+Fixes Vref parsing from TPR6. Proper order from LSB to MSB is DDR3, DDR4,
+LPDDR3 and LPDDR4
 
- arch/arm/mach-sunxi/Kconfig            | 2 +-
+Fix that.
+
+Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+[adjusted commit message]
+Signed-off-by: Philippe Simons <simons.philippe@gmail.com>
+---
  arch/arm/mach-sunxi/dram_sun50i_h616.c | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+index 3345c9b8e82..42a0550e015 100644
+--- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
++++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+@@ -975,7 +975,7 @@ static bool mctl_phy_init(const struct dram_para *para,
+ 		val = para->tpr6 & 0xff;
+ 		break;
+ 	case SUNXI_DRAM_TYPE_LPDDR3:
+-		val = para->tpr6 >> 8 & 0xff;
++		val = para->tpr6 >> 16 & 0xff;
+ 		break;
+ 	case SUNXI_DRAM_TYPE_LPDDR4:
+ 		val = para->tpr6 >> 24 & 0xff;
 -- 
 2.53.0
 
