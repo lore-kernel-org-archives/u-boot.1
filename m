@@ -4,82 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87113E63FE8
-	for <u-boot@archiver.kernel.org>; Sun,  5 Apr 2026 11:34:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF061E64013
+	for <u-boot@archiver.kernel.org>; Sun,  5 Apr 2026 11:50:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A877183C14;
-	Sun,  5 Apr 2026 13:34:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 31AA083C14;
+	Sun,  5 Apr 2026 13:50:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gspXCxeI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F2PZX3wt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB57983C5E; Sun,  5 Apr 2026 13:34:46 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id B978E83C5E; Sun,  5 Apr 2026 13:50:11 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8484C8394E
- for <u-boot@lists.denx.de>; Sun,  5 Apr 2026 13:34:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 850D18394E
+ for <u-boot@lists.denx.de>; Sun,  5 Apr 2026 13:50:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7d4c383f2fcso2716377a34.0
- for <u-boot@lists.denx.de>; Sun, 05 Apr 2026 04:34:44 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-b936331786dso330029366b.3
+ for <u-boot@lists.denx.de>; Sun, 05 Apr 2026 04:50:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775389809; cv=none;
+ d=google.com; s=arc-20240605;
+ b=bT0CUSrCl3DsVYLOf98AdBxLFwR4GrsCDfzrwv6Av+ly/lmUGCMq1p38pFx8aw9eB+
+ WH4hDbAZWo3ODEMyQ9fiMTUi6VyU34k0nJi4GWWKdvbvobsXtGl0njNTLN5y4q4zQKu4
+ KF35LTXYSYB2xSHyDsvx+K53jpnp+jeoWyNhxXh7NfTpVnhj98qnx8vcuKHEFsb8LHyK
+ QyMSIED+H3ugjaoJQpvp03XkGms04kWQGyb6iAHCc0UxJfI9k3n9xqjVk43nPi7lZjqM
+ lV5oUtMnlQg4tKHKu8ufTdcofrITJwzYPI/nbfvJBgbzVgtNUDd27REorpLuU+VMZwNj
+ ABuA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=IDEY00+i3JJRO+kad4dnp5tWHWcWzcZzL5RMGD6qr8M=;
+ fh=FupddYeo0GvvCek3hd4jW7j0f5swrzsvCXAhY05xPqY=;
+ b=YNa515TXnzoTYRSnbN/LFpHLlGNfN7POJDaCkG6wofZQgds8Jo8VQJAOPAZNIRTYhd
+ 4GWdWnZ+w1GOfScy4SqGqh3bP8GD4mDTzdde3ucfugBMBY7mnlxrAgJIfPFByMpSpNXQ
+ prLSBKfQypn1BgyuFrj+3hvrzy1uB2MoCgK3aVfa8guYoPlKtGFFIoKTKNRTo9JZo18w
+ T0AigMEZLo0zsOMwiXW+pl1NBzAfENbGpEcW2j3a7/bubgNWA2CrtHqGQ8oimkn39vhV
+ 7bX7JpvjBTpRjXYz9iO2X6yqJv2m4/dKtgiUAXcV2N7K86Y3cK1TSOb7L66Lqnrl9a+y
+ CVlQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775388882; x=1775993682; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DQ2YPiicZEiGfq1gGw1TCUGe8aDcQ0nNtxSZ32ZlZ4Y=;
- b=gspXCxeIZtFTkGXq9d1g9bA/kLhOVUZopZRN04shSznjRFSAPpPfc2gtyusBWdScxA
- xpDHxmyeF6sx/7Lxb0snejpLmRZf2pXNej+lDutjM124Prw5CVHrQv6NzeZRSRzzD4Ps
- LHpnSWhlUguFv5NnueCBkPIHrenm2QiLHxgUw=
+ d=chromium.org; s=google; t=1775389809; x=1775994609; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=IDEY00+i3JJRO+kad4dnp5tWHWcWzcZzL5RMGD6qr8M=;
+ b=F2PZX3wt5X7cdZhplhjF41Ng3G44R/XoAUpi6GT056w2v58j04t6DQ3rSnNz0MkY54
+ KReei8nWpdfuC5ciGPfSg5MZZQQzyo2s1JelxTgGUjxQ+fzMCxXl4tY60lO6PxRbif24
+ MDngBAR/LcBVpRKMHTH2rG620F8VuABOMbS1A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775388882; x=1775993682;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1775389809; x=1775994609;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DQ2YPiicZEiGfq1gGw1TCUGe8aDcQ0nNtxSZ32ZlZ4Y=;
- b=CfASLkrPIvQ9tQ7Bvx77c2kxj/LND+DreC96Yijz5gktQ8rXyqnNwj+HW9dQ6S139D
- KM1S2Xd86iG3Dq+IgjK7CKTvCSqokzsvOHHL2te/zWF1tqQUgw1FQZW5yxY1MO7yYp5a
- /tLuV1NcWrVqGrgTE19DZo+kYMeWmRh9n4WlOfna4dVqHI9HjHEb9upF+mIWMW0nhbmV
- LyWenO70BLBw6iMKetTkXZS/2fJYxz13AZqUuv4abtOBn5sCl6sNc989+cUtQB73K6uv
- LxFFLLEEfsDNL++1w9qwZr34sxf+wJh+d3zBztpFp38zfy3f4msMqlx/VQ1RYU3hxQ/y
- 1LLg==
-X-Gm-Message-State: AOJu0Yy81f5oeWR1Ot5vt1/2XjfEKYi6oX6DsLbqR4FTNrOToeSVJbAR
- MpVzDwqT/RUHekF0bTcoe2KWFdtDPda3nHshEgvKv/Uk19rYZnCgw8CZt6er2vJRo0Y3XNP6KZk
- tCuuRyw==
-X-Gm-Gg: AeBDietViZSo3hDlgnOzZGiGNtvt7sR3LB1CAS5okstu9ocZT1i2m9LfLIM+OA0AyD6
- JXEsIvdm5m+poLckoMlgRFSdrQ1sPuRcMhXrkLxMZWuaOBR29JIony/LnnfJMraM99arDPgCT/B
- 4mmWd3ZVCfCGKOYkmnTfcBDcOj6Cbt40ha5NC0PLL62vG/9KkTjz8ltsqVDbaIY/+DLkPrt55CR
- /tgS0IZd3R5db0fe7gLyo1MCIZoyujeBeHST+kNMz0BjpGC50Bpq5Ttxwk4dIAEZghc1dDF5WXv
- EIttvHSWQA3xa4bxJ5XDrs+roRuubUmk9oOOxignu6mf+ToiCHX/foAmScC/52/XPAo/P12ZPG3
- xvuDtpoF1vvKRXSSRHQVCF9XrlElIaUui/2fWtE18DfQ4EnLzSaSDc90bbUEdjgIgA6nnaQKkIt
- 4+lIMOl+mrzXfV6luoNg==
-X-Received: by 2002:a05:6830:63ca:b0:7d7:ecda:cc3f with SMTP id
- 46e09a7af769-7dbb6f3d283mr6102794a34.0.1775388882512; 
- Sun, 05 Apr 2026 04:34:42 -0700 (PDT)
-Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7dba7159fd9sm8114027a34.7.2026.04.05.04.34.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 Apr 2026 04:34:41 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Cc: =?UTF-8?q?Ryan=20Pers=C3=A9e?= <ryan.persee@gmail.com>,
- Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Martyn Welch <martyn.welch@collabora.com>, Tom Rini <trini@konsulko.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>
-Subject: [PATCH v2] bootstd: efi: Handle prior-stage FDT in network path
-Date: Sun,  5 Apr 2026 05:34:32 -0600
-Message-ID: <20260405113436.1849007-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
+ bh=IDEY00+i3JJRO+kad4dnp5tWHWcWzcZzL5RMGD6qr8M=;
+ b=rfLtLBjun+ZilgKZEU9uP0ClvJhQ1tkXhow8Gg5hYCHda60E68ClUxNrRIy78uUaGr
+ VRq3tJXsdrUKlJAenFgWRrL3bJNpZj8hHPh0bvHvM6JM0r8k0drx32+4t0BO2S6wNR12
+ UVYwE1H2CCt9SH6L9J8MsfrMDInwsg3OvBIRe7CeOg5cyVyfbeboKsKqy25OwmLjSJ88
+ 600XA3hep6HrK+mvnGPCdguIXGlYe1gOv0DN9KB36uxYsT/dIuEfqJnb5pjuFEYqRuht
+ JsgOsML/BmjQiNisvkmsRuAkk7RIRkEjsuv4ulwuOwI7RdS2DtymTW/rptRSuJ3iT4VH
+ WOLg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX+ZM1QKBE0WaW81XXKQZOF9Dpbx6P5PHZ+UmOX5CXd6d+6uwanllY2VTSC35GQTcQon5UYQIA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzNPJSyb4YFMrnQC6wyZWeEj5RgaSraL4x9Ov7A/ZQ9XUZVMNJZ
+ 1Xt07w+XNrjiSJwzWqFqDQpQy+MSleuoK6pFPlHNB32i5heFGm0F7Nn3xWmQE61hqnffbki2Wde
+ DqvbxDQ25D0yeH3AhMaka4NIqrGUr5P7asPcqrN/i
+X-Gm-Gg: AeBDieuYKQoHlIw4xjjEY1jthmf5Jaq1FuBDjOPdtlAFu9mcfYn6I3rtgAdqS3iTlCz
+ N5LVkU63Bksz1y+QQ+jT3x/ROizzvGe8nCFTOT9KwqlsAYjVsnSaCc03KotnG8j/Mz5gmGUh+Vt
+ cLjR03ewQN4+sCoPVdI+pV3F/sxI2u9jYujVX7VeCTFl8eEwzOLQ+2TavsPIjNNNs+XrLHWuSpR
+ mvRYtkqXp2UqA1P4agVEsWLR3D+e8j1xmc+wKAUf6l3k0ae3qtkpTlsKaIMJ+SGAq69DdSLTNFp
+ x1AxQQ==
+X-Received: by 2002:a17:907:8b95:b0:b97:b2dc:91e2 with SMTP id
+ a640c23a62f3a-b9c67428c5fmr457264066b.16.1775389808616; Sun, 05 Apr 2026
+ 04:50:08 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <cover.1775121078.git.simona.toaca@nxp.com>
+ <7edcce04b39aabc1f58e09814e7fadff226e2bb8.1775121078.git.simona.toaca@nxp.com>
+In-Reply-To: <7edcce04b39aabc1f58e09814e7fadff226e2bb8.1775121078.git.simona.toaca@nxp.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 5 Apr 2026 05:49:56 -0600
+X-Gm-Features: AQROBzDq7w7Z5nKrfivdktDw_qk0K_ji8ZCrWMJV6K_zDXwCTiHFgMDHsektPy4
+Message-ID: <CAFLszTgb5a3QtyviHc-MRTdDUoDUWnYksWXMeCUxagHmvfQK2g@mail.gmail.com>
+Subject: Re: [PATCH v3 1/6] imx9: Add support for saving DDR training data to
+ NVM
+To: "Simona Toaca (OSS)" <simona.toaca@oss.nxp.com>
+Cc: uboot-imx@nxp.com, u-boot@lists.denx.de, 
+ Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com, peng.fan@nxp.com, 
+ alice.guo@nxp.com, viorel.suman@nxp.com, simona.toaca@nxp.com, ye.li@nxp.com, 
+ ping.bai@nxp.com, marex@nabladev.com, sebastien.szymanski@armadeus.com, 
+ ravi@prevas.dk, joao.goncalves@toradex.com, ji.luo@nxp.com, 
+ semen.protsenko@linaro.org, tharvey@gateworks.com, qijian.guo@nxp.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,65 +116,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When CONFIG_OF_HAS_PRIOR_STAGE is enabled and fdtfile is not set,
-efi_get_distro_fdt_name() returns -EALREADY to indicate the prior-stage
-FDT should be used. The block-device EFI path handles this by setting
-BOOTFLOWF_USE_PRIOR_FDT, but the network path treats it as an error,
-causing the bootflow to stay in 'base' state with a -EALREADY error.
+Hi,
 
-This also means fdt_addr_r is required even when no FDT download is
-needed, giving a spurious  -EINVAL error.
+On Thu, 2 Apr 2026 at 03:29, Simona Toaca (OSS)
+<simona.toaca@oss.nxp.com> wrote:
+>
+> From: Simona Toaca <simona.toaca@nxp.com>
+>
+> DDR training data can be saved to NVM and be available
+> to OEI at boot time, which will trigger QuickBoot flow.
+>
+> U-Boot only checks for data integrity (CRC32), while
+> OEI is in charge of authentication when it tries to
+> load the data from NVM.
+>
+> On iMX95 A0/A1, 'authentication' is done via another
+> CRC32. On the other boards, authentication is done by
+> using ELE to check the MAC stored in the ddrphy_qb_state
+> structure.
+>
+> Supported platforms: iMX94, iMX95, iMX952 (using OEI)
+> Supported storage types: eMMC, SD, SPI flash.
+>
+> Signed-off-by: Viorel Suman <viorel.suman@nxp.com>
+> Signed-off-by: Ye Li <ye.li@nxp.com>
+> Signed-off-by: Simona Toaca <simona.toaca@nxp.com>
+> ---
+>  arch/arm/include/asm/arch-imx9/ddr.h |  48 +++-
+>  arch/arm/include/asm/mach-imx/qb.h   |  15 ++
+>  arch/arm/mach-imx/imx9/Makefile      |   6 +-
+>  arch/arm/mach-imx/imx9/qb.c          | 379 +++++++++++++++++++++++++++
+>  arch/arm/mach-imx/imx9/scmi/soc.c    |   7 +
+>  drivers/ddr/imx/imx9/Kconfig         |   7 +
+>  6 files changed, 459 insertions(+), 3 deletions(-)
+>  create mode 100644 arch/arm/include/asm/mach-imx/qb.h
+>  create mode 100644 arch/arm/mach-imx/imx9/qb.c
 
-Fix this by calling efi_get_distro_fdt_name() before checking
-fdt_addr_r, and handling -EALREADY by setting BOOTFLOWF_USE_PRIOR_FDT
-to skip the FDT download, matching the block-device behaviour.
+Note that this feature is present on x86 boards already.
 
-THere is no test for this at present, since sandbox does not enable
-CONFIG_OF_HAS_PRIOR_STAGE and lacks infra for network-based EFI boot.
+I wonder if we could make this more generic? E.g. it could be a
+function of UCLASS_RAM ? I could do the x86 part to try it out if you
+like.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
-
-Changes in v2:
-- Return early in the -EALREADY case instead of using a big else block
-
- boot/bootmeth_efi.c | 15 ++++++++++-----
- 1 file changed, 10 insertions(+), 5 deletions(-)
-
-diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-index f592fec07f6..e187dc39912 100644
---- a/boot/bootmeth_efi.c
-+++ b/boot/bootmeth_efi.c
-@@ -269,17 +269,22 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
- 		return log_msg_ret("fi0", -ENOMEM);
- 
- 	/* read the DT file also */
-+	ret = efi_get_distro_fdt_name(fname, sizeof(fname), 0);
-+	if (ret == -EALREADY) {
-+		/* Prior-stage FDT is used, no download needed */
-+		bflow->flags |= BOOTFLOWF_USE_PRIOR_FDT;
-+		bflow->state = BOOTFLOWST_READY;
-+		return 0;
-+	} else if (ret) {
-+		return log_msg_ret("nam", ret);
-+	}
-+
- 	fdt_addr_str = env_get("fdt_addr_r");
- 	if (!fdt_addr_str)
- 		return log_msg_ret("fdt", -EINVAL);
- 	fdt_addr = hextoul(fdt_addr_str, NULL);
- 	sprintf(file_addr, "%lx", fdt_addr);
- 
--	/* We only allow the first prefix with PXE */
--	ret = efi_get_distro_fdt_name(fname, sizeof(fname), 0);
--	if (ret)
--		return log_msg_ret("nam", ret);
--
- 	bflow->fdt_fname = strdup(fname);
- 	if (!bflow->fdt_fname)
- 		return log_msg_ret("fil", -ENOMEM);
--- 
-2.43.0
-
-base-commit: 1c1bfb1cf34bbb2a5717eb6995c55093279f9341
-branch: bootstd-fix-us2
+Regards,
+Simon
