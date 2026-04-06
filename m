@@ -4,89 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C23BF46C4E
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 16:14:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4179AF46C5A
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 16:48:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D4F78405F;
-	Mon,  6 Apr 2026 18:14:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5850783C2B;
+	Mon,  6 Apr 2026 18:48:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JHglrazW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LLmFZvbz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CB2B840AA; Mon,  6 Apr 2026 18:14:11 +0200 (CEST)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id 7955983E36; Mon,  6 Apr 2026 18:48:43 +0200 (CEST)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39E468352B
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 18:14:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CAD7C8341A
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 18:48:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-67c22b05346so2331954eaf.2
- for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 09:14:09 -0700 (PDT)
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-471618e20a5so699694b6e.1
+ for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 09:48:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1775492048; x=1776096848; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1775494119; x=1776098919; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=g+UpvezSIAVmG6VTXXzv/corE9EvDQzLRNbpeBLxhfc=;
- b=JHglrazW/cHnonucCEOhNVMqc0v0uf7lEuna7VEwGCRm7ZYbAmeFR4f7l35JXDNonC
- Ng/Rj4axCcD1dVlyYT6bYXNyn7VCOPDkI0OjSHQMfwrxABAaaMlmoOqrrRK49doyIUHE
- TT10FLxIOl/Z7RdPr/Q0sLFPmJoDiwzhEYfXk=
+ bh=iSsrWq3DpBGzt82dh8r/N3GQDgC9DNA0HEMr71FiOho=;
+ b=LLmFZvbzA4Z7/2EHtFxvp4MfXJv1ZlYqi8/bRYkHRmy7cjLm+s5AS5qz5zhUt4vNqb
+ w2uDadO5OhVnTChA4Qm8HmWNh/jFw6yTs+VSZ5R/OEL2tyb3WrRHFCiS6Z/JzncZNxQ7
+ kV63L6DS7etUzEpMDJssJ09CQrpAO3bMS0NbQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775492048; x=1776096848;
+ d=1e100.net; s=20251104; t=1775494119; x=1776098919;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=g+UpvezSIAVmG6VTXXzv/corE9EvDQzLRNbpeBLxhfc=;
- b=bcy+dIgP9P2+2GWyl5qd3uHt8o20FHztlhmQgKBnZ4ZJRye38ul2hPu463v0aqR6Yh
- G8dShBzhVyX5DarV4UGhA15WEeCdDD7FNEERA0+k4kTQsRygnZrL6oZuq3c94a0OKb2X
- u8BkiqknCLCjd9pAoYxEr7yb9cik4TzHkDrlkD9MvVDbfA1l5JFNXPy4agw0K2rwmptn
- PBceuH6s/8OFltQ/lnO0pkU52tYnPK42B8j/mVMlgLofWjNrCXfW7tsSD2q9HBzE2Cvh
- +dq3XuL7YNZ1jRHYCpzrQzaHE9cSSfm4Gp8WIiHTRRC6HUBxwwnS2uXHRzkRS+pQXTD3
- gn/Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWuGKNJEV6V/LBF8F+/PX/+XJ4ZGX05EtivueXHTRHwjznl9XDfb2T4PYzM5HcT3TeauCCEWTc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwjyNESKFw4/HVOmkeausJEZjB8SnNqWXhdFHkto2RA8snB7qU5
- H15MDrd1wKtl3qp1GNcbkBKRGaJvxJretF8mCvHi8F/NPemWedHQtg5b9tuVn5TpkQ4=
-X-Gm-Gg: AeBDieuPtjYpQmCnpytXzVI/Y53SxEWZBgzs8SYm3UtwTfjMdrdBwTiFhrKSKWmI8w5
- i2BuQ3Ebu/ELe30JYYz5CFPQJSLXkUNFgNBFbPk5aa+hqDoRkaflsNZR0NNztpRLLFfdSgklCt8
- tiRcdaDIiATSx2uUVgHF8Q6VgHlrHzitYcmRpkUaOlrZ8Nxz3BiYyo3kn4PdVJfiao4vgm0+FHq
- ig+PZ3T3PV630URcqXG6FvxHmuqko9X+fEOMRVLorkgqenQGIIL9xsW1VimmYVS4mbb0zXqUSak
- KjMqXJZO3rnUmdhDQdH7gBjZ6ML/HU87RO4wTs4z2uO340zAXBGGoM/SICQUfccjQXmDl15uJAb
- RuOwzQIhBJNnJuiy/ykWZZyT0RUq1yyjTdkM8jPLmrZAR2vkXpn6BRExCwyGY91QLl9A8VcQHiQ
- QKaJzdFmIZVxoM1pgf/+SDHBK3UpuGzOXIsJn/Pc0XlgtB3Btvs+RLfvwtEvtTeGyesTq835Jvt
- p//JuQTL3W/urCwoTIAJf7v/J9rI9eK9O6Iybuv0TH/1gq1
-X-Received: by 2002:a05:6820:f036:b0:684:e04a:265e with SMTP id
- 006d021491bc7-684e04a28damr3242899eaf.50.1775492047779; 
- Mon, 06 Apr 2026 09:14:07 -0700 (PDT)
+ bh=iSsrWq3DpBGzt82dh8r/N3GQDgC9DNA0HEMr71FiOho=;
+ b=QIDanlBbmyXqKC4tRMMAGouzCOn1QnZr/vsKBpupk16bvdlscfSYTCDF+SZAOqWMmJ
+ 7XWz5Kt2HBTKSQpy3yRDXZvFWICds3OIiKr1jNGEIsXU3TvrUYbpr/T7Uk6b+fOp0IAk
+ bCkQxbEGhiRCYjKNFLTIOdIZN4+NS17S2AravvFUq19trVnXvPWbvRIoYNe418RJg6b8
+ p/wQK+1iXbJr3csw0IV0BrDgK8ALTGBJlVtedJkTz1+a6TGFAx1BdyYl4jqpS8M+DO4A
+ 3+aT2iilLoKLZyUSkILiWmHqydA6+qpRvC+11inGdlw9kfSzodnKCTnZXdN4nikPGKXd
+ DiJA==
+X-Gm-Message-State: AOJu0YxD+H04J6x1/JrXUuPvu6Z2BYQV8Tnr7RTKRRINB2wdV6zLTjG2
+ b5+jUXeKVLTDKfeAAU2uGzQK1SU/nLpPqz174tub8Q+SzkNqUcAzYMleZuR/MjvlGC0=
+X-Gm-Gg: AeBDiesGsoS2F4WTP+N8n/8wZAQnM0D2hxTiU38z50IV3bX8cOUj+3saBT0mHLG6TJ0
+ WB9DAlia1EAGOfmAFiLwncQ7EBXzdljUsApovJhHEfSm5Px5Wnra2RikCxQKQeddzFiL8npML2f
+ uoUODGFtgtR86j+bOssu5B+8e3dxgXEoZkwsapTPKaPjLCkp2hK76M8HxAF4kAtnXs5qNiKyPoj
+ v1Q8CnbvJHp1e3sT1FLLZf7vQhNNDKNUw74uN3vedi93uIiDGEJPrS7sr5G1/3QY216ZyJWKaQ9
+ 3fSVRJRCAApRktccCG6Nlb/9CMbzT+W3q0/Ve2+Bxk8H67nRjkXl5IIkNDNbELBnJh2i41D/wx4
+ KtiIqwZpsVvkEWi2cKHfFcMW1jXhtIxPhDWz6T3tTX1CNrxlPP450KX9CP4bx9sVpuM+94YeEqf
+ Avrh4vmYippfjcfcDwZZ+TQP0cHhN1b9owrKcKZKJfv9ZXpIpvUqbvVDksV9kr+vOre65BrfDAy
+ 9mEEWJvMGWkoP/LhjcrX78PElALzR0KGJy4OEq78a1dBDWdDbJTpfuiyiw=
+X-Received: by 2002:a05:6820:221d:b0:687:6b:9bee with SMTP id
+ 006d021491bc7-687006b9f79mr998968eaf.13.1775494119272; 
+ Mon, 06 Apr 2026 09:48:39 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-422eaf2c7c3sm11593375fac.5.2026.04.06.09.14.06
+ 006d021491bc7-680a882d978sm8780025eaf.10.2026.04.06.09.48.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Apr 2026 09:14:07 -0700 (PDT)
-Date: Mon, 6 Apr 2026 10:14:05 -0600
+ Mon, 06 Apr 2026 09:48:38 -0700 (PDT)
+Date: Mon, 6 Apr 2026 10:48:36 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, jonas@kwiboo.se,
- anshuld@ti.com, sjg@chromium.org, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 2/4] common: move ram_base calculation to independent
- INITCALL()
-Message-ID: <20260406161405.GT41863@bill-the-cat>
-References: <20260403090109.3564638-1-ilias.apalodimas@linaro.org>
- <20260403090109.3564638-3-ilias.apalodimas@linaro.org>
- <b4015957-76b8-4531-b694-cae143a65f49@mailbox.org>
- <20260406154105.GQ41863@bill-the-cat>
- <7a190e6d-60db-4087-ae1c-9013dc6706bc@mailbox.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, Raymond Mao <raymondmaoca@gmail.com>
+Subject: Re: [PATCH] CI: Update sjg lab to match currently actively boards
+Message-ID: <20260406164836.GV41863@bill-the-cat>
+References: <20260317131839.2418655-1-sjg@chromium.org>
+ <20260325201806.GA3445024@bill-the-cat>
+ <CAFLszTgEq7e4ee9H3mbNeBOgG-8B8L_-E0LsQNmGPZfXLK2BXA@mail.gmail.com>
+ <20260326154716.GA502704@bill-the-cat>
+ <CAFLszTjovewJ3YCz-Fu39Tr=W8ZOWo9EC3m1VDVBuEjJG2zcJg@mail.gmail.com>
+ <20260327165319.GD502704@bill-the-cat>
+ <CAFLszTgV6Kye+gmrJEF1xL5T4JrPxt+QZihYNYhvA=Jn0rVZFw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="QbVXbTAhYktKv8t8"
+ protocol="application/pgp-signature"; boundary="FYTzrHLkM7PvE8cH"
 Content-Disposition: inline
-In-Reply-To: <7a190e6d-60db-4087-ae1c-9013dc6706bc@mailbox.org>
+In-Reply-To: <CAFLszTgV6Kye+gmrJEF1xL5T4JrPxt+QZihYNYhvA=Jn0rVZFw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,85 +105,225 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---QbVXbTAhYktKv8t8
+--FYTzrHLkM7PvE8cH
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 06, 2026 at 05:56:41PM +0200, Marek Vasut wrote:
-> On 4/6/26 5:41 PM, Tom Rini wrote:
-> > On Sun, Apr 05, 2026 at 05:59:52AM +0200, Marek Vasut wrote:
-> > > On 4/3/26 11:01 AM, Ilias Apalodimas wrote:
-> > > > Currently, ram_base is calculated within setup_dest_addr().
-> > > > However, upcoming patches that enable U-Boot relocation to the high=
-est
-> > > > DRAM bank require ram_base to be initialized earlier.
-> > > >=20
-> > > > The default dram_init_banksize() definition relies on ram_base
-> > > > to calculate the start of the first bank. But following patches
-> > > > will move that function to execute immediately before setup_dest_ad=
-dr().
-> > > >=20
-> > > > So let's split the ram_base initialization in its own INITCALL.
-> > > >=20
-> > > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > > ---
-> > > >    common/board_f.c | 12 +++++++++---
-> > > >    1 file changed, 9 insertions(+), 3 deletions(-)
-> > > >=20
-> > > > diff --git a/common/board_f.c b/common/board_f.c
-> > > > index 91c569da9682..7df92281c35a 100644
-> > > > --- a/common/board_f.c
-> > > > +++ b/common/board_f.c
-> > > > @@ -329,6 +329,14 @@ __weak int arch_setup_dest_addr(void)
-> > > >    	return 0;
-> > > >    }
-> > > > +static int setup_ram_base(void)
-> > > > +{
-> > > > +#ifdef CFG_SYS_SDRAM_BASE
-> > > > +	gd->ram_base =3D CFG_SYS_SDRAM_BASE;
-> > >=20
-> > > Would it make sense to reset the variable to 0 in case CFG_SYS_SDRAM_=
-BASE is
-> > > not defined ?
-> >=20
-> > In that gd should be zeroed out do we need to?
-> >=20
-> > > Or better yet, how about moving CFG_SYS_SDRAM_BASE to Kconfig with de=
-fault
-> > > value 0 ?
-> >=20
-> > We don't set default values when a valid value must be provided for a
-> > platform to work. It wasn't migrated to Kconfig as it's not really a
-> > configurable value, it's something that if we could pull it from the
-> > device tree, would be great. A someday middle-ground would be to mimic
-> > how Zephyr uses the device tree and get some compile-time constants from
-> > the device tree.
-> It could still be a Kconfig hex value without description and with default
-> value for each platform. That would still be better than the CFG_* remnan=
-ts
-> and would simplify this code.
+On Sun, Apr 05, 2026 at 06:13:29AM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Fri, 27 Mar 2026 at 10:53, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Thu, Mar 26, 2026 at 01:46:24PM -0600, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Thu, 26 Mar 2026 at 09:47, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Thu, Mar 26, 2026 at 05:44:29AM -0600, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Wed, 25 Mar 2026 at 14:18, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Tue, Mar 17, 2026 at 07:18:35AM -0600, Simon Glass wrote:
+> > > > > >
+> > > > > > > Various updates:
+> > > > > > > - c4 lack signing so does not currently build
+> > > > > > > - samus hardware is non-functional
+> > > > > > > - colibrimx8, rockpro64, rock3a, rock5b, rpi5, tk1 and play a=
+re new
+> > > > > > >
+> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > >
+> > > > > > > ---
+> > > > > > > A sample run is here:
+> > > > > > >
+> > > > > > > https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipeline=
+s/29552
+> > > > > > >
+> > > > > > > At present, coral, play, rpi5, snow and vf2 appear to be genu=
+inely
+> > > > > > > broken on -next
+> > > > > > >
+> > > > > > > The ff3399 board needs some investigation.
+> > > > > > >
+> > > > > > >  .gitlab-ci.yml | 46 ++++++++++++++++++++++++++++++++++++----=
+------
+> > > > > > >  1 file changed, 36 insertions(+), 10 deletions(-)
+> > > > > >
+> > > > > > I have two sets of problems with this patch.
+> > > > > >
+> > > > > > One, it doesn't do, but perhaps I wasn't clear enough when brin=
+ging it
+> > > > > > up, change it so that failure to pass is a job failure (it's cu=
+rrently a
+> > > > > > warning). This in turn means people can't tell expected failure=
+ from new
+> > > > > > failure.
+> > > > >
+> > > > > It looks the same as sage...can you post a snippet of what the ru=
+les should
+> > > > > be? It shows failure for me, when the lab fails.
+> > > >
+> > > > https://source.denx.de/u-boot/u-boot/-/pipelines/29670 shows a bunc=
+h of
+> > > > warning for failed boards.
+> > >
+> > > OK, but how did you generate that? Did you see SJG_LAB=3D1 for the
+> > > pipeline? The rules look the same as sage, but perhaps I am missing
+> > > something.
+> >
+> > Yes, I ran the lab job (via the UI instead) in that case and I'm not
+> > sure what you're missing in how you've got your lab setup.
+>=20
+> Just to check, did you pass SJG_LAB=3D1 when you pushed to the pipeline?
 
-I didn't do that migration because it *really* sucks (it depends on the
-SoC, every time, some families from the same semi may share for a while,
-or they may not). And that's why the CFG_SYS namespace was born. I don't
-object to someone else trying to tackle it, which is why I suggested an
-alternative too, that I think would solve the more general problem in a
-way that won't be so painful moving forward either, but it's orthogonal
-to this patch either way.
+Don't recall. Did you find some documentation that says Gitlab treats
+them differently?
+
+> > > > > > Two, when you had previously gone about adding at least colibri=
+mx8 I
+> > > > > > noted that this extended how you were having labgrid build U-Bo=
+ot in an
+> > > > > > even further non-upstreamable manner. As the sage lab yaml show=
+s, we can
+> > > > > > bring in external binaries for buildman (and binman) to find an=
+d use.
+> > > > > > We'll need to extend that logic a bit, to be sure, but it's a s=
+olvable
+> > > > > > problem with the baseline already there.
+> > > > >
+> > > > > Not quite. Buildman builds U-Boot, it's just kicked off by Labgri=
+d (via a
+> > > > > U-Boot 'provider' class), with some pre-built Intel binaries for =
+x86, plus
+> > > > > BL31, etc. put in as environment variables. My design approach is=
+ different
+> > > > > from Sage, in that I often connect to boards interactively, send =
+U-Boot
+> > > > > over USB in some cases (so different files are needed depending o=
+n the
+> > > > > board) and at the moment I have all boards connected to a single =
+server.
+> > > > >
+> > > > > Labgrid has 90 open PRs, including my terminal one
+> > > > > <https://github.com/labgrid-project/labgrid/pull/1571> from over =
+a year
+> > > > > ago. There definitely are PRs getting in though (20 so far this y=
+ear). In
+> > > > > terms of upstreaming, my approach has been to break things down i=
+nto
+> > > > > smaller PRs, but four of them are still outstanding after 18 mont=
+hs. I did
+> > > > > ask on irc a few times but didn't get a response.
+> > > >
+> > > > Yes, your approach requires changes to upstream labgrid, while the
+> > > > approach I suggested before, and was able to finally get done a whi=
+le
+> > > > ago, does not, and still allows for using boards interactively. lab=
+grid
+> > > > even supports python well so whatever tooling you wanted around lab=
+grid
+> > > > and building u-boot and anything else could be written in that, ins=
+tead
+> > > > of shell, for example.
+> > >
+> > > Yes I suspect you are right. One of the design decisions I made was to
+> > > put all of the config in one file (the labgrid environment file).
+> > > That's not something that the labgrid projects wants.
+> > >
+> > > I really can't operate with an external terminal program though, as it
+> > > loses output at the top for some boards. Also I need the USB drivers
+> > > and QEMU changes. Perhaps tougher are the changes to the UBootStrategy
+> > > to support sending over USB, different power/reset combinations, etc.
+> > >
+> > > If I could get some of these smaller PRs upstream then I could start
+> > > to do some rework. But until then I'm not it is worth the effort, as
+> > > everything will still be downstream.
+> > >
+> > > I'm definitely keen to replace the shell scripts, probably with
+> > > Python. I've had good results with uman being fast to start, having
+> > > shell aliases, etc.
+> >
+> > You've outlined a direction above that I don't think is good for the
+> > project as a whole which is why I don't want to encourage it by adding
+> > more machines that will only ever work in your version of labgrid and so
+> > it not replicable for others. I don't think anything you're describing
+> > above can't be done today without making upstream changes and that
+> > you've designed yourself in to a corner.
+>=20
+> Here are the main things that are absolutely required:
+> - USB drivers for Tegra, Samsung and Sunxi
+> - Servo driver (for Chromebooks)
+> - Internal terminal, so that boot output is not lost for some boards
+> (I believe we discussed this issue at some length but you have not
+> seen this problem yourself)
+
+That's all maybe required, yes. There are indeed various classes for
+handling different kinds of drivers, and maybe you need to extend
+existing ones, or add another one. I don't know which sunxi case you're
+referring to because Pine64+ is working fine today, for how I have one
+setup. For the terminal one, it would be good if the labgrid community
+could weigh in on your current PR as they certainly know the code better
+than you and I.
+
+> - Update U-Boot strategy to support sending over USB and different
+> reset/recovery combinations, as well as things like colibri-mx8 which
+> need some work-arounds
+>=20
+> I have PRs up for the first three.
+>=20
+> Re the last point, I suspect you would argue for separate 'labgrid'
+> commands to power on, set reset/recovery, do delays, etc. But that
+> logic needs to live...somewhere.
+
+Yes, that's not labgrid, that's something else.
+
+> It is certainly possible for others to replicate the setup[1]. I went
+> to a lot of trouble to document it carefully, too. I did a rebase a
+> few days ago.
+>=20
+> As to the direction, I would like to see some progress on the existing
+> PRs first, since without that I would only be able to support a small
+> subset boards anyway.
+>=20
+> I do have concerns about performance too. How long does it take to run
+> a smoke test for a typical board in your lab?
+
+As long as it takes? My runs on a beaglebone black take longer than
+yours, but I'm also running a lot more tests and that's just what it is.
+And also using a reservation can take longer than just a direct acquire,
+but that's also required for cooperation between humans and CI.
+
+> The main issue is that Labgrid's support for multiple boards in the
+> environment is incomplete, but it is improving, e.g. [2]. When I asked
+> about this I was told that I should be using a separate environment
+> file for each board. I suspect I could move in that direction with a
+> bit more tooling.
+
+I don't quite follow you. Yes, there's been changes merged in 2025 (so
+after you started your work) that make configuration of some things
+cleaner. And yes, you should move in the direction upstream goes.
+
+> I'd also like to move the scripts to Python. For your lab, do you have
+> scripts for interactive use, smoke test, running pytests, etc.?
+
+I mean, I don't need a script for interactive use (I could have one, I
+just don't see the need) and then yes, I've wrapped pytests around it
+for that case.
 
 --=20
 Tom
 
---QbVXbTAhYktKv8t8
+--FYTzrHLkM7PvE8cH
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCadPbzAAKCRAr4qD1Cr/k
-CqDDAQDxQY4uwAhgWcaSOO7O8xwJI9UYr6cinZBj7/+Lq0z7NAEAnZGNmmoMEtSo
-eHBde1OWvP1MUCK9JhoamsGTpb6TWQs=
-=BwMA
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCadPj4AAKCRAr4qD1Cr/k
+Cpr5AQD6TqawCZxzd3V4Z6aVkqzDYiVatt/EMO4mL+tGDpG75AD/dC0FW1/OJiv+
+LlIeIjEK65hLR4/Af9mMizQtdwoPowU=
+=6NKU
 -----END PGP SIGNATURE-----
 
---QbVXbTAhYktKv8t8--
+--FYTzrHLkM7PvE8cH--
