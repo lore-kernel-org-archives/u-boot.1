@@ -4,63 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61DABF46C54
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 15:55:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8854F46C54
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 15:56:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E365E8352B;
-	Mon,  6 Apr 2026 17:55:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
+	by phobos.denx.de (Postfix) with ESMTP id 75F738352B;
+	Mon,  6 Apr 2026 17:56:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="dDpYy0Ur";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="k/IPjqbi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D717283E36; Mon,  6 Apr 2026 17:55:05 +0200 (CEST)
-Received: from out-170.mta1.migadu.com (out-170.mta1.migadu.com
- [95.215.58.170])
+ id 7452B84034; Mon,  6 Apr 2026 17:56:48 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D88BD8341A
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 17:55:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=postmarketos.org
+ by phobos.denx.de (Postfix) with ESMTPS id 026708341A
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 17:56:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=funderscore@postmarketos.org
-Date: Mon, 06 Apr 2026 15:39:38 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1775490901;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4fqDTm1vqvz9t3C;
+ Mon,  6 Apr 2026 17:56:44 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1775491004;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ovO/kbSXcoaoHLw/vJIxEYj2muraHHCNr20wDZh40ho=;
- b=dDpYy0UrmNTX1y/JX9OwJ18P5PiBH2oAnNzZBTh8/rkMHcQSuD7eeDtOKeGeCIMpZjBcM+
- FHyrZ1cBLI82xCNsYX8T6H+w+k/sgWCwN/3iJVO/C2iwq8FaIypwukRNDCzC4dybpK2FIN
- sTm1l76S5Ei8/kQSOekcdnMuBzZFierl5zPyEh2cRzzjgtoZqkgbAslnB/LioYzsoW22Db
- mm8rSuD63femZmNqTeWrgpti1cxbTB0H56OsveyGtE5KrbqgDaiHLeRmO54Gmw7NWYOM71
- JsdW7x3SUzh3lr56a1MmFjJfTo23zLwPDJ2BYfPiWuLNDyM8d5NXoRXf3PYfDw==
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Ferass El Hafidi <funderscore@postmarketos.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>,
- Kory Maincent (TI.com) <kory.maincent@bootlin.com>,
- Simon Glass <sjg@chromium.org>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Anshul Dalal <anshuld@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Martin Schwan <m.schwan@phytec.de>, David Zang <davidzangcs@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>
-Subject: Re: [PATCH 1/2] autoboot: allow custom prompt without requiring
- AUTOBOOT_KEYED
-References: <20260405-ui-cosmetics-v1-0-bffec3cac741@postmarketos.org>
- <20260405-ui-cosmetics-v1-1-bffec3cac741@postmarketos.org>
- <20260406153000.GP41863@bill-the-cat>
-In-Reply-To: <20260406153000.GP41863@bill-the-cat>
-Message-ID: <td2xjd.37hr0tkamw99c@postmarketos.org>
+ bh=NTip3CfntAHg7WoUNMIDeQSXDgZ72tPn+UKxV2r+mec=;
+ b=k/IPjqbi6MgqN5GcDZIK8TOkrYhTtHOcl5PV8p+XLvCvXEU6YBqS6Iyl3TpAaTsdy7GWjd
+ BSg9HglV09UMKLAFdXzfUn3z6fN7qMxGpJRA6VbVjM2GjcpEL4zO6CFW2vy8zoi/eSFsLC
+ 7Pkm9wU55yh40PmD4SJZsiLSXpPuEzuKRQmU/ClO4JJat1j17jHPV52z76/vCtiWojYrL1
+ NB9kqKemOyp7kBD4DdLn90vLh2mIVqEi0BQFIanxrCb2oHvK9vflVNKQQx/rwJ+I+qXOym
+ C9aArdXJoN/+HdLW/0OAfsPttDFoI31Ibwe50kMjr51HbR6k4XH9CdSDjVd7Lw==
+Message-ID: <7a190e6d-60db-4087-ae1c-9013dc6706bc@mailbox.org>
+Date: Mon, 6 Apr 2026 17:56:41 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset=utf-8; format=flowed
-X-Migadu-Flow: FLOW_OUT
+Subject: Re: [PATCH v1 2/4] common: move ram_base calculation to independent
+ INITCALL()
+To: Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, jonas@kwiboo.se,
+ anshuld@ti.com, sjg@chromium.org, u-boot@lists.denx.de
+References: <20260403090109.3564638-1-ilias.apalodimas@linaro.org>
+ <20260403090109.3564638-3-ilias.apalodimas@linaro.org>
+ <b4015957-76b8-4531-b694-cae143a65f49@mailbox.org>
+ <20260406154105.GQ41863@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260406154105.GQ41863@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: oo4g4rq7rrguhhgr9t8nxzmwipneaet6
+X-MBO-RS-ID: defdf9745d14d601d1a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,94 +79,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 06 Apr 2026 15:30, Tom Rini <trini@konsulko.com> wrote:
->On Sun, Apr 05, 2026 at 10:49:04AM +0000, Ferass El Hafidi wrote:
->
->> The autoboot prompt used to only be customizable in Kconfig when
->> AUTOBOOT_KEYED was enabled. For a usecase such as having a nicer
->> autoboot prompt alongside a splash screen, there is no reason for
->> AUTOBOOT_KEYED to be required for this.
->> 
->> Remove the dependency to AUTOBOOT_KEYED, and use AUTOBOOT_PROMPT in
->> print_boot_delay() instead of a hardcoded string.
->> 
->> Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
->> ---
->>  boot/Kconfig      | 31 ++++++++++++++++---------------
->>  common/autoboot.c |  4 +++-
->>  2 files changed, 19 insertions(+), 16 deletions(-)
->> 
->> diff --git a/boot/Kconfig b/boot/Kconfig
->> index bfed452d77e..6c8ec356996 100644
->> --- a/boot/Kconfig
->> +++ b/boot/Kconfig
->> @@ -1560,6 +1560,22 @@ config AUTOBOOT
->>  	help
->>  	  This enables the autoboot.  See doc/README.autoboot for detail.
->>  
->> +config AUTOBOOT_PROMPT
->> +	string "Autoboot stop prompt"
->> +	default "Autoboot in %d seconds\\n" if AUTOBOOT_KEYED
->> +	default "\\rHit any key to stop autoboot: %d"
->> +	help
->> +	  This string is displayed before the boot delay selected by
->> +	  CONFIG_BOOTDELAY starts. If it is not defined	there is no
->> +	  output indicating that autoboot is in progress.
->> +
->> +	  Note that this define is used as the (only) argument to a
->> +	  printf() call, so it may contain '%' format specifications,
->> +	  provided that it also includes, separated by commas exactly
->> +	  like in a printf statement, the required arguments. It is
->> +	  the responsibility of the user to select only such arguments
->> +	  that are valid in the given context.
->> +
->>  if AUTOBOOT
->>  
->>  config BOOTDELAY
->> @@ -1597,21 +1613,6 @@ config AUTOBOOT_FLUSH_STDIN
->>  	  This can't be enabled for the sandbox as flushing stdin would
->>  	  break the autoboot unit tests.
->>  
->> -config AUTOBOOT_PROMPT
->> -	string "Autoboot stop prompt"
->> -	default "Autoboot in %d seconds\\n"
->> -	help
->> -	  This string is displayed before the boot delay selected by
->> -	  CONFIG_BOOTDELAY starts. If it is not defined	there is no
->> -	  output indicating that autoboot is in progress.
->> -
->> -	  Note that this define is used as the (only) argument to a
->> -	  printf() call, so it may contain '%' format specifications,
->> -	  provided that it also includes, separated by commas exactly
->> -	  like in a printf statement, the required arguments. It is
->> -	  the responsibility of the user to select only such arguments
->> -	  that are valid in the given context.
->> -
->>  config AUTOBOOT_ENCRYPTION
->>  	bool "Enable encryption in autoboot stopping"
->>  	help
->> diff --git a/common/autoboot.c b/common/autoboot.c
->> index 1783ef92c94..d12d618fea3 100644
->> --- a/common/autoboot.c
->> +++ b/common/autoboot.c
->> @@ -379,7 +379,9 @@ static int abortboot_key_sequence(int bootdelay)
->>  
->>  static void print_boot_delay(int bootdelay)
->>  {
->> -	printf(ANSI_CLEAR_LINE "\rHit any key to stop autoboot: %d", bootdelay);
->> +#ifdef CONFIG_AUTOBOOT_PROMPT
->> +	printf(ANSI_CLEAR_LINE CONFIG_AUTOBOOT_PROMPT, bootdelay);
->> +#endif
->>  }
->>  
->>  static int abortboot_single_key(int bootdelay)
->
->We shouldn't need to guard this, as it's always prompted for now during
->configuration, yes?
->
-
-I did this in case it happened to be unset, and also to provide a way to
-silence the prompt entirely.
-
-Best regards,
-Ferass
+On 4/6/26 5:41 PM, Tom Rini wrote:
+> On Sun, Apr 05, 2026 at 05:59:52AM +0200, Marek Vasut wrote:
+>> On 4/3/26 11:01 AM, Ilias Apalodimas wrote:
+>>> Currently, ram_base is calculated within setup_dest_addr().
+>>> However, upcoming patches that enable U-Boot relocation to the highest
+>>> DRAM bank require ram_base to be initialized earlier.
+>>>
+>>> The default dram_init_banksize() definition relies on ram_base
+>>> to calculate the start of the first bank. But following patches
+>>> will move that function to execute immediately before setup_dest_addr().
+>>>
+>>> So let's split the ram_base initialization in its own INITCALL.
+>>>
+>>> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>>> ---
+>>>    common/board_f.c | 12 +++++++++---
+>>>    1 file changed, 9 insertions(+), 3 deletions(-)
+>>>
+>>> diff --git a/common/board_f.c b/common/board_f.c
+>>> index 91c569da9682..7df92281c35a 100644
+>>> --- a/common/board_f.c
+>>> +++ b/common/board_f.c
+>>> @@ -329,6 +329,14 @@ __weak int arch_setup_dest_addr(void)
+>>>    	return 0;
+>>>    }
+>>> +static int setup_ram_base(void)
+>>> +{
+>>> +#ifdef CFG_SYS_SDRAM_BASE
+>>> +	gd->ram_base = CFG_SYS_SDRAM_BASE;
+>>
+>> Would it make sense to reset the variable to 0 in case CFG_SYS_SDRAM_BASE is
+>> not defined ?
+> 
+> In that gd should be zeroed out do we need to?
+> 
+>> Or better yet, how about moving CFG_SYS_SDRAM_BASE to Kconfig with default
+>> value 0 ?
+> 
+> We don't set default values when a valid value must be provided for a
+> platform to work. It wasn't migrated to Kconfig as it's not really a
+> configurable value, it's something that if we could pull it from the
+> device tree, would be great. A someday middle-ground would be to mimic
+> how Zephyr uses the device tree and get some compile-time constants from
+> the device tree.
+It could still be a Kconfig hex value without description and with 
+default value for each platform. That would still be better than the 
+CFG_* remnants and would simplify this code.
