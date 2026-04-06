@@ -4,128 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0E41EF4EB4
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 07:01:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BA59EF4EC2
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 08:28:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21AA583936;
-	Mon,  6 Apr 2026 09:01:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 544F48394E;
+	Mon,  6 Apr 2026 10:28:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hE22fVuI";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="mmgKNFkd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CED818394E; Mon,  6 Apr 2026 09:01:18 +0200 (CEST)
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::1])
+ id 3A00283A41; Mon,  6 Apr 2026 10:28:09 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B7A88341A
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 09:01:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3565C8352B
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 10:28:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
+ spf=pass smtp.mailfrom=simona.toaca@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NyiGnPbLdin6L0zHfgV9Pli8uj1rxuZ2Cxw7Y2ZLY3PSGJjSSzD5YoEypi4/kSx17PvgisRDY+hOhgJV5IgzAlIRidsYqDj9uB6GqJsyytQZrUwpweS3zlYyUL8Mla/Jul6c9N6RaC/PetdIq6uK5iBuho0PHhClANhY55fskRN4CxRwbV43XRshRdTe8ewZXYSLpXtgFBUO7CV6C1eeayBW+gmZPwmheDeY9bS2FVxgYBcj1B/E8BHHxTWKEHO0IfegGFwAXVaSOUVq8B9+ra1qAXFClsa0TfUt2i+PwT+rrdZQcaYv+ptHWOGvSbG9irgjnZnA88lcBkdwi/S/cQ==
+ b=Oqjxw749hDwf8mw+qSoAVUtGdwXBSC7+W1yCDUADkY+z06xe0uofaLjH6RgA4aGgLN1RE9LYhs/cBHuVj7cDDmKDgbFHZ+YcDshMAb0EMJhBBNf+tf/Ygk2bpLvOIha6of71IkC2RTQ44GOu4mtYpVNpTezw41rIEQ0nP2e1UpoRBKO2gakWnErGWHV1H7KjqrI2zD223lNLseXCRNDC945A5/MV+VoWAlDEcK3wIKckOWsPrrNJFzkp/KCQKsa8MpRHPc9Vi9xXqhv2cqfrYv52ZkCF+OTtt7I2KVkZQP7ricrE03IJ2DCV+uH1ZtuJJN2fiWlt0eG1EhqdsWZXWA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fQaJAS6FAWlfKp73SpUDP17YQWuyjDihCetnuNgezd8=;
- b=f4wvUZbXexAZ/i9uXU57Cu9xnam5zYwdxvYO/zsyIXcoa0mn23Yyqe8ln+pgV2Hj1X4/La8/3UAMyh5GSv0UcrlKlRfHZ2EzOy2zaVfAkggiRt5uxsORtigQn2whBDNMzpfvA92NuxeSt2r9k5hxGWRgOp8c0mM4zQBto6VvAJcwRyPgFtk07uvqOoMVuN8ps59eFIKmVdiPl+O1U90F4fxHUrP3djBeb3/2Azlt0lHvoSuSpuLH7uwUmZiUhc8PNZjtRenuyug52oJ1MKqZPFlXbt8noMRO524I6Qx4A9KiY9X8NYqxiG8EjKvwPeW+VC4dte84BdMK2qXmMgzjRA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=/q2C6NQJknQBbACphqejOTRUQO1e8YWIHoTHyhkz1OA=;
+ b=Lws7ZdiL/Lyc/r937lkUwUFxVcuEZD0GtfKWPcPVtjJ6h6ecM5gprnOUHk5cFwCCW4skmHMFWrtmJNJI+2zkDSAE7utCfQei6knCot7+dQUrJQpZIUSi2GWK7F6gv4CtEVdDKGGTZfF75APnD29MMX1Ty00q0drqB+Aa47GRuNubMHebFVWHvzlfPYJdNiUDLqMSqxtZLX41ZKG5amtJmOJh+hHk/bqGQMW7Hch8MnM0IN9WY4k4s7rrzv60I1EeghbsMWzYLQ4opYioog9LijBx6v1IQappf42ofn497VoG4eQvf3kjFaNOjKH8O9A0x5D1I4u9V8jpHh/Cm8hDOw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fQaJAS6FAWlfKp73SpUDP17YQWuyjDihCetnuNgezd8=;
- b=hE22fVuIQvCEag4J5ZwTCNVKT+C7k5SGdJ2BGhPWbzVCYKOaWWQPZfRqGetwsPZ5hibEN+aUzqjFu4fhSzkWIs5Vl1GMZCBcJN92hZYf+W6vRGs+w7UgJHVWj/S1AxIyMhKvx0I4V98T1nrIOFSeDdjyCnGBUqD7Y91TZdEREl0=
-Received: from DM6PR08CA0041.namprd08.prod.outlook.com (2603:10b6:5:1e0::15)
- by LV3PR10MB7795.namprd10.prod.outlook.com (2603:10b6:408:1b6::12) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=/q2C6NQJknQBbACphqejOTRUQO1e8YWIHoTHyhkz1OA=;
+ b=mmgKNFkdt3lCFYGc9IvbEeps/NVfsxPnj2dwmhWdSduxmwuqaZ+jfqZZljw32Z1ei4QSkr4lOpXpjdQOkatXgVzXIYILz30ZGbzP+5z/XS7L0FXrjQsgBt4g8aMFZbLrPqnYCSqEcQEnoNH27l88zr2kDD6CG8DkAe1PT2StxJduNXUUc/IHegHEkWi6D5bs8BlwtM0DX1eShO9G216+WbXf7LyP7S2ChUwAX6tqvsX5Cin8tWiYVpMCcI+eIT6+LHnUCrHiBU0w0hWNZ3yGYLEuBBGI2nZngI0nOQ3miO1Ukc+4EHqSPOeD3zUpOuT+ZMf13qbXxHgDmdLuaSY79A==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from VI0PR04MB11917.eurprd04.prod.outlook.com (2603:10a6:800:306::9)
+ by PA1PR04MB10098.eurprd04.prod.outlook.com (2603:10a6:102:45b::6)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.17; Mon, 6 Apr
- 2026 07:01:13 +0000
-Received: from DS3PEPF0000C381.namprd04.prod.outlook.com
- (2603:10b6:5:1e0:cafe::ae) by DM6PR08CA0041.outlook.office365.com
- (2603:10b6:5:1e0::15) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.32 via Frontend Transport; Mon,
- 6 Apr 2026 07:00:54 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- DS3PEPF0000C381.mail.protection.outlook.com (10.167.23.11) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9769.17 via Frontend Transport; Mon, 6 Apr 2026 07:01:10 +0000
-Received: from DLEE200.ent.ti.com (157.170.170.75) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 6 Apr
- 2026 02:01:10 -0500
-Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE200.ent.ti.com
- (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 6 Apr
- 2026 02:01:09 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE204.ent.ti.com
- (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 6 Apr 2026 02:01:09 -0500
-Received: from [10.24.73.74] (uda0492258.dhcp.ti.com [10.24.73.74])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 636717lj275275;
- Mon, 6 Apr 2026 02:01:07 -0500
-Message-ID: <d8699cf4-3e4e-456e-894b-f086bd7a6ece@ti.com>
-Date: Mon, 6 Apr 2026 12:33:14 +0530
+ 2026 08:28:04 +0000
+Received: from VI0PR04MB11917.eurprd04.prod.outlook.com
+ ([fe80::a506:3460:d2bc:26e7]) by VI0PR04MB11917.eurprd04.prod.outlook.com
+ ([fe80::a506:3460:d2bc:26e7%4]) with mapi id 15.20.9769.016; Mon, 6 Apr 2026
+ 08:28:04 +0000
+Date: Mon, 6 Apr 2026 11:39:36 +0300
+From: Simona Toaca <simona.toaca@oss.nxp.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: uboot-imx@nxp.com, u-boot@lists.denx.de, 
+ Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com, peng.fan@nxp.com,
+ alice.guo@nxp.com, 
+ viorel.suman@nxp.com, simona.toaca@nxp.com, ye.li@nxp.com, ping.bai@nxp.com, 
+ marex@nabladev.com, sebastien.szymanski@armadeus.com, ravi@prevas.dk, 
+ joao.goncalves@toradex.com, ji.luo@nxp.com, semen.protsenko@linaro.org, 
+ tharvey@gateworks.com, qijian.guo@nxp.com
+Subject: Re: [PATCH v3 1/6] imx9: Add support for saving DDR training data to
+ NVM
+Message-ID: <mtfbgewm7kw4jzmxjkksdmq2ahb3mdrb6p5bi5qvpow2tydyl7@bejuojige3bw>
+References: <cover.1775121078.git.simona.toaca@nxp.com>
+ <7edcce04b39aabc1f58e09814e7fadff226e2bb8.1775121078.git.simona.toaca@nxp.com>
+ <CAFLszTgb5a3QtyviHc-MRTdDUoDUWnYksWXMeCUxagHmvfQK2g@mail.gmail.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAFLszTgb5a3QtyviHc-MRTdDUoDUWnYksWXMeCUxagHmvfQK2g@mail.gmail.com>
+X-ClientProxiedBy: AS4P195CA0007.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:20b:5e2::7) To VI0PR04MB11917.eurprd04.prod.outlook.com
+ (2603:10a6:800:306::9)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-CC: <trini@konsulko.com>, <minda.chen@starfivetech.com>,
- <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
-Subject: Re: [PATCH] usb: cdns3: fix cdns3_bind() to avoid returning error and
- probe parent
-To: Marek Vasut <marek.vasut@mailbox.org>, <marex@denx.de>
-References: <20260227055954.3916518-1-s-vadapalli@ti.com>
- <4d8848d2-3a4e-4025-aeac-c15592b16276@mailbox.org>
- <c5e0e61b-a8ab-4186-9460-84221d843542@ti.com>
- <f19e58ad-58ed-4d5b-a348-6d2270e546f0@mailbox.org>
- <992e9023-48dd-460e-a783-9caf58f5e944@ti.com>
- <860de90a-ef7f-499f-9288-61b1f6150342@mailbox.org>
- <17a341aa-4711-4389-8ea1-a8169616baeb@ti.com>
- <a0d9a46b-1040-4c0a-bb64-4d1fb0d8e8f0@mailbox.org>
-Content-Language: en-US
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-In-Reply-To: <a0d9a46b-1040-4c0a-bb64-4d1fb0d8e8f0@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
+X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF0000C381:EE_|LV3PR10MB7795:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6bc15f14-24ce-4a5a-2eca-08de93aa48a1
+X-MS-TrafficTypeDiagnostic: VI0PR04MB11917:EE_|PA1PR04MB10098:EE_
+X-MS-Office365-Filtering-Correlation-Id: b311e28b-68fe-4339-1831-08de93b66c50
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700016|1800799024|376014|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: d9Gl/hklAc0eGVzPQPEN3SbTI+cX/+TTHUaQ0mQtja9HbQef6FuiN8I7+qNTMiBc+UQk2hDE56DIYwl9bRQWv2IsIXPobXi/YyxMnnHsrcZxn94iaMMRAS/Qc0AEMNBAoB6/IC2j1W+eRkNKr7nEy1zL8xl/3SsTjIJzWzKk6JAnYZJuzJqycwVPOQoHuT7wqk8QLOWSqH9lsu0ld7vQSICpjfzc8auq1ZBwxN/paT4pIF9dK3JRyg1ZEZwOOVLI1HN3I2/w1IRXGeMsYI93vTTMNcHpeGBTHLWNLqeLjNve41c2FrD29DjjX7WLNq3r9e57zocPbyrutWuRI2SN9fSSzaINFxYOv4N4ETj4PNnRNoahX8JYffSga3jX478/hHPjF6oa9vRDxnT1Dp1LhQfdn2O545nedu8FlihVMu9jFLx6lj+NwhvFX1kMG4NcAIy27j4e1udR0r3/qo0lQtHxX5CnM1w3aYhTgcOZOEMSCVE6BW5hnTXSQ9HjHAcy69C4nhf0BOKwgGLzkfhnjjyplgb2Km55yPVO3zkyP47JaGGzSqnQXSp5Efn1U4qA3L2ym3+mmZwX6qO53QVZ4vDBzkxn5W2Ik3HQItvQL6qHttae3aUrjh0PAQljpvpupwmD7FhdIp69vA7I0Rmj6ZB0B6d75nM//hJGKk4eI79qkXVvXgprdQJ1dpLLu+XwSlIjNitkCn5Z2FuaYiwWVp7E77o4T46XuOzsCezeOPvliqpShMnvX4/UtM5cn4xZbCor8hq8te705bDco+N+Dg==
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(82310400026)(36860700016)(1800799024)(376014)(56012099003)(18002099003)(22082099003);
+ ARA:13230040|1800799024|19092799006|366016|376014|7416014|22082099003|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: 7+NbvJLykbs6qlyPo2Gxc2osoxPJH/VPzlzSdFYwZQ9EWgyQBT2IVhp7R9BXa9iDH2uJ+848IDhS0bGksvBhcA0aC59aV0taZbpPsO5hTTHHD1aXxJdblJXoNjdHKSoApe5anuMj1Lko1YL/dRheG7Q4U1yMJ/TR0D5fVRVSUwSUday4cCDiD9SLFxL234b4QQKavPir5V3i4AOhtVFnNRcDGQfT2ee873nW4dhqrCaTH0sUUkq8mTyqeMy3neO+s7DB9HfOt/wAuqmXj/73PY3At/epSryCImoz/q4Q1kXARRpT/jDWItxlgwvOVN7TZm2CZFVfzEWHjaMvp5/8cHmmojP8+Wvys0mStROng5lptp6qhhJT61rWYjvUDNwGAmBjPKhQ0JQtWjgw4BPXgEfe15oVHuXSigpOnEeJ+pBn3gqMg3l3qHfpyj97dzJEJMMI4EuFEuSaWDhmxObj7bdAf5+GNVhp565w/pQLMDIlzJ6tzKrJhUFF5b3P696ZqvjCKv9xsil9WLiaNRY0P6YqwPnzkfU+GbRUs2Yo7aj5ze8BwGQWSxd6rOHEWcxfmlhSvI73Q6WZmmYyYNz1qKveRk51L0+7fxbO1Mmor8MhPYEcReajVwYxOIiRCQ7yhCo3ErhnDF1dyvK+FUXUrGk9TEDzzglgSsSVAeXCGtWJ9gRLlQag709s/9dVDx+5pTL2TWUbv1gjXJAsfl94pVl/Fr9AgybHrcbkUj+6Moc=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:VI0PR04MB11917.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(19092799006)(366016)(376014)(7416014)(22082099003)(18002099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 6Ktv3UF6SdlpMNDpK8jp8/Z3Zh24GriXvDFAlG3N5i4WlvJYt9MxENuDsjF6nTMr+ioPU6/PI0i0NC8HeteV0VdrzVNJnyvCzLu0YMFM5XEIr53hUgJS2SgHWumLfjaJ+AkLCReN7JlMPMmoH6j3pKGVqF5ttM439nHdULXyagYOIkHKa1F7+3p2j6OP0KjiimbVVF3vKrLDHdTdv5GCz/Tu/h/U8P07VZt3OfYAGLniLT+ZtE2BSfkHTIXgoEyOYw7RCw8u5sYSBR7W8hX4CA4JNBmEkvIZOzkHpEZg+FVZssVI5xDEUmi4gKVJHZrVEAx5kO8ju98ctsCzj1KhTJ0yLo2+tDxN2MgSvvZYXzXnCb8XBYBQOM5bGWM0OtWhImg59FU134mIgxBIXr+e3snLMznyL8xACLvdwn++iU93A7HGsjDn5ne7Z8E35x1+
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Apr 2026 07:01:10.4454 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6bc15f14-24ce-4a5a-2eca-08de93aa48a1
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF0000C381.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR10MB7795
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gwGYbwSG3wQa1oCMwvsdtbtVKmlRuNMYQ/5l4f6Rq4aCqHvkFHC8J+SPCuTp?=
+ =?us-ascii?Q?3aFr/pPnxE1yzPXPqQiZ6KKv1030E6HxdGtB1sRlNtdjxUl2OPcZvZDJIklE?=
+ =?us-ascii?Q?El7sZuaUFBqgFZhQCRvwi/w8PPeOwEcXV39uUAYzadH/RdmQHqrTgDjoHkhk?=
+ =?us-ascii?Q?dxMXvo6BXFJ51YMlf4WnA1RDZURKEICCrFkCW/AEPP4fomA51n499bx6qW2l?=
+ =?us-ascii?Q?TalRRqnDU6Vljd82ejSsJP/fMdmNviRDGJoZYRHouK4ua53Va/6u9KiudCqd?=
+ =?us-ascii?Q?Vu1S8CFh7BZWR2uwql7pZQ1hTo1ZGMJIa2r7kB5fqF9awJ1DHFVHxHNd3WOk?=
+ =?us-ascii?Q?aud7mx1t+SvGJuEo32+TO3wQqlvkhAe6FCZP70ATocAcWAye9oDV2FaieRx4?=
+ =?us-ascii?Q?d6cTYeakiEnDKB5wxQa0CqfooHff3sfEFUgJphw8tNKBI5R0jJktCChwCSc/?=
+ =?us-ascii?Q?2IubX3TzTmyqDqAZ/loybZwfwIWD5/Eh+/Bk/F6VZ1M/jFakGkRzW65QZPNk?=
+ =?us-ascii?Q?X0z3z3eNX1q8ee3LBUNm13qxmNoCU2eE/gA3sHTCI/Xp7U6plWduhbyEzM2C?=
+ =?us-ascii?Q?ucXaWBvueZqZAUygftM+hpFDgzpXZiudquGjESX/xCIQV4bFNVZb6FoagXYi?=
+ =?us-ascii?Q?amwSy7cL1+oZhP5gaoDnj+He/r/JmKTC9716ytfQuCAC6zQUs8zRlfsBpKAa?=
+ =?us-ascii?Q?VJVL6qzOHkUJWSWd60iH9YYBtqxGuBdSnzq7zkcSqrJ2EMq4bfibqBGF0Ruy?=
+ =?us-ascii?Q?SHsj6s0CPcHC5O6+oXMd3qq8cey5GNwVNDO36s1ZdYje4a9o8t3AP08LCR2s?=
+ =?us-ascii?Q?tl6uPFc6qLwxHOh1KrZ1p6EhgbW4g6Ot38J7ldEPSJ+A0SpcIFGzgzMAEFzQ?=
+ =?us-ascii?Q?woctwEIIW0hawTvB47Wnb6aKv8KI8f5SiZpBbgFIuDMCxGId0aAM0mGZY3cB?=
+ =?us-ascii?Q?M/U+uUOHnwJqj9P4x86DlgRqekuIb9qQsfDJoSCM13xAbcfEeSzMdpaVEfay?=
+ =?us-ascii?Q?dlH6t5l1tS6yCZbWAzJbHzM7XQ6iLji1l1c8uLVhdjA1AENawuY4r4O4uIPB?=
+ =?us-ascii?Q?uh8v0h8eJbS0rCMB/WKAWHUh6FBEDoxQ6YE8HZcpzN8rrRlZqbQCeVxiRax4?=
+ =?us-ascii?Q?uBD7i/3fGpdPmoCq58zOYzySubW9BvvfIufDwiTM/v+1cYBDq+0O9MqIn/s2?=
+ =?us-ascii?Q?61IcQIY8t/rmDMt39Ssw33mNxtpGxtjoFJy/AKiWicD9QshrGXph5SgJEmUu?=
+ =?us-ascii?Q?kqN9osQTEF/5tayuSbHBbb/v+TdHgooTyA2SyA3ovk1FJhG+7/Fq6KhZwqTj?=
+ =?us-ascii?Q?Ks8gh8Vis3SirhnTK9EdLpa8iK3xBgiEU1m0iY1HfkoR0dpphGKGMOvondVZ?=
+ =?us-ascii?Q?2BdEHMCHJqrHwBP7B+Uxiq0ODE+24LJ+Dxi97cW20DOR8MGc1fZkNuImh0ot?=
+ =?us-ascii?Q?Z6ko223oeL075hVptgJzLPKRLvfRvHQls7mpdR9QUireL99sERKhKX93dxCa?=
+ =?us-ascii?Q?rW67CEVOt1N8Ie+7gN+FwLv+NCXhwHTWX3G33o3r389KCk4I2fibhOf7et1P?=
+ =?us-ascii?Q?jGcwHaMooXV4bsbjPRhZuIpxyfv0/33o+isI/NolfvdEQ94AJxxzzZuGZ5s0?=
+ =?us-ascii?Q?vyOV3QAJdNjIgcInCTp2fo6KwEBATPJPP4zpHAGjGV+ENRNEA3WLfti2u8jv?=
+ =?us-ascii?Q?S6ONLjgqeCgh+Mm41+2XHoo4MqoBzgEdYdtnPqAhgHiQWFaAYwKev9bwp2hN?=
+ =?us-ascii?Q?lAdNiB27hA=3D=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b311e28b-68fe-4339-1831-08de93b66c50
+X-MS-Exchange-CrossTenant-AuthSource: VI0PR04MB11917.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Apr 2026 08:28:04.6334 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: A9fo2sgo235uEAgVBvQPU9pQk5e+y2u2ma4R5VTFte1TP5B3xGWA7jw4bIjBKeF9GctE7qzdJy0xSJCqqh+oAQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10098
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -142,110 +148,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 04/04/26 04:05, Marek Vasut wrote:
-> On 3/4/26 7:46 AM, Siddharth Vadapalli wrote:
->> On 03/03/26 19:37, Marek Vasut wrote:
->>> On 3/1/26 6:25 AM, Siddharth Vadapalli wrote:
->>>
->>>>>> There are two users of cdns3_bind() which have registered their 
->>>>>> own .bind() callback as cdns3_bind():
->>>>>> 1. cdns3-starfive.c driver
->>>>>> 2. cdns3-ti.c driver
->>>>>> Since .bind() is called before .probe()
->>>>>
->>>>> .bind callback is meant to BIND the driver instance (to a DT node), it 
->>>>> is not meant to initialize the hardware. .probe callback is meant to 
->>>>
->>>> I agree. But that's exactly where the issue lies. When 'dr_mode' is set 
->>>> to OTG, cdns3_bind() is unable to determine if the driver to bind to 
->>>> the DT node is "cdns-usb3-host" or "cdns-usb3-peripheral".
->>>>
->>>> Since [0], we attempt to identify if OTG should imply 'peripheral' or 
->>>> 'host'. But to do that, [0] needs to read the VBUS Valid field of the 
->>>> OTG Status register. And register access requires the USB Controller to 
->>>> be powered ON.
->>>
->>> Correct, so bind is the wrong place to do any HW access .
->>>
->>>> [0]: bfb530e06ca6 ("usb: cdns3: use VBUS Valid to determine role for 
->>>> dr_mode OTG")
->>>>
->>>>> initialize the hardware. This is fundamental part of the U-Boot DM 
->>>>> lazy initialization scheme. If something does initialize hardware 
->>>>> in .bind, then it is very likely wrong.
->>>>>
->>>>>> , and, since cdns3_bind() is also the .bind() callback of the above 
->>>>>> drivers, device_probe() has to be added here itself. Moreover, it is 
->>>>>> only due to the register accesses being performed by the recently 
->>>>>> introduced cdns3_get_otg_mode() function that we need the USB 
->>>>>> Controller to be powered ON at this stage.
->>>>> So, can we fix this so the HW initialization won't be happening in 
->>>>> bind, but instead in .probe ?
->>>>
->>>> That isn't possible
->>>
->>> Can you investigate how to make that possible ? Maybe by having some 
->>> common .probe implementation that would determine the OTG state, or by 
->>> having some stub driver which handles the OTG selection ?
->> A common .probe will not work because the .id has to be either
->> UCLASS_USB_GADGET_GENERIC OR UCLASS_USB
->> for the new stub driver (say cdns-usb3-otg). By fixing .id beforehand, we 
->> will always fail to probe the driver for the case where the desired role 
->> is the opposite of the role corresponding to .id.
+Hi Simon,
+
+On Sun, Apr 05, 2026 at 05:49:56AM -0600, Simon Glass wrote:
+> Hi,
 > 
-> Looking at this one more time, drivers/usb/cdns3/cdns3-ti.c is already 
-> UCLASS_NOP , that is the parent driver that you are trying to probe in bind 
-> here, right ?
-
-Yes.
-
+> On Thu, 2 Apr 2026 at 03:29, Simona Toaca (OSS)
+> <simona.toaca@oss.nxp.com> wrote:
+> >
+> > From: Simona Toaca <simona.toaca@nxp.com>
+> >
+> > DDR training data can be saved to NVM and be available
+> > to OEI at boot time, which will trigger QuickBoot flow.
+> >
+> > U-Boot only checks for data integrity (CRC32), while
+> > OEI is in charge of authentication when it tries to
+> > load the data from NVM.
+> >
+> > On iMX95 A0/A1, 'authentication' is done via another
+> > CRC32. On the other boards, authentication is done by
+> > using ELE to check the MAC stored in the ddrphy_qb_state
+> > structure.
+> >
+> > Supported platforms: iMX94, iMX95, iMX952 (using OEI)
+> > Supported storage types: eMMC, SD, SPI flash.
+> >
+> > Signed-off-by: Viorel Suman <viorel.suman@nxp.com>
+> > Signed-off-by: Ye Li <ye.li@nxp.com>
+> > Signed-off-by: Simona Toaca <simona.toaca@nxp.com>
+> > ---
+> >  arch/arm/include/asm/arch-imx9/ddr.h |  48 +++-
+> >  arch/arm/include/asm/mach-imx/qb.h   |  15 ++
+> >  arch/arm/mach-imx/imx9/Makefile      |   6 +-
+> >  arch/arm/mach-imx/imx9/qb.c          | 379 +++++++++++++++++++++++++++
+> >  arch/arm/mach-imx/imx9/scmi/soc.c    |   7 +
+> >  drivers/ddr/imx/imx9/Kconfig         |   7 +
+> >  6 files changed, 459 insertions(+), 3 deletions(-)
+> >  create mode 100644 arch/arm/include/asm/mach-imx/qb.h
+> >  create mode 100644 arch/arm/mach-imx/imx9/qb.c
 > 
-> Could you instead flag that cdns3-ti.c with dev_or_flags(dev, 
-> DM_FLAG_PROBE_AFTER_BIND); so it would probe early ? Would that resolve 
-> this problem too ?
-
-DM_FLAG_PROBE_AFTER_BIND will not fix the issue because:
-1. cdns3-ti.c registers cdns3_bind() as its .bind() callback.
-2. cdns3_bind() will be called before the .probe() callback of cdns3-ti.c
-    even with DM_FLAG_PROBE_AFTER_BIND
-3. With cdns3_bind() being called before .probe() of cdns3-ti.c, the USB
-    Controller is still Powered OFF.
-I have tested it nevertheless and have confirmed that the issue isn't fixed.
-
+> Note that this feature is present on x86 boards already.
 > 
-> And just a follow up idea, if you were to stop DM scan at DT compatible = 
-> "ti,j721e-usb"; in dts/upstream/src/arm64/ti/k3-j784s4-j742s2-main- 
-> common.dtsi (i.e. the cdns3 driver wouldn't bind at all), maybe you could 
-> make the cdns3-ti.c bind the right driver (peripheral or host) the same way
+> I wonder if we could make this more generic? E.g. it could be a
+> function of UCLASS_RAM ? I could do the x86 part to try it out if you
+> like.
+> 
 
-For cdns3-ti.c to bind the right driver, it still needs to read the OTG 
-register when dr_mode is set to otg in the device-tree. This would mean 
-that the USB Controller has to be powered ON. Since controller is powered 
-ON by cdns_ti_probe (.probe callback of cdns3-ti.c), a different .bind 
-callback in cdns3-ti.c will still not fix the issue.
+Can you please point me to the implementation for x86? This Quickboot
+feature is specific to Synopsis DDR PHYs, and the location where we
+save this data is specific to iMX9 series (since it is needed by OEI).
+I need a bit more details about what you mean.
 
-> e.g. block device partitions or USB devices are bound during 'mmc rescan' 
-> or 'usb reset' . All those devices are instantiated after the initial DM 
-> scan and after the controller to which they are attached has been probed. 
-> This might be the way to avoid probe in bind too ?
-
-The device-tree node layout and the corresponding drivers / callbacks are 
-as follows:
-
-	usbss0: usb@4104000 {
-		compatible = "ti,j721e-usb"; => cdns3-ti.c driver
-		[...]
-		usb0: usb@6000000 {
-			compatible = "cdns,usb3";
-			[...]
-		};
-	};
-
-First, the cdns3-ti.c driver's .bind callback is invoked. Since cdns3-ti.c 
-registered cdns3_bind() as the .bind callback, cdns3_bind() is invoked 
-before the .probe callback of cdns3-ti.c driver is invoked. As a result,
-the USB Controller is still powered OFF for non-USB Boot Modes when 
-cdns3_bind() executes.
-
-Regards,
-Siddharth.
+Thank you,
+Simona
