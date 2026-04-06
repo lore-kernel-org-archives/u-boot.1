@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46CD7F46C5A
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 16:51:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97AA7F46C59
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 16:51:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6FC684150;
-	Mon,  6 Apr 2026 18:50:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 27F9E8416F;
+	Mon,  6 Apr 2026 18:50:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CoIz8Mv9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WHdEkib5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CF6F83936; Mon,  6 Apr 2026 16:21:19 +0200 (CEST)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
+ id 5DAF083F98; Mon,  6 Apr 2026 16:27:45 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22F8C8341A
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 16:21:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 26EDD83936
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 16:27:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-41576c5c01cso2343626fac.3
- for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 07:21:17 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7dbe437b072so515355a34.2
+ for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 07:27:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1775485276; x=1776090076; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1775485662; x=1776090462; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Uvy2nKkcWHJOYzO8KVeo3wpgAOj2xNbtg8Jve24Uexg=;
- b=CoIz8Mv9hE++EmCDxAeg4Rh3sJ9rSgDZqec+d7SjzmV1AoYuvWYK+X6wCIowYAOiF1
- nFbmITX769nf9mpWeZvs/KsDw0LrKz88kd/5TP8fydouky7Msu3YHvG1qT5Gf/ELDhGs
- wApDgraXrhNbJ5NTRN4ngTSKFkYw7hreTY6+E=
+ bh=9W9hFBVypTGBDECS3g5ONLr0VI9EAl1V7TGS4Z9P6Ng=;
+ b=WHdEkib5I0l4mJeVFxarz0x5q5aEChjtyfGVd4gvThBwULNTUxaIBC3v+ZD7pxevA2
+ p8atDDM5BE/fkZk+lIXbfiAsoJzed9qOkoY+WlXh+yFXIQHDbU9DH9AltZxeBh4Q/gju
+ hkLmPJwJGnsC+Rfexf2E5VnL8vcNTy32A9uj4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775485276; x=1776090076;
+ d=1e100.net; s=20251104; t=1775485662; x=1776090462;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Uvy2nKkcWHJOYzO8KVeo3wpgAOj2xNbtg8Jve24Uexg=;
- b=on2SDGGUUvEKNFkbgbhMo1/BoNMjOi6JHjEagToTbnhYJLqFlc91sI19+Lq1Qv2HoZ
- 4hcukbwRnIDW34MRDav5GubDRDRsUefAMI8LmOdqnpxzdeg6K4Kd7pfxxj4jK2ns18ke
- AfEYreHXOiNfNkPgO7bZb35TJRPahvvU/dpUZUVz9Mp5BzaiuNO+eyFyEjFkkd5i7QsV
- WULLmFn+gpAeW2co1E7pyjTvBV7qY3hBbC/0vTQjqtbmTT2OrnBUSFyfo5iY4Gut2fPe
- VUtW9l66WJp6fm+7xoTsbQHpGYY0rzyAIUYAwkQLDX9jTB3sgdyO9dTykYnkqSW7nh3S
- JCwQ==
-X-Gm-Message-State: AOJu0YwdBSiwm2Zly+51rjEaCf9dvETAIC9ob/5I31pq+L+dvHfv5IvB
- 3bEaDsFUYfAsN+MlySNg17a5y1SF6dOK/MAdzeZ9gvZJYzStQTodXsRMYllr3N5aIE4=
-X-Gm-Gg: AeBDievAhYuK5xCiEenrrKibIHYSBY5Gy/IRs/iBgbIpMrhdxBdpbi2enqYhI9gSRie
- 2hZhCfNMgtabfosrPiavqY/JEfv/MpVXlD5F4XRE6u5qTJh4L7Qyyzbi3X0j/NIGFVgEu5lVjzz
- 8HIHi8HLXI3+oYye7aU3o6OO5M7/axguc5N2emNjq2R2uIheGEl7e1Qf0jc+SLEfoGK76Nurttu
- 7ASOHe+bMnQ8B9Rvuoll0NK2NMNT1CnyT5HhKo9ocv1jz/8b8zxiLMc6ucfgFz2CReQUJUYq+c0
- ywr6Cir49PKIiL2/yI96+clhhtc+CsZAP2ergQt2jpHLNBVJH3pgHGk3JAiSIdU6GSGr9Uu6Zz6
- ydteamQrJBKUNuWK23W8+OrvAa1bp+GC9FojDwgDKl7YnLSX6YvfHuvYMtEIRoJ8pSEa+8J6sDx
- UVmQjSwpWi31zVBEdqtGUgDd6QeasKN9E2ubmUt3UESqR8v25VtKuJNZ6au9vgFH8O3C9+Mdsaw
- LZ47TtMdrABvmA70xIzVPtdxv+W0n/uV4gwjeuNATpcjEye
-X-Received: by 2002:a05:6870:1718:b0:40a:4467:d5 with SMTP id
- 586e51a60fabf-4230fd85329mr6948106fac.14.1775485275693; 
- Mon, 06 Apr 2026 07:21:15 -0700 (PDT)
+ bh=9W9hFBVypTGBDECS3g5ONLr0VI9EAl1V7TGS4Z9P6Ng=;
+ b=m9CEXhbDRSS7/J50wq9wOkJ/mmw9NWpAh69cUUMEFh7fyOUQ/v1Gm0W4SqDVpWJhUi
+ Ntn4ClfaWoOAeqfRXEBzcr+KEBlkVrV7I0BUz11mdyM21VUsVPKCvJUTAUpG6WzkB7n+
+ JeJnfHlBLu+AQrUo7rFM3mkwsjS9ojy3fz1kEUCo1a6QL5TTrT7NRng7Pnt2DL93qD3O
+ 0WC54TJZBY26P6SDquLlk8R90LeiYR/MKGySgsVEHwabCcL/GGwGyj9ZkV0D6/mOxk7T
+ 4tvYRxr2+MHZrsLucJOQhI+6CzcRk/58sbQaZsct2SgMFcE1FKu8JmhLtzwpqUdGsdQi
+ MQRg==
+X-Gm-Message-State: AOJu0YyWr7+tKEKeYkEroA0S7aaLbHzvUqE/5thnFHVIkcnMM76C213s
+ aQnZD1fH2VIJPS3z5lh0U1ReQsvfGdzIL7+IIBnOegrqyH/AvvM31dOvzGJKiIlfT8Q=
+X-Gm-Gg: AeBDietbNK/Jkj2N9uhU7CeDx534ES8vN57c1R7tMMEzh1eMGCZIN+jSN3vOmlRZbYU
+ GE6GqVUUNJOoZr2f1XzaEqZ/6kifAQ3vqlfddUF64UrDDPcIoG/GLodPaP33SfGtvOfjzEyOpm3
+ BRMMpZ/O8N8M4tT1LgrFs27DWRrBIkpz5+GGp/6zJTatv5DO8if+AcvXbzNCq38PvEZv8UPrPDY
+ t4pnXR3V3tG9hRw+C74fCTfbyRK8ptTKml+hbKBw7XMBEiT55ERjNshQpuxGBZNHCwo6+JesEK6
+ hXt7E+IWwdMzTJw/T9b0BgHqou+RzKrp+r/EPD9tkfBnL+IKBCtqopFIYjq0CtFf+KdciNzSpv+
+ SmmGjL15ryRrs5oEVzDmhk277Q/lgiK/+gI8P4FconCbxsEfkr+cHjTPwnvU2kF4Exsm69gGvu0
+ Ujw27hbpMC1fcybCDB3EzRJSxZwItihPxtGV8H0M/ZnRbBZFBLP8QZH4NGXPfSWR+9G488hSoLD
+ wTFwgHP9/pnNHlWIq2MeM4NfPDhTZQl9ZCbm4tR0et0sDfD
+X-Received: by 2002:a05:6820:60f:b0:683:4783:3e64 with SMTP id
+ 006d021491bc7-68347833f0fmr5519167eaf.62.1775485661686; 
+ Mon, 06 Apr 2026 07:27:41 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-422eaf94eccsm10196563fac.8.2026.04.06.07.21.13
+ 586e51a60fabf-422eb25a55asm11960972fac.10.2026.04.06.07.27.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Apr 2026 07:21:14 -0700 (PDT)
-Date: Mon, 6 Apr 2026 08:21:11 -0600
+ Mon, 06 Apr 2026 07:27:40 -0700 (PDT)
+Date: Mon, 6 Apr 2026 08:27:37 -0600
 From: Tom Rini <trini@konsulko.com>
 To: michael.srba@seznam.cz
 Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
@@ -101,15 +101,15 @@ Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  Tien Fong Chee <tien.fong.chee@altera.com>,
  Alice Guo <alice.guo@nxp.com>, George Chan <gchan9527@gmail.com>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Subject: Re: [PATCH 3/5] drivers: allow clk_stub and spmi in SPL
-Message-ID: <20260406142111.GM41863@bill-the-cat>
+Subject: Re: [PATCH 4/5] mach-snapdragon: support building SPL
+Message-ID: <20260406142737.GN41863@bill-the-cat>
 References: <20260404-qcom_spl-v1-0-9e6c2ac66587@seznam.cz>
- <20260404-qcom_spl-v1-3-9e6c2ac66587@seznam.cz>
+ <20260404-qcom_spl-v1-4-9e6c2ac66587@seznam.cz>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="OE9UgjIBAOC9t7fi"
+ protocol="application/pgp-signature"; boundary="WHd3HB2uwyBAv0yt"
 Content-Disposition: inline
-In-Reply-To: <20260404-qcom_spl-v1-3-9e6c2ac66587@seznam.cz>
+In-Reply-To: <20260404-qcom_spl-v1-4-9e6c2ac66587@seznam.cz>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-Mailman-Approved-At: Mon, 06 Apr 2026 18:50:36 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -129,47 +129,123 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---OE9UgjIBAOC9t7fi
+--WHd3HB2uwyBAv0yt
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Apr 04, 2026 at 01:18:18AM +0200, michael.srba@seznam.cz wrote:
+On Sat, Apr 04, 2026 at 01:18:19AM +0200, michael.srba@seznam.cz wrote:
+
 > From: Michael Srba <Michael.Srba@seznam.cz>
 >=20
-> Only Makefile and Kconfig changes necessary.
+> Initially sdm845 support is added, and only usb boot
+> is supported for the next stage.
 >=20
 > Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 [snip]
-> diff --git a/drivers/spmi/Kconfig b/drivers/spmi/Kconfig
-> index ab4878ebae4..4c94f2e0ff4 100644
-> --- a/drivers/spmi/Kconfig
-> +++ b/drivers/spmi/Kconfig
-> @@ -8,6 +8,12 @@ config SPMI
->  	  SPMI (System Power Management Interface) bus is used
->  	  to connect PMIC devices on various SoCs.
+> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/=
+Kconfig
+> index 976c0e35fce..938e6ebd8bf 100644
+> --- a/arch/arm/mach-snapdragon/Kconfig
+> +++ b/arch/arm/mach-snapdragon/Kconfig
+> @@ -1,6 +1,24 @@
+>  if ARCH_SNAPDRAGON
 > =20
-> +config SPL_SPMI
-> +	bool "Enable SPMI bus support in SPL"
-> +	depends on SPL_DM
-> +	---help---
-> +	  Select this to SPMI bus support in SPL
+> +# SoC specific SRAM addresses
 > +
+> +# sdm845
+> +SDM845_BOOT_IMEM_BASE :=3D 0x14800000
+> +SDM845_BOOT_IMEM_SIZE :=3D 0x180000
+> +# we may not be able to use the whole BOOT_IMEM depending on the whiteli=
+sted regions hardcoded in PBL
+> +# (we could technically relocate ourselves after the fact)
+> +SDM845_BOOT_IMEM_OFFSET :=3D 0x3f000
+> +SDM845_BOOT_IMEM_USABLE_SIZE :=3D 0xc1000
+> +# technically the below would work, except the memory from 0x14833000 to=
+ 0x1483F000 gets trashed
+> +# between the ELF getting loaded and XBL_SEC jumping to our code
+> +#SDM845_BOOT_IMEM_OFFSET :=3D 0x16000
+> +#SDM845_BOOT_IMEM_USABLE_SIZE :=3D 0xea000
+> +SDM845_OCIMEM_BASE :=3D 0x14680000
+> +SDM845_OCIMEM_SIZE :=3D 0x00040000
+> +SDM845_OCIMEM_END  :=3D $(shell, printf "0x%x\n" "$(dollar)(($(SDM845_OC=
+IMEM_BASE) + $(SDM845_OCIMEM_SIZE) - 1))")
 
-We should avoid adding more "---help---" lines, just use "help" please.
+I didn't know Kconfig even allowed this. And I *really* don't like it,
+and I think it's going in the wrong direction with respect to being able
+to configure a system. If these are configurable, then they need to be
+"hex" type "config" options, and then used later on. Otherwise they
+should just be the evaluated value as "default ... if ..." later on,
+instead.
+
+[snip]
+> +config QCOM_SPL
+> +	bool "Enable SPL for Snapdragon SOCs"
+> +	select SUPPORT_SPL
+> +	select ARMV8_SPL_EXCEPTION_VECTORS
+> +	select ENABLE_ARM_SOC_BOOT0_HOOK
+> +	select SPL
+> +	select SPL_DM
+> +	select SPL_DM_GPIO
+> +	select SPL_DM_PMIC
+> +	select SPL_DM_USB_GADGET
+> +	select SPL_ENV_SUPPORT
+> +	select SPL_GPIO
+> +	select SPL_HAS_BSS_LINKER_SECTION
+> +	select SPL_LIBCOMMON_SUPPORT
+> +	select SPL_LIBDISK_SUPPORT
+> +	select SPL_LIBGENERIC_SUPPORT
+> +	select SPL_MMC
+> +	select SPL_OF_REAL
+> +	select SPL_OF_CONTROL
+> +	select SPL_PINCONF
+> +	select SPL_PINCTRL
+> +	select SPL_PINCTRL_FULL
+> +	select SPL_PINCTRL_GENERIC
+> +	select SPL_PINCONF_RECURSIVE
+> +	select SPL_PINMUX
+> +	select SPL_SPRINTF
+> +	select SPL_STRTO
+> +	select SPL_USB_GADGET
+
+This should be in the appropriate defconfig, or a config fragment if
+re-used a lot. Or mirroring other platforms, as part of the stanza for
+TARGET_... (or ARCH_...) as needed.
+
+[snip]
+> diff --git a/doc/board/qualcomm/spl.rst b/doc/board/qualcomm/spl.rst
+> new file mode 100644
+> index 00000000000..817c76b659e
+> --- /dev/null
+> +++ b/doc/board/qualcomm/spl.rst
+> @@ -0,0 +1,70 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +.. sectionauthor:: Michael Srba <Michael.Srba@seznam.cz>
+> +
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +Booting U-Boot SPL on Qualcomm SoCs
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +Overview
+> +----------
+
+These are style errors that will trip up CI when it builds the docs.
+Please run "make htmldocs KDOC_WERROR=3D1" for v2, thanks.
 
 --=20
 Tom
 
---OE9UgjIBAOC9t7fi
+--WHd3HB2uwyBAv0yt
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCadPBVwAKCRAr4qD1Cr/k
-CtxSAP9XggAaJSPde/MEYg9Vb/tkRE8CCFAoZ+0dtkbqu9PY+wEA7AhhZc40I0TV
-W3PxTXmVQ/jz1e7Xoqg6hmDqYToFMgU=
-=/eof
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCadPC2QAKCRAr4qD1Cr/k
+ChhZAP9RUvoZHvhRqQVYHs8PA7awUrOv2OnUszShDGoCB/B/rwEAh51kcEPf6ML8
+/AAGZpHeFBc9Daz2E/RPjljsz76WLQY=
+=v9l/
 -----END PGP SIGNATURE-----
 
---OE9UgjIBAOC9t7fi--
+--WHd3HB2uwyBAv0yt--
