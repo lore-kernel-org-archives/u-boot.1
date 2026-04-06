@@ -4,134 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5BCCEF4EDF
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 13:04:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AC79F46C45
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 14:24:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 820C483F98;
-	Mon,  6 Apr 2026 15:04:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 2F0DA83936;
+	Mon,  6 Apr 2026 16:24:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="UZcVqbZl";
+	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="ZarTimqn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C31C83C2B; Mon,  6 Apr 2026 14:18:51 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0712483EC6; Mon,  6 Apr 2026 16:24:32 +0200 (CEST)
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [IPv6:2607:f8b0:4864:20::630])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F41E48341A
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 14:18:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 77D568341A
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 16:24:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 9E6E8600AC;
- Mon,  6 Apr 2026 12:18:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 074EBC4CEF7;
- Mon,  6 Apr 2026 12:18:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1775477927;
- bh=4fzMSwoM0psHeMrlVWfL2XZhNC091UNSM0mAXfoA0O0=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=UZcVqbZlCrihf+d1BCWzH+VbTRSvsPIzjl0SBeMMva7NEe3zJHy1Qi3kw3nGHGmMI
- z66F8fdVfv5jwqhO5iF5SptjteMtWBWmUgCVt1aXXZSYItYH2BWhNFcgYhdZpEcYWi
- dJRok01gavINi8tGxMna0eEz/3kxCuHr/sma+zZbIYA9Ra+ZuynMrR+sNFmP2HIwTF
- 2Tzv/Puxn5zTs1W95lD5ddOeDrJc9iYAt+fwYT+Oe4xBi78doSPlv+KTT4HXybI6B9
- PVnm2ei1C38oF/IDHntzVxYTVm2snHvnv5JtU8SqbDdM3tzA0Hc4NcBErmgSsLpEJ2
- g0BxHfaMRhiBw==
-Date: Mon, 6 Apr 2026 17:48:15 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
- u-boot-qcom@groups.io, Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
- Joel Stanley <joel@jms.id.au>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Paul Barker <paul@pbarker.dev>,
- Dai Okamura <okamura.dai@socionext.com>, linux@analog.com,
- uboot-snps-arc@synopsys.com, u-boot-amlogic@groups.io,
- uboot-stm32@st-md-mailman.stormreply.com, Tom Rini <trini@konsulko.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Stephen Boyd <swboyd@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Yannick Fertre <yannick.fertre@foss.st.com>,
- Romain Gantois <romain.gantois@bootlin.com>,
- Raymond Mao <raymondmaoca@gmail.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- Yao Zi <me@ziyao.cc>, Leo Yu-Chi Liang <ycliang@andestech.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Michal Simek <michal.simek@amd.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Peter Korsgaard <peter@korsgaard.com>, Greg Malysa <malysagreg@gmail.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
- Sean Anderson <seanga2@gmail.com>, Liviu Dudau <liviu.dudau@foss.arm.com>,
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
- Robert Marko <robert.marko@sartura.hr>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, Thierry Reding <treding@nvidia.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Philip Molloy <philip.molloy@analog.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Ryan Wanner <Ryan.Wanner@microchip.com>,
- Varshini Rajendran <varshini.rajendran@microchip.com>,
- Manikandan Muralidharan <manikandan.m@microchip.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
- Luca Weiss <luca.weiss@fairphone.com>, Jens Reidel <adrian@mainlining.org>,
- David Wronek <david.wronek@mainlining.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- David Lechner <dlechner@baylibre.com>, Nishanth Menon <nm@ti.com>,
- Alice Guo <alice.guo@nxp.com>, Valentin Caron <valentin.caron@foss.st.com>,
- Senthil Nathan Thangaraj <senthilnathan.thangaraj@amd.com>,
- Naman Trivedi <naman.trivedimanojbhai@amd.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Padmarao Begari <padmarao.begari@amd.com>,
- Jonathan Currier <dullfire@yahoo.com>, Sam Shih <sam.shih@mediatek.com>,
- Conor Dooley <conor.dooley@microchip.com>,
- Stephan Gerhold <stephan.gerhold@linaro.org>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Sam Day <me@samcday.com>, Rui Miguel Silva <rui.silva@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Shmuel Leib Melamud <smelamud@redhat.com>, Jonas Karlman <jonas@kwiboo.se>,
- Finley Xiao <finley.xiao@rock-chips.com>,
- Joseph Chen <chenjh@rock-chips.com>,
- Elaine Zhang <zhangqing@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>,
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Andrew Davis <afd@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Udit Kumar <u-kumar1@ti.com>, Heiko Schocher <hs@nabladev.com>,
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Paul Sajna <sajattack@postmarketos.org>, Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH RFC 00/40] clk: port full Linux Common Clock Framework to
- U-Boot
-Message-ID: <adOkh0qBBLfVWB87@sumit-xelite>
-References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
+ dmarc=none (p=none dis=none) header.from=thingy.jp
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-2b2503753efso32330975ad.0
+ for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 07:24:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=thingy.jp; s=google; t=1775485466; x=1776090266; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=O07v3UUWA5+kYZqsXRX6xkndXVP6XU8diDA9Uwx9Peo=;
+ b=ZarTimqnCDmR4Cu7mm5RtfoqjoGAKdWfeRU50MLBEMkotiIhZllb5QXRo4O85N0xJ1
+ k+vex3GgggeB9B5bTuBHd7xZ5ViDhPyus9MXXOs281+ZQ/IqFwHwHCVVruJT8aP7bYUD
+ djHcEyMjKKiNglC76Y3QifUxoZAbBcqh4fsOc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775485466; x=1776090266;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=O07v3UUWA5+kYZqsXRX6xkndXVP6XU8diDA9Uwx9Peo=;
+ b=qYfH89AazWAiPljFTVLm0V4MHjqNsxFntF2Twf7YPYveswQB2clni8jtN4d9/OYJjA
+ Kj/27pEd8SU7xLctsz8Jd7K0PZW9n2hgMG66YJGevhU+UA7JgftTvB5+r3msfddAo36g
+ uKeFtilQqIk3QugKZ7qM8FVtZaL2ykDu+zRCdCsiUaMxWfF2ZhmzMeSUK77Rlz1bX27d
+ /ELkStimhDD6aQGybQPigSaU5n3cION6Bbm7e16L2gRbuRTo9I+Rif1MzvVtsirOTxXs
+ PXHYg7XoKYal2sBBFKP0YDy4+dAHBJfi1YPPk1HOR8EvUYRjtFcv0NILr2pljTKtSMZf
+ o5/Q==
+X-Gm-Message-State: AOJu0YwZ7yBLFLe7Z1Fj8KRIWaHHmG2XaAZhpfv4W83/zdW3IweZ0hyU
+ m2DP7YyouyWY5U7+yVoKRtniKfRctB4807m4Ww8/oXzP7McHZBCVtZ4zcNF1S7Ium28=
+X-Gm-Gg: AeBDieuDLD5OL7XKUVaxvUVrjP5BDC7NIV/ZxCt/bkqxl86MXMf4IUSiPAhl64cNqJn
+ 0BQYcRL8MdAlzrse28j8Ytsij7WQWxRbjRyi8poYAGKATI+BhBMELsbzS3jGP1cx/MArOIZByuK
+ OiZxCdGN+7Bse0kBBiI6BEG9+JuNcF4xUmPhEpqCCcjFCekueABsdWXf20R9geQxdHaIo6fmzCF
+ 0VYxkTqig/Z6UjAiMiHCrk05b3EDpWvjowEdvJWgrczoUdt7vd7WrPRcKD6nzI+1Gy/ahldzLh4
+ D3nQpq1uZmxSK/2LcL/yUidB4JZnpkQzh6lJpqoahu8+HbLZDJPbq+LZWXF8MOe/Uzc1jIxMgej
+ +qtiorAu7qIfu09kZ77/tNeHRx/SiR+k1tneQrooUMluTunypI4QDI1AHbuSlBmCIZ6xXHt3fF/
+ L7OaWJwZ//s7winmdvG8jtGXD7Bc/+98D65ZIEmQJltW670TQJtVvIr9Bb9awllcVcPyW+nJXE+
+ 7ffSgsG0KPov4ympGnkvQ==
+X-Received: by 2002:a17:903:3586:b0:2b2:6b58:9317 with SMTP id
+ d9443c01a7336-2b28194ec0fmr131379005ad.39.1775485466589; 
+ Mon, 06 Apr 2026 07:24:26 -0700 (PDT)
+Received: from kinako.work.home.arpa
+ (p1866070-ipxg00f01sizuokaden.shizuoka.ocn.ne.jp. [180.1.30.70])
+ by smtp.googlemail.com with ESMTPSA id
+ d9443c01a7336-2b27478cb4fsm156885295ad.29.2026.04.06.07.24.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 06 Apr 2026 07:24:25 -0700 (PDT)
+From: Daniel Palmer <daniel@thingy.jp>
+To: visitorckw@gmail.com,
+	angelo@kernel-space.org,
+	bmeng.cn@gmail.com
+Cc: u-boot@lists.denx.de,
+	Daniel Palmer <daniel@thingy.jp>
+Subject: [PATCH v2 0/5] Add virtio-mmio support to m68k virt machine
+Date: Mon,  6 Apr 2026 23:24:06 +0900
+Message-ID: <20260406142411.2992618-1-daniel@thingy.jp>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
-X-Mailman-Approved-At: Mon, 06 Apr 2026 15:04:07 +0200
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,145 +95,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Mar 19, 2026 at 09:56:22PM +0100, Casey Connolly wrote:
-> This RFC provides a proof of concept for using the full Linux CCF in
-> U-Boot and consequently porting full Linux clock drivers with extremely
-> minimal changes.
-> 
-> == Overview ==
-> 
-> This RFC is pretty long but can be separated into a few chunks. The
-> first patches relate to Linux API compatibility and just contain small
-> self contained changes, these can go upstream regardless of CCF.
-> 
-> The next group of changes prepare for importing CCF from Linux, the
-> standalone fixed clock drivers are moved to clk/basic, the existing
-> U-Boot CCF drivers are moved to clk/uccf, and struct clk_ops is renamed
-> to clk_ops_uboot.
-> 
-> Additionally, clk_set_rate() is changed so that it returns a signed
-> long, since it can return negative values. This is also done to align
-> with CCF but it's a standalone improvement nonetheless.
-> 
-> The next changes import CCF from Linux 6.19 and then adjust it to
-> compile and work with U-Boot. These commits are split up mostly to
-> try and reduce the size. Finally clk-uclass is adjusted for CCF, this
-> definitely will need some additional passes to be a bit cleaner.
-> 
-> With CCF done, sandbox clk-ccf driver gets a CCF_FULL port, the clk_ccf
-> tests are adjusted to pass.
-> 
-> Lastly, a PoC port of Qualcomms Linux clock drivers is done, this
-> only has sm8650 clocks but they serve the desired purpose. The changes
-> necessary to the Linux drivers are mostly to deal with U-Boots driver
-> model, the actual platform specific clock drivers require essentially
-> zero changes!
-> 
-> === Feedback ===
-> 
-> I'd like to get feedback on the overall architecture and ideas, feel
-> free to point out any dead code or printf's I forgot about, but I'll for
-> sure do a more detailed cleanup before the next revision.
-> 
-> I would definitely like to input on how to deal with clk-uclass, since
-> it's now supporting 3 different clock frameworks, but I'm now sure how
-> best to separate the code out without duplicating code.
-> 
-> In terms of overall architecture, CCF is a departure from the uclass
-> model that U-Boot has stuck too for so long. If this is a success then
-> I think it could make a lot of sense to make similar changes for power
-> domains and resets. I think this change offers a lot of additional
-> flexibility which has been sorely missed.
-> 
-> == Motivation ==
-> 
-> There were quite a few motivating factors behind this effort which I
-> think provide useful context for this series:
-> 
-> 1. Existing UCLASS_CLK support in U-Boot (even with U-Boots minimal CCF)
->    doesn't provide a fully cohesive API nor implement the necessary
->    functionality to support complex modern platforms without a lot of
->    additional effort.
-> 
-> 2. While trying to enable display support on Qualcomm, it became clear
->    that U-Boots clock framework was a severe limiting factor,
->    particularly for more complicated setups like "bonded" dual-DSI.
-> 
-> 3. The current state of Qualcomm clock drivers in U-Boot is pretty poor,
->    as the old very basic driver code is being expected to support more
->    and more complicated usecases. Clock support is generally the most
->    complicated part of bringing up any new Qualcomm platform, so being
->    able to properly reuse Linux drivers with the familiar API greatly
->    reduces the amount of friction when working on U-Boot support for
->    complicated peripherals like the display.
-> 
-> Consequently, My aim with this effort was primarily to provide API
-> compatibility with Linux as much as possible, minimising the changes
-> that have to be made to clock drivers to port them from Linux, and
-> reducing the chance of introducing U-Boot specific bugs.
-> 
-> === clk_ops/UCLASS_CLK ===
-> 
-> CCF_FULL drivers should NOT use UCLASS_CLK, since CCF uses a totally
-> independent clock API. If the clocks are provided by another device like
-> a phy, they can simply be registered with the clk core the same way they
-> are in Linux. Standalone clock drivers should use UCLASS_NOP.
-> 
-> Clocks must all be registered during driver probe, the CCF will ensure
-> that a given clock provider is probed (via a global ofnode -> device
-> lookup) before checking the of_providers, thus making sure the clocks
-> are registered so that the consumer can use them. There is currently no
-> special handling for cyclical dependencies.
-> 
-> === struct clk ===
-> 
-> It's definitely debatable if it makes sense to have 3 different structs
-> for each clk (clk_hw, clk_core and clk). I do think clk_hw and clk_core
-> are justified, since clk_hw is more tied to the hardware description and
-> typically nested in a clk-specific descriptor while clk_core contains
-> the internal runtime state of the clk which should remain private to
-> CCF core.
-> 
-> It could make sense to merge clk and clk_core, but since struct clk is
-> public in U-Boot, where it's an opaque pointer in Linux this would be
-> a substantial effort. In Linux struct clk objects are allocated inside
-> CCF, but in U-Boot they're allocated by the driver, this would need to
-> be resolved before we investigate combining these structs.
-> 
-> === Memory/perf overhead ===
-> 
-> The memory and size overhead of CCF is undoubtably bigger than uCCF,
-> although I suspect the difference is less than it might seem at
-> first glance. In particular: clk_core is only ~50 bytes larger than
-> struct udevice on ARM64, and an additional 120 bytes is saved for each
-> U_BOOT_DRIVER used by uCCF.
-> 
-> On the other hand, the CPU overhead is probably more significant,
-> but not an unreasonable cost to ensure correctness and propagate rate
-> changes across the clock tree.
-> 
-> Just comparing the binary size of sandbox64_defconfig with uCCF vs
-> CCF_FULL, CCF_FULL results in a 135k size increase in the binary. I
-> haven't done any more detailed analysis here (still haven't got buildman
-> to play nice...).
-> 
-> === SPL ===
-> 
-> This RFC doesn't have any SPL specific support, I think this role is
-> better fulfilled by UCLASS_CLK.
->
+Lets start making the m68k virt machine support useful.
 
-SPL support on Qualcomm platforms is coming for real. I see a patch-set
-already posted and more to come. So we really need to see how Linux CCF
-can be reused to support SPL limitations on Qcom SoCs while executing
-from on-chip RAM.
+First we need to fix some m68k endian issues.
 
-If it turns out to be separate clock drivers, Linux CCF for U-Boot
-proper and UCLASS_CLK for U-Boot SPL for the same SoC then it's much
-more maintainence overhead as compared to just pulling in clk driver
-from Linux.
+Then allow virtio mmio driver instances to be created with
+platform data and fix a minor endian issue.
 
-It would be better if somehow Linux CCF can be stripped down to meet SPL
-needs too.
+Finally, add the code for the board to create the instances.
 
--Sumit
+v2:
+  - Added patch to fix readl() etc on m68k, hopefully this
+    doesn't break everything. This should match Linux now.
+  - Added patch to fix sys reset which is broken by the above
+  - Hacks to virtio-mmio are gone because they aren't needed
+    anymore, just one minor endian fix now.
+  - Removed RFC because it looks good to me*.
+
+
+* I wouldn' trust me. :)
+
+Daniel Palmer (5):
+  sysreset: qemu virt: Use __raw_writel()
+  m68k: Fix writew(), writel(), readw(), readl() endianness
+  virtio: mmio: Keep vendor id little endian
+  virtio: mmio: Allow instantiation via platform data
+  board: qemu: m68k: Create virtio mmio instances
+
+ arch/m68k/Kconfig                          | 14 ++++---
+ arch/m68k/include/asm/io.h                 | 17 +++-----
+ board/emulation/qemu-m68k/qemu-m68k.c      | 47 ++++++++++++++++++++++
+ drivers/sysreset/sysreset_qemu_virt_ctrl.c |  2 +-
+ drivers/virtio/virtio_mmio.c               | 29 ++++++++-----
+ include/virtio_mmio.h                      | 12 ++++++
+ 6 files changed, 92 insertions(+), 29 deletions(-)
+ create mode 100644 include/virtio_mmio.h
+
+-- 
+2.51.0
+
