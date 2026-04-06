@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E721BF46C5A
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 16:51:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC8E6F46C5A
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 16:51:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3422784129;
+	by phobos.denx.de (Postfix) with ESMTP id 6CBAA84142;
 	Mon,  6 Apr 2026 18:50:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EoZuR9Bp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FgusuEkC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 178A883E36; Mon,  6 Apr 2026 17:52:23 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 3468083E36; Mon,  6 Apr 2026 17:54:08 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1FAC8341A
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 17:52:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 404698341A
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 17:54:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-66e6f1d8237so254728a12.3
- for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 08:52:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775490740; cv=none;
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-66e6d960ff5so3311081a12.3
+ for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 08:54:06 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775490846; cv=none;
  d=google.com; s=arc-20240605;
- b=BDT3Gkd0YmthUPG3xhbRcbA7DspssmCSYZ58PJYNhgwI+9/bLMOsVUwsVEPfQHD0mS
- kCb4BKcY522iKbh6423Rev6yDtGOZGOTmMH93EVRAiNnYCOsZQjaRdh9wj5FdkTB4EbD
- bbbyb1dx9M/263bdnLHscGMGoQ627PjpXBrGG7s6Zd00RnlHWDk1Wl8LVoGkaH0uGcju
- 7IlEUmU6sJsira9EcnfiSM4FDjVRz0pswXlh/5jBFAaBEq6NEW09Yl7vc2YgwtKyXgGt
- 0gPQYrQWwNPPzFYBwvQdBAwlvB0K5vvSGW/9W/zK7b8k3NBLLv1w1+mzeCUAO+/U0LGw
- 0FXA==
+ b=iHs0SHQG/Hk+wPp/uyOcHWmo6t8KmUoFgP8qJ/rloK1eP/3K6KFmCsjgdSZXCzVt9N
+ 51U6ec0lDEhpWWRgQACiHSLU2ZkOWoWdCz274KLOmwWpmTrVrSNkD3iYhtN0rH2Q5YO0
+ zBwSqDTnAvHktGeGK+chABGPzU9iQ3zaeaG3GR8eN1XxqX5CF2HO9ftgpZhfC95G+IhQ
+ g/sis7/tclOUFLopqfFogFqDWziKkFbyEdU+ur4x3iKhWyn9/M2xXfzCl1JrR2wkNM8S
+ u5LID4nEXZeuFgRp3gT15zGj6gKttFXfvHBzRxctmezTh68GMDLG34Jh05F4fyjhmId0
+ vkiQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=JJF8jaR6aywbXxo297MKPUhu/HNh7hwEwE4Rdmvx4c0=;
+ bh=fnzUcXBOM1Kco8+zP9Rz/e4BJKK9Ko0sAEw0RXMEqqE=;
  fh=lajVl/IeoACZS/6yuLfZkN/hPyImAZ81vhSDRfkAdyk=;
- b=MuKbOK1Co0N/v2AYKzh5dekoYqPW1hfQfqC/RyyHWMURGqPT9bAVW6xIpVysyt2nZ+
- 8gbENLXKdQ5N8BtpmaKV3zPWCxxyjCQSKdZ4PZP1P6R3+gWpo7+geCMgn4nqhWm0i61b
- RRue5WN95MHPkQgTQNs4aou8NV/x2K1pLNQZKrC/OJ7AnEoZoIysdIOdXgV8vSGq39+3
- Erj2YQxLV07NFKoSgyoJ68siyCTGPTqFjC2RoPg6TTtUm9Ymxwp0Tmi754elon3/EEJc
- nRrzVEF007MOqR54hY0q8t7YWQn9cf3ohYFul/YaUhVaq901TozvWh4yPTyArsAy7eXg
- RqGA==; darn=lists.denx.de
+ b=kkbM+QwJpepxtEqsftkSomCqyAVvyLNFq3LiO8SbStuNRncUPnexK8AzrIPjUXAFy5
+ fJgJo1DVffuxNZLh3cB9qB+b45v27vyJvH8x/O1mW20TEHWuWBJPDSqYDB/kYoiZ65pZ
+ s7+LRMOJCWw8MYdzxB8sEtqAb6UUGCnkje4aePBFkwxLodFxE5su08UxzpA4tMJ27KA8
+ 0Ta6u53zZsixMUrMblcOjYr0QcjslYqRY9fUaJHYj0USwwnyzvFDZ1DlJnTLxhxSDT3t
+ 48HOtcOz1oxSIdKHB0zvlSPtFmNAPL8n9tBk2gwkI6DF9yqmMRHFRj5tqGDxPMN15yT/
+ fVNg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775490740; x=1776095540; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775490846; x=1776095646; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JJF8jaR6aywbXxo297MKPUhu/HNh7hwEwE4Rdmvx4c0=;
- b=EoZuR9Bp1mHbHo1r+0yKZMrdD4Y0UZ5NcZuMectrARsddQx6ToqFmHjL0wFmTpcvv5
- /XiI62TgulI+7FCbi5au1afkdPpcwYWi47xiAF0wGTpB7D2gEP/WiffnvkO2U2m3YPs3
- UPNSyDtPWo6FwnbHxfR8/oBR0uXkUYU2B3ya8=
+ bh=fnzUcXBOM1Kco8+zP9Rz/e4BJKK9Ko0sAEw0RXMEqqE=;
+ b=FgusuEkC9ebT4qY1b57Jg5V3XeKBQbFrbQOxn3SFlJCLgPFA5sghz1hfG9WcsK3i5R
+ 5cc6PHeqvz8bFAXP6zdiHcHZq62nzGZ1jreDU6WI52nUpFx2646qeXyS1nU0YsEgIxp1
+ Ks0Dm0DMaGMkuDrLF/+dVzvTr8vCVJi3PJBwI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775490740; x=1776095540;
+ d=1e100.net; s=20251104; t=1775490846; x=1776095646;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JJF8jaR6aywbXxo297MKPUhu/HNh7hwEwE4Rdmvx4c0=;
- b=E9OL37Hk+yg2Lpf9RrifoA7NrMSfD8SVvcjlypOQnTmakofPwkYg2dA+9rf2bDLXXf
- 1tJq3hV1priIe+rPNmIafn5Sn33l4WK/AXU46WsWek7SujY7X67vPiNX3Szde3p+DaCA
- 4ColCl4J6w132ty5X7wt5GGfDsJeLDu7GtWiuLwb8Z3hHCH7BROlVqdxsEl0MzjC02nX
- AapZcbxH/DT0rN1Hq5bMtbQIQkO1k2kQkXSGYyA3UYvcXm9M7Hpju02B4y1vgj7uTDX7
- Fd8mcyxjB6n+BPsZh03ykoB3vsr4lqUTCuVJS1RD8HUBPXbbFB8u7U7dyXwC7cAshCqF
- YyjQ==
-X-Gm-Message-State: AOJu0YxapSPv85vtvdoaXauCdcZNP7hdD3A/ag2Ez+oPPphsue8tP2GA
- rQUnDBPXs5kweTRs8g0ZaBsjclIXW44RGQpnXEOLckaUEqLsuBiAIHBGeoxmTCScQYt4sYPUp7b
- APyxAHRZcy4cbufuU7TBWUNWQpsZzg5AR/qanEa9Q
-X-Gm-Gg: AeBDietqTct0zYe0QEP6RyxqIAQgFcVFx9h9NqOYxkhuZhr7/g4lisM9MK1WekDRlji
- xt5KRdV2U0r57g/E48wbk0nGUgPI9YTLw8ZH//xKU4qS+IWVwh5C0FQC6WoughCFQ9K+sFDTGzo
- /09G0xhDlRBJ6B/FQqAx7PbW8eb3oXgC+2nHs+/32BQoSJycYFCwEYF92fcaH+BiQ8Q3S4Uhvil
- tFaxUBUwW5gVBaLDx2vEPWvR2DMofohzNG6yV9KWDm1DRtYIzOFQAg/FRHE7q3mMBMo9qPUWbhq
- OPWTRA==
-X-Received: by 2002:a17:907:6e8b:b0:b9c:a451:33cb with SMTP id
- a640c23a62f3a-b9ca4513bbdmr360820966b.22.1775490740195; Mon, 06 Apr 2026
- 08:52:20 -0700 (PDT)
+ bh=fnzUcXBOM1Kco8+zP9Rz/e4BJKK9Ko0sAEw0RXMEqqE=;
+ b=cVE3PKS6ys1eCjxKHNRPaVpCfaTOKz+FWC0fqttvJNTtWs1XaCvP64xWM5QAlCz3rz
+ NRqDOi6fvnSnjeBBnnfIFsY21QB+K7DA4VgRvcOUiSCabfxDc6hKpMqnRPNkt7IftI2k
+ 06TJNKRKB12GLcabZYNhZNVIL4Ez7TdPHHoQakStndYU93lGdVWA667fbi7LtK4R7Jn5
+ lUCDY347VHVAzpYb5UEK+TyFZadLCGPdsJg7qW8a82+GYQ3TBXDnCXyQzxfWD0/u/ZnW
+ gn+dO+/D/Vc2bUgHYrOsHXzPYpf5j1zxRtqupYp+J8WSWRLypF2ZAB59L+EwBsBPWzFq
+ cF7g==
+X-Gm-Message-State: AOJu0YyAjA3ZFP5W89wcHP/m1LiRfw+ME9aAT4IaMoznvIre+VGzO+Ng
+ SQmDRmo2JiZWV2xQ/AsyYbGu2IOPqeVBIKAQVYvCYP4UNFsKIvIAV/7hAdDKClNMqrd/+ff+ldd
+ 53ftyssGAy4rmqQtzzfMRBwF51hC0L2mpNU5j+a8k
+X-Gm-Gg: AeBDieva9Oj/OP9UfsoifIjAMXdB9SKGxOZ21t5nP3LJ6LfQ6VxeldW7IFzfMeMXhKr
+ erJjjWxmvYvYEwY+T3K8b68nA3/gIqq3SjUqTzGubdr0FBGzjA7yz2fHZaDnY2TiVwOJJn1UsvE
+ 87pszhaos4420bRJsDgcGDSazWAPNr7nySEMLtAOjUp9YMgSEpt6gQlWbRWtbdcthSLEoVl+IAK
+ a9Uui/5qSu89cwpX9ELcO7RQOOUt8wzeGqbn/QK+umhPttmT1G7PcxlHh5jJki1AcWxGCWeVFZV
+ O3+D1g==
+X-Received: by 2002:a17:907:3f90:b0:b98:6177:2f16 with SMTP id
+ a640c23a62f3a-b9c67a049f5mr604464166b.53.1775490845576; Mon, 06 Apr 2026
+ 08:54:05 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260404-qcom_spl-v1-0-9e6c2ac66587@seznam.cz>
- <20260404-qcom_spl-v1-3-9e6c2ac66587@seznam.cz>
-In-Reply-To: <20260404-qcom_spl-v1-3-9e6c2ac66587@seznam.cz>
+ <20260404-qcom_spl-v1-5-9e6c2ac66587@seznam.cz>
+In-Reply-To: <20260404-qcom_spl-v1-5-9e6c2ac66587@seznam.cz>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 6 Apr 2026 09:52:08 -0600
-X-Gm-Features: AQROBzBmxbPV8Mh9Cn--cRRRLc1W2AmaotK7U-8okRnL2LcGs-a8sxk9FKxnLr0
-Message-ID: <CAFLszTjnLyjnDMEBJWQWb64m+LnnDcUNayAFEt4pMK0Bs0Cq2g@mail.gmail.com>
-Subject: Re: [PATCH 3/5] drivers: allow clk_stub and spmi in SPL
+Date: Mon, 6 Apr 2026 09:53:52 -0600
+X-Gm-Features: AQROBzCPZ5gCwsvhir0odmu0HVIr5aoa_kWaj46Cps9ptprbdzfsV7XaKDn9vp0
+Message-ID: <CAFLszTiFMrsz6ePKymAuRUP2zYaLdjTjsaeAPr97DiawVopCuQ@mail.gmail.com>
+Subject: Re: [PATCH 5/5] dts: add empty .dtsi for shift-axolotl
 To: michael.srba@seznam.cz
 Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  u-boot-qcom@groups.io, 
@@ -142,41 +142,35 @@ X-Virus-Status: Clean
 Hi Michael,
 
 On 2026-04-03T23:18:18, Michael Srba <michael.srba@seznam.cz> wrote:
-> drivers: allow clk_stub and spmi in SPL
+> dts: add empty .dtsi for shift-axolotl
 >
-> Only Makefile and Kconfig changes necessary.
+> This is necessary to select shift-axolotl as a target, in practice
+> the upstream dts will be used
 >
 > Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 
-> diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
-> @@ -114,6 +114,12 @@ config CLK_STUB
-> +config SPL_CLK_STUB
-> +     bool "Stub clock driver"
-> +     depends on SPL_CLK
-> +     help
-> +       Enablestub clock driver in SPL
+> diff --git a/arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi b/arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi
+> +// SPDX-License-Identifier: GPL-2.0
+> +
+> +/* When there is no previous bootloader, the memory node won't get filled in.
+> + */
 
-Enable stub
+The build system uses the first matching -u-boot.dtsi file. Since this
+board-specific file exists, it takes priority over sdm845-u-boot.dtsi,
+which adds bootph-all properties to gcc, usb_1_hsphy, usb_1_dwc3, and
+rpmhcc needed for USB DFU in SPL.
 
-> diff --git a/drivers/spmi/Kconfig b/drivers/spmi/Kconfig
-> @@ -8,6 +8,12 @@ config SPMI
-> +config SPL_SPMI
-> +     bool "Enable SPMI bus support in SPL"
-> +     depends on SPL_DM
-> +     ---help---
-> +       Select this to SPMI bus support in SPL
+Please can you add:
 
-Missing word: Select this to enable SPMI bus support in SPL
+    #include "sdm845-u-boot.dtsi"
 
-> diff --git a/drivers/Makefile b/drivers/Makefile
-> @@ -35,6 +35,7 @@ obj-$(CONFIG_$(PHASE_)SPI) += spi/
-> +obj-$(CONFIG_$(PHASE_)SPMI) += spmi/
+This is the standard pattern - e.g. meson-gxbb-p200-u-boot.dtsi which
+includes meson-gxbb-u-boot.dtsi.
 
-This alone is not enough since drivers/spmi/Makefile still uses
-CONFIG_SPMI, not CONFIG_$(PHASE_)SPMI. During an SPL build with
-CONFIG_SPL_SPMI=y, the directory will be entered but spmi-uclass.o
-will not be built. Please can you update drivers/spmi/Makefile to use
-the PHASE_ pattern, similar to drivers/clk/Makefile.
+The commit message says the file is 'empty' but it contains a comment
+about memory. If that comment is relevant, perhaps clarify what it
+means for this board. Otherwise I suggest removing it until there is
+actual content.
 
 Regards,
 Simon
