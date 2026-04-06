@@ -4,109 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF962F46C4E
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 17:15:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D7EEF46C64
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 17:28:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33414840ED;
-	Mon,  6 Apr 2026 19:15:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 69CFB83C2B;
+	Mon,  6 Apr 2026 19:28:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ifYIcH4a";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FeWuBmk4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E483283C2B; Mon,  6 Apr 2026 19:15:12 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 498BB83FA3; Mon,  6 Apr 2026 19:28:14 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA2568406D
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 19:15:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E42D083936
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 19:28:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b9b1ffbb9f5so467778866b.2
- for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 10:15:10 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775495710; cv=none;
- d=google.com; s=arc-20240605;
- b=Y/PD5D7mIlKQcXWiImdqDHN7Bfy/gCWfNjWImsGEkeoYIaMLGhWzdbjpQx9hE2CNSi
- mIULr2LKRNImYMMfTC2GxJG/50CX3DqTgy0EBF5oCOAS2SfWaiLQAnPTUD3gr055zBOn
- wte04utSi9/z9i3pdWlnfS0gIoemHvYBX6GdLHebRlY8OmsNjSL9K4/xrq9+lykoEl/R
- XBFpsYA/nQ++mX3SlNZl2XQqzGVBz+p3+foInzsvWg+n1Yq1kWmufSX4W/Vf6Q9w3v2Q
- F1wPYc0Ya8Pdlj/+jxRTlrSjKf0q/i7qFWOR5xaeTCugec2yyghCt8cqsrAqBYLmM/Eg
- nsqA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=uX8YXThYXM1ITzbl+ts/b1htryaW0fMgQIyruHIJGzM=;
- fh=ZqGy2reu3NCAtE35jrnoOTbkHg6uMbjpGsVHUHiZ6Dw=;
- b=MQAIUt3I12KWUKeWAgeMNJGXkqXn31AOb0jhb5xo2iMMRuhn2XGItWcqVK7iWCmz2K
- Cwbs7yJu/U5EtytvE7HIXJ0/B4DrgSb3BJWLaIslH4/RCEtLfRpcPkDgvnBnz3cYMpMu
- cUIMsuar4s5oq5UiuO7mhUg/9tS9bbr+eQDWFvu0/Ru2ddJoCJVHPyUC4T2G6LGkYZfg
- 07HeRau3QkEBgcjt9hUpBJn90D2jkPMYifJyJ0SVNgNV7Mur4ffirgp8yXsVA0ppVBdt
- RKUKP0OZ5W8Kmh7JOEKgSnyGeKDF1R59QbgADvXGA5v7qIWVeM0sIu0tRKO3j2jyXXtX
- 10Yw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-43cf7683a28so2423039f8f.2
+ for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 10:28:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775495710; x=1776100510; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uX8YXThYXM1ITzbl+ts/b1htryaW0fMgQIyruHIJGzM=;
- b=ifYIcH4alXk8D5HS94gT+74BJ1XtrYvzF4Sz5v5OcnwH8CtbFpLZ2+n8PWXxnSyGb6
- PZrjZXkG/NAzx7/D2eix4hgeFh3e+KpHJFiVYHQ4545PhCqbOSb3xCQ0i81D6y5UW5Nc
- Y6u5Sy7d04UHAhYZwFHqXJPJJDdY1IFsiNBYo=
+ d=gmail.com; s=20251104; t=1775496491; x=1776101291; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=seKljE74plO8It6lT1Hwx60dQkxdbup/VSqT8J4DrV0=;
+ b=FeWuBmk4ggOnKAN5mo9WklRZ2NEc4Yt9lvBWiZehC/ztVIttN9aQ9J2rPq78KF/8IF
+ pyvai0TXWjAK4007LktotINv196/yoKFsJXrkTrp1FzMqZImvUOQsuUP4lenaGbpn52w
+ F6QtYJXeAky9PGYFo+eL+Y2zIMsYD6gzrl655pSneyI5T8CSEsEx6dra4o9jTn1g4Vz7
+ kQ17tgTl6J59mjDnniZF2Ylc9oZvgd5vi1Z6aDIwrq7y1Gz8Y79zaoFiuP5yO4hsIv7z
+ vVvCboj2ISEItveCKOg4rEoWe6yUGYRqFe4qNh1DEftjV8xKbw8ItQhte/98R2nr8+9O
+ LBaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775495710; x=1776100510;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1775496491; x=1776101291;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uX8YXThYXM1ITzbl+ts/b1htryaW0fMgQIyruHIJGzM=;
- b=aFD32SC4d4WhU8CF2YYKrW519TCcNugRlN4FjGsd3aRJn528v+7Xo7yQJ521nUzui5
- vK7BTPygbf95/+GmQ5J2S2C3BAFnl9d3A94l/Nlic1b9R0j9rte1asbu2pF8vQe4uBXU
- wgZR+P2nZgWZvS6jYBCKs75jZ8FRzjEFRQihJiVAPeQirm+vqmfSSUq/7q1G6v3S+apO
- Yfj6TECxa8g16I3suOLqi9YkHNy95xtqevssorWDg9LUBkY+38cBRbqPNPSzRplMa6Xr
- yh2okPCnrjYZNoLoEhxJqjtT3rZyHIfZaDY2grQp32f3XvefnedstvKOGJfJgL3PVm5z
- qu8A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVUTmraZ1FokhYcqluWcMPsJryvPanMmCH2BZ0S5djwt9fn7J/eIio+gqNfCDHSFwqllhcpH24=@lists.denx.de
-X-Gm-Message-State: AOJu0YxHJ8nxWnIWN7Os9fMxlrojiP46vW9vLmuLryFj9mJ6H410HYce
- iLsJogBU1DMswWiskYYMqVQIzAlQYPv82vEB+/uxt/8tYwEHIXjJXZfzH7/9tSfYIONQBGuqhik
- YpunpqKcdU1v+GU2T+lE3oVOCcYVCPcidyW9zV/Ej
-X-Gm-Gg: AeBDietB4+44Y0EhCWkpK6NihJUyhhRokibaXXszyyczHqwmT0oj26AejMO2yDH+DW4
- in8ZF0+WOY0iT3ev/QI5SMBIxBLRQtq9hm/QETCAAzjo0JSq52siFhEUB16ZmEtxkmeMXBdCbdD
- iCNkaM/AL+2TlUyqg/Nz85stCAOG05mLTVn83CO0r8juVqRYF1h11a+MJpy5CP1QfBnK2Taz45S
- 6GbQUVGOYXiBv3211YS+x4UhDSeljgzDddav7te0+ajkL5DqWI0QOgMAHMiaCQdu5mUvZ75w3hc
- g9qN6g==
-X-Received: by 2002:a17:907:c8c4:b0:b9c:648f:7d3c with SMTP id
- a640c23a62f3a-b9c679adca8mr692442866b.40.1775495710199; Mon, 06 Apr 2026
- 10:15:10 -0700 (PDT)
+ bh=seKljE74plO8It6lT1Hwx60dQkxdbup/VSqT8J4DrV0=;
+ b=YYdLDnI1YsXGsMSxWmuS5fjEj/0S2Ra7U5hgzrVlEIDYt7rl2w5H71xdt9d/8vj6VP
+ jGJXaukfuteWwX+ncO1wgUxnANvTmwZeIsVC6j8WuUO3x0W1me+HfVitbHmZzvVyPo45
+ BLMMpvIMwbNaD0X6GWuXaE+HFCgD+9VcYTLAtn/3FPauUfm69qW+Oi6Znsr9T8HqQfBj
+ SuDIrP+Fdw3efG7a3R8UWJoLsY0o3DfzSHmM6WhRIc+zrcyD+aWpKU2TQ5dfxoK6daWV
+ uwgpey7Tps8hOQe7Kkfy8Z7rU5dpkKFa5IuxAQ6fjkVK+jIl8my3rEzfq9MTMJp2Pxax
+ 5pOg==
+X-Gm-Message-State: AOJu0YzdvTqeeNUAgGVRDcuP8s/ddrmlGULKQohRseJ9jZi3CJPZvFqJ
+ f9xsO470FE4bdWFl1VYCUj45YAuRPzJ2dJhqm0lTAdaa3+XD6dpEzcC5ZWo8tQ==
+X-Gm-Gg: AeBDievjVkcMqSu2P00k/5EkwP0ocaXZCb7wsbU827dE0gNtbpRZmEMkHSj4CzpjVOX
+ 82FE7CMzEKsfWjpae7dZBX672eb6McAHkxyWGxu8fqcwhGKoTQ4xF6G6Wy7RBGYPKvpnMZSnXz1
+ i2hw5AKN3mhWCiIZRnC2MjrT7kR8GOAF0t5cK6yfeVGEVC4rlU/otmUOSFDTogj959sKuXU4UsK
+ O+swjE2jQ9fZQOAoqpmzHFvgLbY9a/B6cOE506V2umws4KiA8SXLt0IR3UxTXaXtGRE9aBiC3BU
+ TRra6SPqIsIzO0mfYVA1dwmfRTLo9tXXnjJ1elUe7UYbJdsR0tWrzTX5RRsz1HIpZAWvkWP57ZT
+ U1K8MIXh7nRb4OEwHHosgX7EGhe3reNUOG7x6FnRDy9QhWeBiY2yYZrc1dESkZPXOaqBd6WqUCP
+ M4pLvCPjFJRhgTSxiPnNcu3lLBMRFfk+sW4XbYkO1kK4NEXa2RrDotLut+Z6cK9woddDu7hpy9U
+ BORYV/syNzKSaVUW7mTBW9BxJ823u0USUdfQ/EzNN4oMW5mW/D8326EPd7MXpe8QGL3Tpfy/9zt
+ 5TzB4hPgBBg3rHLiXzG++76t0KzH/CZ5tm3vdjk9NZ2gWYNrA+dy4lz/8sVc6TIXHnIp3ehf5Hx
+ 9lZIHPdAVJW3lsMfFi8QZ+Q==
+X-Received: by 2002:a05:6000:208a:b0:43b:4aba:8f35 with SMTP id
+ ffacd0b85a97d-43d2927b855mr17121453f8f.12.1775496490492; 
+ Mon, 06 Apr 2026 10:28:10 -0700 (PDT)
+Received: from cypher.home.roving-it.com
+ (7.9.7.f.b.1.3.0.b.8.f.0.9.e.0.0.1.8.6.2.1.1.b.f.0.b.8.0.1.0.0.2.ip6.arpa.
+ [2001:8b0:fb11:2681:e9:f8b:31b:f797])
+ by smtp.googlemail.com with ESMTPSA id
+ ffacd0b85a97d-43d1e4e5890sm42176342f8f.31.2026.04.06.10.28.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 06 Apr 2026 10:28:09 -0700 (PDT)
+From: Peter Robinson <pbrobinson@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH v2] Add an initial CONTRIBUTE.rst
+Date: Mon,  6 Apr 2026 18:28:00 +0100
+Message-ID: <20260406172805.368902-1-pbrobinson@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-References: <20260403135205.26979-1-ansuelsmth@gmail.com>
- <20260403135205.26979-7-ansuelsmth@gmail.com>
-In-Reply-To: <20260403135205.26979-7-ansuelsmth@gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 6 Apr 2026 11:14:58 -0600
-X-Gm-Features: AQROBzDXkLD1liG2LdOzcr28X9U6pR6FXhAImlan9YtHDbwkCoJRg32DJ6jnuOY
-Message-ID: <CAFLszThzN_d9_558hd4LymGAYSd+sk=2jUq4ypN0G_2+DJR8DQ@mail.gmail.com>
-Subject: Re: [PATCH v5 6/6] doc: dtbinding: Update documentation for Generic
- Firmware loader
-To: ansuelsmth@gmail.com
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Peng Fan <peng.fan@nxp.com>, Justin Klaassen <justin@tidylabs.net>, 
- Neha Malcom Francis <n-francis@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jamie Gibbons <jamie.gibbons@microchip.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Harsha Vardhan V M <h-vm@ti.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- "Lucien.Jheng" <lucienzx159@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,55 +100,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Christian,
+Add a contributors file to provide a high level overview
+for people who wish to contribute to the project outlining
+basic details and setting some project expectations.
 
-On 2026-04-03T13:51:57, Christian Marangi <ansuelsmth@gmail.com> wrote:
-> doc: dtbinding: Update documentation for Generic Firmware loader
->
-> Update documentation for Generic Firmware loader, generalize it from FS
-> specific and add new property and example for FIP loader.
->
-> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+This isn't intended to replace any of the existing documentation
+but rather provide a succinct top level document that's easy
+to find to enable users to understand the project and get
+started as quickly as possible.
 
-> diff --git a/doc/device-tree-bindings/misc/fs_loader.txt b/doc/device-tree-bindings/misc/fw_loader.txt
-> @@ -7,6 +7,8 @@ Required properties:
-> +- mdtpart: which partition of ubi the image loading from, this property is
-> +        required for ubi and mounting.
+Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+---
+v2 changes:
+- Numerous spelling fixes
+- Updates to some sections
+- Add reference to other docs
 
-mtdpart
+Note I didn't split out this to other rst as it makes it hard to
+read if in a text console, it needs to be readable in offline text
+environments as well as online.
 
-> diff --git a/doc/device-tree-bindings/misc/fs_loader.txt b/doc/device-tree-bindings/misc/fw_loader.txt
-> @@ -12,6 +12,8 @@ Required properties:
-> +- partoffset: valid ONLY for "u-boot,fip-loader". Offset of the partition to
-> +           parse the FIP parition from.
+ doc/CONTRIBUTE.rst | 76 ++++++++++++++++++++++++++++++++++++++++++++++
+ doc/index.rst      | 10 ++++++
+ 2 files changed, 86 insertions(+)
+ create mode 100644 doc/CONTRIBUTE.rst
 
-partition
+diff --git a/doc/CONTRIBUTE.rst b/doc/CONTRIBUTE.rst
+new file mode 100644
+index 00000000000..514d0257b39
+--- /dev/null
++++ b/doc/CONTRIBUTE.rst
+@@ -0,0 +1,76 @@
++.. SPDX-License-Identifier: GPL-2.0+
++.. sectionauthor:: Peter Robinson <pbrobinson@gmail.com>
++
++Overview
++--------
++
++This document is a high level contributors overview setting overall expectations,
++so people can get started quickly, the rest of the documentation goes into the
++details.
++
++Code of Conduct
++---------------
++
++The U-Boot project doesn't currently have an explicit code of conduct, but all
++contributors are expected to act cordially to, and be respectful of, each other's
++contributions and opinions. There are many code of conducts for open source
++projects available to review if you are unsure of expectations.
++
++Repository
++----------
++
++The official U-Boot repository is located at https://source.denx.de/u-boot/u-boot
++
++Further more detailed documentation can be found at the following link:
++https://docs.u-boot.org/en/latest/index.html
++
++Contributions
++-------------
++
++Contributions to the project are welcome. The U-Boot project uses a fairly
++traditional Linux style development work-flow using git and `a mailing list
++<https://lists.denx.de/listinfo/u-boot>`_.
++
++Patches should be sent to the mailing list using ``git send-email`` or the
++equivalent commands using ``b4`` or ``patman`` with appropriate sign-off and
++attributions for the code in question. Maintainers should be copied on mails
++and they can be found with the ``./scripts/get_maintainer.pl 0001-fix.patch``
++script. Please don't send patches as attachments, and ensure corporate mail
++systems don't reformat patches, append disclaimers or other unnecessary notes.
++The b4 tool automates a number of components mentioned above.
++
++Patch Series
++------------
++
++Patch series for a specific subject are welcome but they should be constrained
++to a single topic with a cover letter outlining the intention of the series.
++Each patch within the series should cover a single change, be self contained,
++not break the build or cause a regression.
++
++Generally bug fixes for existing bugs should be at the beginning of the
++series before any enhancements to allow those patches to be picked up early.
++
++Each iteration of a patch set should be versioned, allow enough time for people
++to review previous versions of the series and incorporate all the review
++feedback before sending a new version. A week between larger patch sets is
++considered as reasonable amount of time.
++
++Development Branches
++--------------------
++
++The U-Boot developers use two main branches for developing the code. The master
++branch is used for the current development cycle, while there is also a next
++branch intended to land changes for the next release early to enable wider
++testing of larger code changes. The next branch is merged to master shortly
++after the tagging of a new major release.
++
++Similar to Linux there is a two week merge window post release after which a
++release candidate is tagged. There's typically a new release candidate every
++two weeks post merge window until the stable generally available release.
++
++Release Schedule
++----------------
++
++There is currently four major releases a year in January (.01), April (.04),
++July (.07) and October (.10). These typically happen on the first Tuesday of
++that month. There is currently no release branches or long term releases.
+diff --git a/doc/index.rst b/doc/index.rst
+index 43398627d89..9ef6aa9c258 100644
+--- a/doc/index.rst
++++ b/doc/index.rst
+@@ -15,6 +15,16 @@ if you want to help out.
+ .. toctree::
+    :maxdepth: 2
+ 
++Contributing Guidelines
++-----------------------
++
++General guidelines for contributing to the U-Boot project.
++
++.. toctree::
++   :maxdepth: 2
++
++   CONTRIBUTING
++
+ User-oriented documentation
+ ---------------------------
+ 
+-- 
+2.53.0
 
-> diff --git a/doc/device-tree-bindings/misc/fs_loader.txt b/doc/device-tree-bindings/misc/fw_loader.txt
-> @@ -1,9 +1,9 @@
->  Required properties:
->  --------------------
->
-> -- compatible: should contain "u-boot,fs-loader"
-> +- compatible: should contain "u-boot,fs-loader" or "u-boot,fip-loader"
-> +- phandlepart: which block storage device and partition the image loading from,
-
-The section says 'Required properties' but phandlepart, mtdpart and
-ubivol are alternatives; only one set is required depending on the
-storage type. Please can you clarify this.
-
-> diff --git a/doc/device-tree-bindings/misc/fs_loader.txt b/doc/device-tree-bindings/misc/fw_loader.txt
-> @@ -46,3 +48,12 @@ ubi in device tree source as shown in below:
-> +     Example for FIP from eMMC:
-> +     fs_loader4: fip-loader@4 {
-> +             bootph-all;
-> +             compatible = "u-boot,fip-loader";
-> +             phandlepart = <&mmc0 0>;
-> +             partoffset = <0x100>;
-> +     };
-
-Since the FIP loader supports UBI storage as well, it would be good to
-add an example for FIP on UBI too.
-
-Regards,
-Simon
