@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6398BF46C59
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 16:50:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2F97F46C59
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 16:50:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8796E83F98;
+	by phobos.denx.de (Postfix) with ESMTP id BCFF0840B0;
 	Mon,  6 Apr 2026 18:50:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Oyo0o1MS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hqs+R8cf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FA2983936; Mon,  6 Apr 2026 17:47:58 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id DF27684034; Mon,  6 Apr 2026 17:50:40 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1C9A8341A
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 17:47:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E1B3F8341A
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 17:50:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-b886fc047d5so623045666b.3
- for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 08:47:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775490475; cv=none;
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-66f2ea5c500so786745a12.3
+ for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 08:50:38 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775490638; cv=none;
  d=google.com; s=arc-20240605;
- b=MBpmtdDD6XV4iknxWVwI0OROCuaxllcxIjCvCXDjXHqZtqdyiSlsRSWK+3840UaeA9
- MGfWgKrOy9ydk+WC7uQzmKKaMk/qO3BbF8rwRSNscHMDsPevcHUh72CmNjKEfz1nuVCW
- FxIl9tEJEI98FzpY4c6fuN1uDrn6Zj5bqs6ctI3iNLRFNl56b6AwwNI3WfK5MBa2qRu0
- y1ZbcsjbuWUpZIkpJlsOqcy1ICPzHfo4WjsMh+4Zt1vN2EskYsYr9msrkTX4SMKV/GgO
- f1+ahgLC9AcAaRhTTT1YTNO9OLx0sSSn5ezdKZLmb7zH70Id1G92x30uPyQWivlC+sTR
- ASeA==
+ b=jW5kbQQiKJ/qmZEKaXNMYbPRnAyKk6SaP3FnwAIk6N5hCEtOlQpklLakRO+eQhhHAm
+ SWhnREceWw73MMz00MCREqdFlDOexlwbmA/XpK0Gz3ZYAQGuW6NA4XTZtxB172iqR0vb
+ Ef/dji1rQMjcGnZqlCRjA0+e1eV8soSGZ0DROVwTnwbsKvMpqO8IO/eK7TwNiSD9DmCL
+ iTg0ImEaqiwx3Nc2vPqOYEWvLVowYd021NWY5TgKhdXfAkhoJpgsF0DLzd580A/ntw+W
+ aWPF1jaPU4yScppleiiiXzTkC5TbdEjqkvR1B6kRVFsPQKDs2kFD1QRABaYn3UcVVpA4
+ QlQg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=vC30gAlxhbkoONZB560oEoysJdu2OhtU1qSAT2Gzzvw=;
+ bh=ro4aHxkzCP7OwUGYL7lZuP+4Z5duDwb3/XNs+brNyhY=;
  fh=lajVl/IeoACZS/6yuLfZkN/hPyImAZ81vhSDRfkAdyk=;
- b=eJJrz7MRQMgzmVowoY+fmGnYyXEbli1tJ43o5YqXZuAlvNO2cZg0fFSlqvPobuqNZT
- ohsdSayEA/CWUFdk51UVqsy1QQYVhEvOdrXq8UQJrveI8KaPPq6+aG1JjFN5/dAN5M97
- Z6de6DQbVkFr1c8sbvqwjTvzQVmc7JSW+hEiP5CoyzKT6xpJtscq0hqSLFrKVIEu33XH
- /30YbtUhD9k17Xv+t5RBai9mwNFOFcgqP9Hx3hItmZD1gsUjXdg7k80OMbAKNkCTlCnb
- +02+NiEjZmXM6kP2Y+8jR0X3xQxUTJxG+ihCyFPAHnlt8DtCCx/VoeKeaahF0r6GhRC6
- 7A0Q==; darn=lists.denx.de
+ b=C9uCQr2444aylQJ/sr79nbPsLztQY56GBf4GHt9pnCmltCZQWldLrf5nAcBzn4I0Ky
+ fUGSIWHzAP06d4b/nrbaQJuUIZ5OnUi62qU641eV9J0MxKAcJyVLSQdwWAloYz4uWKSd
+ 5PhkPfArhWBYftUaGGK0YMvDyyUE/tAct0Fb81c+ZVWv+OD1ZIDwOMRdJKTXsl5vYXSd
+ gGNlvxjPnnV887ueA8t+Um3Rzji6qe4mRiGATpwoyGO3IbG9c+0SL1WQp+dvOTjGqytc
+ rM3V4qX+b2NxYYK3hABOsmkwnltoW6qG4lsaap99XSOlIFuqj0QNPuxrCJHlSn7a5b7j
+ uhkA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775490475; x=1776095275; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775490638; x=1776095438; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vC30gAlxhbkoONZB560oEoysJdu2OhtU1qSAT2Gzzvw=;
- b=Oyo0o1MSKGubApEtQlD+g4NpvwZrkWtgLcNN/xEOe1cVu0e+hH7EOKX6RXmkgm8MKE
- OFhyTKoAIZxa+OF8hoVmOkC8xAroh52OZO02RhTkIcbZfjGw5zIEr2bMCumnia+Ci6/m
- gu+FoecJCWBsgDBntgCrtClA+AgIpLgprujA4=
+ bh=ro4aHxkzCP7OwUGYL7lZuP+4Z5duDwb3/XNs+brNyhY=;
+ b=hqs+R8cfwFBFS6w0Ir5mICAi7uwXuOtfOI083hu2XnQ9cGModkYmBXYtUfyMQD0M3B
+ N57QuhcB2qhRIcslB/FPI25qrB6dcd5C33Rx/C3CnwPMbadZEgNH+qAQk3rVeY4xa20o
+ k5HYWT5pllROQ/nqu+j9miKOlslzIZs6Ev6fU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775490475; x=1776095275;
+ d=1e100.net; s=20251104; t=1775490638; x=1776095438;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vC30gAlxhbkoONZB560oEoysJdu2OhtU1qSAT2Gzzvw=;
- b=bqTom+6UB+Yx3SSrVwaEu0duo+WOgbCZ8NAosEqISjj6zexBk5YWMOiKlAScDZrzKw
- A6GICKagJ7aEBMajCpiOdyAG4uwNZ2umoETgkSGA6QwFz4DikAHTU/Y2yALwrNpwH3Q8
- OnMsKxxhMa8R49ULgR4UF/bqeKJdmWq/wx2u5h5/Sjhj28TQbcOpbrcLavrlEFMH2+TR
- 7sq5agtAl/KOKy0nduvBzCxn9z7mYgBiNPHXVdVfQNqniQz5rGYW39o5NBF9c9v4eTXy
- ihsypJCv6Ar9mb6EVwQojES1d8jsLnKwf8D55Gubm9p5g4Gs/j1y6XC4rrwm8GsH4Xsf
- bLMQ==
-X-Gm-Message-State: AOJu0YwDocMvqlkF24AFzvuEp2qslMsSkpNsRLpg+6/BpPN0ocFU/9Cf
- WMzhQ9iADORFakszyGylBwujwgXMLU3N0fypyY9nV5/d9KXT4/RsP+04ZREK9xwLVUTFJEyHNkg
- D1xLoe710JBRoMt1TEuQ1A8vm7DVdiS32j//P/RXr
-X-Gm-Gg: AeBDievPOy5/X30/3jcHU/CUbd7CmomdB0bEvKrg5a3yY3o1nnHJrdFDGIzqDNMGs0m
- Je4Jo/j2Q9Fzj3FJ5yoMUpvPoRvJ1n13msKvHVOluEtk6zzP5foVzaqmc5tFPEvKJiXfplNmhJU
- i+lwgaLmABGhN1ywz/3CglV/vOU6axgYtv2X8aW+a4BuGPbzGuFMIAc0pA6lzFHPZm1Zk61+g+8
- ywttZ0ULoEdofluP7OPSpHJ6/zO2DVwKk9GmWvx6Vy08PFO/5K4M+Tk1v05/iBpBld9uDBlK98p
- uUkJXAtElRXPRTJZ
-X-Received: by 2002:a17:907:a0d3:b0:b9b:3a1b:e2ed with SMTP id
- a640c23a62f3a-b9c67957cc9mr669302366b.24.1775490475024; Mon, 06 Apr 2026
- 08:47:55 -0700 (PDT)
+ bh=ro4aHxkzCP7OwUGYL7lZuP+4Z5duDwb3/XNs+brNyhY=;
+ b=eQkryptyykD6fZendntDAjZOjqiU6ipFsnRuLQvTgeSU1fvKwAUi/ycDz+zcfJiYae
+ PTSqwTg2eGYMrV2hMCBVrcs7HGkWz9Y+UAJ+eF/iFtW32P0ILWdztj1isaUabFP4GVNp
+ 67n525QX00xU2H6JsnJIB1BxmAHWyMB026KDW1KSLYxNTADGv2CjrdwAiPQL9gNN5JX9
+ +ifqud1xAkkOG9LXmdzzkpakx6jqs2KbM+aawYIg7jbPHrDGlUnDGVPTUZeC465kGbj2
+ R+BIMGN9NhK5/MgmPly74FTaSwVk2DsNqb/aOFoERN1ip88t/TdqLtoXJ2FM6ix+Wqka
+ uv3Q==
+X-Gm-Message-State: AOJu0YwXN1VYynpOuK3JjHXNu4lgcP2DQ4TNk+SDsBpBPmfc7GgfSt4E
+ 418vysbmmjKkGcw+FhlDU04663X1QjJ/4/e2yK20yHipuzLG5fkzk2F2QSSGiB+MegDV1jRalnP
+ Zs/nmGCOtmHckhUFcXqwSpdJaw0xFZotn0Ij5sSK+
+X-Gm-Gg: AeBDieuJvMcn9or3/kctVYCnTbRwCHHi+aoqcjs8xr/vRpEpCNbrJ8TSvcHEWMzCzBA
+ xeUmCccacNu6p6VDPV/5PRufpb2WmoRpBMiVe06ybqnB9mGvwmQc+NHmsUt8nMLR2Qp+4b+A+Pp
+ Yc4l/lz4pMbzS9OBcfX/ZYgfizM/x4DFse75wqCA42dlX/kbPKmyVmE3ZMnbDxyQRlxjevZkuo5
+ zWqKHbBhm9BykhEYM4MMra+R8c7dg4WLhNxlTHWGX3J1sOvBt/kWsdmoGL0D9iqtjoLZklt6J0n
+ rtSQwQ==
+X-Received: by 2002:a17:907:86a9:b0:b9c:b475:90f4 with SMTP id
+ a640c23a62f3a-b9cb4759648mr293425266b.29.1775490638095; Mon, 06 Apr 2026
+ 08:50:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260404-qcom_spl-v1-0-9e6c2ac66587@seznam.cz>
- <20260404-qcom_spl-v1-4-9e6c2ac66587@seznam.cz>
-In-Reply-To: <20260404-qcom_spl-v1-4-9e6c2ac66587@seznam.cz>
+ <20260404-qcom_spl-v1-1-9e6c2ac66587@seznam.cz>
+In-Reply-To: <20260404-qcom_spl-v1-1-9e6c2ac66587@seznam.cz>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 6 Apr 2026 09:47:43 -0600
-X-Gm-Features: AQROBzC5WBKftU5Gr4GTpl9txtzxILj6aQ5tlgHHjnXJE62qS2SgZpyVxIImBpU
-Message-ID: <CAFLszTi=CUiXU5PD4aw_Mei+YMzJRE11RF8QhLEZHDJ=AcvWHQ@mail.gmail.com>
-Subject: Re: [PATCH 4/5] mach-snapdragon: support building SPL
+Date: Mon, 6 Apr 2026 09:50:22 -0600
+X-Gm-Features: AQROBzBBShKHbIYgE3Owi8kVprbyXKn-WAZIslbyfYIdF4jh1RXvpdA5iKQoXmY
+Message-ID: <CAFLszThhVEp3EH1Rqb6acPzJ6TbPc0p0thCG0+PHHCruKGz=iQ@mail.gmail.com>
+Subject: Re: [PATCH 1/5] Makefile: add SPL_REMAKE_ELF_LDSCRIPT feature
 To: michael.srba@seznam.cz
 Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  u-boot-qcom@groups.io, 
@@ -142,111 +142,46 @@ X-Virus-Status: Clean
 Hi Michael,
 
 On 2026-04-03T23:18:18, Michael Srba <michael.srba@seznam.cz> wrote:
-> mach-snapdragon: support building SPL
+> Makefile: add SPL_REMAKE_ELF_LDSCRIPT feature
 >
-> Initially sdm845 support is added, and only usb boot
-> is supported for the next stage.
+> On some platforms (at least Qualcomm), the bootrom expects an ELF file.
+> Since the contents of the ELF file are platform specific, add a config
+> option that allows specifying a linker script to use to produce the
+> ELF file.
 >
 > Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
-> ---
->  arch/arm/Kconfig                                   |   6 +-
->  arch/arm/dts/sdm845-u-boot.dtsi                    |  16 +++
->  arch/arm/mach-snapdragon/Kconfig                   |  98 +++++++++++++++-
->  arch/arm/mach-snapdragon/board.c                   |  26 +++++
->  arch/arm/mach-snapdragon/include/mach/boot0.h      |  61 ++--------
->  .../mach-snapdragon/include/mach/msm8916_boot0.h   |  54 +++++++++
->  .../include/mach/sdm845_spl_boot0.h                | 120 +++++++++++++++++++
->  arch/arm/mach-snapdragon/u-boot-spl-elf-sdm845.lds |  25 ++++
->  board/qualcomm/sdm845_spl.env                      |   1 +
->  configs/sdm845_spl_defconfig                       | 130 +++++++++++++++++++++
->  doc/board/qualcomm/index.rst                       |   1 +
->  doc/board/qualcomm/spl.rst                         |  70 +++++++++++
->  12 files changed, 554 insertions(+), 54 deletions(-)
 
-Please can you split this? E.g.
+> diff --git a/Makefile b/Makefile
+> @@ -2014,6 +2017,26 @@ u-boot-elf.lds: arch/u-boot-elf.lds prepare FORCE
+> +quiet_cmd_u-boot-spl-elf ?= LD      $@
+> +     cmd_u-boot-spl-elf ?= $(LD) spl/u-boot-spl-elf.o -o $@ \
+> +     -T spl/u-boot-spl-elf.lds --defsym=$(CONFIG_PLATFORM_ELFENTRY)=$(CONFIG_SPL_TEXT_BASE) \
+> +     -Ttext=$(CONFIG_SPL_TEXT_BASE) -z max-page-size=0x1000
 
-- boot0.h refactoring and msm8916 header extraction
-- sdm845-specific boot0.h with the EL3 escalation code
-- Kconfig additions for QCOM_SPL and SPL_TARGET_SDM845
-- board.c SPL support functions
-- defconfig and documentation
+The existing cmd_u-boot-spl-elf includes $(if
+$(CONFIG_SYS_BIG_ENDIAN),-EB,-EL) for endianness. Please can you add
+the same here for consistency.
 
-> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-> @@ -1,6 +1,24 @@
-> +config SYS_MALLOC_LEN
-> +     default 0x10000000
-> +     default $(shell, printf "0x%x\n" "$(dollar)(($(SDM845_OCIMEM_SIZE) / 2))") if SPL_TARGET_SDM845
+Since this redefines cmd_u-boot-spl-elf using ?=, the earlier
+definition takes precedence if both SPL_REMAKE_ELF and
+SPL_REMAKE_ELF_LDSCRIPT are enabled. This is probably fine since
+enabling both does not make sense, but maybe add 'depends on
+!SPL_REMAKE_ELF' or a note in the Kconfig help text.
 
-There are three definitions of SYS_MALLOC_LEN in this file. Only the
-first matching default takes effect, so the conditional default for
-SPL_TARGET_SDM845 will never be used. Please can you reorder these so
-the conditional default comes first, or consolidate them.
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> @@ -247,6 +247,12 @@ config SPL_HANDOFF
+> +config SPL_REMAKE_ELF_LDSCRIPT
+> +     string "Linker script to run with u-boot-spl.bin as input"
+> +     help
+> +       This allows specifying a linker script that will act on u-boot-spl.bin
+> +       (see also REMAKE_ELF)
 
-> diff --git a/arch/arm/mach-snapdragon/include/mach/boot0.h b/arch/arm/mach-snapdragon/include/mach/boot0.h
-> @@ -1,54 +1,11 @@
-> +#if defined(CONFIG_SPL_BUILD)
-> +#if CONFIG_SPL_TARGET_SDM845
+Can you explain when you would need a custom linker script rather than
+just using SPL_REMAKE_ELF ?. Something like:
 
-Please can you use defined(CONFIG_SPL_TARGET_SDM845) here for
-consistency with the line above and to avoid relying on the value of
-an undefined symbol.
-
-> diff --git a/arch/arm/mach-snapdragon/include/mach/sdm845_spl_boot0.h b/arch/arm/mach-snapdragon/include/mach/sdm845_spl_boot0.h
-> @@ -0,0 +1,120 @@
-> +     movl    x0, CONFIG_SPL_TEXT_BASE
-> +     add     x0, x0, el3_ret_point
-> +     br      x0
-
-The el3_ret_point label is an absolute address, but you are adding it
-to CONFIG_SPL_TEXT_BASE. Don't you want the offset of el3_ret_point
-relative to some base, e.g. (el3_ret_point - _start) ? If not, please
-can you add a comment?
-
-> diff --git a/arch/arm/mach-snapdragon/include/mach/sdm845_spl_boot0.h b/arch/arm/mach-snapdragon/include/mach/sdm845_spl_boot0.h
-> +     /*  */
-> +     movl    x0, CONFIG_SPL_TEXT_BASE
-
-Empty comment looks like a leftover - please remove or fill in.
-
-> diff --git a/arch/arm/dts/sdm845-u-boot.dtsi b/arch/arm/dts/sdm845-u-boot.dtsi
-> +&rpmhcc: clock-controller {
-> +     bootph-all;
-> +};
-
-This syntax is incorrect - you cannot redefine a label when
-referencing a node. Try:
-
-&rpmhcc {
-  bootph-all;
-};
-
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> @@ -749,3 +757,21 @@ void enable_caches(void)
-> +__weak void reset_cpu(void)
-> +{
-> +     /* TODO */
-> +     while (1) {
-> +             /* loop forever */
-> +     };
-> +}
-
-This function is not guarded by CONFIG_SPL_BUILD, so it will be
-compiled for U-Boot proper as well. Since the defconfig enables
-CONFIG_SYSRESET_QCOM_PSHOLD, there could be multiple reset_cpu()
-implementations. Please can you wrap this in #ifdef CONFIG_SPL_BUILD
-or move it to a separate SPL-specific file.
-
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> @@ -757,3 +757,21 @@ void enable_caches(void)
-> +u32 spl_boot_device(void)
-> +{
-> +     /* TODO: check boot reason to support UFS and sdcard */
-> +     u32 boot_device = BOOT_DEVICE_DFU;
-> +
-> +     return boot_device;
-> +}
-
-Same here - please guard with #ifdef CONFIG_SPL_BUILD
+Some platforms (e.g. Qualcomm) require the bootrom to load a custom
+ELF format. Unlike SPL_REMAKE_ELF which uses a standard linker script,
+this allows a platform-specific one.
 
 Regards,
 Simon
