@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EA61F46C46
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 14:24:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2682EF46C45
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 14:25:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9EC158406D;
-	Mon,  6 Apr 2026 16:24:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E80BF83EC6;
+	Mon,  6 Apr 2026 16:24:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="jvlnlxsA";
+	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="OIQvds9b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A8F38406D; Mon,  6 Apr 2026 16:24:35 +0200 (CEST)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id 3E1908352B; Mon,  6 Apr 2026 16:24:37 +0200 (CEST)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00EE18341A
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 16:24:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1991C8405F
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 16:24:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-2b0afa0210bso19374745ad.2
- for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 07:24:32 -0700 (PDT)
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-c76b0cda2aeso1512378a12.2
+ for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 07:24:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thingy.jp; s=google; t=1775485471; x=1776090271; darn=lists.denx.de;
+ d=thingy.jp; s=google; t=1775485473; x=1776090273; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dOI1OYw5L9OgSAUVFCFOz1abNqr83KHrn1G2y294vG0=;
- b=jvlnlxsAac8my78Lq0pezNJx51HRTmaGZ5OSTbnuMLo8klr+x+BH9aUPUIs40A2owm
- rdSaR8+yU84vsDm/g5Q3chTm/MLD0LiJUBeyp0VfU9goL3zxFIusn+4/FR5Xz+ohTvGp
- 6LRSauVB6N1KLHf3my4JkMW17Ujm4sU/waMew=
+ bh=QvY6rMqtz4X518COuQ10zUdJPlmfu0QsTYJzfAaMLOs=;
+ b=OIQvds9b0AjKmDCsI6WOcCmhj0YIX/AaNjFNq332ynTFxDwtRt/EZHJRZi8sUXC/oN
+ pH1sRN5qC4gTAsLyrmMNy+fUF1mmGaRy/7QOOKwC7MUNSlJX8eQ5Cl2wWCZCYpTY7/OT
+ OgQkTiEgoh9tZY5f7+UIOBityQ4WYfBVyg3J0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775485471; x=1776090271;
+ d=1e100.net; s=20251104; t=1775485473; x=1776090273;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=dOI1OYw5L9OgSAUVFCFOz1abNqr83KHrn1G2y294vG0=;
- b=RPNWEa8gBpJJgB24OqTv7A1avrY/910hPKGML4vJo4yr3S6UM5IQ5CB4SSXJg+vQES
- ZxNrlqOgBDSujph0nN/A6oFcNEsvsY0r5UZ+Gj6ZtRzoGwqLMCc6kb3jcSYGwvrw9JgG
- i8DftkhFyif1RJTi99fEPqbmdYTKE5gZ3WYMs7KL+jU0QPPvkasxZIHxcp4tDkwSovo3
- e3yOkMdftGW24OGux3R9ixDnk2bnpdJTOeq8pCOzZNLH8dRuDnNlqqD8gHgiDfkNouta
- Jz35FrOPHxPh/gg5Y8WG3vIRvG6jyxy7M4hEo/RXrk5Ejf7UcVikrtdjbbMt61G01paU
- KL6Q==
-X-Gm-Message-State: AOJu0Yx6OCEdmpZ1Wph4F++Z4Ii+ijiuD7eWw6gI76twTtP12M1F4b1c
- GtpmqB1DCRwzOB0sX8Prt+FFuJfm0tqOtvve9Z62TOmXWFfLcQlePzcb7m97MKj9E4M=
-X-Gm-Gg: AeBDieu5eqx9iGXZgfy2Y/NbHmzoOG2d29Vbhh21lpxW9RJDCn2jkOrIgk/5sVhRCBZ
- aw2N8Y9p0O7pBXdi843sNzldpR6ZzZZAGWnBCUiUSDmB/pikx1Lhu97OBKNnk8HLxD8oN9FISKZ
- kVTTRubpCL41HS5dHHlu6ts18qWDbqfItcpj4eGJOKwme35rYfDzPoUbLVSYXYfuTiEfGa6aPiV
- hXvo7L+reDpkQiPImtYqOY/e2Ny793OECYweociLwSViyAzC6j2/1IcpEKMaL5nrZ46b6w7jcQD
- MW19SqY1JyhONiJYXrJWPQT1PrSMZulKYKA2m9hj/Zqcdgkc1gV29MSqk7g8qBISoBlIeO9JWU1
- LmahwHVIi5/GGJq0pRO5Tur2RjhZU6o059+LUYJDYu1M394Py5knCbQ9tf4jblS048kFDr1Hgo/
- eAD2eLOLph7QJVxVoLLMPmLd7U/9nOMivI50VgJQHSF2q7pp9ByFqPcLf1JW4CHUFBlbQqp7w79
- I/kAcAqDJc=
-X-Received: by 2002:a17:903:1a30:b0:2b0:c90f:449b with SMTP id
- d9443c01a7336-2b2817d8a15mr129536815ad.10.1775485471387; 
- Mon, 06 Apr 2026 07:24:31 -0700 (PDT)
+ bh=QvY6rMqtz4X518COuQ10zUdJPlmfu0QsTYJzfAaMLOs=;
+ b=VAilpQZLwE2H1FVCTjH4geu0v+YQgx5i+d+am9Zx6VtwWg8qBzdgr8XyFRujAhl8fO
+ AEbL8zq1AFbOCJPJDv1bj/VUYbeoa9vSu8O9/Npjqyga5jvG3LAZI02qDpOugU0PZEZF
+ wvvEK+nXlCHvCgASPw90bq0p9/PUMItVo+jZPNkq0F5V1OvU+jHlObzNH7sLGjcjWui0
+ AcZ2JcF8v6y5D2ioZQdZLep75vTLvYTEGqGyrsDNHFZBE30q4veF3eRWE5/9oW23Hjdm
+ M+O0jcAr/NFvdORQKAmZZ7gFMlnHb6HixDGRGao60mnSg1xIVxdFrgFXzCia/zmJzBAG
+ QcIQ==
+X-Gm-Message-State: AOJu0YwBDp5fH3kEcj1h7ds1CCCLercGcLH1gM/c3FjSNecYBDIeFH7m
+ B3ZlA/NHXAGio5Wb+B0Q2p+1e9IXiN3RsafNvRBPfQpjnLlQTWeCnsKMIWqxRKZB4lY=
+X-Gm-Gg: AeBDievygn9Ay8LaEb53+g4R8yd9rKhA6Z0fDSc3KNeyAB5ikvLcTgO0/P5a/RP/BXD
+ /JB5QJ8TqGBl135gu36KtrDC5HvKNLGudZeJtML1LzLeZEM29fFCy9xW028gMqaI5Sdb2uPBSoa
+ d/kpeyllFtgqiHG+QSzz/NwqmtISqJdQk/L7EYUcQb35fhLtkFMmet07UN1A6QWMJKf9f0+FTHl
+ RlwZQ95hhjxOM/T09ryKPVUXAbSvpu3UNUAtCXMqwcZlyCurrF5ouHSc5uEiLmzeoi+pCaRzVQL
+ wnplXVZuVQbBT3pmk59QmV/c/Z6LiTr7RpnBNzwqEgMb2tAKla0en8O7gLBCyYaxRe0HSeRLt2h
+ mHKxKEOYDS3Ft7I/J7qCHIB50CvsBYoKGgzaa0pTU/XpKebpBfVw0ELfLxyIiOQGtYBSVcE73DZ
+ W81bu0pvE7eHPkF9BX1G4IejXm4TkIa8SNKimv9L+lAdMroeA9yigCitF2H49o0Kzm5CJIt+lZa
+ O5ptyyWA2A=
+X-Received: by 2002:a17:902:f642:b0:2b2:49a7:a5c4 with SMTP id
+ d9443c01a7336-2b2818b00ccmr116069805ad.27.1775485473573; 
+ Mon, 06 Apr 2026 07:24:33 -0700 (PDT)
 Received: from kinako.work.home.arpa
  (p1866070-ipxg00f01sizuokaden.shizuoka.ocn.ne.jp. [180.1.30.70])
  by smtp.googlemail.com with ESMTPSA id
- d9443c01a7336-2b27478cb4fsm156885295ad.29.2026.04.06.07.24.29
+ d9443c01a7336-2b27478cb4fsm156885295ad.29.2026.04.06.07.24.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Apr 2026 07:24:30 -0700 (PDT)
+ Mon, 06 Apr 2026 07:24:33 -0700 (PDT)
 From: Daniel Palmer <daniel@thingy.jp>
 To: visitorckw@gmail.com,
 	angelo@kernel-space.org,
 	bmeng.cn@gmail.com
 Cc: u-boot@lists.denx.de,
 	Daniel Palmer <daniel@thingy.jp>
-Subject: [PATCH v2 2/5] m68k: Fix writew(), writel(), readw(),
- readl() endianness
-Date: Mon,  6 Apr 2026 23:24:08 +0900
-Message-ID: <20260406142411.2992618-3-daniel@thingy.jp>
+Subject: [PATCH v2 3/5] virtio: mmio: Keep vendor id little endian
+Date: Mon,  6 Apr 2026 23:24:09 +0900
+Message-ID: <20260406142411.2992618-4-daniel@thingy.jp>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260406142411.2992618-1-daniel@thingy.jp>
 References: <20260406142411.2992618-1-daniel@thingy.jp>
@@ -99,45 +98,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In Linux these are meant to read a little-endian value and swap
-to the CPU endian.
+The vendor id is used as a little endian value but it gets
+swapped to the CPU endian in readl(). Swap it back to le
+to avoid the below weird output from `virtio info`.
 
-In u-boot for m68k this is currently borken and prevents
-virtio-mmio from functioning.
+Device 0: UMEQ VirtIO Block Device
+            Type: Hard Disk
+            Capacity: 1.0 MB = 0.0 GB (2056 x 512)
 
 Signed-off-by: Daniel Palmer <daniel@thingy.jp>
 ---
- arch/m68k/include/asm/io.h | 17 +++++------------
- 1 file changed, 5 insertions(+), 12 deletions(-)
+ drivers/virtio/virtio_mmio.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/m68k/include/asm/io.h b/arch/m68k/include/asm/io.h
-index 35ad4a1c0444..f4877b0446cf 100644
---- a/arch/m68k/include/asm/io.h
-+++ b/arch/m68k/include/asm/io.h
-@@ -24,18 +24,11 @@
- #define __raw_writel(l,addr) ((*(volatile u32 *) (addr)) = (l))
+diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
+index 1cd737aca249..ddf873fa96fb 100644
+--- a/drivers/virtio/virtio_mmio.c
++++ b/drivers/virtio/virtio_mmio.c
+@@ -374,7 +374,7 @@ static int virtio_mmio_probe(struct udevice *udev)
+ 		 */
+ 		return 0;
+ 	}
+-	uc_priv->vendor = readl(priv->base + VIRTIO_MMIO_VENDOR_ID);
++	uc_priv->vendor = cpu_to_le32(readl(priv->base + VIRTIO_MMIO_VENDOR_ID));
  
- #define readb(addr)		in_8((volatile u8 *)(addr))
--#define writeb(b,addr)		out_8((volatile u8 *)(addr), (b))
--#if !defined(__BIG_ENDIAN)
--#define readw(addr)		(*(volatile u16 *) (addr))
--#define readl(addr)		(*(volatile u32 *) (addr))
--#define writew(b,addr)		((*(volatile u16 *) (addr)) = (b))
--#define writel(b,addr)		((*(volatile u32 *) (addr)) = (b))
--#else
--#define readw(addr)		in_be16((volatile u16 *)(addr))
--#define readl(addr)		in_be32((volatile u32 *)(addr))
--#define writew(b,addr)		out_be16((volatile u16 *)(addr),(b))
--#define writel(b,addr)		out_be32((volatile u32 *)(addr),(b))
--#endif
-+#define writeb(b, addr)		out_8((volatile u8 *)(addr), (b))
-+#define readw(addr)		in_le16((volatile u16 *)(addr))
-+#define readl(addr)		in_le32((volatile u32 *)(addr))
-+#define writew(b, addr)		out_le16((volatile u16 *)(addr), (b))
-+#define writel(b, addr)		out_le32((volatile u32 *)(addr), (b))
- 
- /*
-  * The insw/outsw/insl/outsl macros don't do byte-swapping.
+ 	if (priv->version == 1)
+ 		writel(PAGE_SIZE, priv->base + VIRTIO_MMIO_GUEST_PAGE_SIZE);
 -- 
 2.51.0
 
