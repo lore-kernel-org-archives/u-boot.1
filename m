@@ -4,96 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9904FFB5189
-	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 03:01:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 523D5FB5189
+	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 03:01:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E364B8341A;
-	Tue,  7 Apr 2026 05:01:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2CC2C83F98;
+	Tue,  7 Apr 2026 05:01:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iFUYdT+k";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="n7aG8VPm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 061ED83EC6; Tue,  7 Apr 2026 01:38:38 +0200 (CEST)
-Received: from mail-vs1-xe30.google.com (mail-vs1-xe30.google.com
- [IPv6:2607:f8b0:4864:20::e30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9253F83936; Tue,  7 Apr 2026 01:53:16 +0200 (CEST)
+Received: from mxd-2-a16.seznam.cz (mxd-2-a16.seznam.cz
+ [IPv6:2a02:598:64:8a00::1000:a16])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E48768352B
- for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 01:38:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 78F528341A
+ for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 01:53:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=anatol.pomozov@gmail.com
-Received: by mail-vs1-xe30.google.com with SMTP id
- ada2fe7eead31-6058b3ec384so1271599137.3
- for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 16:38:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775518714; cv=none;
- d=google.com; s=arc-20240605;
- b=X/sjjH1HuLfdEcB6n41LiGHGUmOj3J0uQn2T+/TDdiwSf99GSnn39fPny0eq13U6zZ
- 5JNqk9Ww1an5Ov0ehGaWHcZD5d7aImoc1DLdLCafdp+AxB32HKciMl2kTS5kdgg+XRQI
- DCVnqbG2EhvsDABjwyADS+2ce5m7miSfWWNbWmmN76XuiIxut6FAzaN5MaMoIWPDkHSU
- Sy/BhqGgbxFUvpOK3v4qKBy65yyih44z70MU+OdYKed60GhbV+ETa0uQHEQKoyEWW9VC
- sRCAWFGWsq15IJjzvMGVUUFcE3DmcQ+vjYngsahYefWIWSdBRIMYQHYvazawL1a/0Pbr
- m+nA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:to:subject:message-id:date:from
- :mime-version:dkim-signature;
- bh=XoG7AKosysNBCyqpurb0tJ+aXh1fnAf/oeHPOdVkoFk=;
- fh=ea3Lb1kmqTyoSSOGd3r79PdCdfQHXBjS15GzGXd6hwE=;
- b=GlmJt6A9TgeRu3iDhE3SA+t1quFWmQXcWSchceWBhKD6m/AqkHhNlYzOy7KBTKty9I
- 4a9NrF4/HJw+vcOGirWH0wf5VmGJCuSDyIIbvk/9o2V9tzOQtDPiNk8qpfkBamfyztvX
- 6OZkVFwLzWm2UPKgaUE6W0Cqe3J/VYYWpvsSQogVUlPy6EFKcSr64Fg+HzKasJHbBdGv
- 8leN449Sv+QCA/IakZk0XXNj8Ud/ouzbOzJN+Ougp4j9ZS6cNUs58ikb0bDL8w+oQzuI
- uRFWZ9RM5HNX+HwwTZclFbMJPZ71+vyZvh8aDhhfZYXGVL/TZT/SVno60c09HXw2REB5
- 7uBA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1775518714; x=1776123514; darn=lists.denx.de;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XoG7AKosysNBCyqpurb0tJ+aXh1fnAf/oeHPOdVkoFk=;
- b=iFUYdT+kLl42wtSHH1tJ4XoeBtMJyLgnSFUVnq8buTx8yaLg1JH72S1RkKoRMFBxho
- 5a7NE+QtB7VVL9xvosDuJ1DXGWQc7hi8yETFeDK9RF5dKVHxtFXnO1So7fzhvoEuWxXz
- h/mIZTiavMGuzM47eMhsAFqb2xrYkGjiePKj0knYlbXY91UNmeoNVveX0ioS1i/AuBF+
- aLHt5I4ls4MKa8SvAH6aZ4tjl//VgB5pdBKKlWufk7Y2t5tpJc5tPrAPteKYT+VMrMlL
- DRY/NbCg8qeRdtduNKdawfuUqfv6n38aAXAv/BgRG6CDxCQl4LC92HHQIZtdx8w8VOfC
- IbsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775518714; x=1776123514;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XoG7AKosysNBCyqpurb0tJ+aXh1fnAf/oeHPOdVkoFk=;
- b=XSPL8XL9xhXVLSX/OERG4NapYvm2bsht0H6MMTYp9e/Ar3XW9Aw4OwWga/n10WTOKG
- ARXrYOEr/+YdMP4j5/mGTlmZ3jZCiWR2rt9AfOolW+UDqstStccbE0vgsVNPFUYlmoya
- YcAAELWyS3i8ZqFPiZ3Tjrv4JwjPoFSR2UJtHaVmd6rDfbTrYVIsbD6s6atJUva2N2cV
- 1ALusdLznSWU+J4EIiD3iPhXDUS5wkPvosUliV7D8ChaQEzFokAOVC9A6RqBJPiBkWOI
- 2Lwdda+M1Tl8mBWqZPNQAvWwX/vcEaBKeWRtw6+VRvNK46xcqzF0shLIpZ9uDeUH2VAt
- iQDw==
-X-Gm-Message-State: AOJu0Yz5GRocpoJY+O8rl1pT4bDHhdASP5dWx/9+jTMjZJEuu67jZ7Y3
- fZvodaGaIU97u+cST1AsIgEW4DMDDJpOJveBTgTrT2o6SSxoPppoIJOQQsQjf+Id1idgQ6hOrjP
- 4DGIixnvdKBbWGIx+LUDNvTIx706RbX1mnpuy
-X-Gm-Gg: AeBDiesXG9Zr8c0ucAV456yiuuXbwTxdcHxgi0Sx70lzh25ZYlYZNqMvZbaarFhnDEM
- uirduxSLcdEEPqJxejphtIdBYYCj8kPGEfaIVzt6KFqRfpG4YuE6wEF7SsShTXLwGKfKG+3MZcX
- DfTENk3W0A5YkirmQgsGpyGhP5s/zzSr90l9anTauol6raIUeqkyaLZV9QPBBBjLolZDoTVNhlb
- ZqvfzO3QPogevu6vqdDHxu50STP6zko+o2aOncRJO9ll37Rl7yYCQINeCfiE/krIuYSw1JsZ8R4
- V+9IM6SQLwysFRH1+6V9gf/LIrnsMZNbuoXYdO1tb94UbbqFJiafd4uplZZoPAy4/LBIs0c=
-X-Received: by 2002:a05:6102:689a:b0:5f9:39e9:3562 with SMTP id
- ada2fe7eead31-605a4dd9a49mr5009612137.2.1775518714138; Mon, 06 Apr 2026
- 16:38:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=Michael.Srba@seznam.cz
+Received: from email.seznam.cz by smtpc-mxd-7644845457-sbn6w
+ (smtpc-mxd-7644845457-sbn6w [2a02:598:64:8a00::1000:a16])
+ id 6f628ed2346cdabb6ecb428c; Tue, 07 Apr 2026 01:53:13 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
+ t=1775519593; bh=W8MwkalD0LlgiZdaoztsYwK9/bd3tQAAEkyDu+OqBUo=;
+ h=Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+ Content-Language:From:Content-Type:Content-Transfer-Encoding;
+ b=n7aG8VPmashHWmhDRgN4DGe8Re9UOq3If8x7dJ+sY6BxiGe4pH/I9tis431YSVPrN
+ bwMMjLl1xBgnwmvBSO+LG1KRug+Do09L47eaQgw0BgGLjuvHNw0kdI3vLS6M2hP/IN
+ pEpK2cum2Pe6NRCYgPnZ48zEmYtlbvP5hyBbfGksYfAqduvLTq3sRgr9xYp8VOf6L+
+ x+6NFOIdM1iBrmWNkTduLnYBAmk3teI5FYo53f3juXyjDPmViuqmVDbyWU8f6qq7xk
+ Ec6FxKZso0RYln22PNE1wCBYx0cEzyxlmt0xcpOkpvMGkrlI0UGydM72VfWENWuIOO
+ 9KUgfr0vcktVQ==
+Received: from [192.168.0.240] (ip-111-27.static.ccinternet.cz
+ [147.161.27.111])
+ by smtpd-relay-789d8dfb5c-5qc6d (szn-email-smtpd/2.0.71) with ESMTPA
+ id dac2390b-5fd2-4e9f-b818-be517e5343eb;
+ Tue, 07 Apr 2026 01:53:07 +0200
+Message-ID: <8555f993-36da-4f4b-a6b6-2ef079618cd0@seznam.cz>
+Date: Tue, 7 Apr 2026 01:53:05 +0200
 MIME-Version: 1.0
-From: Anatol Pomozov <anatol.pomozov@gmail.com>
-Date: Mon, 6 Apr 2026 16:38:22 -0700
-X-Gm-Features: AQROBzC2VMJqGLh7op_RwnKTTcxZlTrBNKLs5b5dhfPv-h5Z8cBnC-J48p5wrP4
-Message-ID: <CAOMFOmXFjh1rXWb7bacrLHAZahe6tcyEyjYAKv5=SHP=dJf3nA@mail.gmail.com>
-Subject: Switch ARMv7 Cortex-A processor to ARM mode right before jumping to
- target
-To: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [0/5] Add SPL support for Qualcomm platforms, starting with sdm845
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+References: <20260404-qcom_spl-v1-0-9e6c2ac66587@seznam.cz>
+ <CAFLszThqzujQqjcirUf-2w6+wuXKv9+=WZ_nGjyKiKtzTkG07w@mail.gmail.com>
+Content-Language: en-US
+From: Michael Srba <Michael.Srba@seznam.cz>
+In-Reply-To: <CAFLszThqzujQqjcirUf-2w6+wuXKv9+=WZ_nGjyKiKtzTkG07w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 07 Apr 2026 05:01:00 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,25 +75,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello folks
 
-I=E2=80=99m facing an instruction set mismatch issue on ARMv7. The system u=
-ses
-a proprietary U-Boot=E2=80=93based bootloader (based on v2022.07) that runs=
- in
-ARM mode and then jumps directly to my application. The application
-itself (Zephyr-based) is built in Thumb mode by default, which leads
-to problems when execution is handed off.
 
-Unfortunately, I cannot modify or rebuild the U-Boot binaries, as they
-are closed-source in this case. The only control I have is through the
-U-Boot environment (uboot_env).
+On 4/6/26 17:48, Simon Glass wrote:
+> Hi Michael,
+>
+> On 2026-04-03T23:18:18, Michael Srba <michael.srba@seznam.cz> wrote:
+>> U-Boot SPL, as it will be built using the defconfig added in this series,
+>> replaces xbl_loader.
+> Please can you clarify what happens on devices where XBL_SEC does not
+> have this vulnerability? The code checks for EL3 and skips to reset,
+> but if the SMC call to unlock secure regions fails, does the code
+> handle this gracefully or crash?
+The XBL_SEC ELF must be included as part of the u-boot ELF (this is what
+the linker script does, yes it's cursed), so only a vulnerable one would
+ever be included at build time (or if not, JTAG will be used to alter
+the code flow).
+Ideally a single fixed version would be included with u-boot as
+an ambiguous bag of bytes that you are forced to put in your ELF to have
+your actual code boot, but even if you could convince a judge that under
+EU law that exempts you from copyright, under the US law you're presumably
+screwed and in any case not getting sued is preferred.
 
-Given these constraints, is there any way - via U-Boot environment
-configuration - to switch the processor into Thumb mode right before
-jumping to the application?
+In case the documentation is not clear enough on this, you absolutely
+need to BYO an xbl_sec.elf (because I doubt u-boot wants to carry it,
+and even if it does I'd rather not share "firmware" (using the definition
+of "stuff that comes on your device and nobody ever wrote down a license
+for, or just never gave it to you but that's actually not likely")).
 
-If not, are there any recommended workarounds for handling this ARM
-<=3D> Thumb transition when the bootloader itself cannot be modified?
+For now unless you can find a vulnerable XBL_SEC you'll need to use
+whatever you can get (e.g dumping one from existing xbl.elf on your device)
+and use EUD or plain JTAG to jump to `start` from EL3.
 
-Thanks in advance for your help!
+I think it should be legal for an OEM to intentionally ship an old version
+of XBL_SEC, but as for making it easily available for download that
+depends on if Qualcomm distributes it to *them* with any sort
+of license other than implicit  "obviously we won't sue you for using it
+exactly the way we expect you to use it", and I kinda doubt they do.
+
+To be absolutely clear, to my understanding there would be absolutely
+no security detriments to qcom's precious (sadly legal) security model
+if they just publicly released a stub xbl_sec that doesn't drop to EL1
+before jumping to our code to linux-firmware, since the whole xbl.elf
+is still signed by the OEM on the 99% of devices that put security over
+freedom, but since they made the version of that which they did for google
+explicitly check that it's running on an SoC fused from the factory
+as intended-for-cros, I don't think they are going to do that.
+Maybe it's a product segmentation thing, "how much extra can we charge
+the few rare OEMs who don't want to use our super great stock bootloader".
+(I don't think the idea of an end user having a say ever slips their mind)
+> Regards,
+> Simon
+
