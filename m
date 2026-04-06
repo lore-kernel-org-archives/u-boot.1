@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69DE1F46C7C
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 20:14:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76D8DF46C7C
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 20:15:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA5B683E36;
-	Mon,  6 Apr 2026 22:14:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 021BF84101;
+	Mon,  6 Apr 2026 22:14:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="R1Evhtsk";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="i5QdGLTd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38C28840BE; Mon,  6 Apr 2026 22:14:40 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 644C783FA3; Mon,  6 Apr 2026 22:14:45 +0200 (CEST)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2841183F98
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 22:14:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EA92183936
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 22:14:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7dbb89ab229so3005104a34.1
- for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 13:14:34 -0700 (PDT)
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-40946982a78so1300313fac.2
+ for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 13:14:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1775506473; x=1776111273;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1775506475; x=1776111275;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=+h7lhIpBgiiFE6Z5wj/ru8J/4UP+A7QCgf93BchKfxc=;
- b=R1Evhtsk1DAzx1VAgUIhtT+LhepLjKar8ZXunN+t/ljQ2s3/pI/UHkqoChCUrOHfSs
- yWfCOkUl3nzPwIk9BqLdmlDF4wt5E8jxRnWUYGZ2c3fUZLeyPQ0K7NVAYP3s8h+u/wUq
- aFodXYrtTH5JuKeElBhtpCOYmSHdOvtforRQsR1mufYAui+3wDUpS1dFP2+oSz+EEyUq
- zt+4aKT6V8Zr/YQf1tYm1x9fW/hd8nTEY0yrlJ+6XezWgohNVHsdvrNcmhr3X6teLCIw
- dTA/PKayQqhUkygHJiVGJrb3/McjdUge9XO/tZsrX10NQLyquAGYtO579Qgf9uHNrX76
- GYEA==
+ :reply-to; bh=ImF7ETlJ17SJOnDKQIoOd1dK414rrbCe3DpDaDCBbnM=;
+ b=i5QdGLTdrEHGU85ncLcWnwG9+Uyc/4PdjITVLZb2NbgP6JydpSUTWgTGhSJIqeI3vy
+ CmzJ8aR6ZLArE8f41xEILKMF4yyBoYffaquWmiBarkkJe/kVlbfH74eEpUbJ9V5dA9ZA
+ dkGUO2GFiyGx6RE6Q3MhdyURaLu7vMon4v+R9sCHM558cvPPr2qsVVU59kck6x5k4ZAY
+ 75TTuAh2G6tP5cWiG+Xu5INNMOdQtx4xfBTn9wVsBAUIA64BqS9XG9hE2NJ27NOa3rsI
+ wCa1u6ui7IyKzOXv3KIGh6ipNFWYZqNXyf0NdgG1M4KmSvj5OYx1q6fCydcWuIeBvyx3
+ dIqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775506473; x=1776111273;
+ d=1e100.net; s=20251104; t=1775506475; x=1776111275;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=+h7lhIpBgiiFE6Z5wj/ru8J/4UP+A7QCgf93BchKfxc=;
- b=nwg7qOTvAPCmQraM7i/zPn/OUtPd4ahTliiwwhgA9TDbS/zQZcUVDKEZUuMzY54owU
- zOnkADfcCATPX0r2TN5XbPbzgJsqyunMuPklGjyaQC16A71LzI2uvetOFAuy8mi8VcoV
- Ra5FX2J/fr5fqgJt7LaouvxY47Eu1C4zXxorvHCcJ4AyD1C/S9NyL6mpevacgjamYjTO
- hN8bgstdsks8ev1TjvOTAiAlHYBNDriQQOvVBTCDyOHQDO9xrFNtKu2mRKXzKbUMSuvK
- B7HtctwHFH4KTPi9n3hamL5mmrkK92Lhdmz17he3vLfdLq6m4Yk9aMprmA9Ek2JmB0LO
- Sgfg==
+ bh=ImF7ETlJ17SJOnDKQIoOd1dK414rrbCe3DpDaDCBbnM=;
+ b=X9jsu/T7TCCXVrYu8bO94IRSkK5eqiQB9bvKIWr/RTuFdhOCOUWyFp3yqsPX7yyDiK
+ inXHhpl6h/PFkd0+XWTDWAASAyPmSZoBMzEHR+wa0IHtczt+Yd8DWT2tsblYyc6DAJfE
+ yCUo0mwG62oFfvWnvKNLbFENoZ0z6J82+lBZkHj7kx4qN6PGiwZ5y2pJjGucIxFBssd2
+ Do8W4a9VVczRHW/YTMclLqyPzTFg26tMgnwePfH8XPJmaTpJ10rFFpRf8drSYmZru9np
+ qek7lei+4aJpg0aJMjzfTEzAqq/0oO/BxdV7ATUY/V1O4hb4n4m7a/NEv/6ZaDQgKDE4
+ /Ivw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUjhaRNTBGj8Js5HqNgOwiiKuAMMnrm6dI8o2crWvqveRd3LWguyWNIDLpQC75JLrgWpBFAyw8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxSLAZOs7q0C+fJASRp06gAMTp3o6n/riPYll2+8DcRIiFhcIFg
- cGaX1NjuoUHha6pTjZj3qJaEroVA0WnWOurJpMGP1UYBKO/Lx0jxFMiO8TkgSgqsp7iox04DQSM
- gqcuQ
-X-Gm-Gg: AeBDiesVyuVzByMq8JZIZqD1jAWi5NS2h2jNWPHEtdR0cwDqDn/j2uD4uCTxaG4zoC7
- O/PAWjzKdE9aimr8fFstwvo2md77K5cycaFVdPC4KH6gf7CJgETrmKIFI8h1Eo8c4CoHFjr+Iz/
- ir2o2DClTjkUjiqebmUspLRCHMkCJOTwjz60fQEn2WJpMHvMBUm11LRo95M1ypTvRRlNXVkY7Ub
- NYCtjuXFLBHez97HDKMmLAzblY3lJjH5jFX/r6g9jDPUp/ZSndoPCI3HQvMIFWRuzmU99a9GjvI
- pZu+wNoP/cdqocM7f7JTuP3TyUMZbZod6lI7VueU+4uIl76WOYV3/wf5oxTpW2pFKNYuZPheAdb
- KFWE9D0iu668WNFyfxpHoqRF2BrFNwrClpIxwwGV7H/n73J+1kYGzK6O4srLoSukqpYKthy6iBv
- p1Vj8vATPoioL2BpfHvtfVVcicfQM=
-X-Received: by 2002:a05:6820:168d:b0:680:aa7c:ac0c with SMTP id
- 006d021491bc7-6821f487dddmr8068095eaf.43.1775506472799; 
- Mon, 06 Apr 2026 13:14:32 -0700 (PDT)
+ AJvYcCUHjeSbBXsl35vKV3NvWkTOmuawEVsS5uQD9du1yjzCxHPRMK07n5royagqiQX1E/GaKMQ8Nq8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxhALB8JqZpANAdg6bEqzF8rQLBporJY746zJlQnM6bphb+7rCl
+ 744GKAGpIl1ok46P6x09KWFQxaHwxjiQv6kv766N3v+9NaekvzVmIUxX3yqK/yoAg90qZUQ2ZCJ
+ dQ7zo
+X-Gm-Gg: AeBDiesiHmBIoJvDnZnO0Tjp7gWGQS+XCrSdeR0kZEUfoVikqwj6Sksju02BSqQw39B
+ 4+JCTmZID/jVq4lkWEbRwjpMnfVLU6mAAkLarAiB7Jd2eKMHacz5riZchD+CHLQRAq9UuyI9voR
+ wbDiKmwhqG/bg4U3SCBIYuodH9x0XGJ8NQd9GtJD7zGmNkL84LbsjonFOUFQ7n+e9rS2MykR1Bb
+ i93OEHz4lNU1MkxLXzMVduk9oiWxCOUiyvN7U9o6MZF12gF6rs6ziLsQ+O8VMNk9pFmHgNU562X
+ lCbse8FNkbkKHMbsheDhCOD5sCsSYXbaC3ZPRd4XOJp9IExxsk2Mqb9HTSfcdyQBD2wiijbfTJ9
+ l94RAs9Rz0Ua9z6gdVoiuzUoMT4nD/qvlF6fMr9MlOhwhuzf+pIEv/im3tROqPE+Bdsy7GTlFFf
+ i48U2Je71p2lyyaaC84avNWsZDmnY=
+X-Received: by 2002:a05:6820:198c:b0:67d:f55b:a992 with SMTP id
+ 006d021491bc7-6822152ac2emr7976286eaf.46.1775506474576; 
+ Mon, 06 Apr 2026 13:14:34 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:90d7:b13f:c53:8ca3])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-68597f6c7bdsm2642044eaf.3.2026.04.06.13.14.32
+ 006d021491bc7-68597f6c7bdsm2642044eaf.3.2026.04.06.13.14.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Apr 2026 13:14:32 -0700 (PDT)
+ Mon, 06 Apr 2026 13:14:34 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Mon, 06 Apr 2026 15:13:27 -0500
-Subject: [PATCH 1/8] spi: mtk_snor: clean up comments
+Date: Mon, 06 Apr 2026 15:13:29 -0500
+Subject: [PATCH 3/8] spi: mtk_snor: conditionally copy tx/rx data
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260406-mtk-spi-nor-improvements-v1-1-66f675cbbd3e@baylibre.com>
+Message-Id: <20260406-mtk-spi-nor-improvements-v1-3-66f675cbbd3e@baylibre.com>
 References: <20260406-mtk-spi-nor-improvements-v1-0-66f675cbbd3e@baylibre.com>
 In-Reply-To: <20260406-mtk-spi-nor-improvements-v1-0-66f675cbbd3e@baylibre.com>
 To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
@@ -91,17 +91,17 @@ Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de,
  David Lechner <dlechner@baylibre.com>, "Noah.Shen" <noah.shen@mediatek.com>, 
  "Noah.Shen" <noah.shen@mediatek.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3605; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1830; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=7FKiLIsWrE5M09dO22Anx5t9LOBM17EPAAsIQzZDDEc=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp1BPyJBWwGe/4nIWzzzl/rCs/nroBfkTu+B1vh
- TrtAnuFt+SJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCadQT8hYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A7VIIAIysvkIFVIaj4zs8CGxqtNIihbxUMe4JsW1v7x9
- S5NAAY6b8JsFHhQl+Lk2Z0p0TMNoBss5BPSRsmXqQ896EhID66eE47K9lPRxAmIROdL/xeL1gbv
- ea/E3RQKvz4PbiZHJ/rve6w7PJ4BGl+Y7IVWoUs8Bzcw93M8JXM7sR2zkW1XfXPvuwmOW7g4Ion
- Ckv439HIUq20MM2VmB0fjJgTx0Tb/c2CzJdGSGMI+oP8wj5tD55bbSFgxyBOoJXf5eeiKz8skHT
- /ii/DsQPe/5qqrA3p3JHKmeZZUB9Adb7jXy1vhdAA7wvHfHH/WDbkQbYsH1+GXZta9rkrAdKLzX
- v9mI=
+ bh=0GVKm8oGpajxQoyxghfzk4OPul0gB7mx+9rPiJw9bjY=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp1BP/qFhbnXi6GoeJFQivOFzYGNR9hVZBHv47O
+ cQEXEWAl8qJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCadQT/xYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AA0MIAJtpunQxr0WujqkcWdJmxXBDHoAcb2Kl7DqwP8S
+ nEZ3qTH4XUE4LLSmRAxcXAbKY4eLff3Sx9XRcZCakgzhxFByC5urSa1iDpN1kEgLb9PmXl8QLXU
+ c2L4g9RKQYgz57lQvD3X50CEcnYQn/3NuXUYptBcskhGeRVpVRt2my3xhCXwWpjW/kqy/pC6UNa
+ 51/fp3ok6x5lGk6qJPb3wDsQemmmRy+qUpbRJA/gZGK0Vx4AJguUVuCynp2M/77CAUT6LBsFjIb
+ wkpwvTL5iFQvDvup6gZvbbDRb6I4oWSrWs221d25+KPFUsaxIW20pMBFDbZF7XNLSVZusYR6NCB
+ 2C48=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -122,104 +122,57 @@ X-Virus-Status: Clean
 
 From: "Noah.Shen" <noah.shen@mediatek.com>
 
-Avoid use of C++-style comments and fix multi-line comment style.
+Only write out data for OUT command and read in data for IN commands.
 
 Signed-off-by: Noah.Shen <noah.shen@mediatek.com>
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- drivers/spi/mtk_snor.c | 35 +++++++++++++++++++----------------
- 1 file changed, 19 insertions(+), 16 deletions(-)
+ drivers/spi/mtk_snor.c | 24 ++++++++++++++----------
+ 1 file changed, 14 insertions(+), 10 deletions(-)
 
 diff --git a/drivers/spi/mtk_snor.c b/drivers/spi/mtk_snor.c
-index f202b2f49f5..eb36c9dd5e8 100644
+index 0ff4a8b23d5..674e723db01 100644
 --- a/drivers/spi/mtk_snor.c
 +++ b/drivers/spi/mtk_snor.c
-@@ -1,10 +1,11 @@
- // SPDX-License-Identifier: GPL-2.0
--//
--// Mediatek SPI-NOR controller driver
--//
--// Copyright (C) 2020 SkyLake Huang <SkyLake.Huang@mediatek.com>
--//
--// Some parts are based on drivers/spi/spi-mtk-nor.c of linux version
-+/*
-+ * Mediatek SPI-NOR controller driver
-+ *
-+ * Copyright (C) 2020 SkyLake Huang <SkyLake.Huang@mediatek.com>
-+ *
-+ * Some parts are based on drivers/spi/spi-mtk-nor.c of linux version
-+ */
+@@ -415,14 +415,16 @@ static int mtk_snor_cmd_program(struct mtk_snor_priv *priv,
+ 		writeb(val, reg);
+ 	}
  
- #include <clk.h>
- #include <cpu_func.h>
-@@ -89,13 +90,13 @@
- #define MTK_NOR_REG_DMA_END_DADR 0x724
+-	for (i = 0; i < op->dummy.nbytes; i++, reg_offset--) {
+-		reg = priv->base + MTK_NOR_REG_PRGDATA(reg_offset);
+-		writeb(0, reg);
+-	}
++	if (op->data.dir == SPI_MEM_DATA_OUT) {
++		for (i = 0; i < op->dummy.nbytes; i++, reg_offset--) {
++			reg = priv->base + MTK_NOR_REG_PRGDATA(reg_offset);
++			writeb(0, reg);
++		}
  
- #define MTK_NOR_PRG_MAX_SIZE 6
--// Reading DMA src/dst addresses have to be 16-byte aligned
-+/* Reading DMA src/dst addresses have to be 16-byte aligned */
- #define MTK_NOR_DMA_ALIGN 16
- #define MTK_NOR_DMA_ALIGN_MASK (MTK_NOR_DMA_ALIGN - 1)
--// and we allocate a bounce buffer if destination address isn't aligned.
-+/* and we allocate a bounce buffer if destination address isn't aligned. */
- #define MTK_NOR_BOUNCE_BUF_SIZE PAGE_SIZE
+-	for (i = 0; i < op->data.nbytes; i++, reg_offset--) {
+-		reg = priv->base + MTK_NOR_REG_PRGDATA(reg_offset);
+-		writeb(((const u8 *)(op->data.buf.out))[i], reg);
++		for (i = 0; i < op->data.nbytes; i++, reg_offset--) {
++			reg = priv->base + MTK_NOR_REG_PRGDATA(reg_offset);
++			writeb(((const u8 *)(op->data.buf.out))[i], reg);
++		}
+ 	}
  
--// Buffered page program can do one 128-byte transfer
-+/* Buffered page program can do one 128-byte transfer */
- #define MTK_NOR_PP_SIZE 128
+ 	for (; reg_offset >= 0; reg_offset--) {
+@@ -437,9 +439,11 @@ static int mtk_snor_cmd_program(struct mtk_snor_priv *priv,
  
- #define CLK_TO_US(priv, clkcnt) DIV_ROUND_UP(clkcnt, (priv)->spi_freq / 1000000)
-@@ -168,8 +169,8 @@ static int mtk_snor_adjust_op_size(struct spi_slave *slave,
- 		return 0;
+ 	/* fetch read data */
+ 	reg_offset = 0;
+-	for (i = op->data.nbytes - 1; i >= 0; i--, reg_offset++) {
+-		reg = priv->base + MTK_NOR_REG_SHIFT(reg_offset);
+-		((u8 *)(op->data.buf.in))[i] = readb(reg);
++	if (op->data.dir == SPI_MEM_DATA_IN) {
++		for (i = op->data.nbytes - 1; i >= 0; i--, reg_offset++) {
++			reg = priv->base + MTK_NOR_REG_SHIFT(reg_offset);
++			((u8 *)(op->data.buf.in))[i] = readb(reg);
++		}
+ 	}
  
- 	if (op->addr.nbytes == 3 || op->addr.nbytes == 4) {
--		if (op->data.dir == SPI_MEM_DATA_IN) { //&&
--			// limit size to prevent timeout calculation overflow
-+		if (op->data.dir == SPI_MEM_DATA_IN) {
-+			/* limit size to prevent timeout calculation overflow */
- 			if (op->data.nbytes > 0x400000)
- 				op->data.nbytes = 0x400000;
- 			if (op->addr.val & MTK_NOR_DMA_ALIGN_MASK ||
-@@ -496,7 +497,8 @@ static int mtk_snor_probe(struct udevice *bus)
- 	priv->spi_freq = clk_get_rate(&priv->spi_clk);
- 	printf("spi frequency: %d Hz\n", priv->spi_freq);
- 
--	/* With this setting, we issue one command at a time to
-+	/*
-+	 * With this setting, we issue one command at a time to
- 	 * accommodate to SPI-mem framework.
- 	 */
- 	writel(MTK_NOR_ENABLE_SF_CMD, priv->base + MTK_NOR_REG_WP);
-@@ -504,7 +506,8 @@ static int mtk_snor_probe(struct udevice *bus)
- 	mtk_snor_rmw(priv, MTK_NOR_REG_CFG3,
- 		     MTK_NOR_DISABLE_WREN | MTK_NOR_DISABLE_SR_POLL, 0);
- 
--	/* Unlock all blocks using write status command.
-+	/*
-+	 * Unlock all blocks using write status command.
- 	 * SPI-MEM hasn't implemented unlock procedure on MXIC devices.
- 	 * We may remove this later.
- 	 */
-@@ -521,7 +524,8 @@ static int mtk_snor_probe(struct udevice *bus)
- 
- static int mtk_snor_set_speed(struct udevice *bus, uint speed)
- {
--	/* MTK's SNOR controller does not have a bus clock divider.
-+	/*
-+	 * MTK's SNOR controller does not have a bus clock divider.
- 	 * We setup maximum bus clock in dts.
- 	 */
- 
-@@ -530,8 +534,7 @@ static int mtk_snor_set_speed(struct udevice *bus, uint speed)
- 
- static int mtk_snor_set_mode(struct udevice *bus, uint mode)
- {
--	/* We set up mode later for each transmission.
--	 */
-+	/* We set up mode later for each transmission. */
  	return 0;
- }
- 
 
 -- 
 2.43.0
