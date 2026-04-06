@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2682EF46C45
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 14:25:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5459EF46C46
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 14:25:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E80BF83EC6;
-	Mon,  6 Apr 2026 16:24:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0352D840BE;
+	Mon,  6 Apr 2026 16:24:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="OIQvds9b";
+	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="iV6LBOFa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E1908352B; Mon,  6 Apr 2026 16:24:37 +0200 (CEST)
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
+ id CA3C584101; Mon,  6 Apr 2026 16:24:39 +0200 (CEST)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1991C8405F
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 16:24:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A0DE48341A
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 16:24:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-c76b0cda2aeso1512378a12.2
- for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 07:24:35 -0700 (PDT)
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-35d9c7bf9a1so3595142a91.3
+ for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 07:24:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thingy.jp; s=google; t=1775485473; x=1776090273; darn=lists.denx.de;
+ d=thingy.jp; s=google; t=1775485476; x=1776090276; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QvY6rMqtz4X518COuQ10zUdJPlmfu0QsTYJzfAaMLOs=;
- b=OIQvds9b0AjKmDCsI6WOcCmhj0YIX/AaNjFNq332ynTFxDwtRt/EZHJRZi8sUXC/oN
- pH1sRN5qC4gTAsLyrmMNy+fUF1mmGaRy/7QOOKwC7MUNSlJX8eQ5Cl2wWCZCYpTY7/OT
- OgQkTiEgoh9tZY5f7+UIOBityQ4WYfBVyg3J0=
+ bh=XJpbXycl8bPDKYjuPFFq8DJKD6pPqTPnXXlDYtn5IuE=;
+ b=iV6LBOFaDj31yDEWws0RYYW2oOR5LUeWIL4/qCsIzb8pRTRgPJLp2J7HLCYsOAhuDC
+ rgZy0Uyke8+l1qnPSLovC/jYswWeuPkKV86qjYGA5MePVKIL2hlQ3z8K+o0OdyW47qvh
+ IE57Nfoiq0T9loYZglamcf4ChA/emzJX/dtCo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775485473; x=1776090273;
+ d=1e100.net; s=20251104; t=1775485476; x=1776090276;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=QvY6rMqtz4X518COuQ10zUdJPlmfu0QsTYJzfAaMLOs=;
- b=VAilpQZLwE2H1FVCTjH4geu0v+YQgx5i+d+am9Zx6VtwWg8qBzdgr8XyFRujAhl8fO
- AEbL8zq1AFbOCJPJDv1bj/VUYbeoa9vSu8O9/Npjqyga5jvG3LAZI02qDpOugU0PZEZF
- wvvEK+nXlCHvCgASPw90bq0p9/PUMItVo+jZPNkq0F5V1OvU+jHlObzNH7sLGjcjWui0
- AcZ2JcF8v6y5D2ioZQdZLep75vTLvYTEGqGyrsDNHFZBE30q4veF3eRWE5/9oW23Hjdm
- M+O0jcAr/NFvdORQKAmZZ7gFMlnHb6HixDGRGao60mnSg1xIVxdFrgFXzCia/zmJzBAG
- QcIQ==
-X-Gm-Message-State: AOJu0YwBDp5fH3kEcj1h7ds1CCCLercGcLH1gM/c3FjSNecYBDIeFH7m
- B3ZlA/NHXAGio5Wb+B0Q2p+1e9IXiN3RsafNvRBPfQpjnLlQTWeCnsKMIWqxRKZB4lY=
-X-Gm-Gg: AeBDievygn9Ay8LaEb53+g4R8yd9rKhA6Z0fDSc3KNeyAB5ikvLcTgO0/P5a/RP/BXD
- /JB5QJ8TqGBl135gu36KtrDC5HvKNLGudZeJtML1LzLeZEM29fFCy9xW028gMqaI5Sdb2uPBSoa
- d/kpeyllFtgqiHG+QSzz/NwqmtISqJdQk/L7EYUcQb35fhLtkFMmet07UN1A6QWMJKf9f0+FTHl
- RlwZQ95hhjxOM/T09ryKPVUXAbSvpu3UNUAtCXMqwcZlyCurrF5ouHSc5uEiLmzeoi+pCaRzVQL
- wnplXVZuVQbBT3pmk59QmV/c/Z6LiTr7RpnBNzwqEgMb2tAKla0en8O7gLBCyYaxRe0HSeRLt2h
- mHKxKEOYDS3Ft7I/J7qCHIB50CvsBYoKGgzaa0pTU/XpKebpBfVw0ELfLxyIiOQGtYBSVcE73DZ
- W81bu0pvE7eHPkF9BX1G4IejXm4TkIa8SNKimv9L+lAdMroeA9yigCitF2H49o0Kzm5CJIt+lZa
- O5ptyyWA2A=
-X-Received: by 2002:a17:902:f642:b0:2b2:49a7:a5c4 with SMTP id
- d9443c01a7336-2b2818b00ccmr116069805ad.27.1775485473573; 
- Mon, 06 Apr 2026 07:24:33 -0700 (PDT)
+ bh=XJpbXycl8bPDKYjuPFFq8DJKD6pPqTPnXXlDYtn5IuE=;
+ b=VfXLQRPUu00OvzfBK5Tf6sXvACaIo5q+OY+H6z86mUn2XlENc6GGGHW8lxRfnp6HfX
+ y1Se9y+c9+mnEzywJ8QorCwYEaH2IzKeWdUSK/VZKUUBI9tj8LmdFnP/uhKIjtDI27E6
+ 6VKxX/gMgd6Nl8yjpw76ThRCH/A7PE1lOizbcId/bYbFPm0IMjlrIuC3gJHc11KvJqop
+ MBm0t+MA04hiHf8yrx/alL8uzYITBfYxMxGvYO686UHPLlPYBS2f9C7JYaVdBc/YgeUu
+ SyFY5wO8ialaFzXwcVaDPAMUrXPBs1+UA63Qr4TDVt73Cz0XGFR1r72NO+DGgeDAmpHw
+ LMFg==
+X-Gm-Message-State: AOJu0YwOKasjy9bb/cWgcupwuCyKEfvBAu7oesy5alDOL1SEzMSgMXIW
+ JV/gRNgIvOQ+WXcHrvqo9TdVrOj0lO6L2XSPLA+bCBJMi2B8SYAmESMwnhUDywBI4YvqSKHOz7I
+ RZefH
+X-Gm-Gg: AeBDiev7k3NogYK9djsyhiKcaNC10dEDsftllrnlIzGyU7HejpLgoI/tKXrHF8pcRfk
+ 5vblipp3ZogwavxEVujqoBBA6e/mH1ES3h21VzDnB1mUbOJMc/U3/emjWi3DpA0Iwuyfl1riOwl
+ 8e1GjUsiTEh2+7GUtoNt8LCbziIHLlfz6H2Ajss7QyQVCYraaR3bVywtXih2LPmDlCnhnkSrnQ4
+ q7aAeXPXyUrqCvu2VtHE0mjoqz09O1bC9cSZGrootRvJl5GKaIzDijDHNNlVt+hi91aMSzGLyYd
+ MXGM7KWETTZCo/7rn/nWGgzXDRxcRNNE4+QdQHsPf2x+ljGe7fefCPQYAIFg1dq6e9tuYBQuXs+
+ yOOORltKudRhFDUx8XKN/tyjO6zTjvdAbgKUxRx6TQdMSSiKEw8BRonMIRmJuspZULU+HL8RLpj
+ R4xK4DmkHqADaMZ7Gl/K+vPBmOc0gqOr20KnkMWGogdDd90Ywte4MCahuBdbis7saH2n0btQlWn
+ 9B9CdXCzrs=
+X-Received: by 2002:a17:903:3586:b0:2b0:b325:748a with SMTP id
+ d9443c01a7336-2b281705e9fmr135455995ad.22.1775485476059; 
+ Mon, 06 Apr 2026 07:24:36 -0700 (PDT)
 Received: from kinako.work.home.arpa
  (p1866070-ipxg00f01sizuokaden.shizuoka.ocn.ne.jp. [180.1.30.70])
  by smtp.googlemail.com with ESMTPSA id
- d9443c01a7336-2b27478cb4fsm156885295ad.29.2026.04.06.07.24.31
+ d9443c01a7336-2b27478cb4fsm156885295ad.29.2026.04.06.07.24.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Apr 2026 07:24:33 -0700 (PDT)
+ Mon, 06 Apr 2026 07:24:35 -0700 (PDT)
 From: Daniel Palmer <daniel@thingy.jp>
 To: visitorckw@gmail.com,
 	angelo@kernel-space.org,
 	bmeng.cn@gmail.com
 Cc: u-boot@lists.denx.de,
 	Daniel Palmer <daniel@thingy.jp>
-Subject: [PATCH v2 3/5] virtio: mmio: Keep vendor id little endian
-Date: Mon,  6 Apr 2026 23:24:09 +0900
-Message-ID: <20260406142411.2992618-4-daniel@thingy.jp>
+Subject: [PATCH v2 4/5] virtio: mmio: Allow instantiation via platform data
+Date: Mon,  6 Apr 2026 23:24:10 +0900
+Message-ID: <20260406142411.2992618-5-daniel@thingy.jp>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260406142411.2992618-1-daniel@thingy.jp>
 References: <20260406142411.2992618-1-daniel@thingy.jp>
@@ -98,32 +99,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The vendor id is used as a little endian value but it gets
-swapped to the CPU endian in readl(). Swap it back to le
-to avoid the below weird output from `virtio info`.
-
-Device 0: UMEQ VirtIO Block Device
-            Type: Hard Disk
-            Capacity: 1.0 MB = 0.0 GB (2056 x 512)
+The m68k QEMU virt machine doesn't use devicetree, yet, so
+allow it to create virtio-mmio instances via platform data.
 
 Signed-off-by: Daniel Palmer <daniel@thingy.jp>
 ---
- drivers/virtio/virtio_mmio.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/virtio/virtio_mmio.c | 27 ++++++++++++++++++---------
+ include/virtio_mmio.h        | 12 ++++++++++++
+ 2 files changed, 30 insertions(+), 9 deletions(-)
+ create mode 100644 include/virtio_mmio.h
 
 diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
-index 1cd737aca249..ddf873fa96fb 100644
+index ddf873fa96fb..51ef90c768af 100644
 --- a/drivers/virtio/virtio_mmio.c
 +++ b/drivers/virtio/virtio_mmio.c
-@@ -374,7 +374,7 @@ static int virtio_mmio_probe(struct udevice *udev)
- 		 */
- 		return 0;
- 	}
--	uc_priv->vendor = readl(priv->base + VIRTIO_MMIO_VENDOR_ID);
-+	uc_priv->vendor = cpu_to_le32(readl(priv->base + VIRTIO_MMIO_VENDOR_ID));
+@@ -12,6 +12,7 @@
+ #include <virtio_types.h>
+ #include <virtio.h>
+ #include <virtio_ring.h>
++#include <virtio_mmio.h>
+ #include <linux/bug.h>
+ #include <linux/compat.h>
+ #include <linux/err.h>
+@@ -335,21 +336,28 @@ static int virtio_mmio_notify(struct udevice *udev, struct virtqueue *vq)
  
- 	if (priv->version == 1)
- 		writel(PAGE_SIZE, priv->base + VIRTIO_MMIO_GUEST_PAGE_SIZE);
+ static int virtio_mmio_of_to_plat(struct udevice *udev)
+ {
+-	struct virtio_mmio_priv *priv = dev_get_priv(udev);
++	struct virtio_mmio_plat *plat = dev_get_plat(udev);
++	fdt_addr_t addr;
++
++	addr = dev_read_addr(udev);
+ 
+-	priv->base = (void __iomem *)(ulong)dev_read_addr(udev);
+-	if (priv->base == (void __iomem *)FDT_ADDR_T_NONE)
++	if (addr == FDT_ADDR_T_NONE)
+ 		return -EINVAL;
+ 
++	plat->base = addr;
++
+ 	return 0;
+ }
+ 
+ static int virtio_mmio_probe(struct udevice *udev)
+ {
++	struct virtio_mmio_plat *plat = dev_get_plat(udev);
+ 	struct virtio_mmio_priv *priv = dev_get_priv(udev);
+ 	struct virtio_dev_priv *uc_priv = dev_get_uclass_priv(udev);
+ 	u32 magic;
+ 
++	priv->base = (void __iomem *)plat->base;
++
+ 	/* Check magic value */
+ 	magic = readl(priv->base + VIRTIO_MMIO_MAGIC_VALUE);
+ 	if (magic != ('v' | 'i' << 8 | 'r' << 16 | 't' << 24)) {
+@@ -405,11 +413,12 @@ static const struct udevice_id virtio_mmio_ids[] = {
+ };
+ 
+ U_BOOT_DRIVER(virtio_mmio) = {
+-	.name	= "virtio-mmio",
+-	.id	= UCLASS_VIRTIO,
+-	.of_match = virtio_mmio_ids,
+-	.ops	= &virtio_mmio_ops,
+-	.probe	= virtio_mmio_probe,
++	.name       = "virtio-mmio",
++	.id         = UCLASS_VIRTIO,
++	.of_match   = virtio_mmio_ids,
++	.ops        = &virtio_mmio_ops,
++	.probe      = virtio_mmio_probe,
+ 	.of_to_plat = virtio_mmio_of_to_plat,
+-	.priv_auto	= sizeof(struct virtio_mmio_priv),
++	.priv_auto  = sizeof(struct virtio_mmio_priv),
++	.plat_auto  = sizeof(struct virtio_mmio_plat),
+ };
+diff --git a/include/virtio_mmio.h b/include/virtio_mmio.h
+new file mode 100644
+index 000000000000..8c072826db55
+--- /dev/null
++++ b/include/virtio_mmio.h
+@@ -0,0 +1,12 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++
++#ifndef __VIRTIO_MMIO_H__
++#define __VIRTIO_MMIO_H__
++
++#include <linux/types.h>
++
++struct virtio_mmio_plat {
++	phys_addr_t base;
++};
++
++#endif /* __VIRTIO_MMIO_H__ */
 -- 
 2.51.0
 
