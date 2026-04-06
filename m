@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C99DCF46C5A
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 16:50:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E721BF46C5A
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 16:51:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F168684105;
-	Mon,  6 Apr 2026 18:50:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3422784129;
+	Mon,  6 Apr 2026 18:50:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MBtkoCxV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EoZuR9Bp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE91884034; Mon,  6 Apr 2026 17:51:21 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 178A883E36; Mon,  6 Apr 2026 17:52:23 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7F9D8341A
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 17:51:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C1FAC8341A
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 17:52:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-b9382e59c0eso636816366b.0
- for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 08:51:19 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775490679; cv=none;
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-66e6f1d8237so254728a12.3
+ for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 08:52:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775490740; cv=none;
  d=google.com; s=arc-20240605;
- b=exsebhlISAgb2pRPS0CADHfFJpJ7Q3GE6E00mCVzvA73PAYLz+iyZK9JS31wJz8mOr
- lZtX97VohoooB+3RjYPEeG0Erm5kAvsn7xlvnVzRUIUeVbRUhdiCfzkgsxLvfd9d94P0
- I504Y3BUrA+0a9YK/9Inc/6Vhqx/3GuiW7IGX/ITXqsjN9YrzA6Kw2gtlJbBBtlGORMY
- xH8IWyXdxx1WEaz4e9cGNfkRH4m5ltqJzSfHxqp7Ol8iwKj2maqVgwXnqw2Q6wL08PKG
- N+B9eK3+klaQK5ub7b2X+wSTGHCTf1j5kW7O486YdQgRvk1VJGCXbhMTW6iNX4rfHwbH
- SlxA==
+ b=BDT3Gkd0YmthUPG3xhbRcbA7DspssmCSYZ58PJYNhgwI+9/bLMOsVUwsVEPfQHD0mS
+ kCb4BKcY522iKbh6423Rev6yDtGOZGOTmMH93EVRAiNnYCOsZQjaRdh9wj5FdkTB4EbD
+ bbbyb1dx9M/263bdnLHscGMGoQ627PjpXBrGG7s6Zd00RnlHWDk1Wl8LVoGkaH0uGcju
+ 7IlEUmU6sJsira9EcnfiSM4FDjVRz0pswXlh/5jBFAaBEq6NEW09Yl7vc2YgwtKyXgGt
+ 0gPQYrQWwNPPzFYBwvQdBAwlvB0K5vvSGW/9W/zK7b8k3NBLLv1w1+mzeCUAO+/U0LGw
+ 0FXA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=JcXQrv507HNNdQm+vQfVDJHeQexVXJGdfKrcI/zNI4w=;
+ bh=JJF8jaR6aywbXxo297MKPUhu/HNh7hwEwE4Rdmvx4c0=;
  fh=lajVl/IeoACZS/6yuLfZkN/hPyImAZ81vhSDRfkAdyk=;
- b=O4mGl12BP0X2Glw2yahux9z8Y1Uk81QDmXQsbhqyq/7Etzo34aS0UDBP45qaW9ZOpw
- iubRSxVNJ6SJyN+Q6r50k5AYjIeDcjktwmj1RS4gzCObJZ23T/Cs9ou8mzPTgmqz8vrI
- BZVKMA4RwoTUouvJ7VXlQTNylwJ8iW5Yabb7/g6QrxKEpaXCTjpKsA+DoJ8VLZM7jF4+
- Hr5x/meneshcPllanBwTuC3h0Z+R8GAllXX4TpTi6G4IMPjlSDWx9twrArsAKm918G9v
- st+HTXH2wbyB5xWvNPYmNS3AKMy/2OE8gppG0EWk6+Pr3fU8nCLx8QO2+GNO8AXrfw0L
- Sd2Q==; darn=lists.denx.de
+ b=MuKbOK1Co0N/v2AYKzh5dekoYqPW1hfQfqC/RyyHWMURGqPT9bAVW6xIpVysyt2nZ+
+ 8gbENLXKdQ5N8BtpmaKV3zPWCxxyjCQSKdZ4PZP1P6R3+gWpo7+geCMgn4nqhWm0i61b
+ RRue5WN95MHPkQgTQNs4aou8NV/x2K1pLNQZKrC/OJ7AnEoZoIysdIOdXgV8vSGq39+3
+ Erj2YQxLV07NFKoSgyoJ68siyCTGPTqFjC2RoPg6TTtUm9Ymxwp0Tmi754elon3/EEJc
+ nRrzVEF007MOqR54hY0q8t7YWQn9cf3ohYFul/YaUhVaq901TozvWh4yPTyArsAy7eXg
+ RqGA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775490679; x=1776095479; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775490740; x=1776095540; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JcXQrv507HNNdQm+vQfVDJHeQexVXJGdfKrcI/zNI4w=;
- b=MBtkoCxVM1AWABLH+u9sCXs7A+ll1o1wJAgz1bgEPoM/iNBF9w/4SRdbD2sM5MYS8D
- UGuybaxka5OiXwgvkwwVodtf/UeRf7OYMHFlzHF0ddQOQoQY9V3g0sdEA60GpuWHAfmx
- Z9Fq479i1Hdj9TJQzhONExxvqfe/+D+sP3bw0=
+ bh=JJF8jaR6aywbXxo297MKPUhu/HNh7hwEwE4Rdmvx4c0=;
+ b=EoZuR9Bp1mHbHo1r+0yKZMrdD4Y0UZ5NcZuMectrARsddQx6ToqFmHjL0wFmTpcvv5
+ /XiI62TgulI+7FCbi5au1afkdPpcwYWi47xiAF0wGTpB7D2gEP/WiffnvkO2U2m3YPs3
+ UPNSyDtPWo6FwnbHxfR8/oBR0uXkUYU2B3ya8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775490679; x=1776095479;
+ d=1e100.net; s=20251104; t=1775490740; x=1776095540;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JcXQrv507HNNdQm+vQfVDJHeQexVXJGdfKrcI/zNI4w=;
- b=LFcqQcw2PkjSUkK9vO834mdgaD953U72lxy7f7UF9aAUwJfOxCOmmYprhUjymEoBPK
- KbBsxjq2DMVCHQr5eJBkjum54tLp7SCqUcqMrdIjOqICjImrG9q/PMnFqohabXmLinuq
- l62eOCFHHWcsqcgs8jbAvgdv9CGIfdgH5mS5V/dKCeCBnJhW3V+3O550zobbVCMkxM94
- 10yJHskPV0KjCNJPfTiAxku5JoItGuCsv/6aqMTffFtj68Hlkyhre34afa9H9SPPQY+a
- jNLWySGHQYieR9CpKTo2zqut3NY8p4PSKQfPUCT4ilw045zM87BIALFysRPkaxpP4xiY
- 3tQw==
-X-Gm-Message-State: AOJu0YydS5bdzXHNuq095yiSD0xVsg85Pm0OV0tPM4oghtTkPoAiESkD
- ay0gpOSLUYBpBCCzFsoRCyIWT5cTUS+H1MKTsWQ6JHS9HmwYZ2JF5e/vr/LDkoROABMGf9lM/WI
- DfRUMnQD60n1jeF3s31pcQLbtdKFrAY8WA+CCVzHv
-X-Gm-Gg: AeBDiesXZ1pmJh0W65qBGVGi3pCGJ3nzAi1HO0rk8Bx1gxAiQGBj6ZZyr4OYKmbXLpC
- w56oaHZrlsJyqqCDppWawD6+NueeEkBSXY8/1JXP8eBckU8jXYbpOuwYSooWXaDiPB8FOSqdn8p
- hlPay5j8OodUj4eaoc389vPSdBGIqlA/zQ3ALQQPskFviEEJkcg44DdzDFwE0Rg/z/v2Cstbv/x
- r/Ps3GDHCQxvhYfUqWsm5ZZShY/Vgx6Ot5cRFfPckp6o6wavGkw/CBeeqTDGVuyrlvBxB+6AfFq
- vnCGfg==
-X-Received: by 2002:a17:906:518c:20b0:b98:4d6:8c9c with SMTP id
- a640c23a62f3a-b9c679a584emr497213166b.32.1775490679268; Mon, 06 Apr 2026
- 08:51:19 -0700 (PDT)
+ bh=JJF8jaR6aywbXxo297MKPUhu/HNh7hwEwE4Rdmvx4c0=;
+ b=E9OL37Hk+yg2Lpf9RrifoA7NrMSfD8SVvcjlypOQnTmakofPwkYg2dA+9rf2bDLXXf
+ 1tJq3hV1priIe+rPNmIafn5Sn33l4WK/AXU46WsWek7SujY7X67vPiNX3Szde3p+DaCA
+ 4ColCl4J6w132ty5X7wt5GGfDsJeLDu7GtWiuLwb8Z3hHCH7BROlVqdxsEl0MzjC02nX
+ AapZcbxH/DT0rN1Hq5bMtbQIQkO1k2kQkXSGYyA3UYvcXm9M7Hpju02B4y1vgj7uTDX7
+ Fd8mcyxjB6n+BPsZh03ykoB3vsr4lqUTCuVJS1RD8HUBPXbbFB8u7U7dyXwC7cAshCqF
+ YyjQ==
+X-Gm-Message-State: AOJu0YxapSPv85vtvdoaXauCdcZNP7hdD3A/ag2Ez+oPPphsue8tP2GA
+ rQUnDBPXs5kweTRs8g0ZaBsjclIXW44RGQpnXEOLckaUEqLsuBiAIHBGeoxmTCScQYt4sYPUp7b
+ APyxAHRZcy4cbufuU7TBWUNWQpsZzg5AR/qanEa9Q
+X-Gm-Gg: AeBDietqTct0zYe0QEP6RyxqIAQgFcVFx9h9NqOYxkhuZhr7/g4lisM9MK1WekDRlji
+ xt5KRdV2U0r57g/E48wbk0nGUgPI9YTLw8ZH//xKU4qS+IWVwh5C0FQC6WoughCFQ9K+sFDTGzo
+ /09G0xhDlRBJ6B/FQqAx7PbW8eb3oXgC+2nHs+/32BQoSJycYFCwEYF92fcaH+BiQ8Q3S4Uhvil
+ tFaxUBUwW5gVBaLDx2vEPWvR2DMofohzNG6yV9KWDm1DRtYIzOFQAg/FRHE7q3mMBMo9qPUWbhq
+ OPWTRA==
+X-Received: by 2002:a17:907:6e8b:b0:b9c:a451:33cb with SMTP id
+ a640c23a62f3a-b9ca4513bbdmr360820966b.22.1775490740195; Mon, 06 Apr 2026
+ 08:52:20 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260404-qcom_spl-v1-0-9e6c2ac66587@seznam.cz>
- <20260404-qcom_spl-v1-2-9e6c2ac66587@seznam.cz>
-In-Reply-To: <20260404-qcom_spl-v1-2-9e6c2ac66587@seznam.cz>
+ <20260404-qcom_spl-v1-3-9e6c2ac66587@seznam.cz>
+In-Reply-To: <20260404-qcom_spl-v1-3-9e6c2ac66587@seznam.cz>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 6 Apr 2026 09:51:06 -0600
-X-Gm-Features: AQROBzAMX1xXP4WZUJFZbDyLaCsDOEyvicRkCkmMG5ikq8ZmTu2F6J6faa-9xUQ
-Message-ID: <CAFLszTjTU_RMf6hh97+mTgxDMN97Z86XR+gFDyZadX5vq4qdnQ@mail.gmail.com>
-Subject: Re: [PATCH 2/5] of_live: support in SPL
+Date: Mon, 6 Apr 2026 09:52:08 -0600
+X-Gm-Features: AQROBzBmxbPV8Mh9Cn--cRRRLc1W2AmaotK7U-8okRnL2LcGs-a8sxk9FKxnLr0
+Message-ID: <CAFLszTjnLyjnDMEBJWQWb64m+LnnDcUNayAFEt4pMK0Bs0Cq2g@mail.gmail.com>
+Subject: Re: [PATCH 3/5] drivers: allow clk_stub and spmi in SPL
 To: michael.srba@seznam.cz
 Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  u-boot-qcom@groups.io, 
@@ -142,39 +142,41 @@ X-Virus-Status: Clean
 Hi Michael,
 
 On 2026-04-03T23:18:18, Michael Srba <michael.srba@seznam.cz> wrote:
-> of_live: support in SPL
+> drivers: allow clk_stub and spmi in SPL
 >
-> Add CONFIG_SPL_OF_LIVE and if set, initialize of_live in spl.c
+> Only Makefile and Kconfig changes necessary.
 >
 > Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 
-> diff --git a/dts/Kconfig b/dts/Kconfig
-> @@ -86,6 +86,11 @@ config OF_LIVE
-> +config SPL_OF_LIVE
-> +     bool "Enable use of a live tree in SPL"
-> +     depends on SPL_DM && SPL_OF_CONTROL
-> +
-> +
+> diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+> @@ -114,6 +114,12 @@ config CLK_STUB
+> +config SPL_CLK_STUB
+> +     bool "Stub clock driver"
+> +     depends on SPL_CLK
+> +     help
+> +       Enablestub clock driver in SPL
 
-Please can you add help text here? The main OF_LIVE option has a
-helpful explanation. Also there should only be one blank line after
-the entry.
+Enable stub
 
-> diff --git a/common/spl/spl.c b/common/spl/spl.c
-> @@ -510,6 +511,15 @@ static int spl_common_init(bool setup_malloc)
-> +     if (CONFIG_IS_ENABLED(OF_LIVE)) {
-> +             ret = of_live_build(gd->fdt_blob,
-> +                                 (struct device_node **)gd_of_root_ptr());
-> +             if (ret) {
-> +                     debug("of_live_build() returned error %d\n", ret);
-> +                     return ret;
-> +             }
-> +     }
+> diff --git a/drivers/spmi/Kconfig b/drivers/spmi/Kconfig
+> @@ -8,6 +8,12 @@ config SPMI
+> +config SPL_SPMI
+> +     bool "Enable SPMI bus support in SPL"
+> +     depends on SPL_DM
+> +     ---help---
+> +       Select this to SPMI bus support in SPL
 
-The U-Boot proper code in initr_of_live() wraps of_live_build() with
-bootstage_start()/bootstage_accum() using BOOTSTAGE_ID_ACCUM_OF_LIVE.
-Please can you do the same here for consistency and SPL boot-time
-tracking.
+Missing word: Select this to enable SPMI bus support in SPL
+
+> diff --git a/drivers/Makefile b/drivers/Makefile
+> @@ -35,6 +35,7 @@ obj-$(CONFIG_$(PHASE_)SPI) += spi/
+> +obj-$(CONFIG_$(PHASE_)SPMI) += spmi/
+
+This alone is not enough since drivers/spmi/Makefile still uses
+CONFIG_SPMI, not CONFIG_$(PHASE_)SPMI. During an SPL build with
+CONFIG_SPL_SPMI=y, the directory will be entered but spmi-uclass.o
+will not be built. Please can you update drivers/spmi/Makefile to use
+the PHASE_ pattern, similar to drivers/clk/Makefile.
 
 Regards,
 Simon
