@@ -4,85 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00DBDF46C5B
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 16:57:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DA85F46C5E
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 17:10:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C5B383C2B;
-	Mon,  6 Apr 2026 18:57:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id F2AD483C2B;
+	Mon,  6 Apr 2026 19:10:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jJiWKVOG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GQdH4yyP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 611A983E36; Mon,  6 Apr 2026 18:57:11 +0200 (CEST)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
+ id 2AAF783E36; Mon,  6 Apr 2026 19:10:21 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75B2D8352B
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 18:57:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 11E3183936
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 19:10:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=visitorckw@gmail.com
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-2ab232cc803so17756145ad.3
- for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 09:57:08 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-b9358dd7f79so764390366b.1
+ for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 10:10:19 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775495418; cv=none;
+ d=google.com; s=arc-20240605;
+ b=S8isOjaKfFGppl9wFIZrmj7t5uA5mBsNt9j1JWsHKnEOf1SAtkTKGKROXsVp1WDk+j
+ f8p7DeRYBCkBhRsRWkr5XByB3vSG69nTmtwBcV41JjaI5tkTMcBbjiDJcQvJ3WKpvPgG
+ 3dK799oujHg7brqalEcaPiNJjnPbPSSZzzDQVAEEpOXShe758LhjGqeFGZBf99W/pmoD
+ rQyg46vPowbrbAFCsszB2JDS//wNIlWKeQStQSv0iPCTTi9qS7ytRqZvMCOo/M2l1LGn
+ LvzzJpDurwo5E0738u13JQr88NlUL+vnrciAmT3CFZKH7Uoxw8dE1d1h5eezEt5SBHQw
+ 9W/g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=WNVBjxJe6ial/hiSDpkp7xp13loJRtomA53BSZq5QOc=;
+ fh=9PCp1wSWEeLa/97RDhjPiJYjmm54m2GC+OOC8EwltSI=;
+ b=Juom+mOqk163KvfoDfBaxEgDbi7TUuFxrXeP0NNuvD6CXVDLF8owUlkpQtuYKCEjjy
+ E3F5ofUPbNmYzeZ1owL+DlX69qJMiZ30cIOBb2DSU9HlA/fYwhVeYN02W/joJoy8oxIM
+ 1Abf0X7/t9qKBb34zYORN4x/x9elLnzeTUKRfMx+m6lbi7+hyttwgYTgbAywaKQX3Tjt
+ HEnjOXFHyov+0SX9853G58+D9qK+RVzy86dHljKX7UPS4pYqC6N+FByZONxhhbR5iNOM
+ 5nG0Mm/9smSBz7NM6OIh3O7U2RdBhTfhqZrIbeamPQyrZo5F02QnM76B0zwoDWfJum+c
+ 40sw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1775494627; x=1776099427; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=nORY9EwTObdVhm6FvnxORDXTi9VYi7k126ggTvow9Jg=;
- b=jJiWKVOGVIQVS51Ul0b8735EIKLMc32u1xAl/vpFD+AnPOixHb1iksqJGZ0kYtsxR0
- mOpchFg6vYnCQI9WhTzhNP1cNXPIkbezUXWemA/q4wHCvw++siqcDL/wGCe+4DSh6yFO
- a52ZurYwq65Fp/YTUsRoCOod2vS6qCu5oC2CwvlzipTdzP3U31o8cUCnKpsGlSqN4XrQ
- KQA/+Znb9IejGJZDlTYKRMGs+geOg9fSjSj1PL97aQSnxyfI+aWVSII+2zsFE1PXfe2X
- wTvmfnrCrwroZggCmHF1BAH3lGTBcgUIA8C7NV97mm4RqwEqP0t9SYusTjmmV0yz5DmG
- nRTA==
+ d=chromium.org; s=google; t=1775495418; x=1776100218; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=WNVBjxJe6ial/hiSDpkp7xp13loJRtomA53BSZq5QOc=;
+ b=GQdH4yyPcEMgZLZJzAFJIqODG36wqmvOjDplwlb4gYTkeQu864ZGDVlaPpxK8xkJXr
+ fmEDUra0YE23wBuCxGrxDU+qD/294/mKJVH5EgIpmWOoHuGZjujezuLcnAvyvX+nOoWo
+ W3spCri+HWaU7onVG7HvQPPBR2pnA9HwIOtuw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775494627; x=1776099427;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=nORY9EwTObdVhm6FvnxORDXTi9VYi7k126ggTvow9Jg=;
- b=G37ajCyoEOgStE3TgfoSL18vK63gcgVobpymAf/e4vklwsfXOcHtiQkKTQZ7Bk7OOx
- 5ejQ92sJknaYlXCP0o5/u8PvIu50xfGIJLoBFJB8eJa7u/Otg2Kkugu2j+Arah3nWFyF
- CHlkPV66oQSMOPR7MuGpGlUzJcZ77nCP3M/BSDOaPFMwKtpSF9soO+GNQJFWxq0pTjTH
- xrO+X5akHRPkk2CejcqIBixXl8T0Z6qZYL/26+StU/Vz3PQvk0sllBAdcPUX2+hHopxM
- C7DUYmniOG35YY7ZTq8dxomyiKfiud4hL6ARuERIun3aLXc05HGR7VSMvsyw1ErT3WdX
- UfeA==
+ d=1e100.net; s=20251104; t=1775495418; x=1776100218;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WNVBjxJe6ial/hiSDpkp7xp13loJRtomA53BSZq5QOc=;
+ b=B8qydFopqzpE28o/iklw8HcBfZHoBZukBGyEdwLwSgnlRRDCqZKmn5c3wOAY7yQyqu
+ nu0iLNKARtaJVrjVvGoeyh5kTR6dY4rlRWBU0WIj04Fu+xBC+JyHSwg/V3QwgBoQhAhG
+ 8lfKx0WxVz8nIZAY6F5JfkROG9eDH+y8djfr4etqOZmcIplQH3pVITNNVMZHigak4ZjM
+ JqqZVMRAMIIGY6O/oHiIo0JsZhevOnlv+hGaso7LnpVlQuuNuiPPI4RZ9r67dyUZwo1r
+ 6gjWpIzD2bs3ZCV78XHsko44MEn7S7GDPc11iRCCGyNPDH1cPmiS4k69Km72QfoCYFsE
+ jKkA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXYYeHpVNSgGPG4ic7jE5LBZP/+nunhg7hB8VUWQmEHze5K2GwLPGbsu9jVIlzmGJI/RPmHmAM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzxkLd77GO7EKx8pkNST/yFjuH9q4S2d71ZY/4Y3R1l5IXBj3Gq
- pshEwGfSnnLViUEGvDEArnUylWw8UwFSR4O94qjl3PE/9+HY5d6hsY4U
-X-Gm-Gg: AeBDieup+HrO7w0r6DYIwFyXZ3Fbc3HqO3u7MaVLZS0ytv28r55rBv9/mfWZlrb9xDl
- N9fWgzJCCK6MManK9v5tfrGONb11AIFcF8emPvRHmF10YeCalE9IeiQvdI5Fl0QU9IQm4l3Nqg7
- WYDsoiM3ZA0xCOd0AFy7SlvDf9xBw7fcvET+d+N9vztaRM4RzsvEz5Y5urfZSrhdLUVgPzUj2iz
- hDqw6kN2xtI260xh7E2Mi2KAkFy7Srwksf/JF7JiYlrgeJQInQUGrR7crOhqW7rGIUfPFTzRSmV
- v1vBOOvhHpXL+3mFEkONcsZBaOVSYz7DvUVzmIhwGkqkkk8MHVWLPzn1Ke0d5r8MUojcGu6vmWk
- zN0U2wTE9PZBv+O295sDkeOzLUV2BRmDaGtq5I4xMNIIAJ9ZEQ2VIxkIGs6wvhhxLFj/Q6jZs+c
- qRlMEOf8gIZnrZBQP2/U/O7tdB3yvMhqUHU0tYMI6NLnZp5H5Qp40F4O6rmLl6m8qv
-X-Received: by 2002:a17:903:1b63:b0:2b0:4ec8:fb92 with SMTP id
- d9443c01a7336-2b2818e0eaamr144661095ad.39.1775494626902; 
- Mon, 06 Apr 2026 09:57:06 -0700 (PDT)
-Received: from google.com (61-230-33-2.dynamic-ip.hinet.net. [61.230.33.2])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b2749a3a0fsm194255805ad.59.2026.04.06.09.57.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Apr 2026 09:57:06 -0700 (PDT)
-Date: Tue, 7 Apr 2026 00:57:03 +0800
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: Daniel Palmer <daniel@thingy.jp>
-Cc: angelo@kernel-space.org, bmeng.cn@gmail.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/5] sysreset: qemu virt: Use __raw_writel()
-Message-ID: <adPl33dlbOFxQifT@google.com>
-References: <20260406142411.2992618-1-daniel@thingy.jp>
- <20260406142411.2992618-2-daniel@thingy.jp>
+ AJvYcCUnkgi5rhB5YUdVAGpMpzemTWIPAfSZSHvmvCbHGoUcQusUJGMAizZyivj4HcUM8MhM+h4G5Rg=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywvsd5HMMJe1OiswMQf6cRglK4FTnLtK++ZeXEhjuBP82tkIOP6
+ /fII+7MG1Gk0L0b4T7J4KZjV7OVLg5eOhpasuZviE1yvtDrm9KAHZrbSwheikm512jDhaUFT0YR
+ qBGOGRrsKt8Axuj/5O8dNaj78ChpwrnZ6GJ2z/nrJ
+X-Gm-Gg: AeBDietcVuOAz8hlMiIOeFxAxBnsSf6CIeVg2Qu1d0OU/lsnT03QrtpLjEnAI7j9w9p
+ 7PWX+iv2yZOUUh5DILGtVjeNkOwfQjGG5ZvDmF7eGzXwjAt0HX+rAkQIuPVjm5pTIY59LYqjyDR
+ woc9AD+9JUh0jGxXdPt015CaVSge6eRIR3jp+Ik5/L212WZ5sunnS42Ab2r1W0QEqYC90Za0r/0
+ wJCvQH4vEfqFki+zVhMU0HyFW07ImaJM/MZSrWG/n/WAU2Aj85yGJ3H6ZIWRV9neev+vC5kBluF
+ TTpDag==
+X-Received: by 2002:a17:907:6ea0:b0:b9c:7572:ad3f with SMTP id
+ a640c23a62f3a-b9c7572e0e5mr595349166b.21.1775495418353; Mon, 06 Apr 2026
+ 10:10:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260406142411.2992618-2-daniel@thingy.jp>
+References: <20260403135205.26979-1-ansuelsmth@gmail.com>
+ <20260403135205.26979-3-ansuelsmth@gmail.com>
+In-Reply-To: <20260403135205.26979-3-ansuelsmth@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 6 Apr 2026 11:10:06 -0600
+X-Gm-Features: AQROBzAA46a-J-JckTM1fJfYkit-erzi_zX-Cs9zud-vxASznc8fifdIl2ezvbI
+Message-ID: <CAFLszTjPW27D8U_7wXeKUSn2TeeNhDZerTfpWH0VeA-XtQ5cLA@mail.gmail.com>
+Subject: Re: [PATCH v5 2/6] misc: fs_loader: reorganize and split to FS and FW
+ loader
+To: ansuelsmth@gmail.com
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Peng Fan <peng.fan@nxp.com>, Justin Klaassen <justin@tidylabs.net>, 
+ Neha Malcom Francis <n-francis@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Harsha Vardhan V M <h-vm@ti.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,37 +123,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Apr 06, 2026 at 11:24:07PM +0900, Daniel Palmer wrote:
-> The virt ctrl register seems to be native endian, currently this driver
-> uses writel(), which works by luck because its currently broken on m68k.
-> 
-> Use __raw_writel() instead to avoid breaking this driver when the
-> endianness of writel() is fixed.
-> 
-> Signed-off-by: Daniel Palmer <daniel@thingy.jp>
+Hi Christian,
 
-Acked-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+On 2026-04-03T13:51:57, Christian Marangi <ansuelsmth@gmail.com> wrote:
+> misc: fs_loader: reorganize and split to FS and FW loader
+>
+> In preparation to the introduction of variant of the FS loader,
+> reorganize and split the driver to generic fw_loader function and
+> specific fs_loader function. Create a dedicated directory for the loader
+> and move the internal structs and functions to a dedicated header file.
+>
+> This will permit to reuse all the property and logic of FS loader
+> with container that are not exactly a readable filesystem.
+>
+> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+
+> +struct device_plat {
+> + struct phandle_part phandlepart;
+> + char *mtdpart;
+> + char *ubivol;
+> +
+> + int (*get_firmware)(struct udevice *dev);
+> +};
+
+This series introduces a generic firmware-loader framework with two
+implementations (FS and FIP), which is a good idea. But the dispatch
+mechanism uses function pointers in platform data rather than U-Boot's
+driver model ops.
+
+In U-Boot's driver model, polymorphic behaviour is handled by uclass
+operations. Instead of storing function pointers in device_plat and
+setting them during probe, please can you define a proper ops
+structure:
+
+    struct fw_loader_ops {
+        int (*get_firmware)(struct udevice *dev);
+        int (*get_size)(struct udevice *dev);
+    };
+
+Each driver would then declare its ops:
+
+    static const struct fw_loader_ops fs_loader_ops = {
+        .get_firmware = fw_get_filesystem_firmware,
+        .get_size = fw_get_filesystem_firmware_size,
+    };
+
+And fw_loader.c would use dev_get_uclass_ops() to dispatch. This also
+means you only need a single UCLASS_FIRMWARE_LOADER rather than
+separate UCLASS_FS_FIRMWARE_LOADER and UCLASS_FIP_FIRMWARE_LOADER -
+the ops handle the polymorphism, which is the whole point of having a
+uclass.
+
+See drivers/spi/spi-uclass.c or drivers/i2c/i2c-uclass.c for examples
+of this pattern.
+
+> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+> @@ -612,8 +612,12 @@ config MPC83XX_SERDES
+> +config FW_LOADER_LIB
+> +     bool
+> +
+>  config FS_LOADER
+>       bool "Enable loader driver for file system"
+> +     select FW_LOADER_DRV
+
+FW_LOADER_LIB is defined but never used. FW_LOADER_DRV is selected but
+never defined. I suspect you meant to define FW_LOADER_DRV here
+instead of FW_LOADER_LIB.
+
+> diff --git a/drivers/misc/fw_loader/fw_loader.c b/drivers/misc/fw_loader/fw_loader.c
+> @@ -0,0 +1,144 @@
+> +static int _request_firmware_prepare(struct udevice *dev,
+> +                                  const char *name, void *dbuf,
+> +                                  size_t size, u32 offset)
+> +{
+> +     if (!name || name[0] == '\0')
+> +             return -EINVAL;
+> +
+> +     struct firmware *firmwarep = dev_get_priv(dev);
+
+Please can you move the variable declaration to the top of the
+function, before the statements.
+
+> diff --git a/drivers/misc/fw_loader/internal.h b/drivers/misc/fw_loader/internal.h
+> @@ -0,0 +1,61 @@
+> +/**
+> + * struct firmware - A place for storing firmware and its attribute data.
+> + *
+> + * This holds information about a firmware and its content.
+> + *
+> + * @size: Size of a file
+> + * @data: Buffer for file
+> + * @priv: Firmware loader private fields
+> + * @name: Filename
+> + * @offset: Offset of reading a file
+> + */
+> +struct firmware {
+> +     size_t size;
+> +     const u8 *data;
+> +     const char *name;
+> +     u32 offset;
+> +};
+
+The kernel-doc mentions @priv but there is no priv member in the struct.
 
 Regards,
-Kuan-Wei
-
-> ---
->  drivers/sysreset/sysreset_qemu_virt_ctrl.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/sysreset/sysreset_qemu_virt_ctrl.c b/drivers/sysreset/sysreset_qemu_virt_ctrl.c
-> index e7cacc9b6e98..5ab16001922b 100644
-> --- a/drivers/sysreset/sysreset_qemu_virt_ctrl.c
-> +++ b/drivers/sysreset/sysreset_qemu_virt_ctrl.c
-> @@ -38,7 +38,7 @@ static int qemu_virt_ctrl_request(struct udevice *dev, enum sysreset_t type)
->  		return -EPROTONOSUPPORT;
->  	}
->  
-> -	writel(val, plat->reg + VIRT_CTRL_REG_CMD);
-> +	__raw_writel(val, plat->reg + VIRT_CTRL_REG_CMD);
->  
->  	return -EINPROGRESS;
->  }
-> -- 
-> 2.51.0
-> 
+Simon
