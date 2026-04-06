@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C807F46C4E
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 17:10:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DACEF46C4E
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 17:13:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB36383FA3;
-	Mon,  6 Apr 2026 19:10:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8616283EC6;
+	Mon,  6 Apr 2026 19:13:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YmxyTt2A";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YihVF0Nz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA10E83936; Mon,  6 Apr 2026 19:10:30 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 99DE483F98; Mon,  6 Apr 2026 19:13:50 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CF3483FA3
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 19:10:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A940A83C2B
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 19:13:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-b9382e59c0eso650479666b.0
- for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 10:10:27 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775495427; cv=none;
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-b980785a0bfso522480166b.3
+ for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 10:13:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775495628; cv=none;
  d=google.com; s=arc-20240605;
- b=bKEIyvG96nVBlh/wZFwdlZXXhEON7affVKQci8uEut7mvHER109bWQuRzjNE0GND3m
- dpYI25hkWSDo5uHjh/m6NqJAKiL5KxYcIr6KfQpV4b8TGWfIxHCJYzoe6NEYTl97U8l7
- DHPm7W4fDSH8b43xcB4RzAIWcOUHKuFTUctAHfrZyMh1S8/mOEFdXG4WmWUyesD/MK1a
- YQnhuLOe4JbOEGD1EmTXBvQkVtF4JCW5Tqw+tqfMAfw5TQECWdoggz/HqXlw+hwuSEE/
- Bpc2+f/tyFFQVs0L8zgYCGn6H4DJXafXa0A44PwTX/uuOYYYG9YsBf85wO0BmDp72DLv
- K7mg==
+ b=k1HB3QYU+gkG4OQmcLYfbQ4sjr7ojtz5yX1oAf00k+oRWs0F2zFOPLBMgVDwOJ5/hD
+ yynOxIhqn6BUbAOSYTdAFbEOguqZ5k8EMQ0H4X7TVW84XpKvV3ltx2ozPQg2qrkXTAK/
+ xCKU000dmCUw40IAdkDiGzkqIK+8wtuszqwWac1TZdr9b0g14xC+lcPwH1YDOjMPXLTA
+ LRaKShIevbftTkfa5RQzzJU8QQK2tWvoo0l/TAl1VtrRnvJcjAldjOXLhTvxICgSSZgI
+ TVx/iL+K1+1Y2CQdmcgYXTq7S4kFP7tQBQCVi/OFAWjlbTIGt+a425FlnVdU9O5KO2+Y
+ bVTg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=tNzVZ+vGl37EIsUnH6zPmgm/IUWIjX+bgJcpkXjNlBw=;
- fh=DiOx7Ir4jGNTpOGrhALn9nRvEnFQT9HdPASzXprLy2w=;
- b=O2Ucq3C+Vdml8w/xYky9WulFb8GCuQRUfCXi+e5S7X716DlzWEvXnJptV5luntRP9J
- r26qORUBQLAqG84fsaMydwpgDuFESXL3jjRy/zFh5tMzPTiMSel6ScDyNSHlPxtKxWU4
- ehviog7J+4cOs7aS5QR9Ej5aGnDGQHy4g/CvOShkFpuedeYuvkrILlzNc+T7pBjLuzGC
- RbGK+gu47nB8pBn4CXABLoJayuMXz/tgqHcyPA/T3u/iBvwnhFdJtKbGZf/FRlgKseY+
- CLkqfok57ju5rHCqq06vq4Zlctcz8WKIh//qOlonaUJLI5oVvC3RJpuU+sXs8WidT4BP
- YeRA==; darn=lists.denx.de
+ bh=+0EjFyjrf2S4/z+p2e1DJ6KQGmDX64qZmdasf2o1D5A=;
+ fh=ogW//3OKe2Aeg9xakE0UGGJqt/gZlhyG8skxLfqDLJg=;
+ b=SWoOUFLifU7bbIjsK+tEtBKgH2KUzNBqbo0S5qestMpkpH6QVrft6jV9Fj3buW2n8p
+ PlXPsqeSbnLPfY+syWZpZZnfmElFWX9CPodf9SJUgFDsUYRx80UKWyt+ylr/XDYm1OQ7
+ Z/Dop/bf/f3FyuRPqJvKtmL4ZJ5XVEGjyG6aS8vhxlUVZ+H+48VLg4rjXNtk+CCoSrpv
+ YpiK3o69itL5UAj2ainls/YDwiPZsaD1GDlGlyx8b8HFiP4I5E8QawOSFaUZ8i2ebCoT
+ Ols+4Udi2bEHkegz1vh+I9fj9pRWX9jyK1cQDpqRkxsUxPtQ3XlwqtS8KH5GLDyIxOuF
+ kIXg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775495427; x=1776100227; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775495628; x=1776100428; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tNzVZ+vGl37EIsUnH6zPmgm/IUWIjX+bgJcpkXjNlBw=;
- b=YmxyTt2ApX0nevQh/PKX11zQzmtk8kIJ+AMH6bhJ8dkEMzSeEBgWY3vDeg+VISzS2j
- Vvt1po+7IMXYSXa0dSUh91sldnULzzuKFQVIz0VvLIFJIv6+98c9R4baJceayKDgT060
- TNxnuoghe+tFi81iJh0dyNm93hDQmlf2lC2EE=
+ bh=+0EjFyjrf2S4/z+p2e1DJ6KQGmDX64qZmdasf2o1D5A=;
+ b=YihVF0NzUsx+iR//l9tQfY7INenyd8WAlEnM3T1Ze3sX2bRVbv7/mHgqD/c/6zegeZ
+ fbIngD6x+Gyk6EpSq0b3m8qffwht4bxnKtSiiNgt0+voQMfT/1L+HR72a6RHixNEp6wt
+ OakuQcySQXAmpTenLy3dlbw5vBRkZEnIWYJU4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775495427; x=1776100227;
+ d=1e100.net; s=20251104; t=1775495628; x=1776100428;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tNzVZ+vGl37EIsUnH6zPmgm/IUWIjX+bgJcpkXjNlBw=;
- b=ASYlKoGQ+Qr2HJZ9Ib2j5HbyvnldELQuO9pbMJ+LFia6t7f3SRdevpTAWZHDS+QG+P
- QMVjTagf7TrQcD63PtVC/GjpfztTpdr4R1w1nXBMHxqYBirZZAblRgZn7TPXA4s+rwBv
- dDW/YH/bM8N5lZn4c1sksZZ3i85RExDMiydeQHtLJQs5pJiT0kiTTef6K56SBVswbajr
- Pts0rIig9wgE3mPrqHFZUXDMJGpV9zPFPxQviu8dwcwQ4s83aMNDEtYeDuefyQ2VKA2f
- MPtUxi3k2T+6JGFmoWth97p7DgAaXdNopHbW+T45KTqp/tbZUMQmwFm9R5b0oZtriaTW
- Gi7Q==
+ bh=+0EjFyjrf2S4/z+p2e1DJ6KQGmDX64qZmdasf2o1D5A=;
+ b=ZTtyVPlshzcYj0AuNJDa1nZrx/LhciL80DJMYH8ard07mRrBMwOJ0bcC7/2aHSH4cU
+ hic6A8jJjPWmrjH2dPbxAgmzVEDNbrB7xu7hFjmhEsKEavLDdiAegD9wKB9T9AqoAp4g
+ OW6BqQWbLw7BD5D3vr6pGx5XvAmOukb7o/+hJWB9Yp1IAIfAN1WD05EQ4zbIWYZXmp2T
+ bLqZX8gtd4qdTlYcnDhqvNCmTFaj1XqAWzxrY6bvSpciaIQ/hgh93AE3WoJuui7Do45t
+ ME1DPZgRMtNa2uWWkFIzmoZ9y6i2iMIctia4kUH/IKhIY7+eNQJj6TK/zaJCt0+oJbaY
+ vX1A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU4XVkjVJNGMiWp8xIT2k+PGuZiOZuh7oaj8LaicXmK7YSB221QrsrUrmDn1oZ2RE0wTcB8Tyo=@lists.denx.de
-X-Gm-Message-State: AOJu0YwRs27XbGDnm+lGw3M7wSVGCP07FOHm6+eGV97B5lZZid0oC1n9
- Hh0PoB7hYgsTVKph/JyroUAirtR+DnuXX0YJZE9N42+CwZ5qr65rVDKOC1AO/063QHYjh6qIiW8
- QdlRp4JQ3cZ0HBXHFSkjK++d0aPa5t90okxrbzEUd
-X-Gm-Gg: AeBDiet5bcKc4sRTYpVbZskSrt2D+skbFcb8ypPVNwjwVV/ua+qrBozY0x2uSSLjFut
- SP56jDZRrgt/Pllle56srLjpAa0xoQotrV49ZtxcLw8IGBdd33zkVs4dXV2qZ6mHr0YsSbboP4u
- BbgVPhPd98fHJUuunX5XApvGoIbBBaj4pSroTOKMs8isigh1eJJBAWtGvYB9CZ+YuwKfutTEIyT
- n5EWsUgPL9UA7PCyr08n2tmtP1F5xMs8gOfwRgKHjqODB//du3usYpSxV1NrInpkJ6o52cn4mjY
- 3EUOXQ==
-X-Received: by 2002:a17:907:ea8:b0:b98:695:ec53 with SMTP id
- a640c23a62f3a-b9c676881bemr655846866b.18.1775495426933; Mon, 06 Apr 2026
- 10:10:26 -0700 (PDT)
+ AJvYcCUcxSoIdA5edxV6q+HYuSd0+vXk6fRWv++YGt41HPfTRWLR9lDsrgb14/cqvSsJ9Ful8m+nWAo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyb0kREeE/i7eROv50xLmLZlBAqY27JTO76LBYzqX+yuXxjZLAp
+ sHgpV9WkEgj7dPww8HmyYdhy6kKOtrImXhsWUzDxEdvBDca92zz2oYNPGWgIIYRfsuhf2ztFS44
+ MnyUCGZjbtIm9RysvX+Xstok65oZqIcWVPlFQlqZS
+X-Gm-Gg: AeBDietoFOucUY3TVXfJk9p1xR2M+SGJ6MiMVkV3+Bdg5IRXUxCeIgcz2J4EEnprlPr
+ /bpkkrNFNda9GEqkHmOgToqRWVeciJGI+xOI0wkI4vH63AaWxPX86ray6x8nPBCN/3zaipfpf8g
+ dsjkYUsWA4/sdr34sXrAgimf9u0XL2kSIy0wfjDJJqub9mRyWtIR+WY4W4sJ6M/RedZCf1w6TiK
+ U0c0W+zjeyrj2DPR4zJHID1/27EJ399F1+FCZxK7y9GxqBWsXxTs9D/KS2s9Zp3fcxlYNfAFyOM
+ QilpDQ==
+X-Received: by 2002:a17:907:1c9b:b0:b98:1129:52 with SMTP id
+ a640c23a62f3a-b9c677fbd30mr646809866b.28.1775495627944; Mon, 06 Apr 2026
+ 10:13:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260403135205.26979-1-ansuelsmth@gmail.com>
- <20260403135205.26979-4-ansuelsmth@gmail.com>
-In-Reply-To: <20260403135205.26979-4-ansuelsmth@gmail.com>
+ <20260403135205.26979-5-ansuelsmth@gmail.com>
+In-Reply-To: <20260403135205.26979-5-ansuelsmth@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 6 Apr 2026 11:10:14 -0600
-X-Gm-Features: AQROBzDIcmlnCFlyKwD2-PlolE4AUz68SvXPtgjkIBNcepu_VO4-ZahMHC7WJMM
-Message-ID: <CAFLszTg=CXczoktNG_6HY+7PCjzcFqv-xn9mQm9tGYjEb=ZMiQ@mail.gmail.com>
-Subject: Re: [PATCH v5 3/6] misc: fw_loader: implement generic
- get_fw_loader_from_node()
+Date: Mon, 6 Apr 2026 11:13:35 -0600
+X-Gm-Features: AQROBzA4zyt7H2lId7wxJH11b5cn1vkN4PRUSe259_Jeg_xW8B93WVsC0Ue9qWk
+Message-ID: <CAFLszTgw3B7rzMWCwzP6YBn7HGX2QRkkZt8waBgZ8qxTrCiUVw@mail.gmail.com>
+Subject: Re: [PATCH v5 4/6] misc: fw_loader: implement request_firmware_size()
+ OP
 To: ansuelsmth@gmail.com
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Casey Connolly <casey.connolly@linaro.org>,
@@ -126,30 +126,48 @@ X-Virus-Status: Clean
 Hi Christian,
 
 On 2026-04-03T13:51:57, Christian Marangi <ansuelsmth@gmail.com> wrote:
-> misc: fw_loader: implement generic get_fw_loader_from_node()
+> misc: fw_loader: implement request_firmware_size() OP
 >
-> Implement a generic function to get a FW loader dev from a node.
+> It might be useful to get the firmware size before reading it to allocate
+> the correct size. This is needed for case where the firmware size change
+> across different firmware version and is not always the same. In such case
+> the only way to handle this scenario is to allocate a big-enough buffer to
+> read the firmware.
 >
-> There is currently only get_fs_loader() but that is limited to chosen
-> node and is limited only to FS loader.
+> To better handle this, introduce the request_firmware_size() OP to get the
+> firmware size before reading it. This way proper buffer can be allocated
+> and dynamic firmware size can be better supported.
 >
-> Introduce get_fw_loader_from_node() that will parse the
-> "firmware-loader" from a specified node and will search and probe a
-> matching FW loader device, if found.
+> FS loader is updated to handle the new .get_size() handler.
 >
 > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 
-> diff --git a/include/fw_loader.h b/include/fw_loader.h
-> @@ -6,8 +6,23 @@
-> + * Loop over all the supported FW loader and find a matching
-> + * one.
+> diff --git a/drivers/misc/fw_loader/fs_loader.c b/drivers/misc/fw_loader/fs_loader.c
+> @@ -122,6 +115,28 @@ static int fw_get_filesystem_firmware(struct udevice *dev)
+> +static int __fw_get_filesystem_firmware_prepare(struct udevice *dev)
 
-Is there a compatible string for this node? Is it in the DT schema?
+Please can you avoid double-underscore prefix for static functions?
+Something like fw_fs_prepare() would be cleaner.
 
-The comment says it loops over all supported FW loaders but the
-implementation does a direct lookup by ofnode with
-device_find_global_by_ofnode(). Please can you update the comment to
-match.
+> diff --git a/drivers/misc/fw_loader/fs_loader.c b/drivers/misc/fw_loader/fs_loader.c
+> @@ -143,9 +158,43 @@ static int fw_get_filesystem_firmware(struct udevice *dev)
+> +     firmwarep = dev_get_priv(dev);
+> +     if (!firmwarep) {
+> +             ret = -ENOMEM;
+> +             goto out;
+> +     }
+
+This cannot happen, since driver model ensures the priv data exists.
+
+Also how about using 'priv' as the variable name? We normally use a
+'p' suffix to indicate a parameter which returns a value.
+
+> diff --git a/drivers/misc/fw_loader/fw_loader.c b/drivers/misc/fw_loader/fw_loader.c
+> @@ -174,3 +174,23 @@ int request_firmware_into_buf(struct udevice *dev,
+> +int request_firmware_size(struct udevice *dev, const char *name)
+> +{
+
+The function needs a kerneldoc comment in the implementation.
 
 Regards,
 Simon
