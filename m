@@ -4,100 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF307EF4EDF
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 13:04:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5BCCEF4EDF
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 13:04:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 416F28352B;
+	by phobos.denx.de (Postfix) with ESMTP id 820C483F98;
 	Mon,  6 Apr 2026 15:04:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=permerror header.from=rootcommit.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="key not found in DNS" (0-bit key; unprotected) header.d=rootcommit.com header.i=@rootcommit.com header.b="WgmqZZsu";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="UZcVqbZl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72EE883A41; Mon,  6 Apr 2026 11:57:27 +0200 (CEST)
-Received: from bee.birch.relay.mailchannels.net
- (bee.birch.relay.mailchannels.net [23.83.209.14])
+ id 8C31C83C2B; Mon,  6 Apr 2026 14:18:51 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E162F83936
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 11:57:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F41E48341A
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 14:18:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=permerror header.from=rootcommit.com
-Authentication-Results: phobos.denx.de; spf=fail
- smtp.mailfrom=michael.opdenacker@rootcommit.com
-X-Sender-Id: hostingeremail|x-authuser|michael.opdenacker@rootcommit.com
-Received: from relay.mailchannels.net (localhost [127.0.0.1])
- by relay.mailchannels.net (Postfix) with ESMTP id C1853823AD5;
- Mon, 06 Apr 2026 09:57:21 +0000 (UTC)
-Received: from fr-int-smtpout21.hostinger.io
- (100-121-30-206.trex-nlb.outbound.svc.cluster.local [100.121.30.206])
- (Authenticated sender: hostingeremail)
- by relay.mailchannels.net (Postfix) with ESMTPA id 7286F822C75;
- Mon, 06 Apr 2026 09:57:20 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; d=mailchannels.net; s=arc-2022; cv=none;
- t=1775469441;
- b=05JbMY8sLLVTs81vYB4wZFm/1J+RC1J4v4BM7fl9KS40VaTUr20tHHWWXqzqosoFcKlrmp
- wXxmX1iwyaYn664PmYTajPzHzSfKKLE3+sioSt9w/3kHjrMpfBlu21uYFQmL3awRrE+XMc
- +JPSsKem1PZEMr0AH4VsUJ4EPddtLUKq42lqlKmMM3+WvTGIR2d590rTAsjnli4yipIJDH
- JXXv6vEi20o1OchzhK36Qf1mlidyOSKxL+08NJwyNxap62PMmvv+v0SGh2iFBKxMKs+gsG
- 7goOvMkbZ7u6Po1LZ8Z1PVfKkQ575eDguG6SUswIXHL2VcCHZnSXGSNlUT6p2w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailchannels.net; s=arc-2022; t=1775469441;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:dkim-signature;
- bh=LsCGV6xNHO2+bnsLfT2JDfUd7xYjBnxKUSOjosW9LWA=;
- b=v29oYLR7teyEQ1TW7479Qt/DWw88jhPWgNMQnRv3MAMclYw3NN3SYky6Ox033ujc3spAaz
- h2BQiy+2pCF8l5Pf1FrAV+6YdL0fuxIYm+tE7ePRSu8UzA0vq4oIbLiMo+B9HwsNcvy7QC
- obGDp8AW4GAHlU3RLZZVIyzQ3HRfh+2DLE8DptVSfJLZ8B9frFcZ8Ey1e1VBdmNnz5mWdz
- JsPHxQMrZMNGNVP4wAMCN0/YmQr5bH8l5kYXhBw2WuNSWD03wAkL6sznx4gdkc8Nij2/9T
- +/WdWxk/MIGVjcEKEDoR0kSv6sCmdPwIm8WhgmHEnzXY+yGrMfyeY9sUDI3ywA==
-ARC-Authentication-Results: i=1; rspamd-7d86dcc447-bncfm;
- auth=pass smtp.auth=hostingeremail
- smtp.mailfrom=michael.opdenacker@rootcommit.com
-X-Sender-Id: hostingeremail|x-authuser|michael.opdenacker@rootcommit.com
-X-MC-Relay: Neutral
-X-MailChannels-SenderId: hostingeremail|x-authuser|michael.opdenacker@rootcommit.com
-X-MailChannels-Auth-Id: hostingeremail
-X-Company-Oafish: 17fcfb61275a0d2b_1775469441429_1208300787
-X-MC-Loop-Signature: 1775469441429:4248968491
-X-MC-Ingress-Time: 1775469441429
-Received: from fr-int-smtpout21.hostinger.io (fr-int-smtpout21.hostinger.io
- [148.222.54.33]) (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384)
- by 100.121.30.206 (trex/7.1.5); Mon, 06 Apr 2026 09:57:21 +0000
-Received: from a8.lan (unknown [IPv6:2001:861:4450:d360:4b27:58de:a98b:969a])
- (Authenticated sender: michael.opdenacker@rootcommit.com)
- by smtp.hostinger.com (smtp.hostinger.com) with ESMTPSA id 4fq4W247n5z1xtF;
- Mon,  6 Apr 2026 09:57:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rootcommit.com;
- s=hostingermail-a; t=1775469438;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=LsCGV6xNHO2+bnsLfT2JDfUd7xYjBnxKUSOjosW9LWA=;
- b=WgmqZZsuwIIaCtOC/eVh2vnHVjGHQW8gkOVD5+zrn8lFuHHzJFqfVyt0zjEwzszmc4n0uj
- Yh//DtZ6jwHHnKksKFZzpPL1OvdvG1KcnF9bnnirrvgPddP+FnOY8MStgLccS705nwGMev
- eeKFxjsoPu9trN2ngwRLy+pHjeEF79LhTfRl88mP7rryCzcj5FS+Zw45jqKeRKLZlHt6tR
- e/joHpIUAlOfZOrUN9PuqX4YHZcbkzCt6/PHGGFcwksWjO8nahZp7bVpYs8KGEkM6ntLrw
- ELM0aAVJXjDtOl0w5WJySTg7P28AtZbG3r6OV9oMU/FyEimiLZ0B+Lps6+rLZA==
-From: michael.opdenacker@rootcommit.com
-To: trini@konsulko.com
-Cc: michael.opdenacker@rootcommit.com,
-	u-boot@lists.denx.de
-Subject: [PATCH] doc: api: bootcount: correct bootcount description
-Message-ID: <20260406095705.48379-1-michael.opdenacker@rootcommit.com>
-X-Mailer: git-send-email 2.47.3
+ spf=pass smtp.mailfrom=sumit.garg@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 9E6E8600AC;
+ Mon,  6 Apr 2026 12:18:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 074EBC4CEF7;
+ Mon,  6 Apr 2026 12:18:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1775477927;
+ bh=4fzMSwoM0psHeMrlVWfL2XZhNC091UNSM0mAXfoA0O0=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=UZcVqbZlCrihf+d1BCWzH+VbTRSvsPIzjl0SBeMMva7NEe3zJHy1Qi3kw3nGHGmMI
+ z66F8fdVfv5jwqhO5iF5SptjteMtWBWmUgCVt1aXXZSYItYH2BWhNFcgYhdZpEcYWi
+ dJRok01gavINi8tGxMna0eEz/3kxCuHr/sma+zZbIYA9Ra+ZuynMrR+sNFmP2HIwTF
+ 2Tzv/Puxn5zTs1W95lD5ddOeDrJc9iYAt+fwYT+Oe4xBi78doSPlv+KTT4HXybI6B9
+ PVnm2ei1C38oF/IDHntzVxYTVm2snHvnv5JtU8SqbDdM3tzA0Hc4NcBErmgSsLpEJ2
+ g0BxHfaMRhiBw==
+Date: Mon, 6 Apr 2026 17:48:15 +0530
+From: Sumit Garg <sumit.garg@kernel.org>
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
+ u-boot-qcom@groups.io, Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
+ Joel Stanley <joel@jms.id.au>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Paul Barker <paul@pbarker.dev>,
+ Dai Okamura <okamura.dai@socionext.com>, linux@analog.com,
+ uboot-snps-arc@synopsys.com, u-boot-amlogic@groups.io,
+ uboot-stm32@st-md-mailman.stormreply.com, Tom Rini <trini@konsulko.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Stephen Boyd <swboyd@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Yannick Fertre <yannick.fertre@foss.st.com>,
+ Romain Gantois <romain.gantois@bootlin.com>,
+ Raymond Mao <raymondmaoca@gmail.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Yao Zi <me@ziyao.cc>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Peter Korsgaard <peter@korsgaard.com>, Greg Malysa <malysagreg@gmail.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Sean Anderson <seanga2@gmail.com>, Liviu Dudau <liviu.dudau@foss.arm.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, Thierry Reding <treding@nvidia.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Ryan Wanner <Ryan.Wanner@microchip.com>,
+ Varshini Rajendran <varshini.rajendran@microchip.com>,
+ Manikandan Muralidharan <manikandan.m@microchip.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
+ Luca Weiss <luca.weiss@fairphone.com>, Jens Reidel <adrian@mainlining.org>,
+ David Wronek <david.wronek@mainlining.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ David Lechner <dlechner@baylibre.com>, Nishanth Menon <nm@ti.com>,
+ Alice Guo <alice.guo@nxp.com>, Valentin Caron <valentin.caron@foss.st.com>,
+ Senthil Nathan Thangaraj <senthilnathan.thangaraj@amd.com>,
+ Naman Trivedi <naman.trivedimanojbhai@amd.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Jonathan Currier <dullfire@yahoo.com>, Sam Shih <sam.shih@mediatek.com>,
+ Conor Dooley <conor.dooley@microchip.com>,
+ Stephan Gerhold <stephan.gerhold@linaro.org>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Sam Day <me@samcday.com>, Rui Miguel Silva <rui.silva@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Shmuel Leib Melamud <smelamud@redhat.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Finley Xiao <finley.xiao@rock-chips.com>,
+ Joseph Chen <chenjh@rock-chips.com>,
+ Elaine Zhang <zhangqing@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>,
+ Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
+ Andrew Davis <afd@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Udit Kumar <u-kumar1@ti.com>, Heiko Schocher <hs@nabladev.com>,
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Paul Sajna <sajattack@postmarketos.org>, Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH RFC 00/40] clk: port full Linux Common Clock Framework to
+ U-Boot
+Message-ID: <adOkh0qBBLfVWB87@sumit-xelite>
+References: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Date: Mon,  6 Apr 2026 09:57:18 +0000 (UTC)
-X-CM-Analysis: v=2.4 cv=Gq4Q+V1C c=1 sm=1 tr=0 ts=69d3837e
- a=3zDuGFV/+L4c4FtOV/OD+g==:617 a=xqWC_Br6kY4A:10 a=d70CFdQeAAAA:8
- a=lehcmS9YP0pJxNI8ujgA:9 a=NcxpMcIZDGm-g932nG_k:22
-X-CM-Envelope: MS4xfAyNAvoNc6pNzeIE4iSC2gF0LH/t3bf0Rer0O4vLdRkEF+5DxJOjly0g4LVAB7jMldTX5Uwv93IyEou+FmLh1rQhstsE/3/E/jau/1mYOQ/f8R6aBxCL
- DssUgNEnXJWkjmPPqWwAHsOTP28LaVlSZsWzhqG/4nAUzftNK755bc6FqPtCPz9U1lQ3Of7OddqaD98T/9xkOnjUnho6ddrg4+2lo7glQXPliMLt0E+uRi0T
- XTDxrSOPb2SnaOS7iPSlx+rFpoZ2uFwKb5z2naGJGlLgmrN+x1UkUdHInyRMxdDXmrEBN1xqvWCjld5GjhE7TVbQCyF2R89gBXLYYgYbUgY=
-X-AuthUser: michael.opdenacker@rootcommit.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260319-casey-ccf-upstream-v1-0-4df2ee2226da@linaro.org>
 X-Mailman-Approved-At: Mon, 06 Apr 2026 15:04:07 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -115,27 +148,145 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Michael Opdenacker <michael.opdenacker@rootcommit.com>
+On Thu, Mar 19, 2026 at 09:56:22PM +0100, Casey Connolly wrote:
+> This RFC provides a proof of concept for using the full Linux CCF in
+> U-Boot and consequently porting full Linux clock drivers with extremely
+> minimal changes.
+> 
+> == Overview ==
+> 
+> This RFC is pretty long but can be separated into a few chunks. The
+> first patches relate to Linux API compatibility and just contain small
+> self contained changes, these can go upstream regardless of CCF.
+> 
+> The next group of changes prepare for importing CCF from Linux, the
+> standalone fixed clock drivers are moved to clk/basic, the existing
+> U-Boot CCF drivers are moved to clk/uccf, and struct clk_ops is renamed
+> to clk_ops_uboot.
+> 
+> Additionally, clk_set_rate() is changed so that it returns a signed
+> long, since it can return negative values. This is also done to align
+> with CCF but it's a standalone improvement nonetheless.
+> 
+> The next changes import CCF from Linux 6.19 and then adjust it to
+> compile and work with U-Boot. These commits are split up mostly to
+> try and reduce the size. Finally clk-uclass is adjusted for CCF, this
+> definitely will need some additional passes to be a bit cleaner.
+> 
+> With CCF done, sandbox clk-ccf driver gets a CCF_FULL port, the clk_ccf
+> tests are adjusted to pass.
+> 
+> Lastly, a PoC port of Qualcomms Linux clock drivers is done, this
+> only has sm8650 clocks but they serve the desired purpose. The changes
+> necessary to the Linux drivers are mostly to deal with U-Boots driver
+> model, the actual platform specific clock drivers require essentially
+> zero changes!
+> 
+> === Feedback ===
+> 
+> I'd like to get feedback on the overall architecture and ideas, feel
+> free to point out any dead code or printf's I forgot about, but I'll for
+> sure do a more detailed cleanup before the next revision.
+> 
+> I would definitely like to input on how to deal with clk-uclass, since
+> it's now supporting 3 different clock frameworks, but I'm now sure how
+> best to separate the code out without duplicating code.
+> 
+> In terms of overall architecture, CCF is a departure from the uclass
+> model that U-Boot has stuck too for so long. If this is a success then
+> I think it could make a lot of sense to make similar changes for power
+> domains and resets. I think this change offers a lot of additional
+> flexibility which has been sorely missed.
+> 
+> == Motivation ==
+> 
+> There were quite a few motivating factors behind this effort which I
+> think provide useful context for this series:
+> 
+> 1. Existing UCLASS_CLK support in U-Boot (even with U-Boots minimal CCF)
+>    doesn't provide a fully cohesive API nor implement the necessary
+>    functionality to support complex modern platforms without a lot of
+>    additional effort.
+> 
+> 2. While trying to enable display support on Qualcomm, it became clear
+>    that U-Boots clock framework was a severe limiting factor,
+>    particularly for more complicated setups like "bonded" dual-DSI.
+> 
+> 3. The current state of Qualcomm clock drivers in U-Boot is pretty poor,
+>    as the old very basic driver code is being expected to support more
+>    and more complicated usecases. Clock support is generally the most
+>    complicated part of bringing up any new Qualcomm platform, so being
+>    able to properly reuse Linux drivers with the familiar API greatly
+>    reduces the amount of friction when working on U-Boot support for
+>    complicated peripherals like the display.
+> 
+> Consequently, My aim with this effort was primarily to provide API
+> compatibility with Linux as much as possible, minimising the changes
+> that have to be made to clock drivers to port them from Linux, and
+> reducing the chance of introducing U-Boot specific bugs.
+> 
+> === clk_ops/UCLASS_CLK ===
+> 
+> CCF_FULL drivers should NOT use UCLASS_CLK, since CCF uses a totally
+> independent clock API. If the clocks are provided by another device like
+> a phy, they can simply be registered with the clk core the same way they
+> are in Linux. Standalone clock drivers should use UCLASS_NOP.
+> 
+> Clocks must all be registered during driver probe, the CCF will ensure
+> that a given clock provider is probed (via a global ofnode -> device
+> lookup) before checking the of_providers, thus making sure the clocks
+> are registered so that the consumer can use them. There is currently no
+> special handling for cyclical dependencies.
+> 
+> === struct clk ===
+> 
+> It's definitely debatable if it makes sense to have 3 different structs
+> for each clk (clk_hw, clk_core and clk). I do think clk_hw and clk_core
+> are justified, since clk_hw is more tied to the hardware description and
+> typically nested in a clk-specific descriptor while clk_core contains
+> the internal runtime state of the clk which should remain private to
+> CCF core.
+> 
+> It could make sense to merge clk and clk_core, but since struct clk is
+> public in U-Boot, where it's an opaque pointer in Linux this would be
+> a substantial effort. In Linux struct clk objects are allocated inside
+> CCF, but in U-Boot they're allocated by the driver, this would need to
+> be resolved before we investigate combining these structs.
+> 
+> === Memory/perf overhead ===
+> 
+> The memory and size overhead of CCF is undoubtably bigger than uCCF,
+> although I suspect the difference is less than it might seem at
+> first glance. In particular: clk_core is only ~50 bytes larger than
+> struct udevice on ARM64, and an additional 120 bytes is saved for each
+> U_BOOT_DRIVER used by uCCF.
+> 
+> On the other hand, the CPU overhead is probably more significant,
+> but not an unreasonable cost to ensure correctness and propagate rate
+> changes across the clock tree.
+> 
+> Just comparing the binary size of sandbox64_defconfig with uCCF vs
+> CCF_FULL, CCF_FULL results in a 135k size increase in the binary. I
+> haven't done any more detailed analysis here (still haven't got buildman
+> to play nice...).
+> 
+> === SPL ===
+> 
+> This RFC doesn't have any SPL specific support, I think this role is
+> better fulfilled by UCLASS_CLK.
+>
 
-The bootcount variable is only incremented
-when the upgrade_variable is non-zero,
-as implemented in drivers/bootcount/bootcount_env.c
+SPL support on Qualcomm platforms is coming for real. I see a patch-set
+already posted and more to come. So we really need to see how Linux CCF
+can be reused to support SPL limitations on Qcom SoCs while executing
+from on-chip RAM.
 
-Signed-off-by: Michael Opdenacker <michael.opdenacker@rootcommit.com>
----
- doc/api/bootcount.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+If it turns out to be separate clock drivers, Linux CCF for U-Boot
+proper and UCLASS_CLK for U-Boot SPL for the same SoC then it's much
+more maintainence overhead as compared to just pulling in clk driver
+from Linux.
 
-diff --git a/doc/api/bootcount.rst b/doc/api/bootcount.rst
-index 968c679c3c6..f3c10bbe724 100644
---- a/doc/api/bootcount.rst
-+++ b/doc/api/bootcount.rst
-@@ -8,7 +8,7 @@ This is enabled by CONFIG_BOOTCOUNT_LIMIT.
- This allows to detect multiple failed attempts to boot Linux.
- 
- After a power-on reset, the ``bootcount`` variable will be initialized to 1, and
--each reboot will increment the value by 1.
-+when ``upgrade_available`` is non-zero, each reboot will increment the value by 1.
- 
- If, after a reboot, the new value of ``bootcount`` exceeds the value of
- ``bootlimit``, then instead of the standard boot action (executing the contents
+It would be better if somehow Linux CCF can be stripped down to meet SPL
+needs too.
+
+-Sumit
