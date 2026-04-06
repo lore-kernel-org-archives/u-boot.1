@@ -4,114 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97AA7F46C59
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 16:51:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7076FF46C5B
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 16:54:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27F9E8416F;
-	Mon,  6 Apr 2026 18:50:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E9B6583C2B;
+	Mon,  6 Apr 2026 18:54:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WHdEkib5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QAmsDJ6D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DAF083F98; Mon,  6 Apr 2026 16:27:45 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id D919C84034; Mon,  6 Apr 2026 18:54:56 +0200 (CEST)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26EDD83936
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 16:27:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A5D148352B
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 18:54:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7dbe437b072so515355a34.2
- for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 07:27:43 -0700 (PDT)
+ spf=pass smtp.mailfrom=visitorckw@gmail.com
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-2b24fede2acso22801825ad.3
+ for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 09:54:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1775485662; x=1776090462; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1775494493; x=1776099293; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=9W9hFBVypTGBDECS3g5ONLr0VI9EAl1V7TGS4Z9P6Ng=;
- b=WHdEkib5I0l4mJeVFxarz0x5q5aEChjtyfGVd4gvThBwULNTUxaIBC3v+ZD7pxevA2
- p8atDDM5BE/fkZk+lIXbfiAsoJzed9qOkoY+WlXh+yFXIQHDbU9DH9AltZxeBh4Q/gju
- hkLmPJwJGnsC+Rfexf2E5VnL8vcNTy32A9uj4=
+ bh=ZsZQnSha/3vyLhDab+YEm6TOPSoF34A92lnmWs6GWZo=;
+ b=QAmsDJ6D7T3RxgllfyS+DdkEPV8GUnq1kxqQt6o2EGggzpKZW+qIcZKv3f0a+SpruW
+ F81+l7nI36iGpXJySM/2Ou7q391TYS6AYyV1Nk/jmSNLSIJq5CG0qP++nkOteqvcKg4s
+ Gj82ZbSh66/EQlG5+LcZx1Pr4j0/Fcuh8m4MqmDgR3cJpgPjg2vcmnmUskUYuNG2CEYc
+ XxfnxX/ie1PeOypGg5jBghRdEoRfePq5Haaf1yB6+Bew66tkEghTJJoBYfXaqeefPm9z
+ ttDVPyWsMz3K3KGDlaNytYS0VPWjz/inddPEg55jKe+MowNhYKJ1rxMrsHJ5K6r1pnwe
+ AIWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775485662; x=1776090462;
+ d=1e100.net; s=20251104; t=1775494493; x=1776099293;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9W9hFBVypTGBDECS3g5ONLr0VI9EAl1V7TGS4Z9P6Ng=;
- b=m9CEXhbDRSS7/J50wq9wOkJ/mmw9NWpAh69cUUMEFh7fyOUQ/v1Gm0W4SqDVpWJhUi
- Ntn4ClfaWoOAeqfRXEBzcr+KEBlkVrV7I0BUz11mdyM21VUsVPKCvJUTAUpG6WzkB7n+
- JeJnfHlBLu+AQrUo7rFM3mkwsjS9ojy3fz1kEUCo1a6QL5TTrT7NRng7Pnt2DL93qD3O
- 0WC54TJZBY26P6SDquLlk8R90LeiYR/MKGySgsVEHwabCcL/GGwGyj9ZkV0D6/mOxk7T
- 4tvYRxr2+MHZrsLucJOQhI+6CzcRk/58sbQaZsct2SgMFcE1FKu8JmhLtzwpqUdGsdQi
- MQRg==
-X-Gm-Message-State: AOJu0YyWr7+tKEKeYkEroA0S7aaLbHzvUqE/5thnFHVIkcnMM76C213s
- aQnZD1fH2VIJPS3z5lh0U1ReQsvfGdzIL7+IIBnOegrqyH/AvvM31dOvzGJKiIlfT8Q=
-X-Gm-Gg: AeBDietbNK/Jkj2N9uhU7CeDx534ES8vN57c1R7tMMEzh1eMGCZIN+jSN3vOmlRZbYU
- GE6GqVUUNJOoZr2f1XzaEqZ/6kifAQ3vqlfddUF64UrDDPcIoG/GLodPaP33SfGtvOfjzEyOpm3
- BRMMpZ/O8N8M4tT1LgrFs27DWRrBIkpz5+GGp/6zJTatv5DO8if+AcvXbzNCq38PvEZv8UPrPDY
- t4pnXR3V3tG9hRw+C74fCTfbyRK8ptTKml+hbKBw7XMBEiT55ERjNshQpuxGBZNHCwo6+JesEK6
- hXt7E+IWwdMzTJw/T9b0BgHqou+RzKrp+r/EPD9tkfBnL+IKBCtqopFIYjq0CtFf+KdciNzSpv+
- SmmGjL15ryRrs5oEVzDmhk277Q/lgiK/+gI8P4FconCbxsEfkr+cHjTPwnvU2kF4Exsm69gGvu0
- Ujw27hbpMC1fcybCDB3EzRJSxZwItihPxtGV8H0M/ZnRbBZFBLP8QZH4NGXPfSWR+9G488hSoLD
- wTFwgHP9/pnNHlWIq2MeM4NfPDhTZQl9ZCbm4tR0et0sDfD
-X-Received: by 2002:a05:6820:60f:b0:683:4783:3e64 with SMTP id
- 006d021491bc7-68347833f0fmr5519167eaf.62.1775485661686; 
- Mon, 06 Apr 2026 07:27:41 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-422eb25a55asm11960972fac.10.2026.04.06.07.27.38
+ bh=ZsZQnSha/3vyLhDab+YEm6TOPSoF34A92lnmWs6GWZo=;
+ b=AmVtYzRa/Lq4aJRp0+C/FnopM5UUz3+jasJ8KmwfuZfuUQpZJDMSXNr+O5JhhEem89
+ 64YL9wkVIdZvarPzV6Xx/6EnV9fxbtKIWPnXqyTJj9vVGBZYdPsvzVAof5oj9MILRjj8
+ 3w28ciBuJRjdYgWp3NkaEED4K6u59JWpTgE+HZOzw7ZbJoj0ddW12yGqoYX+9RG6Lsrz
+ JGW6EL1zTYYIX6yYdWDVNn7shv9g0YtAt3cDqrzrl7gSWI7dCaj8hQ8gitcDrwq8SV+6
+ nfKUMSMDqXJrcweHGAXQ1GKCcpfZsPIGLqjDMqr4o2P8IxmDVbI6RrDbj9dsZUhhnYzv
+ kPeg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVzJosFaCrfXVftzn56lV4MAFX4mAyWUOpJx5Wi7oF/fU0UOmy1/tBDNXOXKnBmXAwup+a1TzA=@lists.denx.de
+X-Gm-Message-State: AOJu0YxXpwbbXZtauAzv3pCjtgRaAuX8NXK6eIZTV9d/dz2d6JWdUhac
+ wWQFH+MmR7yKlP/R9/lVJ4mBSZKfYHx2vx5W/vJj8qfZR5Nm8LQs0791PHartg==
+X-Gm-Gg: AeBDieuXZdvrvKVpzfgs0FpkBe94rBHpzKFFLCzUutwKINwlEImz+sblhpGlH6BaReg
+ rrKWprDBlmR50FB5pqhElfYZB4ClPXoUC6lRtEiyGP+hKCXyhdrepjh94/zQEnK06PveIK7joTy
+ fX/fti4eF7HEawy8SwAhWJUNRKTUOEE0eW8IVuVwxtiKK82Xsgj3URHk0i1lXgvlqAZJApnmB7W
+ LOMeyLrNbp0pZ5G5rx6+9xMEb5xz6ZcluHqoWuCDAQ9oypzcc4YCSW0Mm2Tvb91jKzrMMHj5ytg
+ yUjz08pOOqoN74874GaqPFcyVQ6Rn+EfGfckxNZB08R3plGGaI12TnBw1Y2VHdDRGwdSwYn5BOV
+ VeVM0+XOec+co0LaU6nt98U6Cm51QBkzOuvEY8Y4IqhFSqh4wKI/m6x22hLms/dvW/famkTIHsM
+ KcPRxni65QfUrbW8wfmQAufXzUhX2r2GtXNDk05J382T4qkuQ94o9oWf+ik8PnOgdB
+X-Received: by 2002:a17:902:d585:b0:2b0:6b98:59ec with SMTP id
+ d9443c01a7336-2b2818e55cemr141755655ad.34.1775494493004; 
+ Mon, 06 Apr 2026 09:54:53 -0700 (PDT)
+Received: from google.com (61-230-33-2.dynamic-ip.hinet.net. [61.230.33.2])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2b27475bc2asm149958175ad.19.2026.04.06.09.54.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Apr 2026 07:27:40 -0700 (PDT)
-Date: Mon, 6 Apr 2026 08:27:37 -0600
-From: Tom Rini <trini@konsulko.com>
-To: michael.srba@seznam.cz
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Ye Li <ye.li@nxp.com>, Andre Przywara <andre.przywara@arm.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Heiko Schocher <hs@nabladev.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
- Peter Korsgaard <peter@korsgaard.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Tingting Meng <tingting.meng@altera.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Alice Guo <alice.guo@nxp.com>, George Chan <gchan9527@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Subject: Re: [PATCH 4/5] mach-snapdragon: support building SPL
-Message-ID: <20260406142737.GN41863@bill-the-cat>
-References: <20260404-qcom_spl-v1-0-9e6c2ac66587@seznam.cz>
- <20260404-qcom_spl-v1-4-9e6c2ac66587@seznam.cz>
+ Mon, 06 Apr 2026 09:54:52 -0700 (PDT)
+Date: Tue, 7 Apr 2026 00:54:49 +0800
+From: Kuan-Wei Chiu <visitorckw@gmail.com>
+To: Daniel Palmer <daniel@thingy.jp>
+Cc: angelo@kernel-space.org, bmeng.cn@gmail.com, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 3/5] virtio: mmio: Keep vendor id little endian
+Message-ID: <adPlWa9YE9_FZJXe@google.com>
+References: <20260406142411.2992618-1-daniel@thingy.jp>
+ <20260406142411.2992618-4-daniel@thingy.jp>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="WHd3HB2uwyBAv0yt"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260404-qcom_spl-v1-4-9e6c2ac66587@seznam.cz>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Mon, 06 Apr 2026 18:50:36 +0200
+In-Reply-To: <20260406142411.2992618-4-daniel@thingy.jp>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,124 +99,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Daniel,
 
---WHd3HB2uwyBAv0yt
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, Apr 06, 2026 at 11:24:09PM +0900, Daniel Palmer wrote:
+> The vendor id is used as a little endian value but it gets
+> swapped to the CPU endian in readl(). Swap it back to le
+> to avoid the below weird output from `virtio info`.
+> 
+> Device 0: UMEQ VirtIO Block Device
+>             Type: Hard Disk
+>             Capacity: 1.0 MB = 0.0 GB (2056 x 512)
+> 
+> Signed-off-by: Daniel Palmer <daniel@thingy.jp>
+> ---
+>  drivers/virtio/virtio_mmio.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
+> index 1cd737aca249..ddf873fa96fb 100644
+> --- a/drivers/virtio/virtio_mmio.c
+> +++ b/drivers/virtio/virtio_mmio.c
+> @@ -374,7 +374,7 @@ static int virtio_mmio_probe(struct udevice *udev)
+>  		 */
+>  		return 0;
+>  	}
+> -	uc_priv->vendor = readl(priv->base + VIRTIO_MMIO_VENDOR_ID);
+> +	uc_priv->vendor = cpu_to_le32(readl(priv->base + VIRTIO_MMIO_VENDOR_ID));
 
-On Sat, Apr 04, 2026 at 01:18:19AM +0200, michael.srba@seznam.cz wrote:
+Hi Daniel,
 
-> From: Michael Srba <Michael.Srba@seznam.cz>
->=20
-> Initially sdm845 support is added, and only usb boot
-> is supported for the next stage.
->=20
-> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
-[snip]
-> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/=
-Kconfig
-> index 976c0e35fce..938e6ebd8bf 100644
-> --- a/arch/arm/mach-snapdragon/Kconfig
-> +++ b/arch/arm/mach-snapdragon/Kconfig
-> @@ -1,6 +1,24 @@
->  if ARCH_SNAPDRAGON
-> =20
-> +# SoC specific SRAM addresses
-> +
-> +# sdm845
-> +SDM845_BOOT_IMEM_BASE :=3D 0x14800000
-> +SDM845_BOOT_IMEM_SIZE :=3D 0x180000
-> +# we may not be able to use the whole BOOT_IMEM depending on the whiteli=
-sted regions hardcoded in PBL
-> +# (we could technically relocate ourselves after the fact)
-> +SDM845_BOOT_IMEM_OFFSET :=3D 0x3f000
-> +SDM845_BOOT_IMEM_USABLE_SIZE :=3D 0xc1000
-> +# technically the below would work, except the memory from 0x14833000 to=
- 0x1483F000 gets trashed
-> +# between the ELF getting loaded and XBL_SEC jumping to our code
-> +#SDM845_BOOT_IMEM_OFFSET :=3D 0x16000
-> +#SDM845_BOOT_IMEM_USABLE_SIZE :=3D 0xea000
-> +SDM845_OCIMEM_BASE :=3D 0x14680000
-> +SDM845_OCIMEM_SIZE :=3D 0x00040000
-> +SDM845_OCIMEM_END  :=3D $(shell, printf "0x%x\n" "$(dollar)(($(SDM845_OC=
-IMEM_BASE) + $(SDM845_OCIMEM_SIZE) - 1))")
+Thanks for the patch!
 
-I didn't know Kconfig even allowed this. And I *really* don't like it,
-and I think it's going in the wrong direction with respect to being able
-to configure a system. If these are configurable, then they need to be
-"hex" type "config" options, and then used later on. Otherwise they
-should just be the evaluated value as "default ... if ..." later on,
-instead.
+While using cpu_to_le32() here does fix the visual output, it feels a
+bit hacky because it alters the actual core data value just to satisfy
+a display quirk.
 
-[snip]
-> +config QCOM_SPL
-> +	bool "Enable SPL for Snapdragon SOCs"
-> +	select SUPPORT_SPL
-> +	select ARMV8_SPL_EXCEPTION_VECTORS
-> +	select ENABLE_ARM_SOC_BOOT0_HOOK
-> +	select SPL
-> +	select SPL_DM
-> +	select SPL_DM_GPIO
-> +	select SPL_DM_PMIC
-> +	select SPL_DM_USB_GADGET
-> +	select SPL_ENV_SUPPORT
-> +	select SPL_GPIO
-> +	select SPL_HAS_BSS_LINKER_SECTION
-> +	select SPL_LIBCOMMON_SUPPORT
-> +	select SPL_LIBDISK_SUPPORT
-> +	select SPL_LIBGENERIC_SUPPORT
-> +	select SPL_MMC
-> +	select SPL_OF_REAL
-> +	select SPL_OF_CONTROL
-> +	select SPL_PINCONF
-> +	select SPL_PINCTRL
-> +	select SPL_PINCTRL_FULL
-> +	select SPL_PINCTRL_GENERIC
-> +	select SPL_PINCONF_RECURSIVE
-> +	select SPL_PINMUX
-> +	select SPL_SPRINTF
-> +	select SPL_STRTO
-> +	select SPL_USB_GADGET
+For example, if someone in the future writes hardware specific logic
+like if (uc_priv->vendor == 0x554D4551), it would silently fail on
+m68k.
 
-This should be in the appropriate defconfig, or a config fragment if
-re-used a lot. Or mirroring other platforms, as part of the stanza for
-TARGET_... (or ARCH_...) as needed.
+It looks more like a issue in virtio-blk driver to me.
+The code currently does this:
 
-[snip]
-> diff --git a/doc/board/qualcomm/spl.rst b/doc/board/qualcomm/spl.rst
-> new file mode 100644
-> index 00000000000..817c76b659e
-> --- /dev/null
-> +++ b/doc/board/qualcomm/spl.rst
-> @@ -0,0 +1,70 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
-> +.. sectionauthor:: Michael Srba <Michael.Srba@seznam.cz>
-> +
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +Booting U-Boot SPL on Qualcomm SoCs
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +Overview
-> +----------
+sprintf(desc->vendor, "%s", (char *)&uc_priv->vendor);
 
-These are style errors that will trip up CI when it builds the docs.
-Please run "make htmldocs KDOC_WERROR=3D1" for v2, thanks.
+This direct memory cast relies on little endian byte ordering to spell
+"QEMU". On big endian machines, the memory layout naturally spells
+"UMEQ".
 
---=20
-Tom
+So maybe we can extract the characters safely using bitwise shifts like
+this?
 
---WHd3HB2uwyBAv0yt
-Content-Type: application/pgp-signature; name="signature.asc"
+diff --git a/drivers/virtio/virtio_blk.c b/drivers/virtio/virtio_blk.c
+index 3dd0cf36268..af61939270d 100644
+--- a/drivers/virtio/virtio_blk.c
++++ b/drivers/virtio/virtio_blk.c
+@@ -168,10 +168,15 @@ static int virtio_blk_bind(struct udevice *dev)
+         * virtio mmio transport supplies string identification for us,
+         * while pci trnasport uses a 2-byte subvendor value.
+         */
+-       if (uc_priv->vendor >> 16)
+-               sprintf(desc->vendor, "%s", (char *)&uc_priv->vendor);
+-       else
++       if (uc_priv->vendor >> 16) {
++               desc->vendor[0] = (uc_priv->vendor >>  0) & 0xff;
++               desc->vendor[1] = (uc_priv->vendor >>  8) & 0xff;
++               desc->vendor[2] = (uc_priv->vendor >> 16) & 0xff;
++               desc->vendor[3] = (uc_priv->vendor >> 24) & 0xff;
++               desc->vendor[4] = '\0';
++       } else {
+                sprintf(desc->vendor, "%04x", uc_priv->vendor);
++       }
+        desc->bdev = dev;
 
------BEGIN PGP SIGNATURE-----
+        /* Indicate what driver features we support */
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCadPC2QAKCRAr4qD1Cr/k
-ChhZAP9RUvoZHvhRqQVYHs8PA7awUrOv2OnUszShDGoCB/B/rwEAh51kcEPf6ML8
-/AAGZpHeFBc9Daz2E/RPjljsz76WLQY=
-=v9l/
------END PGP SIGNATURE-----
-
---WHd3HB2uwyBAv0yt--
+Regards,
+Kuan-Wei
