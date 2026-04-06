@@ -4,86 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0913F46C5D
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 17:15:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF962F46C4E
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 17:15:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88CA48406D;
-	Mon,  6 Apr 2026 19:15:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 33414840ED;
+	Mon,  6 Apr 2026 19:15:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QteqfVvz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ifYIcH4a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88889840BE; Mon,  6 Apr 2026 19:15:12 +0200 (CEST)
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [IPv6:2607:f8b0:4864:20::429])
+ id E483283C2B; Mon,  6 Apr 2026 19:15:12 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2064E840AB
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 19:15:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DA2568406D
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 19:15:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=visitorckw@gmail.com
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-82ce49785a0so1715401b3a.2
- for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 10:15:09 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-b9b1ffbb9f5so467778866b.2
+ for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 10:15:10 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775495710; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Y/PD5D7mIlKQcXWiImdqDHN7Bfy/gCWfNjWImsGEkeoYIaMLGhWzdbjpQx9hE2CNSi
+ mIULr2LKRNImYMMfTC2GxJG/50CX3DqTgy0EBF5oCOAS2SfWaiLQAnPTUD3gr055zBOn
+ wte04utSi9/z9i3pdWlnfS0gIoemHvYBX6GdLHebRlY8OmsNjSL9K4/xrq9+lykoEl/R
+ XBFpsYA/nQ++mX3SlNZl2XQqzGVBz+p3+foInzsvWg+n1Yq1kWmufSX4W/Vf6Q9w3v2Q
+ F1wPYc0Ya8Pdlj/+jxRTlrSjKf0q/i7qFWOR5xaeTCugec2yyghCt8cqsrAqBYLmM/Eg
+ nsqA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=uX8YXThYXM1ITzbl+ts/b1htryaW0fMgQIyruHIJGzM=;
+ fh=ZqGy2reu3NCAtE35jrnoOTbkHg6uMbjpGsVHUHiZ6Dw=;
+ b=MQAIUt3I12KWUKeWAgeMNJGXkqXn31AOb0jhb5xo2iMMRuhn2XGItWcqVK7iWCmz2K
+ Cwbs7yJu/U5EtytvE7HIXJ0/B4DrgSb3BJWLaIslH4/RCEtLfRpcPkDgvnBnz3cYMpMu
+ cUIMsuar4s5oq5UiuO7mhUg/9tS9bbr+eQDWFvu0/Ru2ddJoCJVHPyUC4T2G6LGkYZfg
+ 07HeRau3QkEBgcjt9hUpBJn90D2jkPMYifJyJ0SVNgNV7Mur4ffirgp8yXsVA0ppVBdt
+ RKUKP0OZ5W8Kmh7JOEKgSnyGeKDF1R59QbgADvXGA5v7qIWVeM0sIu0tRKO3j2jyXXtX
+ 10Yw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1775495708; x=1776100508; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=qKXp2Lyje8Bx232PR/MQYxcFl8fShI5NCbyWO9ArEow=;
- b=QteqfVvzcjggyuEhlliHNpbmLvTD2683VcvrcR9DOoT7rCLCUfop/KSOEz/tiOg9py
- 0Ok6RfqHlHRiW7IlUzrvHCSf+UXWC5YlLNmCjOkkLlMaAz9goAxAkAavqFU5A8J4Gfj0
- n6LU1dVuXhgydaBIYIt+YJB4BpVFIvQAjFQ0I34itlYI3ve0nTNzYLQF1EYbvhedI8Bs
- fl5XYvp9A3eDQLjI3CXFmJyHeUoJlQZcfYWTAYKhPEJonBuarJkuMUZ2gdhs1iO2g2Ve
- EkAOJ6uqRjUBZJY2kbVvvQEtjNCcPKX8NMtETMtXbgzLAftnkOrMS27bd0F+bgQyPier
- 0k5g==
+ d=chromium.org; s=google; t=1775495710; x=1776100510; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=uX8YXThYXM1ITzbl+ts/b1htryaW0fMgQIyruHIJGzM=;
+ b=ifYIcH4alXk8D5HS94gT+74BJ1XtrYvzF4Sz5v5OcnwH8CtbFpLZ2+n8PWXxnSyGb6
+ PZrjZXkG/NAzx7/D2eix4hgeFh3e+KpHJFiVYHQ4545PhCqbOSb3xCQ0i81D6y5UW5Nc
+ Y6u5Sy7d04UHAhYZwFHqXJPJJDdY1IFsiNBYo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775495708; x=1776100508;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qKXp2Lyje8Bx232PR/MQYxcFl8fShI5NCbyWO9ArEow=;
- b=BrYUpxGScNodeB45gqjagBA1UfjCkUM75CtlC2CLr8p2EcbE68akJ2B/kgOBG1zHsK
- E+4Mdndj8wztcgSgTgPoQrhiqc47WyoBawJfetIlMDQ1F53s6Er2KGNuwLzx05YU+UUj
- FGTS8ID4zzA3vjJYFEEWkX4nHl/y4eqESrw7pvDg170spxwaNL/ki0nBreEDin9yk+If
- HIpQQ1/6GXl9U3Z/UsH8Ppq5225qVy0Q/bDDepa+PfdWaMaVEFGAcnVdXS0hQj69ZzQ0
- /MxBbIHzLGnuLQGUikXdd+a/EzV8tcZskL8yNqxpzpNsrXJfMMAGjDW07jVpwKyKHoq2
- 8nSQ==
+ d=1e100.net; s=20251104; t=1775495710; x=1776100510;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uX8YXThYXM1ITzbl+ts/b1htryaW0fMgQIyruHIJGzM=;
+ b=aFD32SC4d4WhU8CF2YYKrW519TCcNugRlN4FjGsd3aRJn528v+7Xo7yQJ521nUzui5
+ vK7BTPygbf95/+GmQ5J2S2C3BAFnl9d3A94l/Nlic1b9R0j9rte1asbu2pF8vQe4uBXU
+ wgZR+P2nZgWZvS6jYBCKs75jZ8FRzjEFRQihJiVAPeQirm+vqmfSSUq/7q1G6v3S+apO
+ Yfj6TECxa8g16I3suOLqi9YkHNy95xtqevssorWDg9LUBkY+38cBRbqPNPSzRplMa6Xr
+ yh2okPCnrjYZNoLoEhxJqjtT3rZyHIfZaDY2grQp32f3XvefnedstvKOGJfJgL3PVm5z
+ qu8A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUEpaLevQPXm02eNcJc1GQTa5BkGSAz6ItkdISCrJY9WPk5jz9fcr7Lg42NkuInEL9PiGC1SIo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy+zXlDhuXXtXX5nJQpA/GhFYEf6Fdi+alNhki/ewjoGGIveB7t
- jIk+t8eqpqrxbI6xlyYvCbulnLed557LBsB+oWJ0w5M9yiIkrGqAOzOj
-X-Gm-Gg: AeBDieuLkhO43BJfB24RMn6MHUJRU7i48ZPULL6JOQxQO3cOPe7XBJQ8NReXOw+Qv9H
- SHvderKcikwe3rztNjEoBHYhdOEVUDsFTXtJhbfk/+7y/9I/di7WoE7T1ZC3oMl+RmUiNrRFYE8
- 01vRHkSnhc/9Jvoy1pY1N5S4wXurVI+tTEqjENEnISjtVHfkMwWJsVHwJAXJ+MWp7FMch8gmsop
- GrfvDVV8hUpKVmmpHLwqe4LGOnGABaVv1LJvsy8xElNoJLzkNLDY7pD+OfRUCLI78qQrNzlBNSB
- qAZPBLRMiWiPqthXspIiuQWuve5XXXI5zssnIRlldAtRcv1pHmWQlKRczl/BsUQ9DsRsusfSdiw
- mQKByBn4ghrlXQh4xmhe/u3MLr+Brwh1DYStXE+AKRGgxhmVVXX2K8L7vqxw9AZMAAK/vd5oblx
- 9Vef4OHxTS1iwsxEcSYoLtFEpOHW3BfEqh7LUGc2KsOvOi8omiR/NOETGr4f8yhwFn
-X-Received: by 2002:a05:6a00:8008:b0:82a:6461:6d1e with SMTP id
- d2e1a72fcca58-82d0dbac6femr12519604b3a.46.1775495707856; 
- Mon, 06 Apr 2026 10:15:07 -0700 (PDT)
-Received: from google.com (61-230-33-2.dynamic-ip.hinet.net. [61.230.33.2])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-82cf9b589b8sm14597634b3a.24.2026.04.06.10.15.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Apr 2026 10:15:07 -0700 (PDT)
-Date: Tue, 7 Apr 2026 01:15:04 +0800
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: Daniel Palmer <daniel@thingy.jp>
-Cc: angelo@kernel-space.org, bmeng.cn@gmail.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 2/5] m68k: Fix writew(), writel(), readw(), readl()
- endianness
-Message-ID: <adPqGChmW8FV--tN@google.com>
-References: <20260406142411.2992618-1-daniel@thingy.jp>
- <20260406142411.2992618-3-daniel@thingy.jp>
+ AJvYcCVUTmraZ1FokhYcqluWcMPsJryvPanMmCH2BZ0S5djwt9fn7J/eIio+gqNfCDHSFwqllhcpH24=@lists.denx.de
+X-Gm-Message-State: AOJu0YxHJ8nxWnIWN7Os9fMxlrojiP46vW9vLmuLryFj9mJ6H410HYce
+ iLsJogBU1DMswWiskYYMqVQIzAlQYPv82vEB+/uxt/8tYwEHIXjJXZfzH7/9tSfYIONQBGuqhik
+ YpunpqKcdU1v+GU2T+lE3oVOCcYVCPcidyW9zV/Ej
+X-Gm-Gg: AeBDietB4+44Y0EhCWkpK6NihJUyhhRokibaXXszyyczHqwmT0oj26AejMO2yDH+DW4
+ in8ZF0+WOY0iT3ev/QI5SMBIxBLRQtq9hm/QETCAAzjo0JSq52siFhEUB16ZmEtxkmeMXBdCbdD
+ iCNkaM/AL+2TlUyqg/Nz85stCAOG05mLTVn83CO0r8juVqRYF1h11a+MJpy5CP1QfBnK2Taz45S
+ 6GbQUVGOYXiBv3211YS+x4UhDSeljgzDddav7te0+ajkL5DqWI0QOgMAHMiaCQdu5mUvZ75w3hc
+ g9qN6g==
+X-Received: by 2002:a17:907:c8c4:b0:b9c:648f:7d3c with SMTP id
+ a640c23a62f3a-b9c679adca8mr692442866b.40.1775495710199; Mon, 06 Apr 2026
+ 10:15:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260406142411.2992618-3-daniel@thingy.jp>
+References: <20260403135205.26979-1-ansuelsmth@gmail.com>
+ <20260403135205.26979-7-ansuelsmth@gmail.com>
+In-Reply-To: <20260403135205.26979-7-ansuelsmth@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 6 Apr 2026 11:14:58 -0600
+X-Gm-Features: AQROBzDXkLD1liG2LdOzcr28X9U6pR6FXhAImlan9YtHDbwkCoJRg32DJ6jnuOY
+Message-ID: <CAFLszThzN_d9_558hd4LymGAYSd+sk=2jUq4ypN0G_2+DJR8DQ@mail.gmail.com>
+Subject: Re: [PATCH v5 6/6] doc: dtbinding: Update documentation for Generic
+ Firmware loader
+To: ansuelsmth@gmail.com
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Peng Fan <peng.fan@nxp.com>, Justin Klaassen <justin@tidylabs.net>, 
+ Neha Malcom Francis <n-francis@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Harsha Vardhan V M <h-vm@ti.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,60 +123,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Daniel,
+Hi Christian,
 
-On Mon, Apr 06, 2026 at 11:24:08PM +0900, Daniel Palmer wrote:
-> In Linux these are meant to read a little-endian value and swap
-> to the CPU endian.
-> 
-> In u-boot for m68k this is currently borken and prevents
-> virtio-mmio from functioning.
-> 
-> Signed-off-by: Daniel Palmer <daniel@thingy.jp>
-> ---
->  arch/m68k/include/asm/io.h | 17 +++++------------
->  1 file changed, 5 insertions(+), 12 deletions(-)
-> 
-> diff --git a/arch/m68k/include/asm/io.h b/arch/m68k/include/asm/io.h
-> index 35ad4a1c0444..f4877b0446cf 100644
-> --- a/arch/m68k/include/asm/io.h
-> +++ b/arch/m68k/include/asm/io.h
-> @@ -24,18 +24,11 @@
->  #define __raw_writel(l,addr) ((*(volatile u32 *) (addr)) = (l))
->  
->  #define readb(addr)		in_8((volatile u8 *)(addr))
-> -#define writeb(b,addr)		out_8((volatile u8 *)(addr), (b))
-> -#if !defined(__BIG_ENDIAN)
-> -#define readw(addr)		(*(volatile u16 *) (addr))
-> -#define readl(addr)		(*(volatile u32 *) (addr))
-> -#define writew(b,addr)		((*(volatile u16 *) (addr)) = (b))
-> -#define writel(b,addr)		((*(volatile u32 *) (addr)) = (b))
-> -#else
-> -#define readw(addr)		in_be16((volatile u16 *)(addr))
-> -#define readl(addr)		in_be32((volatile u32 *)(addr))
-> -#define writew(b,addr)		out_be16((volatile u16 *)(addr),(b))
-> -#define writel(b,addr)		out_be32((volatile u32 *)(addr),(b))
-> -#endif
-> +#define writeb(b, addr)		out_8((volatile u8 *)(addr), (b))
-> +#define readw(addr)		in_le16((volatile u16 *)(addr))
-> +#define readl(addr)		in_le32((volatile u32 *)(addr))
-> +#define writew(b, addr)		out_le16((volatile u16 *)(addr), (b))
-> +#define writel(b, addr)		out_le32((volatile u32 *)(addr), (b))
+On 2026-04-03T13:51:57, Christian Marangi <ansuelsmth@gmail.com> wrote:
+> doc: dtbinding: Update documentation for Generic Firmware loader
+>
+> Update documentation for Generic Firmware loader, generalize it from FS
+> specific and add new property and example for FIP loader.
+>
+> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 
-Just wondering could this global change break some drivers on coldfire?
+> diff --git a/doc/device-tree-bindings/misc/fs_loader.txt b/doc/device-tree-bindings/misc/fw_loader.txt
+> @@ -7,6 +7,8 @@ Required properties:
+> +- mdtpart: which partition of ubi the image loading from, this property is
+> +        required for ubi and mounting.
 
-I originally thought you were planning to split these IO macros between
-coldfire and classic m68k.
+mtdpart
 
-Of course, if you've found that this doesn't actually break coldfire,
-then this global approach is definitely ideal.
+> diff --git a/doc/device-tree-bindings/misc/fs_loader.txt b/doc/device-tree-bindings/misc/fw_loader.txt
+> @@ -12,6 +12,8 @@ Required properties:
+> +- partoffset: valid ONLY for "u-boot,fip-loader". Offset of the partition to
+> +           parse the FIP parition from.
+
+partition
+
+> diff --git a/doc/device-tree-bindings/misc/fs_loader.txt b/doc/device-tree-bindings/misc/fw_loader.txt
+> @@ -1,9 +1,9 @@
+>  Required properties:
+>  --------------------
+>
+> -- compatible: should contain "u-boot,fs-loader"
+> +- compatible: should contain "u-boot,fs-loader" or "u-boot,fip-loader"
+> +- phandlepart: which block storage device and partition the image loading from,
+
+The section says 'Required properties' but phandlepart, mtdpart and
+ubivol are alternatives; only one set is required depending on the
+storage type. Please can you clarify this.
+
+> diff --git a/doc/device-tree-bindings/misc/fs_loader.txt b/doc/device-tree-bindings/misc/fw_loader.txt
+> @@ -46,3 +48,12 @@ ubi in device tree source as shown in below:
+> +     Example for FIP from eMMC:
+> +     fs_loader4: fip-loader@4 {
+> +             bootph-all;
+> +             compatible = "u-boot,fip-loader";
+> +             phandlepart = <&mmc0 0>;
+> +             partoffset = <0x100>;
+> +     };
+
+Since the FIP loader supports UBI storage as well, it would be good to
+add an example for FIP on UBI too.
 
 Regards,
-Kuan-Wei
-
->  
->  /*
->   * The insw/outsw/insl/outsl macros don't do byte-swapping.
-> -- 
-> 2.51.0
-> 
+Simon
