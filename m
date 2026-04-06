@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2F97F46C59
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 16:50:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C99DCF46C5A
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 16:50:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCFF0840B0;
+	by phobos.denx.de (Postfix) with ESMTP id F168684105;
 	Mon,  6 Apr 2026 18:50:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hqs+R8cf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MBtkoCxV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF27684034; Mon,  6 Apr 2026 17:50:40 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id DE91884034; Mon,  6 Apr 2026 17:51:21 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1B3F8341A
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 17:50:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E7F9D8341A
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 17:51:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-66f2ea5c500so786745a12.3
- for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 08:50:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775490638; cv=none;
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b9382e59c0eso636816366b.0
+ for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 08:51:19 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775490679; cv=none;
  d=google.com; s=arc-20240605;
- b=jW5kbQQiKJ/qmZEKaXNMYbPRnAyKk6SaP3FnwAIk6N5hCEtOlQpklLakRO+eQhhHAm
- SWhnREceWw73MMz00MCREqdFlDOexlwbmA/XpK0Gz3ZYAQGuW6NA4XTZtxB172iqR0vb
- Ef/dji1rQMjcGnZqlCRjA0+e1eV8soSGZ0DROVwTnwbsKvMpqO8IO/eK7TwNiSD9DmCL
- iTg0ImEaqiwx3Nc2vPqOYEWvLVowYd021NWY5TgKhdXfAkhoJpgsF0DLzd580A/ntw+W
- aWPF1jaPU4yScppleiiiXzTkC5TbdEjqkvR1B6kRVFsPQKDs2kFD1QRABaYn3UcVVpA4
- QlQg==
+ b=exsebhlISAgb2pRPS0CADHfFJpJ7Q3GE6E00mCVzvA73PAYLz+iyZK9JS31wJz8mOr
+ lZtX97VohoooB+3RjYPEeG0Erm5kAvsn7xlvnVzRUIUeVbRUhdiCfzkgsxLvfd9d94P0
+ I504Y3BUrA+0a9YK/9Inc/6Vhqx/3GuiW7IGX/ITXqsjN9YrzA6Kw2gtlJbBBtlGORMY
+ xH8IWyXdxx1WEaz4e9cGNfkRH4m5ltqJzSfHxqp7Ol8iwKj2maqVgwXnqw2Q6wL08PKG
+ N+B9eK3+klaQK5ub7b2X+wSTGHCTf1j5kW7O486YdQgRvk1VJGCXbhMTW6iNX4rfHwbH
+ SlxA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=ro4aHxkzCP7OwUGYL7lZuP+4Z5duDwb3/XNs+brNyhY=;
+ bh=JcXQrv507HNNdQm+vQfVDJHeQexVXJGdfKrcI/zNI4w=;
  fh=lajVl/IeoACZS/6yuLfZkN/hPyImAZ81vhSDRfkAdyk=;
- b=C9uCQr2444aylQJ/sr79nbPsLztQY56GBf4GHt9pnCmltCZQWldLrf5nAcBzn4I0Ky
- fUGSIWHzAP06d4b/nrbaQJuUIZ5OnUi62qU641eV9J0MxKAcJyVLSQdwWAloYz4uWKSd
- 5PhkPfArhWBYftUaGGK0YMvDyyUE/tAct0Fb81c+ZVWv+OD1ZIDwOMRdJKTXsl5vYXSd
- gGNlvxjPnnV887ueA8t+Um3Rzji6qe4mRiGATpwoyGO3IbG9c+0SL1WQp+dvOTjGqytc
- rM3V4qX+b2NxYYK3hABOsmkwnltoW6qG4lsaap99XSOlIFuqj0QNPuxrCJHlSn7a5b7j
- uhkA==; darn=lists.denx.de
+ b=O4mGl12BP0X2Glw2yahux9z8Y1Uk81QDmXQsbhqyq/7Etzo34aS0UDBP45qaW9ZOpw
+ iubRSxVNJ6SJyN+Q6r50k5AYjIeDcjktwmj1RS4gzCObJZ23T/Cs9ou8mzPTgmqz8vrI
+ BZVKMA4RwoTUouvJ7VXlQTNylwJ8iW5Yabb7/g6QrxKEpaXCTjpKsA+DoJ8VLZM7jF4+
+ Hr5x/meneshcPllanBwTuC3h0Z+R8GAllXX4TpTi6G4IMPjlSDWx9twrArsAKm918G9v
+ st+HTXH2wbyB5xWvNPYmNS3AKMy/2OE8gppG0EWk6+Pr3fU8nCLx8QO2+GNO8AXrfw0L
+ Sd2Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775490638; x=1776095438; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775490679; x=1776095479; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ro4aHxkzCP7OwUGYL7lZuP+4Z5duDwb3/XNs+brNyhY=;
- b=hqs+R8cfwFBFS6w0Ir5mICAi7uwXuOtfOI083hu2XnQ9cGModkYmBXYtUfyMQD0M3B
- N57QuhcB2qhRIcslB/FPI25qrB6dcd5C33Rx/C3CnwPMbadZEgNH+qAQk3rVeY4xa20o
- k5HYWT5pllROQ/nqu+j9miKOlslzIZs6Ev6fU=
+ bh=JcXQrv507HNNdQm+vQfVDJHeQexVXJGdfKrcI/zNI4w=;
+ b=MBtkoCxVM1AWABLH+u9sCXs7A+ll1o1wJAgz1bgEPoM/iNBF9w/4SRdbD2sM5MYS8D
+ UGuybaxka5OiXwgvkwwVodtf/UeRf7OYMHFlzHF0ddQOQoQY9V3g0sdEA60GpuWHAfmx
+ Z9Fq479i1Hdj9TJQzhONExxvqfe/+D+sP3bw0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775490638; x=1776095438;
+ d=1e100.net; s=20251104; t=1775490679; x=1776095479;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ro4aHxkzCP7OwUGYL7lZuP+4Z5duDwb3/XNs+brNyhY=;
- b=eQkryptyykD6fZendntDAjZOjqiU6ipFsnRuLQvTgeSU1fvKwAUi/ycDz+zcfJiYae
- PTSqwTg2eGYMrV2hMCBVrcs7HGkWz9Y+UAJ+eF/iFtW32P0ILWdztj1isaUabFP4GVNp
- 67n525QX00xU2H6JsnJIB1BxmAHWyMB026KDW1KSLYxNTADGv2CjrdwAiPQL9gNN5JX9
- +ifqud1xAkkOG9LXmdzzkpakx6jqs2KbM+aawYIg7jbPHrDGlUnDGVPTUZeC465kGbj2
- R+BIMGN9NhK5/MgmPly74FTaSwVk2DsNqb/aOFoERN1ip88t/TdqLtoXJ2FM6ix+Wqka
- uv3Q==
-X-Gm-Message-State: AOJu0YwXN1VYynpOuK3JjHXNu4lgcP2DQ4TNk+SDsBpBPmfc7GgfSt4E
- 418vysbmmjKkGcw+FhlDU04663X1QjJ/4/e2yK20yHipuzLG5fkzk2F2QSSGiB+MegDV1jRalnP
- Zs/nmGCOtmHckhUFcXqwSpdJaw0xFZotn0Ij5sSK+
-X-Gm-Gg: AeBDieuJvMcn9or3/kctVYCnTbRwCHHi+aoqcjs8xr/vRpEpCNbrJ8TSvcHEWMzCzBA
- xeUmCccacNu6p6VDPV/5PRufpb2WmoRpBMiVe06ybqnB9mGvwmQc+NHmsUt8nMLR2Qp+4b+A+Pp
- Yc4l/lz4pMbzS9OBcfX/ZYgfizM/x4DFse75wqCA42dlX/kbPKmyVmE3ZMnbDxyQRlxjevZkuo5
- zWqKHbBhm9BykhEYM4MMra+R8c7dg4WLhNxlTHWGX3J1sOvBt/kWsdmoGL0D9iqtjoLZklt6J0n
- rtSQwQ==
-X-Received: by 2002:a17:907:86a9:b0:b9c:b475:90f4 with SMTP id
- a640c23a62f3a-b9cb4759648mr293425266b.29.1775490638095; Mon, 06 Apr 2026
- 08:50:38 -0700 (PDT)
+ bh=JcXQrv507HNNdQm+vQfVDJHeQexVXJGdfKrcI/zNI4w=;
+ b=LFcqQcw2PkjSUkK9vO834mdgaD953U72lxy7f7UF9aAUwJfOxCOmmYprhUjymEoBPK
+ KbBsxjq2DMVCHQr5eJBkjum54tLp7SCqUcqMrdIjOqICjImrG9q/PMnFqohabXmLinuq
+ l62eOCFHHWcsqcgs8jbAvgdv9CGIfdgH5mS5V/dKCeCBnJhW3V+3O550zobbVCMkxM94
+ 10yJHskPV0KjCNJPfTiAxku5JoItGuCsv/6aqMTffFtj68Hlkyhre34afa9H9SPPQY+a
+ jNLWySGHQYieR9CpKTo2zqut3NY8p4PSKQfPUCT4ilw045zM87BIALFysRPkaxpP4xiY
+ 3tQw==
+X-Gm-Message-State: AOJu0YydS5bdzXHNuq095yiSD0xVsg85Pm0OV0tPM4oghtTkPoAiESkD
+ ay0gpOSLUYBpBCCzFsoRCyIWT5cTUS+H1MKTsWQ6JHS9HmwYZ2JF5e/vr/LDkoROABMGf9lM/WI
+ DfRUMnQD60n1jeF3s31pcQLbtdKFrAY8WA+CCVzHv
+X-Gm-Gg: AeBDiesXZ1pmJh0W65qBGVGi3pCGJ3nzAi1HO0rk8Bx1gxAiQGBj6ZZyr4OYKmbXLpC
+ w56oaHZrlsJyqqCDppWawD6+NueeEkBSXY8/1JXP8eBckU8jXYbpOuwYSooWXaDiPB8FOSqdn8p
+ hlPay5j8OodUj4eaoc389vPSdBGIqlA/zQ3ALQQPskFviEEJkcg44DdzDFwE0Rg/z/v2Cstbv/x
+ r/Ps3GDHCQxvhYfUqWsm5ZZShY/Vgx6Ot5cRFfPckp6o6wavGkw/CBeeqTDGVuyrlvBxB+6AfFq
+ vnCGfg==
+X-Received: by 2002:a17:906:518c:20b0:b98:4d6:8c9c with SMTP id
+ a640c23a62f3a-b9c679a584emr497213166b.32.1775490679268; Mon, 06 Apr 2026
+ 08:51:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260404-qcom_spl-v1-0-9e6c2ac66587@seznam.cz>
- <20260404-qcom_spl-v1-1-9e6c2ac66587@seznam.cz>
-In-Reply-To: <20260404-qcom_spl-v1-1-9e6c2ac66587@seznam.cz>
+ <20260404-qcom_spl-v1-2-9e6c2ac66587@seznam.cz>
+In-Reply-To: <20260404-qcom_spl-v1-2-9e6c2ac66587@seznam.cz>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 6 Apr 2026 09:50:22 -0600
-X-Gm-Features: AQROBzBBShKHbIYgE3Owi8kVprbyXKn-WAZIslbyfYIdF4jh1RXvpdA5iKQoXmY
-Message-ID: <CAFLszThhVEp3EH1Rqb6acPzJ6TbPc0p0thCG0+PHHCruKGz=iQ@mail.gmail.com>
-Subject: Re: [PATCH 1/5] Makefile: add SPL_REMAKE_ELF_LDSCRIPT feature
+Date: Mon, 6 Apr 2026 09:51:06 -0600
+X-Gm-Features: AQROBzAMX1xXP4WZUJFZbDyLaCsDOEyvicRkCkmMG5ikq8ZmTu2F6J6faa-9xUQ
+Message-ID: <CAFLszTjTU_RMf6hh97+mTgxDMN97Z86XR+gFDyZadX5vq4qdnQ@mail.gmail.com>
+Subject: Re: [PATCH 2/5] of_live: support in SPL
 To: michael.srba@seznam.cz
 Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  u-boot-qcom@groups.io, 
@@ -142,46 +142,39 @@ X-Virus-Status: Clean
 Hi Michael,
 
 On 2026-04-03T23:18:18, Michael Srba <michael.srba@seznam.cz> wrote:
-> Makefile: add SPL_REMAKE_ELF_LDSCRIPT feature
+> of_live: support in SPL
 >
-> On some platforms (at least Qualcomm), the bootrom expects an ELF file.
-> Since the contents of the ELF file are platform specific, add a config
-> option that allows specifying a linker script to use to produce the
-> ELF file.
+> Add CONFIG_SPL_OF_LIVE and if set, initialize of_live in spl.c
 >
 > Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 
-> diff --git a/Makefile b/Makefile
-> @@ -2014,6 +2017,26 @@ u-boot-elf.lds: arch/u-boot-elf.lds prepare FORCE
-> +quiet_cmd_u-boot-spl-elf ?= LD      $@
-> +     cmd_u-boot-spl-elf ?= $(LD) spl/u-boot-spl-elf.o -o $@ \
-> +     -T spl/u-boot-spl-elf.lds --defsym=$(CONFIG_PLATFORM_ELFENTRY)=$(CONFIG_SPL_TEXT_BASE) \
-> +     -Ttext=$(CONFIG_SPL_TEXT_BASE) -z max-page-size=0x1000
+> diff --git a/dts/Kconfig b/dts/Kconfig
+> @@ -86,6 +86,11 @@ config OF_LIVE
+> +config SPL_OF_LIVE
+> +     bool "Enable use of a live tree in SPL"
+> +     depends on SPL_DM && SPL_OF_CONTROL
+> +
+> +
 
-The existing cmd_u-boot-spl-elf includes $(if
-$(CONFIG_SYS_BIG_ENDIAN),-EB,-EL) for endianness. Please can you add
-the same here for consistency.
+Please can you add help text here? The main OF_LIVE option has a
+helpful explanation. Also there should only be one blank line after
+the entry.
 
-Since this redefines cmd_u-boot-spl-elf using ?=, the earlier
-definition takes precedence if both SPL_REMAKE_ELF and
-SPL_REMAKE_ELF_LDSCRIPT are enabled. This is probably fine since
-enabling both does not make sense, but maybe add 'depends on
-!SPL_REMAKE_ELF' or a note in the Kconfig help text.
+> diff --git a/common/spl/spl.c b/common/spl/spl.c
+> @@ -510,6 +511,15 @@ static int spl_common_init(bool setup_malloc)
+> +     if (CONFIG_IS_ENABLED(OF_LIVE)) {
+> +             ret = of_live_build(gd->fdt_blob,
+> +                                 (struct device_node **)gd_of_root_ptr());
+> +             if (ret) {
+> +                     debug("of_live_build() returned error %d\n", ret);
+> +                     return ret;
+> +             }
+> +     }
 
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> @@ -247,6 +247,12 @@ config SPL_HANDOFF
-> +config SPL_REMAKE_ELF_LDSCRIPT
-> +     string "Linker script to run with u-boot-spl.bin as input"
-> +     help
-> +       This allows specifying a linker script that will act on u-boot-spl.bin
-> +       (see also REMAKE_ELF)
-
-Can you explain when you would need a custom linker script rather than
-just using SPL_REMAKE_ELF ?. Something like:
-
-Some platforms (e.g. Qualcomm) require the bootrom to load a custom
-ELF format. Unlike SPL_REMAKE_ELF which uses a standard linker script,
-this allows a platform-specific one.
+The U-Boot proper code in initr_of_live() wraps of_live_build() with
+bootstage_start()/bootstage_accum() using BOOTSTAGE_ID_ACCUM_OF_LIVE.
+Please can you do the same here for consistency and SPL boot-time
+tracking.
 
 Regards,
 Simon
