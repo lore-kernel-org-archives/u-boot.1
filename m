@@ -4,110 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD3A5EF4EC6
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 08:42:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90140EF4ECA
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 10:55:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 586D78394E;
-	Mon,  6 Apr 2026 10:42:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 8066183936;
+	Mon,  6 Apr 2026 12:55:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="bhoQ4+eb";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Kzj9bJlZ";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="eYGq8RbG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 143BB83C2B; Mon,  6 Apr 2026 10:42:26 +0200 (CEST)
-Received: from CY7PR03CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::5])
+ id ACA5A83936; Mon,  6 Apr 2026 12:55:47 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A463C8352B
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 10:42:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Pranav.VinayTilak@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GmmI5A9DtE43/+WUsVvvdWdPmqzh2BZ46N1FurnrzLBwHNdFGhQvOn6iTj0mYC/ojGeEcjxBYkHcOrmQf55Og9/eAyvr65n34xApntFhmHA1WUmDaLUJEAeEGnJda8dyds1XWDyhlWyCOPfmab3EIdTipA3JBI+QaUSDfHWlnbnJWBQdiLCe3oz0E8x6AnXLB+UTx92EwjBp03IF+D+4ozKjl5cxW0S8I9/+s2DNVkpcf/hIaQ/x8F5UrYl7d1B2aWitBUvlIXA/c2uvGC7usz0qJJX5aty/+JnO4JwjJEaFemcJ2ZwezsQJvXlbP78sBQtQcIP1L8EXoT9us2I5yA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/nepva75pzjecnpucGZHmuRUP5dxbJXohbGZETgojLc=;
- b=CxQpPHBAyTDSKjc4KzcSiQFgJ1U3+VxMhP/5d+N5vMLSb0ZNpe+5HJ/H6TvxJaneIpBZD41ZVMWk+gLG4jtuH8u9HRIUJnygRcEN4/SpKEJwQ7jS+6xDx8FvOyyL5reioTQCHJYS63cK2CmlCXEo4ed9513wnSb1V6I3wbR63FYZQoQOjTcEWxOKg+47Uj1HOHKESe6LFlPPCr3p6hurlfoKeKu0IsgSGFkOTbLHPlCEUEClumSv4O01lUwntFvxhPL4KUPPcAvCRZgqi0fe0E7c2mOeLvyuG2/fKnqtGWvx2DgcOtWgXWzl2gzxR36pgsa2SDIbNTajtpfq+1ATaw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/nepva75pzjecnpucGZHmuRUP5dxbJXohbGZETgojLc=;
- b=bhoQ4+ebQpjST839raO9UTyZabn3fVJi+pbDQeGi8RYk1SdR+WBlPESzeaSOEI7axpYeJMwNupGA7tKcMzgVigWvTRCqR375ZA0CjeKUXoxc7qFwAyrkMmrHT/OCLzdVEEgKsZ7pbSdXt8preGtxsUscUn/mC4PtGXN/RVMaDjE=
-Received: from LV3P220CA0026.NAMP220.PROD.OUTLOOK.COM (2603:10b6:408:234::27)
- by DM4PR12MB6640.namprd12.prod.outlook.com (2603:10b6:8:8f::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.17; Mon, 6 Apr
- 2026 08:42:19 +0000
-Received: from BN2PEPF000055DF.namprd21.prod.outlook.com
- (2603:10b6:408:234:cafe::5b) by LV3P220CA0026.outlook.office365.com
- (2603:10b6:408:234::27) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.31 via Frontend Transport; Mon,
- 6 Apr 2026 08:42:19 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BN2PEPF000055DF.mail.protection.outlook.com (10.167.245.9) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9818.0 via Frontend Transport; Mon, 6 Apr 2026 08:42:18 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Mon, 6 Apr
- 2026 03:42:17 -0500
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Mon, 6 Apr 2026 03:42:15 -0500
-From: Pranav Tilak <pranav.vinaytilak@amd.com>
-To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
-CC: <git@amd.com>, <padmarao.begari@amd.com>, Pranav Tilak
- <pranav.vinaytilak@amd.com>, Jerome Forissier <jerome.forissier@arm.com>,
- "Tom Rini" <trini@konsulko.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Ramon Fried <rfried.dev@gmail.com>
-Subject: [PATCH] net: phy: ethernet_id: fix duplicate eth_phy binding
-Date: Mon, 6 Apr 2026 14:11:50 +0530
-Message-ID: <20260406084204.1274302-1-pranav.vinaytilak@amd.com>
-X-Mailer: git-send-email 2.34.1
+ by phobos.denx.de (Postfix) with ESMTPS id 59DC980433
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 12:55:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6368EapL3173845
+ for <u-boot@lists.denx.de>; Mon, 6 Apr 2026 10:55:43 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=7k6i+CW4Mtv1xazrPTFj+e
+ UsOCw9iw0LkQXXHo7c+3s=; b=Kzj9bJlZZzyJ9Zi2iuBSMVleByJOE1tvz/EFQx
+ zh/sELM+XMb9ncR64pLjdj0zXZzi8NVDvAp8qKMDqPnjupfU3OCQGpd6F68d7Ejg
+ FEZWEtpLvh/Hjaf4y4YciJNbt+XS3wyGGvoQhuFX7bCZiHXNqmEvM1S0iKFDrj7V
+ +9peTmxWBN3iMNDmbx/y5uUf8jC8hMmS7exsUOqggZQBGM4bvIjy9IgWrIh46wuK
+ U9gY7zEAMKDbamkGc6soAEdfZFQPVnKefFpM4TkvbWBIor8vKMSoO6I6Ucp+ou3a
+ p2l/AFgDd64nA6DyPT62ye6RwmoNZ2DH635QU0Jj3WkffvBw==
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com
+ [209.85.215.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4daskrn1nj-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 10:55:43 +0000 (GMT)
+Received: by mail-pg1-f199.google.com with SMTP id
+ 41be03b00d2f7-c76dbf0fad3so1018064a12.1
+ for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 03:55:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1775472943; x=1776077743; darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=7k6i+CW4Mtv1xazrPTFj+eUsOCw9iw0LkQXXHo7c+3s=;
+ b=eYGq8RbGCtrlV6OPyM9Gr7d1Tv3VD6O0xhwlAddl91EOatFvTRZq9qcm8as4EsuSXy
+ ouTgPY9KTWyj43kSWUjw+4MK0RYrjKZWQmt3IQt0KDacumPGH6eOwoNtfVsCpxFxXpkH
+ e5tJQWoMC02xv8sDT2/XdJgFplG7ELUhwkmlhTDBVIp9EyUlRyzUSo0jB3KjIaGS4JAA
+ QFrp7UyFLYviuXGKR6ftLT/lxBK0gnqFC7ATek5GHgy75Qa9RnQl4RH69I09V2a3l1xK
+ YQMJHuZsPInWd3cwaksqZb051vWPlGuYcp+toajXdtwGoTbbQ9rPieYvZ9s+lHEwfLFs
+ ywGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775472943; x=1776077743;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7k6i+CW4Mtv1xazrPTFj+eUsOCw9iw0LkQXXHo7c+3s=;
+ b=EyGyWYYf+5KLHJcXiPl16ahrjbOb5Eg9J0nTWrClcAgJ9udHlOW/wsOHvcnnqBSUv1
+ WHeeXH+9h9TamKivCJcJ8dD9N9dmTeuvG9H/f/fGB8DuFVIaiuJ89L3R1Z6B94vKnbi3
+ HgqHwp2WB3No/bcAkDx9VTGwzDObZI8UvYgbwa633wJvlWhDLj5jsqXGPpju4OuTVMqz
+ xR5n4n1oaiSi4qQVAD/qX9H4Bv+hrA3jn4EH/xJRtOTmRJoRjiz75Ca8UvqiSVhR9m+j
+ yHtgEa9X4n1DU7DTE/IZO/5yF8dBqfpD681yCrEQIJNnuZR6SuuF37EqjgDdu6be8zc/
+ tGDg==
+X-Gm-Message-State: AOJu0YxNHKKgLafSRfFopCkiDGsSN7IoA6bWenl/nnNqiyXJY2r1ZITI
+ N0hHAc4jhx8wapfKoDBzFl3IOJ6wPPKRYN56JocOHUDgrwjKYUaxN3rZbrpkInYrdtmn3YceoPx
+ hKGeHmeoGEpopWv+elaS0Hkil+GvgK6TPcf6vc+47lIX8jULtlO+Jtumv
+X-Gm-Gg: AeBDievYaaBxFel33RSGzGHyw3g70MkGUCkMqGxgRrMD2Wwd+t2uODR41Lrk4jaLlci
+ vQssVLzrcfv5MTBHN2o9eZjCIGbG8GZY5m6X2lgel4RpuGK4e3O1HjsNWMeEVOybSeuPAb1Vsdq
+ gvkcO+v8JHprOYSGd/jlqbxLuSgiqE3rgsYYdXUGjcjuvvHaWpEoRrT+uDKAS1XNbugXII8XnnM
+ umWp5EapEUATptVG6oJdTWpKh1QO/oFZqBn09bdYeaB+FVYb2GGK0f3mMKXJKxXm9qC0nJFZpmk
+ rnwAO2k7sKRlC+0CrhmxeUt+jAjY05BKcDWQ/rhlfUWV97Pf3Rn40v3UeEACLFQMigiH5QSX7EN
+ +ebP8Nemqog2XTyX2rjjIAlY35EYnfG70Vpfi5KtZo3S25+Dp36mHhgogqdtyuRInRu0LUyjnuS
+ ZUiE7Ya4FEnLmPSa4B95QnL67owGHveOlZxorYHetjdG1kmtt3Vg==
+X-Received: by 2002:a05:6a00:90a5:b0:82a:7734:8c6a with SMTP id
+ d2e1a72fcca58-82d0dbbe3a7mr10617737b3a.48.1775472942801; 
+ Mon, 06 Apr 2026 03:55:42 -0700 (PDT)
+X-Received: by 2002:a05:6a00:90a5:b0:82a:7734:8c6a with SMTP id
+ d2e1a72fcca58-82d0dbbe3a7mr10617709b3a.48.1775472942278; 
+ Mon, 06 Apr 2026 03:55:42 -0700 (PDT)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-82cf9b3baffsm14128816b3a.14.2026.04.06.03.55.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 06 Apr 2026 03:55:41 -0700 (PDT)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Subject: [PATCH 0/2] ARMv8 timer fixes for platforms without EL2 configuration
+Date: Mon, 06 Apr 2026 16:25:35 +0530
+Message-Id: <20260406-timer-v1-0-f7c5a290c459@oss.qualcomm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000055DF:EE_|DM4PR12MB6640:EE_
-X-MS-Office365-Filtering-Correlation-Id: 763f1240-b903-40f5-be2f-08de93b86997
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700016|376014|1800799024|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: CAd+cJJ8KtiBcXqlQSDqVr02TYzMw7a0pxeP6BWGehdWSXoo0bxMpYn6xKNNd5mX74RkpyC64JmbGbM6exz8Mhznh9GLuVeWGvcau/HkzI9vmiEaGyMQcw3gYW1+97VEtci4LflfwvL7Yvysc+Hun5a1PnlN3WHy3QF+O9Sn0sw2tBx6uiqxmBVmWW+3b+O9w3FwYv6DsjYoo9NQnjpmxmJcFZQgQEBBZ6SPXIRx6m2a374dhDJe+e9UGz22tWXhfXL4SESXsfNtGu66RveJS/oYQM4xsWVv5XUfS8SFLm2UJFTRFjo6REYUAuihK9q6jeMe27jFdHaBy55jxTc49ySlUFLwMHGhaSXwIRSl17z+BvLI+XaLfy/LLrpU5uhL/t52MSkyrV31afVK3cR4Qo+XmA21pVcz9deOODYQeqxfTXZyu8ACa4wexjrOGRFqkCojmKXB4gA8iNy3HzXO/9VuZSL6RlWGSDCuw5G0SgDgSt5gX/w1wWCYqDob9UKnp/7iS/bga0vMgDpzBUQjuFpJxN/4y556cD96VibxBUslIepm7lydz3OV478JwfjHt2Eyrg3xkutAAOeOXwAKDxcw+b6dUnfRNwubing3lzafEG8iOxKy9dCMd6JSXGZzOIILYYGCVuxD93PgWPsjNNH5iGAcr3ZNLq38d+GsFKzOBWAK5QUeLQSpJSSshuCXPF8Zk7yEVU1zS/eqUTFgWyZiGIlmGZqhP3nBjWEJDjQ=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(56012099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: zlBhpwPOUvAoqK7AupK7gWLPmBnxWLetR9O79/ux2EW5Kb7esr5OQKUopW/56LVkGr5oSBascjv0wBxx9W4xxN6CzK50y7F1wKbpVdti9N4dzAFjVRsnpLy8dfTAVL9y4Br7yFqnY78EKLPuKNFsq29eUtFQWLhaadmshfOK1H77YLpkLHJqa9RYkN2a+jyq5eShXFUX0X1ZtTff/C4SNz9wi91f2ls2xhJTAGeGck5vuY0GI+819qYlUgcolG6WkNnsprzY46eEPrpUVkcoPQVqXmT0iRtwdJuWhIbS0aaKjZHIX/bQzVSMxXbzmsemuqbZrCYPRKKiMLjJ/8pRBiR99IsdpL/dDoau5q3eaZt7Wtehp5/yRlrylspAeXaQ7tIk0EiaoBtNKidqNPzAOQWkQtPGv1j/jygjZ9nf4OsXcSgf1SPyvUM2CX2dNecY
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Apr 2026 08:42:18.7588 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 763f1240-b903-40f5-be2f-08de93b86997
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000055DF.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6640
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACeR02kC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDEwMz3ZLM3NQiXQPzZCAnOdHE0sJcCai2oCg1LbMCbE50bG0tABwo1XV
+ XAAAA
+X-Change-ID: 20260406-timer-07c406ca4987
+To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ George Chan <gchan9527@gmail.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1775472938; l=982;
+ i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
+ bh=MHkOmxs/Nkf04bTt97QheEf3YFP/I01lbVfk8pTDXfE=;
+ b=Xa1b0tum8Bcxa1Q7yTjzOyaIyHeTGeQH1MD4WEplgQF9qd9JnIBiefFdCD+9U5enF9Lgkqjq2
+ lHsS/XDRLYeCRbJUECZS9FhGhqjQy6yYIU4d/oOZXvOxGBVkt08AKCH
+X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
+ pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
+X-Authority-Analysis: v=2.4 cv=Xpv3+FF9 c=1 sm=1 tr=0 ts=69d3912f cx=c_pps
+ a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=9aT5ugCHidHj2AFqBCIA:9 a=QEXdDO2ut3YA:10
+ a=_Vgx9l1VpLgwpw_dHYaR:22
+X-Proofpoint-ORIG-GUID: F4WnAVtHeWUWOCnRk449IUWLpEEutThL
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA2MDEwNiBTYWx0ZWRfX7xUbKJLufpbK
+ LNa64xfOsN3p9gzMEhIEFq+fJOooWu62GQ2LhcgqrLwYwo8uO14teKJ/Sswj8Ap3uXPTKe+1QGh
+ pPZsOT7M3kcgpuTmE8DFTEOz9zdeN4ublZdojK0/n8c8aRpcXYcQoQ9Mj5YI2tbqGkrVzzpKNhR
+ 2wGAcfBG6zVHLnBp2vGYStWvRfuL6JRAKF2Np6jhJkJkNlmnJOYg95UxDesrr7bT4cFrhUYPxB4
+ lvKeO0dELyq2g302R+5bXf9eHfghc1gG+ePwkigP6RKHPDQBDBsifijPerW9CmpTaEyai56XXAJ
+ R0v7czFrFdwplUAn73dnQpdkWR7vr+NneUjlWMSigCGg3MLAiaxqcW2ajOR3wR2vMTk9KVtKaEz
+ v3gVUkSiFJDv+7RstDw7qGYCVEVQKYsL539uLYD2Gvcy6senwyzLFnM5Yu1Iz/fVed5s0Fv7YLF
+ cFjcCBb0roGDGuNSqJw==
+X-Proofpoint-GUID: F4WnAVtHeWUWOCnRk449IUWLpEEutThL
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-06_02,2026-04-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 clxscore=1015 impostorscore=0 lowpriorityscore=0 suspectscore=0
+ phishscore=0 priorityscore=1501 spamscore=0 adultscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2604060106
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,45 +162,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When both CONFIG_PHY_ETHERNET_ID and CONFIG_DM_ETH_PHY are enabled,
-eth_phy_binds_nodes() called from eth_post_bind() already binds the
-ethernet PHY node to eth_phy_generic_drv. However, phy_connect_phy_id()
-called via zynq_phy_init() -> phy_connect() cannot attach to the
-already bound PHY device and creates a second instance, resulting
-in duplicate entries in the dm tree.
+This series addresses timer-related issues on ARMv8 platforms where
+U-Boot runs at EL1 without a Hypervisor present. This is commonly
+encountered when using tools like snagboot for
+recovery and development.
 
-Fix this by guarding the bind/probe block in phy_connect_phy_id()
-with uclass_get_device_by_ofnode() to skip re-binding if the PHY
-node is already registered in UCLASS_ETH_PHY.
+On such platforms, U-Boot runs at EL1 but EL2 timer control
+registers may not be properly configured as Hypervisor is not present.
 
-Fixes: 68a4d1506109 ("net: phy: Bind ETH_PHY uclass driver to each new PHY")
-Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
- drivers/net/phy/ethernet_id.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+Balaji Selvanathan (2):
+      armv8: timer: Add option to use virtual counter at EL1
+      snapdragon: Set timer frequency for ARMV8_CNTFRQ_BROKEN platforms
 
-diff --git a/drivers/net/phy/ethernet_id.c b/drivers/net/phy/ethernet_id.c
-index 2f8454ca27d..7b232ab37f6 100644
---- a/drivers/net/phy/ethernet_id.c
-+++ b/drivers/net/phy/ethernet_id.c
-@@ -8,6 +8,7 @@
- #include <dm/device_compat.h>
- #include <dm/device-internal.h>
- #include <dm/lists.h>
-+#include <dm/uclass.h>
- #include <phy.h>
- #include <linux/delay.h>
- #include <asm/gpio.h>
-@@ -51,7 +52,8 @@ struct phy_device *phy_connect_phy_id(struct mii_dev *bus, struct udevice *dev,
- 	if (phydev)
- 		phydev->node = node;
- 
--	if (IS_ENABLED(CONFIG_DM_ETH_PHY) && ofnode_valid(node)) {
-+	if (IS_ENABLED(CONFIG_DM_ETH_PHY) && ofnode_valid(node) &&
-+	    uclass_get_device_by_ofnode(UCLASS_ETH_PHY, node, &pdev)) {
- 		node_name = ofnode_get_name(node);
- 		ret = device_bind_driver_to_node(dev, "eth_phy_generic_drv",
- 						 node_name, node,
+ arch/arm/cpu/armv8/Kconfig         | 19 +++++++++++++++++++
+ arch/arm/cpu/armv8/generic_timer.c | 13 +++++++++++++
+ arch/arm/mach-snapdragon/board.c   | 17 +++++++++++++++++
+ 3 files changed, 49 insertions(+)
+---
+base-commit: 47e064f13171f15817aa1b22b04e309964b15c2c
+change-id: 20260406-timer-07c406ca4987
+
+Best regards,
 -- 
-2.34.1
+Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 
