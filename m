@@ -4,90 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FAC0F46C4E
-	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 15:41:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A2FDF46C4D
+	for <u-boot@archiver.kernel.org>; Mon,  6 Apr 2026 15:48:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FC6C8352B;
-	Mon,  6 Apr 2026 17:41:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B6DAA8352B;
+	Mon,  6 Apr 2026 17:48:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JwLbIF/x";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HX6ij80N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F68A83C2B; Mon,  6 Apr 2026 17:41:12 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id 2F52983936; Mon,  6 Apr 2026 17:48:15 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A1E08341A
- for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 17:41:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 526E98341A
+ for <u-boot@lists.denx.de>; Mon,  6 Apr 2026 17:48:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-470145d7e07so1205295b6e.1
- for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 08:41:10 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-b9c01854477so664085866b.0
+ for <u-boot@lists.denx.de>; Mon, 06 Apr 2026 08:48:13 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775490493; cv=none;
+ d=google.com; s=arc-20240605;
+ b=YejgfhrfkOATxjiyU4WLSXVj2oEUwMFb6u/mQ6X42QkowMzbF7MVI7jdeK+eRj+oXy
+ bQgpWYnnlUn3Nj+qNT5kRNruxPqV2oASV8h2p/NHAO9fapORyLpdDwzis+J3r49tvWbl
+ Aozxxnyril8JNK9+Txs8dknL+kU1IoucFX8M0JOj7/XNxhNXKhLBXTiEk6lWN4a3efVO
+ wSq0F/3tmutZT5MkiAaIBy9sPn43vI67t0AKKS/A5gYi73Ho79iaC0VHAqKVLjRulSB4
+ fDY+zmwc18XtbJ/Rlxqq9ezHB5xSw45gKH6+Cs1RfWDABvoupFr+igBmNelOevF5O6WP
+ w6aA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=4oAVw313PXU/ZvCIp48vKAnco2c6zs/R/Kvej8C4O2w=;
+ fh=BIogcxHhBq+Vd91gzrul14NxEHdKQm0Qafq6kiJRMaw=;
+ b=OmCz/lY/uJd9TKdlBvft7Y2eR4Hws/JxUOF7HmY0DUfTq6YNyQfoA7VpqER5UMFzVU
+ OEdLoQ+HCGsPAtufzBxIzkqd/afTCTLTKpX4rMbarpdY/fqzPlr7FB3D4lpQRCJ9S7s3
+ eLXCZiTrkq5Lc688j1b/btu8n3tYJMUkLpjtuXCWf6HZb+NWyKDyXXZFlWwDg+fxt5mo
+ Uhn/cXHjx44XaNpHavGQnFJhDgTLTNC56B4Y0/xyjzaTy+q3+9QdMVJ6oGPFYleFOFhO
+ zQZM4VRVk4DFoyfyWq78yHPduTLxBcRcogoMcHsR7nGVRbpb1hyu6D1+MofaJdRF4gwk
+ xXag==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1775490069; x=1776094869; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1Yd/zp2PVDwG/4WGZGWSARs9WR+Czvsz8TIQsuRBDlg=;
- b=JwLbIF/xtyrsz3x7zKtKOmBgssUQ6l1ef8C3XCwby0yDEPjbwmWYc9ymQLiz5CxgOh
- gzbTD7HdO0zigNcfAeQADEQgcpNDm2XBwJ1rmXEk0IQMAQp6uGVNYpKvyY4ll7r8yLIc
- zfNF4I58bqHNTT4qlWfFDK0+C65gX5/u6VysA=
+ d=chromium.org; s=google; t=1775490493; x=1776095293; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=4oAVw313PXU/ZvCIp48vKAnco2c6zs/R/Kvej8C4O2w=;
+ b=HX6ij80NvvUw2Rq2umoh1hvKfiFPJ6l3jVNJAFGQ0c9WbBvXd/punBXdsD5H9p6EAC
+ VLjiEQLBBTTe14LGXYRcAnbwOvmg9j+0OEZQY08cHJStsOSUuNiJcm8q0fGET2D1q7+A
+ yKs+vFfQcXuARqFSbQ3DYCJ0ClN2BaDQGup60=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775490069; x=1776094869;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1Yd/zp2PVDwG/4WGZGWSARs9WR+Czvsz8TIQsuRBDlg=;
- b=cg97MaP6sAI9DmKIbriZq6BeiN9bRtInigCewee1PoN9BvnS6h8K2kZBcu1qBm/9He
- csRw5AJfah/IqD6WKEPj05RQ3As12ym6i01s0ZKpYsXb3tuFcVQTfGdKaplBxvcw0Q/Q
- uWSJ4UdVTk5nTf5C9QRu5j0dGiDGbx0qbO5DRJrNcvDdO87mpmw85JOxz5rnLWlZPpoX
- 5MA8bOtN+jOTvoLEOsv3jwwyZ1NcU5p9UmW57QbKqnsw4C7UlKNzdhv4oJEnI6/D7z1w
- A9fL2TH0LSaTa9Bybw+UeSigD44+Ma0iEGgyBWWWtnUzbOYTimGWS2jEmDIXkB79Pi88
- Bemw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW/Pb6ZsvNrwE817CixcRCRhBSP9MsIca8P5VaUJaxV3PVtilhfpkmT/AdVRUIpiVBazrt0u8w=@lists.denx.de
-X-Gm-Message-State: AOJu0YwRttr+3yIXQkPVg69huc+YRbpLNXGsxEf/IwNVYghzcEMhCzen
- KF8lYSTT2tCyOWuHqvs7NlhlaQTg3KZMZjxhIGkyzhi6wBMO4TVqlAd6AqH71eiWo1n07q25/6n
- 4rmyjzZE=
-X-Gm-Gg: AeBDieuip+0cC05rNI4MVLmD4Rm6Hifl/qgUsrvpDdYI9iuQEu6fYBCDGGC7ZvkHmMp
- 58+hMHNb/Rkj1rcq4GA4L3Q2Qid6CMMuGLyuWPHrHNX3H5cEeEIzx2A3Y7kxRfzC3YHwtz3iLcv
- iew8W6ZvG6YZRHuBncO0jvS3FqUkemXd+LjelsCNfnP8lOdv83mtAMwB4d3eGdvDTodVBNXdmqP
- QlR9q8PtlXO/v7jl9q37T4QydBEEgElslFF9YkwCend6TIvIeV/czax45rgSQ29EUCz9GzzFgiM
- RHcn3T4tBlGwA+XdsPgIvFWVp+C7EFMaENh16Yo5Vk/Q3ELXVOTfsmyo5UZ/GrSGFNkDA2kVvCF
- FH7b1OUrjD1VAgi69Y2xmtAJ70OEikYk92DMdTd3KBdcfHpXbMu9Ac8y5bhsmP7gi7C61RrUofx
- YJqNwasM9dsScbBWo9+AzLrOGxFfaUVdegAmm3zq11v/I0m/ss14QymPSev2jqt1oT9EZ0QTbAL
- FFkpPngSZbeb3bKtWJJqRwtOsJd5rdzqMBR+H7TEA+xAZfl
-X-Received: by 2002:a05:6808:d4d:b0:466:f25d:3289 with SMTP id
- 5614622812f47-46ef8219ecamr6768074b6e.36.1775490068675; 
- Mon, 06 Apr 2026 08:41:08 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-46d8d109b69sm8181782b6e.0.2026.04.06.08.41.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Apr 2026 08:41:08 -0700 (PDT)
-Date: Mon, 6 Apr 2026 09:41:05 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, anshuld@ti.com,
- sjg@chromium.org, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 2/4] common: move ram_base calculation to independent
- INITCALL()
-Message-ID: <20260406154105.GQ41863@bill-the-cat>
-References: <20260403090109.3564638-1-ilias.apalodimas@linaro.org>
- <20260403090109.3564638-3-ilias.apalodimas@linaro.org>
- <b4015957-76b8-4531-b694-cae143a65f49@mailbox.org>
+ d=1e100.net; s=20251104; t=1775490493; x=1776095293;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4oAVw313PXU/ZvCIp48vKAnco2c6zs/R/Kvej8C4O2w=;
+ b=VNIb0VfIoBs2Y1sgEe4UerUB36e2iVjehU46VxW+Q4+jM1tSgtddRd3K1bTjQzoMGk
+ 4rNzM4CFKYbNbfYOX4nH2eOiXIE91G2hibuUTX97Quak58uRlH9rsDOyg35T96jFSPaI
+ vGjqJjkWXzq6KIdrlG62ZCwtSCnRvncV/Z1CtzZZuWerRxoIOHhRKCNO0lYB/gwOEaBX
+ XwMVQjuHHbWCh89HuejlR+0Lm5wBwMFu9b/wyp1VEMg1DxqzELkR438SeFnglPFrUv64
+ FxXY7SzF0/a+2wdjNN+PX/3U7mrnPv7JcRvZucZhidWXNn/bp9mh75ugLE+QfCwYILMZ
+ PjIQ==
+X-Gm-Message-State: AOJu0YySBw9BRsqHSJv0FWO9znkhOHCWh2b+wgBgLfau9vUN4T/VYDm+
+ za1VwSbkTiBN1MmCKKNvIHaTs9SZov2ba+ulMkj83Zqu9P+4mnZuJhu89i5ZsmsfA5PIQLgeF3z
+ cgfd+4kVM7AtvHNvkDhm4skhzxs1lfxsgZmUOQ+0bg4qi0makhIY=
+X-Gm-Gg: AeBDiesgcZ45QSG24/IFQCtTSBij0wBCT5OZLmeQlQUQL+JrS5bsz9QIIBxqBX9mqfq
+ Ur2d+gPN1lzi6MByej42fbAN/KBp9YvzPXYK79sxhMEtmqIxL96EXjFNyKAknOBiHr4KF2B/jjN
+ zWUTySIDckp0S0G7RJjSTX3Hldqz5MQb4GuJ4leyjm4jBOL3bPGJQpOGVg9DIfZCUZL23NrPOyt
+ YBgu10CPlg9AHdZgimoR4S5essdMz4ZlbuNTh/s51pij3NdaqDGwVRqD5uo/UThz2tAghMpqWHB
+ sDDn/g==
+X-Received: by 2002:a17:906:9fd0:b0:b97:34e7:ea87 with SMTP id
+ a640c23a62f3a-b9c67454a03mr585287866b.19.1775490492744; Mon, 06 Apr 2026
+ 08:48:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="IDmJFTHH7Oc+CfR5"
-Content-Disposition: inline
-In-Reply-To: <b4015957-76b8-4531-b694-cae143a65f49@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260404-qcom_spl-v1-0-9e6c2ac66587@seznam.cz>
+In-Reply-To: <20260404-qcom_spl-v1-0-9e6c2ac66587@seznam.cz>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 6 Apr 2026 09:48:00 -0600
+X-Gm-Features: AQROBzA3Jw_51sYA2335kHfbc_jGWO-eiGOM6nons9pRlxSXwVd6tcHu_F2bVMY
+Message-ID: <CAFLszThqzujQqjcirUf-2w6+wuXKv9+=WZ_nGjyKiKtzTkG07w@mail.gmail.com>
+Subject: Re: [0/5] Add SPL support for Qualcomm platforms, starting with sdm845
+To: michael.srba@seznam.cz
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,69 +107,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Michael,
 
---IDmJFTHH7Oc+CfR5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2026-04-03T23:18:18, Michael Srba <michael.srba@seznam.cz> wrote:
+> U-Boot SPL, as it will be built using the defconfig added in this series,
+> replaces xbl_loader.
 
-On Sun, Apr 05, 2026 at 05:59:52AM +0200, Marek Vasut wrote:
-> On 4/3/26 11:01 AM, Ilias Apalodimas wrote:
-> > Currently, ram_base is calculated within setup_dest_addr().
-> > However, upcoming patches that enable U-Boot relocation to the highest
-> > DRAM bank require ram_base to be initialized earlier.
-> >=20
-> > The default dram_init_banksize() definition relies on ram_base
-> > to calculate the start of the first bank. But following patches
-> > will move that function to execute immediately before setup_dest_addr().
-> >=20
-> > So let's split the ram_base initialization in its own INITCALL.
-> >=20
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> >   common/board_f.c | 12 +++++++++---
-> >   1 file changed, 9 insertions(+), 3 deletions(-)
-> >=20
-> > diff --git a/common/board_f.c b/common/board_f.c
-> > index 91c569da9682..7df92281c35a 100644
-> > --- a/common/board_f.c
-> > +++ b/common/board_f.c
-> > @@ -329,6 +329,14 @@ __weak int arch_setup_dest_addr(void)
-> >   	return 0;
-> >   }
-> > +static int setup_ram_base(void)
-> > +{
-> > +#ifdef CFG_SYS_SDRAM_BASE
-> > +	gd->ram_base =3D CFG_SYS_SDRAM_BASE;
->=20
-> Would it make sense to reset the variable to 0 in case CFG_SYS_SDRAM_BASE=
- is
-> not defined ?
+Please can you clarify what happens on devices where XBL_SEC does not
+have this vulnerability? The code checks for EL3 and skips to reset,
+but if the SMC call to unlock secure regions fails, does the code
+handle this gracefully or crash?
 
-In that gd should be zeroed out do we need to?
-
-> Or better yet, how about moving CFG_SYS_SDRAM_BASE to Kconfig with default
-> value 0 ?
-
-We don't set default values when a valid value must be provided for a
-platform to work. It wasn't migrated to Kconfig as it's not really a
-configurable value, it's something that if we could pull it from the
-device tree, would be great. A someday middle-ground would be to mimic
-how Zephyr uses the device tree and get some compile-time constants from
-the device tree.
-
---=20
-Tom
-
---IDmJFTHH7Oc+CfR5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCadPUDgAKCRAr4qD1Cr/k
-Csg1AP9Nd90hUldoCtvEO1r2/MQLB730lXRyAPLOslTRUN20DwEAyX92vUmXqhzv
-Ue2TiCntAUYLYBzhsEnwGYop6PPfSgw=
-=VmTt
------END PGP SIGNATURE-----
-
---IDmJFTHH7Oc+CfR5--
+Regards,
+Simon
