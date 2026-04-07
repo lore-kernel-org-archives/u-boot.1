@@ -4,101 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E72ADEDB7CC
-	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 08:52:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9642AEDB7E0
+	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 09:49:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 394E483A41;
-	Tue,  7 Apr 2026 10:52:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CEA4C83A41;
+	Tue,  7 Apr 2026 11:49:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NNxk5zqy";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W6WTBCO6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65C8B84034; Tue,  7 Apr 2026 10:52:45 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 669C483F98; Tue,  7 Apr 2026 11:49:19 +0200 (CEST)
+Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
+ [IPv6:2607:f8b0:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F1D78352B
- for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 10:52:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 35A698352B
+ for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 11:49:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-66f727d6849so193936a12.1
- for <u-boot@lists.denx.de>; Tue, 07 Apr 2026 01:52:43 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775551963; cv=none;
- d=google.com; s=arc-20240605;
- b=E3M5RwjjEf1waoJxjz0gS4jJ6yjKkJ6FaquVuosNsD5tYl9BsiLriXb5bT8o6F6vwg
- xRQyeqvbw1q4Vb0BYx6Nw1Wsa2JarWCqI/9tZ/fEVefNQUlblNh9cTXaOzC2IMVPfrmb
- +cTkLMsh3e7haElTrTtP0sSZAx2Mg8YqlRKmsacTUB34406RMvpcW655aKw5iZ9AgVJ7
- i464byAJS08FiIh6TJ3XEB+ZspJmLUwv+cPEAExyQpAwYbnkSHAVkVBIfmLdHW90jswJ
- nozpKNZe90ebHxhs6dTmhPcWCtnVrmCwtkp/ZvF2sbKnbAAmcfabQ5uEgmiWEDgReJ2c
- +nsQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=0OQxrh8Qr5mk2NyLnlmFsetwobShS2WcGjZz36GvsW0=;
- fh=XohqLLtwbZUF7AfqOPK4AIeJcUUl3GcNFXtTWh5nw7I=;
- b=Szaxz0dtczxHdH8r6uITfjqyBx4Xf3EW3X05x13Kvpl058B9uH8FXcbXDyfNBaU4uC
- RCUgubpsWT/ksZS3oMFy1LvluGw6WeO+GxL4sAzi7eelvdz1IQJ8DEJoM7sqe0O6dTY0
- hd2b5sqERvHOgEyZhzmPNTO4CDvIo5mp8yQJ334LUqBwLv4s5jRMR8yBmp4uUNAprhV2
- 1XWmCOXGBGJMikbBjNcYgXkJwyyK/7A0pzn4I++h1t96oG5/GcZTIO+qlt7F/PaKLFZy
- pp9MKhY//3YDeRnCYt/OAS67SfHi1ixIC9RBix6l5ytfRsXALPJRqEmDxTj+Sal/1MKf
- YkSw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=visitorckw@gmail.com
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-c70ea5e9e9dso1955898a12.1
+ for <u-boot@lists.denx.de>; Tue, 07 Apr 2026 02:49:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1775551963; x=1776156763; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0OQxrh8Qr5mk2NyLnlmFsetwobShS2WcGjZz36GvsW0=;
- b=NNxk5zqyhwzPMNxUhdmWnNP0dMHzpjPO8oyTjV1BwR6cPeac91obLt/KI8MNlE04i0
- ClPjybzdriYkegSxiOBCNMXXpfRB/kzKfcJBOFjzIe4e+3CPS4SFP+hfSAKs1N6cDHgL
- 75CM1172oFR0D+ReGWtc3FDB+Zj1wMVVBFt9A9f5DLNMaDkjP7375BOfPpxvZZ5MhU4B
- CsAxBuJ2z+ZGf3E6ExBmfdvNqw5xl0SNjQXyd+L+AozkrW5RzPy/M735xQs+rPs4c8fU
- z5kU3q1mYFtQD9ggoxIwFMLrmG/PjzMK1T7GltyegtTXILnGkeJWkWVmOETMGGRer3Z+
- KViQ==
+ d=gmail.com; s=20251104; t=1775555355; x=1776160155; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=PGojpPGpkIoQXx+jvmfGstXIhMAA796AdO0xHsGols4=;
+ b=W6WTBCO6y3Xi5ZriXOcmWKQJBKUGxONltJiTUFwbgrK69GgoelCTEu7PO2uJh7YjQG
+ 92p+T8bdgaqkpa0cCuvU8Far7tFb5K3dbTpEiFWnJqLn7wSLkhln/zpXeNoOtWh9o1xT
+ xpjGeWPkWi8WjfPmaC0zJ1mXr8IHmz2BSJBtk/n5a0Olg7DdWo1MfrTBVxhSPQ70Impw
+ GjDwSV9qfXgp5oEpIKcxiHvWMG5WLYItTKIAd5T31WGapjc1h09QYYimdTpTk+rtCjKh
+ tbgJpLbPO8j2aL4axF/AuwgWh1MnKBVmP0gKMoXGUsUzmapL4a21MO8o6QgT1jaMTuUA
+ 775w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775551963; x=1776156763;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=0OQxrh8Qr5mk2NyLnlmFsetwobShS2WcGjZz36GvsW0=;
- b=Bj0pXr2MUHK59al3BtOr9Nzpr9lWQUIUd3XG/V4SESHXQByaODe0blCpYj6YqiS2fT
- B0h60/CpLPrkQfdiOV84s+wC+wfGvF3jCceVC9fIuQEG9YG6q6zcDcpD2/gfD07boG2L
- nnIfmaR5mvYwAFrj0ei/JvlQ37yBPwla9/pWIsd2QiJi0mbyK0B7D/Fkbai8jjJKplzF
- ciXTpaqnzLqOpXHGv6UjWdtptiPdpzn0ievxBaDvxK6fad/zLLDxbAQEnYOd3rcHXK1j
- a3YFM2jFyYSAKYnE9sTo2FTchow+dBv973yEylvhQn+T+37E7srAJetj5qyK2ovecAkT
- 0Wdw==
-X-Gm-Message-State: AOJu0YwZ8VnZW5KSRtcUlG/Fcoix02bGLuzQY/J+yeh9RCHFJEtmn4Lb
- rv4hSjBvb1nQRr69f26qlwyefQQxedgCTR1fYUUB8m7K9RMrka0bjbJfL/VHLP4fTXlw2E/OWxu
- 9IichyQk5us5wexfMnM1Frgba3iDV9BypAz7r
-X-Gm-Gg: AeBDietYbRRWOqiFXFZqYlJO6T38OZVqB50AoLj5hXez0FJYlT8TTFPFS1kWckiQf7k
- beFWchlVw1l5IlEJ7hfGCS/9+ZICYXffF79qUp46eWYftxj7BdiqBAgXtr0Dej0bx8ndVszeqzI
- eajH3PTKWMMzqsQOdOinBfMc2tJU1hoU7rkHsJM5vLVV/34FOhFhXsY/Qe6Zs3xehzdeQ2uupok
- 9dEr68VpByXJ6welJhGBfIrQsmIvs8jMyVvnCLJfvJFBqlA6WSUqbVZrG6DKOTiBUiwPbVnaUQX
- UZNBXa2QgU2ZPTcSCjHj2r4VLWUHdXWnrgP9V3/Ahwiobs4oLseaWxcm2tth8TShIHK36EtJrmp
- UP08Z1gWV3R2SXYQ/PwbRBx5JFUZUbNF8ZbbnAGAbxYQnDJqq
-X-Received: by 2002:a05:6402:50ce:b0:66c:1805:bb4a with SMTP id
- 4fb4d7f45d1cf-66e3f70a8f3mr7387105a12.15.1775551962636; Tue, 07 Apr 2026
- 01:52:42 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1775555355; x=1776160155;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PGojpPGpkIoQXx+jvmfGstXIhMAA796AdO0xHsGols4=;
+ b=WMvjHVEPVRMSYa3oCYSdiDhI9nNljZ9pAkkbXfY8VTxiSCTp/tVL2nSOJMIkwGy4yL
+ L7dc6DKce/Ik7w+hyMpqvDBGBd/23GkFZ/VcowXX8OEl6cp7HDSysgR7+ZJ4viPeVBGC
+ MZT03sKGuHIFNiVn0wcWv2AxXMekISR3HVGPpZBYGEH2k7zv/u1Pxvwf2JiSWmruC9uK
+ lR4aJ046rhXLNFg4jwvhY+7wREIIqZpMmyH3hggOcblUjVozV1GyIh4WyAIQgotClUqP
+ UenJNySZIGDUq62SULbopN4BWduwvYid2VXyQOJKr+AESoGILl+iybsovyJVYaYM1nPx
+ Kstg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX9pVfNu2Q8IiE9jPfbXydlXafRIBKjWdnW5gCS7X/8EqW1utAM+EyfYxHQkjMQUae/KOGRSIE=@lists.denx.de
+X-Gm-Message-State: AOJu0YyIg7ga+mpRbcbLjnGwriwLJSVE/ki4XzE+/0bgo4W9EWz91ETM
+ oETaoxnqA5CbfjPZWNKRuTQBc8aSGYAKKwJsL2PtyPWhhMYV7A+E4aq6U3zDuw==
+X-Gm-Gg: AeBDiesVwmEp1i6Z0psmthgswvVgLUy954sgecO7kuDS0RpdhvRwLS3kVTGZzCK4C3f
+ TSxbCLFTFkAwMjd9WBSkGaQKlXjVnF5ECX6d5KVDH8ewtLqV0jyWHqoGsyD/7bKOfcHYTD4Ev1b
+ ZnLJ2EGNskLx/pcfm6ZotPn0CL2fEmFZpuE6VZAE1kICo6Qlqj9RUJGwORuF8IMJv3LaKa3hl3m
+ y0SmahqM+hNqUyPH+wIhs9rMP5SVJcifwEgm7UlbJO+hOKEV889bosP3XXnRqFgZD8Ou3Qr37eB
+ HqQrg2Xl7K72P39I5IJkS+a4BfUKdzb2MRGrAEQnxvmgyKitNMUxbK2+lM+p/NzCqzET6dqR+Ur
+ sBSAultGp0KpBebP9Fekc7jVR4X5gajxG2Rm72s9+AVtLgYcFE1raqt1a7bZZ2aRGXuWUZD1HGq
+ hjfDUVlMmwaP7AE6QrvtTxHSJokpd76FaUdFF4EzAxYQI26KHTwc/zywSHX9UkLVLdJb6HY4Fp3
+ 73wItdolKx2bj3ya6yZJiaS9yMGG6NkwV+Y80E=
+X-Received: by 2002:a17:903:2c07:b0:2b2:67ca:5ff1 with SMTP id
+ d9443c01a7336-2b2818afe20mr176672035ad.31.1775555355533; 
+ Tue, 07 Apr 2026 02:49:15 -0700 (PDT)
+Received: from visitorckw-work01.c.googlers.com.com
+ (100.130.194.35.bc.googleusercontent.com. [35.194.130.100])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2b27475bc2asm171878375ad.19.2026.04.07.02.49.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Apr 2026 02:49:14 -0700 (PDT)
+From: Kuan-Wei Chiu <visitorckw@gmail.com>
+To: bmeng.cn@gmail.com,
+	trini@konsulko.com
+Cc: tuomas.tynkkynen@iki.fi, sjg@chromium.org, daniel@thingy.jp,
+ jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, u-boot@lists.denx.de,
+ Kuan-Wei Chiu <visitorckw@gmail.com>
+Subject: [PATCH] virtio: mmio: Return error codes on probe failures
+Date: Tue,  7 Apr 2026 09:49:00 +0000
+Message-ID: <20260407094900.420176-1-visitorckw@gmail.com>
+X-Mailer: git-send-email 2.53.0.1213.gd9a14994de-goog
 MIME-Version: 1.0
-References: <CAOMFOmXFjh1rXWb7bacrLHAZahe6tcyEyjYAKv5=SHP=dJf3nA@mail.gmail.com>
-In-Reply-To: <CAOMFOmXFjh1rXWb7bacrLHAZahe6tcyEyjYAKv5=SHP=dJf3nA@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Tue, 7 Apr 2026 09:52:31 +0100
-X-Gm-Features: AQROBzBaOhbVay2lIaOrTy0MWl4SUCv5vnc29CHehNYJfHnrc3VCwyvciC0OAdE
-Message-ID: <CALeDE9P7d3eHd1TF99GB2_PYsokvbv5UED42cQRC2Z8ZYsq9Yw@mail.gmail.com>
-Subject: Re: Switch ARMv7 Cortex-A processor to ARM mode right before jumping
- to target
-To: Anatol Pomozov <anatol.pomozov@gmail.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,36 +101,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anatol,
+Currently, virtio_mmio_probe() returns 0 when it encounters an invalid
+magic value, an unsupported version, or a dummy device (ID 0). In
+U-Boot's driver model, returning 0 indicates a successful probe. This
+causes the system to incorrectly register and activate invalid or
+placeholder devices, potentially leading to undefined behavior or
+crashes later on.
 
-> I=E2=80=99m facing an instruction set mismatch issue on ARMv7. The system=
- uses
-> a proprietary U-Boot=E2=80=93based bootloader (based on v2022.07) that ru=
-ns in
-> ARM mode and then jumps directly to my application. The application
-> itself (Zephyr-based) is built in Thumb mode by default, which leads
-> to problems when execution is handed off.
->
-> Unfortunately, I cannot modify or rebuild the U-Boot binaries, as they
-> are closed-source in this case. The only control I have is through the
-> U-Boot environment (uboot_env).
->
-> Given these constraints, is there any way - via U-Boot environment
-> configuration - to switch the processor into Thumb mode right before
-> jumping to the application?
->
-> If not, are there any recommended workarounds for handling this ARM
-> <=3D> Thumb transition when the bootloader itself cannot be modified?
->
-> Thanks in advance for your help!
+Update the probe function to return appropriate error codes (-ENODEV
+for invalid magic values and dummy devices, and -ENXIO for unsupported
+versions). This fix correctly instructs the DM to abort the binding
+process.
 
-So unfortunately you're going to need to go to the vendor to solve
-that problem, there's not much we can do, we don't know what changes
-the vendor has made, or even what options they've enabled/disabled.
+Fixes: fdc4aca89ecb ("virtio: Add virtio over mmio transport driver")
+Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+---
+ drivers/virtio/virtio_mmio.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Do note that U-Boot is GPL software so they should be releasing it as
-open source, U-Boot isn't closed-source as you state, the vendor can't
-just pick and choose, the requirements of the license are very clear
-if they wish to use U-Boot.
+diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
+index 1cd737aca24..62afe609ec0 100644
+--- a/drivers/virtio/virtio_mmio.c
++++ b/drivers/virtio/virtio_mmio.c
+@@ -354,7 +354,7 @@ static int virtio_mmio_probe(struct udevice *udev)
+ 	magic = readl(priv->base + VIRTIO_MMIO_MAGIC_VALUE);
+ 	if (magic != ('v' | 'i' << 8 | 'r' << 16 | 't' << 24)) {
+ 		debug("(%s): wrong magic value 0x%08x!\n", udev->name, magic);
+-		return 0;
++		return -ENODEV;
+ 	}
+ 
+ 	/* Check device version */
+@@ -362,7 +362,7 @@ static int virtio_mmio_probe(struct udevice *udev)
+ 	if (priv->version < 1 || priv->version > 2) {
+ 		debug("(%s): version %d not supported!\n",
+ 		      udev->name, priv->version);
+-		return 0;
++		return -ENXIO;
+ 	}
+ 
+ 	/* Check device ID */
+@@ -372,7 +372,7 @@ static int virtio_mmio_probe(struct udevice *udev)
+ 		 * virtio-mmio device with an ID 0 is a (dummy) placeholder
+ 		 * with no function. End probing now with no error reported.
+ 		 */
+-		return 0;
++		return -ENODEV;
+ 	}
+ 	uc_priv->vendor = readl(priv->base + VIRTIO_MMIO_VENDOR_ID);
+ 
+-- 
+2.53.0.1213.gd9a14994de-goog
 
-Peter
