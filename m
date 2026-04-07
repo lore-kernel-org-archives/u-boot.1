@@ -4,104 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77580FF512C
-	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 18:14:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34607FF5130
+	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 18:17:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F0108404A;
-	Tue,  7 Apr 2026 20:14:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 61675840BE;
+	Tue,  7 Apr 2026 20:17:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RHZJ7H/F";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="w6x6ykjE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FD088405F; Tue,  7 Apr 2026 20:14:06 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 1EF6A84101; Tue,  7 Apr 2026 20:17:46 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69E9483F75
- for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 20:14:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DAAF58404A
+ for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 20:17:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-66bb6eb28acso9671776a12.0
- for <u-boot@lists.denx.de>; Tue, 07 Apr 2026 11:14:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775585644; cv=none;
- d=google.com; s=arc-20240605;
- b=iTkY/x10Mb105rNR0SnEJpQDnF9VCb/Q1pn+UhoHbq5qyd7g3yGZNOA1WqIEPyrIxR
- PdHTE4mE3hKUKBSAyuAx7Qvcu7gYDrFVQgF4/Ko79TWpHaDWtSblR9UC9rtoX425gJTl
- jlPSonnFFqjPJg0kb2Ebt2g0a+1EFhJQBpixeiT9LsSw1T/zTpCtBwpHsn9OsSNfK9cE
- i7PqsnEhOZviWdx9zHWNM+DVqE2DRj1QxU4vGtqqgVGGIsVXUqjuQKyCNFQsdwMu1A/x
- tkvnsUceeAgI35k2VnCiiXeA9H8VPuKwnmNAhfpyJtBOwxueydCH0CDIQOE1FJv1VZ4p
- lBjQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=nHrQ0x4c69LDE6Qx5C/l0X6IOZtwPcpa90MPd7VqjlY=;
- fh=xvtPdHsw2fYZi/vc7GUrf448xroWVihwIxbwZ117NSw=;
- b=BXTxxgGYGkQtvMw6i+thXGbG57zpGc/NG2ozoJBxUtchKL7Ss8tafNI8RzuDgWIbq7
- Msig8+P95V6/mT5cdiWVbnOlkKkaoR5cVmk6ck7fhFyF7HtywOahKDaydgRRIce8Rtk8
- ZJQQsHulUlBra31aegUgtNuV5HMABR1n69OgXE5Gz1JnWxd1T8rKCLrrt1RRRWAE3NUA
- ETSEZTlC4VoC+c6Ge2SnDsrFkZZAZoEUVe0NBoNKkYtQD5a5wNz489sLicPK5y6XkFj2
- /BN24saBXD9uyfZRy9Jxopm+z1+6Ldc6bdnOKHHigolvVGtAsUrVrnuHAUDrNVmNAspx
- Ot4g==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7d7e9b97a73so104678a34.0
+ for <u-boot@lists.denx.de>; Tue, 07 Apr 2026 11:17:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775585644; x=1776190444; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nHrQ0x4c69LDE6Qx5C/l0X6IOZtwPcpa90MPd7VqjlY=;
- b=RHZJ7H/FEcMXeVfe2ojZT1MLpr3/mF0TvK3IJfRKB7Qm5b0tdRg6YCg9/muH79ahne
- xKBhwgIBCLnXyOrzOoNpGdRr+6th6TKVFy/JgjVFcKXILlbPXChjPpBYUhBS8azbAoLR
- tJOoLlJnrCRoVMqWr79GUHhGOLT5HnGEYvkeo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775585644; x=1776190444;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1775585862; x=1776190662;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nHrQ0x4c69LDE6Qx5C/l0X6IOZtwPcpa90MPd7VqjlY=;
- b=dMql+u2Yvx6fvncJG31Li+oZ9VhVtdB2HNXfbH+bCAGQsVlrXB1u7bF6NKFUGKvbhA
- R8XfHsUyaNOVXhbYgU+TpcpyKtNPgdMKM18myXsynvhI7X0XXS9yk3IXOlF3FklPtaXA
- GOQlqUsIppmQT49ngMst8UumyHXcTjGjwTdBCsJfw/ZXqcIK2iQq9r94tkPuaDeQLDWg
- mgcIKMGdIvrR9g7rQNIwZY0ng3Y0Ab5K0qmzjFSXyzqbwLFVX4RQ/KfMfwHqpDVV3dLS
- 3ToSqnngKXyUq2p3C3sybbJwY+Selb72VYQxAMVwQBTgy9N4atVO8NmdKHC9fHaswfxF
- +lGA==
+ bh=E/AUEDUuIds+AmXBL5yCqOFuMQflUB7PsLD/la6Oiik=;
+ b=w6x6ykjEBqyvAqmt6kwWksVNd+RQ4qyoZxgCZ1cem3O4MeEv8moq2/ll/tvnO1RoW+
+ ZFW7BwMXpqsQYz+fpqI/WRHf2BR11v3s7TbcTiVuK1b303z7XelE6a/RDLpzrMep/aQD
+ gN+Z2RcqAY8FrPA2aKaVMvdE+Xr6BMuG5u0MuPXqaTakmNfjHCwf7jz3OLzgTsufpyjQ
+ bN027/QLBi4q/yGfKsI2rbjrmMjgr1/e8PcdGkNspSGm7c+nluE5dIVUHu+SNfY6OgSI
+ SNYrC4xGblAesIhWtCfZOaivQTOHDUiTgFV9iAShBorXgCbJPdYBNEG7x/YLarZEeTMJ
+ RC1Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775585862; x=1776190662;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=E/AUEDUuIds+AmXBL5yCqOFuMQflUB7PsLD/la6Oiik=;
+ b=Y5Ny6CLEepHcqUb5kaqsa4TNajatZpyARlfBiPo00eM6/8ZwcN35uzIFWuT7k38leo
+ aV0lQWuCXab9J/oFwQBNgZzHkBpUZkmsA0hlL6hWEx8XNDEtMGh9z1Sb3oER0GL+4fvF
+ zp8q3tF8M2LVOwytrANY1KgYmmvyebDePE2W1+pGWGvDFn66cEjefa7sCgGswAEkscV+
+ Eqp6Vz1QLgyilmWJKoeDr7NrG4i23r7WzzYvemZU/SLHnEQ2q5b01RCN4C22EZrZljrX
+ tfRZ8PtxhYlJZNphSm6rORk2KLh2ijqGfakTeuCxAfqko6zHThPhgV8nHIwPjI2fTK4E
+ wxcA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVvE+pBb9RLE1t5QQiMNnG9GHcf0lr+xwntAZ5d/huvnODhgrZPMw+wDgK5chxIdNXzaMZwDtI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yweg9FGz63LNRVfJvJuPQBNhE7U9hTXYeno/hs9a7tWblLpKzrZ
- ROo1ge1v4xpXCyq2LIF7i3aMVGjrPYh2a9R6+stAW8/7bs/eAdpJv8XiRYFoBRhc8dJZf5ksHGa
- Vhey37U0l7HluPwOV6+tWrvuANhVNAueOlrKhooRLe/tUbgFlFOuAuw==
-X-Gm-Gg: AeBDieuS+gV7Ce1WZvtmlhawq3+740E7y0gwh2zaM2+D7Oj8VRheLeP5e6uW840+PF+
- skpE0xupb4uC6P+j+ITXZ7H/DXsF7rEmzmI0cixpQYuOE2triID3k0jHcRv8Zf7RfU8puC7fnGx
- fL4UCweujWF9gHGNwQ2/rzHtb1z/Kw71rpHCHehXJ/Qv1Ky5tcm0bxjM2EQtQox8lYZfhK93So8
- mFcEwetoQESWXvQURsr6rrcL2WOupPRj4u8+jqSfVoxIrLpNsOE9aTjSfE0P1183FuG7ZJn9ZQz
- Y9I/tg==
-X-Received: by 2002:a17:907:9717:b0:b9c:6ef1:ed13 with SMTP id
- a640c23a62f3a-b9c6ef20f71mr826330566b.31.1775585643675; Tue, 07 Apr 2026
- 11:14:03 -0700 (PDT)
+ AJvYcCXCrjGvelXqx4fnxuwgCW56M9r2TqAvFPFS5AqxGplyuk4qI9f7ZTvXwHKHD9kE1Ly6z3MQsoQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwNq+COt70RTT2ZFU3kq4Cmh6KOJ4x4wR2A7RKCXWk6abNjeFKL
+ seiGnbZeoQC7EdKUp5CiH6fBZZNEq4dgSPEmF32IsEphdZcJtRZfomRJRyj5EYOit9c=
+X-Gm-Gg: AeBDieut+rXXiRGLRtYRTC+TW4xqycdOpCx1OHsUZrpmgJVKa2tGy3m49Wl8lDdd++5
+ PJpi8volmrWs6bfRXHmrFcxCRBWNx+5ai32Y2p5Fm8/mL1JR2RIhugi0EPUVRBZi/JQUHlOXuyW
+ fCrgAxUPe6c6VIBoH4gZz6nhvOutr0iB2N7PJOcmfVn71k1X6AU87p36Ply/bIrIdsOeWpOV/w8
+ cVJtuWCj6Qces0POvyRzotFRfLILJ+SWv//9mBwj+3z27oSthFbBMXnl5fqYe43XGl96uHzSn4W
+ +wbM/fMsw0y5Or/dLwAdJU3q6jF0dVqoNSyfzTY5M+2NGkTXfWkjDS2rvsyS5ZABIzOBaFRQNEu
+ rRgAbXedok86u6gsWxZ0I+K3quwCVO1VV8FOnpu6nk3BwY0J8AzP/8K1bw5w8CVjTEqaZIjBKXp
+ qdZovScPT49pNfZRUnRdsIvGpY8vsx
+X-Received: by 2002:a05:6820:1dc8:b0:684:d388:97a0 with SMTP id
+ 006d021491bc7-684d38898e0mr4425341eaf.29.1775585862534; 
+ Tue, 07 Apr 2026 11:17:42 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:f738:1ffd:6365:30a7])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-42356d581c1sm6044877fac.4.2026.04.07.11.17.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Apr 2026 11:17:42 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ David Lechner <dlechner@baylibre.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+In-Reply-To: <20260330-mtk-mt8189-cpu-type-v1-0-4059c3b52761@baylibre.com>
+References: <20260330-mtk-mt8189-cpu-type-v1-0-4059c3b52761@baylibre.com>
+Subject: Re: [PATCH 0/2] arm: mediatek: print specific CPU type
+Message-Id: <177558585013.837601.5159747505182499928.b4-ty@b4>
+Date: Tue, 07 Apr 2026 13:17:30 -0500
 MIME-Version: 1.0
-References: <cover.1775121078.git.simona.toaca@nxp.com>
- <7edcce04b39aabc1f58e09814e7fadff226e2bb8.1775121078.git.simona.toaca@nxp.com>
- <CAFLszTgb5a3QtyviHc-MRTdDUoDUWnYksWXMeCUxagHmvfQK2g@mail.gmail.com>
- <mtfbgewm7kw4jzmxjkksdmq2ahb3mdrb6p5bi5qvpow2tydyl7@bejuojige3bw>
-In-Reply-To: <mtfbgewm7kw4jzmxjkksdmq2ahb3mdrb6p5bi5qvpow2tydyl7@bejuojige3bw>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 7 Apr 2026 12:13:51 -0600
-X-Gm-Features: AQROBzD5hbZCjG9hy4vo2lAoESlsTPknP-JHiuwwPMN2omva544TFD5YR6XF49w
-Message-ID: <CAFLszThADHGE_8aAFExK8Kv_Ef9LG5Xcio=znkNwFH-eUESzsg@mail.gmail.com>
-Subject: Re: [PATCH v3 1/6] imx9: Add support for saving DDR training data to
- NVM
-To: Simona Toaca <simona.toaca@oss.nxp.com>
-Cc: uboot-imx@nxp.com, u-boot@lists.denx.de, 
- Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com, peng.fan@nxp.com, 
- alice.guo@nxp.com, viorel.suman@nxp.com, simona.toaca@nxp.com, ye.li@nxp.com, 
- ping.bai@nxp.com, marex@nabladev.com, sebastien.szymanski@armadeus.com, 
- ravi@prevas.dk, joao.goncalves@toradex.com, ji.luo@nxp.com, 
- semen.protsenko@linaro.org, tharvey@gateworks.com, qijian.guo@nxp.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=681; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=hyotbFbHljA10jXa0bjLXOn9P33KLrQzPt66ogM1SKU=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp1Uo++67MbmqdMxXEQygZDqUJefnUmaz1+Qq8/
+ WuisHJZ+XCJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCadVKPhYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AZIoH/A9edKSKYrgbZJo/10bA9Wog/bub9bdyuJd+hn+
+ owfatvapMgRMpnjACz+6Xf9aNSm5qCOogtjZnSFPzfugSY7cJp2UaSffB8H8IgA6EX9dUcV7Ybz
+ sPGg4yLqfdQum6MkB7mQumox+MkkIkxEnSYz8HGjeOSM1z8rv7Vla/53UxWYI3MKJsPLJ9pLJOU
+ yZlSiLqUFOUpkvcNXBdqz9gt76QPBjO3PWtb1txo+c2gDtqEOJJPO0uMWmkTajlKkjQDGMKQjhU
+ tvPcpzy41tJGKx0gQ4d8N5lmkMuqQy1pm8T+cnqE6pUS/DEve3ucV8w56Zv6mr7KncpHmwUYoEX
+ JpYU=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,82 +119,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simona,
+On Mon, 30 Mar 2026 15:23:17 -0500, David Lechner wrote:
+> arm: mediatek: print specific CPU type
+> 
+> Since the mt8189 init code is shared by multiple similar SoCs, it is
+> useful to read the CPU type from the CPU itself and print it instead of
+> always using "MT8189" in order to have accurate information in the boot
+> log.
+> 
+> [...]
 
-On Mon, 6 Apr 2026 at 02:28, Simona Toaca <simona.toaca@oss.nxp.com> wrote:
->
-> Hi Simon,
->
-> On Sun, Apr 05, 2026 at 05:49:56AM -0600, Simon Glass wrote:
-> > Hi,
-> >
-> > On Thu, 2 Apr 2026 at 03:29, Simona Toaca (OSS)
-> > <simona.toaca@oss.nxp.com> wrote:
-> > >
-> > > From: Simona Toaca <simona.toaca@nxp.com>
-> > >
-> > > DDR training data can be saved to NVM and be available
-> > > to OEI at boot time, which will trigger QuickBoot flow.
-> > >
-> > > U-Boot only checks for data integrity (CRC32), while
-> > > OEI is in charge of authentication when it tries to
-> > > load the data from NVM.
-> > >
-> > > On iMX95 A0/A1, 'authentication' is done via another
-> > > CRC32. On the other boards, authentication is done by
-> > > using ELE to check the MAC stored in the ddrphy_qb_state
-> > > structure.
-> > >
-> > > Supported platforms: iMX94, iMX95, iMX952 (using OEI)
-> > > Supported storage types: eMMC, SD, SPI flash.
-> > >
-> > > Signed-off-by: Viorel Suman <viorel.suman@nxp.com>
-> > > Signed-off-by: Ye Li <ye.li@nxp.com>
-> > > Signed-off-by: Simona Toaca <simona.toaca@nxp.com>
-> > > ---
-> > >  arch/arm/include/asm/arch-imx9/ddr.h |  48 +++-
-> > >  arch/arm/include/asm/mach-imx/qb.h   |  15 ++
-> > >  arch/arm/mach-imx/imx9/Makefile      |   6 +-
-> > >  arch/arm/mach-imx/imx9/qb.c          | 379 +++++++++++++++++++++++++++
-> > >  arch/arm/mach-imx/imx9/scmi/soc.c    |   7 +
-> > >  drivers/ddr/imx/imx9/Kconfig         |   7 +
-> > >  6 files changed, 459 insertions(+), 3 deletions(-)
-> > >  create mode 100644 arch/arm/include/asm/mach-imx/qb.h
-> > >  create mode 100644 arch/arm/mach-imx/imx9/qb.c
-> >
-> > Note that this feature is present on x86 boards already.
-> >
-> > I wonder if we could make this more generic? E.g. it could be a
-> > function of UCLASS_RAM ? I could do the x86 part to try it out if you
-> > like.
-> >
->
-> Can you please point me to the implementation for x86? This Quickboot
-> feature is specific to Synopsis DDR PHYs, and the location where we
-> save this data is specific to iMX9 series (since it is needed by OEI).
-> I need a bit more details about what you mean.
+Applied to mediatek-for-master, thanks!
 
-Yes, if you look at mrccache_save() you will see how this works. It is
-controlled by a flash layout within the SPI-flash node:
+[1/2] arm: mediatek: add SIP platform bininfo lookups
+      commit: cde43f9bbd5d947be1ac6d03bba8d81304941cb0
+[2/2] arm: mediatek: mt8189: print specific CPU information
+      commit: c344faa37d287ff761813b519f8e1412b6153b76
 
- spi: spi {
-    #address-cells = <1>;
-    #size-cells = <0>;
-    compatible = "intel,ich9-spi";
-    spi-flash@0 {
-       #address-cells = <1>;
-       #size-cells = <1>;
-       reg = <0>;
-       m25p,fast-read;
-       compatible = "winbond,w25q64dw",
-          "jedec,spi-nor";
-       memory-map = <0xff800000 0x00800000>;
-       rw-mrc-cache {
-          label = "rw-mrc-cache";
-          reg = <0x005e0000 0x00010000>;
-       };
-    };
- };
+Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
 
-Regards,
-Simon
