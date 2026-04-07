@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAA38FEEF35
-	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 13:07:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75083FEEF2E
+	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 13:08:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A996484132;
-	Tue,  7 Apr 2026 15:07:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 32F088404A;
+	Tue,  7 Apr 2026 15:07:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="WKnNHteA";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="UUyxjsn4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D58B3840AB; Tue,  7 Apr 2026 15:07:28 +0200 (CEST)
+ id 2D62E83A41; Tue,  7 Apr 2026 15:07:29 +0200 (CEST)
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1D0D83A41
+ by phobos.denx.de (Postfix) with ESMTPS id CA51E840BE
  for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 15:07:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
@@ -30,31 +30,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=FubmPL8yioveTsMES+6gih+cBDQKaQVrL18C49/zyNE=; b=WKnNHteAqAoo2Ce0mG+jG+V4F3
- M6DBJyyltfH3B4ee/HZDtACKOv+xM3sYMMRco188s1d0Q0fREKP7dEHFrBNTbVHIU3RYKeAE987UB
- blj24i9dVICsXYPJKeQ/WNKOa4mh2Sv15BRJ4vS3+f8KedtmBEWJyFxbo5b3k6cIPrQayM9WYJFeg
- r3Fo6hXChVy+GdAbVUAxK1RWKqAn5N47yZe+RUOZxHRZs0q0qW8nlKTI99iJj84YBRTsLivYfMT+t
- vldh2UskEwWiehrYiHzuBa4aSpzxEEmxdTx13tRmsOylBRCrTeUsA6WjvO26HmmhczFlgDX7tx/Tr
- Vqqjsq0A==;
+ bh=RnXGgmHBdrRBKU7+ryDZCBmzVNM1/bFKxSlNSpVXjr0=; b=UUyxjsn4oOBVEZ2s7Et4UbUZK+
+ gnCrTZ4s8bvyRVUKdfeaXl2o7cClNU74moN9Axz2nfr6Hz5PDvUQHhVNFopf38VBBhtBr90gkJE1j
+ tl6k+Px6+RIur/ptpJ6yA9KeQMrCwlLUgWH/B/gdIMxYaEZEKVE7WyGConAH8ht/LOdWmn7lF5jzJ
+ CuOXzgHYsgAFblfghEdo1pzdn14J4SMWVWkhOr8nom1fX1kVL4HvCOXCWDsqMfXyTcHEopsuBqhxF
+ tYPZhnJnpzVZXLMlq5WJrmOSkWk2jOsQTVvCW+wDnZPZbMTpgWjKux4CD9Xw7aytxUVLPfI6wDv27
+ azepPkcw==;
 Received: from sslproxy02.your-server.de ([78.47.166.47])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wA69K-00072U-36; Tue, 07 Apr 2026 15:07:22 +0200
+ id 1wA69J-000723-2A; Tue, 07 Apr 2026 15:07:21 +0200
 Received: from localhost ([127.0.0.1])
  by sslproxy02.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wA69K-0007St-0s; Tue, 07 Apr 2026 15:07:22 +0200
+ id 1wA69I-0007St-2w; Tue, 07 Apr 2026 15:07:21 +0200
 From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
  u-boot@ew.tq-group.com
-Cc: Alexander Feilke <alexander.feilke@ew.tq-group.com>,
+Cc: Nora Schiffer <nora.schiffer@ew.tq-group.com>,
  Tom Rini <trini@konsulko.com>,
  Alexander Feilke <Alexander.Feilke@ew.tq-group.com>,
  Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
-Subject: [PATCH v4 7/8] configs: tqma7: add defconfigs
-Date: Tue,  7 Apr 2026 15:06:50 +0200
-Message-ID: <20260407130654.778838-8-Alexander.Feilke@ew.tq-group.com>
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Steffen Doster <Steffen.Doster@tq-group.com>,
+ Max Merchel <Max.Merchel@ew.tq-group.com>,
+ Alexander Feilke <alexander.feilke@ew.tq-group.com>
+Subject: [PATCH v4 3/8] env: add env_set_runtime() helper
+Date: Tue,  7 Apr 2026 15:06:46 +0200
+Message-ID: <20260407130654.778838-4-Alexander.Feilke@ew.tq-group.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260407130654.778838-1-Alexander.Feilke@ew.tq-group.com>
 References: <20260407130654.778838-1-Alexander.Feilke@ew.tq-group.com>
@@ -76,230 +79,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
+From: Nora Schiffer <nora.schiffer@ew.tq-group.com>
 
-Add general shared configurations for different
-boot media and variants for every RAM configuration.
+env_set_runtime() is equivalent to env_set(), but does nothing when
+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG is unset.
 
-Acked-by: Peng Fan <peng.fan@nxp.com>
+Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
+Signed-off-by: Steffen Doster <Steffen.Doster@tq-group.com>
+Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
 Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 ---
- configs/tqma7_common.config       | 119 ++++++++++++++++++++++++++++++
- configs/tqma7_mba7_mmc_defconfig  |   2 +
- configs/tqma7_mba7_qspi_defconfig |   2 +
- configs/tqma7_mba7_uuu_defconfig  |   2 +
- configs/tqma7_mmc.config          |   4 +
- configs/tqma7_qspi.config         |   7 ++
- configs/tqma7_uuu.config          |  22 ++++++
- 7 files changed, 158 insertions(+)
- create mode 100644 configs/tqma7_common.config
- create mode 100644 configs/tqma7_mba7_mmc_defconfig
- create mode 100644 configs/tqma7_mba7_qspi_defconfig
- create mode 100644 configs/tqma7_mba7_uuu_defconfig
- create mode 100644 configs/tqma7_mmc.config
- create mode 100644 configs/tqma7_qspi.config
- create mode 100644 configs/tqma7_uuu.config
+ include/env.h | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
-diff --git a/configs/tqma7_common.config b/configs/tqma7_common.config
-new file mode 100644
-index 00000000000..7e5e31a14ab
---- /dev/null
-+++ b/configs/tqma7_common.config
-@@ -0,0 +1,119 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_MX7=y
-+CONFIG_SPL_GPIO=y
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_SF_DEFAULT_SPEED=40000000
-+CONFIG_ENV_SIZE=0x10000
-+CONFIG_DEFAULT_DEVICE_TREE="nxp/imx/imx7d-mba7"
-+CONFIG_TARGET_TQMA7=y
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_MAX_SIZE=0x100000
-+CONFIG_SF_DEFAULT_BUS=4
-+CONFIG_SPL=y
-+CONFIG_ARMV7_BOOT_SEC_DEFAULT=y
-+CONFIG_IMX_RDC=y
-+CONFIG_SYS_MEMTEST_START=0x80000000
-+CONFIG_SYS_MEMTEST_END=0x98000000
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+# CONFIG_EFI_LOADER is not set
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_OF_BOARD_SETUP=y
-+CONFIG_FDT_FIXUP_PARTITIONS=y
-+CONFIG_SYS_CONSOLE_IS_IN_ENV=y
-+# CONFIG_BOARD_EARLY_INIT_F is not set
-+CONFIG_SPL_MAX_SIZE=0xf000
-+CONFIG_SPL_SYS_MALLOC=y
-+CONFIG_SPL_FIT_IMAGE_TINY=y
-+CONFIG_SPL_NOR_SUPPORT=y
-+CONFIG_SPL_WATCHDOG=y
-+CONFIG_CMD_LICENSE=y
-+CONFIG_CRC32_VERIFY=y
-+CONFIG_CMD_EEPROM=y
-+CONFIG_CMD_MD5SUM=y
-+CONFIG_MD5SUM_VERIFY=y
-+CONFIG_CMD_MEMINFO=y
-+CONFIG_CMD_MEMTEST=y
-+CONFIG_SYS_ALT_MEMTEST=y
-+# CONFIG_SYS_ALT_MEMTEST_BITFLIP is not set
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_MMC_SPEED_MODE_SET=y
-+CONFIG_CMD_MTD=y
-+CONFIG_CMD_SPI=y
-+CONFIG_CMD_TEMPERATURE=y
-+CONFIG_CMD_WDT=y
-+CONFIG_CMD_NFS=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_TIMER=y
-+CONFIG_CMD_PMIC=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_MTDIDS_DEFAULT="nor0=30bb0000.qspi"
-+CONFIG_MTDPARTS_DEFAULT="mtdparts=30bb0000.qspi:4m@0k(bootstream),64k@4096k(env0),64k@4160k(env1),-@6m(ubi)"
-+CONFIG_CMD_UBI=y
-+CONFIG_OF_CONTROL=y
-+CONFIG_OF_UPSTREAM=y
-+CONFIG_OF_LIST="nxp/imx/imx7d-mba7 nxp/imx/imx7s-mba7"
-+CONFIG_MULTI_DTB_FIT=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_USE_ROOTPATH=y
-+CONFIG_ROOTPATH="/srv/nfs"
-+CONFIG_BUTTON=y
-+CONFIG_BUTTON_GPIO=y
-+CONFIG_GPIO_HOG=y
-+CONFIG_DM_PCA953X=y
-+CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
-+CONFIG_I2C_DEFAULT_BUS_NUMBER=0x3
-+CONFIG_SYS_I2C_MXC=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_FSL_USDHC=y
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_BOOTDEV_SPI_FLASH=y
-+CONFIG_SPI_FLASH_GIGADEVICE=y
-+CONFIG_SPI_FLASH_ISSI=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_SPI_FLASH_WINBOND=y
-+# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
-+CONFIG_SPI_FLASH_MTD=y
-+CONFIG_DM_MDIO=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_PHY_GIGE=y
-+CONFIG_FEC_MXC=y
-+CONFIG_RGMII=y
-+CONFIG_MII=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCTRL_IMX7=y
-+CONFIG_DM_PMIC=y
-+CONFIG_DM_PMIC_PFUZE100=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_PFUZE100=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_RTC=y
-+CONFIG_RTC_DS1307=y
-+CONFIG_CONS_INDEX=5
-+CONFIG_SPI=y
-+CONFIG_FSL_QSPI=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_WATCHDOG=y
-+CONFIG_IMX_THERMAL=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_MXC_USB_OTG_HACTIVE=y
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_IMX_WATCHDOG=y
-+CONFIG_CC_OPTIMIZE_LIBS_FOR_SPEED=y
-diff --git a/configs/tqma7_mba7_mmc_defconfig b/configs/tqma7_mba7_mmc_defconfig
-new file mode 100644
-index 00000000000..9d4a37c5b81
---- /dev/null
-+++ b/configs/tqma7_mba7_mmc_defconfig
-@@ -0,0 +1,2 @@
-+#include <configs/tqma7_common.config>
-+#include <configs/tqma7_mmc.config>
-diff --git a/configs/tqma7_mba7_qspi_defconfig b/configs/tqma7_mba7_qspi_defconfig
-new file mode 100644
-index 00000000000..041339597b4
---- /dev/null
-+++ b/configs/tqma7_mba7_qspi_defconfig
-@@ -0,0 +1,2 @@
-+#include <configs/tqma7_common.config>
-+#include <configs/tqma7_qspi.config>
-diff --git a/configs/tqma7_mba7_uuu_defconfig b/configs/tqma7_mba7_uuu_defconfig
-new file mode 100644
-index 00000000000..18404b02ed8
---- /dev/null
-+++ b/configs/tqma7_mba7_uuu_defconfig
-@@ -0,0 +1,2 @@
-+#include <configs/tqma7_common.config>
-+#include <configs/tqma7_uuu.config>
-diff --git a/configs/tqma7_mmc.config b/configs/tqma7_mmc.config
-new file mode 100644
-index 00000000000..8c081314002
---- /dev/null
-+++ b/configs/tqma7_mmc.config
-@@ -0,0 +1,4 @@
-+CONFIG_SYS_MALLOC_LEN=0x2000000
-+CONFIG_ENV_OFFSET=0x100000
-+CONFIG_BOOTCOMMAND="run mmcboot; run nfsboot; run panicboot"
-+CONFIG_ENV_MMC_USE_DT=y
-diff --git a/configs/tqma7_qspi.config b/configs/tqma7_qspi.config
-new file mode 100644
-index 00000000000..652abb8d14b
---- /dev/null
-+++ b/configs/tqma7_qspi.config
-@@ -0,0 +1,7 @@
-+CONFIG_SYS_MALLOC_LEN=0x2000000
-+CONFIG_ENV_OFFSET=0x100000
-+CONFIG_ENV_SECT_SIZE=0x10000
-+CONFIG_QSPI_BOOT=y
-+CONFIG_BOOTCOMMAND="run ubiboot; run nfsboot; run panicboot"
-+# CONFIG_ENV_IS_IN_MMC is not set
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
-diff --git a/configs/tqma7_uuu.config b/configs/tqma7_uuu.config
-new file mode 100644
-index 00000000000..6131aa5b4b4
---- /dev/null
-+++ b/configs/tqma7_uuu.config
-@@ -0,0 +1,22 @@
-+CONFIG_SYS_MALLOC_LEN=0x2000000
-+# CONFIG_ANDROID_BOOT_IMAGE is not set
-+CONFIG_BOOTDELAY=1
-+CONFIG_BOOTCOMMAND="run fastbootcmd"
-+# CONFIG_ENV_IS_IN_MMC is not set
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_FASTBOOT_BUF_ADDR=0x84000000
-+CONFIG_FASTBOOT_BUF_SIZE=0x8000000
-+CONFIG_FASTBOOT_FLASH=y
-+CONFIG_FASTBOOT_UUU_SUPPORT=y
-+CONFIG_FASTBOOT_FLASH_MMC_DEV=0
-+CONFIG_SPL_USB_HOST=y
-+CONFIG_USB_MAX_CONTROLLER_COUNT=2
-+CONFIG_USB_GADGET=y
-+CONFIG_SPL_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="FSL"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0525
-+CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
-+CONFIG_CI_UDC=y
-+CONFIG_SDP_LOADADDR=0x80800000
-+CONFIG_SPL_USB_SDP_SUPPORT=y
+diff --git a/include/env.h b/include/env.h
+index 01c3eeae7e2..9b872fb26eb 100644
+--- a/include/env.h
++++ b/include/env.h
+@@ -9,6 +9,7 @@
+ #ifndef __ENV_H
+ #define __ENV_H
+ 
++#include <config.h>
+ #include <compiler.h>
+ #include <stdbool.h>
+ #include <linux/types.h>
+@@ -160,6 +161,25 @@ bool env_get_autostart(void);
+  */
+ int env_set(const char *varname, const char *value);
+ 
++/**
++ * env_set_runtime() - set an environment variable if
++ * CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG is set.
++ *
++ * This is equivalent to env_set(), but does nothing if
++ * CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG is unset.
++ *
++ * @varname: Variable to adjust
++ * @value: Value to set for the variable, or NULL or "" to delete the variable
++ * @return 0 if OK or !CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG, 1 on error
++ */
++static inline int env_set_runtime(const char *varname, const char *value)
++{
++	if (IS_ENABLED(CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG))
++		return env_set(varname, value);
++
++	return 0;
++}
++
+ /**
+  * env_get_ulong() - Return an environment variable as an integer value
+  *
 -- 
 2.43.0
 
