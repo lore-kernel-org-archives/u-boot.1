@@ -4,72 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F9A0FEEF31
-	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 12:51:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2838FEEF35
+	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 13:07:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E67884106;
-	Tue,  7 Apr 2026 14:51:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=couthit.com
+	by phobos.denx.de (Postfix) with ESMTP id B316784150;
+	Tue,  7 Apr 2026 15:07:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=couthit.com header.i=@couthit.com header.b="Pcm5n+OI";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="pc+QvIOP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B93F83A41; Tue,  7 Apr 2026 10:25:03 +0200 (CEST)
-Received: from server.couthit.com (server.couthit.com [162.240.164.96])
+ id 26E95840BE; Tue,  7 Apr 2026 15:07:26 +0200 (CEST)
+Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76D228352B
- for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 10:25:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=couthit.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=parvathi@couthit.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=couthit.com
- ; s=default;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject
- :Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=LLc5kEFZ4/CYoksSRK7//avMWCYrBsptxIF4imWAxFw=; b=Pcm5n+OI+UZP6hVLsdSCaim8xd
- YfyUAoB5UM7jc03QAL0mzDOcJ/5zsW0vj0N/VOmno2KIPDR6hfpTFUA4POQy63HWlD4roqm4a+cs+
- 2jB0YZsQMvH3updS2GWhcKNoReHRZeNlnzYYnPNFoCodhdLJ62unAc6Awu7ObKo6/1qU6jAUWwOst
- gDW1P+9zrsVXa48G/Q/vOjaaG5baQz8W91TnmfBdJjzC9sN1D9zHQy9gzgobHlAoCskSL5r1KRqay
- A9oVGvcd3ODuP9u+ep7sbcZbi1Nn02e1qTzWyG/hxhb0CuFATZSC9ec++ZyVOoTQtOlABgP0HvdaY
- HsLogfDA==;
-Received: from [115.246.246.98] (port=48973 helo=cypher.couthit.local)
- by server.couthit.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.98.1) (envelope-from <parvathi@couthit.com>)
- id 1wA1k0-0000000Djy7-1xaJ; Tue, 07 Apr 2026 04:24:57 -0400
-From: Parvathi Pudi <parvathi@couthit.com>
-To: u-boot@lists.denx.de, trini@konsulko.com, Maarten.Brock@sttls.nl,
- kory.maincent@bootlin.com, msp@baylibre.com, parvathi@couthit.com,
- sbellary@baylibre.com, romain.gantois@bootlin.com
-Cc: pratheesh@ti.com, j-rameshbabu@ti.com, praneeth@ti.com, vigneshr@ti.com,
- srk@ti.com, rogerq@ti.com, danishanwar@ti.com, m-malladi@ti.com,
- krishna@couthit.com, mohan@couthit.com, pmohan@couthit.com,
- basharath@couthit.com
-Subject: [PATCH] board: ti: am335x: Conditional MDIO PAD configuration instead
- of static for AM335_ICE
-Date: Tue,  7 Apr 2026 13:52:59 +0530
-Message-ID: <20260407082402.2311644-1-parvathi@couthit.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 2C51A83A41
+ for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 15:07:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ew.tq-group.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=Alexander.Feilke@ew.tq-group.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:MIME-Version:
+ References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
+ bh=nJL9Qz4nqstOIBRp2IJz/r9d75YfG2za1zsACTO+t9U=; b=pc+QvIOPucESx9oZf5kFHuldPt
+ kkl44TJgVJIf/GtEs4jKdt1ezRHZ9yPLyjFAS+R+e2PR367/co4/RX6Ln1j8iFkm4kzTwTZ82tq6B
+ BrdFQXV6nqNKrfns4Fgs2MtVXqr93PVhLQ/Rxt2t2KfpZKdc4gAaeTPIlJUufojf+h//dw8Kvg0q1
+ 6vB5InWiMasEsFainmPG9YRT2736FF+m/FcT0P+UvGrJJX/n1Vt8o3CXYS72HPmV+AiEEt8lt9AWq
+ P0QKi9SWFD42OegoIefjIWEro24NT3t94r7PwFPtFTcDlPaOkf0n2z7ZnRF+V/+chN0Bzwv2qMUwe
+ IGMPS4dg==;
+Received: from sslproxy02.your-server.de ([78.47.166.47])
+ by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
+ id 1wA69K-00072I-0h; Tue, 07 Apr 2026 15:07:22 +0200
+Received: from localhost ([127.0.0.1])
+ by sslproxy02.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
+ id 1wA69J-0007St-1k; Tue, 07 Apr 2026 15:07:21 +0200
+From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
+To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
+ u-boot@ew.tq-group.com
+Cc: Alexander Feilke <alexander.feilke@ew.tq-group.com>,
+ Tom Rini <trini@konsulko.com>,
+ Alexander Feilke <Alexander.Feilke@ew.tq-group.com>,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
+Subject: [PATCH v4 5/8] arch: arm: dts: tqma7x: add boot phase properties
+Date: Tue,  7 Apr 2026 15:06:48 +0200
+Message-ID: <20260407130654.778838-6-Alexander.Feilke@ew.tq-group.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260407130654.778838-1-Alexander.Feilke@ew.tq-group.com>
+References: <20260407130654.778838-1-Alexander.Feilke@ew.tq-group.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - server.couthit.com
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - couthit.com
-X-Get-Message-Sender-Via: server.couthit.com: authenticated_id:
- parvathi@couthit.com
-X-Authenticated-Sender: server.couthit.com: parvathi@couthit.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Mailman-Approved-At: Tue, 07 Apr 2026 14:51:19 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,77 +76,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch removes the static MDIO pinmux configuration from
-rmii1_pin_mux[] and instead configures the MDIO pins conditionally
-during board_init(). Previously, the MDIO_CLK and MDIO_DATA pins
-were always configured for CPSW in mux.c, which could lead to
-unnecessary pin ownership and conflicts in scenarios where CPSW
-is not used.
+From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 
-With this change, the MDIO pins are configured only when required,
-ensuring that CPSW Ethernet functionality in U-Boot remains unaffected.
-This approach keeps Ethernet boot behavior intact and provides cleaner
-separation between CPSW and other Ethernet use cases.
+Revert this commit once the upstream linux device trees are
+synchronized.
 
-Signed-off-by: Parvathi Pudi <parvathi@couthit.com>
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
+Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 ---
- board/ti/am335x/board.c | 22 ++++++++++++++++++++++
- board/ti/am335x/mux.c   |  2 --
- 2 files changed, 22 insertions(+), 2 deletions(-)
+ arch/arm/dts/imx7s-mba7-u-boot.dtsi  | 23 ++++++++++++++++++++++-
+ arch/arm/dts/imx7s-tqma7-u-boot.dtsi | 22 ++++++++++++++++++++++
+ 2 files changed, 44 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/imx7s-tqma7-u-boot.dtsi
 
-diff --git a/board/ti/am335x/board.c b/board/ti/am335x/board.c
-index 90e37a8d913..abeab809387 100644
---- a/board/ti/am335x/board.c
-+++ b/board/ti/am335x/board.c
-@@ -61,6 +61,18 @@ DECLARE_GLOBAL_DATA_PTR;
- #define GPIO_ETH0_MODE		GPIO_TO_PIN(0, 11)
- #define GPIO_ETH1_MODE		GPIO_TO_PIN(1, 26)
+diff --git a/arch/arm/dts/imx7s-mba7-u-boot.dtsi b/arch/arm/dts/imx7s-mba7-u-boot.dtsi
+index 2ed3f9c4769..bb560f4d85b 100644
+--- a/arch/arm/dts/imx7s-mba7-u-boot.dtsi
++++ b/arch/arm/dts/imx7s-mba7-u-boot.dtsi
+@@ -7,7 +7,7 @@
+  * Author: Steffen Doster
+  */
  
-+#define AM335X_PIN_MDIO	0x948
-+#define AM335X_PIN_MDC		0x94c
-+
-+#define GPIO_MDIO_DATA		CTRL_BASE + AM335X_PIN_MDIO
-+#define GPIO_MDIO_CLK		CTRL_BASE + AM335X_PIN_MDC
-+
-+/* Enabling MDIO_DATA by setting MUX_MODE to 0, RXACTIVE, PULLUP_EN bits */
-+#define PAD_CONFIG_MDIO_DATA	0x30
-+
-+/* Enabling MDIO_CLK by setting MUX_MODE to 0, PULLUP_EN bit */
-+#define PAD_CONFIG_MDIO_CLK	0x10
-+
- static struct ctrl_dev *cdev = (struct ctrl_dev *)CTRL_DEVICE_BASE;
+-#include "imx7s-u-boot.dtsi"
++#include "imx7s-tqma7-u-boot.dtsi"
  
- #define GPIO0_RISINGDETECT	(AM33XX_GPIO0_BASE + OMAP_GPIO_RISINGDETECT)
-@@ -779,6 +791,16 @@ int board_init(void)
- 			hang();
- 		}
- 
-+		if (!eth0_is_mii || !eth1_is_mii) {
-+			/* Set the Mux Mode to MDIO_DATA */
-+			reg = readl(GPIO_MDIO_DATA);
-+			writel(reg & PAD_CONFIG_MDIO_DATA, GPIO_MDIO_DATA);
-+
-+			/* Set the Mux Mode to MDIO_CLK */
-+			reg = readl(GPIO_MDIO_CLK);
-+			writel(reg & PAD_CONFIG_MDIO_CLK, GPIO_MDIO_CLK);
-+		}
-+
- 		prueth_is_mii = eth0_is_mii;
- 
- 		/* disable rising edge IRQs */
-diff --git a/board/ti/am335x/mux.c b/board/ti/am335x/mux.c
-index d2d87c304f6..36d849d2119 100644
---- a/board/ti/am335x/mux.c
-+++ b/board/ti/am335x/mux.c
-@@ -190,8 +190,6 @@ static struct module_pin_mux mii1_pin_mux[] = {
+ / {
+ 	config {
+@@ -21,7 +21,28 @@
+ 	};
  };
  
- static struct module_pin_mux rmii1_pin_mux[] = {
--	{OFFSET(mdio_clk), MODE(0) | PULLUP_EN},	/* MDIO_CLK */
--	{OFFSET(mdio_data), MODE(0) | RXACTIVE | PULLUP_EN}, /* MDIO_DATA */
- 	{OFFSET(mii1_crs), MODE(1) | RXACTIVE},		/* MII1_CRS */
- 	{OFFSET(mii1_rxerr), MODE(1) | RXACTIVE},	/* MII1_RXERR */
- 	{OFFSET(mii1_txen), MODE(1)},			/* MII1_TXEN */
++&gpio4 {
++	/* Deassert BOOT_EN after boot to separate BOOT_CFG circuits from LCD signals */
++	boot-en-hog {
++		gpio-hog;
++		gpios = <3 GPIO_ACTIVE_LOW>;
++		output-low;
++	};
++};
++
+ &wdog1 {
+ 	u-boot,noautostart;
+ 	timeout-sec = <60>;
+ };
++
++&iomuxc {
++	bootph-pre-ram;
++};
++
++&pinctrl_uart6 {
++	bootph-pre-ram;
++};
++
++&uart6 {
++	bootph-pre-ram;
++};
+diff --git a/arch/arm/dts/imx7s-tqma7-u-boot.dtsi b/arch/arm/dts/imx7s-tqma7-u-boot.dtsi
+new file mode 100644
+index 00000000000..2d1d614cd57
+--- /dev/null
++++ b/arch/arm/dts/imx7s-tqma7-u-boot.dtsi
+@@ -0,0 +1,22 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
++/*
++ * Device Tree Source for TQ-Systems TQMa7S module.
++ *
++ * Copyright (C) 2024-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++ * D-82229 Seefeld, Germany
++ * Author: Steffen Doster
++ */
++
++#include "imx7s-u-boot.dtsi"
++
++&soc {
++	bootph-pre-ram;
++};
++
++&aips1 {
++	bootph-pre-ram;
++};
++
++&aips3 {
++	bootph-pre-ram;
++};
 -- 
 2.43.0
 
