@@ -4,97 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ACDFEDB7EC
-	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 10:17:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05E99EDB7F0
+	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 10:32:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7C5F83A41;
-	Tue,  7 Apr 2026 12:17:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
+	by phobos.denx.de (Postfix) with ESMTP id 6650F83A41;
+	Tue,  7 Apr 2026 12:32:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="AJYcmNd+";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="lpSaYasO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1279F83F98; Tue,  7 Apr 2026 12:17:45 +0200 (CEST)
-Received: from mail-dl1-x1233.google.com (mail-dl1-x1233.google.com
- [IPv6:2607:f8b0:4864:20::1233])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4716584034; Tue,  7 Apr 2026 12:32:50 +0200 (CEST)
+Received: from BYAPR05CU005.outbound.protection.outlook.com
+ (mail-westusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c000::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE2D18352B
- for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 12:17:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D0088352B
+ for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 12:32:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=thingy.jp
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-dl1-x1233.google.com with SMTP id
- a92af1059eb24-1279eced0b9so5629572c88.0
- for <u-boot@lists.denx.de>; Tue, 07 Apr 2026 03:17:41 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775557060; cv=none;
- d=google.com; s=arc-20240605;
- b=O8F0x6B4nFIsom0OGs5gz2Y3D4qEQm3dOaZuyg4cv9BM7MCNoiu9gIDmrCgwfUlLmq
- jBCmlzbngwXKC4yzjvQ0zK4NXclRBtre7ABb2pHGBq2IQraQz2bm7N1yXff+kw8rIhZD
- CN0Ikgf285QCH/vAPbPocFb6JZMy3UIGDZ4zYy7+iwmBuvHPK/3MksiBptvx/Gcf+WRS
- NlKR800X+i7/SjvEn9/hVMUqYxK1nmgW5oJUdf6Se+sZDKwqhqkGaed+xqttgvgtp4ui
- Ixh0bqW/63m2MMAIf8mr7EwzXqdhHQwIqEN8wqZc1T6lmZaIKiFt2DKPEn2WdAUvLmPR
- T4Ng==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=wrQe5oHNvMzH/J0CM9OxjvZDkKEjQn+KFSDtTr5Zjrc=;
- fh=iG9b5sHGu6FrKjVKxRyiQzV0om5tLq7uTHSsMP33bRI=;
- b=UL9rBjOE7N/eTLNpbvn6XMU7GL7M145Kqae8jTCOLllKUK4hfLdu7Gx1YMT7dirN2t
- poSWRdlHQJAKfgPRQXVTPqDQ02YmudSL6xgaK2jzuGrcjkvZT/O8FfKlfMisbJ4r/hj0
- Kb2QnAnCDuY4rSWC28O94hIR89ZiuX3g7refk94zkPDFzog8/+USeJ+Ti4OKG1lfHLSA
- Zrx4eLzbj7lrwGyQ35r0XN8Xvk1JNdjouIyp8HsoqhWSb0oqUl7aAjv2jaYD6+nQEcHX
- Sy1Cmim7M4AtszsnMbRiGbwUyVINxfBpBTOQjzAA0ojk7vUTcSEy5UsdxwQnQidh8iE/
- 2psg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thingy.jp; s=google; t=1775557060; x=1776161860; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wrQe5oHNvMzH/J0CM9OxjvZDkKEjQn+KFSDtTr5Zjrc=;
- b=AJYcmNd+xEwxwhuGizRZZZenjjhhjqDXnJyjQbjyrmOqN07IH2MfKOa71spFL6n0q/
- 7zNdu0BbGQPJ3hbpCGeU1gWIqQSlSULPlJeBmDsPT8VUwjcV4MP3WWdK0OE8WeeDTEF6
- WCdHb96SxnZiXiIwcEHwq7+G8qEwu2Sa5MEmc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775557060; x=1776161860;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wrQe5oHNvMzH/J0CM9OxjvZDkKEjQn+KFSDtTr5Zjrc=;
- b=U3Rn8austBmVhUHqpa9OXOr7xY8tPQo6pTKRhFWxjL7NuuLEETRANY0YtiXY8tYQLE
- CeuQPsotTygGToxa7kNPxr0BnEd3UzyD3zFtu20aPj+Le2bu0BGszBMsA5TzSZliKpCW
- Z1AOj25EbbB27T9rUrjfugTCVpRQ+JONZyslyCQF1VXGttcWIbAzKwOd5jPws0KYKaMg
- 4DEXQ6pPCJiq01GCmkYueC4yegyfj29H78KmS3Uscf88pzrKmBTuW7LxZPykV/bIP7Zn
- CMkqO1gr7Ain8SmvTYziU9RXwiHW0+cKn1QXTsfwofYyHMzMeD1l1Mv87JsYDBqyQF47
- WHtQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXKm5egXRGNsqK3I14K9nvPePUNHLshGFlE0YN30scmcIsgKo+m6IuAr/Yc86vkVCdMZopYOS8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxKm7HSNDiyQzkJx3GvMOn9oirK75Fb99DDid7vB7A2MGIhpYik
- 8N+cF5qk7X39wuy7bIdZG77wUwBf8qe6yJGgM5MPZR6PHrFfd9pNr4sTXlYiTrpeQZd9CyA3DRO
- VPyFQBIZFY/vqxDhm3ww1LZus06/X8RxGTLXcwZ/ORQ==
-X-Gm-Gg: AeBDievtc3IHAXeh/42Uc/BO+pLpfByaMXOMDxEQWFEnf2YlDk/VFC8ypxmpZV3XdwH
- vy49A/y5l5Fstb7oIRf1l66XwayYKnekZAC637dht1nqbbV7mMV8nyZPggnEj8JNMT3992f/pEe
- yle37l1FYQTaCiHt6/W5jqK5P9IUpLsilRyJQcKLHue1rKHFFe3xFrrXLfmm1dj+T0MJde4BbWv
- wNx2VUAMYBqbhhJu2ob+rb/o2ca45VSPZ0NmyZi7kE3pRK53fRPb6udn7g8lnuNNe1xZAUfle7c
- 7N6P
-X-Received: by 2002:a05:7022:49d:b0:12b:ed30:5a32 with SMTP id
- a92af1059eb24-12bfb6e7d5cmr6643968c88.5.1775557059779; Tue, 07 Apr 2026
- 03:17:39 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=BHophRkmCYSxnzPFqJx8RUUdEaBAr0nfLDs7Dko5mVfPpHw1M3Q4A7I9qSR15LFxhNf+OE27wNxOzc12xgxLwX2mRd4iBC3Y6Zo5phuKOks4U2zJqa3bqT0pq8R1q8nu32TFk6ajx1WOm0sEgqyV6DawRuwu116RgnKNCE90R7tTpgTIDG70mzy1Nh6pmtGjMy9SZDdQIM3nBWjMhPPV76i5JjMW1TNCrlynOfnB9DzQq3iXSnWSJMDaZCHEIChv5jwD8W2eqp2wCOb9EN7D+QCmroLaGdTV3iiSbOTwbbT7KuVqdQVJ+aKkD38mUvvJWdbqAJDv7ya48TX87nf0mg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=LCvwRReBgqe2+cMoHFs1kNYt5GW+OM/08/aXOmQVDRQ=;
+ b=iIJ1l3oSm6Zw/RZdRiej6rvwbk17DXSPXyyGzwtPaqYZmf46RZKbFsdRISkpt3a5HjFXK5GuxKKsCc1b+Y4fjzJSlY01jICJqYk71Y3zxg9z/KEZnCkqJdqV+WWWxQfCvt0OhpO7dDfkG9I0zwGYpaqopmBadyJQH2zi6WYx1StBonRexVEFeH2wGZVXPEWG9IX6tHnuDuRvL6u/Iq7X38/2QF/jPXh8B69oOwIR+NfD3M2tcLE983mgV8mufYcoJC7z1UTQoILtazFBicQNMNdYIQDBiPJqaod9ndjE1fbKeDjbcZ5HwsWCWW7takfzMFx3c5UkxVHUGF4oiqZ09w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=LCvwRReBgqe2+cMoHFs1kNYt5GW+OM/08/aXOmQVDRQ=;
+ b=lpSaYasO27BdYL5kFHbX0VUf8xT7Q0FbZw61g9GGdcCB/X9NN1E5x9IL1HUzMg0uxydgNHVkW+e3WFQ4bxJTlgrKnl8FQeZrmXxripoJgZG3lKxD4yHc0dhSYFKmVk+npY3SFmKI7JgMrd+oHSJdCxQlG1yaQtZcwJ/hyqW5244=
+Received: from BN9PR03CA0481.namprd03.prod.outlook.com (2603:10b6:408:130::6)
+ by IA0PR12MB7555.namprd12.prod.outlook.com (2603:10b6:208:43d::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.20; Tue, 7 Apr
+ 2026 10:32:39 +0000
+Received: from BN2PEPF00004FBF.namprd04.prod.outlook.com
+ (2603:10b6:408:130:cafe::ef) by BN9PR03CA0481.outlook.office365.com
+ (2603:10b6:408:130::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.32 via Frontend Transport; Tue,
+ 7 Apr 2026 10:32:39 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BN2PEPF00004FBF.mail.protection.outlook.com (10.167.243.185) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9769.17 via Frontend Transport; Tue, 7 Apr 2026 10:32:39 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 7 Apr
+ 2026 05:32:39 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 7 Apr
+ 2026 05:32:38 -0500
+Received: from localhost (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Tue, 7 Apr 2026 05:32:37 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@amd.com>
+CC: =?UTF-8?q?Frank=20B=C3=B6wingloh?= <f.boewingloh@beckhoff.com>, "Naman
+ Trivedi" <naman.trivedimanojbhai@amd.com>, Senthil Nathan Thangaraj
+ <senthilnathan.thangaraj@amd.com>, Tom Rini <trini@konsulko.com>, "Venkatesh
+ Yadav Abbarapu" <venkatesh.abbarapu@amd.com>
+Subject: [PATCH] soc: xilinx: zynqmp: Add support for new ZynqMP devices
+Date: Tue, 7 Apr 2026 12:32:30 +0200
+Message-ID: <330098196cc84115899ea7a14665a8df7e279fae.1775557948.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260407094900.420176-1-visitorckw@gmail.com>
-In-Reply-To: <20260407094900.420176-1-visitorckw@gmail.com>
-From: Daniel Palmer <daniel@thingy.jp>
-Date: Tue, 7 Apr 2026 19:17:28 +0900
-X-Gm-Features: AQROBzDZVLJPUKIGeFifUYQI6hUZkp7iFGq1ogrBuj4IYEgOzMepFxOsET4n9fU
-Message-ID: <CAFr9PX=zVHFmREtduEv_DVLieoLkKL9oSo=MrFL+NcBVgaEt7g@mail.gmail.com>
-Subject: Re: [PATCH] virtio: mmio: Return error codes on probe failures
-To: Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: bmeng.cn@gmail.com, trini@konsulko.com, tuomas.tynkkynen@iki.fi, 
- sjg@chromium.org, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2036; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=1XaSVIwxZFVQh4rUTkU3fbH0kh10K8u2imXZIq8GP8Q=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWReuWvHETzTJ5k/XFv776yZIVKPHnw1fGkUxXfzEYtVw
+ zSrfjmtjlIWBjEOBlkxRZbpTDoOa75dWyq2PDIfZg4rE8gQBi5OAZjI7gkM/wM3fDgbINrTzvfq
+ 1utjPp4X3vA7S12PsrhYOmfhqSNfI1QY/vt8MfJyO1i0YWO58BbXiVx+nGkLdb5uFM//X7w1rD0
+ vkw0A
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF00004FBF:EE_|IA0PR12MB7555:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8a38c491-2f79-48c7-6c1b-08de9490fe46
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700016|376014|82310400026|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 0WQxZLsAd9mkKUiGxMKufJxAwQoypuChlRtVcafv4IBqaymoQGehy/sG+2d7BLqythUCESMk+EW+j8L8+TYkRG+vqhgvZaxccVGBvsDDiOPG8Rt3EnCJJYWoqzRV8AN/JBuJh/p/csaDyfGQdMrOfOv1x/lD4uhhoS3uHnou+dowRr1eAiH5XPVgkM/jlz06jUE2UUuysGr92SjxO6NRVGkLT+1gz6xjpTpKkEviSlg+jdiAQDpCl7q9Yu48QFIY+26ES2+GxFmC1i89TOeXfTs1PS/oiEOSdh13IHmtZ2zMX6YcM7THuWKwdI9C7q1FYAnygGks8h/MOeQgg7i/zUQ/p4Dmx9Q45/kFfiOaKfOXnsrnVliHoC/Ap6HgaLxyvuMxk3iAzsAmHZLvudQ5JNMxxaWfGfu8XndZOePB0MYzRr54EmlSYaZuOB0kcqkKKNZ41O2aGus+o4FQDleaaBXgWk9wGOYQ+VwVYbyJjwTjgt7Hcg00HL0jdy+3appi2vPSmsbRk1V9o1xKQ8XPI0nH135oG1E2ZzHf/HpNxym/an9m7QjzdYH0Lln9gJJLwtx4un/woVoPBfb8fgUIGhtYKCRytjDB41mTQ981wE8Zo2zsoz9wlTRV7GVUt85fr70b2t1DpcfwnmyIQEyQBN29PLd0PgsqMXnhFRtfajvGMjnFzSwHdq8z6hFMtRQJcWCREAuBwRk65oAesXyuyJxyDe+25jHa3EyPWiBh5fNmLE99hqdhj4023XsdLF1IoAVE7UcGvlQxCjjBnSpd2w==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700016)(376014)(82310400026)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: +06kxBo3uGKf/GJFTl0YfgA0+8ddTRwdv81WnuFadcVpR90zFzXq1/3iAFo83VB7olo3lfM1AoV9m0YftIqUSPyu0Mbe4j3ltMz7ycoCdL/pqZvItEQprcVnF0D6IKTTtVCXkMR8pnA48jxq4YBNxbnGykh5g+zxohOxE0/6sw744y/vJaQH7jaWCe56ta0efDmwwA2DmR5gmjHQBc/w1di2jH7fI+Gzq5mFcaYKXYOCcU6vGJ+eAHYwmyuzyH8AGWX7mXhy8cOmOSBO9SaqPJbE/Pa4KEdIhSk/a0Jxdu79mNgWmpM+WKJ1KA9+gZapmUnydFYW+896sZerBA6Q+6lcB0ThNqVfjrfRJd9IfdSqBSKOSKUrXXqWcdAscR4UOhoHp0gdDE506nnNXtnlay7mHqrJGEXrrvtJVaH80qriiWxhq4/vrYcr+rglkd8X
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Apr 2026 10:32:39.5015 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8a38c491-2f79-48c7-6c1b-08de9490fe46
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF00004FBF.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB7555
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,66 +136,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kuan-Wei,
+Add ID codes for the following ZynqMP devices:
+- XCZU1EG_LR (0x0468A093)
+- XCZU42DR (0x046D4093)
+- XCZU55DR (0x046D2093)
+- XCZU57DR (0x046D3093)
+- XCZU58DR (0x047F9093)
+- XCZU59DR (0x047FC093)
+- XCZU63DR (0x046D5093)
+- XCZU64DR (0x046D6093)
+- XCZU65DR (0x046D1093)
 
-On Tue, 7 Apr 2026 at 18:49, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
->
-> Currently, virtio_mmio_probe() returns 0 when it encounters an invalid
-> magic value, an unsupported version, or a dummy device (ID 0). In
-> U-Boot's driver model, returning 0 indicates a successful probe. This
-> causes the system to incorrectly register and activate invalid or
-> placeholder devices, potentially leading to undefined behavior or
-> crashes later on.
->
-> Update the probe function to return appropriate error codes (-ENODEV
-> for invalid magic values and dummy devices, and -ENXIO for unsupported
-> versions). This fix correctly instructs the DM to abort the binding
-> process.
->
-> Fixes: fdc4aca89ecb ("virtio: Add virtio over mmio transport driver")
-> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
-> ---
->  drivers/virtio/virtio_mmio.c | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
-> index 1cd737aca24..62afe609ec0 100644
-> --- a/drivers/virtio/virtio_mmio.c
-> +++ b/drivers/virtio/virtio_mmio.c
-> @@ -354,7 +354,7 @@ static int virtio_mmio_probe(struct udevice *udev)
->         magic = readl(priv->base + VIRTIO_MMIO_MAGIC_VALUE);
->         if (magic != ('v' | 'i' << 8 | 'r' << 16 | 't' << 24)) {
->                 debug("(%s): wrong magic value 0x%08x!\n", udev->name, magic);
-> -               return 0;
-> +               return -ENODEV;
->         }
->
->         /* Check device version */
-> @@ -362,7 +362,7 @@ static int virtio_mmio_probe(struct udevice *udev)
->         if (priv->version < 1 || priv->version > 2) {
->                 debug("(%s): version %d not supported!\n",
->                       udev->name, priv->version);
-> -               return 0;
-> +               return -ENXIO;
->         }
->
->         /* Check device ID */
-> @@ -372,7 +372,7 @@ static int virtio_mmio_probe(struct udevice *udev)
->                  * virtio-mmio device with an ID 0 is a (dummy) placeholder
->                  * with no function. End probing now with no error reported.
->                  */
-> -               return 0;
-> +               return -ENODEV;
->         }
->         uc_priv->vendor = readl(priv->base + VIRTIO_MMIO_VENDOR_ID);
->
-> --
-> 2.53.0.1213.gd9a14994de-goog
->
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-I'm surprised I didn't notice this when working out the endian issues on m68k.
-I have build/boot tested on m68k and the change looks correct to me.
+ drivers/soc/soc_xilinx_zynqmp.c | 45 +++++++++++++++++++++++++++++++++
+ 1 file changed, 45 insertions(+)
 
-Since I'm not the maintainer for this thing I guess:
+diff --git a/drivers/soc/soc_xilinx_zynqmp.c b/drivers/soc/soc_xilinx_zynqmp.c
+index b97cd443c607..4abc73013eb1 100644
+--- a/drivers/soc/soc_xilinx_zynqmp.c
++++ b/drivers/soc/soc_xilinx_zynqmp.c
+@@ -70,6 +70,11 @@ static const struct zynqmp_device zynqmp_devices[] = {
+ 		.device = 1,
+ 		.variants = ZYNQMP_VARIANT_EG_LR,
+ 	},
++	{
++		.id = 0x0468A093,
++		.device = 1,
++		.variants = ZYNQMP_VARIANT_EG_LR,
++	},
+ 	{
+ 		.id = 0x04711093,
+ 		.device = 2,
+@@ -208,6 +213,16 @@ static const struct zynqmp_device zynqmp_devices[] = {
+ 		.device = 49,
+ 		.variants = ZYNQMP_VARIANT_DR,
+ 	},
++	{
++		.id = 0x047F9093,
++		.device = 58,
++		.variants = ZYNQMP_VARIANT_DR,
++	},
++	{
++		.id = 0x047FC093,
++		.device = 59,
++		.variants = ZYNQMP_VARIANT_DR,
++	},
+ 	{
+ 		.id = 0x046d0093,
+ 		.device = 67,
+@@ -218,6 +233,36 @@ static const struct zynqmp_device zynqmp_devices[] = {
+ 		.device = 67,
+ 		.variants = ZYNQMP_VARIANT_DR_SE,
+ 	},
++	{
++		.id = 0x046D1093,
++		.device = 65,
++		.variants = ZYNQMP_VARIANT_DR,
++	},
++	{
++		.id = 0x046D2093,
++		.device = 55,
++		.variants = ZYNQMP_VARIANT_DR,
++	},
++	{
++		.id = 0x046D3093,
++		.device = 57,
++		.variants = ZYNQMP_VARIANT_DR,
++	},
++	{
++		.id = 0x046D4093,
++		.device = 42,
++		.variants = ZYNQMP_VARIANT_DR,
++	},
++	{
++		.id = 0x046D5093,
++		.device = 63,
++		.variants = ZYNQMP_VARIANT_DR,
++	},
++	{
++		.id = 0x046D6093,
++		.device = 64,
++		.variants = ZYNQMP_VARIANT_DR,
++	},
+ 	{
+ 		.id = 0x04712093,
+ 		.device = 24,
+-- 
+2.43.0
 
-Acked-by: Daniel Palmer <daniel@thingy.jp>
+base-commit: 366dfe78e2028f53a6274da75547fb68844764cc
