@@ -4,146 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AC08FB519B
-	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 06:17:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EACF8FB519D
+	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 06:35:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 654DE83936;
-	Tue,  7 Apr 2026 08:17:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 5E22783936;
+	Tue,  7 Apr 2026 08:35:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="3JrjLxBn";
+	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="AGNXGI+n";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="xGCYqK/D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 153C583A41; Tue,  7 Apr 2026 08:17:25 +0200 (CEST)
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170100009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::9])
+ id 30F6F83A41; Tue,  7 Apr 2026 08:35:05 +0200 (CEST)
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A64908352B
- for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 08:17:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 053628352B
+ for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 08:35:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Pranav.VinayTilak@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wjzwln1lc96qfnZFhWSz2FJMmqD69aQTP+yLqOd0j98BQZP1jioFUFW+6LJ4PiDvJSB07dUUQQFnB3TAlX+r+HunL5oWqA8JxXLZSOJcYHOMc7UF39eCxhz1dVcFQ71Bk6RM1cRLLclncJstBESMf4FbTZR1wYg2x8xVZTuiwiqrqg9T/TBhShr1Mp6rfLliOnwZOGOI7L+kfeoik+pl78JHcaukVDeEfS4fakq3I6+6y8Lut0fIAnk/jWRcPe7lGTUYtFEa1H7p8525Gs0Et6zSWGMS043KylGvF1eMMZTd7xU4q8bLNuOB+DgKldAWU4TXf+txIOfzk9/9tokn8g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fOhwlGfebmo03cqIct90wzqF/rlso+DyzJle8IV6tVo=;
- b=RQjkNF1PDG3CUcSOsMb0wlCidjgCnI2Sb+RTW04dMM/6AsR3qq0VMEMGNru2pfea1D6CKXZPRATSwUp5EZixVAeIp/mvI0LiT5ueGJGp+YfKmoCUXS26ZD9Qd4F9EldySm7OCDIXLc5g+oOvka2LRKVxzxfQn3tHxfdIqegZQ1ojSOTe4WqrEkLZ5m8iRS2tlvexe3nuvn6ItONpgFKIGZCzWj5hFyK0BqBf9s0YI3YsFusMRKm2Clvv4vagfW1kSeHrD7+gkZO9GworXxKkFvJyBC4BluFI7nTFuHToZ1RdLGPqahFkGwCpw8NVVJtLW510Yw2aAscisyyVlkenHQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fOhwlGfebmo03cqIct90wzqF/rlso+DyzJle8IV6tVo=;
- b=3JrjLxBnENZoKLwaLZ3VFnJ+m3IMTnAfNIoaXugWmtTHLueleqUmn9n0pkhh9bTLO+gjuhhJf53gC3dyd6mlrRWTg6KfcBCji4jWmERXuefYzjvydpK28D0u2gwrlzSjH3EFBIyWKXhoHEP+/lR6NwFLNV+VcsQJDjlGd8jqxdE=
-Received: from MW6PR12MB7088.namprd12.prod.outlook.com (2603:10b6:303:238::17)
- by PH7PR12MB8124.namprd12.prod.outlook.com (2603:10b6:510:2ba::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.18; Tue, 7 Apr
- 2026 06:17:16 +0000
-Received: from MW6PR12MB7088.namprd12.prod.outlook.com
- ([fe80::e56b:9894:876a:c049]) by MW6PR12MB7088.namprd12.prod.outlook.com
- ([fe80::e56b:9894:876a:c049%5]) with mapi id 15.20.9769.017; Tue, 7 Apr 2026
- 06:17:16 +0000
-From: "Vinay Tilak, Pranav" <Pranav.VinayTilak@amd.com>
-To: Marek Vasut <marek.vasut@mailbox.org>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, "Simek, Michal" <michal.simek@amd.com>
-CC: "git (AMD-Xilinx)" <git@amd.com>, "Begari, Padmarao"
- <Padmarao.Begari@amd.com>, Jerome Forissier <jerome.forissier@arm.com>, Tom
- Rini <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ramon Fried <rfried.dev@gmail.com>
-Subject: RE: [PATCH] net: phy: ethernet_id: fix duplicate eth_phy binding
-Thread-Topic: [PATCH] net: phy: ethernet_id: fix duplicate eth_phy binding
-Thread-Index: AQHcxaFdqdjt0yumpUS35QsS7cIkP7XSMwCAgADqSjA=
-Date: Tue, 7 Apr 2026 06:17:16 +0000
-Message-ID: <MW6PR12MB70885DCB91C886A069CDC726FB5AA@MW6PR12MB7088.namprd12.prod.outlook.com>
-References: <20260406084204.1274302-1-pranav.vinaytilak@amd.com>
- <3e515a8e-710d-4664-ba49-ce287bd5edc2@mailbox.org>
-In-Reply-To: <3e515a8e-710d-4664-ba49-ce287bd5edc2@mailbox.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-Mentions: marek.vasut@mailbox.org
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_Enabled=True;
- MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_SiteId=3dd8961f-e488-4e60-8e11-a82d994e183d;
- MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_SetDate=2026-04-07T06:11:08.0000000Z;
- MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_Name=Open
- Source; MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_ContentBits=3;
- MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_Method=Privileged
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: MW6PR12MB7088:EE_|PH7PR12MB8124:EE_
-x-ms-office365-filtering-correlation-id: f27229ec-538f-497e-2bc6-08de946d50c5
-x-ld-processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|366016|1800799024|22082099003|56012099003|18002099003|38070700021;
-x-microsoft-antispam-message-info: JGbwzALo2gJbokY1nsMdjEc84p1yXc5h+2ysDeTvXgV6c24HPVYNS6N4qzRDfyTcJy0IypbLVOTVPngqIocrrO1+6MOccZFpc/StvVtQ1YuhNp0fOdQaXGKkIL+fMlNIYZfc1MjliIUVak0Pl/cnZ+oKPM6nTzcdVl1sxropT5MhAjkJG2U0jbbABy193AT2dY2atPWnESPRZ6MDzb5m1E51C5x2KvgiJ4pUIZrm7Wmrf0+eTIUsRiZH+6m0e4kyEsHZlErrFiJ+mbYATaHl3lCi20zadhzizT3iIPIuAQ+XiPE8OK1KumAIPQcSwsmkXRmG76MWczTMUSG+69+FglwbcD/Cl5VMweGia7lSv6B1iEhqF+vDSme5KC/krNSbAgRrQILL81+6B81WSAaTYik2zbZUar4CK0H/0qLU6b7Nt+o89DOEgwe8UgwXN7dw26MFiDLIY7wW/BYSSS56QNoeEhSk38o5tjA2TOvw9LsZ1IjFKpqNx81FMV0D4Zct3rvpL1UZf1faJSiupG+dw3C6Z7cccPSsTGTWf8PEToOeAUC1vwg5Hb/YGb7Ctm1WralhGn8avJilpSbKWl5d5z7+1U7UBXJnZAaT/FOZbY4nWY2o618q1QV5EPhuHEkUQQS3qPSfRdMqHoV2kF947+lrNgwaGPoiRc+dnq73nVzeuLMkhqM9nz+E2OfDvPIrlWFdx8JYQ5DN8I1fwCH8vSzGnC4J/Mhj3mcBsa9TpXCjvG5eNj85zi7h3DKmErOXRs73zAMzF37XfTFlvJBmnTsnDMdlSOafZP8k2ZZaoKs=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MW6PR12MB7088.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024)(22082099003)(56012099003)(18002099003)(38070700021);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?Nm5UL1pEVXI3djJpUHpiZ2NYbklMNXl0RExyUVFRWWQ1V0dBWFpuU052Yjkr?=
- =?utf-8?B?ZWh0MElEbEhUK0VmN3Y0aHRvSXNXRDVPOUt3TjJad1pWYzMzczJHR0NIRjdS?=
- =?utf-8?B?NERpVThlR3hwa0YrSERrcVdmVzdSdXR0MmlDek9vbG1NVkhaZGlWOVhXenV5?=
- =?utf-8?B?VlpLN1dqL0p2S3FLTk9zVVFIYzVrbHUzaklGOWdxQ3ZJaXIzeFpsMUczTmlk?=
- =?utf-8?B?TjFjcG9YMjR4d0Nsdlg5ZzM4YUxrbXhlY204dFV1bE9LYmpVUm56MmFhSGdU?=
- =?utf-8?B?MGIxQkVFWE5MTXd4ZXR6YlRubVczOXZkTktJUldCLzZ3SUV0bFlPbkVEVnhX?=
- =?utf-8?B?ZStubHpVOFErQzJNb1Q1MHRhclRWWFJvSld2NDIrVW5RanlaMkVLdlNZYWhr?=
- =?utf-8?B?SlE0UHNYblUxMmFSQ1lXWGNKWWtLdTJWSWppeUNvNXp6Sk5NUnZFWkpwd1dV?=
- =?utf-8?B?Rzh3TThxY1kwdUM2ZlVzdkZyMWdpaVNXRlRXQm1ZM3E3UXRUNEI5QXdIZ3lX?=
- =?utf-8?B?UVVkbFQ1dDVqTUZTcnhNODhLcUlwZWdJNkQzdTBWdnhNa3A5SGdaTmxMUGVz?=
- =?utf-8?B?MWJZQWJFOUFjQnAxbU5lamN6VDM5bm9od2tRSUpWaGlPZlFhcUFZeFdlTVA1?=
- =?utf-8?B?dlZyQ0dHVytON29EamphRkZzQzF1MDIzZ2tiRmNERjBqbHVoWnlIeGdaOTZY?=
- =?utf-8?B?eWlnNG5ZQ3RiMG5nampXUXZ6U0VncmJYNklQdEN0L2xSTFlCak9LVkFEcHpX?=
- =?utf-8?B?TmlveHJYOFJNaTVsbk9JWmlKbVBod0R3TVk2d0I1ZkdzZC84SlpNVFRXSTM0?=
- =?utf-8?B?NXRKay9UYzNoZm44cjRuNGN0R2EwZStheXluUG00R2V5RERON0ZXSTYzdnR0?=
- =?utf-8?B?RmNQc1RFQ1pQbkZEWTdZaXU2TFJTSEFVR1NFWnRKTEFnUzRVQnZmTHltb1gy?=
- =?utf-8?B?UjFiODFmVlFVUEJBenFZV3dna1JWdjNiYlRDL2x3emo0d1V0OUs0ci8vcUd5?=
- =?utf-8?B?cHM5S1BxUDM3aUxURTFsUUpHcEhEL3RsUFdNMGJGZndCYlBCMjJmMmE4WjN1?=
- =?utf-8?B?eFBZMkRid0dWcVQ4MWtSOFdUcVdVcFlGUUJHNy9CVVd3SVIyKytFNzZwbHlL?=
- =?utf-8?B?LzJGN2loSExmNDVyc2dDRHRXRERBdmRwU0xkQlNZVnNiTk1uM2hnQXJxVExR?=
- =?utf-8?B?M3Vkbm5Wd0syT3ppM2MwSmZFYmNqOGN5eU5JSkRIT2EwWVdjOFhuc2FiQXVR?=
- =?utf-8?B?ZHZubGEyU3U2aTJtTEVJUmN3Yk44QzhwdTRMbXFOMEV2dlJsbjdlRkhnN1pC?=
- =?utf-8?B?YVVxbVdPMWpGZWlXWTZOT0h6WVhDQlcyV00zTWVjL2hFcEhGdWd6ZkszWUlz?=
- =?utf-8?B?QktaN3dQUDBORWhFV2ovdGFoV0duMmlYVUtBd0N6a054NDJSYmhwbmJobjRI?=
- =?utf-8?B?QXkrY0ZPR05hRUdHbVNBOEI4eUZjWXhaS0tuaHZ3SDV0REs2UXAvdzlHTmtj?=
- =?utf-8?B?VTRGcjhJZWpNL08vR1FMdG84Q3VHaE5Db3FEU1hOSXhZMkdPUEhRR2NzY0Rk?=
- =?utf-8?B?eHdVM1RUYkQ5blFDbFVYMUZ0NXVaZ1pnRnUyMzZISTRmYXBTU2lQMGxZN3hm?=
- =?utf-8?B?UldTTDVIUjNvZUNma3VXSjBhbGFzS2Rid21odThaVkF2OUZLSFRRdUNDclc5?=
- =?utf-8?B?Z083bE0zaUlKZlNpajJMMDZLbS9Gc3YzbEtmTnJtbE10dGRvWXNpbW5DcFB2?=
- =?utf-8?B?dFhMK2JwVmhQM1dDTStkbERYU05aS1N0RmVGQStQY25vaXpNeTcvMXUzYVgw?=
- =?utf-8?B?bWR1Rm92M0ZSYlo2QTg1c1RLL2puS1Q3Z3dVVDg2VEFsZkltcUJkbWhUTmVw?=
- =?utf-8?B?QWMvUFZHdUFlb2lKRC9Ka0tNaktaQkxKc2Q5c29CK3Roc2xQTGNGYkYraC9C?=
- =?utf-8?B?WGZ5MTJUVjZkOEFBZmdpTHNOQzVYemRvV085dDZtMUJteTAra25JR0MxUkZQ?=
- =?utf-8?B?VldMelJjQkxXd0g3T2dJUFl1Rnk0NWlVMXY3SmxNZStuK3RTL1ZnbTlSYXdX?=
- =?utf-8?B?aDg5UXJSbjV1NUs5TUtiVlVPK3ZZWDNwVU55bzQ2OGRtVWJ1WFNXMWRDZStE?=
- =?utf-8?B?cVFmOVh2UDdRYnpIQUJSVEVQRnVGSDBhOWdvWHo3eXdKSjc0MUJOc05UN0Jz?=
- =?utf-8?B?dHNzcWhXbEM1dUZQTWVhd01uT1ZQaXUzU0lTT1gzWWRROXJoaWEyMW9uZXQ5?=
- =?utf-8?B?UlBuSEVPeUNEQXFsNXI3Q2w5OTZIdG9oSWttK1ovYlpsd3RQd3hmNndhdTRK?=
- =?utf-8?Q?PLRt2N4WCOU/OnN7k7?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=gregor.herburger@linutronix.de
+From: Gregor Herburger <gregor.herburger@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1775543702;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=EM0x0Yf1CFnWDRKEAdXlOh5YRMfniMWhNePeVbutZWA=;
+ b=AGNXGI+njg9bRSK3oR4e2jlcZG84NiHl4PwtZgAjNuQ+DQXszEP1ir0WyySBuC5FxLCptU
+ DjgRUmooxzMowamOy6Nc4CsF0G+XG61fdFjNr5b1IfR5pR9+ydiOCHwD9Wr+uie+Rs8f5J
+ Y4g889BZPC5jM842MKs773az8B8tCLQYQQ7EBJ20sPE75YksNmyJyXSR2YfjD0R2luClHJ
+ A/5GCCV2z/nk8I3lu3RR53Zx/ODFZaB8ryJPXENZ23k90uoRXmyhrKhcqFsR0uawTpmOMT
+ 9gZkPTSskuAfNCV1Zh3c1rygUnEjRuNdP+6se6iSxoxO1SXr0c3R5d1S2AM0AQ==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1775543702;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=EM0x0Yf1CFnWDRKEAdXlOh5YRMfniMWhNePeVbutZWA=;
+ b=xGCYqK/DXqxWNxW18QmbI6v3FWOGVUX2p9KrosmgbKVucQWny4exOKdiqW38ydqa5j78Yn
+ Rh2w0sy4ym9UdlBA==
+To: u-boot@lists.denx.de,
+	Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Gregor Herburger <gregor.herburger@linutronix.de>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ David Zang <davidzangcs@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 1/2] console: add console_flush_stdin()
+Date: Tue,  7 Apr 2026 08:33:10 +0200
+Message-ID: <20260407063453.18679-1-gregor.herburger@linutronix.de>
 MIME-Version: 1.0
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: MW6PR12MB7088.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f27229ec-538f-497e-2bc6-08de946d50c5
-X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Apr 2026 06:17:16.0465 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: ya/vjune4vl0I4zrSFz9Ysfu5KDfsgNpfNFwDhJd/aMOEu8pn9dwvoHHpHY2cSMM4KSkigwTrB8S8LZskPYUkA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB8124
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,32 +78,203 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-W1B1YmxpY10NCg0KSGkgQE1hcmVrIFZhc3V0LA0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0t
-LS0tDQo+IEZyb206IE1hcmVrIFZhc3V0IDxtYXJlay52YXN1dEBtYWlsYm94Lm9yZz4NCj4gU2Vu
-dDogTW9uZGF5LCBBcHJpbCA2LCAyMDI2IDk6MzUgUE0NCj4gVG86IFZpbmF5IFRpbGFrLCBQcmFu
-YXYgPFByYW5hdi5WaW5heVRpbGFrQGFtZC5jb20+OyB1LWJvb3RAbGlzdHMuZGVueC5kZTsNCj4g
-U2ltZWssIE1pY2hhbCA8bWljaGFsLnNpbWVrQGFtZC5jb20+DQo+IENjOiBnaXQgKEFNRC1YaWxp
-bngpIDxnaXRAYW1kLmNvbT47IEJlZ2FyaSwgUGFkbWFyYW8NCj4gPFBhZG1hcmFvLkJlZ2FyaUBh
-bWQuY29tPjsgSmVyb21lIEZvcmlzc2llcg0KPiA8amVyb21lLmZvcmlzc2llckBhcm0uY29tPjsg
-VG9tIFJpbmkgPHRyaW5pQGtvbnN1bGtvLmNvbT47IE1hcmVrIFZhc3V0DQo+IDxtYXJlay52YXN1
-dCtyZW5lc2FzQG1haWxib3gub3JnPjsgUmFtb24gRnJpZWQgPHJmcmllZC5kZXZAZ21haWwuY29t
-Pg0KPiBTdWJqZWN0OiBSZTogW1BBVENIXSBuZXQ6IHBoeTogZXRoZXJuZXRfaWQ6IGZpeCBkdXBs
-aWNhdGUgZXRoX3BoeSBiaW5kaW5nDQo+DQo+IE9uIDQvNi8yNiAxMDo0MSBBTSwgUHJhbmF2IFRp
-bGFrIHdyb3RlOg0KPiA+IFdoZW4gYm90aCBDT05GSUdfUEhZX0VUSEVSTkVUX0lEIGFuZCBDT05G
-SUdfRE1fRVRIX1BIWSBhcmUNCj4gZW5hYmxlZCwNCj4gPiBldGhfcGh5X2JpbmRzX25vZGVzKCkg
-Y2FsbGVkIGZyb20gZXRoX3Bvc3RfYmluZCgpIGFscmVhZHkgYmluZHMgdGhlDQo+ID4gZXRoZXJu
-ZXQgUEhZIG5vZGUgdG8gZXRoX3BoeV9nZW5lcmljX2Rydi4gSG93ZXZlciwNCj4gPiBwaHlfY29u
-bmVjdF9waHlfaWQoKSBjYWxsZWQgdmlhIHp5bnFfcGh5X2luaXQoKSAtPiBwaHlfY29ubmVjdCgp
-DQo+ID4gY2Fubm90IGF0dGFjaCB0byB0aGUgYWxyZWFkeSBib3VuZCBQSFkgZGV2aWNlIGFuZCBj
-cmVhdGVzIGEgc2Vjb25kDQo+ID4gaW5zdGFuY2UsIHJlc3VsdGluZyBpbiBkdXBsaWNhdGUgZW50
-cmllcyBpbiB0aGUgZG0gdHJlZS4NCj4gPg0KPiA+IEZpeCB0aGlzIGJ5IGd1YXJkaW5nIHRoZSBi
-aW5kL3Byb2JlIGJsb2NrIGluIHBoeV9jb25uZWN0X3BoeV9pZCgpIHdpdGgNCj4gPiB1Y2xhc3Nf
-Z2V0X2RldmljZV9ieV9vZm5vZGUoKSB0byBza2lwIHJlLWJpbmRpbmcgaWYgdGhlIFBIWSBub2Rl
-IGlzDQo+ID4gYWxyZWFkeSByZWdpc3RlcmVkIGluIFVDTEFTU19FVEhfUEhZLg0KPiBTaG91bGRu
-J3QgcGh5X2Nvbm5lY3QoKSBjaGVjayB3aGV0aGVyIHRoZSBQSFkgaXNuJ3QgYWxyZWFkeSBib3Vu
-ZCBhbmQgYmFpbA0KPiBlYXJseSBpZiBpdCBpcyA/DQoNClllcywgaSBjaGVja2VkIHdlIGNhbiBt
-b3ZlIHRoZSBkdXBsaWNhdGUgYmluZGluZyBjaGVjayBmcm9tIHBoeV9jb25uZWN0X3BoeV9pZCgp
-IHRvIGl0cyBjYWxsZXIgaW4gcGh5X2Nvbm5lY3QoKSBhbmQgdXNpbmcgdWNsYXNzX2dldF9kZXZp
-Y2VfYnlfcGhhbmRsZSgpIHRvIHNraXAgcmUtYmluZGluZyBpZiB0aGUgUEhZIG5vZGUgaXMgYWxy
-ZWFkeSByZWdpc3RlcmVkIGluIFVDTEFTU19FVEhfUEhZLiBXaWxsIHVwZGF0ZSBpbiB2Mi4NCg0K
-VGhhbmtzLA0KUHJhbmF2IFRpbGFrLg0K
+Add a common helper console_flush_stdin() to drain all pending
+characters from stdin. This consolidates the open-coded
+while (tstc()) getchar() pattern that appeared in multiple places
+across the tree.
+
+Signed-off-by: Gregor Herburger <gregor.herburger@linutronix.de>
+---
+
+(no changes since v2)
+
+ cmd/conitrace.c              |  4 ++--
+ cmd/eficonfig.c              |  6 +++---
+ cmd/eficonfig_sbkey.c        |  4 ++--
+ common/autoboot.c            | 11 +----------
+ common/console.c             | 12 ++++++++++--
+ include/console.h            |  5 +++++
+ lib/efi_loader/efi_console.c |  7 +++----
+ 7 files changed, 26 insertions(+), 23 deletions(-)
+
+diff --git a/cmd/conitrace.c b/cmd/conitrace.c
+index 6cc113328eb..aef094e03df 100644
+--- a/cmd/conitrace.c
++++ b/cmd/conitrace.c
+@@ -6,6 +6,7 @@
+  * Copyright (c) 2018, Heinrich Schuchardt <xypron.glpk@gmx.de>
+  */
+ #include <command.h>
++#include <console.h>
+ #include <linux/delay.h>
+ 
+ static int do_conitrace(struct cmd_tbl *cmdtp, int flag, int argc,
+@@ -17,8 +18,7 @@ static int do_conitrace(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	printf("To terminate type 'x'\n");
+ 
+ 	/* Empty input buffer */
+-	while (tstc())
+-		getchar();
++	console_flush_stdin();
+ 
+ 	for (;;) {
+ 		int c = getchar();
+diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
+index d8d946c87ac..60c39bc3a99 100644
+--- a/cmd/eficonfig.c
++++ b/cmd/eficonfig.c
+@@ -6,8 +6,9 @@
+  */
+ 
+ #include <ansi.h>
+-#include <cli.h>
+ #include <charset.h>
++#include <cli.h>
++#include <console.h>
+ #include <efi_device_path.h>
+ #include <efi_loader.h>
+ #include <efi_load_initrd.h>
+@@ -167,8 +168,7 @@ static void eficonfig_menu_adjust(struct efimenu *efi_menu, bool add)
+ void eficonfig_print_msg(char *msg)
+ {
+ 	/* Flush input */
+-	while (tstc())
+-		getchar();
++	console_flush_stdin();
+ 
+ 	printf(ANSI_CURSOR_HIDE
+ 	       ANSI_CLEAR_CONSOLE
+diff --git a/cmd/eficonfig_sbkey.c b/cmd/eficonfig_sbkey.c
+index b3325a540f9..a6c5416d3a5 100644
+--- a/cmd/eficonfig_sbkey.c
++++ b/cmd/eficonfig_sbkey.c
+@@ -7,6 +7,7 @@
+ 
+ #include <ansi.h>
+ #include <charset.h>
++#include <console.h>
+ #include <hexdump.h>
+ #include <log.h>
+ #include <malloc.h>
+@@ -288,8 +289,7 @@ static efi_status_t eficonfig_process_show_siglist(void *data)
+ 		}
+ 	}
+ 
+-	while (tstc())
+-		getchar();
++	console_flush_stdin();
+ 
+ 	printf("\n\n  Press any key to continue");
+ 	getchar();
+diff --git a/common/autoboot.c b/common/autoboot.c
+index 1783ef92c94..4b80ddb5b28 100644
+--- a/common/autoboot.c
++++ b/common/autoboot.c
+@@ -315,15 +315,6 @@ static int passwd_abort_key(uint64_t etime)
+ 	return abort;
+ }
+ 
+-/**
+- * flush_stdin() - drops all pending characters from stdin
+- */
+-static void flush_stdin(void)
+-{
+-	while (tstc())
+-		(void)getchar();
+-}
+-
+ /**
+  * fallback_to_sha256() - check whether we should fall back to sha256
+  *                        password checking
+@@ -354,7 +345,7 @@ static int abortboot_key_sequence(int bootdelay)
+ 	uint64_t etime = endtick(bootdelay);
+ 
+ 	if (IS_ENABLED(CONFIG_AUTOBOOT_FLUSH_STDIN))
+-		flush_stdin();
++		console_flush_stdin();
+ #  ifdef CONFIG_AUTOBOOT_PROMPT
+ 	/*
+ 	 * CONFIG_AUTOBOOT_PROMPT includes the %d for all boards.
+diff --git a/common/console.c b/common/console.c
+index 48586fd2166..90b437fd1fc 100644
+--- a/common/console.c
++++ b/common/console.c
+@@ -643,6 +643,15 @@ int tstc(void)
+ 	return serial_tstc();
+ }
+ 
++/**
++ * console_flush_stdin() - drops all pending characters from stdin
++ */
++void console_flush_stdin(void)
++{
++	while (tstc())
++		(void)getchar();
++}
++
+ #define PRE_CONSOLE_FLUSHPOINT1_SERIAL			0
+ #define PRE_CONSOLE_FLUSHPOINT2_EVERYTHING_BUT_SERIAL	1
+ 
+@@ -914,8 +923,7 @@ int confirm_yesno(void)
+ 	char str_input[5];
+ 
+ 	/* Flush input */
+-	while (tstc())
+-		getchar();
++	console_flush_stdin();
+ 	i = 0;
+ 	while (i < sizeof(str_input)) {
+ 		str_input[i] = getchar();
+diff --git a/include/console.h b/include/console.h
+index 8d0d7bb8a4c..01a04f28f31 100644
+--- a/include/console.h
++++ b/include/console.h
+@@ -202,6 +202,11 @@ int console_clear(void);
+  */
+ int console_remove_by_name(const char *name);
+ 
++/**
++ * console_flush_stdin() - drops all pending characters from stdin
++ */
++void console_flush_stdin(void);
++
+ /*
+  * CONSOLE multiplexing.
+  */
+diff --git a/lib/efi_loader/efi_console.c b/lib/efi_loader/efi_console.c
+index 068d1a0a7b7..f83415f2ed3 100644
+--- a/lib/efi_loader/efi_console.c
++++ b/lib/efi_loader/efi_console.c
+@@ -9,6 +9,7 @@
+ 
+ #include <ansi.h>
+ #include <charset.h>
++#include <console.h>
+ #include <efi_device_path.h>
+ #include <malloc.h>
+ #include <time.h>
+@@ -299,8 +300,7 @@ static int query_console_serial(int *rows, int *cols)
+ 	int n[2];
+ 
+ 	/* Empty input buffer */
+-	while (tstc())
+-		getchar();
++	console_flush_stdin();
+ 
+ 	/*
+ 	 * Not all terminals understand CSI [18t for querying the console size.
+@@ -957,8 +957,7 @@ static void efi_cin_check(void)
+  */
+ static void efi_cin_empty_buffer(void)
+ {
+-	while (tstc())
+-		getchar();
++	console_flush_stdin();
+ 	key_available = false;
+ }
+ 
+-- 
+2.47.3
+
+base-commit: c704af3c8b0f37929bce8c2a4bba27d6e89919c7
+branch: cmd-flush-stdin
