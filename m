@@ -4,87 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9642AEDB7E0
-	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 09:49:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ACDFEDB7EC
+	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 10:17:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEA4C83A41;
-	Tue,  7 Apr 2026 11:49:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D7C5F83A41;
+	Tue,  7 Apr 2026 12:17:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W6WTBCO6";
+	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="AJYcmNd+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 669C483F98; Tue,  7 Apr 2026 11:49:19 +0200 (CEST)
-Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
- [IPv6:2607:f8b0:4864:20::52b])
+ id 1279F83F98; Tue,  7 Apr 2026 12:17:45 +0200 (CEST)
+Received: from mail-dl1-x1233.google.com (mail-dl1-x1233.google.com
+ [IPv6:2607:f8b0:4864:20::1233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35A698352B
- for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 11:49:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE2D18352B
+ for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 12:17:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=visitorckw@gmail.com
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-c70ea5e9e9dso1955898a12.1
- for <u-boot@lists.denx.de>; Tue, 07 Apr 2026 02:49:17 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=thingy.jp
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
+Received: by mail-dl1-x1233.google.com with SMTP id
+ a92af1059eb24-1279eced0b9so5629572c88.0
+ for <u-boot@lists.denx.de>; Tue, 07 Apr 2026 03:17:41 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775557060; cv=none;
+ d=google.com; s=arc-20240605;
+ b=O8F0x6B4nFIsom0OGs5gz2Y3D4qEQm3dOaZuyg4cv9BM7MCNoiu9gIDmrCgwfUlLmq
+ jBCmlzbngwXKC4yzjvQ0zK4NXclRBtre7ABb2pHGBq2IQraQz2bm7N1yXff+kw8rIhZD
+ CN0Ikgf285QCH/vAPbPocFb6JZMy3UIGDZ4zYy7+iwmBuvHPK/3MksiBptvx/Gcf+WRS
+ NlKR800X+i7/SjvEn9/hVMUqYxK1nmgW5oJUdf6Se+sZDKwqhqkGaed+xqttgvgtp4ui
+ Ixh0bqW/63m2MMAIf8mr7EwzXqdhHQwIqEN8wqZc1T6lmZaIKiFt2DKPEn2WdAUvLmPR
+ T4Ng==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=wrQe5oHNvMzH/J0CM9OxjvZDkKEjQn+KFSDtTr5Zjrc=;
+ fh=iG9b5sHGu6FrKjVKxRyiQzV0om5tLq7uTHSsMP33bRI=;
+ b=UL9rBjOE7N/eTLNpbvn6XMU7GL7M145Kqae8jTCOLllKUK4hfLdu7Gx1YMT7dirN2t
+ poSWRdlHQJAKfgPRQXVTPqDQ02YmudSL6xgaK2jzuGrcjkvZT/O8FfKlfMisbJ4r/hj0
+ Kb2QnAnCDuY4rSWC28O94hIR89ZiuX3g7refk94zkPDFzog8/+USeJ+Ti4OKG1lfHLSA
+ Zrx4eLzbj7lrwGyQ35r0XN8Xvk1JNdjouIyp8HsoqhWSb0oqUl7aAjv2jaYD6+nQEcHX
+ Sy1Cmim7M4AtszsnMbRiGbwUyVINxfBpBTOQjzAA0ojk7vUTcSEy5UsdxwQnQidh8iE/
+ 2psg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1775555355; x=1776160155; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=PGojpPGpkIoQXx+jvmfGstXIhMAA796AdO0xHsGols4=;
- b=W6WTBCO6y3Xi5ZriXOcmWKQJBKUGxONltJiTUFwbgrK69GgoelCTEu7PO2uJh7YjQG
- 92p+T8bdgaqkpa0cCuvU8Far7tFb5K3dbTpEiFWnJqLn7wSLkhln/zpXeNoOtWh9o1xT
- xpjGeWPkWi8WjfPmaC0zJ1mXr8IHmz2BSJBtk/n5a0Olg7DdWo1MfrTBVxhSPQ70Impw
- GjDwSV9qfXgp5oEpIKcxiHvWMG5WLYItTKIAd5T31WGapjc1h09QYYimdTpTk+rtCjKh
- tbgJpLbPO8j2aL4axF/AuwgWh1MnKBVmP0gKMoXGUsUzmapL4a21MO8o6QgT1jaMTuUA
- 775w==
+ d=thingy.jp; s=google; t=1775557060; x=1776161860; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=wrQe5oHNvMzH/J0CM9OxjvZDkKEjQn+KFSDtTr5Zjrc=;
+ b=AJYcmNd+xEwxwhuGizRZZZenjjhhjqDXnJyjQbjyrmOqN07IH2MfKOa71spFL6n0q/
+ 7zNdu0BbGQPJ3hbpCGeU1gWIqQSlSULPlJeBmDsPT8VUwjcV4MP3WWdK0OE8WeeDTEF6
+ WCdHb96SxnZiXiIwcEHwq7+G8qEwu2Sa5MEmc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775555355; x=1776160155;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1775557060; x=1776161860;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PGojpPGpkIoQXx+jvmfGstXIhMAA796AdO0xHsGols4=;
- b=WMvjHVEPVRMSYa3oCYSdiDhI9nNljZ9pAkkbXfY8VTxiSCTp/tVL2nSOJMIkwGy4yL
- L7dc6DKce/Ik7w+hyMpqvDBGBd/23GkFZ/VcowXX8OEl6cp7HDSysgR7+ZJ4viPeVBGC
- MZT03sKGuHIFNiVn0wcWv2AxXMekISR3HVGPpZBYGEH2k7zv/u1Pxvwf2JiSWmruC9uK
- lR4aJ046rhXLNFg4jwvhY+7wREIIqZpMmyH3hggOcblUjVozV1GyIh4WyAIQgotClUqP
- UenJNySZIGDUq62SULbopN4BWduwvYid2VXyQOJKr+AESoGILl+iybsovyJVYaYM1nPx
- Kstg==
+ bh=wrQe5oHNvMzH/J0CM9OxjvZDkKEjQn+KFSDtTr5Zjrc=;
+ b=U3Rn8austBmVhUHqpa9OXOr7xY8tPQo6pTKRhFWxjL7NuuLEETRANY0YtiXY8tYQLE
+ CeuQPsotTygGToxa7kNPxr0BnEd3UzyD3zFtu20aPj+Le2bu0BGszBMsA5TzSZliKpCW
+ Z1AOj25EbbB27T9rUrjfugTCVpRQ+JONZyslyCQF1VXGttcWIbAzKwOd5jPws0KYKaMg
+ 4DEXQ6pPCJiq01GCmkYueC4yegyfj29H78KmS3Uscf88pzrKmBTuW7LxZPykV/bIP7Zn
+ CMkqO1gr7Ain8SmvTYziU9RXwiHW0+cKn1QXTsfwofYyHMzMeD1l1Mv87JsYDBqyQF47
+ WHtQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX9pVfNu2Q8IiE9jPfbXydlXafRIBKjWdnW5gCS7X/8EqW1utAM+EyfYxHQkjMQUae/KOGRSIE=@lists.denx.de
-X-Gm-Message-State: AOJu0YyIg7ga+mpRbcbLjnGwriwLJSVE/ki4XzE+/0bgo4W9EWz91ETM
- oETaoxnqA5CbfjPZWNKRuTQBc8aSGYAKKwJsL2PtyPWhhMYV7A+E4aq6U3zDuw==
-X-Gm-Gg: AeBDiesVwmEp1i6Z0psmthgswvVgLUy954sgecO7kuDS0RpdhvRwLS3kVTGZzCK4C3f
- TSxbCLFTFkAwMjd9WBSkGaQKlXjVnF5ECX6d5KVDH8ewtLqV0jyWHqoGsyD/7bKOfcHYTD4Ev1b
- ZnLJ2EGNskLx/pcfm6ZotPn0CL2fEmFZpuE6VZAE1kICo6Qlqj9RUJGwORuF8IMJv3LaKa3hl3m
- y0SmahqM+hNqUyPH+wIhs9rMP5SVJcifwEgm7UlbJO+hOKEV889bosP3XXnRqFgZD8Ou3Qr37eB
- HqQrg2Xl7K72P39I5IJkS+a4BfUKdzb2MRGrAEQnxvmgyKitNMUxbK2+lM+p/NzCqzET6dqR+Ur
- sBSAultGp0KpBebP9Fekc7jVR4X5gajxG2Rm72s9+AVtLgYcFE1raqt1a7bZZ2aRGXuWUZD1HGq
- hjfDUVlMmwaP7AE6QrvtTxHSJokpd76FaUdFF4EzAxYQI26KHTwc/zywSHX9UkLVLdJb6HY4Fp3
- 73wItdolKx2bj3ya6yZJiaS9yMGG6NkwV+Y80E=
-X-Received: by 2002:a17:903:2c07:b0:2b2:67ca:5ff1 with SMTP id
- d9443c01a7336-2b2818afe20mr176672035ad.31.1775555355533; 
- Tue, 07 Apr 2026 02:49:15 -0700 (PDT)
-Received: from visitorckw-work01.c.googlers.com.com
- (100.130.194.35.bc.googleusercontent.com. [35.194.130.100])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b27475bc2asm171878375ad.19.2026.04.07.02.49.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Apr 2026 02:49:14 -0700 (PDT)
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: bmeng.cn@gmail.com,
-	trini@konsulko.com
-Cc: tuomas.tynkkynen@iki.fi, sjg@chromium.org, daniel@thingy.jp,
- jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, u-boot@lists.denx.de,
- Kuan-Wei Chiu <visitorckw@gmail.com>
-Subject: [PATCH] virtio: mmio: Return error codes on probe failures
-Date: Tue,  7 Apr 2026 09:49:00 +0000
-Message-ID: <20260407094900.420176-1-visitorckw@gmail.com>
-X-Mailer: git-send-email 2.53.0.1213.gd9a14994de-goog
+ AJvYcCXKm5egXRGNsqK3I14K9nvPePUNHLshGFlE0YN30scmcIsgKo+m6IuAr/Yc86vkVCdMZopYOS8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxKm7HSNDiyQzkJx3GvMOn9oirK75Fb99DDid7vB7A2MGIhpYik
+ 8N+cF5qk7X39wuy7bIdZG77wUwBf8qe6yJGgM5MPZR6PHrFfd9pNr4sTXlYiTrpeQZd9CyA3DRO
+ VPyFQBIZFY/vqxDhm3ww1LZus06/X8RxGTLXcwZ/ORQ==
+X-Gm-Gg: AeBDievtc3IHAXeh/42Uc/BO+pLpfByaMXOMDxEQWFEnf2YlDk/VFC8ypxmpZV3XdwH
+ vy49A/y5l5Fstb7oIRf1l66XwayYKnekZAC637dht1nqbbV7mMV8nyZPggnEj8JNMT3992f/pEe
+ yle37l1FYQTaCiHt6/W5jqK5P9IUpLsilRyJQcKLHue1rKHFFe3xFrrXLfmm1dj+T0MJde4BbWv
+ wNx2VUAMYBqbhhJu2ob+rb/o2ca45VSPZ0NmyZi7kE3pRK53fRPb6udn7g8lnuNNe1xZAUfle7c
+ 7N6P
+X-Received: by 2002:a05:7022:49d:b0:12b:ed30:5a32 with SMTP id
+ a92af1059eb24-12bfb6e7d5cmr6643968c88.5.1775557059779; Tue, 07 Apr 2026
+ 03:17:39 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260407094900.420176-1-visitorckw@gmail.com>
+In-Reply-To: <20260407094900.420176-1-visitorckw@gmail.com>
+From: Daniel Palmer <daniel@thingy.jp>
+Date: Tue, 7 Apr 2026 19:17:28 +0900
+X-Gm-Features: AQROBzDZVLJPUKIGeFifUYQI6hUZkp7iFGq1ogrBuj4IYEgOzMepFxOsET4n9fU
+Message-ID: <CAFr9PX=zVHFmREtduEv_DVLieoLkKL9oSo=MrFL+NcBVgaEt7g@mail.gmail.com>
+Subject: Re: [PATCH] virtio: mmio: Return error codes on probe failures
+To: Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: bmeng.cn@gmail.com, trini@konsulko.com, tuomas.tynkkynen@iki.fi, 
+ sjg@chromium.org, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,55 +111,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently, virtio_mmio_probe() returns 0 when it encounters an invalid
-magic value, an unsupported version, or a dummy device (ID 0). In
-U-Boot's driver model, returning 0 indicates a successful probe. This
-causes the system to incorrectly register and activate invalid or
-placeholder devices, potentially leading to undefined behavior or
-crashes later on.
+Hi Kuan-Wei,
 
-Update the probe function to return appropriate error codes (-ENODEV
-for invalid magic values and dummy devices, and -ENXIO for unsupported
-versions). This fix correctly instructs the DM to abort the binding
-process.
+On Tue, 7 Apr 2026 at 18:49, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
+>
+> Currently, virtio_mmio_probe() returns 0 when it encounters an invalid
+> magic value, an unsupported version, or a dummy device (ID 0). In
+> U-Boot's driver model, returning 0 indicates a successful probe. This
+> causes the system to incorrectly register and activate invalid or
+> placeholder devices, potentially leading to undefined behavior or
+> crashes later on.
+>
+> Update the probe function to return appropriate error codes (-ENODEV
+> for invalid magic values and dummy devices, and -ENXIO for unsupported
+> versions). This fix correctly instructs the DM to abort the binding
+> process.
+>
+> Fixes: fdc4aca89ecb ("virtio: Add virtio over mmio transport driver")
+> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+> ---
+>  drivers/virtio/virtio_mmio.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
+> index 1cd737aca24..62afe609ec0 100644
+> --- a/drivers/virtio/virtio_mmio.c
+> +++ b/drivers/virtio/virtio_mmio.c
+> @@ -354,7 +354,7 @@ static int virtio_mmio_probe(struct udevice *udev)
+>         magic = readl(priv->base + VIRTIO_MMIO_MAGIC_VALUE);
+>         if (magic != ('v' | 'i' << 8 | 'r' << 16 | 't' << 24)) {
+>                 debug("(%s): wrong magic value 0x%08x!\n", udev->name, magic);
+> -               return 0;
+> +               return -ENODEV;
+>         }
+>
+>         /* Check device version */
+> @@ -362,7 +362,7 @@ static int virtio_mmio_probe(struct udevice *udev)
+>         if (priv->version < 1 || priv->version > 2) {
+>                 debug("(%s): version %d not supported!\n",
+>                       udev->name, priv->version);
+> -               return 0;
+> +               return -ENXIO;
+>         }
+>
+>         /* Check device ID */
+> @@ -372,7 +372,7 @@ static int virtio_mmio_probe(struct udevice *udev)
+>                  * virtio-mmio device with an ID 0 is a (dummy) placeholder
+>                  * with no function. End probing now with no error reported.
+>                  */
+> -               return 0;
+> +               return -ENODEV;
+>         }
+>         uc_priv->vendor = readl(priv->base + VIRTIO_MMIO_VENDOR_ID);
+>
+> --
+> 2.53.0.1213.gd9a14994de-goog
+>
 
-Fixes: fdc4aca89ecb ("virtio: Add virtio over mmio transport driver")
-Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
----
- drivers/virtio/virtio_mmio.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+I'm surprised I didn't notice this when working out the endian issues on m68k.
+I have build/boot tested on m68k and the change looks correct to me.
 
-diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
-index 1cd737aca24..62afe609ec0 100644
---- a/drivers/virtio/virtio_mmio.c
-+++ b/drivers/virtio/virtio_mmio.c
-@@ -354,7 +354,7 @@ static int virtio_mmio_probe(struct udevice *udev)
- 	magic = readl(priv->base + VIRTIO_MMIO_MAGIC_VALUE);
- 	if (magic != ('v' | 'i' << 8 | 'r' << 16 | 't' << 24)) {
- 		debug("(%s): wrong magic value 0x%08x!\n", udev->name, magic);
--		return 0;
-+		return -ENODEV;
- 	}
- 
- 	/* Check device version */
-@@ -362,7 +362,7 @@ static int virtio_mmio_probe(struct udevice *udev)
- 	if (priv->version < 1 || priv->version > 2) {
- 		debug("(%s): version %d not supported!\n",
- 		      udev->name, priv->version);
--		return 0;
-+		return -ENXIO;
- 	}
- 
- 	/* Check device ID */
-@@ -372,7 +372,7 @@ static int virtio_mmio_probe(struct udevice *udev)
- 		 * virtio-mmio device with an ID 0 is a (dummy) placeholder
- 		 * with no function. End probing now with no error reported.
- 		 */
--		return 0;
-+		return -ENODEV;
- 	}
- 	uc_priv->vendor = readl(priv->base + VIRTIO_MMIO_VENDOR_ID);
- 
--- 
-2.53.0.1213.gd9a14994de-goog
+Since I'm not the maintainer for this thing I guess:
 
+Acked-by: Daniel Palmer <daniel@thingy.jp>
