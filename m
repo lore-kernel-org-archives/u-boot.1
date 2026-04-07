@@ -4,102 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86F65FF5109
-	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 15:51:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88E38FF5104
+	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 16:01:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9FB08404A;
-	Tue,  7 Apr 2026 17:51:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C43BE8404A;
+	Tue,  7 Apr 2026 18:01:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="KGvx1ra1";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="N2Ft8Ljm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AAC3840B0; Tue,  7 Apr 2026 17:51:50 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id 31D59840BE; Tue,  7 Apr 2026 18:01:42 +0200 (CEST)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C02CE83F75
- for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 17:51:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EED8983F75
+ for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 18:01:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-4042905015cso3284041fac.0
- for <u-boot@lists.denx.de>; Tue, 07 Apr 2026 08:51:47 -0700 (PDT)
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-40946982a78so1653675fac.2
+ for <u-boot@lists.denx.de>; Tue, 07 Apr 2026 09:01:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1775577106; x=1776181906;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1775577698; x=1776182498;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ssLGCJdLs76DkWjr2G8Witl0TT5ApbQO2ccuTt1ZgZs=;
- b=KGvx1ra1hYzegXhMi3apfwL4FK65p06cbNgOJE2zKvkdOPrTB7svocYt1XUz4z9u8I
- i/NRKWdExfzbtJOmCuQuZaySXuoP89iswqPHzzXhOnpDqgjHySoDD1P2Sd1FGB7E5U0r
- dcpnn8E2BcXSk+34GAj4iSS4dQXOTkk9l2deIJxgkZx3JfNDt0viuxrk8RP2qY2c5GlA
- jiEFk30ouNWfsYEgmr3iJofqLayy/VFe6WW50YhfOhb9p/8fwwMD6Yhva3g5uDD8F7iI
- rtBY2t9TAM2P2vfwwUWoA+HOV9qewMrTToDrW+JiDxLudLSuVXH4HgjJmRbWK0oJKTLo
- 157A==
+ bh=MeRnzOC9gA/oAm0lTbGlZzn28YMfjPwYhyfLsxy8Kvs=;
+ b=N2Ft8Ljm4rnCw/cidcGuq4MlbUB80kPnK7BeZ5i5g1xqJiVpY+FSsrsSzDYwHHyiUg
+ 4KDxSY75SQ3oAe5K1Kk15ABdfX8PEQAJPupoMv+/7N77PqTyYup0bZ4FOJ4gtZVs6Crj
+ B82eflEAdy79fZ1wLS+L8pg4DbPizaitAUCpi97oLabbB6qmQABD66Rwkn+UFVAeOkeA
+ u9I03ApDgFf2bSYA9EGbieM1qS8RGF4X28HH2lKtxBKUA8K9zOr5Mf8mhDws6mKtJLob
+ tbO8PzFzxSdU8IcxsuthVlqMWQZvXracpcL0s1VO1SUR5N7rr+fKasQAUO+NP7/FYJRZ
+ Vhqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775577106; x=1776181906;
+ d=1e100.net; s=20251104; t=1775577698; x=1776182498;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=ssLGCJdLs76DkWjr2G8Witl0TT5ApbQO2ccuTt1ZgZs=;
- b=gQXWw9MkZ3OsmrvRYwr2A8QT/KAoTMtzCtaUKcyII1FWoeXJs9RA7HwhGqR4lCgeBM
- PyVXPUP47rkMewNTUeF6Bahqjm+Sw2dP0C3CXKMIPEqqVRM53prqjInIWteNsKtR0x5H
- ww4jYoI86OwFPkzPCABlwCZGOlzVmNWCVxp0nSabnbWoVgwTRK5G1Ebxj365a01tm0cM
- 63246iv2WzNyXMXPHFJbY9QceFbtsBc8sl2WLiPU/U2H11uWM13T1qDHrgHPOf5LA70a
- tVvqhscMQBoR4coV/DyN5FolcP8oXYQMxg4AeYC7mXWyBwrEWAsKr1mFlyIA4jMz/nuY
- z4QQ==
+ bh=MeRnzOC9gA/oAm0lTbGlZzn28YMfjPwYhyfLsxy8Kvs=;
+ b=F5YAM5ooz4lQACRaAjLoyaOvtSn0Tz6eXPoTRmPrkzZyAYQKcQymUuOpJAtAcAFyat
+ plPX0fq0cWvBMxXu7uWQcM54S6Pqs01HKmeSBhZLXSE8fA+Hx28ipaUs7oTexIjc3+5I
+ XJLVH/L3iDQetygfmh5R6JhrPUFdqaqbZcEuwPRHQGAqeC7JX8jk2ffUaD04Gy5lfJW5
+ 80Z9Uv6/2bJLR254/WmnrLFiv3v7bB7p/sVMYTYDdg8wh5WICyUc5Xq36qcpDTHrrD05
+ T/Z5Oq9GbrpZeMryCdCjByA8P7HR3uC5eYWZA3crNo/LS6JMvSdjkIbGmacItlVj3Obg
+ w8Tw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW9sKffjS18YY5dzwEXEQnEtdYSK0542ezBNQbskLpgBFivIFQmgq5JLPbn7zfsHWIPdTRAgT4=@lists.denx.de
-X-Gm-Message-State: AOJu0YxRhcrTCBRa6BlA5YsyzxlR6lt6AkLDyuverIYcg+ByZM+vEjYg
- b7zIVuaKd+iuOkOTSwHgpOoIPH5rPyP+R/9yebMLBdWupPZZdU7kdyBv33prZtwVRQk=
-X-Gm-Gg: AeBDieuJPwg0W1VngeMTg3yAUeiBdegnoXDUAysm5Ttasrpt2Rg+BbBoNTpEP7p6FCD
- xkuLRuz46uLNh5pA1H5c9+LqRBnqfamuSB+fgy3d+hle1za7IULhOKKZCe1aXKSY6lye9GZbVVE
- yI4/7Qxgoz8Z5AicFgFAZ/gknLpOvGnnnDoGi7Uf3v0yQwSy4LuAdSUKTbNnwn50BSqmEB7gTQz
- +oszMDShMyfTWLbgjzrS1REzPlMcDNfrZvIT3PZaZsLE9f4+2zhlsV44YwS3MTrPjA4wFrihJeR
- XNxdYElrWeICIm+6IJ650z71nKLoOz/5EKTivYyH/Yw4zY6JwPLJB+1ylO/1zTt9vPnu1votnH0
- unKwHp6XvK2X0kAtb/0KvmhULacy2NKUs0knuK/FPLdls+hqwbbNvtN7MEqniCFrDNlkicqC72b
- a7qbWGox3mflW/UA2cxlsNau7fvRex
-X-Received: by 2002:a05:6870:ff96:b0:41b:cc55:c398 with SMTP id
- 586e51a60fabf-4230fcd57b8mr9865375fac.15.1775577106336; 
- Tue, 07 Apr 2026 08:51:46 -0700 (PDT)
+ AJvYcCUu+aG4FjI/zAUnYliCk7W/3n0rfeyjc4j7b0lGlgUlIfh8Nq0d6Ze4xU0R2V34Gblr6VfMeIw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwBkAGnLdl9ztthUl3wqRhSpkFR7WFCN9ehJjRdCjENd9fdx4yt
+ EV0xUfBbpSK3vuQ7DvDM+fQxb+DRPEColSYN6B0C/jzSJM+9edawBODDg4K4vvoxelw=
+X-Gm-Gg: AeBDieut0adT52D0XVIByCIPJxVG4nCa8aY3k2dgrCpyTOaly/0SHXqjuF9ROejIyEw
+ eBUT7nF4cJjHLNRIs2OVMGEqbmtC7w8Ysz7ZG/tfdTKvOXfBs8SHN/F++2o1Y5OZPHk2B4VLKhy
+ iF4zHndc4MRABOuGvwazZFYpwIoEX0+qq5vomiM/yxoF1uOOfZRlfIXSncTipM5fIOOB8nUB6WD
+ nCG3P9WZMmeLcSESgTfCGieOn/4wFPXqzx/6+EAPKEdsEnVDtHhXWGquOH94EfA+EfYi36XAOuw
+ bLunXWuObH32UbyOYqDCY2pE0X75xgJExDdJWrWwcng2hxwTdiBkmRjcHPWNU2sqRvJAIuda4rV
+ nhG8T7HNp2SkUaj5aaaV7v3Ey9A9TsDBVKYcjuU7VNAjj+Dg/hlI0UfbTnyK502olUE8wH5uivs
+ xU1MTQuMU4yIF60ZiOlXIa1cETrfgV
+X-Received: by 2002:a05:6870:d146:b0:423:4cc7:b1b6 with SMTP id
+ 586e51a60fabf-4234cc7db2fmr6184707fac.22.1775577696609; 
+ Tue, 07 Apr 2026 09:01:36 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:f738:1ffd:6365:30a7])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4232eb3d0e4sm9550808fac.6.2026.04.07.08.51.45
+ 586e51a60fabf-42324017960sm9593484fac.7.2026.04.07.09.01.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Apr 2026 08:51:45 -0700 (PDT)
+ Tue, 07 Apr 2026 09:01:35 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
  Chunfeng Yun <chunfeng.yun@mediatek.com>, 
  Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-In-Reply-To: <20260330-pinctrl-mtk-fix-mt8189-v2-0-05a737ec623d@baylibre.com>
-References: <20260330-pinctrl-mtk-fix-mt8189-v2-0-05a737ec623d@baylibre.com>
-Subject: Re: [PATCH v2 0/4] pinctrl: mediatek: fix mt8189 MSDC and I2C pins
-Message-Id: <177557706092.837601.16901196602163566586.b4-ty@b4>
-Date: Tue, 07 Apr 2026 10:51:00 -0500
+ Macpaul Lin <macpaul.lin@mediatek.com>, Lukasz Majewski <lukma@denx.de>, 
+ David Lechner <dlechner@baylibre.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
+ Chris-QJ Chen <chris-qj.chen@mediatek.com>, 
+ Cathy Xu <ot_cathy.xu@mediatek.com>
+In-Reply-To: <20260323-mtk-mt8391-initial-support-v3-0-19dd92f4543f@baylibre.com>
+References: <20260323-mtk-mt8391-initial-support-v3-0-19dd92f4543f@baylibre.com>
+Subject: Re: [PATCH v3 0/6] boards: mediatek: initial support for Genio 720 EVK
+Message-Id: <177557768255.837601.14565870114374554567.b4-ty@b4>
+Date: Tue, 07 Apr 2026 11:01:22 -0500
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1101; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1327; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=3qU2U0L08wwkK1H7B03evrkJ/PfxnfCbXUmObOnyxCA=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp1SgJ2ORWkfprveyzoRGoJlkKCw8DEVbH7lVNl
- dFR0ozQttiJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCadUoCRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ABvAH/0lzof3uBJGddcGNsjm0mQzcRjwXJVWiXkrQM+z
- tjbCfzmVbJcnYMSqOtWy0Df5LfQyTGB5m2WKrGJKnerNfFWvLnACCLA6rV8lIxv7jlr3vXrkhNj
- Pbk4Vll0IsXSpFhoDZy3dfzwe0G4bn0JS43LBdGwwFSGXJpYwXAttHR315sBpSeTHY6CShjhjIc
- yPOfDjmuYtHzatWVGd5MYcZcoLCjrja66EsD6W48QAwRHKloDxygPBXxHNOOat5XrZOlK+b5QHo
- tM7X6GJMRRw73j9g5XnQ+ns2Sp/jeIP3cMWahPWz1SLXeZpl6bQs/LFEd1JxigDwXeHo7xZrnDH
- u8bQ=
+ bh=87RwZu0QSzxfLlK0SOGN7U0i7UmoZS2JvwvOosGas0U=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp1SpYZ0CYXrMqDQBrCMHUxdl+fZP16Jux3vSNq
+ FF5ZWjF/U+JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCadUqWBYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A/gcH/jlB6zMiom2oUHzXxuiocvH05tJRfcOc/Hfn1Ux
+ 17oJwTnlvYrp+jJ1WDzSOF0SMdo9alRRLW0L28HZkDzIaon6XOdJ7VhM1fiV9AlgpV8W5xkETcp
+ wBp6ZCVagZF0gNQqsYPFSAjUFAhV1vU4wY5kJZjPPbhVMogkf7eQdP42OngAieIMjUksctH61BM
+ CuLyTJc+XrcUo/+lpMbPZAVzYGuFGQQYSlZuvGHr2fw8SxFvO7sWdWY2ER8V4jErflP+/rcy/cF
+ J6XiKoSyXAthSlVq0hdF9DyanbRP2geyih9/OkGFFZ6eXZMyjxRMenk2P5j0mWoSJx1WrJ5yxnP
+ wby0=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -118,29 +122,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 30 Mar 2026 11:00:32 -0500, David Lechner wrote:
-> pinctrl: mediatek: fix mt8189 MSDC and I2C pins
+On Mon, 23 Mar 2026 15:16:51 -0500, David Lechner wrote:
+> boards: mediatek: initial support for Genio 720 EVK
 > 
-> When trying to use the SD card slot on the Genio 720 EVK, we found that
-> the pin configuration was not working entirely correctly.
+> These patches along with the listed prerequisites are enough to get the
+> MediaTek Genio 720 EVK board to boot into Linux from the eMMC (with a
+> bit of extra config that isn't included here because it isn't generic.)
 > 
-> It turns out that there are a couple of different ways to set bias
-> depending on the pin. One requires setting an RSEL register, which
-> hasn't been seen before in U-Boot, so we add a new pinctrl-mtk-common
-> function to handle this. Then we can fix the mt8189 driver.
+> This is currently being upstreamed in Linux as well, so we just have
+> some minimal devicetree files here to hold us over for a while until we
+> can switch to the upstream ones.
 > 
 > [...]
 
 Applied to mediatek-for-master, thanks!
 
-[1/4] pinctrl: mediatek: add handling for RSEL register
-      commit: 937884083ea8be579ac910cd9b9c69d15741aa12
-[2/4] pinctrl: mediatek: mt8189: fix pinconf bias
-      commit: 108e752b2aff29fa4f3fd141045a6cbaab389373
-[3/4] pinctrl: mediatek: print bias info along with pinmux
-      commit: 76da7482cf39633a05a3ffc2b3c77e9c576cb0c3
-[4/4] pinctrl: mediatek: mtk8189: set get_pinconf functions
-      commit: 29739f15c06ad59340fa638cf1af65567ea37e13
+[1/6] clk: mediatek: mt8189: add some VLP clocks
+      commit: c594a2a7ee9aa644999953fd64792ca3d1f98827
+[2/6] arm: mediatek: add support of MT8189 SoC family
+      commit: 437090305f9d1cbc7b8a7fff5d78ef31454ca283
+[3/6] arm: dts: mediatek: mt8189: Add pinmux macro header file
+      commit: 91a41a2084c9534f7c2201fe6767b4ad77356811
+[4/6] arm: dts: mediatek: Add MediaTek MT8189 dtsi file
+      commit: 2eb1c269b0a551f500e2e61c2ab5d8c69eb378b3
+[5/6] arm: dts: mediatek: Add MediaTek Genio 520/720 EVK DTS
+      commit: 06a4a171fba4cf7d7956e28d0a778deba092f8f8
+[6/6] board: mediatek: Add Genio 520/720 EVK defconfigs
+      commit: 75902cc1f407b7380b5659667f37b0ee6d3ef3ef
 
 Best regards,
 -- 
