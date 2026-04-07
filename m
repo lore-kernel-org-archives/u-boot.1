@@ -4,103 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D86CEFF5134
-	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 19:13:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A364EFF5136
+	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 19:28:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 473A58404A;
-	Tue,  7 Apr 2026 21:13:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 1A49D8404A;
+	Tue,  7 Apr 2026 21:28:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="ORzJxxqJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YysjEGn2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E72C840AB; Tue,  7 Apr 2026 21:13:42 +0200 (CEST)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id 8CDAC8405F; Tue,  7 Apr 2026 21:28:17 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EC5383936
- for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 21:13:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72AD083936
+ for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 21:28:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-688c2235cd4so309168eaf.0
- for <u-boot@lists.denx.de>; Tue, 07 Apr 2026 12:13:40 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7dbff06e4a6so580103a34.1
+ for <u-boot@lists.denx.de>; Tue, 07 Apr 2026 12:28:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1775589219; x=1776194019;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=l7uH2cF50hbvfco73InGqxpV7CDGFo/gzJl2I/lTw40=;
- b=ORzJxxqJUFw6yy45bahePL+YX8y02LGv5qPjDBIQDqjEBeOWvDNDjTlLcbrUH9loy8
- o5o+CurCxV74IdhXQP1pGNzuSqW6LO4HCzBlVoy+GO0H1KDPlLllK2AVK4ELmmV7nPl9
- iy1YUCc7urDtz4Rq7Pd00JSQBckIt+yqDuazAvjUsNikdJfLdOOEcTSx44DBLKKpCF+i
- ryAba1VGZnFvuwI2xt9wHy5JO+4KA1Tz3nVREdNwm/0KIWzaeg9zQLmCK5chR2xPPHrw
- WhrWmeAn2pmTMi7LdLWZ2ndz8BTjKRApEds49eAZIuLIW2+wxPfxtmOWxdN5brt4BdX2
- 1UKA==
+ d=konsulko.com; s=google; t=1775590094; x=1776194894; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=bAJ7mKsTYcepmpjaxXASgGTdWDeKZEtNhCHKv9CEXig=;
+ b=YysjEGn2FxAIcUtteNnO+swr0AYQyFy/uKD25y/4Lmm7osS159IAYnWiTeoL71BjSv
+ jUlemfgM099GYJnxRssWN5IbJCk6VzZiNJn61B9OyEyLgLzMiTTCZxkFknUHT466IPJe
+ QL8uS/ypNrFK/bJfeKPA5LYkN3pVUmDnQS1vI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775589219; x=1776194019;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=l7uH2cF50hbvfco73InGqxpV7CDGFo/gzJl2I/lTw40=;
- b=ZUs3K35nrnu76VD7kNey+mRuJ46z8Y3f//JKcuR4nwdE8K38dPUn+Wv3vjQ1bf+QqS
- n0zAor5Toxzrc/wHa66WfhsxThGyIL/oz8iQbNBMKjJt0emRsibcyT+QVb8fXVifi/03
- OpHcjB5ACxkWQNRQFJP7WNZidejz57xB+Re85FARmC65VMtVFL/kapJLKMsd0RAY4bvY
- +qYU1rup46hkVDnEJ2qetxg51UaXesU8BvPV8FCBoARTDbYadLM6ZwpiRpV3nQ1tjRel
- FJeo+sF/kZyaIWjl3Xf37jXxBgHdsFtNmAS/mGxQoJVrxps2Y7OJ3zht6DGj0CndOKpD
- K58A==
+ d=1e100.net; s=20251104; t=1775590094; x=1776194894;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=bAJ7mKsTYcepmpjaxXASgGTdWDeKZEtNhCHKv9CEXig=;
+ b=WnTzwqPgpoygvsJS8McjTvm4BRSO8GtOA1IpY3Csvl3GVeFIJ9AJKozT9icp1pIQfk
+ 7mzQh9zMLsvx9HuHNfcOlM1q1NKlQYKzQK4ZZ3pi27VQ5RbUVGx323/p1u3bsQuBdmkM
+ QrtzjqybJ3U+36i9PL82YbPMOFNBFGpEqWlHYTR7IYY3jNb6IKRoUZD9lbYVrSnbEzjQ
+ A997lPeLtWacSlaPh6ITgfTvV2uuJ0NP5at5aBbRtJtA37y09angN/2VV4UV0fN0ajAg
+ WCDykrLxMfYkiwxhJrif/26Pazu+/i1tV4cwYZSwVW9w4RG2fUTKlKYfmlqthgNRTzoW
+ Iosw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVDTfcDMUw1N1NOFq+tMAWE08LlkwsZMV7BoTNyw6Oipd9+q7SRHu1KaxREjkGugc14Sd8snWs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy06prsTTngyN+vvayS6kKkvgrb4lo37dgyx4+21xPc4el/pZ/5
- ymBzrGTaLH3Q00dtzfJQTf1h8fc1vJx4ofaV20Bo4mN/KbonkpYOF+pyUCbSYmwjgr49NUPdSR9
- bBsN0
-X-Gm-Gg: AeBDievMQJs2K5qGWElxm3V9rjswgPqPFsqTRbCA8jf6PFB9D7XcB4IJXRCcbMnhtaX
- sy/1jhJTOXNVegqggusKHiisN5dsfAci1mDpJnURhTmxqztRbc/o7jCG/Swga3KTarHChQod7jq
- YLUZor1rCWi+1dZlNzw2vJ3ryqazCPq0NQMjkOn+aGwhY4oQY+bc2rG7v8yxh9BDxasQFEdv4c6
- DxCETuEF8KM+Ty3WLX68D4S9iR0i3USEpBoBZ8iUpGYqIH3HrIBdumZ3m68nzU7qUbINghcQk1C
- RdVzNdGKqUDs/5le8spmaLbwaVpEqv+9qmpjnhSg8EORv7FOiDNDci2ObmdogBmzAAzD8PoFqmd
- qtYLQIk6SwJvODufsQm+sylXmArhqSqRAINss21LzuaOUmYCS4zsqwCm4N3ukK56eQF/fuEHn30
- depw7XOlUO6EOqoehzuF0w6+EnbL7q
-X-Received: by 2002:a05:6820:4716:b0:688:29ff:2de6 with SMTP id
- 006d021491bc7-68829ff3130mr1139481eaf.40.1775589218794; 
- Tue, 07 Apr 2026 12:13:38 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:f738:1ffd:6365:30a7])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6874bdf0f3esm2214990eaf.4.2026.04.07.12.13.38
+ AJvYcCUOeAddbi1In+5EB4PXefIb9RPuYQfVBYPuG/R1QKX9CsOEfekmUTPR6BC1fmuesKDl7jsei3c=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw1a0ghqvF//AiGSFiD5v5J5eZYaslrl+yb2v8qB3/WgAhzMgTc
+ h171RwHCKKtM7fjCnf07XBUKrZLMSXZIoupW5hWBVavwpF3LXzJvmGuGdo0R46KopZ8=
+X-Gm-Gg: AeBDievKash/ppKDsmB8OBAH7+W09/u/sMm7TI6LtJ3E39uU7LDJPYBP7noy1TgVd0f
+ I0KpDyEijvAo3F4/Dz/aE53f6P/3eRPd1lJ7/NWgqcllBv4p258Y+r/3dRtc6EdNz+rUv9PUb5b
+ WLoHh2maREGNYgptI2aDTP7+H5tD//Mb7K7oIXrzQPbDxvOsjVyoIvEbVbmhr9bvc9A1CIOAZA4
+ vgLI2fE3jnRQ32zQogn0CauC7m8TlP/xj7oOBNgbTHVAg/ACI0heFJOKTVddclfl0WOsCoyS/UW
+ K84ix71y51/3/LOT6/+Sg5vfueJ/wFeQVeLY+/TaV/F8fpB1WkFa7gDML1GjMSfaNuijTqVmEmN
+ Qj0OdzkNvc/C6zjLqWyJvJ+bW04iFvfg/IZi9UYwF2Smif7MQuGcoqX+EJ6+poQSW+U0mTjkra8
+ C01tq9P+R5cAw7Ftb0kHdrXfm+2J07SEiwmMXcw7M2e+fik6TictQbWZ4CBcTat46bGiJfD/0Pl
+ kZyIovQ8JOOPDVRQcREEXqXWPJzmGVLYJN5UazJvR8UK4/ixzq+ZX0P2KE=
+X-Received: by 2002:a05:6830:67fa:b0:7d7:c87a:4feb with SMTP id
+ 46e09a7af769-7dbb730ef6cmr12184853a34.30.1775590094121; 
+ Tue, 07 Apr 2026 12:28:14 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7dbf2ddd6c8sm2678425a34.23.2026.04.07.12.28.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Apr 2026 12:13:38 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-Date: Tue, 07 Apr 2026 14:13:25 -0500
-Subject: [PATCH] doc: release cycle: fix 2026.04 stats link
+ Tue, 07 Apr 2026 12:28:13 -0700 (PDT)
+Date: Tue, 7 Apr 2026 13:28:11 -0600
+From: Tom Rini <trini@konsulko.com>
+To: David Lechner <dlechner@baylibre.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] doc: release cycle: fix 2026.04 stats link
+Message-ID: <20260407192811.GB41863@bill-the-cat>
+References: <20260407-doc-fix-stats-link-v1-1-1b53b54f816b@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260407-doc-fix-stats-link-v1-1-1b53b54f816b@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDMBCF4avIrB1IQjDQq0gXaTLqWIklE6Ug3
- r2xLj947z9AKDMJPJoDMu0svKYK3TYQJp9GQo7VYJTplFUO4xpw4C9K8UVw4fRGR8YZr72NSkM
- 9fjLVxT/aP2/L9poplKsE5/kDG1AeTnYAAAA=
-X-Change-ID: 20260407-doc-fix-stats-link-7e272a1a4d01
-To: Tom Rini <trini@konsulko.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1050; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=EGDOBW0DFRpDLg99zf5ytQsuePQkYOjTsqeo2XxeyQs=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp1VdbimLdcsKTcDdEDIe5fqmVSH5R6rCT/Hoe0
- b7ugLMhMZ6JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCadVXWxYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AiYgIAJeD+agTVsYEOULslWbQpZUJMiOAUAeZskcgQ33
- rWP7+ZURFDSXJE26VL3L7O8y5gDoVQs5mvNFZXICOxONarWyYFGLqOwS3GuEayUzO+AOobfyGeZ
- vC1Yvbc5UEszXoclY1FRNS02Ft09phUtf6TvMb/RGNKDkB0Sh0Ijonfw/Nc0lViGgHEr94ueI2r
- jNeWDfn2/wn7M6FBQj/F43IsprIypBAK/5aQbBdnCssGV++FCzh4RaLPJQTJ5iL9miG62VfVj/F
- 9XMfGxCCndglB2te/RFgjj5WNmiCyQAezsk0MkHhyPv0p/alkZTScRjnJa5SW4NKkDXsK3lSE8w
- BuXU=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ijLhjEJbLdvGhEzE"
+Content-Disposition: inline
+In-Reply-To: <20260407-doc-fix-stats-link-v1-1-1b53b54f816b@baylibre.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,33 +98,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix the link to the 2026.04 stats page. It was likely copied from the
-2026.01 line below and not updated.
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
- doc/develop/release_cycle.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+--ijLhjEJbLdvGhEzE
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/doc/develop/release_cycle.rst b/doc/develop/release_cycle.rst
-index 8f5496f477e..69678f2897a 100644
---- a/doc/develop/release_cycle.rst
-+++ b/doc/develop/release_cycle.rst
-@@ -97,7 +97,7 @@ Note: these statistics are generated by our fork of `gitdm
- <https://source.denx.de/u-boot/gitdm>`_, which was originally created by
- Jonathan Corbet.
- 
--* :doc:`statistics/u-boot-stats-v2026.01` which was released on 06 April 2026.
-+* :doc:`statistics/u-boot-stats-v2026.04` which was released on 06 April 2026.
- 
- * :doc:`statistics/u-boot-stats-v2026.01` which was released on 05 January 2026.
- 
+On Tue, Apr 07, 2026 at 02:13:25PM -0500, David Lechner wrote:
 
----
-base-commit: 93f84ee022a8401421cdaab84fe7d106d83fdb4a
-change-id: 20260407-doc-fix-stats-link-7e272a1a4d01
+> Fix the link to the 2026.04 stats page. It was likely copied from the
+> 2026.01 line below and not updated.
 
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+Whoops, yes, it was. Thanks!
 
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--ijLhjEJbLdvGhEzE
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCadVayAAKCRAr4qD1Cr/k
+Ck6OAP9Xs8Fzzp2VcFdCU61hwK/q8g9ojIJr4eycm7e0SqLC6QD+PuP5DLHo0lBN
+8FmnkiJLMThUN+HNaYZwlX+E/5idoQU=
+=O7uN
+-----END PGP SIGNATURE-----
+
+--ijLhjEJbLdvGhEzE--
