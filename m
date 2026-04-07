@@ -4,115 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04A8DEDB7C4
-	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 07:15:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9844EDB7CA
+	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 07:36:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 402C883F98;
-	Tue,  7 Apr 2026 09:15:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 4361983936;
+	Tue,  7 Apr 2026 09:36:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ro18g4cV";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="XTZyXXT/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA0FF84034; Tue,  7 Apr 2026 09:15:23 +0200 (CEST)
-Received: from mail-dy1-x1335.google.com (mail-dy1-x1335.google.com
- [IPv6:2607:f8b0:4864:20::1335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 329A883F98; Tue,  7 Apr 2026 09:36:19 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DD058352B
- for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 09:15:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 44D018352B
+ for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 09:36:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-dy1-x1335.google.com with SMTP id
- 5a478bee46e88-2ce102afb0aso2990844eec.1
- for <u-boot@lists.denx.de>; Tue, 07 Apr 2026 00:15:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775546119; cv=none;
- d=google.com; s=arc-20240605;
- b=JtMDQHC3sITAilBZ0mCa3AGPCJsNzyDrh+BnDOLZY8EuDtzLeXWtFUtEos3S9XmP5F
- IYk3m5mQRskNqUNrWCTdhChafiNPSs2it1o5RoKDT2kwcsJHqhltek57GRBsopqhzTKC
- /Xfr79AvZpzeL69VUDgc1hJQQkMbt725tNXZoe7x7OcowP2iIJtJyftihhtaBAl6tyhC
- go+yZoqsnpFxALFqROmoe9cVnk5xmC3cFlje63asL2QPvBAc1N3RO/rUiYHCnCV2RqXP
- u6GjpSKmJ3j/8WbSeOPCGrHw+oXoNAceS2nPT4j6es0IKY4yMukZ4wksDF52Wtqmdt2k
- GR5A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=m+xXcKLNPMzgrOVTzHq6j8JX4T6FggX4MrPQvGk0pT4=;
- fh=85Z8+huWynni1WhQzjgWUjNLuIZs7aoXOc9QhJIzwF0=;
- b=cClfoeEZ0aKO9Xi6PmyowOk2MngxqKzzipHeooEGxkrcUr5E0xCCmn4xvZaQpmETI+
- mrtMU18HCIUS8NTbpooe6CyZaJn1OsHiKfHuWbEmOdKh1d/CE8vsNn3yPINHF88Mz7eb
- xMYHn8OUkv6OqYRyglNX6guYwMc+kTFalhQYFFxfYosKAeTA+t7ztYiTdf2ZI1aTNy6N
- CJtXybfxWyTRyy39SHEt2Zq4VmmQ+xWZwLvnbe8eyo5sLnyUakGcVXctKRATsEKYKZ7L
- z9e9jooVgJWWoJiE4sW6rFo1wo8LVi73VoPrKEqYKd+ypgCyjwBkt+q+O+55uGwi8EQ/
- 1p8A==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1775546119; x=1776150919;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=m+xXcKLNPMzgrOVTzHq6j8JX4T6FggX4MrPQvGk0pT4=;
- b=ro18g4cVZTC7VCng8goBMfujLjHXP4cRv4iU3LiuZnVSoUfLpst15CX5+e5kgpXoHE
- TZr0iMGH1fcLuwbc3wXkkJebw/FTFY6sFitgV+EvGp5DMzATt0FKfnBEBe+AHoFB3s57
- CfgxMmNjNFSlQV227mh2jvVwKxmto6dYp/IgU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775546119; x=1776150919;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=m+xXcKLNPMzgrOVTzHq6j8JX4T6FggX4MrPQvGk0pT4=;
- b=daR/hGMQmbOlsyzvKLJfhB1UBO+MWGs6PCH1BwzoXCvfMgKTLtRwctGj3q0LzaacPK
- /7I0jFCt4rWQzo0QyfKNnA/oOz9mpuj9MXd61IY035lL6Ahn2T2RxalW0ZAHG3XRVNd7
- hoo13DGXiBq75jmTNeeOVOcWw9vcRz3EXLht7neSmCfc7yb37Ay9LphvzQK5T5qC1HEQ
- rTbicEbdRjSITjMkpdZB0ABetiW/UGJw91VEZq0yCMcYW2Fqe7JD5xvp5aL+WObh3ZRW
- 0AGWbnV6j4bWuvR13+NLVFmU4+4Ps3AX98iimIretRTvWfeOHRkq+fvGxagxRZ6sjOJ9
- vzVA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWT71SmOhA4RZzNnjdKKVCXfjCpUsF+QBSf7vB/FgkHgZfUQHyzOoVn9oZK0Xzzy0AgOuoRF88=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxqtt42YpTCZz+08VRNhfpRyudw71rIvXQGlaMWaXFF4sAZNCQo
- klWB0sjCEKyOmM+7KKlW1v+77FCWnHI1/JRIn1qKpiMurzJ9PZGjsLniD4uOT9nWng1k3gUpcYk
- gjReGfRQqKPbTZfHv+JN6yJ+zCl4OfeNFIHD7wqteiw==
-X-Gm-Gg: AeBDieuEGeiftBqgzSXupyGYlWiJQnO3Kiz/rjIZuHszVUWxCjMOlEdpu51Zv+jaR2N
- BDkwt71uh7P+JPbnbmuqGHzcsLK8g+7niycci64pJHYARI9OPOFjrSoXD7pqsT10iX+Kpdqldic
- Lxc3dasfLiSQmSMo5ljV1WVEp4EIDnTRigBfSyl1NNhR48NMEvdB70lvrP+H1NWEgdBjMDFohQf
- k2LxKvVOm6HOpEjJMrqDShjwdXyJTuPp37y5jRcHhGEHvTMQCPvOCodptNYF3G4v1uEdo/+CuX5
- XK6ZLmRNoKtOSgodGsBbHPvIwIovs+l1PfE=
-X-Received: by 2002:a05:7300:3254:b0:2d1:1da1:a57c with SMTP id
- 5a478bee46e88-2d11da1a75cmr2235709eec.13.1775546119184; Tue, 07 Apr 2026
- 00:15:19 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=simona.toaca@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mPEzIQYiRxtmC2ZAIa4LLB+wdj+rbM4cJO1VRaeCVCFbLwGPe17TDoVZNbx+zqgkAXQlYcQtn3uW22VEs+DNRBNhMFlaCPqs+x4k5N8in0fcIQyV8ebVgr+4qss8hQfQ06Jhna6g3E2H1QRRBKFS3Jv9eCadABARgE9/T7MSiZmrwyFg0Iau407wdk9lcvPvq2sAq1Kk0GYAwXpaeTdyt9feN8vv4rF+9Y9CW8DWtrQ2u+z4RI+3AtfWG5zl4X/sWhW1Ea+orwQh+d0wZOcOU4n769yFt1mjIue8dOcIrZaKgduvW8gBOhPSKx3D5vkAPyXyqxCeWmTjNg9fo3nITw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7IGAcdCSipKmFmoZd3vIjigudp0gWT5P06WoEMDQve0=;
+ b=ecLsZIm2oEzuJjaZ9zVpw7O2j+qgvDRLWNLEEExcElfPD5w4esr0fDWD7zxsPsEKvaxfwe4tA1hCp8ijuOHVw1+2uDPGmjcTTEK5KqJ55z0R03tu6EpKNFzLBZtVWYgv/mKjLULDVuZFcObiBverYjcBX/f6dLnuOQY1jRSicyPEisnNnBWvOHWR9xDJjGCmhSiDb0aBIRMRmvZiKeFfK/R0eg+Ya6bgq9S6KpMPK5vZs0Hwerqio5O2+aTMlxCUVAJwvLzK4tTxiO1ywSgLuAOgpHjzfNZO71tL7nGJB2N0IzRagad0edY7SPMNsc0Enc6shH4Krm62vGy8ldvyWA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7IGAcdCSipKmFmoZd3vIjigudp0gWT5P06WoEMDQve0=;
+ b=XTZyXXT/A16yheyYfsAbmT5xO/V27L9XONwTVoAvcBSEylTLy0D6ITooW/uekAXTKYlqHCMXXJUOi+bAlG3zkKKoXPcDYEkeH9pSsce5USfZ4hLANL0w6X5TKVbXUJaB65bswnTAXbUDjDiYgkkR4WmNnvZXDK51h2oWLHLcl1JT8cK94KsYXxsJoGkGQHxTQSxskkuR6OQlzJx9x1i6sxSIYBCCPIbsngf7KExUNTtfhwF6+5ulu9OyXOXcu9PYJsKWgtQiHu622VaJ1hRDz8pnunlgO8DugObt54lTA7yxfLAX26A4W4813OeSJYfDyGDrl+U0v8B5L8hy0UIe3g==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from VI0PR04MB11917.eurprd04.prod.outlook.com (2603:10a6:800:306::9)
+ by DU4PR04MB10910.eurprd04.prod.outlook.com (2603:10a6:10:589::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.17; Tue, 7 Apr
+ 2026 07:36:15 +0000
+Received: from VI0PR04MB11917.eurprd04.prod.outlook.com
+ ([fe80::a506:3460:d2bc:26e7]) by VI0PR04MB11917.eurprd04.prod.outlook.com
+ ([fe80::a506:3460:d2bc:26e7%4]) with mapi id 15.20.9769.016; Tue, 7 Apr 2026
+ 07:36:12 +0000
+From: "Simona Toaca (OSS)" <simona.toaca@oss.nxp.com>
+To: u-boot@lists.denx.de
+Cc: simona.toaca@nxp.com, viorel.suman@nxp.com, ye.li@nxp.com,
+ marex@nabladev.com
+Subject: [PATCH] drivers: ddr: imx: Fix Kconfig for SAVED_DRAM_TIMING_BASE
+Date: Tue,  7 Apr 2026 10:47:17 +0300
+Message-ID: <20260407074717.2288035-1-simona.toaca@oss.nxp.com>
+X-Mailer: git-send-email 2.43.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: AS4P189CA0020.EURP189.PROD.OUTLOOK.COM
+ (2603:10a6:20b:5db::9) To VI0PR04MB11917.eurprd04.prod.outlook.com
+ (2603:10a6:800:306::9)
 MIME-Version: 1.0
-References: <20260304032441.31558-1-dinesh.maniyam@altera.com>
- <20260304032441.31558-2-dinesh.maniyam@altera.com>
- <20260304143920.GT1388590@bill-the-cat>
- <PH7PR03MB6942D3E727EC89DE074BC0EFF756A@PH7PR03MB6942.namprd03.prod.outlook.com>
- <CAOf5uwm9eEMKe=CVGbZavGgmv3SArnnLZNcJs1RZJW7H6vgw_Q@mail.gmail.com>
- <PH7PR03MB6942E3711A99A34A114E614AF75AA@PH7PR03MB6942.namprd03.prod.outlook.com>
-In-Reply-To: <PH7PR03MB6942E3711A99A34A114E614AF75AA@PH7PR03MB6942.namprd03.prod.outlook.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Tue, 7 Apr 2026 09:15:06 +0200
-X-Gm-Features: AQROBzBLt6gkr3F6_2G7P6r-LBekssD1pPnApLFMYO0J4Ym3qgXaXA9PAD5t1uw
-Message-ID: <CAOf5uwkrp37jF-8FNZ=dJw=xfwq-gAPockLwKkK71sutfiE62w@mail.gmail.com>
-Subject: Re: [PATCH 1/2] mtd: nand: raw: Kconfig: clean up SPL Cadence NAND
- dependencies
-To: "MANIYAM, DINESH" <dinesh.maniyam@altera.com>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot-Denx <u-boot@lists.denx.de>, 
- Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Richard Genoud <richard.genoud@bootlin.com>,
- James Hilliard <james.hilliard1@gmail.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, "Chee,
- Tien Fong" <tien.fong.chee@altera.com>, 
- "Hea, Kok Kiang" <kok.kiang.hea@altera.com>, "NG,
- BOON KHAI" <boon.khai.ng@altera.com>, 
- "YUSLAIMI, ALIF ZAKUAN" <alif.zakuan.yuslaimi@altera.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: VI0PR04MB11917:EE_|DU4PR04MB10910:EE_
+X-MS-Office365-Filtering-Correlation-Id: e72fe910-0367-47d2-13c6-08de947857df
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|19092799006|1800799024|366016|56012099003|18002099003; 
+X-Microsoft-Antispam-Message-Info: 0bYG4tbu79YL6LH0vM44pTGeT9yHYSF8NXmMrz73mjbBNEhlBK2yv5I2EbbjP/3VarxzmF0R6s0V1fhR3bGfPDxgSADlcwIL3jgoDh5BRJ3mXTz0zz8TS06y4jgits4fA97di/GEsnG5ery2MUguH638+1nr9/Rv+9uhE+KerzCi9JAo1Xk/53IU3hCxSEC+BYAnRfMsny4y7GjQEbKAaghHJRziZ9m2JCLIeUmYXiVb7JZ71FmLBk0rtLi/L5LpX15cbRKvosrKIxRDacoBk/B9OwHka8JaU9mCuuEMwtXmztXYavu+uFQgtRmE4K51zdsOrJy+Ban7V3mVJsDDtFxkmb2jcb2hE9z1x1b2mv15Qv93zeRY/OWwI5gy3O+uQiI6TCZqP7MyMqT81aDtDqBUbgK114TrRQCzK6ReLN/p6wXyz1VudUFF18vxog8ZteaGTzfaKsZfkA7H7y2W8NHpD/Tv/NYJph/vJa2fRU7echG1URFceqZVD+VZM+8vU9IYiFl5I4944VDWKYCBhDcXD7UfLK6k5k6UJ/xxF6vozWZEYIQ4xcIBatXcbZ6wVjBuoE0l2f04mmwFczq7fsx4U9fXN2q7N6gCLWaGyKmltJwPOA/F3Sa/DPDPIlwCFwjZvsv+0E3yjFOs5Vj4gTbCwB+fGOix5LhdgjUw6wK75LssIvJd8VZ9QEMQgyd1/9oF4SWCR2AZe+YD+Of5qCTxieY8BwJXpEkAgCLAJ+o=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:VI0PR04MB11917.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(19092799006)(1800799024)(366016)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?KgyV9YoMkEiy/Pv3+eilpnFflTSI5Bm7BV7QN2DP9oUwDDkS9bOOZBzOzRmf?=
+ =?us-ascii?Q?ptAcwgXAyNtSFL5FLJ2PLToWOsjinG+P6Tj+Nc/Lwx7UcDRcnzQnOzka/Mwp?=
+ =?us-ascii?Q?LXAw8F/5iXfFsx86239XjRhcDeRA/zmXc7G6S2m0Kvzjr8dai2gAuhbnhj6G?=
+ =?us-ascii?Q?OVMginCvqRc5/yI0W8m1CQDGNqkQXR9k0eRMZpSN9QjxeR+Z624Kecp+Qp+w?=
+ =?us-ascii?Q?exNK9WmFtTM1NgtpI8P+6D6v1u16qDfUlkRaFjsKXEd2MW1+62kpEkg1FHZm?=
+ =?us-ascii?Q?NiDEwXgmVvodZN9RepCVYa0TdMexuUNjTVJKdUR9ci0ycwnsFgYmofnK43Ht?=
+ =?us-ascii?Q?iHybIRE8HHgeKQgn5RnT+6E8r0gwxO5W78JyFCxw6f5l5aws+bMnIgwJ6uiq?=
+ =?us-ascii?Q?ASX1QzAwiyPXYOBathgMriWSvO3RrAYyQgB1SmHwl6CpR30HZpOnLks9fnae?=
+ =?us-ascii?Q?j/8kBdq7cOSZQUvDxNDr3HZtnUXU5JSCEOqJfHf/OvN1tMHY+IFADCW4BeCq?=
+ =?us-ascii?Q?e0A2v2ZyhTGwjE66Klmq+7ubrRmYQjJA7OyMCgiPR1FlsXA+3zBV1s7mmX9b?=
+ =?us-ascii?Q?jPaThoegOtvd8Z/kQ7XN5aszB444bRdwkzTcr9CAhMCxjyUlAcdv+83hfLN1?=
+ =?us-ascii?Q?oWJGJFw6K058m/HgrU9BUgLV80dtfhe1FXPYzXmDb4ky1Cw+iZ5/4WO0A1Nq?=
+ =?us-ascii?Q?MTSug3143DluQPxarMmpomBgBYMqSxCc9oFgI7BibkSSOmIAkGwonLK6mPpS?=
+ =?us-ascii?Q?A6mdKgDRDJL9ho7CvKNwkOVOfZUcBmanOSocXj+hXlNQAumpkRaHGJEeplUD?=
+ =?us-ascii?Q?eK7x8/gyFj7ACoupO+go3EaqRd73VaZJXxtgBEI9g2BUlCxv72UbieLwl7HS?=
+ =?us-ascii?Q?jgGDtR1+gm9MDWHAexRMTSl43kH1FGP27bg8S5N+96EYsZw0jCzT2UKVO0GO?=
+ =?us-ascii?Q?cdrFZZD4zxrjh0DVHkcSOmaNzVzMVR5Nr3yClMyzUFrBeMFse+c8sJdJXU1q?=
+ =?us-ascii?Q?f9fPF48o3MbBbEepknItOZfQuzOLZ4CjpyWb81rU5e/D/f5GYUxst8B10KS6?=
+ =?us-ascii?Q?eKXqQscWH3dTdrDYs+v9LKXcIte6bmCp5oANDSDTzJq3ce+2EVbito5u9Rcf?=
+ =?us-ascii?Q?JhMOAaI7ozUtTtd9A3p6doA97KYvTBwYfPuZvyM2nvKjukET7b81AlwJ1qQP?=
+ =?us-ascii?Q?Y2Dw+EWO6exoLgFfuIUk5Y9sKMGNs0GD3kKOAhS1rvvjZE3zXkV4rcod0YiY?=
+ =?us-ascii?Q?uy8cymAOOo4+xwFTTzyEdtX+lwd5qVGhnSG+PhROf6hI9Ez3cvS8dcWrkKrH?=
+ =?us-ascii?Q?fkMtoCW7u4n2/Ex7xd85tKsEug3nmeMk8MGOhZC8HR1nfnvkbIdebp0EswJ6?=
+ =?us-ascii?Q?yzGMUm5WT/XrJ5OL2R9guvwxw8Vu839BAY6zg/mrMl2L4ZWggbBV/N7wXdQ8?=
+ =?us-ascii?Q?foFVxw3Asktm2sW3J93Z0TZxKIb5mC1zky6SjM6mbkvuIogh4cJVX0jW8JNB?=
+ =?us-ascii?Q?pKaS2CgjvOxNwnYgR+Hk9vo/+6qZ/DWinWjGuEoI1Wyy3YNzM8sF1Xm9etMs?=
+ =?us-ascii?Q?nePx/NHnt1CyMnNTjOWg8QeE5075wssuxenwO+EaaZJv6Y7oyeXZX2s83tWo?=
+ =?us-ascii?Q?Tdaabl/tfa0k93YmXvR4oBSsRDxtsnhNkalnfZR2bz1dZPmzRWz54CMaozx+?=
+ =?us-ascii?Q?XZp9jBNcU1msFJghGfJqO5igwHXZQeSJgFp/Zq2tTsVHjiOxf9dXktCT804z?=
+ =?us-ascii?Q?12qa/ASJoQ=3D=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e72fe910-0367-47d2-13c6-08de947857df
+X-MS-Exchange-CrossTenant-AuthSource: VI0PR04MB11917.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Apr 2026 07:36:12.7824 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: BiVq5HjrFC9kD/bzj1iy9lqGHUAA87tAGm8Nda9PNplboc6RVL3TbC7iTNOMu0OLp9ngsnvQwIsko/Zleq4RhQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB10910
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,134 +138,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi DINESH
+From: Simona Toaca <simona.toaca@nxp.com>
 
-Your series is here, I will have time this week.
+The 'default' directive should be before 'help'.
 
-https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/commits/nand-0=
-7042026
+Signed-off-by: Simona Toaca <simona.toaca@nxp.com>
+---
+ drivers/ddr/imx/imx9/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I need to take care of other patches too. I have some Easter stops to
-address, and I also have other patches from Bootlin to finish
-reviewing and others to queue this week
+diff --git a/drivers/ddr/imx/imx9/Kconfig b/drivers/ddr/imx/imx9/Kconfig
+index 0a45340ffb6..b953bca4f06 100644
+--- a/drivers/ddr/imx/imx9/Kconfig
++++ b/drivers/ddr/imx/imx9/Kconfig
+@@ -24,9 +24,9 @@ config IMX9_DRAM_INLINE_ECC
+ 
+ config SAVED_DRAM_TIMING_BASE
+ 	hex "Define the base address for saved dram timing"
++	default 0x2051C000
+ 	help
+ 	  after DRAM is trained, need to save the dram related timming
+ 	  info into memory for low power use.
+-	default 0x2051C000
+ 
+ endmenu
+-- 
+2.43.0
 
-Michael
-
-On Tue, Apr 7, 2026 at 8:41=E2=80=AFAM MANIYAM, DINESH
-<dinesh.maniyam@altera.com> wrote:
->
-> Hi Michael,
->
-> > Hi
-> >
-> > Yes I have two series on my queue, I I will work on them this week.
-> >
-> > Michael
-> >
-> > Michael Nazzareno Trimarchi
-> > Co-Founder & Chief Executive Officer
-> > M. +39 347 913 2170
-> > michael@amarulasolutions.com
-> > __________________________________
-> >
-> > Amarula Solutions BV
-> > Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-> > T. +31 (0)85 111 9172
-> > info@amarulasolutions.com
-> > www.amarulasolutions.com
->
-> Any update on these 2 series?
->
-> Regards,
-> Dinesh
-> ________________________________
-> From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-> Sent: Thursday, 26 March 2026 1:57 pm
-> To: MANIYAM, DINESH <dinesh.maniyam@altera.com>
-> Cc: Tom Rini <trini@konsulko.com>; U-Boot-Denx <u-boot@lists.denx.de>; Ma=
-rek Vasut <marex@denx.de>; Simon Goldschmidt <simon.k.r.goldschmidt@gmail.c=
-om>; Dario Binacchi <dario.binacchi@amarulasolutions.com>; Richard Genoud <=
-richard.genoud@bootlin.com>; James Hilliard <james.hilliard1@gmail.com>; Mi=
-quel Raynal <miquel.raynal@bootlin.com>; Chee, Tien Fong <tien.fong.chee@al=
-tera.com>; Hea, Kok Kiang <kok.kiang.hea@altera.com>; NG, BOON KHAI <boon.k=
-hai.ng@altera.com>; YUSLAIMI, ALIF ZAKUAN <alif.zakuan.yuslaimi@altera.com>
-> Subject: Re: [PATCH 1/2] mtd: nand: raw: Kconfig: clean up SPL Cadence NA=
-ND dependencies
->
->
-> [CAUTION: This email is from outside your organization. Unless you trust =
-the sender, do not click on links or open attachments as it may be a fraudu=
-lent email attempting to steal your information and/or compromise your comp=
-uter.]
->
-> Hi
->
-> Yes I have two series on my queue, I I will work on them this week.
->
-> Michael
->
-> Michael Nazzareno Trimarchi
-> Co-Founder & Chief Executive Officer
-> M. +39 347 913 2170
-> michael@amarulasolutions.com
-> __________________________________
->
-> Amarula Solutions BV
-> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-> T. +31 (0)85 111 9172
-> info@amarulasolutions.com
-> www.amarulasolutions.com
->
-> Il gio 26 mar 2026, 03:57 MANIYAM, DINESH <dinesh.maniyam@altera.com> ha =
-scritto:
->
-> Hi Michael,
->
->
-> ________________________________
-> From: Tom Rini
-> Sent: Wednesday, March 4, 2026 10:39 PM
-> To: MANIYAM, DINESH
-> Cc: u-boot@lists.denx.de; Marek Vasut; Simon Goldschmidt; Dario Binacchi;=
- Michael Trimarchi; Richard Genoud; James Hilliard; Miquel Raynal; Chee, Ti=
-en Fong; Hea, Kok Kiang; NG, BOON KHAI; YUSLAIMI, ALIF ZAKUAN
-> Subject: Re: [PATCH 1/2] mtd: nand: raw: Kconfig: clean up SPL Cadence NA=
-ND dependencies
->
-> On Wed, Mar 04, 2026 at 11:24:40AM +0800, dinesh.maniyam@altera.com wrote=
-:
->
-> > From: Dinesh Maniyam <dinesh.maniyam@altera.com>
-> >
-> > Fix and align Kconfig dependencies for Cadence NAND in SPL.
-> > Move SPL-specific selects to SPL_NAND_CADENCE and remove them from the
-> > non-SPL NAND_CADENCE option. This avoids incorrect symbol selection and
-> > keeps SPL Cadence NAND support self-contained.
-> >
-> > Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
->
-> Reviewed-by: Tom Rini <trini@konsulko.com>
->
-> --
-> Tom
->
-> This patch has been reviewed by Tom Rini.
-> When you have a chance, could you please take a look?
-> If there are no further concerns, I=E2=80=99d appreciate your considerati=
-on for merging.
-> Thanks for your time.
->
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
