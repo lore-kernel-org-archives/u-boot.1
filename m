@@ -4,118 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CFD6FEEF2A
-	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 11:56:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C273FEEF29
+	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 12:34:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8216483A41;
-	Tue,  7 Apr 2026 13:56:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9789783F98;
+	Tue,  7 Apr 2026 14:34:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OOfDoSmz";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="SWuJMSb+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A66FA83F98; Tue,  7 Apr 2026 13:56:50 +0200 (CEST)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6570784034; Tue,  7 Apr 2026 14:34:52 +0200 (CEST)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCAFC8352B
- for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 13:56:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F31083A41
+ for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 14:34:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-5a2beddab48so4865908e87.1
- for <u-boot@lists.denx.de>; Tue, 07 Apr 2026 04:56:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775563008; cv=none;
- d=google.com; s=arc-20240605;
- b=Aqo7wlZ9gknVTsKerzt9vCCA4GZvd+cBlsv7Ud/IE1LjK/VXQPuI2G1nFuW3BO9rIM
- 7tDJAs9piodZ7dC6V5q9PW2tFNu9TwQAgdJLZkOoj353qYbIeoe/vzDmR1NZFR76+Rc/
- CQ+GAoPG+Qvjdu81amhRtsZC6gU6i0hm7FsCb1eYbGy7QGvs0Q+UJG8vE/xvIjLevvni
- Fy90SoeQcfxXU42aTMzqkdM5WlVFTtbiQPUYdDwqa/kpTSCqpSqDSfvuwiOxZBA3Df3g
- Q2Xlz0/JMqjP3brSJ0UPuUUVC4ATUbs3tcCBGKiDZIwhvWrgdS6auYCZ7HVNxgkqjtbO
- I+qA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=eHddnZHYKG5WxHYSalGAfTH8R9Df1h3wRkw7SnQ4clA=;
- fh=HwURUStOJzBCJI1S06E4hgOV0nvIdOggDo2gcAjO7IQ=;
- b=WwGUxo356TROshFgTX+bX9n5xnp/zk2bDjxl1kKHLmiDkwWSsstaBN5vi2YC0hxUWh
- 8pFmCsGf8jSaNHJGDcc0hdaFOgrXMoRDXA0rjHmqzmonmBe4kJ6kCYLQpMcYgk+e/Tuj
- i6HQ+aBvvMjvr+W8cLA13N3xRi3uwOwfGvqcCznrJVQ0ZKlQPMU7twWVHKfc2UY6gHPk
- jWznHA26e2ul6LiUlXXQsPuG1ot5TpsWT4vj3tmiFGvxA2FOBigHeIcHirmg7lN5UhL9
- 222kn9mnMxbNslRUUMU/tV2mDnTMYirnkqqi0apPTOp6Aq+ax6mCUdmLlyK1esQ5cMsd
- iuYQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1775563008; x=1776167808; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eHddnZHYKG5WxHYSalGAfTH8R9Df1h3wRkw7SnQ4clA=;
- b=OOfDoSmzTsNRW5u3kEC+ALzQDQEMh8qE3TrUBuOUHVe9hhXb6SM+RdTArWFyJqaw73
- TSYCaSAr56sXMMqfnd+Npth1KFn2qHVt5ZtfVX8+QBgaDQn2sKzmlW9Q7YagYJz+al0D
- nYicMA5Bn6SSygLrcr9bIdsWYCY81QFOUooho1AXr8gtXAkbd3oYuZoIlb/GiEvr8x9I
- 339eNYmCPJ+VwyNLwMYtQ0XSa46xjR+PqPgzLGOkAc8TVlOS3TmdmKjH5tR2mqaxG8nS
- RFhGos/dfDbJDKzW8jabMSMjP6WJgJT3FYdKMiyOX9pV7TCxAUsaWt93aFefSRgnB4Qp
- 0z0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775563008; x=1776167808;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=eHddnZHYKG5WxHYSalGAfTH8R9Df1h3wRkw7SnQ4clA=;
- b=TcP9vCL6B2gOESI6hACu8hRuEPUG/kCrg3entfedYNkGxpzGdyN05UON4+A4VOVTeB
- ymNQhm54V6Iui+15nqgQ7PAAIqQ6jSaFM1c7BlU9xUbMItHwTPYTTO1QJK6iyV0CZGh2
- rT8DA+w1tBgxrhzUdvi0cU2+eUlJZFlqzOoKJ9f0Z24Bd3JX57+8x3poTgw9jipN58cL
- mEIqoUxOBr5QhfoyZzqJF4oPSUlzvpcjeW2+DCTSXiBK/AiacjdKLogkyuX5MiJxf3mj
- +PfGIPB5lbb8FaPKCjqEm6vp+aSoK7Tks4KXj9DHf5I1eisDHF5wBSTQgCMREt0idbHF
- tCiQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUNXjtcLb+ut+zsr43GK9sosc9OQ60VYBOLekTn9qThOGjfNtYPl2kxXorsuabVez5vob5I24I=@lists.denx.de
-X-Gm-Message-State: AOJu0YwPvOTk7Df3r+U23BiuRZjIU1zgfTBDuWEYE9fnCnksewTb7HQe
- 8Q5szluEcBcIU6KOtslVDOBHMdQfGm1DpVj6KFVHRPnPOXzkyk42wOS06CnOgvAW3tjJxZ37g4o
- kOztWnt+sONEXWmCgn5RNGRrttnZJdcU=
-X-Gm-Gg: AeBDievW7GAgjGBnFDDpQjmZjSJwFgGrgwPFO3wO7ibnuT/JQ1GY3qpRg8ar+x6H05w
- FgxwbTZjhn2jaLyUtUAhROgBeTblY4cSfMXUti5ZiCqRjrNSQeyuio8NwxdlaoocZEdafIPFpe7
- I9LIjFe9eQXPzPHGFpNNGSpf93oi+jv9jOgHMzdhJybNIoL8OYcGXVeYL8TwYEuEYl6zCwkjrHN
- SSjRxlrGItXtY0xWScKDcTNXfeFNQY2jxBCTd2pHNXDciQeWx/TYkUT0573/QK6lMsVL5uIIEiw
- RozlJ1/LuruWWypGzcWhxLMKTlhsEPUF0ApDHyNTPD/9yBuctTrE+NdEbboP5x38oQrFNq/2ki7
- G7USzBwk=
-X-Received: by 2002:a05:6512:3f0c:b0:5a2:c82d:3ce5 with SMTP id
- 2adb3069b0e04-5a337580543mr5354638e87.22.1775563007660; Tue, 07 Apr 2026
- 04:56:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-02.galae.net (Postfix) with ESMTPS id A76CC1A31C6
+ for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 12:34:49 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 7DA29603C7;
+ Tue,  7 Apr 2026 12:34:49 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 8D11A1045020A; 
+ Tue,  7 Apr 2026 14:34:47 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1775565289; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=gAWJ1CXGkcWuqYOS/wMlkfzn1D0YhLqHeosmqzeLqmc=;
+ b=SWuJMSb+YlqONKf+Xpyo6OEwHyH3jea6bAF0rCGPvCK/tkK92A/GRLbQkhm2jpUo2vGMhS
+ Tom7sXfnHcbvvRDmu/C70l9Yb2PZNaX4xZxRlBMAOlkx/AoJF3KInmNRsRN0kr+BIjRQQg
+ 5n3PJkHVIRvcSz4d9WDPvePJGXtzw2S2PDq3BZIjcsHGX8AJRIN9ky4xEtiXUzMSCS/P4N
+ xNNvfh3nqh/1lmgFqStBurde4SFo/so+pIPsC0BV1Fv6yk04JmVmxyygsAqvp5PZmoSIoz
+ TsEdn8r5g18vF8GJMZ3KRiiO7/u6o+j2t2+esOy9QdE1uwX3eUfZnaH3TKvbDg==
+From: Kory Maincent <kory.maincent@bootlin.com>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, ilias.apalodimas@linaro.org,
+ Kory Maincent <kory.maincent@bootlin.com>, thomas.petazzoni@bootlin.com,
+ Sughosh Ganu <sughosh.ganu@arm.com>
+Subject: [PATCH] tools: fwumdata: Fix use-after-free in parse_config()
+Date: Tue,  7 Apr 2026 14:34:35 +0200
+Message-ID: <20260407123438.48582-1-kory.maincent@bootlin.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260403-enetc-v1-0-e42ae28ae3fe@nxp.com>
- <20260403-enetc-v1-3-e42ae28ae3fe@nxp.com>
- <CAOMZO5A_Tg4XOYvUekNH8a-t+_0nL7WU8fM1W1LK3QcQDHTsjQ@mail.gmail.com>
- <PAXPR04MB9644FCCC862BC4144D23F74FE25AA@PAXPR04MB9644.eurprd04.prod.outlook.com>
-In-Reply-To: <PAXPR04MB9644FCCC862BC4144D23F74FE25AA@PAXPR04MB9644.eurprd04.prod.outlook.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 7 Apr 2026 08:56:36 -0300
-X-Gm-Features: AQROBzDOifqqCIJaeNw5d8_URiuiXvuyWUAjXY0BCKr5wL7Fj9pbZuZ3_aanw_w
-Message-ID: <CAOMZO5AsKQPHHa760JpznaF2znX+cTv=g6pabvsRyMpgRugY8Q@mail.gmail.com>
-Subject: Re: [EXT] Re: [PATCH v1 3/3] imx952_evk: Enable ENETC0
-To: Alice Guo <alice.guo@nxp.com>
-Cc: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Marek Vasut <marex@nabladev.com>,
- "tharvey@gateworks.com" <tharvey@gateworks.com>, Ye Li <ye.li@nxp.com>, 
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, dl-uboot-imx <uboot-imx@nxp.com>,
- Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>, 
- =?UTF-8?Q?Thomas_Sch=C3=A4fer?= <thomas.schaefer@kontron.com>, 
- Michael Walle <mwalle@kernel.org>, Clark Wang <xiaoning.wang@nxp.com>, 
- Christian Marangi <ansuelsmth@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Robert Marko <robert.marko@sartura.hr>, 
- Yao Zi <me@ziyao.cc>, Heiko Thiery <heiko.thiery@gmail.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>, 
- Jacky Bai <ping.bai@nxp.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Stefano Babic <sbabic@nabladev.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,12 +70,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alice,
+In parse_config(), devname is dynamically allocated by sscanf().
+When sscanf() fails to fill enough fields (rc < 3), devname is freed and
+the loop continues to the next line. However, if the next call to sscanf()
+fails to match (rc == 0), devname is not written and still holds the stale
+freed pointer. The subsequent free(devname) then operates on
+already-freed memory.
 
-On Tue, Apr 7, 2026 at 4:16=E2=80=AFAM Alice Guo <alice.guo@nxp.com> wrote:
+Fix this by resetting devname to NULL before each sscanf() call, so
+that a non-matching call leaves a NULL pointer and the subsequent
+free() becomes a harmless no-op.
 
-> ENETC device tree nodes have not yet been submitted to the Linux. They ar=
-e not present in linux-next or devicetree-rebasing. Do I need to resubmit t=
-he patch to U-Boot after these nodes are included in linux-next?
+Reported-by: Coverity Scan
+Link: https://lists.denx.de/pipermail/u-boot/2026-April/614161.html
+Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+---
+ tools/fwumdata_src/fwumdata.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Yes, please.
+diff --git a/tools/fwumdata_src/fwumdata.c b/tools/fwumdata_src/fwumdata.c
+index c5b0f56842d..44195ce2bf2 100644
+--- a/tools/fwumdata_src/fwumdata.c
++++ b/tools/fwumdata_src/fwumdata.c
+@@ -84,6 +84,7 @@ static int parse_config(const char *fname)
+ 		if (line[0] == '#' || line[0] == '\n')
+ 			continue;
+ 
++		devname = NULL;
+ 		rc = sscanf(line, "%ms %lli %lx %lx",
+ 			    &devname,
+ 			    &devices[i].devoff,
+-- 
+2.43.0
+
