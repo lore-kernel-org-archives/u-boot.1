@@ -4,56 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A21ECEDB7F2
-	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 10:38:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4FCDEDB7F2
+	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 10:43:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21D8983A41;
-	Tue,  7 Apr 2026 12:38:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
+	by phobos.denx.de (Postfix) with ESMTP id 7231A83A41;
+	Tue,  7 Apr 2026 12:43:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="Y7A9LL68";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TTi7WTDc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A94483F98; Tue,  7 Apr 2026 12:38:10 +0200 (CEST)
-Received: from mail.thorsis.com (mail.thorsis.com [217.92.40.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E834F84034; Tue,  7 Apr 2026 12:43:44 +0200 (CEST)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E8808352B
- for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 12:38:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=thorsis.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 66AAB148FE7B; Tue,  7 Apr 2026 12:38:06 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
- t=1775558287; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- in-reply-to:references; bh=E+ZBz78g/zkLUzKo4SaZmGRzY/sb5am2fg/tYuP2yuM=;
- b=Y7A9LL68Jyismz7qELnH1KNEmccfjEVZH2KODnMXdTbTfJcrDrraKrlBsI2NVJrOImC2oJ
- npUIlnMnzXlMTeDTUMYKUBT0P8Y4gZYsiU3oby0+XwUwIDlWQPTFkpbqkWao5PUlytMQEt
- OammgU7LgiwLHoiesklljkdwppZGLMLYsPwrg3+s22zG1edDiJdigthyfLc67cJw+1fhFw
- iq98+bmZvR2Y5kA2nZSjwwg3Gj2VkjOo1yhkqa8eVkCYPsQ9Oe5vR/H0KZOyMRx32FnoHp
- IdQYTLYugAEpy67ZkbpH288aUu2YhjKQMYNIlHmfMLJ2tih98GI3hQApzvPjZg==
-Date: Tue, 7 Apr 2026 12:38:02 +0200
-From: Alexander Dahl <ada@thorsis.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@amd.com,
- Pieter Van Trappen <pieter.van.trappen@cern.ch>,
- Tom Rini <trini@konsulko.com>, Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>
-Subject: Re: [PATCH] cmd: fpga: Fix wrong preprocessor guard for loadb help
- text
-Message-ID: <20260407-contusion-daylight-5eeffaaab47e@thorsis.com>
-Mail-Followup-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de,
- git@amd.com, Pieter Van Trappen <pieter.van.trappen@cern.ch>,
- Tom Rini <trini@konsulko.com>,
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>
-References: <366dfe78e2028f53a6274da75547fb68844764cc.1775549229.git.michal.simek@amd.com>
+ by phobos.denx.de (Postfix) with ESMTPS id BB5358352B
+ for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 12:43:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=visitorckw@gmail.com
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-35d932cc948so2835883a91.2
+ for <u-boot@lists.denx.de>; Tue, 07 Apr 2026 03:43:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1775558621; x=1776163421; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=B0wG/Z2TOWRDtWhNHfDppOEjfP1XlYkqucCdQha+2j0=;
+ b=TTi7WTDc52N1JeBiOX4DZQB/qEqYnOgJif/VyOjjI6SrioqrBeYnDRMXophFiAww8h
+ EgtkLPRa8dd6kTZKfQoIn7fG4r8z2/+7jESiLM6G7u68ctTsYgrILfHMRFOtxg0ZV+6K
+ PtXSSt2vtzg1zIbcc/vh1dDhJu4uTEfkh3ssT8EiJvTBzLL5joayBjiNie/1+6zrPR4G
+ zr941vqMYWuXC75s/cTzzpWeP3nna+xmbqtegnnKZkrefIGQz01J+eAR/cGe/DAgTPhr
+ 3PSXzjDQb6YFx2tWExMhDuqbGTGbmimOfEXyyGh9inDU7E7mwXBuawhVpXVY/4q8bqqJ
+ +lvg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775558621; x=1776163421;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=B0wG/Z2TOWRDtWhNHfDppOEjfP1XlYkqucCdQha+2j0=;
+ b=dRWs8UVLatUgcU53+lmyUltbByU5Dp4OMGG9Hr2FnHeONB3BjzTfmDAzISkWpKWLye
+ A7KCnS0Zu3bNcskoowO5bxaPvHmJZfKgWoQ2eDDVRSQPr8o+1H6cmHKdat+o8Ivu7dII
+ mYjvH49PPH2SdU2MaZ8Q0BBx6sTqNn1aWjndTS6XOyb5XyrmKF/Ry2Sm+07y0N6WpOi1
+ q7a4hL/RtmRXDw6jMLC/pADtRR5E34jTGpdtahEox72dVLqNIIZVqvZhxXznaXnTKbbl
+ hfujYf4m46xpcmFZVAgfUNykZ0yDZHnEk3b2ZeDdb+iX2vTaccc/vSepFpd0fUQ8g0qn
+ CqRA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWiInKpqkBRVfY7JGBAqjIavr+jZNw34YeSjSQkCMhz6CYkk+Tuntc9rcqL2cTt52fwwA/a2QI=@lists.denx.de
+X-Gm-Message-State: AOJu0YyoxiZxgcTh1olP1Y2bbfpJfjlB8FFWRH3sFZ/X0EBajUA0v0ur
+ 5OgKbPry8lSHcGQFY2vzJyiUnJ0459l12rwv2/i1V4fnYewRQXwHxnkY
+X-Gm-Gg: AeBDieso0i9EtklAgw9K/+bwDhK1Q/x9DXjABI/LtEqcvG0sSkX6VKLFO8j83BpZv5O
+ yc2EDtynmweQXncEWTvc20upT12jgq189wgs1RKzYZv+5k7sFdxPFABKBqOQt7UMXbRT7k7yt8K
+ 91DyXA6zJhpH9TTTNxwrWH+zJJr4Bfi64PCCdmRMv3cBJIkUy37dUqaWh9XRcv11u3CTtPwxskW
+ c6RticwFo5RQjpkSR3+SPLeHWRwdkjfDZPb23I5bhSzJlFF5k3FZz6uPpveHpANkwV8s/s4mBC/
+ aWiPCYOtV0vkt1vh2XEFLlZDcfjN5BgwHn1SvvBdPbpSYyBmyhk+P2we9bv99adb1tnpaERAjMq
+ YSTyi7pRU9M0Xl6DoTmxDoB1e1cyHsAgJqIfA/LaBnW49vLywQR1AUUB8l4qwJDbtwEXP/jiOsf
+ c9TFwyiPGZjWxDXwuvCyro12p00+9CnGtscT5k1+Zd3w==
+X-Received: by 2002:a17:90b:2e49:b0:35a:189b:43db with SMTP id
+ 98e67ed59e1d1-35de6810e49mr14487673a91.4.1775558621141; 
+ Tue, 07 Apr 2026 03:43:41 -0700 (PDT)
+Received: from google.com ([2401:fa00:95:201:a7ad:ab31:6142:da2a])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-35de673110dsm5961864a91.3.2026.04.07.03.43.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Apr 2026 03:43:40 -0700 (PDT)
+Date: Tue, 7 Apr 2026 18:43:37 +0800
+From: Kuan-Wei Chiu <visitorckw@gmail.com>
+To: Sean Anderson <sean.anderson@seco.com>
+Cc: lukma@denx.de, trini@konsulko.com, andrew.goodbody@linaro.org,
+ aford173@gmail.com, jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] clk: versaclock: Fix incorrect error check in
+ versaclock_probe()
+Message-ID: <adTf2W5YY3oz-Fro@google.com>
+References: <20251212180615.4112751-1-visitorckw@gmail.com>
+ <6b40a19c-3fe6-40ef-abd8-66939eb0dfae@seco.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <366dfe78e2028f53a6274da75547fb68844764cc.1775549229.git.michal.simek@amd.com>
-User-Agent: Mutt/2.2.13 (2024-03-09)
-X-Last-TLS-Session-Version: TLSv1.3
+In-Reply-To: <6b40a19c-3fe6-40ef-abd8-66939eb0dfae@seco.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,41 +102,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Michal,
-
-Am Tue, Apr 07, 2026 at 10:07:11AM +0200 schrieb Michal Simek:
-> The help text for the "fpga loadb" command was incorrectly guarded by
-> CONFIG_CMD_FPGA_LOADP instead of CONFIG_CMD_FPGA_LOADB. This meant the
-> loadb help text would only be shown when LOADP was enabled, rather than
-> when LOADB was enabled.
+On Fri, Dec 12, 2025 at 01:40:39PM -0500, Sean Anderson wrote:
+> On 12/12/25 13:06, Kuan-Wei Chiu wrote:
+> > The error check during the registration of FODs is incorrect. The code
+> > currently checks IS_ERR(pll_name) immediately after assigning
+> > fod_name[n].
+> >
+> > Since pll_name is checked in a previous block, this condition will
+> > always be false, causing any allocation failure in
+> > versaclock_get_name() for fod_name to be ignored. This could lead
+> > to usage of an invalid pointer.
+> >
+> > Fix the condition to check fod_name[n] instead.
+> >
+> > Fixes: dcf2cee77f2d ("clk: clk_versaclock: Add support for versaclock driver")
+> > Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+> > ---
+> >  drivers/clk/clk_versaclock.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/clk/clk_versaclock.c b/drivers/clk/clk_versaclock.c
+> > index 19a787eaf0c..1dbde75f180 100644
+> > --- a/drivers/clk/clk_versaclock.c
+> > +++ b/drivers/clk/clk_versaclock.c
+> > @@ -945,7 +945,7 @@ int versaclock_probe(struct udevice *dev)
+> >       /* Register FODs */
+> >       for (n = 0; n < vc5->chip_info->clk_fod_cnt; n++) {
+> >               fod_name[n] = versaclock_get_name(dev->name, "fod", n);
+> > -             if (IS_ERR(pll_name)) {
+> > +             if (IS_ERR(fod_name[n])) {
+> >                       ret = PTR_ERR(fod_name[n]);
+> >                       goto free_fod;
+> >               }
 > 
-> Fix the preprocessor condition to use the correct config option.
+> Reviewed-by: Sean Anderson <sean.anderson@seco.com>
 > 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
-> 
->  cmd/fpga.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/cmd/fpga.c b/cmd/fpga.c
-> index d51c380d7b3e..d347a7002906 100644
-> --- a/cmd/fpga.c
-> +++ b/cmd/fpga.c
-> @@ -417,7 +417,7 @@ U_BOOT_CMD(fpga, 6, 1, do_fpga_wrapper,
->  	 "info   [dev]                  List known device information\n"
->  	 "fpga dump   <dev> <address> <size> Load device to memory buffer\n"
->  	 "fpga load   <dev> <address> <size> Load device from memory buffer\n"
-> -#if defined(CONFIG_CMD_FPGA_LOADP)
-> +#if defined(CONFIG_CMD_FPGA_LOADB)
->  	 "fpga loadb  <dev> <address> <size> Load device from bitstream buffer\n"
->  #endif
->  #if defined(CONFIG_CMD_FPGA_LOADP)
+Thanks for the review!
 
-Fixes: f8f378877b8f ("fpga: add new symbol for fpga_loadb")
-Reviewed-by: Alexander Dahl <ada@thorsis.com>
+Just a gentle ping on this patch from last December.
+It looks like it might have slipped through the cracks.
 
-Added original patch author to Cc.
-
-Greets
-Alex
-
+Regards,
+Kuan-Wei
