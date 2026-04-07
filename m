@@ -4,83 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39F08FF5126
-	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 17:27:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77580FF512C
+	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 18:14:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F02E8404A;
-	Tue,  7 Apr 2026 19:27:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6F0108404A;
+	Tue,  7 Apr 2026 20:14:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jSO2h97H";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RHZJ7H/F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5DB3840AB; Tue,  7 Apr 2026 19:27:04 +0200 (CEST)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
+ id 7FD088405F; Tue,  7 Apr 2026 20:14:06 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 907AD83F75
- for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 19:27:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 69E9483F75
+ for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 20:14:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-67fdb2afaf5so2048724eaf.1
- for <u-boot@lists.denx.de>; Tue, 07 Apr 2026 10:27:02 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-66bb6eb28acso9671776a12.0
+ for <u-boot@lists.denx.de>; Tue, 07 Apr 2026 11:14:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775585644; cv=none;
+ d=google.com; s=arc-20240605;
+ b=iTkY/x10Mb105rNR0SnEJpQDnF9VCb/Q1pn+UhoHbq5qyd7g3yGZNOA1WqIEPyrIxR
+ PdHTE4mE3hKUKBSAyuAx7Qvcu7gYDrFVQgF4/Ko79TWpHaDWtSblR9UC9rtoX425gJTl
+ jlPSonnFFqjPJg0kb2Ebt2g0a+1EFhJQBpixeiT9LsSw1T/zTpCtBwpHsn9OsSNfK9cE
+ i7PqsnEhOZviWdx9zHWNM+DVqE2DRj1QxU4vGtqqgVGGIsVXUqjuQKyCNFQsdwMu1A/x
+ tkvnsUceeAgI35k2VnCiiXeA9H8VPuKwnmNAhfpyJtBOwxueydCH0CDIQOE1FJv1VZ4p
+ lBjQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=nHrQ0x4c69LDE6Qx5C/l0X6IOZtwPcpa90MPd7VqjlY=;
+ fh=xvtPdHsw2fYZi/vc7GUrf448xroWVihwIxbwZ117NSw=;
+ b=BXTxxgGYGkQtvMw6i+thXGbG57zpGc/NG2ozoJBxUtchKL7Ss8tafNI8RzuDgWIbq7
+ Msig8+P95V6/mT5cdiWVbnOlkKkaoR5cVmk6ck7fhFyF7HtywOahKDaydgRRIce8Rtk8
+ ZJQQsHulUlBra31aegUgtNuV5HMABR1n69OgXE5Gz1JnWxd1T8rKCLrrt1RRRWAE3NUA
+ ETSEZTlC4VoC+c6Ge2SnDsrFkZZAZoEUVe0NBoNKkYtQD5a5wNz489sLicPK5y6XkFj2
+ /BN24saBXD9uyfZRy9Jxopm+z1+6Ldc6bdnOKHHigolvVGtAsUrVrnuHAUDrNVmNAspx
+ Ot4g==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1775582821; x=1776187621; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wxZffARRbWtg0hWyb936l0xNn9aMXQnbwZuTLvpVe7Y=;
- b=jSO2h97H8+jyV23ghPNn5cxFwrG2CJWNlyU0Z/V53Y1jQWNs7O9344hBtoF4uZeNht
- OoWtLBVKmg0ivNUbAjf2AHJ9Qw33U070G8iS3lNhP/ygNi4eRkxBnRqTDi81i8hCmz/r
- 01B/GdTp9/oJALDwbQG0r2xPQA9RrIAFh2Qak=
+ d=chromium.org; s=google; t=1775585644; x=1776190444; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=nHrQ0x4c69LDE6Qx5C/l0X6IOZtwPcpa90MPd7VqjlY=;
+ b=RHZJ7H/FEcMXeVfe2ojZT1MLpr3/mF0TvK3IJfRKB7Qm5b0tdRg6YCg9/muH79ahne
+ xKBhwgIBCLnXyOrzOoNpGdRr+6th6TKVFy/JgjVFcKXILlbPXChjPpBYUhBS8azbAoLR
+ tJOoLlJnrCRoVMqWr79GUHhGOLT5HnGEYvkeo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775582821; x=1776187621;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wxZffARRbWtg0hWyb936l0xNn9aMXQnbwZuTLvpVe7Y=;
- b=KvrIyL8Sku/csIrPdaWKmuU+P41X+Cke0HgUjOYfycWFwHvUIfbk3p2+py7ZEURAKo
- Ch0yzxYBMWlc/M93sGtVxHWYT6NB2Igae92JNpgfHN1Zq/G5P+mO7ItD10mwlBhj4aZb
- r34uZzA0BCnGiY9O1eFCNS3bgGkX8bIantXCa/1FWkDFuvtHS8bKcmAwVeNKJggiMdft
- dFsMop2ZOwZwLkOvg1kUFebXPgZnkqYkEGmYx5U6gq3wznRR/KG1IacjTzbNdJhxiF6w
- zNHz+hbkev5Hl88Nwcky5+yOVnCiWTHEp8RSxeqSgGZ/7gzmAcrynWdLaEDxj34oAyE4
- sFwg==
-X-Gm-Message-State: AOJu0YyzRbXrRSAtQMue8MDL+PbR+pXHeQgocQlbchQK0Uc4+DeIeL6z
- tNN430QmdW6emJzIbMe6fRrSnqsEvWW+uqWffGyOIBUed4dooLjETCJ7j9lKKzies2o=
-X-Gm-Gg: AeBDieuRhJO0wWcXMSvtSu5jWL9im1d7oHSM1rZpit5+vJ+BdRy8KAsAn0SBagbaO1I
- 4lb1cTIrZ5p5BK19bIhgP8oWdtGs61EP4QQC9f6xY0LCEPx8x3Luvc2D43UeZx3YG1Tz3y8mojF
- GHTk6S4junRhv9q0wKX7dNLGzgNf1y8V/kjPaUqPGvKhNBkdb+Xf+ryv8tTukJMp4AUCRdpNm2T
- viCxcdXanNKe6ZleT+MI4fXiyViEGPIQHY9+lLkLhVrT2gDDoPwouvsp0wiTVEdem4iA4cEluGn
- WpQx1LVBs/OLbx0N/te2VhsCodRXUm6N7k93KfvRzdl+uJldY7tslhtkiklqvG6XQy0V/FqPX7X
- PpFzeZqOHdFjAWDnjchiqMLfWmCgg7foQHJKF5VeJ1ePVioLVYNFoWx9JHJZLIj0KfMT7Mzawgw
- MYZAEi9u1tnDErGcIVNqIcLMlTTdZaBxwNrLmMDMASruRWKDUkSJdD6l4YVKmyo+GZXA07tPK4L
- ct3E0rFiVdLc13yZpC9FS61+kfdJnrxb/PHktcYgNhdEsrH
-X-Received: by 2002:a05:6820:c2d3:20b0:684:75f4:2314 with SMTP id
- 006d021491bc7-68475f427c6mr4516880eaf.25.1775582820931; 
- Tue, 07 Apr 2026 10:27:00 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-680a882d978sm10507214eaf.10.2026.04.07.10.26.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Apr 2026 10:26:59 -0700 (PDT)
-Date: Tue, 7 Apr 2026 11:26:57 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Stefan Bosch <stefan_b@posteo.net>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v1] arm: dts: s5p4418: fix "mmc write failed" e.g. at cmd
- saveenv
-Message-ID: <20260407172657.GA41863@bill-the-cat>
-References: <20260407172155.3419-1-stefan_b@posteo.net>
+ d=1e100.net; s=20251104; t=1775585644; x=1776190444;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nHrQ0x4c69LDE6Qx5C/l0X6IOZtwPcpa90MPd7VqjlY=;
+ b=dMql+u2Yvx6fvncJG31Li+oZ9VhVtdB2HNXfbH+bCAGQsVlrXB1u7bF6NKFUGKvbhA
+ R8XfHsUyaNOVXhbYgU+TpcpyKtNPgdMKM18myXsynvhI7X0XXS9yk3IXOlF3FklPtaXA
+ GOQlqUsIppmQT49ngMst8UumyHXcTjGjwTdBCsJfw/ZXqcIK2iQq9r94tkPuaDeQLDWg
+ mgcIKMGdIvrR9g7rQNIwZY0ng3Y0Ab5K0qmzjFSXyzqbwLFVX4RQ/KfMfwHqpDVV3dLS
+ 3ToSqnngKXyUq2p3C3sybbJwY+Selb72VYQxAMVwQBTgy9N4atVO8NmdKHC9fHaswfxF
+ +lGA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVvE+pBb9RLE1t5QQiMNnG9GHcf0lr+xwntAZ5d/huvnODhgrZPMw+wDgK5chxIdNXzaMZwDtI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yweg9FGz63LNRVfJvJuPQBNhE7U9hTXYeno/hs9a7tWblLpKzrZ
+ ROo1ge1v4xpXCyq2LIF7i3aMVGjrPYh2a9R6+stAW8/7bs/eAdpJv8XiRYFoBRhc8dJZf5ksHGa
+ Vhey37U0l7HluPwOV6+tWrvuANhVNAueOlrKhooRLe/tUbgFlFOuAuw==
+X-Gm-Gg: AeBDieuS+gV7Ce1WZvtmlhawq3+740E7y0gwh2zaM2+D7Oj8VRheLeP5e6uW840+PF+
+ skpE0xupb4uC6P+j+ITXZ7H/DXsF7rEmzmI0cixpQYuOE2triID3k0jHcRv8Zf7RfU8puC7fnGx
+ fL4UCweujWF9gHGNwQ2/rzHtb1z/Kw71rpHCHehXJ/Qv1Ky5tcm0bxjM2EQtQox8lYZfhK93So8
+ mFcEwetoQESWXvQURsr6rrcL2WOupPRj4u8+jqSfVoxIrLpNsOE9aTjSfE0P1183FuG7ZJn9ZQz
+ Y9I/tg==
+X-Received: by 2002:a17:907:9717:b0:b9c:6ef1:ed13 with SMTP id
+ a640c23a62f3a-b9c6ef20f71mr826330566b.31.1775585643675; Tue, 07 Apr 2026
+ 11:14:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Wk1iUBHAYzUNXeGh"
-Content-Disposition: inline
-In-Reply-To: <20260407172155.3419-1-stefan_b@posteo.net>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <cover.1775121078.git.simona.toaca@nxp.com>
+ <7edcce04b39aabc1f58e09814e7fadff226e2bb8.1775121078.git.simona.toaca@nxp.com>
+ <CAFLszTgb5a3QtyviHc-MRTdDUoDUWnYksWXMeCUxagHmvfQK2g@mail.gmail.com>
+ <mtfbgewm7kw4jzmxjkksdmq2ahb3mdrb6p5bi5qvpow2tydyl7@bejuojige3bw>
+In-Reply-To: <mtfbgewm7kw4jzmxjkksdmq2ahb3mdrb6p5bi5qvpow2tydyl7@bejuojige3bw>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 7 Apr 2026 12:13:51 -0600
+X-Gm-Features: AQROBzD5hbZCjG9hy4vo2lAoESlsTPknP-JHiuwwPMN2omva544TFD5YR6XF49w
+Message-ID: <CAFLszThADHGE_8aAFExK8Kv_Ef9LG5Xcio=znkNwFH-eUESzsg@mail.gmail.com>
+Subject: Re: [PATCH v3 1/6] imx9: Add support for saving DDR training data to
+ NVM
+To: Simona Toaca <simona.toaca@oss.nxp.com>
+Cc: uboot-imx@nxp.com, u-boot@lists.denx.de, 
+ Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com, peng.fan@nxp.com, 
+ alice.guo@nxp.com, viorel.suman@nxp.com, simona.toaca@nxp.com, ye.li@nxp.com, 
+ ping.bai@nxp.com, marex@nabladev.com, sebastien.szymanski@armadeus.com, 
+ ravi@prevas.dk, joao.goncalves@toradex.com, ji.luo@nxp.com, 
+ semen.protsenko@linaro.org, tharvey@gateworks.com, qijian.guo@nxp.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,39 +118,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simona,
 
---Wk1iUBHAYzUNXeGh
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, 6 Apr 2026 at 02:28, Simona Toaca <simona.toaca@oss.nxp.com> wrote:
+>
+> Hi Simon,
+>
+> On Sun, Apr 05, 2026 at 05:49:56AM -0600, Simon Glass wrote:
+> > Hi,
+> >
+> > On Thu, 2 Apr 2026 at 03:29, Simona Toaca (OSS)
+> > <simona.toaca@oss.nxp.com> wrote:
+> > >
+> > > From: Simona Toaca <simona.toaca@nxp.com>
+> > >
+> > > DDR training data can be saved to NVM and be available
+> > > to OEI at boot time, which will trigger QuickBoot flow.
+> > >
+> > > U-Boot only checks for data integrity (CRC32), while
+> > > OEI is in charge of authentication when it tries to
+> > > load the data from NVM.
+> > >
+> > > On iMX95 A0/A1, 'authentication' is done via another
+> > > CRC32. On the other boards, authentication is done by
+> > > using ELE to check the MAC stored in the ddrphy_qb_state
+> > > structure.
+> > >
+> > > Supported platforms: iMX94, iMX95, iMX952 (using OEI)
+> > > Supported storage types: eMMC, SD, SPI flash.
+> > >
+> > > Signed-off-by: Viorel Suman <viorel.suman@nxp.com>
+> > > Signed-off-by: Ye Li <ye.li@nxp.com>
+> > > Signed-off-by: Simona Toaca <simona.toaca@nxp.com>
+> > > ---
+> > >  arch/arm/include/asm/arch-imx9/ddr.h |  48 +++-
+> > >  arch/arm/include/asm/mach-imx/qb.h   |  15 ++
+> > >  arch/arm/mach-imx/imx9/Makefile      |   6 +-
+> > >  arch/arm/mach-imx/imx9/qb.c          | 379 +++++++++++++++++++++++++++
+> > >  arch/arm/mach-imx/imx9/scmi/soc.c    |   7 +
+> > >  drivers/ddr/imx/imx9/Kconfig         |   7 +
+> > >  6 files changed, 459 insertions(+), 3 deletions(-)
+> > >  create mode 100644 arch/arm/include/asm/mach-imx/qb.h
+> > >  create mode 100644 arch/arm/mach-imx/imx9/qb.c
+> >
+> > Note that this feature is present on x86 boards already.
+> >
+> > I wonder if we could make this more generic? E.g. it could be a
+> > function of UCLASS_RAM ? I could do the x86 part to try it out if you
+> > like.
+> >
+>
+> Can you please point me to the implementation for x86? This Quickboot
+> feature is specific to Synopsis DDR PHYs, and the location where we
+> save this data is specific to iMX9 series (since it is needed by OEI).
+> I need a bit more details about what you mean.
 
-On Tue, Apr 07, 2026 at 05:23:19PM +0000, Stefan Bosch wrote:
+Yes, if you look at mrccache_save() you will see how this works. It is
+controlled by a flash layout within the SPI-flash node:
 
-> s5p4418-pinctrl.dtsi: Fix mmc bus definitions to fix "mmc write failed"
-> e.g. when cmd saveenv is executed. Initialize all four GPIO of the
-> mmc-buses instead of only the first one.
->=20
-> Signed-off-by: Stefan Bosch <stefan_b@posteo.net>
-> ---
->=20
->  arch/arm/dts/s5p4418-pinctrl.dtsi | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+ spi: spi {
+    #address-cells = <1>;
+    #size-cells = <0>;
+    compatible = "intel,ich9-spi";
+    spi-flash@0 {
+       #address-cells = <1>;
+       #size-cells = <1>;
+       reg = <0>;
+       m25p,fast-read;
+       compatible = "winbond,w25q64dw",
+          "jedec,spi-nor";
+       memory-map = <0xff800000 0x00800000>;
+       rw-mrc-cache {
+          label = "rw-mrc-cache";
+          reg = <0x005e0000 0x00010000>;
+       };
+    };
+ };
 
-Hey, I'm curious what it would take to move this to using OF_UPSTREAM,
-where I assume this problem has already been fixed? Thanks!
-
---=20
-Tom
-
---Wk1iUBHAYzUNXeGh
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCadU+XQAKCRAr4qD1Cr/k
-ChzJAPwOeF4KdKxVO3ZFICK1EKagMZOApuTG1VqO1j8gnLmYVwEAnH7I1DAKFBb4
-alRRlhetGZCCNrVk5o8FfasKApplJw4=
-=8/Q2
------END PGP SIGNATURE-----
-
---Wk1iUBHAYzUNXeGh--
+Regards,
+Simon
