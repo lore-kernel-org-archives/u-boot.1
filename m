@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39CA1FF5136
-	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 19:50:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FD6EFF5135
+	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 19:50:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF837840B0;
-	Tue,  7 Apr 2026 21:50:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 151ED8416F;
+	Tue,  7 Apr 2026 21:50:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mv4nArYn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l7bzfGdm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB2818416F; Tue,  7 Apr 2026 21:50:15 +0200 (CEST)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id 5A93584105; Tue,  7 Apr 2026 21:50:16 +0200 (CEST)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BE0C840B0
- for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 21:50:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F3F284118
+ for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 21:50:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-685013eb58fso1422349eaf.3
- for <u-boot@lists.denx.de>; Tue, 07 Apr 2026 12:50:13 -0700 (PDT)
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-4138136f02eso3615294fac.2
+ for <u-boot@lists.denx.de>; Tue, 07 Apr 2026 12:50:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1775591412; x=1776196212; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1775591413; x=1776196213; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=lkM5oIxZFG0/2+j/sCeC/oWITB4m+LpyjO7xOew0Kco=;
- b=mv4nArYnz+KsrDUU/jzR/qXZqmIz2q60s/groFqMUNLO+oouK+aotVU7XFL1OkWFmx
- wKyb3eLihM0wUhr3072BqnGlo4HlTNbeh9gg3mfox451XoGBLNM0BS1ocYEfsz/BpJj+
- WiHWy4bXdB8NyJBENVAQREVTgP558qtKdwFhw=
+ :reply-to; bh=O0nQriX1Em613QAfU+aNtUi0EtXGPzAKpqaWgm9AnWw=;
+ b=l7bzfGdmxJ4ZSo3fHFakKPtHScUv/TBHWEVh5vSJHeZDK9I90aoIzXnfSNXekdtj7O
+ k/DaS1GV4TEOlTyzQZczn3+IZxzbbQqclVFMC12KmXqEAbriUJe0I+47uXzqcOovWiRy
+ PH4kYi+PqnpaCboi8P03p4id0VXwhql4XoZu4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775591412; x=1776196212;
+ d=1e100.net; s=20251104; t=1775591413; x=1776196213;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=lkM5oIxZFG0/2+j/sCeC/oWITB4m+LpyjO7xOew0Kco=;
- b=AAZUioOcySH49O1NI2SU6qNSve5GvGqIsxBc/B8XVSWjnRSscsnEak4EmVFS9Ilyv+
- uI7buKEEIIDiLJQkte8+HeGDXZO4AtReP5rak0mcKCCT3/ir/6KEJzBg6VvShWdNsvl3
- hf1Sv1zP/Y35tBoZcsahbxNJs4ROvIUe4eMs/vHqHiUnanLY5tocFx6NqcJm1DUyGWDq
- WnIRZ80S6gVDjMqIMOA4eguDVKnkqiFJR//Xn9eyZ9tOVV432lWElrubrrJszGX5bMXY
- D6V2ZPB7I2bSBShwlz9ElfC4Lxk71Ay9UZQiwljXe6fXfb3XH2Jht3FCmDPO3WjAljDc
- AH9g==
-X-Gm-Message-State: AOJu0YylMJKEzk4Tl0CX5jHaZlchMNENdanf5qnvmfOp3s3QL6I7xuYy
- +hvFI7Qd9MNrOg5DV11yrBXNo+RxDCw/LNOnR1vqg5LDGoQyAA+xWhYpw6o5ohZcB6+IjQTICHI
- AK5W4/1g=
-X-Gm-Gg: AeBDievMOShHCbRknJ9ZhLNcl8/UZKxf/U4svmLNETB6MyoSAop3iyqmTYg3oQNFou/
- wR9hIJrAHP+Ol0h6+QPNuaoabUuXc3td6klS9UQwg+hrwKdZYIj0wh37RkaeavjVH0dgwMaHTBz
- BHctTl2+T+78MtqlOn38oE4QfKZCFU7Of4DbIaIk60CqcNLeBaQzs3XTGbudwXV47Wc1Hjgg6Yl
- r6Ixav3sX/rVjLLAwyDU9e71aUPktNr5MlbnArAt+qKFCtjvUcvrWjFw0xJIAKjV4U58WNHk4v0
- 0bc5ZqugPdG2dxrvK/L8n2qFfUChqEDbv2Nd5SNG2v/MeANRb7s+DaiuV+e0jbGKQVeZ0W40KNE
- 8wowMUE7P49ToiBKKg373caU+ZQwfXE3Yz9Dmt9w+LIcOHNVCe+svtfwgVByiHI5gJ7stggtcB+
- i3ez9ITLbmf9xuE1J0v4OFxq/jyGjWZVc1EJGpTjgmvveHqeF1YpCJdeYBeoflhMNoE24FnlsK1
- wPSu48YnFfKd72Q5q4ivAi2hJFMUofQZLX5MbZ6Ca8pJjg=
-X-Received: by 2002:a05:6820:1903:b0:67e:1a8d:8780 with SMTP id
- 006d021491bc7-6821fb60cfamr10528800eaf.36.1775591412184; 
+ bh=O0nQriX1Em613QAfU+aNtUi0EtXGPzAKpqaWgm9AnWw=;
+ b=RkdWaNZPWuliLzMEuzUoN0OkfpoHqTY1+3vzsC+QSXDGLg+Jw5P4Jxma7juv+dyhyf
+ 20VSwzJOrQv43dyf5fRgJSWdwMLEeA/+PT86OjtVrQy/sxbWTQMmMMk3gSZeTKgUO1CH
+ qhS3V5YslCP+a3XauHV+5paniJkwrzsDvDF1T9COB1qtm6LjeunwIRiT1fmcA9Tocq0Y
+ b+o35OuP18kb3e6ldS2gX0Z0d77I3AmhGJZTBlhPqTKmNeo2C6fzR/NwXjLeVUHRTKQU
+ CMm1uZeNWCJASBo9eBIMXi5cJyxk3K8ZNWXV70Hnwu/M5G0IhNd2XqJNMIHYx45FYn2O
+ +PrQ==
+X-Gm-Message-State: AOJu0YxPtZLVrGHxQyppYn5wi0Aj3nmvFUKBPz7oCkNfuaADCvQGa7mA
+ 3zIFVIKyDnKrxRdmBXNCzkAPbkhKXq5MOBFo0fPlj/n/rnwHGXXLeKOqZcvZ4GdwZphFJypTFwC
+ JOLVOG6o=
+X-Gm-Gg: AeBDieu/DMeYq3DNXNopXTysn7uCGCqG9fkUL+7zbTRk9KYBnweFaymvaNIQz8gc9rt
+ 4/R8itNBlllH8Zzk5lDO17kAVucWi2HggTKYwMk92u0mJWUDOAwHuApKnAp79Q2QQAGIb4o+p8r
+ NZJXA/Y3UWmMMrCDIF7tB5JNjxuYDulxUDv+UXmhqT3pYyS0AhZnU4u0L8QRsLgutf6AmMs1KnQ
+ UjDDQCdl0cDRaBLzMdETa5z41WkGzRB6tI+LJD+P4LXfvEieRs2RWL6s4AYCmCouSA4CMPGVLjC
+ phvb4XvLrsBMbVaQLNcyuEa0V7+w/rafivD6baWTug8j59Q/ySjwgrfzttTnGoNucm8R60jZcze
+ 86KnkULyrejgrvAuy1as6PmOA9SQWfwjFrxm8trNcQYsVWie9eoGkhmgAKLxiDLn/N1LA7QsWsX
+ IuYVDZlOZosefr7htW2NNVbJPTxKZ+98wQFrcTtbqWDyeMtWT5c0bG99hnF62b3Rm2AU1vsrjMG
+ rhKtN0SbRr20wYsHT7m0/jwUOxSAX+4Pu9wuALRzvpuT54=
+X-Received: by 2002:a05:6820:4719:b0:688:6d55:17b with SMTP id
+ 006d021491bc7-6886d5503d7mr1144267eaf.51.1775591412973; 
  Tue, 07 Apr 2026 12:50:12 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-42324017960sm9988782fac.7.2026.04.07.12.50.11
+ 586e51a60fabf-42324017960sm9988782fac.7.2026.04.07.12.50.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Apr 2026 12:50:11 -0700 (PDT)
+ Tue, 07 Apr 2026 12:50:12 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20260323195245.2363420-1-trini@konsulko.com>
-References: <20260323195245.2363420-1-trini@konsulko.com>
-Subject: Re: [PATCH] lmb: Rework the LMB_ARCH_MEM_MAP symbol
-Message-Id: <177559141140.2108693.3886262142385106157.b4-ty@konsulko.com>
-Date: Tue, 07 Apr 2026 13:50:11 -0600
+In-Reply-To: <20260323195247.2363434-1-trini@konsulko.com>
+References: <20260323195247.2363434-1-trini@konsulko.com>
+Subject: Re: [PATCH] lmb: boot: Update dependencies within BOOT_DEFAULTS_CMDS
+Message-Id: <177559141233.2108693.1002921080352417995.b4-ty@konsulko.com>
+Date: Tue, 07 Apr 2026 13:50:12 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,18 +95,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 23 Mar 2026 13:52:45 -0600, Tom Rini wrote:
+On Mon, 23 Mar 2026 13:52:47 -0600, Tom Rini wrote:
 
-> This symbol should not be enabled by the user directly but rather
-> selected when implemented in a given platform. This converts all of the
-> current users of this feature and hides the symbol.
+> The CMD_BOOT[IZ] symbols have a dependency on LMB, correctly,
+> currently. Make sure that in BOOT_DEFAULTS_CMDS we only select these
+> commands if LMB is enabled.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] lmb: Rework the LMB_ARCH_MEM_MAP symbol
-      commit: 504c4cdabda5dd602dc91bed4982739ede55339c
+[1/1] lmb: boot: Update dependencies within BOOT_DEFAULTS_CMDS
+      commit: a6594e82bb93bc14d97ca16440f6387fa3e0c111
 -- 
 Tom
 
