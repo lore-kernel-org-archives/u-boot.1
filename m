@@ -4,60 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB2C6FF5104
-	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 15:09:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF1E3FF5104
+	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 15:37:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19E068404A;
-	Tue,  7 Apr 2026 17:09:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 122CF8404A;
+	Tue,  7 Apr 2026 17:37:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="UujLKxm+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="qQ0xqf4c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 602C68405F; Tue,  7 Apr 2026 17:09:35 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2FBCA8405F; Tue,  7 Apr 2026 17:37:12 +0200 (CEST)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7365C83F75
- for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 17:09:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1050A83F75
+ for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 17:37:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4fqqNr127Lz9vCb;
- Tue,  7 Apr 2026 17:09:32 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1775574572;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=L1UCTazkD6PSoAaw/qjxEWbz6265afiF4XLZS2DSvDc=;
- b=UujLKxm+QC7m/cs9bVHL72MyBLYjbc3vThY+wef3H0fRHcA3lomAS+TG083xM6evpdWZWl
- Wjqmv/Uoyzg4uvXIZ2glqKItMbKOZksJzahLuXc1OgIv38pv86DjZ57dgOcHEJQlKeaOZq
- KANqeFZq13ikNJUJoPZ/1yAD7je5GiUgkMQ/GahoZAtNGQSBIuPBdjtiElpjmmV0zl5qcm
- yhLvYQlwBn7pxVY00ZZR035QHNya3XYZh4VoEjbI6pfyV1mK2yLABVnG6Xw5mzu36cSjXU
- vj9uhoCOyWaQMeobSOsI6Z7uWrHkeQKTlDGkMX9vUq7SoS5WDImdnNhGBeIGWg==
-Message-ID: <c9fc91c4-5af2-4242-986c-cd2bdddd83a7@mailbox.org>
-Date: Tue, 7 Apr 2026 12:57:02 +0200
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-35da2d35eccso3230820a91.0
+ for <u-boot@lists.denx.de>; Tue, 07 Apr 2026 08:37:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1775576228; x=1776181028; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=k0lops+nRe/Odc6I+t4G7hvuzfGkqQfM/3HU5H1eI00=;
+ b=qQ0xqf4cv0jNWzJ8nEhaxpuDVMMQ5fq/SrZ0SRB2glDzO/K6fxRkH+zhaortNC0Cuj
+ 1dB2Fzge6MINXv96LCNhP5bfztP7o75HptNxJJ2FpCvJPp7KgklE0XZfoDRTUUdI1hnV
+ fmOMusxlKCbXJ87S3f5SzQkpeUy1/e/L2ckyH3N0AUCUK5fb+VFzdDkgg4FiCs9iAFTw
+ qDG2mS9b02fs0rNgnTo28roez9iHv3ezCj/HaVZxJJlSP3Y6ate3sOKmpBBWTx8AcUuR
+ UO9s082qhGiuxOXSJ1AwlvgE7BZe+cBy34amhpmZ56pIChjvf+MGqasKI1/GsELu9XUQ
+ 2RiA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775576228; x=1776181028;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=k0lops+nRe/Odc6I+t4G7hvuzfGkqQfM/3HU5H1eI00=;
+ b=h61TWQBs7CjuAm8tBKNp25GZkTAMZI7/JJRyq5+O8cvAWOKJxDmTcHFjUnINnkLA6u
+ FgWvDNPsJXfhqRNzg/KkZ/ZRqgrrd0n4DN+azxOc3Eg97Y/A1q3hX8N0WfaYY38H5URs
+ vEi15Hvlry0niyr+NSS++yS4YzjqPxoiqTidm1BKCA+peMzE9mRnZZUEa9b2jx72V2VJ
+ VJZmwp237Pf0lkyJm1cEa8QXuODmu2GRjyxudpXLteLQL31x3GsSEcmLGZ1TSvvG4Oy+
+ VDBnfRmV2MiaHTPpnRfBKtG8z1pR3pmHDMCc55dTy5cq08RToK9gRtmHcgjEJd3gcc2v
+ iEeA==
+X-Gm-Message-State: AOJu0YyKjB3PFSRWBBfHgtVB/xTaUNGkl4CzdVEyxfI5mmsqnMx78wMQ
+ SbYX78gZSRpcKHXE90Yj+eiNhDulhL3nwfqQNpUh703sgtlWadaYPRC/AnQTiA==
+X-Gm-Gg: AeBDieu1c8ZAhwC0YdOAL1SF3baNhK5xZSyU7pg+cqiAsQvjTS8zJYnJF06J6RBvG3m
+ Of6Z3DworYXG1hfakzq0WkSn+pQIwK76LFu8xC0FowxWaeSg+lf1YLuISYcUBeThpx/4EWQo7Vl
+ LzibR8WWonIy7+aAwDy3GSqbmGQ2w/IBWxRe8Hl1c5qOOpLO3mNLLhYFMlxXNub6PPLpyvslhIx
+ nqG+SIQeIRshlda7SN4QBO+17XrOqydSXb+gb0VDByykJlAGWMwBPHZQigtgijjLoSXkscCwapC
+ qdywZcHS1J6XkQxLIgBXbxhoci8PSBT1pb4LqdisfdLaQB4yi8fbQGNgRz9GoUpmbgiOCS3h9Lj
+ MN/nZPCSUuZhUximZ3SHfDm5iMnNT0qslKtttGdyedQbf2ZmT5NrpoKfBP+4A4fMvx2oOhVAKZk
+ N3U+XRhxBy0x9yLPm7hXSB+fyYGKTpKle98bLSkBYivW2Hp9S9JbjToas=
+X-Received: by 2002:a17:90b:6cd:b0:35b:8d89:719a with SMTP id
+ 98e67ed59e1d1-35de6970260mr15912517a91.15.1775576228168; 
+ Tue, 07 Apr 2026 08:37:08 -0700 (PDT)
+Received: from intel-VirtualBox.. ([94.156.205.27])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-35dbe937925sm29585142a91.12.2026.04.07.08.37.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Apr 2026 08:37:07 -0700 (PDT)
+From: Brian Sune <briansune@gmail.com>
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Brian Sune <briansune@gmail.com>
+Subject: [PATCH v1] Fix old TARGET naming to ARCH for PL330
+Date: Tue,  7 Apr 2026 23:36:50 +0800
+Message-Id: <20260407153650.26404-1-briansune@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Subject: Re: [PATCH] drivers: ddr: imx: Fix Kconfig for SAVED_DRAM_TIMING_BASE
-To: "Simona Toaca (OSS)" <simona.toaca@oss.nxp.com>, u-boot@lists.denx.de
-Cc: simona.toaca@nxp.com, viorel.suman@nxp.com, ye.li@nxp.com
-References: <20260407074717.2288035-1-simona.toaca@oss.nxp.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260407074717.2288035-1-simona.toaca@oss.nxp.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 576feb6fcb7087e2445
-X-MBO-RS-META: q3ejbsb3345mcowhu8nbr6bwusbpnjuh
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,11 +95,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/7/26 9:47 AM, Simona Toaca (OSS) wrote:
-> From: Simona Toaca <simona.toaca@nxp.com>
-> 
-> The 'default' directive should be before 'help'.
-> 
-> Signed-off-by: Simona Toaca <simona.toaca@nxp.com>
+latest u-boot fixed the old naming from TARGET to ARCH
+however, cmd Kconfig is not aligned to latest naming.
 
-Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
+Signed-off-by: Brian Sune <briansune@gmail.com>
+---
+ cmd/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index f47ce7f45ce..aead5c80cc6 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1893,7 +1893,7 @@ menu "Shell scripting commands"
+ 
+ config CMD_C5_PL330_DMA
+ 	bool "Release Reset DMA Channels for PL330 Handshake"
+-	depends on TARGET_SOCFPGA_CYCLONE5
++	depends on ARCH_SOCFPGA_CYCLONE5
+ 	help
+ 	  Provides access to Reset Manager Per2ModRst. Enables DMA
+ 	  channels for ARM PrimeCell PL330 via reset release.
+-- 
+2.34.1
+
