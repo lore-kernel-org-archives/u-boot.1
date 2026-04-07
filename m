@@ -4,151 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1564BFEEF31
-	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 12:51:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19FACFEEF25
+	for <u-boot@archiver.kernel.org>; Tue,  7 Apr 2026 12:51:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8275A83F98;
-	Tue,  7 Apr 2026 14:51:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 179CF840AB;
+	Tue,  7 Apr 2026 14:51:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="cWYOJFAj";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="JMGS2Y1y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 011428404A; Tue,  7 Apr 2026 09:16:15 +0200 (CEST)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
+ id 9884084034; Tue,  7 Apr 2026 10:12:58 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79D678352B
- for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 09:16:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 07A7F8352B
+ for <u-boot@lists.denx.de>; Tue,  7 Apr 2026 10:12:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alice.guo@nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Jg6C6WsFh2dBuyszw5dOzlbceXpSLc90xL8syP4/Baa04FFn64BUyXkFsfpOzDqGT4lgynlF3bKyUAI1sq9rrLoggp4KuVfA0YdB/dTg6D3FZzTzgzYvm6TUS4MNjMFyAshgVQn/rpeIv1goQp9HvPFgmV+DThRIbiTV18Y4S/4w1abysK9rYFdRDL2clHX2XM+TWcxBBeO96CFYHqqNqCkJ9GmzfjGSSeryfztlLjPNQVR4+t4IsRQvDA5Nj7PMc3+Tq1RY9ZY2io65KmPcz4q3HK5C4YjEMnzuCcFpAqwSYExlSC1zae/ksodH0kkEJn0RCsbeWH5iEqkRaUMjwA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dtQKE/bv5giTYfDuNVVXU7LJCA3OqpneFq5XOUQvaRg=;
- b=apu3dCgxBd1GbqUdjr6drc34FLhAatMj+005ZBAhd42bSQ6Qfi9i4EocgP2u0MU4vd2aPrYiNRQFBHXfHgFjHj6+z0eUuKxcDkTo3mDj08ApRgFGXsoTkHBSVQpEgcOxNk21BjCVtvMXHq6ygvqk1vn90fthbPjNYGKJJqjgl0w1Ej+kEmXi11RcrepdaRzpfqNnMxUDppSWDdIdGXH88yGJma5nuj4XoIIhxR33WHsAZzEglwOOF9S+DdRqSUJWuj/LA8uota+POwPcvotoF52L+tr/O1qgJ4dK3RnGCVssJK0EDArwZ/mF08ebGMOFOZxBHQoQg6zNO8GslqRO6g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dtQKE/bv5giTYfDuNVVXU7LJCA3OqpneFq5XOUQvaRg=;
- b=cWYOJFAjyE1VAoKkXCJZ75QM+TAPUNU10pxnC2GCdnulOyV5Fmu3to563DZjyY1iLcbBwhO7CsVbJ98AqU+RvZ1TXW1v7nvGC/YAgweoQnxHrwiQVLIQWGBDc3rNzAUgCphp6CJIwFax4JBF6HeVgmJ54P7/JSPkKwPcW0KSMWwdaDWBMCR+88e6FT+0qFlA1oEOF/VpEuNjWwPv+Evn9MfMsa+C0hixKY+qAMWI9kj3QJ+4P2L6gBcIH+iJK2M+vO8hUmtFqYXITWQmEnzNQM0VyR/v3/lNNvBKXibH5/M6D2evV7KrlRQSNaMcNtvMI+BQcJFKu6GK+teavVKq6A==
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
- by GVXPR04MB10562.eurprd04.prod.outlook.com (2603:10a6:150:214::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.17; Tue, 7 Apr
- 2026 07:16:08 +0000
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::cf3:c5b0:7a0c:d11b]) by PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::cf3:c5b0:7a0c:d11b%5]) with mapi id 15.20.9769.016; Tue, 7 Apr 2026
- 07:16:08 +0000
-From: Alice Guo <alice.guo@nxp.com>
-To: Fabio Estevam <festevam@gmail.com>, "Alice Guo (OSS)"
- <alice.guo@oss.nxp.com>
-CC: Marek Vasut <marex@nabladev.com>, "tharvey@gateworks.com"
- <tharvey@gateworks.com>, Ye Li <ye.li@nxp.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, dl-uboot-imx <uboot-imx@nxp.com>, Jerome Forissier
- <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>,
- =?utf-8?B?VGhvbWFzIFNjaMOkZmVy?= <thomas.schaefer@kontron.com>, Michael Walle
- <mwalle@kernel.org>, Clark Wang <xiaoning.wang@nxp.com>, Christian Marangi
- <ansuelsmth@gmail.com>, Simon Glass <sjg@chromium.org>, Quentin Schulz
- <quentin.schulz@cherry.de>, Mikhail Kshevetskiy
- <mikhail.kshevetskiy@iopsys.eu>, Robert Marko <robert.marko@sartura.hr>, Yao
- Zi <me@ziyao.cc>, Heiko Thiery <heiko.thiery@gmail.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>, Jacky Bai
- <ping.bai@nxp.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, Stefano
- Babic <sbabic@nabladev.com>
-Subject: =?utf-8?B?5Zue5aSNOiBbRVhUXSBSZTogW1BBVENIIHYxIDMvM10gaW14OTUyX2V2azog?=
- =?utf-8?Q?Enable_ENETC0?=
-Thread-Topic: [EXT] Re: [PATCH v1 3/3] imx952_evk: Enable ENETC0
-Thread-Index: AQHcw1lNt752bKqjN0OAqMkCMIGdcbXOyH4AgARoqaA=
-Date: Tue, 7 Apr 2026 07:16:07 +0000
-Message-ID: <PAXPR04MB9644FCCC862BC4144D23F74FE25AA@PAXPR04MB9644.eurprd04.prod.outlook.com>
-References: <20260403-enetc-v1-0-e42ae28ae3fe@nxp.com>
- <20260403-enetc-v1-3-e42ae28ae3fe@nxp.com>
- <CAOMZO5A_Tg4XOYvUekNH8a-t+_0nL7WU8fM1W1LK3QcQDHTsjQ@mail.gmail.com>
-In-Reply-To: <CAOMZO5A_Tg4XOYvUekNH8a-t+_0nL7WU8fM1W1LK3QcQDHTsjQ@mail.gmail.com>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR04MB9644:EE_|GVXPR04MB10562:EE_
-x-ms-office365-filtering-correlation-id: e4ccf153-200c-4d56-f05f-08de947589ee
-x-ld-processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|7416014|376014|19092799006|1800799024|38070700021|56012099003|18002099003|22082099003;
-x-microsoft-antispam-message-info: Z+EVT3JzfK2enNfXMcQpa3rChUowgizNQBgCN1H9YzmFN53GmCzwa178r811Hy6yR+KtW2J1NlEPqsKKxQ+ZmIrXGEYV/JhhlO2FFxd7Pb6CjYDJkYUo9RnxRuEkB5azgwKirDFi8qLfh/FVoSMShy5+Y1IXtA4hQ3xBBlmT69WK7ftXfdrD1i8cuyZ0eNuTJCaB4XQxWnOqyczSt3VZJ7l9YMo+Yzaoe9yaqVvIEf92b8gSzgie8WOg38EwKqUpaNFbsbsoAjSMvnCK685R2O/89uq/zbfEE498ii0c4y5ib/Op006pBMEewkUTFeHmGL4J5yXOx5zjaDUl1GpMoKuwx3FYCfYeCZ6aitVwFMGsOsWLvPCTxyWLtEYbVMrinuZ/I/jxUG/ldw4PpFax8QLP/T+QVeAMKZTqF6dGxqIo2JIE9usaqAPL+iDuHIifFCgGvPPT5CethIE1XF/THu41lto+nTtum9AH25YgMwBnofc7O4vggRWqnmH86Jt1LS3UgIcSR8S4VpqQPPtQzz7/NJ6PhOfLQArHWQUzBpsq+7+6M+IL3yEKmXO+KWExXV6Qtkq/bj5igl6XJS/iifk3GGkwc4JdKDD8RhDQjc9DJvw6ckpvajPU2mqyinHuHzpFnfDb1R6fbaR2XqfDE9XuCmm3vdqZuDRdW9p0tLZYGAOg94Rs6cjB74V5oKW+5Yzqg92Dtgwc2F0zyl7EjwG6CI9C7LjxvVQKmAEqTU94rDLYm9vX3KhYm3PHJWv1LwQim1VO8VSysTStwNyYXsWAa0xhaaZVIguEdzWX8oY=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:zh-cn; SCL:1;
- SRV:; IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:;
- CAT:NONE;
- SFS:(13230040)(366016)(7416014)(376014)(19092799006)(1800799024)(38070700021)(56012099003)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?UHp4TGdPRGFUZ09Bei9ETnBkZTdCNUxZUlJYSzZMOHNWTndRWGQ0dHU2aWYx?=
- =?utf-8?B?NzRuSm9TVjBXN2JLSFl0T2M4TkhZaEZsQkJDQklpcitRa0tVRWY1NE1sYTYz?=
- =?utf-8?B?N3RjZk5jWW1mNldWMVk4T0ZDY3hYbWEyVEdIbWxFMlYyYW40S3lFZXhGdWZX?=
- =?utf-8?B?SGl0RWFvd2k1bDVnWmZkbHhKNGQ4TDN0cE83WXpTZVdiRUdBUjl6alZiWk1t?=
- =?utf-8?B?Y0w5SndXVVE0c092cVZYR0xxNEJobC8zYy9kaU5HNTl3NVJvWFkwSFc3Q0U5?=
- =?utf-8?B?b1kreTMzWlNOZytzWFF1VkI4YlhJQkc0RGVteWpSZmxBSzd5SmR1cHZoRUZN?=
- =?utf-8?B?eml6TXpwL2FCQmRFVGdySzN4UkNxWDhoQU9BRjU3TGtnWlRhY0xESitUR2R4?=
- =?utf-8?B?QUJ0cmtlUmlaMitMWmRxUXE1Y1Npdi92aFM2dm9lczN4ZGxPOXZGc3ZLZXJn?=
- =?utf-8?B?Z0hhd2s1T1puRitDeXBqMU82YzgreWFlckg3d2NGdmIxamNqbVRxeUhZS0k0?=
- =?utf-8?B?QlNES0ZCVHNzN2ZHOEJBME1ZeHB3elkvOTJaQUp3L3NzekxSOGtkdlBuZzRE?=
- =?utf-8?B?ODJ5aXBMMGVYUnh1ZVM1ZFdwK2RndXRKYktvSWxQcGxQRGdyaGw3Wlk1aWs2?=
- =?utf-8?B?OFpyYkgvWUdGS2wrVzd4YVAzWEowNVJWRE9xMEh1M0RYU3d5Q0F0NkxLSFpK?=
- =?utf-8?B?M2hhOHlNa0hxczFXQk5VRUgrSXArSjg4WTBhL2o2dGdYUEpTRjZwUVU4Um5O?=
- =?utf-8?B?TXQ4M2l2NUd5TmVLNk5hSjBNZTNBSDFmL3pGampCUXVxR3lRbXVsVWNHM21p?=
- =?utf-8?B?ZndNVU1vNlRKbVJkSUNlS3RRdFNJcFBoVTc3cEFJVDBoREJjNVpoOGZac1JW?=
- =?utf-8?B?bXAzVytuOWlSL3BkQTllZG40YThVOXg5S2UwWmcvdmk1R0hzZ2tmQ0NtbUFC?=
- =?utf-8?B?UW54amNFZ28veVNNZVAyNmsrTEVJaWc1cGowbTNEanRQclp5d1g1UWprV3d1?=
- =?utf-8?B?TEdjZDZHK0J2ZGg4bDZvTVh0R3UvMHJJWlFKUXVjdkRCNk9uSG5tMXBnbkFQ?=
- =?utf-8?B?TU01MVREUXUzNTA4emMvWHF4VllJcUhxcGNMZ1N0UWt4Wnk3SENhL1MvY0Qy?=
- =?utf-8?B?U1hiN1VnUHNGSElCOEdvUmdLc1VxVWplQVZrMGNLd0xnamh1L2tJZE1ZN1p5?=
- =?utf-8?B?dDZQMzR2RWFxKzFHNThUYTlUZDZjQzBLcXVtSmtYb05QR2o0TExuUkMrZ3JQ?=
- =?utf-8?B?WStReUVZQThFWkVJK252Z1h4VUtjVzFSNFBvMDJIQnQzcHp6YXdHMlNDUDZL?=
- =?utf-8?B?ZDYzOG9DNEtsRlcvV2dtOStIMGx3bDJCM0EzZkxQUFVKTDlmaWN0ZkNDWm9C?=
- =?utf-8?B?Y09UcE1XMzFnZ0pWOXFJamd2WEtJMG5WaitjczBSZ0ZXTEJtek5QNWlmYm1Q?=
- =?utf-8?B?aFk2SkpHRmVmRDVRMjJGZjhONDhUQkhUeXZOcGc3STZkTENsMXUyQlFxSk1J?=
- =?utf-8?B?clc1My9XUmpSSGd0aTBvMXV4cDBBMitPSzJSK2lVdnBzVkROeFhEbUNuUHBF?=
- =?utf-8?B?eUpSTTZ4OU44ak5QTjBsUEhuUWFyUkliSTc1eTY1TkQrRXVOUEJsbFFSVHBq?=
- =?utf-8?B?SVVyMHVGcytyUFNmS21HaWJGQytvYVJuUHR1UGFlUnVITUFFTFhIT3VIeUdD?=
- =?utf-8?B?V2RQQ3NjYjJWTVJwMVVBbzhEMU9CVjhaeTFqemF2Wi9RSng5NjZDSTdybHM3?=
- =?utf-8?B?ampNNGlSSG1xNm53MzZTRmc1TGpxK3Z0ZWZvaVM0azdDa29kdnhhR3RCN3d3?=
- =?utf-8?B?OXhJQTlGcytENVlRYk9XWFZGN29Oci9BYWVrQWVvM2FFeHFxSStoYUVpbVZp?=
- =?utf-8?B?UkZpdUtBbkRvaWNVN01Hcit2dnlCMW9rUEVhYzQ0VmNpbS9PMGF4dTFEZDJp?=
- =?utf-8?B?TTBDWTY0L3hyVExGV0xoVDVreTRxSlRDeE5EZkM4Z3JwRkFjbHZ1U2JLeUZs?=
- =?utf-8?B?MFJjQ0JXbjU1WUV3eUkwOFZDM25KV3hFZlRtWmpMb2w2THhPTDltTXF4ZlJz?=
- =?utf-8?B?WVVtZmZCVFcvSjVMKyt5ZEJJZ3dHTDM5L2Z0eXA3WVlYOXVDdDhlM3Awem1l?=
- =?utf-8?B?ODIrQStCUDRmYWZXSEZtb2dJTnRDMW5adS9VY2tPMjdQaDlocE5jbmNyUStM?=
- =?utf-8?B?L0grMVBvTnplSEQzT0NJNDNOUmFzVFFsUzJlYWxrdTFkNG9tczVONEtWS3dv?=
- =?utf-8?B?b0pkNm9hUmFoc2dseDRGUkthUmVBbDhiYS9INWRCRjJvcG13S3VnZkN1eEFz?=
- =?utf-8?Q?yDPZQ8vlDmSKrmn+4J?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=sumit.garg@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id BC63F600CB;
+ Tue,  7 Apr 2026 08:12:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 740A8C116C6;
+ Tue,  7 Apr 2026 08:12:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1775549574;
+ bh=otoefODuN3idHNRSiU1BJeeln65CXkpqikc2Q9gyz64=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=JMGS2Y1yLb5WxkLRV6jGcvJPaoD42tOHtzHLqv2c6QfIFqwSMp5v8ioRQC/QCsjHb
+ PoCzKB+68sb28thThEHZJwGkQK+3IWWBhLxU89eDIB5X8FSGZ2HfBgJiwazLkDiNSK
+ 2b9xr9JizUer7BI991SyOOkqMlh6w5OpPX2gjvNvkqcdlrYKYhh1RaDqWJ9uzxEkGn
+ OMuEySsXtvr+DFL3Kzr+4r3TVa2pNEpX7s1DfgI81X3OaA+IhP2s/tlMXXE6nsuxi+
+ boyo6XcX320StWtepowFb1LoWGDnp5aoyKKNioiZgkQmoHZDrGqa9T1aFP/dg90yaN
+ +2Cr8Oao3Kykw==
+Date: Tue, 7 Apr 2026 13:42:39 +0530
+From: Sumit Garg <sumit.garg@kernel.org>
+To: michael.srba@seznam.cz
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
+ Hrushikesh Salunke <h-salunke@ti.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Ye Li <ye.li@nxp.com>, Andre Przywara <andre.przywara@arm.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Heiko Schocher <hs@nabladev.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Tingting Meng <tingting.meng@altera.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Alice Guo <alice.guo@nxp.com>, George Chan <gchan9527@gmail.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Subject: Re: [PATCH 0/5] Add SPL support for Qualcomm platforms, starting
+ with sdm845
+Message-ID: <adS8d1UulaxycPlU@sumit-xelite>
+References: <20260404-qcom_spl-v1-0-9e6c2ac66587@seznam.cz>
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e4ccf153-200c-4d56-f05f-08de947589ee
-X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Apr 2026 07:16:07.9030 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Fh6DYoBu4TLgk3MKYUZHZmF+SLBKkegUM5OH9PmJBDfxzr46KXclPcLQS2tcO82KzHcMA05B8f1buWe+Bk0eqg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB10562
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260404-qcom_spl-v1-0-9e6c2ac66587@seznam.cz>
 X-Mailman-Approved-At: Tue, 07 Apr 2026 14:51:19 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -166,42 +99,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-PiAtLS0tLemCruS7tuWOn+S7ti0tLS0tDQo+IOWPkeS7tuS6ujogRmFiaW8gRXN0ZXZhbSA8ZmVz
-dGV2YW1AZ21haWwuY29tPg0KPiDlj5HpgIHml7bpl7Q6IDIwMjblubQ05pyINOaXpSAxOTozOQ0K
-PiDmlLbku7bkuro6IEFsaWNlIEd1byAoT1NTKSA8YWxpY2UuZ3VvQG9zcy5ueHAuY29tPg0KPiDm
-ioTpgIE6IE1hcmVrIFZhc3V0IDxtYXJleEBuYWJsYWRldi5jb20+OyB0aGFydmV5QGdhdGV3b3Jr
-cy5jb207IFllIExpDQo+IDx5ZS5saUBueHAuY29tPjsgdS1ib290QGxpc3RzLmRlbnguZGU7IGRs
-LXVib290LWlteCA8dWJvb3QtaW14QG54cC5jb20+Ow0KPiBKZXJvbWUgRm9yaXNzaWVyIDxqZXJv
-bWUuZm9yaXNzaWVyQGFybS5jb20+OyBUb20gUmluaSA8dHJpbmlAa29uc3Vsa28uY29tPjsNCj4g
-VGhvbWFzIFNjaMOkZmVyIDx0aG9tYXMuc2NoYWVmZXJAa29udHJvbi5jb20+OyBNaWNoYWVsIFdh
-bGxlDQo+IDxtd2FsbGVAa2VybmVsLm9yZz47IENsYXJrIFdhbmcgPHhpYW9uaW5nLndhbmdAbnhw
-LmNvbT47IENocmlzdGlhbg0KPiBNYXJhbmdpIDxhbnN1ZWxzbXRoQGdtYWlsLmNvbT47IFNpbW9u
-IEdsYXNzIDxzamdAY2hyb21pdW0ub3JnPjsNCj4gUXVlbnRpbiBTY2h1bHogPHF1ZW50aW4uc2No
-dWx6QGNoZXJyeS5kZT47IE1pa2hhaWwgS3NoZXZldHNraXkNCj4gPG1pa2hhaWwua3NoZXZldHNr
-aXlAaW9wc3lzLmV1PjsgUm9iZXJ0IE1hcmtvIDxyb2JlcnQubWFya29Ac2FydHVyYS5ocj47DQo+
-IFlhbyBaaSA8bWVAeml5YW8uY2M+OyBIZWlrbyBUaGllcnkgPGhlaWtvLnRoaWVyeUBnbWFpbC5j
-b20+OyBNYXJlayBWYXN1dA0KPiA8bWFyZWsudmFzdXQrcmVuZXNhc0BtYWlsYm94Lm9yZz47IFBl
-bmcgRmFuIDxwZW5nLmZhbkBueHAuY29tPjsgSmFja3kNCj4gQmFpIDxwaW5nLmJhaUBueHAuY29t
-PjsgQW5kcmV3IEdvb2Rib2R5IDxhbmRyZXcuZ29vZGJvZHlAbGluYXJvLm9yZz47DQo+IFN0ZWZh
-bm8gQmFiaWMgPHNiYWJpY0BuYWJsYWRldi5jb20+OyBBbGljZSBHdW8gPGFsaWNlLmd1b0BueHAu
-Y29tPg0KPiDkuLvpopg6IFtFWFRdIFJlOiBbUEFUQ0ggdjEgMy8zXSBpbXg5NTJfZXZrOiBFbmFi
-bGUgRU5FVEMwDQo+IA0KPiBDYXV0aW9uOiBUaGlzIGlzIGFuIGV4dGVybmFsIGVtYWlsLiBQbGVh
-c2UgdGFrZSBjYXJlIHdoZW4gY2xpY2tpbmcgbGlua3Mgb3INCj4gb3BlbmluZyBhdHRhY2htZW50
-cy4gV2hlbiBpbiBkb3VidCwgcmVwb3J0IHRoZSBtZXNzYWdlIHVzaW5nIHRoZSAnUmVwb3J0IHRo
-aXMNCj4gZW1haWwnIGJ1dHRvbg0KPiANCj4gDQo+IE9uIEZyaSwgQXByIDMsIDIwMjYgYXQgODow
-MuKAr0FNIDxhbGljZS5ndW9Ab3NzLm54cC5jb20+IHdyb3RlOg0KPiA+DQo+ID4gRnJvbTogQWxp
-Y2UgR3VvIDxhbGljZS5ndW9AbnhwLmNvbT4NCj4gPg0KPiA+IEVuYWJsZSBFTkVUQzAgZnVuY3Rp
-b25hbGl0eSBvbiB0aGUgaS5NWDk1MiBFVksgYm9hcmQuDQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5
-OiBBbGljZSBHdW8gPGFsaWNlLmd1b0BueHAuY29tPg0KPiA+IC0tLQ0KPiA+ICBhcmNoL2FybS9k
-dHMvaW14OTUyLWV2ay11LWJvb3QuZHRzaSB8ICA5NA0KPiArKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysNCj4gPiAgYXJjaC9hcm0vZHRzL2lteDk1Mi11LWJvb3QuZHRzaSAgICAgfCAx
-MDANCj4gKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrDQo+IA0KPiBQbGVhc2Ug
-ZXhwbGFpbiBpbiB0aGUgY29tbWl0IGxvZyB3aHkgeW91IGFyZSBhZGRpbmcgdGhlc2Ugbm9kZXMg
-dG8gdGhlDQo+IHUtYm9vdC5kdHNpIGZpbGVzLg0KPiANCj4gSGF2ZSB0aGV5IGFscmVhZHkgYmVl
-biBzdWJtaXR0ZWQgdG8gTGludXg/IEhhdmUgdGhleSBsYW5kZWQgaW4gbGludXgtbmV4dD8NCj4g
-DQo+IFBsZWFzZSBzaG93IHRoZSBmdWxsIHBpY3R1cmUgaGVyZS4NCg0KSGkgRmFiaW8sDQoNCkVO
-RVRDIGRldmljZSB0cmVlIG5vZGVzIGhhdmUgbm90IHlldCBiZWVuIHN1Ym1pdHRlZCB0byB0aGUg
-TGludXguIFRoZXkgYXJlIG5vdCBwcmVzZW50IGluIGxpbnV4LW5leHQgb3IgZGV2aWNldHJlZS1y
-ZWJhc2luZy4gRG8gSSBuZWVkIHRvIHJlc3VibWl0IHRoZSBwYXRjaCB0byBVLUJvb3QgYWZ0ZXIg
-dGhlc2Ugbm9kZXMgYXJlIGluY2x1ZGVkIGluIGxpbnV4LW5leHQ/DQoNCkJlc3QgcmVnYXJkcywN
-CkFsaWNlIEd1bw0KDQo=
+Hi Michael,
+
+On Sat, Apr 04, 2026 at 01:18:15AM +0200, michael.srba@seznam.cz wrote:
+> [ context ]
+> 
+> Different generations of Qualcomm SoCs have differences in the boot
+> process. msm8916 (and similar) are quite straightforward:
+> [EL3]bootrom->sbl1->tz->[EL2]hyp->[EL1]aboot->linux (omitting non-AP
+> cores). msm8998, sdm845, kodiak and simiar are a bit more involved:
+> [EL3]bootrom->xbl_sec->[EL1]xbl_loader->[EL3]tz->[EL2]hyp->[EL1]uefi
+> ->ABL->linux. Newer platforms like hamoa are even more involved.
+> 
+
+Just as a heads up, we are trying to open up the boot stack/EL3 on
+Qcom platforms such that a developer/OEM can run OEM only signed TF-A/
+OP-TEE stack on IoT targets. However, as you can expect it will take
+time but we already had some success..
+
+> Currently, u-boot proper can run in place of Linux, in place
+> of aboot, or in place of hyp. The option to run in place
+> of Linux is necessary because >99% of OEMs do not consider
+> the sale of a device to an end user a transfer of ownership,
+> that is, they sell the device with a hash of their public key
+> pre-burnt in the fuses.
+> 
+> [ end of context ]
+> 
+> U-Boot SPL, as it will be built using the defconfig added in this series,
+> replaces xbl_loader. If support for msm8916 or a similar platform
+> is added, it would replace sbl1. This will obviously only work on
+> the <1% of devices whose manufacturers consider the sale a transfer
+> of ownership, and of course most SBCs.
+> 
+> Unfortunately, starting with (iirc) msm8998, and getting progressively
+> worse, Qualcomm no longer consider a sale of their SoC a transfer
+> of ownership either. While it's possible to execute your code
+> in EL3 using either jtag or a patched devcfg, the former is impractical
+> while the latter is irrelevant for the purposes of running u-boot SPL
+> since the devcfg is parsed by trustzone. (this of course only applies
+> to the <1% of the devices where the OEM didn't lock the device down
+> prior to sale)
+
+Good to see your U-Boot SPL efforts as a replacement of XBL loader.
+
+> 
+> Given the above, this series uses an unintended feature in old builds
+> of xbl_sec which allows us to elevate to EL3. We also check if we
+> happen to already be running in EL3, in which case we proceed normally.
+> This can be the case e.g if JTAG was used to jump to u-boot SPL in EL3,
+> which may be the only option on e.g. kodiak. (Running in EL1 is not
+> really viable, because xbl_sec+xbl_loader are effectively sbl1 split
+> in half and replacing only one doesn't make much sense)
+
+To begin with Kodiak/RB3Gen2, you can download XBL_SEC image using links
+from meta-qcom recipe here [1] (firmware v00116.0 onwards) to execute
+qtestsign'ed code to run at EL3. If you are interested in TF-A/OP-TEE
+stack then that's available here for Kodiak too [2] [3] although you can
+execute U-Boot proper in EL3 too.
+
+[1] https://github.com/qualcomm-linux/meta-qcom/pull/1627
+[2] https://github.com/qualcomm-linux/trusted-firmware-a
+[3] https://github.com/qualcomm-linux/optee_os
+
+> 
+> For now, only usb dfu is supported to load the next stage. Since we
+> don't support ram initialization, the next stage will need to run from
+> SRAM too, which is currently not supported.
+
+Sadly DRAM init sequence isn't something that's available as an open
+source driver but you can expect QcLib blobs for DRAM init in U-Boot SPL
+just like what's already available with the coreboot project here [4].
+
+[4] https://github.com/coreboot/qc_blobs/tree/main/sc7280/boot
+
+-Sumit
+
+> Additional patches will
+> be needed to make that work, at which point it will be possible
+> to use u-boot as a ufs/emmc programmer with zero proprietary code
+> in the boot chain (sans bootrom and part of xbl_sec, but the latter and
+> technically even the former could be skipped with JTAG)
+> 
+> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
+> ---
+> Michael Srba (5):
+>       Makefile: add SPL_REMAKE_ELF_LDSCRIPT feature
+>       of_live: support in SPL
+>       drivers: allow clk_stub and spmi in SPL
+>       mach-snapdragon: support building SPL
+>       dts: add empty .dtsi for shift-axolotl
+> 
+>  Makefile                                           |  23 ++++
+>  arch/arm/Kconfig                                   |   6 +-
+>  arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi      |   4 +
+>  arch/arm/dts/sdm845-u-boot.dtsi                    |  16 +++
+>  arch/arm/mach-snapdragon/Kconfig                   |  98 +++++++++++++++-
+>  arch/arm/mach-snapdragon/board.c                   |  26 +++++
+>  arch/arm/mach-snapdragon/include/mach/boot0.h      |  61 ++--------
+>  .../mach-snapdragon/include/mach/msm8916_boot0.h   |  54 +++++++++
+>  .../include/mach/sdm845_spl_boot0.h                | 120 +++++++++++++++++++
+>  arch/arm/mach-snapdragon/u-boot-spl-elf-sdm845.lds |  25 ++++
+>  board/qualcomm/sdm845_spl.env                      |   1 +
+>  common/spl/Kconfig                                 |   6 +
+>  common/spl/spl.c                                   |  10 ++
+>  configs/sdm845_spl_defconfig                       | 130 +++++++++++++++++++++
+>  doc/board/qualcomm/index.rst                       |   1 +
+>  doc/board/qualcomm/spl.rst                         |  70 +++++++++++
+>  drivers/Makefile                                   |   2 +-
+>  drivers/clk/Kconfig                                |   6 +
+>  drivers/spmi/Kconfig                               |   6 +
+>  dts/Kconfig                                        |   5 +
+>  lib/Makefile                                       |   2 +-
+>  21 files changed, 616 insertions(+), 56 deletions(-)
+> ---
+> base-commit: 4dc4080805fac1b1ed7606ce3bc8fb44a6d59d5e
+> change-id: 20260403-qcom_spl-0826843ba41c
+> 
+> Best regards,
+> --  
+> Michael Srba <Michael.Srba@seznam.cz>
+> 
