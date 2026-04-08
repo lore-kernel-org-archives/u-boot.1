@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52AE110F995A
-	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 16:59:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 045CB10F995C
+	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 16:59:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7BD283D8A;
-	Wed,  8 Apr 2026 18:59:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0309784106;
+	Wed,  8 Apr 2026 18:59:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="NrOPoWNZ";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="TRW4bVHh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F17A38407E; Wed,  8 Apr 2026 16:04:31 +0200 (CEST)
+ id 3E3C584106; Wed,  8 Apr 2026 16:04:38 +0200 (CEST)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 004198407E
- for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 16:04:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 618BE8407E
+ for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 16:04:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de;
@@ -31,67 +31,71 @@ Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 8D5613F665
- for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 14:04:29 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 1D02A3F648
+ for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 14:04:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1775657069;
- bh=xvEdXS101iGPdq8D/tueyGV9esPvRRU3a73RwdsCb5Y=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=NrOPoWNZ+yAZmBCNzN+H+A0/g7wGUsCrn6H4PSGtfE5PpwMl7JaAslPm978kzWQlD
- GMc43aaWEC0o4/rwG0znsSNdL/Mdzod419TIGbFkwDSWRKqvQiRuGMSCxkO4lEQXgx
- osef+X68AXUsbrpKM9/oO8cBPL/x/p2ULHsLEK+j7vvHfeR9aKAVeYnrrsbjVb62in
- riiCAJ6BId4/xqOckvJJl1ecynWG6K7oJcEabix+kO3QeUeREIURl8rcs2KftLWkiU
- gtt7hTLBfi1LuhGQkcG6KCBWAw9nzWkYZpGEnzb1Q5CHMjrBbjQFSIqeaUIvgIgJvx
- qpuVKw+7Rc6/jWL82Vonve0r4BzmMOpCpggo6pdbN/5jA5k5R/ZlBBb+osRtNEY0iI
- RMWMta348gtQcyXyxsc0rliaEmdt0cuM+qckgDKfLVFMiA0H2hBTppqqwSjrZ1A9v/
- dPtUX0xrh3jYcx+UKULygyc9NzEBkllNDbNiW7mTf2iKz+HgziCK8+LgZamYTNdqSN
- piHjjkAcjBnvjdNYS4kzOWyDPz5uTj01Js/UkGY9yUWs/SltnZBIPPxybpchk6sbwm
- 1X//nUCedDxHt34jiOT0AwfP/G70FmjmO/cxIg+lND92j16m5tw03RSdCuIBmYs3La
- ku6uHv61Q3WNplTk1go3nZxM=
+ s=20251003; t=1775657076;
+ bh=JundCE4mMIYy9PnhaHJQKnMSwD1qy+qfUkMn8hUqmuI=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=TRW4bVHh449i522p76o1M6mTRgEtbaTVo1E+2ozyDnCoiMApsDUTSkr36VVx5sspv
+ VpLTfQtCa1OlsyqsvsLxa6iignbrn362kTK2SajHoiDlSIE+4tEhaZAfQKVYwDl938
+ YWDLueiHK5H0E0l2nEvueTjytucF8HwDO0FqFGd8HCc8H9qcOzgGZET/Lpe65Wa49K
+ MbIq/0Uy0OnntDWcblCb6vncrkptBvLlVNjrUDhFPy+r5hZvbELARODFn4P6T1JNEj
+ /VIsRx4Pt5PP6In0NyHMmYZF6ow5v8MWzqljG0VkiGcZMwkZZMFx+lDRK1trXBQOLt
+ O2maQlp0sfkmSUAJBg2WtGZNYnwcrC/ePa5bv3H63vLckdT0q9+5OhwERtNc45BVfs
+ B1eaAHkPOrxsVtNh61hJcOYOGVf7QEV/BVzgWP17e02/LOxVBpKdt5IrYrbsigxG1l
+ KSN8P+1SZAQnrIyLJL/MWLEgEWoxx79dbaqnhOVhg8P23ugqSuamNgQuI7OxKWblHm
+ 6MtmnHCHJkNFf+FHKQFA9xnIIvA5jGwA+HUcHP9LceJTrN8xxh2ahnX/QbwNEdrK6t
+ zjYubDOl3Mi8hKXc3O0OqWukJfzfHFnNDF3D1RHF+8GWiv04BTcjcL4iYdaj+BSSGZ
+ H3D/lgOExCHneTGmzYIkP+ak=
 Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-2b0c30b51bfso131743505ad.0
- for <u-boot@lists.denx.de>; Wed, 08 Apr 2026 07:04:29 -0700 (PDT)
+ d9443c01a7336-2b24305cb3cso72957735ad.2
+ for <u-boot@lists.denx.de>; Wed, 08 Apr 2026 07:04:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775657067; x=1776261867;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xvEdXS101iGPdq8D/tueyGV9esPvRRU3a73RwdsCb5Y=;
- b=UuZO7sUt90DAYLCYGVBv9bLlyNG/ewgkm1Y3g3L8tL21s+Fu+cJ4VWccUhhfgWgGff
- SqZukA9fwqTpBfK16fLYwp+FkWm0bY5QjPo3X2YIux4RvNBJCxOKakSYFtVc0RW6VWjF
- uXhUui2BfAhn0d0yUqhpq5BeqnGC1XzHRQOOCFWbWa+hcQ84K7J20ZsKkSeYjp0dcClH
- PzzvfOVQxSAN6wpGw5DXWxr6cEpT6QEffoYjprvWUm/SCFG6nWTMcaM8WpiWRdqnbEn9
- U8qu6hb1ckShe5o7qzpejKyWsEy8JmPLqjir5eWYhJz0RT5rVFVib4MAU5guLRezb/L7
- C1Ig==
-X-Gm-Message-State: AOJu0Yx2e0UPlCULP/losBVSO/tc8sOXw/xEHQ+MtblpTUM9zg81sryz
- 9ioH0+AFcskR7GcRopMJn/f0g3am2WBsL/tf9TUzQim3Y8dtLPrWddECrYX7rVPZw/ygFiB1DM9
- Z5iJ/tdcb6ijsrjKOi+XXmLeMrRSl86Tg+6WU327xK4payKoUjLaObg0otRYa9CUFwnap105GJd
- WALglqIg==
-X-Gm-Gg: AeBDieu6CNYUSWFT85DTYG67ZQJ6WV+oePu5ErjyY4pkGiJx83Rh7PaW9Xm3PZF3TrW
- Hyi94OAa4ZoOc0Lk5oY3ELqP0m+xfp6X61sHPi2axr+k6YtxWY1gIWYlK81aH/lmMe6IFazMprJ
- 6+cIcNZtBCUv7GgD0oTlfDnGojFf+hfkWhxXS4JchwAL+s+X4dNlkQUIUSmJKnRvCrd5SsTl6cP
- C33ji/0WjPoGBTNwh/OaEJXQ+OPOS/so4ll/E4RmbQWDMCKnH8PLUKbpHOIHw8Tm67s4EI5p86Q
- oNVuGbYzFJ3+s4ibM1+d+7XPqddeDn/dGgKIVNlDY7ffwc+wfLs+vd9a1n/lZf4Z2RxHlypnlNh
- wM7AMqn4zBtNimrF/AK+zeb+6FoqACBGWT/9LyJFTu0fIF/FI9o2qnFQ8gTGMgMveLSpG3B/C
-X-Received: by 2002:a17:903:17cb:b0:2b2:4029:d781 with SMTP id
- d9443c01a7336-2b28175e05amr236727795ad.20.1775657067419; 
- Wed, 08 Apr 2026 07:04:27 -0700 (PDT)
-X-Received: by 2002:a17:903:17cb:b0:2b2:4029:d781 with SMTP id
- d9443c01a7336-2b28175e05amr236727415ad.20.1775657067067; 
- Wed, 08 Apr 2026 07:04:27 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1775657074; x=1776261874;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=JundCE4mMIYy9PnhaHJQKnMSwD1qy+qfUkMn8hUqmuI=;
+ b=Sb9fKWK6mz35M8dkRJQMyw6Wzr2OGopY7wRXJBT+AyO3INeSTSHrcH/h85GPROsnsE
+ aecjZ82XTnzgLgmla0tjnViTd4dhJcli/DM0hhZXuB7nGTkCP2jLXEr3kBJbtp4Ld8Vo
+ aAJgB+03i97zHZhlEMKCcJsNTSLJ2wYyxP7T/NhsIHSYQrqUgnUzAKhGE7+nCvAyb+26
+ kYqC31ZRxkOBo7shhcTASl1dZ2GNf9u/qROY7MvgaiYrCjlwBgBP9KdWgYKS0dE0EkxP
+ EctJTIvBw/rnjJdUB1UpqKbjtfJJEBF0SA+GLAZ10gaAJ5m3KXD2SXdz3Q+gCwjNZ9KL
+ yfgQ==
+X-Gm-Message-State: AOJu0Yxcy6ezfHZUDko8JBUbm4OK25Xm6gumRUh0UQS+Kt42GcRQH/7P
+ s53YYSYaelbJk1eWeZ41+Cvm5d30F27NuBfHMGWap2UWilPk2nBKEaqhOwp+29tQqdAZcSbIXYr
+ 3gJnDEUWbP2h4YNRIsfTrb98WDsFm4yz8gKT/rlm7D9wf9pTY37MYUtqcgp/Kh8iDMxCAUFDJdJ
+ bl0Agl2A==
+X-Gm-Gg: AeBDievhV9gR0RTMqwLb3FeGfBjUmX9ULdmEM2+M4ZSAs/YM8ZnXA3PSv31en43TD4O
+ aK1ULmvnIaNesLCAkDUsu05jnMXxSrlH40lQQ72nmijK5w30gTgjBXPIP2Jtyg4j+EvCJHP+N8W
+ YyKaFtBRHuGTDtKSJuPM8agcPsa3OzdAjtFS1SetK0TEDZqT6p1kifEokfWpTll5D8cLd6yNNTD
+ kyBOcn4qwD4U+Og4OTlA/nqI+0DuVP98+ZYmoQTH7m07/huyjXYprsqKB7YPDHuBkWNmyYjs+0M
+ TmJhyl8xmoiA/G/Sfcnto57njDA+0AcqPGrReeDwKdIqCdYd5fni2XgcU9OCZcp/NFr/gMXDC7O
+ AQNzwYGByBJVOjX6nVJM5Qg7lCkyJ39WcMT09lALO1jc9GkAhg81q8V1oYEcIzOLRW6nNyxen
+X-Received: by 2002:a17:903:240a:b0:2b0:4b3a:9b4d with SMTP id
+ d9443c01a7336-2b2816e965dmr203819365ad.20.1775657073417; 
+ Wed, 08 Apr 2026 07:04:33 -0700 (PDT)
+X-Received: by 2002:a17:903:240a:b0:2b0:4b3a:9b4d with SMTP id
+ d9443c01a7336-2b2816e965dmr203817535ad.20.1775657070958; 
+ Wed, 08 Apr 2026 07:04:30 -0700 (PDT)
 Received: from noble-uboot.lxd (124-218-37-86.cm.dynamic.apol.com.tw.
  [124.218.37.86]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b2749a3af9sm194312545ad.63.2026.04.08.07.04.24
+ d9443c01a7336-2b2749a3af9sm194312545ad.63.2026.04.08.07.04.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Apr 2026 07:04:26 -0700 (PDT)
+ Wed, 08 Apr 2026 07:04:29 -0700 (PDT)
 From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.denx.de
 Cc: Aristo Chen <aristo.chen@canonical.com>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 1/2] lib: hashtable: fix integer overflow in himport_r
-Date: Wed,  8 Apr 2026 14:03:35 +0000
-Message-ID: <20260408140339.798015-1-aristo.chen@canonical.com>
+Subject: [PATCH v1 2/2] test: env: add test for himport_r SIZE_MAX overflow
+ guard
+Date: Wed,  8 Apr 2026 14:03:36 +0000
+Message-ID: <20260408140339.798015-2-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260408140339.798015-1-aristo.chen@canonical.com>
+References: <20260408140339.798015-1-aristo.chen@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 08 Apr 2026 18:59:06 +0200
@@ -111,40 +115,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When size == SIZE_MAX, the expression malloc(size + 1) wraps to
-malloc(0) due to unsigned integer overflow. malloc(0) may return a
-non-NULL pointer, causing the subsequent memcpy(data, env, size) to
-write SIZE_MAX bytes into a zero-byte allocation.
-
-This is reachable from the U-Boot console via "env import", where size
-is taken directly from a user-supplied hex argument.
-
-Add an explicit check for SIZE_MAX before the malloc call and return
-EINVAL.
+Add a unit test that verifies himport_r rejects SIZE_MAX as the size
+argument, ensuring the integer overflow guard added to lib/hashtable.c
+is exercised and not accidentally regressed.
 
 Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 ---
- lib/hashtable.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ test/env/hashtable.c | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-diff --git a/lib/hashtable.c b/lib/hashtable.c
-index 75c263b5053..902fa6f3e98 100644
---- a/lib/hashtable.c
-+++ b/lib/hashtable.c
-@@ -820,6 +820,13 @@ int himport_r(struct hsearch_data *htab,
- 		return 0;
- 	}
- 
-+	/* Check for potential integer overflow */
-+	if (size == SIZE_MAX) {
-+		debug("%s: size too large, would overflow\n", __func__);
-+		__set_errno(EINVAL);
-+		return 0;
-+	}
+diff --git a/test/env/hashtable.c b/test/env/hashtable.c
+index 16e49358888..ce9689f46d7 100644
+--- a/test/env/hashtable.c
++++ b/test/env/hashtable.c
+@@ -122,3 +122,20 @@ static int env_test_htab_deletes(struct unit_test_state *uts)
+ 	return 0;
+ }
+ ENV_TEST(env_test_htab_deletes, 0);
 +
- 	/* we allocate new space to make sure we can write to the array */
- 	if ((data = malloc(size + 1)) == NULL) {
- 		debug("himport_r: can't malloc %lu bytes\n", (ulong)size + 1);
++/* Verify himport_r rejects SIZE_MAX to prevent integer overflow in malloc */
++static int env_test_htab_import_overflow(struct unit_test_state *uts)
++{
++	struct hsearch_data htab;
++
++	memset(&htab, 0, sizeof(htab));
++	ut_asserteq(1, hcreate_r(SIZE, &htab));
++
++	/* SIZE_MAX would cause malloc(size + 1) to wrap to malloc(0) */
++	ut_asserteq(0, himport_r(&htab, "", SIZE_MAX, '\0', 0, 0, 0, NULL));
++
++	hdestroy_r(&htab);
++	return 0;
++}
++
++ENV_TEST(env_test_htab_import_overflow, 0);
 -- 
 2.43.0
 
