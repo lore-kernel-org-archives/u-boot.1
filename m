@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27EEFEA3C59
-	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 13:02:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BFF4EA3C59
+	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 13:02:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56C1C841A2;
+	by phobos.denx.de (Postfix) with ESMTP id 91404841CD;
 	Thu,  9 Apr 2026 15:00:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=hpe.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hpe.com header.i=@hpe.com header.b="LLBAwvp+";
+	dkim=pass (2048-bit key; unprotected) header.d=hpe.com header.i=@hpe.com header.b="nSVqmSya";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB74983936; Wed,  8 Apr 2026 21:25:07 +0200 (CEST)
-Received: from mx0b-002e3701.pphosted.com (mx0b-002e3701.pphosted.com
- [148.163.143.35])
+ id 1AC7684118; Wed,  8 Apr 2026 21:25:08 +0200 (CEST)
+Received: from mx0a-002e3701.pphosted.com (mx0a-002e3701.pphosted.com
+ [148.163.147.86])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D2988407E
- for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 21:24:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CADB84120
+ for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 21:25:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=hpe.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jorge.cisneros@hpe.com
-Received: from pps.filterd (m0134425.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0134422.ppops.net [127.0.0.1])
  by mx0b-002e3701.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 638H3KpP1755873; Wed, 8 Apr 2026 19:24:21 GMT
+ 638F2jWq1851674; Wed, 8 Apr 2026 19:24:23 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hpe.com; h=cc
  :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=pps0720; bh=iX
- uLIKE0o2uE301AfUL84nBsQKb4zu1bZ8Q3lEls9f8=; b=LLBAwvp+OpRH8FAyEw
- mQj/X+jBTSf19Mg/YOVaetBiLAyl3FodZqYb/ZcO0OO9PFcKAmJOICP8h8mtx9kH
- 9HvG4Xczi+DfyLYq7W75UfbspUskNpiqjrvluTrIUwsK8hg+RKCogTA6LLHrXjpW
- +ZgFtmZrb8ApNM/Gs2q3rd0KhnE1wfsO4ZK7ygJZ6daf9JL6ByFA+EPoCapA59h8
- SMD64J1MmmDTde9mq02QSuisfQ2VBBtW6KQkgsMmxi1AL6bzTT4+jcPHZM5GuWbE
- 8VCWFPgJh16RnqK4PnaxsLNTr6WSwOYsplxjJo2TyiH6k2ogWdWNr5rz/ygeWnI9
- rXhw==
-Received: from p1lg14881.it.hpe.com (p1lg14881.it.hpe.com [16.230.97.202])
- by mx0b-002e3701.pphosted.com (PPS) with ESMTPS id 4ddu35hj0k-1
+ :message-id:mime-version:references:subject:to; s=pps0720; bh=Fa
+ dC60KT/B5h2aPSJuhItBgpnUYaL6NRPb8xrgcRRh8=; b=nSVqmSya2A0Pnu4wyx
+ FSPjEPuuXT1F34a9yVpsPBBsjMPs1EABXbiokpyowPDwZ5q2UK6c8AKweuunylHb
+ DTQ9p1RLhicLGQnP33oPWk0fOCm2Afs16sOzJ6SH4Lh0pcgzK4crp4vW3zrEcpt+
+ CX1vhLmR9pgvAicVsFMrQyCF3njWbweQ+tf28eyq3tKOeDFJ90QJNPmmjs5hKpZ5
+ rFe++uGPjlO0Ocip4x/Nk6vrgOPiynp+s8yahBzSfgxtk6UUd8e7kf4u0zi5aEmQ
+ YBqokpkwr4Czr3IU7D3zB34/aRXStIRt1gQyVy4S5cNDWvwDHsEj07hqLkI1VVkN
+ ygqw==
+Received: from p1lg14878.it.hpe.com (p1lg14878.it.hpe.com [16.230.97.204])
+ by mx0b-002e3701.pphosted.com (PPS) with ESMTPS id 4ddnu8e096-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Wed, 08 Apr 2026 19:24:21 +0000 (GMT)
+ Wed, 08 Apr 2026 19:24:22 +0000 (GMT)
 Received: from p1lg14886.dc01.its.hpecorp.net (unknown [10.119.18.237])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by p1lg14881.it.hpe.com (Postfix) with ESMTPS id 189BA801AD8;
- Wed,  8 Apr 2026 19:24:20 +0000 (UTC)
+ by p1lg14878.it.hpe.com (Postfix) with ESMTPS id 0E41C2BACC;
+ Wed,  8 Apr 2026 19:24:22 +0000 (UTC)
 Received: from [127.0.1.1] (unknown [16.231.227.39])
- by p1lg14886.dc01.its.hpecorp.net (Postfix) with ESMTP id BB224806B47;
- Wed,  8 Apr 2026 19:24:18 +0000 (UTC)
+ by p1lg14886.dc01.its.hpecorp.net (Postfix) with ESMTP id E4CF8805E61;
+ Wed,  8 Apr 2026 19:24:20 +0000 (UTC)
 From: Jorge Cisneros <jorge.cisneros@hpe.com>
-Date: Wed, 08 Apr 2026 19:24:14 +0000
-Subject: [PATCH 2/9] arm: hpe: Add GSC SoC support
+Date: Wed, 08 Apr 2026 19:24:16 +0000
+Subject: [PATCH 4/9] watchdog: Add HPE GSC watchdog driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260408-hpe-gsc-upstream-v1-2-2be1fb7cbbfc@hpe.com>
+Message-Id: <20260408-hpe-gsc-upstream-v1-4-2be1fb7cbbfc@hpe.com>
 References: <20260408-hpe-gsc-upstream-v1-0-2be1fb7cbbfc@hpe.com>
 In-Reply-To: <20260408-hpe-gsc-upstream-v1-0-2be1fb7cbbfc@hpe.com>
 To: u-boot@lists.denx.de
@@ -93,28 +93,28 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Philip Molloy <philip.molloy@analog.com>,
  Jorge Cisneros <jorge.cisneros@hpe.com>
 X-Mailer: b4 0.15.1
-X-Authority-Analysis: v=2.4 cv=JPgLdcKb c=1 sm=1 tr=0 ts=69d6ab65 cx=c_pps
- a=FAnPgvRYq/vnBSvlTDCQOQ==:117 a=FAnPgvRYq/vnBSvlTDCQOQ==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA4MDE4MSBTYWx0ZWRfX6HI9+/9pRAMS
+ mtCO+wpgfdpANqGeT7hM7AkBTZlrF/svLpDC4DQ1m1BToGrRurbplkZX3uX9th0c88xHpxR7QYs
+ MVdX1HDsM6za7XmXxtBJ83aCQPrskghpH67Lk09MVqACeZ8/rLh5jKZ6EAcovTb3DeDl3z4Vpwu
+ VYRMrytF5dTTFViFpnivxhJDweUoMiCevFocej+kCyaxzj2XiM2O1mImTDaA+70ykN3EwgvSjCg
+ oXanF/PBmkjVn5VNDXi4SqKsIQLS+LbpT/lBnRiPEg3MEHP85nwLOzD25YD7yMSrrMe1lEQVdaH
+ xIp3X6/l7fy02JpF8qLtwCvJojl42IvJ2bryfCdhlhSBZwlGNx4Awd3lfhAwwSCSurqXpDWg2zP
+ kgsiutxJIy0YH1m4r32HJYXOmZOW2B0RyjzyROGGZXq65H8pUoJXXY3GRa/5C2We31KRtibm1Qy
+ KbjlUb+tkdvO3/0y3nQ==
+X-Authority-Analysis: v=2.4 cv=LJhWhpW9 c=1 sm=1 tr=0 ts=69d6ab66 cx=c_pps
+ a=UObrlqRbTUrrdMEdGJ+KZA==:117 a=UObrlqRbTUrrdMEdGJ+KZA==:17
  a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=gQcMVamqm3wCPoSYhaRC:22 a=ZSrvDirOKP4VPF05hnFf:22 a=MvuuwTCpAAAA:8
- a=nW4WiQT0LLkrqWE3KoYA:9 a=QEXdDO2ut3YA:10
-X-Proofpoint-ORIG-GUID: 4bZIGNOHYYN1SKcD9UEnPh8sROkgyqOz
-X-Proofpoint-GUID: 4bZIGNOHYYN1SKcD9UEnPh8sROkgyqOz
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA4MDE4MSBTYWx0ZWRfX+H/EeXF59grn
- ksq6nrrXFqLOgmC+0b6TOOUSZaaaKz0mKYWSVSOPARIn2I1fSjVq+l7hLyvHZc4gP2dAq9zKMpB
- L2rH+v65RENFU8+b3vn+mKBMLOHu1CBFiRDe1S6AYVUFrh1Rcm2wk9W3U4V5PO98FLfJzrFd4qZ
- 9Zc3TlWt/OxFmj88leLG3KYCWuaTSuFRmGHpcEMuXg7N1JmCH+FjENAsj1o93OeBmgyXN2Q3wI5
- JPdax8njm9GP5jetxCfVTkOld7nSpe2v1Q/Gc1J/WfMAsGa7EasMenGWAOsa1A3kY8U9IEo5eyI
- aXalQNSZJaisc6QSaGcutswhJLLzl9ongiMhwX6A6k+oAYEncUpGa8VUVoxW22TQVrdDm8qQN4G
- j69tFGjZnPdE00pCaMRsMUZ464cn+ozVGvBEo/ehkhGBEJmLLbxg/ssyrkKtZ9Az6qkaEFA1SxS
- 5h0xpk8zabW2hyi5aBw==
+ a=gQcMVamqm3wCPoSYhaRC:22 a=ModqzXLkJJ0tFyq98apW:22 a=MvuuwTCpAAAA:8
+ a=NIagIq1R15lFhUNdsw8A:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-GUID: GOkdmUhvl5-SIBKz1gmSGi8_W8FEy_ry
+X-Proofpoint-ORIG-GUID: GOkdmUhvl5-SIBKz1gmSGi8_W8FEy_ry
 X-HPE-SCL: -1
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-04-08_05,2026-04-08_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 bulkscore=0 priorityscore=1501 clxscore=1015 spamscore=0
- lowpriorityscore=0 malwarescore=0 impostorscore=0 suspectscore=0 adultscore=0
+ malwarescore=0 suspectscore=0 impostorscore=0 bulkscore=0 clxscore=1015
+ lowpriorityscore=0 phishscore=0 spamscore=0 priorityscore=1501 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2604010000 definitions=main-2604080181
 X-Mailman-Approved-At: Thu, 09 Apr 2026 15:00:51 +0200
@@ -134,70 +134,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add core SoC support for the HPE GSC (Gen Server Controller), an ARM64
-BMC SoC used in HPE Gen12 ProLiant and Synergy servers.
+Add watchdog driver for the HPE GSC SoC. The GSC watchdog uses two
+separate register regions: a counter register and a control register.
+Writing the counter value resets the watchdog timer, while writing to
+the control register enables or disables the watchdog.
 
-This includes:
-- Kconfig entries for SOC_GSC with ARM64, I3C hub DT fixup, and VPD
-  patching options (SYS_SOC set to "gsc")
-- SoC reset implementation via writel to GSC system control register
-- Architecture-level clock header for MACB Ethernet driver compatibility
-
-The GSC reuses several GXP IP blocks (timer, SPI, I2C) while adding
-new peripherals including a GICv3 interrupt controller, Cadence MACB
-GEM Ethernet, and a Denali DDR memory controller.
+Supported operations: start, stop, reset, and expire_now.
 
 Signed-off-by: Jorge Cisneros <jorge.cisneros@hpe.com>
 ---
- arch/arm/include/asm/arch-gsc/clk.h | 14 ++++++++++++++
- arch/arm/mach-hpe/gsc/reset.c       | 19 +++++++++++++++++++
- 2 files changed, 33 insertions(+)
+ drivers/watchdog/Kconfig   |   7 +++
+ drivers/watchdog/Makefile  |   1 +
+ drivers/watchdog/gsc_wdt.c | 110 +++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 118 insertions(+)
 
-diff --git a/arch/arm/include/asm/arch-gsc/clk.h b/arch/arm/include/asm/arch-gsc/clk.h
+diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+index 35ae7d106b1..692a7eb4304 100644
+--- a/drivers/watchdog/Kconfig
++++ b/drivers/watchdog/Kconfig
+@@ -195,6 +195,13 @@ config WDT_DAVINCI
+ 	  Select this to enable the watchdog timer for DaVinci SoCs such as the
+ 	  OMAP-L138.
+ 
++config WDT_GSC
++	bool "HPE GSC watchdog support"
++	depends on WDT
++	help
++	  Enable support for the watchdog timer in HPE GSC BMC SoC
++	  used in HPE Gen12 servers.
++
+ config WDT_GPIO
+ 	bool "External gpio watchdog support"
+ 	depends on WDT
+diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+index 02e2674f8af..f7397e03527 100644
+--- a/drivers/watchdog/Makefile
++++ b/drivers/watchdog/Makefile
+@@ -32,6 +32,7 @@ obj-$(CONFIG_WDT_CDNS) += cdns_wdt.o
+ obj-$(CONFIG_WDT_DA9063) += da9063-wdt.o
+ obj-$(CONFIG_WDT_DAVINCI) += davinci_wdt.o
+ obj-$(CONFIG_WDT_FTWDT010) += ftwdt010_wdt.o
++obj-$(CONFIG_WDT_GSC) += gsc_wdt.o
+ obj-$(CONFIG_$(SPL_TPL_)WDT_GPIO) += gpio_wdt.o
+ obj-$(CONFIG_WDT_MAX6370) += max6370_wdt.o
+ obj-$(CONFIG_WDT_MCF) += mcf_wdt.o
+diff --git a/drivers/watchdog/gsc_wdt.c b/drivers/watchdog/gsc_wdt.c
 new file mode 100644
-index 00000000000..19922c433d4
+index 00000000000..b535f47e052
 --- /dev/null
-+++ b/arch/arm/include/asm/arch-gsc/clk.h
-@@ -0,0 +1,14 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * HPE GSC SoC clock interface
-+ */
-+
-+#ifndef _ASM_ARCH_CLK_H_
-+#define _ASM_ARCH_CLK_H_
-+
-+static inline unsigned long get_macb_pclk_rate(unsigned int dev_id)
-+{
-+	return 50000000; /* 50 MHz */
-+}
-+
-+#endif /* _ASM_ARCH_CLK_H_ */
-diff --git a/arch/arm/mach-hpe/gsc/reset.c b/arch/arm/mach-hpe/gsc/reset.c
-new file mode 100644
-index 00000000000..67fc83b2deb
---- /dev/null
-+++ b/arch/arm/mach-hpe/gsc/reset.c
-@@ -0,0 +1,19 @@
++++ b/drivers/watchdog/gsc_wdt.c
+@@ -0,0 +1,110 @@
 +// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * GSC SoC reset
-+ *
-+ * (C) Copyright 2019-2025 Hewlett Packard Enterprise Development LP.
-+ * Author: Gilbert Chen <gilbert.chen@hpe.com>
-+ */
++/* Copyright (C) 2022-2025 Hewlett Packard Enterprise Development LP */
 +
++#include <dm.h>
++#include <errno.h>
++#include <log.h>
++#include <wdt.h>
 +#include <asm/io.h>
++#include <linux/err.h>
 +
-+#define GSC_CCR	0xC0000000
++#define MASK_WDGCS_ENABLE	BIT(0)
++#define MASK_WDGCS_RELOAD	BIT(2)
++#define MASK_WDGCS_NMIEN	BIT(3)
++#define MASK_WDGCS_WARN		BIT(7)
 +
-+void reset_cpu(void)
++#define WDT_MAX_TIMEOUT_MS	655350
++#define SECS_TO_WDOG_TICKS(x)	((x) * 100)
++
++struct gsc_wdt_priv {
++	void __iomem *counter;
++	void __iomem *control;
++};
++
++static int gsc_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
 +{
-+	writel(1, GSC_CCR);
++	struct gsc_wdt_priv *priv = dev_get_priv(dev);
++	u8 val;
++	u16 timeout_secs;
 +
-+	while (1)
-+		;	/* loop forever till reset */
++	if (timeout_ms > WDT_MAX_TIMEOUT_MS)
++		timeout_ms = WDT_MAX_TIMEOUT_MS;
++	else if (timeout_ms == 0)
++		timeout_ms = CONFIG_WATCHDOG_TIMEOUT_MSECS;
++
++	timeout_secs = timeout_ms / 1000;
++	writew(SECS_TO_WDOG_TICKS(timeout_secs), priv->counter);
++
++	val = readb(priv->control);
++	val |= MASK_WDGCS_ENABLE;
++	writeb(val, priv->control);
++
++	return 0;
 +}
++
++static int gsc_wdt_stop(struct udevice *dev)
++{
++	struct gsc_wdt_priv *priv = dev_get_priv(dev);
++	u8 val;
++
++	val = readb(priv->control);
++	val &= ~MASK_WDGCS_ENABLE;
++	writeb(val, priv->control);
++
++	return 0;
++}
++
++static int gsc_wdt_reset(struct udevice *dev)
++{
++	struct gsc_wdt_priv *priv = dev_get_priv(dev);
++	u8 val;
++
++	val = readb(priv->control);
++	val |= MASK_WDGCS_RELOAD;
++	writeb(val, priv->control);
++
++	return 0;
++}
++
++static int gsc_wdt_expire_now(struct udevice *dev, ulong flags)
++{
++	return gsc_wdt_start(dev, 1, flags);
++}
++
++static const struct wdt_ops gsc_wdt_ops = {
++	.start = gsc_wdt_start,
++	.reset = gsc_wdt_reset,
++	.stop = gsc_wdt_stop,
++	.expire_now = gsc_wdt_expire_now,
++};
++
++static const struct udevice_id gsc_wdt_ids[] = {
++	{ .compatible = "hpe,gsc-wdt" },
++	{ }
++};
++
++static int gsc_wdt_probe(struct udevice *dev)
++{
++	struct gsc_wdt_priv *priv = dev_get_priv(dev);
++
++	priv->counter = dev_remap_addr_index(dev, 0);
++	if (!priv->counter)
++		return -EINVAL;
++
++	priv->control = dev_remap_addr_index(dev, 1);
++	if (!priv->control)
++		return -EINVAL;
++
++	gsc_wdt_stop(dev);
++
++	return 0;
++}
++
++U_BOOT_DRIVER(gsc_wdt) = {
++	.name = "gsc_wdt",
++	.id = UCLASS_WDT,
++	.of_match = gsc_wdt_ids,
++	.probe = gsc_wdt_probe,
++	.priv_auto = sizeof(struct gsc_wdt_priv),
++	.ops = &gsc_wdt_ops,
++};
 
 -- 
 2.43.0
