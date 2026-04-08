@@ -4,78 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FD6110F995A
-	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 16:35:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 103D010F995F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 16:36:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49C2383F98;
-	Wed,  8 Apr 2026 18:35:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 99D5483F98;
+	Wed,  8 Apr 2026 18:36:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="kDPtwICd";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="TBa9bk+q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B303384142; Wed,  8 Apr 2026 18:35:31 +0200 (CEST)
-Received: from out-179.mta0.migadu.com (out-179.mta0.migadu.com
- [91.218.175.179])
+ id 3ACB08404A; Wed,  8 Apr 2026 18:36:32 +0200 (CEST)
+Received: from out-180.mta0.migadu.com (out-180.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::b4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8F3F83D8A
- for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 18:35:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F4CB83D8A
+ for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 18:36:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=funderscore@postmarketos.org
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
+Date: Wed, 08 Apr 2026 16:35:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1775666129;
+ s=key1; t=1775666189;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=pgCxefpAADFmaBf7yKs9CrXigRVeVam7xmJB6EPnUk8=;
- b=kDPtwICdIR6Cqfs6wnnCq4hgw6r0cYcZMKfH/Pfp4IVhYY+xJNGALaELBMRE12AdjOpE2G
- UOOlYKgb/8b3U4gP39FLKbnFOlOhkoOM1vM1ZflH8wlDNlJZ4A4WcHZNteB+ZXCiLWf/GA
- nIwKhsm4hFLbvOFdZ+NmcdxPFQbqWSzCXwSKPFj4grkMyvWNuFCrE8putGmc87opVK3N67
- vPnvAuLfgYv3bC6ohnEJHrH1L09j1EnAeAcYucLFm1J+17UEbntKwNgV4+NSUTYsR11/MP
- S4NaX7B+KaMM5dwVsaLkphx8i0BZ6sJAfN8oX8KSs4LCx2+wnmfMrB5i6MtG5Q==
+ bh=HW3QIYzuVGmnr2iYCGDvI5LijokJlKu7maSj1UUAJ7g=;
+ b=TBa9bk+qok9G3lu3pq7OvRtb/4DBiBhbuqinLOQchX6zOoFNouhTWZSiBUuLdW9G5/ATiR
+ P/YaqGbqVWNJwy3CDE17QhtQApUi9lK0dgWB/inH/feN2Lb+Jip7j+sA9lmVj/6NI5xHx1
+ xcFS+zT6dU/kXwWsPauND/kaRVur881pv5S7sY/B8nbrSSFATBPrhVGkVxtpyNhG/KvgvF
+ MEjF0zHouKyotujVcNFlvEr2rglsEsXw4PfDhMxmdI1el5E7B3mJun0hSRvP1hH0y8ongp
+ z2eff78nD6zfyEg4JWBddlK0zZRp5e1L90BHGOkqnTF0Lbx0CaH4nBxyDKazoQ==
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
 From: Ferass El Hafidi <funderscore@postmarketos.org>
-Date: Wed, 08 Apr 2026 16:34:57 +0000
-Subject: [PATCH v2 2/2] cmd: bootmenu: ANSI_CLEAR_LINE before entry name
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>,
+ Kory Maincent <kory.maincent@bootlin.com>, Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Anshul Dalal <anshuld@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Martin Schwan <m.schwan@phytec.de>,
+ David Zang <davidzangcs@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>
+Subject: Re: [PATCH 1/2] autoboot: allow custom prompt without requiring
+ AUTOBOOT_KEYED
+References: <20260405-ui-cosmetics-v1-0-bffec3cac741@postmarketos.org>
+ <20260405-ui-cosmetics-v1-1-bffec3cac741@postmarketos.org>
+ <20260406153000.GP41863@bill-the-cat> <td2xjd.37hr0tkamw99c@postmarketos.org>
+ <20260406161057.GS41863@bill-the-cat> <td32mt.vpwrp72jgt4m@postmarketos.org>
+In-Reply-To: <td32mt.vpwrp72jgt4m@postmarketos.org>
+Message-ID: <td6osk.387waa70kc9gn@postmarketos.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260408-ui-cosmetics-v2-2-721dc6d2116a@postmarketos.org>
-References: <20260408-ui-cosmetics-v2-0-721dc6d2116a@postmarketos.org>
-In-Reply-To: <20260408-ui-cosmetics-v2-0-721dc6d2116a@postmarketos.org>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
- Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Anshul Dalal <anshuld@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Martin Schwan <m.schwan@phytec.de>, David Zang <davidzangcs@gmail.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Christian Marangi <ansuelsmth@gmail.com>, 
- Ferass El Hafidi <funderscore@postmarketos.org>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=664;
- i=funderscore@postmarketos.org; h=from:subject:message-id;
- bh=ZO2JsmAmqHbIkWnJKKXuw+gTS8UrXS09vWJIeC+Yg2M=;
- b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBp1oPMenyXqQT31OM3eAK/0vhsrS/AwcmwQH2nc
- w6QRJJV6J+JAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCadaDzAAKCRCEr8vQ14ma
- A57LD/9qjzSHkEAb4everDev3yToMxOGkZtigkaJsSQ62W4dKoITLE8qrFkJbi8NpTrIww8Wz0o
- gsoUGzhdHgd/pH8EqUiCfgUTiH4EqQCS+z5lSlHNSLnsh2xOy5tFSWtZC8tZ3w7m3SlqmVhUdyO
- c/WQel7aiIuF0LOJ+O3zlY0460zVw7bNKS9N9kyx8wx8EmaDP5v9oKW9hJ6HWJLKD/mLBHYIJk9
- U3OLHZDkOqcbno+YhAz6BZJ93IQBgQATwSiIxKSnV36Y3iCYc8Mgzo3tRdtQBRzMjnX8X9eZDgB
- aMyHru9StEw2kz+rXdLVhEAvQjLZ7Oe8NdarKxZnCEfAj5vQZWa7tbaIzeIdQ2hMKfQaGb5+2E0
- ah4McpOj1e3RP6cpasp5RqdbQha3xUSgh/PqP2xHyUV4VVrd4cUNubSjK9yECkjJJ79IGqeIv3n
- 8E+01q9Yz/rCXvOFZcmSdsdYb5xp/AKik1QFBxT5mLkECRQtI5h+FJmZfT3t64qO7xrxUpzsgeR
- aQSQMYpGoPNv6ChM6k0QlQFTlfx92fQ0IbRhPHLzMOm01bR7aGoEgn7BpGOQBYCOfbksscuh+RC
- xgj0z0SxYWiz/ECKd2KYWDBbJsSMfM4Ye72nVSxKyLho0JUUsIDeAN5DLyNQst2x7WvccCzq02j
- Bp/PqEdT4GXAxNw==
-X-Developer-Key: i=funderscore@postmarketos.org; a=openpgp;
- fpr=0301BC37FB555CACFD798BEE84AFCBD0D7899A03
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8; format=flowed
 X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,28 +77,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This has the effect of highlighting the whole entry when it is selected
-(on vidconsole), which makes it consistent with eficonfig too.
+Hi Tom,
 
-Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
----
- cmd/bootmenu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Mon, 06 Apr 2026 17:41, Ferass El Hafidi <funderscore@postmarketos.org> wrote:
+>On Mon, 06 Apr 2026 16:10, Tom Rini <trini@konsulko.com> wrote:
+>>On Mon, Apr 06, 2026 at 03:39:38PM +0000, Ferass El Hafidi wrote:
+>>> On Mon, 06 Apr 2026 15:30, Tom Rini <trini@konsulko.com> wrote:
+>>> > On Sun, Apr 05, 2026 at 10:49:04AM +0000, Ferass El Hafidi wrote:
+>>> > 
+>>> > > The autoboot prompt used to only be customizable in Kconfig when
+>>> > > AUTOBOOT_KEYED was enabled. For a usecase such as having a nicer
+>>> > > autoboot prompt alongside a splash screen, there is no reason for
+>>> > > AUTOBOOT_KEYED to be required for this.
+>>> > > 
+>>> > > Remove the dependency to AUTOBOOT_KEYED, and use AUTOBOOT_PROMPT in
+>>> > > print_boot_delay() instead of a hardcoded string.
+>>> > > 
+>>> > > Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
+>>> > > ---
+>>> > >  boot/Kconfig      | 31 ++++++++++++++++---------------
+>>> > >  common/autoboot.c |  4 +++-
+>>> > >  2 files changed, 19 insertions(+), 16 deletions(-)
+>>> > > 
+>>> > > diff --git a/boot/Kconfig b/boot/Kconfig
+>>> > > index bfed452d77e..6c8ec356996 100644
+>>> > > --- a/boot/Kconfig
+>>> > > +++ b/boot/Kconfig
+>>> > > @@ -1560,6 +1560,22 @@ config AUTOBOOT
+>>> > >  	help
+>>> > >  	  This enables the autoboot.  See doc/README.autoboot for detail.
+>>> > > +config AUTOBOOT_PROMPT
+>>> > > +	string "Autoboot stop prompt"
+>>> > > +	default "Autoboot in %d seconds\\n" if AUTOBOOT_KEYED
+>>> > > +	default "\\rHit any key to stop autoboot: %d"
+>>> > > +	help
+>>> > > +	  This string is displayed before the boot delay selected by
+>>> > > +	  CONFIG_BOOTDELAY starts. If it is not defined	there is no
+>>> > > +	  output indicating that autoboot is in progress.
+>>> > > +
+>>> > > +	  Note that this define is used as the (only) argument to a
+>>> > > +	  printf() call, so it may contain '%' format specifications,
+>>> > > +	  provided that it also includes, separated by commas exactly
+>>> > > +	  like in a printf statement, the required arguments. It is
+>>> > > +	  the responsibility of the user to select only such arguments
+>>> > > +	  that are valid in the given context.
+>>> > > +
+>>> > >  if AUTOBOOT
+>>> > >  config BOOTDELAY
+>>> > > @@ -1597,21 +1613,6 @@ config AUTOBOOT_FLUSH_STDIN
+>>> > >  	  This can't be enabled for the sandbox as flushing stdin would
+>>> > >  	  break the autoboot unit tests.
+>>> > > -config AUTOBOOT_PROMPT
+>>> > > -	string "Autoboot stop prompt"
+>>> > > -	default "Autoboot in %d seconds\\n"
+>>> > > -	help
+>>> > > -	  This string is displayed before the boot delay selected by
+>>> > > -	  CONFIG_BOOTDELAY starts. If it is not defined	there is no
+>>> > > -	  output indicating that autoboot is in progress.
+>>> > > -
+>>> > > -	  Note that this define is used as the (only) argument to a
+>>> > > -	  printf() call, so it may contain '%' format specifications,
+>>> > > -	  provided that it also includes, separated by commas exactly
+>>> > > -	  like in a printf statement, the required arguments. It is
+>>> > > -	  the responsibility of the user to select only such arguments
+>>> > > -	  that are valid in the given context.
+>>> > > -
+>>> > >  config AUTOBOOT_ENCRYPTION
+>>> > >  	bool "Enable encryption in autoboot stopping"
+>>> > >  	help
+>>> > > diff --git a/common/autoboot.c b/common/autoboot.c
+>>> > > index 1783ef92c94..d12d618fea3 100644
+>>> > > --- a/common/autoboot.c
+>>> > > +++ b/common/autoboot.c
+>>> > > @@ -379,7 +379,9 @@ static int abortboot_key_sequence(int bootdelay)
+>>> > >  static void print_boot_delay(int bootdelay)
+>>> > >  {
+>>> > > -	printf(ANSI_CLEAR_LINE "\rHit any key to stop autoboot: %d", bootdelay);
+>>> > > +#ifdef CONFIG_AUTOBOOT_PROMPT
+>>> > > +	printf(ANSI_CLEAR_LINE CONFIG_AUTOBOOT_PROMPT, bootdelay);
+>>> > > +#endif
+>>> > >  }
+>>> > >  static int abortboot_single_key(int bootdelay)
+>>> > 
+>>> > We shouldn't need to guard this, as it's always prompted for now during
+>>> > configuration, yes?
+>>> > 
+>>> 
+>>> I did this in case it happened to be unset, and also to provide a way to
+>>> silence the prompt entirely.
+>>
+>>I believe it must be set (there may or may not be some fun around
+>>CMDLINE=n), but this doesn't allow for the prompt to be unset, if I'm
+>>recalling some of the fun around Kconfig -> defines works (defined to ""
+>>is not the same as undefined, we would need to add a new bool Kconfig
+>>option, that's why there's USE_PREBOOT and PREBOOT for example).
+>>
 
-diff --git a/cmd/bootmenu.c b/cmd/bootmenu.c
-index d3108778c6f..a07fea49322 100644
---- a/cmd/bootmenu.c
-+++ b/cmd/bootmenu.c
-@@ -76,7 +76,7 @@ static void bootmenu_print_entry(void *data)
- 	if (reverse)
- 		puts(ANSI_COLOR_REVERSE);
- 
--	printf("%s", entry->title);
-+	printf(ANSI_CLEAR_LINE "%s", entry->title);
- 
- 	if (reverse)
- 		puts(ANSI_COLOR_RESET);
+Thanks, I sent a v2 removing these.
 
--- 
-2.53.0
-
+Best regards,
+Ferass
