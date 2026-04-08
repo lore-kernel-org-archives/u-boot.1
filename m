@@ -4,148 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB1121073CAE
-	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 12:57:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EBCC1073CAE
+	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 12:57:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CACEA84201;
-	Wed,  8 Apr 2026 14:55:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 10C8684209;
+	Wed,  8 Apr 2026 14:55:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Tj2q7wAO";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="kf+e52bm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cWYU3YvX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33C1D838BB; Wed,  8 Apr 2026 11:13:34 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D040080433; Wed,  8 Apr 2026 11:27:00 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14FC080433
- for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 11:13:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6388rp9f2412265
- for <u-boot@lists.denx.de>; Wed, 8 Apr 2026 09:13:30 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=mPbuYTmkwmP
- MW96uiEBbBs6020Xh4UKH/Z99E4/TQv8=; b=Tj2q7wAOoUKDNamCOM9SppNbuDB
- UDXhwuUDXFFHqRA8/dIOgeS30RaGO8gglbHF8Ycj46BXDf3onm7N0OVboZmT5HKP
- 1rPdNzCB2bQw+tDMDvTHLf8QKHiO8XAlMh6RRoXYRjxy+4z9O9y4roZiZS6xPD17
- PaI2d++krZjjdsEuk4HDPne/Pev7boDEex2PPzbTB4nOcGLDezpIHr+UM9Ft6yU6
- iF+LFbLAAhpjsgoh6LXP5kuJJFOzqTnKaXbg6IX1JbsSauIrSuVmfQTxZOaMNvaA
- jusvgtstJ3njQQI1t3hoHo0hvQ42o3fPF+MQDrZ1R7tsXkzWDIn/lgn10IA==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dd61vb138-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 08 Apr 2026 09:13:30 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-2b24e9b4d82so7091515ad.1
- for <u-boot@lists.denx.de>; Wed, 08 Apr 2026 02:13:30 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 8197C840AB
+ for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 11:26:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-48334ee0aeaso56291365e9.1
+ for <u-boot@lists.denx.de>; Wed, 08 Apr 2026 02:26:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1775639609; x=1776244409; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mPbuYTmkwmPMW96uiEBbBs6020Xh4UKH/Z99E4/TQv8=;
- b=kf+e52bmCVOhE07htTiouhJFnW7TJvULe59CavxCKLGIyOrlrIkzHkPBMgF+eaDWrc
- AifBFEpGTAF7OyhS8A61VGiZyUI9NR7Cs6cpDtQZhlOj4gjMGVnMdZ4oacUCT1lwVw2q
- R3UVA23xqY/bd5Eivs03yXplvZlZyikWEsvwf9Ic1NveOYyA9L4ZwbdFsl0cwc3ytWbz
- cL9A1maogGNpYMjqW0Q38jzyXU+amak2zv/+XaSW5UZ2uTLV8nnoNqhDb+N/8BXPrwSV
- y5hOxtU03yjOBdJ+ijfEQ0F+PUn+cmPIRZqUHxbh5jpU7esDpmwxivObCkqiXz3iABfZ
- F1Rg==
+ d=linaro.org; s=google; t=1775640418; x=1776245218; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=deVcJHLsHapktj5FmsPdX8AO3hgWHQjR7zonmtcKXBg=;
+ b=cWYU3YvX9BIweNfTDH4okiz9DQfWSv9R/EAYRjjCB0BFoMwjx2WUy1QF8kchVVA+Jq
+ Dv1PRh7P+LjpkgIBj6+sFy8iHFxaGbwDCJjSrLA7JEwjfJpmk2PRwEwxERqrGJiBvLow
+ RhVGhdc+oI3NztkNb6B6Z2S3Th6ySXXHcl6RieLQFoWmXRs/C+dStJY/ARXviYAzYw6p
+ saxuI1sZwJxe3w1mix5Kvo2KibrKjT3hMqERuxV6cqwxlQMa68hUYStsxqYZKcGr5Uit
+ vCbeWKfbpB+LfSivLU340/0p8L9YmQG2Z5d7vD4od3ecrEVdLZJdRJcXha/YNq3wqWHm
+ 7Z3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775639609; x=1776244409;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=mPbuYTmkwmPMW96uiEBbBs6020Xh4UKH/Z99E4/TQv8=;
- b=KgzeSmZPbCXIWnioFrqH0dbBXxgek4ctAPyY9xLPOHJ+iQnfYDYG1z61nCBsx7OQTZ
- n86GC3FnKIq9DKHmWxWpGrw0d1XNWnnj9qQuP3NcAl9QDJW1GMYYgc7aO60yPISn21j+
- Khu5UITET+HfSg6PJauis2i1wPoewW6fsgl6W06bZmFKJgmTo7shd9D7iqd0Dkz28ZyT
- thU0LizKz5nHN3CzREdXnDNrQJuABf1wO9I+TsOvzncKRmo1pSi5duKjXAQK0LFExIQ+
- ZacS1yNfPZc8TNUIEFsFsgGix2ttj4Aos5PiZP0vpk5IWvaw6jW/LuwWKVHbBzaMO9D1
- Ukew==
+ d=1e100.net; s=20251104; t=1775640418; x=1776245218;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=deVcJHLsHapktj5FmsPdX8AO3hgWHQjR7zonmtcKXBg=;
+ b=Amw14eQDzYUopIZYCYMFKhjr++RvgfI5PTnyZvY3CegGzLpdYZ+cVAuZ5Pr6VqS56n
+ hwoiT8VV6/r+9H6F7Jjkp+Wwc6oFza91qC55uxi8s1S+CY3E6lOD31klrPv2djJWbsVg
+ ehTfQ5LW4KYiB6Y5rBfcZAn6pX7tTMti8Uan4kxRnCMmQSpbclV5ZYkyBcBeS8zdDlRx
+ D3LUEyxIJOAaTJFLonhbvyjryPFaMe7O0tKB+Vc03K5VA7Jy0xwShZtBP9N6Nbb/gqgr
+ pKJPmzHfkBvWkhIsxj+zPbr4GdjRL0C3JG/bJuTdXE/3rMV1zbZIcnr8Nf9NxZ51ji2x
+ wW7g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUxbo0wCEtM/sAQPI8PEL2A6wpZ+vtS+0Q50yarQij3mJS6wOTANd/CAyeEMP5WlQchbKw2yWc=@lists.denx.de
-X-Gm-Message-State: AOJu0YxLT3gRRB03y555E1qjhT4Q+ex/+q05u11gcHVmvz7aqMsfHEDx
- H3L8P6u6tbcNT3odWKyssQ0qmEu5W/vDcDuU9XFuH/SWmNARSJvWrPi0sbirCLEYvEqk4kC7kgA
- Dn8s7jRc7+Ib/bzF73ZziCKkLviOCmMajWxqjgBqVwxhCFhPlDDQfiuPj
-X-Gm-Gg: AeBDiev1iXGND4XkY8ondc9cUx8us7pd2yY7mCCshrCCAgkrRg/PUm8+HzBFGut5MsD
- bmNo7nJ5ih4u1fJ3Tt3EAINs0c3w2/QLYyfYYZT88paPo/D6gwqrVDNAqyaWOloxFFG2ay1OEXK
- 4SlyJIYFIjQQ2sh9UrTTB1+YkCnsmpfakbrG8zW+dvJbgwEjf5r7xWkNc9y58M7FGGPcN2ncJRo
- HjNcfPJs52rFbiqLoLQY9j+oSWHM1sbDgVxl1HCxr2SwI5rn+UGr3HEeEKKKuRSHmYwgtuT+bY2
- 8VsZEv+1YJuJF9F+NphO7EVoX+0rIXYRvf+tZCX5NBCnXa2XLs++qXfTCWfCpnUlI64GTPA6d9B
- em39bGrCX80pZw5qnx6YNVs7f3Jheuc9ecrH3yFzzFnDwaoRTRSVYqbMVNJ3OZBvuuIQRjnX6zz
- vmgmjL/MX1G5REwen2htcvA1zsMxtScXL1r6+bDOKpRsB3CcxZR18=
-X-Received: by 2002:a17:902:cecf:b0:2b2:5070:79 with SMTP id
- d9443c01a7336-2b277e36bfdmr228612155ad.18.1775639609068; 
- Wed, 08 Apr 2026 02:13:29 -0700 (PDT)
-X-Received: by 2002:a17:902:cecf:b0:2b2:5070:79 with SMTP id
- d9443c01a7336-2b277e36bfdmr228611725ad.18.1775639608568; 
- Wed, 08 Apr 2026 02:13:28 -0700 (PDT)
-Received: from hu-varada-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ AJvYcCV3qSOa7kS5VhUg35g63Ms0lPyzub0/VrxPDs1M3oMSHk49iQSYL2cU13fCwLD02ArRLX5Ss60=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywciyo4us9w5BF7zGL0qRJyIyz3QyarKlI8pfHX/vlEe/d+LPIK
+ Ux17EgcaN6e9hkZEEsMilfMYn/+uV5DhBhVL7fxlEJpERNva6ngN3g+ASZe+S3mZUIY=
+X-Gm-Gg: AeBDiesnLLoGRCYKUt/k383wtMLNms4Ku9NlR3ZhYcLQ22XREH9kYf9Ijmgi3rmC9ei
+ n4oHu9ErKbkR3UBxKplQ3mFeJGSoFrvBt2tgD769AWPvZPPdcYyXeKqpeDc7iortd4NEVDc42nl
+ +Et1TorKoCbJUNIo3YDT0SNd+bY7gAd7OxLZcmwlbal6R4BFJojkX5TzVJofWO1sXIkVh5zwTDc
+ nXpUMgm1gFPFo1IY0zXfOre43ZP0xwjMYpw8WI12Su6PMGQGq0XdyIaK9l5EH8hCxrer5RR+pVf
+ wl8q1weyvETqG2xZu0jIWJIJhDoPbNXEZin0xaeao7WB6ZRIobwwYRmTB+ZyeXd945kuU5Xt5To
+ i3LdimLkDKsQkwoh3kZD6G91GfdFiFzh0PXj0a8T8slAH7qGhWx86Jvx65fALzmZWJ5E7dihKyE
+ HUrNWfnVL4IHuRihnbQ1F9x7/Tvd+iwpKHnl/bQMql5xssnkF9jB2hj5ECJz6LAmv/p/hbg1T3L
+ e5H
+X-Received: by 2002:a05:600c:81e:b0:488:a82f:bb9b with SMTP id
+ 5b1f17b1804b1-488a82fbcc5mr109420665e9.30.1775640417783; 
+ Wed, 08 Apr 2026 02:26:57 -0700 (PDT)
+Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b27478945asm260020325ad.28.2026.04.08.02.13.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Apr 2026 02:13:28 -0700 (PDT)
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-To: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
- casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, peng.fan@nxp.com, jh80.chung@samsung.com,
- lukma@denx.de, anshuld@ti.com, tingting.meng@altera.com,
- alif.zakuan.yuslaimi@altera.com, alice.guo@nxp.com,
- quentin.schulz@cherry.de, ilias.apalodimas@linaro.org,
- varadarajan.narayanan@oss.qualcomm.com, xypron.glpk@gmx.de,
- mkorpershoek@kernel.org, afd@ti.com, andre.przywara@arm.com,
- h-salunke@ti.com, dario.binacchi@amarulasolutions.com, ye.li@nxp.com,
+ 5b1f17b1804b1-48895e19c10sm415156355e9.8.2026.04.08.02.26.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 08 Apr 2026 02:26:57 -0700 (PDT)
+Message-ID: <2f19cd1b-b1ff-4053-8507-675f5bd02133@linaro.org>
+Date: Wed, 8 Apr 2026 11:26:55 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 5/9] misc: qcom_geni: Add minicore support
+Content-Language: en-US
+To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
+ neil.armstrong@linaro.org, sumit.garg@kernel.org, peng.fan@nxp.com,
+ jh80.chung@samsung.com, lukma@denx.de, anshuld@ti.com,
+ tingting.meng@altera.com, alif.zakuan.yuslaimi@altera.com,
+ alice.guo@nxp.com, quentin.schulz@cherry.de, ilias.apalodimas@linaro.org,
+ xypron.glpk@gmx.de, mkorpershoek@kernel.org, afd@ti.com,
+ andre.przywara@arm.com, h-salunke@ti.com,
+ dario.binacchi@amarulasolutions.com, ye.li@nxp.com,
  dinesh.maniyam@altera.com, danila@jiaxyga.com, adrian@mainlining.org,
  luca.weiss@fairphone.com, balaji.selvanathan@oss.qualcomm.com,
  aswin.murugan@oss.qualcomm.com, david.wronek@mainlining.org,
  alexeymin@postmarketos.org, james.hilliard1@gmail.com,
- philip.molloy@analog.com, miquel.raynal@bootlin.com,
- malysagreg@gmail.com, richard.genoud@bootlin.com, sughosh.ganu@arm.com,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
+ philip.molloy@analog.com, miquel.raynal@bootlin.com, malysagreg@gmail.com,
+ richard.genoud@bootlin.com, sughosh.ganu@arm.com, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
 Cc: snlakshm@qti.qualcomm.com, gopinath.sekar@oss.qualcomm.com
-Subject: [PATCH v1 9/9] configs: add qcom_ipq5210_mmc_defconfig
-Date: Wed,  8 Apr 2026 14:41:36 +0530
-Message-Id: <20260408091136.2794546-10-varadarajan.narayanan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260408091136.2794546-1-varadarajan.narayanan@oss.qualcomm.com>
 References: <20260408091136.2794546-1-varadarajan.narayanan@oss.qualcomm.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA4MDA4MiBTYWx0ZWRfXy0R7mjijzGFV
- pz5lm5fDniZdXeg5MOxQHIyJH5+Q06Dc2Arn81+VQuhvTBzU65kz1/OxqqUgfRkubf8qgUFwtBU
- 631qZ1leuSGfntA1EB8RRtB6s+FtUL9QjxiSMQox4Xby7jXFlHpGN+2zA+ODwlyuxqghchIWju6
- 09Rem0u6AFtQLnc8RQGk/UrbhBRoM4khYK0xORpHN1uQP8cqAC6UQcEbDq+MlUbUoZsHJwgNjPw
- vGBG1Gdl2Iy4T7dCI+3yO9q/Sb1Cy/J+CP6X3cLIpfxDJymcIuwUexadpX4xzQUFLYaMdHXFmep
- xD5+lD3RMAP+uXFUP0mmx0+UBZy56mpMCifdRr00l0m98y4IIuc9eNWXFke+HpmVBTBOCt6i1VV
- 53EJwZTm05L2CxluQ5Z5Z5TeNdiviDBh0su0UgG5Cb6BJpmKIGaLBoTQsFdFijQVW72XookHWG8
- lW7+JCeMoM/ZIOT/C4w==
-X-Authority-Analysis: v=2.4 cv=FecHAp+6 c=1 sm=1 tr=0 ts=69d61c3a cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=EUspDBNiAAAA:8
- a=GOj2LzLryEk95jnXa_cA:9 a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-ORIG-GUID: 1WXnZiq_JSNVqxI6rrfo4nXokWuLkEVD
-X-Proofpoint-GUID: 1WXnZiq_JSNVqxI6rrfo4nXokWuLkEVD
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-08_03,2026-04-08_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 phishscore=0 lowpriorityscore=0 priorityscore=1501
- suspectscore=0 clxscore=1015 impostorscore=0 bulkscore=0 adultscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2604010000
- definitions=main-2604080082
+ <20260408091136.2794546-6-varadarajan.narayanan@oss.qualcomm.com>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260408091136.2794546-6-varadarajan.narayanan@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Wed, 08 Apr 2026 14:55:29 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -163,126 +120,376 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce a defconfig for the Qualcomm IPQ5210 SoC based RDPs.
-Presently supports eMMC.
+Hi Varadarajan,
 
-Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
----
- configs/qcom_ipq5210_mmc_defconfig | 105 +++++++++++++++++++++++++++++
- 1 file changed, 105 insertions(+)
- create mode 100644 configs/qcom_ipq5210_mmc_defconfig
+On 08/04/2026 11:11, Varadarajan Narayanan wrote:
+> The qcom_geni driver reads an ELF from storage and configures a set of
+> registers and programs the firmware to the GENI Serial Engine (GENI-SE)
+> wrapper device for the expected functionality.
+> 
+> Unlike the GENI-SE wrapper found in MSM SoCs, the IPQ5210's GENI-SE
+> wrapper is pre-configured for one of the functions defined in 'enum
+> geni_se_protocol_type'. Hence, the firmware download is not needed.
+> Only the register configuration part is needed.
 
-diff --git a/configs/qcom_ipq5210_mmc_defconfig b/configs/qcom_ipq5210_mmc_defconfig
-new file mode 100644
-index 00000000000..3800961b63f
---- /dev/null
-+++ b/configs/qcom_ipq5210_mmc_defconfig
-@@ -0,0 +1,105 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_POSITION_INDEPENDENT=y
-+CONFIG_SYS_INIT_SP_BSS_OFFSET=0x180000
-+CONFIG_ARCH_SNAPDRAGON=y
-+CONFIG_TEXT_BASE=0x87980000
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_ENV_SIZE=0x40000
-+CONFIG_ENV_OFFSET=0
-+CONFIG_DEFAULT_DEVICE_TREE="qcom/ipq5210-rdp504"
-+CONFIG_SYS_LOAD_ADDR=0x90000000
-+CONFIG_REMAKE_ELF=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+# CONFIG_BOOTSTD is not set
-+CONFIG_OF_BOARD_SETUP=y
-+CONFIG_USE_PREBOOT=y
-+CONFIG_SYS_PBSIZE=1024
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PART=y
-+CONFIG_EFI_PARTITION=y
-+CONFIG_OF_LIVE=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_CLK=y
-+CONFIG_CLK_QCOM_IPQ5210=y
-+CONFIG_MSM_GPIO=y
-+# CONFIG_I2C is not set
-+# CONFIG_INPUT is not set
-+CONFIG_MISC=y
-+CONFIG_QCOM_GENI=y
-+CONFIG_MMC_HS200_SUPPORT=y
-+CONFIG_MMC_SDHCI=y
-+# CONFIG_MMC_SDHCI_ADMA_HELPERS is not set
-+# CONFIG_MMC_SDHCI_ADMA is not set
-+# CONFIG_MMC_SDHCI_ADMA_FORCE_32BIT is not set
-+# CONFIG_MMC_SDHCI_ADMA_64BIT is not set
-+CONFIG_MMC_SDHCI_MSM=y
-+CONFIG_MTD=y
-+CONFIG_DM_MDIO=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_QCOM=y
-+CONFIG_RGMII=y
-+CONFIG_PHY=y
-+CONFIG_PHY_QCOM_QMP_UFS=y
-+CONFIG_PHY_QCOM_QUSB2=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCONF=y
-+CONFIG_PINCTRL_QCOM_IPQ5210=y
-+CONFIG_DEBUG_UART_MSM_GENI=y
-+CONFIG_DEBUG_UART_ANNOUNCE=y
-+CONFIG_MSM_SERIAL=y
-+CONFIG_MSM_GENI_SERIAL=y
-+CONFIG_SOC_QCOM=y
-+CONFIG_SPL=y
-+CONFIG_SPL_FRAMEWORK=y
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_OF_LIBFDT=y
-+CONFIG_SPL_DM=y
-+CONFIG_SPL_GPIO=y
-+CONFIG_SPL_DM_GPIO=y
-+CONFIG_SPL_DM_RESET=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_SPL_CLK=y
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_SMEM=y
-+CONFIG_DM_STATS=y
-+CONFIG_SPL_SYS_MALLOC_F=y
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x20000
-+CONFIG_SPL_SYS_MALLOC=y
-+CONFIG_SYS_MALLOC_DEFAULT_TO_INIT=y
-+CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-+CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x80008000
-+CONFIG_SPL_SYS_MALLOC_SIZE=0x20000
-+# CONFIG_SPL_SEPARATE_BSS is not set
-+# CONFIG_SPL_USE_TINY_PRINTF is not set
-+CONFIG_SPL_BSS_MAX_SIZE=0x4000
-+CONFIG_SPL_TEXT_BASE=0x08c24000
-+CONFIG_SPL_MAX_SIZE=0x3D000
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_MMC_SDHCI_ADMA=y
-+CONFIG_SPL_MMC_WRITE=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x00
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_SPL_STACKPROTECTOR=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_SPL_ATF=y
-+CONFIG_SPL_ATF_LOAD_IMAGE_V2=y
-+CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
-+CONFIG_SPL_HAS_LOAD_FIT_ADDRESS=y
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x08cbe000
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_HAVE_INIT_STACK=y
-+CONFIG_SPL_STACK=0x08c60000
-+# CONFIG_SAVE_PREV_BL_FDT_ADDR is not set
-+CONFIG_SPL_WRAPPER_ELF=y
+I don't think we should be embedding this ~1kb of data for just these
+platforms.
+
+Please move these to a separate file gated behind some new kconfig option.
+
+> 
+> Earlier, the boot stages before U-Boot would configure the GENI-SE (to
+> access UART/SPI etc). Since for IPQ5210 U-Boot SPL, the previous stage
+> (i.e. boot ROM) doesn't do that modify the driver to do the register
+> configuration part alone without reading an ELF from the storage.
+> 
+> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+> ---
+>  drivers/misc/qcom_geni.c       | 168 ++++++++++++++++++++++++++++++---
+>  include/soc/qcom/geni-se.h     |   5 +
+>  include/soc/qcom/qup-fw-load.h |  15 +++
+>  3 files changed, 175 insertions(+), 13 deletions(-)
+> 
+> diff --git a/drivers/misc/qcom_geni.c b/drivers/misc/qcom_geni.c
+> index a62ae6a2478..d02ea804c33 100644
+> --- a/drivers/misc/qcom_geni.c
+> +++ b/drivers/misc/qcom_geni.c
+> @@ -34,6 +34,102 @@ struct qup_se_rsc {
+>  
+>  struct geni_se_plat {
+>  	bool need_firmware_load;
+> +	bool is_mini_core;
+> +};
+> +
+> +/*
+> + * Register configuration for the QUP minicores to setup the corresponding
+> + * functionality of SPI/I2C/UART.
+> + */
+> +static u8 cfg_reg_idx[] = {
+> +	/* 0 to 18 */
+> +	0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+> +	/* 64 to 113 */
+> +	64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
+> +	81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97,
+> +	98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111,
+> +	112, 113,
+> +};
+> +
+> +static u32 spi_cfg_val[] = {
+> +	/* 0 to 18 */
+> +	0x00000000, 0x00000400, 0x00000000, 0x00000000, 0x00240E78, 0x00011088,
+> +	0x00240007, 0x00000000, 0x00000000, 0x0001000A, 0x00000300, 0x00000000,
+> +	0x00000000, 0x00000000, 0x00154400, 0x001483A0, 0x00AA8128, 0x00641002,
+> +	0x00004000,
+> +	/* 64 to 113 */
+> +	0x00000201, 0x0001FE05, 0x0002C2E7, 0x0A435C00, 0x0010011A, 0x08800000,
+> +	0x00000000, 0x100CAC00, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+> +	0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x000018E4, 0x00000000,
+> +	0x00000003, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+> +	0x0007F807, 0x000FFEFE, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+> +	0x00200000, 0x00000004, 0x00000009, 0x0007F807, 0x000FFEFE, 0x00000000,
+> +	0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+> +	0x00000000, 0x00000000, 0x00C0033F, 0x00000000, 0x00000000, 0x00000000,
+> +	0x00000000, 0x00000055,
+> +};
+> +
+> +static u32 uart_cfg_val[] = {
+> +	/* 0 to 18 */
+> +	0x00000024, 0x00000000, 0x00000024, 0x00000000, 0x00019A00, 0x00400000,
+> +	0x00E00000, 0x00010020, 0x00000000, 0x00000000, 0x00000300, 0x00000700,
+> +	0x00000400, 0x00000000, 0x00000000, 0x00C00000, 0x00000000, 0x00C00024,
+> +	0x00000B00,
+> +	/* 64 to 113 */
+> +	0x00020231, 0x0000CE05, 0x000360E7, 0x0941E6A8, 0x00100510, 0x42C01E51,
+> +	0x00000401, 0x002E8400, 0x1694581A, 0x00000000, 0x00000000, 0x00000000,
+> +	0x00000000, 0x00000000, 0x00000000, 0x00000001, 0x0000031C, 0x00000000,
+> +	0x0000000F, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+> +	0x00081C06, 0x00004010, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+> +	0x00000000, 0x0000000D, 0x00000000, 0x00081C06, 0x00004010, 0x00000000,
+> +	0x00000000, 0x00000000, 0x00000000, 0x00C02415, 0x0000000E, 0x00000001,
+> +	0x00000001, 0x00000000, 0x00C00000, 0x00000000, 0x00000000, 0x00000000,
+> +	0x00000000, 0x00000055,
+> +};
+> +
+> +static u32 i2c_cfg_val[] = {
+> +	/* 0 to 18 */
+> +	0x00000090, 0x00000000, 0x00000090, 0x00000000, 0x00038028, 0x00084080,
+> +	0x00000343, 0x00010000, 0x00000000, 0x00001A00, 0x00000100, 0x00000000,
+> +	0x00000000, 0x00000000, 0x00808008, 0x001C0020, 0x00000000, 0x00020000,
+> +	0x00000000,
+> +	/* 64 to 113 */
+> +	0x00000201, 0x0001FC01, 0x00036222, 0x09C01FFC, 0x00100120, 0x02C00000,
+> +	0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+> +	0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000409, 0x00000003,
+> +	0x00000002, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+> +	0x0007F8FE, 0x000FFEFE, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+> +	0x00000000, 0x00000000, 0x00000001, 0x0007F807, 0x000FFEFE, 0x00000000,
+> +	0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+> +	0x00000000, 0x00000000, 0x00C00000, 0x00000000, 0x00000000, 0x00000000,
+> +	0x00000000, 0x00000055,
+> +};
+> +
+> +static struct qup_mini_core_info qup_mini_cores[] = {
+> +	{
+> +		.serial_protocol = GENI_SE_SPI,
+> +		.fw_version = 0xb02,
+> +		.cfg_version = 0x9,
+> +		.cfg_count = ARRAY_SIZE(spi_cfg_val),
+> +		.cfg_val = spi_cfg_val,
+> +		.cfg_idx = cfg_reg_idx,
+> +	}, {
+> +		.serial_protocol = GENI_SE_UART,
+> +		.fw_version = 0x405,
+> +		.cfg_version = 0xa,
+> +		.cfg_count = ARRAY_SIZE(uart_cfg_val),
+> +		.cfg_val = uart_cfg_val,
+> +		.cfg_idx = cfg_reg_idx,
+> +	}, {
+> +		.serial_protocol = GENI_SE_I2C,
+> +		.fw_version = 0x204,
+> +		.cfg_version = 0x9,
+> +		.cfg_count = ARRAY_SIZE(i2c_cfg_val),
+> +		.cfg_val = i2c_cfg_val,
+> +		.cfg_idx = cfg_reg_idx,
+> +	}, {
+> +		.serial_protocol = GENI_SE_INVALID_PROTO,
+> +	},
+>  };
+>  
+>  /**
+> @@ -163,16 +259,38 @@ static void geni_config_common_control(struct qup_se_rsc *rsc)
+>  		       COMMON_CSR_SLV_CLK_CGC_ON_BMASK);
+>  }
+>  
+> -static int load_se_firmware(struct qup_se_rsc *rsc, struct elf_se_hdr *hdr)
+> +static int load_se_firmware(struct qup_se_rsc *rsc, int elf, void *info)
+
+Please make this a "bool", if you're using clangd or ctags there might
+be a configuration issue if they're suggesting that "bool" isn't a valid
+type (I've had to deal with that in the past).
+
+>  {
+> +	struct elf_se_hdr *hdr, tmp_hdr;
+>  	const u32 *fw_val_arr, *cfg_val_arr;
+>  	const u8 *cfg_idx_arr;
+>  	u32 i, reg_value, mask, ramn_cnt;
+>  	int ret;
+>  
+> -	fw_val_arr = (const u32 *)((u8 *)hdr + hdr->fw_offset);
+> -	cfg_idx_arr = (const u8 *)hdr + hdr->cfg_idx_offset;
+> -	cfg_val_arr = (const u32 *)((u8 *)hdr + hdr->cfg_val_offset);
+> +	if (elf) {
+> +		hdr = info;
+> +		fw_val_arr = (const u32 *)((u8 *)hdr + hdr->fw_offset);
+> +		cfg_idx_arr = (const u8 *)hdr + hdr->cfg_idx_offset;
+> +		cfg_val_arr = (const u32 *)((u8 *)hdr + hdr->cfg_val_offset);
+> +	} else {
+
+Please add a comment here briefly explaining that this is for minicore
+controllers which don't need the whole firmware.
+
+> +		struct qup_mini_core_info *qmc = info;
+> +
+> +		for (; qmc->serial_protocol != GENI_SE_INVALID_PROTO; qmc++)
+> +			if (qmc->serial_protocol == rsc->protocol)
+> +				break;
+> +
+> +		tmp_hdr.magic = MAGIC_NUM_SE;
+> +		tmp_hdr.version = 1;
+> +		tmp_hdr.serial_protocol = rsc->protocol;
+> +		tmp_hdr.fw_version = qmc->fw_version;
+> +		tmp_hdr.cfg_version = qmc->cfg_version;
+> +		tmp_hdr.fw_size_in_items = qmc->cfg_ram_count;
+> +		tmp_hdr.cfg_size_in_items = qmc->cfg_count;
+> +		hdr = &tmp_hdr;
+> +		fw_val_arr = (const u32 *)qmc->cfg_ram;
+> +		cfg_idx_arr = (const u8 *)qmc->cfg_idx;
+> +		cfg_val_arr = (const u32 *)qmc->cfg_val;
+> +	}
+>  
+>  	geni_config_common_control(rsc);
+>  
+> @@ -350,8 +468,8 @@ int qcom_geni_load_firmware(phys_addr_t qup_base,
+>  {
+>  	struct qup_se_rsc rsc;
+>  	struct elf_se_hdr *hdr;
+> -	int ret;
+> -	void *fw;
+> +	int ret, elf;
+> +	void *fw, *info;
+>  
+>  	rsc.dev = dev;
+>  	rsc.base = qup_base;
+> @@ -377,15 +495,22 @@ int qcom_geni_load_firmware(phys_addr_t qup_base,
+>  	/* The firmware blob is the private data of the GENI wrapper (parent) */
+>  	fw = dev_get_priv(dev->parent);
+>  
+> -	ret = read_elf(&rsc, fw, &hdr);
+> -	if (ret) {
+> -		dev_err(dev, "Failed to read ELF: %d\n", ret);
+> -		return ret;
+> +	if (IS_ELF(*(Elf32_Ehdr *)fw)) {
+> +		ret = read_elf(&rsc, fw, &hdr);
+> +		if (ret) {
+> +			dev_err(dev, "Failed to read ELF: %d\n", ret);
+> +			return ret;
+> +		}
+> +		elf = 1;
+> +		info = hdr;
+> +	} else {
+> +		elf = 0;
+> +		info = fw;
+>  	}
+>  
+>  	dev_info(dev, "Loading QUP firmware...\n");
+>  
+> -	return load_se_firmware(&rsc, hdr);
+> +	return load_se_firmware(&rsc, elf, info);
+>  }
+>  
+>  /*
+> @@ -414,6 +539,9 @@ static int geni_se_of_to_plat(struct udevice *dev)
+>  
+>  		if (proto == GENI_SE_INVALID_PROTO)
+>  			plat->need_firmware_load = true;
+> +
+> +		if (readl(res.start + QUPV3_SE_HW_PARAM_2) & GEN_USE_MINICORES)
+> +			plat->is_mini_core = true;
+>  	}
+>  
+>  	return 0;
+> @@ -473,7 +601,7 @@ static int probe_children_load_firmware(struct udevice *dev)
+>  		ret = 0;
+>  		/* Find the device for this ofnode, or bind it */
+>  		if (device_find_global_by_ofnode(child, &child_dev))
+> -			ret = lists_bind_fdt(dev, child, &child_dev, NULL, false);	
+> +			ret = lists_bind_fdt(dev, child, &child_dev, NULL, false);
+>  		if (ret) {
+>  			/* Skip nodes that don't have drivers */
+>  			debug("Failed to probe child %s: %d\n", ofnode_get_name(child), ret);
+> @@ -492,7 +620,11 @@ static int probe_children_load_firmware(struct udevice *dev)
+>   * Load firmware for QCOM GENI peripherals from the dedicated partition on storage and bind/probe
+>   * all the peripheral devices that need firmware to be loaded.
+>   */
+> -static int qcom_geni_fw_initialise(void)
+> +#if CONFIG_XPL_BUILD
+> +int qcom_geni_fw_initialise(struct udevice *dev)
+> +#else
+> +int qcom_geni_fw_initialise(void)
+> +#endif
+>  {
+>  	debug("Loading firmware for QCOM GENI SE\n");
+>  	struct udevice *geni_wrapper, *blk_dev;
+> @@ -520,6 +652,10 @@ static int qcom_geni_fw_initialise(void)
+>  
+>  	ret = find_qupfw_part(&blk_dev, &part_info);
+>  	if (ret) {
+> +		if (plat->is_mini_core) {
+> +			fw_buf = qup_mini_cores;
+> +			goto mini_core;
+
+Why still call find_qupfw_part() in the minicore case? If this is
+intentional please add a comment.
+
+> +		}
+>  		pr_err("QUP firmware partition not found\n");
+>  		return 0;
+>  	}
+> @@ -544,6 +680,7 @@ static int qcom_geni_fw_initialise(void)
+>  		return 0;
+>  	}
+>  
+> +mini_core:
+>  	/*
+>  	 * OK! Firmware is loaded, now bind and probe remaining children. They will attempt to load
+>  	 * firmware during probe. Do this for each GENI SE wrapper that needs firmware loading.
+> @@ -563,7 +700,9 @@ static int qcom_geni_fw_initialise(void)
+>  	return 0;
+>  }
+>  
+> +#if !CONFIG_XPL_BUILD
+>  EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, qcom_geni_fw_initialise);
+> +#endif
+>  
+>  static const struct udevice_id geni_ids[] = {
+>  	{ .compatible = "qcom,geni-se-qup" },
+> @@ -577,4 +716,7 @@ U_BOOT_DRIVER(geni_se_qup) = {
+>  	.of_to_plat = geni_se_of_to_plat,
+>  	.plat_auto = sizeof(struct geni_se_plat),
+>  	.flags = DM_FLAG_DEFAULT_PD_CTRL_OFF,
+> +#if CONFIG_XPL_BUILD
+> +	.probe = qcom_geni_fw_initialise,
+> +#endif
+>  };
+> diff --git a/include/soc/qcom/geni-se.h b/include/soc/qcom/geni-se.h
+> index fc9a8e82cd8..e51dd06fa94 100644
+> --- a/include/soc/qcom/geni-se.h
+> +++ b/include/soc/qcom/geni-se.h
+> @@ -77,6 +77,7 @@ enum geni_se_protocol_type {
+>  #define SE_IRQ_EN			0xe1c
+>  #define SE_HW_PARAM_0			0xe24
+>  #define SE_HW_PARAM_1			0xe28
+> +#define SE_HW_PARAM_2			0xe2c
+>  #define SE_DMA_GENERAL_CFG		0xe30
+>  
+>  /* GENI_DFS_IF_CFG fields */
+> @@ -248,6 +249,10 @@ enum geni_se_protocol_type {
+>  /* SE_HW_PARAM_0 fields */
+>  #define TX_FIFO_WIDTH_MSK		GENMASK(29, 24)
+>  #define TX_FIFO_WIDTH_SHFT		24
+> +
+> +/* SE_HW_PARAM_2 fields */
+> +#define GEN_USE_MINICORES		BIT(12)
+
+GENI_USE_MINICORES
+
+Kind regards,
+
+> +
+>  /*
+>   * For QUP HW Version >= 3.10 Tx fifo depth support is increased
+>   * to 256bytes and corresponding bits are 16 to 23
+> diff --git a/include/soc/qcom/qup-fw-load.h b/include/soc/qcom/qup-fw-load.h
+> index a67a93c72a4..a3ae4122681 100644
+> --- a/include/soc/qcom/qup-fw-load.h
+> +++ b/include/soc/qcom/qup-fw-load.h
+> @@ -14,6 +14,7 @@
+>  #define GENI_INIT_CFG_REVISION		0x0
+>  #define GENI_S_INIT_CFG_REVISION	0x4
+>  #define GENI_FORCE_DEFAULT_REG		0x20
+> +#define GENI_OUTPUT_CTRL		0x24
+>  #define GENI_CGC_CTRL			0x28
+>  #define GENI_CFG_REG0			0x100
+>  
+> @@ -21,6 +22,9 @@
+>  #define RX_FIFO_WIDTH_BIT		24
+>  #define RX_FIFO_WIDTH_MASK		0x3F
+>  
+> +#define QUPV3_SE_HW_PARAM_2		0xe2c
+> +#define GEN_USE_MINICORES		BIT(12)
+> +
+>  /*Same registers as GENI_DMA_MODE_EN*/
+>  #define QUPV3_SE_GENI_DMA_MODE_EN	0x258
+>  #define GENI_M_IRQ_ENABLE		0x614
+> @@ -173,6 +177,17 @@ struct elf_se_hdr {
+>  
+>  struct udevice;
+>  
+> +struct qup_mini_core_info {
+> +	u16 serial_protocol;
+> +	u16 fw_version;
+> +	u16 cfg_version;
+> +	u16 cfg_count;
+> +	u32 *cfg_val;
+> +	u8 *cfg_idx;
+> +	u32 *cfg_ram;
+> +	u32 cfg_ram_count;
+> +};
+> +
+>  int qcom_geni_load_firmware(phys_addr_t qup_base, struct udevice *dev);
+>  
+>  #endif /* _LINUX_QCOM_QUP_FW_LOAD */
+
 -- 
-2.34.1
+// Casey (she/her)
 
