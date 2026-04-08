@@ -4,94 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0715FD5F6A
-	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 09:16:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CADDFB518C
+	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 09:26:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4C5283693;
-	Wed,  8 Apr 2026 11:16:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D71D28404A;
+	Wed,  8 Apr 2026 11:26:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cQ2STR0a";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="dyAE9PeO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FDA2838BB; Wed,  8 Apr 2026 11:16:31 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 19194838BB; Wed,  8 Apr 2026 11:26:57 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0333380433
- for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 11:16:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB41480433
+ for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 11:26:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-48897fd88ebso46654945e9.2
- for <u-boot@lists.denx.de>; Wed, 08 Apr 2026 02:16:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1775639785; x=1776244585; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=LUgqDLOSJ3s3ofSBPmLIILm83cMwASSifllmLsmzfcA=;
- b=cQ2STR0aUhbKURRoytqhu9lpYOeuAbp/1wwAoRCVpgZh/E5i7sq0p7Bs9/5FYO2Z89
- IMScHXN3sRyNLYS1oeObCDuKF6HGX/qjKgZaOC3Ebj8Yh6l9kGy5Z78lf5Se0+2Exk4D
- 72jHJfyX083h79JGSrO+0wF5WH2n/WJywGHJsNGR0R/O4V/WObp+Bt+SSV+fuzkFQmVC
- awiNF+GNJSyPJHeT6M5dccNX3kltlLWOXlAUMHn8MEmn005G/nZr/rZj8SvmTVXs+noP
- C9libAT9S81ZolrBwiZfXevsK/+/DdLfLEhVAWnGQuSlCcZsSOfLwks3s+tftquywts7
- 4vjQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775639785; x=1776244585;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=LUgqDLOSJ3s3ofSBPmLIILm83cMwASSifllmLsmzfcA=;
- b=XK1UEy0GBbmJ5YqZdbmaC7EPczYfHuXtyAK22QgvD/L2rD4j31/GRIJK4QyWHqQdSc
- P4kSwzTywhQJLIBzRh/2m/WaCkzrvZLz3dUGBU5r/V9bXi2yClk+hhA6gNBzezvv9QhZ
- LqJla1aooeTpJGTjTa88+oD41ArilztGiUuIsS5A/3Y1Ri8qGQezhHYpga3PmWbtQI19
- a6FlyIfsRU+rsw3x1JukQ+/SsSXYLEPfLeqTesaB9KI8bqshWVnMZDMHXJWcinlMaN4C
- XvtSIjleRa3egsMXtyNzY1/5J9XJTrPJYM/SUzXY9jbs2H4udv3vcYOy3nGWLs2KLXYi
- p+xQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXxl299WpfKemg/kjfeqr/1djTtu3RD5bi/Bb36Tx1s7pDD3yTO3RCcS/hzzk2t4v8zVo1hbeM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwnGDSzlcJHewhbuCNSm6L9GKgVSAQ7Nd6nFY1tKceYl0ztL4e/
- afeAGSIvjglCJc+FcL0RZrrd6qLK5CjrjuWTK+S/eMe9UL9UF4F/1qa6z/Ly30BFSIU=
-X-Gm-Gg: AeBDietkfvzzKqglyu6YNGy0lhyIUyhd2qAi0Xzv/s8gI1dZuXwFUdlwbcQ3CvjbJ65
- LS0V1OZtmJWWMp1CCyjUmlBQt9q8Go/onN9ww5N2VyufSk16HvL5vnSsBjBm7VEwWxS+N2GHNjA
- eb490nt7GupHEjXn2qLRLnlfLRmdWQlwgxZFeI3qNJL2jnQW10jLpwA8y8+xcyZaZg+rpH4obDV
- 2c5NCikOcgh+41PudtS9LReZhBBp4G0dMI9OhNvFYF9ei3R3OJM6R2A7jdaWUJx6HoJ1Cnyb5SQ
- 2ydUGBIhcn+28KXc7fEOIVnPrs20TA9a/6t0XlYjpRETDjg1ea7i6xxchDNlA8u0SWWWVPmLI60
- XYuv0s/iLMToJRx47DSSaCuKbjm3jXUvSYrXLBMmfl7mwdqHBIDqyYHrunXCGFP7fxxyk08VI+g
- V3lQrAS1zBGHobhdKlCgusvyZRn5CboghgOoxf5baePXh2m9N4iJTAXAfXj/qVLpCSFoPduEfmB
- hbB
-X-Received: by 2002:a05:600c:c08b:b0:488:caed:5cc7 with SMTP id
- 5b1f17b1804b1-488caed5eb0mr5769235e9.15.1775639785341; 
- Wed, 08 Apr 2026 02:16:25 -0700 (PDT)
-Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488b739e00bsm221493565e9.10.2026.04.08.02.16.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Apr 2026 02:16:24 -0700 (PDT)
-Message-ID: <ac78f01b-7aee-4658-b682-67d4f53cd40f@linaro.org>
-Date: Wed, 8 Apr 2026 11:16:24 +0200
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id EB512406A7;
+ Wed,  8 Apr 2026 09:26:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6C9E6C19421;
+ Wed,  8 Apr 2026 09:26:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1775640412;
+ bh=YNN4/WQS41Fb8TaewdbcwzipBsW21zeTkQgRPh7oDdY=;
+ h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
+ b=dyAE9PeOqwiRysX/xhQW+SzUgkEtO1ttffDVesu7RHSMqAsFysN6QE1+PoyByM1L6
+ dbK3vj2acUB2QTG0ztvL/9OzMQiMDlnvrUbtpBN3+Ci2t0CCmCoS3azKY2m95hIydR
+ WTgRCFxC3z2n/jRjH/W4z+z5KoCbPPWrPdzYXSCIGWIopjUw9nHPy3eN82M7kZQIUl
+ 5PpvT4jLcdQhM/+zXXof2PXJ/Pm67B73ApbfTLoXuSU/XcObWpd89raDF+0Qy69SJK
+ axihXWqmKpOh85j3Itu44g0rrmDt5keyCtnrD0PekUumRDcRO+Ga1IOn2lxon+Zm5F
+ uqEhWGPtOB46w==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+usb@mailbox.org>
+In-Reply-To: <20260323143253.2272167-1-trini@konsulko.com>
+References: <20260317012433.4162524-1-trini@konsulko.com>
+ <20260323143253.2272167-1-trini@konsulko.com>
+Subject: Re: [PATCH v2] usb: gadget: Move USB_GADGET_DUALSPEED to be
+ slightly more visible
+Message-Id: <177564041013.8234.15223529346866045261.b4-ty@kernel.org>
+Date: Wed, 08 Apr 2026 11:26:50 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] serial: msm-geni: allow invalid clock
-Content-Language: en-US
-To: Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Stephen Boyd <swboyd@chromium.org>
-References: <20260320-casey-qcom-rpmh-serial-fixes-v1-0-b81d05832eec@linaro.org>
- <20260320-casey-qcom-rpmh-serial-fixes-v1-1-b81d05832eec@linaro.org>
- <adTs0aMJmGrIPKeR@sumit-xelite>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <adTs0aMJmGrIPKeR@sumit-xelite>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,92 +71,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sumit,
+Hi,
 
-On 07/04/2026 13:38, Sumit Garg wrote:
-> On Fri, Mar 20, 2026 at 04:45:40PM +0100, Casey Connolly via B4 Relay wrote:
->> From: Casey Connolly <casey.connolly@linaro.org>
->>
->> Pre-relocation we probably won't have a clock but it's usually
->> been enabled for us already, or worst case we will enable it after
->> relocation.
->>
+On Mon, 23 Mar 2026 08:32:53 -0600, Tom Rini wrote:
+> As exposed by "make randconfig", we have an issue around
+> USB_GADGET_DUALSPEED. It is possible to select this symbol (via
+> SPL_USB_CDNS3_GADGET for example) and so have an unmet dependency due to
+> how this symbol is placed today. Move this to it's own section of the
+> file guarded by USB_GADGET || SPL_USB_GADGET.
 > 
-> Not sure if this is the right approach, since the UART driver might just
-> hang without clock being enabled. What's the motivation for this change?
-
-Hmm, I didn't consider that. The motivation here is to handle CCF, since
-we don't want to support clock pre-relocation. In pretty much all cases
-today the serial clocks are already configured but you're right that we
-ought not to depend on that.
-
-I can't really think of another good solution than hardcoding this clock
-configuration somewhere :/
-
-Any ideas?
-
 > 
-> -Sumit
-> 
->> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
->> ---
->>  drivers/serial/serial_msm_geni.c | 15 +++++----------
->>  1 file changed, 5 insertions(+), 10 deletions(-)
->>
->> diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
->> index bb5a2cb4d2cd..c37255f57d05 100644
->> --- a/drivers/serial/serial_msm_geni.c
->> +++ b/drivers/serial/serial_msm_geni.c
->> @@ -211,9 +211,9 @@ static int msm_serial_setbrg(struct udevice *dev, int baud)
->>  	}
->>  	ret = clk_set_rate(priv->se, clk_rate);
->>  	if (ret < 0) {
->>  		pr_err("%s: Couldn't set clock rate: %d\n", __func__, ret);
->> -		return ret;
->> +		return 0;
->>  	}
->>  	geni_serial_baud(priv->base, clk_div, baud);
->>  
->>  	return 0;
->> @@ -516,15 +516,14 @@ static int msm_serial_probe(struct udevice *dev)
->>  	int ret;
->>  	u32 proto;
->>  	struct clk *clk;
->>  
->> -	clk = devm_clk_get(dev, NULL);
->> -	if (IS_ERR(clk))
->> -		return PTR_ERR(clk);
->> -	priv->se = clk;
->> +	clk = devm_clk_get_optional(dev, NULL);
->> +	if (!IS_ERR(clk))
->> +		priv->se = clk;
->>  
->>  	/* Try enable clock */
->> -	ret = clk_enable(clk);
->> +	clk_enable(clk);
->>  
->>  	/* Check if firmware loading is needed (BT UART) */
->>  	proto = readl(priv->base + GENI_FW_REVISION_RO);
->>  	proto &= FW_REV_PROTOCOL_MSK;
->> @@ -546,12 +545,8 @@ static int msm_serial_probe(struct udevice *dev)
->>  	/* Don't actually probe non-debug UARTs */
->>  	if (ofnode_device_is_compatible(dev_ofnode(dev), "qcom,geni-uart"))
->>  		return -ENOENT;
->>  
->> -	/* Now handle clock enable return value */
->> -	if (ret)
->> -		return ret;
->> -
->>  	ret = geni_set_oversampling(dev);
->>  	if (ret < 0)
->>  		return ret;
->>  
->>
->> -- 
->> 2.51.0
->>
->>
+> [...]
 
--- 
-// Casey (she/her)
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
 
+[1/1] usb: gadget: Move USB_GADGET_DUALSPEED to be slightly more visible
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/ace0e8034982fedb4ef75b8adcd97c1af063a990
+
+--
+Mattijs
