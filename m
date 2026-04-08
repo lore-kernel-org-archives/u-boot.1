@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BFF4EA3C59
-	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 13:02:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D031EA3C55
+	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 13:02:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91404841CD;
+	by phobos.denx.de (Postfix) with ESMTP id CF8B2841D7;
 	Thu,  9 Apr 2026 15:00:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=hpe.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hpe.com header.i=@hpe.com header.b="nSVqmSya";
+	dkim=pass (2048-bit key; unprotected) header.d=hpe.com header.i=@hpe.com header.b="Tyc9g4dJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AC7684118; Wed,  8 Apr 2026 21:25:08 +0200 (CEST)
+ id 3B20684118; Wed,  8 Apr 2026 21:25:08 +0200 (CEST)
 Received: from mx0a-002e3701.pphosted.com (mx0a-002e3701.pphosted.com
  [148.163.147.86])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CADB84120
- for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 21:25:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF2A784132
+ for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 21:25:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=hpe.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jorge.cisneros@hpe.com
 Received: from pps.filterd (m0134422.ppops.net [127.0.0.1])
  by mx0b-002e3701.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 638F2jWq1851674; Wed, 8 Apr 2026 19:24:23 GMT
+ 638G5T0U2028843; Wed, 8 Apr 2026 19:24:25 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hpe.com; h=cc
  :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=pps0720; bh=Fa
- dC60KT/B5h2aPSJuhItBgpnUYaL6NRPb8xrgcRRh8=; b=nSVqmSya2A0Pnu4wyx
- FSPjEPuuXT1F34a9yVpsPBBsjMPs1EABXbiokpyowPDwZ5q2UK6c8AKweuunylHb
- DTQ9p1RLhicLGQnP33oPWk0fOCm2Afs16sOzJ6SH4Lh0pcgzK4crp4vW3zrEcpt+
- CX1vhLmR9pgvAicVsFMrQyCF3njWbweQ+tf28eyq3tKOeDFJ90QJNPmmjs5hKpZ5
- rFe++uGPjlO0Ocip4x/Nk6vrgOPiynp+s8yahBzSfgxtk6UUd8e7kf4u0zi5aEmQ
- YBqokpkwr4Czr3IU7D3zB34/aRXStIRt1gQyVy4S5cNDWvwDHsEj07hqLkI1VVkN
- ygqw==
+ :message-id:mime-version:references:subject:to; s=pps0720; bh=Qj
+ sISXxmb0TxxNpE8rrNI/5TitVgEXucfhYcgyd43HU=; b=Tyc9g4dJn/SdVxUf4q
+ nQFMqVZzz/ZxkiVhG+jOjTD4Xl8FEkIkupSDPUEOG+/WyHamFqyL5sfBv6t6XkmV
+ fmkw3337ZOvUBDKGouB7c4THn1JxSteX5j+qFEudtkWj9um3o5aKIGtWrilxsO8K
+ QfsVGlode6MgBuuQ2S5szKNKPNdlAjGuND6rH5II1eHmbNkusKO82bbHGvg9pSIv
+ wo//qcedIfb0H0EOK3rVr7tPi9ZyA8r7yajAqNOWDVzzuGyfaGPQjocRBMLD/mPQ
+ ZHYpWtSVmHX/aICo7mQnlEVVhFCZUl/GHcr9i9joH9VehbdLo5v9r+HoUN1JiXze
+ dA5Q==
 Received: from p1lg14878.it.hpe.com (p1lg14878.it.hpe.com [16.230.97.204])
- by mx0b-002e3701.pphosted.com (PPS) with ESMTPS id 4ddnu8e096-1
+ by mx0b-002e3701.pphosted.com (PPS) with ESMTPS id 4ddnu8e09e-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Wed, 08 Apr 2026 19:24:22 +0000 (GMT)
+ Wed, 08 Apr 2026 19:24:24 +0000 (GMT)
 Received: from p1lg14886.dc01.its.hpecorp.net (unknown [10.119.18.237])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by p1lg14878.it.hpe.com (Postfix) with ESMTPS id 0E41C2BACC;
- Wed,  8 Apr 2026 19:24:22 +0000 (UTC)
+ by p1lg14878.it.hpe.com (Postfix) with ESMTPS id 3808F295FB;
+ Wed,  8 Apr 2026 19:24:24 +0000 (UTC)
 Received: from [127.0.1.1] (unknown [16.231.227.39])
- by p1lg14886.dc01.its.hpecorp.net (Postfix) with ESMTP id E4CF8805E61;
- Wed,  8 Apr 2026 19:24:20 +0000 (UTC)
+ by p1lg14886.dc01.its.hpecorp.net (Postfix) with ESMTP id 15CE4810AC5;
+ Wed,  8 Apr 2026 19:24:23 +0000 (UTC)
 From: Jorge Cisneros <jorge.cisneros@hpe.com>
-Date: Wed, 08 Apr 2026 19:24:16 +0000
-Subject: [PATCH 4/9] watchdog: Add HPE GSC watchdog driver
+Date: Wed, 08 Apr 2026 19:24:18 +0000
+Subject: [PATCH 6/9] net: macb: Add HPE GSC GEM Ethernet support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260408-hpe-gsc-upstream-v1-4-2be1fb7cbbfc@hpe.com>
+Message-Id: <20260408-hpe-gsc-upstream-v1-6-2be1fb7cbbfc@hpe.com>
 References: <20260408-hpe-gsc-upstream-v1-0-2be1fb7cbbfc@hpe.com>
 In-Reply-To: <20260408-hpe-gsc-upstream-v1-0-2be1fb7cbbfc@hpe.com>
 To: u-boot@lists.denx.de
@@ -93,21 +93,21 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Philip Molloy <philip.molloy@analog.com>,
  Jorge Cisneros <jorge.cisneros@hpe.com>
 X-Mailer: b4 0.15.1
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA4MDE4MSBTYWx0ZWRfX6HI9+/9pRAMS
- mtCO+wpgfdpANqGeT7hM7AkBTZlrF/svLpDC4DQ1m1BToGrRurbplkZX3uX9th0c88xHpxR7QYs
- MVdX1HDsM6za7XmXxtBJ83aCQPrskghpH67Lk09MVqACeZ8/rLh5jKZ6EAcovTb3DeDl3z4Vpwu
- VYRMrytF5dTTFViFpnivxhJDweUoMiCevFocej+kCyaxzj2XiM2O1mImTDaA+70ykN3EwgvSjCg
- oXanF/PBmkjVn5VNDXi4SqKsIQLS+LbpT/lBnRiPEg3MEHP85nwLOzD25YD7yMSrrMe1lEQVdaH
- xIp3X6/l7fy02JpF8qLtwCvJojl42IvJ2bryfCdhlhSBZwlGNx4Awd3lfhAwwSCSurqXpDWg2zP
- kgsiutxJIy0YH1m4r32HJYXOmZOW2B0RyjzyROGGZXq65H8pUoJXXY3GRa/5C2We31KRtibm1Qy
- KbjlUb+tkdvO3/0y3nQ==
-X-Authority-Analysis: v=2.4 cv=LJhWhpW9 c=1 sm=1 tr=0 ts=69d6ab66 cx=c_pps
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA4MDE4MSBTYWx0ZWRfX+qnlXVq5LDoV
+ 70AKbZsseKbDjD4y2zguLpiyelZBpO6vPwFObY4xJydAg1EiUBA6lOEl4pecce3fauWik6m5UhO
+ O8YNzP3dOFdsk4f1jGqb+ymqbjVVAiAl0zjNM0SdqkMVJUevOkYceNH45WFIRrhwn7DSsoxDgZD
+ kKmWIjeNJYHT4cIds6Ot+5UzjJ6rsFnuW7ZLDd23cARtvJbpx1+DAEC/bEX7OBd4rJy1p8PVrsO
+ T00am1rBDMxHs89ra0sXaAu6Z9efKI3qO+dtE+oF+5+s2kU97WfyZDK7aeUgMptZJ1gBIaOUc5D
+ 5qzEt4NONY9qlZjco74KzZcYdzCVqnvRXk8VOIEmXgxhmZUCruTe5wUrPO+TobNMTjPrfh1URti
+ n+70d0Dtl90gWsLS6f/++aI62xqLOvA53wJrP4uvehWB7KUWyeTYoBbn+TwGgYTl5J0Ya4K7gMp
+ ovgXAzX04APOj4oDAGQ==
+X-Authority-Analysis: v=2.4 cv=LJhWhpW9 c=1 sm=1 tr=0 ts=69d6ab69 cx=c_pps
  a=UObrlqRbTUrrdMEdGJ+KZA==:117 a=UObrlqRbTUrrdMEdGJ+KZA==:17
  a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22
  a=gQcMVamqm3wCPoSYhaRC:22 a=ModqzXLkJJ0tFyq98apW:22 a=MvuuwTCpAAAA:8
- a=NIagIq1R15lFhUNdsw8A:9 a=QEXdDO2ut3YA:10
-X-Proofpoint-GUID: GOkdmUhvl5-SIBKz1gmSGi8_W8FEy_ry
-X-Proofpoint-ORIG-GUID: GOkdmUhvl5-SIBKz1gmSGi8_W8FEy_ry
+ a=vO0c-VuOld7Sq2BhZ90A:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-GUID: kYkVazncC0-rx3oU2Y1sAF2KKIS2xMFm
+X-Proofpoint-ORIG-GUID: kYkVazncC0-rx3oU2Y1sAF2KKIS2xMFm
 X-HPE-SCL: -1
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
@@ -134,166 +134,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add watchdog driver for the HPE GSC SoC. The GSC watchdog uses two
-separate register regions: a counter register and a control register.
-Writing the counter value resets the watchdog timer, while writing to
-the control register enables or disables the watchdog.
+Add support for the HPE GSC SoC's Cadence GEM Ethernet MAC. The GSC
+integrates a GEM controller with SGMII interface, gigabit capability,
+jumbo frames, and PTP timestamping support.
 
-Supported operations: start, stop, reset, and expire_now.
+The GSC GEM instance does not require software clock initialization
+as clocking is handled by the SoC integration layer, so the clock
+init callback is a no-op.
 
 Signed-off-by: Jorge Cisneros <jorge.cisneros@hpe.com>
 ---
- drivers/watchdog/Kconfig   |   7 +++
- drivers/watchdog/Makefile  |   1 +
- drivers/watchdog/gsc_wdt.c | 110 +++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 118 insertions(+)
+ drivers/net/macb.c | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-index 35ae7d106b1..692a7eb4304 100644
---- a/drivers/watchdog/Kconfig
-+++ b/drivers/watchdog/Kconfig
-@@ -195,6 +195,13 @@ config WDT_DAVINCI
- 	  Select this to enable the watchdog timer for DaVinci SoCs such as the
- 	  OMAP-L138.
+diff --git a/drivers/net/macb.c b/drivers/net/macb.c
+index cbf5f605518..c1e7044e7bb 100644
+--- a/drivers/net/macb.c
++++ b/drivers/net/macb.c
+@@ -619,6 +619,12 @@ static int macb_sama7g5_clk_init(struct udevice *dev, ulong rate)
+ 	return clk_enable(&clk);
+ }
  
-+config WDT_GSC
-+	bool "HPE GSC watchdog support"
-+	depends on WDT
-+	help
-+	  Enable support for the watchdog timer in HPE GSC BMC SoC
-+	  used in HPE Gen12 servers.
-+
- config WDT_GPIO
- 	bool "External gpio watchdog support"
- 	depends on WDT
-diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-index 02e2674f8af..f7397e03527 100644
---- a/drivers/watchdog/Makefile
-+++ b/drivers/watchdog/Makefile
-@@ -32,6 +32,7 @@ obj-$(CONFIG_WDT_CDNS) += cdns_wdt.o
- obj-$(CONFIG_WDT_DA9063) += da9063-wdt.o
- obj-$(CONFIG_WDT_DAVINCI) += davinci_wdt.o
- obj-$(CONFIG_WDT_FTWDT010) += ftwdt010_wdt.o
-+obj-$(CONFIG_WDT_GSC) += gsc_wdt.o
- obj-$(CONFIG_$(SPL_TPL_)WDT_GPIO) += gpio_wdt.o
- obj-$(CONFIG_WDT_MAX6370) += max6370_wdt.o
- obj-$(CONFIG_WDT_MCF) += mcf_wdt.o
-diff --git a/drivers/watchdog/gsc_wdt.c b/drivers/watchdog/gsc_wdt.c
-new file mode 100644
-index 00000000000..b535f47e052
---- /dev/null
-+++ b/drivers/watchdog/gsc_wdt.c
-@@ -0,0 +1,110 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/* Copyright (C) 2022-2025 Hewlett Packard Enterprise Development LP */
-+
-+#include <dm.h>
-+#include <errno.h>
-+#include <log.h>
-+#include <wdt.h>
-+#include <asm/io.h>
-+#include <linux/err.h>
-+
-+#define MASK_WDGCS_ENABLE	BIT(0)
-+#define MASK_WDGCS_RELOAD	BIT(2)
-+#define MASK_WDGCS_NMIEN	BIT(3)
-+#define MASK_WDGCS_WARN		BIT(7)
-+
-+#define WDT_MAX_TIMEOUT_MS	655350
-+#define SECS_TO_WDOG_TICKS(x)	((x) * 100)
-+
-+struct gsc_wdt_priv {
-+	void __iomem *counter;
-+	void __iomem *control;
-+};
-+
-+static int gsc_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
++static int macb_gsc_clk_init(struct udevice *dev, ulong rate)
 +{
-+	struct gsc_wdt_priv *priv = dev_get_priv(dev);
-+	u8 val;
-+	u16 timeout_secs;
-+
-+	if (timeout_ms > WDT_MAX_TIMEOUT_MS)
-+		timeout_ms = WDT_MAX_TIMEOUT_MS;
-+	else if (timeout_ms == 0)
-+		timeout_ms = CONFIG_WATCHDOG_TIMEOUT_MSECS;
-+
-+	timeout_secs = timeout_ms / 1000;
-+	writew(SECS_TO_WDOG_TICKS(timeout_secs), priv->counter);
-+
-+	val = readb(priv->control);
-+	val |= MASK_WDGCS_ENABLE;
-+	writeb(val, priv->control);
-+
++	/* Clock is handled by the GSC IP block, no programming needed */
 +	return 0;
 +}
 +
-+static int gsc_wdt_stop(struct udevice *dev)
-+{
-+	struct gsc_wdt_priv *priv = dev_get_priv(dev);
-+	u8 val;
-+
-+	val = readb(priv->control);
-+	val &= ~MASK_WDGCS_ENABLE;
-+	writeb(val, priv->control);
-+
-+	return 0;
-+}
-+
-+static int gsc_wdt_reset(struct udevice *dev)
-+{
-+	struct gsc_wdt_priv *priv = dev_get_priv(dev);
-+	u8 val;
-+
-+	val = readb(priv->control);
-+	val |= MASK_WDGCS_RELOAD;
-+	writeb(val, priv->control);
-+
-+	return 0;
-+}
-+
-+static int gsc_wdt_expire_now(struct udevice *dev, ulong flags)
-+{
-+	return gsc_wdt_start(dev, 1, flags);
-+}
-+
-+static const struct wdt_ops gsc_wdt_ops = {
-+	.start = gsc_wdt_start,
-+	.reset = gsc_wdt_reset,
-+	.stop = gsc_wdt_stop,
-+	.expire_now = gsc_wdt_expire_now,
+ int __weak macb_linkspd_cb(struct udevice *dev, unsigned int speed)
+ {
+ #ifdef CONFIG_CLK
+@@ -1360,6 +1366,15 @@ static const struct macb_config sama7g5_emac_config = {
+ 	.usrio = &sama7g5_usrio,
+ };
+ 
++static const struct macb_config gsc_config = {
++	.caps = MACB_CAPS_GIGABIT_MODE_AVAILABLE |
++		MACB_CAPS_JUMBO | MACB_CAPS_GEM_HAS_PTP,
++	.dma_burst_length = 8,
++	.hw_dma_cap = HW_DMA_CAP_32B,
++	.clk_init = macb_gsc_clk_init,
++	.usrio = &macb_default_usrio,
 +};
 +
-+static const struct udevice_id gsc_wdt_ids[] = {
-+	{ .compatible = "hpe,gsc-wdt" },
-+	{ }
-+};
-+
-+static int gsc_wdt_probe(struct udevice *dev)
-+{
-+	struct gsc_wdt_priv *priv = dev_get_priv(dev);
-+
-+	priv->counter = dev_remap_addr_index(dev, 0);
-+	if (!priv->counter)
-+		return -EINVAL;
-+
-+	priv->control = dev_remap_addr_index(dev, 1);
-+	if (!priv->control)
-+		return -EINVAL;
-+
-+	gsc_wdt_stop(dev);
-+
-+	return 0;
-+}
-+
-+U_BOOT_DRIVER(gsc_wdt) = {
-+	.name = "gsc_wdt",
-+	.id = UCLASS_WDT,
-+	.of_match = gsc_wdt_ids,
-+	.probe = gsc_wdt_probe,
-+	.priv_auto = sizeof(struct gsc_wdt_priv),
-+	.ops = &gsc_wdt_ops,
-+};
+ static const struct udevice_id macb_eth_ids[] = {
+ 	{ .compatible = "cdns,macb" },
+ 	{ .compatible = "cdns,at91sam9260-macb" },
+@@ -1374,6 +1389,8 @@ static const struct udevice_id macb_eth_ids[] = {
+ 	{ .compatible = "cdns,zynq-gem" },
+ 	{ .compatible = "sifive,fu540-c000-gem",
+ 	  .data = (ulong)&sifive_config },
++	{ .compatible = "hpe,gsc-gem",
++	  .data = (ulong)&gsc_config },
+ 	{ }
+ };
+ 
 
 -- 
 2.43.0
