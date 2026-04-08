@@ -4,143 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4489EA3C59
-	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 11:40:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D324AEA3C55
+	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 13:00:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A15784142;
-	Thu,  9 Apr 2026 13:40:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id DE507839D5;
+	Thu,  9 Apr 2026 15:00:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="ItIdqToY";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="FinHxjzz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89A7984118; Thu,  9 Apr 2026 13:40:05 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id 87D3183F98; Wed,  8 Apr 2026 19:07:01 +0200 (CEST)
+Received: from mxd-2-a16.seznam.cz (mxd-2-a16.seznam.cz
+ [IPv6:2a02:598:64:8a00::1000:a16])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24F578418A
- for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 13:40:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3568D838BB
+ for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 19:06:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iTvPqf4P0cLaRfd05BMdQkR/nIgDASclm3osaNZ5cfbVkI9Ox/anASc2VuBZ2KK0uPFIUOmEhdGrk8RlchjPuvO5YAPCNONxE8u+TRqGygFITSfWwEZx61kHLo8MKQLHlEL6d3F+HmxoqYjC1ma5wENv/kxREljUgJjp+8XHvg/ZQ4ayZxVJrDgLBflq1aOZYyMe/SriMuiG8h3+l3bFsmOdjFxPuWRE7+4TH3xRDeGKT0mJa9vqi3zo6r73Ofw1TXdoxhxHZ9dqWczPb95DeRNuGReGsXJzl36lfK9s2/EAlAR8pqMjEiC1SOg2MPuV0dreZH+Wb03PKR2G8luxZw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4FJVH6ZkWz2tmKm20mOaE6YVSQe+vzgeVEXU2/oQNkM=;
- b=rhn49ZnZP7USJdLFN4lTek+kVLnVz/AkSo62WOvFYpRd4gO/S2njmM2D3LHVGDslGXpwCgeISBTKjbi0Yiji0ELVV2N3s43KnIZP2pcUyRXEsaqQZvq3JJiN/6ezcigh29VY1CuSF5HAMz+sbaUB+lxGzoAgcv3H/Lbcn0nYNVNtg4Q+MQ5Oy77mfhhMk94ggfVFhQtHCOGJs1DrQtvq2cyHG9mKa1DmI5KbuR0kFMbyeq1ZHRaMuDopwnePWvzSg2ubxw7+MoqSGM6LgWCWMJujNjlATvAVEcwrw2uwwPdWCGRd2jwENwzQXWvhQ5x6dDkHmwUJpn50igTxfDa2+g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4FJVH6ZkWz2tmKm20mOaE6YVSQe+vzgeVEXU2/oQNkM=;
- b=ItIdqToYxsBif/M6WWT08Gl/LAO15zXCuB1XQ9NoToX0XWiHt3mAchGiRQgnfmRa9ikehrx3LEE3fhZwQaSvxBwQJU2sOjjzP7HmQa1kn9tK+D4dyu91ofcGE0SksLjQNnh5DCh7C6sJH59z5V5nQpf02E5Qkfs3LdYOyXuwlLZZeKI7dy98+3l99NYx/aJgUY91KDgKZ7A35r6+bkBMg+BgSofSXwe/I49pkytAuoZqSEv9+rrWNddFqYJ6y4fFCi3E58oXQAYNuSPdCCjsUzkbHWLtDliYc7IQXHbGoaIDMsw23peKi7jEwXUInRZ98U1TxqudZfHWOjTwnxrLoQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by PAXPR04MB8144.eurprd04.prod.outlook.com (2603:10a6:102:1cc::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.17; Thu, 9 Apr
- 2026 11:39:59 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::4972:7eaa:b9f6:7b5e%3]) with mapi id 15.20.9723.030; Thu, 9 Apr 2026
- 11:39:58 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-To: u-boot@lists.denx.de,
-	Kamlesh Gurudasani <kamlesh@ti.com>
-Cc: Peng Fan <peng.fan@nxp.com>, Lukasz Majewski <lukma@denx.de>,
- Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Alice Guo <alice.guo@nxp.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Valentin Caron <valentin.caron@foss.st.com>, anshuld@ti.com,
- vigneshr@ti.com
-Subject: Re: [PATCH v2] clk: scmi: Fix protocol version fetch for non-CCF
- platforms
-Date: Thu,  9 Apr 2026 20:55:47 +0800
-Message-ID: <177573926834.4193161.5957350404063165760.b4-ty@nxp.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20260323-ccf-v2-1-0f3441631702@ti.com>
-References: <20260323-ccf-v2-1-0f3441631702@ti.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: MA1PR01CA0156.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a00:71::26) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ spf=pass smtp.mailfrom=Michael.Srba@seznam.cz
+Received: from email.seznam.cz by smtpc-mxd-7644845457-sbn6w
+ (smtpc-mxd-7644845457-sbn6w [2a02:598:64:8a00::1000:a16])
+ id 404ebfd71b40ebbe41e77389; Wed, 08 Apr 2026 19:06:05 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
+ t=1775667965; bh=nF0iset6+Uj61V14fk16xypXNOJ8M4KtpyaRHWY4SMI=;
+ h=Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+ Content-Language:From:Content-Type:Content-Transfer-Encoding;
+ b=FinHxjzz3fMtFvKsOYdt6xfasYHcv29uQvwVl0LeKrSwwirr8UwYoWC3kd5AWsTfq
+ 0yLanhBBCBsGQW3PTyJxr9zqbty8MUTfFq4EF9IdHH+itoglyUW4n1rEMKSknmFNbu
+ KX8Q3KTqDgxzQmYyUw1yZy4t3Z73xNJVRonuACwFHhTGsf9PAjtDQ7ml7+0LlnqIoQ
+ nCWL4mdO353TiKuhrQmA0uuM0A0HRLvWW1RYaCfzB8/MKGjaz3/aGNhOG8V42j+cPw
+ 9fvUGN2mEu4C4zepzG6UzysJbtHpQkM/mvPhVXm7Jgq0pEfCTwHbWliYoJqAwiCJtd
+ CzWOZ56bN2dIg==
+Received: from [192.168.0.240] (ip-111-27.static.ccinternet.cz
+ [147.161.27.111])
+ by smtpd-relay-789d8dfb5c-q6vgm (szn-email-smtpd/2.0.71) with ESMTPA
+ id 51e3ce82-5fd3-4309-a9c2-81bb09aa2737;
+ Wed, 08 Apr 2026 19:05:56 +0200
+Message-ID: <b07ef09d-28f5-408d-b9c1-7524442f0f33@seznam.cz>
+Date: Wed, 8 Apr 2026 19:03:37 +0200
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|PAXPR04MB8144:EE_
-X-MS-Office365-Filtering-Correlation-Id: 36c72d16-7b5c-4a6e-fe6b-08de962cba8d
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|19092799006|1800799024|376014|7416014|52116014|18002099003|22082099003|56012099003|38350700014;
-X-Microsoft-Antispam-Message-Info: 9RAottNyu1zv8gSBDpHdwOwvL7/oagYeyHuPGhxeQgKv/ZtpcaP99wOHh+02iEGSUSuVWIViOQmoEkzNGRQrEkbwjBYODSUR4EwR/MYqIZN+iP3WeiMW9CUJGxsys5c2OMzEZg8zSVv9CmpCi2B5dHbIPcafoCvhDFnnq0FZCAhb5zLTsnNrElwNgFju2ZZcBYaRRyLCicmWdfSA8BOQx5WYF6AlFV/TxaEgogFU8Mb+/iBRI90FoJAxWNNxQRUUujCDQatHKNaOC9lv6UHogo7bKboVbY5s5CwzsEc3UJJ99G7GbZjNOIM5CQrCnkWIs4Zg9KVv4B0yim/kdh+MdlLIjIcApB87RNyHFSKCRUtdsDR8hVFsp1rJOv3dsQ72C1n6HdLIXIlsmtihxCAaWE8fBZMRpfYkNING2oZd+Tp5agCZCRB42hGFkx3NdIh1Lj0U4hB8j05Fw4qpzD+AYZWQLMKP+VWY5asIr0kImm42RacN+blRtpOFq+gXxAzbiFiwDtKaRO6FhJ2cys40Nv172DAbFxtJmzv/4jHnquS/l4Q6xtgVYhRFShla81YvpPYWhKi9sYJRwrKqrmCkb/DiOXPEDXxVnw1gT2R4sNulljJrUN+FbeMPcgVja6S+t/YTZdEWW0ONjSAt7nzbDfPmE09iQE2lV7Gsqp6wEEIwuijb3iH8Fxelkds8qfPfLZLYsKRmB1YboAtZAstUKz0xDyTnYYzvKTuXGGZRbgwO2sO2OWnBi8mnbFMzCrNroigodU2R/Zi13AbNaXPC3wlj7FDwHpNAi9K3R3vbXJ0=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(19092799006)(1800799024)(376014)(7416014)(52116014)(18002099003)(22082099003)(56012099003)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?K1Q3QVRnODFIYUZCR0EvakJKYWxYQWZ6R3VvTk56a2tSNmI4KzVobzJDaVhq?=
- =?utf-8?B?TzZKb3lUaVl5aTU1ZTgxbGovNURtL1hiUTg3NXFNQWo2c3FNdkhMS1EzRmha?=
- =?utf-8?B?RDdJT3FveVMyYnk0YVFYT2gvUHd0c1pqWGcrYzJORjdpdlZ5NXV2MldpRlVH?=
- =?utf-8?B?WUV0dEhTdW1WNXh4QTlweG0yL2ZLUXhEN2NGRDZmZDRCZ1FDVlVXbjY2S1pa?=
- =?utf-8?B?RXBodFY5RFpuOGs0WFZScjVrV3UxMERVZFhZWDBzQlVmeWRVcStUYUVIQmxh?=
- =?utf-8?B?R3paNXBMTkNIY1lvVytrRGc0OWFUbDJBSzcxRWMxWXZzYnVHN1RkbCt2TGN3?=
- =?utf-8?B?Nk00VmxmMEYxSklhc1NmQjF2c2FzNkordmlEdFZBTnh5ZUJQamRhSEVvRDFE?=
- =?utf-8?B?bnZzU1ZzajlCS1RzSzg0K2xEcUVCYUdlNzY2ZjNLVXhlUDZBOXNpUXl4RDND?=
- =?utf-8?B?VDN0N0VsNE5xempYak1nMEhvaGZWd2laeWRybWpYZ1hWakM5Z0VLa2pVU0dO?=
- =?utf-8?B?ZVVEWnlwRDg1aFYyVHdqRFZycmkxM0k3N3N2N25uZEp0a1Vka2dKa1Fud0NW?=
- =?utf-8?B?T0U2Mkh0NWJINnVpOHVxdnhnVnF0NGtwZmhMa09LTHR2c3prSEJPMFVCMm9k?=
- =?utf-8?B?SFRNVjcyek1LT2padG1sUUtyVmhKOTRuaVhYQ0h1REt5Y1QxTEd4cEV1L2R6?=
- =?utf-8?B?NDJWSUZMaFhrRnpCdzJ2dkxiZ0VLNDdFeEQ2SWVCVlhmL2xmd2pRelV4dnR4?=
- =?utf-8?B?djVOUXN3M21PV0JONFF4WnlHWURzQ0VKNnlERUc4aEpyZG45Tm9PakRlYU5Q?=
- =?utf-8?B?WDJVMUxuc2tVTzY0Wjh2TkxpVlNINTRCYWduRi9iWHNhU2ZPUDVYVGtNVlM5?=
- =?utf-8?B?cURmT2xCNStvRnh3akh0eGF5RDdoVk5PTkVZU0hkai9LeTZuT3ZNSGk0RElU?=
- =?utf-8?B?VzRuTlNCdGk3TkhBRDduSFlxbU1EdWg0aUxGYXRRdnRaY0NFc0p5cXI4cGtM?=
- =?utf-8?B?eUl0SHhBNzJPcGVxdG1XRWVOcnRVZlpWdngzN0UxNVVlYk96K1VXT1VUTGll?=
- =?utf-8?B?N3QxK0g1QlFwYVY0Q1MwRCtIRytQVEZYaThpcjR6U25DQmRpblg2NGZsMUM4?=
- =?utf-8?B?ZWkrSGNEMms1cDBHTFJLS3BlZGM4elBUSGdQM0xna3dMcWFlOEt5R2I0V2lD?=
- =?utf-8?B?SkVZVHRGYnN6M21FcHVMeGh6eHFwL2hBWGpNamZuK1hlT2pob25WWHBvbElD?=
- =?utf-8?B?SVlNUGwwc1VmYUUxUWVxS2tPOWg1MnhHWFEvSGs4Y2xJa1FSOGZVdFBBeXZp?=
- =?utf-8?B?SmVNNmZCTHFVSjU4TWpuYXFVZ3h1SWxPTTk3bG04K0d4RS8wMW1jeVVjYW1U?=
- =?utf-8?B?RFJUb2QxWnFaYlU0R1RjMDZrWDlpcHVqOXh6NE1LN0U5eHpkbkk1ZmtxU1d4?=
- =?utf-8?B?OHpqQlQvbzFGdzNlZFJZKzc2SW9rbmQxTXZvQzYyM0xURlhadWZwY29TOXdH?=
- =?utf-8?B?QmxMc0h3WFJhVmxtZWwvenJMSWU0ajBIc01FYThzLzFTemZ1RHVZNlpUVHRX?=
- =?utf-8?B?V0RJWHJmTnphODNaVjZSR2doZWRxMTc5emJRNlFBTWFyK0N0Ly84WnpJU2Ju?=
- =?utf-8?B?aHNLWG1XVEF1dTNKL3lGQTR3Y3ZjUXpnUk9UQXVKZ1hYRHE1eHMrRU4zc3NY?=
- =?utf-8?B?SUdISm5LUmpaTkpGTmpFSWZ1UUY2WDF0MHdXek42WkhrQ1dRcUhNUmlaWGZ1?=
- =?utf-8?B?dUMyWE1WNHFTZHNsSUVSdG13STJBYjJJVG1VcFRLYnZJZVdQalUzOElqbmhh?=
- =?utf-8?B?YmQvUEg0ZkFPV2NkWnlOdGFyNWtySUJPcGQvQjU5eDlZd2ljd1p1U09EV0Uv?=
- =?utf-8?B?U1puSWtFL0F6Sld0d2tRM0hCYllLdkJlT1EzbURIa2FzKzY1T2NEbUtuNDFl?=
- =?utf-8?B?cjVaNkVPWW1XVHQ4ZjFJU0xPUkVQNmpDamNkTmJ2czdFZGEwNlJiTHptajZK?=
- =?utf-8?B?cGU5ZUhibEN2RHZ1ZkdOcmpULzFtaThaQUV3YjN6UllCZGpKRHVXb2o5aDlL?=
- =?utf-8?B?aDFUK0lzT3NwSE5zRE14TXZTK3FaaUxNa013azVqZW5RT1NtS3ZuMWZwaVhJ?=
- =?utf-8?B?ZE16TlhULy91Z1NKYmdVWFJKR0tYVG5TRWk5Z05TTmdNMWVaVzV0ZTZQMHlC?=
- =?utf-8?B?Z2NhQU5ielNSMkNvNzZHTHRKdG4vRW5OMmVvdDRMeGZ3akRwN3g5MFJQdDAx?=
- =?utf-8?B?VHE0WWE3QUs0ejVmcVJVK054VUZkK0syOU9BU2pvSXlFSll0TUEwYnB3NnhG?=
- =?utf-8?B?L3NlMWZzeS9vZTVTZkZLYlloa1Q2TGZOYzRERTBDZFd4bFFkbk83dz09?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 36c72d16-7b5c-4a6e-fe6b-08de962cba8d
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Apr 2026 11:39:58.8858 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: YT9YXlOkC0T/FPkG0kqMZ2vnkOfd5BwrHJwYi0Bc3Ji6oq0zqp65pqNX/3IGJEUbHCq4HJ/L8IkAmm2jBKP5aQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8144
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/5] mach-snapdragon: support building SPL
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
+ Hrushikesh Salunke <h-salunke@ti.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Jerome Forissier <jerome.forissier@arm.com>, Heiko Schocher
+ <hs@nabladev.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Tingting Meng <tingting.meng@altera.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>,
+ George Chan <gchan9527@gmail.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+References: <20260404-qcom_spl-v1-0-9e6c2ac66587@seznam.cz>
+ <20260404-qcom_spl-v1-4-9e6c2ac66587@seznam.cz>
+ <20260406142737.GN41863@bill-the-cat>
+Content-Language: en-US
+From: Michael Srba <Michael.Srba@seznam.cz>
+In-Reply-To: <20260406142737.GN41863@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 09 Apr 2026 15:00:51 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,25 +105,150 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
 
 
-On Mon, 23 Mar 2026 16:59:27 +0530, Kamlesh Gurudasani wrote:
-> The SCMI clock protocol version was only being fetched when CLK_CCF
-> was enabled. On non-CCF platforms, the probe function returned early
-> without fetching the version, leaving priv->version as 0.
-> 
-> This caused issues because code paths like scmi_clk_gate() and
-> scmi_clk_get_permissions() depend on priv->version to determine
-> which protocol message format to use, even in non-CCF mode.
-> 
-> [...]
+On 4/6/26 16:27, Tom Rini wrote:
+> On Sat, Apr 04, 2026 at 01:18:19AM +0200, michael.srba@seznam.cz wrote:
+>
+>> From: Michael Srba <Michael.Srba@seznam.cz>
+>>
+>> Initially sdm845 support is added, and only usb boot
+>> is supported for the next stage.
+>>
+>> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
+> [snip]
+>> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+>> index 976c0e35fce..938e6ebd8bf 100644
+>> --- a/arch/arm/mach-snapdragon/Kconfig
+>> +++ b/arch/arm/mach-snapdragon/Kconfig
+>> @@ -1,6 +1,24 @@
+>>   if ARCH_SNAPDRAGON
+>>   
+>> +# SoC specific SRAM addresses
+>> +
+>> +# sdm845
+>> +SDM845_BOOT_IMEM_BASE := 0x14800000
+>> +SDM845_BOOT_IMEM_SIZE := 0x180000
+>> +# we may not be able to use the whole BOOT_IMEM depending on the whitelisted regions hardcoded in PBL
+>> +# (we could technically relocate ourselves after the fact)
+>> +SDM845_BOOT_IMEM_OFFSET := 0x3f000
+>> +SDM845_BOOT_IMEM_USABLE_SIZE := 0xc1000
+>> +# technically the below would work, except the memory from 0x14833000 to 0x1483F000 gets trashed
+>> +# between the ELF getting loaded and XBL_SEC jumping to our code
+>> +#SDM845_BOOT_IMEM_OFFSET := 0x16000
+>> +#SDM845_BOOT_IMEM_USABLE_SIZE := 0xea000
+>> +SDM845_OCIMEM_BASE := 0x14680000
+>> +SDM845_OCIMEM_SIZE := 0x00040000
+>> +SDM845_OCIMEM_END  := $(shell, printf "0x%x\n" "$(dollar)(($(SDM845_OCIMEM_BASE) + $(SDM845_OCIMEM_SIZE) - 1))")
+> I didn't know Kconfig even allowed this. And I *really* don't like it,
+> and I think it's going in the wrong direction with respect to being able
+> to configure a system. If these are configurable, then they need to be
+> "hex" type "config" options, and then used later on. Otherwise they
+> should just be the evaluated value as "default ... if ..." later on,
+> instead.
+This is per-SoC hardware info. The SRAM is physically located at that
+address with that size. The offset/usable size are further restrictions
+imposed by the bootrom, which are relevant for placing the text section
+(the bootrom will copy the ELF segment precisely where the ELF segment
+says it wants to live, as long as that's in a whitelisted region).
 
-Applied to fsl-qoriq-for-2026.07-rc1, thanks!
+I really don't like the idea of just hardcoding hex values with either
+no explanation of where they come from, or with a comment that may or
+may not reflect the reality since there's no mechanism that would enforce
+that the value was actually computed according to the comment.
+(also the amount and complexity of such comments would be higher since
+comments can't reference nonexistent intermediate variables)
 
-[1/1] clk: scmi: Fix protocol version fetch for non-CCF platforms
-      commit: d113b295232dd6d819140169d7178d10d155c7e5
+What I wanted to do here was more along the lines of:
+```
+config QCOM_BOOT_IMEM_BASE
+     default 0x14800000 if SPL_TARGET_SDM845
 
-Best regards,
--- 
-Peng Fan <peng.fan@nxp.com>
+config QCOM_BOOT_IMEM_SIZE
+     default 0x180000 if SPL_TARGET_SDM845
+
+config QCOM_BOOT_IMEM_OFFSET
+     default 0x3f000 if SPL_TARGET_SDM845
+
+config QCOM_BOOT_IMEM_USABLE_SIZE
+     default 0xc1000 if SPL_TARGET_SDM845
+```
+and then
+```
+config SPL_STACK
+     default SDM845_OCIMEM_START + SDM845_OCIMEM_SIZE
+
+config SPL_TEXT_BASE
+     default QCOM_BOOT_IMEM_BASE + QCOM_BOOT_IMEM_OFFSET
+
+config SPL_SYS_MALLOC_F_LEN
+     QCOM_BOOT_IMEM_SIZE / 2
+```
+
+The problem with the above is that Kconfig absolutely doesn't support
+doing that. The only way to do arithmetics is to use the preprocessor
+("macro language"), and the preprocessor obviously doesn't have access
+to the values of symbols, only to preprocessor variables.
+
+The current form is the only solution I could come up with that avoids
+hardcoding hex values, and from reading kconfig docs and sources I think
+it's also the only solution possible short of patching kconfig to support
+arithmetics.
+
+If you consider this more ugly than magic hex values (which afaict is
+the only other option, other than patching kconfig of course),
+I can obviously do that, although it does make me very sad, and I'd prefer
+if we can find a solution that avoids hardcoding. What do you think?
+> [snip]
+>> +config QCOM_SPL
+>> +	bool "Enable SPL for Snapdragon SOCs"
+>> +	select SUPPORT_SPL
+>> +	select ARMV8_SPL_EXCEPTION_VECTORS
+>> +	select ENABLE_ARM_SOC_BOOT0_HOOK
+>> +	select SPL
+>> +	select SPL_DM
+>> +	select SPL_DM_GPIO
+>> +	select SPL_DM_PMIC
+>> +	select SPL_DM_USB_GADGET
+>> +	select SPL_ENV_SUPPORT
+>> +	select SPL_GPIO
+>> +	select SPL_HAS_BSS_LINKER_SECTION
+>> +	select SPL_LIBCOMMON_SUPPORT
+>> +	select SPL_LIBDISK_SUPPORT
+>> +	select SPL_LIBGENERIC_SUPPORT
+>> +	select SPL_MMC
+>> +	select SPL_OF_REAL
+>> +	select SPL_OF_CONTROL
+>> +	select SPL_PINCONF
+>> +	select SPL_PINCTRL
+>> +	select SPL_PINCTRL_FULL
+>> +	select SPL_PINCTRL_GENERIC
+>> +	select SPL_PINCONF_RECURSIVE
+>> +	select SPL_PINMUX
+>> +	select SPL_SPRINTF
+>> +	select SPL_STRTO
+>> +	select SPL_USB_GADGET
+> This should be in the appropriate defconfig, or a config fragment if
+> re-used a lot. Or mirroring other platforms, as part of the stanza for
+> TARGET_... (or ARCH_...) as needed.
+>
+> [snip]
+>> diff --git a/doc/board/qualcomm/spl.rst b/doc/board/qualcomm/spl.rst
+>> new file mode 100644
+>> index 00000000000..817c76b659e
+>> --- /dev/null
+>> +++ b/doc/board/qualcomm/spl.rst
+>> @@ -0,0 +1,70 @@
+>> +.. SPDX-License-Identifier: GPL-2.0+
+>> +.. sectionauthor:: Michael Srba <Michael.Srba@seznam.cz>
+>> +
+>> +======================================
+>> +Booting U-Boot SPL on Qualcomm SoCs
+>> +======================================
+>> +
+>> +Overview
+>> +----------
+> These are style errors that will trip up CI when it builds the docs.
+> Please run "make htmldocs KDOC_WERROR=1" for v2, thanks.
+>
+
