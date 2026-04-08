@@ -4,98 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E5411073CAE
-	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 12:56:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73AF41073CAE
+	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 12:56:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D7DE8419E;
+	by phobos.denx.de (Postfix) with ESMTP id D5FF5841C2;
 	Wed,  8 Apr 2026 14:55:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="WqBFxIYO";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ROx57fKM";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="a5FE+3IW";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jXnM3z3d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C623838BB; Wed,  8 Apr 2026 11:12:41 +0200 (CEST)
+ id EBD0D838BB; Wed,  8 Apr 2026 11:12:50 +0200 (CEST)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02F3D80433
- for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 11:12:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E78280433
+ for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 11:12:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
 Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6387FwAH1619624
- for <u-boot@lists.denx.de>; Wed, 8 Apr 2026 09:12:36 GMT
+ 6387FwAM1619624
+ for <u-boot@lists.denx.de>; Wed, 8 Apr 2026 09:12:47 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=oB5mMzPLF2o
- 5xCCR7NyeZJyWoSpTIPRdc0cEfzLvUGQ=; b=WqBFxIYOfjPF3wwlG/giPWCVH3V
- zkFssg19gFrCnHhQ3uYGyf9GH2ER9305rYM5dHx37S4rMFiFtvuHFL+tEna3Btwq
- A79IccAkIvvfbAO8m7FG4cs13kINOP+OU06ZrpSDC0/z3w8xetEVqE0dU77K8QRB
- u4foKWxLb5tGbQYfjzz/jHSSqgro5upH6kIxyj1YlQIIYr6wCKL0G55WkAFfBheo
- 4VyxbsGOioyjccOjpYsyvYp+cQ0zYARXJj5zTuzXNAfTVoLNdQspaE7j9yY94lRc
- ke9kXtePycDKKTmARepiO/+syNlO5t95LfR8lN+3QCtWD8YPkQ+JKO04TvQ==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
- [209.85.214.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ddacrj10w-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=Hd1J7ilWQjg
+ HnMbh7OnpDcRH8M1AtCS0O5VR04Xx2SQ=; b=a5FE+3IWNylC+MKbt7YYZMC67zm
+ UOJpDCwqKJzBHmvbGUm6hLc8tWAxlxGPoBW8KygsrY/+gR8UnQzF091HqP9i1jyy
+ eizqrKHXtyEe2qhXLrNPqGdPpdofyepnDiyBxvkLsvlX6Rvbe8FLxTlURUHEQlyR
+ I6bnrpPGHvxbF0L2zGBZbd9IwLKLLXfhHtUU7JsWSKYppXJBV3RwHrGSaAHCHtmE
+ STeeSJsSGgRp4+n8JXU4C0qW3LiCoqrutJWVUYDMPjGDt/zqDC82QcXdpQC0n90J
+ z9dDEYSGCvVX7RDcr2NfvMJz/e5aJQEo5Bi4NM7ObPz1UU8tReeIVKq4mLA==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
+ [209.85.214.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ddacrj12f-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 08 Apr 2026 09:12:36 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id
- d9443c01a7336-2b258636d16so61656545ad.2
- for <u-boot@lists.denx.de>; Wed, 08 Apr 2026 02:12:35 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Wed, 08 Apr 2026 09:12:46 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id
+ d9443c01a7336-2b23c909256so83230125ad.0
+ for <u-boot@lists.denx.de>; Wed, 08 Apr 2026 02:12:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1775639555; x=1776244355; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1775639566; x=1776244366; darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oB5mMzPLF2o5xCCR7NyeZJyWoSpTIPRdc0cEfzLvUGQ=;
- b=ROx57fKMqfZrMMZekMgkwP8MHLEbqPsy1aBGvWkKRfW0uwo69D1PaY3DudkSL1ZPze
- +Qv8ccw0jntevUFG5qcKQveoKm2HQoy6vHD16/AMZ8g2cl49fd20wpERC1vTssG8p7UP
- yyCaC/Nox03nRIvIughlR3oaByMyBkBYtbCJZqsJVa7XG29u/MsmXGlkjz3SDfuWNf7F
- P5v+I/bzsJy+A/QCxhpGDpE0LxiBO9galg2pgDITazwPXAJB6NFGmk/29u4ZX0TrHI8z
- kWLnJwRl70rPkhgcTzsfdJu/XZoLqhbIl4+gPqscbGUdxAahKhQFpLQU2lqqxgTBduem
- 5h2A==
+ bh=Hd1J7ilWQjgHnMbh7OnpDcRH8M1AtCS0O5VR04Xx2SQ=;
+ b=jXnM3z3dAWQmuIGaMtdQywpmgH0VbvR/ZlrzTDqRQjTXOaNVST2MAqTCGPAw6+NHm7
+ o6dofZgT+JDyJ3w0jhjngKYtr9w0wLa23xmwtaUbr5lbu5t8hFBDln/EZQfoylChFxCo
+ IPEzVwCrbeSbPoAkBZQEVNNvD3ZPG3cy0MbuYOBFFHhH+FQr/VRrwB9mQiImSLKKVHsT
+ jYQ+iZP+4+QTq1e+LPED5c4xRF8Xwjqh6o9rrjvCLAdF9wzIeKNykLPfpL/1i+szDsyv
+ j3iGqt4pqpLeEDLvyngoK1gT7+a2p0NXi5mW0s0N7oReWNMb9JyS1ZGVZHMbPI+wyf1p
+ RrPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775639555; x=1776244355;
+ d=1e100.net; s=20251104; t=1775639566; x=1776244366;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=oB5mMzPLF2o5xCCR7NyeZJyWoSpTIPRdc0cEfzLvUGQ=;
- b=mD8U11b544SUdBv4qcQNq4r3897nBfV4mz348tYXlJtLdnosJoPbo2fXtZ+D++5WfC
- L35fjwCH9mtQShMb/TshsZW5n+JIsKQY2FYds/kuRJyCFIoQMuI4Bahxx1YJd/hYgJVV
- V63Xsh85U2ryNiUM+fD2ZXD0AXT2kcXZ4iKY5WBMZP3JMY3/4MHGrepAuZmDG81b6jW4
- xToPTRqUyNZGrAAi7p6nA37aBLzPSO6bxJS05Q0gz3DZj0FcM/070JeqlcZXh9TomEOe
- WF+8pIF7uoaXUPdBBOxvsd+hqSswDMeUAYJUahxjAaVVNWSyLuIDlOB52sLeWgYZ3XHw
- 16rw==
+ bh=Hd1J7ilWQjgHnMbh7OnpDcRH8M1AtCS0O5VR04Xx2SQ=;
+ b=Qj6ZSe4IMRKcQupwZoJx2xMPJhlSGM5OzrU95/R6DwKTtCTTHXGqNWxLTWKlPMXrAB
+ hLXYEK+FEusczQ7PDibpNZjNYgtBjh7TONtGZPEj8lb4GBSNA8s37IcVu+eZ+qtcwdv1
+ ln6YM2jbNXP1OyG/TnfjB2XwPw56GwFYt7kKWD0pzXo3ow/DepRPoNxpp2v1P90saLQ3
+ PfJUgLt4NYougCdUTIZ01/Qlt4ukk8chFgrq8ekbA0gkcPGrBMvJMvlukzovbAuOAvF+
+ PG5H+ATjNi7g1nEntEg2OyYZfHrhlIU6x0nomUZMxlxnnkzhhjfhHXAZ+CG7mzC8YaKx
+ RSRg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU+wtw1F+EJ2RAQLMrRU1M5kwIxCGD7RBuZUwuX+PsWWg4MbIjwyoqvn6n5kt0KSckjqeXSaEI=@lists.denx.de
-X-Gm-Message-State: AOJu0YzFmm0BmybRNFy61DhXGB+oBqghvFChy85T5EIC3L6nVoCjkzgw
- t4VhR0VOtAdcslR+ZH8f0GuXgB4FqirhDI0GV3srL+Alq5WBezKDEwsjamjGpkJ1Gxutp0tMM3i
- QNjtx2roTAjP+Tn3jQkXlVWfY0pppRxyyhOvt8++nQqDOmxnnS6VwRpLU
-X-Gm-Gg: AeBDieuvFpQL8u8yyelwWeQwHy14dWYa5ieaDAyMJUpvoz7gwhELZfZzWLN20PzS/Wp
- 5KlhAG3fYJfmnySx3am4YFsRYnVLx6PomHHvVWyojDg/9QVMXFHi6HpAKovXwxyLyYJgYrvXoic
- Wu+on1v9K8s4aafcX58ZFI2nFNd8jU2zYgoKZtJ3R9sQvCB5ZTlX8LHcNJx2hlzAT5oH+p4Inch
- kFHqc/EqcZjp7yoa3/xyOzySs8fFWnays7XfdzEnX5M6mJAZg1PHO1SNmQ8mysuZZgJ59H22RSK
- QIC8x8NhF/1YwghsonYSOLHQF2a1xJRO2yHJ7/GLU5k4cDNdGZ9bsso3iyRadGbcgvjnxwtWPgV
- OCgUhr/tfoxMILZlbEyMqi58IrfRNMIsJtQw9EeAToJtpzw8naZVRvz2ZfQCloxi8GwMrBxsNRJ
- C+EzbuQdQROSpi+wor0/bxnvx2bipfQU7LBHrhwjkymyQTjtV7EUc=
-X-Received: by 2002:a17:903:1b30:b0:2b0:60b2:4f8 with SMTP id
- d9443c01a7336-2b281816eabmr217976505ad.15.1775639554810; 
- Wed, 08 Apr 2026 02:12:34 -0700 (PDT)
-X-Received: by 2002:a17:903:1b30:b0:2b0:60b2:4f8 with SMTP id
- d9443c01a7336-2b281816eabmr217975635ad.15.1775639554249; 
- Wed, 08 Apr 2026 02:12:34 -0700 (PDT)
+ AJvYcCVvLjJLCdK5CTJRye7FlPETsHYsF0wOCIHTbnHWl6JbAHklcKzyeLcVp/Gj2UH3OFuD2c0Z7/o=@lists.denx.de
+X-Gm-Message-State: AOJu0YxhVCfMv+Va0dSJjKK44Xal6A1Ce0e9JItBpyYcsB8RNGY/Ygnu
+ ffztYe5+3xJoHgAMyPaMmr9P7BXF9SqJPVeOuqZFpsi1bo9GSfJwcU+aZwAHVfcj2FQQW+Q1L0W
+ +Ntg6INZS7FJd7+cMyJYGF3uRNnhB+Q/KLtNn6nMR5vNDEXJ1bp0wYX5w
+X-Gm-Gg: AeBDievzPdvJNP3AvqHow7vEdm6f9iwUoAu8EYYBMe2m3Ozj4lR6vWN5HL+dcu5kV5W
+ Nt3ATpinrQ5HG6cFMDKICA6d2s+PBsQKrXuKxzLwW5Fx97zcJjn+07hBTWPp0rY5glDw3W/fvvi
+ c4MJHihWnfUKHl/5e+TvpQpOBHBiQXd05wTUxyKFzIu7YOvXIHH1beOy6ZaYy/5l0lWnpkrXI1/
+ B6bd1UL4dpSXl8AKdYCSO+efFPWe/0x2DW40QFwTzOzrq1takV9qJJb7a9eDHKzwlceHinkIsmI
+ Tw0WjfoEExzfwyRy/jCxB3RWDa37r/ljJ1RhBWQv2Dsq9JDUTD4tN7LMFpP78Uf/y9f8RlziB74
+ L9b+4JYZQsvJ1UYzIJVVJ7/c8UN7QqL6yQFGoRcWnOoePyPrMCgLDxQcukhxkejCPV9tyBValkU
+ mhcSqAiw49+a0M3W1I3vKXcSDfo644/Ywc7LiyN+oiNsPI8engIzM=
+X-Received: by 2002:a17:903:950:b0:2ae:b991:a46f with SMTP id
+ d9443c01a7336-2b2817f1a38mr241471415ad.42.1775639565771; 
+ Wed, 08 Apr 2026 02:12:45 -0700 (PDT)
+X-Received: by 2002:a17:903:950:b0:2ae:b991:a46f with SMTP id
+ d9443c01a7336-2b2817f1a38mr241470585ad.42.1775639565212; 
+ Wed, 08 Apr 2026 02:12:45 -0700 (PDT)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b27478945asm260020325ad.28.2026.04.08.02.12.23
+ d9443c01a7336-2b27478945asm260020325ad.28.2026.04.08.02.12.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Apr 2026 02:12:33 -0700 (PDT)
+ Wed, 08 Apr 2026 02:12:44 -0700 (PDT)
 From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 To: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
  casey.connolly@linaro.org, neil.armstrong@linaro.org,
@@ -114,34 +114,34 @@ To: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
  malysagreg@gmail.com, richard.genoud@bootlin.com, sughosh.ganu@arm.com,
  u-boot@lists.denx.de, u-boot-qcom@groups.io
 Cc: snlakshm@qti.qualcomm.com, gopinath.sekar@oss.qualcomm.com
-Subject: [PATCH v1 4/9] pinctrl: qcom: Add ipq5210 pinctrl driver
-Date: Wed,  8 Apr 2026 14:41:31 +0530
-Message-Id: <20260408091136.2794546-5-varadarajan.narayanan@oss.qualcomm.com>
+Subject: [PATCH v1 5/9] misc: qcom_geni: Add minicore support
+Date: Wed,  8 Apr 2026 14:41:32 +0530
+Message-Id: <20260408091136.2794546-6-varadarajan.narayanan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260408091136.2794546-1-varadarajan.narayanan@oss.qualcomm.com>
 References: <20260408091136.2794546-1-varadarajan.narayanan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: MOzcSJiqiJbuMPfzpkjWkx2yiUEb8Xvc
-X-Proofpoint-GUID: MOzcSJiqiJbuMPfzpkjWkx2yiUEb8Xvc
-X-Authority-Analysis: v=2.4 cv=WZs8rUhX c=1 sm=1 tr=0 ts=69d61c04 cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-ORIG-GUID: _0_qi3HTFErYpwHsS_EL2cXptFgZhidR
+X-Proofpoint-GUID: _0_qi3HTFErYpwHsS_EL2cXptFgZhidR
+X-Authority-Analysis: v=2.4 cv=WZs8rUhX c=1 sm=1 tr=0 ts=69d61c0e cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
  a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
- a=NzvCGKM8m0lGn9t9IsgA:9 a=O8hF6Hzn-FEA:10 a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA4MDA4MiBTYWx0ZWRfXwhVEnlyQY1+l
- 1COirdx2SK6ch3Ce/+DMsqZlbWAzJB752Va5KbcHUbQKHxdVCwlnIlSLFfMap7qJlquEjIKzzqN
- YV/zYinOCedHd/gj++el/02hhDRhjAsd5uwCjFmy9UAxdyJAZ0axfj67SwkO7BmqU9trDvxCsrv
- yya5QsFJyEwOjzCStHtZO+GuYa099V1YbZaH7aXdvnObYLn8AmiMjfjFsyNEbBf2KvCvJfMheMT
- ydgT84gVbuCA4R1Mf/6LHHve2KvzTAHObNlHXgG6RNu2zuNYfIZHXdHa+iXUUfWZorns1Spr6/X
- UkliNBEGRiFwD3MxGoVXCdgZ2ExdqYYZIXFKavr1sGaogMyID1jgaqAfVNqtvqDRzJzKGNhlqUf
- OehW1GTxTsfvEa/q84epb/dAAnEEXwfmuzVp7vHsMa21EK30dESh4hWASdT3QPkmI7Lx4vNmS30
- oRbuBFVETLAxGc21RLQ==
+ a=c6PXgn3fiFxYvSzRRRIA:9 a=1OuFwYUASf3TG4hYMiVC:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA4MDA4MiBTYWx0ZWRfX/eRB498md4o6
+ Bfg7n7Y5AY0gLKsMIzJptKzrqlKLpT0hoM3togzxaK93nwYMo4Ye2v2PmIgRhVADFTGSJljm1O5
+ w+Z55KGs7yAyhWAXQjlctdZ0QITfB8dBe/l8Oz/cw7KBwTIofi7RF8Z/Zbgs3gQyyE2XwtGNlPp
+ TOTl9Ow+gFQpgHZjmvwUo/1cVml7JYBleErPkrcqxCy0EbAitF+wq8EwQ6nwFcxC7Zp2hMhx7ht
+ XFapg0LS2HZ3yqvOquVs0rWo3MXdWkNAjBlNdPpd3mid/d9FSai1INmt/kNJtfsjM0AGfaw8MqJ
+ /lyZ4xjnLaZMKj8wzSpom+WpHvsZEVlRnI6Qje0WfhnlLUK1OxK8xaeMEIT0fNAnzDImPW+MXLm
+ JvHW403JcZjthjo13mDhOK83fjwSnLoHRDwMb9fHhShzaHcJZ7ZvcV6Mh/FufAjpo4X0DkZVgXU
+ rMT0vcMmW7XWjQaMyUg==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-04-08_03,2026-04-08_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 malwarescore=0 adultscore=0 phishscore=0 clxscore=1015
+ suspectscore=0 malwarescore=0 adultscore=0 phishscore=0 clxscore=1011
  bulkscore=0 lowpriorityscore=0 spamscore=0 priorityscore=1501 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2604010000 definitions=main-2604080082
@@ -162,402 +162,348 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add pinctrl driver for the TLMM block found in the ipq5210 SoC.
+The qcom_geni driver reads an ELF from storage and configures a set of
+registers and programs the firmware to the GENI Serial Engine (GENI-SE)
+wrapper device for the expected functionality.
+
+Unlike the GENI-SE wrapper found in MSM SoCs, the IPQ5210's GENI-SE
+wrapper is pre-configured for one of the functions defined in 'enum
+geni_se_protocol_type'. Hence, the firmware download is not needed.
+Only the register configuration part is needed.
+
+Earlier, the boot stages before U-Boot would configure the GENI-SE (to
+access UART/SPI etc). Since for IPQ5210 U-Boot SPL, the previous stage
+(i.e. boot ROM) doesn't do that modify the driver to do the register
+configuration part alone without reading an ELF from the storage.
 
 Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 ---
- drivers/pinctrl/qcom/Kconfig           |   8 +
- drivers/pinctrl/qcom/Makefile          |   1 +
- drivers/pinctrl/qcom/pinctrl-ipq5210.c | 349 +++++++++++++++++++++++++
- 3 files changed, 358 insertions(+)
- create mode 100644 drivers/pinctrl/qcom/pinctrl-ipq5210.c
+ drivers/misc/qcom_geni.c       | 168 ++++++++++++++++++++++++++++++---
+ include/soc/qcom/geni-se.h     |   5 +
+ include/soc/qcom/qup-fw-load.h |  15 +++
+ 3 files changed, 175 insertions(+), 13 deletions(-)
 
-diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
-index 580308621b1..d30526b0167 100644
---- a/drivers/pinctrl/qcom/Kconfig
-+++ b/drivers/pinctrl/qcom/Kconfig
-@@ -38,6 +38,14 @@ config PINCTRL_QCOM_IPQ4019
- 	  Say Y here to enable support for pinctrl on the IPQ4019 SoC,
- 	  as well as the associated GPIO driver.
+diff --git a/drivers/misc/qcom_geni.c b/drivers/misc/qcom_geni.c
+index a62ae6a2478..d02ea804c33 100644
+--- a/drivers/misc/qcom_geni.c
++++ b/drivers/misc/qcom_geni.c
+@@ -34,6 +34,102 @@ struct qup_se_rsc {
  
-+config PINCTRL_QCOM_IPQ5210
-+	bool "Qualcomm IPQ5210 Pinctrl"
-+	default y if PINCTRL_QCOM_GENERIC
-+	select PINCTRL_QCOM
-+	help
-+	  Say Y here to enable support for pinctrl on the IPQ5210 SoC,
-+	  as well as the associated GPIO driver.
+ struct geni_se_plat {
+ 	bool need_firmware_load;
++	bool is_mini_core;
++};
 +
- config PINCTRL_QCOM_IPQ5424
- 	bool "Qualcomm IPQ5424 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
-index b5a111605ed..34ae56bb007 100644
---- a/drivers/pinctrl/qcom/Makefile
-+++ b/drivers/pinctrl/qcom/Makefile
-@@ -5,6 +5,7 @@
- obj-$(CONFIG_PINCTRL_QCOM) += pinctrl-qcom.o
- obj-$(CONFIG_PINCTRL_QCOM_APQ8016) += pinctrl-apq8016.o
- obj-$(CONFIG_PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
-+obj-$(CONFIG_PINCTRL_QCOM_IPQ5210) += pinctrl-ipq5210.o
- obj-$(CONFIG_PINCTRL_QCOM_IPQ5424) += pinctrl-ipq5424.o
- obj-$(CONFIG_PINCTRL_QCOM_IPQ9574) += pinctrl-ipq9574.o
- obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
-diff --git a/drivers/pinctrl/qcom/pinctrl-ipq5210.c b/drivers/pinctrl/qcom/pinctrl-ipq5210.c
-new file mode 100644
-index 00000000000..2baff884bf3
---- /dev/null
-+++ b/drivers/pinctrl/qcom/pinctrl-ipq5210.c
-@@ -0,0 +1,349 @@
-+// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * Qualcomm IPQ5210 pinctrl
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ * Register configuration for the QUP minicores to setup the corresponding
++ * functionality of SPI/I2C/UART.
 + */
-+
-+#include <dm.h>
-+
-+#include "pinctrl-qcom.h"
-+
-+#define MAX_PIN_NAME_LEN 32
-+static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
-+
-+enum ipq5210_functions {
-+	msm_mux_atest_char_start,
-+	msm_mux_atest_char_status0,
-+	msm_mux_atest_char_status1,
-+	msm_mux_atest_char_status2,
-+	msm_mux_atest_char_status3,
-+	msm_mux_atest_tic_en,
-+	msm_mux_audio_pri,
-+	msm_mux_audio_pri_mclk_out0,
-+	msm_mux_audio_pri_mclk_in0,
-+	msm_mux_audio_pri_mclk_out1,
-+	msm_mux_audio_pri_mclk_in1,
-+	msm_mux_audio_pri_mclk_out2,
-+	msm_mux_audio_pri_mclk_in2,
-+	msm_mux_audio_pri_mclk_out3,
-+	msm_mux_audio_pri_mclk_in3,
-+	msm_mux_audio_sec,
-+	msm_mux_audio_sec_mclk_out0,
-+	msm_mux_audio_sec_mclk_in0,
-+	msm_mux_audio_sec_mclk_out1,
-+	msm_mux_audio_sec_mclk_in1,
-+	msm_mux_audio_sec_mclk_out2,
-+	msm_mux_audio_sec_mclk_in2,
-+	msm_mux_audio_sec_mclk_out3,
-+	msm_mux_audio_sec_mclk_in3,
-+	msm_mux_core_voltage_0,
-+	msm_mux_cri_trng0,
-+	msm_mux_cri_trng1,
-+	msm_mux_cri_trng2,
-+	msm_mux_cri_trng3,
-+	msm_mux_dbg_out_clk,
-+	msm_mux_dg_out,
-+	msm_mux_gcc_plltest_bypassnl,
-+	msm_mux_gcc_plltest_resetn,
-+	msm_mux_gcc_tlmm,
-+	msm_mux_gpio,
-+	msm_mux_led0,
-+	msm_mux_led1,
-+	msm_mux_led2,
-+	msm_mux_mdc_mst,
-+	msm_mux_mdc_slv0,
-+	msm_mux_mdc_slv1,
-+	msm_mux_mdc_slv2,
-+	msm_mux_mdio_mst,
-+	msm_mux_mdio_slv0,
-+	msm_mux_mdio_slv1,
-+	msm_mux_mdio_slv2,
-+	msm_mux_mux_tod_out,
-+	msm_mux_pcie0_clk_req_n,
-+	msm_mux_pcie0_wake,
-+	msm_mux_pcie1_clk_req_n,
-+	msm_mux_pcie1_wake,
-+	msm_mux_pll_test,
-+	msm_mux_pon_active_led,
-+	msm_mux_pon_mux_sel,
-+	msm_mux_pon_rx,
-+	msm_mux_pon_rx_los,
-+	msm_mux_pon_tx,
-+	msm_mux_pon_tx_burst,
-+	msm_mux_pon_tx_dis,
-+	msm_mux_pon_tx_fault,
-+	msm_mux_pon_tx_sd,
-+	msm_mux_gpn_rx_los,
-+	msm_mux_gpn_tx_burst,
-+	msm_mux_gpn_tx_dis,
-+	msm_mux_gpn_tx_fault,
-+	msm_mux_gpn_tx_sd,
-+	msm_mux_pps,
-+	msm_mux_pwm0,
-+	msm_mux_pwm1,
-+	msm_mux_pwm2,
-+	msm_mux_pwm3,
-+	msm_mux_qdss_cti_trig_in_a0,
-+	msm_mux_qdss_cti_trig_in_a1,
-+	msm_mux_qdss_cti_trig_in_b0,
-+	msm_mux_qdss_cti_trig_in_b1,
-+	msm_mux_qdss_cti_trig_out_a0,
-+	msm_mux_qdss_cti_trig_out_a1,
-+	msm_mux_qdss_cti_trig_out_b0,
-+	msm_mux_qdss_cti_trig_out_b1,
-+	msm_mux_qdss_traceclk_a,
-+	msm_mux_qdss_tracectl_a,
-+	msm_mux_qdss_tracedata_a,
-+	msm_mux_qrng_rosc0,
-+	msm_mux_qrng_rosc1,
-+	msm_mux_qrng_rosc2,
-+	msm_mux_qspi_data,
-+	msm_mux_qspi_clk,
-+	msm_mux_qspi_cs_n,
-+	msm_mux_qup_se0,
-+	msm_mux_qup_se1,
-+	msm_mux_qup_se2,
-+	msm_mux_qup_se3,
-+	msm_mux_qup_se4,
-+	msm_mux_qup_se5,
-+	msm_mux_qup_se5_l1,
-+	msm_mux_resout,
-+	msm_mux_rx_los0,
-+	msm_mux_rx_los1,
-+	msm_mux_rx_los2,
-+	msm_mux_sdc_clk,
-+	msm_mux_sdc_cmd,
-+	msm_mux_sdc_data,
-+	msm_mux_tsens_max,
-+	msm_mux__,
++static u8 cfg_reg_idx[] = {
++	/* 0 to 18 */
++	0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
++	/* 64 to 113 */
++	64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
++	81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97,
++	98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111,
++	112, 113,
 +};
 +
-+#define MSM_PIN_FUNCTION(fname)				\
-+	[msm_mux_##fname] = {#fname, msm_mux_##fname}
-+
-+static const struct pinctrl_function msm_pinctrl_functions[] = {
-+	MSM_PIN_FUNCTION(atest_char_start),
-+	MSM_PIN_FUNCTION(atest_char_status0),
-+	MSM_PIN_FUNCTION(atest_char_status1),
-+	MSM_PIN_FUNCTION(atest_char_status2),
-+	MSM_PIN_FUNCTION(atest_char_status3),
-+	MSM_PIN_FUNCTION(atest_tic_en),
-+	MSM_PIN_FUNCTION(audio_pri),
-+	MSM_PIN_FUNCTION(audio_pri_mclk_out0),
-+	MSM_PIN_FUNCTION(audio_pri_mclk_in0),
-+	MSM_PIN_FUNCTION(audio_pri_mclk_out1),
-+	MSM_PIN_FUNCTION(audio_pri_mclk_in1),
-+	MSM_PIN_FUNCTION(audio_pri_mclk_out2),
-+	MSM_PIN_FUNCTION(audio_pri_mclk_in2),
-+	MSM_PIN_FUNCTION(audio_pri_mclk_out3),
-+	MSM_PIN_FUNCTION(audio_pri_mclk_in3),
-+	MSM_PIN_FUNCTION(audio_sec),
-+	MSM_PIN_FUNCTION(audio_sec_mclk_out0),
-+	MSM_PIN_FUNCTION(audio_sec_mclk_in0),
-+	MSM_PIN_FUNCTION(audio_sec_mclk_out1),
-+	MSM_PIN_FUNCTION(audio_sec_mclk_in1),
-+	MSM_PIN_FUNCTION(audio_sec_mclk_out2),
-+	MSM_PIN_FUNCTION(audio_sec_mclk_in2),
-+	MSM_PIN_FUNCTION(audio_sec_mclk_out3),
-+	MSM_PIN_FUNCTION(audio_sec_mclk_in3),
-+	MSM_PIN_FUNCTION(core_voltage_0),
-+	MSM_PIN_FUNCTION(cri_trng0),
-+	MSM_PIN_FUNCTION(cri_trng1),
-+	MSM_PIN_FUNCTION(cri_trng2),
-+	MSM_PIN_FUNCTION(cri_trng3),
-+	MSM_PIN_FUNCTION(dbg_out_clk),
-+	MSM_PIN_FUNCTION(dg_out),
-+	MSM_PIN_FUNCTION(gcc_plltest_bypassnl),
-+	MSM_PIN_FUNCTION(gcc_plltest_resetn),
-+	MSM_PIN_FUNCTION(gcc_tlmm),
-+	MSM_PIN_FUNCTION(gpio),
-+	MSM_PIN_FUNCTION(led0),
-+	MSM_PIN_FUNCTION(led1),
-+	MSM_PIN_FUNCTION(led2),
-+	MSM_PIN_FUNCTION(mdc_mst),
-+	MSM_PIN_FUNCTION(mdc_slv0),
-+	MSM_PIN_FUNCTION(mdc_slv1),
-+	MSM_PIN_FUNCTION(mdc_slv2),
-+	MSM_PIN_FUNCTION(mdio_mst),
-+	MSM_PIN_FUNCTION(mdio_slv0),
-+	MSM_PIN_FUNCTION(mdio_slv1),
-+	MSM_PIN_FUNCTION(mdio_slv2),
-+	MSM_PIN_FUNCTION(mux_tod_out),
-+	MSM_PIN_FUNCTION(pcie0_clk_req_n),
-+	MSM_PIN_FUNCTION(pcie0_wake),
-+	MSM_PIN_FUNCTION(pcie1_clk_req_n),
-+	MSM_PIN_FUNCTION(pcie1_wake),
-+	MSM_PIN_FUNCTION(pll_test),
-+	MSM_PIN_FUNCTION(pon_active_led),
-+	MSM_PIN_FUNCTION(pon_mux_sel),
-+	MSM_PIN_FUNCTION(pon_rx),
-+	MSM_PIN_FUNCTION(pon_rx_los),
-+	MSM_PIN_FUNCTION(pon_tx),
-+	MSM_PIN_FUNCTION(pon_tx_burst),
-+	MSM_PIN_FUNCTION(pon_tx_dis),
-+	MSM_PIN_FUNCTION(pon_tx_fault),
-+	MSM_PIN_FUNCTION(pon_tx_sd),
-+	MSM_PIN_FUNCTION(gpn_rx_los),
-+	MSM_PIN_FUNCTION(gpn_tx_burst),
-+	MSM_PIN_FUNCTION(gpn_tx_dis),
-+	MSM_PIN_FUNCTION(gpn_tx_fault),
-+	MSM_PIN_FUNCTION(gpn_tx_sd),
-+	MSM_PIN_FUNCTION(pps),
-+	MSM_PIN_FUNCTION(pwm0),
-+	MSM_PIN_FUNCTION(pwm1),
-+	MSM_PIN_FUNCTION(pwm2),
-+	MSM_PIN_FUNCTION(pwm3),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_in_a0),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_in_a1),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_in_b0),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_in_b1),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_out_a0),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_out_a1),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_out_b0),
-+	MSM_PIN_FUNCTION(qdss_cti_trig_out_b1),
-+	MSM_PIN_FUNCTION(qdss_traceclk_a),
-+	MSM_PIN_FUNCTION(qdss_tracectl_a),
-+	MSM_PIN_FUNCTION(qdss_tracedata_a),
-+	MSM_PIN_FUNCTION(qrng_rosc0),
-+	MSM_PIN_FUNCTION(qrng_rosc1),
-+	MSM_PIN_FUNCTION(qrng_rosc2),
-+	MSM_PIN_FUNCTION(qspi_data),
-+	MSM_PIN_FUNCTION(qspi_clk),
-+	MSM_PIN_FUNCTION(qspi_cs_n),
-+	MSM_PIN_FUNCTION(qup_se0),
-+	MSM_PIN_FUNCTION(qup_se1),
-+	MSM_PIN_FUNCTION(qup_se2),
-+	MSM_PIN_FUNCTION(qup_se3),
-+	MSM_PIN_FUNCTION(qup_se4),
-+	MSM_PIN_FUNCTION(qup_se5),
-+	MSM_PIN_FUNCTION(qup_se5_l1),
-+	MSM_PIN_FUNCTION(resout),
-+	MSM_PIN_FUNCTION(rx_los0),
-+	MSM_PIN_FUNCTION(rx_los1),
-+	MSM_PIN_FUNCTION(rx_los2),
-+	MSM_PIN_FUNCTION(sdc_clk),
-+	MSM_PIN_FUNCTION(sdc_cmd),
-+	MSM_PIN_FUNCTION(sdc_data),
-+	MSM_PIN_FUNCTION(tsens_max),
++static u32 spi_cfg_val[] = {
++	/* 0 to 18 */
++	0x00000000, 0x00000400, 0x00000000, 0x00000000, 0x00240E78, 0x00011088,
++	0x00240007, 0x00000000, 0x00000000, 0x0001000A, 0x00000300, 0x00000000,
++	0x00000000, 0x00000000, 0x00154400, 0x001483A0, 0x00AA8128, 0x00641002,
++	0x00004000,
++	/* 64 to 113 */
++	0x00000201, 0x0001FE05, 0x0002C2E7, 0x0A435C00, 0x0010011A, 0x08800000,
++	0x00000000, 0x100CAC00, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
++	0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x000018E4, 0x00000000,
++	0x00000003, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
++	0x0007F807, 0x000FFEFE, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
++	0x00200000, 0x00000004, 0x00000009, 0x0007F807, 0x000FFEFE, 0x00000000,
++	0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
++	0x00000000, 0x00000000, 0x00C0033F, 0x00000000, 0x00000000, 0x00000000,
++	0x00000000, 0x00000055,
 +};
 +
-+typedef unsigned int msm_pin_function[10];
-+
-+#define PINGROUP(id, f1, f2, f3, f4, f5, f6, f7, f8, f9) \
-+	[id] = {        msm_mux_gpio, /* gpio mode */	\
-+			msm_mux_##f1,			\
-+			msm_mux_##f2,			\
-+			msm_mux_##f3,			\
-+			msm_mux_##f4,			\
-+			msm_mux_##f5,			\
-+			msm_mux_##f6,			\
-+			msm_mux_##f7,			\
-+			msm_mux_##f8,			\
-+			msm_mux_##f9,			\
-+	}
-+
-+static const msm_pin_function ipq5210_pin_functions[] = {
-+	PINGROUP(0, sdc_data, qspi_data, pwm2, _, _, _, _, _, _),
-+	PINGROUP(1, sdc_data, qspi_data, pwm2, _, _, _, _, _, _),
-+	PINGROUP(2, sdc_data, qspi_data, pwm2, _, _, _, _, _, _),
-+	PINGROUP(3, sdc_data, qspi_data, pwm2, _, _, _, _, _, _),
-+	PINGROUP(4, sdc_cmd, qspi_cs_n, _, _, _, _, _, _, _),
-+	PINGROUP(5, sdc_clk, qspi_clk, _, _, _, _, _, _, _),
-+	PINGROUP(6, qup_se0, led0, pwm1, _, cri_trng0, qdss_tracedata_a, _, _, _),
-+	PINGROUP(7, qup_se0, led1, pwm1, _, cri_trng1, qdss_tracedata_a, _, _, _),
-+	PINGROUP(8, qup_se0, pwm1, audio_pri_mclk_out2, audio_pri_mclk_in2, _, cri_trng2, qdss_tracedata_a, _, _),
-+	PINGROUP(9, qup_se0, led2, pwm1, _, cri_trng3, qdss_tracedata_a, _, _, _),
-+	PINGROUP(10, pon_rx_los, qup_se3, pwm0, _, _, qdss_tracedata_a, _, _, _),
-+	PINGROUP(11, pon_active_led, qup_se3, pwm0, _, _, qdss_tracedata_a, _, _, _),
-+	PINGROUP(12, pon_tx_dis, qup_se2, pwm0, audio_pri_mclk_out0, audio_pri_mclk_in0, _, qrng_rosc0, qdss_tracedata_a, _),
-+	PINGROUP(13, gpn_tx_dis, qup_se2, pwm0, audio_pri_mclk_out3, audio_pri_mclk_in3, _, qrng_rosc1, qdss_tracedata_a, _),
-+	PINGROUP(14, pon_tx_burst, qup_se0, _, qrng_rosc2, qdss_tracedata_a, _, _, _, _),
-+	PINGROUP(15, pon_tx, qup_se0, _, qdss_tracedata_a, _, _, _, _, _),
-+	PINGROUP(16, pon_tx_sd, audio_sec_mclk_out1, audio_sec_mclk_in1, qdss_cti_trig_out_b0, _, _, _, _, _),
-+	PINGROUP(17, pon_tx_fault, audio_sec_mclk_out0, audio_sec_mclk_in0, _, _, _, _, _, _),
-+	PINGROUP(18, pps, pll_test, _, _, _, _, _, _, _),
-+	PINGROUP(19, mux_tod_out, audio_pri_mclk_out1, audio_pri_mclk_in1, _, _, _, _, _, _),
-+	PINGROUP(20, qup_se2, mdc_slv1, tsens_max, qdss_tracedata_a, _, _, _, _, _),
-+	PINGROUP(21, qup_se2, mdio_slv1, qdss_tracedata_a, _, _, _, _, _, _),
-+	PINGROUP(22, core_voltage_0, qup_se3, pwm3, _, _, _, _, _, _),
-+	PINGROUP(23, led0, qup_se3, dbg_out_clk, qdss_traceclk_a, _, _, _, _, _),
-+	PINGROUP(24, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(25, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(26, mdc_mst, led2, _, qdss_tracectl_a, _, _, _, _, _),
-+	PINGROUP(27, mdio_mst, led1, _, _, _, _, _, _, _),
-+	PINGROUP(28, pcie1_clk_req_n, qup_se1, _, _, qdss_cti_trig_out_a0, _, _, _, _),
-+	PINGROUP(29, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(30, pcie1_wake, qup_se1, _, _, qdss_cti_trig_in_a0, _, _, _, _),
-+	PINGROUP(31, pcie0_clk_req_n, mdc_slv0, _, qdss_cti_trig_out_a1, _, _, _, _, _),
-+	PINGROUP(32, _, _, _, _, _, _, _, _, _),
-+	PINGROUP(33, pcie0_wake, mdio_slv0, qdss_cti_trig_in_a1, _, _, _, _, _, _),
-+	PINGROUP(34, audio_pri, atest_char_status0, qdss_cti_trig_in_b0, _, _, _, _, _, _),
-+	PINGROUP(35, audio_pri, rx_los2, atest_char_status1, qdss_cti_trig_out_b1, _, _, _, _, _),
-+	PINGROUP(36, audio_pri, _, rx_los1, atest_char_status2, _, _, _, _, _),
-+	PINGROUP(37, audio_pri, rx_los0, atest_char_status3, _, qdss_cti_trig_in_b1, _, _, _, _),
-+	PINGROUP(38, qup_se1, led2, gcc_plltest_bypassnl, qdss_tracedata_a, _, _, _, _, _),
-+	PINGROUP(39, qup_se1, led1, led0, gcc_tlmm, qdss_tracedata_a, _, _, _, _),
-+	PINGROUP(40, qup_se4, rx_los2, audio_sec, gcc_plltest_resetn, qdss_tracedata_a, _, _, _, _),
-+	PINGROUP(41, qup_se4, rx_los1, audio_sec, qdss_tracedata_a, _, _, _, _, _),
-+	PINGROUP(42, qup_se4, rx_los0, audio_sec, atest_tic_en, _, _, _, _, _),
-+	PINGROUP(43, qup_se4, audio_sec, _, _, _, _, _, _, _),
-+	PINGROUP(44, resout, _, _, _, _, _, _, _, _),
-+	PINGROUP(45, pon_mux_sel, _, _, _, _, _, _, _, _),
-+	PINGROUP(46, dg_out, atest_char_start, _, _, _, _, _, _, _),
-+	PINGROUP(47, gpn_rx_los, mdc_slv2, qup_se5, _, _, _, _, _, _),
-+	PINGROUP(48, pon_rx, qup_se5, _, _, _, _, _, _, _),
-+	PINGROUP(49, gpn_tx_fault, mdio_slv2, qup_se5, audio_sec_mclk_out2, audio_sec_mclk_in2, _, _, _, _),
-+	PINGROUP(50, gpn_tx_sd, qup_se5, audio_sec_mclk_out3, audio_sec_mclk_in3, _, _, _, _, _),
-+	PINGROUP(51, gpn_tx_burst, qup_se5, _, _, _, _, _, _, _),
-+	PINGROUP(52, qup_se2, qup_se5, qup_se4, qup_se5_l1, _, _, _, _, _),
-+	PINGROUP(53, qup_se2, qup_se4, qup_se5_l1, _, _, _, _, _, _),
++static u32 uart_cfg_val[] = {
++	/* 0 to 18 */
++	0x00000024, 0x00000000, 0x00000024, 0x00000000, 0x00019A00, 0x00400000,
++	0x00E00000, 0x00010020, 0x00000000, 0x00000000, 0x00000300, 0x00000700,
++	0x00000400, 0x00000000, 0x00000000, 0x00C00000, 0x00000000, 0x00C00024,
++	0x00000B00,
++	/* 64 to 113 */
++	0x00020231, 0x0000CE05, 0x000360E7, 0x0941E6A8, 0x00100510, 0x42C01E51,
++	0x00000401, 0x002E8400, 0x1694581A, 0x00000000, 0x00000000, 0x00000000,
++	0x00000000, 0x00000000, 0x00000000, 0x00000001, 0x0000031C, 0x00000000,
++	0x0000000F, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
++	0x00081C06, 0x00004010, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
++	0x00000000, 0x0000000D, 0x00000000, 0x00081C06, 0x00004010, 0x00000000,
++	0x00000000, 0x00000000, 0x00000000, 0x00C02415, 0x0000000E, 0x00000001,
++	0x00000001, 0x00000000, 0x00C00000, 0x00000000, 0x00000000, 0x00000000,
++	0x00000000, 0x00000055,
 +};
 +
-+static const char *ipq5210_get_function_name(struct udevice *dev, uint selector)
-+{
-+	return msm_pinctrl_functions[selector].name;
-+}
++static u32 i2c_cfg_val[] = {
++	/* 0 to 18 */
++	0x00000090, 0x00000000, 0x00000090, 0x00000000, 0x00038028, 0x00084080,
++	0x00000343, 0x00010000, 0x00000000, 0x00001A00, 0x00000100, 0x00000000,
++	0x00000000, 0x00000000, 0x00808008, 0x001C0020, 0x00000000, 0x00020000,
++	0x00000000,
++	/* 64 to 113 */
++	0x00000201, 0x0001FC01, 0x00036222, 0x09C01FFC, 0x00100120, 0x02C00000,
++	0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
++	0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000409, 0x00000003,
++	0x00000002, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
++	0x0007F8FE, 0x000FFEFE, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
++	0x00000000, 0x00000000, 0x00000001, 0x0007F807, 0x000FFEFE, 0x00000000,
++	0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
++	0x00000000, 0x00000000, 0x00C00000, 0x00000000, 0x00000000, 0x00000000,
++	0x00000000, 0x00000055,
++};
 +
-+static const char *ipq5210_get_pin_name(struct udevice *dev, uint selector)
-+{
-+	snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
-+	return pin_name;
-+}
-+
-+static int ipq5210_get_function_mux(unsigned int pin, uint selector)
-+{
-+	unsigned int i;
-+	const msm_pin_function *func = ipq5210_pin_functions + pin;
-+
-+	for (i = 0; i < 10; i++)
-+		if ((*func)[i] == selector)
-+			return i;
-+
-+	pr_err("Can't find requested function for pin %u pin\n", pin);
-+	return -EINVAL;
-+}
-+
-+static const struct msm_pinctrl_data ipq5210_data = {
-+	.pin_data = {
-+		.pin_count = 53,
-+		.special_pins_start = 53, /* There are no special pins */
++static struct qup_mini_core_info qup_mini_cores[] = {
++	{
++		.serial_protocol = GENI_SE_SPI,
++		.fw_version = 0xb02,
++		.cfg_version = 0x9,
++		.cfg_count = ARRAY_SIZE(spi_cfg_val),
++		.cfg_val = spi_cfg_val,
++		.cfg_idx = cfg_reg_idx,
++	}, {
++		.serial_protocol = GENI_SE_UART,
++		.fw_version = 0x405,
++		.cfg_version = 0xa,
++		.cfg_count = ARRAY_SIZE(uart_cfg_val),
++		.cfg_val = uart_cfg_val,
++		.cfg_idx = cfg_reg_idx,
++	}, {
++		.serial_protocol = GENI_SE_I2C,
++		.fw_version = 0x204,
++		.cfg_version = 0x9,
++		.cfg_count = ARRAY_SIZE(i2c_cfg_val),
++		.cfg_val = i2c_cfg_val,
++		.cfg_idx = cfg_reg_idx,
++	}, {
++		.serial_protocol = GENI_SE_INVALID_PROTO,
 +	},
-+	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
-+	.get_function_name = ipq5210_get_function_name,
-+	.get_function_mux = ipq5210_get_function_mux,
-+	.get_pin_name = ipq5210_get_pin_name,
+ };
+ 
+ /**
+@@ -163,16 +259,38 @@ static void geni_config_common_control(struct qup_se_rsc *rsc)
+ 		       COMMON_CSR_SLV_CLK_CGC_ON_BMASK);
+ }
+ 
+-static int load_se_firmware(struct qup_se_rsc *rsc, struct elf_se_hdr *hdr)
++static int load_se_firmware(struct qup_se_rsc *rsc, int elf, void *info)
+ {
++	struct elf_se_hdr *hdr, tmp_hdr;
+ 	const u32 *fw_val_arr, *cfg_val_arr;
+ 	const u8 *cfg_idx_arr;
+ 	u32 i, reg_value, mask, ramn_cnt;
+ 	int ret;
+ 
+-	fw_val_arr = (const u32 *)((u8 *)hdr + hdr->fw_offset);
+-	cfg_idx_arr = (const u8 *)hdr + hdr->cfg_idx_offset;
+-	cfg_val_arr = (const u32 *)((u8 *)hdr + hdr->cfg_val_offset);
++	if (elf) {
++		hdr = info;
++		fw_val_arr = (const u32 *)((u8 *)hdr + hdr->fw_offset);
++		cfg_idx_arr = (const u8 *)hdr + hdr->cfg_idx_offset;
++		cfg_val_arr = (const u32 *)((u8 *)hdr + hdr->cfg_val_offset);
++	} else {
++		struct qup_mini_core_info *qmc = info;
++
++		for (; qmc->serial_protocol != GENI_SE_INVALID_PROTO; qmc++)
++			if (qmc->serial_protocol == rsc->protocol)
++				break;
++
++		tmp_hdr.magic = MAGIC_NUM_SE;
++		tmp_hdr.version = 1;
++		tmp_hdr.serial_protocol = rsc->protocol;
++		tmp_hdr.fw_version = qmc->fw_version;
++		tmp_hdr.cfg_version = qmc->cfg_version;
++		tmp_hdr.fw_size_in_items = qmc->cfg_ram_count;
++		tmp_hdr.cfg_size_in_items = qmc->cfg_count;
++		hdr = &tmp_hdr;
++		fw_val_arr = (const u32 *)qmc->cfg_ram;
++		cfg_idx_arr = (const u8 *)qmc->cfg_idx;
++		cfg_val_arr = (const u32 *)qmc->cfg_val;
++	}
+ 
+ 	geni_config_common_control(rsc);
+ 
+@@ -350,8 +468,8 @@ int qcom_geni_load_firmware(phys_addr_t qup_base,
+ {
+ 	struct qup_se_rsc rsc;
+ 	struct elf_se_hdr *hdr;
+-	int ret;
+-	void *fw;
++	int ret, elf;
++	void *fw, *info;
+ 
+ 	rsc.dev = dev;
+ 	rsc.base = qup_base;
+@@ -377,15 +495,22 @@ int qcom_geni_load_firmware(phys_addr_t qup_base,
+ 	/* The firmware blob is the private data of the GENI wrapper (parent) */
+ 	fw = dev_get_priv(dev->parent);
+ 
+-	ret = read_elf(&rsc, fw, &hdr);
+-	if (ret) {
+-		dev_err(dev, "Failed to read ELF: %d\n", ret);
+-		return ret;
++	if (IS_ELF(*(Elf32_Ehdr *)fw)) {
++		ret = read_elf(&rsc, fw, &hdr);
++		if (ret) {
++			dev_err(dev, "Failed to read ELF: %d\n", ret);
++			return ret;
++		}
++		elf = 1;
++		info = hdr;
++	} else {
++		elf = 0;
++		info = fw;
+ 	}
+ 
+ 	dev_info(dev, "Loading QUP firmware...\n");
+ 
+-	return load_se_firmware(&rsc, hdr);
++	return load_se_firmware(&rsc, elf, info);
+ }
+ 
+ /*
+@@ -414,6 +539,9 @@ static int geni_se_of_to_plat(struct udevice *dev)
+ 
+ 		if (proto == GENI_SE_INVALID_PROTO)
+ 			plat->need_firmware_load = true;
++
++		if (readl(res.start + QUPV3_SE_HW_PARAM_2) & GEN_USE_MINICORES)
++			plat->is_mini_core = true;
+ 	}
+ 
+ 	return 0;
+@@ -473,7 +601,7 @@ static int probe_children_load_firmware(struct udevice *dev)
+ 		ret = 0;
+ 		/* Find the device for this ofnode, or bind it */
+ 		if (device_find_global_by_ofnode(child, &child_dev))
+-			ret = lists_bind_fdt(dev, child, &child_dev, NULL, false);	
++			ret = lists_bind_fdt(dev, child, &child_dev, NULL, false);
+ 		if (ret) {
+ 			/* Skip nodes that don't have drivers */
+ 			debug("Failed to probe child %s: %d\n", ofnode_get_name(child), ret);
+@@ -492,7 +620,11 @@ static int probe_children_load_firmware(struct udevice *dev)
+  * Load firmware for QCOM GENI peripherals from the dedicated partition on storage and bind/probe
+  * all the peripheral devices that need firmware to be loaded.
+  */
+-static int qcom_geni_fw_initialise(void)
++#if CONFIG_XPL_BUILD
++int qcom_geni_fw_initialise(struct udevice *dev)
++#else
++int qcom_geni_fw_initialise(void)
++#endif
+ {
+ 	debug("Loading firmware for QCOM GENI SE\n");
+ 	struct udevice *geni_wrapper, *blk_dev;
+@@ -520,6 +652,10 @@ static int qcom_geni_fw_initialise(void)
+ 
+ 	ret = find_qupfw_part(&blk_dev, &part_info);
+ 	if (ret) {
++		if (plat->is_mini_core) {
++			fw_buf = qup_mini_cores;
++			goto mini_core;
++		}
+ 		pr_err("QUP firmware partition not found\n");
+ 		return 0;
+ 	}
+@@ -544,6 +680,7 @@ static int qcom_geni_fw_initialise(void)
+ 		return 0;
+ 	}
+ 
++mini_core:
+ 	/*
+ 	 * OK! Firmware is loaded, now bind and probe remaining children. They will attempt to load
+ 	 * firmware during probe. Do this for each GENI SE wrapper that needs firmware loading.
+@@ -563,7 +700,9 @@ static int qcom_geni_fw_initialise(void)
+ 	return 0;
+ }
+ 
++#if !CONFIG_XPL_BUILD
+ EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, qcom_geni_fw_initialise);
++#endif
+ 
+ static const struct udevice_id geni_ids[] = {
+ 	{ .compatible = "qcom,geni-se-qup" },
+@@ -577,4 +716,7 @@ U_BOOT_DRIVER(geni_se_qup) = {
+ 	.of_to_plat = geni_se_of_to_plat,
+ 	.plat_auto = sizeof(struct geni_se_plat),
+ 	.flags = DM_FLAG_DEFAULT_PD_CTRL_OFF,
++#if CONFIG_XPL_BUILD
++	.probe = qcom_geni_fw_initialise,
++#endif
+ };
+diff --git a/include/soc/qcom/geni-se.h b/include/soc/qcom/geni-se.h
+index fc9a8e82cd8..e51dd06fa94 100644
+--- a/include/soc/qcom/geni-se.h
++++ b/include/soc/qcom/geni-se.h
+@@ -77,6 +77,7 @@ enum geni_se_protocol_type {
+ #define SE_IRQ_EN			0xe1c
+ #define SE_HW_PARAM_0			0xe24
+ #define SE_HW_PARAM_1			0xe28
++#define SE_HW_PARAM_2			0xe2c
+ #define SE_DMA_GENERAL_CFG		0xe30
+ 
+ /* GENI_DFS_IF_CFG fields */
+@@ -248,6 +249,10 @@ enum geni_se_protocol_type {
+ /* SE_HW_PARAM_0 fields */
+ #define TX_FIFO_WIDTH_MSK		GENMASK(29, 24)
+ #define TX_FIFO_WIDTH_SHFT		24
++
++/* SE_HW_PARAM_2 fields */
++#define GEN_USE_MINICORES		BIT(12)
++
+ /*
+  * For QUP HW Version >= 3.10 Tx fifo depth support is increased
+  * to 256bytes and corresponding bits are 16 to 23
+diff --git a/include/soc/qcom/qup-fw-load.h b/include/soc/qcom/qup-fw-load.h
+index a67a93c72a4..a3ae4122681 100644
+--- a/include/soc/qcom/qup-fw-load.h
++++ b/include/soc/qcom/qup-fw-load.h
+@@ -14,6 +14,7 @@
+ #define GENI_INIT_CFG_REVISION		0x0
+ #define GENI_S_INIT_CFG_REVISION	0x4
+ #define GENI_FORCE_DEFAULT_REG		0x20
++#define GENI_OUTPUT_CTRL		0x24
+ #define GENI_CGC_CTRL			0x28
+ #define GENI_CFG_REG0			0x100
+ 
+@@ -21,6 +22,9 @@
+ #define RX_FIFO_WIDTH_BIT		24
+ #define RX_FIFO_WIDTH_MASK		0x3F
+ 
++#define QUPV3_SE_HW_PARAM_2		0xe2c
++#define GEN_USE_MINICORES		BIT(12)
++
+ /*Same registers as GENI_DMA_MODE_EN*/
+ #define QUPV3_SE_GENI_DMA_MODE_EN	0x258
+ #define GENI_M_IRQ_ENABLE		0x614
+@@ -173,6 +177,17 @@ struct elf_se_hdr {
+ 
+ struct udevice;
+ 
++struct qup_mini_core_info {
++	u16 serial_protocol;
++	u16 fw_version;
++	u16 cfg_version;
++	u16 cfg_count;
++	u32 *cfg_val;
++	u8 *cfg_idx;
++	u32 *cfg_ram;
++	u32 cfg_ram_count;
 +};
 +
-+static const struct udevice_id msm_pinctrl_ids[] = {
-+	{ .compatible = "qcom,ipq5210-tlmm", .data = (ulong)&ipq5210_data },
-+	{ /* Sentinal */ }
-+};
-+
-+U_BOOT_DRIVER(pinctrl_ipq5210) = {
-+	.name		= "pinctrl_ipq5210",
-+	.id		= UCLASS_NOP,
-+	.of_match	= msm_pinctrl_ids,
-+	.ops		= &msm_pinctrl_ops,
-+	.bind		= msm_pinctrl_bind,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
+ int qcom_geni_load_firmware(phys_addr_t qup_base, struct udevice *dev);
+ 
+ #endif /* _LINUX_QCOM_QUP_FW_LOAD */
 -- 
 2.34.1
 
