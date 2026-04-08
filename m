@@ -4,90 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBD20EA3C55
-	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 13:01:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0311EA3C59
+	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 13:01:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4A6D84144;
-	Thu,  9 Apr 2026 15:00:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
+	by phobos.denx.de (Postfix) with ESMTP id B197E84181;
+	Thu,  9 Apr 2026 15:00:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=hpe.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="BXKoev/X";
+	dkim=pass (2048-bit key; unprotected) header.d=hpe.com header.i=@hpe.com header.b="f3iGF0KO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62AD983F98; Wed,  8 Apr 2026 20:17:16 +0200 (CEST)
-Received: from mxd-2-a16.seznam.cz (mxd-2-a16.seznam.cz
- [IPv6:2a02:598:64:8a00::1000:a16])
+ id BD53783936; Wed,  8 Apr 2026 21:25:05 +0200 (CEST)
+Received: from mx0b-002e3701.pphosted.com (mx0b-002e3701.pphosted.com
+ [148.163.143.35])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA6E083693
- for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 20:17:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E480683693
+ for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 21:24:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=seznam.cz
+ dmarc=pass (p=reject dis=none) header.from=hpe.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Michael.Srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-7644845457-sbn6w
- (smtpc-mxd-7644845457-sbn6w [2a02:598:64:8a00::1000:a16])
- id 4a8f14b0118140d94b26d8ee; Wed, 08 Apr 2026 20:16:34 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1775672194; bh=ztXTg8EnX9ygRC2eLsxfMHw6Xvs2t3vmHHvoPpHQ0d0=;
- h=Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
- Content-Language:From:Content-Type:Content-Transfer-Encoding;
- b=BXKoev/XHCsB0IFNAk/BJuz/SroO0VhQZSpYTTyPFck/UzjX+4YleDpOVSRT92nS2
- ZhQPVMzGSbYveJRtCUwWUWbwScBL9I5B2MQ0tBrw3fLYZWpzC+1fgqcU1Ik8BzfxaA
- LI+2Zw5/1ix5+Lvm6WKo7CHRAApJcxq1qDuqlmgPrUbeOhHi/IwhFVk1Izmscin64s
- GbaF9+gybXXZ9y9dd7zXAWQKxWUOF+nuY/onNhp7zlOfgA+vMliXczzjV6KlpswuWM
- wUKaT5irT6gqkckVxrpq7j3YfWQPuB/o/4AwcW52DgWHd6pUgCkjtkyAd9SCa6dpEJ
- v7en1O0ZZCIBw==
-Received: from [192.168.0.240] (ip-111-27.static.ccinternet.cz
- [147.161.27.111])
- by smtpd-relay-789d8dfb5c-h66nf (szn-email-smtpd/2.0.71) with ESMTPA
- id a8af475a-b36c-49d9-a66a-bcdd3adcde0a;
- Wed, 08 Apr 2026 20:16:14 +0200
-Message-ID: <6e0aa4d2-4c65-4e84-8afc-4eae3cead426@seznam.cz>
-Date: Wed, 8 Apr 2026 20:16:12 +0200
+ spf=pass smtp.mailfrom=jorge.cisneros@hpe.com
+Received: from pps.filterd (m0134423.ppops.net [127.0.0.1])
+ by mx0b-002e3701.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 638Dtg0d1224013; Wed, 8 Apr 2026 19:24:34 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hpe.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=pps0720; bh=3k
+ NMA94sDi5z6jvNUhFrIO8I1nP5PWggkV4NmHgz65Q=; b=f3iGF0KOrBOp3ZEJZW
+ O+lGzOeRVDAucvw1i260f0oKJpgvChUydoVMxYd20B/1F5Zwij02MhCc5tHhyOVw
+ VcvysbgDcKk4uUJ7mkLgtPcseQoo/9duC+W1p+gR48QYRnf8miSHaorP0RNP6QcZ
+ Xl+5VDYP00YBDw/olhgZvvbEk3I4X2ApQkPt9Av7lBSmeDSlyHdxk1l+oWl6hcCN
+ TyYN7bWQPHMkOtKPupTb8EXzx5/OzWnyWc0GTNCWpeUhXKTmjEJJmj3AqknT8lol
+ 6H06Q7NzeGWB1yWhKk+IZvf6xcCwqop5h0YFK1IkGn+xX+DiTgOUjZYIaUj6sLVd
+ UbTA==
+Received: from p1lg14879.it.hpe.com (p1lg14879.it.hpe.com [16.230.97.200])
+ by mx0b-002e3701.pphosted.com (PPS) with ESMTPS id 4ddrb6uyyv-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Wed, 08 Apr 2026 19:24:33 +0000 (GMT)
+Received: from p1lg14886.dc01.its.hpecorp.net (unknown [10.119.18.237])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by p1lg14879.it.hpe.com (Postfix) with ESMTPS id 1F84C259;
+ Wed,  8 Apr 2026 19:24:23 +0000 (UTC)
+Received: from [127.0.1.1] (unknown [16.231.227.39])
+ by p1lg14886.dc01.its.hpecorp.net (Postfix) with ESMTP id 020E2806B47;
+ Wed,  8 Apr 2026 19:24:21 +0000 (UTC)
+From: Jorge Cisneros <jorge.cisneros@hpe.com>
+Date: Wed, 08 Apr 2026 19:24:17 +0000
+Subject: [PATCH 5/9] misc: Add HPE GSC memory-mapped EEPROM driver
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/5] Add SPL support for Qualcomm platforms, starting with
- sdm845
-To: Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, Tom Rini
- <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Jerome Forissier <jerome.forissier@arm.com>, Heiko Schocher
- <hs@nabladev.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
- Peter Korsgaard <peter@korsgaard.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Tingting Meng <tingting.meng@altera.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>,
- George Chan <gchan9527@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-References: <20260404-qcom_spl-v1-0-9e6c2ac66587@seznam.cz>
- <adS8d1UulaxycPlU@sumit-xelite>
-Content-Language: en-US
-From: Michael Srba <Michael.Srba@seznam.cz>
-In-Reply-To: <adS8d1UulaxycPlU@sumit-xelite>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20260408-hpe-gsc-upstream-v1-5-2be1fb7cbbfc@hpe.com>
+References: <20260408-hpe-gsc-upstream-v1-0-2be1fb7cbbfc@hpe.com>
+In-Reply-To: <20260408-hpe-gsc-upstream-v1-0-2be1fb7cbbfc@hpe.com>
+To: u-boot@lists.denx.de
+Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tom Rini <trini@konsulko.com>, Jean-Marie Verdun <verdun@hpe.com>,
+ Nick Hawkins <nick.hawkins@hpe.com>,
+ Casey Connolly <casey.connolly@linaro.org>, Anshul Dalal <anshuld@ti.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Peng Fan <peng.fan@nxp.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Tingting Meng <tingting.meng@altera.com>, Alice Guo <alice.guo@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tony Dinh <mibodhi@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Shmuel Leib Melamud <smelamud@redhat.com>,
+ Lukasz Majewski <lukma@nabladev.com>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>,
+ Chen-Yu Tsai <wens@kernel.org>, Justin Klaassen <justin@tidylabs.net>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Simon Glass <sjg@chromium.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Yao Zi <me@ziyao.cc>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Raymond Mao <raymond.mao@riscstar.com>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Jorge Cisneros <jorge.cisneros@hpe.com>
+X-Mailer: b4 0.15.1
+X-Authority-Analysis: v=2.4 cv=UMLt2ify c=1 sm=1 tr=0 ts=69d6ab71 cx=c_pps
+ a=5jkVtQsCUlC8zk5UhkBgHg==:117 a=5jkVtQsCUlC8zk5UhkBgHg==:17
+ a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=gQcMVamqm3wCPoSYhaRC:22 a=g3u0LPWLDYfGfufhFw6-:22 a=MvuuwTCpAAAA:8
+ a=6ZYzDi2jFxUr4rbyXHYA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-GUID: GR4cax_FoF-l1gCO27aDKEPpz9kwGuZW
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA4MDE4MSBTYWx0ZWRfX7o/ddaUbWLdW
+ QYSAOH3xh4RFuLj1NOQPprmU7cxezI/wtNhvzr9wdet/UseGLRTvIhrTuhhJDO8zeUA7tlPjm6S
+ UJ+ntjxINnpOLCRfvN+zJbYdT7sUfS0pn+mI8L++g0/ostHyxn5Aa67YejSRWeW2LJ+kbaRogHC
+ OaVxuiwN/0Oky5h634ranc6/H4VzcG8qiAqS4ZDrKbI4KXPnZtlYPomor9vIBe+e5g4KE2oV0hG
+ qjGngxK7Xo3i3LmFtVzF1GV+M8viUI8Yj7b7itTkxCafiEMy6xi14tYw0jKpN1+oPApa6U0l0+K
+ DvVeoAfG4l1uLHtcCVO5eaeMdz4aeAO0PXbg5sf2alyhgisC94OcES78diHt/FFVG1UyLZ1KERy
+ rtVbObs57xkmoZkEh2fz1nobJIWQllg0sU2h+bK0WTCpzTjA8xTMF4XNTC33qlIUKZMf3W9o09Z
+ FQLctWC8utva5aeZPtA==
+X-Proofpoint-ORIG-GUID: GR4cax_FoF-l1gCO27aDKEPpz9kwGuZW
+X-HPE-SCL: -1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-08_05,2026-04-08_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 spamscore=0 lowpriorityscore=0 adultscore=0 clxscore=1015
+ malwarescore=0 bulkscore=0 priorityscore=1501 suspectscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2604010000 definitions=main-2604080181
 X-Mailman-Approved-At: Thu, 09 Apr 2026 15:00:51 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,171 +134,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Add a driver for the HPE GSC memory-mapped virtual EEPROM. This
+device provides access to system VPD (Vital Product Data) including
+MAC addresses, serial numbers, and part numbers through a simple
+memory-mapped interface.
 
-On 4/7/26 10:12, Sumit Garg wrote:
-> Hi Michael,
->
-> On Sat, Apr 04, 2026 at 01:18:15AM +0200, michael.srba@seznam.cz wrote:
->> [ context ]
->>
->> Different generations of Qualcomm SoCs have differences in the boot
->> process. msm8916 (and similar) are quite straightforward:
->> [EL3]bootrom->sbl1->tz->[EL2]hyp->[EL1]aboot->linux (omitting non-AP
->> cores). msm8998, sdm845, kodiak and simiar are a bit more involved:
->> [EL3]bootrom->xbl_sec->[EL1]xbl_loader->[EL3]tz->[EL2]hyp->[EL1]uefi
->> ->ABL->linux. Newer platforms like hamoa are even more involved.
->>
-> Just as a heads up, we are trying to open up the boot stack/EL3 on
-> Qcom platforms such that a developer/OEM can run OEM only signed TF-A/
-> OP-TEE stack on IoT targets. However, as you can expect it will take
-> time but we already had some success..
->
->> Currently, u-boot proper can run in place of Linux, in place
->> of aboot, or in place of hyp. The option to run in place
->> of Linux is necessary because >99% of OEMs do not consider
->> the sale of a device to an end user a transfer of ownership,
->> that is, they sell the device with a hash of their public key
->> pre-burnt in the fuses.
->>
->> [ end of context ]
->>
->> U-Boot SPL, as it will be built using the defconfig added in this series,
->> replaces xbl_loader. If support for msm8916 or a similar platform
->> is added, it would replace sbl1. This will obviously only work on
->> the <1% of devices whose manufacturers consider the sale a transfer
->> of ownership, and of course most SBCs.
->>
->> Unfortunately, starting with (iirc) msm8998, and getting progressively
->> worse, Qualcomm no longer consider a sale of their SoC a transfer
->> of ownership either. While it's possible to execute your code
->> in EL3 using either jtag or a patched devcfg, the former is impractical
->> while the latter is irrelevant for the purposes of running u-boot SPL
->> since the devcfg is parsed by trustzone. (this of course only applies
->> to the <1% of the devices where the OEM didn't lock the device down
->> prior to sale)
-> Good to see your U-Boot SPL efforts as a replacement of XBL loader.
->
->> Given the above, this series uses an unintended feature in old builds
->> of xbl_sec which allows us to elevate to EL3. We also check if we
->> happen to already be running in EL3, in which case we proceed normally.
->> This can be the case e.g if JTAG was used to jump to u-boot SPL in EL3,
->> which may be the only option on e.g. kodiak. (Running in EL1 is not
->> really viable, because xbl_sec+xbl_loader are effectively sbl1 split
->> in half and replacing only one doesn't make much sense)
-> To begin with Kodiak/RB3Gen2, you can download XBL_SEC image using links
-> from meta-qcom recipe here [1] (firmware v00116.0 onwards) to execute
-> qtestsign'ed code to run at EL3. If you are interested in TF-A/OP-TEE
-> stack then that's available here for Kodiak too [2] [3] although you can
-> execute U-Boot proper in EL3 too.
->
-> [1] https://github.com/qualcomm-linux/meta-qcom/pull/1627
-> [2] https://github.com/qualcomm-linux/trusted-firmware-a
-> [3] https://github.com/qualcomm-linux/optee_os
-I was aware of this effort, however this doesn't seem to be intended
-to jump to sbl1/xbl_loader replacement in EL3, just jump to non-qcom-signed
-trustzone. I didn't explore if it's possible to simply immediately jump
-to EL3 without doing the intended xbl_loader/xbl_sec back and forth
-(which I really see no reason of supporting in u-boot SPL), but I suppose
-if the xbl_sec is willing to immediately jump to whatever the boot0.h
-assembly would tell it is trustzone, but would in fact be the rest
-of u-boot SPL, it would be usable.
+The driver registers as UCLASS_I2C_EEPROM for compatibility with
+the standard EEPROM read/write API and includes checksum validation
+to detect data corruption.
 
- From a cleanliness standpoint it would obviously make more sense to simply
-release the cros variant but without the impossible-to-satisfy fuse check,
-but bloat that never gets executed doesn't bother me as much as bloat which
-does.
+Signed-off-by: Jorge Cisneros <jorge.cisneros@hpe.com>
+---
+ drivers/misc/Kconfig          |   7 +++
+ drivers/misc/Makefile         |   1 +
+ drivers/misc/gsc_mem_eeprom.c | 118 ++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 126 insertions(+)
 
-As for older platforms like sdm845, it would be nice if you could simply
-publicly release whatever the oldest xbl_sec builds in your archive are.
-These are (to my understanding) already available to OEMs, but I doubt
-they're explictly allowed to share them, so you sharing them directly
-would be logistically much more straightforward than any other
-unambiguously legal approach.
->> For now, only usb dfu is supported to load the next stage. Since we
->> don't support ram initialization, the next stage will need to run from
->> SRAM too, which is currently not supported.
-> Sadly DRAM init sequence isn't something that's available as an open
-> source driver but you can expect QcLib blobs for DRAM init in U-Boot SPL
-> just like what's already available with the coreboot project here [4].
->
-> [4] https://github.com/coreboot/qc_blobs/tree/main/sc7280/boot
-The problem with those blobs (well, QcLib specficically) is that it's very
-much not just DRAM init, but an ugly mess of (afaict) whatever Qcom's
-lawyers didn't feel like greenlighting for proper open source integration
-into the upstream project. I also seem to recall statistics of the blob
-being 9:1 in size compared to the entire rest of the coreboot binary,
-which is really hard to swallow.
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index a0aa290480e..5d316b03ec7 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -573,6 +573,13 @@ config SPL_I2C_EEPROM
+ 	  This option is an SPL-variant of the I2C_EEPROM option.
+ 	  See the help of I2C_EEPROM for details.
+ 
++config GSC_MEMEEPROM
++	bool "HPE GSC memory-mapped EEPROM driver"
++	depends on MISC
++	help
++	  Support for HPE GSC memory-mapped EEPROM used for storing
++	  VPD (Vital Product Data) in HPE Gen12 server BMCs.
++
+ config SYS_I2C_EEPROM_ADDR
+ 	hex "Chip address of the EEPROM device"
+ 	depends on ID_EEPROM || I2C_EEPROM || SPL_I2C_EEPROM || CMD_EEPROM || ENV_IS_IN_EEPROM
+diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+index 1d950f7a0ab..e616b9f67d2 100644
+--- a/drivers/misc/Makefile
++++ b/drivers/misc/Makefile
+@@ -44,6 +44,7 @@ obj-$(CONFIG_GDSYS_SOC) += gdsys_soc.o
+ obj-$(CONFIG_IRQ) += irq-uclass.o
+ obj-$(CONFIG_SANDBOX) += irq_sandbox.o irq_sandbox_test.o
+ obj-$(CONFIG_$(PHASE_)I2C_EEPROM) += i2c_eeprom.o
++obj-$(CONFIG_GSC_MEMEEPROM) += gsc_mem_eeprom.o
+ obj-$(CONFIG_IHS_FPGA) += ihs_fpga.o
+ obj-$(CONFIG_IMX8) += imx8/
+ obj-$(CONFIG_IMX_ELE) += imx_ele/
+diff --git a/drivers/misc/gsc_mem_eeprom.c b/drivers/misc/gsc_mem_eeprom.c
+new file mode 100644
+index 00000000000..f67662fe40b
+--- /dev/null
++++ b/drivers/misc/gsc_mem_eeprom.c
+@@ -0,0 +1,118 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * HPE GSC memory-mapped EEPROM driver
++ *
++ * (C) Copyright 2025 Hewlett Packard Enterprise Development LP.
++ */
++
++#include <dm.h>
++#include <dm/device-internal.h>
++#include <i2c_eeprom.h>
++#include <linux/io.h>
++#include <linux/kernel.h>
++
++struct memory_eeprom_priv {
++	u64 mem_offset;
++	int size;
++};
++
++static int validate_checksum(u8 *data)
++{
++	u16 sum = 0;
++	u16 word;
++	u8 rev;
++	int i;
++
++	rev = readb(data);
++	switch (rev) {
++	case 2:
++	case 3:
++		for (i = 0; i < 64; i++) {
++			memcpy(&word, data, sizeof(word));
++			data += sizeof(word);
++			sum += word;
++		}
++		if (sum == 0)
++			return 1;
++		debug("%s - Computed checksum fails 0x%04x\n", __func__, sum);
++		break;
++	default:
++		debug("%s - Version byte 0x%02x unsupported.\n", __func__, rev);
++	}
++	return 0;
++}
++
++static int mem_eeprom_read(struct udevice *dev, int offset, u8 *buf,
++			   int size)
++{
++	struct memory_eeprom_priv *priv = dev_get_priv(dev);
++	u8 *ptr;
++
++	ptr = map_physmem(priv->mem_offset, priv->size, MAP_NOCACHE);
++	if (!ptr) {
++		printf("%s - failed to map physical memory.\n", __func__);
++		return -ENODEV;
++	}
++
++	if (size + offset > priv->size) {
++		unmap_physmem(ptr, MAP_NOCACHE);
++		return -ENOSYS;
++	}
++
++	memcpy(buf, &ptr[offset], size);
++	unmap_physmem(ptr, MAP_NOCACHE);
++
++	return 0;
++}
++
++static const struct i2c_eeprom_ops i2c_mem_eeprom_ops = {
++	.read = mem_eeprom_read,
++};
++
++static const struct udevice_id i2c_mem_eeprom_ids[] = {
++	{ .compatible = "i2c_gsc_mem_eeprom" },
++	{ }
++};
++
++static int i2c_mem_eeprom_probe(struct udevice *dev)
++{
++	struct memory_eeprom_priv *priv = dev_get_priv(dev);
++	u8 *ptr;
++	u8 crc1, crc2;
++	u32 reg[2];
++	int ret;
++
++	ret = dev_read_u32_array(dev, "reg", reg, 2);
++	if (ret) {
++		printf("Error reading reg from DT: %d\n", ret);
++		return ret;
++	}
++	priv->mem_offset = reg[0];
++	priv->size = reg[1];
++
++	ptr = map_physmem(priv->mem_offset, priv->size, MAP_NOCACHE);
++	if (!ptr) {
++		printf("%s failed to map physical memory.\n", __func__);
++		return -ENODEV;
++	}
++
++	crc1 = validate_checksum(ptr);
++	crc2 = validate_checksum(ptr + 128);
++	unmap_physmem(ptr, MAP_NOCACHE);
++
++	if (crc1 != 1 || crc2 != 1) {
++		printf("%s - Warning: Invalid checksum\n", __func__);
++		return -ENODEV;
++	}
++
++	return 0;
++}
++
++U_BOOT_DRIVER(i2c_gsc_memeeprom) = {
++	.name = "gsc_mem_eeprom",
++	.id = UCLASS_I2C_EEPROM,
++	.of_match = i2c_mem_eeprom_ids,
++	.probe = i2c_mem_eeprom_probe,
++	.ops = &i2c_mem_eeprom_ops,
++	.priv_auto = sizeof(struct memory_eeprom_priv),
++};
 
-Would it be possible to have two separate blobs, one with *just* DRAM init
-(and training? though that's hidden well enough in the aux core that it
-would be hard to argue that the AP part can't be open)
-and one with whatever else you don't feel like fighting the lawers over,
-so that the parts that are not literally dram init can be skipped
-(in case of stuff like XPU setup, which is not really *necessary* for
-a working system). I'm not sure if there's parts that can't even
-in principle be skipped, but if there are it would certainly be worthwhile
-trying to convince the lawyers to let *those* be open and properly
-integrated into u-boot, and in any case they would probably be very
-few and reasonably easy for someone to reimplement and make the only
-non-optional blob be the dram init one (as is the case for other platforms,
-e.g Rockchip)
-
-Obviously for the second blob to be optional (or have any hope to become
-optional), it would have to not be a depedency for the DRAM init blob.
-
-Since training is also technically optional, I wonder if a third blob
-for that would make sense, but that's probably not necessary.
-
-Failing all this, an alternative option would be to license the blob
-under something like MIT, so that someone can carve up the binary, remove
-unwanted parts, and share the result, without having to worry about
-legal action.
-> -Sumit
->
->> Additional patches will
->> be needed to make that work, at which point it will be possible
->> to use u-boot as a ufs/emmc programmer with zero proprietary code
->> in the boot chain (sans bootrom and part of xbl_sec, but the latter and
->> technically even the former could be skipped with JTAG)
->>
->> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
->> ---
->> Michael Srba (5):
->>        Makefile: add SPL_REMAKE_ELF_LDSCRIPT feature
->>        of_live: support in SPL
->>        drivers: allow clk_stub and spmi in SPL
->>        mach-snapdragon: support building SPL
->>        dts: add empty .dtsi for shift-axolotl
->>
->>   Makefile                                           |  23 ++++
->>   arch/arm/Kconfig                                   |   6 +-
->>   arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi      |   4 +
->>   arch/arm/dts/sdm845-u-boot.dtsi                    |  16 +++
->>   arch/arm/mach-snapdragon/Kconfig                   |  98 +++++++++++++++-
->>   arch/arm/mach-snapdragon/board.c                   |  26 +++++
->>   arch/arm/mach-snapdragon/include/mach/boot0.h      |  61 ++--------
->>   .../mach-snapdragon/include/mach/msm8916_boot0.h   |  54 +++++++++
->>   .../include/mach/sdm845_spl_boot0.h                | 120 +++++++++++++++++++
->>   arch/arm/mach-snapdragon/u-boot-spl-elf-sdm845.lds |  25 ++++
->>   board/qualcomm/sdm845_spl.env                      |   1 +
->>   common/spl/Kconfig                                 |   6 +
->>   common/spl/spl.c                                   |  10 ++
->>   configs/sdm845_spl_defconfig                       | 130 +++++++++++++++++++++
->>   doc/board/qualcomm/index.rst                       |   1 +
->>   doc/board/qualcomm/spl.rst                         |  70 +++++++++++
->>   drivers/Makefile                                   |   2 +-
->>   drivers/clk/Kconfig                                |   6 +
->>   drivers/spmi/Kconfig                               |   6 +
->>   dts/Kconfig                                        |   5 +
->>   lib/Makefile                                       |   2 +-
->>   21 files changed, 616 insertions(+), 56 deletions(-)
->> ---
->> base-commit: 4dc4080805fac1b1ed7606ce3bc8fb44a6d59d5e
->> change-id: 20260403-qcom_spl-0826843ba41c
->>
->> Best regards,
->> --
->> Michael Srba <Michael.Srba@seznam.cz>
->>
+-- 
+2.43.0
 
