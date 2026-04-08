@@ -4,110 +4,126 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A73E410F994B
-	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 15:02:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 382B910F994B
+	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 15:05:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0839084132;
-	Wed,  8 Apr 2026 17:02:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
+	by phobos.denx.de (Postfix) with ESMTP id B54308404A;
+	Wed,  8 Apr 2026 17:05:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="Ar+AFdWO";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="RfVQ3hIJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB83184105; Wed,  8 Apr 2026 17:02:20 +0200 (CEST)
-Received: from PA5P264CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::])
+ id 1ABFD840AB; Wed,  8 Apr 2026 17:05:40 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E02E3838BB
- for <u-boot+nodisclaimer@lists.denx.de>; Wed,  8 Apr 2026 17:02:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=softathome.com
+ by phobos.denx.de (Postfix) with ESMTPS id DE6C583F98
+ for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 17:05:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.henrys_ext@softathome.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=m+me/9/t3j+NJtkCLACcG8XHwYJxtxFT2EQujOBAMc4LinTx57V8pptNAhnG7j0wUoYA0kIPpvCmHiktU8ox5/paFa4uqSh3XlYHlI9GlNp3j0bFdJBBakVWdvZYQLoXXVV3EtGwJhe3C7mqTHb0Bx0mRaUHBqdW39Rq5a+hj2BOn1DgCLwYlMFc15HMaQFJ3p4K3Bz0jCi52ihdu/e0N8K9fs2yoLUlpVq2k5xL+BwuHW6u4ekaYXAhTqr/hAqSiVr6+ep0odyFeef/5r1xHj15z/SCPN9DFBWYUe+adUi90oHn9RbUDeJKzGbkdbG9PmboVUVOr4RUnjopPXz+vA==
+ b=McZkGRynXxHekPilWl3p/EzO9JyAKL+wPONUiaSEB+03Y1A2mxz1l1ZKn8bXvD3tSf2qFuFmgdr2SW7Iw3OvwKrE5X2b05ym2EiGdtpA0GuwFOHxlOv6Hl/zUmKzln6oncJngtDXc22qH13CYInlB8yW2wiKLJrOND2iHiDn7tI/VeKRFKMKBXiVBv0zhNr2l1+FQi+REWwwpyzSOv1Ua9z50c6hEyw+kijKPT9WzMq3qh3evn8fELQdMskGLTJ++taTLAynLfzkj+SnqPrWw6BEpqsms5tsx2lrwzXwUAEjVFhW7YLr0okaGYqHBItyEnishlzgZIvZ19N7mm95sQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JQ2Vr/KirKE3RyizwcPezfEYEjd4igtwnXkDmcahszA=;
- b=I2tSis1ytuuwNpq64Vz0QbQWd1P0FL47mnlkX8CGS68p0GpjjcvJT37Fsi+0Nq687PKPjkWmBDvuC/awA8KDon+Q4IrFpHN6h4eoVRHzxluWnGrsa3g/Wz1VR5zJZNmFtLlepL6nMe+GI0v9H8TWFeJZ+rtJd7Ugc9hsvhxM9YDqC+jDgc2ZmhBcM6BvyTy044ouQqI7GYjZ0wQWOf0lp1XnKp8iiatf5YyDKvtdnWjKQO/YVj6DoecsbElEac8THURvVUk68aBMnQTkg/jFFBTuKCLlgl5BxGzj8Rvz2oadwDVEKQZPmiBH91ato4ACnynRisu78PzVxdh6luSGuQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 149.6.166.170) smtp.rcpttodomain=chromium.org smtp.mailfrom=softathome.com;
- dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
+ bh=vih5WcZLAo2065+mdgJW/f+md0QqUTEaB4nGMgKcA00=;
+ b=kNajyG/DF/6qpEoV6oM993AsLZqDUyLgp+PaOrmWUKCT3OVuEMweOilctX3EEiXupObl7n6xZvueayS+7EeAgLBxLZfMjI6MdFUAuBoFtBDpb+rYGPJjMDgQsirgNOJqg1eckv5e/UAhVU+kaTNv3kxzgaQu+IbGGjdvN1poBAC5N0exn+UHy8Ya8tOEc/dQwDxTGezV2qR0ORUt4TcdgvG1UOjZnQ4Ddur++sdQ8DsngxMTIEOzX+Ok3hgCYKgEYVtYiZJGM9vCsHA8mIuSVcU1GyhMpTjNbzyw+HXVMy566b6AUvrurQAw4eFUHvyB1JsCXST7F4S9INM308PP/Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JQ2Vr/KirKE3RyizwcPezfEYEjd4igtwnXkDmcahszA=;
- b=Ar+AFdWOzwpktkm4OittznKzEimh4nUAPutXTSFSR7wyP72cDeK2VkHa5TNvhiSAre9hunSxzSXCh+cuxbLxTa5BnxQkEn+i/aguj9hDDgoxFsG28lR4WFoQ+dU0ftggvyIQMnkBkvnAEc1mim6LCdX0NKuizEVU+73Jg4vO6COvT4bNKviqHBjF0ANAEl7YoedcKB33piNrRTDcgLuyvqpOt3NjgAfKENLhSCeAIBiGAAEcswM8n89/tfkRdgfJjsxKotvfmgLEekIjk8rj3QnXWo++B6vnagmwrPdI/mpG+AoAUJvvEISIa/EQC5FdpFlo9lp5wcQ0Y8IlwQcckQ==
-Received: from MR1P264CA0203.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:57::18)
- by MRZP264MB3132.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:31::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.21; Wed, 8 Apr
- 2026 15:02:14 +0000
-Received: from MR1PEPF00000D59.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:501:57:cafe::1c) by MR1P264CA0203.outlook.office365.com
- (2603:10a6:501:57::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.37 via Frontend Transport; Wed,
- 8 Apr 2026 15:02:14 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
- smtp.mailfrom=softathome.com; dkim=none (message not signed)
- header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
-Received-SPF: Pass (protection.outlook.com: domain of softathome.com
- designates 149.6.166.170 as permitted sender)
- receiver=protection.outlook.com; client-ip=149.6.166.170;
- helo=proxy.softathome.com; pr=C
-Received: from proxy.softathome.com (149.6.166.170) by
- MR1PEPF00000D59.mail.protection.outlook.com (10.167.241.6) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.17
- via Frontend Transport; Wed, 8 Apr 2026 15:02:13 +0000
-Received: from sah2lpt245.. (unknown [192.168.72.183])
- by proxy.softathome.com (Postfix) with ESMTPSA id 1A4322018F;
- Wed,  8 Apr 2026 17:02:09 +0200 (CEST)
-From: Paul HENRYS <paul.henrys_ext@softathome.com>
-To: u-boot+nodisclaimer@lists.denx.de
-Cc: sjg+nodisclaimer@chromium.org, trini+nodisclaimer@konsulko.com,
- alpernebiyasak+nodisclaimer@gmail.com,
- philippe.reynes+nodisclaimer@softathome.com,
- Paul HENRYS <paul.henrys_ext@softathome.com>
-Subject: [PATCH v5 1/3] binman: Generate preload header and sign data only once
-Date: Wed,  8 Apr 2026 17:01:59 +0200
-Message-ID: <20260408150201.217942-2-paul.henrys_ext@softathome.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260408150201.217942-1-paul.henrys_ext@softathome.com>
-References: <20260403075528.1150196-3-paul.henrys_ext@softathome.com>
- <20260408150201.217942-1-paul.henrys_ext@softathome.com>
+ bh=vih5WcZLAo2065+mdgJW/f+md0QqUTEaB4nGMgKcA00=;
+ b=RfVQ3hIJgToj4EkGQlt4j6A46qT3k7/zjwBI5cFPQ9JlNEJKw7KUv+JomeN9lYXi30jRIcTl/Q0304sQ8xPAzkRea+Slmkv2AbPAHwBe4MUODUn8QZckBtTCribTqR+LBXXPpjkt+LOi9bJenvPJPK1/XRz3UHct0TCzgru4AFwXfdsHlzfUVOhrOB9WAZVlXn2uX7I1G8aeeB19MEC+14qkhGR8jPopQv8gVoeAmo6uI2Q8PL/OZ6mTeyZjnSK98UfKCfSEMGbAKDoxenFqz3vpAAx2G4N7+CGETWcd298ber8bPstc5cI/8p5xQnVvW+GRDdzzzxqG5RdQYqSEiA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by DU4PR04MB10912.eurprd04.prod.outlook.com (2603:10a6:10:58a::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.17; Wed, 8 Apr
+ 2026 15:05:35 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e%3]) with mapi id 15.20.9723.030; Wed, 8 Apr 2026
+ 15:05:34 +0000
+Date: Thu, 9 Apr 2026 00:21:41 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: "?????? (MW Park)" <mw.park@telechips.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "peng.fan@nxp.com" <peng.fan@nxp.com>,
+ "jh80.chung@samsung.com" <jh80.chung@samsung.com>
+Subject: Re: [PATCH] mmc: allow forward compatibility for EXT_CSD_REV
+Message-ID: <adaAlRvDAKs8mRWB@nxa18884-linux.ap.freescale.net>
+References: <SLXP216MB114822C04834C4F0A78869A6F056A@SLXP216MB1148.KORP216.PROD.OUTLOOK.COM>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <SLXP216MB114822C04834C4F0A78869A6F056A@SLXP216MB1148.KORP216.PROD.OUTLOOK.COM>
+X-ClientProxiedBy: SG2PR04CA0197.apcprd04.prod.outlook.com
+ (2603:1096:4:14::35) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
+X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MR1PEPF00000D59:EE_|MRZP264MB3132:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 8534f785-7ddc-41d9-db16-08de957fd167
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|DU4PR04MB10912:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6f4a6761-fc88-47d1-7a2f-08de958048a6
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700016|376014|82310400026|22082099003|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: eJCfKfRVgvW6ivRGjPO3I+3zKNslDfMAINvZ2+ZscPi6jHMzC50c7l5vrrAb1gKhSdF79kh7AP8etqD2FsEMNNhxA0WilnQYLIUwZyMG4q9I9dcSD1mzAx/jbUMsSp3rXAq6/Tyar1PDCY07Y/ovyIkTEJtMaectjZvPkrrUxepW9+v34erCVJhDO37GJV5YHdADFlT4gmVKUPZW8xQjaH69HZ6w6NEtolh0t2xLiK8zrhJqi9jvvTfKiiYpM/Z/98XdmlyPrJTQ5ze0eNU9cZEVNL+2yHphh2raG/wUEXHRu89nFF3KNLnCKW4nwm+HRLsMA7kTmEGodasLg9QBR/gm326GYDmDf/FoFkn+Dg0OeGLdM1ifxB65pBAxQsOk+NYzSjZYCCNZastIxqQjWr6qhmzpVxIgx0nSvZL7Qb9D+GBIopgWgAlkU9vTH+UP0KEZ8u4ddgrLr9XUJi32CqQRMRxeWwNc0/SwCvuj0AYqWoTN6UPCFblqqyKWOP1rMiy2OzEVlMdbISdW/dTW/l29it3dsH3Ffq+EgSyMGRDQDP+WKvPe1vaZP8VH5E5+u6hCNUdtWQPyLKSmm/lkUc+C6u8J9e3NFVy6tiDunWmA8fzHukrx3Xdg2DOJap+/JDVn+4ar6haxTMdjPQugX4Tpe3ZfEuOqNinTuUXXi440kKZUnXDUfo8wt+4+2gQ1f/PV7mN5GYTF93WCYSc4pA+gFcRKLI1aB7mIQ9uLheF/YSkLa3qEF2Bjv+ihxjkjtejXfBbVaBpgFuLIAgZ+Zw==
-X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700016)(376014)(82310400026)(22082099003)(56012099003)(18002099003);
+ ARA:13230040|366016|376014|52116014|19092799006|1800799024|56012099003|22082099003|18002099003|38350700014;
+X-Microsoft-Antispam-Message-Info: iT6HIPinpdP3XsTJmZEKOdiuQno1u3GhpTZMat45ukwHhmL0imKW8aA8bbHH9WWx2MwRDdLWlM/n3oFfgYsjbBKqfrU5cWTZbQ8vTDoVKhvkW+OHyT4PtUyZwJu35QtpHDEdvRN44Jqu1oxhj1AZ7xpZEIXnJtIc5clihGG1cX+poB1+JBN22sAkxy+pOicbkUZaB9Ja6ZAds/sZlo8FeoO5E6gjJqLCNRNn1I35xcKTbbT14/h+3BNrrIooMZW1q99cVTJzROZgqiClnJ7pcbNkrpEmarv4ScSnuE0tz7k9Ai8je6JNhOf74CQXmTJyITu6MSUp1pfmSViUXdYt0nW4+UATlNDTQBkxuoyaBzWHaPZRVKbY5clRb07QfO6oQIVY2IY5qALKux/ARtuCpeNg4Uuh8/OGKyuT0mreEon2jQkrS5woGzIuN6BUswQzlcRucsTDHmhFZ16vGf20PpZanBjk6Q5BiNNCOOxMd/FTkPUrwZ7BTyRGdH5cq9pY9yEuieTXiWW0RflhRXsXf7ku+mYOCuQFpByy7yBRvSUJHRqwAiZ+/FGfMh/QzljMIQrFZxrI1VoYwZt6N5ZU1ohyuvLqnnO8i+vHd7X/XnGXynP5DA949vq63fSuSW8mHcoHUqDPzEzse9HFoREuC/ix8hBwUUslifrwY3e2KPaCfZxs5vKGCFgl+tVpez9mkgYNFz/DmjFwQc3F7GumDWRSB8c5i6WUd4Mcw4j6pLabcVBVVUYs82mmSy8oV7AXODA0EHvpBCdHhr/Pol0RUi0v2ltwpgZnswFOqv+WEwY=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(52116014)(19092799006)(1800799024)(56012099003)(22082099003)(18002099003)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: VFQ2jJBq8RuZBRY4YS+5kTfe9UjvskH+06wIzzfcx+1QARuEkR+T0akp4zo8vP9L/+h/aCpNXlAt50m1A5qixp2YUGHsLh6byjozDcxg4KhscIv2Vvgionuzdb5SDrSj6BCG/r5tOlaZnzTkm2Ydacc31PgDUzr+UIBrqBW/QPtaI+mYZYA3zTYRrHvLCVp8aI9SAMdAAh0ePpvj67Kfo3QiHlZgwlM8O7soVf5r3wE8i7y15f7NXTIDDc0FHzEMck2Gkz5P/ySfT03fKST85qNFyksYfRAdOcm+pCoOsKQYoaYopFm7TN6Gcz34v/NNApU7Cg+n6utjCIj3ROrefohhonaPRMTsXVcE8Y6hmb/+fe3zteDzYN+9eR56b5tNFA19VcuSYzSlqFVLMPuj7B1FzTUIU3aUgn+s6DuYc49TDJ3KR21Dii+c8uJKw/IQ
-X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Apr 2026 15:02:13.7018 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8534f785-7ddc-41d9-db16-08de957fd167
-X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
- Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: MR1PEPF00000D59.FRAP264.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MRZP264MB3132
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?7kwhyY2FWfJeKPu8yZknvHHTSvbHV1Fp6N4t6PqXAQEwt35bO/Zjpdjx+51B?=
+ =?us-ascii?Q?XJOoMfXjLzsFCC7V3hCRrVyeC3hHQ4DOuR6y2nlZNELWzjN/y0+j805WU4xK?=
+ =?us-ascii?Q?95BzMlUqKj1rnsrpVoKP4vDxdrMvRIx6tU9M7P9sJS/ullx3FaafJ7oL4WKb?=
+ =?us-ascii?Q?rHtJ54jRQfMOkvOB+hzHoYis0cc35WNoatQtggDBBTT7h9ZcsOdGl+cwitts?=
+ =?us-ascii?Q?ClylltOURjR6REE5VoRymYFXh0gojMdu0N8Qi4ebWD1T+976pbwL0D9fYv90?=
+ =?us-ascii?Q?tPQMgub9+qySmuxNlT8BE7evTPHo99/xfcVSiukHRq2g/VmqWOrQua7ZcTvr?=
+ =?us-ascii?Q?3jvEnqKbW26mBSjbTeEuWzmH2hJR9JmrHG9oL+hDTzNB7yefZ8uSzocpfnKa?=
+ =?us-ascii?Q?OLCQ1OFfa9eh/gObBCnal8Cq1A4JShe1ZFR+3be9A9x9zGjtqrSI9i9Ed2fa?=
+ =?us-ascii?Q?c4pxGH8/jXx4BpqGS9CL3p6fNNgV3hG2kw1yKsod1tmv+NIxV2NnoLJmCxDW?=
+ =?us-ascii?Q?JGhP9BEQ8/KcIpwCG6KH6ktwhF8PtNQGzx9E+5yLD7pYRne8GKvhGagT/GfK?=
+ =?us-ascii?Q?SgHwH/E38p9BH7wuX/KDhsnsttGkGLB6L+Mjgzzmh9Rswj8UpoYvSxEav2bL?=
+ =?us-ascii?Q?InNvf5fdcTbaPO7hl5r1+YWggVApKF0BCDeFKJnG1378HNSRz3XeeW29Zq7d?=
+ =?us-ascii?Q?z038e6VqXdvUFNXpgyvz4SU6I8ygMwfsc+F4k+/y+CIAeV91J2DYurM6Gpg6?=
+ =?us-ascii?Q?gsdd3/k8oziioC6aXtMLciSqsbaqeAnfyl87Y33NOQXSa0ZIkc9vUioaNq1/?=
+ =?us-ascii?Q?GSAJ+0x7cZ17D4HUJjKmQy3e/7nUFOcDnhmOWXR4D/dQb4qI+bKDyEaKCkNf?=
+ =?us-ascii?Q?OAe3FblmLMHVY+hELdlFtAu0kZwSbzmga95LVW8xTJ70MthMraOyMsH7gf7N?=
+ =?us-ascii?Q?OcoYU0nRB4D1J7I66tw5VZednfnvsyIHqoTGK4AuvzUXooKLQpU884MLhdoo?=
+ =?us-ascii?Q?sqYEs8Pj5NjK1s67cpkPbaVzxkHaRFWRPbzL3DPl2RrnfspKVdw7pT8bxXeG?=
+ =?us-ascii?Q?Kc+54JZybdQOftxu4MOwt8LKAyzajVnP+xrrs6WlWe85ejBlxae/+e7EeSGQ?=
+ =?us-ascii?Q?G682Qb1mhiyLYL0/i8W/U8higM0101bl6JOwtiWl2pTXo2mqHYekHlIIL6wq?=
+ =?us-ascii?Q?te5krFHfwWync+onTyUuVzvITdTNVbhtY/8d1Gmmlc7rh3m3L1p1H9ciepOO?=
+ =?us-ascii?Q?4W9dn+HNxSxSuQ/9a0GrapgFs9LDr9XGHTIrYBIdYHhMqIwrxN2OAikmswvU?=
+ =?us-ascii?Q?3eZua2RJ8/FrO9Mp/r+H0MIT21XrYEWxsYYBC86w1dvLeX6/vd5kK4su0VQ+?=
+ =?us-ascii?Q?c1eeXPPpf6HU+3ng6YTlMEMp+dqhWDMbs3Sn3ZWGbwmycLdzXSTLM6ipfOMi?=
+ =?us-ascii?Q?3lbz6Aue9RcMnELvyjx0lMxhNbP8BO2GTWiyK3uVvsHvFVS9+rBIGUOczi6v?=
+ =?us-ascii?Q?Y6TcFF4y6XA9SeGLh6neshd4noDJIzox2GdkuZvOEBCdKMS1n5/+eYZschum?=
+ =?us-ascii?Q?NixOfsxq8NHZhNQcYghi4r1gabjHDaPtkfHv9w86hnA5qicA1MDjzstCRhPD?=
+ =?us-ascii?Q?TUp1PYhrcLF2Jv0GVsgesoXpdVC7fpKx63GM6BOx44NX+3FeOTD+oR49MNui?=
+ =?us-ascii?Q?XAgTncBBo3PZY1sMQ6zA8Og/hJzW4b1v/U6FigjUmjjowOCcosWJFQPGot2i?=
+ =?us-ascii?Q?qH+PR5oO5Q=3D=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6f4a6761-fc88-47d1-7a2f-08de958048a6
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Apr 2026 15:05:34.2516 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: u5Mpd4hXu2FPhqrohjZeL1jq+sf3b5tDiLzzYtSdeDpj0qIe8ozBRoyXvyHJQxDZi037a1H9Gi4psW6Pccc8fQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB10912
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,47 +140,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To optimize preload generation, generate the header and signatures only
-after all data has been collected in ProcessContentsUpdate(). This
-avoids signing the data multiple times.
+On Thu, Mar 26, 2026 at 05:55:32AM +0000, ?????? (MW Park) wrote:
+>According to the JEDEC Standard, the EXT_CSD format is meant to be
+>forward compatible. As long as CSD_STRUCTURE does not change, all
+>values for EXT_CSD_REV are authorized.
+>
+>Currently, if an eMMC device with a newer EXT_CSD_REV (e.g., eMMC 5.1B
+>with EXT_CSD_REV=9) is used, U-Boot fails to initialize it and returns
+>-EINVAL because the revision is larger than the mmc_versions array size.
+>
+>Fix this by falling back to the latest supported version if the
+>EXT_CSD_REV exceeds the known versions. This ensures forward
+>compatibility with future eMMC specifications.
+>
+>Signed-off-by: MW Park <mw.park@telechips.com>
 
-Since header_size is known upfront (from __init__), create a placeholder
-in `ObtainContents()` to avoid an extra packing pass when
-ProcessContentsUpdate() detects a size change.
+Would this patch works for you?
+https://lore.kernel.org/u-boot/20260225211332.1896252-1-han.xu@nxp.com/
 
-This reduces unnecessary repacking and signing operations.
-
-Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
----
-
-Changes in v5:
-- Generate a placeholder in ObtainContents() to avoid unnecessary repack
-
- tools/binman/etype/pre_load.py | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
-
-diff --git a/tools/binman/etype/pre_load.py b/tools/binman/etype/pre_load.py
-index 00f1a896767..0d953cb258e 100644
---- a/tools/binman/etype/pre_load.py
-+++ b/tools/binman/etype/pre_load.py
-@@ -152,14 +152,11 @@ class Entry_pre_load(Entry_collection):
-         return data + pad
- 
-     def ObtainContents(self):
--        """Obtain a placeholder for the header contents"""
--        # wait that the image is available
--        self.image = self.GetContents(False)
--        if self.image is None:
--            return False
--        self.SetContents(self._CreateHeader())
-+        """Create a placeholder for the header"""
-+        self.SetContents(tools.get_bytes(0, self.header_size))
-         return True
- 
-     def ProcessContents(self):
-+        self.image = self.GetContents(True)
-         data = self._CreateHeader()
-         return self.ProcessContentsUpdate(data)
--- 
-2.43.0
-
+Regards,
+Peng
