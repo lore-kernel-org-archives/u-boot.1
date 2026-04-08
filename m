@@ -4,59 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BC3C1073C9E
-	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 11:35:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDE0E1073CA4
+	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 12:12:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4137F83D8A;
-	Wed,  8 Apr 2026 13:35:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 3161383D8A;
+	Wed,  8 Apr 2026 14:12:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="hbeKueZV";
+	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="AVFMCJ6U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A94083F98; Wed,  8 Apr 2026 13:35:50 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 8A8FD83F98; Wed,  8 Apr 2026 14:12:16 +0200 (CEST)
+Received: from mail.kernel-space.org (unknown
+ [IPv6:2a03:4000:b:d08:14a9:1bff:fedc:75ad])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 635FF838BB
- for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 13:35:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 36A9E838BB
+ for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 14:12:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=kernel-space.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 4563B60121;
- Wed,  8 Apr 2026 11:35:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6F279C19424;
- Wed,  8 Apr 2026 11:35:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1775648147;
- bh=fIgw+6URITORFbPZRqhI5w53nQAwyC7VJb6+hXsQjFQ=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=hbeKueZVB6DXZn3yQUbZF8CwdTsHhhKWQxipf6St0bgG0zvTgrAhUtOVRT1wIJzf/
- 9GcQTaWtyNj6F7K7+fa2mBi8/yr4wom1yGp+dC6n2VmIGmyyBxnS5UxRnUu2zXXkqh
- VlGrM7gDWpGk7nETeiv3fG2DcGa3R5UMAODEZ3Gj1x8Z7CYa6tIo9iCfNELDoS+k8Y
- 2dpVjOJfu8xhmExH80M34X0aAta8OA34JONCgTBhEvuo+q5jCG3hhWtt1e3f4weNBi
- 05AKKxo9I044zinyD4raNg5JfH/7pxYG2k/bne81Lrq0sGMFNrhR0wy1BLsTIjXNsg
- kCfLo1S6o5jzQ==
-Date: Wed, 8 Apr 2026 17:05:41 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Stephen Boyd <swboyd@chromium.org>
-Subject: Re: [PATCH 1/2] serial: msm-geni: allow invalid clock
-Message-ID: <adY9jXd1gYJrKsMk@sumit-xelite>
-References: <20260320-casey-qcom-rpmh-serial-fixes-v1-0-b81d05832eec@linaro.org>
- <20260320-casey-qcom-rpmh-serial-fixes-v1-1-b81d05832eec@linaro.org>
- <adTs0aMJmGrIPKeR@sumit-xelite>
- <ac78f01b-7aee-4658-b682-67d4f53cd40f@linaro.org>
+ spf=pass smtp.mailfrom=angelo@kernel-space.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
+ s=s1; t=1775650332;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=tVSV+vjGM/GHD8oQNcxP56eSSbAB/xl6Pl3jvtUaMIA=;
+ b=AVFMCJ6UITFwn08LCWoQzHKGrQvDbtEM3hvP9qIoSWXLxYi7a9tKLn31PEub3t7rrGN/CY
+ sY8p3HDAgbsN88TUlWwbgFwybU/ouL20/VIblT9G64wF4oqSZuWZqj2yDNJz47DVEm9hlI
+ Y7nzXiK9nrpsrHcd2bU/NYx6JSiXdUQ=
+Received: from [IPV6:2a07:7e81:7daa:0:62cf:84ff:feee:627] (<unknown>
+ [2a07:7e81:7daa:0:62cf:84ff:feee:627])
+ by oreshnik (OpenSMTPD) with ESMTPSA id c851d75e
+ (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
+ Wed, 8 Apr 2026 12:12:12 +0000 (UTC)
+Message-ID: <c300ac4f-f38a-4a0d-bed9-65588b3308d8@kernel-space.org>
+Date: Wed, 8 Apr 2026 14:12:11 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ac78f01b-7aee-4658-b682-67d4f53cd40f@linaro.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/5] m68k: Fix writew(), writel(), readw(), readl()
+ endianness
+To: Daniel Palmer <daniel@thingy.jp>, visitorckw@gmail.com, bmeng.cn@gmail.com
+Cc: u-boot@lists.denx.de
+References: <20260406142411.2992618-1-daniel@thingy.jp>
+ <20260406142411.2992618-3-daniel@thingy.jp>
+Content-Language: en-US, it
+From: Angelo Dureghello <angelo@kernel-space.org>
+In-Reply-To: <20260406142411.2992618-3-daniel@thingy.jp>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,41 +72,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Apr 08, 2026 at 11:16:24AM +0200, Casey Connolly wrote:
-> Hi Sumit,
-> 
-> On 07/04/2026 13:38, Sumit Garg wrote:
-> > On Fri, Mar 20, 2026 at 04:45:40PM +0100, Casey Connolly via B4 Relay wrote:
-> >> From: Casey Connolly <casey.connolly@linaro.org>
-> >>
-> >> Pre-relocation we probably won't have a clock but it's usually
-> >> been enabled for us already, or worst case we will enable it after
-> >> relocation.
-> >>
-> > 
-> > Not sure if this is the right approach, since the UART driver might just
-> > hang without clock being enabled. What's the motivation for this change?
-> 
-> Hmm, I didn't consider that. The motivation here is to handle CCF, since
-> we don't want to support clock pre-relocation. In pretty much all cases
-> today the serial clocks are already configured but you're right that we
-> ought not to depend on that.
+Hi Daniel,
 
-I think this again comes down to that how CCF framework can enable
-U-Boot SPL use-cases or where in U-Boot proper you get to work with an
-uninitialized UART port for an OEM board variant.
 
+On 4/6/26 16:24, Daniel Palmer wrote:
+> In Linux these are meant to read a little-endian value and swap
+> to the CPU endian.
 > 
-> I can't really think of another good solution than hardcoding this clock
-> configuration somewhere :/
+> In u-boot for m68k this is currently borken and prevents
+> virtio-mmio from functioning.
 > 
 
-That's true since we rely totally on DT based driver probing in U-Boot.
+mmm, "currently broken" ?
 
-> Any ideas?
+If you remove bigendian read/write the driver framework will fail
+to work with coldfire/m68k stuff.
+
+I tested the patchset over master in stmark2 board, seems this patch is
+breaking dspi cs init:
+
+stmark2 $ saveenv
+Saving Environment to SPIFlash... *** Warning - spi_flash_probe_bus_cs() failed, using default environment
+
+Failed (-1)
+stmark2 $ sf probe
+spi_coldfire dspi@fc05c000: Invalid chip select 0:0 (err=-19)
+Failed to initialize SPI flash at 0:0 (error -19)
+stmark2 $ 
+
+Please find a different solution, that may be using "xxx_le" stuff directly
+from your code.
+
+> Signed-off-by: Daniel Palmer <daniel@thingy.jp>
+> ---
+>  arch/m68k/include/asm/io.h | 17 +++++------------
+>  1 file changed, 5 insertions(+), 12 deletions(-)
 > 
+> diff --git a/arch/m68k/include/asm/io.h b/arch/m68k/include/asm/io.h
+> index 35ad4a1c0444..f4877b0446cf 100644
+> --- a/arch/m68k/include/asm/io.h
+> +++ b/arch/m68k/include/asm/io.h
+> @@ -24,18 +24,11 @@
+>  #define __raw_writel(l,addr) ((*(volatile u32 *) (addr)) = (l))
+>  
+>  #define readb(addr)		in_8((volatile u8 *)(addr))
+> -#define writeb(b,addr)		out_8((volatile u8 *)(addr), (b))
+> -#if !defined(__BIG_ENDIAN)
+> -#define readw(addr)		(*(volatile u16 *) (addr))
+> -#define readl(addr)		(*(volatile u32 *) (addr))
+> -#define writew(b,addr)		((*(volatile u16 *) (addr)) = (b))
+> -#define writel(b,addr)		((*(volatile u32 *) (addr)) = (b))
+> -#else
+> -#define readw(addr)		in_be16((volatile u16 *)(addr))
+> -#define readl(addr)		in_be32((volatile u32 *)(addr))
+> -#define writew(b,addr)		out_be16((volatile u16 *)(addr),(b))
+> -#define writel(b,addr)		out_be32((volatile u32 *)(addr),(b))
+> -#endif
+> +#define writeb(b, addr)		out_8((volatile u8 *)(addr), (b))
+> +#define readw(addr)		in_le16((volatile u16 *)(addr))
+> +#define readl(addr)		in_le32((volatile u32 *)(addr))
+> +#define writew(b, addr)		out_le16((volatile u16 *)(addr), (b))
+> +#define writel(b, addr)		out_le32((volatile u32 *)(addr), (b))
+>  
+>  /*
+>   * The insw/outsw/insl/outsl macros don't do byte-swapping.
 
-Have you tried working with DT properties like bootph-pre-ram etc. that
-allows only say UART driver to probe before relocation with CCF?
+Regards,
 
--Sumit
+-- Angelo
+
