@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2D2010F997D
-	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 20:31:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7FF410FC454
+	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 22:09:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1236484144;
-	Wed,  8 Apr 2026 22:30:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
+	by phobos.denx.de (Postfix) with ESMTP id EBFD3840AB;
+	Thu,  9 Apr 2026 00:09:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="X+sW+MkX";
+	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="S12JMdhu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EAD483936; Wed,  8 Apr 2026 22:30:30 +0200 (CEST)
-Received: from out-188.mta0.migadu.com (out-188.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::bc])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A4D4783DC9; Thu,  9 Apr 2026 00:09:52 +0200 (CEST)
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
+ [IPv6:2607:f8b0:4864:20::433])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1ABDA8407E
- for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 22:30:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=postmarketos.org
+ by phobos.denx.de (Postfix) with ESMTPS id 32DB883DC9
+ for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 00:09:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=funderscore@postmarketos.org
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1775680225;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=lOuZz7lvQndsIyML4zQVJ7hX8vwExcnhjD2pWkXMGLI=;
- b=X+sW+MkX1/nTFI9ea57Ua4MNzQr+0Br7azfy1LbRBvZlxrusZ4oZU2mhl+vgaoBDRQgXX3
- P6zL2jCg6pKwavx8EDKOZBjfR06+NNiIr8e58hXwOB/1HqEYQNa9PGWCn72EWOmpJKjY+y
- Fv8HJkz40ZDWj+v0u0Mz0JSFsDfEOmscn/tGlzve1AaFuc0vuO7dnv5Xcd0/4uhEqIFXLa
- MQQO8KKN8N8yaKhALYINZ6wGLQJ/omIO2xgDY2F/LJNmTj/4ZRJYVk6MuCg7Es3+I8SwEc
- ZhPe0RQi4ZV3aaRIx3dovdOZdGOExcCzelQkvpfJIISpJvLj/k2YreKxBcZ4fg==
-From: Ferass El Hafidi <funderscore@postmarketos.org>
-Date: Wed, 08 Apr 2026 20:30:14 +0000
-Subject: [PATCH 3/4] configs: libretech-ac_defconfig: enable EFI Capsule on
- Disk
+ dmarc=none (p=none dis=none) header.from=thingy.jp
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-82d03827316so128682b3a.0
+ for <u-boot@lists.denx.de>; Wed, 08 Apr 2026 15:09:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=thingy.jp; s=google; t=1775686187; x=1776290987; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=iu1IV7fN6Di9cLbZ9FsckTwcGiY3VXXFK3bXNqkZ4Cs=;
+ b=S12JMdhu7LRm2dzuWsLWtgzy0iEnJGfyjkhDkFFWm1vyBD4xpTv5qMEyfw6BW7oPiy
+ 4gSEGXRY6u6+lDTQhYpAu6bMh+3LeFEr2ext9Nt8QzIZ+F60GJOODHOevb6iaMur/YAx
+ jhWU2j6aM0mpUgy/K26CmqE4ZgW3cWpDbwrhY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775686187; x=1776290987;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=iu1IV7fN6Di9cLbZ9FsckTwcGiY3VXXFK3bXNqkZ4Cs=;
+ b=PDtFtfEWZ7enm6bSX+u5cGh5giUVtsw3m//xkOW5BDDnt+ZRlLz6oWDqQk/tB+6YRq
+ wbwsz5J6KnRDzAsWqGZixqyjABE9aXQrEt6+z7gbA5C6LMhrrnLYqTEIyaoFLi4RbcfE
+ owOu9yv/9xEfBf115KRzL3RiYdpxWkY1y6a++Jzuq1NQHqsP/XGh+tLrCBfCu548Cztp
+ YgGBKo40uO1I4OepHoV2UJ8w56jgsHe2xzWte74kSoF2BGCYxkFs5j0q6WEjNr+u063B
+ eb5KjfvAvsAd23twLbysN2iLEADCwAWAnP5gxUfPlbHo5M8t6008PWZi5gO8CrviMYZT
+ P0Mg==
+X-Gm-Message-State: AOJu0YzZeovNRS/9HE/rupmajk6JppB86LTchWNMAjNR4hF+jmGfK4Gs
+ TeUa62e2fjf7nn9Bs0HZ9dOerbERb2ybvVxfSKWHR4ip2+5ayf1G7gIfTrUK8jhdf9w=
+X-Gm-Gg: AeBDievwwNcv+JxzD8r/1Xb/hxI5llitO0iKF3t+XxCS//6jwaDx6rbakUIahj7j9Ja
+ y/uDE4SMNaACrPU96KP1eNSN7Tw9MTRHWkwyCZS577hNcbzwGjYS0nUs/3L80yprHPOq9TuTO1/
+ tZPphcA41+boVY19A8r6zNPM0zjoExUhUmoRljfKqtmTztg/6ATOXVckaYo8n2nSq3s+LAnuQr9
+ VBpTdA+Kk6v0nilWrJWS/3xkSozDBfK6bJutzlwhy6vN4oDa75jS++rZ6ahl+EE0VLFVO57L1JV
+ 9f9oRiUV0/BJi3afMeybDsN6nqtmhzmiaIChxQJ+K8sswEF+o6k9EXET3Rw5IIIurD11HyxpSAn
+ IEBoanUkIUuAkREvZM0spdYt5VbpisKy6wSwoFUNiqQ4zax5MRlKXAqqyLLsOgnmFMCSKRngV+0
+ BnJ+u99czkH03P
+X-Received: by 2002:a05:6a00:180a:b0:81f:c6d1:5608 with SMTP id
+ d2e1a72fcca58-82dd8a5bf0amr966134b3a.1.1775686187239; 
+ Wed, 08 Apr 2026 15:09:47 -0700 (PDT)
+Received: from kinako ([2400:2200:7f0:5ee8:dac6:2cde:760c:93f])
+ by smtp.googlemail.com with ESMTPSA id
+ d2e1a72fcca58-82cf9b60199sm19877723b3a.25.2026.04.08.15.09.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Apr 2026 15:09:46 -0700 (PDT)
+From: Daniel Palmer <daniel@thingy.jp>
+To: visitorckw@gmail.com,
+	angelo@kernel-space.org,
+	bmeng.cn@gmail.com
+Cc: u-boot@lists.denx.de,
+	Daniel Palmer <daniel@thingy.jp>
+Subject: [PATCH v3 0/5] Add virtio-mmio support to m68k virt machine
+Date: Thu,  9 Apr 2026 07:09:23 +0900
+Message-ID: <20260408220928.3328551-1-daniel@thingy.jp>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260408-b4-amlogic-sysreset-capsules-v1-3-6f3386eb5124@postmarketos.org>
-References: <20260408-b4-amlogic-sysreset-capsules-v1-0-6f3386eb5124@postmarketos.org>
-In-Reply-To: <20260408-b4-amlogic-sysreset-capsules-v1-0-6f3386eb5124@postmarketos.org>
-To: u-boot-amlogic@groups.io, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Ferass El Hafidi <funderscore@postmarketos.org>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=771;
- i=funderscore@postmarketos.org; h=from:subject:message-id;
- bh=lsFAb6WIU7UkZswT3Jl47z04z/J3OIDZgcTSN4HJH+0=;
- b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBp1rrbSrCcFAV0YaVQlBgRtE6P0w3VtTtd3YJVH
- nMKV/J9leeJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCada62wAKCRCEr8vQ14ma
- AyrYEACEGSjRzeSVas4JjmoTsEe0KV6w6Ln1yiAsxmKFzrT7noVxs0sr8sbJB0kfOZMkZ2eVtwY
- cuzGlNkj5yDpO6ytNS2Q0SkPUKfo9Y5fC7SUm0LUYNfVQ/mB1or4bGQtxbuqrnR0C//MeCNxVGE
- DJUJAEJ0Jctd1FQnxdaXHfojvQ2xB2vQwbqKvL7/svTwVr9typRuY8pCpGxIm/Xqs9xsCqW6Dhf
- oYnEp2PVnZPOY8YYyxsTu7BkWA4y8UbFXDK2EM1TDFxXqq5ztY2m7mhHLygyVBliSZnMwouZTuk
- WhOkQ2Od6R0/wEyzTKRA242R95tClhNNwA+qOM0Q6BWKvm3Ed9ieOn46u19L+7nnuoInqO7d/NQ
- l7gQk6lWd5xECEjJ/sjXy+VGw5lkvtC+TSo1MuQKk2aEJ/6ON+boQ5JWb5qG2wa/RrDoAIHv8ZM
- oy+OJIRjC6e8g8/STntuh93pt4IDgJfx3SExiXawkFDM7ebYk8vx0kh4XuqupXyO9vBDJriQb5F
- suUy/3efYcBhEOmDo+2uVAb6itK9bRcuiJvUTIeOyqSkLw6Sp3T0YApiDqUWDO4BjnO7LNEUDk7
- jPsgUVEAr5w3bZL0cXJePKWYlNQNJZbu6s28z/zHcLU8OwO+M77e8N1daF4TtOEP/++N0j92nN0
- ARiJnFYrnMMb1lA==
-X-Developer-Key: i=funderscore@postmarketos.org; a=openpgp;
- fpr=0301BC37FB555CACFD798BEE84AFCBD0D7899A03
-X-Migadu-Flow: FLOW_OUT
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,28 +93,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Everything is already in place for EFI capsule updates, so enabling
-Capsule on Disk is fairly trivial. This allows updating U-Boot on SPI
-flash from Linux using fwupd's Capsule support.
+Lets start making the m68k virt machine support useful.
 
-Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
----
- configs/libretech-ac_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+First we need to fix some m68k endian issues.
 
-diff --git a/configs/libretech-ac_defconfig b/configs/libretech-ac_defconfig
-index 1a67ca734b8..17d54655017 100644
---- a/configs/libretech-ac_defconfig
-+++ b/configs/libretech-ac_defconfig
-@@ -23,6 +23,7 @@ CONFIG_DEBUG_UART=y
- CONFIG_REMAKE_ELF=y
- CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
- CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-+CONFIG_EFI_CAPSULE_ON_DISK=y
- CONFIG_FIT=y
- CONFIG_FIT_SIGNATURE=y
- CONFIG_FIT_VERBOSE=y
+Then allow virtio mmio driver instances to be created with
+platform data and fix a minor endian issue.
+
+Finally, add the code for the board to create the instances.
+
+v3:
+  - Fix the bug with the vendor string in virtio-blk properly,
+    this removes the last endian hack in virtio-mmio
+  - Leave the current behaviour for readl() for coldfire as it
+    breaks thing.
+
+v2:
+  - Added patch to fix readl() etc on m68k, hopefully this
+    doesn't break everything. This should match Linux now.
+  - Added patch to fix sys reset which is broken by the above
+  - Hacks to virtio-mmio are gone because they aren't needed
+    anymore, just one minor endian fix now.
+  - Removed RFC because it looks good to me*.
+
+
+* I wouldn't trust me. :)
+
+Daniel Palmer (5):
+  sysreset: qemu virt: Use __raw_writel()
+  m68k: Fix writew(), writel(), readw(), readl() endianness for classic
+    m68k
+  virtio: mmio: Allow instantiation via platform data
+  virtio: blk: Fix converting the vendor id to a string
+  board: qemu: m68k: Create virtio mmio instances
+
+ arch/m68k/Kconfig                          | 14 ++++---
+ arch/m68k/include/asm/io.h                 | 31 +++++++++-----
+ board/emulation/qemu-m68k/qemu-m68k.c      | 47 ++++++++++++++++++++++
+ drivers/sysreset/sysreset_qemu_virt_ctrl.c |  2 +-
+ drivers/virtio/virtio_blk.c                | 12 +++---
+ drivers/virtio/virtio_mmio.c               | 27 ++++++++-----
+ include/virtio_mmio.h                      | 14 +++++++
+ 7 files changed, 113 insertions(+), 34 deletions(-)
+ create mode 100644 include/virtio_mmio.h
 
 -- 
-2.53.0
+2.51.0
 
