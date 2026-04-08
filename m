@@ -4,126 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 382B910F994B
-	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 15:05:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCE9010F995A
+	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 16:14:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B54308404A;
-	Wed,  8 Apr 2026 17:05:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 1C5F783F98;
+	Wed,  8 Apr 2026 18:14:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="RfVQ3hIJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L/R+2e55";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1ABFD840AB; Wed,  8 Apr 2026 17:05:40 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9CFA48404A; Wed,  8 Apr 2026 18:14:31 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE6C583F98
- for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 17:05:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7526B83D8A
+ for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 18:14:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=McZkGRynXxHekPilWl3p/EzO9JyAKL+wPONUiaSEB+03Y1A2mxz1l1ZKn8bXvD3tSf2qFuFmgdr2SW7Iw3OvwKrE5X2b05ym2EiGdtpA0GuwFOHxlOv6Hl/zUmKzln6oncJngtDXc22qH13CYInlB8yW2wiKLJrOND2iHiDn7tI/VeKRFKMKBXiVBv0zhNr2l1+FQi+REWwwpyzSOv1Ua9z50c6hEyw+kijKPT9WzMq3qh3evn8fELQdMskGLTJ++taTLAynLfzkj+SnqPrWw6BEpqsms5tsx2lrwzXwUAEjVFhW7YLr0okaGYqHBItyEnishlzgZIvZ19N7mm95sQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vih5WcZLAo2065+mdgJW/f+md0QqUTEaB4nGMgKcA00=;
- b=kNajyG/DF/6qpEoV6oM993AsLZqDUyLgp+PaOrmWUKCT3OVuEMweOilctX3EEiXupObl7n6xZvueayS+7EeAgLBxLZfMjI6MdFUAuBoFtBDpb+rYGPJjMDgQsirgNOJqg1eckv5e/UAhVU+kaTNv3kxzgaQu+IbGGjdvN1poBAC5N0exn+UHy8Ya8tOEc/dQwDxTGezV2qR0ORUt4TcdgvG1UOjZnQ4Ddur++sdQ8DsngxMTIEOzX+Ok3hgCYKgEYVtYiZJGM9vCsHA8mIuSVcU1GyhMpTjNbzyw+HXVMy566b6AUvrurQAw4eFUHvyB1JsCXST7F4S9INM308PP/Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vih5WcZLAo2065+mdgJW/f+md0QqUTEaB4nGMgKcA00=;
- b=RfVQ3hIJgToj4EkGQlt4j6A46qT3k7/zjwBI5cFPQ9JlNEJKw7KUv+JomeN9lYXi30jRIcTl/Q0304sQ8xPAzkRea+Slmkv2AbPAHwBe4MUODUn8QZckBtTCribTqR+LBXXPpjkt+LOi9bJenvPJPK1/XRz3UHct0TCzgru4AFwXfdsHlzfUVOhrOB9WAZVlXn2uX7I1G8aeeB19MEC+14qkhGR8jPopQv8gVoeAmo6uI2Q8PL/OZ6mTeyZjnSK98UfKCfSEMGbAKDoxenFqz3vpAAx2G4N7+CGETWcd298ber8bPstc5cI/8p5xQnVvW+GRDdzzzxqG5RdQYqSEiA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by DU4PR04MB10912.eurprd04.prod.outlook.com (2603:10a6:10:58a::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.17; Wed, 8 Apr
- 2026 15:05:35 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::4972:7eaa:b9f6:7b5e%3]) with mapi id 15.20.9723.030; Wed, 8 Apr 2026
- 15:05:34 +0000
-Date: Thu, 9 Apr 2026 00:21:41 +0800
-From: Peng Fan <peng.fan@oss.nxp.com>
-To: "?????? (MW Park)" <mw.park@telechips.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "peng.fan@nxp.com" <peng.fan@nxp.com>,
- "jh80.chung@samsung.com" <jh80.chung@samsung.com>
-Subject: Re: [PATCH] mmc: allow forward compatibility for EXT_CSD_REV
-Message-ID: <adaAlRvDAKs8mRWB@nxa18884-linux.ap.freescale.net>
-References: <SLXP216MB114822C04834C4F0A78869A6F056A@SLXP216MB1148.KORP216.PROD.OUTLOOK.COM>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <SLXP216MB114822C04834C4F0A78869A6F056A@SLXP216MB1148.KORP216.PROD.OUTLOOK.COM>
-X-ClientProxiedBy: SG2PR04CA0197.apcprd04.prod.outlook.com
- (2603:1096:4:14::35) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-471618e202bso5274b6e.2
+ for <u-boot@lists.denx.de>; Wed, 08 Apr 2026 09:14:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1775664868; x=1776269668; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=G2X1BmZlrW0zFvuUzH9wKFStxNfwWqM3FLAjpNLqjBw=;
+ b=L/R+2e55XuSL46pLZ/B3sMMjar1RZKkyYjtIeS8yI5keEKX1Upi3SzXG8qOUNZbihC
+ D5dKuuNbuwoUgwes8oDxxHqCCtcU+njvFg1fqSP06RxggzINZRjb02WX8gzBrID5TGOB
+ ePYU+sOjLbKMSEpgxBLC88N8BDiQFn13RZyZc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775664868; x=1776269668;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=G2X1BmZlrW0zFvuUzH9wKFStxNfwWqM3FLAjpNLqjBw=;
+ b=fvZSNCOebh7lOC0g4EOd8GbGemLCSHzr7cSwIzkTW/CRzkdRzpHqNuhr9asbTexLu7
+ e01It4SW5R88s1Jz0SQjANr5lPSN6A1eXwo+FtQY8Z4MR9h2CkiDa1xKS0VmsHsdBtWu
+ NHztLcqYIJi6GZeiBMOGx3xVhcEFWao5IMrvRJcFnu6LKpOHucdFJU6rIiQAzY76SS09
+ fkQoP4C0/W9ilBRFcMUR8Q0rGgSDS7mEaXko9IWe6jPde/gis0c1nbBwTIPfAPXeVIdM
+ stThyhPr7Z3j1XOYnYl8BbG28BNxnTV0K2kYMFja4zikjMy6mvvmU4Ep9+MHkvCxHPgR
+ 189Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXXMXpBZepahE6bDpVF8IpDG/2UMyF7fDAXCABSujyd2DEv1yYIzgY4kkzWDrEgoMSgXjFH4lM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyQ3dHsAtNKTvL6u2ODtPungj5RhS68YMdtoQgJA83GlDXXHgs7
+ qNv0XS7rpd6weQt5kSIxrkWH2+ucV2BYf6j4iPzav07B63IUzAOJKAFPz9Y5pl8KO/Q=
+X-Gm-Gg: AeBDiev0i5bkO/cYQ2ZVBE9915BRB3dSE9gWm76+MPfMa58NVIpJ8PNhDD3Mc+52/jk
+ QF1hWWzseamTkTTO21S2XIUSZ+EyPMskkkyon0aGaGGOcfK/pjK9xOtlgErjyRtyqdvElPnTXjz
+ B0y6jqtUBdbjbQofz7j4Enl6zqbrLXKQRDFClYesaHegy6iGYwpGOOy2zw3OKPb4gEN7Ws9WU9Q
+ noOJq/Gvp8pjLaX4Y+AGxrKnWtaqZwM7QADYYtIU3nb+gOUntJoO8RYE23nkBmDPAHdt8ssHOi+
+ vs9BosWYV+r1C1TsvUOnnZeIgk1pUBXpPqAD/Je0EvfNq5zXWf+IaHKdnLl7GbMJGbuvue2kQa/
+ vkZNHrOL17aJNSZ52TvJEWO4MWhuAjM/rONV59KgWyN8U07EL8GTSd4tlDzcfsTiVE1AcgDnt9Y
+ GKPbQs6kM1kW7x6BjmSeQeEaMz9b1VhmcGoaxZjPsKbuPz6PHKQMhA91LTKixkiFAtR4ZyPYgaZ
+ I37aucIBItu9wz9gk7PE/HaovwUCClA8dX99KD0cuPCYWLp
+X-Received: by 2002:a05:6808:5294:b0:467:32c1:acf1 with SMTP id
+ 5614622812f47-47723a76870mr95748b6e.39.1775664868088; 
+ Wed, 08 Apr 2026 09:14:28 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4757665c7c5sm2411083b6e.1.2026.04.08.09.14.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Apr 2026 09:14:27 -0700 (PDT)
+Date: Wed, 8 Apr 2026 10:14:25 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+Cc: Franz Schnyder <fra.schnyder@gmail.com>,
+ openembedded-core@lists.openembedded.org, u-boot@lists.denx.de,
+ simon.glass@canonical.com, Francesco Dolcini <francesco@dolcini.it>
+Subject: Re: EXTERNAL - Host GnuTLS now needs pkcs11 support
+Message-ID: <20260408161425.GC41863@bill-the-cat>
+References: <f5ov7deig7xaovxmtx3nhewki6mudgebahghknhxodlfa3lrdh@ary63d3fodkz>
+ <adX6wVUWvNrzYfuV@mt.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|DU4PR04MB10912:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6f4a6761-fc88-47d1-7a2f-08de958048a6
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|376014|52116014|19092799006|1800799024|56012099003|22082099003|18002099003|38350700014;
-X-Microsoft-Antispam-Message-Info: iT6HIPinpdP3XsTJmZEKOdiuQno1u3GhpTZMat45ukwHhmL0imKW8aA8bbHH9WWx2MwRDdLWlM/n3oFfgYsjbBKqfrU5cWTZbQ8vTDoVKhvkW+OHyT4PtUyZwJu35QtpHDEdvRN44Jqu1oxhj1AZ7xpZEIXnJtIc5clihGG1cX+poB1+JBN22sAkxy+pOicbkUZaB9Ja6ZAds/sZlo8FeoO5E6gjJqLCNRNn1I35xcKTbbT14/h+3BNrrIooMZW1q99cVTJzROZgqiClnJ7pcbNkrpEmarv4ScSnuE0tz7k9Ai8je6JNhOf74CQXmTJyITu6MSUp1pfmSViUXdYt0nW4+UATlNDTQBkxuoyaBzWHaPZRVKbY5clRb07QfO6oQIVY2IY5qALKux/ARtuCpeNg4Uuh8/OGKyuT0mreEon2jQkrS5woGzIuN6BUswQzlcRucsTDHmhFZ16vGf20PpZanBjk6Q5BiNNCOOxMd/FTkPUrwZ7BTyRGdH5cq9pY9yEuieTXiWW0RflhRXsXf7ku+mYOCuQFpByy7yBRvSUJHRqwAiZ+/FGfMh/QzljMIQrFZxrI1VoYwZt6N5ZU1ohyuvLqnnO8i+vHd7X/XnGXynP5DA949vq63fSuSW8mHcoHUqDPzEzse9HFoREuC/ix8hBwUUslifrwY3e2KPaCfZxs5vKGCFgl+tVpez9mkgYNFz/DmjFwQc3F7GumDWRSB8c5i6WUd4Mcw4j6pLabcVBVVUYs82mmSy8oV7AXODA0EHvpBCdHhr/Pol0RUi0v2ltwpgZnswFOqv+WEwY=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(52116014)(19092799006)(1800799024)(56012099003)(22082099003)(18002099003)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?7kwhyY2FWfJeKPu8yZknvHHTSvbHV1Fp6N4t6PqXAQEwt35bO/Zjpdjx+51B?=
- =?us-ascii?Q?XJOoMfXjLzsFCC7V3hCRrVyeC3hHQ4DOuR6y2nlZNELWzjN/y0+j805WU4xK?=
- =?us-ascii?Q?95BzMlUqKj1rnsrpVoKP4vDxdrMvRIx6tU9M7P9sJS/ullx3FaafJ7oL4WKb?=
- =?us-ascii?Q?rHtJ54jRQfMOkvOB+hzHoYis0cc35WNoatQtggDBBTT7h9ZcsOdGl+cwitts?=
- =?us-ascii?Q?ClylltOURjR6REE5VoRymYFXh0gojMdu0N8Qi4ebWD1T+976pbwL0D9fYv90?=
- =?us-ascii?Q?tPQMgub9+qySmuxNlT8BE7evTPHo99/xfcVSiukHRq2g/VmqWOrQua7ZcTvr?=
- =?us-ascii?Q?3jvEnqKbW26mBSjbTeEuWzmH2hJR9JmrHG9oL+hDTzNB7yefZ8uSzocpfnKa?=
- =?us-ascii?Q?OLCQ1OFfa9eh/gObBCnal8Cq1A4JShe1ZFR+3be9A9x9zGjtqrSI9i9Ed2fa?=
- =?us-ascii?Q?c4pxGH8/jXx4BpqGS9CL3p6fNNgV3hG2kw1yKsod1tmv+NIxV2NnoLJmCxDW?=
- =?us-ascii?Q?JGhP9BEQ8/KcIpwCG6KH6ktwhF8PtNQGzx9E+5yLD7pYRne8GKvhGagT/GfK?=
- =?us-ascii?Q?SgHwH/E38p9BH7wuX/KDhsnsttGkGLB6L+Mjgzzmh9Rswj8UpoYvSxEav2bL?=
- =?us-ascii?Q?InNvf5fdcTbaPO7hl5r1+YWggVApKF0BCDeFKJnG1378HNSRz3XeeW29Zq7d?=
- =?us-ascii?Q?z038e6VqXdvUFNXpgyvz4SU6I8ygMwfsc+F4k+/y+CIAeV91J2DYurM6Gpg6?=
- =?us-ascii?Q?gsdd3/k8oziioC6aXtMLciSqsbaqeAnfyl87Y33NOQXSa0ZIkc9vUioaNq1/?=
- =?us-ascii?Q?GSAJ+0x7cZ17D4HUJjKmQy3e/7nUFOcDnhmOWXR4D/dQb4qI+bKDyEaKCkNf?=
- =?us-ascii?Q?OAe3FblmLMHVY+hELdlFtAu0kZwSbzmga95LVW8xTJ70MthMraOyMsH7gf7N?=
- =?us-ascii?Q?OcoYU0nRB4D1J7I66tw5VZednfnvsyIHqoTGK4AuvzUXooKLQpU884MLhdoo?=
- =?us-ascii?Q?sqYEs8Pj5NjK1s67cpkPbaVzxkHaRFWRPbzL3DPl2RrnfspKVdw7pT8bxXeG?=
- =?us-ascii?Q?Kc+54JZybdQOftxu4MOwt8LKAyzajVnP+xrrs6WlWe85ejBlxae/+e7EeSGQ?=
- =?us-ascii?Q?G682Qb1mhiyLYL0/i8W/U8higM0101bl6JOwtiWl2pTXo2mqHYekHlIIL6wq?=
- =?us-ascii?Q?te5krFHfwWync+onTyUuVzvITdTNVbhtY/8d1Gmmlc7rh3m3L1p1H9ciepOO?=
- =?us-ascii?Q?4W9dn+HNxSxSuQ/9a0GrapgFs9LDr9XGHTIrYBIdYHhMqIwrxN2OAikmswvU?=
- =?us-ascii?Q?3eZua2RJ8/FrO9Mp/r+H0MIT21XrYEWxsYYBC86w1dvLeX6/vd5kK4su0VQ+?=
- =?us-ascii?Q?c1eeXPPpf6HU+3ng6YTlMEMp+dqhWDMbs3Sn3ZWGbwmycLdzXSTLM6ipfOMi?=
- =?us-ascii?Q?3lbz6Aue9RcMnELvyjx0lMxhNbP8BO2GTWiyK3uVvsHvFVS9+rBIGUOczi6v?=
- =?us-ascii?Q?Y6TcFF4y6XA9SeGLh6neshd4noDJIzox2GdkuZvOEBCdKMS1n5/+eYZschum?=
- =?us-ascii?Q?NixOfsxq8NHZhNQcYghi4r1gabjHDaPtkfHv9w86hnA5qicA1MDjzstCRhPD?=
- =?us-ascii?Q?TUp1PYhrcLF2Jv0GVsgesoXpdVC7fpKx63GM6BOx44NX+3FeOTD+oR49MNui?=
- =?us-ascii?Q?XAgTncBBo3PZY1sMQ6zA8Og/hJzW4b1v/U6FigjUmjjowOCcosWJFQPGot2i?=
- =?us-ascii?Q?qH+PR5oO5Q=3D=3D?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6f4a6761-fc88-47d1-7a2f-08de958048a6
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Apr 2026 15:05:34.2516 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: u5Mpd4hXu2FPhqrohjZeL1jq+sf3b5tDiLzzYtSdeDpj0qIe8ozBRoyXvyHJQxDZi037a1H9Gi4psW6Pccc8fQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB10912
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="XbF3t9EVcNoRe6zu"
+Content-Disposition: inline
+In-Reply-To: <adX6wVUWvNrzYfuV@mt.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -140,23 +101,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Mar 26, 2026 at 05:55:32AM +0000, ?????? (MW Park) wrote:
->According to the JEDEC Standard, the EXT_CSD format is meant to be
->forward compatible. As long as CSD_STRUCTURE does not change, all
->values for EXT_CSD_REV are authorized.
->
->Currently, if an eMMC device with a newer EXT_CSD_REV (e.g., eMMC 5.1B
->with EXT_CSD_REV=9) is used, U-Boot fails to initialize it and returns
->-EINVAL because the revision is larger than the mmc_versions array size.
->
->Fix this by falling back to the latest supported version if the
->EXT_CSD_REV exceeds the known versions. This ensures forward
->compatibility with future eMMC specifications.
->
->Signed-off-by: MW Park <mw.park@telechips.com>
 
-Would this patch works for you?
-https://lore.kernel.org/u-boot/20260225211332.1896252-1-han.xu@nxp.com/
+--XbF3t9EVcNoRe6zu
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Regards,
-Peng
+On Wed, Apr 08, 2026 at 08:50:41AM +0200, Wojciech Dubowik wrote:
+> On Tue, Apr 07, 2026 at 06:15:13PM +0200, Franz Schnyder wrote:
+> Hello Franz,
+> > Hello Wojciech,
+> >=20
+> > with commit 0c716a157be ("tools: mkeficapsule: Add support for pkcs11"),
+> > mkeficapsule now references to pkcs11 related symbols.
+> >=20
+> > This breaks our OE builds because it causes link failures for=20
+> > configurations that build mkeficapsule when the host gnutls is=20
+> > built without pkcs11 support:
+> > ```
+> > undefined reference to `gnutls_pkcs11_obj_list_import_url4'
+> > undefined reference to `gnutls_x509_crt_import_pkcs11'
+> > undefined reference to `gnutls_pkcs11_init'
+> > undefined reference to `gnutls_pkcs11_add_provider'
+> > undefined reference to `gnutls_pkcs11_deinit'
+> > ```
+> > On the OE side, enabling support in gnutls via p11-kit fixes the failur=
+es.
+> > However, I wonder what the cleanest solution would be. Should this new=
+=20
+> > host requirement for pkcs11 be handled in the U-Boot OE recipe,=A0 or is
+> > there a better way to approach this correctly?
+> >=20
+> > Any ideas?
+> I could add disable compile flag in mkeficapsule if there are no objectio=
+ns. Sth
+> like this in pkcs11 places:
+>=20
+> +#ifndef DISABLE_PKCS11
+>                 ret =3D gnutls_privkey_import_pkcs11_url(pkey, ctx->key_f=
+ile);
+> [...]
+> +#else
+> +               fprintf(stdout, "Pkcs11 support is disabled\n");
+> +               return -1;
+> +#endif
+>=20
+> This way OE or possibly openwrt don't need to patch.
+
+We should do this as a Kconfig symbol (which shouldn't be enabled by
+default), and make sure that tools-only_defconfig does enable it and let
+distros disable it as desired.
+
+--=20
+Tom
+
+--XbF3t9EVcNoRe6zu
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCadZ+3QAKCRAr4qD1Cr/k
+CslWAP9IJYebAgzpwavtZYuCdtH/izsjMJzrHw4g+kjUT4a6vwEAo46Pm8cFArzL
+s3tRpu+hFqK/WCIk0pjofDcw/E39ngw=
+=rR2Q
+-----END PGP SIGNATURE-----
+
+--XbF3t9EVcNoRe6zu--
