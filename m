@@ -4,88 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEDCB10F9973
-	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 19:12:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E959B10F997F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 20:30:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 420CA838BB;
-	Wed,  8 Apr 2026 21:12:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2072C83D8A;
+	Wed,  8 Apr 2026 22:30:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n8VlR6SZ";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="cGUK6IZl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9139E83CF5; Wed,  8 Apr 2026 21:12:50 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E90F3840AB; Wed,  8 Apr 2026 22:30:26 +0200 (CEST)
+Received: from out-189.mta0.migadu.com (out-189.mta0.migadu.com
+ [91.218.175.189])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5825D83693
- for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 21:12:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E534B83CF5
+ for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 22:30:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7dbccf6a23dso103831a34.2
- for <u-boot@lists.denx.de>; Wed, 08 Apr 2026 12:12:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1775675567; x=1776280367; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0hcnBOagyo4mmUBTBBfuX8gI/u7dF1gRWtS0lgTgEUs=;
- b=n8VlR6SZow0zB7RT7DB3kn2KN/DYmDII3oO45/z3IPpDSyON+LvCvFZFgXT91X/rqB
- eH1ubACG28K4xQwg5Z2yiAH16znwm3bXpP6Glsi7/XAOr91Ws2oUqxMbU9v5UOHPl1r3
- Y/C4n2+mJ8WpTpTfvBbEnKzqvaRRSzNChvnmU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775675567; x=1776280367;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0hcnBOagyo4mmUBTBBfuX8gI/u7dF1gRWtS0lgTgEUs=;
- b=Y7ElCx8CTNfsDHtu4bTkrEVcJp4EZ4F7ukl7156JRD5MIDv7Uz+BKeTDG1Q5zOSA10
- AjrKMgy0vXvNQ+yzPGYE3ejJgB1Sl9Hkn6+dc5c8XkNa0H4LgRHSGCe7KEM4M6f9Hboi
- vkbxUbVoO6EQkIsV3/b2FzD5nCewbYt/p5/tAg3GJW/Dc42y9/3BLtoEwrEydcARaZNw
- iS+XK8cNkrDFAqoLiSlVnSVMDpiu8fku2MbDUSSWEFJ88uiRRO+CHEamkvQ5WXyJkoSc
- 9r05dnlFSUiQ+YB9aQRIIahRfFRwADOkobLlcD10e/Eur/CpV0+hlemu4090YBQNmlCD
- OBXQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVh+BCqkdBUsD7RVTA5eHegk7YKMM9C7f4YbPwEpFEmityMD8Qq34g9tbXCNc6G6EPEDFTUyKQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YxBfgyhHVTPUuPjFXktDTxeeJn+ImKz9yJ0YdxdKwOix2TXibgZ
- 1DwaztZiNnUoze06SPTxEmxYaFQ3/oZuxbUnZh8TsqDgosO28Ymk/NfXxSnwlEA5jkVk94AJ0LF
- 1LT9pa6w=
-X-Gm-Gg: AeBDieuY6OR9AJugkDrY4VdNRIwfmf2CSk8s5k/DKepsyTXm6suOnrbR/fmKccaFvuI
- MbJXiXOHn/HgKLwk3bP63s5GtCe0pJnpjnL6vocdY8QDb7I2cEhYr0ROR4CZx1qHlPNZ+iB5SgT
- 7KXfoS+ESt+ZdZc/lkNAUxBTyMUYJex67/npCBovwyoKFaL3b4J/TR83XuaNHf0XJ/4W15+wF+e
- kNdf4FrFXLkquR9KwXmpH3AqPp/03fgoR7d0HZjlQB6zY50MP4FvHHTeOAery6rW0xCAEDFm11d
- 1ZCFqlIghqReHwmDAj4Idke2pOpCcrokEER3zjaWMIGAkgy3oAMMA4YjhK52BdLJ/vpZSFILtdJ
- peJyXNhctK6PZLPhCQAf1B6svcAz2xign/s4IM4+0JlY9TOp/rEzOhn/fPioKicFgC952f0R3RF
- aSMmhGbontN1sJA2Y6f/ygwytP6fg4v7cL4dLVH82HgTyoeatNYVdmd+20mnCH2KOQZJPV54a22
- PScIQsH0riBsbZ7MNWLYteg/UymaWf7qtM+wctfZqqGka4IKwU=
-X-Received: by 2002:a05:6820:2d04:b0:67d:fc49:4b97 with SMTP id
- 006d021491bc7-6821cd3bf70mr12417511eaf.13.1775675566959; 
- Wed, 08 Apr 2026 12:12:46 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-422eb42db1bsm19358652fac.17.2026.04.08.12.12.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Apr 2026 12:12:46 -0700 (PDT)
-Date: Wed, 8 Apr 2026 13:12:44 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: christian.poetzsch@kernkonzept.com,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Bin Meng <bmeng.cn@gmail.com>, Adam Lackorzynski <adam@l4re.org>
-Subject: Re: [PATCH] virtio: add support for SIZE_MAX & SEG_MAX features
-Message-ID: <20260408191244.GA837666@bill-the-cat>
-References: <20260327081858.311591-1-christian.poetzsch@kernkonzept.com>
- <CAFLszTjKtFM6RXE_ZoEFbpW1ZGPtLCcqzJeceaLGPYoTfGA9vQ@mail.gmail.com>
+ spf=pass smtp.mailfrom=funderscore@postmarketos.org
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
+ s=key1; t=1775680224;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=tSR7ycAPH/8ip9z+10dIFTdBYOwKZhw6MR+BtiNFG0c=;
+ b=cGUK6IZl+XXlbUP3VAc2ZbkUu3Yn5165z0/HQWnZ5op2F9NzkrwvisDZH/POybBNWRc49u
+ o41lc6A3dfTvSou4cAnB8BFiSGvEJwqsOZwdSqpxTiVjCJHxG5sXypMenogAyGGgJTwQf0
+ P5caY4tEuIUsx51xIseAiKUSGm97xPoe1xy6wpytx6VvAfRZVX4IBdBgfChErCTbVeuBYq
+ MccCOAHDAMEdxwazGzWS5sNtbq7Bry4Q1IoRF/dy1Q1W4+x4pXNsFdSWg27TmeclclI0Qk
+ yVtRa+C7t9bGdIhES79Q5T3vpQ1EVMHxuYD4ezSbMWMWuS6L2NWGh9Ye3Xg0FA==
+From: Ferass El Hafidi <funderscore@postmarketos.org>
+Date: Wed, 08 Apr 2026 20:30:13 +0000
+Subject: [PATCH 2/4] arm: meson: enable SYSRESET_PSCI
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="IEetXDNZj8JFpTek"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjKtFM6RXE_ZoEFbpW1ZGPtLCcqzJeceaLGPYoTfGA9vQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260408-b4-amlogic-sysreset-capsules-v1-2-6f3386eb5124@postmarketos.org>
+References: <20260408-b4-amlogic-sysreset-capsules-v1-0-6f3386eb5124@postmarketos.org>
+In-Reply-To: <20260408-b4-amlogic-sysreset-capsules-v1-0-6f3386eb5124@postmarketos.org>
+To: u-boot-amlogic@groups.io, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Ferass El Hafidi <funderscore@postmarketos.org>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=912;
+ i=funderscore@postmarketos.org; h=from:subject:message-id;
+ bh=Gxp3GAIXrBnp462RNs+PPcQQYjHfLyf+ZcX3PQ+wncs=;
+ b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBp1rrbpbnC3HsysF78UJMhK1KOUgSvrsyY/RBtx
+ RlaoZCzHGGJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCada62wAKCRCEr8vQ14ma
+ AzN0D/9JmilcrdlCGTKeOv9a48R9O0eOAjvd/YBmwyxwjBOlxcHoUbyyI+MQKO8N07ziDzb9Xgs
+ 1DjFPoIegUrjMADrltIQf0pUNfCCmpxp5vmL20hiAc6JDZ0TvTkgoMTYlukblQcWFtCykV/RHv+
+ iyTg7qDDinipAvmmo5MEhzo4YjtgpUTlbTR2G/UW5H44Tiq+whdHz1ZOFkbEcp1A7duQfm9iy6l
+ AhXlMmpMpd4tVBXmlotmo+Kg0q9Kvul6yCdoyqew/VDGPblAihYtARqWkkCTlqqATrTwU8ITHtL
+ biuoXBgQ8oKB+4Cn7TcxBS/RX9P5ow9EfY8/y4Ucyrvk7YkpzKBx5ja8bQBYvHPuJAnHxcmhlPr
+ DmlS3o89el8tXzjh+cLzBkSGie8ZhEZzgj0hINeJSGmxrBDgp9QzCbrKsnq9HBaqqzPrwMzmrKf
+ fito/1eSKc9OykEcDb0NvptNMEdK3P0Z3cKEM5f5VcusCAWYHIqk1dICjXuN03ywZ1MLmTJbOhH
+ Ib1L6X6qSQn9byWkgWvp6q0MMdtz0+iGqFOIJaRrERYhn4pzPhVpv5+h8e/mI+KkbBtPkEz9k9M
+ WAqNIK6eFbJNKra2Ae92Y0Tt/HXYvNmcQCYBZqPyWnJATmyMdr4IEBKGrb42oAqF8VEPrIETqXV
+ 1ir9/CfvEicb4rg==
+X-Developer-Key: i=funderscore@postmarketos.org; a=openpgp;
+ fpr=0301BC37FB555CACFD798BEE84AFCBD0D7899A03
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,94 +89,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Previously, Amlogic SoCs defined their own reset_cpu() implementation
+that essentially just did what the sysreset PSCI driver already
+supports. To reduce duplication (and allow for EFI Capsule on Disk
+support), make use of it instead of a board-specific reset_cpu.
 
---IEetXDNZj8JFpTek
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This does not affect SPL, as in that stage we do not actually have PSCI
+(BL31 is not loaded yet at that point).
 
-On Thu, Apr 02, 2026 at 01:41:11PM -0600, Simon Glass wrote:
-> Hi Christian,
->=20
-> On 2026-03-27T08:18:58, Christian P=F6tzsch
-> <christian.poetzsch@kernkonzept.com> wrote:
-> > virtio: add support for SIZE_MAX & SEG_MAX features
-> > virtio: add support for SIZE_MAX & SEG_MAX features
-> >
-> > Some virtio implementations may forward the virtio requests directly to
-> > the underlying hw. The hw may have some restrictions in how many and how
-> > big the requests can be. Therefore, the corresponding virtio device will
-> > announce this limitations with the SIZE_MAX & SEG_MAX feature.
-> >
-> > Add support for those features. Split an io request into multiple virtio
-> > requests if more than seg_max segments would be used. Also split a
-> > single buffer request into multiple segments if the buffer is bigger
-> > then size_max.
-> >
-> > Signed-off-by: Christian P=F6tzsch <christian.poetzsch@kernkonzept.com>
-> > Signed-off-by: Adam Lackorzynski <adam@l4re.org>
->=20
-> > diff --git a/drivers/virtio/virtio_blk.c b/drivers/virtio/virtio_blk.c
-> > @@ -119,7 +145,38 @@ static ulong virtio_blk_do_req(...)
-> > +err_free:
-> > +     for (i =3D 0; i < seg_cnt + 2; ++i)
-> > +             free(sgs[i]);
-> > +     free(sgs);
-> > +
-> > +     return status =3D=3D VIRTIO_BLK_S_OK ? blkcnt : -EIO;
->=20
-> The err_free label is reached from both the success path (fall-through
-> after virtqueue_get_buf()) and error paths (goto from malloc()
-> failure, virtqueue_add() failure, or unknown type). On error paths,
-> status is uninitialised, so the final check has undefined behaviour.
-> Please can you separate the success path from the error cleanup, e.g.
-> with an explicit return before the err_free label.
->=20
-> > diff --git a/drivers/virtio/virtio_blk.c b/drivers/virtio/virtio_blk.c
-> > @@ -145,38 +145,38 @@ static ulong virtio_blk_do_req(...)
-> > +     while (i < blkcnt) {
-> > +             u32 blk_per_sg =3D min(blkcnt - i, seg_sec_cnt * priv->se=
-g_max);
-> > +
-> > +             ret =3D virtio_blk_do_single_req(dev, sector + i, blk_per=
-_sg,
-> > +                                            buffer + i * 512, type);
-> > +             if (!ret)
-> > +                     return ret;
->=20
-> The error check is inverted. virtio_blk_do_single_req() returns blkcnt
-> (positive) on success and -EIO on failure, so if (!ret) only triggers
-> when ret is zero. I suspect you want if (ret < 0) here.
->=20
-> BTW please add a function comment for virtio_blk_do_single_req() so
-> all this is clearer.
+Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
+---
+ arch/arm/mach-meson/Kconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-This is all true, and useful feedback.
+diff --git a/arch/arm/mach-meson/Kconfig b/arch/arm/mach-meson/Kconfig
+index ef86129b535..a615d871095 100644
+--- a/arch/arm/mach-meson/Kconfig
++++ b/arch/arm/mach-meson/Kconfig
+@@ -7,6 +7,8 @@ config MESON64_COMMON
+ 	select DM
+ 	select DM_SERIAL
+ 	select SYSCON
++	select SYSRESET
++	select SYSRESET_PSCI
+ 	select REGMAP
+ 	select PWRSEQ
+ 	select MMC_PWRSEQ
 
-> > diff --git a/drivers/virtio/virtio_blk.c b/drivers/virtio/virtio_blk.c
-> > @@ -67,50 +74,69 @@ static void virtio_blk_init_data_sg(...)
-> > +     // The virtio device may have constrains on the maximum segment s=
-ize.
->=20
-> U-Boot follows the Linux kernel coding style which prefers /* */
-> comments over //. Please can you convert these.
+-- 
+2.53.0
 
-This hasn't been true for a number of years, Linux Kernel nor here.
-We've accepted C99-style comments (when not needing to be kernel-doc)
-for a long time now.
-
---=20
-Tom
-
---IEetXDNZj8JFpTek
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCadaoqAAKCRAr4qD1Cr/k
-Cj+lAQCXwohF6rLhgWVJziDZDqhIyFpUpYDvWU4VxteWbglBbQEAvFRPR5kb26Ck
-XpxGuX/pOZRRKfNrQP9YK/Th49kjTwA=
-=W4+W
------END PGP SIGNATURE-----
-
---IEetXDNZj8JFpTek--
