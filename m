@@ -4,143 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F00E71073CA5
-	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 12:21:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 520481073CA6
+	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 12:49:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41D148418C;
-	Wed,  8 Apr 2026 14:21:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 38CEB8404A;
+	Wed,  8 Apr 2026 14:49:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="K0VYV84z";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="JEx6ocKN";
+	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="opgIG8dE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 026308414B; Wed,  8 Apr 2026 14:21:26 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 80CFE8405F; Wed,  8 Apr 2026 14:49:31 +0200 (CEST)
+Received: from mail-dl1-x1235.google.com (mail-dl1-x1235.google.com
+ [IPv6:2607:f8b0:4864:20::1235])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A6FC841C2
- for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 14:21:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id 42AF483D8A
+ for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 14:49:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6387Q4CK2451202
- for <u-boot@lists.denx.de>; Wed, 8 Apr 2026 12:21:19 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=9UpYA7IIq/O
- l5ltl8etEhl+fI9ks0CQF1vfaQBqqkDQ=; b=K0VYV84z54gKE7yPjldNs1JGZ9o
- MRzY+pwCeGAKeJu/lvpcGKNhTe44NAxen9PwmrSaE9DFqpdQOd3HnPCSPrMSlk8V
- NDM8MO/agFi7y7TIfitM4uP8S9cYxjhmmSrcU94+O1RixGsfajQnzPRTP7Car0pP
- xxfSCoAeIfJRyfp0CbQ8XSfxSIFf7LvLvUfd4LQqhYXnOn3clchkyomiT1c28AHD
- fGn9fCEX61gBa0fvEiCCqruy0K/oSS0dYoevCfs1tUwaN6DMEAWWVxsMUzammF66
- KJJ6dL1ph5vlDdq7fGbj+uAZy11Oudfxup7i4zsob7rk6MXNajVp8z6pJAQ==
-Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
- [209.85.215.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ddae6aq0s-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 08 Apr 2026 12:21:19 +0000 (GMT)
-Received: by mail-pg1-f197.google.com with SMTP id
- 41be03b00d2f7-b630b4d8d52so3950708a12.3
- for <u-boot@lists.denx.de>; Wed, 08 Apr 2026 05:21:19 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=thingy.jp
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
+Received: by mail-dl1-x1235.google.com with SMTP id
+ a92af1059eb24-1271257ae53so6767605c88.1
+ for <u-boot@lists.denx.de>; Wed, 08 Apr 2026 05:49:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775652566; cv=none;
+ d=google.com; s=arc-20240605;
+ b=ksH0go5YHlz0Hu5pY3ITv2WaorxTcNCMKyM9se2FF75r0adhVHAeETJZz7ksGMXQwR
+ v8+cxNicKCWT4b3qUzxNMceoQqncaEn8OULTBZsSb5OAZtEm69GiI5RzXq7fh4b8ol2s
+ FVCkpcWdErwVVooMjZAdzPkUjUjmkLX64ux0QYqOggu6FRK3i223NgWyWdDfLhiwZQbR
+ qLNdpfuDWYUfEi/8+wK6fJc9NoVqoWQ83OSpX/9sOqulU0OKCASLOkzoSKUUJhQNhWxl
+ TYV7KyeUvUf0sGbUEe9Fd76otI0ufEpk2LKmGOmAcqZpDLFLmOeVawr1z7XGq9/5i0NG
+ B0Dg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=SCoGw0DDXydlU7v3nkENRbcafWs3N2ntoEHnai/FUGs=;
+ fh=jbRFM7KP5D5iElM46gV8oSZh+zTFFNlTSTHiAqaXMnQ=;
+ b=NfIVnKrhSvlSxp2h7zeKGozICFwQoU4KNOxfpIQQxG2beA0Y6UjtNWnitFg4r+ZyDR
+ 1dTqTOyRPmZcalarKfR+0RCiM3ATAAXXnMWdZb8phx7XV6E8wN/f3Z2pd3c0ZMtSf6oX
+ H2P2ozJxe62i4UICEZPAaVWj5YbvNViANkIUgARlOvwNbwdYwCPD3GT1waRRqGoQwLNk
+ o2QGWTqux2w5sjPsYDnnyjpcnutKw0qNRyeaXjm/3JY6YoCvwcGk3fLK9SdZ6/2u6P5K
+ d/kO65aaSsQ7Rq0vmEkBaOLYtoy55+v8Req+8sDnYPoiBtR6VqNUpA4KA0fsYs/oys47
+ xQBg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1775650879; x=1776255679; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=9UpYA7IIq/Ol5ltl8etEhl+fI9ks0CQF1vfaQBqqkDQ=;
- b=JEx6ocKNxo5kLFrfcbNv9BYHYRNpRaHpIQi/ihvyucIFBJOygRame7ZloCkYuAFM4M
- mB82mUIyUTbsZxbRzJMcq8nhFOJMrB41TV3HMu3IfukrbbARdqsW4x7Dq9Ib9vMub+0Z
- vZ3uFv9bhM/6/Zb2IdTuV7Pg+5O9C7e8xiaANOlWwqx1X48lM2b20L/lOCAMBZTbGXhg
- 21+6CYrxjGCRUfoj+B6GxyMDjGRsN28hyGroLotWCrey9R0DkH0vtibbEmloiDZA71z/
- hdFrzslWDf5Nkjomk+7poMj3SMfpBfa12WuCbFzLscGcARAVklvGEq+JFZvvud1VN0LP
- GPDw==
+ d=thingy.jp; s=google; t=1775652566; x=1776257366; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=SCoGw0DDXydlU7v3nkENRbcafWs3N2ntoEHnai/FUGs=;
+ b=opgIG8dEKtzT0OcbzHcaryVtLLiR41MsD2wJT2cFzQ+wgY5PDr70ysRsAI+5anFbPQ
+ 45pqueu18u6BhxyRAK40rgy+bQRB9NM4txsolEQbmW3TSmB5AGqvNk/WPq/iu9ObeJwl
+ j3GB5GRXIpzVGfsXmZ+MyEU9VF4R3WrLQXYRM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775650879; x=1776255679;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=9UpYA7IIq/Ol5ltl8etEhl+fI9ks0CQF1vfaQBqqkDQ=;
- b=LS7o8Kili0DDYKFsikxKK48RSFCWjdBYBGUo+3FTUK2g/gqNg/GioQghP5r9O1YCyn
- k0sMiuaRAlUGjMO/MsF2dWGAEDkhdGSohHvWykVv6/DflJywH41D6FRQvY82ysM32+t5
- 8o07PExO4gjS+W7NgnVc8Jq0+DiDnVeonynxJH1D3c+DcJ3uXKtvhbLusuwFY/N/OupD
- 4shpK3EQfjTMCrRLLXFOt5/iRah4XzZ3lyQWa3FUDdo4mezG3A9chQhJcV/Yxayy/KPs
- N5SChY1yTvStMBnvOhhvd8XWRRg7vTeZrHrib1mcxDg/2w0b1K5oJWPIKIECrDjvVMv1
- 4wTQ==
+ d=1e100.net; s=20251104; t=1775652566; x=1776257366;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SCoGw0DDXydlU7v3nkENRbcafWs3N2ntoEHnai/FUGs=;
+ b=L4Akiig0jXQn5TMuVAU0eLiVP02EfYDyCidWAGGb1QPCkZfaBcXkaoGMv+AOXWIFqp
+ JPcgP6t4NUtLng3xWlb2nyniz3rqObX9oCt5CoH4VlxofWyTo3chUnulx0AF+z9og3ef
+ 45zzMOGwpIjQ444pSA94kXGq/cSGecFls993DArDeeNmaQ+RPu6H6CPXgUtI9yGoJiV8
+ 43AeWQ+zzRZOPh5z1gHJ7LFdCTjH/6r3wXMfEJui+343hEFXNwJnpyYlxad/C6sKKE14
+ 4fQlmoDYD2yzVZq+Xfx8DdgnEUHk6vm3Isw5PI2NSoIwIX2piHpYTGmEIecWvvkmWBHI
+ rZUw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVMEiR5JfPqcuYNHS26iShqmLMzQkmVoRYHnqr/S11r298/zMvysQOZq+BDud5nvLGiq5IJBMI=@lists.denx.de
-X-Gm-Message-State: AOJu0YxyU6g7FY34nftxyUbSZfBGpC4nR4s+XQwLXExDthhuMCdRIz0C
- PjFkMwtH8tWZlQetuWg+aT/DLwmKtqBn5TLqz4XJ9YauPVFZnE2sPISwBNaOxupVm0nLH3kNZ8G
- t+bNjijphF9ZEqYRhA+9s3pSqNY+KPIe6/vieGMYd9YKkMu6dbo+9Upo0
-X-Gm-Gg: AeBDies5fR7Gwc0rXvPwdB6RnTGntwphrU9ngEAyVzLVH0hP/xEOKthX+bjcob79heS
- w4LR1PptsJEWQISjrl5WBX6S5aVZ9f281ozAQaCi9BVHgaPHKBNiP91+/rUu52SwddUZKCRVCmI
- XItDqM64AAaNXTLn88R+dyNsb8/4QUahoTtDm7Owiy/BRYCran9/93Js6J8gD+yboTM3eXgVPcy
- KPzp2zmLAQ3DMX6h97p5rAFGgrnNHSV5XZLPP9/Mu2rc1BciSEx4TRZhs/bKXMVzrKpie6GiPPh
- eXt/jGY6+RF9rwP8If9lRYuiyQjBHXMX1xpjKx0ZSDwebIm37M7O9rdBOVLWFw1ogMiZEWAXLKw
- 9NjCiHk9yBZ6V7IGUvaSk5kIH/YC+qA+8H/Jxkp0XpsdVxONgXBztla8m98qp7qZtRteA6Q9ygI
- R3G/4f7gn5HigG1Hx8Snr8piY4UdxJlk53JZ+YaUHf
-X-Received: by 2002:a05:6a00:3693:b0:829:7d31:dd99 with SMTP id
- d2e1a72fcca58-82d0db7e27cmr21032965b3a.38.1775650878504; 
- Wed, 08 Apr 2026 05:21:18 -0700 (PDT)
-X-Received: by 2002:a05:6a00:3693:b0:829:7d31:dd99 with SMTP id
- d2e1a72fcca58-82d0db7e27cmr21032924b3a.38.1775650877852; 
- Wed, 08 Apr 2026 05:21:17 -0700 (PDT)
-Received: from hu-aswinm-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-82cf9a24039sm20512602b3a.0.2026.04.08.05.21.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Apr 2026 05:21:17 -0700 (PDT)
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-To: trini@konsulko.com, aswin.murugan@oss.qualcomm.com,
- casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, sjg@chromium.org, seanga2@gmail.com,
- sughosh.ganu@arm.com, gchan9527@gmail.com, ilias.apalodimas@linaro.org,
- mkorpershoek@kernel.org, marek.vasut+renesas@mailbox.org,
- hs@nabladev.com, msp@baylibre.com, ravi@prevas.dk,
- dinesh.maniyam@altera.com, sajattack@postmarketos.org,
- peng.fan@nxp.com, quentin.schulz@cherry.de,
- jamie.gibbons@microchip.com, mateuslima.ti@gmail.com,
- justin@tidylabs.net, wens@kernel.org, n-francis@ti.com,
- ycliang@andestech.com, jerome.forissier@arm.com, clamor95@gmail.com,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v4 7/7] misc: update API documentation for bit field support
- in NVMEM
-Date: Wed,  8 Apr 2026 17:48:41 +0530
-Message-Id: <20260408121841.186410-8-aswin.murugan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260408121841.186410-1-aswin.murugan@oss.qualcomm.com>
-References: <20260408121841.186410-1-aswin.murugan@oss.qualcomm.com>
+ AJvYcCWUwyFSEtIYR2zFg2PJkycQG6OHExHG7/ZQbVi3e+oq+eR6B41RQ4GBrQAMSngWCEYyxPytQA0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzV4axhRc6g6uuHu2MxbkO68qwRwCIiDYZPaJ9qLjBMQsCERWZB
+ IUCr28c2u4gof8gmRHBFamLhQwbG+dp3A3M/b6ZUdFsDalgg2Wh9KAT21LWufe7EoPXwOuUIewP
+ x9r2f7EdS4+WRRpxPY1lxZoTcSsGsFNUyNTSmSw3DWPf0UjEjwFhG
+X-Gm-Gg: AeBDietYgn7INzww1OqVsvkS2gbiShUxYuJnapzyJ72bVB/DYWOB6EsrPupJADGVuth
+ rCG7kol+gB2FKC2y7FaYRXsXTU7EGllMMcucKZTJtZLEAkJnguAbpVk58+VloX68uJUk1snUOk+
+ eWCuf2raMjHL7q01fevDv0aGVqhDy/LdoTKT0eNjSh+alJFhWEnFCBMXJ/iqXyzH1p7vOtDhis1
+ EUmih65f9/Vo0sOnuXBd3rfwhZX7qFCjDJEXXfpH4vmfBinjkXJVJGApcoQMgDTe2RA6Llxa5lF
+ rldf
+X-Received: by 2002:a05:7022:b81:b0:119:e55a:9c03 with SMTP id
+ a92af1059eb24-12bfb765d17mr9265257c88.31.1775652566320; Wed, 08 Apr 2026
+ 05:49:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA4MDExMiBTYWx0ZWRfX6Vmqmfu4PGzH
- lOXASTkOO2M8daCm7ypSNCI6sRcEVIMFLF+35GOXY0z6NWR5fqc3WF+Pb1CdLz6qaYInCguNuKl
- cT37dcbGOeEBenX8AKEaGizsvsvlWpNK46DDdMZCKYdfyws+RxBFueNNOunO/ZEgLGQkqKa5+D+
- OMU3tDImY87DxdY6iDYsoWcMWQymTh7GfwAw7qo4MwnJPoWKTX8oGNiMm4jYcKGqZCJeJ9+Kd5y
- ZvfsMOAlT23bq+2cRPeNRJnV1Su4Rfvx/7Yy3OIstvzGf8tuZqcj7Heqw9Qk9UGSXsWRMy4C6sC
- svPrjOkZ623bOW3rom1Ak7rR2n1vYOmnY+oOR2awQKww5GaOEhUsDoTZzT7qUUtxK5LVAExFjBl
- 5DzHEpCAzkfKjwk3Y352D4/G4cv9FiHb3pXvdnio4UknjlxJekJyJyutU+Ghz60mzwMalpxFKJa
- EUbPGzZ5FJcGckSe5Jg==
-X-Proofpoint-GUID: 8qtxsLyAPx5zluVTVIdcsOsVa_5ewHfc
-X-Proofpoint-ORIG-GUID: 8qtxsLyAPx5zluVTVIdcsOsVa_5ewHfc
-X-Authority-Analysis: v=2.4 cv=K4AS2SWI c=1 sm=1 tr=0 ts=69d6483f cx=c_pps
- a=rz3CxIlbcmazkYymdCej/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
- a=xnw-sE8SsPs_kYMhUbAA:9 a=bFCP_H2QrGi7Okbo017w:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-08_03,2026-04-08_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 impostorscore=0 lowpriorityscore=0 clxscore=1015
- phishscore=0 malwarescore=0 spamscore=0 bulkscore=0 adultscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2604010000
- definitions=main-2604080112
+References: <20260406142411.2992618-1-daniel@thingy.jp>
+ <20260406142411.2992618-3-daniel@thingy.jp>
+ <c300ac4f-f38a-4a0d-bed9-65588b3308d8@kernel-space.org>
+In-Reply-To: <c300ac4f-f38a-4a0d-bed9-65588b3308d8@kernel-space.org>
+From: Daniel Palmer <daniel@thingy.jp>
+Date: Wed, 8 Apr 2026 21:49:14 +0900
+X-Gm-Features: AQROBzCzfRBpGRFGg4APZCRiYAfo1VMK34upR4HtmeaCpsvq7uq_znTLohg7ZL8
+Message-ID: <CAFr9PXk-fJ_kbqd08LHtCdNfid=MVAr8yEj25o_yJghh7qRB=A@mail.gmail.com>
+Subject: Re: [PATCH v2 2/5] m68k: Fix writew(), writel(), readw(),
+ readl() endianness
+To: Angelo Dureghello <angelo@kernel-space.org>
+Cc: visitorckw@gmail.com, bmeng.cn@gmail.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,99 +112,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the nvmem_cell_read() and nvmem_cell_write() documentation to
-describe the new bit field operation mode.
+Hi Angelo.
 
-The documentation now clearly explains:
+On Wed, 8 Apr 2026 at 21:12, Angelo Dureghello <angelo@kernel-space.org> wrote:
+> mmm, "currently broken" ?
+> If you remove bigendian read/write the driver framework will fail
+> to work with coldfire/m68k stuff.
 
-For bit field mode (nbits > 0):
-- Read: extracts the bit field from raw hardware bytes
-- Write: performs read-modify-write to preserve other bits
-- Requirements: buffer size must be sizeof(u32), cell size <= 4 bytes
+I'm not sure who/what decided this but in Linux at least these are
+meant to be read little endian and convert to cpu endian.
+Classic m68k in linux works like that. Coldfire in Linux is currently
+the same as u-boot on internal registers and but everything else has
+the "correct" behaviour. I think that is so PCI can work.
 
-For non-bit-field mode (nbits == 0):
-- Read/Write: direct byte-level access
-- Requirements: buffer size must equal the cell size
+> I tested the patchset over master in stmark2 board, seems this patch is
+> breaking dspi cs init:
 
-This helps developers understand when to use each mode and the
-associated buffer size requirements.
+Thank you for checking and sorry for the breakage.
 
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
----
-Changes in v4:
-1. Added explicit documentation for all `@cell` parameters:
-   - `@cell->offset` - Byte offset within NVMEM device
-   - `@cell->size` - Size of cell in bytes
-   - `@cell->nbits` - Number of bits (0 = byte-level mode)
-   - `@cell->bit_offset` - Starting bit position
----
- include/nvmem.h | 36 ++++++++++++++++++++++++++++++++----
- 1 file changed, 32 insertions(+), 4 deletions(-)
+> Please find a different solution, that may be using "xxx_le" stuff directly
+> from your code.
 
-diff --git a/include/nvmem.h b/include/nvmem.h
-index dd82122f16f..c3d845c3a7e 100644
---- a/include/nvmem.h
-+++ b/include/nvmem.h
-@@ -43,13 +43,27 @@ struct udevice;
- 
- /**
-  * nvmem_cell_read() - Read the value of an nvmem cell
-- * @cell: The nvmem cell to read
-+ * @cell: The nvmem cell to read, containing:
-+ *        - @cell->offset: Byte offset within the NVMEM device
-+ *        - @cell->size: Size of the cell in bytes
-+ *        - @cell->nbits: Number of bits to extract (0 = read entire cell)
-+ *        - @cell->bit_offset: Starting bit position for extraction
-  * @buf: The buffer to read into
-  * @size: The size of @buf
-  *
-+ * For cells with bit fields (@cell->nbits > 0), this function:
-+ * - Reads the raw bytes from @cell->offset in hardware
-+ * - Extracts the bit field using @cell->bit_offset and @cell->nbits
-+ * - Returns the extracted value in @buf
-+ * - Requires @size == sizeof(u32) and @cell->size <= sizeof(u32)
-+ *
-+ * For cells without bit fields (@cell->nbits == 0):
-+ * - Reads raw bytes directly from @cell->offset
-+ * - Requires @size == @cell->size
-+ *
-  * Return:
-  * * 0 on success
-- * * -EINVAL if @buf is not the same size as @cell.
-+ * * -EINVAL if @size doesn't match requirements
-  * * -ENOSYS if CONFIG_NVMEM is disabled
-  * * A negative error if there was a problem reading the underlying storage
-  */
-@@ -57,13 +71,27 @@ int nvmem_cell_read(struct nvmem_cell *cell, void *buf, size_t size);
- 
- /**
-  * nvmem_cell_write() - Write a value to an nvmem cell
-- * @cell: The nvmem cell to write
-+ * @cell: The nvmem cell to write, containing:
-+ *        - @cell->offset: Byte offset within the NVMEM device
-+ *        - @cell->size: Size of the cell in bytes
-+ *        - @cell->nbits: Number of bits to write (0 = write entire cell)
-+ *        - @cell->bit_offset: Starting bit position for insertion
-  * @buf: The buffer to write from
-  * @size: The size of @buf
-  *
-+ * For cells with bit fields (@cell->nbits > 0), this function:
-+ * - Performs Read-Modify-Write to preserve other bits at @cell->offset
-+ * - Masks and shifts the value to @cell->bit_offset position
-+ * - Merges with existing bits outside the @cell->nbits field
-+ * - Requires @size == sizeof(u32) and @cell->size <= sizeof(u32)
-+ *
-+ * For cells without bit fields (@cell->nbits == 0):
-+ * - Writes raw bytes directly to @cell->offset
-+ * - Requires @size == @cell->size
-+ *
-  * Return:
-  * * 0 on success
-- * * -EINVAL if @buf is not the same size as @cell
-+ * * -EINVAL if @size doesn't match requirements
-  * * -ENOSYS if @cell is read-only, or if CONFIG_NVMEM is disabled
-  * * A negative error if there was a problem writing the underlying storage
-  */
--- 
-2.34.1
+mmm so I did try that for nommu classic m68k in Linux because it's
+also "broken" there and got told to fix readl() etc.
 
+Would putting this in some #ifdefs so coldfire keeps the current
+behaviour and classic m68k matches Linux be acceptable?
+
+Thanks,
+
+Daniel
