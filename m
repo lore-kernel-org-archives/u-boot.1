@@ -4,62 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D724D10F9940
-	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 14:18:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FBBB10F9945
+	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 14:51:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E6A784105;
-	Wed,  8 Apr 2026 16:18:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
+	by phobos.denx.de (Postfix) with ESMTP id 15C2A84105;
+	Wed,  8 Apr 2026 16:50:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="kjWrCaDt";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s/MecrDF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C787E84105; Wed,  8 Apr 2026 16:18:38 +0200 (CEST)
-Received: from mail.kernel-space.org (unknown
- [IPv6:2a03:4000:b:d08:14a9:1bff:fedc:75ad])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3DB0C84106; Wed,  8 Apr 2026 16:50:57 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83A3B840AB
- for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 16:18:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=kernel-space.org
+ by phobos.denx.de (Postfix) with ESMTPS id 22BC0840AB
+ for <u-boot@lists.denx.de>; Wed,  8 Apr 2026 16:50:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=angelo@kernel-space.org
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
- s=s1; t=1775657915;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=xPNVzg1wYJaoSHgbjsUSfONU8f4lAQdOPKjljDO4l7g=;
- b=kjWrCaDt3EWxyR2n+lofRxcBow9LvOdv1IwGhV023f0YCq0yDzYGwy9oslZ+rEAR9TMZ1/
- 8ywDdoL+vmRLHFqMY4EOUseJS1+X3ng8QT5GdSQg8rC4wG1OJc+XaV8xy0WcBjH+Nn4eZx
- W8RL9BbDEZ/HtaI8nQ8eCJG1vZsD6LI=
-Received: from [IPV6:2a07:7e81:7daa:0:62cf:84ff:feee:627] (<unknown>
- [2a07:7e81:7daa:0:62cf:84ff:feee:627])
- by oreshnik (OpenSMTPD) with ESMTPSA id 2c7f5ba8
- (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
- Wed, 8 Apr 2026 14:18:35 +0000 (UTC)
-Message-ID: <949eaa9b-f46b-40d7-a5be-c13450fe754e@kernel-space.org>
-Date: Wed, 8 Apr 2026 16:18:35 +0200
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7dbba5076c8so2415183a34.0
+ for <u-boot@lists.denx.de>; Wed, 08 Apr 2026 07:50:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1775659854; x=1776264654; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=J+dY96nClOUZpFW6fDzHnYUI/l9Ky8hv97kGQwKq0n0=;
+ b=s/MecrDFRYGWQp9PgrL1C+P1iiEzCFv1/n6dx7D81jgYeuhZjGwG6xPB3Jvw/8s+k4
+ AR2Mao7Y7RD+s/faCrXua0pBTyoJ6tdOve8NzSTHlUweyEoYr32nauiDiWuxr9Aqj+kh
+ dP5IRvsL+dx5I1+UQcqjvPi620QDfbhKP9qnQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775659854; x=1776264654;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=J+dY96nClOUZpFW6fDzHnYUI/l9Ky8hv97kGQwKq0n0=;
+ b=Pi+A45bw0SmOcpv3xNsPkW/GVsO6H+HQMGowI7PLIFn+MO1xtbIRJdGiLAX9zlcJp6
+ GtArW1BmT7OjK7E/v2vCYM7IShHLyjdCgO1F1Gs9yCL9n91NxOUKu3Q1nCxTCcTea9et
+ tnxkiUyrlrGzLiayzeRXhQllkcMqQuqRTK/cGqYDrFF8IV5545doZuW2U9YgggMu/Rch
+ mbptAmk//q5VsqVTUHVEcOOiG5ZUz/Wj04DtHcaV8j0VVG+WyFzbud6thVUwI4quKaR5
+ G+JghxputjjwSGdEvTUyJbcgwJaQ7N+vo0NwQWPNoT1s95K+TYjn8B9LruwCmw5pf3cF
+ VT3g==
+X-Gm-Message-State: AOJu0YxzSKiOijTAawZzk80ttYTWV1AccVHP3ahW5JuOigfgk4gLfIMl
+ syCgLG7QUwI56cKl6e7BHQCjtpqgBeS7myMGGNGO0heDhmU7ZTYA9QphNYfzyna7dURB5zSIDO9
+ 7OCaM6Mw=
+X-Gm-Gg: AeBDietgnu+W+iPuideUP+yL4dY3dobAmp0npgtxHDvBQ9hrHD7TOgmKzMiN+W3KKRv
+ inIFcXK4sUrmSyiiZW8+BfmHaPbbzCFLe7wVn3A5dXQ7MWkC+DhSsQsiMc9w4LveaVAHL7qM/KC
+ br0biBwGu14hyoPVHPX0RpFr3/tqoA6xfvmj7YMtyLitBX33RF34c7dAhKRxEzxLshqdWbB8ae2
+ rb6IHRAF7GM5EGmBhZC6+LUazkmpHwV+sXj2CQx+Uy35Ab4RYkpI4KCqjLCyV+Zu2/U1a7TLFDh
+ PSw1Whav8upN/WZVa8YUIYOL5jjIKADNspfoSDaNNvGYXLt3NiVlbrHH8Ck+lKE1F880fahiC2J
+ EVSgzIK4vv0czU9u4N15zuZ86BcK+Z8cNRI8RLQjKZCjRwV+r8nJKiAfDfk/gxA33zA3BBMJvv3
+ Ls05SMG1KqaG/PsD0lR/3bhrE2/C/0PAtaK2YW9W+TddlVfI+eTivSKsb7CvpBgNmZ2aCWflhGW
+ /GYeTIuL7BIeHdRMQV9qlf0Aw8Bg4mZTkDO5RULhZCD0uU1bSgkA0lYVg==
+X-Received: by 2002:a05:6830:2409:b0:7d7:c92a:1d73 with SMTP id
+ 46e09a7af769-7dbb73b3f48mr16383586a34.8.1775659853796; 
+ Wed, 08 Apr 2026 07:50:53 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7dc081753f6sm1514644a34.6.2026.04.08.07.50.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Apr 2026 07:50:53 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Sean Anderson <sean.anderson@linux.dev>
+In-Reply-To: <20260407164011.210590-1-sean.anderson@linux.dev>
+References: <20260407164011.210590-1-sean.anderson@linux.dev>
+Subject: Re: [PATCH] Update my email address
+Message-Id: <177565985276.779397.17389305711307230329.b4-ty@konsulko.com>
+Date: Wed, 08 Apr 2026 08:50:52 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/5] m68k: Fix writew(), writel(), readw(), readl()
- endianness
-To: Daniel Palmer <daniel@thingy.jp>
-Cc: visitorckw@gmail.com, bmeng.cn@gmail.com, u-boot@lists.denx.de
-References: <20260406142411.2992618-1-daniel@thingy.jp>
- <20260406142411.2992618-3-daniel@thingy.jp>
- <c300ac4f-f38a-4a0d-bed9-65588b3308d8@kernel-space.org>
- <CAFr9PXk-fJ_kbqd08LHtCdNfid=MVAr8yEj25o_yJghh7qRB=A@mail.gmail.com>
- <3c748627-9273-4ab2-9d13-56869dcf613b@kernel-space.org>
- <CAFr9PXmj2_0g6BkHLAeuNfo8M-CCnjtozfrB6unJ+QvQxYmy3A@mail.gmail.com>
-Content-Language: en-US, it
-From: Angelo Dureghello <angelo@kernel-space.org>
-In-Reply-To: <CAFr9PXmj2_0g6BkHLAeuNfo8M-CCnjtozfrB6unJ+QvQxYmy3A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,69 +95,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Daniel,
+On Tue, 07 Apr 2026 12:40:10 -0400, Sean Anderson wrote:
 
-On 4/8/26 15:40, Daniel Palmer wrote:
-> Hi Angelo,
+> Soon I will no longer be working at SECO. Update the mailmap to redirect
+> to my linux.dev address which I still have access to.
 > 
-> On Wed, 8 Apr 2026 at 22:26, Angelo Dureghello <angelo@kernel-space.org> wrote:
->> yes, thanks, please try to find a solution protecting coldfire for now.
-> 
-> So for now I have put #ifdefs in so coldfire retains its current behaviour.
-> 
->> I will try to understand better why Linux operates differently from u-boot,
->> i think pci was involved here but actually i don't remember, need to
->> study this deeper.
-> 
-> I thought maybe this change in m68k might be recent but in Linux it
-> seems to have been there since the import into git 22 years ago.
-> 
-> In the linux docs (https://docs.kernel.org/driver-api/device-io.html)
-> it says this:
-> 
-> Note: On some architectures, the normal readl()/writel() functions
-> traditionally assume that devices are the same endianness as the CPU,
-> while using a hardware byte-reverse on the PCI bus when running a
-> big-endian kernel. Drivers that use readl()/writel() this way are
-> generally not portable, but tend to be limited to a particular SoC.
-> 
-> So I think maybe coldfire got a "reads native endian, no swap"
-> readl()/writel() and then when PCI support was added a hack was
-> needed. But somehow normal m68k got it the other way around. <shrug>
-
-mmm, so from a fast look:
-
-apart for M5235EVB_defconfig:CONFIG_CMD_PCI=y  
-but this board has no PCI bus, so it should be some config copy/paste,  
-
-there is no other board using pci for coldfire, maybe either no pci driver
-working (NXP driver may work ?) or tested for them, so there was never
-any need for swapping LE for pci. But just an assumption, i can be totally 
-wrong since some nxp board has been removed and some coldfire have pci.
-
-So this part 
-
-#if !defined(__BIG_ENDIAN)
-#define readw(addr)		(*(volatile u16 *) (addr))
-#define readl(addr)		(*(volatile u32 *) (addr))
-#define writew(b,addr)		((*(volatile u16 *) (addr)) = (b))
-#define writel(b,addr)		((*(volatile u32 *) (addr)) = (b))
-#else
-
-is probably non functional from a pci driver since still "be" r/w. Should
-be replaced with _le stuff. But should go deeper when i have some time.
-
-> 
-> Anyhow, sorry again for breaking your board.
 > 
 
-as i said, no problem. We tested it before, that's ok.
+Applied to u-boot/master, thanks!
 
+[1/1] Update my email address
+      commit: a724ec74947522a4424876aac9cb60ee8d2e49a6
+-- 
+Tom
 
-> Cheers,
-> 
-> Daniel
-
-Regards,
--- Angelo
 
