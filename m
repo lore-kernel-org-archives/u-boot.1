@@ -4,99 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2270EA3C59
-	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 13:36:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96C0CF31E21
+	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 14:48:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79D3484142;
-	Thu,  9 Apr 2026 15:36:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C30378407E;
+	Thu,  9 Apr 2026 16:48:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cK66sgLa";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="InpK25Dj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9317A8414B; Thu,  9 Apr 2026 15:36:54 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 1F1DD84099; Thu,  9 Apr 2026 16:48:12 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98306840B0
- for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 15:36:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 934FE83CF5
+ for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 16:48:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-488b00ed86fso9973345e9.3
- for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 06:36:52 -0700 (PDT)
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7dbcd61429cso463857a34.2
+ for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 07:48:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1775741812; x=1776346612; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:subject:cc
- :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=rZLwfRaHT3u3wUIuaugegVpr0T5uM/7zDGwrA6N7Z1o=;
- b=cK66sgLaE5f9HnY/n890QVCQzhZvTnU92h6/Pv20O1IfoKSP1/af1It0f3AATcII3k
- DoF003SRY+DxzBQfwlVoiPhm9CxDAPrx0BUk1d0WWpeZT+udL8w6jZ1U4FVixZryD54u
- JWLKPMrL1wgDcLzLt3/FtwnNrVhr6H0WQ4UCknIO/aVVDLZoPZbHs3iLoG8BAmg4hQhz
- e4x+yfoWNqqFkSQ9hbnGiX2YViGAAobZ66UGAJY8XSrYPEeMEMUA9sSIXMRV+hzuESE9
- l2udGsdUAARP8CcJflVkUrwOKnOKV8nAIeQPYU26dnsMMLOV95xrp/AThWno2cAp6JyQ
- VYWQ==
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1775746088; x=1776350888;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=dA2BEfvSYiDFfXDP8hmBc6qmvHdhWLAahf8w4Wg9Z94=;
+ b=InpK25DjCIKGfhMcrclsoLsrNGbge0ovkzmi5fE3O2yBbgbA2tvh2mwROxVrc1l4Kn
+ YvUNvhhdqU9D8pRayKzobmgGOI9mLEWNxC5OC4Jai7QA4KAT21rHR5euXuoU4J9ibo+P
+ LwEN/89CshtQt5UuxzaR6Zs9nyS3CpkFTKtwyhUAaxBCkGH3Ep0qJ1GXReRsxQVfqL2m
+ ZtpzPxw5X15CRjpJIzekpDunaULNU8pYnCuivRw4Ba7UEJ9e1eCR02njFwk2YPK9ZEiU
+ 4V6IElLYGV33xvmWFMProqsdY7IndnBF85D9Dm58Gn653lB+FN2DR6fnUKroizsn3jlF
+ y1Bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775741812; x=1776346612;
- h=in-reply-to:content-disposition:mime-version:references:subject:cc
- :to:from:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rZLwfRaHT3u3wUIuaugegVpr0T5uM/7zDGwrA6N7Z1o=;
- b=pafxIvP8o3D3zI5TQ5sGDB9TdBihj+GDdi+q7SmU/s2BEDYAGYuyZbzAO+/ADJpfgM
- NgdUi/KSZmPNT5FA91tJW9jNZhWwucTSsls2EJIaSWwJKvntS2Hvs88oOfZTa2Y3gMnE
- 4yIwrcuuMIdJSPNRowOoiQNGGdD2oOXJv4xdXjR6RImZ1AxAKgirxHDkaJuhK5/ZsfF7
- zSVEtLFjwr7q5Cte7HMOI/+2uBiuB3lnwx+lL5pAKUx3+mScjEZQDk+WfZhlVClinkNH
- fQ433sQi5jvBQXgiGjE/bEVWTPTk13By44QE9mIDAT9vMs+d9TIq8TZ0QvyiAmh7yRHp
- oZmw==
+ d=1e100.net; s=20251104; t=1775746088; x=1776350888;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dA2BEfvSYiDFfXDP8hmBc6qmvHdhWLAahf8w4Wg9Z94=;
+ b=V5yUrhCojNgyEARz3758CUm9IFrkk+NXnR1e2iyAguKQluGEeyCCWmGy8otrUEWr+Y
+ fDgvaT+W3hqb+kY/jGz2/ms2AIL5+W+x96n14G3HXIBs74Zzp2KeDhHnslUoX+DdQQ3Q
+ 9svh6/ZcbDDuco1e+D1YKkhrP17QHO1UaH4yC3iad3ChskWGrtLDVfD/QWQL5szQng0Q
+ HZGxgcJLBQl1ANvH+aczEttXnsBiLTpBf2H5JshAq1rbVTSDrU1wPV4h88AT160cu5KI
+ 9dYwo7Wp3PA/JX83YnN8baLfRbWA7rMM/LG80TKQC7c7vDba1V6D6cinF19DcKogn3q7
+ ZOJQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV0gl22yy2ms/M7A2k45gc+Yh1mrOzffZDc9NsswJXqIOuSA9yxiI0n6WkJcjthv/R/uWIWohw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwmHTpZyyxwWO59BoPK1xXvFpzA/jO4faFRWtzVevY2jmsonOL8
- FjQAZYYmAL1rvE/XtRei4iulTF+durPHyYLYW/grTDxKtu3WGJq7PWna
-X-Gm-Gg: AeBDievQL2Ff7ZEFXAKbvfEm6pZRy4SpWr5wnq1r6X54VG22cmhju5Y/JOg2VbPI1sf
- nOwT4ihDLFliBHhkk7jk0u6hS0gA1HAJjRHoYNxT87MluGQvDpHidXjKsIAilRCBC7jAJZYlZxJ
- qQoYrvt7d8RPnwv+azTjxUCcbFz0oWt/YV3srQNqRsoiLJVYhJgiXrFX32atl77Ik6ZARx2TcAt
- aWuJFNYuRGK9qh7LXgasQ1F/0iYKuvpc8jYwBCBVhQFUUDGGV5yN13KbnDqR1KaD68oO0q0uH4d
- oidFmLgrwjj7tIQ/ZmQiE3Xfpap6miuK9VlSpoEIaG+h8n4miXITu3C6+OO81Hh1VEERSWmk/RD
- eeJ3gi+1mmmCb+lhmUktNUVEpMQT5BJyg3IcaMN3mLsVEuh1LBLAqJEPqf8w8RP4TEeIgJ16446
- 148lJCVl1IEOyqhfUGCgLFl+jB4dYa9pfWFg9QQV++4cbdi65LJ9iOxReQkDUV04XzG/zrgQsuV
- jnvb6Vn
-X-Received: by 2002:a05:600c:19d4:b0:485:30d4:6b9e with SMTP id
- 5b1f17b1804b1-488cd03c4b3mr55647965e9.21.1775741811802; 
- Thu, 09 Apr 2026 06:36:51 -0700 (PDT)
-Received: from Ansuel-XPS. (host-82-61-192-155.retail.telecomitalia.it.
- [82.61.192.155]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488cd1ed16esm39083485e9.6.2026.04.09.06.36.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Apr 2026 06:36:51 -0700 (PDT)
-Message-ID: <69d7ab73.050a0220.ecca9.2809@mx.google.com>
-X-Google-Original-Message-ID: <aderbwU73EfHgDb4@Ansuel-XPS.>
-Date: Thu, 9 Apr 2026 15:36:47 +0200
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Peng Fan <peng.fan@nxp.com>, Justin Klaassen <justin@tidylabs.net>,
- Neha Malcom Francis <n-francis@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jamie Gibbons <jamie.gibbons@microchip.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, Harsha Vardhan V M <h-vm@ti.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- "Lucien.Jheng" <lucienzx159@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v5 5/6] misc: fw_loader: introduce FIP loader driver
-References: <20260403135205.26979-1-ansuelsmth@gmail.com>
- <20260403135205.26979-6-ansuelsmth@gmail.com>
- <CAFLszTjHv+vVunXKHW8ppyq0z3Tr=LZTqiFQEGc4nFcTWwiFgA@mail.gmail.com>
+ AJvYcCXEzspldRp2flbQK6gLYtFEZ6fNz6iDKruoxeGXzICeV/OZjslzy40oN2YRsldzBX4Tej5RL/8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzTXKEDaxcFFJy9LD2TnFbp9aT5ApJ5r37Y/UUgMjLTp570TW9T
+ IohDJ5vW3twE0Lq1RLFblnPg6wvAw0BkGaXyxoNMeLgaHdWlGNJwZrm5ozFAVjH/5w8=
+X-Gm-Gg: AeBDiesCpXq4B7LGycc8XRSWZ8VHr8KYT4UcpUmttRbDCoci2qjkPbzhw4DkTWjGNTT
+ Z/WrrBfHQkFwup920HOjCapXrbnlXVuBxc2HQ/T5TbCck2QOOHh1NnBueFx2tC8d317mJlHOUCg
+ kovtPr7rMb/rG6UT5fdAUU0l6d8psI1gQlE8xNW+xWoXFCTzwE0Hf9wjQEI6ePeY/0bF8pnhdlt
+ V9c1YWPPeTkDjSS7+IVbw9/hmsxrZkTXpmsn0tJCbkAClkqFPrS2PQlP6MF+QsBb96d8o3ZMREo
+ +OcI+7e7fCpM+YLxs9papyFWXHGeFm9s2o32Br9muCpq8M31UjrzqLMVXvkllXroK8cFQttChlJ
+ Sk8kBZ0CG7qGYw+rWM57nkVtp+Z40Of348cWdblyjGv5aOTZkTS+HYWwzsaYJagtT2DVs7YIKEv
+ Os8WUHetcbS6zutxRDRPzDU0EzWqn1NdY9ibq3gHzukvxNfPl7YMG+8OuXycxQMvbnEaQaz1+yk
+ g==
+X-Received: by 2002:a05:6830:82ab:b0:7d7:f146:873a with SMTP id
+ 46e09a7af769-7dc16ded8demr2247450a34.2.1775746088293; 
+ Thu, 09 Apr 2026 07:48:08 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:a548:cf0c:d054:fd01?
+ ([2600:8803:e7e4:500:a548:cf0c:d054:fd01])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7dbfc1cb79esm4940415a34.15.2026.04.09.07.48.07
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 09 Apr 2026 07:48:07 -0700 (PDT)
+Message-ID: <0d32e594-8cca-4d59-b838-442ce2cad394@baylibre.com>
+Date: Thu, 9 Apr 2026 09:48:06 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjHv+vVunXKHW8ppyq0z3Tr=LZTqiFQEGc4nFcTWwiFgA@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] boot/fit: fix misleading comment
+To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ James Hilliard <james.hilliard1@gmail.com>
+References: <20260409-boot-fit-fix-8-byte-alignement-for-overlays-v2-1-32a7878e134a@baylibre.com>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <20260409-boot-fit-fix-8-byte-alignement-for-overlays-v2-1-32a7878e134a@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,123 +108,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Apr 06, 2026 at 11:14:43AM -0600, Simon Glass wrote:
-> Hi Christian,
+On 4/9/26 8:15 AM, Julien Stephan wrote:
+> When load address is specified but set to 0, we ignore it and load in
+> place instead. The current comment is misleading, so update it.
 > 
-> On 2026-04-03T13:51:57, Christian Marangi <ansuelsmth@gmail.com> wrote:
-> > misc: fw_loader: introduce FIP loader driver
-> >
-> > Introduce a variant of the FS loader driver to extract images from FIP
-> > image. These image can contain additional binary used to init Network
-> > accelerator or PHY firmware blob.
-> >
-> > The way FIP handle image type is with the usage of UUID.
-> >
-> > This FIP loader driver implement a simple FIP image parser that check
-> > every entry for a matching UUID.
-> >
-> > Similar to FS loader, this driver also support both UBI and Block
-> > devices.
-> >
-> > Also an additional property is added to handle special case with eMMC
-> > that doesn't have a GPT partition and require a global offset to
-> > reference the FIP partition.
-> >
-> > An example usage of this driver is the following:
-> >
-> > [...]
+> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+> ---
+> It turns out that the else is not useless. The comment associated to it,
+> was misleading, so update the comment instead of removing the else
+> branch
+> ---
+> Changes in v2:
+> - update comment instead of removing else branch
+> - Link to v1: https://lore.kernel.org/r/20260324-boot-fit-fix-8-byte-alignement-for-overlays-v1-1-257b132b6bda@baylibre.com
+> ---
+>  boot/image-fit.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> > diff --git a/drivers/misc/fw_loader/fip_loader.c b/drivers/misc/fw_loader/fip_loader.c
-> > @@ -0,0 +1,578 @@
-> > +static int blk_read_fip_firmware(struct firmware *firmwarep,
-> > +                              struct blk_desc *desc,
-> > +                              struct disk_partition *part_info,
-> > +                              unsigned int part_offset,
-> > +                              const struct fip_toc_entry *ent)
-> > +{
-> > +     ...
-> > +     size_t size = ent->size;
-> > +     ...
-> > +     blkcnt = BLOCK_CNT(size + firmwarep->offset, desc);
-> > +     blkstart = ent->offset_address + firmwarep->offset;
-> > +     ...
-> > +     if (pos) {
-> > +             to_read = min(desc->blksz - pos, (unsigned long)size);
-> > +             ...
-> > +     }
-> > +
-> > +     /* Consume all the remaining block */
-> > +     for (i = 0; i < blkcnt && read < size; i++) {
-> > +             to_read = min(desc->blksz, (unsigned long)(size - read));
-> 
-> This reads the full ent->size bytes but starts at ent->offset_address
-> + firmwarep->offset. Compare with ubi_read_fip_firmware() which
-> correctly reads (size - offset) bytes. The blk variant should also
-> adjust size by firmwarep->offset so the behaviour is consistent.
-> 
-> > diff --git a/drivers/misc/fw_loader/fip_loader.c b/drivers/misc/fw_loader/fip_loader.c
-> > @@ -0,0 +1,578 @@
-> > +static int fw_get_fip_firmware_size(struct udevice *dev)
-> > +{
-> > +     ...
-> > +     return ent.size;
-> > +}
-> 
-> ent.size is u64 but the function returns int. This could truncate
-> large sizes. The same issue exists in fw_get_fip_firmware(). How about
-> using ulong which is the common type in U-Boot?
->
+> diff --git a/boot/image-fit.c b/boot/image-fit.c
+> index 067ad236081..2d2709aa5b1 100644
+> --- a/boot/image-fit.c
+> +++ b/boot/image-fit.c
+> @@ -2282,7 +2282,7 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+>  		printf("   Loading %s from 0x%08lx to 0x%08lx\n",
+>  		       prop_name, data, load);
+>  	} else {
+> -		load = data;	/* No load address specified */
+> +		load = data;	/* load address specified but set to 0 */
 
-Can you better explain this? We need to return int to handle the negative
-error.
- 
-> > diff --git a/drivers/misc/fw_loader/fip_loader.c b/drivers/misc/fw_loader/fip_loader.c
-> > @@ -0,0 +1,578 @@
-> > +static int fw_get_fip_firmware(struct udevice *dev)
-> > +{
-> > +     ...
-> > +     ret = fw_parse_storage_info(dev, &info);
-> > +     if (ret)
-> > +             return ret;
-> > +
-> > +     struct firmware *firmwarep = dev_get_priv(dev);
-> 
-> Please can you move the firmwarep declaration to the top of the block.
-> The same pattern appears in fw_get_fip_firmware_size().
-> 
-> > diff --git a/drivers/misc/fw_loader/fip_loader.c b/drivers/misc/fw_loader/fip_loader.c
-> > @@ -0,0 +1,578 @@
-> > +     if (ent.size + firmwarep->offset > firmwarep->size) {
-> > +             log_err("Not enough space to read firmware\n");
-> > +             return -ENOMEM;
-> > +     }
-> 
-> I suspect this check is wrong. If firmwarep->offset is an offset into
-> the FIP entry, you likely want to verify that (ent.size -
-> firmwarep->offset) fits in the buffer, not (ent.size +
-> firmwarep->offset).
-> 
-> Also -NOSPC might be better, since we are not actually out of memory.
-> When people see -ENOMEM they tend to want to increase the malloc size.
-> 
+It would be even more clear to me if it said something like:
 
-This might be confusing but I feel -ENOMEM is correct here. In
-firmwarep->size we set the maximum size where we can store the firmware
-data so the random guy might be correct to increase malloc size.
+"fit_image_get_load() succeeded but it set load address to 0".
 
-I posted v6 with all the other comments addressed, these 2 are the only one
-left.
 
-> > diff --git a/drivers/misc/fw_loader/internal.h b/drivers/misc/fw_loader/internal.h
-> > @@ -25,11 +25,13 @@ struct phandle_part {
-> > +     int partoffset;
+>  	}
+>  
+>  	comp = IH_COMP_NONE;
 > 
-> partoffset is declared as int but used as unsigned int in
-> fip_storage_info and read from DT with ofnode_read_u32(). Please can
-> you change this to u32 for consistency.
+> ---
+> base-commit: f0000b4a57e9edf8ff8454b9056d767466dff57f
+> change-id: 20260324-boot-fit-fix-8-byte-alignement-for-overlays-381b0a17bf4e
 > 
-> Regards,
-> Simon
+> Best regards,
 
--- 
-	Ansuel
