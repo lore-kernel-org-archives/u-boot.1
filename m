@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09E3AE9DE62
-	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 08:01:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A191E9DE62
+	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 08:01:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21B6184144;
-	Thu,  9 Apr 2026 10:01:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0EAD5840D8;
+	Thu,  9 Apr 2026 10:01:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SrIe9fLP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dKa8qYyV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D68E8413A; Thu,  9 Apr 2026 10:01:11 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id AD3DA839D5; Thu,  9 Apr 2026 10:01:31 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 169E684105
- for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 10:01:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 38E5B840D8
+ for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 10:01:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4888375f735so5331455e9.3
- for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 01:01:09 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-488b00ed86fso6069915e9.3
+ for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 01:01:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1775721668; x=1776326468; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1775721687; x=1776326487; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=aW2gugJkyZ22WphGeCYCMqovQKZmR9g7NH0G6lciFP0=;
- b=SrIe9fLPo7+82VppU4y8yyW/pIdTYZJDcC0p6xFzW22y8cR98QN4UbvitBtHrKfPiU
- ODd5QKQVH4/cmZqLbgxnDQut3ds3C5n5WqA5pZCVrYO4MRfbkAImseIRpv9WBxWvorSR
- Wq1iI04y6GyQgiuyLvLi3Gqz1WwCqoFD2+NHZh409Bigigpkga0GWBEoMTpahjl6wGi6
- kw3kJoenjIyP9K2KUJ0YnojwWuVugt2R9TPLxiGiYyeSbZL7g4FNDkyxfLT9i6lBuZ8j
- ia0+3j1bPq6bzmtWW1JKn9u+qwHxVvfbqLRrJakabLxiyaWHUC4TivgeK9Lic7FxAoIX
- yOnw==
+ :reply-to; bh=WovDVeh3PfdLfhBuKK3xsVS9Ihwbt34LuFpYycxeOsw=;
+ b=dKa8qYyVgW2QN8S1bxgNKXveucW7z9DrA1aHRMEJ99dZ7/b29l8BiVJ5zoEPUE5Iq7
+ PgwXRhVW4rRzgm2GetTd2aEPmtymlzZZYkLm8JSkNkEKcy4QQInDqto4WLET4RWUf7AA
+ T6hOg+xAofIPa2o98rfGVCmeRHEHyE2TX8t0kXvse89GjPVr+pjhrjBUC5POWghiIzSf
+ YKcCNXOHFWugC/QnDBiKjU+EXLESnNSyUXAB4VZWM4Pozix7JuonDMgM5kedfix0qLii
+ Jqh6U8bdXF5ITsVPqwq0qkNergwD+oDa+BkDeOWcCEq+3cTrZOQfT4o5+WoJ16+Op6q8
+ iK4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775721668; x=1776326468;
+ d=1e100.net; s=20251104; t=1775721687; x=1776326487;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aW2gugJkyZ22WphGeCYCMqovQKZmR9g7NH0G6lciFP0=;
- b=ZoH4MeJJXfrk4IbGlR3XlKD8x99o0E91yqniw7Bs8xNk4tTNuilKS7jDSkxDkUWeC6
- AqxggKo/deH+5BtJ0hLxLnrrcdHuKn6hVxFz4aZbu/O+2FnNk0SdBVBqB0eb5uBIM+NP
- GBzhsgzG+6+EqztUZw7VBCgtQ+giBBvriKhryI8ECYC5qjJZxid70IEXT5qlXunaB+Nh
- BJm+dR0tHTypqCcadZhc/FL5gwXsQCgPGFHOjUX9QBW7ORJAnyK5w5gOLEloXURfzcJ0
- xMLMAUl2KmX8w8ILy8vmyA3tasb6FcaV0sIb3NjLhAfATUVYiW603O46ofmvaTJRuWlR
- aXkg==
+ bh=WovDVeh3PfdLfhBuKK3xsVS9Ihwbt34LuFpYycxeOsw=;
+ b=UO6shj/kVm6cAXJ4PEaF0CZfZWbj6ojdg+tkYT1vnVIu6utdDS2Vh4LGK2ZLpMnhsD
+ b6HwlgPo52YKc+2o//BUaRcorbo26kIgY1cvUeifl2uJYK+NHMtYa9sdU/s/03CWOxfJ
+ +LRa6K5FyX7IXPkYLJe+mENOJnIyWAKluggCkKGNB/SuUrqd0GjbeUs9i/GhHWmwHy6e
+ G/OOMrlsdckUHCmccNs9tcXBm+4xFrT3TjArmdKw84e6m4wTFlXz1191DAPFVWa615GV
+ oLHImHFrLh/tjk7xJMPMjBRLnI8khKskuzB/2eAeN5M2Yjpk86Tag+GJlM8gRhgk5n78
+ cE8w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXgKg5g1I9mUyvsl3E4v2JbJHisRCyB5uNNUqhNUtMFcPdFJWiJ2jf1gicAet8K7R+zl7N/tMg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzmdbRVVp8ae04xNyGHgb8BvL5acpJk6qcVSbkYaA+Wop1OkLc1
- t6tTQY+byRPJh4tSTUmzvdyfo+A7QxcxIJ9f4e+/4shjLS9M1MRzT1Y4hsfb/rWgJ20=
-X-Gm-Gg: AeBDieuAy+UxcAMXPhzxgYJoMts5Dkgr3/cpSrneqigAJGRTDMGXtzvgZD5OtrgRhTf
- g0/+shktA/MmhV0spItYS/n9e6DUIIFDmz60bC25GRffFuwKNaHXyDmxNOHy3ltlAHIDaSl+Iff
- ouVpShpQwMGJBHwLONPsubp3NIlIzljWuVgDbenNKXqSe1SFGXO7OYmosbMoqppqBM7LzdlGYIT
- OdoPt8ZT4vhQQg0DwMv91YZDj+f+rYRp4tdsUN4N0QCbTqYMnMRZ97KwPWpMl4JF1EXuFHmKUMH
- jJ0m29lp/0UQ5FvLBpGSAw/2SU62025yos74eY3mMR4bH1B3JJygAfisUOI2Aiygi7ewLXwyJRC
- eXtmw18hKyrjmvR8Bb5jAmICBX2iqt2ZD/Eo7t+RQbFbTBO3+pIEEyLWloPW+Gp788hBVxRageb
- d+QMjnLW5sDjg5dPM2P8gzbE/MwiSOXjcqdNwpUEbC+faGWjAh4P/SGuoSgs/lw8WhXh5AWojT0
- NObOSE=
-X-Received: by 2002:a05:600c:8012:b0:485:3f72:323f with SMTP id
- 5b1f17b1804b1-4889974a416mr339869645e9.11.1775721668044; 
- Thu, 09 Apr 2026 01:01:08 -0700 (PDT)
+ AJvYcCXzykqHc3cdOKRx/h/ahZkF1nfyn0V3Rcl9RlfC1GZ8EagAigect/lXsOAFqBYD4UNdad0GtB8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyi+xLdCWMlXDAxsypKRdSd+3ZjVUHlI1vtaSwrZxAHopNLhAq+
+ fs792QzzOrLDCJSL1T69ihxi10qVJZdfYa6rvPU+rO4bgyiFQhq0AYSxlJ+w66D+ykHX/8mMOHv
+ 9oHFJ
+X-Gm-Gg: AeBDieu2Ro9odHZmEvCo0OK6twmwDbklwJNr22r4lUOWqUEkZuAQDIXRYIdE0H2rm6+
+ 3PXjw4giab5CeEoD4u2bbYVd+R+Z5n+h3fqP7DNZYteM5gjVhAVgU35eSJ1UKAZ4Aubwm9OsodC
+ rO0R9VZqcTazqNQAW7p0aypVAZQUbiGLvLnOgjTRAOUK+pQ48ia7MvTo5Ulod9xoJExeJAoskF6
+ m78chbbU3cmRAL2mbTSydYi9mw7kjpuB/2m3gsaJCpmRPhOBfzavs7lzgE6H4FglQGtZkCQHdyH
+ PirVFkXM/t9+hJqFtv6iYdeTrCstdeRYPcnNhg2fiNrtO2pRlhUhqq1pY1woWX9OF+3Udxl6JG2
+ xjUkMxee6ZtezEtzBUfdTt3XCA+R2dALpjf9XgACAG5L2nZzTVV6z8sxNw3FFv0y7nM6JPOscWY
+ O+mYAU5q1WQfXsfrHIIf5kusg6988s2rulRSMOj3mjxRe4OvbqKAAbv0OSWG2kq/IoBKBaBFKAc
+ Dg1iI0=
+X-Received: by 2002:a05:600c:1e0f:b0:488:b1c7:b432 with SMTP id
+ 5b1f17b1804b1-488cd059947mr34737285e9.24.1775721686450; 
+ Thu, 09 Apr 2026 01:01:26 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:70d5:8219:5bd4:e213?
  ([2a01:e0a:106d:1080:70d5:8219:5bd4:e213])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488cf9f350asm36818435e9.8.2026.04.09.01.01.07
+ 5b1f17b1804b1-488cd19ea6fsm53527035e9.2.2026.04.09.01.01.25
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 09 Apr 2026 01:01:07 -0700 (PDT)
-Message-ID: <aea62a67-6634-4ca5-bd41-5a5de7c639be@linaro.org>
-Date: Thu, 9 Apr 2026 10:01:06 +0200
+ Thu, 09 Apr 2026 01:01:25 -0700 (PDT)
+Message-ID: <65597f02-0d66-4bef-9cd1-05c0ff227eb9@linaro.org>
+Date: Thu, 9 Apr 2026 10:01:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 3/4] configs: libretech-ac_defconfig: enable EFI Capsule
+Subject: Re: [PATCH 4/4] configs: libretech-cc_defconfig: enable EFI Capsule
  on Disk
 To: Ferass El Hafidi <funderscore@postmarketos.org>,
  u-boot-amlogic@groups.io, u-boot@lists.denx.de
@@ -88,7 +89,7 @@ Cc: Tom Rini <trini@konsulko.com>,
  Evgeny Bachinin <EABachinin@salutedevices.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>
 References: <20260408-b4-amlogic-sysreset-capsules-v1-0-6f3386eb5124@postmarketos.org>
- <20260408-b4-amlogic-sysreset-capsules-v1-3-6f3386eb5124@postmarketos.org>
+ <20260408-b4-amlogic-sysreset-capsules-v1-4-6f3386eb5124@postmarketos.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -115,7 +116,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260408-b4-amlogic-sysreset-capsules-v1-3-6f3386eb5124@postmarketos.org>
+In-Reply-To: <20260408-b4-amlogic-sysreset-capsules-v1-4-6f3386eb5124@postmarketos.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -136,27 +137,39 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 4/8/26 22:30, Ferass El Hafidi wrote:
-> Everything is already in place for EFI capsule updates, so enabling
-> Capsule on Disk is fairly trivial. This allows updating U-Boot on SPI
-> flash from Linux using fwupd's Capsule support.
+> Everything is in place to allow this board to support EFI Capsule updates.
+> Enable everything needed to support Capsule updates, as well as Capsule
+> on Disk. All this allows updating U-Boot on eMMC directly from linux using
+> fwupd. Also enable DFU_MMC, which is a requirement for EFI Capsule flashing
+> to eMMC/SD to work.
 > 
 > Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
 > ---
->   configs/libretech-ac_defconfig | 1 +
->   1 file changed, 1 insertion(+)
+>   configs/libretech-cc_defconfig | 4 ++++
+>   1 file changed, 4 insertions(+)
 > 
-> diff --git a/configs/libretech-ac_defconfig b/configs/libretech-ac_defconfig
-> index 1a67ca734b8..17d54655017 100644
-> --- a/configs/libretech-ac_defconfig
-> +++ b/configs/libretech-ac_defconfig
-> @@ -23,6 +23,7 @@ CONFIG_DEBUG_UART=y
+> diff --git a/configs/libretech-cc_defconfig b/configs/libretech-cc_defconfig
+> index d5878bdc431..622922e97ee 100644
+> --- a/configs/libretech-cc_defconfig
+> +++ b/configs/libretech-cc_defconfig
+> @@ -16,6 +16,9 @@ CONFIG_DEBUG_UART_CLOCK=24000000
+>   CONFIG_IDENT_STRING=" libretech-cc"
+>   CONFIG_DEBUG_UART=y
 >   CONFIG_REMAKE_ELF=y
->   CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
->   CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+> +CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+> +CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
 > +CONFIG_EFI_CAPSULE_ON_DISK=y
 >   CONFIG_FIT=y
 >   CONFIG_FIT_SIGNATURE=y
 >   CONFIG_FIT_VERBOSE=y
+> @@ -38,6 +41,7 @@ CONFIG_OF_CONTROL=y
+>   CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+>   CONFIG_SARADC_MESON=y
+>   CONFIG_DFU_RAM=y
+> +CONFIG_DFU_MMC=y
+>   CONFIG_MMC_MESON_GX=y
+>   CONFIG_PHY_MESON_GXL=y
+>   CONFIG_DM_MDIO=y
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
