@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CBBDF364AB
-	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 18:18:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03CD2F364AD
+	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 18:19:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF03984106;
-	Thu,  9 Apr 2026 20:18:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7529084223;
+	Thu,  9 Apr 2026 20:18:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Xig6a2O4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="G9U3uj0m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CAFA841C2; Thu,  9 Apr 2026 20:18:46 +0200 (CEST)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
+ id 2846C841C2; Thu,  9 Apr 2026 20:18:48 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD22284106
- for <u-boot+nodisclaimer@lists.denx.de>; Thu,  9 Apr 2026 20:18:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C5DB28416F
+ for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 20:18:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-47018d341f8so896624b6e.3
- for <u-boot+nodisclaimer@lists.denx.de>; Thu, 09 Apr 2026 11:18:43 -0700 (PDT)
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-4042fe53946so577157fac.3
+ for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 11:18:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1775758722; x=1776363522; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1775758723; x=1776363523; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mpyFGZ5jzHSWmU99jbEMREx7iGdaq1yEJah8Z5q7oPM=;
- b=Xig6a2O4lFr4EFY6ZQApzqm4Gh9rCHIUxxBSwWr/9VW9J7Vjx5CFO5JxiY/vF3jh07
- +GNNS1IsJyFT5OanqNincyYE6fK61I9We7BJwwNeWRnXacSAQx7BaLUcJOO04Fa384gc
- wzrKmtTIRhU5pdZPhyN87sXC2YxTm6ukWG3nI=
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=K+UaL4oyrDmFcr0jDkT5kD/FkY6gDPXSe0AwE4ioTbI=;
+ b=G9U3uj0mgdP5RCO3GjiHBLmTuPsVk45Xiq4f30Ryj38fDFv2epTXM3C25l9qsu9hox
+ Jpes4/zZloq6vJcRPXLwC/sbXsSShoJ295dbWZS2clCMyhGYe5ncesyatPFHgT15DveI
+ aDaH7ZdDTiGkdClgMUMCixBMKlcG0S6a534gQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775758722; x=1776363522;
+ d=1e100.net; s=20251104; t=1775758723; x=1776363523;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=mpyFGZ5jzHSWmU99jbEMREx7iGdaq1yEJah8Z5q7oPM=;
- b=ss0/CO44R4JMeJ9tWLs6hAn17ZHKU07wKL9NOd89LE99mAfs7nKc9V3/NN2iMtpK8O
- 1X+gouM2V60d5HteJfixFugjLOABbWUXC001+PLjhkqIMdv/uzzME81kxraQCYG8W50k
- G7dm9wIznn/iXWlZr4ljzjaJ8s+fBhEQR5tlEGmZuHtL3dKUCMbx6ks6w4fDUyssAlyT
- OfTF0oEoU0CBDnTsjOdHmyM1X8yEN4e3yMKR2LZTysmy7KcHBixqMrVq/26/A4wwQZm6
- kpWvIKUCadwYDSnfKySS1VZ+6YfSpqEWdjMH4QK5sAHMTzaGqw8OK3v9YxTQp3xdPdaU
- 25Jg==
-X-Gm-Message-State: AOJu0Yzc6GVrSaQWKKY0l8sxdNmZ0J0V59S8Q04XN4haBGSYYen4z6Me
- zeA/ZePYgnVr7406ddHbU1e/rK0ylotEvT28lEd+b4tARgxxsnQP2h1PJahbNtkFSAM=
-X-Gm-Gg: AeBDieud0FA2JMbnzVfYB3uphtnJDsRSjtcoAnsB4UZ8kZUFFgVls+Hh97PtzMeszkM
- XEfDO3IZ9FTC0Oc4dtj+AlqGYOCM5rw0VkUdoXZZ+hmIg5gw6NJcwBDbs4/q5GJfATJMd7MXwqA
- DhNhcw3/HiIZ5OqAAeZm89wtFMEF5VmDPelj/inuCCCxblplcwi4W+C8F/DjSNKPpTE5VbhYIw1
- PHk14iq6xLZKH6w/2omKkwhO0Wh6ZQWREsyhD8HTtNAv5u1hqqLM6jo/7NeYf2Qu6B5Zr1mrWhY
- o1lN4pEJpBWrgF/rguVQ0HdKIddetaRQmo0UNz+NE8e1RvOOqbSMrls11mU9G8Uf8QhygVptuIC
- vr8+p+S0Jj8equ1+flUW2cV5RT4QFFCxYzTJzReQ4NVRC6MuJV1SAS5LXgzczxrBtAuV18oo6h1
- eeqIVr6hwe2Mgo3VhxCMiv2EmcSS27/ewOVLUorlEVRzE40SBGsI0VcYxpwWPMK/AncXNfpFWpe
- ZFbg3a+m64OORRc6PrzJZHqV5QieEJrcrbWkSPMrRhj/XTzAwD3XQ==
-X-Received: by 2002:a05:6808:1796:b0:462:b520:273a with SMTP id
- 5614622812f47-4789f9ff5c2mr182455b6e.25.1775758722514; 
- Thu, 09 Apr 2026 11:18:42 -0700 (PDT)
+ :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=K+UaL4oyrDmFcr0jDkT5kD/FkY6gDPXSe0AwE4ioTbI=;
+ b=achQRa0MIVAzgi9OPKOWDVgpYyTDeMgtpxL1hMTMRnn957WUSwlhmR9SqxkZYsWfi0
+ g4hc7Pwb9nCA9FLILyo/Z1ph3BvNoqkY1htVKB8Tkh8hMXurIteTyIXFNXTMVWJVJzHU
+ jroubaQ7e5ufWO1hmioKvABBcxAqtLHrbTQRyZPbb6ftfZkiebWIe63fHs3sHK3p1QLA
+ X1SZoSDveN5L2648QyOFbBq/+MhW9XjsPjd6R9/00nF4iGtNwOYocnuUElCS3vymastj
+ 9o7IhJ5PiBhJAcBULfDMtkzrIHo81yCjGnqgRiFqzK1Oeaz6vgpzyvyk3KEQB6iN1d6p
+ rw7w==
+X-Gm-Message-State: AOJu0YxHkI0sGV4eqm8gNbC/9xnmyuSd6I1wgeKQqn3KE0smCAhFuKhE
+ JPnAejRnx7IGLcJy0K2wEmgQN2BdsBGPGxtN8OBUf8/J6nR+hoWKYbnIfKxsTANxRTNwAtombEX
+ 0RrsprtY=
+X-Gm-Gg: AeBDievWveaZ6ocTwvlQMNgjfRv+Db4AIwjA0pJQCu2z56aRPGSK7WyhyVu8S3mWsQg
+ QCkFXL6bvU/2LBOO00V3tLWhyfYOyZUHZ2FF8Xd3irQvDlbgSmrNKwbyO0A63R6n0v3CTpcidqK
+ SZsDtpZCxBL4tJ0Rb4vCgLFO5NL0zYuu7X9fQHFhp6dJ9G88KN9SlW9mrpZIOm406GY0TGr8zY1
+ 8uobfZASgE7WboNslU73kL6/m5liqmYjLnQbZy+x1wetilL4t0OjHSgUS0YyFB0Evim6cKrDEL6
+ Y9F/OueSDUp+yzYT0SnjxfQb4aVi69pWCyL5sthMfo4le6j0pxWzcrnlRLKNODfVzVRNbt6M8oJ
+ vSXf4bsTwYclkCGisIhbSf5oBOV2D9MENcEn72K/guB/jjWt9SSkREfyID0ebu1548AmTBGzQdn
+ bx1oOJTDemCD/G/YJR1kHqXus8qJ4YL8eGjg9n9fdTgzwmWBUETw5hJrwAPP9Pt5HuBsHVdE9MH
+ kJ1x1is11dNN8OHwWQZp6lRBIzzwcCAEOUWik5ml0N8ND4uYWJlYQ==
+X-Received: by 2002:a05:6808:1a20:b0:46c:e542:cc35 with SMTP id
+ 5614622812f47-4789f00c7fbmr161249b6e.37.1775758723399; 
+ Thu, 09 Apr 2026 11:18:43 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-478a2f565d1sm76328b6e.10.2026.04.09.11.18.41
+ 5614622812f47-478a2f565d1sm76328b6e.10.2026.04.09.11.18.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Apr 2026 11:18:41 -0700 (PDT)
+ Thu, 09 Apr 2026 11:18:42 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, u-boot+nodisclaimer@lists.denx.de,
- Paul HENRYS <paul.henrys_ext@softathome.com>
-Cc: sjg+nodisclaimer@chromium.org
-Subject: Re: [PATCH v2 0/1] tools: u_boot_pylib: ensure all Python modules are
- installed
-Date: Thu,  9 Apr 2026 12:18:39 -0600
-Message-ID: <177575860172.1153156.9979437266936408022.b4-ty@konsulko.com>
+To: u-boot@lists.denx.de,
+	Peng Fan <peng.fan@oss.nxp.com>
+Subject: Re: [GIT PULL] Please pull fsl-qoriq-for-2026.07-rc1
+Date: Thu,  9 Apr 2026 12:18:40 -0600
+Message-ID: <177575860044.1153156.2866801666031959087.b4-ty@konsulko.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260331080636.380507-1-paul.henrys_ext@softathome.com>
-References: <20260331080636.380507-1-paul.henrys_ext@softathome.com>
+In-Reply-To: <add3Gk_2psBrgUv8@nxa18884-linux.ap.freescale.net>
+References: <add3Gk_2psBrgUv8@nxa18884-linux.ap.freescale.net>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
@@ -98,28 +96,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 31 Mar 2026 10:06:35 +0200, Paul HENRYS wrote:
+On Thu, 9 Apr 2026 17:53:30 +0800, Peng Fan wrote:
 
-> Add setuptools package configuration to pyproject.toml so that
-> u_boot_pylib is installed as a proper Python package without changing
-> the existing flat directory structure and making sure all modules are
-> installed.
+> Please pull fsl-qoriq-for-2026.07-rc1 for master
 > 
-> Step to reproduce the issue without the patch:
-> git clone https://source.denx.de/u-boot/u-boot.git
-> cd u-boot
-> python3 -m venv myenv
-> source myenv/bin/activate
-> pip3 install tools/u_boot_pylib/
-> ...
-> error: Multiple top-level modules discovered in a flat-layout: ['command', 'terminal', 'test_util', 'tout', 'cros_subprocess', 'tools', 'gitutil'].
+> ------------------------------------------------------------
+> Add env variables to assist boot for various LS boards
+> Add gpio scmi driver
+> Fix setting the function for scmi pinctrl
+> Use standard device tree pin muxing format for scmi pinctrl
+> Fix protocol version fetch for non-CCF platforms in scmi clk
+> ------------------------------------------------------------
 > 
 > [...]
 
-Applied to u-boot/master, thanks!
+Merged into u-boot/master, thanks!
 
-[1/1] tools: u_boot_pylib: ensure all Python modules are installed
-      commit: 2b9828c8024617f14e13ad6bf7d474552d880240
 -- 
 Tom
 
