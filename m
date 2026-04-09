@@ -4,51 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6B40F31E41
-	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 15:39:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DCC9F31E41
+	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 15:40:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8B3F841B9;
-	Thu,  9 Apr 2026 17:38:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=paulk.fr
+	by phobos.denx.de (Postfix) with ESMTP id 2766C83D8A;
+	Thu,  9 Apr 2026 17:40:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 6387C83CF5; Thu,  9 Apr 2026 17:10:31 +0200 (CEST)
-Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4C4A83693
- for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 17:10:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=paulk.fr
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=contact@paulk.fr
-Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id DB4131F8005C
- for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 15:10:24 +0000 (UTC)
-Received: by laika.paulk.fr (Postfix, from userid 65534)
- id 65702B401BA; Thu,  9 Apr 2026 15:10:23 +0000 (UTC)
-Received: from shepard (unknown [192.168.1.1])
- by laika.paulk.fr (Postfix) with ESMTPSA id E9EF5B401B3;
- Thu,  9 Apr 2026 15:10:21 +0000 (UTC)
-Date: Thu, 9 Apr 2026 17:10:19 +0200
-From: Paul Kocialkowski <contact@paulk.fr>
-To: Mikhail Kalashnikov <iuncuim@gmail.com>
-Cc: Philippe Simons <simons.philippe@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Cody Eksal <masterr3c0rd@epochal.quest>,
- Samuel Holland <samuel@sholland.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] sunxi: H616: dram: fix LPDDR3 TRP6 parsing
-Message-ID: <adfBW5aKiDm6TRzZ@shepard>
-References: <20260407164717.7356-1-simons.philippe@gmail.com>
- <f78d23da-0e61-4a06-ae48-22cadd7ac24d@gmail.com>
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DKwM25jZ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id E982C83D8A; Thu,  9 Apr 2026 17:40:41 +0200 (CEST)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 60BA383CF5
+ for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 17:40:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-46aa216a5edso642672b6e.0
+ for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 08:40:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1775749238; x=1776354038; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=wmvzbs8DNaDMUqrspIdPmrMIj1UEJkGFLyaIhe+ygDg=;
+ b=DKwM25jZQgx866IPBOtpwjyOyP+sgnImste2ckFsKGF9XHRCmhTjrePT4nLdQVvj3I
+ qAmKYR9GxYVm3FFMy0REdxAZcI7tNsuIWsFcACHhwOTZFlG9JpTf6ZKe5uXxHeM4D1hi
+ 6A59fg32hGZauMaQd9GOsNJrGXaSNbGavQ1R0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775749238; x=1776354038;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wmvzbs8DNaDMUqrspIdPmrMIj1UEJkGFLyaIhe+ygDg=;
+ b=K0+Dbo5UaTdlRgkW24ToKucVTuLzf/DcMq/oNgHpZdRZ3roCcYbINc36k4fcOi5SFh
+ vxzAT9JiqVzt8tSAyE44+OpFPYTIUcLAQM/fKM+OHlDqgmiEGvxFx99IX4anQ3BryCKA
+ ADzBWE99bZYhQIA/5+d68YdmcT7eGNBdSo0E3iHKm2sXWL6gOKZubpJPIS/gIAo05BSr
+ UiJD5A1q83OXKxXT5ToDo80N9r0Ozl/D5itpMBFX2pjQkpKzPgZ23rTJQwB4yG2X2J1n
+ q/1D6/I7wsnDqMaausGrYD/JaNkFqA79YPWAX/gJoSFMp2+rV7Y5gBY8UPK5nz7J57Hm
+ mqmQ==
+X-Gm-Message-State: AOJu0YxQXiqZ7GMLtNF1j778+V+uPg0v1eU69xBIxyuQwRfHqcmZuSmU
+ Sbp98qeyj/A+wvOaga2q9M+/ABWTJ0lMvrjaw2/2K8AXFB4uaOp9501x5ifAairPUn4=
+X-Gm-Gg: AeBDiesSn6WpuHgH6DCmXZC1maGg8+3kRozXphKkxqzc8ovyce/Z+MoLRt6I9sMDPcs
+ hUgxEHZRBEFMsI9UrA5xYTYbvuw7WPQ0QRQMDnrsKnpd6/pG33hjAjjm+EYW+J1gOIUlXeYuof+
+ hewfUdPF1/0r/qnwvr+FjFQ5pJvw1PJJwh6/AOWTwRV9v8pL46LXGe9gxoWYZ1uyMc7BxysE4/G
+ LWzF3/pvusfjobWIRzkFBtaxayFUjn1K8Eq46VfoP5ovTtUXyDjilQb5I8+7VbZnxpZQJ5VyR38
+ uT2SGwAC76kwDYEGxM5hjZQukYkpsB1ImXUJKjeaIPC7M33bq9cIMdysSfR5L93xVV+x7bRoH9Q
+ 7770zbvQY19At0ACgi6ic153a9qh7ErGCKxhplbxkbn1EiidZPFDJOELQcRAjEY8jgnxXART9Vh
+ 0XI8sK06SBO3HEOlBob/Hyzr1O0NzaCNIZOviX0ZDC9pB7e72BoJ18QBYnCJftslSVerBnmOO1H
+ 3oumFI8GxbVhNsXePe8LRqHU1iAowZq82nnj8ugY+FkRbzw4hA=
+X-Received: by 2002:a05:6808:22a8:b0:467:26e4:7295 with SMTP id
+ 5614622812f47-46ef8321711mr12115571b6e.44.1775749237913; 
+ Thu, 09 Apr 2026 08:40:37 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-47551804168sm4450840b6e.5.2026.04.09.08.40.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Apr 2026 08:40:37 -0700 (PDT)
+Date: Thu, 9 Apr 2026 09:40:35 -0600
+From: Tom Rini <trini@konsulko.com>
+To: =?iso-8859-1?Q?Sebasti=E1n?= Alba <sebasjosue84@gmail.com>
+Cc: u-boot@lists.denx.de, jerome.forissier@arm.com
+Subject: Re: [SECURITY] net: nfs: buffer overflow in nfs_readlink_reply() in
+ legacy NFS path (nfs-common.c) , incomplete fix
+Message-ID: <20260409154035.GM41863@bill-the-cat>
+References: <CAJD=UNd17V=anGd6C=jM8YzV10uTwEewae+CD1YGym5=JGeuiw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FsDOLbvbGNg7guXs"
+ protocol="application/pgp-signature"; boundary="2bx9njEKrS6aWC49"
 Content-Disposition: inline
-In-Reply-To: <f78d23da-0e61-4a06-ae48-22cadd7ac24d@gmail.com>
-X-Mailman-Approved-At: Thu, 09 Apr 2026 17:38:43 +0200
+In-Reply-To: <CAJD=UNd17V=anGd6C=jM8YzV10uTwEewae+CD1YGym5=JGeuiw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,148 +98,105 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---FsDOLbvbGNg7guXs
+--2bx9njEKrS6aWC49
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Wed, Apr 08, 2026 at 10:56:59PM -0600, Sebasti=C3=A1n Alba wrote:
+> Hi Jerome, Tom, and U-Boot security list,
+>=20
+> I would like to report a buffer overflow vulnerability in
+> net/nfs-common.c:nfs_readlink_reply()
+> that was not addressed by the recent fix in commit fd6e3d34097f ("net:
+> lwip: nfs: fix buffer
+> overflow when using symlinks").
+>=20
+>=20
+> *=3D=3D Vulnerability =3D=3D*
+> File: net/nfs-common.c | Function: nfs_readlink_reply() | Lines: ~667-685
+>=20
+> The `rlen` field from a server READLINK reply is validated only against t=
+he
+> incoming packet
+> length (check inherited from CVE-2019-14195), but NOT against the
+> destination buffer
+> nfs_path_buff[2048]:
+>=20
+>     rlen =3D ntohl(rpc_pkt.u.reply.data[1 + nfsv3_data_offset]);
+>=20
+>     /* validates rlen against packet size only */
+>     if (((uchar *)&rpc_pkt.u.reply.data[0] - (uchar *)(&rpc_pkt) + rlen) >
+> len)
+>         return -NFS_RPC_DROP;
+>=20
+>     /* MISSING: check that pathlen + rlen < sizeof(nfs_path_buff) */
+>     pathlen =3D strlen(nfs_path);
+>     memcpy(nfs_path + pathlen, data, rlen);   /* BSS overflow */
+>     nfs_path[pathlen + rlen] =3D 0;             /* OOB write */
+>=20
+> An attacker controlling an NFS server can send a syntactically valid
+> READLINK reply
+> (rlen <=3D packet_size) where pathlen + rlen exceeds sizeof(nfs_path_buff=
+) =3D
+> 2048,
+> overflowing the BSS buffer into adjacent memory.
+>=20
+>=20
+> *=3D=3D Relationship to Existing Fixes =3D=3D*
+> - CVE-2019-14195 (cf3a4f1e86): added a packet-size check for rlen only =
+=E2=80=94
+> does not bound the copy against nfs_path_buff.
+> - fd6e3d34097f ("net: lwip: nfs: fix buffer overflow when using symlinks"=
+):
+> fixed the same overflow class in net/lwip/nfs.c only; net/nfs-common.c
+> (legacy NFS path) was not addressed.
+>=20
+>=20
+> *=3D=3D Impact =3D=3D*
+> CWE-120 | CVSS 8.8 (AV:A/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H)
+> Affects any U-Boot client booting via NFS when symlinks are present on the
+> server.
+>=20
+>=20
+> *=3D=3D Suggested Fix =3D=3D*
+> --- a/net/nfs-common.c
+> +++ b/net/nfs-common.c
+>      pathlen =3D strlen(nfs_path);
+> +    if (pathlen + rlen >=3D sizeof(nfs_path_buff))
+> +        return -NFS_RPC_DROP;
+>      memcpy(nfs_path + pathlen, data, rlen);
+>      nfs_path[pathlen + rlen] =3D 0;
+>=20
+> Also required for the absolute path branch (~L683):
+> +    if (rlen >=3D sizeof(nfs_path_buff))
+> +        return -NFS_RPC_DROP;
+>      memcpy(nfs_path, data, rlen);
+>      nfs_path[rlen] =3D 0;
+>=20
+>=20
+>=20
+> I would appreciate if the project could request a CVE identifier through
+> the appropriate CNA, crediting me as the reporter.
 
-On Thu 09 Apr 26, 13:48, Mikhail Kalashnikov wrote:
-> On 4/8/26 00:47, Philippe Simons wrote:
-> > From: Jernej Skrabec <jernej.skrabec@gmail.com>
-> >=20
-> > Allwinner's BSP DRAM code uses parameter TPR6, presumably containing
-> > some "Vref" parameter, to encode the values for *all* four supported DR=
-AM
-> > types. The code selects one byte based on the DRAM type used at runtime.
-> > To allow copying DRAM parameters from vendor firmware, we used this val=
-ue
-> > and its encoding, but wrongly: the proper order of bytes is DDR3, DDR4,
-> > LPDDR3, LPDDR4, from LSB to MSB, cf. the A523 and A133 DRAM code.
-> >=20
-> > Correct the masking for LPDDR3 to fix DRAM operation on some boards
-> > using this DRAM type.
-> >=20
-> > With LPDDR3 TRP6 parsing fixed, adapt default DRAM_SUNXI_TPR6 value.
-> > Also change LPDDR4 default value to 0x38 used by A523 boards.
-> >=20
-> > Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
-> > [adjusted commit message, update default value]
-> > Signed-off-by: Philippe Simons <simons.philippe@gmail.com>
-> > ---
-> >   arch/arm/mach-sunxi/Kconfig            | 2 +-
-> >   arch/arm/mach-sunxi/dram_sun50i_h616.c | 2 +-
-> >   2 files changed, 2 insertions(+), 2 deletions(-)
-> >=20
-> > diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-> > index e979ee4a2cc..a1ddc6a1fc8 100644
-> > --- a/arch/arm/mach-sunxi/Kconfig
-> > +++ b/arch/arm/mach-sunxi/Kconfig
-> > @@ -144,7 +144,7 @@ config DRAM_SUNXI_TPR3
-> >   config DRAM_SUNXI_TPR6
-> >   	hex "DRAM TPR6 parameter"
-> > -	default 0x3300c080
-> > +	default 0x38c00080
-> I don't think this will be a good solution. The changes in this series
-> were originally made to improve compatibility with the vendor driver,
-> but now you are introducing an additional inconsistency by closing the
-> previous one. The default values are not just arbitrary values =E2=80=94 =
-they
-> are part of the vendor code that was obtained through binary analysis.
-> https://lore.kernel.org/all/20231018172109.085cce24@donnerap.manchester.a=
-rm.com/
-
-I tend to agree with you, it feels like the default value was taken from the
-reference code while the field parsing was just an issue that was introduced
-with the h616 code. So it should not affect the defaut value, which was lik=
-ely
-mistakenly parsed before.
-
-> There are several options here:
-> 1. If our goal is to improve compatibility, then we should not change
-> the default values for LPDDR4, and only keep the changes for LPDDR3.
-> 2. Add the changes from option 2, and additionally introduce the default
-> values for the A523 platform that I made during the initial binary
-> analysis but for some reason did not get merged into mainline.
-> (https://github.com/iuncuim/u-boot/blob/b17c5c8911a4fce328b01e6332632a9cc=
-d88ebc6/arch/arm/mach-sunxi/Kconfig#L102)
-
-It would be good to have different defaults for different platforms yes.
-Note that the a133 code has some fallback with defaults when the extracted
-field in tpr6 is zero. Maybe they should be used as default value for a133.
-We probably still need to keep these fallbacks in the code in case some
-board-specific tpr6 value does have zeroes and relies on this behavior.
-
-> 3. If we accept the incompatibility between the vendor driver and
-> the mainline driver, then this patch series is unnecessary because
-> they introduce additional inconsistency with the vendor driver.
-
-We definitely want to be able to take the dram parameter values straight fr=
-om
-the BSP and put them directly into our Kconfig. Changing the order of fields
-would make porting new boards very painful so it should be avoided.
-
-> I think option two is the most correct, but option one is also suitable,
-> since the DRAM driver for the A523 only supports DDR3 and LPDDR4,
-> and the default values in this case are the same as for the H616
-> (A523 is 0x33808080, H616 is 0x33c00080).
-
-I suggest we keep the current default (without moving the lpddr3 bits) for =
-h616
-and add new defaults in Kconfig for a523 and a133.
-
-> >   	help
-> >   	  TPR6 value from vendor DRAM settings.
-> > diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sun=
-xi/dram_sun50i_h616.c
-> > index 3345c9b8e82..42a0550e015 100644
-> > --- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
-> > +++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-> > @@ -975,7 +975,7 @@ static bool mctl_phy_init(const struct dram_para *p=
-ara,
-> >   		val =3D para->tpr6 & 0xff;
-> >   		break;
-> >   	case SUNXI_DRAM_TYPE_LPDDR3:
-> > -		val =3D para->tpr6 >> 8 & 0xff;
-> > +		val =3D para->tpr6 >> 16 & 0xff;
-
-This change is definitely necessary though.
-
-> >   		break;
-> >   	case SUNXI_DRAM_TYPE_LPDDR4:
-> >   		val =3D para->tpr6 >> 24 & 0xff;
-
-All the best,
-
-Paul
+Thanks for the report. Please see
+https://docs.u-boot.org/en/latest/develop/sending_patches.html for how
+to submit a patch we can apply. With respect to a CVE, that's up to the
+submitter to request, from whatever service they usually work with for
+one, currently.
 
 --=20
-Paul Kocialkowski,
+Tom
 
-Free software developer - https://www.paulk.fr/
-Independent contractor - sys-base - https://www.sys-base.io/
-
-Contributor to fully free software support for selected hardware.
-
---FsDOLbvbGNg7guXs
-Content-Type: application/pgp-signature; name=signature.asc
+--2bx9njEKrS6aWC49
+Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmnXwVsACgkQhP3B6o/u
-lQw18w//aPHQOCgCjwVSfqg5cYE6Adxj1PY6O7khgnhtJfFuJodXYlLS+gGh6YeV
-llhwqZgylz9KslbpfBUZSpuzSASu4MkuYp9whFk89dRyvafd/MZKCnjgHUXNDNz+
-tocklRKQjDXuA6wuGmB+XFZ4oCcmDxLjYpcDfk3DOf+fCFHEHcuqUIat9JTQBWkW
-2XSsG9hF8awRf6p2Yu8cDiERMV6YUKmlSsP5d4zrcvwcvnt+feUYvxBmOPPvAYCT
-dLWUhwaNnnlPbaAyt7tfVleM3WK8wM8inY0t97ALKFalDi/w1nff2tXZ5sjJ6CPe
-0IMvBNX9V8Wsk5UgETpqtCAA5rhozmX0GNKXTUmiVXJmt5Dzmv921MuZrXCSNDv4
-oWPpTxPSOxRt2O6GyRUfOKCt9qmo73p3kgXgR+ksgRnUTCeaY8/b1Vajp/HiErMi
-te1Encit0DH6RugZz0ETkcOPHkKAHYn3BqCKgWk5f2wz0RcNmcYwgc1fP+5PPiLL
-0gRY7SNrst6zWBfl+POeIk+6E/4PanZZA9gjHyh81m3p5tvbvqZ/+TEnFo+EWE/d
-Hvg+Hovl0iI8dxN+5rIYV7mvQLcgkaFQLHwNfb40efUCBQ6VVZ0CACdnqpkV3Net
-QQ5g3Hsb+R4yW+9TsQ/TiF3ZV9WAv8ZRazZEMFgtSD2W6rM7TWg=
-=I0TU
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCadfIbwAKCRAr4qD1Cr/k
+Clt1AQDlSORWBeytpRCimXN9wycUzmsIQDhLf3i9G8nek64/OgEAsbyGKSGGkFan
+HdvGQSZXw+sZwwujwYK750db6V7eAw8=
+=w+mc
 -----END PGP SIGNATURE-----
 
---FsDOLbvbGNg7guXs--
+--2bx9njEKrS6aWC49--
