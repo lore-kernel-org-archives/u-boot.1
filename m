@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BA4FF364B8
-	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 20:33:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60179F364B6
+	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 20:33:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06D818419C;
+	by phobos.denx.de (Postfix) with ESMTP id 419E8841FF;
 	Thu,  9 Apr 2026 22:32:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="seTwIXX1";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="xQ1fxFfA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B909B84198; Thu,  9 Apr 2026 22:32:11 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id C3AC584105; Thu,  9 Apr 2026 22:32:12 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C52A784201
- for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 22:31:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A33C084189
+ for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 22:31:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-47018d34159so1077199b6e.2
- for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 13:31:58 -0700 (PDT)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-464bba3a9easo673421b6e.0
+ for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 13:31:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1775766717; x=1776371517;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1775766716; x=1776371516;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=YDyQDLGMdqUletDsc30qTzqtglhw4D1rGJgxVpC3dRk=;
- b=seTwIXX1o0o8PmMPeRbuswoHQYQ5R8uQolfiKUJsWSSeU94mHhVhBB3xgkbiQIs2tG
- xE8TPGly4pi5mrlKoDBqssYSaXGMH7+R/Il9pP1Nv1EJQRjn4pzpfy/Z2mktUSWLhJ++
- 0feIxvUIouW08C7et7re/MpszoxSGm0CzNwZLNuk4+8qpRAAHVsLYZ7U7Zjd730QQ+op
- kEyuCYTnZgLKxm1O63RmDB1mNcp3v6At89GO66ZiRSVrMCxYixnlaC7SC3Kz95ojN/a3
- AIZpGMwP+TZEZOSZ6XTV0FHvkiPEQ25c2Lx3irDmn03EjRMYWk3idEzgLC6gl14HgNAX
- PJKw==
+ :reply-to; bh=whyNEfK3rdRlMHAwRPquKy8qMRJYFzx8frrtIHDrVkQ=;
+ b=xQ1fxFfAN7AgySY7D8myHRYa7Y+pn96OvgQBjm4NjBfWK4Xz4FDtVdoZ3bOGATiyre
+ 2i7GBeF9JeRIjH0pYRoCj+ngKI41GUMDU2Ysq5JtGLwyX1v1+C7p6jYclOLJPnuyyggU
+ r0hef8eYggzIWRwMv6Z+exyNJCv2jMcGbVdPJgYzoH+2IESMXPoNCCkbgDQVCmzOiCbG
+ uYRX0I26VC4zxyYqEcRbuQiTmHI3d1OWtC87UZVgbsv4RH735yDqCDe8lP0VEQ6AUcg7
+ oKsn8QH9c5zbQJFncfrJAzOcfc9aag99NY4oOaPfhIBXRLzsmf07bSPlsIBr+eeL9n0F
+ S5dA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775766717; x=1776371517;
+ d=1e100.net; s=20251104; t=1775766716; x=1776371516;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=YDyQDLGMdqUletDsc30qTzqtglhw4D1rGJgxVpC3dRk=;
- b=KBDi8FUiqf0m68IRHG4nyyNIs6HQSNLyMm92VbjfqvNFdOhCecNSTVpiu0TkQhhzso
- eAI4ln6DJC0XcijwiVO/5u1BjbKA2vfgyumypsvVG/pNUZIfRGugurDfZSr3nA46dadp
- DGTf5lEvg47bO+/FMOK8plHaL0z3ss70muWmv8mLnv84/udH78RIzShh9H6+Emj+G/hM
- b9WS+6sqIqa0DqnWFB0J3Nx1jimTGx1J1webd8SKCOOlAvj1EutSfWbew52bSH1hLSKE
- vGLkph9g0YG8Jt6hqdzbAojlQrW5so67DfpHb04YfzsSn66c3oszBbNRamn5QrtFTubU
- +MGQ==
+ bh=whyNEfK3rdRlMHAwRPquKy8qMRJYFzx8frrtIHDrVkQ=;
+ b=cfA5ozo7OAMo5A7Kw1CNJ1w6TQbCxKR4K4/XTjapmZn2RnxPqANNkWfegBOo+XS96X
+ t+dFF2DMMFgkRMrSp/6v12G5aR06rQPSJn85jRbqwa6tTyWqsVrWlK98fiTwWywNBknM
+ 0dwVTMFnoTP/Ky4BYYH9caOzqQ6uBY0CfvPBcd8WRFxtoKS7cuSe1HtHedtx+f5HP5AB
+ 0AzpVtwEzWTMydWcbyecT7ohokSnZBWh1wYbrMqcZwXFwj1/K/VOXq6RHdmuqc1zkTaV
+ V15kOasPhqQh2Q0gswKf7FnZKwq4H2I6j5dIjP5ujNm6cz3tmMXGUDyFbMX6SPE+zhNk
+ CruA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXiJ+YhktxJjm5wUDWo/0AO1b+oKMxCm603r5rgPreD/kPhEWtVEqRp8zfl3Qrfq2Xe6WoNXrc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzF8vG7mWetV4mi0s9l16eNct8/ZWUNhyh5nzwQ1cmTjAS0e+s+
- Sci5MQOFUJOIn0h5D+t7YDiwBWGwHwnBpHPFMG50QC1bi5hpgw3aiesWWECtCZsnjKo=
-X-Gm-Gg: AeBDiesllnUcJaxP1wHlhSG1GpU/pgf70V33rKgUJW6A4cmPparn+1aU8gfruP85dXs
- 86qyizbZqawhh5f7sEkBIKB/obTe8s8QXp81JOYj4t7pjL1oQCUNkXAZxx4ZU4rw9TMoOSzx5uw
- AekKKVAyRQ73u7SXb4GlQY0rbDgdJ69cvxN9QcSJ7pbJfno2x39DsSS4zmTO4o4fw2exonRbXiz
- //tujPzUY7hD35a562+tuxFECXQ3yQ4JGI+72runkFqAdkfB/pF5WWdfpU4Xs2IKaMuysAxHuvL
- 7RtCRUUO+iBQR8CVac6/SdOFLrDBIU7lbN/vSD+e6yRTWKVyzRPi+13EwqOYHkJituEOPP5jD6n
- CnMNYFxeQTH09HylnBhEtG8m/m3/yPbD1wScE3B8QoM0ZT0Asaz4PfQXD0XpDFdcniV9AZuPfbn
- SaS3Lt5QKU53fEA825SMF/hxkh+JPf
-X-Received: by 2002:a05:6808:c168:b0:468:b01:c28c with SMTP id
- 5614622812f47-4789f909351mr419868b6e.46.1775766717388; 
- Thu, 09 Apr 2026 13:31:57 -0700 (PDT)
+ AJvYcCVDMIPl+++JYnF2mc6CRvqdOh4vhx2OLr614LHrIN6yAv+CIcYY7SCIjimeCON/K5DdPLzFv6c=@lists.denx.de
+X-Gm-Message-State: AOJu0YxgaVnCrk3pX3omfFHMcWkK9YjZqQoG9qoqhwNZLI0lixXbeaYj
+ kGy+04t2HETWINLHYdhvKxOSh21bnlPBojywNLdBbnwjgIoFpfY1ovrbnlxS4yAhS10=
+X-Gm-Gg: AeBDieviQr+eUMqfuQsYKXkmjIFqAkSgzUL3UFOIhzZi4oNsfQGsTRD18SW5kafgOvq
+ fqotNnqrjmx3plm39dbOU+iuQFD1G6eEyE0tvvPdjPxg0fTh9aE3kwXX8Ird5BprVlhRyArtXsz
+ tttIlAUhFd7IMQvPtAmlTpyLVgZViYE1Ytm+6f4mG/Fu+6M7Jv/1Ro3pDFGeKoGKnPuFcLhGXUN
+ gW3I2y3jNw4rpfkkqIyiLMM49Nu01YEkWynYTsuugBd7pGeIT6hkdTZS/9jAaTDufjxY9thZCCN
+ F1VnYDu0baqbBoxAK7vbqVUFThPbvFJ5ntbAr98Il7TN9dmD1vkDROPikfVj3+jooyGee9XHaUA
+ 80BRLVG91SMzhM6VFAB4mBm1GknQlpblXEotxti84qJokNhbIUyy4azRcbhr3buCMlASwOvU64z
+ X4iqkl5TVG/gPdakMjLE3aKkOc977T
+X-Received: by 2002:a05:6808:8955:b0:467:284:b3b6 with SMTP id
+ 5614622812f47-4789ff0b3b5mr370607b6e.41.1775766716325; 
+ Thu, 09 Apr 2026 13:31:56 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:a548:cf0c:d054:fd01])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-478a101b75esm293075b6e.6.2026.04.09.13.31.56
+ 5614622812f47-478a101b75esm293075b6e.6.2026.04.09.13.31.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Apr 2026 13:31:56 -0700 (PDT)
+ Thu, 09 Apr 2026 13:31:55 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Thu, 09 Apr 2026 15:30:38 -0500
-Subject: [PATCH v2 6/8] power: pmic: mtk-pwrap: use pmic compatible to
- select child info
+Date: Thu, 09 Apr 2026 15:30:37 -0500
+Subject: [PATCH v2 5/8] power: pmic: mtk-pwrap: remove interrupt related code
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260409-mtk-pmic-fixes-v2-6-73e83aa6345b@baylibre.com>
+Message-Id: <20260409-mtk-pmic-fixes-v2-5-73e83aa6345b@baylibre.com>
 References: <20260409-mtk-pmic-fixes-v2-0-73e83aa6345b@baylibre.com>
 In-Reply-To: <20260409-mtk-pmic-fixes-v2-0-73e83aa6345b@baylibre.com>
 To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
@@ -91,17 +90,17 @@ To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2945; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2257; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=DCtW/6ItScysX8t+HymZdjuv554Mm7J+MxPKaM/lc3M=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp2AyeCzhHA/83E5C5iT866ajls8/lV18rv7O+D
- MJD2x3HaQGJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCadgMnhYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AnhsH/0/a1PxC6F4pJ6Lsr4de3cQBJMe0e0AMFrKrSRZ
- egpq2M+8CH07RcM8e+Mcjl5BXm56TeYH5CPb+oeoZTsu1NgWJl8zShTLkoBdvF8Vg44w/z/A6ay
- cXDRTlc3a1wNYwp1eSsZI7v9oC9/YBOzHMhcC7RbitKhLelrMK2mLSpA6//j5Wfk+mmH7yO1htm
- OyeVleHMgctgPgQ96xZ7hY4HaEk2L6CUHrmPbv8mi0O2ltHDRem6+eOwWe+awXyY2X2skL7qZzf
- 0ziOjG6NSp4NyCfAfqQswjHMscGDaUWQnX1De4cZ+B/PbCvMptHiRpVJPUabXZBuzmTtrBPoTwv
- Qi+E=
+ bh=W//MdpNeGgMOtCxpDmN9quJF1F1IHSC0pcXkhjkmZ+I=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp2AyXWtq4y7w258FzONzxppLQWA5TEe0SLfJ2b
+ DN1rXAFnW2JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCadgMlxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AFIcH/2ezX8j0RqxIIxPzOEM6mGEEtdh7nmdS6TaG7Iq
+ wsSorCAPXg1wkyRi3790wMS8oYJAdAe5dz+nH9XtoD9ivWUWfUzc+4CNhq/P0wo2or+1bbRIRZX
+ PwUhsHypuY1j1znBon6jhGQQMGQYFSLlS47NUoRORlqjE0Bc7+RrH7ET8vxkE+tqxK4XLG2v+2b
+ o6XjtXZSGQwODNDNGu2KW0jGeiN1wB3UCkrqDSkQppkqF5Pj0mfoC5BJraofImVbLsJrwtP4UZ/
+ 8s2Z1gkojPZaqypYmQwQDop+fRPTItfjwPw3Uerfy8fK6JvyrrOiDEd7SLBtuEkxNzoCNpZlGBT
+ bfXA=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -120,97 +119,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Change the logic for selecting pmic_children_info to use the compatible
-string from the devicetree instead of expecting the pwrap (part of the
-MCU) to correspond to the separate PMIC chip.
+Remove the interrupt related code in mtk-pwrap driver. This was just
+enabling interrupts without any handler.
 
-In addition to being more correct, it also saves a few lines of code for
-each MCU type that is added by dropping the enum and type field.
+Even if we did have a handler, the only thing we could do is log a
+message. Since U-Boot isn't long running, this likely wouldn't be very
+useful.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- drivers/power/pmic/mtk-pwrap.c | 24 +++++-------------------
- 1 file changed, 5 insertions(+), 19 deletions(-)
+ drivers/power/pmic/mtk-pwrap.c | 16 ----------------
+ 1 file changed, 16 deletions(-)
 
 diff --git a/drivers/power/pmic/mtk-pwrap.c b/drivers/power/pmic/mtk-pwrap.c
-index c41ebeb62cc..7d84ab1f6d3 100644
+index 64c483b2f3b..c41ebeb62cc 100644
 --- a/drivers/power/pmic/mtk-pwrap.c
 +++ b/drivers/power/pmic/mtk-pwrap.c
-@@ -341,12 +341,6 @@ static int mt8365_regs[] = {
- 	[PWRAP_WDT_SRC_EN_1] =		0xf8,
- };
- 
--enum pwrap_type {
--	PWRAP_MT8188,
--	PWRAP_MT8189,
--	PWRAP_MT8365,
--};
--
- struct pwrap_slv_type {
- 	const u32 *dew_regs;
- 	u32 caps;
-@@ -365,7 +359,6 @@ struct pmic_wrapper {
- 
- struct pmic_wrapper_type {
+@@ -367,8 +367,6 @@ struct pmic_wrapper_type {
  	int *regs;
--	enum pwrap_type type;
+ 	enum pwrap_type type;
  	u32 arb_en_all;
+-	u32 int_en_all;
+-	u32 int1_en_all;
  	u32 spi_w;
  	u32 wdt_src;
-@@ -780,7 +773,6 @@ static int mtk_pwrap_bind(struct udevice *dev)
- 	ofnode pmic_node, regulators_node;
- 	int children;
- 	const struct pmic_child_info *pmic_children_info;
--	struct pmic_wrapper_type *pw_type = (void *)dev_get_driver_data(dev);
+ 	/* Flags indicating the capability for the target pwrap */
+@@ -774,15 +772,6 @@ static int mtk_pwrap_probe(struct udevice *dev)
+ 	else
+ 		pwrap_writel(wrp, 0x1, PWRAP_TIMER_EN);
  
- 	pmic_node = dev_read_first_subnode(dev);
- 	if (!ofnode_valid(pmic_node)) {
-@@ -788,16 +780,13 @@ static int mtk_pwrap_bind(struct udevice *dev)
- 		return -ENXIO;
- 	}
+-	pwrap_writel(wrp, wrp->master->int_en_all, PWRAP_INT_EN);
+-
+-	/*
+-	 * We add INT1 interrupt to handle starvation and request exception
+-	 * If we support it, we should enable it here.
+-	 */
+-	if (HAS_CAP(wrp->master->caps, PWRAP_CAP_INT1_EN))
+-		pwrap_writel(wrp, wrp->master->int1_en_all, PWRAP_INT1_EN);
+-
+ 	return 0;
+ }
  
--	switch (pw_type->type) {
--	case PWRAP_MT8365:
-+	if (ofnode_device_is_compatible(pmic_node, "mediatek,mt6357")) {
- 		pmic_children_info = mt6357_pmic_children_info;
--		break;
--	case PWRAP_MT8188:
--	case PWRAP_MT8189:
-+	} else if (ofnode_device_is_compatible(pmic_node, "mediatek,mt6359")) {
- 		pmic_children_info = mt6359_pmic_children_info;
--		break;
--	default:
--		dev_err(dev, "pwrap type %d not supported\n", pw_type->type);
-+	} else {
-+		dev_err(dev, "pmic type %s not supported\n",
-+			ofnode_read_string(pmic_node, "compatible"));
- 		return -ENXIO;
- 	}
- 
-@@ -846,7 +835,6 @@ static struct dm_pmic_ops mtk_pwrap_ops = {
- 
- static struct pmic_wrapper_type pwrap_mt8188 = {
+@@ -859,8 +848,6 @@ static struct pmic_wrapper_type pwrap_mt8188 = {
  	.regs = mt8188_regs,
--	.type = PWRAP_MT8188,
+ 	.type = PWRAP_MT8188,
  	.arb_en_all = 0x777f,
+-	.int_en_all = 0x180000,
+-	.int1_en_all = 0x0,
  	.spi_w = PWRAP_MAN_CMD_SPI_WRITE,
  	.wdt_src = PWRAP_WDT_SRC_MASK_ALL,
-@@ -855,7 +843,6 @@ static struct pmic_wrapper_type pwrap_mt8188 = {
- 
- static struct pmic_wrapper_type pwrap_mt8189 = {
+ 	.caps = PWRAP_CAP_INT1_EN | PWRAP_CAP_ARB,
+@@ -870,7 +857,6 @@ static struct pmic_wrapper_type pwrap_mt8189 = {
  	.regs = mt8189_regs,
--	.type = PWRAP_MT8189,
+ 	.type = PWRAP_MT8189,
  	.arb_en_all = 0x777f,
+-	.int_en_all = 0x180000,
  	.spi_w = PWRAP_MAN_CMD_SPI_WRITE,
  	.wdt_src = PWRAP_WDT_SRC_MASK_ALL,
-@@ -864,7 +851,6 @@ static struct pmic_wrapper_type pwrap_mt8189 = {
- 
- static const struct pmic_wrapper_type pwrap_mt8365 = {
+ 	.caps = PWRAP_CAP_ARB,
+@@ -880,8 +866,6 @@ static const struct pmic_wrapper_type pwrap_mt8365 = {
  	.regs = mt8365_regs,
--	.type = PWRAP_MT8365,
+ 	.type = PWRAP_MT8365,
  	.arb_en_all = 0x3ffff,
+-	.int_en_all = 0x7f1fffff,
+-	.int1_en_all = 0x0,
  	.spi_w = PWRAP_MAN_CMD_SPI_WRITE,
  	.wdt_src = PWRAP_WDT_SRC_MASK_ALL,
+ 	.caps = PWRAP_CAP_INT1_EN | PWRAP_CAP_WDT_SRC1 | PWRAP_CAP_INIT,
 
 -- 
 2.43.0
