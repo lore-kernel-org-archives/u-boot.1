@@ -4,97 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 406CA10FC45F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 00:07:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93C3710FC456
+	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 00:07:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E12AE84189;
-	Thu,  9 Apr 2026 02:06:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1C4E3841CD;
+	Thu,  9 Apr 2026 02:06:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=traverse.com.au
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=traverse.com.au header.i=@traverse.com.au header.b="Z9wT6afz";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="BOa4zrWy";
+	dkim=pass (2048-bit key; unprotected) header.d=traverse.com.au header.i=@traverse.com.au header.b="hNz8sCwf";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="wBZb5ZHL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFD4783D8A; Thu,  9 Apr 2026 02:06:47 +0200 (CEST)
-Received: from fhigh-a1-smtp.messagingengine.com
- (fhigh-a1-smtp.messagingengine.com [103.168.172.152])
+ id 84E4883CF5; Thu,  9 Apr 2026 02:06:49 +0200 (CEST)
+Received: from fout-a7-smtp.messagingengine.com
+ (fout-a7-smtp.messagingengine.com [103.168.172.150])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B775B84099
- for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 02:06:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D0A17840D8
+ for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 02:06:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=traverse.com.au
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=matt@traverse.com.au
-Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
- by mailfhigh.phl.internal (Postfix) with ESMTP id 0356B14001A7;
- Wed,  8 Apr 2026 20:06:42 -0400 (EDT)
+Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
+ by mailfout.phl.internal (Postfix) with ESMTP id 1CE62EC0105;
+ Wed,  8 Apr 2026 20:06:46 -0400 (EDT)
 Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-06.internal (MEProxy); Wed, 08 Apr 2026 20:06:42 -0400
+ by phl-compute-03.internal (MEProxy); Wed, 08 Apr 2026 20:06:46 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=traverse.com.au;
  h=cc:cc:content-transfer-encoding:content-type:content-type
  :date:date:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:subject:subject:to:to; s=fm1;
- t=1775693201; x=1775779601; bh=3G1Lc+XwRXdIJVWAaMdO8pWF7TueI2pr
- zm/g4V3xJHs=; b=Z9wT6afz1Xq8kO4CHAt9U2sQjix49lVX2jbKZGEpDNNWbfD8
- sGuHQ2sNXOBHVxg75PwKUsSyvqyWpk0nt8RQ+SuhUyIeqX++5n3Gnnj9x1AIaW/S
- ZyRo32za+ywdu/AZgAWLaaq2qGZvas+C0qnhf47a2qteEEel0C2UBvVmK6RCfX8t
- F69fWsmwdu7sBI+YAuqkORpntivtcgEQflc4DhLT86WnC5+FBDfGXZ+PMiAw0lD1
- oHYwvMl1Gh3yDJ/3w0TcMsq9TWw22cVUbNIZBYD88tlhR7KXbDmKLeptvTC9Hg4j
- 01Z9BV3GGOpdQy0YkQ93PeVFXXJcCdxV8IDrVg==
+ t=1775693206; x=1775779606; bh=gSeZPHVta/QdhpWHafv2VLPz7ZOjHH9D
+ oOFsgdgKOIU=; b=hNz8sCwfnQFTX+UxY45TB60OpnKITWdDn8zIsVAtDLfyvJAp
+ eXpc1DkvuMFdMYI+GFUZ//02CObpEM9brphdArc5xT/d6HxmsX8/OpV7fCBfKm87
+ HtU4Jmsp3zj1gYQz19DvQTbAt7vZWzSsMVUtelN7ykBd2OAqgXu0twwnoiUTzB3g
+ HexKgYpte5XQZ0hG+GRlC9wBIKCRfa41Iz1sDfUx7O3Z9IlCeCR9S+IyfRrR69xa
+ e4u0lfWcGC8asJjyRkL61F1IA32Uy/NFA/ZPRMb0437CMsul2yR+itFgpgHwxz6l
+ kbkFKIjP4/iMosu3UuM12059bu4iRViOkvflUA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1775693201; x=
- 1775779601; bh=3G1Lc+XwRXdIJVWAaMdO8pWF7TueI2przm/g4V3xJHs=; b=B
- Oa4zrWyu8dHOsP9PDoBEGizthe9WSxuxJoJ3RDVXEEmaLHJ/M7gyzKOzKyXvDPm2
- n7RM+2CLTXGQP9xcYVtn199GyNC6YcoEALezu0VSIPNCp4YbXBv3BmSSqNbo6Lmq
- s98skM4Aqgt0HQliIQzcH6IqRxEc9iQvwALxmDvBtao361yDB+jIeAwFsWcTSPla
- ojVS0ROeiGmZ/tG3JJcl7g8qeh15o2EV8kY6i1LXDCpF+UwMMbJRrvQyhUyDB6oh
- DCUplnnY7w9TlMca+Udt8AlXSiPjKrQU6ApGLDyIGw7aZrNALto+DEiBkNp/U9X8
- M0ihoh6k+F67gpJTr5BVg==
-X-ME-Sender: <xms:ke3WaWJZV54nGoGumf-zkX4VKrexYRWyFEsGvk_MPGM1345tgOry9w>
- <xme:ke3WacFjsW_jFkJW9Lql16hG2ohq4J3b_PsxmY-JdZ4eRrMVEZIhs-mnotFSlG8lg
- xv-V1obcwm8Bb0EhBuX_0-x-Jdabiy10kLo67DjE7NZFaCA5yMYUVM>
-X-ME-Received: <xmr:ke3WaeRc2SvzKMcPRtpnWp37zBUpbxjWIaSZIH5e4rzVZP_G2vAs8PZg_mRk3qIojPdTZ1MYW5DgheTAwEVPBQH8o06CWg2ZiuOi0qVUAoWZEs2UoIdeb8Sp>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1775693206; x=
+ 1775779606; bh=gSeZPHVta/QdhpWHafv2VLPz7ZOjHH9DoOFsgdgKOIU=; b=w
+ BZb5ZHLjHB8vmgxaDaM2++TTbdXvS0bSfQC60wlX+WEs13pDWpolVp7EMDX/q45n
+ X1kaajXmIl7Yw9qQP1TIYkdvHTZ2Z5e0SAQUvPjFYNcfSOfEavnetf9hwHJoZxpN
+ AaTBESCLW4VYwHgZSGyU6Ghw+Hn0ukyr3Qk+fESEpPtZDyhiL5DNrdFJfCroV260
+ +skBiYDF/xHjaNWnhpqX8ExI0A0vyS4q0wOqjCLV0xJfL8nLbvlaT0pMb5s+N36+
+ 8ASpHaHaJO5t1EN8pTE0Oj1j/642N81d9413hqMkr2c3BjwDMdnVVExay4zRmIdu
+ cdCXD447bfPP2DRL3TBtA==
+X-ME-Sender: <xms:lu3WaaUMM_fkhSVYV5XKgvIuA6WlO_-IPDNR6JA-BU3t-GtIIuwGyA>
+ <xme:lu3WaUjpDgTVnI5h6gFhdaBV9QGxs4YRiqJxyibKpycm5IB1qt8lLVdFJCD7RjlR-
+ HJck6eO0IVKW2mU-Gtn-19heOpp3z93QuNBlN0fGB4gc7DU52-x>
+X-ME-Received: <xmr:lu3WaV-BFogHVZHxa2c73yCyckS6y3SJvdNfdNwl5IyvF6roCP5AnyUQ9ZG-iKq5tIRiTmtwv28BehqfWiKqAQSojSJDzie_3NxEO98SCkZjmS5lRYq35pXL>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgddvgeelkecutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
  ihhlohhuthemuceftddtnecunecujfgurhephfffufggtgfgkfhfjgfvvefosehtjeertd
  ertdejnecuhfhrohhmpeforghthhgvficuofgtuehrihguvgcuoehmrghtthesthhrrghv
  vghrshgvrdgtohhmrdgruheqnecuggftrfgrthhtvghrnhepffdvtdfhkeelffffgfejke
  efteeuhefhiefgfffgkeduueejheffteffleetgfehnecuvehluhhsthgvrhfuihiivgep
- tdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrthhtsehtrhgrvhgvrhhsvgdrtghomh
+ udenucfrrghrrghmpehmrghilhhfrhhomhepmhgrthhtsehtrhgrvhgvrhhsvgdrtghomh
  drrghupdhnsggprhgtphhtthhopedvpdhmohguvgepshhmthhpohhuthdprhgtphhtthho
  pehmrghtthesthhrrghvvghrshgvrdgtohhmrdgruhdprhgtphhtthhopehuqdgsohhoth
  eslhhishhtshdruggvnhigrdguvg
-X-ME-Proxy: <xmx:ke3WaYFQyewDDM1hIiErQSRVKTHZ0l2wVQgoWwur6u-QOuVoHBiuYA>
- <xmx:ke3Waa_fi6CSNanOJ2-DSIzFLmtwPvwS8C9yX079JVFDWViGRF4wIg>
- <xmx:ke3WaSJvq6_rfNcX-2XD8A4qqfhVyoo_8ePPrQ7Z_8JC9qEt5bOI-w>
- <xmx:ke3WadblrPVAlPi6vt5Cp6EDW5UgOug2iZ88TbByfJMPp_E1bOqBlQ>
- <xmx:ke3WaecLfuWI2OOMoaX_YvhF9d9hc9YJe7LogTw0-ddF6jYMGU4ZJlTR>
+X-ME-Proxy: <xmx:lu3WaeBa_GyLmQzMB2jHnm1TKPLjLc8g0U57Gib5nUQt1uwaaD0Dgg>
+ <xmx:lu3WaSKkLANbVdh2vdbBCAKAS_Rz1ExEFT5q-txAZCmstDt6COwn2w>
+ <xmx:lu3WaRlmovL2pjQ8C6F20naSXYdzspR-SzEk2urcBUHYy5PA9pouOg>
+ <xmx:lu3WaQH3aTjJ9SrbQcC2AGTljSVbbAzAWlkH5TUP1kecXl5SJYZWtw>
+ <xmx:lu3WafXhhZpIyWAd1uxWgc3yQDyYV0QRUfqprvDzvQilq9-PQuZBcWhS>
 Feedback-ID: i426947f3:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 8 Apr 2026 20:06:40 -0400 (EDT)
+ 8 Apr 2026 20:06:45 -0400 (EDT)
 From: Mathew McBride <matt@traverse.com.au>
-Date: Thu, 09 Apr 2026 10:06:32 +1000
-Subject: [PATCH 2/5] board: ten64: add fdt fixup to hide usb hub topology
+Date: Thu, 09 Apr 2026 10:06:35 +1000
+Subject: [PATCH 5/5] configs: ten64: switch to OF_UPSTREAM
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260409-ten64-add-usb5744-v1-2-2094496f72c8@traverse.com.au>
+Message-Id: <20260409-ten64-add-usb5744-v1-5-2094496f72c8@traverse.com.au>
 References: <20260409-ten64-add-usb5744-v1-0-2094496f72c8@traverse.com.au>
 In-Reply-To: <20260409-ten64-add-usb5744-v1-0-2094496f72c8@traverse.com.au>
 To: u-boot@lists.denx.de
 Cc: Mathew McBride <matt@traverse.com.au>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1775693197; l=2821;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1775693197; l=1507;
  i=matt@traverse.com.au; s=20260115; h=from:subject:message-id;
- bh=mcQd5OPelGex/Ipyd3otSRFAN5sOAFEofHbQ/JPhP6g=;
- b=mbNH7PlR1sKmd8wUrZgbQNFbuju4YDfK4ro0Q8EIvTXBFwlxPSTa/kiKVwWzlRHXJ6l8badue
- vtE7RQOqxWKD0uYdHYXmr+EQmTSMRMJWPV9U8Fd7pMS0L8v72Gwi/lv
+ bh=74ABKXZMtvDVUWb5dLTMA8sFqpfIkiWBGwvO3rbnTcE=;
+ b=CK7vWbYXaKm4eHoU4bRlAetzEv/+V2hu89oprZvDLKc/Q5YAuoGSWqoO5KK3R77D6Gp1HXwtd
+ 8poRZWSjOcGCQ/EPLKXfP9oXs3L9UiLS9TLnBjSRzey4Ep/0EOb+hgO
 X-Developer-Key: i=matt@traverse.com.au; a=ed25519;
  pk=SM+aGm9Y2fPJ2prfH/b5lab73fTBrKL5UsJwdzv7Pbg=
 X-BeenThere: u-boot@lists.denx.de
@@ -113,97 +113,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The USB Hub (microchip,usb5744) can enter a dis-/reconnect loop
-if a driver tries to re-initialise the hub over I2C.
+Two recent additions to the mainline device tree allow us
+to switch away from the local U-Boot copy:
 
-On the Ten64 board, this process only needs to be run once
-per system reset cycle, which is carried out by U-Boot.
+* Board/embedded controller (traverse,ten64-controller)
+  is now in the mainline device tree.
+* USB Hub (USB5744) connections were also added to
+  the mainline device tree but not in U-Boot.
 
-As there are distributions shipping with the affected
-driver by default, the best solution is to remove
-the USB hub toplogy information from the FDT passed
-to the operating system, so the OS won't attempt
-to re-initialise the USB hub under any circumstance.
+The LS1088A and Ten64 device trees in U-Boot were actually
+'synced' to mainline some time ago, so the content
+(except for the changes mentioned above) is identical.
 
 Signed-off-by: Mathew McBride <matt@traverse.com.au>
 ---
- board/traverse/ten64/ten64.c | 49 ++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 49 insertions(+)
+ configs/ten64_tfa_defconfig | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/board/traverse/ten64/ten64.c b/board/traverse/ten64/ten64.c
-index d41bd2e9dee..69632fdc31e 100644
---- a/board/traverse/ten64/ten64.c
-+++ b/board/traverse/ten64/ten64.c
-@@ -186,6 +186,50 @@ void fdt_fixup_board_enet(void *fdt)
- 		fdt_status_fail(fdt, offset);
- }
- 
-+/* The onboard USB hub driver (microchip,usb5744)
-+ * can cause a disconnect-reconnect loop if the operating system
-+ * attempts to re-initalise the hub after U-Boot has already done it.
-+ * (This process only needs to be done once per system RESET cycle)
-+ *
-+ * To avoid this condition, make the hub topology invisible
-+ * to the operating system.
-+ * It is also required to remove the hub on boards
-+ * without it (RevD).
-+ */
-+int fdt_fixup_usb_hub(void *fdt)
-+{
-+	int usb1_hub2744_offset, usb1_hub5744_offset;
-+	int i2c_usb5744_offset;
-+	int err;
-+
-+	usb1_hub2744_offset = fdt_path_offset(fdt, "/soc/usb@3110000/hub@1");
-+
-+	if (usb1_hub2744_offset < 0)
-+		return usb1_hub2744_offset;
-+
-+	err = fdt_del_node(fdt, usb1_hub2744_offset);
-+	if (err)
-+		return err;
-+
-+	usb1_hub5744_offset = fdt_path_offset(fdt, "/soc/usb@3110000/hub@2");
-+	if (usb1_hub5744_offset < 0)
-+		return usb1_hub5744_offset;
-+
-+	err = fdt_del_node(fdt, usb1_hub5744_offset);
-+	if (err)
-+		return err;
-+
-+	i2c_usb5744_offset = fdt_path_offset(fdt, "/soc/i2c@2000000/usb-hub@2d");
-+	if (i2c_usb5744_offset < 0)
-+		return i2c_usb5744_offset;
-+
-+	err = fdt_setprop_string(fdt, i2c_usb5744_offset, "status", "disabled");
-+	if (err)
-+		return err;
-+
-+	return 0;
-+}
-+
- /* Called after SoC board_late_init in fsl-layerscape/soc.c */
- int fsl_board_late_init(void)
- {
-@@ -208,6 +252,7 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- 	u64 mc_memory_base = 0;
- 	u64 mc_memory_size = 0;
- 	u16 total_memory_banks;
-+	int err;
- 
- 	debug("%s blob=0x%p\n", __func__, blob);
- 
-@@ -251,6 +296,10 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- 
- 	fdt_fixup_icid(blob);
- 
-+	err = fdt_fixup_usb_hub(blob);
-+	if (err)
-+		printf("%s: error %d fixing up usb-hub fdt\n", __func__, err);
-+
- 	return 0;
- }
- 
+diff --git a/configs/ten64_tfa_defconfig b/configs/ten64_tfa_defconfig
+index 2c5227193c0..cb20b0de0c5 100644
+--- a/configs/ten64_tfa_defconfig
++++ b/configs/ten64_tfa_defconfig
+@@ -7,7 +7,7 @@ CONFIG_ENV_SIZE=0x80000
+ CONFIG_ENV_OFFSET=0x500000
+ CONFIG_ENV_SECT_SIZE=0x80000
+ CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1088a-ten64"
++CONFIG_DEFAULT_DEVICE_TREE="freescale/fsl-ls1088a-ten64"
+ CONFIG_QSPI_AHB_INIT=y
+ CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT=y
+ CONFIG_SEC_FIRMWARE_ARMV8_PSCI=y
+@@ -23,6 +23,7 @@ CONFIG_BOOTSTD_BOOTCOMMAND=y
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_OF_BOARD_SETUP=y
+ CONFIG_OF_STDOUT_VIA_ALIAS=y
++CONFIG_OF_UPSTREAM=y
+ CONFIG_USE_BOOTARGS=y
+ CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 ramdisk_size=0x3000000 default_hugepagesz=2m hugepagesz=2m hugepages=256"
+ CONFIG_SYS_PBSIZE=532
 
 -- 
 2.52.0
