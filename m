@@ -4,130 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABA88E9DE43
-	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 07:01:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C75FDE9DE41
+	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 07:06:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3364839D5;
-	Thu,  9 Apr 2026 09:01:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 179DE8407E;
+	Thu,  9 Apr 2026 09:06:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="kBvRiNdY";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="JJU0L+d5";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RWhF7fQV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6065483CF5; Thu,  9 Apr 2026 09:01:30 +0200 (CEST)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
+ id 92791840D8; Thu,  9 Apr 2026 09:06:34 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF51D83693
- for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 09:01:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=y0Bhuc2gwK7M8CXRLXUpInE7Zn/Um7MAksMThZVD1BSXeoSVs4T8zwkxHjmPLFr1nz4GjrdA2Bj4uk+g34wADFM5Ct243pYHG8JUIPpLYv/xWkG9680PgS7Yorepl466Tp/QTRx5W4Owk0YiICYgABwsF5vAgjOritVZartZ1Tv8O78Nzm3ugAZM7BpxFilduiqLVhoo84EwWU6RVk8dxOak4ap0wBPAYlhgEdOraV1I9CnSnuR7I9gQi50XJaqCBJybH3C6c1bah6tnfXDmDfhAiCEcgP2/Y+wUN+R07pIoVwkjAxv2s9VShnngiZgswKtMykHidFJc+iWsvaXc7Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ztk0rthI9ccNZtZLn+Tg8lPB2bWByfis1mNxNYRllug=;
- b=grsuoqQOqQPvpI4WhU79ROHK104GhPHLJvrLwUklQhgwOqduV/TDPJmBfKH/W2/hTxWSk3/084ZbA0CnuKsG7VL1+mu29OnymHdmo3BFcFO+paFNF38kYTrnBB4B/+z6f+sIrjGxZpzXgZKIFlrYZrwH7ZJLxStDChXK9DfHczTUkP75zck5AvXm6tnHKKwI5i7uPfS2NXNZhmj52Ba8Y7pc8Lb9fOBNrCIw5vORo0M+5ZJaQ4KO+4PUosd7A0d4p5QhYoLgTFNQtrlex5dOP9PKmJ5JFxgdVbP5mlj81zzi+8mweyqHCf0f0JIjYWX5s6q/0VM080xHFEkJiVtKAA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ztk0rthI9ccNZtZLn+Tg8lPB2bWByfis1mNxNYRllug=;
- b=kBvRiNdYUbInmcRItiSTBQRpH4kS5NJ0Nf1DFspnsr80lvJ88F4w8vniwXEa3fOe1NFvd7+ZhZAVlBX+vBxt6nrvnka55XTS9YPd1Mv69cbUSCAhqr38oAqKJZAk5suH8fGdCy2k6mAcDKJdRdsMN0RJgoDlRNW4BhVrWx3Vo58=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by DB9PR10MB5571.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:30b::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.42; Thu, 9 Apr
- 2026 07:01:24 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8%5]) with mapi id 15.20.9769.018; Thu, 9 Apr 2026
- 07:01:24 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de,  Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,  Heinrich
- Schuchardt <xypron.glpk@gmx.de>,  Ilias Apalodimas
- <ilias.apalodimas@linaro.org>,  Ion Agorria <ion@agorria.com>,  Miquel
- Raynal <miquel.raynal@bootlin.com>,  Patrice Chotard
- <patrice.chotard@foss.st.com>,  Sughosh Ganu <sughosh.ganu@arm.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,  Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v3 2/2] kbuild: Use if_changed for font and splash
- .incbin rules
-In-Reply-To: <20260405104224.530051-2-sjg@chromium.org> (Simon Glass's message
- of "Sun, 5 Apr 2026 04:42:21 -0600")
-References: <20260405104224.530051-1-sjg@chromium.org>
- <20260405104224.530051-2-sjg@chromium.org>
-Date: Thu, 09 Apr 2026 09:01:22 +0200
-Message-ID: <874ilkpqgt.fsf@prevas.dk>
-User-Agent: Gnus/5.13 (Gnus v5.13)
-Content-Type: text/plain
-X-ClientProxiedBy: GV2PEPF0002399D.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:158:400::196) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F70783DC9
+ for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 09:06:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6395CU8t3535075
+ for <u-boot@lists.denx.de>; Thu, 9 Apr 2026 07:06:30 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=9Jbv9eSWqRpcDU9pAOqHTDoHpUXvNf7fcla
+ EJuv+Mcw=; b=JJU0L+d5+o4KxEXNxtj4j6ggjfQKNfz57yIa/jzSpFK1pcfffWz
+ 4ZnTMLs+Z8M/MPrH/fd/SicJMl95C1iciXeHRd1G+U9M6dc7rWcHYOkw2mc97L/Z
+ AF6F70lHTVtxQCeXvcccbG0gZbogY6mvJ1mprzLhay9uJ/3Ah2zC14xk9U0gAcA/
+ 9wAGsEsuM3xx5aHQMqGZoH+e6ScCihmePgkfs1LlU4nGYaJJbscxt1FnVN+HI3Ma
+ CN4/OY9SmH5faaRvBWvGra0//mdED2wZsSt7QRpOHImjfgpGfimj9EuvYhMfsYZY
+ deT+KqVcJi0z35FH8uswrDjxgBFLix52W0w==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
+ [209.85.216.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ddw9mt0d2-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 07:06:30 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id
+ 98e67ed59e1d1-35da8eb0553so683263a91.1
+ for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 00:06:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1775718390; x=1776323190; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9Jbv9eSWqRpcDU9pAOqHTDoHpUXvNf7fclaEJuv+Mcw=;
+ b=RWhF7fQVQybzYdU5riYT/4IAojNr+ZZjjTu7e2zAE+ykoSqGpdoAqcG7LS1yJrl7uR
+ N4PL3pERazk+kRKWFYVet9FYW8+K5P7Oqwfj7zS5EwzipWX8axwVF9B3aHmApX8UMqdT
+ ptjc9pJEydv4mAEJx4PUtwUBzxJ/sc5NCsR7NotXvYsXNudEnsmwIqxq2goHlg+vTyOt
+ hymFkAZkuzhrUvVmPjVw/OXgUq39UxvStlVRg+WIwOUuBgBN4QDwr1f77802Cby+pSK1
+ bZ8BKOmp4s0V4TLfRDxtmYCiwgARYd/Ge1J62SOBnw4bYrZuzhzqpzxj9ve/Kh4WMGfi
+ 70YA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775718390; x=1776323190;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9Jbv9eSWqRpcDU9pAOqHTDoHpUXvNf7fclaEJuv+Mcw=;
+ b=auFfLaReQK+JQFt8kX4A+FabcUD7DydNN+9wU4s983F8qZMcBDhwwdS0b5RK6rDGcZ
+ X8TpU2mC/59/zEHOqnkQIp+oIMrQE7QcX1isDdBJq8MEbZlzsNYUyf2/hGyCdUgfj0mq
+ 7d6rho3qmYM2bDOLzlnqP4DOKmFkyLqflyR8v43LDaQxCGNXwkd8jtHI/FvlUdF8kgA2
+ s4y2ad1FuJUeiRZDds6P3Ipdj7v47xv8rk/hYPcwaRP+AFuXbvLSWq7Le2yOgSJsfyNS
+ JC15AG9tluD9ExBV1skoD9+mnjxmGf0XS2duocoSQx+Mev3iPvIz7QfPNjnQNej1gBfO
+ E3Kw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVxTdplk6MTH16Fy6EI8RvB0Bx0u14YFukgLR/BQCqz2VTjv1EAxP/4iBLhRw7lUMkj7MtWTR0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx9ge3faDYPgNwf+E5xdeTJNUW52lHC10/xBhSFc6dqjvb2KGKW
+ v/9Xnm+FEY1hRdcOHWW8bK+M6PKY/tZkma6TOw4ogLy70GvIb9lbwxaVathrsosO/d6XQza2GJi
+ i6uK+CEsSIblcQTaznHfCESHS5jETOTpcp2MLNuae/ogbs4NTF8bXV787
+X-Gm-Gg: AeBDiev0Ldj63t9GPCUPba8WYH/r0HNXdbShm0/Ui3Ie4cS+TPORaxPcWBCEtDW3U2c
+ WhNAgIHOJtUP/jN0Fzzvt0o36Q7KDUuaR5ojY0iB3VToJ5mZS7CRaHayFllgmQUgYh7KFz5LSPH
+ /jT+t8kMFBGmUYNqcJrYXu+Hoo54gTipHkmU2Dl1GzF2+cnrAkT9unJTcCHkJ/ovCUuaP6Cst4z
+ lnMGMDnMn4Y5tPFFwuQ7c5eM3vNhEcg0Xwj+QtmbNEWpg/H3Iaq2Vg4PLAgqkGuZRXcoTmCAhls
+ XD08ikj9B0yhW++8M0rF2gvXIqjIfZUGLpwkTBKigvIV5p+yQitKm0+0pITpWwqDaVMYHsS7C0Z
+ LYONxIjyAdkQvsOMRuA51FhR1ULyzTjK2Lm/w/lbXfYc3VlRpRNxkS8cU0fW7ZhG39rEkwAs8ZD
+ 012ZL6tenqNVGg288j/TuuuqQ7nI1LeXofyRJ7MSEKdsEBxbKyzRw=
+X-Received: by 2002:a17:90a:d2ce:b0:35d:a1ce:c1 with SMTP id
+ 98e67ed59e1d1-35e353b3408mr2333810a91.8.1775718389659; 
+ Thu, 09 Apr 2026 00:06:29 -0700 (PDT)
+X-Received: by 2002:a17:90a:d2ce:b0:35d:a1ce:c1 with SMTP id
+ 98e67ed59e1d1-35e353b3408mr2333790a91.8.1775718389198; 
+ Thu, 09 Apr 2026 00:06:29 -0700 (PDT)
+Received: from hu-varada-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-c76c65991a8sm21926708a12.28.2026.04.09.00.06.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Apr 2026 00:06:28 -0700 (PDT)
+From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, peng.fan@nxp.com, jh80.chung@samsung.com,
+ trini@konsulko.com, loic.poulain@oss.qualcomm.com,
+ patrice.chotard@foss.st.com, varadarajan.narayanan@oss.qualcomm.com,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: [PATCH] mmc: msm_sdhci: Use max-frequency to get clock rate
+Date: Thu,  9 Apr 2026 12:36:20 +0530
+Message-Id: <20260409070620.3655875-1-varadarajan.narayanan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|DB9PR10MB5571:EE_
-X-MS-Office365-Filtering-Correlation-Id: fed256b5-5aff-43d2-ab7b-08de9605d014
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|52116014|376014|7416014|38350700014|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: VflrtuucgsnGrLl3t2yfLUXmOhoI4E5E/Sr8HSOXkj7tcQUfj8B/pHKzfXKVD0foag7WGN8kazNKx2dzzKVlNZoqG22K/mpVIWjTu4NgWtpDIK+VN2SUM5Wj+CLzZjnZ8gXl5ievkrPK3nxovrGtsUhsYh00hZg1GJ3TcTJmpInRNfIGBSk+C6nv3cLUPVOannyVLTLOde0ZUJvJV9IXE+gWz+yyPu4RSFEhiU8nibDvvSMrDmvcdicApVEcTNRD5/qbG+njMtDGcf4pQPp7NwcrXOzckeR+O1u85tC0s3cSq3GernMJVpLftQjhRUwfRHZjbvPQMLOPt7ey+PcszesNMdmY7rB7TUHZMX3B1gOUWbOQXxorddhJoynUkdY8jrHtPZGbHs5c2eB+lsJpP9bAYKuF0OUJmZ+QkTAV4zQsa7LbZCoQDpXD0A694LuTT8Nk08PnCZO4T8ml7MUvYkCBHxcN3QOVYiBoI6Z/pa/qQEMwpD+hEToleXc5v/X9aRPfrb+7gFcxdM8N3ene0ZuMaJ6jQvUEhmavbhffz9VeK0xJH7gMKJ2hH7a72GrJ8RYFQvMvUwWxGPv5gUmSjf4YvmhrQDNZHGK9au+MBGb//+W650FsOhhpwB+svnhuCnbpG733mkQOTvxXfj2BWl3OWh01+Mio2mazg+YSeflxRt6V0g3dEzgJD3z7cId52mmpB2PlpJatM/4BPf9lsbdx3P6XqpG+vCxnPJtckzF1qUDVQQGEWR4z3Mf1HRJDNP9Y/BjH5JthfWoT92PYCY/L45dBJ17/bT5pOj/gwNE=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(52116014)(376014)(7416014)(38350700014)(18002099003)(22082099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?CeFwozf7sP/T4Aw+ONQMEQ4wM8kghWQ4hp9cM9gwNwB0p2BbmLsFlKtfWQIx?=
- =?us-ascii?Q?62EPVpxwcXuyeOOFNbzP4zz1GKkaRn/zHPoKacEwoqQYt85j6MX0zhsfjJTx?=
- =?us-ascii?Q?aKAO2WTKHEddPuB2aLpUddqE/wSVgRG1YCrZyc7+bB+jRJTCrFvfgZ6uD1Sg?=
- =?us-ascii?Q?cwrVPBhVVsFesDdEzVKgxACkJZ9xJkBcjdkuVmBwaZ2aic8tah4txbrQcEJ0?=
- =?us-ascii?Q?Gq5hG712gfP/dqCz7ex9SLK0CUu4L/8mwiKfdhIPwD/ZrcBvJtRM/4KvQy/0?=
- =?us-ascii?Q?UMGNt0ubJzPXzQZmPptWO0eU3acRSRW398Oytry+GnG28csO2CETTzruL7xX?=
- =?us-ascii?Q?U7PjgxpRlLcXSGabjwaxWIY9NTMc8TMKGHsZ7VqEsx6DU6b/IrVmR+0Rkr/C?=
- =?us-ascii?Q?jDACgzWNojbVUO5v1YxXCQLqV6fQQLFbPgjhYo4HPYbuIuJE1cHFEXr7RtbN?=
- =?us-ascii?Q?7gzbgA6Lyn+BrRE20jCpVXFS08EhU8gLFxJ7AdcNrRO9udx1w/zpKUZPyRuW?=
- =?us-ascii?Q?nGInvmGPzEvZ1EAbc/PaYnsDfHeU37/aKC05arotAgM6jPrC2HYTa9Km2XVe?=
- =?us-ascii?Q?oLxROPqgj2+++U/GaLdvN9Cgzgzpi8vnFR1Gv/E4fXYXlL6qTssuLId7szk1?=
- =?us-ascii?Q?Mc1d5q4aX+if/zBEykxlqYGULAJYE1/Kz7bftktPOULr+rcTSeTPn8oNnCnM?=
- =?us-ascii?Q?hvDu7vViDN+0QuYWNRgeB3MJ/u/9peA+Ops6NGE44ZaYLBhc/AtTjdp0XYry?=
- =?us-ascii?Q?4e7j1bH3B3UYReNP6M2JA+WvRfetJw36/tq9ezKbxph7eejbqtGpKWCvgWFa?=
- =?us-ascii?Q?pCdCq0wtMBFXjeAySkcSGwXcCVAbqwXU0aLcZgGBBMnxNVu3Scv2WSbVIoV3?=
- =?us-ascii?Q?aH6ZHmS/HrCAAneM4gSsdAWyJE8llxeDEwoOZUf1yqzCv0uEmFNN1WVANnNr?=
- =?us-ascii?Q?5YT1ZuP5xXHhl2ZnmsUPNTTHCtFPJcwmIlMz8Ue4JcPA33VrCy+cHG65YsLQ?=
- =?us-ascii?Q?XL/vEZm1z2/jAC3qv+9kimAg7qL/brs4tg4Gn3lUaTMRzSYC6IePz5koUpQO?=
- =?us-ascii?Q?7HkA0XiqyQtZs9KplHc3o7r2klt+Tv0AiOYo3T9vk71NOC0TQzzTNtihBfvx?=
- =?us-ascii?Q?51HlQ2gHsnJxj8Zug6cDsXwl6TnaBP2i2sANps8w4bS8CeGCmpqc83mfF9Ko?=
- =?us-ascii?Q?h7CY3T1KBR8lxt75wgxmwlqYkSpKnYs1l91k8mDp5kLkwALzZzdpvTgMGGHi?=
- =?us-ascii?Q?WGVQCQC42jWqmwibwjKTzS9xHzo7JPzqIQAPVUgXuR9bQQmEv6pWa3Y8AmXZ?=
- =?us-ascii?Q?DEWIapdV6O2It0y9ShKztsbeLljBIOV4JcJs7OSi9y66VIRFfSdGxnUQsQnL?=
- =?us-ascii?Q?O1FTyPf86lInHzJnvPfgwVH7C26ST8GrGxKw/8hQnXFhKOozmhQ6guc5kmgn?=
- =?us-ascii?Q?VYYfgF/q5aB4ml9sPMcRe04r2P/Ojx2AhOxNTUIbqnoXtesynfKFLaNdGUB4?=
- =?us-ascii?Q?09H0gMx7NZ9bPcAa84Ar4F1KW3VsHDuRFZTYtAVp4OwCfglZHHq6KNU0wGyD?=
- =?us-ascii?Q?BDGMkJhSKGZFPkqus43bQZpvO3++LePBlqblvs8Ps+p+vFKw9pxFz5UlI3Yv?=
- =?us-ascii?Q?HSmsVMe/BMQBnb5ovzcWlGmLmLKfg/qx63EPeUr45WClns+YCDbv6PqtkL9J?=
- =?us-ascii?Q?CNX76XZknxu1c7u4tdC4/WBKIUYbWopSPzf6vkBo741ELOb22Zqlg0bMyKOi?=
- =?us-ascii?Q?VRCTnJ/kGH4eO5cBZ3twVM5E4PaSiYg=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: fed256b5-5aff-43d2-ab7b-08de9605d014
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Apr 2026 07:01:24.6134 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: TNRwHsyeu863Hj8RdPbVMii4NXm+gWEqQp/Fydm+D3PhL0koTM6NO/2V4oI7b9Nd9KUzPrMJQ/TvLKpve5nGkxH6GZSMKluCzrQHi4vQkjo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR10MB5571
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=cfPiaHDM c=1 sm=1 tr=0 ts=69d74ff6 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
+ a=y39NnA_bIYQAsuYrnNoA:9 a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-ORIG-GUID: ULRAC_xldJXIhHpLNrMRr-Rzf1t-suXK
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA5MDA2MSBTYWx0ZWRfX6WSiRQtHfcLE
+ OqWhuTnLIzUqPt1OifXHfpMY2LcaeoYpXy24IAtBDmkmJoKh8JejaOrFokxUVGBZjm9Wo+EOAbL
+ v1zE+Z3XQXBOJJECOPId1WLS7faS1FBk4bElk0BR0MLMtcHpwqTNZG5eIrMUXxd9u8NuzOsPuWf
+ WbwnWKOzAOAyq2qtKPi+sgoo+e5SWn0oagZJeKEpwX/+bQXdv5H3vPtLR9D1pw68TqmC/pFeRUN
+ i7VV2rwdE2COtxioayIrng3aN+CIX+B6r21W9lsFX15ZcCduna8vmLSIFPzt1YZXqQwpqL9BIEy
+ VvNGRzwNZUEQ+5cUAohVwKG0xXg70LxUlT1uOrCkvoday2lOnwSG/Lo6EL7hYp5MzSuy9ID44Qw
+ u8RUkoMbx118KyutBUUx+kx/JV3GQJi/nT9Ruxfz2fc3SB0z4EAjLp9ETVY9ay9hQ/0ks18w9Xe
+ 4ZZapdOb5fq3NdiJlag==
+X-Proofpoint-GUID: ULRAC_xldJXIhHpLNrMRr-Rzf1t-suXK
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-09_02,2026-04-08_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 suspectscore=0 clxscore=1015 lowpriorityscore=0
+ malwarescore=0 spamscore=0 bulkscore=0 adultscore=0 impostorscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2604010000
+ definitions=main-2604090061
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,64 +147,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Apr 05 2026, Simon Glass <sjg@chromium.org> wrote:
+msm_sdc_clk_init() uses clock-frequency to get the clock rate for SDC
+clocks. However, the DT files seem to use max-frequency for the same.
+Since msm_sdc_clk_init() doesn't find clock-frequency in the DT, it sets
+201500000 as the clock rate and this results in timeout errors on IPQ
+platforms. Hence, try to get max-frequency if clock-frequency is not
+present.
 
-> The generated .S files for fonts and splash screens use .incbin with the
-> full prerequisite path. When building with O= this bakes an absolute
-> path into the .S file. If the build directory is later used on a
-> different machine (e.g. in a container), the assembler cannot find the
-> source file.
->
-> Follow the existing DTB convention: rename the object targets to use
-> compound suffixes (.ttf.o, .bmp.o), switch the pattern rules from
-> direct $(call cmd,...) to FORCE + $(call if_changed,...), and register
-> the new suffixes with intermediate_targets so that kbuild loads their
-> .cmd files. This lets if_changed detect when the recorded command
-> (including source paths) has changed and regenerate the .S file
-> automatically.
->
-> The EFI rule is left unchanged since its prerequisite is a generated
-> file in the build directory, like the DTB and DTBO rules.
->
-> Suggested-by: Rasmus Villemoes <ravi@prevas.dk>
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-> Changes in v3:
-> - Use if_changed with compound suffixes (.ttf.o, .bmp.o)
->
-> Changes in v2:
-> - Move U-Boot .incbin rules to Makefile.lib-u-boot first (previous patch)
-> - Drop the EFI .incbin change since .efi files are generated, not source
-> - Use per-file AFLAGS instead of modifying a_flags in Makefile.lib
->
+Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+---
+ drivers/mmc/msm_sdhci.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-> diff --git a/scripts/Makefile.build b/scripts/Makefile.build
-> index e625f99986e..067c38c4cdd 100644
-> --- a/scripts/Makefile.build
-> +++ b/scripts/Makefile.build
-> @@ -438,7 +438,9 @@ intermediate_targets = $(foreach sfx, $(2), \
->  targets += $(call intermediate_targets, .asn1.o, .asn1.c .asn1.h) \
->  	   $(call intermediate_targets, .dtb.o, .dtb.S .dtb) \
->  	   $(call intermediate_targets, .lex.o, .lex.c) \
-> -	   $(call intermediate_targets, .tab.o, .tab.c .tab.h)
-> +	   $(call intermediate_targets, .tab.o, .tab.c .tab.h) \
-> +	   $(call intermediate_targets, .ttf.o, .ttf.S) \
-> +	   $(call intermediate_targets, .bmp.o, .bmp.S)
+diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
+index 66f3cf2de4f..2e6120f18ff 100644
+--- a/drivers/mmc/msm_sdhci.c
++++ b/drivers/mmc/msm_sdhci.c
+@@ -71,8 +71,8 @@ static int msm_sdc_clk_init(struct udevice *dev)
+ 
+ 	var_info = (void *)dev_get_driver_data(dev);
+ 
+-	ret = ofnode_read_u32(node, "clock-frequency", (uint *)(&clk_rate));
+-	if (ret)
++	if (ofnode_read_u32(node, "clock-frequency", (uint *)(&clk_rate)) &&
++	    ofnode_read_u32(node, "max-frequency", (uint *)(&clk_rate)))
+ 		clk_rate = 201500000;
+ 
+ 	ret = clk_get_bulk(dev, &prv->clks);
+-- 
+2.34.1
 
-Do these extra lines need to go here, causing a conflict with the next
-kbuild sync, or could one instead add
-
-  targets += $(call intermediate_targets, .ttf.o, .ttf.S) \
-             $(call intermediate_targets, .bmp.o, .bmp.S)
-
-in the new Makefile.lib-u-boot? I think that would make more sense. But
-there may be some ordering of makefile includes that makes that not
-posssible.
-
-At the very least, I think the additions to targets should go in a new
-'targets +=', just to separate them a little better from upstream and
-making it pure code addition instead of having to modify that last line
-to add a continuation marker.
-
-Rasmus
