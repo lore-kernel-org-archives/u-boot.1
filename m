@@ -4,82 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 620BC10FC459
-	for <u-boot@archiver.kernel.org>; Wed,  8 Apr 2026 22:10:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18F0910FC45F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 00:06:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C3678418C;
-	Thu,  9 Apr 2026 00:10:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
+	by phobos.denx.de (Postfix) with ESMTP id 53E0F83DC9;
+	Thu,  9 Apr 2026 02:06:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=traverse.com.au
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="OD4OxNP1";
+	dkim=pass (2048-bit key; unprotected) header.d=traverse.com.au header.i=@traverse.com.au header.b="jRP3IM8g";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="vsJvcPWc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB0B78407E; Thu,  9 Apr 2026 00:10:07 +0200 (CEST)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 63CB884120; Thu,  9 Apr 2026 02:06:44 +0200 (CEST)
+Received: from fout-a7-smtp.messagingengine.com
+ (fout-a7-smtp.messagingengine.com [103.168.172.150])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 813C384189
- for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 00:10:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A17983CF5
+ for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 02:06:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=traverse.com.au
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=thingy.jp
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-82748257f5fso157300b3a.1
- for <u-boot@lists.denx.de>; Wed, 08 Apr 2026 15:10:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thingy.jp; s=google; t=1775686204; x=1776291004; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=39x2J+ebsoD5FR0CWyPswTrMDeyjPp4g/YXM73sFfFE=;
- b=OD4OxNP1Ezp1/bfFGHN8QVbPHHXmPmq8Sf6Jyi/lcD0C3AAcX92NmymVpUlsjQH4th
- ENC61Pcyr+PQAf1S3FzKdBjKmK/NNVysx/7OciYws1k+Zcorh+WHvIcLkbcC0bJ9oG1A
- 648sPxjxTfTWN2x7NeaRFtH414e9wGpxBhlqg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775686204; x=1776291004;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=39x2J+ebsoD5FR0CWyPswTrMDeyjPp4g/YXM73sFfFE=;
- b=ceD/G/R7yh704OFtzOWe9njS6s/tV2R1TqLZksN98n47DKhqtbJt1cW+so+AIQ5dkT
- RGadWM9glsNZv1uVXl/ELcEeOLL0Q9UlCgY199U1CT1xZ686Q9olrmZs2HBITwIIb/zX
- sPyin+ugrUilOwgqur8lJDFJogeJZXT4oHe81Ds7Aent0ehO2Sc0SX8GJ7ZS0ZjsCsY1
- 0kj8zYeqWiOVNPV2qe8k819U//V03Zgn4YjvWvySq/1Uydf9ywkUdlYAsU8ykOCPs0RO
- hysa9+FArOx/6O8rcjxFLZnnafpbild9Z8LeTyKUIJgyyTUJ9b+kDHJ8dSqy712C7UmW
- +UVw==
-X-Gm-Message-State: AOJu0Yyfj7IE9SxxDAv6UbBe1nDN7GFt6lulgeiIYyRgbfyVxn58uE8U
- 8CDjRQPOZag/l2nTzZ96lg4ZtO5vHdVkKfvxYWPtnxjRceXoWTVElipBJvDGr798EZU=
-X-Gm-Gg: AeBDievWN/SimnL5M+syK7iWzf6RDeBEe0FBnpvpAQ0mz0KrWsUBv2upNFX2y6nBhrX
- AibsaS2RZxZqKhf6+5D90+IbwfHvYknALfPMXSPibt/DRf0hhjbE0Q7HLA3JkxJRdgJ6bN6sB//
- Gq216lIepofnfVV+rZ4kWS5kn8ARVZSD0ZaoTDNVcQ3AbRejx6virju6KX4qe8BS2j2zVR90JaW
- SBQMFJ6grcpKj6aiEjowfCvC5dlB5M3/omGvQU9avdiGl7eb4vlZ7JBFbQarLI2cQD+cnB0+euK
- vQa4qF1aO/CcNZ4R1+mLKCIF9HIkoE3CWFpZKOfd9RGBl+/b9euXmHqc59mE1lcH0S2wfrT2U52
- BNHMIiX9LOCx3w3aG8SBWG/DLtoGUVYZCJIuyeRgGIrh4LnaKabCsVqAGQgXL5gpI8QSBAdDsrC
- 5+/5qLQrzS/+acYtpb6nD66NU=
-X-Received: by 2002:a05:6a00:4c95:b0:7e8:3fcb:9b06 with SMTP id
- d2e1a72fcca58-82dd8b5eb79mr931375b3a.28.1775686203856; 
- Wed, 08 Apr 2026 15:10:03 -0700 (PDT)
-Received: from kinako ([2400:2200:7f0:5ee8:dac6:2cde:760c:93f])
- by smtp.googlemail.com with ESMTPSA id
- d2e1a72fcca58-82cf9b60199sm19877723b3a.25.2026.04.08.15.10.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Apr 2026 15:10:03 -0700 (PDT)
-From: Daniel Palmer <daniel@thingy.jp>
-To: visitorckw@gmail.com,
-	angelo@kernel-space.org,
-	bmeng.cn@gmail.com
-Cc: u-boot@lists.denx.de,
-	Daniel Palmer <daniel@thingy.jp>
-Subject: [PATCH v3 5/5] board: qemu: m68k: Create virtio mmio instances
-Date: Thu,  9 Apr 2026 07:09:28 +0900
-Message-ID: <20260408220928.3328551-6-daniel@thingy.jp>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20260408220928.3328551-1-daniel@thingy.jp>
-References: <20260408220928.3328551-1-daniel@thingy.jp>
+ spf=pass smtp.mailfrom=matt@traverse.com.au
+Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
+ by mailfout.phl.internal (Postfix) with ESMTP id 263D0EC0105;
+ Wed,  8 Apr 2026 20:06:39 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+ by phl-compute-02.internal (MEProxy); Wed, 08 Apr 2026 20:06:39 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=traverse.com.au;
+ h=cc:cc:content-transfer-encoding:content-type:content-type
+ :date:date:from:from:in-reply-to:message-id:mime-version
+ :reply-to:subject:subject:to:to; s=fm1; t=1775693199; x=
+ 1775779599; bh=4X9+LlFmPbVKDELSbtEoqghDVYKaVyqok1sA6Sdms84=; b=j
+ RP3IM8g0x3vM7bkXYCwRWuyWw9/MgU98uG5eUwnUoR4HtQRZspEZl47JbWX6miUM
+ zek99Z2mhocl6oAugz5cH1lTaO83dpWK6yOTIX+sAy7vUMM071kU8ylwDGiZcbSH
+ svp6n0IpiX4P897sP9gR4q6OISym3tzPM/AQy9oSUDj2oQ9DIVn0PXy2SSuJceaZ
+ vPxmsnPv8qBI1C1EaClNgL5W1sYuGJp+zKNA8YdfVVK/vdjdyLR/KQymquweM0gK
+ SsiiYI5fYrW01utReYfhntnyee9dWhT5OufhPYbE3UHtGMZT146bb8GW76I/V1zL
+ oZH0nr3K8VOpbhQRjZDWw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:message-id:mime-version:reply-to:subject
+ :subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm2; t=1775693199; x=1775779599; bh=4X9+LlFmPbVKDELSbtEoqghDVYKa
+ Vyqok1sA6Sdms84=; b=vsJvcPWcsilRsbehwmvdJYISFoRS/cyS0ta3YciBTyOd
+ 7acR8kjm0T+pGKJTD5dn63oQh4XR5XqDBXYGDS1fXssNhUM7j4Yu22MbhyZiWw0j
+ ksTz6VaOw6MyneFu4WFO3VWhQ0VJuBMm32HRZHNlabftee5rnWE3vjUreLKmKm5I
+ zMt3o3UtlMGgVqT6mlTd+m9OKY3OzyJyfY195l+5XFqGxVbyL8NGFgp51H7RDk96
+ JkxtbI2gavW3xWGygY1LkXzH86IlJWwrwVVFJ5AgHQ9XOmoXpluudrsqGngxYnei
+ 5U5FYv7Ju/tIeV/mvqfSJftYAlQuyspQCF7Y4rjfyg==
+X-ME-Sender: <xms:ju3WaUmRbgS3pflTfVFgOXfUdUaVRIwkN0E_IwnQUdaxAdNHPq1hqQ>
+ <xme:ju3WaRy7wZ4bH4lieVTeox1BZUDOUXJpAO6PnXib5bu0Jp3n2qGklz-20_eqlvu33
+ qQLmPCCzbs5-RpkDjXvwGkv6xQIAhiY4h7CzdOdVMAyFJ-DxgfgDQ>
+X-ME-Received: <xmr:ju3WaaNQLlay6IJDPWCj203xLYndlphOs57QHJKdwC6V_k3paHkfvXx-HEQtKkmNtNmVztkfORmvdchLQoTeTmrBaORjr0uJs3xmew6Aujfjk5MX_q_xc2mM>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefhedrtddtgddvgeelkecutefuodetggdotefrod
+ ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
+ ihhlohhuthemuceftddtnecunecujfgurhephffufffkgggtgffvvefosehtjeertdertd
+ ejnecuhfhrohhmpeforghthhgvficuofgtuehrihguvgcuoehmrghtthesthhrrghvvghr
+ shgvrdgtohhmrdgruheqnecuggftrfgrthhtvghrnhepgffgvdfhteeujedvueehiefgke
+ dvkeehgfeugeeludejffegfffffffhtddugfelnecuffhomhgrihhnpehgihhthhhusgdr
+ tghomhenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
+ hmrghtthesthhrrghvvghrshgvrdgtohhmrdgruhdpnhgspghrtghpthhtohepvddpmhho
+ uggvpehsmhhtphhouhhtpdhrtghpthhtohepmhgrthhtsehtrhgrvhgvrhhsvgdrtghomh
+ drrghupdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghngidruggv
+X-ME-Proxy: <xmx:ju3WadSyBpzv7WNiP_2Rf4VHAKqHPcGO-5REjRD_-se9gjfJjav6pw>
+ <xmx:ju3WaQZPiQL6P9u3rsR0Knq7e2vylzUDdon9OqtolQdV_Em4tCLj7g>
+ <xmx:ju3WaS0B0DB5A5AFfERfdWInBuiBW_V_64xREo1VeiVqR0YGfupNiQ>
+ <xmx:ju3WaYX2mPlCTfUx31P7deGO5U9MqD4wy0DquB8rGVJW6iBx888rfQ>
+ <xmx:j-3WaRlo_1a4Si93sjGJ_kHt1uW28MT7M-HtmPpro0iEIxzLo0FmIBCz>
+Feedback-ID: i426947f3:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 8 Apr 2026 20:06:37 -0400 (EDT)
+From: Mathew McBride <matt@traverse.com.au>
+Subject: [PATCH 0/5] board: ten64: add USB Hub (USB5744) management support
+Date: Thu, 09 Apr 2026 10:06:30 +1000
+Message-Id: <20260409-ten64-add-usb5744-v1-0-2094496f72c8@traverse.com.au>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAIbt1mkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDEwML3ZLUPDMT3cSUFN3S4iRTcxMTXYPEFNM0s8QUyzQTAyWgvoKi1LT
+ MCrCZ0bG1tQBd1akeYwAAAA==
+X-Change-ID: 20260408-ten64-add-usb5744-0ad5f6ad9f40
+To: u-boot@lists.denx.de
+Cc: Mathew McBride <matt@traverse.com.au>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1775693197; l=1979;
+ i=matt@traverse.com.au; s=20260115; h=from:subject:message-id;
+ bh=irxCV+c0OXP6OAmCnJRYzQVujz6+oZ+tzmBwmsvW3Pk=;
+ b=BfdMSxpcgcao/6gV0n39fcHp8audcjauuYwuMjTdXRSLuZHaFUtmEjog1EsNyqy+gqo1sLRcb
+ +HhSE3PqQQ7Dy1xr4iFq0wNu1o9aCj7O1CBCk6Oxvm/Is+GXw4YKExD
+X-Developer-Key: i=matt@traverse.com.au; a=ed25519;
+ pk=SM+aGm9Y2fPJ2prfH/b5lab73fTBrKL5UsJwdzv7Pbg=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,123 +114,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-So that you can use virtio network, block etc create the virtio mmio
-instances. There are 128 of these even if they are not all used, a
-single mmio base value is passed via bootinfo.
+The main public Ten64 board version (RevC) has a Microchip/SMSC
+USB hub (USB5744) connected to the second USB controller on the
+LS1088A.
 
-Signed-off-by: Daniel Palmer <daniel@thingy.jp>
+The USB5744 is configured (by bootstrap pins) not to start automatically,
+rather the firmware has to issue the start commands to the USB5744
+over I2C.
+The rationale for this is to allow certain ports to be disabled,
+namely the M.2 Key B slot where the USB3 lanes need to be disabled
+for a card that is PCI Express only (as the USB3 pins are shared
+with a PCIe lane).
+(The functionality for this scenario is not present in the mainline
+USB5744 driver at this time).
+
+Further testing revealed that some operating systems get stuck at boot
+when they start their usb5744 driver, so we hide the USB Hub from
+operating systems by deleting references (fixup) in the FDT prior to handover.
+
+Similarly, references in U-Boot's internal FDT need to be deleted
+when running on a board without the USB hub present.
+
+CI pipeline results are here:
+https://github.com/u-boot/u-boot/pull/924
+I had to change the gpio.h #include in usb_onboard_hub.c to
+asm-generic to fix a compile issue (missing stdint types).
+The CI did not pick up any issues with this.
+
+Signed-off-by: Mathew McBride <matt@traverse.com.au>
 ---
- arch/m68k/Kconfig                     | 14 ++++----
- board/emulation/qemu-m68k/qemu-m68k.c | 47 +++++++++++++++++++++++++++
- 2 files changed, 55 insertions(+), 6 deletions(-)
+Mathew McBride (5):
+      usb: onboard-hub: fix compile issue with gpio.h import
+      board: ten64: add fdt fixup to hide usb hub topology
+      board: ten64: remove USB hub references from internal FDT when needed
+      configs: ten64: enable USB_ONBOARD_HUB (USB5744) option
+      configs: ten64: switch to OF_UPSTREAM
 
-diff --git a/arch/m68k/Kconfig b/arch/m68k/Kconfig
-index 6ce8f577e3a1..20a112880c87 100644
---- a/arch/m68k/Kconfig
-+++ b/arch/m68k/Kconfig
-@@ -195,12 +195,14 @@ config TARGET_STMARK2
-         select M54418
- 
- config TARGET_QEMU_M68K
--    bool "Support QEMU m68k virt"
--    select M68040
--    imply CMD_DM
--    help
--      This target supports the QEMU m68k virtual machine (-M virt).
--      It simulates a Motorola 68040 CPU with Goldfish peripherals.
-+	bool "Support QEMU m68k virt"
-+	select M68040
-+	select BOARD_EARLY_INIT_R
-+	select VIRTIO_MMIO
-+	imply CMD_DM
-+	help
-+	  This target supports the QEMU m68k virtual machine (-M virt).
-+	  It simulates a Motorola 68040 CPU with Goldfish peripherals.
- 
- endchoice
- 
-diff --git a/board/emulation/qemu-m68k/qemu-m68k.c b/board/emulation/qemu-m68k/qemu-m68k.c
-index d3527aee1128..3617c61b5c1f 100644
---- a/board/emulation/qemu-m68k/qemu-m68k.c
-+++ b/board/emulation/qemu-m68k/qemu-m68k.c
-@@ -14,9 +14,14 @@
- #include <asm/bootinfo.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
-+#include <dm.h>
-+#include <dm/device-internal.h>
-+#include <dm/lists.h>
- #include <dm/platdata.h>
-+#include <dm/root.h>
- #include <linux/errno.h>
- #include <linux/sizes.h>
-+#include <virtio_mmio.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -25,6 +30,38 @@ static struct goldfish_rtc_plat rtc_plat;
- static struct goldfish_timer_plat timer_plat;
- static struct qemu_virt_ctrl_plat reset_plat;
- 
-+#define VIRTIO_MMIO_NUM	128
-+#define VIRTIO_MMIO_SZ	0x200
-+
-+static struct virtio_mmio_plat virtio_mmio_plat[VIRTIO_MMIO_NUM];
-+static char virtio_mmio_names[VIRTIO_MMIO_NUM][11];
-+static phys_addr_t virtio_mmio_base;
-+
-+static inline int create_virtio_mmios(void)
-+{
-+	struct driver *drv;
-+	int i, ret;
-+
-+	if (!virtio_mmio_base)
-+		return -ENODEV;
-+
-+	drv = lists_driver_lookup_name("virtio-mmio");
-+	if (!drv)
-+		return -ENOENT;
-+
-+	for (i = 0; i < VIRTIO_MMIO_NUM; i++) {
-+		virtio_mmio_plat[i].base = virtio_mmio_base + (VIRTIO_MMIO_SZ * i);
-+		sprintf(virtio_mmio_names[i], "virtio-%d", i);
-+
-+		ret = device_bind(dm_root(), drv, virtio_mmio_names[i],
-+				  &virtio_mmio_plat[i], ofnode_null(), NULL);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
- /*
-  * Theoretical limit derivation:
-  * Max Bootinfo Size (Standard Page) = 4096 bytes
-@@ -65,6 +102,9 @@ static void parse_bootinfo(void)
- 		case BI_VIRT_CTRL_BASE:
- 			reset_plat.reg = base;
- 			break;
-+		case BI_VIRT_VIRTIO_BASE:
-+			virtio_mmio_base = base;
-+			break;
- 		case BI_MEMCHUNK:
- 			gd->ram_size = record->data[1];
- 			break;
-@@ -80,6 +120,13 @@ int board_early_init_f(void)
- 	return 0;
- }
- 
-+int board_early_init_r(void)
-+{
-+	create_virtio_mmios();
-+
-+	return 0;
-+}
-+
- int checkboard(void)
- {
- 	puts("Board: QEMU m68k virt\n");
+ board/traverse/ten64/ten64.c | 62 ++++++++++++++++++++++++++++++++++++++++++++
+ common/usb_onboard_hub.c     |  2 +-
+ configs/ten64_tfa_defconfig  |  4 ++-
+ 3 files changed, 66 insertions(+), 2 deletions(-)
+---
+base-commit: 0a7e2a90ad4df4235946c2349fc9430e87428d4f
+change-id: 20260408-ten64-add-usb5744-0ad5f6ad9f40
+
+Best regards,
 -- 
-2.51.0
+Mathew McBride <matt@traverse.com.au>
 
