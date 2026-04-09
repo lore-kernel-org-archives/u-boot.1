@@ -4,133 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C75FDE9DE41
-	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 07:06:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B14F3E9DE5A
+	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 07:27:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 179DE8407E;
-	Thu,  9 Apr 2026 09:06:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 229D1839D5;
+	Thu,  9 Apr 2026 09:27:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="JJU0L+d5";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RWhF7fQV";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Gz0Dttwa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92791840D8; Thu,  9 Apr 2026 09:06:34 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id B0BC483CF5; Thu,  9 Apr 2026 09:27:19 +0200 (CEST)
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F70783DC9
- for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 09:06:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6395CU8t3535075
- for <u-boot@lists.denx.de>; Thu, 9 Apr 2026 07:06:30 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=9Jbv9eSWqRpcDU9pAOqHTDoHpUXvNf7fcla
- EJuv+Mcw=; b=JJU0L+d5+o4KxEXNxtj4j6ggjfQKNfz57yIa/jzSpFK1pcfffWz
- 4ZnTMLs+Z8M/MPrH/fd/SicJMl95C1iciXeHRd1G+U9M6dc7rWcHYOkw2mc97L/Z
- AF6F70lHTVtxQCeXvcccbG0gZbogY6mvJ1mprzLhay9uJ/3Ah2zC14xk9U0gAcA/
- 9wAGsEsuM3xx5aHQMqGZoH+e6ScCihmePgkfs1LlU4nGYaJJbscxt1FnVN+HI3Ma
- CN4/OY9SmH5faaRvBWvGra0//mdED2wZsSt7QRpOHImjfgpGfimj9EuvYhMfsYZY
- deT+KqVcJi0z35FH8uswrDjxgBFLix52W0w==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
- [209.85.216.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ddw9mt0d2-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 07:06:30 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id
- 98e67ed59e1d1-35da8eb0553so683263a91.1
- for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 00:06:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1775718390; x=1776323190; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=9Jbv9eSWqRpcDU9pAOqHTDoHpUXvNf7fclaEJuv+Mcw=;
- b=RWhF7fQVQybzYdU5riYT/4IAojNr+ZZjjTu7e2zAE+ykoSqGpdoAqcG7LS1yJrl7uR
- N4PL3pERazk+kRKWFYVet9FYW8+K5P7Oqwfj7zS5EwzipWX8axwVF9B3aHmApX8UMqdT
- ptjc9pJEydv4mAEJx4PUtwUBzxJ/sc5NCsR7NotXvYsXNudEnsmwIqxq2goHlg+vTyOt
- hymFkAZkuzhrUvVmPjVw/OXgUq39UxvStlVRg+WIwOUuBgBN4QDwr1f77802Cby+pSK1
- bZ8BKOmp4s0V4TLfRDxtmYCiwgARYd/Ge1J62SOBnw4bYrZuzhzqpzxj9ve/Kh4WMGfi
- 70YA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775718390; x=1776323190;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9Jbv9eSWqRpcDU9pAOqHTDoHpUXvNf7fclaEJuv+Mcw=;
- b=auFfLaReQK+JQFt8kX4A+FabcUD7DydNN+9wU4s983F8qZMcBDhwwdS0b5RK6rDGcZ
- X8TpU2mC/59/zEHOqnkQIp+oIMrQE7QcX1isDdBJq8MEbZlzsNYUyf2/hGyCdUgfj0mq
- 7d6rho3qmYM2bDOLzlnqP4DOKmFkyLqflyR8v43LDaQxCGNXwkd8jtHI/FvlUdF8kgA2
- s4y2ad1FuJUeiRZDds6P3Ipdj7v47xv8rk/hYPcwaRP+AFuXbvLSWq7Le2yOgSJsfyNS
- JC15AG9tluD9ExBV1skoD9+mnjxmGf0XS2duocoSQx+Mev3iPvIz7QfPNjnQNej1gBfO
- E3Kw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVxTdplk6MTH16Fy6EI8RvB0Bx0u14YFukgLR/BQCqz2VTjv1EAxP/4iBLhRw7lUMkj7MtWTR0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx9ge3faDYPgNwf+E5xdeTJNUW52lHC10/xBhSFc6dqjvb2KGKW
- v/9Xnm+FEY1hRdcOHWW8bK+M6PKY/tZkma6TOw4ogLy70GvIb9lbwxaVathrsosO/d6XQza2GJi
- i6uK+CEsSIblcQTaznHfCESHS5jETOTpcp2MLNuae/ogbs4NTF8bXV787
-X-Gm-Gg: AeBDiev0Ldj63t9GPCUPba8WYH/r0HNXdbShm0/Ui3Ie4cS+TPORaxPcWBCEtDW3U2c
- WhNAgIHOJtUP/jN0Fzzvt0o36Q7KDUuaR5ojY0iB3VToJ5mZS7CRaHayFllgmQUgYh7KFz5LSPH
- /jT+t8kMFBGmUYNqcJrYXu+Hoo54gTipHkmU2Dl1GzF2+cnrAkT9unJTcCHkJ/ovCUuaP6Cst4z
- lnMGMDnMn4Y5tPFFwuQ7c5eM3vNhEcg0Xwj+QtmbNEWpg/H3Iaq2Vg4PLAgqkGuZRXcoTmCAhls
- XD08ikj9B0yhW++8M0rF2gvXIqjIfZUGLpwkTBKigvIV5p+yQitKm0+0pITpWwqDaVMYHsS7C0Z
- LYONxIjyAdkQvsOMRuA51FhR1ULyzTjK2Lm/w/lbXfYc3VlRpRNxkS8cU0fW7ZhG39rEkwAs8ZD
- 012ZL6tenqNVGg288j/TuuuqQ7nI1LeXofyRJ7MSEKdsEBxbKyzRw=
-X-Received: by 2002:a17:90a:d2ce:b0:35d:a1ce:c1 with SMTP id
- 98e67ed59e1d1-35e353b3408mr2333810a91.8.1775718389659; 
- Thu, 09 Apr 2026 00:06:29 -0700 (PDT)
-X-Received: by 2002:a17:90a:d2ce:b0:35d:a1ce:c1 with SMTP id
- 98e67ed59e1d1-35e353b3408mr2333790a91.8.1775718389198; 
- Thu, 09 Apr 2026 00:06:29 -0700 (PDT)
-Received: from hu-varada-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c76c65991a8sm21926708a12.28.2026.04.09.00.06.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Apr 2026 00:06:28 -0700 (PDT)
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, peng.fan@nxp.com, jh80.chung@samsung.com,
- trini@konsulko.com, loic.poulain@oss.qualcomm.com,
- patrice.chotard@foss.st.com, varadarajan.narayanan@oss.qualcomm.com,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: [PATCH] mmc: msm_sdhci: Use max-frequency to get clock rate
-Date: Thu,  9 Apr 2026 12:36:20 +0530
-Message-Id: <20260409070620.3655875-1-varadarajan.narayanan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+ by phobos.denx.de (Postfix) with ESMTPS id 5534483693
+ for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 09:27:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=BOczTq+A18JdKfRbw0oLPR9ekP9+9wtBId5piOEmZqCd+GFY3ZP8f5gfPFqSD3HlR+i+LU429bTf8pAx0p7eNp1HnBr0zlV8TyHLAKgulXWZu1ymQ7Nh0f8Q5/b8QrLThFOBcdiKcigLmHc83ihz9XvQsYceOmBG12lD3zkax8PfCPSowSfwYe270gPzNqsE7KBMenFDRvRav9T0GpYFSQQ6dImkuIWi/IupvTe4uGzinovevVDSelX/yIrDJ3AXAGUQjXNuuAOQ1OUUSDgvTVy20jOmdUyFjF7/XGGuNwGo7R5Sm8c/4cOludfHmvtseHqgF1MAK3Hiq/Wg1rEonQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YBKDOblSwQBtHDGpQMo2VOpRZPKaueLgIPmvRl9gZqE=;
+ b=GAxCQWfL8PsZW0rIIiGty9oLr4Q4qEwfEt9U+AH6XVjjdZdIrPnM16CTbi4hI9lmsaI1iG21w+4gCnmRO+zeF2EFVk1qsjknZEu/c6cPFyhuCA4ebglbZ9lwOmveuY3j5d7ZsdrccdYtzHr15rMujk9WZt20fCnYJg4Hixz/v8JS2pfiAWtmsddgMU8+y3SopsxmZYHq8cx1elxeA4uPSZVsN+QYettVohUoyPhCw5OjSJr4/Wgwj1rJ1qtoGKTf90IOcxTFfhYVf+bAcIPlBXpZGeymRJ3558MfYd7Sf87nC6GSdKc+IEhD/o+alxPYvzC7zQcPF9IXFGsswSxnbQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YBKDOblSwQBtHDGpQMo2VOpRZPKaueLgIPmvRl9gZqE=;
+ b=Gz0DttwaSj3MC0qLziHAdT9CnWy1D1U+SbXUAylhz7Auy+bRX8WHQLjF/Yu2bKL8byK3iuTH6KcEn8MmOVCr8Gjv4GqwGtfgPKpmwR7F7CxKg3RliCjgfZkVzt6QaioDGFJOuWewtMNbmw40g0I3puCXwiH9k8x+PEUSeWIzW3g=
+Received: from SA1P222CA0080.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:35e::17)
+ by SJ5PPF5B5767B72.namprd10.prod.outlook.com
+ (2603:10b6:a0f:fc02::7a1) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.20; Thu, 9 Apr
+ 2026 07:27:14 +0000
+Received: from SN1PEPF000397B5.namprd05.prod.outlook.com
+ (2603:10b6:806:35e:cafe::bb) by SA1P222CA0080.outlook.office365.com
+ (2603:10b6:806:35e::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.40 via Frontend Transport; Thu,
+ 9 Apr 2026 07:27:05 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ SN1PEPF000397B5.mail.protection.outlook.com (10.167.248.59) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9769.17 via Frontend Transport; Thu, 9 Apr 2026 07:27:14 +0000
+Received: from DLEE213.ent.ti.com (157.170.170.116) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 9 Apr
+ 2026 02:27:13 -0500
+Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE213.ent.ti.com
+ (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 9 Apr
+ 2026 02:27:13 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE209.ent.ti.com
+ (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 9 Apr 2026 02:27:13 -0500
+Received: from localhost (ada0543016.dhcp.ti.com [172.24.233.9] (may be
+ forged))
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6397RCEm3368329;
+ Thu, 9 Apr 2026 02:27:13 -0500
+From: Anshul Dalal <anshuld@ti.com>
+To: <s-vadapalli@ti.com>
+CC: <jerome.forissier@arm.com>, <srk@ti.com>, <trini@konsulko.com>,
+ <u-boot@lists.denx.de>, Anshul Dalal <anshuld@ti.com>
+Subject: Re: [PATCH] net: phy: dp83867: default to 2ns delay if unspecified in
+ device-tree
+Date: Thu, 9 Apr 2026 12:57:00 +0530
+Message-ID: <20260409072659.509356-2-anshuld@ti.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260406124559.2481344-1-s-vadapalli@ti.com>
+References: <20260406124559.2481344-1-s-vadapalli@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=cfPiaHDM c=1 sm=1 tr=0 ts=69d74ff6 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
- a=y39NnA_bIYQAsuYrnNoA:9 a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-ORIG-GUID: ULRAC_xldJXIhHpLNrMRr-Rzf1t-suXK
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA5MDA2MSBTYWx0ZWRfX6WSiRQtHfcLE
- OqWhuTnLIzUqPt1OifXHfpMY2LcaeoYpXy24IAtBDmkmJoKh8JejaOrFokxUVGBZjm9Wo+EOAbL
- v1zE+Z3XQXBOJJECOPId1WLS7faS1FBk4bElk0BR0MLMtcHpwqTNZG5eIrMUXxd9u8NuzOsPuWf
- WbwnWKOzAOAyq2qtKPi+sgoo+e5SWn0oagZJeKEpwX/+bQXdv5H3vPtLR9D1pw68TqmC/pFeRUN
- i7VV2rwdE2COtxioayIrng3aN+CIX+B6r21W9lsFX15ZcCduna8vmLSIFPzt1YZXqQwpqL9BIEy
- VvNGRzwNZUEQ+5cUAohVwKG0xXg70LxUlT1uOrCkvoday2lOnwSG/Lo6EL7hYp5MzSuy9ID44Qw
- u8RUkoMbx118KyutBUUx+kx/JV3GQJi/nT9Ruxfz2fc3SB0z4EAjLp9ETVY9ay9hQ/0ks18w9Xe
- 4ZZapdOb5fq3NdiJlag==
-X-Proofpoint-GUID: ULRAC_xldJXIhHpLNrMRr-Rzf1t-suXK
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-09_02,2026-04-08_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 clxscore=1015 lowpriorityscore=0
- malwarescore=0 spamscore=0 bulkscore=0 adultscore=0 impostorscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2604010000
- definitions=main-2604090061
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF000397B5:EE_|SJ5PPF5B5767B72:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7c0d5ad2-ad11-406a-2999-08de96096be3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|376014|82310400026|1800799024|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: yHGJA/gRycRTwV5mVUBDLvgcWZlYzAz6kAmaaUofTcjZLM04Ym7JcO4RcnUkhKhF6rSpgx+K7AqQAR5WTzWXqKuUI/X+mbBYqadW1aZgbCt3+KKvSN5BEup9RLsNjz962ulx3dJU9BeGbEUmo9+XkRpQJqjYZI6T+p4l0wCltDE4H7/AckWcSRT7N/m7z6kcOjCz8UHmOFB9o0QJOU53orJ9220MJWh7zxlzKXlUb0ibYkTSdlbr4WmBBpdqDrrxXMOB+J+4UtrbZ4AkzSh/mdqPEwBf9AAxbVF9RFy3kXaLRBdIt9TSRLLqj+TI9LWrvtEovfXfN34tGJ38y9iovnhiclqp6BTonUkBkorC1yat258sIMA2uP2GSenWKy27wlU5y98i9Pg523Fc+gXPQM7UqOUB+u3AnCT8x/TZoGOmvsRZGjm1KWd0CaF65eWhLoz/8yLHzTfPmEYI/Cz81ifD39YNw/EMm9GNcTI/dOhbMgoGttcabT1RHa+UhMJE1r5bMf8x71hA89JiQKoq0cjPS/jyPmsoU3RBNpTv6kY0D/KsUU5pzxLUFAsn7nxKPW3mzaNgOlxgTlfaXSs6UKBXqwcNsYBP+a42E97zIx50konuKJFctTCi/owT+gwrulWYACPAAOYjelrTjO7zfxZmgNvpOuTYmdQPXjUMRfsC+1/aH2T6wJPwJK2Jxaapd8Y3Rfh2OvnKVnn5iCDcgYBuwODJrEKU5BAwsAnzthgjczL9r5Eo8P4V/JWOnPnfUqxUaL3PMvT9X4GuMYUUjQ==
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(36860700016)(376014)(82310400026)(1800799024)(56012099003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 1si7vbuT4h7MC0vWLA+mw/4E6Mf7LmUYkcQ30x2qPzLSHdWXY5Ucn1QIi0/zF18F724rivC3rJhRxBl0WN+6fqch46x3alPiB9aVqXDCsoiShl/UaLMB2kUgdMsK2fklD/LCc0OLDEsibS1Bs1bu1BSK+cBCqJO2zLmhjMlu6vxr7xUPYaZHc5HUc0moPBf4KvO/aqTaTnDa7O8Z2+AzcdzkbbKtnFSBZuwH3Zyx+sTI2kiwKscGQR6vxImueXahvOUTmSpB7RTEJ7q7eCcueSQDvsqFSkxKW1t5mfXZyVhhs90ccsWK17wPqVjeZ+9HDvIY9CH3wYIiC0QBAtZUgdGTDs/779w1xlef/BKNhVGxk0SNgSG+uoQNQ/ZZArXcZnYG3FGFPTRwSFKPpF1cXxAGWYk6nDrTMTGW4FrMkAnIx2RBl3xBJlx3c2e954Jt
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Apr 2026 07:27:14.1358 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7c0d5ad2-ad11-406a-2999-08de96096be3
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF000397B5.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPF5B5767B72
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,33 +134,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-msm_sdc_clk_init() uses clock-frequency to get the clock rate for SDC
-clocks. However, the DT files seem to use max-frequency for the same.
-Since msm_sdc_clk_init() doesn't find clock-frequency in the DT, it sets
-201500000 as the clock rate and this results in timeout errors on IPQ
-platforms. Hence, try to get max-frequency if clock-frequency is not
-present.
+On Mon, 06 Apr 2026 18:15:57 +0530, Siddharth Vadapalli <s-vadapalli@ti.com> wrote:
+> Since Linux commit c360eb0c3ccb ("dt-bindings: net: ethernet-controller:
+> Add informative text about RGMII delays"), the interpretation of RGMII
+> delays has changed. Prior to the commit, the RGMII Variant among "rgmii",
+> "rgmii-id", "rgmii-rxid" and "rgmii-txid" clearly specified whether it is
+> the MAC or the PHY that "should" add the delay. However, post that commit,
+> the RGMII Variant only specifies whether or not there is a delay on the
+> PCB traces between the MAC and the PHY, leaving it open as to who adds the
+> delay.
+> 
+> Hence, instead of enforcing the existence of the device-tree properties
+> "ti,rx-internal-delay" and "ti,tx-internal-delay", default to a delay
+> of 2ns, while continuing to override this delay with the aforementioned
+> properties, if they exist in the device-tree.
+> 
+> This is in line with the Linux driver implementation updated by commit
+> 6bf78849371d ("net: phy: dp83867: use 2ns delay if not specified in DTB").
+> 
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 
-Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
----
- drivers/mmc/msm_sdhci.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Reviewed-by: Anshul Dalal <anshuld@ti.com>
 
-diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
-index 66f3cf2de4f..2e6120f18ff 100644
---- a/drivers/mmc/msm_sdhci.c
-+++ b/drivers/mmc/msm_sdhci.c
-@@ -71,8 +71,8 @@ static int msm_sdc_clk_init(struct udevice *dev)
- 
- 	var_info = (void *)dev_get_driver_data(dev);
- 
--	ret = ofnode_read_u32(node, "clock-frequency", (uint *)(&clk_rate));
--	if (ret)
-+	if (ofnode_read_u32(node, "clock-frequency", (uint *)(&clk_rate)) &&
-+	    ofnode_read_u32(node, "max-frequency", (uint *)(&clk_rate)))
- 		clk_rate = 201500000;
- 
- 	ret = clk_get_bulk(dev, &prv->clks);
--- 
-2.34.1
-
+--
+Anshul Dalal <anshuld@ti.com>
