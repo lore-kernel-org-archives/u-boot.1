@@ -4,109 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E2C4EA3C57
-	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 11:27:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52C56EA3C59
+	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 11:39:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7595839D5;
-	Thu,  9 Apr 2026 13:27:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 8ED2B83DC9;
+	Thu,  9 Apr 2026 13:39:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="W2HqBzUG";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="jKc9YRCo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C446F83D8A; Thu,  9 Apr 2026 13:27:52 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 71EA683CF5; Thu,  9 Apr 2026 13:39:49 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D503C83693
- for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 13:27:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 83CBF83693
+ for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 13:39:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-b97f9587e6eso107276566b.3
- for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 04:27:50 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775734070; cv=none;
- d=google.com; s=arc-20240605;
- b=Kikdypk6IutAPNoGb+IhgNEwE7nH1qNr5rpilFK8UvOofJYcYIyb4iQXKx3KCWtoWb
- KIai2PNJHSgt0vBag7e22h4pN0bYToB461BzKOGz3QjVaKcHqJuWYnd1ingvGaHvvEhh
- LAWxdw/MJshlslKmUyPlmf6S1hW/q9m5RRazUULo4Fc1CYRJtiRE/3aC1z2UXzT5+e0E
- 8wloo4pCDJdO0KfuFe20inU2o2r7ie5B/TWrRD394aVMxXxm+dpkNLdfGLE2XT+iRocK
- FoGIlSqqRfqxiDpu7UiqGaFTOvxdSt7NsYuuRT9HLT7a3KJBXtkUMDXoiATSM/je/PtN
- ynsQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=OkgRWahIO/iHes0O735vkpacEvIDYD+FT1tAb2jRY8s=;
- fh=3APL3yAaRWDnTkQCt/YGAL0fA7ANeAbLgwJO2kblEUQ=;
- b=Q4sspf3a1DVT78ppwP3U8/KRv8QUd6TPCG1fR3YMPt28r8rOe12HK4TMAyc5AzJWC8
- jWKPC/diyVUcfLTLoNvY0g0Jwh4d86xXzxw3nbwotQWyzAffIKhmkpTCA5JR5zNs10bm
- ih9uX7X9hSxhs746SwNEpXlG+AuzwEtmGVJO/IQbiJBx0R1LUhdinhjecuY1GnR/WMR4
- v8nwQkVSw3tDVs/TLV5k7XpnXjvsXkIsLjRgxWFftcdS0d3iPAQUKFegejes5ZdFQMb8
- AfUhH7hp5KM6eHNthn2DotgtN06w21GVxtK62vSqU7QNcxhyuEh2vxDx0/eEAzJVA/Wt
- Y/MQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1775734070; x=1776338870;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OkgRWahIO/iHes0O735vkpacEvIDYD+FT1tAb2jRY8s=;
- b=W2HqBzUG4Zzf5/O2w5+2BhV69mNY6u15qe1GKzE09s+LHx318rdi7d8Nh5jeFM3qU6
- xhG1XfBOcdqLkm5k5LBol0+cGjn1ZQnD1uFsx61xVxCYvYGC47HcX+mqel4cJNYt1dZI
- wX15UbcpcXcYYYo48PL5EHB2P0awPhWsXblLj/8wohRQuv8jrh1ybNml8glGmXb4p/TR
- FwXgMkwSjiQw92nDufBkra1u+RBv8HSwHkbkt3nEccrpLE8DmEbJCxZQhyMjgHiNs8SP
- lYIH+3ohulAu3EW7C75K2D1S0RoZorm0Crr8ffpvBUF4SeyqE0HZ+BBDcPDEPxF6cMNB
- lr0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775734070; x=1776338870;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=OkgRWahIO/iHes0O735vkpacEvIDYD+FT1tAb2jRY8s=;
- b=otan9TbqoQBpHFRql7s/PuaMohpGqFcy5cSHYLekEMbsxNXlmc2uU1xkA9yIgjf5+9
- Cfspz21MRPeFWu2K1U4Tag1j4yNmQxhfBTaKKHwiKioRkEMeSEIyjqQWi4ki2Ql9jTBg
- zDiOnC4pw1+SB5TiBOq9AWn0lv0s+5p53q3xBtYL5nNF1ab/pco5/AJCpz6NB2OXfEcf
- QdL5iVhy+usdeVJzMp9uDQ7umt1YZNPT5Cj/LYFYysH4iclYUAFIctMpL5kJmx5dOgcR
- BjXoqovtmPDtEoI0ExZ8pI6cLadSkkvXnOaNqMSEJeg0hb5NQIU+XnBbxxrMW6sUH1ml
- J2sw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUZMFnXpbnrIuuN+6/Jx6WnVit0xjIhpqgyVTufWX5H4i5/N5c77DVlE27Lj4T1wNE6eGxUgCI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy64BgvTz4ULuE4Pm68O98NrTv5tlb2srd9hYoQlzJhV7zcwytV
- so0IN6YPckotPWsBMVgS+tHa0CaN4yhsy8DXfYXMa3Xtumt/JHUk4UmWxVtHsKfVNkOeKZ0/Vxd
- kCdeXodgtQvML7YkUgJKT/vLVZyoUJs8WRMelPc/Qpg==
-X-Gm-Gg: AeBDietVAaBS03T2Q8E5WJ1CPQCS3oItQwuzgbSTSzn3ZKaIdh4TXTGTW0pv6A5YzMr
- LFZJr0btPcajnuhkH2QeiJyrrEUi1WrW6dwg2D8mBz7kq58ekJMJJjT1rLNDCXSxKy8p/iivTI4
- EOvON5TJMZxsFsgkw8sX0u1VvQwm0xmpb0EIA+ocED3YrjG95xumG5D36HWb0aM/lRWIIkkoqza
- 8OA6fdc9z09EEel7CThgA4V2f+DySq8lf1ee9+XGYhxYbHLq8xIZvNLzDPz/ECrAnc59qH8Qnus
- mBRDo9kCG78l1gEjcJpJPCcRkngFVKbV/zvHe74+T+e9Ud2ZdrYyhlwt+csPE6js1XJFWNnZgUs
- fIRWAYhO1pSX32SOlc5YnoI0yfw==
-X-Received: by 2002:a17:906:9f91:b0:b97:cc05:61b9 with SMTP id
- a640c23a62f3a-b9c6764d9e8mr1366771266b.15.1775734070238; Thu, 09 Apr 2026
- 04:27:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=SDuW6Ubn0CoHEuTXsRJwMOyw7fSoI7ilj1EEtB/oIpTXZjPLEktDdzlzksyzqcPVsIUnmDjEUi17ql2h6VTzR6K9Tw+QROy0fGrrgoqxZpwliXKcPEHgGsd2qmtMsUq9wcpi5DzWf9SL+7jjgP43o5kOBT4kRxMheDeVuuC3YrPlUMRWSQXIX+R6J68Uwe0tjpQbBrMKnVI6rioexzUzk5Q2Ag9g57vE7bMZC86sAaOrEXWLv2VUCPQ+pgSahSYPI29EMSPN2oL9gWQ4eO0/nauMg5bIHY9008k1wmZ0QTw8RVqvlWmr0WsmEuTCY0EY9eILgiI9frc0n9DgXeaxkw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7/1Om9MTxNhjMmD4vyv6Kt+ocMDWwIST5HHS9XlBjJI=;
+ b=cZmvh5DNTOeKDT/AHhzP3KqBteTQV1NT4XRrvgtTCAhPkcZZwMrWT3uKT1iYewY2jAngc41R5cFIHNVAxXDSKMwiKSA1EO6y6Mvg1MTeYeQ9OBtwnjB9yh28jncRUMggIyzRgNF2y0Z5f0KcoDIiyzGW1WY1Se/wmFLmyv8mKJXH1y3J8dk1FNcpJvqFb1Fl1+RTR5VIGyyMP5BKFojGbO/+JyUd1b86G+ruepn1sBuoZgOeyLsPan3ih/ZKcOwm4ag03iCP4SimmRETv6ni7g++H1j2vlNJs2R4PtSIhbpUg6STaTLbS+r55jdR5osicZagy5qxe3WZo4Y1Xcw45g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7/1Om9MTxNhjMmD4vyv6Kt+ocMDWwIST5HHS9XlBjJI=;
+ b=jKc9YRCo+2TOK9bVYt9JphmoVOWEQzyY9/INLfUccZUVI/wpPpIyu+dtYN1WkGviJoC5feUq1vbfFiFQZvHrEYPJUnXwC43iBVOAKEUSh49lRGGks35xy6Qb2Y5GXSnI3eivxKDXD4GK+/ru6wDImXgfaFKEQ/hp98NaYQR+TdBQf30v7WZ0YacnpcgUpZDULl+uc08RisQGafbtImisglELOkcAaTy0izSG8xmak928ibiklgZBMm7h4rd1NWyXbuOi/sBJyKBwPxb6gFo9c6u9iDvC2dwUevWO/QnYv0WNgyQtM+E01ejuyh9Q+IqyP1ghPZcNigZAXNhzIhtxkg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by DBBPR04MB7979.eurprd04.prod.outlook.com (2603:10a6:10:1ec::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.20; Thu, 9 Apr
+ 2026 11:39:45 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e%3]) with mapi id 15.20.9723.030; Thu, 9 Apr 2026
+ 11:39:45 +0000
+From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+To: u-boot@lists.denx.de, trini@konsulko.com, meenakshi.aggarwal@nxp.com,
+ andy.tang@nxp.com, chunguang.li_2@nxp.com
+Cc: Peng Fan <peng.fan@nxp.com>, ioana.ciornei@nxp.com,
+ florinlaurentiu.chiculita@nxp.com, mingkai.hu@nxp.com,
+ Zhiqiang.Hou@nxp.com, pramod.kumar_1@nxp.com, camelia.groza@nxp.com,
+ priyanka.jain@nxp.com, wasim.khan@nxp.com
+Subject: Re: (subset) [PATCH v2 1/4] ls1028ardb: add env variables to assist
+ boot
+Date: Thu,  9 Apr 2026 20:55:43 +0800
+Message-ID: <177573926840.4193161.15530355356520156129.b4-ty@nxp.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20260402035132.1706521-1-chunguang.li_2@nxp.com>
+References: <20260402035132.1706521-1-chunguang.li_2@nxp.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: MA1PR01CA0156.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a00:71::26) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-References: <20260327-mtk-pmic-fixes-v1-0-ef874ca82409@baylibre.com>
- <20260327-mtk-pmic-fixes-v1-2-ef874ca82409@baylibre.com>
-In-Reply-To: <20260327-mtk-pmic-fixes-v1-2-ef874ca82409@baylibre.com>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Thu, 9 Apr 2026 13:27:47 +0200
-X-Gm-Features: AQROBzB9tC_73gMHxUs76Qcd57cArgR4PHP7qrexG5tDZ3_4VPGP5iJRS5j0qCQ
-Message-ID: <CAEHHSvbZ-BpuBm2KOjz18ihzQsz6cRSnusM7Rv_YPWXuLePVPw@mail.gmail.com>
-Subject: Re: [PATCH 2/3] power: pmic: mtk-pwrap: add PWRAP_CAP_WDT_SRC flag
-To: David Lechner <dlechner@baylibre.com>
-Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|DBBPR04MB7979:EE_
+X-MS-Office365-Filtering-Correlation-Id: c63d4874-8cd2-49dd-4148-08de962cb1e3
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|52116014|366016|19092799006|1800799024|38350700014|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: TXcyFZb9uxsmfSuSg5CBD6Ez15ZlvyYLCTvkaMbfdk1VTYiFfkzF1uDLSWjqMCbrCcKVaYPZs3YYuiAtJcqSHZpT2zMCpZzMYXn3+WhlNjN1DTUV5gDshkQfuUbdTSPbNvQ6dEscduXG2/wjOmw+gsC2POkhn50lUFJOOozr9XUwLvTJCUSoeDqf4BYaYCE6WATORy0CdkRkBqfKbg4q4r4HPWbirUR+nzrZZPnavbmFnLKfe3XmivNTvvhlRMwBRZOQ8ZIS29Vw0cE/2OyNmn3snMiFXuGCKxWXOhUMum9l5bCFUwtDFCBm2U035aacvyJQ6XdsfV4yt80+5+GEkkyeTNeyStM56y1PPOOyAmzinC2xxpAtauCcqowk4zfuSif3DPaBnpPYkBC99WiaaZyokxdI1cxwkZGcDIxTWHP6lGF2KRbLZUIYY7hL71lh4Bhu04tWDeG+Rjior6HMSPHRDfR2ZhubsVt99vT2kfU5irtymGDcSlmHOiC9+f2nz7CYHTxDUqj6TUsVOSv64EUiUU/OTbyuv4P/ytqF4F4kqh8Tx01kSCcgrKB3Pme20XigC+CiTANmcMgwBHJfUGxSaOY1ayxfYLykImbgSeBgrHthqJeLkeZE83bAcZoacRMYX2aQgrdjrBAyN19QXGjTnfYFsrsFrKA17RUEUMJg+vE5zNcwdf8XZNPkrmpXym+A7pySYST79yIuGkvv6Xktd5LnGXFHbDb9MeHmkCehISQorqGf2EkO87xVyhFt0LJq7JsMK992wM7kPOT0EvyQ88rLpc5E5W2whWO8m54=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(52116014)(366016)(19092799006)(1800799024)(38350700014)(56012099003)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TktrNzdpUUpBS2tQODZWSjNmN3k3c2Vwb0pTVjdESjBQajRTZ1FWS25lS0Ri?=
+ =?utf-8?B?enNPYkxsWXg5Tm5YSEd6Q0ZBS2FNdXJicE9DdkU2dGtLUjFFTjIyUjU0aHp2?=
+ =?utf-8?B?SXNNNXp4Mm1UQnJJK29hMUFWSlQxd3dNU0lTK2tmK3pWaHVFaXZEdkxmWVVH?=
+ =?utf-8?B?R05JZ3dGdjk2YzMwL3Nmc3hnL0F4bGs2VmFiQjc1WjMwNHViMkUwVjhZSzNw?=
+ =?utf-8?B?WkRucHdsQTZSdnh2Z0pXK3dLUUhwQlhpVm5NWC9mZ1ZERytDSUJtL2hYT250?=
+ =?utf-8?B?ajQraHhTUFVYUjBZOVlybGNiOUlzYzYrTDB3QkhzZ3l4RUNEa0VuQ3hFa1Jy?=
+ =?utf-8?B?NjRrU1hqTDY0dzNNcFc1OUlJVXlSRFREcjZkbXZpSWh3cXNsWnFpSUNDTDRH?=
+ =?utf-8?B?UnJnWHl0QjBDcUd6c3JVZ2MrdXB0SngvM1U0RnpuZHUxRk0yaDB1M3pvQThL?=
+ =?utf-8?B?TS9McURRSDI4OGZnc1B3SmkzYS9uMG40OFl6dWdqVVpicmVTcnRDZzJydlpj?=
+ =?utf-8?B?anUwbmFGYmVPZkg5SkRib1JSa0Y5c053M2hQVXFuUWhQYXlGaGo5UTc5aVpD?=
+ =?utf-8?B?aWFrd0UyVWJITjNwYU1IQVRaMXRyWHNrUWhaQ1c5MXI2UXBTOCtweWFZdkVC?=
+ =?utf-8?B?SWxmdldTSVV2OW9rcWJ6azBkUUhpVkhHWS9jYzU1Q05XQkdMUzBweUlGR2Js?=
+ =?utf-8?B?TjhLbTN4bGFJaHRNSDFZcldva1Z3Nk1aelR3NmdzbEM1a2NDbFp4UXNHWFFU?=
+ =?utf-8?B?OXJwZG9RSnhnTjhQd0dyZUVlN3ZkWW9mWVYrQUZOT08vR3N0aUxydGVZZTZx?=
+ =?utf-8?B?cVhQOWVNUnA4RFpKN0JxUEVTbEFQa1E1Q2JjV2ZybFdIeXkzTWpjMXdlN0xL?=
+ =?utf-8?B?clcweVEzYXFURzU5Qk9GODdJeEFJZ0c2WGtrZHhKRlkwODZjRll2ZFR0ODdk?=
+ =?utf-8?B?Tk4rRFFSSCtjeG42ZmYyc0ppNW02Z1V4cjk0dHo1amM4ektuU1Qxd09CaFFG?=
+ =?utf-8?B?ekZ2bGVDaENaV09URU5KaGQvNkdyS3FYalVDeDBJTG8rMHpnb1dyOE4yTm15?=
+ =?utf-8?B?UDN3bUUxTGFJR0hGL1lEQkk5OWJrYm9ldW5MYWZzeVY0a1VKSGxzTnNRQkZq?=
+ =?utf-8?B?ek9vbXp3R0dodnpOdHdoakoycDBKSFF0bXhDNVEySHJ3c1N1ZVEwQzd3a1VQ?=
+ =?utf-8?B?a0JmblpBVGxWRjdrOExFSC93MTlHRFpBVFp2MmIwS3VjSTlyZ0ExM1VCNkF4?=
+ =?utf-8?B?TGdheVQ0YjB5d1RVeDBZVUtBcXJzbGJJNDRFQ2liVHR0aXRQNEx5R1RBc3Ry?=
+ =?utf-8?B?L0dFTmFUa09nSXNmZ0tnVVdTQndJTmI0eVJXL0N0aDlYanJtVTVyYVcwbHZS?=
+ =?utf-8?B?c2llWlZoM2JnVEF6TUp0bG83MjRyNzJxdk1rNCtmUEdFSmFiU3FlT1JuUzBk?=
+ =?utf-8?B?SzloRjNGanlWZ25YRW1kc3haSngrY2xFYUhicmdKTEVncFZyRlRHYU1PN3pa?=
+ =?utf-8?B?ekgyUzFLS3AvUkFIK2NNWFdFUFE4azdRRkUyS2J6eHlReVZ1dmNuY3RjWGRx?=
+ =?utf-8?B?V3B6Uy82N1Y1ZkNpRDZYZW8wNlNuZU0ydW55bTFKcEw1dDNaWVpQUHR4NFhF?=
+ =?utf-8?B?M0s3UFRrd3VkZ21lMDM5THZQd21ReHEzY0lyRW9qby9vaWh3MGtmSmlpV0lF?=
+ =?utf-8?B?b2V2VERENUxVOFhudnFQcTUwM1daV0hBUWFIZVJXQjVKODVzdnRzd0g5UlRQ?=
+ =?utf-8?B?dm9SSUM3dW1oTk5oR1BISlVwR3dOQzFRNXV3bnBoaXg5MUlYZGNWb1pWR0pF?=
+ =?utf-8?B?SjFzdzg4eSsvVXpQWDVMaEV6RkVBL1l6RThIcThKcThrR3kzR1MxS1dHWmxo?=
+ =?utf-8?B?bFFOZjBvci9Hc3BkcWxQVXY4amlVQUM4TFh1K09UckwxNktIR3dRWkNhTS80?=
+ =?utf-8?B?QVN0YXB5NVJ1UWNCQXJiU1ovNUZjY2dnODhneFp6TVVMM09VSzZMNVUzQmUx?=
+ =?utf-8?B?Z1A5WGUzUm5pN2NnQ1IwbFlWdkhOeUVmR3U5Z292YXNKNGlLQllMaGg2Q0pr?=
+ =?utf-8?B?RUMwVU1UNVlGQ2VxSUNyRGI1N2J0MWtTYTRIcWUwQVdtOUVvV0FaZXgyZnd5?=
+ =?utf-8?B?M0duOVQ4czEzeS8rMktQOVJvWklMLzlRdHN0eFVFQkxwOEtSWXliQ3JsNFNU?=
+ =?utf-8?B?aU5DRnBZRENiY3A4bytUNmk5a081S1hjTEp1RWJFeDd2ZXhxclYrUE5ET3Fh?=
+ =?utf-8?B?emtWWDRGcnIyRklZcWZMNjgyaVVkT2NiZHV1RGNoZnBwVjRHaHQ0Q1RleHFK?=
+ =?utf-8?B?dzhiN1IxMEEvMVhJU1pXZXNQeUN6MFFnNjhRNDI3S09oL1FzTTZ2dz09?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c63d4874-8cd2-49dd-4148-08de962cb1e3
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Apr 2026 11:39:44.9917 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: IrT5Ytp7wf9+J2/P2ZdNN9kLsbnKpsR4237G60ZS1Us+P7bkk5vdVPEkHXin+zDajo1KO8tMK2Y2CX2qKb5pGA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7979
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,70 +153,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le ven. 27 mars 2026 =C3=A0 20:03, David Lechner <dlechner@baylibre.com> a =
-=C3=A9crit :
->
-> Add a PWRAP_CAP_WDT_SRC flag to indicate if a PMIC wrapper has a WDT_SRC
-> or not. Then use this to conditionally enable the watchdog timer.
->
-> Prior to this change, since the register was not defined, it defaulted
-> to 0, so the wrong register (DONE2) was being written to.
->
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
-> ---
->  drivers/power/pmic/mtk-pwrap.c | 12 +++++++-----
->  1 file changed, 7 insertions(+), 5 deletions(-)
->
-> diff --git a/drivers/power/pmic/mtk-pwrap.c b/drivers/power/pmic/mtk-pwra=
-p.c
-> index 9ff06fdb3bd..d8498646921 100644
-> --- a/drivers/power/pmic/mtk-pwrap.c
-> +++ b/drivers/power/pmic/mtk-pwrap.c
-> @@ -60,10 +60,11 @@ static const struct pmic_child_info mt6359_pmic_child=
-ren_info[] =3D {
->
->  /* Group of bits used for shown pwrap capability */
->  #define PWRAP_CAP_INT1_EN              BIT(3)
-> -#define PWRAP_CAP_WDT_SRC1             BIT(4)
-> -#define PWRAP_CAP_ARB                  BIT(5)
-> +#define PWRAP_CAP_WDT_SRC              BIT(4)
-> +#define PWRAP_CAP_WDT_SRC1             BIT(5)
-> +#define PWRAP_CAP_ARB                  BIT(6)
->  /* To implement this capability, the registers used in pwrap_init() must=
- be defined. */
-> -#define PWRAP_CAP_INIT                 BIT(6)
-> +#define PWRAP_CAP_INIT                 BIT(7)
+From: Peng Fan <peng.fan@nxp.com>
 
-can you reorder patch 1 and 2 to avoid modifying PWRAP_CAP_INIT twice ?
 
->
->  /* defines for slave device wrapper registers */
->  enum dew_regs {
-> @@ -780,7 +781,8 @@ static int mtk_pwrap_probe(struct udevice *dev)
->          * Since STAUPD was not used on mt8173 platform,
->          * so STAUPD of WDT_SRC which should be turned off
->          */
-> -       pwrap_writel(wrp, wrp->master->wdt_src, PWRAP_WDT_SRC_EN);
-> +       if (HAS_CAP(wrp->master->caps, PWRAP_CAP_WDT_SRC))
-> +               pwrap_writel(wrp, wrp->master->wdt_src, PWRAP_WDT_SRC_EN)=
-;
->
->         if (HAS_CAP(wrp->master->caps, PWRAP_CAP_WDT_SRC1))
->                 pwrap_writel(wrp, wrp->master->wdt_src, PWRAP_WDT_SRC_EN_=
-1);
-> @@ -912,7 +914,7 @@ static const struct pmic_wrapper_type pwrap_mt8365 =
-=3D {
->         .int1_en_all =3D 0x0,
->         .spi_w =3D PWRAP_MAN_CMD_SPI_WRITE,
->         .wdt_src =3D PWRAP_WDT_SRC_MASK_ALL,
-> -       .caps =3D PWRAP_CAP_INT1_EN | PWRAP_CAP_WDT_SRC1 | PWRAP_CAP_INIT=
-,
-> +       .caps =3D PWRAP_CAP_INT1_EN | PWRAP_CAP_WDT_SRC | PWRAP_CAP_WDT_S=
-RC1 | PWRAP_CAP_INIT,
->  };
->
->  static const struct udevice_id mtk_pwrap_ids[] =3D {
->
-> --
-> 2.43.0
->
+On Thu, 02 Apr 2026 11:51:29 +0800, chunguang.li_2@nxp.com wrote:
+> From: Chunguang Li <chunguang.li_2@nxp.com>
+> 
+> 
+
+Applied to fsl-qoriq-for-2026.07-rc1, thanks!
+
+[4/4] lx2160ardb: add env variables to assist boot
+      commit: 7cd6c9df4ce1d4d6afab05e351cbd8567c8a13df
+
+Best regards,
+-- 
+Peng Fan <peng.fan@nxp.com>
