@@ -4,121 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A191E9DE62
-	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 08:01:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B886E9DE6B
+	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 08:37:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0EAD5840D8;
-	Thu,  9 Apr 2026 10:01:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D8D00839D5;
+	Thu,  9 Apr 2026 10:37:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dKa8qYyV";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="R/iMfsV0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD3DA839D5; Thu,  9 Apr 2026 10:01:31 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A749083CF5; Thu,  9 Apr 2026 10:37:24 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38E5B840D8
- for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 10:01:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2334F83693
+ for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 10:37:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-488b00ed86fso6069915e9.3
- for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 01:01:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1775721687; x=1776326487; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=WovDVeh3PfdLfhBuKK3xsVS9Ihwbt34LuFpYycxeOsw=;
- b=dKa8qYyVgW2QN8S1bxgNKXveucW7z9DrA1aHRMEJ99dZ7/b29l8BiVJ5zoEPUE5Iq7
- PgwXRhVW4rRzgm2GetTd2aEPmtymlzZZYkLm8JSkNkEKcy4QQInDqto4WLET4RWUf7AA
- T6hOg+xAofIPa2o98rfGVCmeRHEHyE2TX8t0kXvse89GjPVr+pjhrjBUC5POWghiIzSf
- YKcCNXOHFWugC/QnDBiKjU+EXLESnNSyUXAB4VZWM4Pozix7JuonDMgM5kedfix0qLii
- Jqh6U8bdXF5ITsVPqwq0qkNergwD+oDa+BkDeOWcCEq+3cTrZOQfT4o5+WoJ16+Op6q8
- iK4w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775721687; x=1776326487;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WovDVeh3PfdLfhBuKK3xsVS9Ihwbt34LuFpYycxeOsw=;
- b=UO6shj/kVm6cAXJ4PEaF0CZfZWbj6ojdg+tkYT1vnVIu6utdDS2Vh4LGK2ZLpMnhsD
- b6HwlgPo52YKc+2o//BUaRcorbo26kIgY1cvUeifl2uJYK+NHMtYa9sdU/s/03CWOxfJ
- +LRa6K5FyX7IXPkYLJe+mENOJnIyWAKluggCkKGNB/SuUrqd0GjbeUs9i/GhHWmwHy6e
- G/OOMrlsdckUHCmccNs9tcXBm+4xFrT3TjArmdKw84e6m4wTFlXz1191DAPFVWa615GV
- oLHImHFrLh/tjk7xJMPMjBRLnI8khKskuzB/2eAeN5M2Yjpk86Tag+GJlM8gRhgk5n78
- cE8w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXzykqHc3cdOKRx/h/ahZkF1nfyn0V3Rcl9RlfC1GZ8EagAigect/lXsOAFqBYD4UNdad0GtB8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyi+xLdCWMlXDAxsypKRdSd+3ZjVUHlI1vtaSwrZxAHopNLhAq+
- fs792QzzOrLDCJSL1T69ihxi10qVJZdfYa6rvPU+rO4bgyiFQhq0AYSxlJ+w66D+ykHX/8mMOHv
- 9oHFJ
-X-Gm-Gg: AeBDieu2Ro9odHZmEvCo0OK6twmwDbklwJNr22r4lUOWqUEkZuAQDIXRYIdE0H2rm6+
- 3PXjw4giab5CeEoD4u2bbYVd+R+Z5n+h3fqP7DNZYteM5gjVhAVgU35eSJ1UKAZ4Aubwm9OsodC
- rO0R9VZqcTazqNQAW7p0aypVAZQUbiGLvLnOgjTRAOUK+pQ48ia7MvTo5Ulod9xoJExeJAoskF6
- m78chbbU3cmRAL2mbTSydYi9mw7kjpuB/2m3gsaJCpmRPhOBfzavs7lzgE6H4FglQGtZkCQHdyH
- PirVFkXM/t9+hJqFtv6iYdeTrCstdeRYPcnNhg2fiNrtO2pRlhUhqq1pY1woWX9OF+3Udxl6JG2
- xjUkMxee6ZtezEtzBUfdTt3XCA+R2dALpjf9XgACAG5L2nZzTVV6z8sxNw3FFv0y7nM6JPOscWY
- O+mYAU5q1WQfXsfrHIIf5kusg6988s2rulRSMOj3mjxRe4OvbqKAAbv0OSWG2kq/IoBKBaBFKAc
- Dg1iI0=
-X-Received: by 2002:a05:600c:1e0f:b0:488:b1c7:b432 with SMTP id
- 5b1f17b1804b1-488cd059947mr34737285e9.24.1775721686450; 
- Thu, 09 Apr 2026 01:01:26 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:70d5:8219:5bd4:e213?
- ([2a01:e0a:106d:1080:70d5:8219:5bd4:e213])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488cd19ea6fsm53527035e9.2.2026.04.09.01.01.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 09 Apr 2026 01:01:25 -0700 (PDT)
-Message-ID: <65597f02-0d66-4bef-9cd1-05c0ff227eb9@linaro.org>
-Date: Thu, 9 Apr 2026 10:01:24 +0200
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=E9vlk8m76q2b9UDa7xJ28iCW3o9LdGlDeC9aQzNcVrdPMp+Hd3egdMNVdZkPM4krjOCKqvzR8/MRz3QX3eQQ4SDFnad3XcvyjgYiuNcD3ceyGosK/eKAaX91B/vVnLTiGoE2kUOL/PYFPrlq6PQtUZWj/jwqcmMMuxJJHwnSAoKf8X5/pmf689++DjQ3UmsL8fcvHZmVDHfe4O4Unrrf/0VKjE/hiLtKaLQTSJ+a/jzCG8ke7N2LLD10UmJddDbVtwWgD0wHCltnSnZquQc6ECbTIkeIfnCRRd2K7J5spKupkZuz2kjunNMrBSf0lldLQJTFlUYO0qIO8Ch2x934Xw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VRJeMiyS/8EacUA3toArdeH6oUdhqKzhfdR+eU7ZYBo=;
+ b=DqwLDupvsamBIKcIC3OWETsOeH8tqjYLcxpExJhxlcmbXgPy/52p8HSFda9xifU4fXUsj1If8rxXwl2Rp/BtNtZ/ksgqaPohfcejhJNCJ08b9xkry1B6PE03q7JIIjqUPiOpMV71PxLqmJt2Q11WYDPm8OXDSlZLoOWnUfJn8gjj7kR0BZBgmBbZMB40QfCtax97p6BorZlG7Kyg/LITY0BwT6fZltW5XdZcqKzk1+IlPviCKRsUfk3u+oWw41Aimmy6051cjZ8XNxnEfJzxTlhz4iB6YEGmJxsUiGSkZQZk1KpouoCDJsbCNl41B2JvQIuMQu9VXNQmdfVBUi5L4g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VRJeMiyS/8EacUA3toArdeH6oUdhqKzhfdR+eU7ZYBo=;
+ b=R/iMfsV0CynSYk9Koc7AsxbFt2EOuddmd35kIIYhR9tiqfjh39ekLOusYnXjHcuJI3at5LPjx4hOmkyGd2/KEbeIENLlF5uMZ7jTMqJ389/gZvbAgw6r0UhjNN3Hi1zCyZGz+xdSzaS5Aif+Qlg194B7iO1B6kiVHWfCsSk0c1s9vGO2wYymW170F0YgRmBgyagwGEdWB8VHzdFqoIZ8GMyCMIXXeZP4il9s59JgA4jXHmeALqHkXyBcHwgjKaMSHdpfxRApHD+8y5dgBGa+vMIatwO0f6Y7d00IOaIB9ABSwT6n8Oy2hvduNcYgtcRQnHnAavTLc5Jv/RBn6TY+2g==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by AS4PR04MB9689.eurprd04.prod.outlook.com (2603:10a6:20b:4fc::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.21; Thu, 9 Apr
+ 2026 08:37:17 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e%3]) with mapi id 15.20.9723.030; Thu, 9 Apr 2026
+ 08:37:17 +0000
+Date: Thu, 9 Apr 2026 17:53:30 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull fsl-qoriq-for-2026.07-rc1
+Message-ID: <add3Gk_2psBrgUv8@nxa18884-linux.ap.freescale.net>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-ClientProxiedBy: MA5P287CA0008.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:a01:176::7) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 4/4] configs: libretech-cc_defconfig: enable EFI Capsule
- on Disk
-To: Ferass El Hafidi <funderscore@postmarketos.org>,
- u-boot-amlogic@groups.io, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-References: <20260408-b4-amlogic-sysreset-capsules-v1-0-6f3386eb5124@postmarketos.org>
- <20260408-b4-amlogic-sysreset-capsules-v1-4-6f3386eb5124@postmarketos.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260408-b4-amlogic-sysreset-capsules-v1-4-6f3386eb5124@postmarketos.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AS4PR04MB9689:EE_
+X-MS-Office365-Filtering-Correlation-Id: e54719be-5e8c-4513-71e5-08de9613352c
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|19092799006|366016|1800799024|376014|52116014|38350700014|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: hP2ppaFKqpFHJmn9KP8Tl3MREnXU2OSTd7AvNAAV9alJNFqj24iRx5wpzZJg0ypla7GZqaw7eNz/L2sbTWuORBDJfiSNeaWjStPtstaLhFSrjH0zJjJIw8zT39cq0o3AnWeo8us8nxCWPh4VIBD7g2XKRHqleGSKAxwjLTJV1qArwG5+/8NWJd8eicsPAP4swR5XuDgsTmjnQ1c/n6CkFe6wmEnnrGB2fO1woi5+M3XWmDh+vabFRk+/kRdfHKHhUF2ybPwNCCIze7uBV9lmBJnmrqSGMLOVyw+wfsQduH/5qidnLdL5kQnv7ih26qAfC2OCkcoVniJE3aBV07C4HdUxvK2HljxLCr0NnhuGeCVREsc/RYLKeKpaT8Z4iRDxWTZGUfAEEpmVtxpNSrDCncDI5lUG0EPRRBFoh/zqF2HWAsNr0iQTe52WyJ+5uI9Dp1C2ImOnSrBP7s2zZCz52o6/KbMMIzDTCir3IWhuz/K3IMxcItQ1ilfz3jInTmfn8fDxyEK2u9d/Vza2mlaDI2l/wt8UVu7yKI0utvy7wQb5yS/Tajeo0WxaYFoVRkj+RUueY2mbTJV6Uq+nDUj1dTtVT3x/ddOIuikBgdt+P+Tl72VpsoFKPHty+q6Yo0TodnMGjX/nfzCGji4RUrvGtJ9J6qKCDlhjaMrmf3QekY3PxrpEp1wi9crHkBd2rB+AZ/RXm3ajedZiaVoXCoWGVMXM5HEwXhsD22eYf+/Qr5c7Cfy+0+hp+S3jT3fDJmUb
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(19092799006)(366016)(1800799024)(376014)(52116014)(38350700014)(18002099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?pBpk258j9DALvOC641PZL9svMksZU8AoCVih8034xf9vgCZVWs0oUR91Smvh?=
+ =?us-ascii?Q?4e/Gx7bwpiuGhiGq/KJAZNWLX25Pd3PZt35WmFWJ6ebOFfye4enoubU54Lho?=
+ =?us-ascii?Q?XPtKIEt3rXzJrSZc1KbQv+7r/z720foj4iaNGfjALZXt8lu9PL1WKz2kJYnH?=
+ =?us-ascii?Q?eNLS72EphAyWwWGwMuvfawOvNyGWF0TS9jvs6ICixauYdP63k0Ehc7gfMSa4?=
+ =?us-ascii?Q?OC6RykFixEuCbrwxo00URmpW8C8SIinCByhzzAQXCWJKgJb99/edy8uz2+Sw?=
+ =?us-ascii?Q?yCQ0Cy3jtgt+1YtGkZxnE7juKGDkW5JZqD+RxoP/WzU5o2bOBz8yu/SRRDW8?=
+ =?us-ascii?Q?OQxunXRHh/LA0MnI/Jr+1WqQTi9IfyyUFZhSl4M56/X3LpH/3g4pK3jJ+zx2?=
+ =?us-ascii?Q?IQk//gmr/deOtjXqUDlpM/7ttmvX5UnfyhrretNjnSGd1RSPNY5M96hun/q2?=
+ =?us-ascii?Q?q+3UWo2X10FDl1o0hACZNXTDYxe0d0/vS235rEvp2dT7njkpRyu7JsegKfHq?=
+ =?us-ascii?Q?6fNexq8Xp8VCNUyUMOMqXfqb2Jp6xyLaL1M1FQZiko8gTdBdVpFj64aYvGb3?=
+ =?us-ascii?Q?I9VRIx9xjLltLoaw2i5Z64smRDIF1aMtkHSwQfwxVRZV884TMP0JGv2AK518?=
+ =?us-ascii?Q?SEhZm28u9/xqFhpwoA1en9wX5Goj9D1KnGhaPZlBK99IJ/aR4aCOIBN8bBJD?=
+ =?us-ascii?Q?RSz8ZFigDFeTlgfyH0PSmeoaD708Wa2g/9eEgyS9N0Ha1QYBX8YjbqAhDBr7?=
+ =?us-ascii?Q?t9Gd1Al6lWCJYBt8k5iM2SUWn4XHOYMrGrY6/Ncbk/yzoIFjQu8jVoCL6jbB?=
+ =?us-ascii?Q?ViLSIqV7TYSUVEKWSxV82Y25zGBtsPGuCiKUOiTIkOMNFxykm1rUiiWMB8R0?=
+ =?us-ascii?Q?6HMfbLVoUy7saUy02M7mgu5V4O8rPlvBOTk8vrOlDA1CaYErpdTZOn6osuin?=
+ =?us-ascii?Q?cLlW/XgU2/PesXsJUV5gP3AWs4vrzMv2+XoLQPqr9g/AliJxB4DkNPcWtDIe?=
+ =?us-ascii?Q?VyPh/w3m2aZZNkHDWE4rzYBBEb8bLwXiYvpRfuGG2dsIEIbFEF0BTVE+QI1R?=
+ =?us-ascii?Q?EoZ+GXHdskyczN2h3xMWryFVaE3w3mLMYflXFoMlA4dameMg9Zl591E7VbKj?=
+ =?us-ascii?Q?3BlAgVgFybfLoYs+DFis4zIWMJweV5Q+fQorrTGpJ+cwDQu+NOiu+NnvvIIp?=
+ =?us-ascii?Q?uoInyd6iPZegvt0nDowZjfzt5/uh9gqpXxf4p86blZ6tKcmOMRHgtcc3fH3r?=
+ =?us-ascii?Q?jeSBe0i/sOEhSJKaGxN9jxSB3ymeU36rhN3j0k1fZk2fpjmRj2BZ7xNckzB9?=
+ =?us-ascii?Q?SbGomg/gSv3FvVqkOvPdJAZjW8CdyoHhjx39l/FqO3rzZDsjn+MyK/XJ887C?=
+ =?us-ascii?Q?CRvI+tp/ha6k55kMlmtwwPQavsVVXBuLLdoFdMSclAkSN5RW3DKT0bErCLQu?=
+ =?us-ascii?Q?nXZSDNZBAkN894UhHQU4/eEWUksPCMT/RvHMkgP4oVjnF3Fhbl9tIjDjWcIR?=
+ =?us-ascii?Q?78Q6XzTLo37i+eC1p5Y7+8cg4dSKQWwUTYwptruoiehkZtldPlqCTl7xi+4R?=
+ =?us-ascii?Q?yUTjwhxpe8CUNFoQ7HeYbQ1qis8hkJQ8kJ7mYKaALfN1U5albAoJaee77n7o?=
+ =?us-ascii?Q?iB0wwhhPG6bUVvSw6NsRRK8WdSKQ+D5RJ1dwnWnFuBtqc7m0z3HeEnoZcdEt?=
+ =?us-ascii?Q?hR59VyjJhWjz/HdxcY//Df424EXVydTe+yg+FEqcOrGzhvvESeUJlLhjZYp9?=
+ =?us-ascii?Q?qgS3cZe5TQ=3D=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e54719be-5e8c-4513-71e5-08de9613352c
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Apr 2026 08:37:17.5351 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6Ja0plCDbBNyKs0zgukARD8yuQlHd6gM9y95XUbt22PR8i5rAluK2pZyaHFxyno00dJuFGP/y5JDTuS2zVi5Qw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR04MB9689
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -130,49 +131,77 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/8/26 22:30, Ferass El Hafidi wrote:
-> Everything is in place to allow this board to support EFI Capsule updates.
-> Enable everything needed to support Capsule updates, as well as Capsule
-> on Disk. All this allows updating U-Boot on eMMC directly from linux using
-> fwupd. Also enable DFU_MMC, which is a requirement for EFI Capsule flashing
-> to eMMC/SD to work.
-> 
-> Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
-> ---
->   configs/libretech-cc_defconfig | 4 ++++
->   1 file changed, 4 insertions(+)
-> 
-> diff --git a/configs/libretech-cc_defconfig b/configs/libretech-cc_defconfig
-> index d5878bdc431..622922e97ee 100644
-> --- a/configs/libretech-cc_defconfig
-> +++ b/configs/libretech-cc_defconfig
-> @@ -16,6 +16,9 @@ CONFIG_DEBUG_UART_CLOCK=24000000
->   CONFIG_IDENT_STRING=" libretech-cc"
->   CONFIG_DEBUG_UART=y
->   CONFIG_REMAKE_ELF=y
-> +CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
-> +CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-> +CONFIG_EFI_CAPSULE_ON_DISK=y
->   CONFIG_FIT=y
->   CONFIG_FIT_SIGNATURE=y
->   CONFIG_FIT_VERBOSE=y
-> @@ -38,6 +41,7 @@ CONFIG_OF_CONTROL=y
->   CONFIG_ENV_RELOC_GD_ENV_ADDR=y
->   CONFIG_SARADC_MESON=y
->   CONFIG_DFU_RAM=y
-> +CONFIG_DFU_MMC=y
->   CONFIG_MMC_MESON_GX=y
->   CONFIG_PHY_MESON_GXL=y
->   CONFIG_DM_MDIO=y
-> 
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Hi Tom,
+
+Please pull fsl-qoriq-for-2026.07-rc1 for master
+
+------------------------------------------------------------
+Add env variables to assist boot for various LS boards
+Add gpio scmi driver
+Fix setting the function for scmi pinctrl
+Use standard device tree pin muxing format for scmi pinctrl
+Fix protocol version fetch for non-CCF platforms in scmi clk
+------------------------------------------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq/-/pipelines/29808
 
 Thanks,
-Neil
+Peng
+
+The following changes since commit a383c9689282269bb9687ec6c115de094c27fa67:
+
+  dm: Respect dma-ranges size (2026-04-07 15:27:22 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq.git tags/fsl-qoriq-for-2026.07-rc1
+
+for you to fetch changes up to 35138649383c79c7a4186833fd17b92e1be388c1:
+
+  ls1043a: add env variables to assist boot (2026-04-09 10:25:56 +0800)
+
+----------------------------------------------------------------
+Chunguang Li (4):
+      ls1028ardb: add env variables to assist boot
+      ls1046a: add env variables to assist boot
+      lx2160ardb: add env variables to assist boot
+      ls1043a: add env variables to assist boot
+
+Dan Carpenter (3):
+      gpio: scmi: Add gpio_scmi driver
+      firmware: scmi: Fix setting the function
+      pinctrl: scmi: Use standard device tree pin muxing format
+
+Ioana Ciornei (3):
+      drivers: net: fsl-mc: remove unused parameter from the wait_for_mc() function
+      drivers: net: fsl-mc: cleanup the fsl_mc command help text
+      drivers: net: fsl-mc: add the nowait option when applying the DPL
+
+Kamlesh Gurudasani (1):
+      clk: scmi: Fix protocol version fetch for non-CCF platforms
+
+ drivers/clk/clk_scmi.c           |  12 +-
+ drivers/firmware/scmi/pinctrl.c  |   2 +
+ drivers/gpio/Kconfig             |   6 +
+ drivers/gpio/Makefile            |   1 +
+ drivers/gpio/gpio_scmi.c         | 248 +++++++++++++++++++++++++++++++++++++++
+ drivers/net/fsl-mc/mc.c          |  45 ++++---
+ drivers/pinctrl/pinctrl-scmi.c   | 151 +++++++++---------------
+ include/configs/ls1028ardb.h     |   4 +
+ include/configs/ls1043a_common.h |   2 +-
+ include/configs/ls1043aqds.h     |   5 +
+ include/configs/ls1043ardb.h     |  10 ++
+ include/configs/ls1046a_common.h |   2 +-
+ include/configs/ls1046afrwy.h    |   6 +
+ include/configs/ls1046aqds.h     |   5 +
+ include/configs/ls1046ardb.h     |  10 ++
+ include/configs/lx2160a_common.h |   2 +-
+ include/configs/lx2160ardb.h     |   5 +
+ 17 files changed, 396 insertions(+), 120 deletions(-)
+ create mode 100644 drivers/gpio/gpio_scmi.c
