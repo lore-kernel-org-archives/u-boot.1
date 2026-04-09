@@ -4,141 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94163F364B2
-	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 19:15:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD62CF364B5
+	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 19:22:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A57B840D8;
-	Thu,  9 Apr 2026 21:15:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 435FF840D8;
+	Thu,  9 Apr 2026 21:22:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ippA9PaA";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="WFmDRrKj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F25D284105; Thu,  9 Apr 2026 21:15:31 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id AF92A84105; Thu,  9 Apr 2026 21:22:18 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BC4A84099
- for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 21:15:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE6FB84099
+ for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 21:22:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1775762124; x=1776366924; i=xypron.glpk@gmx.de;
- bh=nXQpj15PK4RBNbj0s8doGxbODSmTAwuizDX6H7aNQh8=;
+ s=s31663417; t=1775762529; x=1776367329; i=xypron.glpk@gmx.de;
+ bh=ecIk1IafBuRzaN6PsL0LRxgKxkJeNNqQcitYOKO/Yz4=;
  h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
  Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
  content-transfer-encoding:content-type:date:from:message-id:
  mime-version:reply-to:subject:to;
- b=ippA9PaAMCC/IdxcCNHBPd99tFcD4QHlTfEHDOEd/Lszg0DETWTip9fiE/AyY/tg
- dQkjK3BbhEoiZniG2xD5YU1pH/BClviFF/LbJ7NA+wMMVHKZs9SJKJ3SE/mKZXKFj
- /0DnY+f6avDII2n8/2r4Z9MUZ60+yljO/aByKUSoHUzSzao3ZAmZK+u3N2NtWjIS1
- kQGuGQmXdFFUd/iA5L43AcBBVU0yJiPHy1tpdMdJpqKNvEhyNtAGzgNhb8LIoCSB4
- czQqvFNfFtEgysw0ilh6sbMzuYEc+8pQ38YK1TOayAhxDErk2sC0RGU+PRfYZZ1jR
- PAXpk+EzpMasBnUFMg==
+ b=WFmDRrKj+tVOq9G2NKM7Fr4ugY3P1tjMeVVY+IKFe5SAhxyMppX4qTYMtI84FGRV
+ t1AKKCnTmgAif//sN5JIP2uUvGJ4zMUdoc54NtV+RWf0QGenU3UqPS6v8ssyxCx/r
+ n/UB9H2CY662Iz1RCK+ch73CFIi0tUXHPr2z483mWra+PSarcK/pv5Iej09q4t4VT
+ 4v9ESK/iZ77zLy9VH9eYBXPEeLc521IweMTb8H47eYt8+YZ60hVlNYxHtZl9rfLJG
+ NNMgMq2LYbp+0+/eXNEjZyBSiPHsRtrpFGd7fLTxY1gi9LdLdlKx+GEi1wpytv04L
+ aB3t2DeXWP6XAhH+4Q==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MkHMZ-1vmGLS3Pcf-00it5L; Thu, 09
- Apr 2026 21:15:24 +0200
-Date: Thu, 09 Apr 2026 21:15:20 +0200
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MulmF-1vJ5qU1WPz-00zFsx; Thu, 09
+ Apr 2026 21:22:09 +0200
+Date: Thu, 09 Apr 2026 21:22:05 +0200
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 To: rs@ti.com, robertcnelson@gmail.com, ayush@beagleboard.org,
  Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com,
  afd@ti.com, ilias.apalodimas@linaro.org
 CC: u-boot@lists.denx.de
-Subject: Re: [PATCHv2 1/5] lmb: add LMB_FDT for fdt reserved regions
+Subject: Re: [PATCHv2 2/5] efi_dt_fixup: use fdtdec_get_bool
 User-Agent: Thunderbird for Android
-In-Reply-To: <20260402205038.4005350-2-rs@ti.com>
+In-Reply-To: <20260402205038.4005350-3-rs@ti.com>
 References: <20260402205038.4005350-1-rs@ti.com>
- <20260402205038.4005350-2-rs@ti.com>
-Message-ID: <1708BDA8-C314-4359-B02A-9544FDB984F5@gmx.de>
+ <20260402205038.4005350-3-rs@ti.com>
+Message-ID: <562280B5-5E46-40E4-85F9-8FBDF6B336EF@gmx.de>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:1INf7rZzzL+nAIcNLm4pCDgNuFJyTDPjye+VTyEQMJ4ypWKfsLs
- 6hyrCXy67x0Gkjj21ybC3AOW0JuCXu+WltrjWN1eBsVkoL8ci7LXHiiYEuTY6Re0rn3nUkN
- vLLHyjH0V9LwQ7mqvw8z/dDqGT8p3uJcPtrqKgHPawQmnM0g0JLFLeZ2M7enpLBbpHYvTGS
- ldC3nraCEb+sNaXHiKkrw==
-UI-OutboundReport: notjunk:1;M01:P0:UyDEmJZOjZU=;6mlrwzYzxf0fS1uny/pWBnyh5B9
- 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
+X-Provags-ID: V03:K1:Xm0QfwadpIVk44EjsSwaEkp8QIjJGnV9DEDi/1OIbJLUSP2j/IZ
+ y/y16qr3d8w+eh5fuC7sbSWS5pG5wHGfXHOwvOtKhEUFPgQCGN50fGTHMWjT9UeXIRDYckZ
+ VgHfqxT6daG42Fih7+T4OAPibqDS0pRhLw0xXFpRyCfzwEF7UOBW4sZ+SrpmqV6DUyX46f+
+ nySkXG4PupAtGESIfYhEw==
+UI-OutboundReport: notjunk:1;M01:P0:VcmTjiW2tNE=;F94g0xvjxDn0TBFVRbJpbZqinDh
+ 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
+ 8a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,139 +155,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 2=2E April 2026 22:50:34 MESZ schrieb rs@ti=2Ecom:
+Am 2=2E April 2026 22:50:35 MESZ schrieb rs@ti=2Ecom:
 >From: Randolph Sapp <rs@ti=2Ecom>
 >
->Add an LMB_FDT bit for fdt reserved regions, so we can reclaim them when
->parsing a new device tree and properly warn people when a reservation
->overlaps with an existing allocation=2E
->
->If we don't at least warn the user of these reservation failures,
->there's a chance that this region could be freed and reallocated for
->something important later=2E
->
->This useful warning mechanism was broken in:
->5a6aa7d5913 ("boot: fdt: Handle already reserved memory in boot_fdt_reser=
-ve_region()")
+>Use the more straightforward fdtdec_get_bool instead of fdt_getprop and
+>a return code check=2E
 >
 >Signed-off-by: Randolph Sapp <rs@ti=2Ecom>
+
+Reviewed-by: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+
 >---
-> boot/image-fdt=2Ec |  5 ++++-
-> include/lmb=2Eh    |  7 +++++++
-> lib/lmb=2Ec        | 25 +++++++++++++++++++++++++
-> 3 files changed, 36 insertions(+), 1 deletion(-)
+> lib/efi_loader/efi_dt_fixup=2Ec | 3 +--
+> 1 file changed, 1 insertion(+), 2 deletions(-)
 >
->diff --git a/boot/image-fdt=2Ec b/boot/image-fdt=2Ec
->index a3a4fb8b558=2E=2E0f5857f24d2 100644
->--- a/boot/image-fdt=2Ec
->+++ b/boot/image-fdt=2Ec
->@@ -73,6 +73,7 @@ static void boot_fdt_reserve_region(u64 addr, u64 size,=
- u32 flags)
-> {
-> 	long ret;
-> 	phys_addr_t rsv_addr;
->+	flags |=3D LMB_FDT;
+>diff --git a/lib/efi_loader/efi_dt_fixup=2Ec b/lib/efi_loader/efi_dt_fixu=
+p=2Ec
+>index 544e1aa9808=2E=2E333711b9957 100644
+>--- a/lib/efi_loader/efi_dt_fixup=2Ec
+>+++ b/lib/efi_loader/efi_dt_fixup=2Ec
+>@@ -123,8 +123,7 @@ void efi_carve_out_dt_rsv(void *fdt)
+> 			    fdtdec_get_is_enabled(fdt, subnode)) {
+> 				bool nomap;
 >=20
-> 	rsv_addr =3D (phys_addr_t)addr;
-> 	ret =3D lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &rsv_addr, size, flags);
->@@ -80,7 +81,7 @@ static void boot_fdt_reserve_region(u64 addr, u64 size,=
- u32 flags)
-> 		debug("   reserving fdt memory region: addr=3D%llx size=3D%llx flags=
-=3D%x\n",
-> 		      (unsigned long long)addr,
-> 		      (unsigned long long)size, flags);
->-	} else if (ret !=3D -EEXIST && ret !=3D -EINVAL) {
->+	} else if (ret !=3D -EINVAL) {
-> 		puts("ERROR: reserving fdt memory region failed ");
-> 		printf("(addr=3D%llx size=3D%llx flags=3D%x)\n",
-> 		       (unsigned long long)addr,
->@@ -108,6 +109,8 @@ void boot_fdt_add_mem_rsv_regions(void *fdt_blob)
-> 	if (fdt_check_header(fdt_blob) !=3D 0)
-> 		return;
->=20
->+	lmb_free_fdt_regions();
->+
-> 	/* process memreserve sections */
-> 	total =3D fdt_num_mem_rsv(fdt_blob);
-> 	for (i =3D 0; i < total; i++) {
->diff --git a/include/lmb=2Eh b/include/lmb=2Eh
->index 5d5f037ccb9=2E=2E1b59a63f61d 100644
->--- a/include/lmb=2Eh
->+++ b/include/lmb=2Eh
->@@ -25,11 +25,13 @@
->  * %LMB_NOMAP: Don't add to MMU configuration
->  * %LMB_NOOVERWRITE: The memory region cannot be overwritten/re-reserved
->  * %LMB_NONOTIFY: Do not notify other modules of changes to this memory =
-region
->+ * %LMB_FDT: A FDT reserved region that can be reclaimed if the FDT chan=
-ges
->  */
-> #define LMB_NONE 0
-> #define LMB_NOMAP BIT(1)
-> #define LMB_NOOVERWRITE BIT(2)
-> #define LMB_NONOTIFY BIT(3)
->+#define LMB_FDT BIT(4)
-
-Please, document the constants according to https://docs=2Ekernel=2Eorg/do=
-c-guide/kernel-doc=2Ehtml#object-like-macro-documentation =2E  This allows =
-Sphinx to generate the API documentation=2E
-
-Best regards
-
-Heinrich
-
->=20
-> /**
->  * enum lmb_mem_type - type of memory allocation request
->@@ -215,6 +217,11 @@ phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_si=
-ze_t size, ulong align);
->  */
-> long io_lmb_free(struct lmb *io_lmb, phys_addr_t base, phys_size_t size)=
-;
->=20
->+/**
->+ * lmb_free_fdt_regions() - Reclaim all LMB_FDT tagged reserved regions
->+ */
->+void lmb_free_fdt_regions(void);
->+
-> #endif /* __KERNEL__ */
->=20
-> #endif /* _LINUX_LMB_H */
->diff --git a/lib/lmb=2Ec b/lib/lmb=2Ec
->index e2d9fe86c14=2E=2E18703212afb 100644
->--- a/lib/lmb=2Ec
->+++ b/lib/lmb=2Ec
->@@ -669,6 +669,31 @@ long lmb_free(phys_addr_t base, phys_size_t size, u3=
-2 flags)
-> 	return lmb_map_update_notify(base, size, LMB_MAP_OP_FREE, flags);
-> }
->=20
->+void lmb_free_fdt_regions(void)
->+{
->+	struct alist *lmb_rgn_lst =3D &lmb=2Eused_mem;
->+	struct lmb_region *rgn =3D lmb_rgn_lst->data;
->+	long ret;
->+	int i =3D 0;
->+
->+	while (i < lmb_rgn_lst->count) {
->+		phys_addr_t base =3D rgn[i]=2Ebase;
->+		phys_size_t size =3D rgn[i]=2Esize;
->+		u32 flags =3D rgn[i]=2Eflags;
->+
->+		if (flags & LMB_FDT) {
->+			ret =3D lmb_free(base, size, flags);
->+			if (ret < 0) {
->+				printf("Unable to free FDT memory at 0x%08lx",
->+				       (ulong)base);
->+				i++;
->+			}
->+		} else {
->+			i++;
->+		}
->+	}
->+}
->+
-> static int _lmb_alloc_base(phys_size_t size, ulong align,
-> 			   phys_addr_t *addr, u32 flags)
-> {
+>-				nomap =3D !!fdt_getprop(fdt, subnode, "no-map",
+>-						      NULL);
+>+				nomap =3D fdtdec_get_bool(fdt, subnode, "no-map");
+> 				efi_reserve_memory(fdt_addr, fdt_size, nomap);
+> 			}
+> 			subnode =3D fdt_next_subnode(fdt, subnode);
 
