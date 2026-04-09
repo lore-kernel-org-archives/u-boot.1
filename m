@@ -4,113 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACE98F364AB
-	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 18:14:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CBBDF364AB
+	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 18:18:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88C1A84221;
-	Thu,  9 Apr 2026 20:12:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EF03984106;
+	Thu,  9 Apr 2026 20:18:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qPd4DX6u";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Xig6a2O4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3EF784099; Thu,  9 Apr 2026 18:34:20 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
+ id 4CAFA841C2; Thu,  9 Apr 2026 20:18:46 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D338A83CF5
- for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 18:34:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD22284106
+ for <u-boot+nodisclaimer@lists.denx.de>; Thu,  9 Apr 2026 20:18:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-6841e6a5e51so618572eaf.3
- for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 09:34:18 -0700 (PDT)
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-47018d341f8so896624b6e.3
+ for <u-boot+nodisclaimer@lists.denx.de>; Thu, 09 Apr 2026 11:18:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1775752457; x=1776357257; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=K+42YOtTpTsIwFY1t3y5cNhYPzsM9Hubl25gyCaPqYk=;
- b=qPd4DX6uSSKA+8jL0iR1mGzEkRUgKbO8eqgxbiB3udG0rm/mn8S0YoUj17LpGAgZcq
- JJdgOY1B7sr3O+8x4u0/Oui8J3ppTZSS74y5HJIyh+CZeWqPRcS76zPMTDSbAi2zvY+Z
- 0neusWruElLb/7W5OimkQ8Lbq/Xudv8WZuqJU=
+ d=konsulko.com; s=google; t=1775758722; x=1776363522; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mpyFGZ5jzHSWmU99jbEMREx7iGdaq1yEJah8Z5q7oPM=;
+ b=Xig6a2O4lFr4EFY6ZQApzqm4Gh9rCHIUxxBSwWr/9VW9J7Vjx5CFO5JxiY/vF3jh07
+ +GNNS1IsJyFT5OanqNincyYE6fK61I9We7BJwwNeWRnXacSAQx7BaLUcJOO04Fa384gc
+ wzrKmtTIRhU5pdZPhyN87sXC2YxTm6ukWG3nI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775752457; x=1776357257;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=K+42YOtTpTsIwFY1t3y5cNhYPzsM9Hubl25gyCaPqYk=;
- b=joHOk9X5RrzPj3V1swSzJji5rRl6dqnZAv5K8K2NIBn9fJbd0egx0cAqn/Vo7aoNJH
- jc5IcLNZldMb+bRfJgRccnRJSFSxWkkcU0iXthALGTuQcYNl8O18shXClrSYkbiUjwU1
- xT7lvdoEqbl0urb5AzYO62oE16QGR/OpLxiUOro8a1Yjtr35z4t3zHmz7roAgXwioXTK
- QdDNJD9DsOs75Ml8OjtjPAAnGIVi3JTZcYwaqbRCvtQ/xH+H3Ok0Wg8fjIhfnELZgpkX
- fWfAsC3uQGpEZ8QIGSNnjcqxs/0cNmGqac3HrPD9Hsg8oquOzd8jD9pMCPeG7rKfk3UK
- fdfA==
-X-Gm-Message-State: AOJu0YxSNa15zmQJX4gAF7slBXX+ITnHrqJWMmdz2OB/Afnz8Hq3jFJ0
- e/BGQpwGSH5AzWpvSivHCM2DhSrhojo7+PnznwbG/Xrfe9dfjPfNsLW/0b/K4R8tuXXw4aaWT4O
- dwg6zg0U=
-X-Gm-Gg: AeBDievnoCWxkCt2qNQzk4uG+1siHHZHR444GqvXuwKJRB1EyPC5HyBjTqewcoIByaH
- fXfAKQldrth32ygLySO0pL3LdK0x5BNcNeANVXmq/rarKeGRhe9UTBT7CBuRGsPY4xEDtgIvolj
- KVVTtQ2ficAh9TCG5adhLubP6psVGIqSiSZT1K0agDdydUfVPjbVoZtZpmk8y9EpRy7t9FD8LN5
- En8ASW1JpmP/o5mxqI/5R7BA96+L4VVjD6mefeabYF7ykUozdF1FZh4KT6LnB/bHggPtCkKV0Ah
- qu/zZt3+TzYL1sceVMEDz2numRVx+xWOTsOxLXhXXVgiRdPajDqgLvP9caxN3p4oI102i44wpmB
- YjprwS9VasWtpP3BF2U6c8l1ZpVEit8lixK1ipXGLw0S58wzPE8X15IxNFo5hStahRylpssq7cm
- QgGKetJV72trpF8FcbXv6stPehHHLdQhemSSEQjB7Wa0BPpbx74KZfr9i+6ZH2zCk7iePPa//kL
- at+HD2oeaB4Nb0aC2gGB/BRznB8ialoLPARwHsRZCUPsmy56ww=
-X-Received: by 2002:a05:6820:61d:b0:67e:2ff7:2a6e with SMTP id
- 006d021491bc7-68a611a257dmr2242132eaf.18.1775752457512; 
- Thu, 09 Apr 2026 09:34:17 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ d=1e100.net; s=20251104; t=1775758722; x=1776363522;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=mpyFGZ5jzHSWmU99jbEMREx7iGdaq1yEJah8Z5q7oPM=;
+ b=ss0/CO44R4JMeJ9tWLs6hAn17ZHKU07wKL9NOd89LE99mAfs7nKc9V3/NN2iMtpK8O
+ 1X+gouM2V60d5HteJfixFugjLOABbWUXC001+PLjhkqIMdv/uzzME81kxraQCYG8W50k
+ G7dm9wIznn/iXWlZr4ljzjaJ8s+fBhEQR5tlEGmZuHtL3dKUCMbx6ks6w4fDUyssAlyT
+ OfTF0oEoU0CBDnTsjOdHmyM1X8yEN4e3yMKR2LZTysmy7KcHBixqMrVq/26/A4wwQZm6
+ kpWvIKUCadwYDSnfKySS1VZ+6YfSpqEWdjMH4QK5sAHMTzaGqw8OK3v9YxTQp3xdPdaU
+ 25Jg==
+X-Gm-Message-State: AOJu0Yzc6GVrSaQWKKY0l8sxdNmZ0J0V59S8Q04XN4haBGSYYen4z6Me
+ zeA/ZePYgnVr7406ddHbU1e/rK0ylotEvT28lEd+b4tARgxxsnQP2h1PJahbNtkFSAM=
+X-Gm-Gg: AeBDieud0FA2JMbnzVfYB3uphtnJDsRSjtcoAnsB4UZ8kZUFFgVls+Hh97PtzMeszkM
+ XEfDO3IZ9FTC0Oc4dtj+AlqGYOCM5rw0VkUdoXZZ+hmIg5gw6NJcwBDbs4/q5GJfATJMd7MXwqA
+ DhNhcw3/HiIZ5OqAAeZm89wtFMEF5VmDPelj/inuCCCxblplcwi4W+C8F/DjSNKPpTE5VbhYIw1
+ PHk14iq6xLZKH6w/2omKkwhO0Wh6ZQWREsyhD8HTtNAv5u1hqqLM6jo/7NeYf2Qu6B5Zr1mrWhY
+ o1lN4pEJpBWrgF/rguVQ0HdKIddetaRQmo0UNz+NE8e1RvOOqbSMrls11mU9G8Uf8QhygVptuIC
+ vr8+p+S0Jj8equ1+flUW2cV5RT4QFFCxYzTJzReQ4NVRC6MuJV1SAS5LXgzczxrBtAuV18oo6h1
+ eeqIVr6hwe2Mgo3VhxCMiv2EmcSS27/ewOVLUorlEVRzE40SBGsI0VcYxpwWPMK/AncXNfpFWpe
+ ZFbg3a+m64OORRc6PrzJZHqV5QieEJrcrbWkSPMrRhj/XTzAwD3XQ==
+X-Received: by 2002:a05:6808:1796:b0:462:b520:273a with SMTP id
+ 5614622812f47-4789f9ff5c2mr182455b6e.25.1775758722514; 
+ Thu, 09 Apr 2026 11:18:42 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-68bcacc9925sm55854eaf.9.2026.04.09.09.34.14
+ 5614622812f47-478a2f565d1sm76328b6e.10.2026.04.09.11.18.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Apr 2026 09:34:16 -0700 (PDT)
-Date: Thu, 9 Apr 2026 10:34:13 -0600
+ Thu, 09 Apr 2026 11:18:41 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Jorge Cisneros <jorge.cisneros@hpe.com>
-Cc: u-boot@lists.denx.de,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Jean-Marie Verdun <verdun@hpe.com>, Nick Hawkins <nick.hawkins@hpe.com>,
- Casey Connolly <casey.connolly@linaro.org>, Anshul Dalal <anshuld@ti.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Peng Fan <peng.fan@nxp.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Tingting Meng <tingting.meng@altera.com>, Alice Guo <alice.guo@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tony Dinh <mibodhi@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Shmuel Leib Melamud <smelamud@redhat.com>,
- Lukasz Majewski <lukma@nabladev.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>, Chen-Yu Tsai <wens@kernel.org>,
- Justin Klaassen <justin@tidylabs.net>,
- Neha Malcom Francis <n-francis@ti.com>,
- Jamie Gibbons <jamie.gibbons@microchip.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Simon Glass <sjg@chromium.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Yao Zi <me@ziyao.cc>,
- Kuan-Wei Chiu <visitorckw@gmail.com>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Raymond Mao <raymond.mao@riscstar.com>,
- Philip Molloy <philip.molloy@analog.com>
-Subject: Re: [PATCH 8/9] configs: Add gsc_defconfig for HPE GSC SoC
-Message-ID: <20260409163413.GR41863@bill-the-cat>
-References: <20260408-hpe-gsc-upstream-v1-0-2be1fb7cbbfc@hpe.com>
- <20260408-hpe-gsc-upstream-v1-8-2be1fb7cbbfc@hpe.com>
+To: u-boot@lists.denx.de, u-boot+nodisclaimer@lists.denx.de,
+ Paul HENRYS <paul.henrys_ext@softathome.com>
+Cc: sjg+nodisclaimer@chromium.org
+Subject: Re: [PATCH v2 0/1] tools: u_boot_pylib: ensure all Python modules are
+ installed
+Date: Thu,  9 Apr 2026 12:18:39 -0600
+Message-ID: <177575860172.1153156.9979437266936408022.b4-ty@konsulko.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260331080636.380507-1-paul.henrys_ext@softathome.com>
+References: <20260331080636.380507-1-paul.henrys_ext@softathome.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="g9/hgAuN3FtyyNbh"
-Content-Disposition: inline
-In-Reply-To: <20260408-hpe-gsc-upstream-v1-8-2be1fb7cbbfc@hpe.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Thu, 09 Apr 2026 20:12:34 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,46 +98,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 31 Mar 2026 10:06:35 +0200, Paul HENRYS wrote:
 
---g9/hgAuN3FtyyNbh
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Add setuptools package configuration to pyproject.toml so that
+> u_boot_pylib is installed as a proper Python package without changing
+> the existing flat directory structure and making sure all modules are
+> installed.
+> 
+> Step to reproduce the issue without the patch:
+> git clone https://source.denx.de/u-boot/u-boot.git
+> cd u-boot
+> python3 -m venv myenv
+> source myenv/bin/activate
+> pip3 install tools/u_boot_pylib/
+> ...
+> error: Multiple top-level modules discovered in a flat-layout: ['command', 'terminal', 'test_util', 'tout', 'cros_subprocess', 'tools', 'gitutil'].
+> 
+> [...]
 
-On Wed, Apr 08, 2026 at 07:24:20PM +0000, Jorge Cisneros wrote:
+Applied to u-boot/master, thanks!
 
-> Add default configuration for the HPE GSC (Gen Server Controller)
-> board. This is an ARM64 BMC SoC used in HPE Gen12 ProLiant and
-> Synergy servers.
->=20
-> Key features enabled:
-> - ARMv8 spin-table multicore with GICv3
-> - FIT image boot from SPI flash
-> - GXP timer, I2C, and SPI drivers (shared IP blocks)
-> - Cadence MACB GEM Ethernet with Marvell PHY
-> - GSC watchdog and memory-mapped EEPROM
-> - FDT fixups for I3C hub and VPD provisioning
->=20
-> Signed-off-by: Jorge Cisneros <jorge.cisneros@hpe.com>
-> ---
->  configs/gsc_defconfig | 88 +++++++++++++++++++++++++++++++++++++++++++++=
-++++++
->  1 file changed, 88 insertions(+)
-
-This should be part of the patch that adds the platform itself.
-
---=20
+[1/1] tools: u_boot_pylib: ensure all Python modules are installed
+      commit: 2b9828c8024617f14e13ad6bf7d474552d880240
+-- 
 Tom
 
---g9/hgAuN3FtyyNbh
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCadfVBQAKCRAr4qD1Cr/k
-CibuAP90Ew/+qd0IUXmPykgIBJail00liMSbn/sRPnYicZ02VAEAhwPnxUBjIgsF
-dn3YN8YFxfhEFcBxXlkKoosEv7lBdww=
-=2mQ2
------END PGP SIGNATURE-----
-
---g9/hgAuN3FtyyNbh--
