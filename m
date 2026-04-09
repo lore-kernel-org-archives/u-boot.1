@@ -4,141 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE14DF364B5
-	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 19:47:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7CF2F364B6
+	for <u-boot@archiver.kernel.org>; Thu,  9 Apr 2026 20:31:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F04E384099;
-	Thu,  9 Apr 2026 21:47:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1C26084118;
+	Thu,  9 Apr 2026 22:31:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="oY3tVjEn";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="rsJ1m8Me";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5C61840D8; Thu,  9 Apr 2026 21:47:14 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9122084118; Thu,  9 Apr 2026 22:31:53 +0200 (CEST)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD74983DC9
- for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 21:47:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 03B5883CF5
+ for <u-boot@lists.denx.de>; Thu,  9 Apr 2026 22:31:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1775764029; x=1776368829; i=xypron.glpk@gmx.de;
- bh=p0sPvAx6j4L0Ar75RxG1OMdR5FzaSAWrfNtNLd9cPNE=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=oY3tVjEn+bZomNsGK2aIjJ7E/OvcvII2STVELsYvk8l8aUaes+dCi3Vg5M7U2okl
- KV5QbTZtM0iLZUp6rKXEysObiFRKwowQ6yj4Tn91awpzRGEdDY5U5i1G/XLNUSdj2
- q1wWaPoST10eAPxoTCmy1L+nwrXHD2gFqAOnMlSSXVrdDohJFU5NpjVNutWtiYhlE
- KM4tGWzs2HKF+KHYfRWjy0wgD5F/GzvlIa0Y6a6WzrSv2UltHKmGySnYKuGG2t4hY
- ngwYvJYpbtTYW6+WrGRYW4oBHFczFlRd3ih8FfVFw1iQ3SWP3MdSAnL+POtVOAH6B
- KiOCKy7VhQ2wMwzNVw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Msq6C-1vI8vc3W1Y-00wmze; Thu, 09
- Apr 2026 21:47:09 +0200
-Date: Thu, 09 Apr 2026 21:47:03 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: rs@ti.com, robertcnelson@gmail.com, ayush@beagleboard.org,
- Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com,
- afd@ti.com, ilias.apalodimas@linaro.org
-CC: u-boot@lists.denx.de
-Subject: Re: [PATCHv2 4/5] efi_mem_sort: skip unnecessary compare
-User-Agent: Thunderbird for Android
-In-Reply-To: <20260402205038.4005350-5-rs@ti.com>
-References: <20260402205038.4005350-1-rs@ti.com>
- <20260402205038.4005350-5-rs@ti.com>
-Message-ID: <59AD8D70-3B2E-4969-8E94-90BC60BEF96A@gmx.de>
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-4670676ba03so513449b6e.1
+ for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 13:31:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1775766710; x=1776371510;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=wJJO0D4SqsPpaJewsyOuSxPcYh6Dh3dvCucz9NS3/YQ=;
+ b=rsJ1m8Meh0iSzrL7sn8nfH2f6rfA7AdclyrHHC1xk1kKansbvd0ccG0TneAedP0qP5
+ 0n7O9HgRMF4OIRGq+hdNJD6gw5uymlkFha6HIziOuRHoahbzK+NOXoSaySshr+Ir/Im/
+ hpmYEiij5KJeHIx3APzraGEvNk6VLf9MT4/BKr1+mqgLVYgajDry5GSDfKuLYPH7N1Ve
+ SokjBf/N2KL6b5d2lLu1CxHAiOAvvNbDrMnDRYb7RKl5gdoIHVgycOIHZ2w/eC6ZRh9W
+ EXCDTfy0Ebq2glERnEL/AFoC5wDYRNId/exT77BeowkexLzPHkwDF8dLjZkCzt82KnI3
+ l1MQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775766710; x=1776371510;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wJJO0D4SqsPpaJewsyOuSxPcYh6Dh3dvCucz9NS3/YQ=;
+ b=oiX5qpveszb7BLYdscm6hXs6gUdlZH+6ZNJRaTgd0/xI8QZe+UkHl+knsiOCLTL7i2
+ x4ZDIVO3hCvXSOVe8mWW2SyxHT1DiaFC3ypiTeJj+jtF/QjaH23gLZ9E2Aaxfl//tlaA
+ I5zECNfWc60dxKpKIV62QBYjKLiqYZccAYWcxAwZaC2+cshumAPFSfKF80bDuq0917Uy
+ 1gKtrpx6fxfTwMUWVHwnz17ZqhFbkt5gDyK2ArzdRZfA/YjA66+4qNWALYhpPqEVXdU/
+ 2EEiYrjEZZaC4F4UAjGGwO1GjajuGjrCLM9vjGogS7Qlnf3Xi0scxKAaa1GNFfPcGvjv
+ bWzQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWEJH7PxhyIU9BSame/79lUxk9x5WkHCY8Ciq+4c8yWsIBH4Xag07hPalzzzYvLd98Fafin8gw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwEBrUn3TmkhQuTA8iiD6H35Go6UHgfO3X+JncFsRFBuzc3Bwgl
+ FJzWfJSydTNKexiKHFmSQ2VL3NZzqgoc8yZSn4ShazgZUGq4YGudIyrjvS9QY8jKNeo=
+X-Gm-Gg: AeBDietH5KsiUzUQwGRqSjQYQ7UbECpGRjh4+k3P0KKBDwfe95ksef7IulN9/rn9MdN
+ 4jUpqsNHGYO9akR7TyZuJBYGrOSCrOkjb00vBMj0LJqfmHtCXykmNqsBuIFByTEvlNjQSynvaVZ
+ n3xQ08Jo4tp8QjS6ZkkY5x8mx39Mlvow9OwWAziGIsJP1qqVItrYn5/iDHnK+zCB1g9ZFhdyTGQ
+ f2SyXAIj3ybvYfCutUJ0sWkGSZAI4itc98sT9H2xi44V6Fe6AqkkyT7pvoXFgB0hKhxdN6/Yyrb
+ Y9/ikdF5uxAS8s5LHg+z8qu7ROxmHzX+ecCrXAVBruv7ZAjRmtC6OwxlWkD7+2p1OCrYTUiYHqJ
+ WOzvj18FAsepKwj2v6JCkki307XpS73KKgDkRZ/pPweNhTen/4D2/BbrZ5qB3UZZLUKp1ZFZ6aM
+ ObcKBUfRuNLdh5VbSb+RBUjrMrMg0v
+X-Received: by 2002:a05:6808:1b2c:b0:466:f3a2:dc39 with SMTP id
+ 5614622812f47-478a04fe897mr361637b6e.37.1775766709601; 
+ Thu, 09 Apr 2026 13:31:49 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:a548:cf0c:d054:fd01])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-478a101b75esm293075b6e.6.2026.04.09.13.31.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Apr 2026 13:31:49 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+Subject: [PATCH v2 0/8] power: pmic: mtk-pwrap: add more capability flags
+Date: Thu, 09 Apr 2026 15:30:32 -0500
+Message-Id: <20260409-mtk-pmic-fixes-v2-0-73e83aa6345b@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:7oOJlCxcpRkUX+K6FdYsnJP9QDJQe4O+VraMwKcOa0tP/c8jvDe
- yn0Zek25X2/72tJcZ8CY5LNHDrVY9Ktd9bIJyg2cSXfEOVE42G68vD1eRW2oiypEN5LcjKu
- QzemteY6+FzuvMHaQ9awllmN3jN/4gwSE3K5ZJ8PWv7UF7U6EYFeRsfq+QJNsYStaJckPK7
- q2WDTTJPFgYdJs20gdJ1w==
-UI-OutboundReport: notjunk:1;M01:P0:aEPsRYmeEsQ=;Gy0dSaB5BV1nGn39/mQMR4k6N2Y
- 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
- wetJP2BlPxH2jSb2WbG2netQ==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/2WOSxKCMBBEr0LN2mgS8MfKe1gskjDiqAFMAiVFc
+ XcDuHP5arrf9AgeHaGHPBnBYU+emjqC3CRg7qqukFEZGSSXB56KI7PhyVpLht3og54ZsZepFpq
+ XqoRYah0uh9i5Fiv7Tj/QhNnySzh8d/FTWGOglUdmGmsp5EnjqKJ6Z5UP6GBW3MmHxg3LxF4sj
+ XWN/FvTC8YZ3k7HzKiTzPj5otXwIu1wG/1QTNP0BSCZYy3yAAAA
+X-Change-ID: 20260317-mtk-pmic-fixes-c1523b1b0dad
+To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
+ Tom Rini <trini@konsulko.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
+ David Lechner <dlechner@baylibre.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2108; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=fdVJD22zm2AhvBZz1WXR5QaZoH+aOq+5yCyeKFBetiw=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp2Axv1Puglt6ALKNN83waMQvzaP1n0+MQHe176
+ VXsRNxkpkSJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCadgMbxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AGyMH/2yUsC2JS1df0s/XOMxXXftCyTs9CggWNIc/vTf
+ 7XYXKcuqWKcYO+p8vtcxDkSqiJuPn6CQMzmdAgtoYrcHNUGzuTss8OqJzvQQIli2eF+B5+KY7FR
+ 2g2rvPLWUAv26Kws4r1Wdja9a81S3LzoosUHo8A4JZVaneQxQR6jsQIw5NjuG89v0DCPbXTvNk/
+ J+c27gS9rXkdsaMvpkBlyodj+yqVkMW50hp2zG8qtrTWVa1sJioZe/bVOQFVspvxR2hEpGpAN2g
+ cpTTLQEeBD1Aj3AnOK3wYOPqR5p3CSKfSytd0UPyD6H/hWtSvj/Piyi9/J13C9ck9tCyaYJlhRl
+ lQtE=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,51 +123,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 2=2E April 2026 22:50:37 MESZ schrieb rs@ti=2Ecom:
->From: Randolph Sapp <rs@ti=2Ecom>
->
->I don't want to think about the possibility of this pointer containing a
->reference to something from a previous iteration=2E At best it results in
->a some arithmetic and a comparison that should usually be unnecessary=2E
+After using the mtk-pwrap driver a bit, we noticed that there were a few
+places where it was writing to registers that were not defined on all
+platforms. The undefined registers are treated as 0, which is the DONE2
+register on the affected platforms. This could cause the DONE2 register
+to have an incorrect value, which could cause Linux to re-initialize the
+PMIC unnecessarily.
 
-"a some arithmetic" is not understandable=2E Please, adjust the commit mes=
-sage=2E
+To avoid this issue and ensure that we only write to registers that are
+defined on a given platform, we can add some more capability flags to
+conditionally call any register writes that aren't common to all
+platforms.
 
->
->Signed-off-by: Randolph Sapp <rs@ti=2Ecom>
->---
-> lib/efi_loader/efi_memory=2Ec | 2 +-
-> 1 file changed, 1 insertion(+), 1 deletion(-)
->
->diff --git a/lib/efi_loader/efi_memory=2Ec b/lib/efi_loader/efi_memory=2E=
-c
->index b77c2f980cc=2E=2E882366a9f8a 100644
->--- a/lib/efi_loader/efi_memory=2Ec
->+++ b/lib/efi_loader/efi_memory=2Ec
->@@ -129,13 +129,13 @@ static uint64_t desc_get_end(struct efi_mem_desc *d=
-esc)
-> static void efi_mem_sort(void)
-> {
-> 	struct efi_mem_list *lmem;
->-	struct efi_mem_list *prevmem =3D NULL;
-> 	bool merge_again =3D true;
->=20
-> 	list_sort(NULL, &efi_mem, efi_mem_cmp);
->=20
-> 	/* Now merge entries that can be merged */
-> 	while (merge_again) {
+There are also a couple of other cleanups that we do along the way. And
+in v2, I've picked up Julien's patch to add support for MT8195 and
+rebased on top of this.
 
-The suggested change looks correct=2E But we could go further:
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+Changes in v2:
+- Use EOPNOTSUPP.
+- Reorder patches to reduce churn.
+- Added new patch to fix driver description comment.
+- Added new patch to drop chip type enum.
+- Picked up Julien's patches from [1] and rebased on these changes.
+- Link to [1]: https://lore.kernel.org/u-boot/20260317-mt8195-add-ufs-support-v1-0-7d731ec438ae@baylibre.com/
+- Link to v1: https://patch.msgid.link/20260327-mtk-pmic-fixes-v1-0-ef874ca82409@baylibre.com
 
-We could get rid of this outer loop by either eliminating prev instead of =
-cur or by using list_for_each_safe()=2E
+---
+David Lechner (6):
+      power: pmic: mtk-pwrap: fix file description
+      power: pmic: mtk-pwrap: add PWRAP_CAP_WDT_SRC flag
+      power: pmic: mtk-pwrap: add init capability flag
+      power: pmic: mtk-pwrap: drop PWRAP_SLV_CAP_DUALIO on mt6359
+      power: pmic: mtk-pwrap: remove interrupt related code
+      power: pmic: mtk-pwrap: use pmic compatible to select child info
 
-Best regards
+Julien Stephan (2):
+      power: pmic: mtk-pwrap: use tabs for alignment
+      power: pmic: mtk-pwrap: add MT8195 support
 
-Heinrich
+ drivers/power/pmic/mtk-pwrap.c | 115 +++++++++++++++++++++--------------------
+ 1 file changed, 60 insertions(+), 55 deletions(-)
+---
+base-commit: 2a1bcefce835b827bbf88a9e112d646c5c4af9c1
+change-id: 20260317-mtk-pmic-fixes-c1523b1b0dad
 
->+		struct efi_mem_list *prevmem =3D NULL;
-> 		merge_again =3D false;
-> 		list_for_each_entry(lmem, &efi_mem, link) {
-> 			struct efi_mem_desc *prev;
+Best regards,
+--  
+David Lechner <dlechner@baylibre.com>
 
