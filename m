@@ -4,96 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4299F45A12
-	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 23:05:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E291DF364CD
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 07:08:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 412AB8419E;
-	Sat, 11 Apr 2026 01:05:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 2FC0083DC9;
+	Sat, 11 Apr 2026 09:08:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EgLxbr+2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bGj3Ivnb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C0D1841C2; Sat, 11 Apr 2026 01:05:51 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 81B988416F; Fri, 10 Apr 2026 15:58:34 +0200 (CEST)
+Received: from mail-qt1-x842.google.com (mail-qt1-x842.google.com
+ [IPv6:2607:f8b0:4864:20::842])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B5ED84099
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 01:05:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FBF584105
+ for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 15:58:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-66fb5f2183fso4535662a12.3
- for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 16:05:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775862348; cv=none;
- d=google.com; s=arc-20240605;
- b=fph0AXbEwwdHLySLoV7mxosjfb1ts7X+ifc5R1In+meyho9hKiuhX66rUtQQcVKmUu
- tX20rA7Z5d3owCVdskkcau8/w27/ATUinyOobnC8DmIGsVjS+lI9oncCc6iwFEPqNL2n
- WSeTSjWesHLFHYOl3SnJUnpCaHhAne8KSRsVFWw3V66YGIwtB5oQwtgXzyX7PJIQ+qID
- 5Lngxd/9zleRXqDikFwoDh5uAp0RfzbnsokCfxW+kljiK2S67kJ2LdYnAG0amRltJL1L
- LW/vtx+pyqhwMT+CelxbVVrcnd31NJbl1pmu+yIjbOghD5VNUYYpyD8/FAH1NQwcIZBz
- 49Aw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=iG3Fi3bifYETjD0FtDjvtg4xtMeq7eojMfJp3La+dgI=;
- fh=4qB3mb730ZWpYHDqeRWveSqK679IS8Wf7To6jYrG52Q=;
- b=Rr13qWsdBbc5QgA6z+eA61Fnc2H5Pwcw7ciyv3B0IJbkNkCPFSCs9PfEgqr8IbthzL
- 4psvxe3zp/nVV9Y2oieyZoGjyGnQRKJHjPhCI3ciz2IwwKICdDGMGj4Cf7MPP2OWLED3
- VJzwrP2RO6TMQ2iBAm8OPkpmkj6vyJiTjxC9LDJVpa30ERFpAPUUujIuHBw9EJguPsHI
- ZMfDuiBIJWKM4AmHrM6XPhLgacV0O5qLB5kESshACWDne17EzkHrznYh4cjkFA/NQE84
- OMfwYIVovnb7hxZ7W1KRNbWY12sCXqacIRPrd+h5CptH9mTRSlo6Z2QrjEZIGqRy7Cqn
- S+vg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jcethrid@gmail.com
+Received: by mail-qt1-x842.google.com with SMTP id
+ d75a77b69052e-50b69bf5638so22740801cf.1
+ for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 06:58:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775862348; x=1776467148; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=iG3Fi3bifYETjD0FtDjvtg4xtMeq7eojMfJp3La+dgI=;
- b=EgLxbr+2LIRIJpV76mP0OHxNnabJ+Dmff1kQRWRpdrhPpMZnuqaLpJscOfKrB7F8ef
- XA+wFRMH7wDhUyDg+QfJrjDWDYPz1nAt4d4/6urNqUnNi5npk/uYEsnIKb4KFnDZvJNL
- GObXDhePw1gOIi+sKybFKCsQUbXoA7VtvAuMY=
+ d=gmail.com; s=20251104; t=1775829511; x=1776434311; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=2xuGlgsMcN8iYsXTSeYD8dNugWqvHN5Iinw6bOaLacM=;
+ b=bGj3IvnbDhIcbSygo6w+BRiwzZn8E71mJPf2Fajy/8Act7gbNa4mtk9h5lTPMR/A5y
+ nfBaMwGK20kPyAigsM34zTYPFSjClR4/hY+8hDtHtrEbSMbh9zecsCqEZIhxNRSb2dX7
+ ZyaXdyMlqnTNar3VNPLVFpU6/obq/XjbsYU2QbCjfVx/4p9kZyufOaHiSZ35VcqEv9bv
+ V/i+ZsvcDHi588Bq5OmxLaXc/HTHHkR35akcwb1U1QxNtujDDV7lkTYlBTT+dcs7GWhE
+ jSfDcysIAPeOCsuUJSHdVeV/4VFPa0FrFOIZa5QCihq6UVI/3PBfp3T/orxsTNhNXILo
+ 6O7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775862348; x=1776467148;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1775829511; x=1776434311;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iG3Fi3bifYETjD0FtDjvtg4xtMeq7eojMfJp3La+dgI=;
- b=q1WU8/4uMNvohSRInhMVtq4sc9hI6LUlYZM0ox5vnhhJvJxuSIr1iTVOWIrla8/iZS
- 5H2NyMAN0vr2/ndj2yh1tRV4ZWNxEtOsd73zo5rBocBp6wwBhBKLLo2d5QHlKD9kEGgu
- T/Cc/P+yI10qBETxYCiAZi7ge7WAlskfc3irNNSDS2WK7CK451+EJJpCCN7B5wop0+an
- ufEsrY+pDHgP8BK4ffxGlzcZxzMd3z5PiZsaJ81LC98kCJZRbeEqjCdg3vvxpQfbOfgk
- JzUVHeyhgPsm8Fu4w4EJiAdjxnDU5leCe85kYQg/zYhrGCfEgAVGPUEqggtNCIIGIUgn
- PHwQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVVm5kv24a5+L9c6QeWXcHYAVT7XdVkwZbRTExTBM7xnh0gmeMnE7yv3urSkUk+6alvmH//81k=@lists.denx.de
-X-Gm-Message-State: AOJu0YzI0Yr8ZaccREX9u/BhLKdpxPFXHRC9hVjKYDX+HmdfROR40uo8
- cLCgkQvz2rVpV3QeG9uWaGtcCSuf3iRr3GwO61rWsh1rOjnFQLEcBrlI4ouN9qlO28/RD7UfGg1
- cHI7mOs74xBtQHRR3/e1EvQhthB8Qzb3ext1TvO3F
-X-Gm-Gg: AeBDiesWtvJkfydZYeRh9HqbbMEHTI6A9+ll7kh+x1pKgpvE4V0TUo+QDhHg0sVt4Ts
- 3WEEDZCauARa4zvWnZ7uI7AeahKqacy9ClAD4wXwR9xPiBY4ynvJ2lff7djUHoHQAHcpuZxM4iI
- 4mmo27CvvEBf9VtUeiMrSfEznm2IcS+Bjg/w/s9P/hBXiCGDjkTwK1k/WKvvw4XdmwW2l3PjeWJ
- JNKutYNDgNq98ILDSHGRYVc5U7/0juV3cKNqczTwJ+eIgFbh9bavSigXAoPOZ/CSyONVnrUwJsh
- S7aVyA==
-X-Received: by 2002:a17:907:9615:b0:b98:6984:6627 with SMTP id
- a640c23a62f3a-b9d729c0986mr287073366b.40.1775862347967; Fri, 10 Apr 2026
- 16:05:47 -0700 (PDT)
+ bh=2xuGlgsMcN8iYsXTSeYD8dNugWqvHN5Iinw6bOaLacM=;
+ b=Hirin5robI197C1gkC+85ZNmOZjAWIq0AOLwnUrKb23Hvwg/XfRgBeZKFJ+l84X1nu
+ jNuo6j3C8ndmYd3tXmfMxJ7ZeD9GX4keqmwLX13Ud15YkxbrRCiliG7biHiMKPfFGS2u
+ +37a+16Uchg0UCQsLlPz6Mvch1GG5+zn5eQP8/wFGIh2FjIi2tOo6pD79hy83lbysGDT
+ 0nMWND5/qYh6LImim46GUR7+eykoQdvXJD14lidsjYCDpa7RtnJT+syFG7+Rw52MG5C+
+ x7blzYbWyJeteoNNA247u3dRjky4CwfZz/PHxNVSN0eNLLxXDURYGdxlVaHpQ3ZfNVaN
+ At5w==
+X-Gm-Message-State: AOJu0Yz3i7q+now0dOUDqiW+2qYfS7A8ZXM4Qtc9bQ1GYrQl9ZiwJ0c9
+ e4A9hf/ZYXpRTfYsgz0PWgCtdiDRogBnvFOoROwb+PFlGvCzGUPBU7Y3de+wIL3t
+X-Gm-Gg: AeBDieu3kQaXBEUKrlw4Q4J5j1T09JzTZyDE4jxVO6BjUgVVJlnq7C+ioBbE1lpSALv
+ iq6oJZzpTs5I6uHgDTTrTgcsLPD3FQgKD7kXYJQRhkOkBp0Qizd70Ce9vQmfXzFoqWqWE047ozX
+ rdeSRkWzTrCJQvXWXchvhmE5EFC/xjGWce6quiSN9El2aXOeFBfYQfSvR+j67YBdX3NHQ6+JJlf
+ KZtvPXqt0ZnXBsKQwrMSrvz0slyiMdlp5UuwEPmZKHtcFLDNtg+bVNEQcVRNsh3o+z8hX8nP1Bs
+ ztxvQPROpgv4M6gAoWrc6s8HqaHqjQjedM3KhcMPYEvTXvHsuPgV+42M0G9h6L6BetvBdciySVs
+ 6X51g6KUXAfOfLiYcHK592+b+vxjkaHoNvyo1HPkk9GLNx6u4jXasogof+LSfZtGjaK3PVh/uCG
+ IOKPcK48K6iz/OJWGp/zrFextflv7+fm4AFSKOKMMhOrlb
+X-Received: by 2002:a05:622a:7506:b0:50d:af3a:d8ed with SMTP id
+ d75a77b69052e-50dd5cc440emr36731211cf.41.1775829510779; 
+ Fri, 10 Apr 2026 06:58:30 -0700 (PDT)
+Received: from cethr-l01.localdomain ([136.56.120.109])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-50dd53f9c16sm21723141cf.11.2026.04.10.06.58.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 10 Apr 2026 06:58:30 -0700 (PDT)
+From: Caleb Ethridge <jcethrid@gmail.com>
+To: u-boot@lists.denx.de
+Cc: malysagreg@gmail.com, trini@konsulko.com, linux@analog.com,
+ philip@philipmolloy.com, Caleb Ethridge <jcethrid@gmail.com>,
+ Caleb Ethridge <caleb.ethridge@analog.com>
+Subject: [PATCH v4 00/14] sc5xx Environment Cleanup and Fixes
+Date: Fri, 10 Apr 2026 09:57:55 -0400
+Message-Id: <cover.1775829166.git.jcethrid@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <CAFLszTgR=jt+P5NciLw80PaCseZZw=XMT-Ha+NHQFNXxfMfndg@mail.gmail.com>
- <20260403153733.95117-1-matwey.kornilov@gmail.com>
-In-Reply-To: <20260403153733.95117-1-matwey.kornilov@gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 10 Apr 2026 17:05:35 -0600
-X-Gm-Features: AQROBzC9CcCPC1CuC5z2-OEzpvxWV-h9NeBadWo1NlN-ebd5IwCgCMOOQK4Jil4
-Message-ID: <CAFLszTgRtbfZpGeF2qBwNC=-k5JFdW+dqUkqriFy=fStZrKrcw@mail.gmail.com>
-Subject: Re: [PATCH] doc: Fix fdt resize argument in fdt_overlays.rst
-To: matwey.kornilov@gmail.com
-Cc: sjg@chromium.org, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 11 Apr 2026 09:08:55 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,16 +97,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-04-03T15:37:33, Matwey V. Kornilov <matwey.kornilov@gmail.com> wrote:
-> doc: Fix fdt resize argument in fdt_overlays.rst
->
-> The argument is parsed as hexadecimal number.
->
-> Link: https://lists.denx.de/pipermail/u-boot/2026-April/613799.html
->
-> Signed-off-by: Matwey V. Kornilov <matwey.kornilov@gmail.com>
->
-> doc/usage/fdt_overlays.rst | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+This series performs a general cleanup of the default U-boot environment
+for sc5xx boards, stemming from the decision to no longer store the
+environment in the SPI flash. The environments for each board have been
+edited to contain the minimum number of commands needed for all supported
+boot modes to avoid confusion, and the default boot command synced to spi
+for all boards that support it. The filesystem for the SPI flash has also
+been changed from jffs2 to ubifs.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+A bug with the Ethernet reset line on the sc594 has been fixed, and the
+sc573 has been renamed from the EZKIT to the EZLITE to match the name of the
+publically available board. EZKIT was only used internally before release.
+Preliminary binman support for sc5xx boards has been removed as it was unused
+and full support never added.
+
+Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
+
+---
+Changes in v4:
+- Added commit with default values for fdt_addr_r, kernel_addr_r, and initrd_addr
+---
+
+Caleb Ethridge (13):
+  configs: sc5xx: Do not store environment in SPI flash
+  mach-sc5xx: Remove update commands from default environment
+  mach-sc5xx: Update boot commands
+  mach-sc5xx: Switch from tftp to wget
+  mach-sc5xx: Add USB boot command
+  mach-sc5xx: Remove preliminary binman support
+  dts: sc594: Fix gige-reset line on EZKIT
+  mach-sc5xx: sc573: Rename EZKIT board to EZLITE
+  mach-sc5xx: Update image load address
+  mach-sc5xx: Update SPI bootargs for ubifs
+  configs: sc5xx: Set default bootcmd to SPI boot
+  arm: sc5xx: Remove SC5XX_LOADADDR
+  arm: sc5xx: Add fdt_addr_r, kernel_addr_r, and initrd_addr
+
+Ozan Durgut (1):
+  arm: sc5xx: add missing boot env selectors
+
+ arch/arm/dts/Makefile                         |  2 +-
+ .../dts/{sc573-ezkit.dts => sc573-ezlite.dts} |  4 +-
+ arch/arm/dts/sc594-som-ezkit.dts              |  2 +-
+ arch/arm/dts/sc5xx.dtsi                       | 41 --------
+ arch/arm/mach-sc5xx/Kconfig                   | 47 +--------
+ arch/arm/mach-sc5xx/init/dmcinit.c            |  2 +-
+ board/adi/sc573-ezkit/sc573-ezkit.env         | 17 ----
+ .../adi/{sc573-ezkit => sc573-ezlite}/Kconfig |  8 +-
+ .../{sc573-ezkit => sc573-ezlite}/Makefile    |  2 +-
+ .../sc573-ezlite.c}                           |  0
+ board/adi/sc573-ezlite/sc573-ezlite.env       | 16 +++
+ board/adi/sc584-ezkit/sc584-ezkit.env         |  8 +-
+ board/adi/sc589-ezkit/sc589-ezkit.env         |  9 +-
+ board/adi/sc589-mini/sc589-mini.env           |  9 +-
+ board/adi/sc594-som-ezkit/sc594-som-ezkit.env |  9 +-
+ .../adi/sc594-som-ezlite/sc594-som-ezlite.env |  8 +-
+ board/adi/sc598-som-ezkit/sc598-som-ezkit.env |  9 +-
+ .../adi/sc598-som-ezlite/sc598-som-ezlite.env | 14 ++-
+ ...ezkit_defconfig => sc573-ezlite_defconfig} | 12 +--
+ configs/sc584-ezkit_defconfig                 | 10 +-
+ configs/sc589-ezkit_defconfig                 | 12 +--
+ configs/sc589-mini_defconfig                  | 12 +--
+ configs/sc594-som-ezkit-spl_defconfig         |  7 +-
+ configs/sc594-som-ezlite-spl_defconfig        |  7 +-
+ configs/sc598-som-ezkit-spl_defconfig         |  5 +-
+ configs/sc598-som-ezlite-spl_defconfig        |  5 +-
+ .../arm/adi/adi,sc5xx.yaml                    |  2 +-
+ .../configs/{sc573-ezkit.h => sc573-ezlite.h} |  4 +-
+ include/env/adi/adi_boot.env                  | 98 ++++++-------------
+ 29 files changed, 106 insertions(+), 275 deletions(-)
+ rename arch/arm/dts/{sc573-ezkit.dts => sc573-ezlite.dts} (98%)
+ delete mode 100644 board/adi/sc573-ezkit/sc573-ezkit.env
+ rename board/adi/{sc573-ezkit => sc573-ezlite}/Kconfig (92%)
+ rename board/adi/{sc573-ezkit => sc573-ezlite}/Makefile (79%)
+ rename board/adi/{sc573-ezkit/sc573-ezkit.c => sc573-ezlite/sc573-ezlite.c} (100%)
+ create mode 100644 board/adi/sc573-ezlite/sc573-ezlite.env
+ rename configs/{sc573-ezkit_defconfig => sc573-ezlite_defconfig} (86%)
+ rename include/configs/{sc573-ezkit.h => sc573-ezlite.h} (79%)
+
+-- 
+2.34.1
+
