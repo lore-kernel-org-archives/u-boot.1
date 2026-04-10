@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64300F364DC
-	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 11:05:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21CDFF364DC
+	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 11:05:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13F6B84199;
-	Fri, 10 Apr 2026 13:04:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 590C4841CD;
+	Fri, 10 Apr 2026 13:04:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="o+lR6fD9";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="kSnOQD64";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B401B8419C; Fri, 10 Apr 2026 13:04:41 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 0863584106; Fri, 10 Apr 2026 13:04:45 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BBF284105
- for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 13:04:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C105884199
+ for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 13:04:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-488a29e6110so21890885e9.3
- for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 04:04:37 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-43d43e09de5so1017905f8f.1
+ for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 04:04:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1775819077; x=1776423877;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1775819078; x=1776423878;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=vBVWWARiE/U5RerqrTVYs5Kew8r11V7W6NHM5GIr89o=;
- b=o+lR6fD9ubkKAHTZsu7GJssocJOUNNp3unlkpz6y6vRtnqWP0IZBTI7ds4gCf/2rUJ
- I3OWBLIvtgbIPxMQRo2GUBzTmXxhK76sNo0yd4yjoXSBYXvcL6Dm9VP6/9SrA8b67YsH
- NFUOo+VCcyFq/rzelY82HPXEJw9TbTlm/5kvSqemU13sDKBszynKCMlRNAA3TzcYr7Fc
- G5j29xwzSRaZBucCdDMon4MvZtw6S9NDZt/BZvrf4D9+QwzUxSqyl8jXWLHj5wAsB70N
- RDC9jmlt70t2Pn0oqUlMMxN82mvs41MFwIlZGKvjUB+PQBTI3rH0rGdLbJ6vmYgNUFZj
- J+VQ==
+ :reply-to; bh=YIQqYGJyDi8KAoevzX3u7kL/iFz9ctO6qA4P1mcqGWY=;
+ b=kSnOQD64nJYzlRgcJKO/2v8noz8iOt93pmYFfskeK7Kde/e2/5nxIslGCO/hrOXT1x
+ v0DQkGtsRU/kj9v8tTKb43Sg8hV7roNSqwvP8hiPCUyOF5Ua5stn2+NmamUSYgpF06mF
+ Zgwbxa/2hr7NJWoGUD7dm47cJYivKv28zaWqbT0wLKE+UcJZO3APxYw7iRijhr1G1Q+j
+ PnXV2nk5GSJ/pqBrJrKKXX2GJPBpiecb2nlscaQBStVEUiIxQ0HcRQ0p93XAVnxiEz9c
+ 4O3edrY1ELMLA4akTof8Qtu308JecIaQ3hXZQxBjyYJtpnJxKzTZoejVq2jntmVaPvhl
+ NldA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775819077; x=1776423877;
+ d=1e100.net; s=20251104; t=1775819078; x=1776423878;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=vBVWWARiE/U5RerqrTVYs5Kew8r11V7W6NHM5GIr89o=;
- b=RhWLyYcxp+vx9Ldxyc/LFaqqRg0uWtHQS+tOb72v2IBr1tl02KJuDgpqA1JM9gVF31
- MYWHQ4pGWir9BIXrQ7WpEZNsYL17RWyv7HDhnO2jpUx+3OCv3uwUqV+b0q+92VpRfTpo
- nhSA+/EzOzGu1RX8B++rOXcOrrHvnM77i0XsUIW5JWqcx45Kntovw1Iwwm4+bOcphkKE
- 8fyn7T7tGZiHtMR2OKLRwcrJe3lIiNpyaoQ41U/GyoWO/IvReCZd9PgK3qGTBllnYbwf
- pHRBe9QalZSMmhnSRZY35Cx9KGevMAkjICOQyeg9RN3u0ljlsQuALEVVl2vHvPtIvopd
- /nkA==
-X-Gm-Message-State: AOJu0YzV8eFZ7mA0tG0pCQ279gjE07fMLPwXx71v155cSb5IkVYXxaMQ
- ktfDNOTPTb4YFnSwf9uqubjIPOmlcHoJWMBMOgyTFA+4iS9DZI4vY+1XtvgSPbEHXdc=
-X-Gm-Gg: AeBDieuEqDQrxl57vAMKW8EefcHXS/jRsTeSc1I/IE/ivyPYNfx1wmzUdrv4ExVJ58l
- M9Jlpl5qwSqxKERBfioM1eiNfeufCVEuCeU7jnCUT/BwBl4g0jOtCjCWrFJOL1/JjqcBVQZYZdp
- WHgHlLEwc4ufmdKWT2g6Ket/Ybjod5uYhWmJMIVUJ2TsA8ubl5nMYEQyBKHiXMmEibCnmitztuz
- 7uYNHAyx+OebrWkHMKKHbThjvDfbHGOgt4hZbCl559qF4OP8PGgHp6NnkfHwf5NGmndqXW05a9/
- cPzA4fcOamL1Fo8S49/pDpzDlpt7ZKAtyfbSbDaNUe/iSFrAw6DvwpDUaZ3Q5pM9uxAgpNWHgBT
- MjZQGFoIdqp/J6LGfBD+AqkGOpIJf3rGSbnBz5j1/gSVuQOUvv8/K3m6UoQhHlPfXZEaT1OML76
- vO4O4sY2m9Fu8qIBNshHdkSFStuxHbj4w=
-X-Received: by 2002:a05:600c:8595:b0:485:3b00:f93b with SMTP id
- 5b1f17b1804b1-488d6ab8082mr25731875e9.31.1775819076669; 
- Fri, 10 Apr 2026 04:04:36 -0700 (PDT)
+ bh=YIQqYGJyDi8KAoevzX3u7kL/iFz9ctO6qA4P1mcqGWY=;
+ b=Q7wVvKKYJHBOR2ST/OyqBQB8fo/8/AjNG8J7CvtoszeTkheoPQWIpBIjTT2VNWt1t6
+ E9rAHF6T9A/pjFbGhduEJSqI9nIFQVD4grUmXaM4FY305zSEaWIyAKtYGtWnpbrKrOth
+ NbdzOrsVbasX5fxzMM4CTuGaSrasgDHJyGrE5deH518rzi3F/qOwHL+wuu+QZsJIIeZ1
+ Wavqp9r1/+6kwFX45LYNy7KdQeF8YYt4rDDV4PV+lYUvjFtt+J87DiU5ftYXZozs1mN8
+ CzB87NYBujvpf4BAfvC9mfVicGEq+LphzecgWagGpnLnGleNbnzl/6ExDBPqW/vr8DAH
+ seFg==
+X-Gm-Message-State: AOJu0YxQqJg4R1S5gblGEBCpeLq/ZJA+a54uri93zfSSAJ00II8ff1lU
+ zEINwhoxyCoip+Zj4FFjZjqHBNYcUVf6NCDrY1tweS9iYta6ZKV/xkkBRe04SWZh02WbrtJGuOf
+ 6Z1UA
+X-Gm-Gg: AeBDiet3AwaVvVfMfL0HNVj8gg1lXxmFccpBWdvACCy64EYujjsVWP+FGtpQt0lxIhB
+ jKRByVK5wRZKstgIq6qc7VflqqfEVOkJdT4TzTud7sTBvCcaBdWYUe1EOI7/lLMePIxEFTcSLak
+ MwftdBUwywWXw0fjlfTEr5DNn1vb4VhZOT5D9/zvRRSZ0uK91Afy0H2aSxz3E18HUXemo/mcvKT
+ 3DCpGF+K8mRy8l/7GpItwKO9Wyqhz/c7fSrGLBXyJ7N7ocREbsymnzK5XTTV3A1AS/1UQxb7l+E
+ gIRQhKUlB12ywtub4bFbDMyHPgKaCUPQ7hJNz/obD4r2nAZxGRsmxO/OaMKPYpTd616yr2w9BrY
+ AaraVVBVWU5dFTlJfKZxy71uzDePXLVpmRwtQz7YBMq/rUyGxIJDEa5rn0zY9pbg9tPg8iC/q4S
+ eFuSaYHI0xOYQMbpapij2y
+X-Received: by 2002:a05:6000:1447:b0:43d:1bf6:30f2 with SMTP id
+ ffacd0b85a97d-43d6428d948mr4080856f8f.20.1775819077841; 
+ Fri, 10 Apr 2026 04:04:37 -0700 (PDT)
 Received: from localhost ([2001:4091:a246:8598:4c79:7b44:ca74:c5de])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488d681ecd5sm17588125e9.19.2026.04.10.04.04.36
+ ffacd0b85a97d-43d63dec090sm6797095f8f.12.2026.04.10.04.04.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Apr 2026 04:04:36 -0700 (PDT)
+ Fri, 10 Apr 2026 04:04:37 -0700 (PDT)
 From: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
-Date: Fri, 10 Apr 2026 13:04:05 +0200
-Subject: [PATCH 3/4] net: cpsw: Use driver data for phy_sel
+Date: Fri, 10 Apr 2026 13:04:06 +0200
+Subject: [PATCH 4/4] net: cpsw: Support new cpsw-switch DT bindings
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260410-topic-cpsw-switch-v2026-07-next-v1-3-c914724b13e4@baylibre.com>
+Message-Id: <20260410-topic-cpsw-switch-v2026-07-next-v1-4-c914724b13e4@baylibre.com>
 References: <20260410-topic-cpsw-switch-v2026-07-next-v1-0-c914724b13e4@baylibre.com>
 In-Reply-To: <20260410-topic-cpsw-switch-v2026-07-next-v1-0-c914724b13e4@baylibre.com>
 To: u-boot@lists.denx.de
@@ -83,12 +84,12 @@ Cc: Jerome Forissier <jerome.forissier@arm.com>,
  Tom Rini <trini@konsulko.com>, 
  "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2491; i=msp@baylibre.com;
- h=from:subject:message-id; bh=ciu1GP6BGxcvj1E+kKXDkvBl+hBgQYNeE1oUeiZKczs=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhswbN81DdW+0m5x9Glx2eJ2Qa1FgRXWB6iynxf4eR+ezc
- e8Jnbumo5SFQYyLQVZMkaUzMTTtv/zOY8mLlm2GmcPKBDKEgYtTACaSoMLIcPhzxLLbujd2sHKG
- 35v+VrFT7PpmrlNdfJuClVIkZ5m7qTD8dxCTnV23jmfXN/t9qwrrb0YVn56zZvueiyw5Ao8infp
- z+AA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6318; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=sC3LWihHEDj9ddzcYcUMy8y13zKnmjUYHGMG24BggXc=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhswbN61DDs+OXxosvfTIz0eecossHPS/ddiWqb10lS2Xf
+ uXxRuxmRykLgxgXg6yYIktnYmjaf/mdx5IXLdsMM4eVCWQIAxenAEzkiBcjw4fvzpd5ph2dXrf0
+ 614zVZ1l589+LrOt0bykKTu3u+PCgVeMDPdcsvtuxjddy7jNeeGCmeXZShfeNakBmj7mSh35d+y
+ mMgIA
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-BeenThere: u-boot@lists.denx.de
@@ -107,77 +108,205 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use driver data to pass the correct gmii_sel function. This way new
-compatibles don't need manual compatible matching as is done in
-cpsw_phy_sel().
+Upstream devicetrees use a newer DT binding using cpsw-switch
+compatibles. The bindings are a bit different, so two functions are
+introduced to capture the differences, cpsw_eth_of_to_plat_switch() and
+cpsw_eth_of_to_plat_legacy().
 
 Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
 ---
- drivers/net/ti/cpsw.c | 32 +++++++++++++++++++++++---------
- 1 file changed, 23 insertions(+), 9 deletions(-)
+ drivers/net/ti/cpsw.c | 148 +++++++++++++++++++++++++++++++++++++++-----------
+ 1 file changed, 115 insertions(+), 33 deletions(-)
 
 diff --git a/drivers/net/ti/cpsw.c b/drivers/net/ti/cpsw.c
-index c844416d50ca3db9bb0d9ffe56cd9c352b8c58b0..b1fb009822e9586886e5487e4fbeee115eec9a59 100644
+index b1fb009822e9586886e5487e4fbeee115eec9a59..7a7cb83bd9847bc79ed21b2786ef6fe869e3fc0d 100644
 --- a/drivers/net/ti/cpsw.c
 +++ b/drivers/net/ti/cpsw.c
-@@ -216,6 +216,10 @@ struct cpsw_priv {
- 	u32				phy_mask;
- };
+@@ -33,6 +33,7 @@
+ #define PKT_MAX			(1500 + 14 + 4 + 4)
+ #define CLEAR_BIT		1
+ #define GIGABITEN		BIT(7)
++#define GMII_EN			BIT(5)
+ #define FULLDUPLEXEN		BIT(0)
+ #define MIIEN			BIT(15)
+ #define CTL_EXT_EN		BIT(18)
+@@ -1133,33 +1134,13 @@ static void cpsw_eth_of_parse_slave(struct cpsw_platform_data *data,
+ 							"max-speed", 0);
+ }
  
-+struct cpsw_driver_data {
-+	void (*gmii_sel)(struct cpsw_priv *priv, phy_interface_t phy_mode);
-+};
-+
- static inline int cpsw_ale_get_field(u32 *ale_entry, u32 start, u32 bits)
+-static int cpsw_eth_of_to_plat(struct udevice *dev)
++static int cpsw_eth_of_to_plat_legacy(struct udevice *dev,
++				      struct cpsw_platform_data *data)
  {
- 	int idx;
-@@ -1067,6 +1071,13 @@ static void cpsw_gmii_sel_dra7xx(struct cpsw_priv *priv,
- static void cpsw_phy_sel(struct cpsw_priv *priv, phy_interface_t phy_mode)
- {
- 	const char *compat = priv->data->phy_sel_compat;
-+	const struct cpsw_driver_data *drv_data =
-+		(const struct cpsw_driver_data *)dev_get_driver_data(priv->dev);
-+
-+	if (drv_data && drv_data->gmii_sel) {
-+		drv_data->gmii_sel(priv, phy_mode);
-+		return;
-+	}
+-	struct eth_pdata *pdata = dev_get_plat(dev);
+-	struct cpsw_platform_data *data;
+-	struct gpio_desc *mode_gpios;
+ 	int slave_index = 0;
+-	int num_mode_gpios;
+ 	ofnode subnode;
+ 	int ret;
  
- 	if (!strcmp(compat, "ti,am3352-cpsw-phy-sel"))
- 		cpsw_gmii_sel_am3352(priv, phy_mode);
-@@ -1222,13 +1233,6 @@ static int cpsw_eth_of_to_plat(struct udevice *dev)
- 
- 			if (ofnode_read_bool(subnode, "rmii-clock-ext"))
- 				data->rmii_clock_external = true;
+-	data = calloc(1, sizeof(struct cpsw_platform_data));
+-	if (!data)
+-		return -ENOMEM;
 -
--			data->phy_sel_compat = ofnode_read_string(subnode,
--								  "compatible");
--			if (!data->phy_sel_compat) {
--				pr_err("Not able to get gmii_sel compatible\n");
--				return -ENOENT;
--			}
+-	pdata->priv_pdata = data;
+-	pdata->iobase = dev_read_addr(dev);
+-	data->version = CPSW_CTRL_VERSION_2;
+-	data->bd_ram_ofs = CPSW_BD_OFFSET;
+-	data->ale_reg_ofs = CPSW_ALE_OFFSET;
+-	data->cpdma_reg_ofs = CPSW_CPDMA_OFFSET;
+-	data->mdio_div = CPSW_MDIO_DIV;
+-	data->host_port_reg_ofs = CPSW_HOST_PORT_OFFSET,
+-
+-	pdata->phy_interface = -1;
+-
+-	data->cpsw_base = pdata->iobase;
+-
+ 	ret = dev_read_s32(dev, "cpdma_channels", &data->channels);
+ 	if (ret) {
+ 		printf("error: cpdma_channels not found in dt\n");
+@@ -1192,17 +1173,6 @@ static int cpsw_eth_of_to_plat(struct udevice *dev)
+ 		return ret;
+ 	}
+ 
+-	num_mode_gpios = gpio_get_list_count(dev, "mode-gpios");
+-	if (num_mode_gpios > 0) {
+-		mode_gpios = malloc(sizeof(struct gpio_desc) *
+-				    num_mode_gpios);
+-		gpio_request_list_by_name(dev, "mode-gpios", mode_gpios,
+-					  num_mode_gpios, GPIOD_IS_OUT);
+-		free(mode_gpios);
+-	}
+-
+-	data->active_slave = dev_read_u32_default(dev, "active_slave", 0);
+-
+ 	ofnode_for_each_subnode(subnode, dev_ofnode(dev)) {
+ 		const char *name;
+ 
+@@ -1236,6 +1206,115 @@ static int cpsw_eth_of_to_plat(struct udevice *dev)
  		}
  	}
  
-@@ -1253,9 +1257,19 @@ static int cpsw_eth_of_to_plat(struct udevice *dev)
- 	return 0;
- }
++	return 0;
++}
++
++static int cpsw_eth_of_to_plat_switch(struct udevice *dev,
++				      struct cpsw_platform_data *data)
++{
++	ofnode eth_ports_node, subnode;
++	int ret;
++
++	data->channels = 8;
++	data->ale_entries = 1024;
++	data->mac_control = GMII_EN;
++
++	eth_ports_node = ofnode_find_subnode(dev_ofnode(dev), "ethernet-ports");
++	data->slaves = ofnode_get_child_count(eth_ports_node);
++	if (!data->slaves) {
++		pr_err("cpsw: No ethernet-ports defined\n");
++		return -EINVAL;
++	}
++
++	data->slave_data = malloc(sizeof(struct cpsw_slave_data) * data->slaves);
++	if (!data->slave_data)
++		return -ENOMEM;
++
++	ofnode_for_each_subnode(subnode, eth_ports_node) {
++		struct ofnode_phandle_args args;
++		u32 port_id;
++
++		ret = ofnode_read_u32(subnode, "reg", &port_id);
++		if (ret || !port_id || port_id > data->slaves) {
++			pr_err("cpsw: invalid or missing reg in port node\n");
++			return -EINVAL;
++		}
++
++		cpsw_eth_of_parse_slave(data, port_id - 1, subnode);
++
++		if (!data->gmii_sel) {
++			ret = ofnode_parse_phandle_with_args(subnode, "phys", "#phy-cells",
++							     0, 0, &args);
++			if (!ret)
++				data->gmii_sel = ofnode_get_addr(args.node);
++		}
++	}
++
++	if (!data->gmii_sel) {
++		pr_err("No port specified phys correctly\n");
++		return -ENOENT;
++	}
++
++	ofnode_for_each_subnode(subnode, dev_ofnode(dev)) {
++		const char *name = ofnode_get_name(subnode);
++
++		if (strncmp(name, "mdio", 4))
++			continue;
++
++		data->mdio_base = ofnode_get_addr(subnode);
++		if (data->mdio_base == FDT_ADDR_T_NONE) {
++			pr_err("Not able to get MDIO address space\n");
++			return -ENOENT;
++		}
++	}
++
++	return 0;
++}
++
++static int cpsw_eth_of_to_plat(struct udevice *dev)
++{
++	struct eth_pdata *pdata = dev_get_plat(dev);
++	struct cpsw_platform_data *data;
++	struct gpio_desc *mode_gpios;
++	int num_mode_gpios;
++	int ret;
++	bool switch_dt_bindings =
++		ofnode_valid(ofnode_find_subnode(dev_ofnode(dev), "ethernet-ports"));
++
++	data = calloc(1, sizeof(struct cpsw_platform_data));
++	if (!data)
++		return -ENOMEM;
++
++	pdata->priv_pdata = data;
++	pdata->iobase = dev_read_addr(dev);
++	data->version = CPSW_CTRL_VERSION_2;
++	data->bd_ram_ofs = CPSW_BD_OFFSET;
++	data->ale_reg_ofs = CPSW_ALE_OFFSET;
++	data->cpdma_reg_ofs = CPSW_CPDMA_OFFSET;
++	data->mdio_div = CPSW_MDIO_DIV;
++	data->host_port_reg_ofs = CPSW_HOST_PORT_OFFSET;
++
++	pdata->phy_interface = -1;
++
++	data->cpsw_base = pdata->iobase;
++
++	num_mode_gpios = gpio_get_list_count(dev, "mode-gpios");
++	if (num_mode_gpios > 0) {
++		mode_gpios = malloc(sizeof(struct gpio_desc) * num_mode_gpios);
++		gpio_request_list_by_name(dev, "mode-gpios", mode_gpios,
++					  num_mode_gpios, GPIOD_IS_OUT);
++		free(mode_gpios);
++	}
++
++	data->active_slave = dev_read_u32_default(dev, "active_slave", 0);
++
++	if (switch_dt_bindings)
++		ret = cpsw_eth_of_to_plat_switch(dev, data);
++	else
++		ret = cpsw_eth_of_to_plat_legacy(dev, data);
++	if (ret)
++		return ret;
++
+ 	data->slave_data[0].slave_reg_ofs = CPSW_SLAVE0_OFFSET;
+ 	data->slave_data[0].sliver_reg_ofs = CPSW_SLIVER0_OFFSET;
  
-+static const struct cpsw_driver_data cpsw_data_am3352 = {
-+	.gmii_sel = cpsw_gmii_sel_am3352,
-+};
-+
-+static const struct cpsw_driver_data cpsw_data_dra7xx = {
-+	.gmii_sel = cpsw_gmii_sel_dra7xx,
-+};
-+
- static const struct udevice_id cpsw_eth_ids[] = {
--	{ .compatible = "ti,cpsw" },
--	{ .compatible = "ti,am335x-cpsw" },
-+	{ .compatible = "ti,cpsw",			.data = (ulong)&cpsw_data_am3352 },
-+	{ .compatible = "ti,am335x-cpsw",		.data = (ulong)&cpsw_data_am3352 },
-+	{ .compatible = "ti,am4372-cpsw",		.data = (ulong)&cpsw_data_am3352 },
-+	{ .compatible = "ti,dra7-cpsw",			.data = (ulong)&cpsw_data_dra7xx },
+@@ -1270,6 +1349,9 @@ static const struct udevice_id cpsw_eth_ids[] = {
+ 	{ .compatible = "ti,am335x-cpsw",		.data = (ulong)&cpsw_data_am3352 },
+ 	{ .compatible = "ti,am4372-cpsw",		.data = (ulong)&cpsw_data_am3352 },
+ 	{ .compatible = "ti,dra7-cpsw",			.data = (ulong)&cpsw_data_dra7xx },
++	{ .compatible = "ti,am335x-cpsw-switch",	.data = (ulong)&cpsw_data_am3352 },
++	{ .compatible = "ti,am4372-cpsw-switch",	.data = (ulong)&cpsw_data_am3352 },
++	{ .compatible = "ti,dra7-cpsw-switch",		.data = (ulong)&cpsw_data_dra7xx },
  	{ }
  };
  #endif
