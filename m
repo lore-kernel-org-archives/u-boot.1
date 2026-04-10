@@ -4,59 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EEE7F44841
-	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 11:41:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74C0DF44857
+	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 12:54:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4944E84099;
-	Fri, 10 Apr 2026 13:41:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
+	by phobos.denx.de (Postfix) with ESMTP id 96F0984099;
+	Fri, 10 Apr 2026 14:54:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=infineon.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="SUIZN4Qg";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=infineon.com header.i=@infineon.com header.b="osL1KUCS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 664FF84105; Fri, 10 Apr 2026 13:41:28 +0200 (CEST)
-Received: from out-189.mta0.migadu.com (out-189.mta0.migadu.com
- [91.218.175.189])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5340284105; Fri, 10 Apr 2026 10:42:56 +0200 (CEST)
+Received: from smtp11.infineon.com (smtp11.infineon.com
+ [IPv6:2a00:18f0:1e00:4::5])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 551C383DC9
- for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 13:41:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F023D83DC9
+ for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 10:42:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=postmarketos.org
+ header.from=infineon.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=funderscore@postmarketos.org
-Date: Fri, 10 Apr 2026 11:19:02 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1775821284;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=pfTdwVIXZgU3o9CNaE4R+AjFAh0F7et0TCRXMCaJ07Y=;
- b=SUIZN4QggwWRb5y581PMUQVQs1tzN+XnpQU4HC+7RQFkms71TNa7bAoOA305OGvpGkIi8r
- KHTkvAQMKveDtDHzE5HMzDxPoXT1AkmTENQoiS0MvwqPfL6x6oQvmnMyw+PWLUDLrTSA7q
- 8nl9Q7HcC6wcFl7jrXSVKDY8GzvQgMtKaRXHKQE2URQJI+ekku43buj1l2ciGMN4m322PS
- oPmsYSEmwMGfcFJ8rXAHnbHrwRBqk3xGbuepfaFLpmUH1O6bOinNt5vOraN5mGK3xqEByQ
- XFCMq1JKhRU+ctacUm1VoL3/93fPuUTKgSIpWDmJjXHQMKQNj9mIqWRQdUaUMA==
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Ferass El Hafidi <funderscore@postmarketos.org>
-To: Anand Moon <linux.amoon@gmail.com>, u-boot-amlogic@groups.io
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH 0/4] Enable EFI Capsule on Disk on Libre Computer LePotato
- & LaFrite
-References: <20260408-b4-amlogic-sysreset-capsules-v1-0-6f3386eb5124@postmarketos.org>
- <CANAwSgT33unjY1FXmKmC2A1draM=PE5mG1sdPy+iszdGxoLmNA@mail.gmail.com>
-In-Reply-To: <CANAwSgT33unjY1FXmKmC2A1draM=PE5mG1sdPy+iszdGxoLmNA@mail.gmail.com>
-Message-ID: <tda0gr.210fsxfirzfnv@postmarketos.org>
+ spf=pass smtp.mailfrom=Takahiro.Kuwano@infineon.com
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
+ t=1775810574; x=1807346574;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=K89Z0Pm86SFkjqoBJvPnxdRtVyhxgg6IAxfirdpgKvY=;
+ b=osL1KUCSrr0cAQ/3rKWQgFOjN1Srj9+lppFTslOjShEjSjDPwlUqNZvk
+ +X+RCXk8MbGTUo4KNckf175AG1amYF32AEcyAFb8wexHy2S6YQ5hr9xj1
+ ML0pTgYNQugMKbt1CYIeNqEFjW/7nNs2cuL5gvqhkKm7VDGeteGJf6YvA Q=;
+X-CSE-ConnectionGUID: KshV9RJBRI6723Of8eVaPg==
+X-CSE-MsgGUID: SUC6tqCtQPu/frsno/LiOA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11754"; a="138631018"
+X-IronPort-AV: E=Sophos;i="6.23,171,1770591600"; d="scan'208";a="138631018"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO MUCSE812.infineon.com) ([172.23.29.38])
+ by smtp11.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 10 Apr 2026 10:42:54 +0200
+Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE812.infineon.com
+ (172.23.29.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 10 Apr
+ 2026 10:42:53 +0200
+Received: from MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be]) by
+ MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be%12]) with mapi id
+ 15.02.2562.037; Fri, 10 Apr 2026 10:42:53 +0200
+From: <Takahiro.Kuwano@infineon.com>
+To: <dlechner@baylibre.com>, <vigneshr@ti.com>, <trini@konsulko.com>
+CC: <jstephan@baylibre.com>, <u-boot@lists.denx.de>
+Subject: RE: [PATCH] mtd: spi-nor-ids: add flags for mx25u12835f
+Thread-Topic: [PATCH] mtd: spi-nor-ids: add flags for mx25u12835f
+Thread-Index: AQHcw6jVKqOO/kp+JkiV3123XGpyb7XX/Wtg
+Date: Fri, 10 Apr 2026 08:42:53 +0000
+Message-ID: <683be5a32ef345229d54a68ea67fe64c@infineon.com>
+References: <20260403-spi-nor-mx25u12835f-v1-1-c9ffdae25d8d@baylibre.com>
+In-Reply-To: <20260403-spi-nor-mx25u12835f-v1-1-c9ffdae25d8d@baylibre.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.161.6.196]
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset=utf-8; format=flowed
-X-Migadu-Flow: FLOW_OUT
+X-Mailman-Approved-At: Fri, 10 Apr 2026 14:54:22 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,124 +85,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anand,
-
-On Fri, 10 Apr 2026 10:10, Anand Moon <linux.amoon@gmail.com> wrote:
->Hi  Ferass,
->
->On Thu, 9 Apr 2026 at 02:00, Ferass El Hafidi via groups.io
-><funderscore=postmarketos.org@groups.io> wrote:
->>
->> Mostly everything is already in place to enable EFI capsules and in particular
->> EFI capsule on disk.
->>
->> First, switch all Amlogic boards to use SYSRESET. EFI Capsule on Disk
->> functionality expects sysreset to be present. As the current reset_cpu()
->> function in board-common.c is basically only doing PSCI reset on U-Boot
->> proper, we can replace it with sysreset's PSCI support, which works just
->> fine for that purpose provided BL31 is running (SPL stays on an
->> SoC-specific reset_cpu() which does for(;;);, as the overhead for
->> sysreset is too high and we don't have PSCI yet at that point).
->>
->> Then we can enable capsule on disk. LaFrite has Capsule updates enabled
->> already, so it is simply a matter of enabling CoD. LePotato does not
->> have Capsule updates enabled by default, however it can be easily enabled
->> and setup to update u-boot on eMMC/SD.
->>
->> With Capsule on Disk setup, it becomes possible to update U-Boot directly
->> from Linux, without having to worry about manually using `flashprog`
->> (for SPI flash) or `dd` (for eMMC/SD). Instead, thanks to CoD, updates
->> can be handled by `fwupd` and applied upon next EFI boot.
->>
->> To test:
->>
->>  * build U-Boot as usual
->>
->>  * in that running U-Boot, run: `efidebug capsule esrt` to get the GUID
->>    -OR-
->>    run the following in your tree:
->>         tools/mkeficapsule guidgen path_to_devicetree_here U_BOOT_MESON_MMC
->>                                            (or U_BOOT_MESON_SPI on LaFrite)
->>
->>  * proceed with the following guide to create a capsule file:
->>    https://docs.u-boot.org/en/latest/develop/uefi/uefi.html#enabling-uefi-capsule-update-feature
->>
->>  * generate a .cab file suitable for fwupd using `mkcab`:
->>    https://gitlab.postmarketos.org/tauchgang/tauchgang-ci/-/tree/main/mkcab
->>         mkcab u-boot-libretech-cc.capsule GUID-GOES-HERE libretech-cc "LePotato" 2026.04
->>    (as of writing, the README.md suggests this is for Qualcomm only. It
->>     actually does nothing that is Qualcomm-specific, and works on any
->>     board that supports Capsule on Disk and fwupd)
->>
->>  * on the board itself, boot to Linux via EFI, install fwupd, copy the resulting
->>    .cab file, and run as root:
->>         fwupdtool --force install u-boot-libretech-cc.cab
->>
->>  * reboot, make sure you boot over EFI, else the capsule update will not
->>    start
->>
->> Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
->Thanks for your work.
->
->I haven't tested the EFI portion yet, but I have a few questions regarding
->the previous commit 17d80a3b326e ("arm: meson: spl: add support for
->SPL DRAM init").
->Could you please clarify how you generated the Meson DRAM timing parameters?
->
-
-Reverse-engineering the BL2 blob mainly, though some ancient Amlogic
-U-Boot source drops helped a lot, especially the older ones that had
-some BL2 source code. Amlogic's U-Boot source drops are a huge treasure
-of information when Amlogic's datasheets aren't enough.
-
-I documented some of my work here if you want to know more:
-	https://scm.dersco.re/amlogic/reversing-gxbb-bl2.git/about/
-
-and this is my downstream U-Boot tree I use for experiments. The
-`wip/spl` ones are the relevant branches:
-	https://scm.dersco.re/amlogic/u-boot-kii-pro.git/
-
-Amlogic also defines a few structs in their U-Boot fork, that ends up
-being used by BL2 as acs.bin. These proved valuable for reverse-engineering.
-
->I’m curious about the boot flow since we can apparently boot U-Boot without
->the Amlogic-signed BL1 firmware.
->
-
-BL1 is the bootROM in Amlogic AArch64 BL terminology, so I suppose you 
-mean BL2. (I'm not familiar with Meson8b, maybe BL1 means something
-else there)
-In theory BL2, on boards without secureboot fuses blown, is not signed at
-all, you can replace it with anything. For a long time, U-Boot depended
-on Amlogic's BL2 blob along with the SCP firmware blob (BL30) and their
-downstream Trusted Firmware-A blob (BL31). Since then, the TF-A blob got
-reverse-engineered and the work was upstreamed, leaving BL2 and BL30.
-
-My work replaces BL2 with U-Boot SPL to do DRAM init and load BL30, BL31
-and U-Boot proper. However, right now, this is only possible for Meson
-GXBB (S905) and GXL (S905X), though I'd like to make it happen for
-G12A/B and SM1 too. It is also still experimental, so for now to have a
-good experience, the BL2 blob is still recommended, though that will
-hopefully change soon with some polish.
-
->I just wanted to understand how to upstream U-Boot for the Meson8b (Odroid C1+)
->platform, as it’s currently stuck on a very old version (v2011). It's
->ARM 32-bit.
->
-
-As I understand it, Meson8b is a completely different bootflow. I'm not
-very familiar about it but I know the bootflow got redone starting with
-S905 (which also happens to be the first AArch64 SoC produced by
-Amlogic).
-
-Digging in my IRC logs (#linux-amlogic on libera.chat,
-https://libera.catirclogs.org/linux-amlogic/2023-06-28#34525179),
-apparently these boot to an ARC HS core first, compared to these GXBB
-and newer SoCs. Though I don't know the details.
-
-In any case: Good luck and I hope you succeed at it!
-
-If you have any more questions I'm happy to answer them.
-
-Best regards,
-Ferass
+SGksDQoNCj4gDQo+IEFkZCBzb21lIGNhcGFiaWxpdHkgZmxhZ3MgZm9yIG14MjV1MTI4MzVmLg0K
+PiANCj4gSW4gcGFydGljdWxhciwgd2UgYXJlIGludGVyZXN0ZWQgaW4gdXNpbmcgdGhlIGxvY2sg
+ZmVhdHVyZS4gQWNjb3JkaW5nIHRvDQo+IHRoZSBkYXRhc2hlZXQsIGR1YWwvcXVhZCByZWFkIGlz
+IGFsc28gc3VwcG9ydGVkLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogRGF2aWQgTGVjaG5lciA8ZGxl
+Y2huZXJAYmF5bGlicmUuY29tPg0KPiAtLS0NCj4gIGRyaXZlcnMvbXRkL3NwaS9zcGktbm9yLWlk
+cy5jIHwgMyArKy0NCj4gIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDEgZGVsZXRp
+b24oLSkNCj4gDQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL210ZC9zcGkvc3BpLW5vci1pZHMuYyBi
+L2RyaXZlcnMvbXRkL3NwaS9zcGktbm9yLWlkcy5jDQo+IGluZGV4IGU3ZmVhMzc1NzA2Li40OTMw
+ZmE4NDY4NSAxMDA2NDQNCj4gLS0tIGEvZHJpdmVycy9tdGQvc3BpL3NwaS1ub3ItaWRzLmMNCj4g
+KysrIGIvZHJpdmVycy9tdGQvc3BpL3NwaS1ub3ItaWRzLmMNCj4gQEAgLTI3Miw3ICsyNzIsOCBA
+QCBjb25zdCBzdHJ1Y3QgZmxhc2hfaW5mbyBzcGlfbm9yX2lkc1tdID0gew0KPiAgICAgICAgIHsg
+SU5GTygibXgyNXUzMjM1ZiIsICAweGMyMjUzNiwgMCwgNCAqIDEwMjQsICAxMDI0LCBTRUNUXzRL
+KSB9LA0KPiAgICAgICAgIHsgSU5GTygibXgyNXU2NDM1ZiIsICAweGMyMjUzNywgMCwgNjQgKiAx
+MDI0LCAxMjgsIFNFQ1RfNEspIH0sDQo+ICAgICAgICAgeyBJTkZPKCJteDI1bDEyODA1ZCIsIDB4
+YzIyMDE4LCAwLCA2NCAqIDEwMjQsIDI1NiwgU0VDVF80SykgfSwNCj4gLSAgICAgICB7IElORk8o
+Im14MjV1MTI4MzVmIiwgMHhjMjI1MzgsIDAsIDY0ICogMTAyNCwgMjU2LCBTRUNUXzRLKSB9LA0K
+PiArICAgICAgIHsgSU5GTygibXgyNXUxMjgzNWYiLCAweGMyMjUzOCwgMCwgNjQgKiAxMDI0LCAy
+NTYsIFNFQ1RfNEsgfA0KPiArICAgICAgICAgICAgICBTUElfTk9SX0hBU19MT0NLIHwgU1BJX05P
+Ul9IQVNfVEIgfCBTUElfTk9SX0RVQUxfUkVBRCB8IFNQSV9OT1JfUVVBRF9SRUFEKSB9LA0KDQpE
+aWQgeW91IHRlc3Qgd2l0aCBjb250cm9sbGVyIHRoYXQgc3VwcG9ydHMgcXVhZCBvcHM/DQoNCklu
+IHNwaS1ub3ItY29yZS5jOiBzcGlfbm9yX2luaXRfcGFyYW1zKCk6DQouLi4NCglpZiAoaW5mby0+
+ZmxhZ3MgJiBTUElfTk9SX1FVQURfUkVBRCkgew0KCQlwYXJhbXMtPmh3Y2Fwcy5tYXNrIHw9IFNO
+T1JfSFdDQVBTX1BQXzFfMV80Ow0KCQlzcGlfbm9yX3NldF9wcF9zZXR0aW5ncygmcGFyYW1zLT5w
+YWdlX3Byb2dyYW1zW1NOT1JfQ01EX1BQXzFfMV80XSwNCgkJCQkJU1BJTk9SX09QX1BQXzFfMV80
+LCBTTk9SX1BST1RPXzFfMV80KTsNCgl9DQouLi4NClNQSU5PUl9PUF9QUF8xXzFfNCAoMHgzMikg
+aXMgc2V0IGFzIGNhbmRpZGF0ZSBvZiBwYWdlIHByb2dyYW0gb3Bjb2RlLCBidXQNCmFjY29yZGlu
+ZyB0byBteDI1dTEyODM1ZiBkYXRhc2hlZXQsIHRoYXQgb3Bjb2RlIGlzIG5vdCBzdXBwb3J0ZWQu
+DQoNClRoaXMgaXMgYSBwcm9ibGVtIGluIGNvcmUgc2lkZSBhbmQgd2UgbmVlZCB0byBmaXggaXQu
+DQpJbiBMaW51eCwgYSBkZWRpY2F0ZWQgZmxhZyBuYW1lZCBTUElfTk9SX1FVQURfUFAgaXMgY2hl
+Y2tlZC4NCmh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2FsbC8yMDIyMDkyMDE4NDgwOC40NDg3Ni0y
+LXN1ZGlwLm11a2hlcmplZUBzaWZpdmUuY29tLw0KDQpUaGFua3MsDQpUYWthaGlybw0KDQo+ICAg
+ICAgICAgeyBJTkZPKCJteDI1dTUxMjQ1ZyIsIDB4YzIyNTNhLCAwLCA2NCAqIDEwMjQsIDEwMjQs
+IFNFQ1RfNEsgfA0KPiAgICAgICAgICAgICAgICBTUElfTk9SX0RVQUxfUkVBRCB8IFNQSV9OT1Jf
+UVVBRF9SRUFEIHwgU1BJX05PUl80Ql9PUENPREVTKSB9LA0KPiAgICAgICAgIHsgSU5GTygibXgy
+NWwxMjg1NWUiLCAweGMyMjYxOCwgMCwgNjQgKiAxMDI0LCAyNTYsIDApIH0sDQo+IA0KPiAtLS0N
+Cj4gYmFzZS1jb21taXQ6IDFjMWJmYjFjZjM0YmJiMmE1NzE3ZWI2OTk1YzU1MDkzMjc5ZjkzNDEN
+Cj4gY2hhbmdlLWlkOiAyMDI2MDQwMy1zcGktbm9yLW14MjV1MTI4MzVmLWY3MzI4YTYzMTQzNg0K
+PiANCj4gQmVzdCByZWdhcmRzLA0KPiAtLQ0KPiBEYXZpZCBMZWNobmVyIDxkbGVjaG5lckBiYXls
+aWJyZS5jb20+DQoNCg==
