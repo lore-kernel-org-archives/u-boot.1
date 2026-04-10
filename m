@@ -4,94 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 010CEF45A0F
-	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 23:02:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2AB9F45A0F
+	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 23:03:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E5C284099;
-	Sat, 11 Apr 2026 01:02:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2B37584099;
+	Sat, 11 Apr 2026 01:03:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cgfTdhE8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e5cr+57a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B092840D8; Sat, 11 Apr 2026 01:02:50 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id DCAE184198; Sat, 11 Apr 2026 01:03:31 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24C0283DC9
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 01:02:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DB89683DC9
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 01:03:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-b9c3e2cf3c0so398538766b.1
- for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 16:02:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775862167; cv=none;
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-b9c6680aaf8so455936966b.3
+ for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 16:03:29 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775862209; cv=none;
  d=google.com; s=arc-20240605;
- b=cu8Uqc11Ey7hNstkeuokXQquTdnMoAdH4xFDdXU1RjNL8kx43UssaZSa5+ATDpVmXO
- td1I2SInrLZ97gqRzz/N7yv6NtGVqvbV4jI6pIAEh9W+4LotyOXPlZViK8940r/nLHeI
- ORXnlI2OFlHo08jY9kf2XYd2lCuQ2yZJDy0Dlec8j/kIRhrJ6aLRsn0rFYBIp/V0bWrL
- fd80p6KH3hNoChMbGejjPv56psj2ST2/uHQiIaIGtqPxsZE+YzNEw67IgkBglFN7Dzx+
- A6giDyvZrTgyoeUKa9wm0DSFcRtxHQ9YqSdaLL/UaGLI2mVJMZ44OuRrwDeaFRS3OysZ
- Y7ZA==
+ b=SmCMtqKHHdEgbAy/iqfTPByqBQoDrPHLrejBBW7ICxuYMFSR+n5C2BJ5y9Jj8LPOTl
+ LHo5hr1NqbC41VnLtpjA1WY0iQxaEmre7nuyPcDKGncWoV7dwF+vDUCATjHABWFsoUXM
+ Y9yTkHuzJKVFQcqYqRekuW4N8bcBBCbe0iWzgDMAYmEMS0K4pU8x06epGQWi8PDA1S9+
+ yUcIPABCvpF6cU/KWg8n6U+4M4AcBwbBzNXf6LyTZGhRcehdk/cPWPg3EdRn25MZcVxa
+ R/BHeNsDJBjIhbqrwc/AyOuWmDsnbMlbDIxpH0WR/FDseLXKTb5zuM+JvlIKdC3aDqDu
+ LCTw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=EizR25zkjnWPeOR2m4Wg2/JuwY+zXlRlea0kryyPjMc=;
- fh=OcaZoioaZArISsDr5ZY+o55akaQlFOAAQAGUIyYcjDA=;
- b=RVGOlArNzjQD5YHlEIP00tUFKO395RSugTzShU8lrTqBFq0RIHUGxN5tJUUi4YkZkl
- pCSlJxmiCiAl/2oVMG/V19RqaP1ZLtgjxRAU+eSZfNVcp9niscqsU7JLzuK11Sq8HuuI
- oTqX0MAU6fF9eldBF7usTvol7nv/Yi3dkC6UhG+QeJ+WnD6KL0Rs6W8w5I7bhgkVZZIu
- WLsiesCt67gu0QK9sa8gQjhtmswWvD3NV6Tu3lURYu7Pi+o27h6j7ziRFvfXayI+puIW
- GcBsvfUk/oiLRA/AAp8DH0oSf2bZpVYC7WG8Y0k5QKhwVhpbggiLRPxluR6U+j6SA1Gg
- rZqg==; darn=lists.denx.de
+ bh=w+ndny9RxxMOp/80b2WVV/gV/jF69djiAHJdvy4fJkk=;
+ fh=KyqqMVHoOATPJJUJrgL0MX+76c8wowopIm454Fh8ALE=;
+ b=MELAcrWaKh7SUXLxaKdd82zEBuaGhYaxS49uUTGuKeHuRtBwnq4ummG/nOHL6yG5SK
+ t9li0vXUZBzsI5dAjkrhuiH3Qg4X7KvUBpu+dbNbwJqHDqs09PWu7qh0GKWHK5bI+jra
+ 7h0eKOP8VIn8cbXbw6otPOf1yu2im0QaWN1ZHDq1ds0UZxnSAUC4hk5QOrkr4WsK2QSn
+ Zl66Yw1raGqm/JY/6Cx08As4YeV+UQP7yY+UG5ec3vr6JDrqutwTizKGqwuYwdpp0UCW
+ d553rHa5mvDLZoghi7atgNftkohGTHlcHAeYwYMxMXAfNlzzaCoAy/IfskaUZn8l8cRz
+ YF+g==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775862167; x=1776466967; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775862209; x=1776467009; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EizR25zkjnWPeOR2m4Wg2/JuwY+zXlRlea0kryyPjMc=;
- b=cgfTdhE8k8g95d1uoIY/bThB6Xn1cg9r6TWnrt4lhmek0I6rui3vRLi7dTtCzW6N55
- LPJRf90x2UfAqencvAX34fXr1W9kYO5ayw+Z1wNZTWFtSB3mjOXncIFU5FPjpppId5nR
- x8F+cdvpvr7rUVaxOZiy+cr7VX46RHeQVPNwE=
+ bh=w+ndny9RxxMOp/80b2WVV/gV/jF69djiAHJdvy4fJkk=;
+ b=e5cr+57akd4EYRd7zfOiqkYmbwDezzKFr9oC8YFKq4gAi5wIMHUDF5Ue359Jl2gh78
+ 9hfCzbx72598bLM+ZBK+NeRWyZzntTjSnh8WwouiN9TDFOn+QTy9t1kYDzJEabdr3iTk
+ J0moocckMNxA36Q1AlzyZs3PfiCvCwnKdMLbE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775862167; x=1776466967;
+ d=1e100.net; s=20251104; t=1775862209; x=1776467009;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EizR25zkjnWPeOR2m4Wg2/JuwY+zXlRlea0kryyPjMc=;
- b=pb2G2pavlgtSlCCdYdNB5D2HLG8MQzURDNeCZ5k83H5evDjwq7xzSJjCimLj8C5zs9
- K7a5wP54PJQt5wy8KyY/EqSjubPZsFEUHniDLZ8iQ4H2RXOxBG91mYX0dXtI3NwD1pqw
- PdxqcASzREcShxctTAqr4lxxnz/lOOR5JQ0zg+Mi9tWs4yfBmb6If4lc7/avh1kqmS29
- Y61aNpXh3WATNi+a7K/E6epPuaZGS2XlsaO+n91ncBbhbJmc7sp3nB1jBHFX+vxy05DQ
- eSOM67niD2hGQ1WI5b4dsA4iW8w4x7ehjTAOTYN3OFJu7ZCLM8ou2HXMnrWy0HyMwnP3
- Uq4g==
-X-Gm-Message-State: AOJu0YzpY3QgCggijp1XoB/9lTxtoT05zJYPoIZ3MAl0YYQTzaMlD4Bb
- kj0WMsaRA26b0LU/5gbwk+X1KKMv66AGZc/7ZRgYlik+dyruZP/TmrCGlxUMycOco4OGiL5sZn+
- trKGJ76xXpbb9pA/R9IuXzatXYT7+QUBFYTs3JnO8Fr5UCQIzdsE=
-X-Gm-Gg: AeBDiesqFkyjs70BmkOf1ZSrCgBAQNUpNDYjg9CE/+Aje0sSxrCGAOgtCRSwa188CuP
- /kpw+BkRjuKZLbI7wGciOMClDvCGurIBOWVuoWUe2kQRnVR9Vc9iJ9Cy4iUWdIrDlCFBuP8wSjX
- B8M1UaQAWDDCHhkCXcZkREZ6W6wLrlTiTBzzb06Uy/sSX71TLXB1HhW0kA1cbzJbkYyIRZQbOvh
- Xuo9k5taLtGsdO9T1/FCrGlb1h+0cxaBHQsVqiUUFOd7iD+0qYKf8KZXrLz+3zIFtYF3uZptNSa
- 6mcKcw==
-X-Received: by 2002:a17:907:6ea7:b0:b9b:207c:f7ba with SMTP id
- a640c23a62f3a-b9d724ef918mr318719466b.4.1775862167571; Fri, 10 Apr 2026
- 16:02:47 -0700 (PDT)
+ bh=w+ndny9RxxMOp/80b2WVV/gV/jF69djiAHJdvy4fJkk=;
+ b=JLVzYEgBmrdmzJGGqlsmPu+MMCX1THIwjlbzJo9q1I7H+oEOMu1gjrX51SHDEhVP/y
+ JodLVuNmXTzhlbTOA0jlMJKKzlAj8Jy7i0CIFL22JzQKjyTRfHedfynBUS6aldBB7OYY
+ sGEtQ3c7ZNNkIDpy+Pz8d2I02BMPXHvOBswykh3Ncjx0eMoHov8m1AteI0Tm5VZmKPK9
+ 3j74d3JIm9MLzig1mc3ccv745dHHZlBgYJ1v7mNgLO+V0Qf3deqght0Km7VfkREQrkcg
+ Mwu2nJ9mE2q/ObrwqqXTsc933P2kKqQk5NMNfd+/mwv32hX7oHGHcrNBJiWszikOjqPa
+ YCpQ==
+X-Gm-Message-State: AOJu0Yx6aaRkkvrabFhzBzHwYJmNByzw8lrDRGBSjEvHh0kl8BFO8Ivs
+ ODdcLejPMLeMF4iM4X+X4duOPdw8mXClrKVEFBNKYNVz9wuuQQI7wO+aDC3R6Sn3Os4z7iZQAV4
+ NRlRq0LmMZpT7/osvIHgM5YFvQt0COxRg3J4+Ik9I
+X-Gm-Gg: AeBDiesi5AvN8yn9gQ7P8vXbKg3bXKLij05O41I9RxXiYw5ZlVKbVNYE8D3HUO6HkpA
+ rmrC4QmEBbfBKINK6OcXtpk3O+Pv4ndqG7GWownArI78FC9Nk/R5nWTunuhHJA8dCfuJ1iTbCOk
+ KIliaP4J2DCUbOj1wu36jhm8ZN+T9jUwElhgcoQo9/NccgmoA0eGpRtfZ/4QVKhLMIP8LGWZ4s6
+ IRLdg8XF5rW1+FL6+9TccmbSSzS1hlQ8ShFVsS+s/7k/27nV76sU1PFfvQeXU9AgFVRc2MyMnZt
+ ZSQrHgbaWT+rMpmF
+X-Received: by 2002:a17:907:3d51:b0:b9b:38d4:2cea with SMTP id
+ a640c23a62f3a-b9d724caa11mr330547766b.23.1775862209376; Fri, 10 Apr 2026
+ 16:03:29 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260404152640.3297713-1-dario.binacchi@amarulasolutions.com>
- <20260404152640.3297713-6-dario.binacchi@amarulasolutions.com>
-In-Reply-To: <20260404152640.3297713-6-dario.binacchi@amarulasolutions.com>
+ <20260404152640.3297713-7-dario.binacchi@amarulasolutions.com>
+In-Reply-To: <20260404152640.3297713-7-dario.binacchi@amarulasolutions.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 10 Apr 2026 17:02:35 -0600
-X-Gm-Features: AQROBzBZSw8aS4305VetZfAbEY6eX8bMXrwbuI2RWaORxwrh1FViSQvID1YlXTI
-Message-ID: <CAFLszTg_d7OVGVjASap9j0=z9D65VMCC98nqkP_0YNzOo+KUqg@mail.gmail.com>
-Subject: Re: [PATCH v2 5/7] test: cmd: part: add UUID lookup tests
+Date: Fri, 10 Apr 2026 17:03:17 -0600
+X-Gm-Features: AQROBzBC1olBemXufML4T8TQkBI_skYwRbm9ntoeOfON97lD-qLKSMEl5w_7pYI
+Message-ID: <CAFLszTh+r=SiVh+HgF1Gx5+wN=9nWMWVPH34GK+vXX=XgMs7ng@mail.gmail.com>
+Subject: Re: [PATCH v2 6/7] fwu: add helper to get image GUID by type and bank
+ index
 To: dario.binacchi@amarulasolutions.com
 Cc: u-boot@lists.denx.de, linux-amarula@amarulasolutions.com, 
- Tom Rini <trini@konsulko.com>
+ Michal Simek <michal.simek@amd.com>, Padmarao Begari <padmarao.begari@amd.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,24 +111,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Dario,
+
 On 2026-04-04T15:23:27, Dario Binacchi
 <dario.binacchi@amarulasolutions.com> wrote:
-> test: cmd: part: add UUID lookup tests
+> fwu: add helper to get image GUID by type and bank index
 >
-> Extend the 'part' command unit tests to include partition lookup via
-> UUID.
+> Introduce fwu_mdata_get_image_guid() to retrieve a specific image GUID
+> from the FWU metadata based on the bank index and image type GUID.
 >
-> This ensures that the 'number', 'start', and 'size' subcommands
-> consistently handle UUIDs as partition identifiers, maintaining
-> parity with the name-based lookup functionality.
+> This allows identifying the correct partition in multi-bank (A/B)
+> scenarios, ensuring the correct image is targeted depending on the
+> current bank.
 >
 > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 >
-> test/cmd/part.c | 47 +++++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 47 insertions(+)
+> include/fwu.h         |  3 +++
+>  lib/fwu_updates/fwu.c | 33 +++++++++++++++++++++++++++++++++
+>  test/hooks/bin/u      |  1 +
+>  3 files changed, 37 insertions(+)
 
-You can combine your run_command() and ut_assert() calls in some
-cases. Also use definite values where you can, e.g. ut_asserteq(1,
-ret)
+> diff --git a/include/fwu.h b/include/fwu.h
+> @@ -396,6 +396,9 @@ void fwu_populate_mdata_image_info(struct fwu_data *data);
+> +int fwu_mdata_get_image_guid(efi_guid_t *image_guid,
+> +                          const efi_guid_t *image_type_guid, u32 bank_index);
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+The cover letter mentions 'Add kerneldoc comment for
+fwu_mdata_get_image_guid()' but the header declaration has no
+kerneldoc. Please can you add it before the declaration in fwu.h to
+match other functions in this file? The comment in fwu.c is good, but
+the U-Boot convention is to document public APIs in the header.
+
+Regards,
+Simon
