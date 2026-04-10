@@ -4,94 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEEE6F45A12
-	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 23:01:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 010CEF45A0F
+	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 23:02:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 498428419E;
-	Sat, 11 Apr 2026 01:01:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8E5C284099;
+	Sat, 11 Apr 2026 01:02:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HvVSQpeT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cgfTdhE8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1E4383DC9; Sat, 11 Apr 2026 01:01:10 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 1B092840D8; Sat, 11 Apr 2026 01:02:50 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70B7984198
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 01:01:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 24C0283DC9
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 01:02:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-b9358bc9c50so364855366b.1
- for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 16:01:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775862065; cv=none;
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-b9c3e2cf3c0so398538766b.1
+ for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 16:02:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775862167; cv=none;
  d=google.com; s=arc-20240605;
- b=gpCz1I+9NSymMM/n1Vn8mNslq21bBCRMe3qW/HVvm1wpc0fZVa79sqsKMeNCboNqEA
- 2vA7hZi0dj6D33eOzbhkh2UGlVu1Xf4nAXeHkHu0o5qZsl1apgX3P5lLO65fQNQZJ+pS
- uscxFOZBLgmvJ45dJJ3+kWnSCLnddOJPWE0otaE5HgILV2ELvwYaiVtn2+YU83RaCF+e
- W69xP5JSxmLW9QXXMuaGf6DfL5zku+X0sg5eUCt0LZ/jbAbd7+GRhoFBeDYfLV5CBijQ
- +Kj1mgr56yXz0rQj8sguYYCrZ44voUyInvqqQb6p8wA2AsUdhmqoXN8BvUmZLn8GvGiM
- ohIg==
+ b=cu8Uqc11Ey7hNstkeuokXQquTdnMoAdH4xFDdXU1RjNL8kx43UssaZSa5+ATDpVmXO
+ td1I2SInrLZ97gqRzz/N7yv6NtGVqvbV4jI6pIAEh9W+4LotyOXPlZViK8940r/nLHeI
+ ORXnlI2OFlHo08jY9kf2XYd2lCuQ2yZJDy0Dlec8j/kIRhrJ6aLRsn0rFYBIp/V0bWrL
+ fd80p6KH3hNoChMbGejjPv56psj2ST2/uHQiIaIGtqPxsZE+YzNEw67IgkBglFN7Dzx+
+ A6giDyvZrTgyoeUKa9wm0DSFcRtxHQ9YqSdaLL/UaGLI2mVJMZ44OuRrwDeaFRS3OysZ
+ Y7ZA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=oqJrOBdsNCRqRUBJSqqrX8D+I6icRigRH0eQv7h61Lc=;
- fh=qjB3nBOJ0/N7iM5BUDghjmyYYspP4cX98xiGXQpl+L8=;
- b=kJssmdRbGmbbKBHvfkFlPt+RdD8eIsq6+g188AJz8easUk6GEAL1QOGKek5aERTmGj
- FeAygjPyY911NtZGoLCdUW2XgD7LgU5F/qwKq2TL7Hg1JWGPv5lgTXQ1cgVY4Lu17YQ+
- eHVz6B87H4W/b06w3dfTYxDpIBQjXG/mB+BT5JH0IU9Spwtn/LXYdch8ViJLxvbCv9Am
- S09XN3KVXYnjbZEXIsOyufc5jp2r8KrDLd6RjXBOPSZ9Hq/WNUYE+om41BJcN1VZRppq
- 0ixKFoGSfqBgWCGEWUTP690ERJB1vmUhc3qMEYVdcY1XPPLZKrFddltW16SiKV3+5I5g
- 1J6w==; darn=lists.denx.de
+ bh=EizR25zkjnWPeOR2m4Wg2/JuwY+zXlRlea0kryyPjMc=;
+ fh=OcaZoioaZArISsDr5ZY+o55akaQlFOAAQAGUIyYcjDA=;
+ b=RVGOlArNzjQD5YHlEIP00tUFKO395RSugTzShU8lrTqBFq0RIHUGxN5tJUUi4YkZkl
+ pCSlJxmiCiAl/2oVMG/V19RqaP1ZLtgjxRAU+eSZfNVcp9niscqsU7JLzuK11Sq8HuuI
+ oTqX0MAU6fF9eldBF7usTvol7nv/Yi3dkC6UhG+QeJ+WnD6KL0Rs6W8w5I7bhgkVZZIu
+ WLsiesCt67gu0QK9sa8gQjhtmswWvD3NV6Tu3lURYu7Pi+o27h6j7ziRFvfXayI+puIW
+ GcBsvfUk/oiLRA/AAp8DH0oSf2bZpVYC7WG8Y0k5QKhwVhpbggiLRPxluR6U+j6SA1Gg
+ rZqg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775862065; x=1776466865; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775862167; x=1776466967; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oqJrOBdsNCRqRUBJSqqrX8D+I6icRigRH0eQv7h61Lc=;
- b=HvVSQpeTzXCnd/NL5dSFiZynXEkjcU9RDZldRd0xFgk1rCLxGZLCZAuyf51ozZeDoz
- LthVqL7KsXJ2d0oARUONBG5yCFNVCAQuZfbFniWpe5N4BRrqKYM8vcrCO7YHwH4jcsW5
- lb8YIZFZkqvJH6UvuQA9U8o+2koRmMwb/RTfg=
+ bh=EizR25zkjnWPeOR2m4Wg2/JuwY+zXlRlea0kryyPjMc=;
+ b=cgfTdhE8k8g95d1uoIY/bThB6Xn1cg9r6TWnrt4lhmek0I6rui3vRLi7dTtCzW6N55
+ LPJRf90x2UfAqencvAX34fXr1W9kYO5ayw+Z1wNZTWFtSB3mjOXncIFU5FPjpppId5nR
+ x8F+cdvpvr7rUVaxOZiy+cr7VX46RHeQVPNwE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775862065; x=1776466865;
+ d=1e100.net; s=20251104; t=1775862167; x=1776466967;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oqJrOBdsNCRqRUBJSqqrX8D+I6icRigRH0eQv7h61Lc=;
- b=MFeYtSFKDlB9QVMbYRbL8pqEHyosSdsXpX347MamZPQCqB6IZKTIfUy1EAEHuegv20
- BMAA+8+kV/LZp5lGHfZKx0RF0MwnqZtEj62hVjMIHJ3+lNmIYcoVUOYeNhGd8Ejj/zxK
- b8cD+T9VQuPsUr8c3BLtZSuY479OmLcLN4Iog9CvrgAiUFfA+QvhO+3mE1XUGJIrZOfs
- y3IAM7F4YBZwgLQRfBC2sUj5TukMoQ4aSb+jI85xdSsq1d5dC3d1UdBrxbLS6esaSitf
- 1bkcXs5dqRINzS2Db7W7f5lZc1156Edw6CTSPv3mzRa7OPwc9dii3QMOK26Fx33o99B4
- 8ohg==
-X-Gm-Message-State: AOJu0Yy6HLpwZK377BWLA951QwRrhVKKQOoIxnzGmUG2wBCRrfW3zI8I
- qSBbm340VvoqsQHDaJlugYhPjkumdeCWCC3da1jr+kXGy9jrws+6e5W9D+FcerRY8MuKoNisxH3
- X/e1Eqi2bB9TiMQUTpRoSv8ul1SFI2VnMLQFr66W7
-X-Gm-Gg: AeBDietDpUQJxjwjFGokPJ0JYlgldyN7hq0qOxxmeS9ulSbcKuSHaCk5vSwdANo/rwU
- hyiGPhST2C5SSzJgherP9Tlxn71vpHoBP2SpBp6YH97/zxj+AR+83Lk3OLlcAY0fLuqFz6DVRiU
- Oxr/JUDhcWmFsxyxlqWdOoEvaTcXo81CYafO0IhhUh0qfT2ok3o8x97CPF/PjyUGxsZ6doOCdoS
- UTf1b3bEYm/u9NmjvriSAgvu87LncxGBhTtBho843h25DT5c455x1K4BPyO/2CAD/prLklJ9W2z
- eHiqeA==
-X-Received: by 2002:a17:906:9fd0:b0:b97:6384:2317 with SMTP id
- a640c23a62f3a-b9d72496149mr303806766b.17.1775862064935; Fri, 10 Apr 2026
- 16:01:04 -0700 (PDT)
+ bh=EizR25zkjnWPeOR2m4Wg2/JuwY+zXlRlea0kryyPjMc=;
+ b=pb2G2pavlgtSlCCdYdNB5D2HLG8MQzURDNeCZ5k83H5evDjwq7xzSJjCimLj8C5zs9
+ K7a5wP54PJQt5wy8KyY/EqSjubPZsFEUHniDLZ8iQ4H2RXOxBG91mYX0dXtI3NwD1pqw
+ PdxqcASzREcShxctTAqr4lxxnz/lOOR5JQ0zg+Mi9tWs4yfBmb6If4lc7/avh1kqmS29
+ Y61aNpXh3WATNi+a7K/E6epPuaZGS2XlsaO+n91ncBbhbJmc7sp3nB1jBHFX+vxy05DQ
+ eSOM67niD2hGQ1WI5b4dsA4iW8w4x7ehjTAOTYN3OFJu7ZCLM8ou2HXMnrWy0HyMwnP3
+ Uq4g==
+X-Gm-Message-State: AOJu0YzpY3QgCggijp1XoB/9lTxtoT05zJYPoIZ3MAl0YYQTzaMlD4Bb
+ kj0WMsaRA26b0LU/5gbwk+X1KKMv66AGZc/7ZRgYlik+dyruZP/TmrCGlxUMycOco4OGiL5sZn+
+ trKGJ76xXpbb9pA/R9IuXzatXYT7+QUBFYTs3JnO8Fr5UCQIzdsE=
+X-Gm-Gg: AeBDiesqFkyjs70BmkOf1ZSrCgBAQNUpNDYjg9CE/+Aje0sSxrCGAOgtCRSwa188CuP
+ /kpw+BkRjuKZLbI7wGciOMClDvCGurIBOWVuoWUe2kQRnVR9Vc9iJ9Cy4iUWdIrDlCFBuP8wSjX
+ B8M1UaQAWDDCHhkCXcZkREZ6W6wLrlTiTBzzb06Uy/sSX71TLXB1HhW0kA1cbzJbkYyIRZQbOvh
+ Xuo9k5taLtGsdO9T1/FCrGlb1h+0cxaBHQsVqiUUFOd7iD+0qYKf8KZXrLz+3zIFtYF3uZptNSa
+ 6mcKcw==
+X-Received: by 2002:a17:907:6ea7:b0:b9b:207c:f7ba with SMTP id
+ a640c23a62f3a-b9d724ef918mr318719466b.4.1775862167571; Fri, 10 Apr 2026
+ 16:02:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260404152640.3297713-1-dario.binacchi@amarulasolutions.com>
- <20260404152640.3297713-5-dario.binacchi@amarulasolutions.com>
-In-Reply-To: <20260404152640.3297713-5-dario.binacchi@amarulasolutions.com>
+ <20260404152640.3297713-6-dario.binacchi@amarulasolutions.com>
+In-Reply-To: <20260404152640.3297713-6-dario.binacchi@amarulasolutions.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 10 Apr 2026 17:00:48 -0600
-X-Gm-Features: AQROBzDYrtBDJYDs3hORqEem1OkBnEuqj_PAezn2hbjIcQT8wynhvA4MjUxYRWQ
-Message-ID: <CAFLszTgMGz9+WW2ay=2VgSY7EneUohPFnqtRymTeZptoxG5-Zg@mail.gmail.com>
-Subject: Re: [PATCH v2 4/7] cmd: part: support lookup by UUID
+Date: Fri, 10 Apr 2026 17:02:35 -0600
+X-Gm-Features: AQROBzBZSw8aS4305VetZfAbEY6eX8bMXrwbuI2RWaORxwrh1FViSQvID1YlXTI
+Message-ID: <CAFLszTg_d7OVGVjASap9j0=z9D65VMCC98nqkP_0YNzOo+KUqg@mail.gmail.com>
+Subject: Re: [PATCH v2 5/7] test: cmd: part: add UUID lookup tests
 To: dario.binacchi@amarulasolutions.com
 Cc: u-boot@lists.denx.de, linux-amarula@amarulasolutions.com, 
- Quentin Schulz <quentin.schulz@cherry.de>, Rasmus Villemoes <ravi@prevas.dk>,
  Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -112,22 +111,22 @@ X-Virus-Status: Clean
 
 On 2026-04-04T15:23:27, Dario Binacchi
 <dario.binacchi@amarulasolutions.com> wrote:
-> cmd: part: support lookup by UUID
+> test: cmd: part: add UUID lookup tests
 >
-> The 'part' command currently allows looking up a partition only by its
-> number or name.
+> Extend the 'part' command unit tests to include partition lookup via
+> UUID.
 >
-> Extend the 'number', 'start', and 'size' subcommands to support looking
-> up the partition via its UUID. Unlike names, UUIDs guarantee unique
-> partition identification, avoiding ambiguity.
->
-> The logic is updated to check if the provided string is a valid UUID
-> before falling back to a name-based search. The help strings for these
-> subcommands are updated accordingly.
+> This ensures that the 'number', 'start', and 'size' subcommands
+> consistently handle UUIDs as partition identifiers, maintaining
+> parity with the name-based lookup functionality.
 >
 > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 >
-> cmd/part.c | 12 ++++++++----
->  1 file changed, 8 insertions(+), 4 deletions(-)
+> test/cmd/part.c | 47 +++++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 47 insertions(+)
+
+You can combine your run_command() and ut_assert() calls in some
+cases. Also use definite values where you can, e.g. ut_asserteq(1,
+ret)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
