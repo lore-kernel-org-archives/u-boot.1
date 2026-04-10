@@ -4,117 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB57EE9905D
-	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 09:31:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40D21E99062
+	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 09:31:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2638841CD;
-	Fri, 10 Apr 2026 11:31:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 14FED841D5;
+	Fri, 10 Apr 2026 11:31:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="wRt+2xuJ";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="0r/So4CZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0027984199; Fri, 10 Apr 2026 11:30:56 +0200 (CEST)
-Received: from SN4PR0501CU005.outbound.protection.outlook.com
- (mail-southcentralusazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::3])
+ id 3D7DA83DC9; Fri, 10 Apr 2026 11:30:58 +0200 (CEST)
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FCC88412A
+ by phobos.denx.de (Postfix) with ESMTPS id C935B83DC9
  for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 11:30:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=Pranav.VinayTilak@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=pdZyPgiRMl7nnsizC/YQtLZLrsxPYrMkeIhvUptGb6D3lbsbbwQc0Go48nUWAG4rpSISq58Hb/LBZMNNvyx3XbDXnxcBerLEv1z/nyN5LQZH+DQbrbIf+pQ93N3Bl3fDwrBqfM0G+0/ckUrSFzwfVgDvLvqx90fRChDqV9bm2rr1cbqN0VO+ZOVNsHM6pWPw3X9QHk9ht0OY4AM4Z/2uzHDd+nZ0TYNpmXsmQkqNxigekpYWQGe5bpCI8mZ/AbUtPtB+M4WAewNbKmiXpfiLYoYxk7OavYlDTajks8ONAQP9TN45nDAoiS/tPUV0qFnQadT6eQk+qLbpnHSU2zRHkA==
+ b=Xdv94A/xfarS+bmd3fxQhjb71ZSn5fs1hoA7HQg21KMyFKnPlzg0bjWGq/dpM5j9+Vn1knKqh8y8/S1fn00yTlxSoe+bHcA6dHEE4j+LtoXjJxW3nKGRUgB8fXbR93iMLA8KvVQAe6Ir0VSLEUWANqq++qY0TMLBZzqNuZ7itDMfDh/SQNu6waQLhbylUwT1MQdk33I6KerWiuIH8qf22Dqdth1ZsDcgII1JZja3Xu6dmCCAAsxD6QVjw1Bqyrssar8M45qeNpWTGizQNG+6lc8jBMcBOPkMXShnXYZO4BjBGqdR/LZkiDFgHxPN5Dl7kqU1Jh4E8YzM6WO52sxiRw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=AhSK5sBu4prht0qWZmBKS9bWhDeI3CRK1YVorwLx2tY=;
- b=xP/cD0IuL0AqaG0tbl83rAMHfNIZDex7teBV2As7sDgewwSzd6qaUh5oD/stBRw9wPLJO5Xf20HUDB3X5llo7/rxCtV2hWh9SMjPtLxCG1l+BYJV1qmJBVeBjuVQcz6v2w9MENMR64++fKjC3/mYam+uoURAbmw90HTCLrKQKaSDMZKsc6aU47NGi5O7SZYDqVD2bBQZFvDoK9O/+qDY3Q/uJ3ZMKiZrrpPbjmckmF+VRXPQ/OF3SlN9fY8TriyLWBiszVRt+i0VXfzCinbuRjEqWfG0GqG0eYaKfj2LmcKy9FcY320PPKZUfilUsiDhRkpqek2n1UWHrHZUS+SENA==
+ bh=t091eMGxSdlXkCQO+cmty16hUAyI4DS2EKl9wPxT+gU=;
+ b=sLdIGMLGBmzihjM+7Jw1q4hWyNceTX/rSsIBwfn5Gz+ifC0tgyo3mqfajU7y4+EuGaCOqiMNeHLHmg3YKyshNkllgVfHhjJLi3eV9W8Psz1D91ke6xzJiOCObGJGYl7bpEsL+RYJ29sYZNKTvgvxMyieO3hyDqLOeLY9hdEba7MJNkLRY5lQKBOl4MBuQWcqmWn3Ya4djo4ELFvRQ9TY6+swF8U81rkPqt7OloKkJ8z1Y7lEuRe0QDB/yGADb2UrRjYuWNXOoKLI9pkVn6UCBUrxln+4OGePT/dpR6wH9lCSTbbyDsLQREbUCjo/fbl+mCTxFiUiHa4eythkO1r51w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AhSK5sBu4prht0qWZmBKS9bWhDeI3CRK1YVorwLx2tY=;
- b=wRt+2xuJZLe4oUIK+VWsNOdneSh1hHcvZ6kRYdAdQGfJnPqHitsHmgGJgCYNJqsGuRPe7kLMNakp0Og/19oMcIw70G4siGy3ecBtQZHvTnYUBLM5aNmjPXVcbHlBt+eQSjUOwqBDjwtygD2g3c4ywz23gv6+RqDzF6L0XuSZquc=
-Received: from BL1P222CA0021.NAMP222.PROD.OUTLOOK.COM (2603:10b6:208:2c7::26)
- by MN6PR12MB8541.namprd12.prod.outlook.com (2603:10b6:208:47a::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9791.33; Fri, 10 Apr
- 2026 09:30:46 +0000
-Received: from BL6PEPF0001AB78.namprd02.prod.outlook.com
- (2603:10b6:208:2c7:cafe::27) by BL1P222CA0021.outlook.office365.com
- (2603:10b6:208:2c7::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.46 via Frontend Transport; Fri,
- 10 Apr 2026 09:30:46 +0000
+ bh=t091eMGxSdlXkCQO+cmty16hUAyI4DS2EKl9wPxT+gU=;
+ b=0r/So4CZPhoE1O6zVlH/lS6reGTMH/YS+xzbe49nNPoR4FY418Jz5t+5Od9QeOXxBPvWjALLbdnPuPMe8T3Kikn5ikuUf9euQOd4SjNvcUl3f7iSZ6T036nhXkM4/k95N6ujbFqhwqoahHGFhJTsabnPqcU1sbqsp/xGljZXh28=
+Received: from DS7PR06CA0005.namprd06.prod.outlook.com (2603:10b6:8:2a::20) by
+ IA1PR12MB6483.namprd12.prod.outlook.com (2603:10b6:208:3a8::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.16; Fri, 10 Apr
+ 2026 09:30:48 +0000
+Received: from DS2PEPF00003444.namprd04.prod.outlook.com
+ (2603:10b6:8:2a:cafe::c4) by DS7PR06CA0005.outlook.office365.com
+ (2603:10b6:8:2a::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.45 via Frontend Transport; Fri,
+ 10 Apr 2026 09:30:42 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BL6PEPF0001AB78.mail.protection.outlook.com (10.167.242.171) with Microsoft
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ DS2PEPF00003444.mail.protection.outlook.com (10.167.17.71) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9769.17 via Frontend Transport; Fri, 10 Apr 2026 09:30:46 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Fri, 10 Apr
+ 15.20.9769.17 via Frontend Transport; Fri, 10 Apr 2026 09:30:48 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 10 Apr
  2026 04:30:34 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 10 Apr
- 2026 04:30:29 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 10 Apr
+ 2026 04:30:33 -0500
 Received: from xhdpvinayti50x.xilinx.com (10.180.168.240) by
  satlexmb08.amd.com (10.181.42.217) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.17 via Frontend Transport; Fri, 10 Apr 2026 04:30:28 -0500
+ 15.2.2562.17 via Frontend Transport; Fri, 10 Apr 2026 04:30:32 -0500
 From: Pranav Tilak <pranav.vinaytilak@amd.com>
 To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
 CC: <git@amd.com>, <padmarao.begari@amd.com>, Pranav Tilak
  <pranav.vinaytilak@amd.com>
-Subject: [PATCH 1/3] net: zynq_gem: add SPEED_10000 case in clock rate
- selection
-Date: Fri, 10 Apr 2026 15:00:16 +0530
-Message-ID: <20260410093018.1461732-2-pranav.vinaytilak@amd.com>
+Subject: [PATCH 3/3] net: zynq_gem: reinitialize RX BDs on every init
+Date: Fri, 10 Apr 2026 15:00:18 +0530
+Message-ID: <20260410093018.1461732-4-pranav.vinaytilak@amd.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260410093018.1461732-1-pranav.vinaytilak@amd.com>
 References: <20260410093018.1461732-1-pranav.vinaytilak@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: pranav.vinaytilak@amd.com does not
- designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB78:EE_|MN6PR12MB8541:EE_
-X-MS-Office365-Filtering-Correlation-Id: 382c36c3-c928-4e44-7428-08de96e3d847
+X-MS-TrafficTypeDiagnostic: DS2PEPF00003444:EE_|IA1PR12MB6483:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8e0a22c0-7cab-47d5-d4d6-08de96e3d97a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|376014|1800799024|82310400026|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: XXAoKr6nC9gKhLFTGWbNOfkJvHHkHUNzZfaLysy0kWS1qqUh+FU/9lwHmIh1MfPtHmZfDEfssiQ4Sv1RPxUHOHDgQBRacQkIsF1YJIsrNyfmtk2dhf6ZhmBYtnSJ/uiNvkdhx6+keJ/Tev1NAJjyeMhDzuKiO033lDaRwtS6o2hRXIvexP+P4r8x9kr8K4WYniIWtWI2a1m7qHflB+IU1OiNV+Ptf7dzDHuPu9zXw7UoOzRBYZ2Gzli8e3GhpSCGqA3NZp2CN2rW7ceKgb4EFFpzLJzfHapdm/0xeXAIQLwpEAw4XwasM+1BvlkicIG5OzxFpyt5blqcjb1Dz7OqB6BBUDiVqSeghu/L6dQMyYql3epI6jU86ZSiKtK6E+QfLzkI976i3ExAbS7O4GrzKEXYzrsCHUvvf3mFvFCt0Q2+BW0qAE7UzSnitFzUfOF+wkCFAa5JvTlx8H3XYgxDaLjqAtEtAoj5ts1KRE7bUdwChicM+xQQmkqAcBNlQxIh92mlFpyx9XotO3T5+OEOjBowHWICMoSzJdXZt0ifSyZoqxQquFbGKf5oMM1xpfygNHnGH1uPeVAbr9VnWSfEl7QLcz/d91OWPntOZLkcwa79ceDs18VM59FZsYc68SaGeVUqsNBh3vQq3Qlb7ie+e9hUOWDlXkqkSfzY5fNHWDT2TResdtAf5GVP/aw07z/SF1jwkeoEhIhO5YxdTWB6M5rvpNeJTWDbrLonpbl1d9cv5BAh3di7z33QpotfjbhFZ5zgtramUStuNPHSuxUNIQ==
+ ARA:13230040|82310400026|1800799024|376014|36860700016|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: qNXW080N6LQFA4hfqX9GNprmmJg+KtvYpRzDdXcl5DiG+jopFNkUG+JsiaS/GeyIhPPpxcWrpTF2u7fau/jl3a5CdE/n5Vtas8Wm4MTeFhWcRkBhWm5yFBe1LCfW6Li5K/aD/FV04dG9y9JXWY9bXS9JF1evEWO5tDXe68RjOLnbGOQk2VrpB47B90A+K1jM7rSpFweiU5XUm6LaUG1Qkt4JrmIrc9lyCacN6kj6Ci+lhxaL9VnYnDYeQvPGqyMRn2U6TYYhZgAROwgZxm9mb0M+ScDFTYDV0eyAkYS5wjszqO8ucKjYrA4m9hkMQUnI5UnpXEOhiHfa5JnY/kQPXojc8GIxGOJzdJkOjXTDya/e6tlp6dKbu31Garc7K3fntEZ9m0Q7w88+3lnM5LirVBL/DctaeN4OqFC9+G7p3sHj28mZSZHht+FWeUfnd0mB+BrmREm5CwxnfHGq5xUHDxVfNzO2DtWFi8IwWlDI+chaJoEQz1WbXpp4HfrWuU/YMgTDRBf559hJ73iRZsPKoTR2xD1vSqrDdamVR3TrxejTFzTEnhLpuBT7a2dIksxMG9p59MQL1bKIL66Zl/aOe2vpOxwHTL/0N3sACJpo+Ree6w+wnnmlIAou/we/NirGRh3AnRi6T19qX4qhuNzaKIjjLxETfve/SnYKr8VCD2gEaf3HpWgRbLAptdvQyKRKQ3V8FaUbwDziJRgh/HtEUTZy2RO4aqPwdBNJT2vAoR3b28CZpCf8lecALwgQ0Os4KTBk3EuzRA8M4VF98VZf9A==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(376014)(1800799024)(82310400026)(56012099003)(18002099003)(22082099003);
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(376014)(36860700016)(56012099003)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: a7bdrZyFSpfrn+cprZAxuivMePCJpugh7CgjupLlHGgLlfI2PLbi54UHKRyk4kd6ZIw1jU2zKWMxtd515rUO4VswIp8j0I5Dg/LKotH2ccxGXoPbXE0zu5oV7LV175XMPb069lDtY/lK9buuPdzRQaREmfLl4bHoR3X3rM73ds6wS8KDxTwU9etz51wrPwr+SQ7h/U1P3ulMnu+7xq3kfovfl6gwJ02JWvC6s48Ld7SdD2C+vMg8O63uHQHhvZ5VuCIAXf3nM9xK1XTOYWErY8azSGctNHm1egM/K3IvcnSzBPf+WFfwr0wor/knJ3OjfxdhBTkxsm8orJt726WnJrEFv0wHuYmngmVbC7wYr5EXZyMYwNHgGeK/Y1AwoT0yZ5Sl12V4YMrtoiVXPMq0C5Y9Art4/m1z55Tf9p0mnza8U6SgfAd+NfrkT0f++SQX
+X-MS-Exchange-AntiSpam-MessageData-0: s6XkgqjBRyIL3DpayniVn7G2vGr+sEz2LbboW67jbDXNBtPhp0SyMlqDfUdwrba1G0DIuPRBceUVs8JwF62lUkCMvcSvgMqn376x2/HjfQbUTlmz7OhqkWDfrjr2/Xmzb2sn1U7G6df73G5rEeqHQ/nPPEI0Tqz0SxX2rkupoq2FkdC3RcD/b+osBIJ+yEXWyGdIpiBHtJAkZg+D3+p3hLa0xtVI+RXausrsSHbZKrHK4UZZw30WrWeNYmzh8Q2fyesWWctq4i5fJ95PBDyKnbfOhuOAQmtDQlu9vEJupXjllu5lbnA23yuZYnnVP8qwhKmf0vO5cL8q2Dy59Mx8G2V0CooXrqCakuYkWpSV6C18utR8FPEx/HHYis6Tib/Qf1TMHuyXHZJUgFcsqyoZagjM1q7fitj4pQayukOq+FD10qxNlGklZgy3wzlHxUN7
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Apr 2026 09:30:46.3080 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 382c36c3-c928-4e44-7428-08de96e3d847
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Apr 2026 09:30:48.3173 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8e0a22c0-7cab-47d5-d4d6-08de96e3d97a
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB78.namprd02.prod.outlook.com
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF00003444.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN6PR12MB8541
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6483
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -131,37 +128,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add SPEED_10000 case in the speed switch with the fixed 150 MHz
-tx_clk rate. Without this, clk_rate stays 0 for 10000 Mbps and
-clk_set_rate(0) on a fixed clock aborts initialization.
+Reinitialize RX BDs and rewrite rxqbase on every init instead of only
+on the first init. This ensures a clean BD state on every init for all
+GEM configurations.
+For AMD Versal Gen 2 10GBE this is required since the USX block
+resets the RX DMA pointer to rxqbase on each init, so BDs must be
+rebuilt each time to stay in sync with hardware.
 
 Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
 ---
- drivers/net/zynq_gem.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ drivers/net/zynq_gem.c | 51 ++++++++++++++++++++++++------------------
+ 1 file changed, 29 insertions(+), 22 deletions(-)
 
 diff --git a/drivers/net/zynq_gem.c b/drivers/net/zynq_gem.c
-index a50d5aee03f..c06d114af68 100644
+index e9210d42438..e3f9fd72d2f 100644
 --- a/drivers/net/zynq_gem.c
 +++ b/drivers/net/zynq_gem.c
-@@ -134,6 +134,7 @@
- #define ZYNQ_GEM_FREQUENCY_10	2500000UL
- #define ZYNQ_GEM_FREQUENCY_100	25000000UL
- #define ZYNQ_GEM_FREQUENCY_1000	125000000UL
-+#define ZYNQ_GEM_FREQUENCY_10000	150000000UL
+@@ -474,28 +474,6 @@ static int zynq_gem_init(struct udevice *dev)
+ 		for (i = 0; i < STAT_SIZE; i++)
+ 			readl(&regs->stat[i]);
  
- #define RXCLK_EN		BIT(0)
+-		/* Setup RxBD space */
+-		memset(priv->rx_bd, 0, RX_BUF * sizeof(struct emac_bd));
+-
+-		for (i = 0; i < RX_BUF; i++) {
+-			priv->rx_bd[i].status = 0xF0000000;
+-			priv->rx_bd[i].addr =
+-					(lower_32_bits((ulong)(priv->rxbuffers)
+-							+ (i * PKTSIZE_ALIGN)));
+-#if defined(CONFIG_PHYS_64BIT)
+-			priv->rx_bd[i].addr_hi =
+-					(upper_32_bits((ulong)(priv->rxbuffers)
+-							+ (i * PKTSIZE_ALIGN)));
+-#endif
+-	}
+-		/* WRAP bit to last BD */
+-		priv->rx_bd[--i].addr |= ZYNQ_GEM_RXBUF_WRAP_MASK;
+-		/* Write RxBDs to IP */
+-		writel(lower_32_bits((ulong)priv->rx_bd), &regs->rxqbase);
+-#if defined(CONFIG_PHYS_64BIT)
+-		writel(upper_32_bits((ulong)priv->rx_bd), &regs->upper_rxqbase);
+-#endif
+-
+ 		/* Setup for DMA Configuration register */
+ 		writel(ZYNQ_GEM_DMACR_INIT, &regs->dmacr);
  
-@@ -602,6 +603,9 @@ static int zynq_gem_init(struct udevice *dev)
+@@ -524,6 +502,35 @@ static int zynq_gem_init(struct udevice *dev)
+ 		priv->init++;
  	}
  
- 	switch (priv->phydev->speed) {
-+	case SPEED_10000:
-+		clk_rate = ZYNQ_GEM_FREQUENCY_10000;
-+		break;
- 	case SPEED_1000:
- 		nwconfig |= ZYNQ_GEM_NWCFG_SPEED1000;
- 		clk_rate = ZYNQ_GEM_FREQUENCY_1000;
++	/*
++	 * Reinitialize RX BDs on every init. The 10GBE USX block asserts
++	 * RX_SYNC_RESET during setup which resets the GEM RX DMA pointer
++	 * back to rxqbase, so BDs and rxqbase must be refreshed each time
++	 * to keep the hardware and driver ring indices in sync.
++	 */
++	priv->rxbd_current = 0;
++	priv->rx_first_buf = 0;
++	memset(priv->rx_bd, 0, RX_BUF * sizeof(struct emac_bd));
++	for (i = 0; i < RX_BUF; i++) {
++		priv->rx_bd[i].status = 0xF0000000;
++		priv->rx_bd[i].addr =
++				(lower_32_bits((ulong)(priv->rxbuffers)
++						+ (i * PKTSIZE_ALIGN)));
++#if defined(CONFIG_PHYS_64BIT)
++		priv->rx_bd[i].addr_hi =
++				(upper_32_bits((ulong)(priv->rxbuffers)
++						+ (i * PKTSIZE_ALIGN)));
++#endif
++	}
++	/* WRAP bit to last BD */
++	priv->rx_bd[--i].addr |= ZYNQ_GEM_RXBUF_WRAP_MASK;
++
++	/* Write RxBDs to IP */
++	writel(lower_32_bits((ulong)priv->rx_bd), &regs->rxqbase);
++#if defined(CONFIG_PHYS_64BIT)
++	writel(upper_32_bits((ulong)priv->rx_bd), &regs->upper_rxqbase);
++#endif
++
+ 	ret = phy_startup(priv->phydev);
+ 	if (ret)
+ 		return ret;
 -- 
 2.43.0
 
