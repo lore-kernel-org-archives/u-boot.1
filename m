@@ -4,90 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D35CEF36B97
-	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 02:05:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38C27F36B97
+	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 02:13:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D3AA84099;
-	Fri, 10 Apr 2026 04:05:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A330A84099;
+	Fri, 10 Apr 2026 04:13:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TrI5Kg65";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="HqXbLucI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF29B84099; Fri, 10 Apr 2026 04:05:05 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9E3D284105; Fri, 10 Apr 2026 04:13:35 +0200 (CEST)
+Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDC1183DC9
- for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 04:05:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 13E1C83DC9
+ for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 04:13:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7dbf23885dfso969485a34.3
- for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 19:05:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1775786701; x=1776391501; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=mENjeSZbQFdRu98npBznOH1cdhHqEuwLMg7t0UAPzVY=;
- b=TrI5Kg65TZpQd9zbLf4UXmJx4jo4q2X6vXwOpfo2DhQX+FiWHfhqF62ydIyX82h9QI
- TjqZn3gpklewYyUSmz1lnThyM0obfCyy8VWwVcJGUyNPCBPQnYd9m1gQpl/1/aWs7VEn
- 4Y3orBbY9u6wJljDJ35fsmspElyH+uiMjkeNs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775786701; x=1776391501;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mENjeSZbQFdRu98npBznOH1cdhHqEuwLMg7t0UAPzVY=;
- b=o+1N1a7H+chYY3ImJNSvaTnw9On2+GX8Y8nkueryi0FVIsf1iYadE6K6AZEaIiUhij
- fiIIyc0eQux7O03rCGbDzB+Ls9IlMfLZNQAiP49zwaPIicgweWyiQbGRWhfTxN61akQ/
- pka/OhmbWrE7HVIh2ouIe+2hcMryujDJ3LDmyIU9VLPeTFnkdcOGBVGcZhztyAm620Go
- rKnVzgle2Ply4JtKzOzB8m0/XFdyNxr38yuHJnSwpbrxCfkJ2xdwGzfCVe1b/b/t6+ZV
- Q503Dw8/OaF7LvIe/jhRjRkmXoAONoYGZcRqvJw7ar79JY56zn1xxO46A/Yut4dqN+T+
- GOSQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW8pH3uRuvwWVY6jMHoSYUfVj7YJBBdM1Z/rUKVqCn0gRo25PNjpK/ZA857mvEIvvWk58bfm6M=@lists.denx.de
-X-Gm-Message-State: AOJu0YxaDG89c+dI/GJTsRC5HMPaSJRrbm00zdYs86oMVpJLi7KXccmP
- r8llHJjWbDVLNoSZLxZZ1kFSmG3LLk7JQ/Ip/ZRyo0a1xgmlZWtRPPKK3UqadcKeUgQ=
-X-Gm-Gg: AeBDievP+KwwVpLqehOGLBnJksRf6NMyeBxNA/s7dEmZB5YlKnfHsbNVlIpYSrg4oMx
- I98sAUOP/jTVGRx0qcSDnWCOCa+8TmuF/IUSPBz7/0PNZtjvRy59bFKf/Rm1MXAEwTyhZjGKDSX
- N63N6ixtEByDr7+5I/6f5PGcbHL5zfFUX/RTkt8+YrePH82NzeRyhjJ/pOhXNyX2qsa4KFGpuoV
- ZwJpwZMJ7mQVIREHx5V7M886U52hxyaSiFKZZPj20mxFdSmv7W5omc7z6zVnT9JTeUQrshE2du5
- D9t3rta1kbR6VRVVGNqO+jpfEafmSsI7E/RCa+VkpfojuvVdqmO+5R9Eokg+P6xIrpbAiUnIVVx
- X7V5blkaznrIpgN2SIh9YuC41zkx2BHDgB8xnEtnIm5/L5eHNWSN7DnD0a2dKvfSBTQgZysYFDf
- 93GfB9gb3PfrpMp9UcR/rqNBnOF+0eCsqYn701tLAP0iu8XYpdj3XBrqaCF0VRYxz0R+q8YKMuv
- dLbQ7OvxayPSOVC1csdxiHOWL2DaKsIGLWaXMB8q47YrGc9Dts=
-X-Received: by 2002:a05:6830:81d5:b0:7d7:57ef:384d with SMTP id
- 46e09a7af769-7dc27f0b2demr935810a34.16.1775786701097; 
- Thu, 09 Apr 2026 19:05:01 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7dc269402b9sm929859a34.20.2026.04.09.19.04.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Apr 2026 19:05:00 -0700 (PDT)
-Date: Thu, 9 Apr 2026 20:04:57 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: "Kumar, Udit" <u-kumar1@ti.com>, u-boot@lists.denx.de,
- Casey Connolly <casey.connolly@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@arm.com>
-Subject: Re: [PATCH v2] arm: Add ARMv8-M aarch32 support
-Message-ID: <20260410020457.GS41863@bill-the-cat>
-References: <20260329231442.332359-1-marek.vasut+renesas@mailbox.org>
- <c8a97353-0c3d-4d98-8252-c0bb91a658a5@ti.com>
- <a03ecada-fa00-41ce-99ff-cc1a2a8362b3@mailbox.org>
+ spf=pass smtp.mailfrom=mtk15814@mediatek.com
+X-UUID: dc2f8e7a348211f19a16598d5ca7f8ec-20260410
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:CC:To:From;
+ bh=oWdJ//yi+YCEyYMQkfXiLBj5aShMwyWib5shaJ4pBMQ=; 
+ b=HqXbLucImMjhb1f4aphEfnPVMXulxoQ8fx8JDOGn1jLu6h8/DixJEZIjXuV3Xq+w8sL+bWqJi4gAokoGAsgItY8jmyvSqP2GiDrrjzmz3gu59MFLaZoqgrhHKbOIPXStzAM6DlsSOAor1LOwq/jp2Xiav3mjGYDYvxrvjrtY/ME=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.12, REQID:97451162-eb68-4bf9-b734-6f87121920d8, IP:0,
+ U
+ RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
+ :release,TS:-5
+X-CID-META: VersionHash:e7bac3a, CLOUDID:576e408f-6df4-4a3d-a7a4-fbdc42d669ce,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:102|836|865|888|898,TC:-5,Content:0|
+ 15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0,OSI:0
+ ,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: dc2f8e7a348211f19a16598d5ca7f8ec-20260410
+Received: from mtkmbs13n2.mediatek.inc [(172.21.101.108)] by
+ mailgw02.mediatek.com (envelope-from <mtk15814@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 1340675251; Fri, 10 Apr 2026 10:13:26 +0800
+Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
+ mtkmbs13n1.mediatek.inc (172.21.101.193) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Fri, 10 Apr 2026 10:13:25 +0800
+Received: from mediatek.com (10.233.130.16) by mtkmbs11n1.mediatek.inc
+ (172.21.101.73) with Microsoft SMTP Server id 15.2.2562.29 via Frontend
+ Transport; Fri, 10 Apr 2026 10:13:25 +0800
+Received: by mediatek.com (Postfix, from userid 10015814)
+ id A0F93200C6; Fri, 10 Apr 2026 10:13:25 +0800 (CST)
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: <u-boot@lists.denx.de>
+CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
+ <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, Igor Belwon
+ <igor.belwon@mentallysanemainliners.org>, David Lechner
+ <dlechner@baylibre.com>, Julien Stephan <jstephan@baylibre.com>, Sam Shih
+ <sam.shih@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>
+Subject: [PATCH 1/2] clk: mediatek: remove redundant forward declarations
+Date: Fri, 10 Apr 2026 10:12:57 +0800
+Message-ID: <fc7c50ebff2932b5f0a237c3fc492aefba3a0292.1775786729.git.weijie.gao@mediatek.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1IrrSZDnp07q61WJ"
-Content-Disposition: inline
-In-Reply-To: <a03ecada-fa00-41ce-99ff-cc1a2a8362b3@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,72 +90,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Sam Shih <sam.shih@mediatek.com>
 
---1IrrSZDnp07q61WJ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The clk_ops structures (mtk_clk_apmixedsys_ops, mtk_clk_topckgen_ops,
+mtk_clk_infrasys_ops) are already declared with extern in clk-mtk.h,
+which is included by this file. The forward declarations in clk-mtk.c
+are therefore redundant and can be removed.
 
-On Fri, Apr 10, 2026 at 03:24:10AM +0200, Marek Vasut wrote:
-> On 3/31/26 8:04 AM, Kumar, Udit wrote:
-> >=20
-> >=20
-> > On 3/30/2026 4:44 AM, Marek Vasut wrote:
-> > > Add configuration for ARMv8-M aarch32 core, which are currently
-> > > Cortex-M23/M33 cores. These cores are treated similar to ARMv7-M
-> > > cores, except the code has to be compiled with matching compiler
-> > > -march=3Darmv8-m.main flag . These cores have no MMU, they have MPU,
-> > > which is currently not configured.
-> > >=20
-> > > Unlike ARMv7-M, these cores have 512 interrupt vectors. While the
-> > > SYS_ARM_ARCH should be set to 8, it is set to 7 because all of the
-> > > initialization code is built from from arch/arm/cpu/armv7m and not
-> > > armv8. Furthermore, CONFIG_ARM64 must be disabled, although DTs
-> > > for devices using these cores do come from arch/arm64/boot/dts .
-> > >=20
-> > > To avoid excess duplication in Makefiles, introduce one new Kconfig
-> > > symbol, CPU_V7M_V8M. The CPU_V7M_V8M cover both ARMv7-M and ARMv8-M
-> > > cores.
-> > >=20
-> > > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> > > ---
-> > > Cc: Casey Connolly <casey.connolly@linaro.org>
-> > > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > Cc: Jerome Forissier <jerome.forissier@arm.com> <jerome@forissier.org>
-> > > Cc: Tom Rini <trini@konsulko.com>
-> > > Cc: Udit Kumar <u-kumar1@ti.com>
-> > > Cc: u-boot@lists.denx.de
-> > > ---
-> > > V2: - Rename CPU_V78M to CPU_V7M_V8M
-> > >      - Isolate V7M specific and otherwise option bits in cpu.c
-> >=20
-> > Thanks for v2 Marek,
-> > Apart of name of config discussion over v1 [0].
-> >=20
-> > For changes,
-> > Acked-by: Udit Kumar <u-kumar1@ti.com>
-> >=20
-> > [0] :
-> > https://lore.kernel.org/all/30108d25-efd6-4ff6-9bfe-0dc55670a83f@mailbo=
-x.org/
-> Tom, is the naming now OK ?
+Fixes: 00d0ff7f81bf ("clk: mediatek: refactor parent rate lookup functions")
+Signed-off-by: Sam Shih <sam.shih@mediatek.com>
+Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 
-I'm unable to come up with something I like better, so, yes, I will
-merge this soon, thanks!
+---
+ drivers/clk/mediatek/clk-mtk.c | 4 ----
+ 1 file changed, 4 deletions(-)
 
---=20
-Tom
+diff --git a/drivers/clk/mediatek/clk-mtk.c b/drivers/clk/mediatek/clk-mtk.c
+index 3557aeac3d5..4adec4457b4 100644
+--- a/drivers/clk/mediatek/clk-mtk.c
++++ b/drivers/clk/mediatek/clk-mtk.c
+@@ -204,10 +204,6 @@ static ulong mtk_clk_find_parent_rate(struct clk *clk, int id,
+ 	return clk_get_rate(&parent);
+ }
+ 
+-const struct clk_ops mtk_clk_apmixedsys_ops;
+-const struct clk_ops mtk_clk_topckgen_ops;
+-const struct clk_ops mtk_clk_infrasys_ops;
+-
+ static ulong mtk_find_parent_rate(struct mtk_clk_priv *priv, struct clk *clk,
+ 				  const int parent, u16 flags)
+ {
+-- 
+2.45.2
 
---1IrrSZDnp07q61WJ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCadhaxQAKCRAr4qD1Cr/k
-CufsAQDzw2Gx0r3IXsBjbyBN4unb6wf1r+OodahF41PLCjS+aAD/QHgNeX13II3u
-+rMoS+d2xysXSSn0LQ8IgmleZApIXQc=
-=eUqZ
------END PGP SIGNATURE-----
-
---1IrrSZDnp07q61WJ--
