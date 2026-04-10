@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54CE5E99062
-	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 09:31:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB57EE9905D
+	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 09:31:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6AC684181;
-	Fri, 10 Apr 2026 11:30:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B2638841CD;
+	Fri, 10 Apr 2026 11:31:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="E8YOd5Wa";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="wRt+2xuJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AA468414B; Fri, 10 Apr 2026 11:30:54 +0200 (CEST)
-Received: from PH0PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::3])
+ id 0027984199; Fri, 10 Apr 2026 11:30:56 +0200 (CEST)
+Received: from SN4PR0501CU005.outbound.protection.outlook.com
+ (mail-southcentralusazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15B5584106
- for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 11:30:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4FCC88412A
+ for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 11:30:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=Pranav.VinayTilak@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=G3eLV66fJnzyLLnDtoKJU6PASTnC74Pjem7cehn1PxNa1yJp0+saS2bW5/Y0HgurnkC9/Y1xtaINZQc6hXJ/0Pv7xc98DACfzekC77N2Ph6aOh3w86K8eYTJMJQpOJ4Zt3orFlhXdQcKAM7f/MaGrWImJ6pK/Qi5DE2AwWUJn7VYK2huu9+jC4vHZeV9eXnT6W3BM2/HXPNCewPmwQtC8hqcKzeeqHAoyC43VChttCafzYajkJ00lLuaITO7LDyn/c+ad8GIJsd3S4lerDp4Kq0FwlfbCHdm8k7LYhy84V6VsSWXM/WpbtRLn0C8NAU8sXdtyjxwo2pMC+yhMJK29g==
+ b=pdZyPgiRMl7nnsizC/YQtLZLrsxPYrMkeIhvUptGb6D3lbsbbwQc0Go48nUWAG4rpSISq58Hb/LBZMNNvyx3XbDXnxcBerLEv1z/nyN5LQZH+DQbrbIf+pQ93N3Bl3fDwrBqfM0G+0/ckUrSFzwfVgDvLvqx90fRChDqV9bm2rr1cbqN0VO+ZOVNsHM6pWPw3X9QHk9ht0OY4AM4Z/2uzHDd+nZ0TYNpmXsmQkqNxigekpYWQGe5bpCI8mZ/AbUtPtB+M4WAewNbKmiXpfiLYoYxk7OavYlDTajks8ONAQP9TN45nDAoiS/tPUV0qFnQadT6eQk+qLbpnHSU2zRHkA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OVfN+Im09lO8eYMaoRyRDlz77Xlsmxu1mbE7yfOpEE0=;
- b=q9b3xyQg2SWDI2ExTv4QMXmm97NYqU9gS1OBBepld2kuKTCcm5aYMWXHDFwdp+mywWfNZe/S3nb0gP1J9gy1x8gcGEmPtDH8+TJTM/epsLJCPyx8W66Za2kbsBj7cXIFuo0HZRxDoxTfakCTh/rEnVjnnaPBPPYp4Rg7fhdW2VkTCoT/h6QmRXnv3Ft+sQDSmr/4xwrppaqgL/JeBbO5/DKgebgposTm81nEoXrQif3YkInPc3KjXuNa8DTcxx2Vpy3QykzHCorFKibtiyK15O1hAhvmipR4D0supdTMZ0Sqo+mJkHZIamCeRcDPXbH78+4D/2LuVFMscSbJHldY5Q==
+ bh=AhSK5sBu4prht0qWZmBKS9bWhDeI3CRK1YVorwLx2tY=;
+ b=xP/cD0IuL0AqaG0tbl83rAMHfNIZDex7teBV2As7sDgewwSzd6qaUh5oD/stBRw9wPLJO5Xf20HUDB3X5llo7/rxCtV2hWh9SMjPtLxCG1l+BYJV1qmJBVeBjuVQcz6v2w9MENMR64++fKjC3/mYam+uoURAbmw90HTCLrKQKaSDMZKsc6aU47NGi5O7SZYDqVD2bBQZFvDoK9O/+qDY3Q/uJ3ZMKiZrrpPbjmckmF+VRXPQ/OF3SlN9fY8TriyLWBiszVRt+i0VXfzCinbuRjEqWfG0GqG0eYaKfj2LmcKy9FcY320PPKZUfilUsiDhRkpqek2n1UWHrHZUS+SENA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OVfN+Im09lO8eYMaoRyRDlz77Xlsmxu1mbE7yfOpEE0=;
- b=E8YOd5WapiR5TWxvNZmN0lUeeYoX3Jha/xTgngHXGxDMkcJPu8lyhxAjOkUL5r0StXN1gw/5nMLXZzFHwUEZ89HokVNRDgt3zHlKjskPts+R2DFMrOmRutGbPak48hcgBx5GzAFnRM/+g1cR4q5OZjLUqFVRCOxow8H5HrofVPw=
-Received: from BL1P222CA0003.NAMP222.PROD.OUTLOOK.COM (2603:10b6:208:2c7::8)
- by DS2PR12MB9616.namprd12.prod.outlook.com (2603:10b6:8:275::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.20; Fri, 10 Apr
- 2026 09:30:45 +0000
+ bh=AhSK5sBu4prht0qWZmBKS9bWhDeI3CRK1YVorwLx2tY=;
+ b=wRt+2xuJZLe4oUIK+VWsNOdneSh1hHcvZ6kRYdAdQGfJnPqHitsHmgGJgCYNJqsGuRPe7kLMNakp0Og/19oMcIw70G4siGy3ecBtQZHvTnYUBLM5aNmjPXVcbHlBt+eQSjUOwqBDjwtygD2g3c4ywz23gv6+RqDzF6L0XuSZquc=
+Received: from BL1P222CA0021.NAMP222.PROD.OUTLOOK.COM (2603:10b6:208:2c7::26)
+ by MN6PR12MB8541.namprd12.prod.outlook.com (2603:10b6:208:47a::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9791.33; Fri, 10 Apr
+ 2026 09:30:46 +0000
 Received: from BL6PEPF0001AB78.namprd02.prod.outlook.com
- (2603:10b6:208:2c7:cafe::59) by BL1P222CA0003.outlook.office365.com
- (2603:10b6:208:2c7::8) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.43 via Frontend Transport; Fri,
- 10 Apr 2026 09:30:45 +0000
+ (2603:10b6:208:2c7:cafe::27) by BL1P222CA0021.outlook.office365.com
+ (2603:10b6:208:2c7::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.46 via Frontend Transport; Fri,
+ 10 Apr 2026 09:30:46 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -61,57 +61,60 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 Received: from satlexmb07.amd.com (165.204.84.17) by
  BL6PEPF0001AB78.mail.protection.outlook.com (10.167.242.171) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9769.17 via Frontend Transport; Fri, 10 Apr 2026 09:30:45 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by satlexmb07.amd.com
+ 15.20.9769.17 via Frontend Transport; Fri, 10 Apr 2026 09:30:46 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Fri, 10 Apr
- 2026 04:30:29 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 04:30:34 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 10 Apr
- 2026 04:30:27 -0500
+ 2026 04:30:29 -0500
 Received: from xhdpvinayti50x.xilinx.com (10.180.168.240) by
  satlexmb08.amd.com (10.181.42.217) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.17 via Frontend Transport; Fri, 10 Apr 2026 04:30:26 -0500
+ 15.2.2562.17 via Frontend Transport; Fri, 10 Apr 2026 04:30:28 -0500
 From: Pranav Tilak <pranav.vinaytilak@amd.com>
 To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
 CC: <git@amd.com>, <padmarao.begari@amd.com>, Pranav Tilak
  <pranav.vinaytilak@amd.com>
-Subject: [PATCH 0/3] fix 10GBE support for AMD Versal Gen 2
-Date: Fri, 10 Apr 2026 15:00:15 +0530
-Message-ID: <20260410093018.1461732-1-pranav.vinaytilak@amd.com>
+Subject: [PATCH 1/3] net: zynq_gem: add SPEED_10000 case in clock rate
+ selection
+Date: Fri, 10 Apr 2026 15:00:16 +0530
+Message-ID: <20260410093018.1461732-2-pranav.vinaytilak@amd.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260410093018.1461732-1-pranav.vinaytilak@amd.com>
+References: <20260410093018.1461732-1-pranav.vinaytilak@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: pranav.vinaytilak@amd.com does not
+Received-SPF: None (SATLEXMB04.amd.com: pranav.vinaytilak@amd.com does not
  designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB78:EE_|DS2PR12MB9616:EE_
-X-MS-Office365-Filtering-Correlation-Id: 48e752b2-5ec3-420b-96af-08de96e3d786
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB78:EE_|MN6PR12MB8541:EE_
+X-MS-Office365-Filtering-Correlation-Id: 382c36c3-c928-4e44-7428-08de96e3d847
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|82310400026|36860700016|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: KZMbcnU2XGZJtTgzA7aWOjdSUnItCcyZiFnoEhQft1Mb5dF0aPPE5rJ64u8BC+m/VzKhyCM/uL8YqaPTrRFl4tBsKI4Q4YHsCp7IjRXU/OMTR49pg/F5NJzIrOQU5eiBcIhdoQai6TYFxaZMu+BPCp36LVFqkswhMkTv2dsq9kCNlU4ScuRYt6EUPsrEGRu1vWpsZqCZ7UnCPPBDN33dVEGHf7ySOTFhB22spP4TPAWKP/NakqpL35jRZdfsiOkC6bHaBZkChvpCKos/eS3v3WmSRXZ1opblW1KWsU0WBsC0RjXk+p/zRhTUeiuZo7FtDpXetUpoM3xk7rHg/3TcJWlsQdqfKvFOFOpxrPXnrsuNJk5wM1gKM51F4IQtPWfZN7hhE0VZL8Piy2eg6OaWhTjuh+vfH8XtY38vL1Ox0Wef3IfvZ6RwDA77WHtOfFsLnXrOMslQGl7Ft6ZBOfXIUhuqVtcC+fn2lQ1kLlCZk6RaHIrMzztEyJM6LHSHYGRzks5/rJpA9Y5VNN6rHdMAK1qgQvrfO8YXsAwI67hMW6kZ7TQ3ojeR9/5RsUlyIm1Ukf2KRLblkFC5VxwnMTe/4xXc58hZKr3XUAAoxqha9zwyd4fuGd+phTZKa8xIE0nBFvrfu45aXyw8n2m1n8zWurOjMTVYzpv41PWaeuLnqtYxbOB2gMpi0YhAiEdOipy0jL/eF5+LvBfdfYE8NiwS5R8jL2j7rlXP9/JKD1xF+a0qvyg7OsgF3a1BBL8L31J0KGecAVG4hU34bPm1TAKd7Q==
+ ARA:13230040|36860700016|376014|1800799024|82310400026|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: XXAoKr6nC9gKhLFTGWbNOfkJvHHkHUNzZfaLysy0kWS1qqUh+FU/9lwHmIh1MfPtHmZfDEfssiQ4Sv1RPxUHOHDgQBRacQkIsF1YJIsrNyfmtk2dhf6ZhmBYtnSJ/uiNvkdhx6+keJ/Tev1NAJjyeMhDzuKiO033lDaRwtS6o2hRXIvexP+P4r8x9kr8K4WYniIWtWI2a1m7qHflB+IU1OiNV+Ptf7dzDHuPu9zXw7UoOzRBYZ2Gzli8e3GhpSCGqA3NZp2CN2rW7ceKgb4EFFpzLJzfHapdm/0xeXAIQLwpEAw4XwasM+1BvlkicIG5OzxFpyt5blqcjb1Dz7OqB6BBUDiVqSeghu/L6dQMyYql3epI6jU86ZSiKtK6E+QfLzkI976i3ExAbS7O4GrzKEXYzrsCHUvvf3mFvFCt0Q2+BW0qAE7UzSnitFzUfOF+wkCFAa5JvTlx8H3XYgxDaLjqAtEtAoj5ts1KRE7bUdwChicM+xQQmkqAcBNlQxIh92mlFpyx9XotO3T5+OEOjBowHWICMoSzJdXZt0ifSyZoqxQquFbGKf5oMM1xpfygNHnGH1uPeVAbr9VnWSfEl7QLcz/d91OWPntOZLkcwa79ceDs18VM59FZsYc68SaGeVUqsNBh3vQq3Qlb7ie+e9hUOWDlXkqkSfzY5fNHWDT2TResdtAf5GVP/aw07z/SF1jwkeoEhIhO5YxdTWB6M5rvpNeJTWDbrLonpbl1d9cv5BAh3di7z33QpotfjbhFZ5zgtramUStuNPHSuxUNIQ==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(82310400026)(36860700016)(18002099003)(56012099003);
+ SFS:(13230040)(36860700016)(376014)(1800799024)(82310400026)(56012099003)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: Gkhc1YPbGpTM9R28l2v7qsFCgpn0teBvd5gIftiTuzGNZGM+LEb25pdt4EdzRxYrJcPrJRr/nHB9iDDYWBUBzxSW5nc5ylJawFAm89E190sigH7FjcXMI0o9YxSzWVpUhw2m5btOOtrp/1q1UCVI6HZlsG3fvOwikWaS/E5GHaosYZnHIZDuwHQC9qi3O+//Leyybeh1sqyS6oo1t8nfrKGckbma+CBcYG+qtEavOAUi07GZJgqn6eMPiEvlry3V3e44hKjWjuIfwkYHlGrlU79yHHrxSEj3bbt0oCgY2YVUNQ3CbxFS4swxO+MgTUjN8PBrWvlwyq2Xd8D9N0ZPef+hA+DeIzR9Ch87+jPcE/tF04tWCd+wSvJ7Jiq56UIph/G1bA/3VL7yghjqBArXv046DdRhqwYgSagDV5R5Pnr8j4lxSqboSBV+WBdSuFfY
+X-MS-Exchange-AntiSpam-MessageData-0: a7bdrZyFSpfrn+cprZAxuivMePCJpugh7CgjupLlHGgLlfI2PLbi54UHKRyk4kd6ZIw1jU2zKWMxtd515rUO4VswIp8j0I5Dg/LKotH2ccxGXoPbXE0zu5oV7LV175XMPb069lDtY/lK9buuPdzRQaREmfLl4bHoR3X3rM73ds6wS8KDxTwU9etz51wrPwr+SQ7h/U1P3ulMnu+7xq3kfovfl6gwJ02JWvC6s48Ld7SdD2C+vMg8O63uHQHhvZ5VuCIAXf3nM9xK1XTOYWErY8azSGctNHm1egM/K3IvcnSzBPf+WFfwr0wor/knJ3OjfxdhBTkxsm8orJt726WnJrEFv0wHuYmngmVbC7wYr5EXZyMYwNHgGeK/Y1AwoT0yZ5Sl12V4YMrtoiVXPMq0C5Y9Art4/m1z55Tf9p0mnza8U6SgfAd+NfrkT0f++SQX
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Apr 2026 09:30:45.0325 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 48e752b2-5ec3-420b-96af-08de96e3d786
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Apr 2026 09:30:46.3080 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 382c36c3-c928-4e44-7428-08de96e3d847
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB78.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS2PR12MB9616
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN6PR12MB8541
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,17 +131,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series fixes three issues in the zynq_gem driver required for
-10GBE to function correctly on AMD Versal Gen 2.
+Add SPEED_10000 case in the speed switch with the fixed 150 MHz
+tx_clk rate. Without this, clk_rate stays 0 for 10000 Mbps and
+clk_set_rate(0) on a fixed clock aborts initialization.
 
-Pranav Tilak (3):
-  net: zynq_gem: add SPEED_10000 case in clock rate selection
-  net: zynq_gem: set 128-bit AXI bus width for 10GBE
-  net: zynq_gem: reinitialize RX BDs on every init
+Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
+---
+ drivers/net/zynq_gem.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
- drivers/net/zynq_gem.c | 60 ++++++++++++++++++++++++++----------------
- 1 file changed, 38 insertions(+), 22 deletions(-)
-
+diff --git a/drivers/net/zynq_gem.c b/drivers/net/zynq_gem.c
+index a50d5aee03f..c06d114af68 100644
+--- a/drivers/net/zynq_gem.c
++++ b/drivers/net/zynq_gem.c
+@@ -134,6 +134,7 @@
+ #define ZYNQ_GEM_FREQUENCY_10	2500000UL
+ #define ZYNQ_GEM_FREQUENCY_100	25000000UL
+ #define ZYNQ_GEM_FREQUENCY_1000	125000000UL
++#define ZYNQ_GEM_FREQUENCY_10000	150000000UL
+ 
+ #define RXCLK_EN		BIT(0)
+ 
+@@ -602,6 +603,9 @@ static int zynq_gem_init(struct udevice *dev)
+ 	}
+ 
+ 	switch (priv->phydev->speed) {
++	case SPEED_10000:
++		clk_rate = ZYNQ_GEM_FREQUENCY_10000;
++		break;
+ 	case SPEED_1000:
+ 		nwconfig |= ZYNQ_GEM_NWCFG_SPEED1000;
+ 		clk_rate = ZYNQ_GEM_FREQUENCY_1000;
 -- 
 2.43.0
 
