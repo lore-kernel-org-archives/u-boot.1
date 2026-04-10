@@ -4,66 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7FB1F36B9A
-	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 01:24:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23369F36B97
+	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 01:53:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55F8183DC9;
-	Fri, 10 Apr 2026 03:24:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 6022283DC9;
+	Fri, 10 Apr 2026 03:53:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="XoD2lk+S";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="pdyY8doH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C5F284105; Fri, 10 Apr 2026 03:24:17 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id C777B84099; Fri, 10 Apr 2026 03:53:47 +0200 (CEST)
+Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E86783CF5
- for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 03:24:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C25A83CF5
+ for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 03:53:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4fsJx92KhWz9twx;
- Fri, 10 Apr 2026 03:24:13 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1775784253;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=tYYvxDEeU9uxEAlwNEatc73SNIozCf9NUpuGBnKxTt0=;
- b=XoD2lk+SgYABve51+BsFwu6ULUfLGWTboNvNcC4MzxEY3xgN9OjU0XZ2Oy6r9cRb/L62/o
- 4URXYGekm04Q6TlWLem7BAuqucOPehsQ1yzyTquAWNB2D9NwzWowc/3zROsbTAlmEQ6ABG
- /ot1yppZVKdLk7ZBxA7VTPd/5K1PAHcgavq3FFUfePDlzpnAbekHlzwv/eOxq8UDg6X3w0
- Mu/S6Zb89zfvpJugngRKAL1SI5ZrIi6XzxUrBIWe+Db2pG+j9sRDqOQ4mR0okZI9zCzJaf
- Tab4d+grR5JODWFMSYTuFAEyUcyTLV31WL9qKx2/av0sedTKCyKmBNRtrzJ68g==
-Message-ID: <a03ecada-fa00-41ce-99ff-cc1a2a8362b3@mailbox.org>
-Date: Fri, 10 Apr 2026 03:24:10 +0200
+ spf=pass smtp.mailfrom=mtk15814@mediatek.com
+X-UUID: 17b77dde348011f19a16598d5ca7f8ec-20260410
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:CC:To:From;
+ bh=iS/nBzKRXC3ts0eBzvjh+Y/OI9yopmssCO5S1Ap1SwY=; 
+ b=pdyY8doHEIIIyBDOgCSGf4Afsw2yO2vnqd8nXi0jInFChMGKbsFCRAOY5EXUdAIeOpHg7BM/5D0zqiGWu6LkXq8e5rNaMeZ6iIZOvVIEFBLCJ6bdTO2gy3sQhCdVM6MaKBnoF3BZI1voRAjPLEAtIBR52dfV2NFQB9tdytilDVs=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.12, REQID:71c3a324-031e-4d00-942d-796f032fff6a, IP:0,
+ U
+ RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
+ :release,TS:-5
+X-CID-META: VersionHash:e7bac3a, CLOUDID:6a00b124-cb5c-4236-a89a-9a7fb20c9bc4,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:102|836|865|888|898,TC:-5,Content:0|
+ 15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0,OSI:0
+ ,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: 17b77dde348011f19a16598d5ca7f8ec-20260410
+Received: from mtkmbs11n1.mediatek.inc [(172.21.101.185)] by
+ mailgw02.mediatek.com (envelope-from <mtk15814@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 1164628387; Fri, 10 Apr 2026 09:53:38 +0800
+Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
+ MTKMBS09N2.mediatek.inc (172.21.101.94) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Fri, 10 Apr 2026 09:53:37 +0800
+Received: from mediatek.com (10.233.130.16) by mtkmbs11n1.mediatek.inc
+ (172.21.101.73) with Microsoft SMTP Server id 15.2.2562.29 via Frontend
+ Transport; Fri, 10 Apr 2026 09:53:37 +0800
+Received: by mediatek.com (Postfix, from userid 10015814)
+ id 1FB9E200C6; Fri, 10 Apr 2026 09:53:37 +0800 (CST)
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: <u-boot@lists.denx.de>
+CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
+ <trini@konsulko.com>, Weijie Gao <weijie.gao@mediatek.com>
+Subject: [PATCH] arm: mediatek: enable fw loader support
+Date: Fri, 10 Apr 2026 09:53:11 +0800
+Message-ID: <20260410015311.4066075-1-weijie.gao@mediatek.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] arm: Add ARMv8-M aarch32 support
-To: "Kumar, Udit" <u-kumar1@ti.com>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@arm.com>
-References: <20260329231442.332359-1-marek.vasut+renesas@mailbox.org>
- <c8a97353-0c3d-4d98-8252-c0bb91a658a5@ti.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <c8a97353-0c3d-4d98-8252-c0bb91a658a5@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 895b722a46148d36a84
-X-MBO-RS-META: ohozfnupwmtd8sh3ad1exem1tiu84jmn
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,45 +87,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/31/26 8:04 AM, Kumar, Udit wrote:
-> 
-> 
-> On 3/30/2026 4:44 AM, Marek Vasut wrote:
->> Add configuration for ARMv8-M aarch32 core, which are currently
->> Cortex-M23/M33 cores. These cores are treated similar to ARMv7-M
->> cores, except the code has to be compiled with matching compiler
->> -march=armv8-m.main flag . These cores have no MMU, they have MPU,
->> which is currently not configured.
->>
->> Unlike ARMv7-M, these cores have 512 interrupt vectors. While the
->> SYS_ARM_ARCH should be set to 8, it is set to 7 because all of the
->> initialization code is built from from arch/arm/cpu/armv7m and not
->> armv8. Furthermore, CONFIG_ARM64 must be disabled, although DTs
->> for devices using these cores do come from arch/arm64/boot/dts .
->>
->> To avoid excess duplication in Makefiles, introduce one new Kconfig
->> symbol, CPU_V7M_V8M. The CPU_V7M_V8M cover both ARMv7-M and ARMv8-M
->> cores.
->>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->> ---
->> Cc: Casey Connolly <casey.connolly@linaro.org>
->> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
->> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->> Cc: Jerome Forissier <jerome.forissier@arm.com> <jerome@forissier.org>
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: Udit Kumar <u-kumar1@ti.com>
->> Cc: u-boot@lists.denx.de
->> ---
->> V2: - Rename CPU_V78M to CPU_V7M_V8M
->>      - Isolate V7M specific and otherwise option bits in cpu.c
-> 
-> Thanks for v2 Marek,
-> Apart of name of config discussion over v1 [0].
-> 
-> For changes,
-> Acked-by: Udit Kumar <u-kumar1@ti.com>
-> 
-> [0] :
-> https://lore.kernel.org/all/30108d25-efd6-4ff6-9bfe-0dc55670a83f@mailbox.org/
-Tom, is the naming now OK ?
+Enable SUPPORTS_FW_LOADER to allow the mediatek platform to use ethernet PHY
+drivers with fw loading.
+
+Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+---
+ arch/arm/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 03416c55265..aee8e74dace 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -868,6 +868,7 @@ config ARCH_MEDIATEK
+ 	select SPL_LIBGENERIC_SUPPORT if SPL
+ 	select SPL_OF_CONTROL if SPL
+ 	select SUPPORT_SPL
++	select SUPPORTS_FW_LOADER
+ 	help
+ 	  Support for the MediaTek SoCs family developed by MediaTek Inc.
+ 	  Please refer to doc/README.mediatek for more information.
+-- 
+2.45.2
+
