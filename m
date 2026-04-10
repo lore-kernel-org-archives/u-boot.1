@@ -4,106 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69795F36BAA
-	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 05:21:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BA5FE99055
+	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 08:24:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0432383DC9;
-	Fri, 10 Apr 2026 07:21:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E65F384099;
+	Fri, 10 Apr 2026 10:23:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="D1MW3XYI";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="RIk90PDJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E56AE84120; Fri, 10 Apr 2026 07:21:45 +0200 (CEST)
-Received: from mail-yx1-xb135.google.com (mail-yx1-xb135.google.com
- [IPv6:2607:f8b0:4864:20::b135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 617EF84105; Fri, 10 Apr 2026 10:23:57 +0200 (CEST)
+Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6D648416F
- for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 07:21:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A0B5383DC9
+ for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 10:23:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb135.google.com with SMTP id
- 956f58d0204a3-6501547d7edso1798455d50.0
- for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 22:21:43 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775798502; cv=none;
- d=google.com; s=arc-20240605;
- b=fpLkOzZEru82jZAThdnmZ0KlQQU1PnPtoZ+wrTXDeRD7XFhEZTCu5oKC/KbP4oigK1
- DzNikEJhwrFe3zX/JDR+80f7lTAPgJjyu7IOC8BxMd/jZccAbq8sfjY0AMlyGQseJpMM
- 8HHRCvjfFbmAGziGNBbEtfbNpCJB3UDd5wuFxNgMd1gxhN3QBToE1vU+RdI1v+EW1dN3
- 1aIMniTOI16v5IZdvDBSYT7U2Gfb0A2vlLdaTEHuNjQpNYOAC5bEQIXoSARa4mg4nEal
- vh0syEOH1OafTLBziXUbX3KRhYgQSUIbeOBJcopxGsP1B0WfcOvW2BhV/OQ46zI8w/S2
- qtqA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=rMzunL8HE2XVTpSz1MxGo6s0HNe6D7ba/sKiTM960RU=;
- fh=hLmPBTHaEnf80OfkARA/pwNotZ+wHmOIjI3a2+MIzUA=;
- b=Ym+RVCMLbS4dFB7gnJo87UdxBvch2SUfdz2kGhdSabixHa4uCSPbYcPF4FrbpdYmJl
- SPB1G3gT4iCU3nnb8/Lzq42tNrwYOkBhflMhFY8lNh/TcQHSWvvy2eQFrmYaQH0hjvBm
- NtgzSTxkucAx6HKexQvaE1lbMIxuRDu3HV4JQDIasOZjLqS8BhbQowwEx6Xh1t2Ts93b
- ZqH/ycNCjsf7uv9PxSxeKU/nichtMrGxUt+Ogz7sajlzUfW15IVbgsZbHiEjYbjMolrk
- qQCDL04bu+NSEGzaNwpMf+44F45/BQm+RCAxvwg7m+1P9NVG158vinKNBd3pjEC+7aMi
- KXnA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1775798502; x=1776403302; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rMzunL8HE2XVTpSz1MxGo6s0HNe6D7ba/sKiTM960RU=;
- b=D1MW3XYIVTeZy4fYHagKhk27Jo6XicSp+mWazrqtY9pkVOQXcZuj2SCtw5Imsl7phA
- knEBh+Aq5bvIL0TnVXqKYTSTRc/0IR+k6furOGkNos4tqQQAMlvewV9hdHLDtkzth/6H
- poJsxPLcaWVw8DrKVNbXk+VkUkqEbxgAaxGVAJHC834c/WE0Q9F35VKzs41H0e+HEVL5
- CXD64Z+BUUDEx2sJ7fc8G66URoL7mfh0YbsdPqlQ63ngv7rV5XKmU+RTf7P8VfwoGWV0
- xkIBgkLlIrTHWLXDFdP+6ndahR2y3JXgfpXYYz7xhxwtvk/cpPDukrn3FBRq4m+3MvFB
- iZkw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775798502; x=1776403302;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rMzunL8HE2XVTpSz1MxGo6s0HNe6D7ba/sKiTM960RU=;
- b=YY6Yw8mGlYGqJR56wgxlrgNfkMFpPGv9aRpCXi/qCVLT63Pwh2qR9fj8plROK+zTGo
- xxcNnKtQaKIAosYG2Ju6wP0hsZy6G+tuk7qgOC3SmFXvqaFWso/+YriV9Vv2uLY0I6FP
- k5iTyU9rZ/Q/eveFnaD2zZCJtaRGkwTgXs9ZQZ4e8fimvn6E1R92DgEdjmtnYv7utnF+
- k+AmE6W5hp2j8ztv82IWfDXMtYLVPOlMca9FvE44WA3mWOMZ85RZ8SRCKoALA7GcvG/g
- 1eX1EhaJgW6P0OC7Mr5N6ICPtKFZnZ0xMAaRY56up4TSox7Hd+53nISnFgmAfSK0Nho7
- rzMg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXMvRr6MZMGpOPiB3U2mR0Rv7NQGMnhgBY6+u62PpL8TBrGqcMhyotrl+LBQJugqLoh4NHtlEI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwLgyi0UTpmtoARCfY03KIRUJW0132UsqO6TytGIV6NRz0LQEbc
- 7iMH93nwqKz+szETGCCgLOHGPVET3bLXXbnOcyVWXFKq+3wSeAAEjNP9kc7MpBG/5YSdkZ5pAZp
- ByTPqikZKdl4L4cDK/c5DFEXD4KeM9mAleqFsgDAkja83aKtzrs4Sg/0=
-X-Gm-Gg: AeBDieu8XxyC1BgdsJmq6rRUYLO7V7WCn2Oaj+ArEFQvIaBmVIXBVpJdG2kwioMetGg
- +nfFYNWgtmTChmyEXbYFQulm4pbtPcu4T9ZnKsY4xXbTgKcAYLLjN82GBAi22FRDeK8DLJ1MgVz
- 20CmwVvaIcqZujc4pEhcKheVZGt1tpf9UgkabCev0OiPgx4QDP6kXnCjPtGfe3JE7hFi+/mEJPl
- tNlp+dCjJuO2dph1Gu+acUBz088zioncf6x5pLmBQV0mUYN3BODYQ/5QmePh3WVPPp6xHvCTDFp
- gN9dA+rjYCIKDkoa7D6e7V7v/d5vU95j4mdsgtFkpBqYThFoJmES4vRzMbXKulltwvwTM4fw3l0
- AME1qYsbuqSa5U/EFYzIVV/t973iYZWO/OIalnyEIfoQLMbg/ZsHbOwDcrtxyy7DCVMa1hzgDBa
- vkpk5p7vy802VUfb59q+3jB5PJDCx2Ozlr5WPknnXR/IQrsWBodiij4dDnE5KHZ+N7dnpQuLRCR
- rkEj1RA7iQ/YH3O0hbFL68Ncr0AQEADK8Oqgal3dqI/fU+uPFuQfY/7u1u0gP5VIakv1wHdFWFu
- GtkTtz8JLg1oMboXzdb8gVzu3uybZycSwsfksRulUgM=
-X-Received: by 2002:a05:690e:190d:b0:650:1aa5:8594 with SMTP id
- 956f58d0204a3-65198bb02fdmr1732214d50.49.1775798502509; Thu, 09 Apr 2026
- 22:21:42 -0700 (PDT)
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: 9541befa34b611f19a16598d5ca7f8ec-20260410
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
+ bh=+F1G5wV1KcjK0Fpp3uO+TleLgKG0yljmyHKiFjuvz88=; 
+ b=RIk90PDJpHDwFlcHqxKgCCi6y0Twhx/erVqTRdMq84Syth9mDeGXkZxvPaR1cvzZ6YuNXFbPSBzoNf79mg771X9lsMiFznf1tWY8S3k3VndR9uqdLVyAhp7AStHTedwkeQWjezhpQ3fJ/gyPen+Rb0nar7Mi5d5c7+S0L2fNsCk=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.12, REQID:288c257d-a60f-44fc-80f9-f65c2fed07d5, IP:0,
+ U
+ RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+ release,TS:0
+X-CID-META: VersionHash:e7bac3a, CLOUDID:f980b524-cb5c-4236-a89a-9a7fb20c9bc4,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:102|836|865|888|898,TC:-5,Content:0|
+ 15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0,OSI:0
+ ,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: 9541befa34b611f19a16598d5ca7f8ec-20260410
+Received: from mtkmbs10n2.mediatek.inc [(172.21.101.183)] by
+ mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 2080009853; Fri, 10 Apr 2026 16:23:41 +0800
+Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
+ mtkmbs13n1.mediatek.inc (172.21.101.193) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Fri, 10 Apr 2026 16:23:40 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.2562.29 via Frontend Transport; Fri, 10 Apr 2026 16:23:40 +0800
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: <u-boot@lists.denx.de>
+CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
+ <trini@konsulko.com>, Weijie Gao <weijie.gao@mediatek.com>
+Subject: [PATCH] pinctrl: mediatek: mt7981: fix some register offsets and
+ fields
+Date: Fri, 10 Apr 2026 16:23:32 +0800
+Message-ID: <20260410082332.102522-1-weijie.gao@mediatek.com>
+X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
-References: <20260403090109.3564638-1-ilias.apalodimas@linaro.org>
- <20260403090109.3564638-5-ilias.apalodimas@linaro.org>
- <CAFLszThg53tcrR7TDsk-de7e-7ZbcLixkij3QQW5m8Fmgy1Pmg@mail.gmail.com>
-In-Reply-To: <CAFLszThg53tcrR7TDsk-de7e-7ZbcLixkij3QQW5m8Fmgy1Pmg@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 10 Apr 2026 08:21:06 +0300
-X-Gm-Features: AQROBzBm15yNgPk8GpUB72wqbFNpVxHS1QEjTRnr1uZJPhiJdX_iWST0nk9cuVI
-Message-ID: <CAC_iWj+YhWqN138Bik+yNWZ_t3KOhy6ag_J_fDePHyOMqi0OMA@mail.gmail.com>
-Subject: Re: [PATCH v1 4/4] common: Add an optionto relocate on ram top
-To: Simon Glass <sjg@chromium.org>
-Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, 
- anshuld@ti.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,66 +85,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon
+This patch fixes mt7981 pin register offsets and field definitions.
 
-[...]
+Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+---
+ drivers/pinctrl/mediatek/pinctrl-mt7981.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
-> >
-> > Also add a Kconfig option and allow the common code to relocate U-Boot
-> > [...]
->
-> > diff --git a/Kconfig b/Kconfig
-> > @@ -491,6 +491,14 @@ config SKIP_RELOCATE_CODE_DATA_OFFSET
-> > +config RELOC_ADDR_TOP
-> > +     bool "Relocate to the topmost memory address"
-> > +     help
-> > +       When U-Boot relocates, it chooses the end of the first memory bank.
->
-> Adding an explicit "depends on EXPERT" would be clearer, even though
-> the surrounding menu structure implies it.
+diff --git a/drivers/pinctrl/mediatek/pinctrl-mt7981.c b/drivers/pinctrl/mediatek/pinctrl-mt7981.c
+index 8875c276f36..5219b147797 100644
+--- a/drivers/pinctrl/mediatek/pinctrl-mt7981.c
++++ b/drivers/pinctrl/mediatek/pinctrl-mt7981.c
+@@ -106,7 +106,7 @@ static const struct mtk_pin_field_calc mt7981_pin_ies_range[] = {
+ 
+ 	PIN_FIELD_BASE(9, 9, 5, 0x20, 0x10, 9, 1),
+ 	PIN_FIELD_BASE(10, 10, 5, 0x20, 0x10, 8, 1),
+-	PIN_FIELD_BASE(11, 11, 5, 0x40, 0x10, 10, 1),
++	PIN_FIELD_BASE(11, 11, 5, 0x20, 0x10, 10, 1),
+ 	PIN_FIELD_BASE(12, 12, 5, 0x20, 0x10, 7, 1),
+ 	PIN_FIELD_BASE(13, 13, 5, 0x20, 0x10, 11, 1),
+ 
+@@ -215,7 +215,7 @@ static const struct mtk_pin_field_calc mt7981_pin_smt_range[] = {
+ 	PIN_FIELD_BASE(41, 41, 7, 0x70, 0x10, 0, 1),
+ 	PIN_FIELD_BASE(42, 42, 7, 0x70, 0x10, 9, 1),
+ 	PIN_FIELD_BASE(43, 43, 7, 0x70, 0x10, 7, 1),
+-	PIN_FIELD_BASE(44, 44, 7, 0x30, 0x10, 8, 1),
++	PIN_FIELD_BASE(44, 44, 7, 0x70, 0x10, 8, 1),
+ 	PIN_FIELD_BASE(45, 45, 7, 0x70, 0x10, 3, 1),
+ 	PIN_FIELD_BASE(46, 46, 7, 0x70, 0x10, 4, 1),
+ 	PIN_FIELD_BASE(47, 47, 7, 0x70, 0x10, 5, 1),
+@@ -279,8 +279,8 @@ static const struct mtk_pin_field_calc mt7981_pin_drv_range[] = {
+ 
+ 	PIN_FIELD_BASE(2, 2, 5, 0x00, 0x10, 18, 3),
+ 
+-	PIN_FIELD_BASE(3, 3, 4, 0x00, 0x10, 18, 1),
+-	PIN_FIELD_BASE(4, 4, 4, 0x00, 0x10, 6, 1),
++	PIN_FIELD_BASE(3, 3, 4, 0x00, 0x10, 18, 3),
++	PIN_FIELD_BASE(4, 4, 4, 0x00, 0x10, 6, 3),
+ 	PIN_FIELD_BASE(5, 5, 4, 0x00, 0x10, 3, 3),
+ 	PIN_FIELD_BASE(6, 6, 4, 0x00, 0x10, 9, 3),
+ 	PIN_FIELD_BASE(7, 7, 4, 0x00, 0x10, 0, 3),
+@@ -288,9 +288,9 @@ static const struct mtk_pin_field_calc mt7981_pin_drv_range[] = {
+ 
+ 	PIN_FIELD_BASE(9, 9, 5, 0x00, 0x10, 27, 3),
+ 	PIN_FIELD_BASE(10, 10, 5, 0x00, 0x10, 24, 3),
+-	PIN_FIELD_BASE(11, 11, 5, 0x00, 0x10, 0, 3),
++	PIN_FIELD_BASE(11, 11, 5, 0x10, 0x10, 0, 3),
+ 	PIN_FIELD_BASE(12, 12, 5, 0x00, 0x10, 21, 3),
+-	PIN_FIELD_BASE(13, 13, 5, 0x00, 0x10, 3, 3),
++	PIN_FIELD_BASE(13, 13, 5, 0x10, 0x10, 3, 3),
+ 
+ 	PIN_FIELD_BASE(14, 14, 4, 0x00, 0x10, 27, 3),
+ 
+@@ -302,7 +302,7 @@ static const struct mtk_pin_field_calc mt7981_pin_drv_range[] = {
+ 	PIN_FIELD_BASE(20, 20, 2, 0x00, 0x10, 9, 3),
+ 	PIN_FIELD_BASE(21, 21, 2, 0x00, 0x10, 18, 3),
+ 	PIN_FIELD_BASE(22, 22, 2, 0x00, 0x10, 21, 3),
+-	PIN_FIELD_BASE(23, 23, 2, 0x00, 0x10, 0, 3),
++	PIN_FIELD_BASE(23, 23, 2, 0x10, 0x10, 0, 3),
+ 	PIN_FIELD_BASE(24, 24, 2, 0x00, 0x10, 27, 3),
+ 	PIN_FIELD_BASE(25, 25, 2, 0x00, 0x10, 24, 3),
+ 
+@@ -368,7 +368,7 @@ static const struct mtk_pin_field_calc mt7981_pin_pupd_range[] = {
+ 	PIN_FIELD_BASE(17, 17, 2, 0x30, 0x10, 5, 1),
+ 	PIN_FIELD_BASE(18, 18, 2, 0x30, 0x10, 4, 1),
+ 	PIN_FIELD_BASE(19, 19, 2, 0x30, 0x10, 2, 1),
+-	PIN_FIELD_BASE(20, 20, 2, 0x90, 0x10, 3, 1),
++	PIN_FIELD_BASE(20, 20, 2, 0x30, 0x10, 3, 1),
+ 	PIN_FIELD_BASE(21, 21, 2, 0x30, 0x10, 6, 1),
+ 	PIN_FIELD_BASE(22, 22, 2, 0x30, 0x10, 7, 1),
+ 	PIN_FIELD_BASE(23, 23, 2, 0x30, 0x10, 10, 1),
+-- 
+2.17.0
 
-Fair enough, in the future we might not even need since I plan to fix
-the 32 bit DMA issue.
-Ideally we want this to be the default.
-
-> Please can you add a
-> warning in the help text that this should only be used if all devices
-> can DMA to high memory?
->
-
-Sure
-
-> > diff --git a/common/board_f.c b/common/board_f.c
-> > @@ -353,8 +357,19 @@ static int setup_ram_config(void)
-> > +#if CONFIG_IS_ENABLED(RELOC_ADDR_TOP)
-> > +     for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-> > +             if (gd->ram_top <= gd->bi_dram[bank].start)
-> > +                     gd->ram_top = gd->bi_dram[bank].start +
-> > +                                     gd->bi_dram[bank].size;
-> > +             total_size += gd->bi_dram[bank].size;
-> > +     }
-> > +
-> > +     gd->ram_size = total_size;
-> > +#else
-> > +     gd->ram_top = gd->ram_base + get_effective_memsize();
-> > +     gd->ram_top = board_get_usable_ram_top(gd->mon_len);
-> > +#endif
->
-> The RELOC_ADDR_TOP path does not call board_get_usable_ram_top()
->
-> Some boards override this to keep ram_top below 4 GiB for DMA reasons
-> (see arch/arm/mach-tegra/board2.c). Bypassing it means those
-> constraints are silently ignored. Should board_get_usable_ram_top() be
-> called after the loop?
-
-I plan to fix the 32bit DMA. Calling board_get_usable_ram_top()
-basically behaves as if RELOC_ADDR_TOP was not selected. So I prefer
-leaving it as is. The commit message also hints about the fact that
-board_get_usable_ram_top() will be skipped. If it's unclear I'd rather
-tweak the Kconfig description.
-
-Thanks
-/Ilias
->
-> Regards,
-> Simon
