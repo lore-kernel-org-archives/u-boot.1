@@ -4,92 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 154E8F44868
-	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 13:56:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BA9CF459E0
+	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 14:45:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E42984120;
-	Fri, 10 Apr 2026 15:56:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 4772D8414B;
+	Fri, 10 Apr 2026 16:45:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="wLikssBQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FGjRxLff";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7FD38412A; Fri, 10 Apr 2026 15:56:14 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id 9356A8414B; Fri, 10 Apr 2026 16:45:05 +0200 (CEST)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 155D084105
- for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 15:56:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74F3A84154
+ for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 16:45:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-463f00cda04so1115303b6e.2
- for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 06:56:11 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-45f053b7b90so1210840b6e.0
+ for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 07:45:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1775829371; x=1776434171;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=D2FpkKssos63dFnnoIfaToyxcEvWFqBw+DW2EAd2bQY=;
- b=wLikssBQeW9xm5tkITCGflJKV0Qe10CKXHNoNkRQfgWnv+UXyBdNm0H0Fk+2wR/tIr
- YVacNexqnDJ8ln2BPPAl/vx+7rPEJwcLlHc+sEA+g9DGjS3znyIZ10tSuqkgcVywxX7/
- M6NkVmTnoIAvnPOjgkvz6xDI5MzlPx8WnjTJVO1Mz0qpfQ/AiYIcd6o/BHpsc8NPTsJg
- 64UazzZBioXc4ZeULxSNTKS6yBkg+sWvcWpgfx38Ch8ngIjxoxR98M311ZYWq8ujK3F5
- WTbvFVa76plzMQXk/sdvO8+/y4sg3hHCWQosyR5vMsD/zim7KxEU72pgZY8aQ4cmiwf4
- i1Yw==
+ d=konsulko.com; s=google; t=1775832300; x=1776437100; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=PXVYsMPy+7/2vlC/9evhJEzaeFlFB61pOWczpUjgibk=;
+ b=FGjRxLffL4s5jrhVGSs6+lTm4zFAKpgAR3/6qT9TZlDK5e7P90urvCcZdugF9Uf2B6
+ leFftQJzv5RwJutphPx2xCWKFTh2FnCtFZVla1Ky6U9OJ8f2OW4nBm4PkGNunL2fwP1A
+ R5dp2KJlWlDS6azWRkgNIXKX8Ege2WTE4m63Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775829371; x=1776434171;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=D2FpkKssos63dFnnoIfaToyxcEvWFqBw+DW2EAd2bQY=;
- b=HB++kJeJAulw05Ub6ty7JjAahJybE4riw04q9TOB0IudL6/GKZ/4wx8WM1h4gnQyvW
- 7qWQ6y59zTfLiHnw2CGTne9H0E2F3P9efFFeUVdcMgRvI0tYKoRsXUVWDMcx7prRdmMK
- 5hGY5SvJKJ88H0NBmkTfMW7pPhqnmOFj1J5971np+NT4sK6RQJq9dbCWMtMU11wNBFQk
- Pbq/YHLOhnMyM2G9LCyfhPoirDTYFG2GDDh1Pardn9pYlHCB6AYBLKZceQT/Q+8om/Ku
- WWBFkgedbzL8c2dPOCT3DFcSxSpbNpmWAGzwayoJsEEsxk7/AP/gKLBK7KYTQRY7dcu/
- idNw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUjyfujcMRJ0xbVUcTPAGfPy3edoKyj9BEsyx/aUaI4Gg8zz70xuquOSA7Pe0hMzfvRrPC9AlQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yys3DtLeGtevc6qzAkwH1vCGM2Kkmbv90/BdDEikSwwsgU+SXpN
- ew1PseHYl/Lrw0KtqAru9JV3TNA4xQsmy7TKvCKLYTwLQ1tSgFlFMKKrx1f9MLQZ0I8=
-X-Gm-Gg: AeBDiesRsglSZ3SGCqVd5OF0RWUJRyzbfd+57cLqEbwqLZfFZo6HPskLE9yglmtfysq
- uWE8VrixQbnFWg6qWCQaf0KSRNMCkp/2t2s/sufKcbjiI4oZ6oYhxZZsyCnjx9FBropa8qoWl3+
- EB5lIilhOFMlE7O8CL0Ax4+MA/MUOrAUJBfCSm8k7/gtHBKo2OHh3Woq2HvGkRx429lA1+tHyNB
- XnzPhEkHOb4pjAZ5OGB5oTk0tRQUS9pgxVKsk+jF3oyDL0kcCI3FWOuDlGsIB10YyE09Pxi1vil
- vASahpXhunEYUcreNIPLzBTmm3DH0dFjavjilN0hOgRPWtQPOAj1bWn2z3X8WdWcjqey5SNYlAH
- YixRxNoIkaK3tpRPsDhUUliJmuLnpTQkSuF0+gCwkAqkQJOg0wA0cyQqLMoCnJaSDGjIMaEz1Ow
- JlQG4SH/VE9q12nogg8qrjF/XFbU9NHClPWjDEUpsI+wgVlVbLfYI/pjCKynfgX+xmaHvWKgcgC
- ygDXjr49gZ0
-X-Received: by 2002:a05:6808:6788:b0:467:155f:8c34 with SMTP id
- 5614622812f47-4789f902cfcmr1576778b6e.48.1775829370688; 
- Fri, 10 Apr 2026 06:56:10 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:b75d:2440:dc10:808b?
- ([2600:8803:e7e4:500:b75d:2440:dc10:808b])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-423ddb26220sm2260899fac.9.2026.04.10.06.56.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 Apr 2026 06:56:09 -0700 (PDT)
-Message-ID: <10992c90-1065-425d-8967-ee5cb8433ae0@baylibre.com>
-Date: Fri, 10 Apr 2026 08:56:09 -0500
+ d=1e100.net; s=20251104; t=1775832300; x=1776437100;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=PXVYsMPy+7/2vlC/9evhJEzaeFlFB61pOWczpUjgibk=;
+ b=eUH3cUaEfls7jj6wpgF3+Gl/C8TL9Cvh6cdJJfsbkkW2hjwRu/PvmXwfP9RWoCQbly
+ q+u0RqvwSKrNx+KVeMl+GiS3+iV3zZGTkXA5+gi+pZs8wMEu3rsnlEue2Aeuqc37AbXX
+ 5zOm6K2QVyuhlWb5Jl8wbrYA5DWatwPljhxpDwALvjkPcsP34oHcD6xz4t0Qb15ICR7o
+ oGqc1z00qIgSFbF4qZVPjjL/BFtrwsxyWnUueQ8pW8OLmqOX80nS+XCOxWz2ZnoMZTYU
+ AEiXbFhJum16c7wHirZRPzyT52cMX9FCb9l81kJp7x8C3kF0/umxsx7Ccx6+qYggEJkt
+ +aMQ==
+X-Gm-Message-State: AOJu0YzvJXThMCMP760cJhk/EHRGgb4TIXgB4d5huzr+9bcrI6UzAX6+
+ ShRKZvKV5BuetSW1aTGaEMOwn0znQAsGb/otdIVhMirkoCq53Ql0FwvHROhrUKwKm1s=
+X-Gm-Gg: AeBDiesleNJKzLJBb1x7OaigMNZIN5b3saBpQc+9gVWDX+MoJU7KgLw1kFAb7X71H/b
+ 5se2guYv0SEmQ9HrR7agiqFR3L/EqIqBnRpnq+TmwvW8c5UhcpQGg5bougaOzYxEM6UWdID0wHl
+ 1cAtWHyYARV1c9hFMrTVICtWFiZqA+nQTDiSxVNEzFj5QRwsv/iVowG8Hm3k5O4DEq7GrJ2imw0
+ iSe4WRuiNi9nTqEfYJoXjxZkMo4XGEYiyBSXLCjmzScGTN6o/CRIEVX7lDt5YdOX8LHS+xkfGoQ
+ AW9std3pkQ9LbWkGY4DiH+Oio4lnv9eSdRk5z7EVORuak/7xluxmY3v9XQrR1X4FcdLLYT2W6cq
+ tSuiMKXLlgM0bUb9Y6cnCUI5mVBX2vW0fwCWwZhxmxx39APO0pSGAYbcpLeYCnraxSsio61uktq
+ fmAQ1svf/6Ho5oOT6B+/jeYPRCtlR2wDM1tga9f9pkcyCeJrdCGEie88aWcqR/3PPQOV6FXQG6G
+ 1HI0UtbFH1wBiZx69qw/pGFN+BFOH7rNwr7qdKcflLYOs/TB6U=
+X-Received: by 2002:a05:6820:1749:b0:685:c62e:f8a8 with SMTP id
+ 006d021491bc7-68be6331a56mr1691962eaf.17.1775832300125; 
+ Fri, 10 Apr 2026 07:45:00 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-68bc88c80a7sm1456150eaf.8.2026.04.10.07.44.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 10 Apr 2026 07:44:59 -0700 (PDT)
+Date: Fri, 10 Apr 2026 08:44:57 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Weijie Gao <weijie.gao@mediatek.com>
+Cc: u-boot@lists.denx.de,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+Subject: Re: [PATCH] common: spl: spl_nand: make CONFIG_SYS_NAND_U_BOOT_OFFS
+ optional in spl_nand_get_uboot_raw_page()
+Message-ID: <20260410144457.GU41863@bill-the-cat>
+References: <20260410084933.103186-1-weijie.gao@mediatek.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mtd: spi-nor-ids: add flags for mx25u12835f
-To: Takahiro.Kuwano@infineon.com, vigneshr@ti.com, trini@konsulko.com
-Cc: jstephan@baylibre.com, u-boot@lists.denx.de
-References: <20260403-spi-nor-mx25u12835f-v1-1-c9ffdae25d8d@baylibre.com>
- <683be5a32ef345229d54a68ea67fe64c@infineon.com>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <683be5a32ef345229d54a68ea67fe64c@infineon.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="oqC9o2ZsQFYt9Af8"
+Content-Disposition: inline
+In-Reply-To: <20260410084933.103186-1-weijie.gao@mediatek.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,67 +98,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/10/26 3:42 AM, Takahiro.Kuwano@infineon.com wrote:
-> Hi,
-> 
->>
->> Add some capability flags for mx25u12835f.
->>
->> In particular, we are interested in using the lock feature. According to
->> the datasheet, dual/quad read is also supported.
->>
->> Signed-off-by: David Lechner <dlechner@baylibre.com>
->> ---
->>  drivers/mtd/spi/spi-nor-ids.c | 3 ++-
->>  1 file changed, 2 insertions(+), 1 deletion(-)
->>
->> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
->> index e7fea375706..4930fa84685 100644
->> --- a/drivers/mtd/spi/spi-nor-ids.c
->> +++ b/drivers/mtd/spi/spi-nor-ids.c
->> @@ -272,7 +272,8 @@ const struct flash_info spi_nor_ids[] = {
->>         { INFO("mx25u3235f",  0xc22536, 0, 4 * 1024,  1024, SECT_4K) },
->>         { INFO("mx25u6435f",  0xc22537, 0, 64 * 1024, 128, SECT_4K) },
->>         { INFO("mx25l12805d", 0xc22018, 0, 64 * 1024, 256, SECT_4K) },
->> -       { INFO("mx25u12835f", 0xc22538, 0, 64 * 1024, 256, SECT_4K) },
->> +       { INFO("mx25u12835f", 0xc22538, 0, 64 * 1024, 256, SECT_4K |
->> +              SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-> 
-> Did you test with controller that supports quad ops?
 
-No, the controller I have is only dual so I can't test quad.
+--oqC9o2ZsQFYt9Af8
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Should we just drop the SPI_NOR_QUAD_READ flag for now?
+On Fri, Apr 10, 2026 at 04:49:33PM +0800, Weijie Gao wrote:
 
-> 
-> In spi-nor-core.c: spi_nor_init_params():
-> ...
-> 	if (info->flags & SPI_NOR_QUAD_READ) {
-> 		params->hwcaps.mask |= SNOR_HWCAPS_PP_1_1_4;
-> 		spi_nor_set_pp_settings(&params->page_programs[SNOR_CMD_PP_1_1_4],
-> 					SPINOR_OP_PP_1_1_4, SNOR_PROTO_1_1_4);
-> 	}
-> ...
-> SPINOR_OP_PP_1_1_4 (0x32) is set as candidate of page program opcode, but
-> according to mx25u12835f datasheet, that opcode is not supported.
-> 
-> This is a problem in core side and we need to fix it.
-> In Linux, a dedicated flag named SPI_NOR_QUAD_PP is checked.
-> https://lore.kernel.org/all/20220920184808.44876-2-sudip.mukherjee@sifive.com/
-> 
-> Thanks,
-> Takahiro
-> 
->>         { INFO("mx25u51245g", 0xc2253a, 0, 64 * 1024, 1024, SECT_4K |
->>                SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
->>         { INFO("mx25l12855e", 0xc22618, 0, 64 * 1024, 256, 0) },
->>
->> ---
->> base-commit: 1c1bfb1cf34bbb2a5717eb6995c55093279f9341
->> change-id: 20260403-spi-nor-mx25u12835f-f7328a631436
->>
->> Best regards,
->> --
->> David Lechner <dlechner@baylibre.com>
-> 
+> As spl_nand_get_uboot_raw_page() is a weak function, when a board wants to
+> override it, the CONFIG_SYS_NAND_U_BOOT_OFFS becomes meaningless within
+> this function.
+>=20
+> This patch allows spl_nand_get_uboot_raw_page() being compiled without
+> CONFIG_SYS_NAND_U_BOOT_OFFS being defined.
+>=20
+> Note: this is available only when both CONFIG_SPL_NAND_RAW_ONLY and
+> CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND are not defined.
+>=20
+> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+> ---
+>  common/spl/spl_nand.c | 4 ++++
+>  1 file changed, 4 insertions(+)
 
+I think the bug here is that when SYS_NAND_U_BOOT_LOCATIONS isn't
+defined, we should still be able to override spl_nand_get_uboot_raw_page
+(with an implementation that does not use CONFIG_SYS_NAND_U_BOOT_OFFS).
+Can you please re-examine the code with that in mind? Thanks!
+
+--=20
+Tom
+
+--oqC9o2ZsQFYt9Af8
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCadkM5gAKCRAr4qD1Cr/k
+Ch2MAQDgfvGl4qcbtNaotGaaNSfvxpLr8YbeN1qjPgdTzd/bfQD+KsSpleiyw1fK
+4VYKOKLTatJqdKBGCCpDDz7PUAuHYAg=
+=g11a
+-----END PGP SIGNATURE-----
+
+--oqC9o2ZsQFYt9Af8--
