@@ -4,102 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C944F36BA9
-	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 05:12:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C501F36BA9
+	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 05:13:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28D0684105;
-	Fri, 10 Apr 2026 07:12:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 796A384105;
+	Fri, 10 Apr 2026 07:13:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Tvx0vdmi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="A9pvJfcG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4516684106; Fri, 10 Apr 2026 07:12:21 +0200 (CEST)
-Received: from mail-yx1-xb12c.google.com (mail-yx1-xb12c.google.com
- [IPv6:2607:f8b0:4864:20::b12c])
+ id 999F884105; Fri, 10 Apr 2026 07:13:44 +0200 (CEST)
+Received: from mail-yx1-xb12b.google.com (mail-yx1-xb12b.google.com
+ [IPv6:2607:f8b0:4864:20::b12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6E6083D8A
- for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 07:12:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D84D083D8A
+ for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 07:13:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12c.google.com with SMTP id
- 956f58d0204a3-650775f427eso1691689d50.2
- for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 22:12:18 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775797937; cv=none;
+Received: by mail-yx1-xb12b.google.com with SMTP id
+ 956f58d0204a3-6505ef94043so1691667d50.2
+ for <u-boot@lists.denx.de>; Thu, 09 Apr 2026 22:13:40 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775798020; cv=none;
  d=google.com; s=arc-20240605;
- b=OmhY6cNzqzeKEsYFx1UQwYtjK8xTMUe5KGU+mohLhUn9AtGPan0OotbbrJ/KvlrX/Y
- FEIH3S9ej6Why13CPh1NljQ7pvlER3MShOdx73LZt4GvqccThTDhUQqRzfuN550fRvUT
- xWQMnB7UzBMt1Hs8wTppm+fRsuJp8XJIEENdlfD6oQ9BNEZctxqDw5KOAdkAqxMr0ymg
- oUO8pQYn9ym0PpRMF6b80IW2gq2xNDMdHAktIAGhXo/4I0/JGw45BKOdiRWAeE+P3ssk
- aGoKBZ39LFiN2USE4nO1mkPzYey2EVH3AiuOo4VGiM+0DxMi0kDj+x9/U9cOW4z53c3p
- 1L+w==
+ b=BioMjDESLO58b007iDj+poyddnE7XvObOeXegurY2YZ1yjI33292arfLrzmhucmPMb
+ 90Gj5GHNmg0OMjl4oOjCc3Ex020Y7q+w1ejTi8hUKRAPooPPpMffLEw9805Euf7Oc6oQ
+ gZj/+tCF+ehY0u2q1tV+Lv1ZDwbCzsa52alTWj2wQdPkkmadxAPz3u3dbdbjrAxU6zF1
+ 1YiOVJ5wjRAlTFWQViG9CJ9nowSPAxJT5Fb+1KY2epaeS3gfUViU2mK3yEPO4p7z6tVm
+ Zj9jT5oT3t4CVDDlRODC1r4d731ga17NNelWJVz5T6AqUkWhuGpM9mYCqcYduP0UeCHp
+ geyg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=TJ+pxyCpjhzwu+Z1Yy03esl/9YuZgeAeLS1lO32O6qk=;
- fh=Rdyxsq4dA/1AqvRcDq+Wwo8DHI5uPB9wDtKBoDJ9ZFI=;
- b=A/4EbakpkgqHoF3CnRHYwZHRlHpfS0HR96RP/kKsZ91kRt6eyo0AmRQoWXE1JLhJNN
- 8T9J00xXDJxg9slfGCcmZKsn9rhAHrKD3/mv1v2QnKV7F+rLfhSDTujISGjUeUau0pfu
- ow0m+im/yhraaWt+n8WW38vSLF5KPZusZFlhECeTMHumJ7zZoABXNtR/JWr/EilEfIR4
- n45UzCh9loKaFiSGKjjVwG2W79TpM7MGsUYdmlHQS4utNfkrN9QyhIxzG/P0sudDFby1
- P0m5ZB21qDcSJ5sVjzq17p/X1dqMZKRPM3jAd0TWxDD50YV+IAcH/bnaBGF0oKMA1Vy+
- jSTw==; darn=lists.denx.de
+ bh=vH7J3QwozM/VjHc2ID4tsJTcxkRyxVWWFgiH5s8nVTo=;
+ fh=cQykP3aQj2paMjG6xR0nftR2rw/eVsa7v00Iwnjjxyk=;
+ b=PHx1VDBNEkkNf3PuYGgHwdeaOR/0asMlqgx+M3gpReKgv0RkQRVZeohoOLaXIDaMEg
+ 7s5oyQVhdk/FfAffhyp8wmdeiZonmu1YrRmJwiYBJIX9dxUj50YZl9Ji23z9CzNMp3zK
+ Hm1Q/bL8RI/l7nVW+laql5Q3gRUG5AeythwlOnlu0xZgS+plJ5uuNN9yBRljdHqZE5Br
+ GZFOQSk3EEahq8ultXUlmzOS+NW/THrEkwQXRpIRi0Z/IymT+vy1/o0jrmB+tD7yeE4g
+ 2Y0FSFmTEmScIVTf7zbKILJ+f1ySQBeSbeINEOACyuoJuTXlF3luL1CkzaGcmPmA3djC
+ QESw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1775797937; x=1776402737; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1775798020; x=1776402820; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TJ+pxyCpjhzwu+Z1Yy03esl/9YuZgeAeLS1lO32O6qk=;
- b=Tvx0vdmiTKUsZxd7eCKqWYCh6W9djkS5vlZUkIwgCSawuYglLqUJtZJc9sIm7ACPd4
- i8hFeQkrYzGDPzuSnSMvsWRTPrW67s/YL4dJ0L3eJYxgm7q5zm0NVQISnDAd3Ae+UfcU
- 5JBH0RpEzV8vBd/O7v+qOFO+wcvpDa34Toes/Nc19+HRXydnLte9cMDzvbmTLQxgcSLE
- d80J71bMn/mUDorUZ08oNszc+n2b+95tAZ5xT85iAQe3WmyVP9/ZyTdZj0xdUs5iReYq
- 4LMIvL9g6IR3kdHB49qbkv6hHN9O11MsbrQQs9KrxF9tyXYSCB0Cj+g/LT7ZslvQUv2K
- avag==
+ bh=vH7J3QwozM/VjHc2ID4tsJTcxkRyxVWWFgiH5s8nVTo=;
+ b=A9pvJfcGJT/7uHKSo8XRYsgvypbkCd6HHqEGbX5V8G497830ulfuPWVGA/sw9KwVk2
+ edYcK1siRtOkhoSBpcD+92d/8eCu5bUFu1o5QOE77GJ/Iu5dAkRhn82f9rzwiwI4Rjxy
+ nB5KsEiM5csVoCSMgBuUszlJ+KP3+hP4cx0PVwpTbkJnNa7rgLXFGMcSb4xT8LDH7Ea6
+ OJv4CVgB0KXY5ePdOGdgPKnC4Qw1OsbIF4u3nmtN8mWVZROz9cWEPuB1qB4SKx4QFSEk
+ QzsLZTOQ0P7zCZzx5GYx0WDY2asTO/BYjSNwVhHtp3z7NoPOr2bebI4jBd4cn4GcSvoh
+ QQ0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775797937; x=1776402737;
+ d=1e100.net; s=20251104; t=1775798020; x=1776402820;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TJ+pxyCpjhzwu+Z1Yy03esl/9YuZgeAeLS1lO32O6qk=;
- b=Zo+zs2iKiZYdnR3PthIn06Q9mOkiAWwuTz74SfgCEFQmZzvehQ7HlL/cpuDMQAB7Px
- w0l6Z4idLMqHfwYLBj0vvwqAtfUsyyqY7WcDw364zPdTUfk7ZYxJckwnVAiBS5iFqvbg
- MjfW+TeE9RF4LKsNzmadYkCoZ9sBmjKJZbS1JoRqQy3toAP0rf050K1xMBTXNigwd1MU
- Oh4ca0R81OSgHG2F7pPLSheCqJTv0GiA0ypZ16IfBYLqWSsFAD5TOaxSG/cNc1QDrZ7P
- FXbsdIVQ8BBeFMDDvLF4wEYm5NZG5VGGZulEqR2lCoCyLibNfDZ140Nyob4MLvNFlQRv
- rYWw==
+ bh=vH7J3QwozM/VjHc2ID4tsJTcxkRyxVWWFgiH5s8nVTo=;
+ b=XeCQ8wcFu60AHuvTKAoh1A69i9yhhxhi3HUihGxGbNg+fjbIdRcBhXhKGvuaTdzDtv
+ qAz74VXw4zGYvYjGWnGbcWaIae6KdXbhQRsGfecdIn8Nuggiy7Sv5IRz9IbyBtGA9/8K
+ aFXlM8jFUq4BaIMwq/gl44j6/Hx0txg9KLWKR2QwksVHEagZ15ADhZZTseiYrPLWFXOs
+ IFcYMhNZDhCmmNcnjKDY0/OTyx8zxkW8aVdhc0tn3xeSKQOzyA5Wu3xUTa2XMseJehdT
+ RJYYucm71N+jT543haajm1aJkrR2qvF4Cu8U2JHaoehulDT1f/ZDmWSvsYZS+/XJLYzS
+ CKYg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVB8bVIusY7BIfBxr7kMz4vfsXRGxUJjCqJaOfKpwZ8n8Rn0jlK5GPuPROSNGZLJwhVUeqXvAo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxp4dMKBaGLmJ1B7HRX6LsTXSlXhjPLHWBCBk3+ayMuqWaLZH9Y
- JUBT5gozr+cVdXMvhuHy0dOK7r2LuNeTkZQyldEU+D3p5NkPKYBx4y5+xRocebkcxYOrlRwL89V
- UmUAjnCyWU30LovB3T//FSP/44HPab5uJS88VpmEmYw==
-X-Gm-Gg: AeBDiesUG5iBApYDChjW6Xs3P1IKIc2z+S5HnhyvHJ+nlcP1XMXz8baI1liea9pWLTn
- 1MUKssPvu6m9/EugquRC0h99BQ1pzO0ypE9fSOmREJ6qEBGCdPKhh33yxRK4uQQY2spsFuE86q+
- YcX7ANc9VEbR7NAQZO9skZfmuYuj/e7BeH+wV5UZgnSbqrXlV9cDkkpBdB235cgPmIi9yxO+Dtk
- w4bgrFl9t4zdBSrg1hvOoehIptVqXjp9v8LwjJduLBUXnSlw8LlJzHblS7JtRDT96anbz2M3rJM
- 35Ev0z/LuS0cid5er9dYJN2+4FgFiAQoPQnGnSGQETZ0Dq7PNx4R6RZeiwnq+5mYdvdXP0JAgOS
- O5JizrNEwZzsl20L5j/7EN2bELw97M6SljAWM1PVy3oFTcGp04q3j1BMOS4ed9FtJGUIcfE5Twt
- JlX4931QuyFBKzq52O60Uvdz+gvaQeKEaLjMbYWnuKb10W4Bs7ESfhRSoQ+4llVIq8KWCfi3Jyv
- eoLHPspiTltPEpEisznXMTpz7iGHK0+77ZG/H7RhnTSMFNElnKj70M04eWE1D5V5HpOfH2J+jQA
- mSLYS9phWp6l3RzbQJEiyr3KrykW4hnVH2UF/vfDbTk=
-X-Received: by 2002:a05:690e:4801:b0:650:78be:7ae with SMTP id
- 956f58d0204a3-6519885e62cmr1299285d50.0.1775797937570; Thu, 09 Apr 2026
- 22:12:17 -0700 (PDT)
+ AJvYcCVD2fByPFZTwADfRQ5plRbAHYXOIe4cnku+slReHqJ40Kshun+suZupSSGIRt3Nfs2QWqzn9ps=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxn8pKYqauj7fL3BkrIGMpU2669zFizlz70X3V5D2Kfx60hbjZS
+ V0UgMuHXk1auBCswTE03fIJsG95Vm+179eT9R/RIo1u89DN4OJaj9O28miTxrrQg5qKQG0kUTln
+ VAABKNHjwrCpR7Q4uWKKcMB/khNivK49FfRifUecIrQ==
+X-Gm-Gg: AeBDievSt8i3TR7NwluyzlExh1yuMzYuT+R16iq7YYl0O9lo+ilTjraFwD9NFaJ25qJ
+ vP8fGtekysai6o4QDmC7Dy9lNIfXgvY9IqOcCQZt74wWl6hmvMHenFp7Ax9FV16aexFz1gWzuDb
+ zLCE9u22PfAx6HA6vCnXXkb9lEawyCBG22CkvuqZnc9ooNyGcmqrBQPU1+XfJmmihko18zie332
+ nTD1ZxU3tqowLt85Tv3ynFFIpFzu/T/XJu8c0RHTZbt4vwfr6sfuOS1wN5YFfAD5T4WBn/th+Fh
+ xaIDHTshSU+nkplD24dCZ8ILo794uPbpIhniMs8MTA29bIw+0FwMsLI6ClLnDOo7VEva6hU25ub
+ 5AiBqXaiNmxJorqjFA8zfLgO3DlaVjSdRLME17M/eWTPSccqgxINcF0pqSmhmC5a7w0TYYvRNAB
+ Qu6vAxPEAKlfF863Qn6IcR2x2Bjqle9pzSbYakwzEYpidUlYhb5ntntGF+2WdBQfsCMNbJdbEAL
+ ZRLL5ULbqv5jCq48TRmVFMhz+3AULUocLEloEpM2BRZkSOlhunDxF/uVN/b3Qf6XYc8UWRKVv3F
+ Xnii6suT9Y2YXcyUHNEDfBvjyrv+xFVW5C7ZFvdi3v0=
+X-Received: by 2002:a05:690e:d04:b0:650:dbd:6f83 with SMTP id
+ 956f58d0204a3-65198b7bb83mr1632472d50.48.1775798019687; Thu, 09 Apr 2026
+ 22:13:39 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260403090109.3564638-1-ilias.apalodimas@linaro.org>
- <20260403090109.3564638-2-ilias.apalodimas@linaro.org>
- <177547797999.70791.8632199569441183064.b4-review@b4>
-In-Reply-To: <177547797999.70791.8632199569441183064.b4-review@b4>
+ <177547797994.70791.1169538213395415434.b4-review@b4>
+In-Reply-To: <177547797994.70791.1169538213395415434.b4-review@b4>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 10 Apr 2026 08:11:41 +0300
-X-Gm-Features: AQROBzAjIY1veupXtPKJ0IeQpUuvkl1-skIQClPJgPBMhBA29QWJl6QP99m3om4
-Message-ID: <CAC_iWj+Voi98T2VpF+S5tsHf+v-y3=Wdgc_gAeGCGVZ-+POftw@mail.gmail.com>
-Subject: Re: [PATCH v1 1/4] treewide: move bi_dram[] from bd to gd
+Date: Fri, 10 Apr 2026 08:13:03 +0300
+X-Gm-Features: AQROBzAoEzG8R5VnxY7yTgEvT8ZeLzKaGq3OJpi_noS-_1oa-AnbpH0C-TMJyNI
+Message-ID: <CAC_iWj+3R3TZxTydPmG8gY_sY_=cFd6=7kBFgnZ3KYj7nkz8uQ@mail.gmail.com>
+Subject: Re: [PATCH v1 0/4] Relocate U-Boot in the last bank
 To: Anshul Dalal <anshuld@ti.com>
 Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, 
  sjg@chromium.org, u-boot@lists.denx.de
@@ -120,49 +119,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks a lot Anshul
-
 On Mon, 6 Apr 2026 at 15:19, Anshul Dalal <anshuld@ti.com> wrote:
 >
-> On Fri, 03 Apr 2026 12:01:03 +0300, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
+> On Fri, 03 Apr 2026 12:01:02 +0300, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
 > > [...]
-> > Additionally, U-Boot defaults to relocating to the top of the first memory
-> > bank. While boards currently use custom functions to override this
-> > behavior, having the DRAM bank information available earlier in gd makes
-> > relocating to a different bank trivial and standardizes the process.
+> > Patch #1 - The boilerplate code that moves bi_dram from bd to gd
+> > Patch #2 - Moves the ram_base calculation in its own initcall
+> > Patch #3 - Cleans up and prepares setup_dest_addr()
+> > Patch #4 - Adds the Kconfig option and code to allow us to relocate in top
+> >            memory banks
 > >
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 >
-> Two files below still refer to 'bd->bi_dram' after your patch, rest looks good
-> to me.
->
->         --- a/arch/arm/lib/cache-cp15.c
->         +++ b/arch/arm/lib/cache-cp15.c
->         @@ -96,7 +96,7 @@ __weak void dram_bank_mmu_setup(int bank)
->          {
->                 int     i;
->
->         -       /* bd->bi_dram is available only after relocation */
->         +       /* gd->bi_dram is available only after relocation */
->                 if ((gd->flags & GD_FLG_RELOC) == 0)
->                         return;
->
->         --- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
->         +++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
->         @@ -66,7 +66,7 @@ void dram_bank_mmu_setup(int bank)
->                         size = ALIGN(STM32_SYSRAM_SIZE, MMU_SECTION_SIZE);
->          #endif
->                 } else if (gd->flags & GD_FLG_RELOC) {
->         -               /* bd->bi_dram is available only after relocation */
->         +               /* gd->bi_dram is available only after relocation */
->                         start = gd->bi_dram[bank].start;
->                         size =  gd->bi_dram[bank].size;
->                         use_lmb = true;
+> Please rebase on next for next revision, for now I have tested on top of
+> 075bd023c77f (master) on TI AM62p and AM62a EVM, below are the relocation
+> addresses:
 
-Ah thanks, I'll amend the comments on v2
+Will do
 
 >
-> Reviewed-by: Anshul Dalal <anshuld@ti.com>
+>          Memory Banks                      |  Before  | After
+> AM62a 1: 0x80000000  - 0x100000000 (2GiB)  | fff14000 | 8fff14000
+>       2: 0x880000000 - 0x900000000 (2GiB)
+> AM62p 1: 0x80000000  - 0x100000000 (2GiB)  | ffe9c000 | 9ffe9c000
+>       2: 0x880000000 - 0xa00000000 (6GiB)
+>
+> Tested-by: Anshul Dalal <anshuld@ti.com>
+
+Thanks!
+
 >
 > --
 > Anshul Dalal <anshuld@ti.com>
