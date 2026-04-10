@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24BE7F4485A
-	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 13:34:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D01C1F44863
+	for <u-boot@archiver.kernel.org>; Fri, 10 Apr 2026 13:34:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34ED084222;
+	by phobos.denx.de (Postfix) with ESMTP id 6BB4C84230;
 	Fri, 10 Apr 2026 15:33:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="v2l1KL3w";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="k6DnpMFn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADBA284099; Fri, 10 Apr 2026 15:33:05 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id DCE578419E; Fri, 10 Apr 2026 15:33:07 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C39898421E
- for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 15:33:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 12CA584222
+ for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 15:33:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-43d01d6b50cso2043213f8f.1
- for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 06:33:03 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-488c21c636dso12037845e9.2
+ for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 06:33:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1775827983; x=1776432783;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1775827984; x=1776432784;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=EuONaSG+lMLRa2oA554ImlJ2y/z/OKdI28p9VCThWDY=;
- b=v2l1KL3wlBv+7nsp/KaFUtK8obfn2q003cXYzwNUTqjQRn+AKoXQNtg73BkuX7h3E/
- YW15XRzphj51NH9As/WAHCFjImUvnDa5TnwAcah0PpKqXTiA61FEyBzgZfgv047XhM+4
- k3IiUUjeO82YGf1nrmuywHpefLehtMO3qa5IYs2ftcaaslBzcMaxlz9VmMrEb+da125W
- 8fPP6dUEFmo+KiItjzq4XZgzJxLoCi2tdvMFwxTtfHLCu3e7vRqQOjogcahnKTnWl+pG
- 9VFWqfbUJ6j91Kxon1hQnpTRq4y/R45KB6kthOUUnhCYYTrv52xsGIgMUfkjEWEeAYfE
- 4j9A==
+ :reply-to; bh=BtufZEB5n/cUkjJwG+H52mksqhnEpO9+iUbfse9d39M=;
+ b=k6DnpMFn5bGN3QdcoJYL3e/IPto8/fqnP+xZ8qbPu+agGnpy/LXk5zPUtZOve5l/RF
+ YdUmPl3WfnQ7wI8vqdW6VYbuIQi49f7EFDVvftTLxxEUVuTBCmoMN4Z6GSRyDfTzKywz
+ AY00zT2yTc8cscxy05C8ai94kY7C29aWZkcPaq9OtNmelTDS5DzTig45SjPUwNwR9Wxq
+ MEyYHjn7SlPU05YCVneVr3nr3KBeUrUib8GQENRgQUHGURFijSMomn2uOCaZJYocVjRx
+ TxiDciUZNRrA5ht0B6J4ZA+tIX2IjK67UpfuXA+zXp/vFHyzkR+fYFXc0cfwq95O0f8o
+ qIJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775827983; x=1776432783;
+ d=1e100.net; s=20251104; t=1775827984; x=1776432784;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=EuONaSG+lMLRa2oA554ImlJ2y/z/OKdI28p9VCThWDY=;
- b=JOqqSHNW/fRDuhrkP/sDdD5KYduZBmWYXEkZGRbC4jr2Festt++8Mi2BfMjZYG2y56
- NVJzrFe7RLgfXkMLn5VBExNZW1QUm+vIs4howU6+Dbj6kHzyBkFqu5wBdviZ6VzxYEG2
- lS0ZU1mmFBjYuYKh/E0dHqbaYhnTE3dOrq5kVBb2k0wCh2DkWlv7VTqgiYf53lP6TzrJ
- RF5lsZJhNB+dgBwNKqov1EJxVD9KjeOjxyoc6CtdbBcrt6lSN1/omciRziJWXnelRrv5
- BT5fs2dHNUW1Ae2DZy4o6Njmei0mifuQbkSgyRe5h/COIyAgPikiLyA/xvgImX8mZhaA
- ZGaQ==
-X-Gm-Message-State: AOJu0Yy1B2hu0f6fRMNXPhVP8W2lM0JSBy607GxGexM5sPYc58k5Rkwz
- S3o8TIEfP5J0Cj5ZE9GiRLvMfueJyY6R0JVwZE/jE9dX4CkQEUc2KiTN2fNoX7Nklio=
-X-Gm-Gg: AeBDievdQLSJgVLVEsatS1sQnJPW/sRgPYzQBN+480FfAstiBu5sqmRYkdNduEcbuXZ
- UqfCHO+nuz77e16UOyNHQ/gD0EayV5Wf2AbAEvYtgUbswsmmjPfiRQodVkw7eUEZKcotP+ACohh
- tmjdaEN7OWRiV4AqT310M0cJt9/TUZ1sY2G25s3UnLPLeeSVPpoSyuwYPizuR+SmCnZvzYE7698
- D5VXGkBp18HDTpDNL41W9QnYj+0dJT4kVPVoTYS/FQ/Jk3dPB3O9k70KpOOzIQr2AftRpDJZ/sC
- 0ZvYnV351qd8/JVPm/7B/XIqQG0w+ket6KTNQvqGrkCQjk3+WKeF1cFQKkEfwmn8XOe9BJMIq0/
- A8hVXM5zdXaRYKAkVhNJPXqO6icgvWgNSHW//xv276uymd3Exbx8ZlZzmwfHtKRCWPC8zq6Xic+
- /Cdtz5C4c9UY9ZKhjmBNal
-X-Received: by 2002:a05:6000:178e:b0:43c:fa96:d921 with SMTP id
- ffacd0b85a97d-43d6429b694mr4824391f8f.15.1775827981758; 
- Fri, 10 Apr 2026 06:33:01 -0700 (PDT)
+ bh=BtufZEB5n/cUkjJwG+H52mksqhnEpO9+iUbfse9d39M=;
+ b=TFkwhOjyJ/DaliygcZqUffxVzfJLt2Js2fzmPwqKsWHeeDGJpvk/GBFAPujBToALKV
+ cOtUuDpg+a/31pikDaRgjdqq9uWgjqM9mf/ZhafDLicC46w0z6jivjUYZYsMMYebCPjO
+ YA8pkcKadfQxHSbbsm2vWj6B6DPlpGzC0O1UkPbQos4gL7oWbSNm9ULs3oqrE+y80sac
+ QdwD7S9PlFnjwrFgY77XyoIIuKRN9pL2B51zk36xhXvYynN9m+oS9MKUJVDwFmTwOnjF
+ 4iaXND67VPouRICYdgS9nbeLQNPnGTxrcmCZPeiY3m1qYJ1WeVSIaP3m8dB1IcOmbOcX
+ SJ5w==
+X-Gm-Message-State: AOJu0YxAvoqaXnM/5d/lv1YM9Oe5kR08a0DnwbcbMId90j6dXK0PkcxV
+ OUPDEhAref9/JzMQb2zY52mG8ITW4r3ALcWJy3wYtm3EcaBB7NuiSZBlXe/tKk0vJkk=
+X-Gm-Gg: AeBDieuvSJOvGKdltL+0Ci9neYJKEHSYKxS5G/uoqIOOYNJ0XRetQpi4aU2iPF3FTQD
+ cvDl8EsqpM/e1TFaqwObPMjbVJu8DZd2hg8DCoV8Ob5xk8ikSlqbJZPoXxz/V3afKeH3Dh1IWu9
+ LYrz31t3ihJh4hKt+SoqcXdkZ1lgUbEGLIIbjeCmdWvBfjk0QJIhTSks8zA09p04DTVAVC5VrzV
+ ObGGdd1huH+UqrjOdw+DZZ2TCgO3Jxc3sZ5eDotfPQSh6RYQHXAQEDzDX2v3PdwkLHtSPfvttVd
+ ozFft/9gcEiuiao4Dsvy5LBS5UBxZcbbVf5N9FRVhkqH/xl3TaiHGmUnMIhCGpYRsbFCERsAgMH
+ 5j2Uh8+8OyVVlo2oIayvGGmkKyQ6JbDGQhdsINiDNqY9xe4/u9BLjHuPJ1N/exF49pxOYazHDFX
+ vdSmrp6jfzbgo35Dbacxc+
+X-Received: by 2002:a05:600c:608e:b0:488:a2ac:a336 with SMTP id
+ 5b1f17b1804b1-488d688d2f0mr41855195e9.19.1775827984442; 
+ Fri, 10 Apr 2026 06:33:04 -0700 (PDT)
 Received: from localhost ([2001:4091:a246:8598:4c79:7b44:ca74:c5de])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43d63dec3b6sm7282790f8f.16.2026.04.10.06.33.01
+ 5b1f17b1804b1-488d67a46bdsm33314295e9.3.2026.04.10.06.33.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Apr 2026 06:33:01 -0700 (PDT)
+ Fri, 10 Apr 2026 06:33:04 -0700 (PDT)
 From: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
-Date: Fri, 10 Apr 2026 15:31:49 +0200
-Subject: [PATCH v5 09/12] am33xx: Fix comment about config symbols
+Date: Fri, 10 Apr 2026 15:31:51 +0200
+Subject: [PATCH v5 11/12] dm: core: Split SIMPLE_PM_BUS into phases
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260410-topic-am33-evm-oftree-v2026-01-v5-9-4b9c7aca0e3e@baylibre.com>
+Message-Id: <20260410-topic-am33-evm-oftree-v2026-01-v5-11-4b9c7aca0e3e@baylibre.com>
 References: <20260410-topic-am33-evm-oftree-v2026-01-v5-0-4b9c7aca0e3e@baylibre.com>
 In-Reply-To: <20260410-topic-am33-evm-oftree-v2026-01-v5-0-4b9c7aca0e3e@baylibre.com>
 To: u-boot@lists.denx.de, Marc Murphy <marc.murphy@sancloud.com>
@@ -90,12 +90,12 @@ Cc: Tom Rini <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>,
  Michael Trimarchi <michael@amarulasolutions.com>, 
  "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1145; i=msp@baylibre.com;
- h=from:subject:message-id; bh=5Yykrkd1oSnyX7pm49x9FHg9Z9WPawInbezFIX1wlQU=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhswbv1/nFxntT+HdlTN3Z5m56C326fLfbvQubkv54DNHv
- u9Wt9izjlIWBjEuBlkxRZbOxNC0//I7jyUvWrYZZg4rE8gQBi5OAZjIuv0M/ywW7j4k9in25tNF
- kRd7J18Itbw5rbZ3e+89c/P8k5X7BZwYGXafMt/yx9R0YrNR4inLh44lxZM3lGferxTqczq9VU7
- PjgUA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1931; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=lkprq4BFxGGI5bmMMcK7Y37vNbeeoPrG8dPKW/YHhNA=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhswbv7/9Ua07tDVyX/P0L2rhMcLz116ZumPP3ldfu1nm+
+ k7SZ56v1VHKwiDGxSArpsjSmRia9l9+57HkRcs2w8xhZQIZwsDFKQATOdbEyHBqwaWbqzbz/tik
+ +tt9E5f/J+l3j3o+dUtMzXZwfP4oqCqc4b+vpZ2e2J3GHZJPt28r82vd9HCT8H+dxORev7Wu2ZF
+ VfVwA
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-BeenThere: u-boot@lists.denx.de
@@ -114,38 +114,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix #else and #endif comments to match actual #if condition. Comments
-incorrectly referenced CONFIG_USB_MUSB_* instead of CONFIG_AM335X_USB*
-and CONFIG_XPL_BUILD.
+Similar to SIMPLE_BUS, create a SPL_SIMPLE_PM_BUS additional to the
+SIMPLE_PM_BUS. Most boards will not need SIMPLE_PM_BUS in SPL.
 
-Reviewed-by: Kory Maincent <kory.maincent@bootlin.com>
+This is currently needed to reduce the SPL size for beagle bone black
+with OF_UPSTREAM enabled.
+
 Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
 ---
- arch/arm/mach-omap2/am33xx/board.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/core/Kconfig  | 8 ++++++++
+ drivers/core/Makefile | 2 +-
+ 2 files changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-omap2/am33xx/board.c b/arch/arm/mach-omap2/am33xx/board.c
-index 90b341303c7309dc21b34cc01020db997f53c8f3..c3931900622957a5499fe6483473c61e3a62fff0 100644
---- a/arch/arm/mach-omap2/am33xx/board.c
-+++ b/arch/arm/mach-omap2/am33xx/board.c
-@@ -259,7 +259,7 @@ int arch_misc_init(void)
- {
- 	return 0;
- }
--#else	/* CONFIG_USB_MUSB_* && CONFIG_AM335X_USB* && !CONFIG_DM_USB */
-+#else /* CONFIG_AM335X_USB* && CONFIG_XPL_BUILD */
+diff --git a/drivers/core/Kconfig b/drivers/core/Kconfig
+index 5419bf65b5d653464f8bf958382ede30954d6402..0471e2977d0a993afcafee11874d43016d6738b4 100644
+--- a/drivers/core/Kconfig
++++ b/drivers/core/Kconfig
+@@ -342,6 +342,14 @@ config SIMPLE_PM_BUS
+ 	  Supports the 'simple-pm-bus' driver, which is used for busses that
+ 	  have power domains and/or clocks which need to be enabled before use.
  
- int arch_misc_init(void)
- {
-@@ -282,7 +282,7 @@ int arch_misc_init(void)
- 	return 0;
- }
- 
--#endif /* CONFIG_USB_MUSB_* && CONFIG_AM335X_USB* && !CONFIG_DM_USB */
-+#endif /* CONFIG_AM335X_USB* && CONFIG_XPL_BUILD */
- 
- #if !CONFIG_IS_ENABLED(SKIP_LOWLEVEL_INIT)
- 
++config SPL_SIMPLE_PM_BUS
++	bool "Support simple-pm-bus driver in SPL"
++	depends on SPL_DM && SPL_OF_CONTROL && SPL_CLK && SPL_POWER_DOMAIN
++	help
++	  Supports the 'simple-pm-bus' driver, which is used for busses that
++	  have power domains and/or clocks which need to be enabled before use,
++	  in SPL.
++
+ config OF_TRANSLATE
+ 	bool "Translate addresses using fdt_translate_address"
+ 	depends on DM && OF_CONTROL
+diff --git a/drivers/core/Makefile b/drivers/core/Makefile
+index a549890c22b997a8c3e7cd6ab08b2ed2ac7994b2..1073c26b2ed0009e15ccca0bac93a64d882f0df9 100644
+--- a/drivers/core/Makefile
++++ b/drivers/core/Makefile
+@@ -7,7 +7,7 @@ obj-$(CONFIG_$(PHASE_)ACPIGEN) += acpi.o
+ obj-$(CONFIG_$(PHASE_)DEVRES) += devres.o
+ obj-$(CONFIG_$(PHASE_)DM_DEVICE_REMOVE)	+= device-remove.o
+ obj-$(CONFIG_$(PHASE_)SIMPLE_BUS)	+= simple-bus.o
+-obj-$(CONFIG_SIMPLE_PM_BUS)	+= simple-pm-bus.o
++obj-$(CONFIG_$(PHASE_)SIMPLE_PM_BUS)	+= simple-pm-bus.o
+ obj-$(CONFIG_DM)	+= dump.o
+ obj-$(CONFIG_$(PHASE_)REGMAP)	+= regmap.o
+ obj-$(CONFIG_$(PHASE_)SYSCON)	+= syscon-uclass.o
 
 -- 
 2.53.0
