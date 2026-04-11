@@ -4,91 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E13ECF364CD
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 07:12:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64CB8E99058
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 07:12:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E04DD842EF;
-	Sat, 11 Apr 2026 09:09:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
+	by phobos.denx.de (Postfix) with ESMTP id 4662684242;
+	Sat, 11 Apr 2026 09:09:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="DOejtMD4";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="AmndMj/R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D386B84118; Sat, 11 Apr 2026 02:04:28 +0200 (CEST)
-Received: from mxd-1-a04.seznam.cz (mxd-1-a04.seznam.cz
- [IPv6:2a02:598:128:8a00::1000:a04])
+ id 6A640840D8; Sat, 11 Apr 2026 03:03:06 +0200 (CEST)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54F8E840D8
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 02:04:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A39783DC9
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 03:03:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=redhat.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=seznam.cz
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael.srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-7644845457-4tx79
- (smtpc-mxd-7644845457-4tx79 [2a02:598:128:8a00::1000:a04])
- id 19fad27642f4861f18531e28; Sat, 11 Apr 2026 02:03:57 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1775865837; bh=SJ29VsDzcJCSpAONH7rv6ufDzFecqVdD1Dpx0qDIV9U=;
- h=From:Date:Subject:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Message-Id:To:Cc;
- b=DOejtMD4FhEcsgaKfJZVVWWPE/ySzffMrOx7y66Rd087UdXBr8pAPfry6PYljHH3v
- xgtSeYwlHCddqfXlkiwAT2ASlLY9OiyF8qxq1qRQRUd3rCPQ9mHrXhu5Ks7oFhWvu4
- DvjWW+d8KYUotVUbyvuLEA8rByRAOWXZUWMubOJvu/YxuFpqjh0A5W0T8auF8mPKj1
- K/fUarqap5HHKr9Y94YJit+h4X73kMCc4s+BFMwOArKso7dsWl37fbAPukMUn0RVXU
- PIQWyqThYc87FQF8oRXfmf0buf+HyHWKq3YkzJBBMP3swsyd0L7Bmqzyfq0pqzq3ak
- pernKjbA8OUQw==
-Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
- by smtpd-relay-6597cc8696-xddnz (szn-email-smtpd/2.0.72) with ESMTPA
- id f142906c-4ef6-4d14-a73b-c95c67e1cbc8;
- Sat, 11 Apr 2026 02:03:04 +0200
-From: michael.srba@seznam.cz
-Date: Sat, 11 Apr 2026 02:00:14 +0200
-Subject: [PATCH v2 09/10] qualcomm: add defconfig, env and docs for SPL on
- sdm845
+ spf=pass smtp.mailfrom=ekovsky@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1775869381;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=l5uxdLGqdyr26KBa8khYRsCN8MTqre22xxr02me1+o4=;
+ b=AmndMj/RdL38oMHfysKN9aoeYjdMtdtr8jKhgcRWno+F3wTrO63amQ5xw34pd7tAyR7eJp
+ gp9TJVAZGndgNpKKzLbShzwPKRpWjpNmi+1S/T9f3K26buA5gftcDT4X9z5Xjj/xPRs2/L
+ AA6KVaqz/8yA7EfUwK/5ntbCxcQnC+8=
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-255-qSCo0m9vNfuHgAgMgp0nVw-1; Fri, 10 Apr 2026 21:03:00 -0400
+X-MC-Unique: qSCo0m9vNfuHgAgMgp0nVw-1
+X-Mimecast-MFC-AGG-ID: qSCo0m9vNfuHgAgMgp0nVw_1775869379
+Received: by mail-qt1-f198.google.com with SMTP id
+ d75a77b69052e-50d826ed6f9so61197351cf.1
+ for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 18:03:00 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775869379; x=1776474179;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:date:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=l5uxdLGqdyr26KBa8khYRsCN8MTqre22xxr02me1+o4=;
+ b=mkWFT7K/wQIlnktfWfWGmB8KB+xwV0FE5b+FLMwr85uCBQ8yQ+KDuU+oTbRZnmRzXx
+ D2f2qeoNNXc07Z3KV8Is6dRmy7Q3DVqk/+fW1zT0BrE5gNsAgWFd0NU4P/9haRhUkLnx
+ 5vdlFQIgjCiSB/C4s6Z8u4PxAZ+2sMTd4vkXA0uRLk2RfjQjrk98DjlMQjULwdRjeLD3
+ k8ISjcGAkq/ut+IyceslFTILhrSUeufn4+b3bMniVHfQgHIf8CKagyJ2rxlkQ7d7CSej
+ lj8DNrBBORuWyNSwxxiyhOHXppWRMbItKUgSIZ62HUpj4YDRKFTcfOj09GD3X6jpbk2S
+ 2Fqw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVQyMFl7wn1TvCxYDOyJnNWUKtUU8YlLZEDPCjR84nTT4OB154Pt8r/m/dNEzaPxx9cyderNVw=@lists.denx.de
+X-Gm-Message-State: AOJu0YznpZMu4Xe2P+xuradlnCx1cdIm4oHjHNhx7hHIxmYvIC1Cmc7s
+ C2XbVlkQFAmhU3StmO8/iahiQWms9p3e3TfmN9CprfvUOf7UGg185RPBJ7YHBaS/ojsaEHYn6Ov
+ k7kK5NvXTekxrDnr1YEpKab/hXKzAJk6aHUvXzW2c1ukFE+xajiSziHg=
+X-Gm-Gg: AeBDiet2ohXwm+SXrinVTfoS1tVGDOLBmVwfqcb5PVKBr77+vIUsovxEOJskjdbWOxt
+ cpSUyFOt8Vdq9r4/idMFnkbCtq7BOrcmsVIDB+e45ZTSL+PAI3pddPUHjFDAtZxGykNNaXVBwfF
+ 6ro+f7zLogMQmQBh6H2qKxGm9waE5ekuS+62s8MkwE/w6Qdop1YZDCBUlQGYAabuePFGGvOe/h8
+ sMW8/CQ8HLSWTfteDqpA2XhlW8aEqG7qECAGsjEngStOA4Dy6cfxeVgbTMtRDLA72am3fAXaFAx
+ s12JJ3sz6gFf+tgB1r67zs6WBH0wGyIAJCd0TmjOlhIb/I4kcJUWWRjv2sDJY1dy3liDEDeP7aq
+ Ds8yezkLpMPTT4FwV
+X-Received: by 2002:a05:620a:31a5:b0:8da:4c20:50f0 with SMTP id
+ af79cd13be357-8dc439f1c7dmr1271906985a.8.1775869379418; 
+ Fri, 10 Apr 2026 18:02:59 -0700 (PDT)
+X-Received: by 2002:a05:620a:31a5:b0:8da:4c20:50f0 with SMTP id
+ af79cd13be357-8dc439f1c7dmr1271903385a.8.1775869378909; 
+ Fri, 10 Apr 2026 18:02:58 -0700 (PDT)
+Received: from localhost ([38.246.12.206]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-8ac84c45944sm37039096d6.24.2026.04.10.18.02.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 10 Apr 2026 18:02:58 -0700 (PDT)
+From: Eddie Kovsky <ekovsky@redhat.com>
+X-Google-Original-From: Eddie Kovsky <ewk@edkovsky.org>
+Date: Fri, 10 Apr 2026 19:02:57 -0600
+To: Tom Rini <trini@konsulko.com>
+Cc: Eddie Kovsky <ekovsky@redhat.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Tobias Olausson <tobias@eub.se>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Simon Glass <sjg@chromium.org>, Jan Stancek <jstancek@redhat.com>,
+ Enric Balletbo i Serra <eballetb@redhat.com>,
+ a.fatoum@pengutronix.de, mark.kettenis@xs4all.nl, u-boot@lists.denx.de
+Subject: Re: [PATCH v3] Add support for OpenSSL Provider API
+Message-ID: <admdwS1tuX_ZdPFF@daedalus>
+References: <20260120164524.253188-1-ekovsky@redhat.com>
+ <87ikckmbbi.fsf@kernel.org> <aZc_efHFk1Q-iWvP@daedalus>
+ <20260219172836.GN3233182@bill-the-cat> <aaHWNU0LQqJ0zNDD@daedalus>
+ <20260227174744.GW1593142@bill-the-cat> <ac2WqaHYgLslig_a@daedalus>
+ <20260402162704.GG41863@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260411-qcom_spl-v2-9-9609557cf562@seznam.cz>
-References: <20260411-qcom_spl-v2-0-9609557cf562@seznam.cz>
-In-Reply-To: <20260411-qcom_spl-v2-0-9609557cf562@seznam.cz>
-To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
- u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>, 
- Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>, 
- Hrushikesh Salunke <h-salunke@ti.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>, 
- Andre Przywara <andre.przywara@arm.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>, 
- Kaustabh Chakraborty <kauschluss@disroot.org>, 
- Jerome Forissier <jerome.forissier@arm.com>, 
- Heiko Schocher <hs@nabladev.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Lukasz Majewski <lukma@denx.de>, 
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>, 
- Peter Korsgaard <peter@korsgaard.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Tingting Meng <tingting.meng@altera.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>, 
- George Chan <gchan9527@gmail.com>, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
- Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>, 
- Michael Srba <Michael.Srba@seznam.cz>
-X-Mailer: b4 0.15.1
+In-Reply-To: <20260402162704.GG41863@bill-the-cat>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: jWolvXrgPoSz0hBtsXwCcsdcJdEdTt-aTrjOBiax1aM_1775869379
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 X-Mailman-Approved-At: Sat, 11 Apr 2026 09:08:55 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,268 +119,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Michael Srba <Michael.Srba@seznam.cz>
+--->8
+> > I finally got to the bottom of this. Debian/Ubuntu ship OpenSSL backends
+> > separately. The CI environment is missing the 'pkcs11-provider'
+> > package, which is causing the binman tests to fail.
+> > 
+> >     $ apt show pkcs11-provider
+> >     Package: pkcs11-provider
+> >     Version: 1.0-3
+> >     Priority: optional
+> >     Section: libs
+> >     Maintainer: Luca Boccassi <bluca@debian.org>
+> >     Installed-Size: 410 kB
+> >     Depends: libc6 (>= 2.34), libssl3t64 (>= 3.0.7~)
+> >     Homepage: https://github.com/latchset/pkcs11-provider
+> >     Download-Size: 125 kB
+> >     APT-Manual-Installed: yes
+> >     APT-Sources: http://ftp.debian.org/debian stable/main amd64 Packages
+> >     Description: OpenSSL 3 provider for PKCS11
+> >     With this provider for OpenSSL you can use the OpenSSL library
+> >     (version 3) and command line tools with any PKCS11 implementation as
+> >     backend for the crypto operations.
+> > 
+> > With this package installed the SSL errors logged on Azure are no longer reproducible.
+> > 
+> > The results from the first pipeline expired while I was investigating
+> > this. I reran the CI job so you can see the error messages.
+> > 
+> >     https://dev.azure.com/u-boot/u-boot/_build/results?buildId=13035&view=logs&j=c59aff74-743b-5f08-f408-4a608a489153&t=f2ea3536-b291-5a39-ad92-0220c9b8101a
+> > 
+> > I have looked into the .azure-pipelines.yml file, but it's not clear to
+> > me how to configure the CI to install extra packages.
+> 
+> Ah, OK. So the package needs to be added to tools/docker/Dockerfile (and
+> doc/build/gcc.rst). For testing changes out, you can then modify
+> .azure-pipelines.yml to point at your image, rather than the default
+> image. Or hack in a "sudo apt-get update && sudo apt-get install ..." to
+> the job.
+> 
+> -- 
+> Tom
 
-The defconfig should in principle be board-agnostic. Environment
-simply contains a dfu env specifying where to load u-boot proper
-(TEXT_BASE - 64).
+Hi Tom
 
-Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
----
- board/qualcomm/sdm845_spl.env |   2 +
- configs/sdm845_spl_defconfig  | 131 ++++++++++++++++++++++++++++++++++++++++++
- doc/board/qualcomm/index.rst  |   1 +
- doc/board/qualcomm/spl.rst    |  87 ++++++++++++++++++++++++++++
- 4 files changed, 221 insertions(+)
+Updating the dockerfile and documentation was easy enough, but I was
+still seeing the Azure pipeline fail with the same errors. It seems to
+be ignoring the updated dockerfile.
 
-diff --git a/board/qualcomm/sdm845_spl.env b/board/qualcomm/sdm845_spl.env
-new file mode 100644
-index 00000000000..2396d003b0c
---- /dev/null
-+++ b/board/qualcomm/sdm845_spl.env
-@@ -0,0 +1,2 @@
-+# U-Boot proper text base - 64
-+dfu_alt_info_ram=uboot.bin ram 0x1487FFC0 0x180000
-diff --git a/configs/sdm845_spl_defconfig b/configs/sdm845_spl_defconfig
-new file mode 100644
-index 00000000000..16fec80500f
---- /dev/null
-+++ b/configs/sdm845_spl_defconfig
-@@ -0,0 +1,131 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_COUNTER_FREQUENCY=19200000
-+CONFIG_POSITION_INDEPENDENT=y
-+# CONFIG_INIT_SP_RELATIVE is not set
-+CONFIG_ARCH_SNAPDRAGON=y
-+CONFIG_TEXT_BASE=0x14880000
-+CONFIG_SYS_MALLOC_LEN=0x20000
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x146bffff
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_BSS_MAX_SIZE=0x20000
-+CONFIG_SYS_BOOTM_LEN=0x4000000
-+CONFIG_SYS_LOAD_ADDR=0x0
-+CONFIG_WATCHDOG_TIMEOUT_MSECS=60000
-+CONFIG_SPL_TARGET_SDM845=y
-+CONFIG_SPL_MAX_SIZE=0x0
-+CONFIG_SPL=y
-+CONFIG_SPL_PAYLOAD="u-boot.img"
-+CONFIG_SKIP_RELOCATE=y
-+# CONFIG_EFI_LOADER is not set
-+CONFIG_OF_BOARD_SETUP=y
-+CONFIG_USE_PREBOOT=y
-+CONFIG_CONSOLE_RECORD=y
-+CONFIG_CONSOLE_RECORD_OUT_SIZE=0xA000
-+CONFIG_CONSOLE_RECORD_OUT_SIZE_F=0xA000
-+CONFIG_LOGLEVEL=9
-+CONFIG_SYS_STDIO_DEREGISTER=y
-+CONFIG_LOG_MAX_LEVEL=9
-+CONFIG_SPL_LOG=y
-+CONFIG_SPL_LOG_MAX_LEVEL=9
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_SPL_DMA=y
-+CONFIG_SPL_DM_RESET=y
-+CONFIG_SPL_POWER_DOMAIN=y
-+CONFIG_BOOTM_NETBSD=y
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_DFU=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_UFS=y
-+CONFIG_CMD_CAT=y
-+CONFIG_CMD_RNG=y
-+CONFIG_CMD_REGULATOR=y
-+CONFIG_CMD_LOG=y
-+CONFIG_OF_UPSTREAM_BUILD_VENDOR=y
-+CONFIG_ENV_USE_DEFAULT_ENV_TEXT_FILE=y
-+CONFIG_ENV_DEFAULT_ENV_TEXT_FILE="board/qualcomm/sdm845_spl.env"
-+CONFIG_NET_RANDOM_ETHADDR=y
-+# CONFIG_OFNODE_MULTI_TREE is not set
-+CONFIG_BUTTON_QCOM_PMIC=y
-+CONFIG_CLK=y
-+CONFIG_SPL_CLK=y
-+CONFIG_CLK_STUB=y
-+CONFIG_SPL_CLK_STUB=y
-+CONFIG_CLK_QCOM_SDM845=y
-+CONFIG_DFU_MMC=y
-+CONFIG_DFU_RAM=y
-+CONFIG_DFU_SCSI=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
-+CONFIG_DMA=y
-+CONFIG_DMA_CHANNELS=y
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_FASTBOOT_BUF_ADDR=0xdeadbeef
-+CONFIG_MSM_GPIO=y
-+CONFIG_QCOM_PMIC_GPIO=y
-+CONFIG_DM_I2C=y
-+CONFIG_SYS_I2C_QUP=y
-+CONFIG_I2C_MUX=y
-+CONFIG_IOMMU=y
-+CONFIG_QCOM_HYP_SMMU=y
-+CONFIG_MISC=y
-+CONFIG_NVMEM=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_ADMA=y
-+CONFIG_MMC_SDHCI_MSM=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_PHY=y
-+CONFIG_SPL_PHY=y
-+CONFIG_PHY_QCOM_QMP_UFS=y
-+CONFIG_PHY_QCOM_QUSB2=y
-+CONFIG_PHY_QCOM_USB_SNPS_FEMTO_V2=y
-+CONFIG_PHY_QCOM_SNPS_EUSB2=y
-+CONFIG_PHY_QCOM_USB_HS_28NM=y
-+CONFIG_PHY_QCOM_USB_SS=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCONF=y
-+CONFIG_PINCTRL_QCOM_APQ8016=y
-+CONFIG_PINCTRL_QCOM_APQ8096=y
-+CONFIG_PINCTRL_QCOM_QCM2290=y
-+CONFIG_PINCTRL_QCOM_QCS404=y
-+CONFIG_PINCTRL_QCOM_SDM845=y
-+CONFIG_PINCTRL_QCOM_SM6115=y
-+CONFIG_PINCTRL_QCOM_SM8250=y
-+CONFIG_PINCTRL_QCOM_SM8550=y
-+CONFIG_PINCTRL_QCOM_SM8650=y
-+CONFIG_PINCTRL_QCOM_X1E80100=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_QCOM=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_QCOM_RPMH=y
-+CONFIG_DM_RNG=y
-+CONFIG_RNG_MSM=y
-+CONFIG_SCSI=y
-+CONFIG_MSM_SERIAL=y
-+CONFIG_SOC_QCOM=y
-+CONFIG_QCOM_COMMAND_DB=y
-+CONFIG_QCOM_RPMH=y
-+CONFIG_SPL_SPMI=y
-+CONFIG_SPMI_MSM=y
-+CONFIG_SYSINFO=y
-+CONFIG_SYSINFO_SMBIOS=y
-+CONFIG_SYSRESET_QCOM_PSHOLD=y
-+CONFIG_USB=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_SPL_USB_DWC3_GENERIC=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0525
-+CONFIG_USB_GADGET_PRODUCT_NUM=0xb4a4
-+CONFIG_USB_ETHER=y
-+CONFIG_USB_ETH_CDC=y
-+CONFIG_SPL_DFU=y
-+CONFIG_SPL_USB_SDP_SUPPORT=y
-+CONFIG_UFS=y
-+# CONFIG_SPL_USE_TINY_PRINTF is not set
-+CONFIG_CIRCBUF=y
-diff --git a/doc/board/qualcomm/index.rst b/doc/board/qualcomm/index.rst
-index 3238a68e859..65e3e222f68 100644
---- a/doc/board/qualcomm/index.rst
-+++ b/doc/board/qualcomm/index.rst
-@@ -14,3 +14,4 @@ Qualcomm
-    iq8
-    phones
-    rdp
-+   spl
-diff --git a/doc/board/qualcomm/spl.rst b/doc/board/qualcomm/spl.rst
-new file mode 100644
-index 00000000000..a990cc907c1
---- /dev/null
-+++ b/doc/board/qualcomm/spl.rst
-@@ -0,0 +1,87 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. sectionauthor:: Michael Srba <Michael.Srba@seznam.cz>
-+
-+======================================
-+Booting U-Boot SPL on Qualcomm SoCs
-+======================================
-+
-+Overview
-+--------
-+The boot process on sdm845 (and some other Qualcomm SoCs) starts with the bootrom
-+of the Application Processor, which executes XBL_SEC, which jumps to "OEM" code
-+in EL1. Production device typically are "fused", with a hash of the OEM's signing
-+key burnt into one of the "QFUSE" banks on the SoC making it impossible to run
-+custom bootloader code. As a result U-Boot SPL is only supported on unfused
-+("secureboot off") devices. XBL_SEC is always signed by qualcomm, and the fuses
-+to disable turning off signature verification for it are always burnt at the
-+factory, so replacing XBL_SEC is impossible without using JTAG. Of course JTAG
-+is typically disabled on devices that have secure boot enabled, or at minimum
-+greatly neutered.
-+
-+U-Boot SPL for Qualcomm platforms uses a custom linker script (per SoC) to build a bootable ELF.
-+For sdm845 (and some other platforms) this has two sections, u-boot code and an embedded
-+xbl_sec elf (signed by qualcomm). To boot on an unfused SoC, the elf additionally
-+needs to have hash sections added, which can be accomplished with qtestsign.
-+
-+Currently, sdm845 is supported. You need a device with secure boot disabled
-+(or with secure boot enabled if you enabled it yourself and have the private key,
-+though for full security you'd also want to disable JTAG which will remove your ability
-+to mess with the control flow in the bootrom (immutable) and in XBL_SEC (signed)).
-+
-+Building
-+--------
-+First, obtain an xbl_sec that includes the EL3 privilege escalation feature
-+and place it at .output/xbl_sec.elf. You can extract it from an xbl elf.
-+If you're unable to find one, you can also use JTAG/SWD to break at the SMC
-+entry and use gdp to jump to the u-boot entry point in EL3.
-+
-+To build a bootable image, you need to use a defconfig specific to your SoC.
-+This is because the ELF has to specify where in the address space to put u-boot SPL,
-+and this may differ per SoC. There may be other SoC-dependent build time choices,
-+though in principle those could be made at runtime.
-+
-+``make CROSS_COMPILE=aarch64-suse-linux- O=.output DEVICE_TREE=qcom/sdm845-shift-axolotl sdm845_spl_defconfig``
-+
-+Then compile u-boot and specify the dts for your board (technically nothing about the resulting
-+SPL image should be board-specific, but there are no non-board-specific device trees in Linux)
-+
-+``make CROSS_COMPILE=aarch64-suse-linux- O=.output DEVICE_TREE=qcom/sdm845-shift-axolotl``
-+
-+Finally, use ``qtestsign`` to add the hash segments required by PBL
-+
-+``qtestsign -v 5 -o .output/spl/u-boot-spl_signed.elf prog .output/spl/u-boot-spl.elf``
-+
-+Running
-+-------
-+Currently, U-Boot SPL for qualcomm platforms expects to be booted via EDL:
-+
-+``edl.py --loader=$PWD/.output/spl/u-boot-spl_signed.elf``
-+
-+SPL will then launch the DFU gadget and wait for you to upload u-boot proper:
-+
-+``dfu-util -RD .output/u-boot.img``
-+
-+u-boot proper will then likely crash, since SPL currently doesn't init DRAM on qualcomm platforms
-+and u-boot proper currently doesn't support running from SRAM. The latter should be an easy fix.
-+
-+Notes on memory map
-+-------------------
-+There are various banks of SRAM on a Qualcomm SoC that we can use prior to DRAM init.
-+For example:
-+msm8916 - 512K L2-as-TCM (at 0x08000000), 16K OCIMEM (at 0x08600000)
-+msm8998 - 1M L2-as-TCM (at 0x14000000), 256K OCIMEM (at 0x14680000)
-+sdm845 - 1.5M BOOT_IMEM (0x14800000), 256K OCIMEM (at 0x14680000)
-+
-+There's also RPM code/data RAM and hexagon TCMs, but unless we want to boot dram-less Linux
-+we can probably safely ignore those. On msm8916 they may come in handy though.
-+
-+sdm845 can also have 8M LLCC-as-TCM in theory, but this appears to be broken.
-+L2-as-TCM is no longer present.
-+
-+Since a limited amount of not necessarily continuous SRAM is available, we need to manually
-+specify where .text, .bss, the malloc pool and the stack go. The Kconfig contains reasonable
-+defaults per SoC.
-+
-+On sdm845, we by default put U-Boot SPL in BOOT_IMEM, with .bss, malloc pool and the stack
-+filling OCIMEM. We can also fit U-Boot proper in BOOT_IMEM, for dram-less DFU or peek/poke
-+with a shell.
+After digging through the pipeline logs I noticed that Azure is using
+the Windows Subsystem for Linux with Arch Linux to set up the test
+environment. The package name 'pkcs11-provider' is even the same on
+Arch, so I added that to .azure-pipelines.yml.
 
--- 
-2.53.0
+    https://archlinux.org/packages/extra/x86_64/pkcs11-provider/
+
+And the Azure pipeline now fails because it reports the package doesn't
+exist.
+
+    https://dev.azure.com/u-boot/u-boot/_build/results?buildId=13066&view=logs&j=8222cf02-b5ce-5040-5def-6173bf341f71&t=5f6e674b-07e4-5ce5-77ac-ecaae7331dd8
+
+I am not an expert in these CI systems, so I'm not sure what else can be
+done to change the test environment.
+
+Eddie
 
