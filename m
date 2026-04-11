@@ -4,56 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8479F3ED5C
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 21:07:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B92D4F3ED55
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 21:15:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DB8684118;
-	Sat, 11 Apr 2026 23:07:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3708384118;
+	Sat, 11 Apr 2026 23:15:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="TQIeqQBA";
+	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="uJz89qdx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B50184154; Sat, 11 Apr 2026 23:07:40 +0200 (CEST)
+ id 252B68416F; Sat, 11 Apr 2026 23:15:29 +0200 (CEST)
 Received: from mail.kernel-space.org (unknown
  [IPv6:2a03:4000:b:d08:14a9:1bff:fedc:75ad])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52AA4839D9
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 23:07:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D8201839D9
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 23:15:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=kernel-space.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=angelo@kernel-space.org
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
- s=s1; t=1775941657;
+ s=s1; t=1775942125;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=DWAi+84Oz91wEtgs4TfxjQAdgfyrO4rMb838qbUcvdQ=;
- b=TQIeqQBANrMlY7C7trDjb3WAfhIa+xMeiWXRF/OLKL0AOpHoDHH72YhdRuEJ4B3/xE9c9u
- pSIYffafwiulLsOcU+q9Mr/o104QocOcHpCRSCPdFABVEBzVR8CwC/Wbtfb+c6W56jMCEd
- +vPc7cAvfoKPi4FpX/pAj4QqfzXrQ0I=
+ bh=67XsO5r24XK9oUFTiItaspFUAVhKegGSAoG/Hj6yjHE=;
+ b=uJz89qdxsD4f//IGIntje/jKhq0Pl0NSmzExA4W8kxARRXKVROiAsUzYsIGu5j0Bcqzswc
+ FrKZbKQmi1qdJv3QvACejL5j2SXgVK94dLhi8YclKoCmBwARu0rmRu5X4/ppi5uX6rphJr
+ NBAftT+Xs1rgDqVcQ1dnDCECP1tUukI=
 Received: from [IPV6:2a07:7e81:7daa:0:62cf:84ff:feee:627] (<unknown>
  [2a07:7e81:7daa:0:62cf:84ff:feee:627])
- by oreshnik (OpenSMTPD) with ESMTPSA id 88e008d3
+ by oreshnik (OpenSMTPD) with ESMTPSA id 940a4b77
  (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
- Sat, 11 Apr 2026 21:07:37 +0000 (UTC)
-Message-ID: <f9270d65-c5cd-442c-82aa-b6e6ce96fd9f@kernel-space.org>
-Date: Sat, 11 Apr 2026 23:07:36 +0200
+ Sat, 11 Apr 2026 21:15:25 +0000 (UTC)
+Message-ID: <460879a4-5025-4a48-bbfa-7bc7915b267d@kernel-space.org>
+Date: Sat, 11 Apr 2026 23:15:25 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/5] m68k: Fix writew(), writel(), readw(), readl()
- endianness for classic m68k
+Subject: Re: [PATCH v3 3/5] virtio: mmio: Allow instantiation via platform data
 To: Daniel Palmer <daniel@thingy.jp>, visitorckw@gmail.com, bmeng.cn@gmail.com
 Cc: u-boot@lists.denx.de
 References: <20260408220928.3328551-1-daniel@thingy.jp>
- <20260408220928.3328551-3-daniel@thingy.jp>
+ <20260408220928.3328551-4-daniel@thingy.jp>
 Content-Language: en-US, it
 From: Angelo Dureghello <angelo@kernel-space.org>
-In-Reply-To: <20260408220928.3328551-3-daniel@thingy.jp>
+In-Reply-To: <20260408220928.3328551-4-daniel@thingy.jp>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,81 +71,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tested-by: Angelo Dureghello <angelo@kernel-space.org>
+A question here,
 
+this driver would still work for other devicetree cases ?
 
-it's mainly ok, btw, since you need still probably a v4,
-see below:
+Also, there are some coding style changes that should be in a separate
+patch.
 
+ 
 On 4/9/26 00:09, Daniel Palmer wrote:
-> In Linux these are meant to read a little-endian value and swap
-> to the CPU endian.
-> 
-> In u-boot for m68k this is currently broken and prevents
-> virtio-mmio from functioning.
-> 
-> This change is only for classic m68k. Coldfire has read big-endian,
-> no swap for these in u-boot and Linux and existing drivers probably
-> depend on this.
+> The m68k QEMU virt machine doesn't use devicetree, yet, so
+> allow it to create virtio-mmio instances via platform data.
 > 
 > Signed-off-by: Daniel Palmer <daniel@thingy.jp>
 > ---
->  arch/m68k/include/asm/io.h | 31 ++++++++++++++++++++-----------
->  1 file changed, 20 insertions(+), 11 deletions(-)
+>  drivers/virtio/virtio_mmio.c | 27 ++++++++++++++++++---------
+>  include/virtio_mmio.h        | 12 ++++++++++++
+>  2 files changed, 30 insertions(+), 9 deletions(-)
+>  create mode 100644 include/virtio_mmio.h
 > 
-> diff --git a/arch/m68k/include/asm/io.h b/arch/m68k/include/asm/io.h
-> index 35ad4a1c0444..2577081d8363 100644
-> --- a/arch/m68k/include/asm/io.h
-> +++ b/arch/m68k/include/asm/io.h
-> @@ -23,18 +23,27 @@
->  #define __raw_writew(w,addr) ((*(volatile u16 *) (addr)) = (w))
->  #define __raw_writel(l,addr) ((*(volatile u32 *) (addr)) = (l))
+> diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
+> index 1cd737aca249..28b46ab66238 100644
+> --- a/drivers/virtio/virtio_mmio.c
+> +++ b/drivers/virtio/virtio_mmio.c
+> @@ -12,6 +12,7 @@
+>  #include <virtio_types.h>
+>  #include <virtio.h>
+>  #include <virtio_ring.h>
+> +#include <virtio_mmio.h>
+>  #include <linux/bug.h>
+>  #include <linux/compat.h>
+>  #include <linux/err.h>
+> @@ -335,21 +336,28 @@ static int virtio_mmio_notify(struct udevice *udev, struct virtqueue *vq)
 >  
-> -#define readb(addr)		in_8((volatile u8 *)(addr))
-> -#define writeb(b,addr)		out_8((volatile u8 *)(addr), (b))
-> -#if !defined(__BIG_ENDIAN)
-> -#define readw(addr)		(*(volatile u16 *) (addr))
-> -#define readl(addr)		(*(volatile u32 *) (addr))
-> -#define writew(b,addr)		((*(volatile u16 *) (addr)) = (b))
-> -#define writel(b,addr)		((*(volatile u32 *) (addr)) = (b))
-> +#define readb(addr)	in_8((volatile u8 *)(addr))
-> +#define writeb(b, addr)	out_8((volatile u8 *)(addr), (b))
-> +#ifdef CONFIG_M680x0
-> +/*
-> + * For classic m68k these work the same way as Linux:
-> + * Read a little endian value, swap to the CPU endian.
-> + */
-> +#define readw(addr)	in_le16((volatile u16 *)(addr))
-> +#define readl(addr)	in_le32((volatile u32 *)(addr))
-> +#define writew(b, addr)	out_le16((volatile u16 *)(addr), (b))
-> +#define writel(b, addr)	out_le32((volatile u32 *)(addr), (b))
-
-My understanding is that, even if m68k is big endian, you need 
-LE r/w for usage with virtio. 
-
-Would M680x0 non-qemu work still with this change ?
-Maybe an #if defined (CONFIG_VIRTIO) && defined(CONFIG_M680x0)
-would be better ?
-
-
->  #else
-> -#define readw(addr)		in_be16((volatile u16 *)(addr))
-> -#define readl(addr)		in_be32((volatile u32 *)(addr))
-> -#define writew(b,addr)		out_be16((volatile u16 *)(addr),(b))
-> -#define writel(b,addr)		out_be32((volatile u32 *)(addr),(b))
-> +/*
-> + * For coldfire these read a big endian value and use it
-> + * as-is. This means that for little endian devices on the
-> + * bus like PCI device these won't work as expected currently.
-> + */
-> +#define readw(addr)	in_be16((volatile u16 *)(addr))
-> +#define readl(addr)	in_be32((volatile u32 *)(addr))
-> +#define writew(b, addr)	out_be16((volatile u16 *)(addr), (b))
-> +#define writel(b, addr)	out_be32((volatile u32 *)(addr), (b))
->  #endif
+>  static int virtio_mmio_of_to_plat(struct udevice *udev)
+>  {
+> -	struct virtio_mmio_priv *priv = dev_get_priv(udev);
+> +	struct virtio_mmio_plat *plat = dev_get_plat(udev);
+> +	fdt_addr_t addr;
+> +
+> +	addr = dev_read_addr(udev);
 >  
->  /*
+> -	priv->base = (void __iomem *)(ulong)dev_read_addr(udev);
+> -	if (priv->base == (void __iomem *)FDT_ADDR_T_NONE)
+> +	if (addr == FDT_ADDR_T_NONE)
+>  		return -EINVAL;
+>  
+> +	plat->base = addr;
+> +
+>  	return 0;
+>  }
+>  
+>  static int virtio_mmio_probe(struct udevice *udev)
+>  {
+> +	struct virtio_mmio_plat *plat = dev_get_plat(udev);
+>  	struct virtio_mmio_priv *priv = dev_get_priv(udev);
+>  	struct virtio_dev_priv *uc_priv = dev_get_uclass_priv(udev);
+>  	u32 magic;
+>  
+> +	priv->base = (void __iomem *)plat->base;
+> +
+>  	/* Check magic value */
+>  	magic = readl(priv->base + VIRTIO_MMIO_MAGIC_VALUE);
+>  	if (magic != ('v' | 'i' << 8 | 'r' << 16 | 't' << 24)) {
+> @@ -405,11 +413,12 @@ static const struct udevice_id virtio_mmio_ids[] = {
+>  };
+>  
+>  U_BOOT_DRIVER(virtio_mmio) = {
+> -	.name	= "virtio-mmio",
+> -	.id	= UCLASS_VIRTIO,
+> -	.of_match = virtio_mmio_ids,
+> -	.ops	= &virtio_mmio_ops,
+> -	.probe	= virtio_mmio_probe,
+> +	.name       = "virtio-mmio",
+> +	.id         = UCLASS_VIRTIO,
+> +	.of_match   = virtio_mmio_ids,
+> +	.ops        = &virtio_mmio_ops,
+> +	.probe      = virtio_mmio_probe,
+>  	.of_to_plat = virtio_mmio_of_to_plat,
+> -	.priv_auto	= sizeof(struct virtio_mmio_priv),
+> +	.priv_auto  = sizeof(struct virtio_mmio_priv),
+> +	.plat_auto  = sizeof(struct virtio_mmio_plat),
+>  };
+> diff --git a/include/virtio_mmio.h b/include/virtio_mmio.h
+> new file mode 100644
+> index 000000000000..8c072826db55
+> --- /dev/null
+> +++ b/include/virtio_mmio.h
+> @@ -0,0 +1,12 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +
+> +#ifndef __VIRTIO_MMIO_H__
+> +#define __VIRTIO_MMIO_H__
+> +
+> +#include <linux/types.h>
+> +
+> +struct virtio_mmio_plat {
+> +	phys_addr_t base;
+> +};
+> +
+> +#endif /* __VIRTIO_MMIO_H__ */
 
 Regards,
--- Angelo
+angelo
 
