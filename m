@@ -4,96 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D71BF3ED40
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 14:53:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B228BF3ED4F
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 14:56:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2109F84118;
-	Sat, 11 Apr 2026 16:53:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3DA5D84154;
+	Sat, 11 Apr 2026 16:56:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sFklCWht";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aaNm9ulF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 976598416F; Sat, 11 Apr 2026 16:53:37 +0200 (CEST)
-Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
- [IPv6:2607:f8b0:4864:20::c2a])
+ id 5574584181; Sat, 11 Apr 2026 16:56:50 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BC9D83DC9
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 16:53:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 612CC84118
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 16:56:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-68a2f93b42eso1103301eaf.3
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 07:53:35 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b9825ba7f9dso438723166b.0
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 07:56:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775919408; cv=none;
+ d=google.com; s=arc-20240605;
+ b=gqb24HMF6HEdlcA0T4T8ZGIv5GtEmY6jGW5a8WHpRsvnpl+nXyiAnWmgKoR5NJVONd
+ gwh3tY+iBJ8WY61R6tWRHlTPM+Blq60N7aUUjWsnMqtUNVWMa4Ty0zgh3kNbKcw5r91h
+ xpldRN6tW+1L9WFSzlmVTQyE+cKIov+U6fsv7qIzorvWad/t1I8HBkqdq8pK2MMqnPOx
+ b3TxnuIkx401kvP6sILIg6ToVtuXk8sK6LMIT1NAbKWyThXWdVCLvEMBDRdciNFfWiH7
+ 5NJ+/vMy01+YmGERxDyYnwRWp64zTcl6YPo49skYGvl07zJGmu41/hzNy+O3sTiZLFBX
+ wg2Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=xR/RHJW2NThfAW/aI5Xof4rSS06S1hIUFqBBxu101j4=;
+ fh=pb1V3rC/YOD1axA7yiOFKLmIQEYkcRc0AUeTYO1Qr4A=;
+ b=J1QzUiayHjLjQtuoF6JFRzN+eo4Grr+GAYz96TMTz94r080Gnf4cAL5tMD8StE+mRU
+ 2V2C95wzRhZEbI5l7ZBixfZBWJ1LyCvl4w0ch6QwGRWs/jPf34XRORfBZGpa7cqvPV2v
+ SNqQ/5UszGKvYVNJIdzTqIl9hZRivbP/c3J2rIjlEzc4YGQ7NMRF3EWgdmKxBbAryCdV
+ p6wawjepOH6ZyYi6aFa/iuubU0AmXmciJkBXscO31SFUu7r4iuJlq/2J1NB8XCj05EPS
+ CWpgSlfcY+4Rgj7CjzRX2DaXzsTUlbYdFwfdKnt1V3EDlI8FHXi8NwkyhKOfaBdYRhPA
+ jOGQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1775919214; x=1776524014; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3YOu26vGzWE1gp8zkDkbaE30rUqLvO9Q+K7hwgAeBqc=;
- b=sFklCWhtcgMB2uaFrv8o6VCYNBS4pUg8qdtmQzxpzJqFV5uprZs6XA2zNQzDknVhqe
- m1uDPKCwjhyRu/Q/jfrE0diLaNegzvxX6MRcXvFlc7R5C5mHRBo9DG2Cy84AN7XG+aZl
- jt+xVbm4A/wsnpf+RwH847LtrStDG5cZbvnv4=
+ d=chromium.org; s=google; t=1775919408; x=1776524208; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=xR/RHJW2NThfAW/aI5Xof4rSS06S1hIUFqBBxu101j4=;
+ b=aaNm9ulF++nVUhwd//8FuqqYhHh6bdo62zZ4YqoXRKtL0bepl64tNK/oWD1oFeXaQE
+ BmVDHn0fccVI5EBgDFGbQ2d8ckLag83Pgi5/6lHldxvUMTJ044UljF9oZbEbNh8tUnZT
+ mO8L5S1R1nqraUb9pCfea3BHA9bI/dWGLvXBU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775919214; x=1776524014;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3YOu26vGzWE1gp8zkDkbaE30rUqLvO9Q+K7hwgAeBqc=;
- b=AQ6D4QkIVu1i0PJFCoKjsTPJQFdiG/oqQUlCwWW+9G+5dwzRY5PhpOdrDMtPnLS2D3
- uX+w7gRjTmdDkFimbu03NPg8HdWPwjriLe8/tlkUC24WzREKmLwrZMltXeuvv1zWSd09
- 7bZ6MhEvh8jQikVpm6tHc3gVoNRMzHaAC+lVh6E8WFP7JdQf1zFhjRfPiawvt3MWjmCP
- JD21Fz9VAL7zCk1iZOq6YGNoMVstqENYvAlygPwwCClUltyxPiRp1Yhd2S4Z01AhBfTq
- 4OFOKH57m9525OC3Qvv7c2JViyP/p9dUS9+aN8CkL7TaT9teXHl+/UsZkNnKWbnvfy9J
- RXaw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXFTofJR6oTyCeiCIyNNkjZYGZEc9A0f4hdbPRI1HeRq9qrYr2ZIAJtXF96yGd2ZBj6s7kqPUE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx+dwYag9dURVba4eQaPOmjLN4WlRsm6JRDMzrml3aFVZGAiql8
- kst+ASwxZJIpsRAvLKt2SqplEfBGlU4DzSOw2F840C4rYaozannwsrPnnVHdxuR/888=
-X-Gm-Gg: AeBDieuG9KnXMOezhvMJKGR29kxN/d+YZJuItY1n+Vt45i4uhAB5pAntj+kZHnnKeax
- hfLtxURInWteXlkTFQDERXD4BJ+U5k2SxabGG+m0B3qp8gMXaUmiUMp6nOERUkZ9tNZ/9TVvP3p
- YhKlwyKYqEwf7GvQgvLFp2VdGeg24M3ROVwet6uKuHnj0fpncfPLKYyIxx8VeJYGxAdZo0cA+L9
- BEKhOwWMaTfwAoEMAFwbuK8ChRmDwRHTKK9DPTDrzWjL+T4ZVxSUvbHapVWE49YoHIv6KW6wETR
- U/ZaqVQ+HQRqnI6zv5ohJuBrZWQPIn1Rk5wHAN1wRhOOFEEIUV0MKWl+J1JR3s1DvdDWZnafOJZ
- YQ1rvTmIxbhj00sBxv9nB8dBGFD92+kyVYM0+O9aOsq7DHMuVM/M8k0zi5hP04i4DBkzaGp6i+W
- g6C1KwvU7SLvQY45Lnv68w4aSYuwydPCa4ARLg5lb1wpgHx/4N0ijWkz4zXgWE1ShgSqP686nTp
- Zyhq+V0VHq9qvc+I19EFTZmcXRlGF/VYi2d9d9qN5xt2GSeWao=
-X-Received: by 2002:a05:6820:188f:b0:68b:f68f:86d6 with SMTP id
- 006d021491bc7-68bf68f9cedmr3977767eaf.26.1775919214137; 
- Sat, 11 Apr 2026 07:53:34 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-68bc88c7493sm3103723eaf.7.2026.04.11.07.53.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 11 Apr 2026 07:53:33 -0700 (PDT)
-Date: Sat, 11 Apr 2026 08:53:30 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Ferass El Hafidi <funderscore@postmarketos.org>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Anshul Dalal <anshuld@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Martin Schwan <m.schwan@phytec.de>, David Zang <davidzangcs@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>
-Subject: Re: [PATCH v2 1/2] autoboot: allow custom prompt without requiring
- AUTOBOOT_KEYED
-Message-ID: <20260411145330.GV41863@bill-the-cat>
-References: <20260408-ui-cosmetics-v2-0-721dc6d2116a@postmarketos.org>
- <20260408-ui-cosmetics-v2-1-721dc6d2116a@postmarketos.org>
- <CAFLszTgwK5nUs2QA2Mh_pkTXycAiA0L4ukD8qywubW1AmTetxw@mail.gmail.com>
- <CAFLszTgvueYQUyGCQp3amZN20__LMvz_Eu5S_m=OQf9QDsr+DQ@mail.gmail.com>
- <tdc3t2.1tjebl3bs6nc5@postmarketos.org>
+ d=1e100.net; s=20251104; t=1775919408; x=1776524208;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xR/RHJW2NThfAW/aI5Xof4rSS06S1hIUFqBBxu101j4=;
+ b=Ab2imTgOjXE45rfgVHPESaGZ7AF0OWs6yHJo4zRt3UcCTZ+/tkHjXEOH2boML7QOA8
+ PDzGQ2E9ZysR3B08pXx+b1qeQNLzYA6faPWK09Lk0x7/xCMbYqt1V7o1sPsxOU/L9cYQ
+ e8W91SnNnuFD3sYtf9J4MwyZp/p6FF05wy1Lumy3UxnHjpvnpdIB2Pn3CC6ZJ19o0uii
+ E13QMcD+Ps9CwtGaspGMalxAi2HMne24NvEf/ZggMb5S1NToHJPAog62m8NNoRpP/ptV
+ cJPzmTuM1rrXT/mZV4XDaKPyh+lL6cn9q8VzQIylcCbGtb3hzVHl23S3ZHVRwWpbieyH
+ aEaw==
+X-Gm-Message-State: AOJu0YxDjzFs/PN30anPydQYJ8uVN4Y1wTcJY6/708dVYQO4nYFqPfJX
+ o2OVm/ohAKgxz+yg/7C9H6h+uf9wFKr8cv6JS1KLsEsGT9HYaYqXzqFVqLut9iug7cNh2SV7EvP
+ ULY/ws1+gBZYjHQULi1HCilbC1ioCnjmatDWDmruz
+X-Gm-Gg: AeBDies7hNi1FRjcxxvnJqOta6dZ3UhTfx4VkVaJMOMKwLM0yWBoNS2V1zbOhTiT6EF
+ iVzgFGet/8HOXJHTqN/AdSWSI0uyDpAGCSpzlMNvoit5e9EEVCKHKYTAZnnhuNUo7rVoJCt1djO
+ CpUgomKFAgpDLrtbsqae5ZQyJ1OsQETDh8d9SNrxJPWixXfTZ3UHHzMlLzm01/wyES30VQWtoFI
+ HqYfdxX5sy5kU1r7qFpsoiSuoofDHNJUn72RjUbmXoGL/fS/YNpFBQ1pn+n+zqq/OFZJZ1xN5QD
+ /z+kYQ==
+X-Received: by 2002:a17:907:26cb:b0:b9c:617b:4a36 with SMTP id
+ a640c23a62f3a-b9d46227ffamr596838366b.21.1775919407635; Sat, 11 Apr 2026
+ 07:56:47 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="MSJPg1yEx2tioKij"
-Content-Disposition: inline
-In-Reply-To: <tdc3t2.1tjebl3bs6nc5@postmarketos.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260409133303.31875-1-ansuelsmth@gmail.com>
+In-Reply-To: <20260409133303.31875-1-ansuelsmth@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 11 Apr 2026 08:56:32 -0600
+X-Gm-Features: AQROBzCob8eL_DgNQfdRzLdw7T3yuSaN47yDPpNuYj0a-3D1vzG_cXwbgEX8dBE
+Message-ID: <CAFLszTi9tTgRYrfv3KYFFv9F9u8vpecoks0DomRnxioN19hsxg@mail.gmail.com>
+Subject: Re: [v6,0/6] misc: fs_loader: reorg and split to FS and FW loader +
+ FIP loader
+To: ansuelsmth@gmail.com
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,68 +108,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Christian,
 
---MSJPg1yEx2tioKij
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2026-04-09T13:32:56, Christian Marangi <ansuelsmth@gmail.com> wrote:
 
-On Sat, Apr 11, 2026 at 02:47:00PM +0000, Ferass El Hafidi wrote:
-> Hi Simon,
->=20
-> On Sat, 11 Apr 2026 13:34, Simon Glass <sjg@chromium.org> wrote:
-> > Hi,
-> >=20
-> > On Sat, 11 Apr 2026 at 07:27, Simon Glass <sjg@chromium.org> wrote:
-> > >=20
-> > > On 2026-04-08T16:34:55, Ferass El Hafidi <funderscore@postmarketos.or=
-g> wrote:
-> > > > autoboot: allow custom prompt without requiring AUTOBOOT_KEYED
-> > > >
-> > > > The autoboot prompt used to only be customizable in Kconfig when
-> > > > AUTOBOOT_KEYED was enabled. For a usecase such as having a nicer
-> > > > autoboot prompt alongside a splash screen, there is no reason for
-> > > > AUTOBOOT_KEYED to be required for this.
-> > > >
-> > > > Remove the dependency to AUTOBOOT_KEYED, and use AUTOBOOT_PROMPT in
-> > > > print_boot_delay() instead of a hardcoded string.
-> > > >
-> > > > Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
-> > > > Reviewed-by: Tom Rini <trini@konsulko.com>
-> > > >
-> > > > boot/Kconfig      | 30 +++++++++++++++---------------
-> > > >  common/autoboot.c |  2 +-
-> > > >  2 files changed, 16 insertions(+), 16 deletions(-)
-> > >=20
-> > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> >=20
-> > Actually doc/README.autoboot documents CONFIG_AUTOBOOT_PROMPT as part
-> > of the CONFIG_AUTOBOOT_KEYED group. [...]
->=20
-> Sure can!
->=20
-> > [...] Since you are decoupling these,
-> > please can you add a patch to update the documentation? Really it
-> > should move to doc/ though, if you have the energy for that.
-> >=20
->=20
-> It's already in doc/, what do you mean by that?
+> Rework the FS loader to permit reading firmware from container that
+> are not exactly a readable filesystem.
 
-It should be in rST and part of our public docs, rather than a plain
-text file under doc/.
+The overall design looks reasonable. Splitting the generic firmware
+loader infrastructure from the filesystem-specific code makes sense,
+and the new FIP loader is a sensible addition for ARM platforms.
 
---=20
-Tom
+> Then the FIP loader as a basic parser of FIP.
 
---MSJPg1yEx2tioKij
-Content-Type: application/pgp-signature; name="signature.asc"
+Neither the existing FS loader nor the new FIP loader have any tests.
+Since you are adding new API entry points like
+get_fw_loader_from_node() please can you add a simple dm_test for the
+firmware loader uclass. Even a basic sandbox test exercising the ops
+callbacks would help catch regressions.
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCadpgYgAKCRAr4qD1Cr/k
-Co4bAP4oBQYRPB8YYgYWiaAXGQIZQkmCob6BKyB7gItIj/PjSAEAtKv2H1h8D85L
-UZ4SLT/pKsZnNXl7PGr9TruZse9CoQo=
-=niu0
------END PGP SIGNATURE-----
-
---MSJPg1yEx2tioKij--
+Regards,
+Simon
