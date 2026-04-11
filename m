@@ -4,94 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59524F3ED5E
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 20:31:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2641FF3ED5E
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 20:31:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B107E84154;
-	Sat, 11 Apr 2026 22:31:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4DCAC84198;
+	Sat, 11 Apr 2026 22:31:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y/EAroaa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VU5cByAJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 132C384118; Sat, 11 Apr 2026 22:31:13 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 4858884198; Sat, 11 Apr 2026 22:31:24 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56D4A84181
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 22:31:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AA2D841B9
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 22:31:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b9382e59c0eso561772066b.0
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 13:31:09 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775939469; cv=none;
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-66f727d6849so4671146a12.1
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 13:31:21 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775939480; cv=none;
  d=google.com; s=arc-20240605;
- b=IS4CPFFOMIvKo87hcenWvwNf5Dft/RYkC+qMya7sexYhx4EoTSaNBKXp+lMuH9m+JZ
- A7VqJE1Al/7M5mG82rLG/VkRGUaX8u4eZ/BkBoxKcbIAM2cSFvnGdD1F+43uh9eMIsJr
- 08kyP4ZTwuwJ4+UKxFKlxzCc4yW9FNp7yoC6NuApk3y9WbMkCEakwg5rIo/ncnrCh1fd
- 1kc0TajZspoikPU95Q1RXaGnxb6TWTyp7KZb0dZQlOEeFTZdAQQXdtbh2ZKH6OqFnGRT
- +4p39+qjfgByOhEKn3Hll5ctDjdntJl155YHTkxm5QrFQOWVGCg9ZcJnApwCfn8hmeMR
- /HoQ==
+ b=kZiD0V2spfQzU5TPg47tB6aTJlNsnK0vvKtziHeFnTNpEJyd8LdV+3xHlIRyMZ2xHP
+ 0kZsfN4+6jtNsMkLTWfG1SmlOX/9bM4+sIgLJ8FYuyUvYpaFnrvZKHDSHTMFPoRtwrKQ
+ 341sV31vDq0M87/qVjIyGDdsSR3AhAl8auwnOVPx7SiFJGLzlTfpaKNVUtKf/mTpYBFy
+ qFdNY4pQiLRQx0/F/J2xt5RBfMKtFXUd+5mNRxeVLXNMuA/J+vw93iNtswhX8vOSXiav
+ UhQQEVqRoQSXXEntBCwBmLUfp2YAwXRINK67m/wEyOzLsjXpoHxm428zSETGhOU7occS
+ UrTQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=TQK6A2m1Ng85AjXyt1S6hx5mynGKOnm4ca1A91EQN80=;
- fh=DNnc0PxDvDAOtN2DNlU78zUxlw1DS1Be5zZEFqtZAt8=;
- b=aFlnn/D+WuRoR8LwUbuB+gtnH6iT3RxINuOifn7+mqo7cPrvUwSFNUu+20CznEY4z1
- elq0oRKMbp0UoyBuMYpjwYDl7pX8dt8ajSssRsedjiZNiP2S7XVFQBKcdG6P4xKqnFuv
- LG7yZ7h1YuK5hnOV6tH12isVuO+7ILCdIU7Vc8GjfQo1oZBYX4oqUaz1XuvkK4FP70JO
- o4PaUoHZaGNO4XE82NjI5QgzTfcGfpIXlX4X49bU/EYa9IybLUoVAgGn+dZwYHsC4wUp
- 7aogzicv2ZKf3igs8D5gRHU8RXcICAZNljgYRtrB6JR9hMZqKLx+Tz3kv56aBCodiHJs
- 8/GA==; darn=lists.denx.de
+ bh=asciO2sC2l8wVvFXsrQEdWvaKuH8CNKKLgigQZwvWCE=;
+ fh=zmaIjKiWjntoLGDg2H+ia8/7xCQKism+FOaSsAFHQho=;
+ b=WDjz2H+HC3cQUhnu6K5hmhy145GWAonZdVMWAN12gAyBi/+aqqQ6NyccCl0lcWknj3
+ 4lU519Ob7yCWVDd8rsgI3nLq9MyALLhFcv/Ul4DZIgvizaxA8bGXEW89rTqNNzPN8FoR
+ 1iTWSyG3ajvSp2itSgkEXT4kWIsQ0EP5PqIXMumcpXgjZ4SfyFIFDQc/iCdI2SfBG1SQ
+ 7pCmCFkEUOFBOg7rXAuHXVCiGNX2Pek5AuJ7wlR2qgzOKgqpr0nUL/DyN256WGINVcGA
+ FF1Fi8tpk5SJAr5j0RHQoJcVdyQpRBHs7vk1WjdNH3amYHrredlQ7btvagOIk2lE2OSB
+ mxxQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775939469; x=1776544269; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775939480; x=1776544280; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TQK6A2m1Ng85AjXyt1S6hx5mynGKOnm4ca1A91EQN80=;
- b=Y/EAroaakxnK+OoIq4X2VTHJ7yN9LASOCoUQ5q5FJnZEQDn5zgqovQq5gkVuSffjup
- 3/8r7BgUv8XPgN3sIUSt7lUqH2I38svIiENz4LsJKlQd3HU6eysEARu8xw+TuW2L3nqq
- wAGKALsu/qgvOXTyqGsbKmAeynAU6PSMZYsb8=
+ bh=asciO2sC2l8wVvFXsrQEdWvaKuH8CNKKLgigQZwvWCE=;
+ b=VU5cByAJgvTTZ84dIFAUIAL643Zn0luQ/StCreB1WB/jUc3PtfDruvpvqtuRPQX1ss
+ GPqwzTk0Psaxzk2kz6V4r18KZAjlWEcA8P+yXYnq0NSc7ig2entaRIY1KbrTLD3Gb6Vp
+ WxR6to7CLuxGKSc4mWbDGYRLAG/pGnEI+C4Mc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775939469; x=1776544269;
+ d=1e100.net; s=20251104; t=1775939480; x=1776544280;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TQK6A2m1Ng85AjXyt1S6hx5mynGKOnm4ca1A91EQN80=;
- b=kGtd8wVOcBu2YDU6xhYiEKR1RgvverniT0qKguK03scZb46POxmD53ktruwU1h1uvQ
- 25X7ODpsk3cf26ciDb2b8oVP0At8nFM3Y7EdzCAX3Tis6uPaBvMUr+HUZZecv3fu1Sk0
- 5oBtZHaRR4nEt7sxBtAFnma8sX1pqx7JCPvYiHEX5szHmsYlCAWzY8RV+t7RItOPFqa6
- JK8zEtuZazvcnciaGHew8Abol21uqy4msGK/kB+eQ/hwTut4fPiHNqqlo8syuofsscS1
- 3e3XvqNeMhD4LIAcEhP1lHVa0xJ9ItiqOHmTU7TCmvjFNmHchK88uIKQfy54d4BuCIFc
- hPDw==
+ bh=asciO2sC2l8wVvFXsrQEdWvaKuH8CNKKLgigQZwvWCE=;
+ b=XgG3AWZVJIoiEOX1sOvglfNS9upWaBMTqOOMjUHRUwHM+Xezt7ggERY8byCRdVT7Mr
+ oqpDQ2mpxXydXnPMxhtqDphvg2Mv/0Keah15r8GE6nk0JGMGR2NmeL3gom7N7Gi8NdS0
+ qDJxvN1tUXlUc12WxXiSG2oq577yh5cq4xN7b4JjX28ijBs0qnV1vI8Ye5oe0eOKqZDj
+ TrElQjxhSgO9XBROHzaz8LkDJn3LgFtc19N9o2/+BjUjXYPM6yTMPYnoNzxgv9qpbZ9z
+ kCLBnjqK54/XtHgbEFX5iLAoJpd2ybraUVngI+emshm4pd61lRAUC7BAZ7NVCK+X9H0C
+ YgWQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWPG9EksKi59BkGGu0HFBlf9GyV9iiEbvP3Xu8IYHkEyhZQOLjc9SixCiR9WevuPZxET8sFqZk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw3wjkESNghzeE7DFEV5mCYau0578Xf3EmEHdPRgT3UHzF/dXlT
- 3n/0/feb1xdJBh3prgUVi0aKRfoUcnZR5XcHPDGwk74mjLmJk+SdIF2fWVYHiaeLE9LbL78N2VW
- u0zxBaRJBHvmg+BQQLzqox/eSt90vDAxesISZ9/yw
-X-Gm-Gg: AeBDiesPv0BmiP1Fn0IG29E/J2n+VIUiO8hiwtE0qdhZ/aFF1V9YoqEUf9X0RGXM5Ky
- RXajUYZkGUy8v3p9tJllLsc8MGGcr7b/mnnrtAt+Vgu9Xv80hgyHmBVRPNnK8JooeY8ksqpRr4n
- 2NkZUy7LjwPN0Z+vNZqLxs+MaFcGCPGazRgJiBb46VsEq5jHuniTn8U8XEQ1bt4paG8IMU3nfF7
- ZOc1DJ9YDaHCyxL5l52an4T8h4IVVUyVMSWu7SFrE04kxqk3rBtIEqYAW0Du0XCK+ZEMnni2P/i
- CCv01Q==
-X-Received: by 2002:a17:906:7947:b0:b9c:30b7:770f with SMTP id
- a640c23a62f3a-b9d7265d35emr490450566b.34.1775939468704; Sat, 11 Apr 2026
- 13:31:08 -0700 (PDT)
+ AJvYcCWpjkFXvl/XW8dDLPRa8Ajht/bRwfH30RhwAwmOA4JrjtEDa0pGb5/v5J/Kc6j/qb6V7m6jxnE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwcI19HN9avnfGqWKTVdMVvbhpxG9gxQ8V+VLslwHYez8ub9HOs
+ 38m53uVgOd9rhRK1KVYJzl2cLWFR++Weimb8kA7VtxNmbRRlTaLrDTjB/L5rXsQxM9/Npi1Eb1z
+ bnrtOWUM4V5vwhLw0wenM2fB3arwOmyFk+qphJb8/
+X-Gm-Gg: AeBDiev+YyljLFJSzX4y/mjqnWehRbuu7Zzq3tHUdTfxpwDwvftFdobvsxZ6DNBA946
+ pclHf3KHl0hZ1iuSAd1z1puzx2tSFOxs0qPsR12w5VHGgI/KM/MjIzgVAsH3ih0kv/gDFYFhst6
+ 7sy5nsxMtRLjNg6aKgtAKqMgLAnE8a3XItA+m1WVdnZrU4GBwj/HudXzFdm6aqXoLSnFN5Wimca
+ 6451TyQP57raVR6vHzMbfeWpmjNp5NAcPT3xOfq1T/xPksyngmbgwLpwycNIWvq7rdErt7lSL8a
+ KxMfgA==
+X-Received: by 2002:a17:907:848:b0:b9d:1670:6794 with SMTP id
+ a640c23a62f3a-b9d729bc9d5mr401124966b.35.1775939480436; Sat, 11 Apr 2026
+ 13:31:20 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260408220928.3328551-1-daniel@thingy.jp>
- <20260408220928.3328551-5-daniel@thingy.jp>
-In-Reply-To: <20260408220928.3328551-5-daniel@thingy.jp>
+ <20260408220928.3328551-6-daniel@thingy.jp>
+In-Reply-To: <20260408220928.3328551-6-daniel@thingy.jp>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 11 Apr 2026 14:30:54 -0600
-X-Gm-Features: AQROBzC16FWlOcijl06vs9Tn4NvfJJtKklXvXQFdtY9uS71DpAunCDC1cm32JfE
-Message-ID: <CAFLszTjXCmp5f6y-5mkFG1R+B5A6dqrWRAmrYG2evD5Q4N5PVA@mail.gmail.com>
-Subject: Re: [PATCH v3 4/5] virtio: blk: Fix converting the vendor id to a
- string
+Date: Sat, 11 Apr 2026 14:31:04 -0600
+X-Gm-Features: AQROBzC2IsPxIhXfuRDiZqf2v3hsX0W41g89puNl_wR1txgh8-tCLW3cdGxd4eM
+Message-ID: <CAFLszTi_QuEj_trUW-kAPw6cY_JbgmvqRQbQGi8ddU0Zn0dPpw@mail.gmail.com>
+Subject: Re: [PATCH v3 5/5] board: qemu: m68k: Create virtio mmio instances
 To: daniel@thingy.jp
 Cc: visitorckw@gmail.com, angelo@kernel-space.org, bmeng.cn@gmail.com, 
  u-boot@lists.denx.de
@@ -115,41 +114,37 @@ X-Virus-Status: Clean
 Hi Daniel,
 
 On 2026-04-08T22:09:23, Daniel Palmer <daniel@thingy.jp> wrote:
-> virtio: blk: Fix converting the vendor id to a string
+> board: qemu: m68k: Create virtio mmio instances
 >
-> Currently we are trying to work out if the vendor id is from
-> a virtio-mmio device and then casting a u32 to a char* and using
-> it as a C-string. By chance there is usually a zero after the u32
-> and it works.
->
-> Since the vendor id we are trying to convert to a string is QEMU's
-> just define a value for the QEMU vendor id, check if the vendor
-> id matches and then use a predefined string for "QEMU".
->
-> I don't think we should have been assumming all virtio-mmio vendor
-> ids are printable ASCII chars in the first place so do this special
-> casing just for QEMU. If the vendor id isn't QEMU print the hex
-> value of it.
+> So that you can use virtio network, block etc create the virtio mmio
+> instances. There are 128 of these even if they are not all used, a
+> single mmio base value is passed via bootinfo.
 >
 > Signed-off-by: Daniel Palmer <daniel@thingy.jp>
 >
-> drivers/virtio/virtio_blk.c | 12 +++++-------
->  include/virtio_mmio.h       |  2 ++
->  2 files changed, 7 insertions(+), 7 deletions(-)
+> arch/m68k/Kconfig                     | 14 ++++++-----
+>  board/emulation/qemu-m68k/qemu-m68k.c | 47 +++++++++++++++++++++++++++++++++++
+>  2 files changed, 55 insertions(+), 6 deletions(-)
 
-> diff --git a/include/virtio_mmio.h b/include/virtio_mmio.h
-> @@ -5,6 +5,8 @@
-> +#define VIRTIO_MMIO_VENDOR_QEMU      0x554d4551
+> diff --git a/board/emulation/qemu-m68k/qemu-m68k.c b/board/emulation/qemu-m68k/qemu-m68k.c
+> @@ -25,6 +30,38 @@ static struct qemu_virt_ctrl_plat reset_plat;
+> +static inline int create_virtio_mmios(void)
 
-This vendor ID applies to all virtio transports, not just virtio-mmio,
-e.g. virtio_blk.c must include virtio_mmio.h even when built for
-platforms that only have virtio-pci
+Please can you drop the inline keyword here? It is not needed for a
+function called only once and not in a header file.
 
-Please can you move this to include/virtio.h instead? Something like
-VIRTIO_VENDOR_QEMU would be more appropriate.
+> diff --git a/board/emulation/qemu-m68k/qemu-m68k.c b/board/emulation/qemu-m68k/qemu-m68k.c
+> @@ -80,6 +120,13 @@ int board_early_init_f(void)
+> +int board_early_init_r(void)
+> +{
+> +     create_virtio_mmios();
+> +
+> +     return 0;
+> +}
 
-With that:
-Reviewed-by: Simon Glass <sjg@chromium.org>
+The return value from create_virtio_mmios() is discarded - really this
+should be checked. If not, perhaps log_debug() or log_warning() would
+help report when virtio-mmio devices are not created?
 
 Regards,
 Simon
