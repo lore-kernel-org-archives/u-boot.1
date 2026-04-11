@@ -4,81 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21CF8F3ED50
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 17:27:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D403F3ED50
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 17:39:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A704B84118;
-	Sat, 11 Apr 2026 19:27:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0202384118;
+	Sat, 11 Apr 2026 19:39:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="qPiq9xZM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iScYyK6w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9F0184118; Sat, 11 Apr 2026 19:27:51 +0200 (CEST)
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
+ id CE83C84154; Sat, 11 Apr 2026 19:39:46 +0200 (CEST)
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
+ [IPv6:2607:f8b0:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADB0A83DC9
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 19:27:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DB5783DC9
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 19:39:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-3591cc98871so1546423a91.3
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 10:27:49 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-c766a95a72dso2027594a12.1
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 10:39:44 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775929183; cv=none;
+ d=google.com; s=arc-20240605;
+ b=WtCILOxvG/uttySyPdF2A2OSfAzGlUTQJQ29JGjOYYU99wf19cBeuBiBYpqhq41NSj
+ PvUhGK4bDjwWG2yFCDmjJWvwKl+ZsUkh8Z9gAdVdcY/MH+PoYTn4AP5Ex2Ict++ZKcL6
+ zhhxcS5se0wBbiaKMrZBcI6oMScQ+6MSaWRDXFsbbl7mPvqhv4nuEiNS4cI06RH+EwxO
+ AWiIUqS16/j6+K1eomp0AVEfWjhMXNI/x1zVoCUl7Rahu6THyVTt/J4Wllhcd2VSZWEy
+ PAqaBuU0tReZb7rB6BRNAmzYmQfAzwIZl+G2b5TthMo07VoDaSkIG29KLH6EVg/DF4iq
+ y+UQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=6lEbo0zYPwTdJL7kyJ2Xzt2F01WOM7CTr2fXCAeyeew=;
+ fh=RMotW0d5XlV4ufFtnrZdzQ0yk4gZppNtVCUWCpNgShU=;
+ b=LOzK5wOrQm+N1+5+sZF/6IoBRze+d9RZJwng+irXRdv74ee6Q32G6ltCYLRZXufdzJ
+ SCzMX/OCgwkcY3m3o/rfROFBYby+MGKDcZcliuUk/mnIb0QACSmdXJTNORgl3CKEChg0
+ YvGUzQHbH3vY6tV3GEHdJAOXriS5KNzSMgF8EqcAQRAQV8Ttv0XBc7uGrMpNCxMnWW/z
+ 8Gr7mlwYJP91XYk1qjwmSWRmOo0kbZYb239OPkofcThQqZvh3yAyoP1/G2W0QiO+cCp9
+ k4HnrgJzWxtdMvwyBxhke53tnde/yDMK4fdWvRBuv6+XL03awxhFKqh8X0llir177nuv
+ 8TMg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1775928468; x=1776533268; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=KaJ6lsXbGYi/BLZcb0iwsVUy8cGezcCZZrYfpwxoyx4=;
- b=qPiq9xZMH7b5AepUBf54o0+i6uF7dccZ10xmR34Qg0xw3hEk2yhUSI02kl/od0FoHc
- UQAkBy9H51Ztz3PD/A/YNwpYBDv2k3RSXh+Psuck4gkKEJ3164+E1+jYRJ8nCNazmicD
- 6j37CJ1l4nAVf+syGwFUlGa23g6YXmAwMwp32nBI1GbzeoF6fd1vTnW1Y9z/V0h/4V/u
- KlCgZCqrabvLYCtcNgcH0BWmPOC5yR2LtZY/sYRE1uGBczWuamiq+ttgouswQ2ROYDHc
- Rtta7UcTLE4dRiJDpJkUlyvkNCYLNO75GYwR1Lstt8A+dUvuVylFccPkwlh5qyjqfOhc
- og7g==
+ d=chromium.org; s=google; t=1775929183; x=1776533983; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6lEbo0zYPwTdJL7kyJ2Xzt2F01WOM7CTr2fXCAeyeew=;
+ b=iScYyK6wH9kw3l9qm8Hf8IlOK0KIZ3XJdEorZUfdDNP6eNAyjYskIYxtnt9ndfXZiY
+ DLJswE7h7rr54Wwlw55AkCE9/vw7iXnb+1K60/+LqprHC6PRpMP8pMU/s9YyDAf3vzwH
+ CB942DT6fV+BOM5725Vz41Od7phjcLl0MPs1s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775928468; x=1776533268;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1775929183; x=1776533983;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KaJ6lsXbGYi/BLZcb0iwsVUy8cGezcCZZrYfpwxoyx4=;
- b=CeDOCAvA9X+WYXDCHcd9THFTDs1oXMvRqVLW/Ud9yAM71BvvLjslr7pdHz9Q0bwr7/
- VJKes8/5Z4jTSWC9FHSU5cF9HCJtDJVq2WGImucKKgyDUnlJxiCTTWxanDyLSfAgHtSE
- VV1CVADclpuPGn7rpmukt2hTPCopShtpBl57zhKbSHvHVgtx5Wrsox6FX/uZAQsfB9hw
- AZTbn+D0Wdnn2L130NDzjaUOCMSMabGmonRZKQKj3OWemrG7BXmu91CAPKNwgtAFyXwu
- wlD2c5ihlm5/mAmyJnxlFJDmWBO9BpZdjZaPldUQMuHNahv6bIHl9h+XddAud7jCd9Vv
- /3gw==
-X-Gm-Message-State: AOJu0YyvbXJPATyBCAhBPFCN9AgEybmn122RCcbLDgc4uABkul/VZUd3
- NIiddBOjV7IWpF+truq6XS+xdkdG8aFlJLNZ1ZgU/fkdhBMT3ghcNxa6CvCpPg==
-X-Gm-Gg: AeBDievY00+PTo7ISoeu1fq0LfqqOxQwqz2HPRzzDvFy+PehXSKqizGzXZUDFVYbsVa
- JcWdrrEv9Jnxex2z9kqTBjWeHp1IWBmriSoO+sb6csVieE5SElUvurS7YYngpc99LaKXpFElId5
- 4KPiLnrVMLjsCeoBhk2Wu18it175EykMvfshVItptmwafTTKEn6TD94JH1yHjlieNxD49E1Lrq1
- LgB1+ttLyXVIMswEPLyzCJdUKXkxSyWcnVUCszrdyKzlBio1DZHQqskVVLPiK5L6mDLICzxufuh
- pmeIDFyp9LCbB9A9nwUGwLGFLEzDM5smCznNMyU+h6Uhfx2Pj1it2o0wTIAsQcrSBsLGiWBmgOi
- 7fLVwd+7wu0U4R1i4BNyYIxbE5PADft0ITEFxqZV+cQ8TWqgNd8IQoHlPfXmtyoYL+1JiPMdVpN
- WC0TTPfG8FFD+eMq2wtPkmq3t+2zTyAHZQvEaGCj3TIg10sQ==
-X-Received: by 2002:a17:90b:1d8a:b0:35e:30bc:96ed with SMTP id
- 98e67ed59e1d1-35e42781abdmr7871163a91.10.1775928467834; 
- Sat, 11 Apr 2026 10:27:47 -0700 (PDT)
-Received: from intel-VirtualBox.. ([94.156.205.200])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-35e411ff4c3sm7155785a91.2.2026.04.11.10.27.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 11 Apr 2026 10:27:47 -0700 (PDT)
-From: Brian Sune <briansune@gmail.com>
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Brian Sune <briansune@gmail.com>
-Subject: [PATCH v1] Improve handosff prepare on SoCFPGA
-Date: Sun, 12 Apr 2026 01:27:30 +0800
-Message-Id: <20260411172730.218700-1-briansune@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ bh=6lEbo0zYPwTdJL7kyJ2Xzt2F01WOM7CTr2fXCAeyeew=;
+ b=FNMMliU6oLDmU6cNtJJdluZZhxtGv6j52nEDn4R+yhMY9yE9YmDwHipU0q6HMQjEpm
+ ZHKjTMnUiXrc/JgSqGGnLAGkCKomcGLKhEIyZAMeK5o5uULvf5khp3Uof8kNtAAC3PEs
+ 1Rd08/Bs9qnn6Gi+itFiOlUltXiiP8wc4emCRp+KTBj9mNE/xXGn9v8lW9uGMqwW4v8g
+ +8el/OK2+HNSsKluv6U19SH9gnNpNrVnvC+mI2GZy6L1jB9sYBjKIKO2YO3Rfo2+BjLa
+ 8lKYoBUHjs4aMvu3GxLc6bIf7qRhPlP61XjkhgnoMeP7GmoElAjTthLivv0sCLKR2v96
+ HaWQ==
+X-Gm-Message-State: AOJu0YxoyfevWazdu0mEl/PLpP1aVApcS4xivDbs/Sqckt90tFurxiNP
+ KudSa56AyB6LM6P8nkaWgzCIyPJJVo97plZ8YIgJ+W0xDdcj1oJ9syAzP0dg5cJCExZ3Xm7zaXp
+ 0aNzpuU5Mnq2dj+FrwwJnZ9O6aJKST6vCKqL+vxP/He1QQf90eerEcCLq
+X-Gm-Gg: AeBDievGBbtq5foY0xuiR471qu2fjf8i1QjeNI7xB1vM51HO0ui0fanoEjBPJ61dEXP
+ z6jNvs0em3ORmwBoViczlQkWRlfsLvXeuSim77oHZOLosqSVu6wil6FrSRNfGdOJH4TEubjVXDy
+ uC3+7J3F8fFrRS/z+RhvI1WQqpYJ0x6cEKaTfpY2bZ0zE2ov50TsVkxh0LkS05VNxyz4CMKUP9y
+ Y3jrmBBdLpEv/EJxYysD1ojK8lFXar+d3VUCjvSfoRTH7+sORMMqPc9DAWY05m/XFwLd0Fu/clC
+ y2jezA==
+X-Received: by 2002:a05:6a00:2d85:b0:82c:9126:31e3 with SMTP id
+ d2e1a72fcca58-82f0c31050amr8568818b3a.26.1775929183029; Sat, 11 Apr 2026
+ 10:39:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260408140339.798015-1-aristo.chen@canonical.com>
+ <20260408140339.798015-2-aristo.chen@canonical.com>
+In-Reply-To: <20260408140339.798015-2-aristo.chen@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 11 Apr 2026 11:39:24 -0600
+X-Gm-Features: AQROBzA5OsO_lWqmSomBn6E6Q7Of7o4XWcnMf5a3VYoKLs4lmtH4peoH1AM70l4
+Message-ID: <CAFLszTik_GipbFjp5w_kFiDjBJwX9GMEwH3ChUgoMT21ecJjzA@mail.gmail.com>
+Subject: Re: [PATCH v1 2/2] test: env: add test for himport_r SIZE_MAX
+ overflow guard
+To: aristo.chen@canonical.com
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,32 +109,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are some cases that the Python scripts
-are run and the qts files are not replaced.
-Make sure qts folder h files are removed before
-handoff script runs.
+Hi Aristo,
 
-Signed-off-by: Brian Sune <briansune@gmail.com>
----
- arch/arm/mach-socfpga/config.mk | 5 +++++
- 1 file changed, 5 insertions(+)
+On 2026-04-08T14:03:35, Aristo Chen <aristo.chen@canonical.com> wrote:
+> test: env: add test for himport_r SIZE_MAX overflow guard
+>
+> Add a unit test that verifies himport_r rejects SIZE_MAX as the size
+> argument, ensuring the integer overflow guard added to lib/hashtable.c
+> is exercised and not accidentally regressed.
+>
+> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+>
+> test/env/hashtable.c | 17 +++++++++++++++++
+>  1 file changed, 17 insertions(+)
 
-diff --git a/arch/arm/mach-socfpga/config.mk b/arch/arm/mach-socfpga/config.mk
-index 1ca1d33cb16..d9d9d4f2373 100644
---- a/arch/arm/mach-socfpga/config.mk
-+++ b/arch/arm/mach-socfpga/config.mk
-@@ -43,6 +43,11 @@ socfpga_g5_handoff_prepare:
- 			exit 0; \
- 		fi; \
- 		echo "[INFO] Found hiof file: $$HIOF_FILE"; \
-+		echo "[INFO] Clean old BSP files..."; \
-+		if ls "$$BOARD_DIR/qts"/*.h >/dev/null 2>&1; then \
-+			rm -r "$$BOARD_DIR/qts"/*.h; \
-+			echo "[INFO] Removed old BSP files..."; \
-+		fi; \
- 		echo "[INFO] Running BSP generator..."; \
- 		python3 $(srctree)/tools/cv_bsp_generator/cv_bsp_generator.py -i "$$HANDOFF_PATH" -o "$$BOARD_DIR/qts" || echo "[WARN] BSP generator failed, continuing..."; \
- 		echo "[DONE] SoCFPGA QTS handoff conversion complete."
--- 
-2.34.1
+> diff --git a/test/env/hashtable.c b/test/env/hashtable.c
+> @@ -122,3 +122,20 @@ static int env_test_htab_deletes(struct unit_test_state *uts)
+> +     /* SIZE_MAX would cause malloc(size + 1) to wrap to malloc(0) */
+> +     ut_asserteq(0, himport_r(&htab, "", SIZE_MAX, '\0', 0, 0, 0, NULL));
 
+Please can you add a check that errno is set to EINVAL after the
+himport_r() call?
+
+It's a pretty old API that!
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
