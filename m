@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 627EFE99058
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 07:11:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9F88F364CD
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 07:11:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5FC984297;
-	Sat, 11 Apr 2026 09:09:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1CA30842A2;
+	Sat, 11 Apr 2026 09:09:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="CYFs9cNe";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="WmqEvRDH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 986BD84099; Sat, 11 Apr 2026 02:04:08 +0200 (CEST)
+ id 07AC184199; Sat, 11 Apr 2026 02:04:11 +0200 (CEST)
 Received: from mxd-3-715.seznam.cz (mxd-3-715.seznam.cz
  [IPv6:2a02:598:96:8a00::1200:715])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E6E6841A2
+ by phobos.denx.de (Postfix) with ESMTPS id 65EFD8416F
  for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 02:03:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=seznam.cz
@@ -28,29 +28,28 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael.srba@seznam.cz
 Received: from email.seznam.cz by smtpc-mxd-7644845457-lgzgl
  (smtpc-mxd-7644845457-lgzgl [2a02:598:96:8a00::1200:715])
- id 469836b01d9662d94731faee; Sat, 11 Apr 2026 02:03:21 +0200 (CEST)
+ id 23ecccbd78e298d4224500e3; Sat, 11 Apr 2026 02:03:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1775865801; bh=FT64CkIr9NBOVaVt2u3VBA+dcAuZE/R3cdr3Ofp4OEU=;
+ t=1775865796; bh=/ACGPa6zL8Sb90YIJDHGUmmBBKj5bBWU4xeIH6xizW8=;
  h=From:Date:Subject:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Message-Id:To:Cc;
- b=CYFs9cNejHjFeGYqylTIAdAFvvkpVD2Q2SKP4QIJSW41MHHITfFxF7UayEKIK9re+
- ZSVymQ3Ej1D9ic6LS64hkwfoBbNB1ZxHrzKROaQ26/+4HPwioCesu/WOr3wZRfyggL
- zTT0bxd1kPKPI10bK8U+CPVmLzOqY9qBMOOf79NVlT34ud0uh7nuF6ry0goVwxKMNT
- P5FL67kIb3tsWmzUCCsO6ohvKgyDuQpK7BiMm8lgoqvYrWr/yRZb+tTwT4KhF0DXM8
- UNnb8+Hs1WHntosG/owtr7GPrlcsLFwzhMUQ04HJw7TgPihHmQ+LE8gtGBMEojVeg/
- WjxZwkCLWMjUA==
+ b=WmqEvRDHGodFdzcebg6kaowDIxto8VIu3rjEJ7WM1IQfYxqmOdvdXyelAMek2RZhp
+ Obfz49wxxIMNGJH5rWerkhmJfUVEFk628dKy8Mxv1ej0iadqzA4sDl7MJsvu+4pFQ+
+ bSgi7lXVm/N/Ul953Ot1h9VgNLJWpbsvTX8JVqBxiZZ2ggjTm6wPfFq5QA8rvu0wv7
+ J1+Jo8OliQ2g4cllBMiyhlPdB1GxlnmfUEJEgq5EzyAgU32IX4JNw2icPHRpoibFl4
+ RUvWXbTmgOe/npel7qe/xesqbb4Mu1022/aqLKJOq9mGzXdbZBxaK5w1/ZIDsnqa/l
+ o6UiHrvVlRGwg==
 Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
  by smtpd-relay-6597cc8696-xddnz (szn-email-smtpd/2.0.72) with ESMTPA
- id b552bba4-1af0-44f8-ae6f-284626012d90;
- Sat, 11 Apr 2026 02:03:05 +0200
+ id 8ac3fd86-ff03-456b-a689-fb6e0824757f;
+ Sat, 11 Apr 2026 02:03:02 +0200
 From: michael.srba@seznam.cz
-Date: Sat, 11 Apr 2026 02:00:15 +0200
-Subject: [PATCH v2 10/10] dts: add u-boot specific sdm845 .dtsi a .dtsi for
- shift-axolotl
+Date: Sat, 11 Apr 2026 02:00:10 +0200
+Subject: [PATCH v2 05/10] mach-snapdragon: add u-boot-spl-elf-sdm845.lds
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260411-qcom_spl-v2-10-9609557cf562@seznam.cz>
+Message-Id: <20260411-qcom_spl-v2-5-9609557cf562@seznam.cz>
 References: <20260411-qcom_spl-v2-0-9609557cf562@seznam.cz>
 In-Reply-To: <20260411-qcom_spl-v2-0-9609557cf562@seznam.cz>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -108,46 +107,46 @@ X-Virus-Status: Clean
 
 From: Michael Srba <Michael.Srba@seznam.cz>
 
-The board .dtsi just includes the SoC-specific .dtsi, which
-adds bootph-all markings to upstream dts nodes which are
-needed in SPL.
+This custom linker script is required to produce a bootable ELF
+for the sdm845 SoC. An xbl_sec.elf must be provided, which will
+be put in a section in the ELF as required by the boot rom.
 
 Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 ---
- arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi |  2 ++
- arch/arm/dts/sdm845-u-boot.dtsi               | 16 ++++++++++++++++
- 2 files changed, 18 insertions(+)
+ arch/arm/mach-snapdragon/u-boot-spl-elf-sdm845.lds | 25 ++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-diff --git a/arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi b/arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi
+diff --git a/arch/arm/mach-snapdragon/u-boot-spl-elf-sdm845.lds b/arch/arm/mach-snapdragon/u-boot-spl-elf-sdm845.lds
 new file mode 100644
-index 00000000000..d41210ab23a
+index 00000000000..10912f416cc
 --- /dev/null
-+++ b/arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi
-@@ -0,0 +1,2 @@
-+// SPDX-License-Identifier: GPL-2.0
-+#include "sdm845-u-boot.dtsi"
-diff --git a/arch/arm/dts/sdm845-u-boot.dtsi b/arch/arm/dts/sdm845-u-boot.dtsi
-new file mode 100644
-index 00000000000..b029264555b
---- /dev/null
-+++ b/arch/arm/dts/sdm845-u-boot.dtsi
-@@ -0,0 +1,16 @@
-+// SPDX-License-Identifier: GPL-2.0
-+&gcc {
-+	bootph-all;
-+};
++++ b/arch/arm/mach-snapdragon/u-boot-spl-elf-sdm845.lds
+@@ -0,0 +1,25 @@
++TARGET("binary")
++INPUT("./xbl_sec.elf")
 +
-+&usb_1_hsphy {
-+	bootph-all;
-+};
++OUTPUT_FORMAT("default")
 +
-+&usb_1_dwc3 {
-+	bootph-all;
-+};
++ENTRY(CONFIG_PLATFORM_ELFENTRY)
++PHDRS
++{
++	data PT_LOAD FLAGS(7);
++	xbl_sec PT_LOAD FLAGS(5 | (0x5 << 24));
++}
++SECTIONS
++{
++	. = 0x0000000014699000;
++	.xbl_sec : { // XBL_SEC nested ELF
++		. = .;
++		"./xbl_sec.elf"
++	} :xbl_sec
 +
-+&rpmhcc {
-+	bootph-all;
-+};
++	. = CONFIG_PLATFORM_ELFENTRY;
++
++	.data : {
++		*(.data*)
++	} :data
++}
 
 -- 
 2.53.0
