@@ -4,97 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2641FF3ED5E
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 20:31:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8479F3ED5C
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 21:07:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DCAC84198;
-	Sat, 11 Apr 2026 22:31:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 1DB8684118;
+	Sat, 11 Apr 2026 23:07:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VU5cByAJ";
+	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="TQIeqQBA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4858884198; Sat, 11 Apr 2026 22:31:24 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6B50184154; Sat, 11 Apr 2026 23:07:40 +0200 (CEST)
+Received: from mail.kernel-space.org (unknown
+ [IPv6:2a03:4000:b:d08:14a9:1bff:fedc:75ad])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AA2D841B9
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 22:31:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 52AA4839D9
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 23:07:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=kernel-space.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-66f727d6849so4671146a12.1
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 13:31:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775939480; cv=none;
- d=google.com; s=arc-20240605;
- b=kZiD0V2spfQzU5TPg47tB6aTJlNsnK0vvKtziHeFnTNpEJyd8LdV+3xHlIRyMZ2xHP
- 0kZsfN4+6jtNsMkLTWfG1SmlOX/9bM4+sIgLJ8FYuyUvYpaFnrvZKHDSHTMFPoRtwrKQ
- 341sV31vDq0M87/qVjIyGDdsSR3AhAl8auwnOVPx7SiFJGLzlTfpaKNVUtKf/mTpYBFy
- qFdNY4pQiLRQx0/F/J2xt5RBfMKtFXUd+5mNRxeVLXNMuA/J+vw93iNtswhX8vOSXiav
- UhQQEVqRoQSXXEntBCwBmLUfp2YAwXRINK67m/wEyOzLsjXpoHxm428zSETGhOU7occS
- UrTQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=asciO2sC2l8wVvFXsrQEdWvaKuH8CNKKLgigQZwvWCE=;
- fh=zmaIjKiWjntoLGDg2H+ia8/7xCQKism+FOaSsAFHQho=;
- b=WDjz2H+HC3cQUhnu6K5hmhy145GWAonZdVMWAN12gAyBi/+aqqQ6NyccCl0lcWknj3
- 4lU519Ob7yCWVDd8rsgI3nLq9MyALLhFcv/Ul4DZIgvizaxA8bGXEW89rTqNNzPN8FoR
- 1iTWSyG3ajvSp2itSgkEXT4kWIsQ0EP5PqIXMumcpXgjZ4SfyFIFDQc/iCdI2SfBG1SQ
- 7pCmCFkEUOFBOg7rXAuHXVCiGNX2Pek5AuJ7wlR2qgzOKgqpr0nUL/DyN256WGINVcGA
- FF1Fi8tpk5SJAr5j0RHQoJcVdyQpRBHs7vk1WjdNH3amYHrredlQ7btvagOIk2lE2OSB
- mxxQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775939480; x=1776544280; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=asciO2sC2l8wVvFXsrQEdWvaKuH8CNKKLgigQZwvWCE=;
- b=VU5cByAJgvTTZ84dIFAUIAL643Zn0luQ/StCreB1WB/jUc3PtfDruvpvqtuRPQX1ss
- GPqwzTk0Psaxzk2kz6V4r18KZAjlWEcA8P+yXYnq0NSc7ig2entaRIY1KbrTLD3Gb6Vp
- WxR6to7CLuxGKSc4mWbDGYRLAG/pGnEI+C4Mc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775939480; x=1776544280;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=asciO2sC2l8wVvFXsrQEdWvaKuH8CNKKLgigQZwvWCE=;
- b=XgG3AWZVJIoiEOX1sOvglfNS9upWaBMTqOOMjUHRUwHM+Xezt7ggERY8byCRdVT7Mr
- oqpDQ2mpxXydXnPMxhtqDphvg2Mv/0Keah15r8GE6nk0JGMGR2NmeL3gom7N7Gi8NdS0
- qDJxvN1tUXlUc12WxXiSG2oq577yh5cq4xN7b4JjX28ijBs0qnV1vI8Ye5oe0eOKqZDj
- TrElQjxhSgO9XBROHzaz8LkDJn3LgFtc19N9o2/+BjUjXYPM6yTMPYnoNzxgv9qpbZ9z
- kCLBnjqK54/XtHgbEFX5iLAoJpd2ybraUVngI+emshm4pd61lRAUC7BAZ7NVCK+X9H0C
- YgWQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWpjkFXvl/XW8dDLPRa8Ajht/bRwfH30RhwAwmOA4JrjtEDa0pGb5/v5J/Kc6j/qb6V7m6jxnE=@lists.denx.de
-X-Gm-Message-State: AOJu0YwcI19HN9avnfGqWKTVdMVvbhpxG9gxQ8V+VLslwHYez8ub9HOs
- 38m53uVgOd9rhRK1KVYJzl2cLWFR++Weimb8kA7VtxNmbRRlTaLrDTjB/L5rXsQxM9/Npi1Eb1z
- bnrtOWUM4V5vwhLw0wenM2fB3arwOmyFk+qphJb8/
-X-Gm-Gg: AeBDiev+YyljLFJSzX4y/mjqnWehRbuu7Zzq3tHUdTfxpwDwvftFdobvsxZ6DNBA946
- pclHf3KHl0hZ1iuSAd1z1puzx2tSFOxs0qPsR12w5VHGgI/KM/MjIzgVAsH3ih0kv/gDFYFhst6
- 7sy5nsxMtRLjNg6aKgtAKqMgLAnE8a3XItA+m1WVdnZrU4GBwj/HudXzFdm6aqXoLSnFN5Wimca
- 6451TyQP57raVR6vHzMbfeWpmjNp5NAcPT3xOfq1T/xPksyngmbgwLpwycNIWvq7rdErt7lSL8a
- KxMfgA==
-X-Received: by 2002:a17:907:848:b0:b9d:1670:6794 with SMTP id
- a640c23a62f3a-b9d729bc9d5mr401124966b.35.1775939480436; Sat, 11 Apr 2026
- 13:31:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=angelo@kernel-space.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
+ s=s1; t=1775941657;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=DWAi+84Oz91wEtgs4TfxjQAdgfyrO4rMb838qbUcvdQ=;
+ b=TQIeqQBANrMlY7C7trDjb3WAfhIa+xMeiWXRF/OLKL0AOpHoDHH72YhdRuEJ4B3/xE9c9u
+ pSIYffafwiulLsOcU+q9Mr/o104QocOcHpCRSCPdFABVEBzVR8CwC/Wbtfb+c6W56jMCEd
+ +vPc7cAvfoKPi4FpX/pAj4QqfzXrQ0I=
+Received: from [IPV6:2a07:7e81:7daa:0:62cf:84ff:feee:627] (<unknown>
+ [2a07:7e81:7daa:0:62cf:84ff:feee:627])
+ by oreshnik (OpenSMTPD) with ESMTPSA id 88e008d3
+ (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
+ Sat, 11 Apr 2026 21:07:37 +0000 (UTC)
+Message-ID: <f9270d65-c5cd-442c-82aa-b6e6ce96fd9f@kernel-space.org>
+Date: Sat, 11 Apr 2026 23:07:36 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/5] m68k: Fix writew(), writel(), readw(), readl()
+ endianness for classic m68k
+To: Daniel Palmer <daniel@thingy.jp>, visitorckw@gmail.com, bmeng.cn@gmail.com
+Cc: u-boot@lists.denx.de
 References: <20260408220928.3328551-1-daniel@thingy.jp>
- <20260408220928.3328551-6-daniel@thingy.jp>
-In-Reply-To: <20260408220928.3328551-6-daniel@thingy.jp>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 11 Apr 2026 14:31:04 -0600
-X-Gm-Features: AQROBzC2IsPxIhXfuRDiZqf2v3hsX0W41g89puNl_wR1txgh8-tCLW3cdGxd4eM
-Message-ID: <CAFLszTi_QuEj_trUW-kAPw6cY_JbgmvqRQbQGi8ddU0Zn0dPpw@mail.gmail.com>
-Subject: Re: [PATCH v3 5/5] board: qemu: m68k: Create virtio mmio instances
-To: daniel@thingy.jp
-Cc: visitorckw@gmail.com, angelo@kernel-space.org, bmeng.cn@gmail.com, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ <20260408220928.3328551-3-daniel@thingy.jp>
+Content-Language: en-US, it
+From: Angelo Dureghello <angelo@kernel-space.org>
+In-Reply-To: <20260408220928.3328551-3-daniel@thingy.jp>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,40 +72,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Daniel,
+Tested-by: Angelo Dureghello <angelo@kernel-space.org>
 
-On 2026-04-08T22:09:23, Daniel Palmer <daniel@thingy.jp> wrote:
-> board: qemu: m68k: Create virtio mmio instances
->
-> So that you can use virtio network, block etc create the virtio mmio
-> instances. There are 128 of these even if they are not all used, a
-> single mmio base value is passed via bootinfo.
->
+
+it's mainly ok, btw, since you need still probably a v4,
+see below:
+
+On 4/9/26 00:09, Daniel Palmer wrote:
+> In Linux these are meant to read a little-endian value and swap
+> to the CPU endian.
+> 
+> In u-boot for m68k this is currently broken and prevents
+> virtio-mmio from functioning.
+> 
+> This change is only for classic m68k. Coldfire has read big-endian,
+> no swap for these in u-boot and Linux and existing drivers probably
+> depend on this.
+> 
 > Signed-off-by: Daniel Palmer <daniel@thingy.jp>
->
-> arch/m68k/Kconfig                     | 14 ++++++-----
->  board/emulation/qemu-m68k/qemu-m68k.c | 47 +++++++++++++++++++++++++++++++++++
->  2 files changed, 55 insertions(+), 6 deletions(-)
+> ---
+>  arch/m68k/include/asm/io.h | 31 ++++++++++++++++++++-----------
+>  1 file changed, 20 insertions(+), 11 deletions(-)
+> 
+> diff --git a/arch/m68k/include/asm/io.h b/arch/m68k/include/asm/io.h
+> index 35ad4a1c0444..2577081d8363 100644
+> --- a/arch/m68k/include/asm/io.h
+> +++ b/arch/m68k/include/asm/io.h
+> @@ -23,18 +23,27 @@
+>  #define __raw_writew(w,addr) ((*(volatile u16 *) (addr)) = (w))
+>  #define __raw_writel(l,addr) ((*(volatile u32 *) (addr)) = (l))
+>  
+> -#define readb(addr)		in_8((volatile u8 *)(addr))
+> -#define writeb(b,addr)		out_8((volatile u8 *)(addr), (b))
+> -#if !defined(__BIG_ENDIAN)
+> -#define readw(addr)		(*(volatile u16 *) (addr))
+> -#define readl(addr)		(*(volatile u32 *) (addr))
+> -#define writew(b,addr)		((*(volatile u16 *) (addr)) = (b))
+> -#define writel(b,addr)		((*(volatile u32 *) (addr)) = (b))
+> +#define readb(addr)	in_8((volatile u8 *)(addr))
+> +#define writeb(b, addr)	out_8((volatile u8 *)(addr), (b))
+> +#ifdef CONFIG_M680x0
+> +/*
+> + * For classic m68k these work the same way as Linux:
+> + * Read a little endian value, swap to the CPU endian.
+> + */
+> +#define readw(addr)	in_le16((volatile u16 *)(addr))
+> +#define readl(addr)	in_le32((volatile u32 *)(addr))
+> +#define writew(b, addr)	out_le16((volatile u16 *)(addr), (b))
+> +#define writel(b, addr)	out_le32((volatile u32 *)(addr), (b))
 
-> diff --git a/board/emulation/qemu-m68k/qemu-m68k.c b/board/emulation/qemu-m68k/qemu-m68k.c
-> @@ -25,6 +30,38 @@ static struct qemu_virt_ctrl_plat reset_plat;
-> +static inline int create_virtio_mmios(void)
+My understanding is that, even if m68k is big endian, you need 
+LE r/w for usage with virtio. 
 
-Please can you drop the inline keyword here? It is not needed for a
-function called only once and not in a header file.
+Would M680x0 non-qemu work still with this change ?
+Maybe an #if defined (CONFIG_VIRTIO) && defined(CONFIG_M680x0)
+would be better ?
 
-> diff --git a/board/emulation/qemu-m68k/qemu-m68k.c b/board/emulation/qemu-m68k/qemu-m68k.c
-> @@ -80,6 +120,13 @@ int board_early_init_f(void)
-> +int board_early_init_r(void)
-> +{
-> +     create_virtio_mmios();
-> +
-> +     return 0;
-> +}
 
-The return value from create_virtio_mmios() is discarded - really this
-should be checked. If not, perhaps log_debug() or log_warning() would
-help report when virtio-mmio devices are not created?
+>  #else
+> -#define readw(addr)		in_be16((volatile u16 *)(addr))
+> -#define readl(addr)		in_be32((volatile u32 *)(addr))
+> -#define writew(b,addr)		out_be16((volatile u16 *)(addr),(b))
+> -#define writel(b,addr)		out_be32((volatile u32 *)(addr),(b))
+> +/*
+> + * For coldfire these read a big endian value and use it
+> + * as-is. This means that for little endian devices on the
+> + * bus like PCI device these won't work as expected currently.
+> + */
+> +#define readw(addr)	in_be16((volatile u16 *)(addr))
+> +#define readl(addr)	in_be32((volatile u32 *)(addr))
+> +#define writew(b, addr)	out_be16((volatile u16 *)(addr), (b))
+> +#define writel(b, addr)	out_be32((volatile u32 *)(addr), (b))
+>  #endif
+>  
+>  /*
 
 Regards,
-Simon
+-- Angelo
+
