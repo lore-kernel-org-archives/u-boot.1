@@ -4,107 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A06AF3ED4F
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 14:58:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4E1DF3ED40
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 16:29:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8D0B8419C;
-	Sat, 11 Apr 2026 16:58:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EE61B84154;
+	Sat, 11 Apr 2026 18:29:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jyn9yvg4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ASrIxBs7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E0518419E; Sat, 11 Apr 2026 16:58:46 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 40CFD8416F; Sat, 11 Apr 2026 18:29:03 +0200 (CEST)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58F4884118
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 16:58:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7182483DC9
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 18:29:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-b97f9587e6eso397680266b.3
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 07:58:44 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775919524; cv=none;
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-2a871daa98fso19936595ad.1
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 09:29:00 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775924939; cv=none;
  d=google.com; s=arc-20240605;
- b=dw0Jm4KMnrPO2M67QVUePlyHivPCU/T0waepmJSAyJL/VSnDZzVS4RMYzWz8p2SAyu
- Hl+PGAnOZ1P+jrMCcBRsdzuc3ICZ6GUx5dZ5PV5eCOVRJEWXq7xjMSoTH5qTsv8Pm7B6
- GYjV3YpUrA97V6y8FaYxiJf177tNll2t//PyWeajoIfWBoSkbzWXRItdr4tjoO8baAAp
- lVes70Byk2QAW7SbAJPoXbkizRd2rHuan4CSbpy9F7/+kjU0oNLUZcEpOm0RN28dfh3T
- +huYoLHrJHwlng+7a8Y3wcUk222aOAEri9WcGcd/mtSWZ3Pbd67F96r1vhW95H5h52SC
- ecEw==
+ b=DIc1eHwzx8ob/eJOiVEwkEnsUZipQuNyMx8fmWxH3Onk4izWOIgI3CkN4HxEDYebqL
+ yAy43qO0Tgu6IxI4cC5r7rb3PGboNm13+HHs1WmFiwu9BKY/CfMV8j2gWhacT9OvwQn8
+ /nE3/Nx7OP8kcrdmOCZmhQICN+WeuN/S5Sctyns3QxMLbFkg8fU89BBbLh3IuZdEtEAu
+ QEfv5tdHUmci9PaIfNWCdUv+MPyV/l18fy6z0KmqbqZukSK8xlL1zj6iaVHXFQa6rLtG
+ i2/q+Lb90a/UBrt4Tl+fDBlcQ0YKq9BtQT14dtFNhH9vw4xCfgOM4WguzGReADzzAs9H
+ acpw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=C+L/dz1mtXKl8SeIkRJN/gsCMXJq1AIlJRj6CSEh2bA=;
- fh=zqgypZo7V5l1Z09kqIenDlLd4mYts5FYV4cZ78J1pho=;
- b=S5XU9bvcR3D8WzKu8ef6sAw9p3SfMAofdIs81rxAWiLiSuxZYozArdukCr0ksIJciT
- xD9pHGBKY7qhwCper+4rbE55CfsCBHbJlvjcOwBpJVIuBXvshLZo/SpsReXUuqMoaes3
- fbeRy5yZLbWaWkEyUQ1VZYpLnUtkvdg10OLWRgFQ8UPebjNEh09ieiocQBaxVzvJggCC
- bmuDDp5D/6tzaUHQQHxZRh1yI0W2jxGPeQtwbkhDdEvJK2/YigI3SPWO8DcvndE8V96X
- aU8la7+Ym3SoR8zWI510FBK49/PjPKJmZp9t+QLXJ8Bxp+ZOS1f5Qt8XQQfMGebELrre
- ojHg==; darn=lists.denx.de
+ bh=k/nmbm6JVzRS++F2190jGb9MqXHXbchef2D+kSN9Xxk=;
+ fh=kI0ydHh3I9VudES9YPN+YmTUNcg1GAMjIdsyacz7lxc=;
+ b=UtZTF96iEDV2ZeLqo/L+DLERkRlRn8FmBFyoHkt8bbG4nyA2NajZylDuIxjqVEK6AV
+ oRNS54Y1KWYWU5vGjVEGEXjUZ1HxsJMZsRQNEcnCHdwp9+W8Jz2/woHIFnrCoYHmywtL
+ X3FNCfUvzZPtujfE8pbVI2l7yPSj16aZcIOEeBjFnfyVAhvPty/VEcudAVq8T12qOMNx
+ 6oK1G2Y3u6txCzExjk3OZWpOjQfQ3D9/KuFg5ApE3SgRstVAlFdrM5fhNeCCz3SxQqD2
+ ZpiTAqUYnDo2tC7mWMQFiHUfKNrMXyjeQyWtV6o1NO5D8WWFdNkQqbOLDzxtbPmxq09z
+ aQnw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775919524; x=1776524324; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775924939; x=1776529739; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=C+L/dz1mtXKl8SeIkRJN/gsCMXJq1AIlJRj6CSEh2bA=;
- b=jyn9yvg4BvryEsERRPZMjvb6b15fMnhoW9Q8LfD8iZhNnv56lgU2z4+am+LaYeHrM5
- wOHkbn68P/Sh9Lqq7ZbgJmEPZp/B1yzMf+q36X3Uneb5l3zL4gu5duFLSma7i83/pyj9
- DEGgx+VNF79KFr3CJQsK3htIvIs7Rupk/Dksw=
+ bh=k/nmbm6JVzRS++F2190jGb9MqXHXbchef2D+kSN9Xxk=;
+ b=ASrIxBs7x7Z0dgSJ0baiH2t9Tcz3ybkqDwDYlmi1gDD26pgzPiElE3ShVuBX22zh/h
+ aI/TDOhyczzo8/b11othp0Aa8KYdgr0nbGagRblN6GvclkfiGXL5BG0zmbJicOLOE/av
+ 7B7Z/FlgFgAZM/3sOqRM5BKtuROX6Bc+xsIe4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775919524; x=1776524324;
+ d=1e100.net; s=20251104; t=1775924939; x=1776529739;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=C+L/dz1mtXKl8SeIkRJN/gsCMXJq1AIlJRj6CSEh2bA=;
- b=W3LD3FWStCNOYLsjsazoSjzbh/YR1R7+2DrFbCEBCP9HmwY0EBsM8/ZUogIKn8nlvB
- Z2Iq5m1QTx4VdXrb010Jzdtuc0AzrJ5Nd/N+XvKzoY6aB2rW5SpUHHcTiAzrjTWbjR9u
- oIkdxaXgFElOvdglWrUmrVfxiu/8c440Z53HdazQFjib8oeBjhFPH2krZSqApKXEUka8
- l5W2V52xA31u2sWX9xJb6+WTsXMumYxNOz5PyQKcFk/nTHmatyH4F/AlWBIOw1drwAnx
- qTydY73eF0r/iJRn42D9RvQbRO4qp+woJfVCvblrmvUZBnSIYMppWx5PQZvpAqb62HGp
- ARbg==
+ bh=k/nmbm6JVzRS++F2190jGb9MqXHXbchef2D+kSN9Xxk=;
+ b=T9OkS30SkfnIzp2LFZnNY3UZJX/MB2IT1SQ8ToreWLNw8Xk1T2RGkb8FilmnoLeBP/
+ ZXeNNmJn6bCsYmYoKWI0zKdJXbPAfirNYRmJmZP+/LSRmrMswt10/jqZmYIG4w3DgjTu
+ RDRsQzO5wBu6wm34E3LQ8GNtBybY7u463Xr9ttRlwl10dxYf7VM+BEkDoMvHJNBkte8L
+ uURpfv/EBwsGGxD+yYctDWeqa0uQi2rkehJGqDzK0X0WGJ23v3zIdg/zSfcV3Yn24LyE
+ XqncJ33VK4A29OvwSU7NmCWGUur5kK4yrk6cOjKYQfIAdLptCTJh54BrkwtGcM10AYZo
+ OKIg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWb/UYgb5Xh/EF4h7qo4Bu9busgTSEQT3o25XhvhAPMXW/rSvm/3SRFNVVECx1Lyep3lAoI108=@lists.denx.de
-X-Gm-Message-State: AOJu0YzPW5NBOmfwHZq/rYBBM4EsXa2owPecN1cAlxOlRHZilE0btkv+
- zXZDOwBoXGu2/Pp6Cf3T5nrP+a/eJJitogFCABL4+b139U5SnwPbEV+lXOpKexyuzDYEljvbAW2
- XfF2IaUch4jkdMv6g7659YPTd909FHsGGPBgiMpy+
-X-Gm-Gg: AeBDiesfrPbuJLjSBJ52OUd4WmZA22YW3PTbAUKDDO6o8hvsMjBxyopiqo7rRhTZHa6
- MxH3ZZgHh+tTK7MScl4wIWtagYqgQOdzXZy4zYx5+ls0s0ZRLBNN7J1rLi4eIqeW56+8G1W+RMN
- fTuFZYjmTabDrWrWfhICibXI6bSmRtgx2Ya0F91OdEWUKaW7jC4FZ48chuz/dSFjCrTOmX7qNpc
- WgB38MI8tP9ZHbKkNgqu7d63j1g8ws50YxDa1ngFdjTMisCXG5g8eiByD4dXkh5y0LPYothmVId
- T8eN8PdNPL7Vz8tP
-X-Received: by 2002:a17:907:9452:b0:b9c:7ed6:df70 with SMTP id
- a640c23a62f3a-b9d728322famr423790366b.44.1775919523626; Sat, 11 Apr 2026
- 07:58:43 -0700 (PDT)
+ AFNElJ8j/1Zhb7lDxXZbwBrZ7RLFCrgUK5JNZUqdEAON96XS/qopCjt6mZNO/ttT3d88o1jUFSJG41M=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx3H7JSVrahXeAMNpHonNZKtzwJ75TXIarzBZDToCH7yTud+eHQ
+ cHifSbszpbTBCxyj0mlQU7fQPCHms8swHhE+4TPUscuDOmfrFrJKfRld6B9wkPP+G3f/D4ByTMA
+ eI0dr6qaVUTkk14mbOpqMZaWJ7SM3zKoaetmXjxPP
+X-Gm-Gg: AeBDietm0ZyulYcT4bP1CRglN6GC8LyhckP2OY5wlf2snn56TkUYplMfzohuHgzL07n
+ U2v6j6kn9a6MWGz0Id5LBMzQ7Va3eazvOrOkbn5Gl/gke8656XGZc80R++51/n5oz1tHhClYnHz
+ LdwVCwfaa5FqBgfPbCp3TdyefaeB81n9/N86RmmBY1XsYnIhKgLsELGMyvyjRg/CS+hKu7YRhPb
+ F8ME7v+S8TEyf+XOWoVFxxejxeWNJ5LZMr4FDSPaLXpwDy308aVRSJRCUv33X3gjDNr+Eam5M79
+ OVZlwk9QtU2Kj1Vp
+X-Received: by 2002:a17:903:2c04:b0:2b2:4fcc:2687 with SMTP id
+ d9443c01a7336-2b2d5a49c8cmr73621835ad.31.1775924938864; Sat, 11 Apr 2026
+ 09:28:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260409133303.31875-1-ansuelsmth@gmail.com>
- <20260409133303.31875-7-ansuelsmth@gmail.com>
-In-Reply-To: <20260409133303.31875-7-ansuelsmth@gmail.com>
+References: <20260408220928.3328551-1-daniel@thingy.jp>
+ <20260408220928.3328551-3-daniel@thingy.jp>
+In-Reply-To: <20260408220928.3328551-3-daniel@thingy.jp>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 11 Apr 2026 08:58:30 -0600
-X-Gm-Features: AQROBzCMpTW15jGl42c4MJkLLDXZ0UYzgMSUVhaCyyAcTgH28pbBWtjOjE_dVyg
-Message-ID: <CAFLszThY6ioJG5mJt+13j_9_kqr7dJeXTg7LzSACWk-owGNmPw@mail.gmail.com>
-Subject: Re: [PATCH v6 6/6] doc: dtbinding: Update documentation for Generic
- Firmware loader
-To: ansuelsmth@gmail.com
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Peng Fan <peng.fan@nxp.com>, Kever Yang <kever.yang@rock-chips.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mateus Lima Alves <mateuslima.ti@gmail.com>, 
- Jamie Gibbons <jamie.gibbons@microchip.com>,
- Neha Malcom Francis <n-francis@ti.com>, 
- Justin Klaassen <justin@tidylabs.net>, Leo Yu-Chi Liang <ycliang@andestech.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- "Lucien.Jheng" <lucienzx159@gmail.com>, u-boot@lists.denx.de
+Date: Sat, 11 Apr 2026 10:28:36 -0600
+X-Gm-Features: AQROBzCYb5Ny5X0_rs5BYrzFrPnckqeoQCQy0qpOlFw2vNwaV2PwwPu4p50t24U
+Message-ID: <CAFLszTjdAcFbyELhAC6Si9_pSOH8ZqMWD_inrTH3w+VNEXt68A@mail.gmail.com>
+Subject: Re: [PATCH v3 2/5] m68k: Fix writew(), writel(), readw(), readl()
+ endianness for classic m68k
+To: daniel@thingy.jp
+Cc: visitorckw@gmail.com, angelo@kernel-space.org, bmeng.cn@gmail.com, 
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -122,45 +112,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Christian,
+On 2026-04-08T22:09:23, Daniel Palmer <daniel@thingy.jp> wrote:
+> m68k: Fix writew(), writel(), readw(), readl() endianness for classic m68k
+>
+> In Linux these are meant to read a little-endian value and swap
+> to the CPU endian.
+>
+> In u-boot for m68k this is currently broken and prevents
+> virtio-mmio from functioning.
+>
+> This change is only for classic m68k. Coldfire has read big-endian,
+> no swap for these in u-boot and Linux and existing drivers probably
+> depend on this.
+>
+> Signed-off-by: Daniel Palmer <daniel@thingy.jp>
+>
+> arch/m68k/include/asm/io.h | 31 ++++++++++++++++++++-----------
+>  1 file changed, 20 insertions(+), 11 deletions(-)
 
-On 2026-04-09T13:32:56, Christian Marangi <ansuelsmth@gmail.com> wrote:
-> doc: dtbinding: Update documentation for Generic Firmware loader
->
-> Update documentation for Generic Firmware loader, generalize it from FS
-> specific and add new property and example for FIP loader.
->
-> Also add details on the usage of 'phandlepart', 'mtdpart' and 'ubivol'
-> property.
->
-> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
->
-> .../misc/{fs_loader.txt => fw_loader.txt}          | 29 +++++++++++++++++++---
->  1 file changed, 26 insertions(+), 3 deletions(-)
-
-> diff --git a/doc/device-tree-bindings/misc/fs_loader.txt b/doc/device-tree-bindings/misc/fw_loader.txt
-> @@ -1,17 +1,23 @@
-> -* File system firmware loader
-> +* Generic Firmware loader
->
->  Required properties:
->  --------------------
->
-> -- compatible: should contain "u-boot,fs-loader"
-> +- compatible: should contain "u-boot,fs-loader" or "u-boot,fip-loader"
-> +- phandlepart: which block storage device and partition the image loading from,
-> ...
-> +- mtdpart: which partition of ubi the image loading from, this property is
-> ...
-> +- ubivol: which volume of ubi the image loading from, this property is required
-> ...
-> +- partoffset: valid ONLY for "u-boot,fip-loader". Offset of the partition to
-
-All these properties except compatible are listed under 'Required
-properties' but they are actually optional, right? Only one of
-phandlepart or mtdpart+ubivol is needed, and partoffset is
-FIP-specific. Please can you split this into 'Required properties'
-(just compatible) and 'Optional properties' sections?
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
