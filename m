@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD780F3ED4D
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 13:25:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A440F3ED4D
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 13:25:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 413EF841E6;
+	by phobos.denx.de (Postfix) with ESMTP id 8118084201;
 	Sat, 11 Apr 2026 15:25:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eov8fIQT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Vj+pQgpI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B8288416F; Sat, 11 Apr 2026 15:16:04 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id A12F98416F; Sat, 11 Apr 2026 15:16:11 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5ED984118
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 15:16:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B105B84118
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 15:16:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-66e129e457dso2961980a12.1
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 06:16:01 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775913361; cv=none;
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-670f879f7abso368388a12.0
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 06:16:08 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775913368; cv=none;
  d=google.com; s=arc-20240605;
- b=E6UdqlTwTdF1dT8PDbA3NQyPo5Fx19jQ27UD8sSyjNDr1GsxqDdnOo3Dm5Zk+zH3Ts
- md5E0Iw/gYt/Bpi5jXK//s4f8KrZIfhO6gNeAMym6A44Ai1c+YhobrRJSCYgtMcpRfNN
- USkGeVAPM4PO2q5cIKokRGDxhExmaQeQ1SXuIMhmb9u7euVyJjuSVWdtThMgC700lzPW
- 7ESbVIbd7w77rZNm3VJ7t3b1P9qD8lyA4MXr65rXuE/rvIK1GCmnpIwZJehQ7Xln/4u3
- 1LNODxozxq/+bWsDDybiDpwfB78npTsGKfTqh8VyRUzM6zZs8fwr9rd+MIgCz6EDuTZN
- J1Vg==
+ b=SmxLEfHeqSUAncQJC6vTq+3k4hQYAPgcbp1LCa/dAKLV7Lj8IF8MHmcrzrhfV1wgI7
+ +hiNvVVslBwaaKhWvqflAPTghcc+kTRZcp/DFfByo+sCGmWi1/bZF0HVouFucm8OFLOg
+ gJmUsRKA5/ov6MqYuC0RLydqe0Y+U9e86InwNHL+kao299Kt30MfXajwpMPY1F3t9M9U
+ msGN/c9NOOp22X/QG/2VIFdWhZyHGx5HvuZr3U80z4l6bSXbJkILb7ITBI9eJLXx2ZTO
+ jNWF3DOM8oV5EmCnA0BPxacfIQ1Qaoa52N022pb6ecHKYv/h7F05V3zP6K8djiVSH6r6
+ uGsw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=msScTXxiIpHxgM77PHECV+9p7Wvdsj/JUo2/i0lsyoU=;
- fh=NpULHgXzxRUaUGWaxtHjbS3A2FSifvlQUVWx4+lAb70=;
- b=C+mT327oaIMs3zYMUOA911r19Uq/FKYYn0RME2SJHq71SNnRURDPHwMCiqQ6kdBcW9
- tQ0Sw4Bk4KwPqXk6lnrrcXrAR6RNF+CEDM30oY5n56pFnaMaSMCEgptArLcb9gN0Tbpy
- v4WBMXEUKIJYcgFUuMxMde353tHP4fO0A9bDkeHBZ0zgbLKdokCCvrkpZAZUygP4A7rS
- OI24u0oDuYwEqd0fE4eCE+C2aIT0lqJ9vhhDDLPDwxnlsmYT70f75lEM93X1tZLUCfIf
- +6HItJXvSRezxFjeDCL6Ivej71XulUrvTbjs6O/WFHWnJjXZQBvdbUPv6KDwRc5HAy3E
- bIlw==; darn=lists.denx.de
+ bh=30abGhkZA4uIvLJwBKMfxpHOc3TCLe1CPftFzlluiOU=;
+ fh=QYE4yYjQrkwHbBQuIVs/RzQO4Rp2dP+F64RMlUsI70U=;
+ b=h9mX9YMUXC0Bpdar+BZHetIKt0ruSILDrrdy7HtJSoWJxx7wlBQrP2BIuvh90DfJ8C
+ 0rXef0Q1wkJfR8lEPF1vyxJQ6aODVIKvQXJ66HcGTkm3pnDRf3q6hh3XUfmmKNfALbdc
+ BSdq29iHSD78MCm+fH1x61V9P1BUYvsTkQfhcJGBi56R0uUTkw2aKOLbBkDJDRlnU5IU
+ jPiWDkGcas/pBH2L0+uU5HKD2OolRcXmSlmMqFqxLBiHdjnhM2tvWkE53/tsYO35WlmE
+ CSHjVelAY+hU42ngV1pvV3HlUM/qFagCBGfzsGdUGnrmWqnwJHyQi6ez1lqVHmF6U4c9
+ j6Aw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775913361; x=1776518161; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775913368; x=1776518168; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=msScTXxiIpHxgM77PHECV+9p7Wvdsj/JUo2/i0lsyoU=;
- b=eov8fIQTNl5Qi+aEZVBsBTQdvz4edhNvA6UfL0pgdM6GlLj1sWJrFISgWeHlLjLPAD
- tJRn1WWjMlPi9BSQrXmYa+qtWyUmA3veB/n4PG2YvLZwPUHH6vg6pA1By+aB3ZUNGMPp
- YFJ3MUsUeriHtNbfuIkdCoRILlsmVFATx8e8U=
+ bh=30abGhkZA4uIvLJwBKMfxpHOc3TCLe1CPftFzlluiOU=;
+ b=Vj+pQgpILISWFKqmIGtW7N9LCgMN8O4SpOjqBjnyrx8QhwR94BiGig5PTfzb1i0kvw
+ cmv6q5EOPuxn9swXNtnSw/BJtrRpmYu4dy0lybS0oldajetGVHIuyhbIAzff7iiIVuAq
+ HMYI8YBvNYokEyLIYSTIFQOdzIG+/HA3lMI+E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775913361; x=1776518161;
+ d=1e100.net; s=20251104; t=1775913368; x=1776518168;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=msScTXxiIpHxgM77PHECV+9p7Wvdsj/JUo2/i0lsyoU=;
- b=sm4ObeXnnjQgsgN/9XhXfVVT8nFUJeXQFL5kmfHPPgUUcqcLN1IPwAmfiu4rSfamAf
- twAg/dgTQ+xQ3asB0weINloeq95e4ESEUzMjBDoseaZ+7kSnZ9yQu2aX+45nP1w1Cvdw
- yLqYHcFolOYAtcSVik/CG0pJFhf0bTxjyTGUMXl8Zn7KylC29E/IVz6UWxQEzvwzgMLz
- lV5STzetWgp1HajNcNkeqoUtFtTW7Rl0SOVeVjIz19vnMkD4mMrpWYcCxPWjfaqBAYb5
- ZmpIX0fhh3qtWcorASfmyNiwOqOwgWLeo+QZEhJIfbSkCy/DuLDQQgSHuxUgMnaYNHxu
- ZnlA==
+ bh=30abGhkZA4uIvLJwBKMfxpHOc3TCLe1CPftFzlluiOU=;
+ b=eZ2J2TJIIQkZXvSScf2wDSAQ93QoF/qYhdLiPWdgu2jZOvJAIqzUbvqxWZ8yaCI5Wv
+ acuQQJqOQvGRnZyiC43t2qofJpQk9L7TshBva/bcWxsaXeN/aXMcjyf6GJljQlVXjuKA
+ Seyew7j3CqhFCnswBc0y6hP3TtDOZs+x7/+MFEh2/GQZl6WDJ9zpNqRNleY8EeqnbrDp
+ sLS0dT8ZjebQi9J+X9/TXZLyV4F1KViu3NGIDLiCfaLWj3IUktDyekN6eMclnjlmXuXs
+ LwyicdkSbrk8IF8qR3j+Ci6E70X+oFKeQ00ZrtqAX37mZ0POEyJ/G+1IQM97+2lvN3Kx
+ 8kxQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXeQvb8k3JYoPIiNghaS77s6VNJtDisfVBdmGzwXeFTKPqQ6eiHDbMOOz0tMuPGQm5rf+0+lJ8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxfkN2FopY6h+yhbn88yHPYQ/rdJWqof1K0kxk3wsCSBjmAAdqm
- oyWx3rKsvp3L7GOB1npLd0qoys7WBV3QVAkZuabipGyTfiCiLZIVYYs+4qkGv85Rggn6YE9FoyG
- U+zRG5d8sCsM7BnasoDY6XpDdHhgNa1GmULKAaH6q
-X-Gm-Gg: AeBDies2TrmSAeudl0gek0JpnrGNFNFbrsZLflJxfxXx4kkPsODsq+JDPk1g2NmeXOv
- Y+xUuHh0vray5PySKBjTScHcATumt0rFIbegKuMYJei+zc2+kjdTeBtTN8P1M1lXgTzMfYqskRa
- OFLVJ8XfjFcBy14lv78AmnhhvIwOQUCwD9B7eWvBC1UvMds3Dez0hDSZVl89MbGpzDc3o4yCSy9
- xVX+Xz63LQFW3o8V6zBot/DdWmCvCrJbldQ4UDO3xeIen4eo8GsDc3nuoFR594fC0AcEWe6hl4H
- ZhJohA==
-X-Received: by 2002:a17:907:6c0f:b0:b98:cb6:e896 with SMTP id
- a640c23a62f3a-b9d7298ffa1mr385019766b.38.1775913361068; Sat, 11 Apr 2026
- 06:16:01 -0700 (PDT)
+ AJvYcCWNx786pjymGGhYjyVal2GLOy8jYawXcV/B9gz5KUmQaW8JOSHcvEzD9TdMqJNkfg+pIBIG728=@lists.denx.de
+X-Gm-Message-State: AOJu0YwIRyQ4y4OLqxI4b9RXm0Wooc/YyMVK5G5qrLfDdOAybdEO7T+y
+ Ewb3CEvKc20gnrTTbqmb4AeDVoymnabq97bP0J4laX95zslD8AFCHPdwZ3Ao8KEkUfPArAUiGQ9
+ kBYg8oC6jc8NJ0pgbxntn0+3zrnz4uRtbBSmvhy3I
+X-Gm-Gg: AeBDiesZwLcQcSkaQ+xd7gsMd3Op3oCKpVavdYWXwfp5Yc1mycmd8NAJGEnDK/KXoKi
+ ZF3uT9likXogtKEGuQlLaYF5u4MxwcRBE11GP3WpDhEcT3KN2e+seC0OWOF5jl4dTRaMMD/KSdN
+ STnHeI4kevI/chJXetHXWbOhTGKggBQXJHj5bidPG1IGHBgowEQl8R8MhMmiRJXIflT3z7odc4Y
+ mmjMrgk95pcAQZiszTTwoCYgYmImFUGHogrFEk2IjWzBDdnEG0ZglGEC0zlcfhe8KSdof+tTMVB
+ 2UgzAh8fkb5GX+Dh
+X-Received: by 2002:a17:907:268b:b0:b9b:171e:baf0 with SMTP id
+ a640c23a62f3a-b9d7243f594mr396202566b.7.1775913367990; Sat, 11 Apr 2026
+ 06:16:07 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260410091154.1001021-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260410091154.1001021-10-varadarajan.narayanan@oss.qualcomm.com>
-In-Reply-To: <20260410091154.1001021-10-varadarajan.narayanan@oss.qualcomm.com>
+ <20260410091154.1001021-3-varadarajan.narayanan@oss.qualcomm.com>
+In-Reply-To: <20260410091154.1001021-3-varadarajan.narayanan@oss.qualcomm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 11 Apr 2026 07:15:46 -0600
-X-Gm-Features: AQROBzAU5aY-vMx5e2Xlm-QxNmciliGrF4emsIJuDJC-qrUUv0jUb7Xgu61-Tug
-Message-ID: <CAFLszTgkdQxRmzfXOW3+RcNO0+aSeYFEq_iA3spWd8nnf2egaA@mail.gmail.com>
-Subject: Re: [PATCH v2 9/9] configs: add qcom_ipq5210_mmc_defconfig
+Date: Sat, 11 Apr 2026 07:15:55 -0600
+X-Gm-Features: AQROBzDnlPhAiVbikZX7FSAvn3u9qrEe00eGWLqHOfnSIncNEyiSt0Fln5AjCh4
+Message-ID: <CAFLszTjj5HqMPpFiLY4gaLRNdZngRO3DWh81+1OczBL8Fh+04Q@mail.gmail.com>
+Subject: Re: [PATCH v2 2/9] doc: board/qualcomm: Update RDP build instructions
 To: varadarajan.narayanan@oss.qualcomm.com
 Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com, 
  casey.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@kernel.org, 
@@ -130,37 +130,37 @@ Hi Varadarajan,
 
 On 2026-04-10T09:11:45, Varadarajan Narayanan
 <varadarajan.narayanan@oss.qualcomm.com> wrote:
-> configs: add qcom_ipq5210_mmc_defconfig
+> doc: board/qualcomm: Update RDP build instructions
 >
-> Introduce a defconfig for the Qualcomm IPQ5210 SoC based RDPs.
-> Presently supports eMMC.
+> Add details about the SPL & U-Boot proper build steps, converting to
+> flashable images, source URLs for the needed binaries and scripts.
 >
 > Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 >
-> configs/qcom_ipq5210_mmc_defconfig | 106 +++++++++++++++++++++++++++++++++++++
->  1 file changed, 106 insertions(+)
+> doc/board/qualcomm/rdp.rst | 69 ++++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 69 insertions(+)
 
-> diff --git a/configs/qcom_ipq5210_mmc_defconfig b/configs/qcom_ipq5210_mmc_defconfig
-> @@ -0,0 +1,106 @@
-> +CONFIG_DEBUG_UART_MSM_GENI=y
-> +CONFIG_DEBUG_UART_ANNOUNCE=y
+> diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
+> @@ -42,6 +67 @@ on your device with::
+> +Build steps for IPQ5210 based Qualcomm Dragonwing F8 & N8 Platforms:
+> +====================================================================
 
-The other IPQ defconfigs (ipq5424, ipq9574) have CONFIG_DEBUG_UART=y
-along with CONFIG_DEBUG_UART_BASE and CONFIG_DEBUG_UART_CLOCK. Without
-these, preloader_console_init() in your SPL likely won't produce early
-debug output. Please can you add these.
+The section heading uses "====" which in RST is the same level as the
+document title. This should use "----" to be consistent with the
+existing "Installation" section.
 
-> diff --git a/configs/qcom_ipq5210_mmc_defconfig b/configs/qcom_ipq5210_mmc_defconfig
-> @@ -0,0 +1,106 @@
-> +CONFIG_SPL_TEXT_BASE=0x08c24000
-> +CONFIG_SPL_MAX_SIZE=0x3D000
-> +...
-> +CONFIG_SPL_STACK=0x08c60000
+> diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
+> @@ -42,6 +67 @@ on your device with::
+> +     $ make -j8 O=${out_dir} qcom_ipq5210_mmc_defconfig
 
-Just to check, the SPL code region ends at 0x08c61000 (SPL_TEXT_BASE +
-SPL_MAX_SIZE) but the stack is at 0x08c60000 which is inside that
-region. If the SPL binary approaches the maximum size the stack will
-collide with code. Is this intentional?
+This defconfig is added in patch 9 - can you move the docs patch to
+the end of the series so the tree remains bisectable.
+
+> diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
+> @@ -42,6 +67 @@ on your device with::
+> +             --template template.its
+
+Where does this file come from?
 
 Regards,
 Simon
