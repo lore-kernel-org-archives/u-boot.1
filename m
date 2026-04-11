@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 502C2E937E4
-	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 13:00:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9955E937E3
+	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 13:00:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1E288419E;
-	Sun, 12 Apr 2026 15:00:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3A2D4841D5;
+	Sun, 12 Apr 2026 15:00:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GhZ6asZI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bJ/lV6t+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE7298416F; Sat, 11 Apr 2026 17:40:08 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 5C0088416F; Sat, 11 Apr 2026 17:40:16 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D610880077
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 17:40:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7524580077
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 17:40:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-65c0891f4e9so4995627a12.1
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 08:40:06 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775922006; cv=none;
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-b8f9568e074so503384066b.0
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 08:40:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775922014; cv=none;
  d=google.com; s=arc-20240605;
- b=S6PG4dytTgTxS3Fi+1fgwPxceimmG2FbV669fKuG2Wr/VLUJnHx2VoguTHiZnSjcys
- vwmfDqubPixgzyUTwYMw/msZMP0OsfB3YZw0+70tiRFtMEEnPqVo1Ty/QO+wq4Ls1NsY
- bc9CnMapNm7Pttb/apr5a5ZCUjtHSuysBtvBs6bp7B0kCwkXrIaar3LhM2CbjkpG4sWw
- 4nowSmXe+ZBub3Ieed2kNmYobWu8uaPMuIP3C/u8ZuBPf/ngAJus9a9Q+7D9xQrDK/2U
- /kGAZ8QlLmKxEVNK0eIX8jLImcBLw/U6cRg7VZoNEzhpMb9ppztC0KJBktCCjWIXiCpS
- ntog==
+ b=f171l2IK7c6ddtcxeITeY/zNVBNYy0cKeb05cdfO89ExfMedUAWNo07wTFawupKX/M
+ 3m0eryciS2oG77zGxIKtf3SsmmzC+uiX58Vxm9Xmh4Ha5oAS0Abzq96z458DU/oQPbx5
+ rzatTjjhky5j0aX+SkyPIhmdY8pHEwa0zDfpxY0bsYQMh+vrd8Yl8SUI9oAnjXAt4S3V
+ iPLj7Mu47tMb+J8bOTZeZYAo2vXb55HA2DrWBc9k+8Koy45/mTzg/+GwTekIxzHcUf+9
+ KZ5CP6F/USqFfdiOr77OwAWVPi1SCv+qLSKgVdaXdI/jPgl8NZLuP0cqK2n6m0Sf9G/N
+ RUjg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=ACvPbFxuitcJYPNAzALjGMh3Zxop0O2RTIAODEWLe8c=;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=VvrpgtLMCqaY26AVZV+Tas5WArMqsVgFYcBKxo6jJwg=;
  fh=pKV29h6PBf5SbuSFTM/GZF+KoVG4OaOclZXc+5Qi1tM=;
- b=ky3CbcqEjuRyKnf3osd2Y6/zv5eyLryB0XJnKmXgtrcDdjb/CrCQbe7GViVR+kevIz
- X4AP/zHuDCcJR26izMZfY57KuuIWHUtM+IkexgYkEvCLb3OXjZpgxaV2dEM23QwwKDKY
- SRx3fl3ltoFeb1vtwTfC/TQyjaWkcZyRJ+yjdkouZJysc8L0byLb9YXN0ij03gGqVzbm
- QmuBL74DfxWtnuxeM4yxVbNygBX6XXnoXdLNG9TXmE7YaneCydCt1I3r2BHkX3GKRVZY
- WLu/7FWKWDnEFpEvfWjTLypWtnoQ8MUBA23tneYPI1qopdPNYW0wp80MQVytZ13EgmfE
- aQUg==; darn=lists.denx.de
+ b=g7Vd8zE7WtdWaRXafFOUiNHUl3UPYYo8iJtB2F98dssm75WNx9M9ssWLlImTNAmvNZ
+ Ti70BIqcpZbEgdK1xS62D3/3sAIn7eLXqBK3vV8XXBToS0x8nhU75En9nfB3Kf2W5uZO
+ WzD+fEqpTpRI2ZSnksIAXBNVwlNhLQVovK4hOWwyEEjH1liwn2WwmZwD7cOk5ZlY07s8
+ BUkjEebrWxpO3OI7emOxwBLK23ogJoRDxEfPkEUEIAyePiYxxHXFNtkBOklHyFH3WbzU
+ F2EpFLGzlUvc/jaWxnmu4qsdsxzeEgOLnM869ZpgnXPiQ+B6HJ7DeCRr3IpKF4HzwMqJ
+ rH4g==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775922006; x=1776526806; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ACvPbFxuitcJYPNAzALjGMh3Zxop0O2RTIAODEWLe8c=;
- b=GhZ6asZIRhrfDkx0JU5GfC0lg8li+efzmBfA4CUDwGsXuiMR4KiyfUoN3NzIh8MN8R
- +DUO6bgVBJWcgpVM4lMGypqbdbf9ea7Hnc+q5F7VSEMvNkFF42y8MOUjdhQWjn7DEABL
- K6+jR0QU7UyRlL8KAH+I9MNWwgvZbJnnKyCeg=
+ d=chromium.org; s=google; t=1775922014; x=1776526814; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=VvrpgtLMCqaY26AVZV+Tas5WArMqsVgFYcBKxo6jJwg=;
+ b=bJ/lV6t+Rr/t2fAkvtim/0tSeQkIlGAUy4VNGrOWfT6OpYW12LHdLBzersdqQgIqpf
+ qz2Ai1tarRNb7IoMiUCdfNDxtweRF4jegWQQfaBK4R0JmnMrmTaeHrJud3Z/wLxhiDyJ
+ xcHCpVDhd4yKAFCRdu54JCDM+sq+WNeLBeIdQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775922006; x=1776526806;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=ACvPbFxuitcJYPNAzALjGMh3Zxop0O2RTIAODEWLe8c=;
- b=Gn5fR2XZDPZylt+S09h35C/RZ9EsINpbe5AW6aYP56tqWS5SWfZ2UV1R1xPQhHTMj5
- h2jkK0JESfqVWb9c0Ew2VC2OebuGGf5Hxqiv3aOv8KdC5rDVG50S3eFHfasuJtRA+LIT
- W7Pgcx1FEMq6c7ET3ybPHx2HXc3Cw+kI9qk8CgmX+xopTgpL5TP4f0ia5yDnkzfPRULo
- Chf17FzAiPxZjQtHR9/mr+qS/s84Sv3c5hWaVNnMtdy02Xi7wKrA1kenGIHElSieGfaw
- uRbPPqJ3PP9Wup9sXf8RMXyuwrXAo+z2FAflu0a2dG2xhNONxpyLWcEHWdNbDEqRHmDE
- mi6Q==
-X-Gm-Message-State: AOJu0YxcS+6lrVTZX8UMfQ4OC3jR5RL74xK+u+NVr8eDraVJzMKZYKah
- vWzmy1mqYzYYSwHh2OC3iCkcq9QAxUXH4ry0UgiR2ay0e7ttyIDlMjU263aNMiSdt2gqi5aEz3f
- k8vAQC8hS0zzCA0H793c2PCukiDXOTi0XRA9GzuCX
-X-Gm-Gg: AeBDievHSdQ13Q9txid1JO675TpAEhuYB6qSGRg/nwrrcfXKTTI+eEgyQ6GPeRQEh0f
- OnXTzFggKULMbknSW0YehvY1FEwRvB6icu+wa4NNTemgMfXdcXvGQVilDaUfzXyGnw4L7so90a4
- Ht7ubXmZpap56IvW82F8an6NNiGx5VKBRezWA15XAIyna0fo/hbVETcO5fScoUmPsnHVtCmfjWW
- 18gqE0a+AoDwIXbDe++IMXvOUV2HPS8dT7t08pDtLpkotqZvfJJAWysDAcSnRLMkOcTysTw7vkJ
- UOAfSw==
-X-Received: by 2002:a17:907:1582:b0:b9c:3ba2:2dbd with SMTP id
- a640c23a62f3a-b9d727ac3cbmr297834066b.53.1775922005950; Sat, 11 Apr 2026
- 08:40:05 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1775922014; x=1776526814;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VvrpgtLMCqaY26AVZV+Tas5WArMqsVgFYcBKxo6jJwg=;
+ b=FkNTePkdbSJB4u/vABxkm+t+y2pfmOlpery3Ztky/BFtKspHhyl0aUPYWFy2dhUG8V
+ 10Ej5iOgfoKl0W+flbDX3dclTyjKgtciTGvuy9ydOenPiPJ9x6423vsm4EL1Us6S8bW7
+ krD8UvYxRfaheCl8ZbvGcM/5zY5KqJL8TIPGhz5Wy4sGqB26RMUfzg8sXQ6p2RLcgy/J
+ 2LMFvIB/yq2ajtxMWapKE0KKSvjuTW2IqdNPC3vg31U0FkLsswGxSJPVdwJuv1215BA+
+ 0xFSFkf1e9J8qxlETIrbLnsQm7w3JWW9Hu22bdlkw59JLrqsVAY16/2xqVv9L0WqfLZS
+ C3Pw==
+X-Gm-Message-State: AOJu0Yze7zQIh3/2EVVlEZGS1hdfmiL+6e4Og3BT5X1td/yFVmfuYMdS
+ RpixYn5hAoC6XEXUDRFAxTCM48/gXzmAc06ou0a3ktTlwIdQJqC+kKci1t4rzTRuFeSIMxjviMU
+ Us38OPOFvYlTTEVImSc1YWbMpBY0zE7YF9Bvz+hTs
+X-Gm-Gg: AeBDiesxUBQh12n/1XJPNavT5BiUDM+lxvuixv+7JM3j3PEHGZ3YvF2HK6vGwa9g5Zt
+ 0yCHPjHcPHGzDPAd+sTEwp/D1HGY8ltEy9Jcaa4u4SeQdnhPETjAntJ+vtcPrLz2C+eRZiPFxTs
+ crRm4cQaAbngYcYOOSywGa4hu4WEYbdkgPvR8Kwyl72an3/aDKU6LF6pGbUnQX7LPIgQ116VSEt
+ QVmgR1B2L8OsNiowDSjlu1WjuHvbXzmZL07OHs+g1E2OXJffTlC6gLCc6xe68OwF4orcAbSMJn0
+ n3YAmA==
+X-Received: by 2002:a17:907:c80f:b0:b9d:43a7:6c13 with SMTP id
+ a640c23a62f3a-b9d7267b5d5mr445369366b.41.1775922013885; Sat, 11 Apr 2026
+ 08:40:13 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260411-qcom_spl-v2-0-9609557cf562@seznam.cz>
- <20260411-qcom_spl-v2-3-9609557cf562@seznam.cz>
-In-Reply-To: <20260411-qcom_spl-v2-3-9609557cf562@seznam.cz>
+ <20260411-qcom_spl-v2-4-9609557cf562@seznam.cz>
+In-Reply-To: <20260411-qcom_spl-v2-4-9609557cf562@seznam.cz>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 11 Apr 2026 09:39:51 -0600
-X-Gm-Features: AQROBzBhIGaW2UvVjEX2S9vA0YJWO8oZYLEERigLHyFS1-VOlOAtsiVRL_dxqpw
-Message-ID: <CAFLszTgBU=bNqo6bPtmLJJ5y7jRHkTFz3V7xkZJAR3gzVqGMog@mail.gmail.com>
-Subject: Re: [PATCH v2 03/10] drivers: allow clk_stub and spmi in SPL
+Date: Sat, 11 Apr 2026 09:39:57 -0600
+X-Gm-Features: AQROBzAE8V8nuew5Kx6yctTGXLue_czhmAYwW7e_VIIUJwHRpnd-oAfcOPcBtpg
+Message-ID: <CAFLszTjUEagZUEHTGYRjm6KvNKFCUpPcZZ+oFugJ-Tit8GZinQ@mail.gmail.com>
+Subject: Re: [PATCH v2 04/10] mach-snapdragon: boot0.h: split out
+ msm8916_boot0.h
 To: michael.srba@seznam.cz
 Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  u-boot-qcom@groups.io, 
@@ -124,7 +124,6 @@ Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
  Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Sun, 12 Apr 2026 15:00:19 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -142,47 +141,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
-
 On 2026-04-11T00:00:12, Michael Srba <michael.srba@seznam.cz> wrote:
-> drivers: allow clk_stub and spmi in SPL
+> mach-snapdragon: boot0.h: split out msm8916_boot0.h
 >
-> Only Makefile and Kconfig changes necessary.
+> Prepare for supporting alternative boot0.h per-SoC by splitting out
+> the existing msm8916-specific code.
 >
 > Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 >
-> drivers/Makefile      | 2 +-
->  drivers/clk/Kconfig   | 6 ++++++
->  drivers/spmi/Kconfig  | 6 ++++++
->  drivers/spmi/Makefile | 2 +-
->  4 files changed, 14 insertions(+), 2 deletions(-)
-
-> diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
-> @@ -114,6 +114,12 @@ config CLK_STUB
-> +config SPL_CLK_STUB
-> +     bool "Stub clock driver"
-> +     depends on SPL_CLK
-> +     help
-> +       Enable stub clock driver in SPL
-
-Please can you expand this to mention the use case, e.g. 'Enable this
-to provide a stub clock driver in SPL for non-essential clock
-controllers'
-
-> diff --git a/drivers/spmi/Kconfig b/drivers/spmi/Kconfig
-> @@ -8,6 +8,12 @@ config SPMI
-> +config SPL_SPMI
-> +     bool "Enable SPMI bus support in SPL"
-> +     depends on SPL_DM
-> +     help
-> +       Select this to enable SPMI bus support in SPL
-
-Just to check =E2=80=94 should this also depend on SPMI? Since SPMI_MSM
-depends on SPMI (not SPL_SPMI), you need SPMI enabled in U-Boot proper
-to get the driver compiled. Currently ARCH_SNAPDRAGON selects SPMI so
-it works, but the Kconfig relationship seems loose.
+> arch/arm/mach-snapdragon/include/mach/boot0.h      | 57 ++--------------------
+>  .../mach-snapdragon/include/mach/msm8916_boot0.h   | 54 ++++++++++++++++++++
+>  2 files changed, 59 insertions(+), 52 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Regards,
-Simon
