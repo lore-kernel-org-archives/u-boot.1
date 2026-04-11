@@ -4,94 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E825BF3ED4F
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 14:56:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30D37F3ED4F
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 14:57:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A32F841B9;
-	Sat, 11 Apr 2026 16:56:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BC9048419E;
+	Sat, 11 Apr 2026 16:57:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bg+sP9ZM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Iyra3Gku";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65DEC841A2; Sat, 11 Apr 2026 16:56:56 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id B66DC841A2; Sat, 11 Apr 2026 16:57:13 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78B5B84118
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 16:56:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B059B8419C
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 16:57:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-66bd4e0560fso4045118a12.0
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 07:56:54 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775919414; cv=none;
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-b9c62fc8debso472191866b.0
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 07:57:11 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775919431; cv=none;
  d=google.com; s=arc-20240605;
- b=XiwQaxcC61IyBhh0f9/pxtCRSsmEuT717mUMbzCcKKsxw+4OPjan3ix5zUUeQM2ngh
- FzhxKAQth3I1/TqISJVOGLaGPV7zQ1FjoBZIL77deVJN7MpYThrwl1icqD14CKYH8aly
- r8aYJRercGFUvcC+LqMKTpvEWiIrCBKIF41U8B+vNggG7WFJy3Dw75B250d7UQlqDcdB
- /bMHlVHBnxfTjGj4jJkslUaY7XSO1J5Fx//haCrpIsi5wg5/AXnDAlIH1rQxve/O6+c1
- rZQONDYYKspHIevHCIiqjJvQp8djWtZRv3qAnDz5hnRAy8HQbMseHWcWvwmktNJRLSpv
- sMLw==
+ b=KfHXX7F8mIBn1Jif6jFm+5UnKG59KFEAeuQa25O8BdXp5M8Y5riHJJCXe2WaZUk2cl
+ dZAOxpaf7SCQtSATwS79R0Yu0zoApEqX3Oc49Xo9iuaFrAOEkNU215mPBSCtyFxsTm+z
+ LlTjIKRhLQ2tDbZZHtoeKoe2aNFdlCk4IiAx9qj4hQ3idj6em/iDenj14pLW4+4/p5kK
+ lNF8qDyi8m48EbWmndVknobCe4zYgPrcbi8rMTmGu//BNpeZ0hXQGdnPZzoRqbnbLovJ
+ 4547PNYSOnUj+3ptU8nORejBR4zxMZPUUvsUxfvAZ+Kjvtv8Z30ChKNQkZGX4jo0CIYm
+ 3Wug==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=/4fWAhKV22VZedRl+F8aJflHw0g/vRP9P1gGDojBFtI=;
- fh=2H2z42KegxqsJEnh3SHJTVPqVJ+qMkH85mYRIk+hC3A=;
- b=N5Qd2qgRQDSvNJW/pZWRbjK2t40cnXFT2dkxT6Ookxq6EZSAr2LZ5rgYn0Wk03RUsX
- 6iPI+BbJqccGimuwDl8q+hqd5Sqx/eWeypSxRXiEoyVvQRsMQROCvJo9Tc4wVLXmIazR
- Ldpb+CU0FpqCztSDwW5WZBxDbTsWMpZyd2WxpJW70pr5E2zO/Ss20Q5bV2fy+2tK8Ij8
- fAD6uZP4DwM1vBd73WbT+r139FM28uoSNvO0aDs1Hp0bPPhNgnSk2K906gu/Y1gN9TQc
- z3o9I44H/35lFgas0TGw1UMbSLR4A2H6Nsln+CWdeLbtJQ4Xp2nJxuFq6cD/8ZzLy2s5
- w0ew==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=2yTxcu0vqVkq4t0aYNsq0rwov/lbEN+SHNZC9AMfSWU=;
+ fh=1mukGU/SZ5ROZsZbRem9cL3HCU+61MKGHAeqvmJgawU=;
+ b=MQaK5pqSprkKj69Pn3k5K35VqmcYENdwMgYD9v65MCLG4DSngfq1zaKoOS1XGR09Xa
+ ngIvqHuMZuPNkDSOxvTtPmvyrYtsa1wQMBq3mqUtZjvjV0Gk+HcQAADq5XjZhn0iPYT5
+ LC1V7MAc3ydI4Ov58XZqaARuwQ2ak56HzOtcKuUEevsCf7bpVwQC+GFBQUPyV+YZsy83
+ Y0AK/UDU/0zfsD7nwSQgv9XbYw4l4fRxBQrt+/2ks7Wgjg5H+vspa82VqgcT576fpLAv
+ 3spxZm1wiAF7qaolVIGvSYbHQGTesMNGj3KvEBwi9/mVRhWYg0Qkd4e6xLKcAluZS2Lh
+ KOuQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775919414; x=1776524214; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/4fWAhKV22VZedRl+F8aJflHw0g/vRP9P1gGDojBFtI=;
- b=bg+sP9ZMPacoi37Iy64qjauVqFqu04WFqCmvsZeGCkDYQoavxkXzVaafNhi122tpLQ
- nLcvQNBKiFqr4oviXWUoWXtpp2vwnXIT1naayS+IjXIvhQLxq4lN0Szz2nB9XO4CLDqL
- h4dKbCoA7zhwMztHK+7fRsQqEE/wOTS2moIjA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775919414; x=1776524214;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1775919431; x=1776524231; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/4fWAhKV22VZedRl+F8aJflHw0g/vRP9P1gGDojBFtI=;
- b=UUHcNtgzxTwJQ+p+MUTGyLNoQX2/3GR9d46hDkBgnjXnNyTU78cMFxJ1sGgzSSBIDB
- QJuKeJcg6jcdCkU7/YzdocVZSUEO+HRWCgCM1nG8S0kos12ZarpomBNn7HMvwX/aPVb6
- VMJtZ90RdBdL5YwpF9XnTwKDQ160s3OHVG4ZvZUcswMY0OCYVhr3IP1mD+L0fhlZL4o3
- 5UNqG0nIpNrqNtWEAbYaUgwv08ySfSolnkZskcRMvW4C4okX/zjTHrUzUKeTl2TBEZa8
- ACFDvGj3it4xJ75RdnGauVvxOgMtKrSDspmOW+sf2sdGUFAMXto2zkPyQV1leJ/YTsZD
- KqKw==
+ bh=2yTxcu0vqVkq4t0aYNsq0rwov/lbEN+SHNZC9AMfSWU=;
+ b=Iyra3Gkuzpg5ud7Zp2S2nWGFNCiTqZz9Y3mtMw4WUd+qJzcq7Z8v9MOuwp1A8SpAK4
+ zjHc6csbkI9Q6d8FXuPI8aU7oBmTyYjy+QA+0NXVuURGFcRCah3pc4yOWGlA4o0RqIyj
+ cEEz4N2qRtm6DAgkAXgyHDH8o/lFYTIVa9ngw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775919431; x=1776524231;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=2yTxcu0vqVkq4t0aYNsq0rwov/lbEN+SHNZC9AMfSWU=;
+ b=HhbcX2rT+dtm1E+R3SIxT1674aNcJj4aRoMo2Il+m3xXtIj8EKe7NRjtV4FMwfOJ7l
+ o1nEDjx1jlhhdA4UTOn/fHXr1Nm52gldiqEkgfOfGxh5vve5+yRBB3Wgrdzv1kL/Tq0T
+ F3wkUO19p4xfogekajyqlfut6qcr2stH7fCxoOa1fcF20A0Xp7+4rjv0h5ZZ9rPCAABv
+ SzjAK7UUEbn8/jXfEcCCNaE9hljF2x4ySf1jF/tqPGkQnGfUohB3mnKBLzUQcBk1rerj
+ +5kg0UfU7a1WchUa98toLo6ORTZPSDgdNdfMO/qGWALAsTkknHhpYUg5nx5RKdjqDVt0
+ wPug==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXxUCFh2HZamQTNwYXpJOBxKjQm3Sg4qYFZcwRp8tbiF3vdtIUf3SZvFRvc7adEA0LMPEdm7vs=@lists.denx.de
-X-Gm-Message-State: AOJu0YzH4DA4RYzRPNUMYOEiOegyOBNYdgig22NiQTQpVJA3T4LgMEoO
- urzz9HdhUn9OKICjAmYhuYVFwElZnCaKJCr6qyqranUzveLTkQPdPehq7s5JT0eAGDGkVAbUQ9x
- Ia4GsR1BpxX40RQU+lBqMhh47JOhWMf5MbHRUUGGG
-X-Gm-Gg: AeBDieuCNmrQ6Z74CFl5QFGA6BFvsKYDC/U7NC1F+xQYKk8Hb6zuUvlt97JChmpGB5h
- Oscv8UiynYZh7a0a9LbHKvyLHFyPQCC4eHePTXRI6LXXgZ3o6w+TqARrVSqhvQb3KzcOL8di9lw
- tRYdQhDl8Tnh3D7vR+V67yAHgQ+pPYrQO5KLsFwG7rzw8FcdZ1BXA/4r8fgQZmP1TjiVg+KeFxj
- mDwLEgdBc/htpBqfmZSBxUf3uc51w1qso+EKdl30IQModZ6Vw0gNX7U+PDInH4BiedgYxUNCtTM
- fQI3QQ==
-X-Received: by 2002:a17:907:9719:b0:b98:284b:53b with SMTP id
- a640c23a62f3a-b9d76d2c9dbmr389652566b.14.1775919413913; Sat, 11 Apr 2026
- 07:56:53 -0700 (PDT)
+ AJvYcCWcTDVrUSATTC0NFp7WeznWLiVdiuaeTAZNRoQ/UdylJYmJ+MpYysTpOwyuTD6OriGXbCDWR7c=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx9V6ReXeqrsF+NEr6/OQ4y9KGEeJCGQZBAwrLP21vpuYDej6tb
+ xC8HZaHF1OWnPviGPyw5I8qCNtShz1h8ZX3hiVebdiSvLSoT0O3wGcNHdBiguUlszEZqr4ZgR9m
+ E0PFwtOGXHS6nNvVtuL5WdgsFZGR3q0VksZPV9kLb
+X-Gm-Gg: AeBDiesK6KxJq6VrerogPorFik8o/SDXAfu2/xJper7tbbo7avL4iYIXUpXClbnwdC+
+ ypWXDzYhzjZ2t+CV6YP7sLTNNShlF1OEUSII5IcJvtkDqCFkyfwEPYpEGYMv58HY8fQ7z40cADk
+ Bvqu+Mj1b2jnXVvoYqojkKRNqc9iQTvfiBbHKCskBQHr3nPxhvzB84yojtpSbMgTxzcfifRROvL
+ T/6j+32Ks0771V55K0A6k4xRgXO+N+iQcNddzyNBGIWlDc6naWecyDVSpnIthSEg8vDtt4FMca6
+ 6oZY9w==
+X-Received: by 2002:a17:907:c20:b0:b97:9636:5aac with SMTP id
+ a640c23a62f3a-b9d727a057fmr386830766b.13.1775919431120; Sat, 11 Apr 2026
+ 07:57:11 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260409133303.31875-1-ansuelsmth@gmail.com>
- <20260409133303.31875-4-ansuelsmth@gmail.com>
-In-Reply-To: <20260409133303.31875-4-ansuelsmth@gmail.com>
+ <20260409133303.31875-3-ansuelsmth@gmail.com>
+In-Reply-To: <20260409133303.31875-3-ansuelsmth@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 11 Apr 2026 08:56:42 -0600
-X-Gm-Features: AQROBzATp2q8ueRhsMMVGGQgqAoCia-Do_lD4NqWAt07BiuDBYPkMBOZmBErMJg
-Message-ID: <CAFLszTiMVJ=YFJWDEGNtfq8fPAXePRaCVJr43yi1bqyX3AKiMA@mail.gmail.com>
-Subject: Re: [PATCH v6 3/6] misc: fw_loader: implement generic
- get_fw_loader_from_node()
+Date: Sat, 11 Apr 2026 08:56:54 -0600
+X-Gm-Features: AQROBzC99YcOor7CpdzFCw1WvRag49RkCKXs8wtRR1YEsTZ392QSmSb8d4D_a64
+Message-ID: <CAFLszTiJtK=ODNfy3nNBJDpJhe6xDvehvcDRvU1UTpc0rCMQgg@mail.gmail.com>
+Subject: Re: [PATCH v6 2/6] misc: fs_loader: reorganize and split to FS loader
+ and FW UCLASS
 To: ansuelsmth@gmail.com
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Casey Connolly <casey.connolly@linaro.org>,
@@ -106,6 +107,7 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, 
  "Lucien.Jheng" <lucienzx159@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,49 +127,67 @@ X-Virus-Status: Clean
 Hi Christian,
 
 On 2026-04-09T13:32:56, Christian Marangi <ansuelsmth@gmail.com> wrote:
-> misc: fw_loader: implement generic get_fw_loader_from_node()
+> misc: fs_loader: reorganize and split to FS loader and FW UCLASS
 >
-> Implement a generic function to get a FW loader dev from a node.
+> In preparation to the introduction of variant of the FS loader,
+> reorganize and split the driver to generic fw_loader UCLASS and
+> specific fs_loader function. Create a dedicated directory for the loader
+> and move the internal structs and functions to a dedicated header file.
+> While at it also drop some redundant check and rename some variables as w=
+e
+> are updating the code for the UCLASS rework.
 >
-> There is currently only get_fs_loader() but that is limited to chosen
-> node and is limited only to FS loader.
->
-> Introduce get_fw_loader_from_node() that will parse the
-> "firmware-loader" from a specified node and will search and probe a
-> matching FW loader device, if found.
+> This will permit to reuse all the property and logic of FS loader
+> with container that are not exactly a readable filesystem.
 >
 > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 >
-> drivers/misc/fw_loader/fw_loader-uclass.c | 23 +++++++++++++++++++++++
->  include/fw_loader.h                       | 14 ++++++++++++++
->  2 files changed, 37 insertions(+)
+> drivers/misc/Kconfig                      |   5 +
+>  drivers/misc/Makefile                     |   2 +-
+>  drivers/misc/fs_loader.c                  | 328 ------------------------=
+------
+>  drivers/misc/fw_loader/Makefile           |   4 +
+>  drivers/misc/fw_loader/fs_loader.c        | 186 +++++++++++++++++
+>  drivers/misc/fw_loader/fw_loader-uclass.c | 147 +++++++++++++
+>  drivers/misc/fw_loader/internal.h         |  73 +++++++
+>  include/dm/uclass-id.h                    |   2 +-
+>  include/fs_loader.h                       |  47 +----
+>  include/fw_loader.h                       |  19 ++
+>  10 files changed, 438 insertions(+), 375 deletions(-)
 
-> diff --git a/drivers/misc/fw_loader/fw_loader-uclass.c b/drivers/misc/fw_loader/fw_loader-uclass.c
-> @@ -96,6 +98,27 @@ UCLASS_DRIVER(fw_loader) = {
-> +int get_fw_loader_from_node(ofnode node, struct udevice **dev)
+> diff --git a/drivers/misc/fw_loader/fw_loader-uclass.c b/drivers/misc/fw_=
+loader/fw_loader-uclass.c
+> new file mode 100644
+> @@ -0,0 +1,147 @@
+> +UCLASS_DRIVER(fw_loader) =3D {
+> +     .id             =3D UCLASS_FIRMWARE_LOADER,
+> +     .name           =3D "fw_loader",
+> +     .pre_probe      =3D fw_loader_pre_probe,
+> +     .per_device_plat_auto =3D sizeof(struct device_plat),
+> +     .per_device_auto =3D sizeof(struct firmware),
+> +};
+
+The uclass uses per_device_auto but the code uses
+dev_get_uclass_priv() to access it. Please can you use priv_auto in
+the driver, or per_device_auto with dev_get_uclass_auto() in the code.
+I suspect you meant the latter.
+
+> diff --git a/drivers/misc/fw_loader/fw_loader-uclass.c b/drivers/misc/fw_=
+loader/fw_loader-uclass.c
+> @@ -0,0 +1,147 @@
+> +static int fw_loader_pre_probe(struct udevice *dev)
 > +{
-> +     struct udevice *fw_dev;
+> +     struct device_plat *plat =3D dev_get_uclass_plat(dev);
+> +     ofnode fw_loader_node;
 > +     int ret;
 > +
-> +     node = ofnode_parse_phandle(node, "firmware-loader", 0);
-> +     if (!ofnode_valid(node))
-> +             return -ENODEV;
-> +
-> +     ret = device_find_global_by_ofnode(node, &fw_dev);
-> +     if (ret)
-> +             return ret;
-> +
-> +     ret = device_probe(fw_dev);
+> +     if (!IS_ENABLED(CONFIG_DM))
+> +             return 0;
 
-Using device_find_global_by_ofnode() followed by device_probe() does
-not verify that the device belongs to UCLASS_FIRMWARE_LOADER. If the
-device tree contains an erroneous phandle pointing to some other
-device type, this function would happily return it.
-
-Please can you use uclass_get_device_by_ofnode(UCLASS_FIRMWARE_LOADER,
-node, dev) instead? That is the standard pattern for obtaining a
-device by ofnode within a specific uclass. See get_fs_loader() for an
-example.
+The IS_ENABLED(CONFIG_DM) check is not needed since this code is
+inside a uclass =E2=80=94 driver model must be enabled for this to compile =
+or
+run.
 
 Regards,
 Simon
