@@ -4,102 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 353A8F3ED54
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 14:37:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 590B7F3ED4F
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 14:37:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56C0784118;
-	Sat, 11 Apr 2026 16:37:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 55D998418C;
+	Sat, 11 Apr 2026 16:37:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R1bE2CHL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GX+HJSWm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7622E84154; Sat, 11 Apr 2026 16:37:27 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id CA2DC841D5; Sat, 11 Apr 2026 16:37:37 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B2B083DC9
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 16:37:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DEE384198
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 16:37:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-66e6d9610d8so4253243a12.0
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 07:37:25 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775918245; cv=none;
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b9d9971d059so145410966b.2
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 07:37:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775918252; cv=none;
  d=google.com; s=arc-20240605;
- b=UucWreAfDmba29GwuRk5yWDHQbOY/u1V3Nfb+CEt84nM2U0X31PafHDkSW3CIGMc0S
- E/h8FI6w8X2kJROFKDlogbiPDMUAgENx8Qy6+KtSt86m6onZZ5X+JOGmRQCKVpP5ZujV
- th0rxG2H5aU7M9K9K8LrE2wJe0P0U2/waZ0sGcwEbBcxm2rpAmJ3A0mMI014VbF4ru3E
- 6EGiCRyEEinBalkY9hA9Ke+byq+Yq1PxLeSg94m0JIf+iuwFq2zwKKbrg+bphm52OM2B
- y0MwP/GE1BduSqW08K5iUBBQDH+7t6sMjiJoqsmKA8jOb9TmF7mFBkt8ZVey3XvJf3We
- BGzg==
+ b=T/I2B5j1Mjhr2fLGQduwQT4rcPcXkiSuN7hu2lBMozESEJsjhEd0g3hxSZb6D/RXyQ
+ bh4cMmZZZ7DH7c1E1Dhpa3CIAkfQfCL313mB+9GG3GK2k8iz8lmuiOGmgtnq7PZH+h2t
+ VtNZMhOSFk23QnGJ0hdBT5d2/K9mNU8LknT/EPLve2xFNbyeAmAEYcxH+YPcvV77llaK
+ EH32K/uZ3FdNk6LMu314svshsnxYfD64CwH7fShZorzWIL2KB0IQY2ih/AORuL1pkM1M
+ +UljhTxBqSeIfzMTCEw/2VqWd7srbh9LSQOHcLELeedR6RRRKOq2VTNsgN9ic+LQiwy7
+ mfLw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Rt80GfA6RakNRZ9Irm4POf15iOmJdRi6hJGdVbDTzXQ=;
- fh=Gd5+a9uUrr4s6WJjvIIOS89zSsxCc+V9mQKHqwrvrq0=;
- b=eyvxvcSNGIdopUoZL1OGoXZPGfYt5ao6loMDg8qaxBa5V2nwQgroBmDmzSwQTixd9b
- sMHRlrfkbvbFn2n7DzgZFjk8BflpfTnFK+e3qAGTDtIB9Xf+FMpwOBOMcdTsuClFYRWB
- yMtOSRPiYk5y+6Hx12qvp3tfKkro7eQIrFjCrggVSzzW2hHfWHcvRjbbmaxG/rKPZxkM
- LiNYtdoLL7Ts5o9RnJfQlTya18Wt/SdE5qevDQD3WwMek2LP5fxMhInK04Jfl26KVbya
- V0DheUHDE53+05Rk7t6qF7wnoP2lTfQQgB0zzhqi2lNjCGUY2vJ0wo5miN60C8JqX/3q
- 611A==; darn=lists.denx.de
+ bh=QUDsYm58gdvYWK8OGgT8zMvxWNSgQeLQAf9J3qgCYgI=;
+ fh=bmSH9koqKj4GnjbTG0n5xSv8UKRMztqmSvaMRIXvRvQ=;
+ b=bNLcX5wV4GEN4arVEWUKcwofECEQ8RuRGrAV746pRJ75StfkxhcFoga1Ha2SdDhzPF
+ 2HFv3KJf2xmV9who+Cnx+hAj/U3zhAEiXFB+4g6XXbIECx050rueHVzfZ4APtslp2dVn
+ hhlbIFQKX78zT2ESlJVZiOyTpJ6r0wzgkvAebuXIH01v21ZqBsW0/MWuklGGXPTur5TH
+ JcsMAX1xSuq9FHs7iEMX+2Vs4Mdh+2LaFmFy4ffSmbvdrBhP5HHxluN4ts+nSK4Jc1eB
+ +VoeLaeADYUzTydn7Ur/tJmKPz+DX5TGn3fVnEo9corCTwuXT8VHnSfNMhEDsBaSQk+7
+ Gnig==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775918245; x=1776523045; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775918252; x=1776523052; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Rt80GfA6RakNRZ9Irm4POf15iOmJdRi6hJGdVbDTzXQ=;
- b=R1bE2CHLoezs1LYlbJBpE8l8s4vI1MMHGIRJ548G9XzBtaZTICrQkeEONTMVKMdJ6R
- 4cDrM9qQzlw2aGopU9uEaTd+sw85Zk58YsA0v6E94GFWahOU/QGwCu+XFkvUKJo88BMU
- owoRP2uMgcoOQg4LhmnMB46BVmhAHCxuhHH4U=
+ bh=QUDsYm58gdvYWK8OGgT8zMvxWNSgQeLQAf9J3qgCYgI=;
+ b=GX+HJSWmXxYMNfxIzh9GKIyy94VwaBf3VsQrHiHinfhiFayoPaCaZMO4oEnwtxHqen
+ xa8sGVkVGZnwurRz7CtpZqvnf8LJ0ii2FCw4tABUA+nKAunYnpXhAD9zApknwc4m8O5W
+ HQnhIQQXKx1e2+34b4KElRc+uESxUpkO7RNME=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775918245; x=1776523045;
+ d=1e100.net; s=20251104; t=1775918252; x=1776523052;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Rt80GfA6RakNRZ9Irm4POf15iOmJdRi6hJGdVbDTzXQ=;
- b=Ab7oUosaf+I6lRJl3iDBvp7tBIlxzpgH497pi7cghvFAwAaRBPwHWgs157RyaLSi3j
- IxY1pKCRGrHBkZcYPEoH9tjA+hJ604nawonRSWNkB61isSMLIqwmf6annn35FNQs/nQZ
- GjPGR2pp2G/uGU09hkgg6TIQSeIdKqNLteUs77ST3Y9qKNrp76xIqOMNoaDKQThiR9xp
- bPYC7WVaQizyjwR4cRq4w4HEWXub7iL2q5gChWb7b5z3i4/zMPm7NjoOd6MwHX6HnUDa
- Xwj4dUxIuSh4t8Pu3mUbzxYfWtWCgL/d4PTQ4sRsSdTGWyzlc2q4wmQoa2YUqtAYijUl
- J/cw==
-X-Gm-Message-State: AOJu0Yy/gmUkn/Bd2Pp0jo0EO4RPmzq6j86V+aXIvYqdICRsXoWax2Qc
- PlJmeAMphOUWFvRthtSE/LFFDgXFfSvhGASoq8dirM2xH3RbSxBxgzuUjoPkSyLduZoejuhbMa/
- Bz4G8cs/LEyUNt+axTaav5ucE/Eyf3eTh5Lgc36Tw
-X-Gm-Gg: AeBDiev7lkYVI9vhIYSXO2iGgX2u9GxjhgicDGmL1VMvXfSUbuZisOAS6DdqVI+aDvD
- 8G692Elkv7bsWIaJZlS/TUZTgQKSapFc0knKFTieqzvK38eXOBASpQ3szBOBOS84X57Xgisj74h
- YvDp718/de/KLTu2cCI1HsY1fvIHVQC8gD/cVgE5rMUpuwo0wqj6VUbNL5AyhB35jkYJR4JAQTf
- yWj1umE5LWzWY2u1IkN9rSiLrVwfORbYg74wHO7d+YC9IKUlCUOYFqTu8OZo4eIvZ+LyxIbOK3p
- 37uSGg==
-X-Received: by 2002:a17:907:168c:b0:b9c:cdd7:c8a8 with SMTP id
- a640c23a62f3a-b9d7279d638mr418706266b.48.1775918244870; Sat, 11 Apr 2026
- 07:37:24 -0700 (PDT)
+ bh=QUDsYm58gdvYWK8OGgT8zMvxWNSgQeLQAf9J3qgCYgI=;
+ b=l3W7hqh2j7K4cBlf0dPTw/wfT8gRnAO/tnr9odnnYvHcFrkYXJ+FiX2mSqLnxrZHYR
+ ksFWwe5FZHx1IplFGDyIw6GbH/NCPQBpoiDYpr+YG/HAQWwsSFd0YyegxoJpWUi6/oUh
+ zhE6KulumHQvcI6pDRmwNGXHAUhg09GS6bwrVdETXmYE3bu4lzZaIYt4vKeE58VmWqpF
+ 4TC9DndH1jAslyQ2EOWiBAKTP4vtyxaAhEwi/8h09nIxP/nqlsDW5zGLaBBxrkkNkKnG
+ 46IHg3VSvTaydsCzhfoJzdDNrKRp7aQEFnhaU6MvuUiZVda4v1IhWaEQZVwf/U/QMgmE
+ 7VJQ==
+X-Gm-Message-State: AOJu0YzOgfuKOMpNECjS1Dm+KTUVe37gxviAvEoLKymIs1Tra7mVET6H
+ eWseyHr4objO44RadIeqykqq6siapynOppK5UTc5MJz2JskSGEN5aLIZmY+VasdXgnB8AqSIGc4
+ YBGNGHqWZ3DvB5Wrtnlu5/mFuSbU9hDLWJ1TBZcYdjaEYzNYPKEza5g==
+X-Gm-Gg: AeBDiet42ogh8RqZ1n0SnYktAEEJC7n1I31BElwY8W7QQQMkau5ThNcdT0bU3OX6ShK
+ eu7jECSA3hIPNYZP+gRAjASAWNXsaJnmkpUe+If6FQwsv53N39TwyzYBunph4+INVhIAcJuqISi
+ 54mGpz0uivPT5QzWvKaqQ10B5oaVfcbYV2xjcZt5vVxWyydp0HYdN74LO/gWwFkO6ddhXkrS1UY
+ ZfxzNVy83HoTRWvESMjDIyX6pCDt8SVw7Th+kEDL/8TGhN9lEzITiOtxbYT46tKLow3D/eJsh4q
+ 2Gi6sw==
+X-Received: by 2002:a17:907:e107:b0:b9b:5164:905c with SMTP id
+ a640c23a62f3a-b9d72793041mr227149666b.14.1775918252463; Sat, 11 Apr 2026
+ 07:37:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260410-topic-am33-evm-oftree-v2026-01-v5-0-4b9c7aca0e3e@baylibre.com>
- <20260410-topic-am33-evm-oftree-v2026-01-v5-11-4b9c7aca0e3e@baylibre.com>
-In-Reply-To: <20260410-topic-am33-evm-oftree-v2026-01-v5-11-4b9c7aca0e3e@baylibre.com>
+References: <20260405144944.41074-1-lucienzx159@gmail.com>
+In-Reply-To: <20260405144944.41074-1-lucienzx159@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 11 Apr 2026 08:37:10 -0600
-X-Gm-Features: AQROBzCKu1gobAoMT1wrMYpGqSN6A7oms0pso1adNWAui87mZxsT0-B78xK03ns
-Message-ID: <CAFLszTjbgkiXO_Tj4Whnz6hjo8XzeA9ohoY4vfcq=-4maq8NVQ@mail.gmail.com>
-Subject: Re: [PATCH v5 11/12] dm: core: Split SIMPLE_PM_BUS into phases
-To: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
-Cc: u-boot@lists.denx.de, Marc Murphy <marc.murphy@sancloud.com>, 
- Tom Rini <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>, 
- Kory Maincent <kory.maincent@bootlin.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Romain Gantois <romain.gantois@bootlin.com>,
- Parvathi Pudi <parvathi@couthit.com>, 
- Basharath Hussain Khaja <basharath@couthit.com>,
- Paul Barker <paul.barker@sancloud.com>, 
- "Andrew F. Davis" <afd@ti.com>, Anshul Dalal <anshuld@ti.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>
+Date: Sat, 11 Apr 2026 08:37:19 -0600
+X-Gm-Features: AQROBzCd4VArlL-QBU78MHp8Pvlcsyv9M9RU0UkNhvyNU_zwkmFkpWPJ4HaOTnc
+Message-ID: <CAFLszTgMvRHfrEa8=-m+AszoKvxg-TshcH2qx4z--yN6ZwoQGg@mail.gmail.com>
+Subject: Re: [v3,0/4] phy: add common PHY polarity properties support
+To: lucienzx159@gmail.com
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -117,63 +107,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Markus,
+Hi Lucien,
 
-On Fri, 10 Apr 2026 at 07:33, Markus Schneider-Pargmann (TI)
-<msp@baylibre.com> wrote:
->
-> Similar to SIMPLE_BUS, create a SPL_SIMPLE_PM_BUS additional to the
-> SIMPLE_PM_BUS. Most boards will not need SIMPLE_PM_BUS in SPL.
->
-> This is currently needed to reduce the SPL size for beagle bone black
-> with OF_UPSTREAM enabled.
->
-> Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
-> ---
->  drivers/core/Kconfig  | 8 ++++++++
->  drivers/core/Makefile | 2 +-
->  2 files changed, 9 insertions(+), 1 deletion(-)
->
-> diff --git a/drivers/core/Kconfig b/drivers/core/Kconfig
-> index 5419bf65b5d653464f8bf958382ede30954d6402..0471e2977d0a993afcafee11874d43016d6738b4 100644
-> --- a/drivers/core/Kconfig
-> +++ b/drivers/core/Kconfig
-> @@ -342,6 +342,14 @@ config SIMPLE_PM_BUS
->           Supports the 'simple-pm-bus' driver, which is used for busses that
->           have power domains and/or clocks which need to be enabled before use.
->
-> +config SPL_SIMPLE_PM_BUS
-> +       bool "Support simple-pm-bus driver in SPL"
-> +       depends on SPL_DM && SPL_OF_CONTROL && SPL_CLK && SPL_POWER_DOMAIN
-> +       help
-> +         Supports the 'simple-pm-bus' driver, which is used for busses that
-> +         have power domains and/or clocks which need to be enabled before use,
-> +         in SPL.
-> +
->  config OF_TRANSLATE
->         bool "Translate addresses using fdt_translate_address"
->         depends on DM && OF_CONTROL
-> diff --git a/drivers/core/Makefile b/drivers/core/Makefile
-> index a549890c22b997a8c3e7cd6ab08b2ed2ac7994b2..1073c26b2ed0009e15ccca0bac93a64d882f0df9 100644
-> --- a/drivers/core/Makefile
-> +++ b/drivers/core/Makefile
-> @@ -7,7 +7,7 @@ obj-$(CONFIG_$(PHASE_)ACPIGEN) += acpi.o
->  obj-$(CONFIG_$(PHASE_)DEVRES) += devres.o
->  obj-$(CONFIG_$(PHASE_)DM_DEVICE_REMOVE)        += device-remove.o
->  obj-$(CONFIG_$(PHASE_)SIMPLE_BUS)      += simple-bus.o
-> -obj-$(CONFIG_SIMPLE_PM_BUS)    += simple-pm-bus.o
-> +obj-$(CONFIG_$(PHASE_)SIMPLE_PM_BUS)   += simple-pm-bus.o
->  obj-$(CONFIG_DM)       += dump.o
->  obj-$(CONFIG_$(PHASE_)REGMAP)  += regmap.o
->  obj-$(CONFIG_$(PHASE_)SYSCON)  += syscon-uclass.o
->
-> --
-> 2.53.0
->
+On 2026-04-05T14:49:40, Lucien.Jheng <lucienzx159@gmail.com> wrote:
 
-I'm assuming that this doesn't affect any existing boards.
+> Patches 3-4 add sandbox DM unit tests for the new library
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Patches 3 and 4 have a bisection problem. Patch 3 adds test code
+referencing DT nodes like /phy-common-props-missing, but those nodes
+are only created in patch 4. Please can you squash patches 3 and 4
+together, or reorder so the DTS changes come first?
+
+> Add obj-$(CONFIG_PHY_COMMON_PROPS) build entry in test/dm/Makefile
+
+I don't see an update to sandbox_defconfig to enable
+CONFIG_PHY_COMMON_PROPS for testing. Please can you add a patch to
+enable PHY_COMMON_PROPS in sandbox_defconfig, or imply it from
+SANDBOX?
 
 Regards,
 Simon
