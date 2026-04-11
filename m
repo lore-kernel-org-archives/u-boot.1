@@ -4,107 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA563F3ED4F
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 14:57:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01CFCF3ED40
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 14:58:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48BA18419E;
-	Sat, 11 Apr 2026 16:57:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 8D93D84154;
+	Sat, 11 Apr 2026 16:58:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A4sKHMpH";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="TPSiBi/r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F039841B9; Sat, 11 Apr 2026 16:57:45 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 27A85841F2; Sat, 11 Apr 2026 16:58:03 +0200 (CEST)
+Received: from out-174.mta0.migadu.com (out-174.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::ae])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32F018419C
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 16:57:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AFAB784118
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 16:58:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-b9825ba7f9dso438809666b.0
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 07:57:43 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775919463; cv=none;
- d=google.com; s=arc-20240605;
- b=dWC6IgIBUbRNoe9e3dS5u2x0A51F0lCmlNGEkxH3Cojxlfqcinh3daaK02S8txCZSE
- k7dGwuJy9jlzEuwqSaaB10ElJIJ8Ha3yDgKyGMe07yAhpVcLGVyekJlcMkf1PrDXjpaW
- J5kDAie+h3bGLISbPj0b0tzT3/7wI5oc/JiN91b3vyTO5/jQ2UYukzcCcYJyNUwTLXQh
- nz/mkNnK3+C5LCuaLmu6vWpSI5/AUdIN1iCt+gRpELpwaYhXv2LK4rBXO4FfK+xS6Hm4
- s1a+mZsrlKf3hrXEknlcI04jrYc/cenktOWmT5dh4wZw/glASFDoW4HYsh7tNSs+d3Xv
- w5iQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=Bpik3QYi4RrnA4WT+oN6mGEqpDhs/s1TLm9TwM14P18=;
- fh=yHqBN7NFClq905zqB96KeXXRqRH346QT5urrBm81ZP8=;
- b=Eh0fVSio1ODaf6eh7nBittPFunfXx5BsFYUpHirVMwsmUR2nB0coqBvwlDi+wcAdAy
- hVOSuqrqo/DspT/IVFUnoCZV8I+K6G9NDnUNvuh1eJFVCw7xgMxgJmgo0MArxUXIPdSB
- 3D3DhH9jMQDrMwacYWZQ/fqyVsWSNa68cr5n+1nMIon2d4I9mdBXCWYRvvQLRVL+kGp4
- IKpx41H5S8ON9UX1ed47wHdAe679uvEK1RGJmTHBE7GzPZW8hFmXssTNgzo1RNY5k3/U
- Pt4k9JBD40Y72PLWZo7nFksghOWzaroBNecqB+reYiLp8HLy9fQpHwkWi6YJrbtIMXYK
- iqvw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775919463; x=1776524263; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Bpik3QYi4RrnA4WT+oN6mGEqpDhs/s1TLm9TwM14P18=;
- b=A4sKHMpHAs4neGob480+vSgtBea73LsXfPHmJK7A1+Fj8iiLJ8jpOhgz8w4RhD8txM
- /UMM/eqSVZTBM65VpYZuOQW+Jls0j6D18dg271EMzsdu/peCWp+p4ymK36LwM087yr3v
- GnkeqzTlGNuNRbIhFjXTtdVgFPbLu7YqN31kc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775919463; x=1776524263;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Bpik3QYi4RrnA4WT+oN6mGEqpDhs/s1TLm9TwM14P18=;
- b=m4YSriguMXIh1ZSOF+JSrl075K7KWojAf3TUKb5TeY1+ehMFx2XEn1SI8CkHvEFumX
- bEJC8Mi0bDb43q1Cyj7BrZXxaeiNDOHMrXo7LcNY1ueKJfGh0q6zRQWtNJZfmMr3iljW
- unYRNvo+7l6oElSYsCsEQMcLdPp9LrMkgy2uTuIaaywzhsl3h/kfBs0AAASrszaPnFTx
- d5h7Dgjr2tYnvMxYBIIuT4xA+kf7FvwPYyAya5Mg2rF1AibY4JzLfYg+bcawjFSmsRSS
- CcUaN7rUupOPvIWBVy7qxuDotdhrcQf9VQYCDaZSc/pnMWtcgo9drXrCD5v5NIHv0tWt
- IyZQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUzK/E2ezYko80x6itFsbbqlIABxoOEzIB0EpQQIyvnJqKqvurpdKMM866+KOMpC5PpX6FvHFY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzCdxeDKeZCvku4nYzbZzka0aWCRWnM/gn5MHcWftKikzOupAoA
- 4+tQdMBAgrbxQtoelewQYe4p1vPC/3taQloclYqsn6LKpGpwnugPiY2WV9cMasauP+kattoosYY
- 5IB5B3ykdMZwfmyQU79gIn+MWX990kad+oNFdOhke
-X-Gm-Gg: AeBDiesK9APCZOAU5gF3FDErQCN9yo/lUZLTltP4EdJeG+rDgQf7G5YF1k+y+xw0808
- ieSavGFHJYf1PL+ereblVbmsa2n2ArXRAQ9gQixiRkOezz+GXESfpnMMLkHAcfJCaLX3vXAd4z2
- 6PnsnDrVZK4dCOtc03M7X5aoY+WulXaGo3mWsQYguuxv3RRxQug9+fIBggql92Kt7y3Gb6Bxl5y
- l3OxWZtnN2kUBRhJxLXC3i3WTurMLeF/AG4+3/ug/LiMtLAA8dNQqouMhkFRZxuGcDNMYxJ9yAV
- OE+f3w==
-X-Received: by 2002:a17:907:26cb:b0:b9c:617b:4a36 with SMTP id
- a640c23a62f3a-b9d46227ffamr596955566b.21.1775919462545; Sat, 11 Apr 2026
- 07:57:42 -0700 (PDT)
+ spf=pass smtp.mailfrom=funderscore@postmarketos.org
+Date: Sat, 11 Apr 2026 14:56:14 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
+ s=key1; t=1775919480;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=78QaezHpQzYmKodAuLRU0kKPR7dzb2Jlj332PXEv81M=;
+ b=TPSiBi/r6LI2gqt+fs7hxb61kVUuwlsaTHRFU3XcxgrkzGuh/PCHBSX7Pu8bSdSWyluaAK
+ wxDzp8XeYNMvDYo5RKSBLqLNmroD5XWCl707VoSVvlvz5MbXw9K/4k3lM41n/OnBhaBW/B
+ XZADjHHdRa6Jrruak9R1Dhy/BJ8RrEmTLrdO9DoIq7Zev9CF6WZhKZu8lI7HEOkCvebDiA
+ xHpGKC/9Z408s2tLAa/7WZksFSiQOykDkdGSGdsVaCEWBYaBYirzr5qIPT4lKF06dES542
+ Ja6uGndJmtpI9iVs/gFbj7Bl3RFqwgsjnN2ppPYknscUJYX79rX32wXNMYN3dA==
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: Ferass El Hafidi <funderscore@postmarketos.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Anshul Dalal <anshuld@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Martin Schwan <m.schwan@phytec.de>,
+ David Zang <davidzangcs@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>
+Subject: Re: [PATCH v2 1/2] autoboot: allow custom prompt without requiring
+ AUTOBOOT_KEYED
+References: <20260408-ui-cosmetics-v2-0-721dc6d2116a@postmarketos.org>
+ <20260408-ui-cosmetics-v2-1-721dc6d2116a@postmarketos.org>
+ <CAFLszTgwK5nUs2QA2Mh_pkTXycAiA0L4ukD8qywubW1AmTetxw@mail.gmail.com>
+ <CAFLszTgvueYQUyGCQp3amZN20__LMvz_Eu5S_m=OQf9QDsr+DQ@mail.gmail.com>
+ <tdc3t2.1tjebl3bs6nc5@postmarketos.org> <20260411145330.GV41863@bill-the-cat>
+In-Reply-To: <20260411145330.GV41863@bill-the-cat>
+Message-ID: <tdc48k.33h7i0pp1hoxk@postmarketos.org>
 MIME-Version: 1.0
-References: <20260409133303.31875-1-ansuelsmth@gmail.com>
- <20260409133303.31875-6-ansuelsmth@gmail.com>
-In-Reply-To: <20260409133303.31875-6-ansuelsmth@gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 11 Apr 2026 08:57:30 -0600
-X-Gm-Features: AQROBzBh8WoF28_iP08RPgasgPLvZ4rqBIYYmYz98FvQuZ5s5x6IjkrrmB12kU8
-Message-ID: <CAFLszThnYjfy2Y=pfWWeUmguG4Xne7qk7zikpBMEkwM7JoJswg@mail.gmail.com>
-Subject: Re: [PATCH v6 5/6] misc: fw_loader: introduce FIP loader driver
-To: ansuelsmth@gmail.com
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Peng Fan <peng.fan@nxp.com>, Kever Yang <kever.yang@rock-chips.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mateus Lima Alves <mateuslima.ti@gmail.com>, 
- Jamie Gibbons <jamie.gibbons@microchip.com>,
- Neha Malcom Francis <n-francis@ti.com>, 
- Justin Klaassen <justin@tidylabs.net>, Leo Yu-Chi Liang <ycliang@andestech.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- "Lucien.Jheng" <lucienzx159@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8; format=flowed
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,73 +79,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Christian,
+On Sat, 11 Apr 2026 14:53, Tom Rini <trini@konsulko.com> wrote:
+>On Sat, Apr 11, 2026 at 02:47:00PM +0000, Ferass El Hafidi wrote:
+>> Hi Simon,
+>> 
+>> On Sat, 11 Apr 2026 13:34, Simon Glass <sjg@chromium.org> wrote:
+>> > Hi,
+>> > 
+>> > On Sat, 11 Apr 2026 at 07:27, Simon Glass <sjg@chromium.org> wrote:
+>> > > 
+>> > > On 2026-04-08T16:34:55, Ferass El Hafidi <funderscore@postmarketos.org> wrote:
+>> > > > autoboot: allow custom prompt without requiring AUTOBOOT_KEYED
+>> > > >
+>> > > > The autoboot prompt used to only be customizable in Kconfig when
+>> > > > AUTOBOOT_KEYED was enabled. For a usecase such as having a nicer
+>> > > > autoboot prompt alongside a splash screen, there is no reason for
+>> > > > AUTOBOOT_KEYED to be required for this.
+>> > > >
+>> > > > Remove the dependency to AUTOBOOT_KEYED, and use AUTOBOOT_PROMPT in
+>> > > > print_boot_delay() instead of a hardcoded string.
+>> > > >
+>> > > > Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
+>> > > > Reviewed-by: Tom Rini <trini@konsulko.com>
+>> > > >
+>> > > > boot/Kconfig      | 30 +++++++++++++++---------------
+>> > > >  common/autoboot.c |  2 +-
+>> > > >  2 files changed, 16 insertions(+), 16 deletions(-)
+>> > > 
+>> > > Reviewed-by: Simon Glass <sjg@chromium.org>
+>> > 
+>> > Actually doc/README.autoboot documents CONFIG_AUTOBOOT_PROMPT as part
+>> > of the CONFIG_AUTOBOOT_KEYED group. [...]
+>> 
+>> Sure can!
+>> 
+>> > [...] Since you are decoupling these,
+>> > please can you add a patch to update the documentation? Really it
+>> > should move to doc/ though, if you have the energy for that.
+>> > 
+>> 
+>> It's already in doc/, what do you mean by that?
+>
+>It should be in rST and part of our public docs, rather than a plain
+>text file under doc/.
+>
 
-On 2026-04-09T13:32:56, Christian Marangi <ansuelsmth@gmail.com> wrote:
-> misc: fw_loader: introduce FIP loader driver
->
-> Introduce a variant of the FS loader driver to extract images from FIP
-> image. These image can contain additional binary used to init Network
-> accelerator or PHY firmware blob.
->
-> The way FIP handle image type is with the usage of UUID.
->
-> This FIP loader driver implement a simple FIP image parser that check
-> every entry for a matching UUID.
->
-> Similar to FS loader, this driver also support both UBI and Block
-> devices.
->
-> Also an additional property is added to handle special case with eMMC
-> that doesn't have a GPT partition and require a global offset to
-> reference the FIP partition.
->
-> An example usage of this driver is the following:
->
-> [...]
->
-> drivers/misc/Kconfig                      |  11 +
->  drivers/misc/fw_loader/Makefile           |   1 +
->  drivers/misc/fw_loader/fip_loader.c       | 544 ++++++++++++++++++++++++++++++
->  drivers/misc/fw_loader/fw_loader-uclass.c |   3 +
->  drivers/misc/fw_loader/internal.h         |   2 +
->  5 files changed, 561 insertions(+)
+Ah right, sure can do that too.
 
-> diff --git a/drivers/misc/fw_loader/fip_loader.c b/drivers/misc/fw_loader/fip_loader.c
-> @@ -0,0 +1,544 @@
-> +#include <fs.h>
-
-Is this header actually used?
-
-> diff --git a/drivers/misc/fw_loader/fip_loader.c b/drivers/misc/fw_loader/fip_loader.c
-> @@ -0,0 +1,544 @@
-> +static int blk_read_fip_toc_entry(struct blk_desc *desc, u32 offset,
-> +                               int pos, char *buf,
-> +                               struct fip_toc_entry *ent)
-> +{
-> +     unsigned long left, consumed, to_read, read = 0;
-> +     unsigned int blkstart, blkcnt;
-> +     int i, ret;
-> +
-> +     consumed = pos % desc->blksz;
-> +     left = desc->blksz - consumed;
-> +     to_read = min(left, (unsigned long)sizeof(*ent));
-> +
-> +     blkstart = BLOCK_CNT(pos, desc);
-> +     blkcnt = BLOCK_CNT(sizeof(*ent) - to_read, desc);
-> +
-> +     /* Read data from previous cached block if present */
-> +     if (left) {
-> +             memcpy(ent, buf + consumed, to_read);
-> +             read += to_read;
-> +     }
-
-I suspect this condition is wrong. When pos is exactly at a block
-boundary (e.g. pos = 512 on a 512-byte block device), consumed is 0
-and left is 512. The code then enters the branch and copies stale data
-from the buffer. The condition should probably be if (consumed) to
-match the logic in blk_read_fip_firmware() which correctly uses if
-(pos)
-
-Regards,
-Simon
+Best regards,
+Ferass
