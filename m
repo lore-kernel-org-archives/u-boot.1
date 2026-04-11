@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 851B6F3ED4D
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 13:25:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD780F3ED4D
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 13:25:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 061BC841D6;
+	by phobos.denx.de (Postfix) with ESMTP id 413EF841E6;
 	Sat, 11 Apr 2026 15:25:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jSSKvpom";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eov8fIQT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 501928416F; Sat, 11 Apr 2026 15:14:54 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 6B8288416F; Sat, 11 Apr 2026 15:16:04 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CFCB84118
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 15:14:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D5ED984118
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 15:16:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-b9c755b2cdeso462383566b.2
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 06:14:52 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775913291; cv=none;
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-66e129e457dso2961980a12.1
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 06:16:01 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775913361; cv=none;
  d=google.com; s=arc-20240605;
- b=eP1AX4Y27S3fLj/og4crMqN5v5vnitcQwOVymY39tzYy0vWpfiWJAKcvUuQgQM4UeN
- hG0GwYNMA5o84gMZol1yz5Hj4UCaIqZ9JBhhqsIrJIQEnLKDvRefNT2Fmfx/09S64jjB
- MdIiOs+odrOIdnscQPQ+kG+dVTDZdCqea3iYLZT3Tzi5KH//B6JwZwFOHV24V9f8mNsN
- ZidUcD8+Lcs/Y+oOS+vz7wzRz3gc+sDqCeeF2ws7zb6gLxZBcY33ZbnsDQQjqhEXs1Sn
- d4Plvv9OF/g29KY2Rsqkk2Puetw9UrIDy9C197UUdjKkXLJnAdcXfwtQT6hI3YmIDLdv
- tKkA==
+ b=E6UdqlTwTdF1dT8PDbA3NQyPo5Fx19jQ27UD8sSyjNDr1GsxqDdnOo3Dm5Zk+zH3Ts
+ md5E0Iw/gYt/Bpi5jXK//s4f8KrZIfhO6gNeAMym6A44Ai1c+YhobrRJSCYgtMcpRfNN
+ USkGeVAPM4PO2q5cIKokRGDxhExmaQeQ1SXuIMhmb9u7euVyJjuSVWdtThMgC700lzPW
+ 7ESbVIbd7w77rZNm3VJ7t3b1P9qD8lyA4MXr65rXuE/rvIK1GCmnpIwZJehQ7Xln/4u3
+ 1LNODxozxq/+bWsDDybiDpwfB78npTsGKfTqh8VyRUzM6zZs8fwr9rd+MIgCz6EDuTZN
+ J1Vg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=3/HSU6K4bQXug9q/pEX3LhiUf2chMFDQzJsEiF3URG8=;
- fh=LyOMVuuR1pFG3udfQP+1h/tPU885BX42i0U8b8tcbPw=;
- b=lRt/szwVdHCzkMmqdBgPV3CgRSW0+xPGyKDcX7Up0F4Ld72i8RhcDZduov6H4He2R6
- Q1dzd/IVbKDk4HYXqXZz9MjjsDBD/XsVunRqieWgEYxc901RwsLzr8iBggANBm4+AE3+
- EVRp5yXc86WXygF6Rdv7YwIEGFOQhBi64nI+ov6C9xWO9KhwR7Fqd6S6LsoV30bJ6w4D
- jdpVwtyHZmSxpA7NmBv0W9Ea2cNHU+uoWEerJ3wttGdwx5eNJwnTG/br4QXqMiOBcy0H
- +x+G4POQFoygJlOzBh+jkFCRycnJzCLSek8tJK3rLHb1u5M2VGbWsObbVzDwjhd2BNXJ
- SsMw==; darn=lists.denx.de
+ bh=msScTXxiIpHxgM77PHECV+9p7Wvdsj/JUo2/i0lsyoU=;
+ fh=NpULHgXzxRUaUGWaxtHjbS3A2FSifvlQUVWx4+lAb70=;
+ b=C+mT327oaIMs3zYMUOA911r19Uq/FKYYn0RME2SJHq71SNnRURDPHwMCiqQ6kdBcW9
+ tQ0Sw4Bk4KwPqXk6lnrrcXrAR6RNF+CEDM30oY5n56pFnaMaSMCEgptArLcb9gN0Tbpy
+ v4WBMXEUKIJYcgFUuMxMde353tHP4fO0A9bDkeHBZ0zgbLKdokCCvrkpZAZUygP4A7rS
+ OI24u0oDuYwEqd0fE4eCE+C2aIT0lqJ9vhhDDLPDwxnlsmYT70f75lEM93X1tZLUCfIf
+ +6HItJXvSRezxFjeDCL6Ivej71XulUrvTbjs6O/WFHWnJjXZQBvdbUPv6KDwRc5HAy3E
+ bIlw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775913291; x=1776518091; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775913361; x=1776518161; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3/HSU6K4bQXug9q/pEX3LhiUf2chMFDQzJsEiF3URG8=;
- b=jSSKvpom8YIZVdXrBLJ4jZVUYSlLBaDWJu7kv50YxAAU3MhRsJhyoYIwqnSr3ot9jp
- 6Nqz5JNC6D90uR4vPiLp6hjq25yS4BnxAfbZ5XwmBE7xYZ2lg9m5wWN0krttxoGGIN6Z
- Nmiqg/Gt20LHvFfiwGc1v0Utw9TaEpSep6WFM=
+ bh=msScTXxiIpHxgM77PHECV+9p7Wvdsj/JUo2/i0lsyoU=;
+ b=eov8fIQTNl5Qi+aEZVBsBTQdvz4edhNvA6UfL0pgdM6GlLj1sWJrFISgWeHlLjLPAD
+ tJRn1WWjMlPi9BSQrXmYa+qtWyUmA3veB/n4PG2YvLZwPUHH6vg6pA1By+aB3ZUNGMPp
+ YFJ3MUsUeriHtNbfuIkdCoRILlsmVFATx8e8U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775913291; x=1776518091;
+ d=1e100.net; s=20251104; t=1775913361; x=1776518161;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3/HSU6K4bQXug9q/pEX3LhiUf2chMFDQzJsEiF3URG8=;
- b=IvPfOCOM4LXDOcrp9o1gKC6QgEM30LdYS1GvSBLM/N7YsmZtvGSjZDhmluIlyWkpOo
- 9WQgpltDFL/O9KGjhALIhDZZgRjDhq3OG3R1eucx6HooUMLPftudec1SS6CGcAtIzkRL
- XlqRV/zcvyHusYI+eQHgguSxPBPv6zAZ0i+x0C52CsqBIysxXdyme3xyTIKECnnNP3E8
- 7gbki+QK9Y5b8gNk28veokpXqRf6QWJKt3B+lDT9QNosoa4ls1n0SGeN1qsTCe3ZNeg6
- 1WWPkxqRA+5ZZh4Or+mh93USLXoL44ZsF4E/Qx4/9+WS0WjhSrQDLZSLpUiUYE3keE5s
- jIHg==
+ bh=msScTXxiIpHxgM77PHECV+9p7Wvdsj/JUo2/i0lsyoU=;
+ b=sm4ObeXnnjQgsgN/9XhXfVVT8nFUJeXQFL5kmfHPPgUUcqcLN1IPwAmfiu4rSfamAf
+ twAg/dgTQ+xQ3asB0weINloeq95e4ESEUzMjBDoseaZ+7kSnZ9yQu2aX+45nP1w1Cvdw
+ yLqYHcFolOYAtcSVik/CG0pJFhf0bTxjyTGUMXl8Zn7KylC29E/IVz6UWxQEzvwzgMLz
+ lV5STzetWgp1HajNcNkeqoUtFtTW7Rl0SOVeVjIz19vnMkD4mMrpWYcCxPWjfaqBAYb5
+ ZmpIX0fhh3qtWcorASfmyNiwOqOwgWLeo+QZEhJIfbSkCy/DuLDQQgSHuxUgMnaYNHxu
+ ZnlA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU8VWDWlBPOvhB7Fh57TMaJEARcn8BNdPBL/a+RIhxPmsWTLgAn0/MNRg+LcQX2LseHLdbvoDQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzqa7aFuMCIFtlGv4eeFto8yVKvscDXvrL7/uqyHQ6+lq3NbiqO
- gKoKHdizU7qSx2ysWe6i8XlHXyoMvRq5UNL928Z/hcyDaJgX3CqmRjZECGMP8yN7j9GqLSHeGju
- BrbnHiMwZjkHn7vTff4vQeN7OhcADJHpQVOh/2C9s
-X-Gm-Gg: AeBDieu5qvEN/tnLGk5Lng5dcwDXe5Fpd3GIUoLxh2Ek2+TUEW0KN/57aNJh8i6k+pP
- I2DLBIhTqpqYCBqvHCZdfPED+U4qU0/b6XEl+fDIr+8Ilyhvd105rKYFW6ITnHIo45pZnFqkXVg
- WagAOT81RVVNYdLjxrmLcQ5+hmmgNn4RcEELaoGTMk8q55vwX1NguEuDv+BZMLWE8C2C11gMFZo
- ZPgu2xFgC00N0Bay4sRTJsOqtbKSXt2rYRmJoaGrOgNqARkyPrWVZC95DenXRcHW5ka4It48Cer
- VeR2YQ==
-X-Received: by 2002:a17:907:c28f:b0:b9c:69df:4d9d with SMTP id
- a640c23a62f3a-b9d7267ae8emr375272666b.38.1775913291449; Sat, 11 Apr 2026
- 06:14:51 -0700 (PDT)
+ AJvYcCXeQvb8k3JYoPIiNghaS77s6VNJtDisfVBdmGzwXeFTKPqQ6eiHDbMOOz0tMuPGQm5rf+0+lJ8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxfkN2FopY6h+yhbn88yHPYQ/rdJWqof1K0kxk3wsCSBjmAAdqm
+ oyWx3rKsvp3L7GOB1npLd0qoys7WBV3QVAkZuabipGyTfiCiLZIVYYs+4qkGv85Rggn6YE9FoyG
+ U+zRG5d8sCsM7BnasoDY6XpDdHhgNa1GmULKAaH6q
+X-Gm-Gg: AeBDies2TrmSAeudl0gek0JpnrGNFNFbrsZLflJxfxXx4kkPsODsq+JDPk1g2NmeXOv
+ Y+xUuHh0vray5PySKBjTScHcATumt0rFIbegKuMYJei+zc2+kjdTeBtTN8P1M1lXgTzMfYqskRa
+ OFLVJ8XfjFcBy14lv78AmnhhvIwOQUCwD9B7eWvBC1UvMds3Dez0hDSZVl89MbGpzDc3o4yCSy9
+ xVX+Xz63LQFW3o8V6zBot/DdWmCvCrJbldQ4UDO3xeIen4eo8GsDc3nuoFR594fC0AcEWe6hl4H
+ ZhJohA==
+X-Received: by 2002:a17:907:6c0f:b0:b98:cb6:e896 with SMTP id
+ a640c23a62f3a-b9d7298ffa1mr385019766b.38.1775913361068; Sat, 11 Apr 2026
+ 06:16:01 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260410091154.1001021-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260410091154.1001021-9-varadarajan.narayanan@oss.qualcomm.com>
-In-Reply-To: <20260410091154.1001021-9-varadarajan.narayanan@oss.qualcomm.com>
+ <20260410091154.1001021-10-varadarajan.narayanan@oss.qualcomm.com>
+In-Reply-To: <20260410091154.1001021-10-varadarajan.narayanan@oss.qualcomm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 11 Apr 2026 07:14:38 -0600
-X-Gm-Features: AQROBzCPHXCp0Z5WLh6_du7IT2Bj2pp1SUULbG8kqOEBC4W1r6LhrjxqPTWdmLc
-Message-ID: <CAFLszTgiz=vNv1QMDx2-pNsEKE+FbDN19tyVgXayxi4VfN_vZg@mail.gmail.com>
-Subject: Re: [PATCH v2 8/9] mach-snapdragon: Add commands to create wrapper ELF
+Date: Sat, 11 Apr 2026 07:15:46 -0600
+X-Gm-Features: AQROBzAU5aY-vMx5e2Xlm-QxNmciliGrF4emsIJuDJC-qrUUv0jUb7Xgu61-Tug
+Message-ID: <CAFLszTgkdQxRmzfXOW3+RcNO0+aSeYFEq_iA3spWd8nnf2egaA@mail.gmail.com>
+Subject: Re: [PATCH v2 9/9] configs: add qcom_ipq5210_mmc_defconfig
 To: varadarajan.narayanan@oss.qualcomm.com
 Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com, 
  casey.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@kernel.org, 
@@ -130,50 +130,37 @@ Hi Varadarajan,
 
 On 2026-04-10T09:11:45, Varadarajan Narayanan
 <varadarajan.narayanan@oss.qualcomm.com> wrote:
-> mach-snapdragon: Add commands to create wrapper ELF
+> configs: add qcom_ipq5210_mmc_defconfig
 >
-> The IPQ5210 boot ROM expects the SPL binary image to be embedded within
-> an ELF along with additional binaries. Hence add the relevant commands
-> and linker script needed to convert u-boot-spl.bin to the expected
-> format.
+> Introduce a defconfig for the Qualcomm IPQ5210 SoC based RDPs.
+> Presently supports eMMC.
 >
 > Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 >
-> arch/arm/mach-snapdragon/Kconfig                  |  6 ++++++
->  arch/arm/mach-snapdragon/ipq5210-spl-wrap-elf.lds | 14 ++++++++++++++
->  scripts/Makefile.xpl                              | 21 +++++++++++++++++++++
->  3 files changed, 41 insertions(+)
+> configs/qcom_ipq5210_mmc_defconfig | 106 +++++++++++++++++++++++++++++++++++++
+>  1 file changed, 106 insertions(+)
 
-> diff --git a/arch/arm/mach-snapdragon/ipq5210-spl-wrap-elf.lds b/arch/arm/mach-snapdragon/ipq5210-spl-wrap-elf.lds
-> new file mode 100644
-> @@ -0,0 +1,14 @@
-> +PHDRS {
+> diff --git a/configs/qcom_ipq5210_mmc_defconfig b/configs/qcom_ipq5210_mmc_defconfig
+> @@ -0,0 +1,106 @@
+> +CONFIG_DEBUG_UART_MSM_GENI=y
+> +CONFIG_DEBUG_UART_ANNOUNCE=y
 
-Please add SPDX licence identifier.
+The other IPQ defconfigs (ipq5424, ipq9574) have CONFIG_DEBUG_UART=y
+along with CONFIG_DEBUG_UART_BASE and CONFIG_DEBUG_UART_CLOCK. Without
+these, preloader_console_init() in your SPL likely won't produce early
+debug output. Please can you add these.
 
-> diff --git a/arch/arm/mach-snapdragon/ipq5210-spl-wrap-elf.lds b/arch/arm/mach-snapdragon/ipq5210-spl-wrap-elf.lds
-> @@ -0,0 +1,14 @@
-> +SECTIONS {
-> +     . = 0x8c24000;
+> diff --git a/configs/qcom_ipq5210_mmc_defconfig b/configs/qcom_ipq5210_mmc_defconfig
+> @@ -0,0 +1,106 @@
+> +CONFIG_SPL_TEXT_BASE=0x08c24000
+> +CONFIG_SPL_MAX_SIZE=0x3D000
+> +...
+> +CONFIG_SPL_STACK=0x08c60000
 
-This hardcodes the load address. It would be better to use
-CONFIG_SPL_TEXT_BASE here so it stays in sync with the defconfig. You
-can pass it via LDPPFLAGS in Makefile.xpl similar to how
-IMAGE_TEXT_BASE is passed.
-
-> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-> @@ -45,4 +45,10 @@ config SYS_CONFIG_NAME
-> +config SPL_WRAPPER_ELF
-> +     bool "Create wrapper ELF for applicable platforms"
-> +     help
-> +       Some platforms embed the U-Boot SPL binary within an ELF as a
-> +       segment. Additional tools are used to convert this ELF into a
-> +       image that is usable for the boot ROM.
-
-into an image
-
-Since you are adding a new SPL feature you may need to add "depends on
-SPL" to make the dependency explicit.
+Just to check, the SPL code region ends at 0x08c61000 (SPL_TEXT_BASE +
+SPL_MAX_SIZE) but the stack is at 0x08c60000 which is inside that
+region. If the SPL binary approaches the maximum size the stack will
+collide with code. Is this intentional?
 
 Regards,
 Simon
