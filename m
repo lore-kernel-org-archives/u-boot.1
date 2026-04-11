@@ -4,94 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A440F3ED4D
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 13:25:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32CB8F3ED40
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 13:26:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8118084201;
+	by phobos.denx.de (Postfix) with ESMTP id C25A784213;
 	Sat, 11 Apr 2026 15:25:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Vj+pQgpI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jihm7xW8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A12F98416F; Sat, 11 Apr 2026 15:16:11 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id F24AD8416F; Sat, 11 Apr 2026 15:18:36 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B105B84118
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 15:16:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F51A84118
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 15:18:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-670f879f7abso368388a12.0
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 06:16:08 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775913368; cv=none;
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-b9c745e18a0so240954366b.1
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 06:18:34 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775913514; cv=none;
  d=google.com; s=arc-20240605;
- b=SmxLEfHeqSUAncQJC6vTq+3k4hQYAPgcbp1LCa/dAKLV7Lj8IF8MHmcrzrhfV1wgI7
- +hiNvVVslBwaaKhWvqflAPTghcc+kTRZcp/DFfByo+sCGmWi1/bZF0HVouFucm8OFLOg
- gJmUsRKA5/ov6MqYuC0RLydqe0Y+U9e86InwNHL+kao299Kt30MfXajwpMPY1F3t9M9U
- msGN/c9NOOp22X/QG/2VIFdWhZyHGx5HvuZr3U80z4l6bSXbJkILb7ITBI9eJLXx2ZTO
- jNWF3DOM8oV5EmCnA0BPxacfIQ1Qaoa52N022pb6ecHKYv/h7F05V3zP6K8djiVSH6r6
- uGsw==
+ b=k5eV5+nl88Rv5p9ysS+70057iEcMP8zCUN1yT4TpDo2dmTwjdRJwcfWAhygdc6eYHJ
+ nIE7+Qs38MFqdbDO84dDwKpS4yVQf8G8WAFtE2i3FJb83RKpydbk1KcXn/0oRuf8VW2H
+ IdHd4LrrXVyiWpuBeGggRniEwgTWyLzfarJo+pke+LyYlZuKFUUuMTOR6kFLvt19B6yl
+ drIyIwP7B0pILEd++gGE1BhUd2seRKu3m9rAJY4jRKgFH3d6/OqI85Aakrb8m8oj4PVs
+ W01BwmXNO0vluyNZXnoku2mpxMuY+1g9N+sqFWS8JIgjgyseLMX+YVvnwDl+2X32wMt4
+ MnlA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=30abGhkZA4uIvLJwBKMfxpHOc3TCLe1CPftFzlluiOU=;
- fh=QYE4yYjQrkwHbBQuIVs/RzQO4Rp2dP+F64RMlUsI70U=;
- b=h9mX9YMUXC0Bpdar+BZHetIKt0ruSILDrrdy7HtJSoWJxx7wlBQrP2BIuvh90DfJ8C
- 0rXef0Q1wkJfR8lEPF1vyxJQ6aODVIKvQXJ66HcGTkm3pnDRf3q6hh3XUfmmKNfALbdc
- BSdq29iHSD78MCm+fH1x61V9P1BUYvsTkQfhcJGBi56R0uUTkw2aKOLbBkDJDRlnU5IU
- jPiWDkGcas/pBH2L0+uU5HKD2OolRcXmSlmMqFqxLBiHdjnhM2tvWkE53/tsYO35WlmE
- CSHjVelAY+hU42ngV1pvV3HlUM/qFagCBGfzsGdUGnrmWqnwJHyQi6ez1lqVHmF6U4c9
- j6Aw==; darn=lists.denx.de
+ bh=o4jd5X4F4Ql6GsfVr01Y5o/XB8JdfKfkesDEuQ8USl0=;
+ fh=L/BQ/gD2GH7IVfNMorT43f9vmswcCMmsK7BCCAZgy8g=;
+ b=V/BRM1CYcj5+nZ7nGK1DV6VY2Gz7kp5vEfPnV5JW6EnU/DaX10+Hm6oHZQF/iwXZs6
+ nL23p7ZpMN52LzZFm95idIVIFgGKWXurF5CR6Tc91kiqpzwsDaRoPyM7D05DImsOpQmU
+ AcibY4/4TZCmZzNEL//N6CjvdS/zbUHyw/aG8o3iO1NBFJOl3Do0p5zT5qM6oygbw2WI
+ w0dgkGpNZHrCEXPo+nJSrqADHy163G8jZjBhxO4B/0PVP6LuaCVfMJ4Q3oJrAJuz2XIM
+ BmCGckkIBZ8GCE3lZnvYSw2DUwvXaPQk4jPx9m6hjxa4BGuzRcHhvwYRk9wGYWQNco6I
+ rQbg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775913368; x=1776518168; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775913514; x=1776518314; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=30abGhkZA4uIvLJwBKMfxpHOc3TCLe1CPftFzlluiOU=;
- b=Vj+pQgpILISWFKqmIGtW7N9LCgMN8O4SpOjqBjnyrx8QhwR94BiGig5PTfzb1i0kvw
- cmv6q5EOPuxn9swXNtnSw/BJtrRpmYu4dy0lybS0oldajetGVHIuyhbIAzff7iiIVuAq
- HMYI8YBvNYokEyLIYSTIFQOdzIG+/HA3lMI+E=
+ bh=o4jd5X4F4Ql6GsfVr01Y5o/XB8JdfKfkesDEuQ8USl0=;
+ b=jihm7xW8NhP0ZxrA97yFnueJPVicPEHvqkTo1P2+OHekh6EIr3jq/JbBDTWqthQsu7
+ CGJLa0RCq98x2KFm2APbB5wOF35MeoJlY4GUNh62obsiM/Fl+34KY98gxQWUcCD5hCO5
+ tY8Gv5UljzOUDpJncGNMdtLcw7qn6qnX/6eV0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775913368; x=1776518168;
+ d=1e100.net; s=20251104; t=1775913514; x=1776518314;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=30abGhkZA4uIvLJwBKMfxpHOc3TCLe1CPftFzlluiOU=;
- b=eZ2J2TJIIQkZXvSScf2wDSAQ93QoF/qYhdLiPWdgu2jZOvJAIqzUbvqxWZ8yaCI5Wv
- acuQQJqOQvGRnZyiC43t2qofJpQk9L7TshBva/bcWxsaXeN/aXMcjyf6GJljQlVXjuKA
- Seyew7j3CqhFCnswBc0y6hP3TtDOZs+x7/+MFEh2/GQZl6WDJ9zpNqRNleY8EeqnbrDp
- sLS0dT8ZjebQi9J+X9/TXZLyV4F1KViu3NGIDLiCfaLWj3IUktDyekN6eMclnjlmXuXs
- LwyicdkSbrk8IF8qR3j+Ci6E70X+oFKeQ00ZrtqAX37mZ0POEyJ/G+1IQM97+2lvN3Kx
- 8kxQ==
+ bh=o4jd5X4F4Ql6GsfVr01Y5o/XB8JdfKfkesDEuQ8USl0=;
+ b=Own0fTOv1KVYZBOkHdPxcvVhYV3gaEsYIGK7LNusKgxa4BAsFZv34CiwmswrRqt3tB
+ u5YQcu2jfKdqqdJJstNxOXukEzJpVWr0Cv6PdL8EQGB1Lf/WdtmSS0bzthAaVtELYC7w
+ jeFB1HxZda4OltKQQq5cu7kx9IZTdjH6HpMR076VFNbIPcqkLZoiVzHagJB4GeBxq7IF
+ AGixSuWh3I6N7kbaUdPkI1mR8yJOih7D7mkL9cb1ifwlIcBtwj5+Qn5J0bwyBnw7XIkc
+ F/yUDmPTLsP8frKu0WOjGV00ZgJzfw7d83PxmUmE2hzJ88ughUj2Iaw3ifNFBZYRQd09
+ L25w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWNx786pjymGGhYjyVal2GLOy8jYawXcV/B9gz5KUmQaW8JOSHcvEzD9TdMqJNkfg+pIBIG728=@lists.denx.de
-X-Gm-Message-State: AOJu0YwIRyQ4y4OLqxI4b9RXm0Wooc/YyMVK5G5qrLfDdOAybdEO7T+y
- Ewb3CEvKc20gnrTTbqmb4AeDVoymnabq97bP0J4laX95zslD8AFCHPdwZ3Ao8KEkUfPArAUiGQ9
- kBYg8oC6jc8NJ0pgbxntn0+3zrnz4uRtbBSmvhy3I
-X-Gm-Gg: AeBDiesZwLcQcSkaQ+xd7gsMd3Op3oCKpVavdYWXwfp5Yc1mycmd8NAJGEnDK/KXoKi
- ZF3uT9likXogtKEGuQlLaYF5u4MxwcRBE11GP3WpDhEcT3KN2e+seC0OWOF5jl4dTRaMMD/KSdN
- STnHeI4kevI/chJXetHXWbOhTGKggBQXJHj5bidPG1IGHBgowEQl8R8MhMmiRJXIflT3z7odc4Y
- mmjMrgk95pcAQZiszTTwoCYgYmImFUGHogrFEk2IjWzBDdnEG0ZglGEC0zlcfhe8KSdof+tTMVB
- 2UgzAh8fkb5GX+Dh
-X-Received: by 2002:a17:907:268b:b0:b9b:171e:baf0 with SMTP id
- a640c23a62f3a-b9d7243f594mr396202566b.7.1775913367990; Sat, 11 Apr 2026
- 06:16:07 -0700 (PDT)
+ AJvYcCUMoshF4qQL0sGVdA7VTJfFRVuFMJDYDskp2K/kjuUxRm38zBfwKthhiAogVoQLM8ES2FR0kxg=@lists.denx.de
+X-Gm-Message-State: AOJu0YxiGUVsP151Juvsk1xRb1+XJzo5Ls7f5+9jwPYq2ek0Yxe2wbf7
+ MIR69jod+jOA/Yx/163wPLsH4IHR/gI0gjqUeMJEf1Ylhr6fXksmOPJFmq18RXk+yHYFBZpve6R
+ MVa+XOXraqyOMk3LCng8qVJbqS0LUC94BSc4HjLW6
+X-Gm-Gg: AeBDietmaozsYmoLAK/88AABZO77vlX8sSMUbxPU6BIEGZLqxwiOAPdyuqbS+CcqBxw
+ fnkNIUsnCaamtLMHv3LXeldDs7h8xpO2HWkLUovaGrhW5m0/Oc+rvxCBEZk8g0CWUYnziTktdO2
+ zVyv4TsLs604LExKuZv4bzDexDor1fh44d0VRdVLynvNiPxYyHeghzqYStUf/TeDBEmEnVq5dd5
+ ztf+Dd49ErMSJiix1xIValEXg0Y7gzxu9ljSqNR8I91l5vlrCVwsoKrNF9A68M6kWDM7xhG7k7Z
+ ZDR/TA==
+X-Received: by 2002:a17:907:d7c6:b0:b9d:6a04:beb0 with SMTP id
+ a640c23a62f3a-b9d6a04bf1fmr390818066b.4.1775913513873; Sat, 11 Apr 2026
+ 06:18:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260410091154.1001021-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260410091154.1001021-3-varadarajan.narayanan@oss.qualcomm.com>
-In-Reply-To: <20260410091154.1001021-3-varadarajan.narayanan@oss.qualcomm.com>
+In-Reply-To: <20260410091154.1001021-1-varadarajan.narayanan@oss.qualcomm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 11 Apr 2026 07:15:55 -0600
-X-Gm-Features: AQROBzDnlPhAiVbikZX7FSAvn3u9qrEe00eGWLqHOfnSIncNEyiSt0Fln5AjCh4
-Message-ID: <CAFLszTjj5HqMPpFiLY4gaLRNdZngRO3DWh81+1OczBL8Fh+04Q@mail.gmail.com>
-Subject: Re: [PATCH v2 2/9] doc: board/qualcomm: Update RDP build instructions
-To: varadarajan.narayanan@oss.qualcomm.com
+Date: Sat, 11 Apr 2026 07:18:19 -0600
+X-Gm-Features: AQROBzC7EuRYxYMQ0a6_gAocYuhw5dnCAybIMLbrkiRWPwpypR_nabEE-27VwJ0
+Message-ID: <CAFLszTi5K5iqeCw9XthrCPALti4Z5sMFaBx6rOE38PsQQx_93g@mail.gmail.com>
+Subject: Re: [PATCH v2 0/9] Qualcomm IPQ5210 SoC bringup
+To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com, 
  casey.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@kernel.org, 
  peng.fan@nxp.com, jh80.chung@samsung.com, lukma@denx.de, 
@@ -128,39 +127,93 @@ X-Virus-Status: Clean
 
 Hi Varadarajan,
 
-On 2026-04-10T09:11:45, Varadarajan Narayanan
+On Fri, 10 Apr 2026 at 06:54, Varadarajan Narayanan
 <varadarajan.narayanan@oss.qualcomm.com> wrote:
-> doc: board/qualcomm: Update RDP build instructions
 >
-> Add details about the SPL & U-Boot proper build steps, converting to
-> flashable images, source URLs for the needed binaries and scripts.
+> Add pinctrl, clock drivers and SPL to support the IPPQ5210 SoC in U-Boot.
 >
-> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+> The relevant DT files are available in linux-next [1].
 >
-> doc/board/qualcomm/rdp.rst | 69 ++++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 69 insertions(+)
+> Working features, as tested on RDP504:
+>         * Serial console
+>         * UART
+>         * MMC
+>         * Boot sequence transitions from Boot ROM to U-Boot SPL, proprietary
+>           binaries (a.k.a QCLib) load and execute as appropriate and eventual
+>           jump to U-Boot.
+>         * The QCLib handles
+>                 - DDR initialization
+>                 - Clock setup
+>
+> 1 - https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/tree/arch/arm64/boot/dts/qcom/ipq5210.dtsi
+>     https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/tree/arch/arm64/boot/dts/qcom/ipq5210-rdp504.dts
+>     https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/tree/include/dt-bindings/clock/qcom,ipq5210-gcc.h
+>     https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/tree/include/dt-bindings/reset/qcom,ipq5210-gcc.h
+>
+> v2:     - Add QCOM_GENI_MINICORE config option
+>         - Move minicore register settings to separate file and include
+>           if QCOM_GENI_MINICORE is enabled
+>         - Remove bootph-all from override dts and moved them to kernel
+>           DT - https://lore.kernel.org/linux-arm-msm/20260409-add_bootph-v1-1-cb2b5093f7d7@oss.qualcomm.com/T/#u
+>
+> v1: https://lore.kernel.org/u-boot/20260408091136.2794546-1-varadarajan.narayanan@oss.qualcomm.com/
+>
+> Varadarajan Narayanan (9):
+>   dts: ipq5210-rdp504-u-boot: add override dtsi
+>   doc: board/qualcomm: Update RDP build instructions
+>   clk/qcom: add initial clock driver for ipq5210
+>   pinctrl: qcom: Add ipq5210 pinctrl driver
+>   misc: qcom_geni: Add minicore support
+>   spl: Include SMEM driver in SPL
+>   mach-snapdragon: Add initial support for IPQ5210 SPL
+>   mach-snapdragon: Add commands to create wrapper ELF
+>   configs: add qcom_ipq5210_mmc_defconfig
+>
+>  arch/arm/Kconfig                              |   5 +-
+>  arch/arm/dts/ipq5210-rdp504-u-boot.dtsi       |  15 +
+>  arch/arm/mach-snapdragon/Kconfig              |   6 +
+>  arch/arm/mach-snapdragon/Makefile             |   3 +
+>  .../mach-snapdragon/ipq5210-spl-wrap-elf.lds  |  14 +
+>  arch/arm/mach-snapdragon/spl.c                | 701 ++++++++++++++++++
+>  common/spl/Kconfig                            |   8 +
+>  configs/qcom_ipq5210_mmc_defconfig            | 106 +++
+>  doc/board/qualcomm/rdp.rst                    |  69 ++
+>  drivers/Makefile                              |   1 +
+>  drivers/clk/qcom/Kconfig                      |   8 +
+>  drivers/clk/qcom/Makefile                     |   1 +
+>  drivers/clk/qcom/clock-ipq5210.c              |  97 +++
+>  drivers/misc/Kconfig                          |   6 +
+>  drivers/misc/Makefile                         |   1 +
+>  drivers/misc/qcom_geni-minicore.c             | 102 +++
+>  drivers/misc/qcom_geni.c                      |  90 ++-
+>  drivers/pinctrl/qcom/Kconfig                  |   8 +
+>  drivers/pinctrl/qcom/Makefile                 |   1 +
+>  drivers/pinctrl/qcom/pinctrl-ipq5210.c        | 349 +++++++++
+>  include/smem.h                                |   3 +
+>  include/soc/qcom/geni-se.h                    |   2 +
+>  include/soc/qcom/qup-fw-load.h                |  15 +
+>  scripts/Makefile.xpl                          |  21 +
+>  24 files changed, 1618 insertions(+), 14 deletions(-)
+>  create mode 100644 arch/arm/dts/ipq5210-rdp504-u-boot.dtsi
+>  create mode 100644 arch/arm/mach-snapdragon/ipq5210-spl-wrap-elf.lds
+>  create mode 100644 arch/arm/mach-snapdragon/spl.c
+>  create mode 100644 configs/qcom_ipq5210_mmc_defconfig
+>  create mode 100644 drivers/clk/qcom/clock-ipq5210.c
+>  create mode 100644 drivers/misc/qcom_geni-minicore.c
+>  create mode 100644 drivers/pinctrl/qcom/pinctrl-ipq5210.c
+>
+> --
+> 2.34.1
+>
 
-> diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
-> @@ -42,6 +67 @@ on your device with::
-> +Build steps for IPQ5210 based Qualcomm Dragonwing F8 & N8 Platforms:
-> +====================================================================
+> Add pinctrl, clock drivers and SPL to support the IPPQ5210 SoC in U-Boot.
 
-The section heading uses "====" which in RST is the same level as the
-document title. This should use "----" to be consistent with the
-existing "Installation" section.
+Should that be IPQ5210 ?
 
-> diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
-> @@ -42,6 +67 @@ on your device with::
-> +     $ make -j8 O=${out_dir} qcom_ipq5210_mmc_defconfig
+How about splitting up patch 7 a bit as it has quite a lot in it.
 
-This defconfig is added in patch 9 - can you move the docs patch to
-the end of the series so the tree remains bisectable.
-
-> diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
-> @@ -42,6 +67 @@ on your device with::
-> +             --template template.its
-
-Where does this file come from?
+Is CONFIG_SPL_WRAPPER_ELF intended to be a generic feature or just
+something for this particular SoC?
 
 Regards,
 Simon
