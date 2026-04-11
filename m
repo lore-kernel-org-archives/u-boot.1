@@ -4,147 +4,151 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D6EDF3ED4F
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 13:43:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16E99F3ED4F
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 13:49:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 947E18419C;
-	Sat, 11 Apr 2026 15:43:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7D01A84118;
+	Sat, 11 Apr 2026 15:49:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="BaF7Ney9";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="eMrVty4X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64DBD8416F; Sat, 11 Apr 2026 15:43:44 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id DCE2F84154; Sat, 11 Apr 2026 15:49:23 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6135084118
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 15:43:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DCC0183DC9
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 15:49:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1775915017; x=1776519817; i=xypron.glpk@gmx.de;
- bh=xawueAux5RKOOjJv5pCpy3oNJVxJgZ0vnycAcAvi9PE=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ s=s31663417; t=1775915347; x=1776520147; i=xypron.glpk@gmx.de;
+ bh=3qjhu8FWSblztYM6Q/KGrJt8H9HWH+qCjnD+O1mH7+Q=;
+ h=X-UI-Sender-Class:Date:From:To:Subject:In-Reply-To:References:
  Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
  content-transfer-encoding:content-type:date:from:message-id:
  mime-version:reply-to:subject:to;
- b=BaF7Ney9v4SBSCZz/1T6oqE5EYv9qQq+dXFAtUuoDMpUtD8pMqacLuaVC9CJz8+r
- WqdsIDb5v2cz1ni775y2STeFzUCSUp9WtGReo9aaEUyOivlC+IEgVnv0N79glM8cJ
- vku6aP00IzUIceHrEnpozQ/uqH9gKBtbyicbykhq8/U3A9jqVIZYXyQB/0IXnBGXo
- VqHRs9Z7IAAwJfbNyhesCAvMGA6iH6zevsg5qIjwdPfJtx6Kz6BGv8Gc4P/jw3ZSB
- TK+4v+nzXUV6vgaeHBX7oqKZb+gYrP6RGXn4CQWyHNwOvUqg0DzoxVgBBTts+dBM9
- Cqi6zD+6Xf/H+welsg==
+ b=eMrVty4XFDG7sgQWWMmCWnXsKCZN2JF3RjXv7OR09fcqRqJmGdWVBO73934Bfcc5
+ M06FC68mEPDolUHt1jZuovM0LHp84JdbOD4CgATyVJZNvTMYDIl0tuRFa71Bx4c5/
+ OaAl0PKNG4AEM60JsKzTAE/Rsec5fL7s0vrwRWP2LjB+sSmORRuaAWF0fQpjY53bK
+ h0SoQ4WGtjoT0k22RKAWxy28q8aZRRFAo95a2ihqsmWQyZ2cPpMiCkq60PU0WkyZ9
+ J8kWptUrdyJZg7ZwLpQRyHEHBWBk16pXThOM14PbQK8stiZEGz5r6w6Vn01PL/NRI
+ 2bZnYKgUzJIaYgh8Hg==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from client.hidden.invalid by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MqaxU-1vgumP0ElM-00kBRu; Sat, 11
- Apr 2026 15:43:37 +0200
-Date: Sat, 11 Apr 2026 15:43:32 +0200
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MtwUm-1vJkCd1gsO-00yMbC; Sat, 11
+ Apr 2026 15:49:07 +0200
+Date: Sat, 11 Apr 2026 15:49:00 +0200
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>, Gary Guo <gary@garyguo.net>
-CC: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- David Zang <davidzangcs@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>, Javier Tia <javier.tia@linaro.org>,
- Martyn Welch <martyn.welch@collabora.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] efi_loader: support EFI_OS_INDICATIONS_BOOT_TO_FW_UI
+To: Christian Marangi <ansuelsmth@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Casey Connolly <casey.connolly@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Peng Fan <peng.fan@nxp.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Mateus Lima Alves <mateuslima.ti@gmail.com>,
+ Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Justin Klaassen <justin@tidylabs.net>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>, u-boot@lists.denx.de
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v6_6/6=5D_doc=3A_dtbinding=3A_Update?=
+ =?US-ASCII?Q?_documentation_for_Generic_Firmware_loader?=
 User-Agent: Thunderbird for Android
-In-Reply-To: <CAFLszTiLZamF1ySMhtGOqJdzCrYdTRyUvFKu2s0h+ms+EgOZFg@mail.gmail.com>
-References: <20260331191853.44549-1-gary@garyguo.net>
- <CAFLszTj-QRQBCZHNCyM6YR7n5M4+myr8ztDo6Xn9CfDb6=ppSA@mail.gmail.com>
- <DHJMTRNSOX3S.2LQPF5ATDP78S@garyguo.net>
- <CAFLszTiLZamF1ySMhtGOqJdzCrYdTRyUvFKu2s0h+ms+EgOZFg@mail.gmail.com>
-Message-ID: <1B3F85B0-08DC-4157-88FD-D69566AF045A@gmx.de>
+In-Reply-To: <20260409133303.31875-7-ansuelsmth@gmail.com>
+References: <20260409133303.31875-1-ansuelsmth@gmail.com>
+ <20260409133303.31875-7-ansuelsmth@gmail.com>
+Message-ID: <701C0616-EBF4-48D2-9356-953589B0DEA8@gmx.de>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:KGr/Yn9pMB/nDLqVEoOkPu9sRwBT+Uja7Kbq+0J4JizdseQgdFG
- QHUI6x7nBVDlKpjOpi3nSxcRR85JLFtOK/E39WwKDm/39a7ogs6WIgED7+UoLsq4KI3NqoM
- b1YJUGuRd440R3W6I+hSblWwhGkUjCmXylsbHCwvotiJdF4JCJ53Gyd5+Y7fwEZnfLERC5e
- J5kfGf4V5UD/PzZ0rZTJA==
-UI-OutboundReport: notjunk:1;M01:P0:5J+8JB8EUcY=;19+vSRPm1gTHTdQA9UV6c9D/INO
- 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
+X-Provags-ID: V03:K1:9o0HmzEbodp30rRaGBjUN7XgU0FuO8UKMDcmN0znGd9HU8JDZZz
+ EXVTJCErvQgLL3spySiEuupkbIcqynHJQ4zq/lMFL3p8ERR51DdgM95SudGwEbjpiyrCHnb
+ lq/JEskaidz882djIzFArJXNezgzyy6qLbvM9VJ1yls7Zvv2mwGAsatRgXli2ngJfNr5c6a
+ idSB4FRbluzynA/xWi5Xw==
+UI-OutboundReport: notjunk:1;M01:P0:NHNWsPnRP4k=;RS3xV5fz2wXMUjR2Px5GGXvyXXV
+ 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
+ LBxC5aWtVCZF1+U9Uar3Ew42TKygT2ONtwlo=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,107 +165,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 3=2E April 2026 18:31:14 MESZ schrieb Simon Glass <sjg@chromium=2Eorg>:
->Hi Gary,
+Am 9=2E April 2026 15:33:02 MESZ schrieb Christian Marangi <ansuelsmth@gmai=
+l=2Ecom>:
+>Update documentation for Generic Firmware loader, generalize it from FS
+>specific and add new property and example for FIP loader=2E
 >
->On Fri, 3 Apr 2026 at 09:41, Gary Guo <gary@garyguo=2Enet> wrote:
->>
->> On Fri Apr 3, 2026 at 2:22 PM BST, Simon Glass wrote:
->> > Hi Gary,
->> >
->> > On 2026-03-31T19:18:51, Gary Guo <gary@garyguo=2Enet> wrote:
->> >> efi_loader: support EFI_OS_INDICATIONS_BOOT_TO_FW_UI
->> >>
->> >> EFI variable OsIndications have a bit EFI_OS_INDICATIONS_BOOT_TO_FW_=
-UI
->> >> indicating that the OS (or next stage bootloader) requests booting i=
-nto
->> >> firmware UI instead of continuing autoboot process=2E
->> >>
->> >> Support it by having autoboot=2Ec asking EFI bootmgr if boot should =
-continue,
->> >> which checks and clear the bit (so the next boot continue as normal)=
-=2E
->> >>
->> >> With this change, systemd-boot will show a "Reboot Into Firmware Int=
-erface"
->> >> option which will be able to drop back to u-boot=2E This can be usef=
-ul if
->> >> bootdelay is configured to be -2=2E
->> >>
->> >> Signed-off-by: Gary Guo <gary@garyguo=2Enet>
->> >
->> >> diff --git a/lib/efi_loader/efi_bootmgr=2Ec b/lib/efi_loader/efi_boo=
-tmgr=2Ec
->> >> @@ -1290,6 +1290,51 @@ out:
->> >> +bool efi_should_abort_autoboot(void)
->> >> +{
->> >> +     efi_status_t ret;
->> >> +     u64 os_indications =3D 0x0;
->> >> +     efi_uintn_t size;
->> >> +     efi_status_t r;
->> >
->> > (I'm leaving the proper review to Ilias & Heinrich, this is just a fe=
-w
->> > nits and a though)
->> >
->> > Please can you use a single variable name for both efi_status_t varia=
-bles=2E
->>
->> Ah, I think I copied the init part from somewhere else and forget to me=
-rge the
->> variable names=2E
->>
->> I'll adjust the variable name in the next version after receiving more =
-reviews=2E
->>
->> >
->> >> +     ret =3D efi_init_obj_list();
->> >> +     if (ret !=3D EFI_SUCCESS) {
->> >> +             log_err("Error: Cannot initialize UEFI sub-system, r =
-=3D %lu\n",
->> >> +                     ret &
+>Also add details on the usage of 'phandlepart', 'mtdpart' and 'ubivol'
+>property=2E
 
-The return value does not help anybody to understand what went wrong as th=
-ere are a lot of different failure modes=2E
+The sevice-tree documents should be integrated into the generated html doc=
+umentation=2E
 
-We should write specific messages inside the routine and not a message in =
-the caller=2E
-
-It might make sense to have a generic translation of EFI return codes to a=
- string message in vsprintf=2Ec=2E Which end user would know what error 14 =
-is?
+Shouldn't we use the same yaml schema format as the kernel to enable autom=
+ated CI tests?
 
 Best regards
 
 Heinrich
 
- ~EFI_ERROR_MASK);
->> >
->> > The log message says "r =3D " but prints ret=2E The similar message i=
-n
->> > efi_bootmgr_run() just prints the value without a prefix=2E
->>
->> Sorry, what do you mean by "without a prefix"? I think the code is iden=
-tical to
->> the one in `efi_bootmgr_run`?
+
 >
->I mean you don't need r =3D in the message=2E You could say (err %lu) per=
-haps?
+>Signed-off-by: Christian Marangi <ansuelsmth@gmail=2Ecom>
+>---
+> =2E=2E=2E/misc/{fs_loader=2Etxt =3D> fw_loader=2Etxt}     | 29 +++++++++=
+++++++++--
+> 1 file changed, 26 insertions(+), 3 deletions(-)
+> rename doc/device-tree-bindings/misc/{fs_loader=2Etxt =3D> fw_loader=2Et=
+xt} (60%)
 >
->>
->> >
->> > I would also like to see the code which adjusts the variable placed i=
-n
->> > a function=2E
->>
->> You mean the bit clearing part? What benefit does that provide, conside=
-ring that
->> this is just a single function call?
->
->There is reading and write=2E Being able to control that could end up in
->a command at some point=2E It is a useful feature=2E Up to you though=2E
->
->Regards,
->Simon
+>diff --git a/doc/device-tree-bindings/misc/fs_loader=2Etxt b/doc/device-t=
+ree-bindings/misc/fw_loader=2Etxt
+>similarity index 60%
+>rename from doc/device-tree-bindings/misc/fs_loader=2Etxt
+>rename to doc/device-tree-bindings/misc/fw_loader=2Etxt
+>index 542be4b25a0a=2E=2E9b00b2c887c0 100644
+>--- a/doc/device-tree-bindings/misc/fs_loader=2Etxt
+>+++ b/doc/device-tree-bindings/misc/fw_loader=2Etxt
+>@@ -1,17 +1,23 @@
+>-* File system firmware loader
+>+* Generic Firmware loader
+>=20
+> Required properties:
+> --------------------
+>=20
+>-- compatible: should contain "u-boot,fs-loader"
+>+- compatible: should contain "u-boot,fs-loader" or "u-boot,fip-loader"
+> - phandlepart: which block storage device and partition the image loadin=
+g from,
+> 	       this property is required for mmc, usb and sata=2E This is unsig=
+ned
+> 	       32-bit array=2E For example phandlepart=3D<&mmc_0 1>, meaning us=
+e
+> 	       that MMC0 node pointer, partition 1=2E
+>-- mdtpart: which partition of ubi the image loading from, this property =
+is
+>+- mtdpart: which partition of ubi the image loading from, this property =
+is
+> 	   required for ubi and mounting=2E
+> - ubivol: which volume of ubi the image loading from, this property is r=
+equired
+> 	  for ubi and mounting=2E
+>+- partoffset: valid ONLY for "u-boot,fip-loader"=2E Offset of the partit=
+ion to
+>+	      parse the FIP partition from=2E
+>+
+>+Either 'phandlepart' or 'mtdpart' can be used=2E For Block device, 'phan=
+dlepart'
+>+should be used and for MTD device, 'mtdpart' should be used=2E With UBI =
+device,
+>+in addition to 'mtdpart' also 'ubivol' is required=2E
+>=20
+> Example of storage device and partition search set for mmc, usb, sata an=
+d
+> ubi in device tree source as shown in below:
+>@@ -46,3 +52,20 @@ ubi in device tree source as shown in below:
+> 		mtdpart =3D "UBI",
+> 		ubivol =3D "ubi0";
+> 	};
+>+
+>+	Example for FIP from eMMC:
+>+	fs_loader4: fip-loader@4 {
+>+		bootph-all;
+>+		compatible =3D "u-boot,fip-loader";
+>+		phandlepart =3D <&mmc0 0>;
+>+		partoffset =3D <0x100>;
+>+	};
+>+
+>+	Example for FIP from ubi:
+>+	fs_loader4: fip-loader@4 {
+>+		bootph-all;
+>+		compatible =3D "u-boot,fip-loader";
+>+		mtdpart =3D "ubi",
+>+		ubivol =3D "bl31";
+>+	};
+>+
 
