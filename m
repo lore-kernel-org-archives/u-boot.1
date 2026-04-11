@@ -4,57 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B54CF3ED5C
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 20:28:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59524F3ED5E
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 20:31:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BE1384154;
-	Sat, 11 Apr 2026 22:28:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
+	by phobos.denx.de (Postfix) with ESMTP id B107E84154;
+	Sat, 11 Apr 2026 22:31:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="MlPtCDk6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y/EAroaa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 060E28416F; Sat, 11 Apr 2026 22:28:20 +0200 (CEST)
-Received: from mail.kernel-space.org (unknown
- [IPv6:2a03:4000:b:d08:14a9:1bff:fedc:75ad])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 132C384118; Sat, 11 Apr 2026 22:31:13 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 095F484118
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 22:28:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=kernel-space.org
+ by phobos.denx.de (Postfix) with ESMTPS id 56D4A84181
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 22:31:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=angelo@kernel-space.org
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
- s=s1; t=1775939297;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=acy90WBzBBJuVe2EbSnH/yoTHey0BoWflW9qc95271Y=;
- b=MlPtCDk61CVXWGPVTaurevWPLcTxozaO6SbwZNyVp0hCzlOU4r8qUvr7Tn1FV5ZwR3ltcm
- Rn+WXNprMNwG8kHsLbAqsPCVhG5h8UBTE4n05kyaIzHy/b7t2peKuKoaiWX0KeNmK0AaeW
- 1HuxuVZ5Jf+yUgVieq5qqwDdV8j76pM=
-Received: from [IPV6:2a07:7e81:7daa:0:62cf:84ff:feee:627] (<unknown>
- [2a07:7e81:7daa:0:62cf:84ff:feee:627])
- by oreshnik (OpenSMTPD) with ESMTPSA id dcb11655
- (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
- Sat, 11 Apr 2026 20:28:17 +0000 (UTC)
-Message-ID: <358e3185-1a42-4786-9c37-fe7ac41054e6@kernel-space.org>
-Date: Sat, 11 Apr 2026 22:28:16 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-b9382e59c0eso561772066b.0
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 13:31:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775939469; cv=none;
+ d=google.com; s=arc-20240605;
+ b=IS4CPFFOMIvKo87hcenWvwNf5Dft/RYkC+qMya7sexYhx4EoTSaNBKXp+lMuH9m+JZ
+ A7VqJE1Al/7M5mG82rLG/VkRGUaX8u4eZ/BkBoxKcbIAM2cSFvnGdD1F+43uh9eMIsJr
+ 08kyP4ZTwuwJ4+UKxFKlxzCc4yW9FNp7yoC6NuApk3y9WbMkCEakwg5rIo/ncnrCh1fd
+ 1kc0TajZspoikPU95Q1RXaGnxb6TWTyp7KZb0dZQlOEeFTZdAQQXdtbh2ZKH6OqFnGRT
+ +4p39+qjfgByOhEKn3Hll5ctDjdntJl155YHTkxm5QrFQOWVGCg9ZcJnApwCfn8hmeMR
+ /HoQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=TQK6A2m1Ng85AjXyt1S6hx5mynGKOnm4ca1A91EQN80=;
+ fh=DNnc0PxDvDAOtN2DNlU78zUxlw1DS1Be5zZEFqtZAt8=;
+ b=aFlnn/D+WuRoR8LwUbuB+gtnH6iT3RxINuOifn7+mqo7cPrvUwSFNUu+20CznEY4z1
+ elq0oRKMbp0UoyBuMYpjwYDl7pX8dt8ajSssRsedjiZNiP2S7XVFQBKcdG6P4xKqnFuv
+ LG7yZ7h1YuK5hnOV6tH12isVuO+7ILCdIU7Vc8GjfQo1oZBYX4oqUaz1XuvkK4FP70JO
+ o4PaUoHZaGNO4XE82NjI5QgzTfcGfpIXlX4X49bU/EYa9IybLUoVAgGn+dZwYHsC4wUp
+ 7aogzicv2ZKf3igs8D5gRHU8RXcICAZNljgYRtrB6JR9hMZqKLx+Tz3kv56aBCodiHJs
+ 8/GA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1775939469; x=1776544269; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=TQK6A2m1Ng85AjXyt1S6hx5mynGKOnm4ca1A91EQN80=;
+ b=Y/EAroaakxnK+OoIq4X2VTHJ7yN9LASOCoUQ5q5FJnZEQDn5zgqovQq5gkVuSffjup
+ 3/8r7BgUv8XPgN3sIUSt7lUqH2I38svIiENz4LsJKlQd3HU6eysEARu8xw+TuW2L3nqq
+ wAGKALsu/qgvOXTyqGsbKmAeynAU6PSMZYsb8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775939469; x=1776544269;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TQK6A2m1Ng85AjXyt1S6hx5mynGKOnm4ca1A91EQN80=;
+ b=kGtd8wVOcBu2YDU6xhYiEKR1RgvverniT0qKguK03scZb46POxmD53ktruwU1h1uvQ
+ 25X7ODpsk3cf26ciDb2b8oVP0At8nFM3Y7EdzCAX3Tis6uPaBvMUr+HUZZecv3fu1Sk0
+ 5oBtZHaRR4nEt7sxBtAFnma8sX1pqx7JCPvYiHEX5szHmsYlCAWzY8RV+t7RItOPFqa6
+ JK8zEtuZazvcnciaGHew8Abol21uqy4msGK/kB+eQ/hwTut4fPiHNqqlo8syuofsscS1
+ 3e3XvqNeMhD4LIAcEhP1lHVa0xJ9ItiqOHmTU7TCmvjFNmHchK88uIKQfy54d4BuCIFc
+ hPDw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWPG9EksKi59BkGGu0HFBlf9GyV9iiEbvP3Xu8IYHkEyhZQOLjc9SixCiR9WevuPZxET8sFqZk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw3wjkESNghzeE7DFEV5mCYau0578Xf3EmEHdPRgT3UHzF/dXlT
+ 3n/0/feb1xdJBh3prgUVi0aKRfoUcnZR5XcHPDGwk74mjLmJk+SdIF2fWVYHiaeLE9LbL78N2VW
+ u0zxBaRJBHvmg+BQQLzqox/eSt90vDAxesISZ9/yw
+X-Gm-Gg: AeBDiesPv0BmiP1Fn0IG29E/J2n+VIUiO8hiwtE0qdhZ/aFF1V9YoqEUf9X0RGXM5Ky
+ RXajUYZkGUy8v3p9tJllLsc8MGGcr7b/mnnrtAt+Vgu9Xv80hgyHmBVRPNnK8JooeY8ksqpRr4n
+ 2NkZUy7LjwPN0Z+vNZqLxs+MaFcGCPGazRgJiBb46VsEq5jHuniTn8U8XEQ1bt4paG8IMU3nfF7
+ ZOc1DJ9YDaHCyxL5l52an4T8h4IVVUyVMSWu7SFrE04kxqk3rBtIEqYAW0Du0XCK+ZEMnni2P/i
+ CCv01Q==
+X-Received: by 2002:a17:906:7947:b0:b9c:30b7:770f with SMTP id
+ a640c23a62f3a-b9d7265d35emr490450566b.34.1775939468704; Sat, 11 Apr 2026
+ 13:31:08 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 5/5] board: qemu: m68k: Create virtio mmio instances
-To: Daniel Palmer <daniel@thingy.jp>, visitorckw@gmail.com, bmeng.cn@gmail.com
-Cc: u-boot@lists.denx.de
 References: <20260408220928.3328551-1-daniel@thingy.jp>
- <20260408220928.3328551-6-daniel@thingy.jp>
-Content-Language: en-US, it
-From: Angelo Dureghello <angelo@kernel-space.org>
-In-Reply-To: <20260408220928.3328551-6-daniel@thingy.jp>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ <20260408220928.3328551-5-daniel@thingy.jp>
+In-Reply-To: <20260408220928.3328551-5-daniel@thingy.jp>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 11 Apr 2026 14:30:54 -0600
+X-Gm-Features: AQROBzC16FWlOcijl06vs9Tn4NvfJJtKklXvXQFdtY9uS71DpAunCDC1cm32JfE
+Message-ID: <CAFLszTjXCmp5f6y-5mkFG1R+B5A6dqrWRAmrYG2evD5Q4N5PVA@mail.gmail.com>
+Subject: Re: [PATCH v3 4/5] virtio: blk: Fix converting the vendor id to a
+ string
+To: daniel@thingy.jp
+Cc: visitorckw@gmail.com, angelo@kernel-space.org, bmeng.cn@gmail.com, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,143 +114,42 @@ X-Virus-Status: Clean
 
 Hi Daniel,
 
-After applying this patch i got an error building
+On 2026-04-08T22:09:23, Daniel Palmer <daniel@thingy.jp> wrote:
+> virtio: blk: Fix converting the vendor id to a string
+>
+> Currently we are trying to work out if the vendor id is from
+> a virtio-mmio device and then casting a u32 to a char* and using
+> it as a C-string. By chance there is usually a zero after the u32
+> and it works.
+>
+> Since the vendor id we are trying to convert to a string is QEMU's
+> just define a value for the QEMU vendor id, check if the vendor
+> id matches and then use a predefined string for "QEMU".
+>
+> I don't think we should have been assumming all virtio-mmio vendor
+> ids are printable ASCII chars in the first place so do this special
+> casing just for QEMU. If the vendor id isn't QEMU print the hex
+> value of it.
+>
+> Signed-off-by: Daniel Palmer <daniel@thingy.jp>
+>
+> drivers/virtio/virtio_blk.c | 12 +++++-------
+>  include/virtio_mmio.h       |  2 ++
+>  2 files changed, 7 insertions(+), 7 deletions(-)
 
-on a test build i am getting this error:
+> diff --git a/include/virtio_mmio.h b/include/virtio_mmio.h
+> @@ -5,6 +5,8 @@
+> +#define VIRTIO_MMIO_VENDOR_QEMU      0x554d4551
 
-      m68k:  +   qemu-m68k
-+  422 |                 sep = memchr(fixup_str, ':', fixup_len);
-+      |                     ^
-+  432 |                 sep = memchr(name, ':', fixup_len);
-+m68k-linux-ld: cmd/virtio.o: in function `do_virtio':
-+cmd/virtio.c:42:(.text.do_virtio+0xa6): undefined reference to `blk_common_cmd'
-+m68k-linux-ld: final link failed: bad value
-+make[1]: *** [Makefile:2105: u-boot] Error 1
-+make: *** [Makefile:189: __sub-make] Error 2
+This vendor ID applies to all virtio transports, not just virtio-mmio,
+e.g. virtio_blk.c must include virtio_mmio.h even when built for
+platforms that only have virtio-pci
 
-Looks like a "select BLK" is missing.
+Please can you move this to include/virtio.h instead? Something like
+VIRTIO_VENDOR_QEMU would be more appropriate.
+
+With that:
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
-angelo
-
-On 4/9/26 00:09, Daniel Palmer wrote:
-> So that you can use virtio network, block etc create the virtio mmio
-> instances. There are 128 of these even if they are not all used, a
-> single mmio base value is passed via bootinfo.
-> 
-> Signed-off-by: Daniel Palmer <daniel@thingy.jp>
-> ---
->  arch/m68k/Kconfig                     | 14 ++++----
->  board/emulation/qemu-m68k/qemu-m68k.c | 47 +++++++++++++++++++++++++++
->  2 files changed, 55 insertions(+), 6 deletions(-)
-> 
-> diff --git a/arch/m68k/Kconfig b/arch/m68k/Kconfig
-> index 6ce8f577e3a1..20a112880c87 100644
-> --- a/arch/m68k/Kconfig
-> +++ b/arch/m68k/Kconfig
-> @@ -195,12 +195,14 @@ config TARGET_STMARK2
->          select M54418
->  
->  config TARGET_QEMU_M68K
-> -    bool "Support QEMU m68k virt"
-> -    select M68040
-> -    imply CMD_DM
-> -    help
-> -      This target supports the QEMU m68k virtual machine (-M virt).
-> -      It simulates a Motorola 68040 CPU with Goldfish peripherals.
-> +	bool "Support QEMU m68k virt"
-> +	select M68040
-> +	select BOARD_EARLY_INIT_R
-> +	select VIRTIO_MMIO
-> +	imply CMD_DM
-> +	help
-> +	  This target supports the QEMU m68k virtual machine (-M virt).
-> +	  It simulates a Motorola 68040 CPU with Goldfish peripherals.
->  
->  endchoice
->  
-> diff --git a/board/emulation/qemu-m68k/qemu-m68k.c b/board/emulation/qemu-m68k/qemu-m68k.c
-> index d3527aee1128..3617c61b5c1f 100644
-> --- a/board/emulation/qemu-m68k/qemu-m68k.c
-> +++ b/board/emulation/qemu-m68k/qemu-m68k.c
-> @@ -14,9 +14,14 @@
->  #include <asm/bootinfo.h>
->  #include <asm/global_data.h>
->  #include <asm/io.h>
-> +#include <dm.h>
-> +#include <dm/device-internal.h>
-> +#include <dm/lists.h>
->  #include <dm/platdata.h>
-> +#include <dm/root.h>
->  #include <linux/errno.h>
->  #include <linux/sizes.h>
-> +#include <virtio_mmio.h>
->  
->  DECLARE_GLOBAL_DATA_PTR;
->  
-> @@ -25,6 +30,38 @@ static struct goldfish_rtc_plat rtc_plat;
->  static struct goldfish_timer_plat timer_plat;
->  static struct qemu_virt_ctrl_plat reset_plat;
->  
-> +#define VIRTIO_MMIO_NUM	128
-> +#define VIRTIO_MMIO_SZ	0x200
-> +
-> +static struct virtio_mmio_plat virtio_mmio_plat[VIRTIO_MMIO_NUM];
-> +static char virtio_mmio_names[VIRTIO_MMIO_NUM][11];
-> +static phys_addr_t virtio_mmio_base;
-> +
-> +static inline int create_virtio_mmios(void)
-> +{
-> +	struct driver *drv;
-> +	int i, ret;
-> +
-> +	if (!virtio_mmio_base)
-> +		return -ENODEV;
-> +
-> +	drv = lists_driver_lookup_name("virtio-mmio");
-> +	if (!drv)
-> +		return -ENOENT;
-> +
-> +	for (i = 0; i < VIRTIO_MMIO_NUM; i++) {
-> +		virtio_mmio_plat[i].base = virtio_mmio_base + (VIRTIO_MMIO_SZ * i);
-> +		sprintf(virtio_mmio_names[i], "virtio-%d", i);
-> +
-> +		ret = device_bind(dm_root(), drv, virtio_mmio_names[i],
-> +				  &virtio_mmio_plat[i], ofnode_null(), NULL);
-> +		if (ret)
-> +			return ret;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
->  /*
->   * Theoretical limit derivation:
->   * Max Bootinfo Size (Standard Page) = 4096 bytes
-> @@ -65,6 +102,9 @@ static void parse_bootinfo(void)
->  		case BI_VIRT_CTRL_BASE:
->  			reset_plat.reg = base;
->  			break;
-> +		case BI_VIRT_VIRTIO_BASE:
-> +			virtio_mmio_base = base;
-> +			break;
->  		case BI_MEMCHUNK:
->  			gd->ram_size = record->data[1];
->  			break;
-> @@ -80,6 +120,13 @@ int board_early_init_f(void)
->  	return 0;
->  }
->  
-> +int board_early_init_r(void)
-> +{
-> +	create_virtio_mmios();
-> +
-> +	return 0;
-> +}
-> +
->  int checkboard(void)
->  {
->  	puts("Board: QEMU m68k virt\n");
-
--- Angelo
-
+Simon
