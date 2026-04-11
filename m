@@ -4,85 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E7C3E99058
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 07:11:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 022C2F364CD
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 07:11:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1D9384258;
-	Sat, 11 Apr 2026 09:09:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 228F38426C;
+	Sat, 11 Apr 2026 09:09:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nkvHFLvW";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="EIWVJInS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 015AE84154; Fri, 10 Apr 2026 15:58:54 +0200 (CEST)
-Received: from mail-qt1-x841.google.com (mail-qt1-x841.google.com
- [IPv6:2607:f8b0:4864:20::841])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 792D684198; Sat, 11 Apr 2026 02:04:00 +0200 (CEST)
+Received: from mxd-2-a16.seznam.cz (mxd-2-a16.seznam.cz
+ [IPv6:2a02:598:64:8a00::1000:a16])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AD0C8416F
- for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 15:58:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D0AC683DC9
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 02:03:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jcethrid@gmail.com
-Received: by mail-qt1-x841.google.com with SMTP id
- d75a77b69052e-50b69bf5638so22745331cf.1
- for <u-boot@lists.denx.de>; Fri, 10 Apr 2026 06:58:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1775829530; x=1776434330; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QfX3Y4HRlVlSE9KPBL5PId+AHtD03Q7wPEhbAX1BH3A=;
- b=nkvHFLvWPnTl2X4IyydYH0UMHrNKZk6QimU0CWCm9yipNi/2QvXJMGLQDb2FGWVcR6
- 0L1EzhYqX6NyqbwI3D1Q2650997hPSxb8w3w5ZoAax8jnGMXMYeONPDDzIedN0xiWcC3
- ZYGEhAv7TY4zVN9vPH+zXKooIvYLxOCL1QbQqIX+tmrY3WEL537encPnI/y0aZNqrTUR
- LCvtjEOe7c8O/swF5iK3WTOW84P/2B6vZJ75m5bA2IgtsJ7+FAOK9MF38eeFeZkXQzwb
- SvvhIxyT6rnDIU3jg+2WSOE3RJrJv88uSqoFmqX5rzgEOI7FuymSXRzN7gR9UA0NJYZY
- FanA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775829530; x=1776434330;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=QfX3Y4HRlVlSE9KPBL5PId+AHtD03Q7wPEhbAX1BH3A=;
- b=U7KnBw9vvdorGH0WgbUyp5ULTYqcQVk2YAINDy3io3tronBegCGW7yMCTfTRqLotOv
- I7XMjf+5JYQZlFpvRhK0mTN6lD9iGGz6v7J23PkWRA1rkso2oCbTfQmrYZ3OwN20wjOf
- 1zsy5QJvRTW6pExHXCsKrGqAKJ7YiKjjiVCZLGb6RFi0q1/VjrG4OTv/7EA99BlmOMzo
- w/KCnqdTVBO2EOLQMg1aVgp2s/g3/JR9TbDvS2KEN+uKGl9jDQquBxX4AEL+l3H3deQh
- jTwA/gN+c54HRSr5ao+crhMvd3PkZUMcJHLGRT4hObeQVoyZavRBypHGcp+vCoeU/pUK
- KwFQ==
-X-Gm-Message-State: AOJu0YxNkb+/JChtJ35tMYfnRoyZvEdVlhvUMLju8iynHp/gHdipKb8K
- GghU1GrAIJSwSHDVPlgUNs5NZUZnmGLINzTXKu7vRCmUNolX26Mr/r0b9GDMimYY
-X-Gm-Gg: AeBDievGYcr64MkOxlECAK6t2yeNKeLbJCR4lbqwq07p2uGkY+mdHcPI8c6W4HIolbb
- GJxU4FSNTXrF9bqRYOHx9XuzLVaE25K4J60ILk9DsnwICgZ5mRS0H+024OztL75FLNfCNFK8fRY
- RD5iKxLlPG9rXzXezOoVeIRPEoKoiLwxaaGWxsM1/kBt9BPiLy9yXI66JdDMXZihajmO0aIzFTv
- x+9AzIMmHJ8LnZxw3WVwg2fRY0/wa6lf3C3m/e2JLnNFUjCdxGtLVU72s+1HS47w5o8FAt2EJ5H
- xxE44A1jYYna23udYt29FxkLuk3ceSpmlfciB7eUIizK9Av/nGUcx0qgoyE7OfN6Rva9Q9wIzqJ
- s4COdKKLyZ0kPgupsDrsH0Ixf44rOhOP1MoJhZjthCRkMh8fL7q6MRji6OybbAGy0YbBwswAmSz
- RXiNEep51hbXmZjXrWPtdQ9WaUSyXB9Ts7MiZSjf8KXiTX
-X-Received: by 2002:a05:622a:3d0:b0:50b:1932:c9e with SMTP id
- d75a77b69052e-50dd5cc6a95mr45020991cf.39.1775829529731; 
- Fri, 10 Apr 2026 06:58:49 -0700 (PDT)
-Received: from cethr-l01.localdomain ([136.56.120.109])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-50dd53f9c16sm21723141cf.11.2026.04.10.06.58.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Apr 2026 06:58:49 -0700 (PDT)
-From: Caleb Ethridge <jcethrid@gmail.com>
-To: u-boot@lists.denx.de
-Cc: malysagreg@gmail.com, trini@konsulko.com, linux@analog.com,
- philip@philipmolloy.com, Caleb Ethridge <caleb.ethridge@analog.com>
-Subject: [PATCH v4 14/14] arm: sc5xx: Add fdt_addr_r, kernel_addr_r,
- and initrd_addr
-Date: Fri, 10 Apr 2026 09:58:09 -0400
-Message-Id: <bf1821a5b0f561df15ab1fd1d7783bb3184d3db9.1775829166.git.jcethrid@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1775829166.git.jcethrid@gmail.com>
-References: <cover.1775829166.git.jcethrid@gmail.com>
+ spf=pass smtp.mailfrom=michael.srba@seznam.cz
+Received: from email.seznam.cz by smtpc-mxd-7644845457-sbn6w
+ (smtpc-mxd-7644845457-sbn6w [2a02:598:64:8a00::1000:a16])
+ id 3833eebb633dbad2399a22e5; Sat, 11 Apr 2026 02:03:17 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
+ t=1775865797; bh=vVTEeJaDEDLgb20scJoILNdnbX8OzJkq8Zymvzp2gPc=;
+ h=From:Date:Subject:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Message-Id:To:Cc;
+ b=EIWVJInSf5cES9B3IbxK4BLibesC7TFE4QuxdqEgAZB/wwQtw2O1M5QSu/FOQE/2m
+ HB3qUaGl9QZ0+rBXMObcCzIH4KlnB/NQXTBm3XE6LJzwKlrdwAhnsMo/BhYkciez5i
+ AvDfe/U/wfNYWUw4cx8oust04dj3+QXQXT4KEDaM9YD4WqGgZY43ndtetTSNHq1NGr
+ YBI3y0tqfl67GrGSpKWEwS6LtO7e+oTTMoZD54DsUslDAu2AQ6gbbeZqhxvKHzsCcl
+ KHJlpLQrDRs+FH9+ZgqUBMwG4cwSHPJXysrImZmoUQrjvbxqvJ/bfYgQtyVSwUXh2i
+ PQJz0bwmv851g==
+Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
+ by smtpd-relay-6597cc8696-xddnz (szn-email-smtpd/2.0.72) with ESMTPA
+ id 4aece207-b9b5-4b16-8581-b04eff31af3e;
+ Sat, 11 Apr 2026 02:03:03 +0200
+From: michael.srba@seznam.cz
+Date: Sat, 11 Apr 2026 02:00:12 +0200
+Subject: [PATCH v2 07/10] mach-snapdragon: boot0.h: add sdm845_spl_boot0.h
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260411-qcom_spl-v2-7-9609557cf562@seznam.cz>
+References: <20260411-qcom_spl-v2-0-9609557cf562@seznam.cz>
+In-Reply-To: <20260411-qcom_spl-v2-0-9609557cf562@seznam.cz>
+To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
+ u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>, 
+ Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>, 
+ Hrushikesh Salunke <h-salunke@ti.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>, 
+ Andre Przywara <andre.przywara@arm.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Heiko Schocher <hs@nabladev.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Lukasz Majewski <lukma@denx.de>, 
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>, 
+ Peter Korsgaard <peter@korsgaard.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Tingting Meng <tingting.meng@altera.com>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>, 
+ George Chan <gchan9527@gmail.com>, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
+ Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>, 
+ Michael Srba <Michael.Srba@seznam.cz>
+X-Mailer: b4 0.15.1
 X-Mailman-Approved-At: Sat, 11 Apr 2026 09:08:55 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,143 +105,162 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Caleb Ethridge <caleb.ethridge@analog.com>
+From: Michael Srba <Michael.Srba@seznam.cz>
 
-Add fdt_addr_r, kernel_addr_r, and initrd_addr to the SC5xx boards,
-to be used by the booti command.
+On sdm845, running u-boot SPL in EL3 requires escalting by using
+an unintentional feature in old builds of xbl_sec.elf. We do this
+in boot0.h so the rest of U-Boot can stay blissfully unaware
+of XBL_SEC. If we are already in EL3 for whatever reason, the
+code is skipped.
 
-Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
+Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 ---
- board/adi/sc573-ezlite/sc573-ezlite.env         | 4 ++++
- board/adi/sc584-ezkit/sc584-ezkit.env           | 4 ++++
- board/adi/sc589-ezkit/sc589-ezkit.env           | 4 ++++
- board/adi/sc589-mini/sc589-mini.env             | 4 ++++
- board/adi/sc594-som-ezkit/sc594-som-ezkit.env   | 4 ++++
- board/adi/sc594-som-ezlite/sc594-som-ezlite.env | 4 ++++
- board/adi/sc598-som-ezkit/sc598-som-ezkit.env   | 4 ++++
- board/adi/sc598-som-ezlite/sc598-som-ezlite.env | 4 ++++
- 8 files changed, 32 insertions(+)
+ arch/arm/mach-snapdragon/include/mach/boot0.h      |   4 +
+ .../include/mach/sdm845_spl_boot0.h                | 120 +++++++++++++++++++++
+ 2 files changed, 124 insertions(+)
 
-diff --git a/board/adi/sc573-ezlite/sc573-ezlite.env b/board/adi/sc573-ezlite/sc573-ezlite.env
-index ab1acabef53..2a62526717d 100644
---- a/board/adi/sc573-ezlite/sc573-ezlite.env
-+++ b/board/adi/sc573-ezlite/sc573-ezlite.env
-@@ -3,6 +3,10 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
-+fdt_addr_r=CONFIG_SYS_LOAD_ADDR
-+kernel_addr_r=0x84008000
-+initrd_addr=0x85000000
+diff --git a/arch/arm/mach-snapdragon/include/mach/boot0.h b/arch/arm/mach-snapdragon/include/mach/boot0.h
+index 44a764788de..5d401051bd1 100644
+--- a/arch/arm/mach-snapdragon/include/mach/boot0.h
++++ b/arch/arm/mach-snapdragon/include/mach/boot0.h
+@@ -1,6 +1,10 @@
+ /* SPDX-License-Identifier: GPL-2.0+ */
+ #if defined(CONFIG_SPL_BUILD)
++#if defined(CONFIG_SPL_TARGET_SDM845)
++#include "sdm845_spl_boot0.h"
++#else
+ 	b	reset
++#endif
+ #else
+ /* currently only db410c enables boot0.h in u-boot proper */
+ #include "msm8916_boot0.h"
+diff --git a/arch/arm/mach-snapdragon/include/mach/sdm845_spl_boot0.h b/arch/arm/mach-snapdragon/include/mach/sdm845_spl_boot0.h
+new file mode 100644
+index 00000000000..a0136578756
+--- /dev/null
++++ b/arch/arm/mach-snapdragon/include/mach/sdm845_spl_boot0.h
+@@ -0,0 +1,120 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Workaround for non-qcom-signed code being entered in EL1 on sdm845
++ * Copyright (C) 2026 Michael Srba <Michael.Srba@seznam.cz>
++ *
++ * This code uses an unintentional ownership enhancing feature in older builds of XBL_SEC
++ * in order to elevate our privileges to EL3 as soon as possible after a system reset.
++ * This allows for a very close approximation of a clean state.
++ *
++ * Do note that you still need to own the device in the sense that you control the code that
++ * XBL_SEC jumps to in EL1, which is sadly not a level of ownership commonly afforded to you
++ * by the device manufacturer. On such devices, CVE-2021-30327 could help, but it's not documented
++ * and there is no PoC available utilizing it
++ *
++ */
++#include <linux/arm-smccc.h>
 +
- #define USE_NFS
- #define USE_SPI
- #define USE_RAM
-diff --git a/board/adi/sc584-ezkit/sc584-ezkit.env b/board/adi/sc584-ezkit/sc584-ezkit.env
-index 740b7b554cb..48bdb6fb2cd 100644
---- a/board/adi/sc584-ezkit/sc584-ezkit.env
-+++ b/board/adi/sc584-ezkit/sc584-ezkit.env
-@@ -3,6 +3,10 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
-+fdt_addr_r=CONFIG_SYS_LOAD_ADDR
-+kernel_addr_r=0x8A308000
-+initrd_addr=0x8A800000
++#define SCM_SMC_FNID(s, c)	((((s) & 0xFF) << 8) | ((c) & 0xFF))
 +
- #define USE_NFS
- #define USE_SPI
- #define USE_RAM
-diff --git a/board/adi/sc589-ezkit/sc589-ezkit.env b/board/adi/sc589-ezkit/sc589-ezkit.env
-index 00f90c7942e..1cc0e735672 100644
---- a/board/adi/sc589-ezkit/sc589-ezkit.env
-+++ b/board/adi/sc589-ezkit/sc589-ezkit.env
-@@ -3,6 +3,10 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
-+fdt_addr_r=CONFIG_SYS_LOAD_ADDR
-+kernel_addr_r=0xC4008000
-+initrd_addr=0xC5000000
++#define ARM_SMCCC_SIP32_FAST_CALL \
++	ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL, ARM_SMCCC_SMC_32, ARM_SMCCC_OWNER_SIP, 0)
 +
- #define USE_NFS
- #define USE_RAM
- #define USE_MMC
-diff --git a/board/adi/sc589-mini/sc589-mini.env b/board/adi/sc589-mini/sc589-mini.env
-index 13079ed7527..f3d21f3afc3 100644
---- a/board/adi/sc589-mini/sc589-mini.env
-+++ b/board/adi/sc589-mini/sc589-mini.env
-@@ -3,6 +3,10 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
-+fdt_addr_r=CONFIG_SYS_LOAD_ADDR
-+kernel_addr_r=0xC4008000
-+initrd_addr=0xC5000000
++/* same as with qcom's TZ */
++#define QCOM_SCM_SVC_MEM_DUMP 0x03
++/* unlike the TZ counterpart, in XBL_SEC this simply unlocks the XPUs */
++#define QCOM_SCM_MEM_DUMP_UNLOCK_SECURE_REGIONS 0x10
 +
- #define USE_NFS
- #define USE_RAM
- #define USE_SPI
-diff --git a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-index 324bfae4571..2e88b8099bd 100644
---- a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-+++ b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
-@@ -3,6 +3,10 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
-+fdt_addr_r=CONFIG_SYS_LOAD_ADDR
-+kernel_addr_r=0xA3008000
-+initrd_addr=0xA8000000
++/*
++ * We put our payload in place of some SCM call, the important thing is that it's hopefully
++ * in a memory region that is not in cache.
++ *
++ * It would be cleaner to just put our code at the scm entry point in the vector table,
++ * however it seems that we can't force cache coherency from EL1 if EL3 doesn't have
++ * any reason to care about that.
++ */
++#define QCOM_SCM_SVC_DONOR 0x01
++#define QCOM_SCM_DONOR 0x16
++/* we replace the instructions at this address with a jump to the start of u-boot */
++/* NOTE: this address is specific to a particular XBL_SEC elf */
++#define XBL_SEC_DONOR_SCM_ADDR 0x146a0ce0
 +
- #define USE_NFS
- #define USE_SPI
- #define USE_OSPI
-diff --git a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
-index bdbfaf0dabe..8cdc7006d1d 100644
---- a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
-+++ b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
-@@ -3,6 +3,10 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
-+fdt_addr_r=CONFIG_SYS_LOAD_ADDR
-+kernel_addr_r=0x80008000
-+initrd_addr=0x85000000
++/* gnu as doesn't implement these useful pseudoinstructions */
++.macro movq Xn, imm
++    movz    \Xn,  \imm & 0xFFFF
++    movk    \Xn, (\imm >> 16) & 0xFFFF, lsl 16
++    movk    \Xn, (\imm >> 32) & 0xFFFF, lsl 32
++    movk    \Xn, (\imm >> 48) & 0xFFFF, lsl 48
++.endm
 +
- #define USE_NFS
- #define USE_SPI
- #define USE_OSPI
-diff --git a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-index 324bfae4571..b9934b0ac5d 100644
---- a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-+++ b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
-@@ -3,6 +3,10 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
-+fdt_addr_r=CONFIG_SYS_LOAD_ADDR
-+kernel_addr_r=0x9a200000
-+initrd_addr=0x9c000000
++.macro movl Wn, imm
++    movz    \Wn,  \imm & 0xFFFF
++    movk    \Wn, (\imm >> 16) & 0xFFFF, lsl 16
++.endm
 +
- #define USE_NFS
- #define USE_SPI
- #define USE_OSPI
-diff --git a/board/adi/sc598-som-ezlite/sc598-som-ezlite.env b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
-index ab1acabef53..ceb8e4e7776 100644
---- a/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
-+++ b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
-@@ -3,6 +3,10 @@
-  * (C) Copyright 2024 - Analog Devices, Inc.
-  */
- 
-+fdt_addr_r=CONFIG_SYS_LOAD_ADDR
-+kernel_addr_r=0x9a200000
-+initrd_addr=0x9c000000
++/* copy 32 bits to an address from a label */
++.macro copy32 addr, text_base, addrofval, offset
++	movl	x0, \addr
++	add	x0, x0, \offset
++	movq	x1, \text_base
++	add	x1, x1, \addrofval
++	add	x1, x1, \offset
++	ldr	w2, [x1]
++	str	w2, [x0]
++	dc	cvau, x0 // flush cache to RAM straight away, we need to do it by address anyway
++.endm
 +
- #define USE_NFS
- #define USE_SPI
- #define USE_RAM
++.macro copy_instructions addr, text_base, start_addr, num_bytes // num_bytes must be a multiple of 4
++	mov x3,	#0x0 // x0, x1 and w2 used by copy32
++1:
++	copy32	\addr, \text_base, \start_addr, x3
++	add	x3, x3, #0x4 // i+=4
++	cmp	x3, \num_bytes
++	blo	1b
++.endm
++
++	/*  If we're already in EL3 for some reason,  skip this whole thing */
++	mrs	x0, CurrentEL
++	cmp	x0, #(3 << 2)	/* EL3 */
++	beq	reset
++
++	/* disable the mmu */
++	mrs	x0, sctlr_el1
++	and     x0, x0, #~(1 << 0) // CTRL_M
++	msr	sctlr_el1, x0
++
++	mov	x0, #ARM_SMCCC_SIP32_FAST_CALL
++	movk	x0, #SCM_SMC_FNID(QCOM_SCM_SVC_MEM_DUMP, QCOM_SCM_MEM_DUMP_UNLOCK_SECURE_REGIONS)
++	mov	x1, #0x0	/* no params */
++	mov	x6, #0x0
++
++	smc	#0 /* unlock XBL_SEC code area for writing (assuming old enough XBL_SEC build) */
++
++	/* this will also flush the writes from cache */
++	copy_instructions XBL_SEC_DONOR_SCM_ADDR, CONFIG_SPL_TEXT_BASE, el3_payload, #((el3_payload_end - el3_payload))
++
++	/* this probably doesn't affect EL3, but it doesn't hurt */
++	dsb	ish	/* block until cache is flushed */
++	ic	iallu	/* force re-fetch of our shiny new instructions */
++	dsb	ish	/* block until invalidation is finished */
++	isb	sy	/* unify here ? */
++
++	mov	x0, #ARM_SMCCC_SIP32_FAST_CALL
++	movk	x0, #SCM_SMC_FNID(QCOM_SCM_SVC_DONOR, QCOM_SCM_DONOR)
++	mov	x1, #0x0	/* no params */
++	smc	#0	/* call the payload */
++
++el3_ret_point:
++	b	reset
++
++el3_payload:
++	/* disable the mmu for EL3 too */
++	mrs	x0, sctlr_el3
++	and     x0, x0, #~(1 << 0) // CTRL_M
++	msr	sctlr_el3, x0
++
++	/* jump back to our code, but now in EL3 */
++	movl	x0, CONFIG_SPL_TEXT_BASE
++	add	x0, x0, (el3_ret_point - _start)
++	br	x0
++el3_payload_end:
+
 -- 
-2.34.1
+2.53.0
 
