@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C75C5E937E4
-	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 13:01:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E164FE937E3
+	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 13:01:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86AE284214;
-	Sun, 12 Apr 2026 15:00:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8A1FA84223;
+	Sun, 12 Apr 2026 15:00:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Sgf9FR3Y";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RR8O9dIg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 514178416F; Sat, 11 Apr 2026 17:41:07 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id DE9DE84181; Sat, 11 Apr 2026 22:30:53 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F79080077
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 17:41:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B67F784118
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 22:30:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-b9358bc9c50so412291866b.1
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 08:41:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775922065; cv=none;
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-66bb6eb28acso3044810a12.0
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 13:30:51 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775939451; cv=none;
  d=google.com; s=arc-20240605;
- b=We7NLzbk2gXSRgbkwzB8W338M6q24L9Eqb2SXWpJYGGohC06rJ2NxMkIImieF2EnLD
- s4rXf8JUsoUX9gA72avVdaIx01YU+ZLTH4NoqFQOSaTQSxsBMeNUJvj9oeJdzzmL1HjE
- oROgA0yp5XAVzL0VelZFBfqicMrNaJjIi5pMqq1zaqwts3t4RKm09mXZnPpApJhp0KHZ
- oFrIX9ScMG7sEwVXtfvOEFRMaemu4KZZfJE/Q8RM20sauwjWKn+R2qCTaurM3qJRhNVn
- CFusdPQlDljh7Kcpj5W6Syifdms/dci/0pjzMrWSZU0hN7wv7YKV4G0Gn9YTxGPkn5Zq
- CRgw==
+ b=A33VuR+wa1EPA51UFFLl77VdM4nLCgb1+5TzSju+ZWXdewbhFGMGm9Mow7QNLicwbG
+ 8/zC6ouK4mIgbaQJZj5HM4KbUxP7YS9MaENMeVqXDycS1Xp5NPqo0vaXiKYAYicGYeO9
+ yWdhyYu4zMSMER8jIxqz4bZJirr7afPpVZoCAvVXpQjQFQgQwJ1nRsJkzS2s9ftYDnq7
+ 4AihaY8NahHFX7cKbPW6ThOUFIERS6qLJBo/80ThfR9f1kXYK+8uzIJWi5/cpadVPH/J
+ kxrW8qntYZ6jJ4RW6V+vCaHUFCF/3OD6cCWOfo1PjIzohPyz/4klxRxYn6/URsg77EQV
+ R55w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=tH2J385Gf8UKF2zbIgRfPVoF3cnxj4ZroUQFm9KDYZY=;
+ bh=5CCO/Izxk1WHhUY/5yHeJFc6NA6XouOKFnvJrQ2m4XY=;
  fh=pKV29h6PBf5SbuSFTM/GZF+KoVG4OaOclZXc+5Qi1tM=;
- b=BqiJem2Gkkuoeq5bDxSSu5M7p90pDk6qDZcjh0BoU2kNSQbgP8CtCkBB3DyBlRbjeF
- cD2cH0B6R1OfHvOHRsfZ+OHQ2mVV4vMx7hruxuOO6z/cBnCa2PvGp3SwP6jaojS7sK18
- 6A5W4OWLUe/mcOO23eNBDWv8hd6VqScjheF5ewseBXolcawyVSL1BDAkE+DN7thQPb0F
- YmVnolnr5MBu5osMUesjVtmMhOu32peG+86bJdHeffV5oBvfrffxCKN0YpFk1vSU963i
- X0dNB2SjyRZ30c5IoumtudLGPMtaNpbnDW0CBgNNmOloI9Tkmajh8sddg1L1fR+ua5Lx
- qkpw==; darn=lists.denx.de
+ b=PPL5+1vYy13Traf1Jbyq2v1DfVJT4k72u58Fd8nWwaog8t7O/3WgaEORNOaofxyrpJ
+ luIuIpzQinfqYoqjaU2T0wSxHJTO/5xk58G2TrGCyVkqy1xcnsIZ++1u+btAC1AaWXGC
+ zyc2NIHVl7HYZMHLPkjLDMMHuMTFrzSVKMT1OB1u00+/aNTxDgpWtGBKamxB43fnkPyn
+ UMKLx+w689z7MLJRhcL+Iu9UUuH6FJ+jNDprWzObJiu7MvhDO5sc1gBHuV4METF9o9Wh
+ zSaNVor5Up9ZQQbcU7rDrmgsQY7ZFnZVX3xODrtlHd12t88yHfHmbWFTEFQois5IKPVL
+ x6yQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775922065; x=1776526865; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775939451; x=1776544251; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tH2J385Gf8UKF2zbIgRfPVoF3cnxj4ZroUQFm9KDYZY=;
- b=Sgf9FR3Y4HeTvKEBMbbFeD2UTXsmH+W/Hrv5EHrL7azFY8Mv5ex06jwpLf70jKRtKB
- FclKYMHG90bbtHrQ0S95FHAspkmW3P0YOWrgRpa0ZF9SdHeBZBRU2RGmQE+g4XsytkeZ
- 7elFvvWM1tyc5lJDyropht87O5w/g8GeabJyg=
+ bh=5CCO/Izxk1WHhUY/5yHeJFc6NA6XouOKFnvJrQ2m4XY=;
+ b=RR8O9dIg7HU7Ka2t1ntwqnMlm9O8ZsIe70Ln+huRZerzF9aafQ0ELdjRvs3ipnwyb7
+ 4j6IMeYbsKX2prqa8OXU3Ond65C/RNAV38NoogbSS2B8KakQiD+d45bteXcDNJdJa7on
+ ERBbv+WP0XHecdSSpBCLKqjjr8LRtr/Pj5sBo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775922065; x=1776526865;
+ d=1e100.net; s=20251104; t=1775939451; x=1776544251;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tH2J385Gf8UKF2zbIgRfPVoF3cnxj4ZroUQFm9KDYZY=;
- b=cWKYmSTJ/QWv6M6PfWSFEUwIkN+B9epYmBWGTcyLZ00HcGc3Hu9dHFqs5bfNUL5bqd
- 3a/UBzDheDpz0VF3EnsHJ4jFNSH8wlgQ53ZXy02By3qcRncT5RnZq7KM5mYhbdAasIEb
- nMCDEzvorzmp0PrvjS3+Qwjn0lHTzXqpqHHdTwr16mR7WvjymtJ1EmoJqPzrqEw8Jg3R
- u+KnvOvgOJHxOgk1PSMaoow45l7VhWb0/V2uXbho3CGqgSy/KsmfXykHwdgoY7PbQT8j
- cV0sfFtipvSEZkstwVE/kPyIpzrs/xZVF0P56dI7nCLROM70so0fyQUCJNqZSxW9zeeU
- kq8w==
-X-Gm-Message-State: AOJu0YxVO5nTEq8fE2GTQo32WwHiPyQxfs2jvWh4iVOeMQs3sd/UmrbY
- OAMMhN4yqGZh0uVzgysuAWKfRmEGbXvCN5Bm+/AdHxL5SdvHT+BoxeyBvJd9OIo+9ASsq/o0ftt
- 4zul7/1OaNbjt0BmuCuq1rlNn0xeuGtB87YSeWY2X
-X-Gm-Gg: AeBDieva08iA5iVwhmQKxWdxYcILhKvLepWZHOZ/W8oaDWcJLdZpze5zk+1KW/JqTGJ
- YdalBi8vFBCrTFRy8UVLLryp/md9HUld1StvCYpv8IAWX0g23qDN2IKIU7FLILXfKTzQkijzQ3k
- BoAc+DofnLXCagu3dU2tzRAxaRONRGJ+gjDHJ+bdYfzJIBHO33myAxPlavkJ8eYfbHRsG7AnGM0
- t6zMO5bfM7rlnjvUBZ2rIZXDKzPIriumqPR7zqdiAm4tNXJmuFljzYN2LvuQUHr17CR4F3etlvm
- llsSOQ==
-X-Received: by 2002:a17:907:7284:b0:b9d:9741:4ef5 with SMTP id
- a640c23a62f3a-b9d97415fb0mr213616966b.6.1775922064543; Sat, 11 Apr 2026
- 08:41:04 -0700 (PDT)
+ bh=5CCO/Izxk1WHhUY/5yHeJFc6NA6XouOKFnvJrQ2m4XY=;
+ b=l5QgaxRJ2at8VwLfNZZQHexM1XdaMgzO800d0eWwtY7rFqHDmchtkpVIGhvUmk9AFu
+ yFyWEUAKrZD2j2xdMGwBxsjob3PQwW9jLgCCCtR1Fvbp6pWKLsxa+ZXPZbG5U4ObLBbI
+ bTCqRyOo/MqFI4Ns1SSWm36k1YAs52zySRA/fpb+kIMzvAYgn487hVLlwNgBjtvwMkLV
+ tfP/K7fK+Uo2GD8RoWBrcf9qz+rdu/qU2KjmoqE/YKcFBMmnUrDYQNtWp9dQlSa5ayoX
+ sF01slUfOZKqGk39tGl3YYv0/zlhelVwNAggdg4k30bfurREIO04CX6NIpmOvE7ufnh2
+ jFoA==
+X-Gm-Message-State: AOJu0YwuTrvP71e6irZMHcPkePnuqRkByj1OC9rUjAmom/7oT99A+fw/
+ Nt5k+MmqASttZQeiWF0XfPpMADxg37es/XjouCVG61r0vqYX32TFC6kaQaQwPIpFvXO6iufYVe/
+ 1BwAvOurYDHNnO/pe4Xko9xY0AGy5hp5yZE+abUoe
+X-Gm-Gg: AeBDievkY5xHUcocbg2Po9kC8lyECXq72d+YusZ9qC9xfXvDLyPGfJrir0obKbm73rL
+ hnacuP2FEUVmS9iSuYArQJGeKynCwnkA+GltIfWGS5MLu9cMFUd7iEqxmL63xNgyflqJ6MDtKLU
+ YEkvLEeRLaVqZ02Gmo0cbQZwjovxNHFTgnFt1tzKDpR8zabQgFayMIJDiwBuXH6gMRfqox/1Vih
+ Eu8YwM4SvB0jq2r76THlN1PzrlP8/tMUAhE2je/A3ThU9k3Q0f0nPKULZLjpUiucB4no4MUT3CT
+ Xztu+A==
+X-Received: by 2002:a17:907:a46:b0:b9c:513e:34db with SMTP id
+ a640c23a62f3a-b9d72635a40mr493501766b.23.1775939451048; Sat, 11 Apr 2026
+ 13:30:51 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260411-qcom_spl-v2-0-9609557cf562@seznam.cz>
- <20260411-qcom_spl-v2-10-9609557cf562@seznam.cz>
-In-Reply-To: <20260411-qcom_spl-v2-10-9609557cf562@seznam.cz>
+ <20260411-qcom_spl-v2-8-9609557cf562@seznam.cz>
+In-Reply-To: <20260411-qcom_spl-v2-8-9609557cf562@seznam.cz>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 11 Apr 2026 09:40:49 -0600
-X-Gm-Features: AQROBzCix0nP8LIfTd-y6PntMyOiaWiBBzhwvtYW852vHjsY5AR0bTo3mKSH2x0
-Message-ID: <CAFLszTgD53TWNH4XM0gFgg5D7P-5MS2mOy+HmH60+xg4cbwbfg@mail.gmail.com>
-Subject: Re: [PATCH v2 10/10] dts: add u-boot specific sdm845 .dtsi a .dtsi
- for shift-axolotl
+Date: Sat, 11 Apr 2026 14:30:37 -0600
+X-Gm-Features: AQROBzBtIpUs5eEPkuYZ59-Pt2KA8F5CT9gzWEmJbylSbP-MGHJNNfQfbBywcZA
+Message-ID: <CAFLszTg_yxJj8RYV9P-qFJd70npM7gei6M163VSrAQpPKMoo5w@mail.gmail.com>
+Subject: Re: [PATCH v2 08/10] mach-snapdragon: add board-spl.c and split out
+ common code
 To: michael.srba@seznam.cz
 Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  u-boot-qcom@groups.io, 
@@ -144,27 +144,28 @@ X-Virus-Status: Clean
 Hi Michael,
 
 On 2026-04-11T00:00:12, Michael Srba <michael.srba@seznam.cz> wrote:
-> dts: add u-boot specific sdm845 .dtsi a .dtsi for shift-axolotl
+> mach-snapdragon: add board-spl.c and split out common code
 >
-> The board .dtsi just includes the SoC-specific .dtsi, which
-> adds bootph-all markings to upstream dts nodes which are
-> needed in SPL.
+> Code in board.c will now only be compiled into U-Boot proper,
+> and the new board_spl.c will only be built into SPL.
+> Code in board_common.c is common to both phases.
 >
-> Signed-off-by: Michael Srba <Michael.Srba@Seznam.cz>
+> Also split out mem_map.c, which is currently common to both
+> phases since it seems to not cause issues in SPL. In the future
+> it should probably behave differenly in SPL, especially if dram
+> initialization is supported.
 >
-> arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi |  2 ++
->  arch/arm/dts/sdm845-u-boot.dtsi               | 16 ++++++++++++++++
->  2 files changed, 18 insertions(+)
+> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
+>
+> arch/arm/mach-snapdragon/Makefile       |   8 +
+>  arch/arm/mach-snapdragon/board.c        | 358 +-------------------------------
+>  arch/arm/mach-snapdragon/board_common.c |  56 +++++
+>  arch/arm/mach-snapdragon/board_spl.c    |  35 ++++
+>  arch/arm/mach-snapdragon/mem_map.c      | 318 ++++++++++++++++++++++++++++
+>  arch/arm/mach-snapdragon/qcom-priv.h    |   4 +-
+>  6 files changed, 429 insertions(+), 350 deletions(-)
 
-> diff --git a/arch/arm/dts/sdm845-u-boot.dtsi b/arch/arm/dts/sdm845-u-boot.dtsi
-> @@ -0,0 +1,16 @@
-> +&usb_1_dwc3 {
-> +     bootph-all;
-> +};
-
-This relies on propagation to parents but should be OK.
-
-The commit subject is missing the word 'and'
+The commit subject says board-spl.c but should say board_spl.c
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
