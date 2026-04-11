@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4743AF364CD
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 07:12:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4A0EE99058
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 07:12:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3183984255;
+	by phobos.denx.de (Postfix) with ESMTP id 701F6842C9;
 	Sat, 11 Apr 2026 09:09:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="mOk7uOzC";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="LbzjU0b2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1269684118; Sat, 11 Apr 2026 02:04:16 +0200 (CEST)
+ id 0135184099; Sat, 11 Apr 2026 02:04:18 +0200 (CEST)
 Received: from mxd-2-a16.seznam.cz (mxd-2-a16.seznam.cz
  [IPv6:2a02:598:64:8a00::1000:a16])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72EE084099
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 02:04:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B7FE8419E
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 02:04:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael.srba@seznam.cz
 Received: from email.seznam.cz by smtpc-mxd-7644845457-sbn6w
  (smtpc-mxd-7644845457-sbn6w [2a02:598:64:8a00::1000:a16])
- id 5ee64eb705e81ade5f4f82e9; Sat, 11 Apr 2026 02:03:40 +0200 (CEST)
+ id 640afecd3f04aaa465a33293; Sat, 11 Apr 2026 02:03:40 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1775865820; bh=s2nWCNAqzqMnhfWnKCObMbfXatl2EZK1a5sWJdvQiIE=;
+ t=1775865820; bh=RsmhNoqUFmRuQSR7G+pXMVVID6V0T7OzRhGN+q9JfTk=;
  h=From:Date:Subject:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Message-Id:To:Cc;
- b=mOk7uOzCV4yBseuu7W5CLXmtoDX1PEaDCvXuyNTLmIuXu60cts17yYyftYoi8cgRq
- c1rqqbRzlgWJYL3CiWFdLn+6BMG+YmgxJbVbdGniI6BRALaqkw+X7/jlLDrzApBQEr
- If5uVEzpquNoGjjYJaM9wekKxhEmJdRVjjKAOWimljMtROafmxL/bZmiQlKMcq/m0c
- LecAzIDdN/CslaK3jSIIV2CTZnJm6ia8wFyzmMGPoWYAR+/rRALY6jtJ3AcOItj5+V
- VBvLjrCrab8IvDT/H0hiVkHJplEo1BViKJsFuwtdFyj0Y6y0okBiotJHmomZrxaBsw
- 7vQF6qn7oET1w==
+ b=LbzjU0b2Mxs0fdYYu3D3+7YTk6E6FdlHCzqQd6PXutGfwGJnbW3Vqtn031jfyCinF
+ rG6Pg6Ruxlkr2/Sh8ml2dt6/vyhvp+ofvPo+AOGKM/8V0SITSK3OGcy943xvQJHYbx
+ 8IFzIPG6qu8HzMUGQ//i3Eq9SHUEk95ffnEyBDEIbZD1KNqlTBGL1gkAmArWi3nzBr
+ DHWt/J8VyNK7korw1r4JW73E2rZGtGNUOIj/IlhjSft1QxBji+ZDmsiciA34o3eTyV
+ 6pBaBdJoDuO/e3HwEzmOCPO1y0d+3T/MvULTXOYXYeTVJP/mdngVd4ZkOCG5bIBXBI
+ 3o1YiDMuQyeGA==
 Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
  by smtpd-relay-6597cc8696-xddnz (szn-email-smtpd/2.0.72) with ESMTPA
- id 7693eb5f-b9a6-4c27-a032-bf67f49d6e98;
- Sat, 11 Apr 2026 02:03:00 +0200
+ id 79489188-a0fb-4a7b-85d1-d60c257ca549;
+ Sat, 11 Apr 2026 02:03:01 +0200
 From: michael.srba@seznam.cz
-Date: Sat, 11 Apr 2026 02:00:07 +0200
-Subject: [PATCH v2 02/10] of_live: support in SPL
+Date: Sat, 11 Apr 2026 02:00:08 +0200
+Subject: [PATCH v2 03/10] drivers: allow clk_stub and spmi in SPL
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260411-qcom_spl-v2-2-9609557cf562@seznam.cz>
+Message-Id: <20260411-qcom_spl-v2-3-9609557cf562@seznam.cz>
 References: <20260411-qcom_spl-v2-0-9609557cf562@seznam.cz>
 In-Reply-To: <20260411-qcom_spl-v2-0-9609557cf562@seznam.cz>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -107,81 +107,82 @@ X-Virus-Status: Clean
 
 From: Michael Srba <Michael.Srba@seznam.cz>
 
-Add CONFIG_SPL_OF_LIVE and if set, initialize of_live in spl.c
+Only Makefile and Kconfig changes necessary.
 
 Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 ---
- common/spl/spl.c | 11 +++++++++++
- dts/Kconfig      |  6 ++++++
- lib/Makefile     |  2 +-
- 3 files changed, 18 insertions(+), 1 deletion(-)
+ drivers/Makefile      | 2 +-
+ drivers/clk/Kconfig   | 6 ++++++
+ drivers/spmi/Kconfig  | 6 ++++++
+ drivers/spmi/Makefile | 2 +-
+ 4 files changed, 14 insertions(+), 2 deletions(-)
 
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 8256fa97862..179694a38cd 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -17,6 +17,7 @@
- #include <irq_func.h>
- #include <log.h>
- #include <mapmem.h>
-+#include <of_live.h>
- #include <serial.h>
- #include <spl.h>
- #include <spl_load.h>
-@@ -510,6 +511,16 @@ static int spl_common_init(bool setup_malloc)
- 			return ret;
- 		}
- 	}
-+	if (CONFIG_IS_ENABLED(OF_LIVE)) {
-+		int ret;
-+
-+		bootstage_start(BOOTSTAGE_ID_ACCUM_OF_LIVE, "of_live");
-+		ret = of_live_build(gd->fdt_blob,
-+				    (struct device_node **)gd_of_root_ptr());
-+		bootstage_accum(BOOTSTAGE_ID_ACCUM_OF_LIVE);
-+		if (ret)
-+			return ret;
-+	}
- 	if (CONFIG_IS_ENABLED(DM)) {
- 		bootstage_start(BOOTSTAGE_ID_ACCUM_DM_SPL,
- 				xpl_phase() == PHASE_TPL ? "dm tpl" : "dm_spl");
-diff --git a/dts/Kconfig b/dts/Kconfig
-index af8d30b45ab..b30bc5db5d1 100644
---- a/dts/Kconfig
-+++ b/dts/Kconfig
-@@ -86,6 +86,12 @@ config OF_LIVE
- 	  enables a live tree which is available after relocation,
- 	  and can be adjusted as needed.
+diff --git a/drivers/Makefile b/drivers/Makefile
+index 43d0ba33281..477718ce89a 100644
+--- a/drivers/Makefile
++++ b/drivers/Makefile
+@@ -35,6 +35,7 @@ obj-$(CONFIG_$(PHASE_)RAM) += ram/
+ obj-$(CONFIG_$(PHASE_)RTC) += rtc/
+ obj-$(CONFIG_$(PHASE_)SERIAL) += serial/
+ obj-$(CONFIG_$(PHASE_)SPI) += spi/
++obj-$(CONFIG_$(PHASE_)SPMI) += spmi/
+ obj-$(CONFIG_$(PHASE_)TIMER) += timer/
+ obj-$(CONFIG_$(PHASE_)VIRTIO) += virtio/
+ obj-$(CONFIG_$(PHASE_)DM_MAILBOX) += mailbox/
+@@ -106,7 +107,6 @@ obj-$(CONFIG_DM_REBOOT_MODE) += reboot-mode/
+ obj-y += rtc/
+ obj-y += scsi/
+ obj-y += sound/
+-obj-y += spmi/
+ obj-y += watchdog/
+ obj-$(CONFIG_QE) += qe/
+ obj-$(CONFIG_U_QE) += qe/
+diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+index c2da7b3938b..888ea08cead 100644
+--- a/drivers/clk/Kconfig
++++ b/drivers/clk/Kconfig
+@@ -114,6 +114,12 @@ config CLK_STUB
+ 	  Enable this to provide a stub clock driver for non-essential clock
+ 	  controllers.
  
-+config SPL_OF_LIVE
-+	bool "Enable use of a live tree in SPL"
-+	depends on SPL_DM && SPL_OF_CONTROL
++config SPL_CLK_STUB
++	bool "Stub clock driver"
++	depends on SPL_CLK
 +	help
-+	  This option enables a live tree in SPL.
++	  Enable stub clock driver in SPL
 +
- config OF_UPSTREAM
- 	bool "Enable use of devicetree imported from Linux kernel release"
- 	depends on !COMPILE_TEST
-diff --git a/lib/Makefile b/lib/Makefile
-index d0ffabc2b47..bbd540e9687 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -13,7 +13,6 @@ obj-$(CONFIG_FWU_MULTI_BANK_UPDATE) += fwu_updates/
- obj-$(CONFIG_LZMA) += lzma/
- obj-$(CONFIG_BZIP2) += bzip2/
- obj-$(CONFIG_FIT) += libfdt/
--obj-$(CONFIG_OF_LIVE) += of_live.o
- obj-$(CONFIG_CMD_DHRYSTONE) += dhry/
- obj-$(CONFIG_ARCH_AT91) += at91/
- obj-$(CONFIG_OPTEE_LIB) += optee/
-@@ -55,6 +54,7 @@ obj-$(CONFIG_BITREVERSE) += bitrev.o
- obj-y += list_sort.o
- endif
+ config CLK_BCM6345
+ 	bool "Clock controller driver for BCM6345"
+ 	depends on CLK && ARCH_BMIPS
+diff --git a/drivers/spmi/Kconfig b/drivers/spmi/Kconfig
+index ab4878ebae4..f3d91e0b754 100644
+--- a/drivers/spmi/Kconfig
++++ b/drivers/spmi/Kconfig
+@@ -8,6 +8,12 @@ config SPMI
+ 	  SPMI (System Power Management Interface) bus is used
+ 	  to connect PMIC devices on various SoCs.
  
-+obj-$(CONFIG_$(PHASE_)OF_LIVE) += of_live.o
- obj-$(CONFIG_$(PHASE_)TPM) += tpm-common.o
- ifeq ($(CONFIG_$(PHASE_)TPM),y)
- obj-$(CONFIG_TPM) += tpm_api.o
++config SPL_SPMI
++	bool "Enable SPMI bus support in SPL"
++	depends on SPL_DM
++	help
++	  Select this to enable SPMI bus support in SPL
++
+ config SPMI_MSM
+ 	bool "Support Qualcomm SPMI bus"
+ 	depends on SPMI
+diff --git a/drivers/spmi/Makefile b/drivers/spmi/Makefile
+index 1b3d57f36a9..a654884737e 100644
+--- a/drivers/spmi/Makefile
++++ b/drivers/spmi/Makefile
+@@ -2,6 +2,6 @@
+ #
+ # (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
+ 
+-obj-$(CONFIG_SPMI)  += spmi-uclass.o
++obj-$(CONFIG_$(PHASE_)SPMI)  += spmi-uclass.o
+ obj-$(CONFIG_SPMI_MSM) += spmi-msm.o
+ obj-$(CONFIG_SPMI_SANDBOX) += spmi-sandbox.o
 
 -- 
 2.53.0
