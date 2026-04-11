@@ -4,94 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2A45F3ED4F
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 14:38:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18202F3ED4F
+	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 14:38:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69C62841D5;
-	Sat, 11 Apr 2026 16:38:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 79C07841CD;
+	Sat, 11 Apr 2026 16:38:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YcgAPcVb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fdu+VxEW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59F6183DC9; Sat, 11 Apr 2026 16:38:07 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id D75DE841B9; Sat, 11 Apr 2026 16:38:29 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35B0D841CD
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 16:38:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E5E9A84118
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 16:38:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-b9bff57cb62so479049666b.2
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 07:38:02 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775918281; cv=none;
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b9358bc9c50so409058066b.1
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 07:38:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775918307; cv=none;
  d=google.com; s=arc-20240605;
- b=i6GkDan6yHC6IFgdyxPji3yn3oZjt8AdTvadblthv/72oVXNLYATOh1fnDKNdz3lh2
- zVSMvtfpOYbD+u44OccTS3ft03YN77D1dF6weCvmqzR/iT5UgmbaLI0PtwwRplNxixsx
- ZLnDlxpplVD2VWGeF6u2v5hxrwtP2KABJ0aCVXHzgsyLLJ6Sgc595qBwuIT5mLiJgvDm
- vbLPtyKzwnplAwUr5BETSPWNURA6BoXWI3wU3M81Hxj6WHpzUnvnEmDdr6zl3S8Z+DOi
- brbJ594apgcfGbZDGVaru0P/1Nozm+GVPMZMInnHSd6Q6xKkQq8xSD6qxLLXhbhku5fo
- BcDw==
+ b=Hh4cLfytK55cBBd0ZP3wXT7hTmONz3U7TAiaYJJQAG5Oz8B3fn1nsDuJpM9+GC+bOt
+ JpioIu2N3ZXWRZnjimZ/E+N7LLAxmNURtUiIYiFZ+y7JLh+wMuY+JIwKP9QZ10G2deny
+ raj+RZvfTEvk0EEm69oKEFIuPhgeDhkLQbulv6kZLe9s1/XBkMQP4CtpFj7Y2gi91J/+
+ zKuhPSRErFq+ZvqiuMMMQUjr28rB6fNbVSC3DltgxrulTnjtwXxbdwo5R4v3foX9oWas
+ M2RZRAejZFZzw8NnQ6N9SyEY2NoFjXnbbyk9Kef0FzS5/MNh0GKTyJbcRTGf3gWun6Y7
+ PJTQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=/a9fayhV553V3QzcdEj+QGSO5J18oJxAL+mWK3CEC0k=;
- fh=j9vcBxmF5lkzW3x86G/7mzB5H9gldgJrp50Nrb3DWZk=;
- b=AABNGCxRJAXiheokqyEq5JFQJx9AwPqcnLt0h35rDfzkr9Jvj+siHE31BYZgoqCtWr
- P14a0dEm/k4lCOC+Q6SmdROosTPzYUIO7xyFx5FKqoVlKt6vsAdu1CjVxYI9gGfFb75Y
- mc+0v1QGPPDl5C6lgxb/ncoCD1iLDCfGg5s9mKDh3/gnO+5t1UM4hPTtLzwj2v10pFkU
- ASWT20/33Vh/33gnlnj8gPJYF3K7AQG5pDLXi4+2qoagPh2GA/b61OUqiyQzqFbFOFh5
- picnkAciQ72bqWbtecgh2uT1hQr03acTMmlrusUS4zeT2mXX+B7fFJkWNdle5//nH2h4
- 6X2A==; darn=lists.denx.de
+ bh=J1kTB9xvYtTFfVrIiHdLA9cok3I9J53flz3HGMyuzRI=;
+ fh=fzkA9x94YE5UDVQWJtvPgpPtCZt/HBkqd5rb9Z8l0kw=;
+ b=jcI+wcT847NejWDHkPCkrebpz4B7nbN6xB51KArXt2aD6/9nEosT4Yvx0zcPCpYwEh
+ s2UXo3NtFdHBuyQLh1U1NxLyw05NwW9XAMeR8JzOzNH7eiOX03UeW9kF79T7ioLWcYcZ
+ LtHRUaErkmCf1b7/kfab/qlnqyCvnfDm3ULb7M4nVFxLs0vbWEttNVaGZksicXGtpmfh
+ Kt5KWwSbXT9cleffJ62SVj49LbMoKvH2t/7xTIN1koP0DcrtvD3ymHpa2Xvpo/hxma+6
+ XkXrEB6PAOIIWIYCVKtrVt8nXUaHXI5Ff+2UswLTiffjQROnATilVQOWJcEUz5/AyBNB
+ 3MVA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775918281; x=1776523081; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775918307; x=1776523107; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/a9fayhV553V3QzcdEj+QGSO5J18oJxAL+mWK3CEC0k=;
- b=YcgAPcVbi11q72S9jMK9Gdg/R2soCEy/mq7kBZDzJirBX+8N+lG0ykWF2AwoyxLkef
- v49SbdLtA3iWJDxbmhsoZU/ov9teCZWDV4SyMu+0cxwXfkojRJnJysLGskg8NrU+dx0L
- UmEaa6p8qlp+b6hCt59KkfMc4fsyHZ0MExFcQ=
+ bh=J1kTB9xvYtTFfVrIiHdLA9cok3I9J53flz3HGMyuzRI=;
+ b=Fdu+VxEWaolaaayNvVvQ8ATyK68mx/CfixPjw9D95cDZHTTIUUF0gO3Kr1Srzlhc4i
+ rZLKfX8AoMfJRKfRyi+kxRRw0ARLAu3iwC9ftqVHenQr5OfDyDgxNHYrs0LKqrAFFZ5I
+ 3gtYZxtKs2DRC/OZ4Z0Kwjs3Jwh0NvlFOFbHg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775918281; x=1776523081;
+ d=1e100.net; s=20251104; t=1775918307; x=1776523107;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/a9fayhV553V3QzcdEj+QGSO5J18oJxAL+mWK3CEC0k=;
- b=erEKf1mkfsMZhjjLN2P7efJsZj7mD5WfYjPJPb7t7tGGwgsxuqmOIovQMdeKdu2KbV
- bszCqr5lNLkF5hNCMHMsoT5lQGvcR1FJsFJr5/y7nSZ6PuJiT57aInoVeWnWPCj2tlY/
- AoKoBznZDFwuR0QMZtBK18LjQr9l40PUGF4vgI0pQ5SNCv9XlM3ieI4EqkRQmhgBc5ce
- AVEB54AEWUQsBeuy84CbsUdcOhaV1zCrwe+8fZmSaOHoRiytGKuAKU6XFHmQeO/b3qZ4
- MIBBqfaz6Byctrp6Yt65hrWHSdAG03tLgyRQksWZTA37A6Jh9ByPnzgE9Nq2iRygDedG
- xXxQ==
+ bh=J1kTB9xvYtTFfVrIiHdLA9cok3I9J53flz3HGMyuzRI=;
+ b=AbMYkyQuhE+nlUOBb192z/l7z6ynwyrg43XRaDfdcFapcnpGkBou7celhzhFuiaD99
+ +rbcRUTidqQyd42nrA1sN4xZ+tVPnYppxdg84eHMTRJzKSTxevS0YAmMaw5jJbg58HLH
+ w0LPGKD03nsu9zntPtZ7/9+LNJLazqFSfzGrRlcYpnghW28JWZkIujG5VX5fRW7i2JDH
+ dYfFJTgkylVY54N4Ow24VplU0pHpfZs7npG/ZLBFQFFs1FlfTvANjwskK0r08AZ4PoL6
+ 9lo4lxbTjgdJoZN1+uWGRaVHE86dzY8WEt2NWD7+0WgWeSWQxnm75ruokNnXudIaJ+op
+ stQw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXAmGGzv/pb5iMA3tuSvdPoj+CGWIM3ZhyHip8PEoqWkV70jR6W2vHZhq4HcxqwV9oOutuQ7Us=@lists.denx.de
-X-Gm-Message-State: AOJu0YzgfD3e0RezJhbXBtBQI5txptKHrywP/8thGaGTG14GT8+NXW//
- 0cDHPBY5m/6JKtAunJvo30dz4uv5u9Cic2G6tdZ7vztNk5l9PVrVI7FQaQQRh1h6JzGXIdtnKvb
- DUJN1z/SoTFSW6+9k5XcDK4uyRWQ1WVb4E4asj/Da
-X-Gm-Gg: AeBDiet4nXlxI26dEwiWmdSg5K3ji75kWw6rt9P63+SVG0R3+D2/4bX2aq/7sg2zx34
- Ft2FDqtk42NoPM6uBXOe0EQoBrb3NmRo3RVrRpmnZRcvos8uwebLUg6/o2QzYBtE/wt+NpV6TXM
- b0CsBI05kFNGEekZaAb0/9jHW3d4m55wWt09ZmHiydv532YxGmJH1HrLyIJUvY2crPUimAScfZ1
- 9UZwmNkPlx7G27sFY1HW+kCBQxfqcHxaXKb89kF0uXNoZhpd3ECLxZ1brwegGysU1Ab3C6QlcRV
- ujTuILUZeX4RtKNZ
-X-Received: by 2002:a17:907:6ea7:b0:b9d:61c7:2343 with SMTP id
- a640c23a62f3a-b9d724ec21cmr404363366b.10.1775918281510; Sat, 11 Apr 2026
- 07:38:01 -0700 (PDT)
+ AJvYcCW7lioE0Bio17Fm0vMcl02JIRDUUW1WyHninGG6NyMw70sn1DYickKowc+oZX+9te94bwj0Tv8=@lists.denx.de
+X-Gm-Message-State: AOJu0YyUscnmh4ORwogQwgZl+zSnvN3z9+MTmrrod6K2RdO6AnI9O8w7
+ 01IPy7hAOKaF8nd06jYdbh0/Ps0jOwHoPX0gmc18lnhacHtLOynvzn9I4C2HiV6ysHpq5EGzWhY
+ it6Y4lGAOolwmMYGh7bJxfO0A8lvxsV9uojGhGlxx
+X-Gm-Gg: AeBDieuPpaV/kRsPQRePBd/L0fLTBNLSuMGyjV50RS8d4qhdKIWj8pQoI5kEH2kF1iO
+ eAM8zjVgd1A5GAnsyk2z3nnSnilxTfUeZYx6r+efK/C3FK2yCTzUYEXRv2jq3jsfBN3Jgo/wqUB
+ tPY1DoVX3SDKnWQkf1XzIWKW22tYuSARbivlA8aXhcheklK9yXRFFSs80H8TJb4nibCTRo6Pe7N
+ LN3rCp/Ki9rHW1doDMC2xf0ccvj1mG+DWkeyfn6LkM4s1U23bS12+Fph1ylyqmVhJ1a1dXXds91
+ mgtiTzyhIeBw8s/w
+X-Received: by 2002:a17:907:9608:b0:b9c:b88c:6364 with SMTP id
+ a640c23a62f3a-b9d7249921cmr396245566b.22.1775918307232; Sat, 11 Apr 2026
+ 07:38:27 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260405144944.41074-1-lucienzx159@gmail.com>
- <20260405144944.41074-3-lucienzx159@gmail.com>
-In-Reply-To: <20260405144944.41074-3-lucienzx159@gmail.com>
+ <20260405144944.41074-4-lucienzx159@gmail.com>
+In-Reply-To: <20260405144944.41074-4-lucienzx159@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 11 Apr 2026 08:37:50 -0600
-X-Gm-Features: AQROBzAitiRYbMGWBx2opdM4qIXv9EDevaixEWNFC4eONrkGyWtVMRXa8apIbgs
-Message-ID: <CAFLszTiL-j=i0AFyoDc8yKFAxoKzdZms6tqiT_ePohYGaGM-RA@mail.gmail.com>
-Subject: Re: [PATCH v3 2/4] net: phy: air_en8811h: use standard
- rx-polarity/tx-polarity properties
+Date: Sat, 11 Apr 2026 08:38:15 -0600
+X-Gm-Features: AQROBzBNZ3cqyDAYb-9gFor1Xqlja2pWwNp3HqCQEm0vZADHp4AvFiSSalokJro
+Message-ID: <CAFLszTjF8L0+xcuZBRpRfXL1oLRZQCRJtQ_VPnnjq+Pn=P_-Vw@mail.gmail.com>
+Subject: Re: [PATCH v3 3/4] test: dm: add PHY common props unit tests
 To: lucienzx159@gmail.com
 Cc: trini@konsulko.com, jerome.forissier@arm.com, sumit.garg@kernel.org, 
  marek.vasut+renesas@mailbox.org, vladimir.oltean@nxp.com, ericwouds@gmail.com, 
@@ -118,38 +117,39 @@ X-Virus-Status: Clean
 Hi Lucien,
 
 On 2026-04-05T14:49:40, Lucien.Jheng <lucienzx159@gmail.com> wrote:
-> net: phy: air_en8811h: use standard rx-polarity/tx-polarity properties
+> test: dm: add PHY common props unit tests
 >
-> Replace the proprietary airoha,pnswap-rx / airoha,pnswap-tx boolean
-> device tree properties with the standard rx-polarity and tx-polarity
-> properties defined in phy-common-props.yaml.
+> Add obj-$(CONFIG_PHY_COMMON_PROPS) build entry in test/dm/Makefile and
+> sandbox DM unit tests for the PHY common properties library, covering
+> rx/tx polarity lookups for all relevant cases:
 >
-> Backward compatibility is maintained by reading the legacy boolean
-> properties first and passing them as the default_pol argument to
-> phy_get_rx/tx_polarity(). If the standard properties are absent the
-> legacy values are used transparently, so existing device trees remain
-> functional without modification.
+>   - missing property (defaults to PHY_POL_NORMAL)
+>   - single value without names array (applies to all modes)
+>   - count mismatch between values and names arrays (-EINVAL)
+>   - name found by exact match
+>   - name not found with no "default" fallback (-EINVAL)
+>   - name not found with a "default" entry (uses fallback value)
+>   - unsupported polarity value (-EOPNOTSUPP)
 >
-> Link: https://git.kernel.org/linus/66d8a334b57e64e43810623b3d88f0ce9745270b
+> Ported from Linux KUnit test:
+>   linux/drivers/phy/phy-common-props-test.c
+>
 > Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
 >
-> drivers/net/phy/airoha/Kconfig      |  1 +
->  drivers/net/phy/airoha/air_en8811.c | 58 ++++++++++++++++++++++++++++---------
->  2 files changed, 45 insertions(+), 14 deletions(-)
+> test/dm/Makefile           |   1 +
+>  test/dm/phy_common_props.c | 319 +++++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 320 insertions(+)
 
-> diff --git a/drivers/net/phy/airoha/air_en8811.c b/drivers/net/phy/airoha/air_en8811.c
-> @@ -1046,6 +1047,47 @@ static int air_leds_init(...)
-> +     ret = phy_get_rx_polarity(node,
-> +                               phy_interface_strings[phydev->interface],
+> diff --git a/test/dm/phy_common_props.c b/test/dm/phy_common_props.c
+> @@ -0,0 +1,319 @@
+> +static int dm_test_phy_common_props_rx_missing(struct unit_test_state *uts)
+> +{
+> +     ofnode node = ofnode_path("/phy-common-props-missing");
 
-Should you use phy_string_for_interface() here instead of directly indexing?
-
-> diff --git a/drivers/net/phy/airoha/air_en8811.c b/drivers/net/phy/airoha/air_en8811.c
-> @@ -1046,6 +1047,47 @@ static int air_leds_init(...)
-> +     ret = phy_get_tx_polarity(node,
-> +                               phy_interface_strings[phydev->interface],
-
-Same here.
+This patch references DT nodes (e.g. /phy-common-props-missing) which
+are added in patch 4/4. This breaks bisectability. Please can you
+either squash patches 3 and 4 together, or swap their order so the DT
+nodes are added first?
 
 Regards,
 Simon
