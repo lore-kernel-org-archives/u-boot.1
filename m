@@ -4,97 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 668C6F3ED4A
-	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 00:59:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 186E9F3ED67
+	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 01:03:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9EB7F83B99;
-	Sun, 12 Apr 2026 02:59:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
+	by phobos.denx.de (Postfix) with ESMTP id 5AFF8840D8;
+	Sun, 12 Apr 2026 03:03:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0x0f.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="fjrIjp9K";
+	dkim=pass (1024-bit key; unprotected) header.d=0x0f.com header.i=@0x0f.com header.b="lnPg4SCW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18A4E83B99; Sun, 12 Apr 2026 02:59:31 +0200 (CEST)
-Received: from mail-dl1-x1236.google.com (mail-dl1-x1236.google.com
- [IPv6:2607:f8b0:4864:20::1236])
+ id 99F7384119; Sun, 12 Apr 2026 03:03:21 +0200 (CEST)
+Received: from mail-dl1-x1230.google.com (mail-dl1-x1230.google.com
+ [IPv6:2607:f8b0:4864:20::1230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97C10839D9
- for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 02:59:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A04DB83B99
+ for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 03:03:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=thingy.jp
+ dmarc=none (p=none dis=none) header.from=0x0f.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-dl1-x1236.google.com with SMTP id
- a92af1059eb24-12c45281a06so561836c88.1
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 17:59:27 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775955566; cv=none;
+Received: by mail-dl1-x1230.google.com with SMTP id
+ a92af1059eb24-1271257ae53so10715912c88.1
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 18:03:18 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775955797; cv=none;
  d=google.com; s=arc-20240605;
- b=FAjSNjetB0lpafKhNEuxZPompZB7vLwp7hpFG9Z9CNC9VgdKCGme8Edgi2vDf7qRKK
- 8dpI2y91eWGQn+FQFesA2cnl60Zsni91ajG9kTKEl5mZ76OCD4CGmnN03Xi3j99Dzsb7
- fHK2kbrMxY/+ErY34iykUJiyRnXjByny0bTzlMZh+ZTb2oG3x8E+zqYo5jLqIEKU2a4J
- 70FP58HFK0zrbO4hkNgI7jtA3LdZrTl9BQUEo0zWz9CvlqN1XjAo81zIHoYS7ME3LGas
- i/njdoCCk13maLvGjpBZQKhkkol4Fxq/xXOI1isQf9D2G2PsOUABOLL59lLaZRq8VnOY
- 69Jw==
+ b=b9kjFk52zsvwsLB5Wn95xozJusHe1776RqxUjucEDZkxfI+TD5GNjDWDfyf/l5/nP7
+ LmINPmESlGFDQMbE0v0f+hhM/csvUZ9krBZPcKB7GjU45lGVis9Yzc24ecSd9tOmhFhb
+ Qz9U9zTfIesDC1XjbqofHcToElrEqKtKI6r0rcPk8lCoTIQMJVg2eEt7K8DMZ/CLLFLZ
+ b7OFNY1U/2m6QxMCh/MECslB658swH+ztSOu8+Vv7CYqcMdGeRvkYZoL7EmTgJFvqXNf
+ KNYWIobZnrrLsfS+PcClZQIJOzNktjzH6yrTLwmH7ka8EP77Y7u05cAbQE1mloPJLGVG
+ n7Og==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=9B/awkBf76NYQ3wZfgenyzP5dYSGtgNbKORGBL7qQDY=;
- fh=ZUGUgN1x0n8D4+gg/oXM2I8GAYqDnensOouY5qV2UWA=;
- b=VPGS2eBHxDVq9U3DrSqqOjVGPdOq5hLh8Op7DHQdUbq5GMzP1eB930Ga30BOmvNspE
- YAe8ZNHg7+WcmMOC1c+YrgxDsFO1tVMUAgr7S7oHQaCJy4RbvMg9Cp1XPto+DZpmZmgN
- F9r5h2OJNqV3b3Jd4PMsN89coofJA6X39mWo7Wo57ZIcKTHByN0QozxVY7Yf/4/XaQJE
- qemViE+ihIkLcfKrJZWzhWc2SftiNRftdtySosR7Iayb6sJk+gmKxDr08z0UxyT5n6fM
- dwpLMUM/J/oEgvjNvbksodN7qhiPdqURVXdFTNghsfeG5alTDjVb3KdG8nOmgixJ2von
- AN7Q==; darn=lists.denx.de
+ bh=pmF4IZ7ic50+s7xzF9RYEl31EVWqjW8pGMTSm8FFmVU=;
+ fh=eZ6IlrSom3HSAjlBd+7yT11s6lqFz4g2SScpur249K0=;
+ b=dNXWCAMX5Mv9IRD/U0eKfyT60bfOgFAkIt013YjLMyM/FQHhBOsDuiftwTfK1t19uD
+ ELNqqJtHT3R3ekr2MkpLM1SPB1tCoPbWo838+nh3dFBA8uiumJ+fEeMFb6gn0LoAljho
+ RaDTFAwK4oZ8bhC9xVLT2XOnHipMgOddmZAKz4vay4dAPBmu3R8jOMzf+HJtpZ8YGtHI
+ xsAjws5BIX15XVXM/RUq9dzC/soBIlVbDFI3SQYEdGbbWbquyq2oDvSYwvLNWe879gY2
+ pPR/aftq5DlVUBMKzrlcvNCXQzoeoyB8XN6nJ2a2W1Ep4X07WrHc1Y7vCu/mzGShlkOb
+ MCkA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thingy.jp; s=google; t=1775955566; x=1776560366; darn=lists.denx.de;
+ d=0x0f.com; s=google; t=1775955797; x=1776560597; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9B/awkBf76NYQ3wZfgenyzP5dYSGtgNbKORGBL7qQDY=;
- b=fjrIjp9KH/wuhu32UhNBZsx3Vdu0a5GpUOmLyNFsdUapH0sjciX2lACm9VnZ4FXU7B
- y3juk+LybWeu3oQ8Px9qM9JWPQb2jrOfXrxhwjF1C3yYAuglN6zit/qxgoepP05/Xu66
- 4eBjsqtpVcS1iedgWmsphVOgOG6o64H9f5UJI=
+ bh=pmF4IZ7ic50+s7xzF9RYEl31EVWqjW8pGMTSm8FFmVU=;
+ b=lnPg4SCW8MnrasPCL7qwR9Jq82olmnshuF0PCZbwjNW55qNSyz5sB1Nh8BqsaBARNC
+ qo02lCc8O9B9TEi2qkUGqJQGsM21etO7VR+jfVbLwu+uDNlRGt7s5CWl3W9pzcPWd8xx
+ hciuHY7c9d+f851WtPxrIjlA1ERY70nYe89gw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775955566; x=1776560366;
+ d=1e100.net; s=20251104; t=1775955797; x=1776560597;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9B/awkBf76NYQ3wZfgenyzP5dYSGtgNbKORGBL7qQDY=;
- b=OsXFT7wMaEn9ti96AWq2qq3A2cl9rDE0lRtXg8iFXjpvGRjHbm0PPKT+0zx3FmMfRs
- Fv5CzB4K5uQkduca6UeLNCfA+KO8rSnAgZNNMe55q2mJAZsI7f0ChThGmkBs6GhThuSH
- 04zyBbsiaZJBrMGPGG59C/UbEGRRu5b6fUIi3Mm7vFrdl8PotlvA3LwUPERzVQgd6wvK
- N/lsgyX5bhLIu1OmM1BbH41hHMK3yuy720hh4xvWxrUMLpyGAToRYqWihqUKe0sbHEd0
- uSO2P035z4F1NMtu6JDlfNi1ESAZrzd3AuCxS1kKU7STz3gHCNc75MYZ05f4MwRUebFC
- C79g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUlh7h3ldGe2inPOU4+JIccjHdhU1TeeTkeQ9GFMwbj3Lr0lVVKuighhdABAgx3iduKwaLw1/A=@lists.denx.de
-X-Gm-Message-State: AOJu0YwLUwDeMT8hXatdt2XO+00hHY/I/xESEnPbRH/kMo/HhbeXcxF9
- AKJj8oQDj9LOWCZMtIOa07Q4wpjc9Ms7j6hlDtMCWxasEHKraHeb8tM8TsUHn/i1MAil15USGJZ
- gQwOnhbZgpoqGv8ixv5tLrNt2Zgo60Nk1uCsibynVbg==
-X-Gm-Gg: AeBDievb+iN6dYljnvutl7Wa98NLkgB46MsBfyQw7h6WzrK53rz9LUStGxMtbOeA4fO
- aR9bjHN0nPDxoi9b2EoUu6STNIwRpql8XHFee/nGpBoovGY9LUIqTnZJdvrXSCFOVSCQaoY0qdD
- IaGbdVy2gy2L6D7y3xk/R71fuJqwxbuu19xIbSPaFFBJQaFIac70ebgl8ZaQ/1MEIsiZlsVS+d3
- TF9Ck8PtzURPzpNhdhcB+daUmD4FneDE+VlaYZruME1guWiz+qe/tp9giC+FgjOjl8UtxS4HcS4
- vtRrQo+fvu1z/cU=
-X-Received: by 2002:a05:7022:48e:b0:128:df3d:cd97 with SMTP id
- a92af1059eb24-12c34f07477mr4736775c88.35.1775955565679; Sat, 11 Apr 2026
- 17:59:25 -0700 (PDT)
+ bh=pmF4IZ7ic50+s7xzF9RYEl31EVWqjW8pGMTSm8FFmVU=;
+ b=VEn56aT9upttdA7Tla3lx0r0T28neWcn0aO40PngDgm5x7OQnus6yaarKABWKGwef3
+ kOy9cbDzd3T9kZnIvZXPAWq1OiMH/dKGZksRHfEx/z4DDhfYWgaxw7khOAWXXqXKV3rJ
+ 7qNO7O1M4L3KF43KX+rGS68Og/scaRy7/HNDfl7eqyCY6TPtN09yUjP7DwOq38XVwref
+ CS8o+c05iCkogm+dFwYxgvLCdCNfrehcH7k4sRnJZkbpnfpnwPFPXynMmJ897nA7ds2I
+ IAVHqnwPtBDfivNq0NBRPwG680Ppdv7ZK3D/fnAeSftC5KNNVRUPTtaLfc0r2grRCbpC
+ agxg==
+X-Gm-Message-State: AOJu0Yw/cSxYrrW4l+/JVpjXlCpUXuD3Z0WuByuFLBg/NHUbxmfE+sqz
+ Yq9dI0X7SVSeHLytR7zbCEsT0+uR/xh457wDHpOHBoH7vEK3lDeBBXva0l+L618F/Ebjvkw8t3G
+ 3ZexAwDKUeuAdl696N1c36Z8RPBknycso6ak60tOY/7pmBRuKi9hI
+X-Gm-Gg: AeBDievR+obG8oecjDDWjif4lKU7dgnsZ8d0xP+1UA3P3aWVNib6vfieBLwttNfohAq
+ QIcK2jud4vVEPNdBK4JulnNxbGAuAZ8VEZ+3BA0Oygdmcz0qVvTo0FER7sLl9OYsN7RgFCaPhsE
+ lqMaXzBLJMDE0dwiOKnSuP2DZxsK5mCzWf6CVq+3eQghBb3uRDP468XA1Ld46L3MnxEBfpNDxky
+ r3jhhHfgm8lHI8MWyxj4eyrfSJjCqSeuXmPH3wKaYtIY64vkmmUO6t0cH83+psaNURm46WmOj2w
+ Octv
+X-Received: by 2002:a05:7022:327:b0:12a:6c4b:9cf0 with SMTP id
+ a92af1059eb24-12c34e68d9cmr4875442c88.3.1775955797019; Sat, 11 Apr 2026
+ 18:03:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260408220928.3328551-1-daniel@thingy.jp>
- <20260408220928.3328551-3-daniel@thingy.jp>
- <f9270d65-c5cd-442c-82aa-b6e6ce96fd9f@kernel-space.org>
-In-Reply-To: <f9270d65-c5cd-442c-82aa-b6e6ce96fd9f@kernel-space.org>
-From: Daniel Palmer <daniel@thingy.jp>
-Date: Sun, 12 Apr 2026 09:59:13 +0900
-X-Gm-Features: AQROBzCT7MsLN13zN-xnXDk7dZNzn7QVWJMsxvJ6Ym73UVn6ijG1P5-Bebe19d8
-Message-ID: <CAFr9PXmywknpi_ULyYAxcy3yn3kh6wfizejQMtAwgwxe1=hzXQ@mail.gmail.com>
-Subject: Re: [PATCH v3 2/5] m68k: Fix writew(), writel(), readw(), readl()
- endianness for classic m68k
-To: Angelo Dureghello <angelo@kernel-space.org>
-Cc: visitorckw@gmail.com, bmeng.cn@gmail.com, u-boot@lists.denx.de
+References: <20260309023234.640209-1-daniel@0x0f.com>
+In-Reply-To: <20260309023234.640209-1-daniel@0x0f.com>
+From: Daniel Palmer <daniel@0x0f.com>
+Date: Sun, 12 Apr 2026 10:03:05 +0900
+X-Gm-Features: AQROBzBYlDvziBOzr1miyoNTwyTVPbM6hvQJ2yknaCsP5zfxN-e-Sr7a4cLXz-M
+Message-ID: <CAFr9PXn0EGkTT02b5BSxeV7dxTwOuEq=wMdO+bVGezJjq1L_ow@mail.gmail.com>
+Subject: Re: [PATCH] serial: goldfish: Add DEBUG_UART support
+To: visitorckw@gmail.com
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Angelo Dureghello <angelo@kernel-space.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -112,19 +108,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Angelo,
+Hi all,
 
-On Sun, 12 Apr 2026 at 06:07, Angelo Dureghello <angelo@kernel-space.org> wrote:
+On Mon, 9 Mar 2026 at 11:33, Daniel Palmer <daniel@0x0f.com> wrote:
+>
+> Add debug support for the goldfish tty so it can be used for
+> early debugging. This will be really useful when adding support
+> for relocation etc.
+>
+> Signed-off-by: Daniel Palmer <daniel@0x0f.com>
+> ---
 
-> Would M680x0 non-qemu work still with this change ?
-> Maybe an #if defined (CONFIG_VIRTIO) && defined(CONFIG_M680x0)
-> would be better ?
+I think this has been reviewed and out of other comments for long
+enough now? If possible can someone merge it?
 
-I think we need this change even for non-virtio. The bug just showed
-up because of virtio.
-I think this would have shown up if/when PCI support is added. I have
-PCI on my Amiga working in Linux so that's not totally impossible. :)
-
-Cheers,
+Thanks,
 
 Daniel
