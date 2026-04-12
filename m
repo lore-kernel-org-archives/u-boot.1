@@ -4,57 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B92D4F3ED55
-	for <u-boot@archiver.kernel.org>; Sat, 11 Apr 2026 21:15:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 668C6F3ED4A
+	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 00:59:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3708384118;
-	Sat, 11 Apr 2026 23:15:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
+	by phobos.denx.de (Postfix) with ESMTP id 9EB7F83B99;
+	Sun, 12 Apr 2026 02:59:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="uJz89qdx";
+	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="fjrIjp9K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 252B68416F; Sat, 11 Apr 2026 23:15:29 +0200 (CEST)
-Received: from mail.kernel-space.org (unknown
- [IPv6:2a03:4000:b:d08:14a9:1bff:fedc:75ad])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 18A4E83B99; Sun, 12 Apr 2026 02:59:31 +0200 (CEST)
+Received: from mail-dl1-x1236.google.com (mail-dl1-x1236.google.com
+ [IPv6:2607:f8b0:4864:20::1236])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8201839D9
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 23:15:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=kernel-space.org
+ by phobos.denx.de (Postfix) with ESMTPS id 97C10839D9
+ for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 02:59:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=angelo@kernel-space.org
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
- s=s1; t=1775942125;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=67XsO5r24XK9oUFTiItaspFUAVhKegGSAoG/Hj6yjHE=;
- b=uJz89qdxsD4f//IGIntje/jKhq0Pl0NSmzExA4W8kxARRXKVROiAsUzYsIGu5j0Bcqzswc
- FrKZbKQmi1qdJv3QvACejL5j2SXgVK94dLhi8YclKoCmBwARu0rmRu5X4/ppi5uX6rphJr
- NBAftT+Xs1rgDqVcQ1dnDCECP1tUukI=
-Received: from [IPV6:2a07:7e81:7daa:0:62cf:84ff:feee:627] (<unknown>
- [2a07:7e81:7daa:0:62cf:84ff:feee:627])
- by oreshnik (OpenSMTPD) with ESMTPSA id 940a4b77
- (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
- Sat, 11 Apr 2026 21:15:25 +0000 (UTC)
-Message-ID: <460879a4-5025-4a48-bbfa-7bc7915b267d@kernel-space.org>
-Date: Sat, 11 Apr 2026 23:15:25 +0200
+ dmarc=none (p=none dis=none) header.from=thingy.jp
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
+Received: by mail-dl1-x1236.google.com with SMTP id
+ a92af1059eb24-12c45281a06so561836c88.1
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 17:59:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775955566; cv=none;
+ d=google.com; s=arc-20240605;
+ b=FAjSNjetB0lpafKhNEuxZPompZB7vLwp7hpFG9Z9CNC9VgdKCGme8Edgi2vDf7qRKK
+ 8dpI2y91eWGQn+FQFesA2cnl60Zsni91ajG9kTKEl5mZ76OCD4CGmnN03Xi3j99Dzsb7
+ fHK2kbrMxY/+ErY34iykUJiyRnXjByny0bTzlMZh+ZTb2oG3x8E+zqYo5jLqIEKU2a4J
+ 70FP58HFK0zrbO4hkNgI7jtA3LdZrTl9BQUEo0zWz9CvlqN1XjAo81zIHoYS7ME3LGas
+ i/njdoCCk13maLvGjpBZQKhkkol4Fxq/xXOI1isQf9D2G2PsOUABOLL59lLaZRq8VnOY
+ 69Jw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=9B/awkBf76NYQ3wZfgenyzP5dYSGtgNbKORGBL7qQDY=;
+ fh=ZUGUgN1x0n8D4+gg/oXM2I8GAYqDnensOouY5qV2UWA=;
+ b=VPGS2eBHxDVq9U3DrSqqOjVGPdOq5hLh8Op7DHQdUbq5GMzP1eB930Ga30BOmvNspE
+ YAe8ZNHg7+WcmMOC1c+YrgxDsFO1tVMUAgr7S7oHQaCJy4RbvMg9Cp1XPto+DZpmZmgN
+ F9r5h2OJNqV3b3Jd4PMsN89coofJA6X39mWo7Wo57ZIcKTHByN0QozxVY7Yf/4/XaQJE
+ qemViE+ihIkLcfKrJZWzhWc2SftiNRftdtySosR7Iayb6sJk+gmKxDr08z0UxyT5n6fM
+ dwpLMUM/J/oEgvjNvbksodN7qhiPdqURVXdFTNghsfeG5alTDjVb3KdG8nOmgixJ2von
+ AN7Q==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=thingy.jp; s=google; t=1775955566; x=1776560366; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=9B/awkBf76NYQ3wZfgenyzP5dYSGtgNbKORGBL7qQDY=;
+ b=fjrIjp9KH/wuhu32UhNBZsx3Vdu0a5GpUOmLyNFsdUapH0sjciX2lACm9VnZ4FXU7B
+ y3juk+LybWeu3oQ8Px9qM9JWPQb2jrOfXrxhwjF1C3yYAuglN6zit/qxgoepP05/Xu66
+ 4eBjsqtpVcS1iedgWmsphVOgOG6o64H9f5UJI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775955566; x=1776560366;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9B/awkBf76NYQ3wZfgenyzP5dYSGtgNbKORGBL7qQDY=;
+ b=OsXFT7wMaEn9ti96AWq2qq3A2cl9rDE0lRtXg8iFXjpvGRjHbm0PPKT+0zx3FmMfRs
+ Fv5CzB4K5uQkduca6UeLNCfA+KO8rSnAgZNNMe55q2mJAZsI7f0ChThGmkBs6GhThuSH
+ 04zyBbsiaZJBrMGPGG59C/UbEGRRu5b6fUIi3Mm7vFrdl8PotlvA3LwUPERzVQgd6wvK
+ N/lsgyX5bhLIu1OmM1BbH41hHMK3yuy720hh4xvWxrUMLpyGAToRYqWihqUKe0sbHEd0
+ uSO2P035z4F1NMtu6JDlfNi1ESAZrzd3AuCxS1kKU7STz3gHCNc75MYZ05f4MwRUebFC
+ C79g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUlh7h3ldGe2inPOU4+JIccjHdhU1TeeTkeQ9GFMwbj3Lr0lVVKuighhdABAgx3iduKwaLw1/A=@lists.denx.de
+X-Gm-Message-State: AOJu0YwLUwDeMT8hXatdt2XO+00hHY/I/xESEnPbRH/kMo/HhbeXcxF9
+ AKJj8oQDj9LOWCZMtIOa07Q4wpjc9Ms7j6hlDtMCWxasEHKraHeb8tM8TsUHn/i1MAil15USGJZ
+ gQwOnhbZgpoqGv8ixv5tLrNt2Zgo60Nk1uCsibynVbg==
+X-Gm-Gg: AeBDievb+iN6dYljnvutl7Wa98NLkgB46MsBfyQw7h6WzrK53rz9LUStGxMtbOeA4fO
+ aR9bjHN0nPDxoi9b2EoUu6STNIwRpql8XHFee/nGpBoovGY9LUIqTnZJdvrXSCFOVSCQaoY0qdD
+ IaGbdVy2gy2L6D7y3xk/R71fuJqwxbuu19xIbSPaFFBJQaFIac70ebgl8ZaQ/1MEIsiZlsVS+d3
+ TF9Ck8PtzURPzpNhdhcB+daUmD4FneDE+VlaYZruME1guWiz+qe/tp9giC+FgjOjl8UtxS4HcS4
+ vtRrQo+fvu1z/cU=
+X-Received: by 2002:a05:7022:48e:b0:128:df3d:cd97 with SMTP id
+ a92af1059eb24-12c34f07477mr4736775c88.35.1775955565679; Sat, 11 Apr 2026
+ 17:59:25 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/5] virtio: mmio: Allow instantiation via platform data
-To: Daniel Palmer <daniel@thingy.jp>, visitorckw@gmail.com, bmeng.cn@gmail.com
-Cc: u-boot@lists.denx.de
 References: <20260408220928.3328551-1-daniel@thingy.jp>
- <20260408220928.3328551-4-daniel@thingy.jp>
-Content-Language: en-US, it
-From: Angelo Dureghello <angelo@kernel-space.org>
-In-Reply-To: <20260408220928.3328551-4-daniel@thingy.jp>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ <20260408220928.3328551-3-daniel@thingy.jp>
+ <f9270d65-c5cd-442c-82aa-b6e6ce96fd9f@kernel-space.org>
+In-Reply-To: <f9270d65-c5cd-442c-82aa-b6e6ce96fd9f@kernel-space.org>
+From: Daniel Palmer <daniel@thingy.jp>
+Date: Sun, 12 Apr 2026 09:59:13 +0900
+X-Gm-Features: AQROBzCT7MsLN13zN-xnXDk7dZNzn7QVWJMsxvJ6Ym73UVn6ijG1P5-Bebe19d8
+Message-ID: <CAFr9PXmywknpi_ULyYAxcy3yn3kh6wfizejQMtAwgwxe1=hzXQ@mail.gmail.com>
+Subject: Re: [PATCH v3 2/5] m68k: Fix writew(), writel(), readw(), readl()
+ endianness for classic m68k
+To: Angelo Dureghello <angelo@kernel-space.org>
+Cc: visitorckw@gmail.com, bmeng.cn@gmail.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,107 +112,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A question here,
+Hi Angelo,
 
-this driver would still work for other devicetree cases ?
+On Sun, 12 Apr 2026 at 06:07, Angelo Dureghello <angelo@kernel-space.org> wrote:
 
-Also, there are some coding style changes that should be in a separate
-patch.
+> Would M680x0 non-qemu work still with this change ?
+> Maybe an #if defined (CONFIG_VIRTIO) && defined(CONFIG_M680x0)
+> would be better ?
 
- 
-On 4/9/26 00:09, Daniel Palmer wrote:
-> The m68k QEMU virt machine doesn't use devicetree, yet, so
-> allow it to create virtio-mmio instances via platform data.
-> 
-> Signed-off-by: Daniel Palmer <daniel@thingy.jp>
-> ---
->  drivers/virtio/virtio_mmio.c | 27 ++++++++++++++++++---------
->  include/virtio_mmio.h        | 12 ++++++++++++
->  2 files changed, 30 insertions(+), 9 deletions(-)
->  create mode 100644 include/virtio_mmio.h
-> 
-> diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
-> index 1cd737aca249..28b46ab66238 100644
-> --- a/drivers/virtio/virtio_mmio.c
-> +++ b/drivers/virtio/virtio_mmio.c
-> @@ -12,6 +12,7 @@
->  #include <virtio_types.h>
->  #include <virtio.h>
->  #include <virtio_ring.h>
-> +#include <virtio_mmio.h>
->  #include <linux/bug.h>
->  #include <linux/compat.h>
->  #include <linux/err.h>
-> @@ -335,21 +336,28 @@ static int virtio_mmio_notify(struct udevice *udev, struct virtqueue *vq)
->  
->  static int virtio_mmio_of_to_plat(struct udevice *udev)
->  {
-> -	struct virtio_mmio_priv *priv = dev_get_priv(udev);
-> +	struct virtio_mmio_plat *plat = dev_get_plat(udev);
-> +	fdt_addr_t addr;
-> +
-> +	addr = dev_read_addr(udev);
->  
-> -	priv->base = (void __iomem *)(ulong)dev_read_addr(udev);
-> -	if (priv->base == (void __iomem *)FDT_ADDR_T_NONE)
-> +	if (addr == FDT_ADDR_T_NONE)
->  		return -EINVAL;
->  
-> +	plat->base = addr;
-> +
->  	return 0;
->  }
->  
->  static int virtio_mmio_probe(struct udevice *udev)
->  {
-> +	struct virtio_mmio_plat *plat = dev_get_plat(udev);
->  	struct virtio_mmio_priv *priv = dev_get_priv(udev);
->  	struct virtio_dev_priv *uc_priv = dev_get_uclass_priv(udev);
->  	u32 magic;
->  
-> +	priv->base = (void __iomem *)plat->base;
-> +
->  	/* Check magic value */
->  	magic = readl(priv->base + VIRTIO_MMIO_MAGIC_VALUE);
->  	if (magic != ('v' | 'i' << 8 | 'r' << 16 | 't' << 24)) {
-> @@ -405,11 +413,12 @@ static const struct udevice_id virtio_mmio_ids[] = {
->  };
->  
->  U_BOOT_DRIVER(virtio_mmio) = {
-> -	.name	= "virtio-mmio",
-> -	.id	= UCLASS_VIRTIO,
-> -	.of_match = virtio_mmio_ids,
-> -	.ops	= &virtio_mmio_ops,
-> -	.probe	= virtio_mmio_probe,
-> +	.name       = "virtio-mmio",
-> +	.id         = UCLASS_VIRTIO,
-> +	.of_match   = virtio_mmio_ids,
-> +	.ops        = &virtio_mmio_ops,
-> +	.probe      = virtio_mmio_probe,
->  	.of_to_plat = virtio_mmio_of_to_plat,
-> -	.priv_auto	= sizeof(struct virtio_mmio_priv),
-> +	.priv_auto  = sizeof(struct virtio_mmio_priv),
-> +	.plat_auto  = sizeof(struct virtio_mmio_plat),
->  };
-> diff --git a/include/virtio_mmio.h b/include/virtio_mmio.h
-> new file mode 100644
-> index 000000000000..8c072826db55
-> --- /dev/null
-> +++ b/include/virtio_mmio.h
-> @@ -0,0 +1,12 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +
-> +#ifndef __VIRTIO_MMIO_H__
-> +#define __VIRTIO_MMIO_H__
-> +
-> +#include <linux/types.h>
-> +
-> +struct virtio_mmio_plat {
-> +	phys_addr_t base;
-> +};
-> +
-> +#endif /* __VIRTIO_MMIO_H__ */
+I think we need this change even for non-virtio. The bug just showed
+up because of virtio.
+I think this would have shown up if/when PCI support is added. I have
+PCI on my Amiga working in Linux so that's not totally impossible. :)
 
-Regards,
-angelo
+Cheers,
 
+Daniel
