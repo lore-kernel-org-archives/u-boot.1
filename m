@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 073E1E937E3
-	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 11:22:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C26FE937E3
+	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 11:24:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8957C839D5;
-	Sun, 12 Apr 2026 13:22:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1F5B4839D5;
+	Sun, 12 Apr 2026 13:24:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GN9LRA3p";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XHV8P9CC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5900583DC9; Sun, 12 Apr 2026 13:22:24 +0200 (CEST)
-Received: from mail-oa1-x43.google.com (mail-oa1-x43.google.com
- [IPv6:2001:4860:4864:20::43])
+ id E967E840D8; Sun, 12 Apr 2026 13:24:03 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D98B18341A
- for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 13:22:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 53E438341A
+ for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 13:24:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x43.google.com with SMTP id
- 586e51a60fabf-40f1a1f77a6so2333843fac.2
- for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 04:22:21 -0700 (PDT)
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-4138136f02eso2249951fac.2
+ for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 04:24:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775992939; x=1776597739; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=bHlsgf3XvUT/3FwiR/V9/5qtSqMlTiQOgdPR3vheRsM=;
- b=GN9LRA3pV6TOLcMxeTAh6GcQTkg89CgnC+nS9UynSVyLLlOxiFJfaiHfDpex5UPubd
- Isp4vfzsXZcouiTrTTkI+Mjl67NoCnlteDVSwMSss82f4kvRCM379omnnQdZ9tR+qhXr
- 2LhMIkq00hbjIQT5UYRMfMJa4YGgNZx0+oS6w=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775992939; x=1776597739;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1775993039; x=1776597839; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bHlsgf3XvUT/3FwiR/V9/5qtSqMlTiQOgdPR3vheRsM=;
- b=sO+Re8bNNqG9M65Rb8EOioJyjhJ/BEW0cnd67Dg/ZdA3Vl75n/321WzX5SzxWpEofh
- NPpVdN/kblPVaPsgHZ8BTalk+kXX7B+RjuAMV177BRyoZ6zFdmhcHsC8VikVhCVmlP76
- k8UASE4OPC+r/fuuH/doe40yd/1qV0kS9t8tnBjWJCcmntU8i2uuwJJmi61Dk8Dbtyh1
- r0NZh4YlUwBe7fMQangiW4psGuEaY4nMsFnUmRDJ1p3Nbic/BnvRv4vcdxwZOfA4BKD3
- TPIWMrfrptfRWJgOq8zPNIQVi3aCu6GBXAnfIwrEg34Hup76oG74Fm+79anKydFXXKqf
- fJmw==
-X-Gm-Message-State: AOJu0YwlTh1AqjxuEcP82LEDFRMmCh+SlPv52/QJ1XhIkJJcI5jTQKpK
- ecAZ0ReJ4lTTqsPbAMmUH0yzDvfTDIgAwYkwkkNxdLowkvfhJcG3jaKjfcWMBJdZg2i894qbQVI
- jFF3Vuwqf
-X-Gm-Gg: AeBDiesNvS3XtEiUaoWvkEpijCzB1EVlpI5UHxwBP5/rQc5aKnbwzdng5g6n9SM/im4
- OdVI79+y28qv9xu+ylwlYsTzJerdaLdI5x9r14jkz2u02uUNExNp/q2MeyUKHlscRgBsemhuHoq
- d2dzxcUNVFT6YBxWvGcps6rXdrmQdKSs7Il3xQQxYtB+lwQpcienCj16XbTgIiN5FcjR0lI0uwY
- +Vw0CnEvK7xCh9SlZsMCfX7se82Cl6vZANiv3p7Ny2H2L6TihOa2lW6FSKjacpIwmHqv2YCnvZZ
- Mk0pfeX8xSBLJzQXlBekqDAL7PZ9H1HZ9YE6bnQJcro7WWUhP6cBnIBYRq+Wb2bVHcViTxMAXw3
- hOuA77RnTDGyYcpBsE5rnoJNVYkMU7Zy5L1dhFIyJ1FzzYW2QcDG6q4cIg7z8UgSyNXdGDJqYCS
- fU7R4hjWbi0WwDaX20cg==
-X-Received: by 2002:a05:6871:430b:b0:417:2b13:f2cd with SMTP id
- 586e51a60fabf-423e0e16ed8mr5432358fac.10.1775992939378; 
- Sun, 12 Apr 2026 04:22:19 -0700 (PDT)
+ bh=vJU8VpiUrK7UsUpBNsC+ecw18CCcPk4W41lFeryMrJQ=;
+ b=XHV8P9CCo40UpNi7YxEjAEBXx9x6dpGCOUpsjHQhz7M2DQs4UGxdRCY00Aqsl37SCg
+ I01y0+A717WXhCA1oNqPXIk2jdzq2Mc8YhyX/SDeRk3x7nzmhw0hM3AJy1DWM4caslWh
+ giKsyAcRTrUHdDiYkO345bQGyFM6m7lYehLb4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775993039; x=1776597839;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=vJU8VpiUrK7UsUpBNsC+ecw18CCcPk4W41lFeryMrJQ=;
+ b=HEe/LBOcXXfpKgfNzvrQe6IuA7Cf5UVG4A/UQFkxU0afqtwMnGHSTFQ7OsPTh57/8W
+ Ts4ihaOHvaGyx+aGQvvH1Z/eWPtyYfykobLVBl/CWj54gtggbynFdAUxMLl/J8Guhhls
+ pbWixeF280u+/ym0DwE9opV+4X99sXEoVFrlrXlNLtiCAo+1jGKvV2JWb4USgp/+qGDm
+ /7YSLrf5Eh1SvOAiveTZBOBZQnEpq4Q9VSwsWdCKxoWQt25/aAR/B8gx05cc526yNj4X
+ S7P0xGeF1WV+9jujmklRLVq03JA96Q/RcFY9MUcNxp0mY4aN0a0U17eotIMpDSFrrKCy
+ 4iBw==
+X-Gm-Message-State: AOJu0YzRdqFxrRomJNkbcDlSX4Uy63RQJKeKwWivx0W5uPqp5Q3jUqGH
+ Y+bKSmlAqv4eHvVgitM/0ecuyg9Nn8sN/UqvwHFQ1mGI44OIQJw2yGxg//zHGZQySz2dve0vW2I
+ CWDfgIA==
+X-Gm-Gg: AeBDietrA4SFj85H0M+3ctuhprDdtwF2+Iy3eGJ7T2uMCKIl7O6ht4Qdrhx9uDOaqko
+ l8/kNNf8sa5/BtQAPAzpX2c4yUwYpS1xPBYIxrKHTnc8vhAVTA+nY7DdPEqyDqK+JuPUujhLgdH
+ gtH1fE4uZPITW7m2TMUucCcuwFVWdow5wehPZiPG/9vibGgqZBF3uKjAqC/HyThH204tLgNlJL0
+ SXSICt2K/wUEWOYap1xqxX7b3fdeCRt6fuv9swi/r96ltDvvgWXGE6iglooiQX1h75ADHmVFhw4
+ xdS0zOnm7jEVhZBxh2bow5MrbT8rTdNqOZqDSIftGYPudPSSTqvRe159QO3IFZo67/TK052P8m6
+ 0x5DpOWXXo4PkIDP9tKXJAAQBgIIzJGD6pIaEI8v6DpquVo5wn6xg/87J75mjzhvoDN/U5HwB74
+ 3cotg/c7bvRsoJPJ9AaQ==
+X-Received: by 2002:a05:6870:a787:b0:409:a4d3:a30e with SMTP id
+ 586e51a60fabf-423e0db9f67mr5366971fac.2.1775993039430; 
+ Sun, 12 Apr 2026 04:23:59 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-423dd395606sm6622071fac.1.2026.04.12.04.22.16
+ 586e51a60fabf-423dd395606sm6622071fac.1.2026.04.12.04.23.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Apr 2026 04:22:17 -0700 (PDT)
+ Sun, 12 Apr 2026 04:23:57 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>
-Subject: [PATCH v2 00/12] test: Add support for passing arguments to C unit
- tests
-Date: Sun, 12 Apr 2026 05:19:37 -0600
-Message-ID: <20260412111958.943933-1-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 01/12] test: Add ut_asserteq_regex() for regex pattern
+ matching
+Date: Sun, 12 Apr 2026 05:19:38 -0600
+Message-ID: <20260412111958.943933-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260412111958.943933-1-sjg@chromium.org>
+References: <20260412111958.943933-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,103 +95,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some tests have two parts: a Python test which handles setup, such as
-creating filesystem images or configuring the environment, and a C
-test which does the bulk of the work including assertions. At present
-there is no way to pass information between these two parts, so
-things like paths and device names must be hard-coded in the C test.
+Add a new assertion macro ut_asserteq_regex() that checks if a string
+matches a regular expression pattern using the SLRE library.
 
-This tends to make people write tests in Python, but this is not ideal
-for several reasons:
+This is useful for tests where exact string-matching is difficult, such
+as when output contains line numbers or other variable content.
 
-- Python lacks access to things like return codes and has to scan the
-  console output to figure out what happened
-- Python lacks access to internal state, so it cannot directly check
-  the result of an operation
-- Python is ~100x slower due to console interaction, etc.
-- C tests can be stepped through in gdb, which is much harder with
-  Python driving the console
-- C tests can exercise internal APIs directly (e.g. fs_read(),
-  fs_size()) rather than going through the command layer, so they
-  test more precisely what they intend to
+Use a helper function ut_check_regex() to avoid including slre.h in the
+header.
 
-This series adds infrastructure for passing typed, runtime arguments
-from Python to C unit tests, using a name=value format on the ut
-command line.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-The series includes:
+(no changes since v1)
 
-- Regex assertion helpers for matching variable output in tests
+ include/test/ut.h | 36 +++++++++++++++++++++++++++++-------
+ test/ut.c         | 30 ++++++++++++++++++++++++++++++
+ 2 files changed, 59 insertions(+), 7 deletions(-)
 
-- A private buffer in unit_test_state for test-local temporary data
-
-- Argument-type definitions (string, integer, boolean) with optional
-  flags and default values
-
-- A new UNIT_TEST_ARGS() macro for declaring tests with typed
-  arguments
-
-- Argument parsing in the test framework, accepting name=value format
-
-- Updates to the ut command to pass arguments through to tests
-
-- Type-checked accessor macros ut_str(), ut_int(), and ut_bool()
-  with bounds validation
-
-- Tests for the argument feature covering type checking, optional
-  arguments, and argument-parsing failures
-
-- Documentation for the test-parameter feature
-
-- C-based filesystem tests as an example of the hybrid approach,
-  with Python wrappers that pass filesystem type, image path, and
-  expected MD5 values to the C tests
-
-Note: This series depends on:
-
-   https://patchwork.ozlabs.org/project/uboot/list/?series=496972
-
-Changes in v2:
-- Correct double signoff
-
-Simon Glass (12):
-  test: Add ut_asserteq_regex() for regex pattern matching
-  test: Add a helper to check the next line against a regex
-  test: Add a private buffer for tests
-  test: Add argument-type definitions
-  test: Add a macro to declare unit tests with arguments
-  test: Add support for passing arguments to C tests
-  test: Enhance the ut command to pass test arguments
-  test: Add type-checked argument accessor functions
-  test: Add tests for unit-test arguments
-  test: Add documentation for the test framework
-  test: fs: add C-based filesystem tests
-  test: fs: Update Python tests to call C implementations
-
- arch/sandbox/cpu/spl.c              |   3 +-
- doc/develop/tests_writing.rst       | 169 ++++++++++++
- doc/usage/cmd/ut.rst                |  18 +-
- include/test/fs.h                   |  39 +++
- include/test/test.h                 | 107 ++++++++
- include/test/ut.h                   | 123 ++++++++-
- test/Makefile                       |   1 +
- test/cmd_ut.c                       |  32 ++-
- test/common/Makefile                |   1 +
- test/common/test_args.c             | 176 ++++++++++++
- test/fs/Makefile                    |   3 +
- test/fs/fs_basic.c                  | 407 ++++++++++++++++++++++++++++
- test/py/tests/test_fs/conftest.py   |   4 +-
- test/py/tests/test_fs/test_basic.py | 346 +++++++----------------
- test/test-main.c                    | 170 +++++++++++-
- test/ut.c                           | 117 ++++++++
- 16 files changed, 1437 insertions(+), 279 deletions(-)
- create mode 100644 include/test/fs.h
- create mode 100644 test/common/test_args.c
- create mode 100644 test/fs/Makefile
- create mode 100644 test/fs/fs_basic.c
-
+diff --git a/include/test/ut.h b/include/test/ut.h
+index 6510c35997f..cda15f3a7a9 100644
+--- a/include/test/ut.h
++++ b/include/test/ut.h
+@@ -13,6 +13,9 @@
+ #include <linux/err.h>
+ #include <test/test.h>
+ 
++/* Size of error buffer for ut_check_regex() */
++#define UT_REGEX_ERR_SIZE	256
++
+ struct unit_test_state;
+ 
+ /**
+@@ -41,6 +44,16 @@ void ut_failf(struct unit_test_state *uts, const char *fname, int line,
+ 	      const char *func, const char *cond, const char *fmt, ...)
+ 			__attribute__ ((format (__printf__, 6, 7)));
+ 
++/**
++ * ut_check_regex() - Check if a string matches a regex pattern
++ *
++ * @pattern: Regular expression pattern
++ * @str: String to match against
++ * @err: Buffer to hold error message on failure (UT_REGEX_ERR_SIZE bytes)
++ * Return: 0 if match, -EINVAL if pattern is invalid, -ENOENT if no match
++ */
++int ut_check_regex(const char *pattern, const char *str, char *err);
++
+ /**
+  * ut_check_console_line() - Check the next console line against expectations
+  *
+@@ -264,13 +277,22 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
+ 	__ret;								\
+ })
+ 
+-/**
+- * ut_asserteq_mem() - Assert that two memory areas are equal
+- *
+- * @expr1:	expected value
+- * @expr2:	actual value
+- * @len:	length of the memory areas
+- */
++/* Assert that a string matches a regex pattern */
++#define ut_asserteq_regex(pattern, str) ({				\
++	const char *_pattern = (pattern), *_str = (str);		\
++	char _err[UT_REGEX_ERR_SIZE];					\
++	int __ret = 0;							\
++									\
++	__ret = ut_check_regex(_pattern, _str, _err);			\
++	if (__ret) {							\
++		ut_failf(uts, __FILE__, __LINE__, __func__,		\
++			 #pattern " matches " #str, "%s", _err);	\
++		return CMD_RET_FAILURE;					\
++	}								\
++	__ret;								\
++})
++
++/* Assert that two memory areas are equal */
+ #define ut_asserteq_mem(expr1, expr2, len) ({				\
+ 	const u8 *_val1 = (u8 *)(expr1), *_val2 = (u8 *)(expr2);	\
+ 	const uint __len = len;						\
+diff --git a/test/ut.c b/test/ut.c
+index a16fdfb3a93..b4f2a8bf40f 100644
+--- a/test/ut.c
++++ b/test/ut.c
+@@ -6,7 +6,10 @@
+  */
+ 
+ #include <console.h>
++#include <errno.h>
+ #include <malloc.h>
++#include <slre.h>
++#include <vsprintf.h>
+ #ifdef CONFIG_SANDBOX
+ #include <asm/state.h>
+ #endif
+@@ -38,6 +41,33 @@ void ut_failf(struct unit_test_state *uts, const char *fname, int line,
+ 	uts->cur.fail_count++;
+ }
+ 
++int ut_check_regex(const char *pattern, const char *str, char *err)
++{
++	struct slre slre;
++
++	if (!pattern || !str) {
++		snprintf(err, UT_REGEX_ERR_SIZE,
++			 "NULL value: pattern=%s, str=%s",
++			 pattern ? pattern : "(null)",
++			 str ? str : "(null)");
++		return -EINVAL;
++	}
++
++	if (!slre_compile(&slre, pattern)) {
++		snprintf(err, UT_REGEX_ERR_SIZE,
++			 "Invalid regex '%s': %s", pattern, slre.err_str);
++		return -EINVAL;
++	}
++
++	if (!slre_match(&slre, str, strlen(str), NULL)) {
++		snprintf(err, UT_REGEX_ERR_SIZE,
++			 "No match: pattern '%s', str '%s'", pattern, str);
++		return -ENOENT;
++	}
++
++	return 0;
++}
++
+ ulong ut_check_free(void)
+ {
+ 	struct mallinfo info = mallinfo();
 -- 
 2.43.0
 
-base-commit: e2fa3e570f83ab0f9ce667ddaec9dc738bcf05b9
-branch: testa-us2
