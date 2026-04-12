@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9082F3ED67
-	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 01:36:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24EAEF3ED4A
+	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 01:37:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFEC78422D;
-	Sun, 12 Apr 2026 03:35:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B287484227;
+	Sun, 12 Apr 2026 03:36:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZTtA2iky";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E8W2JmG2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A3D883B99; Sun, 12 Apr 2026 03:35:56 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 332C483B99; Sun, 12 Apr 2026 03:36:00 +0200 (CEST)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 355BA83B99
- for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 03:35:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E69E483BC4
+ for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 03:35:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7dbd8c6fc84so2014502a34.3
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 18:35:53 -0700 (PDT)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7dbce74e537so2545323a34.1
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 18:35:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775957750; x=1776562550; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775957753; x=1776562553; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=22g70G337FxkN0JlhatwuAKycba5Rd8oL33Xc5vDmxo=;
- b=ZTtA2iky/A+LFhPxHtEo9LlP2adsLsS/tp0nYTPe8UK9RIwW9DSAxm2MiyEq2QAOSD
- 5j83Ul3BnVlOGaDhB9CIlwpnjzuBNw1TPyvAGnzE5/VnEq9jQlJnlyjNd5yjidWZXmdV
- bWCG07Vky4yyTrdPpPprQPtTxi+U86FJtfDLY=
+ bh=8Ou6HYCSwmaSic9D+TLSD0IxCwcBjd/tY4/O1UsxR8k=;
+ b=E8W2JmG2m1uBoqWJSVUXpQoYp8MkvOpPv6SthxAYZMrUDXq8lJdRkze/a53tAOwF35
+ 7VGyvAi9772xl2N9/e//MD8kOXScllQuZzyXAtqVIrSFKwYKtrWP5AayvD7QD/nAshWR
+ CHu6oE/wZbMNYIz0uuIRcdk+pGiOku3O3fD6Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775957750; x=1776562550;
+ d=1e100.net; s=20251104; t=1775957753; x=1776562553;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=22g70G337FxkN0JlhatwuAKycba5Rd8oL33Xc5vDmxo=;
- b=alK8G7vdIlp2YZoZlCeT5v3NS7wlpD/7lhzNYaazI9vYKJTRleQZgxlp48ADWFYmJK
- yNEzMHfzWXs8E1I8LFTvAVdJXMt9Hqq9qmT+KHxccq/6cj1Owz2XG6/F+dMrg5cEKlp9
- q9eivEXLeDDxeMYPfp7aTgZrjUEHOFiWTol4xONT21lNnehGgnYCO6IOXe6vaCQkUDkV
- kfWrEsyUtSfg7bO9EWQW9IkqUd+FAbUf62c0maOJRkoutdjikR6teorh0PdleaqGilrs
- QR1e/3wYJyTcU+RJcmSVP7vns5EYVZqoYyJwpbSdIVP8xAQI0WWu/yQN+D1fgHAfAofD
- foWw==
-X-Gm-Message-State: AOJu0YxY9oaWmIw3mNJnnKT0fU1xa51Vi905ToEzCnK3tpDJYadPndiA
- XmvcasPngV2kA+MNwD9M/0s0QdFE5DhR2oVZPBZN0YtgCbxzKXU/YQnNKytjmjTJ68e6w/Jkcbx
- JNTf35w==
-X-Gm-Gg: AeBDieudomV/IufsPYzuMqWYuAkWrJ4aPwUnXwgCLZG+3komNYQFJLbabgbygRz9Re9
- kiZh0SSiqjs0/3NsxqByO1TNq8JB3suOsU7atGk1ABvzwQZ+Q10h8o4QyEq4/Za72Ttap/wtaOy
- 5An42OOf1/OxvpqYdGBpPsoKHWfXqu/vJM4nYB1QctPttvEe/p9z/DMFdWzAGHH0rg9+IK3cqD7
- 8j4Xba95qMphx1oR78eyVxp+LbSRdd9TZcQ45D7f9UlKnxPdcBCRcvgUunwOZvbFgqnc8OJ8YrU
- Vjj/eRyA/EO/EQdyKjXtJCYmWm0fMZKovRvs6w4hMsdpOL6BYsSlCJGgpFOdbZZFSH7Qby5yaBc
- ihCtutznrH2rt+XvhEqmr+5X79b+lN0YB/VfRPqR72WjNau5eCM+JMLgfXqR72WcOpaFd9VCMhb
- LxaUziSja/A+uyvk6hXw==
-X-Received: by 2002:a05:6830:83b0:b0:7d7:f031:37c7 with SMTP id
- 46e09a7af769-7dc27c643ddmr5472517a34.3.1775957750042; 
- Sat, 11 Apr 2026 18:35:50 -0700 (PDT)
+ bh=8Ou6HYCSwmaSic9D+TLSD0IxCwcBjd/tY4/O1UsxR8k=;
+ b=lc9JSxh875pfX0yIs+2uvY0ekfXvBiyWdhlD+/r2kSvOeJdwO6ytOvXqBupXO6RmQf
+ Mb8Y++3oXBprPeXUpbG8MjaWRYPNvK0OtZAzLoRrjkZVDjb1WNvuWyYigqjviYCC7rP+
+ n6OBBjA2xuqg1yUU0LZR3ob6PiqarhNbA64bC4FwQ+Yyu4GS4uOxELONkEX+n/bQoSgL
+ kC8OqQkcAALaTZcrvpbT8oz106F3lcUdaiKlU2LwAqv0lXrgqbU+RpxWU6GJg1KsHGfg
+ Soo0OAt3rp4HyY/OG0do6OY/XoPrzeRdCWRv1236I1CiNRh7TaR0OdBf4BEwbGLcM7gg
+ DSqw==
+X-Gm-Message-State: AOJu0Yy8WR4N+O7CHYDRe4P/PnpbtbUASZjw37euPNZEE0/gVvqAamZm
+ rniJ4nBQAP57LWa3bvbsUaauZRMeYL83h9yjNUW2S5G2Sx/OZJxssMfOLGmfRRfH4FV/gdoOEpD
+ yXgpjtA==
+X-Gm-Gg: AeBDies2ajTxnqsSCZwPb68GB7coJfrzMslptlGSPtl2gnKgK2a/aWZaHzl0zfTcnBV
+ /K0G5GmnkbIGlBzSwhvZ8oHjifo4MSNU//TsPuyfky8QFUw41QtT8opS7in4N8ka2cL8KmvV49g
+ RLCXzIyi4aHFlJGCMi1wLAx0SyZWNNrJOFyqUyI6a+OkN+RwqrYV4lbszcpnPH8Hx5MozziOqFu
+ aAkUKEeT5fhN7o8VYvCPx5dyd3SNmCWqykskKfvjUMKGmVmU6bAphh+jBIPfWXjWJZiv7Xo+SB5
+ +KaA0H/lAtXwQnA4wuv6vYH5xNgve3TV9T05apHUuzSWwIXlugDKLLIrxazNpw3b/5Odof5jBYN
+ VQn3YAox/AwJRiSK8xodrbgSWBe8a5WJ9BChhQreIRNpENGOk7w1yd4nfb2xKeEf0xECl0dOkYO
+ RQgRYRsMfQIbPOSStCTA==
+X-Received: by 2002:a05:6830:3745:b0:7dc:67:8c9b with SMTP id
+ 46e09a7af769-7dc27d93540mr6014539a34.4.1775957753530; 
+ Sat, 11 Apr 2026 18:35:53 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7dc2d1aca3asm4242826a34.6.2026.04.11.18.35.44
+ 46e09a7af769-7dc2d1aca3asm4242826a34.6.2026.04.11.18.35.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 11 Apr 2026 18:35:44 -0700 (PDT)
+ Sat, 11 Apr 2026 18:35:51 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
  Simon Glass <simon.glass@canonical.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH 11/12] test: fs: add C-based filesystem tests
-Date: Sat, 11 Apr 2026 19:34:39 -0600
-Message-ID: <20260412013451.2929001-12-sjg@chromium.org>
+ Marek Vasut <marex@denx.de>
+Subject: [PATCH 12/12] test: fs: Update Python tests to call C implementations
+Date: Sat, 11 Apr 2026 19:34:40 -0600
+Message-ID: <20260412013451.2929001-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260412013451.2929001-1-sjg@chromium.org>
 References: <20260412013451.2929001-1-sjg@chromium.org>
@@ -97,530 +97,441 @@ X-Virus-Status: Clean
 
 From: Simon Glass <simon.glass@canonical.com>
 
-Add C implementations of filesystem tests that can be called via
-the 'ut fs' command. These tests use UTF_MANUAL flag since they require
-external setup, i.e. creation of filesystem images.
-
-This covers the existing TestFsBasic tests.
-
-The tests use typed arguments (fs_type, fs_image, md5 values) passed
-via the command line.
-
-Add a few helpers to make the code easier to read.
+Update test_basic.py to call the new C-based filesystem tests via the
+'ut' command. This allows tests to run more directly, calling the actual
+FS layer, without having to go through the command interface and
+worrying about which filesystem command to use.
 
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/test/fs.h  |  39 +++++
- test/Makefile      |   1 +
- test/cmd_ut.c      |   2 +
- test/fs/Makefile   |   3 +
- test/fs/fs_basic.c | 407 +++++++++++++++++++++++++++++++++++++++++++++
- 5 files changed, 452 insertions(+)
- create mode 100644 include/test/fs.h
- create mode 100644 test/fs/Makefile
- create mode 100644 test/fs/fs_basic.c
+ test/py/tests/test_fs/conftest.py   |   4 +-
+ test/py/tests/test_fs/test_basic.py | 346 ++++++++--------------------
+ 2 files changed, 98 insertions(+), 252 deletions(-)
 
-diff --git a/include/test/fs.h b/include/test/fs.h
-new file mode 100644
-index 00000000000..7fdb8d70451
---- /dev/null
-+++ b/include/test/fs.h
-@@ -0,0 +1,39 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright 2026 Canonical Ltd
-+ */
-+
-+#ifndef __TEST_FS_H
-+#define __TEST_FS_H
-+
-+#include <test/test.h>
-+#include <test/ut.h>
-+
-+/**
-+ * FS_TEST() - Define a new filesystem test
-+ *
-+ * @name:	Name of test function
-+ * @flags:	Flags for the test (see enum ut_flags)
-+ */
-+#define FS_TEST(_name, _flags)	UNIT_TEST(_name, UTF_DM | (_flags), fs)
-+
-+/**
-+ * FS_TEST_ARGS() - Define a filesystem test with inline arguments
-+ *
-+ * Like FS_TEST() but for tests that take arguments.
-+ * The test can access arguments via uts->args[].
-+ * The NULL terminator is added automatically.
-+ *
-+ * Example:
-+ *   FS_TEST_ARGS(my_test, UTF_MANUAL,
-+ *       { "fs_type", UT_ARG_STR },
-+ *       { "fs_image", UT_ARG_STR });
-+ *
-+ * @name:	Name of test function
-+ * @flags:	Flags for the test (see enum ut_flags)
-+ * @...:	Argument definitions (struct ut_arg_def initializers)
-+ */
-+#define FS_TEST_ARGS(_name, _flags, ...) \
-+	UNIT_TEST_ARGS(_name, UTF_DM | (_flags), fs, __VA_ARGS__)
-+
-+#endif /* __TEST_FS_H */
-diff --git a/test/Makefile b/test/Makefile
-index 5676bd35963..02ded045995 100644
---- a/test/Makefile
-+++ b/test/Makefile
-@@ -22,6 +22,7 @@ obj-y += boot/
- obj-y += common/
- obj-$(CONFIG_UT_ENV) += env/
- obj-$(CONFIG_UT_FDT_OVERLAY) += fdt_overlay/
-+obj-$(CONFIG_SANDBOX) += fs/
- obj-y += log/
- else
- obj-$(CONFIG_SPL_UT_LOAD) += image/
-diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index 9d36bd5dc87..827fcbc9fcb 100644
---- a/test/cmd_ut.c
-+++ b/test/cmd_ut.c
-@@ -60,6 +60,7 @@ SUITE_DECL(exit);
- SUITE_DECL(fdt);
- SUITE_DECL(fdt_overlay);
- SUITE_DECL(font);
-+SUITE_DECL(fs);
- SUITE_DECL(hush);
- SUITE_DECL(lib);
- SUITE_DECL(loadm);
-@@ -87,6 +88,7 @@ static struct suite suites[] = {
- 	SUITE(fdt, "fdt command"),
- 	SUITE(fdt_overlay, "device tree overlays"),
- 	SUITE(font, "font command"),
-+	SUITE(fs, "filesystem tests"),
- 	SUITE(hush, "hush behaviour"),
- 	SUITE(lib, "library functions"),
- 	SUITE(loadm, "loadm command parameters and loading memory blob"),
-diff --git a/test/fs/Makefile b/test/fs/Makefile
-new file mode 100644
-index 00000000000..5899be8e667
---- /dev/null
-+++ b/test/fs/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+
-+obj-y += fs_basic.o
-diff --git a/test/fs/fs_basic.c b/test/fs/fs_basic.c
-new file mode 100644
-index 00000000000..a6f1e056f5b
---- /dev/null
-+++ b/test/fs/fs_basic.c
-@@ -0,0 +1,407 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Basic filesystem tests - C implementation for Python wrapper
-+ *
-+ * These tests are marked UTF_MANUAL and are intended to be called from
-+ * test_basic.py which sets up the filesystem image and expected values.
-+ *
-+ * Copyright 2026 Canonical Ltd
-+ */
-+
-+#include <command.h>
-+#include <dm.h>
-+#include <env.h>
-+#include <fs.h>
-+#include <hexdump.h>
-+#include <image.h>
-+#include <linux/sizes.h>
-+#include <mapmem.h>
-+#include <test/fs.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+#include <u-boot/md5.h>
-+
-+/* Test constants matching fstest_defs.py */
-+#define ADDR	0x01000008
-+
-+/*
-+ * Common argument indices. Each test declares only the arguments it needs,
-+ * so indices 2+ vary per test - see comments in each test.
-+ */
-+#define FS_ARG_TYPE	0	/* fs_type: ext4, fat, exfat, fs_generic */
-+#define FS_ARG_IMAGE	1	/* fs_image: path to filesystem image */
-+
-+/* Common arguments for all filesystem tests (indices 0 and 1) */
-+#define COMMON_ARGS \
-+	{ "fs_type", UT_ARG_STR }, \
-+	{ "fs_image", UT_ARG_STR }
-+
-+/**
-+ * get_fs_type(uts) - Get filesystem type enum from test argument
-+ *
-+ * Reads the fs_type argument and returns the appropriate FS_TYPE_* enum value.
-+ *
-+ * Return: filesystem type enum
-+ */
-+static int get_fs_type(struct unit_test_state *uts)
-+{
-+	const char *fs_type = ut_str(FS_ARG_TYPE);
-+
-+	if (!fs_type)
-+		return FS_TYPE_ANY;
-+
-+	if (!strcmp(fs_type, "ext4"))
-+		return FS_TYPE_EXT;
-+	if (!strcmp(fs_type, "fat"))
-+		return FS_TYPE_FAT;
-+	if (!strcmp(fs_type, "exfat"))
-+		return FS_TYPE_EXFAT;
-+
-+	/* fs_generic uses FS_TYPE_ANY */
-+	return FS_TYPE_ANY;
-+}
-+
-+/* Set up the host filesystem block device */
-+static int set_fs(struct unit_test_state *uts)
-+{
-+	return fs_set_blk_dev("host", "0:0", get_fs_type(uts));
-+}
-+
-+/* Build a path by prepending "/" to the leaf filename, with optional suffix */
-+static const char *getpath(struct unit_test_state *uts, const char *leaf,
-+			   const char *suffix)
-+{
-+	snprintf(uts->priv, sizeof(uts->priv), "/%s%s", leaf, suffix ?: "");
-+
-+	return uts->priv;
-+}
-+
-+/**
-+ * prep_fs() - Prepare filesystem for testing
-+ *
-+ * Binds the fs_image argument as host device 0, sets up the block device,
-+ * and optionally returns a zeroed buffer.
-+ *
-+ * @uts: Unit test state
-+ * @len: Length of buffer to allocate and zero, or 0 for none
-+ * @bufp: Returns pointer to zeroed buffer, or NULL if @len is 0
-+ * Return: 0 on success, negative on error
-+ */
-+static int prep_fs(struct unit_test_state *uts, uint len, void **bufp)
-+{
-+	const char *fs_image = ut_str(FS_ARG_IMAGE);
-+
-+	ut_assertnonnull(fs_image);
-+	ut_assertok(run_commandf("host bind 0 %s", fs_image));
-+	ut_assertok(set_fs(uts));
-+
-+	if (len) {
-+		*bufp = map_sysmem(ADDR, len);
-+		memset(*bufp, '\0', len);
-+	}
-+
-+	return 0;
-+}
-+
-+/**
-+ * fs_write_supported(uts) - Check if write is supported for current fs type
-+ *
-+ * Reads the fs_type argument and checks if write support is enabled
-+ * for that filesystem type.
-+ *
-+ * Return: true if write is supported, false otherwise
-+ */
-+static bool fs_write_supported(struct unit_test_state *uts)
-+{
-+	const char *fs_type = ut_str(FS_ARG_TYPE);
-+
-+	if (!fs_type)
-+		return false;
-+
-+	if (!strcmp(fs_type, "ext4"))
-+		return IS_ENABLED(CONFIG_EXT4_WRITE);
-+	if (!strcmp(fs_type, "fat"))
-+		return IS_ENABLED(CONFIG_CMD_FAT_WRITE);
-+
-+	/* fs_generic and exfat use generic write which is always available */
-+	return true;
-+}
-+
-+/**
-+ * verify_md5() - Calculate MD5 of buffer and verify against expected
-+ *
-+ * Uses arg 3 (md5val) as the expected MD5 hex string.
-+ *
-+ * @uts: Unit test state
-+ * @buf: Buffer to calculate MD5 of
-+ * @len: Length of buffer
-+ *
-+ * Return: 0 if MD5 matches, -EINVAL otherwise
-+ */
-+static int verify_md5(struct unit_test_state *uts, const void *buf, size_t len)
-+{
-+	u8 digest[MD5_SUM_LEN], expected[MD5_SUM_LEN];
-+	const char *expected_hex = ut_str(3);
-+
-+	ut_assertok(hex2bin(expected, expected_hex, MD5_SUM_LEN));
-+
-+	md5_wd(buf, len, digest, CHUNKSZ_MD5);
-+	ut_asserteq_mem(expected, digest, MD5_SUM_LEN);
-+
-+	return 0;
-+}
-+
-+/* Test Case 1 - ls command, listing root directory and invalid directory */
-+static int fs_test_ls_norun(struct unit_test_state *uts)
-+{
-+	const char *small = ut_str(2);
-+	const char *big = ut_str(3);
-+	struct fs_dir_stream *dirs;
-+	struct fs_dirent *dent;
-+	bool found_big = false, found_small = false, found_subdir = false;
-+
-+	ut_assertok(prep_fs(uts, 0, NULL));
-+
-+	/* Test listing root directory */
-+	dirs = fs_opendir("/");
-+	ut_assertnonnull(dirs);
-+
-+	while ((dent = fs_readdir(dirs))) {
-+		if (!strcmp(dent->name, big)) {
-+			found_big = true;
-+			ut_asserteq(FS_DT_REG, dent->type);
-+		} else if (!strcmp(dent->name, small)) {
-+			found_small = true;
-+			ut_asserteq(FS_DT_REG, dent->type);
-+		} else if (!strcmp(dent->name, "SUBDIR")) {
-+			found_subdir = true;
-+			ut_asserteq(FS_DT_DIR, dent->type);
-+		}
-+	}
-+	fs_closedir(dirs);
-+
-+	ut_assert(found_big);
-+	ut_assert(found_small);
-+	ut_assert(found_subdir);
-+
-+	/* Test invalid directory returns error */
-+	ut_assertok(set_fs(uts));
-+	dirs = fs_opendir("/invalid_d");
-+	ut_assertnull(dirs);
-+
-+	/* Test file exists */
-+	ut_assertok(set_fs(uts));
-+	ut_assert(fs_exists(small));
-+
-+	/* Test non-existent file */
-+	ut_assertok(set_fs(uts));
-+	ut_assert(!fs_exists("nonexistent.file"));
-+
-+	return 0;
-+}
-+FS_TEST_ARGS(fs_test_ls_norun, UTF_SCAN_FDT | UTF_CONSOLE | UTF_MANUAL,
-+	     COMMON_ARGS, { "small", UT_ARG_STR }, { "big", UT_ARG_STR });
-+
-+/* Test Case 2 - size command for small file (1MB) */
-+static int fs_test_size_small_norun(struct unit_test_state *uts)
-+{
-+	const char *small = ut_str(2);
-+	loff_t size;
-+
-+	ut_assertok(prep_fs(uts, 0, NULL));
-+	ut_assertok(fs_size(getpath(uts, small, NULL), &size));
-+	ut_asserteq(SZ_1M, size);
-+
-+	/* Test size via path with '..' */
-+	ut_assertok(set_fs(uts));
-+	snprintf(uts->priv, sizeof(uts->priv), "/SUBDIR/../%s", small);
-+	ut_assertok(fs_size(uts->priv, &size));
-+	ut_asserteq(SZ_1M, size);
-+
-+	return 0;
-+}
-+FS_TEST_ARGS(fs_test_size_small_norun, UTF_SCAN_FDT | UTF_MANUAL,
-+	     COMMON_ARGS, { "small", UT_ARG_STR });
-+
-+/* Test Case 3 - size command for large file (2500 MiB) */
-+static int fs_test_size_big_norun(struct unit_test_state *uts)
-+{
-+	const char *big = ut_str(2);
-+	loff_t size;
-+
-+	ut_assertok(prep_fs(uts, 0, NULL));
-+	ut_assertok(fs_size(getpath(uts, big, NULL), &size));
-+	ut_asserteq_64((loff_t)SZ_1M * 2500, size);  /* 2500 MiB = 0x9c400000 */
-+
-+	return 0;
-+}
-+FS_TEST_ARGS(fs_test_size_big_norun, UTF_SCAN_FDT | UTF_MANUAL,
-+	     COMMON_ARGS, { "big", UT_ARG_STR });
-+
-+/* Load a file at a given offset and verify the size and MD5 */
-+static int check_load(struct unit_test_state *uts, const char *fname,
-+		      ulong offset, ulong read_len, ulong expect_len,
-+		      bool check_md5)
-+{
-+	loff_t actual;
-+	void *buf;
-+
-+	ut_assertok(prep_fs(uts, expect_len, &buf));
-+	ut_assertok(fs_read(getpath(uts, fname, NULL), ADDR, offset, read_len,
-+			    &actual));
-+	ut_asserteq(expect_len, actual);
-+	if (check_md5)
-+		ut_assertok(verify_md5(uts, buf, expect_len));
-+
-+	return 0;
-+}
-+
-+/* Test Case 4 - load small file, verify MD5 */
-+static int fs_test_load_small_norun(struct unit_test_state *uts)
-+{
-+	return check_load(uts, ut_str(2), 0, 0, SZ_1M, true);
-+}
-+FS_TEST_ARGS(fs_test_load_small_norun, UTF_SCAN_FDT | UTF_MANUAL,
-+	     COMMON_ARGS, { "small", UT_ARG_STR }, { "md5val", UT_ARG_STR });
-+
-+/* Test Case 5 - load first 1MB of big file */
-+static int fs_test_load_big_first_norun(struct unit_test_state *uts)
-+{
-+	return check_load(uts, ut_str(2), 0, SZ_1M, SZ_1M, true);
-+}
-+FS_TEST_ARGS(fs_test_load_big_first_norun, UTF_SCAN_FDT | UTF_MANUAL,
-+	     COMMON_ARGS, { "big", UT_ARG_STR }, { "md5val", UT_ARG_STR });
-+
-+/* Test Case 6 - load last 1MB of big file (offset 0x9c300000) */
-+static int fs_test_load_big_last_norun(struct unit_test_state *uts)
-+{
-+	return check_load(uts, ut_str(2), 0x9c300000, SZ_1M, SZ_1M, true);
-+}
-+FS_TEST_ARGS(fs_test_load_big_last_norun, UTF_SCAN_FDT | UTF_MANUAL,
-+	     COMMON_ARGS, { "big", UT_ARG_STR }, { "md5val", UT_ARG_STR });
-+
-+/* Test Case 7 - load 1MB from last 1MB chunk of 2GB (offset 0x7ff00000) */
-+static int fs_test_load_big_2g_last_norun(struct unit_test_state *uts)
-+{
-+	return check_load(uts, ut_str(2), 0x7ff00000, SZ_1M, SZ_1M, true);
-+}
-+FS_TEST_ARGS(fs_test_load_big_2g_last_norun, UTF_SCAN_FDT | UTF_MANUAL,
-+	     COMMON_ARGS, { "big", UT_ARG_STR }, { "md5val", UT_ARG_STR });
-+
-+/* Test Case 8 - load first 1MB in 2GB region (offset 0x80000000) */
-+static int fs_test_load_big_2g_first_norun(struct unit_test_state *uts)
-+{
-+	return check_load(uts, ut_str(2), 0x80000000, SZ_1M, SZ_1M, true);
-+}
-+FS_TEST_ARGS(fs_test_load_big_2g_first_norun, UTF_SCAN_FDT | UTF_MANUAL,
-+	     COMMON_ARGS, { "big", UT_ARG_STR }, { "md5val", UT_ARG_STR });
-+
-+/* Test Case 9 - load 1MB crossing 2GB boundary (offset 0x7ff80000) */
-+static int fs_test_load_big_2g_cross_norun(struct unit_test_state *uts)
-+{
-+	return check_load(uts, ut_str(2), 0x7ff80000, SZ_1M, SZ_1M, true);
-+}
-+FS_TEST_ARGS(fs_test_load_big_2g_cross_norun, UTF_SCAN_FDT | UTF_MANUAL,
-+	     COMMON_ARGS, { "big", UT_ARG_STR }, { "md5val", UT_ARG_STR });
-+
-+/* Test Case 10 - load beyond file end (2MB from offset, only 1MB remains) */
-+static int fs_test_load_beyond_norun(struct unit_test_state *uts)
-+{
-+	return check_load(uts, ut_str(2), 0x9c300000, SZ_2M, SZ_1M, false);
-+}
-+FS_TEST_ARGS(fs_test_load_beyond_norun, UTF_SCAN_FDT | UTF_MANUAL,
-+	     COMMON_ARGS, { "big", UT_ARG_STR });
-+
-+/* Test Case 11 - write file */
-+static int fs_test_write_norun(struct unit_test_state *uts)
-+{
-+	const char *small = ut_str(2);
-+	loff_t actread, actwrite;
-+	void *buf;
-+
-+	if (!fs_write_supported(uts))
-+		return -EAGAIN;
-+
-+	ut_assertok(prep_fs(uts, SZ_1M, &buf));
-+
-+	/* Read small file */
-+	ut_assertok(fs_read(getpath(uts, small, NULL), ADDR, 0, 0, &actread));
-+	ut_asserteq(SZ_1M, actread);
-+
-+	/* Write it back with new name */
-+	ut_assertok(set_fs(uts));
-+	ut_assertok(fs_write(getpath(uts, small, ".w"), ADDR, 0, SZ_1M,
-+			     &actwrite));
-+	ut_asserteq(SZ_1M, actwrite);
-+
-+	/* Read back and verify MD5 */
-+	ut_assertok(set_fs(uts));
-+	memset(buf, '\0', SZ_1M);
-+	ut_assertok(fs_read(getpath(uts, small, ".w"), ADDR, 0, 0, &actread));
-+	ut_asserteq(SZ_1M, actread);
-+
-+	ut_assertok(verify_md5(uts, buf, SZ_1M));
-+
-+	return 0;
-+}
-+FS_TEST_ARGS(fs_test_write_norun, UTF_SCAN_FDT | UTF_MANUAL,
-+	     COMMON_ARGS, { "small", UT_ARG_STR }, { "md5val", UT_ARG_STR });
-+
-+/* Test Case 12 - write to "." directory (should fail) */
-+static int fs_test_write_dot_norun(struct unit_test_state *uts)
-+{
-+	loff_t actwrite;
-+
-+	if (!fs_write_supported(uts))
-+		return -EAGAIN;
-+
-+	ut_assertok(prep_fs(uts, 0, NULL));
-+
-+	/* Writing to "." should fail */
-+	ut_assert(fs_write("/.", ADDR, 0, 0x10, &actwrite));
-+
-+	return 0;
-+}
-+FS_TEST_ARGS(fs_test_write_dot_norun, UTF_SCAN_FDT | UTF_MANUAL,
-+	     COMMON_ARGS);
-+
-+/* Test Case 13 - write via "./" path */
-+static int fs_test_write_dotpath_norun(struct unit_test_state *uts)
-+{
-+	const char *small = ut_str(2);
-+	loff_t actread, actwrite;
-+	void *buf;
-+
-+	if (!fs_write_supported(uts))
-+		return -EAGAIN;
-+
-+	ut_assertok(prep_fs(uts, SZ_1M, &buf));
-+
-+	/* Read small file */
-+	ut_assertok(fs_read(getpath(uts, small, NULL), ADDR, 0, 0, &actread));
-+	ut_asserteq(SZ_1M, actread);
-+
-+	/* Write via "./" path */
-+	ut_assertok(set_fs(uts));
-+	snprintf(uts->priv, sizeof(uts->priv), "/./%s2", small);
-+	ut_assertok(fs_write(uts->priv, ADDR, 0, SZ_1M, &actwrite));
-+	ut_asserteq(SZ_1M, actwrite);
-+
-+	/* Read back via "./" path and verify */
-+	ut_assertok(set_fs(uts));
-+	memset(buf, '\0', SZ_1M);
-+	ut_assertok(fs_read(uts->priv, ADDR, 0, 0, &actread));
-+	ut_asserteq(SZ_1M, actread);
-+	ut_assertok(verify_md5(uts, buf, SZ_1M));
-+
-+	/* Also verify via normal path */
-+	ut_assertok(set_fs(uts));
-+	memset(buf, '\0', SZ_1M);
-+	ut_assertok(fs_read(getpath(uts, small, "2"), ADDR, 0, 0, &actread));
-+	ut_asserteq(SZ_1M, actread);
-+	ut_assertok(verify_md5(uts, buf, SZ_1M));
-+
-+	return 0;
-+}
-+FS_TEST_ARGS(fs_test_write_dotpath_norun, UTF_SCAN_FDT | UTF_MANUAL,
-+	     COMMON_ARGS, { "small", UT_ARG_STR }, { "md5val", UT_ARG_STR });
+diff --git a/test/py/tests/test_fs/conftest.py b/test/py/tests/test_fs/conftest.py
+index 0205048e73a..5fc796097e3 100644
+--- a/test/py/tests/test_fs/conftest.py
++++ b/test/py/tests/test_fs/conftest.py
+@@ -198,8 +198,6 @@ def fs_obj_basic(request, u_boot_config):
+         volume file name and  a list of MD5 hashes.
+     """
+     fs_type = request.param
+-    fs_cmd_prefix = fstype_to_prefix(fs_type)
+-    fs_cmd_write = 'save' if fs_type == 'fs_generic' or fs_type == 'exfat' else 'write'
+     fs_img = ''
+ 
+     fs_ubtype = fstype_to_ubname(fs_type)
+@@ -289,7 +287,7 @@ def fs_obj_basic(request, u_boot_config):
+         pytest.skip('Setup failed for filesystem: ' + fs_type + '. {}'.format(err))
+         return
+     else:
+-        yield [fs_ubtype, fs_cmd_prefix, fs_cmd_write, fs_img, md5val]
++        yield [fs_ubtype, fs_img, md5val]
+     finally:
+         call('rm -rf %s' % scratch_dir, shell=True)
+         call('rm -f %s' % fs_img, shell=True)
+diff --git a/test/py/tests/test_fs/test_basic.py b/test/py/tests/test_fs/test_basic.py
+index 88b163ce305..7f805d04dd5 100644
+--- a/test/py/tests/test_fs/test_basic.py
++++ b/test/py/tests/test_fs/test_basic.py
+@@ -6,298 +6,146 @@
+ 
+ """
+ This test verifies basic read/write operation on file system.
++
++Tests are implemented in C (test/fs/fs_basic.c) and called from here.
++Python handles filesystem image setup and environment variable configuration.
+ """
+ 
+ import pytest
+-import re
+-from fstest_defs import *
++from fstest_defs import SMALL_FILE, BIG_FILE
+ from fstest_helpers import assert_fs_integrity
+ 
+-@pytest.mark.boardspec('sandbox')
+-@pytest.mark.slow
+-class TestFsBasic(object):
+-    def test_fs1(self, ubman, fs_obj_basic):
+-        """
+-        Test Case 1 - ls command, listing a root directory and invalid directory
+-        """
+-        fs_type,fs_cmd_prefix,fs_cmd_write,fs_img,md5val = fs_obj_basic
+-        with ubman.log.section('Test Case 1a - ls'):
+-            # Test Case 1 - ls
+-            output = ubman.run_command_list([
+-                'host bind 0 %s' % fs_img,
+-                '%sls host 0:0' % fs_cmd_prefix])
+-            assert(re.search('2621440000 *%s' % BIG_FILE, ''.join(output)))
+-            assert(re.search('1048576 *%s' % SMALL_FILE, ''.join(output)))
+ 
+-        with ubman.log.section('Test Case 1b - ls (invalid dir)'):
+-            # In addition, test with a nonexistent directory to see if we crash.
+-            output = ubman.run_command(
+-                '%sls host 0:0 invalid_d' % fs_cmd_prefix)
+-            assert('' == output)
++def run_c_test(ubman, fs_type, fs_img, test_name, small=None, big=None,
++               md5val=None):
++    """Run a C unit test with proper setup.
+ 
+-        with ubman.log.section('Test Case 1c - test -e'):
+-            # Test Case 1 - test -e
+-            output = ubman.run_command_list([
+-                'host bind 0 %s' % fs_img,
+-                'test -e host 0:0 1MB.file && echo PASS'])
+-            assert('PASS' in ''.join(output))
++    Args:
++        ubman (ConsoleBase): U-Boot console manager
++        fs_type (str): Filesystem type (ext4, fat, fs_generic, exfat)
++        fs_img (str): Path to filesystem image
++        test_name (str): Name of C test function (without _norun suffix)
++        small (str): Filename of small test file (optional)
++        big (str): Filename of big test file (optional)
++        md5val (str): Expected MD5 value for verification (optional)
+ 
+-        with ubman.log.section('Test Case 1d - test -e (invalid file)'):
+-            # In addition, test with a nonexistent file to see if we crash.
+-            output = ubman.run_command(
+-                'test -e host 0:0 2MB.file || echo PASS')
+-            assert('PASS' in ''.join(output))
++    Returns:
++        bool: True if test passed, False otherwise
++    """
++    # Build the command with arguments
++    cmd = f'ut -f fs {test_name}_norun fs_type={fs_type} fs_image={fs_img}'
++    if small:
++        cmd += f' small={small}'
++    if big:
++        cmd += f' big={big}'
++    if md5val:
++        cmd += f' md5val={md5val}'
+ 
+-    def test_fs2(self, ubman, fs_obj_basic):
+-        """
+-        Test Case 2 - size command for a small file
+-        """
+-        fs_type,fs_cmd_prefix,fs_cmd_write,fs_img,md5val = fs_obj_basic
+-        with ubman.log.section('Test Case 2a - size (small)'):
+-            # 1MB is 0x0010 0000
+-            # Test Case 2a - size of small file
+-            output = ubman.run_command_list([
+-                'host bind 0 %s' % fs_img,
+-                '%ssize host 0:0 /%s' % (fs_cmd_prefix, SMALL_FILE),
+-                'printenv filesize',
+-                'setenv filesize'])
+-            assert('filesize=100000' in ''.join(output))
++    # Run the C test
++    ubman.run_command(cmd)
++
++    # Check result
++    result = ubman.run_command('echo $?')
++    return result.strip() == '0'
++
++
++@pytest.mark.boardspec('sandbox')
++@pytest.mark.slow
++class TestFsBasic:
++    """Test basic filesystem operations via C unit tests."""
++
++    def test_fs1(self, ubman, fs_obj_basic):
++        """Test Case 1 - ls command, listing root and invalid directories"""
++        fs_type, fs_img, _ = fs_obj_basic
++        with ubman.log.section('Test Case 1 - ls'):
++            assert run_c_test(ubman, fs_type, fs_img, 'fs_test_ls',
++                              small=SMALL_FILE, big=BIG_FILE)
+ 
+-        with ubman.log.section('Test Case 2b - size (/../<file>)'):
+-            # Test Case 2b - size of small file via a path using '..'
+-            output = ubman.run_command_list([
+-                '%ssize host 0:0 /SUBDIR/../%s' % (fs_cmd_prefix, SMALL_FILE),
+-                'printenv filesize',
+-                'setenv filesize'])
+-            assert('filesize=100000' in ''.join(output))
++    def test_fs2(self, ubman, fs_obj_basic):
++        """Test Case 2 - size command for a small file"""
++        fs_type, fs_img, _ = fs_obj_basic
++        with ubman.log.section('Test Case 2 - size (small)'):
++            assert run_c_test(ubman, fs_type, fs_img, 'fs_test_size_small',
++                              small=SMALL_FILE)
+ 
+     def test_fs3(self, ubman, fs_obj_basic):
+-        """
+-        Test Case 3 - size command for a large file
+-        """
+-        fs_type,fs_cmd_prefix,fs_cmd_write,fs_img,md5val = fs_obj_basic
++        """Test Case 3 - size command for a large file"""
++        fs_type, fs_img, _ = fs_obj_basic
+         with ubman.log.section('Test Case 3 - size (large)'):
+-            # 2.5GB (1024*1024*2500) is 0x9C40 0000
+-            # Test Case 3 - size of big file
+-            output = ubman.run_command_list([
+-                'host bind 0 %s' % fs_img,
+-                '%ssize host 0:0 /%s' % (fs_cmd_prefix, BIG_FILE),
+-                'printenv filesize',
+-                'setenv filesize'])
+-            assert('filesize=9c400000' in ''.join(output))
++            assert run_c_test(ubman, fs_type, fs_img, 'fs_test_size_big',
++                              big=BIG_FILE)
+ 
+     def test_fs4(self, ubman, fs_obj_basic):
+-        """
+-        Test Case 4 - load a small file, 1MB
+-        """
+-        fs_type,fs_cmd_prefix,fs_cmd_write,fs_img,md5val = fs_obj_basic
++        """Test Case 4 - load a small file, 1MB"""
++        fs_type, fs_img, md5val = fs_obj_basic
+         with ubman.log.section('Test Case 4 - load (small)'):
+-            # Test Case 4a - Read full 1MB of small file
+-            output = ubman.run_command_list([
+-                'host bind 0 %s' % fs_img,
+-                '%sload host 0:0 %x /%s' % (fs_cmd_prefix, ADDR, SMALL_FILE),
+-                'printenv filesize'])
+-            assert('filesize=100000' in ''.join(output))
+-
+-            # Test Case 4b - Read full 1MB of small file
+-            output = ubman.run_command_list([
+-                'md5sum %x $filesize' % ADDR,
+-                'setenv filesize'])
+-            assert(md5val[0] in ''.join(output))
++            assert run_c_test(ubman, fs_type, fs_img, 'fs_test_load_small',
++                              small=SMALL_FILE, md5val=md5val[0])
+ 
+     def test_fs5(self, ubman, fs_obj_basic):
+-        """
+-        Test Case 5 - load, reading first 1MB of 3GB file
+-        """
+-        fs_type,fs_cmd_prefix,fs_cmd_write,fs_img,md5val = fs_obj_basic
++        """Test Case 5 - load, reading first 1MB of 3GB file"""
++        fs_type, fs_img, md5val = fs_obj_basic
+         with ubman.log.section('Test Case 5 - load (first 1MB)'):
+-            # Test Case 5a - First 1MB of big file
+-            output = ubman.run_command_list([
+-                'host bind 0 %s' % fs_img,
+-                '%sload host 0:0 %x /%s %x 0x0' % (fs_cmd_prefix, ADDR, BIG_FILE, LENGTH),
+-                'printenv filesize'])
+-            assert('filesize=100000' in ''.join(output))
+-
+-            # Test Case 5b - First 1MB of big file
+-            output = ubman.run_command_list([
+-                'md5sum %x $filesize' % ADDR,
+-                'setenv filesize'])
+-            assert(md5val[1] in ''.join(output))
++            assert run_c_test(ubman, fs_type, fs_img, 'fs_test_load_big_first',
++                              big=BIG_FILE, md5val=md5val[1])
+ 
+     def test_fs6(self, ubman, fs_obj_basic):
+-        """
+-        Test Case 6 - load, reading last 1MB of 3GB file
+-        """
+-        fs_type,fs_cmd_prefix,fs_cmd_write,fs_img,md5val = fs_obj_basic
++        """Test Case 6 - load, reading last 1MB of 3GB file"""
++        fs_type, fs_img, md5val = fs_obj_basic
+         with ubman.log.section('Test Case 6 - load (last 1MB)'):
+-            # fails for ext as no offset support
+-            # Test Case 6a - Last 1MB of big file
+-            output = ubman.run_command_list([
+-                'host bind 0 %s' % fs_img,
+-                '%sload host 0:0 %x /%s %x 0x9c300000'
+-                    % (fs_cmd_prefix, ADDR, BIG_FILE, LENGTH),
+-                'printenv filesize'])
+-            assert('filesize=100000' in ''.join(output))
+-
+-            # Test Case 6b - Last 1MB of big file
+-            output = ubman.run_command_list([
+-                'md5sum %x $filesize' % ADDR,
+-                'setenv filesize'])
+-            assert(md5val[2] in ''.join(output))
++            assert run_c_test(ubman, fs_type, fs_img, 'fs_test_load_big_last',
++                              big=BIG_FILE, md5val=md5val[2])
+ 
+     def test_fs7(self, ubman, fs_obj_basic):
+-        """
+-        Test Case 7 - load, 1MB from the last 1MB in 2GB
+-        """
+-        fs_type,fs_cmd_prefix,fs_cmd_write,fs_img,md5val = fs_obj_basic
++        """Test Case 7 - load, 1MB from the last 1MB in 2GB"""
++        fs_type, fs_img, md5val = fs_obj_basic
+         with ubman.log.section('Test Case 7 - load (last 1MB in 2GB)'):
+-            # fails for ext as no offset support
+-            # Test Case 7a - One from the last 1MB chunk of 2GB
+-            output = ubman.run_command_list([
+-                'host bind 0 %s' % fs_img,
+-                '%sload host 0:0 %x /%s %x 0x7ff00000'
+-                    % (fs_cmd_prefix, ADDR, BIG_FILE, LENGTH),
+-                'printenv filesize'])
+-            assert('filesize=100000' in ''.join(output))
+-
+-            # Test Case 7b - One from the last 1MB chunk of 2GB
+-            output = ubman.run_command_list([
+-                'md5sum %x $filesize' % ADDR,
+-                'setenv filesize'])
+-            assert(md5val[3] in ''.join(output))
++            assert run_c_test(ubman, fs_type, fs_img,
++                              'fs_test_load_big_2g_last',
++                              big=BIG_FILE, md5val=md5val[3])
+ 
+     def test_fs8(self, ubman, fs_obj_basic):
+-        """
+-        Test Case 8 - load, reading first 1MB in 2GB
+-        """
+-        fs_type,fs_cmd_prefix,fs_cmd_write,fs_img,md5val = fs_obj_basic
++        """Test Case 8 - load, reading first 1MB in 2GB"""
++        fs_type, fs_img, md5val = fs_obj_basic
+         with ubman.log.section('Test Case 8 - load (first 1MB in 2GB)'):
+-            # fails for ext as no offset support
+-            # Test Case 8a - One from the start 1MB chunk from 2GB
+-            output = ubman.run_command_list([
+-                'host bind 0 %s' % fs_img,
+-                '%sload host 0:0 %x /%s %x 0x80000000'
+-                    % (fs_cmd_prefix, ADDR, BIG_FILE, LENGTH),
+-                'printenv filesize'])
+-            assert('filesize=100000' in ''.join(output))
+-
+-            # Test Case 8b - One from the start 1MB chunk from 2GB
+-            output = ubman.run_command_list([
+-                'md5sum %x $filesize' % ADDR,
+-                'setenv filesize'])
+-            assert(md5val[4] in ''.join(output))
++            assert run_c_test(ubman, fs_type, fs_img,
++                              'fs_test_load_big_2g_first',
++                              big=BIG_FILE, md5val=md5val[4])
+ 
+     def test_fs9(self, ubman, fs_obj_basic):
+-        """
+-        Test Case 9 - load, 1MB crossing 2GB boundary
+-        """
+-        fs_type,fs_cmd_prefix,fs_cmd_write,fs_img,md5val = fs_obj_basic
++        """Test Case 9 - load, 1MB crossing 2GB boundary"""
++        fs_type, fs_img, md5val = fs_obj_basic
+         with ubman.log.section('Test Case 9 - load (crossing 2GB boundary)'):
+-            # fails for ext as no offset support
+-            # Test Case 9a - One 1MB chunk crossing the 2GB boundary
+-            output = ubman.run_command_list([
+-                'host bind 0 %s' % fs_img,
+-                '%sload host 0:0 %x /%s %x 0x7ff80000'
+-                    % (fs_cmd_prefix, ADDR, BIG_FILE, LENGTH),
+-                'printenv filesize'])
+-            assert('filesize=100000' in ''.join(output))
+-
+-            # Test Case 9b - One 1MB chunk crossing the 2GB boundary
+-            output = ubman.run_command_list([
+-                'md5sum %x $filesize' % ADDR,
+-                'setenv filesize'])
+-            assert(md5val[5] in ''.join(output))
++            assert run_c_test(ubman, fs_type, fs_img,
++                              'fs_test_load_big_2g_cross',
++                              big=BIG_FILE, md5val=md5val[5])
+ 
+     def test_fs10(self, ubman, fs_obj_basic):
+-        """
+-        Test Case 10 - load, reading beyond file end'):
+-        """
+-        fs_type,fs_cmd_prefix,fs_cmd_write,fs_img,md5val = fs_obj_basic
++        """Test Case 10 - load, reading beyond file end"""
++        fs_type, fs_img, _ = fs_obj_basic
+         with ubman.log.section('Test Case 10 - load (beyond file end)'):
+-            # Generic failure case
+-            # Test Case 10 - 2MB chunk from the last 1MB of big file
+-            output = ubman.run_command_list([
+-                'host bind 0 %s' % fs_img,
+-                '%sload host 0:0 %x /%s 0x00200000 0x9c300000'
+-                    % (fs_cmd_prefix, ADDR, BIG_FILE),
+-                'printenv filesize',
+-                'md5sum %x $filesize' % ADDR,
+-                'setenv filesize'])
+-        assert('filesize=100000' in ''.join(output))
++            assert run_c_test(ubman, fs_type, fs_img, 'fs_test_load_beyond',
++                              big=BIG_FILE)
+ 
+     def test_fs11(self, ubman, fs_obj_basic):
+-        """
+-        Test Case 11 - write'
+-        """
+-        fs_type,fs_cmd_prefix,fs_cmd_write,fs_img,md5val = fs_obj_basic
++        """Test Case 11 - write"""
++        fs_type, fs_img, md5val = fs_obj_basic
+         with ubman.log.section('Test Case 11 - write'):
+-            # Read 1MB from small file
+-            # Write it back to test the writes
+-            # Test Case 11a - Check that the write succeeded
+-            output = ubman.run_command_list([
+-                'host bind 0 %s' % fs_img,
+-                '%sload host 0:0 %x /%s' % (fs_cmd_prefix, ADDR, SMALL_FILE),
+-                '%s%s host 0:0 %x /%s.w $filesize'
+-                    % (fs_cmd_prefix, fs_cmd_write, ADDR, SMALL_FILE)])
+-            assert('1048576 bytes written' in ''.join(output))
+-
+-            # Test Case 11b - Check md5 of written to is same
+-            # as the one read from
+-            output = ubman.run_command_list([
+-                '%sload host 0:0 %x /%s.w' % (fs_cmd_prefix, ADDR, SMALL_FILE),
+-                'md5sum %x $filesize' % ADDR,
+-                'setenv filesize'])
+-            assert(md5val[0] in ''.join(output))
++            assert run_c_test(ubman, fs_type, fs_img, 'fs_test_write',
++                              small=SMALL_FILE, md5val=md5val[0])
+             assert_fs_integrity(fs_type, fs_img)
+ 
+     def test_fs12(self, ubman, fs_obj_basic):
+-        """
+-        Test Case 12 - write to "." directory
+-        """
+-        fs_type,fs_cmd_prefix,fs_cmd_write,fs_img,md5val = fs_obj_basic
++        """Test Case 12 - write to "." directory"""
++        fs_type, fs_img, _ = fs_obj_basic
+         with ubman.log.section('Test Case 12 - write (".")'):
+-            # Next test case checks writing a file whose dirent
+-            # is the first in the block, which is always true for "."
+-            # The write should fail, but the lookup should work
+-            # Test Case 12 - Check directory traversal
+-            output = ubman.run_command_list([
+-                'host bind 0 %s' % fs_img,
+-                '%s%s host 0:0 %x /. 0x10'
+-                    % (fs_cmd_prefix, fs_cmd_write, ADDR)])
+-            assert('Unable to write' in ''.join(output))
++            assert run_c_test(ubman, fs_type, fs_img, 'fs_test_write_dot')
+             assert_fs_integrity(fs_type, fs_img)
+ 
+     def test_fs13(self, ubman, fs_obj_basic):
+-        """
+-        Test Case 13 - write to a file with "/./<filename>"
+-        """
+-        fs_type,fs_cmd_prefix,fs_cmd_write,fs_img,md5val = fs_obj_basic
++        """Test Case 13 - write to a file with '/./<filename>'"""
++        fs_type, fs_img, md5val = fs_obj_basic
+         with ubman.log.section('Test Case 13 - write  ("./<file>")'):
+-            # Read 1MB from small file
+-            # Write it via "same directory", i.e. "." dirent
+-            # Test Case 13a - Check directory traversal
+-            output = ubman.run_command_list([
+-                'host bind 0 %s' % fs_img,
+-                '%sload host 0:0 %x /%s' % (fs_cmd_prefix, ADDR, SMALL_FILE),
+-                '%s%s host 0:0 %x /./%s2 $filesize'
+-                    % (fs_cmd_prefix, fs_cmd_write, ADDR, SMALL_FILE)])
+-            assert('1048576 bytes written' in ''.join(output))
+-
+-            # Test Case 13b - Check md5 of written to is same
+-            # as the one read from
+-            output = ubman.run_command_list([
+-                'mw.b %x 00 100' % ADDR,
+-                '%sload host 0:0 %x /./%s2' % (fs_cmd_prefix, ADDR, SMALL_FILE),
+-                'md5sum %x $filesize' % ADDR,
+-                'setenv filesize'])
+-            assert(md5val[0] in ''.join(output))
+-
+-            # Test Case 13c - Check md5 of written to is same
+-            # as the one read from
+-            output = ubman.run_command_list([
+-                'mw.b %x 00 100' % ADDR,
+-                '%sload host 0:0 %x /%s2' % (fs_cmd_prefix, ADDR, SMALL_FILE),
+-                'md5sum %x $filesize' % ADDR,
+-                'setenv filesize'])
+-            assert(md5val[0] in ''.join(output))
++            assert run_c_test(ubman, fs_type, fs_img, 'fs_test_write_dotpath',
++                              small=SMALL_FILE, md5val=md5val[0])
+             assert_fs_integrity(fs_type, fs_img)
 -- 
 2.43.0
 
