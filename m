@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F232BE937E1
-	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 11:24:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFB50E937E1
+	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 11:24:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C9B7841D7;
-	Sun, 12 Apr 2026 13:24:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DB949841FF;
+	Sun, 12 Apr 2026 13:24:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dXn3lKVS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hpEer5WP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D95BF841E6; Sun, 12 Apr 2026 13:24:10 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id 8317D841D5; Sun, 12 Apr 2026 13:24:14 +0200 (CEST)
+Received: from mail-oi1-x241.google.com (mail-oi1-x241.google.com
+ [IPv6:2607:f8b0:4864:20::241])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9089841CD
- for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 13:24:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C384841D6
+ for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 13:24:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-40f387a688dso2369282fac.0
- for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 04:24:08 -0700 (PDT)
+Received: by mail-oi1-x241.google.com with SMTP id
+ 5614622812f47-464bc03efd8so2010721b6e.2
+ for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 04:24:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775993047; x=1776597847; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775993050; x=1776597850; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KbOQItx370W3yIuamNCAXxkBc00v6bztmsRJlNSZaUY=;
- b=dXn3lKVSobe3oSaPrDwfQ6k6j5TK2rkwtMiVxA/Cd6I4zvyhHvFlVNyf3iSrsC5YRn
- GcOm3pmMEVqh1HA3wHDaQd5nJimBW08Kkb536xZzPIGdeVT2oKzX5aMhrQu17nhf4idZ
- EG/IfviR3el3ZkmyBkdt/T2zmLCSk0CpMo+no=
+ bh=gd5ka50w82XQuShn1IDs16nRmP+r3WISm8LWruzN950=;
+ b=hpEer5WPwEet8tXDuyWBIfrYW/iXfwt1lyNOgK3Z0SzWbsQ/8WHV011TS4+zSfA7Vf
+ FN/7luaA8sIAXGuOCbEAoYNnvaXRS1NCB8Gpl7AV5woXhXSHzfOLnsLHDZRvclVW4y/n
+ tBJ0vsefUFshASPGwShJqNfbyrPZ13vax33C4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775993047; x=1776597847;
+ d=1e100.net; s=20251104; t=1775993050; x=1776597850;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=KbOQItx370W3yIuamNCAXxkBc00v6bztmsRJlNSZaUY=;
- b=jMBU7rPIMT7D3kvydV+80E7McMAjlL7pQpRIjfcXhPDX6FYrCi4EMOfV6b0wQ6Zt9d
- j4w7mn0TXPeSaSjo6yTb0NVCpuCXp1sz/LDCvTj3NbiO0l2uaTlwkvpyH4QrJim2WOzL
- z+m/WDAYWGEATLGhBkfH9vDuk7+LsHB1dq9Lwsg6vE3Ro7wwvG9w1Uv6wMUVD8JMQ2w1
- DkN0Proj4ZUMm3FyGtla+FM2Bya6w9hodIyNeG9WCLVztZgmgp6iX+Hgjn/yJqZj1X4j
- GFEnY0nTqYJB3rFqV+rxAvfI0AHATXKUs/sV6iYxWNAhuZgfm4RboPQ07a4ebV+9VRg9
- Sqng==
-X-Gm-Message-State: AOJu0YwT3zz5rV8gvZaKTJvnD+RZINIee1kIt55AcCum3LSQoto9+6Fd
- Xpm+S3+CmgMB1djRvGOMgill4P65Pqn8Ou/XhQ1dQTQJRPNhqek3v2yOYgYRHr1Tbj12b7/bICn
- dCYC4zg==
-X-Gm-Gg: AeBDiet5brH6lZND8WkH0g2kJvHhmwCM8eq8lWZh8cIn4ewzVEO+WfLzs9Gg3QAxUvA
- zulgjH9BrPhu+UTv10fJWIOq6jvuo0bQYIZxPTI+75+Na+TjkUNP09p1eL6ff34jfSqH0RLByfB
- 9iam5gR6Ssdl1tnR0SGW6n5EMvCgX+NNUBmo8FGcIdF0OeeypIb4zqnimOgyEqeA0cVBqsfdZ47
- /JhgvpQxilnhTIq5BXng+VOt6a1baQP4CPPOJTIz14g3PtbOlVnnZMq0Fmsytgq216zaGlSLttT
- yI1zsS5U/4aBKg0/j5lwAFvnF3HHg3Z83+pUTH2tXAg73CfjpdRNsFWTaoXnUQOV8MMOnNe/NkE
- lWFB1gAABWhFg2XKFtdsWVIVd3AZsgTa4ETgZZdY/F3r9lc9jxSsxkumO7CVP4xWlX7WvqiRlEl
- A2hS/a1cLMnMIzpfhFUw==
-X-Received: by 2002:a05:6870:3043:b0:423:a084:b675 with SMTP id
- 586e51a60fabf-423e10e1dfbmr5127760fac.34.1775993046897; 
- Sun, 12 Apr 2026 04:24:06 -0700 (PDT)
+ bh=gd5ka50w82XQuShn1IDs16nRmP+r3WISm8LWruzN950=;
+ b=SUR2bxsHQUH28EinyrWqxsXFRMARgjj4oA5Ot2VtelR+LChtApiG1pmuGQiY9uxilt
+ qk6EhI1XujJ5s1jXVfJGkyQRmEs86Dfa+RichgfOwvuOexbJo/CDl52e5VidDRxpyJ81
+ O/6LgrPXSKbzxioAzrXh2uC+/jSl2raVVIrcG7TPKS9RxY/QDmUq9GJL/CavLsvp49Ms
+ z+Yvx1ww2qeG0uisXaQ5f52iASsVSjxRgYUZcXJZPdaXsClhJWc1VdjW8GrDYXZnK+OM
+ mXCzUKCv9G9aZMQOP9KMkguOXqwKJzfUFrAu+m8d3DGbaB6UYiS54DeUGzmXWCqNCnwx
+ rGMQ==
+X-Gm-Message-State: AOJu0Yy/rKz6WpU1oTR227W13aFsINwI1tR9FNqWBNMs8T8a7cHjKzIq
+ HRxRC7pJt5LSz0aWo8zhaFFYibzV+e7istADkEdapT7vvg1Q029hI6DN2/AD7a0DDiU4FEPX8SX
+ tEbMq0tM5
+X-Gm-Gg: AeBDieu7Srel46UO92zxFLqsFSDbLiYlfyxOG7izUOwJvXzTDz2cmxxJ6JpK6IEE84U
+ zy2XBQ/6hBbiLZdEFwxUU4xS9B7kuSY88WL5AJf1ePX4eVDCS7CTJCYwj0FFu+ddJ55EHFNsswN
+ BCTcV+bSs8T8B5dHW4PnI5tRpdlbyz75baxlOqhlLDVGi9oMkWV2qQ1lYHNtuXiBdvQRmQGwBG6
+ cPvaGljELPpbsh47LvZzt3hujVhJZL0UvT76xg+UItFQcDbRuG/dYvWvjDUH0JWJSuAA1D0GRM0
+ joih5Vs+bEo0CrrxPI5Q8biGIY9LIw+YMYgwkeGYG89JuO7j+oepti45h89ZsPuO7y8hG47YqvD
+ JpfhhNEoxav4FiAKWT4UsygsbJnqA06Eafy+jlpxBsA9CQxA18lcsCS5kXvFD3tOe6FEkcLF86v
+ OsWI/RH/gQMV/jeMqsuw==
+X-Received: by 2002:a05:6808:c2b8:b0:467:2926:1252 with SMTP id
+ 5614622812f47-4789f9ff601mr4845821b6e.30.1775993050239; 
+ Sun, 12 Apr 2026 04:24:10 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-423dd395606sm6622071fac.1.2026.04.12.04.24.04
+ 586e51a60fabf-423dd395606sm6622071fac.1.2026.04.12.04.24.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Apr 2026 04:24:05 -0700 (PDT)
+ Sun, 12 Apr 2026 04:24:08 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <simon.glass@canonical.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 03/12] test: Add a private buffer for tests
-Date: Sun, 12 Apr 2026 05:19:40 -0600
-Message-ID: <20260412111958.943933-4-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 04/12] test: Add argument-type definitions
+Date: Sun, 12 Apr 2026 05:19:41 -0600
+Message-ID: <20260412111958.943933-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260412111958.943933-1-sjg@chromium.org>
 References: <20260412111958.943933-1-sjg@chromium.org>
@@ -94,49 +94,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Simon Glass <simon.glass@canonical.com>
+Add types for declaring and storing unit test arguments:
+- enum ut_arg_type: INT, BOOL, STR types
+- enum ut_arg_flags: OPTIONAL flag for non-required args
+- struct ut_arg_def: declares expected args with defaults
+- struct ut_arg: holds parsed argument values
 
-Add a priv[] buffer to struct unit_test_state that tests can use for
-their own data. This avoids the need to allocate memory or use global
-variables for test-specific state.
+This prepares for passing key=value arguments to tests via the 'ut'
+command instead of needing to use environment variables.
 
-Signed-off-by: Simon Glass <simon.glass@canonical.com>
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- include/test/test.h | 4 ++++
- 1 file changed, 4 insertions(+)
+ include/test/test.h | 65 +++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 65 insertions(+)
 
 diff --git a/include/test/test.h b/include/test/test.h
-index 0f2b68a5dee..f8a80a88959 100644
+index f8a80a88959..c9b56c66eae 100644
 --- a/include/test/test.h
 +++ b/include/test/test.h
-@@ -9,6 +9,8 @@
- #include <malloc.h>
- #include <linux/bitops.h>
- 
-+#define UT_PRIV_SIZE	256
-+
- /**
-  * struct ut_stats - Statistics about tests run
-  *
-@@ -53,6 +55,7 @@ struct ut_stats {
-  * @old_bloblist: stores the old gd->bloblist pointer
-  * @expect_str: Temporary string used to hold expected string value
-  * @actual_str: Temporary string used to hold actual string value
-+ * @priv: Private data for tests to use as needed
-  */
- struct unit_test_state {
- 	struct ut_stats cur;
-@@ -78,6 +81,7 @@ struct unit_test_state {
- 	void *old_bloblist;
- 	char expect_str[512];
- 	char actual_str[512];
-+	char priv[UT_PRIV_SIZE];
+@@ -29,6 +29,40 @@ struct ut_stats {
+ 	ulong duration_ms;
  };
  
- /* Test flags for each test */
++/**
++ * enum ut_arg_type - Type of a unit test argument
++ *
++ * @UT_ARG_INT: Integer argument (hex with 0x prefix, or decimal) -> vint
++ * @UT_ARG_BOOL: Boolean argument (0 or 1) -> vbool
++ * @UT_ARG_STR: String argument -> vstr
++ */
++enum ut_arg_type {
++	UT_ARG_INT,
++	UT_ARG_BOOL,
++	UT_ARG_STR,
++};
++
++/**
++ * struct ut_arg - Parsed unit test argument value
++ *
++ * Holds the parsed value of an argument after command-line processing.
++ *
++ * @name: Name of the argument (points to ut_arg_def.name)
++ * @type: Type of the argument
++ * @vint: Integer value (when type is UT_ARG_INT)
++ * @vbool: Boolean value (when type is UT_ARG_BOOL)
++ * @vstr: String value (when type is UT_ARG_STR, points into argv)
++ */
++struct ut_arg {
++	const char *name;
++	enum ut_arg_type type;
++	union {
++		long vint;
++		bool vbool;
++		const char *vstr;
++	};
++};
++
+ /*
+  * struct unit_test_state - Entire state of test system
+  *
+@@ -108,6 +142,37 @@ enum ut_flags {
+ 	UTF_UNINIT	= BIT(13),	/* test uninits a suite */
+ };
+ 
++/**
++ * enum ut_arg_flags - Flags for unit test arguments
++ *
++ * @UT_ARGF_OPTIONAL: Argument is optional; use default value if not provided
++ */
++enum ut_arg_flags {
++	UT_ARGF_OPTIONAL	= BIT(0),
++};
++
++/**
++ * struct ut_arg_def - Definition of a unit test argument
++ *
++ * Declares an expected argument for a test, including its name, type,
++ * whether it is optional, and its default value.
++ *
++ * @name: Name of the argument (used in key=value matching)
++ * @type: Type of the argument (int, bool, or string)
++ * @flags: Argument flags (e.g., UT_ARGF_OPTIONAL)
++ * @def: Default value (used when argument is optional and not provided)
++ */
++struct ut_arg_def {
++	const char *name;
++	enum ut_arg_type type;
++	int flags;
++	union {
++		long vint;
++		bool vbool;
++		const char *vstr;
++	} def;
++};
++
+ /**
+  * struct unit_test - Information about a unit test
+  *
 -- 
 2.43.0
 
