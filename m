@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74F2EE937E1
-	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 11:24:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E3D3E937E3
+	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 11:25:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CB118422D;
-	Sun, 12 Apr 2026 13:24:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DF23F841CD;
+	Sun, 12 Apr 2026 13:24:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NQvaymgT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OpjdVFK4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B09E984228; Sun, 12 Apr 2026 13:24:24 +0200 (CEST)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 04739839D5; Sun, 12 Apr 2026 13:24:27 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B0D784214
- for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 13:24:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B16BE841CD
+ for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 13:24:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-464bba3a9easo1805698b6e.0
- for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 04:24:22 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-40ef10ec84cso2403452fac.2
+ for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 04:24:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775993060; x=1776597860; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775993063; x=1776597863; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6Z63gjZp9n81K5hzsJNahmRxfr5j060cy+fJAISrWL8=;
- b=NQvaymgT3oBJ7RYzM90tkX5/B7x7nwLhhCIN5GS5LULvtvSX/iNHCkG1D3RcaqO/h2
- lRNfsxWaKQxSHlhmtKyRWAXQ0cRxolas8Sxq6+5ROGDyJzDtXFyetIxwVy9Kp6bGjw5v
- ai0OeO6LqIxsrujbONrNFm5gTVEOLIyb6pu30=
+ bh=TntcstSuO60GougXCwCwNigTK8sl/33dvalNsrtzqUw=;
+ b=OpjdVFK4oVPsmZWzCTUzyrWtOGhBqbuReyreQ10OBOO3lVFdc4BMPvJGd4aiF+/5tH
+ jIDwo1PXVeoyXs381LsV9JN8EM31+E+tClQ+CTsDao/IpgVmtiVw629m/5qa4F9fCeYO
+ y1v+pxS26cArlPOXXE3dTgYiuk2n8Na3RLC6w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775993060; x=1776597860;
+ d=1e100.net; s=20251104; t=1775993063; x=1776597863;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=6Z63gjZp9n81K5hzsJNahmRxfr5j060cy+fJAISrWL8=;
- b=EXtVjJnGgbqXofQH0bJaPoMin1U2XoF0jLg/8H9BszLgt+ZglYJJyzYMBCECxoZVDL
- oq123cX331g7H0FYZTHsmYaW3s1urMxSbqH+FcB5MODQShOghFNfeizVCWgHJpS+mE1s
- wdyuC+oXWbWkU8CIM2gxu2KL/NZt9URediOsq13C2H7iJPGEuLjSBriM0taaF15nYYQ0
- jlPmbMUrQhotDxaa0llIuDeOXLPM/snNG3xSgNunbmlu2jK3plWvdv6PhKLO1BwwOMlK
- xpzRNIOpq8g69kkfTiCHC66XlHLJ+R/ATEEAo7IqOS3R5vQcjlHTOs2nnJdb+JrBsrf4
- r1oQ==
-X-Gm-Message-State: AOJu0YxZDalVojasrVBFCqvbPRbcE9CSdM1VLpnQZd9Ghw7f8BLEWZVY
- OniT3vz3OErHY1baU/hJaAb9LexbgI07dm+RnMy+Hf6vY/oh90RNRxqxSWNkJYO6P/YgMa7c+hy
- BWibdhQ==
-X-Gm-Gg: AeBDieveafdvnUocmX6ku5t+yxBkycPWAWRzdOW9aly1DD+Axo7x9b842cRQWHWgwTc
- XaPs+M3h/wIeRAbIrctkd5gSVkYLWtscAzi1aAajnmNzgAkmI19xvFFTQXznod/3WiC2cMOTMGT
- mojBQ/M27afp/7NseK3BDvBTYpQSq5F1LEu0YHjs62JlzjcaolF5VRlYPCfL6xuoHgba8TFW8Bw
- JxZTr+rZ+Pu4HDoHqCJh/8na85O2bUIXLBrlN+aKh5laBCjXLGfnMjooavyK3gOqU63kT8o+dw9
- uKJT4+SJQNH+DBwKLSVXlUTmR5UcazmL/Uv5qI7hJJrZmiOD08gPlCVGOfINCZ/uEeD9UZhAR9k
- 1jEmfFbplZP/Vg9IuTMdzjiUqOAWweBumB1JLGTjk9sshFd5vx+MJnn+gOkXOhR0GVWCTfLCyvI
- qgvSkHsCUh0cRig4FQbw==
-X-Received: by 2002:a05:6808:180a:b0:467:e4b3:3bef with SMTP id
- 5614622812f47-478a080e17cmr4770501b6e.48.1775993060246; 
- Sun, 12 Apr 2026 04:24:20 -0700 (PDT)
+ bh=TntcstSuO60GougXCwCwNigTK8sl/33dvalNsrtzqUw=;
+ b=C2K/z+9LZYV9L/GYbr3b0E2YV3Klv2sTjojd+xb1Kj95BHCoXg48cnNUF196tkUjza
+ mPb5wLNmbJi2L0WEwjykfW6DaMGGIUZ6L4y+cvJn4VOgAGmx7Y7wCq3t6wBFEEGifDwE
+ m0RvV66Z7Bm7qYwJFYFwn0f7w7Z6WiEdKCz+4DnuzTwuDXttVW6dP7iJPOp1LAOHpVwl
+ Z5cYzxGpU85b7Kz7TVKVizVO5tKDkoN5xlHQqlDddMzLd+YzaLxdlNRTgNoQKfWvNFjQ
+ ZoFkTqeiL3pnwP9GVb5RQm+O5Pf4iIBJUAJydZXcGFz+9FITDWJgKcjHXoGPawZhiKOK
+ BqPw==
+X-Gm-Message-State: AOJu0YyDt8puwFrdXXoK8LieoAaVSGb2HFGwNJcNVk+UFY/M3sWCr8IR
+ BTWT9LK6e5DwODeg6sd6AAOQDz6n4wu4wCK6BEqAnHfmguuneU56R1O4CIu3f4aPjk0KncTs9os
+ IsP4=
+X-Gm-Gg: AeBDievNBF5EQa+diKBHRkAXGK5QC0MJqzcu5Hoz+Zo7q1nGtl8lPEJ3DoGuBjOt41S
+ cv97yuk/lGJNBjhG8C1tLKM3bbFlLbq6Mdy6Wtr5ntLBzmrNoiTDC76K8vuGD2Es3f6uxsvOkTN
+ FGiBNDg8vgkCxoQsPz3od6Nqh1d3qkys+rrTes1BG4XYkQh9sBBbfRvdzFENME57jbYcBU1Hq9e
+ sL30MyL51+YUJSuP1yFChRQrUI7rUHgevxKFo+6Gjsn0yR1CYKze6/vMJFny0WnjpbnJ5PGcmcx
+ DNcl3EZCV4fFgE1HQZEM+FEuGCsepo8KkFA+zEV8r1lGlkhpRaVoH7+AJCG62TLxZJVf9b46JOa
+ xg81Sz8NUKpGtPN20eB+ypOtBUMPv+YtVob+v4SynWB4c0XuO1r0RFcfPprzeoAbtM3gpWG1+kc
+ Iu99IgVy0FPlTCfoQBPNLclZJ7w9e4
+X-Received: by 2002:a05:6871:7586:b0:3fa:aa1:5b1c with SMTP id
+ 586e51a60fabf-423e113c1fcmr4979808fac.30.1775993062818; 
+ Sun, 12 Apr 2026 04:24:22 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-423dd395606sm6622071fac.1.2026.04.12.04.24.18
+ 586e51a60fabf-423dd395606sm6622071fac.1.2026.04.12.04.24.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Apr 2026 04:24:19 -0700 (PDT)
+ Sun, 12 Apr 2026 04:24:21 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 07/12] test: Enhance the ut command to pass test arguments
-Date: Sun, 12 Apr 2026 05:19:44 -0600
-Message-ID: <20260412111958.943933-8-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: [PATCH v2 08/12] test: Add type-checked argument accessor functions
+Date: Sun, 12 Apr 2026 05:19:45 -0600
+Message-ID: <20260412111958.943933-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260412111958.943933-1-sjg@chromium.org>
 References: <20260412111958.943933-1-sjg@chromium.org>
@@ -94,154 +95,192 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the ut command to permit passing arguments to tests.
+Add ut_get_str(), ut_get_int(), and ut_get_bool() functions with
+corresponding ut_str(), ut_int(), and ut_bool() macros for accessing
+test arguments with type checking.
 
-Usage: ut -f fs test_name key1=value1 key2=value2
+These functions check that the argument index is within bounds and the
+type matches what was requested.
+
+The first failure for a test is reported via ut_failf() which should
+make it fairly easy to debug the test.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- doc/usage/cmd/ut.rst | 11 ++++++++++-
- test/cmd_ut.c        | 29 ++++++++++++++++++++---------
- 2 files changed, 30 insertions(+), 10 deletions(-)
+ include/test/test.h |  2 ++
+ include/test/ut.h   | 50 ++++++++++++++++++++++++++++++++++
+ test/test-main.c    |  1 +
+ test/ut.c           | 66 +++++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 119 insertions(+)
 
-diff --git a/doc/usage/cmd/ut.rst b/doc/usage/cmd/ut.rst
-index 1acf3126680..d8c3cbf496c 100644
---- a/doc/usage/cmd/ut.rst
-+++ b/doc/usage/cmd/ut.rst
-@@ -11,7 +11,7 @@ Synopsis
+diff --git a/include/test/test.h b/include/test/test.h
+index bd47025ce50..f435d6f8c6a 100644
+--- a/include/test/test.h
++++ b/include/test/test.h
+@@ -95,6 +95,7 @@ struct ut_arg {
+  * @priv: Private data for tests to use as needed
+  * @args: Parsed argument values for current test
+  * @arg_count: Number of parsed arguments
++ * @arg_error: Set if ut_str/int/bool() detects a type mismatch
+  */
+ struct unit_test_state {
+ 	struct ut_stats cur;
+@@ -123,6 +124,7 @@ struct unit_test_state {
+ 	char priv[UT_PRIV_SIZE];
+ 	struct ut_arg args[UT_MAX_ARGS];
+ 	int arg_count;
++	bool arg_error;
+ };
  
- ::
+ /* Test flags for each test */
+diff --git a/include/test/ut.h b/include/test/ut.h
+index 1c4ee390fd8..6115711574c 100644
+--- a/include/test/ut.h
++++ b/include/test/ut.h
+@@ -692,4 +692,54 @@ int ut_run_list(struct unit_test_state *uts, const char *category,
+  */
+ void ut_report(struct ut_stats *stats, int run_count);
  
--    ut [-r<runs>] [-f] [-I<n>:<one_test>] [-r<n>] [<suite> | 'all' [<test>]]
-+    ut [-r<runs>] [-f] [-I<n>:<one_test>] [<suite> | all [<test>]] [<args>...]
-     ut [-s] info
- 
- Description
-@@ -37,6 +37,11 @@ test
-     causes another test to fail. If the one test fails, testing stops
-     immediately.
- 
-+args
-+    Optional arguments to pass to the test, in `name=value` format. These are
-+    used by tests declared with `UNIT_TEST_ARGS()` which define expected
-+    argument names and types.
++/**
++ * ut_get_str() - Get a string test argument
++ *
++ * Fails the test if the argument type is not UT_ARG_STR.
++ *
++ * @uts: Test state
++ * @n: Argument index
++ * @file: Filename of caller
++ * @line: Line number of caller
++ * @func: Function name of caller
++ * Return: String value, or NULL if type mismatch
++ */
++const char *ut_get_str(struct unit_test_state *uts, int n, const char *file,
++		       int line, const char *func);
 +
- Typically the command is run on :ref:`arch/sandbox/sandbox:sandbox` since it
- includes a near-complete set of emulators, no code-size limits, many CONFIG
- options enabled and runs easily in CI without needing QEMU. It is also possible
-@@ -201,3 +206,7 @@ Run a selection of three suites::
-     Tests run: 10, 12 ms, average: 1 ms, failures: 0
-     Suites run: 3, total tests run: 37, 26 ms, average: 0 ms, failures: 0
-     Average test time: 0 ms, worst case 'mem' took 1 ms
++/**
++ * ut_get_int() - Get an integer test argument
++ *
++ * Fails the test if the argument type is not UT_ARG_INT.
++ *
++ * @uts: Test state
++ * @n: Argument index
++ * @file: Filename of caller
++ * @line: Line number of caller
++ * @func: Function name of caller
++ * Return: Integer value, or 0 if type mismatch
++ */
++long ut_get_int(struct unit_test_state *uts, int n, const char *file,
++		int line, const char *func);
 +
-+Run a test with arguments (used by tests declared with UNIT_TEST_ARGS)::
++/**
++ * ut_get_bool() - Get a boolean test argument
++ *
++ * Fails the test if the argument type is not UT_ARG_BOOL.
++ *
++ * @uts: Test state
++ * @n: Argument index
++ * @file: Filename of caller
++ * @line: Line number of caller
++ * @func: Function name of caller
++ * Return: Boolean value, or false if type mismatch
++ */
++bool ut_get_bool(struct unit_test_state *uts, int n, const char *file,
++		 int line, const char *func);
 +
-+    => ut -f fs fs_test_ls_norun fs_type=ext4 fs_image=/tmp/img small=1MB.file
-diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index 7304c32bec5..9d36bd5dc87 100644
---- a/test/cmd_ut.c
-+++ b/test/cmd_ut.c
-@@ -30,7 +30,7 @@ struct suite {
++/* Helpers for accessing test arguments with type checking */
++#define ut_str(n)	ut_get_str(uts, n, __FILE__, __LINE__, __func__)
++#define ut_int(n)	ut_get_int(uts, n, __FILE__, __LINE__, __func__)
++#define ut_bool(n)	ut_get_bool(uts, n, __FILE__, __LINE__, __func__)
++
+ #endif
+diff --git a/test/test-main.c b/test/test-main.c
+index 9d8ab794db8..9fc4bca8e20 100644
+--- a/test/test-main.c
++++ b/test/test-main.c
+@@ -636,6 +636,7 @@ static int ut_run_test(struct unit_test_state *uts, struct unit_test *test,
+ 	if (ret)
+ 		return ret;
  
- static int do_ut_all(struct unit_test_state *uts, const char *select_name,
- 		     int runs_per_test, bool force_run,
--		     const char *test_insert);
-+		     const char *test_insert, int argc, char *const argv[]);
- 
- static int do_ut_info(bool show_suites);
- 
-@@ -120,7 +120,7 @@ static bool has_tests(struct suite *ste)
- /** run_suite() - Run a suite of tests */
- static int run_suite(struct unit_test_state *uts, struct suite *ste,
- 		     const char *select_name, int runs_per_test, bool force_run,
--		     const char *test_insert)
-+		     const char *test_insert, int argc, char *const argv[])
- {
- 	int n_ents = ste->end - ste->start;
- 	char prefix[30];
-@@ -131,7 +131,7 @@ static int run_suite(struct unit_test_state *uts, struct suite *ste,
- 
- 	ret = ut_run_list(uts, ste->name, prefix, ste->start, n_ents,
- 			  select_name, runs_per_test, force_run, test_insert,
--			  0, NULL);
-+			  argc, argv);
- 
- 	return ret;
++	uts->arg_error = false;
+ 	ret = test->func(uts);
+ 	if (ret == -EAGAIN)
+ 		skip_test(uts);
+diff --git a/test/ut.c b/test/ut.c
+index b0cc0f3e8ff..a13e4825eac 100644
+--- a/test/ut.c
++++ b/test/ut.c
+@@ -284,3 +284,69 @@ void ut_set_skip_delays(struct unit_test_state *uts, bool skip_delays)
+ 	state_set_skip_delays(skip_delays);
+ #endif
  }
-@@ -167,7 +167,8 @@ static void update_stats(struct unit_test_state *uts, const struct suite *ste)
- }
- 
- static int do_ut_all(struct unit_test_state *uts, const char *select_name,
--		     int runs_per_test, bool force_run, const char *test_insert)
-+		     int runs_per_test, bool force_run, const char *test_insert,
-+		     int argc, char *const argv[])
- {
- 	int i;
- 	int retval;
-@@ -179,7 +180,7 @@ static int do_ut_all(struct unit_test_state *uts, const char *select_name,
- 		if (has_tests(ste)) {
- 			printf("----Running %s tests----\n", ste->name);
- 			retval = run_suite(uts, ste, select_name, runs_per_test,
--					   force_run, test_insert);
-+					   force_run, test_insert, argc, argv);
- 			if (!any_fail)
- 				any_fail = retval;
- 			update_stats(uts, ste);
-@@ -244,6 +245,8 @@ static struct suite *find_suite(const char *name)
- static int do_ut(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- {
- 	const char *test_insert = NULL, *select_name;
-+	int test_argc;
-+	char *const *test_argv;
- 	struct unit_test_state uts;
- 	bool show_suites = false;
- 	bool force_run = false;
-@@ -285,9 +288,14 @@ static int do_ut(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	ut_init_state(&uts);
- 	name = argv[0];
- 	select_name = cmd_arg1(argc, argv);
 +
-+	/* Test arguments are after suite name and test name */
-+	test_argc = argc > 2 ? argc - 2 : 0;
-+	test_argv = argc > 2 ? argv + 2 : NULL;
++const char *ut_get_str(struct unit_test_state *uts, int n, const char *file,
++		       int line, const char *func)
++{
++	if (n < 0 || n >= uts->arg_count) {
++		if (!uts->arg_error)
++			ut_failf(uts, file, line, func, "ut_str() arg check",
++				 "arg %d is invalid (arg_count=%d)", n,
++				 uts->arg_count);
++		uts->arg_error = true;
++		return NULL;
++	}
++	if (uts->args[n].type != UT_ARG_STR) {
++		if (!uts->arg_error)
++			ut_failf(uts, file, line, func, "ut_str() type check",
++				 "arg %d is not a string", n);
++		uts->arg_error = true;
++		return NULL;
++	}
 +
- 	if (!strcmp(name, "all")) {
- 		ret = do_ut_all(&uts, select_name, runs_per_text, force_run,
--				test_insert);
-+				test_insert, test_argc, test_argv);
- 	} else if (!strcmp(name, "info")) {
- 		ret = do_ut_info(show_suites);
- 	} else {
-@@ -306,7 +314,8 @@ static int do_ut(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 			}
- 
- 			ret = run_suite(&uts, ste, select_name, runs_per_text,
--					force_run, test_insert);
-+					force_run, test_insert, test_argc,
-+					test_argv);
- 			if (!any_fail)
- 				any_fail = ret;
- 			update_stats(&uts, ste);
-@@ -322,12 +331,14 @@ static int do_ut(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- }
- 
- U_BOOT_LONGHELP(ut,
--	"[-rs] [-f] [-I<n>:<one_test>][<suites>] - run unit tests\n"
-+	"[-rs] [-f] [-I<n>:<one_test>] <suite> [<test> [<args>...]] - run unit tests\n"
- 	"   -r<runs>   Number of times to run each test\n"
- 	"   -f         Force 'manual' tests to run as well\n"
- 	"   -I         Test to run after <n> other tests have run\n"
- 	"   -s         Show all suites with ut info\n"
--	"   <suites>   Comma-separated list of suites to run\n"
-+	"   <suite>    Test suite to run (or comma-separated list)\n"
-+	"   <test>     Specific test to run (optional)\n"
-+	"   <args>     Test arguments as key=value pairs (optional)\n"
- 	"\n"
- 	"Options for <suite>:\n"
- 	"all       - execute all enabled tests\n"
++	return uts->args[n].vstr;
++}
++
++long ut_get_int(struct unit_test_state *uts, int n, const char *file,
++		int line, const char *func)
++{
++	if (n < 0 || n >= uts->arg_count) {
++		if (!uts->arg_error)
++			ut_failf(uts, file, line, func, "ut_int() arg check",
++				 "arg %d is invalid (arg_count=%d)", n,
++				 uts->arg_count);
++		uts->arg_error = true;
++		return 0;
++	}
++	if (uts->args[n].type != UT_ARG_INT) {
++		if (!uts->arg_error)
++			ut_failf(uts, file, line, func, "ut_int() type check",
++				 "arg %d is not an int", n);
++		uts->arg_error = true;
++		return 0;
++	}
++
++	return uts->args[n].vint;
++}
++
++bool ut_get_bool(struct unit_test_state *uts, int n, const char *file,
++		 int line, const char *func)
++{
++	if (n < 0 || n >= uts->arg_count) {
++		if (!uts->arg_error)
++			ut_failf(uts, file, line, func, "ut_bool() arg check",
++				 "arg %d is invalid (arg_count=%d)", n,
++				 uts->arg_count);
++		uts->arg_error = true;
++		return false;
++	}
++	if (uts->args[n].type != UT_ARG_BOOL) {
++		if (!uts->arg_error)
++			ut_failf(uts, file, line, func, "ut_bool() type check",
++				 "arg %d is not a bool", n);
++		uts->arg_error = true;
++		return false;
++	}
++
++	return uts->args[n].vbool;
++}
 -- 
 2.43.0
 
