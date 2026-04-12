@@ -4,98 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FEFFE937E7
-	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 21:47:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEAE3E937E7
+	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 22:00:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFE7683B99;
-	Sun, 12 Apr 2026 23:47:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
+	by phobos.denx.de (Postfix) with ESMTP id 1948983B99;
+	Mon, 13 Apr 2026 00:00:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="A+vmdugU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N2wxLAvU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5449883BC4; Sun, 12 Apr 2026 23:47:56 +0200 (CEST)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id 71BC983EC6; Mon, 13 Apr 2026 00:00:29 +0200 (CEST)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 038EF839D5
- for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 23:47:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4371D839D5
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 00:00:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=thingy.jp
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-79a535e7c00so43051967b3.3
- for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 14:47:52 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776030471; cv=none;
- d=google.com; s=arc-20240605;
- b=KokKyOCR2rZo1XoWawio8wGC0Hll6bukUKaWh15qifeoN7dqR+Lr6olr5IcQm7zR2G
- IcLl4S2Y1AEVtalnkLSFKS9NY13E4H17Yv1AOEzYHokiAlUrZ+hwOFH64qd3o1b615ct
- LqiqVri6vVIztBgznokz/DjQvrzJqQwIvtAZwdUYAFQSOXcjmWGKWXx3jF6kqbMUJPKw
- ttWFhyBAEgepTRA8yVM8zaa53P9JTpuWZAQaQTO3nCDVnFekQsPSIzAbQv5wKeisKilW
- SMP64r/MAdl5T+Kn0Rerb/SeBkR3YKjSsKTqYnzRTuar8Y1GnTV1gLT2K0PrmqlzxlNS
- t+HQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=R3zMBYUHqDpFaKl+tjEGHQenNirmU7FpD3trzZgcW9o=;
- fh=0Oc5kyYjVCmya2mmcsaGUFu9KBl763qOyu40EeTAIFg=;
- b=KhpAJEUroCM5oZU4WCRkp3n4Lg6wtkqiRfSoab5cB+SzI9WsOWZ6JK9GAVMsebnAbq
- h2fUrcllXVj35OggGbQbx07sYCNI6jq+bcmZBnWv5IO7KQ4NCD0YKWYLJw/YPgQUqgWb
- I+B99GaLLEUXNyXVsozAoLRK3I5pyGHpsaRn7CwxxU99EJqc2zLFQaCZ12EA0vMnnFSY
- kas+6qrmNtZ7oJ74c7n4OkODM/hzsWECxKqB02cZFxAp7LM9KJ3O9GhfHftz82MfYCkD
- HWg5ZK8T3Bzi8Qs7x2uGE43cmjX1LxH9PEvQWvJkUMnDXYDyKJmPs5CzyVv9gA7rBJ6u
- 3wfg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=visitorckw@gmail.com
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-35fb16e56efso364373a91.2
+ for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 15:00:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thingy.jp; s=google; t=1776030471; x=1776635271; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=R3zMBYUHqDpFaKl+tjEGHQenNirmU7FpD3trzZgcW9o=;
- b=A+vmdugUBIqwHfBjsFZW8IM9biZeWAGMbvKMp0oPpSwPuX6dkple8YfRpTwH/BAlmi
- E05dpAabGOjvjbscl0Z4mUQ9mCGjY9OadLKL5VqJXYLkMRw1UavFemdlRvBeDGZmZ7rU
- FxAKizRhvyQ1y22cT1SYAiYTx2/Jy0tOT7JmM=
+ d=gmail.com; s=20251104; t=1776031226; x=1776636026; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ir9+1D6sdH9XXHUjnwBZQA3nWGX6pOPIHT4P9Y832Xk=;
+ b=N2wxLAvUdWX5DeADbA08m4Iw86cBWDh4PpXaTf24H7DqegnoGvhXfU7u8u6TA0pS3b
+ 2C5Eduqr6M01/KmbDpRVbGWbrf7v112Dqm91Om91IYXPnvlUM6RxTdQD001XPViuu4CD
+ 3d9BNH2yWnLskDuZoMk/CYNW9GM3KdexSjyZdAamkIZuhU3yUXVGtUDW+2dO4PVKiosy
+ V51rIHSvDPSsB2W0v7o+TR0jRoQ9VvbQH8Yi3N5j6S8qsCU0d8+jpmNGFkRJjxo81b8D
+ Al/218OkDtERFP6TNDmcRVcGrv04v63QWQv0hPZQvxtN7I2DoB5kGq6vW6TcHtq+P8w5
+ cjhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776030471; x=1776635271;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=R3zMBYUHqDpFaKl+tjEGHQenNirmU7FpD3trzZgcW9o=;
- b=ClL+0LGTFRvPcibzepva0VJPj3Za99CixLfCHNHYgvt/ioEAjmw1iatCrTA+/Hcsfg
- sDzBNR4JdoWvxQ9e9ZWN+kKvBTXVEAMfJ3eAMEtky39O3WRrsgB28BkJftubeVXzTTQs
- RB3j1TnSe58LhkEzX7Q1W+LE4heKNp84hdClHIgZ6V74krCNyhewLIgpggEP9F00rw2D
- qpdn7Ar3ly8w1NYBBbnoQ8oTSt7ajstoxM1NxgWDzbrYTpwOJ8ue64BKGCl49J0//2vR
- EURjDvydzNzZzJQCuu9/3xUAeT78Gcrzi+6NcZb/v1so0a9HQEoQFLpK3kR9V+ZjD8Ux
- VTNw==
+ d=1e100.net; s=20251104; t=1776031226; x=1776636026;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ir9+1D6sdH9XXHUjnwBZQA3nWGX6pOPIHT4P9Y832Xk=;
+ b=nFwoHCv8AVWkynolh7VsjE3Hj0b+bz90ERZ4cM7I4tUnTdYoku31qyG21fcz+by8sH
+ 0bxhR+2+R2obLcOJBvCmGwNlKVb6BAp03FhRHcJKoX8KeIGqiVSyiOFRPiGi2Tz75eEx
+ IptI/1nHB9/bSWLONzKvvDan5xKNUhi+UdYaXRQTFBLTyDokDV+6KPIz8jGFYHIKMEY6
+ 3ni/YYf3AOUYB+t/txjTWGqXEiwBNsDZguQXF9dYVIGF4xwBH7oheCvclQc1cwsl91qB
+ Ji9rEhhKDAVi6LnggN/89dSF0HuFVNnN57zIGsjGdCgzcEobtGC/ah3vBnw/Yk4hLgM0
+ 8MHQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+CKQdZZyvgnLNhdyERvQdnRGafg5uU/Iw7+07JnbV8fUX7jKCumsoADltdmvtmlD810ndBTxU=@lists.denx.de
-X-Gm-Message-State: AOJu0YywkrBXbTKT0p+url+fS0Uv00BpyzBbt7D6EqA1NHWgOYGTIA1M
- rKnV7hIQ6yE1QeDuYzExUn0wKX0l6nsGb7FdR8FKY9vkpzV7OyDA/bu7pGOiW/Sp9oVwXa/8slC
- ihXvucyisRr5ZMJ3FX90ygOsQ7ib/jPy9w60TcbRGLg==
-X-Gm-Gg: AeBDietdBbBfrh5BDWBOQy++EIe/MFNqW+UqL2qjEodr8onWu//ob+mPn0N56olVmgc
- WVeYHOklQIxE0XdiaCn11RFnRPKOs8Hzm0Zsj4seUb9oPAoCMw/GtXJEHaZ1qz4yo5rut6oDUA4
- T6q4yXmRSqtBksjhu4a3PquHXl7vomTOq8kUNr1dKyFZWvKIBiQS0uMMct9zcES2tb3B4Lj5VXk
- k5QCRD2WI9yKfY4XbtiRxO5ww1icPihypferqyqfFgQZo4DzlGSSZEhrjRPimBjNZmxohDxErWz
- JXGx9EorW9fb5fFc9MyRv9c3ZwifBjc4F1lFergwCFVscS51qHE=
-X-Received: by 2002:a05:690c:498f:b0:7b1:e942:bddb with SMTP id
- 00721157ae682-7b1e942c63bmr49833417b3.13.1776030471414; Sun, 12 Apr 2026
- 14:47:51 -0700 (PDT)
-MIME-Version: 1.0
+ AFNElJ91/rcc1ECT/LM+Hj7SDgjq7HeBjwzyeGhmowkdpO9UcApR65TVCBDhkgfyKhZ4QbvRz0pO4wg=@lists.denx.de
+X-Gm-Message-State: AOJu0YyeyOPnOjfAaianf4zLSkKExUoc+/k6/nBA77TDawiwllQtNA+r
+ WgOWwo3aGRRGEPqFVueHsNkkGHIZzB5pOOHSZTmzDqHuHGrDdyVxabCA
+X-Gm-Gg: AeBDiev+xBG598OASj8/lw9Y0fkOccEmpvXwdTWD+swdOLk92WIz3axAEPu9eT8eWwi
+ TY9TR+TuJ3EQoOU6TlwPoXZLEseFiYr8FvyS7wFcS6/0cFojTyk7/TrReHOu01rtMi6BVQHS6UC
+ 2H16m8AGkqT+VY1mz/wEzM4a5TttjKTK3DMS1ewst57hd43d+kysnVJxv8o8wlWi0qQnppBxCQ8
+ kmbojQgQ7MB1yAXHK/p/viJJoTBnW+QdN1B0tNFamDGTxk6IzYHjkNN5TTqQ93PsRyY3oUApcv4
+ qC5aL0uOXVRdxOAe/yByPPwme6OYrUPf2hwbSdVJoq0YRiYBOkrEVglVAP6yWZzH+dGdSfTSdnF
+ e+NpU60KIcxS1KkZNa8RqpzwNjRHpRY2CCUYOeZ1VgBj/GNoaqHtRy4/pcNTxJYVc73U9ZjtS0i
+ gFTbXeCeoNMWcyHH8v1ikzQlz+LE7Gx54uTlJ4MA/R9uo4iA==
+X-Received: by 2002:a17:90a:e7cf:b0:34c:fe57:2793 with SMTP id
+ 98e67ed59e1d1-35e42881e54mr11039297a91.20.1776031221827; 
+ Sun, 12 Apr 2026 15:00:21 -0700 (PDT)
+Received: from google.com ([2402:7500:477:c367:3a21:b5ec:1429:fbe])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-35e5a218959sm1167648a91.2.2026.04.12.15.00.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 12 Apr 2026 15:00:21 -0700 (PDT)
+Date: Mon, 13 Apr 2026 06:00:17 +0800
+From: Kuan-Wei Chiu <visitorckw@gmail.com>
+To: Daniel Palmer <daniel@thingy.jp>
+Cc: angelo@kernel-space.org, bmeng.cn@gmail.com, u-boot@lists.denx.de
+Subject: Re: [PATCH v3 4/5] virtio: blk: Fix converting the vendor id to a
+ string
+Message-ID: <adwV8fQUTwBlo1sj@google.com>
 References: <20260408220928.3328551-1-daniel@thingy.jp>
  <20260408220928.3328551-5-daniel@thingy.jp>
  <adwP6m1zDjUQWAl0@google.com>
-In-Reply-To: <adwP6m1zDjUQWAl0@google.com>
-From: Daniel Palmer <daniel@thingy.jp>
-Date: Mon, 13 Apr 2026 06:47:37 +0900
-X-Gm-Features: AQROBzAPrRUGjGRlE67z8nm-YnLb2x3bOnlQ4EYI_6Efdt3bt3Lw8yAjw4FG36k
-Message-ID: <CAFr9PXmVeWjFNM8x0rKeLHjvZOFLyvbMyNngt8EpMqkBbugHGw@mail.gmail.com>
-Subject: Re: [PATCH v3 4/5] virtio: blk: Fix converting the vendor id to a
- string
-To: Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: angelo@kernel-space.org, bmeng.cn@gmail.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ <CAFr9PXmVeWjFNM8x0rKeLHjvZOFLyvbMyNngt8EpMqkBbugHGw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAFr9PXmVeWjFNM8x0rKeLHjvZOFLyvbMyNngt8EpMqkBbugHGw@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,16 +102,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kuan-Wei,
+Hi Daniel,
 
-On Mon, 13 Apr 2026 at 06:34, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
-> Is there a chance that other non qemu virtio-mmio devices also use a
-> 4 character string for their vendor ID? If so, this patch will regress
-> their output from a human-readable string to a raw hex value.
+On Mon, Apr 13, 2026 at 06:47:37AM +0900, Daniel Palmer wrote:
+> Hi Kuan-Wei,
+> 
+> On Mon, 13 Apr 2026 at 06:34, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
+> > Is there a chance that other non qemu virtio-mmio devices also use a
+> > 4 character string for their vendor ID? If so, this patch will regress
+> > their output from a human-readable string to a raw hex value.
+> 
+> There might be other implementations of virtio but probably not used
+> together with u-boot.
+> I think this goes the other way too, we are assuming the ids are
+> printable ascii chars and it's possible to have an id that isn't.
+> What is currently happening looks like luck and seems unsafe to me so
+> I think regressing to printing hex is better.
 
-There might be other implementations of virtio but probably not used
-together with u-boot.
-I think this goes the other way too, we are assuming the ids are
-printable ascii chars and it's possible to have an id that isn't.
-What is currently happening looks like luck and seems unsafe to me so
-I think regressing to printing hex is better.
+I just took a quick look through the virtio spec, and indeed it never
+mentions that the mmio vendor id should be a string.
+
+Given this, should we even treat qemu as a special case here?
+Perhaps the simplest and most spec-compliant approach is to never
+assume it's a string, and just uniformly print the hex value for all
+devices. What do you think?
+
+Regards,
+Kuan-Wei
