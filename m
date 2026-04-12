@@ -4,94 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8D31F3ED4A
-	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 01:37:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CEF8F3ED6D
+	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 05:12:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEEF983BC4;
-	Sun, 12 Apr 2026 03:36:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 9A4FD839D9;
+	Sun, 12 Apr 2026 07:12:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="j8jgMFwT";
+	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="ixP2E/g9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 087E8839D9; Sun, 12 Apr 2026 03:36:39 +0200 (CEST)
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
- [IPv6:2607:f8b0:4864:20::631])
+ id 9ACA783B99; Sun, 12 Apr 2026 07:12:49 +0200 (CEST)
+Received: from mail-dl1-x1232.google.com (mail-dl1-x1232.google.com
+ [IPv6:2607:f8b0:4864:20::1232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 749C7839D9
- for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 03:36:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C43480517
+ for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 07:12:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-2ad9516a653so15302935ad.0
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 18:36:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775957794; cv=none;
+ dmarc=none (p=none dis=none) header.from=thingy.jp
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
+Received: by mail-dl1-x1232.google.com with SMTP id
+ a92af1059eb24-12c45281a06so661136c88.1
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 22:12:46 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775970764; cv=none;
  d=google.com; s=arc-20240605;
- b=cIfq7crHobEVdBARzHYkbcqpRQinVGdnX8Nh0bNwR/5s3l0nsvZfowgcTIdeg/jYcC
- A7KgJZgOenebH35vxCqIvFoaU8QBS0nTdEhcqdKa0qWE46C4eK3gYpw3O14SrSG9hdeA
- DyybVjo75kIpztNs/7Sr5mkQFcpMURNduj6byUxZvZEVt7Gd7mg0KjoMpCuVJH+FhjOh
- XxJQQlaHprI9KKcAbqP4ESK5w6OLOARlC2C1W8eucCVfNeyUiSzTOqNXxwniUtAR7DGx
- xvJLXcGTawPLp8r3/YOOSmtGetm5BVgirqjRbaT9WVgkJw8eQg7esl3/aA7LiXDBNlgX
- BAfQ==
+ b=VxlP8J2Imbh0bQGlM+32c15QmU2Z6asFSi/bGCTc2wxvJ14XNL+7FLdKso3yHHCR/D
+ dEqpjT7TbbXjm7b8zOfoXf12VpgxhEGe9HC9KyLd5JXsSDXPperfA9SjzKejispnLZ4h
+ E9H0RT288lCmCTQkAcNE5/dOYz93uS8wIUmsEC8IvOELST9npIym66gONITx7GmHMVTP
+ nQqmIRrSxxE3GK3JkJQ0dJH1/GgSlhJwYTtN8hAANC6NJj21GI4xcBpijb7Zzb57C53p
+ aMR4uxCWZgy0h1n50xzRPUNxjXZur2rc5h2xN8JkZN4tQ9QPXC/lBA95RDZqTiulljST
+ UAIA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=83XoxZF10/D7FoUGT0g1iUGPAmHcJMzTav4Gs9Q+EDM=;
- fh=IdwO/rC/acyyEduxN1uOkpxtcUbuHgO/3u2O629Abb8=;
- b=ZRGGVLz1PmF6y47wGhjwyrJrrzfMflnT4/UNx6XEE8Nfb345bqOwHoMH5Zb3N/fUka
- o47checuAXegNchDmNhJHvNOtgObg4ThfVsmgEl6o/G3scOFARaeurJzwikh6HfF6P/e
- 1BL8BfugY/ZF4R76Lfkg2aprGLcPn1m9Cr4t/4jCJWnJMuVtE7fVo4jQlTBJuUe4YsA5
- vHW+psXXdlJCISUKHQ344dJAf2XNA3UGsLRWkE17Mbmza4swNz32Hg9yYKfRWYuvbnBC
- Oj8YV/ewE8ycLwIzVmY/Clg2acoEW3M8NuKuFgdl5LbBYIMuwxZWVF9/07OklL78X1dQ
- 7+Ng==; darn=lists.denx.de
+ bh=E5DM+C0BVYPkwhDVDxkuZo2joMNmznOa2v23Tl+s640=;
+ fh=FkMP/ei1tOJRQrGSPZFyjiCtDfljhwNveePQpEysuVE=;
+ b=MF38CbLmCmh1rs3A59iurpFTGyRNeYATgNxorZifH0ECPN4qu9ot/4x+5HZla6jxNZ
+ 6ULcMLy4vqbyyu3ZYz5dTQdGMrs5l0NMi5t96xzd6NebgXvp1SOuqUw/3ST3tKQukpCf
+ 8FJos94xGB5ERTQkuoKaYIPWPAsRVIW8oSTL4Ti5VgGTaqhRKr883AXe9LAIePazv5D7
+ WX/EgxvsC2/DVkIFQt7PVoWNo3QulVVGwgjYVE58EQ/BSpr6KH6bHGHssWR5+EeccLjS
+ nVtIcgVb39pkCeiRi/9BgHwJRfg6pDUPVS4PCvv2pIDf9qmSuXgCTDPBH+kKn7GilRaE
+ V+Mw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775957794; x=1776562594; darn=lists.denx.de;
+ d=thingy.jp; s=google; t=1775970764; x=1776575564; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=83XoxZF10/D7FoUGT0g1iUGPAmHcJMzTav4Gs9Q+EDM=;
- b=j8jgMFwT1aJ09apNT2YCVZElJr21a/Zkj7IUlNVWdayYqh+5nKFFA5PQFyl1AqBvig
- B5dwwymZzF2kinlCOys91zv/bXh+TUrJK4LiX5RX46kKL+aADigiw6dLX/QK5X0n2nGI
- gyqSPhMgSJbTgjVm4JOkiUUg6z/jNKpdLu7N8=
+ bh=E5DM+C0BVYPkwhDVDxkuZo2joMNmznOa2v23Tl+s640=;
+ b=ixP2E/g9LTYAsiSzwepGcltRqCEWka6ke6eD25qndqqrEfWnefRV9Xhj/V8JNgxUd7
+ pAfpvTdOKkmLUBZAtRdajOna6uNh5419OziWVtdYBxsqCGEtPJ8813zC1FhjB2iGuiej
+ xV1d5S3fLW1R5M1J49F8UFLSEVo1ziVSS3zkI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775957794; x=1776562594;
+ d=1e100.net; s=20251104; t=1775970764; x=1776575564;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=83XoxZF10/D7FoUGT0g1iUGPAmHcJMzTav4Gs9Q+EDM=;
- b=cxVdndM3JaakQC9gGlGmkNFgwpXCeZ4ut2YDOs0PSiF3xNRizuIX9GmNh9dK2KRTBd
- ZBpIkp/Zz9/TmdoX2Qw5D2N2fBzNlDHtyA9h3SLzsm6p2Xg+QRFJyp9EQw4uInfBSOfj
- sabKEOrS961yqIyoxNQ/KSKz382V+CvQNCGIcyB5/Q5MKSnzERusJhM54G6sBzWEHb7q
- WdWOn7MLym/7kmA/ZodAz1Lw9Y871YbMM7jlpVezGnm1U5s/OYVANpJj/KaxEtEpvbE0
- CWhwptqMxXA/+kQkbPOU+8RDZ9+DTb38Zd00ZrwOUWKYKwccJ1QYt1HFy5492RFICYTB
- 4/bw==
-X-Gm-Message-State: AOJu0YzFnpqCRYuokySDHwOM1rQnVvV8QZxEvclxTBjc4BcTvbu+B4Tr
- 2t9Q8dY1/iQbRiDe/Tp5jquXqOLZfXsixoDH4wX2RuUUC27XJ4K+2W3yvpqunNCvCOHNDanVG2/
- N5h58VGWO1QwQTKe/el2jp/r4/w7ZO0wXk+j+uuNhGUgtTIM/1MU=
-X-Gm-Gg: AeBDieu3aP3IcGpZCtohmvT/VYBWUbTmdf0BQIjDNwT65OdKeYYSdFYmL6JmoQ6izDj
- wR2ARWzW6AO20VeVgpHI0DSd4Otfp7U4ATyIOHggXs4SLzBNBXRAGHuh+UeQOyF9oxtr0St4WZR
- rd4bwO9y1LN74lFGv7CY4jhkNaGBw/ddLvp1u954MnX9ZXFnJljEYWov0IOOoNgjAjK5e5Hih2u
- tmj5ozF1v9K1bMcsf5uBDjHfgdw9G9yKdLltUMeN2Y6FTaKNkAvVPhtHUbbiVxNFmW3GOvGYFJf
- Stfv/8+aTUSZYK0W
-X-Received: by 2002:a17:903:1aa7:b0:2b2:d463:b8f5 with SMTP id
- d9443c01a7336-2b2d5a15f6emr84157025ad.21.1775957793748; Sat, 11 Apr 2026
- 18:36:33 -0700 (PDT)
+ bh=E5DM+C0BVYPkwhDVDxkuZo2joMNmznOa2v23Tl+s640=;
+ b=CEgGMsmJB0ulj4ngWjKIZQFvDr+ZEFK2VBFIBTMFEYzDpVIqyM6mP9cuF7uTZiXmfR
+ ktV2jl7lM5YD9QmLZumv87vcxgJSiX7+z4+35NRwqcYGP4VVb4TFYzJ9+cTAL/BpDnjJ
+ PAz7plTklyv5WZJnNMFs8IDjg7Zys2n9GzrlYDSpDm0X6A7XIc9g9S/UWv3TaZUt801V
+ roQHqXkQgbPxq8/TedFYII1lRTvnQTSFJ6esLuTp+/K9FwhI/Yl5MowHGOpK7+OhR741
+ jS3YdDTfkoW/uht9mnHGGte5kGsd6EGBzf3BD1FnlY/g2vFfPlgXeO3swVM8rVgDx/J9
+ sujw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVwMj1CNnnLAioHHgpiUci+1Jp3Iz1IOodTqTR1sqQfWesJDsX1SYhvUjIYz/FsM33s7ndeuJ0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxdwZIjOO6n6je0VpjlS5sMAeYpMNpZp2lGxKAPN3K/yk3+znNN
+ iRyixAJ896R2ntYlTpyxS7km2qooyLTzcaUnjsXf9fX2F8MgV0hFOemL1Ho3AvBXJ27iMFQEfbd
+ 6omlrGxOGaeAIC+XDwJLsWIvuT8cxvQaA4fKkeri68Q==
+X-Gm-Gg: AeBDieutHYQjRUDd/JGcAFx5MH1RUnfpn6vKVmeOMAWp9692sGrnL/AWJhL9wQDAVUH
+ P9aGpEBmXCfD6omBAT1jVeBv50UhFApVphNwQAJ7KOTyyKiaJ8jvs3RUSvHVC90GzE3KSAgXpV2
+ NqElyYFCC69HCqUN94vefDYkKcIlIKjU2SFGXh6peukIvKbU1soHs1qeWQ/XMAumaBQSyg+Rf4q
+ LOaVnfTckEulV0aMsdm8/OlWtW32QLrsihLXtXPWDOLr2W3DxBM7H7g25ZE5CnpRfZh79VDFSND
+ 7btH
+X-Received: by 2002:a05:7022:327:b0:127:9e95:a2f with SMTP id
+ a92af1059eb24-12c34e714e3mr4496371c88.2.1775970764393; Sat, 11 Apr 2026
+ 22:12:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260321134626.516665-1-sjg@chromium.org>
- <20260321134626.516665-2-sjg@chromium.org>
-In-Reply-To: <20260321134626.516665-2-sjg@chromium.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 11 Apr 2026 19:36:16 -0600
-X-Gm-Features: AQROBzBxSGMg8oCZ6gvTKPmqShnxsusstkwhtp26Gtf2FA24_W45u3Urjx3MusA
-Message-ID: <CAFLszThfW=K1h1q2rHC5cFYNQ5SCiPBMMDKOxEXUTdxxwYo-FA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] linker_lists: Fix end-marker alignment to prevent
- padding
-To: u-boot@lists.denx.de
-Cc: Simon Glass <simon.glass@canonical.com>, Tom Rini <trini@konsulko.com>
+References: <20260408220928.3328551-1-daniel@thingy.jp>
+ <20260408220928.3328551-4-daniel@thingy.jp>
+ <460879a4-5025-4a48-bbfa-7bc7915b267d@kernel-space.org>
+In-Reply-To: <460879a4-5025-4a48-bbfa-7bc7915b267d@kernel-space.org>
+From: Daniel Palmer <daniel@thingy.jp>
+Date: Sun, 12 Apr 2026 14:12:32 +0900
+X-Gm-Features: AQROBzCg4YMlcLNAPhj--CLiaGJkr3dL2cSIIEoH2uxXtCvVhuDiOxp3JXkfH30
+Message-ID: <CAFr9PXm3t2eCD8ELah86JQaYdrKS1efgWGAXV4u=qQSPib0gUQ@mail.gmail.com>
+Subject: Re: [PATCH v3 3/5] virtio: mmio: Allow instantiation via platform data
+To: Angelo Dureghello <angelo@kernel-space.org>
+Cc: visitorckw@gmail.com, bmeng.cn@gmail.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,44 +111,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Angelo,
 
-On Sat, 21 Mar 2026 at 07:46, Simon Glass <sjg@chromium.org> wrote:
+On Sun, 12 Apr 2026 at 06:15, Angelo Dureghello <angelo@kernel-space.org> wrote:
 >
-> From: Simon Glass <simon.glass@canonical.com>
+> A question here,
 >
-> Change the alignment of end markers in ll_entry_end() and ll_end_decl()
-> from __aligned(4) and __aligned(CONFIG_LINKER_LIST_ALIGN) respectively
-> to __aligned(1).
->
-> The linker places zero-size end markers at aligned boundaries based on
-> what follows them. When the next list's start marker has a high alignment
-> requirement (e.g., 32 bytes), padding gets inserted before the end
-> marker. This causes the byte span (end - start) to not be an exact
-> multiple of the struct size.
->
-> The compiler optimises pointer subtraction (end - start) using
-> magic-number multiplication for division. This optimisation only produces
-> correct results when the byte span is an exact multiple of the struct
-> size. With padding, the result is garbage (e.g., -858993444 instead of
-> 15).
->
-> By using __aligned(1), the end marker is placed immediately after the
-> last entry with no padding, ensuring (end - start) equals exactly
-> (n * sizeof) where n is the number of entries. This makes
-> ll_entry_count() and direct pointer arithmetic work correctly.
->
-> Fixes: 0b2fa98aa5e5 ("linker_lists: Fix alignment issue")
-> Signed-off-by: Simon Glass <simon.glass@canonical.com>
-> ---
->
->  include/linker_lists.h | 22 ++++++++++++++++++++--
->  1 file changed, 20 insertions(+), 2 deletions(-)
->
+> this driver would still work for other devicetree cases ?
 
-Any thoughts on applying this one?
+Yeah, I hadn't actually tested that though so I just built this series
+for the ARM virt machine to test it still works and it does so there
+shouldn't be any problems for the current users.
 
-My test series depends on it, but I'll send it as it is for now.
+> Also, there are some coding style changes that should be in a separate
+> patch.
 
-Regards,
-Simon
+mmm I think it's minimal enough that it's ok but if whoever ends up
+merging this wants that I will split it into two commits.
+
+Thanks,
+
+Daniel
