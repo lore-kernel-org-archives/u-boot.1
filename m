@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0164DF3ED67
-	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 01:35:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F3FEF3ED4A
+	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 01:35:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 393BB84220;
-	Sun, 12 Apr 2026 03:35:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0F7C58418C;
+	Sun, 12 Apr 2026 03:35:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="U/F6xBdW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q1FVECCu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89692841E6; Sun, 12 Apr 2026 03:35:21 +0200 (CEST)
-Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com
- [IPv6:2607:f8b0:4864:20::342])
+ id 3D2BD83B99; Sun, 12 Apr 2026 03:35:26 +0200 (CEST)
+Received: from mail-ot1-x344.google.com (mail-ot1-x344.google.com
+ [IPv6:2607:f8b0:4864:20::344])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEF6F83B99
- for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 03:35:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9494D841E6
+ for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 03:35:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x342.google.com with SMTP id
- 46e09a7af769-7dbca22dbfeso1674184a34.1
- for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 18:35:18 -0700 (PDT)
+Received: by mail-ot1-x344.google.com with SMTP id
+ 46e09a7af769-7d7fdb922a5so2721547a34.3
+ for <u-boot@lists.denx.de>; Sat, 11 Apr 2026 18:35:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775957715; x=1776562515; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775957719; x=1776562519; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0jRNRrNr+SlAMzhOHrqNuVXEzu7yUxUKxR9oOj7BpA0=;
- b=U/F6xBdW9mNtJwHZEp3tByFJwcVkV45OMNl9FPAkDS5xbYTDOEKXXcrYORVMrI5Qro
- shG2dHo0Pg5uLyQf49GBOHsqPkYPJydj2YqLgnl3+DXHbVh10H3Qt5eWKZGgi4p2Evtv
- vcbpMlwuM5vGeY3OUJCo8P14joic9FseRgxww=
+ bh=SPyfSm5EVH+7daZH9oNJDxBmGsFCMCivITAhTXZqNQc=;
+ b=Q1FVECCuNWYqfsKkU24RPL44JqdG4F1dKDD7koWSfb7Z4O2CyM6EP73aNIucpIUy/y
+ XlsSVjWk7Qc4u6OA+kRvXAZT32Yih2UpcpeO2PQVzExbKFuFZKIeAE48/kpEGnQJba8B
+ 58P/VqajG/JgH75jM4cKRTnmhAmSUn/rIzjXI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775957715; x=1776562515;
+ d=1e100.net; s=20251104; t=1775957719; x=1776562519;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=0jRNRrNr+SlAMzhOHrqNuVXEzu7yUxUKxR9oOj7BpA0=;
- b=LGt4HmJITYobH4cO8LIbL82dQEVY+RrlGvdAkqB3gw8FlWOi7DOqPzmdeslI4ujkkl
- FwGt7ueaYO0xS8dL0yDlBvFCEg1+8/uZ5pN7UDkvEmsQ26JGB4X6LFckl5n+NR3HdBY5
- gVkJmIuY/Vd21eJGeA/GEzLLcDoBmBH69AFa0RqD2XuDDhj6BR6avC9iT6A+KDSgYpbk
- q1Q6256IbmXaucBIHUKWIHNNvM+ui7dCebzXvXmgpBw+TV+bhZlJHMUNB5zGvTaI8lGP
- JIJX7oQ+SNvi4SB44phH7sgcLmijnN/TQafRsT1BZu23H+O6/edSMiX09Ek9hh0vwV5y
- Go0A==
-X-Gm-Message-State: AOJu0Yxu+ehMOYm2aVSSMyV5cxVT1VSpqC4m3t9OSENGO7+Z6L545U1j
- gfigARMcEo7lghrm1SGI85ZndD+XRFX5ky1SRxgrFHanggKL8zMTICOtjL84XOnE0X2gymOQPAn
- FIqV7DEij
-X-Gm-Gg: AeBDietz/8bZaQV63Xw2lOZ2uBeW9XUzWrKLKvwDQfJPGRC0Ccn7mfraeiuN2jvFyZH
- rVqj2IV1o9Knm3meRfNBIsl5v0z8NbYSnC2fM8/FERtC14NxZx8o+3thUHEEobWqO4VSZO24MG8
- 3fPNf58JMFTUD9sJzP5BFXZOwdsAPBHa/GGP169oESxdIRdGTL3r6EifMHYhbdBa+0frdBsfHv8
- Vb1AhC7UMpxFwDtJG3qYFDyKnRNUDOqIlvNjTArqdJkbFbBBUhBE60rRJEZMi5BBdeIYuvdiDwP
- qot9xeJ6Zlu1WmTBnabwt1jpgmQFvqZAfjhcg19OF6qZUQuLwIY5fGxfHwmi9mCLSaLTgZ9FrgM
- 285jemoQFWikBHV+Cyzz6z1USMlAxZiyhJ+ipR1fbwTe+q4J09CCBSnNHOk7TT5Noue/QVc2N+j
- tYafN2LcXiyaZDLSIOnA==
-X-Received: by 2002:a05:6830:67fb:b0:7d7:fb03:f6ba with SMTP id
- 46e09a7af769-7dc27e14161mr4673484a34.21.1775957715288; 
- Sat, 11 Apr 2026 18:35:15 -0700 (PDT)
+ bh=SPyfSm5EVH+7daZH9oNJDxBmGsFCMCivITAhTXZqNQc=;
+ b=gOkR4ubv3JSz4Al209r6oaqooKa+b5pBMnWCom/EtQAynT3PP/D0mbkYdlkxeYttmG
+ c0XHPX+KYmWZhyWmsuPFHbBEDJr5jx3sYT1pewDDtLy11W1dwv9NGaJ+OMap6oMeAUWk
+ 0+N0Ng/xJPBFWBe25HKwJJ8vHX7iglpQ7CV1OUNwj8ogt3AVbMBevkNgtWNR4TgurtzO
+ jeembaUEQ9lTCqnlz2io+hDpCWXvYPS2iDwHuub0LUxkxr4HXrL6HC+wdkDhu4Cber+P
+ fuIXKl+Qv1vNcBg52UjsTVkDBiUzWGHJ55NkWbeIFdyhUNLvH5tzpd3Me6+5URJRhM35
+ VXEQ==
+X-Gm-Message-State: AOJu0YzdvFzdtHeZEcJUxTDFzBss3LQQB46OVPMJE0DuV9TLUCODkUa1
+ ZBqztBaVvp4cSJgNFLftHQ1MtbvazA5GzRik1EJY8OBdL7TXTwCzg8gaqXz9coyshZKAdbwUGlQ
+ K+ZnM54uS
+X-Gm-Gg: AeBDievCV4eBM7BZU4M+DVbqNmdcK/6wjzzbjKVUQvucDyptaF8RUKIGv1yO30Owvsn
+ kOn86jaHYNhjdlSfmO96qcp6hSVb5XnWbcHMZUPcGChta8/8KEdI1OJfCjTBSKJFB85iEClSs/H
+ rTplwOcAL/qhFKjijlpnz7n/ijCDYPWUEM8J0zZ1XggRgmfWfU5+xuvvQK/ve+wfcWRTotmlDO+
+ U2cBTVf6ax9GmCxX2/ooVSEHUstFgl/6dK2qNSelNSt/GTjdmEcL0C+iWANOwaGW2NdSvnodLwB
+ GdfpykrLFOglnt3/vpKaSVP9JC7com0kF/N6+99oF1S3dPqIz4q7r73IO0J+ViHh0xPg7vSWfwz
+ llu55RcVvjk+5wn0ZDt2r5+5X1I3CL6VUuADaYZCd+Fd7F+4UllSvF2sIqzrkg1H/n/r/o1b8OU
+ sEOP1HjVkTjYGnIPdIW4x3rnptgT8Z
+X-Received: by 2002:a05:6830:6f43:b0:7d7:ebf0:34b2 with SMTP id
+ 46e09a7af769-7dc27dcfedemr5074075a34.14.1775957719153; 
+ Sat, 11 Apr 2026 18:35:19 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7dc2d1aca3asm4242826a34.6.2026.04.11.18.35.11
+ 46e09a7af769-7dc2d1aca3asm4242826a34.6.2026.04.11.18.35.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 11 Apr 2026 18:35:12 -0700 (PDT)
+ Sat, 11 Apr 2026 18:35:16 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
  Simon Glass <simon.glass@canonical.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH 04/12] test: Add argument-type definitions
-Date: Sat, 11 Apr 2026 19:34:32 -0600
-Message-ID: <20260412013451.2929001-5-sjg@chromium.org>
+Subject: [PATCH 05/12] test: Add a macro to declare unit tests with arguments
+Date: Sat, 11 Apr 2026 19:34:33 -0600
+Message-ID: <20260412013451.2929001-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260412013451.2929001-1-sjg@chromium.org>
 References: <20260412013451.2929001-1-sjg@chromium.org>
@@ -96,105 +96,92 @@ X-Virus-Status: Clean
 
 From: Simon Glass <simon.glass@canonical.com>
 
-Add types for declaring and storing unit test arguments:
-- enum ut_arg_type: INT, BOOL, STR types
-- enum ut_arg_flags: OPTIONAL flag for non-required args
-- struct ut_arg_def: declares expected args with defaults
-- struct ut_arg: holds parsed argument values
+Add a UNIT_TEST_ARGS() macro to declare and register a test with inline
+argument definitions. The variadic arguments use struct ut_arg_def and
+a NULL terminator is added automatically to the list.
 
-This prepares for passing key=value arguments to tests via the 'ut'
-command instead of needing to use environment variables.
+Example usage:
+  static int my_test(struct unit_test_state *uts) { ... }
+  UNIT_TEST_ARGS(my_test, UTF_CONSOLE, my_suite,
+      { "path", UT_ARG_STR },
+      { "count", UT_ARG_INT, UT_ARGF_OPTIONAL, { .vint = 10 } });
 
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/test/test.h | 65 +++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 65 insertions(+)
+ include/test/test.h | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
 
 diff --git a/include/test/test.h b/include/test/test.h
-index f8a80a88959..c9b56c66eae 100644
+index c9b56c66eae..cdd19392844 100644
 --- a/include/test/test.h
 +++ b/include/test/test.h
-@@ -29,6 +29,40 @@ struct ut_stats {
- 	ulong duration_ms;
- };
- 
-+/**
-+ * enum ut_arg_type - Type of a unit test argument
-+ *
-+ * @UT_ARG_INT: Integer argument (hex with 0x prefix, or decimal) -> vint
-+ * @UT_ARG_BOOL: Boolean argument (0 or 1) -> vbool
-+ * @UT_ARG_STR: String argument -> vstr
-+ */
-+enum ut_arg_type {
-+	UT_ARG_INT,
-+	UT_ARG_BOOL,
-+	UT_ARG_STR,
-+};
-+
-+/**
-+ * struct ut_arg - Parsed unit test argument value
-+ *
-+ * Holds the parsed value of an argument after command-line processing.
-+ *
-+ * @name: Name of the argument (points to ut_arg_def.name)
-+ * @type: Type of the argument
-+ * @vint: Integer value (when type is UT_ARG_INT)
-+ * @vbool: Boolean value (when type is UT_ARG_BOOL)
-+ * @vstr: String value (when type is UT_ARG_STR, points into argv)
-+ */
-+struct ut_arg {
-+	const char *name;
-+	enum ut_arg_type type;
-+	union {
-+		long vint;
-+		bool vbool;
-+		const char *vstr;
-+	};
-+};
-+
- /*
-  * struct unit_test_state - Entire state of test system
+@@ -49,6 +49,7 @@ enum ut_arg_type {
   *
-@@ -108,6 +142,37 @@ enum ut_flags {
- 	UTF_UNINIT	= BIT(13),	/* test uninits a suite */
+  * @name: Name of the argument (points to ut_arg_def.name)
+  * @type: Type of the argument
++ * @provided: true if value was provided on command line
+  * @vint: Integer value (when type is UT_ARG_INT)
+  * @vbool: Boolean value (when type is UT_ARG_BOOL)
+  * @vstr: String value (when type is UT_ARG_STR, points into argv)
+@@ -56,6 +57,7 @@ enum ut_arg_type {
+ struct ut_arg {
+ 	const char *name;
+ 	enum ut_arg_type type;
++	bool provided;
+ 	union {
+ 		long vint;
+ 		bool vbool;
+@@ -179,12 +181,14 @@ struct ut_arg_def {
+  * @name: Name of test
+  * @func: Function to call to perform test
+  * @flags: Flags indicated pre-conditions for test
++ * @arg_defs: Argument definitions (NULL-terminated array), or NULL
+  */
+ struct unit_test {
+ 	const char *file;
+ 	const char *name;
+ 	int (*func)(struct unit_test_state *state);
+ 	int flags;
++	const struct ut_arg_def *arg_defs;
  };
  
-+/**
-+ * enum ut_arg_flags - Flags for unit test arguments
-+ *
-+ * @UT_ARGF_OPTIONAL: Argument is optional; use default value if not provided
-+ */
-+enum ut_arg_flags {
-+	UT_ARGF_OPTIONAL	= BIT(0),
-+};
-+
-+/**
-+ * struct ut_arg_def - Definition of a unit test argument
-+ *
-+ * Declares an expected argument for a test, including its name, type,
-+ * whether it is optional, and its default value.
-+ *
-+ * @name: Name of the argument (used in key=value matching)
-+ * @type: Type of the argument (int, bool, or string)
-+ * @flags: Argument flags (e.g., UT_ARGF_OPTIONAL)
-+ * @def: Default value (used when argument is optional and not provided)
-+ */
-+struct ut_arg_def {
-+	const char *name;
-+	enum ut_arg_type type;
-+	int flags;
-+	union {
-+		long vint;
-+		bool vbool;
-+		const char *vstr;
-+	} def;
-+};
-+
  /**
-  * struct unit_test - Information about a unit test
-  *
+@@ -236,6 +240,33 @@ struct unit_test {
+ 		.func = _name,						\
+ 	}
+ 
++/**
++ * UNIT_TEST_ARGS() - create unit test entry with inline argument definitions
++ *
++ * Like UNIT_TEST() but allows specifying argument definitions inline.
++ * The variadic arguments are struct ut_arg_def initializers. The NULL
++ * terminator is added automatically by the macro.
++ *
++ * Example:
++ *   UNIT_TEST_ARGS(my_test, UTF_CONSOLE, my_suite,
++ *       { "path", UT_ARG_STR },
++ *       { "count", UT_ARG_INT, UT_ARGF_OPTIONAL, { .vint = 10 } });
++ *
++ * @_name:	Test function name
++ * @_flags:	Test flags (see enum ut_flags)
++ * @_suite:	Test suite name
++ * @...:	Argument definitions (struct ut_arg_def initializers)
++ */
++#define UNIT_TEST_ARGS(_name, _flags, _suite, ...)			\
++	static const struct ut_arg_def _name##_args[] = { __VA_ARGS__, { NULL } }; \
++	ll_entry_declare(struct unit_test, _name, ut_ ## _suite) = {	\
++		.file = __FILE__,					\
++		.name = #_name,						\
++		.flags = _flags,					\
++		.func = _name,						\
++		.arg_defs = _name##_args,				\
++	}
++
+ /* Get the start of a list of unit tests for a particular suite */
+ #define UNIT_TEST_SUITE_START(_suite) \
+ 	ll_entry_start(struct unit_test, ut_ ## _suite)
 -- 
 2.43.0
 
