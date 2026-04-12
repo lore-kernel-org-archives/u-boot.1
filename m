@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 405CDE937E3
-	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 11:25:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 301E2E937E1
+	for <u-boot@archiver.kernel.org>; Sun, 12 Apr 2026 11:25:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 252B184223;
-	Sun, 12 Apr 2026 13:24:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5E07B8420C;
+	Sun, 12 Apr 2026 13:24:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WvhRuyFT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h5DmWY8m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A841839D5; Sun, 12 Apr 2026 13:24:30 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id 2AFB584242; Sun, 12 Apr 2026 13:24:33 +0200 (CEST)
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 114B78421E
- for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 13:24:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C7264839D5
+ for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 13:24:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-464bc03efd8so2010777b6e.2
- for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 04:24:28 -0700 (PDT)
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-67e0d3f288aso2342707eaf.0
+ for <u-boot@lists.denx.de>; Sun, 12 Apr 2026 04:24:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1775993066; x=1776597866; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1775993069; x=1776597869; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TAhZxhLEz0oy/K9BIxXMcNU3xWcbigcWRSL6sK4+4ZY=;
- b=WvhRuyFTARxArHFXznPVjCLEwqStAgpBFAJA3SBmikX/ip6ZA9pKPvDI65lF5J4T3K
- gi/MmuKU2uTfc9tRsjoR6T221G1bgkN1+M2Hl8xPnoEbccOdj9Ldlfai+IfnBOo94CKk
- nRi35mWxDN3yxMpZ0yd1cxY7F8hiVpmU/OIyo=
+ bh=HtC3HYFPdl/00ksMSAHwr/U9a9/nYBnm16wH2uxUpHk=;
+ b=h5DmWY8ml9YGwD1E7qJNqV3yOdbX8R4NBnYxrjRzjxLG4AGS1Lnr2x3rw+CDoMhoiK
+ o+RgC8FQI7VaLK0gC9gh4gz2BXCCuhbTOa0WEh4QkP0m22LQe81NUoIHhpIXvmzd3i4U
+ MEQWwg6Wv96b2DfqCXHAIzxyulUdMBRDPMg14=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1775993066; x=1776597866;
+ d=1e100.net; s=20251104; t=1775993069; x=1776597869;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=TAhZxhLEz0oy/K9BIxXMcNU3xWcbigcWRSL6sK4+4ZY=;
- b=URabrGr6f9a9oocqkgIqC/F0jGfC3+ygKCGnBshxRirWnKR8FlmyInOQBO5XSoEyb+
- gRiWrZAvpjuETuXZRvo5w6AKEi2L0+8fXDt021aSMSO48/fPu4gYFHiD2m+UpF9gOJ+7
- YXKXEdz9vR8ROTHLUkqYHaI/CPNxkDT7IgcW7NpPcDLBLTteyM8khbM1SuH0ZDYiR24G
- 2JWObBIAMc3uzi5DgWXe6dj5py5JBBPUZMKvvZdCxtpS+ksjhuaqZ8D7M205Tn0sMdSq
- MBjd2CgJDNunE71yyIk8n51rNM/pbvwgu5fU3lLC9EDe5a/3OCsRuNC68yUDHyDbNVCq
- UqPA==
-X-Gm-Message-State: AOJu0YzNxH/JNspnPHH5USEiRD3Uan9YeWFUhDdeAZnEvW17uNp0mWuC
- 4zKB38q6YaTtCyr6ovVHNiTgbag28laaH6hPUAqK1w64Ql30z0dzsdhui3ivHPbKy/7vnNAEWf5
- uo4TNPQ==
-X-Gm-Gg: AeBDietIur/NtKccgzz4OUAPLmZOPjZh89T5QokKmRB7lqp6KyDqrrRv125yRUsTpGv
- SMH+B1nVfU0DblpDbKxu1fs7vkRpdNsUMouqcS72EfKOAPKHU2VcaP1CgE3dRHzL6+wJKt+/wiK
- /2bhyo9Ixvt1U7VdQFZX9OOB4EpL9p8mxF2re39s9Vn4yqV/ph8fkJ1kfkmjvyyoFVXsyYDEC63
- XeZP/iaq1bvjCKeo3jJC9jpMlZoyWwpNB/GRjk5cnimPsrW5xivuQ79Mcikon+R+DPXYrEwXmyA
- eTnsqE0JIWFNLmuahchmuXHEDyaryGEnGLm3rUr0+e2KByrG1wo2wCYl2Ofesc9D+ZaclU0zrc0
- swBD1dCOklUBr8JtsjvS8oZIXTInP0v9R64C216EF6isypR6PEqQnj/ymCdW6IJRnNVvKt30SCw
- I0RTVBCG/rKYW8Fie31w==
-X-Received: by 2002:a05:6808:c168:b0:467:1f38:bc1a with SMTP id
- 5614622812f47-4789d95209bmr4735582b6e.7.1775993066154; 
- Sun, 12 Apr 2026 04:24:26 -0700 (PDT)
+ bh=HtC3HYFPdl/00ksMSAHwr/U9a9/nYBnm16wH2uxUpHk=;
+ b=Vw4qp4Zf4aGo79FyQc0hQnOz4u0nrIkWInYl42jPwEM9MRfchO+dFoEwt6TUj84Z74
+ GTtZwAVibanLoD0htvZgYn96Vx4d/O3X1vzoftqMN+e4tTmC6FKnXa3RJtcWafOgyK2M
+ oC+ewnkqLUB+MUDxswUo64FHpRNgTa0WO7tRoSNj+O7E1+S6TbI0Iv6u4mwiz9puIUzN
+ yZS5QvA5/hA98VLMKQsKwFyMF7fzaivP66fO+VER9c74K9al9rVKw0Hn8ufB94lf/pzY
+ efw3+nmyJF37ArpAo5F+rBKqzr3+0JZbQqpas97JjEF/Q3p9eGtnYvSirBHNxQMPxrEj
+ a5MQ==
+X-Gm-Message-State: AOJu0YyJ6PiAUtXuP72H7g9vuWnBhgD5W/cVvD/i/E7/NRRoX9IZVisA
+ q7swiaZAY/2p1x5dmMdSSlXai97draSdwBwimi7d2JPw/W5ssaYFRTML5MaeBbl1lCHk0tUpynK
+ 0FBKaNA==
+X-Gm-Gg: AeBDietwyXIzT5ZvB6eC2Qdc1/KTp4vw1+2vaZikp/rUxQIA5kTWQeQZxc+pgKj197q
+ u0Yim0A9jQ9BFANmR8m4eOESCii0lEw5ZSimpxaZn8P0zCU7ukWC2UmSev/h+1BKxk8IBh5Vpc4
+ NI/2anhZRUpkiMX/57NMqY6vqDnGzBHfuTJIyI6NewQVCGuEgMCDYMOd8J+WX6H5+litRzDnMat
+ dd2YxgcGdUMG94BD8FazbPWM6fV1eR9OxEjAgOevhFfgniEQSaKqyb4lxgFOm9m2OXH2ZIC1Rhm
+ I8lgd27SDnNcrWPTOMGlY6jArSXdAr//b5t0PEhABq34qOBwAET+01Upi5HaqrS0P63OUYtx1hm
+ gKUAEXljcwvD5ObtwHR3a8OVfDgK5LHgN7GTbg8N/5gzZpPAperTt9A3/AhvQDKUlZhSFcepc1u
+ v9DeGB5pIJMm1/dHxeXw==
+X-Received: by 2002:a05:6820:5183:b0:682:ecb8:c3c with SMTP id
+ 006d021491bc7-68be88efeadmr3016282eaf.49.1775993068733; 
+ Sun, 12 Apr 2026 04:24:28 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-423dd395606sm6622071fac.1.2026.04.12.04.24.23
+ 586e51a60fabf-423dd395606sm6622071fac.1.2026.04.12.04.24.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Apr 2026 04:24:24 -0700 (PDT)
+ Sun, 12 Apr 2026 04:24:28 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 09/12] test: Add tests for unit-test arguments
-Date: Sun, 12 Apr 2026 05:19:46 -0600
-Message-ID: <20260412111958.943933-10-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH v2 10/12] test: Add documentation for the test framework
+Date: Sun, 12 Apr 2026 05:19:47 -0600
+Message-ID: <20260412111958.943933-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260412111958.943933-1-sjg@chromium.org>
 References: <20260412111958.943933-1-sjg@chromium.org>
@@ -94,211 +95,239 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a set of tests to check the behaviour of test arguments and the ut
-command. This includes failure cases, where the wrong type or a
-non-existent argument is requested.
+Add documentation for test assertions, the private buffer, and test
+parameters. This covers the available ut_assert*() macros, console
+output checks, memory helpers, and how to pass typed arguments from
+Python to C tests.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/common/Makefile    |   1 +
- test/common/test_args.c | 176 ++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 177 insertions(+)
- create mode 100644 test/common/test_args.c
+ doc/develop/tests_writing.rst | 169 ++++++++++++++++++++++++++++++++++
+ doc/usage/cmd/ut.rst          |  11 ++-
+ 2 files changed, 178 insertions(+), 2 deletions(-)
 
-diff --git a/test/common/Makefile b/test/common/Makefile
-index baefc7b3622..bfeb29346f5 100644
---- a/test/common/Makefile
-+++ b/test/common/Makefile
-@@ -11,3 +11,4 @@ obj-$(CONFIG_CYCLIC) += cyclic.o
- obj-$(CONFIG_EVENT_DYNAMIC) += event.o
- obj-y += cread.o
- obj-$(CONFIG_$(PHASE_)CMDLINE) += print.o
-+obj-$(CONFIG_$(PHASE_)CMDLINE) += test_args.o
-diff --git a/test/common/test_args.c b/test/common/test_args.c
-new file mode 100644
-index 00000000000..d81039e75ac
---- /dev/null
-+++ b/test/common/test_args.c
-@@ -0,0 +1,176 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Test for unit test arguments
-+ *
-+ * Copyright 2026 Canonical Ltd
-+ * Written by Simon Glass <simon.glass@canonical.com>
-+ */
+diff --git a/doc/develop/tests_writing.rst b/doc/develop/tests_writing.rst
+index 1a020caa411..40192f9db30 100644
+--- a/doc/develop/tests_writing.rst
++++ b/doc/develop/tests_writing.rst
+@@ -101,6 +101,47 @@ constructs, in this case to check that the expected things happened in the
+ Python test.
+ 
+ 
++Passing arguments to C tests
++----------------------------
 +
-+#include <string.h>
-+#include <test/common.h>
-+#include <test/test.h>
-+#include <test/ut.h>
++Sometimes a C test needs parameters from Python, such as filenames or expected
++values that are generated at runtime. The test-argument feature allows this.
 +
-+/* Test that string arguments work correctly */
-+static int test_args_str_norun(struct unit_test_state *uts)
-+{
-+	ut_asserteq_str("hello", ut_str(0));
++Use the `UNIT_TEST_ARGS` macro to declare a test with arguments::
 +
-+	return 0;
-+}
-+UNIT_TEST_ARGS(test_args_str_norun, UTF_CONSOLE | UTF_MANUAL, common,
-+	       { "strval", UT_ARG_STR });
++   static int my_test_norun(struct unit_test_state *uts)
++   {
++      const char *filename = ut_str(0);
++      int count = ut_int(1);
 +
-+/* Test that integer arguments work correctly */
-+static int test_args_int_norun(struct unit_test_state *uts)
-+{
-+	ut_asserteq(1234, ut_int(0));
++      /* test code using filename and count */
 +
-+	return 0;
-+}
-+UNIT_TEST_ARGS(test_args_int_norun, UTF_CONSOLE | UTF_MANUAL, common,
-+	       { "intval", UT_ARG_INT });
++      return 0;
++   }
++   UNIT_TEST_ARGS(my_test_norun, UTF_CONSOLE | UTF_MANUAL, my_suite,
++                  { "filename", UT_ARG_STR },
++                  { "count", UT_ARG_INT });
 +
-+/* Test that boolean arguments work correctly */
-+static int test_args_bool_norun(struct unit_test_state *uts)
-+{
-+	ut_asserteq(true, ut_bool(0));
++Each argument definition specifies a name and type:
 +
-+	return 0;
-+}
-+UNIT_TEST_ARGS(test_args_bool_norun, UTF_CONSOLE | UTF_MANUAL, common,
-+	       { "boolval", UT_ARG_BOOL });
++- `UT_ARG_STR` - string argument, accessed via `ut_str(n)`
++- `UT_ARG_INT` - integer argument, accessed via `ut_int(n)`
++- `UT_ARG_BOOL` - boolean argument, accessed via `ut_bool(n)`
++  (use `1` for true, any other value for false)
 +
-+/* Test multiple arguments of different types */
-+static int test_args_multi_norun(struct unit_test_state *uts)
-+{
-+	ut_asserteq_str("test", ut_str(0));
-+	ut_asserteq(42, ut_int(1));
-+	ut_asserteq(true, ut_bool(2));
++Arguments are passed on the command line in `name=value` format::
 +
-+	return 0;
-+}
-+UNIT_TEST_ARGS(test_args_multi_norun, UTF_CONSOLE | UTF_MANUAL, common,
-+	       { "str", UT_ARG_STR },
-+	       { "num", UT_ARG_INT },
-+	       { "flag", UT_ARG_BOOL });
++   ut -f my_suite my_test_norun filename=/path/to/file count=42
 +
-+/* Test optional arguments with defaults */
-+static int test_args_optional_norun(struct unit_test_state *uts)
-+{
-+	/* Required arg should match what was passed */
-+	ut_asserteq_str("required", ut_str(0));
++From Python, you can call the test like this::
 +
-+	/* Optional args should have default values if not provided */
-+	ut_asserteq(99, ut_int(1));
-+	ut_asserteq(false, ut_bool(2));
++   cmd = f'ut -f my_suite my_test_norun filename={filepath} count={count}'
++   ubman.run_command(cmd)
 +
-+	return 0;
-+}
-+UNIT_TEST_ARGS(test_args_optional_norun, UTF_CONSOLE | UTF_MANUAL, common,
-+	       { "req", UT_ARG_STR },
-+	       { "opt_int", UT_ARG_INT, UT_ARGF_OPTIONAL, { .vint = 99 } },
-+	       { "opt_bool", UT_ARG_BOOL, UT_ARGF_OPTIONAL, { .vbool = false } });
++This approach combines Python's flexibility for setup (creating files,
++generating values) with C's speed and debuggability for the actual test logic.
 +
-+/* Test requesting wrong type - ut_int() on a string arg should fail */
-+static int test_args_wrongtype_norun(struct unit_test_state *uts)
-+{
-+	/* This should fail - asking for int but arg is string */
-+	ut_asserteq(0, ut_int(0));
-+	ut_asserteq(true, uts->arg_error);
 +
-+	return 0;
-+}
-+UNIT_TEST_ARGS(test_args_wrongtype_norun, UTF_MANUAL, common,
-+	       { "strval", UT_ARG_STR });
+ How slow are Python tests?
+ --------------------------
+ 
+@@ -384,6 +425,134 @@ existing suite or creating a new one.
+ An example SPL test is spl_test_load().
+ 
+ 
++.. _tests_writing_assertions:
 +
-+/* Test requesting invalid arg number - ut_str(1) when only arg 0 exists */
-+static int test_args_badnum_norun(struct unit_test_state *uts)
-+{
-+	/* This should fail - asking for arg 1 but only arg 0 exists */
-+	ut_asserteq_ptr(NULL, ut_str(1));
-+	ut_asserteq(true, uts->arg_error);
++Assertions
++----------
 +
-+	return 0;
-+}
-+UNIT_TEST_ARGS(test_args_badnum_norun, UTF_MANUAL, common,
-+	       { "strval", UT_ARG_STR });
++The test framework provides various assertion macros, defined in
++``include/test/ut.h``. All of these return from the test function on failure,
++unless ``uts->soft_fail`` is set.
 +
-+/* Wrapper test that runs the manual tests with proper arguments */
-+static int test_args(struct unit_test_state *uts)
-+{
-+	ut_assertok(run_command("ut -f common test_args_str_norun strval=hello",
-+				0));
-+	ut_assertok(run_command("ut -f common test_args_int_norun intval=1234",
-+				0));
-+	ut_assertok(run_command("ut -f common test_args_bool_norun boolval=1",
-+				0));
-+	ut_assertok(run_command("ut -f common test_args_multi_norun str=test num=42 flag=1",
-+				0));
-+	ut_assertok(run_command("ut -f common test_args_optional_norun req=required",
-+				0));
++Basic assertions
++~~~~~~~~~~~~~~~~
 +
-+	return 0;
-+}
-+COMMON_TEST(test_args, UTF_CONSOLE);
++ut_assert(cond)
++    Assert that a condition is non-zero (true)
 +
-+/* Test argument-parsing failure cases - these should all fail */
-+static int test_args_fail(struct unit_test_state *uts)
-+{
-+	/* Missing required argument - should fail */
-+	ut_asserteq(1, run_command("ut -f common test_args_str_norun", 0));
-+	ut_assert_nextline("Missing required argument 'strval' for test 'test_args_str_norun'");
-+	ut_assert_nextline_regex("Tests run: 1,.*failures: 1");
-+	ut_assert_console_end();
++ut_assertf(cond, fmt, args...)
++    Assert that a condition is non-zero, with a printf() message on failure
 +
-+	/* Unknown argument name - should fail */
-+	ut_asserteq(1, run_command("ut -f common test_args_str_norun badarg=x",
-+				   0));
-+	ut_assert_nextline("Unknown argument 'badarg' for test 'test_args_str_norun'");
-+	ut_assert_nextline_regex("Tests run: 1,.*failures: 1");
-+	ut_assert_console_end();
++ut_assertok(cond)
++    Assert that an operation succeeds (returns 0)
 +
-+	/* Invalid format (no = sign) - should fail */
-+	ut_asserteq(1, run_command("ut -f common test_args_str_norun strval",
-+				   0));
-+	ut_assert_nextline("Invalid argument 'strval' (expected key=value)");
-+	ut_assert_nextline_regex("Tests run: 1,.*failures: 1");
-+	ut_assert_console_end();
++ut_reportf(fmt, args...)
++    Report a failure with a printf() message (always fails)
 +
-+	return 0;
-+}
-+COMMON_TEST(test_args_fail, UTF_CONSOLE);
++Value comparisons
++~~~~~~~~~~~~~~~~~
 +
-+/* Test that requesting wrong type fails - ut_int() on string arg */
-+static int test_args_wrongtype(struct unit_test_state *uts)
-+{
-+	ut_asserteq(1,
-+		    run_command("ut -R -f common test_args_wrongtype_norun strval=hello",
-+				0));
-+	ut_assert_nextline("Test: test_args_wrongtype_norun: test_args.c");
-+	ut_assert_nextline_regex(
-+		"test/common/test_args.c:.*, test_args_wrongtype_norun\\(\\): ut_int\\(\\) type check: arg 0 is not an int");
-+	ut_assert_nextline("Test 'test_args_wrongtype_norun' failed 1 times");
-+	ut_assert_nextline_regex("Tests run: 1,.*failures: 1");
-+	ut_assert_console_end();
++ut_asserteq(expr1, expr2)
++    Assert that two int expressions are equal
 +
-+	return 0;
-+}
-+COMMON_TEST(test_args_wrongtype, UTF_CONSOLE);
++ut_asserteq_64(expr1, expr2)
++    Assert that two 64-bit expressions are equal
 +
-+/* Test that requesting invalid arg number fails */
-+static int test_args_badnum(struct unit_test_state *uts)
-+{
-+	ut_asserteq(1,
-+		    run_command("ut -R -f common test_args_badnum_norun strval=hello",
-+				0));
-+	ut_assert_nextline("Test: test_args_badnum_norun: test_args.c");
-+	ut_assert_nextline_regex(
-+		"test/common/test_args.c:.*, test_args_badnum_norun\\(\\): ut_str\\(\\) arg check: arg 1 is invalid \\(arg_count=1\\)");
-+	ut_assert_nextline("Test 'test_args_badnum_norun' failed 1 times");
-+	ut_assert_nextline_regex("Tests run: 1,.*failures: 1");
-+	ut_assert_console_end();
++ut_asserteq_str(expr1, expr2)
++    Assert that two strings are equal
 +
-+	return 0;
-+}
-+COMMON_TEST(test_args_badnum, UTF_CONSOLE);
++ut_asserteq_strn(expr1, expr2)
++    Assert that two strings are equal, up to the length of the first
++
++ut_asserteq_mem(expr1, expr2, len)
++    Assert that two memory areas are equal
++
++ut_asserteq_ptr(expr1, expr2)
++    Assert that two pointers are equal
++
++ut_asserteq_addr(expr1, expr2)
++    Assert that two addresses (converted from pointers via map_to_sysmem())
++    are equal
++
++ut_asserteq_regex(pattern, str)
++    Assert that a string matches a regular expression pattern. Uses the SLRE
++    library for regex matching. Useful when exact matching is fragile, e.g.
++    when output contains line numbers or variable content.
++
++Pointer assertions
++~~~~~~~~~~~~~~~~~~
++
++ut_assertnull(expr)
++    Assert that a pointer is NULL
++
++ut_assertnonnull(expr)
++    Assert that a pointer is not NULL
++
++ut_assertok_ptr(expr)
++    Assert that a pointer is not an error pointer (checked with IS_ERR())
++
++Console output assertions
++~~~~~~~~~~~~~~~~~~~~~~~~~
++
++These are used to check console output when ``UTF_CONSOLE`` flag is set.
++
++ut_assert_nextline(fmt, args...)
++    Assert that the next console output line matches the format string
++
++ut_assert_nextlinen(fmt, args...)
++    Assert that the next console output line matches up to the format
++    string length
++
++ut_assert_nextline_regex(pattern)
++    Assert that the next console output line matches a regex pattern
++
++ut_assert_nextline_empty()
++    Assert that the next console output line is empty
++
++ut_assert_skipline()
++    Assert that there is a next console output line, and skip it
++
++ut_assert_skip_to_line(fmt, args...)
++    Skip console output until a matching line is found
++
++ut_assert_skip_to_linen(fmt, args...)
++    Skip console output until a partial match is found (compares up to the
++    format-string length)
++
++ut_assert_console_end()
++    Assert that there is no more console output
++
++ut_assert_nextlines_are_dump(total_bytes)
++    Assert that the next lines are a print_buffer() hex dump of the specified
++    size
++
++Memory helpers
++~~~~~~~~~~~~~~
++
++These help check for memory leaks:
++
++ut_check_free()
++    Return the number of bytes free in the malloc() pool
++
++ut_check_delta(last)
++    Return the change in free memory since ``last`` was obtained from
++    ``ut_check_free()``. A positive value means more memory has been allocated.
++
++Private buffer
++~~~~~~~~~~~~~~
++
++Each test has access to a private buffer ``uts->priv`` (256 bytes) for temporary
++data. This avoids the need to allocate memory or use global variables::
++
++   static int my_test(struct unit_test_state *uts)
++   {
++      snprintf(uts->priv, sizeof(uts->priv), "/%s", filename);
++      /* use uts->priv as a path string */
++
++      return 0;
++   }
++
++
+ Writing Python tests
+ --------------------
+ 
+diff --git a/doc/usage/cmd/ut.rst b/doc/usage/cmd/ut.rst
+index d8c3cbf496c..a26ee6ad7de 100644
+--- a/doc/usage/cmd/ut.rst
++++ b/doc/usage/cmd/ut.rst
+@@ -11,7 +11,7 @@ Synopsis
+ 
+ ::
+ 
+-    ut [-r<runs>] [-f] [-I<n>:<one_test>] [<suite> | all [<test>]] [<args>...]
++    ut [-r<runs>] [-f] [-R] [-I<n>:<one_test>] [<suite> | all [<test>]] [<args>...]
+     ut [-s] info
+ 
+ Description
+@@ -37,10 +37,17 @@ test
+     causes another test to fail. If the one test fails, testing stops
+     immediately.
+ 
++-R
++    Preserve console recording on test failure. Normally when a test fails,
++    console recording is disabled so error messages go directly to output.
++    This flag keeps recording enabled, which is useful when testing the test
++    framework itself.
++
+ args
+     Optional arguments to pass to the test, in `name=value` format. These are
+     used by tests declared with `UNIT_TEST_ARGS()` which define expected
+-    argument names and types.
++    argument names and types. See :ref:`develop/tests_writing:passing arguments
++    to c tests` for details.
+ 
+ Typically the command is run on :ref:`arch/sandbox/sandbox:sandbox` since it
+ includes a near-complete set of emulators, no code-size limits, many CONFIG
 -- 
 2.43.0
 
