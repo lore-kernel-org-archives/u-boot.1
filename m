@@ -4,136 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B25BEBFD30
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 10:13:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55CBBEBFD30
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 10:48:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8988C84119;
-	Mon, 13 Apr 2026 12:13:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 91550839DF;
+	Mon, 13 Apr 2026 12:48:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="piCrhMQL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kf7j4+a2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95D70841A2; Mon, 13 Apr 2026 12:13:45 +0200 (CEST)
-Received: from SN4PR0501CU005.outbound.protection.outlook.com
- (mail-southcentralusazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C499483DC9; Mon, 13 Apr 2026 12:48:38 +0200 (CEST)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63D7583F75
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 12:13:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 013F9839D5
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 12:48:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fCOGAIMtrEpnjGZzb2RkRQG65erS0pLFTKpzFK567bTc2eiwcGiMTsHJhEXM1R60bwkbH7y0miVNsQyAfa+pHBnaVpWYETH6BKoDzGTUaSMJ1v3oXvSfefFcgHkp6VXez8XSA4U2JUbZzqqSR08bNP0Jlm+SNmPljSSoQgoddRdrE/Hb/ygYVVvzK2YjyO5KNOZmmFWPWSAHizpFNejcslPrw5PMoOjE6x0P3Vxg2gs1XRRyMX9G0HdytX/QVQVZYUePkMCJy+K15arYJIW9rYZZBtq7+JzdxxeFpeVED00kthWPcD7hNKzTaREHJM1bV989g+LUP7r4rBBKBAgsuA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=z5EOxECgjYmjcAIDMbMjaatUqu49AeOT2viKXTvAfQU=;
- b=UpFxzJjxEkS3DlT7e5XZ5mgwCliUWECkXmZrZ3qxtoJV3wpv130FqEqk8MkGSiMuS1W9EkYHsul0LiX7ffPshd6uzs45x4JCOk8nfNHrREo/2v3n02aJPQImuV+8Mhzwd1Kf/xsGodwj8urO8Bejg6bOh98EN8qkVG0DSpCAmXlnk5nzNDD+6X/bFkUpPtGlK0UNYGIzyp3QqetdxtHXYV9EFXcmOfkXyANT73oDIfzUPb5HORNe9Xrwci3MUscc+QyFPM+iCdR74+rumbbtLDBIdsDVsksjJwpzBuoiWWVVjVjCSJ+pqhYmszG8Myh/EwLrzEzb/irE9kCYALYS0A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=z5EOxECgjYmjcAIDMbMjaatUqu49AeOT2viKXTvAfQU=;
- b=piCrhMQLPhlZfby1FsccoOujyut6iWbJS59G10wRnQz0/ZGVsewciiexsb2p3DYQsXHBiKwemliiQPG1BckNP/z8NmJK9yFuXvb4wmmziGcLAsXpQdVlyyp0GMy+X7yga/SmHQc8s6lpBnLQIliENJS4VO19UX5k/JwBsk+IojPqZBo/DzBWIAOrmCeyl0ZsokLIORsMcQ9+H6P9h/TGoaoOxKAIcsEnOJr2bpRGRXWU+H57BOVgjqW2qGieCdTeYZ2pXdtjG/hUDueTrMs0mZPnJnUh8UDM5JaLczFsRAn3UkspnNFn7Y5Iw+IVNBYMgJRnDtedjPJd8FxJgLN8Lw==
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
- by DS1PR03MB7869.namprd03.prod.outlook.com (2603:10b6:8:21d::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Mon, 13 Apr
- 2026 10:13:38 +0000
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::efa9:4b97:3b4a:8235]) by LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::efa9:4b97:3b4a:8235%6]) with mapi id 15.20.9769.046; Mon, 13 Apr 2026
- 10:13:38 +0000
-From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-To: "MANIYAM, DINESH" <dinesh.maniyam@altera.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Marek Vasut <marex@denx.de>, Simon Goldschmidt
- <simon.k.r.goldschmidt@gmail.com>, Tom Rini <trini@konsulko.com>, Lukasz
- Majewski <lukma@denx.de>, "Hea, Kok Kiang" <kok.kiang.hea@altera.com>, "NG,
- BOON KHAI" <boon.khai.ng@altera.com>, "YUSLAIMI, ALIF ZAKUAN"
- <alif.zakuan.yuslaimi@altera.com>
-Subject: Re: [PATCH] drivers: clk: altera: arria10: Fix wrong API used for
- memory free
-Thread-Topic: [PATCH] drivers: clk: altera: arria10: Fix wrong API used for
- memory free
-Thread-Index: AQHcphPK5yfjZyIwSUWCrDLmp9dFErXdCndO
-Date: Mon, 13 Apr 2026 10:13:38 +0000
-Message-ID: <LV8PR03MB813786F6FD0FD268C1D9B6C2A7242@LV8PR03MB8137.namprd03.prod.outlook.com>
-References: <20260225050110.14290-1-dinesh.maniyam@altera.com>
-In-Reply-To: <20260225050110.14290-1-dinesh.maniyam@altera.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: LV8PR03MB8137:EE_|DS1PR03MB7869:EE_
-x-ms-office365-filtering-correlation-id: f0fb77e9-e515-4bef-fbf2-08de994554a8
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|22082099003|18002099003|55112099003|56012099003|38070700021;
-x-microsoft-antispam-message-info: dZMKiMC3lMuW7o9oAFM1IpZgqvA4SRCUQFANPlJgST4cOY9iG7DFc0D2vg0n9dWl40mGCgVqiDlC8osfg0nmxdr6mtDy2DqoaxEKXFTuKaT9YmMuX2ZTtNnaPTwfxuXYbJwb7BCOgc5XUseX0TxMFMzoJwn2Oi4+gLBzU7ZisP3vXFA57zxxOMuqFfEbkxOpj4zLZp6OW18G5A7uuVgL1i/4qYDYiQ/l0Dh8QBH4NTL3ULEwjrDDXrqMGgZpEWRfgjPvx4HOYXoW0/S70x8Iu+phvI6etiDMQX0oIjMZSxR4FCErJhLIsf5t34DokLSuN1L+LdIxHUYghEZNEzxlax7mlBAw4ZUF9AnWE8ub4KCtIKI2ZdHchbb7BxKuVU5OR6Fb0k34pSJQEboMabba5L1o9c7d8WauG1hnVEQrlJ6UK4xX8zO9nDj4qsiI/A375rp+PsUNrCivSr15dkQvMk5iq/XW9mJGJQDTuUwDD+GuVNVAOkBld+0grtVRUT0QPIhP4IRWYtY8zSLSrYc6YBKvdcMjR5zS20Sld7Spf9yaIc9I8QSLhTQTKNP4xukyWt9JxbHPbCaR2HL0fmLIhaYHEQ/u5DvroiygbEQcD2hLdfCVVzhNNAhz09ys78HdD/PRzd3sd9NqBzTriS3bGs4vvyfPCJFwuEw49vYkwXeOEGxc7A5txMa6KgA4bgl90KpjBSXZjfbicynEggPuq8HpCFIqdKDW+9cLMc/1u5NWDr00tWntTPqb97L5LJ7RK0cMMd5Dr196okcpz1Y+Ct1FLLVkg2VcQpzsywR3J5E=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(22082099003)(18002099003)(55112099003)(56012099003)(38070700021);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?Windows-1252?Q?tmBKG5ZCDONpnmHljyLEK2eBxJMOH/QJ79AzmWkIMQmJWfbCytWYaUQj?=
- =?Windows-1252?Q?4cOzqquHp6iR/J3/QqUrlQHQuqGAhnWANdbTNTkEQgm51TRdPvsVkUGc?=
- =?Windows-1252?Q?qbHCIkN9Gr65YVUJ/qml9590QJ8uXQiJgjTMy8Id3rY9LGLLm9Vm755C?=
- =?Windows-1252?Q?0m3laI2DH6ia8bC38hMKuVJSzqAMvnkWQ5JfCYrr0Tg/k7fQv+hBHjWr?=
- =?Windows-1252?Q?udqknkUDpHjmqJOeaW9BWdD9MN84wzqGmngfcGKrZ7zHfKZ2uzkktN3c?=
- =?Windows-1252?Q?8TvBi7g9blZqMMvnpDeaBtME3dbkFkrT407ElFHiUbywCcsZMAlaGVQg?=
- =?Windows-1252?Q?QGLw66wvrnRjGaNsv0zLHUPeoY/ZXnWsv7kncmNw6GyNjt9WnEjP0xYh?=
- =?Windows-1252?Q?dE58OpQHNbW6RCdxLix/tot+tRU8YetgXNoFc+IC80hNtiGHZn9OXdbs?=
- =?Windows-1252?Q?SdgdgxwaryPsSrqupPWuSeTEcbWrQPX49FksfrK0L2XiiIMHjfPZyQht?=
- =?Windows-1252?Q?he4p+8dzEi+ldpad6QBDrhD2F8eyn9Nk2IvlY6NSNmOmD4fXPeN0cb5p?=
- =?Windows-1252?Q?TZU2pqj2eBglIdqf8r38DldQROMf0k7aVR9k/AFHQR9Bqiuc3fPOJx3U?=
- =?Windows-1252?Q?gcZw1pBSprlp4KVz+HEF7kuhuYeRZS8UW3ZOsUMNxxygwxP3qqVEPxzC?=
- =?Windows-1252?Q?Or6WwI+BKFbJaH3lrEyPd3JfSrfcIXEy8xrSufjZc/vtReLQODBJUneN?=
- =?Windows-1252?Q?BuBqDh+2FdUy8WVzSWS1bxafYnyzFHp9+aEW3Z+5KboYOOG79zdxdWOS?=
- =?Windows-1252?Q?0SWDUOuSvV6eVX9UXosAsvlmzs3ihmz3svT99v6ElbTjEI7/sfYhmAKx?=
- =?Windows-1252?Q?vE10cIiTRZ3TKaGmoQ3RPF9YFixJ2tFHCvIx80BIgbiCe8OUvcQuZwSc?=
- =?Windows-1252?Q?Q7ZSZB+oYCOmZpCltbeNgja3N0f8w4ODb/GdGAsMHmj1m2soE1vxhhih?=
- =?Windows-1252?Q?+l7eTHJ1+4r7HbMAfkdM8w3CP6Bgao2O3q5piZj/KAd8xbEjtDuZ3+ma?=
- =?Windows-1252?Q?xWGC/wW7p+XjqVxeF0Jf4cN4JZkkGTBTIM+JoC0NbUJoU4/X8EutHabN?=
- =?Windows-1252?Q?xwcGa2h9LgahEN5BPpOMxaFJ5HwQFOoRYiXFrbXB3z46PoN+2RT75kZe?=
- =?Windows-1252?Q?GJgLp2opFZMMLyINoYYUmTFNUtoGdh7FDBT+kajwg8hgAENzJMhE90UV?=
- =?Windows-1252?Q?d5AIqmaOsnzrfb+RN8bz2W82FAE2Jp3v92B7bVvxJ6ME2cQjAZf0IoOC?=
- =?Windows-1252?Q?4+zHBFyKqPQJLWqQLMNl/wRN8Zf9+9X4Ir0OPJS5zrm6ryJnIPCraz7e?=
- =?Windows-1252?Q?L41Ql9e8rpgXLaPrv7w2+4uIQCesFtAc+MoVweKeslhfz66GI2047+K+?=
- =?Windows-1252?Q?y8AipzVhn5wjHHu4LTCJRuCUjVwPYkX2KU/TJ26005nB476GxpvpkU3J?=
- =?Windows-1252?Q?jdfq9YnxaxI+pFTqU5260JKzlTQewzEZQlVMzPsbyHU7fKGNgFVc//pb?=
- =?Windows-1252?Q?wmdr0s5ifNEhcxURql3trcnkAGlTMHdWeI4DBnB3/hxOykqAp2TktK4b?=
- =?Windows-1252?Q?KfNk5fcDByE1qdtXX7NYPlnbLbLatCk3O3Pgfwt1pw4Y7LZNrkGmdbQD?=
- =?Windows-1252?Q?OFSVOiG3eIz22VrOJMPxKO6XVxE+/n2tjLjPyObpHJ7jvEjGJVhB0/1O?=
- =?Windows-1252?Q?W8NqFswcuhorb3XFOfewBKYQIPPB92RQ5zdAkD5q2rJIchraxo4O8V4E?=
- =?Windows-1252?Q?DvB7qHrKwp82kb9IAZivtomV4sMsC6yEoPBqt+j0D4S86I5duc6WHTBj?=
- =?Windows-1252?Q?JCe/FOyqfWDLEA=3D=3D?=
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+ spf=pass smtp.mailfrom=ranquet.guillaume@gmail.com
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-82cd70febc7so2846654b3a.2
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 03:48:35 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776077314; cv=none;
+ d=google.com; s=arc-20240605;
+ b=BM7d0nOuTkI2GtDdLO9booEPXWMEQPlxHu6iG/nFYyBvIOILUxb1mvyxBwTKSqACm2
+ 3M547HXQZykEj1UBvXaF7/Dw0HaoZRLmIibWVGkzT25RQc/vU1zkM2LJ1C1qpSuwX1+y
+ MlCJP6Sm3ChKnw52TyqvTjkVuusjLsLuMt8yqcrPP1EYY/xTRukQtbo1AIwSA8ctH+kP
+ Ih8UzJQuW0R6kbRDm9hS24gRkxJwb3dY27VUD9eLUfwD5F4XZCyKryVupd/uvVw91vnk
+ nHT9DdR2ZbLm9CSDHa0hX0mwo+J6/mlg9PREwqoDzpNcB3L1MB6Oa8Ra+dJm7XU5BSfW
+ LHCA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:mime-version:in-reply-to:references
+ :user-agent:from:dkim-signature;
+ bh=6BOLccOblBcQwnTlL2NiHow+pyERSqq3TFN4QSycc3s=;
+ fh=hDjB4ghDwlr9gcMCB/70x7M9q1CtfdzNZAslHteNuM0=;
+ b=RtrZF26ZZwShOItuE90jtMuE9zUuENYhY+mICu6aNG+QPT+F471IPrjx89ubQ5aWPC
+ R2FavvNVq00bulHBSg4Mgx4WKS/rYGfd/tBe9FfCVXkJys2TZIshnKI1S9b7AP+yNjo2
+ EdE9PqGfmaqJyVl71JzRDGas0V6LOC+aL5+2fOAqAwkXC1ytFZDZPXPfFmz0Or6NwqdZ
+ mszVwtBWsFanTXwMqQ2A22NCxc4Ll21afm8HLHW7B5jphBnqUPgiAuz4mMvn5FE4+1gu
+ ohya50qs1KLxuKIlnn8bEWt39lajbGx3ZMNuhoHp33mD5JyaRQIWR5TvgF4sMTDSgeaM
+ qhRQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1776077314; x=1776682114; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:mime-version:in-reply-to:references
+ :user-agent:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6BOLccOblBcQwnTlL2NiHow+pyERSqq3TFN4QSycc3s=;
+ b=kf7j4+a2ifGrEFVMlnW8bkWT9B1eBpPOnMBcIyVdH1aZTZhxkq9MvXv4VVZfPryYUH
+ 0eml6X8BgVWPHakzH6Zn4uf3dEHF9soSspxy2nuUEZ4HTqYBSXhzJrOtjNlmIVqejwfv
+ eGDbDRaYAXUrLicLgR5H7oSHZZuFgbGoVraiiwyNTRndoDH7zZUXSeURoVj4AscQDlSS
+ qNSbe66zatx5S79mn1XVVQMVaN2moc2LMdbPDek96Y76xUe8lVrPby+UeFmupzQSVjhD
+ yUpbI9mLOA/GW4XW75kYpknXKZIxy04eWuv/alwaKSpGLobYL1HGcvj2Dm5UEJ5knxH9
+ 8+pQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776077314; x=1776682114;
+ h=cc:to:subject:message-id:date:mime-version:in-reply-to:references
+ :user-agent:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6BOLccOblBcQwnTlL2NiHow+pyERSqq3TFN4QSycc3s=;
+ b=CF3kTcLUI5dqwiaqYtNZp+6JQP432Ao5ZoHuR1tx1geBwpRwyBmjpJx8y5igBMAIOA
+ mN7zPMxDImJgB84OwkZQTCXJ8TF20suTdw23gLGCHn/B8Kf03kfkZeHvhhAq5zAhypr0
+ wzJs4WN3qgVT2+irP+IPpc9atr6gqJX+Rl0gLAT0/9JYFPFlKy6GVNP6tgHdn2Hq4dxW
+ BmXvEct66RRx62v9Ar7B5HWJIJ3umhzzxZiA8y1tlkqtuwxGlGquW095V0l0126Tj0KE
+ sw4suFxLhnZ3a2mp8FMuEurCN2b96A/3BNzkk5qPhHNk05uU/lNwc4wY1elDvSns6GaR
+ bkPg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+YsxU13sE8QIjIo5H7gojKriRBsQW/yK/+aW7qmM/8+7pKjK6RYD9tAlDhtpGiarhIzicIAuA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy0Cw23U+Ag+ABUfL/xY4zwfBcIHBj0ss27gUfmOgxj0DCxNlp4
+ igydX9CzrbpNynhzCpKxv6Nxlz/xHQHgeOsl55jyhwXOr+kdtUts6U8WgAwkoMyn7+VpUNrF4g2
+ ynbl2WCLwotNZdiEZoEzdAnvtw1ESlOk=
+X-Gm-Gg: AeBDievJJEZK3vI1J8DRVyF88Yg+DhvK6T4Hrvc0xKQj+yXtd3fos4RDftnv9HljBDQ
+ FgNRi6gvZQkWrk9H0BXi8dzXBQulk+ZfViHftw3KaP8ev78mnChppVJr9HhTZTR+hujUeI/YFss
+ jO3qPtd6Jtmate5Lf3zRRm12hPMOdJQ/o62ujds/eC/c6YbsCMReHXD7c8Talc4oq/XGp0ylLvo
+ HCbHSfdUTz7uhLBU69QbO3a1PPLFrKkymcluyyQgkFYRcliSKVmFylPBQH6qCLYKEs7mguRzam9
+ gACLKQ==
+X-Received: by 2002:a05:6a00:26cc:b0:82f:2243:e448 with SMTP id
+ d2e1a72fcca58-82f2243e6d1mr5913145b3a.3.1776077314366; Mon, 13 Apr 2026
+ 03:48:34 -0700 (PDT)
+Received: from 753933720722 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 13 Apr 2026 03:48:32 -0700
+Received: from 753933720722 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 13 Apr 2026 03:48:32 -0700
+From: Guillaume Ranquet <ranquet.guillaume@gmail.com>
+User-Agent: meli/0.8.13
+References: <20260403-cmdline-v2-1-83e22c82f02f@missingno.tech>
+ <4D95B3CE-66CD-45E0-9DB8-2CDD45622920@gmx.de>
+ <CAFLszThvYf0=ebaGqprxy7unbVomC+tu-5uQM2auEZeiNCZpmA@mail.gmail.com>
+In-Reply-To: <CAFLszThvYf0=ebaGqprxy7unbVomC+tu-5uQM2auEZeiNCZpmA@mail.gmail.com>
 MIME-Version: 1.0
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f0fb77e9-e515-4bef-fbf2-08de994554a8
-X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Apr 2026 10:13:38.4517 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: yGtvL7C8vjumwm12Z+hVOFbzFp5TlOXBbhBnceherE0rmdfWaMENTgE1T+2mnThWu594WJyhouxVx+qwCQ6PEwWTkcmERtrkXrGMuU1gBz4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS1PR03MB7869
+Date: Mon, 13 Apr 2026 03:48:32 -0700
+X-Gm-Features: AQROBzBTNDCdvjBq1it5kb7xGrFZbrO8_Nw-5YZMiz3KQxwDh7nnyjxDk4RNbVM
+Message-ID: <CAD+NunbVCgmyUdfd4WX+i8iZZ4FZy5bwBRdrvsH4B6us9gqwfQ@mail.gmail.com>
+Subject: Re: [PATCH v2] arch/x86/lib: implement cmdline configuration property
+To: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Guillaume Ranquet <ranquet.guillaume@gmail.com>, u-boot@lists.denx.de, 
+ Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Jeremy Compostella <jeremy.compostella@intel.com>, Peng Fan <peng.fan@nxp.com>,
+ Yao Zi <me@ziyao.cc>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ James Hilliard <james.hilliard1@gmail.com>,
+ Frank Wunderlich <frank-w@public-files.de>, 
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Shiji Yang <yangshiji66@outlook.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Guillaume Ranquet <granquet@missingno.tech>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,53 +132,221 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dinesh,=0A=
-=0A=
-> From:=A0Maniyam, Dinesh <dinesh.maniyam@altera.com>=0A=
-> Sent:=A0Wednesday, February 25, 2026 1:01 PM=0A=
-> To:=A0u-boot@lists.denx.de <u-boot@lists.denx.de>=0A=
-> Cc:=A0Marek Vasut <marex@denx.de>; Simon Goldschmidt=0A=
-> <simon.k.r.goldschmidt@gmail.com>; Tom Rini <trini@konsulko.com>; Lukasz=
-=0A=
-> Majewski <lukma@denx.de>; Chee, Tien Fong <tien.fong.chee@altera.com>; He=
-a,=0A=
-> Kok Kiang <kok.kiang.hea@altera.com>; Maniyam, Dinesh=0A=
-> <dinesh.maniyam@altera.com>; Ng, Boon Khai <boon.khai.ng@altera.com>;=0A=
-> Yuslaimi, Alif Zakuan <alif.zakuan.yuslaimi@altera.com>=0A=
-> Subject:=A0[PATCH] drivers: clk: altera: arria10: Fix wrong API used for =
-memory=0A=
-> free=0A=
-> From: Dinesh Maniyam <dinesh.maniyam@altera.com>=0A=
-> Fix the wrong API used for memory free.=0A=
-> Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>=0A=
-> ---=0A=
-> =A0drivers/clk/altera/clk-arria10.c | 2 +-=0A=
-> =A01 file changed, 1 insertion(+), 1 deletion(-)=0A=
-> diff --git a/drivers/clk/altera/clk-arria10.c=0A=
-> b/drivers/clk/altera/clk-arria10.c=0A=
-> index 1840f73beee..e56e94adae0 100644=0A=
-> --- a/drivers/clk/altera/clk-arria10.c=0A=
-> +++ b/drivers/clk/altera/clk-arria10.c=0A=
-> @@ -223,7 +223,7 @@ static void socfpga_a10_handoff_workaround(struct ude=
-vice=0A=
-> *dev)=0A=
-> =A0=A0=A0=A0=A0=A0=A0=A0 ret =3D clk_request(dev, &bulk->clks[0]);=0A=
-> =A0=A0=A0=A0=A0=A0=A0=A0 if (ret)=0A=
-> -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 free(bulk->clks);=0A=
-> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 devm_kfree(dev, bulk->clks);=
-=0A=
-=0A=
-you must still reset bulk->clks =3D NULL and bulk->count =3D 0 so nothing r=
-eads the old shape, treating pointer/count reset as part of =93secure clean=
-up=94=0A=
-    bulk->clks =3D NULL;=0A=
-    bulk->count =3D 0;=0A=
-=0A=
-=0A=
-> =A0}=0A=
-> =A0static int socfpga_a10_clk_bind(struct udevice *dev)=0A=
-> --=0A=
-> 2.43.7=0A=
-=0A=
-Best regards,=0A=
-Tien Fong=
+On Sun, 12 Apr 2026 13:37, Simon Glass <sjg@chromium.org> wrote:
+>Hi,
+>
+>On Sat, 11 Apr 2026 at 05:25, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>>
+>> Am 3. April 2026 16:28:23 MESZ schrieb Guillaume Ranquet <ranquet.guillaume@gmail.com>:
+>> >Implement the cmdline configuration property as described in the spec
+>> >[1]
+>>
+>>
+>> I can't see in the spec that the command line property is x86 specific. Why would you try to implement it in arch/x86?
+>>
+>
+>This is a little tricky though. It could perhaps be handled in
+>bootm_process_cmdline_env() by setting bootargs. Both legacy bootm and
+>bootstd (via the on_bootargs callback) would then pick it up without
+>any arch-specific code. But I haven't tried it. Commands like
+>'bootflow cmdline set' need to continue to operate as now.
+>
+>Regards,
+>Simon
+>
+
+Indeed, I've looked at implementing this in a generic way but it
+requires a bit of massaging to get things working.
+
+I was also under the impression that no one in their right mind would
+use the command line property if they had access to a device tree?
+
+Tell me if you think I should propose a generic implementation?
+
+Thx,
+Guillaume.
+
+>> Best regards
+>>
+>> Heirich
+>>
+>> >
+>> >[1]: https://fitspec.osfw.foundation/#id10
+>> >
+>> >Signed-off-by: Guillaume Ranquet <granquet@missingno.tech>
+>> >---
+>> >Changes in v2:
+>> >- EDITME: describe what is new in this series revision.
+>> >- EDITME: use bulletpoints and terse descriptions.
+>> >- Link to v1: https://lore.kernel.org/r/20260401-cmdline-v1-1-c56577f82960@missingno.tech
+>> >---
+>> > arch/x86/include/asm/zimage.h |  2 +-
+>> > arch/x86/lib/bootm.c          | 10 +++++++++-
+>> > arch/x86/lib/zimage.c         |  6 +++---
+>> > boot/image-fit.c              | 30 +++++++++++++++++++++++++++++-
+>> > include/image.h               |  3 +++
+>> > 5 files changed, 45 insertions(+), 6 deletions(-)
+>> >
+>> >diff --git a/arch/x86/include/asm/zimage.h b/arch/x86/include/asm/zimage.h
+>> >index 8b5426051701c8266395afd9232eb1ff30d38304..ee0114a227a2b067a3a3126d7d80ab0cc89cea6e 100644
+>> >--- a/arch/x86/include/asm/zimage.h
+>> >+++ b/arch/x86/include/asm/zimage.h
+>> >@@ -132,7 +132,7 @@ struct boot_params *load_zimage(char *image, unsigned long kernel_size,
+>> >  * Return: 0 (always)
+>> >  */
+>> > int setup_zimage(struct boot_params *setup_base, char *cmd_line, int auto_boot,
+>> >-               ulong initrd_addr, ulong initrd_size, ulong cmdline_force);
+>> >+               ulong initrd_addr, ulong initrd_size, const char *cmdline_force);
+>> >
+>> > /**
+>> >  * zboot_start() - Prepare to boot a zimage
+>> >diff --git a/arch/x86/lib/bootm.c b/arch/x86/lib/bootm.c
+>> >index cde4fbf35574a267b856a668659ece7e0a36367f..e029cc1ff18bd53eb873c0e56fd9d3b0a331b4c2 100644
+>> >--- a/arch/x86/lib/bootm.c
+>> >+++ b/arch/x86/lib/bootm.c
+>> >@@ -61,6 +61,7 @@ int arch_fixup_memory_node(void *blob)
+>> > static int boot_prep_linux(struct bootm_headers *images)
+>> > {
+>> >       char *cmd_line_dest = NULL;
+>> >+      const char *cmd_line_override = NULL;
+>> >       struct legacy_img_hdr *hdr;
+>> >       int is_zimage = 0;
+>> >       void *data = NULL;
+>> >@@ -99,6 +100,13 @@ static int boot_prep_linux(struct bootm_headers *images)
+>> >                       puts("Can't get image data/size!\n");
+>> >                       goto error;
+>> >               }
+>> >+
+>> >+              ret = fit_image_get_cmdline(images->fit_hdr_os,
+>> >+                                          images->fit_noffset_cfg,
+>> >+                                          &cmd_line_override);
+>> >+              if (ret)
+>> >+                      debug("unable to retrieve cmdline for zimage\n");
+>> >+
+>> >               is_zimage = 1;
+>> > #endif
+>> >       }
+>> >@@ -125,7 +133,7 @@ static int boot_prep_linux(struct bootm_headers *images)
+>> >       printf("Setup at %#08lx\n", images->ep);
+>> >       ret = setup_zimage((void *)images->ep, cmd_line_dest,
+>> >                       0, images->rd_start,
+>> >-                      images->rd_end - images->rd_start, 0);
+>> >+                      images->rd_end - images->rd_start, cmd_line_override);
+>> >
+>> >       if (ret) {
+>> >               printf("## Setting up boot parameters failed ...\n");
+>> >diff --git a/arch/x86/lib/zimage.c b/arch/x86/lib/zimage.c
+>> >index a5f2231aa523356de93368338b5fd249b8abad6e..af7ee8dbcf3e8f402cb0c76767b8a587f205ad5d 100644
+>> >--- a/arch/x86/lib/zimage.c
+>> >+++ b/arch/x86/lib/zimage.c
+>> >@@ -276,7 +276,7 @@ struct boot_params *load_zimage(char *image, unsigned long kernel_size,
+>> > }
+>> >
+>> > int setup_zimage(struct boot_params *setup_base, char *cmd_line, int auto_boot,
+>> >-               ulong initrd_addr, ulong initrd_size, ulong cmdline_force)
+>> >+               ulong initrd_addr, ulong initrd_size, const char *cmdline_force)
+>> > {
+>> >       struct setup_header *hdr = &setup_base->hdr;
+>> >       int bootproto = get_boot_protocol(hdr, false);
+>> >@@ -333,7 +333,7 @@ int setup_zimage(struct boot_params *setup_base, char *cmd_line, int auto_boot,
+>> >
+>> >               /* build command line at COMMAND_LINE_OFFSET */
+>> >               if (cmdline_force)
+>> >-                      strcpy(cmd_line, (char *)cmdline_force);
+>> >+                      strcpy(cmd_line, cmdline_force);
+>> >               else
+>> >                       build_command_line(cmd_line, auto_boot);
+>> >               if (IS_ENABLED(CONFIG_CMD_BOOTM)) {
+>> >@@ -404,7 +404,7 @@ int zboot_setup(void)
+>> >
+>> >       ret = setup_zimage(base_ptr, (char *)base_ptr + COMMAND_LINE_OFFSET,
+>> >                          0, state.initrd_addr, state.initrd_size,
+>> >-                         (ulong)state.cmdline);
+>> >+                         state.cmdline);
+>> >       if (ret)
+>> >               return -EINVAL;
+>> >
+>> >diff --git a/boot/image-fit.c b/boot/image-fit.c
+>> >index e7c7212195f4a291e26ed6d3440a1b42274dacab..1790af4a8e5a9c7d11f7dee5f67226071f8f057e 100644
+>> >--- a/boot/image-fit.c
+>> >+++ b/boot/image-fit.c
+>> >@@ -1096,6 +1096,32 @@ int fit_image_get_data(const void *fit, int noffset, const void **data,
+>> >       return ret;
+>> > }
+>> >
+>> >+/**
+>> >+ * fit_image_get_cmdline - get image configuration command line
+>> >+ * @fit: pointer to the FIT format image header
+>> >+ * @cfg_noffset: configuration node offset
+>> >+ * @cmdline: double pointer to char, will hold pointer to the cmdline
+>> >+ *
+>> >+ * fit_image_get_cmdline() gets the cmdline from the configuration node.
+>> >+ * If the property is found its data start address is returned to the caller.
+>> >+ *
+>> >+ * returns:
+>> >+ *     0, on success
+>> >+ *     -1, on failure
+>> >+ */
+>> >+int fit_image_get_cmdline(const void *fit, int noffset, const char **cmdline)
+>> >+{
+>> >+      int len;
+>> >+
+>> >+      *cmdline = (const char *)fdt_getprop(fit, noffset, FIT_CMDLINE_PROP, &len);
+>> >+      if (!*cmdline) {
+>> >+              fit_get_debug(fit, noffset, FIT_CMDLINE_PROP, len);
+>> >+              return -1;
+>> >+      }
+>> >+
+>> >+      return 0;
+>> >+}
+>> >+
+>> > /**
+>> >  * fit_image_hash_get_algo - get hash algorithm name
+>> >  * @fit: pointer to the FIT format image header
+>> >@@ -2136,8 +2162,10 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+>> >               fit_base_uname_config = fdt_get_name(fit, cfg_noffset, NULL);
+>> >               printf("   Using '%s' configuration\n", fit_base_uname_config);
+>> >               /* Remember this config */
+>> >-              if (image_type == IH_TYPE_KERNEL)
+>> >+              if (image_type == IH_TYPE_KERNEL) {
+>> >                       images->fit_uname_cfg = fit_base_uname_config;
+>> >+                      images->fit_noffset_cfg = cfg_noffset;
+>> >+              }
+>> >
+>> >               if (FIT_IMAGE_ENABLE_VERIFY && images->verify) {
+>> >                       puts("   Verifying Hash Integrity ... ");
+>> >diff --git a/include/image.h b/include/image.h
+>> >index 34efac6056dd29307df359dce21e4f94d5fcbf2d..9916e67168e3a4f5412fc26d318af32047c239e2 100644
+>> >--- a/include/image.h
+>> >+++ b/include/image.h
+>> >@@ -365,6 +365,7 @@ struct bootm_headers {
+>> >        * format, even for SPL, this extra data size seems worth it.
+>> >        */
+>> >       const char      *fit_uname_cfg; /* configuration node unit name */
+>> >+      int             fit_noffset_cfg;        /* configuration node offset */
+>> >
+>> >       void            *fit_hdr_os;    /* os FIT image header */
+>> >       const char      *fit_uname_os;  /* os subimage node unit name */
+>> >@@ -1108,6 +1109,7 @@ int booti_setup(ulong image, ulong *relocated_addr, ulong *size,
+>> > #define FIT_TFA_BL31_PROP     "tfa-bl31"
+>> > #define FIT_TEE_PROP          "tee"
+>> > #define FIT_COMPAT_PROP               "compatible"
+>> >+#define FIT_CMDLINE_PROP      "cmdline"
+>> >
+>> > #define FIT_MAX_HASH_LEN      HASH_MAX_DIGEST_SIZE
+>> >
+>> >@@ -1259,6 +1261,7 @@ int fit_get_data_node(const void *fit, const char *image_uname,
+>> > int fit_get_data_conf_prop(const void *fit, const char *prop_name,
+>> >                          const void **data, size_t *size);
+>> >
+>> >+int fit_image_get_cmdline(const void *fit, int noffset, const char **cmdline);
+>> > int fit_image_hash_get_algo(const void *fit, int noffset, const char **algo);
+>> > int fit_image_hash_get_value(const void *fit, int noffset, uint8_t **value,
+>> >                               int *value_len);
+>> >
+>> >---
+>> >base-commit: 98cf83d81617f489d7ff7bf78d33e693e2799254
+>> >change-id: 20260401-cmdline-ab954a4e8828
+>> >
+>> >Best regards,
+>>
