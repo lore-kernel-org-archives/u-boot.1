@@ -4,86 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1A11F531CB
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 20:19:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C62EF531CC
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 20:23:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6298183DC9;
-	Mon, 13 Apr 2026 22:19:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CF58D841CD;
+	Mon, 13 Apr 2026 22:23:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iB011goG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EiGcopI1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1BEE841A2; Mon, 13 Apr 2026 22:19:17 +0200 (CEST)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id BBF2D841D5; Mon, 13 Apr 2026 22:23:22 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E1AD839DF
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 22:19:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CC87839DF
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 22:23:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-464ba2bb3aeso2770761b6e.1
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 13:19:05 -0700 (PDT)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7dbcb467f2bso4402453a34.3
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 13:23:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1776111537; x=1776716337; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1776111799; x=1776716599; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=tFimhQ3mkrzI4CmGPpnJt93dQy6hiCrZpLNo07Ti4OQ=;
- b=iB011goGcc1e36aOLTUGWO5Hel3wugxWz96S0vkNnOpD4rO/Lv3pI0nuIRgjju5OoY
- WW+ieVHz/cwYmoYa1c65s1sE2bzZEipb6rkMLdiAZZIPIjPux0N9wc+2BM8/NdLnMblz
- wxZAu9OOawa9IJSnXv1Z1pgChUjsR71GrEmGE=
+ bh=L0QEkKel+blg6CV7eek9A0BmTsNHWrG0+6acwlBtTN4=;
+ b=EiGcopI1LrFvNrqw0F2OvtPtFzJJfFe9i5wikanpWTMn99G+JvrNSiKqNj7UYqsAl3
+ rjo2t+f33TUHmdb8H17zdRVxUWkzFUCPmhPor2gdtl9tOUKv2DhjNZ5O0HVAmU521wVM
+ yAkFHjQfnIfv6NbJ2MzqQyKu9kYOjkNAdkBs8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776111537; x=1776716337;
+ d=1e100.net; s=20251104; t=1776111799; x=1776716599;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tFimhQ3mkrzI4CmGPpnJt93dQy6hiCrZpLNo07Ti4OQ=;
- b=IoS8xUBgZVfoXY+9ngDnjQDTD1uvhb2yIUQkvVK9Kb2gJzl8Km1555qHD0tGJnogN1
- tAws1ODDSHeQdcACQ/go8U6HT2wpbXbIK5+gDblGo3/ux2e1NoHhX01YwC4RxamQyWHX
- Lt6xd1nf/RcZqGELuT/c10HZhL0s/MYI12j3oNPXetZ6J+nlF5CYitMrHacGGSW7l6L0
- gPABhvWaDvps+oNgBViuXIVOYNHUeRsp23MRghMtmnzXyYmtyZavPTLSOdchUNylUOou
- xpPrTgHxfXCwj3k+aMoxYTKSKm4YNvCDgjHpL/KwMIECTn87LiExPN/yw6chYNhWbDPz
- ccLw==
-X-Gm-Message-State: AOJu0YzdaBz2aHA5Se1+L9Nhch0lQ9ieiK0PBpy6ba7jWR3JBnpBTZJq
- IOx1ADO36n4yqH9XqtR5ASl0MFT/Zx1MEIhO9k3qCMh9eVY2Q0WlfBzHqKyX2ktLJOg=
-X-Gm-Gg: AeBDiesxRPk+gCMOOo7p9sdQ1FPyetdopE2zKNDoo4i2gnWTfT0ZP3CiUz4iy8cvD3s
- a5AB1ePp/G2FEGGYW6R7W5vg7ftgqV6njxRNpWd1IqQofNewoNCGqWLVkdk30sn7s7IoN7vmWww
- qBwFM5WfEBuRZPtZq6M5hqjpz0RDh3WbvKMY1i3y5+82tbJS2nbn7GwPvSzyRi3FkBANeq2oHiV
- yVPrMWqA9lJpQA7/xPAOd3kZOWR+tiA0LchjJBXqFBPCGeQLlxaCRukhN1FVVVTJlps2NHSYaGT
- ADsnGIuV/0Eqv4JNP1fHixnaqOE5K9CubkPlewecA4r0DzU20tTA8eoa/75aqIVKp9At/rGPyyJ
- d/Gj/RBqDeG1NGhCZEQDgzRXHa86xBeVaFlw4IyqOkA2mZ1Pa2608dLW7qUQJPWXj+pR5Joe0uF
- 6AbGFZFgkZTjIDswlMhatWwYa3ZnuACN9gyGw+Y7oaD2xEmVMvTfgU9y+OtTZzLFxFFFZrR74oH
- 2OYrbXvSFtjbldFGZhCVdo5aL3+GXkolv/pLsQ+YUzYKAPbgwY=
-X-Received: by 2002:a05:6808:13d5:b0:466:ed3f:7214 with SMTP id
- 5614622812f47-478b9f54edamr5789817b6e.25.1776111536630; 
- Mon, 13 Apr 2026 13:18:56 -0700 (PDT)
+ bh=L0QEkKel+blg6CV7eek9A0BmTsNHWrG0+6acwlBtTN4=;
+ b=JrnCPHSRO/BjhECr1eMw/7gmru5oCNIo8DBRL1bwoJFu9KVrv7178pRZ1AgycrAFJn
+ gkoPAcja2hVSX8aaBF6r5US5mr9polJZHPC4RLmyK8YL/CJ+ESJmTmv8m6gqbZ9+VAv1
+ BprVYg2FnBWZGnKI1C7AExXoxcybOpVMb8brQoVL0XCbSrxTrkzY1YQuwpOicYdyI0z4
+ 5iDdP3ZrMjaTFJMikcO96I0KXdsPdQh6LQxNRgt2nmU4SL4+/z1I+aOI1L9TAIvWRuD2
+ s+evv/hy+MxKPV1s/o0exbzQui/uOSyixC0tUIbyXUoQJSAsQI0PgCB27JEe+MfJx1ib
+ XuvQ==
+X-Gm-Message-State: AOJu0Yz3xb5XAaJ7+OnEVJP0Ct10q1H6We1gJGieXsd13mwjK48bzenV
+ kZ0I1jdTYA3qPf0BnfDi0royKHxW8kvMRMwEeeJdeyAXFCt37KXqt21fVjPVMu+KK/0=
+X-Gm-Gg: AeBDieuvHv/WSt05OW6DKI1jSdC82Gxs8bx0wKDDZARQJgIdWIHIsz0lNFPicIHDZKN
+ lFpPHeVuUIMmi+3+BCPtuElLNaxL7o5g1PVNN/joyjcL1xHYUsBHubj+iCZgY6jTTdibDTcvpL8
+ 9VKi2TtFTOkFMf89SjLpXyRMLa3YmTS55BnidbPICkDlo5u+WOywm8zKlw2r/tcr7989g1ROPlm
+ eHewoY/wIIF/diCjNBY9gN76kPjknOZr4f5cN1P3zyY8Oqe7sUIKS/T34ZuQQBg/MlepjAWaQBg
+ OQpHdi3QPCWU6Vna5ndCIVJcmADHsLRXSScjb5kAmJfCbEUrxUYB/qcmcqQwVdBPl9EDgRjeSFw
+ ftuAU9arSNIF1Jcy3dAFv4I/Nafsoi0hi/Z5PDaxjWPr8Hx88t9E9inFB6dFNds/dX1H4fgwKKi
+ 5Wjk3Gcvg21KPVZoVvUqCHp7PrYfUlUAc0Doazt1XLO+3Yr2hMCkGNTJHodsIoqobP8UWOrDtm+
+ 7yJim1WWT+tXy3SbBh5S+VGceG+nYsgMWVAb0wscoKsGIIcSXA=
+X-Received: by 2002:a05:6820:6184:b0:67e:16b4:aa0d with SMTP id
+ 006d021491bc7-68be7ee6b04mr4587127eaf.30.1776111798868; 
+ Mon, 13 Apr 2026 13:23:18 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-478a080c237sm6939820b6e.1.2026.04.13.13.18.55
+ 006d021491bc7-68bc88c7493sm6397971eaf.7.2026.04.13.13.23.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Apr 2026 13:18:56 -0700 (PDT)
-Date: Mon, 13 Apr 2026 14:18:53 -0600
+ Mon, 13 Apr 2026 13:23:17 -0700 (PDT)
+Date: Mon, 13 Apr 2026 14:23:14 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, James Hilliard <james.hilliard1@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH 01/13] boot: Split out the first part of fit_image_load()
-Message-ID: <20260413201853.GG41863@bill-the-cat>
-References: <20260325165431.1027591-1-sjg@chromium.org>
- <20260325165431.1027591-2-sjg@chromium.org>
- <20260408162543.GD41863@bill-the-cat>
- <CAFLszTjKBrUu9zFHyHXmSUMCrZjLB05ri9jdSaaTBOuJndKE0g@mail.gmail.com>
+To: "NG, BOON KHAI" <boon.khai.ng@altera.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-boot Openlist <u-boot@lists.denx.de>,
+ Chin-Liang See <chin.liang.see@intel.com>,
+ Dinh Nguyen <dinh.nguyen@intel.com>, Marek Vasut <marex@denx.de>,
+ Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ "Chee, Tien Fong" <tien.fong.chee@altera.com>,
+ "MANIYAM, DINESH" <dinesh.maniyam@altera.com>,
+ "YUSLAIMI, ALIF ZAKUAN" <alif.zakuan.yuslaimi@altera.com>,
+ "LOK, CHEN HUEI" <chen.huei.lok@altera.com>,
+ "Hea, Kok Kiang" <kok.kiang.hea@altera.com>
+Subject: Re: [PATCH v1] configs: socfpga: stratix10: Disable mkeficapsule
+ tool build
+Message-ID: <20260413202314.GH41863@bill-the-cat>
+References: <20260319112717.7805-1-boon.khai.ng@altera.com>
+ <20260319134809.GR502704@bill-the-cat>
+ <SA3PR03MB7187764E2EBF3FACEF2619DDB44FA@SA3PR03MB7187.namprd03.prod.outlook.com>
+ <20260319161609.GU502704@bill-the-cat>
+ <SA3PR03MB71873A4FC785BA33DA3FA714B45AA@SA3PR03MB7187.namprd03.prod.outlook.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qDPiP34XLNCw4oqJ"
+ protocol="application/pgp-signature"; boundary="6aQ7XP0id/YYseYM"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTjKBrUu9zFHyHXmSUMCrZjLB05ri9jdSaaTBOuJndKE0g@mail.gmail.com>
+In-Reply-To: <SA3PR03MB71873A4FC785BA33DA3FA714B45AA@SA3PR03MB7187.namprd03.prod.outlook.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,72 +113,79 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---qDPiP34XLNCw4oqJ
+--6aQ7XP0id/YYseYM
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Apr 11, 2026 at 07:03:35AM -0600, Simon Glass wrote:
+On Tue, Apr 07, 2026 at 12:46:32AM +0000, NG, BOON KHAI wrote:
+
 > Hi Tom,
 >=20
-> On Wed, 8 Apr 2026 at 10:25, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Wed, Mar 25, 2026 at 10:54:10AM -0600, Simon Glass wrote:
-> >
-> > > This function is over 250 lines long. Split out the image-selection
-> > > part into a new select_image() function which handles format checking,
-> > > configuration selection and image-node lookup.
-> > >
-> > > Take care to only call fit_get_name() when a valid node is found, sin=
-ce
-> > > libfdt does not handle negative offsets gracefully.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> >
-> > Function length isn't a problem in and of itself, especially when we
-> > aren't pulling out some 4 or 5 level deep nested logic to improve
-> > readability.
+> >=20
+> > That's a documented host dependency. We generally don't want to disable
+> > general tools even if, sigh, I see a few other boards are also doing
+> > this now.
+> >=20
+> > --
+> > Tom
 >=20
-> In my view the current code is very hard to maintain and change. I
-> know this because I have tried to do it:
->=20
-> 1. By my count, fit_image_load() declares 20 locals. Even without deep
-> nesting, tracking which variables are live at which point in a
-> function of ~270 lines is extremely hard (see [1] for someone else
-> that had this problem). Just to take one example, pulling
-> select_image() out makes it explicit that cfg_noffset (for example) is
-> only relevant during image selection and doesn't leak into the
-> load/decompress path.
->=20
-> 2. The function has distinct phases: format checking, configuration
-> selection, hash verification, and image-node lookup. So we have 'find
-> what to load' vs. 'load it'. These  are much easier to understand with
-> clean function boundaries, rather than an arbitrary split at a line
-> count.
->=20
-> 3. Reviewability - when someone adds a feature to the loading path,
-> they currently have to read past 90 lines of selection logic to find
-> where their change fits. Smaller functions with clear contracts make
-> it easier to see where new code belongs.
+> Can share the link to the documentation? I tried to search tool the U-Boot
+> docs.u-boot.org but cant find any document related to the host dependency
+> this is only what i found https://docs.u-boot.org/en/latest/build/tools.h=
+tml
+> but didn't mention about mkeficapsule.
 
-Or, splitting things up makes it harder to review because now what
-you're reading through is over *there* instead of the next line. I find
-myself having to "un-inline" function calls sometimes because we've
-thrown around so many abstractions. So I stand by what I said in the
-cover letter.
+So in https://docs.u-boot.org/en/latest/build/gcc.html we list tls.
+That's not to say our docs could not be improved and expanded on, but it
+is there. But with that, you have a stronger point below.
+
+> At the same time, i would like to clarify why this is more than just a mi=
+ssing
+> host dependancy.
+>=20
+> Since SoCFPGA does not support EFI capsule updates, the automatic
+> enable of CONFIG_TOOLS_MKEFICAPSULE actually not reflecting the=20
+> actual capability of the platform.
+>=20
+> Disabling the tool explicitly in the defconfing is an accurate representa=
+tion
+> of this board's feature set, and this is not merely a build workaround,=
+=20
+>=20
+> and, according to https://adaptivesupport.amd.com/s/question/
+> 0D54U000086ca7RSAQ/toolsmkeficapsulec2110-fatal-error-
+> gnutlsgnutlsh-no-such-file-or-directory?language=3Den_US
+> installing libgnutls-dev would suppress the error,
+>=20
+> but this will leave a misleading configuration in place.
+>=20
+> I'm curious, if the intent is that the TOOLS_MKEFICAPSULE should always
+> be build, perhaps the correct fix upstream would be to make the gnutls=20
+> dependency a hard Kconfig requirement?
+
+I've added the EFI Loader custodians to the thread as well. While I
+think tools-only_defconfig needs to enable TOOLS_MKEFICAPSULE (as this
+is what generic distributions should be using when building the
+userspace tools for a generic case, in order to have maximally useful
+tooling), I'm open to saying that it should be "default y if ..." some
+other symbol that means that a given platform has in fact configured the
+rest of the system to support capsule updates as, you're right. If a
+board hasn't done the rest of the work to use it, the tool is not
+useful.
 
 --=20
 Tom
 
---qDPiP34XLNCw4oqJ
+--6aQ7XP0id/YYseYM
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCad1PrQAKCRAr4qD1Cr/k
-CvHiAQDuPdndu1NnJz0OLhEOAQ1aGtSPQwbAdHHqG00gdHopvwEAleXz9Adh1Q/Z
-eQB0oOwvROWG3JJw6ZNbLILGkKtc8gc=
-=W5rP
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCad1QsgAKCRAr4qD1Cr/k
+Cir0AQDFtsSDMFXp33ymZWf5vI0oEsAV2tXvhLzstaYP1fSJqgD/UIQA34XgC7Gy
+qBO9rzaRYWkqfB7R/1Fguilrl8JDMwQ=
+=d4jx
 -----END PGP SIGNATURE-----
 
---qDPiP34XLNCw4oqJ--
+--6aQ7XP0id/YYseYM--
