@@ -4,119 +4,126 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30D9EF531CD
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 20:37:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F071CF531CA
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 21:08:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2776F841F2;
-	Mon, 13 Apr 2026 22:36:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2A4CC839D5;
+	Mon, 13 Apr 2026 23:08:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AiW8Q1/O";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="T3cSryLR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1ED3C8424E; Mon, 13 Apr 2026 22:36:37 +0200 (CEST)
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170100009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::9])
+ id 1BF96839DF; Mon, 13 Apr 2026 23:08:06 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04820841F2
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 22:36:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 630738352B
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 23:08:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HH5W9+GgtTvTxPlWNx8tkkPllWKN8pgTqWi4qjrJVxGWiA7zO+wxzt4gazrR6iDyjANm5LwEAaYGm6xoZxDo4X25sxh+LmUV9+b68m6KcLH2i/hsmB7fRvRYlpbh+mYjbcNKvi6GwsBI0hp5xnWZ/RyexfUrKPNL1TdxMwJOZ0GMZIetxKbGGhWyLb9ke+8y+iEoQXlv/4SzaXmC5RKMfBGXiQB6ffzMPhhStOYUAc8EPgT5OL+hmi3lfruJ/A/AQARlHyt0RHfrD5tKDsFFxz6yOZfekhYom6v5g27Xq54mxx+g0vUeBrxjrC1bqN6nMka+jmb9YUMOCFumxnvRog==
+ b=LMZTlTbMMppcBqMfO7EEofGf4s0YVUsQsKtcgb1FhvAG+ZwdXU7VEsqc1PVMDye2vNhfc4KUnjXZkylkjVHRk2zuYrIxKiNCyXrm19UMBjNy8xB+mxsuvbczJVXGP8g4rdvUEzD0vVGz+PReaiLF27T+X2pT26ej5YL8hDJijoiF0tgNUgJlgK+IC50r8fST4wlFEnRmaclmYS8dd1fyN6sbkigz89pdUsMUFAPXCWEKbWD321yVOz4xcg1gj2+Q7616ayciYzXmPo6V61cBtjQjJHbvCt8j8hiFR1I7vl3vIzj8K+4RQZ4gRPHGOxGNQBUX/73jQrIW2JZd1tdBVQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LLgBWxzLMC9Ao6f8URF9xRpqcblEbBU/DFtHJc4P+z4=;
- b=WnpqI3KrSDQtvwWES+8w5T/N1Okzk5DSdqvp3oF4XM7RmC3EOEKyJwYP1EtytaWo7CBQ+Kpl0pOd8MCMC5c7pmEcSZTxp5QpA2QvcLBRvxeHqXE0cJX6AJOw8nek0Xm2o+i3VA669x+lc6YWaWlYcG1YJvUM1C1tih5OZwHoQqT+GuAiGliU8jbzJ98g4joexQhfuUVVSm+THXt0NVf4D6T4wJw3hpItiKKRXLx8wdPCpj8Xt6ysnnnzhmhSrvvkE6cokAKPXQ9SvY8MoquLk950AXB2etaKMl4D/pznGIV1WR4sbj3ju56BKMQpij+xgBqP4BMx4q604wl5EXva3Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=+jlF2QCt/RJUtAJZkzDxAmhQN1nPuN7lSV8z9jCNhvc=;
+ b=EBJygiHWX2/7PxiDYxyBO6PDRgZMfN2zAQwppv+TSX1E/3n3/+tQq8TMRb+LPnl9Z+idpb6gHBdUiE/7P7//8SfefXMztvjXHkBbLWlAfUoHKstCV42P8g8/vstFJWjnzpDwWzumoDitR9gAEnFe3ulTD1qfOqhFPHhzDdHEPAfnyMMHyPTL/f4VsRUE1DgyOZUnRcBQhPVkhwPprkhFnx+8i01sLZeRTA/RMqPRdsNKNZ0YljOEpHLdDDjB29HoKEiQMNCtjOgzjS7Z5xqh8KpMIDScuYaSqYGmowCqRBwY4F2EcY3XV0quMSsueyfnaUaUoftj7vBWjml8XbE67g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LLgBWxzLMC9Ao6f8URF9xRpqcblEbBU/DFtHJc4P+z4=;
- b=AiW8Q1/Ojdtl/uWr6E30PYDBwrwQmEnNZ93k/gwhfHKO8Y9ufviprjNFAmFB5uqnlURimw9VHiwJkHkgWkNX/mXflqAnBpvYXP4rIBUsaHZakZJF2cthr5jajNGWYBXRtH1TRTYLLfGVMkWegvqoUSmT6SutXgrn9SPhUJwy6kE=
-Received: from SJ0PR13CA0043.namprd13.prod.outlook.com (2603:10b6:a03:2c2::18)
- by DS7PR10MB5135.namprd10.prod.outlook.com (2603:10b6:5:38e::18) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=+jlF2QCt/RJUtAJZkzDxAmhQN1nPuN7lSV8z9jCNhvc=;
+ b=T3cSryLR5vXg2iC7Mvd0ZPblNCo5Gm/DNgEsM4NimlRL29XBr2iznbqGXdnAjaZFfoeZ+aTR1hPPi4wi2XyzSvZ8qU4pM638hdShY3pg5R6X91mFKOZI3IE9GdzBlN108cbcAd6Fly1Oo9InTOlMqoynkJcq0SRWpQtuI0ormUU=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
+ by DUZPR10MB8051.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:4b0::17)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Mon, 13 Apr
- 2026 20:36:31 +0000
-Received: from SJ5PEPF000001F2.namprd05.prod.outlook.com
- (2603:10b6:a03:2c2:cafe::8b) by SJ0PR13CA0043.outlook.office365.com
- (2603:10b6:a03:2c2::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.47 via Frontend Transport; Mon,
- 13 Apr 2026 20:36:30 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SJ5PEPF000001F2.mail.protection.outlook.com (10.167.242.70) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9769.17 via Frontend Transport; Mon, 13 Apr 2026 20:36:29 +0000
-Received: from DFLE211.ent.ti.com (10.64.6.69) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 13 Apr
- 2026 15:36:12 -0500
-Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE211.ent.ti.com
- (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 13 Apr
- 2026 15:36:12 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE204.ent.ti.com
- (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 13 Apr 2026 15:36:12 -0500
-Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.39])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63DKaBsf2729634;
- Mon, 13 Apr 2026 15:36:12 -0500
-From: <rs@ti.com>
-To: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
- <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
- <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
- <ilias.apalodimas@linaro.org>
-CC: <u-boot@lists.denx.de>
-Subject: [PATCHv3 5/6] efi_mem_sort: use list_for_each_entry_safe instead
-Date: Mon, 13 Apr 2026 15:35:54 -0500
-Message-ID: <20260413203555.1990337-6-rs@ti.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260413203555.1990337-1-rs@ti.com>
-References: <20260413203555.1990337-1-rs@ti.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ 2026 21:08:00 +0000
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8%5]) with mapi id 15.20.9769.046; Mon, 13 Apr 2026
+ 21:07:59 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de,  Simon Glass <simon.glass@canonical.com>,  Tom
+ Rini <trini@konsulko.com>
+Subject: Re: [PATCH 1/2] linker_lists: Fix end-marker alignment to prevent
+ padding
+In-Reply-To: <CAFLszTi_U4xS_6kW1VUqaKVUeP+sweOfQvAydXM5F0nQOGSZ+Q@mail.gmail.com>
+ (Simon Glass's message of "Mon, 23 Mar 2026 10:17:17 -0600")
+References: <20260321134626.516665-1-sjg@chromium.org>
+ <20260321134626.516665-2-sjg@chromium.org> <87jyv2oon5.fsf@prevas.dk>
+ <CAFLszTi_U4xS_6kW1VUqaKVUeP+sweOfQvAydXM5F0nQOGSZ+Q@mail.gmail.com>
+Date: Mon, 13 Apr 2026 23:07:58 +0200
+Message-ID: <87se8ymuvl.fsf@prevas.dk>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: AM6PR04CA0023.eurprd04.prod.outlook.com
+ (2603:10a6:20b:92::36) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:681::18)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001F2:EE_|DS7PR10MB5135:EE_
-X-MS-Office365-Filtering-Correlation-Id: 63ee20b0-91b2-406b-a4a2-08de999c57b2
+X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|DUZPR10MB8051:EE_
+X-MS-Office365-Filtering-Correlation-Id: 860d32ff-b2bd-4b81-d75f-08de99a0be03
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|376014|82310400026|1800799024|22082099003|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: DvaHWnJ5s2ah9TiJfUidsEQG6d1HNgxTNAzlxoC2K2Iw8CxEhsfqmQcT0gpOH3yGD0OLqP+5wLmngtEd8LH80uWLxx6SugEbdF/+Ox5No7haytFeUW+0ODDNC8nse91gA87kTxmU6FFb8JErzlh/BKwL7qrJ9q96Mhf8P9O3L49VOD0wshvsEZcT8v+hqnLWMIDl5PFzd9KOXiSlvbbs105cVgpG5fgcPwnEOLcdqiEXQP4Gw3xszViNFRJXlfSzFz5fvQ8d0KQNxc2fdUek1qpTd5eyj2lR5laOrYkClixYNjcgWrwWzLkvXIALpWG0QwtuPSw0NnUva98IXv5b6G7uJ+YTraT+RwcPZDWI73MCt4/HMyJVQLwtoeWBbfjY9F2bzgRLX1EYDYponzsmj8VQgzlJ5LJD1YbNhgUolV4z+rspLhmeA1skjagow7S3LYRB9ijnXVnbVqQaYqlF72xbqUrhxc0GTIysSLSnhqsH4rAOxjitSFchk64LBOUhjZkjc+zpnzM8so6LfMOmNshwiDTvwkRYnhuzEMMNMVLsPAZakcgLC5l2aJXak0xFWUPfvzdoVakcOq2tr+1avPuc5gt7HXqhyHbRrAQnPiKa9iYJ+mTeJ7EZSNqj07rIBHNwipBi2yKfJiqQa4v/ikmlDkBV0xYMHFKHZLr8u9iojeBXEE9b80UJUfkt8SbpBXNGRuQlrrGA63nQZI9GKjs0o8pljFg/QEf35RaKgJGHG48OnGYj0ZA3wKxHXmCjMq89t/R6ykcDC6smIG/O8A==
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(36860700016)(376014)(82310400026)(1800799024)(22082099003)(18002099003)(56012099003);
+ ARA:13230040|52116014|376014|1800799024|366016|38350700014|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: LqErRicEtVAKZuZ4zqF0CBOFcUp0qr5oNOaSYofqJM1wDe6CKm/HUp0sMtQR+xsmEbAGOuX1DYlaCPCgMMO19iNGfrq/KsUtZulvElWaLaFVz0nCCW6Unhzrt9S/DGPwsiHpwAMGjUDGGXms0G9UOwwnZ6Jn6UrrAqNebkqlt0JLn9tZzf6gkxWZ+SXsMa9+9+Z/O1Mog5WS8u3WR8fxi+iEdaEXNZlW9AqpfuBDs/SfvEt/LJlAPP1e2ciWHbk1qkIzAnJ7S43ogPqn5Hw3QM84tVMvBu2wbTwwP8S3S7niwl/q2nSkXpIbcNtCAvvrT6SzBavKLUgGpG/5qex7AmEHYLE7GQByYsh+lGO5fW3pXWr76/YndFz/qJSLG/cdhEIMN4b/zKDnB3q8TYFcQmTpLvzaD/r0hzTAq36k9YZYsOgCcN6ZdZU+3tE9K/PnsBoKokpBQ6+qzUEA3ebWNHG+mFT85cdxErNpXZmj7nqOM+WfqkjS8OVALy7SqYcI/YDEWzJv8YssZzfKSEBAJispO5mXhcyzC6Zo1Ui/zeMyTPSnF8WcMRWksRLtVXAIQIL1g2Q+Ao4pwGbBfCe++EwFVJ1pah0vXmtWYITjlTRZ2huHPa0ZsSs8Fuk/TUEWNnHBRxspXqhrl7wGVZ55sLV/Kel0KrD0zG2+D5p7Zy88EYqvI/QisldjBEPQGZFwhTy3Ne2k8QOjLyNhQAmbqTKqONryqrmg/KbyoxQ7JwXhcSFioWh1JrRSqyRBHKjNEEzmBCnuqKmFDT1UUQBtkVbbbqQwnTZKUNBIBEdszzQ=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(376014)(1800799024)(366016)(38350700014)(56012099003)(22082099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: PHyEElVoSrnceQubCcSVHUYDH7pp/6yd11qusNYEWGMh/izoHFfygFe1xTuYA7LiYtZoxRnR56JKabskeCmLVxbxNEdXacaQmhqdT8W9UII1tN4ijWj6kzPmbaE9wVb0PDPun/XoOzCav0yKedvQuwJnKommws3EKNWB10H4qzB7iQbcIcld61Fa9aRiicTApTj5aFxiQg8ukEuDsoBUcoh85IDv0KaUkN7FcATpeHiUtrpr7/aB6ChTAB+Mft4O4igrivBCmo6mWGouF/t0adMh1BsaTcOkmom9LaRX/GonHCYGlPsylRZ9VuC26dx+IF7b6jjHtUrnc05Ukav6fYvCQR4Z5QlvZyp132b16QQTApsL7vzbRxPB/IzoU0gZfGiJaxhjwGF0K2cz8hUKVKSIASDs8UmzOdOy9dG9qnQFW2fgb/qnBcho6Pi9ybOS
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Apr 2026 20:36:29.7177 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 63ee20b0-91b2-406b-a4a2-08de999c57b2
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001F2.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR10MB5135
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?97tXxIrUIDcRD6iTEcZBP9mvkLSJ3MCc3peeMaJwnl7mncQ6A/VBecQWJhYh?=
+ =?us-ascii?Q?BoWnyygj+V1dUL0GPXuwz/oOZeNtWawJreeK6ThyC5XdqzXEzyay+KNMAyOz?=
+ =?us-ascii?Q?Viah8o+K4SBmmiHV5cEcNwhUPrBJR6amxMbozkFjTDiGp3My0uZgo9AQlFxv?=
+ =?us-ascii?Q?Cf446vcajHVFDxpGElRvYq9+yFdCjuixLFEDR2Ni1KQOTIfAT8Owp1RBzSmJ?=
+ =?us-ascii?Q?s+EuqEEszQEm7pN6VPi9XUB947sI9tfLzUf0VjL4Umlhh9XIV3p3qr3YGhdL?=
+ =?us-ascii?Q?ECMxWfE/KhV9XXXLSAVXXr/Br4ffwhMoT2eFRnWDeXDeJ4cYosrNYzXPpySB?=
+ =?us-ascii?Q?hO8rj82yDtt05Ucft1cDBVlkP10yVILXlj2/LtyigEYFZNXWWwc59wCNyJjd?=
+ =?us-ascii?Q?plbDhylUxCO2WYxaBpRStI+oqSGIdh7zO7qbX0u8WA7retiVyS6Yj0+T2A8w?=
+ =?us-ascii?Q?fnT+KUkbre3NOOJFAXnC4TUoLh7ZiR45AOHBzB8afqz1LW/EZn4U/Za7pn0Y?=
+ =?us-ascii?Q?xNM0bdH5gtA/5fXbbrjBYnL9rnsnG6HnBcK1qIcNyaZq8ngzgSlZ+5WKrbLN?=
+ =?us-ascii?Q?K8QIAEXwTyc4D5wrUi3gAobS425PSPxW75Do5j/Tkug6fXoYj+kYPMCLTK1M?=
+ =?us-ascii?Q?RNVncjD1MQbV6weDhCV+/U68u1fhdvFIuHCwdF3lhUnPwbHVJ4hxA9kBEUqD?=
+ =?us-ascii?Q?XHlELsnCpeHdWy50dDWfbVsA7upPbHWwb4nCLxTs+2KmrXnju+QRtP4LWPO/?=
+ =?us-ascii?Q?n7Co8NAcbBc8stctscBKJV9FoYTraG8dHrrh5bYtXAEo/CtTpbBasmMcpVgA?=
+ =?us-ascii?Q?TIirM16sLfkVicLqF7uw0xM4DdnMxJwJEPWCUkfZ9ZdAkdt5t99342U99trm?=
+ =?us-ascii?Q?WpqxHr+UuPjOj2wX18OUdDTKeMsox64kaCSt1Ca7wPQz9pmPE7Xo1E0oT2Co?=
+ =?us-ascii?Q?PIjtSCY+IHheFWDmpVhTWj2bvyPBtGmZUlX5PTKfJJj/eZL8JD/I3L1C5Cgu?=
+ =?us-ascii?Q?spXF9q9hqGJwtShGoCnw/buOwI5X3ztpywFQPfwfLZiEhMZoVBcjlW+HB0Sf?=
+ =?us-ascii?Q?DAZSZkcjDp67ZwzQa7IMDWp4qRX0Fn3ghu62rdBOu0TfWuKh0qaSVct2mHTp?=
+ =?us-ascii?Q?B11HAuoRSJV5tnccqOM9y/pdhkzBm1PUXp05TyviIB2W5NTYWlqJgWYc9nUy?=
+ =?us-ascii?Q?Gd3mEQTplS2TkuiWe8KJARtH+v9KYHPnGtmQq0v8+vmcpguso/9qhb/p+eC1?=
+ =?us-ascii?Q?QYf+lFVk6uHgxrDWB8b6PMZp0L8G0F8EExKvYiX33NYAybSYipXRZgaRe4sA?=
+ =?us-ascii?Q?pRxsvAGuEYo8FyV2SPRYiOB2y2yRPh9eEdjcOyOnPqc8SAiHI64UYiCcMJ8P?=
+ =?us-ascii?Q?l5cIle66bEPORcL8kB12XRuaR5zIDqUjwpfGcm6ytnYlPts5f7eiIBn7l1X0?=
+ =?us-ascii?Q?p0ftbPFRGJ7EOFIRFC9ghpawxzSQ8Vil9Fnbe436mw2xu/no6HLwSAA1KHHk?=
+ =?us-ascii?Q?XdtDpDzsJ3/0fqTTF9V4dK+5WifqssmWCoc6fDg0+j74SU6l89Cx3KGCC1n8?=
+ =?us-ascii?Q?Rnn1fiAgtXbx5bGHRoHmjPoyBW2rZO4x9YBT7EW+Jc3VP3p4vl6RqjE0ww0J?=
+ =?us-ascii?Q?Nd7J1FPGsOfa0XAskRX2bD2vCssdgDNYJLZ2iYBhRHMqaFFFQ1WnwJ9KR/vd?=
+ =?us-ascii?Q?SgE7mzrimAvp0Wsdp1vpSK7umCCrai2PRpREi+Lmx6UqjhAukzgCFkqs+KUd?=
+ =?us-ascii?Q?OyseqSKKWTxbuR4lZUlRb527ULteZUs=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 860d32ff-b2bd-4b81-d75f-08de99a0be03
+X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Apr 2026 21:07:59.6474 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: rJATxlhwMwBtfUp/Y2nfL4CuUeERZw6kVKTb4Kz1MH8PKe2IEU/6twRVDUBK174KUctM8EzNRv90V5AnI8hiqMrgsD0dwiu7y80veGZSBoA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DUZPR10MB8051
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,84 +140,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Randolph Sapp <rs@ti.com>
+On Mon, Mar 23 2026, Simon Glass <sjg@chromium.org> wrote:
 
-Use list_for_each_entry_safe and comparisons against the current and
-next efi_mem_desc. This reduces the computation required for merging
-regions, prevents unnecessary additional iterations of the list, and
-requires less temporary values.
+> Hi Rasmus,
+>
+> On Mon, 23 Mar 2026 at 03:56, Rasmus Villemoes <ravi@prevas.dk> wrote:
+>>
+>> On Sat, Mar 21 2026, Simon Glass <sjg@chromium.org> wrote:
+>>
+>> > From: Simon Glass <simon.glass@canonical.com>
+>> >
+>> > Change the alignment of end markers in ll_entry_end() and ll_end_decl()
+>> > from __aligned(4) and __aligned(CONFIG_LINKER_LIST_ALIGN) respectively
+>> > to __aligned(1).
+>> >
+>> > The linker places zero-size end markers at aligned boundaries based on
+>> > what follows them. When the next list's start marker has a high alignment
+>> > requirement (e.g., 32 bytes), padding gets inserted before the end
+>> > marker. This causes the byte span (end - start) to not be an exact
+>> > multiple of the struct size.
+>> >
+>> > The compiler optimises pointer subtraction (end - start) using
+>> > magic-number multiplication for division. This optimisation only produces
+>> > correct results when the byte span is an exact multiple of the struct
+>> > size. With padding, the result is garbage (e.g., -858993444 instead of
+>> > 15).
+>> >
+>> > By using __aligned(1), the end marker is placed immediately after the
+>> > last entry with no padding, ensuring (end - start) equals exactly (n *
+>> > sizeof) where n is the number of entries.
+>>
+>> So I'm wondering why that is guaranteed. I mean, the linker is placing
+>> these sections one after another in order
+>>
+>>
+>>   2_foo_2_last_foo   size sizeof(struct foo), alignment max(4, alignof(struct foo))
+>>   2_foo_3            size 0, alignment 4 (1 with your patch)
+>>   2_bar_1            size 0, alignment CONFIG_LINKER_LIST_ALIGN
+>>   2_bar_2_first_bar  size sizeof(struct bar), alignment max(4, alignof(struct bar))
+>>
+>> So clearly the end of last_foo does have 4-byte alignment, yet it is
+>> observed that the linker sometimes makes 2_foo_3's address coincide with
+>> 2_bar_1's address?
+>>
+>> What I don't understand is that it seems that the linker could place the
+>> zero-size object 2_foo_3 at any 4-byte aligned address between the end
+>> of 2_foo_2_last_foo and 2_bar_1. And the same seems to be true when one
+>> changes it to have even smaller alignment requirement.
+>>
+>> So why does an align(1) stop the linker from placing that 0-size section
+>> at the same address as 2_bar_1, or even force it (as we need) to put it
+>> at the first possible address, i.e. immediately after last_foo?
+>
+> My commit message was a bit confusing - alignment of symbol is not
+> based on what follows an item, just on the item itself (despite
+> appearances to the contrary).
+>
+> My understanding of this is that the linker processes input sections
+> sequentially within the SORT(_u_boot_list*) output section, placing
+> each at the first address that satisfies its alignment. So the
+> location counter advances forward only by the minimum needed. But this
+> isn't specific to alignment 1.
+>
+> I've used __aligned(1) in order to make it clear we don't want any
+> alignment. In all current cases, __aligned(4) would be OK too since
+> the structs we use are always 4-byte-aligned. We just want the end
+> marker to go at the current location-counter, i.e. immediately after
+> the last entry. I suppose another way of saying this is that we want
+> the end marker to be a 'multiple of the struct size' higher than the
+> start marker.
+>
+> With ll_end_decl() using __aligned(CONFIG_LINKER_LIST_ALIGN), the
+> result depends on the struct size and the number of items in the list.
+> On sandbox the value is 32. If the last entry ends at, say, 0x103c
+> (4-byte aligned but not 32-byte aligned), the linker must advance to
+> 0x1040 to place the end marker. So then there is a 4-byte gap, i.e.
+> (end - start) not a multiple of sizeof(struct), and the compiler's
+> magic-number division optimisation fails.
 
-Signed-off-by: Randolph Sapp <rs@ti.com>
----
- lib/efi_loader/efi_memory.c | 48 +++++++++++++------------------------
- 1 file changed, 17 insertions(+), 31 deletions(-)
+OK, yes, I agree that the proper thing to use for the end markers is
+aligned(1). But I can't help but feel that this problem is somewhat
+self-inflicted; I still don't understand the rationale for
+CONFIG_LINKER_LIST_ALIGN, even if I've read 0b2fa98aa5 multiple
+times.
 
-diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-index b77c2f980cc..b3b292ebf56 100644
---- a/lib/efi_loader/efi_memory.c
-+++ b/lib/efi_loader/efi_memory.c
-@@ -128,44 +128,30 @@ static uint64_t desc_get_end(struct efi_mem_desc *desc)
-  */
- static void efi_mem_sort(void)
- {
--	struct efi_mem_list *lmem;
--	struct efi_mem_list *prevmem = NULL;
--	bool merge_again = true;
-+	struct efi_mem_list *curmem, *nextmem = NULL;
- 
- 	list_sort(NULL, &efi_mem, efi_mem_cmp);
- 
- 	/* Now merge entries that can be merged */
--	while (merge_again) {
--		merge_again = false;
--		list_for_each_entry(lmem, &efi_mem, link) {
--			struct efi_mem_desc *prev;
--			struct efi_mem_desc *cur;
--			uint64_t pages;
-+	list_for_each_entry_safe(curmem, nextmem, &efi_mem, link) {
-+		struct efi_mem_desc *cur;
-+		struct efi_mem_desc *next;
- 
--			if (!prevmem) {
--				prevmem = lmem;
--				continue;
--			}
-+		/* Exit when we've got nothing to compare with */
-+		if (&nextmem->link == &efi_mem) {
-+			break;
-+		}
- 
--			cur = &lmem->desc;
--			prev = &prevmem->desc;
--
--			if ((desc_get_end(cur) == prev->physical_start) &&
--			    (prev->type == cur->type) &&
--			    (prev->attribute == cur->attribute)) {
--				/* There is an existing map before, reuse it */
--				pages = cur->num_pages;
--				prev->num_pages += pages;
--				prev->physical_start -= pages << EFI_PAGE_SHIFT;
--				prev->virtual_start -= pages << EFI_PAGE_SHIFT;
--				list_del(&lmem->link);
--				free(lmem);
--
--				merge_again = true;
--				break;
--			}
-+		cur = &curmem->desc;
-+		next = &nextmem->desc;
- 
--			prevmem = lmem;
-+		if ((cur->physical_start == desc_get_end(next)) &&
-+		    (cur->type == next->type) &&
-+		    (cur->attribute == next->attribute)) {
-+			/* There is another similar map coming up, reuse it */
-+			next->num_pages += cur->num_pages;
-+			list_del(&curmem->link);
-+			free(curmem);
- 		}
- 	}
- }
--- 
-2.53.0
+The ELF format includes an alignment field for sections, so if gcc emits
+a symbol to some section which requires 16 byte alignment, that section
+should get an alignment requirement of 16 bytes. So I guess what I don't
+understand is how gcc can end up emitting a section containing a "struct
+driver" in one TU with an alignment of 16 bytes, while another TU
+contains a section with a "struct driver" that only requires 8 byte
+alignment.
 
+So yes, this commit improves things, and you can take my Ack, but I'd
+like to have some very concrete examples of a set of complete TUs (not
+just single lines) and compiler invocations that exhibit some of the
+problems that this is all about. Because I'd really like to look at the
+intermediate .o files and see what's going on.
+
+Rasmus
