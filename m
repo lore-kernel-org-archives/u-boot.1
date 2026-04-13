@@ -4,105 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAE6EF34C49
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 12:09:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D0EEF34C4B
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 12:24:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67E09839DF;
-	Mon, 13 Apr 2026 14:09:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8794F839DF;
+	Mon, 13 Apr 2026 14:24:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vdEO0RUz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s5X0QWQh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BCA483DC9; Mon, 13 Apr 2026 14:09:45 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 3BDA483DC9; Mon, 13 Apr 2026 14:24:39 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 430A8839D5
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 14:09:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A9B7839D5
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 14:24:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-488a14c31eeso35202135e9.0
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 05:09:42 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-488c2690057so41586115e9.0
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 05:24:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1776082182; x=1776686982; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1776083075; x=1776687875; darn=lists.denx.de;
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VOVA4jbkHXz9nkWiI6IAmAo0bPvTZu69kvq99PyXMpU=;
- b=vdEO0RUzSRoX1uRZe8iKFus7NlVH8uRXJe7ZB+6/GthkQSnMbXJNupw7v5NY3svcet
- GCEnM6FI7/nbZHgliiGIUz3Ep/gLQz6Gu+HeXXezjaJCDTXZ6i7OVGAFak9ns7LQyGBy
- H3jyO+AYUuYLU7VI/JZHzzzYhCyStD+UFBEV0SK9BoaJKm1Ftvs5Pho6OBnPbOZbXTVI
- J4a39GPFI9RTRkXzZJmv35xGgyFfIvdxa3j7QGT9LApjJrVD4cUxI05+yBsR4xVgxdTc
- mWzIPEOGQmg7ooSqU/j8Qj43RmkL/hJG/RxYSt64PP1YDROi70u+adxVoTvOX7Vi6JSi
- vIug==
+ bh=uzEYOWaS57tBNFxeUqDhAXRkROVxoJ1ZCv3z8ueBmj0=;
+ b=s5X0QWQhtTRwskFQ9N3AkKap8PZ7ii4Q2beHLnu2d7Feao3imgQV9IojaPhWyAVEIB
+ DTKKuGMW1V34rOH+duPaY9AGh+wKygnRWEPQLCUqDuEU8x757VJiMmtZLH5yoC6gGABI
+ Yn14LspahhF4NCljnUyN9NEuRC/+bXmabB7Ppg1DUdqWuISqOl/wP+am0wP9iePixy63
+ TLmmNKdPoUT59qoU2/Q5ExiZDv7pSE2jyDHCNutV6CleKnmx249qdkL73l9KS19Y6VxA
+ qtSSjHxkMHnAwX3KAdyXdYUItIQWy1hkVEbZiWnqIhQptNamyxZC99scSsdKqNQeIHbC
+ jd3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776082182; x=1776686982;
+ d=1e100.net; s=20251104; t=1776083075; x=1776687875;
  h=message-id:date:references:in-reply-to:cc:to:from:subject
  :content-transfer-encoding:mime-version:x-gm-gg:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=VOVA4jbkHXz9nkWiI6IAmAo0bPvTZu69kvq99PyXMpU=;
- b=dT3AU+OScoWfA4KyMplYqxWvtW1k7mPkqqTfmqA1WrSwM96PM/jTRFQkOyp+Xy4XgS
- 1iKlFeKHSjZi+tiFBPpbKIzOCcSUER+s9C5eiucWb88CptI8MjpBv395TnATtnejJiRH
- jFwUdOsBIexQHh95cvni/jIgMh3VhUIEIT7DMjd+Nx39LhaTgr48JyBfRIwShLJn0LjH
- QJDTgbsFVLvL6JcCbYKW4ZU9Bqhbl125mD/n/iGLs53sHHdLp4N+CSLG/frhjMFop5lB
- ounFLDq52HddG6YDGbYjl7ZLEJtSTKcOnF8gN3bSldf5bG2vzPayr83vcdNOwGr89NX2
- MODw==
-X-Gm-Message-State: AOJu0Yy4B0Y+wWdLSVTiqkQNwdx2FuelD5+kpI8Q7Fs7Rxab8pObNrbF
- 9r75zQ3HqtCDb4AL/wcxCoMJwu65BKMVXbPfNLRYQlGnlsgIXQtLgGV4rMsJ8Py3wH4=
-X-Gm-Gg: AeBDiesXXMOCtevu0ZV2SnrdopFpG6fVrkzVnpwsSFnJ5cncqxzRgQ6EsbMlQ3L2o9s
- Vq/u1qP7NxOaCADACLMQ2smpJRmzvD+8it7fZ7ybx7JdyFF22/z+kDpUdyjc2Yg3ZgidYdO2Bg+
- EJcGgWwvrPG8LNOgUBq8VPmVTK/nG84VhrgGT2G7d/HEhBOA3emuNSjhamqU8+F/78xBDAvXBpa
- aNM3lbl544lMnGafKGmqaVgoUk2wPzG6TTGMexijYc9IapdC6W72qGXnAVDrdF4Ovwg9J2Ivj9h
- 6n0YJSd/cx+cS5Km9G22vAjFeTHWqoezac+GO5TpgyGZJuUt+Ipky5Algw1BUY7Ul36KW64ltIC
- ggDkzu/B0e9TnW56iHwaAd0bF+BAaUPC7ojkvmF14vCH7H/xdup1RjrqDUPjHiePUqmWg8nrkGO
- p/h86P+1i2i30XmUORyhqb6e9keTZs9+8aI1vBIDVcQkqfEsNt6jLcFr/e4ZRDjYccli63
-X-Received: by 2002:a05:600c:64c4:b0:485:39b2:a47c with SMTP id
- 5b1f17b1804b1-488d686892emr158124725e9.25.1776082181155; 
- Mon, 13 Apr 2026 05:09:41 -0700 (PDT)
+ bh=uzEYOWaS57tBNFxeUqDhAXRkROVxoJ1ZCv3z8ueBmj0=;
+ b=gPj2aGuWpLDEMVJtkYpaRUgWBhlgbqZqaYPvlWxo3uhPzFYiQXI3oxhY5jrxUX/eNE
+ YKrWhCe2cTxejI74dYZccirRi/GMAz7bb1UJ6LfXXkgbFtA8KykdGisL1grhV4aUszuj
+ 28DzrgGAjnRuGmjNkPT8H6Gowy6MoG5Okr44LK/rqCIx14yLAUB32WkV5ao/wS6CR5qF
+ 4dFQdti9qkkv8eReFxvpmYjFM3qFL2Q8sv4ybADRt5VVuzbQBkFTtKHVK780buWO5Pg8
+ Pqpj13QovXJwiZv8zFDuFOTMbczvtOpL5xy//zssJSwQk8A4URu6KwxF2RFhFCp/e1SU
+ tZxA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/txHa04IqsOrciZwwy19ngMS5HCdXzaXPsviV5ZJImjEItoM/Rud578upQSk0lvF9kjn0ZQH0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwoDFrsoLxkfu7ajS+WqVn6R7pqG7zyJEkmBiJTdR39Z4ga58o6
+ EvmWkIU7iQ9wxxX9BEPxh0QrCzXvouyPMCIYmDdRMqHeoXXrKlX1ww8lGm4c/TM1nV8=
+X-Gm-Gg: AeBDieuOVeZZLB1ni9Gt20x3BtcVCeS74MZmIfjPd06t2AQSRRc8Tp3klgD4La/GVqC
+ VklptueEDtCFMhQL11O/DsNFl6AZ5CgaCXUhGXfN6SKvkQl6N0f8loTSxu1OPCxc9KYLYCdxCrI
+ 6bI1FdkEIfgIPAOgxrjqnbK3CfohG459N/sSmJiHDv5GOEnUZbhMc7vJ4Yo2dedaKsOmIuproBc
+ Z4pTSaBpfPJpsmY3RiLHkEBsc5xgpHhudX/9eD1S7O44UL14gUUk1bCnIZdn7juBLGMo3Olv5BS
+ vryyTgbfyYJTNVZgMEDUjohL0FoBRcbipI+FBN32YZx849JtCNILrjWfmM+eUg809OQExFMCKRj
+ +QvvQ0iMjbepNssTpLCTb7zv5GjygDyHXzJs7GD7ac4ya3MBfIrsYXxAJYy2AD+OnkmE0nHPfEW
+ koMBGVDRA/lN87PmlInwmrB6GRY3vWUm6WyYP1iL3OsT5kk0jp40UVgvVtLdV3wtkh9iTq
+X-Received: by 2002:a05:600c:3107:b0:488:8b52:f7de with SMTP id
+ 5b1f17b1804b1-488d6860930mr165134105e9.12.1776083075305; 
+ Mon, 13 Apr 2026 05:24:35 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd86.dip0.t-ipconnect.de.
  [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488d5396293sm277577175e9.15.2026.04.13.05.09.39
+ 5b1f17b1804b1-488d53808b2sm360618475e9.11.2026.04.13.05.24.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Apr 2026 05:09:40 -0700 (PDT)
+ Mon, 13 Apr 2026 05:24:34 -0700 (PDT)
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 5/5] drivers: ufs: qcom: Initialize and enable clocks
- before hardware access
+Subject: Re: [PATCH v4 3/7] mach-snapdragon: Integrate reboot-mode handling
 From: Casey Connolly <casey.connolly@linaro.org>
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
- u-boot-qcom@groups.io, Lukasz Majewski <lukma@denx.de>, 
- Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- David Wronek <david.wronek@mainlining.org>, 
- Luca Weiss <luca.weiss@fairphone.com>, 
- Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>, 
- Swathi Tamilselvan <swathi.tamilselvan@oss.qualcomm.com>, 
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Julien Stephan <jstephan@baylibre.com>
-In-Reply-To: <20260319-ufs_probe_clk-v1-5-08c085d6b15d@oss.qualcomm.com>
-References: <20260319-ufs_probe_clk-v1-0-08c085d6b15d@oss.qualcomm.com>
- <20260319-ufs_probe_clk-v1-5-08c085d6b15d@oss.qualcomm.com>
-Date: Mon, 13 Apr 2026 14:09:39 +0200
-Message-Id: <177608217912.1177412.14533836406368185534.b4-reply@b4>
+To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Cc: trini@konsulko.com, casey.connolly@linaro.org, 
+ neil.armstrong@linaro.org, sumit.garg@kernel.org, sjg@chromium.org, 
+ seanga2@gmail.com, sughosh.ganu@arm.com, gchan9527@gmail.com, 
+ ilias.apalodimas@linaro.org, mkorpershoek@kernel.org, 
+ marek.vasut+renesas@mailbox.org, hs@nabladev.com, msp@baylibre.com, 
+ ravi@prevas.dk, dinesh.maniyam@altera.com, sajattack@postmarketos.org, 
+ peng.fan@nxp.com, quentin.schulz@cherry.de, jamie.gibbons@microchip.com, 
+ mateuslima.ti@gmail.com, justin@tidylabs.net, wens@kernel.org, 
+ n-francis@ti.com, ycliang@andestech.com, jerome.forissier@arm.com, 
+ clamor95@gmail.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
+In-Reply-To: <20260408121841.186410-4-aswin.murugan@oss.qualcomm.com>
+References: <20260408121841.186410-1-aswin.murugan@oss.qualcomm.com>
+ <20260408121841.186410-4-aswin.murugan@oss.qualcomm.com>
+Date: Mon, 13 Apr 2026 14:24:32 +0200
+Message-Id: <177608307280.1177412.930103688416218651.b4-reply@b4>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3358;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4518;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=clubaUhsdbqqQiWQaIbRRsKigoo1UsZuIYQWn3ho3q4=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw7d5nPnvll6nLrxhtV4w0ZSwyOT9seVRN2wO+ZQMvO7
- CvBe1JcOkpZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBEnk1n+CsZKmiZ/D666Ax7
- e6B41GX96SL7GIMORRaxnkgREGReupHhf22C85MY0dx92d7dVe5OGj8clr9hM1n0aN26W1Y/3j0
- W2QkA
+ bh=7zIHkAKfsseF/nK92u/nyG1XWFtBQw9CvdMdSeiw3cA=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw7DxpzxT5f3MExU3DD9vZZb89M/FL+56RRfPXjg+sl9
+ i/gEdjL0lHKwiDIwSArpsgifmKZZdPay/Ya2xdcgJnDygQyhIGLUwAmwlXK8N9TRMMmzfa57tpV
+ uVMer278ze8ZI/o14NuBvwxpEz5Vye1gZOi1j7msnK3dtW5tVnfP0/oXntsOSjvOUr6s/sqD0WD
+ r+n8A
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -121,111 +119,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-03-19 15:07 +0530, Balaji Selvanathan wrote:
-> Move UFS clock initialization and enabling before hardware setup
-> to ensure clocks are running when accessing UFS registers.
+On 2026-04-08 17:48 +0530, Aswin Murugan wrote:
+> Add reboot-mode detection and automatic fastboot entry to Qualcomm board
+> initialization. This enables 'reboot bootloader' functionality on
+> platforms with reboot-mode device tree configuration.
 > 
-> Previously, U-Boot depended on earlier bootloader stages to
-> initialize UFS clocks. When these bootloaders failed to do so,
-> UFS registers became inaccessible, causing initialization to fail.
-> This change makes U-Boot initialize and enable UFS clocks early
-> in the init sequence, removing the dependency on previous
-> bootloaders.
-> 
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> ---
->  drivers/ufs/ufs-qcom.c | 45 +++++++++++++++++++++++++++++++++++++--------
->  1 file changed, 37 insertions(+), 8 deletions(-)
-> 
-> diff --git a/drivers/ufs/ufs-qcom.c b/drivers/ufs/ufs-qcom.c
-> index dc40ee62daf..c63e550c881 100644
-> --- a/drivers/ufs/ufs-qcom.c
-> +++ b/drivers/ufs/ufs-qcom.c
-> @@ -30,6 +30,7 @@
->  #define UFS_CPU_MAX_BANDWIDTH	819200
->  
->  static void ufs_qcom_dev_ref_clk_ctrl(struct ufs_hba *hba, bool enable);
-> +static u32 ufs_qcom_get_core_clk_unipro_max_freq(struct ufs_hba *hba);
->  
->  static int ufs_qcom_enable_clks(struct ufs_qcom_priv *priv)
->  {
-> @@ -49,12 +50,34 @@ static int ufs_qcom_enable_clks(struct ufs_qcom_priv *priv)
->  
->  static int ufs_qcom_init_clks(struct ufs_qcom_priv *priv)
->  {
-> -	int err;
->  	struct udevice *dev = priv->hba->dev;
-> +	struct clk clk;
-> +	int err;
-> +	long rate;
-> +	u32 max_freq;
-> +
-> +	/* Get maximum frequency for core_clk_unipro from device tree */
-> +	max_freq = ufs_qcom_get_core_clk_unipro_max_freq(priv->hba);
-> +
-> +	/* Get and configure core_clk_unipro */
-> +	err = clk_get_by_name(dev, "core_clk_unipro", &clk);
-> +	if (err) {
-> +		dev_err(dev, "Failed to get core_clk_unipro: %d\n", err);
-> +		return err;
-> +	}
-> +
-> +	rate = clk_set_rate(&clk, max_freq);
-> +
-> +	if (rate < 0) {
-> +		dev_err(dev, "Failed to set core_clk_unipro rate to %u Hz: %ld\n",
-> +			max_freq, rate);
-> +	}
->  
->  	err = clk_get_bulk(dev, &priv->clks);
+> Changes:
+> - Add qcom_handle_reboot_mode() call in board_late_init()
+> - Conditionally compile with CONFIG_DM_REBOOT_MODE
+> - Reorganize header includes
 
-Adding to the other comments here, since you already requested core_clk_unipro you shouldn't
-request it again with clk_get_bulk(). Probably simplest at this point to just request all the
-clocks individually for better or worse.
+Please shuffle around headers in a separate path. Also you add power/regulator.h here but it's not
+clear why?
+
+Rather than adding board code for this, could we instead teach reboot-mode-uclass to just probe
+the FIRST reboot-mode driver automatically and call dm_reboot_mode_update()? Maybe put this
+behind a kconfig option?
+
+It's a bit of a mystery to me why this functionality is stuffed into DM when it clearly doesn't
+really belong there, but yeah as usual I'd rather fix the core code here than continue the cycle
+of board/platform-specific boilerplate that is wholely unnecessary.
+
+With that change b/q/default.env can be updated to check the env var in preboot_cmd rather than
+jumping the gun and running commands before we even get through late init.
+
+Again apologies for the late review.
 
 Kind regards,
 
-> -	if (err)
-> +	if (err) {
-> +		dev_err(dev, "clk_get_bulk failed: %d\n", err);
->  		return err;
-> +	}
->  
->  	return 0;
->  }
-> @@ -561,6 +584,18 @@ static int ufs_qcom_init(struct ufs_hba *hba)
->  
->  	priv->hba = hba;
->  
-> +	err = ufs_qcom_init_clks(priv);
-> +	if (err) {
-> +		dev_err(hba->dev, "failed to initialize clocks, err:%d\n", err);
-> +		return err;
-> +	}
-> +
-> +	err = ufs_qcom_enable_clks(priv);
-> +	if (err) {
-> +		dev_err(hba->dev, "failed to enable clocks, err:%d\n", err);
-> +		return err;
-> +	}
-> +
->  	/* setup clocks */
->  	ufs_qcom_setup_clocks(hba, true, PRE_CHANGE);
->  
-> @@ -579,12 +614,6 @@ static int ufs_qcom_init(struct ufs_hba *hba)
->  		 priv->hw_ver.minor,
->  		 priv->hw_ver.step);
->  
-> -	err = ufs_qcom_init_clks(priv);
-> -	if (err) {
-> -		dev_err(hba->dev, "failed to initialize clocks, err:%d\n", err);
-> -		return err;
-> -	}
-> -
->  	ufs_qcom_advertise_quirks(hba);
->  	ufs_qcom_setup_clocks(hba, true, POST_CHANGE);
->  
 > 
+> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> ---
+> Changes in v4:
+> 1. Added early return `if (!IS_ENABLED(CONFIG_DM_REBOOT_MODE))`
+>    inside `qcom_handle_reboot_mode()`
+> 2. Removed `#ifdef` wrapper around function call
+> 3. Function now defined unconditionally with runtime check
+> 4. Provides user feedback when fastboot command fails
+> 
+> Changes in v3:
+> 1. No change in v3
+> ---
+>  arch/arm/mach-snapdragon/board.c | 59 ++++++++++++++++++++++++++------
+>  1 file changed, 48 insertions(+), 11 deletions(-)
+> 
+> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> index 5fb3240acc5..c3e97cdbfdf 100644
+> --- a/arch/arm/mach-snapdragon/board.c
+> +++ b/arch/arm/mach-snapdragon/board.c
+> @@ -9,6 +9,15 @@
+>  #define LOG_CATEGORY LOGC_BOARD
+>  #define pr_fmt(fmt) "QCOM: " fmt
+>  
+> +#include <command.h>
+> +#include <env.h>
+> +#include <fdt_support.h>
+> +#include <init.h>
+> +#include <lmb.h>
+> +#include <malloc.h>
+> +#include <sort.h>
+> +#include <time.h>
+> +#include <usb.h>
+>  #include <asm/armv8/mmu.h>
+>  #include <asm/gpio.h>
+>  #include <asm/io.h>
+> @@ -16,22 +25,14 @@
+>  #include <asm/system.h>
+>  #include <dm/device.h>
+>  #include <dm/pinctrl.h>
+> -#include <dm/uclass-internal.h>
+>  #include <dm/read.h>
+> -#include <power/regulator.h>
+> -#include <env.h>
+> -#include <fdt_support.h>
+> -#include <init.h>
+> +#include <dm/uclass-internal.h>
+>  #include <linux/arm-smccc.h>
+>  #include <linux/bug.h>
+>  #include <linux/psci.h>
+>  #include <linux/sizes.h>
+> -#include <lmb.h>
+> -#include <malloc.h>
+> -#include <fdt_support.h>
+> -#include <usb.h>
+> -#include <sort.h>
+> -#include <time.h>
+> +#include <power/regulator.h>
+> +#include <reboot-mode/reboot-mode.h>
+>  
+>  #include "qcom-priv.h"
+>  
+> @@ -506,6 +507,38 @@ void qcom_show_boot_source(void)
+>  	env_set("boot_source", name);
+>  }
+>  
+> +/**
+> + * qcom_handle_reboot_mode() - Process reboot-mode detection and handle fastboot entry
+> + *
+> + * This function detects the reboot reason from PMIC registers and automatically
+> + * enters fastboot mode if the reboot reason was "bootloader".
+> + */
+> +static void qcom_handle_reboot_mode(void)
+> +{
+> +	struct udevice *reboot_dev;
+> +	const char *reboot_mode;
+> +	int ret;
+> +
+> +	if (!IS_ENABLED(CONFIG_DM_REBOOT_MODE))
+> +		return;
+> +
+> +	ret = uclass_first_device_err(UCLASS_REBOOT_MODE, &reboot_dev);
+> +	if (ret)
+> +		return;
+> +
+> +	ret = dm_reboot_mode_update(reboot_dev);
+> +	if (ret)
+> +		return;
+> +
+> +	reboot_mode = env_get("reboot-mode");
+> +	if (reboot_mode && !strcmp(reboot_mode, "bootloader")) {
+> +		log_info("Entering fastboot mode due to reboot reason...\n");
+> +		ret = run_command("run fastboot", 0);
+> +		if (ret)
+> +			log_warning("Failed to enter fastboot mode: %d\n", ret);
+> +	}
+> +}
+> +
+>  void __weak qcom_late_init(void)
+>  {
+>  }
+> @@ -570,6 +603,10 @@ int board_late_init(void)
+>  	qcom_late_init();
+>  
+>  	qcom_show_boot_source();
+> +
+> +	/* Handle reboot-mode detection and fastboot entry */
+> +	qcom_handle_reboot_mode();
+> +
+>  	/* Configure the dfu_string for capsule updates */
+>  	qcom_configure_capsule_updates();
+>  
 > -- 
 > 2.34.1
 > 
