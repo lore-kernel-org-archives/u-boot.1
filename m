@@ -4,135 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C661EBFD22
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 09:52:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF247EBFD2C
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 09:53:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6EE684206;
-	Mon, 13 Apr 2026 11:52:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4105D841C2;
+	Mon, 13 Apr 2026 11:53:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="H04D7mH5";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="oMaHi3mJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0585684206; Mon, 13 Apr 2026 11:52:23 +0200 (CEST)
-Received: from BYAPR05CU005.outbound.protection.outlook.com
- (mail-westusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c000::1])
+ id 022B484206; Mon, 13 Apr 2026 11:53:23 +0200 (CEST)
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (mail-northcentralusazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0618583F75
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 11:52:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BD3AB83F75
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 11:53:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ spf=pass smtp.mailfrom=boon.khai.ng@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LJJlrjkAmTsLRMo+fgELnxxylspHCphNF3pUCS0BwegJMVVD8263NfKSPBbg4KKpciDY+EU1MQPDwYSPpIfILyqfxSR0J504eBiqWnfqL9M9Av0PxPlLTURcP4Bm/EUFhtS3s73lzzK02ksDDYdqXCXDBK2FKQxYA80rmSNodlf+2IYh1HEN2Wxu8eaLAz3v94oravWHgSs0xYtnNOFPnblc9NzluSVpBEFUM5fV7oErU4HEUDmiN4rGeJNmTebQJcxdl7412KK4Bp32PkUCKiEA9ucTR95522NI9aJq7cqzl0dytc32DKH7PdQEUAwOAA3R7vSQCWEX07r2ltzpXg==
+ b=OByeMkVxXVpiN5qv0M92iz/3ZwqOZFTPOPHUY7r8/SqU9EHf7b7U8WUvvfDempVqsc5HIEsEhm5fOLb0N5+IprNh/CqnkNPrcAjqtKi/NGVdSfC8icdROOPJaAibU7sFz6hEQdbSHWQKj+9uH5abGcgDhvt9QOrj79lodQS15fkfQazzBgzccJzbSXNJsbhvigkuWv9PXbQ+LAvy7dZBiXPCAnESqd3q2G4MCEhqmAz72GQRUG2yEFXXypKSgW7uOasNe2L7vfh9mysaThevKR8dfFtOJ9Y/S45tLzEwYLwLqy+fHTPF34mcm+aAwQ5l1qI//4zQdXjaRjkE9dgsXQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=eTj4yzWmVdmPUtbtHG1hynPSkJJLtqmEo3MKRR4VEzE=;
- b=dB3b6f8q0kd9IFy9dqknMhv6Oh46lo3QF9NqQu7JXyhkLyIcfk6JXYdgyWsYzqaqiyW80dM35ITHsSMiuAkKOwL+WA8w7Y3pjgY5Ib5euihO+mPnqTYNUj92Y2/oHofpehfLYwNwgWrQtflaEw3l9yQ5aX4xpdrTkOEyqFrRyfBrFXQBHfenu1tc4fDfaP1Quw0Y3X4iW2ANGUVnzlDvhn3mCaX7/ECQsInFlMTd9FSUaT+cJnuv8a/03AFQa57FzwU8p9xQ8V1Vy43vhRDGliOYDJPeMYGsDPuTilRdIlinA9VEjMF3kEfPfjLsO9BygS0pMW17/KWEBLnwS4lOkw==
+ bh=DEB1SCJiLXaG0OdsulY6vLR1IO9g2YLyGS1QUIWuOzw=;
+ b=Mb7vmIDIMhEPwAafGYzVfn8Fmc4ESBE8W7nPHH4wOqEWr/7DSKkJPq57Fz4b2fcK0AaS5xN0hT2dXex8prigqUm0f+hklpsW5UHrlu3+qPkut68XVjG3JCGmkqo1nRZ2mip7fSW+qNV9E8mA15RWKlsAN07t57njZu5jYgK1KqJm3LltGBRrsFz5XRJlmQOcuKE//7wOPONgGpu0ZKmQdTBGnY9/6VDOHylRZUk9lyPh2cf5BlQpFA2eMkdVOAwKxJ7UbGQcP4FjMGOLNeRnwC8tJ4aLY48gEusI0JtlFhwKRN8dfwnme5FEYaRLAm2zBHtNXAcpvU10+60ynKqY8A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eTj4yzWmVdmPUtbtHG1hynPSkJJLtqmEo3MKRR4VEzE=;
- b=H04D7mH5lc1ANr3ZvM0jW/uTDw7sDJK9ec6DBHT7j3Z850Mi/+YoPce2gNJmJJxClTO39Js0ZMQxNfWxcLgsFlz6szq7J4R+flqNiblkxCxrseUQ0oRiXOCJh49O4yLq1rE8M1Hks1Xwl0hFwXf6tr24Ek9e7ZcmE2/At5HGOg0y+67Zmi2BttKx99Qae3LI8leNdCVHWQgsgRV2yoZkeikutspG0mIHxZ7wU+Wen+ndjaXAy/WhYm4otfewXOU9H1VkRTsMh7ksF6YdBf95VWsDjIdqA9Y3SJiDOEq1DCtht7HTfp+6qeXDIz/UaI1zC7kpyB3y8txgKur2Sbrl7Q==
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
- by CO1PR03MB7820.namprd03.prod.outlook.com (2603:10b6:303:270::6)
+ bh=DEB1SCJiLXaG0OdsulY6vLR1IO9g2YLyGS1QUIWuOzw=;
+ b=oMaHi3mJnwmBTDPVC6Hrrt2QWpaGF7cnhObWLL38ORqZNFRZh1q61QQteFQxjMMjJM2IM6OEQ/XZ8CoGzVd1nLNBH14b1Q73KbRYkL1v7oZ/C+XP2OYyAv/7uqDNyiL+e1mo24ZB/8r62kUpfBc5Pb8NO51BektVnlfLUhPYeYJ2abz820OWFD7Rracjy712B9xHeScaSlW6W8sk6dfxJIFbwcrVCm2k8Lesy7oPEkVKEh0sA0mYA23wgR+n7PFR8sLTaM+YNbnw+GFxl2sjQTfHbZMXscNoDcjkQtv5x9YI2MirLLbWLuHVsLt9Gw6inXtPl5Hwfzgr+/nVrIiLyw==
+Received: from SA3PR03MB7187.namprd03.prod.outlook.com (2603:10b6:806:2f6::11)
+ by SA2PR03MB5820.namprd03.prod.outlook.com (2603:10b6:806:114::15)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Mon, 13 Apr
- 2026 09:52:16 +0000
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::efa9:4b97:3b4a:8235]) by LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::efa9:4b97:3b4a:8235%6]) with mapi id 15.20.9769.046; Mon, 13 Apr 2026
- 09:52:16 +0000
-From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-To: "MANIYAM, DINESH" <dinesh.maniyam@altera.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Marek Vasut <marex@denx.de>, Simon Goldschmidt
- <simon.k.r.goldschmidt@gmail.com>, Tom Rini <trini@konsulko.com>, Michal
- Simek <michal.simek@amd.com>, "Hea, Kok Kiang" <kok.kiang.hea@altera.com>,
- "NG, BOON KHAI" <boon.khai.ng@altera.com>, "YUSLAIMI, ALIF ZAKUAN"
- <alif.zakuan.yuslaimi@altera.com>, Teik Heng Chong
- <teik.heng.chong@intel.com>
-Subject: Re: [PATCH] drivers: fpga: arria10: Clean up dead code
-Thread-Topic: [PATCH] drivers: fpga: arria10: Clean up dead code
-Thread-Index: AQHcphFA3hWWfcESL0my153a1spyh7XdCMyx
-Date: Mon, 13 Apr 2026 09:52:15 +0000
-Message-ID: <LV8PR03MB813790629F927F0CC7F17BD0A7242@LV8PR03MB8137.namprd03.prod.outlook.com>
-References: <20260225044257.31225-1-dinesh.maniyam@altera.com>
-In-Reply-To: <20260225044257.31225-1-dinesh.maniyam@altera.com>
-Accept-Language: en-US
-Content-Language: en-US
+ 2026 09:53:17 +0000
+Received: from SA3PR03MB7187.namprd03.prod.outlook.com
+ ([fe80::7000:d55:b39c:2e53]) by SA3PR03MB7187.namprd03.prod.outlook.com
+ ([fe80::7000:d55:b39c:2e53%7]) with mapi id 15.20.9769.046; Mon, 13 Apr 2026
+ 09:53:16 +0000
+From: "NG, BOON KHAI" <boon.khai.ng@altera.com>
+To: U-boot Openlist <u-boot@lists.denx.de>
+CC: Alice Guo <alice.guo@nxp.com>, "YUSLAIMI, ALIF ZAKUAN"
+ <alif.zakuan.yuslaimi@altera.com>, Anshul Dalal <anshuld@ti.com>, Casey
+ Connolly <casey.connolly@linaro.org>, Christian Marangi
+ <ansuelsmth@gmail.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, Neil
+ Armstrong <neil.armstrong@linaro.org>, Quentin Schulz
+ <quentin.schulz@cherry.de>, Rayagonda Kokatanur
+ <rayagonda.kokatanur@broadcom.com>, Tien Fong Chee
+ <tien.fong.chee@intel.com>, Tingting Meng <tingting.meng@altera.com>, Tom
+ Rini <trini@konsulko.com>, "Chee, Tien Fong" <tien.fong.chee@altera.com>
+Subject: Re: [PATCH v1] drivers: clk: agilex5: Setting correct counter
+ frequency in boot mode
+Thread-Topic: [PATCH v1] drivers: clk: agilex5: Setting correct counter
+ frequency in boot mode
+Thread-Index: AQHcpW2LtDCy5TjkN0WZCDXEq0KpRLXdC41E
+Date: Mon, 13 Apr 2026 09:53:16 +0000
+Message-ID: <SA3PR03MB7187BF99049BC78C3CAF13F6B4242@SA3PR03MB7187.namprd03.prod.outlook.com>
+References: <20260224091109.8181-1-boon.khai.ng@altera.com>
+In-Reply-To: <20260224091109.8181-1-boon.khai.ng@altera.com>
+Accept-Language: en-MY, en-US
+Content-Language: en-MY
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 msip_labels: 
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: LV8PR03MB8137:EE_|CO1PR03MB7820:EE_
-x-ms-office365-filtering-correlation-id: 73c9946a-be75-4343-ff97-08de99425839
+x-ms-traffictypediagnostic: SA3PR03MB7187:EE_|SA2PR03MB5820:EE_
+x-ms-office365-filtering-correlation-id: 46dc44a8-5f0d-4b79-e332-08de99427c75
 x-ms-exchange-atpmessageproperties: SA
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
- ARA:13230040|1800799024|366016|376014|56012099003|18002099003|22082099003|55112099003|38070700021;
-x-microsoft-antispam-message-info: uKZXPD9seKkqUrA3E8P2s+1NYFPaUco487cLh17bUp8RAZ1msIHKA0sCytd/ASA/jLrsCTpFhQY1/XhOu1Ny6fDYy34DsIZMT6Iec9AD7yvMYlW3dTJOB0p+Z6KwWX+z+CsRdgemJBQPqtbqXiTXYmEn5QeZJP2evaxNKPK9O4a0KWw7HhnRG67csoi6DisXQc6eZJaTTVhI6XgPIwSnJzBY4b0rLCFzppSWD1YM0Hon0FjqreMIs/GWd/DQmfXGgR7G8trmLADandRtcMhSdu+RA7SYmvBorUQPGIpb+qqunOLrah7XOoZefJBfpUdeExuPX9PPHt8HnY4gd1BstodUJnXxgVvkkiy3qdj0QKzYSNDkH7etssEvs2sY+JWowgeOTD+SaKzD0qfbz3OBZQGyMWr0b4m4h5vHXPZrWNzwWn9T2JvfqVYGVn7mtV4gNO3juEs8hA+m2n3HXdhXNgc0/VGqjofb05biuIcUHeuBjsQtqZNcNV3TLcS3aNv0FORwpCANHGlZnnh7QBMOVccpABfcps6ldi0SVPzMwPZy1JmUXjo6kBH4us53TCCvHxmIRdMnjJG9drr+CLjIzY7e1GaxTN6bpXue8hDmtgz360G9aPJQM4w/J1h4nNdvSK4bsshR25dREp4OVReQbYYJB4hXHLTro24dJLf6q1PhxjXZxcFpxmCsbA917qR0CZ5gTZEsRo5QfxuylD8BG9sr2QsFRUIoJHqt4cC6G3q2P3g8WUijsfC6Q5OEO/9q+q9EO2WKVYr5Rdf9rOPH5GwO/dn7eHO+QEmqS8fa0BQ=
+ ARA:13230040|366016|1800799024|7416014|376014|38070700021|55112099003|18002099003|56012099003|22082099003;
+x-microsoft-antispam-message-info: EkZLQeprARMBRcxBWnJ/CCQnbmGV1WKy/4q4jAwP5N559i9338BSIJMmheDSIUtsb1Fc7Y4IVS79N1SZMK8QZWC1g/dnUZFSur8AYn8T3RClEMn4SNsOyre8fH54lbg+nraGXb/hn0upZPdRJ0hGL8T/cmJJXKMPlCsUzuBpPRJa2hvcqoagTia9fioT7qY7g0Za+Z6xokKJKjCh5eIVM4EywKjvuMXfZ7nGnuH7SL7dG8H8UA4Uqo0NDzvO7jauRCgKGl0ezOnwnEtP41h6/8P3pR0FV7Z8mi3JEenTlDt+FJFvZXqhdRXUjw4jlY3/1iOPnoXjZz2BHc/2R8F77EHgD7DvU3AtkNR86/rgrX7qADkuKqIturT5aswx9U/Rox/PPQljREZY2wtBiXSR/7kkAQsXp1ukIgeEyBw16ynY6/5jbdUFMa8t9GLrtEx8ffnZoBYSXLI+WTOQz1jCwphMD5fFWzAjj1nK0NTpQ8yRmlIrAzwGn61SZbAOmCjd70AsPBAIMJEwvJ5Q254Fsi0/YReFY1Us25VMiUmA2CMlCPx1fH3Ad53CaBwOcWRQN76eS1/CL9daFhXf5S4bcGsEgSNXvSi0/f/fNje+DVkEkQRpaRegrpPIJ0WVXdelSaKPxwwl0sN/aRU5dhfafxfqubCCG0T5M2HeViEPpK7n6AwP8euXFf6y40Y+nu2WiIsC5pu7SWo/OhEUK0WTY3z0Kgmjviw1YPjyhYaUDGzk/UODfFPuOLHClkQ8zOFezwSnfUJpqZcgmWlu2TVebWGJtsdEEqqjxIr0kSXghQU=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(56012099003)(18002099003)(22082099003)(55112099003)(38070700021);
+ IPV:NLI; SFV:NSPM; H:SA3PR03MB7187.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(7416014)(376014)(38070700021)(55112099003)(18002099003)(56012099003)(22082099003);
  DIR:OUT; SFP:1101; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?Windows-1252?Q?nzCsqwxL1u/Eb6UKJxVv8uGuwoyztfWHq7geI067kC5qkko8fPz9dZmr?=
- =?Windows-1252?Q?nzTz5E+KphM0g9wm1MGUVY8so24RvRE9eVRFsTdgod1Z0kQZivOn7wqB?=
- =?Windows-1252?Q?ehbGw1JzsX4l+lwkednTinmflwx7p20EuxpmMnj9P0pofVSQYiTbya1/?=
- =?Windows-1252?Q?rvKZlxu3hFQG9Z+VayVoqgs9S05NHrLi3KUMAp+etp23XvYoGzaOfWNP?=
- =?Windows-1252?Q?hQ1clzt4vIr1CFrOzejXxF976trUw3dVnrgaaSDFKsLy20BoMpjmg/zs?=
- =?Windows-1252?Q?UqyFpqqNdbZhS4bHxtucfH2ka+lRUjgI4CB+gvgJuU6XtHwv1Ui5L2f6?=
- =?Windows-1252?Q?XABOkONRp6cQRzozRflctv0EePFgxT4dZypKsLJMonsL00csNzo66f0s?=
- =?Windows-1252?Q?GaBDaTBQ41wQcxJGPaIIAjCKHbeAI5rA8jmCAy1nCEWWo+jizgfaeHYP?=
- =?Windows-1252?Q?qBtXVYhKYYb/XfcUsne+5A0jIUXnmRCz8gh43iIvXn/X/YzR49wCi+P2?=
- =?Windows-1252?Q?7vhsmPMfP/OiyRWv/1Nml2Z75SdAhida7yRxcLNAe4gTCMa6Ou0jHdMd?=
- =?Windows-1252?Q?x+y9tH2Rf401iA7ioXmbmolJaBJxzuRzuZgvl9w+tZ32fdS38yGLpUjC?=
- =?Windows-1252?Q?bVOeKIg37C3JOrnvLPVV33K00MV6K2DzM2ucDgaJSg5/CZ2sVSMppyaK?=
- =?Windows-1252?Q?adX/RSGXLGmfA0N1vjq952sGPOeAOQPCImt0tw6Fk36X68xVxbB6Mnmh?=
- =?Windows-1252?Q?gNMAWlnD1aDqP1eOB0bF3pQ+EmJBmav0DTBaRwetXB1im0ov2SzvOx6+?=
- =?Windows-1252?Q?wBcm4c/+yBxBnuZOQD8wzcr0FOk1CUv07HpKELzVACAfZ+yZe42xRWsE?=
- =?Windows-1252?Q?0abqkz8xKbD0Xjd47DCmTbLz+FJS+au0DOABtyuG/xk5AVs+NnOyE25S?=
- =?Windows-1252?Q?lvAu3vCLUtDJB0rpsVi6z+60VS97CmOmrAJozsdcHT23c2/6bAXDKdtd?=
- =?Windows-1252?Q?GzVsaVMM2f2BGP/yQ1KV1qjCoGfNnfMDXdZ+rBuT3q1P7Tlje5Rnc9Ra?=
- =?Windows-1252?Q?1/omnJtR7OPdxzVaDr0wNfhiasRIunSUFw9SAPEu6eun9KE32KWwXu0P?=
- =?Windows-1252?Q?WuELlWT/iPVOMga9cIaKaISpzbO1pxdddGeACgT9gG+DANLMWnAG4lQl?=
- =?Windows-1252?Q?ktr8yIdCh+D0viMfiUFmIgryZnmBtNQipuc7hhHvXmyfyBpJq3hSH4Vf?=
- =?Windows-1252?Q?AzpegoaP0hgOnY8yYA5FuuTuPvSk3v+YZuYQnOTC7fSLKAB2zDGc80sk?=
- =?Windows-1252?Q?JpnpQFFh0zOP0NMhJVmVE03wFmVMST7Su4xRcb5zRp1Bghgjx0KNoo3a?=
- =?Windows-1252?Q?sjFQPA7ueMQGBe/E5YT/eip9G5vezXojOeFi1DtSYiPkQas29dbhdofi?=
- =?Windows-1252?Q?EFOfLzfjOnwLUmaOz/OeZmgSpZDfp3tfgxG2ksCxI63hAlTs96Balg+K?=
- =?Windows-1252?Q?w49GOs1CrRPMQMTpeBRRnGpiDIui+gLQxklXJBXqqNq2hdw1cWE4q5vT?=
- =?Windows-1252?Q?z7I2Hd9kAsIHdOZwpUHg7FjnPkbDVPmNTE6g/nAAgfj3s0Y8M8QgFfM/?=
- =?Windows-1252?Q?6NbuGsdjqm6NGaVGHAU+GGjYWkCXoX7SDG23vywE5ag4tAIAlr6vF5/1?=
- =?Windows-1252?Q?U2cPE19gFmnf/ukX3JuTc5ThaWuXP2PlhGlI4xX9zHG49TUrNqtmqiqg?=
- =?Windows-1252?Q?iPHdLDcslfuPU1SRz4NAhyhsGfqvcOa0jsVWBRkh80EAxifFqazj7F2m?=
- =?Windows-1252?Q?rzGO4bxPywA0teI+WVazGWyua54/xQnMLApqKmY8F4LHowvF1qOg7YXN?=
- =?Windows-1252?Q?PUwBOXXzY3ORVA=3D=3D?=
-Content-Type: text/plain; charset="Windows-1252"
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?TvTcr2BvFiYG5XA6PGQGcDys9dUP3uVya+MkwtXG3tIgPkqXBgLieE1q9a?=
+ =?iso-8859-1?Q?I6fYEgQf8Jhqwb8yMNUhyFP0ONr9FfRzS4vLPVeizM3SEneWGM/V3xrWOM?=
+ =?iso-8859-1?Q?pVMZx1PoozJwFeW89+/tEhaXi4Qhu9g8llFPOt5ks+0EIz56UiA5h66Ux9?=
+ =?iso-8859-1?Q?WtKL0cE1fy7V7kzKKAwxbXzHtlWZNyjHJ9iB22VhuXd3zlhNajBrZxInDn?=
+ =?iso-8859-1?Q?yKQhpmHMRJTd3p4I6Mn/eagdeGwgmrPN/qbq/cu6RGP2WfpPp9U9yXFx+b?=
+ =?iso-8859-1?Q?EN+KhIT4xjIi05ZwkLJ0vig4Z4QAaKrA6O6KfMyfi3jNS27NAsZGc0vVy1?=
+ =?iso-8859-1?Q?FHeYC9GRTQdlGSQVFSjnEBHWQW54pb+SO1GoduXckyueadcy67lDtl0NmN?=
+ =?iso-8859-1?Q?qBU+fqH06RkXnA1Oa/jbKvJiSKG+sINN39j588sqYnrqQUWa3Y+1f6kX0Z?=
+ =?iso-8859-1?Q?xvIpJHok9TjE7Vsu3SZBuMNBuqGQXbZbWBZIJUh9vHLVENeoM23Fngttcp?=
+ =?iso-8859-1?Q?wdJqmXBgve2oonV9IBNzw2d49EpYbj6Ltsk4/Bzb5s0J03uu1SeVkWPDPK?=
+ =?iso-8859-1?Q?O8LVKMzIz7LPs/TkRMlj6UciVFA6ZnNF3+3nGAlJmskXe76D9pQF1BN91w?=
+ =?iso-8859-1?Q?YJrg8/9ji26XBZa7yAuc+f58PfkdBlxhp4kSyoCLcQaUrLgxutIU/TMTMG?=
+ =?iso-8859-1?Q?vifhc8vMMFZ44Hd2RoG8aA7lvDNP5SmYS/lAas6l1axRBnRtOZlSQ97Tvo?=
+ =?iso-8859-1?Q?xVL4qmtUkhRuOL8SfaiIUmBL4jMeFtb+kzDE9ONn7cbhpB3DGeN2gPfQ90?=
+ =?iso-8859-1?Q?KMTWOGS0kXQaey2eijzt28iiQaNRuuJQgsGpH0JI/r8zOLQ/LLtCQeip3W?=
+ =?iso-8859-1?Q?rU13s2TpxVYPnmlJvnLbsLwQEagFSsDXOl6acCHqo1nTnmQzJwgh6rChM8?=
+ =?iso-8859-1?Q?tZThcylfjOnVjp2m+NOcrR97BnUR0gapUJNUVXyP9aRTWedAoIBTS4CJp9?=
+ =?iso-8859-1?Q?zGHDpR4x8cTyj023wn9BdOuNn/4oHtl/G/KyyN/gUVWNrzj2FF7UBgnb9e?=
+ =?iso-8859-1?Q?puNRLrO7N/nLdYmt0z9AxuY6R6YWYAU1Z0mPn9/NJTCjVe6ztGxYREexd7?=
+ =?iso-8859-1?Q?QCSRMa97QMYsDf79hezIEwIvw7LIAhzUkrNth/uBxBOq9WsMu15u8LqG9P?=
+ =?iso-8859-1?Q?/Db5sF8vGS1zJclc7auKE0FSlWq62/1Xq9Cxuw4ATyTyEldUQzkUn4mxdO?=
+ =?iso-8859-1?Q?lF/0bKPT+l2/YVLCukwKdauR9vEHuiZusr3aSHDzgxflAsa1ukiQWBhk/F?=
+ =?iso-8859-1?Q?U63IsDAZCISqCy0A4DKQrtHccldzb0a78C/ymyWG9l7J0DUvvswgPGSlOk?=
+ =?iso-8859-1?Q?9JWYBAYOwl438t+0Pnh1OYKC4JqaMhInbNvLFnHfK9QvDp1a6xSJ87qXED?=
+ =?iso-8859-1?Q?FBQfc2sPyE8Q9PLixnwP1H/IgogyYR6o9LpOUlwEDIAGJVPAJJHcD3yOwe?=
+ =?iso-8859-1?Q?uttjaPCG1LHFTIavk0WCkXdW0pq6KxtPm7Z0DGpeViXto0tXVC5FEibETR?=
+ =?iso-8859-1?Q?6MGd9JYlWV8ZTjpBelalB9uXXVHccDGiBMXaTnXD5hWVsGqbc/kKiDlrJD?=
+ =?iso-8859-1?Q?eeENQrVDPhdNg5HEjqYybKfmruf6JkXq0B/Zr1sFbGWG/iBjEY8qSn0xAj?=
+ =?iso-8859-1?Q?OiWNtyfo4cPN/thUGvDBQTQh2z1UaTiz9BvDN/7qil+aIe9AAAH8CfOgCj?=
+ =?iso-8859-1?Q?HJQAU6s9EqhlPc09jWDVC9BELH63vTQuH5ySrn15jDe3+XLiXGXh6ZB2Mu?=
+ =?iso-8859-1?Q?oG2wIv/jOw=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: altera.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 73c9946a-be75-4343-ff97-08de99425839
-X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Apr 2026 09:52:16.0083 (UTC)
+X-MS-Exchange-CrossTenant-AuthSource: SA3PR03MB7187.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 46dc44a8-5f0d-4b79-e332-08de99427c75
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Apr 2026 09:53:16.8010 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: OdoHqHOvj1NlUVdWgCafZxhKtZ5y+eBIf6OlpSVOa4gaA5msqu6ifaTnjF1wJYZ74i7FRgZGJ02339ya4wNmI1Da3xUnsKH5m6+nyThubBk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR03MB7820
+X-MS-Exchange-CrossTenant-userprincipalname: 6/UFUWHv9MLlkXSh6FUVUcFu5x7DDYKHsFutG7KpqdYob1vy9S+AETbKs9+Rnf1mTWwr/YmcjWmBOPW1il1AkQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR03MB5820
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,30 +152,4 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dinesh,=0A=
-=0A=
-> From:=A0Maniyam, Dinesh <dinesh.maniyam@altera.com>=0A=
-> Sent:=A0Wednesday, February 25, 2026 12:42 PM=0A=
-> To:=A0u-boot@lists.denx.de <u-boot@lists.denx.de>=0A=
-> Cc:=A0Marek Vasut <marex@denx.de>; Simon Goldschmidt=0A=
-> <simon.k.r.goldschmidt@gmail.com>; Tom Rini <trini@konsulko.com>; Michal =
-Simek=0A=
-> <michal.simek@amd.com>; Chee, Tien Fong <tien.fong.chee@altera.com>; Hea,=
- Kok=0A=
-> Kiang <kok.kiang.hea@altera.com>; Maniyam, Dinesh <dinesh.maniyam@altera.=
-com>;=0A=
-> Ng, Boon Khai <boon.khai.ng@altera.com>; Yuslaimi, Alif Zakuan=0A=
-> <alif.zakuan.yuslaimi@altera.com>; Teik Heng Chong <teik.heng.chong@intel=
-.com>=0A=
-> Subject:=A0[PATCH] drivers: fpga: arria10: Clean up dead code=0A=
-> From: Dinesh Maniyam <dinesh.maniyam@altera.com>=0A=
-> Remove the dead schedule() code.=0A=
-=0A=
-Please improve the commit message:=0A=
- =93Remove the dead schedule() code.=94 is accurate but could be improved:=
-=0A=
-Mention it is unreachable after break.=0A=
-Optionally mention no functional change.=0A=
-=0A=
-Best regards,=0A=
-Tien Fong=
+Adding Tien Fong's altera email.=0A=
