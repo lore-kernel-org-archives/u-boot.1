@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8C79EBFD38
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 11:06:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2C36EBFD37
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 11:06:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E39A3841CD;
-	Mon, 13 Apr 2026 13:06:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8D0538419E;
+	Mon, 13 Apr 2026 13:06:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y0fnwreT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RbH6efPw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31EA084119; Mon, 13 Apr 2026 13:06:23 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 0ACF98407D; Mon, 13 Apr 2026 13:06:24 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59C5583F75
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 13:06:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D632840D8
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 13:06:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-48374014a77so60202815e9.3
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 04:06:19 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-488af96f6b2so57676465e9.0
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 04:06:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1776078378; x=1776683178; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1776078379; x=1776683179; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=KuO7+RKIoPCYl+xOEAftzGlHG2Bn8WUqFrSXa3J/7rc=;
- b=y0fnwreT4sXOmtUX9hiw4VLso5bmvc7xKrn//BcBplms3KWWHVy0UwzkTOYxlsSYVq
- uLq2/eS4uADaBkpVeZVw/aZbraqvWErd5HL/5idFQoiBTulAy5KZonwb8XgsSFfxnPrb
- QcgidN9qUqcf9n6pZEimRORCF31oyx7aoT6NaPCB+jF4l1ezeLEL+N6tP3Lx+BTM3QEg
- MKkAnlCFiTmJQf3F9VOW1VE3/Bu+MRFmHyFs2/zlBQpCxPEbRlyvqLhsKfw+FLyj8RbY
- dmJGbf3ztxFisVJZbAxYHbv9VfQDK7A5jdz8dK0/AoxyxACHXNj7+AAOSQN0mC45eu+N
- R7JQ==
+ :reply-to; bh=fEn07sIk9cXzw9wGGlw/Rg6nOAz+bx2WAbHJgltzu0U=;
+ b=RbH6efPw78Q4HekvC/HOeQKmVAQS7hCr20H/HWeaNVqGp3XAycVFtEuJLFnP6ktPOe
+ 987qP+bX7meSnsXt3/kil3zGoOy4yaCEQZWMFRcSqE21pysXmPKGnO9hoRQq3Fjur6ph
+ jnI/XvwE1JgmNyuCiMJ7nULkT/Y3gnBC9qfPC6xtdGVO4uGyMn2tA9cnFKX1cZH7idB+
+ qbp9RNmmTeTnll8+1jpEpTlLhodRNeBiRYChIlUXTxc1kyQGLeVZ6ITYn3iMv0NTZax1
+ V1DvHP/aToMWVgy0aPZsDNzdyYq2wcbx/W0FyY8tpFnA/OQDy/hOPBvnA747xkZZhfRi
+ L3Hw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776078378; x=1776683178;
+ d=1e100.net; s=20251104; t=1776078379; x=1776683179;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=KuO7+RKIoPCYl+xOEAftzGlHG2Bn8WUqFrSXa3J/7rc=;
- b=HwizjuF08rGnTZRnLAjFK5Wt+00zIfAVXJDo5ATmHJbjgmzlvgAs1L85Ii9l3AS9vx
- OxJeETSDB/RPdPtD3SEE6D4h2zKuQB/xv+RrldB1mpyNkV0PPbQ5lzz0qMn3DxRHx/95
- l/BjqxLlA7avesAgCjCNh7f+wY3HRWIEZu9hObqUmcemHskSVUq/oTQeB4hpT0UvTvl8
- 5hIQR1WqoK2qB+d9lKB0RlaO2ojb5/9r0HoXn54t3p0t5m6VzByzlCyQvNwm7deMq+v8
- iIaWvBjNLNYzL4PULXBo3QmBFJCJ3Agqy4JLvhHmD0DLp+tfRx5Z/60OoXORZSH5XO17
- QskQ==
+ bh=fEn07sIk9cXzw9wGGlw/Rg6nOAz+bx2WAbHJgltzu0U=;
+ b=q4ElAxXvi0N+yrfVcCyd0LcTvhtRUTu6tB/5e0vcYWsrIyPvLG4H1xZpJYYAs51Rea
+ czCGjSpVdFwdX/o375tHI1ByVkoRDIl1jPICLB0Xiig0PF/nVWHt6SNtCw8mE6bsf7d1
+ /BfqB5m3l8xHhgvT/+fnSzuqtNHFSCCYtwmY6Kb8418WuGa2NejRl3KmVt9mQ0zMZnIx
+ 8Ox1mg05OHa0gdt0hErMifrUQCYYRtA5omLRjHBbhApa+RnPDgz1ODDzh1spJbcLY+dw
+ zgxy/5CVMYj2vC21rEPN+M979yreckjd+db3g6ucZSrAbFoftgi7zjot8uTmiT240Y79
+ 9lCA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9XZntu/FZd+a9fajbwy4bju50bNla8C6gCObGs6VelpooLaTmoWLBAYGT7B2uJDT7Uc4ifPvI=@lists.denx.de
-X-Gm-Message-State: AOJu0YyBWlb6SrW35YQWa74tIeB7kIubDs/Ht3wAA8o19wB5RQdboKFX
- 1H+6dgQGXkFR4QqWCs+9yaOxbyWLQfQPHkWe14iOMRgdygRo9yfwnJomjpaXbcyDtPeiaxK0M1l
- ntXJTHS8=
-X-Gm-Gg: AeBDieskwJAvoCpYHL5UOU+hd7f+XgUf14se/eVomAswgrcrbsl+0BDLdJ2vtVMKEaQ
- h8/NLJVbvFIToDw792bWnLtmlm0JgaM4XIDXeaobcSV6CCYp2qqQ/KspjnPeQDC7rNjzjpSVVWO
- O8MSHPumgM+R91foRp1RLBZyL1aJrvJRXGWdIb2bt9NI1yi9yq1mR6P5v7qmp76z++8oP7pmFlH
- GfuwsjUgzohbx3TqBs60TV5oQB5jwwQ5qwzijtZNMWB3KLNYi/Oi9LUXjzI0YGdvxLEOSJzvAB1
- bzt4cF+1yXpF/LOq/d963JX8U1JhnKA0B3ISK0gPNE78gCSPA0+ylXXTEMjrjfzqLCuKAx1x6P4
- XKX5GRJZ/Vi1UODhc2d/29Vg+XsKGTE4bqsc4YC4xZB8MPAjcAG0+BvlsNB883IXmZx9UEHFI5t
- /H+caAGZPuu+WfmzGq8wii5xOaCPNMdwwdezhKUv5oMzUJ0aKa9FFqyUUodLhTQOWtjQLt
-X-Received: by 2002:a05:600c:8706:b0:488:a62d:76d7 with SMTP id
- 5b1f17b1804b1-488d67df53cmr181160965e9.1.1776078378373; 
- Mon, 13 Apr 2026 04:06:18 -0700 (PDT)
+ AFNElJ/1kBQjnY/T2RwIYQMJLeEPRwKDdlwpLRRDwX3QGZXkwBKh2YcjDulxpfC8ZFEL0WATuc39Hh4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxTB6U/ef6OcH2qQ/+e+OLYAO7IdbOfugZX2JzViMtbE4BIZDze
+ 7gVJbDkF1O1eOePwp1gjSH3GhkL8Gnd1+WaaGk8Uu1We1W85whLYLe9hReu5uhPCb6PNRxwdIca
+ dPlDv7Yo=
+X-Gm-Gg: AeBDietIJXJTA9QXlY4d/rzmrFVi+OsuUZo31Kn5zEi5uq+MAfx+s4FT8YcCqcJkLyg
+ FI+9NERVV90KOz820g5VgM9DzHWmFzM+5YRo68FVJNZFXGyJNRmQYhldMSVdvO8O4mdCOYeB5Yd
+ MGd6JPOYf6FPto/TWNgNWNol1vdWkkx/18w2QN2MKHQ3uPNc/d77m6C0MK5LTw2bwxyjg/tkysR
+ Girt83VjQ0jA6VB7c/yU4BcpMnI+Vrf/9SROG9WRcE9HfGbcaBC5bkk6S1zIL4kaheOxLqMC/LI
+ 7gEWkGCIq4MwQ/iaEOkFdMf6bCjbTva/Ho3gkWWvMGX95DQAoTWIko1sRIEWxcoO/DDabELoV00
+ OZFljEFp85CPvgm95DWB7AoDXus2l2zrCiFqNTxMITRgMm+ps6zEJthSFC3OnJvn6CDj9e3wMwu
+ nXEt5/a2aodqswZ4H72PWStvxw31FUONGXDK8CFEyJ/04Y13zRGxKg11446X5eKlD7Ow0H
+X-Received: by 2002:a05:600c:871a:b0:488:a2ac:a34a with SMTP id
+ 5b1f17b1804b1-488d67f4299mr189181505e9.10.1776078379462; 
+ Mon, 13 Apr 2026 04:06:19 -0700 (PDT)
 Received: from lion.localdomain (p4fc3dd86.dip0.t-ipconnect.de.
  [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488d5347ea5sm327284945e9.8.2026.04.13.04.06.17
+ 5b1f17b1804b1-488d5347ea5sm327284945e9.8.2026.04.13.04.06.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Apr 2026 04:06:17 -0700 (PDT)
+ Mon, 13 Apr 2026 04:06:18 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Mon, 13 Apr 2026 13:06:15 +0200
-Subject: [PATCH 2/3] soc/qcom: rpmh: only allow rpmh writes of a single command
+Date: Mon, 13 Apr 2026 13:06:16 +0200
+Subject: [PATCH 3/3] power: regulator: qcom-rpmh: propagate votes to parent
+ supplies
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260413-casey-qcom-geni-rpmh-fixes-v1-2-2a83a67ac0f1@linaro.org>
+Message-Id: <20260413-casey-qcom-geni-rpmh-fixes-v1-3-2a83a67ac0f1@linaro.org>
 References: <20260413-casey-qcom-geni-rpmh-fixes-v1-0-2a83a67ac0f1@linaro.org>
 In-Reply-To: <20260413-casey-qcom-geni-rpmh-fixes-v1-0-2a83a67ac0f1@linaro.org>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
@@ -88,13 +89,13 @@ Cc: Casey Connolly <casey.connolly@linaro.org>,
  Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 X-Mailer: b4 0.15-dev-47773
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2331;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3070;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=4BBM5Z9rZMlSFJ/wYNUneY37xxkh5ZLsgZ/9c0ZNpoQ=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw759RYWz0PzcpKV3bMr153KaJ9zRHXyulT/nN+aj21t
- 9jz76tpHaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAi/y8w/OG8/f4+t99U5vKM
- VTN4Wqsbp0ofSPTy09vq8Oye0kal3rsM/yyk729cXlI+jaPpVhG/+rk/6/lM96nk1nc+yp370nv
- P5VcA
+ bh=F6PqnQqZAhoZ+vDH0qEnA4aUGHOQTrFHiCA6wD+SN4o=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw759RzY+e//PLzlGaWWvAd1Yl/Gg/3snkwtFsZVvSWu
+ T7Z+Wd5RykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZjIcSaGP3xHfk37e/yV06Ei
+ 8QNM/VnfdmvlbH/5WEcpbt/ta2v0X/owMqy+9OPz9odR1ZuWGelVVR5dxme8bG1h0bqo7w635q5
+ lzX4AAA==
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -113,68 +114,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With how we currently handle synchronous RPMh access in U-Boot (being
-derived from the async-heavy Linux driver), with available documentation
-it doesn't seem to be easy to get multiple commands per TCS request
-to work correctly, resulting in a broken state. This likely needs more
-testing to find a better fix but for now this seems to resolve issues we
-hit in Linux on sm8650.
+Parse the parent supply data, fetch parent supplies and propagate
+set_enable() calls to the parent regulator.
+
+Not sure if necessary but it doesn't hurt
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/interconnect/qcom/bcm-voter.c | 16 ++++++++++------
- drivers/soc/qcom/rpmh.c               |  6 ++++++
- 2 files changed, 16 insertions(+), 6 deletions(-)
+ drivers/power/regulator/qcom-rpmh-regulator.c | 35 +++++++++++++++++++++++++--
+ 1 file changed, 33 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/interconnect/qcom/bcm-voter.c b/drivers/interconnect/qcom/bcm-voter.c
-index 361b03f207a9..5d284448fdf4 100644
---- a/drivers/interconnect/qcom/bcm-voter.c
-+++ b/drivers/interconnect/qcom/bcm-voter.c
-@@ -292,15 +292,19 @@ int qcom_icc_bcm_voter_commit(struct bcm_voter *voter)
- 	tcs_list_gen(voter, QCOM_ICC_BUCKET_AMC, cmds, commit_idx);
- 	if (!commit_idx[0])
- 		goto out;
+diff --git a/drivers/power/regulator/qcom-rpmh-regulator.c b/drivers/power/regulator/qcom-rpmh-regulator.c
+index 3f0f18454698..de71af9b0f0d 100644
+--- a/drivers/power/regulator/qcom-rpmh-regulator.c
++++ b/drivers/power/regulator/qcom-rpmh-regulator.c
+@@ -159,8 +159,9 @@ struct rpmh_vreg {
+ 	struct udevice			*dev;
+ 	u32				addr;
+ 	const struct rpmh_vreg_hw_data	*hw_data;
+ 	bool				always_wait_for_ack;
++	struct udevice			*supply;
  
--	for (int i = 0 ; commit_idx[i] ; ++i) {
--		ret = rpmh_write(voter->dev, RPMH_ACTIVE_ONLY_STATE,
--				 &cmds[i], commit_idx[i]);
--		if (ret) {
--			pr_err("Error sending AMC RPMH requests (%d)\n", ret);
--			goto out;
-+	/* U-Boot: don't combine votes into a single message since it doesn't work properly */
-+	for (int i = 0, k = 0 ; commit_idx[i] ; ++i) {
-+		for (int j = 0; j < commit_idx[i]; j++) {
-+			ret = rpmh_write(voter->dev, RPMH_ACTIVE_ONLY_STATE,
-+					 &cmds[k + j], 1);
-+			if (ret) {
-+				pr_err("Error sending AMC RPMH requests (%d)\n", ret);
-+				goto out;
-+			}
- 		}
-+		k += commit_idx[i];
- 	}
+ 	int				enabled;
+ 	bool				bypassed;
+ 	int				uv;
+@@ -330,8 +331,26 @@ static int rpmh_regulator_set_enable_state(struct udevice *rdev,
  
- 	/* TOFIX vote for WAKE & SLEEP ?? */
+ 	debug("%s: set_enable %d (current %d)\n", rdev->name, enable,
+ 	      vreg->enabled);
  
-diff --git a/drivers/soc/qcom/rpmh.c b/drivers/soc/qcom/rpmh.c
-index b55e23c4417d..685ac5d27cef 100644
---- a/drivers/soc/qcom/rpmh.c
-+++ b/drivers/soc/qcom/rpmh.c
-@@ -132,8 +132,14 @@ int rpmh_write(const struct udevice *dev, enum rpmh_state state,
- {
- 	DEFINE_RPMH_MSG_ONSTACK(dev, state, rpm_msg);
- 	int ret;
- 
-+	// FIXME: can't seem to get multiple commands per message to work properly
-+	if (n > 1) {
-+		pr_err("%s: ERROR: RPMh writes with multiple commands don't work!\n", dev->name);
-+		return -EINVAL;
++	if (vreg->enabled <= 0 && !enable)
++		return 0;
++	if (vreg->enabled >= 1 && enable) {
++		vreg->enabled++;
++		return 0;
 +	}
 +
- 	ret = __fill_rpmh_msg(&rpm_msg, state, cmd, n, false);
- 	if (ret)
- 		return ret;
++	if (vreg->supply) {
++		debug("%s: set supply %s enable state %d\n",
++		      rdev->name, vreg->supply->name, enable);
++		ret = regulator_set_enable(vreg->supply, enable);
++		if (ret < 0) {
++			debug("%s: failed to set supply %s enable state %d: %d\n",
++			      rdev->name, vreg->supply->name, enable, ret);
++			return ret;
++		}
++	}
++
+ 	if (vreg->enabled == -EINVAL &&
+ 	    vreg->uv != -ENOTRECOVERABLE) {
+ 		ret = _rpmh_regulator_vrm_set_value(rdev,
+ 						    vreg->uv, true);
+@@ -339,10 +358,13 @@ static int rpmh_regulator_set_enable_state(struct udevice *rdev,
+ 			return ret;
+ 	}
  
+ 	ret = rpmh_regulator_send_request(vreg, &cmd, enable);
+-	if (!ret)
+-		vreg->enabled = enable;
++	if (!ret) {
++		if (vreg->enabled < 0)
++			vreg->enabled = 0;
++		vreg->enabled += enable ? 1 : -1;
++	}
+ 
+ 	return ret;
+ }
+ 
+@@ -837,8 +859,10 @@ static int rpmh_regulator_probe(struct udevice *dev)
+ {
+ 	const struct rpmh_vreg_init_data *init_data;
+ 	struct rpmh_vreg *priv;
+ 	struct dm_regulator_uclass_plat *plat_data;
++	int ret;
++	char name[32] = { 0 };
+ 
+ 	init_data = (const struct rpmh_vreg_init_data *)dev_get_driver_data(dev);
+ 	priv = dev_get_priv(dev);
+ 	plat_data = dev_get_uclass_plat(dev);
+@@ -849,8 +873,15 @@ static int rpmh_regulator_probe(struct udevice *dev)
+ 		dev_err(dev, "Failed to read RPMh address for %s\n", dev->name);
+ 		return -ENODEV;
+ 	}
+ 
++	strlcpy(name, init_data->supply_name, sizeof(name));
++	strlcat(name, "-supply", sizeof(name));
++	ret = device_get_supply_regulator(dev->parent, name, &priv->supply);
++	if (ret)
++		printf("Failed to get supply regulator %s for %s: %d\n",
++		       init_data->supply_name, dev->name, ret);
++
+ 	priv->hw_data = init_data->hw_data;
+ 	priv->enabled = -EINVAL;
+ 	priv->uv = -ENOTRECOVERABLE;
+ 	if (ofnode_read_u32(dev_ofnode(dev), "regulator-initial-mode", &priv->mode))
 
 -- 
 2.51.0
