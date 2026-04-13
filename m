@@ -4,69 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45210F34C5E
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 15:26:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6BBEF34C62
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 15:30:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C02C4841BE;
-	Mon, 13 Apr 2026 17:26:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
+	by phobos.denx.de (Postfix) with ESMTP id 8959A839D5;
+	Mon, 13 Apr 2026 17:30:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="VImv68iF";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="9VpB7Gnd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tEICVqR9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9470484198; Mon, 13 Apr 2026 17:25:57 +0200 (CEST)
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 67319836AC; Mon, 13 Apr 2026 17:30:01 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7F9E841CD
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 17:25:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C5742836AC
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 17:29:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linutronix.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=gregor.herburger@linutronix.de
-From: Gregor Herburger <gregor.herburger@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1776093954;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=z3XnIE6ZKWle+h529DSwEdbUCC7FPfDs4YbGL/zetfQ=;
- b=VImv68iFcQsjO0Y4kPdIM2Dpsi0DOohQ9+zfmQQ8L15hr0T06Adll5n/kjvcb49ZO6Vw3i
- 2Tw+jrs9xIU+5Tskcw5xmcmB16n6Pl1HtN8nwm96KuWW2iS9SWXodxMYl20GBpJN6qKDLg
- gdkj5UooiQdL86zx43gViRrfT2Ztj/edPpazo2GVP8y8lQPEKrYHX3vR+R8QpWNx045iJa
- EmOnFqpwSWL37yir1JlfXAOJpJp4fMzmb9ZDnEGbGtx1zmDykFaoEPPkW43AkUNDoT8r1n
- zmNSYn8ZWwja+ddr+Swr4txnaUKWNLKLmQAE5i9r5VNiK302BkpmLLgAklpL2w==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1776093954;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=z3XnIE6ZKWle+h529DSwEdbUCC7FPfDs4YbGL/zetfQ=;
- b=9VpB7GndZbyKyhTfWCZcmy2ClK6D8HEmEXbyiRME77py3F7cspMj5PyFBVqm9O+ei34Pvd
- PQ/Yq3TmrlIdc8CQ==
-To: u-boot@lists.denx.de,
-	Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Gregor Herburger <gregor.herburger@linutronix.de>,
- Simon Glass <sjg@chromium.org>,
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7dbce74e537so3544394a34.1
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 08:29:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1776094197; x=1776698997; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+BeenR5TzBs/pG3bH9LsLqRy7CapMpUwJBMln5DyK/w=;
+ b=tEICVqR9qGCmoycJtYt1woWEPR2pWP35OzxgkovFuYzbW4BM+c4yr6xjyRSNlYV2sv
+ lYTmASExDaJ0G3vOEwZfbmCpx6Wrh3PGSsX325+ISVtehuTBnovPieCu7B7rSIdJwbyx
+ zygZNh6mc7JbcKeC9sBJOsMrS7x2YllG9sk4k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776094197; x=1776698997;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+BeenR5TzBs/pG3bH9LsLqRy7CapMpUwJBMln5DyK/w=;
+ b=DMGcess+/d6EDdCnUIKS7fOVTXSjZppw4XifzYE35uiELRopSFPH20Uh6A0w8HtJLz
+ i3GRPlzm2C6BkUv/sPwf9qKVo43u2wD0iZrOJFOGwD5RyOQEyEYgkXN2U8EMAapCojhb
+ f/sct7FqEpeg9morZMldnaCfviE9uXB62+ChhIqDUrgVO3rj64gzcJsM7BDktrlCwoof
+ hazLXEMRSvBV4d3xuVzILJFMpIt5jTtSog6vbSYFejOnt+cOATgSnVo+7EiafR/9I/XK
+ hE5H9vEggPlk0I+ra11RB2dj4HLVS3ba1WIL13whRQPPbrBEtNrEnDDbCp5Yyb69PFWx
+ d/Tw==
+X-Gm-Message-State: AOJu0YyUkcYa0JMoe/RuVHuUFaeKeccZumfKgO21lKwdUkp+bZ5U2RNB
+ hFfdCnVx93p5tPQYqbm/bHOvKlvy4NfYR2ATSXYalBBfnaDZYmCH7Pp/5MNBhi+i7j8=
+X-Gm-Gg: AeBDies54R+tJNVwIvuQ0HK5MljLg0/9Ffk+4B6vVlfOvMY+m3ikrpkZyCjOp3vz+OH
+ qlRnS472CqXE2Rmz+DovCGUdjt4NjY2RbkeeZd2lole+WBVHLrCbeu2PBTI5gws/sPWCcaUsBRy
+ 6DhQ8Mjngk+Z2XxeV+cau/4qIpuYLvKYnya9KpEjnDLBVLQWGSBRsvedhCtzYFFrh/Far5FS3IX
+ y5QlFczRMEjfviJRRYt7A5tdTZkCcoAORxASyzTMnpFrOiOx0gpK8snBEW4kj+tvzgl6qOGW58L
+ cRVW3YNhGRoCmz830KjIQrQFG0/n54lBzWyTNqpZGHtErnnabX5T1ZzpCPLqOynoeBvNauYCT4H
+ 5tTNG+rNTbnqCg9j81MurkwuhtW4dy5KswZooDdey1pa//ooYPy/UCwiCJfD0kUo2jfdIV62FQb
+ RwxnkL+toIXXGUe2csiT8/FCTCR4Ij5ccF/qnyOROJSJhaVA/b/VuCG7BaQI98/QJOMYzfxRSCC
+ dG+ddnvK+Y2Id5iSXa+pa9cmcjNdZwEMd21jkkHFp5GZdYLVeY=
+X-Received: by 2002:a05:6820:3397:10b0:67d:ccf6:13f1 with SMTP id
+ 006d021491bc7-68be7ee39f3mr4494344eaf.37.1776094197334; 
+ Mon, 13 Apr 2026 08:29:57 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-68bc7dfa174sm5828927eaf.3.2026.04.13.08.29.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 13 Apr 2026 08:29:56 -0700 (PDT)
+Date: Mon, 13 Apr 2026 09:29:54 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Andrew Goodbody <andrew.goodbody@linaro.org>,
- Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 2/2] cli: flush stdin before enabling cli
-Date: Mon, 13 Apr 2026 17:24:54 +0200
-Message-ID: <20260413152526.153605-2-gregor.herburger@linutronix.de>
-In-Reply-To: <20260413152526.153605-1-gregor.herburger@linutronix.de>
-References: <20260413152526.153605-1-gregor.herburger@linutronix.de>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH v2 00/12] test: Add support for passing arguments to C
+ unit tests
+Message-ID: <20260413152954.GW41863@bill-the-cat>
+References: <20260412111958.943933-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="rZtAOxUt+nr/UNtV"
+Content-Disposition: inline
+In-Reply-To: <20260412111958.943933-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,68 +99,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently there is no possibility to flush stdin after autocommands are
-executed. If in the bootcmd the stdin is changed, e.g. from nulldev to
-serial, it could happen that junk characters sit in the fifo and appear
-on the cli.
 
-Add a option to clear stdin before starting the CLI.
+--rZtAOxUt+nr/UNtV
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Gregor Herburger <gregor.herburger@linutronix.de>
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Sun, Apr 12, 2026 at 05:19:37AM -0600, Simon Glass wrote:
 
----
+> Some tests have two parts: a Python test which handles setup, such as
+> creating filesystem images or configuring the environment, and a C
+> test which does the bulk of the work including assertions. At present
+> there is no way to pass information between these two parts, so
+> things like paths and device names must be hard-coded in the C test.
+>=20
+> This tends to make people write tests in Python, but this is not ideal
+> for several reasons:
+>=20
+> - Python lacks access to things like return codes and has to scan the
+>   console output to figure out what happened
+> - Python lacks access to internal state, so it cannot directly check
+>   the result of an operation
+> - Python is ~100x slower due to console interaction, etc.
+> - C tests can be stepped through in gdb, which is much harder with
+>   Python driving the console
+> - C tests can exercise internal APIs directly (e.g. fs_read(),
+>   fs_size()) rather than going through the command layer, so they
+>   test more precisely what they intend to
+>=20
+> This series adds infrastructure for passing typed, runtime arguments
+> from Python to C unit tests, using a name=3Dvalue format on the ut
+> command line.
+>=20
+> The series includes:
+>=20
+> - Regex assertion helpers for matching variable output in tests
+>=20
+> - A private buffer in unit_test_state for test-local temporary data
+>=20
+> - Argument-type definitions (string, integer, boolean) with optional
+>   flags and default values
+>=20
+> - A new UNIT_TEST_ARGS() macro for declaring tests with typed
+>   arguments
+>=20
+> - Argument parsing in the test framework, accepting name=3Dvalue format
+>=20
+> - Updates to the ut command to pass arguments through to tests
+>=20
+> - Type-checked accessor macros ut_str(), ut_int(), and ut_bool()
+>   with bounds validation
+>=20
+> - Tests for the argument feature covering type checking, optional
+>   arguments, and argument-parsing failures
+>=20
+> - Documentation for the test-parameter feature
+>=20
+> - C-based filesystem tests as an example of the hybrid approach,
+>   with Python wrappers that pass filesystem type, image path, and
+>   expected MD5 values to the C tests
+>=20
+> Note: This series depends on:
+>=20
+>    https://patchwork.ozlabs.org/project/uboot/list/?series=3D496972
+>=20
+> Changes in v2:
+> - Correct double signoff
 
-Changes in v4:
-- Collect tags
+Reposting a series this large, on the weekend, the day after v1, because
+you made a trivial mistake is bad form. You should just acknowledge that
+in the cover letter and wait for feedback.
 
-Changes in v3:
-- Update helptext
+And since I'm seeing over 100 emails from you this weekend, this
+matters.
 
-Changes in v2:
-- add a common console_flush_stdin to console.c
-- replace all caller of while(getchar()) with function call
+--=20
+Tom
 
- cmd/Kconfig  | 8 ++++++++
- common/cli.c | 4 ++++
- 2 files changed, 12 insertions(+)
+--rZtAOxUt+nr/UNtV
+Content-Type: application/pgp-signature; name="signature.asc"
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 7bbeaad04ff..33a7952c9b8 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -47,6 +47,14 @@ config HUSH_SELECTABLE
- 	default y if HUSH_OLD_PARSER && HUSH_MODERN_PARSER
- endmenu
- 
-+config CMDLINE_FLUSH_STDIN
-+	bool "Enable flushing input before starting cli"
-+	help
-+	  When this option is enabled the stdin buffer will be flushed before
-+	  starting the CLI. This is useful when stdin is changed during boot
-+	  (e.g. from nulldev to serial) and junk characters may be pending
-+	  in the buffer.
-+
- config CMDLINE_EDITING
- 	bool "Enable command line editing"
- 	default y
-diff --git a/common/cli.c b/common/cli.c
-index 4694a35cd0e..bcc7264d51a 100644
---- a/common/cli.c
-+++ b/common/cli.c
-@@ -295,6 +295,10 @@ err:
- void cli_loop(void)
- {
- 	bootstage_mark(BOOTSTAGE_ID_ENTER_CLI_LOOP);
-+
-+	if (IS_ENABLED(CONFIG_CMDLINE_FLUSH_STDIN))
-+		console_flush_stdin();
-+
- #if CONFIG_IS_ENABLED(HUSH_PARSER)
- 	if (gd->flags & GD_FLG_HUSH_MODERN_PARSER)
- 		parse_and_run_file();
--- 
-2.47.3
+-----BEGIN PGP SIGNATURE-----
 
-base-commit: e2fa3e570f83ab0f9ce667ddaec9dc738bcf05b9
-branch: cmd-flush-stdin4
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCad0L7QAKCRAr4qD1Cr/k
+Cg1dAPsG3A4AldYPE2s4BwusqROIPWaXns73usX5kbUJ3oCd5AD/b6UbPEZoPm9Z
+TZL/o1ldwVHcVz4uHp1Bh7j03+XZXgI=
+=y4hK
+-----END PGP SIGNATURE-----
+
+--rZtAOxUt+nr/UNtV--
