@@ -4,118 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55CBBEBFD30
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 10:48:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3CFAEBFD38
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 11:06:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91550839DF;
-	Mon, 13 Apr 2026 12:48:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1D208839DF;
+	Mon, 13 Apr 2026 13:06:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kf7j4+a2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SkNL0/Fh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C499483DC9; Mon, 13 Apr 2026 12:48:38 +0200 (CEST)
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
- [IPv6:2607:f8b0:4864:20::42a])
+ id 90CA484119; Mon, 13 Apr 2026 13:06:20 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 013F9839D5
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 12:48:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E02D839D5
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 13:06:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ranquet.guillaume@gmail.com
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-82cd70febc7so2846654b3a.2
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 03:48:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776077314; cv=none;
- d=google.com; s=arc-20240605;
- b=BM7d0nOuTkI2GtDdLO9booEPXWMEQPlxHu6iG/nFYyBvIOILUxb1mvyxBwTKSqACm2
- 3M547HXQZykEj1UBvXaF7/Dw0HaoZRLmIibWVGkzT25RQc/vU1zkM2LJ1C1qpSuwX1+y
- MlCJP6Sm3ChKnw52TyqvTjkVuusjLsLuMt8yqcrPP1EYY/xTRukQtbo1AIwSA8ctH+kP
- Ih8UzJQuW0R6kbRDm9hS24gRkxJwb3dY27VUD9eLUfwD5F4XZCyKryVupd/uvVw91vnk
- nHT9DdR2ZbLm9CSDHa0hX0mwo+J6/mlg9PREwqoDzpNcB3L1MB6Oa8Ra+dJm7XU5BSfW
- LHCA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:mime-version:in-reply-to:references
- :user-agent:from:dkim-signature;
- bh=6BOLccOblBcQwnTlL2NiHow+pyERSqq3TFN4QSycc3s=;
- fh=hDjB4ghDwlr9gcMCB/70x7M9q1CtfdzNZAslHteNuM0=;
- b=RtrZF26ZZwShOItuE90jtMuE9zUuENYhY+mICu6aNG+QPT+F471IPrjx89ubQ5aWPC
- R2FavvNVq00bulHBSg4Mgx4WKS/rYGfd/tBe9FfCVXkJys2TZIshnKI1S9b7AP+yNjo2
- EdE9PqGfmaqJyVl71JzRDGas0V6LOC+aL5+2fOAqAwkXC1ytFZDZPXPfFmz0Or6NwqdZ
- mszVwtBWsFanTXwMqQ2A22NCxc4Ll21afm8HLHW7B5jphBnqUPgiAuz4mMvn5FE4+1gu
- ohya50qs1KLxuKIlnn8bEWt39lajbGx3ZMNuhoHp33mD5JyaRQIWR5TvgF4sMTDSgeaM
- qhRQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-488a4bc360bso23140185e9.0
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 04:06:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776077314; x=1776682114; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:mime-version:in-reply-to:references
- :user-agent:from:from:to:cc:subject:date:message-id:reply-to;
- bh=6BOLccOblBcQwnTlL2NiHow+pyERSqq3TFN4QSycc3s=;
- b=kf7j4+a2ifGrEFVMlnW8bkWT9B1eBpPOnMBcIyVdH1aZTZhxkq9MvXv4VVZfPryYUH
- 0eml6X8BgVWPHakzH6Zn4uf3dEHF9soSspxy2nuUEZ4HTqYBSXhzJrOtjNlmIVqejwfv
- eGDbDRaYAXUrLicLgR5H7oSHZZuFgbGoVraiiwyNTRndoDH7zZUXSeURoVj4AscQDlSS
- qNSbe66zatx5S79mn1XVVQMVaN2moc2LMdbPDek96Y76xUe8lVrPby+UeFmupzQSVjhD
- yUpbI9mLOA/GW4XW75kYpknXKZIxy04eWuv/alwaKSpGLobYL1HGcvj2Dm5UEJ5knxH9
- 8+pQ==
+ d=linaro.org; s=google; t=1776078376; x=1776683176; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ASfmMggwx3RfaBtCf6C/rAG48PrpV0v/xrLa7+Mcotk=;
+ b=SkNL0/Fhlw61McdzNFJCDd1s/SeEHwXqmuEA+LCTh/0+2G74HXEFXClddGPm4tb/Q2
+ efV1CadsMctm21fFqMk1P+2urVtilBYlo1a5QM2F7ySueWzbUY41oRfd76p5hdGaPvGv
+ RAildKWYcmSzkMSGF28WIDCsdCW1mKeVX0Zd8EL0hLRMsBtNY7YCtQPmuEIb4gL8rIbR
+ 5pc84NmmSh2sV5uiFEKHHW8NeM2DW1v2XgLJZjmfrAFsjU5Te/EEbL4qGGkQRtzxCi+U
+ WBen96ZN7UZfXz7zSM0/yduE7CRbojwtES8+HKjq6YgSGlq+rbqcHYVAIedsZtWVFvPA
+ X7tQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776077314; x=1776682114;
- h=cc:to:subject:message-id:date:mime-version:in-reply-to:references
- :user-agent:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1776078376; x=1776683176;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6BOLccOblBcQwnTlL2NiHow+pyERSqq3TFN4QSycc3s=;
- b=CF3kTcLUI5dqwiaqYtNZp+6JQP432Ao5ZoHuR1tx1geBwpRwyBmjpJx8y5igBMAIOA
- mN7zPMxDImJgB84OwkZQTCXJ8TF20suTdw23gLGCHn/B8Kf03kfkZeHvhhAq5zAhypr0
- wzJs4WN3qgVT2+irP+IPpc9atr6gqJX+Rl0gLAT0/9JYFPFlKy6GVNP6tgHdn2Hq4dxW
- BmXvEct66RRx62v9Ar7B5HWJIJ3umhzzxZiA8y1tlkqtuwxGlGquW095V0l0126Tj0KE
- sw4suFxLhnZ3a2mp8FMuEurCN2b96A/3BNzkk5qPhHNk05uU/lNwc4wY1elDvSns6GaR
- bkPg==
+ bh=ASfmMggwx3RfaBtCf6C/rAG48PrpV0v/xrLa7+Mcotk=;
+ b=ijICjdAEhrqMTTP7C+Pz3GKsQnpOyzGKsD+RcsVpQOFm5v9w1GgvUvI8HXYTF7IVu2
+ EOJACz7ii/kSn3CYvsDGIztGQHwunqBvBOiRSkc+RB/VVLCo3QdHqzvxERDEigeLmh0g
+ vPppPlQ2WFNe9EpHQQlp2oYVv9W9jndpAjsmw/1Jch0sc7kXOzBGem+fnPWNmm+fOiC7
+ Pt4wAORmKR4D//92kmE3w9N/d7jqaiUxBtZTGx0JjMyFkPkXZONUAKbXbHkF28GFL5Z8
+ 0DHZnGciVg2wE/aSnBFePFn1dmGBxggvRVmr/nMItKP2n+3ASa7YN7L9wK+pZKmE+SVd
+ Y4IA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+YsxU13sE8QIjIo5H7gojKriRBsQW/yK/+aW7qmM/8+7pKjK6RYD9tAlDhtpGiarhIzicIAuA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy0Cw23U+Ag+ABUfL/xY4zwfBcIHBj0ss27gUfmOgxj0DCxNlp4
- igydX9CzrbpNynhzCpKxv6Nxlz/xHQHgeOsl55jyhwXOr+kdtUts6U8WgAwkoMyn7+VpUNrF4g2
- ynbl2WCLwotNZdiEZoEzdAnvtw1ESlOk=
-X-Gm-Gg: AeBDievJJEZK3vI1J8DRVyF88Yg+DhvK6T4Hrvc0xKQj+yXtd3fos4RDftnv9HljBDQ
- FgNRi6gvZQkWrk9H0BXi8dzXBQulk+ZfViHftw3KaP8ev78mnChppVJr9HhTZTR+hujUeI/YFss
- jO3qPtd6Jtmate5Lf3zRRm12hPMOdJQ/o62ujds/eC/c6YbsCMReHXD7c8Talc4oq/XGp0ylLvo
- HCbHSfdUTz7uhLBU69QbO3a1PPLFrKkymcluyyQgkFYRcliSKVmFylPBQH6qCLYKEs7mguRzam9
- gACLKQ==
-X-Received: by 2002:a05:6a00:26cc:b0:82f:2243:e448 with SMTP id
- d2e1a72fcca58-82f2243e6d1mr5913145b3a.3.1776077314366; Mon, 13 Apr 2026
- 03:48:34 -0700 (PDT)
-Received: from 753933720722 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 13 Apr 2026 03:48:32 -0700
-Received: from 753933720722 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 13 Apr 2026 03:48:32 -0700
-From: Guillaume Ranquet <ranquet.guillaume@gmail.com>
-User-Agent: meli/0.8.13
-References: <20260403-cmdline-v2-1-83e22c82f02f@missingno.tech>
- <4D95B3CE-66CD-45E0-9DB8-2CDD45622920@gmx.de>
- <CAFLszThvYf0=ebaGqprxy7unbVomC+tu-5uQM2auEZeiNCZpmA@mail.gmail.com>
-In-Reply-To: <CAFLszThvYf0=ebaGqprxy7unbVomC+tu-5uQM2auEZeiNCZpmA@mail.gmail.com>
+ AFNElJ/7XqrqBZJeBpH8ghPLzzzVER/JRP0aQxb/hbgQjyQ1EN0mFUU1lF7/jt7Zz2QCrfqfiuPM9jM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxvE08XYNer1qJaUNMLt9J1jRm2Y4yZymlWHrb3amRJ/lCylK2Y
+ Kb5thbn+yzSJcvzX/rIegEvp0Ay9ACs9KdYgbv/+0jXqUL4NSmMpkp/er6RCYiZycBCMEcScKE9
+ OjSVOiT4=
+X-Gm-Gg: AeBDiet+XWj7NXGye1SvJlIzyNf1zocc5zICadpWRa2EiHxLmY3islWKwHZfwhH0opj
+ zkqXGKro07HMfaHXaVh+MZofiNFH7TzU5KzR4kiywE1iTojkSRxY4QfybqMcAinX0eE9iqyHmyJ
+ IJL1+AS/LtU9mg1VWwKWI011KHOOqa5nG32EtSsOt8mT2x3Z98Ucz/nSF2L5dK4xsa8Z8dHr5Nk
+ Z//Kcqfg6/FNrnDjS1/k4FmYdfFvpby/kkByhdNDKEwcKlL9D1vBnbXkriOKx1e/xxr18xnrCgp
+ kFyI97blrfVjvyoa/+j4WQA8mzXPpq+i3STLPHyGeMNmAtanUhz54NLyHI1bRGfcQxPyJlXWOiC
+ ZRZyOfHqqd1aP/6J60IvHJsFssAWY89mBA1ju+ICEQtpBd6RMrTS45OQ+kwg9xGGUHKdQBiKrJ8
+ wh5DNuLmwpMhX5/jiR4E23nBrW1aKgkWVus4YIxZV4z+VUw1S8RcwAGXcDOJrulVVe9IH6
+X-Received: by 2002:a05:600c:46cb:b0:488:c51f:e04e with SMTP id
+ 5b1f17b1804b1-488d67f3a0fmr177495285e9.13.1776078376189; 
+ Mon, 13 Apr 2026 04:06:16 -0700 (PDT)
+Received: from lion.localdomain (p4fc3dd86.dip0.t-ipconnect.de.
+ [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-488d5347ea5sm327284945e9.8.2026.04.13.04.06.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 13 Apr 2026 04:06:15 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+Subject: [PATCH 0/3] Qualcomm: rpmh and regulator fixes
+Date: Mon, 13 Apr 2026 13:06:13 +0200
+Message-Id: <20260413-casey-qcom-geni-rpmh-fixes-v1-0-2a83a67ac0f1@linaro.org>
 MIME-Version: 1.0
-Date: Mon, 13 Apr 2026 03:48:32 -0700
-X-Gm-Features: AQROBzBTNDCdvjBq1it5kb7xGrFZbrO8_Nw-5YZMiz3KQxwDh7nnyjxDk4RNbVM
-Message-ID: <CAD+NunbVCgmyUdfd4WX+i8iZZ4FZy5bwBRdrvsH4B6us9gqwfQ@mail.gmail.com>
-Subject: Re: [PATCH v2] arch/x86/lib: implement cmdline configuration property
-To: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Guillaume Ranquet <ranquet.guillaume@gmail.com>, u-boot@lists.denx.de, 
- Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Jeremy Compostella <jeremy.compostella@intel.com>, Peng Fan <peng.fan@nxp.com>,
- Yao Zi <me@ziyao.cc>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- James Hilliard <james.hilliard1@gmail.com>,
- Frank Wunderlich <frank-w@public-files.de>, 
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Shiji Yang <yangshiji66@outlook.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Guillaume Ranquet <granquet@missingno.tech>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACXO3GkC/yXMwQ6CMBCE4Vche3aTdqEefBXjAeoAa0LBrhoN4
+ d2pevwymX8lQ1YYnaqVMl5qOqcCf6gojm0awHotJnFydI2vObaGD9/jPPGApJyXaeRe3zBGL3X
+ nggQfhEpgyfgN5X++/G3P7ob4+BZp23acIwXHfgAAAA==
+X-Change-ID: 20260413-casey-qcom-geni-rpmh-fixes-ef23b0525152
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
+ u-boot@lists.denx.de
+Cc: Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+X-Mailer: b4 0.15-dev-47773
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1662;
+ i=casey.connolly@linaro.org; h=from:subject:message-id;
+ bh=Q3EbBCadEa70aJ01r9FuIeJkhjaBbaPpB/ksgFzKd+A=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw759Qe7t/S3PT4llJXnXM+c4ar4AFBliliYt+PLJ/er
+ Vbit3ZaRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZjIS02G/z63DJkeuybXTjNb
+ fWrTdBbXC9Jn7O/xGR9cbbVM9/HN6e8YGRaE5YvIPbud8/in0MeplVxufz53nj0VNF/p6wyrnmm
+ nRE4DAA==
+X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,221 +115,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 12 Apr 2026 13:37, Simon Glass <sjg@chromium.org> wrote:
->Hi,
->
->On Sat, 11 Apr 2026 at 05:25, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->>
->> Am 3. April 2026 16:28:23 MESZ schrieb Guillaume Ranquet <ranquet.guillaume@gmail.com>:
->> >Implement the cmdline configuration property as described in the spec
->> >[1]
->>
->>
->> I can't see in the spec that the command line property is x86 specific. Why would you try to implement it in arch/x86?
->>
->
->This is a little tricky though. It could perhaps be handled in
->bootm_process_cmdline_env() by setting bootargs. Both legacy bootm and
->bootstd (via the on_bootargs callback) would then pick it up without
->any arch-specific code. But I haven't tried it. Commands like
->'bootflow cmdline set' need to continue to operate as now.
->
->Regards,
->Simon
->
+The RPMh API is frustratingly complicated and lacks public
+documentation. With the Linux drivers being the only available sources
+but are highly asynchronous and thus hard to translate to U-Boot.
 
-Indeed, I've looked at implementing this in a generic way but it
-requires a bit of massaging to get things working.
+The main issue seems to relate to sending multiple commands in a single
+TCS request, currently this is only done by the interconnect driver and
+while this may not be the underlying cause it seems to be safer to avoid
+this for now.
 
-I was also under the impression that no one in their right mind would
-use the command line property if they had access to a device tree?
+Adjust the bcm-voter driver to avoid sending multiple commands per
+write, and additionally adjust how we send RPMh requests as well as
+improve the cleanup we do prior to booting the OS.
 
-Tell me if you think I should propose a generic implementation?
+Lastly, add a missing piece to the rpmh regulator driver to ensure
+that when a supply gets enabled we also propagate a vote to its parent
+supply. This seems to have been missed from the original port (perhaps
+because the Linux regulator core handles this automatically?) but it is
+necessary for some peripherals on some boards to work (e.g. to ensure
+that the spms supplier for an LDO gets enabled).
 
-Thx,
-Guillaume.
+---
+Casey Connolly (3):
+      soc/qcom: rpmh: properly fix synchronous requests
+      soc/qcom: rpmh: only allow rpmh writes of a single command
+      power: regulator: qcom-rpmh: propagate votes to parent supplies
 
->> Best regards
->>
->> Heirich
->>
->> >
->> >[1]: https://fitspec.osfw.foundation/#id10
->> >
->> >Signed-off-by: Guillaume Ranquet <granquet@missingno.tech>
->> >---
->> >Changes in v2:
->> >- EDITME: describe what is new in this series revision.
->> >- EDITME: use bulletpoints and terse descriptions.
->> >- Link to v1: https://lore.kernel.org/r/20260401-cmdline-v1-1-c56577f82960@missingno.tech
->> >---
->> > arch/x86/include/asm/zimage.h |  2 +-
->> > arch/x86/lib/bootm.c          | 10 +++++++++-
->> > arch/x86/lib/zimage.c         |  6 +++---
->> > boot/image-fit.c              | 30 +++++++++++++++++++++++++++++-
->> > include/image.h               |  3 +++
->> > 5 files changed, 45 insertions(+), 6 deletions(-)
->> >
->> >diff --git a/arch/x86/include/asm/zimage.h b/arch/x86/include/asm/zimage.h
->> >index 8b5426051701c8266395afd9232eb1ff30d38304..ee0114a227a2b067a3a3126d7d80ab0cc89cea6e 100644
->> >--- a/arch/x86/include/asm/zimage.h
->> >+++ b/arch/x86/include/asm/zimage.h
->> >@@ -132,7 +132,7 @@ struct boot_params *load_zimage(char *image, unsigned long kernel_size,
->> >  * Return: 0 (always)
->> >  */
->> > int setup_zimage(struct boot_params *setup_base, char *cmd_line, int auto_boot,
->> >-               ulong initrd_addr, ulong initrd_size, ulong cmdline_force);
->> >+               ulong initrd_addr, ulong initrd_size, const char *cmdline_force);
->> >
->> > /**
->> >  * zboot_start() - Prepare to boot a zimage
->> >diff --git a/arch/x86/lib/bootm.c b/arch/x86/lib/bootm.c
->> >index cde4fbf35574a267b856a668659ece7e0a36367f..e029cc1ff18bd53eb873c0e56fd9d3b0a331b4c2 100644
->> >--- a/arch/x86/lib/bootm.c
->> >+++ b/arch/x86/lib/bootm.c
->> >@@ -61,6 +61,7 @@ int arch_fixup_memory_node(void *blob)
->> > static int boot_prep_linux(struct bootm_headers *images)
->> > {
->> >       char *cmd_line_dest = NULL;
->> >+      const char *cmd_line_override = NULL;
->> >       struct legacy_img_hdr *hdr;
->> >       int is_zimage = 0;
->> >       void *data = NULL;
->> >@@ -99,6 +100,13 @@ static int boot_prep_linux(struct bootm_headers *images)
->> >                       puts("Can't get image data/size!\n");
->> >                       goto error;
->> >               }
->> >+
->> >+              ret = fit_image_get_cmdline(images->fit_hdr_os,
->> >+                                          images->fit_noffset_cfg,
->> >+                                          &cmd_line_override);
->> >+              if (ret)
->> >+                      debug("unable to retrieve cmdline for zimage\n");
->> >+
->> >               is_zimage = 1;
->> > #endif
->> >       }
->> >@@ -125,7 +133,7 @@ static int boot_prep_linux(struct bootm_headers *images)
->> >       printf("Setup at %#08lx\n", images->ep);
->> >       ret = setup_zimage((void *)images->ep, cmd_line_dest,
->> >                       0, images->rd_start,
->> >-                      images->rd_end - images->rd_start, 0);
->> >+                      images->rd_end - images->rd_start, cmd_line_override);
->> >
->> >       if (ret) {
->> >               printf("## Setting up boot parameters failed ...\n");
->> >diff --git a/arch/x86/lib/zimage.c b/arch/x86/lib/zimage.c
->> >index a5f2231aa523356de93368338b5fd249b8abad6e..af7ee8dbcf3e8f402cb0c76767b8a587f205ad5d 100644
->> >--- a/arch/x86/lib/zimage.c
->> >+++ b/arch/x86/lib/zimage.c
->> >@@ -276,7 +276,7 @@ struct boot_params *load_zimage(char *image, unsigned long kernel_size,
->> > }
->> >
->> > int setup_zimage(struct boot_params *setup_base, char *cmd_line, int auto_boot,
->> >-               ulong initrd_addr, ulong initrd_size, ulong cmdline_force)
->> >+               ulong initrd_addr, ulong initrd_size, const char *cmdline_force)
->> > {
->> >       struct setup_header *hdr = &setup_base->hdr;
->> >       int bootproto = get_boot_protocol(hdr, false);
->> >@@ -333,7 +333,7 @@ int setup_zimage(struct boot_params *setup_base, char *cmd_line, int auto_boot,
->> >
->> >               /* build command line at COMMAND_LINE_OFFSET */
->> >               if (cmdline_force)
->> >-                      strcpy(cmd_line, (char *)cmdline_force);
->> >+                      strcpy(cmd_line, cmdline_force);
->> >               else
->> >                       build_command_line(cmd_line, auto_boot);
->> >               if (IS_ENABLED(CONFIG_CMD_BOOTM)) {
->> >@@ -404,7 +404,7 @@ int zboot_setup(void)
->> >
->> >       ret = setup_zimage(base_ptr, (char *)base_ptr + COMMAND_LINE_OFFSET,
->> >                          0, state.initrd_addr, state.initrd_size,
->> >-                         (ulong)state.cmdline);
->> >+                         state.cmdline);
->> >       if (ret)
->> >               return -EINVAL;
->> >
->> >diff --git a/boot/image-fit.c b/boot/image-fit.c
->> >index e7c7212195f4a291e26ed6d3440a1b42274dacab..1790af4a8e5a9c7d11f7dee5f67226071f8f057e 100644
->> >--- a/boot/image-fit.c
->> >+++ b/boot/image-fit.c
->> >@@ -1096,6 +1096,32 @@ int fit_image_get_data(const void *fit, int noffset, const void **data,
->> >       return ret;
->> > }
->> >
->> >+/**
->> >+ * fit_image_get_cmdline - get image configuration command line
->> >+ * @fit: pointer to the FIT format image header
->> >+ * @cfg_noffset: configuration node offset
->> >+ * @cmdline: double pointer to char, will hold pointer to the cmdline
->> >+ *
->> >+ * fit_image_get_cmdline() gets the cmdline from the configuration node.
->> >+ * If the property is found its data start address is returned to the caller.
->> >+ *
->> >+ * returns:
->> >+ *     0, on success
->> >+ *     -1, on failure
->> >+ */
->> >+int fit_image_get_cmdline(const void *fit, int noffset, const char **cmdline)
->> >+{
->> >+      int len;
->> >+
->> >+      *cmdline = (const char *)fdt_getprop(fit, noffset, FIT_CMDLINE_PROP, &len);
->> >+      if (!*cmdline) {
->> >+              fit_get_debug(fit, noffset, FIT_CMDLINE_PROP, len);
->> >+              return -1;
->> >+      }
->> >+
->> >+      return 0;
->> >+}
->> >+
->> > /**
->> >  * fit_image_hash_get_algo - get hash algorithm name
->> >  * @fit: pointer to the FIT format image header
->> >@@ -2136,8 +2162,10 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
->> >               fit_base_uname_config = fdt_get_name(fit, cfg_noffset, NULL);
->> >               printf("   Using '%s' configuration\n", fit_base_uname_config);
->> >               /* Remember this config */
->> >-              if (image_type == IH_TYPE_KERNEL)
->> >+              if (image_type == IH_TYPE_KERNEL) {
->> >                       images->fit_uname_cfg = fit_base_uname_config;
->> >+                      images->fit_noffset_cfg = cfg_noffset;
->> >+              }
->> >
->> >               if (FIT_IMAGE_ENABLE_VERIFY && images->verify) {
->> >                       puts("   Verifying Hash Integrity ... ");
->> >diff --git a/include/image.h b/include/image.h
->> >index 34efac6056dd29307df359dce21e4f94d5fcbf2d..9916e67168e3a4f5412fc26d318af32047c239e2 100644
->> >--- a/include/image.h
->> >+++ b/include/image.h
->> >@@ -365,6 +365,7 @@ struct bootm_headers {
->> >        * format, even for SPL, this extra data size seems worth it.
->> >        */
->> >       const char      *fit_uname_cfg; /* configuration node unit name */
->> >+      int             fit_noffset_cfg;        /* configuration node offset */
->> >
->> >       void            *fit_hdr_os;    /* os FIT image header */
->> >       const char      *fit_uname_os;  /* os subimage node unit name */
->> >@@ -1108,6 +1109,7 @@ int booti_setup(ulong image, ulong *relocated_addr, ulong *size,
->> > #define FIT_TFA_BL31_PROP     "tfa-bl31"
->> > #define FIT_TEE_PROP          "tee"
->> > #define FIT_COMPAT_PROP               "compatible"
->> >+#define FIT_CMDLINE_PROP      "cmdline"
->> >
->> > #define FIT_MAX_HASH_LEN      HASH_MAX_DIGEST_SIZE
->> >
->> >@@ -1259,6 +1261,7 @@ int fit_get_data_node(const void *fit, const char *image_uname,
->> > int fit_get_data_conf_prop(const void *fit, const char *prop_name,
->> >                          const void **data, size_t *size);
->> >
->> >+int fit_image_get_cmdline(const void *fit, int noffset, const char **cmdline);
->> > int fit_image_hash_get_algo(const void *fit, int noffset, const char **algo);
->> > int fit_image_hash_get_value(const void *fit, int noffset, uint8_t **value,
->> >                               int *value_len);
->> >
->> >---
->> >base-commit: 98cf83d81617f489d7ff7bf78d33e693e2799254
->> >change-id: 20260401-cmdline-ab954a4e8828
->> >
->> >Best regards,
->>
+ drivers/interconnect/qcom/bcm-voter.c         | 16 +++---
+ drivers/power/regulator/qcom-rpmh-regulator.c | 35 +++++++++++++-
+ drivers/soc/qcom/rpmh-rsc.c                   | 70 ++++++++++++++++++++-------
+ drivers/soc/qcom/rpmh.c                       |  6 +++
+ 4 files changed, 102 insertions(+), 25 deletions(-)
+---
+base-commit: c704af3c8b0f37929bce8c2a4bba27d6e89919c7
+
+// Casey (she/they)
+
