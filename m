@@ -4,116 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DEEEF531CA
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 21:14:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 507D8F531D3
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 21:16:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46F3584214;
-	Mon, 13 Apr 2026 23:13:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D2C54839D5;
+	Mon, 13 Apr 2026 23:16:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CZ1DgUsH";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="jjvXEMJ2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B61E8839DF; Mon, 13 Apr 2026 19:21:15 +0200 (CEST)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B081984198; Mon, 13 Apr 2026 23:16:21 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2ED7A8352B
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 19:21:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C22F88352B
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 23:16:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-40ef10ec84cso3278286fac.2
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 10:21:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1776100872; x=1776705672; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ScKfoSOzE9lZeiEWcxnRRbqkHqOqK/TReU5nIoscTfo=;
- b=CZ1DgUsHTYEAZvBXXt+lbbZIBU9v23syYOd1bS86oAYnAEs61Wth9at9JslH+XhTBT
- AMB/HipBUIGv3bUTGrlXqJdjySZCDDIGhS2XG47QPw4rY7KuTIGL7eJsJTShzjwdWRcb
- Q/u4wWCGdveh7rQ0wZ6iBqBBLdsp2xJPvZPWQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776100872; x=1776705672;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ScKfoSOzE9lZeiEWcxnRRbqkHqOqK/TReU5nIoscTfo=;
- b=OJOtMna8V0Hb8cm0iOJ/C805jbY1pCBsltZl6T24BeidOIq1elZ5JgACfLhhBUB1MU
- V6rLDJfNVeWOBF8UaorBztCjSzob0wH7KMZHe4j/B4lMMYIEhS5JswFeij2Nl8xuJOZ4
- wlunSSvpfjHQqH7K8nkHORkDcJTtk3mKQkwW5/Ngtia1Sc/kCPM0vDSUgjnpTuSdFjUM
- PoDhPTgOZJULYsE88Mmhm2FM3QI7SSWqAypebvAsN7q68YfFV81ORlXU5Z6XV4iEsmU5
- z7q60w0q/HKOKQHyxnxSkLWNN0iurWOYvtAj0nqNHvrOMDWenZtKGAj15xywqrlybz7/
- GVVg==
-X-Gm-Message-State: AOJu0YzhvvXmTrdGkgwSvZKHVBjN7b7iM8L2W6RptaykAZvwsNaLRX5f
- QBjzEE624HwN9ePdWKZmm/zhUPdPwzg8eH4ThilZhREfHoD6uW+Zy7Oanmb4QwkkDqk=
-X-Gm-Gg: AeBDiet45byy5UwG1mxZWzacVSPfVsf6MIzZ+qR2tWlTE0+fWsb4Gm7oOYt9/o60Yrn
- ob2hkrwrv3U4qA/9u3Y8sNlCxTtm5mlmsTtKeUEzh/bnjcf1Kn2UMlv8cLsviTJ9xAFVQCIuJw/
- VCzQBplSM2Sxmpib7Z3V9BtQy+sXjdN58GZOD5DqRA5W9pc33u2TjSUhc1AXoyCWqtjY4YK04hG
- ZjIgHzzWv+qXR+QWHyOWTRmDevhDd92m9yuix7PKP6TYrZp3F0PEenPijMwZIxUXDzvlTxwC208
- 8vChs6ueNg3jFSpsAWTk2dJkN+TKl1ebnYCvENtnhnTtfKFuDBY3Hgim7WBrj1affIt5d4An6pt
- 6B2E9tWFydlUIVoc+4lDQaFC+CCBU41klhNopG6YuNRKdhn5CHuLzCmP/Xnb2igO9hUZZ8qG5U2
- V1yo1ganPLReI7NAx6sorPrY4832lirJW6l7LASoyCcD78EW4hfXqy7x5wrcwu7gLqfyQ3iVGUH
- 92s07HvRsLChr2nKq4yNjwc4O7M+83I/pgFWQsf5zpPlhPu1r8=
-X-Received: by 2002:a05:6870:b01a:b0:417:51a0:23b1 with SMTP id
- 586e51a60fabf-423e11f1abdmr7335389fac.41.1776100871698; 
- Mon, 13 Apr 2026 10:21:11 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-423dd420bd2sm8798250fac.6.2026.04.13.10.21.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Apr 2026 10:21:11 -0700 (PDT)
-Date: Mon, 13 Apr 2026 11:21:07 -0600
-From: Tom Rini <trini@konsulko.com>
-To: michael.srba@seznam.cz
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Ye Li <ye.li@nxp.com>, Andre Przywara <andre.przywara@arm.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Heiko Schocher <hs@nabladev.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
- Peter Korsgaard <peter@korsgaard.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Tingting Meng <tingting.meng@altera.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Alice Guo <alice.guo@nxp.com>, George Chan <gchan9527@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>
-Subject: Re: [PATCH v2 09/10] qualcomm: add defconfig, env and docs for SPL
- on sdm845
-Message-ID: <20260413172107.GB41863@bill-the-cat>
-References: <20260411-qcom_spl-v2-0-9609557cf562@seznam.cz>
- <20260411-qcom_spl-v2-9-9609557cf562@seznam.cz>
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=OaES7JLbLp6wItK7WncuvnoaNDRnZDHztySRMI0mUBg0VelhzLHZT07wqpkgAgd/1WFiEsB0wQuTtEngC0Lvx7g+l8IwIUsaHHlGgF6qQIa3w/acPSNH541SszCkimJlouWPOFQ555U0P4vdEysJd22yy3eooLYsoH4eNoZOCSQK6+VDvnxVNpY9LDXcPxuGiBawItP1EhKLGG2mRBYg61D8lI4YhpFPcMctZNrju0v/sZhm+uD7XZKEaGJgxOyxMUgLif2LRGaiiA1mHRUiCFO5aEwvoTR2V2JRuQzVv2l2lqwPrkpPfVaRLKSCtzKhF27RTPc4DkRd/T7hO23fpw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=LbOJITxJdWonj78UmHSutTCyB157+iu+CoKzMixetJw=;
+ b=QpFjHWFmMNNUr9WsLNzbe/3mOKMJ+071/iBDu0RT4bZvG7Tle3PfN6E6XfODqMc1QoNIyxvKgfK75NicYXo+0OGYxtTSZw4fZxv0jH4I5Y+hkkQeBimZpMkz1pCqHVt3j/gDor5CWtY0yTMLcgBYCOLJL2tnJnO7nrn4uNohSkVKJPAmiaEhe602+UpAWvrWrMZPH7M0HBx/pp5pobACzzbODljF0qpRpzxJ0F/kCVPVdpMg5f9fGZQPB3Mc2fpzyWxM4CgcWO0A+3uvxszCuASe+qJ4UNuVnql9Lda3wUiPhqBTJLRLvStNQ6KznVdy03sX/oN0LWMHCOpif3iIsg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=LbOJITxJdWonj78UmHSutTCyB157+iu+CoKzMixetJw=;
+ b=jjvXEMJ2bMHONOanzGzz0IUGCQd+iVrp3jaj2GvQubr4UNUUq2POuzCKzU9c4ar4Rxcp2Ihmz8MLfrxa67lwelXgXnBVlWgeY4EYx3hZC2v7FFpzWu4uqeMmu5V3MKKkmh8tKJWDDbQf60e6yJJJD/HFVW0PbgT4czTopKHkuOQ=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
+ by PAWPR10MB7198.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:2f1::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Mon, 13 Apr
+ 2026 21:16:15 +0000
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8%5]) with mapi id 15.20.9769.046; Mon, 13 Apr 2026
+ 21:16:15 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de,  Tom Rini <trini@konsulko.com>,  Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>,  Adriano Cordova <adrianox@gmail.com>,
+ Greg Malysa <malysagreg@gmail.com>,  James Hilliard
+ <james.hilliard1@gmail.com>,  Marek Vasut
+ <marek.vasut+renesas@mailbox.org>,  Philip Molloy
+ <philip.molloy@analog.com>,  Richard Genoud <richard.genoud@bootlin.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,  Tien Fong Chee
+ <tien.fong.chee@altera.com>
+Subject: Re: [PATCH v4 1/2] kbuild: Move U-Boot .incbin rules to
+ Makefile.lib-u-boot
+In-Reply-To: <20260413131541.2091541-1-sjg@chromium.org> (Simon Glass's
+ message of "Mon, 13 Apr 2026 07:15:37 -0600")
+References: <20260413131541.2091541-1-sjg@chromium.org>
+Date: Mon, 13 Apr 2026 23:16:14 +0200
+Message-ID: <87mrz6muht.fsf@prevas.dk>
+User-Agent: Gnus/5.13 (Gnus v5.13)
+Content-Type: text/plain
+X-ClientProxiedBy: CPBP307CA0023.DNKP307.PROD.OUTLOOK.COM
+ (2603:10a6:380:2::12) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:681::18)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="BB/dcpLBHfxR6eAK"
-Content-Disposition: inline
-In-Reply-To: <20260411-qcom_spl-v2-9-9609557cf562@seznam.cz>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Mon, 13 Apr 2026 23:13:56 +0200
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|PAWPR10MB7198:EE_
+X-MS-Office365-Filtering-Correlation-Id: 542c1b50-5de9-4195-dda0-08de99a1e580
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|52116014|7416014|1800799024|366016|38350700014|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: +dLJViKb5dsNFwvlOZpQTQEMMuzJEFbmZ/1EmEkzSd2UK5eYi529wgFCk/lVEusObcf+V4L8GBkmkz/bpMU1jRxnimQosrCX7hTgKi8LRvBHnivFHzG54ZwA+6S0twC0IvyYMn/dguhXdQtRIgzoAtt+CKsbgIgR6EOnDgfO9jGG1M0RTRbNIdijdbNzSv2BSKfvbjIxHEPbczB0W0VsG0wNIHbPSNxbWqkLw9OeEY2F0U8mucQ/iUXsb8GB2B6tWkEr+FmzCYwLfi6WeNX5Z6TP2KOUQ3AUKHn6Ct5HfuvgvsCeWdbksSBLYKn2h+ozCN2HFa2SDjwFEXw5X/vFXHg0vUTTcwHyyaLil4cdjucfJ1sjbw/ZBv44IBtoodVKnWpo0coL/5Y7qDc+mtWcobCkoyqcAKWd6r2tFttTBsxXImqf4b89Hl+j/Bl0kjw0CIb7RkxwBL55D7nlYQJjSknT6t6MlrqwABjT+ITBAEGdQdTQ/rFfjJPl67PDiCBb2msW2w57iEgkas5pQBQYCJgXmNLkuWcnWmpzi2yMaS/Skw53btpX5YkSQ+ehHFLj2J16PBdNeeFDhRh/pU3WfAYhadGClO0qzrddRxY4Qm2Uk600O4COj9caq1Pj5vhNU+wUA7cQd/dvpI6LHPWv7T7Ndxw5Vc3KEZaNYg6pJU/DyN+NVuylx04XT9xHn+GeULGn1lGz1+P1D41c/6m2awKso4cefkOOSs954kB44fi+MV1SjJ7XyJ3GIkKJ0hO8LVb+VIigGzLIvX1o6LCIBDQcaIvFYiLFfu7ZkVjZkLU=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(52116014)(7416014)(1800799024)(366016)(38350700014)(56012099003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?hXiYQZxk4QCfSUksYGWIGNQ36uKnPRblFICB6Dgd2CbGevIYmhJ73fTISO0N?=
+ =?us-ascii?Q?QDJsZXiyvzsLvh79gRAZT1BN9O5N4DKi6P5L6rchBIjYs9rK6CMwgZtnpU/M?=
+ =?us-ascii?Q?/Sbyf8m3CNMrtW29jPHbROMetQowStRG3qZaTYtA+XTqS58jju/1jSBkL1lE?=
+ =?us-ascii?Q?Ckfaw4WOBHUCNIeGQOkUSGFmWjmB0kEFJlzObWFKeL/5ptilpHUWEK979fBm?=
+ =?us-ascii?Q?xkmRUNbM3e5GeFJvx/QJcQrJGIosP2KDG2tl7P8H5DuNFIyhNHNlunnY47cV?=
+ =?us-ascii?Q?oE4jMWObqLjtdQ45t5TxW1umltaLohfO8VR4BBT++Q8JLSun5l5VsAA7L9IL?=
+ =?us-ascii?Q?16VrQJdptPHMnkokSmCCsW0EegFGmf3KFOXlz4lW+x7PQ+MNgT8aNPLDEauv?=
+ =?us-ascii?Q?N8EuLiKlcfwIABKNTAFL15btmy1MdgBemw7CAcvOONVNCFJDrshcG3iEDUOY?=
+ =?us-ascii?Q?eH/G7k+ah1SexTiDrHYvZUeDolyJ1lCoE5zTVl3G36ivnSPvrlHH+58i24om?=
+ =?us-ascii?Q?sALrfz5ufIoZVLRB/ta4kV8ZCbhqqv11cCKfOFuDIjHdMR2J59WISlYMkdZf?=
+ =?us-ascii?Q?jucemjP+KiKDjcrb5IFah1rZSahsr1anRB1IoxBt8yxoYRhdWqMSKqJ5WPuT?=
+ =?us-ascii?Q?rgC1rdiJAZ7KCf7A9haUu4hJe7gsYxYgaP1N+I/qIGPe2wiTtMpVhQKCUlKB?=
+ =?us-ascii?Q?Eo0nIaSmipyuw4AxQBbzgLlWJkrlNlBe6gfzyL/MVJADnBZs3J2NBZILWUah?=
+ =?us-ascii?Q?ia1U1+T3QUHQawBPlNf6vNyc5WBBJtvC3MhpY50lJKwPHB28fA5ebfRxziSf?=
+ =?us-ascii?Q?EYkWc1IHS2KT5bt4MC9t+/gA2t7MCH95bAwLiJ6s+tt65O+H5/A2Mn1R3idb?=
+ =?us-ascii?Q?raAl2+Q+P9IWflneeD2URCO2Ra3gifKKW5c1cb8dZBtoxQE5IJL1k06f7/6L?=
+ =?us-ascii?Q?gnDyi3UQaLb0SeaKxdldgd1k05/MdsPjtzJMtD6y9cDip3RbTvAVToPmi+1u?=
+ =?us-ascii?Q?eKCx1FAYAWOhrctnRCWAHjTGIPAxB3/XHimhNqE9Xwnu/JNVnfp+L5DOUWaW?=
+ =?us-ascii?Q?AWmgCocnJLcyJJevWxoIf1exU5yXYEsTwxySj2+fiI1MFWYX8BJ3nAH8ARDU?=
+ =?us-ascii?Q?7MnQlGU3WWKpoxZ2HpHGoOK/cH4LjxEBxKw8T+j4j+bk/u6YLnmK0Kd7qIKj?=
+ =?us-ascii?Q?umGDIzmisve6W46mr++zz8ImPf3gze1/wpvqWTyUIqITG1z3JFDJ5WLGTQD5?=
+ =?us-ascii?Q?YIjlwGLSWXxlq9OFSWXf7slM38birxEKEoRt5dduv7xhDuAF6YZS6iZUcLlb?=
+ =?us-ascii?Q?TOhAE8VC2MMEybpO0wDx5ccQfklAuWuvfkW5nGh13ydgqI+FryfaOlvY3Nh5?=
+ =?us-ascii?Q?DKi8KepPAxx6GQEBlzp3z7oed0a9gHnbdxPmGw5XHImaJc9bAF3y4fgecCCI?=
+ =?us-ascii?Q?6jjQTVd6rJhdeapUh08Wp3bHw15eloMZMtENY5MNk+NwkDD4qb4A0ykNCGy5?=
+ =?us-ascii?Q?19sS0AgNTHMIV/M3f4pvqVp5CsVERDfm46YFPA+Ch7pSWWhT8h0hIwmseXPZ?=
+ =?us-ascii?Q?ajbP01C+Mz5SKjjeeVDg0/eexsMTADUDF86xbEr1nahJHEd2FB11xjFDaMPi?=
+ =?us-ascii?Q?HxFu9kKfxSxZAMHt1wDqJAChLMOo8GkgovixRKweiLDUwZEhJ3q1kMeOEu2F?=
+ =?us-ascii?Q?r+qtCXq9B32MQNswF0U+08KKWyJylpcEFxaIug2Bhr/RaFEQIErV12BtGdzF?=
+ =?us-ascii?Q?guxe8yPGLuwLP35Ehp5Wd1XqM4f8Uzw=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 542c1b50-5de9-4195-dda0-08de99a1e580
+X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Apr 2026 21:16:15.3994 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: CffELTvkRiAmZmO7f3CFGxutHZ/gv6bQUaI3LqbpFpcCgq+fDJyZkCML0QyUqdRDn+JbbSFSe6lif9FSH9vwX7ZZ6pQNQX7cftcjSb/UsUM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR10MB7198
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -130,44 +144,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, Apr 13 2026, Simon Glass <sjg@chromium.org> wrote:
 
---BB/dcpLBHfxR6eAK
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> The font, splash-screen and EFI .incbin wrapper rules are U-Boot
+> additions that do not exist in the upstream Linux kbuild. Keeping them
+> in scripts/Makefile.lib makes re-syncing with Linux harder than it needs
+> to be, as every sync must manually preserve the U-Boot additions.
+>
+> Move these rules into a new scripts/Makefile.lib-u-boot and include it
+> from Makefile.build and Makefile.xpl, right after the existing
+> Makefile.lib include.
+>
+> This is a pure code-move with no functional change.
+>
+> Suggested-by: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-On Sat, Apr 11, 2026 at 02:00:14AM +0200, michael.srba@seznam.cz wrote:
-
-> From: Michael Srba <Michael.Srba@seznam.cz>
->=20
-> The defconfig should in principle be board-agnostic. Environment
-> simply contains a dfu env specifying where to load u-boot proper
-> (TEXT_BASE - 64).
->=20
-> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
-[snip]
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +Booting U-Boot SPL on Qualcomm SoCs
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-That's a doc error (too many =3D), please put the next iteration through
-CI: https://docs.u-boot.org/en/latest/develop/ci_testing.html
-Thanks!
-
---=20
-Tom
-
---BB/dcpLBHfxR6eAK
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCad0mAgAKCRAr4qD1Cr/k
-CuVVAQCH1f7NaYECAOhs4EVr8XYBhqYD1jpeFKlww0SpSVpwzwD/XhBbCg/tTJ/M
-AgzB4yPyX8V6ix44GbcnOrHn4vGEVQI=
-=U+zl
------END PGP SIGNATURE-----
-
---BB/dcpLBHfxR6eAK--
+Reviewed-by: Rasmus Villemoes <ravi@prevas.dk>
