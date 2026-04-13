@@ -4,85 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6BBEF34C62
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 15:30:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E174F34C62
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 15:40:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8959A839D5;
-	Mon, 13 Apr 2026 17:30:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8F284839D5;
+	Mon, 13 Apr 2026 17:40:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tEICVqR9";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HVP0Gz3t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67319836AC; Mon, 13 Apr 2026 17:30:01 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 1C86C839DF; Mon, 13 Apr 2026 17:40:47 +0200 (CEST)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5742836AC
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 17:29:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8AB79836AC
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 17:40:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7dbce74e537so3544394a34.1
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 08:29:58 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-2a8fba3f769so20384195ad.2
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 08:40:44 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776094843; cv=none;
+ d=google.com; s=arc-20240605;
+ b=NQ3fCdtSHF3vEzkwMfRfZu0pacxON73s2eedp9sgTKq3K8k6oMNHrDGN2gZy24OGSV
+ AXiCBZlugT5AOcBg2EZQsC53oCAFIBdy7ubUEepM5H2yVYzfgY4aiF5DZ3rGiGmofYPt
+ s9nDdL/lpY8LEYy03dTI+BwkPXvREiYOi3AAJ/iOLcTqxSAHw6IWMkaC8iXqQ/54Zig7
+ nwk/aT3xBbw/oSvZIIyw3/pbgIALStyoD5OP0ykgoeUH7a4qVSF3Wklqlh+GSbBg2mAp
+ AK6fZIKEd7qlfYhFqrRQdyrSlVJ9d7+c3R3b/sPZGGcfXDGodZ2OYrWqxjF29P+uyHAs
+ HeCg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=FXhGz2w9Q39HYftHfmJ6BsbrFstmBBX1vkGDqiinlW4=;
+ fh=x8CHnSGD4cRa4Gb5OxW3DEd7ozMoYZsI49tbFC7/xcM=;
+ b=ccmwm1j3DJ1jv4CSDXKzoVuSEDFj+z9fbm6/A3LqTIw5P2NpMzf4wucbXaWK0uIctS
+ 0XWRAGMmq/ydGCllxuE7rg0D2U3RHp4TTYiX9rbOcfJ7wCV9svD19fRsnjZe3TnkvTy3
+ gOtQRrR9+MnoMtK8NTaNF7CMYDsYxIavp2cecc+JkLI8zYNwKII2lB2403xNExJIH4iq
+ JQCTKsdFDV/UwH7X94GJAzB6jm5GXsWnA4+ZhLacYCDroH2E9Z+JygflevnuRGn/BGKD
+ Udb2s3taeRRvLAlhglTdDXhs5ekdkXLVsxM6pDHLfv7AVtVlxtadm1F3JureV/Y6q7zS
+ Q0Kw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1776094197; x=1776698997; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+BeenR5TzBs/pG3bH9LsLqRy7CapMpUwJBMln5DyK/w=;
- b=tEICVqR9qGCmoycJtYt1woWEPR2pWP35OzxgkovFuYzbW4BM+c4yr6xjyRSNlYV2sv
- lYTmASExDaJ0G3vOEwZfbmCpx6Wrh3PGSsX325+ISVtehuTBnovPieCu7B7rSIdJwbyx
- zygZNh6mc7JbcKeC9sBJOsMrS7x2YllG9sk4k=
+ d=chromium.org; s=google; t=1776094843; x=1776699643; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=FXhGz2w9Q39HYftHfmJ6BsbrFstmBBX1vkGDqiinlW4=;
+ b=HVP0Gz3td51V8SF32G+up0gQoBv93Lf7RKVtIUkB1Mo0Z2uEY5dGnrc24BmWLXaILA
+ 8TGbvoE6FK5SW7zjD4N4cic1xcVQoJBM9CD6EEr1GVW6nB2CEV0pzEI9OJN0OR5oe2uc
+ 0nvsqhXvqaYYaJY325seiB/FgCFC+Z9QPmeZ4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776094197; x=1776698997;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=+BeenR5TzBs/pG3bH9LsLqRy7CapMpUwJBMln5DyK/w=;
- b=DMGcess+/d6EDdCnUIKS7fOVTXSjZppw4XifzYE35uiELRopSFPH20Uh6A0w8HtJLz
- i3GRPlzm2C6BkUv/sPwf9qKVo43u2wD0iZrOJFOGwD5RyOQEyEYgkXN2U8EMAapCojhb
- f/sct7FqEpeg9morZMldnaCfviE9uXB62+ChhIqDUrgVO3rj64gzcJsM7BDktrlCwoof
- hazLXEMRSvBV4d3xuVzILJFMpIt5jTtSog6vbSYFejOnt+cOATgSnVo+7EiafR/9I/XK
- hE5H9vEggPlk0I+ra11RB2dj4HLVS3ba1WIL13whRQPPbrBEtNrEnDDbCp5Yyb69PFWx
- d/Tw==
-X-Gm-Message-State: AOJu0YyUkcYa0JMoe/RuVHuUFaeKeccZumfKgO21lKwdUkp+bZ5U2RNB
- hFfdCnVx93p5tPQYqbm/bHOvKlvy4NfYR2ATSXYalBBfnaDZYmCH7Pp/5MNBhi+i7j8=
-X-Gm-Gg: AeBDies54R+tJNVwIvuQ0HK5MljLg0/9Ffk+4B6vVlfOvMY+m3ikrpkZyCjOp3vz+OH
- qlRnS472CqXE2Rmz+DovCGUdjt4NjY2RbkeeZd2lole+WBVHLrCbeu2PBTI5gws/sPWCcaUsBRy
- 6DhQ8Mjngk+Z2XxeV+cau/4qIpuYLvKYnya9KpEjnDLBVLQWGSBRsvedhCtzYFFrh/Far5FS3IX
- y5QlFczRMEjfviJRRYt7A5tdTZkCcoAORxASyzTMnpFrOiOx0gpK8snBEW4kj+tvzgl6qOGW58L
- cRVW3YNhGRoCmz830KjIQrQFG0/n54lBzWyTNqpZGHtErnnabX5T1ZzpCPLqOynoeBvNauYCT4H
- 5tTNG+rNTbnqCg9j81MurkwuhtW4dy5KswZooDdey1pa//ooYPy/UCwiCJfD0kUo2jfdIV62FQb
- RwxnkL+toIXXGUe2csiT8/FCTCR4Ij5ccF/qnyOROJSJhaVA/b/VuCG7BaQI98/QJOMYzfxRSCC
- dG+ddnvK+Y2Id5iSXa+pa9cmcjNdZwEMd21jkkHFp5GZdYLVeY=
-X-Received: by 2002:a05:6820:3397:10b0:67d:ccf6:13f1 with SMTP id
- 006d021491bc7-68be7ee39f3mr4494344eaf.37.1776094197334; 
- Mon, 13 Apr 2026 08:29:57 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-68bc7dfa174sm5828927eaf.3.2026.04.13.08.29.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Apr 2026 08:29:56 -0700 (PDT)
-Date: Mon, 13 Apr 2026 09:29:54 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>
+ d=1e100.net; s=20251104; t=1776094843; x=1776699643;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FXhGz2w9Q39HYftHfmJ6BsbrFstmBBX1vkGDqiinlW4=;
+ b=cWYTdE3+ELVxheIP5SN8YVnYqyc8UMF3S55yD8VPGlCIw7hHIOAbcB83YqBnwami7h
+ ST5WQt4XRJKets8jzjCSn+sp3MqyBvj/Mk4TQzODAK9TM//fiCQYQmFDiqN8+UsjXNE5
+ ORofBKrPd2xsFmSm98fI5LO3JoHOMvBeXDBO8PfRpq9Ata8KDbMpv7ueuweArHU9MppK
+ BKA3SKiq+YUNUQuQKEqyXCGi+tcDxBMBTJZ2ri3nUQLAZj/AUJke4SR/4AZ2zt/x44uO
+ j/b1IvipYvTPYY3sEahR0aaLMJbiemOX+1gKBNW9XkO5zRm7y3dd0cjipmGrb38Fc5T5
+ TqXw==
+X-Gm-Message-State: AOJu0YyEeDiREfP6bRMixHREwuMLOemSboNWzkCxYgK9kZibDA8vAPpE
+ 2krsluz5Q5vgDki73sO3cOqoqDrXjpjzms5FYjn0+Jnv25yqIAcEC1/gPoBtBuXriTK8CLqjscd
+ aHI+Uk6rUs3YztreoH/AVNVuXLL9DYAzR4XYUFUwP5jLtpjvZcjQ=
+X-Gm-Gg: AeBDiesHJkikDjSHnLgU06BnfueSUsEhdj1OHdhXGCpEjFgMGvowoku6n6xqVF9hB6N
+ 9fUbJ1su5HwLoLcusfpunpYnD+ZcRTFF+wj+Qr9dGIXAYXE/g3LTsBxS6xfGKh5CY7Ge+DXyqCC
+ 2u1JnGdkY8BkMasCQu6MCRNotgEFWDKHZQacC7K1necMVREGZ+SzsqBMWWLgtGgV5iFKET6VUTn
+ rqIr0gRDzsybn3evJF44GXttvrC2Br93+9XAN6TgiHQ2SIzCKjriF+AFCpAfCDLfrWRdhTNQDI6
+ 4keEjw==
+X-Received: by 2002:a17:903:1207:b0:2b2:5637:1480 with SMTP id
+ d9443c01a7336-2b2d5a95dacmr139959885ad.40.1776094843029; Mon, 13 Apr 2026
+ 08:40:43 -0700 (PDT)
+MIME-Version: 1.0
+References: <20260412111958.943933-1-sjg@chromium.org>
+ <20260413152954.GW41863@bill-the-cat>
+In-Reply-To: <20260413152954.GW41863@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 13 Apr 2026 09:40:24 -0600
+X-Gm-Features: AQROBzAoNH6qaXK9RnHmzmByVFHPDmMgXbXfhxUcUfq6e-U-eG-we96qWpQxa3Y
+Message-ID: <CAFLszTjcKm4sexwAACnu_sJpcQrpgN_Bry8Nh_pxZTyNeDjAgA@mail.gmail.com>
 Subject: Re: [PATCH v2 00/12] test: Add support for passing arguments to C
  unit tests
-Message-ID: <20260413152954.GW41863@bill-the-cat>
-References: <20260412111958.943933-1-sjg@chromium.org>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="rZtAOxUt+nr/UNtV"
-Content-Disposition: inline
-In-Reply-To: <20260412111958.943933-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Marek Vasut <marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,92 +112,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---rZtAOxUt+nr/UNtV
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, 13 Apr 2026 at 09:29, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sun, Apr 12, 2026 at 05:19:37AM -0600, Simon Glass wrote:
+>
+> > Some tests have two parts: a Python test which handles setup, such as
+> > creating filesystem images or configuring the environment, and a C
+> > test which does the bulk of the work including assertions. At present
+> > there is no way to pass information between these two parts, so
+> > things like paths and device names must be hard-coded in the C test.
+> >
+> > This tends to make people write tests in Python, but this is not ideal
+> > for several reasons:
+> >
+> > - Python lacks access to things like return codes and has to scan the
+> >   console output to figure out what happened
+> > - Python lacks access to internal state, so it cannot directly check
+> >   the result of an operation
+> > - Python is ~100x slower due to console interaction, etc.
+> > - C tests can be stepped through in gdb, which is much harder with
+> >   Python driving the console
+> > - C tests can exercise internal APIs directly (e.g. fs_read(),
+> >   fs_size()) rather than going through the command layer, so they
+> >   test more precisely what they intend to
+> >
+> > This series adds infrastructure for passing typed, runtime arguments
+> > from Python to C unit tests, using a name=value format on the ut
+> > command line.
+> >
+> > The series includes:
+> >
+> > - Regex assertion helpers for matching variable output in tests
+> >
+> > - A private buffer in unit_test_state for test-local temporary data
+> >
+> > - Argument-type definitions (string, integer, boolean) with optional
+> >   flags and default values
+> >
+> > - A new UNIT_TEST_ARGS() macro for declaring tests with typed
+> >   arguments
+> >
+> > - Argument parsing in the test framework, accepting name=value format
+> >
+> > - Updates to the ut command to pass arguments through to tests
+> >
+> > - Type-checked accessor macros ut_str(), ut_int(), and ut_bool()
+> >   with bounds validation
+> >
+> > - Tests for the argument feature covering type checking, optional
+> >   arguments, and argument-parsing failures
+> >
+> > - Documentation for the test-parameter feature
+> >
+> > - C-based filesystem tests as an example of the hybrid approach,
+> >   with Python wrappers that pass filesystem type, image path, and
+> >   expected MD5 values to the C tests
+> >
+> > Note: This series depends on:
+> >
+> >    https://patchwork.ozlabs.org/project/uboot/list/?series=496972
+> >
+> > Changes in v2:
+> > - Correct double signoff
+>
+> Reposting a series this large, on the weekend, the day after v1, because
+> you made a trivial mistake is bad form. You should just acknowledge that
+> in the cover letter and wait for feedback.
 
-On Sun, Apr 12, 2026 at 05:19:37AM -0600, Simon Glass wrote:
+OK I'll do that if I make this mistake again.
 
-> Some tests have two parts: a Python test which handles setup, such as
-> creating filesystem images or configuring the environment, and a C
-> test which does the bulk of the work including assertions. At present
-> there is no way to pass information between these two parts, so
-> things like paths and device names must be hard-coded in the C test.
->=20
-> This tends to make people write tests in Python, but this is not ideal
-> for several reasons:
->=20
-> - Python lacks access to things like return codes and has to scan the
->   console output to figure out what happened
-> - Python lacks access to internal state, so it cannot directly check
->   the result of an operation
-> - Python is ~100x slower due to console interaction, etc.
-> - C tests can be stepped through in gdb, which is much harder with
->   Python driving the console
-> - C tests can exercise internal APIs directly (e.g. fs_read(),
->   fs_size()) rather than going through the command layer, so they
->   test more precisely what they intend to
->=20
-> This series adds infrastructure for passing typed, runtime arguments
-> from Python to C unit tests, using a name=3Dvalue format on the ut
-> command line.
->=20
-> The series includes:
->=20
-> - Regex assertion helpers for matching variable output in tests
->=20
-> - A private buffer in unit_test_state for test-local temporary data
->=20
-> - Argument-type definitions (string, integer, boolean) with optional
->   flags and default values
->=20
-> - A new UNIT_TEST_ARGS() macro for declaring tests with typed
->   arguments
->=20
-> - Argument parsing in the test framework, accepting name=3Dvalue format
->=20
-> - Updates to the ut command to pass arguments through to tests
->=20
-> - Type-checked accessor macros ut_str(), ut_int(), and ut_bool()
->   with bounds validation
->=20
-> - Tests for the argument feature covering type checking, optional
->   arguments, and argument-parsing failures
->=20
-> - Documentation for the test-parameter feature
->=20
-> - C-based filesystem tests as an example of the hybrid approach,
->   with Python wrappers that pass filesystem type, image path, and
->   expected MD5 values to the C tests
->=20
-> Note: This series depends on:
->=20
->    https://patchwork.ozlabs.org/project/uboot/list/?series=3D496972
->=20
-> Changes in v2:
-> - Correct double signoff
+> And since I'm seeing over 100 emails from you this weekend, this
+> matters.
 
-Reposting a series this large, on the weekend, the day after v1, because
-you made a trivial mistake is bad form. You should just acknowledge that
-in the cover letter and wait for feedback.
+Yes, I was trying to catch up on various things.
 
-And since I'm seeing over 100 emails from you this weekend, this
-matters.
-
---=20
-Tom
-
---rZtAOxUt+nr/UNtV
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCad0L7QAKCRAr4qD1Cr/k
-Cg1dAPsG3A4AldYPE2s4BwusqROIPWaXns73usX5kbUJ3oCd5AD/b6UbPEZoPm9Z
-TZL/o1ldwVHcVz4uHp1Bh7j03+XZXgI=
-=y4hK
------END PGP SIGNATURE-----
-
---rZtAOxUt+nr/UNtV--
+Regards,
+Simon
