@@ -4,114 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 484BBF34C49
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 13:49:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE661F34C5F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 14:55:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10BF584246;
-	Mon, 13 Apr 2026 15:49:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E95C38407D;
+	Mon, 13 Apr 2026 16:54:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Os/s8AeN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m8/7zq3P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C26C38423D; Mon, 13 Apr 2026 15:36:34 +0200 (CEST)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
+ id CAE4D84199; Mon, 13 Apr 2026 16:54:58 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4770984199
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 15:36:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D0AB183DC9
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 16:54:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-35d9c7bf9a1so3929367a91.3
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 06:36:31 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776087390; cv=none;
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-b9e00649769so72456366b.3
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 07:54:56 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776092096; cv=none;
  d=google.com; s=arc-20240605;
- b=SHAn7xq7tfCE4jvLcihb+fMiuC0eFbmyIBWXorm6hnvxWslLd+7qqyCmBIrgVDjCLc
- bMNwpBmAwYQ48RerF1BJf2BYqOrLmM4f3qsuSuU/z+Zlp6+IAmydLzDibsECN5VK21s0
- plJZyujjFAYK+wgS5VoFDiFpF+rjTRkG7oUoanhQIdT2mUB1+Cvr0z+osxbTgz7r3uEF
- BDdaXhDorYvuugyntVBm0c1DGKe2TvRFK4lskjX0XIDgoUdtvoPI2fqFK2UFknq9GVlP
- p17SG1qrbOOd+8NJhUvisobb5j63646UfPL27UDFl+v0VCDzWzxu0TZbDsfSnymW3ssO
- 10YQ==
+ b=ho0o37VcBnWScQlF+0wj2G04On+j2yK5wuQE8dfE5hcp9MxGIRVi2yfhIi9tQfoMSu
+ KdtfRu9IYftv0Nx41Ztq6JYkLsEy6VvHvGI6SpX33rtvtXqvfy27MeS1nTLfZ5V4er+J
+ 84vFQdJl2MoqBTWPTvv+6ECQdjUSs2DUg8yoYRZiKOwlD3yW8NmHffNNasQIQAao0/Ex
+ 25CU2weWlKf7juUKTebf0003Yrz2gjc9pYAQeFSAa/D1jUJCkPhteaerFPXJnX38Xks5
+ ZK/Hr2DxXUXIppeuX8AxbbBnZPvKBhVQydwOKdG3LG0j4/5tAng/jFm+MSmyFzlr/ZvT
+ x0aw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=6syZNdbyKIWxOaFQiLmobjOLL99Fwgkn2F+mv6Fe1+4=;
- fh=g/AySMeZ8irarr3MNV8jIwt2YlL2g9WaFK3gZX7WKCg=;
- b=Dul6CNvzoiSNi+7lL/a3kdutoEaT7EU+bygOkuhezT+zTHQ8rf8LEiiYY7YQvbksT0
- PkN8xBUMNMEvA1qawLp+/hsB6UF+EmZEZidnbU9ExyNPi2uArZqqOyM1QdvsqDrHL1kg
- NAZ9UwbsrozakiqiaLgQzU1fN5J2Ncg29PWt65/q/LfWXmPxu4pIzBDBuMdfZQbEN+rP
- tRnMmbP0plejQjj2wyeLkQ/kGNqrqhVs+Jl6/Z6z8BWqoZ29/WSEiRoLeUMeAs7yrjC4
- ArOP70GwzVh4VjbU/+FJYOlKJcHlfyQLrgcK0JwhVX7jmi4iWmoWiMkt4uHoUd7HsP18
- CFfw==; darn=lists.denx.de
+ bh=1EFyaHTg851r7lufNcaM4Ki7+obc5Re9dAxnhFM/0ZM=;
+ fh=vWGjtn1jaHvP7sTvYs5T2kZsOKPFB1kxIckHvNdP2E4=;
+ b=SmYoe2RWNVXOZZRm6wUVHMipba51a8z2aTOtQLD5POF1PqXz//DvR0pb61VnmKqTwp
+ IFk4PwsfHuNlJnv8V/+e1R22LnNWnAQBCX/vyj2xJoES1MQ5XLnVeRalc3tpn3gc6WZ9
+ TWEK6nQqUys9ty8OkfIP62rIe/0IoqJaNJJLGgnUEPVDyAKEuLs5LYU7qEdLXExLH3hb
+ CYZWCzzLIKhhmLbqliC1JGUm9RV4F+DffhDjjtupBVdzwGGLHJTy+z3MjI2KnNxGwAsC
+ 1JgNtC3+UuTd3Wk6oXhc3zSAckppIhwllRDorZew3CU9McQ8E0CPjHPdCLy4oNiTAKrx
+ KcrQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776087390; x=1776692190; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776092096; x=1776696896; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6syZNdbyKIWxOaFQiLmobjOLL99Fwgkn2F+mv6Fe1+4=;
- b=Os/s8AeNpIGQxUPUOg1CeTM+JSyw+oHUveBMIoFIm1JwH+os8NpzN2ZZIEARmyxyo8
- IBukmHDNTqvfBfEnOChARCaRnXvGdQXJlHSPm7Igh+6I0qfBqVe1a63Kj0IrcBRTzhMQ
- YHjp2f95zSGEza4wLzmZ0T3Z2NMG4hs0KPqCI=
+ bh=1EFyaHTg851r7lufNcaM4Ki7+obc5Re9dAxnhFM/0ZM=;
+ b=m8/7zq3PCiv3SggCeQt9szumoq4LQFx0t1Wp8/l0kNcfgxxRQsQSlU8R1Ytv9q5tNq
+ aOLL0pCznYSipb97z9fyWUxSpRPvcTi/TtKmHJ1gnge+Qk5IPvuoPQj2ZLHqS/Rt/fiE
+ Qv5c87mkDZaPQfSuGGStoqG5OpQibXdPDQUaY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776087390; x=1776692190;
+ d=1e100.net; s=20251104; t=1776092096; x=1776696896;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6syZNdbyKIWxOaFQiLmobjOLL99Fwgkn2F+mv6Fe1+4=;
- b=aU5Powyuuuc+djO3fAhDLxBRyLEHFkoFVZXk1Il2Yjr7H5Maz2DWGQWMA+UA5dJJy6
- 2VgQz2wTm6UmaSKpXI3g4Y9R3qVmmbxPaTynqP014kAEvTsOCJfBHWtj2KGLKbeIgxfe
- aqPG407ZGTlRPzZ9WSCVfvwVL2mvvDQxeXg9nytutNyGeThvqNxCJFmNyc8pAbZZtmP2
- ll8rB9oX01IsgLdyNNCXsA8cymUyQV3+ywZMPGCkX6dlY5lQtJwyI1nXqynpsEZEsNde
- 5AqRif77MTzgU0MayzI0P2chs6AoZs1qF9qLWVx/Dsy4txmqmSgwUMA6Ed7yxpmPx9Q/
- /nmw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9HaM8TNuefB0DPsO+WVKcKG5bOuL8tq4wOUBACx0VtpvtxqJJDTBqHghXMlXWYIlsC/n0eHPo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy0qlEvbj1TLvWsUgZqoTuOigpQb+P9nTw/8uF37xPiofYSFkdg
- v0Qb80p9SuRobe1OzqB8QUqoJSzVaJSI6rVQqkRxkgPGfYTyLHBOCdGlKPMdYyCg6LfE+mmOiVZ
- n4MsVKMPPvgIIMVkRKIG0N8Q8t861cAdZUManq330
-X-Gm-Gg: AeBDieuSK1RpZBuZRWnkOEyX9ArbA2R2C1uoiuAwVsqCO/SOi9ysq0Ba7CAbCn2JN1p
- 8x0LMx/uajeu9cCYFeIsLeUK2/Ucvmi+7YenOuwKnrr/URwMtlUFZD63fiLpffcB0cU3e/R5+l5
- PxUd4A7CRiFR6ZNnZ0ygw5ULA+lQuIIFYFtC7uxpM13u0Od8Mh2iHEwTNHpm9ov+dExUP9ltoBp
- 1FfuYJghkH639L15fQpo2FZlgJ/ebJIBqNtiXrk50AOs9sksjSjyByJylbecITtQfKuleSyBwPJ
- d+Cu7g==
-X-Received: by 2002:a17:90b:1e0c:b0:35d:a3b4:2f00 with SMTP id
- 98e67ed59e1d1-35e427ea4c3mr14757907a91.8.1776087389718; Mon, 13 Apr 2026
- 06:36:29 -0700 (PDT)
+ bh=1EFyaHTg851r7lufNcaM4Ki7+obc5Re9dAxnhFM/0ZM=;
+ b=b1iBMBxvqWp2pLUdpxfAcX1/dOqHyLi7D//mEnQgVPUB94TmAK6LqtwJfoZt2VzysJ
+ g2ztaLVpdAelcc5PeSAh5dB7o7pN7xAQ+MA1YzJ5ZyQ/sUIVTG2z8siFfQdkotciYmpW
+ Msbiz71Ol+KnxCztD0kqLSwLWmxGa/KEkxImcwaSb0J8z14VA2Qdc74xUh189kLNoLwF
+ sHt1nGAaxnZbotaiom0h21BgTo0CCynyOqEEEr1W7iTa1tBASHToNT1fzds2WswK/zkM
+ rtvUS70yKeUT+sxInW5PjSASjEzGkD3fTDu4eAWXxL1yhXDsOyAw/+H+nmNuTcUOukcx
+ N65A==
+X-Gm-Message-State: AOJu0YzCXg/Lu5A13vEdmtReur9uzBexjA2eDt7GTbn1eXFBkp+7JehI
+ NSKYc2L7aAI3XTEl4z9eWffOvynJ2rgDvK/K1aS1WaiOlFE1HH4RhIUNpfzHsln0fVXVOU8iYoL
+ 4xU6RNamBoYyo+CKeFmFss7YAu6ZuWpqyoHpu9kTS
+X-Gm-Gg: AeBDievZ2MGvAKdyA6JV1a3eJ+VEFd4uN3OXq7waNlRMhWZ7GjlsqojOk/9xzkhHvlu
+ cxt5KrrdL2pDqwcYt6edKX2auIUp7VICnWsFEb28fwsYRxP3R+o1H0W+OnNFhI7yhWR7Ci5cJ/w
+ K9ZywwZ01dNcEVtn1QmggbetVhUPtKaDYR01rWcHDyw9GVITdXt15d0/Urx9ZjwaUe8e4DlCpR8
+ dxrEZEMpM1UqZZUvFqFxrs3vpNAhzj8vZUzY0m+HTgqBpX5FWP3d2GqxImjzK2xNPItz80F9edq
+ 68rKZA==
+X-Received: by 2002:a17:907:a604:b0:b9d:1a1c:a664 with SMTP id
+ a640c23a62f3a-b9d72991a2dmr858472166b.40.1776092096135; Mon, 13 Apr 2026
+ 07:54:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260410091154.1001021-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260410091154.1001021-6-varadarajan.narayanan@oss.qualcomm.com>
- <CAFLszTij2Asndsdy4gdVgHWXqayKztvdV5mySX2A90+1xzOfdg@mail.gmail.com>
- <adx/vkAHk96k/CVv@hu-varada-blr.qualcomm.com>
-In-Reply-To: <adx/vkAHk96k/CVv@hu-varada-blr.qualcomm.com>
+References: <20260306012019.800588-1-sjg@chromium.org>
+ <f1cf64a7-04b4-409f-ab54-044b010f32cd@pengutronix.de>
+In-Reply-To: <f1cf64a7-04b4-409f-ab54-044b010f32cd@pengutronix.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 13 Apr 2026 07:35:48 -0600
-X-Gm-Features: AQROBzAbYPoAzob-CuTXDAy6aeaXs1QmyRI9IWxoRD-_N44k3Y0xhUMzI9pbDHA
-Message-ID: <CAFLszTj3L1442VW8cuQZaTomx8qRLrCyL37fR=WXX=k+2pCkdA@mail.gmail.com>
-Subject: Re: [PATCH v2 5/9] misc: qcom_geni: Add minicore support
-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com, 
- casey.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@kernel.org, 
- peng.fan@nxp.com, jh80.chung@samsung.com, lukma@denx.de, 
- tien.fong.chee@altera.com, anshuld@ti.com, alif.zakuan.yuslaimi@altera.com, 
- tingting.meng@altera.com, alice.guo@nxp.com, quentin.schulz@cherry.de, 
- ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, mkorpershoek@kernel.org, 
- h-salunke@ti.com, alchark@gmail.com, dario.binacchi@amarulasolutions.com, 
- ye.li@nxp.com, andre.przywara@arm.com, afd@ti.com, dinesh.maniyam@altera.com, 
- balaji.selvanathan@oss.qualcomm.com, danila@jiaxyga.com, 
- aswin.murugan@oss.qualcomm.com, luca.weiss@fairphone.com, 
- adrian@mainlining.org, justin@tidylabs.net, n-francis@ti.com, wens@kernel.org, 
- jamie.gibbons@microchip.com, david.wronek@mainlining.org, 
- alexeymin@postmarketos.org, james.hilliard1@gmail.com, 
- michael@amarulasolutions.com, richard.genoud@bootlin.com, 
- philip.molloy@analog.com, sughosh.ganu@arm.com, u-boot@lists.denx.de, 
- u-boot-qcom@groups.io
+Date: Mon, 13 Apr 2026 08:54:43 -0600
+X-Gm-Features: AQROBzDDjTLyTa3_k6o6qJJOpgaop7YQ3EOYkpJNqjOrKWLJwbqyMrwO-MGL0T8
+Message-ID: <CAFLszTjcdFs78x8f1pH891cmrwpDr9k=T-zU2HTbNwiXqii9mA@mail.gmail.com>
+Subject: Re: [PATCH v2] boot: Add fit_config_get_hash_list() to build signed
+ node list
+To: Ahmad Fatoum <a.fatoum@pengutronix.de>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Ludwig <ludwig.nussel@siemens.com>, Simon Glass <simon.glass@canonical.com>, 
+ Daniel Golle <daniel@makrotopia.org>,
+ Enric Balletbo i Serra <eballetbo@kernel.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Sascha Hauer <s.hauer@pengutronix.de>
 Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Mon, 13 Apr 2026 15:49:01 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,67 +114,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Varadarajan,
+Hi Ahmad,
 
-On Sun, 12 Apr 2026 at 23:32, Varadarajan Narayanan
-<varadarajan.narayanan@oss.qualcomm.com> wrote:
+On Wed, 11 Mar 2026 at 08:17, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
 >
-> Hi Simon,
+> Hello Simon,
 >
-> Thanks for the feedback, need one clarification...
+> On 3/6/26 2:20 AM, Simon Glass wrote:
+> > From: Simon Glass <simon.glass@canonical.com>
 >
-> > > +     ...
-> > > +     if (elf) {
-> > > +             hdr = info;
-> > > +             ...
-> > > +     } else if (IS_ENABLED(CONFIG_QCOM_GENI_MINICORE)) {
-> >
-> > If elf is false and CONFIG_QCOM_GENI_MINICORE is disabled some
-> > variables are used uninitialised. Please add an else clause that
-> > returns an error.
+> > +     /* Process each image referenced by the config */
+> > +     image_count = 0;
+> > +     fdt_for_each_property_offset(prop_offset, fit, conf_noffset) {
+> > +             const char *prop_name;
+> > +             int img_count, i;
+> > +
+> > +             fdt_getprop_by_offset(fit, prop_offset, &prop_name, NULL);
+> > +             if (!prop_name)
+> > +                     continue;
+> > +
+> > +             /* Skip properties that are not image references */
+> > +             if (!strcmp(prop_name, FIT_DESC_PROP) ||
+> > +                 !strcmp(prop_name, FIT_COMPAT_PROP) ||
 >
-> Ok.
+> I know you need to mimic what mkimage does on the other side, but I
+> found this surprising:
 >
-> > > diff --git a/drivers/misc/qcom_geni.c b/drivers/misc/qcom_geni.c
-> > > @@ -377,15 +413,22 @@ int qcom_geni_load_firmware(...)
-> > > +     if (IS_ELF(*(Elf32_Ehdr *)fw)) {
-> > > +             ...
-> > > +             elf = 1;
-> > > +             info = hdr;
-> > > +     } else {
-> > > +             elf = 0;
-> > > +             info = fw;
-> > > +     }
-> >
-> > Using 1/0 for a bool is a bit odd. Please use true/false.
+> The configuration node name is probably hashed along with the FDT node,
+> but compatible isn't, so relying on compatible means an attacker can
+> trivially control which configuration is booted.
 >
-> Ok.
+> > +                 !strcmp(prop_name, FIT_DEFAULT_PROP))
 >
-> > > diff --git a/drivers/misc/qcom_geni.c b/drivers/misc/qcom_geni.c
-> > > @@ -492,7 +540,11 @@ static int probe_children_load_firmware(...)
-> > > +#if CONFIG_XPL_BUILD
-> > > +int qcom_geni_fw_initialise(struct udevice *dev)
-> > > +#else
-> > > +int qcom_geni_fw_initialise(void)
-> > > +#endif
-> >
-> > Having two different function signatures based on a preprocessor
-> > conditional makes future maintenance harder. Consider always passing
-> > dev and ignoring it when unused.
->
-> The signature difference is because for one case it is
->
->         int (*probe)(struct udevice *dev);
->
-> and
->
->         typedef int (*event_handler_simple_t)(void);
->
-> for the other. Not sure how to reconcile between these two.
-> Please advice.
+> I am aware of /configurations/default, but what does a default property
+> within a configuration signify?
 
-One way is to use two separate stub functions (one for each signature)
-which call a common function.
+Belated reply, but yes we don't use a defauilt property within the
+configuration.
+
+So we don't need that extra check, i.e. if someone did add a 'default'
+property into the configuration it would be OK to fail the signature
+check.
+
+[..]
 
 Regards,
 Simon
