@@ -4,99 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE661F34C5F
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 14:55:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A06AF34C5F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 14:57:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E95C38407D;
-	Mon, 13 Apr 2026 16:54:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B13DE83DC9;
+	Mon, 13 Apr 2026 16:57:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m8/7zq3P";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OyWbv9Xu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CAE4D84199; Mon, 13 Apr 2026 16:54:58 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 489798407D; Mon, 13 Apr 2026 16:57:14 +0200 (CEST)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0AB183DC9
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 16:54:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 210E4839D5
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 16:57:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-b9e00649769so72456366b.3
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 07:54:56 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776092096; cv=none;
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-82f351ca23cso570288b3a.2
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 07:57:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776092230; cv=none;
  d=google.com; s=arc-20240605;
- b=ho0o37VcBnWScQlF+0wj2G04On+j2yK5wuQE8dfE5hcp9MxGIRVi2yfhIi9tQfoMSu
- KdtfRu9IYftv0Nx41Ztq6JYkLsEy6VvHvGI6SpX33rtvtXqvfy27MeS1nTLfZ5V4er+J
- 84vFQdJl2MoqBTWPTvv+6ECQdjUSs2DUg8yoYRZiKOwlD3yW8NmHffNNasQIQAao0/Ex
- 25CU2weWlKf7juUKTebf0003Yrz2gjc9pYAQeFSAa/D1jUJCkPhteaerFPXJnX38Xks5
- ZK/Hr2DxXUXIppeuX8AxbbBnZPvKBhVQydwOKdG3LG0j4/5tAng/jFm+MSmyFzlr/ZvT
- x0aw==
+ b=BWCe3GLTC06Bj4/LlCmZZYxRge2zvvkYatHcv/7ZooaHEqY0GVxDMbEY+UxOrtYAfN
+ Oc42tzoEcaCv5jDVeSDofQprbjjBCgd6CI2zz7TDK2LNedsJ7ibYLm49ak/xEDCZIKjz
+ fSZLv6MYXIG2Oas9CTqbMXJOuUmNQ1PBA7tkXJdjgr/zEEywMrbRZ96j4lvTclGHdWiv
+ FGP9bDANW2DABJs659Em0q9nfJ8ixjvir8dpcnSmeC9dUXvRC6YuaQMKpQEGLj4we9i0
+ QDU6DvYUXzfymZfPpaXfVpAbiEoD3R0OOZR9Ht3psKym4eRvV/NKwNPUwT/WfFGnuiKA
+ fqBQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=1EFyaHTg851r7lufNcaM4Ki7+obc5Re9dAxnhFM/0ZM=;
- fh=vWGjtn1jaHvP7sTvYs5T2kZsOKPFB1kxIckHvNdP2E4=;
- b=SmYoe2RWNVXOZZRm6wUVHMipba51a8z2aTOtQLD5POF1PqXz//DvR0pb61VnmKqTwp
- IFk4PwsfHuNlJnv8V/+e1R22LnNWnAQBCX/vyj2xJoES1MQ5XLnVeRalc3tpn3gc6WZ9
- TWEK6nQqUys9ty8OkfIP62rIe/0IoqJaNJJLGgnUEPVDyAKEuLs5LYU7qEdLXExLH3hb
- CYZWCzzLIKhhmLbqliC1JGUm9RV4F+DffhDjjtupBVdzwGGLHJTy+z3MjI2KnNxGwAsC
- 1JgNtC3+UuTd3Wk6oXhc3zSAckppIhwllRDorZew3CU9McQ8E0CPjHPdCLy4oNiTAKrx
- KcrQ==; darn=lists.denx.de
+ bh=V7+YvyKXGIOFikLuuMc+s6VBGn0tbW96ODkEQ8ar0aY=;
+ fh=dF+eCHOIT6SIbAzI5tBwPFZclvSQgQQ7Zo1JXO6SSnQ=;
+ b=OENuvEYmYsVPifBKqZPiU9/R93JV22uw696IQc0dgJty2srUNegnY+hSX6U9C3QvPp
+ XxsnYLzOEbGo8BjrdZ1rbRGu7cM6Zc2BlVR7S9Z9unS3n96EKYxkuZiIIcTQxtEHKkjT
+ HjZ1UNk9SKaYX/4xbOvOg6jqlUibVFXz6omx4aG37/ly7vF1yIfQAzMub9gHIkJ0qEPS
+ N08PvUZfOoUSxPFctNYYeoUr3qyVOL0Drkfs87SDyLC7qJ/6XK8tAatdS5r+QoKZkqGl
+ 1jMo2CObuMsnsPUfuPsnt0RAsSr2zRQ6sHJnYDMo6su4BehAFFeia+0QESrZbwxYU8bL
+ /KOQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776092096; x=1776696896; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776092230; x=1776697030; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1EFyaHTg851r7lufNcaM4Ki7+obc5Re9dAxnhFM/0ZM=;
- b=m8/7zq3PCiv3SggCeQt9szumoq4LQFx0t1Wp8/l0kNcfgxxRQsQSlU8R1Ytv9q5tNq
- aOLL0pCznYSipb97z9fyWUxSpRPvcTi/TtKmHJ1gnge+Qk5IPvuoPQj2ZLHqS/Rt/fiE
- Qv5c87mkDZaPQfSuGGStoqG5OpQibXdPDQUaY=
+ bh=V7+YvyKXGIOFikLuuMc+s6VBGn0tbW96ODkEQ8ar0aY=;
+ b=OyWbv9XupDjTym+LILpVni5FsSqkq6q66mH3pp0Aj9/m1XIj3076jFlrycpCxSJXdN
+ eYgbmXsVuz//xxYOybnvaKBV2t2LV3pbvE+nF9d3LBXFEYrryHhuXNVbN5AOe7eBKxPQ
+ kUz94RTpv5Pv2kQqWjc7yvVkSwmxuC/vyVZag=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776092096; x=1776696896;
+ d=1e100.net; s=20251104; t=1776092230; x=1776697030;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1EFyaHTg851r7lufNcaM4Ki7+obc5Re9dAxnhFM/0ZM=;
- b=b1iBMBxvqWp2pLUdpxfAcX1/dOqHyLi7D//mEnQgVPUB94TmAK6LqtwJfoZt2VzysJ
- g2ztaLVpdAelcc5PeSAh5dB7o7pN7xAQ+MA1YzJ5ZyQ/sUIVTG2z8siFfQdkotciYmpW
- Msbiz71Ol+KnxCztD0kqLSwLWmxGa/KEkxImcwaSb0J8z14VA2Qdc74xUh189kLNoLwF
- sHt1nGAaxnZbotaiom0h21BgTo0CCynyOqEEEr1W7iTa1tBASHToNT1fzds2WswK/zkM
- rtvUS70yKeUT+sxInW5PjSASjEzGkD3fTDu4eAWXxL1yhXDsOyAw/+H+nmNuTcUOukcx
- N65A==
-X-Gm-Message-State: AOJu0YzCXg/Lu5A13vEdmtReur9uzBexjA2eDt7GTbn1eXFBkp+7JehI
- NSKYc2L7aAI3XTEl4z9eWffOvynJ2rgDvK/K1aS1WaiOlFE1HH4RhIUNpfzHsln0fVXVOU8iYoL
- 4xU6RNamBoYyo+CKeFmFss7YAu6ZuWpqyoHpu9kTS
-X-Gm-Gg: AeBDievZ2MGvAKdyA6JV1a3eJ+VEFd4uN3OXq7waNlRMhWZ7GjlsqojOk/9xzkhHvlu
- cxt5KrrdL2pDqwcYt6edKX2auIUp7VICnWsFEb28fwsYRxP3R+o1H0W+OnNFhI7yhWR7Ci5cJ/w
- K9ZywwZ01dNcEVtn1QmggbetVhUPtKaDYR01rWcHDyw9GVITdXt15d0/Urx9ZjwaUe8e4DlCpR8
- dxrEZEMpM1UqZZUvFqFxrs3vpNAhzj8vZUzY0m+HTgqBpX5FWP3d2GqxImjzK2xNPItz80F9edq
- 68rKZA==
-X-Received: by 2002:a17:907:a604:b0:b9d:1a1c:a664 with SMTP id
- a640c23a62f3a-b9d72991a2dmr858472166b.40.1776092096135; Mon, 13 Apr 2026
- 07:54:56 -0700 (PDT)
+ bh=V7+YvyKXGIOFikLuuMc+s6VBGn0tbW96ODkEQ8ar0aY=;
+ b=FvI2tw03Vea9otR0HGlBag+EETOlluI5RQyQaMBw9a//UD03ttCTw1Ax6WbVl+wgPP
+ Ecj1Lyytm/6/cWTAF93oUaKBCCDhgzvZ15aF9V62c21+PZxut8fGk6yuq+aD5B2urkBk
+ 6b/AWsqy2sGNcZAC/TlDF0jomiFMlnLp+tUXWY1XmQx0oyWGFJSw0+w5YQMhlcAH238k
+ HnnPrky7Aa5JIcxXZbNqGWbZCv0Sobugq8IKrK8Jdv40wzLq2ZtYLGlcmyfP9w9idF4p
+ VM919QHM7PsitJhurMOFYBG7jkjy4rV84p1B4Xvf9GphH5eD/Xujt9CjTIvU08NNTChH
+ tFnw==
+X-Gm-Message-State: AOJu0YxWwFfAf6KkQm81q2SoXOEVC8l/g9SkO8CtTywOuCLneUg3ARxI
+ N+IQ1YmkB5h5vHZ1xKAjHYespDISm3VJy5tg4g/iAFA1TtQBgqBZjBeAgG3YcpwqGixCplmnUKn
+ geFhEjc8M8pmCfwHb7se4f5vegFubKaUjVi6/AsSo7wY5d07Hjrs=
+X-Gm-Gg: AeBDievbSBIUCgGIflgH+KRRoOG9A0UQUyii3b7vOEIyHF7DZw+QmWxEDqmlolCIyeG
+ HB2HOtGgI82M8DnRsW6OnJG+9abnEoepkeVi00yS7C2hARCnbMbYnOBM8S0eT+DfC1njcAblPvG
+ /r9rbgnZenT9Hfnfc7fAmj+1O2MJ5unDanCtaN9u+lF52zo+6h50RtYdKUU/1e07UeNC+H1Xf9q
+ eUbiV2JMSK9mWIHPFq6L3Y9mRrg0x4hqRZuU7Qipzp9Tn6RBbPwbb8qdqN9+as1nax7YtVQYql5
+ 36JqBw==
+X-Received: by 2002:a05:6a00:1946:b0:82c:e1a0:3453 with SMTP id
+ d2e1a72fcca58-82f0c3568e4mr13475537b3a.26.1776092230567; Mon, 13 Apr 2026
+ 07:57:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260306012019.800588-1-sjg@chromium.org>
- <f1cf64a7-04b4-409f-ab54-044b010f32cd@pengutronix.de>
-In-Reply-To: <f1cf64a7-04b4-409f-ab54-044b010f32cd@pengutronix.de>
+References: <20260412195947.1982729-1-ravi@prevas.dk>
+ <20260412195947.1982729-2-ravi@prevas.dk>
+In-Reply-To: <20260412195947.1982729-2-ravi@prevas.dk>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 13 Apr 2026 08:54:43 -0600
-X-Gm-Features: AQROBzDDjTLyTa3_k6o6qJJOpgaop7YQ3EOYkpJNqjOrKWLJwbqyMrwO-MGL0T8
-Message-ID: <CAFLszTjcdFs78x8f1pH891cmrwpDr9k=T-zU2HTbNwiXqii9mA@mail.gmail.com>
-Subject: Re: [PATCH v2] boot: Add fit_config_get_hash_list() to build signed
- node list
-To: Ahmad Fatoum <a.fatoum@pengutronix.de>
+Date: Mon, 13 Apr 2026 08:56:51 -0600
+X-Gm-Features: AQROBzCsra2KaF5eTfgceXJDWeqfDSEKNrTPPdThXfcwVnmsP6Di9xBjrbbLLDE
+Message-ID: <CAFLszTg=oAKTtGUCgFnXzf65xdWwGYgMdzd7qOvRFBU+JDnBeA@mail.gmail.com>
+Subject: Re: [PATCH 1/8] string: fix prototype of memdup()
+To: ravi@prevas.dk
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Ludwig <ludwig.nussel@siemens.com>, Simon Glass <simon.glass@canonical.com>, 
- Daniel Golle <daniel@makrotopia.org>,
- Enric Balletbo i Serra <eballetbo@kernel.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Sascha Hauer <s.hauer@pengutronix.de>
+ Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -114,49 +109,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ahmad,
+On 2026-04-12T19:59:41, Rasmus Villemoes <ravi@prevas.dk> wrote:
+> string: fix prototype of memdup()
+>
+> It doesn't make sense to restrict memdup() to only return char*
+> pointers, especially when it is already defined to accept void*. This
+> makes it uglier to use to e.g. duplicate a struct.
+>
+> Make it return void*, just as kmemdup() does in the kernel (and which
+> our kmemdup() in fact also does).
+>
+> While in here, make a small optimization: memcpy() is defined to
+> return the destination register, so we write this in a way that the
+> compiler may do a tail call.
+>
+> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+>
+> include/linux/string.h | 2 +-
+>  lib/string.c           | 8 +++-----
+>  2 files changed, 4 insertions(+), 6 deletions(-)
 
-On Wed, 11 Mar 2026 at 08:17, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
->
-> Hello Simon,
->
-> On 3/6/26 2:20 AM, Simon Glass wrote:
-> > From: Simon Glass <simon.glass@canonical.com>
->
-> > +     /* Process each image referenced by the config */
-> > +     image_count = 0;
-> > +     fdt_for_each_property_offset(prop_offset, fit, conf_noffset) {
-> > +             const char *prop_name;
-> > +             int img_count, i;
-> > +
-> > +             fdt_getprop_by_offset(fit, prop_offset, &prop_name, NULL);
-> > +             if (!prop_name)
-> > +                     continue;
-> > +
-> > +             /* Skip properties that are not image references */
-> > +             if (!strcmp(prop_name, FIT_DESC_PROP) ||
-> > +                 !strcmp(prop_name, FIT_COMPAT_PROP) ||
->
-> I know you need to mimic what mkimage does on the other side, but I
-> found this surprising:
->
-> The configuration node name is probably hashed along with the FDT node,
-> but compatible isn't, so relying on compatible means an attacker can
-> trivially control which configuration is booted.
->
-> > +                 !strcmp(prop_name, FIT_DEFAULT_PROP))
->
-> I am aware of /configurations/default, but what does a default property
-> within a configuration signify?
-
-Belated reply, but yes we don't use a defauilt property within the
-configuration.
-
-So we don't need that extra check, i.e. if someone did add a 'default'
-property into the configuration it would be OK to fail the signature
-check.
-
-[..]
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
