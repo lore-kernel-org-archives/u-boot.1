@@ -4,68 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B214F34C40
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 12:01:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAE6EF34C49
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 12:09:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5C2D839DF;
-	Mon, 13 Apr 2026 14:01:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 67E09839DF;
+	Mon, 13 Apr 2026 14:09:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="TXf0ChQk";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vdEO0RUz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7CC484181; Mon, 13 Apr 2026 14:01:24 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7BCA483DC9; Mon, 13 Apr 2026 14:09:45 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA86F839D5
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 14:01:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 430A8839D5
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 14:09:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 4182A1A31C5;
- Mon, 13 Apr 2026 12:01:21 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 0E2B45FFB9;
- Mon, 13 Apr 2026 12:01:21 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 37A34104500A2; 
- Mon, 13 Apr 2026 14:01:11 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1776081673; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=p5AYzRXdQhAPVagOxWvrNjcpeosUX/ECVGprE1hrH4w=;
- b=TXf0ChQkl9yOnA6vrrsc2V7pt1ngEWvfPgTbZ4EcZvHBuvYBSdeIPBt8nl+5illenDZeBe
- 4BBr4BIakjVRQcU5Y5z2RrMVrYAIutY3oyaAUx1VHVyamom2F+r9DzoJedU1bB3iRVmIk6
- FQuYdvUmKw44pqm1k9BgLKgmxJQ8m2n+5+8m7c4ouFjaR+qAau+V7kPcu9TRQ1e5HSRpPY
- Mgs0Fgfa6AHVMO3PI5iua0hn6eHt2MW2CCYF058L8V7SoTIXtzRQZVAiMZQPIcE3XuZX3a
- /h4JN/iKV5DHj2MGtZ+nRsb0GHsv6Ex4f9172ouRBLtxcG9eU3/XYm2KuKa6/Q==
-Date: Mon, 13 Apr 2026 14:01:10 +0200
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
-Cc: u-boot@lists.denx.de, Marc Murphy <marc.murphy@sancloud.com>, Tom Rini
- <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Romain Gantois
- <romain.gantois@bootlin.com>, Parvathi Pudi <parvathi@couthit.com>,
- Basharath Hussain Khaja <basharath@couthit.com>, Paul Barker
- <paul.barker@sancloud.com>, "Andrew F. Davis" <afd@ti.com>, Simon Glass
- <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>, Michael Trimarchi
- <michael@amarulasolutions.com>
-Subject: Re: [PATCH v5 12/12] configs: am335x_evm_defconfig: Switch to
- upstream devicetree
-Message-ID: <20260413140029.798645ad@kmaincent-XPS-13-7390>
-In-Reply-To: <20260410-topic-am33-evm-oftree-v2026-01-v5-12-4b9c7aca0e3e@baylibre.com>
-References: <20260410-topic-am33-evm-oftree-v2026-01-v5-0-4b9c7aca0e3e@baylibre.com>
- <20260410-topic-am33-evm-oftree-v2026-01-v5-12-4b9c7aca0e3e@baylibre.com>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-488a14c31eeso35202135e9.0
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 05:09:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1776082182; x=1776686982; darn=lists.denx.de;
+ h=message-id:date:references:in-reply-to:cc:to:from:subject
+ :content-transfer-encoding:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VOVA4jbkHXz9nkWiI6IAmAo0bPvTZu69kvq99PyXMpU=;
+ b=vdEO0RUzSRoX1uRZe8iKFus7NlVH8uRXJe7ZB+6/GthkQSnMbXJNupw7v5NY3svcet
+ GCEnM6FI7/nbZHgliiGIUz3Ep/gLQz6Gu+HeXXezjaJCDTXZ6i7OVGAFak9ns7LQyGBy
+ H3jyO+AYUuYLU7VI/JZHzzzYhCyStD+UFBEV0SK9BoaJKm1Ftvs5Pho6OBnPbOZbXTVI
+ J4a39GPFI9RTRkXzZJmv35xGgyFfIvdxa3j7QGT9LApjJrVD4cUxI05+yBsR4xVgxdTc
+ mWzIPEOGQmg7ooSqU/j8Qj43RmkL/hJG/RxYSt64PP1YDROi70u+adxVoTvOX7Vi6JSi
+ vIug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776082182; x=1776686982;
+ h=message-id:date:references:in-reply-to:cc:to:from:subject
+ :content-transfer-encoding:mime-version:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=VOVA4jbkHXz9nkWiI6IAmAo0bPvTZu69kvq99PyXMpU=;
+ b=dT3AU+OScoWfA4KyMplYqxWvtW1k7mPkqqTfmqA1WrSwM96PM/jTRFQkOyp+Xy4XgS
+ 1iKlFeKHSjZi+tiFBPpbKIzOCcSUER+s9C5eiucWb88CptI8MjpBv395TnATtnejJiRH
+ jFwUdOsBIexQHh95cvni/jIgMh3VhUIEIT7DMjd+Nx39LhaTgr48JyBfRIwShLJn0LjH
+ QJDTgbsFVLvL6JcCbYKW4ZU9Bqhbl125mD/n/iGLs53sHHdLp4N+CSLG/frhjMFop5lB
+ ounFLDq52HddG6YDGbYjl7ZLEJtSTKcOnF8gN3bSldf5bG2vzPayr83vcdNOwGr89NX2
+ MODw==
+X-Gm-Message-State: AOJu0Yy4B0Y+wWdLSVTiqkQNwdx2FuelD5+kpI8Q7Fs7Rxab8pObNrbF
+ 9r75zQ3HqtCDb4AL/wcxCoMJwu65BKMVXbPfNLRYQlGnlsgIXQtLgGV4rMsJ8Py3wH4=
+X-Gm-Gg: AeBDiesXXMOCtevu0ZV2SnrdopFpG6fVrkzVnpwsSFnJ5cncqxzRgQ6EsbMlQ3L2o9s
+ Vq/u1qP7NxOaCADACLMQ2smpJRmzvD+8it7fZ7ybx7JdyFF22/z+kDpUdyjc2Yg3ZgidYdO2Bg+
+ EJcGgWwvrPG8LNOgUBq8VPmVTK/nG84VhrgGT2G7d/HEhBOA3emuNSjhamqU8+F/78xBDAvXBpa
+ aNM3lbl544lMnGafKGmqaVgoUk2wPzG6TTGMexijYc9IapdC6W72qGXnAVDrdF4Ovwg9J2Ivj9h
+ 6n0YJSd/cx+cS5Km9G22vAjFeTHWqoezac+GO5TpgyGZJuUt+Ipky5Algw1BUY7Ul36KW64ltIC
+ ggDkzu/B0e9TnW56iHwaAd0bF+BAaUPC7ojkvmF14vCH7H/xdup1RjrqDUPjHiePUqmWg8nrkGO
+ p/h86P+1i2i30XmUORyhqb6e9keTZs9+8aI1vBIDVcQkqfEsNt6jLcFr/e4ZRDjYccli63
+X-Received: by 2002:a05:600c:64c4:b0:485:39b2:a47c with SMTP id
+ 5b1f17b1804b1-488d686892emr158124725e9.25.1776082181155; 
+ Mon, 13 Apr 2026 05:09:41 -0700 (PDT)
+Received: from lion.localdomain (p4fc3dd86.dip0.t-ipconnect.de.
+ [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-488d5396293sm277577175e9.15.2026.04.13.05.09.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 13 Apr 2026 05:09:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH 5/5] drivers: ufs: qcom: Initialize and enable clocks
+ before hardware access
+From: Casey Connolly <casey.connolly@linaro.org>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
+ u-boot-qcom@groups.io, Lukasz Majewski <lukma@denx.de>, 
+ Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ David Wronek <david.wronek@mainlining.org>, 
+ Luca Weiss <luca.weiss@fairphone.com>, 
+ Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>, 
+ Swathi Tamilselvan <swathi.tamilselvan@oss.qualcomm.com>, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
+ Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Julien Stephan <jstephan@baylibre.com>
+In-Reply-To: <20260319-ufs_probe_clk-v1-5-08c085d6b15d@oss.qualcomm.com>
+References: <20260319-ufs_probe_clk-v1-0-08c085d6b15d@oss.qualcomm.com>
+ <20260319-ufs_probe_clk-v1-5-08c085d6b15d@oss.qualcomm.com>
+Date: Mon, 13 Apr 2026 14:09:39 +0200
+Message-Id: <177608217912.1177412.14533836406368185534.b4-reply@b4>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3358;
+ i=casey.connolly@linaro.org; h=from:subject:message-id;
+ bh=clubaUhsdbqqQiWQaIbRRsKigoo1UsZuIYQWn3ho3q4=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhsw7d5nPnvll6nLrxhtV4w0ZSwyOT9seVRN2wO+ZQMvO7
+ CvBe1JcOkpZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBEnk1n+CsZKmiZ/D666Ax7
+ e6B41GX96SL7GIMORRaxnkgREGReupHhf22C85MY0dx92d7dVe5OGj8clr9hM1n0aN26W1Y/3j0
+ W2QkA
+X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,131 +121,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 10 Apr 2026 15:31:52 +0200
-"Markus Schneider-Pargmann (TI)" <msp@baylibre.com> wrote:
-
-> The upstream devicetree uses simple-pm-bus, so CONFIG_POWER_DOMAIN is
-> required now. CONFIG_POWER_DOMAIN enables probing power domains, the PRM
-> power domain driver is requierd as well now.
->=20
-> This switches all evm defconfig variants to use the upstream devicetree.
-
-Hello,
-
-This patch breaks the BeagleBone Green Eco boot.
-
-U-Boot SPL 2026.04-00765-g42087b117172 (Apr 13 2026 - 11:59:01 +0200)
-Trying to boot from MMC1
-
-U-Boot 2026.04-00765-g42087b117172 (Apr 13 2026 - 11:59:01 +0200)
-
-CPU  : AM335X-GP rev 2.1
-Model: Seeed Studio BeagleBone Green Eco
-DRAM:  512 MiB
-Core:  201 devices, 17 uclasses, devicetree: separate
-Could not initialize timer (err -19)
-
-resetting ...
-
->=20
-> Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
+On 2026-03-19 15:07 +0530, Balaji Selvanathan wrote:
+> Move UFS clock initialization and enabling before hardware setup
+> to ensure clocks are running when accessing UFS registers.
+> 
+> Previously, U-Boot depended on earlier bootloader stages to
+> initialize UFS clocks. When these bootloaders failed to do so,
+> UFS registers became inaccessible, causing initialization to fail.
+> This change makes U-Boot initialize and enable UFS clocks early
+> in the init sequence, removing the dependency on previous
+> bootloaders.
+> 
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 > ---
->  configs/am335x_evm.config            | 6 +++++-
->  configs/am335x_evm_defconfig         | 2 +-
->  configs/am335x_evm_spiboot_defconfig | 2 +-
->  configs/am335x_hs_evm.config         | 2 +-
->  4 files changed, 8 insertions(+), 4 deletions(-)
->=20
-> diff --git a/configs/am335x_evm.config b/configs/am335x_evm.config
-> index
-> 9c12771a3299bcd0b1c5c14bb4c2306d7b02aae5..fbc070c930e4d2d85739c9e428c4b13=
-0490cd6bc
-> 100644 --- a/configs/am335x_evm.config +++ b/configs/am335x_evm.config
-> @@ -3,7 +3,10 @@ CONFIG_ARCH_CPU_INIT=3Dy
->  CONFIG_ARCH_OMAP2PLUS=3Dy
->  CONFIG_TI_COMMON_CMD_OPTIONS=3Dy
->  CONFIG_SF_DEFAULT_SPEED=3D24000000
-> -CONFIG_DEFAULT_DEVICE_TREE=3D"am335x-evm"
-> +CONFIG_DEFAULT_DEVICE_TREE=3D"ti/omap/am335x-evm"
-> +CONFIG_POWER_DOMAIN=3Dy
-> +CONFIG_TI_OMAP_PRM_POWER_DOMAIN=3Dy
-> +CONFIG_SIMPLE_PM_BUS=3Dy
->  CONFIG_AM33XX=3Dy
->  CONFIG_CLOCK_SYNTHESIZER=3Dy
->  CONFIG_SYS_BOOTM_LEN=3D0x1000000
-> @@ -12,6 +15,7 @@ CONFIG_TIMESTAMP=3Dy
->  CONFIG_SPL_LOAD_FIT=3Dy
->  CONFIG_DISTRO_DEFAULTS=3Dy
->  CONFIG_OF_BOARD_SETUP=3Dy
-> +CONFIG_OF_UPSTREAM=3Dy
->  CONFIG_BOOTCOMMAND=3D"run findfdt; run init_console; run finduuid; run
-> distro_bootcmd" CONFIG_LOGLEVEL=3D3
->  CONFIG_SYS_CONSOLE_INFO_QUIET=3Dy
-> diff --git a/configs/am335x_evm_defconfig b/configs/am335x_evm_defconfig
-> index
-> 448b0a8308fcca04732b81313c72f7fd2247d1ca..9281178f914085b199e3d35e95d0ce1=
-f3c0faaa5
-> 100644 --- a/configs/am335x_evm_defconfig +++ b/configs/am335x_evm_defcon=
-fig
-> @@ -24,7 +24,7 @@ CONFIG_CMD_SPL_NAND_OFS=3D0x00080000
->  # CONFIG_CMD_SETEXPR is not set
->  CONFIG_MTDIDS_DEFAULT=3D"nand0=3Dnand.0"
->  CONFIG_MTDPARTS_DEFAULT=3D"mtdparts=3Dnand.0:128k(NAND.SPL),128k(NAND.SP=
-L.backup1),128k(NAND.SPL.backup2),128k(NAND.SPL.backup3),256k(NAND.u-boot-s=
-pl-os),1m(NAND.u-boot),128k(NAND.u-boot-env),128k(NAND.u-boot-env.backup1),=
-8m(NAND.kernel),-(NAND.file-system)"
-> -CONFIG_OF_LIST=3D"am335x-evm am335x-bone am335x-sancloud-bbe
-> am335x-sancloud-bbe-lite am335x-sancloud-bbe-extended-wifi am335x-bonebla=
-ck
-> am335x-evmsk am335x-bonegreen am335x-icev2 am335x-pocketbeagle
-> am335x-bonegreen-eco" +CONFIG_OF_LIST=3D"ti/omap/am335x-evm ti/omap/am335=
-x-bone
-> ti/omap/am335x-sancloud-bbe ti/omap/am335x-sancloud-bbe-lite
-> ti/omap/am335x-sancloud-bbe-extended-wifi ti/omap/am335x-boneblack
-> ti/omap/am335x-evmsk ti/omap/am335x-bonegreen ti/omap/am335x-icev2
-> ti/omap/am335x-pocketbeagle ti/omap/am335x-bonegreen-eco"
-> CONFIG_SPL_ENV_IS_NOWHERE=3Dy CONFIG_CLK=3Dy CONFIG_CLK_CCF=3Dy diff --git
-> a/configs/am335x_evm_spiboot_defconfig b/configs/am335x_evm_spiboot_defco=
-nfig
-> index
-> eebd916c02a2cad0d01ab738aab37b11dd3a9645..bbaca6c8800baf19377a457e49db446=
-159e338a8
-> 100644 --- a/configs/am335x_evm_spiboot_defconfig +++
-> b/configs/am335x_evm_spiboot_defconfig @@ -12,7 +12,7 @@
-> CONFIG_SPL_SPI_LOAD=3Dy CONFIG_SYS_SPI_U_BOOT_OFFS=3D0x20000 # CONFIG_CMD=
-_SETEXPR
-> is not set CONFIG_SPL_OF_CONTROL=3Dy -CONFIG_OF_LIST=3D"am335x-evm am335x=
--bone
-> am335x-boneblack am335x-evmsk am335x-bonegreen am335x-icev2
-> am335x-pocketbeagle am335x-bonegreen-eco" +CONFIG_OF_LIST=3D"ti/omap/am33=
-5x-evm
-> ti/omap/am335x-bone ti/omap/am335x-boneblack ti/omap/am335x-evmsk
-> ti/omap/am335x-bonegreen ti/omap/am335x-icev2 ti/omap/am335x-pocketbeagle
-> ti/omap/am335x-bonegreen-eco" # CONFIG_ENV_IS_IN_FAT is not set
-> CONFIG_ENV_IS_IN_SPI_FLASH=3Dy CONFIG_SPL_ENV_IS_NOWHERE=3Dy diff --git
-> a/configs/am335x_hs_evm.config b/configs/am335x_hs_evm.config index
-> 7ade2fb163b204ad8bcc9554455fdd3e81657890..0bc8556b1d4b18a413ecd6879ab85be=
-54f2730ef
-> 100644 --- a/configs/am335x_hs_evm.config +++ b/configs/am335x_hs_evm.con=
-fig
-> @@ -8,7 +8,7 @@ CONFIG_SPL_NAND_DRIVERS=3Dy CONFIG_SPL_NAND_ECC=3Dy
-> CONFIG_MTDIDS_DEFAULT=3D"nand0=3Dnand.0"
-> CONFIG_MTDPARTS_DEFAULT=3D"mtdparts=3Dnand.0:128k(NAND.SPL),128k(NAND.SPL=
-.backup1),128k(NAND.SPL.backup2),128k(NAND.SPL.backup3),256k(NAND.u-boot-sp=
-l-os),1m(NAND.u-boot),128k(NAND.u-boot-env),128k(NAND.u-boot-env.backup1),8=
-m(NAND.kernel),-(NAND.file-system)"
-> -CONFIG_OF_LIST=3D"am335x-evm am335x-bone am335x-boneblack am335x-evmsk
-> am335x-bonegreen am335x-icev2 am335x-pocketbeagle am335x-bonegreen-eco"
-> +CONFIG_OF_LIST=3D"ti/omap/am335x-evm ti/omap/am335x-bone
-> ti/omap/am335x-boneblack ti/omap/am335x-evmsk ti/omap/am335x-bonegreen
-> ti/omap/am335x-icev2 ti/omap/am335x-pocketbeagle
-> ti/omap/am335x-bonegreen-eco" CONFIG_SPL_DM_USB_GADGET=3Dy
-> CONFIG_SPL_TINY_MEMSET=3Dy CONFIG_RSA=3Dy
->=20
+>  drivers/ufs/ufs-qcom.c | 45 +++++++++++++++++++++++++++++++++++++--------
+>  1 file changed, 37 insertions(+), 8 deletions(-)
+> 
+> diff --git a/drivers/ufs/ufs-qcom.c b/drivers/ufs/ufs-qcom.c
+> index dc40ee62daf..c63e550c881 100644
+> --- a/drivers/ufs/ufs-qcom.c
+> +++ b/drivers/ufs/ufs-qcom.c
+> @@ -30,6 +30,7 @@
+>  #define UFS_CPU_MAX_BANDWIDTH	819200
+>  
+>  static void ufs_qcom_dev_ref_clk_ctrl(struct ufs_hba *hba, bool enable);
+> +static u32 ufs_qcom_get_core_clk_unipro_max_freq(struct ufs_hba *hba);
+>  
+>  static int ufs_qcom_enable_clks(struct ufs_qcom_priv *priv)
+>  {
+> @@ -49,12 +50,34 @@ static int ufs_qcom_enable_clks(struct ufs_qcom_priv *priv)
+>  
+>  static int ufs_qcom_init_clks(struct ufs_qcom_priv *priv)
+>  {
+> -	int err;
+>  	struct udevice *dev = priv->hba->dev;
+> +	struct clk clk;
+> +	int err;
+> +	long rate;
+> +	u32 max_freq;
+> +
+> +	/* Get maximum frequency for core_clk_unipro from device tree */
+> +	max_freq = ufs_qcom_get_core_clk_unipro_max_freq(priv->hba);
+> +
+> +	/* Get and configure core_clk_unipro */
+> +	err = clk_get_by_name(dev, "core_clk_unipro", &clk);
+> +	if (err) {
+> +		dev_err(dev, "Failed to get core_clk_unipro: %d\n", err);
+> +		return err;
+> +	}
+> +
+> +	rate = clk_set_rate(&clk, max_freq);
+> +
+> +	if (rate < 0) {
+> +		dev_err(dev, "Failed to set core_clk_unipro rate to %u Hz: %ld\n",
+> +			max_freq, rate);
+> +	}
+>  
+>  	err = clk_get_bulk(dev, &priv->clks);
+
+Adding to the other comments here, since you already requested core_clk_unipro you shouldn't
+request it again with clk_get_bulk(). Probably simplest at this point to just request all the
+clocks individually for better or worse.
+
+Kind regards,
+
+> -	if (err)
+> +	if (err) {
+> +		dev_err(dev, "clk_get_bulk failed: %d\n", err);
+>  		return err;
+> +	}
+>  
+>  	return 0;
+>  }
+> @@ -561,6 +584,18 @@ static int ufs_qcom_init(struct ufs_hba *hba)
+>  
+>  	priv->hba = hba;
+>  
+> +	err = ufs_qcom_init_clks(priv);
+> +	if (err) {
+> +		dev_err(hba->dev, "failed to initialize clocks, err:%d\n", err);
+> +		return err;
+> +	}
+> +
+> +	err = ufs_qcom_enable_clks(priv);
+> +	if (err) {
+> +		dev_err(hba->dev, "failed to enable clocks, err:%d\n", err);
+> +		return err;
+> +	}
+> +
+>  	/* setup clocks */
+>  	ufs_qcom_setup_clocks(hba, true, PRE_CHANGE);
+>  
+> @@ -579,12 +614,6 @@ static int ufs_qcom_init(struct ufs_hba *hba)
+>  		 priv->hw_ver.minor,
+>  		 priv->hw_ver.step);
+>  
+> -	err = ufs_qcom_init_clks(priv);
+> -	if (err) {
+> -		dev_err(hba->dev, "failed to initialize clocks, err:%d\n", err);
+> -		return err;
+> -	}
+> -
+>  	ufs_qcom_advertise_quirks(hba);
+>  	ufs_qcom_setup_clocks(hba, true, POST_CHANGE);
+>  
+> 
+> -- 
+> 2.34.1
+> 
+> 
 
 
-
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
