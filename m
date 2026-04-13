@@ -4,68 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DF2EF3ED78
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 06:18:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0998CEBFD01
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 06:24:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C9F5839D5;
-	Mon, 13 Apr 2026 08:18:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
+	by phobos.denx.de (Postfix) with ESMTP id 50F24839D5;
+	Mon, 13 Apr 2026 08:24:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="ex6fkj30";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="8019w0ID";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="jcRJdVWE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFDF383B99; Mon, 13 Apr 2026 08:18:37 +0200 (CEST)
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+ id E53DB83F75; Mon, 13 Apr 2026 08:24:48 +0200 (CEST)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A32478352B
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 08:18:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=gregor.herburger@linutronix.de
-Date: Mon, 13 Apr 2026 08:18:33 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1776061115;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=oAYcpSoENvtyeV3nhiHmEpMFQZ7XR4+aEK8jX/JAFEo=;
- b=ex6fkj30a+4vIczIoz06rOkna16aF4DQKVRxJb3R6LljyFtm4w+zdbcacYTuMAIuTS4A/0
- A3b88RJvrSEmzId93xMOquT5VEXBZEFX/LXuq0zZWs6MA+FX/4bNb4l0/TzQpEjTWvA20h
- Agpb7RKAbjGJ0gJOaqBJdb5aL/6mECXUSG2eiVNyfQLv4ppOu8zUk1XWZVKqkanr+uPaNw
- zMtjBSu9Y/FWJ+VJM1d6GRh+19i9t9EDx2DQTBbAxZsT9O93j43KoD4WxD66lgcfdDqZIE
- 787J45ZDsmMpIDEwfvRkbyaUdvOs5wdvJ8ORZrXcJZRPiS32NX/fEf4aTMgReg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1776061115;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=oAYcpSoENvtyeV3nhiHmEpMFQZ7XR4+aEK8jX/JAFEo=;
- b=8019w0IDc/Y7D4LK7Mg7/+7g6lxmmSCWoR1U4keCDshEsP7sgbGjNiU3YMEiiFc3crGbmG
- Psj87i6Q3B/BN7AQ==
-From: Gregor Herburger <gregor.herburger@linutronix.de>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v3 2/2] cli: flush stdin before enabling cli
-Message-ID: <adyKucgpN0v4ddhA@gregor-framework>
-References: <20260407063453.18679-1-gregor.herburger@linutronix.de>
- <20260407063453.18679-2-gregor.herburger@linutronix.de>
- <CAFLszTgOx73JFqH9+ES4w6oVP=DeM81QJFqQP9dR4_g4eOm15w@mail.gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id E95FF8352B
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 08:24:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-176-199-115-125.um44.pools.vodafone-ip.de
+ [176.199.115.125])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 6113E3F69B; 
+ Mon, 13 Apr 2026 06:24:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1776061486;
+ bh=twUXIeYefj7YftVyMfLFtR5D+crZO8jBhcbrWMElv0o=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=jcRJdVWE8FxjdtT2d6N1+iVHTc/FFqd19m1l5+78FRW6ZlTOgbbi0OlPwBWrDGUt1
+ ju+53jKTHXxmku2KS0HcyFk71xZFRm1d37rfI4TB6em1LLq4cRwVcp0VgZuz7W0Lkn
+ eb5+vITlIyT8OOVecw2sk6X4SPBExGW5YrEpxMfG/Mi7WegfaJvNSaZIeruZ6Z0dOF
+ VROMo3aKQ4cIlMEvFYZ2jhZPP6THnvncoCDQCcEG3kMFPq8PSHNEQBjdm+NOiOFstr
+ vj5ikeKoCIoeJi/G2/xaAHQ/0II/60XDHqnoK1daap2oujGL+mBMakrQOrIS64BhJC
+ uBpzPaP7+Mj0Ff3WDldjZcMTsKRADbCYvhbMrzENO4Ti2B3vZ6r4N4dcdjyBDqXSpR
+ FU8ELqgVRk9OE+MzpeXa5lLv9gGQsop6W3QMb+LCFCqbVNWwwXEr93kL+GtybSkOrv
+ VrLMKpMuyB/a/B1ZKs398+ZVSk9JR2LiTC13ofBUDQ09VzOmdCZF32+IE6FkT/4KeN
+ aPEADjfIorzoFIFNBDuBcTmB09CEgOEB0qtXDxEj7FsEPYi9EKLGMrPi9BszHXTTql
+ iDqcPELPzz0FYdegthWUeDN+OP/ikRq7zWFJ7UFb1PU0zgPLg6swlflLpE9gsl4918
+ yZUBG2zuK1CS3c5tepeCSIIs=
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] doc: correct title of CONTRIBUTE.rst
+Date: Mon, 13 Apr 2026 08:24:39 +0200
+Message-ID: <20260413062439.56470-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAFLszTgOx73JFqH9+ES4w6oVP=DeM81QJFqQP9dR4_g4eOm15w@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,42 +74,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+The title should be 'Contributing' as this is not the 'Overview' of the
+U-Boot project.
 
-On Sat, Apr 11, 2026 at 10:41:00AM -0600, Simon Glass wrote:
-> Hi Gregor,
-> 
-> On 2026-04-07T06:33:10, Gregor Herburger <gregor.herburger@linutronix.de> wrote:
-> > cli: flush stdin before enabling cli
-> >
-> > Currently there is no possibility to flush stdin after autocommands are
-> > executed. If in the bootcmd the stdin is changed, e.g. from nulldev to
-> > serial, it could happen that junk characters sit in the fifo and appear
-> > on the cli.
-> >
-> > Add a option to clear stdin before starting the CLI.
-> >
-> > Signed-off-by: Gregor Herburger <gregor.herburger@linutronix.de>
-> >
-> > cmd/Kconfig  | 8 ++++++++
-> >  common/cli.c | 4 ++++
-> >  2 files changed, 12 insertions(+)
-> 
-> > diff --git a/cmd/Kconfig b/cmd/Kconfig
-> > @@ -47,6 +47,14 @@ config HUSH_SELECTABLE
-> > +config CMDLINE_FLUSH_STDIN
-> > +     bool "Enable flushing input before starting cli"
-> > +         When this option is enabled the stdin buffer will be flushed before
-> > +         starting the CLI. This is useful when stdin is changed during boot
-> > +         (e.g. from nulldev to serial) and junk characters may be pending
-> > +         in the buffer.
-> 
-> Thanks for expanding the help text!
-> 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+The top title should be H1, the other titles H2.
 
-I just realized I didn't collected the Reviewed-by Tags from v2. Should
-I send a v4 with these or does a maintainer add them?
+Fixes: 0290cec364f6 ("Add an initial CONTRIBUTE.rst")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ doc/CONTRIBUTE.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Regards
-Gregor
+diff --git a/doc/CONTRIBUTE.rst b/doc/CONTRIBUTE.rst
+index 8ccb3a193da..a47dfdca221 100644
+--- a/doc/CONTRIBUTE.rst
++++ b/doc/CONTRIBUTE.rst
+@@ -1,8 +1,8 @@
+ .. SPDX-License-Identifier: GPL-2.0+
+ .. sectionauthor:: Peter Robinson <pbrobinson@gmail.com>
+ 
+-Overview
+---------
++Contributing
++============
+ 
+ This document is a high level contributors overview setting overall expectations,
+ so people can get started quickly, the rest of the documentation goes into the
+-- 
+2.53.0
+
