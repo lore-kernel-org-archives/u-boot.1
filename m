@@ -4,103 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E541F34C4E
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 13:16:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74EECF34C52
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 13:22:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 139E58407D;
-	Mon, 13 Apr 2026 15:16:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 0337484199;
+	Mon, 13 Apr 2026 15:22:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X9w0rXHZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IlSRMXug";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD7F38421D; Mon, 13 Apr 2026 15:16:35 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 87BC78419E; Mon, 13 Apr 2026 15:22:22 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C928E83DC9
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 15:16:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B0C868407D
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 15:22:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b9841aecf72so547870566b.2
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 06:16:33 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776086193; cv=none;
- d=google.com; s=arc-20240605;
- b=aT8d+mwNPhEq1kDvq9k+/UQLJNdILrBVZferbh6cumiihjKiMfqBgNbi5ox2xm2lUs
- W6XQljNtNREwQ/u7m/5tTMNieGMAqzVnQSu87EIgmWBqwW4kzfDiomqP3UuOESGm0q0y
- a0Jeom5g+lphLNV9j+aLSm0lqwA0EKZX1Ei9HGBkXhg9Yxf42F3Aa/l/YUvR7yOQh3w3
- biOy1Am3/sX0NduBp6oNfqtDe9hca13BNejJvwsnQ5Kig6VIHkpWiE7zsKDhyzPeq5Hr
- EsqI7wHZKdS2xFcQZ+ghWeCjhLYN5cTBz3Z6dq2mSTmveTK7onm3jA3CqhX4cAApyI6U
- RvtA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=ZS6huNxE88/LGhVtCridH9Kt8eJsVcoUjWK1f4yIe9o=;
- fh=hwc0z0Mp1uXaDJbAcaNfs+adm+vgVJQt+uwEfvCRJQw=;
- b=Pv3abI1QDufZl8A/yxNsGCroTxocUL5+ZTw9Pw8MABCrbYq9N583tc9lSLkRJ1UCoZ
- uexJeLgP2dVG52dv+8yfI2y5ReiHOyXZRTxZAT8mnkkBE3BDPvBDQj8Pq4DN2E0VJ9Fh
- FY4Vz04mPDtXykruOhiEN+IVIsgDHh3o8JB/aCwPYv01bq0EwPES2yb+h2wztbZ4QLup
- 7imY7xJw4iPBYJXn2DXmUNbmNlifIpea+GzPaYyAwrBbn4ATczUWcBeGI2KUFFkvVm3L
- iCi38qdWbm63/bFkUwkDF8SJl1mCm8beXwS4mhZzvBJhET0Hii9O7ueiEV+cJQ7cebun
- rEdA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-488a29e6110so48393115e9.3
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 06:22:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776086193; x=1776690993; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZS6huNxE88/LGhVtCridH9Kt8eJsVcoUjWK1f4yIe9o=;
- b=X9w0rXHZdBx56/mdL6tyH++60n/Ypf/lrmK+kSPJEO0ea2MMIm8x3FWXOrZfu2yn04
- A8jhb1lZlEwX7iV/3ihk0bjPMlXVR3f8q8K50hI0DL2qdKp9ATeRa2EtBWiYLijcaWRL
- W+t0p5qh0Auv2xjNWWn4Ih8cSbkbuShWg4zfM=
+ d=linaro.org; s=google; t=1776086539; x=1776691339; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=WTGAz2kdE63KmTATzRchWbrfz/3BTKGWMRmXbE+7rCI=;
+ b=IlSRMXugUoQaJDPGlOgLRoegWKycO6MeGQdDYkzd6SHohnSCoq4Xr8CpVlxHPLpGZ5
+ wnFWV5rwzhnaw3+ue0OYZAX4NknRvlhozWOHfEuChPDVD9SjF6ode5XUQSI3WyEIMkxN
+ D/w/bLKQda+mkUK8650w08r/gIThvYIoraTJfHEw2tkg6pUUXCF6bUgtMiPXRx4Y18QM
+ DM96UkCh+n9hK9wFwWVnXrDadcwxI3R4gqYOYxTkXYHXyAq3Ng/gfWVkgx80txQjlC45
+ 861XcgVwgPo/FyCrmm/t8MtiI1G/5uBvikxbMV3ltwKzipul1JksjbCy97qZXUFh9Y0S
+ PVHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776086193; x=1776690993;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZS6huNxE88/LGhVtCridH9Kt8eJsVcoUjWK1f4yIe9o=;
- b=AWirNqcdPx5cdGskAMtOFALdczsgscXO0j7Omt12CCSsX4ecAKvFNIx72krEFoGULF
- LicAE+1kW2EnN2ViQnsH8zOrOrC1TFIgOz3aPxppDPviz6NrAnt9Z3kkq7oVYqEwkya3
- i18bedLHZoqO1jF9NPouPkT+Jb5qiymcWEzH3aL5IL9Rg8V0xWbJCLCozJ0fw3qq+ruV
- 2sXwYTHej3fnhX2Gsl7U8/nNg2JrgZNBQ6dsgxSn6ovHYEsTrxCjQfrxkANrguashkwz
- /4AxJ1rmfQ5lorBjxKh7AOLdy38jjGIKsZksKUjO+akRHreQHSqxu+fpJ5GjE4bhjIq+
- GliA==
-X-Gm-Message-State: AOJu0YyZtOxtWcCd5p/SQQZWHDowfNGmNZdSl4inFjetlKir30aqb/RZ
- 1V4u+4ae+HBLBXjfpenB7dTs4kFZCgu+m6/W9SAuxFfrcMXR3DxwmOagmYHNbQ17wyrH5eQ0ub3
- CtN5txf7nwIzhYKZJtq9b7SKzHl+Si84/4E7FE1Bs
-X-Gm-Gg: AeBDievk8eLMKIJGvc/xrhQ1NO8SekV174zu4jjUVbxoAc3AdtWV/nFbyKOwTU6JOnE
- NtvmIvHKeePZnXtZCpKiYB6aJeFE76JsgkImM3lx7c1LDUMecvyrNtDfo5wPV7N1zYxU3z7+dLd
- XajjTxGxsKPS63Ny7qMyGZuzq7vzFk990+4MGtwniq/Vcsoev56UI60d13992p8RneFwhnetc8I
- fKr8TssTkfPdnYvCCLFXJDbJwdteH02eNzHB8SKnNu6+/SeYrA6TuntSudQOqqTo0f4/Ipv0/fs
- tmYC5A==
-X-Received: by 2002:a17:907:25cb:b0:b98:695:ec53 with SMTP id
- a640c23a62f3a-b9d7248ab3bmr693310266b.18.1776086192776; Mon, 13 Apr 2026
- 06:16:32 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1776086539; x=1776691339;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WTGAz2kdE63KmTATzRchWbrfz/3BTKGWMRmXbE+7rCI=;
+ b=MBswGayDP/1Kqt7harubiLxeQBZn4OmiNiDfhMssoP3cey8vZDc0/SZiobwPGZeHaj
+ jweaL90FtS4te0Pn/m/MfmmhrlS58rXdHi2bsldj7s+9rebzju0YuM9/rFY+r1h+THO3
+ ql4a6mTTp94h9zvCbesDXcdLvYomvrn52mfY4ngMPoRWrgCbNzu3hejYe2weekPKDDEL
+ kNVu/rcRUP+yimIVWo4rW+Vrmgfl0eIwxs12lKcFQrCHDsmkaSacg2lZZxhLKFUgrDE+
+ h4wTQc8x4fNbwJJePFMax7jbggwNQiwmP9F7L99oqoFe8AUc5XxFENJP9OjNCqnUSZk1
+ Pjeg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+XW3YPh1afTOZGAxM7kSPakDTTa25u6iwplDjrU2+nOTVQheYoqQEJCjTyuBhqC2TBRecHjgE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy1KWeaRapP3WPlXG88QIl+FjB1gQPPZlV/6oTO67w1TxM5f1r3
+ 11fxJD8aQmlNCphfdkXiqGMna81U3y4JImzY0QzWnGNZ0B2jNWq9USn0zQo42Bngiho=
+X-Gm-Gg: AeBDievbMWrTrkTyGBvXiz/9TnkT7uUJGf6vguGIUFTwteSRwNOP1HaR6E62h84NKG9
+ GuK76T1kKeKPymo0BpDSzkIxM4NvuFO5E3V2+Vymq+BQXXT+cahPMtrk4jlEjYn+Z7umOGtzWnd
+ 6bwp1SQxpvrVulztftYBvTHQpe9kBKveNUh6crNHU7eOGQsJeCP4uq3Pvb+c9LgCnFlgKdgmLZ0
+ Zcb+X9lErY1qLX1/2SAFt2Kc9dHv7ODVlr9wzwR9k1A5hSqCmI+tvwLqAeJUYoWctdoJrnnQsQ1
+ Sb37BVDARWhdQIsdb7CvUHnmE8TaZVYjt+h4kDrWJKFAk1M+p1b9r2k6pHpb/kkn3sLiJdptV4a
+ 0m1vThKXrImqzx0KNtlPG8UFR+9olNtXq4IqADUQmJEeHjjGgGFa/a+raMy4Ij86xaEmKHFTz3K
+ JNaIYjHjwD8y8klKisjh6Pk+TTiccpXJKcyCGPkS7vbbtb2G+bIUalO+tgq7i1ceDl8HNSs+fGb
+ +pE
+X-Received: by 2002:a05:600c:a411:b0:488:ac01:72de with SMTP id
+ 5b1f17b1804b1-488d67ec72cmr144823235e9.5.1776086538967; 
+ Mon, 13 Apr 2026 06:22:18 -0700 (PDT)
+Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-488d67ced32sm132822005e9.7.2026.04.13.06.22.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 13 Apr 2026 06:22:18 -0700 (PDT)
+Message-ID: <2abdf020-3181-43ac-9759-8e64df8b47df@linaro.org>
+Date: Mon, 13 Apr 2026 15:22:17 +0200
 MIME-Version: 1.0
-References: <20260405104224.530051-1-sjg@chromium.org>
- <20260405104224.530051-2-sjg@chromium.org>
- <874ilkpqgt.fsf@prevas.dk>
-In-Reply-To: <874ilkpqgt.fsf@prevas.dk>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 13 Apr 2026 07:16:21 -0600
-X-Gm-Features: AQROBzD0Y3fmqr0jUH1JA9S3qvZ5GfLwwC3yd-MFqAdfmQqbuMc85aEj4uhC-is
-Message-ID: <CAFLszTg2n4b9r3G8YK-E1OW-8+S_a1LwWEUghAnKyU1g4Rm_iw@mail.gmail.com>
-Subject: Re: [PATCH v3 2/2] kbuild: Use if_changed for font and splash .incbin
- rules
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: u-boot@lists.denx.de, Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Ion Agorria <ion@agorria.com>, Miquel Raynal <miquel.raynal@bootlin.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Sughosh Ganu <sughosh.ganu@arm.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] soc: qcom: cmd-db: Add optional support for device
+ programmer flows
+Content-Language: en-US
+To: Sumit Garg <sumit.garg@kernel.org>
+Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+References: <20260409-cmddb-v1-1-b10549b34133@oss.qualcomm.com>
+ <177608330028.1177412.9846637830549940803.b4-reply@b4>
+ <adznF-hzUtiZ6QaV@sumit-xelite>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <adznF-hzUtiZ6QaV@sumit-xelite>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,74 +109,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
 
-On Thu, 9 Apr 2026 at 01:01, Rasmus Villemoes <ravi@prevas.dk> wrote:
->
-> On Sun, Apr 05 2026, Simon Glass <sjg@chromium.org> wrote:
->
-> > The generated .S files for fonts and splash screens use .incbin with the
-> > full prerequisite path. When building with O= this bakes an absolute
-> > path into the .S file. If the build directory is later used on a
-> > different machine (e.g. in a container), the assembler cannot find the
-> > source file.
-> >
-> > Follow the existing DTB convention: rename the object targets to use
-> > compound suffixes (.ttf.o, .bmp.o), switch the pattern rules from
-> > direct $(call cmd,...) to FORCE + $(call if_changed,...), and register
-> > the new suffixes with intermediate_targets so that kbuild loads their
-> > .cmd files. This lets if_changed detect when the recorded command
-> > (including source paths) has changed and regenerate the .S file
-> > automatically.
-> >
-> > The EFI rule is left unchanged since its prerequisite is a generated
-> > file in the build directory, like the DTB and DTBO rules.
-> >
-> > Suggested-by: Rasmus Villemoes <ravi@prevas.dk>
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > Changes in v3:
-> > - Use if_changed with compound suffixes (.ttf.o, .bmp.o)
-> >
-> > Changes in v2:
-> > - Move U-Boot .incbin rules to Makefile.lib-u-boot first (previous patch)
-> > - Drop the EFI .incbin change since .efi files are generated, not source
-> > - Use per-file AFLAGS instead of modifying a_flags in Makefile.lib
-> >
->
-> > diff --git a/scripts/Makefile.build b/scripts/Makefile.build
-> > index e625f99986e..067c38c4cdd 100644
-> > --- a/scripts/Makefile.build
-> > +++ b/scripts/Makefile.build
-> > @@ -438,7 +438,9 @@ intermediate_targets = $(foreach sfx, $(2), \
-> >  targets += $(call intermediate_targets, .asn1.o, .asn1.c .asn1.h) \
-> >          $(call intermediate_targets, .dtb.o, .dtb.S .dtb) \
-> >          $(call intermediate_targets, .lex.o, .lex.c) \
-> > -        $(call intermediate_targets, .tab.o, .tab.c .tab.h)
-> > +        $(call intermediate_targets, .tab.o, .tab.c .tab.h) \
-> > +        $(call intermediate_targets, .ttf.o, .ttf.S) \
-> > +        $(call intermediate_targets, .bmp.o, .bmp.S)
->
-> Do these extra lines need to go here, causing a conflict with the next
-> kbuild sync, or could one instead add
->
->   targets += $(call intermediate_targets, .ttf.o, .ttf.S) \
->              $(call intermediate_targets, .bmp.o, .bmp.S)
->
-> in the new Makefile.lib-u-boot? I think that would make more sense. But
-> there may be some ordering of makefile includes that makes that not
-> posssible.
->
-> At the very least, I think the additions to targets should go in a new
-> 'targets +=', just to separate them a little better from upstream and
-> making it pure code addition instead of having to modify that last line
-> to add a continuation marker.
 
-OK I did the latter and updated the commit msg with why the former can't work.
+On 13/04/2026 14:52, Sumit Garg wrote:
+> On Mon, Apr 13, 2026 at 02:28:20PM +0200, Casey Connolly wrote:
+>> On 2026-04-09 21:15 +0530, Balaji Selvanathan wrote:
+>>> Add QCOM_COMMAND_DB_OPTIONAL Kconfig option to allow the Command DB
+>>> driver to bind successfully even when CMD DB data is missing or has
+>>> an invalid magic number.
+>>>
+>>> This is required for device programmer flows where U-Boot runs
+>>> without AOP (Always On Processor) being invoked. Since AOP is
+>>> responsible for populating CMD DB data, device programmer scenarios
+>>> lack valid CMD DB and would otherwise fail to boot.
+>>>
+>>> Normal boot flows should keep this disabled
+>>> as they require valid CMD DB data populated by AOP.
+>>
+>> Presumably this is only used for development and isn't meant to be a supported setup right? In that
+>> case how about just using a normal macro rather than a whole kconfig option, then you can just
+>> build with make CCFLAGS=-DQCOM_CMD_DB_OPTIONAL=1 or something?
+> 
+> Looks like the commit message lacks to describe the motivation here.
+> This patch is a preparatory step to allow U-Boot to be used as a device
+> flashing/provisioning tool. In that environment, there isn't TZ or HYP
+> stage running and U-Boot is expected to be launched in EL3.
 
-Regards,
-Simon
+Hmm I see, so we just rely on BROM to set up the necessary regulators
+and deal with the error spam? How does the firehose loader handle this
+(is it equivalent?).
 
->
-> Rasmus
+Maybe it would be best to send this along with the rest of the code
+necessary to enable that functionality, it would be good to get a better
+idea of the architecture here.
+
+Kind regards,
+
+> 
+>>
+>> Kind regards,
+>>
+>>>
+>>> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+>>> ---
+>>>  drivers/soc/qcom/Kconfig  | 16 ++++++++++++++++
+>>>  drivers/soc/qcom/cmd-db.c | 10 ++++++++++
+>>>  2 files changed, 26 insertions(+)
+>>>
+>>> diff --git a/drivers/soc/qcom/Kconfig b/drivers/soc/qcom/Kconfig
+>>> index 8243805e46a..239d87e044f 100644
+>>> --- a/drivers/soc/qcom/Kconfig
+>>> +++ b/drivers/soc/qcom/Kconfig
+>>> @@ -18,6 +18,22 @@ config QCOM_COMMAND_DB
+>>>  	  resource on a RPM-hardened platform must use this database to get
+>>>  	  SoC specific identifier and information for the shared resources.
+>>>  
+>>> +config QCOM_COMMAND_DB_OPTIONAL
+>>> +	bool "Allow operation without Command DB data"
+>>> +	depends on QCOM_COMMAND_DB
+>>> +	help
+>>> +	  Allow the Command DB driver to bind successfully even when CMD DB
+>>> +	  data is not populated or has an invalid magic number.
+>>> +
+>>> +	  This is useful for platforms where CMD DB is not populated by
+>>> +
+>>> +	  When enabled, missing CMD DB will generate warnings but allow boot
+>>> +	  to continue. Consumer drivers must handle cmd_db API failures
+>>> +	  gracefully by checking return values.
+>>> +
+>>> +	  If unsure, say N. Most production Qualcomm platforms require
+>>> +	  valid CMD DB data.
+>>> +
+>>>  config QCOM_RPMH
+>>>  	bool "Qualcomm RPMh support"
+>>>  	depends on QCOM_COMMAND_DB
+>>> diff --git a/drivers/soc/qcom/cmd-db.c b/drivers/soc/qcom/cmd-db.c
+>>> index d0a6047b8a6..b4682d811f7 100644
+>>> --- a/drivers/soc/qcom/cmd-db.c
+>>> +++ b/drivers/soc/qcom/cmd-db.c
+>>> @@ -252,8 +252,18 @@ static int cmd_db_bind(struct udevice *dev)
+>>>  
+>>>  	cmd_db_header = base;
+>>>  	if (!cmd_db_magic_matches(cmd_db_header)) {
+>>> +#ifdef CONFIG_QCOM_COMMAND_DB_OPTIONAL
+> 
+> Switch to IS_ENABLED(QCOM_COMMAND_DB_OPTIONAL) check instead.
+> 
+>>> +		log_warning("%s: CMD DB magic not found (0x%02x%02x%02x%02x)\n",
+>>> +			    __func__, cmd_db_header->magic[0], cmd_db_header->magic[1],
+>>> +			    cmd_db_header->magic[2], cmd_db_header->magic[3]);
+>>> +		log_warning("%s: CMD DB data unavailable, resource queries will fail\n",
+>>> +			    __func__);
+> 
+> Convert these warning rather to log_debug() since this will be under
+> special config check anyways.
+> 
+> -Sumit
+> 
+>>> +		cmd_db_header = NULL;
+>>> +		return 0;
+>>> +#else
+>>>  		log_err("%s: Invalid Command DB Magic\n", __func__);
+>>>  		return -EINVAL;
+>>> +#endif
+>>>  	}
+>>>  
+>>>  	return 0;
+>>>
+>>> ---
+>>> base-commit: f0000b4a57e9edf8ff8454b9056d767466dff57f
+>>> change-id: 20260409-cmddb-394afa003818
+>>>
+>>> Best regards,
+>>> -- 
+>>> Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+>>>
+>>>
+>>>
+>>
+>>
+
+-- 
+// Casey (she/her)
+
