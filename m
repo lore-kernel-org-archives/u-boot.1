@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 199E1F531CA
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 21:14:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B98D0F531CA
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 21:14:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C849A841A2;
-	Mon, 13 Apr 2026 23:13:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0C916841D7;
+	Mon, 13 Apr 2026 23:13:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Flr0fTy7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MdnDgtBx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7DFA839DF; Mon, 13 Apr 2026 19:14:05 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id DA4E9839DF; Mon, 13 Apr 2026 19:17:25 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A56678352B
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 19:14:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A7F6F8352B
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 19:17:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7dbd08144deso4305525a34.0
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 10:14:03 -0700 (PDT)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7d9bba96f7dso2476993a34.1
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 10:17:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1776100442; x=1776705242; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1776100642; x=1776705442; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UGX+FuQSX62GTdeNVwbqbE6TJBBSvPNJEezbTI/41f8=;
- b=Flr0fTy7/7LtSXOWn0UVXc8oKYbgMVOvuUOnkLxq++OdDyrb5AAJb31SLFvhV48Ueo
- vIh8DtjjPDBtrqeE7ge01q6OH2DbH+1FJLC1SRihOWk6pUWLbg4tXN7WPws8yBWZ39f1
- 1FNXbcQ65CsLZ1y+jr1P59yYj7mCw2y5Gvxbc=
+ bh=XmW0TU1hY4RlFRbmTRkD0EwADR7TRUrkLMwRUhiioLw=;
+ b=MdnDgtBxOkMH2k9rpC5YyGEdJlFQgZ2wMVRxiLGBcx85dqpdizJ3UsITa9r2dnTisP
+ 3DCPgaoNqUwDdNEqjHYijTyjT8Iqwc/l8ODjC5HP7HWY/OEUspZEbot8M/nkTvvn8AKo
+ aQKgRPePI4OwKjGMLG4QH941MQ0ogSroXKK3w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776100442; x=1776705242;
+ d=1e100.net; s=20251104; t=1776100642; x=1776705442;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UGX+FuQSX62GTdeNVwbqbE6TJBBSvPNJEezbTI/41f8=;
- b=g8JAN9Re7iHVG7ZX0N4i9XTFTH5A2SRk2hL3x/KEMXPvSwEleXtEAR/DTwN/dp71mm
- gx68JAn9ylp287/a8JG+XkASmW385wBRrlqRaiySLolOcr8hz4SfGLms8/srDAfbr7uG
- zCFeFrrtB8UmuHXwXBqHd68aPhTptJA8VV47qAnbauOhJeNaTE64ySwk0sIjtrKrXBVi
- 3ErDZTFeMEaBS5Oxe/K6T43ZYAizkrpGs8i0QZRbjd/TsBl9UcJqwZ78oXnTRJt6qooT
- EsMo6rP4nWlpkYXsTOPH3SpBRhfxpQEOV1HcdJTdrf+SHuh1dpDyyfJECSRnSAe6JQs4
- SijQ==
-X-Gm-Message-State: AOJu0YybJIBUauSoCzfCbIO1yzFklKf1ceIN1910fqlejV3PBTzT4E/c
- JyrXmvNttbzI+1ZHujm1GxL6TadY91kyW8kLNLlLoV64UmIZSmJ51FrB2EMbCP7C9Ts=
-X-Gm-Gg: AeBDieusQ2I0u3nLd5n1OPbXTgiVhs0kNS6HbTOnyQCzm0m9VgH11RooLKgqZHzxSPe
- FVJrmHMCu/BszuhTOjqcoZpslgjuz27Pso5atQecV3cuIiBOWHx7BZjuQx3yyiWfUyyjPSZ9feb
- /V5BC8mF283UsdUwcxi8eit4u0Qp+v9ul6StbJdacvPA7d4046gbySDrDwHO/hK+UAr82an9zom
- gIc08AmiorhtLEIf2FULqbN5QlDzw0IB55i0zR+dY9q9+PSBgM/HVOwx+PQoSwBHnQc/toma3S6
- iiwrvB3R91juH7EknyKoGNs2Ldc1zjj13iVo7EWSVJTjzlUWg6BXMSc3vwAiZ8GZdnk6eVLiZWH
- 9nwZxr7aSeT/DRfYhrMqeakrIrCpWbWW942kpYv5y/7KDNnLNyoxaNDlnlbQ9Djp/k6dLBdoH8/
- HrAl+Z5YTukPqKmyEMLXrQk2TOLhXTSxdBTM8zPmCP3YA0EoNoQSwsSnlqtZJZKlcLoxYdMcHyK
- xWbLJ8vYlftKjxbHygVPf5CFG1c8qNd1U4XTiK/y7hT8GgMrEI=
-X-Received: by 2002:a05:6820:f013:b0:68e:1120:d4c0 with SMTP id
- 006d021491bc7-68e1120d6demr4214115eaf.15.1776100442272; 
- Mon, 13 Apr 2026 10:14:02 -0700 (PDT)
+ bh=XmW0TU1hY4RlFRbmTRkD0EwADR7TRUrkLMwRUhiioLw=;
+ b=N0Bphfw9TBqJsp3z8QdQgWqQC6iqcGzrTPnQGs1eREQ8AwO+PMvpmaVyETu3thRusF
+ cNuIRl5iD2zooIuKcoqoawxwA0qTlLhebUwO4llili2IgWjoLNQjutvRCGzaUdQGwj2r
+ DbTanCMxTaVpu1yDtr2w0FqhI+xi6mkXb+Ctsk3xt6NKeIDeRWTwZ4aiyR4yuzpXnN0u
+ gD/vzS/+QkTHdj2n5mc4WT9j5y9MCXZDfy5T22WbF9RX/PU8JIoGVJvL8qMawNL5Pf5z
+ 9W7rTZ1EwrDJwx5/H6GQ3M5NI6Qc+V712S7gAZhnsdWC1klIQVThIkMsLiig1+brKO5T
+ yL4w==
+X-Gm-Message-State: AOJu0YzUYZEATyaIBd7Mp0W9yCkrcnmFAjSiiAl0ju4jnry1FUDP2RJy
+ Xvc31P4OP0gLuaGLuycvHZ5Sx+wZqtf/T7V7pkUg+on8fqH6qUbA/k9bQ7xmc17swgk=
+X-Gm-Gg: AeBDiesGWp+7lvqyoi89QQuVpJvGKaoZH4oQvW7JmZtkBGlmGFridWHCY19hz3i0HYz
+ 8QtgHkMsoHYgsAuJ6DSupSC+HXzrCrEuF5yDPTwoyQ51ASWO8GqZIiLcbr9KdA5R3/yUKuJOWcH
+ stl/hwZcsOFTlPZ63vCfnaXbC3wDSX65wkEc2ApRg/iQMFZAcpDU6sZonmjlUNk5Kimz0C8dMyu
+ BRQjmozu4s6zl7uB73DGJUn+GYs9PGXAbTRK3D5hSOALCyNFntDxAWSSgiyyqZRuZ0cWy6uIwt0
+ Qu7blVtxZxab6Dn0ysGxhLKq5b8RGpfVf6VtTIN+zUhGB9GKYhm+Lb0F4Wfe/gb6buWs6fJA/rq
+ DvOqip6htPMEXN1U4ze2nWzLe8/OABCkulCu1aloYzcryGBJaVX49mjDC19MVp5T1SNADdvILGz
+ +EgXMHzUBaS7B8OUr1waYwK7vWVrk/7Q5/V+ZopHj8C0GJsRs1OvHtlWAj4X/UD7SpyyQeFKg7z
+ 4og5y+vHB2FkGRr3ZUcCG8oxhSAX9DPaMehUKNqdT6dH3HJeto=
+X-Received: by 2002:a05:6820:2d0b:b0:68e:2616:f61c with SMTP id
+ 006d021491bc7-68e2616f82bmr3623528eaf.25.1776100642344; 
+ Mon, 13 Apr 2026 10:17:22 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-68bc82ea711sm5942693eaf.4.2026.04.13.10.13.59
+ 006d021491bc7-68bcacc9babsm6385330eaf.10.2026.04.13.10.17.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Apr 2026 10:14:01 -0700 (PDT)
-Date: Mon, 13 Apr 2026 11:13:57 -0600
+ Mon, 13 Apr 2026 10:17:21 -0700 (PDT)
+Date: Mon, 13 Apr 2026 11:17:17 -0600
 From: Tom Rini <trini@konsulko.com>
 To: michael.srba@seznam.cz
 Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
@@ -102,15 +102,16 @@ Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  Alice Guo <alice.guo@nxp.com>, George Chan <gchan9527@gmail.com>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
  Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>
-Subject: Re: [PATCH v2 03/10] drivers: allow clk_stub and spmi in SPL
-Message-ID: <20260413171357.GZ41863@bill-the-cat>
+Subject: Re: [PATCH v2 06/10] mach-snapdragon: Kconfig: changes / additions
+ to support SPL
+Message-ID: <20260413171717.GA41863@bill-the-cat>
 References: <20260411-qcom_spl-v2-0-9609557cf562@seznam.cz>
- <20260411-qcom_spl-v2-3-9609557cf562@seznam.cz>
+ <20260411-qcom_spl-v2-6-9609557cf562@seznam.cz>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="eu57DJxPlBOBa/6p"
+ protocol="application/pgp-signature"; boundary="VAvJhPINpYfgA6k8"
 Content-Disposition: inline
-In-Reply-To: <20260411-qcom_spl-v2-3-9609557cf562@seznam.cz>
+In-Reply-To: <20260411-qcom_spl-v2-6-9609557cf562@seznam.cz>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-Mailman-Approved-At: Mon, 13 Apr 2026 23:13:56 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -130,94 +131,130 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---eu57DJxPlBOBa/6p
+--VAvJhPINpYfgA6k8
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Apr 11, 2026 at 02:00:08AM +0200, michael.srba@seznam.cz wrote:
+On Sat, Apr 11, 2026 at 02:00:11AM +0200, michael.srba@seznam.cz wrote:
+
 > From: Michael Srba <Michael.Srba@seznam.cz>
 >=20
-> Only Makefile and Kconfig changes necessary.
+> An SoC to target has to be selected, e.g. SPL_TARGET_SDM845.
+> This will select reasonable defaults and enable per-SoC linker
+> script (if required).
 >=20
 > Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 > ---
->  drivers/Makefile      | 2 +-
->  drivers/clk/Kconfig   | 6 ++++++
->  drivers/spmi/Kconfig  | 6 ++++++
->  drivers/spmi/Makefile | 2 +-
->  4 files changed, 14 insertions(+), 2 deletions(-)
+>  arch/arm/Kconfig                 | 31 +++++++++++++++++++++++++++-
+>  arch/arm/mach-snapdragon/Kconfig | 44 ++++++++++++++++++++++++++++++++++=
+------
+>  2 files changed, 68 insertions(+), 7 deletions(-)
 >=20
-> diff --git a/drivers/Makefile b/drivers/Makefile
-> index 43d0ba33281..477718ce89a 100644
-> --- a/drivers/Makefile
-> +++ b/drivers/Makefile
-> @@ -35,6 +35,7 @@ obj-$(CONFIG_$(PHASE_)RAM) +=3D ram/
->  obj-$(CONFIG_$(PHASE_)RTC) +=3D rtc/
->  obj-$(CONFIG_$(PHASE_)SERIAL) +=3D serial/
->  obj-$(CONFIG_$(PHASE_)SPI) +=3D spi/
-> +obj-$(CONFIG_$(PHASE_)SPMI) +=3D spmi/
->  obj-$(CONFIG_$(PHASE_)TIMER) +=3D timer/
->  obj-$(CONFIG_$(PHASE_)VIRTIO) +=3D virtio/
->  obj-$(CONFIG_$(PHASE_)DM_MAILBOX) +=3D mailbox/
-> @@ -106,7 +107,6 @@ obj-$(CONFIG_DM_REBOOT_MODE) +=3D reboot-mode/
->  obj-y +=3D rtc/
->  obj-y +=3D scsi/
->  obj-y +=3D sound/
-> -obj-y +=3D spmi/
->  obj-y +=3D watchdog/
->  obj-$(CONFIG_QE) +=3D qe/
->  obj-$(CONFIG_U_QE) +=3D qe/
-> diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
-> index c2da7b3938b..888ea08cead 100644
-> --- a/drivers/clk/Kconfig
-> +++ b/drivers/clk/Kconfig
-> @@ -114,6 +114,12 @@ config CLK_STUB
->  	  Enable this to provide a stub clock driver for non-essential clock
->  	  controllers.
-> =20
-> +config SPL_CLK_STUB
-> +	bool "Stub clock driver"
-> +	depends on SPL_CLK
-> +	help
-> +	  Enable stub clock driver in SPL
-> +
->  config CLK_BCM6345
->  	bool "Clock controller driver for BCM6345"
->  	depends on CLK && ARCH_BMIPS
-> diff --git a/drivers/spmi/Kconfig b/drivers/spmi/Kconfig
-> index ab4878ebae4..f3d91e0b754 100644
-> --- a/drivers/spmi/Kconfig
-> +++ b/drivers/spmi/Kconfig
-> @@ -8,6 +8,12 @@ config SPMI
->  	  SPMI (System Power Management Interface) bus is used
->  	  to connect PMIC devices on various SoCs.
-> =20
-> +config SPL_SPMI
-> +	bool "Enable SPMI bus support in SPL"
-> +	depends on SPL_DM
-> +	help
-> +	  Select this to enable SPMI bus support in SPL
-> +
->  config SPMI_MSM
->  	bool "Support Qualcomm SPMI bus"
->  	depends on SPMI
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index 03416c55265..8490e336516 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -1138,9 +1138,38 @@ config ARCH_SNAPDRAGON
+>  	select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
+>  	select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
+>  	select SYSRESET
+> -	select SYSRESET_PSCI
+> +	select SYSRESET_PSCI if !SPL
+>  	select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
+>  	select MMU_PGPROT
+> +	select SUPPORT_SPL
+> +	select ARMV8_SPL_EXCEPTION_VECTORS if SPL
+> +	select ENABLE_ARM_SOC_BOOT0_HOOK if SPL
+> +	select SPL_DM if SPL
+> +	select SPL_DM_GPIO if SPL
+> +	select SPL_DM_PMIC if SPL
+> +	select SPL_DM_USB_GADGET if SPL
+> +	select SPL_ENV_SUPPORT if SPL
+> +	select SPL_GPIO if SPL
+> +	select SPL_HAS_BSS_LINKER_SECTION if SPL
+> +	select SPL_LIBCOMMON_SUPPORT if SPL
+> +	select SPL_LIBDISK_SUPPORT if SPL
+> +	select SPL_LIBGENERIC_SUPPORT if SPL
+> +	select SPL_MMC if SPL
+> +	select SPL_OF_REAL if SPL
+> +	select SPL_OF_CONTROL if SPL
+> +	select SPL_PINCONF if SPL
+> +	select SPL_PINCTRL if SPL
+> +	select SPL_PINCTRL_FULL if SPL
+> +	select SPL_PINCTRL_GENERIC if SPL
+> +	select SPL_PINCONF_RECURSIVE if SPL
+> +	select SPL_PINMUX if SPL
+> +	select SPL_SPRINTF if SPL
+> +	select SPL_STRTO if SPL
+> +	select SPL_USB_GADGET if SPL
+> +	imply DM_EVENT if USB_DWC3_GENERIC || SPL_USB_DWC3_GENERIC
+> +	imply SPL_EVENT if SPL_USB_DWC3_GENERIC
+> +	imply OF_LIVE if USB_DWC3_GENERIC
+> +	imply SPL_OF_LIVE if SPL_USB_DWC3_GENERIC
+>  	imply OF_UPSTREAM
+>  	imply CMD_DM
+>  	imply DM_USB_GADGET
 
-You need to add SPL_SPMI_MSM here, and then update the Makefile to use
-$(PHASE_) as well.
+This part looks good.
+
+> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/=
+Kconfig
+> index 976c0e35fce..74d687ceee2 100644
+> --- a/arch/arm/mach-snapdragon/Kconfig
+> +++ b/arch/arm/mach-snapdragon/Kconfig
+> @@ -11,18 +11,12 @@ config SYS_VENDOR
+>  	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD>
+>  	  will be used as the custom board directory.
+> =20
+> -config SYS_MALLOC_LEN
+> -	default 0x10000000
+> -
+>  config SYS_MALLOC_F_LEN
+>  	default 0x2000
+> =20
+>  config SPL_SYS_MALLOC_F
+>  	default y
+> =20
+> -config SPL_SYS_MALLOC_F_LEN
+> -	default 0x2000
+> -
+>  config SYS_MALLOC_LEN
+>  	default 0x800000
+> =20
+> @@ -45,4 +39,42 @@ config SYS_CONFIG_NAME
+>  	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
+>  	  will be used for board configuration.
+> =20
+> +config SPL_SHARES_INIT_SP_ADDR
+> +	default n
+> +
+> +config SPL_HAVE_INIT_STACK
+> +	default y
+> +
+> +# SPL targets
+> +
+> +config SPL_TARGET_SDM845
+> +	bool "Set reasonable default values for running SPL in SRAM on sdm845 d=
+evices"
+
+This namespace is confusing and so shouldn't be used. Does SDM845 get
+used without SPL? We should probably follow the convention of adding a
+new defconfig of <whatever board>_spl_defconfig, that enables the
+options as needed.
 
 --=20
 Tom
 
---eu57DJxPlBOBa/6p
+--VAvJhPINpYfgA6k8
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCad0kVQAKCRAr4qD1Cr/k
-CvMRAQChpDZWXd9HGXKafsYGQUFEs3tBVy7I0K5VXqfJ/4iy+wEA8s7G+JViEZla
-8WOiRO7RWTJJ1//dosIErGRM/ToLagc=
-=AenQ
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCad0lHQAKCRAr4qD1Cr/k
+CsBfAP9Z5DVNqY549rvOWQtLLfbrtkFB4D4VlveTTUvkJ0604gEAiZd8rVHOFYXE
+OdGlN3xG87JmGhgl+PiySkCcWj0uzQ4=
+=S8Rz
 -----END PGP SIGNATURE-----
 
---eu57DJxPlBOBa/6p--
+--VAvJhPINpYfgA6k8--
