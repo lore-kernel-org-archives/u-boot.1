@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFEA7F34C51
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 13:01:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BF96F34C49
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 13:01:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A85E8841FF;
-	Mon, 13 Apr 2026 15:01:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2D8DE8421D;
+	Mon, 13 Apr 2026 15:01:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UOuwX+7n";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dG6zK2aZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BC2D841D7; Mon, 13 Apr 2026 15:01:31 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 08BEF839D5; Mon, 13 Apr 2026 15:01:34 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 692EC84198
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 15:01:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 759DA841BE
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 15:01:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7dbca22dbfeso2251754a34.1
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 06:01:29 -0700 (PDT)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7dbd2a0211bso3198715a34.0
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 06:01:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776085287; x=1776690087; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776085289; x=1776690089; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rJohr6U/rQ1BWdImYqelCwf68CJzOQHRgvLd10+2QfE=;
- b=UOuwX+7nowEMeIWu0/rnxBPMDTvG+zKjxm2JJtQ9jc6pjv2v4jJqkc6jqIyFdDunL0
- 950Z96yvtNIE6J6DhYrcYySrBlnGjNzzWnRRB9lXLB+1gV1o/y3UMhnU3hxHSWxNdBLh
- qlbwrBGeQve5Fb/VCCJIVvflQPl1itJrlYYuI=
+ bh=mKKMwJEXNccMVRbjf/M/Cyhj42/TW3hLuqRloykcaGc=;
+ b=dG6zK2aZAzA9hJTbOqcULVGY8FdyDKzE/kFM1S7rZXbcTYDtYhDhXfrOcSX2mRnwQE
+ +0LxFpPVKsDHCri4Tjn1rjAh0bA/KoKgDsfhJLrQyspeO/ToOOVLZ4/D6MW0tIS67AHU
+ Rd22f5TEbUSCAd34xxC6V9LmRIlLbbPx0koSY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776085287; x=1776690087;
+ d=1e100.net; s=20251104; t=1776085289; x=1776690089;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=rJohr6U/rQ1BWdImYqelCwf68CJzOQHRgvLd10+2QfE=;
- b=VCvakMqV52aYsW/WhO/nkYFO0Dvz1rbHFozBMrFbPlTqqqXJU+i/R51JcMqJUCBnjU
- /Fo/OjXjG5Ar+E3ULOAlwAX14lSWF5y/gFaLlQQsQmmFP4noCHlTuJCsNxrksBxiw/vl
- C8aahB5qZM7hdkYOW9TUXDCVV2KGiB09Ilkv9hxxQ19x5JtV8Zeobcl51dKJ2kgt+aKG
- o7lN3yhpObTclVvn2eyYsqeEyR7gQNPEi2XYRisKuSu7eUUUTZoKd9xugVI+3Ya9IjkK
- hDo2QKzZx1PeZjx+c1L4+5nz0X1t/LmwXNM0ibh0QrWAMUQIXqJxy3GxkB7PLRPxdR/y
- 2pHg==
-X-Gm-Message-State: AOJu0YxLPM9e39lepgzt481WGbHpvrNcipNtoHdjpCre8bdO5eQAIINC
- VH2PX1AEeJP4Nm2Tkhszm7lTMQD0M7h3+xBhvqZTLx/eKH+SCgifbKOSXMJ4txQ7XquLMyQx76c
- ly65EKw==
-X-Gm-Gg: AeBDiesv44PynMG1ECIQVF5P+ZTmlDkH2PsMOKw7Dwaw3RaAOIDuHA5tXZswDFGMOX1
- prsERiSWeq9RtphfZrfRAuwjnCQFOHG27wc+MkVOiwzx9V0bLCcovcCi15mszbufDybaav11yhC
- 6zk7mB/8VhMds4ed3ecwud06r0eShuqqZWgHm9R2071aXLz1lkk7IumpQ37PwDc889wVIcRNZ67
- S8vIKlbYEqDc7TOKSC7gesDq8Vku7FBqoVae5RSZj8QvnrS4DguRt45Tb+/EZGBsU9AUyKdZP5o
- wjOpSK3BAKB5g6gjcGuK0fcdDp5/mPYpMsvcXWnFU4Ksgv2wBKXAaNdyTp24dYuVS0HI7bAvd+0
- OQKP1jFXWvUZ2EzhkV395gGcWnqRBEKfiFsu2np6j4UqkpLPo/rV0XzBRuubYOeaP5Kv02M+42H
- BBYQ+WFRgKdw/NQ8d7cg==
-X-Received: by 2002:a05:6830:675a:b0:7dc:3db6:eee with SMTP id
- 46e09a7af769-7dc3db62270mr3433149a34.20.1776085287283; 
- Mon, 13 Apr 2026 06:01:27 -0700 (PDT)
+ bh=mKKMwJEXNccMVRbjf/M/Cyhj42/TW3hLuqRloykcaGc=;
+ b=AuRhZHJys+Y6EQnZCToSeN87pg9okkq5+U+vRs0O7/wXfmfaUMl1XT2G2wEqdDzIDW
+ z2dBd6MInfxshqMSscVTVTMS3NnB5nPAZHMLe7+An7YbaRLGPHwnbQnF6tg32bTJQ3Qh
+ Pfeyw1iqc7X2VGppe/7jRrkUWkigJRIqhd8eqWLW1yP2sYcyq6dH1NaZ8+KHQ1i+lDPB
+ V7Cb7yep5BkzEDhJ3Nb8/dmRMGbkNtNunV+dl/XESog5NDEvKR7uMbG0+KteOKdViYgY
+ eckRwpGLFdsWipWlgYDieQqxeeHXEVuBnS+DVc7LDXvUQ17Ppni79nKX8ePDIJfpEoL8
+ 6GOw==
+X-Gm-Message-State: AOJu0YywpazXAl8ZS4jzh5JaFF3vR1XgX9pDiG1URXhJowHQPo7du7je
+ Cm2Yb1m5lTfhkg7XA6j4AbqBY33e1Kr6SWNkwTa6J+zp9mPr15Bl1jLowhVMtSCtIoichu6Wf9V
+ qqZNTHA==
+X-Gm-Gg: AeBDieuTfpULhWs5XXQRaIUlSKN0/mWINicU01JroG2sRnm5xS8CilXHx2E5z+EzVTc
+ ruNoOczLDuBIlhlB9HOcKukOgTi4fxDw3En6YmvyXel7FIDT3iKRqMigaR7vy1KOTka8ciaRvtb
+ QpR+OPf82YHLNPSD1f6jDDuAZpL6fwMnK7t6gBJFsuvbiIeKIO4TdLQ2bDmzX1alPNDhh+ESGnD
+ qiNc/cleRWUoWHoaMMhKtF8ksDL+PGuq5OHHnqjBIQyGR1Hrz7nqOOUtp4Oo7l8dSmWmjviTxZj
+ doem3Ob2YblLyqg7YPS6Z7N91bejtNQru8Rn+S0EsM7CKhIdLsEUuvYJBd9D8Y+cPpQBaZqR7Jd
+ 1ukawTeqEEkQ7XIkfk+afTD7pEefJ3C4Okn+dKo1LWl4ySRZKfZ3gMBvuPe61w1gMIo1Ne2Em4M
+ 9pettfsvLYf6AUkllCyQ==
+X-Received: by 2002:a05:6830:2684:b0:7db:a832:b329 with SMTP id
+ 46e09a7af769-7dc27f02d10mr7217155a34.21.1776085289411; 
+ Mon, 13 Apr 2026 06:01:29 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7dc2696532bsm8369144a34.21.2026.04.13.06.01.25
+ 46e09a7af769-7dc2696532bsm8369144a34.21.2026.04.13.06.01.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Apr 2026 06:01:26 -0700 (PDT)
+ Mon, 13 Apr 2026 06:01:28 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 2/8] test: fit: Avoid restarting U-Boot
-Date: Mon, 13 Apr 2026 06:59:53 -0600
-Message-ID: <20260413130007.1987326-3-sjg@chromium.org>
+Subject: [PATCH v3 3/8] test: Rename test_fit() to test_fit_base()
+Date: Mon, 13 Apr 2026 06:59:54 -0600
+Message-ID: <20260413130007.1987326-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260413130007.1987326-1-sjg@chromium.org>
 References: <20260413130007.1987326-1-sjg@chromium.org>
@@ -94,120 +94,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We don't actually need to use the test FDT as the control FDT. It slows
-down the test since U-Boot needs to be restarted each time.
+The current name is uses as a root name by a few other tests, such as
+test_fit_ecdsa() which makes it hard to run just this test.
 
-Instead of restarting, update the test to clear memory before it loads
-the FIT.
-
-Rename the data-variable to fdt_data since is it no-longer the control
-FDT.
+Rename it to test_fit_base()
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/py/tests/test_fit.py | 29 ++++++++---------------------
- 1 file changed, 8 insertions(+), 21 deletions(-)
+ test/py/tests/test_fit.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/test/py/tests/test_fit.py b/test/py/tests/test_fit.py
-index 71c98be27cf..4a19bd5cb49 100755
+index 4a19bd5cb49..4c7d400bc6a 100755
 --- a/test/py/tests/test_fit.py
 +++ b/test/py/tests/test_fit.py
-@@ -104,6 +104,7 @@ base_fdt = '''
- # then run the 'bootm' command, then save out memory from the places where
- # we expect 'bootm' to write things. Then quit.
- base_script = '''
-+mw.b 0 0 160000
- host load hostfs 0 %(fit_addr)x %(fit)s
- fdt addr %(fit_addr)x
- bootm start %(fit_addr)x
-@@ -260,7 +261,7 @@ def test_fit(ubman):
-           - run code coverage to make sure we are testing all the code
-         """
-         # Set up invariant files
--        control_dtb = fit_util.make_dtb(ubman, base_fdt, 'u-boot')
-+        fdt_data = fit_util.make_dtb(ubman, base_fdt, 'u-boot')
-         kernel = fit_util.make_kernel(ubman, 'test-kernel.bin', 'kernel')
-         ramdisk = make_ramdisk('test-ramdisk.bin', 'ramdisk')
-         loadables1 = fit_util.make_kernel(ubman, 'test-loadables1.bin', 'lenrek')
-@@ -284,7 +285,7 @@ def test_fit(ubman):
-             'fdt' : fdt,
-             'fdt_out' : fdt_out,
-             'fdt_addr' : 0x80000,
--            'fdt_size' : filesize(control_dtb),
-+            'fdt_size' : filesize(fdt_data),
-             'fdt_load' : '',
+@@ -119,7 +119,7 @@ host save hostfs 0 %(loadables2_addr)x %(loadables2_out)s %(loadables2_size)x
+ @pytest.mark.boardspec('sandbox')
+ @pytest.mark.buildconfigspec('fit')
+ @pytest.mark.requiredtool('dtc')
+-def test_fit(ubman):
++def test_fit_base(ubman):
+     def make_fname(leaf):
+         """Make a temporary filename
  
-             'ramdisk' : ramdisk,
-@@ -317,12 +318,10 @@ def test_fit(ubman):
- 
-         # First check that we can load a kernel
-         # We could perhaps reduce duplication with some loss of readability
--        ubman.config.dtb = control_dtb
--        ubman.restart_uboot()
-         with ubman.log.section('Kernel load'):
-             output = ubman.run_command_list(cmd.splitlines())
-             check_equal(kernel, kernel_out, 'Kernel not loaded')
--            check_not_equal(control_dtb, fdt_out,
-+            check_not_equal(fdt_data, fdt_out,
-                             'FDT loaded but should be ignored')
-             check_not_equal(ramdisk, ramdisk_out,
-                             'Ramdisk loaded but should not be')
-@@ -351,10 +350,9 @@ def test_fit(ubman):
-         with ubman.log.section('Kernel + FDT load'):
-             params['fdt_load'] = 'load = <%#x>;' % params['fdt_addr']
-             fit = fit_util.make_fit(ubman, mkimage, base_its, params)
--            ubman.restart_uboot()
-             output = ubman.run_command_list(cmd.splitlines())
-             check_equal(kernel, kernel_out, 'Kernel not loaded')
--            check_equal(control_dtb, fdt_out, 'FDT not loaded')
-+            check_equal(fdt_data, fdt_out, 'FDT not loaded')
-             check_not_equal(ramdisk, ramdisk_out,
-                             'Ramdisk loaded but should not be')
- 
-@@ -363,7 +361,6 @@ def test_fit(ubman):
-             params['ramdisk_config'] = 'ramdisk = "ramdisk-1";'
-             params['ramdisk_load'] = 'load = <%#x>;' % params['ramdisk_addr']
-             fit = fit_util.make_fit(ubman, mkimage, base_its, params)
--            ubman.restart_uboot()
-             output = ubman.run_command_list(cmd.splitlines())
-             check_equal(ramdisk, ramdisk_out, 'Ramdisk not loaded')
- 
-@@ -375,7 +372,6 @@ def test_fit(ubman):
-             params['loadables2_load'] = ('load = <%#x>;' %
-                                          params['loadables2_addr'])
-             fit = fit_util.make_fit(ubman, mkimage, base_its, params)
--            ubman.restart_uboot()
-             output = ubman.run_command_list(cmd.splitlines())
-             check_equal(loadables1, loadables1_out,
-                         'Loadables1 (kernel) not loaded')
-@@ -389,21 +385,12 @@ def test_fit(ubman):
-             params['fdt'] = make_compressed(fdt)
-             params['ramdisk'] = make_compressed(ramdisk)
-             fit = fit_util.make_fit(ubman, mkimage, base_its, params)
--            ubman.restart_uboot()
-             output = ubman.run_command_list(cmd.splitlines())
-             check_equal(kernel, kernel_out, 'Kernel not loaded')
--            check_equal(control_dtb, fdt_out, 'FDT not loaded')
-+            check_equal(fdt_data, fdt_out, 'FDT not loaded')
-             check_not_equal(ramdisk, ramdisk_out, 'Ramdisk got decompressed?')
-             check_equal(ramdisk + '.gz', ramdisk_out, 'Ramdist not loaded')
- 
- 
--    # We need to use our own device tree file. Remember to restore it
--    # afterwards.
--    old_dtb = ubman.config.dtb
--    try:
--        mkimage = ubman.config.build_dir + '/tools/mkimage'
--        run_fit_test(mkimage)
--    finally:
--        # Go back to the original U-Boot with the correct dtb.
--        ubman.config.dtb = old_dtb
--        ubman.restart_uboot()
-+    mkimage = ubman.config.build_dir + '/tools/mkimage'
-+    run_fit_test(mkimage)
 -- 
 2.43.0
 
