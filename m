@@ -4,147 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 278F6EBFD14
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 08:13:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEF4AEBFD16
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 08:34:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65DCC83B99;
-	Mon, 13 Apr 2026 10:13:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 5245E839D5;
+	Mon, 13 Apr 2026 10:34:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="v9inzxsy";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="CDmBFQiI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D3E4841FF; Mon, 13 Apr 2026 10:13:50 +0200 (CEST)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
+ id 3A467839DF; Mon, 13 Apr 2026 10:34:00 +0200 (CEST)
+Received: from BN1PR04CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A77CB841C2
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 10:13:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 04B848352B
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 10:33:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
+ spf=pass smtp.mailfrom=tien.fong.chee@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rdTOm4//ZDCgcLeLYxh/so/jzO9kXwZDePn3pFa0QNXfMkXGxd41JLgNFROttCASjY1LflRqaTZxOCl5+qrtFSxT+mVZCnfADeUS4v8ptsO42xA62rAb4+ENsWpCdidFwi3CiHMCNE4XGO5rHlkTl6v1VQlJXzrIzBYEkpFJ8qOf1cChI1qDUL8cW1XLO3zReu/M5tku3c28CnK0S87Dd4lghv4GjVDFvyY/Wk28BMtz8PrNZJ/1tM3hH8anF4x1HovLJuIH99vEed1s2gv7uG8zRMKAm6xgv4b+X/4+RWIVIZzVnm3glV8wgHD5m91FaEUtByba/EOLkvRa6oMlig==
+ b=nwVYGH8jEszTkJ8x6ynBbXlOJyv+lF+fEdd6KYnP6EjEcPgClFw8qKwYw+mCh6wrPguW68X8F52j92L6kzTAZaJfBVjRTPKDWCMCk8YGh6+TEid9LBsXQCQyZnkynY1XiLeRqpYtk4xK/vihfL5BLkpz9If+q3a2SfL3pLIWGy+PbUi/Ear9IjWxHAs6MwLDZdXMjXctPY2CCPWo61s2nGOa/C2AwklAMRhyJuXY3VYNF21j+OX0xiKiO2ibKtULbJWLnWrPuNJK3qCuSt+3nA61oFrdKpmmlmMLNelvneamMPZBj3kV85qE7c9YHUmcLt0CX3mSvfVJ/8n30nS5rA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=b6RDVbr/A50BH56noEFDFUzQLRSAIvJ82l0ps4B7458=;
- b=vfAoMtgos0ZLzxC92MXcqCaJgH9hP8V82bpHkL2wOtE7JMlxWtTRI8gtRH8e+wQ2U0eUfY9j4ittYL5TjzANuMJNS2ybjsIT6DEIExu5vEwIEPowJpmjDo9eeYkTm0/ZjRfvs0GRith6FGPas8p8Z40IM1uDNCpvCkcymFFYvKsCQvaBGhyFkzzIm/3/uAknPdPs0IX+gKp2yoHz11JxIzv43sc/QHvCB+7EkbzKnm2hay/QjA8TIrSO8rYWUdNQjx2awDnr0h/WUwJin/MrKXZenktC50uNc8y0qv9Vf1ns7eYPKpnsq82yHw+fyRKTjNazAAvPrztwbUx8CRcVtg==
+ bh=dV/a5ocEKnTQJtwFhBKS0teJO5YUOOoIf8yZp3pUZHg=;
+ b=icnQUnCtQpFoaQGpxySctirk46JRRy5j46ldCGcwmuOqMGbIa1CfzW1hPiQf/uyJaAT/l/s9yff7S7dDsOIHFjEfOZhRQoZwD/IHoYmWbk71R67q197mzE6WuLRNKYGoKsDcoUeTLVblbeBlQ76bO3FCNgarL6oagKCe1B7YenGOmbBC8/uG+yDxFVdmCgY6anBo9GzoqZLqeAFTargZzTALSOjObqBPKDgMuvjVPSXaQeZzGv0yXbnhHoixzABFfO4+AsuYF6HAgO/1rdS9wUVLF0hEZguGawVckYqsVWKue8lrHUGPiv4yQNztR5z9QxEZOmFmCVAlio/weKcP+Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=b6RDVbr/A50BH56noEFDFUzQLRSAIvJ82l0ps4B7458=;
- b=v9inzxsybSm+hF78RJ8qL3n3/tL/8SakyURImPQi6fU5IsAl/HD0F8Tg1QLpaYMkismJdJL6nbOGvjunrtSE75kKoUAE+jjH5iKHxjBKZ8rMZq54Y+8b73g+s2zIeg30ASf5Z2FoHE64DF4RZ3/AwLbx+fXoOAU5zFHv1vEosbkbSITovebhz9XFLDOx65ENxP+6u71rrxzZRc+hjSr6pSHsRlM5maiPU9+IJWk0V8vxWRQ2N/Qtlqkj0BmZ3wrqdZ97dUEY0ruWAtQnwhCKAX0ll49hD1aqkRWZeqi3Tg2qwsB0oH87twlvS6jBx4bOn6LnUfST3S54RlllKIAPBQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
- by DU4PR04MB10483.eurprd04.prod.outlook.com (2603:10a6:10:565::15)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=dV/a5ocEKnTQJtwFhBKS0teJO5YUOOoIf8yZp3pUZHg=;
+ b=CDmBFQiI5MXj6TTOxdw5/mx4x4D3sGNFVjLEY3FQpJ2xVfGcoH/Sx/afEk2TqOL45bdXsPaas52GiZgntD7z3PMELDnq0B/0nmeu+N0vR0sw8/NRanpepU0EVmgP81OFZMfZsasPtGNq2nZdNhDJkS90rToF7n3cyCHSbrdkSSih83pBLLYR767NRvewYmldDpuFu9BshPE5SGQZavZ2DWaX22oOLIX/R7pDhYRJcQXmLRZkeJG93TOcp0F7inSIFG4BK6xmvJv4vHpm7uxSuEUMV4iwmUi2QLQFX/QGiH/2pqt0PXRGaDQv9uCk74pUtUSLMRTYNgkSbl06lLcNmA==
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
+ by DS2PR03MB8393.namprd03.prod.outlook.com (2603:10b6:8:333::16) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Mon, 13 Apr
- 2026 08:13:42 +0000
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::cf3:c5b0:7a0c:d11b]) by PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::cf3:c5b0:7a0c:d11b%5]) with mapi id 15.20.9769.046; Mon, 13 Apr 2026
- 08:13:42 +0000
-From: alice.guo@oss.nxp.com
-Date: Mon, 13 Apr 2026 16:15:40 +0800
-Subject: [PATCH v2 2/2] net: fsl_enetc: Add support for i.MX952
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260413-netc-v1-2-8670e5ce2d49@nxp.com>
-References: <20260413-netc-v1-0-8670e5ce2d49@nxp.com>
-In-Reply-To: <20260413-netc-v1-0-8670e5ce2d49@nxp.com>
-To: Ye Li <ye.li@nxp.com>, Tim Harvey <tharvey@gateworks.com>, 
- Marek Vasut <marex@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
- u-boot@lists.denx.de
-Cc: Jerome Forissier <jerome.forissier@arm.com>, 
- Tom Rini <trini@konsulko.com>, Michael Walle <mwalle@kernel.org>, 
- Vladimir Oltean <vladimir.oltean@nxp.com>, 
- Heiko Thiery <heiko.thiery@gmail.com>, Clark Wang <xiaoning.wang@nxp.com>, 
- Thomas Schaefer <thomas.schaefer@kontron.com>, 
- Christian Marangi <ansuelsmth@gmail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Robert Marko <robert.marko@sartura.hr>, Yao Zi <me@ziyao.cc>, 
- Peng Fan <peng.fan@nxp.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Jacky Bai <ping.bai@nxp.com>, Alice Guo <alice.guo@nxp.com>
-X-Mailer: b4 0.15.2
-X-ClientProxiedBy: SG2PR02CA0041.apcprd02.prod.outlook.com
- (2603:1096:3:18::29) To PAXPR04MB9644.eurprd04.prod.outlook.com
- (2603:10a6:102:242::11)
-MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|DU4PR04MB10483:EE_
-X-MS-Office365-Filtering-Correlation-Id: fd8be593-118f-4ce7-b817-08de9934936a
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|376014|7416014|366016|19092799006|1800799024|38350700014|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: A0ZgCR7HzdGflHkWDt+fz09PT0gxZSoliWMnuwKacynibaPZIl79PuDiD7MSYE74xPrmA4XBOpmNYnWNQfqXx5XTvXEYwmetbIFfXfna42GK7teb4sEICAfznmxZff1ghaKzuTtIyioPLKbjuS8VryWfaEzeXkKDcgcqnH+97uzP0s6mJXcGJz2+biP17mRxgfsWP8DLl7S3rhCe7GxjrO/4c92017OcDQ1D/HxwC2m2nDWZyCpSdv/hLzRYONzDpUR8gIAN8pqgYbDDLpRaIx6iyVZm+EcVrwiwh8d69pi2RRk7t4bsOYfX3GVsj4lUG5rycY4q5Z4r8LwhJ6Bd0a8CDyv6bC41md7IyahHGE3CumIvrOk+zca/tY895IlKAkVFQZbj6pIaTUCq0NzBQj7uyAu+9vyqVw23zhEHnXDORRQtCP28hmFVzBI4zoQArWd9IKqVhdrLMLzSOihSMfcC0rp++RzbkkVJ1uBTOsbTOIQRO4m+D4xgZvgj77rAtcAtZrKQSBepNxu6YBIsuwyg+GgeYhAQX9RiRdPdnAVe7CRbjqIA6bA4hWJnwRfQ0PXrKVbHkbHMIiXCJr3Y2o+Jm4r8zifAteY1ILu3hkepSNtNeJA/nrzA1pYHN8JB5bVVOkmk0F59e8rWfIMKh/MB8o/EXJGoVpx1faSn2UmuTijguoALzxiIbOhAwn2aqi22tg0BxZzRvpDAxH/7Y4PdgvsolyAgxHhl88teLiH2uphWHENrKgyyO6wUsZXcEU3+lGu4C7Zrzc+FsB3PBVgYi+bRUiuPKJDLCVtuUJ4=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(376014)(7416014)(366016)(19092799006)(1800799024)(38350700014)(56012099003)(18002099003)(22082099003);
+ 2026 08:33:54 +0000
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::efa9:4b97:3b4a:8235]) by LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::efa9:4b97:3b4a:8235%6]) with mapi id 15.20.9769.046; Mon, 13 Apr 2026
+ 08:33:54 +0000
+From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
+To: "LOK, CHEN HUEI" <chen.huei.lok@altera.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+CC: Marek Vasut <marex@denx.de>, Simon Goldschmidt
+ <simon.k.r.goldschmidt@gmail.com>, Tom Rini <trini@konsulko.com>, "Rosdi,
+ Danish Ahmad" <danish.ahmad.rosdi@altera.com>, "YUSLAIMI, ALIF ZAKUAN"
+ <alif.zakuan.yuslaimi@altera.com>, "MANIYAM, DINESH"
+ <dinesh.maniyam@altera.com>, "NG, BOON KHAI" <boon.khai.ng@altera.com>, "Hea, 
+ Kok Kiang" <kok.kiang.hea@altera.com>
+Subject: Re: [PATCH v1] arm: socfpga: soc64: separate reset manager into
+ common and platform-family parts
+Thread-Topic: [PATCH v1] arm: socfpga: soc64: separate reset manager into
+ common and platform-family parts
+Thread-Index: AQHcmk2HRbd/hxlPkE6tJc5fAwf/OrXdAd6s
+Date: Mon, 13 Apr 2026 08:33:53 +0000
+Message-ID: <LV8PR03MB8137BA02FC8E03F7218A1C62A7242@LV8PR03MB8137.namprd03.prod.outlook.com>
+References: <20260210052359.2644-1-chen.huei.lok@altera.com>
+In-Reply-To: <20260210052359.2644-1-chen.huei.lok@altera.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: LV8PR03MB8137:EE_|DS2PR03MB8393:EE_
+x-ms-office365-filtering-correlation-id: c71c4492-5d9b-4965-e475-08de99376590
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|56012099003|18002099003|22082099003|55112099003|38070700021;
+x-microsoft-antispam-message-info: FQ9UfUvmUy0LLLRK0exWvH8in8ofkv/uzMEJ1wGI+DGVzeSY/0wI94/C65xuHcWtXZ8ModJ5pEMWFn8YJqjlTYLXl2W04mTZCNZ71LatiaJmRjhNrJCerfNSYffr4AAoYTtm8/q0786Lu9KYfllWykc/hp+xd5mTQURgWE1hc1MNdVASrcpeQf8pLYEEAit7PdrjQZpfdsMx0TBNxJf3OFXOCFHpNkpyKsCO8AufzQCpJUzQb5DWJhhycrsTVM+IrC37SzrE4OSwGwVzY/penxtQM15yNR2mRiQYmjlU041RZVIe/pDwLtnfk1Qd6H/Ve0l2cx6vOKnm0rCesVVld7J/wOOPKJ10aq+85QTc4lvdSqd1HbMdLLY/EdvkdnaNWKz1GkKiArvOjksInz1wAXW//4wV8z2gzMcNQNy5+QZ/60HSIUH7nL3y81RQnM6iWYF1obrAKVchrqBcukguX4W6v1AT8KLestxvkzL+giP3gyX4tVtWW/Yz1ui5fN258v+u3hGIxPBZR00JtXIjMBrFXTM+/s+mlpfqZIzPzEnc9OoH2aYwzBcwHv9x6ZUa0oUKc3YmTIU/LP6jtolFV7kpIuqIMvCcLmwP0AyQKZDfFwvNkOZrPaQVNE8ZW4KafMSWKdGeaRT/LpRq/DIIMMthMW/WAF8atXpTUUDLu5vYKD0e4dJB/D5Ow2+T2mYK3nj59JkQLqVNOXXLQUywebs7Sqdlk1Uk1+FE66HfFLb7zvaiSjFwwQpI5MotgsKJ
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(56012099003)(18002099003)(22082099003)(55112099003)(38070700021);
  DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VElhRWdGMldNSFEwYjF5bERVbGN5bjV1SEx2WTR1RHlRSEMyakEvczJEUjY2?=
- =?utf-8?B?OW45dWlVMGZxRHZWMjVsMmM2VnQ3ejZMT3g3dWF6ZWNaY0JxWW04WUQ5a2tt?=
- =?utf-8?B?L2JZRzY1UzlBdkdraTJXVGZNekI5eGlNNStsTlkyY3NRQmJlOGZnQVFSb1BQ?=
- =?utf-8?B?SjU3MlphYmtWNWdYcUlha0FNcDlOZWt2REw0MWtNVXg3dW1zRGdHemRFYlJv?=
- =?utf-8?B?WEpqTWYxVWs2ckt0QWRtWEhMZWpuZEx6YjZOcXBUT0pwOTZZUFNMRDVZY0M1?=
- =?utf-8?B?ZHZOSFhoOUkvNkxlUTMwUGpGR0YzQXM2blltMldSc3E1anJHT050aStJRmtK?=
- =?utf-8?B?d1Z6d2E3OG1wMGc5andFeVZwdjV3ZHlhZnhoSFVubVJ3bGhCQWJ0N1VwRkpB?=
- =?utf-8?B?YW8ySlY1TTllazVlOVQvR0t2RHhEc21HSVpsSGZvQTNsTEJCbDJ2NFdnRFNv?=
- =?utf-8?B?UDRET0RBRFVFMkRhL0F3TktRU1lHWmgyZU82NmUrSUdMOWgwQkZ5TFNIOVdN?=
- =?utf-8?B?dVhxL3g0UkdQVy9VVjhSUHk3N0RpQnJ0UnBGaFVzdWtvM2Fua2ltUkovWmhK?=
- =?utf-8?B?cm1BRDBndVM2NFJqVzROOWZCTW9sVVdHMFJockpBNkpLUFNsN2IyR2lUSDA3?=
- =?utf-8?B?Y3N4QklFd1BtOGovSjlIM0t3d1hralRsWGlvRVhBdE9NZW5HZTRleDVzU0Jq?=
- =?utf-8?B?aEg3TkJRbGxMaDlzQ1RHL2hVVnNvbEdTQVFOeER6aE9QTXhqNzRzek0zaHRV?=
- =?utf-8?B?RUs2YlZ1VWxHYm1qWUFtNHQ3MzFXUjB4TWswcjRsQUMxeDJXeVpuZ2tGMEMy?=
- =?utf-8?B?V010c1h5UzhSOUFkRnRpZEZXNDdLSFlrYlV3Qm1Eek9YTFB1akNDSUhnVzJ4?=
- =?utf-8?B?RndzcWI5S1FjaFJTU3B6OU1IMmV4cTE0emdZM2w2cXBBOFFZbUY1TVlXY2t1?=
- =?utf-8?B?UVVqNkFRYWc5VGR2SFoxSTcwSnc3QkI4M0tFUkNZaVRMbzgwdFRHRjdYQXox?=
- =?utf-8?B?czEyUE40WkFxTElPRzlyTmV3VmFQLzduRTVQb0gzYjB1cUhYNHJZdDJrRElO?=
- =?utf-8?B?aVd6UGx5UE5yekp3bXpNOHVtVlYvSERmUFhpSnlnKzQ4dFJvSTBUU1ZwaDV5?=
- =?utf-8?B?RGI0OTcyRmJ4ZWc3SWs0SEp6Yk1aeFRuTlh3K2FoQ3g3SnFvU0RTV1NSUlhH?=
- =?utf-8?B?dzQxbEVmNXZ6S3dnaGZXZmVhRUgzQy9RYkp1SXNrSnBpRUlHQnFGM2g2SVov?=
- =?utf-8?B?WGNsSWNONWtFZTJCbmVCZnZpMXFaNHEwejV6L2ZpRkE3YWtWcUJoSmJML2NX?=
- =?utf-8?B?Z1AzZlNwNVpQb2NSekZudkR5RFFZUm5UM3h2alJKMy82YmlQZmNFWXNXaXRh?=
- =?utf-8?B?S25iWUdtOUVEWkZCT3liL3RleEp2Zy9ka2FXK3EvTVBqNGNjNXl3NUN3NzNO?=
- =?utf-8?B?TEcxbjFXeWZodm5HYlFObnNqZVJlcDMvbE9NK1kzVWdBN3IzM1EwVDQxVVZY?=
- =?utf-8?B?TWk4VzhhMDZpUHhGOTZZOW9FVWtQSno4S25BTFllTVI4M3Z5cmx0SkQyWlVj?=
- =?utf-8?B?VG5FZ2JpZ2VCN3FGdWRnM3IwNml5WnUyQUZ6cHd4VWlHZmw5c0IyYlJycjlq?=
- =?utf-8?B?M1RQS3FkWTN1RE1aYXFDQTlRVWNEVVFnWncrc1ozMGg5LzF5MXBwYUlBL1V2?=
- =?utf-8?B?UHJaODRNbDNqb0VQMHhvUkJlOFczWmxMS3RkMHdtVjM5TkZGVlROcFpsTk14?=
- =?utf-8?B?eUFpSWVleUwxQ2ZvQzAvREpxdUl5Wk92M3NSbXU4b0NTMDF1TDc1cTFzZ29l?=
- =?utf-8?B?TitTSWYwQXQ2UU14YmJWSG5yOUhjQXkrVG5FZDlvMnI4cFB3VVJFWjBwUkVF?=
- =?utf-8?B?V0dna3lrbDZtNDgrd2VlMFcvOThQamJjd2laQVZlVUsraWZxOFhrUkJQcWVG?=
- =?utf-8?B?TEpTRGM4c1F5aHRrdmdYYVJ5cUJackt4Z0I0Q1NEdUV5S3RHM1NCWnNnOTk3?=
- =?utf-8?B?Vm5wWElPVGhlMnBvUHoyNzdwdTBXSDJiSHUvZ2VXOE1nbGdtRWl4RFdBWmkr?=
- =?utf-8?B?MXBiaHA5OHpWcVdvY2kvRE9zK2JiSC8vMEV5QXpXUE9hSW5STWdBdlEvOU82?=
- =?utf-8?B?TkNBN29qWWtuQzR0QlVBazM5NHR4aTVEZjY1cEk3SjYzeSttbm9GcmtBeFM0?=
- =?utf-8?B?NU5sZUV1N092SExHRDB2RXBmSGRWUGszQkY2eXBLa3NvK3BSWmZUQ2NnVWpS?=
- =?utf-8?B?Q2Jha2ExMDdWZW5OakFrbW9rTUJNaExXOHU3UUFVdS94Snl0bHhVMFNBN0Z6?=
- =?utf-8?B?NVNEdGMxRzlGM09IclFhVHVzUS9GR2gzZVVTK29COGxRdWs3Um5mZz09?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fd8be593-118f-4ce7-b817-08de9934936a
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?Windows-1252?Q?u/LZ9mnwmsK3ma4vwRQiVGSi7OMsTg2vKyav4ztaD1+kO6aa3SCFzfft?=
+ =?Windows-1252?Q?G74O+6YnGaZq8QGXlgS98aTlyxnBxwSAUmiODG7r5dxGKfZpLwJ/m9RA?=
+ =?Windows-1252?Q?YMbsH0nHaykVEJpMrjsM7gMdBOPg+Pqs5jL35Al5yhN4Ns31GelGot/N?=
+ =?Windows-1252?Q?v8WENDuCr4WmtGJlnuoAr2SSoQQsqYjFtOWogmt5txXGaDXoi1CvCGP1?=
+ =?Windows-1252?Q?svPWMqYbY2ilkNtb4KegqS2/MhO0Lqoz/Y7OZy2CUdIKKT1tbXQbZPsn?=
+ =?Windows-1252?Q?TrYSu6Kf3pKZYZH+nrf1m8/yccxuX+6eydrjFOoL8WoNRO5lOzPMf904?=
+ =?Windows-1252?Q?oUYSkAdvHzVn4tBJKVBMvFS7JgpX36OYP+SPDQd2tsblyfQ9QYO094Av?=
+ =?Windows-1252?Q?9pWrxYUFM48/OVdcZXndJeas0hDCs5n/yqVYWqfG1BRf1MAEJoRuy9j9?=
+ =?Windows-1252?Q?lCj93+5IGTByggI++la9+VfDdwJrekn0pq9+YLGxKi+oznqQxJDf6OJ3?=
+ =?Windows-1252?Q?TQWuEJuIeiW5r6iAMB9OUEDqQcDRNFR0OaIK6vO7bC0m2/s4Jy76lSHf?=
+ =?Windows-1252?Q?L8u49TcGMLjEFuoWY1BNLL12LZ6uIa6HW2fKuVq49XHoOYZ7DPI/zS5E?=
+ =?Windows-1252?Q?O7PRNvXG9EMLWQN/7uF6ZNuCNCgvOoqKfuNrdZ6rKoDzcN4J8DpNHCeN?=
+ =?Windows-1252?Q?hZzjDN6it4+jUGvW+IicqH6GROzCD/aZUGCB+y5O0BLslGMl1NCGI0FU?=
+ =?Windows-1252?Q?FOfU57uMSMXzD0FPuTTczDSgbnBR5KV1FVDJ7V7g6UTRWTGMWBNyLjYQ?=
+ =?Windows-1252?Q?ZNOLLDrGtbvO3xqUBDVmIidcAd7DtHow0PTeYCanyYd6EPEgVLrIqmmL?=
+ =?Windows-1252?Q?TuC/PZopmDmiseKmTgMw5cig/NitZTYce9auaJkq68iqVmgvnI/yzgyA?=
+ =?Windows-1252?Q?yAqCu9Ra27QeW2dD3M2MR7qoif06w/mZoq4OZnbVxcLwDQ5Vx2oWV5/C?=
+ =?Windows-1252?Q?ylLzYZzt0wDf3CZKffzBntDEgLrMEIYhejB/+Oq7Za8BtmoIhvmjQN/z?=
+ =?Windows-1252?Q?LjgjJOy3j7FRx6UpQ9wWfTnd6AcvHmXCDcFh1nj8Cmw37jkbC6LMLuPz?=
+ =?Windows-1252?Q?6qdDdnDVJK3ZjS5OHuIMOCp4eXnlfBKD3U1RJbWVs4u7u7uxoj9zz/KC?=
+ =?Windows-1252?Q?zGhMQLJCNbUpvGP4aKpGllCGFvAHQbW+Lwk/g0FPWodTf9SnefAQt2lF?=
+ =?Windows-1252?Q?btpvnyYyneo14kpbfHmDLKUm9OBaHw5AJuurCBlFkp3t03O3JyL3v+0R?=
+ =?Windows-1252?Q?BvHrL+BMdpj+uAjtfhE6ZSyi2RQgohQ7Za1bqOqt/KgaxH+0jLvaVVQ3?=
+ =?Windows-1252?Q?E+SPKcTkgBX204/YZMHaGvPzyTNUPR6HqXuMm9Qj+MqsQd52FHxCQC9h?=
+ =?Windows-1252?Q?DxtsAI2uz43uufxB7vu4ufXP3hKX7KX3v9+MSH3v7DQmLFTr/KHjVssd?=
+ =?Windows-1252?Q?KP6euxxd7Zst54Vmj4BtHpNV4GYDsuy19ez1clXgooSUcXPDiNBqbwFY?=
+ =?Windows-1252?Q?eGP1q8RfN2OIPBbvZJbOZcLdDRsnsRd0oVZADQlsjiCA3durf5i4+kBo?=
+ =?Windows-1252?Q?NME2bUOgfwzQyFJ1h9PAqPvSiVtUDZU0T9lHUj7pU95xlcDVkP0CGUTs?=
+ =?Windows-1252?Q?qhNQ1rY4Jpn4NQhFZ66ypCKfDai4ZZWcAKMRobFE47xp9NRaf26CSIKZ?=
+ =?Windows-1252?Q?FdlACyzvD6AmAq2VqE+OmFRJZmK5EjjyVP60aRmbCvHtXh0x7cD7zZHx?=
+ =?Windows-1252?Q?hSyP5twaTpi2QNtw2UrCUGhkToRnYnOhjih2q6jdiBWlSvphJHweZQop?=
+ =?Windows-1252?Q?Ib05Fju8e2mExw=3D=3D?=
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: altera.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Apr 2026 08:13:42.5696 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hZzO8DCd7xHaWleC8sOcdCW+ZzBmiqNCZFPXfxmofxRRYx8NVgw5yKBPo+H0ToJofWhiiCcQ0FBmPE1JMYm2Bw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB10483
+X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c71c4492-5d9b-4965-e475-08de99376590
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Apr 2026 08:33:53.8980 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 8CF+73QW0JVZSt28u+MY9++IYa9gdi3rfYaOBNpUSEDvjx538iFZmouUsHAgipfZkM2ydangPRv8QPvpFAGnPlxPOqZExqVIRZcgja2aoOs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS2PR03MB8393
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,192 +151,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ye Li <ye.li@nxp.com>
-
-Extend ENETC driver to support i.MX952 platform where 2 ENETC
-controllers are located on different PCIe buses.
-
-Key changes:
-- Add enetc_dev_id_imx() to derive device ID from device tree "reg"
-  property for i.MX952, mapping bus_devfn values 0x0 and 0x100 to device
-  IDs 0 and 1 respectively
-- Implement imx952_netcmix_init() to configure MII protocol and PCS
-  settings based on PHY mode parsed from device tree
-- Add i.MX952 to FSL_ENETC_NETC_BLK_CTRL Kconfig dependencies
-
-Signed-off-by: Ye Li <ye.li@nxp.com>
-Signed-off-by: Alice Guo <alice.guo@nxp.com>
----
- drivers/net/Kconfig                   |  4 +-
- drivers/net/fsl_enetc.c               | 28 +++++++++++++-
- drivers/net/fsl_enetc_netc_blk_ctrl.c | 72 +++++++++++++++++++++++++++++++++++
- 3 files changed, 101 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index ed07e286676..4da10ed1289 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -1018,8 +1018,8 @@ config FSL_ENETC
- config FSL_ENETC_NETC_BLK_CTRL
- 	bool "NXP ENETC NETC blocks control driver"
- 	depends on FSL_ENETC
--	depends on IMX95 || IMX94
--	default y if IMX95 || IMX94
-+	depends on IMX95 || IMX94 || IMX952
-+	default y if IMX95 || IMX94 || IMX952
- 	help
- 	  This driver configures Integrated Endpoint Register Block (IERB) and
- 	  Privileged Register Block (PRB) of NETC. For i.MX platforms, it also
-diff --git a/drivers/net/fsl_enetc.c b/drivers/net/fsl_enetc.c
-index 766aea035d3..a1569b9d989 100644
---- a/drivers/net/fsl_enetc.c
-+++ b/drivers/net/fsl_enetc.c
-@@ -67,10 +67,36 @@ static int enetc_is_ls1028a(struct udevice *dev)
- 	       pplat->vendor == PCI_VENDOR_ID_FREESCALE;
- }
- 
-+static int enetc_dev_id_imx(struct udevice *dev)
-+{
-+	if (IS_ENABLED(CONFIG_IMX952)) {
-+		int bus_devfn;
-+		u32 reg[5];
-+		int error;
-+
-+		error = ofnode_read_u32_array(dev_ofnode(dev), "reg", reg, ARRAY_SIZE(reg));
-+		if (error)
-+			return error;
-+
-+		bus_devfn = (reg[0] >> 8) & 0xffff;
-+
-+		switch (bus_devfn) {
-+		case 0:
-+			return 0;
-+		case 0x100:
-+			return 1;
-+		default:
-+			return -EINVAL;
-+		}
-+	}
-+
-+	return PCI_DEV(pci_get_devfn(dev)) >> 3;
-+}
-+
- static int enetc_dev_id(struct udevice *dev)
- {
- 	if (enetc_is_imx95(dev))
--		return PCI_DEV(pci_get_devfn(dev)) >> 3;
-+		return enetc_dev_id_imx(dev);
- 	if (enetc_is_ls1028a(dev))
- 		return PCI_FUNC(pci_get_devfn(dev));
- 
-diff --git a/drivers/net/fsl_enetc_netc_blk_ctrl.c b/drivers/net/fsl_enetc_netc_blk_ctrl.c
-index 8577bb75632..0c87d80ea5c 100644
---- a/drivers/net/fsl_enetc_netc_blk_ctrl.c
-+++ b/drivers/net/fsl_enetc_netc_blk_ctrl.c
-@@ -35,6 +35,7 @@
- #define  MII_PROT_RGMII			0x2
- #define  MII_PROT_SERIAL		0x3
- #define  MII_PROT(port, prot)		(((prot) & 0xf) << ((port) << 2))
-+#define  MII_PROT_GET(reg, port)	(((reg) >> ((port) << 2)) & 0xf)
- 
- #define IMX95_CFG_LINK_PCS_PROT(a)	(0x8 + (a) * 4)
- #define PCS_PROT_1G_SGMII		BIT(0)
-@@ -97,6 +98,9 @@
- #define IMX94_TIMER1_ID			1
- #define IMX94_TIMER2_ID			2
- 
-+#define IMX952_ENETC0_BUS_DEVFN		0x0
-+#define IMX952_ENETC1_BUS_DEVFN		0x100
-+
- /* Flags for different platforms */
- #define NETC_HAS_NETCMIX		BIT(0)
- 
-@@ -567,6 +571,69 @@ static int netc_prb_check_error(struct netc_blk_ctrl *priv)
- 	return 0;
- }
- 
-+static int imx952_netcmix_init(struct udevice *dev)
-+{
-+	struct netc_blk_ctrl *priv = dev_get_priv(dev);
-+	ofnode child, gchild;
-+	phy_interface_t interface;
-+	int bus_devfn, mii_proto;
-+	u32 val;
-+
-+	/* Default setting */
-+	val = MII_PROT(0, MII_PROT_RGMII) | MII_PROT(1, MII_PROT_RGMII);
-+
-+	/* Update the link MII protocol through parsing phy-mode */
-+	dev_for_each_subnode(child, dev) {
-+		if (!ofnode_is_enabled(child))
-+			continue;
-+
-+		ofnode_for_each_subnode(gchild, child) {
-+			if (!ofnode_is_enabled(gchild))
-+				continue;
-+
-+			if (!ofnode_device_is_compatible(gchild, "pci1131,e101"))
-+				continue;
-+
-+			bus_devfn = netc_of_pci_get_bus_devfn(gchild);
-+			if (bus_devfn < 0)
-+				return -EINVAL;
-+
-+			interface = ofnode_read_phy_mode(gchild);
-+			if (interface == -1)
-+				continue;
-+
-+			mii_proto = netc_get_link_mii_protocol(interface);
-+			if (mii_proto < 0)
-+				return -EINVAL;
-+
-+			switch (bus_devfn) {
-+			case IMX952_ENETC0_BUS_DEVFN:
-+				val &= ~CFG_LINK_MII_PORT_0;
-+				val |= FIELD_PREP(CFG_LINK_MII_PORT_0, mii_proto);
-+				break;
-+			case IMX952_ENETC1_BUS_DEVFN:
-+				val &= ~CFG_LINK_MII_PORT_1;
-+				val |= FIELD_PREP(CFG_LINK_MII_PORT_1, mii_proto);
-+				break;
-+			default:
-+				return -EINVAL;
-+			}
-+		}
-+	}
-+
-+	if (MII_PROT_GET(val, 1) == MII_PROT_SERIAL) {
-+		/* Configure Link I/O variant */
-+		netc_reg_write(priv->netcmix, IMX95_CFG_LINK_IO_VAR,
-+			       IO_VAR(1, IO_VAR_16FF_16G_SERDES));
-+		/* Configure Link 2 PCS protocol */
-+		netc_reg_write(priv->netcmix, IMX95_CFG_LINK_PCS_PROT(1),
-+			       PCS_PROT_2500M_SGMII);
-+	}
-+	netc_reg_write(priv->netcmix, IMX95_CFG_LINK_MII_PROT, val);
-+
-+	return 0;
-+}
-+
- static const struct netc_devinfo imx95_devinfo = {
- 	.netcmix_init = imx95_netcmix_init,
- 	.ierb_init = imx95_ierb_init,
-@@ -578,9 +645,14 @@ static const struct netc_devinfo imx94_devinfo = {
- 	.xpcs_port_init = imx94_netc_xpcs_port_init,
- };
- 
-+static const struct netc_devinfo imx952_devinfo = {
-+	.netcmix_init = imx952_netcmix_init,
-+};
-+
- static const struct udevice_id netc_blk_ctrl_match[] = {
- 	{ .compatible = "nxp,imx95-netc-blk-ctrl", .data = (ulong)&imx95_devinfo },
- 	{ .compatible = "nxp,imx94-netc-blk-ctrl", .data = (ulong)&imx94_devinfo },
-+	{ .compatible = "nxp,imx952-netc-blk-ctrl", .data = (ulong)&imx952_devinfo },
- 	{},
- };
- 
-
--- 
-2.34.1
-
+Hi Chen Huei,=0A=
+=0A=
+> From:=A0Lok, Chen Huei <chen.huei.lok@altera.com>=0A=
+> Sent:=A0Tuesday, February 10, 2026 1:23 PM=0A=
+> To:=A0u-boot@lists.denx.de <u-boot@lists.denx.de>=0A=
+> Cc:=A0Marek Vasut <marex@denx.de>; Simon Goldschmidt=0A=
+> <simon.k.r.goldschmidt@gmail.com>; Chee, Tien Fong=0A=
+> <tien.fong.chee@altera.com>; Tom Rini <trini@konsulko.com>; Rosdi, Danish=
+=0A=
+> Ahmad <danish.ahmad.rosdi@altera.com>; Yuslaimi, Alif Zakuan=0A=
+> <alif.zakuan.yuslaimi@altera.com>; Maniyam, Dinesh=0A=
+> <dinesh.maniyam@altera.com>; Ng, Boon Khai <boon.khai.ng@altera.com>; Hea=
+, Kok=0A=
+> Kiang <kok.kiang.hea@altera.com>; Lok, Chen Huei <chen.huei.lok@altera.co=
+m>=0A=
+> Subject:=A0[PATCH v1] arm: socfpga: soc64: separate reset manager into co=
+mmon=0A=
+> and platform-family parts=0A=
+> The SoCFPGA SoC64 reset manager code is currently built as=0A=
+> reset_manager_s10.o even though it is shared across multiple SoC64=0A=
+> families.=0A=
+> Split the implementation into:=0A=
+> - reset_manager_soc64.o for common SoC64 logic=0A=
+> - reset_manager_soc64_platform_families.o for platform-family-specific=0A=
+=0A=
+Consider a shorter/more conventional name than reset_manager_soc64_platform=
+_families.c=0A=
+e.g. reset_manager_soc64_families.c=0A=
+=0A=
+> =A0 code=0A=
+> This improves code organization and prepares the reset manager for=0A=
+> additional SoC64 platform families. No functional change intended.=0A=
+> Signed-off-by: Chen Huei Lok <chen.huei.lok@altera.com>=0A=
+> ---=0A=
+> =A0arch/arm/mach-socfpga/Makefile=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0 | 15 ++-=0A=
+> =A0arch/arm/mach-socfpga/reset_manager_soc64.c=A0=A0 | 94 +++++++++++++++=
+++++=0A=
+> =A0...> reset_manager_soc64_platform_families.c} | 75 +--------------=0A=
+> =A03 files changed, 106 insertions(+), 78 deletions(-)=0A=
+> =A0create mode 100644 arch/arm/mach-socfpga/reset_manager_soc64.c=0A=
+> =A0rename arch/arm/mach-socfpga/{reset_manager_s10.c =3D>=0A=
+> =A0reset_manager_soc64_platform_families.c} (78%)=0A=
+> diff --git a/arch/arm/mach-socfpga/Makefile b/arch/arm/mach-socfpga/Makef=
+ile=0A=
+> index 4e85bfb00d4..71587fd3caa 100644=0A=
+> --- a/arch/arm/mach-socfpga/Makefile=0A=
+> +++ b/arch/arm/mach-socfpga/Makefile=0A=
+> @@ -34,7 +34,8 @@ obj-y +=3D lowlevel_init_soc64.o=0A=
+> =A0obj-y=A0=A0 +=3D mailbox_s10.o=0A=
+> =A0obj-y=A0=A0 +=3D misc_soc64.o=0A=
+> =A0obj-y=A0=A0 +=3D mmu-arm64_s10.o=0A=
+> -obj-y=A0 +=3D reset_manager_s10.o=0A=
+> +obj-y=A0 +=3D reset_manager_soc64.o=0A=
+> +obj-y=A0 +=3D reset_manager_soc64_platform_families.o=0A=
+> =A0obj-y=A0=A0 +=3D system_manager_soc64.o=0A=
+> =A0obj-y=A0=A0 +=3D timer_s10.o=0A=
+> =A0obj-y=A0=A0 +=3D wrap_handoff_soc64.o=0A=
+> @@ -47,7 +48,8 @@ obj-y +=3D lowlevel_init_soc64.o=0A=
+> =A0obj-y=A0=A0 +=3D mailbox_s10.o=0A=
+> =A0obj-y=A0=A0 +=3D misc_soc64.o=0A=
+> =A0obj-y=A0=A0 +=3D mmu-arm64_s10.o=0A=
+> -obj-y=A0 +=3D reset_manager_s10.o=0A=
+> +obj-y=A0 +=3D reset_manager_soc64.o=0A=
+> +obj-y=A0 +=3D reset_manager_soc64_platform_families.o=0A=
+> =A0obj-$(CONFIG_SOCFPGA_SECURE_VAB_AUTH)=A0=A0 +=3D secure_vab.o=0A=
+> =A0obj-y=A0=A0 +=3D system_manager_soc64.o=0A=
+> =A0obj-y=A0=A0 +=3D timer_s10.o=0A=
+> @@ -62,7 +64,8 @@ obj-y +=3D clock_manager_agilex5.o=0A=
+> =A0obj-y=A0=A0 +=3D mailbox_s10.o=0A=
+> =A0obj-y=A0=A0 +=3D misc_soc64.o=0A=
+> =A0obj-y=A0=A0 +=3D mmu-arm64_s10.o=0A=
+> -obj-y=A0 +=3D reset_manager_s10.o=0A=
+> +obj-y=A0 +=3D reset_manager_soc64.o=0A=
+> +obj-y=A0 +=3D reset_manager_soc64_platform_families.o=0A=
+> =A0obj-y=A0=A0 +=3D wrap_handoff_soc64.o=0A=
+> =A0obj-y=A0=A0 +=3D wrap_pll_config_soc64.o=0A=
+> =A0obj-y=A0=A0 +=3D altera-sysmgr.o=0A=
+> @@ -79,7 +82,8 @@ obj-y +=3D lowlevel_init_soc64.o=0A=
+> =A0obj-y=A0=A0 +=3D mailbox_s10.o=0A=
+> =A0obj-y=A0=A0 +=3D misc_soc64.o=0A=
+> =A0obj-y=A0=A0 +=3D mmu-arm64_s10.o=0A=
+> -obj-y=A0 +=3D reset_manager_s10.o=0A=
+> +obj-y=A0 +=3D reset_manager_soc64.o=0A=
+> +obj-y=A0 +=3D reset_manager_soc64_platform_families.o=0A=
+> =A0obj-$(CONFIG_SOCFPGA_SECURE_VAB_AUTH)=A0=A0 +=3D secure_vab.o=0A=
+> =A0obj-y=A0=A0 +=3D system_manager_soc64.o=0A=
+> =A0obj-y=A0=A0 +=3D timer_s10.o=0A=
+> @@ -95,7 +99,8 @@ obj-y +=3D lowlevel_init_soc64.o=0A=
+> =A0obj-y=A0=A0 +=3D mailbox_s10.o=0A=
+> =A0obj-y=A0=A0 +=3D misc_soc64.o=0A=
+> =A0obj-y=A0=A0 +=3D mmu-arm64_s10.o=0A=
+> -obj-y=A0 +=3D reset_manager_s10.o=0A=
+> +obj-y=A0 +=3D reset_manager_soc64.o=0A=
+> +obj-y=A0 +=3D reset_manager_soc64_platform_families.o=0A=
+> =A0obj-$(CONFIG_SOCFPGA_SECURE_VAB_AUTH)=A0=A0 +=3D secure_vab.o=0A=
+> =A0obj-y=A0=A0 +=3D system_manager_soc64.o=0A=
+> =A0obj-y=A0=A0 +=3D timer_s10.o=0A=
+> diff --git a/arch/arm/mach-socfpga/reset_manager_soc64.c=0A=
+> b/arch/arm/mach-socfpga/reset_manager_soc64.c=0A=
+> new file mode 100644=0A=
+> index 00000000000..71e9512af49=0A=
+> --- /dev/null=0A=
+> +++ b/arch/arm/mach-socfpga/reset_manager_soc64.c=0A=
+> @@ -0,0 +1,94 @@=0A=
+> +// SPDX-License-Identifier: GPL-2.0=0A=
+> +/*=0A=
+> + * Copyright (C) 2016-2018 Intel Corporation <www.intel.com>=0A=
+> + * Copyright (C) 2025 Altera Corporation <www.altera.com>=0A=
+> + *=0A=
+> + */=0A=
+> +=0A=
+> +#include <errno.h>=0A=
+> +#include <exports.h>=0A=
+> +#include <hang.h>=0A=
+> +#include <asm/global_data.h>=0A=
+> +#include <asm/io.h>=0A=
+> +#include <asm/secure.h>=0A=
+> +#include <asm/arch/reset_manager.h>=0A=
+> +#include <asm/arch/smc_api.h>=0A=
+=0A=
+Includes SMC + secure headers, but the functions shown don=92t use them.=0A=
+Prefer minimal includes. This improves compile times and reduces coupling=
+=0A=
+=0A=
+> +#include <asm/arch/system_manager.h>=0A=
+> +#include <asm/arch/timer.h>=0A=
+> +#include <dt-bindings/reset/altr,rst-mgr-s10.h>=0A=
+> +#include <linux/iopoll.h>=0A=
+> +#include <linux/intel-smc.h>=0A=
+> +#include <wait_bit.h>=0A=
+> +=0A=
+> +DECLARE_GLOBAL_DATA_PTR;=0A=
+> +=0A=
+=0A=
+[...]=0A=
+=0A=
+Best regards,=0A=
+Tien Fong=
