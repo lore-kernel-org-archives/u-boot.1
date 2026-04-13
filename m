@@ -4,94 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DE06F34C4E
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 13:35:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E865F34C52
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 13:35:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA25A839DF;
-	Mon, 13 Apr 2026 15:35:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F1DA084199;
+	Mon, 13 Apr 2026 15:35:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QLq3WXEs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y1oa2VdC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4275783DC9; Mon, 13 Apr 2026 15:35:47 +0200 (CEST)
-Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
- [IPv6:2607:f8b0:4864:20::52a])
+ id 754C38419E; Mon, 13 Apr 2026 15:35:55 +0200 (CEST)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05B11839D5
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 15:35:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CCF484199
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 15:35:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-c6e2355739dso1969327a12.2
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 06:35:44 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776087343; cv=none;
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-35fc258aaa4so97854a91.2
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 06:35:51 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776087350; cv=none;
  d=google.com; s=arc-20240605;
- b=UnIqlQiSlb98+Lu39H7Fw5e0t5z2LofTjuoTAsOlNuSfiXqylayFbKT3Kjj2Epmrbz
- jKBCyvbqv1qSAe7Ahv9tzFo7APQ9s4z94xeHLQ5sQvsK98Y/ZqQj/hkGCyNiL0KbCvtS
- VB8XQFPFkyxEDeseD8kqQqZ/MmwWDuJKaR43aDwUyKiKemi9WOI6ytnADPTWluPsDl2N
- hryhYiATgns5MCAHneUuHFffuI06Fl9W9PGxxMB6lEWIOP65zu+j5Hhzt9ZGAAudHjtG
- IdjcbYggYChtj0hfSStrNe52hMOaWMzFfkAQESeBtgbLob7QqNn5s5C94zZOom979KME
- FTjQ==
+ b=PI8Y6TFHurNrOJ5uIhBtrbOIRA32X/CRY9EOHJom6F8cB/bqgh6r8CZ9ebxWmn+Jna
+ staKD8xYzn+Oh4GgEbuvL9kA/cQzJLM1p5nQHIOQ6PgnQ5AmmWJo4pZdCiEu8q1QASTP
+ +OSjtwnY/3mwFZNKHBIp8koFbVElrgFUseEjrniVKr4mGQnFDU02tiqi1u7F0ISG22Ki
+ 7hP6E3Qn5Yahhh89hr7M5gIgWDpqMQcNNMSRDoesvO0bKNwtxKTv3UV3eJUDU1yagoeU
+ FdX5HEhiI/nrKAgnbPtS9mS3SuAFjP0YiJ1zQBEP/2oP68zB9/qlsrfpFbQLz37e5XEP
+ 9Vuw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Z7ZzCNClvuGhPxwPhk06oJNAdC7Deo6tl10wkKnHgps=;
- fh=ZvTOplTg/Tb064jHRbjjpY73JyZzsX6EywF5EPWG8TY=;
- b=iZvrjRZg+Za+bHWv71qARwXnLsdwXSeZgpZtJpM2CbF+R6SSm3Mt6C0WKyp6URMn51
- 01iBs0aLTkHbycM33eq6rgaxRD/LkQ7094O0qtlAS/45sYTbp6q9W1+TNo4Ttbj+e4iI
- sMUry6UfSNjK5hvSJ4hQBN8eVa/szDIG23Ifpg3Fj092ibRpTi4u/LJvHEUKsE1WoPN4
- iYw7y/G7KDmJsZBYi2mOKyt4wgeuTZLrpFnnoBQ8p+Arlrr4VXhoLYhNUEApWixX52rF
- fWKdX8B6e6O2GoJhcESJFq9JaI0DC9ZL+kecSEXjSKLuil9+XFHQV+bJPe3lsSsIRPlc
- 4VkQ==; darn=lists.denx.de
+ bh=ygBqtaDeczLtrb9gTTS2ihYIf9Ld8W15j39cpcyZ0v0=;
+ fh=mvcsXzL7JtZ03J5pmO/qI22jN3bCOwpAY3DyNXEQFI4=;
+ b=iDpSHlwbv0IeLj5ByPkf54JVlvlupgF0GpL4w97WLhK30KGKhNzy3ZKPJYaEL6k+KE
+ dth6XaoODh5/yOm0SV5obhNagn/xKqxtjRa0PZOZdwcPDuOdUDRhgoPLS1//PkOFLYH3
+ DXOKKc5hyRYTgnYtutzDKdFfVsiB38QdhwFyiiIq7pvmNuLLrsefSPuCNuRTTaypZkxf
+ 3Y1Tcd3Pw29xWAwO9dXdK+01zldKeeyD5c68bJjyQjsrWHj0kQPC30HT4rC//WVfwp7g
+ S31mG7QkpsSVJrMqe29V/bURtEDojceL78mBOaHq+24UpVN1c0oVL7xFw80337KhuhiQ
+ 8pEQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776087343; x=1776692143; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776087350; x=1776692150; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Z7ZzCNClvuGhPxwPhk06oJNAdC7Deo6tl10wkKnHgps=;
- b=QLq3WXEsgHlrJjukk4zmpTCG6t1DfCQB6Q7h8boJqbHls6k5kSM2KQhinNZr+Q6ZH4
- AVQkHdOzJ5g2W1yX7y8rSXAzAMM3ufLvG7OP2rITHSq0AujStKYsXl/HPL18dg5HuuHT
- OUusBetMvelwAbH/NGZ/MHv4STpDqhd8ZCreg=
+ bh=ygBqtaDeczLtrb9gTTS2ihYIf9Ld8W15j39cpcyZ0v0=;
+ b=Y1oa2VdCsu7iB+bAK6qVX4MpUJNKXESYMt08xrCUqPdId3Z+RxeKXEH+hUOH7IUPiz
+ KWvvIxxrMWuSgoBlEvi3Ed0tIb/DDtxoxb4tIz5/RFD3y/yZxBnrXMHqQ+1jOXc8oZRj
+ mOjsdKzlw6TfJl3XA9++HiUUoZDZqzKaWN8pM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776087343; x=1776692143;
+ d=1e100.net; s=20251104; t=1776087350; x=1776692150;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Z7ZzCNClvuGhPxwPhk06oJNAdC7Deo6tl10wkKnHgps=;
- b=YDgCsKyrzMzgSBEtIZcnWiHREnJDFHKWM7X4MQSKiQAudL8id8TPGlQUpAWWWQps3Q
- euGPgWBlrIjm1GwRQlABPWu5AFbTNv5Bkb+NoTqFlwIwLYaOs0iMzdIKmollB0m/eEjx
- Be7mksCZww7j613tOFygU3HJ6sLImIP55YZfszFZ8hq0mjnM/tD3BJSDL+5uA3OlTYcj
- aD2utm65XrjJ099yKngoNB0vle1pEyGG2lHI6Hmmv7BKGXHiG33gKq3rq1Krj0+9nsZ+
- LKKqTb3llvWANIwX2Zjdv+e/uE7EiKGb+VmNNf+WKL5T4wMQWvkgRAVv9T2l0WnV79ZU
- flCg==
-X-Gm-Message-State: AOJu0Ywwbuk2s4fXsu98UWHL3103CNb4jvUMRFNsSkVMwM0Vcy3mGDd5
- UlWKQhOqGW+B+o7Ea2QVG9Mr/YnEGJZ9wVSCexr1SQOkhy9vblsX4FxCqysVh0Tssa8UyKrC1rc
- duC+4paL+hiJsNcZOMQXcjza054nxgnqhpWtqVJfO
-X-Gm-Gg: AeBDiet24GVpUVJY/k1eg/HwQw+hag3XOoLzl0JKmR/90Sshq7S2yPCjn/q6NVLpXKB
- vEr2ERAzQpDOpFildSzCi0VGxc+7j0RTOnds808GLfuWFmPbgiagf0JDDmOiIWhx8nZakEZj4VJ
- zEWcww5yVtDHEF4pH4VTam3COBdwqFWMRnopnLr9ZKNBEobr9NOk8NHH3eQxtcBGHU8o3ycXgPT
- ZtnQ9f1N6BYsXYX6lUZuS2+hHamkeMInmVOh6/fgf1Kd0mwJOXa62eQKUwUXXhR+6hCiAPuihpP
- mez6fOTZTdRBFa6B
-X-Received: by 2002:a05:6a00:1bcd:b0:82c:24d5:63e6 with SMTP id
- d2e1a72fcca58-82f0c169049mr13084199b3a.15.1776087343472; Mon, 13 Apr 2026
- 06:35:43 -0700 (PDT)
+ bh=ygBqtaDeczLtrb9gTTS2ihYIf9Ld8W15j39cpcyZ0v0=;
+ b=XscOsve7AbihYPRLvVwCzlvb3OTSQzb8+Jq2ZzL4T60Pwtqkz8GkpjZzUyD8VZE5nj
+ sav/3yRLIm+1Qjx5+u1OoLif5A8UFJ4bGl1q1BtaSxV0KokRv/VA98G4PO0+GNt9m1ee
+ FmZgoSx8vmVzrMMrdrGkNbPKXkzWiMnZTST87tm7zFNHJFuwvlPm9rxl8yHcYQoLn1X0
+ 5LRZDCOeFWMBh9eciBtdicGsDT5HQSJbvVMo8wMpuV6+0d7WHUsKlT6vRkVyTR6zjHB0
+ oUesmulW15f+4BDrG+LdIZwhCKle2iJLdzSHaRDQhOGVdG8GjJwMrm9yuKjCzaXexXKh
+ pLWw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+z0MBp4SN+i3eB4KmMNd4vdPnLlMMNg9fxdmvOr6pBwPYa2f/aOq6PHGXTJtBLkWgwK5Rxf7s=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzq+S5rGcEh8mKEiwiygJT0tBYtMUryfJAE9PI6CWjcuk6+/Vyb
+ 2hSeTJk6jE22PBltL+yBPd13wva7JMGrh49AysgZW9Z0N/yeQLDCMjh3HcTxY2IvxbPuuu7ff1C
+ iodaWQtwDrilp0kOe+jxShWeQxTMQP+nGhdRb3OFNSf5VXIzkBGk=
+X-Gm-Gg: AeBDieu2H60J0O9Vx5HtFpItd5hG2e0aOqlCfxWPGTFuEJ4kGbKr4q9HJDv4OkwYa27
+ 6xpW4/v2qwejqRE8YZpnbp8OdVWVQy21Kuq/uk588zCNXxrXHVXm6Pn0jY/0BEQsJUUTWbsWJqy
+ IBu3py+tVtouazdxy3f5R414Y/iYKWh5E9HYh0gymTfLklIo7n/sykrvnlS3d+Iq41zqjkw9kI5
+ ssoCEe/cCMSxwjzOZnn5HarAIGyQ0qdO+Ga+FM0oAYpZj8bVujZvd2LNGvuhcry57Q2i6vEGZqF
+ LPxIGQ==
+X-Received: by 2002:a17:903:1207:b0:2b0:5ec1:97c1 with SMTP id
+ d9443c01a7336-2b2d5939275mr139079945ad.7.1776087349745; Mon, 13 Apr 2026
+ 06:35:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260413081322.2226374-1-ravi@prevas.dk>
-In-Reply-To: <20260413081322.2226374-1-ravi@prevas.dk>
+References: <20260413062439.56470-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260413062439.56470-1-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 13 Apr 2026 07:35:22 -0600
-X-Gm-Features: AQROBzAXxe7JioZZJ7ozhD_1BGaI7FEq003X9j_VMpx7kfk_KBJSoj2FttCBJTE
-Message-ID: <CAFLszTi6FO42hpyN=U=4OTEd1be12wR==OUL_s=dCMjLiwt+6w@mail.gmail.com>
-Subject: Re: [PATCH] cmd: mmc: allow 'mmc rst-function' to show the current
- value
-To: ravi@prevas.dk
-Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>,
- Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>
+Date: Mon, 13 Apr 2026 07:35:27 -0600
+X-Gm-Features: AQROBzCvb7FFpja2DQ2UoXzMj4CVyUSYCAlOqNwuv2n7p8HVTH9Ixo-fCz8sAq0
+Message-ID: <CAFLszTiiR8ge76TFVB8Jj=hKT87M48wF9-ZYvcAjWDyk8j=ZGA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] doc: correct title of CONTRIBUTE.rst
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,32 +110,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
-
-On 2026-04-13T08:13:22, Rasmus Villemoes <ravi@prevas.dk> wrote:
-> cmd: mmc: allow 'mmc rst-function' to show the current value
+On Mon, 13 Apr 2026 at 00:24, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Extend the 'mmc rst-function' subcommand so that lacking a value to
-> set, it simply prints the current value, and its interpretation.
+> The title should be 'Contributing' as this is not the 'Overview' of the
+> U-Boot project.
 >
-> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+> The top title should be H1, the other titles H2.
 >
-> cmd/mmc.c             | 36 +++++++++++++++++++++++++++---------
->  doc/usage/cmd/mmc.rst |  4 ++--
->  2 files changed, 29 insertions(+), 11 deletions(-)
+> Fixes: 0290cec364f6 ("Add an initial CONTRIBUTE.rst")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  doc/CONTRIBUTE.rst | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 
-> diff --git a/cmd/mmc.c b/cmd/mmc.c
-> @@ -1032,6 +1026,30 @@ static int do_mmc_rst_func(...)
-> +             switch (ext_csd[EXT_CSD_RST_N_FUNCTION]) {
-> +             case 0x0: puts("(temporarily disabled)\n"); break;
-> +             case 0x1: puts("(permanently enabled)\n"); break;
-> +             case 0x2: puts("(permanently disabled)\n"); break;
-> +             default: puts("(unknown)\n");
-> +             }
-
-We normally put case/default on their own line, as elsewhere in this file.
-
-I'd even suggest putting this code in its own function.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
