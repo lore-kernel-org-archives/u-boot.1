@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26A15F531DE
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 23:36:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68F91F531CE
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 23:36:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D37D5841A2;
-	Tue, 14 Apr 2026 01:35:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 159278352B;
+	Tue, 14 Apr 2026 01:36:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PFQ/9tj3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YRdaNuCB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C803184148; Tue, 14 Apr 2026 01:35:56 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id 1195C841D5; Tue, 14 Apr 2026 01:35:58 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B064D839D5
- for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 01:35:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E91D883BC4
+ for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 01:35:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-409de4132b5so3209210fac.1
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 16:35:54 -0700 (PDT)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7d4be94eeacso5333913a34.2
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 16:35:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1776123353; x=1776728153; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1776123354; x=1776728154; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kbgq9fRgddMfvgOo4VEHoK9D8DwILnV3RbqOmc2F+3w=;
- b=PFQ/9tj3UGaIoKilTg2MCUtv4FM43eMRWon4BJIYhJAQaDswB4J+Bzl3lk8hPXHRR6
- 5yvqGXPqIOjD1Mw/7qtAPAfkkV3L8nQ+OUWZJ1mnj4Y3G4iPcttY5ahja0y3i7lSL0Mj
- 7Bk7N5HvDRGdpJX3T6BWJVyeUl0Bd245Xj+Ks=
+ bh=//sW8wCoQbernkZZMi5ODt09R8axZIs4lyQ3yaa3mOE=;
+ b=YRdaNuCBR7cBVIK4JnsTM0nrRYpVMUD6dPtGLaPZguspOxdIh/AGr2SWyiwkgEt+vU
+ LKwZBZ5VXTG6OZ4qh84VgT0A3YKMrSH04px9PoiEWiJw32QiIa4gZpLqZBK2W+H6Okrr
+ cU4AwcfNqWeqjlPawt0GGS4znGk/CCcnszZZ8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776123353; x=1776728153;
+ d=1e100.net; s=20251104; t=1776123354; x=1776728154;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=kbgq9fRgddMfvgOo4VEHoK9D8DwILnV3RbqOmc2F+3w=;
- b=OKtAcK++ZViFRfe7dcYn+a1wruDAKA3jouMxnvtXD1kRo7BodQEQ9pCdzOL4rHP2p2
- 7tiZTPlmRhEeH8e4T8vqm8xy3PtUEyjn2hH2I5DXWoMysRVU+Jexh58LgOBvVbZh1U8u
- nmOHtmr3NP8E8uLnuv3pHckhCZOfadOCzmFwsU7JkhKdsAMTd5ixXzynokIt0y8S9BuO
- xfWt70oI7bbu2u7ccXukbeg+iJlIAu8IxVVTX+au4DjUusC8lTMIfBG4c/dL1pK+kRUq
- 60dk9mFjADX30ph1cSaLW9MV+fTmcKnt4Quez+6JbY6TT577f0o5CHv3MGmwkUHObvdd
- QWJA==
-X-Gm-Message-State: AOJu0YwVOaAflnFvrzB8gRsTCJho1YzFPIybdaWG4PXZOnd8ok6DzZ73
- lmw3ylJ2D+NObSJGnQ1+5ixCTWiNrSmmEXpqGrhND8tdCr+8rbSuxCn2s4DDeolHDz8=
-X-Gm-Gg: AeBDieuziHaC7DNWf+BWQQiA4939gj7IOB7X/89ODHz5eWXDcz2LYlnkJw/NWhhz7em
- 5hwGtmBQadKa/whNAcnT6Dw7584jdJVxZv0XjZ8BOcKD0FchFzXxz+HKCt6Wcdztur7woreVass
- aULXd4QJJkVzFRoDJWEkZYaEl1XmwCI02xahJLhOrU1eFsLYNIDMSwcKyUHTp3dlhvfV/nBb2z6
- PrzgLxwMQDAP+67+TD/jHKYUy5FfLWjr9KWzvFx1ZyxOQlJtSfv3kvhtUaKLfSMFf/5paxYuaQn
- Y8znDdBrrlWYtpYF3zWUHZEiTK8JMYubw52/55ULPvlIbpJ8W88FAXgUR4eNV4dMLwlibF45Dle
- acVl5o51sE+wDnNQS0dB8ykOWNFZ6IEFvmm3O1BJBFQVbNE9ocVzfqHXmUyZvEoSeK4XcgQmrSa
- t6ge1bZHX5nAoo7afve6CkFPF/z0tgdAXDWVodbG1PwYeqg4VJJdIgxADzHv+EjhWe0GG46sy9C
- Dv3Xyl6DK9J+GJ8PoHlCdpHE2OTJ1Bph+Gnl5aFvmAzJc8SZQ==
-X-Received: by 2002:a05:6808:c1b8:b0:467:bfa:bdae with SMTP id
- 5614622812f47-4789d343285mr8242684b6e.20.1776123353387; 
- Mon, 13 Apr 2026 16:35:53 -0700 (PDT)
+ bh=//sW8wCoQbernkZZMi5ODt09R8axZIs4lyQ3yaa3mOE=;
+ b=MAvjHFL3J5zTU7gI1vAto/FhziTrWifNGpQFt1h0t/dRZ2nDWU2jZlgYbJDZsVpziN
+ gP6LmIY3Zk87pP5EyMXQjHUbSe6a8NvsFsUGheJ5YjcDxLSvhPWk0UY/KWPyCzPj4cV+
+ U1wA9UBCvYQ+vmVbvJDhigfWLm4KC7kV6d40PyxeZI1kDW0+Fb7r8a/p9k08zzhJRj5y
+ A3clvOXhFw628zncMLCmzbwt1tSnOPAmDdrGO6aDr0lb0mVOu4VtoglAhGpxxz/NshJT
+ 9wXfJaX3JitLIAUGqoLNpWpo1ai3R5Oqm3XMuse4rdR7y5n1bb+0SW6EFuvsraQlRfK5
+ +rDg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+PEkFjsxC5ul752bQNHbDKyx0Ms0SyrC60MYK8eVs4uq/MxVZF2jGfxkQ6/qj4BKPJkTedlRU=@lists.denx.de
+X-Gm-Message-State: AOJu0YxVJk8ZZ9C0uIenn1aWWsLZ2GrLPnWSazN6x7YtdZlLFfU9Zf7G
+ xNA3O/4XyR4X82zSREDvBJUjYkp33wVb/BsfdqoEws5PsqdkOHehCzsOPxecTfQQnQ/H0QN2s3k
+ XTesJp18=
+X-Gm-Gg: AeBDiespAoNdVEjmewDRrNXkGvu2gXuPHUO+hsSbJptoi7ZPs/h9TFw9NI8ycNVzdpj
+ tXB1L2Gc9Wlhfo5z6XseKljrpOr3AsB8UL6inSGlqOtT3sionBhKtwkXajXG3a+jED1/+EHo8WM
+ SaVsqt5vrl2I7GgkNImw6PtLsUgcbft3iUlIy4ycFy/HUTYDA4u1NyG0GxaoSDRqc+T+GkTXVDr
+ 5w0HvVEnHUEqIZ6zetCszYAOjq1e+DvNZMRZ+HSQrgBRwIcbQFE1pLPkp5n4ZeRBq/1b828hAnl
+ yaH8WUDK/Zw2vr5cux7muJfw+6QmJZz3CHTd3/qK7mCkAkzBG2G9HXyUlI/xrBxr9bviXn96dL4
+ 67xiKjhxnhT9MnaaYWIX2pdrudfhw2TGkYTO3Fxpbut6rTowhSNnxMjTmeae5tAvSEVFFQtsH2x
+ Bi6kMVGsnHcSHrmc5umfCRs5fPxUQSLxFDesSFo4KlGMDqC/OuxCexdROTboBYbQtd1kmLnJmzg
+ zsE7Nm+ALmE/PAZd2QVJuOzXD/PBgtREaI7w8pOIwop6zzraw==
+X-Received: by 2002:a05:6820:3088:b0:68c:373f:1835 with SMTP id
+ 006d021491bc7-68c373f1b1fmr7359616eaf.36.1776123354622; 
+ Mon, 13 Apr 2026 16:35:54 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-423dd396960sm10227910fac.2.2026.04.13.16.35.52
+ 586e51a60fabf-423dd396960sm10227910fac.2.2026.04.13.16.35.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 13 Apr 2026 16:35:53 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Ngo Luong Thanh Tra <ngotra27101996@gmail.com>
-Cc: Ngo Luong Thanh Tra <S4210155@student.rmit.edu.au>, 
- Stefan Bosch <stefan_b@posteo.net>
-In-Reply-To: <20260328051552.29343-1-S4210155@student.rmit.edu.au>
-References: <20260328051552.29343-1-S4210155@student.rmit.edu.au>
-Subject: Re: [PATCH] board: nanopi2: fix bd_update_env() cmdline buffer
- overflow
-Message-Id: <177612335264.2487918.9843219949804589449.b4-ty@konsulko.com>
-Date: Mon, 13 Apr 2026 17:35:52 -0600
+To: Hugo Villeneuve <hugo@hugovil.com>
+Cc: Hugo Villeneuve <hvilleneuve@dimonoff.com>, u-boot@lists.denx.de
+In-Reply-To: <20260327151612.2000964-1-hugo@hugovil.com>
+References: <20260327151612.2000964-1-hugo@hugovil.com>
+Subject: Re: [PATCH] config_distro_bootcmd: do not scan boot partitions if
+ distro_bootpart is defined
+Message-Id: <177612335349.2487918.13359859594236961157.b4-ty@konsulko.com>
+Date: Mon, 13 Apr 2026 17:35:53 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,21 +100,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 28 Mar 2026 12:15:48 +0700, Ngo Luong Thanh Tra wrote:
+On Fri, 27 Mar 2026 11:16:07 -0400, Hugo Villeneuve wrote:
 
-> Replace unbounded strcpy()/sprintf() calls with snprintf() and
-> check the return value against remaining buffer capacity at each
-> append step. The previous size guard did not account for
-> subsequent dpi suffix, remaining bootargs tail, and bootdev
-> token appends, allowing overflow when those later writes exceed
-> the remaining space.
+> For some projects, designing the active bootable partition is done by
+> setting distro_bootpart in the environment instead of changing the bootable
+> flag on the active partition.
+> 
+> This patch makes it possible to support both models by scanning boot
+> partitions only if distro_bootpart is not defined in the environment.
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] board: nanopi2: fix bd_update_env() cmdline buffer overflow
-      commit: 163d939b2839e156e58c234f07bf987228b91137
+[1/1] config_distro_bootcmd: do not scan boot partitions if distro_bootpart is defined
+      commit: f7bef8f81f4f1b97b071b14a8c1f61df6285fc63
 -- 
 Tom
 
