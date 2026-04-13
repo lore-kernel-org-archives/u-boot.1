@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BBDFF34C49
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 13:49:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97C79F34C4E
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 13:49:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78EC98421E;
+	by phobos.denx.de (Postfix) with ESMTP id BC28384239;
 	Mon, 13 Apr 2026 15:49:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="uCC314WN";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="NYRUP7Nu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEE6C83DC9; Mon, 13 Apr 2026 14:37:37 +0200 (CEST)
+ id 5B0FE83DC9; Mon, 13 Apr 2026 14:39:52 +0200 (CEST)
 Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2337F839D5
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 14:37:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CC5A839D5
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 14:39:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id E72FF60172;
- Mon, 13 Apr 2026 12:37:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C5D1EC2BCAF;
- Mon, 13 Apr 2026 12:37:22 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 1B87D6132D;
+ Mon, 13 Apr 2026 12:39:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83B9DC2BCAF;
+ Mon, 13 Apr 2026 12:39:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1776083853;
- bh=ww/4yMteWj6US2Z0S8osEy4M2FdwsClTbjXY9Whc2r4=;
+ s=k20201202; t=1776083988;
+ bh=tNO3C0lYFc7dP/Jruyk6n08lwjOHJbeZTK3LUbzu03c=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=uCC314WNCvEkTnKn/Rr4Mp2OwRASoUxzqF4FChPI5jjygJKOd1UcHhs52tusd5VRa
- yjH6TQta9uRXzLAcgbMfCmVebfZLxQon2333zWmIrzdhMCkjfeucVx3MbFvIr0UzlG
- dZ9/43SNy2gG3t+UjaQgO65KIl9liEHgWDH9GmjGNoDcCc8UdRhS2sIw4TBy2Y1qzt
- tAcejLDNqnDJ9VjOgpxSdS1NYQR4EFRusDlYqi9UnqUntgvCPsHI9tp3hP+05hyzUy
- gRmiuKierqGYo3Uc9oVKUOcMge90lDu+rnzNGYAIgD1ergADB9lYYgXEYMdCPYeqgr
- aN3JgGytZCqag==
-Date: Mon, 13 Apr 2026 18:07:19 +0530
+ b=NYRUP7NuypF+94Eo7YpbUaWPjAx1UpxPRQ4z69kxCuWc37A+HF4pr0iwoFiSIlsX9
+ h0WlRj4F+dGq5dfNK5eZZKz3R/zPPecGGMFHgnc9M0CH7vmJFHlPdSt6bp0qsRuoTN
+ i3ibkFVZ8KZ0wt/gtfcocdTsYDYTCWePZjVDeLEvD3gWYzaMud7Q4z+jfoCKrHILS5
+ Pta6ek0+7VU/1OGadPkb/fpUx980EhX/sb5qVFn3W0uUd9O0TmUw3wdROWHFMxQS5M
+ LzTRvHrJcQz2sXQQewou3TEMGlDENwpn+owhsp+ukGMZCLgJKT19TdSYI6a1y6Gzl5
+ l5ET3GhlRHJlA==
+Date: Mon, 13 Apr 2026 18:09:32 +0530
 From: Sumit Garg <sumit.garg@kernel.org>
 To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
@@ -71,14 +71,14 @@ Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
  Peter Korsgaard <peter@korsgaard.com>
-Subject: Re: [PATCH 2/4] drivers: ufs: qcom: Add SPL support
-Message-ID: <adzjf6IrtuV2p4p9@sumit-xelite>
+Subject: Re: [PATCH 3/4] drivers: phy: qcom: Add UFS PHY support for SPL
+Message-ID: <adzkBMFuvjfxVQth@sumit-xelite>
 References: <20260409-spl_ufs_only-v1-0-f7e0e243d805@oss.qualcomm.com>
- <20260409-spl_ufs_only-v1-2-f7e0e243d805@oss.qualcomm.com>
+ <20260409-spl_ufs_only-v1-3-f7e0e243d805@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260409-spl_ufs_only-v1-2-f7e0e243d805@oss.qualcomm.com>
+In-Reply-To: <20260409-spl_ufs_only-v1-3-f7e0e243d805@oss.qualcomm.com>
 X-Mailman-Approved-At: Mon, 13 Apr 2026 15:49:01 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,70 +96,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Apr 09, 2026 at 08:13:32PM +0530, Balaji Selvanathan wrote:
-> Enable Qualcomm UFS driver to be built for SPL. The ufs-uclass is
-> also built conditionally based on whether SPL or
-> U-Boot proper is being compiled.
+On Thu, Apr 09, 2026 at 08:13:33PM +0530, Balaji Selvanathan wrote:
+> Enable Qualcomm QMP UFS PHY driver for SPL. This is required for
+> UFS boot support in SPL on Qualcomm platforms.
 > 
 > Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 > ---
->  drivers/ufs/Kconfig  | 8 ++++++++
->  drivers/ufs/Makefile | 7 ++++++-
->  2 files changed, 14 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
-> index 49472933de3..a32d51cae1d 100644
-> --- a/drivers/ufs/Kconfig
-> +++ b/drivers/ufs/Kconfig
-> @@ -55,6 +55,14 @@ config UFS_QCOM
->  	  This selects the platform driver for the UFS host
->  	  controller present on Qualcomm Snapdragon SoCs.
->  
-> +config SPL_UFS_QCOM
-> +	bool "Qualcomm Host Controller driver for UFS in SPL"
-> +	depends on SPL_UFS_SUPPORT && ARCH_SNAPDRAGON
+>  drivers/phy/qcom/Kconfig  | 7 +++++++
+>  drivers/phy/qcom/Makefile | 2 +-
+>  2 files changed, 8 insertions(+), 1 deletion(-)
 
-Rather than SPL_UFS_SUPPORT, you can just say SPL_UFS which will
-simplify below..
-
-> +	help
-> +	  This selects the platform driver for the UFS host
-> +	  controller present on Qualcomm Snapdragon SoCs for use in SPL.
-> +	  Enable this to use UFS as a boot device in SPL on Qualcomm platforms.
-> +
->  config UFS_RENESAS
->  	bool "Renesas R-Car S4 UFS Controller support"
->  	depends on UFS
-> diff --git a/drivers/ufs/Makefile b/drivers/ufs/Makefile
-> index e7f3c1d30c4..7056066ce25 100644
-> --- a/drivers/ufs/Makefile
-> +++ b/drivers/ufs/Makefile
-> @@ -3,13 +3,18 @@
->  # Copyright (C) 2019 Texas Instruments Incorporated - https://www.ti.com
->  #
->  
-> +ifdef CONFIG_SPL_BUILD
-> +obj-$(CONFIG_SPL_UFS_SUPPORT) += ufs-uclass.o
-> +else
->  obj-$(CONFIG_UFS) += ufs-uclass.o
-> +endif
-
-..to:
-
-obj-$(CONFIG_$(PHASE_)UFS) += ufs-uclass.o
-
->  obj-$(CONFIG_UFS_AMD_VERSAL2) += ufs-amd-versal2.o ufshcd-dwc.o
->  obj-$(CONFIG_UFS_CADENCE) += cdns-platform.o
->  obj-$(CONFIG_UFS_MEDIATEK) += ufs-mediatek.o
->  obj-$(CONFIG_UFS_PCI) += ufs-pci.o
-> -obj-$(CONFIG_UFS_QCOM) += ufs-qcom.o
-> +obj-$(CONFIG_$(PHASE_)UFS_QCOM) += ufs-qcom.o
->  obj-$(CONFIG_UFS_RENESAS) += ufs-renesas.o
->  obj-$(CONFIG_UFS_RENESAS_GEN5) += ufs-renesas-rcar-gen5.o
->  obj-$(CONFIG_UFS_ROCKCHIP) += ufs-rockchip.o
->  obj-$(CONFIG_UFS_TI_J721E) += ti-j721e-ufs.o
-> +
-
-Drop un-necessary blank line added here.
+Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
 -Sumit
+
+> 
+> diff --git a/drivers/phy/qcom/Kconfig b/drivers/phy/qcom/Kconfig
+> index 0dd69f7ffd0..e5541fd3edc 100644
+> --- a/drivers/phy/qcom/Kconfig
+> +++ b/drivers/phy/qcom/Kconfig
+> @@ -24,6 +24,13 @@ config PHY_QCOM_QMP_UFS
+>  	help
+>  	  Enable this to support the UFS QMP PHY on various Qualcomm chipsets.
+>  
+> +config SPL_PHY_QCOM_QMP_UFS
+> +	bool "Qualcomm QMP UFS PHY driver in SPL"
+> +	depends on SPL_PHY && ARCH_SNAPDRAGON
+> +	help
+> +	  Enable this to support the UFS QMP PHY in SPL on various Qualcomm chipsets.
+> +	  This is required for UFS boot support in SPL.
+> +
+>  config PHY_QCOM_QUSB2
+>  	tristate "Qualcomm USB QUSB2 PHY driver"
+>  	depends on PHY && ARCH_SNAPDRAGON
+> diff --git a/drivers/phy/qcom/Makefile b/drivers/phy/qcom/Makefile
+> index 1c4e7d8d391..a91c5377ac4 100644
+> --- a/drivers/phy/qcom/Makefile
+> +++ b/drivers/phy/qcom/Makefile
+> @@ -1,7 +1,7 @@
+>  obj-$(CONFIG_PHY_QCOM_IPQ4019_USB) += phy-qcom-ipq4019-usb.o
+>  obj-$(CONFIG_MSM8916_USB_PHY) += msm8916-usbh-phy.o
+>  obj-$(CONFIG_PHY_QCOM_QMP_PCIE) += phy-qcom-qmp-pcie.o
+> -obj-$(CONFIG_PHY_QCOM_QMP_UFS) += phy-qcom-qmp-ufs.o
+> +obj-$(CONFIG_$(PHASE_)PHY_QCOM_QMP_UFS) += phy-qcom-qmp-ufs.o
+>  obj-$(CONFIG_PHY_QCOM_QUSB2) += phy-qcom-qusb2.o
+>  obj-$(CONFIG_PHY_QCOM_USB_SNPS_FEMTO_V2) += phy-qcom-snps-femto-v2.o
+>  obj-$(CONFIG_PHY_QCOM_SNPS_EUSB2) += phy-qcom-snps-eusb2.o
+> 
+> -- 
+> 2.34.1
+> 
