@@ -4,58 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 806ABF34C49
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 12:52:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB451F34C51
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 13:01:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 031BD839DF;
-	Mon, 13 Apr 2026 14:52:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 277E3839DF;
+	Mon, 13 Apr 2026 15:01:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="rUahZXd0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WnWeLCDY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65A1E839D5; Mon, 13 Apr 2026 14:52:49 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D12568419E; Mon, 13 Apr 2026 15:01:29 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BE8183DC9
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 14:52:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 75E5C839D5
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 15:01:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 73ED861333;
- Mon, 13 Apr 2026 12:52:45 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B9DEDC2BCAF;
- Mon, 13 Apr 2026 12:52:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1776084765;
- bh=0Qz2gEsVr6PvKb92/BVEOsiTOlvFfK4ReD8sfI6WezA=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=rUahZXd0w+fq3/TsrZQF4ujIA3xNkoqrV9c/qN31c9vb1ITZFB2pWiQjheJjnbRIu
- pzwu1L4qNJjGz3LzAUGPKdqDMoTqS7hxys2Gj/VE2EvTAzs2Qwl9xFqjcwLZRLVFkK
- NzeSDMM0gsUuh7SUVKGYu7cJsO06MZ5UMRmFR1yNn5KXo3Yi7WLSjegAebbIijCMto
- ifsmJGiQfsYgBJMmvBMpezGaT8tNOw2oXezs17LHeC7+ljlx1q+uGspAg9sQmIYgIw
- JgY2FI6kMjKrlaJ89FvJbCjd468LxtE1zGolUrYTDJUGkpRxbaRwOuV8870BVkAaG1
- ScyWYxq7fYvOw==
-Date: Mon, 13 Apr 2026 18:22:39 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- u-boot-qcom@groups.io, u-boot@lists.denx.de,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Subject: Re: [PATCH] soc: qcom: cmd-db: Add optional support for device
- programmer flows
-Message-ID: <adznF-hzUtiZ6QaV@sumit-xelite>
-References: <20260409-cmddb-v1-1-b10549b34133@oss.qualcomm.com>
- <177608330028.1177412.9846637830549940803.b4-reply@b4>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7dbd2a0211bso3198664a34.0
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 06:01:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1776085285; x=1776690085; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8zWHXxI6Zwno0IDaWAd4itCTOKFu/oIP2UFfoAnQSB4=;
+ b=WnWeLCDYe7m1L3GDX+r/g93wevHDqRBRZmv7GodQQP8o2clHUZr0TINj3BEGrGOkDX
+ rlE8YRlZ1uZgkmBImN3gZIisr1T5B39+JViAc3lj6nfTYqfda3xmhPg5uYyIXoRCujyI
+ 9Jb0V3Jqk5Lrgmm65VOAYm0O/bn8VgiVavsqw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776085285; x=1776690085;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=8zWHXxI6Zwno0IDaWAd4itCTOKFu/oIP2UFfoAnQSB4=;
+ b=HJjWmu5GEBVEp9IFvH64Tb6HZczzYFnBUbOKQVI2uk+dMGIFR/QoEIXTSvqUcenhJO
+ Ti4i7OYgW2bun8Yhvaw72rk1B6t+v7xqkfN56kYHUI2j6IJXiYAdRTqDiPw0eLmQyHV+
+ 01V4PpNKnAqik8FkzXgbVxxQq84C01JWahfTy31KKB3miqgUD7NT5LNJNlA6ZNfBLMWD
+ q/ouqauhVteovo27V6i0IHwl0pSR0wPcTxtC7/uvM0ZU3rMra3xpVpAI/do/TtAWofdF
+ Q4jFreXesEgnEfZcFyH9Ob9tpK0i+Pnsh9zxhEGEo6xznVgT4heiNMG8U6Laxq8zUZT0
+ IEQg==
+X-Gm-Message-State: AOJu0YwCPai4lWUvM1pRS2c0r+mX99StONou7NqKskoOevFh3c6A/Mug
+ Jq4Edbesk9hc90CjKMlmNlgHqljwEilrgxBLjyuXAN/prnN61vXi38a5OFAaLFz9My/RdiAUFCx
+ a/g1tdQ==
+X-Gm-Gg: AeBDieuTT9nbMI0aVY40KRZ7U+sA3KzDSkD7J4pdyxLOeAsyACdAxQvhxge2DaT0geK
+ UzPei9spweThKo+euJX1jiaP0P13ehF91okS+kHlWmYyPATmqLbmmxgQ+CtP+R30d+X648R1y2T
+ 7AOlFcHVtZO/QrOobYsm1qAWSrQSUKa4PHZ+HZY5NSB52kJEzvEG8l7DVTteA1DSwHY2puT72kq
+ 0FeaLafu2CM1sGXWPwwhvdZTTnDlbATwNPUFttIqVBz+DFC1cjzXJgRY0VS2uJHI0nd61DUBI0V
+ oyG4LsW/RTbDFovPbJt5pdIzgzllvoRSZcDbVLybXlmLRJC97R4QsCG+LKPo/LWpWtjABG3A74R
+ P3Bwg8VhDRdq1wKX27iFiV6dTit1qH4jH3JV7fgO+SX59lJ5dtmDtHmE78YdKcWrO3jR7hgQtTX
+ 4t/blBMyAIeCRf5M1KdQ==
+X-Received: by 2002:a05:6830:34a3:b0:7d7:f13a:762c with SMTP id
+ 46e09a7af769-7dc27f60e59mr7812167a34.27.1776085285060; 
+ Mon, 13 Apr 2026 06:01:25 -0700 (PDT)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7dc2696532bsm8369144a34.21.2026.04.13.06.01.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 13 Apr 2026 06:01:24 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 1/8] test: fit: Drop the fit_signature buildconfigspec
+Date: Mon, 13 Apr 2026 06:59:52 -0600
+Message-ID: <20260413130007.1987326-2-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260413130007.1987326-1-sjg@chromium.org>
+References: <20260413130007.1987326-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <177608330028.1177412.9846637830549940803.b4-reply@b4>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,108 +94,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Apr 13, 2026 at 02:28:20PM +0200, Casey Connolly wrote:
-> On 2026-04-09 21:15 +0530, Balaji Selvanathan wrote:
-> > Add QCOM_COMMAND_DB_OPTIONAL Kconfig option to allow the Command DB
-> > driver to bind successfully even when CMD DB data is missing or has
-> > an invalid magic number.
-> > 
-> > This is required for device programmer flows where U-Boot runs
-> > without AOP (Always On Processor) being invoked. Since AOP is
-> > responsible for populating CMD DB data, device programmer scenarios
-> > lack valid CMD DB and would otherwise fail to boot.
-> > 
-> > Normal boot flows should keep this disabled
-> > as they require valid CMD DB data populated by AOP.
-> 
-> Presumably this is only used for development and isn't meant to be a supported setup right? In that
-> case how about just using a normal macro rather than a whole kconfig option, then you can just
-> build with make CCFLAGS=-DQCOM_CMD_DB_OPTIONAL=1 or something?
+The test_fit test requires buildconfigspec('fit_signature') but does
+not exercise signature verification. The ITS template includes a
+signature-1 node, but mkimage only needs TOOLS_FIT_SIGNATURE (a host
+tool option) to handle it, not CONFIG_FIT_SIGNATURE in the U-Boot
+binary.
 
-Looks like the commit message lacks to describe the motivation here.
-This patch is a preparatory step to allow U-Boot to be used as a device
-flashing/provisioning tool. In that environment, there isn't TZ or HYP
-stage running and U-Boot is expected to be launched in EL3.
+Since sandbox does not enable CONFIG_FIT_SIGNATURE, the test is silently
+skipped on every run. Change the marker to buildconfigspec('fit') which
+is all the test actually needs.
 
-> 
-> Kind regards,
-> 
-> > 
-> > Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> > ---
-> >  drivers/soc/qcom/Kconfig  | 16 ++++++++++++++++
-> >  drivers/soc/qcom/cmd-db.c | 10 ++++++++++
-> >  2 files changed, 26 insertions(+)
-> > 
-> > diff --git a/drivers/soc/qcom/Kconfig b/drivers/soc/qcom/Kconfig
-> > index 8243805e46a..239d87e044f 100644
-> > --- a/drivers/soc/qcom/Kconfig
-> > +++ b/drivers/soc/qcom/Kconfig
-> > @@ -18,6 +18,22 @@ config QCOM_COMMAND_DB
-> >  	  resource on a RPM-hardened platform must use this database to get
-> >  	  SoC specific identifier and information for the shared resources.
-> >  
-> > +config QCOM_COMMAND_DB_OPTIONAL
-> > +	bool "Allow operation without Command DB data"
-> > +	depends on QCOM_COMMAND_DB
-> > +	help
-> > +	  Allow the Command DB driver to bind successfully even when CMD DB
-> > +	  data is not populated or has an invalid magic number.
-> > +
-> > +	  This is useful for platforms where CMD DB is not populated by
-> > +
-> > +	  When enabled, missing CMD DB will generate warnings but allow boot
-> > +	  to continue. Consumer drivers must handle cmd_db API failures
-> > +	  gracefully by checking return values.
-> > +
-> > +	  If unsure, say N. Most production Qualcomm platforms require
-> > +	  valid CMD DB data.
-> > +
-> >  config QCOM_RPMH
-> >  	bool "Qualcomm RPMh support"
-> >  	depends on QCOM_COMMAND_DB
-> > diff --git a/drivers/soc/qcom/cmd-db.c b/drivers/soc/qcom/cmd-db.c
-> > index d0a6047b8a6..b4682d811f7 100644
-> > --- a/drivers/soc/qcom/cmd-db.c
-> > +++ b/drivers/soc/qcom/cmd-db.c
-> > @@ -252,8 +252,18 @@ static int cmd_db_bind(struct udevice *dev)
-> >  
-> >  	cmd_db_header = base;
-> >  	if (!cmd_db_magic_matches(cmd_db_header)) {
-> > +#ifdef CONFIG_QCOM_COMMAND_DB_OPTIONAL
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Switch to IS_ENABLED(QCOM_COMMAND_DB_OPTIONAL) check instead.
+(no changes since v2)
 
-> > +		log_warning("%s: CMD DB magic not found (0x%02x%02x%02x%02x)\n",
-> > +			    __func__, cmd_db_header->magic[0], cmd_db_header->magic[1],
-> > +			    cmd_db_header->magic[2], cmd_db_header->magic[3]);
-> > +		log_warning("%s: CMD DB data unavailable, resource queries will fail\n",
-> > +			    __func__);
+Changes in v2:
+- Add new patch to fix the buildconfigspec marker
 
-Convert these warning rather to log_debug() since this will be under
-special config check anyways.
+ test/py/tests/test_fit.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
--Sumit
+diff --git a/test/py/tests/test_fit.py b/test/py/tests/test_fit.py
+index 619f73153a0..71c98be27cf 100755
+--- a/test/py/tests/test_fit.py
++++ b/test/py/tests/test_fit.py
+@@ -116,7 +116,7 @@ host save hostfs 0 %(loadables2_addr)x %(loadables2_out)s %(loadables2_size)x
+ '''
+ 
+ @pytest.mark.boardspec('sandbox')
+-@pytest.mark.buildconfigspec('fit_signature')
++@pytest.mark.buildconfigspec('fit')
+ @pytest.mark.requiredtool('dtc')
+ def test_fit(ubman):
+     def make_fname(leaf):
+-- 
+2.43.0
 
-> > +		cmd_db_header = NULL;
-> > +		return 0;
-> > +#else
-> >  		log_err("%s: Invalid Command DB Magic\n", __func__);
-> >  		return -EINVAL;
-> > +#endif
-> >  	}
-> >  
-> >  	return 0;
-> > 
-> > ---
-> > base-commit: f0000b4a57e9edf8ff8454b9056d767466dff57f
-> > change-id: 20260409-cmddb-394afa003818
-> > 
-> > Best regards,
-> > -- 
-> > Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> > 
-> > 
-> > 
-> 
-> 
