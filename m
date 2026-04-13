@@ -4,93 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83F78F531C0
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 18:13:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33828F531C7
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 19:24:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3046839DF;
-	Mon, 13 Apr 2026 20:13:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2D50F83DC9;
+	Mon, 13 Apr 2026 21:24:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KllCCeir";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cxRhKStx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FBFF839DF; Mon, 13 Apr 2026 20:13:05 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2CF918407D; Mon, 13 Apr 2026 21:24:01 +0200 (CEST)
+Received: from CY7PR03CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C899839D5
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 20:13:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BB6AC839DF
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 21:23:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7d4c12ff3d5so4249063a34.2
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 11:13:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1776103982; x=1776708782; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gFbNTWkFY9KjryxbKMcYobNcmcIeaezHYHDHwNk0pGY=;
- b=KllCCeirZoClnSLhCHz8NjNeUWrJMiz5iFBHBbqMlQT4N8DJqSyGTTg4A7lED+yQUz
- vTdFFooraavPfuRaGoUmHyI3QAATK/+6ZHCuDGPezq3TQU8F7j6bPbKLgpBhBiH7RKdJ
- eCD80G+kK5aTH3rw2ukjgUloOsSbsuLun/wZ4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776103982; x=1776708782;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=gFbNTWkFY9KjryxbKMcYobNcmcIeaezHYHDHwNk0pGY=;
- b=fn5UGOL4xkNZTOkHEJQRzKRbe4sKyaPh/pSZChtbHRuBEeSbdluggd2oJEwo9d/kB1
- YnYmloU0QdZbo198i9HVnzG9bHTCDJPRRa+A5vb5JsXbQDVOYEYOULGUoVujNHzKNPHX
- stG9ZMp42CMppyrz4EwQpk10Pjgjs5C1BwB9P7UkYkG8Ag3LIU91+b5hLiESBor2JtVY
- AlM0/MtreGSLKy3FqgA/hP6o2BydiYfTowBOQVb1t1TlXtbWhw53BCHP2KNRaS9tCQ1F
- Az+g7kJR1TjjN0As/1Ee2zCI3FkDOzUJG9N/J4ShxiY8u1Eicw2HWB8c8Jd5pgrGvSQD
- iBpA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ97Pg/K+Ewwqc0ZofqOpcPGTsoxp6yOdLnx3VzYvEEMVOqtNAm8CXDuLX9CoeaPNO7Gv7yo6X8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxD6qct+YPEPZRMCkloyg/ys7/4DGYAwhazQhqidNkjz9iYRAlQ
- IDk/Dhw4w6EmVN7ByBLh78kfSOWakXavEMD1Fs+BvDcQ/uT3+I644uAdzAaUgK9MaV0=
-X-Gm-Gg: AeBDieu0/21UDRnAMfaiVN7eZKBljy0twu4rLyZeRot+0NTb3Pkibei0cCk7VT106J+
- EEEkqwRK3hns9D1xys8pecaafMlYUtxRxr83jlxMmpbW2yacb1sgS5V6blaLBMFMeT+l16S8C1L
- q/bw3U/Sq6PdNdmuZZypVmKBGAfG3a2163eJziEtMaUMWaiyJDq6VsGoP/fFhMENmCBGV+bodD9
- Exzss7S2IFo7fgZIdjsZUCptXtLaZoGAdor63rYj85c0wEnJnIbSGetl5yzGxo2bJyVqb+TlFq4
- 2vG6c2BCavK2kJ4vcfC9AYBELXl8Q0cSq354jyBzQ7OIoRLTojaYAP4rrdgkBDsDcxeKwRv+zpA
- nac8yzwVRvBKo4No6Nt00yRcrfPAEeE0nDrSeq5SxGGc8sXSitayFbXgrr5SUq8S5VnGfT4G0kH
- 9a4wQtOMzw17E6mX0EXRNz7QroqtvjqpalI4coYJeoegUlt5Dx3CUFtgKl89wh1COiGkJPrNZ1f
- +/qOD7QVR7FjJOwVRK6GPkR+N4rZ4s6+89fzx0Hny8SNvbLhdw=
-X-Received: by 2002:a05:6830:3788:b0:7db:a0b2:b5c2 with SMTP id
- 46e09a7af769-7dc27dd3c99mr9664467a34.5.1776103981668; 
- Mon, 13 Apr 2026 11:13:01 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7dc269d3255sm9292661a34.25.2026.04.13.11.13.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Apr 2026 11:13:01 -0700 (PDT)
-Date: Mon, 13 Apr 2026 12:12:58 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Eddie Kovsky <ekovsky@redhat.com>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Tobias Olausson <tobias@eub.se>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Simon Glass <sjg@chromium.org>, Jan Stancek <jstancek@redhat.com>,
- Enric Balletbo i Serra <eballetb@redhat.com>,
- a.fatoum@pengutronix.de, mark.kettenis@xs4all.nl, u-boot@lists.denx.de
-Subject: Re: [PATCH v3] Add support for OpenSSL Provider API
-Message-ID: <20260413181258.GD41863@bill-the-cat>
-References: <20260120164524.253188-1-ekovsky@redhat.com>
- <87ikckmbbi.fsf@kernel.org> <aZc_efHFk1Q-iWvP@daedalus>
- <20260219172836.GN3233182@bill-the-cat> <aaHWNU0LQqJ0zNDD@daedalus>
- <20260227174744.GW1593142@bill-the-cat> <ac2WqaHYgLslig_a@daedalus>
- <20260402162704.GG41863@bill-the-cat> <admdwS1tuX_ZdPFF@daedalus>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=we/pPz2PF2Vh54vTO4IL0UUZtsSQBFd0WVVWqW3pxJKkewiptCgFeuEUji82mDf3BEipXvbbJS57wl8sbcoKYs0pUZu9x3wznyfiSztWbrUzuMZ+Q+HM+V8GhbRur7Awi6btb3DSVs1DaUFvTi/3spvTFM+Q7JUnk8Gm2CUl88Hf1EQsK7hA3B3mMiFdkZAfLbcG2fUPwdwiFBoTA3vLjqsHsO85rrW31Q97oFigy6Fe9G2E6a4EijSQ9yKRk4fguzBgpjxTIFjQZXKA5/eyzOpS9m2Htc/yEPA37r5a9DrZWqgDk+BA5fjxoGrhVGWzs+kcflMawPVUGDp1qp4YEg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=zSu03rATZZXdV7YDp9EzuA9BakZJRkl+eclPUThT8k0=;
+ b=ka7XngQmmaBZXOJy0nok/Qu7XiVGLwUefS7JAtKhzbnz1TFyzpvNhkH1IuS/gq6N8KyXAjQiSGJu0bZvtNtmoWSwphIRKFJBuJhkahTGNa7s1wRQg7K9lHXtAMG3ZviSSOwOpKbT5WDjNNpGo8mspysVSERLr9ZjQTbJxa30+xRUZPHGJfY2/3cBJhFVuefSFg73OYNevC6B3+8FkU90yDd7caRc7poUcJkgx4635uLCDCmFXcur7lvvE/VJdRXoVCZV8HViR37d4vP7XRT+jzQkJnl68fIznXCbYJiXl0YQivlEfUbTDNsEip3DBqZpHHtqN7YVwgTJnO35OZcAVw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=zSu03rATZZXdV7YDp9EzuA9BakZJRkl+eclPUThT8k0=;
+ b=cxRhKStxaPBWxPrQXjcfSXQjjqPNBbJ+PfkUu8XzOypnRmxCl3W29W95Lrx/Kw8mW/exqzTNtB9C3+aNFi/KQDb8EgNXF5Qcb0WVjD+OYV34ogjpdfXda/UcWGG1gpV7UZ8BRg1ADWvqnyeOlCdaTIXJ6adAIzWd/4ynmYppuVo=
+Received: from BY3PR10CA0026.namprd10.prod.outlook.com (2603:10b6:a03:255::31)
+ by SA3PR10MB7096.namprd10.prod.outlook.com (2603:10b6:806:306::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Mon, 13 Apr
+ 2026 19:23:53 +0000
+Received: from CO1PEPF000066EC.namprd05.prod.outlook.com
+ (2603:10b6:a03:255:cafe::fc) by BY3PR10CA0026.outlook.office365.com
+ (2603:10b6:a03:255::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.48 via Frontend Transport; Mon,
+ 13 Apr 2026 19:23:53 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ CO1PEPF000066EC.mail.protection.outlook.com (10.167.249.8) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9769.17 via Frontend Transport; Mon, 13 Apr 2026 19:23:51 +0000
+Received: from DFLE214.ent.ti.com (10.64.6.72) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 13 Apr
+ 2026 14:23:50 -0500
+Received: from DFLE205.ent.ti.com (10.64.6.63) by DFLE214.ent.ti.com
+ (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 13 Apr
+ 2026 14:23:50 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE205.ent.ti.com
+ (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 13 Apr 2026 14:23:50 -0500
+Received: from localhost (rs-desk.dhcp.ti.com [128.247.81.39])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63DJNoqw2641776;
+ Mon, 13 Apr 2026 14:23:50 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="I0fVnErkLcKa+B4/"
-Content-Disposition: inline
-In-Reply-To: <admdwS1tuX_ZdPFF@daedalus>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Mon, 13 Apr 2026 14:23:50 -0500
+Message-ID: <DHS9TKSVNH16.3L5B7F14AYYTI@ti.com>
+CC: <u-boot@lists.denx.de>
+Subject: Re: [PATCHv2 4/5] efi_mem_sort: skip unnecessary compare
+From: Randolph Sapp <rs@ti.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, <rs@ti.com>,
+ <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
+ <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
+ <trini@konsulko.com>, <afd@ti.com>, <ilias.apalodimas@linaro.org>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20260402205038.4005350-1-rs@ti.com>
+ <20260402205038.4005350-5-rs@ti.com>
+ <59AD8D70-3B2E-4969-8E94-90BC60BEF96A@gmx.de>
+In-Reply-To: <59AD8D70-3B2E-4969-8E94-90BC60BEF96A@gmx.de>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000066EC:EE_|SA3PR10MB7096:EE_
+X-MS-Office365-Filtering-Correlation-Id: fe634b6c-baa4-42dd-e446-08de9992322e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700016|376014|82310400026|921020|18002099003|56012099003|22082099003;
+X-Microsoft-Antispam-Message-Info: wCudq+x16PhSg7N20RVpan1TxBW47EJYUOTGcu+VZTuP7/Q49OGaPz3QThPpd8LRXeLdvVJnwAkE65WSmXyHN8NezAJUS9/5o+Ye0TWjTpNeZ2O1alWi0bSzBHQvA6IQGfEj1TgV8tJXcK5LHocA8E2AXXjLkPcdxpQvebaGie7NB4XsQ4CbgK9RjhH3xNH+3egVbHtokm/0CGS54KoKAUHpt8FLWOrQt1iXPPehkWQYdcmoQ6QaqSPfioTy3XLKARsw5AC0LZhCDB9d9IgwCz7Rt2DsZEPazXPEawKwmOSbiTLobCjVh0S4WsvrH5Z3dra6g9tvvd+Dt/ibUHl/NvpYQTFNKfBnIxGwXSzYcqY7wmtA3AzNp4vYyMGfZn4AxZkyXFh7wdGlo3CtRm3afeOfj7zZngo3DsTH8wpt5ZOq9OBn+H7FECIiNRPC0BrrF0WQtiIvKvay2NwqgBET7mKg+EOSD9jKl/wzXR+NaoaU+en/jcNGYyeglBtIDcTuIpuQh3ja5zCpn3d6COIW0+Ok/AHoByuhRmpJJ/knF+XVvrN6dMukQiXohh2YO/fhXCm+WDkQiLHmYSiGV+iZ0pcsiPxu23eE6Nt54DLb0XrKSNmBCPqV9ZHZ8asdLzrNik1LR/xFf7vxe4vNLchRc6ORJ6MXuiWue/9i63igYVSmPQwlJkMk+TEwJJVraxNrVSv1tUE4Kxi2UpfDT1SQKePe4Gy/zcJG+3oI7Igf3AdyTz+2iccFs/U1wN4fVPczdb6IA32yfwFUvnL7T+ezbv6NOTbcnvxpmoV3WanXfK26hpBhz+VdOrKADw2gCU9W
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700016)(376014)(82310400026)(921020)(18002099003)(56012099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: M/pvyO2jMWwRor/uLveFciLlzluR5wEjiTygwgvGYDBVnhAk4K1QyfGQtjwaDMx9GRyXo2VZJrFNqB+7gpG7wJibOO/enJwa900W9lwZ1kZtxJuS0Xu2Sxz05p8NdFbgv6npCrtdjW+pSRTVsmiT9RNEiYi9/BT5mgTZrnTfQ67e2kmRzcxop4LYeZ6ft9pTDFd+u3kqmmVSmAY6G6VQhjiUBNX5s3k+7nUW1C9uxiJ4Z964wXPfBu+4Le987C+3byhk+EdVpUxA++euuosArb9psHCZTHEtrKPtHjwNx0Cm9BjWQSAZRNZQ52Ezx/mBs3IeiP4/kgvvTIS/5LSa64dhmLOiBNh6T2pfbrxp9yVeyNCnHxRwgqvV00+d9/LiIgWGGBt4CSGK0BrLIoQ68C+FXjjCoMJfwLMrDaaRTBqrg3oxivXaEHHEwo4EjySj
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Apr 2026 19:23:51.8007 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fe634b6c-baa4-42dd-e446-08de9992322e
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000066EC.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR10MB7096
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,101 +135,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu Apr 9, 2026 at 2:47 PM CDT, Heinrich Schuchardt wrote:
+> Am 2. April 2026 22:50:37 MESZ schrieb rs@ti.com:
+>>From: Randolph Sapp <rs@ti.com>
+>>
+>>I don't want to think about the possibility of this pointer containing a
+>>reference to something from a previous iteration. At best it results in
+>>a some arithmetic and a comparison that should usually be unnecessary.
+>
+> "a some arithmetic" is not understandable. Please, adjust the commit mess=
+age.
+>
+>>
+>>Signed-off-by: Randolph Sapp <rs@ti.com>
+>>---
+>> lib/efi_loader/efi_memory.c | 2 +-
+>> 1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>>diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+>>index b77c2f980cc..882366a9f8a 100644
+>>--- a/lib/efi_loader/efi_memory.c
+>>+++ b/lib/efi_loader/efi_memory.c
+>>@@ -129,13 +129,13 @@ static uint64_t desc_get_end(struct efi_mem_desc *d=
+esc)
+>> static void efi_mem_sort(void)
+>> {
+>> 	struct efi_mem_list *lmem;
+>>-	struct efi_mem_list *prevmem =3D NULL;
+>> 	bool merge_again =3D true;
+>>=20
+>> 	list_sort(NULL, &efi_mem, efi_mem_cmp);
+>>=20
+>> 	/* Now merge entries that can be merged */
+>> 	while (merge_again) {
+>
+> The suggested change looks correct. But we could go further:
+>
+> We could get rid of this outer loop by either eliminating prev instead of=
+ cur or by using list_for_each_safe().
+>
+> Best regards
+>
+> Heinrich
 
---I0fVnErkLcKa+B4/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Very good point. Didn't know about the safe iteration functions but this lo=
+gic
+would benefit greatly from comparing current and next efi_mem_desc and merg=
+ing
+into the next efi_mem_desc instance instead. Less arithmetic, iteration, an=
+d
+generally less room for error.
 
-On Fri, Apr 10, 2026 at 07:02:57PM -0600, Eddie Kovsky wrote:
-> --->8
-> > > I finally got to the bottom of this. Debian/Ubuntu ship OpenSSL backe=
-nds
-> > > separately. The CI environment is missing the 'pkcs11-provider'
-> > > package, which is causing the binman tests to fail.
-> > >=20
-> > >     $ apt show pkcs11-provider
-> > >     Package: pkcs11-provider
-> > >     Version: 1.0-3
-> > >     Priority: optional
-> > >     Section: libs
-> > >     Maintainer: Luca Boccassi <bluca@debian.org>
-> > >     Installed-Size: 410 kB
-> > >     Depends: libc6 (>=3D 2.34), libssl3t64 (>=3D 3.0.7~)
-> > >     Homepage: https://github.com/latchset/pkcs11-provider
-> > >     Download-Size: 125 kB
-> > >     APT-Manual-Installed: yes
-> > >     APT-Sources: http://ftp.debian.org/debian stable/main amd64 Packa=
-ges
-> > >     Description: OpenSSL 3 provider for PKCS11
-> > >     With this provider for OpenSSL you can use the OpenSSL library
-> > >     (version 3) and command line tools with any PKCS11 implementation=
- as
-> > >     backend for the crypto operations.
-> > >=20
-> > > With this package installed the SSL errors logged on Azure are no lon=
-ger reproducible.
-> > >=20
-> > > The results from the first pipeline expired while I was investigating
-> > > this. I reran the CI job so you can see the error messages.
-> > >=20
-> > >     https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D1303=
-5&view=3Dlogs&j=3Dc59aff74-743b-5f08-f408-4a608a489153&t=3Df2ea3536-b291-5a=
-39-ad92-0220c9b8101a
-> > >=20
-> > > I have looked into the .azure-pipelines.yml file, but it's not clear =
-to
-> > > me how to configure the CI to install extra packages.
-> >=20
-> > Ah, OK. So the package needs to be added to tools/docker/Dockerfile (and
-> > doc/build/gcc.rst). For testing changes out, you can then modify
-> > .azure-pipelines.yml to point at your image, rather than the default
-> > image. Or hack in a "sudo apt-get update && sudo apt-get install ..." to
-> > the job.
-> >=20
-> > --=20
-> > Tom
->=20
-> Hi Tom
->=20
-> Updating the dockerfile and documentation was easy enough, but I was
-> still seeing the Azure pipeline fail with the same errors. It seems to
-> be ignoring the updated dockerfile.
->=20
-> After digging through the pipeline logs I noticed that Azure is using
-> the Windows Subsystem for Linux with Arch Linux to set up the test
-> environment. The package name 'pkcs11-provider' is even the same on
-> Arch, so I added that to .azure-pipelines.yml.
->=20
->     https://archlinux.org/packages/extra/x86_64/pkcs11-provider/
->=20
-> And the Azure pipeline now fails because it reports the package doesn't
-> exist.
->=20
->     https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D13066&vi=
-ew=3Dlogs&j=3D8222cf02-b5ce-5040-5def-6173bf341f71&t=3D5f6e674b-07e4-5ce5-7=
-7ac-ecaae7331dd8
->=20
-> I am not an expert in these CI systems, so I'm not sure what else can be
-> done to change the test environment.
+Will apply that.
 
-So, I see two problems. One is the failure on Windows hosts. Perhaps
-https://www.msys2.org/docs/package-management/ has some hints on how to
-find out where it's looking for packages and if that's packaged in turn?
-The other is that the binman test suites are still failing, on Linux.
+>>+		struct efi_mem_list *prevmem =3D NULL;
+>> 		merge_again =3D false;
+>> 		list_for_each_entry(lmem, &efi_mem, link) {
+>> 			struct efi_mem_desc *prev;
 
---=20
-Tom
-
---I0fVnErkLcKa+B4/
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCad0yJgAKCRAr4qD1Cr/k
-Cn9dAPoCg8ugqHIqEltn6odPqUKCYHljKOIreAz3SmXMV6bcQAEAtZK4CMUtk1t8
-Wh9wkdPie0L4csRswaF55vP/i3QdRQE=
-=BK1K
------END PGP SIGNATURE-----
-
---I0fVnErkLcKa+B4/--
