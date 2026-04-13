@@ -4,121 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48393EBFD15
-	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 08:13:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46EEAEBFD14
+	for <u-boot@archiver.kernel.org>; Mon, 13 Apr 2026 08:13:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E509883EC6;
-	Mon, 13 Apr 2026 10:13:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 2D35D84199;
+	Mon, 13 Apr 2026 10:13:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="Ep8tnRKS";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="akrk/FJy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 594D984119; Mon, 13 Apr 2026 10:13:32 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
+ id C693383B99; Mon, 13 Apr 2026 10:13:38 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1442D83B99
- for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 10:13:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DA52183B99
+ for <u-boot@lists.denx.de>; Mon, 13 Apr 2026 10:13:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wzvdJA8YNrD3ctffCL8M4B32sUGlcEE5lERaMg7khyabz+AynfyoDacs8HwLRgKubSeTK/NQ+/U/2rmcleWtMgyAEXNPxkW8P5Fdt3L3BCEBcJUECXHF80sSNsrR/vLkzgDa9a0eNjvafMOCJfoI6ZfEvyXZ5n4DZl4XFhP/XVD6OdqFZ5qLYkenOeaZAq3nxWP/v1bhWXdE3pKFsDZCQa6SnP2jwe4KKZk6hKj3h4BWO3Wcd+rmrtdncRMh/XKQhtHbIXYD2lpf7VuKerQAL2Juzsih/Q72hpZAX5unxggzXg8lfp7L8wG1rIfL/QmmtFneSdvCXpFc48YrvdpzPg==
+ b=HM89NKQKBap+QPISdKjO81W7CnSuMnKMQqS0dduLdBT6n5W6ug2bQ0yQ6tF/ZN98+TmnOZpksMQbkDA8Bp05UlCgaM2Hm6MloKPe7UyHKSBLUnwjUtaPWtOFfn/WU533YbAwGjvosSu0b35tADC29lL0y7Tj1r6lilf04oW9BT568cufmbgfQUckYSN7DO3FjnOUpE0qgWJ5VEIM84SNDdLanj5jH3ZRNmsJw4kuKnAWMPohmdL/p7qL45acPCRn72VV2MgdILP0ZD1E/vQ42AEdCnkYyM98NoPrzYMd0LbUNy5R8U/+yOrt5Bu9rfNbDQ8A+DXRhWtVQZjz6G/d2w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qOqAJt4Acm6VZ8R142NweLkcAwIjeLRXK5ToBJ/O/jc=;
- b=A0LJpA/PHQePM5bTZy5Pl/1TJGoWCO+HMjz3QA1QGjd0HCjjYdNKG4MQjrBxYntE9tiiye5Fev6Ef+JYEqG00RP3Xbs8a/ptVR77C5icFgGX25/KN3iOWF941n9xLwuJvK5yyfpsoxmtfKcr7b3freJiodn4yzH+crcASHXFFYa7rj5KaQhghJh3Qzn35sixG6r/5B0wvW9toKOh+dhkWbvWEd2i6faK7mNQJSigLhxrx4prn5TnuMs7ZNoGuV0iwEE80gecoBqgIrou6QZC4dyG2aF9p5ceoq3zm5ILgcuXuKEXYdLjkNxDF/TA0Sjol8qdmY0HTRzH64HU6wehhQ==
+ bh=Q2Yj2bHmit+6Y7m5Dp/EMtQUXxbqGkHwheJCXHQtMyw=;
+ b=Sd7cJyBS116OW5IOtVyYz3cSc6Wng4Nichji4/oxx70uJrbpZk4i80WDhnOsVOP0Tmbb0cqFCSTrVMzyhxu9S13shsGw0GQ1SkS81l5zJyHTywdN8qQFL5q7hPM4e45ewiV2E/qtQ5TdsRlMfTjg6Fjt2a1YMMlf2j2e203sHnArvjzI1S95RQjwClqaZ2/g71Bhph32ChtGiYiu4juHeysMIdzF/TAoI18fO/4yAvntt6vLR/QX+ucnYGILAglzeg+bh6jMlaqJHqPkn/IZnZbBVTDvSV/d/VjzpjZsL6w3yMIQFx7Cc89913zXlR4M7vVzShOOeMtpyIVs4LVuSA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qOqAJt4Acm6VZ8R142NweLkcAwIjeLRXK5ToBJ/O/jc=;
- b=Ep8tnRKSuYdlSSJE55xCKgPMLfO1kNlc4gqc5f6g3xZd7/+LyYs4wrKO/TeqhmXtvXE4Vt0YnweyjNhM6RdDQQlXvEJ4Ijn5heaUYPDUqjQqhyScuuLdnj4Vv/oQc2MiO3/Ou3gcUrM7FDBaBYqXoI/1sdimwysBiqxk0hpbAVY=
+ bh=Q2Yj2bHmit+6Y7m5Dp/EMtQUXxbqGkHwheJCXHQtMyw=;
+ b=akrk/FJyBFoZIjoh9r7AqKu6/nPkXWewlBJc+0Vb6Zi0gp/F35PRIyuFUW5gLN3+vVMDqLAm1c3y5D7YpqNkn5zEO6B94h14N/BcG8XEmKOkUtfmRiFZm6nyQkPUfUYrJXIXsDgjXOUHb0JEmYVcKw+cG4D1CybPfDjdBlIbJnPQIbBa8voii8D38UllMQxl+s8IYIPiixN78E2TRve872OlqILnXADnH/qGUN6IJNnUGhoUlsPP2UssJB/w41HkiAY58KUMgguSwQfKqOTytPbuR0tFWYhS5zACXtjD2W9HUhi6yTKw47YZUAPvi0a04psv9ozMZauOxIHdU8gvgg==
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by DB4PR10MB6166.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:389::22)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
+ by DU4PR04MB10483.eurprd04.prod.outlook.com (2603:10a6:10:565::15)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Mon, 13 Apr
- 2026 08:13:25 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8%5]) with mapi id 15.20.9769.046; Mon, 13 Apr 2026
- 08:13:25 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: u-boot@lists.denx.de
-Cc: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH] cmd: mmc: allow 'mmc rst-function' to show the current value
-Date: Mon, 13 Apr 2026 10:13:22 +0200
-Message-ID: <20260413081322.2226374-1-ravi@prevas.dk>
-X-Mailer: git-send-email 2.53.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0085.SWEP280.PROD.OUTLOOK.COM (2603:10a6:190:8::7)
- To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+ 2026 08:13:34 +0000
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::cf3:c5b0:7a0c:d11b]) by PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::cf3:c5b0:7a0c:d11b%5]) with mapi id 15.20.9769.046; Mon, 13 Apr 2026
+ 08:13:33 +0000
+From: alice.guo@oss.nxp.com
+Date: Mon, 13 Apr 2026 16:15:39 +0800
+Subject: [PATCH v2 1/2] net: fsl_enetc: fix the duplex setting on the iMX
+ platform
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260413-netc-v1-1-8670e5ce2d49@nxp.com>
+References: <20260413-netc-v1-0-8670e5ce2d49@nxp.com>
+In-Reply-To: <20260413-netc-v1-0-8670e5ce2d49@nxp.com>
+To: Ye Li <ye.li@nxp.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Marek Vasut <marex@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ u-boot@lists.denx.de
+Cc: Jerome Forissier <jerome.forissier@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Michael Walle <mwalle@kernel.org>, 
+ Vladimir Oltean <vladimir.oltean@nxp.com>, 
+ Heiko Thiery <heiko.thiery@gmail.com>, Clark Wang <xiaoning.wang@nxp.com>, 
+ Thomas Schaefer <thomas.schaefer@kontron.com>, 
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Robert Marko <robert.marko@sartura.hr>, Yao Zi <me@ziyao.cc>, 
+ Peng Fan <peng.fan@nxp.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Jacky Bai <ping.bai@nxp.com>, Alice Guo <alice.guo@nxp.com>
+X-Mailer: b4 0.15.2
+X-ClientProxiedBy: SG2PR02CA0041.apcprd02.prod.outlook.com
+ (2603:1096:3:18::29) To PAXPR04MB9644.eurprd04.prod.outlook.com
+ (2603:10a6:102:242::11)
 MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|DB4PR10MB6166:EE_
-X-MS-Office365-Filtering-Correlation-Id: d1d18b30-44c8-49ee-a0f5-08de99348906
+X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|DU4PR04MB10483:EE_
+X-MS-Office365-Filtering-Correlation-Id: ae8e7aca-3575-4705-a0d9-08de99348e11
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|52116014|366016|18002099003|56012099003|38350700014;
-X-Microsoft-Antispam-Message-Info: uFbejoTpVIUdf2mYOp1bVTIoZCyLXQ/jIBC6BC9gb3H1UsD+gMXFz67kHTCg3rXcMcfmZ3DQGNZLASc6LNusVch0tfoXr082UiQx6LeDde3KsGCXAN/fMX52W6o4nUMSGA3gs62GPTJPJG329MJF3OlB1VWgPxSa5yZ8VcAzRCy7p3nyrpbHSa5nV1LEj2h5E9ZBsxHKJzzjYgKHdHwFMHs3dQzUv88QHEnuDDvdci/TjNQ+sTeBupNQiOIpoVFMf6QrFK30QfSJtu2CQQF28K1v6v8fk07hwA/+0sfVni0Sbm5KAvb8M/7GBHwLNV1VE+pVwj51sDJ2+IeMjfLOKkvtzBMkjV0GL24wkK7skDpu+HejapMIuPylipzTKnNSXm39jmd0VGZhmspMTWussqBBRaWofrZlQDJfRBP94HkwummZiCZQUNcPi8A5LcMHlClwJz40PVKMIZmIwDXqUPTx5KhiRv6PSoY/KsVlJ028xT0wZxFRqRHJssuxfC41SEMdDqUmesKEJXc/BsHc47FTDAKPRzlaYh4Z+VMA6KIszcNBODAtLLZsVioOiIixaBn0vVMbUD7o916SExwo/Jw31Fy+AER5KAKGL4Ys0T9nYp87xo2kCJyOmig8DlilhnHesA6lZ6fGyoLxWrUVKDbIsUqs13B3FuXJkyzQK5NTZ+LHMxYPEnXOx1+n8IZPmR02keEaAvtjjD3YldckwghpZOB7mrFj/V90ZNEPVXplnoFB0RbZfYtyY/7JsTO8Vp9hHuQouWDC+95fYFYrKVa4XI7Wvqjm4ePFI5JJ/Y0=
+ ARA:13230040|52116014|376014|7416014|366016|19092799006|1800799024|38350700014|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: YpVQ9Z/joqqFajfNszTGYXsfD57jxttVndXBXXFFLWUhc7eZHyeoT/jE6Mq1GABFs4+g0D6IDf5Zscmbvijs8Agl9v86MrpLwmoDjxRS3AxEp5bHVHwuY5KmBJK2sRMQxYn9AgSPSpGvYShQAdacs/hZQiKq/7KRoLgpDGR6/g9uAOuBbb18lyO8rS4zutRyerRFe7B751H7TyjpkPXbVfA050YXOU/fgBCUrqf+dlIckK4nWVoqFfzgVyi1tZXGW/CgSSEemPTGJVmuOf9KRhRlLfvj0KMOg24/sVF66eoyHs83fNZwqXpggeVvSnhfnEWT7Re8wSmzYUs9IH+8yCgaMGIny3h+37zXTDyZJ3Jdb+d+/svDN+nL6dBQpCdNNJquqqTdbGhU8FLGc+Avfx+mdYxGYft42YVfC6NFMezP4lN+3tjpTVcoz4YkRDsJ8fmv500Nyly9s74aDkyP6N/0Jd6gy8sTUiPueclcIzl6gQyjpAhkjk6xYvzNByixldNa1RkNBeSBxTB/Sa5qxB8EgMPUxAjpMYDjoVYTS3rEnOFRLlFLn0RtI8ksTQi6/ZbQzNzpTV8jmAAneo1Vfr2tdnnqpePF+P/fQd4to+FFSEKfVZzjPLgRz6IcpJ44N89HyuyH9se9YT7tgjKEdK5ETvje50A4Ra03QCNRX1QAc6V3iDU4as5QxSnJkNnqUSgRcSXHJeyD1nS5xwpZWy2w4H00/jJ4AevqT2/RIs8ViKFNs57ICW34MTwnkDeLfj/WsIEZ9mK+kpzbtot4XZCxkflEPhIHVzChpY9iLpI=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(52116014)(366016)(18002099003)(56012099003)(38350700014);
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(376014)(7416014)(366016)(19092799006)(1800799024)(38350700014)(56012099003)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?CEOo29YjQs9MedXypLV0iXNGGcwrti4hANWjoQQzCWYvoi+BcizOp2WxSq/8?=
- =?us-ascii?Q?SEabi3x+XnVYQFw6ffJPcUdvB/1U863QwSu0RpB0gWA6FT9sHtBWWU0BMvoA?=
- =?us-ascii?Q?j4OMYkWlSTS4sJFbKUEh7JJMKqsjoNGkOjf63DpXQg4Pw3C5qeMg9NMEuKi7?=
- =?us-ascii?Q?mlPv7k8UctSuAB1aQ+L6EWjjw89H6CcCch1vjwi1eEZc9H97XfdYYJD6UATn?=
- =?us-ascii?Q?SHJ4bpLGAtCHhEZ9/15eucUi3PjBXdVJaEOdlWZ2AZ8ulsuATpsnwELofwn8?=
- =?us-ascii?Q?ER9Pf4EzB4EKb7B/U0y+Kk7zPzKjP38j9OHv/9ypCUMjbN+DIMOcdv3uladn?=
- =?us-ascii?Q?3FdC8p4p4TCbMR7k867qYxOZbaEh2RNYVXYAizIPOIoJON9b+kdZ64c3D0R+?=
- =?us-ascii?Q?yTwuyaWgH58im1QaT8l+7qH3TaLHLeXY1dvA39LzRArJUbFI2Jiiu1LxGMng?=
- =?us-ascii?Q?rNsjLTuB5aLWwHhtQCePwoTTCAWRnjJlulTtBeYNOidgByLhuglYWuT4Nyc9?=
- =?us-ascii?Q?fK2FVJR3jIs/kX8JjcbIa/YIBdJC6gzsn6S/KFTGiBy7i2Dif8ItbjpkdBqI?=
- =?us-ascii?Q?fiVkt6i1A4GcWodtB2l50HzUMAXfq4LWwLOgHSCyiArhzdR2DdNJEOvtUtOy?=
- =?us-ascii?Q?2AxPAWd/gcPhiD9fUsEfHgTvDPRZ9FSdXZMlToFDL/1wp1GK10WokH2K2L1E?=
- =?us-ascii?Q?vra7AIlqw07GgifwmVwTUcNNdG4FkeDedF5etaMvpAxxFBac21I4g95oWWgJ?=
- =?us-ascii?Q?53bd3ccC2ghVDptMTt+W7N0S5dEytcwgJnQ/VSaV66IP46rP5cLADZEj0zVK?=
- =?us-ascii?Q?ead1IsH0tzQcC4gzTcDHgCOYzJ82Ij3KCtLVf3Zo0x++LkRpfp1EcksM+kvf?=
- =?us-ascii?Q?/3JLMdy6b2fQzpFkwAosiGrWx+780XlKNaTo+WzkppDJylJby0inyAyjDxTb?=
- =?us-ascii?Q?NcTdW8IwI2G7UHEPRX216JafYUTQGMY+KFfZCYCQY6ztW+ZX07N0wAuic0/p?=
- =?us-ascii?Q?h/AlE8N1xmncWLeNzglarl2coasxo43CxJIKxmLvXeXZk2JP4RT1GsgBYmEw?=
- =?us-ascii?Q?hCrSM0ZYXNa1ZtBRtYVO1BOoOcdfZSL6FEaEOkpNUO2xE8GUyYR4iyzvuV32?=
- =?us-ascii?Q?gfkpsBvtJxc/cQmnKGPEEl+nXjg/bP5jpXDPXsR4/p88xtPs7fX6ND/sY0el?=
- =?us-ascii?Q?Ow6OvTpleSxpn3n6Pl2O4YhwjFfrJrJOoguHirtxS3wB7QyjI+E73DwdiSvU?=
- =?us-ascii?Q?LYHZvGuUavzSxoDjZnapgLLnsKG8uNrK6kxxAY59Aewh9bTJT9Wp0m+m/wMl?=
- =?us-ascii?Q?vjacFSKGHmEkmg3CiQt7A5k70SG0lUXgkq1qbehyebPKG3l8WAC9bRo9qTFm?=
- =?us-ascii?Q?55hSC38PhmNS2in5YkEglQB494DtoRnR7vJstlto6CY7bTnx/mRlxq5RGIRd?=
- =?us-ascii?Q?9dG2YQZHEO/7OeZ2DVklUG0E/gWIo01JmK37B33QithO28kLKe3nLMWzA0Dz?=
- =?us-ascii?Q?0BrFMhhn/Yw5i7sA8olw0y5lzx/4DQshfz4ttGYzWSb2GXqHOFcWYhyB16sD?=
- =?us-ascii?Q?ZLNYERFTT5eoXsVJTIp26L7No+zcRj926xaHkOftHTYm2BtIy/DQ3ctUYODF?=
- =?us-ascii?Q?oyrm6VKs0CXp/pXRMZG9/9Sf0UxBEpEGDzrAjFnNy7T+UkO3TxRDHiahdt2O?=
- =?us-ascii?Q?ZFb2CCHrAF5eyd7tkwgyNwqZzmPJGisdpLXd3FHR7gPOsGZYHvHpgaYHrXCX?=
- =?us-ascii?Q?uzXYN/lmSIugTEE81VETdn1bWrabnyk=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: d1d18b30-44c8-49ee-a0f5-08de99348906
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eklSZmRlenpJWXFnRXo1N1llMTVNN0J3YTVWN1lqZHhSZjlRdzNGWlJRQ3d2?=
+ =?utf-8?B?U2w2VHVKL2pWamVkSmFsZk1QbWxTVnBsOGZLWlh6ZUpyQWx6ZjJjcHdJRWky?=
+ =?utf-8?B?emJrZisraSt0dVdSL0ZKQ1hCVlVBNW1taHZaaUd4dGUzc3VsUG8xMzMxOFlO?=
+ =?utf-8?B?eVhVcTJnbExvOHlGSFAveVJzZ0xvd0dMV1BsT3RmcWg4R05hcnczc2JwY2h6?=
+ =?utf-8?B?cTFaTGx5Qkl2ejc1TGN2UXF5a3VrdXdGTVhDRVNIN3I2VENNWlFEa3poYlFr?=
+ =?utf-8?B?RGo2U3YvK25ob2RGRkVPcm1IVlk0M0NweGNrMDUvRDJlZ0h4Z0xKaVpMUzdB?=
+ =?utf-8?B?VXoyZ0hpWDA2d1ZBT0NhWi9ydE0yeTN2c2h3T2xqQU5nV3k3bld4ZU5aWTVP?=
+ =?utf-8?B?OFRuY1JmTks1NnhLa3NLV2djUE1lT1FjMGw0SjJmOVhhSWg4ckZGN1NoSVIw?=
+ =?utf-8?B?cXcwZ1h2UHpDWElhRHNVb3o2bGl5L09lSS9VRld2OVd1WW03MWlacjl3K2Fw?=
+ =?utf-8?B?bXBmV2RrVWVRV2lpVjVYYWtvbm9Mbk1oTXIxTW9GUFo2UUg4ZW4ranlUeklN?=
+ =?utf-8?B?cHRBY1hwUi9OTmxqbUV2c05RU296SzJKNjc3QmlxSmM4UEtWMlhpdzd3VGR5?=
+ =?utf-8?B?Q0lEQXFXQlFWMko0K1RNMXl1UzU2ZUFwSGppNzdFTFloSzY0MHp2TXpaVXRE?=
+ =?utf-8?B?RjBlNWIzQjBFeUUwdUFGaE8wOFcyRFhvVnRTUHltV1I5V0w3OEFGRnVaZk5G?=
+ =?utf-8?B?U1I1Rzd3NURrcFh5aThERXhQZEpqeDBLVnZ0OXZaQVg5SDh0bmtMMGc2VENx?=
+ =?utf-8?B?ZjlyWmpqbHBLYjNyWEYyQis4cjRVbXlFbWJYalppUTJoTnUybHgza0hzdkR1?=
+ =?utf-8?B?UG50N0t3ZmNSbHBxZm15QnBJWEZGd2dFRXYrYjJsUkdwV1lmTW9wTzd5OTJa?=
+ =?utf-8?B?RDlWNkFHNFdKa3Ntb3E0TGNyYnREUGlQSlZwNUZHdkIreU9vTWJxaEFEdVYr?=
+ =?utf-8?B?ZEgrL25MNlpCVGNtZ0RWT3o3RDlqaE5hbFE0L3owd0djcjZaNmRNUHFXUEp2?=
+ =?utf-8?B?eDlVMWc5MzliY0YybjdHZXR1MVRVSXA5T3FYc0w3dURFR2V1dVlPZlRUMEdr?=
+ =?utf-8?B?Mmp4S3lLSUxNSkZqT3lLOTg5a012SVB1YXhzVHJKby93MHF1V2NSSzBpUGlr?=
+ =?utf-8?B?RnYrTGxpZXZTV2lnUVZXeUtoR0JzdWhxTlM4MDc5YjZJTzlHblJjRE9ydnJS?=
+ =?utf-8?B?U1NaanlQaURrelRBOHV5VTRwOVZWNFdLb0JZVG1FcXQ3eTl1THBzV1FlcEhh?=
+ =?utf-8?B?Tmp1eFZ6NW1oU3hwWVloUVdyckZobWx0WjFnWHJ3SEIrNkc5YzdrWVJuU1BM?=
+ =?utf-8?B?R3dDYjN6bDRhWktBZklCR0Q2TWRUTzduU2NZQ0VxZzZtSVdvL2plZy9NR0hx?=
+ =?utf-8?B?ejJHNXZQdkpNSWJPRUh4RW1qTDR5WU1NQVV2SDdsUXhYTmpKUy9yZ1Y1ZFM1?=
+ =?utf-8?B?a3EzeWRaeVk4UUwyTDQ2TEl1bUUwMGlhOHdhd2xuWmNWV1lxdnVMUzZaQnV3?=
+ =?utf-8?B?Qk5rdzZSRlhWTWxWdzFoT2g0bXRTWmJNdnoxL2RUUU9TK05YeUU2WnVvOW0r?=
+ =?utf-8?B?TnZyUHpzS0tERzlBbzhYRzdQQ09Qci9leXV0M1hvdHVBYThFQ0FKUUlLUEVm?=
+ =?utf-8?B?b1ppcDhHeVJTZXBmenE5cWQzTThvcHYzaTJUQnJFQmJEcWRlRmxXSW91ZCtS?=
+ =?utf-8?B?Tlk3bFJENHNSRUcyeUhnd0V0NmFFdElnaEJ4WFlBNVNiZVlwVHNYaHl6TzFG?=
+ =?utf-8?B?M1gwWm8xaEp2Q205MEF0Uk5kN09Lb3grenFRekkralhkMmpPZ0RGRHZhc1M1?=
+ =?utf-8?B?dG5INTFhaHcyMXIyZUR6N1lJbWdOMWRjZk1JNEE2Skp3RDVmWTEyTnNxaFFX?=
+ =?utf-8?B?RFZKK2pCaGRwQWpiamJLWnBXS1V5a3FBN2R3KzZxank4VFUyY0ZHZEM4VnRL?=
+ =?utf-8?B?TG40a2hWMkVJdEhBTnZxMC91cmJ0Zk9OTnNqdU1aQnFKSkhyc1ZJVHN5TkNn?=
+ =?utf-8?B?UC9Odllya0pjR2c2aUIzYkJKR2ZyWmsyTDZsWm01b3pUU2lzeVluSlVDd3ZV?=
+ =?utf-8?B?Vlc1T2RSQ1JyLzRaS0dRcjdqRmcwS2haMTFuYm92YmozYno4T2ExR2gwV0x0?=
+ =?utf-8?B?RlpyL1FmQ2hFQ242VXNZZFdDcUJSQVB0WmJ2ZVBOaisxdzlheVkwcmpDVml0?=
+ =?utf-8?B?M0hHSlVBVlpPUWFweWFOKys3Qnd5MkQwcDVsZFRHR1FQYjZna2UwWlhOTG5i?=
+ =?utf-8?B?aDRkdVpwZ241dmVPM1BLRjI3TDdMbUQrNERSenVxaDkwNWphUTNVQT09?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ae8e7aca-3575-4705-a0d9-08de99348e11
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Apr 2026 08:13:25.1566 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Apr 2026 08:13:33.7057 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: USQU8EIAhyqpvqisYEaTlIaL3zjrXw0j2/qgEhAPHPOP7ZwlOcVTFdcHQCXkGHxqbVWDgKEyPaLKmHan8oiMZOPK0sE7+wxQGEsnPGEDoxk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB4PR10MB6166
+X-MS-Exchange-CrossTenant-UserPrincipalName: g9pC9bdpcWrXlY57Xe/92UgW4uukhdK3Rhi+7U8BeefwoeDgavHxAn1yRwXWK7wh3fZ7mgHrDbnmdbEYsYrVUw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB10483
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,101 +162,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Extend the 'mmc rst-function' subcommand so that lacking a value to
-set, it simply prints the current value, and its interpretation.
+From: Clark Wang <xiaoning.wang@nxp.com>
 
-Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+The iMX and LS platforms use different bits in the same register to
+set duplex, but their logics are opposite.
+The current settings will result in unexpected configurations in
+RGMII mode.
+
+Fixes: e6df2f5e22c6 ("net: fsl_enetc: Update enetc driver to support i.MX95")
+Signed-off-by: Clark Wang <xiaoning.wang@nxp.com>
+Signed-off-by: Alice Guo <alice.guo@nxp.com>
 ---
- cmd/mmc.c             | 36 +++++++++++++++++++++++++++---------
- doc/usage/cmd/mmc.rst |  4 ++--
- 2 files changed, 29 insertions(+), 11 deletions(-)
+ drivers/net/fsl_enetc.c | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/cmd/mmc.c b/cmd/mmc.c
-index 81b1ca4ad84..f217dfdacaa 100644
---- a/cmd/mmc.c
-+++ b/cmd/mmc.c
-@@ -1012,16 +1012,10 @@ static int do_mmc_rst_func(struct cmd_tbl *cmdtp, int flag,
- 	 * The only valid values are 0x0, 0x1 and 0x2 and writing
- 	 * a value of 0x1 or 0x2 sets the value permanently.
- 	 */
--	if (argc != 3)
-+	if (argc < 2 || argc > 3)
- 		return CMD_RET_USAGE;
+diff --git a/drivers/net/fsl_enetc.c b/drivers/net/fsl_enetc.c
+index a4ba27904bc..766aea035d3 100644
+--- a/drivers/net/fsl_enetc.c
++++ b/drivers/net/fsl_enetc.c
+@@ -17,6 +17,7 @@
+ #include <asm/io.h>
+ #include <pci.h>
+ #include <miiphy.h>
++#include <linux/bitfield.h>
+ #include <linux/bug.h>
+ #include <linux/delay.h>
+ #include <linux/build_bug.h>
+@@ -388,7 +389,7 @@ static int enetc_init_sgmii(struct udevice *dev)
+ /* set up MAC for RGMII */
+ static void enetc_init_rgmii(struct udevice *dev, struct phy_device *phydev)
+ {
+-	u32 old_val, val, dpx = 0;
++	u32 old_val, val = 0;
  
- 	dev = dectoul(argv[1], NULL);
--	enable = dectoul(argv[2], NULL);
--
--	if (enable > 2) {
--		puts("Invalid RST_n_ENABLE value\n");
--		return CMD_RET_USAGE;
--	}
+ 	old_val = val = enetc_read_mac_port(dev, ENETC_PM_IF_MODE);
  
- 	mmc = init_mmc_device(dev, false);
- 	if (!mmc)
-@@ -1032,6 +1026,30 @@ static int do_mmc_rst_func(struct cmd_tbl *cmdtp, int flag,
- 		return CMD_RET_FAILURE;
+@@ -408,15 +409,14 @@ static void enetc_init_rgmii(struct udevice *dev, struct phy_device *phydev)
+ 		val |= ENETC_PM_IFM_SSP_10;
  	}
  
-+	if (argc == 2) {
-+		ALLOC_CACHE_ALIGN_BUFFER(u8, ext_csd, MMC_MAX_BLOCK_LEN);
-+		ret = mmc_send_ext_csd(mmc, ext_csd);
-+		if (ret)
-+			return CMD_RET_FAILURE;
-+
-+		printf("RST_n_FUNCTION: 0x%x ", ext_csd[EXT_CSD_RST_N_FUNCTION]);
-+		switch (ext_csd[EXT_CSD_RST_N_FUNCTION]) {
-+		case 0x0: puts("(temporarily disabled)\n"); break;
-+		case 0x1: puts("(permanently enabled)\n"); break;
-+		case 0x2: puts("(permanently disabled)\n"); break;
-+		default: puts("(unknown)\n");
-+		}
-+
-+		return CMD_RET_SUCCESS;
-+	}
-+
-+	enable = dectoul(argv[2], NULL);
-+
-+	if (enable > 2) {
-+		puts("Invalid RST_n_ENABLE value\n");
-+		return CMD_RET_USAGE;
-+	}
-+
- 	ret = mmc_set_rst_n_function(mmc, enable);
- 	if (ret != 0)
- 		return CMD_RET_FAILURE;
-@@ -1344,8 +1362,8 @@ U_BOOT_CMD(
- 	"mmc partconf <dev> [[varname] | [<boot_ack> <boot_partition> <partition_access>]]\n"
- 	" - Show or change the bits of the PARTITION_CONFIG field of the specified device\n"
- 	"   If showing the bits, optionally store the boot_partition field into varname\n"
--	"mmc rst-function <dev> <value>\n"
--	" - Change the RST_n_FUNCTION field of the specified device\n"
-+	"mmc rst-function <dev> [<value>]\n"
-+	" - Show or change the RST_n_FUNCTION field of the specified device\n"
- 	"   WARNING: This is a write-once field and 0 / 1 / 2 are the only valid values.\n"
- #endif
- #if CONFIG_IS_ENABLED(CMD_MMC_RPMB)
-diff --git a/doc/usage/cmd/mmc.rst b/doc/usage/cmd/mmc.rst
-index 55391fda24c..c6ab334b3d4 100644
---- a/doc/usage/cmd/mmc.rst
-+++ b/doc/usage/cmd/mmc.rst
-@@ -24,7 +24,7 @@ Synopsis
-     mmc bootbus <dev> <boot_bus_width> <reset_boot_bus_width> <boot_mode>
-     mmc bootpart-resize <dev> <dev part size MB> <RPMB part size MB>
-     mmc partconf <dev> [[varname] | [<boot_ack> <boot_partition> <partition_access>]]
--    mmc rst-function <dev> <value>
-+    mmc rst-function <dev> [<value>]
-     mmc reg read <reg> <offset> [env]
+-	if (enetc_is_imx95(dev))
+-		dpx = ENETC_PM_IFM_FULL_DPX_IMX;
++	if  (enetc_is_imx95(dev))
++		val = u32_replace_bits(val,
++				       phydev->duplex == DUPLEX_FULL ? 0 : 1,
++				       ENETC_PM_IFM_FULL_DPX_IMX);
+ 	else if (enetc_is_ls1028a(dev))
+-		dpx = ENETC_PM_IFM_FULL_DPX_LS;
+-
+-	if (phydev->duplex == DUPLEX_FULL)
+-		val |= dpx;
+-	else
+-		val &= ~dpx;
++		val = u32_replace_bits(val,
++				       phydev->duplex == DUPLEX_FULL ? 1 : 0,
++				       ENETC_PM_IFM_FULL_DPX_LS);
  
- Description
-@@ -178,7 +178,7 @@ The 'mmc bootpart-resize' command changes sizes of boot and RPMB partitions.
-     RPMB part size MB
-         target size of RPMB partition
- 
--The 'mmc rst-function' command changes the RST_n_FUNCTION field.
-+The 'mmc rst-function' command shows or changes the RST_n_FUNCTION field.
- **WARNING** : This is a write-once field. (*Refer to eMMC specification*)
- 
-     value
+ 	if (val == old_val)
+ 		return;
+
 -- 
-2.53.0
+2.34.1
 
