@@ -4,136 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DDF6F531F1
-	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 07:33:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1351F531FA
+	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 07:43:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87CF184119;
-	Tue, 14 Apr 2026 09:32:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4209F84132;
+	Tue, 14 Apr 2026 09:43:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="ov400RQ4";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="e1ij2Mc/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0644F84132; Tue, 14 Apr 2026 09:32:59 +0200 (CEST)
-Received: from CO1PR03CU002.outbound.protection.outlook.com
- (mail-westus2azlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c005::5])
+ id B510C838BB; Tue, 14 Apr 2026 09:43:14 +0200 (CEST)
+Received: from BN8PR05CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB2FE838BB
- for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 09:32:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3E09838BB
+ for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 09:43:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ spf=pass smtp.mailfrom=boon.khai.ng@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oWT+Y/4nJu6a5RIbnYTp4a9/ruEWvIyKPFjEacz3PkKl2aVhFkbIxD5d2gXhUIEwaK44917PXm3KgwVUpBH+47umr6YhntIO4bpPAMZGtCg/ivbLZWoqE1/tZ88GgKin55DgJakuMeQNYgmw8mi/0ihwoQarw1vEi9Gu/HVNNJJYY1cdIrqP10IWgoiWXeZ6OX+Gphs1kDpfm/DwDBahEoNQrGAKULjHsqyc0MrxdyP4DhzDJI0YuMNhQ2RWyF1LSfrlUyBbf/nEQ6KfzRFQDLW+smPTvslq0+Y+Plr+ZOXeaiJO2UKoXR/jCAz0btU//iBM3tBPwNdZcccmp64sgA==
+ b=UcGlgl4s0suZWGiWxhMpcp4vcJSXMOjCQ2mdBcR8SePNEYxXRJe5hZMD0f/VRdJy4uZmLEadtwVkELZDAFzaMmE09n4QeMNiuxcX+9DehThBBZ5a7sEXK0qje10iYeI2h7SF18HetN59KgYNBYu1IFEPBSvqAE78aX0xubimgui1ScMfYCxpi3NRRbpLCNppSkucbmZClDaMNikaEMcZmQ5N7d1JUjr/wymzjlcxQFPwbNks91CFyK2iJpmJV1iTUCjelt7UtH0GxJBSaj/xYwuJKVvQZfJfdEmcKtx8cHYTKBW+X6SR8FdXrguu2iJHKSC38C1cUeC/fUAfKuKPxw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Tt29KDLypbFBb15p4ScjFMak33krEx7NuFO1oo2pew4=;
- b=kr4lq3k8pwtoUWBPGfZn6am12TEauYBndnpbC7ABAbc+r+E4o3hi8zepRMjsZvB1Lh/2jOwz+6MAUGe1LROA64Hai2GCt+KCfR13h01Y+6hxp6WHxjZ6zJh1JfbRHVe95Z58N8SaLFBZ32bHB52PW1SSedMTejs6J8Mdv/s994uw7HgNsl5I8zNQ4DGxVcKL1IM1F3q2Jfz8bbK4h/9iB+S3pU4qayASFg7abBEcbLvgpdlKPK39IJSMONzQ+gOHMcFZUihi5VZt1p7lH31bEs+tj1jgPszupxLevc7pzG642xwG/16zDPkqDLvFrkgnJaSL/Qo5Vklrc+bDYx1JXQ==
+ bh=idvdatVu6IqfFHp5OYvdHX5LOHyiqEMd4X2gWSlE/zM=;
+ b=hjnlZYvsFMncgQNWKtV+WQxZp3tDX6pG2L81AthfHmofj7VqSpRF6jk2qpt8R6Z3HcAZsXeB7CX2XizrFuP4eiKftRwNYPQT0zz5+2Yqkcu/3V3ssqDhVb6RREJZATm4hX8nYrvn0nujRFpmAJw9XmpM4zuWIVWBYoYIAXVA9M4kOSXKLyKZdMAHc1sqQDBJHq4WXBJIKcpUDYgtiyC5v0fbLn4VsVVIVnOxJi59UwwvdUy5bjS51AIA7o/r/xfChYbS/Pe5XIS/fL1UVDP0vWDVBXoSM12qBPZSK44g8a3lxe/+WnQLpbXO86mCf7ssK3LSWIKQPKfB5vehoStmTA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Tt29KDLypbFBb15p4ScjFMak33krEx7NuFO1oo2pew4=;
- b=ov400RQ4xaaADIys4X37MsSm2kBFNfdRzs1FQBdKA0j9TrwYpnwDpjf45cSt6PzehiC8dAliWABSuwccrXfDFEmfiwUdNJHoLc4pebRmLrlD3BgjQdXFTCSKAkBIwH9QwswkiU+sPD6C9zfS9kazlGpdBtYRS9eIPwSvbmJavGvQebKSPD4hmahBU9QBL2JhObhDzBlmuWGaqa+lNYevDOu+kWcKfhYKELakWIbE+VhmxObT6m6e1c/C9g7DZk8X4AUF6Q/0YmRrZAEADsf8/EKwf+GO0t82hENZHPBi9zoBtF7sUDMHj/hHmPS9tbomEoqMXQA4kuI0fWQMcLKI2A==
-Received: from CY1PR03MB8121.namprd03.prod.outlook.com (2603:10b6:930:106::16)
- by LV3PR03MB7635.namprd03.prod.outlook.com (2603:10b6:408:284::11)
+ bh=idvdatVu6IqfFHp5OYvdHX5LOHyiqEMd4X2gWSlE/zM=;
+ b=e1ij2Mc/KSf8/A5aVLH2v+oiPRSyaewnpzPgGhDrTXWuIxSnt4mzOifIrZY1qTt8IjpdTckoA7CJthRfXgOe6pamJi1y1gglIAoDKq8dNR6uRE9yXFq4o0HFoiJoNwoaXWXNos51zNslGoDbSD5UyzmIj26KzC58oo4Vwa7fTVVex1L1++N2Ui2egxuK+5uNMFwtfSIFtkzNNpD5L3tEuHDU47T74TXnW0H7hS3Km9JpNz7ORLkWaD18rRAimuZCzeevo7sxCQQK9mwIcwwnNybU5wgPOIkw5bJMIJaO21doiCj1Ax5cpGDE2IhqoZ3YP71H9Wm0AT/jo+XJbTa8MA==
+Received: from SA3PR03MB7187.namprd03.prod.outlook.com (2603:10b6:806:2f6::11)
+ by SJ0PR03MB5951.namprd03.prod.outlook.com (2603:10b6:a03:2de::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Tue, 14 Apr
- 2026 07:32:53 +0000
-Received: from CY1PR03MB8121.namprd03.prod.outlook.com
- ([fe80::fe3c:a06b:8724:fab0]) by CY1PR03MB8121.namprd03.prod.outlook.com
- ([fe80::fe3c:a06b:8724:fab0%6]) with mapi id 15.20.9769.046; Tue, 14 Apr 2026
- 07:32:52 +0000
-From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-To: "NG, BOON KHAI" <boon.khai.ng@altera.com>, U-boot Openlist
- <u-boot@lists.denx.de>
-CC: "YUSLAIMI, ALIF ZAKUAN" <alif.zakuan.yuslaimi@altera.com>, "MANIYAM,
- DINESH" <dinesh.maniyam@altera.com>, Lukasz Majewski <lukma@denx.de>, Naresh
- Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>, Tom Rini
- <trini@konsulko.com>, "LOK, CHEN HUEI" <chen.huei.lok@altera.com>, "Hea, Kok
- Kiang" <kok.kiang.hea@altera.com>
-Subject: Re: [PATCH v1] clk: altera: agilex: Update sync to async mode config
- in clk pll
-Thread-Topic: [PATCH v1] clk: altera: agilex: Update sync to async mode config
- in clk pll
-Thread-Index: AQHcpjtukGLC4H/GK0qXRnwpVZrn3LXedS8D
-Date: Tue, 14 Apr 2026 07:32:52 +0000
-Message-ID: <CY1PR03MB8121AB143DE8EB7384783FC2A7252@CY1PR03MB8121.namprd03.prod.outlook.com>
-References: <20260225094453.33673-1-boon.khai.ng@altera.com>
-In-Reply-To: <20260225094453.33673-1-boon.khai.ng@altera.com>
-Accept-Language: en-US
-Content-Language: en-US
+ 2026 07:43:09 +0000
+Received: from SA3PR03MB7187.namprd03.prod.outlook.com
+ ([fe80::7000:d55:b39c:2e53]) by SA3PR03MB7187.namprd03.prod.outlook.com
+ ([fe80::7000:d55:b39c:2e53%7]) with mapi id 15.20.9769.046; Tue, 14 Apr 2026
+ 07:43:09 +0000
+From: "NG, BOON KHAI" <boon.khai.ng@altera.com>
+To: U-boot Openlist <u-boot@lists.denx.de>, "Chee, Tien Fong"
+ <tien.fong.chee@altera.com>
+CC: Alice Guo <alice.guo@nxp.com>, "YUSLAIMI, ALIF ZAKUAN"
+ <alif.zakuan.yuslaimi@altera.com>, Anshul Dalal <anshuld@ti.com>, Casey
+ Connolly <casey.connolly@linaro.org>, Christian Marangi
+ <ansuelsmth@gmail.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, Neil
+ Armstrong <neil.armstrong@linaro.org>, Quentin Schulz
+ <quentin.schulz@cherry.de>, Rayagonda Kokatanur
+ <rayagonda.kokatanur@broadcom.com>, Tien Fong Chee
+ <tien.fong.chee@intel.com>, Tingting Meng <tingting.meng@altera.com>, Tom
+ Rini <trini@konsulko.com>
+Subject: Re: [PATCH v1] drivers: clk: agilex5: Setting correct counter
+ frequency in boot mode
+Thread-Topic: [PATCH v1] drivers: clk: agilex5: Setting correct counter
+ frequency in boot mode
+Thread-Index: AQHcpW2LtDCy5TjkN0WZCDXEq0KpRLXeeX/N
+Date: Tue, 14 Apr 2026 07:43:09 +0000
+Message-ID: <SA3PR03MB718727B42ADF86B94EA4D3EAB4252@SA3PR03MB7187.namprd03.prod.outlook.com>
+References: <20260224091109.8181-1-boon.khai.ng@altera.com>
+In-Reply-To: <20260224091109.8181-1-boon.khai.ng@altera.com>
+Accept-Language: en-MY, en-US
+Content-Language: en-MY
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 msip_labels: 
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: CY1PR03MB8121:EE_|LV3PR03MB7635:EE_
-x-ms-office365-filtering-correlation-id: 704ed0fd-c183-427e-4cbf-08de99f809bc
+x-ms-traffictypediagnostic: SA3PR03MB7187:EE_|SJ0PR03MB5951:EE_
+x-ms-office365-filtering-correlation-id: f76667cd-f61f-4ef5-4967-08de99f9797b
 x-ms-exchange-atpmessageproperties: SA
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|1800799024|366016|56012099003|22082099003|18002099003|55112099003|38070700021;
-x-microsoft-antispam-message-info: gK17RMNPD5IPd7eiKLV3ulirQteNnG9sqXyOXuEaHCM90V3cq199OIv4OyKKY/MwraH8NYYgOP7ULxYN2+MEZrT7s/5cgQ4/fi+na0xuVnob29UW/+BGMkwm/w7vX1anjkibK7ZciwzBWeYmzlBgTrMVuFr9+tT0NIycmmDDq6GNuubZc4MvXCsAbDEU8m6Jy75/2Bdkl0/Cxf64YLYrtaCv01o5BBOFoHmW92P4AqGqgqdW0mLHwjCMxCU9v4ahuyMM4lza9e1ToY9cQVJmA1Ren2fWBWg8yKaKkWmUbNuitQhUkzvDGjl7h9kb/fAzcRnojkSnPCZtqorTHIKGFh+htQ1dvEGsLY26sgK+ap4uXBoGlc0c2l4vbvoXMnAOX791GNDLxCoTlL9ohh8vzpo4HCKNYcCZUf2T2MZCTROdXBciMH7chJfCGZnS6BnW0MgmB7othofri3xtTfx7ahlf7cSaqal+IRz5HYXoyrDuTx3pA3i3RNHyjcfpVOKfgUnd/AIW+k7Gw5iNskq2nD1/E8rUa8aZYvbhX+6ICP0vVcDUHS8Wu0eY5IKzkqVLuH5rVyhh4t909CC3NFDNXdQzf18mZRPTffth/XSWKtLayKZ4UBbYxLoZ0YmfmsXL1CkWVByzIAJxjv+kV9VWm6zkcm2ghXEz7bfVhw7qsoCb+xgQjXiZoFT9ok8P7rnYXsG2HbQH0ktMKF4DnIz4PQdBKeVKltVVA0A0Z7/C9s1ECWl+rTeO/G1zDE59Vv3G2oYsYRzCzQof+at8P3p9XDu3l0FPiefWjUNkRTkRUG8=
+ ARA:13230040|366016|1800799024|376014|7416014|38070700021|18002099003|18092099006|22082099003|56012099003|55112099003;
+x-microsoft-antispam-message-info: DsOOQzQQb78qL3AAC0JaudXhtrVEiwfdblJ0oQN/UNyPoZGoWbm7E2KZah7WAhLn9kt5neY+DPtRoM5WZCJ9hyy0Wub4rVQaup5UhrV2TyWm9Vm3y2cZlNINZQFcr/Fa/QmeJteMFJn2TXyRqdCuN0RgaCoNg8kfyVMdvh42fFJgz7mBElUoQ19C7wZ2BPAhOmDHDQWVogM7NdrNkMAcW0PEnqhF/xVeFYCpdOYLlPqnhI3aGb32g4gfrSn4yZUB+ZnfzRh4XH8ekRvHTMc4E2rKvVhmrEjpFjfvu623pazw0ueJNkVoO/ryrGGAm8AEuM/IzdFhQ94iZ2PFm+7xgK3DTC6Fu/7qKvQ7y+UjkRELGm+A1S1ICaOscQG2OmPqp3/xe8z+JLxIn/Ephsc0CH6kgSRZFDcF9ZRYji3fP3dZfGW+AMcLxDpixPG0tJeKiNiTkYn9xDcxaIRmab65gKdBR93++7VTItPuQUA7p7npt888eIreIwmXSyFimcLTtJ0IrhhhAOKZdokM6QCa1HuEksbWTo16cAdaClyKnDkCNRSF3PXPB867Bvpzfp9e00XCSwiFHPXe+7n5dxSymRYPvZvjh5YGFKnaC8+ohXh1lKE4z2GDFU28uA/k1a6Lknvvx/BpS1ugC1+0o7qofpTkiEo0sNEYjuDLOLXPRw7yKD7dhCpkazleX8CWsQlOKM5cGRIbDhsSYvqkBSuJafcGsbZEOp5n/vgsS1z2/aJ9FFHY5I4AJzJ7TxqruRSXz0oycc0heU/Gi+GZmRs/Owy0iODCjZTwpHYfu2TxADs=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CY1PR03MB8121.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(56012099003)(22082099003)(18002099003)(55112099003)(38070700021);
+ IPV:NLI; SFV:NSPM; H:SA3PR03MB7187.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(7416014)(38070700021)(18002099003)(18092099006)(22082099003)(56012099003)(55112099003);
  DIR:OUT; SFP:1101; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?d/NiQQ/sprsxMXRI+TFnZ2HBRZHQBJPkM4DfclPKToRyHwcMd1VYamCbKt?=
- =?iso-8859-1?Q?nilPCM99zhKPUYHLI/04u7eYjtQQFkLTkneKFaWrJad3SqPLT5oRxEibsQ?=
- =?iso-8859-1?Q?25f3UpbjvDB188pqB/bWLloadocO9BxlM5S6SrJhqkRAIxy5ihA/sqPST9?=
- =?iso-8859-1?Q?HL59c/Ysq61NFraohLjw2ULcSdNucnyA74yISQtRYYoaDMAz8y4XgqtQSS?=
- =?iso-8859-1?Q?XlB8YZhoenDDaJjnkeWFE3SD5X9O/kKxSZ2BCTON2PjnypLsS95V8wY2ps?=
- =?iso-8859-1?Q?UvB6BmSH1qXIGQdBXGukebJQI0O1CHOStv4vwDybHwmmXWjh/0gLXflEeO?=
- =?iso-8859-1?Q?RFtGlaDGNdEqCPZ4BoxMzNd7TpQ5lvRUb4dPSNnHBD9889oJy084u1r0qO?=
- =?iso-8859-1?Q?WUFODC8Aj+EDqpU8S1zTl51EpaHCpEnw4XUFVYGlcemgYmxdZgNzHulVSG?=
- =?iso-8859-1?Q?kJ8V1XOXkm6ITEUE0gU+ZWDZJvOr0NLR8d/CMMtqXITwAJRcLafMM/sTD3?=
- =?iso-8859-1?Q?QJ/QDF/CnvYZ7HmPmfEiVJLb38lMWqjyoqZjMnJxkHeh+MXvh4cfVpsl4f?=
- =?iso-8859-1?Q?3OkArzM2ptqFezqEOByzqOO7qelMrQ8FTRBBp12AUxh5B0km1OLHn3lpiv?=
- =?iso-8859-1?Q?hImVqb8P/VQJtAi1BJdUX4LsBT7byEQHzZRs6Nb6hSE+IV594bBPIru9D6?=
- =?iso-8859-1?Q?xwqL96t10Qh/HmOIywMNNdjUExUptW7ZcNWXgO8VCXnpbso8QWcvYMMfdu?=
- =?iso-8859-1?Q?T3+3SZL05WK2+vDz8JGzbDUEoz6QUSG4OAtDwIGSWfFxK7Wdxupv74QUEh?=
- =?iso-8859-1?Q?qsuMbjw/0kpqeqG0f9eqruRdjC7sATfZHMJL+OErQ3YEfZAx7kjqWjo7b8?=
- =?iso-8859-1?Q?DRJzzJctFYy/6LXHsqYO1I7sZxpG2bi6Z6pqMJ/rXluEX/QBxU7SVInFEf?=
- =?iso-8859-1?Q?b4I0ReLtnl2xQqJX0uNdVmhJWHYwxa3WMIciSbDgqTfPXfV42gYHO4Bl71?=
- =?iso-8859-1?Q?lJK2uNxHUIZfPF6HACxcmTrH42Mtlt6qyTJiThZUCWHXu1E66PCWFm5OkB?=
- =?iso-8859-1?Q?il5NvoTQNeslbdio6pgdR9zhJt9p7y2f/3Z8xxIy7vUMQ0YesWvm3gfJYD?=
- =?iso-8859-1?Q?HIrGWIKsWZs+9l0eSQkLsY9XX0zbRwDUOzHUl0e1g4ElPxYtgE4jGcjOhW?=
- =?iso-8859-1?Q?B4SRg9iBZWG8ziz4qkEdif2tYkYkr05wZBE1xWOYDtGkwV2t2GkwJR8aBP?=
- =?iso-8859-1?Q?6dLYOh18H8S/aWs+4PL1UCwYxmwwM0+T/2A/pCB7zJQOv+s+lWZ0JEOvOq?=
- =?iso-8859-1?Q?CKwTHzp4/d1ELxzFGS8grTmncH25x0Fv+ppTX1dv2Lk5I/uh5INfjibgNm?=
- =?iso-8859-1?Q?uHlDkN4ZnryYFf1mxGa4YKXJaj0Ub74JduAUW0ny+oVIUj0c+68l5evmX3?=
- =?iso-8859-1?Q?UE7Ke/SijwY42m45tdEzFass5lbFlPToIypFPO3Vxjss83C3xlqfP+Uxw8?=
- =?iso-8859-1?Q?d+K6/mZiQx3qHtty5HqJMwT8oKuY3+iZhOLomIqp0FcgLQ8KWySNEYM0hk?=
- =?iso-8859-1?Q?OWsJT64b8rAvosK8XJD7fzVkWVxe6X7tL6nFJGXmlE7zJWfY57BiFSjyf5?=
- =?iso-8859-1?Q?/AzWgS5V+oWn6LCKeKBDW9ZjAfzVLNi428iIICqZ+nTVx7wbSwmiHfQbxM?=
- =?iso-8859-1?Q?6AGCr+TLuSDgHivE3PQswdSja0heR2x8dT6qoiA9/DqeLWs2DNl+hb8cvA?=
- =?iso-8859-1?Q?AZZgDYaOtsYFvyZib4mPk7jdtC2lBVdaSQTc8Vi9m+RPFKzkozAYJeh4FO?=
- =?iso-8859-1?Q?wM7ZxbVaCA=3D=3D?=
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?z33QuVJ17XYbQ6Ass9e3hH0CHCiRC0Ia9dBYCaLEExZmcBvoqoFegF7JO4?=
+ =?iso-8859-1?Q?0yQ2y97V+qshSOXSUgNoWG0I13cXZp3gnjC7oEkkdOBRuiONa1a9dH7FTK?=
+ =?iso-8859-1?Q?EglzGoscA0IfgmONBd4Ru1M80BeAg1dRMcSRQYEYMH2CoeTLhPl/9+tiZ2?=
+ =?iso-8859-1?Q?FoKGaOhypOyvAzwGXx82v8KNIK0gu9sPq0e9kYgP/hHDIMPCkwz/ykKPsD?=
+ =?iso-8859-1?Q?Izh85/1IfIdbemZuukoK2XCQ4yoiIxfiCO1eesN/YS1Uv0/Zb2qwBE0qNa?=
+ =?iso-8859-1?Q?XHJIvTn7GiOEM7LF+b+1eOdeim29b+Jah1RQC6QhrD5wKVPiQVuw6iVZUZ?=
+ =?iso-8859-1?Q?4KwGqOiA4p+u/H4tMLeeOiDeVtk86IOwaTrRQKHmFF7Qn2oPh63V2470mO?=
+ =?iso-8859-1?Q?bsSYONQlq3GPlwNXhMqX67HSjayEYLouKIyedF2/6mSN09pRaQjR4Sxale?=
+ =?iso-8859-1?Q?cBwr/CGPX4F+AwvUcz9hKVre6PDmbIsAcZcEKXCjtyNK45Yh9RqMLWZgCn?=
+ =?iso-8859-1?Q?P7iRtiFf/SruAj+SBn3scoyzAgTsNZWiKBjhwVAQAnU1y+IotciVSanp28?=
+ =?iso-8859-1?Q?ztEsXSAah1UFooR7ZTnBv8799l0KL22XbhhDLZO9H2VP/O8dYhDcoLSOab?=
+ =?iso-8859-1?Q?l8f2IlYd93twm0n2RZI+ivfj2AmzkwUZSjBz0I6lJwlaYkjj1O0jQ1cZvK?=
+ =?iso-8859-1?Q?wWJRTeIpxzSD3aUigTnJIGSCyzXXBlZB+be7Q8QqWLdYmUmExr3DO6tZIB?=
+ =?iso-8859-1?Q?vgJRJPj/d0KR/UfzxUCCk5eFxTLNH5jaPU8jobh4IeuOJ4WL7Xk7a69EfT?=
+ =?iso-8859-1?Q?xJXu9wctls1F3siM6RE8dRdNoGohNnUSJJaiGp6ZwPnhGqj03yJIAg5+li?=
+ =?iso-8859-1?Q?f8jB/QNeQvOI5mO4ywcKvXKbuPMTVYBMGSCo/CIGt8VsdeALQc8ZpKtWRr?=
+ =?iso-8859-1?Q?/TByJYX6fiCiuxSf8JBPZPjCg9OT4ghVzPMlgxr7/yIStj84vDUrKyUmbp?=
+ =?iso-8859-1?Q?TLtn2Rj9xmKbqB6aE7ZzPEIjfxpeR/7Yk84pXiTqGzKu6KlOevDtOmAPoF?=
+ =?iso-8859-1?Q?J11lw7o+0LcwvDH1gPBHiOUvKzNb8rEabhQfY3mNNogKaw9+ET9hhtbZ5K?=
+ =?iso-8859-1?Q?TPHBE09cPwHdEkF4ceOpdAyjSUjLGaxmAGHzGIe84guuXTnOdiaqmfHk3U?=
+ =?iso-8859-1?Q?x22pLcD7fHH0xTLCTRSLcgcY/J7nzAooaBzddvQbvkKCp8G1qUGDZ4hcJO?=
+ =?iso-8859-1?Q?VaTdeX2rptRYsCt3VGqdwRkkz8MPWpfuFScI4sEjbvdOrj4mqRjYV05OM+?=
+ =?iso-8859-1?Q?TY8DfRH+R5z25CTqL38AKZxQtTI/WI/qxtb5YtEYZRW70SfOd0qqulaBao?=
+ =?iso-8859-1?Q?INrJX4HFHa99Y8kmeFw3aCiQaME8+1pk7o68qKWtfoegMce/tYhFWC1pOo?=
+ =?iso-8859-1?Q?D8lPN38e3NuiOH5WgQIJt26j/eAOTOytzy8s/0o5BUpJxYIsUcpsDRF1y5?=
+ =?iso-8859-1?Q?DM+Jl5ZexvRFOWKiylVBu8dFUFRtAoabU+aCVtRaAQZeqijduTG4iAq4Ox?=
+ =?iso-8859-1?Q?4IWzZbDbhGXZ3ex0j1juEsbVuIKJGKCoMcr8oFHsf0K07LJobwsct20V31?=
+ =?iso-8859-1?Q?rVKmkgH/CAPxeVWaL2Y6F+hLMZTkIHTeLEjriq9gaf1D/ikyv6Nytd2mon?=
+ =?iso-8859-1?Q?KFLAAgoKJv00kTSM8eNqgWz29TWr/9qxVAd81BMzbJCDcT8hNnnCZGJ2ao?=
+ =?iso-8859-1?Q?iLCXXwX64YjWSnRoiN6/ymnk7x64bh/b4/LTzW1jhINF5OSh1lcks3UhZK?=
+ =?iso-8859-1?Q?e44sKQgTHA=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: altera.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: CY1PR03MB8121.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 704ed0fd-c183-427e-4cbf-08de99f809bc
-X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Apr 2026 07:32:52.5076 (UTC)
+X-MS-Exchange-CrossTenant-AuthSource: SA3PR03MB7187.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f76667cd-f61f-4ef5-4967-08de99f9797b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Apr 2026 07:43:09.6842 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: viB2xs67i2QF2pioKtmyJmVaWsD7x1XwvBosnXvZQljVz9FV4HUT7YXcinTmfCArymQVXvCjdJtgfJSKckFEDlB9uIjd7WezVaP/5+v14uc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR03MB7635
+X-MS-Exchange-CrossTenant-userprincipalname: siJbikntztud2QNZLLXoYfjslVaQdWYpN3gVat/TcCFhYIS+/Ddmaabikas8DC2luVY9nu1uJpt3I7nRnA2RJA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB5951
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,62 +153,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From:=A0Ng, Boon Khai <boon.khai.ng@altera.com>=0A=
-> Sent:=A0Wednesday, February 25, 2026 5:44 PM=0A=
-> To:=A0U-boot Openlist <u-boot@lists.denx.de>=0A=
-> Cc:=A0Yuslaimi, Alif Zakuan <alif.zakuan.yuslaimi@altera.com>; Maniyam, D=
-inesh=0A=
-> <dinesh.maniyam@altera.com>; Lukasz Majewski <lukma@denx.de>; Naresh Kuma=
-r=0A=
-> Ravulapalli <nareshkumar.ravulapalli@altera.com>; Patrice Chotard=0A=
-> <patrice.chotard@foss.st.com>; Peng Fan <peng.fan@nxp.com>; Chee, Tien Fo=
-ng=0A=
-> <tien.fong.chee@altera.com>; Tom Rini <trini@konsulko.com>; Ng, Boon Khai=
+Re-add Tien Fong's Altera Email, with the patch's content.=0A=
 =0A=
-> <boon.khai.ng@altera.com>; Lok, Chen Huei <chen.huei.lok@altera.com>; Hea=
-, Kok=0A=
-> Kiang <kok.kiang.hea@altera.com>=0A=
-> Subject:=A0[PATCH v1] clk: altera: agilex: Update sync to async mode conf=
-ig in=0A=
-> clk pll=0A=
-> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>=0A=
-> Remove MEMBUS_CLKSLICE_REG source synchronous mode configuration to run=
-=0A=
-> as source asynchronous mode.=0A=
-> Switching the HPS PLL to async mode improves resistance to clock=0A=
-> marginality issues such as F2S clk to HPS PLL=0A=
-> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>=0A=
+> =0A=
+> =A0=0A=
+> From: Tien Fong Chee <tien.fong.chee@intel.com>=0A=
+> =0A=
+> Counter frequency need to be set in 200Mhz when system in boot mode.=0A=
+> 400Mhz need to be set when system exit the boot mode with the PLL=0A=
+> generating the high frequency clock set by user.=0A=
+> =0A=
+> Signed-off-by: Tien Fong Chee <tien.fong.chee@intel.com>=0A=
 > Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>=0A=
 > ---=0A=
-> =A0drivers/clk/altera/clk-agilex.c | 9 ---------=0A=
-> =A01 file changed, 9 deletions(-)=0A=
-> diff --git a/drivers/clk/altera/clk-agilex.c b/drivers/clk/altera/clk-agi=
-lex.c=0A=
-> index b793dbf6a42..426f400159c 100644=0A=
-> --- a/drivers/clk/altera/clk-agilex.c=0A=
-> +++ b/drivers/clk/altera/clk-agilex.c=0A=
-> @@ -74,15 +74,6 @@ static const struct {=0A=
-> =A0=A0=A0=A0=A0=A0=A0=A0 u32 val;=0A=
-> =A0=A0=A0=A0=A0=A0=A0=A0 u32 mask;=0A=
-> =A0} membus_pll[] =3D {=0A=
-> -=A0=A0=A0=A0=A0=A0 {=0A=
-> -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 MEMBUS_CLKSLICE_REG,=0A=
-> -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 /*=0A=
-> -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 * BIT[7:7]=0A=
-> -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 * Enable source synchronou=
-s mode=0A=
-> -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 */=0A=
-> -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 BIT(7),=0A=
-> -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 BIT(7)=0A=
-> -=A0=A0=A0=A0=A0=A0 },=0A=
-> =A0=A0=A0=A0=A0=A0=A0=A0 {=0A=
-> =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 MEMBUS_SYNTHCALFOSC_INIT=
-_CENTERFREQ_REG,=0A=
-> =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 /*=0A=
+> =A0arch/arm/Kconfig | 1 +=0A=
+> =A01 file changed, 1 insertion(+)=0A=
+> =0A=
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig=0A=
+> index 5508fce796a..4cc42ca393b 100644=0A=
+> --- a/arch/arm/Kconfig=0A=
+> +++ b/arch/arm/Kconfig=0A=
+> @@ -30,6 +30,7 @@ config COUNTER_FREQUENCY=0A=
+> =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 =
+ROCKCHIP_RK3288 || ROCKCHIP_RK322X || ROCKCHIP_RK3036=0A=
+> =A0=A0=A0=A0=A0=A0=A0=A0 default 25000000 if ARCH_LX2160A || ARCH_LX2162A=
+ || ARCH_LS1088A=0A=
+> =A0=A0=A0=A0=A0=A0=A0=A0 default 100000000 if ARCH_ZYNQMP=0A=
+> +=A0=A0=A0=A0=A0=A0 default 400000000 if ARCH_SOCFPGA && ARM64 && !TARGET=
+_SOCFPGA_AGILEX5=0A=
+> =A0=A0=A0=A0=A0=A0=A0=A0 default 200000000 if ARCH_SOCFPGA_AGILEX5 || ARC=
+H_SOCFPGA_AGILEX7M=0A=
+> =A0=A0=A0=A0=A0=A0=A0=A0 default 0=0A=
+> =A0=A0=A0=A0=A0=A0=A0=A0 help=0A=
 > --=0A=
 > 2.43.7=0A=
-=0A=
-Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>=0A=
-=0A=
-Best regards,=0A=
-Tien Fong=
+> =
