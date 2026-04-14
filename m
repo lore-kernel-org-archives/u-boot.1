@@ -4,86 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F626F9D0EC
-	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 19:23:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA745F9D0F6
+	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 22:19:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05C6E841CD;
-	Tue, 14 Apr 2026 21:23:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C0E5A838BB;
+	Wed, 15 Apr 2026 00:19:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MJ3/U+Ad";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="tnhD3QiI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B2868421E; Tue, 14 Apr 2026 21:23:09 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 00F0183936; Wed, 15 Apr 2026 00:19:01 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3E4680086
- for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 21:23:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0240C80086
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 00:18:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7dbb6c072f1so5513814a34.2
- for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 12:23:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1776194584; x=1776799384; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/Snp4KJmF4JmJdmdPscmWpvyS6Wd5mT9ZExYJ1soyMU=;
- b=MJ3/U+AdoJQ4H6Pa01vWETF28IQPCZTD1DUtf8OlpzERXsg7VeIdb8IStcZp41Z5SW
- SDIlqEFPsANZX4CpVwZ7AAORgdZ9XQI/bQovHttRC/QQ1JteM47nAym2N7zM4sI/89bU
- PqzXScY3Vl4AuhmWqovFkW+YPu6bPEbtT9KXQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776194584; x=1776799384;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/Snp4KJmF4JmJdmdPscmWpvyS6Wd5mT9ZExYJ1soyMU=;
- b=GNfs94IXqTJhV1iW3vYNinBVIF7xn0zX1mtQqlcU15dsemlQFocZxCkqnA05GFUPwr
- 8QCWic7BSL3J7g7hk797q+ut9s4hhyZxGvPQGjgPndiUaw0DkbD//3GsSBrFXqWvXuwK
- QDBkGr2IwHDdDXpbhzALOY2EPYKdN05+tf07QnAm0Z4jHpmFkqpPdkHNyu5ED92/mRIG
- ot2XJZAWM/J4U7F+hygYlZl30AXVMMbbnwcQC21OVztliYeU1oSbrcyZQh56bZ/jPP7M
- vj9w214sYgpwNR7sMdk8INH425Jo5hGhO6NmrJ1VFT9aTmzFfc3xZQcNzYtz9Vk8jvcV
- r4aQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/7qlPAflZCD10ML+dfTX2XLvb6ZWpREWAiq5foyV5zj9FiSU2bWc6Xos+iTRZSd3jmLX1QLE8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx8GSvJ9ndxK6+7f3++ujPc872QUi9eKcHjMXR3/djoFMA4w2Ai
- LMkmb9SUDBAI0XutaYnu/pQICaXWn3suPPEYZ1COtLg+O+5UOnY7sl4/36glafX0Iv8=
-X-Gm-Gg: AeBDieuaYV/5ZmX7o9U9xKNBuaBJvZYQfBNl87ZUZ05FL21gROaoGE21acYtF7IBVsV
- Bi840j/+eteSYImtHyu3+dILZuhZ6sWgrZlWctv56Xjmbsx+50dLr5acG8OUJf8ciV7a572tECy
- CNKysSVb7cbLgwrKyTAmdM24QoFWS3kxX69B3VlxN2KqrR5t+02X+mUZCZnCedU2pC4kA+wTFG/
- imKF1v8Bm6t2H9jL0tJ4izqLGV9PJyW2b5mi/z/ZZHKubDSfmpxMlDSn84OJ7lEaX7xoy59VY6u
- kmX3xcvclGL4w5sCASzu6WcXfstTSa3FyGwvbzfcgUBA1qLdlUNz/y3eTVDX86vCVygR4wXTLqs
- WbFUa8OUAeAfSXo5m9Izq2KByhGRE6bWW3Ko1cfppmEGylp3XriPVUm5R2GNvey3X/ui1/cMfQA
- TRSVbXnI7/fho+OPEqBQDYi8I/Se7y4V7Oj0ieBxn+d3+AZ5C3V1WrUsJaARxUL5rQ0r4JPZs7G
- bI7zuUHV9p1U+rviHmmoYK0P2XYH0ccPtYkpEiYMaLoEZ2ghlxF6QiLt+aw3w==
-X-Received: by 2002:a05:6830:358e:b0:7d7:fbe5:e9be with SMTP id
- 46e09a7af769-7dc27e0f792mr11853395a34.20.1776194583543; 
- Tue, 14 Apr 2026 12:23:03 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7dc3959099fsm8680484a34.9.2026.04.14.12.23.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Apr 2026 12:23:02 -0700 (PDT)
-Date: Tue, 14 Apr 2026 13:23:00 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Daniel Palmer <daniel@thingy.jp>
-Cc: visitorckw@gmail.com, angelo@kernel-space.org, bmeng.cn@gmail.com,
- sjg@chromium.org, u-boot@lists.denx.de
-Subject: Re: [PATCH v4 4/6] virtio: cmd: Depend on VIRTIO_BLK
-Message-ID: <20260414192300.GN41863@bill-the-cat>
-References: <20260413092240.3719260-1-daniel@thingy.jp>
- <20260413092240.3719260-5-daniel@thingy.jp>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4fwJb559cHz9tV5;
+ Wed, 15 Apr 2026 00:18:57 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1776205137;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=YInW/7AypNhHUKR4N8KVGnZuJlPfR91lqkQ2oy897VY=;
+ b=tnhD3QiIs3xlA7uav1QvbD3EZ/2/JUWIv1CkL90G/JX/B+dJiKkPvGuaVQ1mlhSXJ5SAQ+
+ s90j06HGilxFSuNhdvkNsG8eTchqeeHN4PcDfJt/Ely4+fTAPqNKkD6AeoIyeK9D3WFwgH
+ TCehqGT2NnmU8/v9BBKBRppjvlbHIdmpRXzhyUO07Bs7iRjbY4FPXhVN5zFUvkF2aBnp1q
+ cfEkTuSTUZUO+hBSGYiJIAVPjMxgf8nttZukm/+nVfXpx22T2MS5oafc4usdxEFABtn7WE
+ RdbUrI7Fq5gsdepgY7KwVKtZ1fXU68Br6Tp0ua9VpHkwxw2j6yz67dIGILE3Mg==
+Message-ID: <a0bb44a6-1805-4c0c-b7a5-0d9d31f9d6b7@mailbox.org>
+Date: Wed, 15 Apr 2026 00:18:55 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="AmbPdUT/rinLToVr"
-Content-Disposition: inline
-In-Reply-To: <20260413092240.3719260-5-daniel@thingy.jp>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH] misc: Add RZG2L OTP support
+To: Mathieu Othacehe <othacehe@gnu.org>, Tom Rini <trini@konsulko.com>,
+ Paul Barker <paul@pbarker.dev>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: u-boot@lists.denx.de
+References: <20260414091422.16952-1-othacehe@gnu.org>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260414091422.16952-1-othacehe@gnu.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 33d3b454d65bec4293e
+X-MBO-RS-META: it74q3cynkkoy1espz6dh5otaea6ky88
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,37 +74,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 4/14/26 11:14 AM, Mathieu Othacehe wrote:
 
---AmbPdUT/rinLToVr
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+[...]
 
-On Mon, Apr 13, 2026 at 06:22:38PM +0900, Daniel Palmer wrote:
+> +/*
+> + * XXX: To enable direct fusing through U-Boot, the trusted-firmware must
+> + * allow the non-secure world to perform fusing operations. This is controlled
+> + * by the SYS_SLVACCCTL7 register.
 
-> The virtio command is calling virtio blk functions but currently
-> depends on CONFIG_VIRTIO only. This means disabling CONFIG_VIRTIO_BLK
-> causes the final link to fail.
->=20
-> Since CONFIG_VIRTIO_BLK depends on CONFIG_VIRTIO switch to depending
-> on just CONFIG_VIRTIO_BLK
->=20
-> Signed-off-by: Daniel Palmer <daniel@thingy.jp>
+Is there some SMC call to perform the fusing via TFA ?
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+> + */
+> +#define RZG2L_OTP_BASE      0x11860000
+> +#define RZG2L_SYSC_BASE     0x11020000
 
---=20
-Tom
+Can this be parsed out of DT ?
 
---AmbPdUT/rinLToVr
-Content-Type: application/pgp-signature; name="signature.asc"
+> +#define RZ_SYS_BASE_DEVID   (RZG2L_SYSC_BASE + 0x0A04)
+> +#define RZ_OTP_BASE_DEVID   (RZG2L_OTP_BASE + 0x1178)
+> +#define RZ_OTP_BASE_CHIPID  (RZG2L_OTP_BASE + 0x1140)
+> +
+> +#define RZ_OTP_PWR          (RZG2L_OTP_BASE + 0x0000)
+> +#define RZ_OTP_STR          (RZG2L_OTP_BASE + 0x0004)
+> +#define RZ_OTP_STAWR        (RZG2L_OTP_BASE + 0x0008)
+> +#define RZ_OTP_ADRWR        (RZG2L_OTP_BASE + 0x000c)
+> +#define RZ_OTP_DATAWR       (RZG2L_OTP_BASE + 0x0010)
+> +
+> +#define RZ_OTP_ADRRD        (RZG2L_OTP_BASE + 0x0014)
+> +#define RZ_OTP_DATARD       (RZG2L_OTP_BASE + 0x0018)
+> +
+> +#define RZ_OTP_FLAG         (RZG2L_OTP_BASE + 0x001c)
+> +
+> +#define OTP_PWR		    BIT(0)
+> +#define ERR_WR_1	    BIT(1)
+> +#define ERR_WR_2	    BIT(2)
+> +#define ERR_WP		    BIT(3)
+> +#define OTP_ACCL	    BIT(4)
+> +#define ERR_RDY_WR	    BIT(8)
+> +#define OTP_DUMMY_READ	    (0x400 >> 2)
 
------BEGIN PGP SIGNATURE-----
+What does 0x400 >> 2 mean ?
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCad6UEAAKCRAr4qD1Cr/k
-CkVdAQDMCm+9ej9nBJORkS5R2KEcYSFsRbgyt57A83sKZid7CAD/e0wPf6/21IyO
-kk6Dc3jicMmCbSp1kJc/+2JdXU6jygk=
-=WiyZ
------END PGP SIGNATURE-----
+> +static int rzg2l_otp_open(void)
+> +{
+> +	int i = 0;
+> +
+> +	if (readl(RZ_OTP_PWR) & 1) {
 
---AmbPdUT/rinLToVr--
+What does this magic value 1 mean ? Please add macro for it.
+
+> +		debug("OTP already powered up\n");
+> +		return 0;
+> +	}
+> +
+> +	while ((readl(RZ_OTP_STR) & 1) ||
+> +	       ((readl(RZ_OTP_FLAG) & 1) == 0)) {
+
+read_poll_*() .
+
+> +		if (i++ > 1000) {
+> +			printf("OTP power-up timeout\n");
+> +			return -ETIMEDOUT;
+> +		}
+> +
+> +		mdelay(1);
+> +	}
+> +
+> +	writel(readl(RZ_OTP_PWR) | OTP_PWR | OTP_ACCL, RZ_OTP_PWR);
+> +
+> +	return 0;
+> +}
+> +
+> +static int rzg2l_otp_dummy_read(void)
+> +{
+> +	int i = 0;
+> +
+> +	while ((readl(RZ_OTP_STR) & 1) == 0) {
+
+readl_poll_*()
+
+> +		if (i++ > 1000) {
+> +			printf("Timeout polling ready for OTP read\n");
+> +			return -ETIMEDOUT;
+> +		}
+> +		mdelay(1);
+> +	}
+> +
+> +	writel(RZG2L_OTP_BASE + OTP_DUMMY_READ, RZ_OTP_ADRRD);
+> +	readl(RZ_OTP_DATARD);
+> +
+> +	return 0;
+> +}
+> +
+> +static int rzg2l_otp_close(void)
+> +{
+> +	int i = 0;
+> +	u32 val;
+> +
+> +	rzg2l_otp_dummy_read();
+> +
+> +	val = readl(RZ_OTP_PWR);
+> +	val = val & OTP_PWR & OTP_ACCL;
+> +	writel(val, RZ_OTP_PWR);
+
+clrsetbits_le32()
+
+> +	while (readl(RZ_OTP_STR) & 1) {
+
+readl_poll ...
+
+[...]
