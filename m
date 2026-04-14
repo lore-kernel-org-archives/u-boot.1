@@ -4,122 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F540F9D0CB
-	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 12:25:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7BC5F9D0CA
+	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 12:54:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 819DD841D6;
-	Tue, 14 Apr 2026 14:25:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1D3C7841D7;
+	Tue, 14 Apr 2026 14:54:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QxVojqxO";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="P9nBeHFO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91334841D7; Tue, 14 Apr 2026 14:25:47 +0200 (CEST)
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170100009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::9])
+ id C82B5840D8; Tue, 14 Apr 2026 05:02:58 +0200 (CEST)
+Received: from CH4PR04CU002.outbound.protection.outlook.com
+ (mail-northcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 622DF841CD
- for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 14:25:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C7D7683BC4
+ for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 05:02:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=chen.huei.lok@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=EoF+tzoRypzRtCa7Lx5oGtegHQC768z7B2V5BmHlFiA4WMtVcFrjSiP8YuzJefSgZZzVJSGLc5yYpeqgKu6mBbJJ/YqObTCZHck9+NFCNhRS48l+xeSx0dpXHXnju7yUrWY2bX9+LPw4omqzFmz8/pBUbiVzeMmyA7wOOsNkKRtkXYOPTJETHeJPhGBN9YSyEItdDxj2o/GZ8EzwshWu+8YO01Fk0E1QCtbe23d5tUTIh4yPMZZE4RS/LSdhuBZhQMU9/K1cLQKq7NwHW70tMb9jGRWg2YY/Ofvj8+Npf7AThQuds7YXyVna3bdH+gmmVviT/5+RR4kYfeSQqT+PMQ==
+ b=qPefOl1tcr4ExLabCs5jXAu3qc3+M+UFIqKNJ4nfd/dyl2I5tklvIwnVhDWjrJiN1m9X0Udv3fA3ZVVRL8flINoAUpZTFsOf9s3qGdTbJwk/jWXVf77cLfpY/a1+tj78393G30RRJ2UCj5MYKirQ/FoACFmekeyGvdb6tBFPPzt8+T/kYbtC9Zc9/akii5A7v+Hpbqw27tBwBq6bkrOzNxiQWZqU+U9cgNP8dEMNMG1QL0NighyToi57/Yt9Ga4VNFT5sOXR94d+mcMcc7rlNA5DvWgOUHqR8fhPJWeep4IHWdsnTknqwnux+IFbbI5Bc3uyZ+HJMYRTkP94CX06vQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=22CgciMkwBxpLv3Zg2g9KXwfzdp6cAo6b0jXTv/sr24=;
- b=b7hQQEef1asqltg2g/F9i30WR13m0CFGpEHhmijhsM1JZZxj4gDiK/sVZ8vB4mMYnVP20R5ZB25woPDE6bkQTWGT0GYgqfNi/xh7m39FOs0rf02qFAm4bGYFLM//dmfmlZY+5HGOy8NGCkm5sO4Xjhu6H4R3MJFxeAPfVB1soi1PPMZa2nuZonTFYH+l5oFLd9FgWxExhrwqDaMzkLml2IaCj1jyA0Dmw87yNJomiX+wNSSVQBVwEYvSl+e9eP3tGzd54vNar1OZNtpHdKxzOsWYAb1zIusi8W7tqyI4mxJ6eTmO9G2SzhbHqGragf/mjEWfIUghcr3KOuCd+RssOw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=gmail.com smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=zerVmHn0LAgogbuwKscuAsR5x6e4igxSMIlvYabZYkk=;
+ b=ULGwU2BLiVJRfcYkkBVpzbSgHLI2MA9sHeBJ+v0e/FU8w4HgnvjsIHbnuz1a2Jj6SjsT5sosWOV3FtL+mucE1EJYmG4O4wv90v4FgdIf3KzgqnGEjvSreAjpes1UXzJf9jT6KPQoTWkb5W23JXPR5XGh+J7yW/52dY7/SSn1rgZWR7XlueOT3eQ2seRaar7GLoFQR3lvIkmt77Tlorwc4z/Qip2zwb/xeRwaRNrFY71GAgn4tlM0oBXw+zG8pQaolb7j/tyXegI64s+mTS+JRp8K7iKiVFziLH6J88HmPETDTaNSCpZGDpXtm8dkXgEeFqpWspGcXGKzsHmsIoRQag==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=22CgciMkwBxpLv3Zg2g9KXwfzdp6cAo6b0jXTv/sr24=;
- b=QxVojqxOlA/9Vid6vQ3xnjC04GI8+eXRcpquz3EusL2h/r7/xqm0yaG0QoYIcMCO0yGvi34/Hga7ZrXvzOeJTL3sCVFc2o/iZe/ZdTXamYHFHIzrBCw5gqacWfPHsfgbCASAjTSUabA8afTaWquW6kzGM32Y5YS3GslLnXhZA3M=
-Received: from BL0PR1501CA0015.namprd15.prod.outlook.com
- (2603:10b6:207:17::28) by SJ5PPFA7DBF91DC.namprd10.prod.outlook.com
- (2603:10b6:a0f:fc02::7c1) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.42; Tue, 14 Apr
- 2026 12:25:39 +0000
-Received: from BL6PEPF00022574.namprd02.prod.outlook.com
- (2603:10b6:207:17:cafe::3c) by BL0PR1501CA0015.outlook.office365.com
- (2603:10b6:207:17::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.49 via Frontend Transport; Tue,
- 14 Apr 2026 12:25:38 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- BL6PEPF00022574.mail.protection.outlook.com (10.167.249.42) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9769.17 via Frontend Transport; Tue, 14 Apr 2026 12:25:37 +0000
-Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 14 Apr
- 2026 07:25:35 -0500
-Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 14 Apr
- 2026 07:25:35 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE207.ent.ti.com
- (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 14 Apr 2026 07:25:35 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63ECPYe03999771;
- Tue, 14 Apr 2026 07:25:34 -0500
-Message-ID: <86387a11-6f9b-4535-962c-150b004f4d20@ti.com>
-Date: Tue, 14 Apr 2026 07:25:34 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] board: ti: cape_detect: Add overlay name lookup table for
- extension boards
-To: Kory Maincent <kory.maincent@bootlin.com>, <u-boot@lists.denx.de>
-CC: Bajjuri Praneeth <praneeth@ti.com>, Robert Nelson
- <robertcnelson@gmail.com>, Jason Kridner <jkridner@beagleboard.org>,
- <thomas.petazzoni@bootlin.com>, Tom Rini <trini@konsulko.com>, Marian Cingel
- <cingel.marian@gmail.com>
-References: <20260414082007.662549-1-kory.maincent@bootlin.com>
+ bh=zerVmHn0LAgogbuwKscuAsR5x6e4igxSMIlvYabZYkk=;
+ b=P9nBeHFOmu6tLo4xni/nlrqqTGbzJ9v7uH+y1T0mocPzyasbQpCrlPUcnpOPLXd5bSTHA5fqZVsH/Xps3duKS7aOBzRIBynyd9RC7yHzHIjv2MuXuWzR6puPPoed5eWLE8IBTMqW2YX0WcnO6XP4NezFQhe7GL4lL89J1oKmqvX+DudLDDnaX1fLcsJMesesXNBYVJob06nqA1iM/3V+NNLzePkHTbqjy9iG73oUI1DGysqgug8cbVDzuN/52vSFjYUKP4I83R0aUkOnf+1EXXZnEF41EiynDIvHIDZOs5UQFfMJ4C6L9ywLGBZfmurunUPhO45s5zNe2dSFpS6FdA==
+Received: from IA3PR03MB8021.namprd03.prod.outlook.com (2603:10b6:208:502::17)
+ by CH3PR03MB7435.namprd03.prod.outlook.com (2603:10b6:610:195::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Tue, 14 Apr
+ 2026 03:02:53 +0000
+Received: from IA3PR03MB8021.namprd03.prod.outlook.com
+ ([fe80::3016:b672:c683:f7ad]) by IA3PR03MB8021.namprd03.prod.outlook.com
+ ([fe80::3016:b672:c683:f7ad%4]) with mapi id 15.20.9769.046; Tue, 14 Apr 2026
+ 03:02:53 +0000
+From: "LOK, CHEN HUEI" <chen.huei.lok@altera.com>
+To: "Chee, Tien Fong" <tien.fong.chee@altera.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+CC: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
+ Alexander Dahl <ada@thorsis.com>, "Rosdi, Danish Ahmad"
+ <danish.ahmad.rosdi@altera.com>, "YUSLAIMI, ALIF ZAKUAN"
+ <alif.zakuan.yuslaimi@altera.com>, "MANIYAM, DINESH"
+ <dinesh.maniyam@altera.com>, "NG, BOON KHAI" <boon.khai.ng@altera.com>, "Hea, 
+ Kok Kiang" <kok.kiang.hea@altera.com>
+Subject: Re: [PATCH v2] drivers: fpga: Use SOC64 conditional instead of
+ Agilex/Stratix10
+Thread-Topic: [PATCH v2] drivers: fpga: Use SOC64 conditional instead of
+ Agilex/Stratix10
+Thread-Index: AQHcl0FLie9ELA3/kE28B9wfIgd6pbXdB4sAgAE2Zlg=
+Date: Tue, 14 Apr 2026 03:02:52 +0000
+Message-ID: <IA3PR03MB8021F3099C54AC7CE657FA74C3252@IA3PR03MB8021.namprd03.prod.outlook.com>
+References: <20260206081904.12390-1-chen.huei.lok@altera.com>
+ <LV8PR03MB813764D9AB9C683D10955D58A7242@LV8PR03MB8137.namprd03.prod.outlook.com>
+In-Reply-To: <LV8PR03MB813764D9AB9C683D10955D58A7242@LV8PR03MB8137.namprd03.prod.outlook.com>
+Accept-Language: en-US
 Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20260414082007.662549-1-kory.maincent@bootlin.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF00022574:EE_|SJ5PPFA7DBF91DC:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4a7e2c37-c486-4565-db2b-08de9a20ef16
-X-LD-Processed: e5b49634-450b-4709-8abb-1e2b19b982b7,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|376014|1800799024|82310400026|22082099003|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: sq4MPG6dua+uAMg5uDcjjoYEmvP4iQqseQGqh0xshxbHHH7z/EwFYB4kW/Xk9XHvUCxLROuiWEAlVdjd+2ctOyoCMN+biUXQ8KuREQH079UOEAA9ePqG4GUjWiP/KGq/cETHSQNaptqOYkifAqdHw7CLAlmeYf7NyoWgyimRJbVcp8/7enownpC7VSECeDupu51JnNqS4n521HAdo9JK1jg7P5xSlUY+U68KAPE+4BjWvrzF1RDk6avw3SwfFwAK6vJ+WquG+tfJqXR9YqbZHLhxELYdXUfHpg6BthNNRKirEZwYH89D//u5jNwGLjQ0PyAtqUF5DEfTWTL0zyN5wo0TUGRwqV2MEW7oUKSlpyM3ZeRJiEGM6zZsMSj28+1JyBo7UqwCShUZaX2U+HqZMA+fSJD3opVM/nyloVl+g49L1rVYTmvNTUuARJWKNTXTA9Uo1Ywl3GPeKxpT/nRtzPsnkuMndzqUveHlDWXdbts7q1f07jei6CAyyrpz5L3AmaBzRVaiaSO/y3t+ugbto0m7jrQKE1LQRNl0N4Fx1O5d/97fjeGDomo6Q982W0841LLalzDl6J+BcutZSDNofO+m8StLSVk9rotff5ZW1pWbzmxLqPslUyusWCxhJE/4Y2iEsEncnA+yrRi8au2QshEbRWk9jm7lAzI5lpLxRbQjlVkLhfpRLbZQNbVsdx5JsvN7ZMOzqtYwiabKSyVTEb97fzQT7a6KNgPLUd+s7v8UDE4NSdM3ueLI72TRRoJlI3G5zhq9muAX5y1KIf8eyw==
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(36860700016)(376014)(1800799024)(82310400026)(22082099003)(18002099003)(56012099003);
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: IA3PR03MB8021:EE_|CH3PR03MB7435:EE_
+x-ms-office365-filtering-correlation-id: 1be70a3d-d502-4e28-1c24-08de99d251e7
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|366016|1800799024|376014|18002099003|22082099003|55112099003|56012099003|38070700021;
+x-microsoft-antispam-message-info: 7GW4/PrD53vRlSUGcIfmgH/JMaPscXIky6MdMbSAEgtOhIRv1sCj42CQ/mKBjbyjgbFflB9OrmY75Z8GVOnQYJBl1nqCfXhmyUazbjMSfh5N9xvCEJ57++Dg3lJhBQgNK613S0MuV0xiwf2QQQr9inOBF1vHCgsbOsb3g0rWRzHmZGVASF7J/sOgyMLSFPhtDIu9X3cJb2/dYa15LpPG13BFSm3FDPCWd/7TR+7a4oCbK9AkP9DJGCYsoH3/9jDen8CSW9nSKG2X++b3QnaxrMkfpurOPvIuX8bFVjw/sCwxWJqd8BMeaurAwC6eU51FlL+Dkz3pQRQaB8vKln6ZTk/4yffUBg796ufxIyOYhNOEO3Syq6W03yVyyiTqvmndUMShm/85c+bgiVV7UoLNH/XSnPKQL1cjEpuQSOIqSlMiy5TDxedJeO6vtz6f9hM52mxeCWzTfPoD2n9h4yiTuhwceCQd8D5QaUaIhAtBUOdCvKAhmBJRLXpr6CrHp9uGTGFkWQOgXQj73TZ1b0UwWvXDBg+SQISxZXAahbPzqZay6r8RCR6aAXdqrSpsh6oODt2fGWKhRKiCK4rmp5dHr1libBZadlWDik5AFTmozRfjrXpZYNM5hVSLTajj6QgHCD1Hb5S34x5aqZf/G1NGWOUy44oD+RjHEjT8IYYwo4IedKNrgQBi9xPAIalz0qBJo6qWbO6IDt19EcdsFoNz64T9EOePaDC3QrYVUGCdZA+bVFJ0IpZ9ECtqY8+bPPsyl+LrXOoXoFNOmzjza3XAxrri2062bOQ/ktiKWI0EL58=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:IA3PR03MB8021.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(18002099003)(22082099003)(55112099003)(56012099003)(38070700021);
  DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: MAjpk8hZ4HfNYe5MxvGC/rVSpQ3uSGb5KpidnjIgCkY6p+isNgOR0/Yj2qDdMi1rBeCGf1h2/ugjszLj0hxlSckT5Jjyw85sQnhp7HUYW/3B7dqXpyoKzDS3Dcyz3723RTFhrDeP2yiy0Rk2Njz8SIsoX9Ygfq9CGIWK3094T9+UKCqmG8knPyZN4b7XP71VxIDuyLmTFFiNdRWHYRGfa7NXSsGHZlDy1tTQSwnmEGQj8ZC2Cm+NSHKDE68UuhEZb3wJ85DIRr5CqBLA/dQQHyWAjeliqipeF35/cYTAZM/O1vwC/UZXatNKe8llvryjOh/PIPGuCOBXyLJEwOX44nITZggo8NQ27wjhPRJnzIaWZw2p4gew1sXQZ/5/YVhQUdRZyXhIT7Y1W3U7jg7zp1qxs2blptJgIV+IbGSya5/NQyoNXTkytdlik0TjBaCE
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Apr 2026 12:25:37.2955 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4a7e2c37-c486-4565-db2b-08de9a20ef16
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF00022574.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPFA7DBF91DC
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?Windows-1252?Q?lgfXzximsYKixSYsJYy73dY7GrXyspe1Lp30xMBmpIehcRvYnjuCg0KE?=
+ =?Windows-1252?Q?fMSWmqx0C6v+AwGA5GHMDOoGMCjZn/YGxQC5v0kyWMPS9O3zjSTo8B9x?=
+ =?Windows-1252?Q?U6IF0fOSnJh5J8B+VAqH5bQgqT2w2M9wVDeEhBXcBaZXD16HQTBHjy6S?=
+ =?Windows-1252?Q?uR6psbkCg++XGxFJKplCboRbV+5KbTb3ZYP2MzjNypYO4FJgDUArZCAq?=
+ =?Windows-1252?Q?q3A/5Vrep1Jr6heY5bfksenTMOBWgv8PGY5QkoOqeUS8bXt/4bJUASqN?=
+ =?Windows-1252?Q?PMsgmUgGxkFuJfqIWRtljvyftCfDcy/Mb7YL1o3JTdF8HoG6Dsb3BUBE?=
+ =?Windows-1252?Q?IODpwjjZ4cwjyxczilwGhh0Cg8CBXk+v0LgokbzhhA6P+iR8K/qXdFA+?=
+ =?Windows-1252?Q?h0pfac8+6PiwRb4WgnqrOaAztD+DvBckTsS+OnQuzHsoRU1bX9m8G4q5?=
+ =?Windows-1252?Q?Xg/QuxqsK1Yic2dPIf4wIslFVbtx2KtrWjrhInKvNFx+iPbhprUZgno8?=
+ =?Windows-1252?Q?bz0VeLQWenHxRc7bAWhHksuQtxvJENamuzPNT68jubEYVh0UEFB9p9J6?=
+ =?Windows-1252?Q?0DY8MINoCGUYcL5omzW9JjRXkAieXnBckwo19bhZsNK4pr5U/wbn3tOY?=
+ =?Windows-1252?Q?bypVn/r7Avsht797SMRwVoH9gPNw2zkvurN7e6za7UAcgBuwytx3sqVC?=
+ =?Windows-1252?Q?AM8j+vsjUckztVb1qYZ90c4NJ9hEsc6Bg3d6fymoc+Bn4FlC1Mm5Y7lW?=
+ =?Windows-1252?Q?iVTNmC8KT+c94DdcSNyvO8tGTAOEJoOdoOoIjAxUwrwmiuEZ4NZn/x/g?=
+ =?Windows-1252?Q?BU0aeXl2ghw6X2P38u/VsN+Kg714co6Gqddn/6JdiNAirAsYAGWC4Vkt?=
+ =?Windows-1252?Q?33HhABegBLFuMuubYKrB2e4hvABk01KoL/5Uy6OkTdYrtoL33F5BDQIU?=
+ =?Windows-1252?Q?7JjHkgCA8gMZgzn2rwtGJZkCxGs2RbT0N3OZvTMEkPGPScqk/UEiixI0?=
+ =?Windows-1252?Q?bNjxYX2tb0A3K/rg2irlfbjEa07IEtW1D4Ce/7kw4zKxRdstygEyB6fM?=
+ =?Windows-1252?Q?z63Y9klZ+PNidTqRbyhTezlgOd7YV2ygFSFptMP/TSae1rNepu+fJKyQ?=
+ =?Windows-1252?Q?+cS0c5u3pHzB0q+m3oaVO91Ip7uE2+iOZfGfKpIwHsY4xUFLAEcpf+uf?=
+ =?Windows-1252?Q?pvQ7sJKaelpCS/IEISvNTgJb18acCm7o8c6/Rl9orKIW3uk8VbA0JWhf?=
+ =?Windows-1252?Q?XxJc0ncwpR9e2ixYfqF+iBV4VwiDeEXuiR6vGpSkobBXVqXEymFEITBJ?=
+ =?Windows-1252?Q?n+GWELJBPCY0gfrQ3IOKjI2LUHHv2vkIBPl7SE7+TpeMd9z5jZXNDVq0?=
+ =?Windows-1252?Q?bLsKQnGcuKb1j7MeYms1PZoeIJ2MdZFv7XKGMuvYbG/lFSKqB95Mq49i?=
+ =?Windows-1252?Q?KI0+o+uWZLg+pMJicSa+6Mde3vvZ3IsoyYzz/GgclxThgJChXa71du7d?=
+ =?Windows-1252?Q?hAR4oeopa/xrgLJW2fgIb8EIA+pNCf/51XQnqfGxQ0/0HkVLZAG5PfRV?=
+ =?Windows-1252?Q?TY31RRFj1IQQWMA8vJbwS4+rVsEPjNlMb7LUJCfab4htYcW4BRzawojr?=
+ =?Windows-1252?Q?9XKExARiZpQGayuP8fm9gRxrD0TyGfzYlZlGE6MYo4Ra0Nrwp7gBRcQ8?=
+ =?Windows-1252?Q?cREBykQ1rvicujdxroB4mzcXomqBgJYEawWSBAQ2CsxDircY7rdU13Sb?=
+ =?Windows-1252?Q?JDo8JL2qioFNUrzyeLH3ud1OwE7b8oVrvZJi5k4NdrJxbwIZawBmsZic?=
+ =?Windows-1252?Q?Eflx6YsMmAPWN8ZMdpN9ND9ffUGSCTTkCw3o9f6PgK+lMMHll8nXrJsI?=
+ =?Windows-1252?Q?90HhZ5/dCMq4iw=3D=3D?=
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: IA3PR03MB8021.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1be70a3d-d502-4e28-1c24-08de99d251e7
+X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Apr 2026 03:02:52.9250 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 2YZiaTMA8G23d//TsKDLZXDCY5Fh4ZMEubt21cRH6bi5XkCgGgdaq476PM9cWwAH1mCDOebfNSK0pjnCzVKBsSBmIf2fKiUHFYOHs3GqWO0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR03MB7435
+X-Mailman-Approved-At: Tue, 14 Apr 2026 14:54:51 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,92 +153,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/14/26 3:20 AM, Kory Maincent wrote:
-> From: "Kory Maincent (TI)" <kory.maincent@bootlin.com>
-> 
-> Some extension boards have EEPROM part numbers that do not directly match
-> their devicetree overlay filenames. Introduce a static name_mapping table
-> and a set_cape_overlay() helper that translates the part number and version
-> strings read from the EEPROM into the correct overlay filename.
-> 
-> When no entry matches, fall back to the existing behavior of constructing
-> the overlay name as "<part_number>-<version>.dtbo" directly from the
-> EEPROM content.
-> 
-> Add an initial entry mapping BB-GREEN-HDMI revision 00A0 to
-> am335x-bone-hdmi-00a0.dtbo.
-> 
-> Signed-off-by: Kory Maincent (TI) <kory.maincent@bootlin.com>
-> ---
->   board/ti/common/cape_detect.c | 42 +++++++++++++++++++++++++++++++++--
->   1 file changed, 40 insertions(+), 2 deletions(-)
-> 
-> diff --git a/board/ti/common/cape_detect.c b/board/ti/common/cape_detect.c
-> index 88fa6ae81f0..c9555779c0c 100644
-> --- a/board/ti/common/cape_detect.c
-> +++ b/board/ti/common/cape_detect.c
-> @@ -13,6 +13,44 @@
->   
->   #include "cape_detect.h"
->   
-> +struct name_mapping {
-> +	char part_number[17];
-> +	char version[5];
-> +	char overlay[64];
-> +};
-> +
-> +static struct name_mapping extension_mapping[] = {
-> +	{
-> +		"BB-GREEN-HDMI",
-> +		"00A0",
-> +		"am335x-bone-hdmi-00a0.dtbo",
-> +	},
-> +	{ /* sentinel */ }
-> +};
-> +
-> +void set_cape_overlay(char *overlay, char *part_number, char *version)
-> +{
-> +	struct name_mapping *mapping;
-> +
-> +	for (mapping = extension_mapping; mapping->part_number[0] != 0;
-> +	     mapping++) {
-
-Does ARRAY_SIZE() make this any cleaner than a null-terminated array? Or
-do you plan to generalize this in some way more?
-
-Either way, the concept looks good to me.
-
-Andrew
-
-> +		if (strncmp(mapping->part_number, part_number,
-> +			    sizeof(mapping->part_number)))
-> +			continue;
-> +
-> +		if (strncmp(mapping->version, version,
-> +			    sizeof(mapping->version)))
-> +			continue;
-> +
-> +		strlcpy(overlay, mapping->overlay, sizeof(mapping->overlay));
-> +		return;
-> +	}
-> +
-> +	/* Use default name extracted from the EEPROM */
-> +	snprintf(overlay, sizeof(mapping->overlay), "%s-%s.dtbo",
-> +		 part_number, version);
-> +}
-> +
->   static void sanitize_field(char *text, size_t size)
->   {
->   	char *c = NULL;
-> @@ -82,8 +120,8 @@ static int ti_extension_board_scan(struct udevice *dev,
->   
->   		printf("BeagleBone Cape: %s (0x%x)\n", eeprom_header.board_name, addr);
->   
-> -		snprintf(cape.overlay, sizeof(cape.overlay), "%s-%s.dtbo",
-> -			 process_cape_part_number, process_cape_version);
-> +		set_cape_overlay(cape.overlay, process_cape_part_number,
-> +				 process_cape_version);
->   		strlcpy(cape.name, eeprom_header.board_name,
->   			sizeof(eeprom_header.board_name));
->   		strlcpy(cape.version, process_cape_version,
-
+> > -#if IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX) || \=0A=
+> > -=A0=A0=A0=A0=A0=A0 IS_ENABLED(CONFIG_TARGET_SOCFPGA_STRATIX10)=0A=
+> > +#if IS_ENABLED(CONFIG_TARGET_SOCFPGA_SOC64)=0A=
+> =0A=
+> Please respin against current master; drivers/fpga/altera.c uses=0A=
+> CONFIG_ARCH_SOCFPGA_* not CONFIG_TARGET_*. Likely want=0A=
+> CONFIG_ARCH_SOCFPGA_SOC64 if available.=0A=
+> =0A=
+Hi Tien Fong,=0A=
+=0A=
+Thanks for the note.=0A=
+=0A=
+Yes, this change comes after the commit that replaces the TARGET namespace,=
+ so using the CONFIG_ARCH_SOCFPGA_* option is the correct approach here. =
+=0A=
+I=92ll respin against current master and update the guard to CONFIG_ARCH_SO=
+CFPGA_SOC64 accordingly.=0A=
+=0A=
+Adding this context in the commit message for v3.=0A=
+=0A=
+Thanks,=0A=
+Best regards,=0A=
+Lok=
