@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 222C6ED7B8B
-	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 09:17:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEF6FED7B9D
+	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 10:35:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86999841B9;
-	Tue, 14 Apr 2026 11:17:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id B66A4839D5;
+	Tue, 14 Apr 2026 12:35:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="vl1d0Xq9";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="g09c4yF7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8E4E84181; Tue, 14 Apr 2026 11:17:47 +0200 (CEST)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ id 61CBC841CD; Tue, 14 Apr 2026 12:35:34 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E7C4841CD
- for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 11:17:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A1E2838BB
+ for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 12:35:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 394E2C5AA96
- for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 09:18:22 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 3074B5FFBB;
- Tue, 14 Apr 2026 09:17:45 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 5DED410450093; 
- Tue, 14 Apr 2026 11:17:42 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1776158264; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=Lms9VHwybC4O364iAvPNW7+860fAl7hg+UtIui2DdoY=;
- b=vl1d0Xq9LE7nUZ3FzD1gr+NG4qi4LnfDO+lwqnvP7HYAvCrvuNzkju2dQDbSK04ib7DnfI
- qzc4eHrRvvgYmuvOidf3G5DWr5nMxGCLlOOlra/NcknQ8isnMtYLiiLdrnVXc/gtp57No1
- pGn7UtthqPSiZX5FYdNRYoA5Lul6G+4+F+072qdIn3WoJ1ZdNST1IXX0acrO5sg3gH9tSh
- dRnZAvAX8Dcc5f6ZGV7i5hb4NUIlXgHxeeE/U5B8vo4GiBCZlENWVktk9uPhiFJ/lT7XsW
- opQWuxufKWtRxjnjOTq7KI9mltEmhyuueYxj/03z2C4Ly09s6I2BhghSqLOqzw==
-Date: Tue, 14 Apr 2026 11:17:41 +0200
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
- <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] board: stm32pm1: Fix board_check_usb_power()
-Message-ID: <20260414111741.511707e5@kmaincent-XPS-13-7390>
-In-Reply-To: <20260414-fix_usb_adc_meausurement-v1-1-8cdbd4c10dd8@foss.st.com>
-References: <20260414-fix_usb_adc_meausurement-v1-1-8cdbd4c10dd8@foss.st.com>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4fw0zQ59VNz9txr;
+ Tue, 14 Apr 2026 12:35:30 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1776162931;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=XF4iXTMhRxEH0Q8xeFzyeQn1fBkambyxuE/i9VVcOxU=;
+ b=g09c4yF7WthGeQEHPkFD+DTsThNy1AYTqXXjEjP3bcnib/TfZzIkBatnoTHI6pS8M8F6B9
+ pqZkn9XdzNrDZ/n17bhjzpvPAXkMBWDjRCsW+HhMUH0++SvN7j+VytjBEpwopf3jGgUv68
+ h2dThTqs1WtFI5OocJzyLqdRKoWDOENnGP7tVuWNw7Gy6rkEtvpK53Ed+/TIhCcyfQHsoZ
+ 83cd8Y1dF2JVm4Ek9RSdhTDdPjDVAwD+1m6Eku3mzfo+cLDJ9vZ9dd86MqdXSLaiKqrKtf
+ 0EfeetKj+3zX6ifY7M1uOllxB22dmQSzOUIVa1M+bSkilYp6tFJdqB8mO2KjWA==
+Message-ID: <3f3a5163-7f59-4d02-8fe2-983cdd03b6cf@mailbox.org>
+Date: Tue, 14 Apr 2026 08:11:42 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+Subject: Re: [PATCH v1] usb: dwc3: core: fix memory leaks in event buffer
+ cleanup
+To: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>,
+ marex@denx.de, trini@konsulko.com, mkorpershoek@kernel.org,
+ macromorgan@hotmail.com, casey.connolly@linaro.org,
+ felipe.balbi@linux.intel.com, quic_varada@quicinc.com, u-boot@lists.denx.de
+References: <20260414055013.2978223-1-gurumoorthy.santhakumar@oss.qualcomm.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260414055013.2978223-1-gurumoorthy.santhakumar@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: xsb6wxsgh7815thznarz1i5e4uo356ka
+X-MBO-RS-ID: 8cc059e980cc04d6d7a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,37 +76,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 14 Apr 2026 11:06:50 +0200
-Patrice Chotard <patrice.chotard@foss.st.com> wrote:
+On 4/14/26 7:50 AM, Gurumoorthy Santhakumar wrote:
 
-> Depending of plugged power source (computer, wall charger, ...) it can
-> happen that we got the following message:
->=20
-> "****************************************************"
-> "*      USB TYPE-C charger not compliant with       *"
-> "*                   specification                  *"
-> "****************************************************"
-> "                                                    "
-> "### ERROR ### Please RESET the board ###            "
->=20
-> This issue has been detected on STM32MP135f-DK board.
->=20
-> It's due to max_uV and min_uV value are initialized at beginning of
-> board_check_usb_power() and can then be used for the 2 iteration of
-> adc_measurement().
-> max_uV/min_uV values issued of the first adc_measurement() iteration
-> are used as input of the second adc_measurement() iteration, which
-> can lead to incoherent pair of min_uV/max_uV values.
->=20
-> To ensure that adc_measurement() returns coherent value for max_uV and
-> min_uV, initialize max_uV and min_uV at each loop start.
->=20
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+[...]
 
-Reviewed-by: Kory Maincent <kory.maincent@bootlin.com>
+> +++ b/drivers/usb/dwc3/core.c
+> @@ -206,6 +206,11 @@ static void dwc3_free_one_event_buffer(struct dwc3 *dwc,
+>   		struct dwc3_event_buffer *evt)
+>   {
+>   	dma_free_coherent(evt->buf);
+> +
+> +	if (evt) {
+> +		free(evt);
 
-Thank you!
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+It is valid to call free(NULL) , the if (...) conditional is not needed 
+here.
+
+> +		evt = NULL;
+
+Is this assignment needed ?
+
+> +	}
+>   }
+>   
+>   /**
+> @@ -252,6 +257,11 @@ static void dwc3_free_event_buffers(struct dwc3 *dwc)
+>   		if (evt)
+>   			dwc3_free_one_event_buffer(dwc, evt);
+>   	}
+> +
+> +	if (dwc->ev_buffs) {
+> +		free(dwc->ev_buffs);
+> +		dwc->ev_buffs = NULL;
+> +	}
+Same two comments apply here.
