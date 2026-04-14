@@ -4,64 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5D4AF9D0CA
-	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 13:36:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EE29F9D0D5
+	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 14:53:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B86084206;
-	Tue, 14 Apr 2026 15:36:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 68DA484214;
+	Tue, 14 Apr 2026 16:53:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="kM/NKQKV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dSw/lPWx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E64A84214; Tue, 14 Apr 2026 15:36:07 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 319DB8421D; Tue, 14 Apr 2026 16:53:58 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 367C9841F2
- for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 15:36:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 09214841F2
+ for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 16:53:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id B84831A32A8;
- Tue, 14 Apr 2026 13:36:04 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 8D64C60410;
- Tue, 14 Apr 2026 13:36:04 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 8BCB8104510D5; 
- Tue, 14 Apr 2026 15:36:01 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1776173763; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=HMxEp9ZVar77dhQKjnpB6Pw7nzNY6Xz1rTaS0Tj0vGo=;
- b=kM/NKQKVzs1FEELXTz8sTkPCNLK5tgkAvx+TETyHJNZz3QJClGmeBmfvKnmJ18CuVLPXJc
- xNmmwK31JJ5poenvhC+P86EdP3miX/xueIVVZp6C5uIjoWZxFvuGGAijYxyapWHdFmfynn
- JouYBLxDme3s5qgpKkDnqX0jgcHYq8Um6cTbm5UfOl/6KN8UymF6yZDM6wCN3L1dgQf9ok
- 9phx/5EqOi1cu5WBNwDvr+iwcJm7aqVYVwFoBgAYjO1OJ3IjvxdB2930YUtnHenBMdZD58
- VmQJI8sfTB4tyo3iGuGb4WLm84nLKBr6WGS7kCZELushhbZ/p6MNEF8DO8/0IA==
-Date: Tue, 14 Apr 2026 15:36:00 +0200
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Andrew Davis <afd@ti.com>
-Cc: <u-boot@lists.denx.de>, Bajjuri Praneeth <praneeth@ti.com>, Robert
- Nelson <robertcnelson@gmail.com>, Jason Kridner <jkridner@beagleboard.org>,
- <thomas.petazzoni@bootlin.com>, Tom Rini <trini@konsulko.com>, Marian
- Cingel <cingel.marian@gmail.com>
-Subject: Re: [PATCH] board: ti: cape_detect: Add overlay name lookup table
- for extension boards
-Message-ID: <20260414153600.45f651be@kmaincent-XPS-13-7390>
-In-Reply-To: <86387a11-6f9b-4535-962c-150b004f4d20@ti.com>
-References: <20260414082007.662549-1-kory.maincent@bootlin.com>
- <86387a11-6f9b-4535-962c-150b004f4d20@ti.com>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-4710c186d8aso1680279b6e.3
+ for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 07:53:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1776178435; x=1776783235; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=5HOkJr16gc1vzdWMQa30RMocdono0gbVjFA2rWxm1Qc=;
+ b=dSw/lPWxvrL6Hhv8TsvhVso+WcfEqm+YjQHlYysjAMQYj68P9q8wAIq26ZAV+D3XvS
+ XWqx1uFxD1qC3SjGYynho2E/4XQtbGthFxtJFhTrJJB0CTwjHExrw/BJaVOuz8I9Yts7
+ LEQynGmETC5B1Ui6SLFTicq2yCNz9974rEbvk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776178435; x=1776783235;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=5HOkJr16gc1vzdWMQa30RMocdono0gbVjFA2rWxm1Qc=;
+ b=bIw5VcIAlOONv4CZsWUFQx9/+RkqIeSVYUOF4/Vgrs7+L7O1jlJ9Don4p4wZWSUaVM
+ K3OJlBIEB+e8eOdl6beauYS9lInrYPlq5G9QTzLF/xReMwmWuLdnJonO1eYFL0b1Vao/
+ G1z7yiBz08N/9dDApHVwNYs+CvdSgX5NWZMb7REc6o0oESGFEDIhAQxAZ0p9eb+Kj/e1
+ 9Wejo478DHZk1YQrOVIeFdzzYxU8XNXRSz59dNa19WSgmiZnJJmhkwGnw5KNrD1DyYw2
+ AcnN34tHggIMqrZf8bUFZNinn+Qs1P+NSqeoSaX9IX4ctI28NFwXqOlq4GbGpUkKfUyx
+ a6zg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+ubP4duUptMEms9si9n9+L2Noea0JwK5Gded5O9EYNV3fGV75vy6Zf2W05Yg5Xp/aOV58jfk0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzCBIDPkTrxbPz7MDRwCVDhr63jXZGI+LY78O0aWfir7F2FQZA5
+ LlUTpP/Y0Wp7ul7NKBef2r2Mu/h5a3bTMXZ7QQoN0HOXaVYY3MlLEk06GjFpETKWx7c=
+X-Gm-Gg: AeBDievJ2+VZpPoWEkpFn2tF07HWofJsX7yYpS5fC6T4SQ4HI3Ct/eo6wUJE4M8/r7Y
+ 86UcETTsREwwxSY0FnEw7VuH6fl70uiWUFDYBIXO2b+U2WyjqE1lSy9KCICy/WesoWcDpFE3G1R
+ HOz36GHndRR5qncJk9yYX39Srd6YdKVOeLDIcP2Yl0K7VuOXPHYg+3d4CEgsGMVj+wIE9tsjM+y
+ fkpkwH7488KU11fueYtDL10WC+S/Bxbrwhvat/L/3hawmMK3Oa4XKCU9USAnXgoYl6G06CS/HE5
+ RbyJneCjbW2FipBO/9ErKhTONzzBg/s5HDy2RtqwifJXY+DgTPQUYiwynuOU40h7gcKOkUnjlcW
+ /N8TfkJnLwi0u7dsH0RjDuincaAnjUTFLVy0lpV+lzmhVd5TFATC6nI1LV8mUf+cdCltbmyJH3k
+ 3Qui7X6s9PRTALKnqoC5eO3rynWVZ7H74giBN44dC7axMIWzxpWmxptrJv/8E67AoCpypO55+aa
+ d9FPu5enIsaVBhvP+C6HSJwp+RlqJ+2wTs35kgF8AIxaYC7LwHJOntakyWdVw==
+X-Received: by 2002:a54:4e83:0:b0:467:143c:7733 with SMTP id
+ 5614622812f47-4789f50b735mr6885897b6e.46.1776178434581; 
+ Tue, 14 Apr 2026 07:53:54 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-478a2f565d1sm8250838b6e.10.2026.04.14.07.53.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Apr 2026 07:53:53 -0700 (PDT)
+Date: Tue, 14 Apr 2026 08:53:51 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Mathieu Othacehe <othacehe@gnu.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Paul Barker <paul@pbarker.dev>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] misc: Add RZG2L OTP support
+Message-ID: <20260414145351.GJ41863@bill-the-cat>
+References: <20260414091422.16952-1-othacehe@gnu.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="3jDiOwEkizPbfOqj"
+Content-Disposition: inline
+In-Reply-To: <20260414091422.16952-1-othacehe@gnu.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,75 +100,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 14 Apr 2026 07:25:34 -0500
-Andrew Davis <afd@ti.com> wrote:
 
-> On 4/14/26 3:20 AM, Kory Maincent wrote:
-> > From: "Kory Maincent (TI)" <kory.maincent@bootlin.com>
-> >=20
-> > Some extension boards have EEPROM part numbers that do not directly mat=
-ch
-> > their devicetree overlay filenames. Introduce a static name_mapping tab=
-le
-> > and a set_cape_overlay() helper that translates the part number and ver=
-sion
-> > strings read from the EEPROM into the correct overlay filename.
-> >=20
-> > When no entry matches, fall back to the existing behavior of constructi=
-ng
-> > the overlay name as "<part_number>-<version>.dtbo" directly from the
-> > EEPROM content.
-> >=20
-> > Add an initial entry mapping BB-GREEN-HDMI revision 00A0 to
-> > am335x-bone-hdmi-00a0.dtbo.
-> >=20
-> > Signed-off-by: Kory Maincent (TI) <kory.maincent@bootlin.com>
-> > ---
-> >   board/ti/common/cape_detect.c | 42 +++++++++++++++++++++++++++++++++--
-> >   1 file changed, 40 insertions(+), 2 deletions(-)
-> >=20
-> > diff --git a/board/ti/common/cape_detect.c b/board/ti/common/cape_detec=
-t.c
-> > index 88fa6ae81f0..c9555779c0c 100644
-> > --- a/board/ti/common/cape_detect.c
-> > +++ b/board/ti/common/cape_detect.c
-> > @@ -13,6 +13,44 @@
-> >  =20
-> >   #include "cape_detect.h"
-> >  =20
-> > +struct name_mapping {
-> > +	char part_number[17];
-> > +	char version[5];
-> > +	char overlay[64];
-> > +};
-> > +
-> > +static struct name_mapping extension_mapping[] =3D {
-> > +	{
-> > +		"BB-GREEN-HDMI",
-> > +		"00A0",
-> > +		"am335x-bone-hdmi-00a0.dtbo",
-> > +	},
-> > +	{ /* sentinel */ }
-> > +};
-> > +
-> > +void set_cape_overlay(char *overlay, char *part_number, char *version)
-> > +{
-> > +	struct name_mapping *mapping;
-> > +
-> > +	for (mapping =3D extension_mapping; mapping->part_number[0] !=3D 0;
-> > +	     mapping++) { =20
+--3jDiOwEkizPbfOqj
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Apr 14, 2026 at 11:14:21AM +0200, Mathieu Othacehe wrote:
+
+> Add OTP support through the fuse command. Fusing is directly performed by
+> U-Boot, which means that the trusted-firmware must allow the non-secure
+> world to perform fusing operations.
 >=20
-> Does ARRAY_SIZE() make this any cleaner than a null-terminated array? Or
-> do you plan to generalize this in some way more?
+> Signed-off-by: Mathieu Othacehe <othacehe@gnu.org>
+> ---
+>  drivers/misc/Kconfig     |   7 ++
+>  drivers/misc/Makefile    |   1 +
+>  drivers/misc/rzg2l_otp.c | 222 +++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 230 insertions(+)
+>  create mode 100644 drivers/misc/rzg2l_otp.c
 >=20
-> Either way, the concept looks good to me.
+> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+> index ea785793d18..16cb800a393 100644
+> --- a/drivers/misc/Kconfig
+> +++ b/drivers/misc/Kconfig
+> @@ -132,6 +132,13 @@ config SPL_ROCKCHIP_IODOMAIN
+>  	  for the IO-domain setting of the SoC to match the voltage supplied
+>  	  by the regulators.
+> =20
+> +config RZG2L_OTP
+> +	bool "Renesas RZ/G2L OTP support"
+> +	depends on MISC
+> +	help
+> +	  Enable support for the OTP controller on
+> +	  Renesas RZ/G2L SoCs.
+> +
 
-We could indeed use ARRAY_SIZE. I have no preference.
-Maybe its indeed better in terms of footprint size. I will send a v2 with i=
-t.
+If there's other feedback, this should have some dependency on CMD_FUSE
+as well (since that's what makes use of the functionality) but indeed
+it's very inconsistent currently, and the area in general could use some
+modernization.
 
-Regards,
 --=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+Tom
+
+--3jDiOwEkizPbfOqj
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCad5U/AAKCRAr4qD1Cr/k
+CmqcAQCbsk5GPSFbd1Tgqm/IKfX9KDTiSpFoPRsWm824YqO1KAEAvdEvys/3ut4M
+Qaa6W1QTXqfgmUJpuLLv2b8/uIY7pgA=
+=/qn2
+-----END PGP SIGNATURE-----
+
+--3jDiOwEkizPbfOqj--
