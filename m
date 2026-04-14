@@ -4,70 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 090C1ED7B82
-	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 08:03:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6A4FED7B82
+	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 08:20:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7563484178;
-	Tue, 14 Apr 2026 10:03:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id 2676384198;
+	Tue, 14 Apr 2026 10:20:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="WzbBlRo/";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="C2I3QPx+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4FB784181; Tue, 14 Apr 2026 10:03:44 +0200 (CEST)
-Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
+ id AD8108419C; Tue, 14 Apr 2026 10:20:22 +0200 (CEST)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A915838BB
- for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 10:03:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id A240484181
+ for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 10:20:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 697cc1dc37d811f19a16598d5ca7f8ec-20260414
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
- bh=l8HTT7pYUbCqpM2AonTppBpCIRErNiEb+SSYrEkYWmk=; 
- b=WzbBlRo/3Vbaqlhi+mbiaF0ehHB8mfnmEdzzBjW7q++JRIBnHjpR7D4ExCLTR8yvWt240cZYnkY49EXou0mIQL70uYhQeMI5detzx1PMH1hZCXvgJGVt23m94DmTntzVbvJ0v/PI3yc9fU6Vrb1B0clnBCn52M/6TEILfrpyZTo=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.12, REQID:5fc886ee-ac74-41bb-8026-1a564f09329b, IP:0,
- U
- RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
- release,TS:0
-X-CID-META: VersionHash:e7bac3a, CLOUDID:bd23678f-6df4-4a3d-a7a4-fbdc42d669ce,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:102|836|865|888|898,TC:-5,Content:0|
- 15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0,OSI:0
- ,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 697cc1dc37d811f19a16598d5ca7f8ec-20260414
-Received: from mtkmbs11n2.mediatek.inc [(172.21.101.187)] by
- mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1339775409; Tue, 14 Apr 2026 16:03:24 +0800
-Received: from mtkmbs13n2.mediatek.inc (172.21.101.108) by
- mtkmbs11n2.mediatek.inc (172.21.101.187) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Tue, 14 Apr 2026 16:03:23 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs13n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Tue, 14 Apr 2026 16:03:23 +0800
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: <u-boot@lists.denx.de>
-CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
- <trini@konsulko.com>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH] common: spl: nand: improve u-boot offsets overriding
-Date: Tue, 14 Apr 2026 16:03:21 +0800
-Message-ID: <20260414080321.39542-1-weijie.gao@mediatek.com>
-X-Mailer: git-send-email 2.17.0
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 237FD4E429F2;
+ Tue, 14 Apr 2026 08:20:20 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id EDEE05FFBB;
+ Tue, 14 Apr 2026 08:20:19 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id CC20C10450596; 
+ Tue, 14 Apr 2026 10:20:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1776154819; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=yxEmfQECD+K3xm2tLo3lRlBemevp/YGBDul0ORiQoG0=;
+ b=C2I3QPx+RPLqQgZJFoR/KGheanH/XmcPWPRrjfIbJc7I+7Q8rqmcQkHC5ngUvkcUxXUxRT
+ 55eiqnwwzT1dQPmeLET7U/NHpES1kEBkUdnWzGATt3RAIvXnFxpiMDE/xWCoNDJuVMXMS2
+ /8O+7cJkWONKt+zX8mkcLY3o/GsoaONRrcnaDsylGTZ0D7eQi0nOBz0/c6rSdw49Ys026B
+ eXYWP741cTzmqZwxiIWTn8T5vbjlH78f/tBspOy1l1j2NGhH68TsGUFCudn5sQ7I2+rUc6
+ X0mzLJBQ4WvWU/e0gmqBCc6qG+vNfpx4p6PZY4SKp/cA+Rh7JmT7KAPrTl1wmQ==
+From: Kory Maincent <kory.maincent@bootlin.com>
+To: u-boot@lists.denx.de
+Cc: Bajjuri Praneeth <praneeth@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, Andrew Davis <afd@ti.com>,
+ Jason Kridner <jkridner@beagleboard.org>,
+ "Kory Maincent (TI)" <kory.maincent@bootlin.com>,
+ thomas.petazzoni@bootlin.com, Tom Rini <trini@konsulko.com>,
+ Marian Cingel <cingel.marian@gmail.com>
+Subject: [PATCH] board: ti: cape_detect: Add overlay name lookup table for
+ extension boards
+Date: Tue, 14 Apr 2026 10:20:06 +0200
+Message-ID: <20260414082007.662549-1-kory.maincent@bootlin.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain
-X-MTK: N
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,95 +74,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch introduces spl_nand_get_uboot_raw_page_redund() to wrap the
-CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND macro, similar as what
-spl_nand_get_uboot_raw_page() has already done.
-Also, make it possible to use these functions without defining related
-macros.
+From: "Kory Maincent (TI)" <kory.maincent@bootlin.com>
 
-This patch also replaces all references to CONFIG_SYS_NAND_U_BOOT_OFFS and
-CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND with the return value of the two
-functions mentioned above.
+Some extension boards have EEPROM part numbers that do not directly match
+their devicetree overlay filenames. Introduce a static name_mapping table
+and a set_cape_overlay() helper that translates the part number and version
+strings read from the EEPROM into the correct overlay filename.
 
-Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+When no entry matches, fall back to the existing behavior of constructing
+the overlay name as "<part_number>-<version>.dtbo" directly from the
+EEPROM content.
+
+Add an initial entry mapping BB-GREEN-HDMI revision 00A0 to
+am335x-bone-hdmi-00a0.dtbo.
+
+Signed-off-by: Kory Maincent (TI) <kory.maincent@bootlin.com>
 ---
- common/spl/spl_nand.c | 38 ++++++++++++++++++++++++++------------
- 1 file changed, 26 insertions(+), 12 deletions(-)
+ board/ti/common/cape_detect.c | 42 +++++++++++++++++++++++++++++++++--
+ 1 file changed, 40 insertions(+), 2 deletions(-)
 
-diff --git a/common/spl/spl_nand.c b/common/spl/spl_nand.c
-index f449b31f594..cce2e1a6df3 100644
---- a/common/spl/spl_nand.c
-+++ b/common/spl/spl_nand.c
-@@ -18,21 +18,34 @@
+diff --git a/board/ti/common/cape_detect.c b/board/ti/common/cape_detect.c
+index 88fa6ae81f0..c9555779c0c 100644
+--- a/board/ti/common/cape_detect.c
++++ b/board/ti/common/cape_detect.c
+@@ -13,6 +13,44 @@
  
- uint32_t __weak spl_nand_get_uboot_raw_page(void)
- {
-+#ifdef CONFIG_SYS_NAND_U_BOOT_OFFS
- 	return CONFIG_SYS_NAND_U_BOOT_OFFS;
-+#else
-+	return 0;
-+#endif
+ #include "cape_detect.h"
+ 
++struct name_mapping {
++	char part_number[17];
++	char version[5];
++	char overlay[64];
++};
++
++static struct name_mapping extension_mapping[] = {
++	{
++		"BB-GREEN-HDMI",
++		"00A0",
++		"am335x-bone-hdmi-00a0.dtbo",
++	},
++	{ /* sentinel */ }
++};
++
++void set_cape_overlay(char *overlay, char *part_number, char *version)
++{
++	struct name_mapping *mapping;
++
++	for (mapping = extension_mapping; mapping->part_number[0] != 0;
++	     mapping++) {
++		if (strncmp(mapping->part_number, part_number,
++			    sizeof(mapping->part_number)))
++			continue;
++
++		if (strncmp(mapping->version, version,
++			    sizeof(mapping->version)))
++			continue;
++
++		strlcpy(overlay, mapping->overlay, sizeof(mapping->overlay));
++		return;
++	}
++
++	/* Use default name extracted from the EEPROM */
++	snprintf(overlay, sizeof(mapping->overlay), "%s-%s.dtbo",
++		 part_number, version);
 +}
 +
-+uint32_t __weak spl_nand_get_uboot_raw_page_redund(void)
-+{
-+#ifdef CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND
-+	return CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND;
-+#else
-+	return 0;
-+#endif
- }
- 
- #if defined(CONFIG_SPL_NAND_RAW_ONLY)
- static int spl_nand_load_image(struct spl_image_info *spl_image,
- 			struct spl_boot_device *bootdev)
+ static void sanitize_field(char *text, size_t size)
  {
-+	u32 offs = spl_nand_get_uboot_raw_page();
-+
- 	nand_init();
+ 	char *c = NULL;
+@@ -82,8 +120,8 @@ static int ti_extension_board_scan(struct udevice *dev,
  
- 	printf("Loading U-Boot from 0x%08x (size 0x%08x) to 0x%08x\n",
--	       CONFIG_SYS_NAND_U_BOOT_OFFS, CFG_SYS_NAND_U_BOOT_SIZE,
--	       CFG_SYS_NAND_U_BOOT_DST);
-+	       offs, CFG_SYS_NAND_U_BOOT_SIZE, CFG_SYS_NAND_U_BOOT_DST);
+ 		printf("BeagleBone Cape: %s (0x%x)\n", eeprom_header.board_name, addr);
  
--	nand_spl_load_image(spl_nand_get_uboot_raw_page(),
--			    CFG_SYS_NAND_U_BOOT_SIZE,
-+	nand_spl_load_image(offs, CFG_SYS_NAND_U_BOOT_SIZE,
- 			    map_sysmem(CFG_SYS_NAND_U_BOOT_DST,
- 				       CFG_SYS_NAND_U_BOOT_SIZE));
- 	spl_set_header_raw_uboot(spl_image);
-@@ -127,6 +140,7 @@ static int spl_nand_load_image_os(struct spl_image_info *spl_image,
- static int spl_nand_load_image(struct spl_image_info *spl_image,
- 			       struct spl_boot_device *bootdev)
- {
-+	u32 offs = spl_nand_get_uboot_raw_page();
- 	int err;
- 
- #ifdef CONFIG_SPL_NAND_SOFTECC
-@@ -155,14 +169,14 @@ static int spl_nand_load_image(struct spl_image_info *spl_image,
- #endif
- #endif
- 	/* Load u-boot */
--	err = spl_nand_load_element(spl_image, bootdev, spl_nand_get_uboot_raw_page());
--#ifdef CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND
--#if CONFIG_SYS_NAND_U_BOOT_OFFS != CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND
--	if (err)
--		err = spl_nand_load_element(spl_image, bootdev,
--					    CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND);
--#endif
--#endif
-+	err = spl_nand_load_element(spl_image, bootdev, offs);
-+	if (err) {
-+		u32 offs_redund = spl_nand_get_uboot_raw_page_redund();
-+
-+		if (offs != offs_redund)
-+			err = spl_nand_load_element(spl_image, bootdev,
-+						    offs_redund);
-+	}
- 	nand_deselect();
- 	return err;
- }
+-		snprintf(cape.overlay, sizeof(cape.overlay), "%s-%s.dtbo",
+-			 process_cape_part_number, process_cape_version);
++		set_cape_overlay(cape.overlay, process_cape_part_number,
++				 process_cape_version);
+ 		strlcpy(cape.name, eeprom_header.board_name,
+ 			sizeof(eeprom_header.board_name));
+ 		strlcpy(cape.version, process_cape_version,
 -- 
-2.45.2
+2.43.0
 
