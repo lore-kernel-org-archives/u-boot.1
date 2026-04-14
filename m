@@ -4,139 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1351F531FA
-	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 07:43:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 090C1ED7B82
+	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 08:03:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4209F84132;
-	Tue, 14 Apr 2026 09:43:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 7563484178;
+	Tue, 14 Apr 2026 10:03:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="e1ij2Mc/";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="WzbBlRo/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B510C838BB; Tue, 14 Apr 2026 09:43:14 +0200 (CEST)
-Received: from BN8PR05CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::3])
+ id D4FB784181; Tue, 14 Apr 2026 10:03:44 +0200 (CEST)
+Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3E09838BB
- for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 09:43:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A915838BB
+ for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 10:03:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=boon.khai.ng@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UcGlgl4s0suZWGiWxhMpcp4vcJSXMOjCQ2mdBcR8SePNEYxXRJe5hZMD0f/VRdJy4uZmLEadtwVkELZDAFzaMmE09n4QeMNiuxcX+9DehThBBZ5a7sEXK0qje10iYeI2h7SF18HetN59KgYNBYu1IFEPBSvqAE78aX0xubimgui1ScMfYCxpi3NRRbpLCNppSkucbmZClDaMNikaEMcZmQ5N7d1JUjr/wymzjlcxQFPwbNks91CFyK2iJpmJV1iTUCjelt7UtH0GxJBSaj/xYwuJKVvQZfJfdEmcKtx8cHYTKBW+X6SR8FdXrguu2iJHKSC38C1cUeC/fUAfKuKPxw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=idvdatVu6IqfFHp5OYvdHX5LOHyiqEMd4X2gWSlE/zM=;
- b=hjnlZYvsFMncgQNWKtV+WQxZp3tDX6pG2L81AthfHmofj7VqSpRF6jk2qpt8R6Z3HcAZsXeB7CX2XizrFuP4eiKftRwNYPQT0zz5+2Yqkcu/3V3ssqDhVb6RREJZATm4hX8nYrvn0nujRFpmAJw9XmpM4zuWIVWBYoYIAXVA9M4kOSXKLyKZdMAHc1sqQDBJHq4WXBJIKcpUDYgtiyC5v0fbLn4VsVVIVnOxJi59UwwvdUy5bjS51AIA7o/r/xfChYbS/Pe5XIS/fL1UVDP0vWDVBXoSM12qBPZSK44g8a3lxe/+WnQLpbXO86mCf7ssK3LSWIKQPKfB5vehoStmTA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=idvdatVu6IqfFHp5OYvdHX5LOHyiqEMd4X2gWSlE/zM=;
- b=e1ij2Mc/KSf8/A5aVLH2v+oiPRSyaewnpzPgGhDrTXWuIxSnt4mzOifIrZY1qTt8IjpdTckoA7CJthRfXgOe6pamJi1y1gglIAoDKq8dNR6uRE9yXFq4o0HFoiJoNwoaXWXNos51zNslGoDbSD5UyzmIj26KzC58oo4Vwa7fTVVex1L1++N2Ui2egxuK+5uNMFwtfSIFtkzNNpD5L3tEuHDU47T74TXnW0H7hS3Km9JpNz7ORLkWaD18rRAimuZCzeevo7sxCQQK9mwIcwwnNybU5wgPOIkw5bJMIJaO21doiCj1Ax5cpGDE2IhqoZ3YP71H9Wm0AT/jo+XJbTa8MA==
-Received: from SA3PR03MB7187.namprd03.prod.outlook.com (2603:10b6:806:2f6::11)
- by SJ0PR03MB5951.namprd03.prod.outlook.com (2603:10b6:a03:2de::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Tue, 14 Apr
- 2026 07:43:09 +0000
-Received: from SA3PR03MB7187.namprd03.prod.outlook.com
- ([fe80::7000:d55:b39c:2e53]) by SA3PR03MB7187.namprd03.prod.outlook.com
- ([fe80::7000:d55:b39c:2e53%7]) with mapi id 15.20.9769.046; Tue, 14 Apr 2026
- 07:43:09 +0000
-From: "NG, BOON KHAI" <boon.khai.ng@altera.com>
-To: U-boot Openlist <u-boot@lists.denx.de>, "Chee, Tien Fong"
- <tien.fong.chee@altera.com>
-CC: Alice Guo <alice.guo@nxp.com>, "YUSLAIMI, ALIF ZAKUAN"
- <alif.zakuan.yuslaimi@altera.com>, Anshul Dalal <anshuld@ti.com>, Casey
- Connolly <casey.connolly@linaro.org>, Christian Marangi
- <ansuelsmth@gmail.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, Neil
- Armstrong <neil.armstrong@linaro.org>, Quentin Schulz
- <quentin.schulz@cherry.de>, Rayagonda Kokatanur
- <rayagonda.kokatanur@broadcom.com>, Tien Fong Chee
- <tien.fong.chee@intel.com>, Tingting Meng <tingting.meng@altera.com>, Tom
- Rini <trini@konsulko.com>
-Subject: Re: [PATCH v1] drivers: clk: agilex5: Setting correct counter
- frequency in boot mode
-Thread-Topic: [PATCH v1] drivers: clk: agilex5: Setting correct counter
- frequency in boot mode
-Thread-Index: AQHcpW2LtDCy5TjkN0WZCDXEq0KpRLXeeX/N
-Date: Tue, 14 Apr 2026 07:43:09 +0000
-Message-ID: <SA3PR03MB718727B42ADF86B94EA4D3EAB4252@SA3PR03MB7187.namprd03.prod.outlook.com>
-References: <20260224091109.8181-1-boon.khai.ng@altera.com>
-In-Reply-To: <20260224091109.8181-1-boon.khai.ng@altera.com>
-Accept-Language: en-MY, en-US
-Content-Language: en-MY
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SA3PR03MB7187:EE_|SJ0PR03MB5951:EE_
-x-ms-office365-filtering-correlation-id: f76667cd-f61f-4ef5-4967-08de99f9797b
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|7416014|38070700021|18002099003|18092099006|22082099003|56012099003|55112099003;
-x-microsoft-antispam-message-info: DsOOQzQQb78qL3AAC0JaudXhtrVEiwfdblJ0oQN/UNyPoZGoWbm7E2KZah7WAhLn9kt5neY+DPtRoM5WZCJ9hyy0Wub4rVQaup5UhrV2TyWm9Vm3y2cZlNINZQFcr/Fa/QmeJteMFJn2TXyRqdCuN0RgaCoNg8kfyVMdvh42fFJgz7mBElUoQ19C7wZ2BPAhOmDHDQWVogM7NdrNkMAcW0PEnqhF/xVeFYCpdOYLlPqnhI3aGb32g4gfrSn4yZUB+ZnfzRh4XH8ekRvHTMc4E2rKvVhmrEjpFjfvu623pazw0ueJNkVoO/ryrGGAm8AEuM/IzdFhQ94iZ2PFm+7xgK3DTC6Fu/7qKvQ7y+UjkRELGm+A1S1ICaOscQG2OmPqp3/xe8z+JLxIn/Ephsc0CH6kgSRZFDcF9ZRYji3fP3dZfGW+AMcLxDpixPG0tJeKiNiTkYn9xDcxaIRmab65gKdBR93++7VTItPuQUA7p7npt888eIreIwmXSyFimcLTtJ0IrhhhAOKZdokM6QCa1HuEksbWTo16cAdaClyKnDkCNRSF3PXPB867Bvpzfp9e00XCSwiFHPXe+7n5dxSymRYPvZvjh5YGFKnaC8+ohXh1lKE4z2GDFU28uA/k1a6Lknvvx/BpS1ugC1+0o7qofpTkiEo0sNEYjuDLOLXPRw7yKD7dhCpkazleX8CWsQlOKM5cGRIbDhsSYvqkBSuJafcGsbZEOp5n/vgsS1z2/aJ9FFHY5I4AJzJ7TxqruRSXz0oycc0heU/Gi+GZmRs/Owy0iODCjZTwpHYfu2TxADs=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA3PR03MB7187.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(7416014)(38070700021)(18002099003)(18092099006)(22082099003)(56012099003)(55112099003);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?z33QuVJ17XYbQ6Ass9e3hH0CHCiRC0Ia9dBYCaLEExZmcBvoqoFegF7JO4?=
- =?iso-8859-1?Q?0yQ2y97V+qshSOXSUgNoWG0I13cXZp3gnjC7oEkkdOBRuiONa1a9dH7FTK?=
- =?iso-8859-1?Q?EglzGoscA0IfgmONBd4Ru1M80BeAg1dRMcSRQYEYMH2CoeTLhPl/9+tiZ2?=
- =?iso-8859-1?Q?FoKGaOhypOyvAzwGXx82v8KNIK0gu9sPq0e9kYgP/hHDIMPCkwz/ykKPsD?=
- =?iso-8859-1?Q?Izh85/1IfIdbemZuukoK2XCQ4yoiIxfiCO1eesN/YS1Uv0/Zb2qwBE0qNa?=
- =?iso-8859-1?Q?XHJIvTn7GiOEM7LF+b+1eOdeim29b+Jah1RQC6QhrD5wKVPiQVuw6iVZUZ?=
- =?iso-8859-1?Q?4KwGqOiA4p+u/H4tMLeeOiDeVtk86IOwaTrRQKHmFF7Qn2oPh63V2470mO?=
- =?iso-8859-1?Q?bsSYONQlq3GPlwNXhMqX67HSjayEYLouKIyedF2/6mSN09pRaQjR4Sxale?=
- =?iso-8859-1?Q?cBwr/CGPX4F+AwvUcz9hKVre6PDmbIsAcZcEKXCjtyNK45Yh9RqMLWZgCn?=
- =?iso-8859-1?Q?P7iRtiFf/SruAj+SBn3scoyzAgTsNZWiKBjhwVAQAnU1y+IotciVSanp28?=
- =?iso-8859-1?Q?ztEsXSAah1UFooR7ZTnBv8799l0KL22XbhhDLZO9H2VP/O8dYhDcoLSOab?=
- =?iso-8859-1?Q?l8f2IlYd93twm0n2RZI+ivfj2AmzkwUZSjBz0I6lJwlaYkjj1O0jQ1cZvK?=
- =?iso-8859-1?Q?wWJRTeIpxzSD3aUigTnJIGSCyzXXBlZB+be7Q8QqWLdYmUmExr3DO6tZIB?=
- =?iso-8859-1?Q?vgJRJPj/d0KR/UfzxUCCk5eFxTLNH5jaPU8jobh4IeuOJ4WL7Xk7a69EfT?=
- =?iso-8859-1?Q?xJXu9wctls1F3siM6RE8dRdNoGohNnUSJJaiGp6ZwPnhGqj03yJIAg5+li?=
- =?iso-8859-1?Q?f8jB/QNeQvOI5mO4ywcKvXKbuPMTVYBMGSCo/CIGt8VsdeALQc8ZpKtWRr?=
- =?iso-8859-1?Q?/TByJYX6fiCiuxSf8JBPZPjCg9OT4ghVzPMlgxr7/yIStj84vDUrKyUmbp?=
- =?iso-8859-1?Q?TLtn2Rj9xmKbqB6aE7ZzPEIjfxpeR/7Yk84pXiTqGzKu6KlOevDtOmAPoF?=
- =?iso-8859-1?Q?J11lw7o+0LcwvDH1gPBHiOUvKzNb8rEabhQfY3mNNogKaw9+ET9hhtbZ5K?=
- =?iso-8859-1?Q?TPHBE09cPwHdEkF4ceOpdAyjSUjLGaxmAGHzGIe84guuXTnOdiaqmfHk3U?=
- =?iso-8859-1?Q?x22pLcD7fHH0xTLCTRSLcgcY/J7nzAooaBzddvQbvkKCp8G1qUGDZ4hcJO?=
- =?iso-8859-1?Q?VaTdeX2rptRYsCt3VGqdwRkkz8MPWpfuFScI4sEjbvdOrj4mqRjYV05OM+?=
- =?iso-8859-1?Q?TY8DfRH+R5z25CTqL38AKZxQtTI/WI/qxtb5YtEYZRW70SfOd0qqulaBao?=
- =?iso-8859-1?Q?INrJX4HFHa99Y8kmeFw3aCiQaME8+1pk7o68qKWtfoegMce/tYhFWC1pOo?=
- =?iso-8859-1?Q?D8lPN38e3NuiOH5WgQIJt26j/eAOTOytzy8s/0o5BUpJxYIsUcpsDRF1y5?=
- =?iso-8859-1?Q?DM+Jl5ZexvRFOWKiylVBu8dFUFRtAoabU+aCVtRaAQZeqijduTG4iAq4Ox?=
- =?iso-8859-1?Q?4IWzZbDbhGXZ3ex0j1juEsbVuIKJGKCoMcr8oFHsf0K07LJobwsct20V31?=
- =?iso-8859-1?Q?rVKmkgH/CAPxeVWaL2Y6F+hLMZTkIHTeLEjriq9gaf1D/ikyv6Nytd2mon?=
- =?iso-8859-1?Q?KFLAAgoKJv00kTSM8eNqgWz29TWr/9qxVAd81BMzbJCDcT8hNnnCZGJ2ao?=
- =?iso-8859-1?Q?iLCXXwX64YjWSnRoiN6/ymnk7x64bh/b4/LTzW1jhINF5OSh1lcks3UhZK?=
- =?iso-8859-1?Q?e44sKQgTHA=3D=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: 697cc1dc37d811f19a16598d5ca7f8ec-20260414
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
+ bh=l8HTT7pYUbCqpM2AonTppBpCIRErNiEb+SSYrEkYWmk=; 
+ b=WzbBlRo/3Vbaqlhi+mbiaF0ehHB8mfnmEdzzBjW7q++JRIBnHjpR7D4ExCLTR8yvWt240cZYnkY49EXou0mIQL70uYhQeMI5detzx1PMH1hZCXvgJGVt23m94DmTntzVbvJ0v/PI3yc9fU6Vrb1B0clnBCn52M/6TEILfrpyZTo=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.12, REQID:5fc886ee-ac74-41bb-8026-1a564f09329b, IP:0,
+ U
+ RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+ release,TS:0
+X-CID-META: VersionHash:e7bac3a, CLOUDID:bd23678f-6df4-4a3d-a7a4-fbdc42d669ce,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:102|836|865|888|898,TC:-5,Content:0|
+ 15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0,OSI:0
+ ,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: 697cc1dc37d811f19a16598d5ca7f8ec-20260414
+Received: from mtkmbs11n2.mediatek.inc [(172.21.101.187)] by
+ mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 1339775409; Tue, 14 Apr 2026 16:03:24 +0800
+Received: from mtkmbs13n2.mediatek.inc (172.21.101.108) by
+ mtkmbs11n2.mediatek.inc (172.21.101.187) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Tue, 14 Apr 2026 16:03:23 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs13n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.2562.29 via Frontend Transport; Tue, 14 Apr 2026 16:03:23 +0800
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: <u-boot@lists.denx.de>
+CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
+ <trini@konsulko.com>, Weijie Gao <weijie.gao@mediatek.com>
+Subject: [PATCH] common: spl: nand: improve u-boot offsets overriding
+Date: Tue, 14 Apr 2026 16:03:21 +0800
+Message-ID: <20260414080321.39542-1-weijie.gao@mediatek.com>
+X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SA3PR03MB7187.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f76667cd-f61f-4ef5-4967-08de99f9797b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Apr 2026 07:43:09.6842 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: siJbikntztud2QNZLLXoYfjslVaQdWYpN3gVat/TcCFhYIS+/Ddmaabikas8DC2luVY9nu1uJpt3I7nRnA2RJA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB5951
+Content-Type: text/plain
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,38 +84,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Re-add Tien Fong's Altera Email, with the patch's content.=0A=
-=0A=
-> =0A=
-> =A0=0A=
-> From: Tien Fong Chee <tien.fong.chee@intel.com>=0A=
-> =0A=
-> Counter frequency need to be set in 200Mhz when system in boot mode.=0A=
-> 400Mhz need to be set when system exit the boot mode with the PLL=0A=
-> generating the high frequency clock set by user.=0A=
-> =0A=
-> Signed-off-by: Tien Fong Chee <tien.fong.chee@intel.com>=0A=
-> Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>=0A=
-> ---=0A=
-> =A0arch/arm/Kconfig | 1 +=0A=
-> =A01 file changed, 1 insertion(+)=0A=
-> =0A=
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig=0A=
-> index 5508fce796a..4cc42ca393b 100644=0A=
-> --- a/arch/arm/Kconfig=0A=
-> +++ b/arch/arm/Kconfig=0A=
-> @@ -30,6 +30,7 @@ config COUNTER_FREQUENCY=0A=
-> =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 =
-ROCKCHIP_RK3288 || ROCKCHIP_RK322X || ROCKCHIP_RK3036=0A=
-> =A0=A0=A0=A0=A0=A0=A0=A0 default 25000000 if ARCH_LX2160A || ARCH_LX2162A=
- || ARCH_LS1088A=0A=
-> =A0=A0=A0=A0=A0=A0=A0=A0 default 100000000 if ARCH_ZYNQMP=0A=
-> +=A0=A0=A0=A0=A0=A0 default 400000000 if ARCH_SOCFPGA && ARM64 && !TARGET=
-_SOCFPGA_AGILEX5=0A=
-> =A0=A0=A0=A0=A0=A0=A0=A0 default 200000000 if ARCH_SOCFPGA_AGILEX5 || ARC=
-H_SOCFPGA_AGILEX7M=0A=
-> =A0=A0=A0=A0=A0=A0=A0=A0 default 0=0A=
-> =A0=A0=A0=A0=A0=A0=A0=A0 help=0A=
-> --=0A=
-> 2.43.7=0A=
-> =
+This patch introduces spl_nand_get_uboot_raw_page_redund() to wrap the
+CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND macro, similar as what
+spl_nand_get_uboot_raw_page() has already done.
+Also, make it possible to use these functions without defining related
+macros.
+
+This patch also replaces all references to CONFIG_SYS_NAND_U_BOOT_OFFS and
+CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND with the return value of the two
+functions mentioned above.
+
+Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+---
+ common/spl/spl_nand.c | 38 ++++++++++++++++++++++++++------------
+ 1 file changed, 26 insertions(+), 12 deletions(-)
+
+diff --git a/common/spl/spl_nand.c b/common/spl/spl_nand.c
+index f449b31f594..cce2e1a6df3 100644
+--- a/common/spl/spl_nand.c
++++ b/common/spl/spl_nand.c
+@@ -18,21 +18,34 @@
+ 
+ uint32_t __weak spl_nand_get_uboot_raw_page(void)
+ {
++#ifdef CONFIG_SYS_NAND_U_BOOT_OFFS
+ 	return CONFIG_SYS_NAND_U_BOOT_OFFS;
++#else
++	return 0;
++#endif
++}
++
++uint32_t __weak spl_nand_get_uboot_raw_page_redund(void)
++{
++#ifdef CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND
++	return CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND;
++#else
++	return 0;
++#endif
+ }
+ 
+ #if defined(CONFIG_SPL_NAND_RAW_ONLY)
+ static int spl_nand_load_image(struct spl_image_info *spl_image,
+ 			struct spl_boot_device *bootdev)
+ {
++	u32 offs = spl_nand_get_uboot_raw_page();
++
+ 	nand_init();
+ 
+ 	printf("Loading U-Boot from 0x%08x (size 0x%08x) to 0x%08x\n",
+-	       CONFIG_SYS_NAND_U_BOOT_OFFS, CFG_SYS_NAND_U_BOOT_SIZE,
+-	       CFG_SYS_NAND_U_BOOT_DST);
++	       offs, CFG_SYS_NAND_U_BOOT_SIZE, CFG_SYS_NAND_U_BOOT_DST);
+ 
+-	nand_spl_load_image(spl_nand_get_uboot_raw_page(),
+-			    CFG_SYS_NAND_U_BOOT_SIZE,
++	nand_spl_load_image(offs, CFG_SYS_NAND_U_BOOT_SIZE,
+ 			    map_sysmem(CFG_SYS_NAND_U_BOOT_DST,
+ 				       CFG_SYS_NAND_U_BOOT_SIZE));
+ 	spl_set_header_raw_uboot(spl_image);
+@@ -127,6 +140,7 @@ static int spl_nand_load_image_os(struct spl_image_info *spl_image,
+ static int spl_nand_load_image(struct spl_image_info *spl_image,
+ 			       struct spl_boot_device *bootdev)
+ {
++	u32 offs = spl_nand_get_uboot_raw_page();
+ 	int err;
+ 
+ #ifdef CONFIG_SPL_NAND_SOFTECC
+@@ -155,14 +169,14 @@ static int spl_nand_load_image(struct spl_image_info *spl_image,
+ #endif
+ #endif
+ 	/* Load u-boot */
+-	err = spl_nand_load_element(spl_image, bootdev, spl_nand_get_uboot_raw_page());
+-#ifdef CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND
+-#if CONFIG_SYS_NAND_U_BOOT_OFFS != CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND
+-	if (err)
+-		err = spl_nand_load_element(spl_image, bootdev,
+-					    CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND);
+-#endif
+-#endif
++	err = spl_nand_load_element(spl_image, bootdev, offs);
++	if (err) {
++		u32 offs_redund = spl_nand_get_uboot_raw_page_redund();
++
++		if (offs != offs_redund)
++			err = spl_nand_load_element(spl_image, bootdev,
++						    offs_redund);
++	}
+ 	nand_deselect();
+ 	return err;
+ }
+-- 
+2.45.2
+
