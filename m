@@ -4,111 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72AB4F9D0CA
-	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 13:16:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5D4AF9D0CA
+	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 13:36:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DCBF84223;
-	Tue, 14 Apr 2026 15:16:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
+	by phobos.denx.de (Postfix) with ESMTP id 0B86084206;
+	Tue, 14 Apr 2026 15:36:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="czU4wN/2";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="kM/NKQKV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD71684236; Tue, 14 Apr 2026 15:16:33 +0200 (CEST)
-Received: from MRZP264CU002.outbound.protection.outlook.com
- (mail-francesouthazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::1])
+ id 9E64A84214; Tue, 14 Apr 2026 15:36:07 +0200 (CEST)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4C4B84206
- for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 15:16:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=softathome.com
+ by phobos.denx.de (Postfix) with ESMTPS id 367C9841F2
+ for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 15:36:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yan.wang@softathome.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Y71LtHmw8m6c3sNkVAJBMT4ESFFectWELVXDarvtrhx48QXe+Z/I15+BPsH0RMHbvyamAqUT6nUL8WFO+Af1hrlAJbTuoKak8K2fcmmbrHCP1vr16aeVZaitAW3x5vg3AO80jZHnXBDlKwhsH/nbkbkofsWMKKUbmlkb/uM+XXEEhOk4hPxss/Mviqwn7cwxBCObFx7OKLhsZa6wyq08MkoQaRoqPMvMXevcx/HLO2Uff+UHgZlFTry4vEC/ie9tD029ouj6pqCEv+p1RLtr8LgrjLOvgKfkoDMhJABN4n2Li8/INzVLIBekSKWm0WNsWQ5oz23D1fydTfMjl6UPQg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0fo8/fBTKKipFdE1SnLhC8eeIT7L+3UnUBY/bdknjBc=;
- b=URDps/65MGknZcJVAYDbaO1h8lQv/EkXxrbDr5LIVN62kHVngmDd9H5BQ0HwYfNRnlLfexBEsRo1yyv+yA+tU8jsX1y20E+n30zm6JvjgNbDljB0qq6QPT7Z5QAvWkCnkvKSWsEz3P6FcSLBACh7zVgVvlJ8RCVPEzY/Uzmx6kLLS+A++gTUcVPHxFoGLyjWFEOcyJ1Twvt9opX6+Iz+BC/FhATD+qpR2y3uzxGSFbuDQ5VS4g4oSar4bzd2m1nrYlhmQm4p8m9oNkj2SB2uaJcxxKXdpyevqxJWQkTtRR7MJTnaGZJ13G7ubE3C38S1LvJnTqTCo5Kq15/fRWaEaw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 149.6.166.170) smtp.rcpttodomain=chromium.org smtp.mailfrom=softathome.com;
- dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0fo8/fBTKKipFdE1SnLhC8eeIT7L+3UnUBY/bdknjBc=;
- b=czU4wN/2rnKstFuHwHQFCm0422dJfBNWfNnC5OJk42XhlUnvGRYPHXnhuQt8ExQ2S4lHsBZuDjoVmxJ2zWa+7FASG29y7+KUpA5duOsp/K2i6fvfzIbBpWNeKGft3wqp25t/NGDlKYdAIyda7nRNoiNq61I7Wca1Cx1O4WRY8lo0vhVmurw/o0sgX2X5bZtqA4WvrOgG7nlPFZBhgzCw2Z0jU4B1ohbuJjD7QKu+0+oC9tIQ0qXmXIcjpPJLl4rgmWCcbwnWODrA9/K1i1RhVgTLHuaEKNPNxGS3Di8KYr+jl+3mVJFRcZf4LVAk6cGoN8DOWAyuugaKgeI8a36itw==
-Received: from PR1P264CA0087.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:345::9)
- by PR0P264MB1914.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:16b::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Tue, 14 Apr
- 2026 13:16:25 +0000
-Received: from PA2PEPF00019230.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:345:cafe::11) by PR1P264CA0087.outlook.office365.com
- (2603:10a6:102:345::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.48 via Frontend Transport; Tue,
- 14 Apr 2026 13:16:25 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
- smtp.mailfrom=softathome.com; dkim=none (message not signed)
- header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
-Received-SPF: Pass (protection.outlook.com: domain of softathome.com
- designates 149.6.166.170 as permitted sender)
- receiver=protection.outlook.com; client-ip=149.6.166.170;
- helo=proxy.softathome.com; pr=C
-Received: from proxy.softathome.com (149.6.166.170) by
- PA2PEPF00019230.mail.protection.outlook.com (10.167.242.36) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.17
- via Frontend Transport; Tue, 14 Apr 2026 13:16:24 +0000
-Received: from sah1lpt719.softathome.com (unknown [192.168.72.213])
- by proxy.softathome.com (Postfix) with ESMTPSA id B0872202C3;
- Tue, 14 Apr 2026 15:16:24 +0200 (CEST)
-From: Yan WANG <yan.wang@softathome.com>
-To: trini@konsulko.com,
-	sjg@chromium.org,
-	alpernebiyasak@gmail.com
-Cc: paul.henrys_ext@softathome.com,
-	u-boot@lists.denx.de
-Subject: [PATCH v6 3/3] tools: binman: Test signing an encrypted FIT with a
- preload header
-Date: Tue, 14 Apr 2026 15:15:58 +0200
-Message-Id: <20260414131558.538656-4-yan.wang@softathome.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20260414131558.538656-1-yan.wang@softathome.com>
-References: <20260408150201.217942-3-paul.henrys_ext@softathome.com>
- <20260414131558.538656-1-yan.wang@softathome.com>
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-02.galae.net (Postfix) with ESMTPS id B84831A32A8;
+ Tue, 14 Apr 2026 13:36:04 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 8D64C60410;
+ Tue, 14 Apr 2026 13:36:04 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 8BCB8104510D5; 
+ Tue, 14 Apr 2026 15:36:01 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1776173763; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=HMxEp9ZVar77dhQKjnpB6Pw7nzNY6Xz1rTaS0Tj0vGo=;
+ b=kM/NKQKVzs1FEELXTz8sTkPCNLK5tgkAvx+TETyHJNZz3QJClGmeBmfvKnmJ18CuVLPXJc
+ xNmmwK31JJ5poenvhC+P86EdP3miX/xueIVVZp6C5uIjoWZxFvuGGAijYxyapWHdFmfynn
+ JouYBLxDme3s5qgpKkDnqX0jgcHYq8Um6cTbm5UfOl/6KN8UymF6yZDM6wCN3L1dgQf9ok
+ 9phx/5EqOi1cu5WBNwDvr+iwcJm7aqVYVwFoBgAYjO1OJ3IjvxdB2930YUtnHenBMdZD58
+ VmQJI8sfTB4tyo3iGuGb4WLm84nLKBr6WGS7kCZELushhbZ/p6MNEF8DO8/0IA==
+Date: Tue, 14 Apr 2026 15:36:00 +0200
+From: Kory Maincent <kory.maincent@bootlin.com>
+To: Andrew Davis <afd@ti.com>
+Cc: <u-boot@lists.denx.de>, Bajjuri Praneeth <praneeth@ti.com>, Robert
+ Nelson <robertcnelson@gmail.com>, Jason Kridner <jkridner@beagleboard.org>,
+ <thomas.petazzoni@bootlin.com>, Tom Rini <trini@konsulko.com>, Marian
+ Cingel <cingel.marian@gmail.com>
+Subject: Re: [PATCH] board: ti: cape_detect: Add overlay name lookup table
+ for extension boards
+Message-ID: <20260414153600.45f651be@kmaincent-XPS-13-7390>
+In-Reply-To: <86387a11-6f9b-4535-962c-150b004f4d20@ti.com>
+References: <20260414082007.662549-1-kory.maincent@bootlin.com>
+ <86387a11-6f9b-4535-962c-150b004f4d20@ti.com>
+Organization: bootlin
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA2PEPF00019230:EE_|PR0P264MB1914:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: ac157da6-9863-4e89-062b-08de9a28079f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700016|376014|82310400026|56012099003|18002099003|17002099007|22082099003;
-X-Microsoft-Antispam-Message-Info: 6lAOhmF6ip57c6ypDoqTy6mtJ+ILEdVJFyClH2RWKBIQ1TYdqvT08i/fCuj5sJ3urWQ6J5rfQ3stfhQiF6KyUxMva0a7wI2Nxh4Gz8oyNd9w/Wyy2ZqsXaWAkmGqbekmZqueZTL0K/XJ9AGM/6Tbj93FxtnS47nz6xaaUTXlTC/gelqfVm6yC/W9Xbke72/WgmOLOj6dT3xNt8lzySFNHbvavB2JDPRvBh48BZT+ulTFhBCYSLdgX8Zr6vRSmAHOki0xNT8hgfZV11ueDysS2aJxwE9rz7UmiRefz1fuTs7ReULjJK0jWpVsaQjx+zXexjgGVJgLXV+Z2poEu02JPc0BcBFhMcFU48rL2Y0+JH/hdYe7zzZpKEHwDem+LVc9Z4TJeABBCy1TNiiT+BQ4GTi6QH5JWq0OYOoR2GCl89npLuPpIIc9PRxw+jGb8GcEOQAfNB1JYLEILOWjN6f7LzewxNSeJobABcLJS3Xd/Cw8Z78ZNcAfSOX3uLvBwSG/b9/G17EeQ5vlzJS3Oi7CVB2VEPp84LEcXNW/IUUDJBAdMfTZMxBf0FJ6z0exB0vMu8eDbk+c2Yw7z1PYrkF/oyBjz/TRhMiF6xDimbhoH3+JSSgS7decwe3mnytj4rqAf8wKWvhZ2ByC1Q97aMB8fIupmyVqjZX2Y45A86JhBis/lPrMJltaduQVsD+CuNsfDONz0rAaQvhoJhpfUL/LnzmEyef43rOOWH1mnOz4Ib+K3VoptQizk35u/xKNvdr6mENu+u9j6NmDg7xXzdzgOQ==
-X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700016)(376014)(82310400026)(56012099003)(18002099003)(17002099007)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 0MepdVelE+PUPTP+BNXHCJ762wCSCcfD4XsiS2adEX4PdJbedfrqWFIhN9oILc18Oigp283DiI5tbAsJPRWgYVzNR+yPIyMsA5gDsotg8qAt6HANrhVFMnT0WdmAeD4GujEu6I/E/eP7rjAj6ytL5FOYsU3k6YwgkaLCpK6bJ+zLzIU3tDY+mq1zb7HUPRaw/jknqtPwmaWbXfq5NJlDq63/yuCBJPjU8wzDPRo7lpMZrjCLV7Njt/Ojpk/v/jKM+j5eE4P30kQ+NjMt8l9ujFJFw7kXU76KHz8gLIuiQEANiEUKRgZT4+z/jYjif8KL3fp1YwV03Puk8ns61z4QWsab6hJyKRqaSkuYyY0bmEyUqXvUfhciY4VUvmYnDjqL8vPT+w6i5TOYjHWhI5ztxAzoKQ+t4JnstzWX7Au7Xsv5kINvzsgwtNdB9vB+uRbO
-X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Apr 2026 13:16:24.9615 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ac157da6-9863-4e89-062b-08de9a28079f
-X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
- Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: PA2PEPF00019230.FRAP264.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR0P264MB1914
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,124 +78,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Paul HENRYS <paul.henrys_ext@softathome.com>
+On Tue, 14 Apr 2026 07:25:34 -0500
+Andrew Davis <afd@ti.com> wrote:
 
-Add a test to verify the preload header correctly signs an encrypted
-FIT. This test exercises the case where encryption uses random IVs that
-would change between mkimage calls.
+> On 4/14/26 3:20 AM, Kory Maincent wrote:
+> > From: "Kory Maincent (TI)" <kory.maincent@bootlin.com>
+> >=20
+> > Some extension boards have EEPROM part numbers that do not directly mat=
+ch
+> > their devicetree overlay filenames. Introduce a static name_mapping tab=
+le
+> > and a set_cape_overlay() helper that translates the part number and ver=
+sion
+> > strings read from the EEPROM into the correct overlay filename.
+> >=20
+> > When no entry matches, fall back to the existing behavior of constructi=
+ng
+> > the overlay name as "<part_number>-<version>.dtbo" directly from the
+> > EEPROM content.
+> >=20
+> > Add an initial entry mapping BB-GREEN-HDMI revision 00A0 to
+> > am335x-bone-hdmi-00a0.dtbo.
+> >=20
+> > Signed-off-by: Kory Maincent (TI) <kory.maincent@bootlin.com>
+> > ---
+> >   board/ti/common/cape_detect.c | 42 +++++++++++++++++++++++++++++++++--
+> >   1 file changed, 40 insertions(+), 2 deletions(-)
+> >=20
+> > diff --git a/board/ti/common/cape_detect.c b/board/ti/common/cape_detec=
+t.c
+> > index 88fa6ae81f0..c9555779c0c 100644
+> > --- a/board/ti/common/cape_detect.c
+> > +++ b/board/ti/common/cape_detect.c
+> > @@ -13,6 +13,44 @@
+> >  =20
+> >   #include "cape_detect.h"
+> >  =20
+> > +struct name_mapping {
+> > +	char part_number[17];
+> > +	char version[5];
+> > +	char overlay[64];
+> > +};
+> > +
+> > +static struct name_mapping extension_mapping[] =3D {
+> > +	{
+> > +		"BB-GREEN-HDMI",
+> > +		"00A0",
+> > +		"am335x-bone-hdmi-00a0.dtbo",
+> > +	},
+> > +	{ /* sentinel */ }
+> > +};
+> > +
+> > +void set_cape_overlay(char *overlay, char *part_number, char *version)
+> > +{
+> > +	struct name_mapping *mapping;
+> > +
+> > +	for (mapping =3D extension_mapping; mapping->part_number[0] !=3D 0;
+> > +	     mapping++) { =20
+>=20
+> Does ARRAY_SIZE() make this any cleaner than a null-terminated array? Or
+> do you plan to generalize this in some way more?
+>=20
+> Either way, the concept looks good to me.
 
-Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
----
+We could indeed use ARRAY_SIZE. I have no preference.
+Maybe its indeed better in terms of footprint size. I will send a v2 with i=
+t.
 
-Changes in v6:
-- No changes
-
- tools/binman/ftest.py                         | 21 +++++++
- .../test/security/pre_load_fit_encrypted.dts  | 63 +++++++++++++++++++
- 2 files changed, 84 insertions(+)
- create mode 100644 tools/binman/test/security/pre_load_fit_encrypted.dts
-
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index ca5149ee654..da8325f820a 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -5895,6 +5895,27 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-             data = self._DoReadFileDtb('security/pre_load_invalid_key.dts',
-                                        entry_args=entry_args)
- 
-+    def testPreLoadEncryptedFit(self):
-+        """Test an encrypted FIT image with a pre-load header"""
-+        entry_args = {
-+            'pre-load-key-path': os.path.join(self._binman_dir, 'test'),
-+        }
-+        data = tools.read_file(self.TestFile("fit/aes256.bin"))
-+        self._MakeInputFile("keys/aes256.bin", data)
-+
-+        keys_subdir = os.path.join(self._indir, "keys")
-+        data = self._DoReadFileDtb(
-+            'security/pre_load_fit_encrypted.dts', entry_args=entry_args,
-+            extra_indirs=[keys_subdir])[0]
-+
-+        image_fname = tools.get_output_filename('image.bin')
-+        is_signed = self._CheckPreload(image_fname, self.TestFile("dev.key"))
-+
-+        self.assertEqual(PRE_LOAD_MAGIC, data[:len(PRE_LOAD_MAGIC)])
-+        self.assertEqual(PRE_LOAD_VERSION, data[4:4 + len(PRE_LOAD_VERSION)])
-+        self.assertEqual(PRE_LOAD_HDR_SIZE, data[8:8 + len(PRE_LOAD_HDR_SIZE)])
-+        self.assertEqual(is_signed, True)
-+
-     def _CheckSafeUniqueNames(self, *images):
-         """Check all entries of given images for unsafe unique names"""
-         for image in images:
-diff --git a/tools/binman/test/security/pre_load_fit_encrypted.dts b/tools/binman/test/security/pre_load_fit_encrypted.dts
-new file mode 100644
-index 00000000000..f5e9bf9426c
---- /dev/null
-+++ b/tools/binman/test/security/pre_load_fit_encrypted.dts
-@@ -0,0 +1,63 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
-+		pre-load {
-+			content = <&image>;
-+			algo-name = "sha256,rsa2048";
-+			key-name = "dev.key";
-+			header-size = <4096>;
-+			version = <0x11223344>;
-+		};
-+
-+		image: fit {
-+			fit,encrypt;
-+			description = "Test a FIT with encrypted data and signed with a preload";
-+			#address-cells = <1>;
-+
-+			images {
-+				u-boot {
-+					description = "U-Boot";
-+					type = "firmware";
-+					arch = "arm64";
-+					os = "U-Boot";
-+					compression = "none";
-+					load = <00000000>;
-+					entry = <00000000>;
-+					cipher {
-+						algo = "aes256";
-+						key-name-hint = "aes256";
-+					};
-+					u-boot-nodtb {
-+					};
-+				};
-+				fdt-1 {
-+					description = "Flattened Device Tree blob";
-+					type = "flat_dt";
-+					arch = "arm64";
-+					compression = "none";
-+					cipher {
-+						algo = "aes256";
-+						key-name-hint = "aes256";
-+					};
-+					u-boot-dtb {
-+					};
-+				};
-+			};
-+
-+			configurations {
-+				default = "conf-1";
-+				conf-1 {
-+					description = "Boot U-Boot with FDT blob";
-+					firmware = "u-boot";
-+					fdt = "fdt-1";
-+				};
-+			};
-+		};
-+	};
-+};
--- 
-2.25.1
-
+Regards,
+--=20
+K=C3=B6ry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
