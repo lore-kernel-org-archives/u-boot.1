@@ -4,143 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4AEFF531EC
-	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 03:34:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2141FF531F8
+	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 07:01:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3103E83B99;
-	Tue, 14 Apr 2026 05:34:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 335ED83BC4;
+	Tue, 14 Apr 2026 09:01:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="Ciwo1U/q";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="Gp3P9MOU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 812D383BC4; Tue, 14 Apr 2026 05:34:12 +0200 (CEST)
-Received: from SN4PR0501CU005.outbound.protection.outlook.com
- (mail-southcentralusazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2281083EC6; Tue, 14 Apr 2026 09:01:34 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DE79839D5
- for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 05:34:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1145D838BB
+ for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 09:01:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=boon.khai.ng@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ejfF/YpiLtQfNgp0BlDMN2RAjAsHxwox0ujnBE7PZNWVJzA7VmXSN0HCQjofWNn52u0Py3qrSBzd/wmWZ8+imEG92ssOj/gFik9KEo0kJrnRQ63dHRJgK0DBXOf0yXmdrrFUgEcprRyIJln3PqW5YxOImzqntv5pVfOH2dGFt7Lt0kzdWn80ouTXVq/MLmLuO5RTDF1x634w/BuRAKm/fpnGH4rSUr/cIr7JF2NRnhw1K0T+Xwbz/vwDp6ir6+dot9rinBMCoVcCcwaedGvW7jxCWhhYgS4h/IOwICRIicFg5uaa3JHwKZ5KbFlTpr0SjKe7Pfj6JhLyPb1KPY/P2Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yHZ45+aIBbXvDAMlK+aP0DbAyFYN16KXDu5IA3QQaMM=;
- b=YShkhVoynOOvAPQ0WPZL+mvSfZUpEY5DA2kpc6e5oBJDHRQ8ofzjy2rUi91wMl3St0rBrHbeMu6+d75O3HMkMVfNVLxD/fCiGKPa8o0Z+IsvbFblQtJXDmDTk6uCX0aXTrLRfrH0zfK4r3yD+3AQqkedRbsuQ7ZlRykb6LKgfW1W3L3wiKWVfyqSGrWx8KPplPUNgaLQgk9VPmNWsgVQonOO91/qmqYm+6kBjQ1ayfRdAMWXfHHXHGxNd67a864Qw3q5vTwkEHpm7Qf5iJQbmJTHxDFs7xdXHdvmUg6fbnZacS/Ro0BGMrPIGp5yE/aBHLLdwXKCQnIr8/ntY6eR3g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yHZ45+aIBbXvDAMlK+aP0DbAyFYN16KXDu5IA3QQaMM=;
- b=Ciwo1U/qBJX8ytIy2QUOrbK3ohFzEKnOKoWWity5plp+85tQME9HyYXkf8524dC7U5nziHvz0OUDwE+vRRyb7BWms6hsAZZ5VzDNlYQF/ZWsQwS5vwZqRXUD69DMzv/3LPNacsB+5l0JFRkVjx65vhlvErN1N4LzvnkZX05Qes2JPAkLplBPWlLOZJv4x0OnTMnk+9eE5syuj/rsxX9jpgX+HKrCy8capzFxDvz72vzMiL8e/e11Y5tcJTNQbs3d9gx8XWktvOaRanzLyNyfrRv6tgQ3vDYIhS7xfSAgI3lsGQ+/xW3pY7otr3QV0Xacva9xFG/QqBoHrfQgUa5Jxg==
-Received: from SA3PR03MB7187.namprd03.prod.outlook.com (2603:10b6:806:2f6::11)
- by DSWPR03MB989165.namprd03.prod.outlook.com (2603:10b6:8:362::23)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Tue, 14 Apr
- 2026 03:34:07 +0000
-Received: from SA3PR03MB7187.namprd03.prod.outlook.com
- ([fe80::7000:d55:b39c:2e53]) by SA3PR03MB7187.namprd03.prod.outlook.com
- ([fe80::7000:d55:b39c:2e53%7]) with mapi id 15.20.9769.046; Tue, 14 Apr 2026
- 03:34:07 +0000
-From: "NG, BOON KHAI" <boon.khai.ng@altera.com>
-To: Tom Rini <trini@konsulko.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-CC: U-boot Openlist <u-boot@lists.denx.de>, Chin-Liang See
- <chin.liang.see@intel.com>, Dinh Nguyen <dinh.nguyen@intel.com>, Marek Vasut
- <marex@denx.de>, Naresh Kumar Ravulapalli
- <nareshkumar.ravulapalli@altera.com>, Simon Goldschmidt
- <simon.k.r.goldschmidt@gmail.com>, "Chee, Tien Fong"
- <tien.fong.chee@altera.com>, "MANIYAM, DINESH" <dinesh.maniyam@altera.com>,
- "YUSLAIMI, ALIF ZAKUAN" <alif.zakuan.yuslaimi@altera.com>, "LOK, CHEN HUEI"
- <chen.huei.lok@altera.com>, "Hea, Kok Kiang" <kok.kiang.hea@altera.com>
-Subject: Re: [PATCH v1] configs: socfpga: stratix10: Disable mkeficapsule tool
- build
-Thread-Topic: [PATCH v1] configs: socfpga: stratix10: Disable mkeficapsule
- tool build
-Thread-Index: AQHct5NhYEcwx8aNDU+9MkP3aZIY5LW13uOAgAAmm8qAAAK/gIAc1DJ0gAq7HwCAAHgxbg==
-Date: Tue, 14 Apr 2026 03:34:07 +0000
-Message-ID: <SA3PR03MB718767C602268BA968642A71B4252@SA3PR03MB7187.namprd03.prod.outlook.com>
-References: <20260319112717.7805-1-boon.khai.ng@altera.com>
- <20260319134809.GR502704@bill-the-cat>
- <SA3PR03MB7187764E2EBF3FACEF2619DDB44FA@SA3PR03MB7187.namprd03.prod.outlook.com>
- <20260319161609.GU502704@bill-the-cat>
- <SA3PR03MB71873A4FC785BA33DA3FA714B45AA@SA3PR03MB7187.namprd03.prod.outlook.com>
- <20260413202314.GH41863@bill-the-cat>
-In-Reply-To: <20260413202314.GH41863@bill-the-cat>
-Accept-Language: en-MY, en-US
-Content-Language: en-MY
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SA3PR03MB7187:EE_|DSWPR03MB989165:EE_
-x-ms-office365-filtering-correlation-id: 0e6461ce-4991-4e5a-2aed-08de99d6af24
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|1800799024|376014|366016|55112099003|38070700021|56012099003|22082099003|18002099003;
-x-microsoft-antispam-message-info: Y0cHv55mTRb+6w6oj6tTjGiLLX7PeWp6QznNneicIUGqlnoFEExJlEQFgsJwvg+ozxGsjdAwYGXBE5fu2X1Kd4H5+G39vKxbj7ejnliKtC4lnk0+JRI/i17g30iPsQxrQXbs8CFFCJ5iBMh6maclArl/PcswCK8d1N8EX8dZAbM5eyj6//BUQEBTxhhEoJSjQo5HFxEctyfZpoh4RAP541uV3F6sPA15jR88V9yGD8W9f1szvdj/uWMkCMKywpC3FzBHGZ2CMHdc3G+lyo4b5Ifj657zE1ZCiB2sl54D5Hf/yaWc5RB2MCnqPJ/2h7Re5+gHQDZeYdEH2+j7+r545gKkUkuGTG0BWfXvZcHX7Vdn805Qxu7jrUZb4qA3//CYeJOEWlOcb2H3ZY7d4yfsosNYflDxQPyoEFphc/wLtrEFkDfgLJXYYsTVfHIAwimS+ja2ERr3vsSTNSMjTI+y8FPZuEEJBQ7BdU9IhfQ4wb2at7LVJOy9rBhHqgrGjq6wo+ZxU4qEqN6FX64iVIT4fiBjgan5P+TbyN34+LgV2Td/QjURRssWpwru86CmCrruDBvzC4vgF7Ck6T4+hG6PS9m/+HHy8MuNIjZqMy98AVHtUBw9ReCQaK7C8igfKOqrSxr1aaodGrBTu/uKtiaFuNuAr4xv/ysdtBmByH/bCnIayKhQaJBuTnGsN4nHIYp34xoH8ru4919GDJcE3mn6+T387OOHly8r13wAg11y0LSxOGGffEEqEvVr6RdmpwgeiMM7fJ52+Qlkb2J6T70q+hxJkmtyKTMMzt6G6zse+qE=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA3PR03MB7187.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(55112099003)(38070700021)(56012099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?fSp+yDarJjh31ezieX3wKvmnz/lgI17IZQx9xzKrE5SJwYvhJJuvovQ8ZO?=
- =?iso-8859-1?Q?sSe17KLxzmllg6wAocyU7PZkosPeckRGzA7dYbPXF1SLFOc52JCtAObeAS?=
- =?iso-8859-1?Q?OebvIOafDSOWXVUFnKBHX8rGxdUgoKJxFTG7w8k4zaZ09UUsDHVz38gzQo?=
- =?iso-8859-1?Q?qn1yg7IJNZQ+SICkued5lhPL6tvpfVIas6U/JEOomq4Ksp04BUHeTZMQ69?=
- =?iso-8859-1?Q?4GIfdpk2OYkKVAOfse+LGjpsVfbWxNi03zpevdPvzYnzpssuZWBCGwHLHS?=
- =?iso-8859-1?Q?IBKxj5o0OIScIotr8wxslfhK9WVKH4jIq+vVURJkKI0aHpXZTMP1K1+/Uc?=
- =?iso-8859-1?Q?lZsrjRjFXhIGF4YZk+MszNJ3f7ET0DDxeR8Lo0szSS3/axCw039U4QWyWs?=
- =?iso-8859-1?Q?WyGjo+JE9mlAcaQ5LBxtRSc/0Es3V9V0bx2sX1EZKXee59jd4QtpluOMi3?=
- =?iso-8859-1?Q?Jcz63yLlZhCj4NE/WRjisyYDwOBLUNVwXuI+lh4b/vx07L4jaKFzOIM+v5?=
- =?iso-8859-1?Q?omU3nZFYVCFzIuWGBgZBQvSCDCcjQpLVShSkiB9Cz22Q2SI8qnr0OmMLtI?=
- =?iso-8859-1?Q?zM0YvBNyVYGsecMClO1VF0DMTpyMPhwTRcOGcEZInJpMO2eP2IJao4oh0h?=
- =?iso-8859-1?Q?Dk3myqlTXSx+TxPxTHWh2w1n6GHWHRqOakg6XLsz4nFjLeO/QSG1kpKblS?=
- =?iso-8859-1?Q?yhCH8LGerX1E+diyvxDONCSDwYvrWqtM/ynKT4kyIEeu7nwn2MFUinvyaT?=
- =?iso-8859-1?Q?EKYsJpMAEnFcm0Vicuan+wCjPAtxwAjiLfdWmBWdh8hFloXDd2e/6PuED5?=
- =?iso-8859-1?Q?HEk2AVrv4fN1lvqoxR1fl5+cxvOr0lC52BRUhX1tjVCiv62FACd8b5C5kz?=
- =?iso-8859-1?Q?qExcvtJGEIanlOHNS7M7US70HFMpb/Pi9dcELxqwdiL1OfeY8uHjBoLolx?=
- =?iso-8859-1?Q?eGmWfFAv1SXRidtg0Cf6dpkSEBezXMyyk+iGtlwOxkdLHJby5pgVliwgqy?=
- =?iso-8859-1?Q?vNzsA+2Bmu9idOJBp+1QnJQ1peEW62/geupzYUZn6H0hoyEyiW7ntn1Dub?=
- =?iso-8859-1?Q?5ft691G6V4HjgJcjlRNo4p7ZK/OFCSsjp74W4Gz6WfDiF98J+ntcAfiAfp?=
- =?iso-8859-1?Q?urh7LB/dpe9kr+YniXJgepv8fZ2OQL13kXKQb7P9CIyYdc2qFQngGFZAEs?=
- =?iso-8859-1?Q?E5RxLEVW5beRJd8/GAQ54fC1GTEq4Ehb9/VaZ11eQU5tVPB4ajG3zVnH3F?=
- =?iso-8859-1?Q?LoKUWobYGQq/6WSRasiCwLpD/0K33DyZK8LXkylw+gXBa6sEVol+IpmVpT?=
- =?iso-8859-1?Q?azyqRDoKjodEGLXi3C4xp8rKldLFEkMMznp+wxRFkV2krg1dupf7F3ewxU?=
- =?iso-8859-1?Q?fyD3FZLJI0783vowPLeKhPif8GBMhY3pSzzIwvDBXQJ0U+dmFk62ULiB+n?=
- =?iso-8859-1?Q?Q3j0kLUQS2DkIrtYWxqXit3nlYXpTa9fvhHLiuVm0XquNqT+mniEuLYrz9?=
- =?iso-8859-1?Q?OzMhtWisER/ov/0f/ro76ua4NYHaxNPlhZz5QuSZiPmPjNcIcZ1ZujoI7u?=
- =?iso-8859-1?Q?jHalDjRDLgz5oMpo9qyTLBo1cvfau28g7l+QNcIrwePfCe7HBKq9GX+5N3?=
- =?iso-8859-1?Q?8GZ21La0UtMC2wEnpQrRswXTK88GB4kjXjY0i9/im2aTYN0bEUz4cnqpF0?=
- =?iso-8859-1?Q?eBq+g261OhRNNMEEYVlGCOIWP7X6lEPHOFq5ZeO1cJzRxQ8ZXXIT9pYNgK?=
- =?iso-8859-1?Q?D/wPmm/PcO+rM17VPwNZu+HSeD+RZ9grhUJyPmxdxmXN7hmE87qmgCEpw0?=
- =?iso-8859-1?Q?B7Vy8VTTOA=3D=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-MIME-Version: 1.0
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SA3PR03MB7187.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0e6461ce-4991-4e5a-2aed-08de99d6af24
-X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Apr 2026 03:34:07.3472 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: K8jGF1pKvQi0oZGQXSzOPnYRWX/PELD89kdDnD5N+EkqKnuY/t0eB1sEpDgBgtrE8ZyYoGdBx9MIUIXuYiYQWQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSWPR03MB989165
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4887ca8e529so33637035e9.0
+ for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 00:01:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1776150091; x=1776754891;
+ darn=lists.denx.de; 
+ h=in-reply-to:references:from:subject:cc:to:message-id:date
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=fMXtAQwF7JXgXAKQ5k/mj1R1gIuNTOktm98iu5Q9cPc=;
+ b=Gp3P9MOU0R9s+5luc5VQNTuosQLqDcdxcaqMW/ksUxZjQuymrn/pv1lKr0zd0dNxIJ
+ F+KWET+eNF9jB++mXwg8STZK6GPz085bvxlnt/ybwlQcECSsL0+S0Snx4PNN1uLifST0
+ 7sVGgM1Ae3Y/D6yJFzFY83zz1MLwzH8HrOfFFyop7yrTGUihaAHr1iqYqJV/jr19SLl1
+ RoBnHK/KtdDse94VyHX5O+eAUDT9zIUstmeOs/Tq8+9tlLcHDBi/UoAS3Q8MG1F5wXvW
+ UZmRoCpQF2QpThRgFcPuCg7SD5RPMzFNvvPetoS2tk68JaNnPA0EGR0X+vkXnpqsmBuL
+ RfUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776150091; x=1776754891;
+ h=in-reply-to:references:from:subject:cc:to:message-id:date
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fMXtAQwF7JXgXAKQ5k/mj1R1gIuNTOktm98iu5Q9cPc=;
+ b=Q9bii4ZU5cP/2JvOiAwVCj9b1HR1QELNcmlJuRJWmfAYawLECur2C1N5BoVBC54NL9
+ tUOt9SrBwwsXrrWXB67v+PaiQBOb+9wgrJnQ2PzfcydGDQoCsxjeajM/iG1FoXt1msGb
+ +C5SCOkn5U7Odc1dN2V15UJvkNOudgYUYoGdf7ZlLVmeQ8aGRTh9LKMW3wv305Qh4Et2
+ 36LdcRVD0sm6d1TEPZRkHyTDxUVUiWyMb+366H1ikd8Km7tpaVjdMrHmrmeyMb2Ymi0e
+ R1R5rEueycT3WGocjPHUPcAU2Z4LdB/YsOEqDynJpzr9bITP1U5kfBYIPVhOudZ3I0dE
+ 4VKw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+jlKOPptMe2brPzRq0Osy4LAY8JisSAm+hiYVI80UOLZuqqxxvMRQbOoYhRB5rkrlrDq2/79A=@lists.denx.de
+X-Gm-Message-State: AOJu0YwzKjSmcqv20laBwu1vFQ3cSMjXVA3rq87um+eajG41RQsQebDr
+ pw/Ilc7PYXGFH97pwtiusmCwODYed+ewADUQ6xQtL8+5K1jqJ8Ru1HNGjf/b1ph5a5Y=
+X-Gm-Gg: AeBDieu643Ab7QW0veZ6XF80S+VawcPjSk2C8/Hzra0JhD5blOgt3WoLT/u/PCJdW/H
+ JRRAzIYom1yzLOqaaX5cUP0K3lpXjCD5h2JpMIRP/1F2dhgecVt49mc5gNohu1aCiqqPbsWtEgB
+ dlZaDJMZNLSG5Tgc23aCRMMIUDo68kY2OP+TLyam0UE9eHWRzv4dDtYIy9Q7oUCkKLcZE120/ac
+ F3s36Fmr4xWSHpbh09etxrCY4Q8gJZBFyzLPFdskktA1TWOJNR/vcCIdScSAk77kXQ7nHAFXJJX
+ n9L0ZrX/ZGmInD6BYPmUXq0YFO+b1gO7WVfOefTfqJ1LsSd9JRNu91feMr/tahk5pXfVy0+pUDh
+ SPW3ogbWd5tCSWy/GKG2cX02Mug9iH69MDhKvkF64hmvxEI0MSdisaQxzXaT6lhAZeMMRJIJQk2
+ KFUWQ++0v/cDp7ZE0=
+X-Received: by 2002:a05:600c:609a:b0:485:3e00:944a with SMTP id
+ 5b1f17b1804b1-488d68ae78amr215556385e9.9.1776150091357; 
+ Tue, 14 Apr 2026 00:01:31 -0700 (PDT)
+Received: from localhost ([62.246.35.158]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-488ede24eb0sm28247325e9.8.2026.04.14.00.01.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Apr 2026 00:01:30 -0700 (PDT)
+Mime-Version: 1.0
+Content-Type: multipart/signed;
+ boundary=f5aca7d37fc53933acffa6c31fe9fbeb47e8c816220021dd55c5b71e4f22;
+ micalg=pgp-sha512; protocol="application/pgp-signature"
+Date: Tue, 14 Apr 2026 09:01:20 +0200
+Message-Id: <DHSONMPLU5N5.AY9KGH9Z6WFD@baylibre.com>
+To: "Maarten Brock" <Maarten.Brock@sttls.nl>, "Markus Schneider-Pargmann
+ (TI)" <msp@baylibre.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: "Jerome Forissier" <jerome.forissier@arm.com>, "Tom Rini"
+ <trini@konsulko.com>
+Subject: Re: [PATCH 2/4] net: cpsw: Remove compat string argument
+From: "Markus Schneider-Pargmann" <msp@baylibre.com>
+X-Mailer: aerc 0.21.0-126-g9e77103592fe
+References: <20260410-topic-cpsw-switch-v2026-07-next-v1-0-c914724b13e4@baylibre.com>
+ <20260410-topic-cpsw-switch-v2026-07-next-v1-2-c914724b13e4@baylibre.com>
+ <GV2PR05MB11941D5BAD20EA6CC43F2C3F783242@GV2PR05MB11941.eurprd05.prod.outlook.com>
+In-Reply-To: <GV2PR05MB11941D5BAD20EA6CC43F2C3F783242@GV2PR05MB11941.eurprd05.prod.outlook.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,31 +103,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,=0A=
-=0A=
-Thank you for the clarification and for looping in the EFI Loader custodian=
-s.=0A=
-=0A=
-I'm okay with the implementation to improve the Kconfig logic to only enabl=
-e=0A=
-`CONFIG_TOOLS_MKEFICAPSULE` by default on platforms that actually support=
-=0A=
-EFI capsule updates would be the best long-term solution.=0A=
-This would prevent misleading configurations and avoid unnecessary=0A=
-build failures on platforms that do not use the tool.=0A=
-=0A=
-I'm happy to help test or review any proposed changes in this area.=0A=
-=0A=
-In the meantime, could we set the setting=0A=
-=0A=
-+# CONFIG_TOOLS_MKEFICAPSULE is not set =0A=
-=0A=
-at the defonfig first? as I believe disabling the tool=0A=
-explicitly in the SoCFPGA defconfig remains the most=0A=
-accurate way to reflect the board's capabilities and=0A=
-avoid confusion for users.=0A=
-=0A=
-Thanks again for the constructive discussion.=0A=
-=0A=
-Regards,=0A=
-Boon Khai=
+--f5aca7d37fc53933acffa6c31fe9fbeb47e8c816220021dd55c5b71e4f22
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+
+Hi Maarten,
+
+On Mon Apr 13, 2026 at 11:00 AM CEST, Maarten Brock wrote:
+> Hi Markus,
+>
+>> diff --git a/drivers/net/ti/cpsw.c b/drivers/net/ti/cpsw.c index 6bfdbb6=
+0091ac1cb7ef5a0bb3ad5221c2c11206f..c844416d50ca3db9bb0d9ffe56cd9c352b8c58b0=
+ 100644
+>> --- a/drivers/net/ti/cpsw.c
+>> +++ b/drivers/net/ti/cpsw.c
+>> @@ -1064,9 +1064,10 @@ static void cpsw_gmii_sel_dra7xx(struct cpsw_priv=
+ *priv,
+>>  	writel(reg, priv->data->gmii_sel);
+>>  }
+>> =20
+>> -static void cpsw_phy_sel(struct cpsw_priv *priv, const char *compat,
+>> -			 phy_interface_t phy_mode)
+>> +static void cpsw_phy_sel(struct cpsw_priv *priv, phy_interface_t=20
+>> +phy_mode)
+>
+> Indent please. And consider to keep the type on the same line as the para=
+meter.
+
+I think this may have been your mail client? At least in my git patch
+and the patch I can see I sent it is all on one line:
+
++static void cpsw_phy_sel(struct cpsw_priv *priv, phy_interface_t phy_mode)
+
+Best
+Markus
+
+--f5aca7d37fc53933acffa6c31fe9fbeb47e8c816220021dd55c5b71e4f22
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCad3mQRsUgAAAAAAEAA5t
+YW51MiwyLjUrMS4xMiwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlPN
+GgD/UIqjpXygya2FOdN+7gV+at2+RhLN4C8cycajKGuiOYAA/1jDeZyVl9IzkfmW
+m/4zqqHXQZyr0Tj9hA9zDAnWuLgI
+=XVKc
+-----END PGP SIGNATURE-----
+
+--f5aca7d37fc53933acffa6c31fe9fbeb47e8c816220021dd55c5b71e4f22--
