@@ -4,140 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F438ED7B82
-	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 08:25:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36F2FED7B8F
+	for <u-boot@archiver.kernel.org>; Tue, 14 Apr 2026 09:07:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81846841A2;
-	Tue, 14 Apr 2026 10:25:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sttls.nl
+	by phobos.denx.de (Postfix) with ESMTP id 55EFA841C2;
+	Tue, 14 Apr 2026 11:07:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sttls.nl header.i=@sttls.nl header.b="IdHeMaEJ";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ZUj9GJh2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A39ED841B9; Tue, 14 Apr 2026 10:25:26 +0200 (CEST)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
+ id 5135A841CD; Tue, 14 Apr 2026 11:07:00 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7447584181
- for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 10:25:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E724841B9
+ for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 11:06:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=sttls.nl
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Maarten.Brock@sttls.nl
+ spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=V1gIQ7nyMmhMxbF2NPvhLv3aDKGHqOgSqcNFc65t3qUrJsQgdwPAQQLtYrREb5Tt5INe9aLmYlFZRSBz9agKUhCymCGdshxINXUFNXR70ciQiBvZ4AE+SeglkBRCRNjA0TLYsl8gk2qlTrjyE8qE00MwWEwFDPWKgE51+4o2zRcunkLsQ3bU3rPakZ1YQZOWVxNN3k76P306m9hVYKFKxT3iPkJFdrsxQYQbOEUW/wcsLJmOb3SuLFldxnrBZteTcoBwr3XsjonL3w6k+paKuQxeijEgNuSL9Gliu8rAfAkOuEvxU9H/RTz4QF37rLMSgjlEYB2A+CXTfLnAub3g8A==
+ b=Mvhg7t80q4uDj42hFgDvoO1k83HFxKnoDGTyCKmyrLJ9K0bodC0zvc7MewW7qmmz9HcQruo+JTPW5tdAFCHs8xVFvH7VGRlnHCt8oGxqBpzv9BrNSCndM4IWcG08EzpG8wzMy6eLf/vFm6YwpLWW0j669iQ+JRlJn0+L9iD9n5fn7ooS4pB85kj2DRsqMc+xcOukyDoer3TRPZv68UgsKXg/QgKfqoGocfjvA3sIR+E/Hg0icRm3XYGznSMtqB7HngQuyogrpU2XM8MIhGWCVk/cCbblkcarR6qIh3xkrGViR6gf+3ybqrhH2dwBEFN7PtsFq5ucHyWTg2BMp3WKnw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7u+Cb+nWuHRl80KslBYQSIZnUdpNFT23QPSe+7KHzao=;
- b=VMgkCzmuIQ+xTSCgB7myx56fdW0Ix3/WE5kS4GeVIRdkglE6hftSVMKhlO+GG3zzEzh17h1nKwubGW9iFd3LZqIlJ0COrQp+whKdtncrkdRd6rvhaBgxlRBWudyha4y799CVgzOEiSKhLM4qHd/BRh86xx+Jbd/qRKzVpip7S+o/wvpSSVGfQJZGdJZuQJEwaLtpNdUIpgeA9i4L8r6f+7KXGn7eg81hfuCj2FBnuSIeKj+7TAiZrvnsBfPtpkDsOzFKsO6nT49KcjoHcsWfJg5MK2krS1cOLlF2L1Coc5cxtK5l5dAWhnaRLb2lJQgfuiyG0M2IErYYSBHg0vEucg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 20.93.157.195) smtp.rcpttodomain=baylibre.com smtp.mailfrom=sttls.nl;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=sttls.nl;
+ bh=dPQqIMq6EZjqNVOAL9IxvlHh6PoJjLH+om8aeJIYX+8=;
+ b=Hq5jEtlDViIeVpPfvTKYdJgwlaiqC3N0pCbESBF4ABCQ2/h1v1G4ptq6c5SETkRWmphePkLbfXNH3GyaCinHynAc1XujYNlPt8WhS7cWKrcQocz/XxLPCCGgM2ilV5YNhRNI8vejxYY6fpb1HHM65jQy4Y7CCaCaZcsxQ8xqhXqvzKbkeTz8OHUJq4T4V7nI8kC4KZoVhIjWdkedS21VTCg62krRghtMUpbnpm67HqSyXsXuRZMNI/eaqu3o37XOjgSmBbBmQpY6aDhdU+13dPLZy5ATnpOLJZlWqy5pt28Vm/SAXEFfD7iitFXkNVcSqzyeqEipZ13cV59vis909Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.59) smtp.rcpttodomain=konsulko.com smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
  dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sttls.nl; s=selector1; 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7u+Cb+nWuHRl80KslBYQSIZnUdpNFT23QPSe+7KHzao=;
- b=IdHeMaEJoywfZGftI8QJ0SN6g60Sk3HEe1RsgsGGCN/ZkH68rOtGD4KBAfuGWTLubeKe/7P1NXNllSZrxy7EQmD2shWPCAPChrAU/3FI1ICRdle+z+/iO2OCmQ7AlacFC1cBPRXAL+KilZZjxuhSHtzVJY/ERgR2zZuaKe8vC5zmms9VtIuDuhMqiDl+N0Ybie5cGe+JJOOjkxwYFlnkGlHvlzFzffjK422+nYvKC65QZSvnNBZhNflUAbG3FmV1G8lrOjMacZI4IsbdgcKq211kKrc+6YANOPmcaS0HFOPnzMiv6xpTeE9SnZWolDdn4G/Rcy2g9VPKVpyiv70ZMQ==
-Received: from LO4P123CA0187.GBRP123.PROD.OUTLOOK.COM (2603:10a6:600:1a4::12)
- by AM7PR05MB6929.eurprd05.prod.outlook.com (2603:10a6:20b:1af::13)
+ bh=dPQqIMq6EZjqNVOAL9IxvlHh6PoJjLH+om8aeJIYX+8=;
+ b=ZUj9GJh2tN2oMdjaL7gvNfCNw37lZWrRpbsSGikM3PmIJ11h7T4Ybnc2308DrzYPTi+jzWhda381knCqwq1aef03LF/qJIO2Kv8jlxbzY/V34IMKf0+JuoMjciUGXcPHwwNYwHrLXUzrCMQiIt62K3o57pPioDE8Z0e4QBoHYsi0gYBOudwON0Fdsk1JNZAAs4Kxz0uV9jUwSrI1OrhVEKaTi2hHF9xBTRj2eDUJdtur61KDbrKDE6B8wCCDihUlEVRWgoA1Gm8136Z2bUOxVc3GXh4hlmDlVpp7e7WmPtmdealSeTTVdSKkpB0Txayb9Ocw55nWk5fEP98F6BfVcQ==
+Received: from CWLP265CA0517.GBRP265.PROD.OUTLOOK.COM (2603:10a6:400:18c::18)
+ by PAVPR10MB6791.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:2fe::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Tue, 14 Apr
- 2026 08:25:20 +0000
-Received: from DU6PEPF00009525.eurprd02.prod.outlook.com
- (2603:10a6:600:1a4:cafe::15) by LO4P123CA0187.outlook.office365.com
- (2603:10a6:600:1a4::12) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 09:06:55 +0000
+Received: from AM3PEPF00009B9E.eurprd04.prod.outlook.com
+ (2603:10a6:400:18c:cafe::d4) by CWLP265CA0517.outlook.office365.com
+ (2603:10a6:400:18c::18) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.48 via Frontend Transport; Tue,
- 14 Apr 2026 08:25:20 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 20.93.157.195)
- smtp.mailfrom=sttls.nl; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=sttls.nl;
-Received-SPF: Pass (protection.outlook.com: domain of sttls.nl designates
- 20.93.157.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=20.93.157.195; helo=westeu11-emailsignatures-cloud.codetwo.com;
- pr=C
-Received: from westeu11-emailsignatures-cloud.codetwo.com (20.93.157.195) by
- DU6PEPF00009525.mail.protection.outlook.com (10.167.8.6) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9769.17 via Frontend Transport; Tue, 14 Apr 2026 08:25:19 +0000
-Received: from AS8PR07CU003.outbound.protection.outlook.com (40.93.65.55) by
- westeu11-emailsignatures-cloud.codetwo.com with CodeTwo SMTP Server (TLS12)
- via SMTP; Tue, 14 Apr 2026 08:25:18 +0000
-Received: from GV2PR05MB11941.eurprd05.prod.outlook.com
- (2603:10a6:150:2cf::21) by DB9PR05MB7692.eurprd05.prod.outlook.com
- (2603:10a6:10:1f9::8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Tue, 14 Apr
- 2026 08:25:17 +0000
-Received: from GV2PR05MB11941.eurprd05.prod.outlook.com
- ([fe80::86e3:136c:737e:e29a]) by GV2PR05MB11941.eurprd05.prod.outlook.com
- ([fe80::86e3:136c:737e:e29a%4]) with mapi id 15.20.9769.046; Tue, 14 Apr 2026
- 08:25:16 +0000
-From: Maarten Brock <Maarten.Brock@sttls.nl>
-To: Markus Schneider-Pargmann <msp@baylibre.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>
-Subject: RE: [PATCH 2/4] net: cpsw: Remove compat string argument
-Thread-Topic: [PATCH 2/4] net: cpsw: Remove compat string argument
-Thread-Index: AQHcyNnklLG+3/lS4EC2//So5z8jRLXctaDAgAFxqgCAABYVgA==
-Date: Tue, 14 Apr 2026 08:25:16 +0000
-Message-ID: <GV2PR05MB119419B55DD47889763A53EED83252@GV2PR05MB11941.eurprd05.prod.outlook.com>
-References: <20260410-topic-cpsw-switch-v2026-07-next-v1-0-c914724b13e4@baylibre.com>
- <20260410-topic-cpsw-switch-v2026-07-next-v1-2-c914724b13e4@baylibre.com>
- <GV2PR05MB11941D5BAD20EA6CC43F2C3F783242@GV2PR05MB11941.eurprd05.prod.outlook.com>
- <DHSONMPLU5N5.AY9KGH9Z6WFD@baylibre.com>
-In-Reply-To: <DHSONMPLU5N5.AY9KGH9Z6WFD@baylibre.com>
-Accept-Language: en-US, nl-NL
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=sttls.nl;
-x-ms-traffictypediagnostic: GV2PR05MB11941:EE_|DB9PR05MB7692:EE_|DU6PEPF00009525:EE_|AM7PR05MB6929:EE_
-X-MS-Office365-Filtering-Correlation-Id: c6d04171-6ce8-4a44-b2b3-08de99ff5d93
+ 14 Apr 2026 09:06:55 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ AM3PEPF00009B9E.mail.protection.outlook.com (10.167.16.23) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9769.17 via Frontend Transport; Tue, 14 Apr 2026 09:06:55 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Tue, 14 Apr
+ 2026 11:10:03 +0200
+Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Tue, 14 Apr
+ 2026 11:06:54 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+Date: Tue, 14 Apr 2026 11:06:50 +0200
+Subject: [PATCH] board: stm32pm1: Fix board_check_usb_power()
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20260414-fix_usb_adc_meausurement-v1-1-8cdbd4c10dd8@foss.st.com>
+X-B4-Tracking: v=1; b=H4sIAKkD3mkC/x2MQQqDMBQFryJ/3YBK0OhVpIQkPtu/MEp+UwrBu
+ ze4HJiZQoLEEJqbQglfFj5ihe7RUHi7+ILitTL1bT+0utNq45/N4q1bg93hsuSEHfGjoDH5cTI
+ mBE81PxOqe6+X53X9ARH1lCBqAAAA
+X-Change-ID: 20260414-fix_usb_adc_meausurement-e4e9b7988ccb
+To: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
+ <trini@konsulko.com>, Kory Maincent <kory.maincent@bootlin.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Patrice Chotard
+ <patrice.chotard@foss.st.com>
+X-Mailer: b4 0.14.3
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM3PEPF00009B9E:EE_|PAVPR10MB6791:EE_
+X-MS-Office365-Filtering-Correlation-Id: d6bddc44-4cb0-4a49-69bb-08de9a052ce1
+X-LD-Processed: 75e027c9-20d5-47d5-b82f-77d7cd041e8f,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
- ARA:13230040|366016|1800799024|376014|38070700021|18002099003|56012099003|22082099003;
-X-Microsoft-Antispam-Message-Info-Original: hjPKykCTwyAcZs+rYGt8XVEHaPf+7oVfl4+te0Lc/vOMyFukDrpl8JNehbS8jubV1Ns+xerPldthrcwKb7xez79EpvZNH1lug0ZQtcL5JTiGRD79v1si84GMm8YFLUesjon0alwcSvuvO4JWAHv+b/vbESYU4k3cgXnkLwWteefYyNWrE5dqkWwrkFHYSyXSxFZNP7/PvCgMFupujtghYeov/2JqN3WoL2t+jzPH2XqlfM32LWIq9Ls+4M4b6ZS3lrkAGqtdqU9UsXJwI3ypnOjufBRiek1UO9xZYy92aKaU041Opj8+bczaCTrGArFGk/ZYtZdXkgkw0uXHEtGhx0TA/IXI+GZF5NsAeDRCrv8zgKTwqq4dvu5yW+M6+cFYypqL9AKU7meMkaTCLr7h8bfCHmWPzLJ+KaXxVz4GwC+Zo3+pc4408zjNsN594QsZIzXBD+KydDnjfgt1oGR7UjU6NU8gjAuD7/g7oi2vxxryziTbRSedkV53TCj3k1oCbh4weQWo8IakVWCtAj9yuDBTInp810+B4HCrED5zCASATmvOCl+o6lAUvziitzKf7daT4UY40CcST4oIAW6Q9LNYLJHSX+voL7D3ZqHoGr7eKqcjnu8YwMtKpewVGZ9O2Acuy6x/qEF7w9O9dq4peltNVouNJQXia996SKJeHeXxbKz7XQ1S0b7fAxTMROGnrw7jsOFGVhX5ZZDVFjYwqtoChw/W/v8BUa0g+cNQULzOFrSJqfvKETOCkSdKH6LEmVb7GItmiMCuutlv3OhIS9UXAR9m3ug42x5TyJ8sJQI=
-X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
- SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:GV2PR05MB11941.eurprd05.prod.outlook.com;
- PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(38070700021)(18002099003)(56012099003)(22082099003);
- DIR:OUT; SFP:1102; 
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: R6eg2Cs2DUnVyDdLzSy9ARLDqm9itvSPColqcH6xp7shKbkqCrBkVo5e/h/6kdgARbOSSE+ngPeAELegfmd000hTrZWTDypKSql9Iemd0yLh5vJxoIVf4FXtoVL1DBfGk6uiuGIbrV75ND/VRDigiUWoEndO+nbkgezEts9OEzfEXJwnxOa+mRXywInNIU+Ogz5fp3ouJ94S52XtpOWwXABcz57FK3YlM490qZjZR/TT0iVLytLLYmC861KuorJkKloMdoIopzbfOltVnhVrILME4eDUulDw1TqUxTtR8eJNOeseeW+yiL7GFsidCI6ZYknIfn3E7q7EZSfnQO9mfQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR05MB7692
-X-CodeTwo-MessageID: 182d626e-81ad-4f75-ac7d-47cce6aca80a.20260414082518@westeu11-emailsignatures-cloud.codetwo.com
-X-CodeTwoProcessed: true
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: DU6PEPF00009525.eurprd02.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 6fe17264-a4f2-4ebc-d27d-08de99ff5b97
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|36860700016|14060799003|35042699022|82310400026|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: XI6z7sn3h0MT1FEd6Bo2x9C6j+IpkJXbfReHcOM/QzU2Rsf2+FFduZJ0W4nK5lCeWfRR8LfxZ8nptHg0M6JxQtfBzk1QvmeYGpEZOEuLqr4rF+Jger/wjUZbzAxfoKEwEsAjvl7M211pmSBVoFzxaF9xk8kX978lruuAZMSO7LtJKXpHszXc/Ystqzisif+h7cUm+7vYGinx0oDqgRX/NMCkQmCVq+b/b3HEGU0BUIvHnZK8WLRgo7Mie7CuU9Th4ACZj7v7Gf5jHsG/tz7/CJAOJpFcj5AN5GhO/PpkkIRnHGfa0Q7eBTFckQnbZwb9ovIJN/8z9+E5fXXn53G5P6Hmt/P40kFCg7F+sXRjCMKyEz6uFHmtTyNWszIFsBgm66JSQsxV8quM2wN/gDtX15TGfumcR+DeH3HJnHtVgmNyYb9fo1YOaaicZ9sl4DvhfcrizFy8A++BIyu+XVbOZx2TMjJkgSUoc+5BrBblps7lafTm5cKc549h8C995c1rd5QI8f6sCpEEhuk2qII/wZbsBXGZrApexbEreG6lnP9H9xnawIGJLD58RvPdeTgNfbhsJvUefdgCmLEZEiXuiec0oQa4x/r8lY3CZB83EmREs8G3V0iBKledqtJq7yE0jmSwJguWYzCnBTyV+V7B2oHV3oivUzdYsLIQhn/pwDzmg3dz8J33eve8+mMYkZoFp/82TPdmulTzfW2HBIWjqFFK7shquuv1+HjWm7ZM1YRtwCIxvx9j2SzrmYQ5xdR7RT3MiuIqfDEOQWuAW/RBDQ==
-X-Forefront-Antispam-Report: CIP:20.93.157.195; CTRY:NL; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:westeu11-emailsignatures-cloud.codetwo.com;
- PTR:westeu11-emailsignatures-cloud.codetwo.com; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(36860700016)(14060799003)(35042699022)(82310400026)(18002099003)(22082099003)(56012099003);
- DIR:OUT; SFP:1102; 
+ ARA:13230040|36860700016|82310400026|376014|1800799024|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: cH+ajMEsZn/FdoYEeGgueyLfm63cymK2tOA20E05/mx/QulAKhb6uENuzP3SjPyvCb83ba6vBAMEV5xFiQg5LKB6HyaFqK1wqE2qma+rL3zY9VLaH9HgkCn/TgWpHxhGuO9sZgBklGL/LB4YlHuVsKm1U11L7hbk3U9v/32vxP3v/Jg6UbERPFLotTnGrKmIwIT1iiZHJxxl7rFsI0kV/aJXnniSjzQGyXp7rdwUepZTYN0nWDlzcflLV3sV2mopDsxNwFwsBY+T802iIzwDlnkgx7ZVPLnsjOUPfTsw4OVK2s/6JMS52Z220T3uoiX8OysNAI7RK4dpeCtP+SqYbVyKXbXIIqqIYDiEvJX+ZCuKT/xFycldnLZaxx7Ua9m/AvD0JDKLg7+KgPNskufVBn/x9sWl60LC7xUUCU8bTtUpcZvsVRAf3/+9cS1kAYjtpA4ila2BfHqRthzrmd5/TZz/CxV7PBQiNj3PVNQeRcz4CG0eqqAoEyasBQQsmDlOOWTIbjPLRu1C1O0R33XoHl73a2dLGZL3fouk5ofP3MWYXthE/reRDpyet3m+2Bjosmpi0Eu/bmWwwm2eoZKZw+jDtVLvCHC4zL9Hn5WBY9x0HB4wzrd8QgP4V1riXBcs26guQYfhCOXZgMFdy3qZpLKcWXoRjvfjfI0a0qWxLWsSmeGsmoIwe3BYpVtyqyCbTYxokkSxV5WhkUs5Co5EOlBZcyO2Tzlf+z8qmgVNAEI6CRbCD+Vx9hekoZFHynr1lWIDiQIFKj2rCGHN4y9ypQ==
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700016)(82310400026)(376014)(1800799024)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 6DLLRbCOqI7xpS6/OVogmx/cXr1W7UM9I1tfl1qJ5f1iASVtC4qXMjYacMkQdcWqh88tLShOKl/fgrUZ+nsSLlDVchCbF2wRw4bbMxnY3ghY/H9ytzcMAgq4eM4tCc+StPyryAo4mq/hAIeAbne8AbeM0OaAqSlIGiqA00bBdF0UW6hJ80gJtgjCCD1+19vwskU/40FdTOk/DD66YlzpjcrCj+ujQK4dDi/zzQu9P0oee/UQ9DecF0Abs2HQKOGWpjpglA/jasun+Sl2BQ0MRabzjTlbi4XXcNBUaXcb2ZCmeIWSUAspzlgd+3xXo40yCVUI22rTofm6dl7EFq512CjP3Y440MFtF/VFwqRPCTaaA1E/JipOxt/Xl32x1Y85kHocMUtQUXfGBn3nIkx0zqyha9zzvI9BYwDFDfLssXVCsv0stab+0De/mxxMf9Ke
-X-OriginatorOrg: sttls.nl
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Apr 2026 08:25:19.8044 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c6d04171-6ce8-4a44-b2b3-08de99ff5d93
-X-MS-Exchange-CrossTenant-Id: 86583a9a-af49-4f90-b51f-a573c9641d6a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=86583a9a-af49-4f90-b51f-a573c9641d6a; Ip=[20.93.157.195];
- Helo=[westeu11-emailsignatures-cloud.codetwo.com]
-X-MS-Exchange-CrossTenant-AuthSource: DU6PEPF00009525.eurprd02.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: QVRtXIH5QX8cguUWvTNjatWOpyp+t9ZxF3vMYmt/xgr0WWaVk5y8DGR/k+lnTw2hm5cYww8Ex0JlD+kthAaVFKTmuIEka3MTy9o1D+NQTzn3SFWafALWgrSRsXOcUVngirrs7WxnAigaE8/gEdieUOK12QovyPDPy6XsPWJo4e5b0+l0vyF1XkXIHFUEqrz1JUFFmkScFPJ65ayJob/SKqFowB2VMal5F2Y5ZGgcPZjC6FEUPjq64uZITsx+8HaEykA1hnSpr9nMiqFlN+eqvE0mfqtjckbw3Z6AIl2WKhoDwzmL4g4pOOiKyykpbBDnx1IQab0lquwxDWu4NSAYubA/EnR8LNHrLyXEY74lMjTT/BJ5pVDnc8cIV4g9Asdz3HVkXeAZHxiDjtdcNMVRPwG+h2i5kY/rOtTqEszvlAw5DK7/5083QLy6jDRbjOvK
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Apr 2026 09:06:55.0785 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d6bddc44-4cb0-4a49-69bb-08de9a052ce1
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF00009B9E.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR05MB6929
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR10MB6791
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,34 +133,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgTWFya3VzLA0KDQpUbyBteSBzaGFtZWZ1bCBzdXJwcmlzZSwgeW91IGFyZSByaWdodC4NCk15
-IGNvbXBhbnkgZm9yY2VzIG1lIHRvIHVzZSBicm9rZW4gc29mdHdhcmUgYW5kIHRoaXMgd2FzIG9u
-ZSBvZiBpdHMgImZlYXR1cmVzIi4NCkkgaGF2ZSBub3cgdHVybmVkIGl0IG9mZiwgd2hvIGtub3dz
-IGhvdyBsb25nIGl0IHdpbGwgaG9sZC4NCg0KT3RoZXIgZmVhdHVyZXMgaW5jbHVkZTogcmVzZXR0
-aW5nIHRoZSBjdXJzb3IgdG8gdGhlIHRvcC1sZWZ0IHdoaWxlIHlvdSBhcmUgd3JpdGluZyBhbiBl
-bWFpbC4NCg0KS2luZCByZWdhcmRzLA0KTWFhcnRlbg0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2Fn
-ZS0tLS0tDQo+IEZyb206IE1hcmt1cyBTY2huZWlkZXItUGFyZ21hbm4gPG1zcEBiYXlsaWJyZS5j
-b20+DQo+IFNlbnQ6IFR1ZXNkYXkgMTQgQXByaWwgMjAyNiA5OjAxDQo+IFRvOiBNYWFydGVuIEJy
-b2NrIDxNYWFydGVuLkJyb2NrQHN0dGxzLm5sPjsgTWFya3VzIFNjaG5laWRlci1QYXJnbWFubiAo
-VEkpIDxtc3BAYmF5bGlicmUuY29tPjsgdS1ib290QGxpc3RzLmRlbnguZGUNCj4gQ2M6IEplcm9t
-ZSBGb3Jpc3NpZXIgPGplcm9tZS5mb3Jpc3NpZXJAYXJtLmNvbT47IFRvbSBSaW5pIDx0cmluaUBr
-b25zdWxrby5jb20+DQo+IFN1YmplY3Q6IFJlOiBbUEFUQ0ggMi80XSBuZXQ6IGNwc3c6IFJlbW92
-ZSBjb21wYXQgc3RyaW5nIGFyZ3VtZW50DQo+IA0KPiBIaSBNYWFydGVuLA0KPiANCj4gT24gTW9u
-IEFwciAxMywgMjAyNiBhdCAxMTowMCBBTSBDRVNULCBNYWFydGVuIEJyb2NrIHdyb3RlOg0KPiA+
-IEhpIE1hcmt1cywNCj4gPg0KPiA+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9uZXQvdGkvY3Bzdy5j
-IGIvZHJpdmVycy9uZXQvdGkvY3Bzdy5jIGluZGV4DQo+IDZiZmRiYjYwMDkxYWMxY2I3ZWY1YTBi
-YjNhZDUyMjFjMmMxMTIwNmYuLmM4NDQ0MTZkNTBjYTNkYjliYjBkOWZmZTU2Y2Q5YzM1MmI4YzU4
-YjAgMTAwNjQ0DQo+ID4+IC0tLSBhL2RyaXZlcnMvbmV0L3RpL2Nwc3cuYw0KPiA+PiArKysgYi9k
-cml2ZXJzL25ldC90aS9jcHN3LmMNCj4gPj4gQEAgLTEwNjQsOSArMTA2NCwxMCBAQCBzdGF0aWMg
-dm9pZCBjcHN3X2dtaWlfc2VsX2RyYTd4eChzdHJ1Y3QgY3Bzd19wcml2ICpwcml2LA0KPiA+PiAg
-CXdyaXRlbChyZWcsIHByaXYtPmRhdGEtPmdtaWlfc2VsKTsNCj4gPj4gIH0NCj4gPj4NCj4gPj4g
-LXN0YXRpYyB2b2lkIGNwc3dfcGh5X3NlbChzdHJ1Y3QgY3Bzd19wcml2ICpwcml2LCBjb25zdCBj
-aGFyICpjb21wYXQsDQo+ID4+IC0JCQkgcGh5X2ludGVyZmFjZV90IHBoeV9tb2RlKQ0KPiA+PiAr
-c3RhdGljIHZvaWQgY3Bzd19waHlfc2VsKHN0cnVjdCBjcHN3X3ByaXYgKnByaXYsIHBoeV9pbnRl
-cmZhY2VfdA0KPiA+PiArcGh5X21vZGUpDQo+ID4NCj4gPiBJbmRlbnQgcGxlYXNlLiBBbmQgY29u
-c2lkZXIgdG8ga2VlcCB0aGUgdHlwZSBvbiB0aGUgc2FtZSBsaW5lIGFzIHRoZSBwYXJhbWV0ZXIu
-DQo+IA0KPiBJIHRoaW5rIHRoaXMgbWF5IGhhdmUgYmVlbiB5b3VyIG1haWwgY2xpZW50PyBBdCBs
-ZWFzdCBpbiBteSBnaXQgcGF0Y2gNCj4gYW5kIHRoZSBwYXRjaCBJIGNhbiBzZWUgSSBzZW50IGl0
-IGlzIGFsbCBvbiBvbmUgbGluZToNCj4gDQo+ICtzdGF0aWMgdm9pZCBjcHN3X3BoeV9zZWwoc3Ry
-dWN0IGNwc3dfcHJpdiAqcHJpdiwgcGh5X2ludGVyZmFjZV90IHBoeV9tb2RlKQ0KPiANCj4gQmVz
-dA0KPiBNYXJrdXMNCg==
+Depending of plugged power source (computer, wall charger, ...) it can
+happen that we got the following message:
+
+"****************************************************"
+"*      USB TYPE-C charger not compliant with       *"
+"*                   specification                  *"
+"****************************************************"
+"                                                    "
+"### ERROR ### Please RESET the board ###            "
+
+This issue has been detected on STM32MP135f-DK board.
+
+It's due to max_uV and min_uV value are initialized at beginning of
+board_check_usb_power() and can then be used for the 2 iteration of
+adc_measurement().
+max_uV/min_uV values issued of the first adc_measurement() iteration
+are used as input of the second adc_measurement() iteration, which
+can lead to incoherent pair of min_uV/max_uV values.
+
+To ensure that adc_measurement() returns coherent value for max_uV and
+min_uV, initialize max_uV and min_uV at each loop start.
+
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
+ board/st/stm32mp1/stm32mp1.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
+index 5f7c6822116..88ede4e3910 100644
+--- a/board/st/stm32mp1/stm32mp1.c
++++ b/board/st/stm32mp1/stm32mp1.c
+@@ -326,8 +326,8 @@ static int adc_measurement(ofnode node, int adc_count, int *min_uV, int *max_uV)
+ static int board_check_usb_power(void)
+ {
+ 	ofnode node;
+-	int max_uV = 0;
+-	int min_uV = USB_START_HIGH_THRESHOLD_UV;
++	int max_uV;
++	int min_uV;
+ 	int adc_count, ret;
+ 	u32 nb_blink;
+ 	u8 i;
+@@ -358,6 +358,9 @@ static int board_check_usb_power(void)
+ 
+ 	/* perform maximum of 2 ADC measurements to detect power supply current */
+ 	for (i = 0; i < 2; i++) {
++		max_uV = 0;
++		min_uV = USB_START_HIGH_THRESHOLD_UV;
++
+ 		ret = adc_measurement(node, adc_count, &min_uV, &max_uV);
+ 		if (ret)
+ 			return ret;
+
+---
+base-commit: 88dc2788777babfd6322fa655df549a019aa1e69
+change-id: 20260414-fix_usb_adc_meausurement-e4e9b7988ccb
+
+Best regards,
+-- 
+Patrice Chotard <patrice.chotard@foss.st.com>
+
