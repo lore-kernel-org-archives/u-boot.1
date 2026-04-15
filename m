@@ -4,119 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FFA0F43834
-	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 15:22:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85D5FF4384C
+	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 15:41:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62D7D841D6;
-	Wed, 15 Apr 2026 17:22:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 08E2584119;
+	Wed, 15 Apr 2026 17:40:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ffhAay8U";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="X8aaBGMo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCBCA83936; Wed, 15 Apr 2026 17:22:30 +0200 (CEST)
-Received: from SN4PR2101CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::1])
+ id CEA12841C8; Wed, 15 Apr 2026 17:40:57 +0200 (CEST)
+Received: from out-177.mta0.migadu.com (out-177.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::b1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66F4A84201
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 17:22:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BACE984105
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 17:40:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yLXFsxFcWmcUZKi3k6z5Tjiv6gfLg8rym2KNRbC8yf6AE+wq0d0TJF6BGVjjde0E67Qusf6eApo673bZ0p1UK9XDU0nyEfeL1c8YR9GJCb8GvPeXVcXd0H2RwThjcqedgHJqjc+BRZAmvjNtuj/hiIOQ8kxqpHpc+15EnnYoTMZk9pPkkMI7O3s6BWFPZiq3Z5NE1A0PYI8JNvt4mo3/UDc0kX41w8YnOm1hb9MfZ3w3JwVoTyBLIQK5NNtYGMHkqXLgE0hHmJxF04P371bQaVCQJjTVNeztTD+d/vhqLpRBPaHVwL+h6fcqmPRFPgclOeJybflKaW9tvIlbnyH8GQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=aBa3pbYxyH6OGWOJH1zxZkWx4uuBMFUAaf4A+kKjrJQ=;
- b=CQ//HuQruw0vQOtJXo5+uV69utasLc4i+vug4xJddT1dimp5XYWutHAHpEiVjy57glNh0fOlohcU1OCQUAGkBwEh0sAfRl1fICtmEeeRuoFgsrHSdsiZP02GHthQdDm+aXvERx8+Dz+CuWtbsoMKmyfZ4spY+/s7ykSD+6gM+RZ8pLvxHqfVyVMWSv2DQK216jT4Vq447yJafWbWLX1f7h4kY4qnCWee+P09eoVKZno5OYnvaD7h9x9hZOqXbTjZ7/JDfyU/mtLfyxwzLytHq8edk8C7fmRIep124BUIaZDCmFVxfd4g+rqSXJFl7wPq9FaVMORhni3vHDOV/8mNgg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=aBa3pbYxyH6OGWOJH1zxZkWx4uuBMFUAaf4A+kKjrJQ=;
- b=ffhAay8Um81wExEALBXiXm0aEYWrzyaGwk/Lxwd4NpQwVunDnIyip8K2C+uE1+pn8v2DuJhTbUrBes7ZMXch3RditeoY9sYmNa7tmmWcMRybgtuDBTBxogbdWGRujD5JUuhJvAr9JJztgBBz1K2uKf0eje1XG9nmbAdU4ur0RJw=
-Received: from SJ0PR05CA0116.namprd05.prod.outlook.com (2603:10b6:a03:334::31)
- by SA2PR10MB4569.namprd10.prod.outlook.com (2603:10b6:806:111::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Wed, 15 Apr
- 2026 15:22:24 +0000
-Received: from SJ5PEPF000001F7.namprd05.prod.outlook.com
- (2603:10b6:a03:334:cafe::31) by SJ0PR05CA0116.outlook.office365.com
- (2603:10b6:a03:334::31) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.46 via Frontend Transport; Wed,
- 15 Apr 2026 15:22:24 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- SJ5PEPF000001F7.mail.protection.outlook.com (10.167.242.75) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9769.17 via Frontend Transport; Wed, 15 Apr 2026 15:22:23 +0000
-Received: from DFLE210.ent.ti.com (10.64.6.68) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 15 Apr
- 2026 10:22:09 -0500
-Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE210.ent.ti.com
- (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 15 Apr
- 2026 10:22:09 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE207.ent.ti.com
- (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 15 Apr 2026 10:22:09 -0500
-Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.53.178])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63FFM0uk2222771;
- Wed, 15 Apr 2026 10:22:06 -0500
-From: Udit Kumar <u-kumar1@ti.com>
-To: <vigneshr@ti.com>, <trini@konsulko.com>, <m-chawdhry@ti.com>
-CC: <bb@ti.com>, <n-francis@ti.com>, <nm@ti.com>, <gehariprasath@ti.com>,
- <u-boot@lists.denx.de>, Udit Kumar <u-kumar1@ti.com>
-Subject: [PATCH v2 2/3] arch: mach-k3: j721s2_init: Add workaround for errata
- i2437
-Date: Wed, 15 Apr 2026 20:51:51 +0530
-Message-ID: <20260415152152.3048491-3-u-kumar1@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260415152152.3048491-1-u-kumar1@ti.com>
-References: <20260415152152.3048491-1-u-kumar1@ti.com>
+ spf=pass smtp.mailfrom=funderscore@postmarketos.org
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
+ s=key1; t=1776267655;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=/iKhnXumiWAvIt5tB3bahgiWoprzGPaoEPa0Kq2JmBc=;
+ b=X8aaBGMo+m/MB2kXvDeBZ7WehxRl7AI5NyszTksTT4Hx3uIYHyitqScQ9tQicmYdcdbMda
+ UpBwDuuMtwmUT5ybhMTM6KihA8ogeiOjk5NUxCX+5I9bsjHNSwQbkCxrdN63cypBbxz5Oe
+ dPQnWFyVI9/oYu4xJKg4gsiwptADH88Yhrbcu495Vf73s9bw2jSO2yXlNbaSQVfKFZ24pH
+ WuFc70Illn7wpMf8qlZiVMaxJs+N/T5LAfqfnD1Nu5iZG2Qu58niTPOwGv5k0+ClXIyxoc
+ AXO4w15YNL49sB24BDsLjt9u7KMUCdiFYaVvqXSY+Ib8ko8+InnOlgOTBT4+dA==
+From: Ferass El Hafidi <funderscore@postmarketos.org>
+Date: Wed, 15 Apr 2026 14:32:31 +0000
+Subject: [PATCH v3 1/3] autoboot: allow custom prompt without requiring
+ AUTOBOOT_KEYED
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001F7:EE_|SA2PR10MB4569:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2b80a0fd-b1de-4b4e-cda7-08de9b02cb69
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700016|82310400026|376014|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: DntW+N6o7u45qcwHWP6b8A1Z62veccN2ZAgJ/vZMDATjL/vzz9US7LJd4lnQYe1zqqcSfM5uWShfVYM5MF8WAV5Ykg7/Y0AcsXytiZPwzerVngijxPhLuw2KqgElzgoaJOuLpukcB1OliUpYdiTN+uu2cphASVh2M6mzQRJ2NGMj1gMAc/F9kCB3QHQJfd8NLCpuN8lVxogPt/xBD5w4VPKLspOEyPOIWQH9aDCpvkhvskRAoRUkFbxJKmah7GM8qaD9Lg1iBDRNdsWO7Un6rLYUDQktjpjOvL+mv0HqQolWjlGXkTqRvX5p2riwB+z0dHZ8t1yviRC74WqZaYreB+vVLMt+v53wcytbdJC2yxN2RMPGbj2HOWBcI1qVgtvVArvjniAa4ZKeHoVowDmngTA55YhNmJ9B70qY32JphBJT9O98GLmUaphAvFqMWNcVey3T2fqc0dDiVXMc7d2KPcMrAprDn9mnAn+imKl++YzrPpyvxnEZz26uOb7pxHL2JSy/l5zB4tV2agVdjAIy8iYW27ljkjxF640Dd2EBFd5wNngvO3Ix3jFwjJJA2A8L2q9rqint7CpRafkvyNkWC9in0qPzI1n5nhH0gvEau2r4oMd/+jLgIliWbQgTH1YpjbYpscenaDz1KraepYTKi+6198VjjHsac6tx/7RqcGCgKWmmcjfvsq2KE39v2fcJaCOqPc98HA62e6aHX/Hkris0UoE6EOHIVXXIWqvefpM4kJFUk93eIdlh5yXRvA52UU84rKSj3f2SY6bjB6fcsg==
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700016)(82310400026)(376014)(18002099003)(22082099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: ndh0SDCRhfxR3bR9lyrih9INJiYkRrokVtoaLVmclt2SOq8KN/W3KZo3hcDEYbh+R9jEsY1XqObo1djbqwOmmdQv/gmTrEvQ2fsSqaWwH9jBgem+9xWqqjVxXV5xZ6vZVnrbTzDhifxPh2ZwRhb1bFihUY5PWc66qumA6Bklp8s9zXPp9tAq0JdiEsX31vAAtBFhiQ0uF9HQlXapvf6i5xhOOymIA+CpuP2vQe3215XOhSaV2fxfRjE/gXfeL+MJQWRYu+LE4NpGmQ+/NsEFFOMf3cot6PdQqB7VG/eO31MQ68bbAeRadhaQpTwoiRGwf/EE8dIxdLcZYDaA3FwR0NJMRlQl142xUHgbtlJwkRvaxDKjLPasG4sAEHZS7bpIwQxPaBkjVVkxIObwhASVmguydheGSdBxl3Z+BwjRZp/Py+mCNZbHGPW411XjLA+R
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Apr 2026 15:22:23.6837 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2b80a0fd-b1de-4b4e-cda7-08de9b02cb69
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001F7.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR10MB4569
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260415-ui-cosmetics-v3-1-aa8308a47e33@postmarketos.org>
+References: <20260415-ui-cosmetics-v3-0-aa8308a47e33@postmarketos.org>
+In-Reply-To: <20260415-ui-cosmetics-v3-0-aa8308a47e33@postmarketos.org>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
+ Simon Glass <sjg@chromium.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Anshul Dalal <anshuld@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Martin Schwan <m.schwan@phytec.de>, David Zang <davidzangcs@gmail.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Ferass El Hafidi <funderscore@postmarketos.org>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2946;
+ i=funderscore@postmarketos.org; h=from:subject:message-id;
+ bh=W78OJh6lLsKhVjq1BgDGzcNc1Ap3s5X1sVTHGBV6qo0=;
+ b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBp37GD66WJzK3Ns/bdFDYTHy4pF6siFPKYPRKtu
+ TMkg0EOm1SJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCad+xgwAKCRCEr8vQ14ma
+ A+5CEACVYd4k487T05vBirLKntE9M0AJ6kdSrUcYnywDtnASCpdtWUgFzJjLIB9KuuVJ5ODngRU
+ aQJOLn+e3DWDPg2+g7xEoZNUUKamoWuukcLZE3TRusjA6BJx+17gclSfkHSpKToMFS0K/dBuBBL
+ CenjoacPjCxivyF5LV+UQj0Gn+oUsuH/rkfx6Mt7aufi/0z19tKfLpl2rCEGT8T/io1cK4VYUCZ
+ pzPZscOkmrWATuJ0W2R9Qlx5Ci25T3u7kToZf5jryzsacWpVz87DhKqg3U8Ns5UUxiccQb6r6ES
+ 3EbCELYcHLlwlVuI1IwE+IdMofpxAnz5kZJtFrsQ14lzpu35+UfhI5d+h0OFzn7/rblkRzyMZjd
+ D3fzH5GMSRYj4wJNrra5pIlpQ+KBC4NsaoENV4uAYiJomWn3HCXj9LNnxo2l36wuUrbKL8EPJIT
+ WUt2iLfKpIqzpVDXYM6rH5LSd5J/cUImq7frDJ0KPqu08ZwLgDaVbEA3guTVcup5FF58WYMGMiv
+ rIhjDBIiovx2dUrVWVIJ/6T8+xfx/QNyx/BsFzjXvuGqOHvLny4hjnR1I2MskXichYwyBOA+3fd
+ YPVld7a17Y4zRa5SPVt5KteX4X9v0HXnr5Q27FkKlL71/3/gsr5i2LAeIgfSfP9g+q95W8qCaLy
+ YfGQqf7loGKxTHA==
+X-Developer-Key: i=funderscore@postmarketos.org; a=openpgp;
+ fpr=0301BC37FB555CACFD798BEE84AFCBD0D7899A03
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,76 +94,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Neha Malcom Francis <n-francis@ti.com>
+The autoboot prompt used to only be customizable in Kconfig when
+AUTOBOOT_KEYED was enabled. For a usecase such as having a nicer
+autoboot prompt alongside a splash screen, there is no reason for
+AUTOBOOT_KEYED to be required for this.
 
-Add the workaround proposed for J721S2 errata i2437 (link) for SE
-clock-gating turning off too early. Without this, a hardware bug present
-in C7120 leads to C7120 CPU hanging.
+Remove the dependency to AUTOBOOT_KEYED, and use AUTOBOOT_PROMPT in
+print_boot_delay() instead of a hardcoded string.
 
-Link: https://www.ti.com/lit/pdf/sprz530
-Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
 ---
- arch/arm/mach-k3/j721s2/j721s2_init.c | 39 +++++++++++++++++++++++++++
- 1 file changed, 39 insertions(+)
+ boot/Kconfig      | 30 +++++++++++++++---------------
+ common/autoboot.c |  2 +-
+ 2 files changed, 16 insertions(+), 16 deletions(-)
 
-diff --git a/arch/arm/mach-k3/j721s2/j721s2_init.c b/arch/arm/mach-k3/j721s2/j721s2_init.c
-index b5453d8895d..780d853423f 100644
---- a/arch/arm/mach-k3/j721s2/j721s2_init.c
-+++ b/arch/arm/mach-k3/j721s2/j721s2_init.c
-@@ -40,6 +40,15 @@
- #define NB_THREADMAP_BIT1				BIT(1)
- #define NB_THREADMAP_BIT2				BIT(2)
+diff --git a/boot/Kconfig b/boot/Kconfig
+index bfed452d77e..039c5acc023 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -1560,6 +1560,21 @@ config AUTOBOOT
+ 	help
+ 	  This enables the autoboot.  See doc/README.autoboot for detail.
  
-+/*
-+ * RAT mapping for errata ID: i2437
-+ */
-+#define RAT_ERRATA_2437_BASE_REGION0		0x40f90000
-+#define RAT_ERRATA_2437_IN_ADDR			0xc0000000
-+#define RAT_ERRATA_2437_OUT_ADDR_U		0x0000004d
-+#define RAT_ERRATA_2437_OUT_ADDR_L		0x21000000
-+#define RAT_ERRATA_2437_CTRL			0x80000010
++config AUTOBOOT_PROMPT
++	string "Autoboot stop prompt"
++	default "Autoboot in %d seconds\\n" if AUTOBOOT_KEYED
++	default "\\rHit any key to stop autoboot: %d"
++	help
++	  This string is displayed before the boot delay selected by
++	  CONFIG_BOOTDELAY starts.
 +
- struct fwl_data cbass_hc_cfg0_fwls[] = {
- 	{ "PCIE0_CFG", 2577, 7 },
- 	{ "EMMC8SS0_CFG", 2579, 4 },
-@@ -346,6 +355,36 @@ void board_init_f(ulong dummy)
- 		if (ret)
- 			printf("AVS init failed: %d\n", ret);
- 	}
++	  Note that this define is used as the (only) argument to a
++	  printf() call, so it may contain '%' format specifications,
++	  provided that it also includes, separated by commas exactly
++	  like in a printf statement, the required arguments. It is
++	  the responsibility of the user to select only such arguments
++	  that are valid in the given context.
 +
-+	if (IS_ENABLED(CONFIG_CPU_V7R)) {
-+		/*
-+		 * Errata ID i2437: SE Clock-Gating Turning Off Too Early
-+		 *
-+		 * A hardware bug is present in the C7120 Streaming Engine top level
-+		 * clock gating logic that can lead to the C7120 CPU hanging.
-+
-+		 * Workaround: The DSP_<COREID>_DEBUG_CLKEN_OVERRIDE fields of the
-+		 * COMPUTE_CLUSTER_CFG_WRAP_0_CC_CNTRL register (where COREID is the
-+		 * name of the specific C7120 core) must be enabled before power-up
-+		 * of the C7120 core to override all clock-gating.
-+		 */
-+
-+		/* Setup RAT mapping */
-+		debug("Errata i2437: Use RAT for COMPUTE_CLUSTER_CFG_WRAP_0_CC_CNTRL register\n");
-+		writel_verify(RAT_ERRATA_2437_IN_ADDR, RAT_ERRATA_2437_BASE_REGION0 + 0x24);
-+		writel_verify(RAT_ERRATA_2437_OUT_ADDR_L, RAT_ERRATA_2437_BASE_REGION0 + 0x28);
-+		writel_verify(RAT_ERRATA_2437_OUT_ADDR_U, RAT_ERRATA_2437_BASE_REGION0 + 0x2c);
-+		writel_verify(RAT_ERRATA_2437_CTRL, RAT_ERRATA_2437_BASE_REGION0 + 0x20);
-+
-+		/* Enable DSP_X_DEBUG_CLKEN_OVERRIDE for C71x cores */
-+		writel_verify(0x300, RAT_ERRATA_2437_IN_ADDR + 0x200);
-+
-+		/* Clear RAT mapping */
-+		writel_verify(0, RAT_ERRATA_2437_BASE_REGION0 + 0x20);
-+		writel_verify(0, RAT_ERRATA_2437_BASE_REGION0 + 0x24);
-+		writel_verify(0, RAT_ERRATA_2437_BASE_REGION0 + 0x28);
-+		writel_verify(0, RAT_ERRATA_2437_BASE_REGION0 + 0x2c);
-+	}
+ if AUTOBOOT
+ 
+ config BOOTDELAY
+@@ -1597,21 +1612,6 @@ config AUTOBOOT_FLUSH_STDIN
+ 	  This can't be enabled for the sandbox as flushing stdin would
+ 	  break the autoboot unit tests.
+ 
+-config AUTOBOOT_PROMPT
+-	string "Autoboot stop prompt"
+-	default "Autoboot in %d seconds\\n"
+-	help
+-	  This string is displayed before the boot delay selected by
+-	  CONFIG_BOOTDELAY starts. If it is not defined	there is no
+-	  output indicating that autoboot is in progress.
+-
+-	  Note that this define is used as the (only) argument to a
+-	  printf() call, so it may contain '%' format specifications,
+-	  provided that it also includes, separated by commas exactly
+-	  like in a printf statement, the required arguments. It is
+-	  the responsibility of the user to select only such arguments
+-	  that are valid in the given context.
+-
+ config AUTOBOOT_ENCRYPTION
+ 	bool "Enable encryption in autoboot stopping"
+ 	help
+diff --git a/common/autoboot.c b/common/autoboot.c
+index 1783ef92c94..7114ee58f47 100644
+--- a/common/autoboot.c
++++ b/common/autoboot.c
+@@ -379,7 +379,7 @@ static int abortboot_key_sequence(int bootdelay)
+ 
+ static void print_boot_delay(int bootdelay)
+ {
+-	printf(ANSI_CLEAR_LINE "\rHit any key to stop autoboot: %d", bootdelay);
++	printf(ANSI_CLEAR_LINE CONFIG_AUTOBOOT_PROMPT, bootdelay);
  }
- #endif
  
+ static int abortboot_single_key(int bootdelay)
+
 -- 
-2.34.1
+2.53.0
 
