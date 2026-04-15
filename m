@@ -4,82 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36132FA0C3D
-	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 07:42:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B076BFA0C3C
+	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 07:47:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB60783D8A;
-	Wed, 15 Apr 2026 09:42:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id 2737883D8A;
+	Wed, 15 Apr 2026 09:47:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="cQzIWizo";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="cHzdVPi8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A0F28407E; Wed, 15 Apr 2026 09:42:32 +0200 (CEST)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+ id A1CA68407D; Wed, 15 Apr 2026 09:47:44 +0200 (CEST)
+Received: from SA9PR02CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170130001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10c::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DF4C83936
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 09:42:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id 7450B83936
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 09:47:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sam.shih@mediatek.com
-X-UUID: a4ce9bfe389e11f1ae70033691e9ac7d-20260415
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=MIME-Version:Content-Transfer-Encoding:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
- bh=k2AckXQWidPEBLtM9u29FGeCBCTPI2jgUDsEEQhy0Tk=; 
- b=cQzIWizou2UAcW0bodh3BkvKarjaKy6bnceOS0fIIZEyxLrmKJ2yB9dfJBlz+k5GDGt4f39/cyKhcadcBLH3Hqj4qV/phta4BZWYG6N482rVIiko2n5/5YP6rxMBhKsrBeV/eUfZZN1WqE61rcgYwRm/Pgbxe3oqDexpJ7RU2mA=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.12, REQID:521c62e0-91b1-421e-b21e-6e2e818e11a9, IP:0,
- U
- RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
- :release,TS:-5
-X-CID-META: VersionHash:e7bac3a, CLOUDID:b2a7f594-f8ef-4ca8-bea0-143568f9ca1d,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102|836|865|888|898,TC:-
- 5,Content:0|15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1
- ,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: a4ce9bfe389e11f1ae70033691e9ac7d-20260415
-Received: from mtkmbs14n1.mediatek.inc [(172.21.101.75)] by
- mailgw01.mediatek.com (envelope-from <sam.shih@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 907304191; Wed, 15 Apr 2026 15:42:24 +0800
-Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
- mtkmbs11n1.mediatek.inc (172.21.101.185) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Wed, 15 Apr 2026 15:42:24 +0800
-Received: from mediatek.com (10.233.130.16) by mtkmbs11n1.mediatek.inc
- (172.21.101.73) with Microsoft SMTP Server id 15.2.2562.29 via Frontend
- Transport; Wed, 15 Apr 2026 15:42:24 +0800
-Received: by mediatek.com (Postfix, from userid 10015778)
- id 27026200C6; Wed, 15 Apr 2026 15:42:24 +0800 (CST)
-Message-ID: <cbf94c5bb1dbaa6c6efbbdc37be93a2858d14685.camel@mediatek.com>
-Subject: Re: [PATCH 2/2] clk: mediatek: fix parent rate lookup for fixed PLL
- clocks
-From: sam.shih <sam.shih@mediatek.com>
-To: David Lechner <dlechner@baylibre.com>, Weijie Gao
- <weijie.gao@mediatek.com>, <u-boot@lists.denx.de>
-CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
- <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, Igor Belwon
- <igor.belwon@mentallysanemainliners.org>, Julien Stephan
- <jstephan@baylibre.com>
-Date: Wed, 15 Apr 2026 15:42:23 +0800
-In-Reply-To: <abe54929-2f66-4a3d-b08c-65a03cc32fd3@baylibre.com>
-References: <fc7c50ebff2932b5f0a237c3fc492aefba3a0292.1775786729.git.weijie.gao@mediatek.com>
- <91c2295c6677a94ea34089a52a93487d8ff7caca.1775786729.git.weijie.gao@mediatek.com>
- <abe54929-2f66-4a3d-b08c-65a03cc32fd3@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: git-send-email 2.45.1
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=G7+CADbtejua/OjuzRpslRPWeKEmFCD1J34CtSav7FthrBj6txGGQBc6eMBs6vcvB9KuKJLjQRiMrARFGYFWzbe9h/UbekfgMcDFNddLyKtJ1X1UdsQ+lrItrw6W3ARH12evhPRmxSaM4u3J2E6RJdyuAIfTZYdZc/w3f1c50mXUM4MuHKUAhlgZFwdN7omwse8SAKCyyKGDmhJnK+1D7flP+HdPOychWTXgTa/uPLkioAKdh/PYUF0onuMWdHymNVtOuks87ObtSnEfBF43q4LkqV4/ynWPiwIFN012kU/3z2t06pM84bQyMMBdCQlYhGGI4ENkRivAfNmxWZJbwg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Isrb7AoIyCl1rPiUU32JryKNEqxcD3TYxRH6EvEPivI=;
+ b=iYNRYdpG53+FWH6okcWvBNw1uYIX3dCBzRaGGYo0CBzQjiiDrkNLab/u7pbIhOf4Xt25mhrvYaYMJ5+XabEaL7qGmZl9btd6QomLhBhWIh1pTURTOOJpoxlgoJ+c/AF0gsYnZQXYrGxrqztgIwEt9lwVH8yjtxEIhi9zh1KmW+fB8b6F2OC6K0tHc+QmGpfnSGxnJDsEHKszOtqa8fxGEIF03OoiEAKWAJZfFjo4+TseUuWTJaNX1MQ9Fl9Elo75i7SgYcbiwgDKbdm1NeLYDkreOA3SDx/VJEeodD76dvHl6htEW6PABK1i3pup+Qr4Nx3YwE9ZAM6IErnEAplPTg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Isrb7AoIyCl1rPiUU32JryKNEqxcD3TYxRH6EvEPivI=;
+ b=cHzdVPi8d95D78BEecuVjdEWo/f/ouAEEBYa+8yYM6dbhRU8CjC7B1ySgw3G2PsGNAtJ7fER/S4Mhsc6TMSdHGuCwyB8d7FOxpGGrwSjNG37pCdCDd9v5MItx1p/UAI4UK3b65TbW4tEQi0jV6uVkhFHUU2sLcyDi3rYCw8tc9ZMuqnh2d/FyuNLtCX83HjPZgsrVQCfqyEvSLsmU0GXE+oBhuftshcVSfpW6eI9u7KCAgUKyGePeXnaipECB2UC8wMzuIvi5Q7CMCB1wZfFc7fvqXL1VCeCWSjVqIR2+cLDo4HpHiWVnDEVLuAWkDEKm4FID5ZWWU52Sj3oNvwyVg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from CY1PR03MB8121.namprd03.prod.outlook.com (2603:10b6:930:106::16)
+ by CHXPR03MB989196.namprd03.prod.outlook.com (2603:10b6:610:2fd::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Wed, 15 Apr
+ 2026 07:47:38 +0000
+Received: from CY1PR03MB8121.namprd03.prod.outlook.com
+ ([fe80::fe3c:a06b:8724:fab0]) by CY1PR03MB8121.namprd03.prod.outlook.com
+ ([fe80::fe3c:a06b:8724:fab0%6]) with mapi id 15.20.9769.046; Wed, 15 Apr 2026
+ 07:47:38 +0000
+Message-ID: <a5545cd8-9a37-4793-b020-98a577598e11@altera.com>
+Date: Wed, 15 Apr 2026 15:47:29 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: socfpga: Ensure FPGA in user mode before enabling
+ the bridges
+To: dinesh.maniyam@altera.com, u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
+ Kok Kiang <kok.kiang.hea@altera.com>, Boon Khai <boon.khai.ng@altera.com>,
+ Alif <alif.zakuan.yuslaimi@altera.com>,
+ Tien Fong Chee <tien.fong.chee@intel.com>
+References: <20260304034354.2871-1-dinesh.maniyam@altera.com>
+Content-Language: en-US
+From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
+In-Reply-To: <20260304034354.2871-1-dinesh.maniyam@altera.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: SI2P153CA0002.APCP153.PROD.OUTLOOK.COM
+ (2603:1096:4:140::16) To CY1PR03MB8121.namprd03.prod.outlook.com
+ (2603:10b6:930:106::16)
 MIME-Version: 1.0
-X-Mailer: git-send-email 2.45.1
-X-MTK: N
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY1PR03MB8121:EE_|CHXPR03MB989196:EE_
+X-MS-Office365-Filtering-Correlation-Id: 70f34455-2e04-4996-c79e-08de9ac343df
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|1800799024|366016|55112099003|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 4gC/FKY2a6HSVKTX60G1CLo9Q0hddGMDTP86o9RkNGcPZz8aB5KXWvmVr6NvhgiAbJxXvKSTkaIzrqb253sMbwz7AWQfwArfuVwgbwK8L5An2h/+1TXVrpmvXGoOGGlL2rzSerU2mVbx9O16L3c77v2PnNXI3QFdSrgpxqx9v0W0zwEjYe7ZVVQT6vjNBAl4/CIqga5aU2UAHz/WcpDF9VR3DA6tNXr+qsHJHYIVuTADmCTgBaZfP6G2OEFomXkxrm1LS9IuSPmH+VxRF1ENnWtjXYnqjLDzl4Xz6q21BxRZ+kqbWxjbK9Fith6pdryolaQNZ8RnAD2ithP617qIFugzplT5FyoyHO7pxwUEYCyrZ9oH4rgUA2L7OqGYn3m6ByTYAImfwKksOLIYmCFcuLbSvOEfEqKRRIQ/d2YX7UR10pypUAsDJMFrd4X28432kkcxpNLXPJ58J+v2niwQXlbatJhV7Ixr6aMj2ot6tIRFdTqVGJ4fLAbPmV2n4ehLGKSEeaZ4bbLcolFi9BGhrfN9B6d/ZvmMFRo5mP+Hzb6AuOcWnsUEU/aA7V2LCFSE6kU1SQLmJ1RkkRyhlsICqwmiO9U0Jkj28XwbuQbiOstXVOmDvKdk70KEegtytVZ7cX9/gsGxfEeKv4OLoaaf6SpngWFa+RMKWz9OWeIbU34iAgeFesmT23KCO18RsgtxGYrLusIrAzsnGqbaDiJXV3a0n1Q8Ox4ChrggpAhpNU8=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CY1PR03MB8121.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(55112099003)(56012099003)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aE54clJOMDRxemUxT3l6ekJaazFaZFl1MFMvUHhuQ05lNURxVlRUL1krY2NU?=
+ =?utf-8?B?cEJvZzdySFpPNG0zeXZKbSt6WTZYa2o4RWpwVUNSRTlKNTZzR3B4TDVUd3p1?=
+ =?utf-8?B?RlNweTV2TFJWL0FJa1JOdGhXdTdPTWxPdGxpVkpYZHRtaDdmdGZxWUZlZUNp?=
+ =?utf-8?B?QnZnWVhsZUMrZXNmeGl0U1UrcE14WEYxeWxVSDhPZXQ4UE81Nkkxdm5lODdR?=
+ =?utf-8?B?cGE4YVJNeHNobllZMWd5Sm5CREtxWmJ5aUNSWnJtclVZbG5ISTlGUExiaC9N?=
+ =?utf-8?B?cE5ZSTQ2RDllUUpySjNpVTFxMzZETm5XVmNnM1dUZkFmQ004bXlXQVpnRTZT?=
+ =?utf-8?B?WEx3UlpxWWZDcVhzNTh6ZDJURTRvYmZvZjdtcGE2MTRZUTE5TytoTkYxSWly?=
+ =?utf-8?B?MWJVSjlDdDBvOUhoU1FwdzBCRHdBVWdnZlF5bWtRUzN2SU1CbHMyVVNPU0Rl?=
+ =?utf-8?B?d0RiQmpIczJ5VjVIRVhZZ1ZnVnN5eDBXN1BhTjJnSXE1T2xSdCtzV3pENUMz?=
+ =?utf-8?B?QjliRGx4b1JlaWFDTUNCQjZyMitLQTZ6TDNUZDB5ZW9vRTNrR3ZDOTkrZ0Ji?=
+ =?utf-8?B?WFplZ1NSTzR6Y1FSaHVVZjVQZi84bkhoVE5TTE0vdlNBTFM3Y0JXaEp4VHUr?=
+ =?utf-8?B?NG1PUEdmQWo5Tmk4VTcrK2FIZklZdWpYdkd4cmVrTkJjaVc3bkV5RHJaN1Fl?=
+ =?utf-8?B?R1BsamhML1c5LzZmV2tFL3U0VUpRSWZpMXNOR3NTdDFRRDdMRFJJYXRTQkRn?=
+ =?utf-8?B?d1NCeko4ME56VkExcU9kL3VyNjBjbEljMG1pZ1ZKcTZoNlNTNWtZN1lscFl6?=
+ =?utf-8?B?NnBOdjV3U1ptSFJIZEpaL1lPQ0lPM2d3N1dBdXBpV2VRbFlyY1ozcklkUno2?=
+ =?utf-8?B?ZU82U0hsMWtPMGhmaWs3MlpNeVVIVTlLbURvMWwvd3Y3Ym9vSFVsUlFGdHha?=
+ =?utf-8?B?NGdITE1OSjJYZEpEMGZiRkNhVGtBblJuS0FFRTE4YlpVc2lYRVBsVWFvNWpj?=
+ =?utf-8?B?cUhNRzJEVm92TTRyTUI0dDJOUExvWmdRTS9mazN0bXZTZHVaaGtRdEh2bSsy?=
+ =?utf-8?B?d3Q5RVU1QW9SajdyWHJmOWdvSWw3RXdyakgzaW05WGJjckV0Z1lURnJORUky?=
+ =?utf-8?B?VHlRRitnUUU1bGkzQlh4djBTUm9LUnc0WHNtWXhYcjVEYUIxcjY3TEhKSU15?=
+ =?utf-8?B?VVU5V2llRUtTNEFZZW9tMXpyM0lsdDJ3Wm5jRENJaENhbGtMWGp3L2xTNXdY?=
+ =?utf-8?B?clkwb0VkNy84R04wRkR3cTQyR29IenNzeERtcGx4ZUd1MWcyTmlzTmd6Mlc5?=
+ =?utf-8?B?K0ZxRWJaQndlcXNOV004S1Z4TzRhNEExSnZvelowcDhxajBERG9tclpLUmN2?=
+ =?utf-8?B?YjZqZTRCOU91Mk1SVzNUMTNaaTExYTArdW5ZeExuK3Y3OVhBRmFnK3g3TGZi?=
+ =?utf-8?B?OWwwQS9rajhjVjduemdRRU01Wmt6bklZU09aOTIxQ0hGeUNrUkdTeHhtdFps?=
+ =?utf-8?B?dndTQnVPcWNjaFZ1TXhVUkFMVG5WM2hwOVByaFlvS2JOakFRYTh3NzY0dnlY?=
+ =?utf-8?B?ZDdueHJJU0t1TDU0Q2Y5NDYwWS96UVEvMTN2TlIzMmFrbXEyNWxyMXpYSys5?=
+ =?utf-8?B?a2o5TGZWaG0yZzd6RnVWc1pFUmdRSitNWEIzQ2Y4Q1JkUGEyMnp6NDJSVHli?=
+ =?utf-8?B?L21rVXJHc2JmUVFxSThpbGNybFByd0djVjBlZ25CZUpsZ1VkWlBRaHMySHFD?=
+ =?utf-8?B?ejJkSFdSc1dwL3JLYkFOVDhLbFU1cXFCQjJ3VnMxWWlPL0hXVTJncmRvRWtr?=
+ =?utf-8?B?VXZQVVhqcGFjeFdwT0hTYnNObmx6a3F3eCszSTVWVmM3VFNVUHZ2czNvL0xn?=
+ =?utf-8?B?Z1FKWkhBUmdUZlRFeCtNa0wwVXpmbFRUVEFXaDZId0FYUDFFZGE0ZUdITVZn?=
+ =?utf-8?B?UVhPZ05hYTBkNnJIZ2hkTTdqR2hJaDUvU1RlTTllcHArZlk2QjZZaXF5aEE4?=
+ =?utf-8?B?NjVOSituZFdOcFpqcXBlUTBkR0k5aXcxYmtuc0VCbGRLSDh0eUNGQ0g0NjV3?=
+ =?utf-8?B?M29TNVRrMk1hOS9aZTYvbDEwK0V4c1NJZGd1WWxkWXZ6WnVzV3ZJdWVSaUE5?=
+ =?utf-8?B?ZjE2c3pKbEZEU3dHdjBpeUhLaE5JMjFsaHBHUW9JYWRERTZ0OFhxYXhTaHR4?=
+ =?utf-8?B?UHNpbzlRL21waWRZV2RlN1hiTFBDZFFOWGR4a1NXcGtEUVNiWFVmRFAyZURx?=
+ =?utf-8?B?SGJBRDhiSVRxUXEwbWZZYkcwYzhsTzZoWFpKUkluSmhoRjc1Ujl2UnpGZllo?=
+ =?utf-8?B?UktaSVh3dHloa2l6ZTFnYjRIZ2lnWXBsWUZYRmpEL0FZTFV3MEJ5Qlo1WEZs?=
+ =?utf-8?Q?d+VqB/rQO+Pqm04o=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 70f34455-2e04-4996-c79e-08de9ac343df
+X-MS-Exchange-CrossTenant-AuthSource: CY1PR03MB8121.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Apr 2026 07:47:38.2790 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: FmZMXErmEmz5Niux4PPMUWCZCtIJ+zp+903iE2ZYRM7s/H7tDY2JfIjQFidUOqAgBwwvbXHPm2pIVqbYr91D57D2ObtvH1dej6lzGZ8mRtA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CHXPR03MB989196
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,117 +155,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi David,
-=20
-Thanks for the feedback.
+Hi Dinesh,
 
-We will follow your suggestion to move the grandparent_dev declaration
-into the else block where it is used. This change, along with the
-other minor formatting/cleanup adjustments, will be placed into the new
-patch 2/3, so that patch 3/3 is limited to the functional fix for the
-parent rate lookup of fixed PLL clocks.
+On 4/3/2026 11:43 am, dinesh.maniyam@altera.com wrote:
+> From: Dinesh Maniyam <dinesh.maniyam@altera.com>
+>
+> Unexpected behavior and error can occur if FPGA is accessed in unknown
+> state.Always checking with FPGA in user mode is required to ensure
+> system stability.
+>
+> Signed-off-by: Tien Fong Chee <tien.fong.chee@intel.com>
+> Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
+> ---
+>   arch/arm/mach-socfpga/misc_arria10.c | 13 ++++++++++---
+>   1 file changed, 10 insertions(+), 3 deletions(-)
+>
+> diff --git a/arch/arm/mach-socfpga/misc_arria10.c b/arch/arm/mach-socfpga/misc_arria10.c
+> index 7e0f3875b7c..6b25ab917ca 100644
+> --- a/arch/arm/mach-socfpga/misc_arria10.c
+> +++ b/arch/arm/mach-socfpga/misc_arria10.c
+> @@ -13,6 +13,7 @@
+>   #include <ns16550.h>
+>   #include <spi_flash.h>
+>   #include <watchdog.h>
+> +#include <asm/arch/fpga_manager.h>
+>   #include <asm/arch/misc.h>
+>   #include <asm/arch/pinmux.h>
+>   #include <asm/arch/reset_manager.h>
+> @@ -126,10 +127,16 @@ int print_cpuinfo(void)
+>   
+>   void do_bridge_reset(int enable, unsigned int mask)
 
 
-On Fri, 2026-04-10 at 11:07 -0500, David Lechner wrote:
-> On 4/9/26 9:13 PM, Weijie Gao wrote:
-> > From: Sam Shih <sam.shih@mediatek.com>
-> >=20
-> > The refactoring in commit 00d0ff7f81bf ("clk: mediatek: refactor
-> > parent
-> > rate lookup functions") introduced a regression where fixed PLL
-> > clocks
-> > using mtk_clk_fixed_pll_ops are not properly recognized as valid
-> > parents
-> > in the CLK_PARENT_APMIXED case.
-> >=20
-> > Fixed PLL clocks are implemented using mtk_clk_fixed_pll_ops
-> > instead of
-> > mtk_clk_apmixedsys_ops, but they can also serve as parent clocks in
-> > the
-> > APMIXED domain. The parent lookup function needs to check for both
-> > driver ops to properly resolve the parent clock device.
-> >=20
-> > Add mtk_clk_fixed_pll_ops checks alongside mtk_clk_apmixedsys_ops
-> > checks
-> > in mtk_find_parent_rate() to restore support for fixed PLL parent
-> > clocks.
-> >=20
->=20
->=20
-> > Also refactor the grandparent lookup code to extract the repeated
-> > dev_get_parent(priv->parent) call into a local variable to keep
-> > lines
-> > under 100 characters and pass checkpatch validation.
->=20
-> This sounds like an unrelated change. Let's split that out into a
-> separate patch.
->=20
-> >=20
-> > Fixes: 00d0ff7f81bf ("clk: mediatek: refactor parent rate lookup
-> > functions")
-> > Signed-off-by: Sam Shih <sam.shih@mediatek.com>
-> > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-> > ---
-> > =C2=A0drivers/clk/mediatek/clk-mtk.c | 20 +++++++++++++-------
-> > =C2=A01 file changed, 13 insertions(+), 7 deletions(-)
-> >=20
-> > diff --git a/drivers/clk/mediatek/clk-mtk.c
-> > b/drivers/clk/mediatek/clk-mtk.c
-> > index 4adec4457b4..26db60dea7f 100644
-> > --- a/drivers/clk/mediatek/clk-mtk.c
-> > +++ b/drivers/clk/mediatek/clk-mtk.c
-> > @@ -207,20 +207,26 @@ static ulong mtk_clk_find_parent_rate(struct
-> > clk *clk, int id,
-> > =C2=A0static ulong mtk_find_parent_rate(struct mtk_clk_priv *priv,
-> > struct clk *clk,
-> > =C2=A0				=C2=A0 const int parent, u16 flags)
-> > =C2=A0{
-> > +	struct udevice *grandparent_dev;
->=20
-> Putting this here is fine, but we could also declare it inside the
-> else scope instead since it is only used there.
->=20
-> > =C2=A0	struct udevice *parent_dev;
-> > =C2=A0
-> > =C2=A0	switch (flags & CLK_PARENT_MASK) {
-> > =C2=A0	case CLK_PARENT_APMIXED:
-> > =C2=A0		/* APMIXEDSYS can be parent or grandparent. */
-> > -		if (dev_get_driver_ops(clk->dev) =3D=3D
-> > &mtk_clk_apmixedsys_ops)
-> > +		if (dev_get_driver_ops(clk->dev) =3D=3D
-> > &mtk_clk_apmixedsys_ops ||
-> > +		=C2=A0=C2=A0=C2=A0 dev_get_driver_ops(clk->dev) =3D=3D
-> > &mtk_clk_fixed_pll_ops) {
-> > =C2=A0			parent_dev =3D clk->dev;
-> > -		else if (dev_get_driver_ops(priv->parent) =3D=3D
-> > &mtk_clk_apmixedsys_ops)
-> > +		} else if (dev_get_driver_ops(priv->parent) =3D=3D
-> > &mtk_clk_apmixedsys_ops ||
-> > +			dev_get_driver_ops(priv->parent) =3D=3D
-> > &mtk_clk_fixed_pll_ops) {
-> > =C2=A0			parent_dev =3D priv->parent;
-> > -		else if (dev_get_driver_ops(dev_get_parent(priv-
-> > >parent)) =3D=3D &mtk_clk_apmixedsys_ops)
-> > -			parent_dev =3D dev_get_parent(priv->parent);
-> > -		else
-> > -			return -EINVAL;
-> > -
-> > +		} else {
-> > +			grandparent_dev =3D dev_get_parent(priv-
-> > >parent);
-> > +			if (dev_get_driver_ops(grandparent_dev) =3D=3D
-> > &mtk_clk_apmixedsys_ops ||
-> > +			=C2=A0=C2=A0=C2=A0 dev_get_driver_ops(grandparent_dev) =3D=3D
-> > &mtk_clk_fixed_pll_ops)
-> > +				parent_dev =3D grandparent_dev;
-> > +			else
-> > +				return -EINVAL;
-> > +		}
-> > =C2=A0		break;
-> > =C2=A0	case CLK_PARENT_TOPCKGEN:
-> > =C2=A0		if (dev_get_driver_ops(clk->dev) =3D=3D
-> > &mtk_clk_topckgen_ops)
->=20
+mask is unused on Arria 10—please mark it __maybe_unused so we do not 
+trip -Wunused-parameter while keeping the shared API.
+
+Example: unsigned int mask __maybe_unused
+
+
+>   {
+> -	if (enable)
+> -		socfpga_reset_deassert_bridges_handoff();
+> -	else
+> +	if (enable) {
+> +		if (is_fpgamgr_user_mode()) {
+> +			socfpga_reset_deassert_bridges_handoff();
+> +		} else {
+> +			puts("Bridges: Failed to enable because FPGA is not ");
+> +			puts("in user mode\n");
+
+
+Single line puts is preferred
+
+Example:
+         puts("Bridges: failed to enable because FPGA is not "
+                 "in user mode\n");
 
 Best regards,
-Sam
+
+Tien Fong
+
