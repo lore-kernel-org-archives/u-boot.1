@@ -4,92 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D383F4213B
-	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 19:27:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54C03F4213B
+	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 19:33:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BD2683C2B;
-	Wed, 15 Apr 2026 21:27:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id B1BE083C2B;
+	Wed, 15 Apr 2026 21:33:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="qL07nYpJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qGqeQmJ7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D70783EEF; Wed, 15 Apr 2026 21:27:45 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id 1E6258407D; Wed, 15 Apr 2026 21:33:28 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C473E83B99
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 21:27:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AF8583B99
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 21:33:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7dbd08144deso6507470a34.0
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 12:27:41 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7dc51aa8926so1824375a34.3
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 12:33:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1776281260; x=1776886060;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=Z9pHAyC2MSXCOGZS4EM/jAg/9KPWyZ8FeYONgRLWmsc=;
- b=qL07nYpJywdssicWDqhc33GoscRks+qYp6ocWulbtTHLANp0jZfSqsQNGVe3gU/r3x
- xOPTrdwX5vK90Fb9scBG28PUowMhL7ezCw6wlpgfYRB+3AGJ6KV2AGaJ/vVAneyviGLh
- oeQ3fkIATPjZQdL5ZOOpW2DJVhIlzQTUorv57mZpTjdWn41Be5dHmaXvY3qH5E+ZR/OH
- SRrrAdNHUgmb1wenFI0YkCjA3Nw3e5lPC5gs+VzE3ai9qq6DbQtafmZ/e+tclDmec2+D
- HPlItjhufeVC7IIzimSxbRQYPChSEMnk2/S8AD/2t7R6WhzXx/xfL1DDlt6tu6GBSqyY
- afLg==
+ d=konsulko.com; s=google; t=1776281604; x=1776886404; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Frv+66aXbtLUBQYcNYnI9rJgeRrb0GPOX1He9elU56w=;
+ b=qGqeQmJ7iqm91tHz4cvI79I3ggwZz3Revpp5Dlys3PZORKuL2f7+8skwyxwnH5GLsL
+ KiB4TjSPp1dfJTzKWeOqa7fmEmSxeMK4wIbBSUzwKA215Lb706jAQD1PRrDVCJyf3Sa5
+ KxHcCnSUgxcP+xoLosvICu+nhbo+C1+HRPbYQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776281260; x=1776886060;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Z9pHAyC2MSXCOGZS4EM/jAg/9KPWyZ8FeYONgRLWmsc=;
- b=EWAKrcMs5be6D9KD5arX2G1/U1g9rFJe7qaLiPGkELBUbQwNORo8wK/qegRn4gt5S8
- US2afe2K+/GnxxVyAZI/d2cANNkJ+XK+fvqpR9VBLfM+S3fiGMMNredYuDeXjhRNGEIO
- TBmqdyCJ6PSTDR5w+6rpSanNl5oQL8Ml006dK+rS2PZ28JHNJNEF2fxNIT8me1B6hFnC
- V9gQo66spvw+znqoULbZgjMgMJpBrZOT/tB23bLNZUXD8ES9IJnM8t1rWkIVR5dvJ1ei
- 3DT+AZ6Wf+cT3DzRN1jmEpt9mT/JG8B58G5zXymjFCI5KkaYznQhnHtX2FgBuDabzcAE
- x9Mg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9JUQgkzT4FTA8CnKZwduhvl2f4I73qhpymdjq9iBkWOsadyJLaEws5S13HVEpkuwa3msscvYY=@lists.denx.de
-X-Gm-Message-State: AOJu0YygSP2x0AauNb9z1ElFygAYz/eHAXGjU+QQgOToZc5VWdHGjTBg
- pOWkoXhsaJ5y2q171MjC+pij5IALHNXfSsNYlXeiZqBBIwVNu3ceGpXaq7B9aJKgcbU=
-X-Gm-Gg: AeBDiesR9aZu1R8j19zsjcQPQy0ko4lH9sQz784hrTmRSwU+N5n+jlGNf/5/vqcQBmP
- NJ6k0MCUiGS539rZja4PQEws9vzqEWVzjfdo/ZpkFDgW71YiY3ce1pkJoRG9wCjwaeSCMZ2iM/o
- bn4kuiNYwlorl32jBcJX7b+Ps0rd0pXmZ8QwAhFJVBDE5C40Hb10y4MArW+V26cb2u/jT5Wk66L
- /VFFaiSkaQx55IG1u5dXPeQHblg7UtvHbG7RM8P9Co5+GgIif9WaY6Q5FFCrrfhjVmsnbNGyVbk
- CAUmx5v1UjM6JTj42QRC9F/N91fEVoC+o3vAGv9LLJ1d2t2oEQsKqx1bzGGZnfgr/9ohyjeBT09
- +JMBC3yKP049zp5qNymUcDxrx5uc+b/eWL42d1oGuyz5jfqwQvD9je56dblgvfdiPGeX8r2rCma
- vdC/zygxbOUu2IdqxbkbTEu5Iw3IjwEGUsy2puKiX+OqOYcY1B4h0ZADE6DtgrTRu+7oZ3Q05nH
- aYhRzVrfa59
-X-Received: by 2002:a05:6830:8290:b0:7d9:f50f:96cc with SMTP id
- 46e09a7af769-7dc27c643e8mr13764339a34.2.1776281260513; 
- Wed, 15 Apr 2026 12:27:40 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:5ab6:1e6d:2337:887c?
- ([2600:8803:e7e4:500:5ab6:1e6d:2337:887c])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7dc76b95a2csm1981183a34.22.2026.04.15.12.27.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 15 Apr 2026 12:27:40 -0700 (PDT)
-Message-ID: <0d7ba570-335e-4de7-b272-7152b540def2@baylibre.com>
-Date: Wed, 15 Apr 2026 14:27:39 -0500
+ d=1e100.net; s=20251104; t=1776281604; x=1776886404;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Frv+66aXbtLUBQYcNYnI9rJgeRrb0GPOX1He9elU56w=;
+ b=RK/f6b5mCRqqkEMVNz5BroD3yDab60HSfsHN2ox4IxIZu83KsrT2DeO3B5TS2gvbRr
+ S2efB3VqGqhSpBTdDdMuNsdO8POzokvWAOElEsS0Cevrfy6haRZ2JYkaRU1Jg/Jwjmuk
+ 58YCUnFWym2Ng0eOJT5SnOBn+B0I+bj0SHyzHSjD2B1vfWQZ+Ep1qy5pTyCgZxaBfsmY
+ UX8cB1OHVdhjwm9H6Z5nKXavUSHr+zlgSyF1M6pEV+DXDRwzjcJuA0gclR5HmQSyONNa
+ D+kNIubzLXnLOcCCAewHavD10VXd7729+pKYJK3kWlzeBsQPL4Xqohq99EQ/Vsvh4gjS
+ /3+Q==
+X-Gm-Message-State: AOJu0Yx0kqJ6TeSgUpAdzS6ZbsUo52mcBzKBoqmHZZu9d6BMw0hZ5O2l
+ HfVbi8Qd4inq57nn9w8UsAaU2nR5mFs2uYmNsnbz0VN4N4m4aJzZFTdDlvWckL0eYtY=
+X-Gm-Gg: AeBDieszS5/1GAViYIDDYS1Vvbn+56JCiNv2AEO6IPvqbSWvL5vlQUi6OJA1W7fDMco
+ NfcDXTUt0zFQp/pg7/acsrl3EUQ+iMQIIivYEu9nqMBOEzAkv302xJsCXbJdA1HK2pSI4BkGj+2
+ Qs9ZCfToKWHSPXbEMly1ngLMkKyXCvoUI4VqDx6BIUrHB5q5rTH8EAK71EurSaPFOlbYwtsL5jo
+ L1KMHAxnqOaDU4La8KschbEn0YUkVID/E+MejGI65auWkgRlQxzZWx7qeT8duzElIgU4kkmyken
+ qK3kmV/HnzotGbfOv1WnK1dGEEp+iQ1cx3YLT62MpgyHZI7o5Ry5GwXG4n15xSXtzO2R5N12+ve
+ Tc0PWKfHlWEUJ6qfTR/uvbIjHknCfghxh8cqSzQSqaVB9gn8r76blsFqKV1Rh/JqimvB33KK4ts
+ Wd2gANhlCj6knusg2LIvferk/Jc5JNzZ3gSpxJ1jUIrBcd+kR0OSsoZ7bPc1ughSja2DbQ27x5B
+ qPK7Azf4SWG6l0wRVcs4sb949NHczlOTa+lDCgLzSQQkT3LWuv6AccjgbIjTQ==
+X-Received: by 2002:a05:6830:828e:b0:7d7:5113:f83a with SMTP id
+ 46e09a7af769-7dc27e4ed34mr13244024a34.25.1776281603705; 
+ Wed, 15 Apr 2026 12:33:23 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7dc7746b5a8sm1686261a34.6.2026.04.15.12.33.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 Apr 2026 12:33:23 -0700 (PDT)
+Date: Wed, 15 Apr 2026 13:33:20 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Boon Khai Ng <boon.khai.ng@altera.com>
+Cc: U-boot Openlist <u-boot@lists.denx.de>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Prasanth Babu Mantena <p-mantena@ti.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Chen Huei Lok <chen.huei.lok@altera.com>,
+ Kok Kiang Hea <kok.kiang.hea@altera.com>
+Subject: Re: [PATCH v1] drivers: cadence_qspi_apb: Add 1us delays in polling
+ loops
+Message-ID: <20260415193320.GA1906598@bill-the-cat>
+References: <20260312114419.21163-1-boon.khai.ng@altera.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: mediatek: enable fw loader support
-From: David Lechner <dlechner@baylibre.com>
-To: Weijie Gao <weijie.gao@mediatek.com>, Tom Rini <trini@konsulko.com>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- u-boot@lists.denx.de
-References: <20260410015311.4066075-1-weijie.gao@mediatek.com>
- <d23fec41-0eeb-489f-8c1e-5bb4b974139b@baylibre.com>
-Content-Language: en-US
-In-Reply-To: <d23fec41-0eeb-489f-8c1e-5bb4b974139b@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="AIx//JifsDvBM4C7"
+Content-Disposition: inline
+In-Reply-To: <20260312114419.21163-1-boon.khai.ng@altera.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,56 +109,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/15/26 10:02 AM, David Lechner wrote:
-> On 4/9/26 8:53 PM, Weijie Gao wrote:
->> Enable SUPPORTS_FW_LOADER to allow the mediatek platform to use ethernet PHY
->> drivers with fw loading.
->>
->> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
->> ---
->>  arch/arm/Kconfig | 1 +
->>  1 file changed, 1 insertion(+)
->>
->> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
->> index 03416c55265..aee8e74dace 100644
->> --- a/arch/arm/Kconfig
->> +++ b/arch/arm/Kconfig
->> @@ -868,6 +868,7 @@ config ARCH_MEDIATEK
->>  	select SPL_LIBGENERIC_SUPPORT if SPL
->>  	select SPL_OF_CONTROL if SPL
->>  	select SUPPORT_SPL
->> +	select SUPPORTS_FW_LOADER
-> 
-> I don't think this is how this config option is meant to be used.
-> 
-> Based on [1], it sounds like we just need to make sure CMDLINE and
-> ENV_SUPPORT are enabled in any config that also enables PHY_MEDIATEK_2P5GE.
-> 
-> I don't see any defconfig that enables PHY_MEDIATEK_2P5GE though, so
-> I'm not sure there is anything to do here. Unless it makes sense to
-> enable this in one of the existing defconfigs or add a new defconfig?
-> 
-> [1]: https://lore.kernel.org/u-boot/20260310162610.1163833-1-trini@konsulko.com/
-> 
->>  	help
->>  	  Support for the MediaTek SoCs family developed by MediaTek Inc.
->>  	  Please refer to doc/README.mediatek for more information.
-> 
 
-I thought about this some more and I wonder if we need to do something
-like this to make it actually work correctly though...
+--AIx//JifsDvBM4C7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
----
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 4e6a0c6a1b6..ed37daa28b8 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -73,6 +73,7 @@ config DYNAMIC_CRC_TABLE
- 
- config SUPPORTS_FW_LOADER
- 	bool
-+	default y
- 	depends on CMDLINE
- 	depends on ENV_SUPPORT
- 
+On Thu, Mar 12, 2026 at 07:44:19PM +0800, Boon Khai Ng wrote:
 
+> Add 1us delays in busy-wait polling loops to reduce CPU usage, minimize
+> bus traffic, and prevent watchdog timeout during QSPI operations.
+>=20
+> Three tight polling loops continuously check hardware status without
+> any delay, consuming excessive CPU cycles and potentially triggering
+> watchdog timeout on long operations. Adding small delays allows the
+> hardware time to respond and reduces unnecessary register reads.
+>=20
+> The udelay() function includes WATCHDOG_RESET()/schedule() calls that
+> service the watchdog, preventing system reset during extended QSPI
+> transfers.
+>=20
+> Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
+> ---
+>  drivers/spi/cadence_qspi_apb.c | 3 +++
+>  1 file changed, 3 insertions(+)
+
+This introduces a failure to build on socfpga_vining_fpga
+
+--=20
+Tom
+
+--AIx//JifsDvBM4C7
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCad/n+QAKCRAr4qD1Cr/k
+CsXnAQDpbEaX16YCZYW+KllBsrSlTdmWkZo84JIkTeschMkBawD/WGuT8sCRWbDG
+qj1AX9m3OPL52fAf3QF0hTJaGddE7Q0=
+=qfVq
+-----END PGP SIGNATURE-----
+
+--AIx//JifsDvBM4C7--
