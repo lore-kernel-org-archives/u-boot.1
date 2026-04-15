@@ -4,88 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED1FCF428F5
-	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 20:56:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3879BF433C8
+	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 21:21:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 391F38407D;
-	Wed, 15 Apr 2026 22:56:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 883D5840AB;
+	Wed, 15 Apr 2026 23:21:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Man+8qOO";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="paEPfRFo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC9CB8407E; Wed, 15 Apr 2026 22:56:31 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A50AF84105; Wed, 15 Apr 2026 23:21:45 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CAB983B99
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 22:56:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-662f30d3f1fso4139192eaf.1
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 13:56:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1776286587; x=1776891387; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=5QvlajjKIiOAipAYL4AKUMRw74HxcSCGaCNdQ7nNjnw=;
- b=Man+8qOOLloT/uuDV3N2PkuE57xlNbyxi3e5eFs+IPmrd3nQTtEOMPVHkv6rW7iS9b
- +TTMvnTDuITM2fKKq8S5GEI/zNgzBMHMsm0pyCVOyR7ZwA63SyNp1SxXB96WGzhzarB9
- isEA3CYzEutrUIcTxQDvrQ4j0JVH7c4Ckf4Rw=
+ by phobos.denx.de (Postfix) with ESMTPS id 6525783B99
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 23:21:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id E8CD13F7D9
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 21:21:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1776288102;
+ bh=Xw5mhYPrimQh/LGUkvcKTME9zaL2+LOQ5mIeLggtQHk=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=paEPfRFoeDxqXngjvP+C0i+/DCOzuA50djrfBQg8rxjq9lxVBN4WbXauCuc/a+dNO
+ JR52H9HMIb45pLdJUDId3J11/wIu+H5pWgvVW0tnZl6fcu69cq6KX1PEgJkEgqSit/
+ LDfPq7BuWYmGIrlk6SoIcYvWfakfXRVAQt+p4fszGfPKcHcZNXrKl8DKVk3xa4DZNN
+ T2Ez7RTWrQF0v95YKaHSzhc0dC/SlMg33nRJZST2Nc7Oh2iTvtQtguG34/9MsrBP9T
+ qTGJTcNEp7Qko0FCWRpd3sK5fZTPRc8yRfLaRlb4fYFy+HdlcNZdkVjZy/3biUD5IS
+ YoFyKOOgPWSqAsEmXUmKqQ0URKqyx1PDqhXN8cOO+QkZ34tpdmfTR9gckHglav/tPc
+ HzkcnfkhTymi6afWbfANxt0kGLO4EwHbOTfF0ORmn7wG4BbNsyUQTxw2Uh3HqSxr8e
+ MWm/H1K60T/QgS9Nb9XEC2zNtLt5uH4cuQ3Qb+j7Yl3oksbSRESUEc6GH4HzFmXhXJ
+ V1equbllnEkPi/m3KMi6/ZxU6qynSbpGu+ycJ17ZhZA9BJ0UZOM6KZP34R3ajg7gUe
+ 3pr76WiwcXceAToJ951bOUp+Wn07+sYSsHoWQGdEblwbuR//QhaT+d35NPfBlZWZhS
+ /lFoISBZy4w4Kt7kEfuql+/s=
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-43d177fb157so7050010f8f.0
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 14:21:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776286587; x=1776891387;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5QvlajjKIiOAipAYL4AKUMRw74HxcSCGaCNdQ7nNjnw=;
- b=FusNwbAOGmRTwzi0cYgVUjyn2VQzUzHY3RFoTFpKEQ5XpFqYxw9/Wb8plHF+pk9V3f
- cm/4IHK3HI62cLkP735jh2mccLty8pta7bTFwPLjO1j0rMaWh9NkxG/Yj0cSZmflGNeK
- 7iOCdIKlbovFQaPBo6UCa2DhEFt6zamb0k5Uysvs3Y3zFCDCo+f/5Xva6P+P5bpkWQO7
- Zbf7EXJmRSQIe61jdtuHFqZjOvikXqOCcgSUi3n6rS4r60ZUbhZDyW1WNqvyt7JWcQss
- hkHazeKYJombaP2BamiIxJC1zJXhIvo+l71PdDszVOpFsoLQNNDVDLrme9OgwJ2f+hu/
- zsaA==
+ d=1e100.net; s=20251104; t=1776288102; x=1776892902;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Xw5mhYPrimQh/LGUkvcKTME9zaL2+LOQ5mIeLggtQHk=;
+ b=rSr1mRwJfWiAznHuW9yl/rnmaYqA+dkRdKXaj1m48r4HyU9uF+sPT4JXc4/BXC9G3f
+ LLX5I5FBsVBWRX4rfRkOfVo6M7O5D52OEjVlcB9JHLeMFiv/e/hm2YzvponljIuQQO2g
+ dZQ0pGMlEVv4QnLhayqO/Mp7HbFJq9L7mzDsDCx5fcJeWMzKnkYEiV6b1YVzM8DhcXY6
+ BizlxxjvpP0h4cvGsww4QsPdikhu2DST/ASgIUp+Hk3VWf9O8QgHJCagqmegyXlCMafI
+ /nw51Hls0CQrU5RaSvu8GmZ/4H85zHn1aF1kNfexsRDOIUYJhgJsEoAaQ3bvN7yNElZl
+ h77w==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+w912RzDHxDphz0xUW4zRXLHf4fTyiOJ89jQw8UJLxzW72y5IxzBuxW0+nEpLgRK+/+ci/NMQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw30LJBvCdpfkM2aNYh4c/4lc1/rlBf4SiBsPGvztQD5I67vbKj
- OdFRbcLs5vAE5DeJGAt2jK6Kx5TqoXRpsT57MWLMY6kCLAtvD6Tfcdg8Uu5oE8OxRY4=
-X-Gm-Gg: AeBDies3P47J/xr/B2YJMAj4Pno36roMbTdLIKJ+z50dGS16R7OzcCSbDXvU9Tml53b
- giRak0PQUmIE/ujpb5fiasOCE7olMB5BxQ/A/539kkIo7aZTovJap3wNAczO2jM1pyiTPLJ2/zq
- 0pvN0oRliOSZgOcnsg0YMDNixAZQj8GCDOkmeTaTfi8IPgMaJdDCh6JizklG+rVdrfDHoetaWD9
- jIwy+MW4jcKBNi4iGxBgbzft2QJfHW39OslEapJMEWNMgFLJVwALc1MtletLqcr/M8qLQZuDN+7
- 5gAT/uPYGYvXu6KU+uwMx6dCwh+OF1T4uyMltrpELMmoOFa8RhGLzm6ifVkBc8aP0qxcqd7H8HK
- dd69rjwc+FCWpWgqA8vbByjzZusH9B++rKqFp8CJe/OBcyovL+avMT9iNZyiAqG72LRxc8coo6B
- qo/Ggs4ctP6VHSJgQDCGuBzdgwHlEfZIKMJqPPo4U9cKGPHL2OIeIqa2NQWXJlIH28Y2A6xRF6l
- Zkv69/zg/px6tP0eUMq/Kvgi8JQiSLLzxLM0Qtq6nfbC7wDd9Q0O7Coaxgo4f3aYuxQsn/m
-X-Received: by 2002:a05:6820:1519:b0:67d:e78f:38d2 with SMTP id
- 006d021491bc7-694235fbd9emr568633eaf.25.1776286587226; 
- Wed, 15 Apr 2026 13:56:27 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6932b374a0dsm1497544eaf.5.2026.04.15.13.56.26
+ AFNElJ/d3qML5zeyIEs8CiFD3895QMVTHvanQvBceFA8GcJLgw0mbdaKaIxxadVrQG6dlsonWiNZedA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzzoixa5EF3g/T8XIVVaCkeUUuOQj7EdS2DqXpvkSY3w+NQ3+xN
+ cggTCHeX9A999JqSwQIgksNO1ND6DL0rtC6ClXz1ikenNTfOyLmagL88oA/IuIyLmhavz6kaBhP
+ LNJpsr0bCP0ONaVdWBsmewjbRMguvwX7uFGQBvoIaJ8J+pwGy7VyR2f4jZmFFfsSig827KZw=
+X-Gm-Gg: AeBDietHZHUUrc6HshF4pEABJO49VXjA/VbVSFygHZwHQ9V7VBaGTXFot2GwSBNLV7D
+ AUjfVpA+oyFCdBAr+oVyKpWb0auJmYM6IxJ/LLAKfViitk8ADgVaCqd7X22++YuwJWl/EF80gqf
+ gkRxbMi8u+w8gwTDALk4LQTzg1yJke7Xk+oC17EWPkydgj0E2pFu9n3lJR82pJvq7GYAZSumVx9
+ 7b7OFkeaBZvUdimOQ+Losuymb1aTt5aINjxQLtPHlNmqowiIWk/MegmtG2tv4Octqlr8ky5N7Mc
+ kpfPMQIL7oO5CGWTXvNnTOxlwgs5KL6+1BZRDJUNGK4QS8PGm2d/hiNKLtWjVPdSAdbiKH3atH4
+ wH21D0mFxQkAHFkYDGhaSI8jllN3JtAxIoyBLBkBOgAfJ0OtHoVpRtRdKajccFepZYivQCCZczs
+ VYgYG2vcce4vNjvsvKrGU1FK2ICetnQPw2MpKtaaY3ia6BNxkOtJaaxNkE7bHE
+X-Received: by 2002:a05:600c:19d1:b0:488:c282:e77e with SMTP id
+ 5b1f17b1804b1-488d688608emr300761765e9.28.1776288102422; 
+ Wed, 15 Apr 2026 14:21:42 -0700 (PDT)
+X-Received: by 2002:a05:600c:19d1:b0:488:c282:e77e with SMTP id
+ 5b1f17b1804b1-488d688608emr300761455e9.28.1776288101990; 
+ Wed, 15 Apr 2026 14:21:41 -0700 (PDT)
+Received: from workstation5 (ip-176-199-115-125.um44.pools.vodafone-ip.de.
+ [176.199.115.125]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-488f1e87e93sm90744115e9.11.2026.04.15.14.21.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Apr 2026 13:56:26 -0700 (PDT)
-Date: Wed, 15 Apr 2026 14:56:24 -0600
-From: Tom Rini <trini@konsulko.com>
-To: David Lechner <dlechner@baylibre.com>
-Cc: Weijie Gao <weijie.gao@mediatek.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] arm: mediatek: enable fw loader support
-Message-ID: <20260415205624.GP41863@bill-the-cat>
-References: <20260410015311.4066075-1-weijie.gao@mediatek.com>
- <d23fec41-0eeb-489f-8c1e-5bb4b974139b@baylibre.com>
- <0d7ba570-335e-4de7-b272-7152b540def2@baylibre.com>
+ Wed, 15 Apr 2026 14:21:41 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Hans de Goede <hdegoede@redhat.com>
+Cc: Tom Rini <trini@konsulko.com>, Andre Przywara <andre.przywara@arm.com>,
+ Samuel Holland <samuel@sholland.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] sunxi: use vendor prefix for $fdtfile on RISC-V too
+Date: Wed, 15 Apr 2026 23:21:36 +0200
+Message-ID: <20260415212136.320419-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="4BNZA1cJYNJnQ2ut"
-Content-Disposition: inline
-In-Reply-To: <0d7ba570-335e-4de7-b272-7152b540def2@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,83 +113,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Once we complete the support for RISC-V Allwinner D1 (sun20i), we will need
+to prefix $fdtfile with the vendor prefix to match the Linux device-tree
+directory structure.
 
---4BNZA1cJYNJnQ2ut
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+Some work on sun20i in https://github.com/smaeul/u-boot/tree/d1-wip still
+needs to be ported to upstream.
+---
+ include/configs/sunxi-common.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Wed, Apr 15, 2026 at 02:27:39PM -0500, David Lechner wrote:
-> On 4/15/26 10:02 AM, David Lechner wrote:
-> > On 4/9/26 8:53 PM, Weijie Gao wrote:
-> >> Enable SUPPORTS_FW_LOADER to allow the mediatek platform to use ethern=
-et PHY
-> >> drivers with fw loading.
-> >>
-> >> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-> >> ---
-> >>  arch/arm/Kconfig | 1 +
-> >>  1 file changed, 1 insertion(+)
-> >>
-> >> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> >> index 03416c55265..aee8e74dace 100644
-> >> --- a/arch/arm/Kconfig
-> >> +++ b/arch/arm/Kconfig
-> >> @@ -868,6 +868,7 @@ config ARCH_MEDIATEK
-> >>  	select SPL_LIBGENERIC_SUPPORT if SPL
-> >>  	select SPL_OF_CONTROL if SPL
-> >>  	select SUPPORT_SPL
-> >> +	select SUPPORTS_FW_LOADER
-> >=20
-> > I don't think this is how this config option is meant to be used.
-> >=20
-> > Based on [1], it sounds like we just need to make sure CMDLINE and
-> > ENV_SUPPORT are enabled in any config that also enables PHY_MEDIATEK_2P=
-5GE.
-> >=20
-> > I don't see any defconfig that enables PHY_MEDIATEK_2P5GE though, so
-> > I'm not sure there is anything to do here. Unless it makes sense to
-> > enable this in one of the existing defconfigs or add a new defconfig?
-> >=20
-> > [1]: https://lore.kernel.org/u-boot/20260310162610.1163833-1-trini@kons=
-ulko.com/
-> >=20
-> >>  	help
-> >>  	  Support for the MediaTek SoCs family developed by MediaTek Inc.
-> >>  	  Please refer to doc/README.mediatek for more information.
-> >=20
->=20
-> I thought about this some more and I wonder if we need to do something
-> like this to make it actually work correctly though...
->=20
-> ---
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> index 4e6a0c6a1b6..ed37daa28b8 100644
-> --- a/lib/Kconfig
-> +++ b/lib/Kconfig
-> @@ -73,6 +73,7 @@ config DYNAMIC_CRC_TABLE
-> =20
->  config SUPPORTS_FW_LOADER
->  	bool
-> +	default y
->  	depends on CMDLINE
->  	depends on ENV_SUPPORT
+diff --git a/include/configs/sunxi-common.h b/include/configs/sunxi-common.h
+index b29a25d5617..49d5617f028 100644
+--- a/include/configs/sunxi-common.h
++++ b/include/configs/sunxi-common.h
+@@ -280,7 +280,7 @@
+ 	CONSOLE_STDIN_SETTINGS \
+ 	CONSOLE_STDOUT_SETTINGS
+ 
+-#ifdef CONFIG_ARM64
++#if defined(CONFIG_ARM64) || defined(CONFIG_RISCV)
+ #define FDTFILE "allwinner/" CONFIG_DEFAULT_DEVICE_TREE ".dtb"
+ #else
+ #define FDTFILE CONFIG_DEFAULT_DEVICE_TREE ".dtb"
+-- 
+2.53.0
 
-That would be "def_bool y" in practice. And yes, that looks right, and
-should have a Fixes.
-
---=20
-Tom
-
---4BNZA1cJYNJnQ2ut
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCad/7cAAKCRAr4qD1Cr/k
-CgPwAQCVW8nklALBqTFglC4+YmVo5YZcv/XeEctkGLIgjZ3h6gEAtcfEQrb+Sd8O
-rvlHWnVW942Q40+WW1UXJqoXCbSR/wo=
-=29Lu
------END PGP SIGNATURE-----
-
---4BNZA1cJYNJnQ2ut--
