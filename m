@@ -4,153 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2129F41997
-	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 12:09:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECBEEF4199A
+	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 12:17:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 039468419C;
-	Wed, 15 Apr 2026 14:09:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 594EB83B99;
+	Wed, 15 Apr 2026 14:17:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="EPNhLHoB";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jVBPsAh+";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="QEwXiZZB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E4C384119; Wed, 15 Apr 2026 12:11:06 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id 35C0F83C2B; Wed, 15 Apr 2026 14:17:18 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0792483936
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 12:10:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 63F7tSq1764284
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 10:10:57 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=mnc5rQpSppA6TP7+KJQqPqFo
- KvdcwdQUAL4YGJHCIEs=; b=EPNhLHoB4xabb29w5EDBND1LjgRJnKyMcZl/HO/4
- 0OM5fpzr1snQQX2a1WRCq5NqINke3ifgfFMohpsk/PhyBqZn9vc4jQe82sc/qaS3
- g9KsGM3XNt6glqXlqFHpv5syDq2ONWgeo9yPLYJV26AQk9ARX9zOx2GVzWVlMWds
- OsDoYPaHvj2rCUEdq0q6mUQXVdKh0NPwBgfWLftB175mxqWrYAPZ/i+HlNW+2Z+0
- ukk1Z7W5s8socILMnblaZx2wT9UyA3FGmJk4swIrj/PBfeJPvuUPqLoBHMydFjry
- qx5RXPpS9J/QskLAT9L8wHz4C+cvm0qUjdeH8aUiONNjPQ==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dj6q7rhu7-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 10:10:56 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id
- 98e67ed59e1d1-35d9278587bso6504845a91.2
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 03:10:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1776247856; x=1776852656; darn=lists.denx.de; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=mnc5rQpSppA6TP7+KJQqPqFoKvdcwdQUAL4YGJHCIEs=;
- b=jVBPsAh+038HjGV5h4SXxiNTBOp63GFTeL7zNCRK3Plvhc7NJwAksDl/oP2Y20qfYo
- k/smrhbORI0aovOsRSZWAtFS/O8WgM6L0E+8Ihyv8gZjfwYn3a1gHqzPHnOWYvjN71Am
- agg7fntUcdKvMF3cz34pXmKy1BGsxzYf5E8/NXQT14XVB8eHbvJ09WejIhXvu86RIo5a
- H4SZhIhkC9VKvMmC9PQKuIa05fAWTuVYpMDLCovUZIYHWWR85T5kIchxebczYYIZrGL6
- mbq+pXg6xiWFhsyMN7Htv3f/MCh8IcHRtuTje/MHATMXZpEEeyKuYRAo9nVaHcIGUDUc
- hUZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776247856; x=1776852656;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mnc5rQpSppA6TP7+KJQqPqFoKvdcwdQUAL4YGJHCIEs=;
- b=kkBd8QxE5f6qJoiKrhBE3YCYD9TqZG55DUap906ITN/+entnK5V5o0jA8alQQWSaOB
- AASmuFD9/WHKTtCz/R+Fo6xnzlUyb/s6h/WMYFc4dYP1HlyvS8i0RpyyK0MSQH7E7uW0
- 2UwhK58CROqcUlivuHGZZvfDarexpTkRDJfs3iMW3TcEPkP5IVCkpSNnZvt2C/VopJM3
- QB3QjuiKjIUHk4ADufAYeGXrtUTcSGGyWDqUdRPmpQ5JzkP7on8QxzoTcEaj8mbe1ZT+
- E9526x6lhWxxwWc3sUQJWA+FL3Wy/PeLKpP7kIYT0jwRCWJ3z5XMbMvKpGjx9UddJEpL
- AoDA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9h3cJlwZMJMtsyBq22KvgKP5gRdhGJhvCm9bEuhVMzvbTwPpcnqLqMystObaayWEiqA6PxvxY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwdMgT/LGj3Zyix6WXDj4+f6KVHCQyStSLJCHWepb8MmuZZTziD
- rKXNShp1VUFQeXOQaP00pr2iqeelFqmR5L0TM4f5HblONQvQBRTlkGSVlZsyuU/yWlGRvFVCA4U
- G/WaU6VBIf/V0okukdtiXB0LKlkBzyyd9yV1Z54TyxB3ds+V3M5g6WGJD
-X-Gm-Gg: AeBDiev1eP9CyVh/dhv23MM5gp7xLoxBiWqsbU+ujvvryG8kgy7ntNNx6pxHxJUcJrA
- v/he+6qj/9+HpMaCclEUXg64vabzcOxXP2z4+HP/uQz9pDlUntVnYqjSzLvnyOaBu15MAA+1bfb
- KjOEqt7TaafsCp0LiVzYjGB3fgjgz/WpUp6p8YMo4kRrWv83JZacSl9wAL4vUYWH+8GJHjTeZGg
- vU3pFSPFuP5N/H+AMPr85MXAhogNWr/HlU1/FLfwdLaJCjgqOu8CFOnYDdnLHBn2NSlvOBtj7KR
- vsr/xyQBDXkvlrKZeGpjbo6og7NFLHB4tDGo8t+j8JG5K6APvjIAjefoTonOWsIllvIKlrzGuxu
- TKvtw9S/jCVIOW57cJew+76BXUU4fpNvSE82w0eP5oQSRH3qZt64MU4bT2sZ/F0Ax0lsT5XlKXK
- EGDUSn9N3tdnCoTpDzDY/2gOZ2phNM07TURVMLVRGhufbUD7iPPtA=
-X-Received: by 2002:a17:90b:4c0d:b0:35d:93ff:2854 with SMTP id
- 98e67ed59e1d1-35e4276140fmr22859742a91.8.1776247856303; 
- Wed, 15 Apr 2026 03:10:56 -0700 (PDT)
-X-Received: by 2002:a17:90b:4c0d:b0:35d:93ff:2854 with SMTP id
- 98e67ed59e1d1-35e4276140fmr22859708a91.8.1776247855796; 
- Wed, 15 Apr 2026 03:10:55 -0700 (PDT)
-Received: from hu-varada-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-35fd21040b1sm1733023a91.16.2026.04.15.03.10.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Apr 2026 03:10:55 -0700 (PDT)
-Date: Wed, 15 Apr 2026 15:40:40 +0530
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
- casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, peng.fan@nxp.com, jh80.chung@samsung.com,
- lukma@denx.de, tien.fong.chee@altera.com, anshuld@ti.com,
- alif.zakuan.yuslaimi@altera.com, tingting.meng@altera.com,
- alice.guo@nxp.com, quentin.schulz@cherry.de,
- ilias.apalodimas@linaro.org, xypron.glpk@gmx.de,
- mkorpershoek@kernel.org, h-salunke@ti.com, alchark@gmail.com,
- dario.binacchi@amarulasolutions.com, ye.li@nxp.com,
- andre.przywara@arm.com, afd@ti.com, dinesh.maniyam@altera.com,
- balaji.selvanathan@oss.qualcomm.com, danila@jiaxyga.com,
- aswin.murugan@oss.qualcomm.com, luca.weiss@fairphone.com,
- adrian@mainlining.org, justin@tidylabs.net, n-francis@ti.com,
- wens@kernel.org, jamie.gibbons@microchip.com,
- david.wronek@mainlining.org, alexeymin@postmarketos.org,
- james.hilliard1@gmail.com, michael@amarulasolutions.com,
- richard.genoud@bootlin.com, philip.molloy@analog.com,
- sughosh.ganu@arm.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: Re: [PATCH v2 9/9] configs: add qcom_ipq5210_mmc_defconfig
-Message-ID: <ad9kIAaiXaIqDm6a@hu-varada-blr.qualcomm.com>
-References: <20260410091154.1001021-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260410091154.1001021-10-varadarajan.narayanan@oss.qualcomm.com>
- <CAFLszTgkdQxRmzfXOW3+RcNO0+aSeYFEq_iA3spWd8nnf2egaA@mail.gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id C0ECD83936
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 14:17:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=gqJeYzl0aMiMQNJH04YdP4W2tBf5f8mPgPnKvMWHVMJfdDcnPZwRNDv+7PtRRJ5pa3+9vTM3nOu7QLiJv2QhOLB9N+bCZMXHgl8h/mf6r7FfPAMKFygxUYiqEzRWGkTxyHhODlN+c1Svt0Xfu9oO3zUmsv+qo6vsx8mkf/C/73PgXSb/CIiPNUq6roFkqiOf8VRFqNhzctHO66L9Y+/PUO+t073HDXLXKZJ++ZeJIP3OH+POyMW5Ebv2i0hQwOo6U6Sp/L2Bfi4oFPGLwRGC4keDv2RJrPjjp6V7I8AiHRKa/OEvaqPHlSFn/hK2XkQ3qN7GJHj+ZEUq1xzTdbN2HQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=1dskDuMFZ+NQBjTthN/2sngX0nfKqVwxk9sID8zNqxs=;
+ b=yOSyQfgkF+y6wO8piwX9xPqddOq5LBnnouWqIHuw2fMn9XYRa7SD0Pge1RFTTdvRfpxcdecpsbjRtibX1eByiRpJHKopA1azOLOPAbZ4zasWRGIo8OQj3XwgDMIORusLRf/qlvrcMragEFGVkba8SE93o5rmRb2BiMsJ+9M/FJCHfGYqFOAQIhoBp0ufDjC7x/I+2WrQg2DsO/+ZHQVdyd+Omtxbfre6sMtiD82WpZGkRwYRwZ8nQhUI8vE+groX7ArjF/z0ySenAZbVCyiQzt0vT3bXE6TcCi8bYjU0NhpM2l6yIXL9kzUmF4HCSIhAujEHvmWvZb6noEqPx1wCzA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1dskDuMFZ+NQBjTthN/2sngX0nfKqVwxk9sID8zNqxs=;
+ b=QEwXiZZBciR5ZQDKU5lKeYg453gMjlL4zs3aNoTna7Rr2AMiK2AYE1jbC/09Rmo4PddoxcOPQ47b8B1/Kgf2nHFgOd/3zj7vS8LbekEQ04koBYPgzB2sFCEkJEm03iFNW1UG4RfZa2ruRt//jONLvCmFQPMthSwEtnEg1sloHag1ACRBf6dADTzJf/usbzJ7C4Hq/tlZhhHY5Y3owJZKMVko55HGf4civDSqVEjOYFmx6+tra4L2bAVDACbM6SguY4tLHoIZdY7vcRXF95crbcEV76uNRfTFr9IAY6pkWYxFlBgy2XUix7469CDorq1Rs3ribPw4ZS5dDhQiQY9Llg==
+Received: from DB9PR04MB8461.eurprd04.prod.outlook.com (2603:10a6:10:2cf::20)
+ by PA6PR04MB11808.eurprd04.prod.outlook.com (2603:10a6:102:523::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Wed, 15 Apr
+ 2026 12:17:09 +0000
+Received: from DB9PR04MB8461.eurprd04.prod.outlook.com
+ ([fe80::21f6:947a:1f40:18af]) by DB9PR04MB8461.eurprd04.prod.outlook.com
+ ([fe80::21f6:947a:1f40:18af%6]) with mapi id 15.20.9769.046; Wed, 15 Apr 2026
+ 12:17:09 +0000
+From: Peng Fan <peng.fan@nxp.com>
+To: Primoz Fiser <primoz.fiser@norik.com>, Stefano Babic
+ <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, dl-uboot-imx
+ <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "upstream@lists.phytec.de"
+ <upstream@lists.phytec.de>
+Subject: RE: [PATCH] imx: imx9: Select ARCH_MISC_INIT for all i.MX9 SoCs
+Thread-Topic: [PATCH] imx: imx9: Select ARCH_MISC_INIT for all i.MX9 SoCs
+Thread-Index: AQHczM2S0cXvAU1Vl0Ga7ckAnHMIg7XgCVpQ
+Date: Wed, 15 Apr 2026 12:17:09 +0000
+Message-ID: <DB9PR04MB8461701ACC88F0AE7F5B89CE88222@DB9PR04MB8461.eurprd04.prod.outlook.com>
+References: <20260415114658.3321643-1-primoz.fiser@norik.com>
+In-Reply-To: <20260415114658.3321643-1-primoz.fiser@norik.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB9PR04MB8461:EE_|PA6PR04MB11808:EE_
+x-ms-office365-filtering-correlation-id: 4c114b59-5cbb-45c9-4fb6-08de9ae8ea82
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|376014|1800799024|366016|19092799006|38070700021|56012099003|22082099003|18002099003;
+x-microsoft-antispam-message-info: eFMI/ChKTtFGY7oTY5W6YKkUvy4Mhzk0eGpB/SDrIVgH/GQGnBy8KJKK6jjSTKdrfMNn8sL2AqEPXVMnRTljumKGqx2qW2tdE3HkzhSF1jqgX/KpDnO/qTBMK+IuYeOW3tdvBjSQJz483KbzYnED5qI0joHyYWWFT2o/ghg8K1NzixYOoap+Rn52gk8wU0nyI5WhiqGf/VuUiW/M0wsN7GVPCykwG7OgMzdAvjf4tByFUPmj6sbBY6jJhV06uSa00v1xTUDlvbI/oByfYg10fL/VBwJo4sCJWlqmf9XGuA2sR4vK+UV6E/G3Js0o8zMUyIcw+IsNQuKdmP3q9DtPBrMzRV19mHZxQX4jRMA0f0bTVrHj2HwSnWQeelh0VZi23Xv9cKwKedZSDIQhLrTPX8ceYKHrSbYWQ+z+XDj06dWBMXEcYaUxlaO39FJ5LitrGYU1c0aT4wu6GnAQD2DXvobpmdEWddKSbDbtelT7uyJhj4h1hViPcAFHJkKyjcTL7/vZtmEF4MOaB65W1dwE+FN3Nq1LhbrpJ3tOs0mPeZfbnwumrJDIQyEkN7sdDu17eyIOAWdVoevAlWnSdovTWwplvnFHoOq321h9r2iMXb53p5X7uIu6by4K6VNaaVt4BmhGZ1SdzxzY49oC5P+bh9Y0bwbeqaoDhZl6JcdeJ3u9VgvMWyOqOlI8tVVo9bFuJVf14U3hy7m+4OKBGJF5V4D0dTm52M4UOHoFJzd/Y3F+s4XW+72gQIvGTlAPjKpTSNEpVorfUrQ6IHKXkh9NpNwULhDMguCoSOOHQ648EV4=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR04MB8461.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(19092799006)(38070700021)(56012099003)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?3RstJz930tpkr1ZZi2pLg4P+lMMDraszOI+sdN+Oir17wF2Um2bOEl0nP7Mn?=
+ =?us-ascii?Q?H67DAJLjQeTIBXj1Oi+WDeZK2UGkNIwJQt5w3Ud1aJfX6DqSOnCpAAAdNv6Q?=
+ =?us-ascii?Q?nldmngkbl41wqB27pIxNKMvaA1YCpxox34RkH9GD7pf+yrpxoJOiVJN3pSHW?=
+ =?us-ascii?Q?dQa5Maja+VjTFX6iDBdehc/FKeSv2GS5fdxP6YnnJkyNW1f++6PXymiaAItL?=
+ =?us-ascii?Q?Iqr3qdiG3gyPBPdXUW9coSBkdLWkJ6fQ2Rkdu9urZJn+3nSQHpSZsi5MZ6oJ?=
+ =?us-ascii?Q?N7x705mwkbvkEILbdU7CEUD3tTBGj2ztUMzCqpA1SRAVWHg5NjDHF1TprMCz?=
+ =?us-ascii?Q?3/QbK8onnnuWliVV/41gJmEt2DR50BhaWaa/WkZicXJpngqQdHSwZNBx96Jb?=
+ =?us-ascii?Q?P45CtmXmWzgTiLaT6vHx6SOMPkL96ePqjRWNx/0a7W5iyq1FrkTV3w9pF5mB?=
+ =?us-ascii?Q?E5BHrLYquCp2ujtMpO8qHYYXruuc/61Rz0dHFaC5pc6tltPhaalwL70uuEDu?=
+ =?us-ascii?Q?JZyl6KGKDEehlp//bky40OOnwzhJj/MK02l27JsnHz80tRSjluWicjpyPfLD?=
+ =?us-ascii?Q?NliqoQehEBHJe9B98ID24pg8ZkxLQcKAsi86LehOiU/XwDekch87ykmPLwK1?=
+ =?us-ascii?Q?rcAPf2jMpt/9q848DQBaI/MpdgGtzfP5/fopmwSCkLVqqCQ2MgBkrxugDB0l?=
+ =?us-ascii?Q?OzqA+axqne+ZhU3KeCgQn/4DV9CEah2+lHHTB6yYp5dNaBfMmaFDvBh+YIme?=
+ =?us-ascii?Q?clFX7jDupnPtbx3gbzHTepEvcaHxIXtKrDVWktzHf43m0yQfluwSDPDz1pry?=
+ =?us-ascii?Q?UxqDFxFn/5Ff7SVAzvVwGTBf6VxajnHYZHCD0TM0aQPSQjoNcHCSzsOSkWq2?=
+ =?us-ascii?Q?yG15vGc6IbjHAxAUQ6gXtnTScwzcQxiC9VDIJLuo9qEP+1qj7N+4darzUZE6?=
+ =?us-ascii?Q?3+QxMZ+o4ofhqqhS1DcBtjpllhXyAhZ18gPtID5MqnwvgRxehGXBo7xHRYJa?=
+ =?us-ascii?Q?J9jT9C8LAOar6qwjer4AS6xy+at6U0v9BZTXKNnMROE4xkcj1o39EsjJABtB?=
+ =?us-ascii?Q?eiZpJhll+jxzs4RjoCOm7mvlQrl7glYufNQ6zgNzqs+vtzzxKVXPr6x6OUjX?=
+ =?us-ascii?Q?zv6jcdUks/U+C0AEdp2goUoNbTBQRbDx05XR16oSeN+NdZ8NPxfSp4GHwz+x?=
+ =?us-ascii?Q?GpLR0AwRTfD1/0Dx+MkTQBwhLQDSoYzuqGvnvBqAQ3M/1ixBOQ5Sdb5+WpGA?=
+ =?us-ascii?Q?iFMDvqDcpNUQGokruyHbYH+axCcu4YkY+fPUS42QMcFpqbi6ZKxLvU+5dJWA?=
+ =?us-ascii?Q?87PqzVG8RlSo++0JA0Cdvol5BAsIJkgN6YW7fcoGg3Jk9pDWF9lUSuAp3DA5?=
+ =?us-ascii?Q?oWm6HSBMu5cjowA2Uh/m9Ye9HIRmD1toy+M/p71aMEiYU7kPhp1PgUGZhPE/?=
+ =?us-ascii?Q?MxVSEme/9vsYO4rqrOLZYBWN0VOVamfZVhlTy1xWN2MrjHve6HqVdudao10N?=
+ =?us-ascii?Q?SMlnCB3J/dCLsWg6Wq+sQcNnGAqsLKt/koCHgL6Mo1JP8A1NNSIYALN2GMOs?=
+ =?us-ascii?Q?BvY9/iXWBLe61xlHyG2IRz3vMTsqKrATG8RCu7snuUfSQy0ylM3GO+7imwjV?=
+ =?us-ascii?Q?Ykh/e549aUK+8FbiG0Y9J4YfF0UftOQu+VDbXniS9lDUAVL+tAB9Xpd3n8Ai?=
+ =?us-ascii?Q?X7qABToHWwubM0JJ+1jVeXfXdAAWU8ovDw/Gz7PhgdSi6W3+?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAFLszTgkdQxRmzfXOW3+RcNO0+aSeYFEq_iA3spWd8nnf2egaA@mail.gmail.com>
-X-Authority-Analysis: v=2.4 cv=AvHeGu9P c=1 sm=1 tr=0 ts=69df6430 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=kj9zAlcOel0A:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=xDDBMRYjjB0QwaCvmfYA:9 a=CjuIK1q_8ugA:10
- a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-GUID: 7GxERLOeXOL76UyPh4Huck8BBTyiQrPw
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE1MDA5MyBTYWx0ZWRfX79F1qdj6JLUj
- rY6pZHgFMVBEoWvmg0n3C5rOvbPpOk0Azg0zivMm8wbERfdM4zLlou8kILiDaDXr8yvbX410ig9
- vrCSXlIFDq1zBhvW10cdHzILF749hLluVbbf5lKskKTc6beaJCL1Urv3q51P6ZjZxELyngBLI2e
- O/sGb8kq0jBr2tehv83tqFDwafWrEGfkHC+VaHxU83TGACNQ4anTfNYTaCe5a/mMCOiFAMzXmIo
- lcIoj138ym42l5H1iljcCaB/GBuETc40GbdE9Zky+uZLx37GtmQ0bXxurfJC6TqHltwdCyPID2P
- n9KCicOd9bhuQLzSIshP6hyh9uz4P+s0iBfUHPWPVst4AeIDJ0afxSubhyBuI5tqGQFxEU2C9gs
- 1C/egkV7h1qh2ZrahMzFBNX8pRYaNFPeNZNJ1/X1zCwg14cGDWIYLcKVtY947rNC64s+uoHioE3
- 9TJ+f0wao3UcHs6Dy/A==
-X-Proofpoint-ORIG-GUID: 7GxERLOeXOL76UyPh4Huck8BBTyiQrPw
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-14_04,2026-04-13_04,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 spamscore=0 clxscore=1015 adultscore=0 phishscore=0
- bulkscore=0 suspectscore=0 priorityscore=1501 impostorscore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2604070000
- definitions=main-2604150093
-X-Mailman-Approved-At: Wed, 15 Apr 2026 14:09:40 +0200
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR04MB8461.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4c114b59-5cbb-45c9-4fb6-08de9ae8ea82
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Apr 2026 12:17:09.0437 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 0+9dqjYUKI4WDsNg8MaKmnMTOY3KcNEp+BEgKwpZ+1CLQKQRi81TloZA1aNsy/J0MOVgPPhJW89nWm1b4hEM8w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA6PR04MB11808
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -167,51 +139,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Apr 11, 2026 at 07:15:46AM -0600, Simon Glass wrote:
-> Hi Varadarajan,
->
-> On 2026-04-10T09:11:45, Varadarajan Narayanan
-> <varadarajan.narayanan@oss.qualcomm.com> wrote:
-> > configs: add qcom_ipq5210_mmc_defconfig
-> >
-> > Introduce a defconfig for the Qualcomm IPQ5210 SoC based RDPs.
-> > Presently supports eMMC.
-> >
-> > Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-> >
-> > configs/qcom_ipq5210_mmc_defconfig | 106 +++++++++++++++++++++++++++++++++++++
-> >  1 file changed, 106 insertions(+)
->
-> > diff --git a/configs/qcom_ipq5210_mmc_defconfig b/configs/qcom_ipq5210_mmc_defconfig
-> > @@ -0,0 +1,106 @@
-> > +CONFIG_DEBUG_UART_MSM_GENI=y
-> > +CONFIG_DEBUG_UART_ANNOUNCE=y
->
-> The other IPQ defconfigs (ipq5424, ipq9574) have CONFIG_DEBUG_UART=y
-> along with CONFIG_DEBUG_UART_BASE and CONFIG_DEBUG_UART_CLOCK. Without
-> these, preloader_console_init() in your SPL likely won't produce early
-> debug output. Please can you add these.
+> Subject: [PATCH] imx: imx9: Select ARCH_MISC_INIT for all i.MX9 SoCs
+>=20
+> Instead of adding select ARCH_MISC_INIT for each i.MX 9x SoC, select it
+> at the i.MX9 family Kconfig level. The corresponding arch_misc_init() is
+> already defined in the common arch/arm/mach-imx/imx9/soc.c file
+> and will print out ELE firmware BuildInfo for all i.MX9 SoCs now instead
+> of just
+> i.MX91 and i.MX95.
 
-The relevant QUP clock is enabled for ipq5424 & ipq9574 by the boot
-loaders that ran before U-Boot proper.
+This will also make the Kconfig being select for i.MX93 and i.MX94.
+I think this is ok. But please mention that in commit log, then:
 
-In ipq5210, since we have SPL, the relevant qup clock is not enabled
-for CONFIG_DEBUG_UART to work. In SPL after the clocks get setup the
-serial console works.
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
 
-> > diff --git a/configs/qcom_ipq5210_mmc_defconfig b/configs/qcom_ipq5210_mmc_defconfig
-> > @@ -0,0 +1,106 @@
-> > +CONFIG_SPL_TEXT_BASE=0x08c24000
-> > +CONFIG_SPL_MAX_SIZE=0x3D000
-> > +...
-> > +CONFIG_SPL_STACK=0x08c60000
->
-> Just to check, the SPL code region ends at 0x08c61000 (SPL_TEXT_BASE +
-> SPL_MAX_SIZE) but the stack is at 0x08c60000 which is inside that
-> region. If the SPL binary approaches the maximum size the stack will
-> collide with code. Is this intentional?
-
-Will change CONFIG_SPL_STACK as appropriate.
-
-Thanks
-Varada
+Regards
+Peng.
