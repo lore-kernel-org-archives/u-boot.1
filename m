@@ -4,61 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A559F428D3
-	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 20:13:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAF6DF428F6
+	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 20:44:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB60B83EEF;
-	Wed, 15 Apr 2026 22:13:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
+	by phobos.denx.de (Postfix) with ESMTP id 078BD83FFA;
+	Wed, 15 Apr 2026 22:44:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="Xa2BNFKl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="c2mJsA8b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25BEA83FFA; Wed, 15 Apr 2026 22:13:47 +0200 (CEST)
-Received: from out-172.mta0.migadu.com (out-172.mta0.migadu.com
- [91.218.175.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 572D48407D; Wed, 15 Apr 2026 22:44:29 +0200 (CEST)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DDF483B99
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 22:13:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=postmarketos.org
+ by phobos.denx.de (Postfix) with ESMTPS id 3544883B99
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 22:44:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=funderscore@postmarketos.org
-Date: Wed, 15 Apr 2026 20:10:43 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1776284023;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=nfRAsYGIb6MUOd57d2o2LnDV3QprCmVbDwEbd8UluV4=;
- b=Xa2BNFKl2OY33749El2iCPg30ClwTCQHxumumhHQz/lE6aSPjufl9+hYleqRzQ5IzagdEq
- HIdO4w+Bo+FsjC6IkAG6y/lMufaClwTBoOrTMflQMbNlQiTpG4WXJjeB6bYRRXlUeJ6qAD
- 9gnxaOwH6I/mwwDqXBAcfuQ9QqsEiSpqSBNbLIcbNgBCU50AHpdNFQ31bq+HF4EPi9M35o
- Z61j/kWYkJ+DcAHQKQoC2CtFt6aB1o++iqZh2UWVKaXqjGd37ZCFFVRcw8NSPjDFnk7n/k
- tP95EakJC2o7QJqoTQAj++5tRQY93C0YM+XELQsfOft0PaIOELOuX/SRwfVU7A==
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Ferass El Hafidi <funderscore@postmarketos.org>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Kory Maincent (TI.com) <kory.maincent@bootlin.com>,
- Simon Glass <sjg@chromium.org>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Anshul Dalal <anshuld@ti.com>, Martin Schwan <m.schwan@phytec.de>,
- David Zang <davidzangcs@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>
-Subject: Re: [PATCH v3 3/3] doc: usage: convert autoboot README to rST
-References: <20260415-ui-cosmetics-v3-0-aa8308a47e33@postmarketos.org>
- <20260415-ui-cosmetics-v3-3-aa8308a47e33@postmarketos.org>
- <61DCA2CF-A66E-47C5-8921-9747FAC8C75B@gmx.de>
-In-Reply-To: <61DCA2CF-A66E-47C5-8921-9747FAC8C75B@gmx.de>
-Message-ID: <tdjxih.1juw2c1se87sl@postmarketos.org>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7d1872504cbso6431808a34.0
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 13:44:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1776285866; x=1776890666; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=8XT+3jl6dd3wdwDDo7USgS31vI2kycOeeDl3WkRbI90=;
+ b=c2mJsA8bcUfpJSmSOkxkFG7OWyY2+UaF94jMR+LcmmdJ0K32/+YuoBHANvvBKHKP4E
+ Z6B6FZg2RB7wiWH2kd2BPjdUL5CDvyducy9ZjMTfTHG2ayma4hkfEKlGZJQafxa6lzwF
+ UzxqNBxXEupryJGkQCtQ0SiDLZV0LVAv1WDwU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776285866; x=1776890666;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8XT+3jl6dd3wdwDDo7USgS31vI2kycOeeDl3WkRbI90=;
+ b=mw6xuwblUPwEYgQdsbEg1ThYgbMwYy+vyplZjf0OifEfweqiNJXhAO7LfxD1DF6Rlq
+ Ajp9O/71hlGVNEESC7jY0nJQPk38bGHoifTqyI3qmFCIYY6zh7p1E7Kqq1/u6OLQegmm
+ su/MVmCE3Vmrzpij3JAShMIh6P/of+h2q02TrmQmf1SJ6pQty48OXkAhg6m+m7YwfL9A
+ LSpsE2CnbQGDOUQgEopjGqHb3hJNOzdxUyKwFZcKbLWFGJrbrlLthBEG/pFXnpRfKhLG
+ Y+UmyQ1SQfD+oYWKQFJdXkPANW5OktyHyW+4WRp06GzlQ4ZviJC3CYTHcAUv49kzQLGI
+ My1g==
+X-Gm-Message-State: AOJu0YzWErFR7E8OgOEtZU1tfpud6WCkMzHtQGohqOJ9gfWeKiHUMNde
+ 0yGEpcfhoYaCBhWAxeYGUXgpI9AU7YkMKy3RTFhFL3JxzyxOy52XKjHRnNEKwWrMY8R34cyIXUE
+ yJYdpGCQ=
+X-Gm-Gg: AeBDievIVfjoLln54lXfJAHz0Ul5fL3Zb0EzdxoUtC0cKFDY0nP+98cYImNMLG64WCA
+ DxsmKwVHNpOG7UXYLOH/6exYa9SkNdfkWYsBhB5OVWTFqU0w4+IvL0FKY7ill3xEC/sK50HYVpI
+ /GuIIrazcKpwvOvcCtlDSb+jkjwo10Ddom7f+edErTjlM+Xd858B71tgrBFzZHP2+FnxkOsJVfO
+ ePVQfRxrMw6Xof7gpG49GfhX6ArVqdJbCw/WxHMD3zatgYWnBWnnT7XH4e6b4w2/w56SwpvLD2u
+ Bnj6lFKiuq+SQOcUIWkes83zyGEtbqXaYp10smfsP8CTBAwtzCol05ifSv5E2XrHu6MNQowL/oz
+ h0s0LSycPAn9CblN6ar2GxNqCrUUV//I/4j/+erIrLEAOwL3aAM6fjSS+2yO1ppjrXzB2X1xVbt
+ VYJrcnYiIPguBnIb3qRXtQ3iuGzlWRKyCv6Uh3id+ldgUG0KHqZ36PasDyi7rM3XNSuQ6aF8TnB
+ 2NWQt2mDVzxLAHWSAnN0JE8MasgeSeWL0MkiSQOJtx2DwgHTdhAglZKu1ev9w==
+X-Received: by 2002:a05:6820:80c9:b0:685:ad47:d7b2 with SMTP id
+ 006d021491bc7-69423310442mr537207eaf.21.1776285865864; 
+ Wed, 15 Apr 2026 13:44:25 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-693ec6a0605sm674865eaf.2.2026.04.15.13.44.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 Apr 2026 13:44:25 -0700 (PDT)
+Date: Wed, 15 Apr 2026 14:44:22 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Boon Khai Ng <boon.khai.ng@altera.com>
+Cc: U-boot Openlist <u-boot@lists.denx.de>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Prasanth Babu Mantena <p-mantena@ti.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Chen Huei Lok <chen.huei.lok@altera.com>,
+ Kok Kiang Hea <kok.kiang.hea@altera.com>, Marek Vasut <marex@nabladev.com>
+Subject: Re: [PATCH v1] drivers: cadence_qspi_apb: Add 1us delays in polling
+ loops
+Message-ID: <20260415204422.GA2526031@bill-the-cat>
+References: <20260312114419.21163-1-boon.khai.ng@altera.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset=utf-8; format=flowed
-X-Migadu-Flow: FLOW_OUT
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="M8NjSihaVV8beqJT"
+Content-Disposition: inline
+In-Reply-To: <20260312114419.21163-1-boon.khai.ng@altera.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,307 +110,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On Wed, 15 Apr 2026 18:57, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->Am 15. April 2026 16:32:33 MESZ schrieb Ferass El Hafidi <funderscore@postmarketos.org>:
->>Convert the plain text autoboot documentation into rST, so it is visible
->>in the public docs. Also decouple CONFIG_AUTOBOOT_PROMPT from
->>CONFIG_AUTOBOOT_KEYED in the documentation to reflect previous commits.
->>
->>Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
->>---
->> doc/README.autoboot    | 162 -------------------------------------------------
->> doc/usage/autoboot.rst | 149 +++++++++++++++++++++++++++++++++++++++++++++
->> doc/usage/index.rst    |   1 +
->> 3 files changed, 150 insertions(+), 162 deletions(-)
->>
->>diff --git a/doc/README.autoboot b/doc/README.autoboot
->>deleted file mode 100644
->>index 5e9a5e1cf7f..00000000000
->>--- a/doc/README.autoboot
->>+++ /dev/null
->>@@ -1,162 +0,0 @@
->>-SPDX-License-Identifier: GPL-2.0+
->>-/*
->>- * (C) Copyright 2001
->>- * Dave Ellis, SIXNET, dge@sixnetio.com
->>- *
->>- */
->>-
->>-Using autoboot configuration options
->>-====================================
->>-
->>-The basic autoboot configuration options are documented in the main
->>-U-Boot README. See it for details. They are:
->>-
->>-  bootdelay
->>-  bootcmd
->>-  CONFIG_BOOTDELAY
->>-  CONFIG_BOOTCOMMAND
->>-
->>-Some additional options that make autoboot safer in a production
->>-product are documented here.
->>-
->>-Why use them?
->>--------------
->>-
->>-The basic autoboot feature allows a system to automatically boot to
->>-the real application (such as Linux) without a user having to enter
->>-any commands. If any key is pressed before the boot delay time
->>-expires, U-Boot stops the autoboot process, gives a U-Boot prompt
->>-and waits forever for a command. That's a good thing if you pressed a
->>-key because you wanted to get the prompt.
->>-
->>-It's not so good if the key press was a stray character on the
->>-console serial port, say because a user who knows nothing about
->>-U-Boot pressed a key before the system had time to boot. It's even
->>-worse on an embedded product that doesn't have a console during
->>-normal use. The modem plugged into that console port sends a
->>-character at the wrong time and the system hangs, with no clue as to
->>-why it isn't working.
->>-
->>-You might want the system to autoboot to recover after an external
->>-configuration program stops autoboot. If the configuration program
->>-dies or loses its connection (modems can disconnect at the worst
->>-time) U-Boot will patiently wait forever for it to finish.
->>-
->>-These additional configuration options can help provide a system that
->>-boots when it should, but still allows access to U-Boot.
->>-
->>-What they do
->>-------------
->>-
->>-  CONFIG_BOOT_RETRY_TIME
->>-  CONFIG_BOOT_RETRY_MIN
->>-
->>-  "bootretry" environment variable
->>-
->>-	These options determine what happens after autoboot is
->>-	stopped and U-Boot is waiting for commands.
->>-
->>-	CONFIG_BOOT_RETRY_TIME must be defined to enable the boot
->>-	retry feature. If the environment variable "bootretry" is
->>-	found then its value is used, otherwise the retry timeout is
->>-	CONFIG_BOOT_RETRY_TIME. CONFIG_BOOT_RETRY_MIN is optional and
->>-	defaults to CONFIG_BOOT_RETRY_TIME. All times are in seconds.
->>-
->>-	If the retry timeout is negative, the U-Boot command prompt
->>-	never times out. Otherwise it is forced to be at least
->>-	CONFIG_BOOT_RETRY_MIN seconds. If no valid U-Boot command is
->>-	entered before the specified time the boot delay sequence is
->>-	restarted. Each command that U-Boot executes restarts the
->>-	timeout.
->>-
->>-	If CONFIG_BOOT_RETRY_TIME < 0 the feature is there, but
->>-	doesn't do anything unless the environment variable
->>-	"bootretry" is >= 0.
->>-
->>-  CONFIG_AUTOBOOT_KEYED
->>-  CONFIG_AUTOBOOT_KEYED_CTRLC
->>-  CONFIG_AUTOBOOT_PROMPT
->>-  CONFIG_AUTOBOOT_DELAY_STR
->>-  CONFIG_AUTOBOOT_STOP_STR
->>-
->>-  "bootdelaykey"  environment variable
->>-  "bootstopkey"	  environment variable
->>-
->>-	These options give more control over stopping autoboot. When
->>-	they are used a specific character or string is required to
->>-	stop or delay autoboot.
->>-
->>-	Define CONFIG_AUTOBOOT_KEYED (no value required) to enable
->>-	this group of options.	CONFIG_AUTOBOOT_DELAY_STR,
->>-	CONFIG_AUTOBOOT_STOP_STR or both should be specified (or
->>-	specified by the corresponding environment variable),
->>-	otherwise there is no way to stop autoboot.
->>-
->>-	CONFIG_AUTOBOOT_PROMPT is displayed before the boot delay
->>-	selected by CONFIG_BOOTDELAY starts. If it is not defined
->>-	there is no output indicating that autoboot is in progress.
->>-
->>-	Note that CONFIG_AUTOBOOT_PROMPT is used as the (only)
->>-	argument to a printf() call, so it may contain '%' format
->>-	specifications, provided that it also includes, sepearated by
->>-	commas exactly like in a printf statement, the required
->>-	arguments. It is the responsibility of the user to select only
->>-	such arguments that are valid in the given context. A
->>-	reasonable prompt could be defined as
->>-
->>-		#define CONFIG_AUTOBOOT_PROMPT \
->>-			"autoboot in %d seconds\n",bootdelay
->>-
->>-	If CONFIG_AUTOBOOT_DELAY_STR or "bootdelaykey" is specified
->>-	and this string is received from console input before
->>-	autoboot starts booting, U-Boot gives a command prompt. The
->>-	U-Boot prompt will time out if CONFIG_BOOT_RETRY_TIME is
->>-	used, otherwise it never times out.
->>-
->>-	If CONFIG_AUTOBOOT_STOP_STR or "bootstopkey" is specified and
->>-	this string is received from console input before autoboot
->>-	starts booting, U-Boot gives a command prompt. The U-Boot
->>-	prompt never times out, even if CONFIG_BOOT_RETRY_TIME is
->>-	used.
->>-
->>-	The string recognition is not very sophisticated. If a
->>-	partial match is detected, the first non-matching character
->>-	is checked to see if starts a new match. There is no check
->>-	for a shorter partial match, so it's best if the first
->>-	character of a key string does not appear in the rest of the
->>-	string.
->>-
->>-	The CONFIG_AUTOBOOT_KEYED_CTRLC #define allows for the boot
->>-	sequence to be interrupted by ctrl-c, in addition to the
->>-	"bootdelaykey" and "bootstopkey". Setting this variable
->>-	provides an escape sequence from the limited "password"
->>-	strings.
->>-
->>-  CONFIG_AUTOBOOT_ENCRYPTION
->>-
->>-  "bootstopkeysha256"	environment variable
->>-
->>-	- Hash value of the input which unlocks the device and
->>-	  stops autoboot.
->>-
->>-	This option allows a string to be entered into U-Boot to stop the
->>-	autoboot. The string itself is hashed and compared against the hash
->>-	in the environment variable 'bootstopkeysha256'. If it matches then
->>-	boot stops and a command-line prompt is presented.
->>-
->>-	This provides a way to ship a secure production device which can also
->>-	be accessed at the U-Boot command line.
->>-
->>-  CONFIG_RESET_TO_RETRY
->>-
->>-	(Only effective when CONFIG_BOOT_RETRY_TIME is also set)
->>-	After the countdown timed out, the board will be reset to restart
->>-	again.
->>-
->>-  CONFIG_AUTOBOOT_USE_MENUKEY
->>-  CONFIG_AUTOBOOT_MENUKEY
->>-
->>-	If this key is pressed to stop autoboot, then the commands in the
->>-	environment variable 'menucmd' will be executed before boot starts.
->>-	For example, 33 means "!" in ASCII, so pressing ! at boot would take
->>-	this action.
->>diff --git a/doc/usage/autoboot.rst b/doc/usage/autoboot.rst
->>new file mode 100644
->>index 00000000000..3b6f040008b
->>--- /dev/null
->>+++ b/doc/usage/autoboot.rst
->>@@ -0,0 +1,149 @@
->>+.. SPDX-License-Identifier: GPL-2.0+
->>+..
->>+.. (C) Copyright 2001
->>+.. Dave Ellis, SIXNET, dge@sixnetio.com
->>+
->>+Using autoboot configuration options
->>+====================================
->>+
->>+The basic autoboot configuration options are documented in the main
->>+U-Boot README. See it for details.
->
->I can't find the word autoboot there. Anyway all autoboot options should be documented in this file.
->
+--M8NjSihaVV8beqJT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This was taken from the OG README.autoboot file
+On Thu, Mar 12, 2026 at 07:44:19PM +0800, Boon Khai Ng wrote:
 
-> They are:
->>+
->>+::
->>+
->>+        bootdelay
->>+        bootcmd
->>+        CONFIG_BOOTDELAY
->>+        CONFIG_BOOTCOMMAND
->>+
->>+Some additional options that make autoboot safer in a production
->>+product are documented here.
->>+
->>+Why use them?
->>+-------------
->>+
->>+The basic autoboot feature allows a system to automatically boot to
->>+the real application (such as Linux) without a user having to enter
->>+any commands. If any key is pressed before the boot delay time
->>+expires, U-Boot stops the autoboot process, gives a U-Boot prompt
->>+and waits forever for a command. That's a good thing if you pressed a
->>+key because you wanted to get the prompt.
->>+
->>+It's not so good if the key press was a stray character on the
->>+console serial port, say because a user who knows nothing about
->>+U-Boot pressed a key before the system had time to boot. It's even
->>+worse on an embedded product that doesn't have a console during
->>+normal use. The modem plugged into that console port sends a
->>+character at the wrong time and the system hangs, with no clue as to
->>+why it isn't working.
->
->There recently was a patch on the mailing list to clear stdin at least for serial input.
->
+> Add 1us delays in busy-wait polling loops to reduce CPU usage, minimize
+> bus traffic, and prevent watchdog timeout during QSPI operations.
+>=20
+> Three tight polling loops continuously check hardware status without
+> any delay, consuming excessive CPU cycles and potentially triggering
+> watchdog timeout on long operations. Adding small delays allows the
+> hardware time to respond and reduces unnecessary register reads.
+>=20
+> The udelay() function includes WATCHDOG_RESET()/schedule() calls that
+> service the watchdog, preventing system reset during extended QSPI
+> transfers.
+>=20
+> Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
+> ---
+>  drivers/spi/cadence_qspi_apb.c | 3 +++
+>  1 file changed, 3 insertions(+)
 
-Same for this
+So, this is fine, BUT it pushes socfpga_vining_fpga over the size limit.
+And I see SoCFPGA isn't enabling LTO at all. Can you please get that
+tested on at least some SoCFPGA platforms and then enable it for all?
+Then we can continue down this path, thanks!
 
->>+
->>+You might want the system to autoboot to recover after an external
->>+configuration program stops autoboot. If the configuration program
->>+dies or loses its connection (modems can disconnect at the worst
->>+time) U-Boot will patiently wait forever for it to finish.
->>+
->>+These additional configuration options can help provide a system that
->>+boots when it should, but still allows access to U-Boot.
->>+
->>+What they do
->>+------------
->>+
->>+CONFIG_BOOT_RETRY_TIME, CONFIG_BOOT_RETRY_MIN, "bootretry" environment variable
->>+    These options determine what happens after autoboot is
->>+    stopped and U-Boot is waiting for commands.
->>+ 
->>+    CONFIG_BOOT_RETRY_TIME must be defined to enable the boot
->>+    retry feature. If the environment variable "bootretry" is
->>+    found then its value is used, otherwise the retry timeout is
->>+    CONFIG_BOOT_RETRY_TIME. CONFIG_BOOT_RETRY_MIN is optional and
->>+    defaults to CONFIG_BOOT_RETRY_TIME. All times are in seconds.
->>+ 
->>+    If the retry timeout is negative, the U-Boot command prompt
->>+    never times out. Otherwise it is forced to be at least
->>+    CONFIG_BOOT_RETRY_MIN seconds. If no valid U-Boot command is
->>+    entered before the specified time the boot delay sequence is
->>+    restarted. Each command that U-Boot executes restarts the
->>+    timeout.
->>+ 
->>+    If CONFIG_BOOT_RETRY_TIME < 0 the feature is there, but
->>+    doesn't do anything unless the environment variable
->>+    "bootretry" is >= 0.
->>+
->>+CONFIG_AUTOBOOT_PROMPT
->>+    CONFIG_AUTOBOOT_PROMPT is displayed before the boot delay
->>+    selected by CONFIG_BOOTDELAY starts, if CONFIG_AUTOBOOT_KEYED
->>+    is defined. Else it is displayed during the autoboot countdown.
->>+
->>+    Note that CONFIG_AUTOBOOT_PROMPT is used as first
->>+    argument to a printf() call, along with the '%d' boot delay countdown,
->>+    so it may contain '%' format specifications, provided that it
->>+    also includes, sepearated by commas exactly like in a printf
->>+    statement, the required arguments. It is the responsibility
->>+    of the user to select only such arguments that are valid in
->>+    the given context. A reasonable prompt could be defined as
->>+
->>+    ::
->>+
->>+        #define CONFIG_AUTOBOOT_PROMPT \
->>+                "\rBooting in %d seconds"
->
->Constants starting with CONFIG_ may only be defined in Kconfig files.
->
+--=20
+Tom
 
-And this.
+--M8NjSihaVV8beqJT
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Do you think it makes sense to rework autoboot documentation with these
-changes or would it be out of scope for this patch series? The only
-changes I did was to convert to rST and move AUTOBOOT_PROMPT docs
-outside of KEYED (as per patch 1/3).
+-----BEGIN PGP SIGNATURE-----
 
---
-Best regards,
-Ferass <funderscore@postmarketos.org>
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCad/4ogAKCRAr4qD1Cr/k
+CrmZAP9/z0gjV5AFeNl6JLJGLjo8quW1NaAvh6k44bDYt02rNgEA1ou0hwQs3jEy
+zturxqHTMsgBYHlektI5Yc4V4gu7hwk=
+=n0cr
+-----END PGP SIGNATURE-----
+
+--M8NjSihaVV8beqJT--
