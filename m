@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58B8BF433D0
-	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 23:55:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72EDAF433CC
+	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 23:59:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA24F8419C;
-	Thu, 16 Apr 2026 01:55:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B852F84201;
+	Thu, 16 Apr 2026 01:59:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PbMdjm2k";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="oIor773y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F371841C8; Thu, 16 Apr 2026 01:55:04 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 3C3358407E; Wed, 15 Apr 2026 19:21:40 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A47B83C2B
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 01:54:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 34B4583936
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 19:21:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7d9b21d1461so116202a34.1
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 16:54:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=micbis.openwrt@gmail.com
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-43cfce3a195so4394075f8f.2
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 10:21:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1776297298; x=1776902098; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=g1FOadwrtQ2XNXPCUh4QCPUEAYAeulLjDahhrv+jSGE=;
- b=PbMdjm2k7QAzDgFIk5ZOzIvSsRAGcIRFl/KTHVteyaBgWSQ6punREGqBe77hu8KHjI
- 8vMnfmiawrwWF2vte611OpG4zmu9FeitfDYycdY3WLbdCNQQ7FDtPjNpFuTJ334tDwep
- BjEuh4dTIucTOHebd+PU9qVU6schqcn9YvHEU=
+ d=gmail.com; s=20251104; t=1776273697; x=1776878497; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ChralTyzbjqayJnfM9/H7w8B69XsMq5McNeKcy90Vys=;
+ b=oIor773y6bu+zp/duqpRaFjYSpbovgQGEja2QhMKX/Z41gzN1Ve4zLI9eoHJTnjEDx
+ 9aQ2fI5EHhwjqdB4Gq5n7ctGxHoCvh01cyfwn+EWesKNjGS3LN0VfL4dTvxOsVBO/HH/
+ Si69iX5efY+SgmHdoj4SkcMgt+j5OtcE3s5FsVbM7VD0ShjTGRumsi8qwMmqsQggf/SK
+ 18JTJjcUjxsnM2cvF+z03V84CTyxn1id1iW0yj3YY9grQuw4K/BT0Pu6XwXcrE18PNU2
+ XYHrg4vJCb14Cup7ZiCgK0oJYvKkmFl0hnqmmbx1Zelq5xgRoxtZyK8V6pqes3w1Eq/S
+ GAeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776297298; x=1776902098;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=g1FOadwrtQ2XNXPCUh4QCPUEAYAeulLjDahhrv+jSGE=;
- b=KX3o74HuzBfUZxlkLiIQkzFpG06njaRjcy8Vg8K+wGWhBsNRPi7DVTZjzToCGfB/No
- ZIEnftosvV4Vi/FcuUJDeOQxZvMWlesheQNZhLMh3iLk+HWKIy0BM/I6zXPWhpYAVB49
- 9NDnXmF63M3X6zcnC4Sbz8/9SfnPNWrG4929NYE63ZvQ/d4YnBiKqwCeIg/NFaUPIA5g
- tAAN3SQTOYvOPEcB3qkYTbN1D2BX22TiwxnvDWDpnURkb7iCuCjJ9PSRKcNpynN4VWAQ
- zsHjM5LS0EfWslgHx+zOty6E1rBNHMOYZYk3OEfR5zJ/2xzULWY87znN0ykE5YRwnryT
- BDAg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8KeeRKf0F9U09WykPA41IFH3GN42U4BgfYCGMfsg2aZZn0Asr22AZhXNXMohf2/HyxoPDQ+LI=@lists.denx.de
-X-Gm-Message-State: AOJu0YzojTXXI5NslSs/bk/ynVcETPCmIWaGgDczqgxii7GvNyiYnQpQ
- 2BTUcW1P1k9oe2mMwT1UzhsEqBbmHiY5XwhtKv48u6wY5tJT1Fsg3wjhAJ9DoLUHm3A=
-X-Gm-Gg: AeBDietkYFXC0mh/jPq1bMa1RAKDkn9zGMYG01k0UjkJbZUwbCcemDv98XmsKUKt4oD
- vKTFQJgIRuqCmiVgcIwEo3YqUPMGxZLLz1b/604opeu5fRA7m4DFQmAFDlEN/NwHx6ROJ3Fqbue
- 5ggCK7nUEMdXLEdHQ6QoBE2sJa64NgBw02n84FZwg5fP2QvJjJRCtbwgFhZf3PGJTnPNJ0x74G+
- P1hxUdxlbBSptn0+tbbeGbp1iPY6SugGaMN9iF6mXS/BKPcgQlzCMoACRGVbfByGcUPYc9zMJNS
- SiTnIi+mZLWRX+TXEzYdUzcbB2mX2PfuycCR159SMZ2UEl4n9EGikjFIaYqx664zOrUV1W+5AwM
- Z3gYwNblQAclO9nZrniGDutVqzOSz/MRBpssPeR77EFudiRxNHARy1n+0f1RV/jLAGFFlcz/xgm
- 5sibwGqOPsVy/uZbtoVmPjNGXRz8wG7gV0W5jw5y4hIDJr9MOSexVrAoGxCWXCWf1tJ1OYlldEl
- CzkD+kYVakcRC+/Re8+ZLDFI4BPXdSE6H70jlKQVPUnGulFU1usP3g7qeOdYA==
-X-Received: by 2002:a9d:5501:0:b0:7d7:45b7:ed8a with SMTP id
- 46e09a7af769-7dc803a001dmr758989a34.5.1776297298108; 
- Wed, 15 Apr 2026 16:54:58 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7dc76bd18a2sm2221492a34.27.2026.04.15.16.54.56
+ d=1e100.net; s=20251104; t=1776273697; x=1776878497;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ChralTyzbjqayJnfM9/H7w8B69XsMq5McNeKcy90Vys=;
+ b=fwAzor9daSv8dGnYZaKObYWb5m1sNmJuaUGUc0tV+sQ2OV7hlDAmhKzUYOxyKxjUnm
+ sfnsZciKZvYQ44ke0yl3IEtTUZdGKe0ZURZs3EieIMHryUrJ2Fqs9jCaPB8FjBtIRrbi
+ MgiB4aM5nGyXKVyS7JQNXy5G9fWFG/h25+lY+79HAEqqrWmnN5CsiLmgcruf49WbAn+P
+ DS2YiAqYxc0VAaiB/0SyNLEi+xLIcypQkuhRwQCGGQWC+vFvu0NM9J+GoR4WQzvM8sK6
+ O0OQuV90FQGGIYNpUKU6yNVLw8jJc6K6r+Mp1Qs7kspq92WdOuUDjiMchH1chn/trzw+
+ Jxkg==
+X-Gm-Message-State: AOJu0Ywv6fn27oYtL+A97WC8dH2f2AAt+ePV11bOqW3tB9RAHyQY37gp
+ J/pN8kam3Qh4ecwl0QYYO52d1Es0fjB6lnSOjdfYkrjZCy7sGAIcgbPNlsv1FCXf4UA=
+X-Gm-Gg: AeBDievN+34qt/0Vht3uZsg0fc0vywFY4SnNAFmspj5z1Hkc7vrD1LzMC6uv1rYH9rY
+ I4VNBVvOkPr7sQ8N6bOgRqc50jnScFwmRMxQjlE0cZi5r+ORvA9DrUvsZMaxyA/NAhw9KTCmH0O
+ /oZq0acSfnZev8ObmBYz5tnKvynx6b88X4Lt69/MTqsgS9VH4zSV0BPj16sJzSLCAoWVwxJesy2
+ oJGNlS5jR2n4NIuRIOgT2MN8GlMzTgQ16YSJdYEokBLnHK/P/Uoxc1Qrhfdg2oGr+cjpRo3sfxx
+ Wk5WmrH7PvjUsPeomY1l+pYfwQc5XIqCQANlQwGluOI8eAP+JjzuePYVXAzgPWp7qbt+M3zePPV
+ Jftp7egUywXVRsc73V4Kmb2gJMVrWe+ING6HjKErjquXWjozim9yuOsTA8EiWyCLm/deqFauUN1
+ yhPN0/ZWcrnG1cuGL7mvgZ/zpBsjQDHOMWskc4sUfa
+X-Received: by 2002:a5d:64e4:0:b0:43e:a638:250f with SMTP id
+ ffacd0b85a97d-43ea638264cmr11844620f8f.1.1776273697008; 
+ Wed, 15 Apr 2026 10:21:37 -0700 (PDT)
+Received: from localhost.localdomain ([151.70.144.55])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43ead33da6esm6210954f8f.5.2026.04.15.10.21.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Apr 2026 16:54:57 -0700 (PDT)
-Date: Wed, 15 Apr 2026 17:54:55 -0600
-From: Tom Rini <trini@konsulko.com>
-To: David Lechner <dlechner@baylibre.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de,
- Weijie Gao <weijie.gao@mediatek.com>
-Subject: Re: [PATCH] lib/Kconfig: Fix SUPPORTS_FW_LOADER option
-Message-ID: <20260415235455.GQ41863@bill-the-cat>
-References: <20260415-lib-fix-supports_fw_loader-v1-1-3b27b4034981@baylibre.com>
+ Wed, 15 Apr 2026 10:21:36 -0700 (PDT)
+From: Michele Bisogno <micbis.openwrt@gmail.com>
+To: u-boot@lists.denx.de
+Cc: marek.vasut+renesas@mailbox.org, paul@pbarker.dev, jh80.chung@samsung.com,
+ peng.fan@nxp.com, lukma@denx.de, mkorpershoek@kernel.org,
+ trini@konsulko.com, Michele Bisogno <micbis.openwrt@gmail.com>
+Subject: [PATCH] usb: gadget: renesas: add support for RZ/G2L SoC
+Date: Wed, 15 Apr 2026 19:21:13 +0200
+Message-Id: <20260415172113.273702-1-micbis.openwrt@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="p2xhmgMIxRv3tUR1"
-Content-Disposition: inline
-In-Reply-To: <20260415-lib-fix-supports_fw_loader-v1-1-3b27b4034981@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 16 Apr 2026 01:59:51 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,45 +97,154 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Support the Renesas RZ/G2L (r9a07g044) USBHS IP by addressing
+platform-specific reset, glue logic, and FIFO access requirements.
 
---p2xhmgMIxRv3tUR1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+- regulator: rzg2l: Implement CON_CTRL manual connectivity notification.
+  By setting SEL_CONNECT and CONNECT_1, the UTM+ core is notified of
+  connection status in peripheral mode.
+- gadget: common: Add "renesas,rzg2l-usbhs" compatible and support
+  reset deassertion. Fix a re-entrancy bug by calling usb_del_gadget_udc()
+  in the remove callback to prevent stale UDC list entries.
+- gadget: fifo: Refactor PIO push/pop logic to handle trailing bytes
+  using iowrite8/ioread8. This ensures correct data alignment on
+  RZ/G2L and simplifies the data transfer loop.
 
-On Wed, Apr 15, 2026 at 04:37:27PM -0500, David Lechner wrote:
+Signed-off-by: Michele Bisogno <micbis.openwrt@gmail.com>
+---
+ .../power/regulator/rzg2l-usbphy-regulator.c  | 10 ++++++--
+ drivers/usb/gadget/rcar/common.c              | 15 ++++++++++++
+ drivers/usb/gadget/rcar/fifo.c                | 23 +++++++++++--------
+ 3 files changed, 36 insertions(+), 12 deletions(-)
 
-> Change the SUPPORTS_FW_LOADER option to be enabled by default.
->=20
-> This is a dependency-only option intended to be used like:
->     depends on SUPPORTS_FW_LOADER
->=20
-> Instead of having to always remember to do both:
->     depends on CMDLINE
->     depends on ENV_SUPPORT
->=20
-> In order to actually work though, the option has to be enabled.
->=20
-> Reported-by: Weijie Gao <weijie.gao@mediatek.com>
-> Closes: https://lore.kernel.org/u-boot/20260410015311.4066075-1-weijie.ga=
-o@mediatek.com/
-> Fixes: 4ed440e6be80 ("fw_loader: Introduce SUPPORTS_FW_LOADER symbol")
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
+diff --git a/drivers/power/regulator/rzg2l-usbphy-regulator.c b/drivers/power/regulator/rzg2l-usbphy-regulator.c
+index 0354555d0b5..03f8dec4f08 100644
+--- a/drivers/power/regulator/rzg2l-usbphy-regulator.c
++++ b/drivers/power/regulator/rzg2l-usbphy-regulator.c
+@@ -9,16 +9,22 @@
+ #include <renesas/rzg2l-usbphy.h>
+ 
+ #define VBENCTL			0x03c
++#define CON_CTRL		0x020
+ #define VBENCTL_VBUS_SEL	BIT(0)
++#define SEL_CONNECT		BIT(4)
++#define CONNECT_1		BIT(0)
+ 
+ static int rzg2l_usbphy_regulator_set_enable(struct udevice *dev, bool enable)
+ {
+ 	struct rzg2l_usbphy_ctrl_priv *priv = dev_get_priv(dev->parent);
+ 
+-	if (enable)
++	if (enable) {
+ 		clrbits_le32(priv->regs + VBENCTL, VBENCTL_VBUS_SEL);
+-	else
++		setbits_le32(priv->regs + CON_CTRL, SEL_CONNECT | CONNECT_1);
++	} else {
+ 		setbits_le32(priv->regs + VBENCTL, VBENCTL_VBUS_SEL);
++		clrbits_le32(priv->regs + CON_CTRL, SEL_CONNECT | CONNECT_1);
++	}
+ 
+ 	return 0;
+ }
+diff --git a/drivers/usb/gadget/rcar/common.c b/drivers/usb/gadget/rcar/common.c
+index 2ba022a3f2c..1f266ae5ac9 100644
+--- a/drivers/usb/gadget/rcar/common.c
++++ b/drivers/usb/gadget/rcar/common.c
+@@ -16,6 +16,7 @@
+ #include <linux/usb/ch9.h>
+ #include <linux/usb/gadget.h>
+ #include <usb.h>
++#include <reset.h>
+ 
+ #include "common.h"
+ 
+@@ -397,6 +398,7 @@ static int usbhs_udc_otg_probe(struct udevice *dev)
+ 	struct usbhs_priv_otg_data *priv = dev_get_priv(dev);
+ 	struct usb_gadget *gadget;
+ 	struct clk_bulk clk_bulk;
++	struct reset_ctl_bulk reset_bulk;
+ 	int ret = -EINVAL;
+ 
+ 	priv->base = dev_read_addr_ptr(dev);
+@@ -411,6 +413,14 @@ static int usbhs_udc_otg_probe(struct udevice *dev)
+ 	if (ret)
+ 		return ret;
+ 
++	ret = reset_get_bulk(dev, &reset_bulk);
++	if (ret)
++		return ret;
++
++	ret = reset_deassert_bulk(&reset_bulk);
++	if (ret)
++		return ret;
++
+ 	clrsetbits_le32(priv->base + UGCTRL2, UGCTRL2_USB0SEL_MASK, UGCTRL2_USB0SEL_EHCI);
+ 	clrsetbits_le16(priv->base + LPSTS, LPSTS_SUSPM, LPSTS_SUSPM);
+ 
+@@ -447,7 +457,11 @@ err_clk:
+ static int usbhs_udc_otg_remove(struct udevice *dev)
+ {
+ 	struct usbhs_priv_otg_data *priv = dev_get_priv(dev);
++	struct usb_gadget *gadget;
+ 
++	gadget = usbhsg_get_gadget(&priv->usbhs_priv);
++	if (gadget)
++		usb_del_gadget_udc(gadget);
+ 	usbhs_rcar3_power_ctrl(&priv->usbhs_priv, false);
+ 	usbhs_mod_remove(&priv->usbhs_priv);
+ 	usbhs_fifo_remove(&priv->usbhs_priv);
+@@ -460,6 +474,7 @@ static int usbhs_udc_otg_remove(struct udevice *dev)
+ 
+ static const struct udevice_id usbhs_udc_otg_ids[] = {
+ 	{ .compatible = "renesas,rcar-gen3-usbhs" },
++	{ .compatible = "renesas,rzg2l-usbhs"},
+ 	{},
+ };
+ 
+diff --git a/drivers/usb/gadget/rcar/fifo.c b/drivers/usb/gadget/rcar/fifo.c
+index 6016b2987d5..b5340b4d860 100644
+--- a/drivers/usb/gadget/rcar/fifo.c
++++ b/drivers/usb/gadget/rcar/fifo.c
+@@ -535,18 +535,21 @@ static int usbhsf_pio_try_push(struct usbhs_pkt *pkt, int *is_done)
+ 	 * 32-bit access only
+ 	 */
+ 	if (len >= 4 && !((unsigned long)buf & 0x03)) {
+-		iowrite32_rep(addr, buf, len / 4);
+-		len %= 4;
+-		buf += total_len - len;
++		int words = len / 4;
++
++		iowrite32_rep(addr, buf, words);
++		buf += (words * 4);
++		len -= (words * 4);
+ 	}
+ 
+ 	/* the rest operation */
+-	if (usbhs_get_dparam(priv, cfifo_byte_addr)) {
+-		for (i = 0; i < len; i++)
+-			iowrite8(buf[i], addr + (i & 0x03));
+-	} else {
+-		for (i = 0; i < len; i++)
+-			iowrite8(buf[i], addr + (0x03 - (i & 0x03)));
++	if (len > 0) {
++		if (len == 2 && !((unsigned long)buf & 0x01)) {
++			iowrite16(*(u16 *)buf, addr);
++		} else {
++			for (i = 0; i < len; i++)
++				iowrite8(buf[i], addr);
++		}
+ 	}
+ 
+ 	/*
+@@ -716,7 +719,7 @@ static int usbhsf_pio_try_pop(struct usbhs_pkt *pkt, int *is_done)
+ 		if (!(i & 0x03))
+ 			data = ioread32(addr);
+ 
+-		buf[i] = (data >> ((i & 0x03) * 8)) & 0xff;
++		buf[i] = ioread8(addr);
+ 	}
+ 
+ usbhs_fifo_read_end:
+-- 
+2.34.1
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---p2xhmgMIxRv3tUR1
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaeAlSwAKCRAr4qD1Cr/k
-CgkwAP0T6Y2ZINyWmofg1/Josa8UO0BrYh7tnmcW/cVR2uApfwD+Pg1V8zc7JcQY
-ndpv/lUo1eCuKv/VSIhJb52Gy7PmHgE=
-=TI8L
------END PGP SIGNATURE-----
-
---p2xhmgMIxRv3tUR1--
