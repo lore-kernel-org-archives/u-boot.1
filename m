@@ -4,67 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7C3DF41992
-	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 11:47:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97ED2F4198B
+	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 12:04:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1D9883B99;
-	Wed, 15 Apr 2026 13:47:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
+	by phobos.denx.de (Postfix) with ESMTP id 8852583C2B;
+	Wed, 15 Apr 2026 14:04:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="MtESJa4R";
+	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="hrTmDG7b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E22D783C2B; Wed, 15 Apr 2026 13:47:06 +0200 (CEST)
-Received: from cp2.siel.si (cp2.siel.si [46.19.12.180])
+ id E380D84119; Wed, 15 Apr 2026 14:04:53 +0200 (CEST)
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29EA180086
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 13:47:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D01F083B99
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 14:04:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=norik.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=primoz.fiser@norik.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
- s=default;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
- Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=Luj0wtlYI5+rDh97cVJdHpgjjr/2Mb3bWTVnOdlC6uo=; b=MtESJa4R9e7vTNSDGQ6oVDf4/f
- AMB1C1qutepCzOEZi0a0rsdcIZGD6ZliG7UQsGzJQUbzTDfNM+cHxm0xeoZSOhHNzqesjxH5d4F5O
- wiKwzA40Wbt4CZ9djGIfCQJNrFVQ5mg/7j7JVoIu8At/2IeNiBB2fMyIVgzheqntD6txDDuyi/aFK
- BUWTZeyYfm5iQVD6V6f8pSPfiYrsO9FvbGhUa4BCOpnLnSRulH+3IVESl3NyX+C68953l2B/W9H/i
- BDlZva6BfIR/u/82+30ZT2++iSPzK6qYc2Zu/GdTnFeZjpNeBqog4VhsCE821GQIxjyKPLpYgs0uR
- LpucO0ZA==;
-Received: from 89-212-21-243.static.t-2.net ([89.212.21.243]:43782
- helo=localhost.localdomain)
- by cp2.siel.si with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.99.1) (envelope-from <primoz.fiser@norik.com>)
- id 1wCyhx-000000041sm-3rgz; Wed, 15 Apr 2026 13:46:58 +0200
-From: Primoz Fiser <primoz.fiser@norik.com>
-To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- uboot-imx@nxp.com, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
-	upstream@lists.phytec.de
-Subject: [PATCH] imx: imx9: Select ARCH_MISC_INIT for all i.MX9 SoCs
-Date: Wed, 15 Apr 2026 13:46:58 +0200
-Message-Id: <20260415114658.3321643-1-primoz.fiser@norik.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sgdfkk@163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=+R
+ RctQiDz10VO7hYlJBBD3FZic+A0WGqjtUyOAGP5Sw=; b=hrTmDG7b6KJ8zsHtyE
+ 5RV5Dq6hru/vMFypqRiGS0Qw4cmtYQHHZIr3xHPPOMFdmFlFOCJ7i6AbNrB2O3oI
+ 0caRF/isJoQWpiYtcDVOI9HPTfXjNEyFN+bXLOqMySEPJMgptiGDDdqzPy7z3o6/
+ k93LSt1wEXYawx8XNNEIH34hI=
+Received: from server-e.. (unknown [])
+ by gzga-smtp-mtada-g1-0 (Coremail) with SMTP id
+ _____wD3RcLJft9p2XkzFA--.19463S5; 
+ Wed, 15 Apr 2026 20:04:39 +0800 (CST)
+From: sgdfkk@163.com
+To: duhuanpeng@139.com
+Cc: Du Huanpeng <u74147@gmail.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de (open list)
+Subject: [PATCH v7 3/7] mips: loongson: lowlevel debug serial
+Date: Wed, 15 Apr 2026 20:04:09 +0800
+Message-ID: <20260415120425.5792-4-sgdfkk@163.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260415120425.5792-1-sgdfkk@163.com>
+References: <20260415120425.5792-1-sgdfkk@163.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cp2.siel.si
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - norik.com
-X-Get-Message-Sender-Via: cp2.siel.si: authenticated_id: primoz.fiser@norik.com
-X-Authenticated-Sender: cp2.siel.si: primoz.fiser@norik.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+X-CM-TRANSID: _____wD3RcLJft9p2XkzFA--.19463S5
+X-Coremail-Antispam: 1Uf129KBjvJXoWxtw1UZrWrCw1fJr4kGFy3urg_yoW7XFy7pF
+ 1xAan5KF4DXw47KasYy3WkGrnxtrs5Jry7JFnrXF1ru3Z7t3Z5CF42kFn0vrW3JFZ5GrWF
+ 9ayavrW2gas7Zw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jl9a9UUUUU=
+X-Originating-IP: [240e:3b0:4805:31e::3001]
+X-CM-SenderInfo: xvjgwyrn6rljoofrz/xtbCwBgof2nffth6lQAA3w
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,45 +70,225 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Instead of adding select ARCH_MISC_INIT for each i.MX 9x SoC, select it
-at the i.MX9 family Kconfig level. The corresponding arch_misc_init() is
-already defined in the common arch/arm/mach-imx/imx9/soc.c file and will
-print out ELE firmware BuildInfo for all i.MX9 SoCs now instead of just
-i.MX91 and i.MX95.
+From: Du Huanpeng <u74147@gmail.com>
 
-Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
+set pin to uart alternate function and enable uart for lowlevel debug,
+also future pinctrl driver can base on this code.
+
+Signed-off-by: Du Huanpeng <u74147@gmail.com>
 ---
- arch/arm/mach-imx/imx9/Kconfig | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ arch/mips/mach-loongson/include/mach/serial.h |  16 +++
+ arch/mips/mach-loongson/ls1c300/gpio.c        |  66 +++++++++++
+ arch/mips/mach-loongson/ls1c300/serial.c      | 104 ++++++++++++++++++
+ 3 files changed, 186 insertions(+)
+ create mode 100644 arch/mips/mach-loongson/include/mach/serial.h
+ create mode 100644 arch/mips/mach-loongson/ls1c300/gpio.c
+ create mode 100644 arch/mips/mach-loongson/ls1c300/serial.c
 
-diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
-index 2308457df23e..12eb0af88a73 100644
---- a/arch/arm/mach-imx/imx9/Kconfig
-+++ b/arch/arm/mach-imx/imx9/Kconfig
-@@ -7,6 +7,7 @@ config AHAB_BOOT
- 
- config IMX9
- 	bool
-+	select ARCH_MISC_INIT
- 	select BINMAN
- 	select CPU
- 	select CPU_IMX
-@@ -22,7 +23,6 @@ config IMX93
- config IMX91
- 	bool
- 	select IMX9
--	select ARCH_MISC_INIT
- 	select ARMV8_SPL_EXCEPTION_VECTORS
- 
- config IMX95_A0
-@@ -30,7 +30,6 @@ config IMX95_A0
- 
- config IMX95
- 	bool
--	select ARCH_MISC_INIT
- 	select ARMV8_SPL_EXCEPTION_VECTORS
- 	select IMX9
- 	select DM_MAILBOX
+diff --git a/arch/mips/mach-loongson/include/mach/serial.h b/arch/mips/mach-loongson/include/mach/serial.h
+new file mode 100644
+index 00000000000..7afe5788cb7
+--- /dev/null
++++ b/arch/mips/mach-loongson/include/mach/serial.h
+@@ -0,0 +1,16 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright (C) 2020 MediaTek Inc.
++ *
++ * Author:  Gao Weijie <weijie.gao@mediatek.com>
++ *
++ * Copyright (C) 2022 Du Huanpeng <u74147@gmail.com>
++ */
++
++#ifndef __LSMIPS_SERIAL_H_
++#define __LSMIPS_SERIAL_H_
++
++void loongson_spl_serial_init(void);
++int gpio_set_alternate(int gpio, int func);
++
++#endif /* __LSMIPS_SERIAL_H_ */
+diff --git a/arch/mips/mach-loongson/ls1c300/gpio.c b/arch/mips/mach-loongson/ls1c300/gpio.c
+new file mode 100644
+index 00000000000..7f160408382
+--- /dev/null
++++ b/arch/mips/mach-loongson/ls1c300/gpio.c
+@@ -0,0 +1,66 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2022 Du Huanpeng <u74147@gmail.com>
++ */
++
++#include <linux/errno.h>
++#include <asm/bitops.h>
++
++#define CBUS_FIRST0	0xbfd011c0
++#define CBUS_SECOND0	0xbfd011d0
++#define CBUS_THIRD0	0xbfd011e0
++#define CBUS_FOURTHT0	0xbfd011f0
++#define CBUS_FIFTHT0	0xbfd01200
++
++#define CBUS_FIRST1	0xbfd011c4
++#define CBUS_SECOND1	0xbfd011d4
++#define CBUS_THIRD1	0xbfd011e4
++#define CBUS_FOURTHT1	0xbfd011f4
++#define CBUS_FIFTHT1	0xbfd01204
++
++#define CBUS_FIRST2	0xbfd011c8
++#define CBUS_SECOND2	0xbfd011d8
++#define CBUS_THIRD2	0xbfd011e8
++#define CBUS_FOURTHT2	0xbfd011f8
++#define CBUS_FIFTHT2	0xbfd01208
++
++#define CBUS_FIRST3	0xbfd011cc
++#define CBUS_SECOND3	0xbfd011dc
++#define CBUS_THIRD3	0xbfd011ec
++#define CBUS_FOURTHT3	0xbfd011fc
++#define CBUS_FIFTHT3	0xbfd0120c
++
++/*
++ * pinmux for debug uart and spl only, for others, please
++ * use a pinctrl driver and device-tree for pin muxing.
++ *
++ * @gpio: gpio number
++ * @func: alternate function 1 to 5, 0 for GPIO.
++ */
++
++int gpio_set_alternate(int gpio, int func)
++{
++	volatile void __iomem *addr;
++	int i;
++
++	if (gpio < 0 || gpio > 104)
++		return -ENODEV;
++	if (func < 0 || func > 5)
++		return -EINVAL;
++
++	if (func) {
++		i = func - 1;
++		addr = (void *)CBUS_FIRST0 + i * 16;
++		set_bit(gpio, addr);
++	} else {
++		/* GPIO, clear CBUS 1 ~ 5 */
++		i = 5;
++	}
++
++	while (i--) {
++		addr = (void *)CBUS_FIRST0 + 16 * i;
++		clear_bit(gpio, addr);
++	}
++
++	return 0;
++}
+diff --git a/arch/mips/mach-loongson/ls1c300/serial.c b/arch/mips/mach-loongson/ls1c300/serial.c
+new file mode 100644
+index 00000000000..a7697574dad
+--- /dev/null
++++ b/arch/mips/mach-loongson/ls1c300/serial.c
+@@ -0,0 +1,104 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2020-2026 Du Huanpeng <u74147@gmail.com>
++ */
++
++#include <mach/serial.h>
++#include <linux/kernel.h>
++
++struct uart_pin_config {
++	char port;
++	char afunc;
++	char rx;
++	char tx;
++};
++
++struct uart_pin_config con[] = {
++#if CONFIG_CONS_INDEX == 0
++	{ 0, 2, 74, 75 },
++	{ 0, 3, 23, 24 },
++	{ 0, 3, 99, 100 },
++
++#elif CONFIG_CONS_INDEX == 1
++	{ 1, 1, 17, 18 },
++	{ 1, 1, 101, 102 },
++	{ 1, 2, 40, 41 },
++	{ 1, 4, 2, 3 },
++
++#elif CONFIG_CONS_INDEX == 2
++	{ 2, 2, 36, 37 },
++	{ 2, 2, 42, 43 },
++	{ 2, 3, 27, 28 },
++	{ 2, 3, 103, 104 },
++	{ 2, 4, 4, 5 },
++
++#elif CONFIG_CONS_INDEX == 3
++	{ 3, 2, 17, 18 },
++	{ 3, 2, 33, 34 },
++	{ 3, 2, 44, 45 },
++	{ 3, 4, 0, 1 },
++
++#elif CONFIG_CONS_INDEX == 4
++	{ 4, 5, 23, 24 },
++	{ 4, 5, 58, 59 },
++	{ 4, 5, 80, 79 },
++
++#elif CONFIG_CONS_INDEX == 5
++	{ 5, 5, 25, 26 },
++	{ 5, 5, 60, 61 },
++	{ 5, 5, 81, 78 },
++
++#elif CONFIG_CONS_INDEX == 6
++	{ 6, 5, 27, 46 },
++	{ 6, 5, 62, 63 },
++
++#elif CONFIG_CONS_INDEX == 7
++	{ 7, 5, 57, 56 },
++	{ 7, 5, 64, 65 },
++	{ 7, 5, 87, 88 },
++
++#elif CONFIG_CONS_INDEX == 8
++	{ 8, 5, 55, 54 },
++	{ 8, 5, 66, 67 },
++	{ 8, 5, 89, 90 },
++
++#elif CONFIG_CONS_INDEX == 9
++	{ 9, 5, 53, 52 },
++	{ 9, 5, 68, 69 },
++	{ 9, 5, 85, 86 },
++
++#elif CONFIG_CONS_INDEX == 10
++	{ 10, 5, 51, 50 },
++	{ 10, 5, 70, 71 },
++	{ 10, 5, 84, 82 },
++
++#elif CONFIG_CONS_INDEX == 11
++	{ 11, 5, 49, 48 },
++	{ 11, 5, 72, 73 },
++#endif /* CONFIG_CONS_INDEX */
++};
++
++#define UART2_RX	36
++#define UART2_TX	37
++#define AFUNC		2
++
++void loongson_spl_serial_init(void)
++{
++#if defined(CONFIG_SPL_SERIAL)
++	int pin_rx, pin_tx;
++	int afunc;
++
++	if (CONFIG_CONS_PIN < ARRAY_SIZE(con)) {
++		pin_rx = con[CONFIG_CONS_PIN].rx;
++		pin_tx = con[CONFIG_CONS_PIN].tx;
++		afunc = con[CONFIG_CONS_PIN].afunc;
++	} else {
++		pin_rx = UART2_RX;
++		pin_tx = UART2_TX;
++		afunc = AFUNC;
++	}
++
++	gpio_set_alternate(pin_rx, afunc);
++	gpio_set_alternate(pin_tx, afunc);
++#endif /* CONFIG_SPL_SERIAL */
++}
 -- 
-2.34.1
+2.43.0
 
