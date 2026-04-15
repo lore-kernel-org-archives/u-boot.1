@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACE47F4384C
-	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 15:41:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE843F4384C
+	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 15:41:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D895B8421D;
-	Wed, 15 Apr 2026 17:41:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DD97D8407E;
+	Wed, 15 Apr 2026 17:41:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="e/HnOd4Y";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="McPFapHK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A91E8421D; Wed, 15 Apr 2026 17:41:00 +0200 (CEST)
-Received: from out-185.mta0.migadu.com (out-185.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::b9])
+ id B653384105; Wed, 15 Apr 2026 17:41:04 +0200 (CEST)
+Received: from out-170.mta0.migadu.com (out-170.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::aa])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD3B584129
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 17:40:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3184983B99
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 17:40:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
@@ -29,24 +29,24 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1776267656;
+ s=key1; t=1776267657;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=YZrSxf6ckX384UqqPLbIT/7pjppJxspx3wLMVSrNvYU=;
- b=e/HnOd4YiABCw2E+dTCuQ9qgezXzOJQMK1J2lKzXXFeIkBKVySbCVIVDLB+rR2wNP7hx1o
- VXOEQkwE30lLSgJOS7kyxL6JuXP2UZIBMeCWu7MiJ2ohvrgN6S54S7TyH0RaD7gZRwdS5E
- Gnh92HrJqh+qWx79g0eO4//Xm1PeEGo3pdTwKpWhngeBktqF467VDOUtezHWb3DDgaJftD
- dtJX0vEpYjNUIMVUJnuja5VCt6SMZ3A99j7hrRihsgnNT3tiAgiudBLp90yThnKxuPwBGu
- 1jHjH8l2sDl91Xf6s1aG0BMhXbBVqf2aL28pyprj8i/3tCTdiMHtAOHdSHCLgg==
+ bh=VOtCjwnb5nL4pxpt8ORKORTsYzgI3ZH03AVBnwZ7BXI=;
+ b=McPFapHK9YcOpMUhu+ymWJDF0fpVvMQYHPsLYJCNDIcixy+vRv2O09mcFr6Y4hvUC6bgRY
+ 0A1JE4ntFAqEcoUfFHqkY5pvEmSRIhZ4jhPljqXrg8MjGY817XIEyBe6h67gn9+NaWvfrY
+ lgQw3v0JX0lOU5f/im1dTOdu0Sq8wiehmWCxv8qRnO75OP12WiO6K8e4lmuLYes/d1SOaG
+ kLDIBkaEUGGbzcZZbq48h2TRQVfyXmZUvb0zfz/H6LlBlElKavArPuDcExtMQcbbZSdx6r
+ IQ3Fl1rT5ywMR6lUwZZ1rCkdxoFm5PkiorNeSTaRyyNRGJa5vnRKcdW+/xnxcg==
 From: Ferass El Hafidi <funderscore@postmarketos.org>
-Date: Wed, 15 Apr 2026 14:32:32 +0000
-Subject: [PATCH v3 2/3] cmd: bootmenu: ANSI_CLEAR_LINE before entry name
+Date: Wed, 15 Apr 2026 14:32:33 +0000
+Subject: [PATCH v3 3/3] doc: usage: convert autoboot README to rST
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260415-ui-cosmetics-v3-2-aa8308a47e33@postmarketos.org>
+Message-Id: <20260415-ui-cosmetics-v3-3-aa8308a47e33@postmarketos.org>
 References: <20260415-ui-cosmetics-v3-0-aa8308a47e33@postmarketos.org>
 In-Reply-To: <20260415-ui-cosmetics-v3-0-aa8308a47e33@postmarketos.org>
 To: u-boot@lists.denx.de
@@ -59,21 +59,21 @@ Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
  Sam Protsenko <semen.protsenko@linaro.org>, 
  Christian Marangi <ansuelsmth@gmail.com>, 
  Ferass El Hafidi <funderscore@postmarketos.org>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=709;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=13781;
  i=funderscore@postmarketos.org; h=from:subject:message-id;
- bh=gRFMsdTbH87+UZY8Gp3qVC28CYTjUgFe4xb6Rw0ialU=;
- b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBp37GDEy5bB9esF3JgMCX10mJH/0IU2DkUV5K83
- /7V8ceZnf2JAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCad+xgwAKCRCEr8vQ14ma
- Aw07D/9Zx+OkRkVgQrxH1rp30vuBBpH+KXeTsbGD86aHoLU+S8ufAEqt2lwZGfqILx53/JprD2p
- Weq5wMedpuTnrG94x9mHl9veo7jPgj6llDvEIxFrOiufe7ITixTdy/CCC0Kjb9qHrKBYoT4R9Dv
- YxX3VO/w8f39Rktmm8q+caWINBwM2E3cdvWuwvV80THJzpAGoh0Te0k6Fp/twpTP+PjIKS0ARZl
- ZQryfLDSddOWGhn3KuvW7WMMTxrmSSp62EmKz2AdZbbuM8Kuo7A0Xx3GW1Z8jgHBRmvX0AMuIBW
- 865uZXbnMtIfhuab3KgPXAm0dimuJ9BiYBDhyvUZVSDlYkEgTpkmc8ED9JYxt1OcZEYQU6kjkT8
- QalCDY2CA8POu9xi9zz/8htuqGAWH3QkvXGOsD6+t0dq0frvh5m5CA4rmkTfMr2IkONHEiBDOqc
- xXbc3gNw3eSAi48kKvJE1WpP9RlwYWWVl7pkl+fzBOBEnPEftesSUR7kqNRLU3foqBMfL92LKs0
- DrS1RMj2G3peUJJfy0LmewyIaHNVs7SLuML/pEB+p5KgDnzyXMrF+L0/xd8lnt+FXf4BfZYqBLH
- kqrLiPT0sF7oX+DTIwfnskzotJQhsU7XqEpO08UShR1vt/mH4k0cOO3YiozMca9KSAWvEs4Fii4
- C4663fBV+8QBMMQ==
+ bh=Nld+PT02Wk6627mufXp47AmnR6LT4Hs7/oSuQXUD1xM=;
+ b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBp37GEB+Uq3pmUlKCva8caWmkSAvOMLK/+RPgcm
+ NwFT/k+qU+JAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCad+xhAAKCRCEr8vQ14ma
+ Aww2D/0a8QW5YUJtRjPOhcjvThGFpEuaAJY6AREoqJADXawfqSdgaGDPG238C2OwxK8bYyhhWLC
+ H6rWds6Vd+z8aJR+jKe8NQk7NLbIwb31Q2w/kSdvYnd9JMXdepxtzyluDpWNTOgGY15mGD1FXe1
+ IViLsctxfSFRSFWwntLFF+Q2M8vCJq7e/76nJgIild7wdHD1m7jnV/8i6QEeAn1yh9CYu+MIbo1
+ PC4YAhChyH922AgLd1UBw60wJjjsGb3aglgEZHXVaP0vwpZFm6k5FF7bE0XH7+4BpBBewuMVUZN
+ /J9/483hqFU5TnITXUq9PXnr+BaFHEfNf6ZZnvOaIyhe4YKYr6CzC0qFQK4xm0qPrwSOXYNQRHy
+ RcqfCYkpem9pfjkawX4Gjmb4dAaKO1K649sORSSM8M/GDzHy5+K04G4DYAT8I/Gc27u3tuk0rS7
+ On8vpQXno5HHoGNP3C1l9WQ5WQnXmLqGve6vY/8Wc3o0rRV4BniQZxf2yj+LCGewz8pW79zLrGo
+ XIFsSLCRQ1VxsTrp0ULKOhXdPFRnE6evXQmqWCk3jUFucFK+szjzCQvQ2DWFeqri4KgkPmqspd7
+ EX6vEayTVCitgW/8f/YBg5creNh0k/VRiBySIh5GH4iRZXQHK1hkFQ7RSo/WcDyjyunJId111OY
+ bVXdOs9KyJbuXlg==
 X-Developer-Key: i=funderscore@postmarketos.org; a=openpgp;
  fpr=0301BC37FB555CACFD798BEE84AFCBD0D7899A03
 X-Migadu-Flow: FLOW_OUT
@@ -93,28 +93,352 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This has the effect of highlighting the whole entry when it is selected
-(on vidconsole), which makes it consistent with eficonfig too.
+Convert the plain text autoboot documentation into rST, so it is visible
+in the public docs. Also decouple CONFIG_AUTOBOOT_PROMPT from
+CONFIG_AUTOBOOT_KEYED in the documentation to reflect previous commits.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
 ---
- cmd/bootmenu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ doc/README.autoboot    | 162 -------------------------------------------------
+ doc/usage/autoboot.rst | 149 +++++++++++++++++++++++++++++++++++++++++++++
+ doc/usage/index.rst    |   1 +
+ 3 files changed, 150 insertions(+), 162 deletions(-)
 
-diff --git a/cmd/bootmenu.c b/cmd/bootmenu.c
-index d3108778c6f..a07fea49322 100644
---- a/cmd/bootmenu.c
-+++ b/cmd/bootmenu.c
-@@ -76,7 +76,7 @@ static void bootmenu_print_entry(void *data)
- 	if (reverse)
- 		puts(ANSI_COLOR_REVERSE);
+diff --git a/doc/README.autoboot b/doc/README.autoboot
+deleted file mode 100644
+index 5e9a5e1cf7f..00000000000
+--- a/doc/README.autoboot
++++ /dev/null
+@@ -1,162 +0,0 @@
+-SPDX-License-Identifier: GPL-2.0+
+-/*
+- * (C) Copyright 2001
+- * Dave Ellis, SIXNET, dge@sixnetio.com
+- *
+- */
+-
+-Using autoboot configuration options
+-====================================
+-
+-The basic autoboot configuration options are documented in the main
+-U-Boot README. See it for details. They are:
+-
+-  bootdelay
+-  bootcmd
+-  CONFIG_BOOTDELAY
+-  CONFIG_BOOTCOMMAND
+-
+-Some additional options that make autoboot safer in a production
+-product are documented here.
+-
+-Why use them?
+--------------
+-
+-The basic autoboot feature allows a system to automatically boot to
+-the real application (such as Linux) without a user having to enter
+-any commands. If any key is pressed before the boot delay time
+-expires, U-Boot stops the autoboot process, gives a U-Boot prompt
+-and waits forever for a command. That's a good thing if you pressed a
+-key because you wanted to get the prompt.
+-
+-It's not so good if the key press was a stray character on the
+-console serial port, say because a user who knows nothing about
+-U-Boot pressed a key before the system had time to boot. It's even
+-worse on an embedded product that doesn't have a console during
+-normal use. The modem plugged into that console port sends a
+-character at the wrong time and the system hangs, with no clue as to
+-why it isn't working.
+-
+-You might want the system to autoboot to recover after an external
+-configuration program stops autoboot. If the configuration program
+-dies or loses its connection (modems can disconnect at the worst
+-time) U-Boot will patiently wait forever for it to finish.
+-
+-These additional configuration options can help provide a system that
+-boots when it should, but still allows access to U-Boot.
+-
+-What they do
+-------------
+-
+-  CONFIG_BOOT_RETRY_TIME
+-  CONFIG_BOOT_RETRY_MIN
+-
+-  "bootretry" environment variable
+-
+-	These options determine what happens after autoboot is
+-	stopped and U-Boot is waiting for commands.
+-
+-	CONFIG_BOOT_RETRY_TIME must be defined to enable the boot
+-	retry feature. If the environment variable "bootretry" is
+-	found then its value is used, otherwise the retry timeout is
+-	CONFIG_BOOT_RETRY_TIME. CONFIG_BOOT_RETRY_MIN is optional and
+-	defaults to CONFIG_BOOT_RETRY_TIME. All times are in seconds.
+-
+-	If the retry timeout is negative, the U-Boot command prompt
+-	never times out. Otherwise it is forced to be at least
+-	CONFIG_BOOT_RETRY_MIN seconds. If no valid U-Boot command is
+-	entered before the specified time the boot delay sequence is
+-	restarted. Each command that U-Boot executes restarts the
+-	timeout.
+-
+-	If CONFIG_BOOT_RETRY_TIME < 0 the feature is there, but
+-	doesn't do anything unless the environment variable
+-	"bootretry" is >= 0.
+-
+-  CONFIG_AUTOBOOT_KEYED
+-  CONFIG_AUTOBOOT_KEYED_CTRLC
+-  CONFIG_AUTOBOOT_PROMPT
+-  CONFIG_AUTOBOOT_DELAY_STR
+-  CONFIG_AUTOBOOT_STOP_STR
+-
+-  "bootdelaykey"  environment variable
+-  "bootstopkey"	  environment variable
+-
+-	These options give more control over stopping autoboot. When
+-	they are used a specific character or string is required to
+-	stop or delay autoboot.
+-
+-	Define CONFIG_AUTOBOOT_KEYED (no value required) to enable
+-	this group of options.	CONFIG_AUTOBOOT_DELAY_STR,
+-	CONFIG_AUTOBOOT_STOP_STR or both should be specified (or
+-	specified by the corresponding environment variable),
+-	otherwise there is no way to stop autoboot.
+-
+-	CONFIG_AUTOBOOT_PROMPT is displayed before the boot delay
+-	selected by CONFIG_BOOTDELAY starts. If it is not defined
+-	there is no output indicating that autoboot is in progress.
+-
+-	Note that CONFIG_AUTOBOOT_PROMPT is used as the (only)
+-	argument to a printf() call, so it may contain '%' format
+-	specifications, provided that it also includes, sepearated by
+-	commas exactly like in a printf statement, the required
+-	arguments. It is the responsibility of the user to select only
+-	such arguments that are valid in the given context. A
+-	reasonable prompt could be defined as
+-
+-		#define CONFIG_AUTOBOOT_PROMPT \
+-			"autoboot in %d seconds\n",bootdelay
+-
+-	If CONFIG_AUTOBOOT_DELAY_STR or "bootdelaykey" is specified
+-	and this string is received from console input before
+-	autoboot starts booting, U-Boot gives a command prompt. The
+-	U-Boot prompt will time out if CONFIG_BOOT_RETRY_TIME is
+-	used, otherwise it never times out.
+-
+-	If CONFIG_AUTOBOOT_STOP_STR or "bootstopkey" is specified and
+-	this string is received from console input before autoboot
+-	starts booting, U-Boot gives a command prompt. The U-Boot
+-	prompt never times out, even if CONFIG_BOOT_RETRY_TIME is
+-	used.
+-
+-	The string recognition is not very sophisticated. If a
+-	partial match is detected, the first non-matching character
+-	is checked to see if starts a new match. There is no check
+-	for a shorter partial match, so it's best if the first
+-	character of a key string does not appear in the rest of the
+-	string.
+-
+-	The CONFIG_AUTOBOOT_KEYED_CTRLC #define allows for the boot
+-	sequence to be interrupted by ctrl-c, in addition to the
+-	"bootdelaykey" and "bootstopkey". Setting this variable
+-	provides an escape sequence from the limited "password"
+-	strings.
+-
+-  CONFIG_AUTOBOOT_ENCRYPTION
+-
+-  "bootstopkeysha256"	environment variable
+-
+-	- Hash value of the input which unlocks the device and
+-	  stops autoboot.
+-
+-	This option allows a string to be entered into U-Boot to stop the
+-	autoboot. The string itself is hashed and compared against the hash
+-	in the environment variable 'bootstopkeysha256'. If it matches then
+-	boot stops and a command-line prompt is presented.
+-
+-	This provides a way to ship a secure production device which can also
+-	be accessed at the U-Boot command line.
+-
+-  CONFIG_RESET_TO_RETRY
+-
+-	(Only effective when CONFIG_BOOT_RETRY_TIME is also set)
+-	After the countdown timed out, the board will be reset to restart
+-	again.
+-
+-  CONFIG_AUTOBOOT_USE_MENUKEY
+-  CONFIG_AUTOBOOT_MENUKEY
+-
+-	If this key is pressed to stop autoboot, then the commands in the
+-	environment variable 'menucmd' will be executed before boot starts.
+-	For example, 33 means "!" in ASCII, so pressing ! at boot would take
+-	this action.
+diff --git a/doc/usage/autoboot.rst b/doc/usage/autoboot.rst
+new file mode 100644
+index 00000000000..3b6f040008b
+--- /dev/null
++++ b/doc/usage/autoboot.rst
+@@ -0,0 +1,149 @@
++.. SPDX-License-Identifier: GPL-2.0+
++..
++.. (C) Copyright 2001
++.. Dave Ellis, SIXNET, dge@sixnetio.com
++
++Using autoboot configuration options
++====================================
++
++The basic autoboot configuration options are documented in the main
++U-Boot README. See it for details. They are:
++
++::
++
++        bootdelay
++        bootcmd
++        CONFIG_BOOTDELAY
++        CONFIG_BOOTCOMMAND
++
++Some additional options that make autoboot safer in a production
++product are documented here.
++
++Why use them?
++-------------
++
++The basic autoboot feature allows a system to automatically boot to
++the real application (such as Linux) without a user having to enter
++any commands. If any key is pressed before the boot delay time
++expires, U-Boot stops the autoboot process, gives a U-Boot prompt
++and waits forever for a command. That's a good thing if you pressed a
++key because you wanted to get the prompt.
++
++It's not so good if the key press was a stray character on the
++console serial port, say because a user who knows nothing about
++U-Boot pressed a key before the system had time to boot. It's even
++worse on an embedded product that doesn't have a console during
++normal use. The modem plugged into that console port sends a
++character at the wrong time and the system hangs, with no clue as to
++why it isn't working.
++
++You might want the system to autoboot to recover after an external
++configuration program stops autoboot. If the configuration program
++dies or loses its connection (modems can disconnect at the worst
++time) U-Boot will patiently wait forever for it to finish.
++
++These additional configuration options can help provide a system that
++boots when it should, but still allows access to U-Boot.
++
++What they do
++------------
++
++CONFIG_BOOT_RETRY_TIME, CONFIG_BOOT_RETRY_MIN, "bootretry" environment variable
++    These options determine what happens after autoboot is
++    stopped and U-Boot is waiting for commands.
++ 
++    CONFIG_BOOT_RETRY_TIME must be defined to enable the boot
++    retry feature. If the environment variable "bootretry" is
++    found then its value is used, otherwise the retry timeout is
++    CONFIG_BOOT_RETRY_TIME. CONFIG_BOOT_RETRY_MIN is optional and
++    defaults to CONFIG_BOOT_RETRY_TIME. All times are in seconds.
++ 
++    If the retry timeout is negative, the U-Boot command prompt
++    never times out. Otherwise it is forced to be at least
++    CONFIG_BOOT_RETRY_MIN seconds. If no valid U-Boot command is
++    entered before the specified time the boot delay sequence is
++    restarted. Each command that U-Boot executes restarts the
++    timeout.
++ 
++    If CONFIG_BOOT_RETRY_TIME < 0 the feature is there, but
++    doesn't do anything unless the environment variable
++    "bootretry" is >= 0.
++
++CONFIG_AUTOBOOT_PROMPT
++    CONFIG_AUTOBOOT_PROMPT is displayed before the boot delay
++    selected by CONFIG_BOOTDELAY starts, if CONFIG_AUTOBOOT_KEYED
++    is defined. Else it is displayed during the autoboot countdown.
++
++    Note that CONFIG_AUTOBOOT_PROMPT is used as first
++    argument to a printf() call, along with the '%d' boot delay countdown,
++    so it may contain '%' format specifications, provided that it
++    also includes, sepearated by commas exactly like in a printf
++    statement, the required arguments. It is the responsibility
++    of the user to select only such arguments that are valid in
++    the given context. A reasonable prompt could be defined as
++
++    ::
++
++        #define CONFIG_AUTOBOOT_PROMPT \
++                "\rBooting in %d seconds"
++
++CONFIG_RESET_TO_RETRY
++    (Only effective when CONFIG_BOOT_RETRY_TIME is also set)
++    After the countdown timed out, the board will be reset to restart
++    again.
++
++CONFIG_AUTOBOOT_USE_MENUKEY, CONFIG_AUTOBOOT_MENUKEY
++    If this key is pressed to stop autoboot, then the commands in the
++    environment variable 'menucmd' will be executed before boot starts.
++    For example, 33 means "!" in ASCII, so pressing ! at boot would take
++    this action.
++
++
++Controlling autoboot
++~~~~~~~~~~~~~~~~~~~~
++
++The following options give more control over stopping autoboot. When
++they are used a specific character or string is required to stop or
++delay autoboot.
++Define CONFIG_AUTOBOOT_KEYED (no value required) to enable this group
++of options.
++
++CONFIG_AUTOBOOT_DELAY_STR, CONFIG_AUTOBOOT_STOP_STR or both
++should be specified (or specified by the corresponding environment variable),
++otherwise there is no way to stop autoboot.
++
++CONFIG_AUTOBOOT_DELAY_STR, "bootdelaykey" environment variable
++    If specified and this string is received from console input
++    before autoboot starts booting, U-Boot gives a command prompt.
++    The U-Boot prompt will time out if CONFIG_BOOT_RETRY_TIME is
++    used, otherwise it never times out. It should be specified
++    otherwise there is no way to stop autoboot.
++
++CONFIG_AUTOBOOT_STOP_STR, "bootstopkey" environment variable
++    If specified and this string is received from console input
++    before autoboot starts booting, U-Boot gives a command prompt.
++    The U-Boot prompt never times out, even if CONFIG_BOOT_RETRY_TIME
++    is used.
++
++The string recognition is not very sophisticated. If a
++partial match is detected, the first non-matching character
++is checked to see if starts a new match. There is no check
++for a shorter partial match, so it's best if the first
++character of a key string does not appear in the rest of the
++string.
++
++CONFIG_AUTOBOOT_KEYED_CTRLC
++    The CONFIG_AUTOBOOT_KEYED_CTRLC #define allows for the boot
++    sequence to be interrupted by ctrl-c, in addition to the
++    "bootdelaykey" and "bootstopkey". Setting this variable
++    provides an escape sequence from the limited "password"
++    strings.
++
++CONFIG_AUTOBOOT_ENCRYPTION, "bootstopkeysha256" environment variable
++    This option allows a string to be entered into U-Boot to stop the
++    autoboot. The string itself is hashed and compared against the hash
++    in the environment variable 'bootstopkeysha256'. If it matches then
++    boot stops and a command-line prompt is presented.
++
++    This provides a way to ship a secure production device which can also
++    be accessed at the U-Boot command line.
+diff --git a/doc/usage/index.rst b/doc/usage/index.rst
+index 6f477b842ca..35b9f4612f4 100644
+--- a/doc/usage/index.rst
++++ b/doc/usage/index.rst
+@@ -4,6 +4,7 @@ Use U-Boot
+ .. toctree::
+    :maxdepth: 1
  
--	printf("%s", entry->title);
-+	printf(ANSI_CLEAR_LINE "%s", entry->title);
- 
- 	if (reverse)
- 		puts(ANSI_COLOR_RESET);
++   autoboot
+    spl_boot
+    blkmap
+    dfu
 
 -- 
 2.53.0
