@@ -4,106 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46F8FFA0C21
-	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 04:24:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5593FA0C2B
+	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 05:11:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1FF2839D5;
-	Wed, 15 Apr 2026 06:24:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 99D8F83936;
+	Wed, 15 Apr 2026 07:11:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="rfQGH1rg";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="aYSjR+1y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2BA283B99; Wed, 15 Apr 2026 06:24:04 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4F154839D5; Wed, 15 Apr 2026 07:11:02 +0200 (CEST)
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::9])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C09383936
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 06:24:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ED067838BB
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 07:10:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7dbf23885dfso3835533a34.3
- for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 21:24:02 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776227041; cv=none;
- d=google.com; s=arc-20240605;
- b=gXhJo973+qTnR/oZCRwTvDTnhNKD3QhaWpYySoJIzfI1XY+Hvcum7ZDNY3XuQqcg/R
- dbld9jTYUYC342C99zAzTQtUupcd754BZb99Wc1kWQJRun/MUPjbBNY3Jk/t0zIrvHDL
- x3a8ZguhhlFwlVKdgk+gQDU37uowvMoQO6tt6xE7XddkFZdJ32cfB9Frjke+3UQLVY3S
- UNcXpu+q43IYdZiPAklb9LzMwCc3PoZOWBhKqTl65/6Pv86c+XGPKf2zI6jCrk/MgiMh
- SYxkIXiGrSvaggTBncKtfu6rc4a2yf/fwp333R64Tsm5lK/nWeXoqH7y0u/LcFO6PKPr
- lzPw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=FFsB2RfVd1XiKoqYsAURSV4mRtAJIh88OQr17sp0v+0=;
- fh=1nEW93sjxCV0PkJKPPLUsKuD5Uu2CEoTpJYEjB7qx/Q=;
- b=c3wNU/svj662nnYwPuRniMjViecuolflUfK0QrpVIdj7FH/ZVMYZGlAA7KqSWLqJBq
- 0/m5ySbF8PmMYEhIwLlNwERqmT6Ns0020p+k8SGW88LSe5VeNMLM2X405Ji9QaZUyr7A
- LWRDcBRxaqa8ArIdKlfIOAg0g3efd/rnKUGFPRtMF8MTy3NJs3FfpMvIT6+1fI3fwMyc
- A7dz4fAILt3tR4wxnUBTuY322s6yA/R8anFen7lbgiwUUQb4DQQF2ln7ePqpv6sg8zVK
- R77oD2CFyTmXXWJsmkvWzc5noYY2Mc5G6dgm8Vv5GZ7IKKw9lA/6e3Sy8y4lZwo7HsXm
- SIsg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776227041; x=1776831841; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FFsB2RfVd1XiKoqYsAURSV4mRtAJIh88OQr17sp0v+0=;
- b=rfQGH1rgjLhFnxR9y0LQVE32AzM/TFRbsObCmx6cYXEKY26IH9wn7FBoxt+YFbU/wq
- Q/bj5kxEDiHXQeMMJWuvMkhzUfQ7PR/TnzQmScu5qC8z4wD6jv4OG05CJ+uEA7SonJd0
- 1lXQ8pZOkdjvMosj5bYx+l7uBmqS3cyp2HmexrAYJgqAu0WeVOVOlRQ6zjR1Q3sycDqI
- 2tMCGt/ppC8WtTG9BQIafK8wE0A9A5kH2kNByapAsB/FHgED4pbQEB4nPv7KpdV8P8Th
- lVM33g7KGeR9B648yT2G9kb9+JOezsKjRPQ5sCxl1mSJzqHQLLbpxmqSvw5psnwtNhT/
- HLhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776227041; x=1776831841;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=FFsB2RfVd1XiKoqYsAURSV4mRtAJIh88OQr17sp0v+0=;
- b=eEEirjgE49JVXVoj+OBRpQNX/yHT2EiO3cZa/sDhe0wvaSz4mclciQNj3POYm7wO7r
- ozAvxUXHk96CVXV7q1dKkn18TJzBvYgJFY8tKIWbUDKEXqASopF0iSzvvsEEzzb7mJJb
- XV1IXtT+1RtYusBVu6bR3myZfbb3Amb2Ju7TJYOW1UZYvw1CJyRO05vWiYpkR0Q6JLq/
- 40SSZZZqL3mv2+le+bIVazkygOTtbzg73hnb0YZwJaFVQU+SaJyxZNjChVwux/CMHA0y
- FSXqVkpABBvynDNX+sLQzrqC5oATeoLhuQzYCcN+MJTiiLQXEflCMfU/DqhUoOtHLqyx
- mamA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+FFZdH+6T43ZoPW8jXcOJkO9O3VpTh7pgd7GDHn85JtfgyJ2zCXQblOYEUBxIvHG7TVpwU25Y=@lists.denx.de
-X-Gm-Message-State: AOJu0YxguvzyeRkznAnjQ6tTf/8r0EwNapO+y46lO680lYZHAGR5vXF8
- Lh/SG7lK7RTVFa0bEKa9FebYOcdxDmz07DzaDgL8+e6jkVQ7rO4ak3N4faGS8yEpvJuNcJuxmg0
- BkPkgylYSQ3hx9OB6Kn7VyuNBJ6o0ImU=
-X-Gm-Gg: AeBDieuNFqRhfnSH5x9p3I9ZdpXjqoX/9QCoGiL2O1ppFSHGOFxUdJ8CWeY2I+E8h1R
- uiC9lBsEmH4XUXU3Ka0w2l8sQ0RIK5mlc1/xZc5m7o0z7iqh/fbvOej38T4C9h+J6RB1mdoHnyW
- WroYtpQImhpMeH/SdJMTYQUizB66DAU4KdtI9LJwaxyGW8VXRO1te69mTeUKrZ965C4toPc+XD8
- jOvQ2vi543QyZ6ETqVYxT3ruzjd+HUB0nsPHqEM4mZtFIKimbZcSx5fHDWEcdb35PuMV453VHUj
- BFx28QEuvkLJCfs4QZTOm/bmdGsFxA==
-X-Received: by 2002:a05:6830:67d7:b0:7d7:ef0a:1ce9 with SMTP id
- 46e09a7af769-7dc27f0b2d3mr12879204a34.14.1776227040670; Tue, 14 Apr 2026
- 21:24:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=pQ36A5lmXIfqG2pAFYoTsdQTx/mkquyVDf6A/N07u46CD0PlfrwkLrSFVaMDacI6Cv2fer4vVrrcDpqSqTyJQAt6KR1FjvqVQs6lgc9DQQUUEm60xbPQERvTNegl+Am2ihbRpdjWDbCWmHSPD03X/XrHikevgb9E6vPdHNup1bWovIa8ztkknKTKDeQHUQjWmtw/ZRRo7TbGZpB8XtWrriWtuM7wvXoXKg3YpsIyux3dpEYERh7JChGt+MfD8xrx13GaDyzFIjZeBqA8d4A5f8ENfOECw54VD60nnjr7gvIbyKMUmZ5aQ20m9f8Ngetpz8LllsICGDljvk4Hpa281A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=5fu7g2vQsZZkCtRiuXGiwOsnMR1uvbNpzrryz3VH7Gw=;
+ b=npmh7BNyNrW6GNMB+XYCWKPoYy1G/BuCBghOObQnmjqduEXgCWy1DdyZ08WHvshxu6J9llyLkuGo8lscFDQwOviWKzvt5QqmMFlePsfxqfM40DBH3AEX7QUEryOmlFOcD2+nTWFzgXafz5K4sKBlJx6qZWMjFrvfKjNo5oe8CFZ803ecdbBiPUd84/UEuCx95bwxsbB5zidjj/UchUDj9ULHvfI3rGeDdCNm8shnQkXlXHplurxCB1aQE8IrBf4WdITjK41gX7xB7sagyf3w04ZPvByZDAMsoojeCdEpjPLBt1KExnwcTUTceL/mzWsg73e9e0+IymTP4mAGKxr2rA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=5fu7g2vQsZZkCtRiuXGiwOsnMR1uvbNpzrryz3VH7Gw=;
+ b=aYSjR+1yRIPel430GQcOzbDGRW3Vmu0VM6U8lBI1JnGOsVviBksBO1gtUTMCeerNlZ6bVz4ytF/3YrtXDVG2GWHckvrJWIotjRkDGhzr3APVDseh88UbzAS2lG33zzwZN+L4QDkOSFv/jasAGMBTAa30w65GSkB3HG/hmcerCr41CMTdU4cQKVCIDRoF69DGGHHhRtEz49gNZbaa2UXQyb5XU/ol7xoemaDnajcQR2MPiaq9AGqZEd0JwqozvWIJzal/0ZFxhO3wkYqMaPcLHyrYBdyNLj75f9oYAfBLrSThs2O/s+HDuq0fX0og8yqU9HoipOmo12ZjsMJ0y33KfA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
+ by PH7PR03MB7321.namprd03.prod.outlook.com (2603:10b6:510:2f4::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Wed, 15 Apr
+ 2026 05:10:55 +0000
+Received: from PH7PR03MB6942.namprd03.prod.outlook.com
+ ([fe80::8f8a:2a94:f5a8:ea1a]) by PH7PR03MB6942.namprd03.prod.outlook.com
+ ([fe80::8f8a:2a94:f5a8:ea1a%3]) with mapi id 15.20.9769.046; Wed, 15 Apr 2026
+ 05:10:55 +0000
+From: dinesh.maniyam@altera.com
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Tien Fong <tien.fong.chee@altera.com>,
+ Kok Kiang <kok.kiang.hea@altera.com>, Dinesh <dinesh.maniyam@altera.com>,
+ Boon Khai <boon.khai.ng@altera.com>, Alif <alif.zakuan.yuslaimi@altera.com>
+Subject: [PATCH v2] drivers: clk: altera: arria10: Fix wrong API used for
+ memory free
+Date: Wed, 15 Apr 2026 13:10:16 +0800
+Message-ID: <20260415051016.3316-1-dinesh.maniyam@altera.com>
+X-Mailer: git-send-email 2.43.7
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: BY3PR05CA0015.namprd05.prod.outlook.com
+ (2603:10b6:a03:254::20) To PH7PR03MB6942.namprd03.prod.outlook.com
+ (2603:10b6:510:157::18)
 MIME-Version: 1.0
-References: <20251216084623.19589-1-alif.zakuan.yuslaimi@altera.com>
- <c5129f8f-5970-44eb-8bda-a6577bde41bd@altera.com>
- <CAN7C2SAP8b38_2=6oanx7s8zYPpudUBFF+J1te6bPqALcbRPVQ@mail.gmail.com>
- <a8baeaf7-dc67-4ad1-905e-e8abeab6fd43@altera.com>
-In-Reply-To: <a8baeaf7-dc67-4ad1-905e-e8abeab6fd43@altera.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Wed, 15 Apr 2026 12:23:48 +0800
-X-Gm-Features: AQROBzBTejOxkE2K-rriP5iFA9Kyf4Phj07FJKQ60Wyds3EfTcxKCWvWyE4-ZGw
-Message-ID: <CAN7C2SC2C0kfyfmytoWrmTkyxY8k6=KkFPU49ROT643fxjDz6Q@mail.gmail.com>
-Subject: Re: [PATCH v1 0/5] SoCFPGA: Update DDR Support for Gen5/Arria10 in
- U-Boot
-To: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
-Cc: "Chee, Tien Fong" <tienfong.chee@altera.com>, u-boot@lists.denx.de, 
- Tien Fong Chee <tien.fong.chee@altera.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR03MB6942:EE_|PH7PR03MB7321:EE_
+X-MS-Office365-Filtering-Correlation-Id: 43b3829a-bc29-43ea-8f37-08de9aad5f3f
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|56012099003|18002099003|55112099003; 
+X-Microsoft-Antispam-Message-Info: ZzRtMb29NRFR92j0XuG8/RyWP+7yD9FnMp64YabcqzMDIzE+viQWG4xCmoEv7X+C8TXnaxCLf1+tfjQ7DDCrSTU6wzR7JhJNEU2bma0D4cB9GOd1IhK0WuiXkOV3cDoqm3ZOVjjxPFfurxn8oUNUsCndLEbwEBQl48kpI26QzUNQoDsViO5Ze19uIUnseLrra4oEDemqo9tY+zEGCxJqVy7C/p1LBMNs1QCpHqD3F07Zmc4RXiRgQC3N0jcT127EewZkZKbTyam42qu81YKdEWjafVCybBsWxpWYiPZbMBEsOn4mmBmbtlsvO7dxYjbpEod4o9EAVFpp5Fvw/cZ6HZz5NMMP/R9LG/eEif6KbP4nmJbQNliMVA9/1r6T0lobqizri5NV0y2BPAP0F1vERkoM2Mr5eM7nkyK49C9o5XUtoi3+PCTadBS4fNOj6iXPFMCNMZ1iL0lOEFZgezXOHvUa0BAeb3+ijGC1DZy2p1mj50fDS0GOLLFAuCqbnlI7yq1kdILuY9Jg3qZMuirMWUjibRB3IRKJ0xQjV1apDBko6QgSpmbk2HX5AAGRnVzC0g4dKfS0Bwar/qtTWUDRX89rVAayl1++zhlVRKuiqF1pruHZH/iuEkcf0C8m3lbmDMAJLJx66OyWCgpKKeX+nwhDSEZ9+5ZiIBSwP3hpcWcS5uxgrNHk2x2hMc9PdgKmywJqLf2TUGVP2hjhWn85JfwnZl73+5RZAT2mUtQoGLc=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(56012099003)(18002099003)(55112099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?1B5RD6d2elkf3JoXjpKBpp/xfcv3np/mjQG//qr9HTXd9WfTrjRaMfOCbUzs?=
+ =?us-ascii?Q?1ktCir0AHyETh7HXEiLar+Hfi6okd4U74X5PTd9jjSI1pbCQR/JlZ9FbUE1S?=
+ =?us-ascii?Q?+KB5YMxhjVMYiwIoQ+I0UViKmrtYlcAm4zv/DwAdNnz4c4WeWvhAstiTc7xL?=
+ =?us-ascii?Q?InEw2Nil0tcr6/vIZjpYYJ1Z+dS1TUVrbu1jEm43+FUHUXaE1YEGHuv/VfM0?=
+ =?us-ascii?Q?Uhu4mOZRUHuMYxlH1kBgawbwFAldaLdenzMS8ry0r7wgE6nV5+2cOp00jArj?=
+ =?us-ascii?Q?Prnt7x5ClfjLoHE/GjXfolAm4/FSbqaHf0Pxo5PGxwRSKpElSxkLx6dDhh3n?=
+ =?us-ascii?Q?QxiATZwL/QdWLBrwEhbDKJe1gu/Y9GLO0mUfBULZnGvWsdbDatA6UYM7FiG0?=
+ =?us-ascii?Q?2b3GjqhPmYH76HXgZC3uW18Z00bvzBKJSnQrXQgC8jw26z1ETI/GMSjcZaV1?=
+ =?us-ascii?Q?bZk78OTWRVw6uCcpg6rI0SVKDXzYH2nUyVGP/09YkgH/FY+Yu+1QhbWic4V7?=
+ =?us-ascii?Q?9eZV8uP4WFVpQuBc15akb+XS/JxxC4XNRMRzG/RMjbOOLnLZLf9V4du7sHtQ?=
+ =?us-ascii?Q?RPjDjh2zQw9R2gDITiTrqzPcoqnHguYzacD3Rh0QaWvdXgRjVNYlj9Vk0MlY?=
+ =?us-ascii?Q?98L3oxYwQ1ii2rTCHOfcObGa1+ag9D3Ajh7TZEFKZ9TqrLtgLv9BFxLxyAot?=
+ =?us-ascii?Q?5xyuZGnmytuq6EvRzTyZpFIajNlhU/Ay19tIYxI/vMtaO3QzmUOnEWhCwYVJ?=
+ =?us-ascii?Q?cmUZGjA4i7MbTxQgZMyAq0Ucn6u/h7O0HRgSTNcDrAfa5wlI9Kng5b/qYSye?=
+ =?us-ascii?Q?RuZpBORO74DmXgrhkEfV1ciJIqmMG0+IHx9nBZDqn+qAqz2xQCkxEXBtW1gX?=
+ =?us-ascii?Q?xHQGTx0Rt7vGxT4bKSE01DEUi6ks+Ql61s271op2KUHbHXauVp7gfPJqjH5R?=
+ =?us-ascii?Q?TO9+hCCXWMO1gGd3zKmqyqswFhMZAPOUCOBbdd1LH7cOrOyG2eFOznKwb0zy?=
+ =?us-ascii?Q?78+uCfXbh5M/zdw5dppw+kCZ2cGwfCIHbjA7FdFLLg29wNRcqAVHxZsyS5Hw?=
+ =?us-ascii?Q?z46lX2GK1efN/tdc/+DMfiSWPxsKd/ERRsjN8ZPWypowvFCptluGq6Eul+Pg?=
+ =?us-ascii?Q?Om8StKtIrLELyV9xZ32r3Ta7tyHKljtQX/RIUqGcvdO366CcFRSz5Ww90yUt?=
+ =?us-ascii?Q?u7zT63ds4ZKKICJLWbxNpVk8M96fojlRSm0x0UF16k4Ql9otHJie2ZR0gKz7?=
+ =?us-ascii?Q?4hn9ac1X/T+41xN1XJTxYsxyHboBxedz8cMp4UHWMh19Ht3diycHBbnAsC5x?=
+ =?us-ascii?Q?+RK5Yg7QEOH/fyIaOfhe12UMlSjjAUZUpMe/R0t0lZqL1UA/1/hNjafOvN22?=
+ =?us-ascii?Q?Jrz3Ib4FAHjeAOMf79aIJPSXXobxrGEzFrTH1E4RfsvjavmvZy6a9c5pq4Gj?=
+ =?us-ascii?Q?wgyDp5XT8A9HhBL2G38XJIL8YVtoI5FJHp6pmbU91aXy8tA6S0Zaur+g+AGr?=
+ =?us-ascii?Q?D5Hwu/bnx56c+FRbboHptmVDHQTD00lkp6A4d1wvxdN+mw4YZ57pGgK54iIH?=
+ =?us-ascii?Q?iYbPSvNTwRoE5/U+yEge3ESVE9/KxxTiNmq0hop5kFfw5HI1xW7UmJKsUPTc?=
+ =?us-ascii?Q?g6crRqq83dx/TjB1e2ANzAFZ5kFQCVCFJT4u7KEd68ZD4jyRsTV3eXLASwC9?=
+ =?us-ascii?Q?pHsJ5NgFkr98TVH51yy8zCZQFm4PFq451ub8xOd9z/MZRZ7OILmkhv+B9CQX?=
+ =?us-ascii?Q?dOgBA5nCaQJ0hJt7HjUnpU7gjkBwjEA=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 43b3829a-bc29-43ea-8f37-08de9aad5f3f
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB6942.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Apr 2026 05:10:55.5927 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: OjxKfi5H1yB8N65tN9iBYjo7d9Rcux4sRZ5CmO5kfSF9Q6Jf7bmza8owhtS87b+27z9raIO4PPfbsmGES7pn4HibD8ioiI2rMUMEkfvOjE8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR03MB7321
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,140 +142,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Apr 15, 2026 at 11:33=E2=80=AFAM Yuslaimi, Alif Zakuan
-<alif.zakuan.yuslaimi@altera.com> wrote:
->
-> Hello Brian,
->
-> On 12/4/2026 8:11 pm, Sune Brian wrote:
-> > [CAUTION: This email is from outside your organization. Unless you trus=
-t the sender, do not click on links or open attachments as it may be a frau=
-dulent email attempting to steal your information and/or compromise your co=
-mputer.]
-> >
-> > Hi T.F. and Alif,
-> >
-> > What are the issues here? Try to help push ECC back to main
-> > stream u-boot.
-> >
-> > Latest U-Boot revision even removed cache codes.
-> >
-> > So what are the solutions here?
-> >
-> > Thanks,
-> > Brian
-> >
+From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 
-Hi Alif,
+Fix the wrong API used for memory free.
 
-+spl/u-boot-spl.bin exceeds file size limit:
-+ limit: 0xf520 bytes
-+ actual: 0xf621 bytes
-+ excess: 0x101 bytes
-+make[1]: *** [Makefile:2416: spl/u-boot-spl.bin] Error 1
-+make[1]: *** Deleting file 'spl/u-boot-spl.bin'
-+make: *** [Makefile:189: __sub-make] Error 2
-+ actual: 0xfa0d bytes
-+ excess: 0x4ed bytes
-+1024+0 records in
-+1024+0 records out
-+65536 bytes (66 kB, 64 KiB) copied, 0.0017824 s, 36.8 MB/s
-+ actual: 0xfc96 bytes
-+ excess: 0x776 bytes
-+ actual: 0xfa85 bytes
-+ excess: 0x565 bytes
+Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
+---
+ drivers/clk/altera/clk-arria10.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-I think this is board dependent.
-I used the patches in this patch series and had no issue on size.
-No too familiar with those boards but highly suspected the original
-rooms for those are closed to zero.
+diff --git a/drivers/clk/altera/clk-arria10.c b/drivers/clk/altera/clk-arria10.c
+index 1840f73beee..081f8f2b7aa 100644
+--- a/drivers/clk/altera/clk-arria10.c
++++ b/drivers/clk/altera/clk-arria10.c
+@@ -222,8 +222,11 @@ static void socfpga_a10_handoff_workaround(struct udevice *dev)
+ 		return;
+ 
+ 	ret = clk_request(dev, &bulk->clks[0]);
+-	if (ret)
+-		free(bulk->clks);
++	if (ret) {
++		devm_kfree(dev, bulk->clks);
++		bulk->clks = NULL;
++		bulk->count = 0;
++	}
+ }
+ 
+ static int socfpga_a10_clk_bind(struct udevice *dev)
+-- 
+2.43.7
 
-Maybe reduce the check cases in sdram_gen5.c:
-Just check size match.
-Then completely remove the extra file and turn into inline action for
-sdram_soc32.c.
-
-Thanks,
-Brian
-
-> The pipeline test was failing for SoCKit SoCrates and VINING boards due
-> to exceeding their SPL size limit, further improvements will have to be
-> made to exclude these Gen5 variants from enabling these features to
-> conserve SPL size.
->
-> I will submit v2 once I have finalized and tested the workaround
-> accordingly.
->
-> Thanks,
-> Alif
-> > On Sat, Feb 14, 2026 at 12:52=E2=80=AFPM Chee, Tien Fong
-> > <tienfong.chee@altera.com> wrote:
-> >>
-> >> Hi Alif,
-> >>
-> >> On 16/12/2025 4:46 pm, alif.zakuan.yuslaimi@altera.com wrote:
-> >>
-> >> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-> >>
-> >> This patch set updates the boot support for the Altera SoCFPGA Gen5/Ar=
-ria10 platform in U-Boot. The changes include:
-> >> 1. Update MMU/dcache setup across Gen5/Arria10 using common driver
-> >> 2. Add ECC scrubbing support for Gen5/Arria10
-> >> 3. Add DRAM size checking for Gen5/Arria10
-> >> 4. Assign unit address to memory node in common SoCFPGA device tree fi=
-le
-> >>
-> >> This patch set has been tested on CycloneV devkit with SDMMC boot and =
-RAM boot (TFTP & ARM DS debugger).
-> >> Tested on Arria10 devkit with RAM boot as well
-> >>
-> >> Alif Zakuan Yuslaimi (5):
-> >>    arm: socfpga: Consolidate dram_bank_mmu_setup()
-> >>    ddr: socfpga: Add ECC DRAM scrubbing support for Gen5/Arria10
-> >>    ddr: altera: gen5: Add DRAM size checking
-> >>    ddr: altera: arria10: Add DRAM size checking
-> >>    arch: arm: socfpga: Assign unit address to memory node
-> >>
-> >>   arch/arm/dts/socfpga-common-u-boot.dtsi       |  2 +-
-> >>   arch/arm/dts/socfpga_arria5_secu1.dts         |  2 +-
-> >>   arch/arm/dts/socfpga_cyclone5_dbm_soc1.dts    |  2 +-
-> >>   arch/arm/dts/socfpga_cyclone5_de10_nano.dts   |  2 +-
-> >>   .../dts/socfpga_cyclone5_de10_standard.dts    |  2 +-
-> >>   arch/arm/dts/socfpga_cyclone5_de1_soc.dts     |  2 +-
-> >>   arch/arm/dts/socfpga_cyclone5_is1.dts         |  2 +-
-> >>   arch/arm/mach-socfpga/Kconfig                 |  1 +
-> >>   arch/arm/mach-socfpga/misc.c                  | 31 ++++++++
-> >>   arch/arm/mach-socfpga/misc_arria10.c          | 26 -------
-> >>   arch/arm/mach-socfpga/spl_gen5.c              |  4 +
-> >>   drivers/ddr/altera/Makefile                   |  4 +-
-> >>   drivers/ddr/altera/sdram_arria10.c            | 57 +++++++++-----
-> >>   drivers/ddr/altera/sdram_gen5.c               | 38 +++++++++-
-> >>   drivers/ddr/altera/sdram_soc32.c              | 74 +++++++++++++++++=
-++
-> >>   drivers/ddr/altera/sdram_soc32.h              | 11 +++
-> >>   16 files changed, 205 insertions(+), 55 deletions(-)
-> >>   create mode 100644 drivers/ddr/altera/sdram_soc32.c
-> >>   create mode 100644 drivers/ddr/altera/sdram_soc32.h
-> >>
-> >> I will need to drop these patches (1/5, 2/5, 3/5) for now as it causes=
- the U-Boot SPL file size to exceed the limit on several Cyclone V variant =
-defconfigs (see CI failure: https://source.denx.de/u-boot/custodians/u-boot=
--socfpga/-/jobs/1379031).
-> >>
-> >> Please consider restructuring the changes so that Arria 10 and Cyclone=
- V are handled separately. Arria 10 has a larger OCRAM footprint, while Cyc=
-lone V is much more constrained.
-> >>
-> >> The SPL size overflow on certain Cyclone V boards must be properly res=
-olved before we can take this upstream.
-> >>
-> >> Also, please make sure to run the pipeline tests and confirm they pass=
- before resubmitting the patches upstream.
-> >>
-> >> Thanks for your understanding, and please resend once the Cyclone V si=
-ze issue has been properly addressed and the pipeline is clean.
-> >>
-> >> Best regards,
-> >>
-> >> Tien Fong
->
