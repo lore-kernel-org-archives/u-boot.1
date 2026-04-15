@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85D5FF4384C
-	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 15:41:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B228AF43844
+	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 15:41:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08E2584119;
+	by phobos.denx.de (Postfix) with ESMTP id 5282E84207;
 	Wed, 15 Apr 2026 17:40:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="X8aaBGMo";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="jh5eN4M+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEA12841C8; Wed, 15 Apr 2026 17:40:57 +0200 (CEST)
-Received: from out-177.mta0.migadu.com (out-177.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::b1])
+ id 06A8A84105; Wed, 15 Apr 2026 17:40:58 +0200 (CEST)
+Received: from out-188.mta0.migadu.com (out-188.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::bc])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BACE984105
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 17:40:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B187583B99
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 17:40:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
@@ -29,27 +29,29 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1776267655;
+ s=key1; t=1776267653;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=/iKhnXumiWAvIt5tB3bahgiWoprzGPaoEPa0Kq2JmBc=;
- b=X8aaBGMo+m/MB2kXvDeBZ7WehxRl7AI5NyszTksTT4Hx3uIYHyitqScQ9tQicmYdcdbMda
- UpBwDuuMtwmUT5ybhMTM6KihA8ogeiOjk5NUxCX+5I9bsjHNSwQbkCxrdN63cypBbxz5Oe
- dPQnWFyVI9/oYu4xJKg4gsiwptADH88Yhrbcu495Vf73s9bw2jSO2yXlNbaSQVfKFZ24pH
- WuFc70Illn7wpMf8qlZiVMaxJs+N/T5LAfqfnD1Nu5iZG2Qu58niTPOwGv5k0+ClXIyxoc
- AXO4w15YNL49sB24BDsLjt9u7KMUCdiFYaVvqXSY+Ib8ko8+InnOlgOTBT4+dA==
+ content-transfer-encoding:content-transfer-encoding;
+ bh=ZQ/CIWwdqaVbuupSXcl78Ecm7x0SHwJtH5l3P2b2BmQ=;
+ b=jh5eN4M+uIjsuIz60pYtMf3zMDc2krTyElMUTDYuD92c68vlbK2ZmaQwyaYDv0xASbR6KO
+ dEr4XwjBfvoAvhSJ1C7IK3UE91/JHqNq84bulvxrzYjrAmGVJDmaMJ6IBN1zhAJbGSyQln
+ 3n8/C4CEZRHGtjSZ/ZxzIzOfw6/UCsrRntwhyNFCaFuwhMwFRZoGVfexE+8ROPcT9AVz+/
+ q/vbWrGBti9ncMu8BCxoKbeXTkjwZj65rdtQG8wd4RPRADiJI4Lgx37Iwr/+87jFYfW6Xr
+ d6FR+Qq8OfGF26V8YIOBPZUU8wNNohvnJV2ZovdXdBy/W8OudTD1lFDz2fm/aw==
 From: Ferass El Hafidi <funderscore@postmarketos.org>
-Date: Wed, 15 Apr 2026 14:32:31 +0000
-Subject: [PATCH v3 1/3] autoboot: allow custom prompt without requiring
- AUTOBOOT_KEYED
+Subject: [PATCH v3 0/3] Autoboot prompt customization and bootmenu
+ cosmetics
+Date: Wed, 15 Apr 2026 14:32:30 +0000
+Message-Id: <20260415-ui-cosmetics-v3-0-aa8308a47e33@postmarketos.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260415-ui-cosmetics-v3-1-aa8308a47e33@postmarketos.org>
-References: <20260415-ui-cosmetics-v3-0-aa8308a47e33@postmarketos.org>
-In-Reply-To: <20260415-ui-cosmetics-v3-0-aa8308a47e33@postmarketos.org>
+X-B4-Tracking: v=1; b=H4sIAH6h32kC/23MSw6CMBSF4a2Qjq3pA4tx5D6Mg1IucGOgpLc2G
+ sLeLThR4/A/yflmRhAQiJ2KmQVISOjHHHpXMNfbsQOOTW6mhDJCa8nvyJ2nASI64taCEpWtoTE
+ 1y5cpQIuPjbtcc/dI0Yfnpie5rm+oFIdvKEkueN224LSzrirlefIUBxtuED3tfejY6iX1aRx/D
+ JWNSsnGmUZJaewfY1mWFydqoczzAAAA
+X-Change-ID: 20260331-ui-cosmetics-aae207abed6b
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
  "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
@@ -60,21 +62,21 @@ Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
  Sam Protsenko <semen.protsenko@linaro.org>, 
  Christian Marangi <ansuelsmth@gmail.com>, 
  Ferass El Hafidi <funderscore@postmarketos.org>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2946;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2118;
  i=funderscore@postmarketos.org; h=from:subject:message-id;
- bh=W78OJh6lLsKhVjq1BgDGzcNc1Ap3s5X1sVTHGBV6qo0=;
- b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBp37GD66WJzK3Ns/bdFDYTHy4pF6siFPKYPRKtu
- TMkg0EOm1SJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCad+xgwAKCRCEr8vQ14ma
- A+5CEACVYd4k487T05vBirLKntE9M0AJ6kdSrUcYnywDtnASCpdtWUgFzJjLIB9KuuVJ5ODngRU
- aQJOLn+e3DWDPg2+g7xEoZNUUKamoWuukcLZE3TRusjA6BJx+17gclSfkHSpKToMFS0K/dBuBBL
- CenjoacPjCxivyF5LV+UQj0Gn+oUsuH/rkfx6Mt7aufi/0z19tKfLpl2rCEGT8T/io1cK4VYUCZ
- pzPZscOkmrWATuJ0W2R9Qlx5Ci25T3u7kToZf5jryzsacWpVz87DhKqg3U8Ns5UUxiccQb6r6ES
- 3EbCELYcHLlwlVuI1IwE+IdMofpxAnz5kZJtFrsQ14lzpu35+UfhI5d+h0OFzn7/rblkRzyMZjd
- D3fzH5GMSRYj4wJNrra5pIlpQ+KBC4NsaoENV4uAYiJomWn3HCXj9LNnxo2l36wuUrbKL8EPJIT
- WUt2iLfKpIqzpVDXYM6rH5LSd5J/cUImq7frDJ0KPqu08ZwLgDaVbEA3guTVcup5FF58WYMGMiv
- rIhjDBIiovx2dUrVWVIJ/6T8+xfx/QNyx/BsFzjXvuGqOHvLny4hjnR1I2MskXichYwyBOA+3fd
- YPVld7a17Y4zRa5SPVt5KteX4X9v0HXnr5Q27FkKlL71/3/gsr5i2LAeIgfSfP9g+q95W8qCaLy
- YfGQqf7loGKxTHA==
+ bh=YoV2GL4iFBOLF9KjmATl2Amer2v6v8TNJfKD9hsWBHs=;
+ b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBp37F8bmTc6YD2KV5BoCKy55wRijZ216F5K/4Qd
+ 8x+gjv5tmqJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCad+xfAAKCRCEr8vQ14ma
+ A/FmD/9bkOAI2MZXRhyFIqri4TcDWDqJw/U3uz3e8wM2BIPjbpSYQweIKtmK7lDSyp99tyK9cmr
+ 3UV3rGB/jHQHUB/pZ8+d6+CJwGfdWK/HYCcc22jamNPnq4n+ecHYaXJE4XAQpLVlb9xAFEdX+sY
+ Rs4pf60q0sWID+z4QzGxVNOaK7QjcalxihPDfmHi4SR2fHqSdtvGAWJj+PW4u4Q6WHP1cura1gp
+ cZWmm8qQ3JLvCo3B4omhQIrJR6jcqC4Gi7U3BkwGLO7BzhYL0WvTA1Hgtzj45IM5yzQJJStYq24
+ h2TtuBDtqa8rDt3Twg+2FhhoSKo5K14vAKKSQp0J2VSYk9pTYg59dOWsdpR0gLhMxXTUyQgx+IT
+ 1HE4vsT0ziImaoZy3+B+1QI7P+yUdId8KcAPAT46DH4pLkWfN7/Tk2dGJifXSJYo83xQlA5OTF0
+ /IIex20QJbN4ymRDYnNyZoz8lFaYZ/5twdfuHslDUftG8nK32Eputc+z/l2qaCKIO7ZULNa5T4X
+ 9ta+3GLILfWazPwg/W7OgXltteB003eKNvrGCeJJoKo8kirLu8zujxuadfbZf4qSrE2kKb3v0bx
+ FM1GnanDsJjAzDG6H4qtfSxr98WeJ1kJjfeUXf4xisSgRi6zk/e4BVvjKTpNFPc5eoK9CB1zVET
+ 8Xa90cPhHBd5ufQ==
 X-Developer-Key: i=funderscore@postmarketos.org; a=openpgp;
  fpr=0301BC37FB555CACFD798BEE84AFCBD0D7899A03
 X-Migadu-Flow: FLOW_OUT
@@ -94,84 +96,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The autoboot prompt used to only be customizable in Kconfig when
-AUTOBOOT_KEYED was enabled. For a usecase such as having a nicer
-autoboot prompt alongside a splash screen, there is no reason for
-AUTOBOOT_KEYED to be required for this.
+This is a small patch series to make the autoboot prompt configurable
+regardless of if CONFIG_AUTOBOOT_KEYED is enabled, which is very useful
+with a splash screen. My usecase is, with some ANSI magic, moving the
+autoboot prompt to the very bottom of the screen and highlighted, with a
+splash screen shown.
+Something like this: https://ircb.dersco.re/uploads/funderscore/efa2a27132e56891
+It feels wrong to require AUTOBOOT_KEYED only for that usecase.
 
-Remove the dependency to AUTOBOOT_KEYED, and use AUTOBOOT_PROMPT in
-print_boot_delay() instead of a hardcoded string.
+Also, the bootmenu now prints ANSI_CLEAR_LINE before each entry, which
+has the effect of highlighting the entire line entry on vidconsole, just
+like eficonfig. I can drop that one if it's not very useful, just
+thought it would look nice.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
+And while at it, and because this has been due for a long time, convert
+autoboot documentation to rST, so it is part of the public docs, instead
+of a plain text file.
+
 Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
 ---
- boot/Kconfig      | 30 +++++++++++++++---------------
- common/autoboot.c |  2 +-
- 2 files changed, 16 insertions(+), 16 deletions(-)
+Changes in v3:
+ - Add Tom and Simon's R-b's
+ - Convert autoboot documentation to rST
+ - Link to v2: https://lore.kernel.org/r/20260408-ui-cosmetics-v2-0-721dc6d2116a@postmarketos.org
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index bfed452d77e..039c5acc023 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -1560,6 +1560,21 @@ config AUTOBOOT
- 	help
- 	  This enables the autoboot.  See doc/README.autoboot for detail.
- 
-+config AUTOBOOT_PROMPT
-+	string "Autoboot stop prompt"
-+	default "Autoboot in %d seconds\\n" if AUTOBOOT_KEYED
-+	default "\\rHit any key to stop autoboot: %d"
-+	help
-+	  This string is displayed before the boot delay selected by
-+	  CONFIG_BOOTDELAY starts.
-+
-+	  Note that this define is used as the (only) argument to a
-+	  printf() call, so it may contain '%' format specifications,
-+	  provided that it also includes, separated by commas exactly
-+	  like in a printf statement, the required arguments. It is
-+	  the responsibility of the user to select only such arguments
-+	  that are valid in the given context.
-+
- if AUTOBOOT
- 
- config BOOTDELAY
-@@ -1597,21 +1612,6 @@ config AUTOBOOT_FLUSH_STDIN
- 	  This can't be enabled for the sandbox as flushing stdin would
- 	  break the autoboot unit tests.
- 
--config AUTOBOOT_PROMPT
--	string "Autoboot stop prompt"
--	default "Autoboot in %d seconds\\n"
--	help
--	  This string is displayed before the boot delay selected by
--	  CONFIG_BOOTDELAY starts. If it is not defined	there is no
--	  output indicating that autoboot is in progress.
--
--	  Note that this define is used as the (only) argument to a
--	  printf() call, so it may contain '%' format specifications,
--	  provided that it also includes, separated by commas exactly
--	  like in a printf statement, the required arguments. It is
--	  the responsibility of the user to select only such arguments
--	  that are valid in the given context.
--
- config AUTOBOOT_ENCRYPTION
- 	bool "Enable encryption in autoboot stopping"
- 	help
-diff --git a/common/autoboot.c b/common/autoboot.c
-index 1783ef92c94..7114ee58f47 100644
---- a/common/autoboot.c
-+++ b/common/autoboot.c
-@@ -379,7 +379,7 @@ static int abortboot_key_sequence(int bootdelay)
- 
- static void print_boot_delay(int bootdelay)
- {
--	printf(ANSI_CLEAR_LINE "\rHit any key to stop autoboot: %d", bootdelay);
-+	printf(ANSI_CLEAR_LINE CONFIG_AUTOBOOT_PROMPT, bootdelay);
- }
- 
- static int abortboot_single_key(int bootdelay)
+Changes in v2:
+ - Remove #ifdef/#endif near printf in print_boot_delay: no need to
+   guard the printf as CONFIG_AUTOBOOT_PROMPT must be set
+ - Link to v1: https://lore.kernel.org/r/20260405-ui-cosmetics-v1-0-bffec3cac741@postmarketos.org
 
+---
+Ferass El Hafidi (3):
+      autoboot: allow custom prompt without requiring AUTOBOOT_KEYED
+      cmd: bootmenu: ANSI_CLEAR_LINE before entry name
+      doc: usage: convert autoboot README to rST
+
+ boot/Kconfig           |  30 ++++-----
+ cmd/bootmenu.c         |   2 +-
+ common/autoboot.c      |   2 +-
+ doc/README.autoboot    | 162 -------------------------------------------------
+ doc/usage/autoboot.rst | 149 +++++++++++++++++++++++++++++++++++++++++++++
+ doc/usage/index.rst    |   1 +
+ 6 files changed, 167 insertions(+), 179 deletions(-)
+---
+base-commit: 0da1866a8fdd4d4bc4837ef2af281dbe010ae16b
+change-id: 20260331-ui-cosmetics-aae207abed6b
+
+Best regards,
 -- 
-2.53.0
+Ferass El Hafidi <funderscore@postmarketos.org>
 
