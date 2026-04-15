@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C867F9D0FB
-	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 00:40:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9D99F9D0FB
+	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 00:40:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E51CC83E36;
-	Wed, 15 Apr 2026 02:40:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 305A18407D;
+	Wed, 15 Apr 2026 02:40:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SVSMV9/a";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FNxuS6+d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4604E838BB; Wed, 15 Apr 2026 02:40:10 +0200 (CEST)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
+ id 0A94480433; Wed, 15 Apr 2026 02:40:12 +0200 (CEST)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FA2983B99
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 02:40:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 875A180433
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 02:40:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-4138136f02eso3875949fac.2
- for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 17:40:07 -0700 (PDT)
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-479554880bcso858299b6e.1
+ for <u-boot@lists.denx.de>; Tue, 14 Apr 2026 17:40:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1776213606; x=1776818406; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1776213607; x=1776818407; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lgtXENVT7PBC8keyGvAoNJmtzHhHGALcR22ba2Tx3ng=;
- b=SVSMV9/aFYiWI4NcXeJFtKL6CmkSRbEKL0M3zAH4l5iwUbm9X1MoQorfeUfxNxmim1
- ASPbmv/8L58AHpHHlTtkU4dUIu60EHpQ1XuUfudM44SdKAA+8ijNpkdjoz3nxY7zH+TZ
- n0w+BxzZPcu4awUlIkdD45g0aJcvRESu6BeVc=
+ bh=27QICOMUAimi95VOE4n7cwL/ygwfNcuFmp3GBYdPEKM=;
+ b=FNxuS6+d3LnmTxRpvGIUznUXtwA9J+pPQccykFT6/auXIzQ8uXbrPKf6HwRzum6qXg
+ ukG6ogsGBQ/D13BwQRYTWVSvOBpOPR3JNLDojsqrbSeDcSxEjlxC2SAbUXf9MOft4hrj
+ Ilg9b9LOuH+zM7WZ60zue7k2Aaj/h7nmN4HTw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776213606; x=1776818406;
+ d=1e100.net; s=20251104; t=1776213607; x=1776818407;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=lgtXENVT7PBC8keyGvAoNJmtzHhHGALcR22ba2Tx3ng=;
- b=goDLaQzLvGVnR0/mkeUtlj6rSXCtXw82KTD6IqAeMi7anh3r75mPI/rd2q+E+QWF7m
- fOrYqva/4RNyqZnvd3uyS1reV4KkqeW9k9ZuXqBQQlT0X+Q4bL5YW2yeez/6oMhQoVZM
- 9DdE/cO2kA6uJ8Dj1dcKi+ribMq9wD/r/Hg4UxZu5+GpIKjLnX0qQBjB+CDYF12BkN0F
- 1zihwfxMpIbp5ALbq4utgNMYEzWOeuic8bfYm9E5qIov++Vi/D64Ajyajq/8tgMAPBdm
- fyHN3SpwqgKQ5xc2cWJKkjqng6Uxp5uOthukP4Qm1k4hpmavi6+GQXL2EAqSObO9v7v8
- zFjA==
-X-Gm-Message-State: AOJu0YwfbJFmaW3ppSz3/nw8Ve2Hk169h/j9f+aiirYgF3jiNGYO5Cdo
- kCj3Owl4gDg5jp+LOoYE0w2WPq5/9BLMEekcxcxb+Gqp1DPW/tB557sRKx7Md0wvKyM=
-X-Gm-Gg: AeBDieu6bdXv9lzjKv0Ky+F2wnaRNXAHP8TJnV+s69EHHiaTAVlgm14Z6RuQ6qEJODX
- lYO99WUiiYs/a8Upx4BU77LO3PU/Ere3ULcBbhRofJNETaoXAbBfeRgp1oJHyLnb2HMOiYyZG6A
- 7H6Ze8XKWdpbt+nh3UTKlbfAr1rH+a2ZmAbAjpVKebjZQ5x64G9MzjJzymIEACS2EyEScY0h6x6
- xBe85gW//1o9HZJ8OHb3bn/IEyVIXK+EyBFeIzfTdUl3KlT3NafmD2SF8HSGnAvStDS6qnTxO+L
- x64Oj2wgfKA/UFVye9I0xn5JTPEPtxtIebpymLXkorgBR6jRIyzdmPmokord6bGHKvXbUHAb/Wl
- tE3pKYM4ex/iyBbsJEkEsQQNp2M5gPSXmOKtyR0LL8xYuFxCm+LytWsRESOsFztLeTDuDuPUju5
- 7BzK78IiLC1vDGzI0yK996yWiTcN7t7DiE6Vt8gWavALXro+La0Qrsol1aaANATBF498eI5WRPZ
- xugKDtI1xprirbFJe9WmvtsURHltg7+DkEdNWI8PxDE504mTIL5rwUrO4HK
-X-Received: by 2002:a05:6871:8908:b0:36e:8381:db00 with SMTP id
- 586e51a60fabf-423e0db87cemr12056743fac.9.1776213606289; 
- Tue, 14 Apr 2026 17:40:06 -0700 (PDT)
+ bh=27QICOMUAimi95VOE4n7cwL/ygwfNcuFmp3GBYdPEKM=;
+ b=BfqyuYulJwEVFSbJoEMR6GwLWa3LNYvHLrOv4qWgjWo7WhgrffKmFkrn/Wl+9Ef8LQ
+ ZwCUylo2o+w7pqrhkWrnAwBIhhXpT415KcM697/e3BgzYukpFz51vQXZpolpFTkdgTMO
+ Ihf6rJwpJgTN/8cmpXsrtSb6U9VD96TX6TQcAAhw0cIKf/q7hEcASf2qWDIRIa6fv7sq
+ ZNflNpWU68cLejekg+A67zQRbAHUq5Xuysf0HLoBvGVEjOlzQhYlu0qObIdCd8pmZk93
+ sb371zp/SOFXkNbj33G7VetRbx1y+qauAeA7sKEDIkZW1KRwZ1yJhPgyhsKwQsoeABws
+ AVtw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/yJm+UbFUmaCLml4FUgkRfLv+QI+zTMBG4yYtsgrrkBsyd3b6jhBmKLB+wv/fjZV2lIs5bQrg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwN0u+n3v9JdJxsvLhfMG5LgANnj+hXk/yXH3m1/DfgfZpaKwNd
+ m6zNNomThhRKGst8BLWqE8lr69QV2TOjVfx+in3dqdwvRz7f+zk60oRGPfY/NjqaRPlV58tdhUE
+ 85e143Zk=
+X-Gm-Gg: AeBDietjX3j4aFAvUhnw6Nx8xo6KeuqSQpo4RTo2qV+cKtH0cScsVd5kDcppwYpugvf
+ zqV6cRfJNy+9ekFT1tle1Fxl5cJqECj8lWZET9mnDjVaCW/8TFEdlC84KwarQ78Z0ua2bWXDqpl
+ T1E1DTuZlPVV+f5v0SqqpSNFzao5HGLY5kjgxTYTVad1KySMTmj5HPuzQJ9dyM2vC7CGHGrk9tO
+ I4SUMXOkJpc5igfg2DgvqSIK/K/iLQm8IVbrxuhOwn1fFFKlmWPwNKrEXVfn9PlAQuFXBeXArNH
+ t8NNV7iTcJebWlOCSRKisfsRu9aHehPHTNIys+u8dhsycLWatLRQWmFRq1EPYA8uTSNstonuxRn
+ vYbhRl37ixgR4sQvIv5/AArtxBJn3Y6iBCv9Dc8T9ePplMmBd3NhUQ9vQumqvqLTAztsfKHPw5r
+ BRDnRpxoq1/isYvB3FvqG0afC9UDrqMLCxxfLjbxd0bMlcy5bA6cFImNw6jHvkXXBisdze7nYUU
+ CtzHDaH/jkjotXuev5o2HFHIaHPNUD3uxPV7fCAGDrQ0eoM80FELy2oOnOP
+X-Received: by 2002:a05:6808:2202:b0:450:4782:2b0e with SMTP id
+ 5614622812f47-4789d03fd6bmr9458207b6e.15.1776213607200; 
+ Tue, 14 Apr 2026 17:40:07 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-42666bcb977sm193085fac.6.2026.04.14.17.40.05
+ 586e51a60fabf-42666bcb977sm193085fac.6.2026.04.14.17.40.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Apr 2026 17:40:05 -0700 (PDT)
+ Tue, 14 Apr 2026 17:40:06 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20260225062301.46540-1-heinrich.schuchardt@canonical.com>
-References: <20260225062301.46540-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] x86/apollolake: don't select non-existent
- INTEL_PMC
-Message-Id: <177621360532.2899116.18430453232771622033.b4-ty@konsulko.com>
-Date: Tue, 14 Apr 2026 18:40:05 -0600
+Cc: Jeremy Compostella <jeremy.compostella@intel.com>, u-boot@lists.denx.de
+In-Reply-To: <20260225155050.73841-1-heinrich.schuchardt@canonical.com>
+References: <20260225155050.73841-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH 1/1] x86: there is no CONFIG_UBOOT_ROMSIZE_KB_12288
+Message-Id: <177621360641.2899116.7161413383623150451.b4-ty@konsulko.com>
+Date: Tue, 14 Apr 2026 18:40:06 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,17 +100,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 25 Feb 2026 07:23:01 +0100, Heinrich Schuchardt wrote:
+On Wed, 25 Feb 2026 16:50:50 +0100, Heinrich Schuchardt wrote:
 
-> Symbol CONFIG_INTEL_PMC does not exist.
-> Don't select it.
+> Remove the reference to the non-existent symbol. As ROMs typically
+> come as powers of two there seems no need for this value.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] x86/apollolake: don't select non-existent INTEL_PMC
-      commit: dc8f56e008744a40718291f94090fd0598cf325a
+[1/1] x86: there is no CONFIG_UBOOT_ROMSIZE_KB_12288
+      commit: 70fd0c3bb7c26d42f24d10145dd5f3168ac92eac
 -- 
 Tom
 
