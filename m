@@ -4,106 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B00FF43832
-	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 15:18:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C666F43834
+	for <u-boot@archiver.kernel.org>; Wed, 15 Apr 2026 15:22:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C977C83B99;
-	Wed, 15 Apr 2026 17:18:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
+	by phobos.denx.de (Postfix) with ESMTP id 5E40F84129;
+	Wed, 15 Apr 2026 17:22:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="V5Vs3dZB";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="onfByP/D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB37283C2B; Wed, 15 Apr 2026 17:18:15 +0200 (CEST)
-Received: from MRZP264CU002.outbound.protection.outlook.com
- (mail-francesouthazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::1])
+ id EE0C783936; Wed, 15 Apr 2026 17:22:10 +0200 (CEST)
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DF6583936
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 17:18:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=softathome.com
+ by phobos.denx.de (Postfix) with ESMTPS id 79F3383936
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 17:22:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=philippe.reynes@softathome.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RWz9+poA52TBxN5fYFoRyOrBda4btb+sbCLkgLzDcGG1a/+Ep89UHq+9Byu7IuOwqIy04Hyy2ocgNrtRVjF4tTm2omnXlHNAydEf8s6pnTXYdab0xB1o3b0Ie80DDWr7ntgclsb3sL+7/fiGgCc7fRgwbVAylGrM6CwpPMNC3BPhyTGmaB28JMTGYAcqqXpqkoUStdF9X3DKDqAqJuslamaF2eoZuz2+kEq+G8OFc6J5cOKPGaZp/harBtJJwU23PWoHhjktck/brqrvNZexbAUwTEUBqIWZrKaA54uOBAXa4RMxcnrnvywly/S8Jzfkz/LE12yDxsZSUg0S2ZIHwQ==
+ b=ds04x6Ixmwl1kTdgt7VRheVshLnpX+fuLwOef4tukkAK7EeMR2TrUwXyufD0QYD8LWbECh2cYM9ozgaB7RRa1QG41jnxNx1QHkZZgBK7EBpuxcd82/9ulL4blQmJLL04wrxgWMBIa2wJrngwmebNySmErVQjUs7CzRz8/w27HS53oSaxiQjVQo9eiHEomyWvPIHFuWEcuJuU0p6o++GNsHfRIcXOobuU6DHdgcCxfa8nULVWiz/tsFvVDRBniy09zM+IF2o8lBOqsrIjJbVk0XZ74crbzo1B0rdyP0W+e2LJA5IdWotZEnW0KI9zE+jugaIv4FOl/5DfmsF9awbRCQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ojdaeqwH/a1WlUSB3JfmkiRyOnbSa+w8dZ73SRAqUkA=;
- b=Y4CeG/lCkawQqOFuwqzkzjijsy3/MEaaha/OsIa0xB/PNGs7U6YMpFIhDyifFNb9IpWFJNyjj7tD5Q43Pft2CUICRktDIohC0xtaCabAzJ4AUQ3IgzecKIXZjNeLYTtyN9iIoRNFzhd/qk2piNeTTVbPaCWnSySp8zk6AgPxXfjC3TNaM0tGYlL8ZdJrXzCvLg59wKOYBStBBdVLimNg6VQRDPmeH+M3B0QK8DEC557afTh/v18jdPNKbXCb7lFU0f3Af9iXViopt+57iB9GBUxegF2KzyYw5X+J31hN2obAgj+FR1jUG+XffEkWz7NEgNIEs4UOy/Rd/+C5PqpwBQ==
+ bh=1I7y/hoO7ZtSNVVPnq9LvFkza7T1GzvADNSljoN05DQ=;
+ b=Y7WYVykNWkUYCqScpQPL5XxJ3L8dkxLk/4yLeTVvvbkKFPLmp/CaJZ35Xxi47yA9hKDRz37RaEkD45KWOJohKKJOFuRtTnTleLxpR+L45vPxzB/YW4gOUf3kZOvqHE/tnPmUs4JhTERuANFe1tTueuGlIVUbQlynp9n0on0UCKF5DwDBl/AcVc5KuFLJxRx71AKnEFbdzue8W2o70Enyrp/yPvpKy30Mydyd9cWfZUEzNhtUPCnX7aXRZ8Cai8SKxEC5To/GepBUS0Hk8KFul+B0jsiER9lEnUzOwlHT795TjUtBtiZoNWT5EVIBxFHLa+bcIYmlf6weR/EesZz5cA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 149.6.166.170) smtp.rcpttodomain=canonical.com smtp.mailfrom=softathome.com;
- dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
+ 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ojdaeqwH/a1WlUSB3JfmkiRyOnbSa+w8dZ73SRAqUkA=;
- b=V5Vs3dZBufIVIyhYXWhTfR1Hb5vsD3hd1QAkX/xgkOm3250zOEaxdCg5jx91KsQkNLJ6LEkSUPJNVKkuNGZ0wlfIOgXPcGbPeZMJ3kksuOH/J5bzNEJC6L/63hU3RBWtQIjBtWACJ4B3Bw3d40Y24DKJs06BrbFTF750yiwDp1ejjhnNJ3MiqKn0Gpi3KaHEDKyXgXBpE2Yh3NZmIAUn7zEiM4gpiRUG+2osGOsFqo9xy7FqfmQ9UkJ8iwAtPRrCBLAKlavx5curZjRR/hlFu1Eg4ojjnXQj96aHoomMyEUMNlQca9nFnOnNzsYPDJsRuIgBRktcFk2LtfTVO4pUww==
-Received: from PA7P264CA0095.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:348::6)
- by PAZP264MB2912.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1f6::15) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=1I7y/hoO7ZtSNVVPnq9LvFkza7T1GzvADNSljoN05DQ=;
+ b=onfByP/D53sIbjmYSuiH0LTBVN+qNiKYJHW3/12yMXAyWPcEV203IuVvyFyfcEtlM74DYDcNrbsjE/KzIy4ERQen6Z5LJr78MXCdOouEsYSb4rG80UkZ5pvgoY643d36HBTBRDRepAIRk0eAU+R53C8j+hRhhfmvCXJjohDxj4A=
+Received: from CYZPR14CA0047.namprd14.prod.outlook.com (2603:10b6:930:a0::29)
+ by SJ0PR10MB6325.namprd10.prod.outlook.com (2603:10b6:a03:44a::19)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Wed, 15 Apr
- 2026 15:18:07 +0000
-Received: from PA1PEPF000CC3FC.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:348:cafe::1e) by PA7P264CA0095.outlook.office365.com
- (2603:10a6:102:348::6) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 15:22:04 +0000
+Received: from CY4PEPF0000E9DC.namprd05.prod.outlook.com
+ (2603:10b6:930:a0:cafe::e4) by CYZPR14CA0047.outlook.office365.com
+ (2603:10b6:930:a0::29) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.49 via Frontend Transport; Wed,
- 15 Apr 2026 15:18:07 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
- smtp.mailfrom=softathome.com; dkim=none (message not signed)
- header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
-Received-SPF: Pass (protection.outlook.com: domain of softathome.com
- designates 149.6.166.170 as permitted sender)
- receiver=protection.outlook.com; client-ip=149.6.166.170;
- helo=proxy.softathome.com; pr=C
-Received: from proxy.softathome.com (149.6.166.170) by
- PA1PEPF000CC3FC.mail.protection.outlook.com (10.167.242.7) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.17
- via Frontend Transport; Wed, 15 Apr 2026 15:18:07 +0000
-Received: from sah1lpt726.softathome.com (unknown [192.168.66.192])
- by proxy.softathome.com (Postfix) with ESMTPSA id C255B2010C;
- Wed, 15 Apr 2026 17:18:07 +0200 (CEST)
-From: Philippe Reynes <philippe.reynes@softathome.com>
-To: trini@konsulko.com,
-	simon.glass@canonical.com
-Cc: u-boot@lists.denx.de,
-	Philippe Reynes <philippe.reynes@softathome.com>
-Subject: [PATCH] sandbox: enable FIT_SIGNATURE
-Date: Wed, 15 Apr 2026 17:17:59 +0200
-Message-ID: <20260415151759.85015-1-philippe.reynes@softathome.com>
-X-Mailer: git-send-email 2.43.0
+ 15 Apr 2026 15:22:04 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ CY4PEPF0000E9DC.mail.protection.outlook.com (10.167.241.75) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9769.17 via Frontend Transport; Wed, 15 Apr 2026 15:22:04 +0000
+Received: from DLEE208.ent.ti.com (157.170.170.97) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 15 Apr
+ 2026 10:22:03 -0500
+Received: from DLEE213.ent.ti.com (157.170.170.116) by DLEE208.ent.ti.com
+ (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 15 Apr
+ 2026 10:22:03 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE213.ent.ti.com
+ (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 15 Apr 2026 10:22:03 -0500
+Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.53.178])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63FFM0ui2222771;
+ Wed, 15 Apr 2026 10:22:00 -0500
+From: Udit Kumar <u-kumar1@ti.com>
+To: <vigneshr@ti.com>, <trini@konsulko.com>, <m-chawdhry@ti.com>
+CC: <bb@ti.com>, <n-francis@ti.com>, <nm@ti.com>, <gehariprasath@ti.com>,
+ <u-boot@lists.denx.de>, Udit Kumar <u-kumar1@ti.com>
+Subject: [PATCH v2 0/3] j721s2: j784s4: Add workaround for errata i2437
+Date: Wed, 15 Apr 2026 20:51:49 +0530
+Message-ID: <20260415152152.3048491-1-u-kumar1@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA1PEPF000CC3FC:EE_|PAZP264MB2912:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: c2b7a9fc-7939-47a4-5da4-08de9b0232e1
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9DC:EE_|SJ0PR10MB6325:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6dd3a545-8f5a-4ea5-3663-08de9b02bfb2
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700016|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: ocPnYb5kAig+z3+49LicEBK1AKRbYQeMIgGraFV6IOd5jHlnH4TIInh57JQiipmVV/EcrDGnGltU5jZH9eWIEjg+1RksyGG3jyey28PjvjiYE63q5mgFhPdtnmqRrfAtPpIiPLxb0m7JY7EO8wOC9kHDhTtonK76KXJFyxKhdB4K+lAvJSUqxFc8mnLxnEj8wZH90Ee3Jjx9wMlH2u4xp24r2Oj0mcqKKFcFNY2n6cErFtBJvQW19ZvOMH0X8tsRs1Xj7Gn2xQnN2kC2rKzRPQusa+UgcumZC/mdvglLMKZiI3sQRo2POrdotz8HsOR3TGvm5lH0RD7jo3M0WGi/YbslCpxs1tDQnlSuBWaIjQVRM3vQ0GZzftjWjcww8sXJbuwFGlZbqXGxIekTOMsMCof4GGSKvto8W+ZL/MPwOe+eA4iH5coHV+STAF4d5+aRjPwUq590OFriIX4LtjSIaIp2p+6d+wnXfvie1uy8QgLtUKsaMLoplQd3KkRVN5xmyjv3JkdOn8qX9gQRUbpAv7Yv96VouxYOJ02ruNUiHmC4uYdqFr2/IUCEIh2enh0499h0pQDLZOsuNggwiUIhw9t9T0R0/pzL4EmfXw6seGYx1DUBlD2qlq012ty/S4dZISFpjC9lxLgZWP0YsJqaAhct2Is83sb86+US31f7iB4NE1dfsa4uqNNvgy38DsRddJ6eOGytHhhA/mVynulUiNBrTtr4Eodp0DmnBNDrcDVttTZDZM4+QYqdybMO0vbdU+BE6sDCYiCfJkZrCU2X7w==
-X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700016)(18002099003)(56012099003);
+ ARA:13230040|1800799024|36860700016|82310400026|376014|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: iJsMDFBMIWGdqGuls75mZI4uQhk794Qjd54XKOmCjP+GllfOSbfZjHwJq3AL7KFslhHb4p572NeFBmv3VVRkUGkPVQtRbHO/WzZWf5kGDRBiZD+OLEYOWIhaY11jTE57G8tBB0WFqI9LhQtWwc/pvTy1tw9XOVFwUtuU4duY+xmLZCQsJaFuBkEt9kMGmhgFO+58DrL8XSlY+9qdqzcxdmC3/kqJPNiMqJmJpj7CValg7S/spwUtXAdNnrqwHZU2ZnFtj2VwUtN22ifnVvKWFQ0+8YyhlPLJv/bh9C/hwiUBEFnDDfnn3uK9vccaeawBySGLq6J8u4gYAa89yH8vl8y0snxlXrIGkoP56bTlRGrM77hz1X/0pQR5d0bNy3f2tEVFzQ7vC8/BMemDH1IZaYsN6l5XRFRE14KNW6UuvJ8cExGrX3DxENmGhVbOWEyLXMI2dbPPYpxwDEHj9pZ+3/E3R2wlSit2XkZZbMfjG4R1QilV0XZaTKNIdkoiH3r5W/dBiXic3OasOp5vb2Wu2QVVoxU2qWAEp2RUM+iNsb7pVxTCNgYKzDL38OG0rId4vBJO6nsI2knmRGAZJFQSh8WiZ8q+N2tQ0vUdC3Ey//Uz1bNyx1FBYiTqg1SH+3/1ZkW6Tp9ab+2av6gBdWxrfKJaJQUrj0F7mipjn4ri6u8RFxibIv25/Yd18I2SIoYbEY2S+UFB+R4A1rShfO9muiwkor6zp4xPwFnGoWJ88Hr/4pq6Oqy6GCXUQFNmt08ePIxsVIMODM1PGx+8p1DsYQ1VvjKpMNsUEpbn9dVa2hs=
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700016)(82310400026)(376014)(18002099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: DzwiXWNrAYzw4cZS5V0+5kzazdBt2EdeO1ijJywdl0/vWR1aIB4+69xCqH9tPy/iJ3NB2Kp4/ip0TzF7Xt8vvB220LVEyyfWZF2oOEjMrF3zvwzlNu2H86RUmRbPe+tmEQck5mQyvBL0YyCpAEqO/BYbXeozPGaF3NK9X1Xb4lXgh9ArX38FsjN0XLRMIBUFnkndr6Fd9Vw7vJ+WfeLL5HisiI7v3O+oKk+Us/S7U1X4BA+sSAlzME0/zrZAJaq+G2u5gWBy8epER0EWC0mrwTatXH2GwAQpVPXHiiE4ZUk+flDARizfX7ZSSum/q2CfiZ3TxYDDX/pKFACZRjDtk+WiwLf6aeXETzC0IiQXXwjoGPVtQR9mO4gXAoekWFhX7vbaW9qY7qcGCVkh08aXEoodhsFuGlp8VI3Ng7aCqU7yoBNN3B0mLe3In1B8amZt
-X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Apr 2026 15:18:07.8605 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c2b7a9fc-7939-47a4-5da4-08de9b0232e1
-X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
- Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: PA1PEPF000CC3FC.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-AntiSpam-MessageData-0: w5n3cIh3brB9w9/vgU+ONjMTTSRKtPMPpUkNEkbeCUmXGxVyEf0jGrABgGbBfyoPf8AzxhXKIps/yY9vapF49ioidsR+joOtyCKDnRlqawf37F/gVN2ZgeyWk3FCRTsaAoF7mNo9PbqMJ3/w8YnzX2GHz0dcG0iTC15CAuOUdUCK+f4rFpVuN8TPgqOEyALyxB0GKpBNEO+7NB/9itheG8gTjmKZeLyCp9iEaJy+mcJrEzRK007n2VuZMAqkLE4H43ZzEo7HCPAEKG/iDABvmoTKBo0Brb4UsU0fzVw5ChTFnjE5ssfeUVVoYEm51sFifUToF89H8CZYczqAA+LpKGnS36ATotQ/tSURPTgbF/NETZHv1Wt8TSPa5oIopT3ZX/OSCzz4ULFuM+XSbnwxsrwq5Vu5P5Gx0PxoHgy2pjmLYl9IAzjynWOB08an+mL8
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Apr 2026 15:22:04.0754 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6dd3a545-8f5a-4ea5-3663-08de9b02bfb2
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9DC.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAZP264MB2912
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB6325
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,30 +131,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since commit d09256283f72 ("FIT: Image pre-load signature
-support must select not depends on FIT_SIGNATURE")
-FIT_SIGNATURE is disabled on sandbox. But this config
-is used on many fit signature tests. So FIT_SIGNATURE should
-be enabled on sandbox.
+Add a necessary hardware errata workaround for J721S2 and J784S4.
 
-Fixes: d09256283f72 ("FIT: Image pre-load signature support must select not depends on FIT_SIGNATURE")
-Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
----
- configs/sandbox_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+Bootlogs
+https://gist.github.com/uditkumarti/da2a489a78d3241ecd2791c9df1c1317
 
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index b681b91c3f9..f26295103f1 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -21,6 +21,7 @@ CONFIG_EFI_CAPSULE_AUTHENTICATE=y
- CONFIG_EFI_CAPSULE_CRT_FILE="board/sandbox/capsule_pub_key_good.crt"
- CONFIG_BUTTON_CMD=y
- CONFIG_FIT=y
-+CONFIG_FIT_SIGNATURE=y
- CONFIG_FIT_CIPHER=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_BOOTMETH_ANDROID=y
+Changelog:
+Changes in v2:
+1- Added verified macro (this is new patch)
+2- updated macro from ERRATA2437 to ERRATA_2437
+3- instead of using hardcoded write, used verified write macro
+
+Link to v1:
+https://lore.kernel.org/u-boot/20251106063929.2232788-1-n-francis@ti.com/
+
+Neha Malcom Francis (2):
+  arch: mach-k3: j721s2_init: Add workaround for errata i2437
+  arch: mach-k3: j784s4_init: Add workaround for errata i2437
+
+Udit Kumar (1):
+  arm: mach-k3: arm: mach-k3: Add writel_verify macro for register write
+    verification
+
+ arch/arm/mach-k3/include/mach/hardware.h | 10 ++++++
+ arch/arm/mach-k3/j721s2/j721s2_init.c    | 39 ++++++++++++++++++++++++
+ arch/arm/mach-k3/j784s4/j784s4_init.c    | 39 ++++++++++++++++++++++++
+ 3 files changed, 88 insertions(+)
+
 -- 
-2.43.0
+2.34.1
 
