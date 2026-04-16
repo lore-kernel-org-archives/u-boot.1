@@ -4,108 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F7A0F8D775
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 19:54:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BA4EF8D76E
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 20:26:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 068AC841F2;
-	Thu, 16 Apr 2026 21:54:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BC38783FC0;
+	Thu, 16 Apr 2026 22:26:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WNgNsSsh";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rfiiGPY1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA31883EEF; Thu, 16 Apr 2026 21:54:52 +0200 (CEST)
-Received: from mail-yx1-xb133.google.com (mail-yx1-xb133.google.com
- [IPv6:2607:f8b0:4864:20::b133])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6EB2A8407E; Thu, 16 Apr 2026 22:26:23 +0200 (CEST)
+Received: from MW6PR02CU001.outbound.protection.outlook.com
+ (mail-westus2azlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c007::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E0AE83EEF
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 21:54:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 538B683EEF
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 22:26:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb133.google.com with SMTP id
- 956f58d0204a3-650789b22e3so9855012d50.1
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 12:54:50 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776369289; cv=none;
- d=google.com; s=arc-20240605;
- b=T4QGuwqeCIB7/dlcwZSFWvH40MIb0aYx3WkcUgrR4gkfqlO/K1/LL4cA7sT8pw1U+m
- Wobx704h1GIMw9w9hzDIo2dHJ/o0XT9YdGAAH/RhcZkC3J12lnGPWkCWfluW6/hwDVr/
- lmm0HXfq3XPxqgN9vLPNrnI4L2OgQh8u1dPckUlcvJog0zmEeT8mY9CPQaWdQwOGXDgw
- m6uEnDFsfTEBiSHk67gRbX3x9JEn4N6tdq0ikIvxCxA7185qKyyLm8ltXCdL0Cv1Y6q3
- Bgh+XfpNb3SrM9UsTfgzHjFMXrBoUekHWKAWYmJWQuVzxrrd8afXAcZIgVIgV/Ft1/v1
- oezg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=y/Ms3YXFFWdC8HunHda/2F2fpkQ5yIYjb7gIFRLGR50=;
- fh=aNZCeVXI75hsTZEZgHzjEkpPw9QzDCuy/OQeWOk5+u4=;
- b=BvJXuH9reS31u6vjei0Vm7qGzmR2RbU8E/or+HmlNDX/NRz+LGwgm4S8vl2MQUF80s
- N5weJXk06C0a7ttesiibIgxQpochcV5JcaupZyYKQOSz6fyC7y2CEEihohUCNZ2hMBgq
- HdK+PtYiP0QdV+gasNk838QgZgShD5bFueo8AnzqPDG/4ItUotTqMqL7kBXMigjSvr0Y
- AwcS8XXwsujiKejcOivqhf+n/CMLjok6QFMJCAthQfz74QBg5bYMGuvp2kS5gr5ugB2G
- cyGEe6W0JjXhmnTccreNB9ATKc1rAFfyAx2jrhzIRICNh1rp6YKHE3jgwS0xCfPYGfxv
- PUWQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1776369289; x=1776974089; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=y/Ms3YXFFWdC8HunHda/2F2fpkQ5yIYjb7gIFRLGR50=;
- b=WNgNsSshVxL52Ewqob0vTbcsGk4JuyTz0y25rUYRWGs/bgfStlop8kSbuF7j5DARIw
- wHYvn8RhXmCE2JEjiLJ40yODjE7NYWjrVab1344YgYCp+jgN+o7s3UtB5hFNTEIKmRhe
- BXWZLrOAjUb9Ve+UFO/K+oWWEukq1luj4pBBef0s8ESPdJjo+8CC8T7977cN0udebxB+
- wLX6s9nTLClPNPilQRXFHuukN9QSmsKJ7D3VQ036UwwZcBvXrRiQRO+RFUuJJhNWYhsX
- 5VG2m3164gD69PxqZnj7n3tNxgSCY9vsHz1i1+S3SBAV4OlRmSqTFHdiq8/yDjABB9UM
- EmNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776369289; x=1776974089;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=y/Ms3YXFFWdC8HunHda/2F2fpkQ5yIYjb7gIFRLGR50=;
- b=H6bkX4Ts+LyGv4eLcLDib5DEe4B8qDTge1K8ZjywBkMLMWHjEmBlcRnM+bNlJS2dqh
- 0AXfYHy1DzilCY8xByoFlnakeSQSWXQHD6ZIHZUXwIusetx3OoRLRywf9TioV0k/Ne8e
- 0dzZxM0FUdHV9VeMhxtpQLsjj1y0mntSgmReAWM9eMY+pcIEKXNiX8sc1VKXJgm966PM
- h96rIkXZ8n/2yIYnSEp1DjF4uWmB9n+djyxXhNzLDY1Evf9YH9wr9DKJgKKAPSklAXTU
- lucBppS7p0WMFBhzeDHyeKwGnHX9HBIYaED+t4T10TWovP8wdd7G3HtFLBA6ZorZxj7c
- WfJA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ99T/IUo/iewoOYFb8rBSl43YgFcN33ty/yBt/Q2CqQc5jfQsQfvqI6DvVXgryDKLVnQ80jB+w=@lists.denx.de
-X-Gm-Message-State: AOJu0YyDtMRD8kgvhzEdHe7IqCNZscbStdLjLLFWoE3qKAtVMiV9Sf3U
- JIrFDuH2g31RqfAvvL4KT6S1PU7ejVWwY5QNrxfR7Cmy7n+r0npEhpVJQ/XuxU08jHACmMgaK8z
- fC84W3c9d1R2/DJ/QITIWmMLdk7BATukERUAq/RBqkg==
-X-Gm-Gg: AeBDievqvRV52d8gsi1ozXQPqVzyaurXTN6zXjCE2q4G3NmVnDhglf7x9O0YAmpB8hu
- VjYuH5campKVSdPEXz4y3RLaaAt6nFWtxtPWbUKIo+FlWxFDQB09mQKER71kXx3rbvxaVAMwZo2
- qxr1gccghpcDUExnL5kXic7kxJ48pY0Oew0K7F64DReJcJ/cQj5OP8go/mdYg56NV6RVABAmDVu
- n5/qB/hhQVnafsBg+gxe9iJtH9Pdd1WGI1dq4mVHgpBWKANIrAydF/ClINlJCmrBMVWCWNkZ6B9
- 5axl0F+RWwbIbri7RKfpLSUf1KwJ3205XOxMuqiqs9wjDDTrnL2qexxoTod4yL6dbL3GoVj0rZE
- 7dfdOoq6Z3/UsNuY79lCVdMyT1YdTidZYiFFQJoZ/yc6jc6LF/cquSpl/L1BQcb+l9gczULr9BX
- wt4rgZofkejEIxNPBnknDLjcL1jNmiPLZErAoanGHtaPPLkRAC6dyj1PMFddAeBYc1EFT9h6JqU
- XpCZDU6NFgrLXxOlrOnVnOjKAvMucNBqq/3gEnVunmYaeUffoPV9BoGSbl0p7siUWBS2rkaKJlL
- 0dxPSVZqBl2XmKgYIuoGJkxafty0tV/uLwudu6sDn8yvlsYQ3o/Pyg==
-X-Received: by 2002:a53:accb:0:10b0:64d:6a5a:ac29 with SMTP id
- 956f58d0204a3-65310b456cbmr5030d50.55.1776369288898; Thu, 16 Apr 2026
- 12:54:48 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=NDlKCbWRHkDt3+FOimGs4Hpbh7DVdfTt2HR66KEu7awG+a7GhEvd3CEROQMkQqp9SqtaCpm56WpGY4QmJQ+NI1d0ccOF8dpaEZR5p7L93ZApeRh7SlyPVwb2q+qdEC3p1SI/Ml0BnsEv6CJj9xpU7iKTd4D2TtSxW7W5+AVMzRmRDV9z6bjndQfaXMIh7SbfqbyeRaLeIDpUo8qe1yYCgYQWAT5d/qWyokHmYn7AQaAYr7QywLuaH1zUMU14HebYpQkYWDASuDCiLMq1uvffiOxovHYgIf1i5B0FLci80hFfNhj3Nwfe/GQM33xMngObHMsciAKinvg5m7MiJ657fA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=2HFR7LJ2xF+frZB5QIUVhiVj/aUHO0YIMdZU57lHpZs=;
+ b=BY+GESMWEmpSFsk9BPsbci2A96w8xk1k+bPaPBREejSfyUduE7Ojj+PUxFoINPIS62LfKoJTiIfHCRaTBzqvbpmfc6KA7pTFr2U+MkmJNqZ6G2yp2gNt41Vur8G2RK4Fxf54M+0WmyQp7Kcg7C9cQm4FCru69HxjrvxxJ8aOT+8ZCHlTPuWY8DtjgsXF4Z9M54MpVyVmeOwYeSVGHGZ9YfWbj2bZmvZ2Gp6edqkGl3jcmGoJT+xPN7DeanT1svqaAyNEgl90wzifDjCx7mDoR3+p9iOU7GuzijA3KFWYT34O4dMkUZd+gzVKIZr1vz+WqljW9DDdo6RjvDlZGD+Usw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2HFR7LJ2xF+frZB5QIUVhiVj/aUHO0YIMdZU57lHpZs=;
+ b=rfiiGPY1OgKPBH2yC0oD87be1TnXCG4bqoi0dZwmlBtasQ/t7yJASNLMGF6FW3dd+aA1CtsYoj0Mzr6wr6jrIoUlzfMdxNYzGqfFqDXdwxKHCPxqY4AMz/ESKITvQ/rA8ZN2vjJUm0wINX+cuBWTNU9chgUNdKSyyJmOujeCF6U=
+Received: from SJ0PR13CA0027.namprd13.prod.outlook.com (2603:10b6:a03:2c0::32)
+ by SJ0PR10MB4560.namprd10.prod.outlook.com (2603:10b6:a03:2d3::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.25; Thu, 16 Apr
+ 2026 20:26:15 +0000
+Received: from SJ1PEPF000023CB.namprd02.prod.outlook.com
+ (2603:10b6:a03:2c0:cafe::eb) by SJ0PR13CA0027.outlook.office365.com
+ (2603:10b6:a03:2c0::32) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.51 via Frontend Transport; Thu,
+ 16 Apr 2026 20:26:15 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ SJ1PEPF000023CB.mail.protection.outlook.com (10.167.244.5) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9769.17 via Frontend Transport; Thu, 16 Apr 2026 20:26:15 +0000
+Received: from DLEE212.ent.ti.com (157.170.170.114) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 16 Apr
+ 2026 15:26:14 -0500
+Received: from DLEE211.ent.ti.com (157.170.170.113) by DLEE212.ent.ti.com
+ (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 16 Apr
+ 2026 15:26:14 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 16 Apr 2026 15:26:14 -0500
+Received: from localhost (rs-desk.dhcp.ti.com [128.247.81.39])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63GKQEUk655757;
+ Thu, 16 Apr 2026 15:26:14 -0500
 MIME-Version: 1.0
-References: <20260413203555.1990337-1-rs@ti.com>
- <20260413203555.1990337-3-rs@ti.com>
- <CAC_iWj+=ukmK+vXA=T8g7xnJpCb14=DHm7GF_su+ohYTpMCoGg@mail.gmail.com>
- <DHUTP14B0Z8Q.64QEUIVV4YNB@ti.com>
-In-Reply-To: <DHUTP14B0Z8Q.64QEUIVV4YNB@ti.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 16 Apr 2026 22:54:13 +0300
-X-Gm-Features: AQROBzDvS8NkvlUhB6oTLVR4NcXZE1mO6s49ubbYbLXNRmbp5NfwUYRlcv86KLw
-Message-ID: <CAC_iWjJRoKuRiLNLYeNSo6P6Mszcn=vY11-U71_N=mS0A8P+-w@mail.gmail.com>
-Subject: Re: [PATCHv3 2/6] lmb: add LMB_FDT for fdt reserved regions
-To: Randolph Sapp <rs@ti.com>
-Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
- Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
- afd@ti.com, xypron.glpk@gmx.de, u-boot@lists.denx.de
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="UTF-8"
+Date: Thu, 16 Apr 2026 15:26:14 -0500
+Message-ID: <DHUV0ZQ8Y0KC.1HCMIW6TK4K9A@ti.com>
+Subject: Re: [PATCHv3 4/6] efi_selftest_memory: check for duplicates first
+From: Randolph Sapp <rs@ti.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, <rs@ti.com>
+CC: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
+ <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
+ <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
+ <u-boot@lists.denx.de>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20260413203555.1990337-1-rs@ti.com>
+ <20260413203555.1990337-5-rs@ti.com>
+ <CAC_iWjJOzdFwAppsCKwFMf_uJ0TGi3JpSzcj+9iWegLryha5-A@mail.gmail.com>
+In-Reply-To: <CAC_iWjJOzdFwAppsCKwFMf_uJ0TGi3JpSzcj+9iWegLryha5-A@mail.gmail.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000023CB:EE_|SJ0PR10MB4560:EE_
+X-MS-Office365-Filtering-Correlation-Id: 79f5ca59-0618-4308-cadf-08de9bf6689f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|36860700016|376014|1800799024|22082099003|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: blaPqMJUXbM92jSjZAodbaqVRNyCiuI/VMpDSRrTKOvcVrDcFvylDGIivQEfEy6GrM7PHQ8pVI1VZ/AhzIJYh0u92njZRoVZuc2EIwNXOIY5AObCzCmkMuJYRxRvddkK67m8EAebEapPKD9M1hFc/EamYs4rUe7gdtpXphGj6Zro7/hZYAuT2+bCx6TEtcIw1Ed4ONme4XhStI71uSjaijEH+UxyiCO8XgSxcFKkVWc6RMn2JgQDj2Nhl7hlipDNhIUTYqzkLVpPVr8R9r4mIrmlvH8p1RiLy8SeRuS0VGWuBCTxyZ2Y+3e2mMMuqVcVb7wKoduiwhWtU6q7Crx6AKsMJ0ASV7WkGMBvhQZ42/5OgCNJeL5NW5wp8rQu5Pm+H9HZsKiLIGRLSVI9mndLK5UlvzvPCfxLLyW+4LAP4+53drMM4uHQDTBLXtaB++msumWhUUIacIXAO48RNSKwTmpTxb7SWJKWYKDOIYDTt7n4HRVJl2blxV2CDWSQHcOwcG6bv2SxxsqRtJ3nj1YG5NAbsizCC7NRMc9LURfBfZBlm1n0JdZ4veNLD7toSQZvFF5ghbuzZ4AsRzVnCXdWMk42z2YPNbuzixjOYz8o/kQQnSdCwkXjxyL2xR/e8ilOYt2v0RwLgtuKzPlIrybFgafl1kmifxf+AwHGCzB3QTklxeGnrgtfRgyamAfFmM+FBa6hVgK/oLeq439Ofcw9CuvIKulTzFq0vheaNNqx4C/gmflUFWabOIugVYZKTZCxI42Fidru/SIjEA//CEVJEA==
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(22082099003)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: ZP8cfwlNijUGRgASl8OPfHtR2f4SU/CLOAPu+W59AaKLb+UqkqYx8YCLHvi3u2695T/WbBhoMaZ8zwrnBk4+DU0EQBKW2UyUGdch5hvNWZ7J9XjxQy4wQWdquyP6jNM+oaZKWtOoXQAurAYc0dBXDjHjOMuko/Mc02+EMdZrF4zi9a6mbJyn57dL+4Dhbr6A9Qi8G4xCCsqbMqoVtzLL7qCYBA2ij4ry60+q7+pXd/xO/7M1LSNYaLiG58SqV4KQkX3xMMjD8j1liVTxv2WEjCaMTbMfsnx7Pf+RAQ9FITu1vOOrNdutRURv0XS18UYDxqsJUH38Hz/c5L3srBvHXUk00+1g3uwK1qocno2i2CLU9Ko3rHHRxqsteqD2Dp6X9QaU6dpkwYB1RwP4bBBxetmsZ4lS76Curzc6cZ0rdgKlIhEMqTr7kK7GiiD5uyrX
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2026 20:26:15.1356 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 79f5ca59-0618-4308-cadf-08de9bf6689f
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000023CB.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB4560
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,183 +136,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 16 Apr 2026 at 22:23, Randolph Sapp <rs@ti.com> wrote:
+On Thu Apr 16, 2026 at 3:55 AM CDT, Ilias Apalodimas wrote:
+> On Mon, 13 Apr 2026 at 23:36, <rs@ti.com> wrote:
+>>
+>> From: Randolph Sapp <rs@ti.com>
+>>
+>> Check for duplicate memory mappings before reporting any incorrect
+>> attributes. Could be that second allocation has the correct type while
+>> the first doesn't. Knowing there is a duplicate in this scenario is
+>> more helpful than just reporting the first mismatch.
+>>
+>> Signed-off-by: Randolph Sapp <rs@ti.com>
 >
-> On Thu Apr 16, 2026 at 3:39 AM CDT, Ilias Apalodimas wrote:
-> > Hi Randolph.
-> >
-> > On Mon, 13 Apr 2026 at 23:36, <rs@ti.com> wrote:
-> >>
-> >> From: Randolph Sapp <rs@ti.com>
-> >>
-> >> Add an LMB_FDT bit for fdt reserved regions, so we can reclaim them when
-> >> parsing a new device tree and properly warn people when a reservation
-> >> overlaps with an existing allocation.
-> >
-> > The LMB has a set of regions that clearly describe memory in an
-> > abstact way, e.g reserved, no overwrite etc.
-> > I don't think adding we should open the door for treating reserved
-> > memory as special. Can't we apply the same fix without adding a new
-> > description?
-> >
-> > Thanks
-> > /Ilias
+> [...]
 >
-> I did have an initial implementation using a separate allocation list for fdt
-> regions in LMB. It works, but boy it's much more messy. All allocations and
-> frees had to check both the regular allocation list and the fdt allocation list.
+>>                         }
+>> -                       found =3D true;
+>> -                       if (memory_type !=3D entry->type) {
+>> -                               efi_st_error
+>> -                                       ("Wrong memory type %d, expected=
+ %d\n",
+>> -                                        entry->type, memory_type);
+>> -                               return EFI_ST_FAILURE;
+>> -                       }
+>> +                       match =3D entry;
+>>                 }
+>>         }
+>> -       if (!found) {
+>> +       if (!match) {
+>>                 efi_st_error("Missing memory map entry\n");
+>>                 return EFI_ST_FAILURE;
+>>         }
+>> +       if (memory_type !=3D match->type) {
+>> +               efi_st_error("Wrong memory type %d, expected %d\n", matc=
+h->type,
+>> +                            memory_type);
+>> +               return EFI_ST_FAILURE;
 >
-> I thought about having the fdt helpers build their own local list separate from
-> LMB, but that's also a little messy in that it means we're either double
-> tracking regions or tying to reach into the guts of LMB to extract information
-> about that existing allocation region.
+> This check is now outside the loop and only checks for the last entry.
+> If you wan't to split the fucntionality, don't we need a loop over all
+> memory areas and the type?
 >
-> Maybe that's fine considering LMB already reaches out to kick
-> boot_fdt_add_mem_rsv_regions. Just trying to keep things compartmentalized at
-> the moment.
->
-> I'll revisit the localized reservation list for image-fdt. I'll just setup some
-> goofy linked list to track allocation start and size for the later free. I
-> assume we prefer a separate set of lmb_region structs for that list as it's a
-> little concerning to pass references to an active LMB region outside of the LMB
-> core.
+> Thanks
+> /Ilias
 
-Can you explain a bit more when the problem happens? Is it because
-boot_fdt_add_mem_rsv_regions() get called twice in some boot flows? Or
-is there another reason?
+Not necessarily. At the end of the day we can only really raise one excepti=
+on
+anyway. I just think informing the user about a duplicate should take prior=
+ity
+above mismatched attributes. It hints at a bigger issue.
 
-Thanks
-/Ilias
->
-> >>
-> >> If we don't at least warn the user of these reservation failures,
-> >> there's a chance that this region could be freed and reallocated for
-> >> something important later.
-> >>
-> >> This useful warning mechanism was broken in:
-> >> 5a6aa7d5913 ("boot: fdt: Handle already reserved memory in boot_fdt_reserve_region()")
-> >>
-> >> Signed-off-by: Randolph Sapp <rs@ti.com>
-> >> ---
-> >>  boot/image-fdt.c |  5 ++++-
-> >>  include/lmb.h    | 14 ++++++++++++++
-> >>  lib/lmb.c        | 33 +++++++++++++++++++++++++++++----
-> >>  3 files changed, 47 insertions(+), 5 deletions(-)
-> >>
-> >> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-> >> index a3a4fb8b558..0f5857f24d2 100644
-> >> --- a/boot/image-fdt.c
-> >> +++ b/boot/image-fdt.c
-> >> @@ -73,6 +73,7 @@ static void boot_fdt_reserve_region(u64 addr, u64 size, u32 flags)
-> >>  {
-> >>         long ret;
-> >>         phys_addr_t rsv_addr;
-> >> +       flags |= LMB_FDT;
-> >>
-> >>         rsv_addr = (phys_addr_t)addr;
-> >>         ret = lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &rsv_addr, size, flags);
-> >> @@ -80,7 +81,7 @@ static void boot_fdt_reserve_region(u64 addr, u64 size, u32 flags)
-> >>                 debug("   reserving fdt memory region: addr=%llx size=%llx flags=%x\n",
-> >>                       (unsigned long long)addr,
-> >>                       (unsigned long long)size, flags);
-> >> -       } else if (ret != -EEXIST && ret != -EINVAL) {
-> >> +       } else if (ret != -EINVAL) {
-> >>                 puts("ERROR: reserving fdt memory region failed ");
-> >>                 printf("(addr=%llx size=%llx flags=%x)\n",
-> >>                        (unsigned long long)addr,
-> >> @@ -108,6 +109,8 @@ void boot_fdt_add_mem_rsv_regions(void *fdt_blob)
-> >>         if (fdt_check_header(fdt_blob) != 0)
-> >>                 return;
-> >>
-> >> +       lmb_free_fdt_regions();
-> >> +
-> >>         /* process memreserve sections */
-> >>         total = fdt_num_mem_rsv(fdt_blob);
-> >>         for (i = 0; i < total; i++) {
-> >> diff --git a/include/lmb.h b/include/lmb.h
-> >> index 427d701bc30..c6a1fc1ca47 100644
-> >> --- a/include/lmb.h
-> >> +++ b/include/lmb.h
-> >> @@ -51,6 +51,15 @@
-> >>   */
-> >>  #define LMB_NONOTIFY BIT(3)
-> >>
-> >> +/**
-> >> + * define LMB_FDT - reclaim this region with lmb_free_fdt_regions()
-> >> + *
-> >> + * LMB Memory region attribute flag to indicate that the region will be
-> >> + * reclaimed with lmb_free_fdt_regions(). This allows device tree reservations
-> >> + * to be cleaned up and tracked more granularly.
-> >> + */
-> >> +#define LMB_FDT BIT(4)
-> >> +
-> >>  /**
-> >>   * enum lmb_mem_type - type of memory allocation request
-> >>   * @LMB_MEM_ALLOC_ADDR:        request for a particular region of memory
-> >> @@ -235,6 +244,11 @@ phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_size_t size, ulong align);
-> >>   */
-> >>  long io_lmb_free(struct lmb *io_lmb, phys_addr_t base, phys_size_t size);
-> >>
-> >> +/**
-> >> + * lmb_free_fdt_regions() - Reclaim all %LMB_FDT tagged reserved regions
-> >> + */
-> >> +void lmb_free_fdt_regions(void);
-> >> +
-> >>  #endif /* __KERNEL__ */
-> >>
-> >>  #endif /* _LINUX_LMB_H */
-> >> diff --git a/lib/lmb.c b/lib/lmb.c
-> >> index 8f12c6ad8e5..7ecc548d831 100644
-> >> --- a/lib/lmb.c
-> >> +++ b/lib/lmb.c
-> >> @@ -463,10 +463,10 @@ static int lmb_map_update_notify(phys_addr_t addr, phys_size_t size,
-> >>
-> >>  static void lmb_print_region_flags(u32 flags)
-> >>  {
-> >> -       const char * const flag_str[] = { "none", "no-map", "no-overwrite",
-> >> -                                         "no-notify" };
-> >> -       unsigned int pflags = flags &
-> >> -                             (LMB_NOMAP | LMB_NOOVERWRITE | LMB_NONOTIFY);
-> >> +       const char *const flag_str[] = { "none", "no-map", "no-overwrite",
-> >> +                                        "no-notify", "fdt" };
-> >> +       unsigned int pflags =
-> >> +               flags & (LMB_NOMAP | LMB_NOOVERWRITE | LMB_NONOTIFY | LMB_FDT);
-> >>
-> >>         if (flags != pflags) {
-> >>                 printf("invalid %#x\n", flags);
-> >> @@ -654,6 +654,31 @@ long lmb_free(phys_addr_t base, phys_size_t size, u32 flags)
-> >>         return lmb_map_update_notify(base, size, LMB_MAP_OP_FREE, flags);
-> >>  }
-> >>
-> >> +void lmb_free_fdt_regions(void)
-> >> +{
-> >> +       struct alist *lmb_rgn_lst = &lmb.used_mem;
-> >> +       struct lmb_region *rgn = lmb_rgn_lst->data;
-> >> +       long ret;
-> >> +       int i = 0;
-> >> +
-> >> +       while (i < lmb_rgn_lst->count) {
-> >> +               phys_addr_t base = rgn[i].base;
-> >> +               phys_size_t size = rgn[i].size;
-> >> +               u32 flags = rgn[i].flags;
-> >> +
-> >> +               if (flags & LMB_FDT) {
-> >> +                       ret = lmb_free(base, size, flags);
-> >> +                       if (ret < 0) {
-> >> +                               printf("Unable to free FDT memory at 0x%08lx\n",
-> >> +                                      (ulong)base);
-> >> +                               i++;
-> >> +                       }
-> >> +               } else {
-> >> +                       i++;
-> >> +               }
-> >> +       }
-> >> +}
-> >> +
-> >>  static int _lmb_alloc_base(phys_size_t size, ulong align,
-> >>                            phys_addr_t *addr, u32 flags)
-> >>  {
-> >> --
-> >> 2.53.0
-> >>
->
+>> +       }
+>>         return EFI_ST_SUCCESS;
+>>  }
+>>
+>> --
+>> 2.53.0
+>>
+
