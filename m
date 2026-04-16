@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7E78F8A145
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 08:47:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 278B8F8A148
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 08:47:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D9FE840AB;
-	Thu, 16 Apr 2026 10:47:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 30A67841F2;
+	Thu, 16 Apr 2026 10:47:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mhOL4pS0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MS0X0cEs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53CDC84105; Thu, 16 Apr 2026 10:47:24 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 3C81684214; Thu, 16 Apr 2026 10:47:26 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 552DF84105
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 10:47:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D254841D5
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 10:47:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-488b3f8fa2bso3718615e9.1
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 01:47:22 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-43d7e23defbso2079825f8f.0
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 01:47:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776329242; x=1776934042; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1776329243; x=1776934043; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3OQzSckePx/MAGXW8zkDhFDD7+iffyF3SDq4Cg2uauA=;
- b=mhOL4pS0L8NP+bF04ORxRrg532TQ1GDSGIKNdMmpxX7k6ZdlkctVEhiayVQbXzZA5L
- 3IfLtRUsUq+cy7aXlPd12ygIjkvqSqakT7nGHQQ8Sl/ExKV4Ic+SL0FaxgK6KdkztcgQ
- +hmjAxE1fbKWD8oAInsp8ZSDr2Cta/s3Apt9d12OkjEqlX1zYzao+450iRT4AqMRuC4c
- a0GKxcQj5bx4gTAIEe0DQeSprSptHNiHzncziW20B0G4K8+ncapVaN1L78Rct66YwKXp
- JcYfS5WLBQ4d2D5cXJhvWKqyUeaX+4n7EsOKV2QOJ8+KjqwhRsaVye6Ksvd0cCYMfiHl
- WEsg==
+ bh=BbZeYI3IIp4ZaLDzYHqOXJahwEOJ4/rJdMzIteM20sk=;
+ b=MS0X0cEsP0TM7KpgaoTn93eHlwujsnc4VeKvm5psotsCGbu7gS/VDfOr5pptypU9xv
+ 1CEPjY5nX53Pru1xSIL5BPJd9GDAOvBPH9zchVNS9hAOLkNvIzmxMJmwY/fiWIwbBV6/
+ QGG8vzGBX5ubrMunH3PYkV7mKUlMN3hTVBKknXeHc7TwAjPoR0btNE1sfHStLDXec+9G
+ PdeBn7ATxq73R3eCixlF3leOrYZYtyqloZuDX440aBmvSLsLe7wUDs9W6/x6o4bSRxUJ
+ n+Ubego5rAWDrR3rsLVODl5ST0yyz5TIReuo24i3MFaml3Lh9XRcyr01t9gk70zbvYfc
+ 6WUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776329242; x=1776934042;
+ d=1e100.net; s=20251104; t=1776329243; x=1776934043;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=3OQzSckePx/MAGXW8zkDhFDD7+iffyF3SDq4Cg2uauA=;
- b=YqAKJvMQelLuQIdBOPvGm+wTSFLq6hrph3IVk/bbpUWenYPgUwtd0bDk+gbqO9S4WI
- iiNYZrKxbhZ//bih+Rrskx0AYnRrHLFMm+tefZIfX9pp7GcevRSS9FJisoQl5OAKLOf3
- S8d667UwXeZ6bAc5c8FJin4AFZVbTOAGWX317OzdiRbhVdaNY5MV0CSXfXlOkbJlpDEF
- +IkxA2XTay9bmyyiQNHQG/5LjKx5uXwpuPl93t0TphQHhldK1msNjN0U0vJOuU2KBxxN
- mv+8o53gvdoMkBI2oC1FuChBIWmbJ2vOFnWN0Sm1A4wJEAVay2mEWqOeJGlOFBsm0qAU
- Y3Sw==
+ bh=BbZeYI3IIp4ZaLDzYHqOXJahwEOJ4/rJdMzIteM20sk=;
+ b=axzIQAc91LN4FISQBeR+dGkug3G8Ni4nuDz5hRg0xGUsBkxY/oi5HXBf8RS0TiA8Wx
+ HHh1S6dZyobLrrPfupMqARliLt3dtna9qRcOUnSQwDb8I9kB4TzzTcq6k/Oq1fgZcW3n
+ uqWnv3AeumN5yxyQw583ZsPBRk5bVBozhmBYynFWS6Y7CNsdH/ghbaL/43kxhrtuuk3M
+ fecMFYdvRtaWddgQ4XZiJhIX5LZzW9UlPToqqqEUKiFHtvs5vIt4TUcqkBHOLTGYd9Ex
+ b07yNaegd2av2MJy1wEA0FUwctUFScSD72Kh5gxhMvVtxjCuqMBahXc39uZDvHw3NEyq
+ fR/A==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8spPA4MA8j5fGrpMsEOXsBHMyHzVotfgzeUvG+ZnWIZQX3l7q88lFPUEKrXziwWB38KTXliNI=@lists.denx.de
-X-Gm-Message-State: AOJu0YzDX/AaG1xEaEvcl0Mu6nD+nEYB1N/JyzGyozpZXetXPq0vKTxU
- FGsqO3aZI27m6onUYu5HLmvLA32z2+8OqXhqyNVGMTHKVvOnBDHfMZjO
-X-Gm-Gg: AeBDietUPU0coL9FNRF/kUOFBvNZb2YFsN8IcF0np4vdIQi2Zj4zRvM/XW5R5n2I8Nk
- DnG8AIAMuJtWcNmhqvaoXeW+BIu8CVSUM4ymGaPnLD9AMmor24gAFD3wJOHOEKQnaqpkPnuHf11
- SLQWqXm7i86xPQE0R/hMwtMwooR+7vPcHKUVa8dQIWKE8AXAte1PJztdL1xrn+x4/tHEjYGcAB5
- XM3M5oim7YCQkuOPgGrObCw5Qv68uhAxTvCDk/K8n4qW+QpjdWXCyQvE8plLHo9kL3tvvFSblD/
- sPNF7BYNgj70d7E+qSeVXg8QLEm83rRWVxv6EHfzC+cVKpfEcokUs2gTj5V25bxtRIkuXM8LHTP
- 4fCmNfsJvzEUZjwVTymzntNfGTzZqzMABHaPvOwy0+TCp/6StmwrqsTH0PfHd5RkTrzNo4ZCiIC
- L1hx3zNBM0M4jKLNH8Ob6Vih3+6uHe1j296ysM1oSIqWJUfDkUdYbQuzoWl57xcTK/6fS8t+OwN
- 6XtfEq6dkYma6iRRznE7EcMtltv6KHiJfWSCjKl41fNnagW
-X-Received: by 2002:a05:600c:40d2:b0:488:e10c:d17f with SMTP id
- 5b1f17b1804b1-488f4800189mr26969805e9.16.1776329241428; 
- Thu, 16 Apr 2026 01:47:21 -0700 (PDT)
+ AFNElJ8Ic6m+EMD7LKK/6ZIQ0l54NAkHAwLGy0ShpYwN/49conUiMrTJR/q+3afT9T0gF+1XiAHdHYE=@lists.denx.de
+X-Gm-Message-State: AOJu0YyAb08Fm2OyS595KMvh6tvkbfORhlh+V25VYpTLYJvTTU3pdnoV
+ PxVCD7g3Zwnbot/BfNyJwgZ5+0ku21PVeJzWXf2FhrFHeK5nzqf/XiaH
+X-Gm-Gg: AeBDiesh8LwIeK1DUbVwJrZBvJW67oRWd5pJF9Y7SUiP3DxXuRSPNd9qV6Lb9sfWQbt
+ zubn4FIbwN2lr5nOURc3Yibfb7HugTQGe+vvMi/4J8bVmKKdah8h0sNo/WnA8vzCq7Ib89oyUhj
+ pV2tIPFRbQNwLQ+5j2IhMhJ0d8cHPr7a3dEkOTbjCdSgY5qyab2sZzf3P42TUD8/bL4+YY93Ghe
+ bDY7m6QP9UfPNnTAxVg1kaG+92yeBdKe1INjU665Nn+llnHYrWEUQB+/KqA/VGCvrS3MvYmNoNp
+ AelSxYm20CqSYPoti+ftso2uxl3ul/HxQVfnr6gjTQrM3Tq0ce7q1tzVjjQGoWeiVXWaPcz4Cqg
+ 0YegwDD2mN9HtNwssuQGP0BXmZajYWqkzWyw1IvigHg+zYeaQWNwyUA5YnZ0FoPk92NjaNBoA6a
+ zwYU4LlFAPuVeNaqYYM4Kkt84/P3FQnObuLaMbtEc9GuYvRMV7pMQFx43fz/RV6S8AHgopO8H8g
+ haraLhjB9tIgkeI1rA0IcMGoCQcmKxL3obBH9SzaHoE9NZ+
+X-Received: by 2002:a5d:5f46:0:b0:43c:f8b4:e58 with SMTP id
+ ffacd0b85a97d-43d642c088fmr36767656f8f.41.1776329243215; 
+ Thu, 16 Apr 2026 01:47:23 -0700 (PDT)
 Received: from emanueleg-nb.homenet.telecomitalia.it
  (host-87-2-163-213.retail.telecomitalia.it. [87.2.163.213])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43ead3564d8sm13391674f8f.10.2026.04.16.01.47.20
+ ffacd0b85a97d-43ead3564d8sm13391674f8f.10.2026.04.16.01.47.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Apr 2026 01:47:21 -0700 (PDT)
+ Thu, 16 Apr 2026 01:47:22 -0700 (PDT)
 From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@nabladev.com>,
  Fabio Estevam <festevam@gmail.com>,
@@ -83,10 +83,10 @@ Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
  "Peng Fan" <peng.fan@nxp.com>, "Alice Guo" <alice.guo@nxp.com>,
  "Sumit Garg" <sumit.garg@oss.qualcomm.com>, Simon Glass <sjg@chromium.org>,
  u-boot@lists.denx.de
-Subject: [PATCH v1 1/3] common: memsize: add RAM size probe based on alias
- detection
-Date: Thu, 16 Apr 2026 10:45:23 +0200
-Message-ID: <20260416084535.1490476-2-ghidoliemanuele@gmail.com>
+Subject: [PATCH v1 3/3] toradex: tdx-cfg-block: add verdin imx95 0226,
+ 0227 and 0228 pid4
+Date: Thu, 16 Apr 2026 10:45:25 +0200
+Message-ID: <20260416084535.1490476-4-ghidoliemanuele@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260416084535.1490476-1-ghidoliemanuele@gmail.com>
 References: <20260416084535.1490476-1-ghidoliemanuele@gmail.com>
@@ -110,131 +110,60 @@ X-Virus-Status: Clean
 
 From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-Add probe_ram_size_by_alias() to detect RAM size by checking whether a
-write to one address aliases to another address.
-
-Compared to get_ram_size(), this function allows the caller to:
-- limit probing to a small set of required accesses
-- avoid touching reserved or already used memory regions
-- handle non-linear alias patterns
-
-On the iMX95 SoC, when used with LPDDR5, accesses beyond the end of an 8GB DDR
-configuration do not alias to the expected linear wrap-around addresses.
-Instead, the aliased addresses appears to follow a pattern related to the
-DDRC bank and bank-group addresses mapping. Experimentally, the observed
-pattern is:
-
-Write        Read
-y00000000 -> x0001c000
-y00004000 -> x00018000
-y00008000 -> x00014000
-y0000c000 -> x00010000
-y00010000 -> x0000c000
-y00014000 -> x00008000
-y00018000 -> x00004000
-y0001c000 -> x00000000
-
-This helper makes it possible to probe RAM size by explicitly specifying
-the probed address and the expected alias address for each size check.
+Add these new PID4 to config block handling:
+ - 0226 Verdin iMX95 Hexa 4GB WB IT
+ - 0227 Verdin iMX95 Hexa 4GB ET
+ - 0228 Verdin iMX95 Hexa 16GB IT
 
 Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 ---
- common/memsize.c | 56 ++++++++++++++++++++++++++++++++++++++++++++++++
- include/init.h   |  7 ++++++
- 2 files changed, 63 insertions(+)
+ board/toradex/common/tdx-cfg-block.c      | 3 +++
+ board/toradex/common/tdx-cfg-block.h      | 3 +++
+ board/toradex/verdin-imx95/verdin-imx95.c | 3 ++-
+ 3 files changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/common/memsize.c b/common/memsize.c
-index 1abf3fc47d73..cf46a6b17872 100644
---- a/common/memsize.c
-+++ b/common/memsize.c
-@@ -127,6 +127,62 @@ long get_ram_size(long *base, long maxsize)
- 	return (maxsize);
- }
+diff --git a/board/toradex/common/tdx-cfg-block.c b/board/toradex/common/tdx-cfg-block.c
+index c8c10742103b..896a0d3bd126 100644
+--- a/board/toradex/common/tdx-cfg-block.c
++++ b/board/toradex/common/tdx-cfg-block.c
+@@ -187,6 +187,9 @@ const struct toradex_som toradex_modules[] = {
+ 	{ OSM_IMX91S_2GB_IT,                     "OSM iMX91 Solo 2GB IT",                TARGET_IS_ENABLED(TORADEX_OSM_IMX91)    },
+ 	{ VERDIN_AM62D_1G_ET_GPU_NODSI,          "Verdin AM62 Dual 1GB ET",              TARGET_IS_ENABLED(VERDIN_AM62_A53)      },
+ 	{ AQUILA_TDA4O_16GB_IT,                  "Aquila TDA4 Octa 16GB IT",             TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
++	{ VERDIN_IMX95H_4G_WB_IT,                "Verdin iMX95 Hexa 4GB WB IT",          TARGET_IS_ENABLED(VERDIN_IMX95)         },
++	{ VERDIN_IMX95H_4G_ET,                   "Verdin iMX95 Hexa 4GB ET",             TARGET_IS_ENABLED(VERDIN_IMX95)         },
++	{ VERDIN_IMX95H_16G_IT,                  "Verdin iMX95 Hexa 16GB IT",            TARGET_IS_ENABLED(VERDIN_IMX95)         },
+ };
  
-+/**
-+ * probe_ram_size_by_alias() - Detect RAM size using known alias addresses
-+ * @checks: Array of RAM alias probe descriptors, terminated by a NULL
-+ *	    @probe_addr entry
-+ *
-+ * Probe RAM size by writing a test pattern to each @probe_addr and checking
-+ * whether the same pattern does not appear at the corresponding @alias_addr.
-+ * This is useful on systems where address wrap-around does not alias to the
-+ * base of memory in a linear way, so get_ram_size() cannot be used directly.
-+ * It is also useful on systems where the base of the physical memory cannot
-+ * be safely accessed, so get_ram_size() cannot be used at all.
-+ *
-+ * Return: The size associated with the first matching entry, or 0 if no match
-+ * is found.
-+ */
-+long probe_ram_size_by_alias(const struct ram_alias_check *checks)
-+{
-+	long save[2];
-+	int dcache_en = dcache_status();
-+	long ret = 0;
-+
-+	while (checks->probe_addr && !ret) {
-+		volatile long *d = checks->probe_addr;
-+		volatile long *s = checks->alias_addr;
-+
-+		save[0] = *s;
-+		save[1] = *d;
-+		/* Ensure s is written and not cached */
-+		if (dcache_en)
-+			dcache_flush_invalidate(s);
-+
-+		*d = ~save[0];
-+		sync();
-+		if (dcache_en)
-+			dcache_flush_invalidate(d);
-+
-+		if (*s != ~save[0])
-+			ret = checks->size;
-+
-+		/* Restore content */
-+		*d = save[1];
-+		sync();
-+		if (dcache_en)
-+			dcache_flush_invalidate(d);
-+
-+		*s = save[0];
-+		sync();
-+		if (dcache_en)
-+			dcache_flush_invalidate(s);
-+
-+		checks++;
-+	}
-+
-+	return ret;
-+}
-+
- phys_size_t __weak get_effective_memsize(void)
- {
- 	phys_size_t ram_size = gd->ram_size;
-diff --git a/include/init.h b/include/init.h
-index 1e375da48936..c31ebd83b85e 100644
---- a/include/init.h
-+++ b/include/init.h
-@@ -14,6 +14,12 @@
+ struct pid4list {
+diff --git a/board/toradex/common/tdx-cfg-block.h b/board/toradex/common/tdx-cfg-block.h
+index 3022ef615ad8..9a96bddfbe17 100644
+--- a/board/toradex/common/tdx-cfg-block.h
++++ b/board/toradex/common/tdx-cfg-block.h
+@@ -150,6 +150,9 @@ enum {
+ 	OSM_IMX91S_2GB_IT, /* 220 */
+ 	VERDIN_AM62D_1G_ET_GPU_NODSI,
+ 	AQUILA_TDA4O_16GB_IT = 223,
++	VERDIN_IMX95H_4G_WB_IT = 226,
++	VERDIN_IMX95H_4G_ET,
++	VERDIN_IMX95H_16G_IT,
+ };
  
- #include <linux/types.h>
+ enum {
+diff --git a/board/toradex/verdin-imx95/verdin-imx95.c b/board/toradex/verdin-imx95/verdin-imx95.c
+index 8f7ada7a8215..00e11943a807 100644
+--- a/board/toradex/verdin-imx95/verdin-imx95.c
++++ b/board/toradex/verdin-imx95/verdin-imx95.c
+@@ -27,7 +27,8 @@ static void select_dt_from_module_version(void)
+ 		 * module with Wi-Fi/Bluetooth make sure we use the -wifi
+ 		 * device tree.
+ 		 */
+-		is_wifi = (tdx_hw_tag.prodid == VERDIN_IMX95H_8G_WIFI_BT_IT);
++		is_wifi = (tdx_hw_tag.prodid == VERDIN_IMX95H_8G_WIFI_BT_IT) ||
++			  (tdx_hw_tag.prodid == VERDIN_IMX95H_4G_WB_IT);
+ 	}
  
-+struct ram_alias_check {
-+	void *probe_addr;
-+	void *alias_addr;
-+	long size;
-+};
-+
- /*
-  * In case of the EFI app the UEFI firmware provides the low-level
-  * initialisation.
-@@ -88,6 +94,7 @@ int dram_init(void);
- int dram_init_banksize(void);
- 
- long get_ram_size(long *base, long size);
-+long probe_ram_size_by_alias(const struct ram_alias_check *checks);
- phys_size_t get_effective_memsize(void);
- 
- int testdram(void);
+ 	if (is_wifi)
 -- 
 2.43.0
 
