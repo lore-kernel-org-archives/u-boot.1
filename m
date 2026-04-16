@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41C6AF43697
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 12:51:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4704FF43699
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 12:51:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01CD5844BA;
+	by phobos.denx.de (Postfix) with ESMTP id 3BCEA844BE;
 	Fri, 17 Apr 2026 14:44:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lUgt+FYn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D8lLx8wr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D31B840AB; Thu, 16 Apr 2026 17:20:31 +0200 (CEST)
-Received: from mail-qv1-xf44.google.com (mail-qv1-xf44.google.com
- [IPv6:2607:f8b0:4864:20::f44])
+ id 397538420C; Thu, 16 Apr 2026 17:20:32 +0200 (CEST)
+Received: from mail-vs1-xe42.google.com (mail-vs1-xe42.google.com
+ [IPv6:2607:f8b0:4864:20::e42])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 023A48420C
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 17:20:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E04084201
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 17:20:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jcethrid@gmail.com
-Received: by mail-qv1-xf44.google.com with SMTP id
- 6a1803df08f44-8acae26e564so55640296d6.2
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 08:20:28 -0700 (PDT)
+Received: by mail-vs1-xe42.google.com with SMTP id
+ ada2fe7eead31-612d8a59ca0so1215840137.1
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 08:20:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776352828; x=1776957628; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1776352829; x=1776957629; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=z2DYyt7uEVwCnP84l5G8RvHRS5XSBJMzriRwtU/iMoI=;
- b=lUgt+FYnIhiXWzBfz/2s3y9jDLmcJXR+u7Aa+7DUCbHAODbIER+a23KBar3NQWq62y
- g9kUA9RfSyFfUfamoOi+CnQU45Dw0i6eUSL4g4K4B9th2DAZFK6qv6QCLJ5ai08k5/Wc
- liK3aCxc2HGcm8QO8OCceVVQMqN9w9ACYTZnIuVM94cOl/Uz5iSErvHEweh2kUjSzGS5
- N447cNB9+qA3oyUKs3zvI7pmR7bwlxkDqZol4zD1rYBwL2EljYwLOkoLfLRNlOLjy5/z
- Ct6579FobXAVUvjQq2JEVi8HuZxbn8PDlGJ3eJc0+MCOs9EyH0OJ6HUbG8kKasRqgcVq
- CuMA==
+ bh=QfX3Y4HRlVlSE9KPBL5PId+AHtD03Q7wPEhbAX1BH3A=;
+ b=D8lLx8wryuUBxfA2C8EL7mbc+xC91DeZ/tfKB+0A5r2Bk517mlt/sLIqy7JTj5PSPu
+ buLYh2Sx97D0ZKGJWFtpcPDmWeOu/wYFwbS1qWHWqNE1xAnvMH5SKtSKs8XUaTrbIxfa
+ WTs7mCJ2WCST77ZVWfjGX6C9KRC82/i9PzicV7eySbN43F/mbUWcU4VoknnV5sfa94wu
+ 8DRSLYK558WmEh0z0RvvGwIQGvxJ/mNaybmdQ5Kj1UGAfhsHpAvDXLsQpov+ujl52hGu
+ TLAqzVrviGwEKEe4b2+3uQ+rZqHCqol1kNfNPfunTZ65y4JwQrrtfsGz9ukzsunYANbC
+ Ab+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776352828; x=1776957628;
+ d=1e100.net; s=20251104; t=1776352829; x=1776957629;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=z2DYyt7uEVwCnP84l5G8RvHRS5XSBJMzriRwtU/iMoI=;
- b=dweFHP6nQTqxoWc/6oIzZ3kRhgfc+htgvBtWJaJTZ7Eui9gjil5VFx3SCdNU4cLlmQ
- 9bvOEDDO+KHU4VsHc7XEjBAI4Z5fMQUvFcVbey2shD62yLyyvh7Q8GffcgZl6bSfUCoI
- DWcq/LsE4T9QzBmDhb4syWWrVseLvaxqnISLvMcktdTmCmFtvUiE7wuROYP5fKSokOzt
- cc/hIrnR0hVYyWQFQUd3MVR06ppxLY5KoIfyDaYVuhle5lLwSwYZz6iYcFuV57/V8Gnm
- OpnWNEg/tDsITnSSZmTpjUBqwfGAJMaCI2fQe6YApNQwdtIX0KKRzdYH+YaNR5CQvGLV
- IAnA==
-X-Gm-Message-State: AOJu0YxYHC6ECAHOCgyUOGqub0iF9NByGdlXCZy596d2C/xGC4Gnk5FB
- i5Epz22vrGBwlxVtoBwFd5HlHMf9F/HnekqT6u3W/qxdQLoCs9Bm14DIzz3EKNiL
-X-Gm-Gg: AeBDieuupFAb0i5Oob9SsbFjLpp8wOHGG0UNY3g32jdShMjRjAVf224awfdrYLcwcdD
- /niWUbBNmDqWhloOjRY35/yacbLpFcnX1hEGIuMHKX1auzURzyV6UpzHCAIGCgfK46J+eAn7nop
- zjBljV72yawnWquJvc7T/3d7qr5SRgj87XX2Er3fuBr15KOXqaNExzQqP3F4NEeKEkuyuCA9B2c
- nzTDLnYyVyezK88D/4+/DwSnDd3QIDsCxA8Sfe+eE8LpZEpeOuGMYdKmA9waUkwk//+suIMHOa8
- 34quPMty3mRlIpVftVmkeIGBsod4cQwyLvOAOesqHyB8Ffp+HyZq2t+/mwnZ69nHUo2lXZvB+P+
- TXMzUhUz9VH/lLH7GZ3hPW6HMLrr78A7Bve5Fxp9pJhOho/Y0t93jKP+gxQ6F8H+0kZ2vo0/y+K
- UCPfPpxZiijBhdYgx9DeoTofdQGEx7SeXzwg==
-X-Received: by 2002:a05:6214:2422:b0:8ac:a8df:639b with SMTP id
- 6a1803df08f44-8aca8df6733mr306226466d6.39.1776352827628; 
- Thu, 16 Apr 2026 08:20:27 -0700 (PDT)
+ bh=QfX3Y4HRlVlSE9KPBL5PId+AHtD03Q7wPEhbAX1BH3A=;
+ b=JkcMPagfN5sqBvXY6kySm8YmZABOFvpQmvy43ownVcEAbtrPkZE/kO+Jc3zUCtbUnY
+ DJP9ODLVdYTn1SgP8hp57obKMsjwAxah50r9YdBpbak0Q+4RwN1oSUies+ZhRJSI5pIl
+ 0EQzwei4s5iSK782MGs67Pf42RqyHaMoyuoPWLn+aIgZtfnWGpmCnjSlAQDEwaVAm4uq
+ FoA12nPbTZcIK1r7yU96OlyaNgW2HNyQ8YokgSWixXIxaetL6kfRpZZcVBou7N7wkLWH
+ m2j9I1ZjeNRMntOePx3wIDdWQgPpTKUF8Hm31d+FPQkLGVPobn3+0Z+ogfpbPcb3dCPX
+ FcgQ==
+X-Gm-Message-State: AOJu0YzeCQ3udukak7bV7aJzHWP138lbu3EszJ3ACcshupWdZoA2WFTP
+ cOB3D34LBESx0/CVhF9GTKshyt9gE6kTU4EYKZSlHrYDTWVfrexjQU2EBkrBsCLn
+X-Gm-Gg: AeBDiesmoLGDLRvDiRsbyprfoRhHnkkRBJpW8zhen7xskD7mnTrzS011cb4Bt+EdOic
+ knLWpAdFTc67Jo3mJ+omrH8fWGgf586rIIAajKH3XWN/NMMLen5eYJsCJs8Tf33TQl6flH+jBHH
+ zfnzyQX/vDJ1HLoqqKi+rsRAbltHNiwKckjJWAtNu9OUCAJHJC6+OgDdwVSOiedQMI68n0G9LfS
+ 3sZbl8E1Y3/bMARQERtZtCmAEsq33vhKs00ADQ4m0N09NQL9KDmIcjP7S0QOTPoDlNhYOm9lATS
+ CXk9Y5uk7MQ0X9NR6LWo+4wbRFi6IRDYOosRMqvd1uJA4DBc2NLb8u5qNKAk2O0M/EX3XS/iMX4
+ rhsiiknhEv2D2pHBDZ7U0Ij7bRMUM926Ibj/vH6uWJbYYf1926uMEUDSmrFuyo8mfUtDBGSMqBW
+ fxISkFyagpUW94MpPgOrj+HoP+1HWb5CVLYw==
+X-Received: by 2002:a05:6102:3e0e:b0:602:7589:6545 with SMTP id
+ ada2fe7eead31-60a0198ad58mr14218748137.28.1776352828720; 
+ Thu, 16 Apr 2026 08:20:28 -0700 (PDT)
 Received: from cethr-l01.localdomain ([136.56.120.109])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8ae6c93b7e2sm38561586d6.8.2026.04.16.08.20.26
+ 6a1803df08f44-8ae6c93b7e2sm38561586d6.8.2026.04.16.08.20.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Apr 2026 08:20:27 -0700 (PDT)
+ Thu, 16 Apr 2026 08:20:28 -0700 (PDT)
 From: Caleb Ethridge <jcethrid@gmail.com>
 To: u-boot@lists.denx.de
 Cc: malysagreg@gmail.com, trini@konsulko.com, linux@analog.com,
- philip@philipmolloy.com, Ozan Durgut <ozndrgt@gmail.com>,
- Ozan Durgut <ozan.durgut@analog.com>
-Subject: [RESEND v4 13/14] arm: sc5xx: add missing boot env selectors
-Date: Thu, 16 Apr 2026 11:19:48 -0400
-Message-Id: <d92e6e885515ddc3c205623d6edc56ab7c53aa19.1776344788.git.jcethrid@gmail.com>
+ philip@philipmolloy.com, Caleb Ethridge <caleb.ethridge@analog.com>
+Subject: [RESEND v4 14/14] arm: sc5xx: Add fdt_addr_r, kernel_addr_r,
+ and initrd_addr
+Date: Thu, 16 Apr 2026 11:19:49 -0400
+Message-Id: <4b5af507bd698752af52fd318273fb5fe40e53d4.1776344788.git.jcethrid@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1776344788.git.jcethrid@gmail.com>
 References: <cover.1776344788.git.jcethrid@gmail.com>
@@ -100,38 +100,143 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ozan Durgut <ozndrgt@gmail.com>
+From: Caleb Ethridge <caleb.ethridge@analog.com>
 
-Define the boot options for SC598 SOM EZ-LITE so the shared ADI boot
-environment includes the expected boot commands for this board.
+Add fdt_addr_r, kernel_addr_r, and initrd_addr to the SC5xx boards,
+to be used by the booti command.
 
-SC598 SOM EZ-LITE board environment utilizes the shared ADI boot
-environment, but it does not define any of the USE_* boot mode selectors.
-Without those selectors, the shared env does not generate the board boot
-commands such as `spiboot`. This leaves the default `bootcmd=run spiboot`
-without a matching environment command and breaks autoboot.
-
-Fixes: c9e893d ("board: adi: Add support for SC598")
-Signed-off-by: Ozan Durgut <ozan.durgut@analog.com>
+Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
 ---
- board/adi/sc598-som-ezlite/sc598-som-ezlite.env | 6 ++++++
- 1 file changed, 6 insertions(+)
+ board/adi/sc573-ezlite/sc573-ezlite.env         | 4 ++++
+ board/adi/sc584-ezkit/sc584-ezkit.env           | 4 ++++
+ board/adi/sc589-ezkit/sc589-ezkit.env           | 4 ++++
+ board/adi/sc589-mini/sc589-mini.env             | 4 ++++
+ board/adi/sc594-som-ezkit/sc594-som-ezkit.env   | 4 ++++
+ board/adi/sc594-som-ezlite/sc594-som-ezlite.env | 4 ++++
+ board/adi/sc598-som-ezkit/sc598-som-ezkit.env   | 4 ++++
+ board/adi/sc598-som-ezlite/sc598-som-ezlite.env | 4 ++++
+ 8 files changed, 32 insertions(+)
 
-diff --git a/board/adi/sc598-som-ezlite/sc598-som-ezlite.env b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
-index c7d7932064a..ab1acabef53 100644
---- a/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
-+++ b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
-@@ -3,4 +3,10 @@
+diff --git a/board/adi/sc573-ezlite/sc573-ezlite.env b/board/adi/sc573-ezlite/sc573-ezlite.env
+index ab1acabef53..2a62526717d 100644
+--- a/board/adi/sc573-ezlite/sc573-ezlite.env
++++ b/board/adi/sc573-ezlite/sc573-ezlite.env
+@@ -3,6 +3,10 @@
   * (C) Copyright 2024 - Analog Devices, Inc.
   */
  
-+#define USE_NFS
-+#define USE_SPI
-+#define USE_RAM
-+#define USE_MMC
-+#define USE_USB
++fdt_addr_r=CONFIG_SYS_LOAD_ADDR
++kernel_addr_r=0x84008000
++initrd_addr=0x85000000
 +
- #include <env/adi/adi_boot.env>
+ #define USE_NFS
+ #define USE_SPI
+ #define USE_RAM
+diff --git a/board/adi/sc584-ezkit/sc584-ezkit.env b/board/adi/sc584-ezkit/sc584-ezkit.env
+index 740b7b554cb..48bdb6fb2cd 100644
+--- a/board/adi/sc584-ezkit/sc584-ezkit.env
++++ b/board/adi/sc584-ezkit/sc584-ezkit.env
+@@ -3,6 +3,10 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
++fdt_addr_r=CONFIG_SYS_LOAD_ADDR
++kernel_addr_r=0x8A308000
++initrd_addr=0x8A800000
++
+ #define USE_NFS
+ #define USE_SPI
+ #define USE_RAM
+diff --git a/board/adi/sc589-ezkit/sc589-ezkit.env b/board/adi/sc589-ezkit/sc589-ezkit.env
+index 00f90c7942e..1cc0e735672 100644
+--- a/board/adi/sc589-ezkit/sc589-ezkit.env
++++ b/board/adi/sc589-ezkit/sc589-ezkit.env
+@@ -3,6 +3,10 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
++fdt_addr_r=CONFIG_SYS_LOAD_ADDR
++kernel_addr_r=0xC4008000
++initrd_addr=0xC5000000
++
+ #define USE_NFS
+ #define USE_RAM
+ #define USE_MMC
+diff --git a/board/adi/sc589-mini/sc589-mini.env b/board/adi/sc589-mini/sc589-mini.env
+index 13079ed7527..f3d21f3afc3 100644
+--- a/board/adi/sc589-mini/sc589-mini.env
++++ b/board/adi/sc589-mini/sc589-mini.env
+@@ -3,6 +3,10 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
++fdt_addr_r=CONFIG_SYS_LOAD_ADDR
++kernel_addr_r=0xC4008000
++initrd_addr=0xC5000000
++
+ #define USE_NFS
+ #define USE_RAM
+ #define USE_SPI
+diff --git a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
+index 324bfae4571..2e88b8099bd 100644
+--- a/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
++++ b/board/adi/sc594-som-ezkit/sc594-som-ezkit.env
+@@ -3,6 +3,10 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
++fdt_addr_r=CONFIG_SYS_LOAD_ADDR
++kernel_addr_r=0xA3008000
++initrd_addr=0xA8000000
++
+ #define USE_NFS
+ #define USE_SPI
+ #define USE_OSPI
+diff --git a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
+index bdbfaf0dabe..8cdc7006d1d 100644
+--- a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
++++ b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
+@@ -3,6 +3,10 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
++fdt_addr_r=CONFIG_SYS_LOAD_ADDR
++kernel_addr_r=0x80008000
++initrd_addr=0x85000000
++
+ #define USE_NFS
+ #define USE_SPI
+ #define USE_OSPI
+diff --git a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
+index 324bfae4571..b9934b0ac5d 100644
+--- a/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
++++ b/board/adi/sc598-som-ezkit/sc598-som-ezkit.env
+@@ -3,6 +3,10 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
++fdt_addr_r=CONFIG_SYS_LOAD_ADDR
++kernel_addr_r=0x9a200000
++initrd_addr=0x9c000000
++
+ #define USE_NFS
+ #define USE_SPI
+ #define USE_OSPI
+diff --git a/board/adi/sc598-som-ezlite/sc598-som-ezlite.env b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
+index ab1acabef53..ceb8e4e7776 100644
+--- a/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
++++ b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
+@@ -3,6 +3,10 @@
+  * (C) Copyright 2024 - Analog Devices, Inc.
+  */
+ 
++fdt_addr_r=CONFIG_SYS_LOAD_ADDR
++kernel_addr_r=0x9a200000
++initrd_addr=0x9c000000
++
+ #define USE_NFS
+ #define USE_SPI
+ #define USE_RAM
 -- 
 2.34.1
 
