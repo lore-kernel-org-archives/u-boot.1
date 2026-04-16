@@ -4,76 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0C66F8A145
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 09:13:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2000BF8A146
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 09:14:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 541828407E;
-	Thu, 16 Apr 2026 11:13:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id AAEC78407E;
+	Thu, 16 Apr 2026 11:14:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="DnI8i+Hb";
+	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="oZSym3rd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC3D9840AB; Thu, 16 Apr 2026 11:13:18 +0200 (CEST)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0513B84105; Thu, 16 Apr 2026 11:14:36 +0200 (CEST)
+Received: from mail-dl1-x122f.google.com (mail-dl1-x122f.google.com
+ [IPv6:2607:f8b0:4864:20::122f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6176B83FC0
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 11:13:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7582E83FC0
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 11:14:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id E8C164E42A1B;
- Thu, 16 Apr 2026 09:13:15 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id BEA145FDEB;
- Thu, 16 Apr 2026 09:13:15 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 7B2EE1045A134; 
- Thu, 16 Apr 2026 11:13:07 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1776330794; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=Hr/6bwfdm7JG9SG1kqDYIgQzp6wx33C0sXuR0s9EFgU=;
- b=DnI8i+HbECc4V+xAZFD0a6ap6aQVQ/5wpTeeibPP00rTWQylWqRhVB+db0YDRbA0vr6o80
- BCEeY/itl9sw8CGBRfrzipmw0jUU4m/9ZnZKNAk7QyZSU17YHiiKkIZikMlV2M4QZ5JQu/
- /Pkmx0yFd30yp5OpQ8Ol7x8GQpz5XfJEm7MTZIZ4KQsOHNU3dZwxsVwb9oIGD7dzOkPHQM
- O4/VewUw9w7XWLUdp1xSSVqGowzD5wnk5LD7Ng/LDtO6q/tvaZx1fdpkY6vv3P2anHprtL
- L3/ZOoHGyZvydjsFQ3ljZ1MXiYBL58oR85of2xE9PhfW1aMU9syxFnqserLGMQ==
-Date: Thu, 16 Apr 2026 11:13:02 +0200
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
-Cc: u-boot@lists.denx.de, Marc Murphy <marc.murphy@sancloud.com>, Tom Rini
- <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Romain Gantois
- <romain.gantois@bootlin.com>, Parvathi Pudi <parvathi@couthit.com>,
- Basharath Hussain Khaja <basharath@couthit.com>, Paul Barker
- <paul.barker@sancloud.com>, "Andrew F. Davis" <afd@ti.com>, Simon Glass
- <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>, Michael Trimarchi
- <michael@amarulasolutions.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Svyatoslav Ryhel <clamor95@gmail.com>, Tien
- Fong Chee <tien.fong.chee@altera.com>, Frieder Schrempf
- <frieder.schrempf@kontron.de>, Johan Jonker <jbx6244@gmail.com>, Brian Sune
- <briansune@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>, Bernhard
- Messerklinger <bernhard.messerklinger@at.abb.com>, Emanuele Ghidoli
- <emanuele.ghidoli@toradex.com>, Parth Pancholi
- <parth.pancholi@toradex.com>, Jonas =?UTF-8?B?U2Nod8O2YmVs?=
- <jonasschwoebel@yahoo.de>, Paul Kocialkowski <contact@paulk.fr>
-Subject: Re: [PATCH v6 00/14] arm: am335x: Switch to upstream devicetree
-Message-ID: <20260416111302.45a7e1fb@kmaincent-XPS-13-7390>
-In-Reply-To: <20260416110631.6f89a2e9@kmaincent-XPS-13-7390>
-References: <20260415-topic-am33-evm-oftree-v2026-01-v6-0-94cde349bb01@baylibre.com>
- <20260416110631.6f89a2e9@kmaincent-XPS-13-7390>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ dmarc=none (p=none dis=none) header.from=thingy.jp
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
+Received: by mail-dl1-x122f.google.com with SMTP id
+ a92af1059eb24-1279eced0b9so11286052c88.0
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 02:14:32 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776330871; cv=none;
+ d=google.com; s=arc-20240605;
+ b=j8jIGMnkFEjHzvB+XOtPEYMQuXZ+2zyU7xKGfvQyZnY+x2DA6Fe0pNSBHVqOl/xWS7
+ oywlryjDSdXxWX/5lLVnNmrcacw4rMy1sY0/KCbqzB/ChrGTW/t8wExcIjyQCwxviIvP
+ Ittu5iTHjOszVcaJCF8tfCbMw9Lv6SBl+KZHDMIg7cGBpCIdltXAfjBbQDHg2Iu53nHJ
+ OmKZH4FtyEwRx/mz1wra6dFSPn+2Ayt0awDa32SdJaam7OjnajH+YcUCEmQplwcEPQIz
+ lZwzDJAlvEePw20XUiGShsmi4S7L0ahzfh7VYItQAKeac1c3oegao96TcwUj4qGI21yu
+ of0g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=GgdMK6jRW9uHesHpYxhFQYZ6L/g2qMNmJl/uCB9aPdc=;
+ fh=uR6Xv81TiE6im77EvvdP+H3OfCw2R1K5JYTXz3LgkcE=;
+ b=ktQTbtPlxIO43axRdBlqPtqQZzQvcEOsT7S4ABKv4A8AgK14PNaAa/96QJ3Xk3KdwY
+ F9JiN4sQEUwvzUaBHgQ3wmm8advvGIfMB3lYgZ2PZLEOfJizhSPqkpzQUKUvp6K5Xo+X
+ /WLkjWm9OFGqvtZDvAJKOTsFyvS/Oo3id8mPJZIfD2aHfb39lwSC+/p0qKk4zYO/bc/q
+ 3nt7HH5F0fqT6iEld7fqKJpMb4YoBJYUSZlDGqRDu4M5HoZBARRuNeO3m28n1G0ESTbI
+ k4AjWYazMbuOZ61j7x6wglZu/AV0jLYx+wyleM3Z6Jk7EMbgvHM7uP1SsV3j0cCisJ/S
+ 9z9w==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=thingy.jp; s=google; t=1776330871; x=1776935671; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=GgdMK6jRW9uHesHpYxhFQYZ6L/g2qMNmJl/uCB9aPdc=;
+ b=oZSym3rdtIGNcXgmbaGjcX/XG05JXvND+rAorfQh0o5D3eTrXZc1znsos8COXw/gow
+ jlWuX8jaWt0+uz1KZ+OrTuJSjGkzzRwPrUWDcTWOeYlVwl9+0fP8tuokkMxrmO0Xyawb
+ rHpSKuOX6bCUgvXk35yDZg0YWthJg9QBK35Zc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776330871; x=1776935671;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GgdMK6jRW9uHesHpYxhFQYZ6L/g2qMNmJl/uCB9aPdc=;
+ b=GhP7ZnRDEOc97aTG4AprBOmshmA/O0RpnkmeJgMqgP5G29qTw4elKj/RabWCwge50k
+ 4Y4K/LBkXrSZZ9c4riwTyZxyOAR1hKpMtY/08TwJzxNcR1UCqDlKkg09W9ClgSFeduNK
+ s746RISWSHpX99cMrLWq7SKs4r3TRepp90IGswbOpvW9XjV8D4wkZR3lyCLmdRSkD6FU
+ MUQyuAAdraGkatnGdynrW8siD7iKKMT+4IfJotwOsFpartJrXCWg2gXikCzwlEIcYLBG
+ 64uOmtHHlpBxBfkWZ37CME/+qOdBzUTyjd9Rx+7ykwhUZZTaYFfy1JeeTdqv7dDy+sqc
+ L5Kg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/NVC209l0fB8FlBxhGP3dCFxH1SHn3UVIkxbvcwwWsUKojm0/pM26xIG15zytK8qB+S2Y7NTA=@lists.denx.de
+X-Gm-Message-State: AOJu0YxjmSEcobTswC2tGAUSI9EX29bO5eqUkQgLR3mFL7b7DP+E1Fd+
+ oIP8SEj/Py9V4wOWV1XduOyQF2Zyr2meRCx7Di+z02g5tjodvGNmH/814raMCZVA6xOPwreSMhb
+ MjDLdU2i5K3bEdzBfMMlDhmPxIgNUmF9HY1i4rBaPUUliYyuY/XeyY4g=
+X-Gm-Gg: AeBDievjeWhv+5i2Yndxpw9X5oOkgsWE9uZeHbjJ/7AQb/g734+hvvwEOQuR1xaX0a3
+ NYmwNt+mNKxrXpDb6saYWg6jzCjkCzm74A+ylvD9PAfr+7wDdOIWWi0vV8mjFfMd+PxK+ZxU9Y4
+ DbwHyGnCbzMB7k1Vrgfg04OMMDquWJR6E6bFD61JWuXXiU+CK3+duIElS7bY1rM05OWlrTex+Ou
+ isg9H3v17N57Zj1TSK/8Wvruiva3NRSjvMc0ybARz7VX+sV7P2i/0x66u4KUVxv/H7WW947EYXN
+ 638SeEk=
+X-Received: by 2002:a05:7022:e0d:b0:128:cf5c:535a with SMTP id
+ a92af1059eb24-12c34e8f94emr13473687c88.11.1776330870730; Thu, 16 Apr 2026
+ 02:14:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20260413092240.3719260-1-daniel@thingy.jp>
+ <20260413092240.3719260-3-daniel@thingy.jp>
+ <9953a109-6ff5-43f1-ac5d-245c906280b5@kernel-space.org>
+In-Reply-To: <9953a109-6ff5-43f1-ac5d-245c906280b5@kernel-space.org>
+From: Daniel Palmer <daniel@thingy.jp>
+Date: Thu, 16 Apr 2026 18:14:18 +0900
+X-Gm-Features: AQROBzA7Abhwg4mpOSClXPlc5KDef2RDVXxcL56ZDotNsnBz5jE3VbE3RMr4l7M
+Message-ID: <CAFr9PXk+1THbL3Pe9gGfXtYWr0Tt0Aci559UGzc0kDsnD63dQg@mail.gmail.com>
+Subject: Re: [PATCH v4 2/6] m68k: Fix writew(), writel(), readw(), readl()
+ endianness for classic m68k
+To: Angelo Dureghello <angelo@kernel-space.org>
+Cc: visitorckw@gmail.com, bmeng.cn@gmail.com, sjg@chromium.org, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,43 +113,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 16 Apr 2026 11:06:49 +0200
-Kory Maincent <kory.maincent@bootlin.com> wrote:
+Hi Angelo,
 
-> On Wed, 15 Apr 2026 18:02:21 +0200
-> "Markus Schneider-Pargmann (TI)" <msp@baylibre.com> wrote:
->=20
-> > The series is split into two logical groups:
-> >=20
-> > - Patches 1-3: Fixes for am335x-evm to boot and support the LCD panel
-> >   with the current u-boot devicetree.
-> > - Patches 4-14: Make upstream devicetree working with uboot. This
-> >   adds tick-timer, adds compatibility of the board code for different
-> >   USB probing, makes SPL smaller and updates the defconfig.
-> >=20
-> > The series has been tested on am335x-evm. Note that I don't have all
-> > other boards built with the am335x_*evm_*defconfig, so tests are
-> > appreciated. buildman reports builds are working. =20
->=20
-> Your patch series breaks the scan of extension boards (cape).
-> =3D> extension scan =20
-> Found 0 extension board(s).
->=20
-> While I should have:
-> =3D> extension scan =20
-> BeagleBone Cape: Beaglebone green hdmi cape (0x57)
-> Found 1 extension board(s).
-> =3D> extension list =20
-> Extension 0: Beaglebone green hdmi cape
-> 	Manufacturer: 		Seeed
-> 	Version: 		00A0
-> 	Devicetree overlay: 	BB-GREEN-HDMI-00A0.dtbo
-> 	Other information: =09
+On Thu, 16 Apr 2026 at 18:06, Angelo Dureghello <angelo@kernel-space.org> wrote:
+>
+> Hi Daniel,
+>
+> actually, i can build all m68k boards without errors,
+> and have stmark2 up and running without any issue.
+>
+> I will try to fix better this endian thing asap, thanks for the comment.
 
-After I bisect, I have located the breakage on patch 13.=20
+A heads up: The linux versions of these might change for CF ->
+https://lore.kernel.org/linux-m68k/4ec2b9f3-8420-4f77-9373-7ae4df83404d@app.fastmail.com/T/#mdb1f285ce91df7e94f1c2a1fb3b137f3f8e21a79
 
-Regards,
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+Cheers,
+
+Daniel
