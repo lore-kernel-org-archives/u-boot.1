@@ -4,52 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3A10F8E4A0
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 02:41:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14B18F8E497
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 02:57:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9959D842C7;
-	Fri, 17 Apr 2026 04:41:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 5AAE48426C;
+	Fri, 17 Apr 2026 04:57:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="kQYg2VSa";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EB38842CD; Fri, 17 Apr 2026 04:41:12 +0200 (CEST)
-Received: from Atcsqr.andestech.com (unknown [60.248.187.195])
+ id CE3A784262; Fri, 17 Apr 2026 04:57:47 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AAC0842C7
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 04:41:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
- header.from=andestech.com
+ by phobos.denx.de (Postfix) with ESMTPS id ACE948422D
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 04:57:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTP id 63H2edcr033481;
- Fri, 17 Apr 2026 10:40:40 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS34.andestech.com
- (10.0.1.134) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 17 Apr
- 2026 10:40:39 +0800
-From: Leo Yu-Chi Liang <ycliang@andestech.com>
-To: <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Vignesh R <vigneshr@ti.com>, "Takahiro
- Kuwano" <takahiro.kuwano@infineon.com>, Jagan Teki
- <jagan@amarulasolutions.com>, <ycliang@andestech.com>
-Subject: [PATCH 8/8] configs: ae350: Enable ATCSPI200 data merge mode
-Date: Fri, 17 Apr 2026 10:40:34 +0800
-Message-ID: <20260417024034.4046667-4-ycliang@andestech.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260417024034.4046667-1-ycliang@andestech.com>
-References: <20260417024034.4046667-1-ycliang@andestech.com>
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4fxfgr02qPz9v7t;
+ Fri, 17 Apr 2026 04:57:44 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1776394664;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=dO1EUKkf5Jq7VaNXyXePTAQn8c469nhJO3xECJk6lNY=;
+ b=kQYg2VSaVRV+QkXoGDxhVN7dMVsBrm+CMe0QbTOOeVDSmDy1F6VunGoEPw+AYa8wOjBa2d
+ DXkFH+YNSA3L45+2ZrMSfyuo/wt4gZIwTG2P339Q/4IWqMfH7zqOkoFC/H+6pCmNwLimmC
+ UIFf+YQAc4n/Dc7PzzOdlNfjCxJqhr5LbtZqeio5QVHOnt5buDZg4uVugRD9xRovoFzVcg
+ JypEh3frjyCFwdmi3xI8RrkQeXifKojIk0xTKBcoceAYrZv/5adDUr5Hd+VhNHUcvpX3ty
+ TCp8zPqned3zBA9elfCJrES9C+M+omDi6rYVaglUpWD2Y/7QnIYXo7nh2oxk2w==
+Message-ID: <86d99f5c-5476-448f-849a-ff68b4bb1068@mailbox.org>
+Date: Thu, 16 Apr 2026 20:03:42 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.0.15.183]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 63H2edcr033481
+Subject: Re: [PATCH v3 1/2] regulator: rzg2l: implement connectivity
+ notification
+To: Michele Bisogno <micbis.openwrt@gmail.com>, u-boot@lists.denx.de,
+ Biju Das <biju.das.jz@bp.renesas.com>,
+ Geert Uytterhoeven <geert+renesas@glider.be>
+Cc: paul@pbarker.dev, jh80.chung@samsung.com, peng.fan@nxp.com,
+ lukma@denx.de, mkorpershoek@kernel.org, trini@konsulko.com
+References: <20260416153827.14256-1-micbis.openwrt@gmail.com>
+ <20260416153827.14256-2-micbis.openwrt@gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260416153827.14256-2-micbis.openwrt@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: okw9tzcsng7sjwnqw8hkkwazrri4t87m
+X-MBO-RS-ID: 932b68d6e3c98ba96a0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,162 +80,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable CONFIG_ATCSPI200_SPI_DATA_MERGE for all AE350 board variants
-to improve SPI throughput by using 4-byte FIFO access for aligned
-transfers.
+On 4/16/26 5:38 PM, Michele Bisogno wrote:
+> Implement CON_CTRL manual connectivity notification.
+> By setting SEL_CONNECT and CONNECT_1, the UTM+ core is notified of
+> connection status in peripheral mode.
+> 
+> Signed-off-by: Michele Bisogno <micbis.openwrt@gmail.com>
+> ---
+>   drivers/power/regulator/rzg2l-usbphy-regulator.c | 10 ++++++++--
+>   1 file changed, 8 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/power/regulator/rzg2l-usbphy-regulator.c b/drivers/power/regulator/rzg2l-usbphy-regulator.c
+> index 0354555d0b5..03f8dec4f08 100644
+> --- a/drivers/power/regulator/rzg2l-usbphy-regulator.c
+> +++ b/drivers/power/regulator/rzg2l-usbphy-regulator.c
+> @@ -9,16 +9,22 @@
+>   #include <renesas/rzg2l-usbphy.h>
+>   
+>   #define VBENCTL			0x03c
+> +#define CON_CTRL		0x020
+>   #define VBENCTL_VBUS_SEL	BIT(0)
+> +#define SEL_CONNECT		BIT(4)
+> +#define CONNECT_1		BIT(0)
+>   
+>   static int rzg2l_usbphy_regulator_set_enable(struct udevice *dev, bool enable)
+>   {
+>   	struct rzg2l_usbphy_ctrl_priv *priv = dev_get_priv(dev->parent);
+>   
+> -	if (enable)
+> +	if (enable) {
+>   		clrbits_le32(priv->regs + VBENCTL, VBENCTL_VBUS_SEL);
+> -	else
+> +		setbits_le32(priv->regs + CON_CTRL, SEL_CONNECT | CONNECT_1);
+> +	} else {
+>   		setbits_le32(priv->regs + VBENCTL, VBENCTL_VBUS_SEL);
+> +		clrbits_le32(priv->regs + CON_CTRL, SEL_CONNECT | CONNECT_1);
+> +	}
+>   
+>   	return 0;
+>   }
 
-Signed-off-by: Leo Yu-Chi Liang <ycliang@andestech.com>
----
- configs/ae350_rv32_defconfig            | 1 +
- configs/ae350_rv32_falcon_defconfig     | 1 +
- configs/ae350_rv32_falcon_xip_defconfig | 1 +
- configs/ae350_rv32_spl_defconfig        | 1 +
- configs/ae350_rv32_spl_xip_defconfig    | 1 +
- configs/ae350_rv32_xip_defconfig        | 1 +
- configs/ae350_rv64_defconfig            | 1 +
- configs/ae350_rv64_falcon_defconfig     | 1 +
- configs/ae350_rv64_falcon_xip_defconfig | 1 +
- configs/ae350_rv64_spl_defconfig        | 1 +
- configs/ae350_rv64_spl_xip_defconfig    | 1 +
- configs/ae350_rv64_xip_defconfig        | 1 +
- 12 files changed, 12 insertions(+)
-
-diff --git a/configs/ae350_rv32_defconfig b/configs/ae350_rv32_defconfig
-index d8716d2b8f2..e58e9b1bde3 100644
---- a/configs/ae350_rv32_defconfig
-+++ b/configs/ae350_rv32_defconfig
-@@ -48,6 +48,7 @@ CONFIG_FTMAC100=y
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+CONFIG_ATCSPI200_SPI_DATA_MERGE=y
- # CONFIG_WATCHDOG_AUTOSTART is not set
- CONFIG_WDT=y
- CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv32_falcon_defconfig b/configs/ae350_rv32_falcon_defconfig
-index 659be8287ba..7f2e4270cce 100644
---- a/configs/ae350_rv32_falcon_defconfig
-+++ b/configs/ae350_rv32_falcon_defconfig
-@@ -56,4 +56,5 @@ CONFIG_FTMAC100=y
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+CONFIG_ATCSPI200_SPI_DATA_MERGE=y
- # CONFIG_BINMAN_FDT is not set
-diff --git a/configs/ae350_rv32_falcon_xip_defconfig b/configs/ae350_rv32_falcon_xip_defconfig
-index 93b80ef789d..a6ad9a90873 100644
---- a/configs/ae350_rv32_falcon_xip_defconfig
-+++ b/configs/ae350_rv32_falcon_xip_defconfig
-@@ -58,4 +58,5 @@ CONFIG_FTMAC100=y
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+CONFIG_ATCSPI200_SPI_DATA_MERGE=y
- # CONFIG_BINMAN_FDT is not set
-diff --git a/configs/ae350_rv32_spl_defconfig b/configs/ae350_rv32_spl_defconfig
-index 4b0f52ff42b..9f56d0c4e7c 100644
---- a/configs/ae350_rv32_spl_defconfig
-+++ b/configs/ae350_rv32_spl_defconfig
-@@ -56,6 +56,7 @@ CONFIG_FTMAC100=y
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+CONFIG_ATCSPI200_SPI_DATA_MERGE=y
- # CONFIG_WATCHDOG_AUTOSTART is not set
- CONFIG_WDT=y
- CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv32_spl_xip_defconfig b/configs/ae350_rv32_spl_xip_defconfig
-index f076f36c73c..375d6f6cc5c 100644
---- a/configs/ae350_rv32_spl_xip_defconfig
-+++ b/configs/ae350_rv32_spl_xip_defconfig
-@@ -57,6 +57,7 @@ CONFIG_FTMAC100=y
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+CONFIG_ATCSPI200_SPI_DATA_MERGE=y
- # CONFIG_WATCHDOG_AUTOSTART is not set
- CONFIG_WDT=y
- CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv32_xip_defconfig b/configs/ae350_rv32_xip_defconfig
-index 4eb59d31bcc..c3fbdb59bc1 100644
---- a/configs/ae350_rv32_xip_defconfig
-+++ b/configs/ae350_rv32_xip_defconfig
-@@ -49,6 +49,7 @@ CONFIG_FTMAC100=y
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+CONFIG_ATCSPI200_SPI_DATA_MERGE=y
- # CONFIG_WATCHDOG_AUTOSTART is not set
- CONFIG_WDT=y
- CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv64_defconfig b/configs/ae350_rv64_defconfig
-index ca3acabdbf0..b24c64db6d8 100644
---- a/configs/ae350_rv64_defconfig
-+++ b/configs/ae350_rv64_defconfig
-@@ -48,6 +48,7 @@ CONFIG_FTMAC100=y
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+CONFIG_ATCSPI200_SPI_DATA_MERGE=y
- # CONFIG_WATCHDOG_AUTOSTART is not set
- CONFIG_WDT=y
- CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv64_falcon_defconfig b/configs/ae350_rv64_falcon_defconfig
-index c7c44671419..e1b95a34777 100644
---- a/configs/ae350_rv64_falcon_defconfig
-+++ b/configs/ae350_rv64_falcon_defconfig
-@@ -56,4 +56,5 @@ CONFIG_FTMAC100=y
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+CONFIG_ATCSPI200_SPI_DATA_MERGE=y
- # CONFIG_BINMAN_FDT is not set
-diff --git a/configs/ae350_rv64_falcon_xip_defconfig b/configs/ae350_rv64_falcon_xip_defconfig
-index ae9c7cfd933..044b3c84c52 100644
---- a/configs/ae350_rv64_falcon_xip_defconfig
-+++ b/configs/ae350_rv64_falcon_xip_defconfig
-@@ -58,4 +58,5 @@ CONFIG_FTMAC100=y
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+CONFIG_ATCSPI200_SPI_DATA_MERGE=y
- # CONFIG_BINMAN_FDT is not set
-diff --git a/configs/ae350_rv64_spl_defconfig b/configs/ae350_rv64_spl_defconfig
-index af000ca58ce..0fa0b1cb0d5 100644
---- a/configs/ae350_rv64_spl_defconfig
-+++ b/configs/ae350_rv64_spl_defconfig
-@@ -56,6 +56,7 @@ CONFIG_FTMAC100=y
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+CONFIG_ATCSPI200_SPI_DATA_MERGE=y
- # CONFIG_WATCHDOG_AUTOSTART is not set
- CONFIG_WDT=y
- CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv64_spl_xip_defconfig b/configs/ae350_rv64_spl_xip_defconfig
-index 8c6e2773723..03862ce4ba2 100644
---- a/configs/ae350_rv64_spl_xip_defconfig
-+++ b/configs/ae350_rv64_spl_xip_defconfig
-@@ -57,6 +57,7 @@ CONFIG_FTMAC100=y
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+CONFIG_ATCSPI200_SPI_DATA_MERGE=y
- # CONFIG_WATCHDOG_AUTOSTART is not set
- CONFIG_WDT=y
- CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv64_xip_defconfig b/configs/ae350_rv64_xip_defconfig
-index 617940c830f..01e53998c87 100644
---- a/configs/ae350_rv64_xip_defconfig
-+++ b/configs/ae350_rv64_xip_defconfig
-@@ -49,6 +49,7 @@ CONFIG_FTMAC100=y
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+CONFIG_ATCSPI200_SPI_DATA_MERGE=y
- # CONFIG_WATCHDOG_AUTOSTART is not set
- CONFIG_WDT=y
- CONFIG_WDT_ATCWDT200=y
--- 
-2.34.1
-
+Why does Linux not need a change like this to 
+drivers/reset/reset-rzg2l-usbphy-ctrl.c ?
