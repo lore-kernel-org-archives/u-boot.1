@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13A48F43699
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 12:46:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46AFCF43697
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 12:47:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 902AB84372;
+	by phobos.denx.de (Postfix) with ESMTP id C82098437C;
 	Fri, 17 Apr 2026 14:44:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K63m0mLp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kmQHwETa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9CEE8407E; Thu, 16 Apr 2026 22:54:40 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 12F398407E; Thu, 16 Apr 2026 22:54:47 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBD4E83EEF
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 22:54:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B46E583EEF
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 22:54:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-672bd8d2400so345859a12.1
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 13:54:38 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776372878; cv=none;
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-671c24f23b1so6767848a12.0
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 13:54:44 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776372884; cv=none;
  d=google.com; s=arc-20240605;
- b=hs9OAO+bSvT+JLTYWZq5V9ovG4oFUA9X1yZxdk9/UbzDWXZIUK1xyB/pRh7ZBWRimy
- 1pxoj+38j3VfvXC1ZZ42IHfBd+n3TGb09MfCAArRDfXfNS/lg//7qzFpuXjBJ+Qxhq5W
- QYfJZO3VDP1IVaNFxsF3fEAE9vYypxfecf957kzDVEuMAUr0f9pg/L2kQPA18eSzcwd8
- TN282nQObC+QQpXJjxWxPV6bqsl3uXn1IJ83tDZDsUhouWYZdLjMgi0yzlqp7qEBvSwP
- FAZXlN2yfiMKK2gawBRREmrpWeC56Dx3LUPuGLNf+qKqTtlrgQFKhjFL0xp+j6lZC3Vn
- aKrQ==
+ b=NOyxEcDUIDiY/vkRFASuFu+m+91TXozOae2uQpfpgZRk4uaKJpyc5tqDf1u/ychyZs
+ ky9m4pK3ygrogF3efepH+VezcIhYR6flhzXb3UOvxA9JhITEC1w+BVdnWlN6LcJCZPQF
+ Ojly/3Vao6l7xvmqD5MQjjBDcCwi9cnlHO6Vir2C7LyI6WAXkhv93kTUUJP9oxawLXcn
+ iesyuAIoz0iwYUaodLkQOf9yE6oaKlhYOXoRzeZ4JXrncq99qD4PwOGA7ERxTyLof2Fr
+ uV4nKQ2O9l+TZX8l25lQcvWki9uIDColixSg0lFWj7hZ69UGV+Xgodw0owjR6t3JzI6v
+ kcwQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Pl5bX6YwBr6/FuDLad5VR93gR+g5Q8i5dDrIKwXLKjI=;
- fh=Xs636b9cxoz7QiX8lA0xHfFF4N8UAO0T7pnns8a2EOs=;
- b=IL2bYstsyy1EtF9I2+kW44xA2J93c+XSuCRPG/Vm8xK1otfeYhp4/5whVhUSNQnw8d
- ki2jvnBTIcS+QvPZb5MnnMGpQW4kvJpZs5wvoqGUE4SOWrYb2E5V8B66N/L3gpt6E0wZ
- i36B22I32gkLWg6VpAUVOzPn3yNqj/kPJXu0HhzBPLZ8Eg1CreHcvqvUy4Fawp3OnVmt
- /uIz4AA7RZt+WcxFehKfTzSCK31PY+RP13TAl45RDdbnt6ws9Gm9gv9r80hkqIRuMlbP
- SyhytpXVKFyL5cF0nURDgJJTr+/rI0Neklye9SAbtiTMxD10lOIHTNx1kh2Di88Uafcd
- CSKQ==; darn=lists.denx.de
+ bh=PnJVtyYGld468F3DHO37W00cejxCldoBffSCcbbwpsc=;
+ fh=PXJx/Mb3DSRd7uUbX1ZSl9BQGaoWKiQr+pn5Yqf5nv8=;
+ b=YU/hyW7ogpgHp6HrbXDp8jkmdzQjQyoyAD0v2HpphEzRUd2KtcJm/X9nKYH8kFMeIw
+ mnlWD2Xpajoh6Ca50RrILlO1hbxMyAPf8tTd48iba5VYZ/KmUbeZTHRWZi9GJ6UY7wqG
+ xjVhqcLdxuZXbQK4ff6mrKgTki7rFEaCBiIuZyq3dGt7p0NdGoQ9yAyhdEO2/I0vpHDa
+ unjsmjvQBIW9EQ/DBTFfXUH/JXFaSVzkBRlDWFX8Bs5xro/Uy/EYaEPTmbrOfjtxnZgW
+ foWCv7M0V59GROqpBV9WvwOwHoKdJBpIk1udvHuz6j0eFm5xxZ9jF+rmoxF+UMQiJhQD
+ Ou2Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776372878; x=1776977678; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776372884; x=1776977684; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Pl5bX6YwBr6/FuDLad5VR93gR+g5Q8i5dDrIKwXLKjI=;
- b=K63m0mLpDs0SLP898ZrbOoKod+4EveezxAgY4yLP7yZsW9ze5VUDz/ZVYO32/k9h+l
- KfpA0pbKmg8xmL0aLUbC+YCj9JQv8bW+y5SXe2slXhUYnlTzOMJRSBqTD4iOc8yBj0Yt
- Dp91sKEOJ9motRZH4Z4ExW6vhJoZEcmwRZGpw=
+ bh=PnJVtyYGld468F3DHO37W00cejxCldoBffSCcbbwpsc=;
+ b=kmQHwETa8atq8F8EqG1T0bsW7JchRZsr2ST0QzgJcQ/8Hek1iNNDTYiJBOEfG5BQY/
+ +ScP5y7Zi/sm8gjdZ0j25rCMoDXnj30Rbt0sI/TuWE9bAuexkdeP75O86TPiErW1mfwQ
+ a4535g60CgGfg/WVFJdi1JPd30Rysj4d3CbDI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776372878; x=1776977678;
+ d=1e100.net; s=20251104; t=1776372884; x=1776977684;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Pl5bX6YwBr6/FuDLad5VR93gR+g5Q8i5dDrIKwXLKjI=;
- b=khfoXs4vkpx8L/fxDQVmCEm/63DI0ILPfB8reEO/VIYiDcIHmhn+lRDBEX1qSi3wPO
- 3j5m38DmlOTEJMtV7A0h8ehVUkDi0DihUEEhgo5JDEvuGhj7QTdbQjPpc8bWvNkQ1Who
- suE5iPpMQczqKSJW9KUM5azuusvFbD1H81ll/OBG+rgBzx63Me1OWExkZKyyBcG6A0lE
- QEDwZ8LpyNcdrkI9IqGdoZt4nI15rUyd6eYsVnceQ9q+qe2VytrChqj1MRInVNCGF0wS
- baJC3Bb78e+ai/YchxEPF7opmQWSf0PGr+s4oW8jwEoHhZP3Vy+cuY2DqUOa/ZjDLL/7
- GL8A==
+ bh=PnJVtyYGld468F3DHO37W00cejxCldoBffSCcbbwpsc=;
+ b=Zi9E29ob/QLm8ZAfg22ecErdqPmjBg/cTg9niz/k/5do23cE/lDsru+JIt4TFm/PyF
+ c+5AzgVzxOqQFjAi82hi2HZivhf2Yh/ZXpZl2yJPyCkup9IH6BtV8yicub0rudZieNgz
+ J0vLbQxq9KtVkT3loet51++DJ7EJJmQQYkPUeSq3660LOCCftGgVbSTXybqwJtmjCAgN
+ 0yICYKs11ZaCWGwkbenP6jOGL4cEWLs0qgeCRrgfGzbRAMOiHU2Ieevy3gSgVl9ZUxZr
+ oew3mlk+gL1BxpMJTxp1go6QKrZM5AFtwmmp95r/Dh1XPegL3RlQpAUxtlqajU4rhBAQ
+ jXtA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/Zrv3z0NvLvv6o6Ub2oelYBk5uLTK3qUnc/3bCQ6Lbue4ENHZcPjkJg2zbcuqKdYjmECsZfFM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwqgonYHVVfEbzqVPXzduudlk1JWcUhrxAE8P14uxb25zGnruOd
- 91wrTwt4eh+R3WT26b25+5b7eWrQtKbm2ihPhF+v54H6uFGK/RNoQPiy9yysWDZCH97NSx2dQvD
- 5IPIwlItmFRFnl67qTiryb5KnvwWQXNmp+UChi9Td
-X-Gm-Gg: AeBDieu9Ze8WEb6AwAcUPQNs9b2nXywpYzWI+SEl23po46zjsaGp8XDb+oS5ybq1kwa
- L+wPD/Oaz24rKLigY9FaEZBKvGYTCSecT7qNmlttHDlQ6ciC/PRZRVCxELucPiU6ATmKInXr8eN
- eH0ocQS8qSQr+YO9ZAzOi4XUtqfqhishmcbLijjZkI3mB3fsusbwXamYL4sYUaU+7yH37spIN9K
- JMDAaMpzHsjmLSITLyGqqro7xqMjAN0gy8QziZTRGSnvfd9hB5a6hGK4IqVMNZpm7fl323MwnUr
- NjhIuZiG97uxfqDJ2+7j
-X-Received: by 2002:a17:907:a60b:b0:b9c:b069:8ab6 with SMTP id
- a640c23a62f3a-ba418b7e7d6mr5761466b.7.1776372878070; Thu, 16 Apr 2026
- 13:54:38 -0700 (PDT)
+ AFNElJ8pqfrnjnIJG4glMH8zYVBJbe07z3uANeHELeR9+P9nqBrH7CKfdo2qAq9aE637C1pYD85+nEw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyHna+O6cV46NRnheM9TFyDeA55VHuZnbcmQHwonvq6r8X9Zl9+
+ B+auwNg6O3VSlnSQiOt1OpIPyY4fW+sEBR8IqtTK2deDHI7Le3/aeP72FMEowplPgkrOeYRDiUa
+ CI/GHHLL+S2I+L3bxNbKnjmCbZ45GSjBZq+DRu1UI
+X-Gm-Gg: AeBDiescd8fZc0j7IbLPHKj576iweiuU5cWSry2WKuI/KccrxkNbz1fVJC6vituXgOA
+ mbgnIB8dA2KzRlbDauU+gVvFThGDnGbVCoD9M0ELgYeAsbhOyxuhPViWED3cuY1+5Eneux4Bw3+
+ 8u+a37za6dKVhGN9gQDuZ7RJWRGiW5NKpX+bI7ZKaJPocofuo1QA0wYze0Iy/SdNE0/EyAPY/OS
+ 8IWallpLoOE/NS5LuWMf++I1UG+Hq1XUOi9EejJ/MTJ+7KkkyYNffg/wr6rfGd0i2lKUIkxLRQI
+ ZtoopKT49ruSElgyKjUf
+X-Received: by 2002:a17:907:d865:b0:b97:8503:8313 with SMTP id
+ a640c23a62f3a-ba41a047014mr5417666b.27.1776372884020; Thu, 16 Apr 2026
+ 13:54:44 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260416053928.2834699-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260416053928.2834699-9-varadarajan.narayanan@oss.qualcomm.com>
-In-Reply-To: <20260416053928.2834699-9-varadarajan.narayanan@oss.qualcomm.com>
+ <20260416053928.2834699-11-varadarajan.narayanan@oss.qualcomm.com>
+In-Reply-To: <20260416053928.2834699-11-varadarajan.narayanan@oss.qualcomm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 17 Apr 2026 08:54:23 +1200
-X-Gm-Features: AQROBzD_VkL-V5Lsqku1jH6RE7RoNCXuzgriUM9bQDUK323GAvxrCrkqFXBTY1I
-Message-ID: <CAFLszThnBSX2vOdH+ieE_DXub0UuJNknq8Y_0X3AjfQSYDoLig@mail.gmail.com>
-Subject: Re: [PATCH v3 08/10] mach-snapdragon: Add commands to create wrapper
- ELF
+Date: Fri, 17 Apr 2026 08:54:31 +1200
+X-Gm-Features: AQROBzBH9TkH2DEK8V2Bn_9ZE1UpT0CypoiCJtyiswtlWlFrzFvpoaBS5fFubuk
+Message-ID: <CAFLszTjRs8Wv8wjvWVCPE430HSNv2+_O4aH09KRhW1C_oXOPxg@mail.gmail.com>
+Subject: Re: [PATCH v3 10/10] doc: board/qualcomm: Update RDP build
+ instructions
 To: varadarajan.narayanan@oss.qualcomm.com
 Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com, 
  casey.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@kernel.org, 
@@ -130,32 +130,28 @@ Hi Varadarajan,
 
 On 2026-04-16T05:39:18, Varadarajan Narayanan
 <varadarajan.narayanan@oss.qualcomm.com> wrote:
-> mach-snapdragon: Add commands to create wrapper ELF
+> doc: board/qualcomm: Update RDP build instructions
 >
-> The IPQ5210 boot ROM expects the SPL binary image to be embedded within
-> an ELF along with additional binaries. Hence add the relevant commands
-> and linker script needed to convert u-boot-spl.bin to the expected
-> format.
+> Add details about the SPL & U-Boot proper build steps, converting to
+> flashable images, source URLs for the needed binaries and scripts.
 >
 > Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 >
-> arch/arm/mach-snapdragon/Kconfig                  |  7 +++++++
->  arch/arm/mach-snapdragon/ipq5210-spl-wrap-elf.lds | 18 +++++++++++++++++
->  scripts/Makefile.xpl                              | 24 +++++++++++++++++++++++
->  3 files changed, 49 insertions(+)
+> doc/board/qualcomm/rdp.rst | 70 ++++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 70 insertions(+)
 
-> +ifeq ($(CONFIG_ARCH_SNAPDRAGON),y)
-> +INPUTS-$(CONFIG_SPL_WRAPPER_ELF) += spl/u-boot-spl.wrap-elf
-> +endif
+> +.. _create_multielf.py: https://raw.githubusercontent.com/coreboot/coreboot/refs/heads/main/util/qualcomm/create_multielf.py
+> +.. _gen_its.py: https://git.codelinaro.org/clo/qsdk/oss/system/tools/meta/-/tree/win.platform_tools.1.0.r34/scripts?ref_type=heads
+> +.. _libqtisec_dbg.a: https://softwarecenter.qualcomm.com/nexus/generic/product/chip/software-product/IPQ5210.NLQ.14.0/ipq5210.nlq.14.0-qca-oem-qartifact/r00036.1/WIN.TFA.1.0.R4/apss_proc/out/proprietary/qtiseclib/output/ipq52xx/release/libqtisec_dbg.a
+> +.. _OPTEE: ...
+> +.. _qc_config.elf: ...
+> +.. _QCLib.elf: ...
+> +.. _template.its: ...
+> +.. _TFA: ...
+> +.. _tmel-ipq52xx-patch.elf: ...
 
-Please can you use $(obj)/$(SPL_BIN).wrap-elf here to follow the
-convention used elsewhere in this file. The hardcoded path would break
-out-of-tree builds.
-
-> +/*
-> + * SPDX-License-Identifier: GPL-2.0
-
-U-Boot convention for new files is GPL-2.0+ - is that OK, or do you need 2.0 ?
+These link definitions are not referenced in the document body -
+please can you add the references in the text?
 
 Regards,
 Simon
