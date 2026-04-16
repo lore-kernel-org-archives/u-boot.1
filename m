@@ -4,133 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E2C6F433C7
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 05:12:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDCDAF433FE
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 05:55:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C72B0840AB;
-	Thu, 16 Apr 2026 07:12:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C0E1983EEF;
+	Thu, 16 Apr 2026 07:55:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="XdBIKcpQ";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Ju/8+70o";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="gtAd9NnF";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ITFNcZtY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96ECE840AB; Thu, 16 Apr 2026 07:12:05 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id 6C5B18407E; Thu, 16 Apr 2026 07:55:15 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DFC983C2B
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 07:12:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A21D483C2B
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 07:55:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ smtp.mailfrom=gurumoorthy.santhakumar@oss.qualcomm.com
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 63G4TDOo1553076
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 05:12:01 GMT
+ 63G0OU3d2972348
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 05:55:11 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=F/jwK1zTCEyhoI/iLoo2rY+VeIMFvnJeR2O
- YoqSAnq4=; b=XdBIKcpQTBEeZUiuBBSLdyGHPBOSKI+LuzbnqeCanF8vMn+5Yki
- d2L0JLzHxxPPO1HOLSN3eKVSeWNIN8v4jJI/d+7f2EPf24LcgtuzQXkwBX2dlHmT
- MKZyRizXJe2U2F3SrSMnORLsbWJsMifOFWZSaeSukQh1F2mtBBys7PbI6XEhsEab
- 2Oh/ug0l0O4RCSAGeVJHxI7N4iILS4aPP9sZOk/xjuHuzeTnpx/g7RWteu2k3oyQ
- Gw7lNN+f9jnuOtyiYcQtR5ER26FfCpxKnWL5NNs4HehjQFJTxYau3aPsM5XC6spl
- A/1NCRLN0s3ZEeHpl4IwHRLomXrbHsXs3Lg==
-Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
- [209.85.210.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4djrsn842j-1
+ :subject:to; s=qcppdkim1; bh=TnKlgmrKf+axqnrTM+lXubi6aU8y0HDVHi4
+ unww4wTc=; b=gtAd9NnFor8UnCet3kG/oyIRDYhgeqI5YZoaw9guiOkSDIz8HTv
+ KomzW6mwH5llBvwkQdxxLlox0Zl1dQA3RDRpm5sSmJU99sc1n2MDcZyXNvr8qdNj
+ sPZBvaSvLivr/sxx4zUUTJ4kEoIY6KZ/A1jsjMFa8MVicaesQYxTJduaIDk7iRL7
+ oCNfBv1OgqPJgVRYwpkjuRKOesegS+7oecc70rZmNj2BY50liQS0hz+DTvZNWH96
+ +dPLm80Z8eMHiGiab0Q0XxHA7/0skX3vZWQRpnIGq0pYHfKUcTAsA8B/wbjcl9qb
+ tDZaCAW325Qj0kR+SK/FB2rzkE3uu/tnjIA==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
+ [209.85.214.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dj74gbwn3-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 05:12:01 +0000 (GMT)
-Received: by mail-pf1-f199.google.com with SMTP id
- d2e1a72fcca58-82a6c70f1f8so5113278b3a.0
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 22:12:01 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 05:55:10 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id
+ d9443c01a7336-2b2e06219cbso56923445ad.3
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 22:55:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1776316321; x=1776921121; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1776318909; x=1776923709; darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=F/jwK1zTCEyhoI/iLoo2rY+VeIMFvnJeR2OYoqSAnq4=;
- b=Ju/8+70o1ryEStdkxcr6OKGSGEQNht0n7kLnQ6mVf7j56GzXYCRYTV3RTRyKWAEJEo
- NHWZAbmxM1I/N+mS22OJJZ759dmb7XUS95FbpsiPX9ULZcdMHSMWH96HoE9ol+2cjMEN
- dIF54FfeV/Qxtg7TFD92EDyw2AjJoZm6FLgmVBuRu7YYdu/+kPZewvIFUz9uxj9Y78mU
- fBOyT+EVwRL4FZfl8p8sVQuKqSAzf93SnsJ1UorBHgBwkN0/rlJDCm5Uvn16V6bpTriF
- vOus+ChczKPkS9rM1oAU0ELPvb0+V6YuNfGpCOZsUC7iO5bflQi5MtOrPwpyXqsafR4s
- tR1w==
+ bh=TnKlgmrKf+axqnrTM+lXubi6aU8y0HDVHi4unww4wTc=;
+ b=ITFNcZtYxL/Rnp0DUAptbDoUdL2r3ZCZyoTwljhesCJ2X4hekYN5NsmBJKVoMs7K0+
+ kbGucva/QVfDlgTPyvZhkwnuhzSrk50QQjfxeTMkrKXqHubzpovAuRf98yyLv5UW4gqf
+ p+BkcYRE61N9TmopzTmUG3v5s/hyhu7FdfnwIqYKCyxu1yd4mENM/rmAOxDRrlFesF3e
+ fZZOQ500wC9jwAsAHDlhOt8gGVpVu5tPcuxYUo5xocaR3oiGoSuDLbovHMfWoMk2wanQ
+ Cm5MkSfJXso0zkzRgqUAYQ6Qkpf02tqYVAEMyQtXlAWupIJo4PXFz1xpCK45OVDZ8KwG
+ N5Kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776316321; x=1776921121;
+ d=1e100.net; s=20251104; t=1776318909; x=1776923709;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=F/jwK1zTCEyhoI/iLoo2rY+VeIMFvnJeR2OYoqSAnq4=;
- b=dIp4Jo6GSbFyt6lO+DZ5U5O/v6fpfyIcewfMLGVEG23LQiiJLVkYu9GIulPnfjVRd4
- HISz5NEPEhVUNrdOFyNSVXQrVMGb/hYQ+KfHFShyotjKJXYHM6uQrxAufjFlHzKsbzW7
- t2FmrgeRw/IIDMIchIiUt5AtXMxa+6ll5Yp4VmGrhV82ZWdmkLwTuJbfFz0uif5qvXCO
- 7o/yoJHiZDY9Jz9cl9Q2kl0jcprcBzEyxv/fIyhMLA8n1AZKqgfFMl2M9KEyQkGJDboL
- fTZjsZKRFbn4WQm1NcfHeidz6kCtA2jOUmicfFaMPufE32natReFN30yOQ+takpz96Hj
- dqDg==
+ bh=TnKlgmrKf+axqnrTM+lXubi6aU8y0HDVHi4unww4wTc=;
+ b=QtDYlKyAB/h49tB9TJcd2l5v1H7GJGsZzibdhD7a/OxSQUDd2R925FqXYuMGpFF7Gc
+ L5QmI1XMNGWpQz/fwfoF0vdJJI4IUGRMsu9ITMQvOAbUL0jesztK2vYwpbbxhgutoCcX
+ JIJnqmRKUfgNxYt/1iKR3B/ruOkNpAgLImWRcSKfpw8D7dtUn+drh2b5X8V3LIWb3zF5
+ BjjQNrbN4sdV9m6/9tScFy4s/dl6JqnIUT3Y037OcoWDWh4bDqYta31RkPWMgYRZocxz
+ 34WADLw+nSkLP2r5YUqIe4RyRjt7kKVXp75kYW+rskHWOAyJbK4YJSzs2wBBdd4qMIx+
+ SapQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/qmrpNrb+hV2tLOfPpUMufg7RM/H+0VDkZbGdVsQCv+fgj3nynNwteM+Ia1H5O+0qSJw31XBo=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywb9F2DeYNK2f6seSxIXkduieuYaihyGUSf26b1od22J12C2Rwt
- ipPV8JuHcCNp77VaYxuCHJBBMPTyRV+umdSfFXG7rK5jBNGUAQQqfiYi2M3HALJm6rqxhGQ3GJY
- Us1qjI/+/mhfFjs9vW/nPjvUIdbzJcHwSBIBrHI1g8QicQyBesVGhiys9
-X-Gm-Gg: AeBDievJIJbDA4/d5pDN95UgrOvKyQTLI/snvpxV14IWwv+yU0SebmqgK+zJu14N+mU
- mLy/SrD4lFfIFkvvIKYIO/cCqWqF74c5idHiqoKcvhQ+JGORyG5gnpgRNgmSt1Yc7FVk2ysPRw3
- 49+IsvywJMfZOL9YVt1DSrxLkr8WChPNprKwb08qAw7r8l0tbWoHLRlnor6soP4hCCHqrHqkZ5h
- u9MhzrKLE+Pu4XkGkgTqWmFG0P/5z9CzYNEyw0KCCITjlBeJ9ZAxGf7JoQdHhV/oyVEvS+yQtOe
- q8QB6JKxJ3SgKYdEQyZQGHt8tsqyIRJsbqtvXxpO7LbQu1eTWgV7Y7GoCuHcnBU68xAlzzsjd+y
- AgX9p4Tnv6jA8CbRFf5v01XnAvkk+cjCARZRGnn+E7XKvxtBSmVOepRHV94IFQvuPYUhLFZ6HPO
- LzkaTEDz2Q7JVl1ulO5OyaWehbI74qFMhCuvYrvO+WAxbkQ/fRLsg=
-X-Received: by 2002:a05:6a00:1946:b0:82c:dde3:f2ef with SMTP id
- d2e1a72fcca58-82f0c35f7c9mr23823173b3a.50.1776316320691; 
- Wed, 15 Apr 2026 22:12:00 -0700 (PDT)
-X-Received: by 2002:a05:6a00:1946:b0:82c:dde3:f2ef with SMTP id
- d2e1a72fcca58-82f0c35f7c9mr23823150b3a.50.1776316320151; 
- Wed, 15 Apr 2026 22:12:00 -0700 (PDT)
-Received: from hu-varada-blr.qualcomm.com
+ AFNElJ/CUz6V1d4/N00zbQLnprFa2ypDW0U+T6N2tClSxSWkKIIb+4ktZYHZagMSDhzndjCOoGe8cok=@lists.denx.de
+X-Gm-Message-State: AOJu0YzCpw6UtWjusJSrHvuYJmXBouisHZpeqR6L+WoaIttTgAuDE3I2
+ 7kA72ko/xOQAGp4bjLUwaFd4yyIdwqF+qbSZX5LWSBQ3FPKn3p3k4m2NUHufYBJ+o++uLwt83aZ
+ XvVlYDO/RWqCNYq1fARhBE60/ZXTzBTUXVKQ+yz/NLRD2LwOHC3dV029H
+X-Gm-Gg: AeBDiet+laK+82Rhgxdi0PWMEi8wqL8iVmslXmAaZzOUBd5qn27cl46dKXsNSY54Nu1
+ ifdpa+AQnaGRMOYWdY4gUwncAlyVNwSbaTNVFzpUOCdcOa9AMtNvFa5Zk3zzC6EcbEuIM80kINb
+ G2GyWyAtZpXW/BOK+w8+M+cZUd+3zKfXtA7W9rsnYenLGxaw7/mD+EIN6LycCNpiQUjkjBn1Ywg
+ 2zfTSLlIT4Vp375UbtX3J2K/Dg0r8ayMvxg5+nzHa1fUSNIJeUf79/sfCOjtI+ywJ5tqH6bd6+R
+ QRqEs/oQyY7Qut6TmDe0K01OmjUuSM1gXo3EPIiRlyHpjuarINWNvby9OJCHIB7THJGk2duQLSK
+ vrTkIX0bs5kvppw3xaYruEOkCOdFLyvCgYTrSXue92/7awK4nB4s+vil2m+BJkQGuufJJrgKnqB
+ H7ZESN9SMYfFWb9tUtkAZKt+3kFiYmcV7kBrU2HD8RmdktCaT8OibNmZY/wq7PPhPUT1U=
+X-Received: by 2002:a17:903:3de3:b0:2b0:624f:8edc with SMTP id
+ d9443c01a7336-2b2d597d43dmr178466025ad.12.1776318909521; 
+ Wed, 15 Apr 2026 22:55:09 -0700 (PDT)
+X-Received: by 2002:a17:903:3de3:b0:2b0:624f:8edc with SMTP id
+ d9443c01a7336-2b2d597d43dmr178465815ad.12.1776318909040; 
+ Wed, 15 Apr 2026 22:55:09 -0700 (PDT)
+Received: from hu-gsanthak-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-82f670374aasm4352919b3a.12.2026.04.15.22.11.55
+ d9443c01a7336-2b478109a4dsm42652295ad.18.2026.04.15.22.55.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Apr 2026 22:11:59 -0700 (PDT)
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, peng.fan@nxp.com, jh80.chung@samsung.com,
- trini@konsulko.com, loic.poulain@oss.qualcomm.com,
- varadarajan.narayanan@oss.qualcomm.com, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Subject: [PATCH v2] mmc: msm_sdhci: Use max-frequency to get clock rate
-Date: Thu, 16 Apr 2026 10:41:51 +0530
-Message-Id: <20260416051151.2825532-1-varadarajan.narayanan@oss.qualcomm.com>
+ Wed, 15 Apr 2026 22:55:08 -0700 (PDT)
+From: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
+To: marex@denx.de, trini@konsulko.com, mkorpershoek@kernel.org,
+ macromorgan@hotmail.com, casey.connolly@linaro.org,
+ quic_varada@quicinc.com, felipe.balbi@linux.intel.com,
+ gurumoorthy.santhakumar@oss.qualcomm.com, u-boot@lists.denx.de
+Subject: [PATCH v2] usb: dwc3: core: fix memory leaks in event buffer cleanup
+Date: Thu, 16 Apr 2026 11:25:01 +0530
+Message-Id: <20260416055501.494002-1-gurumoorthy.santhakumar@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: 4BSv3HCEt4yeSGQoFxq8f-MnuEQZlfmo
-X-Proofpoint-GUID: 4BSv3HCEt4yeSGQoFxq8f-MnuEQZlfmo
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE2MDA0NiBTYWx0ZWRfX48bj5wLXLZ5V
- QMuLiQOHTgKx4TA0S9YGX9Q6SB7FDTHsdghLXZ16vsqLA2AJo/0WtlXaaVCJH4Ck9qYXXr3Vaim
- SCcHYs9JEjXbj765KyXaVj2u7Q+0utbwnJHKy4M6I+iZby//8PgDOtdtnIP21DcvcWOGCM+oFdz
- GfNRiWITpCTzpG56I8SMcYRl/7A9NOVVsCo07juG3QVl1cqXlZ/1cTieNAnxu/LPmoRDBMavdsc
- J9xbwOyf3Gh7ElsHkZlRnXTuOx79O3Indb4nUptuxA2o85UFIgp1vUEie0vj9pcPWuCvuE2kyo4
- Gtr+n7pkfEY3/Tw7BrrZ3If9tIGWa8XvHg8P4dt6TjffITLacuF5Q2zalAtdbU4NcLXZCwWeW7W
- GlGrn2HTlqaQXkLWiPDl/A0KK0oAKWnCRd7Ldmo7WW7/RtS6RVjOq1ikkacgx3Jdf2pihUCSQRJ
- cRo0OH9SIAEe5xweuWg==
-X-Authority-Analysis: v=2.4 cv=EojiaycA c=1 sm=1 tr=0 ts=69e06fa1 cx=c_pps
- a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE2MDA1MyBTYWx0ZWRfX7br702XDZcej
+ EEIX33bL+6Y14H8BnIdtosU8ciTdauH8CUxsZ2uKBPzN2u0BQuxj3BonpAV3aruSYb4mLC9Ot/G
+ 9BremoM19mw7u93nvG/EIfTLObkoUkPY0JCWhWQr1ssnScawKpumJYBbrnvgDT4c5Ie5eA/rPl7
+ KIrOE8UGJpiR7RNfExRuc0SNdV6bedHXqf1aFcF//eQxc7MJwi+k9jswlebs2/cwb21D7RM+3a1
+ fzK4ipA0ZUljpARLjC1FrXiipsNk05HuembF9zfzZHAZq1gTsE+bBJTonUNpQScrXHRia2kZa+n
+ o9/LD0eesAPAp+yScEuL2xhNvqfmh4lYXLtfATqRu9WbZdRCOvTbW6lOagcYeQleWhV5081rXws
+ NVwa8xVoypvZwmry8QIQ8dXpbFEyttJ/Yb5djIIOusG+s/RkoLK+DoJeQ7hRcIxSWEWXHPSNcEz
+ COc1K0NHddPx2vcBOcg==
+X-Proofpoint-ORIG-GUID: AIAu_hR7oX_78ojHGig20zRoNqVBQZ8c
+X-Authority-Analysis: v=2.4 cv=ZIfnX37b c=1 sm=1 tr=0 ts=69e079be cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8
- a=YBpYqEoKsAOojBjESW8A:9 a=OpyuDcXvxspvyRM73sMx:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=8ukGJnHcqfySqs3Rp24A:9 a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-GUID: AIAu_hR7oX_78ojHGig20zRoNqVBQZ8c
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-04-16_01,2026-04-13_04,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 adultscore=0 spamscore=0 phishscore=0
- impostorscore=0 suspectscore=0 lowpriorityscore=0 malwarescore=0
- clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2604070000
- definitions=main-2604160046
+ impostorscore=0 suspectscore=0 lowpriorityscore=0 spamscore=0 bulkscore=0
+ phishscore=0 clxscore=1015 malwarescore=0 adultscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2604070000 definitions=main-2604160053
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,34 +145,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-msm_sdc_clk_init() uses clock-frequency to get the clock rate for SDC
-clocks. However, the DT files seem to use max-frequency for the same.
-Since msm_sdc_clk_init() doesn't find clock-frequency in the DT, it sets
-201500000 as the clock rate and this results in timeout errors on IPQ
-platforms.
+In dwc3_free_one_event_buffer(), only the DMA buffer (evt->buf) was
+being freed via dma_free_coherent(), but the evt structure itself was
+never explicitly freed, causing a memory leak.
 
-Additionally, clock-frequency is not DT bindings compliant. Hence, get
-clock rate using DT bindings compliant max-frequency.
+In dwc3_free_event_buffers(), the ev_buffs pointer array allocated
+with memalign() was never freed after iterating and releasing all
+individual event buffers, causing another memory leak.
 
-Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Fix both leaks by freeing the evt struct in
+dwc3_free_one_event_buffer() and freeing dwc->ev_buffs in
+dwc3_free_event_buffers() after all entries have been released.
+
+Signed-off-by: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
 ---
- drivers/mmc/msm_sdhci.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+Changes in V2:
+- Removed redundant NULL check before free
+- Removed NULL assignment to the pointer after free
+- Link to V1:
+https://lore.kernel.org/u-boot/20260414055013.2978223-1-gurumoorthy.santhakumar@oss.qualcomm.com/
+---
+---
+ drivers/usb/dwc3/core.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
-index 66f3cf2de4f..aaa87923604 100644
---- a/drivers/mmc/msm_sdhci.c
-+++ b/drivers/mmc/msm_sdhci.c
-@@ -71,8 +71,7 @@ static int msm_sdc_clk_init(struct udevice *dev)
+diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
+index 6f22b9232ba..65c4d1a4e6f 100644
+--- a/drivers/usb/dwc3/core.c
++++ b/drivers/usb/dwc3/core.c
+@@ -206,6 +206,7 @@ static void dwc3_free_one_event_buffer(struct dwc3 *dwc,
+ 		struct dwc3_event_buffer *evt)
+ {
+ 	dma_free_coherent(evt->buf);
++	free(evt);
+ }
  
- 	var_info = (void *)dev_get_driver_data(dev);
+ /**
+@@ -252,6 +253,8 @@ static void dwc3_free_event_buffers(struct dwc3 *dwc)
+ 		if (evt)
+ 			dwc3_free_one_event_buffer(dwc, evt);
+ 	}
++
++	free(dwc->ev_buffs);
+ }
  
--	ret = ofnode_read_u32(node, "clock-frequency", (uint *)(&clk_rate));
--	if (ret)
-+	if (ofnode_read_u32(node, "max-frequency", (uint *)(&clk_rate)))
- 		clk_rate = 201500000;
- 
- 	ret = clk_get_bulk(dev, &prv->clks);
+ /**
 -- 
 2.34.1
 
