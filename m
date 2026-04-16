@@ -4,80 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 773EEF43697
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 12:49:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47A41F43699
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 12:49:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01C9284366;
+	by phobos.denx.de (Postfix) with ESMTP id 3D931843C0;
 	Fri, 17 Apr 2026 14:44:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AfOiPBkk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iTmj4Gid";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B326841F2; Thu, 16 Apr 2026 17:20:06 +0200 (CEST)
-Received: from mail-qv1-xf44.google.com (mail-qv1-xf44.google.com
- [IPv6:2607:f8b0:4864:20::f44])
+ id CD5218420C; Thu, 16 Apr 2026 17:20:15 +0200 (CEST)
+Received: from mail-vk1-xa43.google.com (mail-vk1-xa43.google.com
+ [IPv6:2607:f8b0:4864:20::a43])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94918840AB
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 17:19:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C2B1840AB
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 17:20:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jcethrid@gmail.com
-Received: by mail-qv1-xf44.google.com with SMTP id
- 6a1803df08f44-8a3342d301aso80532686d6.2
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 08:19:58 -0700 (PDT)
+Received: by mail-vk1-xa43.google.com with SMTP id
+ 71dfb90a1353d-56a857578a8so3173036e0c.3
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 08:20:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776352797; x=1776957597; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=vrbHaSJrmwR49ssyplLKJ1OzYQwSvymM6cfJ+7kjR9o=;
- b=AfOiPBkkxXndtPFdMhldx7IfDvxsoQ6xfGY/zSQImuKyGOUykq/Dw/jdzBFtN61mRf
- JqC8YlEAmQz6V1Z2Lmhv74dmsltwqGnw9v8EMImiSC5pqQ/ZYnbNYOsKrKQYTZO6X+OZ
- 0Wuv6SLO43rDm6/RwJB6YxcO+su3gOXUQBVgTMuusyWJ0H9mjyB4TOxnNibB5Q0qSxZG
- xX66nW4U8IdnvP7C6EssHPvORoHhyfbap3qfKCo8yU7z8dDKccKyWAsFYIQp9k2SEPhQ
- EAV0lh4nvZHd9xe7SHHnApxyX/M7tC4gcFvr05ZtpLR2FS1U2F61PMpc8VHIlZk7W3YF
- 2DtA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776352797; x=1776957597;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1776352812; x=1776957612; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vrbHaSJrmwR49ssyplLKJ1OzYQwSvymM6cfJ+7kjR9o=;
- b=Qcgtttks4rD5vPcAeD0B7P6iuhWziMi+zzf1SNI1GPlXZD667+CEcyESEk2xRiEKbX
- fpIGbrfhEtrmpIkoVronse/jSUEGsQ2a0xCIUE+Y9G/nA0RKji3pm7o8mtyNaeyXOPBW
- 3FMOSJy+CzwiuB6H8Ie/O0/FCijmXmXgB97q9SgK8MhrMal1MLTNxS5bHrkdvPsJbMin
- MSJb6PLiKBWyso4whJdSJgeJDIwOUx+LjJLrjyrQ73TOrAlK3ilYgpz/H0Elq7x0NPg4
- BHiiQWT1HeZM8hIqiDPoidVHT0oQcWvuHqPmkmEPOCgwb/jmKiE9srVSa5SFw6fMcw2a
- hiJg==
-X-Gm-Message-State: AOJu0Yzb0b1WwYROw2DF+iqluLi6cieU4F0XZqbsDg6ppcvE3gnzX5p/
- rz6mDyZ14A3IcqOw3Laxp14fDoYua2Mpr+rxUK/gI0HzNNvX4ESfzaD2UKa/L53U
-X-Gm-Gg: AeBDieuvKxYNIAjY8+f9JpC21D+mHWs01D2mR68mh13P8jnS93No3rOYW1HRUv5rrNL
- ukm1D/bWE6sEOa5xonMLcltWVF6vx3q0NNHiPjLc8P4gyMDROyecgD817eU3hdyGtoe4RRIXuZ4
- uQZbpoylEvnhj+Xr3FiwiNoeBGwLyqInosb2JNmetN/6QQz6KPLNs6ytfb4uCtfy4yD8/I3qTzZ
- FHF9kNuipajTUEC6zyCQgk3EPXs3brZ8HOccObeSRx+jl9q6igJZBfzIWjzDUIY3v5nEKqUK93X
- iF/aMRjF796rq9GqyrLR/XNcQJyl5fo11YSzTDDBUA8ROQ4SDnnbPSrSK+YtvudqV/75ETc4nce
- ipoL7efVoM7wI0hQv3v92no2HPrBDa+AKrHa+fhpWhNH7La4VL7cp9PlyblnTQMPgk0g3vSGYfe
- DPV77L7wujDrPC3aEQIEv/QPbdc2EVlgW7wQ==
-X-Received: by 2002:a0c:e004:0:b0:89c:4f7f:8479 with SMTP id
- 6a1803df08f44-8ac861562e2mr377004536d6.6.1776352797153; 
- Thu, 16 Apr 2026 08:19:57 -0700 (PDT)
+ bh=+6gUZivq8PD3uTPMd+4hu8dE2KyTc38gDyskWGzZWwI=;
+ b=iTmj4GidVyQNmzr9AoQ3EKTN+kmGYkZx3Qq59TgJx7ZSwYxs6cUp9vWEgMjnv/4Ncx
+ wBN2olDSzsahNoOu/mtckO9miO+qGZxNB0XU8aNQLi0c+Hd+4w/Q34EuGijayS/NGdCw
+ TsLoZeGjYYcNFbP0ZAyCjJNNsRKQ7yBXpv9uOKjzU5002LNud+CFgULTIbeo5Ll/7+Uy
+ 7RF7fZOt67TPkk/mwekpo7/mZBSf2Wow81xc9Ukxg1CNYLf2uCv4lzuaurp1Ossh/0Je
+ +adTfdFyySE57jDJAOij4h8JMDLCFC67KqM18Sn6bLc4S7XaGngQK9aK7Tt8lNS2dAnO
+ j60A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776352812; x=1776957612;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=+6gUZivq8PD3uTPMd+4hu8dE2KyTc38gDyskWGzZWwI=;
+ b=iHhiSedVelc6bQFa3c9VhQ/mE9gztWXedrsuQZLF4awBN6fa1kKgjKmfLW0h3RzVkG
+ j9idEokU+RAud35xOb6rVr0ZaQ64NGu2u/+VUz1HCO+FxW3EC42eKAXd75w07zhmM8//
+ RrKwJARq6ErwK+CHGzXXskzVnglTIfMwa04qhVYf8WZIeLS7QA6MxxzOq+3rCyd3wvJr
+ ceelFt+DxswwggR6vbPrWq/qT4Q9i2DDSJbXRrRH31vJP3uZP0nwI0B+a88j7pwPsT0h
+ zSbIPBO5S9dW4/nWbhMJsf3GvxAeRxB1GQanoB8sqqJSCwLsjeDzZJ8zs8dJ+yHjYqdP
+ 1A5g==
+X-Gm-Message-State: AOJu0YxQEMiZzcK/qLmDvJberHp21ChYgUh8W6Q4M0Km9LwQt7oK3mtU
+ vF7lSgiLTGDVh/SZJiSClQ5LXKO4mnvA9PN++roPRu9u9oHP7NCUDP4h8w9/4gIw
+X-Gm-Gg: AeBDietmsTT4TdqtYuKhmlpbUJvIz31klRt78ic+tXUjP/THWh+vMFxmAj6A3nEmKLB
+ 2GhUWOn1kIN0BXljoLmxBBpBqKvvJoBXXDUBP1pK6B+2ADuJ2uSsd7FGZPjg91NFJVMOu5n+VPl
+ 7B7M7P/EW6sgRaRwTACQVQnSMmmzgFzRF2AOx9MsTs5WyEAedVunOlNNr0rvPXqPM1fBUujOc8W
+ LQWiIkxI5yyuRKXTCUuW/80ml40ylnd8DqnHb9r8J7UBiebBoAfVfktTXpI6khV9C+bWP1L405R
+ rck+oGxDjUGGicy4AkVwPwiN+0qdRLw/yf8Mq/FwaCpzr3OoomjU+h9FvbQzFBdhdePSSTc85dY
+ EOLmsKRKXHvJFsyKZ3s0cdhEfHn5BFhtDviMSjga2HP7qFKsZqOR7dYZTXuJQtENGnsIuZ4M3Gj
+ pQFSYud3ZYsSrGz0kS77bzXCOx3kKHvTE7yA==
+X-Received: by 2002:a05:6122:788:b0:56f:1ed6:1d29 with SMTP id
+ 71dfb90a1353d-56f3bca6059mr12204964e0c.9.1776352812191; 
+ Thu, 16 Apr 2026 08:20:12 -0700 (PDT)
 Received: from cethr-l01.localdomain ([136.56.120.109])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8ae6c93b7e2sm38561586d6.8.2026.04.16.08.19.56
+ 6a1803df08f44-8ae6c93b7e2sm38561586d6.8.2026.04.16.08.20.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Apr 2026 08:19:56 -0700 (PDT)
+ Thu, 16 Apr 2026 08:20:11 -0700 (PDT)
 From: Caleb Ethridge <jcethrid@gmail.com>
 To: u-boot@lists.denx.de
 Cc: malysagreg@gmail.com, trini@konsulko.com, linux@analog.com,
- philip@philipmolloy.com, Caleb Ethridge <jcethrid@gmail.com>,
- Caleb Ethridge <caleb.ethridge@analog.com>
-Subject: [RESEND v4 00/14] sc5xx Environment Cleanup and Fixes
-Date: Thu, 16 Apr 2026 11:19:35 -0400
-Message-Id: <cover.1776344788.git.jcethrid@gmail.com>
+ philip@philipmolloy.com, Caleb Ethridge <caleb.ethridge@analog.com>
+Subject: [RESEND v4 01/14] configs: sc5xx: Do not store environment in SPI
+ flash
+Date: Thu, 16 Apr 2026 11:19:36 -0400
+Message-Id: <fa6c603f6665c1da2fd84c027b7417e7bed1b180.1776344788.git.jcethrid@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1776344788.git.jcethrid@gmail.com>
+References: <cover.1776344788.git.jcethrid@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 17 Apr 2026 14:44:25 +0200
@@ -97,79 +100,203 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series performs a general cleanup of the default U-boot environment
-for sc5xx boards, stemming from the decision to no longer store the
-environment in the SPI flash. The environments for each board have been
-edited to contain the minimum number of commands needed for all supported
-boot modes to avoid confusion, and the default boot command synced to spi
-for all boards that support it. The filesystem for the SPI flash has also
-been changed from jffs2 to ubifs.
+From: Caleb Ethridge <caleb.ethridge@analog.com>
 
-A bug with the Ethernet reset line on the sc594 has been fixed, and the
-sc573 has been renamed from the EZKIT to the EZLITE to match the name of the
-publically available board. EZKIT was only used internally before release.
-Preliminary binman support for sc5xx boards has been removed as it was unused
-and full support never added.
+Remove config option enabling storage of the environment
+in the SPI flash, to match shift of programming boot media
+to Linux.
 
 Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
+---
+ configs/sc573-ezkit_defconfig          | 4 ----
+ configs/sc584-ezkit_defconfig          | 5 -----
+ configs/sc589-ezkit_defconfig          | 5 -----
+ configs/sc589-mini_defconfig           | 5 -----
+ configs/sc594-som-ezkit-spl_defconfig  | 4 ----
+ configs/sc594-som-ezlite-spl_defconfig | 4 ----
+ configs/sc598-som-ezkit-spl_defconfig  | 4 ----
+ configs/sc598-som-ezlite-spl_defconfig | 4 ----
+ 8 files changed, 35 deletions(-)
 
-Caleb Ethridge (13):
-  configs: sc5xx: Do not store environment in SPI flash
-  mach-sc5xx: Remove update commands from default environment
-  mach-sc5xx: Update boot commands
-  mach-sc5xx: Switch from tftp to wget
-  mach-sc5xx: Add USB boot command
-  mach-sc5xx: Remove preliminary binman support
-  dts: sc594: Fix gige-reset line on EZKIT
-  mach-sc5xx: sc573: Rename EZKIT board to EZLITE
-  mach-sc5xx: Update image load address
-  mach-sc5xx: Update SPI bootargs for ubifs
-  configs: sc5xx: Set default bootcmd to SPI boot
-  arm: sc5xx: Remove SC5XX_LOADADDR
-  arm: sc5xx: Add fdt_addr_r, kernel_addr_r, and initrd_addr
-
-Ozan Durgut (1):
-  arm: sc5xx: add missing boot env selectors
-
- arch/arm/dts/Makefile                         |  2 +-
- .../dts/{sc573-ezkit.dts => sc573-ezlite.dts} |  4 +-
- arch/arm/dts/sc594-som-ezkit.dts              |  2 +-
- arch/arm/dts/sc5xx.dtsi                       | 41 --------
- arch/arm/mach-sc5xx/Kconfig                   | 47 +--------
- arch/arm/mach-sc5xx/init/dmcinit.c            |  2 +-
- board/adi/sc573-ezkit/sc573-ezkit.env         | 17 ----
- .../adi/{sc573-ezkit => sc573-ezlite}/Kconfig |  8 +-
- .../{sc573-ezkit => sc573-ezlite}/Makefile    |  2 +-
- .../sc573-ezlite.c}                           |  0
- board/adi/sc573-ezlite/sc573-ezlite.env       | 16 +++
- board/adi/sc584-ezkit/sc584-ezkit.env         |  8 +-
- board/adi/sc589-ezkit/sc589-ezkit.env         |  9 +-
- board/adi/sc589-mini/sc589-mini.env           |  9 +-
- board/adi/sc594-som-ezkit/sc594-som-ezkit.env |  9 +-
- .../adi/sc594-som-ezlite/sc594-som-ezlite.env |  8 +-
- board/adi/sc598-som-ezkit/sc598-som-ezkit.env |  9 +-
- .../adi/sc598-som-ezlite/sc598-som-ezlite.env | 14 ++-
- ...ezkit_defconfig => sc573-ezlite_defconfig} | 11 +--
- configs/sc584-ezkit_defconfig                 | 10 +-
- configs/sc589-ezkit_defconfig                 | 12 +--
- configs/sc589-mini_defconfig                  | 12 +--
- configs/sc594-som-ezkit-spl_defconfig         |  7 +-
- configs/sc594-som-ezlite-spl_defconfig        |  7 +-
- configs/sc598-som-ezkit-spl_defconfig         |  5 +-
- configs/sc598-som-ezlite-spl_defconfig        |  5 +-
- .../arm/adi/adi,sc5xx.yaml                    |  2 +-
- .../configs/{sc573-ezkit.h => sc573-ezlite.h} |  4 +-
- include/env/adi/adi_boot.env                  | 98 ++++++-------------
- 29 files changed, 106 insertions(+), 274 deletions(-)
- rename arch/arm/dts/{sc573-ezkit.dts => sc573-ezlite.dts} (98%)
- delete mode 100644 board/adi/sc573-ezkit/sc573-ezkit.env
- rename board/adi/{sc573-ezkit => sc573-ezlite}/Kconfig (92%)
- rename board/adi/{sc573-ezkit => sc573-ezlite}/Makefile (79%)
- rename board/adi/{sc573-ezkit/sc573-ezkit.c => sc573-ezlite/sc573-ezlite.c} (100%)
- create mode 100644 board/adi/sc573-ezlite/sc573-ezlite.env
- rename configs/{sc573-ezkit_defconfig => sc573-ezlite_defconfig} (87%)
- rename include/configs/{sc573-ezkit.h => sc573-ezlite.h} (79%)
-
+diff --git a/configs/sc573-ezkit_defconfig b/configs/sc573-ezkit_defconfig
+index fc4ce13cc70..976d8e0306a 100644
+--- a/configs/sc573-ezkit_defconfig
++++ b/configs/sc573-ezkit_defconfig
+@@ -3,9 +3,6 @@ CONFIG_SYS_ARM_CACHE_WRITETHROUGH=y
+ CONFIG_ARCH_SC5XX=y
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SPL_GPIO=y
+-CONFIG_ENV_SIZE=0x4000
+-CONFIG_ENV_OFFSET=0xD0000
+-CONFIG_ENV_SECT_SIZE=0x4000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x10000
+ CONFIG_SPL_SERIAL=y
+@@ -52,7 +49,6 @@ CONFIG_CMD_FS_GENERIC=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="sc573-ezkit"
+ CONFIG_NET_RETRY_COUNT=20
+diff --git a/configs/sc584-ezkit_defconfig b/configs/sc584-ezkit_defconfig
+index a8c6b9f1224..27f55804199 100644
+--- a/configs/sc584-ezkit_defconfig
++++ b/configs/sc584-ezkit_defconfig
+@@ -3,9 +3,6 @@ CONFIG_SYS_ARM_CACHE_WRITETHROUGH=y
+ CONFIG_ARCH_SC5XX=y
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SPL_GPIO=y
+-CONFIG_ENV_SIZE=0x4000
+-CONFIG_ENV_OFFSET=0xD0000
+-CONFIG_ENV_SECT_SIZE=0x4000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
+ CONFIG_SPL_SERIAL=y
+@@ -57,8 +54,6 @@ CONFIG_CMD_FS_GENERIC=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_ENV_SPI_MAX_HZ=10000000
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="sc584-ezkit"
+ CONFIG_NET_RETRY_COUNT=20
+diff --git a/configs/sc589-ezkit_defconfig b/configs/sc589-ezkit_defconfig
+index 9cd204e40ab..180b6904d95 100644
+--- a/configs/sc589-ezkit_defconfig
++++ b/configs/sc589-ezkit_defconfig
+@@ -5,9 +5,6 @@ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SPL_GPIO=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xC203F000
+ CONFIG_SF_DEFAULT_SPEED=1000000
+-CONFIG_ENV_SIZE=0x4000
+-CONFIG_ENV_OFFSET=0xD0000
+-CONFIG_ENV_SECT_SIZE=0x4000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
+ CONFIG_SPL_SERIAL=y
+@@ -61,8 +58,6 @@ CONFIG_CMD_FS_GENERIC=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_ENV_SPI_MAX_HZ=10000000
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="sc589-ezkit"
+ CONFIG_NET_RETRY_COUNT=20
+diff --git a/configs/sc589-mini_defconfig b/configs/sc589-mini_defconfig
+index 0908ab1708b..92c2741f701 100644
+--- a/configs/sc589-mini_defconfig
++++ b/configs/sc589-mini_defconfig
+@@ -4,9 +4,6 @@ CONFIG_ARCH_SC5XX=y
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SPL_GPIO=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xC203F000
+-CONFIG_ENV_SIZE=0x10000
+-CONFIG_ENV_OFFSET=0xD0000
+-CONFIG_ENV_SECT_SIZE=0x10000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
+ CONFIG_SPL_SERIAL=y
+@@ -58,8 +55,6 @@ CONFIG_CMD_FS_GENERIC=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_ENV_SPI_MAX_HZ=10000000
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="sc589-mini"
+ CONFIG_NET_RETRY_COUNT=20
+diff --git a/configs/sc594-som-ezkit-spl_defconfig b/configs/sc594-som-ezkit-spl_defconfig
+index c62097a2ac9..c379de2c146 100644
+--- a/configs/sc594-som-ezkit-spl_defconfig
++++ b/configs/sc594-som-ezkit-spl_defconfig
+@@ -4,9 +4,6 @@ CONFIG_ARCH_SC5XX=y
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SPL_GPIO=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x8203f000
+-CONFIG_ENV_SIZE=0x20000
+-CONFIG_ENV_OFFSET=0x100000
+-CONFIG_ENV_SECT_SIZE=0x20000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x10000
+@@ -40,7 +37,6 @@ CONFIG_CMD_EXT4=y
+ CONFIG_CMD_FAT=y
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="sc594-som-ezkit"
+ CONFIG_NET_RETRY_COUNT=20
+diff --git a/configs/sc594-som-ezlite-spl_defconfig b/configs/sc594-som-ezlite-spl_defconfig
+index 39481351102..54b26ed85c2 100644
+--- a/configs/sc594-som-ezlite-spl_defconfig
++++ b/configs/sc594-som-ezlite-spl_defconfig
+@@ -3,9 +3,6 @@ CONFIG_SYS_ARM_CACHE_WRITETHROUGH=y
+ CONFIG_ARCH_SC5XX=y
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SPL_GPIO=y
+-CONFIG_ENV_SIZE=0x20000
+-CONFIG_ENV_OFFSET=0x100000
+-CONFIG_ENV_SECT_SIZE=0x20000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x10000
+@@ -45,7 +42,6 @@ CONFIG_CMD_FAT=y
+ # CONFIG_DOS_PARTITION is not set
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="sc594-som-ezlite"
+ CONFIG_NET_RETRY_COUNT=20
+diff --git a/configs/sc598-som-ezkit-spl_defconfig b/configs/sc598-som-ezkit-spl_defconfig
+index ad3a6fcc236..7027a7f8a2a 100644
+--- a/configs/sc598-som-ezkit-spl_defconfig
++++ b/configs/sc598-som-ezkit-spl_defconfig
+@@ -4,9 +4,6 @@ CONFIG_COUNTER_FREQUENCY=31250000
+ CONFIG_ARCH_SC5XX=y
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SPL_GPIO=y
+-CONFIG_ENV_SIZE=0x20000
+-CONFIG_ENV_OFFSET=0x180000
+-CONFIG_ENV_SECT_SIZE=0x20000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x10000
+@@ -63,7 +60,6 @@ CONFIG_CMD_EXT4_WRITE=y
+ CONFIG_CMD_FAT=y
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="sc598-som-ezkit"
+ CONFIG_NET_RETRY_COUNT=20
+diff --git a/configs/sc598-som-ezlite-spl_defconfig b/configs/sc598-som-ezlite-spl_defconfig
+index 34dbedf12b4..0b59b36f264 100644
+--- a/configs/sc598-som-ezlite-spl_defconfig
++++ b/configs/sc598-som-ezlite-spl_defconfig
+@@ -4,9 +4,6 @@ CONFIG_COUNTER_FREQUENCY=31250000
+ CONFIG_ARCH_SC5XX=y
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SPL_GPIO=y
+-CONFIG_ENV_SIZE=0x20000
+-CONFIG_ENV_OFFSET=0x180000
+-CONFIG_ENV_SECT_SIZE=0x20000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x10000
+@@ -62,7 +59,6 @@ CONFIG_CMD_EXT4=y
+ CONFIG_CMD_EXT4_WRITE=y
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="sc598-som-ezlite"
+ CONFIG_NET_RETRY_COUNT=20
 -- 
 2.34.1
 
