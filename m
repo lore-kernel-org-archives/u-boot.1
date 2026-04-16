@@ -4,131 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDCDAF433FE
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 05:55:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 401D7F433F7
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 06:00:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0E1983EEF;
-	Thu, 16 Apr 2026 07:55:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 311F184206;
+	Thu, 16 Apr 2026 08:00:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="gtAd9NnF";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ITFNcZtY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="USypUPpU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C5B18407E; Thu, 16 Apr 2026 07:55:15 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 089B584206; Thu, 16 Apr 2026 08:00:12 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A21D483C2B
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 07:55:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=gurumoorthy.santhakumar@oss.qualcomm.com
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 63G0OU3d2972348
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 05:55:11 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=TnKlgmrKf+axqnrTM+lXubi6aU8y0HDVHi4
- unww4wTc=; b=gtAd9NnFor8UnCet3kG/oyIRDYhgeqI5YZoaw9guiOkSDIz8HTv
- KomzW6mwH5llBvwkQdxxLlox0Zl1dQA3RDRpm5sSmJU99sc1n2MDcZyXNvr8qdNj
- sPZBvaSvLivr/sxx4zUUTJ4kEoIY6KZ/A1jsjMFa8MVicaesQYxTJduaIDk7iRL7
- oCNfBv1OgqPJgVRYwpkjuRKOesegS+7oecc70rZmNj2BY50liQS0hz+DTvZNWH96
- +dPLm80Z8eMHiGiab0Q0XxHA7/0skX3vZWQRpnIGq0pYHfKUcTAsA8B/wbjcl9qb
- tDZaCAW325Qj0kR+SK/FB2rzkE3uu/tnjIA==
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
- [209.85.214.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dj74gbwn3-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 05:55:10 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-2b2e06219cbso56923445ad.3
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 22:55:10 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A55483C2B
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 08:00:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-488c2690057so76093375e9.0
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 23:00:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1776318909; x=1776923709; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=TnKlgmrKf+axqnrTM+lXubi6aU8y0HDVHi4unww4wTc=;
- b=ITFNcZtYxL/Rnp0DUAptbDoUdL2r3ZCZyoTwljhesCJ2X4hekYN5NsmBJKVoMs7K0+
- kbGucva/QVfDlgTPyvZhkwnuhzSrk50QQjfxeTMkrKXqHubzpovAuRf98yyLv5UW4gqf
- p+BkcYRE61N9TmopzTmUG3v5s/hyhu7FdfnwIqYKCyxu1yd4mENM/rmAOxDRrlFesF3e
- fZZOQ500wC9jwAsAHDlhOt8gGVpVu5tPcuxYUo5xocaR3oiGoSuDLbovHMfWoMk2wanQ
- Cm5MkSfJXso0zkzRgqUAYQ6Qkpf02tqYVAEMyQtXlAWupIJo4PXFz1xpCK45OVDZ8KwG
- N5Kg==
+ d=linaro.org; s=google; t=1776319206; x=1776924006; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zIRukHnnD2yRthhxfE5asPyAnbq119C7lGxwUlkI2W4=;
+ b=USypUPpU5HE9kES0tjNojaEc5ORTf6sDagU1PufnQ5F+ROgggzPYgJJ/hSs6P2avkN
+ 1pd0I44s1Hx381cUsmO18xWn8xTctRyym5OySP9d9scj0X+sVxV7BBsk/ZMShhGX84bu
+ WutmhBXiuSFcsBsh9+omybEBQbtIxoe6RaFi8OT9rfgyyRNAfVxIHC0NR60OHrosMTgo
+ /Gm5GDY8I+sSfs0KdU0sLU2N8uidu9w19/EvO0kGsWZRdIc2mCZtidje7NA+C+ipQp2e
+ 8CJ7Ii7pdLoH/74queAJrqEP72abD1GDPQgyeoUramiwLYjkJ8rAWbC3RJHrVskTQ1kj
+ Pk/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776318909; x=1776923709;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TnKlgmrKf+axqnrTM+lXubi6aU8y0HDVHi4unww4wTc=;
- b=QtDYlKyAB/h49tB9TJcd2l5v1H7GJGsZzibdhD7a/OxSQUDd2R925FqXYuMGpFF7Gc
- L5QmI1XMNGWpQz/fwfoF0vdJJI4IUGRMsu9ITMQvOAbUL0jesztK2vYwpbbxhgutoCcX
- JIJnqmRKUfgNxYt/1iKR3B/ruOkNpAgLImWRcSKfpw8D7dtUn+drh2b5X8V3LIWb3zF5
- BjjQNrbN4sdV9m6/9tScFy4s/dl6JqnIUT3Y037OcoWDWh4bDqYta31RkPWMgYRZocxz
- 34WADLw+nSkLP2r5YUqIe4RyRjt7kKVXp75kYW+rskHWOAyJbK4YJSzs2wBBdd4qMIx+
- SapQ==
+ d=1e100.net; s=20251104; t=1776319206; x=1776924006;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=zIRukHnnD2yRthhxfE5asPyAnbq119C7lGxwUlkI2W4=;
+ b=AMLMcPlIGFtgm0WuDTnM1eizZq92KCFpePCfYc3/RcN+h8TN4jVA/x7ByHdbEGe1kv
+ kzaduCKZ3ogBjVGd38oWhX6Tm27DofShLYfW8f9aFltVxGt6UGerllFYB3fmoNq5XIBM
+ tRXhmWRmC+jXy03vHzQSZV/qcjHTleILtSaT2znxMJ5tDxd8QcEy/Hrl8uSpN/rhQBzZ
+ HhQo1wCA/PZllG+aSEdvjAyLxZ92JrpJOJZSy2H5qtugryH3O4PNy9WXOaBajLCcdY13
+ 3/nO2WUWh97oLGM3OTZhH61znKuxXDtIwYCUNjQwjOEY0OUCStvOCIT8f5Uphvs0y2wB
+ SYMw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/CUz6V1d4/N00zbQLnprFa2ypDW0U+T6N2tClSxSWkKIIb+4ktZYHZagMSDhzndjCOoGe8cok=@lists.denx.de
-X-Gm-Message-State: AOJu0YzCpw6UtWjusJSrHvuYJmXBouisHZpeqR6L+WoaIttTgAuDE3I2
- 7kA72ko/xOQAGp4bjLUwaFd4yyIdwqF+qbSZX5LWSBQ3FPKn3p3k4m2NUHufYBJ+o++uLwt83aZ
- XvVlYDO/RWqCNYq1fARhBE60/ZXTzBTUXVKQ+yz/NLRD2LwOHC3dV029H
-X-Gm-Gg: AeBDiet+laK+82Rhgxdi0PWMEi8wqL8iVmslXmAaZzOUBd5qn27cl46dKXsNSY54Nu1
- ifdpa+AQnaGRMOYWdY4gUwncAlyVNwSbaTNVFzpUOCdcOa9AMtNvFa5Zk3zzC6EcbEuIM80kINb
- G2GyWyAtZpXW/BOK+w8+M+cZUd+3zKfXtA7W9rsnYenLGxaw7/mD+EIN6LycCNpiQUjkjBn1Ywg
- 2zfTSLlIT4Vp375UbtX3J2K/Dg0r8ayMvxg5+nzHa1fUSNIJeUf79/sfCOjtI+ywJ5tqH6bd6+R
- QRqEs/oQyY7Qut6TmDe0K01OmjUuSM1gXo3EPIiRlyHpjuarINWNvby9OJCHIB7THJGk2duQLSK
- vrTkIX0bs5kvppw3xaYruEOkCOdFLyvCgYTrSXue92/7awK4nB4s+vil2m+BJkQGuufJJrgKnqB
- H7ZESN9SMYfFWb9tUtkAZKt+3kFiYmcV7kBrU2HD8RmdktCaT8OibNmZY/wq7PPhPUT1U=
-X-Received: by 2002:a17:903:3de3:b0:2b0:624f:8edc with SMTP id
- d9443c01a7336-2b2d597d43dmr178466025ad.12.1776318909521; 
- Wed, 15 Apr 2026 22:55:09 -0700 (PDT)
-X-Received: by 2002:a17:903:3de3:b0:2b0:624f:8edc with SMTP id
- d9443c01a7336-2b2d597d43dmr178465815ad.12.1776318909040; 
- Wed, 15 Apr 2026 22:55:09 -0700 (PDT)
-Received: from hu-gsanthak-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b478109a4dsm42652295ad.18.2026.04.15.22.55.05
+ AFNElJ/UUrlBNztjqnjv/tUellyDSjFmqA+lKMHFmx6ueB544HSNEKDJIc5+2ek7zV2E1yexK3BF6EA=@lists.denx.de
+X-Gm-Message-State: AOJu0YydUPqmRWdnS3F/WS32prhfqYeICvRL9r5qT5EyMJz3854rYrr1
+ cZmj2Iz3wc1uGEsvVTnaz1aOWKpx2NXEjsBcXTnZU+fk74z48Ut8ENhY/2yw4hKXvPs=
+X-Gm-Gg: AeBDietuBpkfAL0R0E6wcbwVlNtpl1HTt9pBZMt7ZVaR8mjTkISrZUUacBqpHTZnA8w
+ 4gdca9SvVodHtX7K2jJJEDogORut9Y5elPajN9NxhVz/UvoFVcKtQX4oXR3RDgZVU7Db8k+bBVn
+ l3785JY7NTos+yHTP5nGu3n57cyHMiAPI181UFZRgrOwQGBMzJ+m8qVg9nNiC9lfUxfsjRTOYmh
+ 8ugnPCtsVdBW316kTz6cwV7VgLZ6Cnf0p0dU1i/5z7cBOlFEBc7VTu09JhomszXqWVIMXBv5Ynj
+ GezfzwU+0L+1Swuu6WT8Xx+HDwE/T4xDBsQXPSk0oyxq2EHm0sYfQ2EVfrUPQxao1M3VQjNGCIl
+ +T9wAGb+H2Uzwrukjzoc0L5F9ee+LkPMFSDOyp2xuzOTuVzsiLtYWsjOVcXORxxtnW3aMfJAMlZ
+ PUcQSSBcxIa1USK8VJDsw0YgqGPD0A4WZL/JyQ/0cy8caM1f2YibZ0NChH/WZsQOXbq15AJ0j7s
+ pKeP1oBf19aniBL5NRW/zywcT4kasYLS97UdQZiUpG39K1ddm8Q03rsAKp36RqPNiyIjL1qhjIa
+ 3cFh5GXiwDH1LJ/Bq1TR79RciV6rCR86Shh4R6nSaF3HikS7IjAD2fJ4Leiz50ULRubmBHZBG9W
+ EbhR4MoOep89VdxOekFD/Tn/ddP7GMKwOJm7k99CgrC4/vQk91Ihg5bZOMPI8CVIQVASMmpaTp8
+ 7Q869vXfECAcpgfYu1YjO42i4pPNIqzp/kqeqCWEAkEh71yE23pOdnWJr3p8iI
+X-Received: by 2002:a05:600c:8b84:b0:486:ffa3:594 with SMTP id
+ 5b1f17b1804b1-488f71cef2fmr1598335e9.23.1776319205445; 
+ Wed, 15 Apr 2026 23:00:05 -0700 (PDT)
+Received: from hera ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-488f0e9a770sm36379755e9.19.2026.04.15.23.00.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Apr 2026 22:55:08 -0700 (PDT)
-From: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
-To: marex@denx.de, trini@konsulko.com, mkorpershoek@kernel.org,
- macromorgan@hotmail.com, casey.connolly@linaro.org,
- quic_varada@quicinc.com, felipe.balbi@linux.intel.com,
- gurumoorthy.santhakumar@oss.qualcomm.com, u-boot@lists.denx.de
-Subject: [PATCH v2] usb: dwc3: core: fix memory leaks in event buffer cleanup
-Date: Thu, 16 Apr 2026 11:25:01 +0530
-Message-Id: <20260416055501.494002-1-gurumoorthy.santhakumar@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+ Wed, 15 Apr 2026 23:00:04 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: trini@konsulko.com
+Cc: marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, anshuld@ti.com,
+ sjg@chromium.org, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ u-boot@lists.denx.de
+Subject: [PATCH v2 1/6] fdtdec: Deduplicate iterator function
+Date: Thu, 16 Apr 2026 08:59:37 +0300
+Message-ID: <20260416055948.130041-2-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260416055948.130041-1-ilias.apalodimas@linaro.org>
+References: <20260416055948.130041-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE2MDA1MyBTYWx0ZWRfX7br702XDZcej
- EEIX33bL+6Y14H8BnIdtosU8ciTdauH8CUxsZ2uKBPzN2u0BQuxj3BonpAV3aruSYb4mLC9Ot/G
- 9BremoM19mw7u93nvG/EIfTLObkoUkPY0JCWhWQr1ssnScawKpumJYBbrnvgDT4c5Ie5eA/rPl7
- KIrOE8UGJpiR7RNfExRuc0SNdV6bedHXqf1aFcF//eQxc7MJwi+k9jswlebs2/cwb21D7RM+3a1
- fzK4ipA0ZUljpARLjC1FrXiipsNk05HuembF9zfzZHAZq1gTsE+bBJTonUNpQScrXHRia2kZa+n
- o9/LD0eesAPAp+yScEuL2xhNvqfmh4lYXLtfATqRu9WbZdRCOvTbW6lOagcYeQleWhV5081rXws
- NVwa8xVoypvZwmry8QIQ8dXpbFEyttJ/Yb5djIIOusG+s/RkoLK+DoJeQ7hRcIxSWEWXHPSNcEz
- COc1K0NHddPx2vcBOcg==
-X-Proofpoint-ORIG-GUID: AIAu_hR7oX_78ojHGig20zRoNqVBQZ8c
-X-Authority-Analysis: v=2.4 cv=ZIfnX37b c=1 sm=1 tr=0 ts=69e079be cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=8ukGJnHcqfySqs3Rp24A:9 a=uG9DUKGECoFWVXl0Dc02:22
-X-Proofpoint-GUID: AIAu_hR7oX_78ojHGig20zRoNqVBQZ8c
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-16_01,2026-04-13_04,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 suspectscore=0 lowpriorityscore=0 spamscore=0 bulkscore=0
- phishscore=0 clxscore=1015 malwarescore=0 adultscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2604070000 definitions=main-2604160053
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,51 +104,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In dwc3_free_one_event_buffer(), only the DMA buffer (evt->buf) was
-being freed via dma_free_coherent(), but the evt structure itself was
-never explicitly freed, causing a memory leak.
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-In dwc3_free_event_buffers(), the ev_buffs pointer array allocated
-with memalign() was never freed after iterating and releasing all
-individual event buffers, causing another memory leak.
+Both fdtdec_setup_memory_banksize() and fdtdec_setup_mem_size_base_lowest()
+implement the exact same iterator over all memory banks, the only difference
+is the body that is executed for each bank. Deduplicate the functionality
+into iterator function fdtdec_setup_mem_for_each_bank(), which takes a
+function pointer to a function which implements the body as a parameter.
+No functional change.
 
-Fix both leaks by freeing the evt struct in
-dwc3_free_one_event_buffer() and freeing dwc->ev_buffs in
-dwc3_free_event_buffers() after all entries have been released.
-
-Signed-off-by: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Anshul Dalal <anshuld@ti.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Changes in V2:
-- Removed redundant NULL check before free
-- Removed NULL assignment to the pointer after free
-- Link to V1:
-https://lore.kernel.org/u-boot/20260414055013.2978223-1-gurumoorthy.santhakumar@oss.qualcomm.com/
----
----
- drivers/usb/dwc3/core.c | 3 +++
- 1 file changed, 3 insertions(+)
+ lib/fdtdec.c | 77 ++++++++++++++++++++--------------------------------
+ 1 file changed, 30 insertions(+), 47 deletions(-)
 
-diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-index 6f22b9232ba..65c4d1a4e6f 100644
---- a/drivers/usb/dwc3/core.c
-+++ b/drivers/usb/dwc3/core.c
-@@ -206,6 +206,7 @@ static void dwc3_free_one_event_buffer(struct dwc3 *dwc,
- 		struct dwc3_event_buffer *evt)
+diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+index fb3375ea157e..9c35b08e709f 100644
+--- a/lib/fdtdec.c
++++ b/lib/fdtdec.c
+@@ -1096,7 +1096,7 @@ ofnode fdtdec_get_next_memory_node(ofnode mem)
+ 	return get_next_memory_node(mem);
+ }
+ 
+-int fdtdec_setup_memory_banksize(void)
++static int fdtdec_setup_mem_for_each_bank(void (*bankfn)(struct resource *res, int bank))
  {
- 	dma_free_coherent(evt->buf);
-+	free(evt);
- }
+ 	int bank, ret, reg = 0;
+ 	struct resource res;
+@@ -1124,63 +1124,46 @@ int fdtdec_setup_memory_banksize(void)
+ 		if (ret != 0)
+ 			return -EINVAL;
  
- /**
-@@ -252,6 +253,8 @@ static void dwc3_free_event_buffers(struct dwc3 *dwc)
- 		if (evt)
- 			dwc3_free_one_event_buffer(dwc, evt);
+-		gd->bd->bi_dram[bank].start = (phys_addr_t)res.start;
+-		gd->bd->bi_dram[bank].size =
+-			(phys_size_t)(res.end - res.start + 1);
+-
+-		debug("%s: DRAM Bank #%d: start = %pap, size = %pap\n",
+-		      __func__, bank,
+-		      &gd->bd->bi_dram[bank].start,
+-		      &gd->bd->bi_dram[bank].size);
++		bankfn(&res, bank);
  	}
-+
-+	free(dwc->ev_buffs);
+ 
+ 	return 0;
  }
  
- /**
+-int fdtdec_setup_mem_size_base_lowest(void)
++static void fdtdec_setup_memory_banksize_bankfn(struct resource *res, int bank)
+ {
+-	int bank, ret, reg = 0;
+-	struct resource res;
+-	unsigned long base;
+-	phys_size_t size;
+-	ofnode mem = ofnode_null();
++	gd->bd->bi_dram[bank].start = (phys_addr_t)res->start;
++	gd->bd->bi_dram[bank].size = (phys_size_t)(res->end - res->start + 1);
+ 
+-	gd->ram_base = (unsigned long)~0;
+-
+-	mem = get_next_memory_node(mem);
+-	if (!ofnode_valid(mem)) {
+-		debug("%s: Missing /memory node\n", __func__);
+-		return -EINVAL;
+-	}
+-
+-	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+-		ret = ofnode_read_resource(mem, reg++, &res);
+-		if (ret < 0) {
+-			reg = 0;
+-			mem = get_next_memory_node(mem);
+-			if (!ofnode_valid(mem))
+-				break;
+-
+-			ret = ofnode_read_resource(mem, reg++, &res);
+-			if (ret < 0)
+-				break;
+-		}
+-
+-		if (ret != 0)
+-			return -EINVAL;
++	debug("%s: DRAM Bank #%d: start = 0x%llx, size = 0x%llx\n",
++	      __func__, bank,
++	      (unsigned long long)gd->bd->bi_dram[bank].start,
++	      (unsigned long long)gd->bd->bi_dram[bank].size);
++}
+ 
+-		base = (unsigned long)res.start;
+-		size = (phys_size_t)(res.end - res.start + 1);
++int fdtdec_setup_memory_banksize(void)
++{
++	return fdtdec_setup_mem_for_each_bank(fdtdec_setup_memory_banksize_bankfn);
++}
+ 
+-		if (gd->ram_base > base && size) {
+-			gd->ram_base = base;
+-			gd->ram_size = size;
+-			debug("%s: Initial DRAM base %lx size %lx\n",
+-			      __func__, base, (unsigned long)size);
+-		}
++static void fdtdec_setup_mem_size_base_lowest_bankfn(struct resource *res, int bank)
++{
++	unsigned long base = (unsigned long)res->start;
++	phys_size_t size = (phys_size_t)(res->end - res->start + 1);
++
++	if (gd->ram_base > base && size) {
++		gd->ram_base = base;
++		gd->ram_size = size;
++		debug("%s: Initial DRAM base %lx size %lx\n",
++		      __func__, base, (unsigned long)size);
+ 	}
++}
+ 
+-	return 0;
++int fdtdec_setup_mem_size_base_lowest(void)
++{
++	gd->ram_base = (unsigned long)~0;
++
++	return fdtdec_setup_mem_for_each_bank(fdtdec_setup_mem_size_base_lowest_bankfn);
+ }
+ 
+ static int uncompress_blob(const void *src, ulong sz_src, void **dstp)
 -- 
-2.34.1
+2.53.0
 
