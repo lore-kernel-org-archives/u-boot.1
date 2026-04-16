@@ -4,106 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40833F8D754
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 14:38:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 508FEF8D757
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 14:58:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73555841C2;
-	Thu, 16 Apr 2026 16:38:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id ABEA8841C2;
+	Thu, 16 Apr 2026 16:58:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aSwSa89n";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="sKPmivjz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 267A9841D5; Thu, 16 Apr 2026 16:38:31 +0200 (CEST)
-Received: from mail-yx1-xb134.google.com (mail-yx1-xb134.google.com
- [IPv6:2607:f8b0:4864:20::b134])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1F9E084214; Thu, 16 Apr 2026 16:58:02 +0200 (CEST)
+Received: from out-180.mta0.migadu.com (out-180.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::b4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F24F7840AB
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 16:38:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CF6B840AB
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 16:57:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb134.google.com with SMTP id
- 956f58d0204a3-6501c4857b2so5455840d50.3
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 07:38:27 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776350307; cv=none;
- d=google.com; s=arc-20240605;
- b=FVgFeQbnj7dEK871vdJq4w5NOf/6l1/3QSxeDOCTtvrfRNolMTyqRgXSomsxmLshPL
- Mh/hb0xE5TyjZMBtajg5Lg14jbNZ2h0/aI0YT/rdPdp6P90whKBsqpNYj2V2bfhoPjuC
- sfNDz357JVLofioz8v32Z1wE/+7hMObbXH58mB7cVhutL4z98PFIpigdezHBzHtmT5eV
- 7inODUcsochk33QTDAcbjLYhImkleso7dFzbpTO+yuO06LMhLZ9/YSSKuq8UVFdpZCmA
- zQihfRFz8+OR/nd7YK4T8x7Phb2PdS1ae0HP+sZB3RmuyNTo8nzMMah2QptXJc1lPrj1
- sHww==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=LJFY6Dez2V26yIfYpOQhdrDXwL+xBZ5pZIULDtJUlos=;
- fh=fMIRLHPrjszqdMt5C9QCjZtCMhlxKhkShnffRQVQvkk=;
- b=XfOIhi0a4vaS3y0N5HiRcSMN1n7JWGUIuROqNpe7PYKDnfff6URNAAuZdpVL6ToB+0
- +05CaXSlTHnqMnbuPHI+3x2Pw+N+3CMQp45ykBtd41yT3M+kD7sdie9HIMfy+QAbEvhp
- EsDfRcHWcjBT8PnFgLLLCdmSF1XguIv1U/j5yLXdt06f1BhJ/noV2akYx5Ei9kfCtE/n
- xoyi/leqPFynofz+PybS2h1yaYzJZ1DMrhhXINwYaKnLLBUv3vo7Z8LcEbp1YOJJQBBu
- IpyoCfuHaIRZmlQuGii68MDmDosITHJaqLiGbHYRATHeqmLib6YBa+Q7ym2fejasDpR5
- A4Ew==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1776350307; x=1776955107; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LJFY6Dez2V26yIfYpOQhdrDXwL+xBZ5pZIULDtJUlos=;
- b=aSwSa89nEMrstbB0Fkket8p1EoBdzH2221ruMmSFqrVCuUtW9AdbNNO1cDoIrJV5HB
- FoPMm+pycIcMQxcKdrIKxm5GriwA1mcHZMhX2LABEl4gu5+o49h6xgbZwc7zfr4UbPjp
- o+3ClAr3JLvMneBged4v00Pz1DNr3u1JcWQ50mlnCsWKFVp71nuWUQtJ/d8IskQmvbhO
- N/NxJlX2bnXWSscJpQhXjobc6pSiEsRqoFm0iA0DBatIMzEjxXLtk13UOPvK5UhPDOJs
- 77Q3QaAPwzUrCfr8YQ8YCk4enXmlzBWBbfG8a5fSsA2qcr9OMXfU8ZYN4Mf4sR/5xcE2
- WCYQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776350307; x=1776955107;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LJFY6Dez2V26yIfYpOQhdrDXwL+xBZ5pZIULDtJUlos=;
- b=G3I+hQrLGOu4s9Q8Zpv6J2ruC7dMf0vXyWjw/1Jkreb6ucaDiH6HvhWEq4wSzfBP7o
- epntcBULkrNlsOu50J8cYFsMWUcvZvUA0DkYAc8s+Kwc9uUafJydToP1QM1bx9Xo3sv4
- KGUDXyRwt+msleb/4ez8M9wXoaENyMcuql0tRGLLBXTVsb+7AZ8tAlRlanYnmktYBdP4
- 2jmBW5hwl0MJspyqRscgy1GPAUvQqhEZh89RTT7yoBxpRZkr2XzMtp5MEqG4W8IJccXX
- ppcT2pdZtEvpplDMuZLRhntFkQDIYFc5v4IPeUtrmDrMxnM1dLBUbIMj7EbakoNP4VRZ
- jODg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+M+T1Y4Q79K3aA+s0JrLRSwiEMj/PFQHMiDetNUVHTEyD3RyBDQAGOj38NRe/ZrCnUa9sqRwU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxGZrft+XKF9hEN+y5XG1612D9kAowgtZNJ5OzD8Y3coews78Qz
- bYAbp3DX/CuZn/GbkA5CXrH2YTTUUDFYlWdEkq9G3xyOb5kphWTiwzI2wsR7NcU6z7WWps3oglg
- pdBrvVDM2APYrCU/job6OEbb9k31tF6xy7pmFFAn9Lg==
-X-Gm-Gg: AeBDiessJ0RdRzh9CrfomBjJq8biDilro9K27Q1g1q922RTrMABCDX7lQweAsb46kcH
- Rhzz8V0qBh5c9iuylyMrzywbd6MWf4OUsyTKVGcakFxcse01AT9NfcyYR7+7T4MbwgT2SR+5ukf
- za2ICS3bIrUpaPV3hDGMsX4/lk8bxKQy0acsYpzqjptdm3Rd46R/u73hnVGMsRa73ruVBf295sP
- tqn8JLL72Cupex7LoV4mW1IUZAuKsSUqr0gJ/A9oOsooEf/ezKb5Vna/gdW0A79FReRGKCM0odr
- 5/2T8gAH5e/ebW8S66HuHsXOzPGgqEtD2jSRhSuhd4mXDpGUGuxOVEuSUuMoCEQ/KKSEN5Z2NY5
- 7GC1ukvJQbZ5D74kXqRI+MzdcPxtfvQiEiChu2lJVFcaoh8UU/BOSFhSsBiy0BmfnNBRKHY/kzi
- J6x9oymL7MQWgjUtJckKmbL3ifiga+/hwhYKgE14wMtEiy9Zi95jyDPz8hAf3b4jBmy6RrMkN16
- BnKY6Pie2ZpbetBpgeP4VCC7lTZEMuvMKDCkbtAxZbqQngXGyTe/wi5cu0g86SdxmyFwDZS78vB
- Uamg116C7OU9+41mk5nr/4hU+vLrxYK2MFQxUDbtUffy
-X-Received: by 2002:a53:d015:0:b0:651:b8a6:3236 with SMTP id
- 956f58d0204a3-651b8a6445dmr17512840d50.62.1776350306691; Thu, 16 Apr 2026
- 07:38:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=funderscore@postmarketos.org
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
+ s=key1; t=1776351478;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Re6OallyHx8jNQb4BtWF6HijrxJHgILKt/E2FlEqwBw=;
+ b=sKPmivjzTPrF8255bQ55/ZP/3ncY37dp/PR3/EpMX2UYy57vV15tfmWyzW6w/IED1M4E5g
+ wuXamAcSzLmO40aUhld4VUqXEpJWH6UaIZBkLMGicanTmqh0IiYNhp0RGyxOa+57gm2zdN
+ jHY/6H063j/8bM7tE58omqd/8mGmH0kj4vRQWUa+XAM4wdDffTiqB+hbxY/yaOvo6T9FYn
+ FHNSsGcg8PYExqvkA/kWH4yMsGC6u6NQVJ1aVB3l8X57QORcMVc21csa6i4Iq/gX9S6MQS
+ xgVgKyeDXlRSqGdQ2kSmJYwuWz+eRlEUIpxKZYfdvdBX6X3KVsaWQnQH6jdyKQ==
+From: Ferass El Hafidi <funderscore@postmarketos.org>
+Subject: [PATCH v4 0/4] Autoboot prompt customization and bootmenu
+ cosmetics
+Date: Thu, 16 Apr 2026 14:57:40 +0000
+Message-Id: <20260416-ui-cosmetics-v4-0-b843ba661b3f@postmarketos.org>
 MIME-Version: 1.0
-References: <20260413203555.1990337-1-rs@ti.com>
- <20260413203555.1990337-7-rs@ti.com>
-In-Reply-To: <20260413203555.1990337-7-rs@ti.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 16 Apr 2026 17:37:49 +0300
-X-Gm-Features: AQROBzDQicxpm2mzz0HFL74g2_n9uy2c40A3weGq1pjMErJP5Ek60joUNxqw_zo
-Message-ID: <CAC_iWj+2=ajV0cXFT6a5Y2oqtTwcaPRcpkYqTbu4o+jbFmX+5w@mail.gmail.com>
-Subject: Re: [PATCHv3 6/6] memory: reserve from start_addr_sp to end_addr_sp
-To: rs@ti.com
-Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
- Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
- afd@ti.com, xypron.glpk@gmx.de, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAOT44GkC/3XOTQ6CMBCG4auQrq3pn4W48h7GxdAO0BgoaZFoC
+ He34AaJLt8vmSczkYjBYSTnbCIBRxed71KoQ0ZMA12N1NnURDChmZScPhw1PrY4OBMpAAqWQ4l
+ WlySd9AEr91y56y114+Lgw2vVR76sH0ix0zc0cspoWVVopAGTK37pfRxaCHccfDz6UJPFG8XWK
+ HaGSEYuuDXaCs41/DHkxuD7P2QyAArJClA5SvnDmOf5DaLIxws3AQAA
+X-Change-ID: 20260331-ui-cosmetics-aae207abed6b
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
+ Simon Glass <sjg@chromium.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Anshul Dalal <anshuld@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Martin Schwan <m.schwan@phytec.de>, David Zang <davidzangcs@gmail.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Ferass El Hafidi <funderscore@postmarketos.org>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2306;
+ i=funderscore@postmarketos.org; h=from:subject:message-id;
+ bh=tBzfxnXLaK9QvFycukNRc3814Wsd142TsuPnI8L53Bs=;
+ b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBp4PjvmM9AlEYs1loDFlEwfEHr4BqGBGrmqNQzi
+ wOiaaRpjTGJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCaeD47wAKCRCEr8vQ14ma
+ A6YdEACje9aC7jT2UyvRGO92oI30Zrowc5xpZTKboU7z+CEFBtjVxk60IJ+0mLMSaQP7NAMoz9U
+ aPBEZg1DxlK9vTJEpWDDsdhwHWlEC0vrC1/v2tR0oqD/z6YDTmByHr0W7l8XowShnW1WkHNQoMF
+ bWP0cqSDXPVEpWK7Sqtj1zJ/iocH3TIshozj0I1j8u0ZSHLSUSPYi7GWWIK0HWZ4qhInMgAuYL6
+ Yi9L99vbsZUV5Bhe+QEpt8omuxRjkI3fJSLD4V6kyqflWi5fSOgtvNOPaODPpmDWWHhc2vZxoed
+ zivZ3diUeT6oUYg6JM7SfJc1GvPxmzWLTDusBu1lHhuBJGS3lWiKAJAo/1GliO9ZgX1mAlMU+RW
+ DzlQIOpDMSC2upSPbEtpdNAjJKErnyBR6FSBQ8bdPyeA5+OsCwO7dqYIp66Nt1A8vUFIs7PsZmq
+ gDRp+L1mj7RIqdh1WKfUoa9xCBAlZAW2jEn+W7Pvw26jc7yxdkKulZ1BcLDKcGhn0LYcksgiI7G
+ p3yv6G0z8dl9RxyUmDpt9/ZBhaH+UnwgG6q/SPFUFC4ILA2FoyN6Nn/nS9ucKpNRBgBKZVY2jat
+ 5zfPLBmddiF0XZVt633Vi0P2yHibestA0ACKQKVaqkseI3uBmiFjAK1ZjEFGSBYb1inkPImYjaZ
+ s6U0Z50WcskMpVA==
+X-Developer-Key: i=funderscore@postmarketos.org; a=openpgp;
+ fpr=0301BC37FB555CACFD798BEE84AFCBD0D7899A03
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,131 +96,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Randolph,
+This is a small patch series to make the autoboot prompt configurable
+regardless of if CONFIG_AUTOBOOT_KEYED is enabled, which is very useful
+with a splash screen. My usecase is, with some ANSI magic, moving the
+autoboot prompt to the very bottom of the screen and highlighted, with a
+splash screen shown.
+Something like this: https://ircb.dersco.re/uploads/funderscore/efa2a27132e56891
+It feels wrong to require AUTOBOOT_KEYED only for that usecase.
 
+Also, the bootmenu now prints ANSI_CLEAR_LINE before each entry, which
+has the effect of highlighting the entire line entry on vidconsole, just
+like eficonfig. I can drop that one if it's not very useful, just
+thought it would look nice.
 
-On Mon, 13 Apr 2026 at 23:36, <rs@ti.com> wrote:
->
-> From: Randolph Sapp <rs@ti.com>
->
-> Add a new global data struct member called end_addr_sp. This stores the
-> original value of relocaddr, directly from setup_dest_addr. This is
-> specifically to avoid any adjustments made by other init functions.
->
-> Reserve the memory from gd->start_addr_sp - CONFIG_STACK_SIZE to
-> gd->end_addr_sp instead of gd->ram_top. This allows platform specific
-> relocation addresses to work without unnecessarily painting over a large
-> range.
->
+And while at it, and because this has been due for a long time, convert
+autoboot documentation to rST, so it is part of the public docs, instead
+of a plain text file.
 
-Is there a platform we can test the changes? Running the in QEMU had
-no differences.
+Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
+---
+Changes in v4:
+ - Add patch to update autoboot documentation
+ - Link to v3: https://lore.kernel.org/r/20260415-ui-cosmetics-v3-0-aa8308a47e33@postmarketos.org
 
-> Signed-off-by: Randolph Sapp <rs@ti.com>
-> ---
+Changes in v3:
+ - Add Tom and Simon's R-b's
+ - Convert autoboot documentation to rST
+ - Link to v2: https://lore.kernel.org/r/20260408-ui-cosmetics-v2-0-721dc6d2116a@postmarketos.org
 
-[...]
+Changes in v2:
+ - Remove #ifdef/#endif near printf in print_boot_delay: no need to
+   guard the printf as CONFIG_AUTOBOOT_PROMPT must be set
+ - Link to v1: https://lore.kernel.org/r/20260405-ui-cosmetics-v1-0-bffec3cac741@postmarketos.org
 
->  #ifdef CFG_PRAM
-> diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-> index 745d2c3a966..2f3ef26a17c 100644
-> --- a/include/asm-generic/global_data.h
-> +++ b/include/asm-generic/global_data.h
-> @@ -115,6 +115,12 @@ struct global_data {
->          * @start_addr_sp: initial stack pointer address
->          */
->         unsigned long start_addr_sp;
-> +       /**
-> +        * @end_addr_sp: the end of memory currently in use by uboot,
-> +        *               should be the original value of the relocaddr before
-> +        *               any other allocations shift it
-> +        */
-> +       unsigned long end_addr_sp;
->         /**
->          * @reloc_off: relocation offset
->          */
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index b3b292ebf56..bd0d875a8cd 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -870,8 +870,8 @@ static void add_u_boot_and_runtime(void)
->         /* Add U-Boot */
->         uboot_start = ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
->                        uboot_stack_size) & ~EFI_PAGE_MASK;
-> -       uboot_pages = ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
-> -                      uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
-> +       uboot_pages = ((gd->end_addr_sp - uboot_start) + EFI_PAGE_MASK) >>
-> +                     EFI_PAGE_SHIFT;
+---
+Ferass El Hafidi (4):
+      autoboot: allow custom prompt without requiring AUTOBOOT_KEYED
+      cmd: bootmenu: ANSI_CLEAR_LINE before entry name
+      doc: usage: convert autoboot README to rST
+      doc: usage: autoboot: update content
 
-The map_sysmem dance is still needed here for sandbox.
+ boot/Kconfig           |  30 ++++-----
+ cmd/bootmenu.c         |   2 +-
+ common/autoboot.c      |   2 +-
+ doc/README.autoboot    | 162 -------------------------------------------------
+ doc/usage/autoboot.rst | 158 +++++++++++++++++++++++++++++++++++++++++++++++
+ doc/usage/index.rst    |   1 +
+ 6 files changed, 176 insertions(+), 179 deletions(-)
+---
+base-commit: 0da1866a8fdd4d4bc4837ef2af281dbe010ae16b
+change-id: 20260331-ui-cosmetics-aae207abed6b
 
->         efi_update_memory_map(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE,
->                               false, false);
->  #if defined(__aarch64__)
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index 7ecc548d831..da61b005154 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -534,46 +534,19 @@ static long lmb_reserve(phys_addr_t base, phys_size_t size, u32 flags)
->
->  static void lmb_reserve_uboot_region(void)
->  {
-> -       int bank;
-> -       ulong end, bank_end;
-> +       ulong size;
->         phys_addr_t rsv_start;
-> -       ulong pram = 0;
->
->         rsv_start = gd->start_addr_sp - CONFIG_STACK_SIZE;
-> -       end = gd->ram_top;
-> +       size = gd->end_addr_sp - rsv_start;
->
-> -       /*
-> -        * Reserve memory from aligned address below the bottom of U-Boot stack
-> -        * until end of RAM area to prevent LMB from overwriting that memory.
-> -        */
-> -       debug("## Current stack ends at 0x%08lx ", (ulong)rsv_start);
-> -
-> -#ifdef CFG_PRAM
-> -       pram = env_get_ulong("pram", 10, CFG_PRAM);
-> -       pram = pram << 10; /* size is in kB */
-> -#endif
+Best regards,
+-- 
+--
+Best regards,
+Ferass
 
-This functionality is removed, but we still have boards defining CFG_PRAM
-
-> +       debug("## Current stack ends at 0x%08lx\n", (ulong)rsv_start);
->
-> -       for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-> -               if (!gd->bd->bi_dram[bank].size ||
-> -                   rsv_start < gd->bd->bi_dram[bank].start)
-> -                       continue;
-> -               /* Watch out for RAM at end of address space! */
-> -               bank_end = gd->bd->bi_dram[bank].start +
-> -                       gd->bd->bi_dram[bank].size - 1;
-> -               if (rsv_start > bank_end)
-> -                       continue;
-> -               if (bank_end > end)
-> -                       bank_end = end - 1;
-> -
-> -               lmb_reserve(rsv_start, bank_end - rsv_start - pram + 1,
-> +       if (gd->flags & GD_FLG_SKIP_RELOC)
-> +               lmb_reserve((phys_addr_t)(uintptr_t)_start, gd->mon_len,
->                             LMB_NOOVERWRITE);
-> -
-> -               if (gd->flags & GD_FLG_SKIP_RELOC)
-> -                       lmb_reserve((phys_addr_t)(uintptr_t)_start,
-> -                                   gd->mon_len, LMB_NOOVERWRITE);
-> -
-> -               break;
-> -       }
-> +       else
-> +               lmb_reserve(rsv_start, size, LMB_NOOVERWRITE);
->  }
->
->  static void lmb_reserve_common(void *fdt_blob)
-> --
-> 2.53.0
->
-
-Thanks
-/Ilias
