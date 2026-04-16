@@ -4,93 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 414CFF8D775
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 19:36:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26357F8D775
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 19:36:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8015283EEF;
-	Thu, 16 Apr 2026 21:36:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5905E8423E;
+	Thu, 16 Apr 2026 21:36:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZXm+dHuw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AJzq5qrh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C252841F2; Thu, 16 Apr 2026 21:36:34 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 6AAA280086; Thu, 16 Apr 2026 21:36:51 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6025280086
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 21:36:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1238180086
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 21:36:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-672bd7d00bdso172658a12.1
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 12:36:32 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776368192; cv=none;
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-671c4d08dc2so3543608a12.3
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 12:36:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776368206; cv=none;
  d=google.com; s=arc-20240605;
- b=Q4FTjN1vQsRZJ4c5odlT7dvUwu6Rq4lCZofnW8cbnW++uv6dDY0NCUnxNMminO1A0f
- LXbHsyay40DaNhukQeqsFKJYWhVhY1I30a3WG+IN+0EtStYMmaO+agPBDQToq54XgMZP
- uk8pDCs1r1+HaTeKto/qELeJdIUeFoPK78Ulc/blTIUfhwDITYD2QneIzXf0eAG2EKpO
- eT1EmiQvoIMtdib7amUHzmUGxSt+AIdD0GVvQb/Oetv6z+et+P1CNLA0nPar4CLPQtax
- RW/SqQSEMVG6AzdGqGk1NFNsXh/xZLtetxqyLSGjduwhE2E+iS9n/3/lPrClSG8a2lKa
- j7Lw==
+ b=Rwy0kkhbZAJBDA7QoykpWxGdLkIhXFl3SZJDtrcoSZuYx800Tg2ADzi2wk1nT9Saag
+ 0Jg9xR0tHhda+ApDYN/Xfbk8ZdOKVG9j97H3Yj38lQ8SncPUHRCV/fq3Dy66mVsTy9WG
+ YgwfBAk/tn7y52xJ0/7wuXmfnbZo18KcWykpNQiSdJw7hTkCgl5070hUG99mytUL2AzH
+ 50ETJqpYLLiIHGPpXdI6CxOGVJxFfOOeLElRLM0CYw6x3o5OiOo/BZ4sfGw5sMFL49eL
+ Gs32nus/lv3gD4cyh91WEHP807H++tT4SvlsjttM0chRzfgUs5OpVY/RVARuAS/+cRlw
+ m7mw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Z3NhqLS/9XedvHvU4LSaUDbGntd933Usjc4Mky+SIRQ=;
- fh=1GDjmpAREd9sK9zDNvgAAkWKiaYXwy/vI7ZDvQ2JZvk=;
- b=NAlDf5vo/Zm4XTKrGvNfAmOMTx1VH4znaOmpxVUmPEjAy8cHjCYS7JpIp95vyy2s3J
- wu7w8cFL1yqwHjB+z9l+2HpqfBbL+k5KpjtOlrwwYH6takW/cxQUZwsCFrdrsete3sDi
- uIjNpF91QHnhb3Oqrc9TUPkohDd/XrcJ+9fbUj8RS2I72sIZzvrOWmSz3MkDFlAAZAZL
- a+avS3Rofo9bVDakJMNwVrH1E1GILFjXTrTCDzwg3UmqLRBlwj59zl04NQbj1DUPod4R
- 5ZcQ2z26IeUQhj4iim4BKezQTKaq5uM4oSQ/TDXJ2LMfjiG0SNGVqgM72DfJq/Lcr5FX
- wB0Q==; darn=lists.denx.de
+ bh=eDjf9DdFvk9B5T9ogRXGZDki9sdmBXN2s1JfKPWixME=;
+ fh=cbYquVqJfSlv5DRvNQl5DfKkRDDjpF2iJAI/mtifNns=;
+ b=DYpiCL9Bf/p9CKk5TA6pHvIOVEUehNseRdH9TRQQFX3TL0GafQwAN4CZCo3dXpgd9c
+ mtuqYOh40wO9b21sEKCZ6LcMbss2mJ3YtLXHgZ3Xuq3On89J73Hh7cH4ISRh2i3HMCxe
+ yGIjznqlH+c8fwmoOGHMGrWIEgoN95kVR9Zar2QCX8Vssy5M5txrUgzdNAT5ztsZ6gH6
+ IqsnRog6ucshvnp5Sk0/GHgcZl4LZocnaQZgbe4vRK6KijNUglqCPrXTHMrCSUglfb8X
+ W+4bV4YWl29CfZWjJrrSSs7GM6n7IW4CLBFze8kA3lAzkI/ndlsJHD7+Kywo5O57tCSv
+ RiNw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776368192; x=1776972992; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776368206; x=1776973006; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Z3NhqLS/9XedvHvU4LSaUDbGntd933Usjc4Mky+SIRQ=;
- b=ZXm+dHuwlI+abKujN22+bKpopcx1e0yAv9dMC0KIsV28UdD2oBQZTLvns3Iw5yMFQE
- 1NqrU084Fq/BUrlNjGyLT8OOhREgEWxhnEAEDO3ChB300v8t700hnFbNqiR7Fghfez2B
- w8TotrCPz0UxdjNAmCuAfoLRgO5jWxG2hWZHY=
+ bh=eDjf9DdFvk9B5T9ogRXGZDki9sdmBXN2s1JfKPWixME=;
+ b=AJzq5qrhgkFm/PoFQKyCnJJlBPkMCicoUDPwnaSCClzw7NzubKqgqwOuw9sVPI9nBS
+ Z8X63l6YXBQsEq7lQiYdfgzbHPwHsnQbq84E4aGQoHCemtEIMiQ/FrR01RdFqAkdpPzz
+ kIObjymN/sDGs7lUjV4GLb92Qwk+mvToHqT+A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776368192; x=1776972992;
+ d=1e100.net; s=20251104; t=1776368206; x=1776973006;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Z3NhqLS/9XedvHvU4LSaUDbGntd933Usjc4Mky+SIRQ=;
- b=VgF/bFWe4QXCB+QT3ofhVVpDoCNYpMnc4TgySQILmDhzng3dtnOgRpTrMqHUvHTq7p
- ldtKdY3v2onX2pY/9BkRPCgkgJSSiPRR1mz2tDlALMG/1QMmdhyP9weXs+ubT2ySXXHq
- 5U/a6wpPv9rRRMDGn3oZM1g3UPEXLn3JfPtYDJkayl+s6OK9RCOsk4kWYgchbyUfQWjW
- GObtCJ02hIyolj0w/uFt8Fd+eAV4pguCU1HVgdpZMo41kr71YLWNFBKY7tBs9+xCHBHz
- RZq5oRWpuWQDn4Clj3UTKtQUgerV5u7aQvvDJJqrwo0Yx2m8fOXWz6OggGZUXEK61XNY
- 6Uzg==
+ bh=eDjf9DdFvk9B5T9ogRXGZDki9sdmBXN2s1JfKPWixME=;
+ b=WJjiWiKYNU+j8lOJPjyEGcFy3nK1B3o8YYJ7E4+PfQHMH1QIGH4yLE7yfjO7M6lWno
+ ILBGRyN2SCCSXkXtJupUvk+NBANGGg5Y1oJ3tRsuaQR3QkqfsfBjQvMS+01IK8JHM5vL
+ wHHQ+4lgIXYPMNNfTCCiipvNkY3KQCiJYmrNZQ7JXKNOId6LjCJT7j85ZBO62fcsykSL
+ KAGFXHGJTZVbTTYTSxfw2mVsODxWKbZPJDcMVpCY2jGxYuvVfp27GaRogphwYn/c17N5
+ rS37RPBsTs3TcRPXi0Y/77th4frdslG0HTsXiikL3IvZmiKv8hHWhx77dAbLz0+907OV
+ ob/Q==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+kiTWdg+Lvk8TdRgSZB+wMIenSarMhgAjSZHo3zFhNBi6hvRLHW8GwCvuryk+lJ+NP7H9wDjY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzJp4uif+HNCq7VWq5+tDOnmEueXHtUc5zRTbDI/3/1XVd6xZxu
- CuVcW7FMZTq0S98z2m56NqnRwgcRsjJLKBEzszXoYwDgQWkzrVE+eLRqsVd++uYn1MAKgxd/TTd
- pju6om04Y5xCpNDdU1ZyWDwwqTteQ2vVvZJOePAKE
-X-Gm-Gg: AeBDiet75x51ZdFhnck53X5hSefIA61fD76epmOCK70av0G4VHIRI8EXLBGfUmzxacC
- BPkPrZHwg0hz88RcMLPnULClomWXCpycBCsVXdd/NJTY/gtqeu+JqZ30riBIvGefBaPFYb+M0we
- eNQjP/CKQPPTEFaFzPQ8c8jpLA1Oy+0gPdlMtRvr7sd2qSAQjngEbwbaqn9a7uAj78byIQRb3Vb
- Z+e4v7TINSHyq1aaPOGiZHa8K/sqopTsFjvfLHa8eGJ6Y70dKzsTJ1i+sCyUBueZjepiC5NtOiD
- B5czcAvZfeg+9rwXgCX5
-X-Received: by 2002:a17:907:ca1e:b0:b9c:7ba2:4168 with SMTP id
- a640c23a62f3a-ba3dbfa3b3cmr33226566b.22.1776368191667; Thu, 16 Apr 2026
- 12:36:31 -0700 (PDT)
+ AFNElJ+sI9vA4DFMUeTVa1oW3NpN6V6TlLnX36lUSOL57NH3VEO0xCrHAnJe8C3YI1LKmtnl5F1cGJo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxcGWGSpp7xeScJB2jRbAOswEvjFbSzgSN9VqXnwPt66sFO8spy
+ eGMqC6uqnIu90y7Vsbi4GpQgtehReOiIoslWm0isA6jE3PGF0v+INRm2POfrYN/W1Ut4x+Agvpu
+ /wlFLu73mhoYJ+E9MQaFchL10f8SpZbEgT6N432z+
+X-Gm-Gg: AeBDievT2c08/uZbFcIOGvWt9ISK1vFTSpmSiDCN0iMBGuLjaeupHzjlWAvNlnfSjS7
+ D3T1DKgCMjMAytV0lJQvIUc5QEve+VQx3YUqraFUBzmbLEo3AEGP/RstISXQEXIyWf1stEWqskA
+ Pv57s3DnEfqwT8OG5iMk9SNYUmUes2ChMM45+ktxL/OEvPbCNdhh0sVbUSnjz3g1gDDmPvYNJxP
+ 6A3UiqREXO5POJ7j0UrIRTt4u/5/tvoDQZUiXId9ivnGmgcPKczKK1smad8qZaPGQzCxBUg462Z
+ /0HC8dE5caDxijqZtV4O
+X-Received: by 2002:a17:907:d490:b0:b9c:f70f:7211 with SMTP id
+ a640c23a62f3a-ba3de1c0476mr41412766b.44.1776368206285; Thu, 16 Apr 2026
+ 12:36:46 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1776302805.git.daniel@makrotopia.org>
- <9ceb70fcad4dec6efae1b03297f38665926b6c9f.1776302806.git.daniel@makrotopia.org>
-In-Reply-To: <9ceb70fcad4dec6efae1b03297f38665926b6c9f.1776302806.git.daniel@makrotopia.org>
+ <5945d65ed7d795cc753d76bc503a9c2e47fb6bb3.1776302806.git.daniel@makrotopia.org>
+In-Reply-To: <5945d65ed7d795cc753d76bc503a9c2e47fb6bb3.1776302806.git.daniel@makrotopia.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 17 Apr 2026 07:36:17 +1200
-X-Gm-Features: AQROBzBLcMlOH__2jB2VZTYEujRwuc5PY9q9rEdG_RVXaimb2WqKNV9q7NcBDuI
-Message-ID: <CAFLszThhPE9SPOHhjcukPUDsg4Yf+GtPhVWeHdsnKCQE1ysOSg@mail.gmail.com>
-Subject: Re: [PATCH v2 7/7] test: py: add mkimage dm-verity round-trip test
+Date: Fri, 17 Apr 2026 07:36:33 +1200
+X-Gm-Features: AQROBzCVS0MhhBPaCdn60ClPjHRxOY7sb_pDnLnAGMCBBXfwdlaQkXIkxrIDEFw
+Message-ID: <CAFLszTiW=ysumFM=H580CZEeH=Z6_EqJaNmpN5wwqGD+Csp=VA@mail.gmail.com>
+Subject: Re: [PATCH v2 4/7] tools: mkimage: add dm-verity Merkle-tree
+ generation
 To: daniel@makrotopia.org
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Quentin Schulz <quentin.schulz@cherry.de>,
@@ -133,39 +134,40 @@ X-Virus-Status: Clean
 Hi Daniel,
 
 On 2026-04-16T01:46:15, Daniel Golle <daniel@makrotopia.org> wrote:
-> test: py: add mkimage dm-verity round-trip test
+> tools: mkimage: add dm-verity Merkle-tree generation
 >
-> Add test/py/tests/test_fit_verity.py with two tests.
+> When mkimage encounters a dm-verity subnode inside a component image
+> node it now automatically invokes veritysetup(8) with --no-superblock
+> to generate the Merkle hash tree, screen-scrapes the Root hash and Salt
+> from the tool output, and writes the computed properties back into the
+> FIT blob.
 >
-> Both tests are skipped if veritysetup is not installed on the host.
+> The user only needs to specify algorithm, data-block-size, and
+> hash-block-size in the ITS; mkimage fills in digest, salt,
+> num-data-blocks, and hash-start-block.  Because --no-superblock is
+> used, hash-start-block equals num-data-blocks with no off-by-one.
 >
-> Signed-off-by: Daniel Golle <daniel@makrotopia.org>
+> The image data property is replaced with the expanded content (original
+> data followed directly by the hash tree) so that subsequent hash and
+> signature subnodes operate on the complete image.
 >
-> test/py/tests/test_fit_verity.py | 153 +++++++++++++++++++++++++++++++++++++++
->  1 file changed, 153 insertions(+)
+> fit_image_add_verification_data() is restructured into two passes:
+> dm-verity first (may grow data), then hashes and signatures.
+>
+> [...]
 
-> diff --git a/test/py/tests/test_fit_verity.py b/test/py/tests/test_fit_verity.py
-> @@ -0,0 +1,153 @@
-> +import struct
+> diff --git a/tools/image-host.c b/tools/image-host.c
+> @@ -626,6 +629,309 @@ int fit_image_cipher_data(const char *keydir, void *keydest,
+> +     uint32_t hash_start_block;
+> ...
+> +     /* hash tree starts immediately after data (no superblock) */
+> +     hash_start_block = hash_offset / hash_block_size;
 
-The struct import seems to be unused.
-
-> diff --git a/test/py/tests/test_fit_verity.py b/test/py/tests/test_fit_verity.py
-> @@ -0,0 +1,153 @@
-> +def have_veritysetup():
-> +    return shutil.which('veritysetup') is not None
-> +
-> +
-> +@pytest.mark.requiredtool('dtc')
-> +@pytest.mark.requiredtool('fdtget')
-> +@pytest.mark.skipif(not have_veritysetup(),
-> +                    reason='veritysetup not installed')
-> +def test_mkimage_verity(ubman):
-
-The test infrastructure supports
-@pytest.mark.requiredtool('veritysetup') which handles the skip
-message consistently. That also means you can drop the
-have_veritysetup() helper.
+The check for num_data_blocks overflowdoesn't protect against
+hash_start_block overflow when hash-block-size < data-block-size. For
+example, if data_block_size is 4096 and hash_block_size is 512,
+hash_start_block can be 8x larger than num_data_blocks. Please can you
+add a similar overflow check for hash_start_block?
 
 Regards,
 Simon
