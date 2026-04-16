@@ -4,93 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3C7BF8D765
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 18:54:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A219AF8D762
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 19:01:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4290884258;
-	Thu, 16 Apr 2026 20:54:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 1B87F84262;
+	Thu, 16 Apr 2026 21:01:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e3lVgawX";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oIodWqdI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3DA8E84258; Thu, 16 Apr 2026 20:54:39 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F004D8426C; Thu, 16 Apr 2026 21:01:30 +0200 (CEST)
+Received: from BL0PR03CU003.outbound.protection.outlook.com
+ (mail-eastusazlp170120007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c101::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E1AC84214
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 20:54:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1742084214
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 21:01:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b9c745e18a0so194296966b.1
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 11:54:37 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776365676; cv=none;
- d=google.com; s=arc-20240605;
- b=B3oSueBJP2LPgd/c+fmUi2ik0AciuCDr0lSvwKx9nJ0cA5xCM+rwBz/5IY9JXJg8/+
- 3Tw0rvbFM+wqAesdYRSuFiesDK2zcBt1AIyUbLsa1sq57rqFl5ydEqrf4Tq9zp/lhsWl
- Y26sH48xOvSS7Z1gXoJqpJA9HE3ou5NT9RiMgsqp2DlVjArX8982E0YKI+4oGBrqtStW
- PpaJm42ZoXViuHUbACIT4lSqhayt65kX/KB4f9CNGjBNPyje6z+n4zec0SLSpp5uixe4
- Ee7pjaAXM1nb5HJXXSoGWuWjhm4P48o2wScV3rHhdXSz/f+BrpDUZdPeM7nHaXwwM/fr
- 7eEQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=O87EEr1dp7ZFbzrcS6pYLvni5bcIMoCny/fPFcxfavU=;
- fh=8LbBtn3iNxQRuEgDTUB0nOZtFTCP6XN1/ZQVKWpSzFo=;
- b=lkRh9uRD/cvR+cgh7DQ8cdbFtrO6B/f8XFFuwNKwYceae7Ou8vZbb7noHFe9pkHHzF
- IJRSF+fompGd6LVGaKRaQVgut0jBPWn34GkVYAQkJ5nobCIvlFcgUxgds8J690FyL1Nj
- J9Upm8TbXNAzRCPMvQ3ZxWMxdF9nomUKuyi17SJzljaLNp82muZIkwbjEwwK4tBorSSY
- 6rvV8RA+GLUMKyzfe4yFHsCkviWCoPxUFT01gdRAlv7ZmXMk+VUU4DF5xYteXv9QRu8H
- SB4o/7kFRivNt3NuMlNeWjLYsImlo/VGCbM9y2LQYbiftbAPXq56cegk/0QeN77h/cvL
- dRYA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776365676; x=1776970476; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=O87EEr1dp7ZFbzrcS6pYLvni5bcIMoCny/fPFcxfavU=;
- b=e3lVgawX41DyhaNYHZXuIJ9bnkVYoVT2S3VK89+cX9kmkBnAq6Drv1ASDOW/2sc5/t
- FnqR3jA99tH2XQGgH11fGtv8JMGIMfpAPgJaCH7+FnOzx06aSxLuxKsmOcLPVoPApwFp
- 6DOGIsbuCDEsGAgpCt0za4Edu0oT6Bm2yRcO0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776365676; x=1776970476;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=O87EEr1dp7ZFbzrcS6pYLvni5bcIMoCny/fPFcxfavU=;
- b=OV1f7UCqqe2QHUkeJ/T7OFGGuUeg///kOEBwnIi+QX0I7owYK+x8q2Hfexq67pR2vY
- XCnfbNgWVEox4VNOzrJRqtDabhi02x+YIbvxf63pfVb8yXRNt7xhVv9kTObYpoFaQK1T
- ahWnzjvfrn9OpVYbMoRIcz37GqBPSiNxU1fCBKo71QW1qB8sC6xNhWp84RZVqEnWN+l7
- gSIEj3WReUWKkI6navY/qQQNB1WuRwQJJi1QpLP4EuORgMf99uON06XTlGJa1BuSspI5
- 2MlSWqCcwDfZB0cyb3MZWeY+ZkBahdpw/PmkHNqcYk6Su/exImwi3SEscfbF8N/jCD5P
- We5w==
-X-Gm-Message-State: AOJu0YwcfyFoFZIf4gQs5G4gXu7TYxK8FwjG/aBDWNtswwLA4ZsD2AyB
- wDXrxZVRHhxaASmbFkTD6IQ5C89/5qp9FGS7pg70NMPs3kDTOADj9m2m/vn4rex6Jsz/rJqhxYs
- 3CJspRf/RbbBWVXq8fSosUZ2TY134IY1Dy1Yy5vOUVglYmQ+t2UChgg==
-X-Gm-Gg: AeBDievpwc4lKO5+Wpv1900DXkBH/235rb2Y/C+eYW7yQ9i0/s5bU3gW7htj3pZLVuw
- AQ6lXzuEjORd+Z6ekV2vwcisIxjA/Pw55w0SmkX/uZPh/VBLcUWJipkdKQHJsurkrxYUQUQmrJE
- aZDAMYyzvovs+/MrGiM0ty2zWnIdFBPOzxaydLqNZjLMXULnm23FXjADMDeEljwCw2NWfC377sv
- 4iW6o78fpxo4nwQRRMUU9XAvVFhw8EdV8NUXDSK5/TfFJWnH/7vUD60NY6NeyPEfIH658sstmNR
- 0+dGiGdYjYd/VPqFJhw8
-X-Received: by 2002:a17:907:1b08:b0:b88:51cb:fd65 with SMTP id
- a640c23a62f3a-ba3e3503c36mr23927966b.3.1776365676409; Thu, 16 Apr 2026
- 11:54:36 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=yv0/TcgyViK2o+zoSf8SN3pVwo+QlLd1zn+ugZBX7J5QZy+BNQfILgMfMiPJzytdYhv/nb9/j9xPn0WXAbaiQ5fkJmRtkh4ndQXnruWbdpxgy4RqK8uAeEZmRensqCtaERpJ/5PRBwmMPk0YPFooCA27xKCfp+/iUG4tt6K8RyX1IiYSGO8mx3shmoB0lPKQDT8+HanORipxRfCcik7oGL4oDkGeaXzz6v7vgNbNvGN0XNdKrziIegOtM2oRooxy+P5idLFqwuqNQFqQMYezj1yP6nuoZ3Yise5eGksxnEjD6bf5QQWNl2blgRXWnJXt50nLmNMNS1tT54EazTN4Og==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bP0INy0aBwNMIR7npuFRCIE3agIVUi3VJTE3Xamr5zI=;
+ b=afI/WlRD9MkciJbRnQ6lvnCxHOuS1tFsjcFDbeNiU+TfwoggtbgF2XPdV4hR+Ik6x6AQ50B+TYKzM3PyxnyG4fHY7TzIVFoJxw8WzcmLlMlNqGMvgWedeqy7PtRRS24/NUQ5JhRo9B42L0hKw4g2QyBdobsmDw2/xUArG2CAAVukinD04URinnQgdM1V4eiDNnaRnUxvwoZ0v5Uu66LPJ/CWPATcTRDALXvgKoIeC+9QaaJGMjB+A2CGnVV8kD1t3Cop8hCbootObnpAqrCNVylh10JXAourHLE9A1oQaQYbbz1RnAnRjZ5EUHlonUElNW8zVOQ8w0u8th5SZzcLIQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bP0INy0aBwNMIR7npuFRCIE3agIVUi3VJTE3Xamr5zI=;
+ b=oIodWqdIHXMOgbtAodgAkcdQJo8L4h69hsbmBKXIdgKxTVA8A0z0xQmuT4LjP64k6AGQtijC5Q0yyJc1mEyBYtI5sbDrTRrLdVZ1nXu6jmSBZ51FCdUjTLtkWdoS0935i2oZu2XWDnOpjmxtmQDGWOgwJFy4qWnlFTpDxa9Q+LM=
+Received: from SJ0PR03CA0255.namprd03.prod.outlook.com (2603:10b6:a03:3a0::20)
+ by DS7PR10MB5071.namprd10.prod.outlook.com (2603:10b6:5:3a1::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.25; Thu, 16 Apr
+ 2026 19:01:24 +0000
+Received: from BY1PEPF0001AE1B.namprd04.prod.outlook.com
+ (2603:10b6:a03:3a0:cafe::44) by SJ0PR03CA0255.outlook.office365.com
+ (2603:10b6:a03:3a0::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.52 via Frontend Transport; Thu,
+ 16 Apr 2026 19:01:23 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ BY1PEPF0001AE1B.mail.protection.outlook.com (10.167.242.103) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9769.17 via Frontend Transport; Thu, 16 Apr 2026 19:01:22 +0000
+Received: from DFLE208.ent.ti.com (10.64.6.66) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 16 Apr
+ 2026 14:01:16 -0500
+Received: from DFLE211.ent.ti.com (10.64.6.69) by DFLE208.ent.ti.com
+ (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 16 Apr
+ 2026 14:01:16 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE211.ent.ti.com
+ (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 16 Apr 2026 14:01:16 -0500
+Received: from localhost (rs-desk.dhcp.ti.com [128.247.81.39])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63GJ1G7m327669;
+ Thu, 16 Apr 2026 14:01:16 -0500
 MIME-Version: 1.0
-References: <20260415190321.120706-1-ssrane_b23@ee.vjti.ac.in>
-In-Reply-To: <20260415190321.120706-1-ssrane_b23@ee.vjti.ac.in>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 17 Apr 2026 06:54:23 +1200
-X-Gm-Features: AQROBzAnfaDAuM8pVeJqFdVQBlK9DU4qD2jjlCP7li_dbrweKBh-RQUUZsPA9-M
-Message-ID: <CAFLszTi-s_XZgoFN4avxDn2sjo8MPGyLmC=stLC1ZGbsgkWOng@mail.gmail.com>
-Subject: Re: [PATCH] video: bridge: add ITE IT66121 DPI-to-HDMI bridge driver
-To: ssrane_b23@ee.vjti.ac.in
-Cc: u-boot@lists.denx.de, jd@denx.de, tl@denx.de, trini@konsulko.com
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="UTF-8"
+Date: Thu, 16 Apr 2026 14:01:16 -0500
+Message-ID: <DHUT7XN85MRK.18B9QGYDHEPIB@ti.com>
+CC: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
+ <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
+ <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
+ <u-boot@lists.denx.de>
+Subject: Re: [PATCHv3 6/6] memory: reserve from start_addr_sp to end_addr_sp
+From: Randolph Sapp <rs@ti.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, <rs@ti.com>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20260413203555.1990337-1-rs@ti.com>
+ <20260413203555.1990337-7-rs@ti.com>
+ <CAC_iWj+2=ajV0cXFT6a5Y2oqtTwcaPRcpkYqTbu4o+jbFmX+5w@mail.gmail.com>
+In-Reply-To: <CAC_iWj+2=ajV0cXFT6a5Y2oqtTwcaPRcpkYqTbu4o+jbFmX+5w@mail.gmail.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BY1PEPF0001AE1B:EE_|DS7PR10MB5071:EE_
+X-MS-Office365-Filtering-Correlation-Id: 866cef8e-a831-4af3-1e6f-08de9bea8d0e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|1800799024|82310400026|36860700016|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: vRo9a7wrjr+ECieMOgLNbNEUCKJ37q5KUTm7Fn61v6LWVVa1c50hb48D5sAq9685s6smkUlsdJ9likPonmORKtHX7TVNShBdnmAOkWADATKhITY8DOSBB4zA3eJEUugPBvcxXtnSpi9DnSy2VTrkhrzNaEu3Vp/KKQ8cLQKVDYqjAbG+PwsHTt/oTmCYMWmJA63QR9eb2WXnWz7ZwgscMx/JcfKZqCb4LT559SJl37fEOb+Gx/drB2fWHy+q1IKvRrZiTU97wm/7e8G/jxz5JswKHfVn9u5OUDROqFklVcpHPyb6hnZEUzUWkGmQAWe+cB2XglSRB3dsFsFIwQDAFXF+UUIpOibkfqo7LvokFYoSbK+FAQ9fSFsRvt60psjKSMI4PQSesP4m195aA16rpFhsvgCJEgp5JlLmSatTFL16GRDjJ8VBaTSgJmab5jYQYM7vh/7rQEOyjxGu58udkFawFzUQdBMHGLA+qjAiMjCGO0SQGje+xgdWJyy39NHegxZi6tKWUgj1t+iaz7PGk7RJlNstfJMFw6xPGPE211WBMG+czfTIJqic/Hz3s3VEWVFGwQxVfTuegKO8tA9oIBEHZ5FgrVHpKgPs4AA9KQUGGFnbVrAXOYlDbgz3/4N1JBvpxqEyqsGwJNdebariete7QZH+Hqu1W4Tj2KLvooDAE7bJ6FqyV5n/VSeWavaVhHijiNhzfrEcU7WvLqvpms5OE7Kyc5aowuV0OKkThfkxwWGqtDv+h1pzn1hKFn8swrr77PwugnN66iI+bK1Myw==
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(82310400026)(36860700016)(56012099003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: V8F5xk5VWsP78DYg6aE7DXKrvI86+JtNeYhswvYFJXmZcxop72iPX7+0cqKCpZcdiLDvB2kCFrjeiW1+jd1CJJCR8xpvOpYQ7jbjatixEL34pUSPco6sSXrLNRo/uPqBKMs3LfD3Z0OhdvB/PNOI8/hAHP1/N+9Z9+NaNYq9qAToEA1XeVweJ9w+hZYIZCe7EjBCgRD03yb4t299poT9lGacMPjoWMm771qk3SVNpqVjjt3eraw4yEEgapT8wJ7GaJjSUg+kAV1iH4aR5PjbPpp1qqcZeNBtDjA5dWQc2P4COy6blyVCSUHdqbRh6mYQUzPbEXOgo9BJZyjTeQBb+72/kEeoFuvnV5A0q1+S3HNMW/UvM6dwCe9Knen5kWKUk1Kp0O3wDxgr71m3MWtQOhiWIPi1tadYRzX4c7uPSsV9II51pKpt/ENc0lpUZBhE
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2026 19:01:22.2982 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 866cef8e-a831-4af3-1e6f-08de9bea8d0e
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BY1PEPF0001AE1B.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR10MB5071
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,98 +135,165 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Shaurya,
-
-On 2026-04-15T19:03:21, Shaurya Rane <ssrane_b23@ee.vjti.ac.in> wrote:
-> video: bridge: add ITE IT66121 DPI-to-HDMI bridge driver
+On Thu Apr 16, 2026 at 9:37 AM CDT, Ilias Apalodimas wrote:
+> Hi Randolph,
 >
-> Add support for the ITE IT66121 DPI-to-HDMI bridge chip. The IT66121
-> converts parallel RGB/DPI video input to HDMI output. It is found on
-> boards like the BeaglePlay where the TI AM625 SoC's DPI output is
-> routed to an HDMI connector through this chip.
 >
-> The driver is based on the IT66121 Programmer Guide and the Linux
-> kernel driver drivers/gpu/drm/bridge/ite-it66121.c.
+> On Mon, 13 Apr 2026 at 23:36, <rs@ti.com> wrote:
+>>
+>> From: Randolph Sapp <rs@ti.com>
+>>
+>> Add a new global data struct member called end_addr_sp. This stores the
+>> original value of relocaddr, directly from setup_dest_addr. This is
+>> specifically to avoid any adjustments made by other init functions.
+>>
+>> Reserve the memory from gd->start_addr_sp - CONFIG_STACK_SIZE to
+>> gd->end_addr_sp instead of gd->ram_top. This allows platform specific
+>> relocation addresses to work without unnecessarily painting over a large
+>> range.
+>>
 >
-> Tested on BeaglePlay hardware with HDMI output via TI TIDSS.
+> Is there a platform we can test the changes? Running the in QEMU had
+> no differences.
+
+Not yet. This is a mandatory requirement for pocketbeagle2, but otherwise t=
+he
+default behavior is the same as it ever was.
+
+You can change the relocation address in the function you snipped out below=
+ to
+an arbitrary value for testing.
+
+>> Signed-off-by: Randolph Sapp <rs@ti.com>
+>> ---
 >
-> Signed-off-by: Shaurya Rane <ssrane_b23@ee.vjti.ac.in>
+> [...]
 >
-> drivers/video/bridge/Kconfig   |  10 +
->  drivers/video/bridge/Makefile  |   1 +
->  drivers/video/bridge/it66121.c | 535 +++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 546 insertions(+)
+>>  #ifdef CFG_PRAM
+>> diff --git a/include/asm-generic/global_data.h b/include/asm-generic/glo=
+bal_data.h
+>> index 745d2c3a966..2f3ef26a17c 100644
+>> --- a/include/asm-generic/global_data.h
+>> +++ b/include/asm-generic/global_data.h
+>> @@ -115,6 +115,12 @@ struct global_data {
+>>          * @start_addr_sp: initial stack pointer address
+>>          */
+>>         unsigned long start_addr_sp;
+>> +       /**
+>> +        * @end_addr_sp: the end of memory currently in use by uboot,
+>> +        *               should be the original value of the relocaddr b=
+efore
+>> +        *               any other allocations shift it
+>> +        */
+>> +       unsigned long end_addr_sp;
+>>         /**
+>>          * @reloc_off: relocation offset
+>>          */
+>> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+>> index b3b292ebf56..bd0d875a8cd 100644
+>> --- a/lib/efi_loader/efi_memory.c
+>> +++ b/lib/efi_loader/efi_memory.c
+>> @@ -870,8 +870,8 @@ static void add_u_boot_and_runtime(void)
+>>         /* Add U-Boot */
+>>         uboot_start =3D ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
+>>                        uboot_stack_size) & ~EFI_PAGE_MASK;
+>> -       uboot_pages =3D ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
+>> -                      uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
+>> +       uboot_pages =3D ((gd->end_addr_sp - uboot_start) + EFI_PAGE_MASK=
+) >>
+>> +                     EFI_PAGE_SHIFT;
+>
+> The map_sysmem dance is still needed here for sandbox.
+>
 
-General note: please use lower-case hex consistently.
+Why? We're not using that address directly. We're just trying to figure out=
+ how
+large the carveout region is.
 
-> diff --git a/drivers/video/bridge/it66121.c b/drivers/video/bridge/it66121.c
-> @@ -0,0 +1,535 @@
-> +#include <dm.h>
-> +#include <i2c.h>
-> +#include <edid.h>
-> +#include <log.h>
+There's not anything funky going on with the global data structure for sand=
+box
+functionality is there? LMB definitely didn't do anything to account for th=
+at.
 
-Does this need linux/bitops.h for the BIT() macro?
+>>         efi_update_memory_map(uboot_start, uboot_pages, EFI_BOOT_SERVICE=
+S_CODE,
+>>                               false, false);
+>>  #if defined(__aarch64__)
+>> diff --git a/lib/lmb.c b/lib/lmb.c
+>> index 7ecc548d831..da61b005154 100644
+>> --- a/lib/lmb.c
+>> +++ b/lib/lmb.c
+>> @@ -534,46 +534,19 @@ static long lmb_reserve(phys_addr_t base, phys_siz=
+e_t size, u32 flags)
+>>
+>>  static void lmb_reserve_uboot_region(void)
+>>  {
+>> -       int bank;
+>> -       ulong end, bank_end;
+>> +       ulong size;
+>>         phys_addr_t rsv_start;
+>> -       ulong pram =3D 0;
+>>
+>>         rsv_start =3D gd->start_addr_sp - CONFIG_STACK_SIZE;
+>> -       end =3D gd->ram_top;
+>> +       size =3D gd->end_addr_sp - rsv_start;
+>>
+>> -       /*
+>> -        * Reserve memory from aligned address below the bottom of U-Boo=
+t stack
+>> -        * until end of RAM area to prevent LMB from overwriting that me=
+mory.
+>> -        */
+>> -       debug("## Current stack ends at 0x%08lx ", (ulong)rsv_start);
+>> -
+>> -#ifdef CFG_PRAM
+>> -       pram =3D env_get_ulong("pram", 10, CFG_PRAM);
+>> -       pram =3D pram << 10; /* size is in kB */
+>> -#endif
+>
+> This functionality is removed, but we still have boards defining CFG_PRAM
 
-> +static int it66121_setup_afe(struct udevice *dev, unsigned long pclk_khz)
-> +{
-> +     int ret;
-> +
-> +     ret = it66121_reg_write(dev, IT66121_AFE_DRV_REG, IT66121_AFE_DRV_RST);
-> +     if (ret)
-> +             return ret;
-> +
-> +     if (pclk_khz > 80000) {
-> +             ret = it66121_reg_set(dev, IT66121_AFE_XP_REG, 0x90, 0x80);
-> +             if (ret)
-> +                     return ret;
-> +             ret = it66121_reg_set(dev, IT66121_AFE_IP_REG, 0x89, 0x80);
-> +             if (ret)
-> +                     return ret;
-> +             ret = it66121_reg_set(dev, IT66121_AFE_XP_EC1, 0x10, 0x00);
+The PRAM allocation occurs before this, and it is carved out of the region
+covered by start_addr_sp through end_addr_sp. It's actually part of the rea=
+son I
+needed to add end_addr_sp, as it moves the relocation address pointer. We d=
+on't
+need to account for it separately now.
 
-Please can you add named defines for these bit fields (0x90, 0x89,
-0x80, 0x10, 0x09, etc.) so it is clear what each AFE setting does. A
-brief comment referencing the programming guide section would also
-help.
+>> +       debug("## Current stack ends at 0x%08lx\n", (ulong)rsv_start);
+>>
+>> -       for (bank =3D 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+>> -               if (!gd->bd->bi_dram[bank].size ||
+>> -                   rsv_start < gd->bd->bi_dram[bank].start)
+>> -                       continue;
+>> -               /* Watch out for RAM at end of address space! */
+>> -               bank_end =3D gd->bd->bi_dram[bank].start +
+>> -                       gd->bd->bi_dram[bank].size - 1;
+>> -               if (rsv_start > bank_end)
+>> -                       continue;
+>> -               if (bank_end > end)
+>> -                       bank_end =3D end - 1;
+>> -
+>> -               lmb_reserve(rsv_start, bank_end - rsv_start - pram + 1,
+>> +       if (gd->flags & GD_FLG_SKIP_RELOC)
+>> +               lmb_reserve((phys_addr_t)(uintptr_t)_start, gd->mon_len,
+>>                             LMB_NOOVERWRITE);
+>> -
+>> -               if (gd->flags & GD_FLG_SKIP_RELOC)
+>> -                       lmb_reserve((phys_addr_t)(uintptr_t)_start,
+>> -                                   gd->mon_len, LMB_NOOVERWRITE);
+>> -
+>> -               break;
+>> -       }
+>> +       else
+>> +               lmb_reserve(rsv_start, size, LMB_NOOVERWRITE);
+>>  }
+>>
+>>  static void lmb_reserve_common(void *fdt_blob)
+>> --
+>> 2.53.0
+>>
+>
+> Thanks
+> /Ilias
 
-> +     /* Preferred DTD pixel clock: bytes 54-55, units of 10 kHz. */
-> +     pclk_khz = ((unsigned long)priv->edid[55] << 8 |
-> +                  priv->edid[54]) * 10;
-
-Please can you use EDID_DETAILED_TIMING_PIXEL_CLOCK() from edid.h (or
-edid_get_timing()) rather than open-coding the EDID parsing.
-
-> +static int it66121_attach(struct udevice *dev)
-> +{
-> +     struct it66121_priv *priv = dev_get_priv(dev);
-> +     unsigned long pclk_khz;
-> +     u8 status;
-> +     int ret;
-> +
-> +     ret = video_bridge_set_active(dev, true);
-> +     if (ret) {
-> +             debug("IT66121: set_active failed: %d\n", ret);
-> +             return ret;
-> +     }
-
-Just to check: video_bridge_set_active() returns 0 if the GPIOs are
-not specified in DT. If BeaglePlay does not define reset-gpios, this
-returns 0 but does not reset the chip. Is this intentional?
-
-> +     if (pclk_khz > 0) {
-> +             debug("IT66121: configuring video for %lu kHz pclk\n",
-> +                   pclk_khz);
-> +             ret = it66121_setup_video(dev, pclk_khz);
-> +             if (ret)
-> +                     debug("IT66121: setup_video failed: %d\n", ret);
-> +     }
-> +
-> +     return 0;
-
-If it66121_setup_video() fails you log it but return 0. Should this
-return ret instead? If the failure is intentionally non-fatal, please
-add a comment.
-
-Regards,
-Simon
