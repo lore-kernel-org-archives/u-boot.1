@@ -4,88 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 401D7F433F7
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 06:00:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A880F433F7
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 06:00:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 311F184206;
+	by phobos.denx.de (Postfix) with ESMTP id D64F884223;
 	Thu, 16 Apr 2026 08:00:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="USypUPpU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ckw5Ihvw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 089B584206; Thu, 16 Apr 2026 08:00:12 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 19D7A84201; Thu, 16 Apr 2026 08:00:12 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A55483C2B
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 08:00:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D65583EEF
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 08:00:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-488c2690057so76093375e9.0
- for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 23:00:07 -0700 (PDT)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-488b0e1b870so115958765e9.2
+ for <u-boot@lists.denx.de>; Wed, 15 Apr 2026 23:00:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1776319206; x=1776924006; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zIRukHnnD2yRthhxfE5asPyAnbq119C7lGxwUlkI2W4=;
- b=USypUPpU5HE9kES0tjNojaEc5ORTf6sDagU1PufnQ5F+ROgggzPYgJJ/hSs6P2avkN
- 1pd0I44s1Hx381cUsmO18xWn8xTctRyym5OySP9d9scj0X+sVxV7BBsk/ZMShhGX84bu
- WutmhBXiuSFcsBsh9+omybEBQbtIxoe6RaFi8OT9rfgyyRNAfVxIHC0NR60OHrosMTgo
- /Gm5GDY8I+sSfs0KdU0sLU2N8uidu9w19/EvO0kGsWZRdIc2mCZtidje7NA+C+ipQp2e
- 8CJ7Ii7pdLoH/74queAJrqEP72abD1GDPQgyeoUramiwLYjkJ8rAWbC3RJHrVskTQ1kj
- Pk/Q==
+ d=linaro.org; s=google; t=1776319203; x=1776924003; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=CCF/3EVkveJ+XgJRIPLOUq6kXS5gNJyu3G/VrZyd0As=;
+ b=Ckw5IhvwNhxNNkqSihS3Hoyay0Uuugt5UWQFtTefAFDYawslY8Mr4blC3bFfF0Z8KC
+ B9NEKZisXLmD94B1QCVEnwBTkvkl6xz8aKzptr8HwGm2ew7l1/qlQ2A+qL866WFMQYUi
+ enUaID6vMJf2oERJ41PsHmnxiDTaWQPZoPCJHr/GkfoPgTUfP/a7314FGHxsRXjKMIPM
+ DpAMEBohKXrdyq7FdQIIg0+hn/+xVkGxMo6B3A2I7BzGq8uvXtZTKMmyr3ukTxdxaVwD
+ x73VUjMXVIkqdjgX96PmHy884e1qgtj6BQqTysPIzVqADIr6LK5zb3nQXZifDlqH0Gbp
+ PRlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776319206; x=1776924006;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=zIRukHnnD2yRthhxfE5asPyAnbq119C7lGxwUlkI2W4=;
- b=AMLMcPlIGFtgm0WuDTnM1eizZq92KCFpePCfYc3/RcN+h8TN4jVA/x7ByHdbEGe1kv
- kzaduCKZ3ogBjVGd38oWhX6Tm27DofShLYfW8f9aFltVxGt6UGerllFYB3fmoNq5XIBM
- tRXhmWRmC+jXy03vHzQSZV/qcjHTleILtSaT2znxMJ5tDxd8QcEy/Hrl8uSpN/rhQBzZ
- HhQo1wCA/PZllG+aSEdvjAyLxZ92JrpJOJZSy2H5qtugryH3O4PNy9WXOaBajLCcdY13
- 3/nO2WUWh97oLGM3OTZhH61znKuxXDtIwYCUNjQwjOEY0OUCStvOCIT8f5Uphvs0y2wB
- SYMw==
+ d=1e100.net; s=20251104; t=1776319203; x=1776924003;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CCF/3EVkveJ+XgJRIPLOUq6kXS5gNJyu3G/VrZyd0As=;
+ b=JF+UN504XTQThF3zg0SMWdUJBqCBGnu0G7yrLzUmeWQJSXHaP4eTwgMvua8AYGdr3T
+ tXc/841HSWcUVFLUfldnqPEdi4NseVhZdJP6JRJ4enb5U0Ra+1sNoiLQ5F12KyyP7u+p
+ s2aUMVViiUwnKlxQIoWf3RkIVbZ+LtjF5r9mxJNwNfHMiARGAJBIUsgDvIAoUFGYTJxa
+ M9tG/3H6QSpAZpNrDt+oa6ywgSC/RfsbUe0YXmArAPYdd943oM7XpbHFHS8JTLlsdPxc
+ oVxqeqGiScKx72ve1C0i7hU28QE2169+2n7hPkQjXst31uGmWjmopy3J+SYG1dYWoOB2
+ qdlw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/UUrlBNztjqnjv/tUellyDSjFmqA+lKMHFmx6ueB544HSNEKDJIc5+2ek7zV2E1yexK3BF6EA=@lists.denx.de
-X-Gm-Message-State: AOJu0YydUPqmRWdnS3F/WS32prhfqYeICvRL9r5qT5EyMJz3854rYrr1
- cZmj2Iz3wc1uGEsvVTnaz1aOWKpx2NXEjsBcXTnZU+fk74z48Ut8ENhY/2yw4hKXvPs=
-X-Gm-Gg: AeBDietuBpkfAL0R0E6wcbwVlNtpl1HTt9pBZMt7ZVaR8mjTkISrZUUacBqpHTZnA8w
- 4gdca9SvVodHtX7K2jJJEDogORut9Y5elPajN9NxhVz/UvoFVcKtQX4oXR3RDgZVU7Db8k+bBVn
- l3785JY7NTos+yHTP5nGu3n57cyHMiAPI181UFZRgrOwQGBMzJ+m8qVg9nNiC9lfUxfsjRTOYmh
- 8ugnPCtsVdBW316kTz6cwV7VgLZ6Cnf0p0dU1i/5z7cBOlFEBc7VTu09JhomszXqWVIMXBv5Ynj
- GezfzwU+0L+1Swuu6WT8Xx+HDwE/T4xDBsQXPSk0oyxq2EHm0sYfQ2EVfrUPQxao1M3VQjNGCIl
- +T9wAGb+H2Uzwrukjzoc0L5F9ee+LkPMFSDOyp2xuzOTuVzsiLtYWsjOVcXORxxtnW3aMfJAMlZ
- PUcQSSBcxIa1USK8VJDsw0YgqGPD0A4WZL/JyQ/0cy8caM1f2YibZ0NChH/WZsQOXbq15AJ0j7s
- pKeP1oBf19aniBL5NRW/zywcT4kasYLS97UdQZiUpG39K1ddm8Q03rsAKp36RqPNiyIjL1qhjIa
- 3cFh5GXiwDH1LJ/Bq1TR79RciV6rCR86Shh4R6nSaF3HikS7IjAD2fJ4Leiz50ULRubmBHZBG9W
- EbhR4MoOep89VdxOekFD/Tn/ddP7GMKwOJm7k99CgrC4/vQk91Ihg5bZOMPI8CVIQVASMmpaTp8
- 7Q869vXfECAcpgfYu1YjO42i4pPNIqzp/kqeqCWEAkEh71yE23pOdnWJr3p8iI
-X-Received: by 2002:a05:600c:8b84:b0:486:ffa3:594 with SMTP id
- 5b1f17b1804b1-488f71cef2fmr1598335e9.23.1776319205445; 
- Wed, 15 Apr 2026 23:00:05 -0700 (PDT)
+ AFNElJ9ImAbHs80i7rT2XVq7zjiUQsHevRI369Qn/WTWaDOGwQcLvIURT77sVBGnEgarQhOXOqCX/xU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwkX4HNOgKZgSGJ30J7keWnP6LK9uLzfAAQihCNGUxtX+BCaUif
+ 1iQSt64AqXgvO5jrNCLQbZQJvGNR3EwJ4dtUwi5MUHVcCJItr2u3d0HrIIPhnfBqvzE=
+X-Gm-Gg: AeBDiesnGMLvyGt1R+cr+ghciJNqYfx6d56G1l84yYyR39RoLRfe4xjFdVcfDfXaUVh
+ MvrkmNMjXRxPb1sFkVRwBthcK8yL9sxXZPxQYsBMUVGWwfgj1BaCCJe08p7cDlxtgqf/IkLK9x6
+ o0NWZLWAMvfAhWdk/fcAjqc/XNyEazqi7pbIuTGJ9nJWQZzL8+RMEWR7UQPqGhqE0lAQxG6q6UV
+ +H6vMqfekLY9h4yBadNTpa9jadD0h2IwLKT76OwkmUmFgbTE18/iIuTdsa/Iq749q1w2lxE1P26
+ i3AxxE3ynYI/B4+454jGgoKdH3ncXmqXV1EgZzwjHkguRdqEHE0IzURcm86F/0dTfRjvdoz7SJ3
+ K6Ydb8AJJdX3gfgvoSWg8UlxjTnwsOnNhzbeFNj84MM02LFj3FoJEXzQ9+RI2bsia5smgkRqFoi
+ gUafqq0ijWXJBfYreBTplhBzGRRP1cPtQIsvPE0Gsj/PoQqKrX7nGpd3vktkwTIFKYjG/fRsaIK
+ wSotkWHnyDbyi/l7DjsMMUT5lvrKri3ZIhHgjHLF+qW4HJl9fvHXAdyut9P5ITKYTw05l5kUoEV
+ dnIvK21M0BKRRm7Gkkl+51zGBNRgo29iWIhZSUb1QyhAd6Rv5RW7naaVz0SDIEDV2xOm24TTXeK
+ HGO88f17M+uI8b3dCou2b33ADyC+JD8MkJy1qB5I7ZJQ1E1LCQYaiCHkclK3GCQUx0KaUNek2aa
+ 8yVJ+aohk+zU2kmqgrS/7zhcQ3MDzkIJNdAGSX0q1weIrEg6Lf750FtTJr8i4o6J8CDoKB3xI=
+X-Received: by 2002:a05:600c:4504:b0:485:3b9e:caa7 with SMTP id
+ 5b1f17b1804b1-488d6864f6dmr335060405e9.23.1776319203353; 
+ Wed, 15 Apr 2026 23:00:03 -0700 (PDT)
 Received: from hera ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488f0e9a770sm36379755e9.19.2026.04.15.23.00.04
+ 5b1f17b1804b1-488f0e9a770sm36379755e9.19.2026.04.15.23.00.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Apr 2026 23:00:04 -0700 (PDT)
+ Wed, 15 Apr 2026 23:00:02 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: trini@konsulko.com
 Cc: marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, anshuld@ti.com,
  sjg@chromium.org, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  u-boot@lists.denx.de
-Subject: [PATCH v2 1/6] fdtdec: Deduplicate iterator function
-Date: Thu, 16 Apr 2026 08:59:37 +0300
-Message-ID: <20260416055948.130041-2-ilias.apalodimas@linaro.org>
+Subject: [PATCH v2 0/6] Relocate U-Boot in the last bank
+Date: Thu, 16 Apr 2026 08:59:36 +0300
+Message-ID: <20260416055948.130041-1-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260416055948.130041-1-ilias.apalodimas@linaro.org>
-References: <20260416055948.130041-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -104,130 +101,273 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Hi This is v2 of [1]!
 
-Both fdtdec_setup_memory_banksize() and fdtdec_setup_mem_size_base_lowest()
-implement the exact same iterator over all memory banks, the only difference
-is the body that is executed for each bank. Deduplicate the functionality
-into iterator function fdtdec_setup_mem_for_each_bank(), which takes a
-function pointer to a function which implements the body as a parameter.
-No functional change.
+There was a discussion recently on the mailing lists regarding our
+management of memory above ram_top [0]. The tl;dr is that we have two problems.
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Reviewed-by: Anshul Dalal <anshuld@ti.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
- lib/fdtdec.c | 77 ++++++++++++++++++++--------------------------------
- 1 file changed, 30 insertions(+), 47 deletions(-)
+The first one is that U-Boot always relocates to the top of the first available
+bank unless there's special board code to sidestep that. The second is we don't
+successfully deal with devices that can only do 32-bit DMA.
 
-diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-index fb3375ea157e..9c35b08e709f 100644
---- a/lib/fdtdec.c
-+++ b/lib/fdtdec.c
-@@ -1096,7 +1096,7 @@ ofnode fdtdec_get_next_memory_node(ofnode mem)
- 	return get_next_memory_node(mem);
- }
- 
--int fdtdec_setup_memory_banksize(void)
-+static int fdtdec_setup_mem_for_each_bank(void (*bankfn)(struct resource *res, int bank))
- {
- 	int bank, ret, reg = 0;
- 	struct resource res;
-@@ -1124,63 +1124,46 @@ int fdtdec_setup_memory_banksize(void)
- 		if (ret != 0)
- 			return -EINVAL;
- 
--		gd->bd->bi_dram[bank].start = (phys_addr_t)res.start;
--		gd->bd->bi_dram[bank].size =
--			(phys_size_t)(res.end - res.start + 1);
--
--		debug("%s: DRAM Bank #%d: start = %pap, size = %pap\n",
--		      __func__, bank,
--		      &gd->bd->bi_dram[bank].start,
--		      &gd->bd->bi_dram[bank].size);
-+		bankfn(&res, bank);
- 	}
- 
- 	return 0;
- }
- 
--int fdtdec_setup_mem_size_base_lowest(void)
-+static void fdtdec_setup_memory_banksize_bankfn(struct resource *res, int bank)
- {
--	int bank, ret, reg = 0;
--	struct resource res;
--	unsigned long base;
--	phys_size_t size;
--	ofnode mem = ofnode_null();
-+	gd->bd->bi_dram[bank].start = (phys_addr_t)res->start;
-+	gd->bd->bi_dram[bank].size = (phys_size_t)(res->end - res->start + 1);
- 
--	gd->ram_base = (unsigned long)~0;
--
--	mem = get_next_memory_node(mem);
--	if (!ofnode_valid(mem)) {
--		debug("%s: Missing /memory node\n", __func__);
--		return -EINVAL;
--	}
--
--	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
--		ret = ofnode_read_resource(mem, reg++, &res);
--		if (ret < 0) {
--			reg = 0;
--			mem = get_next_memory_node(mem);
--			if (!ofnode_valid(mem))
--				break;
--
--			ret = ofnode_read_resource(mem, reg++, &res);
--			if (ret < 0)
--				break;
--		}
--
--		if (ret != 0)
--			return -EINVAL;
-+	debug("%s: DRAM Bank #%d: start = 0x%llx, size = 0x%llx\n",
-+	      __func__, bank,
-+	      (unsigned long long)gd->bd->bi_dram[bank].start,
-+	      (unsigned long long)gd->bd->bi_dram[bank].size);
-+}
- 
--		base = (unsigned long)res.start;
--		size = (phys_size_t)(res.end - res.start + 1);
-+int fdtdec_setup_memory_banksize(void)
-+{
-+	return fdtdec_setup_mem_for_each_bank(fdtdec_setup_memory_banksize_bankfn);
-+}
- 
--		if (gd->ram_base > base && size) {
--			gd->ram_base = base;
--			gd->ram_size = size;
--			debug("%s: Initial DRAM base %lx size %lx\n",
--			      __func__, base, (unsigned long)size);
--		}
-+static void fdtdec_setup_mem_size_base_lowest_bankfn(struct resource *res, int bank)
-+{
-+	unsigned long base = (unsigned long)res->start;
-+	phys_size_t size = (phys_size_t)(res->end - res->start + 1);
-+
-+	if (gd->ram_base > base && size) {
-+		gd->ram_base = base;
-+		gd->ram_size = size;
-+		debug("%s: Initial DRAM base %lx size %lx\n",
-+		      __func__, base, (unsigned long)size);
- 	}
-+}
- 
--	return 0;
-+int fdtdec_setup_mem_size_base_lowest(void)
-+{
-+	gd->ram_base = (unsigned long)~0;
-+
-+	return fdtdec_setup_mem_for_each_bank(fdtdec_setup_mem_size_base_lowest_bankfn);
- }
- 
- static int uncompress_blob(const void *src, ulong sz_src, void **dstp)
--- 
+This patch series deals with the first problem by adding a Kconfig option
+allowing platforms to relocate to the top of the last discovered bank.
+
+It's worth noting that this is easily testable with QEMU
+
+qemu-system-aarch64 -m 8192 -smp 2 -nographic -cpu cortex-a57 \
+    -machine virt,secure=off \
+    -bios u-boot.bin \
+    -device virtio-rng-pci \
+    -drive id=os,if=none,file="$image" \
+    -device virtio-blk-device,drive=os \
+    -object memory-backend-ram,id=ram0,size=4G \
+    -object memory-backend-ram,id=ram1,size=4G \
+    -numa node,memdev=ram0 \
+    -numa node,memdev=ram1
+
+# RELOCATE_LAST_BANK not set
+Hit any key to stop autoboot: 0
+=> bdinfo
+[...]
+relocaddr   = 0x000000013f66c000
+reloc off   = 0x000000013f66c000
+[...]
+lmb_dump_all:
+ memory.count = 0x1
+ memory[0]	[0x40000000-0x23fffffff], 0x200000000 bytes, flags: none
+ reserved.count = 0x2
+ reserved[0]	[0x13d507000-0x13d509fff], 0x3000 bytes, flags: no-notify, no-overwrite
+ reserved[1]	[0x13d50aff0-0x23fffffff], 0x102af5010 bytes, flags: no-overwrite
+devicetree  = board
+[...]
+TLB addr    = 0x000000013ffe0000
+irq_sp      = 0x000000013e50aff0
+sp start    = 0x000000013e50aff0
+Early malloc usage: e88 / 2000
+=>
+
+# RELOCATE_LAST_BANK enabled
+
+=> bdinfo
+[...]
+relocaddr   = 0x000000023f66c000
+reloc off   = 0x000000023f66c000
+[...]
+lmb_dump_all:
+ memory.count = 0x1
+ memory[0]	[0x40000000-0x23fffffff], 0x200000000 bytes, flags: none
+ reserved.count = 0x2
+ reserved[0]	[0x23d507000-0x23d509fff], 0x3000 bytes, flags: no-notify, no-overwrite
+ reserved[1]	[0x23d50aff0-0x23fffffff], 0x2af5010 bytes, flags: no-overwrite
+devicetree  = board
+[...]
+TLB addr    = 0x000000023ffe0000
+irq_sp      = 0x000000023e50aff0
+sp start    = 0x000000023e50aff0
+Early malloc usage: e88 / 2000
+=>
+
+Patch #1 - Clean up from Marek
+Patch #2 - Introduce fdtdec_setup_mem_ram_top() from Marek
+Patch #3 - The boilerplate code that moves bi_dram from bd to gd
+Patch #4 - Moves the ram_base calculation in its own initcall
+Patch #5 - Cleans up and prepares setup_dest_addr()
+Patch #6 - Adds the Kconfig option and code to allow us to relocate in top
+           memory banks
+
+[1] https://lore.kernel.org/u-boot/20260403090109.3564638-1-ilias.apalodimas@linaro.org/
+
+Changes since v1:
+- Rebased and added Marek's cleanup patches
+- Remove the ifdefery on patch #6 in favor of 'if (CONFIG_IS_ENABLED)'
+- Added a warning on the Kconfig message about breaking devices that
+  can't DMA to high memory
+- Added depends on EXPERT for relocatiing to the last bank
+- Using %llx instead of %llX on debug prints
+- Removed 2 remaining comments of bd->bi_dram[]
+- Collected Tested/Reviewed-by tags
+
+Ilias Apalodimas (4):
+  treewide: move bi_dram[] from bd to gd
+  common: move ram_base calculation to independent INITCALL()
+  common: Clean up setup_dest_addr()
+  common: Add an option to relocate on ram top
+
+Marek Vasut (2):
+  fdtdec: Deduplicate iterator function
+  fdtdec: Introduce fdtdec_setup_mem_ram_top() to determine end of
+    topmost DRAM bank
+
+ Kconfig                                       |  10 ++
+ api/api_platform.c                            |   4 +-
+ arch/arm/cpu/armv8/cache_v8.c                 |   6 +-
+ arch/arm/cpu/armv8/fsl-layerscape/cpu.c       | 116 +++++++++---------
+ arch/arm/lib/bootm-fdt.c                      |   5 +-
+ arch/arm/lib/bootm.c                          |   4 +-
+ arch/arm/lib/cache-cp15.c                     |   9 +-
+ arch/arm/lib/image.c                          |   2 +-
+ arch/arm/mach-airoha/an7581/init.c            |   8 +-
+ arch/arm/mach-apple/board.c                   |   4 +-
+ arch/arm/mach-davinci/misc.c                  |   4 +-
+ arch/arm/mach-imx/ele_ahab.c                  |   7 +-
+ arch/arm/mach-imx/imx8/ahab.c                 |   7 +-
+ arch/arm/mach-imx/imx8/cpu.c                  |  44 +++----
+ arch/arm/mach-imx/imx8m/soc.c                 |  24 ++--
+ arch/arm/mach-imx/imx8ulp/soc.c               |  20 +--
+ arch/arm/mach-imx/imx9/scmi/soc.c             |  24 ++--
+ arch/arm/mach-imx/imx9/soc.c                  |  24 ++--
+ arch/arm/mach-imx/mx5/mx53_dram.c             |   8 +-
+ arch/arm/mach-imx/spl.c                       |   4 +-
+ arch/arm/mach-k3/k3-ddr.c                     |   4 +-
+ arch/arm/mach-mvebu/alleycat5/cpu.c           |   4 +-
+ arch/arm/mach-mvebu/armada3700/cpu.c          |  10 +-
+ arch/arm/mach-mvebu/armada8k/dram.c           |  10 +-
+ arch/arm/mach-mvebu/dram.c                    |   6 +-
+ arch/arm/mach-omap2/am33xx/board.c            |   4 +-
+ arch/arm/mach-omap2/omap-cache.c              |   5 +-
+ arch/arm/mach-omap2/omap3/emif4.c             |   8 +-
+ arch/arm/mach-omap2/omap3/sdrc.c              |   8 +-
+ arch/arm/mach-owl/soc.c                       |   4 +-
+ arch/arm/mach-renesas/memmap-gen3.c           |   8 +-
+ arch/arm/mach-renesas/memmap-rzg2l.c          |   4 +-
+ arch/arm/mach-rockchip/rk3588/rk3588.c        |   8 +-
+ arch/arm/mach-rockchip/sdram.c                |  40 +++---
+ arch/arm/mach-snapdragon/board.c              |  12 +-
+ arch/arm/mach-socfpga/board.c                 |   5 +-
+ arch/arm/mach-socfpga/misc_arria10.c          |   7 +-
+ .../mach-stm32mp/cmd_stm32prog/stm32prog.c    |   4 +-
+ arch/arm/mach-stm32mp/stm32mp1/cpu.c          |   7 +-
+ arch/arm/mach-tegra/board2.c                  |  14 +--
+ arch/arm/mach-tegra/cboot.c                   |   4 +-
+ arch/arm/mach-uniphier/dram_init.c            |   6 +-
+ arch/arm/mach-uniphier/fdt-fixup.c            |   8 +-
+ arch/arm/mach-versal-net/cpu.c                |   8 +-
+ arch/arm/mach-versal/cpu.c                    |  16 +--
+ arch/arm/mach-versal2/cpu.c                   |   6 +-
+ arch/arm/mach-zynqmp/cpu.c                    |   8 +-
+ arch/mips/mach-octeon/dram.c                  |   4 +-
+ arch/riscv/cpu/k1/dram.c                      |  12 +-
+ arch/sandbox/cpu/spl.c                        |   4 +-
+ arch/x86/cpu/coreboot/sdram.c                 |   4 +-
+ arch/x86/cpu/efi/payload.c                    |   4 +-
+ arch/x86/cpu/efi/sdram.c                      |   4 +-
+ arch/x86/cpu/intel_common/mrc.c               |   4 +-
+ arch/x86/cpu/ivybridge/sdram_nop.c            |   4 +-
+ arch/x86/cpu/qemu/dram.c                      |   8 +-
+ arch/x86/cpu/quark/dram.c                     |   4 +-
+ arch/x86/cpu/slimbootloader/sdram.c           |   4 +-
+ arch/x86/cpu/tangier/sdram.c                  |   4 +-
+ arch/x86/lib/bootm.c                          |   5 +-
+ arch/x86/lib/fsp/fsp_dram.c                   |  18 +--
+ board/CZ.NIC/turris_1x/turris_1x.c            |  42 +++----
+ board/armltd/corstone1000/corstone1000.c      |   4 +-
+ board/armltd/integrator/integrator.c          |   4 +-
+ board/armltd/total_compute/total_compute.c    |   6 +-
+ board/armltd/vexpress/vexpress_common.c       |   8 +-
+ board/atmel/common/video_display.c            |   2 +-
+ .../sam9x60_curiosity/sam9x60_curiosity.c     |   2 +-
+ .../sam9x75_curiosity/sam9x75_curiosity.c     |   2 +-
+ .../atmel/sama5d27_som1_ek/sama5d27_som1_ek.c |   2 +-
+ .../sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c   |   2 +-
+ .../sama5d29_curiosity/sama5d29_curiosity.c   |   2 +-
+ .../atmel/sama5d2_xplained/sama5d2_xplained.c |   2 +-
+ .../sama7d65_curiosity/sama7d65_curiosity.c   |   2 +-
+ .../sama7g54_curiosity/sama7g54_curiosity.c   |   2 +-
+ board/broadcom/bcmns3/ns3.c                   |   4 +-
+ board/compulab/cm_fx6/cm_fx6.c                |  28 ++---
+ board/elgin/elgin_rv1108/elgin_rv1108.c       |   4 +-
+ board/esd/meesc/meesc.c                       |   4 +-
+ board/friendlyarm/nanopi2/board.c             |  10 +-
+ board/ge/mx53ppd/mx53ppd.c                    |   8 +-
+ board/hisilicon/hikey/hikey.c                 |  24 ++--
+ board/hisilicon/hikey960/hikey960.c           |   4 +-
+ board/hisilicon/poplar/poplar.c               |   4 +-
+ board/k+p/kp_imx53/kp_imx53.c                 |   4 +-
+ board/keymile/pg-wcom-ls102xa/ddr.c           |   4 +-
+ board/kontron/sl28/sl28.c                     |   4 +-
+ board/kontron/sl28/spl_atf.c                  |   6 +-
+ board/liebherr/btt/btt.c                      |   2 +-
+ board/menlo/m53menlo/m53menlo.c               |   8 +-
+ board/nuvoton/arbel_evb/arbel_evb.c           |  26 ++--
+ board/nxp/imxrt1020-evk/imxrt1020-evk.c       |   2 +-
+ board/nxp/imxrt1050-evk/imxrt1050-evk.c       |   2 +-
+ board/nxp/imxrt1170-evk/imxrt1170-evk.c       |   2 +-
+ board/nxp/ls1021aqds/ddr.c                    |   4 +-
+ board/nxp/ls1028a/ls1028a.c                   |  10 +-
+ board/nxp/ls1043aqds/ls1043aqds.c             |   8 +-
+ board/nxp/ls1043ardb/ls1043ardb.c             |   8 +-
+ board/nxp/ls1046afrwy/ls1046afrwy.c           |   8 +-
+ board/nxp/ls1046aqds/ls1046aqds.c             |   8 +-
+ board/nxp/ls1046ardb/ls1046ardb.c             |   8 +-
+ board/nxp/ls1088a/ls1088a.c                   |   6 +-
+ board/nxp/ls2080aqds/ls2080aqds.c             |  14 +--
+ board/nxp/ls2080ardb/ls2080ardb.c             |  14 +--
+ board/nxp/lx2160a/lx2160a.c                   |   6 +-
+ board/phytec/phycore_am62x/phycore-am62x.c    |  26 ++--
+ board/phytec/phycore_am64x/phycore-am64x.c    |  18 +--
+ board/phytium/durian/durian.c                 |   4 +-
+ board/phytium/pe2201/pe2201.c                 |   4 +-
+ board/raspberrypi/rpi/rpi.c                   |   4 +-
+ board/renesas/common/rcar64-common.c          |   6 +-
+ board/renesas/genmai/genmai.c                 |   4 +-
+ board/renesas/sparrowhawk/sparrowhawk.c       |   8 +-
+ board/ronetix/pm9261/pm9261.c                 |   4 +-
+ board/ronetix/pm9263/pm9263.c                 |   4 +-
+ board/ronetix/pm9g45/pm9g45.c                 |   4 +-
+ board/samsung/arndale/arndale.c               |   4 +-
+ board/samsung/common/board.c                  |   6 +-
+ board/samsung/exynos-mobile/exynos-mobile.c   |   4 +-
+ board/samsung/goni/goni.c                     |  12 +-
+ board/samsung/smdkc100/smdkc100.c             |   4 +-
+ board/samsung/smdkv310/smdkv310.c             |  16 +--
+ board/siemens/iot2050/board.c                 |  16 +--
+ board/socionext/developerbox/developerbox.c   |   6 +-
+ board/st/stih410-b2260/board.c                |   4 +-
+ board/ste/stemmy/stemmy.c                     |   4 +-
+ board/ti/dra7xx/evm.c                         |   8 +-
+ board/ti/ks2_evm/board.c                      |   4 +-
+ board/toradex/colibri_imx7/colibri_imx7.c     |   8 +-
+ board/toradex/verdin-am62/verdin-am62.c       |   2 +-
+ board/toradex/verdin-am62p/verdin-am62p.c     |   2 +-
+ board/traverse/ten64/ten64.c                  |   6 +-
+ board/xilinx/zynq/cmds.c                      |   6 +-
+ board/xilinx/zynqmp/zynqmp.c                  |   6 +-
+ boot/image-board.c                            |   2 +-
+ boot/image-fdt.c                              |   4 +-
+ cmd/bdinfo.c                                  |   6 +-
+ cmd/ti/ddr4.c                                 |   8 +-
+ cmd/ufetch.c                                  |   4 +-
+ common/board_f.c                              |  65 +++++++---
+ common/init/handoff.c                         |  10 +-
+ drivers/bootcount/bootcount_ram.c             |   4 +-
+ drivers/ddr/altera/sdram_agilex.c             |   4 +-
+ drivers/ddr/altera/sdram_agilex5.c            |  18 +--
+ drivers/ddr/altera/sdram_agilex7m.c           |   4 +-
+ drivers/ddr/altera/sdram_arria10.c            |  12 +-
+ drivers/ddr/altera/sdram_n5x.c                |   4 +-
+ drivers/ddr/altera/sdram_s10.c                |   4 +-
+ drivers/ddr/altera/sdram_soc64.c              |  28 ++---
+ drivers/mmc/mvebu_mmc.c                       |   4 +-
+ drivers/net/mvgbe.c                           |   4 +-
+ drivers/pci/pci-uclass.c                      |   8 +-
+ drivers/usb/host/ehci-marvell.c               |   4 +-
+ drivers/video/meson/meson_vpu.c               |   8 +-
+ drivers/video/sunxi/sunxi_de2.c               |   2 +-
+ drivers/video/sunxi/sunxi_display.c           |   2 +-
+ include/asm-generic/global_data.h             |   7 ++
+ include/asm-generic/u-boot.h                  |   4 -
+ include/configs/m53menlo.h                    |   4 +-
+ include/configs/mx53cx9020.h                  |   4 +-
+ include/configs/mx53loco.h                    |   4 +-
+ include/configs/mx53ppd.h                     |   4 +-
+ include/fdtdec.h                              |  23 +++-
+ include/init.h                                |   2 +-
+ lib/fdtdec.c                                  | 102 +++++++--------
+ lib/lmb.c                                     |  13 +-
+ test/cmd/bdinfo.c                             |   7 +-
+ 167 files changed, 802 insertions(+), 756 deletions(-)
+
+--
 2.53.0
 
