@@ -4,139 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9142AF8A154
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 09:55:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92029F8A154
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 10:14:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C03BD840AB;
-	Thu, 16 Apr 2026 11:55:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 42C3B840AB;
+	Thu, 16 Apr 2026 12:14:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="KOwHLmiH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TKBJQ9Ld";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F96084105; Thu, 16 Apr 2026 11:55:28 +0200 (CEST)
-Received: from SJ2PR03CU001.outbound.protection.outlook.com
- (mail-westusazlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c001::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 60E1F84105; Thu, 16 Apr 2026 12:14:01 +0200 (CEST)
+Received: from mail-yx1-xb132.google.com (mail-yx1-xb132.google.com
+ [IPv6:2607:f8b0:4864:20::b132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F1DE83FC0
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 11:55:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6854083FC0
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 12:13:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xccnXye9UGwc0B+qdqDON/5sq0xGVfJWBbkOKOu+sfophhA4EtryD0zryygh8e0yUTjhj7VsDyUc6Q28QOrya51JhIL/y4wO/TnyS02ZnfXy76Wpqr4JeRY1yMqd7Z2jUUsm3g282ZfOxTrw56CO6a43Ck+ISqjqsiNNouKU+o+/jZO7QJor/Y6xCLWcatwo0eIH8MvBqoWq1kyPp7m5KrekDDjK5FFHOMJSxC57kxd3DkIj7Ly6l0YhKirQoKb6d8nVXH9iWQYo6sTRMaVUHc8WPgN+8vxxcM5UVPCf1oI91ogIRMFml96uDHuy66GS0j2rQkgn4soD7TKelvDArA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KXdVoCE/Q0i8RHISDhiSd6EVb42/1o8jpwpVN/IRX9w=;
- b=Kyz8yyw93nvLXuKFPFI/fnGtidSQN3CgGYBI9gF0BJaQ+mCEgcIfbjRLlCiuE3hllVVdYJ/ZwBNMOGVI7DdF9l21XL33XPDj6gWxB/RPUEa6qzudxKjZSRqFbtIU4gDSBiPoxSpFN2/cAYARyrU65nCqbPKQm7mUy5x5wlmcImV1IVusjCkGvBFiJ80sJzr32MvM6Pxp5r7xaQEc4RsMsLMNVbQ6NTRW+E7zu4aDk5pLHdCk2TV9GprD5+iHuk33rixChyB3Z078OoZhE1pgvagENjdRlUtUBMcRobZL5dfikZK5Kit9CwPJYVYHGDTjrsAWQ3ZWLOAkHnzpaC+C8A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KXdVoCE/Q0i8RHISDhiSd6EVb42/1o8jpwpVN/IRX9w=;
- b=KOwHLmiH5Es7JAx0eKwxmELYlw/tE5uFYGWqGtrL+OXE+vWouhpfhxrSAuWl9q9pws0Nwko2QJsukeQz0uA005OTxlaWXs3kR6bHDWkXlbTLNgH5wVRqswPom83ETJKKtn9PwYB+Htls3GGXGU15PkS4/TKfFEn51JXCK+kXF7OUZmGiEwdHZ9CHYKxAUZHuy9wciezaP2QAxaMToDLF0oCHFDtIYAHofnT+M0/zTUAiN5J1oi42JoZCLsD9YM2mBzh1XG2a3nOtbh6lZYn6SpaVUwENvKKchqntsF2EaJeK1VF78J+RPw6Kb6/a0QA/5UStdHwD51R5mPMmIJ4hzA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
- by DM4PR03MB6207.namprd03.prod.outlook.com (2603:10b6:5:39b::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Thu, 16 Apr
- 2026 09:55:22 +0000
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::efa9:4b97:3b4a:8235]) by LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::efa9:4b97:3b4a:8235%6]) with mapi id 15.20.9818.017; Thu, 16 Apr 2026
- 09:55:21 +0000
-Message-ID: <a3245d64-3e7f-4179-aebc-439eb400b11a@altera.com>
-Date: Thu, 16 Apr 2026 17:55:12 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: dts: socfpga: n5x: Drop kernel node from binman
-To: dinesh.maniyam@altera.com, u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
- Kok Kiang <kok.kiang.hea@altera.com>, Boon Khai <boon.khai.ng@altera.com>,
- Alif <alif.zakuan.yuslaimi@altera.com>
-References: <20260311050224.23983-1-dinesh.maniyam@altera.com>
-Content-Language: en-US
-From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-In-Reply-To: <20260311050224.23983-1-dinesh.maniyam@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SI1PR02CA0038.apcprd02.prod.outlook.com
- (2603:1096:4:1f6::15) To LV8PR03MB8137.namprd03.prod.outlook.com
- (2603:10b6:408:295::8)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb132.google.com with SMTP id
+ 956f58d0204a3-651b2f46720so4710865d50.3
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 03:13:57 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776334436; cv=none;
+ d=google.com; s=arc-20240605;
+ b=RX7HkbWTHomPhu5Yy+OEAmh4rpm8PCp7e9ZwBOBpV6VrQhLAQD+kOSY/H/FNf7ae6E
+ gLh+3t5keukv5z+0T4HPCDTi52xgHqHYtegTwhs1997JOJpMIwtrfBFnewYrivE0ZbFM
+ 5yW+vVrrkZk/8koqL5YwkDL0+i3WPzZPYewcGAM6OPRYl6FFRB/1Q4YmMSfHu8pPGAh/
+ rwOzrr1ko0kyNsdDjcJq0tRzpbWQAJOEt5bpG5nlSNxCKGNTMSEi9+13VZbJvWmHWy6r
+ 1GHyfkk37hx5hDmJhYXkq00TXdDuy3bHDji/XDrn4Sa1Rn8dPVsdQ4kceYFpmqm1N74r
+ +7sA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=7WDP0wXgeEv34pcMvl4lHd0NEnLOGgOGU/ui1Tm87Tk=;
+ fh=a5DpevWUlMn0kvVgwFdhAszlAYlVweVm6c/7ek/0VX4=;
+ b=Vjle9cTXl2U/k19INqX5BrRjPCaMzU6tTUjmNSElGSqC2kPDlMnbmhM9+Iu01YIkyG
+ DY3E2WBUVZ1GaqgAj/mxTWorKlZgZwzz+Sd9YTg+KjJNdV27KYmH3BGnNDqs39ZdigBK
+ xUwD1Ejzmgu3Rdlv2MIFpjnCuFTQm/RcWM8B61kn2vWnR8sW4f0YnBCoMOUogcE9TqyF
+ Ki3g7jfbheP9bxI9mDPlnJIYRscZoccOPp4lNsggLteb5TJa/xJqnLCqciGHfqjrqwDd
+ 70C07X3yO97cPZgnl+++FCZc8Z80vRQjxBp3YhQLehHZKF7N+FytFCTFYu5Qcq2sohF1
+ ZBEg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1776334436; x=1776939236; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=7WDP0wXgeEv34pcMvl4lHd0NEnLOGgOGU/ui1Tm87Tk=;
+ b=TKBJQ9LdItsMCb1GKLaaDj2K5+5yrqNbEc2aRk6eaff/v+51vg+ccbsier3MpNsrty
+ PH2DatPww+O90xxGtjAPvK+NJmUPFRAT7zJVCWpZqQPZ8TmREQ6uz+ZsuQvex3LA34Hk
+ AfZ+1rAplM4tEKSLeMHx2kx7h8KPUNgDDkzGxbJrd9FsYZT5PWNAowZMBKncC+22u3Py
+ IcsX33BuxrzR4zZYTs7xp9lm2ys/c+2myNsGyykBK+afSkqw0nlvktY5bLq5wib3FXK/
+ mAMCS2yTAxK5CRNfUjnWn26D0xY6Ejre00Z+CHcZNhSt+hgJdkkzWvpoTeAOjAok3M7A
+ r0qw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776334436; x=1776939236;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7WDP0wXgeEv34pcMvl4lHd0NEnLOGgOGU/ui1Tm87Tk=;
+ b=az2iDMHBq9xhZ+IsRmPj/Jk7fuWBBzpvYatEUEjl3I8A6zoa2T828PbOz15og9ZMFK
+ gb+u/yZfwHukHU59nL/l0LsENWbBvSlsOrQz0v5L8IJf8s27JAY2/m4K2fqG7Q5H8/Gc
+ UnzvnFgraELeMyWvz6nnVSpxjDSehSKrhe5c/WTS4G3Uj5K19LgAXGBtRmhruiMad2A5
+ U/9jqYRGOqA+c9bpZ0cMaSheT0t7TiZZYLDJLzYS7b9BLyXaQo/L2ZfR1Alr3R4Tiwvi
+ dYeaHRGSWkXpP/aJD4UnH6WKe9G5VdKNe1yP+lZF1Ok6qxHPOInVsQQ1QXzfxJDlQkOJ
+ Ry8w==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9jaefOYcpPO5ars0wx8Q5/nqVpVXYPO2+4trlysM7mt9nVFwm1LUz1VB5F+BNKrSM4ccb/Jvc=@lists.denx.de
+X-Gm-Message-State: AOJu0YyomgHO3blR0latty2aTcLN2HRybe55UBIHZIpy6lM8qPaLy3D9
+ c8tRfcprRkXVeyTXzEN3qP+EgJPdu2wyBckN85sDMHof6F0wk3EVF7LhhXN5GUc4t6Wn09p5Kat
+ 6A9RHI9JJpI5qOa1DVGq4BSE4oxNGuSLmkry8HSP98Q==
+X-Gm-Gg: AeBDievOIGZvrSKUiYEEU6WkDQFAAdebNtTPjYdWsG2HPOYUigrr+Vkz08Asjli1ZTX
+ lSKUvXXan9t9dRopQI0NjmtgGXh3Q8zxHnexIAhZnQ/ynn5OrKkQO/WAuYiYTX0f/RhDTbL13gz
+ fSzXN8C/ejp55TtYIBxYZKjHQ51KtUgjnAqYDDI+vBb9yuZu/rWRnOTrgI5CQ9N7KIE2Wra2gAk
+ A/MMbCiJb6AI/reiCtOxBcYat8JKIBBktrEM+m2LGycDdqi4sXPP1Uddf9b3B2ym/why7Oa41U6
+ 12yrzX3fmF1Cuvbn5J69v59bPos1otq/PZsI2PtbtG6vmj6zI5sHrdf2h2WlrPDeAJLFKZ1XeGS
+ WCL20NhSvNyWT7a+9j8TDdnCsIK4kTsBkFzhBkWuT+OLYQKeVR6SknbIlG1XkpjTkjRMj2AWKG7
+ HJJxtE4kZifIQyAaVc1dbfMr338hX+CidoIn7/MVSuBS4SIwxbh+x4UHpn5SfFSc9sT2GtbGoCF
+ 2KrYVvHfo8WBVclLkX7X7JL8rX7dTedvtI92Y9uHKdeOpizy8Y1gCBfiFvRdL/Bdk9Kmsnlpo8n
+ +owbDkJHZC9HHEK95U3/A3mJqBkcm3ffKFPQ8rwRjOt7
+X-Received: by 2002:a05:690e:130a:b0:650:95e:2fc with SMTP id
+ 956f58d0204a3-65198b566f5mr24287525d50.40.1776334436048; Thu, 16 Apr 2026
+ 03:13:56 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV8PR03MB8137:EE_|DM4PR03MB6207:EE_
-X-MS-Office365-Filtering-Correlation-Id: b1748db4-6da8-4135-f0b2-08de9b9e45f3
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|376014|55112099003|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: VzYQqjr/zPPHNhng9LfypkBHKRLQk9/wtQvdkINGYpvgkZHRPAQyroXcxtnsN6ibHHXBuzZXaOlwV2Pk5Ufd/HmL+ItTR/+hb2sp18lxV4m6v+7mEBxGR2mfKBFrFSWLI2NxXtM+nlIRxStJT7/fzjNviYxGDX43u7K0Z8ubC7kKk4S50jhThQeRpG6Qvw9Xx4ZH1GDfaH6IxSh/ak75qNP2+1AlhKc/c1xIz9+YjGSCMtauLpMVXWxtiEiqbaKOtKJJXd7bTqHtVe/cOgJte7IU7vSsme/VGexlleI0RJk/Gh8oyuwYptwQC2ELY8x3CFq+D+EyhbXjXn6kzlVks2Gxvn296MKppkRbkpJH4vZ3EPw8KRz2Z544iuDZlcu4XesDG7MIApgt+qBWOhmB6amBskSoeAih7WZ1blmMcCTPOF2HuaEEWSN85ezMiznyI3JAzMNpQEUQJy4V/j/UO1Tb7nk+mOaEeuX5sx5LIkAuLPQ/hhm90gXzCBQjh1bek0/j/m//+byE0fBMhZV0lsLmdxTXNDgkex0jAg28qZeIiz5drTvXpjcWil781KrZkPLSaEYaGmhiF3UpEJDE15v9vOrfBq67npBwYnOZbVh5pjOaEhAGicL0kUoR1/W7kKv7Jc2EHFum7niv9aP31/y178285wpPgTVAhwaROjUeWn/DhueoKQqvxHdmKo0BD8kDSNbchRU34MyvhjDs08B5bncpvvAmQYQhUGwkAqM=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(55112099003)(56012099003)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VTZCcHBnblRwRDExaUkyVHc3aWxHQVlyT0hZWktmb2hObEJZeU1wbzlSbjlH?=
- =?utf-8?B?akhHZnE1ZmFyTC9BTHBGd1NmNG5zc2ZPcnRrWm1PdFdiaFpRd0VzS2JmMElm?=
- =?utf-8?B?c3E5QUVXQkJpRTZIMzNPWUVrQXBGUzkwS2VBZzI3aUQxeG9abStabnBTNGMz?=
- =?utf-8?B?QXZXRmozZUNGdEd5eFdxUSsxYmgrR1cvcjlJOFN6aGdXcXZ5ZWJ5ZVdlUmRn?=
- =?utf-8?B?N1BSWFhzNVk3RG85RUNsbk84REt4eVRrQTVpdDlNMUNVT1B0UGVCVGVkQnZu?=
- =?utf-8?B?aHVmTlZYVXAxVVdWVjBuMjd5aHV5c3p6OUEwVnZ1U3czUFZ5WWdrcS9SWDNJ?=
- =?utf-8?B?V0RsQURFc1FrUUtmRmxPek9raGFjdEJkVzNBVDk1ZmdwVkdIWWtvV0V5TmNW?=
- =?utf-8?B?T2tqVjNBbVZKcCtVTDlRMysyOVFsUFNuRWxVQ1NOU2dEYTF4eW1NVFV2aVhQ?=
- =?utf-8?B?QWVUcmM4azc4M3JFcFUyYVFQSHFrQXFqOVprSGNXRzh1ZHM2bThwTXpjSk5y?=
- =?utf-8?B?bkN4NUJxdmxyRnl4SGY2WVdUYjRPRnc4WFJteFA1RVpaUzFtMjNkZXB4ZEZs?=
- =?utf-8?B?L2RHVWFXT09VMGd0T2pJeCt2bTllUFF1Ukp3ak51ZE1MSzlEc2xxM1RYdFF6?=
- =?utf-8?B?c2UzQXNGRDhybjJMdnYzNXNRVE9XaFZuR0w0RHV2Y3pIQ2c2N1hVY0dEaE0y?=
- =?utf-8?B?bkQzOTZSK05JUHFNZkRtNW0rdHZudkdTOVV4RnFsTGZyNkdMTGtzRVNzUnFB?=
- =?utf-8?B?ZTh4eDdwWmlVYktnb2dPYTMzTGtJTjlaQlhJRzhoNENhUmpjZDREVXJ1MTZz?=
- =?utf-8?B?aVMwZXV6dVN5TGFSRU9LSlVYdlpDNFZlSC9hOUxsWi92K3JERWtKeFE5ZHow?=
- =?utf-8?B?TmsyVENobjR6VVJSa0YvMzRpUGl2ZngvUm9sSkttalFMSDJkWU1paG05R2JD?=
- =?utf-8?B?UzdCdlRZN1RLRS9wWEg4V21Oc0hMVVdNS1g3Q2NBODFSN2hoYk5oYm5XZE5a?=
- =?utf-8?B?eEVibXdhamtoNEt4bXA3b1cyc2hzTW9Hc3hFWXVCa2lldkpkVnB3N2pwMDhp?=
- =?utf-8?B?VWhHajFoc2xIMzR5czZMQTk3SzlNOG81NlNDTWJxS2xoTDI1WHU4aStqNnpK?=
- =?utf-8?B?OTBOMFJwaVpxcFZCS1Uwb25zdm1wZm42aThKMXhRS0cvLzVQbmduTE1DZDB3?=
- =?utf-8?B?UE1QSGxrYkR5L280Yk9pbmVYQXBTOGhTVWFFMVBKME5jU2piaGxkOFYrc2dX?=
- =?utf-8?B?RDhqaWhTTTZVcmI3bVR5b1Z0K1RiTTZQeWRka2JKajVBZFRBUkJ5TXNJbnRG?=
- =?utf-8?B?VC9PMGZQd1IvYnVBcFErb3JTVFdnOHJNQm5aRG9CNzVKOTJzTG1aNWk2K2RK?=
- =?utf-8?B?aDVlaE1scVlDblROOWhENTBDcUdaWHZ2OElkWUNSMmp6TGtNdXRJZDNzVDZy?=
- =?utf-8?B?NDd5QlZZSzNzUm1iMk1WUnpGbWtjem1xdG1ZT2c2cm9RTFZ0QTJtdUVudlQr?=
- =?utf-8?B?TUtYVHZmVVQwZ2NjZWhKWmpucHNWTWQ1REZkNVF6aEhQUk1QV0NybStVVGNV?=
- =?utf-8?B?YncwM0VVdkVrQlpxOFVuYTlEK3A4b2diZDk0QktzRklxdWpCZ2NBdjlrMEJP?=
- =?utf-8?B?YlBJUzF1SG1hZ3Eza2VqczRiNG01Ly9lZC9BU3NGNVRUbmM4U2hINTNBZDhZ?=
- =?utf-8?B?UmVvSlBFYjRIUVVSSGJxaEV6Rkcvdk42MXpWU1poZUxrRVFQcGxHdFpTU1Nx?=
- =?utf-8?B?endacWJZL2g5d1l6eXlyZlVpQW0rQVpURVVqeUZiWW02SVViVS95aU81NVZQ?=
- =?utf-8?B?c2VMTnVCK1YrK2ZLaTFzZTFEUjdabUVjRDV0TFZybTFjaWhTVXJDa0RFUGJi?=
- =?utf-8?B?QjB1STlvMEU1Y3hKY1doWk0vUDJ6MU14UUtmVzhWU3lRWFE5K0pObjlqa2pv?=
- =?utf-8?B?NVVadTFoTU1ZdUJ2b0ttWWRJL1cyenE2dFFOcEd5bmtjNFZBYTFwQys0bUpY?=
- =?utf-8?B?SVEvUStROWw5MWNZSFA1eWpNazIrNWpSWll0TGtIMzhoYytpdk5KRk41eDdr?=
- =?utf-8?B?b3E3aWVLOEc4N2pnOTBLWUwvcmRqVHJpOWJwV3ROd2hSVzVOKzdwZmZreGNU?=
- =?utf-8?B?TUNvL1NxN3NDQjduZkJTUFlFdGxLL010dWtXTmxzMlpyb0sxa0xBU2IxVHZx?=
- =?utf-8?B?b3NKNnhwSzluOG5iSWFCQlBhMzI0SnNNd0JKZm1ESUJuZTNjQmlMT3VMZjUx?=
- =?utf-8?B?OVVSVElNaXdQNzJiUm9pOXh6VUFzZEJJck40bXFGKzRsajJ2NEVSYmFRQWda?=
- =?utf-8?B?UkhIUUd5d1BhWWJtWnp3VGplK3RrKzRWL3FUVlJ5NDFta3p4bGlXb1JzSmVL?=
- =?utf-8?Q?hu6FvzqKfrEdaC1w=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b1748db4-6da8-4135-f0b2-08de9b9e45f3
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2026 09:55:21.8302 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GfSK/J9jjtbGnx+JUfnXWmxXhpfhopwLquaorPVORNfedzKDwNzmpuHaxWyqD3yBOtXVClKWVARn+PJZPeXhmo6ffQk77EWDebmO1spZ39c=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR03MB6207
+References: <20260413203555.1990337-1-rs@ti.com>
+ <20260413203555.1990337-6-rs@ti.com>
+In-Reply-To: <20260413203555.1990337-6-rs@ti.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 16 Apr 2026 13:13:20 +0300
+X-Gm-Features: AQROBzAf50DcTNJWJn5ybR4DV6jhKIxK_LrkYm3ctoooruzkPpdpdb3UW5tgTIo
+Message-ID: <CAC_iWjKbAqzjRJ=0CLM4UJD2dLukuhna_UXSd-EfWEL=TXxYPg@mail.gmail.com>
+Subject: Re: [PATCHv3 5/6] efi_mem_sort: use list_for_each_entry_safe instead
+To: rs@ti.com
+Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
+ Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
+ afd@ti.com, xypron.glpk@gmx.de, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,35 +120,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/3/2026 1:02 pm, dinesh.maniyam@altera.com wrote:
-> From: Dinesh Maniyam <dinesh.maniyam@altera.com>
+On Mon, 13 Apr 2026 at 23:36, <rs@ti.com> wrote:
 >
-> Recent binman changes expect a kernel image to be present when
-> processing the binman description. N5X builds U-Boot without a
-> kernel image, so drop the kernel node from n5x.dtsi to avoid the
-> build dependency.
+> From: Randolph Sapp <rs@ti.com>
 >
-> Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
+> Use list_for_each_entry_safe and comparisons against the current and
+> next efi_mem_desc. This reduces the computation required for merging
+> regions, prevents unnecessary additional iterations of the list, and
+> requires less temporary values.
+>
+> Signed-off-by: Randolph Sapp <rs@ti.com>
 > ---
->   arch/arm/dts/socfpga_n5x_socdk-u-boot.dtsi | 4 ++++
->   1 file changed, 4 insertions(+)
+
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+>  lib/efi_loader/efi_memory.c | 48 +++++++++++++------------------------
+>  1 file changed, 17 insertions(+), 31 deletions(-)
 >
-> diff --git a/arch/arm/dts/socfpga_n5x_socdk-u-boot.dtsi b/arch/arm/dts/socfpga_n5x_socdk-u-boot.dtsi
-> index 840537c9d0b..236975692f1 100644
-> --- a/arch/arm/dts/socfpga_n5x_socdk-u-boot.dtsi
-> +++ b/arch/arm/dts/socfpga_n5x_socdk-u-boot.dtsi
-> @@ -61,3 +61,7 @@
->   &watchdog0 {
->   	bootph-all;
->   };
-> +
-> +&binman {
-> +	/delete-node/ kernel;
-> +};
-
-
-Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
-
-Best regards,
-Tien Fong
-
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index b77c2f980cc..b3b292ebf56 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -128,44 +128,30 @@ static uint64_t desc_get_end(struct efi_mem_desc *desc)
+>   */
+>  static void efi_mem_sort(void)
+>  {
+> -       struct efi_mem_list *lmem;
+> -       struct efi_mem_list *prevmem = NULL;
+> -       bool merge_again = true;
+> +       struct efi_mem_list *curmem, *nextmem = NULL;
+>
+>         list_sort(NULL, &efi_mem, efi_mem_cmp);
+>
+>         /* Now merge entries that can be merged */
+> -       while (merge_again) {
+> -               merge_again = false;
+> -               list_for_each_entry(lmem, &efi_mem, link) {
+> -                       struct efi_mem_desc *prev;
+> -                       struct efi_mem_desc *cur;
+> -                       uint64_t pages;
+> +       list_for_each_entry_safe(curmem, nextmem, &efi_mem, link) {
+> +               struct efi_mem_desc *cur;
+> +               struct efi_mem_desc *next;
+>
+> -                       if (!prevmem) {
+> -                               prevmem = lmem;
+> -                               continue;
+> -                       }
+> +               /* Exit when we've got nothing to compare with */
+> +               if (&nextmem->link == &efi_mem) {
+> +                       break;
+> +               }
+>
+> -                       cur = &lmem->desc;
+> -                       prev = &prevmem->desc;
+> -
+> -                       if ((desc_get_end(cur) == prev->physical_start) &&
+> -                           (prev->type == cur->type) &&
+> -                           (prev->attribute == cur->attribute)) {
+> -                               /* There is an existing map before, reuse it */
+> -                               pages = cur->num_pages;
+> -                               prev->num_pages += pages;
+> -                               prev->physical_start -= pages << EFI_PAGE_SHIFT;
+> -                               prev->virtual_start -= pages << EFI_PAGE_SHIFT;
+> -                               list_del(&lmem->link);
+> -                               free(lmem);
+> -
+> -                               merge_again = true;
+> -                               break;
+> -                       }
+> +               cur = &curmem->desc;
+> +               next = &nextmem->desc;
+>
+> -                       prevmem = lmem;
+> +               if ((cur->physical_start == desc_get_end(next)) &&
+> +                   (cur->type == next->type) &&
+> +                   (cur->attribute == next->attribute)) {
+> +                       /* There is another similar map coming up, reuse it */
+> +                       next->num_pages += cur->num_pages;
+> +                       list_del(&curmem->link);
+> +                       free(curmem);
+>                 }
+>         }
+>  }
+> --
+> 2.53.0
+>
