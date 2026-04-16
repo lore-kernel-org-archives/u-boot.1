@@ -4,87 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED831F43699
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 12:45:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B9D1F43699
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 12:45:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC82B84309;
-	Fri, 17 Apr 2026 14:44:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7640284314;
+	Fri, 17 Apr 2026 14:44:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gaSeUjIP";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="Xuv+xrkK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE21984201; Thu, 16 Apr 2026 17:51:17 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id A12748405A; Thu, 16 Apr 2026 18:13:14 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C5C683EEF
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 17:51:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9C0783EEF
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 18:13:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=9elements.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fra.schnyder@gmail.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-488b00ed86fso82197005e9.3
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 08:51:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=maximilian.brune@9elements.com
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-43cfd832155so5678764f8f.1
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 09:13:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776354675; x=1776959475; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ijxK31UKfkp1DpRBTTIzwXNN21ByR9LiwFdqvBVazLc=;
- b=gaSeUjIPOi5v1DZQbaJDAC8dtHkXKFoDHeDftiouJ5I65HZQ2ko6SDv7wEXnJAXRlU
- 6TP198JJUBtscW783IQpFcBYPxFDExl6W13eVwhUiGtvOZnstZzVS64Bzm5T3reL5UmO
- 0iCs1He05c75doMEuLO0HgR6lSvfI3FaPKBYKxIZGbP4Hvc+gBEf8r3pjgEpWhobhfyG
- yMeOMumJy+9AtRkaHeyH698djBhknZb/RntbGnbTibZxENLxuYKiWXpCHlkJEB1CQ8ye
- OhqBbp4DE914o0YBoN1c5VZ/GYUhnMiSxDtxb0BG5d+DQyKJwouUPXzSWDRlpf0oKwh4
- uhsw==
+ d=9elements.com; s=google; t=1776355988; x=1776960788; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=IoNMUcoV2Z9BAIJ2q8e+0qv5et7Zu1kh2NhEcLrhTv8=;
+ b=Xuv+xrkKW9tzj3YryNGMvedNUWa1m9whC1RxtPoQsd2gIyCCO6gK7g3vIVf1JSmd96
+ 737vxXC6FxQG+uwkp/gZ2AGPXOh46q/A8xITS1qEE6UqqyUqoX59ww2jVJLqsmwCcl7z
+ Y6Q+euvravaBF6yQ7FWi4UtTJj0YLfiQ+EtEfT0Wl2J9e80P+X37p/F8b/BK0t+OheOZ
+ Lv0enSbrbpheRPonGT7EOex+FmUHKD8j75LNU3up0S3Al6H2/7WewC/rAjix/ZYe9HML
+ yK95s134mznDZmRgaf/GcjdK2G8SjLyDY2pFhAubVJfB1RsgUduQIJllUqzhXaoJBGB5
+ kcKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776354675; x=1776959475;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ijxK31UKfkp1DpRBTTIzwXNN21ByR9LiwFdqvBVazLc=;
- b=PBvxWGcox7qYcIK3HYYNCIyATNj+XGPVD59mHrIu/otNzdEiS5vMDzD/YhMM1JxbDp
- nEtwJC02/gj4C/3BI13cqFfdm/3WCyRXjwGgcCZd/oT1oTmDJHeEpT8lvRQqJNF6k4hW
- ktd7Ypq2xzIcnpaMxxxkcP4WS4ka6bh9F0EWugubOcLS0sM7Gms1CglrRktN1gndyUy+
- eyxd8NmF7Vw6q2JBT/9kXikjpOqybSenKZ7Z1A2J6qSk9y7utLFytK162w5S/TOIndXQ
- sCnA3aWdvJYlj+rGPeTnLGgS2KVwuJII/V6WZj/p+3ItIMiwq9At+Xtjs6WNqgD7BFkf
- szIQ==
-X-Gm-Message-State: AOJu0Yw6LGXWZiANghA2z/lAEiVDw45D0rKqYTEWVMX7G2wSYH1VlwBc
- SENj3rbBCkBCQsFiwb676GcP8YSD1uOK1bW7leIusMdwwaUkgZbLCPDj
-X-Gm-Gg: AeBDietAXtRnkY8oaJzGC67looxLttAiTBxwV0B/0JGNioxHEgXhzBQTSm9hRH1mTJo
- 93CNepf7cQF1die+cRxLMnZVPpQpy20zPi3T2o8F4hYLXXkPtb+9uwteSQ6xw1iFELcz0HzU7wu
- Ou7cl9iSnI2RBmxhZkFgrqhSoYBpNVG25M7xaY9KGF6qL1Uhh7fAEJaUQ+L3+eBBgZ1vRWnmnYe
- cXBF/MSgS7Harl4Su9n0o+5tFMiXezm4kZIgWSFgH2g8ERfSkACazp/rruc2NEeY6I4FIqLCLeL
- F2W2U7dme4+DhpCJUeBxf1GTz4x5KRvZlKOsj8iZz1JNLu4DQuugG/jU8MgIwLh5D3+FCqoeUof
- 6bdbu2PPB/22lHgOodArmqCXHCcbNFLLwD2ERRPlqss5vWlbAbXvtIh6W0r8RcWwtn0VzkvXTNp
- pOfKb15+1gH1VUzdcZkKLygUJ6nya7R5u2B/xW8489IsBhT8T75AQfLIE5I/DLHuo63XQQDOHsh
- fV4Xh/FitiXl/yqzSsdfFkqV601jCQ+o4ZaLUuAosEFEIunERiUErNAPmUife35oVUGzvL5dA==
-X-Received: by 2002:a05:600c:8207:b0:488:bf0c:a372 with SMTP id
- 5b1f17b1804b1-488d68a0ec8mr376113135e9.31.1776354674594; 
- Thu, 16 Apr 2026 08:51:14 -0700 (PDT)
-Received: from franzs-nb
- (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
+ d=1e100.net; s=20251104; t=1776355988; x=1776960788;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IoNMUcoV2Z9BAIJ2q8e+0qv5et7Zu1kh2NhEcLrhTv8=;
+ b=aqeXhJK6QtLVyLkURfb+DCsgJ3DUHY05SeUG58T7WiZnM29A/0OAG7bqFsfnoyEQ6x
+ uDjR2ilC4CEBLYh9MGXKtRlpo4eMy698HFozCx5VhW9hB60nXo7GVi8QAcm2j9lv4l5X
+ ku/AizdSIthB6MzrQsX0Nqw757hSpeB8YSGtu2Etx0zoIfCTqe+psoYKV4lU4KZ0hn9D
+ aOUFFlNq3hg8PD3B6zC/+AcWZ6CvI9WDUt7+YWDKn0bpTrqAQx1ixJQHtKS5T7vW/Rjx
+ kxz6BTj9TK6zlR+P16zoj75zz5ySISVhUv9xobF80hzruODefjELe2BHyv2n8pxr3f1h
+ Y9KA==
+X-Gm-Message-State: AOJu0YyndXwV6eNBmyCUhUkIxVZO4rl2VNDLGRbRN7lSYhlkXgGdKdUU
+ DoR/LPZ77Tiug5ip7jr+pcL8oCKxdAFqmZ9PoC+ddiTlrs9fMdLjz6fniAmWQVqI5K/fcpTJVbU
+ vsh0mKTc=
+X-Gm-Gg: AeBDietSMlX9PatUA+xWzJXZ9TIl5uuKaV/URB8aFndapPA1tknZaMQBqx9W8cjxkr1
+ YEN5vwgCUwpcEpHQWxWhhKjPNeX7mKf1lVVKbkuZuEGi7Zi76sx8yFfqNfA8w3QVy3c/emcXZJO
+ hIjaUQVsm35ZoxtLKOsfibKIP8glyx2CTjUiQ1p3sVAGs9GImiNiDvNX9cnMqBQ0N73SQIo4VJ+
+ LxknWzc8elmJSTuMeGZyKWAgUvNu0fIqjxPVybVOOK4KOSXZdmXuxQg3qk1x+uTR6Bu9bjWTU51
+ UZYmYsMJ+0RCJ4E77oy65KkPCZjubUbgubFUmgs5uWFap3Y33ToPDVprwfh8xWcOdUxc1QUHqEi
+ 8KiXHyFJrbpVTpKa+bHOgCsaG1tjX4TTjbKpI8mVvt79SUQjCK5dvcHLzkuiPUI8xf1toeKRf9v
+ qqBFX9CYxmC0v2HM0wrnbhPQXr/pn5gcxAVc9VaVu3w+07CB3lkyMUFrlLHW6i3edH24ar
+X-Received: by 2002:a5d:5f82:0:b0:43f:dfbc:8c71 with SMTP id
+ ffacd0b85a97d-43fe0613a3amr134616f8f.25.1776355988161; 
+ Thu, 16 Apr 2026 09:13:08 -0700 (PDT)
+Received: from mmax.sec.9e.network ([185.254.75.29])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488f584e306sm74276835e9.11.2026.04.16.08.51.13
+ ffacd0b85a97d-43ead3566b7sm15524821f8f.11.2026.04.16.09.13.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Apr 2026 08:51:14 -0700 (PDT)
-Date: Thu, 16 Apr 2026 17:51:13 +0200
-From: Franz Schnyder <fra.schnyder@gmail.com>
-To: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, 
- "openembedded-core @ lists . openembedded . org"
- <openembedded-core@lists.openembedded.org>,
- Francesco Dolcini <francesco@dolcini.it>
-Subject: Re: [PATCH] tools: mkeficapsule: Add disable pkcs11 menu option
-Message-ID: <7xe72m3tkzultqh3hw4cubfognfryjk5ababajoe6w6zt7jx4c@aaxa2kehv635>
-References: <20260409074710.1322519-1-Wojciech.Dubowik@mt.com>
+ Thu, 16 Apr 2026 09:13:07 -0700 (PDT)
+From: Maximilian Brune <maximilian.brune@9elements.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, andrew.goodbody@linaro.org,
+ george.mccollister@konsulko.com,
+ Maximilian Brune <maximilian.brune@9elements.com>
+Subject: [PATCH] pci: correct PCI device enumeration to include all functions
+ on device 0
+Date: Thu, 16 Apr 2026 18:13:05 +0200
+Message-ID: <20260416161305.24118-1-maximilian.brune@9elements.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260409074710.1322519-1-Wojciech.Dubowik@mt.com>
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 17 Apr 2026 14:43:59 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,135 +99,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Apr 09, 2026 at 09:47:07AM +0200, Wojciech Dubowik wrote:
-> Some distros are using gnutls library without pkcs11 support
-> and linking of mkeficapsule will fail. Add disable pkcs11
-> option with default set to no so distros can control this
-> feature with config option.
-> 
-> Suggested-by: Tom Rini <trini@konsulko.com>
-> Cc: Franz Schnyder <fra.schnyder@gmail.com>
-> Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-> ---
->  tools/Kconfig        |  8 ++++++++
->  tools/Makefile       |  3 +++
->  tools/mkeficapsule.c | 14 ++++++++++++++
->  3 files changed, 25 insertions(+)
-> 
-> diff --git a/tools/Kconfig b/tools/Kconfig
-> index ef33295b8ecd..ccc878595d3b 100644
-> --- a/tools/Kconfig
-> +++ b/tools/Kconfig
-> @@ -114,6 +114,14 @@ config TOOLS_MKEFICAPSULE
->  	  optionally sign that file. If you want to enable UEFI capsule
->  	  update feature on your target, you certainly need this.
->  
-> +config MKEFICAPSULE_DISABLE_PKCS11
-> +	bool "Disable pkcs11 support"
-> +	depends on TOOLS_MKEFICAPSULE
-> +	default n
-> +	help
-> +	  Disable pkcs11 support. Can be used in cases when host GnuTLS
-> +	  library doesn't support it.
-> +
->  menuconfig FSPI_CONF_HEADER
->  	bool "FlexSPI Header Configuration"
->  	help
-> diff --git a/tools/Makefile b/tools/Makefile
-> index 1a5f425ecdaa..60e84bfbf20d 100644
-> --- a/tools/Makefile
-> +++ b/tools/Makefile
-> @@ -271,6 +271,9 @@ mkeficapsule-objs := generated/lib/uuid.o \
->  	$(LIBFDT_OBJS) \
->  	mkeficapsule.o
->  hostprogs-always-$(CONFIG_TOOLS_MKEFICAPSULE) += mkeficapsule
-> +ifeq ($(CONFIG_MKEFICAPSULE_DISABLE_PKCS11),y)
-> +HOSTCFLAGS_mkeficapsule.o += -DCONFIG_MKEFICAPSULE_DISABLE_PKCS11
-> +endif
->  
->  include tools/fwumdata_src/fwumdata.mk
->  
-> diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
-> index ec640c57e8a5..ad1c46f0e909 100644
-> --- a/tools/mkeficapsule.c
-> +++ b/tools/mkeficapsule.c
-> @@ -229,9 +229,11 @@ static int create_auth_data(struct auth_context *ctx)
->  	gnutls_pkcs7_t pkcs7;
->  	gnutls_datum_t data;
->  	gnutls_datum_t signature;
-> +#ifndef CONFIG_MKEFICAPSULE_DISABLE_PKCS11
->  	gnutls_pkcs11_obj_t *obj_list;
->  	unsigned int obj_list_size = 0;
->  	const char *lib;
-> +#endif
->  	int ret;
->  	bool pkcs11_cert = false;
->  	bool pkcs11_key = false;
-> @@ -242,6 +244,7 @@ static int create_auth_data(struct auth_context *ctx)
->  	if (!strncmp(ctx->key_file, "pkcs11:", strlen("pkcs11:")))
->  		pkcs11_key = true;
->  
-> +#ifndef CONFIG_MKEFICAPSULE_DISABLE_PKCS11
->  	if (pkcs11_cert || pkcs11_key) {
->  		lib = getenv("PKCS11_MODULE_PATH");
->  		if (!lib) {
-> @@ -259,6 +262,7 @@ static int create_auth_data(struct auth_context *ctx)
->  			return -1;
->  		}
->  	}
-> +#endif
->  
->  	if (!pkcs11_cert) {
->  		ret = read_bin_file(ctx->cert_file, &cert.data, &file_size);
-> @@ -301,6 +305,7 @@ static int create_auth_data(struct auth_context *ctx)
->  
->  	/* load x509 certificate */
->  	if (pkcs11_cert) {
-> +#ifndef CONFIG_MKEFICAPSULE_DISABLE_PKCS11
->  		ret = gnutls_pkcs11_obj_list_import_url4(&obj_list, &obj_list_size,
->  							 ctx->cert_file, 0);
->  		if (ret < 0 || obj_list_size == 0) {
-> @@ -309,6 +314,10 @@ static int create_auth_data(struct auth_context *ctx)
->  		}
->  
->  		gnutls_x509_crt_import_pkcs11(x509, obj_list[0]);
-> +#else
-> +		fprintf(stdout, "Pkcs11 support is disabled\n");
-> +		return -1;
-> +#endif
->  	} else {
->  		ret = gnutls_x509_crt_import(x509, &cert, GNUTLS_X509_FMT_PEM);
->  		if (ret < 0) {
-> @@ -320,12 +329,17 @@ static int create_auth_data(struct auth_context *ctx)
->  
->  	/* load a private key */
->  	if (pkcs11_key) {
-> +#ifndef CONFIG_MKEFICAPSULE_DISABLE_PKCS11
->  		ret = gnutls_privkey_import_pkcs11_url(pkey, ctx->key_file);
->  		if (ret < 0) {
->  			fprintf(stderr, "error in %d: %s\n", __LINE__,
->  				gnutls_strerror(ret));
->  			return -1;
->  		}
-> +#else
-> +		fprintf(stdout, "Pkcs11 support is disabled\n");
-> +		return -1;
-> +#endif
->  	} else {
->  		ret = gnutls_privkey_import_x509_raw(pkey, &key, GNUTLS_X509_FMT_PEM,
->  						     0, 0);
-> -- 
-> 2.47.3
-> 
+Currently the implementation does not just skip all devices beside
+device 0, it also skips all functions (besides 0) on device 0. This
+broke basically all AMD platforms, since they have a lot of internal SOC
+devices behind on these functions.
 
-Hi Wojciech,
+This was detected, because the XHCI controller and therefore the USB
+devices were not found by u-boot on AMD/crater platform.
 
-Shouldn't it be the other way around? Use of pkcs11 should be disabled 
-by default and enabled if required. As it is now, it would still depend
-on the the gnutls library having pkcs11 support and therefore still 
-would break our OE builds with mainline u-boot if we don't change our
-modules defconfig.
+Fix it by checking all functions on device 0 (Linux does the same).
 
-kind regards
+TEST=build u-boot as coreboot payload and run it on a recent x86 AMD
+platform. Devices like the XHCI controller are now found again.
+---
+ drivers/pci/pci-uclass.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Franz
+diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
+index 83b76d01f24..f58d542ef75 100644
+--- a/drivers/pci/pci-uclass.c
++++ b/drivers/pci/pci-uclass.c
+@@ -927,7 +927,7 @@ int pci_bind_bus_devices(struct udevice *bus)
+ 		if (PCI_FUNC(bdf) && !found_multi)
+ 			continue;
+ 
+-		if (only_one_child(bus) && (PCI_MASK_BUS(bdf) > 0))
++		if (only_one_child(bus) && (PCI_DEV(bdf) > 0))
+ 			continue;
+ 
+ 		/* Check only the first access, we don't expect problems */
+-- 
+2.53.0
+
