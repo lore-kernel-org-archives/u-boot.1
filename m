@@ -4,97 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1A7CF8D765
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 18:51:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FF5DF8D766
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 18:52:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3678984228;
-	Thu, 16 Apr 2026 20:51:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AF7B884223;
+	Thu, 16 Apr 2026 20:52:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MVIhZxH5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K6saxIV9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 175128423F; Thu, 16 Apr 2026 20:51:35 +0200 (CEST)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
+ id B624484242; Thu, 16 Apr 2026 20:52:33 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92DE184223
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 20:51:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 92F1B84214
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 20:52:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-35fb166b0c6so544433a91.0
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 11:51:32 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776365491; cv=none;
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-6729c8f9c55so949972a12.0
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 11:52:31 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776365551; cv=none;
  d=google.com; s=arc-20240605;
- b=L3kYlNTOb8+CLw+vttwNpXLknHTR46xdLhqLEoVuY2brZruzcnVn2XUBcWkWDubbHY
- PXoVoCbGAjV6E/MUmnR5Qdrp5r8/MwYSsHqDhmu+CuFIjVjhu/yx4hAiBzY2wVdWFMWp
- sEnGiT8dm6ptLZHLYGH6fHu9gWwU20+uWi4OuaMp85xpoCFyTX7Z6OjLnsesuHrEWtjO
- cewJgqHfm1ec7GBggvxVYpKyaucqdtFAZ++mcqzzGvdW8ZQiZPPbl/f6SpxcTbbMcKyC
- Wyw0p5pMC89gnFoBCfBJuypsWxTvI6pHvB5EsxVgbvohJ3exvDbmCFbLlDBxwtgRBaPv
- wyyg==
+ b=DyoS/zG/V83UXX2c3i0FtI+5Ho0CKsNpHGUjKDLdH18RIOy13cHflB3uyHk5mKy1xg
+ o2hxm6+ed9VBSPZEZgEvzykhqDaQdDGb//bM3XGepdKetAWWdhHztd2KelKm5QyPPvnt
+ /03Fbc2wV/WoJDAKsQT1YyHqK8oE1XCWoF9fhLKVjXjLOhzXYF0vJ75VoZJB7M0/t1g7
+ JqgramGwm6v/lTpQOr+GWKBOjXQZYqYbxACL5jNSqkJgOuFD7YiyMYHuGeXYZZ8S4+Li
+ s+/QG6zLGyD0LoEFPGxGu2Z0LNqZRq+hqlVdeUxp63iGrQJIkNERbymQMoVqyailcsMZ
+ 8DDQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=78kCEmVn4JPYRAoPo2yqphjtySONlr++xa0fR6PjN7c=;
- fh=s9Lt3w64TAkHKFDbt+9kT1Eei+RajGoFuxA1RXbRw0E=;
- b=Uhf9YqW6pWkmKgCIbrzh0roLg66DYkljeRyEXi9kRFxJ3/f0LPpBONTgC7qxmFgeAn
- cgoBtd2XeN2T4KiO2ir1TJ7C2WA9cgp13/wC/379mrcuNay3YSebWgzhG3HqSIKHlQIK
- dqzymjJXcFnSBRKG/s/tZrDloxaYIsZZtUgWFEMFdrNFHLgA2DUoPmct2/iT7dT/jrFb
- hPT5/fOXr4R0xBnGkQ+icvyufBpjuhKJFZVlpm0dmQEsCUbvMnolbxNQXiSCKDfgsPW/
- ZJ4GIzZode5XENrB26r9FQprDOS0OUkZGSUkKnwMYOcqiFRHRw0c6FUpaqQI/v2ZjuEP
- gerw==; darn=lists.denx.de
+ bh=SSUzBbuoOm3FFgk2EG2JaRJEytEJr4/xb3ZO84iNNnw=;
+ fh=tjiV1P9byL0UH7BqddYqNliTcFRJuda8derD73aVpbI=;
+ b=jzhWueBup4920N+dAd6OfDamXiO2bblnQVmx3FQ3SOqqpjKSpFaTZ2a+dO+4uRySTf
+ RWEm7m+PykZiDXelNJW4xduMINcicT1JM/o46QxBkW2Y2b0AfeABEvfJ/oZJKCGUGHY8
+ XAnH4e0ncrsnHpG/UpeCHzRGwz60Ghzmo/PzPtSvKkykQ3SZOBIBgwWAnM4xyaGWwdVM
+ y8LFZchnfrJ9pEM1kCASQzFLGJMYZ+/sTnjaaX7cnoEQSXUmvbx/YWXC/8Ym9ixEQymr
+ ERoTK71N632ntqSTR+/ZkoUf7nXIO+g5LV8hkpGCH6d8gK57ab1uI1fFaTD+ewFlItm5
+ Q2Jw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776365491; x=1776970291; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776365551; x=1776970351; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=78kCEmVn4JPYRAoPo2yqphjtySONlr++xa0fR6PjN7c=;
- b=MVIhZxH5XQ6gbSe363xD2+M2Bdwy2NHsby0sTeUy6uUC5yXeWxx2HGlX2pmUVf/MHS
- J6/vHbsyc0QbphjMV89SlIzfoMUP6ofENCHqdmA6tZz+R+qYZQw/ALYZkt7YuGDDd8eN
- /qKHcWIwcy9UkMSzbp4b3maiqv8If+bxjSH+4=
+ bh=SSUzBbuoOm3FFgk2EG2JaRJEytEJr4/xb3ZO84iNNnw=;
+ b=K6saxIV9SWkEPCK/IUcFQQEK1uFEJtdiV37CQvfMe46dQkoEW1RW8ygM6acuL23aJH
+ 8FNLFg9tONWcW4/uVBDkPVOLCFZ4qIat/vSH4CZKU9ARCr4iPgGZCpaBnvqo3xfU42J0
+ r8RoX7c4c8aaecLMoEZQdIMydaGE19SGoxFpc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776365491; x=1776970291;
+ d=1e100.net; s=20251104; t=1776365551; x=1776970351;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=78kCEmVn4JPYRAoPo2yqphjtySONlr++xa0fR6PjN7c=;
- b=YjLv0zW/6il+dJMVKqWbk6pkmP4kNJJK62GFw142q3GrmPFctBZrtesuiy7CU/adgg
- yQFRTfroXOkbfDXdG/OSkA2d70Y/rF+CFPKMlXvuMI03QAyntLP7Xj4pFzu/4VvgxgaX
- LfPrB4JV48iqzTrs/TtzcoLGWRj3tF2hlu/XXy7epedVMfwq1+AO/A18x7Rnm6MdQTla
- In0m+Fftf7jwSvTzbSrTiDhA3luRzStj7A2tS81DxouGJ1+WMOOiguoalazw2rYrHbiH
- mFyHmm2ep3d04jiQCBPRTH4/UY8BK3pUdtheKIYMtl8Ry9Du4tUJCK7HrSo38TGNhbKa
- HfGA==
-X-Gm-Message-State: AOJu0Yxo465Sc48+NmIIcmhJRGP7EYj2X/ua/dJjjoRTg7gWx+KULV0x
- ialGfY3RVn+M3pW1PzV8ID3vZvAIfJs2mce0EhIVrsKF+Fsc+G88qzLybHX3/c8Yn4JL2Ftq3xT
- WnqawtaaOVZtstnyGIu0ejYM8LJiIvWRhi0wjheLl
-X-Gm-Gg: AeBDieuxzgfm/SMVhCU4WxImAMZHMrC2jdQeav4jwBHjcE1ZRGWJOLkdNLLvRdjEcVG
- +xgYQ+5f8SF5yDCtJdIJQYg2rzalrn9HtdLB+Odbem4CrNm+1rS4pQD48IB1+f9kgJEIMoNiLYC
- doKvD5U7OeG+HBtniKu89JymlCZbeocDjEa37RN4uaclqraLm4+U1LeA9kIFtsxBLjjsYm+s21+
- ChM+64Jsy5DddhhSUXilq95OcXlMU/PrguEpy1k202yUDQ2f/e4jUsJ+WpXRODn2s8GDHN6AaiK
- Vm0i6/15CRvHCslAbL4y
-X-Received: by 2002:a17:90b:390b:b0:35d:aa02:d776 with SMTP id
- 98e67ed59e1d1-3613e212386mr354480a91.2.1776365490788; Thu, 16 Apr 2026
- 11:51:30 -0700 (PDT)
+ bh=SSUzBbuoOm3FFgk2EG2JaRJEytEJr4/xb3ZO84iNNnw=;
+ b=fOHsj4QjXMihizQzfvbNoRwnU337+n73TA1m/fgXig4p5R68C+jbGS6ttSFwquvW2x
+ gCpxlVqsVprd2kxCnPF8+3iqJjGaFCS2h8rJd4E5TiKCKJf9wX3ztdxdb/NK06QGEXH7
+ 04u2xkVB8qiXqt6Sj5LrneoLFpsnL3Qg2cxZz3hz5iJbwDSsxNgwPjw7HnPuene42LkV
+ NMaQkEgwIbE+ZSyqnCbXrzFO8sRpYUmM1cFct+gjW5XKbi8DmIWaxCcYkjHhr3XYmIh6
+ 1dkayfyrVPazIaEh4NgRYADKwDynTJNMdcDz6OOiLt7U20Ac06wKe9w0W5aQ3p8p3XLJ
+ ZsvQ==
+X-Gm-Message-State: AOJu0Yy5BQ1648tJ38zdDONeIVz1rioCtFP02nKAp7dytk3uN9ku46f5
+ ur2tHnjiZQjSNz2PQZ9qFYhv5wvTUSE2+FF6xloBJPXxsVCuACHLwP6+QXn+P5fArn7PGi49E80
+ 7OF9hSlbmer0AYSrkLa9CiK2wZew1JPsg7hiAhEHP
+X-Gm-Gg: AeBDietNr16DkGJgiRqb9wi07QkoNECKKnFuFr5y+16+0LRT6H7Jdviot5CHA/kpIOP
+ KGNRkjDO1Y9hA1bFrxHA8X0TNxxOdWEj3KrKsGHDdOK6y0TTrDSpq2MrhQ9PoaD9xqFJEzXdHVy
+ /IOXCxNQBuvoUwOPt7BLDs/pB8ToO7fyfVzWQbAkgIyWOgKiL4cUNTF4hHpH8YAHrc0f8yWZa1l
+ DIurgcCTvUD7VsvMvVYFkJin5lcL3n0eiikIDdBPQMg5ldhGVxIlIKro2KWTcf+drwhXS5OSpk/
+ LPcpiS+VWyfIYqTONezf
+X-Received: by 2002:a17:907:9704:b0:b98:14e:32c0 with SMTP id
+ a640c23a62f3a-ba3e3b2a8c1mr23241166b.14.1776365550975; Thu, 16 Apr 2026
+ 11:52:30 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260415183250.3031030-1-dario.binacchi@amarulasolutions.com>
- <20260415183250.3031030-4-dario.binacchi@amarulasolutions.com>
-In-Reply-To: <20260415183250.3031030-4-dario.binacchi@amarulasolutions.com>
+ <20260415183250.3031030-7-dario.binacchi@amarulasolutions.com>
+In-Reply-To: <20260415183250.3031030-7-dario.binacchi@amarulasolutions.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 17 Apr 2026 06:51:05 +1200
-X-Gm-Features: AQROBzC2NKQq66PN5C2-EwMXMJ9Ve3cfdJ1-1C1T9KGV3PzE1BtuIfu0n_zavFs
-Message-ID: <CAFLszTi07U8fH2D0YWc00UgXuYKD=PpX7xdfEmOkSHfRy_QvVA@mail.gmail.com>
-Subject: Re: [PATCH v3 3/7] test: cmd: add unit tests for part command
+Date: Fri, 17 Apr 2026 06:52:18 +1200
+X-Gm-Features: AQROBzCG_Yxnjog92qQUCpExgLJe_pGry7ZHic5rcn2aOb34AOWW9mBZ9TXKBkw
+Message-ID: <CAFLszTg+S7xepqVuU7y8mA_LoK531w77+pqp8if6nBnWsMizoA@mail.gmail.com>
+Subject: Re: [PATCH v3 6/7] fwu: add helper to get image GUID by type and bank
+ index
 To: dario.binacchi@amarulasolutions.com
 Cc: u-boot@lists.denx.de, linux-amarula@amarulasolutions.com, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kory Maincent <kory.maincent@bootlin.com>, 
+ Michal Simek <michal.simek@amd.com>, Padmarao Begari <padmarao.begari@amd.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -116,40 +117,43 @@ Hi Dario,
 
 On 2026-04-15T18:31:27, Dario Binacchi
 <dario.binacchi@amarulasolutions.com> wrote:
-> test: cmd: add unit tests for part command
+> fwu: add helper to get image GUID by type and bank index
 >
-> Add unit tests for the 'part' command, specifically for the 'number',
-> 'start', and 'size' subcommands.
+> Introduce fwu_mdata_get_image_guid() to retrieve a specific image GUID
+> from the FWU metadata based on the bank index and image type GUID.
 >
-> These tests establish a baseline for the current partition lookup
-> functionality by name. This foundation will be used by subsequent
-> patches to extend the command, ensuring consistent behavior as new
-> features are introduced.
+> This allows identifying the correct partition in multi-bank (A/B)
+> scenarios, ensuring the correct image is targeted depending on the
+> current bank.
 >
 > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 >
-> test/cmd/Makefile |   1 +
->  test/cmd/part.c   | 161 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 162 insertions(+)
+> include/fwu.h         | 11 +++++++++++
+>  lib/fwu_updates/fwu.c | 33 +++++++++++++++++++++++++++++++++
+>  2 files changed, 44 insertions(+)
 
-> diff --git a/test/cmd/part.c b/test/cmd/part.c
-> @@ -0,0 +1,161 @@
-> +#include <dm/test.h>
-> +#include <env.h>
-> +#include <part.h>
-> +#include <test/ut.h>
-> +#include <vsprintf.h>
+> diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
+> @@ -243,6 +243,39 @@ int fwu_sync_mdata(struct fwu_mdata *mdata, int part)
+> +int fwu_mdata_get_image_guid(efi_guid_t *image_guid,
+> +                          const efi_guid_t *image_type_guid, u32 bank_index)
+> +{
+> +     struct fwu_data *data = &g_fwu_data;
+> +     struct fwu_image_entry *image;
+> +     int i;
+> +
+> +     if (bank_index >= data->num_banks)
+> +             return -EINVAL;
+> +
+> +     for (i = 0; i < data->num_images; i++) {
 
-Please include <test/cmd.h> and use CMD_TEST() instead of DM_TEST().
-This places the tests in the cmd suite rather than the dm suite. See
-test/cmd/hash.c for an example.
+Using data->num_images here is the proper approach for new code. Some
+existing functions still use CONFIG_FWU_NUM_IMAGES_PER_BANK in their
+loops but using the runtime value is more correct, especially since
+FWU v2 populates num_images from the metadata itself.
 
-> diff --git a/test/cmd/part.c b/test/cmd/part.c
-> @@ -0,0 +1,161 @@
-> +static int dm_test_cmd_part_number(struct unit_test_state *uts)
+Is there a unit test for this new function? Since you have added tests
+for the part command in patches 2, 3, and 5, it would be good to add
+coverage here as well, e.g. testing success, -EINVAL for invalid bank
+index, and -ENOENT for missing image type.
 
-With the change to CMD_TEST() please rename the test functions
-accordingly, e.g. cmd_test_part_number().
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
