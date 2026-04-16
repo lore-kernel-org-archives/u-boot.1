@@ -4,21 +4,21 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94837F8E48C
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 22:59:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB214F8E48C
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 23:26:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 09B9B83FC0;
-	Fri, 17 Apr 2026 00:59:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 51B3F83FC0;
+	Fri, 17 Apr 2026 01:26:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AD6B8407E; Fri, 17 Apr 2026 00:59:19 +0200 (CEST)
+ id A520F8407E; Fri, 17 Apr 2026 01:26:13 +0200 (CEST)
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5130183EEF
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 00:59:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 47B2D83EEF
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 01:26:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
@@ -26,8 +26,8 @@ Authentication-Results: phobos.denx.de;
 Received: from local
  by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
  (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1wDVfc-000000006lY-3AeT; Thu, 16 Apr 2026 22:58:48 +0000
-Date: Thu, 16 Apr 2026 23:58:45 +0100
+ id 1wDW5n-000000006tD-2pI3; Thu, 16 Apr 2026 23:25:51 +0000
+Date: Fri, 17 Apr 2026 00:25:47 +0100
 From: Daniel Golle <daniel@makrotopia.org>
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
@@ -50,15 +50,16 @@ Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
  Jonas Karlman <jonas@kwiboo.se>, Shiji Yang <yangshiji66@outlook.com>,
  Rasmus Villemoes <ravi@prevas.dk>,
  Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 7/7] test: py: add mkimage dm-verity round-trip test
-Message-ID: <aeFppbCsfKNDTWuC@makrotopia.org>
+Subject: Re: [PATCH v2 6/7] test: boot: add runtime unit test for
+ fit_verity_build_cmdline()
+Message-ID: <aeFv-xm5MZ44W3Yn@makrotopia.org>
 References: <cover.1776302805.git.daniel@makrotopia.org>
- <9ceb70fcad4dec6efae1b03297f38665926b6c9f.1776302806.git.daniel@makrotopia.org>
- <CAFLszThhPE9SPOHhjcukPUDsg4Yf+GtPhVWeHdsnKCQE1ysOSg@mail.gmail.com>
+ <97e38b81f2e8f54ec819940d360849e4cf61b875.1776302806.git.daniel@makrotopia.org>
+ <CAFLszTgazuTSYbidfn7Q1gEiE1RG2YVkj2Vz9L6fN49QE0bdUA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAFLszThhPE9SPOHhjcukPUDsg4Yf+GtPhVWeHdsnKCQE1ysOSg@mail.gmail.com>
+In-Reply-To: <CAFLszTgazuTSYbidfn7Q1gEiE1RG2YVkj2Vz9L6fN49QE0bdUA@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,43 +76,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Apr 17, 2026 at 07:36:17AM +1200, Simon Glass wrote:
+On Fri, Apr 17, 2026 at 07:36:37AM +1200, Simon Glass wrote:
 > Hi Daniel,
 > 
 > On 2026-04-16T01:46:15, Daniel Golle <daniel@makrotopia.org> wrote:
-> > test: py: add mkimage dm-verity round-trip test
+> > test: boot: add runtime unit test for fit_verity_build_cmdline()
 > >
-> > Add test/py/tests/test_fit_verity.py with two tests.
-> >
-> > Both tests are skipped if veritysetup is not installed on the host.
+> > Add test/boot/fit_verity.c with four tests that construct FIT blobs
+> > in memory and exercise fit_verity_build_cmdline().
 > >
 > > Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 > >
-> > test/py/tests/test_fit_verity.py | 153 +++++++++++++++++++++++++++++++++++++++
-> >  1 file changed, 153 insertions(+)
+> > test/boot/Makefile     |   1 +
+> >  test/boot/fit_verity.c | 302 +++++++++++++++++++++++++++++++++++++++++++++++++
+> >  test/cmd_ut.c          |   2 +
+> >  3 files changed, 305 insertions(+)
 > 
-> > diff --git a/test/py/tests/test_fit_verity.py b/test/py/tests/test_fit_verity.py
-> > @@ -0,0 +1,153 @@
-> > +import struct
+> > diff --git a/test/boot/fit_verity.c b/test/boot/fit_verity.c
+> > @@ -0,0 +1,302 @@
+> > +             ret = fdt_setprop_string(buf, verity_node, "algo", "sha256");
+> > +             val = cpu_to_fdt32(4096);
+> > +             ret = fdt_setprop(buf, verity_node, "data-block-size",
 > 
-> The struct import seems to be unused.
-> 
-> > diff --git a/test/py/tests/test_fit_verity.py b/test/py/tests/test_fit_verity.py
-> > @@ -0,0 +1,153 @@
-> > +def have_veritysetup():
-> > +    return shutil.which('veritysetup') is not None
-> > +
-> > +
-> > +@pytest.mark.requiredtool('dtc')
-> > +@pytest.mark.requiredtool('fdtget')
-> > +@pytest.mark.skipif(not have_veritysetup(),
-> > +                    reason='veritysetup not installed')
-> > +def test_mkimage_verity(ubman):
-> 
-> The test infrastructure supports
-> @pytest.mark.requiredtool('veritysetup') which handles the skip
-> message consistently. That also means you can drop the
-> have_veritysetup() helper.
+> Please can you use the FIT_VERITY_*_PROP constants from
+> include/image.h instead of literal strings? See test/image/spl_load.c
+> for an example.
 
-I have to admit that Python is not one of my strengths...
-I'll try to figure it out and address this in v3.
+Sure, I'll change that.
+
+I was deliberately not doing it so the test code is as self-contained
+as possible.
