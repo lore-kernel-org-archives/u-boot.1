@@ -4,21 +4,21 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9544FF433D6
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 01:46:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4395DF433D4
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 01:47:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0A6383EEF;
-	Thu, 16 Apr 2026 03:46:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 33C0D84119;
+	Thu, 16 Apr 2026 03:46:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C75E84105; Thu, 16 Apr 2026 03:46:50 +0200 (CEST)
+ id A3F7883B99; Thu, 16 Apr 2026 03:46:50 +0200 (CEST)
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F354583B99
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 03:46:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ADB328407D
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 03:46:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
@@ -26,8 +26,8 @@ Authentication-Results: phobos.denx.de;
 Received: from local
  by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
  (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1wDBoF-000000006cz-1SWR; Thu, 16 Apr 2026 01:46:23 +0000
-Date: Thu, 16 Apr 2026 02:46:15 +0100
+ id 1wDBoO-000000006d3-1rbt; Thu, 16 Apr 2026 01:46:32 +0000
+Date: Thu, 16 Apr 2026 02:46:29 +0100
 From: Daniel Golle <daniel@makrotopia.org>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Quentin Schulz <quentin.schulz@cherry.de>,
@@ -51,11 +51,13 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Jonas Karlman <jonas@kwiboo.se>, Shiji Yang <yangshiji66@outlook.com>,
  Rasmus Villemoes <ravi@prevas.dk>,
  Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
-Subject: [PATCH v2 0/7] fit: dm-verity support
-Message-ID: <cover.1776302805.git.daniel@makrotopia.org>
+Subject: [PATCH v2 1/7] image: fit: add dm-verity property name constants
+Message-ID: <ae77f7b939ec6e1c2cc1b0fabc13cb3f8a68c2c0.1776302806.git.daniel@makrotopia.org>
+References: <cover.1776302805.git.daniel@makrotopia.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
+In-Reply-To: <cover.1776302805.git.daniel@makrotopia.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,80 +74,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds dm-verity support to U-Boot's FIT image infrastructure.
-It is the first logical subset of the larger OpenWrt boot method series
-posted as an RFC in February 2026 [1], extracted here for independent
-review and merging.
+Add FIT_VERITY_NODENAME and the complete set of FIT_VERITY_*_PROP
+constants for the dm-verity child node of filesystem-type images, plus
+the five optional boolean error-handling property names aligned with the
+flat-image-tree specification.
 
-OpenWrt's firmware model embeds a read-only squashfs or erofs root
-filesystem directly inside a uImage.FIT container as a FILESYSTEM-type
-loadable FIT image. At boot the kernel maps this sub-image directly from
-the underlying block device via the fitblk driver (/dev/fit0, /dev/fit1,
-...), the goal is that the bootloader never even copies it to RAM.
+Signed-off-by: Daniel Golle <daniel@makrotopia.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+v2: no changes
 
-dm-verity enables the kernel to verify the integrity of those mapped
-filesystems at read time, with a Merkle hash tree stored contiguously in
-the same sub-image just after the data. Two kernel command-line
-parameters are required:
+ include/image.h | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-  dm-mod.create=   -- the device-mapper target table for the verity device
-  dm-mod.waitfor=  -- a comma-separated list of block devices to wait for
-                      before dm-init sets up the targets (needed when fitblk
-                      probes late, e.g. because it depends on NVMEM
-                      calibration data)
-
-The FIT dm-verity node schema was upstreamed into the flat-image-tree
-specification [2], which this implementation tries to follow exactly.
-
-The runtime feature is guarded behind CONFIG_FIT_VERITY. If not
-enabled the resulting binary size remains unchanged. If enabled the
-binary size increases by about 3kB.
-
-[1] RFC/v2: https://www.mail-archive.com/u-boot@lists.denx.de/msg565945.html
-[2] flat-image-tree dm-verity node spec:
-    https://github.com/open-source-firmware/flat-image-tree/commit/795fd5fd7f0121d0cb03efb1900aafc61c704771
-
-v2: address comments by Simon Glass
- * use is_power_of_2() for pre-boot sanity check
- * let fit_verity_build_cmdline() return 0 on success
- * add comment explaining why bootm_start() calls fit_verity_free()
- * use existing hex2bin() (and adapt it to be usable for host-tools)
- * fix stale comment still including superblock despite veritysetup
-   being called with --no-superblock
- * add power-of-two check for data-block-size and hash-block-size to
-   mkimage
- * don't ignore return value of fdt_delprop()
- * various documentation fixes, minimal example
- * add pytest for mkimage part
- * add run-time unit test for cmdline generation part
-
-Daniel Golle (7):
-  image: fit: add dm-verity property name constants
-  boot: fit: support generating DM verity cmdline parameters
-  include: hexdump: make hex2bin() usable from host tools
-  tools: mkimage: add dm-verity Merkle-tree generation
-  doc: fit: add dm-verity boot parameter documentation
-  test: boot: add runtime unit test for fit_verity_build_cmdline()
-  test: py: add mkimage dm-verity round-trip test
-
- boot/Kconfig                     |  20 ++
- boot/bootm.c                     |  13 ++
- boot/image-board.c               |   5 +
- boot/image-fit.c                 | 337 +++++++++++++++++++++++++++++
- doc/usage/fit/dm-verity.rst      | 282 +++++++++++++++++++++++++
- doc/usage/fit/index.rst          |   1 +
- include/hexdump.h                |   8 +-
- include/image.h                  |  97 ++++++++-
- test/boot/Makefile               |   1 +
- test/boot/fit_verity.c           | 298 ++++++++++++++++++++++++++
- test/cmd_ut.c                    |   2 +
- test/py/tests/test_fit_verity.py | 153 ++++++++++++++
- tools/fit_image.c                | 116 +++++++++-
- tools/image-host.c               | 349 ++++++++++++++++++++++++++++++-
- 14 files changed, 1669 insertions(+), 13 deletions(-)
- create mode 100644 doc/usage/fit/dm-verity.rst
- create mode 100644 test/boot/fit_verity.c
- create mode 100644 test/py/tests/test_fit_verity.py
-
+diff --git a/include/image.h b/include/image.h
+index 34efac6056d..482446a8115 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -1079,6 +1079,23 @@ int booti_setup(ulong image, ulong *relocated_addr, ulong *size,
+ #define FIT_CIPHER_NODENAME	"cipher"
+ #define FIT_ALGO_PROP		"algo"
+ 
++/* dm-verity node */
++#define FIT_VERITY_NODENAME	"dm-verity"
++#define FIT_VERITY_ALGO_PROP	"algo"
++#define FIT_VERITY_DBS_PROP	"data-block-size"
++#define FIT_VERITY_HBS_PROP	"hash-block-size"
++#define FIT_VERITY_NBLK_PROP	"num-data-blocks"
++#define FIT_VERITY_HBLK_PROP	"hash-start-block"
++#define FIT_VERITY_DIGEST_PROP	"digest"
++#define FIT_VERITY_SALT_PROP	"salt"
++
++/* dm-verity error-handling modes (optional boolean property names) */
++#define FIT_VERITY_OPT_RESTART	"restart-on-corruption"
++#define FIT_VERITY_OPT_PANIC	"panic-on-corruption"
++#define FIT_VERITY_OPT_RERR	"restart-on-error"
++#define FIT_VERITY_OPT_PERR	"panic-on-error"
++#define FIT_VERITY_OPT_ONCE	"check-at-most-once"
++
+ /* image node */
+ #define FIT_DATA_PROP		"data"
+ #define FIT_DATA_POSITION_PROP	"data-position"
 -- 
 2.53.0
