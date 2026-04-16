@@ -4,63 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74470F8A146
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 09:06:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E3C5F8A145
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 09:07:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F30C58407E;
-	Thu, 16 Apr 2026 11:06:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 9363984206;
+	Thu, 16 Apr 2026 11:07:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="G8RoupDh";
+	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="gUy6OIWo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5342841D5; Thu, 16 Apr 2026 11:06:10 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id 2E65C83FC0; Thu, 16 Apr 2026 11:06:59 +0200 (CEST)
+Received: from mail.kernel-space.org (unknown
+ [IPv6:2a03:4000:b:d08:14a9:1bff:fedc:75ad])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B423483FC0
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 11:06:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 21DC383FC0
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 11:06:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=kernel-space.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4fxBvM0bMCz9tk9;
- Thu, 16 Apr 2026 11:06:07 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1776330367;
+ spf=pass smtp.mailfrom=angelo@kernel-space.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
+ s=s1; t=1776330416;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=CFz6mP6rjrGYlhQTvsAZLY2CFLYZNMdMwya+2SgeqnM=;
- b=G8RoupDh8AxTDA4cRLpx0WkDB+aywSCYEdVzxBExD7u5pYYl6/iGchDQcOldK7w1sbIETd
- xrsbFkDmDz8ouHnv0LlzD8EA1RBg3ODW8FLiW+rkm8iEqbsSnRB06No7VHkEMDkOeUkLxs
- 8L+Umdi+0InIfcAfLCaWReBgTN2VoyHZFb5krb65VAgwmUspTkUiSuVMRJ/TtFzJ2ea7Oz
- j57qP8JvrV01SHT1iuVC2R3OEPVLSHIa9KcuG0Sc2kAtf81opCaHbnKlXWmKR9AI0hGX2T
- 7T68AHRlQ+6igRJCTgf46VYwsr0Jkh+5mgZDH84s5001p9IGnDKFH+ujVeF90g==
-Message-ID: <6f873006-9b2e-406d-a561-da951a5d0d5d@mailbox.org>
-Date: Thu, 16 Apr 2026 11:06:03 +0200
+ bh=5qS1cED+9qlV2BWW94OuwNGL/v0meKZROBln7/AF1C8=;
+ b=gUy6OIWoZiQYRP2bENa4kDSTi6n4JlMfG2CjmjM0WKGxz5OvRFh24TZ16bwT+5IkvPgF+A
+ TCu66waQxtegPZo1GD1Au2imS8ooGwmxsZQQUeWb4I11WhTJE/TMqkrC/HBC59Q/sKe8o8
+ 9LsoQVsvLt05WuojuXrp/xHlzSbI840=
+Received: from [IPV6:2a07:7e81:7daa:0:62cf:84ff:feee:627] (<unknown>
+ [2a07:7e81:7daa:0:62cf:84ff:feee:627])
+ by oreshnik (OpenSMTPD) with ESMTPSA id 54fb2740
+ (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
+ Thu, 16 Apr 2026 09:06:56 +0000 (UTC)
+Message-ID: <9953a109-6ff5-43f1-ac5d-245c906280b5@kernel-space.org>
+Date: Thu, 16 Apr 2026 11:06:55 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] usb: dwc3: core: fix memory leaks in event buffer
- cleanup
-To: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>,
- trini@konsulko.com, mkorpershoek@kernel.org, macromorgan@hotmail.com,
- casey.connolly@linaro.org, quic_varada@quicinc.com,
- felipe.balbi@linux.intel.com, u-boot@lists.denx.de
-References: <20260416055501.494002-1-gurumoorthy.santhakumar@oss.qualcomm.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260416055501.494002-1-gurumoorthy.santhakumar@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/6] m68k: Fix writew(), writel(), readw(), readl()
+ endianness for classic m68k
+To: Daniel Palmer <daniel@thingy.jp>, visitorckw@gmail.com, bmeng.cn@gmail.com
+Cc: sjg@chromium.org, u-boot@lists.denx.de
+References: <20260413092240.3719260-1-daniel@thingy.jp>
+ <20260413092240.3719260-3-daniel@thingy.jp>
+Content-Language: en-US, it
+From: Angelo Dureghello <angelo@kernel-space.org>
+In-Reply-To: <20260413092240.3719260-3-daniel@thingy.jp>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 4gfnmgmqx4itnronph3f9w73fx9ajmdi
-X-MBO-RS-ID: e47a85424249cf28fe6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,21 +72,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/16/26 7:55 AM, Gurumoorthy Santhakumar wrote:
-> In dwc3_free_one_event_buffer(), only the DMA buffer (evt->buf) was
-> being freed via dma_free_coherent(), but the evt structure itself was
-> never explicitly freed, causing a memory leak.
-> 
-> In dwc3_free_event_buffers(), the ev_buffs pointer array allocated
-> with memalign() was never freed after iterating and releasing all
-> individual event buffers, causing another memory leak.
-> 
-> Fix both leaks by freeing the evt struct in
-> dwc3_free_one_event_buffer() and freeing dwc->ev_buffs in
-> dwc3_free_event_buffers() after all entries have been released.
-> 
-> Signed-off-by: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
+Hi Daniel,
 
-Reviewed-by: Marek Vasut <marek.vasut+usb@mailbox.org>
+actually, i can build all m68k boards without errors, 
+and have stmark2 up and running without any issue.
 
-Thank you
+I will try to fix better this endian thing asap, thanks for the comment.
+
+Acked-by: Angelo Dureghello <angelo@kernel-space.org>
+
+On 4/13/26 11:22, Daniel Palmer wrote:
+> In Linux these are meant to read a little-endian value and swap
+> to the CPU endian.
+> 
+> In u-boot for m68k this is currently broken and prevents
+> virtio-mmio from functioning.
+> 
+> This change is only for classic m68k. Coldfire has read big-endian,
+> no swap for these in u-boot and Linux and existing drivers probably
+> depend on this.
+> 
+> Signed-off-by: Daniel Palmer <daniel@thingy.jp>
+> Tested-by: Angelo Dureghello <angelo@kernel-space.org>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> ---
+>  arch/m68k/include/asm/io.h | 31 ++++++++++++++++++++-----------
+>  1 file changed, 20 insertions(+), 11 deletions(-)
+> 
+> diff --git a/arch/m68k/include/asm/io.h b/arch/m68k/include/asm/io.h
+> index 35ad4a1c0444..2577081d8363 100644
+> --- a/arch/m68k/include/asm/io.h
+> +++ b/arch/m68k/include/asm/io.h
+> @@ -23,18 +23,27 @@
+>  #define __raw_writew(w,addr) ((*(volatile u16 *) (addr)) = (w))
+>  #define __raw_writel(l,addr) ((*(volatile u32 *) (addr)) = (l))
+>  
+> -#define readb(addr)		in_8((volatile u8 *)(addr))
+> -#define writeb(b,addr)		out_8((volatile u8 *)(addr), (b))
+> -#if !defined(__BIG_ENDIAN)
+> -#define readw(addr)		(*(volatile u16 *) (addr))
+> -#define readl(addr)		(*(volatile u32 *) (addr))
+> -#define writew(b,addr)		((*(volatile u16 *) (addr)) = (b))
+> -#define writel(b,addr)		((*(volatile u32 *) (addr)) = (b))
+> +#define readb(addr)	in_8((volatile u8 *)(addr))
+> +#define writeb(b, addr)	out_8((volatile u8 *)(addr), (b))
+> +#ifdef CONFIG_M680x0
+> +/*
+> + * For classic m68k these work the same way as Linux:
+> + * Read a little endian value, swap to the CPU endian.
+> + */
+> +#define readw(addr)	in_le16((volatile u16 *)(addr))
+> +#define readl(addr)	in_le32((volatile u32 *)(addr))
+> +#define writew(b, addr)	out_le16((volatile u16 *)(addr), (b))
+> +#define writel(b, addr)	out_le32((volatile u32 *)(addr), (b))
+>  #else
+> -#define readw(addr)		in_be16((volatile u16 *)(addr))
+> -#define readl(addr)		in_be32((volatile u32 *)(addr))
+> -#define writew(b,addr)		out_be16((volatile u16 *)(addr),(b))
+> -#define writel(b,addr)		out_be32((volatile u32 *)(addr),(b))
+> +/*
+> + * For coldfire these read a big endian value and use it
+> + * as-is. This means that for little endian devices on the
+> + * bus like PCI device these won't work as expected currently.
+> + */
+> +#define readw(addr)	in_be16((volatile u16 *)(addr))
+> +#define readl(addr)	in_be32((volatile u32 *)(addr))
+> +#define writew(b, addr)	out_be16((volatile u16 *)(addr), (b))
+> +#define writel(b, addr)	out_be32((volatile u32 *)(addr), (b))
+>  #endif
+>  
+>  /*
+
+-- Angelo
+
