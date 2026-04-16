@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20B96F4369A
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 12:44:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0D4DF4369A
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 12:44:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E10A78426C;
-	Fri, 17 Apr 2026 14:43:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2632B84297;
+	Fri, 17 Apr 2026 14:44:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SePKLmqN";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iOwPEpN0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D09984201; Thu, 16 Apr 2026 16:45:05 +0200 (CEST)
+ id 0B22D841F2; Thu, 16 Apr 2026 16:45:10 +0200 (CEST)
 Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
  [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9EF50841C2
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 16:45:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F3C1841C2
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 16:45:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=micbis.openwrt@gmail.com
 Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-48374014a77so105949725e9.3
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 07:45:03 -0700 (PDT)
+ 5b1f17b1804b1-488c2690057so82109995e9.0
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 07:45:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776350703; x=1776955503; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1776350707; x=1776955507; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wuAzHK5KC8yD7Za8YXNhQGv4356/N2bl4iAgmIWEcuw=;
- b=SePKLmqNraknXWLg0gf1oNyVZqleOvUtjJZ7RNxhdz0PHgDOEiJBiwXfVk8JREM9eY
- axS/bH/yMGbpA+WEkkF5G9QkSSjg/bSf+BS/ATSG5whai4O1gGIsBCP1OSx2vwbb4nOA
- mHsH1zIin0Izr0WMPllZqEkLIMZNmUZLhKCtf4j+DLnjK3WWGawE4sfcWjY5J4oHRPVG
- 2L85aOQv82Ma6hp2/M+hoLOyP3AZSGnErHYZycnlrVG+q1RAi8zZB0DbliFHWtNg4Vwy
- dru1IjO0HKNq7rA+rhxHyLZpBXt+Ng4+Z2NmbeRHjbAXCfMOJtkUCi9KuuvsBHJVJhh/
- ShYQ==
+ bh=ITezWZ76YZkfMJJHfN7K+7rosPUNBPmRwlq2NM1uEfk=;
+ b=iOwPEpN01wCz5C7uPLGnzxIQx9hcQ0/eNnMbFkO7oskShTalna9r6hAqDA7PyV2+nE
+ sBtmrdQkbXuDQQp96iX6a6a0/KfSV+7a8loe4hZOYVRJrb7BMcrdl+YkxEXdpeLnLKdX
+ oydXlLjFr+jazAwZ9QI3kZkLuQvOegpC93DjSJVdKE3PWfvlz9NUM7RBjoiGkArfJIIN
+ G2EUSM/pCFGZaL8Ll4wtBD7C36PqWVFjB1+Upq673qb2iDMmCk/tQN7uyhQ+r2cqbjz3
+ l5M/hPXYTANcMDiiaRFx8bRfSFNVYaFb5zY94FrkM076TYyenGwdMxbUb10d2/YuzVDU
+ IRxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776350703; x=1776955503;
+ d=1e100.net; s=20251104; t=1776350707; x=1776955507;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=wuAzHK5KC8yD7Za8YXNhQGv4356/N2bl4iAgmIWEcuw=;
- b=p+AFWH5gEOkP+mUs7N6ZbkZ/FvM0HT0jXH6tS7GIOhr2stfPQf3sL6VlE9ms+7Kqth
- Ez9pMJD/mBT1XTZwppy+3+6i29kpFMCXSZHRzYCs+BcyX5yeWiKUOvSfsnzDICRtZncQ
- jjY0PbA5lYG/Bk72oWtVFavwTkbTEceW+ozhbAh403HE+JVnjSkJZ6vz1BQNxDsq/n6A
- RuhheQsEw2mC+Ijv6gq5Tlf0DD6kko/5gKwCqwDH9iUqjBJ9lIXtEUIi3p3ZWbxpMgRC
- +8jc0QZKuEM4Og69kPXUuTDmOTW39G4HiSQmjEiMrBjt6wWX0ONZzfitbhSqBrcHR5w2
- sDoA==
-X-Gm-Message-State: AOJu0YzBtQW6fnG5f2kMbB0UWRnuyd7BAFzFw0l0nozhZ8mojc2SSN0P
- 0djSKpTaXQw7oOehcaj65sHsoNcY6uZP/SxmPeoWrHwBXA4H/peTUbwYZAV4UnFfYys=
-X-Gm-Gg: AeBDietMavSf51QI7lsHEKJCok3Lol+VxRP1wtHMckGXPVAk4RyzqJaF8FQBXXBD/HU
- m/SEhj+P70h52L6b+ZF159X9Bs8JnVrayG98gxKCOZXGjFGPoXVm3fMCFBkJ7f7JG+30Js7PAJF
- lOBLZ4gcvzlMUa3CHN4KZfjNZKNbLFo34r7gwpIDv8T0X3xbWzPVwwD/5nLsMd8YU7FnHVjTdfA
- oBAQXMf4HgBu39OfDpkkzmscYnXWBqHwO9CAfyfPmVRvV7aHWmvBNel6xXsAy+Ln2nyBwAz8+H/
- TgMO45IasruycWG0S8d0FnLYhwG2rxaGj2LyBQGXIKRhhZzi5DZ61gKU7+W7ihQpLxFHJP+tveo
- 33Wxt+9LEU6k66onHnMFIoEqslEu9H0DUmi5CKSsGaBcYY6tTF8KBRmRZOVPPmcf5blxH0Sq17/
- GHCo867ZJAMQzDpCFlK5Jjrz1WZFhB3pLWL7uo7UM8
-X-Received: by 2002:a05:600c:1391:b0:486:fe23:1707 with SMTP id
- 5b1f17b1804b1-488d687116amr373059095e9.20.1776350702343; 
- Thu, 16 Apr 2026 07:45:02 -0700 (PDT)
+ bh=ITezWZ76YZkfMJJHfN7K+7rosPUNBPmRwlq2NM1uEfk=;
+ b=VvsAEn1/M9/LcbT256e8siPD1w24wOKLhUf7BLS0WsK3XUzaBGoeAw+r3hF6Nl7K4S
+ 7wJ1ddQHhSGQKsduMd/eNfmIGAmkeToZPyhcLur1CZ5qn3w7g9rStdbCS6QOpfCB7kyV
+ KJUEkalEmVHyb8/Lgq/ZkgaCQ3XYxZghJwyll/cGiSBZWirmJyk0yUzLioqCbRwFHv1M
+ r+pFxoRGqhgkFjdCi4GXA7AEHJ4mGsEdpBC7ygDLTMDBY82P2ZrTOUSPS1GBtay4BAlF
+ zGfYk5R+ZVGg9pRk/vVi8ZzbKMrg3o0yzQFsEhs/6c0q5BpjFBWoJ1QowgI3etZKtQsu
+ PzHg==
+X-Gm-Message-State: AOJu0YyOZFyT4Srlw6T4wPHQ5rjWEiYYx1lA8fhSVWZ+sqGYPNaQb1rA
+ 7Zdye4+YApKAjNYIR9l1A42gcjfgnC9tVjmdjlbWRrQ/zsYzkVdU8i8Rl2VNsbqq
+X-Gm-Gg: AeBDiesEorQ216gkWIo2cFtSWGN5T07EI8z+uD5s5ThAqb9ER+XAB2n7qaRiscAqJ19
+ +MyOG3yHusCXnYYD2jPAkYOcRUyk44z6N92CTMca4n/eqOPCiMsvy8+tqJKzFyHYnS6po+gMQqi
+ 3BMHyT+BvjXv4wO0yx90J7z9l0WDDEAxum9sy+6BHu9LEZ3QEjy5xxzo6P/OEYkuABQA9p8PBxv
+ 7grywCKTrvbdCofRQZSiYN6Q48M1mpsh50+Mu7NwCiaFWjw1Y22/RP7gqgwm/cxGprpSjQ3Zn5g
+ KgztrBjLSSbZFGjRy1q7q2WQ9w+r8gzkvF+B4zcac0ux/tMU0SWtYNYDx0qXRDCFVERLsdDw/4P
+ 4x9xiVr8UP6bNpHiXu3EDfS0Md9O5i2XmL3Bz47XAEOGgR5IcwTYQQsSnBNtHdNdz86Rp2GFT1C
+ 3bNdCWakj8W9nZhvqWAxUe233GMt/kdC0bE5VPrIh7NjcjKL6m8hc=
+X-Received: by 2002:a05:600c:a105:b0:486:af22:4a2a with SMTP id
+ 5b1f17b1804b1-488d681f281mr255196975e9.7.1776350707077; 
+ Thu, 16 Apr 2026 07:45:07 -0700 (PDT)
 Received: from localhost.localdomain ([151.70.144.55])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488f58163cbsm58756775e9.1.2026.04.16.07.45.01
+ 5b1f17b1804b1-488f58163cbsm58756775e9.1.2026.04.16.07.45.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Apr 2026 07:45:01 -0700 (PDT)
+ Thu, 16 Apr 2026 07:45:06 -0700 (PDT)
 From: Michele Bisogno <micbis.openwrt@gmail.com>
 To: u-boot@lists.denx.de
 Cc: marek.vasut+renesas@mailbox.org, paul@pbarker.dev, jh80.chung@samsung.com,
  peng.fan@nxp.com, lukma@denx.de, mkorpershoek@kernel.org,
  trini@konsulko.com, Michele Bisogno <micbis.openwrt@gmail.com>
-Subject: [PATCH v2 1/2] regulator: rzg2l: implement connectivity notification
-Date: Thu, 16 Apr 2026 16:44:25 +0200
-Message-Id: <20260416144426.12728-2-micbis.openwrt@gmail.com>
+Subject: [PATCH v2 2/2] usb: gadget: renesas: add support for RZ/G2L SoC
+Date: Thu, 16 Apr 2026 16:44:26 +0200
+Message-Id: <20260416144426.12728-3-micbis.openwrt@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260416144426.12728-1-micbis.openwrt@gmail.com>
 References: <20260416144426.12728-1-micbis.openwrt@gmail.com>
@@ -100,42 +100,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement CON_CTRL manual connectivity notification.
-By setting SEL_CONNECT and CONNECT_1, the UTM+ core is notified of
-connection status in peripheral mode.
+common: Add "renesas,rzg2l-usbhs" compatible and support
+reset deassertion. Fix a re-entrancy bug by calling usb_del_gadget_udc()
+in the remove callback to prevent stale UDC list entries.
+fifo: Refactor PIO push/pop logic to handle trailing bytes
+using iowrite8/ioread8. This ensures correct data alignment on
+RZ/G2L and simplifies the data transfer loop.
 ---
- drivers/power/regulator/rzg2l-usbphy-regulator.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ drivers/usb/gadget/rcar/common.c | 15 +++++++++++++++
+ drivers/usb/gadget/rcar/fifo.c   | 23 +++++++++++++----------
+ 2 files changed, 28 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/power/regulator/rzg2l-usbphy-regulator.c b/drivers/power/regulator/rzg2l-usbphy-regulator.c
-index 0354555d0b5..03f8dec4f08 100644
---- a/drivers/power/regulator/rzg2l-usbphy-regulator.c
-+++ b/drivers/power/regulator/rzg2l-usbphy-regulator.c
-@@ -9,16 +9,22 @@
- #include <renesas/rzg2l-usbphy.h>
+diff --git a/drivers/usb/gadget/rcar/common.c b/drivers/usb/gadget/rcar/common.c
+index 2ba022a3f2c..1f266ae5ac9 100644
+--- a/drivers/usb/gadget/rcar/common.c
++++ b/drivers/usb/gadget/rcar/common.c
+@@ -16,6 +16,7 @@
+ #include <linux/usb/ch9.h>
+ #include <linux/usb/gadget.h>
+ #include <usb.h>
++#include <reset.h>
  
- #define VBENCTL			0x03c
-+#define CON_CTRL		0x020
- #define VBENCTL_VBUS_SEL	BIT(0)
-+#define SEL_CONNECT		BIT(4)
-+#define CONNECT_1		BIT(0)
+ #include "common.h"
  
- static int rzg2l_usbphy_regulator_set_enable(struct udevice *dev, bool enable)
+@@ -397,6 +398,7 @@ static int usbhs_udc_otg_probe(struct udevice *dev)
+ 	struct usbhs_priv_otg_data *priv = dev_get_priv(dev);
+ 	struct usb_gadget *gadget;
+ 	struct clk_bulk clk_bulk;
++	struct reset_ctl_bulk reset_bulk;
+ 	int ret = -EINVAL;
+ 
+ 	priv->base = dev_read_addr_ptr(dev);
+@@ -411,6 +413,14 @@ static int usbhs_udc_otg_probe(struct udevice *dev)
+ 	if (ret)
+ 		return ret;
+ 
++	ret = reset_get_bulk(dev, &reset_bulk);
++	if (ret)
++		return ret;
++
++	ret = reset_deassert_bulk(&reset_bulk);
++	if (ret)
++		return ret;
++
+ 	clrsetbits_le32(priv->base + UGCTRL2, UGCTRL2_USB0SEL_MASK, UGCTRL2_USB0SEL_EHCI);
+ 	clrsetbits_le16(priv->base + LPSTS, LPSTS_SUSPM, LPSTS_SUSPM);
+ 
+@@ -447,7 +457,11 @@ err_clk:
+ static int usbhs_udc_otg_remove(struct udevice *dev)
  {
- 	struct rzg2l_usbphy_ctrl_priv *priv = dev_get_priv(dev->parent);
+ 	struct usbhs_priv_otg_data *priv = dev_get_priv(dev);
++	struct usb_gadget *gadget;
  
--	if (enable)
-+	if (enable) {
- 		clrbits_le32(priv->regs + VBENCTL, VBENCTL_VBUS_SEL);
--	else
-+		setbits_le32(priv->regs + CON_CTRL, SEL_CONNECT | CONNECT_1);
-+	} else {
- 		setbits_le32(priv->regs + VBENCTL, VBENCTL_VBUS_SEL);
-+		clrbits_le32(priv->regs + CON_CTRL, SEL_CONNECT | CONNECT_1);
-+	}
++	gadget = usbhsg_get_gadget(&priv->usbhs_priv);
++	if (gadget)
++		usb_del_gadget_udc(gadget);
+ 	usbhs_rcar3_power_ctrl(&priv->usbhs_priv, false);
+ 	usbhs_mod_remove(&priv->usbhs_priv);
+ 	usbhs_fifo_remove(&priv->usbhs_priv);
+@@ -460,6 +474,7 @@ static int usbhs_udc_otg_remove(struct udevice *dev)
  
- 	return 0;
- }
+ static const struct udevice_id usbhs_udc_otg_ids[] = {
+ 	{ .compatible = "renesas,rcar-gen3-usbhs" },
++	{ .compatible = "renesas,rzg2l-usbhs"},
+ 	{},
+ };
+ 
+diff --git a/drivers/usb/gadget/rcar/fifo.c b/drivers/usb/gadget/rcar/fifo.c
+index 6016b2987d5..b5340b4d860 100644
+--- a/drivers/usb/gadget/rcar/fifo.c
++++ b/drivers/usb/gadget/rcar/fifo.c
+@@ -535,18 +535,21 @@ static int usbhsf_pio_try_push(struct usbhs_pkt *pkt, int *is_done)
+ 	 * 32-bit access only
+ 	 */
+ 	if (len >= 4 && !((unsigned long)buf & 0x03)) {
+-		iowrite32_rep(addr, buf, len / 4);
+-		len %= 4;
+-		buf += total_len - len;
++		int words = len / 4;
++
++		iowrite32_rep(addr, buf, words);
++		buf += (words * 4);
++		len -= (words * 4);
+ 	}
+ 
+ 	/* the rest operation */
+-	if (usbhs_get_dparam(priv, cfifo_byte_addr)) {
+-		for (i = 0; i < len; i++)
+-			iowrite8(buf[i], addr + (i & 0x03));
+-	} else {
+-		for (i = 0; i < len; i++)
+-			iowrite8(buf[i], addr + (0x03 - (i & 0x03)));
++	if (len > 0) {
++		if (len == 2 && !((unsigned long)buf & 0x01)) {
++			iowrite16(*(u16 *)buf, addr);
++		} else {
++			for (i = 0; i < len; i++)
++				iowrite8(buf[i], addr);
++		}
+ 	}
+ 
+ 	/*
+@@ -716,7 +719,7 @@ static int usbhsf_pio_try_pop(struct usbhs_pkt *pkt, int *is_done)
+ 		if (!(i & 0x03))
+ 			data = ioread32(addr);
+ 
+-		buf[i] = (data >> ((i & 0x03) * 8)) & 0xff;
++		buf[i] = ioread8(addr);
+ 	}
+ 
+ usbhs_fifo_read_end:
 -- 
 2.34.1
 
