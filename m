@@ -4,84 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B9D1F43699
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 12:45:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7798EF43697
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 12:45:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7640284314;
-	Fri, 17 Apr 2026 14:44:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
+	by phobos.denx.de (Postfix) with ESMTP id 0FBD78431E;
+	Fri, 17 Apr 2026 14:44:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="Xuv+xrkK";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="YLrmdOXX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A12748405A; Thu, 16 Apr 2026 18:13:14 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6B7828424E; Thu, 16 Apr 2026 21:16:21 +0200 (CEST)
+Received: from mxd-1-a09.seznam.cz (mxd-1-a09.seznam.cz
+ [IPv6:2a02:598:128:8a00::1000:a09])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9C0783EEF
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 18:13:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=9elements.com
+ by phobos.denx.de (Postfix) with ESMTPS id C532D8423F
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 21:16:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maximilian.brune@9elements.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-43cfd832155so5678764f8f.1
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 09:13:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1776355988; x=1776960788; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=IoNMUcoV2Z9BAIJ2q8e+0qv5et7Zu1kh2NhEcLrhTv8=;
- b=Xuv+xrkKW9tzj3YryNGMvedNUWa1m9whC1RxtPoQsd2gIyCCO6gK7g3vIVf1JSmd96
- 737vxXC6FxQG+uwkp/gZ2AGPXOh46q/A8xITS1qEE6UqqyUqoX59ww2jVJLqsmwCcl7z
- Y6Q+euvravaBF6yQ7FWi4UtTJj0YLfiQ+EtEfT0Wl2J9e80P+X37p/F8b/BK0t+OheOZ
- Lv0enSbrbpheRPonGT7EOex+FmUHKD8j75LNU3up0S3Al6H2/7WewC/rAjix/ZYe9HML
- yK95s134mznDZmRgaf/GcjdK2G8SjLyDY2pFhAubVJfB1RsgUduQIJllUqzhXaoJBGB5
- kcKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776355988; x=1776960788;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IoNMUcoV2Z9BAIJ2q8e+0qv5et7Zu1kh2NhEcLrhTv8=;
- b=aqeXhJK6QtLVyLkURfb+DCsgJ3DUHY05SeUG58T7WiZnM29A/0OAG7bqFsfnoyEQ6x
- uDjR2ilC4CEBLYh9MGXKtRlpo4eMy698HFozCx5VhW9hB60nXo7GVi8QAcm2j9lv4l5X
- ku/AizdSIthB6MzrQsX0Nqw757hSpeB8YSGtu2Etx0zoIfCTqe+psoYKV4lU4KZ0hn9D
- aOUFFlNq3hg8PD3B6zC/+AcWZ6CvI9WDUt7+YWDKn0bpTrqAQx1ixJQHtKS5T7vW/Rjx
- kxz6BTj9TK6zlR+P16zoj75zz5ySISVhUv9xobF80hzruODefjELe2BHyv2n8pxr3f1h
- Y9KA==
-X-Gm-Message-State: AOJu0YyndXwV6eNBmyCUhUkIxVZO4rl2VNDLGRbRN7lSYhlkXgGdKdUU
- DoR/LPZ77Tiug5ip7jr+pcL8oCKxdAFqmZ9PoC+ddiTlrs9fMdLjz6fniAmWQVqI5K/fcpTJVbU
- vsh0mKTc=
-X-Gm-Gg: AeBDietSMlX9PatUA+xWzJXZ9TIl5uuKaV/URB8aFndapPA1tknZaMQBqx9W8cjxkr1
- YEN5vwgCUwpcEpHQWxWhhKjPNeX7mKf1lVVKbkuZuEGi7Zi76sx8yFfqNfA8w3QVy3c/emcXZJO
- hIjaUQVsm35ZoxtLKOsfibKIP8glyx2CTjUiQ1p3sVAGs9GImiNiDvNX9cnMqBQ0N73SQIo4VJ+
- LxknWzc8elmJSTuMeGZyKWAgUvNu0fIqjxPVybVOOK4KOSXZdmXuxQg3qk1x+uTR6Bu9bjWTU51
- UZYmYsMJ+0RCJ4E77oy65KkPCZjubUbgubFUmgs5uWFap3Y33ToPDVprwfh8xWcOdUxc1QUHqEi
- 8KiXHyFJrbpVTpKa+bHOgCsaG1tjX4TTjbKpI8mVvt79SUQjCK5dvcHLzkuiPUI8xf1toeKRf9v
- qqBFX9CYxmC0v2HM0wrnbhPQXr/pn5gcxAVc9VaVu3w+07CB3lkyMUFrlLHW6i3edH24ar
-X-Received: by 2002:a5d:5f82:0:b0:43f:dfbc:8c71 with SMTP id
- ffacd0b85a97d-43fe0613a3amr134616f8f.25.1776355988161; 
- Thu, 16 Apr 2026 09:13:08 -0700 (PDT)
-Received: from mmax.sec.9e.network ([185.254.75.29])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43ead3566b7sm15524821f8f.11.2026.04.16.09.13.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Apr 2026 09:13:07 -0700 (PDT)
-From: Maximilian Brune <maximilian.brune@9elements.com>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, andrew.goodbody@linaro.org,
- george.mccollister@konsulko.com,
- Maximilian Brune <maximilian.brune@9elements.com>
-Subject: [PATCH] pci: correct PCI device enumeration to include all functions
- on device 0
-Date: Thu, 16 Apr 2026 18:13:05 +0200
-Message-ID: <20260416161305.24118-1-maximilian.brune@9elements.com>
-X-Mailer: git-send-email 2.53.0
+ dmarc=pass (p=none dis=none) header.from=seznam.cz
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=Michael.Srba@seznam.cz
+Received: from email.seznam.cz by smtpc-mxd-fd5c5cd95-bfmjc
+ (smtpc-mxd-fd5c5cd95-bfmjc [2a02:598:128:8a00::1000:a09])
+ id 00a1bb8e5bafefe7010877d0; Thu, 16 Apr 2026 21:15:24 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
+ t=1776366924; bh=Jw19iE2UMoq45L/PTVPsC5e85l/1bMc+oqP09UFxcTo=;
+ h=Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+ Content-Language:From:Content-Type:Content-Transfer-Encoding;
+ b=YLrmdOXXLM5OjmNSGUOO/O6CeAV7vL2skKKAI+FGnVLyqhmbcJ0wC9qTT85qKQ4hq
+ f8Nw6wW9cM8+I6N/1WQ9JmKFCmraei2PsvaTHkiv59X3z2QUOHOLVrxNAqHf8muaF/
+ ZsQ0P6i8YzOCZ646TwXYkZdeM6n/S/dwQHMUb+uoQVPk/y56DqmpFC1Axkm9VeQkdN
+ biNfxQXLBFS8qKxRT+8Pc/qYyIhTpscIPaK7o6YfeddPG0Kxz+UYAJ0jgUouImBt+t
+ SswNH5m9M6dGDJqhqkzhjsS+Rt9ZbGpa1N3vI9NQwG2zXKesW2DqUfucGWNw7NER3j
+ YMWthILlnKWqA==
+Received: from [192.168.0.240] (ip-111-27.static.ccinternet.cz
+ [147.161.27.111])
+ by smtpd-relay-6597cc8696-j2tv7 (szn-email-smtpd/2.0.72) with ESMTPA
+ id a49c71a6-6f82-438d-a658-ff9fe4254ff6;
+ Thu, 16 Apr 2026 21:15:19 +0200
+Message-ID: <c2f3199f-480a-4d28-840d-f29bd9e5f0b9@seznam.cz>
+Date: Thu, 16 Apr 2026 21:15:17 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 07/10] mach-snapdragon: boot0.h: add sdm845_spl_boot0.h
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Anshul Dalal <anshuld@ti.com>,
+ Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
+ Hrushikesh Salunke <h-salunke@ti.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Jerome Forissier <jerome.forissier@arm.com>, Heiko Schocher
+ <hs@nabladev.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Tingting Meng <tingting.meng@altera.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>,
+ George Chan <gchan9527@gmail.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>
+References: <20260411-qcom_spl-v2-0-9609557cf562@seznam.cz>
+ <20260411-qcom_spl-v2-7-9609557cf562@seznam.cz>
+ <CAFLszTicL2M709+Mm3g1bdnVcYwcuX4SOEPKjbqW1SuJ8LF+2g@mail.gmail.com>
+Content-Language: en-US
+From: Michael Srba <Michael.Srba@seznam.cz>
+In-Reply-To: <CAFLszTicL2M709+Mm3g1bdnVcYwcuX4SOEPKjbqW1SuJ8LF+2g@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Fri, 17 Apr 2026 14:43:59 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,35 +106,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently the implementation does not just skip all devices beside
-device 0, it also skips all functions (besides 0) on device 0. This
-broke basically all AMD platforms, since they have a lot of internal SOC
-devices behind on these functions.
+Hi,
 
-This was detected, because the XHCI controller and therefore the USB
-devices were not found by u-boot on AMD/crater platform.
-
-Fix it by checking all functions on device 0 (Linux does the same).
-
-TEST=build u-boot as coreboot payload and run it on a recent x86 AMD
-platform. Devices like the XHCI controller are now found again.
----
- drivers/pci/pci-uclass.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
-index 83b76d01f24..f58d542ef75 100644
---- a/drivers/pci/pci-uclass.c
-+++ b/drivers/pci/pci-uclass.c
-@@ -927,7 +927,7 @@ int pci_bind_bus_devices(struct udevice *bus)
- 		if (PCI_FUNC(bdf) && !found_multi)
- 			continue;
- 
--		if (only_one_child(bus) && (PCI_MASK_BUS(bdf) > 0))
-+		if (only_one_child(bus) && (PCI_DEV(bdf) > 0))
- 			continue;
- 
- 		/* Check only the first access, we don't expect problems */
--- 
-2.53.0
+On 4/11/26 17:40, Simon Glass wrote:
+> Hi Michael,
+>
+> On 2026-04-11T00:00:12, Michael Srba <michael.srba@seznam.cz> wrote:
+>> mach-snapdragon: boot0.h: add sdm845_spl_boot0.h
+>>
+>> On sdm845, running u-boot SPL in EL3 requires escalting by using
+>> an unintentional feature in old builds of xbl_sec.elf. We do this
+>> in boot0.h so the rest of U-Boot can stay blissfully unaware
+>> of XBL_SEC. If we are already in EL3 for whatever reason, the
+>> code is skipped.
+>>
+>> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
+>>
+>> arch/arm/mach-snapdragon/include/mach/boot0.h      |   4 +
+>>   .../include/mach/sdm845_spl_boot0.h                | 120 +++++++++++++++++++++
+>>   2 files changed, 124 insertions(+)
+>> diff --git a/arch/arm/mach-snapdragon/include/mach/sdm845_spl_boot0.h b/arch/arm/mach-snapdragon/include/mach/sdm845_spl_boot0.h
+>> @@ -0,0 +1,120 @@
+>> +.macro movl Wn, imm
+>> +    movz    \Xn,  \imm & 0xFFFF
+>> +    movk    \Xn, (\imm >> 16) & 0xFFFF, lsl 16
+>> +.endm
+> The macro parameter is named Wn but the body references \Xn - does
+> this actually build?
+I'm not sure why it displays like that for you, both for me locally and on
+https://lore.kernel.org/all/20260411-qcom_spl-v2-7-9609557cf562@seznam.cz/
+it displays correctly...
+>> @@ -0,0 +1,120 @@
+>> +.macro movq Xn, imm
+>> +    movz    \Xn,  \imm & 0xFFFF
+> Similar issue to above - also please use tabs to indent.
+>
+>> @@ -0,0 +1,120 @@
+>> +el3_payload:
+>> +     /* disable the mmu for EL3 too */
+>> +     mrs     x0, sctlr_el3
+>> +     and     x0, x0, #~(1 << 0) // CTRL_M
+>> +     msr     sctlr_el3, x0
+>> +
+>> +     /* jump back to our code, but now in EL3 */
+>> +     movl    x0, CONFIG_SPL_TEXT_BASE
+>> +     add     x0, x0, (el3_ret_point - _start)
+>> +     br      x0
+>> +el3_payload_end:
+> After disabling the MMU in EL3 shouldn't you have an ISB before the branch?
+>
+> Regards,
+> Simon
 
