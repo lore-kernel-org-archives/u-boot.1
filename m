@@ -4,103 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BF71F8A146
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 09:11:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33BCDF8A145
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 09:11:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C912B8422D;
-	Thu, 16 Apr 2026 11:11:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 862F18423F;
+	Thu, 16 Apr 2026 11:11:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="BxBfvDHn";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ZyroC6V3";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="n6JnIuNT";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="V1zogV2t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09BF08423F; Thu, 16 Apr 2026 11:11:06 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id 4431B83FC0; Thu, 16 Apr 2026 11:11:07 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C50C8422D
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 11:11:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DCEA58423D
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 11:10:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 63G6JNxF1668220
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 09:11:01 GMT
+ 63G90YmA2979251
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 09:10:57 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- w/pPf4eRb2Ay4Z7j6QJLQnbU+YWcD6NIwqqpt3PUs2U=; b=BxBfvDHnaQpxrSQx
- 76ActYng27zgH6TmFcukeNut0kFrxhkBDbeRwd3cM789RQcKzlCFE7iV2up+Xq6N
- I4T5Q46ixJNRj0LHfI+dKg0tGFGoFAnYK0zvjLxTgIm6cxmX28i+Qn8M2ZXop7w3
- aJzBzZZ0lnqId8xEj5tmrfJBeHJJ5EhpuhR2z8tkPPnQG37Itk271XdQsRrvz3MD
- cLcMjxOWs1Efat7Wxl5J2ULyH4C8CfKGmY6GgGaqciiUituNvcfwmIEmpOUbwLzY
- LxB8QWg8nS5c+fZnwa65Jrx9BnG4mtmzsEjJkjST+w6MdWxXvoMZrvfFNMmQdhPW
- cWkrbA==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
- [209.85.216.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4djtd90nrp-1
+ psUcOxmKqahpoc0p2mWl7enoVqWY+qAczqDSLmlikxk=; b=n6JnIuNTAFs/QREO
+ SWMfA72mFMpByNpL70xmqmN4DjTRYmAtryxxMZfDpvpfTe2WXi//MLGwzpNrkVAA
+ oycSYiOCQuFcePY6AzhKFFZD9cd5QFEQRr1IYV9PjZKIici8BAnlLhGiuN2skJ4m
+ qByNm8mRPs9myDEgtwOmvKlzSfqJ/Y3G23sJidhzpjzR19yZzYm+5TyOyBQyyDMM
+ KrGpK8nL7GXELJ2wNcaFwFi1cdX+STkQsHCg/tCnF6wX7HG2+RWvKO/rNXh79Xfz
+ ORFqhkIJ4yilg1tJQzybqZuuE1FZZG5ts9tNwvgaOirHX1FwYHupQs0nNsLd7Gq9
+ iJPaGg==
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
+ [209.85.214.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4djvru81jg-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 09:11:00 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id
- 98e67ed59e1d1-35d9f68d00fso15627730a91.2
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 02:11:00 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 09:10:56 +0000 (GMT)
+Received: by mail-pl1-f199.google.com with SMTP id
+ d9443c01a7336-2b2eba42b8dso42839105ad.0
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 02:10:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1776330660; x=1776935460; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1776330656; x=1776935456; darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=w/pPf4eRb2Ay4Z7j6QJLQnbU+YWcD6NIwqqpt3PUs2U=;
- b=ZyroC6V3P0KvbBJg4eBRf2u9cTaLkYUdtLPCh5HkfUEA18VoPEv6TPAg/JuZ9jMzf1
- t96KTeDWTtkYOKstPRc6mxHWNj5THjo+yB/8+20TgcPPu38o6ispbkVNO8D2wMvUi1JJ
- SS2eTH5vxzs4HGfwaIN5c7RZwM/czfSII0S0X9BlgHEIJ5d/FDItjxtm413f8uT1Fv/C
- /CaOzguGOwkwF04jcdfKyp43yh8gCHFxstl1RsVbwlxM0lLZggfRt3LNxZyv5lkWfzIv
- rQOdYQuQ9SSzouaNr/j7ujrhdy+a2deFCfKUFYbu65O2jUdQvcGw3ArD7iSYkfrFy5sn
- eW9A==
+ :reply-to; bh=psUcOxmKqahpoc0p2mWl7enoVqWY+qAczqDSLmlikxk=;
+ b=V1zogV2tDzFfFVOCnS9n6wYfvksb8kIKhqHz9XeCaX8Wgc+88X3fvr+Bbmcoq9d1AP
+ JClNaS5Rx90XKSb2CAqPvFNAaygwib9BfuGOnnP/fM7bFV0EKoaPDzwV5etng53M9RNd
+ HktFO+aS+AzXVljikpPt5rOhI7XAiBnVN8jZQoKKvHERj5R5yoCyh+7pQvwpFjsioVzR
+ 9q3qGhV1tNGqB5Vke+/nM3sKJkBttpSUfOa6Vu9F0a/z+Ysp0wE0Ae/hBrcHaMH7wGVS
+ +ZXxlMZsBfwmDS7G5vcgb7rZ+6lvRhZTTFlzU+xTR0thF3Oe0qPvPnQs6r5sqCSZ9jfv
+ N/jA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776330660; x=1776935460;
+ d=1e100.net; s=20251104; t=1776330656; x=1776935456;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=w/pPf4eRb2Ay4Z7j6QJLQnbU+YWcD6NIwqqpt3PUs2U=;
- b=Fn9L5dMEfoBrFphS+3siypLoUoBy0d4YzCYXDY3u2u2i55joBNjEVtcONK0Uo1zL9N
- IVY/n9IXybB4buEW7B9h9O/C4sQmnEnXVsj7UVayU+SSp4NL5iR2WfhkxGptyl+7M6Wq
- j2r4MC8CB8GUX0Y0/DTLyiWph4d/uh0VnlzH7LDlCvzhwFEo6Qzwc/m+/Cm8ZXKXoib3
- OXeRIglDaI9+1iNDXWjh6crZCUxUeL/lYn0isJMtfz3wJyVTD5u9fsnL8NJ5YYV89sYJ
- TsXj95AgaGe7YN28TXcesvfoib/0Y2gSS1dzRREg/r7yDS2bRHZQ1EJX+Cu2opXAj6Gw
- IDtA==
-X-Gm-Message-State: AOJu0YziQvpLw38KYvUARt8g+mIMWyZSb+EO/1bDNBsJpw9B+IF8EdVN
- XMlUSJpqrdmMjnbtIRKYhK2X5jryalJOyPDQ6h57kzLDyQyfLEhvRHcXjg8a+d4EOBWjwTs/TRY
- ZH5KYk9k1F8haW4kzgXSmMZhHWeHd7k1RWM0Um6xaaAZRe18EOpHaZHTF
-X-Gm-Gg: AeBDiet4m1iv/X9GpTqyPTfOIUiH0i+PkruNjkvMSmaOFaDPV5FCRhcuboTvZ/AwzDm
- 1Jkll7VCMy+feJVfBCVucuppAo/PWzU6uQmPi6KdFUK4cd4E3xDFKOOppAklhTI4w33Gp9ce9cT
- YLztfSvjlKpU0C9SGL+lqiVjpdY8NwmwjBdNdIajMvobAYIAJX4s7ytfCNKgh5sxWC+aqntA3In
- 5SKa3RNM6tAkl2xL8npkYz1qJUtmRvFwiHIvlsNcx48W9tIr3ovNnrbZWKXc5wx3Ly0lXRWhcTG
- yCdXdZf8ZxSNGP0ckA0ZOS7kvRe8lcDXfeUX7qMPefQb7S8QE/RpfM9J8VcYVs3vqaGI5uEPsBi
- +iXDXVEcEC8gwctecZQWg4FwnbfR0pWuWpa9diBkjayzoWnYU3Ssj0l2jLZmGzAZfq5CWpMC0I3
- BsjQwssiQms7bmtIQwztOgAtFVJw56uQACi0sPc15+cMVb3bXCvQ==
-X-Received: by 2002:a17:90b:17d0:b0:359:fe72:3559 with SMTP id
- 98e67ed59e1d1-35e42883e2cmr27351512a91.21.1776330659910; 
- Thu, 16 Apr 2026 02:10:59 -0700 (PDT)
-X-Received: by 2002:a17:90b:17d0:b0:359:fe72:3559 with SMTP id
- 98e67ed59e1d1-35e42883e2cmr27351457a91.21.1776330659366; 
- Thu, 16 Apr 2026 02:10:59 -0700 (PDT)
+ bh=psUcOxmKqahpoc0p2mWl7enoVqWY+qAczqDSLmlikxk=;
+ b=Le0xxtl5YrzW2DV4xesQCT1rcTP8la3wm9Yy2VmI+r0H+eFEMMc9QLDf1RNWFq786P
+ emZlpnvD/reRuvTBo//ox8D1/P4pXvK5qsnsCFu9vBUK5eFSIjNG9gFsx07yukbBQfNg
+ +nTcyx98otvTM9qdCd578Bvq+txphxRbW4M0FgWc6btzgctwiw0IjhXYUwgaMj0I0mNU
+ x4lraqHLgG/IxJC5sOxV0PUvVH3MSpgiTRHgfWeY/aKcWPwG+PXp1zfma4xZFD8k7j/e
+ 5BrEIyhg2OXgHL7SlhaBfNBVDT4CdYYKY/9k+9Y26HQOLMswgwY1mHRiafb0ppogTnbN
+ +nzw==
+X-Gm-Message-State: AOJu0YwV2S7tgbh0ZjrCaNH9gv7sxi4c1r9CMhUkgMGXzxYvsLEcVjKS
+ jJNK8BCZX3YrodYNRtjhLA5wcNoH7aooak7o/V6ibEOwthKlosHvapTH0IKH93ZmMymW1S4fzsG
+ Qy1+5+SOcxmW5QluYMWWkhcQbu3NO9xtH9/GEncesrs4h27lJlDqp/bun
+X-Gm-Gg: AeBDiesMS9g1Cj0/8r+6BagwRWcgvz85qZbxqSq5AHwqZfvL1vZm78ugryJNHOjfMV5
+ feH27gqS1dw7TRh6cF/bB6LGJCmtjE0a3QEmP/RpFSwlJGvfAp1ueQ9K8tfOVEkS04bpIpAr+DZ
+ 2foz40mkYnL3iTVypQu39ynV9m2c4u8M1naqup8Kl6OKUNOyFB7nzK43F+k/xjK1GpD9ZlszmFQ
+ zbUL3TgVegSLL8XIBDP/prXoWyEUZ0ddNFsOdJWfjTG7YsLcSmsz5vAbGA3i8w9/FgaKCbTYmKh
+ +HNsqizNuIuQD0bC65zn1p/4v0eScX6JaEqcxpytXTsmySYUh3o8ADoctsGAiDDIJtFq/EdcrvZ
+ Il6dAEVOqR1DtB0qUPuCokZFcY/WZdxjURUfAkrXGH/kX2rwsLnu06EMlEwCA8CWqAZBtkIg4S3
+ uqQ0Z87rlw1Ck3NH4A1EXkUKr0kbSa2lFbYAzqpsMHpw6rhUjziA==
+X-Received: by 2002:a17:903:2c10:b0:2b2:e6e8:3c09 with SMTP id
+ d9443c01a7336-2b2e6e83e45mr177241405ad.40.1776330656216; 
+ Thu, 16 Apr 2026 02:10:56 -0700 (PDT)
+X-Received: by 2002:a17:903:2c10:b0:2b2:e6e8:3c09 with SMTP id
+ d9443c01a7336-2b2e6e83e45mr177241075ad.40.1776330655756; 
+ Thu, 16 Apr 2026 02:10:55 -0700 (PDT)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b47810b898sm46211895ad.25.2026.04.16.02.10.56
+ d9443c01a7336-2b47810b898sm46211895ad.25.2026.04.16.02.10.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Apr 2026 02:10:58 -0700 (PDT)
+ Thu, 16 Apr 2026 02:10:55 -0700 (PDT)
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Thu, 16 Apr 2026 14:40:47 +0530
-Subject: [PATCH v3 2/2] scsi: Enable FUA bit in WRITE10 commands
+Date: Thu, 16 Apr 2026 14:40:46 +0530
+Subject: [PATCH v3 1/2] Revert "scsi: sync cache on write"
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260416-enable_fua-v3-2-84508de2bfd9@oss.qualcomm.com>
+Message-Id: <20260416-enable_fua-v3-1-84508de2bfd9@oss.qualcomm.com>
 References: <20260416-enable_fua-v3-0-84508de2bfd9@oss.qualcomm.com>
 In-Reply-To: <20260416-enable_fua-v3-0-84508de2bfd9@oss.qualcomm.com>
 To: u-boot@lists.denx.de
@@ -113,37 +113,38 @@ Cc: Tom Rini <trini@konsulko.com>,
  Bin Meng <bmeng.cn@gmail.com>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1776330648; l=1165;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1776330648; l=2029;
  i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=K8FU1jHxNjWdsxAsB0hUWphZ5zsNXcrzIM8XrHaqwp4=;
- b=UNIeIjpXI7+4kYLGqyMPrr9QUQ+J8g4jWxNPgCFAhKubLbruJE4ueyVMC4L3Y1ralRQqedN+8
- hcvKLnzG0ZeBi119OFYTyTymyNtESJG62zU/zLSDji57SpTELBnmGxN
+ bh=o8PwxZfXcVL44M49MTd/tAXHJrEfHBvmrSSCiqJGpuA=;
+ b=z2Y2aoqfLkE455vOT5pOs/Tqe8Zfuxv/9pyD4XkUKe9B198OwX/wqZPg4dNV8ip+LtiB/GBZu
+ kP/6T3SgEGqA4nZn3V8zS52eXpTJK6uASGTq8Z+IrcRGW5SgzQq/lJU
 X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
  pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE2MDA4NiBTYWx0ZWRfX1E7+CNu+tDkV
- fWgaE32TAZ5paIwEfeC6fsLYAzv+LirM23URcMP0fmsvm8DEIvSwC41hOsaNnBXUCRsD5JPi0Uf
- /PdupJKEJRbo1jOCwZVTVKRXpTGRhkRJjCcKIsgSQV8WN0BxcC5vNm+mi6tGh0EiGjmlFFRt53E
- VvhCWjjeH1I5/NR6LthyJJbpQfAFj/01SLfL01g+PsdN/qoDBgEGKM6uBfNXMNy6oiwd75NLBpa
- 2JRZffHNpp2WwIL3Y7K9DnisfRSuzJ1L8KsTHJ8z4HRg5p8uMkhjhFGmFpKO2CsXJIPbk50hO1/
- AGJkgIBtJZJWqj9wLCIZ7NYIfWgPJ9aCVaS3Eu0EfnIFpASRAg70Ua8Y5ZyznQZzqZ7yeivovQB
- x3Vg52AzmJfjDjxEF+NoYYgudbvdSKaBIcStB2tmugqHgstgdb2NcgfYZHZxxD453rM7dpxpBkQ
- BYsPEXOq9aqp/hojxVg==
-X-Authority-Analysis: v=2.4 cv=avuCzyZV c=1 sm=1 tr=0 ts=69e0a7a5 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE2MDA4NiBTYWx0ZWRfX5H6G0lgb/yyO
+ ukyi3iyiuKQ2zEVHGAj1Jct4h4O5MHDebkNJvMWY39TQWOqX/BxnZTN9/L9/uvGzGdi8ajZoBMB
+ voFnPPkaQUTI7Gp+9S+ET7xb0tnOrmTj1VS7E3RJZDyyYkiSs4A6rXPtuieNqh+AGvmcNcDjfk5
+ xunpUNOqHRBd5k4e+6NREGfJJ+w18oR6/7LDi2NTnUYxD+I+5njdEXuv2LgvE/jGp6OL8ILm+o+
+ F+4kKH8jYG6pOq77Ixm8nD6/BVxQ26GkGzGfsuO9WegrRoL5OEiqciSXB2Q0UI2+YD9wTyv9qZj
+ H2l6z3VJwU24kzpLs5SK0ctRVs4+x7igNeUNeOCqKeiDSz5XHnpule8akTAP+a67fsgvRVJXTIj
+ H+LDgrkxBau+NQzuEjUXaENOjS+KjNdTHq7IsXqqJ/GsFWwFUyC09GkmqH9xTj+IKpD79DZEJKw
+ +wMYl0S9XISZ+O1uAdw==
+X-Proofpoint-GUID: DQHD7Itkifj8t2e0BTF3E8cb2oNgDrU9
+X-Proofpoint-ORIG-GUID: DQHD7Itkifj8t2e0BTF3E8cb2oNgDrU9
+X-Authority-Analysis: v=2.4 cv=GcInWwXL c=1 sm=1 tr=0 ts=69e0a7a0 cx=c_pps
+ a=JL+w9abYAAE89/QcEU+0QA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=2KWoTbq3bzERRF-STQcA:9 a=QEXdDO2ut3YA:10
- a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-GUID: 80ti04OHpWlGzhR9N65Bk4a6dMRflkvP
-X-Proofpoint-ORIG-GUID: 80ti04OHpWlGzhR9N65Bk4a6dMRflkvP
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=OPt5pyjpXDMeivyPd00A:9 a=QEXdDO2ut3YA:10 a=O8hF6Hzn-FEA:10
+ a=324X-CrmTo6CU4MGRt3R:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-04-16_02,2026-04-13_04,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 phishscore=0 spamscore=0 bulkscore=0 priorityscore=1501
- adultscore=0 suspectscore=0 clxscore=1015 lowpriorityscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2604070000 definitions=main-2604160086
+ lowpriorityscore=0 adultscore=0 priorityscore=1501 malwarescore=0
+ impostorscore=0 phishscore=0 suspectscore=0 bulkscore=0 spamscore=0
+ clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2604070000
+ definitions=main-2604160086
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,36 +161,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+While the SYNC_CACHE approach prevents data loss during board resets,
+it causes system hangs during large sparse image flashing operations.
+This will be replaced with a FUA (Force Unit Access) approach in future
+commit, which achieves the same data integrity goal more efficiently.
 
-Enable the Force Unit Access (FUA) bit in SCSI WRITE10 commands to
-ensure writes bypass the device's volatile cache and go directly to
-non-volatile storage. This provides write-through behavior that prevents
-data loss during board resets.
+This reverts commit ffe4e6ab42d2534302be825e49a2d085acf80f30.
 
-Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
 Changes in v3:
-- Added SoB in commit description.
+- Changed commit description's structure.
 ---
- drivers/scsi/scsi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/scsi/scsi.c | 22 ----------------------
+ 1 file changed, 22 deletions(-)
 
 diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
-index 9a417795851..50e7d749921 100644
+index 116b696b08d..9a417795851 100644
 --- a/drivers/scsi/scsi.c
 +++ b/drivers/scsi/scsi.c
-@@ -107,7 +107,7 @@ static void scsi_setup_write_ext(struct scsi_cmd *pccb, lbaint_t start,
- 				 lbaint_t blocks)
- {
- 	pccb->cmd[0] = SCSI_WRITE10;
+@@ -82,23 +82,6 @@ static void scsi_setup_inquiry(struct scsi_cmd *pccb)
+ 	pccb->msgout[0] = SCSI_IDENTIFY; /* NOT USED */
+ }
+ 
+-static void scsi_setup_sync_cache(struct scsi_cmd *pccb, lbaint_t start,
+-				  lbaint_t blocks)
+-{
+-	pccb->cmd[0] = SCSI_SYNC_CACHE;
 -	pccb->cmd[1] = 0;
-+	pccb->cmd[1] = 0x08; /* Set FUA bit to bypass write cache */
- 	pccb->cmd[2] = (unsigned char)(start >> 24) & 0xff;
- 	pccb->cmd[3] = (unsigned char)(start >> 16) & 0xff;
- 	pccb->cmd[4] = (unsigned char)(start >> 8) & 0xff;
+-	pccb->cmd[2] = (unsigned char)(start >> 24) & 0xff;
+-	pccb->cmd[3] = (unsigned char)(start >> 16) & 0xff;
+-	pccb->cmd[4] = (unsigned char)(start >> 8) & 0xff;
+-	pccb->cmd[5] = (unsigned char)start & 0xff;
+-	pccb->cmd[6] = 0;
+-	pccb->cmd[7] = (unsigned char)(blocks >> 8) & 0xff;
+-	pccb->cmd[8] = (unsigned char)blocks & 0xff;
+-	pccb->cmd[9] = 0;
+-	pccb->cmdlen = 10;
+-	pccb->msgout[0] = SCSI_IDENTIFY; /* NOT USED */
+-}
+-
+ static void scsi_setup_read_ext(struct scsi_cmd *pccb, lbaint_t start,
+ 				lbaint_t blocks)
+ {
+@@ -301,11 +284,6 @@ static ulong scsi_write(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+ 		buf_addr += pccb->datalen;
+ 	} while (blks != 0);
+ 
+-	/* Flush the SCSI cache so we don't lose data on board reset. */
+-	scsi_setup_sync_cache(pccb, 0, 0);
+-	if (scsi_exec(bdev, pccb))
+-		scsi_print_error(pccb);
+-
+ 	debug("%s: end startblk " LBAF ", blccnt " LBAF " buffer %lX\n",
+ 	      __func__, start, blocks, buf_addr);
+ 	return blkcnt;
 
 -- 
 2.34.1
