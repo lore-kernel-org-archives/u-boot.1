@@ -4,91 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7798EF43697
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 12:45:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7CF9F43699
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 12:45:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FBD78431E;
+	by phobos.denx.de (Postfix) with ESMTP id 7956C83FC0;
 	Fri, 17 Apr 2026 14:44:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="YLrmdOXX";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NVXwsvHI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B7828424E; Thu, 16 Apr 2026 21:16:21 +0200 (CEST)
-Received: from mxd-1-a09.seznam.cz (mxd-1-a09.seznam.cz
- [IPv6:2a02:598:128:8a00::1000:a09])
+ id BC6BF84222; Thu, 16 Apr 2026 21:55:16 +0200 (CEST)
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (mail-northcentralusazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C532D8423F
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 21:16:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DA3C83EEF
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 21:55:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=seznam.cz
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Michael.Srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-fd5c5cd95-bfmjc
- (smtpc-mxd-fd5c5cd95-bfmjc [2a02:598:128:8a00::1000:a09])
- id 00a1bb8e5bafefe7010877d0; Thu, 16 Apr 2026 21:15:24 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1776366924; bh=Jw19iE2UMoq45L/PTVPsC5e85l/1bMc+oqP09UFxcTo=;
- h=Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
- Content-Language:From:Content-Type:Content-Transfer-Encoding;
- b=YLrmdOXXLM5OjmNSGUOO/O6CeAV7vL2skKKAI+FGnVLyqhmbcJ0wC9qTT85qKQ4hq
- f8Nw6wW9cM8+I6N/1WQ9JmKFCmraei2PsvaTHkiv59X3z2QUOHOLVrxNAqHf8muaF/
- ZsQ0P6i8YzOCZ646TwXYkZdeM6n/S/dwQHMUb+uoQVPk/y56DqmpFC1Axkm9VeQkdN
- biNfxQXLBFS8qKxRT+8Pc/qYyIhTpscIPaK7o6YfeddPG0Kxz+UYAJ0jgUouImBt+t
- SswNH5m9M6dGDJqhqkzhjsS+Rt9ZbGpa1N3vI9NQwG2zXKesW2DqUfucGWNw7NER3j
- YMWthILlnKWqA==
-Received: from [192.168.0.240] (ip-111-27.static.ccinternet.cz
- [147.161.27.111])
- by smtpd-relay-6597cc8696-j2tv7 (szn-email-smtpd/2.0.72) with ESMTPA
- id a49c71a6-6f82-438d-a658-ff9fe4254ff6;
- Thu, 16 Apr 2026 21:15:19 +0200
-Message-ID: <c2f3199f-480a-4d28-840d-f29bd9e5f0b9@seznam.cz>
-Date: Thu, 16 Apr 2026 21:15:17 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=rKY7K5usZ/vI503E3TLV0SSiiY/jOnq5SZDxppyU7FAxQEzRQM/WXVXZAYX/b20HXNDwDuUMHHSYbGlV/eV0LySeEBw+JGpUr1pDOKajc1NtrVdgI31eZ2jvO9rybvUQ+GyeyNNAFlsZJQtRAxaNAkFwiTRNoMOGKv6dV893OUn301WHkpC8QxlloM/hW8fUXJMhRN816BiiZFt6EfH2IKSQ+IYybwAtOdxOoH2KO18IHpo2dL54EJORyLop/yqiCilayNvamTg/8kFB0O0prnCeUU0dYYPSCO3wA5vmU4sz37Wa69Ib+o6ahOzr6eCi/lhijmk1M1oJuzRTlxuo5Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=aM9JOXjnpBo/V3L1Bh2X7AL6FVmxCTsf4c/7oOf/O7U=;
+ b=fMubWtEh9K6BC5hOpWTfb7L8Y8e2GH/19a6nVg5cHK1NLsb5D1aURSplyQpj526swPVWBk5XACE78aav3AhyYVP1sEhmJZBCjnBxMnRm7dc7ylH1CuhuzCfhavj9Hvbgw6Bp5Qq/L/Qb56NPgVQb9kD1ARw868n2BqX8D14kI0osmrlM+Qk2AD0xw4iPj5ic+AfIZJr540GO7tbDuY+3SuZQy3V83lVj2EzWhfzQrQMfjWfNeEVjtDxFKBXLQ0AzsdriwN6tyv1s2ZB7mgxTkXFgWkggidSiFycplVAmLvHVzds83rxSOv6KJz4ZV+eHyNOAEO1m/zrh1CKt7SYq3A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=paulk.fr smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=aM9JOXjnpBo/V3L1Bh2X7AL6FVmxCTsf4c/7oOf/O7U=;
+ b=NVXwsvHIoY68GXKY5i0wmqNCzCf+RtsbCPcEGUhYNcitxx1O8cdbtq1GkfqI/MIp9K0EjruwgWwzGXPUWxVGx5zQfHHIHCA9Nyu/yeAab0FQ0Dtsb72cI6cVde9jcwz4CyAM+W1++GtLOI+gJEgewJ6l6N61UR48yeyZmYHHgwg=
+Received: from BLAPR03CA0022.namprd03.prod.outlook.com (2603:10b6:208:32b::27)
+ by CY5PR10MB5938.namprd10.prod.outlook.com (2603:10b6:930:2d::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.21; Thu, 16 Apr
+ 2026 19:55:07 +0000
+Received: from MN1PEPF0000F0E1.namprd04.prod.outlook.com
+ (2603:10b6:208:32b:cafe::e1) by BLAPR03CA0022.outlook.office365.com
+ (2603:10b6:208:32b::27) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.49 via Frontend Transport; Thu,
+ 16 Apr 2026 19:55:07 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ MN1PEPF0000F0E1.mail.protection.outlook.com (10.167.242.39) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9769.17 via Frontend Transport; Thu, 16 Apr 2026 19:55:06 +0000
+Received: from DFLE209.ent.ti.com (10.64.6.67) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 16 Apr
+ 2026 14:55:02 -0500
+Received: from DFLE206.ent.ti.com (10.64.6.64) by DFLE209.ent.ti.com
+ (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 16 Apr
+ 2026 14:55:02 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE206.ent.ti.com
+ (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 16 Apr 2026 14:55:02 -0500
+Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63GJt2sP614199;
+ Thu, 16 Apr 2026 14:55:02 -0500
+Message-ID: <39c2f5f1-ba0d-45ec-92f8-2e87ddff1aae@ti.com>
+Date: Thu, 16 Apr 2026 14:55:02 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 07/10] mach-snapdragon: boot0.h: add sdm845_spl_boot0.h
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, Anshul Dalal <anshuld@ti.com>,
- Peng Fan <peng.fan@nxp.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Jerome Forissier <jerome.forissier@arm.com>, Heiko Schocher
- <hs@nabladev.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
- Peter Korsgaard <peter@korsgaard.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Tingting Meng <tingting.meng@altera.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>,
- George Chan <gchan9527@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>
-References: <20260411-qcom_spl-v2-0-9609557cf562@seznam.cz>
- <20260411-qcom_spl-v2-7-9609557cf562@seznam.cz>
- <CAFLszTicL2M709+Mm3g1bdnVcYwcuX4SOEPKjbqW1SuJ8LF+2g@mail.gmail.com>
+Subject: Re: [PATCH v6 00/14] arm: am335x: Switch to upstream devicetree
+To: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>,
+ <u-boot@lists.denx.de>, Marc Murphy <marc.murphy@sancloud.com>
+CC: Tom Rini <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>, "Kory
+ Maincent" <kory.maincent@bootlin.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Romain Gantois
+ <romain.gantois@bootlin.com>, Parvathi Pudi <parvathi@couthit.com>,
+ "Basharath Hussain Khaja" <basharath@couthit.com>, Paul Barker
+ <paul.barker@sancloud.com>, "Andrew F. Davis" <afd@ti.com>, Simon Glass
+ <sjg@chromium.org>, Anshul Dalal <anshuld@ti.com>, Michael Trimarchi
+ <michael@amarulasolutions.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Svyatoslav Ryhel <clamor95@gmail.com>, "Tien
+ Fong Chee" <tien.fong.chee@altera.com>, Frieder Schrempf
+ <frieder.schrempf@kontron.de>, Johan Jonker <jbx6244@gmail.com>, Brian Sune
+ <briansune@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>, "Bernhard
+ Messerklinger" <bernhard.messerklinger@at.abb.com>, Emanuele Ghidoli
+ <emanuele.ghidoli@toradex.com>, Parth Pancholi <parth.pancholi@toradex.com>,
+ =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, Paul Kocialkowski
+ <contact@paulk.fr>
+References: <20260415-topic-am33-evm-oftree-v2026-01-v6-0-94cde349bb01@baylibre.com>
 Content-Language: en-US
-From: Michael Srba <Michael.Srba@seznam.cz>
-In-Reply-To: <CAFLszTicL2M709+Mm3g1bdnVcYwcuX4SOEPKjbqW1SuJ8LF+2g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Judith Mendez <jm@ti.com>
+In-Reply-To: <20260415-topic-am33-evm-oftree-v2026-01-v6-0-94cde349bb01@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0E1:EE_|CY5PR10MB5938:EE_
+X-MS-Office365-Filtering-Correlation-Id: 772c85f8-74a4-4776-4777-08de9bf20e86
+X-LD-Processed: e5b49634-450b-4709-8abb-1e2b19b982b7,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|7416014|376014|36860700016|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: vAYDjEpVwIXLmiY9oo5U47Yyw85eKaa42zhaU1EDNfsrpzytfxDi0eyKgXIGQwLlmyBtkQFVZZ3gsrWE+9rVntofDByJsq2wor2VALle2SxVgzuWyBV8deLbD9+87IyuQ+GZZkUSMODCKk+OsFQmeLzd0JnsuLGX2nrGMIIKDBvRFoxm989vH2GA17HOl8CQog00JH7X5uLgHWs5DgCOwgi/Ur+wo0DHKSP533K9L+TFe1Tc8VsSf86tB0LfzdkXRvmWT+vpyjckqiRCjAMuSVtnBvHTPfbwuM/6KfFITgC2yNG6v1+sb16CkmHDM6wn5KGUA47ksTKBzqYRf7SapLeZTWYYa4gl97MYTDUDY5wWx0ScXsuzSapiU9Kd9KkrprzW8PqLPmwKCOV0jMhJUu+KmYKyABcASs5aIoLR/E6nq5Oz9AvWkk2aWJUFdjUe3SdNNWs9NNsytKFsEhlGDxOVBamv0Qj4XFNbVZbKJDBCxNrlpCtQPHDOBLQ2mPKk4+vQzQeq1YCA9kbw7j/bg+y1ltJa+rvMjRLa8REYCVqU6tfxquz+/vFAXkYa0AvupqXop3W3ujRie7ogCWf196RJFqFJc6iYFQJb42SrqXdjdC3md6Olb8ZjIrL2vnlk10JIowlwNFnXpkXATYWlQwn+nn8pVYWB2j9D6wNqz3mnLktiC06zyIj+laYGzCkwpRc1xWFlxThegSMun/PimfXpFCrhFIrhPJwLFHmO5OAPHqPd2UrRw4GDMn1vBZ3KPtOon4NGuB0TuIRs6iRsfEgD8SU8Xsq6mgl5+ZBATBs=
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(7416014)(376014)(36860700016)(56012099003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: wdQToaFvOkIHY0CyfLua7mXYsRvThYjTmhKvOpT675TAQujLYJHZGX1O6c+Os8xWdqnMRde4xd9NnPx68PNiOSzfu/9BAyyfeh+Dc2Ox00XqUTu2a7/MFtP0ZV3RIBVkmxsZ05nNjUGsyKNfZCrUy8G9rg8yRNpGegmlcf837DVQSoACFKtVt3gK/eTANy+Qx06qUj6x3WKrez/rQAHEm9O7LVNpblAR8QgPQ/Tef9Or76CAszX7/5gsvsC+W9VIS9AJOZDJ3WKpyIUMXwhbS6a11zBWIWn4WsqtqBgA/KabDVtGBHw7wq5NBkz5QEDrzuTLBSZgBL0NsVlfkZe4zSF7qz71PVfo0JGX5JS+WRLGdwH86Rxs50F2dQkRR1x18k3u47XPrHXblZCixBjrOSdP9pHCiHlUOAAFNHVix0ycZ5ZWrnKN3p2eGPjVJS/t
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2026 19:55:06.0060 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 772c85f8-74a4-4776-4777-08de9bf20e86
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000F0E1.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR10MB5938
 X-Mailman-Approved-At: Fri, 17 Apr 2026 14:43:59 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,55 +150,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Markus,
 
-On 4/11/26 17:40, Simon Glass wrote:
-> Hi Michael,
->
-> On 2026-04-11T00:00:12, Michael Srba <michael.srba@seznam.cz> wrote:
->> mach-snapdragon: boot0.h: add sdm845_spl_boot0.h
->>
->> On sdm845, running u-boot SPL in EL3 requires escalting by using
->> an unintentional feature in old builds of xbl_sec.elf. We do this
->> in boot0.h so the rest of U-Boot can stay blissfully unaware
->> of XBL_SEC. If we are already in EL3 for whatever reason, the
->> code is skipped.
->>
->> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
->>
->> arch/arm/mach-snapdragon/include/mach/boot0.h      |   4 +
->>   .../include/mach/sdm845_spl_boot0.h                | 120 +++++++++++++++++++++
->>   2 files changed, 124 insertions(+)
->> diff --git a/arch/arm/mach-snapdragon/include/mach/sdm845_spl_boot0.h b/arch/arm/mach-snapdragon/include/mach/sdm845_spl_boot0.h
->> @@ -0,0 +1,120 @@
->> +.macro movl Wn, imm
->> +    movz    \Xn,  \imm & 0xFFFF
->> +    movk    \Xn, (\imm >> 16) & 0xFFFF, lsl 16
->> +.endm
-> The macro parameter is named Wn but the body references \Xn - does
-> this actually build?
-I'm not sure why it displays like that for you, both for me locally and on
-https://lore.kernel.org/all/20260411-qcom_spl-v2-7-9609557cf562@seznam.cz/
-it displays correctly...
->> @@ -0,0 +1,120 @@
->> +.macro movq Xn, imm
->> +    movz    \Xn,  \imm & 0xFFFF
-> Similar issue to above - also please use tabs to indent.
->
->> @@ -0,0 +1,120 @@
->> +el3_payload:
->> +     /* disable the mmu for EL3 too */
->> +     mrs     x0, sctlr_el3
->> +     and     x0, x0, #~(1 << 0) // CTRL_M
->> +     msr     sctlr_el3, x0
->> +
->> +     /* jump back to our code, but now in EL3 */
->> +     movl    x0, CONFIG_SPL_TEXT_BASE
->> +     add     x0, x0, (el3_ret_point - _start)
->> +     br      x0
->> +el3_payload_end:
-> After disabling the MMU in EL3 shouldn't you have an ISB before the branch?
->
-> Regards,
-> Simon
+On 4/15/26 11:02 AM, Markus Schneider-Pargmann (TI) wrote:
+> The series is split into two logical groups:
+> 
+> - Patches 1-3: Fixes for am335x-evm to boot and support the LCD panel
+>    with the current u-boot devicetree.
+> - Patches 4-14: Make upstream devicetree working with uboot. This
+>    adds tick-timer, adds compatibility of the board code for different
+>    USB probing, makes SPL smaller and updates the defconfig.
+> 
+> The series has been tested on am335x-evm. Note that I don't have all
+> other boards built with the am335x_*evm_*defconfig, so tests are
+> appreciated. buildman reports builds are working.
+> 
+> Dependencies:
+>    - net: cpsw: Add cpsw-switch DT binding support
+>        https://lore.kernel.org/r/20260410-topic-cpsw-switch-v2026-07-next-v1-0-c914724b13e4@baylibre.com
+> 
 
+I have been planning to test this series on a couple of AM335 boards,
+So far :
+
+- am335 EVM: Pass
+- am335 SK: Fail (at least SD boot regression)
+
+Pending to test:
+- beaglebone black and am335 ice boards.
+
+
+am335 sk:
+without of_upstream: 
+https://gist.github.com/jmenti/e51e1fc1b25c19f94786ad39a38737b7
+with of_upstream: 
+https://gist.github.com/jmenti/fc17347eff33991a78ce365c42a76a25
+
+Is this expected?
+
+~ Judith
