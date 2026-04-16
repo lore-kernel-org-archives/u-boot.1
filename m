@@ -4,92 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0EC7F43841
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 07:53:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5BB4F8A141
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 08:23:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2AD0483FC0;
-	Thu, 16 Apr 2026 09:53:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id CEAF6840AB;
+	Thu, 16 Apr 2026 10:23:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="T+hwW5vg";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="u8sMHfmm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34EF8840AB; Thu, 16 Apr 2026 09:53:49 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E2BEC84105; Thu, 16 Apr 2026 10:23:10 +0200 (CEST)
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3B5B8352B
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 09:53:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F5E383FC0
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 10:23:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4887f49ec5aso92476845e9.1
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 00:53:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1776326026; x=1776930826;
- darn=lists.denx.de; 
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RGsGKpVtvhKPzDSmr/fxpHKP68S3fXLOp9eYzCqUOOE=;
- b=T+hwW5vgLg/EfT+ZgExRZHO2mYrGsSIrzmYKZhIA76V29T80Ibk9W88E39KIvVU9QV
- 1lF4pQO4isXf4uzXVidmu8r7MPawhVjEFy87jyYJl6YDxqiom8b0ZvN0a4y4nW5pTMEC
- jPh3NsMUwQdFmAeG098n5BGYWVRbZX+m9F/Ga69lCX3ODGwiQYP8LBzJdrJwMsMeHtUJ
- 0y9ZXBHoQ5UTVOrOeOeN54C18wUgLVn/quqmkP/ZwbS4AwzRav7V1+GtsNodfcBwtbGq
- 8ZIgLqMO0ZZ4nzjAAe5e0ZFNE9llie1n6mzMBqPSQ62Xuk24QRzj+WwYBc6Q+Cg07wYa
- i3Nw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776326026; x=1776930826;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RGsGKpVtvhKPzDSmr/fxpHKP68S3fXLOp9eYzCqUOOE=;
- b=dsq8UP7/Fp68OTYDmZf1KjiLiBcehFqqEhC3eP+1DMKpK9X8evjDJg34P5bEpkf7yW
- zkYxQy3X7fpGIvDP+OAkN55PYSTHMSf4FW5r0s6oPS8W5EPKFCr53dnf34FmYKHrR4ZD
- ZDjBn6p+le/KNdHg7AOOVE2kplDK1qYveMB4JYreJfHarna/+Ic9iZKGWKC21boaUPjq
- n8xHDyLE3adMOYMve45AA0qc1qgpJGhmcm3nm5VcQFDWFrhyL1rQkbb7in7qsfvcMn4Y
- 0bw1pWjNP+ry6DoG/O18UqP/UDbHz+M+gobc4JplC+rc3SYq9mAj/ecQ6fhN5i6U1Tbd
- xkeg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9lEeJ7oGxuXWWxwdAgib4pirR8zgbLnUnPWku2ThaSMX/xlGTZ03+Q/8ND0EkwLB4w3Iysir0=@lists.denx.de
-X-Gm-Message-State: AOJu0YycXA3uXUZ032pzhLAhxGrH5IzYQc+H0brwTyBKxJHJLXTg1LW6
- iRfPllTRR4LgNk3vrFpwfcOUScFdZZUndQ6LUYcFyU3jZ0ZZaKUUtvzAgvXJepuT4Fs=
-X-Gm-Gg: AeBDiethG+WewESMGOzE7byO4dV6FnWzVn45d+bLkgjB74GdwZoWyMBvGJm9IbASCas
- QTnFR0PVdCj7V3brcWo9V3jL9pOluSydF7hd7/TMSKYL6OeWbAezyBfsGzts+TgW7/BdctQFmR9
- 1LnJgL/fyeXPtGuH6ZGtqI/+U2Z3i1z1goRHxgaU/nQBPQE0Mf3uF4uBwufMjKqxHaI8kl3JI87
- MtZkFmRhtnDVDABAkDS6qX0HILKekxWPWSWFxQaJDFgcBN7l0ZmAznmx4154iDLfqH7GEDy/jFH
- oqSRq0KDKzwTxxefMNrzSDjwV7m6lD/sAdX5zIV3qtYIjctc3xJsrHxcGcsEbO6swxuf2aK2R6N
- m8da2JYjmCBOOmUUTNvzFWGUeA+X0dOappaWBEwtbjKg5VoOD2NGhjZRmEUVYMFYAW9X1p1JqGG
- jQJW34FuQXRf3plyokiy5GN3yPrw==
-X-Received: by 2002:a05:600c:34cc:b0:488:869c:edaf with SMTP id
- 5b1f17b1804b1-488d67d882cmr353689835e9.8.1776326026260; 
- Thu, 16 Apr 2026 00:53:46 -0700 (PDT)
-Received: from localhost ([62.246.35.158]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488f581d836sm30627395e9.7.2026.04.16.00.53.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Apr 2026 00:53:45 -0700 (PDT)
-Mime-Version: 1.0
-Content-Type: multipart/signed;
- boundary=f2f73e8c14f9c9a9f483b4b7f8fb60b9d6367944501bc3effe2f022f9e68;
- micalg=pgp-sha512; protocol="application/pgp-signature"
-Date: Thu, 16 Apr 2026 09:53:37 +0200
-Message-Id: <DHUF0R06L66I.OSJLU3XXXRAJ@baylibre.com>
-Cc: <pratheesh@ti.com>, <j-rameshbabu@ti.com>, <praneeth@ti.com>,
- <vigneshr@ti.com>, <srk@ti.com>, <rogerq@ti.com>, <danishanwar@ti.com>,
- <m-malladi@ti.com>, <krishna@couthit.com>, <mohan@couthit.com>,
- <pmohan@couthit.com>, <basharath@couthit.com>
-Subject: Re: [PATCH] board: ti: am335x: Conditional MDIO PAD configuration
- instead of static for AM335_ICE
-From: "Markus Schneider-Pargmann" <msp@baylibre.com>
-To: "Parvathi Pudi" <parvathi@couthit.com>, <u-boot@lists.denx.de>,
- <trini@konsulko.com>, <Maarten.Brock@sttls.nl>,
- <kory.maincent@bootlin.com>, <msp@baylibre.com>, <sbellary@baylibre.com>,
- <romain.gantois@bootlin.com>
-X-Mailer: aerc 0.21.0-126-g9e77103592fe
-References: <20260407082402.2311644-1-parvathi@couthit.com>
-In-Reply-To: <20260407082402.2311644-1-parvathi@couthit.com>
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: 7aa88fc2396d11f1ae70033691e9ac7d-20260416
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
+ bh=lKe5lxHNAUEgcYlpyoRr8dzPEuzy/dHkA9ETROIkWPY=; 
+ b=u8sMHfmmc3Eyq1rdHjLExZJwMvr85LX0TJmzDm46LiUzhRyY4vtKcZkr1Rfghgv/CbYMF151+R1ESeN9bfRKoGyQsRFgIeFCOReR1tkb6lBrOMCht4dTg+7zceCa+BH+AeoiBUn6uCp0KbsHmpMI7dVxEmVIfGsLcAXOOtcEPgE=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.12, REQID:87dc101a-40ce-42b6-8ff9-f905dc7ac2a0, IP:0,
+ U
+ RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+ release,TS:0
+X-CID-META: VersionHash:e7bac3a, CLOUDID:5109ef24-cb5c-4236-a89a-9a7fb20c9bc4,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:102|836|865|888|898,TC:-5,Content:0|
+ 15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0,OSI:0
+ ,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: 7aa88fc2396d11f1ae70033691e9ac7d-20260416
+Received: from mtkmbs14n1.mediatek.inc [(172.21.101.75)] by
+ mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 1457762892; Thu, 16 Apr 2026 16:22:59 +0800
+Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
+ mtkmbs13n2.mediatek.inc (172.21.101.108) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Thu, 16 Apr 2026 16:22:58 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.2562.29 via Frontend Transport; Thu, 16 Apr 2026 16:22:57 +0800
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: <u-boot@lists.denx.de>
+CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
+ <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>, Julien Stephan
+ <jstephan@baylibre.com>, Macpaul Lin <macpaul.lin@mediatek.com>, Weijie Gao
+ <weijie.gao@mediatek.com>
+Subject: [PATCH v2 0/3] Fixes for parent rate lookup of mediatek clk driver
+Date: Thu, 16 Apr 2026 16:22:51 +0800
+Message-ID: <cover.1776326933.git.weijie.gao@mediatek.com>
+X-Mailer: git-send-email 2.17.0
+MIME-Version: 1.0
+Content-Type: text/plain
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,112 +86,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---f2f73e8c14f9c9a9f483b4b7f8fb60b9d6367944501bc3effe2f022f9e68
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+This patch series aims to fix a clk issue that breaks all MediaTek Filogic
+platforms where flash device can't be initialized correctly.
 
-Hi Parvathi,
+Sam Shih (3):
+  clk: mediatek: remove redundant forward declarations
+  clk: mediatek: add grandparent variable in mtk_find_parent_rate()
+  clk: mediatek: fix parent rate lookup for fixed PLL clocks
 
-On Tue Apr 7, 2026 at 10:22 AM CEST, Parvathi Pudi wrote:
-> This patch removes the static MDIO pinmux configuration from
-> rmii1_pin_mux[] and instead configures the MDIO pins conditionally
-> during board_init(). Previously, the MDIO_CLK and MDIO_DATA pins
-> were always configured for CPSW in mux.c, which could lead to
-> unnecessary pin ownership and conflicts in scenarios where CPSW
-> is not used.
->
-> With this change, the MDIO pins are configured only when required,
-> ensuring that CPSW Ethernet functionality in U-Boot remains unaffected.
-> This approach keeps Ethernet boot behavior intact and provides cleaner
-> separation between CPSW and other Ethernet use cases.
+ drivers/clk/mediatek/clk-mtk.c | 24 +++++++++++++-----------
+ 1 file changed, 13 insertions(+), 11 deletions(-)
 
-Do you have a specific use case here?
+-- 
+2.45.2
 
->
-> Signed-off-by: Parvathi Pudi <parvathi@couthit.com>
-> ---
->  board/ti/am335x/board.c | 22 ++++++++++++++++++++++
->  board/ti/am335x/mux.c   |  2 --
->  2 files changed, 22 insertions(+), 2 deletions(-)
->
-> diff --git a/board/ti/am335x/board.c b/board/ti/am335x/board.c
-> index 90e37a8d913..abeab809387 100644
-> --- a/board/ti/am335x/board.c
-> +++ b/board/ti/am335x/board.c
-> @@ -61,6 +61,18 @@ DECLARE_GLOBAL_DATA_PTR;
->  #define GPIO_ETH0_MODE		GPIO_TO_PIN(0, 11)
->  #define GPIO_ETH1_MODE		GPIO_TO_PIN(1, 26)
-> =20
-> +#define AM335X_PIN_MDIO	0x948
-> +#define AM335X_PIN_MDC		0x94c
-
-These two are not aligned when applied.
-
-> +
-> +#define GPIO_MDIO_DATA		CTRL_BASE + AM335X_PIN_MDIO
-> +#define GPIO_MDIO_CLK		CTRL_BASE + AM335X_PIN_MDC
-> +
-> +/* Enabling MDIO_DATA by setting MUX_MODE to 0, RXACTIVE, PULLUP_EN bits=
- */
-> +#define PAD_CONFIG_MDIO_DATA	0x30
-> +
-> +/* Enabling MDIO_CLK by setting MUX_MODE to 0, PULLUP_EN bit */
-> +#define PAD_CONFIG_MDIO_CLK	0x10
-> +
->  static struct ctrl_dev *cdev =3D (struct ctrl_dev *)CTRL_DEVICE_BASE;
-> =20
->  #define GPIO0_RISINGDETECT	(AM33XX_GPIO0_BASE + OMAP_GPIO_RISINGDETECT)
-> @@ -779,6 +791,16 @@ int board_init(void)
->  			hang();
->  		}
-> =20
-> +		if (!eth0_is_mii || !eth1_is_mii) {
-
-eth0_is_mii and eth1_is_mii is the same, as it was checked in the
-if condition above this one. You could make this an else if as well if
-you like.
-
-> +			/* Set the Mux Mode to MDIO_DATA */
-> +			reg =3D readl(GPIO_MDIO_DATA);
-> +			writel(reg & PAD_CONFIG_MDIO_DATA, GPIO_MDIO_DATA);
-> +
-> +			/* Set the Mux Mode to MDIO_CLK */
-
-Please remove comments for code that shows the same thing.
-
-> +			reg =3D readl(GPIO_MDIO_CLK);
-> +			writel(reg & PAD_CONFIG_MDIO_CLK, GPIO_MDIO_CLK);
-
-Could you do the same thing in enable_board_pin_mux()? Or would it be
-possible to reuse mux.h here to avoid redefining values etc.?
-
-Why do you use reg & PAD_CONFIG_MDIO_CLK instead of writing
-PAD_CONFIG_MDIO_CLK directly and skip the read?
-
-> +		}
-> +
-
-This snippet is in the section guarded by these:
-
-  #if defined(CONFIG_CLOCK_SYNTHESIZER) && (!defined(CONFIG_XPL_BUILD) || \
-    (defined(CONFIG_SPL_ETH) && defined(CONFIG_XPL_BUILD)))
-    if (board_is_icev2()) {
-
-Is this the same as for the original pinmux setup?
-
-Best
-Markus
-
---f2f73e8c14f9c9a9f483b4b7f8fb60b9d6367944501bc3effe2f022f9e68
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCaeCVgRsUgAAAAAAEAA5t
-YW51MiwyLjUrMS4xMiwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlPi
-dwEAjYQPztUdrntNrxlRfBpziPfI8mUoHTdcFXrUbjrMe90BAMVRj60F+FBh7ApO
-LhA6Tg9cdCwpmlh/zdCXDpzPu/8F
-=SrMA
------END PGP SIGNATURE-----
-
---f2f73e8c14f9c9a9f483b4b7f8fb60b9d6367944501bc3effe2f022f9e68--
