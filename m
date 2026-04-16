@@ -4,97 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E07BF8A149
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 09:15:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F87FF8A145
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 09:17:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3632B8407E;
-	Thu, 16 Apr 2026 11:15:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
+	by phobos.denx.de (Postfix) with ESMTP id C23468407E;
+	Thu, 16 Apr 2026 11:17:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="LNowLj3M";
+	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="vAaUYbsk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2FE283FC0; Thu, 16 Apr 2026 11:15:50 +0200 (CEST)
-Received: from mail-dy1-x132b.google.com (mail-dy1-x132b.google.com
- [IPv6:2607:f8b0:4864:20::132b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 991EB84201; Thu, 16 Apr 2026 11:17:26 +0200 (CEST)
+Received: from mail.kernel-space.org (unknown
+ [IPv6:2a03:4000:b:d08:14a9:1bff:fedc:75ad])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65C3D8422D
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 11:15:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A0C183FC0
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 11:17:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=kernel-space.org
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=thingy.jp
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-dy1-x132b.google.com with SMTP id
- 5a478bee46e88-2d832f2f44cso5397232eec.0
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 02:15:47 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776330946; cv=none;
- d=google.com; s=arc-20240605;
- b=dhTLoq9tGQhUygG4zWOWfX7JAcYN/xtidQyRtXL5+Yart1SNFlabzkF/L2bUppEFXX
- c03SyrGPW04/i/lMmAEGh5gBSyUQlbaHm0Z/FE4ut6XJTP7Dxomz/7qJ0MJ+dqZUqAJR
- y/R52hqxDqga96A6/0uI8qwa3DBir95WSthrSlHFipvs5B2tIitVKJwH7ZTfELoI+Vfy
- vjRFkkSOn6Pa4OTbbRfLBrRqsemKvOa43zDkR2AqatJ47m7nleK2AbXDvudYVA5Leyg7
- FLQFO3v5rnedf7UCPzoQol2aoUg6CJV4NTWNDlI795EvanNUZ+DrInEZ0t6MrZ2y3UlR
- 8Pig==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=eBnSLo1WaWdWZNmP/1Y3PJozIxe7e8DbpBRkn5Mt2ec=;
- fh=I4H8W3eym20rCBE4i5huWUJTEVymNOMhh7coLOIes04=;
- b=GruxNMcIAPi2as65b7klASLpYCF1W0XEAdj/mLT66150t3TucP/BZhpGVB7eRgVzAz
- szpj9nvkrA+sbcJRubWIcsyEOxIlmejSywz9haUXzseMnn9KyLaayHIRSHFlzN4YgXLW
- bziACGBcj4Eb7E2U3KNEXZ2wRK+CjTHFX7vH5IDZdm1kyAEZRWHx7nguYg6UWQzTkWwC
- CsDTu2CX/AhLsme67nGcNHwbwQP/B/dYt3kun9clbJmf+t+FDWDFYwhJKDbKXkKtvpKz
- 3XkSwbimU87FOcfe05eSUEYv+G7o3+T3gdzMx0KWbs++mMIe1PojIXHoK7rT7i2kSJTI
- GuHQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thingy.jp; s=google; t=1776330946; x=1776935746; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=eBnSLo1WaWdWZNmP/1Y3PJozIxe7e8DbpBRkn5Mt2ec=;
- b=LNowLj3MtA9RDfLqj0HvhvpaExVoWTYw798vPCzjtUBQWuu32mOZ8JJUGH6pK85URf
- XUQo/LHaHZhxqIgNNhscfht0UrI07pVpRF7Bo6mVrClr+ruPEa2gyQ8XDb29MWaOJHY4
- s7THa7s3bEptRn7rPruGjNxbItfPfdoVATutw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776330946; x=1776935746;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eBnSLo1WaWdWZNmP/1Y3PJozIxe7e8DbpBRkn5Mt2ec=;
- b=Qmg9NN0lnkWns7bgf7d/9sFNIS6zk9ikcioxBnEl7L0ZqrBWlieYYmvCLuCcrKPwaa
- rL9kGf2hkJpfQj9dVgbQIhrXR5QWvwVnW0q3rYEOYSaRqH8Miiaj/cWl2Nmxgl44HsnI
- 0oZQvO0X96A668ahGvZaJ4z81EqWCAuJzjNTOQSsbeJDzyWiYXKq3Gv3WrVJ1UVgZQYs
- eLgfTa4mUTaNGQeFP578ORfHmRutmDKIqrl21gX4S1DM7B8/25LcUylXEUBNUTXmOPcd
- eQng/wizJYW4w+gjPN8zTeSBFnKdY1LGafav8SVhx0I50bYvRRd3pKMB//Hw3aSCHpVj
- MtNA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+0t+jrqmarmv9cB/83fv7z9YrMI4By7JpfqaCbyE4aBJexz4OCkutZXXlbooBiHDTNF/wJc7U=@lists.denx.de
-X-Gm-Message-State: AOJu0YzdqxLLF/6k5kbo4RtPx9VP9059tYbWaYbXB1gGUuzGIcudEjCh
- RdHm6I6ffauyH3npaUF06/UEfUDxtBnhHRhMl7PWBSbnhvcX28M/GQCw+7kwOpHotV/5qgPo5iw
- D2sINDVgZzdjDxT+vkDm7VNi0vRvBtQqH2nEH1fUF6g==
-X-Gm-Gg: AeBDiesqmIy6qCpr+1LUDpF4jlM67LWxjUCiCCR8CMzkrnqvWuMRNF5sC4l4ZJtwNEJ
- AEcv2F4Wo2ZUGZOKD1JlwmYuzbQqYgAGaf5KxDdOEfoRx/89RPbiNrL2Emtc5H8HhoZkQ1//rwW
- BVNpcVNd0Ht2McDUXmjshj/qBZWMOw2bm8hq9UTGG0TY0ZKbaVhDQELB9IRYDFD+Bs2OdeGYEBz
- VltG9GF4FjPsG36IyqNmUpz05gzXErcmRpa2JeNb8mBLND0ImTBrggmOd2O4cBf8zBFNQhoEX9F
- ZuuLfhw=
-X-Received: by 2002:a05:7022:122:b0:128:cda8:3a12 with SMTP id
- a92af1059eb24-12c34e8a100mr13093312c88.11.1776330945766; Thu, 16 Apr 2026
- 02:15:45 -0700 (PDT)
+ spf=pass smtp.mailfrom=angelo@kernel-space.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
+ s=s1; t=1776331044;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=E5+OiGqQz2/I/mylDjA/3QVp5jepuWtg7eGh4O+Khc4=;
+ b=vAaUYbskJwAkvxDqQO4VXQWXhTWW0qBDMdF4ViDEZhfKcj9oIg6xfeH+wdAK2CS3i6mW5j
+ +pxh9z9fGPVmqIzVvTrXinj5z2g0sHonvFtVAUYQCSQ5gVtyo9f4as854oQ1pM5XEvnwqy
+ P696J6hddm+Cv5a+E/DJIjbieMrmyxc=
+Received: from [IPV6:2a07:7e81:7daa:0:62cf:84ff:feee:627] (<unknown>
+ [2a07:7e81:7daa:0:62cf:84ff:feee:627])
+ by oreshnik (OpenSMTPD) with ESMTPSA id 826bf89d
+ (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
+ Thu, 16 Apr 2026 09:17:24 +0000 (UTC)
+Message-ID: <c5d53b62-d8ee-427d-b7ec-acc20e8c70ae@kernel-space.org>
+Date: Thu, 16 Apr 2026 11:17:23 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 6/6] board: qemu: m68k: Create virtio mmio instances
+To: Daniel Palmer <daniel@thingy.jp>, visitorckw@gmail.com, bmeng.cn@gmail.com
+Cc: sjg@chromium.org, u-boot@lists.denx.de
 References: <20260413092240.3719260-1-daniel@thingy.jp>
- <aeCNjtGCY-mlBWwY@google.com>
-In-Reply-To: <aeCNjtGCY-mlBWwY@google.com>
-From: Daniel Palmer <daniel@thingy.jp>
-Date: Thu, 16 Apr 2026 18:15:34 +0900
-X-Gm-Features: AQROBzChcYLAatxvMIEn0VpSZjD57eIgHBDuj7Vwb5BuZafMnPk9Z_IPBShE6jY
-Message-ID: <CAFr9PX=gf9xdDP+H+Ab8o5YtDmcrUML-Z43YXhQTLi2FBUqwfQ@mail.gmail.com>
-Subject: Re: [PATCH v4 0/6] Add virtio-mmio support to m68k virt machine
-To: Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: angelo@kernel-space.org, bmeng.cn@gmail.com, sjg@chromium.org, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ <20260413092240.3719260-7-daniel@thingy.jp>
+Content-Language: en-US, it
+From: Angelo Dureghello <angelo@kernel-space.org>
+In-Reply-To: <20260413092240.3719260-7-daniel@thingy.jp>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,12 +71,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kuan-Wei,
+Reviewed-by: Angelo Dureghello <angelo@kernel-space.org>
 
-On Thu, 16 Apr 2026 at 16:19, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
-> While testing and playing around with it on the qemu m68k virt machine,
-> I noticed that the date and sleep commands are broken after applying
-> these changes.
+On 4/13/26 11:22, Daniel Palmer wrote:
+> So that you can use virtio network, block etc create the virtio mmio
+> instances. There are 128 of these even if they are not all used, a
+> single mmio base value is passed via bootinfo.
+> 
+> Signed-off-by: Daniel Palmer <daniel@thingy.jp>
+> ---
+>  arch/m68k/Kconfig                     | 14 +++++----
+>  board/emulation/qemu-m68k/qemu-m68k.c | 45 +++++++++++++++++++++++++++
+>  2 files changed, 53 insertions(+), 6 deletions(-)
+> 
+> diff --git a/arch/m68k/Kconfig b/arch/m68k/Kconfig
+> index 6ce8f577e3a1..20a112880c87 100644
+> --- a/arch/m68k/Kconfig
+> +++ b/arch/m68k/Kconfig
+> @@ -195,12 +195,14 @@ config TARGET_STMARK2
+>          select M54418
+>  
+>  config TARGET_QEMU_M68K
+> -    bool "Support QEMU m68k virt"
+> -    select M68040
+> -    imply CMD_DM
+> -    help
+> -      This target supports the QEMU m68k virtual machine (-M virt).
+> -      It simulates a Motorola 68040 CPU with Goldfish peripherals.
+> +	bool "Support QEMU m68k virt"
+> +	select M68040
+> +	select BOARD_EARLY_INIT_R
+> +	select VIRTIO_MMIO
+> +	imply CMD_DM
+> +	help
+> +	  This target supports the QEMU m68k virtual machine (-M virt).
+> +	  It simulates a Motorola 68040 CPU with Goldfish peripherals.
+>  
+>  endchoice
+>  
+> diff --git a/board/emulation/qemu-m68k/qemu-m68k.c b/board/emulation/qemu-m68k/qemu-m68k.c
+> index d3527aee1128..a19b23a28ce3 100644
+> --- a/board/emulation/qemu-m68k/qemu-m68k.c
+> +++ b/board/emulation/qemu-m68k/qemu-m68k.c
+> @@ -14,9 +14,14 @@
+>  #include <asm/bootinfo.h>
+>  #include <asm/global_data.h>
+>  #include <asm/io.h>
+> +#include <dm.h>
+> +#include <dm/device-internal.h>
+> +#include <dm/lists.h>
+>  #include <dm/platdata.h>
+> +#include <dm/root.h>
+>  #include <linux/errno.h>
+>  #include <linux/sizes.h>
+> +#include <virtio_mmio.h>
+>  
+>  DECLARE_GLOBAL_DATA_PTR;
+>  
+> @@ -25,6 +30,38 @@ static struct goldfish_rtc_plat rtc_plat;
+>  static struct goldfish_timer_plat timer_plat;
+>  static struct qemu_virt_ctrl_plat reset_plat;
+>  
+> +#define VIRTIO_MMIO_NUM	128
+> +#define VIRTIO_MMIO_SZ	0x200
+> +
+> +static struct virtio_mmio_plat virtio_mmio_plat[VIRTIO_MMIO_NUM];
+> +static char virtio_mmio_names[VIRTIO_MMIO_NUM][11];
+> +static phys_addr_t virtio_mmio_base;
+> +
+> +static int create_virtio_mmios(void)
+> +{
+> +	struct driver *drv;
+> +	int i, ret;
+> +
+> +	if (!virtio_mmio_base)
+> +		return -ENODEV;
+> +
+> +	drv = lists_driver_lookup_name("virtio-mmio");
+> +	if (!drv)
+> +		return -ENOENT;
+> +
+> +	for (i = 0; i < VIRTIO_MMIO_NUM; i++) {
+> +		virtio_mmio_plat[i].base = virtio_mmio_base + (VIRTIO_MMIO_SZ * i);
+> +		sprintf(virtio_mmio_names[i], "virtio-%d", i);
+> +
+> +		ret = device_bind(dm_root(), drv, virtio_mmio_names[i],
+> +				  &virtio_mmio_plat[i], ofnode_null(), NULL);
+> +		if (ret)
+> +			return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>  /*
+>   * Theoretical limit derivation:
+>   * Max Bootinfo Size (Standard Page) = 4096 bytes
+> @@ -65,6 +102,9 @@ static void parse_bootinfo(void)
+>  		case BI_VIRT_CTRL_BASE:
+>  			reset_plat.reg = base;
+>  			break;
+> +		case BI_VIRT_VIRTIO_BASE:
+> +			virtio_mmio_base = base;
+> +			break;
+>  		case BI_MEMCHUNK:
+>  			gd->ram_size = record->data[1];
+>  			break;
+> @@ -80,6 +120,11 @@ int board_early_init_f(void)
+>  	return 0;
+>  }
+>  
+> +int board_early_init_r(void)
+> +{
+> +	return create_virtio_mmios();
+> +}
+> +
+>  int checkboard(void)
+>  {
+>  	puts("Board: QEMU m68k virt\n");
 
-Thanks for testing. I'll put your changes into v5. I think we are
-pretty close now.
+-- Angelo
+
