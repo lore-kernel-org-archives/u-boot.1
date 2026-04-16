@@ -4,97 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2000BF8A146
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 09:14:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E07BF8A149
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 09:15:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AAEC78407E;
-	Thu, 16 Apr 2026 11:14:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3632B8407E;
+	Thu, 16 Apr 2026 11:15:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="oZSym3rd";
+	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="LNowLj3M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0513B84105; Thu, 16 Apr 2026 11:14:36 +0200 (CEST)
-Received: from mail-dl1-x122f.google.com (mail-dl1-x122f.google.com
- [IPv6:2607:f8b0:4864:20::122f])
+ id D2FE283FC0; Thu, 16 Apr 2026 11:15:50 +0200 (CEST)
+Received: from mail-dy1-x132b.google.com (mail-dy1-x132b.google.com
+ [IPv6:2607:f8b0:4864:20::132b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7582E83FC0
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 11:14:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 65C3D8422D
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 11:15:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-dl1-x122f.google.com with SMTP id
- a92af1059eb24-1279eced0b9so11286052c88.0
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 02:14:32 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776330871; cv=none;
+Received: by mail-dy1-x132b.google.com with SMTP id
+ 5a478bee46e88-2d832f2f44cso5397232eec.0
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 02:15:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776330946; cv=none;
  d=google.com; s=arc-20240605;
- b=j8jIGMnkFEjHzvB+XOtPEYMQuXZ+2zyU7xKGfvQyZnY+x2DA6Fe0pNSBHVqOl/xWS7
- oywlryjDSdXxWX/5lLVnNmrcacw4rMy1sY0/KCbqzB/ChrGTW/t8wExcIjyQCwxviIvP
- Ittu5iTHjOszVcaJCF8tfCbMw9Lv6SBl+KZHDMIg7cGBpCIdltXAfjBbQDHg2Iu53nHJ
- OmKZH4FtyEwRx/mz1wra6dFSPn+2Ayt0awDa32SdJaam7OjnajH+YcUCEmQplwcEPQIz
- lZwzDJAlvEePw20XUiGShsmi4S7L0ahzfh7VYItQAKeac1c3oegao96TcwUj4qGI21yu
- of0g==
+ b=dhTLoq9tGQhUygG4zWOWfX7JAcYN/xtidQyRtXL5+Yart1SNFlabzkF/L2bUppEFXX
+ c03SyrGPW04/i/lMmAEGh5gBSyUQlbaHm0Z/FE4ut6XJTP7Dxomz/7qJ0MJ+dqZUqAJR
+ y/R52hqxDqga96A6/0uI8qwa3DBir95WSthrSlHFipvs5B2tIitVKJwH7ZTfELoI+Vfy
+ vjRFkkSOn6Pa4OTbbRfLBrRqsemKvOa43zDkR2AqatJ47m7nleK2AbXDvudYVA5Leyg7
+ FLQFO3v5rnedf7UCPzoQol2aoUg6CJV4NTWNDlI795EvanNUZ+DrInEZ0t6MrZ2y3UlR
+ 8Pig==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=GgdMK6jRW9uHesHpYxhFQYZ6L/g2qMNmJl/uCB9aPdc=;
- fh=uR6Xv81TiE6im77EvvdP+H3OfCw2R1K5JYTXz3LgkcE=;
- b=ktQTbtPlxIO43axRdBlqPtqQZzQvcEOsT7S4ABKv4A8AgK14PNaAa/96QJ3Xk3KdwY
- F9JiN4sQEUwvzUaBHgQ3wmm8advvGIfMB3lYgZ2PZLEOfJizhSPqkpzQUKUvp6K5Xo+X
- /WLkjWm9OFGqvtZDvAJKOTsFyvS/Oo3id8mPJZIfD2aHfb39lwSC+/p0qKk4zYO/bc/q
- 3nt7HH5F0fqT6iEld7fqKJpMb4YoBJYUSZlDGqRDu4M5HoZBARRuNeO3m28n1G0ESTbI
- k4AjWYazMbuOZ61j7x6wglZu/AV0jLYx+wyleM3Z6Jk7EMbgvHM7uP1SsV3j0cCisJ/S
- 9z9w==; darn=lists.denx.de
+ bh=eBnSLo1WaWdWZNmP/1Y3PJozIxe7e8DbpBRkn5Mt2ec=;
+ fh=I4H8W3eym20rCBE4i5huWUJTEVymNOMhh7coLOIes04=;
+ b=GruxNMcIAPi2as65b7klASLpYCF1W0XEAdj/mLT66150t3TucP/BZhpGVB7eRgVzAz
+ szpj9nvkrA+sbcJRubWIcsyEOxIlmejSywz9haUXzseMnn9KyLaayHIRSHFlzN4YgXLW
+ bziACGBcj4Eb7E2U3KNEXZ2wRK+CjTHFX7vH5IDZdm1kyAEZRWHx7nguYg6UWQzTkWwC
+ CsDTu2CX/AhLsme67nGcNHwbwQP/B/dYt3kun9clbJmf+t+FDWDFYwhJKDbKXkKtvpKz
+ 3XkSwbimU87FOcfe05eSUEYv+G7o3+T3gdzMx0KWbs++mMIe1PojIXHoK7rT7i2kSJTI
+ GuHQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thingy.jp; s=google; t=1776330871; x=1776935671; darn=lists.denx.de;
+ d=thingy.jp; s=google; t=1776330946; x=1776935746; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GgdMK6jRW9uHesHpYxhFQYZ6L/g2qMNmJl/uCB9aPdc=;
- b=oZSym3rdtIGNcXgmbaGjcX/XG05JXvND+rAorfQh0o5D3eTrXZc1znsos8COXw/gow
- jlWuX8jaWt0+uz1KZ+OrTuJSjGkzzRwPrUWDcTWOeYlVwl9+0fP8tuokkMxrmO0Xyawb
- rHpSKuOX6bCUgvXk35yDZg0YWthJg9QBK35Zc=
+ bh=eBnSLo1WaWdWZNmP/1Y3PJozIxe7e8DbpBRkn5Mt2ec=;
+ b=LNowLj3MtA9RDfLqj0HvhvpaExVoWTYw798vPCzjtUBQWuu32mOZ8JJUGH6pK85URf
+ XUQo/LHaHZhxqIgNNhscfht0UrI07pVpRF7Bo6mVrClr+ruPEa2gyQ8XDb29MWaOJHY4
+ s7THa7s3bEptRn7rPruGjNxbItfPfdoVATutw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776330871; x=1776935671;
+ d=1e100.net; s=20251104; t=1776330946; x=1776935746;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GgdMK6jRW9uHesHpYxhFQYZ6L/g2qMNmJl/uCB9aPdc=;
- b=GhP7ZnRDEOc97aTG4AprBOmshmA/O0RpnkmeJgMqgP5G29qTw4elKj/RabWCwge50k
- 4Y4K/LBkXrSZZ9c4riwTyZxyOAR1hKpMtY/08TwJzxNcR1UCqDlKkg09W9ClgSFeduNK
- s746RISWSHpX99cMrLWq7SKs4r3TRepp90IGswbOpvW9XjV8D4wkZR3lyCLmdRSkD6FU
- MUQyuAAdraGkatnGdynrW8siD7iKKMT+4IfJotwOsFpartJrXCWg2gXikCzwlEIcYLBG
- 64uOmtHHlpBxBfkWZ37CME/+qOdBzUTyjd9Rx+7ykwhUZZTaYFfy1JeeTdqv7dDy+sqc
- L5Kg==
+ bh=eBnSLo1WaWdWZNmP/1Y3PJozIxe7e8DbpBRkn5Mt2ec=;
+ b=Qmg9NN0lnkWns7bgf7d/9sFNIS6zk9ikcioxBnEl7L0ZqrBWlieYYmvCLuCcrKPwaa
+ rL9kGf2hkJpfQj9dVgbQIhrXR5QWvwVnW0q3rYEOYSaRqH8Miiaj/cWl2Nmxgl44HsnI
+ 0oZQvO0X96A668ahGvZaJ4z81EqWCAuJzjNTOQSsbeJDzyWiYXKq3Gv3WrVJ1UVgZQYs
+ eLgfTa4mUTaNGQeFP578ORfHmRutmDKIqrl21gX4S1DM7B8/25LcUylXEUBNUTXmOPcd
+ eQng/wizJYW4w+gjPN8zTeSBFnKdY1LGafav8SVhx0I50bYvRRd3pKMB//Hw3aSCHpVj
+ MtNA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/NVC209l0fB8FlBxhGP3dCFxH1SHn3UVIkxbvcwwWsUKojm0/pM26xIG15zytK8qB+S2Y7NTA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxjmSEcobTswC2tGAUSI9EX29bO5eqUkQgLR3mFL7b7DP+E1Fd+
- oIP8SEj/Py9V4wOWV1XduOyQF2Zyr2meRCx7Di+z02g5tjodvGNmH/814raMCZVA6xOPwreSMhb
- MjDLdU2i5K3bEdzBfMMlDhmPxIgNUmF9HY1i4rBaPUUliYyuY/XeyY4g=
-X-Gm-Gg: AeBDievjeWhv+5i2Yndxpw9X5oOkgsWE9uZeHbjJ/7AQb/g734+hvvwEOQuR1xaX0a3
- NYmwNt+mNKxrXpDb6saYWg6jzCjkCzm74A+ylvD9PAfr+7wDdOIWWi0vV8mjFfMd+PxK+ZxU9Y4
- DbwHyGnCbzMB7k1Vrgfg04OMMDquWJR6E6bFD61JWuXXiU+CK3+duIElS7bY1rM05OWlrTex+Ou
- isg9H3v17N57Zj1TSK/8Wvruiva3NRSjvMc0ybARz7VX+sV7P2i/0x66u4KUVxv/H7WW947EYXN
- 638SeEk=
-X-Received: by 2002:a05:7022:e0d:b0:128:cf5c:535a with SMTP id
- a92af1059eb24-12c34e8f94emr13473687c88.11.1776330870730; Thu, 16 Apr 2026
- 02:14:30 -0700 (PDT)
+ AFNElJ+0t+jrqmarmv9cB/83fv7z9YrMI4By7JpfqaCbyE4aBJexz4OCkutZXXlbooBiHDTNF/wJc7U=@lists.denx.de
+X-Gm-Message-State: AOJu0YzdqxLLF/6k5kbo4RtPx9VP9059tYbWaYbXB1gGUuzGIcudEjCh
+ RdHm6I6ffauyH3npaUF06/UEfUDxtBnhHRhMl7PWBSbnhvcX28M/GQCw+7kwOpHotV/5qgPo5iw
+ D2sINDVgZzdjDxT+vkDm7VNi0vRvBtQqH2nEH1fUF6g==
+X-Gm-Gg: AeBDiesqmIy6qCpr+1LUDpF4jlM67LWxjUCiCCR8CMzkrnqvWuMRNF5sC4l4ZJtwNEJ
+ AEcv2F4Wo2ZUGZOKD1JlwmYuzbQqYgAGaf5KxDdOEfoRx/89RPbiNrL2Emtc5H8HhoZkQ1//rwW
+ BVNpcVNd0Ht2McDUXmjshj/qBZWMOw2bm8hq9UTGG0TY0ZKbaVhDQELB9IRYDFD+Bs2OdeGYEBz
+ VltG9GF4FjPsG36IyqNmUpz05gzXErcmRpa2JeNb8mBLND0ImTBrggmOd2O4cBf8zBFNQhoEX9F
+ ZuuLfhw=
+X-Received: by 2002:a05:7022:122:b0:128:cda8:3a12 with SMTP id
+ a92af1059eb24-12c34e8a100mr13093312c88.11.1776330945766; Thu, 16 Apr 2026
+ 02:15:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260413092240.3719260-1-daniel@thingy.jp>
- <20260413092240.3719260-3-daniel@thingy.jp>
- <9953a109-6ff5-43f1-ac5d-245c906280b5@kernel-space.org>
-In-Reply-To: <9953a109-6ff5-43f1-ac5d-245c906280b5@kernel-space.org>
+ <aeCNjtGCY-mlBWwY@google.com>
+In-Reply-To: <aeCNjtGCY-mlBWwY@google.com>
 From: Daniel Palmer <daniel@thingy.jp>
-Date: Thu, 16 Apr 2026 18:14:18 +0900
-X-Gm-Features: AQROBzA7Abhwg4mpOSClXPlc5KDef2RDVXxcL56ZDotNsnBz5jE3VbE3RMr4l7M
-Message-ID: <CAFr9PXk+1THbL3Pe9gGfXtYWr0Tt0Aci559UGzc0kDsnD63dQg@mail.gmail.com>
-Subject: Re: [PATCH v4 2/6] m68k: Fix writew(), writel(), readw(), readl()
- endianness for classic m68k
-To: Angelo Dureghello <angelo@kernel-space.org>
-Cc: visitorckw@gmail.com, bmeng.cn@gmail.com, sjg@chromium.org, 
+Date: Thu, 16 Apr 2026 18:15:34 +0900
+X-Gm-Features: AQROBzChcYLAatxvMIEn0VpSZjD57eIgHBDuj7Vwb5BuZafMnPk9Z_IPBShE6jY
+Message-ID: <CAFr9PX=gf9xdDP+H+Ab8o5YtDmcrUML-Z43YXhQTLi2FBUqwfQ@mail.gmail.com>
+Subject: Re: [PATCH v4 0/6] Add virtio-mmio support to m68k virt machine
+To: Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: angelo@kernel-space.org, bmeng.cn@gmail.com, sjg@chromium.org, 
  u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -113,20 +111,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Angelo,
+Hi Kuan-Wei,
 
-On Thu, 16 Apr 2026 at 18:06, Angelo Dureghello <angelo@kernel-space.org> wrote:
->
-> Hi Daniel,
->
-> actually, i can build all m68k boards without errors,
-> and have stmark2 up and running without any issue.
->
-> I will try to fix better this endian thing asap, thanks for the comment.
+On Thu, 16 Apr 2026 at 16:19, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
+> While testing and playing around with it on the qemu m68k virt machine,
+> I noticed that the date and sleep commands are broken after applying
+> these changes.
 
-A heads up: The linux versions of these might change for CF ->
-https://lore.kernel.org/linux-m68k/4ec2b9f3-8420-4f77-9373-7ae4df83404d@app.fastmail.com/T/#mdb1f285ce91df7e94f1c2a1fb3b137f3f8e21a79
-
-Cheers,
-
-Daniel
+Thanks for testing. I'll put your changes into v5. I think we are
+pretty close now.
