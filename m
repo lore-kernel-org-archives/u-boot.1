@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6B90F43697
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 12:46:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE493F43699
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 12:46:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5979184332;
+	by phobos.denx.de (Postfix) with ESMTP id 94E2B84347;
 	Fri, 17 Apr 2026 14:44:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mKFnpgMC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kumjdz6I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E23278407E; Thu, 16 Apr 2026 22:52:26 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 3C7DC8407E; Thu, 16 Apr 2026 22:53:29 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E08DC83EEF
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 22:52:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 51A8E83EEF
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 22:53:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-b9910707d82so345366b.1
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 13:52:24 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776372744; cv=none;
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-b936331786dso1010218366b.3
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 13:53:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776372807; cv=none;
  d=google.com; s=arc-20240605;
- b=jcxyuMm5nsBIDtlk2t1itf1dBLtcnSokvRm7/LGvcZ0c/SMNJI1IIk3V9IWZRewGRr
- WPYhyUAdviLPW+W3Aa1WbEoHxNY2z0b+i/eAE6CVNliW/JjiLoNag/frgmD6H8c5xVMR
- ThLYMxAw8jwWuCss8I9IOeFX58kYTMekOu5nXLDG07v3oPXtnyUtfn6VLEw33YrMMlyk
- dM/D/TXL/ePt6nTQkQOzXbys1/oohR5t/Xpg8IhAjhCioN2UI1MAeERUqXDd+tiis3Vx
- txaQB7fEUzWs0/D2U5aBsjZrO2y0hr8bzzdnO+wPNUr85hYJa8pDsCqDk1L5u+mIr1sm
- 0WdA==
+ b=J+IEnr3lp66kPbSxeiV5L8mdZz1LBTUz46h5UueNzBhqfYLtkLl3eH5+Do3MYkNu/+
+ 6jFf/ydCrWWcI0L+Eo4vmN2muPQOzah+gWX+hVLZMHlcQQZR1JZu3jZGJF8TXeAjZoL+
+ 9RAjVcrbVCNnHBgnCAcqyzPD3BAwGrWz/+tYAfe70SsxIXS8RmVnptA8Qh3TQ7oUp7bi
+ +WgUIhVW/El6YYcFMFzXcdeF96yPZkWqLcTxG+WYH2PrY4YI8a/1SOD0awO95RBEbFif
+ tGftGaT/L38DDH6HdlOusBfVrVOGg5FAYvGH9Erp9EyLJR2TELLMgx6pNFXHnXc2Shpx
+ Regw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=srVDOUhev8QJnVpl1futru5agXzcinhCiCfNtACUqr0=;
- fh=PzcHDHniSDSnSUoX2MAnjnpEO0mAOzqNIR7VgfcIVrA=;
- b=KTSwSF4quu5Xq8JBUko6dzakpgF340B/sllyy5JU+1KhxDouMah/c1SxwLQc83bWHj
- hE/Z+Hsvth++ruDf4Sgk9EOZy99oeebj0L+V/lIj9dzc8sNvS73TO2VDtZXYOhnJ+rHO
- TUibN78jdzLlTs4OqSMZB/HB8FCSi5CA5x6R1n/Hr3UIunnppYnnD3Y67m+AsF71qIpR
- Yqs8UEwdSO6XilTGmM3iqPPqiAA03jBXWe21boqBLJBuMyRPFEthUf0wc2VvR4cMOyZK
- eEfHcWCRwrw0vXF5bVk1a8trRc6Bw3dy4MZFbDA1leaPRi/lOQn929E0qdU3DdvT5XhO
- U/bQ==; darn=lists.denx.de
+ bh=wyRjX8pMh7+RhZHjmCtdJoJ7fJ4lXKm2bNXrge3eIIg=;
+ fh=1W6KVLriV9vHZUBTib7uFWDJ5E/IlPKOWOKt6b9rVJ8=;
+ b=a+UTB3xGfnvbbNvYvvnRR7dugFK9JW9UoaXojjjGbt+JaAyjIG8LRgelkQSin3ZtFs
+ 2Kbd6vZY4J0Koq/66DH1EWk9EBYwV1SMrTAjAi1bFPIaKNEedNtAMcooLGK90BaZjQFl
+ WtDEiHojGeo5G51U9f6zC9zDtX4L75UDpBytC3N+s5KxI20arW6y7OVDRpvSRTU3757X
+ AIOazU/RFcPIgM8xw++uMfVEbKb6JKRkWLSgS4MMWb7XVvrjo2dUeYYHlYv4mx+qPbF7
+ dStg0+ME3pT7AW+8Dujk45cGgYB5k/sf2opWlq4BYl0I4EUZ0N9rx9nulM3jCCXfv7Pl
+ +2yA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776372744; x=1776977544; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776372807; x=1776977607; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=srVDOUhev8QJnVpl1futru5agXzcinhCiCfNtACUqr0=;
- b=mKFnpgMCKzkTIE7qmo2SVBM9dC1ieyJXh42KcPHSpT4HlmA90W6RDebIhpwAG1nALx
- KUWCR1PLp/lukh1EngkoaalOvy00fkeNB2GA0BOgPqcuiuK97vRnx9k9SFC3p91K2GXV
- mhG508I1EXRj0nZOXsB7AUZ6L4ZeR1519HCh0=
+ bh=wyRjX8pMh7+RhZHjmCtdJoJ7fJ4lXKm2bNXrge3eIIg=;
+ b=kumjdz6I4gTNG5BO85cU7T7A4R8hEVc7azbxYqbCDWt1TGMCalEoq6YcVvweIJpKqS
+ 56MUeiZ8tvEt4X5bApjbz9TlcTkoOW1Fd2t5y+beGnq9DdMWOpTDfRi/HTPfn7xzSKFi
+ DMGUozkc0q2u2GKvIU4tyBRyySTzBn5eMSONc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776372744; x=1776977544;
+ d=1e100.net; s=20251104; t=1776372807; x=1776977607;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=srVDOUhev8QJnVpl1futru5agXzcinhCiCfNtACUqr0=;
- b=UvMA2J+05YFoLFSEhsJQfjjVg3ydeWc5fV/CqAisECraC9YiYwecxPChA7oNlJuUoQ
- xsVyTddCIj8dAT8jmp9yl1nwfo4N4SuS0kWGT6096nGDmycL2o+D9RiXYpzhyZQRkPkF
- 9Tu/P9vlsi+Hjt/pNq+gzVJKbst3Tq7uBQk5unxC8rJFOJN2qBR4gWD5jr1ibnwl3wZz
- Gq27D6B7Ll3amOID5x0NC6U3ZbNlmqXy/lGxtD7aV3QnAmNiSMU7PtNJAY+C09v3F1uW
- uabA6JTN/9jGkX83mSlwQ1RaCggr5K1sQy5zst5njJe84ISrghjx+ynbLkzAhKyZr+UV
- akgg==
+ bh=wyRjX8pMh7+RhZHjmCtdJoJ7fJ4lXKm2bNXrge3eIIg=;
+ b=VYztX6NHQB6VeNMTJV9W9LHenJKYxVX8fguzhsYDa5ktHpHyvn4LN8OSY06VKkvS0O
+ FAlAHWDMcHP6kU9i50urZ9LznC9baL+P3jBH7CYGZ+2fsMqjw1zkEsCfeclDFX01DjeU
+ x3iFCiV8NmUBqZcvPrraXQiuBr4vGc5dJd0qP2cSa4y1fSvw45b+9QcqXVtlcuPtME04
+ mWkqSWs823YetUMM4ds23P8t3O8xcUF78Xb2rmEC4tdIxc5Xs8tId14oH4k71ZdyHvQb
+ agLvZxAiUVQl/5gM0EKMSgd6kuUMxnYHHMCtQt2x54Vz3ZKaicDiJdTIIN1NrHa7Z048
+ 81RA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+fRICzM0x9OGMFZrGCpaFOKPyt3DrTmmAaD476ijvBMsVrWyVwARRQ4EjO6/HtzGgKbPJ+/4E=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw3kyaRxn3Sho5LrC81X3S04lcKksT6sgQFsd1su2aBqxkfqDB5
- ow+tqcvtjfOsXcDso2bm5HK1Qxu3aKfQV2R5WNSTApiZzT4RdOSeRRXsRRWQMBWdwkNpTK+EBNQ
- XeEk2dPH8iW4ygCUv3nme4xHYqsPsIe0b82zGsSyp
-X-Gm-Gg: AeBDiesX947HDAn7HuMErd0/Kq6KYrt82pT3uy76ZDe+wMTfJDPmaa64xDIV86U61rx
- zvmKUOGsx7XAp4Ak0qV508jPW8JVtFc1DCltGCZ9Y6JZ7PiIbeJ5aZbnfa3eY+k0b5aGaKIu4Eu
- h7WdGaBIGETeTjkBdAz9K2xr5Ci2IVUu7amgxlIFEAQywPD94qJdx7ltD9jrv8kScNcrHOhgnUh
- YqTzGytz4t8tLJdElnm8RgTmcQWcKhzPN+jUp6gOabHmdrSDg2Ynrc22cv21iCVpLIH83VnFzOR
- LmZafA1MqPj1oDCeIIqhNOvG/zV3S5A=
-X-Received: by 2002:a17:907:a602:b0:b9c:c3ca:a724 with SMTP id
- a640c23a62f3a-ba418982fd2mr6495966b.8.1776372743799; Thu, 16 Apr 2026
- 13:52:23 -0700 (PDT)
+ AFNElJ86SsjtmWp76ccmpzqpelOuwMQw6b6SmbDX3ju+38iExfL0sX2Uqg21aUPRvYfFtaPDnSJ/Pfs=@lists.denx.de
+X-Gm-Message-State: AOJu0YyNSAmQN0koZ451hoRI3zUtwLTTtWE229gknZlVm47vzP1+6SNt
+ sjhX177MmsWOfQWzZiaqDh+r7O9DS3nUpU8aZd2p8oslMmOM2iEADhUjU67lfTEpn6Qruk641xc
+ JJNYro3eZltSMnezk/e2e+nYjUqBiASiNtYV6E4G3
+X-Gm-Gg: AeBDiev2Qz7cRqDeZnmWQS8rEuD4FEKVLveh+MtnfepyFEZNyyGHJztH0prvgTXdqZQ
+ WmtgilxKvSnLfh3tXtOppCwNb587TxhMYB1h2zjtb4VB+JltePjr0sDWTgIMVr7/GIBZjlFZFeC
+ G7wHUq/rvYqYwpNU4N6EEvCPTdPqWDt4WtjICb4rRW6v78wzN4pmJ68fH7cdPzH5PQpKJD/+gK6
+ ovynxywT7YNneNJJgQbDLZDIzwoJs5Uh5qEzjdIu5OCoDqm1AnD4eALy4s29UYV+tg3RzDq75e1
+ lEEA7DFy+n68nSX1ZYi3GoeSefjyVwk=
+X-Received: by 2002:a17:907:d206:b0:b9b:fa57:d5b2 with SMTP id
+ a640c23a62f3a-ba41b0e2b8amr4533966b.42.1776372806756; Thu, 16 Apr 2026
+ 13:53:26 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260416053928.2834699-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260416053928.2834699-3-varadarajan.narayanan@oss.qualcomm.com>
-In-Reply-To: <20260416053928.2834699-3-varadarajan.narayanan@oss.qualcomm.com>
+ <20260416053928.2834699-4-varadarajan.narayanan@oss.qualcomm.com>
+In-Reply-To: <20260416053928.2834699-4-varadarajan.narayanan@oss.qualcomm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 17 Apr 2026 08:52:10 +1200
-X-Gm-Features: AQROBzDkZZ76zcjyuMXk5-yahlHPcHsLk7S0U9WQnAe7jDOandTxNACJMYHMdNI
-Message-ID: <CAFLszTj=iQO73XC8+d83Um8sw-QPd0ceTDLN6zU53GDD8B3aSQ@mail.gmail.com>
-Subject: Re: [PATCH v3 02/10] clk/qcom: add initial clock driver for ipq5210
+Date: Fri, 17 Apr 2026 08:53:12 +1200
+X-Gm-Features: AQROBzCXkRPg8GtgkprvEHwa2O2YEoCbzMD0FpTe9cWAzfuM6mf4PCTljPEH4YM
+Message-ID: <CAFLszTgMb89EjfDSc17z0TAqZS0MB0Z1m56hqx1=bZxH578nzA@mail.gmail.com>
+Subject: Re: [PATCH v3 03/10] pinctrl: qcom: Add ipq5210 pinctrl driver
 To: varadarajan.narayanan@oss.qualcomm.com
 Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com, 
  casey.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@kernel.org, 
@@ -129,52 +129,28 @@ Hi Varadarajan,
 
 On 2026-04-16T05:39:18, Varadarajan Narayanan
 <varadarajan.narayanan@oss.qualcomm.com> wrote:
-> clk/qcom: add initial clock driver for ipq5210
+> pinctrl: qcom: Add ipq5210 pinctrl driver
 >
-> Add initial set of clocks and resets for enabling U-Boot on ipq5210
-> based RDP platforms.
+> Add pinctrl driver for the TLMM block found in the ipq5210 SoC.
 >
 > Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 >
-> drivers/clk/qcom/Kconfig         |  8 ++++
->  drivers/clk/qcom/Makefile        |  1 +
->  drivers/clk/qcom/clock-ipq5210.c | 97 ++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 106 insertions(+)
+> drivers/pinctrl/qcom/Kconfig           |   8 +
+>  drivers/pinctrl/qcom/Makefile          |   1 +
+>  drivers/pinctrl/qcom/pinctrl-ipq5210.c | 349 +++++++++++++++++++++++++++++++++
+>  3 files changed, 358 insertions(+)
 
-> +#include <dm/device-internal.h>
+> +static const struct msm_pinctrl_data ipq5210_data = {
+> +     .pin_data = {
+> +             .pin_count = 53,
+> +             .special_pins_start = 53, /* There are no special pins */
 
-Is this needed?
+From my reading, the PINGROUP definitions run from 0 to 53, which is
+54 pins, so shouldn't these two be 54 ?
 
-> +static ulong ipq5210_set_rate(struct clk *clk, ulong rate)
-> +{
-> +     struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +
-> +     switch (clk->id) {
-> +     case GCC_QUPV3_WRAP_SE1_CLK:
-> +             clk_rcg_set_rate_mnd(priv->base, priv->data->clks[clk->id].cbcr_reg,
+> +     pr_err("Can't find requested function for pin %u pin\n", pin);
 
-cbcr_reg is a bit confusing since that name suggests a CBCR register -
-see the ipq5424 driver which uses 'reg'. What do you think about using
-reg consistently, or maybe add a comment explaining this?
-
-> +static int ipq5210_enable(struct clk *clk)
-> +{
-> +     struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +
-> +     if (priv->data->num_clks <= clk->id) {
-> +             debug("%s: unknown clk id %lu\n", __func__, clk->id);
-> +             return 0;
-> +     }
-
-Shouldn't the comparison be <  ?
-
-Also, should return an error, not 0.
-
-> +     qcom_gate_clk_en(priv, clk->id);
-> +
-> +     return 0;
-
-Should return any error from qcom_gate_clk_en()
+The word 'pin' appears twice
 
 Regards,
 Simon
