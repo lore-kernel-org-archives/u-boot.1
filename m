@@ -4,21 +4,21 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41319F433D6
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 01:47:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52E5BF433D6
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 01:47:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6E8084253;
-	Thu, 16 Apr 2026 03:47:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 21FC984119;
+	Thu, 16 Apr 2026 03:47:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F1D184119; Thu, 16 Apr 2026 03:47:23 +0200 (CEST)
+ id BBA1484228; Thu, 16 Apr 2026 03:47:30 +0200 (CEST)
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C73384285
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 03:47:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0AE328423F
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 03:47:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
@@ -26,8 +26,8 @@ Authentication-Results: phobos.denx.de;
 Received: from local
  by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
  (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1wDBox-000000006gX-12aW; Thu, 16 Apr 2026 01:47:07 +0000
-Date: Thu, 16 Apr 2026 02:47:03 +0100
+ id 1wDBp4-000000006hE-1aVW; Thu, 16 Apr 2026 01:47:14 +0000
+Date: Thu, 16 Apr 2026 02:47:11 +0100
 From: Daniel Golle <daniel@makrotopia.org>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Quentin Schulz <quentin.schulz@cherry.de>,
@@ -51,14 +51,12 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Jonas Karlman <jonas@kwiboo.se>, Shiji Yang <yangshiji66@outlook.com>,
  Rasmus Villemoes <ravi@prevas.dk>,
  Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
-Subject: [PATCH v2 6/7] test: boot: add runtime unit test for
- fit_verity_build_cmdline()
-Message-ID: <97e38b81f2e8f54ec819940d360849e4cf61b875.1776302806.git.daniel@makrotopia.org>
+Subject: [PATCH v2 7/7] test: py: add mkimage dm-verity round-trip test
+Message-ID: <9ceb70fcad4dec6efae1b03297f38665926b6c9f.1776302806.git.daniel@makrotopia.org>
 References: <cover.1776302805.git.daniel@makrotopia.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 In-Reply-To: <cover.1776302805.git.daniel@makrotopia.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -76,358 +74,176 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add test/boot/fit_verity.c with four tests that construct FIT blobs
-in memory and exercise fit_verity_build_cmdline().
+Add test/py/tests/test_fit_verity.py with two tests.
+
+Both tests are skipped if veritysetup is not installed on the host.
 
 Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 ---
 v2: new patch
 
- test/boot/Makefile     |   1 +
- test/boot/fit_verity.c | 298 +++++++++++++++++++++++++++++++++++++++++
- test/cmd_ut.c          |   2 +
- 3 files changed, 301 insertions(+)
- create mode 100644 test/boot/fit_verity.c
+ test/py/tests/test_fit_verity.py | 153 +++++++++++++++++++++++++++++++
+ 1 file changed, 153 insertions(+)
+ create mode 100644 test/py/tests/test_fit_verity.py
 
-diff --git a/test/boot/Makefile b/test/boot/Makefile
-index 89538d4f0a6..d98f212b243 100644
---- a/test/boot/Makefile
-+++ b/test/boot/Makefile
-@@ -15,6 +15,7 @@ endif
- ifdef CONFIG_SANDBOX
- obj-$(CONFIG_$(PHASE_)CMDLINE) += bootm.o
- endif
-+obj-$(CONFIG_$(PHASE_)FIT_VERITY) += fit_verity.o
- obj-$(CONFIG_MEASURED_BOOT) += measurement.o
- 
- ifdef CONFIG_OF_LIVE
-diff --git a/test/boot/fit_verity.c b/test/boot/fit_verity.c
+diff --git a/test/py/tests/test_fit_verity.py b/test/py/tests/test_fit_verity.py
 new file mode 100644
-index 00000000000..40c54998387
+index 00000000000..670232995cc
 --- /dev/null
-+++ b/test/boot/fit_verity.c
-@@ -0,0 +7,302 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Tests for FIT dm-verity cmdline generation
-+ *
-+ * Copyright 2026 Daniel Golle <daniel@makrotopia.org>
-+ */
++++ b/test/py/tests/test_fit_verity.py
+@@ -0,0 +1,153 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright 2026 Daniel Golle <daniel@makrotopia.org>
 +
-+#include <image.h>
-+#include <test/test.h>
-+#include <test/ut.h>
++"""
++Test mkimage dm-verity Merkle-tree generation
 +
-+#define FIT_VERITY_TEST(_name, _flags)	UNIT_TEST(_name, _flags, fit_verity)
++Build a minimal .its with a dm-verity subnode (user-provided properties only),
++run mkimage -E, and verify that the computed properties (digest, salt,
++num-data-blocks, hash-start-block) are written into the resulting FIT.
 +
-+/* FIT blob buffer size — generous to avoid FDT_ERR_NOSPACE */
-+#define FIT_BUF_SIZE	4096
++This test does not run the sandbox.  It only exercises the host tool 'mkimage'.
++Requires 'veritysetup' from the cryptsetup package on the build host.
++"""
 +
-+/* Test digest (32 bytes = sha256) */
-+static const u8 test_digest[32] = {
-+	0x8e, 0x67, 0x91, 0x63, 0x7f, 0x93, 0xcb, 0xb8,
-+	0x1f, 0xc4, 0x52, 0x99, 0xe2, 0x03, 0xcb, 0xe8,
-+	0x5c, 0xa2, 0xe4, 0x7a, 0x38, 0xf5, 0x05, 0x1b,
-+	0xdd, 0xee, 0xce, 0x92, 0xd7, 0xb1, 0xc9, 0xf9,
++import os
++import shutil
++import pytest
++import struct
++import utils
++
++ITS_TEMPLATE = """\
++/dts-v1/;
++
++/ {
++    description = "dm-verity test";
++    #address-cells = <1>;
++
++    images {
++        rootfs {
++            description = "test filesystem";
++            data = /incbin/("./rootfs.bin");
++            type = "filesystem";
++            arch = "sandbox";
++            compression = "none";
++
++            dm-verity {
++                algo = "sha256";
++                data-block-size = <4096>;
++                hash-block-size = <4096>;
++            };
++        };
++    };
++
++    configurations {
++        default = "conf-1";
++        conf-1 {
++            description = "test config";
++            loadables = "rootfs";
++        };
++    };
 +};
++"""
 +
-+/* Test salt (32 bytes) */
-+static const u8 test_salt[32] = {
-+	0xaa, 0x7b, 0x11, 0xf8, 0xdb, 0x8f, 0xe2, 0xe5,
-+	0xbf, 0xd4, 0xec, 0xa1, 0xd1, 0x8a, 0x22, 0xb5,
-+	0xde, 0x7e, 0xa3, 0x9d, 0x2e, 0x1b, 0x93, 0xbb,
-+	0x72, 0x72, 0xce, 0x0c, 0x6c, 0xa3, 0xcc, 0x8e,
-+};
++def have_veritysetup():
++    return shutil.which('veritysetup') is not None
 +
-+/**
-+ * build_verity_fit() - construct a minimal FIT blob with dm-verity metadata
-+ * @buf:		output buffer (at least FIT_BUF_SIZE bytes)
-+ * @num_loadables:	number of filesystem loadables to create (1 or 2)
-+ *
-+ * Builds a FIT blob containing:
-+ *  - /images/rootfsN  with type="filesystem" and a dm-verity subnode
-+ *  - /configurations/conf-1  referencing the loadable(s)
-+ *
-+ * Return: configuration node offset, or -ve on error
-+ */
-+static int build_verity_fit(void *buf, int num_loadables)
-+{
-+	int images_node, conf_node, confs_node, img_node, verity_node;
-+	fdt32_t val;
-+	int ret, i;
-+	char name[32];
-+	/*
-+	 * Build the loadables string list.  FDT stringlists are concatenated
-+	 * NUL-terminated strings.  E.g. "rootfs0\0rootfs1\0"
-+	 */
-+	char loadables[128];
-+	int loadables_len = 0;
 +
-+	ret = fdt_create_empty_tree(buf, FIT_BUF_SIZE);
-+	if (ret)
-+		return ret;
++@pytest.mark.requiredtool('dtc')
++@pytest.mark.requiredtool('fdtget')
++@pytest.mark.skipif(not have_veritysetup(),
++                    reason='veritysetup not installed')
++def test_mkimage_verity(ubman):
++    """Test that mkimage computes dm-verity properties correctly."""
 +
-+	/* /images */
-+	images_node = fdt_add_subnode(buf, 0, "images");
-+	if (images_node < 0)
-+		return images_node;
++    mkimage = ubman.config.build_dir + '/tools/mkimage'
++    tempdir = os.path.join(ubman.config.result_dir, 'verity')
++    os.makedirs(tempdir, exist_ok=True)
 +
-+	for (i = 0; i < num_loadables; i++) {
-+		snprintf(name, sizeof(name), "rootfs%d", i);
++    rootfs_file = os.path.join(tempdir, 'rootfs.bin')
++    its_file = os.path.join(tempdir, 'image.its')
++    fit_file = os.path.join(tempdir, 'image.itb')
 +
-+		img_node = fdt_add_subnode(buf, images_node, name);
-+		if (img_node < 0)
-+			return img_node;
++    # Create a dummy filesystem image: 64 x 4096-byte blocks of 0xa5
++    block_size = 4096
++    num_blocks = 64
++    with open(rootfs_file, 'wb') as f:
++        f.write(bytes([0xa5]) * block_size * num_blocks)
 +
-+		ret = fdt_setprop_string(buf, img_node, "type", "filesystem");
-+		if (ret)
-+			return ret;
++    with open(its_file, 'w') as f:
++        f.write(ITS_TEMPLATE)
 +
-+		verity_node = fdt_add_subnode(buf, img_node, "dm-verity");
-+		if (verity_node < 0)
-+			return verity_node;
++    # Build the FIT with external data (required for dm-verity)
++    dtc_args = f'-I dts -O dtb -i {tempdir}'
++    utils.run_and_log(ubman,
++                      [mkimage, '-E', '-D', dtc_args, '-f', its_file, fit_file])
 +
-+		ret = fdt_setprop_string(buf, verity_node, "algo", "sha256");
-+		if (ret)
-+			return ret;
++    # Helper to read FIT properties via fdtget
++    def fdt_get(node, prop):
++        val = utils.run_and_log(
++            ubman, f'fdtget {fit_file} {node} {prop}')
++        return val.strip()
 +
-+		val = cpu_to_fdt32(4096);
-+		ret = fdt_setprop(buf, verity_node, "data-block-size",
-+				  &val, sizeof(val));
-+		if (ret)
-+			return ret;
++    def fdt_get_hex(node, prop):
++        """Read a byte-array property as hex string."""
++        val = utils.run_and_log(
++            ubman, f'fdtget -tbx {fit_file} {node} {prop}')
++        return ''.join(b.zfill(2) for b in val.strip().split())
 +
-+		ret = fdt_setprop(buf, verity_node, "hash-block-size",
-+				  &val, sizeof(val));
-+		if (ret)
-+			return ret;
++    verity_path = '/images/rootfs/dm-verity'
 +
-+		val = cpu_to_fdt32(100);
-+		ret = fdt_setprop(buf, verity_node, "num-data-blocks",
-+				  &val, sizeof(val));
-+		if (ret)
-+			return ret;
++    # Verify mkimage filled in the computed properties
++    algo = fdt_get(verity_path, 'algo')
++    assert algo == 'sha256', f'algo mismatch: {algo}'
 +
-+		val = cpu_to_fdt32(100);
-+		ret = fdt_setprop(buf, verity_node, "hash-start-block",
-+				  &val, sizeof(val));
-+		if (ret)
-+			return ret;
++    dbs = int(fdt_get(verity_path, 'data-block-size'))
++    assert dbs == block_size, f'data-block-size mismatch: {dbs}'
 +
-+		ret = fdt_setprop(buf, verity_node, "digest",
-+				  test_digest, sizeof(test_digest));
-+		if (ret)
-+			return ret;
++    hbs = int(fdt_get(verity_path, 'hash-block-size'))
++    assert hbs == block_size, f'hash-block-size mismatch: {hbs}'
 +
-+		ret = fdt_setprop(buf, verity_node, "salt",
-+				  test_salt, sizeof(test_salt));
-+		if (ret)
-+			return ret;
++    nblk = int(fdt_get(verity_path, 'num-data-blocks'))
++    assert nblk == num_blocks, f'num-data-blocks mismatch: {nblk} != {num_blocks}'
 +
-+		/* Append to loadables stringlist */
-+		loadables_len += snprintf(loadables + loadables_len,
-+					  sizeof(loadables) - loadables_len,
-+					  "%s", name) + 1;
-+	}
++    hblk = int(fdt_get(verity_path, 'hash-start-block'))
++    # With --no-superblock, hash-start-block == num-data-blocks
++    assert hblk == num_blocks, f'hash-start-block mismatch: {hblk} != {num_blocks}'
 +
-+	/* /configurations/conf-1 */
-+	confs_node = fdt_add_subnode(buf, 0, "configurations");
-+	if (confs_node < 0)
-+		return confs_node;
++    # digest and salt should be non-empty hex strings (sha256 = 32 bytes = 64 hex chars)
++    digest = fdt_get_hex(verity_path, 'digest')
++    assert len(digest) == 64, f'digest length mismatch: {len(digest)} (expected 64)'
++    # Should not be all zeros
++    assert digest != '0' * 64, 'digest is all zeros'
 +
-+	conf_node = fdt_add_subnode(buf, confs_node, "conf-1");
-+	if (conf_node < 0)
-+		return conf_node;
++    salt = fdt_get_hex(verity_path, 'salt')
++    assert len(salt) == 64, f'salt length mismatch: {len(salt)} (expected 64)'
 +
-+	ret = fdt_setprop(buf, conf_node, "loadables",
-+			  loadables, loadables_len);
-+	if (ret)
-+		return ret;
 +
-+	return conf_node;
-+}
++@pytest.mark.requiredtool('dtc')
++@pytest.mark.skipif(not have_veritysetup(),
++                    reason='veritysetup not installed')
++def test_mkimage_verity_requires_external(ubman):
++    """Test that mkimage rejects dm-verity without -E flag."""
 +
-+/* Test: single dm-verity loadable produces correct cmdline fragments */
-+static int fit_verity_test_single(struct unit_test_state *uts)
-+{
-+	char buf[FIT_BUF_SIZE];
-+	struct bootm_headers images;
-+	int conf_noffset;
++    mkimage = ubman.config.build_dir + '/tools/mkimage'
++    tempdir = os.path.join(ubman.config.result_dir, 'verity_no_ext')
++    os.makedirs(tempdir, exist_ok=True)
 +
-+	conf_noffset = build_verity_fit(buf, 1);
-+	ut_assert(conf_noffset >= 0);
++    rootfs_file = os.path.join(tempdir, 'rootfs.bin')
++    its_file = os.path.join(tempdir, 'image.its')
++    fit_file = os.path.join(tempdir, 'image.itb')
 +
-+	memset(&images, 0, sizeof(images));
-+	ut_assertok(fit_verity_build_cmdline(buf, conf_noffset, &images));
++    with open(rootfs_file, 'wb') as f:
++        f.write(bytes([0xa5]) * 4096 * 8)
 +
-+	/* dm_mod_create should contain the target spec for rootfs0 */
-+	ut_assertnonnull(images.dm_mod_create);
-+	ut_assert(strstr(images.dm_mod_create, "rootfs0,,,"));
-+	ut_assert(strstr(images.dm_mod_create, "verity 1"));
-+	ut_assert(strstr(images.dm_mod_create, "/dev/fit0"));
-+	ut_assert(strstr(images.dm_mod_create, "4096 4096 100 100"));
-+	ut_assert(strstr(images.dm_mod_create, "sha256"));
-+	/* Check hex-encoded digest prefix */
-+	ut_assert(strstr(images.dm_mod_create, "8e6791637f93cbb8"));
-+	/* Check hex-encoded salt prefix */
-+	ut_assert(strstr(images.dm_mod_create, "aa7b11f8db8fe2e5"));
++    with open(its_file, 'w') as f:
++        f.write(ITS_TEMPLATE)
 +
-+	/* dm_mod_waitfor should reference /dev/fit0 */
-+	ut_assertnonnull(images.dm_mod_waitfor);
-+	ut_asserteq_str("/dev/fit0", images.dm_mod_waitfor);
-+
-+	fit_verity_free(&images);
-+	ut_assertnull(images.dm_mod_create);
-+	ut_assertnull(images.dm_mod_waitfor);
-+
-+	return 0;
-+}
-+
-+FIT_VERITY_TEST(fit_verity_test_single, 0);
-+
-+/* Test: FIT with no dm-verity subnode returns 0, pointers stay NULL */
-+static int fit_verity_test_no_verity(struct unit_test_state *uts)
-+{
-+	char buf[FIT_BUF_SIZE];
-+	struct bootm_headers images;
-+	int conf_node, images_node, img_node, confs_node;
-+	int ret;
-+
-+	ret = fdt_create_empty_tree(buf, FIT_BUF_SIZE);
-+	ut_assertok(ret);
-+
-+	images_node = fdt_add_subnode(buf, 0, "images");
-+	ut_assert(images_node >= 0);
-+
-+	img_node = fdt_add_subnode(buf, images_node, "rootfs");
-+	ut_assert(img_node >= 0);
-+	ut_assertok(fdt_setprop_string(buf, img_node, "type", "filesystem"));
-+	/* No dm-verity subnode */
-+
-+	confs_node = fdt_add_subnode(buf, 0, "configurations");
-+	ut_assert(confs_node >= 0);
-+	conf_node = fdt_add_subnode(buf, confs_node, "conf-1");
-+	ut_assert(conf_node >= 0);
-+	ut_assertok(fdt_setprop_string(buf, conf_node, "loadables", "rootfs"));
-+
-+	memset(&images, 0, sizeof(images));
-+	ut_asserteq(0, fit_verity_build_cmdline(buf, conf_node, &images));
-+	ut_assertnull(images.dm_mod_create);
-+	ut_assertnull(images.dm_mod_waitfor);
-+
-+	return 0;
-+}
-+
-+FIT_VERITY_TEST(fit_verity_test_no_verity, 0);
-+
-+/* Test: two dm-verity loadables produce combined cmdline */
-+static int fit_verity_test_two_loadables(struct unit_test_state *uts)
-+{
-+	char buf[FIT_BUF_SIZE];
-+	struct bootm_headers images;
-+	int conf_noffset;
-+
-+	conf_noffset = build_verity_fit(buf, 2);
-+	ut_assert(conf_noffset >= 0);
-+
-+	memset(&images, 0, sizeof(images));
-+	ut_assertok(fit_verity_build_cmdline(buf, conf_noffset, &images));
-+
-+	/* Both targets should appear, separated by ";" */
-+	ut_assertnonnull(images.dm_mod_create);
-+	ut_assert(strstr(images.dm_mod_create, "rootfs0,,,"));
-+	ut_assert(strstr(images.dm_mod_create, ";rootfs1,,,"));
-+	ut_assert(strstr(images.dm_mod_create, "/dev/fit0"));
-+	ut_assert(strstr(images.dm_mod_create, "/dev/fit1"));
-+
-+	/* dm_mod_waitfor should list both devices */
-+	ut_assertnonnull(images.dm_mod_waitfor);
-+	ut_assert(strstr(images.dm_mod_waitfor, "/dev/fit0"));
-+	ut_assert(strstr(images.dm_mod_waitfor, "/dev/fit1"));
-+
-+	fit_verity_free(&images);
-+	return 0;
-+}
-+
-+FIT_VERITY_TEST(fit_verity_test_two_loadables, 0);
-+
-+/* Test: invalid block size (not power of two) returns -EINVAL */
-+static int fit_verity_test_bad_blocksize(struct unit_test_state *uts)
-+{
-+	char buf[FIT_BUF_SIZE];
-+	struct bootm_headers images;
-+	int images_node, conf_node, confs_node, img_node, verity_node;
-+	fdt32_t val;
-+	int ret;
-+
-+	ret = fdt_create_empty_tree(buf, FIT_BUF_SIZE);
-+	ut_assertok(ret);
-+
-+	images_node = fdt_add_subnode(buf, 0, "images");
-+	ut_assert(images_node >= 0);
-+
-+	img_node = fdt_add_subnode(buf, images_node, "rootfs");
-+	ut_assert(img_node >= 0);
-+	ut_assertok(fdt_setprop_string(buf, img_node, "type", "filesystem"));
-+
-+	verity_node = fdt_add_subnode(buf, img_node, "dm-verity");
-+	ut_assert(verity_node >= 0);
-+
-+	ut_assertok(fdt_setprop_string(buf, verity_node, "algo", "sha256"));
-+
-+	/* 3000 is not a power of two */
-+	val = cpu_to_fdt32(3000);
-+	ut_assertok(fdt_setprop(buf, verity_node, "data-block-size",
-+				&val, sizeof(val)));
-+	val = cpu_to_fdt32(4096);
-+	ut_assertok(fdt_setprop(buf, verity_node, "hash-block-size",
-+				&val, sizeof(val)));
-+
-+	val = cpu_to_fdt32(100);
-+	ut_assertok(fdt_setprop(buf, verity_node, "num-data-blocks",
-+				&val, sizeof(val)));
-+	ut_assertok(fdt_setprop(buf, verity_node, "hash-start-block",
-+				&val, sizeof(val)));
-+
-+	ut_assertok(fdt_setprop(buf, verity_node, "digest",
-+				test_digest, sizeof(test_digest)));
-+	ut_assertok(fdt_setprop(buf, verity_node, "salt",
-+				test_salt, sizeof(test_salt)));
-+
-+	confs_node = fdt_add_subnode(buf, 0, "configurations");
-+	ut_assert(confs_node >= 0);
-+	conf_node = fdt_add_subnode(buf, confs_node, "conf-1");
-+	ut_assert(conf_node >= 0);
-+	ut_assertok(fdt_setprop_string(buf, conf_node, "loadables", "rootfs"));
-+
-+	memset(&images, 0, sizeof(images));
-+	ut_asserteq(-EINVAL, fit_verity_build_cmdline(buf, conf_node, &images));
-+	ut_assertnull(images.dm_mod_create);
-+	ut_assertnull(images.dm_mod_waitfor);
-+
-+	return 0;
-+}
-+
-+FIT_VERITY_TEST(fit_verity_test_bad_blocksize, 0);
-diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index 44e5fdfdaa6..d1b376f617c 100644
---- a/test/cmd_ut.c
-+++ b/test/cmd_ut.c
-@@ -59,6 +59,7 @@ SUITE_DECL(env);
- SUITE_DECL(exit);
- SUITE_DECL(fdt);
- SUITE_DECL(fdt_overlay);
-+SUITE_DECL(fit_verity);
- SUITE_DECL(font);
- SUITE_DECL(hush);
- SUITE_DECL(lib);
-@@ -86,6 +87,7 @@ static struct suite suites[] = {
- 	SUITE(exit, "shell exit and variables"),
- 	SUITE(fdt, "fdt command"),
- 	SUITE(fdt_overlay, "device tree overlays"),
-+	SUITE(fit_verity, "FIT dm-verity cmdline generation"),
- 	SUITE(font, "font command"),
- 	SUITE(hush, "hush behaviour"),
- 	SUITE(lib, "library functions"),
++    # Without -E, mkimage should fail for dm-verity images
++    dtc_args = f'-I dts -O dtb -i {tempdir}'
++    with pytest.raises(Exception):
++        utils.run_and_log(ubman,
++                          [mkimage, '-D', dtc_args, '-f', its_file, fit_file])
 -- 
 2.53.0
