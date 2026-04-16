@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8312F8A14D
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 09:40:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BCFCF8A146
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 09:40:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5B2C8423F;
+	by phobos.denx.de (Postfix) with ESMTP id E284884258;
 	Thu, 16 Apr 2026 11:40:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="CzOwZbS1";
+	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="k8ETBCSl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79C0984105; Thu, 16 Apr 2026 11:40:07 +0200 (CEST)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
+ id 5E62684246; Thu, 16 Apr 2026 11:40:08 +0200 (CEST)
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 638A284105
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 11:40:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 298CA8407E
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 11:40:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-c795a88e8acso590689a12.3
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 02:40:04 -0700 (PDT)
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-82a655cfab5so6364939b3a.1
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 02:40:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thingy.jp; s=google; t=1776332403; x=1776937203; darn=lists.denx.de;
+ d=thingy.jp; s=google; t=1776332404; x=1776937204; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nMlSqEMzLHIBrMWBPw3/su0lh/eopHFl9flEYxjRn38=;
- b=CzOwZbS1oRR4/2GwTl8EB3z4PDk6ZTCJP2rvqi7I5pNBpcngWqWL3orySMtd8wGEHq
- pi6eO/X5D1H1rFW1AQN0QcCALNzF5IAaQG/y56tKrWxOC9NT7y2oivApAdE3yXYC0juU
- 16TpSAk2VfQ/wDesmsWWxY8o24SuTVmpSmad8=
+ bh=Y13x06t9MNZeSMACuzaERlgtCziZSbpHJl/qeN8+ObQ=;
+ b=k8ETBCSltjoTvaq5Uh46MjM9DM0nus+6XDjZGu0r7n4XdnllS+b1dt8Nd7fwHo7J3W
+ nQxZAj/f5xP/UXmmmcKXun533bXGmj4KUkodVQkkfY7BBkWfht4tARFtoHCBWhSrGFSp
+ sw2iuOJFNvQVSJzJzmvPMLm5CDs26fyKQ83MM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776332403; x=1776937203;
+ d=1e100.net; s=20251104; t=1776332404; x=1776937204;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=nMlSqEMzLHIBrMWBPw3/su0lh/eopHFl9flEYxjRn38=;
- b=EMj16M4kYP+wC4pC5UUkKTRZiEZ//hcUENpDq75zNRsRHgs3WCk3g/3HjGM7+wnlI5
- BJaPSyvgHnEJzBsOh4fvQPPQtymkno7Yx88PjtQ7/LMYoYBzQDSJKtH5lU55DAjKxEEJ
- gv4Y6khKx5pYZU0omjG9pT84NhB/3rITmQW0xxNZRClXQwh+LX2avmTgU7G9JRxs3Asr
- I5GvhT9+zT8amKdXUQonJhULRns97H/bwRMxB7AbX2OcqvAmnCOVaIqRZYFMUoLtT2E6
- rqwnP1gNAxzwjt+QxWYkGEmbkfBQnNitAqR4MfLVP6C65Z6Z178Q52e5DizeopzRwqVw
- DkZQ==
+ bh=Y13x06t9MNZeSMACuzaERlgtCziZSbpHJl/qeN8+ObQ=;
+ b=ck0h5iq2fucfH/u1xF1T1F1qzJ7HLB52uJUL9wfp1mzc1CdJWnfS5zKcYXTHAZp06S
+ uWdwC9RryIzSpDDN/6PyZzxocANrah33nyS/M3rrijk/sMq+zRlWuMXd5mtLB83mdyKT
+ OaanHK61iY8Zya+b5REmVV0E+uioXgPu8aYlW/g2AE3IEGfJZpOQbjwq9eKillrf/yqi
+ /Obu7dNscAyAC+TmPcBXb3w04Pbh9NV0Zi2NMoPQAfvFUd247pHkJzl0/qdNrskHAOmw
+ kugoq6GRv8fUuUaHLRoGXBGPxw+PeecHQJzCNchpgZbxkI6AB9122D1K1+14VoJzmVgH
+ mHZg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/3JkAnQa3hw7rUX+9YJJHpe1vlZzd/V4exNdhRjXT7dTNcd9iJWFjY1k7r9pThlYveEu+uYqs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxSaenvhqYhIpScb8U4eTN0NCWUB6oV0xkSAkKXabg59AqIOYJm
- HnOjj4BWo0eGb0Z75f3noqi/F7xSB+zn8nVvQ7nEO6QssFu8nX9UZPpr9QNTZMQyZjI=
-X-Gm-Gg: AeBDievr7KK+6NTU3a69tQ8XKSUwmjU7XfPOycLchc2r5NWevrv+a2p1Y2XsWHYXXYF
- B2AIlLwAqRv5P9Y2RfL3P9n07MV+AwtFS5X5EZ1mdDUrfpW8zlPaifd9ZJ3tcCjW5qlh3ofKf82
- GTel5sT85caK361CLYjQ3r26T1NllmnAsWHJtkjX+qNjurKV9m0F2lFR6aGYZe1YbsdXBDrtrv8
- gkr6+r2uMOt+aqJ2iNfzeGrOGCAUtbrKWtbAFeA1fnORP7KUNiQSOY12xW5hlSzj7iRkDcOYHNI
- upXKD/UtDt+dnXyyrGVTuH94mPV6UuG/3XEkprXjhLTv1Ge+uooWrKgiPoZWMRstFGl80GsS46y
- NwLI+dMrgeFaEtYYeHbqPiuA7x9eYsyLqugSVtKLKazuFyKhJonswG7b+W2dKpB3T0YN5PKP5EF
- Enexuvc25vcIPlCpS8uAtj5sfgn9jshLNjXe0P6IcM22NmyKjsPJ8T+XaIZqGIrkqA0Yhgd3wY4
- uyweYJy1yJ4SA==
-X-Received: by 2002:a05:6a21:644d:b0:39b:d937:8020 with SMTP id
- adf61e73a8af0-39fe400f835mr22638395637.42.1776332402900; 
- Thu, 16 Apr 2026 02:40:02 -0700 (PDT)
+ AFNElJ/p7IvanA23FISKhA7J4snmXWL6PdmGtUA3708Kn8wszudQc9IU1vgf9fVDcj9ubME1yxVlc/g=@lists.denx.de
+X-Gm-Message-State: AOJu0YwK+wOqdexNLmKBv75O5lStM2pUWIBJA2WOodMR1wKLZTZX3PIb
+ gMJL8EH5QB80HJojV5bMiZJPHhjalkJsDDtiM8M1LhvEHjc/Jn0SbHRVY5M0wEc7Tlo=
+X-Gm-Gg: AeBDiesE19oxJMn3do5kp6F8jHFLuaRiSvomp/QX7QbAXcgPXEoAt/jcpadW/cKY5Xu
+ zPWYme9h9UHZ0ZX0U2ckDAbv4fPoLPkhKVhFEVabLhaHPctpYhFsumKrl135KBtI/WQb9Dlmn7t
+ 1weS/eX312XMSeRO6f2rFvAWxBIq4+P7lX2DgTnYRht1Jr+8xeOcvcWp7FTOlXgZ7KnLHgVIbcv
+ VnefpnAhCGV+aLQT0zUCL4TMIonFiTkM+QjuOVnpRCDXDLVOHofYW1Y8RXFqcuA5kaIkf/xY7+O
+ v5sc7hhtBAMMkFbSsR3NEfSzNL6tL7tKdEfb2Ru8uxY95xWkVLIUgrMHgKCE3hltmoirbc2kmRs
+ i6Jco8/Y/FOLSBAlfrjpBkNl45zZcjLiwXVCe1M5K9g+KwtkxocjKIOfdDoZqpSzylqU34aXKzi
+ v0e2MCOVtw6mKvvA054HR47SyMa2fI+VQDHZUxgu/Kw8wupXLPYs3ha1b55cbN54mbGkpn2XFrd
+ wivFw7J7mxEtQ==
+X-Received: by 2002:a05:6a20:9188:b0:399:196:1430 with SMTP id
+ adf61e73a8af0-39fe3d82535mr27711530637.20.1776332404629; 
+ Thu, 16 Apr 2026 02:40:04 -0700 (PDT)
 Received: from kinako.work.home.arpa
  (p1329195-ipxg00a01sizuokaden.shizuoka.ocn.ne.jp. [114.145.5.195])
  by smtp.googlemail.com with ESMTPSA id
- 41be03b00d2f7-c79581a2fc2sm4423568a12.21.2026.04.16.02.40.01
+ 41be03b00d2f7-c79581a2fc2sm4423568a12.21.2026.04.16.02.40.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Apr 2026 02:40:02 -0700 (PDT)
+ Thu, 16 Apr 2026 02:40:04 -0700 (PDT)
 From: Daniel Palmer <daniel@thingy.jp>
 To: visitorckw@gmail.com,
 	angelo@kernel-space.org,
 	bmeng.cn@gmail.com
 Cc: sjg@chromium.org, u-boot@lists.denx.de, Daniel Palmer <daniel@thingy.jp>
-Subject: [PATCH v5 2/8] rtc: goldfish: Use __raw_readl() and __raw_writel()
-Date: Thu, 16 Apr 2026 18:39:21 +0900
-Message-ID: <20260416093927.602613-3-daniel@thingy.jp>
+Subject: [PATCH v5 3/8] timer: goldfish: Use __raw_readl()
+Date: Thu, 16 Apr 2026 18:39:22 +0900
+Message-ID: <20260416093927.602613-4-daniel@thingy.jp>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260416093927.602613-1-daniel@thingy.jp>
 References: <20260416093927.602613-1-daniel@thingy.jp>
@@ -101,48 +101,35 @@ X-Virus-Status: Clean
 
 From: Kuan-Wei Chiu <visitorckw@gmail.com>
 
-In QEMU, the Goldfish RTC is explicitly instantiated as a big-endian
-device on the m68k virt machine (via the 'big-endian=true' property).
-Currently, this driver uses ioread32() and iowrite32(), which works
-by luck because the underlying readl() and writel() are currently
-broken on m68k.
+The Goldfish timer registers are native endian, so they act as
+big-endian on the m68k virt machine. Currently, this driver uses
+readl(), which works by luck because it's currently broken on m68k.
 
-Use __raw_readl() and __raw_writel() instead to avoid breaking this
-driver when the endianness of readl() and writel() is fixed.
+Use __raw_readl() instead to avoid breaking this driver when the
+endianness of readl() is fixed.
 
 Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
 Tested-by: Daniel Palmer <daniel@thingy.jp>
 Signed-off-by: Daniel Palmer <daniel@thingy.jp>
 ---
- drivers/rtc/goldfish_rtc.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ drivers/timer/goldfish_timer.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/rtc/goldfish_rtc.c b/drivers/rtc/goldfish_rtc.c
-index d2991ca67192..4892a63f8d80 100644
---- a/drivers/rtc/goldfish_rtc.c
-+++ b/drivers/rtc/goldfish_rtc.c
-@@ -40,8 +40,8 @@ static int goldfish_rtc_get(struct udevice *dev, struct rtc_time *time)
- 	u64 time_low;
- 	u64 now;
+diff --git a/drivers/timer/goldfish_timer.c b/drivers/timer/goldfish_timer.c
+index 70673bbd93c2..91277d7932ac 100644
+--- a/drivers/timer/goldfish_timer.c
++++ b/drivers/timer/goldfish_timer.c
+@@ -31,8 +31,8 @@ static u64 goldfish_timer_get_count(struct udevice *dev)
+ 	 * We must read LOW before HIGH to latch the high 32-bit value
+ 	 * and ensure a consistent 64-bit timestamp.
+ 	 */
+-	low = readl(priv->base + TIMER_TIME_LOW);
+-	high = readl(priv->base + TIMER_TIME_HIGH);
++	low = __raw_readl(priv->base + TIMER_TIME_LOW);
++	high = __raw_readl(priv->base + TIMER_TIME_HIGH);
  
--	time_low = ioread32(base + GOLDFISH_TIME_LOW);
--	time_high = ioread32(base + GOLDFISH_TIME_HIGH);
-+	time_low = __raw_readl(base + GOLDFISH_TIME_LOW);
-+	time_high = __raw_readl(base + GOLDFISH_TIME_HIGH);
- 	now = (time_high << 32) | time_low;
+ 	time = ((u64)high << 32) | low;
  
- 	do_div(now, 1000000000U);
-@@ -62,8 +62,8 @@ static int goldfish_rtc_set(struct udevice *dev, const struct rtc_time *time)
- 		return -EINVAL;
- 
- 	now = rtc_mktime(time) * 1000000000ULL;
--	iowrite32(now >> 32, base + GOLDFISH_TIME_HIGH);
--	iowrite32(now, base + GOLDFISH_TIME_LOW);
-+	__raw_writel(now >> 32, base + GOLDFISH_TIME_HIGH);
-+	__raw_writel(now, base + GOLDFISH_TIME_LOW);
- 
- 	if (time->tm_isdst > 0)
- 		priv->isdst = 1;
 -- 
 2.51.0
 
