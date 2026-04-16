@@ -4,98 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 507E5F88090
-	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 07:04:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DE75F88090
+	for <u-boot@archiver.kernel.org>; Thu, 16 Apr 2026 07:04:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3360841D5;
-	Thu, 16 Apr 2026 09:04:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2C19884201;
+	Thu, 16 Apr 2026 09:04:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="odKrACGg";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="TZdu8XeF";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="ObRbNBaw";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="deUuXz23";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E40F841D5; Thu, 16 Apr 2026 09:03:59 +0200 (CEST)
+ id D033784222; Thu, 16 Apr 2026 09:04:04 +0200 (CEST)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20A4A84214
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 09:03:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CC1884223
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 09:04:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 63G0MFvp3733590
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 07:03:55 GMT
+ 63G6OmK52651712
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 07:04:00 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=NGHZ+i8DbOI
- kCHzNej2dba/IbQnRoOUzhKXfoGV4A6Y=; b=odKrACGg0S4KdsOLTaQaIHhn9Fg
- 29nwmzvonWYP/cT3jmPYVVnog9ktQZ7DcTm0RbintSgnMBvQKxB3hD5+z0qNSaEl
- m1S2Ws5kkMIwgKTvJCVr7S5bfNCeFmu7Dk8kB4kSjtExT3FCRiXtLnan5Ju7fj68
- YltYRgwo0kgertnaycyu9/CuNqJyeACdpozImlsOBPVcdiX7DSCo+9oM+OKK/4C9
- Wnhhx6ka9Q6sERDOt08FcGv1487jPGUxO+pR/cHo2V8AzeihHM28Fsr048cf4tUB
- LpA581Q9WcxIfhrkv0Y0orfUOUIxkeA4qfm6nokhxyl6jkmbEF7azTYHByA==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
- [209.85.214.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4djcqwjuf5-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=5Xhcy5Kqf96
+ HAeecZnZ24Jlfw2k6R7neMZwT3s6wVbA=; b=ObRbNBawhYhkOdFuBUbDRVTWxkf
+ 0B1YcACS3KsWKdiXZxTej+RhSGRh3MDVN/z2lMOasUjDDKc4jZc3CaiW7BdXVScG
+ XxCm5ZBpiOUMz485oNGtmnSXUn5/vsTex5Ek+qfPVb9xhfAoiAn6E0wH/FEN7oVi
+ 29cMCIvJBjScwoAlbytB6bl89349dslG7o8HA8fM1X/RMLGYEiqQQJn89mYQX7Mh
+ fs4Av94WFF7Aw2U6KBBtDQxMNp9sfUlCq1QhaH6UKHxwJ1w1vw/hOdV9qme7i9s1
+ j7SAer8MVkTtVVmp0XDTbLMjrItDuSQD03dEm+fNTEd0kgVBOZmT3KPLlsQ==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4djtfug46a-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 07:03:55 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id
- d9443c01a7336-2b4654f9bb6so43953965ad.2
- for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 00:03:55 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 07:04:00 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-2b4678c6171so40638895ad.1
+ for <u-boot@lists.denx.de>; Thu, 16 Apr 2026 00:04:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1776323035; x=1776927835; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1776323040; x=1776927840; darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NGHZ+i8DbOIkCHzNej2dba/IbQnRoOUzhKXfoGV4A6Y=;
- b=TZdu8XeFhnpL5aMPOrXBu/do9WForYkK2k9SId1O+p3a5OM7OMLdHjsWUQrRENjFGT
- REzwE4hFXygUPRdr8RhrOVhP2zWOqFAgZrn4ifNLNDaCa/FuP71IYn3SZZKUU3exCAbz
- wrnC1X9Eivt+Ci1mWYKal3J0SCxvChGuHXAaie+shzucH/wTT3hvFb+/dMeog4DyuLCF
- IYcrqFZXSQF6mA/SWnH34mecoCVZktDvgPwTC7e/iAHQ/mwY7+LXIvkSppR53muS55Fc
- 9jv/pyW9Z0gSOQXPW5PUhPKZ3ildGZQ8Jjw2Aq/I8m+7J67evjJAS1tMvbX9zneb1rBG
- +XYw==
+ bh=5Xhcy5Kqf96HAeecZnZ24Jlfw2k6R7neMZwT3s6wVbA=;
+ b=deUuXz231uEFuVFQnAJOC2/NTWAESug02pc72W7PhYkbEPmwmvuQKkMbur3xKiFDwK
+ B8Bix+UUZcRoKY5UXQvo4EQ7AbLTgkX/eGbYeTEYJCIpCVtvyPMA1cbv1Y/tllRb9TAn
+ FpzGjYe8F7YMCjkcs69GhAxpeG7zLwSY3oBFSCWUICaVuqvR3l/zHgLHhvhHIOXHDfvO
+ Y6SOj0HsDudnY57qdris0HDioEyt28fCiCqY/9NX9wSq9X8cfkKzOCFVm371Rg9wVMir
+ CNg2YxTsa7tyaZdw6/1y3KnQ8nZDGGgNVO+jz7CmPlB38jPWNUgj+vhq8yBHP8X2Tt3J
+ HkFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776323035; x=1776927835;
+ d=1e100.net; s=20251104; t=1776323040; x=1776927840;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=NGHZ+i8DbOIkCHzNej2dba/IbQnRoOUzhKXfoGV4A6Y=;
- b=k3T7yLkOTHefxpgPGGtB4pNPfhhHDWMg2JWICiYMgGyNwHdZ32rBVU+S/9+F7k7X++
- biakbb5gKBxX62wxBRAxJJwFw7kF6XJvUdJ7vaWnA4NR9W2WeQCcY7OoPO+iX9RPHVGs
- 0ApJS6C+QrrGD/DFLZH4BoFCd8n1q0F5WSxU2Rr7nGFPnbisuqZig/5U4ggzqRQzQycS
- hYtngZcySfTeiDsejU/5P8vQMzBLw4SHf8Pzc31ERIjCDLuTkEOzWc8yJLdlIpJReqPy
- vGYZOdCUlRQ0pFT+h3a6ezf960j/AVPYMe/p9fkzAp+arxy+LWKWMXa/RbyVwgf9lJCU
- 9d8g==
+ bh=5Xhcy5Kqf96HAeecZnZ24Jlfw2k6R7neMZwT3s6wVbA=;
+ b=MtoiXdNYF7/WoRH/7zPhm+kffA2/9AKcZdUf1gfyNdk8/2nv8bGReacP4zaV5a7xFe
+ cE8zMTkrHUPiQlBvcGwp8ePWy1+mEzr+h1xhjWe0UC+eRCMnJzosNnORhu0HYRCuWh2E
+ gjOofN7bM7JlE88hEXiqybj1OqR09effMbj+AKf1MmsCoVl4vOfpUBKM3PUteQWPYUYi
+ 9MX3XGja3OHuUmPVl3II5yE2ogBL6YqYEXco82bAMEOovLf6HcyzzCcB3ZoYFpyxX9Sh
+ cN2o1xETSe93uwP6/jQewbunlTSu8SXcKa+3D4vf59GXBR4PBwM7pShfqBPtgJ0Hgev0
+ 0sEw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9zXsdvx0T0WtwQFEl2tA4Fo/lqgwG88X6WuaTyIhok7SbAiUq/7Mr+oBC8qHhvGG234yGAhNg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw0qa7YZDV5q1zK3SpcHBlVZfI3jgR8xe5H7qQiCPaVw+N5YW3z
- lc0k0kNxT1tqZkX5WRZqcJj1bsCvsHNETfDpjr56X38E4Dt2fZytdcY96Yde/qv9J+euXVji8+6
- ebFBUawiKqGjngbiO5fhApigtWs9QWQDd5StwAQH9i19jRJkgn4PY3jg0
-X-Gm-Gg: AeBDies+yPK7/S0WR99qld+KuEuKg/BoAPEKBamWxQPXFkZDjuhPU1T+xw+jIx4uYh9
- W5IWnUBxCmPEIPkvCTFBoQXM431FuO8h2P2C5Z0Wd74sxHhkNUHfLVYpS87c74BqJL+6oEYso61
- l+XXsqEqs2nHU2W2OvGE3orQ9DipR6thQlDHNrzKznhzorymVBw/iiOIk5gFTiq3osvX34YNtBo
- 7dJ517CpvNiitGfBstDTOUXa7tR8zx/ZkLwNHb1P9BC3QlnEHPWWFZf6yRkfOAvSWllV1RBC3oJ
- StWl0OJdkm2y4K/8zFt9RjN1plZ5s6vVQ0ko3c1+U9XeDEq3xmkTdH7GPkMACmpd5eMp2+E+u8X
- +j8NbNGcEBAbbyiem6StB4JB9R0OmOBqYOcWYmjOmnF07nUy2nLsUvEl2oihDECXrxLsk8GYNny
- AJ7kUi6+ld/e6xUE8KFzmCQxClNjBZ3dm4+tCFcXlVPfs9VwH44Ck=
-X-Received: by 2002:a17:902:7003:b0:2b2:5258:a23d with SMTP id
- d9443c01a7336-2b2d59808d0mr177952625ad.14.1776323034502; 
- Thu, 16 Apr 2026 00:03:54 -0700 (PDT)
-X-Received: by 2002:a17:902:7003:b0:2b2:5258:a23d with SMTP id
- d9443c01a7336-2b2d59808d0mr177952195ad.14.1776323033893; 
- Thu, 16 Apr 2026 00:03:53 -0700 (PDT)
+ AFNElJ9D0Ot4KsRGptGZvpbVP3t2yZr8lL6pZwIrueG7aH+VgMkeu9a7p+XGzemR8OKbP35+qE1KbmM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxPiYftOYWsoh3ULBBgrPDgAhZDj5k7sOFrlaGdlKpHLSYo9B3Z
+ AHWnDMbbpNc9v7L1CFfhnZuHwn4jRGL7lSFhgtT46PakHIpE/1Kj1EkjGpTTcxPtxOWnQeC+0hS
+ O89xJe3IDzYsjsPG3pm+yxW/ejbtGPgt90KODo4UXE/Pjc859sJ5OyY5b
+X-Gm-Gg: AeBDievOIyX4Jfx7+ijTMx85h7R32oopmWX/p4yse6sTYcJSJStDKpA6NjHpoX41+VG
+ elC81KwyFwWqdhxDl5yIQtlF99S2eUY76eUFmEPUOzwz8fm5502eexfAsS/mkaoxhjKtk4SzMw3
+ QgqNfpPZBOp5mokRnfSRPIJeJVivfM8pi9oVGcZCnxmhx9DVzZk+/nsf+EYJoa373ZBm9LBC6ra
+ 1+t7cZlR2TdZWzdvdAQGqfp5PvueH+VB+kYNH7NH8m4yqZ71GDVsts2GU/cuEBej6p96QnGCJnk
+ KUZHv2x9oV/tCpAnIybgwabF3RhOeUKsp3ZbIizNKKNIezmnDAlxmhKzGL2oJ1De+KltxsA1vSP
+ HM+jK4806QBYXzqggZZ3Hdacdl+DkAvZRYn2Lqd6zEQJGGqZC0+xOWHrMjaRXnL55TsIEApUeD3
+ XvFK0Jo++2DdHtbbtzwx9EfYi1oTMK1o4UsFtrHRKFOCXLxFO4v74=
+X-Received: by 2002:a17:903:2b05:b0:2b0:7225:d2c0 with SMTP id
+ d9443c01a7336-2b2d5a4e995mr233368655ad.30.1776323039638; 
+ Thu, 16 Apr 2026 00:03:59 -0700 (PDT)
+X-Received: by 2002:a17:903:2b05:b0:2b0:7225:d2c0 with SMTP id
+ d9443c01a7336-2b2d5a4e995mr233368255ad.30.1776323039048; 
+ Thu, 16 Apr 2026 00:03:59 -0700 (PDT)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b4782b1174sm54195255ad.70.2026.04.16.00.03.49
+ d9443c01a7336-2b4782b1174sm54195255ad.70.2026.04.16.00.03.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Apr 2026 00:03:53 -0700 (PDT)
+ Thu, 16 Apr 2026 00:03:58 -0700 (PDT)
 From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
  sumit.garg@kernel.org, varadarajan.narayanan@oss.qualcomm.com,
@@ -104,37 +104,37 @@ To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org,
  michal.simek@amd.com, visitorckw@gmail.com, clamor95@gmail.com,
  u-boot@lists.denx.de, u-boot-qcom@groups.io
 Cc: Sumit Garg <sumit.garg@oss.qualcomm.com>
-Subject: [PATCH v7 2/5] drivers: sysreset: Add sysreset op that can take
- arguments
-Date: Thu, 16 Apr 2026 12:33:27 +0530
-Message-Id: <20260416070330.3006528-3-varadarajan.narayanan@oss.qualcomm.com>
+Subject: [PATCH v7 3/5] sysreset: Implement PSCI based reset to EDL mode for
+ QCOM SoCs
+Date: Thu, 16 Apr 2026 12:33:28 +0530
+Message-Id: <20260416070330.3006528-4-varadarajan.narayanan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260416070330.3006528-1-varadarajan.narayanan@oss.qualcomm.com>
 References: <20260416070330.3006528-1-varadarajan.narayanan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: 0Dc3XW2RI9hvo9Tz91RwFpyVy9WTXiTM
-X-Proofpoint-GUID: 0Dc3XW2RI9hvo9Tz91RwFpyVy9WTXiTM
-X-Authority-Analysis: v=2.4 cv=XOIAjwhE c=1 sm=1 tr=0 ts=69e089db cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-ORIG-GUID: 5YS1p3q-V9DPxIMpGOzH31YyHLJ24944
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE2MDA2NCBTYWx0ZWRfXyFpxXfGOy0Rw
+ jnHvqZ1ShQzT7UDvPY21WsGu4o2WdIfvq7vFo0N3MMXf0sWs9KoGVv9qmFnEg5awO3D+TEl0by1
+ ANuY2aXkDDdcin5D6BSdx5wSXfTZqbN57fJRjcjxqdLq1E6X9P1hX/LP5Qm5FzyzlcxfbR7caJZ
+ JW7rsbG5zed7ZDFzraKjKt6sgLHYKQDGt5ucYm589IgWbqGIIQPnKH8NvE6maTNG4gFjLsFs7qR
+ Nj2A4YpOzkd686MSQPdPYixq6dpSezoB5dOOy+D4RGpF1KmQWDVY/nupn/FzCO1rsW0PmgwuuLu
+ mbLACTlviMLEl6+mTsQLhc+UXcurM/TnFcMFo8ZMU6ezbwz1Lz0MSWelaBje0f6ChLOTkrHi2zi
+ 0syUbZwqL3hvQqZwUxkikDEi13WxrJMDfjzLcN9DImBE5kDCSoEDOsr8SrRtjCuaXD/DLYdJhz/
+ ppwfNex/T8Tl2inspRg==
+X-Proofpoint-GUID: 5YS1p3q-V9DPxIMpGOzH31YyHLJ24944
+X-Authority-Analysis: v=2.4 cv=KrF9H2WN c=1 sm=1 tr=0 ts=69e089e0 cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=KKAkSRfTAAAA:8
- a=EUspDBNiAAAA:8 a=k-42gJp3AAAA:8 a=k2bqWL-eJF5qEUxKWYMA:9
- a=324X-CrmTo6CU4MGRt3R:22 a=cvBusfyB2V15izCimMoJ:22 a=uCSXFHLys93vLW5PjgO_:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE2MDA2NCBTYWx0ZWRfX2KHgezZgT18H
- GtTP+u9eoH6HJSJ0o4mhyxmRs2VRHxhQygvdENj2GvCo18Y3UHr6Uoxb4038p8vx8DBltzESabx
- EMBGupV0DeyM+9CIn2LegB1UVdnsJvj6XxSB2TybNo7KRx04xdPUSD198f+H97UWnVCVsycC3Ih
- 7lpjLZmuOOEoxq+StNq1s/M39JjiiTc2kwywh7mqEevY8kbTpXj70YOL6O76UHQIHcRsFuCVxMF
- zAFwGrsqAMvLx0a3cypny49C3y9KrBbO15C4t7PbqgdXLLpUb3MOLP5rvqZqJb+R7zmPhDcqEjq
- PMbla97NAVJJVuseI7yUWxxuys4ZpTYrVitVHLOGXtzfp4UuaDzl1gejZVHF5XjCA4CozGJ5LPd
- O97BxYGE27k22W0bzE7lfOCxJuLLEn3DBH92xwscj6xR6k7qhCDtVMGG+mnkw/5iwIgqEh8yes3
- XHhW2NTBSfRJztVMWPg==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=KKAkSRfTAAAA:8
+ a=EUspDBNiAAAA:8 a=c-n4J4-pAAAA:8 a=oUc18nVTi94oOmveUj4A:9
+ a=GvdueXVYPmCkWapjIL-Q:22 a=cvBusfyB2V15izCimMoJ:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-04-16_02,2026-04-13_04,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 adultscore=0 suspectscore=0 spamscore=0 malwarescore=0
- bulkscore=0 impostorscore=0 phishscore=0 clxscore=1015 lowpriorityscore=0
+ bulkscore=0 spamscore=0 clxscore=1015 priorityscore=1501 phishscore=0
+ impostorscore=0 malwarescore=0 adultscore=0 lowpriorityscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2604070000 definitions=main-2604160064
 X-BeenThere: u-boot@lists.denx.de
@@ -153,130 +153,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a 'request_arg' op to struct sysreset_ops to enable sysreset drivers
-to receive arguments given to the 'reset' command. Process the
-request_arg() op before the usual request() op.
+Implement request_arg() sysreset_op for QCOM SoCs that use
+PSCI to reset to EDL (Emergency Download) mode.
 
 Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
 Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 ---
- drivers/sysreset/Kconfig           |  8 +++++++
- drivers/sysreset/sysreset-uclass.c | 37 ++++++++++++++++++++++++++++++
- include/sysreset.h                 | 18 +++++++++++++++
- 3 files changed, 63 insertions(+)
+ drivers/firmware/psci.c               |  4 +++
+ drivers/sysreset/Kconfig              |  6 ++++
+ drivers/sysreset/Makefile             |  1 +
+ drivers/sysreset/sysreset_qcom-psci.c | 45 +++++++++++++++++++++++++++
+ 4 files changed, 56 insertions(+)
+ create mode 100644 drivers/sysreset/sysreset_qcom-psci.c
 
+diff --git a/drivers/firmware/psci.c b/drivers/firmware/psci.c
+index 2e3223e1c32..b6838a244d2 100644
+--- a/drivers/firmware/psci.c
++++ b/drivers/firmware/psci.c
+@@ -186,6 +186,10 @@ static int psci_bind(struct udevice *dev)
+ 					 NULL);
+ 		if (ret)
+ 			pr_debug("PSCI System Reset was not bound.\n");
++		if (IS_ENABLED(CONFIG_SYSRESET_QCOM_PSCI) &&
++		    device_bind_driver(dev, "qcom_psci-sysreset",
++				       "qcom_psci-sysreset", NULL))
++			pr_debug("QCOM PSCI System Reset was not bound.\n");
+ 	}
+ 
+ 	/* From PSCI v1.0 onward we can discover services through ARM_SMCCC_FEATURE */
 diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
-index 16ef434a8d9..f589ad15418 100644
+index f589ad15418..f4a6610eef3 100644
 --- a/drivers/sysreset/Kconfig
 +++ b/drivers/sysreset/Kconfig
-@@ -49,6 +49,14 @@ config SYSRESET_CMD_RESET
+@@ -301,6 +301,12 @@ config SYSRESET_RAA215300
  	help
- 	  Enable sysreset implementation of the reset command.
+ 	  Add support for the system reboot via the Renesas RAA215300 PMIC.
  
-+config SYSRESET_CMD_RESET_ARGS
-+	bool "Enable reset command to take arguments"
++config SYSRESET_QCOM_PSCI
++	bool "Support reset to EDL for Qualcomm SoCs via PSCI"
 +	help
-+	  Pass on the arguments received by the 'reset' command to the
-+	  sysreset driver(s). The sysreset driver(s) may make use of the
-+	  additional arguments for implementing arch/board specific
-+	  functionality.
++	  Add support for the reset to EDL (Emergency Download) on Qualcomm
++	  SoCs via PSCI.
 +
- if CMD_POWEROFF
- 
- config SYSRESET_CMD_POWEROFF
-diff --git a/drivers/sysreset/sysreset-uclass.c b/drivers/sysreset/sysreset-uclass.c
-index 536ac727142..f25e09e9cd0 100644
---- a/drivers/sysreset/sysreset-uclass.c
-+++ b/drivers/sysreset/sysreset-uclass.c
-@@ -32,6 +32,18 @@ int sysreset_request(struct udevice *dev, enum sysreset_t type)
- 	return ops->request(dev, type);
- }
- 
-+#if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
-+int sysreset_request_arg(struct udevice *dev, int argc, char * const argv[])
+ config SYSRESET_QCOM_PSHOLD
+ 	bool "Support sysreset for Qualcomm SoCs via PSHOLD"
+ 	help
+diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
+index d18a5d52360..b5b99235b6e 100644
+--- a/drivers/sysreset/Makefile
++++ b/drivers/sysreset/Makefile
+@@ -30,6 +30,7 @@ obj-$(CONFIG_SYSRESET_RESETCTL) += sysreset_resetctl.o
+ obj-$(CONFIG_$(PHASE_)SYSRESET_AT91) += sysreset_at91.o
+ obj-$(CONFIG_$(PHASE_)SYSRESET_X86) += sysreset_x86.o
+ obj-$(CONFIG_SYSRESET_RAA215300) += sysreset_raa215300.o
++obj-$(CONFIG_SYSRESET_QCOM_PSCI) += sysreset_qcom-psci.o
+ obj-$(CONFIG_SYSRESET_QCOM_PSHOLD) += sysreset_qcom-pshold.o
+ obj-$(CONFIG_TARGET_XTFPGA) += sysreset_xtfpga.o
+ obj-$(CONFIG_SYSRESET_QEMU_VIRT_CTRL) += sysreset_qemu_virt_ctrl.o
+diff --git a/drivers/sysreset/sysreset_qcom-psci.c b/drivers/sysreset/sysreset_qcom-psci.c
+new file mode 100644
+index 00000000000..3627bbf5c82
+--- /dev/null
++++ b/drivers/sysreset/sysreset_qcom-psci.c
+@@ -0,0 +1,45 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2017 Masahiro Yamada <yamada.masahiro@socionext.com>
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++
++#include <dm.h>
++#include <sysreset.h>
++#include <asm/system.h>
++#include <linux/errno.h>
++#include <linux/psci.h>
++#include <asm/psci.h>
++
++static int qcom_psci_sysreset_get_status(struct udevice *dev, char *buf, int size)
 +{
-+	struct sysreset_ops *ops = sysreset_get_ops(dev);
-+
-+	if (!ops->request_arg)
-+		return -ENOSYS;
-+
-+	return ops->request_arg(dev, argc, argv);
++	return -EOPNOTSUPP;
 +}
-+#endif /* CONFIG_SYSRESET_CMD_RESET_ARGS */
 +
- int sysreset_get_status(struct udevice *dev, char *buf, int size)
- {
- 	struct sysreset_ops *ops = sysreset_get_ops(dev);
-@@ -71,6 +83,26 @@ int sysreset_walk(enum sysreset_t type)
- 	return ret;
- }
- 
-+#if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
-+int sysreset_walk_arg(int argc, char * const argv[])
++static int qcom_psci_sysreset_request_arg(struct udevice *dev, int argc,
++					  char * const argv[])
 +{
-+	struct udevice *dev;
-+	int ret = -ENOSYS;
-+
-+	while (ret != -EINPROGRESS && ret != -EPROTONOSUPPORT) {
-+		for (uclass_first_device(UCLASS_SYSRESET, &dev);
-+		     dev;
-+		     uclass_next_device(&dev)) {
-+			ret = sysreset_request_arg(dev, argc, argv);
-+			if (ret == -EINPROGRESS || ret == -EPROTONOSUPPORT)
-+				break;
++	if (!strncasecmp(argv[1], "-edl", 4)) {
++		/* Supported in qcs9100, qcs8300, sc7280, qcs615 */
++		if (psci_features(ARM_PSCI_1_1_FN64_SYSTEM_RESET2) ==
++							ARM_PSCI_RET_SUCCESS) {
++			psci_system_reset2(0, 1);
++			return -EINPROGRESS;
 +		}
++		printf("PSCI SYSTEM_RESET2 not supported\n");
 +	}
 +
-+	return ret;
++	return -EPROTONOSUPPORT;
 +}
-+#endif /* CONFIG_SYSRESET_CMD_RESET_ARGS */
 +
- int sysreset_get_last_walk(void)
- {
- 	struct udevice *dev;
-@@ -132,6 +164,11 @@ int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	printf("resetting ...\n");
- 	mdelay(100);
- 
-+#if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET_ARGS)
-+	if (argc > 1 && sysreset_walk_arg(argc, argv) == -EINPROGRESS)
-+		return 0;
-+#endif
++static struct sysreset_ops qcom_psci_sysreset_ops = {
++	.request_arg = qcom_psci_sysreset_request_arg,
++	.get_status = qcom_psci_sysreset_get_status,
++};
 +
- 	sysreset_walk_halt(reset_type);
- 
- 	return 0;
-diff --git a/include/sysreset.h b/include/sysreset.h
-index ff20abdeed3..d1cc9ebc542 100644
---- a/include/sysreset.h
-+++ b/include/sysreset.h
-@@ -43,6 +43,24 @@ struct sysreset_ops {
- 	 * (in which case this method will not actually return)
- 	 */
- 	int (*request)(struct udevice *dev, enum sysreset_t type);
-+
-+	/**
-+	 * @request_arg: Reset handler implementations that might need to process
-+	 *		 arguments given to the 'reset' command.
-+	 *
-+	 * Note that this function may return before the reset takes effect.
-+	 *
-+	 * @dev:	Device to be used for system reset
-+	 * @argc:	No. of items in @argv
-+	 * @argv:	Arguments given to 'reset' command
-+	 * Return:
-+	 * -EINPROGRESS		if the reset has started and will complete soon
-+	 * -EPROTONOSUPPORT	if not supported by this device
-+	 * 0			if the reset has already happened
-+	 * (in which case this method will not actually return)
-+	 */
-+	int (*request_arg)(struct udevice *dev, int argc, char * const argv[]);
-+
- 	/**
- 	 * @get_status:	get printable reset status information
- 	 *
++U_BOOT_DRIVER(qcom_psci_sysreset) = {
++	.name = "qcom_psci-sysreset",
++	.id = UCLASS_SYSRESET,
++	.ops = &qcom_psci_sysreset_ops,
++	.flags = DM_FLAG_PRE_RELOC,
++};
 -- 
 2.34.1
 
