@@ -4,106 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FF2AF99C6A
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 21:40:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10146F99C63
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 21:55:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C54D38420C;
-	Fri, 17 Apr 2026 23:40:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 76B8383BC8;
+	Fri, 17 Apr 2026 23:55:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="aru7pR66";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="ei3gKI5M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D28E84223; Fri, 17 Apr 2026 23:40:55 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id AC3AE841C8; Fri, 17 Apr 2026 23:55:37 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29464841C8
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 23:40:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5489B83015
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 23:55:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-46f0fa0e398so714559b6e.1
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 14:40:53 -0700 (PDT)
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-6830f4f34c9so669429eaf.3
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 14:55:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1776462052; x=1777066852;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1776462934; x=1777067734;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fZzErNUQjwzxCKkq8O/3lyh5qkrPLW92i0P9B3KCyms=;
- b=aru7pR66kPgyY+JJYy8gjW6UztRjYJ6tYqZY92U+cJFZ5D+5vzMDgAIwiGEtqZkSEo
- 4z7YuTxN1Vou7Qfk7IchhS0ZX2BG9LFEscSXAsVqIRVvr1VSJg0AxyzLARGq/J/TTV0c
- RhiA0ofqM7Px+f+GkUqrKWzB81OT+m7DdKlj6dPjRRRYUyICA7uygVKBtNoDstdVUO2W
- NdkEOzBeEkUfl2P+LXCVob3geKXGdkYLH53WwDMfc3hvphQfiW9SMV7PKIAiIh49++Fc
- INP4VSFBoLrFFrPpJ2V0vHPPH9h2+i7K7w2WoqpbvYy92FkKaeYAfCmqss6OjiGuNkM3
- 4BmQ==
+ bh=MOYqbvVAHLOunxAkov+ID5rC/2n5xkIXcbCX+L70kgY=;
+ b=ei3gKI5M9a3FFsXo7m6LMnomDHCMoAJDaaQe9O8kWAsrSnbQCfaOR4Mk368dBbE/Mk
+ LqZwu49gieGPi7Cd8xGo7hDifXWXcLA+QrKQIQd52Kz6LmNnRqm6AeFQGg6b50rV2R31
+ Jjn+WIUrApgc5k+PEGGIKH6FlucQORzJQj+j3Nqmg1N4FjC6n4/ewVaFRYkQeWG3YwkZ
+ K4aGfz/CYfOGa/JBn+dDl/olXJKkyZEbu/Ee+JqHzY+jx2gZw3klkV2Ty1opvR0GKW2L
+ IUS8sOPiUwiiJ19Z08kBljOwGxVd9y+VERXAPjvhzv8k5BIH7bEZno40hdu1CIHOQ2+c
+ ckUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776462052; x=1777066852;
+ d=1e100.net; s=20251104; t=1776462934; x=1777067734;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=fZzErNUQjwzxCKkq8O/3lyh5qkrPLW92i0P9B3KCyms=;
- b=HNMC5r5GxqvUfCkGLbdKSfFuB3YAmvT67UktTIQVLoXC6ZI4ekZW+d2ps9P/Il4DVO
- C4OfomSnPL0VbOa6piPJ4ykIkHuO/7UwmdW64ceDOZxOz5tPuEubFXT7YkJTQXclsC7z
- /jnCwduYZ+C/WakYC+bofCUIOgTm78DNHHu1tPQjW5eQL1ZSKlQSH0VOBVfRmc2qen1h
- BTsnvMEJYZYHoSTJVDx378Jmh09QG73/heFfyqkm8g+3WPC3rUexcY+pgOqocmhj3eNd
- yepry3EgiImCIpJLzpKXkBaktuXU9rn8maQo8z6UmQ9cIFSsVEiYVrbkJ+nHKBIqT5b/
- mGfQ==
+ bh=MOYqbvVAHLOunxAkov+ID5rC/2n5xkIXcbCX+L70kgY=;
+ b=Z24cvZHYs3f0QeeHqvEiwx5GiIYMPp27kHPucyTzElVf1HRS/uxPZPz+9z+jtHM0xM
+ 8/cY3SwmINs52M5795UdMBKVYNMo1puvFrwLjBWFnebkO3bR5cIu2V6dNG5f1cDy0kuE
+ D9kmTtn8cl4QWS1UwYOBk2kFOrfPdPJnSIxi0MY+gh5lYnLUf7PvmZklD9S+zkHWlMko
+ dOLVo3Kwng7ACCjC5cF7wqFdnfWYxw8iEFAzm2wvlZKQUuA9w2Pg9P6k09BODp/YqciI
+ EfPa/YSEWDPQatlIaq6J1GlsxfKqcQmmkOACpoav9MQOo4JcN8nPn3LF4yRmz8qS0oWo
+ QtJg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ84n6LuVlgmUIjcXsbOwcFr2dQXPH5idz8riEtJoFvPWMdWkEosSZbgHH9YzekpUZ1p5Fh9JxA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxdBybHV5nJ+ieSZdg9dCQS4B/m784s34ZS1eWFQKlp+Uxy7JG+
- qhLaBMGEOTcQd8W9BFTTwWBFMdOKIU7mWgYqCHYioUo/gWCFv0fUTxqpgJVYE8z8jKQ=
-X-Gm-Gg: AeBDieuPQfn1n+2ONZlOBT2ol2hbJ0WrKBZ8iRSHSusU5YWZb4mol0iH8kH1uUOLwIS
- OCQzXxZ18Xw8i6wanFK5b13uzTRCgugxJ5JBCauVqEq/xb43gzTHESeSKcM8JmefVhLnyw5Ck0S
- f7AUx9mk/MYlVfDoxbY4Eg4ZH99/bZUIUMeI+DbYZumoer7NF+Z+ROc2c5An28HHYtMjNLNRsrd
- Sa5M6FKaCJxG7u4kOmw6261PKkb0jFPuDjh97H/bLSw4R4oKN0EyjYe8+0feM/89dyowASQgPIx
- w02NhfJoZKm5wOqt1l+0G7jcHYSAXaML6jK8yl5cA0epRKxofGXooH7S6wqGUfAfWciLas7NVog
- B7qen3OTFH0R+DTOA2NNIYa4QvbvaPibfQppkXs9X3kl4Z5nFlxaqixtXqTJy+8+N9IyyPjMDqY
- q4dp/zhYe/UJ4ueY/A8+fjwPCaMorxqr8wiTYBpsI7qdFSea9l
-X-Received: by 2002:a05:6808:3447:b0:467:254:b90 with SMTP id
- 5614622812f47-4799c876f79mr2436710b6e.10.1776462051800; 
- Fri, 17 Apr 2026 14:40:51 -0700 (PDT)
+ AFNElJ+gUUfpCml4J7dYNuB0jiz1iGgErzXHJYzH0m/ypXQdnwGpz7rJLWMI8OMcm2gNEfe/mLkAOH4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwTm3wek057uClMyK004OZnUotN8M1wYc5s+CWwThS5FDM60tyJ
+ NJ/9n3BtD85z5EDt4StC1Xp/ikzecVakYZO9+fFERE7qv6uKCQcJqXwK/nTOMbz5OkU=
+X-Gm-Gg: AeBDievngxoQfWLeORQ++/tAbpg4K5Jn1HPQ7U/8ZfrYG61fwiRnD62uez6ZH2z5JIb
+ P3IcbCH/YVVL9AA23Z/zU62digsBt4THYU2LtVYheu2HMUoH37mEXdsCuk7cxbn2lXID1H2V91M
+ RXx99M9fI8OSFChe/46wdS3P7KOtsbpBx9FtQ6m532m2ZXsXHpC2cvNld0OoM1VEguwZsze4Xz0
+ B3DYczIHBliPpV3vt8uDyH5QEFcT5CDGQxt1NPb2PthJIwFzoQfV0Z7KakUb17ZCb6IS9yLMFO8
+ bMg0xhatyfFZpSa0v2ttVHNRbtDKXzFssUbqPOKqNk7/sKcHVYEDDcM1dSu+E5ePuPh4r61ENMp
+ XpgIn6iB0Pq6sFrgc5L3WrnDKz/Q8nsaUxi7CqW/vT4500t2FAgi71kgD5VrSWyBnEQP98ide81
+ AkIGFduf1G95KI6/82NTTX3kmwF6bzHmVNrAQFAhE8RnV5SruE
+X-Received: by 2002:a05:6820:290e:b0:67e:1b5c:8761 with SMTP id
+ 006d021491bc7-69462eed682mr2834074eaf.44.1776462934081; 
+ Fri, 17 Apr 2026 14:55:34 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:ef27:3314:b886:cd3])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4799fef6dd0sm1801357b6e.5.2026.04.17.14.40.48
+ 586e51a60fabf-42b93046dcesm2514420fac.3.2026.04.17.14.55.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Apr 2026 14:40:50 -0700 (PDT)
+ Fri, 17 Apr 2026 14:55:33 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Ryder Lee <ryder.lee@mediatek.com>, 
+To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
  Weijie Gao <weijie.gao@mediatek.com>, 
  Chunfeng Yun <chunfeng.yun@mediatek.com>, 
  Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>, 
  David Lechner <dlechner@baylibre.com>
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-In-Reply-To: <20260330-mtk-genio-720-ufs-v1-0-3bad8362ed70@baylibre.com>
-References: <20260330-mtk-genio-720-ufs-v1-0-3bad8362ed70@baylibre.com>
-Subject: Re: [PATCH 0/6] arm: mediatek: add UFS support for Genio 520/720 EVKs
-Message-Id: <177646203771.59267.7634760092135792833.b4-ty@b4>
-Date: Fri, 17 Apr 2026 16:40:37 -0500
+In-Reply-To: <20260401-mtk-mt8189-usb-v1-0-a4bf951aa8ad@baylibre.com>
+References: <20260401-mtk-mt8189-usb-v1-0-a4bf951aa8ad@baylibre.com>
+Subject: Re: [PATCH 0/3] arm: mediatek: mt8189: enable USB support
+Message-Id: <177646292300.59267.18213346214473248748.b4-ty@b4>
+Date: Fri, 17 Apr 2026 16:55:23 -0500
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1208; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=743; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=OAxVs27DM09A4pievlGAH+Ue9bFguIdgHipfxITyGM8=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp4qja+rjzX0hUQT9jEoKEjCilSoX/DCt45DEI8
- qC254kzWcSJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaeKo2hYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Aux4IAIDAfXIBVJgl65Jj2m6jUlo8Omrxt6JbHCnO3up
- ys3PBDU+K0xrFhHgWnW/Bg24bQUAKtUNYKFAyCFXeugwcvQra8ratoDdaZ5VKDgUtuN/WJj/LvP
- IKvNzib7K3+ifh5Uk/iM6VnRtPyVNhTZRcKqQIYxmUE2vl7QdigJPzhhdYo/NmCeyZV/gmjJErI
- lILPa+H8QfCGFBqEoHASaIV6/2cvRZGR9XwCEa2FIt2UUQhz50mgauRUuYwug6p8KBfWaTz+wyo
- 3TvWV4wwwvXReHR7x3F2aECfsPmJ5c5agKKb36c9tF2Ombd03aKYRKCQG3H03g8tdyAqzoegKyS
- vfNg=
+ bh=KguNPNqTino9uFje86zR0le9ZOIq9lFxdCzEfjdE4/w=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp4qxNWh4vit9xm2eWBrutvMX+IfbrdYR975Pz5
+ 2OSTeTaeMOJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaeKsTRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AfO8H/i1MRO4TeSYIKjkCvK37We8zWs6GGaVbN3Aes+Z
+ JSNjqU2hkerwR1QepKcmgQvV28ECZqDTHdC6g0fgo7mpkaRQhr70aMaBmv/tM08gSLR+eu1WEE+
+ GYphNZEmfGShY76/mMOY4BBophYnLmA11TFdVlHqxSOnW3nPbg85wCcF2V9ngvelX3y8tUJF0O4
+ DVebrdu/Ilm9Hji2VjTt7qmU1s4LlRsaOzWrAXdn8EpOiuto6NFJcxQXTJYgewkiJgFm3sbllM5
+ GPYe/fIqU4VweG1rEgxQHTw+UTzlrTuRI3IZCMzi0hfQXiXVGC41LOgLKG3jZh0G/8pAay3eMaH
+ DIDc=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -122,32 +120,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 30 Mar 2026 15:42:12 -0500, David Lechner wrote:
-> arm: mediatek: add UFS support for Genio 520/720 EVKs
+On Wed, 01 Apr 2026 16:53:44 -0500, David Lechner wrote:
+> arm: mediatek: mt8189: enable USB support
 > 
-> This series adds support for booting from UFS on the MediaTek Genio 520
-> and Genio 720 EVKs. The first few patches are adding missing runtime
-> dependencies. Then we add the required devicetrees and defconfigs.
+> This series is adding USB support to for MT8189 and similar SoCs (i.e.
+> Genio 520/720 EVKs).
 > 
-> To apply cleanly, the UFS patches depend on [1] and the devicetree
-> patches depend on [2].
+> USB and T-PHY drivers already exist, but we need to add a new XS-PHY
+> driver as well.
 > 
 > [...]
 
 Applied to mediatek-for-master, thanks!
 
-[1/6] ufs: ufs-mediatek: add mt8183-ufshci compatible
-      commit: 816fb59203a15a0e87afffceb28e0e05341a0282
-[2/6] ufs: mediatek: clean up zero terminator
-      commit: 10ba04272df2c4cec966f83dee15d854eed24b69
-[3/6] clk: mediatek: mt8189: add UFS clocks
-      commit: 9e966cd1c93d369c69b1756b9d9209727255c7bd
-[4/6] arm: dts: mt8189: add UFS nodes
-      commit: a6c71f526caf7dcc4666a2be7154490d1e28c72d
-[5/6] arm: dts: mediatek: add UFS variant of Genio 520/720 EVK
-      commit: 31719a47c578dfcde4da62930df628f564d48499
-[6/6] config: mediatek: add UFS defconfigs for Genio 520/720 EVKs
-      commit: 9bc9e17d25d9a91a717f5b483a54f30abc5b2d1d
+[1/3] phy: mediatek: new XS-PHY driver
+      commit: 1769f88b031a34347d6ed795a5cd7e776298f703
+[2/3] arm: dts: mediatek: add USB/PHY nodes for Genio 520/720
+      commit: 3b4c8b853ba160ff02b20f218a051508ce880073
+[3/3] configs: mediatek: mt8189: enable USB support
+      commit: d40c8bc91c3b957bb7de44ebf13d05115972189b
 
 Best regards,
 -- 
