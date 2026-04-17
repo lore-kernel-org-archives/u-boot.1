@@ -4,109 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40479F43697
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 13:04:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E476F4369A
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 13:04:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 186EA843DC;
-	Fri, 17 Apr 2026 15:02:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
+	by phobos.denx.de (Postfix) with ESMTP id 0EBAA84286;
+	Fri, 17 Apr 2026 15:04:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=e-labworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="e6NDfl2R";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=e-labworks-com.20251104.gappssmtp.com header.i=@e-labworks-com.20251104.gappssmtp.com header.b="ORsCzqy/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFD2A84319; Fri, 17 Apr 2026 15:02:21 +0200 (CEST)
-Received: from PA5P264CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A337B842E0; Fri, 17 Apr 2026 14:45:34 +0200 (CEST)
+Received: from mail-dy1-x1335.google.com (mail-dy1-x1335.google.com
+ [IPv6:2607:f8b0:4864:20::1335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A09E84347
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 15:02:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=softathome.com
+ by phobos.denx.de (Postfix) with ESMTPS id 4394084246
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 14:45:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
+ header.from=e-labworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=philippe.reynes@softathome.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SHnKufSdSsANXfXPImGAY4MKC5a70Hn0Zl3m5/CG11GSwFT7Ufn1x85xFGU2nep/RlPeenKJ4LV94A2D5P/XRLn4ZDgWVHwIDLjkAVfOK26j1+wO+BgYaNwIM4HhgeuCtd7XhyAjZf8VqUnC3I0kUCEDk9iMbSg+S00C5a4VSGynXpNzhG/nP+TMsCL2JO6Aaln9Jkje0HwY7iw6rt7vMZgPo4a5Q4Jc8JxYQf2qxaggpANp9BQJe4Y8t6danQ7BVMI3aWSPhqVFPqR4+9/X6NPobLAud5o3mVCo25a0dA9aaum7dHiUugTdG84CXt+8J6j5E0Cx9qn5WnL4agETyQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WQnMRS8Fa8Upq1gqwXpFyyITt9Wx/P4xSvQ7fcX0I5g=;
- b=xsNcnbVd1P+2tT0GT1i6m0KAK3Tkf9BLx+CPGvt+qrBq/Gw2pJKTatA5DvIjf6Lg2NNEjnvbPMJpAvUxyYaWtqT4WhSBGnn/YcQSPzRV8dVvw68cIgasJqYY7GKLC0P/1Qy5afhfL8BGLCr9/EaEPJ8aco8LUHwJA8ysQmCjcX4LK+jwtg4pvzyNZ4pra+dn6moLZKV4Ce2ZceuEnpkvM3jffkCC5M/V0t2Uo9lTZ4NeWiYNV6NiJrNRPGTwCf+kgA5RFICVYD6eekaulrmrZXM1PLFBBolK19NdYz5QkbfEvYZO754XmPHQayBoqlICodv5d1w5VD3ZOknkly1a7w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 149.6.166.170) smtp.rcpttodomain=canonical.com smtp.mailfrom=softathome.com;
- dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
- (message not signed); arc=none (0)
+ spf=none smtp.mailfrom=sergio.prado@e-labworks.com
+Received: by mail-dy1-x1335.google.com with SMTP id
+ 5a478bee46e88-2b6b0500e06so1108832eec.1
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 05:45:32 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776429931; cv=none;
+ d=google.com; s=arc-20240605;
+ b=A8QB3Eb2thCYiY73DJ+vHOVySvbg3Dj6TZETGAoU3dThPXe1rwzlLcg3HwQ9Oz46fU
+ Y5tN23653NRZ+zlp0Dp/kaYnEySiBE7bzNfZpNbwOglgUQ+nRcceX5saesJpttsJdSKJ
+ NgEaZ7YzNRmMFy6q0XL/lMzfaC4RikmNqDJ9/0g+Nv7pfaEeRxeJ90cIFpDJ9JqbwG2C
+ AuSIS+PCiNjhOmsSk80MEehHS3EkcFIPrK9BvQaaqpFbj8XiFmaeGupeLNuvMm980YBx
+ 8LnPN/Ekvxu5HZ3SHL9XZYwPyICjNYM2zQbHVoc1gdhlBec1jTFiUD5N3lB5zSjZ80Xw
+ pvrg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=H5rsciFe75g/4QXkvDJ2h8EZX6K6ebhL7WSFtUzfj7Y=;
+ fh=McFpimHY6bIsIE5qOYgv8xLs+kIZjYvKN90K+mlCE3I=;
+ b=T87/fvMv2dPx4BXryOlHVPWzzVSeDJlMmWVKBhzrM0n8WQqEykaZpEA8/5GlbIvmm6
+ mQLvtoLK6KMfdsooJMhGj4dosTTBtfvG3Xjo5vswZ5D+9soVre0aDiYvRu2QCgsvJ3Co
+ 9kZzk5a4UTjwn7QCF2QXHqDPuKIxTbkTAqpXTyMgRy0bA0Z+2N+UsJWBStjT7V43XYco
+ ng3wuep7kIdzcBz0EBWwawUafjF7Dp2E++QfuPgU+52plq3TPB2FWvbYhfeKcbjGLOjH
+ JltxmRay71vsBYwiGfN2Q2Q2C22KaYe3nh3rtty+IZ+jzghb3gywe49VyKOssQhIx58h
+ ZEpg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WQnMRS8Fa8Upq1gqwXpFyyITt9Wx/P4xSvQ7fcX0I5g=;
- b=e6NDfl2RZ35BAGZX3SW4jyfHkXR/IadBOftrh1MykjfpxkzpJie9++6aueu3/fzvDuM8DYLwjnXJaD/xAjIfZZvGAu4DXW7SnXtVCJpAO5IfouO1lmRlOtrBSZe6Qc6R/O7dnXYVKarPNK1YgKA7rz9LSEfMnyL5wMT81aFECYyAXK2+g6fSctJR+WctwD/RBLSFVsXguO/gb8lOB268afTwsQinMoOAs+ATzbesfHJ6D2GXa3B0cUVBUFY+eR/GX8H4lvLWI6SjHXmHLP2+k9ANqF43/vMvuLXJH39y7n+9nqEkArkb+khqGU6kHMLWHZO0O6k3AVCmYVKk/HRzig==
-Received: from PA7P264CA0182.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:376::16)
- by MR1P264MB2724.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:39::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.25; Fri, 17 Apr
- 2026 13:02:10 +0000
-Received: from PA2PEPF00019233.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:376:cafe::1d) by PA7P264CA0182.outlook.office365.com
- (2603:10a6:102:376::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.52 via Frontend Transport; Fri,
- 17 Apr 2026 13:02:10 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
- smtp.mailfrom=softathome.com; dkim=none (message not signed)
- header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
-Received-SPF: Pass (protection.outlook.com: domain of softathome.com
- designates 149.6.166.170 as permitted sender)
- receiver=protection.outlook.com; client-ip=149.6.166.170;
- helo=proxy.softathome.com; pr=C
-Received: from proxy.softathome.com (149.6.166.170) by
- PA2PEPF00019233.mail.protection.outlook.com (10.167.242.39) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.17
- via Frontend Transport; Fri, 17 Apr 2026 13:02:10 +0000
-Received: from sah1lpt726.home (unknown [192.168.72.39])
- by proxy.softathome.com (Postfix) with ESMTPSA id A996020E61;
- Fri, 17 Apr 2026 15:02:10 +0200 (CEST)
-From: Philippe Reynes <philippe.reynes@softathome.com>
-To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
- trini@konsulko.com, simon.glass@canonical.com
-Cc: u-boot@lists.denx.de,
-	Philippe Reynes <philippe.reynes@softathome.com>
-Subject: [PATCH v4 13/14] test: py: vboot: prepare test for global signature
- with ecdsa
-Date: Fri, 17 Apr 2026 15:02:03 +0200
-Message-ID: <20260417130204.49896-14-philippe.reynes@softathome.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260417130204.49896-1-philippe.reynes@softathome.com>
-References: <20260417130204.49896-1-philippe.reynes@softathome.com>
+ d=e-labworks-com.20251104.gappssmtp.com; s=20251104; t=1776429931; x=1777034731;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=H5rsciFe75g/4QXkvDJ2h8EZX6K6ebhL7WSFtUzfj7Y=;
+ b=ORsCzqy/iKcpgO4R7Dax/42MFOUTEYuSZhNiv6VqsWCkF4Cp9mc+S9WMZf0L/ErJ8K
+ E5Pwe5teee+UduKgljyTOOam9RY3onGGp+3GebbW9tU7JwNhNKcprsBxi3tO1KVwn07C
+ Ukfxm8iXYh/3UyVQMcyrYdTYCbmiHEYeoytS6VWtjPdahts1bLmjuhorLh1B3wmLA5P+
+ 5pN7U1vvYmBPoVvgU9CSM8NK2YFae6JrD6nPXla4GNCAibNW16SA35dHvUml3Voaoze0
+ i4LqItXmeKMYaUHho5IBM/SdS03AoEJSxi35t4YCNrRyEwXq57uYKnfUZ0MzUvhtEYak
+ rqxA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776429931; x=1777034731;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=H5rsciFe75g/4QXkvDJ2h8EZX6K6ebhL7WSFtUzfj7Y=;
+ b=hGNiByNw/57kzQNp4RqRoohwmQ4gBjxrMljWvwTX/6i+wrsHOc0grJ2XTYmwf1kE6b
+ QOVY9+LEx9L5ljcHZYPabNOrCWp6Emchllb/Lc6qVR/T4rhcPYkoaT8yz824hho2I6gE
+ EUcmojSMjuvgS7DNA82I8hNmrjfRlXKhfXbVovsNUVOOfP1N9yd7gHtACxOC9gfO1qML
+ OrWzPUnJcAaIUBWpv5kYc1WiiZ3cyCxIqmH84JsLMnWvqGA3UyU8w1HKpgz4Fnl5gA9p
+ T5SHpijo4zFq2d+hvLuy2MNaAYMOFUAAcrDhyTRzI1FB34psd4f/puU4Zqup0gWpVgCg
+ xBEg==
+X-Gm-Message-State: AOJu0YwakWWq8jKAQu7ELTxOP1AFWqWTsoB3usqwmCmUdpEjfsXCG83B
+ yH3ANTn4JcMCQGS+Hc1rXhi8lp4iDVfUWuESxgEZ8y/RrXdlsZ1V6JQXQJTjp9z2Zu33fHZcBKT
+ 4sWQca7IZq8NNcu3XCFq2gLEd4v8vWHgdZLloPj3kMw==
+X-Gm-Gg: AeBDieuq4bgCmfrM9BvbO8NQgsDWGTuNwbBV/yuZD2cSPcsZqTeUhFT96tyjFFwkqyB
+ 8ZZu+zOU06zWlyt1rMLLAgqtZfKLve8M2+mXxpNAokitDdj5NEY8MIcCV/DR3WHFjW61e5S4fez
+ JPGjvR+7Nuw2BLJSVquSCBduWdLj71OCA/VZWAjKNW/W6h8KEhAAL4bMjf2Q8Y+44LWFW6GPKLy
+ BkBSa1nLKhSlGObdN1cOCk0gI0u/4JY6EwQYhbcTtgh4ncp8+SxOouXOopu2GM/zYraq3eqfxqI
+ mjNKjdcp7QWFNrQp140=
+X-Received: by 2002:a05:7300:5728:b0:2cf:28e8:d784 with SMTP id
+ 5a478bee46e88-2e478a3314cmr1149080eec.19.1776429930476; Fri, 17 Apr 2026
+ 05:45:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA2PEPF00019233:EE_|MR1P264MB2724:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 6dd19c64-a297-43e7-ece0-08de9c8189b8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|36860700016|82310400026|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: JsfNbq1ufhjS8Inxl8it9O/R6pLmbCr5ygQBhp4a7wVCypI52Uylby4Ft01AC3Ud81+UjPftYf1y7mbGUS1jLjNjslJi5lYbgUxXadSZyFIoOPPaY94pdsITBRhlK3FoPaMNhJMLYERJGcipj1K5k9lM5LTJTNRQHS5DRgpPIGfYxID4Bil8+oqV786d9zx1nSfjP+pmRgMbqPKbAbURQ7EZHh3KNsZ4BkOOlKSKli5eKXD0C+t3nWKjlSpmBq0tuMluyQG5V4iwnoLA+Qw/gVes8ajMwTf7FjG90l/X4SdBERkLL05t3BRncXm5PvqXCxMJoW/a0R1F8RZtiOvC+D1RXal6xJPExYPsjZP713Sj6AqqFfAWuB5tya2ggum4tb+GcjMFprL8u1XEesf/KqQmEQJWC/EauEVnBGoMVYoIbAmNq6M3vAlzK5zQX3bJr9PG5vPkb32c+F2Hce6sqRZFjoTAKecMJ39YZFJ63rDq2iSyQi2tA8U10yVEEWFn7iSGJMoveh41+VRpLz7Ot9/ffSBB8N6JY25uBEwVd78DbghhCUMHN5cq17qwae7qSo0qN7q5DzieIdDjZblbAxyY5CgFqnJf6uC//JzHXx3SG7FgCQgx4YEEzaFrsANljSKjf0/IpgUfU+A/XYmWFFxJN6RJKhIdGDRKK+NWsUCKNKl9CffOYF53bhVb08r+woAvyU8y56u6wfxQu0wg3jUxeQtwf4BlhjBrmbydgKDBPIMcONUwOeDTw0L2oVG5tKoLKn6oSuD+vc/kwdvQWQ==
-X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(36860700016)(82310400026)(56012099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: B61d3zbcqXBqgW6N7GciI9Fq9K/pW0Rz/wHj+g81fDUkIvyVO5QdKdGHwVkulnlC+J79Puf9rDsimPErosfehpLznoRRrqBPGWIU/eNWtd/KE7H825JYWy/rtSwZpJ140wNYbv2JUUQXwTg4JQda0mRO4SbV2xE4L5T6fzc/x3RVvmWs6rtrv+YfumZtKeR3mQQ0SOgXnxcNnTyes2troc9tVfnZKhtDZS1+G7TI6+8gKevX2Cy+tWkFrYVv4gno8brYojgTESEYsLG6eBQ5ncDRN63IzB8rivJuRjUgske76s7CdzEC5LivfZC50g2VCPwaR1aAHmXrpHDj2eg3fGVpypCtBE8ZzyVHco8+JAq4DUVsF/fw5fxv6FloyZr3ttjFnAJXuY+V4/svqyVRuc2xLANDGJm9PogjUj1/obwdRuTE4Bh41uPumTfTtzAW
-X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Apr 2026 13:02:10.8004 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6dd19c64-a297-43e7-ece0-08de9c8189b8
-X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
- Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: PA2PEPF00019233.FRAP264.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR1P264MB2724
+References: <20260416145259.2985564-1-sergio.prado@e-labworks.com>
+ <CAFLszThoyxqjaR=FVz5kqg4F+NRqKoTXCx-d0r5-voCqDn9Lwg@mail.gmail.com>
+In-Reply-To: <CAFLszThoyxqjaR=FVz5kqg4F+NRqKoTXCx-d0r5-voCqDn9Lwg@mail.gmail.com>
+From: Sergio Prado <sergio.prado@e-labworks.com>
+Date: Fri, 17 Apr 2026 09:45:13 -0300
+X-Gm-Features: AQROBzB2i2uDVNW9XD2nNIwXnxCf3P_1O-WEjH4rqC2p2h4b2n4AaPbZ1mAVrWg
+Message-ID: <CANu7NGtQkJcTt-LW2OLOwR4-4C8s6--8wVh_XkX8GXqrvSJYFg@mail.gmail.com>
+Subject: Re: [PATCH] binman: x509_cert: add PKCS#11/HSM signing support
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, alpernebiyasak@gmail.com, 
+ ilias.apalodimas@linaro.org, marek.vasut+renesas@mailbox.org, 
+ sughosh.ganu@arm.com, wolfgang.wallner@at.abb.com, bb@ti.com, 
+ y.moog@phytec.de, afd@ti.com
+X-Mailman-Approved-At: Fri, 17 Apr 2026 15:04:32 +0200
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,97 +119,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The vboot tests only consider rsa for test with global signature.
-To prepare the integration of test with ecdsa test, the signature
-algo is now explicit.
+Hi Simon,
 
-Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
----
-v3:
-- initial version
-v4:
-- no change
+> For some reason I cannot see this in patchwork.
+It seems my email is waiting for moderator approval. I received this email:
+"Your message to U-Boot awaits moderator approval. The reason it is being
+held: Post to moderated list".
 
- test/py/tests/test_vboot.py                          | 12 ++++++------
- ...binman-pss.dts => sandbox-binman-rsa2048-pss.dts} |  0
- ...sandbox-binman.dts => sandbox-binman-rsa2048.dts} |  0
- ...pss.dts => sandbox-u-boot-global-rsa2048-pss.dts} |  0
- ...-global.dts => sandbox-u-boot-global-rsa2048.dts} |  0
- 5 files changed, 6 insertions(+), 6 deletions(-)
- rename test/py/tests/vboot/{sandbox-binman-pss.dts => sandbox-binman-rsa2048-pss.dts} (100%)
- rename test/py/tests/vboot/{sandbox-binman.dts => sandbox-binman-rsa2048.dts} (100%)
- rename test/py/tests/vboot/{sandbox-u-boot-global-pss.dts => sandbox-u-boot-global-rsa2048-pss.dts} (100%)
- rename test/py/tests/vboot/{sandbox-u-boot-global.dts => sandbox-u-boot-global-rsa2048.dts} (100%)
+> In any case, please can you add tests and check that the coverage is
+still 100% ?
+Good point. I will work on the test cases, validate test coverage and
+submit v2.
 
-diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
-index 4e4d9529031..22865f653c5 100644
---- a/test/py/tests/test_vboot.py
-+++ b/test/py/tests/test_vboot.py
-@@ -503,7 +503,7 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
-                           dtb)
-         run_bootm(sha_algo, 'multi required key', '', False)
- 
--    def test_global_sign(sha_algo, padding, sign_options):
-+    def test_global_sign(sha_algo, sig_algo, padding, sign_options):
-         """Test global image signature with the given hash algorithm and padding.
- 
-         Args:
-@@ -512,14 +512,14 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
-                     rsa signature algorithm.
-         """
- 
--        dtb = '%ssandbox-u-boot-global%s.dtb' % (tmpdir, padding)
-+        dtb = '%ssandbox-u-boot-global%s%s.dtb' % (tmpdir, sig_algo, padding)
-         ubman.config.dtb = dtb
- 
-         # Compile our device tree files for kernel and U-Boot. These are
-         # regenerated here since mkimage will modify them (by adding a
-         # public key) below.
-         dtc('sandbox-kernel.dts', ubman, dtc_args, datadir, tmpdir, dtb)
--        dtc_options('sandbox-u-boot-global%s.dts' % padding, '-p 1024')
-+        dtc_options('sandbox-u-boot-global%s%s.dts' % (sig_algo, padding), '-p 1024')
- 
-         # Build the FIT with dev key (keys NOT required). This adds the
-         # signature into sandbox-u-boot.dtb, NOT marked 'required'.
-@@ -528,11 +528,11 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
- 
-         # Build the dtb for binman that define the pre-load header
-         # with the global sigature.
--        dtc('sandbox-binman%s.dts' % padding, ubman, dtc_args, datadir, tmpdir, dtb)
-+        dtc('sandbox-binman%s%s.dts' % (sig_algo, padding), ubman, dtc_args, datadir, tmpdir, dtb)
- 
-         # Run binman to create the final image with the not signed fit
-         # and the pre-load header that contains the global signature.
--        run_binman('sandbox-binman%s.dtb' % padding)
-+        run_binman('sandbox-binman%s%s.dtb' % (sig_algo, padding))
- 
-         # Check that the signature is correctly verified by u-boot
-         run_bootm(sha_algo, 'global image signature',
-@@ -582,7 +582,7 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
-     try:
-         ubman.config.dtb = dtb
-         if global_sign:
--            test_global_sign(sha_algo, padding, sign_options)
-+            test_global_sign(sha_algo, sig_algo, padding, sign_options)
-         elif required:
-             test_required_key(sha_algo, sig_algo, padding, sign_options)
-         else:
-diff --git a/test/py/tests/vboot/sandbox-binman-pss.dts b/test/py/tests/vboot/sandbox-binman-rsa2048-pss.dts
-similarity index 100%
-rename from test/py/tests/vboot/sandbox-binman-pss.dts
-rename to test/py/tests/vboot/sandbox-binman-rsa2048-pss.dts
-diff --git a/test/py/tests/vboot/sandbox-binman.dts b/test/py/tests/vboot/sandbox-binman-rsa2048.dts
-similarity index 100%
-rename from test/py/tests/vboot/sandbox-binman.dts
-rename to test/py/tests/vboot/sandbox-binman-rsa2048.dts
-diff --git a/test/py/tests/vboot/sandbox-u-boot-global-pss.dts b/test/py/tests/vboot/sandbox-u-boot-global-rsa2048-pss.dts
-similarity index 100%
-rename from test/py/tests/vboot/sandbox-u-boot-global-pss.dts
-rename to test/py/tests/vboot/sandbox-u-boot-global-rsa2048-pss.dts
-diff --git a/test/py/tests/vboot/sandbox-u-boot-global.dts b/test/py/tests/vboot/sandbox-u-boot-global-rsa2048.dts
-similarity index 100%
-rename from test/py/tests/vboot/sandbox-u-boot-global.dts
-rename to test/py/tests/vboot/sandbox-u-boot-global-rsa2048.dts
--- 
-2.43.0
+Best regards,
 
+Sergio Prado
+
+Em qui., 16 de abr. de 2026 =C3=A0s 18:35, Simon Glass <sjg@chromium.org>
+escreveu:
+
+> Hi Sergio,
+>
+> On Fri, 17 Apr 2026 at 02:53, Sergio Prado <sergio.prado@e-labworks.com>
+> wrote:
+> >
+> > Allow X509 certificates used for K3/TI secure boot to be signed via an
+> > HSM using the PKCS#11 standard.
+> >
+> > Two new make variables are introduced:
+> >
+> >   BINMAN_PKCS11_URI    PKCS#11 URI identifying the signing key on the H=
+SM
+> >   BINMAN_PKCS11_MODULE Path to the PKCS#11 shared library (.so)
+> >
+> > When BINMAN_PKCS11_URI is set, it is passed to binman as the pkcs11-uri
+> > entry argument, which overrides the keyfile property at signing time.
+> >
+> > The openssl bintool gains three helper methods:
+> >
+> >   _pkcs11_use_provider() detects whether the pkcs11 provider (OpenSSL
+> >     >=3D 3.1) or the legacy pkcs11 engine (libp11) is available.
+> >
+> >   _build_key_args() builds the appropriate -key/-provider/-engine
+> >     arguments for the openssl command line, appending ?pin-value=3D<pin=
+>
+> >     from the PKCS11_PIN environment variable when set.
+> >
+> >   _run_cmd_pkcs11() exports PKCS11_MODULE_PATH and PKCS11_PROVIDER_MODU=
+LE
+> >     before invoking openssl when a module path is provided.
+> >
+> > Existing behavior is unchanged when neither BINMAN_PKCS11_URI nor
+> > BINMAN_PKCS11_MODULE is set.
+> >
+> > Tested with SoftHSM2 and a Yubikey using the verdin-am62_a53_defconfig
+> > configuration.
+> >
+> > Signed-off-by: Sergio Prado <sergio.prado@e-labworks.com>
+> > ---
+> >  Makefile                        |   2 +
+> >  tools/binman/binman.rst         |  18 ++++++
+> >  tools/binman/btool/openssl.py   | 106 +++++++++++++++++++++++++++-----
+> >  tools/binman/etype/x509_cert.py |  47 ++++++++++++--
+> >  4 files changed, 153 insertions(+), 20 deletions(-)
+>
+> For some reason I cannot see this in patchwork.
+>
+> In any case, please can you add tests and check that the coverage is
+> still 100% ?
+>
+> Regards,
+> Simon
+>
