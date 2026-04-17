@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18627F433D6
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 08:15:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58295F433D6
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 08:15:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADBEF8426E;
-	Fri, 17 Apr 2026 10:15:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E9D058423F;
+	Fri, 17 Apr 2026 10:15:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N1OPSAO6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MM5w8DGr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07FEF84246; Fri, 17 Apr 2026 10:15:16 +0200 (CEST)
+ id 929A08422D; Fri, 17 Apr 2026 10:15:18 +0200 (CEST)
 Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
  [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 272EF8422D
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 10:15:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B66178423F
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 10:15:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
 Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-43cfbd17589so275519f8f.0
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 01:15:14 -0700 (PDT)
+ ffacd0b85a97d-43d03db7f87so222499f8f.3
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 01:15:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776413713; x=1777018513; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1776413716; x=1777018516; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=WhU1KEIUS+xV9lTXK9S2oLxK2bRBJpA7Cutz/RVay38=;
- b=N1OPSAO6Wmx4+Nxn2RLL/5QYG6oujxh7/R7XcOgC5nf17kYcD+w3sBf1oljZF4TjH+
- ZkrypPMzrGfT3wLawD+GLJyRK4eS1QLoRghfXkvJNWbdo9+n9cjrNzna8bSPS/KoIBmb
- NSfk8A2UV9zDn3rtaCOc9+dagmjXUkH48rbF3HXZCmZRmNv+YKH/jlJwzN6N9yvEzBvl
- ou1qZs4VfGGp/heRIWhEdhl1gK46BC1pLORBQNj2CkS54wt/HnnXuYM2ynjiXPQ/n3+1
- E8aMMn4tCN5jcotDU/lnPch11/t0UcmFvHIGJyp2vwco6MxvywD3UXsOHTMeDkTHZkbR
- HCbw==
+ bh=WqEKbwxbqtGB21Uu1wb7rSiQoCasfq4Ry2S3cwkU7IQ=;
+ b=MM5w8DGrZiqgbjlTcxhJfELxZb8vDZ3sOe6+vIOwf6hTtVENvKVdYDRMF2qOC9xwmg
+ 63X8JBcW2trZ3Ea3XaHu59dZtl9f+4+GWt2yn0KwNE0XJpT5uJpw3YKwyD40ub+AJ9mv
+ fG3rpFuLCiyT0PW0MJ2iVALGYrfIIYW+DWHW3joK81SwSdG2e3S8eCUFCyIn7FH4U826
+ 0smEFODHcKyx0kwhXGyxokblTf054dXFV56aVC4ZDKWhoJNWR7R8VdLbeeLp4gUvMl7h
+ uIUb4uZqH6jy5MlWtrJ8zUMnX/L5q85c6XuOF0mXZybWT5UHqTLr+WHHERFjoaEFqbiP
+ QVaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776413713; x=1777018513;
+ d=1e100.net; s=20251104; t=1776413716; x=1777018516;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:from:subject:user-agent:mime-version:date:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WhU1KEIUS+xV9lTXK9S2oLxK2bRBJpA7Cutz/RVay38=;
- b=jCA1netbUMERSORorwl4pg85Glap02Joe6kH+bfzqCOHMfP6dAgk/BIR7Os5PP65Lo
- ctaqzCbKk0lsNLRY9s7fQDLZYLwFDA9mbbDS492DaZlHgxSo/lPkqN+DRK90EVyiS1Sh
- CKvlKz4wJypdeq2xgWD9IpsZ9tuOBiPk8MTe5/W24b3OjkFUTTkH7uS01xYuw7F4V1YH
- DGL6Pu84TTTLBDPDt7j88ElKQWSf0HEw9agw53uwyDISVCa1ta8tQZpMvE+R8DqwsL9j
- KgR5WoXy7DMge15hFqh9mYfskgUDhrfYAM7vlhfooBbvSGeYJWzkCyf+R5aHg26MqKMj
- 8T6A==
+ bh=WqEKbwxbqtGB21Uu1wb7rSiQoCasfq4Ry2S3cwkU7IQ=;
+ b=eQOm0mRp2D6vgH64LZZ9Pywr0wUBZ2b3uN3aNKMdhna6uCvI165q5wz7bVt5TeSGoV
+ pIu+0fbGYZQr0JKEdRiO5z3tVYDjrxte64W0s4u8TAt1X/QAQlS6q393toZbS7auKdvi
+ /nEO59WPQEjXSdRbFCjIC7UcMvpZanMJVyslA7Vkb7dTzR/dVbqFQSGF5waSzExMySAp
+ 1wnzp01UARNieLdo6zcjnbkfKEJQWJ+Aj3aCi5qdMQSvjyo9fZ+x46hDnOZS1twJS5Zg
+ T86dkipcP+eU149Qg6ouqOsY7NXsBeHaRSFaKigBA8JDqGTGf7m5i3iySemZ6NLedy/s
+ sWKw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8gsyarBGfFEDyZq9u+3yiAliEDqMFeiZJahs3LPZ76cxmdCW5d3LWcmOMneI4mRyKXZQrpu9M=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx2brwRwvBrkOIOw43cO3HBHcNOErZeTCCUybnyXXvykxTTM7/X
- gCjf29HGVHpJeX8j5ye687Hr7s3EXWnrQ5IezBhfSTKez+uVzaEDCSjH
-X-Gm-Gg: AeBDieuvHRxwc4GSxEmtGaNbOaP+0wEAlSwlW4lEPfr6RZtjRnncHVsB090eCpIiF2t
- bzV/8xunXvnCwqZT9S7HqLR+Xjn//HrxdaYZ/nGp0ZFRzp1zhFyrj2QqEGp8++BIq8K/9tQdgyP
- xuCCkprtB2DAIEmGQmf1RXqiA+P6G6keKt76WaFLX+baTKLXvhAcLJ4qwoujZlTTgHNQUdRNWuX
- 5Z4fUusePLKCme+MvIvfDSXHQpNA1WMMg2Pp09Zcx9aismnpakVIrCFgm4yfIF3fhsw3U/KlKJs
- OfodK4ugYTilUIOZ3w2fUx7/jjUNW/hqCTzsmz2cdJksv8efBg4n1Y4Eq67dtwlFeF41YM2fqPf
- YxaC3HRiRN+3B5+qFLUlhWz3DqL9lAGGsjC6z9TqqDfffWDVUUhXY1YX1xWYg3Ejxh5TNSd3hxE
- UBto01TCjyPCl+P4a1YCiUsuPvINwWALAlWadiYJNKiyK8UdgZ4PdLjEw+6yRWyTMh7GsUUs2aj
- WTfcZU4AyWGBM9G
-X-Received: by 2002:a05:6000:144d:b0:43d:7403:4b63 with SMTP id
- ffacd0b85a97d-43fe3e0b862mr2443573f8f.44.1776413713371; 
- Fri, 17 Apr 2026 01:15:13 -0700 (PDT)
+ AFNElJ9avUJji8hOar1Z4IXjm/I1OpfaPws1PhMDLCC26etDpa82rYF/fiPf1TRJYFs9VhsE2lhOwH4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzlc+6Uhxzlolac3DiSnSsTf2d/3r/aKl3IjrLvDLeaHiW5G7r9
+ Qzy0mxPbttZ3TJWPdyps7PSWkYqPuh7MCh8E0tnSbVgY7xR9RJZhPekW
+X-Gm-Gg: AeBDieukwuueXntjNAcBTvZ6JmbrtolcenNODu2OPs+A7VFMeIKf9Q5Ng0fMcKT2V6A
+ 9fkMLZf5zs1VWldttl6CWzrMJEQU4LkHI3zMTr4U8rC8QEP9+xuHDIJmFFmAWZ3aEBSEwVIGEQN
+ vin+gA41z7yw3bvBRLfO1tfw3d7v2fwoHxZh056YyFM2UTHj24CYp/OTmR5Ml7DdKdRZpDsaM0x
+ i8xvBsI9jKL+UfO5aJFXqGIpAtCyhywEfdd8hjRm1DywnW6LadrVzrvA/zGryp5LlXonHnoeAMV
+ wBvwEuiMYDLHS+kkvgwODM/+4Juogya6HCBFbcJ2bap+HYA8UMohdio5CWCVnAaCMfI4bSoTABR
+ 5aJR44iF0HuIJRGl/MlFG9GU+gdcUqUNL8icfJQQLUBhzeJoL4DqX/9gKrv3KcQ1RJQxt3YM/Zg
+ hugomo6qX5QCBDnp04CIfsj2oRFez9d11kDOm8H4hTm5qF+MkAFezBfgA4qQrM2l0TEm/jRl64m
+ tNHz1JKJmHepkxMRfVe2p1jeao=
+X-Received: by 2002:a5d:5d02:0:b0:43d:77c6:be6d with SMTP id
+ ffacd0b85a97d-43fe3db39c6mr2476453f8f.7.1776413716044; 
+ Fri, 17 Apr 2026 01:15:16 -0700 (PDT)
 Received: from [192.168.1.3] (host-87-2-163-213.retail.telecomitalia.it.
  [87.2.163.213]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43fe4e3a7b4sm2537984f8f.22.2026.04.17.01.15.12
+ ffacd0b85a97d-43fe4e3a7b4sm2537984f8f.22.2026.04.17.01.15.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 17 Apr 2026 01:15:12 -0700 (PDT)
-Message-ID: <b9d05cc7-df84-4c6c-b45d-9393d0f3f248@gmail.com>
-Date: Fri, 17 Apr 2026 10:15:12 +0200
+ Fri, 17 Apr 2026 01:15:15 -0700 (PDT)
+Message-ID: <0747c1f1-5f49-42d2-a624-a6da6c47d2d9@gmail.com>
+Date: Fri, 17 Apr 2026 10:15:15 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] board: toradex: add Toradex Verdin iMX95
+Subject: Re: [PATCH v2 3/3] toradex: tdx-cfg-block: add verdin imx95 0226,
+ 0227 and 0228 pid4
 From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@nabladev.com>,
  Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team"
@@ -85,11 +86,11 @@ To: Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@nabladev.com>,
 Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
  Peng Fan <peng.fan@nxp.com>, Alice Guo <alice.guo@nxp.com>,
  Sumit Garg <sumit.garg@oss.qualcomm.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
+ u-boot@lists.denx.de
 References: <20260417071546.1610330-1-ghidoliemanuele@gmail.com>
- <20260417071546.1610330-3-ghidoliemanuele@gmail.com>
+ <20260417071546.1610330-4-ghidoliemanuele@gmail.com>
 Content-Language: en-US
-In-Reply-To: <20260417071546.1610330-3-ghidoliemanuele@gmail.com>
+In-Reply-To: <20260417071546.1610330-4-ghidoliemanuele@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -112,6 +113,7 @@ X-Virus-Status: Clean
 
 On 4/17/26 09:13, Emanuele Ghidoli wrote:
 > From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+
 Apologies, I accidentally omitted this Reviewed-by tag.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
