@@ -4,100 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 880BBF99C63
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 20:12:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FDACF99C60
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 20:39:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D97A28420C;
-	Fri, 17 Apr 2026 22:12:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 81AAD84214;
+	Fri, 17 Apr 2026 22:39:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="suBSESt3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BmkuFXK1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F29B584214; Fri, 17 Apr 2026 22:12:24 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id 6315C84223; Fri, 17 Apr 2026 22:39:56 +0200 (CEST)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C207A841C2
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 22:12:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E3DC18420C
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 22:39:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-40f0e14b9f9so749496fac.1
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 13:12:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-8d68bcf50fdso131563585a.2
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 13:39:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1776456741; x=1777061541;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=X9vA9L1YXz4jtzAxh1X2NdL7Wg2YOud3blXYAFGxILU=;
- b=suBSESt3SbbvPsGIeq1v36cvVdGJW2tCfpcK2apy0L/hfzP8zxBdqopvPgieaWXcHg
- cPX3i4phnCpVYkirLxPl/d9ctHpp0aOF6wvvaSkDBptU9NpKI/W6Agv4drHubczkPyFT
- iQ9/4ScnpOBlVZS13y8lmMRoMlz2Tj2zkM6wWigZYIrfUXJ6YQlbjQ0te2pED8l0g4qv
- iiqikgF8TS4sfdv3RHRB1l2GSHO9KR4IJq79chJ8F7UQY0ndkOZJE9NBSD0nGjx3EkZU
- fK6ScXx94IA4anYiBQ7tXRjQh+4pT6ob7D2GR4rUySpWG1cNYQAzx7trqEPcd+5PGSOt
- qg9Q==
+ d=gmail.com; s=20251104; t=1776458392; x=1777063192; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=GN3qKRgNqZ3Nx8dD225h1/mG+r9b6DMJ4u6PThO6oG8=;
+ b=BmkuFXK1DXsZQMni/GPvq0J3oASIE3723br9bNWOWMzctcU+e7pwcWXwR/IJ1FUh90
+ s8MKgu2jBgDI9bX9yvL4igs27xHLnFWgQfxy+ADKJtmJ+0LsGEvOMhzCgLc4W4h8iqx/
+ vCP4yX2nKQ8ox0QhAQH2nWROxA6K8kWFCPiZPR8eS4iJ0ke9MxKUTh7WBh4etI63nUDj
+ WpPaO1FCT4iSS5kfttj0c0DiPZcHbCXlajTnILL6KtAFKiz6l9zhdo/KGM9U4xHPs7kv
+ MmJ4oCvWSvdFeBa4GM/jZrcqX6N7NNkjdX52iv3WwKIhEtrf52EawcR2xAbiO0JEOxMp
+ B+JQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776456741; x=1777061541;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=X9vA9L1YXz4jtzAxh1X2NdL7Wg2YOud3blXYAFGxILU=;
- b=VnmQaLqGh64m4mO/kgDHOzy0zLHuFJCsH5OOpNmcZLfQccWDTyW0+DFLY7oTKr0Av9
- NmqD5yCIqoztbOxEf1h7Pkhh7du/Pd5Gm+LDriksgDTG9+KzmKhkClBCouLxnPBnVK55
- M9A/NS3mODsWUH2mxdGc9tnG0DrjY9w/B2UgIjsVbWRemf2eZBS6IImgkrsjHDKC8kND
- ZBlhX5pqbpsDJHZeEooK5Y2o8qaSzlTnQBAxUe+FJXaUCewHvg2AD5HUr9wtZRccCtDo
- Yz0LCNWmN10SQuoOCrzDf4eE/CEG3ei70t52kGLtiT2oe2lwxTg/fPqtmXVpVEi3Acq2
- /M2A==
-X-Gm-Message-State: AOJu0Yx8tpgGCKKaz8LQB1p07C9IhcYnktQWsl4OTd3G9RpJDcQrMUMn
- fX3HbCngfRJZC7m48+bLSx8AW73oCtghL1ZkfnH9DoZPtbnohjb0wTAl1uTL2bWbRhA=
-X-Gm-Gg: AeBDietieFEAsGOo0ndRseuxI/g60apzBx+7teNFX1hs4kEkvAnzQb2a6HlfPel7XwP
- ppARZpnGezGnmSCxctJsaRWbBLwmlsUJmOcGtBjtGe6f8MYlkdOuvXuI0VM5mCR5ASm8c0H75z/
- fBNTjqI6kGWx1h3JyhBUwu8G/bj347NTEJDHxpThweW79gz/8NUjMoYc2Lq4Pst5bZHc2scpGZx
- e0dmLPORrxC3b60lshT6Np0a3nGbEr8NiraiQZek0Bh1rZPt3s0jiWd2zCuQKSFTqcQHVD1P/2f
- jT/wn2y65u3dTvbF3NkKUDdWXxXXlu3iJi9mD0q+r7c+DeeV1gquVQvHSeEEoVyf2YXahDotLKK
- iKLKZPLPH9rhrb90ncsdYPiJfQwKOGzxJ10lCZn8FZb42TRb7IQn38ks/DiE7byIxZhl6kw45iA
- 2z3HQe+01NWUh86c7HXuBRKu1/5MHqg1wvKoLo4pZgZPNRLnbO
-X-Received: by 2002:a05:6870:c262:b0:423:b5a9:888d with SMTP id
- 586e51a60fabf-42adedb8fadmr2659954fac.37.1776456741422; 
- Fri, 17 Apr 2026 13:12:21 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:ef27:3314:b886:cd3])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-42b93046dcesm2297218fac.3.2026.04.17.13.12.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Apr 2026 13:12:20 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-To: u-boot@lists.denx.de, Weijie Gao <weijie.gao@mediatek.com>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>
-In-Reply-To: <20260410082332.102522-1-weijie.gao@mediatek.com>
-References: <20260410082332.102522-1-weijie.gao@mediatek.com>
-Subject: Re: [PATCH] pinctrl: mediatek: mt7981: fix some register offsets
- and fields
-Message-Id: <177645672728.59267.9743943375579286397.b4-ty@b4>
-Date: Fri, 17 Apr 2026 15:12:07 -0500
+ d=1e100.net; s=20251104; t=1776458392; x=1777063192;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GN3qKRgNqZ3Nx8dD225h1/mG+r9b6DMJ4u6PThO6oG8=;
+ b=ZCtieQ9txSoqw/fJAebDFcqPIrn79NrWBVGBgCODvNe7WMaO+RJQDQ4xCx/kbfZWzG
+ BX0HjfyacKfNfX/El55FVwm9Eci55sbzbFpSvt9zAmi6c+WRB0nN7O6xxbNlXw3iaboe
+ 8J7fz1fPE7lb+fnts19pRhzg78yWQ5K865egd2eprY2CLM7x/T/DWhPgWNx3hCXjaVT+
+ 6kdAQAvGcaBpIQgWWh6qG6sg/7U3gr1kX1Jt1ZwoU8cu1SmKMeykwZroqQTMDzuqwPAy
+ ZVvz8V9XbXpwIaWiBVRSEIh48JzasOI8FfUCCmkoGlPbAA7utbXc4PonucYmk4/dRUNg
+ TQtQ==
+X-Gm-Message-State: AOJu0Yx4V7IIUSVgrP9NJT0RWqWU/U6nGf2HFMablKXkkZZZAZtTXCYt
+ DDV406DqPXWcgLRCcTAJHGVZ32WQ+8qGPUqJ0aOFjRMndnFomUPuZ4oWSi54UlIdZM0=
+X-Gm-Gg: AeBDieuKyRV9pKzDnazRbUTZvtBAkNFQciZSQ07r/72fJDDACmuFbBREugFmBqYZZEx
+ ZlOeIjWmu4h6Xucc8JnWmLvjKZC5UuIUob6U30LydegfGkZ2b1Zk037zHBKbctvai+92Zct12bj
+ r+kqNU6cGL95vHraJVHlYJx9R2GsQseVUwbkgmqVyfPNaELpPr3RBhL1bkQ4c2NLqHbWM+kwiHN
+ 3VBDsUybcliipZ4jR0F+u5FDS7Hlj9NI5UNGaPPcxJW8OD9lrkBpFnyMBDqGMt8ZPj8qGMHmE6h
+ 2M5KUExa5CWFy29aNNkuEK/KVN+pbT8jj0gj2jQ8n0sDbc4PCSfbZh7DIVElvPolAcpDOboFP3J
+ DP0WzeQCRcclPVRLj0saju9hnyqDG5a4KpqWSf2ws2Xq4yf6r7JC0BZzjULtQy/4BkFJo1Srfhz
+ XEANaBupy1vRQFB9xK/ey3GedTLFb2xgzOmHSNpM27co6QFzBwhcDfx6mVNq2FNjuGLInUtzSf5
+ 32eD3KZTQdP72HQ6Gfx3DmFmRi0UQ==
+X-Received: by 2002:a05:620a:489b:b0:8d0:26db:4f9f with SMTP id
+ af79cd13be357-8e79001504dmr622590785a.26.1776458392260; 
+ Fri, 17 Apr 2026 13:39:52 -0700 (PDT)
+Received: from [192.168.68.100] (172-97-209-197.cpe.distributel.net.
+ [172.97.209.197]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-8e7d5fe8ed1sm198608785a.8.2026.04.17.13.39.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 17 Apr 2026 13:39:51 -0700 (PDT)
+Message-ID: <696b7f4d-e192-44e4-8652-e8db7f980507@gmail.com>
+Date: Fri, 17 Apr 2026 16:39:50 -0400
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/6] Add support for DT overlays handoff
+To: u-boot@lists.denx.de
+Cc: michal.simek@amd.com, venkatesh.abbarapu@amd.com,
+ Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Liviu Dudau <liviu.dudau@foss.arm.com>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Harrison Mutai <harrison.mutai@arm.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Matthias Brugger <mbrugger@suse.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ raymondmaoca@gmail.com
+References: <20250718141621.3147633-1-raymond.mao@linaro.org>
+Content-Language: en-CA
+From: Raymond Mao <raymondmaoca@gmail.com>
+In-Reply-To: <20250718141621.3147633-1-raymond.mao@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=355; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=9lXnmWEb6Mk9vW3tekhOXldSXsb1nWNEsimWHp2y8xM=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp4pQdxQbOjIUARnbhPl30G4v0VinIruk8gJ1Rw
- N+FdWekDLCJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaeKUHRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A5F4H/RubxssGRRqDzhXXlaRod519jj3lfBhmDjya7gD
- +IbyB3wF/TDYzArwJGsBNcmHrPFyXjVjuuVV7zDfsTknlORQocTdhDiHNf3W1qm56ECFAXK9ApF
- 3fYSQyUfVJdw7XIGZsbC+wrOhMRkfmX5drLQUlv9u2bcrI85Vt8oCXtmbWQR+YvILPW5aVEXEc8
- j7ipmq56p41WVO4nf6eeCM1vvqJjXarcGE0Z1j7fE0zE1P6f4V+KDWxWVL/2oU+RaSjUrrH2hlm
- QuQjrHoQ7DEVSIjyYAFNGNAQUg5FKIgfd0SUDJeSI2+fLwNvKBcXlJT7tM9xkfKizszj+77b76T
- 3XAI=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,15 +114,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 10 Apr 2026 16:23:32 +0800, Weijie Gao wrote:
-> pinctrl: mediatek: mt7981: fix some register offsets and fields
+Hi,
 
-Applied to mediatek-for-master, thanks!
+The Firmware Handoff spec changes required for this series is already accepted and merged at [1].
 
-[1/1] pinctrl: mediatek: mt7981: fix some register offsets and fields
-      commit: 5576522219d40ffeb7918dd04263f5d925df9d1d
+Please review and merge this series.
 
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
+[1] Add Transfer Entry for Devicetree Overlay
+https://github.com/FirmwareHandoff/firmware_handoff/pull/74
 
+Thanks and regards,
+
+Raymond
+
+On 2025-07-18 10:16 a.m., Raymond Mao wrote:
+
+> The series include refactoring on bloblist and fdtdec to support handoff
+> of multiple DT overlays and applying them into the DT base during setup.
+> All changes are aligned to the spec update for supporting DT overlay
+> handoff[1].
+>
+> Notes for testing:
+>
+> Currently DT overlay is not yet enabled in TF-A, but with the test patches
+> I provided for TF-A and OP-TEE build, importing a DT overlay blob file from
+> QEMU to TF-A reserved memory is supported.
+> Follow below instructions to build and run for test:
+> $ repo init -u https://github.com/OP-TEE/manifest.git -m qemu_v8.xml
+> Replace your local qemu_v8.xml with [2], which contains all necessary
+> changes in both TF-A and OP-TEE build.
+> $ repo sync
+> $ cd build
+> $ make toolchains
+> $ make ARM_FIRMWARE_HANDOFF=y all
+> Copy and rename your DT overlay blob as 'qemu_v8.dtb' into out/bin
+> $ make ARM_FIRMWARE_HANDOFF=y run-only
+>
+> [1] Add Transfer Entry for Devicetree Overlay
+> https://github.com/FirmwareHandoff/firmware_handoff/pull/74
+>
+> [2] https://github.com/raymo200915/optee_manifest/blob/dt_overlay_handoff/qemu_v8.xml
+>
+> Raymond Mao (6):
+>    bloblist: add blob type for DT overlay
+>    bloblist: add helper functions
+>    bloblist: fix a potential negative size for memmove
+>    bloblist: add API for applying blobs with specified tag
+>    fdtdec: apply DT overlays from bloblist
+>    configs: Select OF_LIBFDT_OVERLAY to hand over DTO via bloblist
+>
+>   common/bloblist.c                       | 67 ++++++++++++++++++++-
+>   configs/qemu_arm64_defconfig            |  1 +
+>   configs/vexpress_fvp_bloblist_defconfig |  1 +
+>   include/bloblist.h                      | 34 ++++++++++-
+>   lib/fdtdec.c                            | 80 +++++++++++++++++++++++++
+>   5 files changed, 181 insertions(+), 2 deletions(-)
+>
