@@ -4,53 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B5C9F8E497
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 02:22:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDF1FF8E4A0
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 02:35:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CDCD8425F;
-	Fri, 17 Apr 2026 04:21:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 4F9AB8423D;
+	Fri, 17 Apr 2026 04:35:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="S20Subld";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A52984262; Fri, 17 Apr 2026 04:21:44 +0200 (CEST)
-Received: from Atcsqr.andestech.com (unknown [60.248.187.195])
+ id 095FF8423D; Fri, 17 Apr 2026 04:35:30 +0200 (CEST)
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E63E08425F
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 04:21:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
- header.from=andestech.com
+ by phobos.denx.de (Postfix) with ESMTPS id B86F484262
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 04:35:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTP id 63H2LBPa015786;
- Fri, 17 Apr 2026 10:21:11 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS34.andestech.com
- (10.0.1.134) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 17 Apr
- 2026 10:21:10 +0800
-From: Leo Yu-Chi Liang <ycliang@andestech.com>
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: 14b178ca3a0611f1ae70033691e9ac7d-20260417
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
+ bh=I10BH8lGCHJU35vNSUpmcMszqm8YmAi3flhRnVh4gEg=; 
+ b=S20SubldoM2IfbtGro85geX83BopSzcA31NkL8OlmIQDW8AHjZoeQI/vrFafLcVsyCmAl6D7PhGaRRSEm1ZQOP3oqaA0AahAwc29kAsr1qs9BFOSMhL6hYJr8qmwrUdUFsNniqk4mprwzOiqnBImpTx8CioV2NkGRfhztZynSgw=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.12, REQID:5328f1b0-24cb-425a-a126-45dbf8849497, IP:0,
+ U
+ RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+ release,TS:0
+X-CID-META: VersionHash:e7bac3a, CLOUDID:d33af624-cb5c-4236-a89a-9a7fb20c9bc4,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:102|836|865|888|898,TC:-5,Content:0|
+ 15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0,OSI:0
+ ,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: 14b178ca3a0611f1ae70033691e9ac7d-20260417
+Received: from mtkmbs14n1.mediatek.inc [(172.21.101.75)] by
+ mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 1129617273; Fri, 17 Apr 2026 10:35:21 +0800
+Received: from mtkmbs11n2.mediatek.inc (172.21.101.187) by
+ MTKMBS09N2.mediatek.inc (172.21.101.94) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Fri, 17 Apr 2026 10:35:20 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs11n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.2562.29 via Frontend Transport; Fri, 17 Apr 2026 10:35:19 +0800
+From: Weijie Gao <weijie.gao@mediatek.com>
 To: <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Vignesh R <vigneshr@ti.com>, "Takahiro
- Kuwano" <takahiro.kuwano@infineon.com>, Jagan Teki
- <jagan@amarulasolutions.com>, <ycliang@andestech.com>
-Subject: [PATCH 4/8] spi: atcspi200: Fix double stop call and simplify
- transfer loop
-Date: Fri, 17 Apr 2026 10:21:00 +0800
-Message-ID: <20260417022104.3973576-5-ycliang@andestech.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260417022104.3973576-1-ycliang@andestech.com>
-References: <20260417022104.3973576-1-ycliang@andestech.com>
+CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
+ <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, Weijie
+ Gao <weijie.gao@mediatek.com>
+Subject: [PATCH 0/3] Add support for ubi environment to auto create volumes
+Date: Fri, 17 Apr 2026 10:35:14 +0800
+Message-ID: <cover.1776392312.git.weijie.gao@mediatek.com>
+X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Originating-IP: [10.0.15.183]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 63H2LBPa015786
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,122 +85,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-- Remove duplicate atcspi200_hw_stop() call after the while loop;
-  the stop inside the loop already handles the final chunk
-- Simplify the CHUNK_SIZE=1 transfer logic: since CHUNK_SIZE was
-  always 1, remove the constant and inline its value, eliminating
-  dead num_bytes/rf_cnt/rx_bytes variables
-- Simplify atcspi200_rx_byte() to void (return value was unused)
-- Add clarifying comment on the multi-chunk address increment
+This patch series expose more ubi helpers to allow the ubi environment to
+create ubi env volumes if not exist.
 
-Fixes: b41e12e73b2 ("spi: Add SPI driver for Andestech ATCSPI200 controller")
-Signed-off-by: Leo Yu-Chi Liang <ycliang@andestech.com>
----
- drivers/spi/atcspi200_spi.c | 41 ++++++++++++-------------------------
- 1 file changed, 13 insertions(+), 28 deletions(-)
+Weijie Gao (3):
+  cmd: ubi: expose more APIs to public
+  cmd: ubi: allow creating volume with all free spaces in ubi_create_vol
+  env: ubi: add support to create environment volume if it does not
+    exist
 
-diff --git a/drivers/spi/atcspi200_spi.c b/drivers/spi/atcspi200_spi.c
-index 38345a88260..0e7f7b83081 100644
---- a/drivers/spi/atcspi200_spi.c
-+++ b/drivers/spi/atcspi200_spi.c
-@@ -18,7 +18,6 @@
- #include <linux/bitops.h>
- 
- #define MAX_TRANSFER_LEN	512
--#define CHUNK_SIZE		1
- #define SPI_TIMEOUT_MS		1000
- #define SPI_DEF_SRC_CLK		100000000
- #define SPI_DEF_MAX_CLK		40000000
-@@ -188,26 +187,22 @@ static void atcspi200_tx_byte(struct atcspi200_priv *priv, const void *dout)
- 	atcspi200_write(priv, ATCSPI200_REG_DATA, *(u8 *)dout);
- }
- 
--static int atcspi200_rx_byte(struct atcspi200_priv *priv, void *din,
--			     unsigned int bytes)
-+static void atcspi200_rx_byte(struct atcspi200_priv *priv, void *din)
- {
- 	*(u8 *)din = (u8)atcspi200_read(priv, ATCSPI200_REG_DATA);
--	return bytes;
- }
- 
- static int atcspi200_hw_xfer(struct atcspi200_priv *priv,
- 			     unsigned int bitlen, const void *data_out,
- 			     void *data_in, unsigned long flags)
- {
--	unsigned int event, rx_bytes;
-+	unsigned int event;
- 	const void *dout = NULL;
- 	void *din = NULL;
- 	int num_blks, num_chunks, max_tran_len, tran_len;
--	int num_bytes;
- 	u8 *cmd_buf = priv->cmd_buf;
- 	size_t cmd_len = priv->cmd_len;
- 	unsigned long data_len = bitlen / 8;
--	int rf_cnt;
- 	int ret = 0;
- 	unsigned long start;
- 
-@@ -250,10 +245,7 @@ static int atcspi200_hw_xfer(struct atcspi200_priv *priv,
- 	while (num_chunks--) {
- 		tran_len = min((size_t)data_len, (size_t)max_tran_len);
- 		priv->tran_len = tran_len;
--		num_blks = DIV_ROUND_UP(tran_len, CHUNK_SIZE);
--		num_bytes = tran_len % CHUNK_SIZE;
--		if (num_bytes == 0)
--			num_bytes = CHUNK_SIZE;
-+		num_blks = tran_len;
- 		start = get_timer(0);
- 		atcspi200_hw_start(priv);
- 
-@@ -267,30 +259,24 @@ static int atcspi200_hw_xfer(struct atcspi200_priv *priv,
- 
- 			if ((event & TXEPTY) && data_out) {
- 				atcspi200_tx_byte(priv, dout);
--				num_blks -= CHUNK_SIZE;
--				dout += CHUNK_SIZE;
-+				num_blks--;
-+				dout++;
- 			}
- 
- 			if ((event & RXFVE_MASK) && data_in) {
--				rf_cnt = FIELD_GET(RXFVE_MASK, event);
--				if (rf_cnt >= CHUNK_SIZE)
--					rx_bytes = CHUNK_SIZE;
--				else if (num_blks == 1 &&
--					 rf_cnt == num_bytes)
--					rx_bytes = num_bytes;
--				else
--					continue;
--
--				if (atcspi200_rx_byte(priv, din, rx_bytes) ==
--				    rx_bytes) {
--					num_blks -= CHUNK_SIZE;
--					din = (unsigned char *)din + rx_bytes;
--				}
-+				atcspi200_rx_byte(priv, din);
-+				num_blks--;
-+				din = (unsigned char *)din + 1;
- 			}
- 		}
- 
- 		data_len -= tran_len;
- 		if (data_len) {
-+			/*
-+			 * Increment SPI NOR read address in cmd buffer
-+			 * for multi-chunk transfers (3-byte big-endian
-+			 * address at cmd_buf[1..3]).
-+			 */
- 			priv->cmd_buf[1] += ((tran_len >> 16) & 0xff);
- 			priv->cmd_buf[2] += ((tran_len >> 8) & 0xff);
- 			priv->cmd_buf[3] += (tran_len & 0xff);
-@@ -298,7 +284,6 @@ static int atcspi200_hw_xfer(struct atcspi200_priv *priv,
- 		}
- 		ret = atcspi200_hw_stop(priv);
- 	}
--	ret = atcspi200_hw_stop(priv);
- 
- 	return ret;
- }
+ cmd/ubi.c           | 16 ++++++++++------
+ env/Kconfig         |  6 ++++++
+ env/ubi.c           | 20 ++++++++++++++++++++
+ include/ubi_uboot.h |  5 +++++
+ 4 files changed, 41 insertions(+), 6 deletions(-)
+
 -- 
-2.34.1
+2.45.2
 
