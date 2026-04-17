@@ -4,95 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58295F433D6
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 08:15:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0716F8D74A
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 08:18:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9D058423F;
-	Fri, 17 Apr 2026 10:15:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6746084223;
+	Fri, 17 Apr 2026 10:18:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MM5w8DGr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ow7Ont23";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 929A08422D; Fri, 17 Apr 2026 10:15:18 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 82E4284228; Fri, 17 Apr 2026 10:18:03 +0200 (CEST)
+Received: from mail-yx1-xb130.google.com (mail-yx1-xb130.google.com
+ [IPv6:2607:f8b0:4864:20::b130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B66178423F
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 10:15:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9A8483FC0
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 10:18:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-43d03db7f87so222499f8f.3
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 01:15:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb130.google.com with SMTP id
+ 956f58d0204a3-651c5d525f6so403838d50.3
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 01:18:00 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776413880; cv=none;
+ d=google.com; s=arc-20240605;
+ b=dUm2VGwCQ5GcusyRexARLssM/duA/zPgr46fKdYsO32Ddim2ib3rXNtUsZfUgEnPHg
+ Y+QcN9skcUBY5NVFfZ9hQtwBCohtzMLTxddDocdQ54Glvk33+EDyjQc9WzFiQb5d596g
+ RdWUC+rL87TbCGbU2hhFOl88Sde+iHd+fub9uQCgpfJA+QhzNJtXxZnmN5+w6lgC7QAV
+ sDUW+DJ0JOndSuttsr6VF8mJL4DBhOLBUpMBGf+UiMeF35Qzxk/nTXPFpm1f6v46VwvN
+ 8O3UQlv0T1dZQP5/jRAE8EFEvaCYKZJMtg1uxfRhY54ypAsuo4Ky3o6bVMW0YcmUZHFf
+ QV/g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=urWwqCIqjuNkbTkDSoSg/IV5uqX10pE3oZZM9GmQbys=;
+ fh=IkuYRYtWIVK1RIQT9qro7ygMRZ7BBqXmQotIu4AFxso=;
+ b=J63lxXni1RGG2Fz3J6UMWJgdJZ3z40zgmoZ0HEi2u/HJXq5gRyFCm1mjdYEldaL4dA
+ rWvApyCNzmhSdSJyrkHhT2SxtcYlpfuaLkhF7dMfhwOnB4/2DI4ys52uEP3F8S3AWLmY
+ 0XUSWz3OdmMsWupJ61kgJW+lW1SRP+oDNODij5yG80N59S4NAFV+y01k/IS7DZvEyYW6
+ bK1NVxt1BZFOPCb447dH2jiiBp1AD3XmqMdXEhKfno/xhqow34sodJGdy4pRKTd6k+wd
+ E+l3pbUo4z+uyiQw/ccpnG9F98JFEE480cmQWJi61ZdWX0B47wI28dG66isjGsDu+H/K
+ g42w==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776413716; x=1777018516; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=WqEKbwxbqtGB21Uu1wb7rSiQoCasfq4Ry2S3cwkU7IQ=;
- b=MM5w8DGrZiqgbjlTcxhJfELxZb8vDZ3sOe6+vIOwf6hTtVENvKVdYDRMF2qOC9xwmg
- 63X8JBcW2trZ3Ea3XaHu59dZtl9f+4+GWt2yn0KwNE0XJpT5uJpw3YKwyD40ub+AJ9mv
- fG3rpFuLCiyT0PW0MJ2iVALGYrfIIYW+DWHW3joK81SwSdG2e3S8eCUFCyIn7FH4U826
- 0smEFODHcKyx0kwhXGyxokblTf054dXFV56aVC4ZDKWhoJNWR7R8VdLbeeLp4gUvMl7h
- uIUb4uZqH6jy5MlWtrJ8zUMnX/L5q85c6XuOF0mXZybWT5UHqTLr+WHHERFjoaEFqbiP
- QVaw==
+ d=linaro.org; s=google; t=1776413879; x=1777018679; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=urWwqCIqjuNkbTkDSoSg/IV5uqX10pE3oZZM9GmQbys=;
+ b=ow7Ont23AMiPnGi2CdDuwycESLakllaRdOXbOfAq+1fh1XgPo/TRUtyItVhps1Fvym
+ CBl9ZSuh852QlTNqNWruM+f4OT0jKe3K9SqSSe47GABLHiaj2J47miHcbDoVaaDhgasn
+ D+2vbnOLbio/5kMT3ib7E2ugMlCqK9vJc6zH6aWtkkrDbrfDZx6PwohCLTKwztpTX4Z6
+ 0nZLlCeb49twW4HSV7zPrLz4JDI+waSJaeeFdXsOdm1gy3DTtm5WV2NUIdHvL6PJgZ/j
+ gncejyrWd44ZyJ+8zGcFYjgGVhYzjywlpi9k+S+LZfu1z1p4Z7huyAVjjvNiuoARfyKS
+ dTbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776413716; x=1777018516;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WqEKbwxbqtGB21Uu1wb7rSiQoCasfq4Ry2S3cwkU7IQ=;
- b=eQOm0mRp2D6vgH64LZZ9Pywr0wUBZ2b3uN3aNKMdhna6uCvI165q5wz7bVt5TeSGoV
- pIu+0fbGYZQr0JKEdRiO5z3tVYDjrxte64W0s4u8TAt1X/QAQlS6q393toZbS7auKdvi
- /nEO59WPQEjXSdRbFCjIC7UcMvpZanMJVyslA7Vkb7dTzR/dVbqFQSGF5waSzExMySAp
- 1wnzp01UARNieLdo6zcjnbkfKEJQWJ+Aj3aCi5qdMQSvjyo9fZ+x46hDnOZS1twJS5Zg
- T86dkipcP+eU149Qg6ouqOsY7NXsBeHaRSFaKigBA8JDqGTGf7m5i3iySemZ6NLedy/s
- sWKw==
+ d=1e100.net; s=20251104; t=1776413880; x=1777018680;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=urWwqCIqjuNkbTkDSoSg/IV5uqX10pE3oZZM9GmQbys=;
+ b=BCT1xmvmM1IZQkPLwzYnEn3TAMHM8jvetwCRS5Gy4eA3oZdiWCAB4uqJKKkqET2dXL
+ TqI3FKylaEwGvime0G0s+qRuNExuRh8468zELm49W+4ijPAJUMBvmHDGSbqbdMv5NcFx
+ 4PaTAoXhT7Nl0JyEVN19dbNVtV5d9xRcLZjXV8WNysbcr9lmmVR6GgtF980xkSroBTHr
+ GOv7zwWHUCa1uXEdWIyUVu9+h36rk3ARsV/xhrQnM/t2kLyqYcW/ZOm+PjB8Q71P/EUi
+ bCvwCnpQoasIjpwXB1V6zsy39srb1fEuQGi0tKXaSj0BhWOJT0wUWPrUhHYKRXXKL3Ae
+ JZiA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9avUJji8hOar1Z4IXjm/I1OpfaPws1PhMDLCC26etDpa82rYF/fiPf1TRJYFs9VhsE2lhOwH4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzlc+6Uhxzlolac3DiSnSsTf2d/3r/aKl3IjrLvDLeaHiW5G7r9
- Qzy0mxPbttZ3TJWPdyps7PSWkYqPuh7MCh8E0tnSbVgY7xR9RJZhPekW
-X-Gm-Gg: AeBDieukwuueXntjNAcBTvZ6JmbrtolcenNODu2OPs+A7VFMeIKf9Q5Ng0fMcKT2V6A
- 9fkMLZf5zs1VWldttl6CWzrMJEQU4LkHI3zMTr4U8rC8QEP9+xuHDIJmFFmAWZ3aEBSEwVIGEQN
- vin+gA41z7yw3bvBRLfO1tfw3d7v2fwoHxZh056YyFM2UTHj24CYp/OTmR5Ml7DdKdRZpDsaM0x
- i8xvBsI9jKL+UfO5aJFXqGIpAtCyhywEfdd8hjRm1DywnW6LadrVzrvA/zGryp5LlXonHnoeAMV
- wBvwEuiMYDLHS+kkvgwODM/+4Juogya6HCBFbcJ2bap+HYA8UMohdio5CWCVnAaCMfI4bSoTABR
- 5aJR44iF0HuIJRGl/MlFG9GU+gdcUqUNL8icfJQQLUBhzeJoL4DqX/9gKrv3KcQ1RJQxt3YM/Zg
- hugomo6qX5QCBDnp04CIfsj2oRFez9d11kDOm8H4hTm5qF+MkAFezBfgA4qQrM2l0TEm/jRl64m
- tNHz1JKJmHepkxMRfVe2p1jeao=
-X-Received: by 2002:a5d:5d02:0:b0:43d:77c6:be6d with SMTP id
- ffacd0b85a97d-43fe3db39c6mr2476453f8f.7.1776413716044; 
- Fri, 17 Apr 2026 01:15:16 -0700 (PDT)
-Received: from [192.168.1.3] (host-87-2-163-213.retail.telecomitalia.it.
- [87.2.163.213]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43fe4e3a7b4sm2537984f8f.22.2026.04.17.01.15.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 17 Apr 2026 01:15:15 -0700 (PDT)
-Message-ID: <0747c1f1-5f49-42d2-a624-a6da6c47d2d9@gmail.com>
-Date: Fri, 17 Apr 2026 10:15:15 +0200
+ AFNElJ/vE9sMJh1yE8gmU8QZEWj8d+Pgu9HeuCsGcAsIUG9H85kO7zdMzLc4OS/mpvB/ZbEw/g6o5xw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwL/++L3LNANC3we9OzsstLmOfawEljGmM/q/t6DLK1ehulYgu0
+ ftXFKBEI190YqRk7OBJ1ezKQ8LNN882VvraWAjPck3NwdOjwCcQ4uNK1yXYAvgLbF8fZAmKnLCZ
+ HprtBUdEwLhLUuRfMEYBPAGYUd4AB54nk3UNf51Ircw==
+X-Gm-Gg: AeBDieteU3OW3Oby8RnQ7B6y8KeLQoGU8QMrunH0PYSnKsOmhWtkkR9uBCni+m6RErG
+ dcjqlQleTMHC/6t11gOCmlCwczP6QRLYzUKo+PWTce06wqN2MnGTTJhnKvZHnxrkbrwrzvVCYwi
+ CHz7JNbwYqNxXBBN6XExtPuZ1f+k+SJGK6Nsceash9TZ9WtZfsKNA4ALl5OKpVQeHI0KbIJ1/VZ
+ zI0zrfitqOPpvmLokHDMZHl0C1pvA9P8OW9d+wqcU+46ck++nT4bz23BOcFXf+HaOV8vdQQ8N8G
+ bkboQV1omrvtuZS8PQetKBVo1z/Zce7Rjqbw6ce34g8cN6Rzx6fBHD1oHAT6KH7J7AGRAX+tEx8
+ 7bCjpEGa5glQUMMDyqDwHSWO/BLAQGSsxI0KH5aE9/b/mJH/4LeFK7eAxAsJMh/jn+jlXZv8jID
+ taKrFNQ6U2eeaJc4FrdMTixau5fopPPiTW0kKOrksAK0E01c1KgMVeX2INsApPfKddBCNbLXORl
+ 6D/wg7heI3Gp8a4xBikBH3JHcQwLuwsTA42lY4i63UhVp7MPJ/UvYkU7NHnfBpPo5BbrMfmK1qw
+ amylE+NR9al4QwnQmyQmRKFpoOz8v52N3dj4llcLhw0btBl8vEbfUkpzYC48gqIBHg==
+X-Received: by 2002:a53:ad4b:0:b0:651:bb0b:700f with SMTP id
+ 956f58d0204a3-65310a6d20emr1208249d50.47.1776413879481; Fri, 17 Apr 2026
+ 01:17:59 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] toradex: tdx-cfg-block: add verdin imx95 0226,
- 0227 and 0228 pid4
-From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@nabladev.com>,
- Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team"
- <uboot-imx@nxp.com>, Francesco Dolcini <francesco.dolcini@toradex.com>
-Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Peng Fan <peng.fan@nxp.com>, Alice Guo <alice.guo@nxp.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-References: <20260417071546.1610330-1-ghidoliemanuele@gmail.com>
- <20260417071546.1610330-4-ghidoliemanuele@gmail.com>
-Content-Language: en-US
-In-Reply-To: <20260417071546.1610330-4-ghidoliemanuele@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260413203555.1990337-1-rs@ti.com>
+ <20260413203555.1990337-5-rs@ti.com>
+ <CAC_iWjJOzdFwAppsCKwFMf_uJ0TGi3JpSzcj+9iWegLryha5-A@mail.gmail.com>
+ <DHUV0ZQ8Y0KC.1HCMIW6TK4K9A@ti.com>
+In-Reply-To: <DHUV0ZQ8Y0KC.1HCMIW6TK4K9A@ti.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 17 Apr 2026 11:17:23 +0300
+X-Gm-Features: AQROBzDDXB9Sa7vIcy0D-if-GoC--4dJzb-g0HSE3sZlD3eWW-x2as0nzpmeS74
+Message-ID: <CAC_iWjKtRMz1Vr7VXyw56cij=zhcSRfOdGO=XGui3uYGcp1x7Q@mail.gmail.com>
+Subject: Re: [PATCHv3 4/6] efi_selftest_memory: check for duplicates first
+To: Randolph Sapp <rs@ti.com>
+Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
+ Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
+ afd@ti.com, xypron.glpk@gmx.de, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,12 +122,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 16 Apr 2026 at 23:26, Randolph Sapp <rs@ti.com> wrote:
+>
+> On Thu Apr 16, 2026 at 3:55 AM CDT, Ilias Apalodimas wrote:
+> > On Mon, 13 Apr 2026 at 23:36, <rs@ti.com> wrote:
+> >>
+> >> From: Randolph Sapp <rs@ti.com>
+> >>
+> >> Check for duplicate memory mappings before reporting any incorrect
+> >> attributes. Could be that second allocation has the correct type while
+> >> the first doesn't. Knowing there is a duplicate in this scenario is
+> >> more helpful than just reporting the first mismatch.
+> >>
+> >> Signed-off-by: Randolph Sapp <rs@ti.com>
+> >
+> > [...]
+> >
+> >>                         }
+> >> -                       found = true;
+> >> -                       if (memory_type != entry->type) {
+> >> -                               efi_st_error
+> >> -                                       ("Wrong memory type %d, expected %d\n",
+> >> -                                        entry->type, memory_type);
+> >> -                               return EFI_ST_FAILURE;
+> >> -                       }
+> >> +                       match = entry;
+> >>                 }
+> >>         }
+> >> -       if (!found) {
+> >> +       if (!match) {
+> >>                 efi_st_error("Missing memory map entry\n");
+> >>                 return EFI_ST_FAILURE;
+> >>         }
+> >> +       if (memory_type != match->type) {
+> >> +               efi_st_error("Wrong memory type %d, expected %d\n", match->type,
+> >> +                            memory_type);
+> >> +               return EFI_ST_FAILURE;
+> >
+> > This check is now outside the loop and only checks for the last entry.
+> > If you wan't to split the fucntionality, don't we need a loop over all
+> > memory areas and the type?
+> >
+> > Thanks
+> > /Ilias
+>
+> Not necessarily. At the end of the day we can only really raise one exception
+> anyway. I just think informing the user about a duplicate should take priority
+> above mismatched attributes. It hints at a bigger issue.
 
+I dont mind about the priority. We can swap that over. But with this
+patch we will check for less problems than we currently do.
 
-On 4/17/26 09:13, Emanuele Ghidoli wrote:
-> From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
-
-Apologies, I accidentally omitted this Reviewed-by tag.
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
+Thanks
+/Ilias
+>
+> >> +       }
+> >>         return EFI_ST_SUCCESS;
+> >>  }
+> >>
+> >> --
+> >> 2.53.0
+> >>
+>
