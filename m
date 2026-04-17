@@ -4,141 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0652F8DFE3
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 08:31:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E79D2F8DFE9
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 08:41:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66B7584258;
-	Fri, 17 Apr 2026 10:31:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 568FB83EEF;
+	Fri, 17 Apr 2026 10:41:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="dIab2Nc4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="w8Teb50C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B49684258; Fri, 17 Apr 2026 10:31:56 +0200 (CEST)
-Received: from CH1PR05CU001.outbound.protection.outlook.com
- (mail-northcentralusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9401584214; Fri, 17 Apr 2026 10:41:57 +0200 (CEST)
+Received: from mail-yx1-xb130.google.com (mail-yx1-xb130.google.com
+ [IPv6:2607:f8b0:4864:20::b130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C24D841C2
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 10:31:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EBE3B83B99
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 10:41:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=IkmmIx4UagEMB4ix9/Nwgoi4IBMjV1dWDmPI6hkllqWeuYQpau0P4PezgpxcNJeCQX24Fjuazf0DpJqhPoO0pKC2EmImFEkAA+IBT/5TErRSmwwLvPzyHI4kNnVrhxytixy/igT3/jTF4Ahrd5LsHc265zoWgNmFNjqq/K8JS7vsX61yANf787fZpGei1cz2uK0HvpAvqRAEkVjEUb2rlj27HoPLt5CP3lpHbASmRIYU2aIUBLmOc/8DtkZzfd1ZIlPwWSbRxn9WqaUyt0D5QvKbGUCPUYVioomxthudTZz5N8+13n9eE3ZWPHbkVrGnVuzPR0Osl6+UAIJGuujsJA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=M9esJl5CGtKNj6r/mDhrymTHLuTeTwW9vewxqkMS4tc=;
- b=YCCc9kU/WDoxaLQRAkzEPBuyg1PXAdylqONPha7Ppu94O/1RT0DvWMi2XBiRGr5JAdw793rB6HnnOzd2uTUgW0vZvE+JtoVl2PmEEnod9tetxtPNLTYG+e7BOKuSW5I0ZeDmK+4UElzusaACUTlHJugrWTBF8D5Q4z0VSWMFj8CXCx1KCz0rWfqBZEGG73UWg5b8lJ0q5H21mvuqvxxbcSnWNEDahxrRlThykl2r3Mj2RGKrLs46aT37yZjAeNqeU310QjfMPUoFNeie0oqbqq4qXGYusoa3EFb6JK6rw/Qi/Y4j9yLlDdoy8AidJP9yVo0aIp9BCCYyQJwlnV68WA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=M9esJl5CGtKNj6r/mDhrymTHLuTeTwW9vewxqkMS4tc=;
- b=dIab2Nc4kmYVMHqCFgxmr/jLNgNnB086hpO0kPhRb0hj4qdf+aDwZ5fUa2VkYuaqTik07NxwWgG2vkskST/XglkwJwWjOfIMoGeBq02siubSCSi0mkmFNh33lEKhA3mb7luhGf8tchiJrkNkNmYWimhqfht6E9OQgBUX8OEcVCG0krrJzIdAcS+rfJLZKyQvegK7U8f26T4MLJVsTBxLJS2B0WrfCW3DDmHPIrniuac3tXUPv1GTF7ixwhLE4GhFzDw6AWqd6aNlkPf7XgmRkgGld65ETcDoj9I25AMj+oC5lB2cUtMNejrsT+CMMWMxSh+eVgbY8fe6mP+PvOuHrw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
- by CH8PR03MB8297.namprd03.prod.outlook.com (2603:10b6:610:2ba::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.25; Fri, 17 Apr
- 2026 08:31:49 +0000
-Received: from LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::efa9:4b97:3b4a:8235]) by LV8PR03MB8137.namprd03.prod.outlook.com
- ([fe80::efa9:4b97:3b4a:8235%6]) with mapi id 15.20.9818.017; Fri, 17 Apr 2026
- 08:31:49 +0000
-Message-ID: <c9bbd137-0416-4ba5-87ac-8cbe5de15e48@altera.com>
-Date: Fri, 17 Apr 2026 16:31:41 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: socfpga: Setting the image magic value to romcode
- initswstate register
-To: dinesh.maniyam@altera.com, u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
- Kok Kiang <kok.kiang.hea@altera.com>, Boon Khai <boon.khai.ng@altera.com>,
- Alif <alif.zakuan.yuslaimi@altera.com>,
- Tien Fong Chee <tien.fong.chee@intel.com>
-References: <20260325054411.13071-1-dinesh.maniyam@altera.com>
-Content-Language: en-US
-From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-In-Reply-To: <20260325054411.13071-1-dinesh.maniyam@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SI2PR02CA0049.apcprd02.prod.outlook.com
- (2603:1096:4:196::7) To LV8PR03MB8137.namprd03.prod.outlook.com
- (2603:10b6:408:295::8)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb130.google.com with SMTP id
+ 956f58d0204a3-651b4d09141so662400d50.1
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 01:41:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776415314; cv=none;
+ d=google.com; s=arc-20240605;
+ b=LKlHrav4gAgtJs0MbXZHtPPlwqIxOgZDNFT1CXQXF9JLj1FFPnjYsSrLdij7RVghAF
+ fr4+KWdCw22Awrh/C0sudW8WTpoQkLHT87zF9d71aJ6DDNh3Mg3oGhuVf3QZjDzyRcKu
+ 4xwKHxua/6wQdE/VECn1ZCHhUroAZwFbjNfmixnjJcTN4xXH5Pfbo6FrWOEtkjpW273r
+ T2DiGwbrBmO5LWdHYubZfV6TbBfgdsfqjxJl2rXdFhQIyOuIDHXkganJ+uBR87pgHDc9
+ pgfUH0M8QKDQ9PlF9vdTrmWPo/srwac5t0G+THJz5j6QQa41p7clbLk9LrpDqtYDD/s8
+ t4TQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=gnw/n1QleqCuYQTkpqGqVsrzPlsdqjrQYbeeUscLrbE=;
+ fh=VYMhwsKdAQQ2hTCPvnZFflohSyFHwDIIUqKJEcPNysk=;
+ b=IbZGpkEjsnfX+b8x3YdNaUxJ9Gta/zKlKCtYFaj1R/7FO41VvyFooRQw8ki93ooH5o
+ GcrTwEalXsO/1+cvfsDXbHE5G8tvURhHBO9LXMwPmxjeLK09P5AOc1wpdtSt5sRicWQd
+ AwqkEcg50wn8LfqhZZCeimAJohvHBgNODndty1cpJiixT/FjB5AWRIe+C4cN4Aa59pB5
+ Hh5JmBThmhpizSz0SiHOsflMIO2tw5I4PcHpmK1JxSemBbvLJy+bV80oQoP0Xswz0mq0
+ GVzG93ofG+UIgKTn19VViGLdq0+5dRXJgqRNhpbxATe0RRsmkiZGEaQmTgWcmKJN7hi0
+ zbBQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1776415314; x=1777020114; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=gnw/n1QleqCuYQTkpqGqVsrzPlsdqjrQYbeeUscLrbE=;
+ b=w8Teb50C22tuWG3p7iar8IyQ47aI0EHNHVIFUJQcDLr5aHiyDtT57v4/3At/FHUihj
+ 3bQ5+lDPL76kDVcJux/LB7UBlfZy7jrxxXk9MjVUwSX4rmzigBZIv9ZH4ZDq3GnnD+2Q
+ cs2nKJcWNz7KiroGn5Om++w2C7SCJivxdB6Ig1SSW3G2acp59da5RNXKTjB97rBR50pY
+ 6Oy29+iKwuPtZycVnDFMxGRacHqYvWnMw3cEfJyjxeowJNoSAbyVRTxRH9Jut1tBXoLu
+ vHSnJ1YSY+klEnUwXvGjTfQvbbmbStoS0bpMt52Op7Rr5DrV9tN//fcN4ctQHXV6gBK6
+ UCvg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776415314; x=1777020114;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gnw/n1QleqCuYQTkpqGqVsrzPlsdqjrQYbeeUscLrbE=;
+ b=lK87JDCludkq7QOrKUwXj4c+jY+ThSXyZJbOBoyM3KPpAKy/MNIn1cUQ4mC4X0yfPm
+ Bo1V2zyzCn18pNJu+hqzvCz6Tacx2PBzL6xfTiD7h8EnlyaCNLNqixPG+eeVapW+LJjq
+ 30wrgdjQUiPLxpoQ958vqDPQLSBCU9S/xDbGyFojDOWflHr4xh8MIyNa7xooFxABoh1q
+ H4ScYk0A559dP8YKWNruGDmCCdNJUKiHQmBAJUNwIlOjTgk79dmi8zRwoPECtDAJLQ7M
+ fqJvG8AekGcFpUTfVLqKCQCPiyTjvr4Nrpq4Hja56Ltee/1aYZnM76HqnN6M5pJUXUfP
+ rWXg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/MjMNyD8hSwsKYzzekMaWxaerRLRJhD560c6IUj5JqceueXCjrIpgLwXN1XD5V+BRn0M+pFlE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxPHwgaMPGrS4w5n4YXKh+UN2wCUB7bBEe51QQPHer3CciUiK8S
+ NgEZiKNC2UbrBnQ9/ka7UCi//t9r2j7e9glDI/shjXcqM1Ne1TMGP1FZ7TequzbgYp90E0c5nYx
+ AsjLDhwb/4MVfqZNJFQq/gAXxW/BRyZoEoG8Wk5trNA==
+X-Gm-Gg: AeBDies2MKNHWUhK533OOTArC/WQTiq+GIALZvecYdi0LGJMHcN151DZDBRJUB8JXxZ
+ 4ESyBATtW2WE8JMMIvlzEyg99Qetpwj/zcJUKxzNNkfq0BVIf+XgxirO3r9eXif2se2cQIpeD8g
+ FxMhRn/2oAPdAeErALMNxBS2+Cl9Hcojt0LG25DP7CDmZE6lS/Q6koBrPZi6lD40ahK38cta+9K
+ PLuSXC36g0CiexUGHFEpK+Jp2j12YXsREjayqsrEF+xoxpIUfF7cLZRcjdXj5G+WuM263tvopE1
+ oQaDvqIQMK7L3jOPa159HCBzxlXLebpz41xzi+rwkl9IRBm81NxN7irlpcvM9J7iwBQ7sHSXeGn
+ 4JkgEnO+YFF20V/5FePcNey6pEs9JQWFDo6nhCKnjunh0WAxB03+u1xut6KZ9Wm/m6VSKVUFVXt
+ wsW3BTmQEpFkNwoSGkneD0LNegxNJma1QQuptSEt2RoL+nBTZqRg3XnY+ojVo/rltA3rXsY/ChK
+ h4yNfb8t3wJKeejUR2ERBlLBK0snKfYusbL6xtq//WO/bkj9ClE2SKbxPkxX4NE2aDTUoABNpxD
+ ijqaK8J1XgG1oC5AGtTRtRdxmbTccCNL20FwuB73w2Tk2TkstEb/gwI=
+X-Received: by 2002:a05:690e:480c:b0:651:b61a:4b5f with SMTP id
+ 956f58d0204a3-65311989a3amr711436d50.17.1776415313569; Fri, 17 Apr 2026
+ 01:41:53 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV8PR03MB8137:EE_|CH8PR03MB8297:EE_
-X-MS-Office365-Filtering-Correlation-Id: f390b8d2-5114-4374-6bd2-08de9c5bc4a6
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|366016|55112099003|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: wlqRO63iqYE+HumCjAAqWrlyOuFJ587hUAAo3TZf9rHTHBRJgSpnLuKyRC3VXaiaKJUjAxXcb6VsDE5SydXOjieXyEr1GtoWCNoh7jVCtl/8/wRlwXdGF4IMLa1SgCfAoECgJT1ym67Ez/vm9V9sMq9wCmDlgGYe4MwRt+URU+cjd7Qj92Npq4LERenv2fuv6mOfP66+/gGy+czTMVM8IzGPOpETNWaWVeRx1S7FT8pxRSjD4Nwac9GIIhxTAe6ysXzFOAwcjH9sDTnrVc6uStPxPI2JEivVnzBZ3LtoIs6NW5eRS8VHO6dzxAav/MQNTwQmd/Zi9AHQe4K/6mE/rZGYaZbpu3fQ2lzrcIfNXiYFdRWeVv3rDVI1qjfgnLBGrEaZPzIKCeoMWSgrSt0prVLhvqoZ87DdT47KtZyT74KbUNeCRi/JxLax5iV7P43iZKcUl/tJgtBeDCYe5Bsr9CLQk4xqclsxqecOs/fCRn2KZ9FHKWl7xf+x6g3uad4yRONrHoB5n616pGB/iGcIedjjRWVeS4qyyAdIknwHADs9xA9Io91QEvyX5ad9+y0vbP0EIw10PUOnVHhax46pMUl1OUI0d5CX6nTRB3ekYdFvzcIhEe5z/j8s9Jfl6ADaHlcy7vDD54QYEdWZbEeAaW4vM+ZBrILGhMZWAL5MPhwIP4D6QW9rDLXt3dGCWHJRf2pNXIk/uR1rxkbsKeW5Ycqjg9kj2QFx2PpoU/JS5cg=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(55112099003)(56012099003)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?a3J1SjJlZ1RQdHBKRDdtekNSR3ZYOHYyYWZpYTBGMlVQT25jOEZhYWMyQk8x?=
- =?utf-8?B?ODhSanVZQUVGano4TE1aMWM3b0NIYjRFeWNPckFMRS9mZC9xZDkvZnJyRThC?=
- =?utf-8?B?dm8xY3NrZmxvUG5GM1ZYSFFxbHo5RHgxRDdHRGZxM09teWU0Y21vNjdHQmNl?=
- =?utf-8?B?Rm4zSnVkdWpVZ2ZtUllxUEovYTlrNjRrcHIva3dXVWlOVUJ5WnJvbDF1cFlw?=
- =?utf-8?B?d0l5OHp3K0xwVExRL0pxN0dhZEhWQ2VoK2hNQ1hvYjdhRGV4RFBIb2FDaXdn?=
- =?utf-8?B?NGlCWUQ5WU9TUml0cm4wNWx6SW45K1RLTWl1QjRiMkdHVUVRRWdSb2ZtVXRO?=
- =?utf-8?B?akJSQTZZazdiN08xOGFVcHMza2Jqb3oyS1lHNHdRQ2lPeldtYmlqSThTSTAr?=
- =?utf-8?B?eFBKeDVCcW9oVkJ3Tzk5TUFzSW5vTDRQVzNKRkltZkZnaHpBWmI0K3gyaTVj?=
- =?utf-8?B?cEU1Q1V3YU5ySWVsdHBoODlHUUZHTGpaOGJEMi80N0w4Q3M5a1pYcmNyaGRX?=
- =?utf-8?B?am11T3EwbEhuTndHdkFKbTlNdFQ5aE5scUpReGZrZThGbXIyVGpqVm0wTExy?=
- =?utf-8?B?VnVqNkpXQytsd0Q2UTlPbDFaU1ZFN0k4c3M5amNnMXVWSGZXSm9uYmlab2VS?=
- =?utf-8?B?bVpSRG9IYXdNUnZQeGh0R2hhWi9rUGkyOUZoWndCZlRFbHVUWGxCbFNBMVBC?=
- =?utf-8?B?UXRCS0F2SGNQMVZtUzc5QkVDNk5GNWd6YVB4OXoxamltOWgwb1VQNFRoSTZZ?=
- =?utf-8?B?bDJMWmp0TlF2VnAySTROY1Z4Z2gzTmRwUkRxQTIveDliUkN3YVR0Z3RkWlk5?=
- =?utf-8?B?d3pHZ0RHNjhkYjRidW9DVFZFaVllenpLZGxHbi84SFJFNktqV0V3bmFZbk9Y?=
- =?utf-8?B?VFBWN05jUHVQb0V4alpVcStGWVc4RTUyeHFhU1Z5OWV4eXRrYytkNzFOY0RL?=
- =?utf-8?B?dkZUK1Y4cEIwVlpVSlNxMFBWSmpFZ3JIU2t4SFBFOWVMUGpvbnZPS2lodkpC?=
- =?utf-8?B?Qks0UFJHN2gyTDBVYTlUU0dTZHNDaGQ2NURrd0ljWE9GWEt6VTkrNU9QMmtU?=
- =?utf-8?B?SUJpWFdSYkFUR3BheXF3UVVTbDFZbW93SUxRWUdQL01SUy9VbUxxNTVTWStS?=
- =?utf-8?B?Y0x3cVlMOXU1MGdMR3VoRHhmVGt6NThGMXgvSVdUQ3pPUHVSeThid2lVejZq?=
- =?utf-8?B?SzhJWitpSWNCeWRvYlNzMFRpNWg4N0lYZDNUR1VISllaNENGZzR2TzhYck1l?=
- =?utf-8?B?U094Q1kzRVZQZ1R4SjhLZ2dvcXZnQ3ozakFqLzhiK2NqcWZsYXVZdURIcTI1?=
- =?utf-8?B?YSsrYWNqQ2pTZkwzdURjejdueDQxMTdicm9ERDZnb25NSFZ3WVlFdHMxT0d0?=
- =?utf-8?B?TFRmU3JCdzM5ZU4rSUFsVThyU2Z1Z2tqRDdCR0FZWGp5bHVVaXh5WEhaZXow?=
- =?utf-8?B?Z0ZNTWJJUnIxV09IVlRFVjZieG50WnMrcVR3dlEwMk9BU0pITTJJM2FZYTdo?=
- =?utf-8?B?My9aSzk2cE5Rc0NTU0VhWVNhblZucG93YU53azgwNUNKMUV5Q2dBQ2Z5UjR6?=
- =?utf-8?B?eWl5TlQxNnlBelVwdDFtRndNOXNqVGV1NjIrYUVEcjZPUVJLdXAyTHRlUjZu?=
- =?utf-8?B?eFJsN0JBankyajd0MXZYeC9iR2xQdi9XOFVjQzVOM2hxMmd1K0EraElFR3Mx?=
- =?utf-8?B?cTYwOUd1UXlFZWFDSGIzSFpKb0ljRkxGYU9JZFVWeGVOKzZlZVo1VWI2Vzc4?=
- =?utf-8?B?L09MejRBK0NLYTJtbXhDY1RmWlNxcGZkdGdNdmZmWVdvK09ZNGJDaXRFVzJS?=
- =?utf-8?B?bmQ1S3N1Y24xN2NOZ1F2Nk9tQkx5dGROQ3loRzQ5WHNiek01eUxIS1dIdFh4?=
- =?utf-8?B?NlFKQUFaaTd5aUE2aW54T0Z0cmR1VmQ3WGg2R1JMNVlJS3pweHplVXBKOExw?=
- =?utf-8?B?TVBabjFIdlRoc1A4OEtzZ0tSalJsek9YRHJpMEl1K1M3UHdHODhlQThNUTdE?=
- =?utf-8?B?Z25rMXc5UE1ObXJ0bjBFVHRxVmRTWVlicExUZ3hMdG5UbUpUR0doYytSV3Qr?=
- =?utf-8?B?VUpmUWR4QW9rK1EybmoxdU1mRVNRaks2dFBVbk5yS1Fna01oKzd6NlBoY0dE?=
- =?utf-8?B?MEUzNnVWLzNKakY4V1BoNzJkQnlMcXhqTTNaanY3SGRTOFMzM084S1l4aWw2?=
- =?utf-8?B?d0RCWERqUThTQWxEVUpnMkk2MGRFRk56OWlEdzFLMnBYNXh5eDVyWkhncVJN?=
- =?utf-8?B?WWJvTW1SNXNFaDl1VFJEOTFpNUtuZTdVNEVNTGJyZ3A2ZExsUjcrU2JlM3lF?=
- =?utf-8?B?bkx6c1pOc0J0a0l5c2p0M09hOHpEMktwMWlEcFFqaHRieWdkM013VHpTYk5N?=
- =?utf-8?Q?5qZBICgWoS9SqWXI=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f390b8d2-5114-4374-6bd2-08de9c5bc4a6
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Apr 2026 08:31:49.3359 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qvAe9NiqVzMC3LHlz13OD0ONjm+rmpn3dlOclTI11MTZ43lMRmyWGFSb03YyVWHpXik6ctFCEkTeFN3KhQGRpDKFlmtpYN9HD6v2ApcV5HY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH8PR03MB8297
+References: <20260331191853.44549-1-gary@garyguo.net>
+ <76933f99-d73a-43e2-be5e-0b765e8679b2@gmx.de>
+In-Reply-To: <76933f99-d73a-43e2-be5e-0b765e8679b2@gmx.de>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 17 Apr 2026 11:41:17 +0300
+X-Gm-Features: AQROBzBjYeONew93s6dGM3z0QXt0qjTbGy98d3pzsQDbvsgO7ip5Xn3HFVShTPQ
+Message-ID: <CAC_iWjK2KtL=Gdx-sMb8EPa_VuZsGJ2pyrmdGGkVkjz7TkQinw@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: support EFI_OS_INDICATIONS_BOOT_TO_FW_UI
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+Cc: Gary Guo <gary@garyguo.net>, u-boot@lists.denx.de, 
+ David Zang <davidzangcs@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>,
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Martyn Welch <martyn.welch@collabora.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,36 +122,172 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 25/3/2026 1:44 pm, dinesh.maniyam@altera.com wrote:
-> From: Dinesh Maniyam <dinesh.maniyam@altera.com>
+Hi Heinrich
+
+On Fri, 17 Apr 2026 at 08:59, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> The romcode_initswstate register need to be set with FSBL_IMAGE_IS_VALID
-> value if the current FSBL image is found valid, otherwise BootROM will
-> look for next subsequent valid FSBL image when warm reset is triggered.
+> On 3/31/26 21:18, Gary Guo wrote:
+> > EFI variable OsIndications have a bit EFI_OS_INDICATIONS_BOOT_TO_FW_UI
+> > indicating that the OS (or next stage bootloader) requests booting into
+> > firmware UI instead of continuing autoboot process.
+> >
+> > Support it by having autoboot.c asking EFI bootmgr if boot should continue,
+> > which checks and clear the bit (so the next boot continue as normal).
+> >
+> > With this change, systemd-boot will show a "Reboot Into Firmware Interface"
+> > option which will be able to drop back to u-boot. This can be useful if
+> > bootdelay is configured to be -2.
+> >
+> > Signed-off-by: Gary Guo <gary@garyguo.net>
+> > ---
+> >   common/autoboot.c            |  4 +++-
+> >   include/efi_loader.h         |  2 ++
+> >   lib/efi_loader/efi_bootmgr.c | 45 ++++++++++++++++++++++++++++++++++++
+> >   lib/efi_loader/efi_setup.c   |  4 ++++
+> >   4 files changed, 54 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/common/autoboot.c b/common/autoboot.c
+> > index 1783ef92c94c..b889407612dc 100644
+> > --- a/common/autoboot.c
+> > +++ b/common/autoboot.c
+> > @@ -11,6 +11,7 @@
+> >   #include <cli.h>
+> >   #include <command.h>
+> >   #include <console.h>
+> > +#include <efi_loader.h>
+> >   #include <env.h>
+> >   #include <errno.h>
+> >   #include <fdtdec.h>
+> > @@ -503,7 +504,8 @@ void autoboot_command(const char *s)
+> >   {
+> >       debug("### main_loop: bootcmd=\"%s\"\n", s ? s : "<UNDEFINED>");
+> >
+> > -     if (s && (stored_bootdelay == -2 ||
+> > +     if (s && !(IS_ENABLED(CONFIG_EFI_BOOTMGR) && efi_should_abort_autoboot()) &&
 >
-> Signed-off-by: Tien Fong Chee <tien.fong.chee@intel.com>
-> Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
-> ---
->   arch/arm/mach-socfpga/include/mach/system_manager_arria10.h | 2 ++
->   1 file changed, 2 insertions(+)
+> I do not understand why the logic should depend on CONFIG_EFI_BOOTMGR
+> instead of CONFIG_EFI_LOADER. It seems applicable whenever we support UEFI.
+
+That's a good point, but we install some protocols that are useful for
+booting distros only when we boot via the bootmgr e.g the load_initrd
+stuff. OTOH grub, systemd etc install their own version of the protocl
+nowadays so I don't mind if we allow it in the generic case as well.
+
+
 >
-> diff --git a/arch/arm/mach-socfpga/include/mach/system_manager_arria10.h b/arch/arm/mach-socfpga/include/mach/system_manager_arria10.h
-> index 0afe63e647e..346db78aff2 100644
-> --- a/arch/arm/mach-socfpga/include/mach/system_manager_arria10.h
-> +++ b/arch/arm/mach-socfpga/include/mach/system_manager_arria10.h
-> @@ -37,6 +37,8 @@
->   #define SYSMGR_A10_ISW_HANDOFF_BASE		0x230
->   #define SYSMGR_A10_ISW_HANDOFF_7		0x1c
->   
-> +#define SYSMGR_A10_ROMCODE_INITSWSTATE		0x20C
-> +
->   #define SYSMGR_SDMMC				SYSMGR_A10_SDMMC
->   
->   #define SYSMGR_SDMMC_SMPLSEL_SHIFT	4
+>
+> > +         (stored_bootdelay == -2 ||
+> >                (stored_bootdelay != -1 && !abortboot(stored_bootdelay)))) {
+> >               bool lock;
+> >               int prev;
+> > diff --git a/include/efi_loader.h b/include/efi_loader.h
+> > index 3e70ac070550..449697ad13b3 100644
+> > --- a/include/efi_loader.h
+> > +++ b/include/efi_loader.h
+> > @@ -583,6 +583,8 @@ efi_status_t efi_bootmgr_get_unused_bootoption(u16 *buf,
+> >   efi_status_t efi_bootmgr_update_media_device_boot_option(void);
+> >   /* Delete selected boot option */
+> >   efi_status_t efi_bootmgr_delete_boot_option(u16 boot_index);
+> > +/* Check if autoboot should be aborted based on EFI vars */
+> > +bool efi_should_abort_autoboot(void);
+> >   /* Invoke EFI boot manager */
+> >   efi_status_t efi_bootmgr_run(void *fdt);
+> >   /* search the boot option index in BootOrder */
+> > diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> > index a687f4d8e85c..39f255ac9de4 100644
+> > --- a/lib/efi_loader/efi_bootmgr.c
+> > +++ b/lib/efi_loader/efi_bootmgr.c
+> > @@ -1290,6 +1290,51 @@ out:
+> >       return ret;
+> >   }
+> >
+> > +/**
+> > + * efi_should_abort_autoboot() - check if autoboot should be aborted per EFI vars
+>
+> Please, mention the relevant flag.
+>
+> > + *
+> > + * Return:   true if autoboot should abort
+> > + */
+> > +bool efi_should_abort_autoboot(void)
+> > +{
+> > +     efi_status_t ret;
+> > +     u64 os_indications = 0x0;
+> > +     efi_uintn_t size;
+> > +     efi_status_t r;
+> > +
+> > +     /* Initialize EFI drivers */
+> > +     ret = efi_init_obj_list();
+>
+> @Ilias:
+>
+> Essentially this ends up in always running  efi_init_obj_list() if we
+> have UEFI enabled.
+>
+> Shouldn't we then replace all invocations of efi_init_obj_list() by a
+> single call after preboot but before EVT_POST_PREBOOT?
 
+I agree with you here and if we do that, your point above to depend on
+EFI_LOADER instead of the bootmanager makes more sense.
+Tom keeping in mind that more and more distros work out of the box
+with U-Boot, can we bite the bullet and always init the subsystem
+early now ?
+If people don't plan to boot with EFI that can always disable the EFI_LOADER.
 
-Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
-
-Best regards,
-Tien Fong
-
+Thanks
+/Ilias
+>
+> Best regards
+>
+> Heinrich
+>
+> > +     if (ret != EFI_SUCCESS) {
+> > +             log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
+> > +                     ret & ~EFI_ERROR_MASK);
+> > +             return false;
+> > +     }
+> > +
+> > +     size = sizeof(os_indications);
+> > +     r = efi_get_variable_int(u"OsIndications", &efi_global_variable_guid,
+> > +                              NULL, &size, &os_indications, NULL);
+> > +     if (r != EFI_SUCCESS || size != sizeof(os_indications))
+> > +             return false;
+> > +
+> > +     if (!(os_indications & EFI_OS_INDICATIONS_BOOT_TO_FW_UI))
+> > +             return false;
+> > +
+> > +     /* Clear the BOOT_TO_FW_UI so next boot returns to normal */
+> > +     os_indications &= ~EFI_OS_INDICATIONS_BOOT_TO_FW_UI;
+> > +     r = efi_set_variable_int(u"OsIndications",
+> > +                              &efi_global_variable_guid,
+> > +                              EFI_VARIABLE_NON_VOLATILE |
+> > +                              EFI_VARIABLE_BOOTSERVICE_ACCESS |
+> > +                              EFI_VARIABLE_RUNTIME_ACCESS,
+> > +                              sizeof(os_indications),
+> > +                              &os_indications, false);
+> > +
+> > +     if (r != EFI_SUCCESS)
+> > +             log_err("Setting %ls failed\n", L"OsIndications");
+> > +
+> > +     return true;
+> > +}
+> > +
+> >   /**
+> >    * efi_bootmgr_run() - execute EFI boot manager
+> >    * @fdt:    Flat device tree
+> > diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+> > index f06cf49e4435..0ad02e9fe0dd 100644
+> > --- a/lib/efi_loader/efi_setup.c
+> > +++ b/lib/efi_loader/efi_setup.c
+> > @@ -156,6 +156,10 @@ static efi_status_t efi_init_os_indications(void)
+> >   {
+> >       u64 os_indications_supported = 0;
+> >
+> > +     if (IS_ENABLED(CONFIG_EFI_BOOTMGR))
+> > +             os_indications_supported |=
+> > +                     EFI_OS_INDICATIONS_BOOT_TO_FW_UI;
+> > +
+> >       if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
+> >               os_indications_supported |=
+> >                       EFI_OS_INDICATIONS_CAPSULE_RESULT_VAR_SUPPORTED;
+>
