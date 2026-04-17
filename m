@@ -4,83 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6025F43696
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 18:30:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 880BBF99C63
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 20:12:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2FD28425F;
-	Fri, 17 Apr 2026 20:29:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D97A28420C;
+	Fri, 17 Apr 2026 22:12:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TB7fnTZG";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="suBSESt3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60F0D83FC0; Fri, 17 Apr 2026 20:29:44 +0200 (CEST)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id F29B584214; Fri, 17 Apr 2026 22:12:24 +0200 (CEST)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBEC08425F
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 20:29:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C207A841C2
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 22:12:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-46aa216a65aso605083b6e.1
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 11:29:41 -0700 (PDT)
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-40f0e14b9f9so749496fac.1
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 13:12:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1776450580; x=1777055380; darn=lists.denx.de;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1776456741; x=1777061541;
+ darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=K3QOPJH+VU46UVmkjoaNrZrfcGOvm1SumtVTGKUoKIk=;
- b=TB7fnTZGrjpxwXIC5JaKYDAKrXEDxzhYW8aRW2fH0lIxRI86EezOjtQPPSLQvmCVW5
- OTcqyw4+0QCXvqLh1YUCHmA1RuKEnQDEOe9RbJsZuUZBEPGTMfFk/C30bUf0AKfZPlRs
- mM77vNrq/3OfjQ4vXz0yT0Wug6DERuWK5oLMQ=
+ bh=X9vA9L1YXz4jtzAxh1X2NdL7Wg2YOud3blXYAFGxILU=;
+ b=suBSESt3SbbvPsGIeq1v36cvVdGJW2tCfpcK2apy0L/hfzP8zxBdqopvPgieaWXcHg
+ cPX3i4phnCpVYkirLxPl/d9ctHpp0aOF6wvvaSkDBptU9NpKI/W6Agv4drHubczkPyFT
+ iQ9/4ScnpOBlVZS13y8lmMRoMlz2Tj2zkM6wWigZYIrfUXJ6YQlbjQ0te2pED8l0g4qv
+ iiqikgF8TS4sfdv3RHRB1l2GSHO9KR4IJq79chJ8F7UQY0ndkOZJE9NBSD0nGjx3EkZU
+ fK6ScXx94IA4anYiBQ7tXRjQh+4pT6ob7D2GR4rUySpWG1cNYQAzx7trqEPcd+5PGSOt
+ qg9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776450580; x=1777055380;
+ d=1e100.net; s=20251104; t=1776456741; x=1777061541;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=K3QOPJH+VU46UVmkjoaNrZrfcGOvm1SumtVTGKUoKIk=;
- b=CML+ho/UQwUqf4KCp+2jw7UPiKbfreQPYvVlD7cpSi7KayxNhj/EAxHcupSP2QXjBr
- DrB6tFZP7mnelC0DSUAkNfD92szQ9vsMDgAdqQb7V/g+mh1SzIYI+ATzlCUJyxjuDmJA
- XzqMz9dgYNuX33ztwaZ89UbY3oYaMopvx6maJadnWHPMTZKAWhGDZuXEcG5ZLPYS5CRY
- kWoswTtPfuhTbq356Vu+CNkHIEuMRO03M4bbEYrUxNvY0BdwxuxeZqaoqD5gjpHY31Xk
- LFqYTW8wCXAZMVi+YtSMrCvBb+QrI7xDcUAYfYqz9KLJ3+3Fir1RKgdj4pc9v5Vi2+yO
- NBfQ==
-X-Gm-Message-State: AOJu0Yy/7xTbHRg/d5Hp7wGBkyy62YqUNNgg+ZDsU2vnqBq/2s0cT+nw
- IOJ6L0E4rDON0LEkg+QLm/mCC81N1XHUjcbsslRB25ElpwZlhvWvR+fO9qa+6Rks9fs=
-X-Gm-Gg: AeBDietfW9rmyCRlM68j4x0Seg4lySMJBMQgieeeyHVuUob8009IXe+G4sestdiCosc
- pssKxJGixE+UIYTo4s61715Oa8GhA+Y6ShNAjoUebZJKam072GsIlR0CnVGwsntKik13FAZN14Z
- fOjMmsMtRN3vyCOX7T6KQABHlNibvlCJc+jeu3zQ6zAbOfamdxVUGOvF1a2vhq4vvTF26XknK+Q
- 0VkFJMjKQOQNSJwRtEcVjaeFAspFYrXwHt+XskaGuhHoy31SLwkHoAvT2NbRtKEztegESh3/Jqm
- LX+pM1qXlB2h5TQ7PtSiVV/aVqz3o9LBoBEf7ggv3GkBBkgBHn+TqdkBJ4xasiyVnXarZl6rEWD
- 4gqiFng/8jDVX9xm78zG8zBxIrZshhS58zNaMk+NRt0/r3wIBIwNBTP/SqXhL6Z3uCSZiZXZrpk
- btKV7VXbMpzEeEIxRriNjfg04uV77MfkTte3IFT4oY/Cs6TsokaELB0Sh+fXb7ZuDW/GQPSYYOh
- guUl79IgYHmRM1IPV4PQS/O2ecxjKUfJ8IRpbCervAdUeQ68xvf6jwMOp28
-X-Received: by 2002:a05:6808:6909:b0:472:b43a:3063 with SMTP id
- 5614622812f47-4799c9cf2f2mr1966811b6e.38.1776450580444; 
- Fri, 17 Apr 2026 11:29:40 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-42b9ac6f2a3sm2004954fac.16.2026.04.17.11.29.39
+ bh=X9vA9L1YXz4jtzAxh1X2NdL7Wg2YOud3blXYAFGxILU=;
+ b=VnmQaLqGh64m4mO/kgDHOzy0zLHuFJCsH5OOpNmcZLfQccWDTyW0+DFLY7oTKr0Av9
+ NmqD5yCIqoztbOxEf1h7Pkhh7du/Pd5Gm+LDriksgDTG9+KzmKhkClBCouLxnPBnVK55
+ M9A/NS3mODsWUH2mxdGc9tnG0DrjY9w/B2UgIjsVbWRemf2eZBS6IImgkrsjHDKC8kND
+ ZBlhX5pqbpsDJHZeEooK5Y2o8qaSzlTnQBAxUe+FJXaUCewHvg2AD5HUr9wtZRccCtDo
+ Yz0LCNWmN10SQuoOCrzDf4eE/CEG3ei70t52kGLtiT2oe2lwxTg/fPqtmXVpVEi3Acq2
+ /M2A==
+X-Gm-Message-State: AOJu0Yx8tpgGCKKaz8LQB1p07C9IhcYnktQWsl4OTd3G9RpJDcQrMUMn
+ fX3HbCngfRJZC7m48+bLSx8AW73oCtghL1ZkfnH9DoZPtbnohjb0wTAl1uTL2bWbRhA=
+X-Gm-Gg: AeBDietieFEAsGOo0ndRseuxI/g60apzBx+7teNFX1hs4kEkvAnzQb2a6HlfPel7XwP
+ ppARZpnGezGnmSCxctJsaRWbBLwmlsUJmOcGtBjtGe6f8MYlkdOuvXuI0VM5mCR5ASm8c0H75z/
+ fBNTjqI6kGWx1h3JyhBUwu8G/bj347NTEJDHxpThweW79gz/8NUjMoYc2Lq4Pst5bZHc2scpGZx
+ e0dmLPORrxC3b60lshT6Np0a3nGbEr8NiraiQZek0Bh1rZPt3s0jiWd2zCuQKSFTqcQHVD1P/2f
+ jT/wn2y65u3dTvbF3NkKUDdWXxXXlu3iJi9mD0q+r7c+DeeV1gquVQvHSeEEoVyf2YXahDotLKK
+ iKLKZPLPH9rhrb90ncsdYPiJfQwKOGzxJ10lCZn8FZb42TRb7IQn38ks/DiE7byIxZhl6kw45iA
+ 2z3HQe+01NWUh86c7HXuBRKu1/5MHqg1wvKoLo4pZgZPNRLnbO
+X-Received: by 2002:a05:6870:c262:b0:423:b5a9:888d with SMTP id
+ 586e51a60fabf-42adedb8fadmr2659954fac.37.1776456741422; 
+ Fri, 17 Apr 2026 13:12:21 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:ef27:3314:b886:cd3])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-42b93046dcesm2297218fac.3.2026.04.17.13.12.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Apr 2026 11:29:40 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: simon.glass@canonical.com, 
- Philippe Reynes <philippe.reynes@softathome.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20260415151759.85015-1-philippe.reynes@softathome.com>
-References: <20260415151759.85015-1-philippe.reynes@softathome.com>
-Subject: Re: [PATCH] sandbox: enable FIT_SIGNATURE
-Message-Id: <177645057978.805241.14897793283482926132.b4-ty@konsulko.com>
-Date: Fri, 17 Apr 2026 12:29:39 -0600
+ Fri, 17 Apr 2026 13:12:20 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+To: u-boot@lists.denx.de, Weijie Gao <weijie.gao@mediatek.com>
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>
+In-Reply-To: <20260410082332.102522-1-weijie.gao@mediatek.com>
+References: <20260410082332.102522-1-weijie.gao@mediatek.com>
+Subject: Re: [PATCH] pinctrl: mediatek: mt7981: fix some register offsets
+ and fields
+Message-Id: <177645672728.59267.9743943375579286397.b4-ty@b4>
+Date: Fri, 17 Apr 2026 15:12:07 -0500
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=355; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=9lXnmWEb6Mk9vW3tekhOXldSXsb1nWNEsimWHp2y8xM=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp4pQdxQbOjIUARnbhPl30G4v0VinIruk8gJ1Rw
+ N+FdWekDLCJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaeKUHRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A5F4H/RubxssGRRqDzhXXlaRod519jj3lfBhmDjya7gD
+ +IbyB3wF/TDYzArwJGsBNcmHrPFyXjVjuuVV7zDfsTknlORQocTdhDiHNf3W1qm56ECFAXK9ApF
+ 3fYSQyUfVJdw7XIGZsbC+wrOhMRkfmX5drLQUlv9u2bcrI85Vt8oCXtmbWQR+YvILPW5aVEXEc8
+ j7ipmq56p41WVO4nf6eeCM1vvqJjXarcGE0Z1j7fE0zE1P6f4V+KDWxWVL/2oU+RaSjUrrH2hlm
+ QuQjrHoQ7DEVSIjyYAFNGNAQUg5FKIgfd0SUDJeSI2+fLwNvKBcXlJT7tM9xkfKizszj+77b76T
+ 3XAI=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,22 +114,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 15 Apr 2026 17:17:59 +0200, Philippe Reynes wrote:
+On Fri, 10 Apr 2026 16:23:32 +0800, Weijie Gao wrote:
+> pinctrl: mediatek: mt7981: fix some register offsets and fields
 
-> Since commit d09256283f72 ("FIT: Image pre-load signature
-> support must select not depends on FIT_SIGNATURE")
-> FIT_SIGNATURE is disabled on sandbox. But this config
-> is used on many fit signature tests. So FIT_SIGNATURE should
-> be enabled on sandbox.
-> 
-> 
-> [...]
+Applied to mediatek-for-master, thanks!
 
-Applied to u-boot/master, thanks!
+[1/1] pinctrl: mediatek: mt7981: fix some register offsets and fields
+      commit: 5576522219d40ffeb7918dd04263f5d925df9d1d
 
-[1/1] sandbox: enable FIT_SIGNATURE
-      commit: 30429c8bd2f18d33862cc41fe520f7459fa4bfbd
+Best regards,
 -- 
-Tom
-
+David Lechner <dlechner@baylibre.com>
 
