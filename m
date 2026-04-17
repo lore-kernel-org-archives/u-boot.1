@@ -4,121 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8E81F436AD
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 14:14:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86E2FF436B8
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 15:44:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8475F84314;
-	Fri, 17 Apr 2026 16:14:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id D90B284258;
+	Fri, 17 Apr 2026 17:44:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="VluFCmLW";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="ecUxBd/u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A594842D2; Fri, 17 Apr 2026 16:14:36 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id E40D384286; Fri, 17 Apr 2026 17:44:53 +0200 (CEST)
+Received: from bali.collaboradmins.com (bali.collaboradmins.com
+ [IPv6:2a01:4f8:201:9162::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3B2E8427F
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 16:14:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FF6384246
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 17:44:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ye.li@nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bjxgmLx6mlS4VZaUjudhJqMIUd/vM5LCcDy1jKS5pVkZQvv6xQDcAIyZVIId1fBIveBTov3PrWQn4DHh4Rscryxn4NSTgjYDvhlNPvTBHH7eTZRisPDhdsEh/O1RRQHGWGA20F7s6F64Gqp7ikPmneJkjr9ELKavpItH+E54fFLFlMVVd8HqFAK6/qpaHYRlho0FlcjYwhJC+nBmViWxHNGcMFwm4sDbw+qkk6e2J4wc1yfl+4tkw5cBrronO2OpuyQp4FMJtFIvjIuKsWBemaXOta6w+bocJN6f/3bMqfqUQqqgStcn+w2/U1DWb4OqSM1/zWJoqGlDz6lCzipuZg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cEiVzVrwuWx/NwAqj73J7yqTQACi2G7RvHNainI951Q=;
- b=xdIc+UjhIucYt9xkHaif0zjGG3kxNHBb+4mzAa1LMMpM0IlNQb2Y3WYW6GqA4LoZIOlR1dukGnApmZuLXLJuYQrUSjR+3zZiKknU3229TinNquwXzexL8sLXzOeIK+kj4uLfWl7kRmP9HVvoHMXv5jpj0buhkgPTeEAggfcpYFyvzvqLWCEt1MbXWx6J21DEbHRJSEYFPDYgxXGQceoW3B4py2cgfInOeIudeR0tmPRkqwAt14BDhTkX50GXRpEmO6z84TdgMObF2sagEXVpRIMFkRWjHs/EtL2YsA+Ro2TDnaM43m4hpiYRC3FapuQ9BmDZy+JyUPHATOFvRPKK5g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cEiVzVrwuWx/NwAqj73J7yqTQACi2G7RvHNainI951Q=;
- b=VluFCmLWYH3uAvYl0tZHFCdIa05+IanQsoXH6DbiQSQFOKWVrGIc7XbE7n930LiO8EnzbUBkdeEtB7Ondh/3AyHXYhwyK4OizsHOOTkWUtAbY1IdNrhoDuDLthgpx5qJIbvq+jRoqRZ1eqGnsbll370aRRuUtjMG43uf8rz9JiMefB2jZ9g69rXwLkBB6N0g1b/lYI3UnBqwFzWHe6i3bjikVEXSfd81CeRXLFXGtqnxRcoJ86BxlDAEX6ovZaUixFKzWgwa+kSpjsR3Js1EDkUU9yTvM9iFBtxsmS/JAAavCKycO3sAZWrnp4ZQrAYJlOspmaZJV/35Rbjb/wublQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-Received: from AS4PR04MB9436.eurprd04.prod.outlook.com (2603:10a6:20b:4ec::5)
- by VI0PR04MB10879.eurprd04.prod.outlook.com (2603:10a6:800:25c::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.25; Fri, 17 Apr
- 2026 14:14:30 +0000
-Received: from AS4PR04MB9436.eurprd04.prod.outlook.com
- ([fe80::5732:4a55:2959:6da1]) by AS4PR04MB9436.eurprd04.prod.outlook.com
- ([fe80::5732:4a55:2959:6da1%4]) with mapi id 15.20.9818.023; Fri, 17 Apr 2026
- 14:14:30 +0000
-From: Ye Li <ye.li@nxp.com>
-To: peng.fan@nxp.com,
-	peng.fan@oss.nxp.com,
-	u-boot@lists.denx.de
-Cc: ye.li@oss.nxp.com,
-	uboot-imx@nxp.com
-Subject: [PATCH 1/2] arm: dts: layerscape: Fix DT build warning in SPI nodes
-Date: Fri, 17 Apr 2026 22:16:36 +0800
-Message-Id: <20260417141637.1490695-1-ye.li@nxp.com>
-X-Mailer: git-send-email 2.37.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SI2PR02CA0050.apcprd02.prod.outlook.com
- (2603:1096:4:196::11) To AS4PR04MB9436.eurprd04.prod.outlook.com
- (2603:10a6:20b:4ec::5)
+ dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=arnaud.ferraris@collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1776440690;
+ bh=VIqQ4w8hO5+TeBIodSY3jMWkZ0QZFwa+5IaoQtdCTk8=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=ecUxBd/u7822kCt3oak2hItGYzALDXFvmvALediM9igyXXWu2MUT58dL06rbMGU28
+ 5WonLEM3kNpm1xlsf5KJFX1g0tWdIHUqGVTN+to31fUNzj2ftdoHvBH2tePm15iNHY
+ xut8DUDhknXviyDQmhT1PobXlR2/ofDlssNpTXizuLXRl0iRjX5hyk8fsLJa1d+0CK
+ OvwmU8j3L2mytJNkO5CD6aqtfUAL6LVElAj+ZAlZA4cC4N50zh2DFh94ULDO9c0Bgf
+ CTDymyz27JjlP20AJDr4GaRsDFsiuRDb0OWcjPAJbHTML1gZmmFLwyxnRmJcqqplb5
+ tQWRz9BLGCqZA==
+Received: from [100.64.1.83] (unknown [100.64.1.83])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: aferraris)
+ by bali.collaboradmins.com (Postfix) with ESMTPSA id 3F47117E1317;
+ Fri, 17 Apr 2026 17:44:50 +0200 (CEST)
+Message-ID: <61e06e0d-0968-491d-90df-86a69f3c5978@collabora.com>
+Date: Fri, 17 Apr 2026 17:44:49 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4PR04MB9436:EE_|VI0PR04MB10879:EE_
-X-MS-Office365-Filtering-Correlation-Id: 04f40e69-0575-4666-a428-08de9c8ba418
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|52116014|376014|42112799006|19092799006|1800799024|18002099003|56012099003|38350700014;
-X-Microsoft-Antispam-Message-Info: 1OrTpszBRlXCzapMtV1bsUGlle4YQBPdPy08cEVHDqMZC0etqV+hnoLRRN0VvJqsDCzoi6HWFAns7HYp/WHqptlZ39t9/Qn4RrgPfi4xTF0ka3gig6loJXbva71o5IyDhd48fB8SmHqChzqmZFAh29YeMsSwIOfYuqo/h+ji/BenZnsrHKMLe3OdW2FkWmqHgQkSZC5qU9U8euBwgVXx06Bolt+E7q6DGKDRoduC0cLiFV1ZdTmzj6331f7o8p0PKgnxLWQK0fG79ME5fv7kzhHgTlwQGYIdPxNB2Bzy1bvWY/3in81MtRxk8+iYUMG4b/QeT1m1BZifdsp3Nr8WtDGhUjoA/tz6qpyYgQhhfdvgV6BN/PJBuFcUJiLW4cGXHGRiGBjugOmyBOt62vwoCq1soWJMXRp7vn4fP/p2QSXWqh0Vx1qqZFZUkqt6f2FSS+C+u/iDHMpvW5upZx3sHf1uH4sDBGQlGU6U0HOO1TBalrMxTotzVx74hxOCMxllI4zZUIkydg06xlBgXDOrzzvnF28VmnUYLzU2aJwETyN5+4eV4eFOAEVHPQvvdGepbCAmZsPt7MkFgiuvzk4gK79eglbAkqmF05HLhDgvbDPV0zUpp/oWNClMrCQFY3uj8xLHevDrD++efIH1RsjzU8tR3X0AlsFFzfK4n+gZZhRgWNVo8EwM2wBlWwXicmmEpHqFbpISOFkK+AdRg8qlMKcIr50GpCGvm/5EuySNe9MxLtNVyluduYfHh+K3V3CRNzby7eETOJxkQTv6gcltMsHN6lkrmPlX/f3uBk1Bvxs=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4PR04MB9436.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(52116014)(376014)(42112799006)(19092799006)(1800799024)(18002099003)(56012099003)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?TB0DVxAz/9PzUuAGtvrsFKGd7a8q16H4HFqpIEYjZQQ//v1AObgxxjFKB1QT?=
- =?us-ascii?Q?h4ASQS1YAbu+TZQB42b/AurCEfwwHYNqmK8W7EFW2nNFb1IPDPItWNmfdNli?=
- =?us-ascii?Q?LcBvSPDIfRp6zmXZXGoUsdkKJtkx1QszQmeRAv2vjC6JpFamUsSjkBbckbGK?=
- =?us-ascii?Q?iYGWL4D951AV7mRwbruXaA/s4r4UX1w4LO9fN/DGj424Ig+Xj+qOqwdVldhm?=
- =?us-ascii?Q?IhrVSdv/iBFe9SVVcW+ng9LBGiwwExktOqgiYsiDysvforEt0gFr1c5hM4mk?=
- =?us-ascii?Q?Vxi/PPOr14Mm7Wx40ZtC1zyunaIAkGZViNBmyKiWiwq3rDRgMnd/1pM35utV?=
- =?us-ascii?Q?Xp4gZkCbI7EjxEM/itzKDPRxVz31nHcjaQZjXejugJDUFB06IAygFmCC3bSV?=
- =?us-ascii?Q?y4/Gs7w/3Gaviqss9aTlQj6gVusAd9J/OS5QurUSq1fsQIcFjPjktXyXeuMu?=
- =?us-ascii?Q?FLnPfM2/N8PeRgD6xrPbHd65Bgq+2puCAFGB4LEhscFa+pJiu/8mN0/AoPM8?=
- =?us-ascii?Q?XxCSlEpUQwonTXtNGmHQHZ0okS9JEyLg+NsoGe0EB8AWsYz1GLyG+tvqJRDg?=
- =?us-ascii?Q?PL7xeymrPbTcpyAmV7jlPSw3PZC1iKzS4yF52vgVePbeOBkVirXFqElR6lOq?=
- =?us-ascii?Q?kPHbJ7bK+oCJ/5mw95rKCQ6/eru6ryVbeJjum1+eImTVA6nJpqRJZuOC0U9b?=
- =?us-ascii?Q?LZJp7daGullDMndaKsqYx3maFTykTES0M2Aa12rENGDbUm3yHBFsTJ/aAp5T?=
- =?us-ascii?Q?yN01GY5nahWd7I/Twg3TVrUv7HP1VDofvO0HM3TNVR8V9i49d+yuhZhxQswG?=
- =?us-ascii?Q?WXJ6NhsRrbY20HHcDy18porCcqJ+/b2SN1jKXJOxNwXkEuN8Ig2liSpz98af?=
- =?us-ascii?Q?yuqXBs7utoTX3mRbPfBTL/p2wmYFoVletc4/2KkbvbEbsJYWy743SR1YR/5I?=
- =?us-ascii?Q?6MBeBdI7o1UqQPAhMJ++ZOgecgs3Fh7+ztSw0RRXqrXs5pjc6pUEFdLurRqj?=
- =?us-ascii?Q?0bvTqimXYu+bfcRnYmw/VLpQoTZgO3ZnetgJXOid926j3Z6VLNC/berZZyGf?=
- =?us-ascii?Q?CwDOptEq09qyRMRJwQInlIEe9KVEvHb40fulyedqBwE0pcL80WZJ1fBMAG/z?=
- =?us-ascii?Q?zQbRsziROT8gSv9xgyuWqmld9YJ7tyu+IV1UV3/MutgwUBL14GINzzMfQ9Z2?=
- =?us-ascii?Q?y/wio57EXY3fZ7rcp3F4/7VZAQyDhPZj/Vlei0du88CDNBp0tIgdJk4tNbJF?=
- =?us-ascii?Q?giYyCqloyPvHilsty2wIA2DiDZx3YXJjc+183tUlQrWBfjpRg8rfKducc834?=
- =?us-ascii?Q?MR7EDQrR3NZX0ckaq+QOaoiK9gpI5/sDVy4bIK8Lfqz5EvvOsGj87f7G3GS5?=
- =?us-ascii?Q?HCucqjZ5HrmbUZ0EmJIfKEW7S1uwVjjO35ynN3C2TXFwcogrSHmcmxKduPCT?=
- =?us-ascii?Q?XUM5zP2r1bqlEeetKYaVdQJ4sea00NC1VrzZxK0fJfZ/XAWTsPq4sKfEbzl9?=
- =?us-ascii?Q?NKA70HU2KKqdh8X2sYqOMaoAeJeo9TS9UjxdYW+Ecq4iID3t7nysHPdXY6xe?=
- =?us-ascii?Q?A2VnIdE5RyrYkRxaiTiz+h0qnYyVV8oksqfRTwWkuxv3ZbxDT/BOEVNe2UM0?=
- =?us-ascii?Q?rGTkxAKvtF+6xWDIJ/8bNMP8NN+ENmao8UktLbJfeUrCkM+Tb6herruRLc+a?=
- =?us-ascii?Q?fB8sQzJMy9Z2l+PAHhGj/3+qVSAODYtjeg0Pal9DjiF/1jwz?=
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 04f40e69-0575-4666-a428-08de9c8ba418
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR04MB9436.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Apr 2026 14:14:30.3704 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: L/UPICeqsM/NJjzNT+zVsI4X3kaiW4+JtBrNsiqg0tPusmgsbf3mNkd/pnHUPS45
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB10879
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] phy: mediatek: new XS-PHY driver
+To: David Lechner <dlechner@baylibre.com>, Tom Rini <trini@konsulko.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Macpaul Lin <macpaul.lin@mediatek.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+References: <20260401-mtk-mt8189-usb-v1-0-a4bf951aa8ad@baylibre.com>
+ <20260401-mtk-mt8189-usb-v1-1-a4bf951aa8ad@baylibre.com>
+From: Arnaud Ferraris <arnaud.ferraris@collabora.com>
+Content-Language: en-US, fr
+Autocrypt: addr=arnaud.ferraris@collabora.com; keydata=
+ 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
+ L9jD4jU=
+In-Reply-To: <20260401-mtk-mt8189-usb-v1-1-a4bf951aa8ad@baylibre.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,654 +121,669 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are lots of DT warning in layerscape DTS files like:
-node name for SPI buses should be 'spi' and SPI bus unit address
-format error.
-Update the spi node name and flash node name to avoid build warning
+Hi David,
 
-Signed-off-by: Ye Li <ye.li@nxp.com>
----
- arch/arm/dts/fsl-ls1012a-qds.dtsi     |  6 +++---
- arch/arm/dts/fsl-ls1012a.dtsi         |  4 ++--
- arch/arm/dts/fsl-ls1028a-qds.dtsi     | 14 +++++++-------
- arch/arm/dts/fsl-ls1043a-qds.dtsi     |  6 +++---
- arch/arm/dts/fsl-ls1043a-rdb.dts      |  2 +-
- arch/arm/dts/fsl-ls1043a.dtsi         |  6 +++---
- arch/arm/dts/fsl-ls1046a-qds.dtsi     |  6 +++---
- arch/arm/dts/fsl-ls1046a.dtsi         |  6 +++---
- arch/arm/dts/fsl-ls1088a-qds.dtsi     |  6 +++---
- arch/arm/dts/fsl-ls2080a-qds.dtsi     |  6 +++---
- arch/arm/dts/fsl-ls2080a-rdb.dts      |  2 +-
- arch/arm/dts/fsl-ls2080a.dtsi         |  4 ++--
- arch/arm/dts/fsl-ls2081a-rdb.dts      |  2 +-
- arch/arm/dts/fsl-ls2088a-rdb-qspi.dts |  2 +-
- arch/arm/dts/fsl-lx2160a-qds.dtsi     | 18 +++++++++---------
- arch/arm/dts/fsl-lx2160a.dtsi         |  8 ++++----
- arch/arm/dts/fsl-lx2162a-qds.dts      | 18 +++++++++---------
- arch/arm/dts/ls1021a.dtsi             |  6 +++---
- 18 files changed, 61 insertions(+), 61 deletions(-)
+Le 01/04/2026 à 23:53, David Lechner a écrit :
+> Add a new driver for the Mediatek XS-PHY. This is found on some newer
+> Mediatek SoCs.
+> 
+> Upstream devicetree bindings already exist. MAINTAINERS is already
+> covered by drivers/phy/phy-mtk-*.
+> 
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
+> ---
+>   drivers/phy/Kconfig         |  11 +
+>   drivers/phy/Makefile        |   1 +
+>   drivers/phy/phy-mtk-xsphy.c | 600 ++++++++++++++++++++++++++++++++++++++++++++
+>   3 files changed, 612 insertions(+)
+> 
+> diff --git a/drivers/phy/Kconfig b/drivers/phy/Kconfig
+> index 09810b62b51..fc4daa00661 100644
+> --- a/drivers/phy/Kconfig
+> +++ b/drivers/phy/Kconfig
+> @@ -292,6 +292,17 @@ config PHY_MTK_UFS
+>   	  initialization, power on and power off flow of
+>   	  specified M-PHYs.
+>   
+> +config PHY_MTK_XSPHY
+> +	bool "MediaTek XS-PHY Driver"
+> +	depends on PHY
+> +	depends on ARCH_MEDIATEK
+> +	select REGMAP
+> +	select SYSCON
+> +	help
+> +	  Enable this to support the SuperSpeedPlus XS-PHY transceiver for
+> +	  USB3.1 GEN2 controllers on MediaTek chips. The driver supports
+> +	  multiple USB2.0, USB3.1 GEN2 ports.
+> +
+>   config PHY_NPCM_USB
+>   	bool "Nuvoton NPCM USB PHY support"
+>   	depends on PHY
+> diff --git a/drivers/phy/Makefile b/drivers/phy/Makefile
+> index 83102349669..684e9a99af8 100644
+> --- a/drivers/phy/Makefile
+> +++ b/drivers/phy/Makefile
+> @@ -38,6 +38,7 @@ obj-$(CONFIG_PHY_DA8XX_USB) += phy-da8xx-usb.o
+>   obj-$(CONFIG_PHY_EXYNOS_USBDRD) += phy-exynos-usbdrd.o
+>   obj-$(CONFIG_PHY_MTK_TPHY) += phy-mtk-tphy.o
+>   obj-$(CONFIG_PHY_MTK_UFS) += phy-mtk-ufs.o
+> +obj-$(CONFIG_PHY_MTK_XSPHY) += phy-mtk-xsphy.o
+>   obj-$(CONFIG_PHY_NPCM_USB) += phy-npcm-usb.o
+>   obj-$(CONFIG_$(PHASE_)PHY_IMX8MQ_USB) += phy-imx8mq-usb.o
+>   obj-$(CONFIG_PHY_IMX8M_PCIE) += phy-imx8m-pcie.o
+> diff --git a/drivers/phy/phy-mtk-xsphy.c b/drivers/phy/phy-mtk-xsphy.c
+> new file mode 100644
+> index 00000000000..d3418ffb101
+> --- /dev/null
+> +++ b/drivers/phy/phy-mtk-xsphy.c
+> @@ -0,0 +1,600 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * MediaTek USB3.1 gen2 xsphy Driver
+> + *
+> + * Copyright (c) 2026 MediaTek Inc.
+> + * Copyright (c) 2026 BayLibre, SAS
+> + *
+> + * Based on Linux mtk-xsphy driver:
+> + * Copyright (c) 2018 MediaTek Inc.
+> + * Author: Chunfeng Yun <chunfeng.yun@mediatek.com>
+> + *
+> + * And U-Boot mtk-tphy driver:
+> + * Copyright (c) 2015 - 2019 MediaTek Inc.
+> + * Author: Chunfeng Yun <chunfeng.yun@mediatek.com>
+> + *	   Ryder Lee <ryder.lee@mediatek.com>
+> + */
+> +
+> +#include <clk.h>
+> +#include <dm.h>
+> +#include <generic-phy.h>
+> +#include <malloc.h>
+> +#include <mapmem.h>
+> +#include <regmap.h>
+> +#include <syscon.h>
+> +
+> +#include <asm/io.h>
+> +#include <dm/device_compat.h>
+> +#include <dm/devres.h>
+> +#include <linux/bitfield.h>
+> +#include <linux/bitops.h>
+> +#include <linux/delay.h>
+> +#include <linux/iopoll.h>
+> +
+> +#include <dt-bindings/phy/phy.h>
+> +
+> +/* u2 phy banks */
+> +#define SSUSB_SIFSLV_MISC		0x000
+> +#define SSUSB_SIFSLV_U2FREQ		0x100
+> +#define SSUSB_SIFSLV_U2PHY_COM		0x300
+> +
+> +/* u3 phy shared banks */
+> +#define SSPXTP_SIFSLV_DIG_GLB		0x000
+> +#define SSPXTP_SIFSLV_PHYA_GLB		0x100
+> +
+> +/* u3 phy banks */
+> +#define SSPXTP_SIFSLV_DIG_LN_TOP	0x000
+> +#define SSPXTP_SIFSLV_DIG_LN_TX0	0x100
+> +#define SSPXTP_SIFSLV_DIG_LN_RX0	0x200
+> +#define SSPXTP_SIFSLV_DIG_LN_DAIF	0x300
+> +#define SSPXTP_SIFSLV_PHYA_LN		0x400
+> +
+> +#define XSP_U2FREQ_FMCR0	((SSUSB_SIFSLV_U2FREQ) + 0x00)
+> +#define P2F_RG_FREQDET_EN		BIT(24)
+> +#define P2F_RG_CYCLECNT			GENMASK(23, 0)
+> +
+> +#define XSP_U2FREQ_MMONR0	((SSUSB_SIFSLV_U2FREQ) + 0x0c)
+> +
+> +#define XSP_U2FREQ_FMMONR1	((SSUSB_SIFSLV_U2FREQ) + 0x10)
+> +#define P2F_RG_FRCK_EN			BIT(8)
+> +#define P2F_USB_FM_VALID		BIT(0)
+> +
+> +#define XSP_USBPHYACR0		((SSUSB_SIFSLV_U2PHY_COM) + 0x00)
+> +#define P2A0_RG_INTR_EN			BIT(5)
+> +
+> +#define XSP_USBPHYACR1		((SSUSB_SIFSLV_U2PHY_COM) + 0x04)
+> +#define P2A1_RG_INTR_CAL		GENMASK(23, 19)
+> +#define P2A1_RG_VRT_SEL			GENMASK(14, 12)
+> +#define P2A1_RG_TERM_SEL		GENMASK(10, 8)
+> +
+> +#define XSP_USBPHYACR5		((SSUSB_SIFSLV_U2PHY_COM) + 0x014)
+> +#define P2A5_RG_HSTX_SRCAL_EN		BIT(15)
+> +#define P2A5_RG_HSTX_SRCTRL		GENMASK(14, 12)
+> +
+> +#define XSP_USBPHYACR6		((SSUSB_SIFSLV_U2PHY_COM) + 0x018)
+> +#define P2A6_RG_BC11_SW_EN		BIT(23)
+> +#define P2A6_RG_OTG_VBUSCMP_EN		BIT(20)
+> +
+> +#define XSP_U2PHYDTM1		((SSUSB_SIFSLV_U2PHY_COM) + 0x06C)
+> +#define P2D_FORCE_IDDIG			BIT(9)
+> +#define P2D_RG_VBUSVALID		BIT(5)
+> +#define P2D_RG_SESSEND			BIT(4)
+> +#define P2D_RG_AVALID			BIT(2)
+> +#define P2D_RG_IDDIG			BIT(1)
+> +
+> +#define SSPXTP_PHYA_GLB_00	((SSPXTP_SIFSLV_PHYA_GLB) + 0x00)
+> +#define RG_XTP_GLB_BIAS_INTR_CTRL	GENMASK(21, 16)
+> +
+> +#define SSPXTP_PHYA_LN_04	((SSPXTP_SIFSLV_PHYA_LN) + 0x04)
+> +#define RG_XTP_LN0_TX_IMPSEL		GENMASK(4, 0)
+> +
+> +#define SSPXTP_PHYA_LN_14	((SSPXTP_SIFSLV_PHYA_LN) + 0x014)
+> +#define RG_XTP_LN0_RX_IMPSEL		GENMASK(4, 0)
+> +
+> +#define XSP_REF_CLK_MHZ		26
+> +#define XSP_SLEW_RATE_COEF	17
+> +#define XSP_SR_COEF_DIVISOR	1000
+> +#define XSP_FM_DET_CYCLE_CNT	1024
+> +
+> +/* PHY switch between pcie/usb3/sgmii */
+> +#define USB_PHY_SWITCH_CTRL	0x0
+> +#define RG_PHY_SW_TYPE		GENMASK(3, 0)
+> +#define RG_PHY_SW_PCIE		0x0
+> +#define RG_PHY_SW_USB3		0x1
+> +#define RG_PHY_SW_SGMII		0x2
+> +
+> +struct mtk_xsphy_instance {
+> +	void __iomem *port_base;
+> +	struct device_node *np;
+> +	struct clk ref_clk;	/* reference clock of analog phy */
+> +	u32 index;
+> +	u32 type;
+> +	struct regmap *type_sw;
+> +	u32 type_sw_reg;
+> +	u32 type_sw_index;
+> +	/* only for HQA test */
+> +	u32 efuse_intr;
+> +	u32 efuse_tx_imp;
+> +	u32 efuse_rx_imp;
+> +	/* u2 eye diagram */
+> +	u32 eye_src;
+> +	u32 eye_vrt;
+> +	u32 eye_term;
+> +};
+> +
+> +struct mtk_xsphy {
+> +	struct udevice *dev;
+> +	void __iomem *sif_base;
+> +	struct mtk_xsphy_instance **phys;
+> +	u32 nphys;
+> +	u32 src_ref_clk_mhz; /* reference clock for slew rate calibrate */
+> +	u32 src_coef; /* coefficient for slew rate calibrate */
+> +};
+> +
+> +static void mtk_xsphy_u2_slew_rate_calibrate(struct mtk_xsphy *xsphy,
+> +					     struct mtk_xsphy_instance *instance)
+> +{
+> +	void __iomem *pbase = instance->port_base;
+> +	u32 calib_val;
+> +	u32 fm_out;
+> +	u32 tmp;
+> +
+> +	/* use force value */
+> +	if (instance->eye_src)
+> +		return;
+> +
+> +	/* enable USB ring oscillator */
+> +	setbits_le32(pbase + XSP_USBPHYACR5, P2A5_RG_HSTX_SRCAL_EN);
+> +	/* wait for clock to become stable */
+> +	udelay(1);
+> +
+> +	/* enable free run clock */
+> +	setbits_le32(pbase + XSP_U2FREQ_FMMONR1, P2F_RG_FRCK_EN);
+> +
+> +	/* set cycle count as 1024 */
+> +	clrsetbits_le32(pbase + XSP_U2FREQ_FMCR0, P2F_RG_CYCLECNT,
+> +			FIELD_PREP(P2F_RG_CYCLECNT, XSP_FM_DET_CYCLE_CNT));
+> +
+> +	/* enable frequency meter */
+> +	setbits_le32(pbase + XSP_U2FREQ_FMCR0, P2F_RG_FREQDET_EN);
+> +
+> +	/* ignore return value */
+> +	readl_poll_sleep_timeout(pbase + XSP_U2FREQ_FMMONR1, tmp,
+> +				 (tmp & P2F_USB_FM_VALID), 10, 200);
+> +
+> +	fm_out = readl(pbase + XSP_U2FREQ_MMONR0);
+> +
+> +	/* disable frequency meter */
+> +	clrbits_le32(pbase + XSP_U2FREQ_FMCR0, P2F_RG_FREQDET_EN);
+> +
+> +	/* disable free run clock */
+> +	clrbits_le32(pbase + XSP_U2FREQ_FMMONR1, P2F_RG_FRCK_EN);
+> +
+> +	if (fm_out) {
+> +		/* (1024 / FM_OUT) x reference clock frequency x coefficient */
+> +		tmp = xsphy->src_ref_clk_mhz * xsphy->src_coef;
+> +		tmp = (tmp * XSP_FM_DET_CYCLE_CNT) / fm_out;
+> +		calib_val = DIV_ROUND_CLOSEST(tmp, XSP_SR_COEF_DIVISOR);
+> +	} else {
+> +		/* if FM detection fail, set default value */
+> +		calib_val = 3;
+> +	}
+> +	dev_dbg(xsphy->dev, "phy.%u, fm_out:%u, calib:%u (clk:%u, coef:%u)\n",
+> +		instance->index, fm_out, calib_val, xsphy->src_ref_clk_mhz,
+> +		xsphy->src_coef);
+> +
+> +	/* set HS slew rate */
+> +	clrsetbits_le32(pbase + XSP_USBPHYACR5, P2A5_RG_HSTX_SRCTRL,
+> +			FIELD_PREP(P2A5_RG_HSTX_SRCTRL, calib_val));
+> +
+> +	/* disable USB ring oscillator */
+> +	clrbits_le32(pbase + XSP_USBPHYACR5, P2A5_RG_HSTX_SRCAL_EN);
+> +}
+> +
+> +static void mtk_xsphy_u2_instance_init(struct mtk_xsphy *xsphy,
+> +				       struct mtk_xsphy_instance *instance)
+> +{
+> +	void __iomem *pbase = instance->port_base;
+> +
+> +	/* DP/DM BC1.1 path Disable */
+> +	clrbits_le32(pbase + XSP_USBPHYACR6, P2A6_RG_BC11_SW_EN);
+> +
+> +	setbits_le32(pbase + XSP_USBPHYACR0, P2A0_RG_INTR_EN);
+> +}
+> +
+> +static void mtk_xsphy_u2_instance_power_on(struct mtk_xsphy *xsphy,
+> +					   struct mtk_xsphy_instance *instance)
+> +{
+> +	void __iomem *pbase = instance->port_base;
+> +
+> +	setbits_le32(pbase + XSP_USBPHYACR6, P2A6_RG_OTG_VBUSCMP_EN);
+> +
+> +	clrsetbits_le32(pbase + XSP_U2PHYDTM1,
+> +			P2D_RG_VBUSVALID | P2D_RG_AVALID | P2D_RG_SESSEND,
+> +			P2D_RG_VBUSVALID | P2D_RG_AVALID);
+> +
+> +	dev_dbg(xsphy->dev, "%s(%u)\n", __func__, instance->index);
+> +}
+> +
+> +static void mtk_xsphy_u2_instance_power_off(struct mtk_xsphy *xsphy,
+> +					    struct mtk_xsphy_instance *instance)
+> +{
+> +	void __iomem *pbase = instance->port_base;
+> +
+> +	clrbits_le32(pbase + XSP_USBPHYACR6, P2A6_RG_OTG_VBUSCMP_EN);
+> +
+> +	clrsetbits_le32(pbase + XSP_U2PHYDTM1,
+> +			P2D_RG_VBUSVALID | P2D_RG_AVALID | P2D_RG_SESSEND,
+> +			P2D_RG_SESSEND);
+> +
+> +	dev_dbg(xsphy->dev, "%s(%u)\n", __func__, instance->index);
+> +}
+> +
+> +static void mtk_xsphy_u2_instance_set_mode(struct mtk_xsphy *xsphy,
+> +					   struct mtk_xsphy_instance *instance,
+> +					   enum phy_mode mode)
+> +{
+> +	u32 tmp;
+> +
+> +	tmp = readl(instance->port_base + XSP_U2PHYDTM1);
+> +
+> +	switch (mode) {
+> +	case PHY_MODE_USB_DEVICE:
+> +		tmp |= P2D_FORCE_IDDIG | P2D_RG_IDDIG;
+> +		break;
+> +	case PHY_MODE_USB_HOST:
+> +		tmp |= P2D_FORCE_IDDIG;
+> +		tmp &= ~P2D_RG_IDDIG;
+> +		break;
+> +	case PHY_MODE_USB_OTG:
+> +		tmp &= ~(P2D_FORCE_IDDIG | P2D_RG_IDDIG);
+> +		break;
+> +	default:
+> +		return;
+> +	}
+> +
+> +	writel(tmp, instance->port_base + XSP_U2PHYDTM1);
+> +}
+> +
+> +static void mtk_xsphy_parse_property(struct mtk_xsphy *xsphy,
+> +				     struct mtk_xsphy_instance *instance)
+> +{
+> +	ofnode node = np_to_ofnode(instance->np);
+> +
+> +	switch (instance->type) {
+> +	case PHY_TYPE_USB2:
+> +		ofnode_read_u32(node, "mediatek,efuse-intr", &instance->efuse_intr);
+> +		ofnode_read_u32(node, "mediatek,eye-src", &instance->eye_src);
+> +		ofnode_read_u32(node, "mediatek,eye-vrt", &instance->eye_vrt);
+> +		ofnode_read_u32(node, "mediatek,eye-term", &instance->eye_term);
+> +
+> +		dev_dbg(xsphy->dev, "intr:%u, src:%u, vrt:%u, term:%u\n",
+> +			instance->efuse_intr, instance->eye_src,
+> +			instance->eye_vrt, instance->eye_term);
+> +		return;
+> +	case PHY_TYPE_USB3:
+> +		ofnode_read_u32(node, "mediatek,efuse-intr", &instance->efuse_intr);
+> +		ofnode_read_u32(node, "mediatek,efuse-tx-imp", &instance->efuse_tx_imp);
+> +		ofnode_read_u32(node, "mediatek,efuse-rx-imp", &instance->efuse_rx_imp);
+> +
+> +		dev_dbg(xsphy->dev, "intr:%u, tx-imp:%u, rx-imp:%u\n",
+> +			instance->efuse_intr, instance->efuse_tx_imp,
+> +			instance->efuse_rx_imp);
+> +		return;
+> +	case PHY_TYPE_PCIE:
+> +	case PHY_TYPE_SGMII:
+> +		/* nothing to do */
+> +		return;
+> +	default:
+> +		dev_err(xsphy->dev, "incompatible PHY type\n");
+> +		return;
+> +	}
+> +}
+> +
+> +static void mtk_xsphy_u2_props_set(struct mtk_xsphy *xsphy,
+> +				   struct mtk_xsphy_instance *instance)
+> +{
+> +	void __iomem *pbase = instance->port_base;
+> +
+> +	if (instance->efuse_intr)
+> +		clrsetbits_le32(pbase + XSP_USBPHYACR1, P2A1_RG_INTR_CAL,
+> +				FIELD_PREP(P2A1_RG_INTR_CAL, instance->efuse_intr));
+> +
+> +	if (instance->eye_src)
+> +		clrsetbits_le32(pbase + XSP_USBPHYACR5, P2A5_RG_HSTX_SRCTRL,
+> +				FIELD_PREP(P2A5_RG_HSTX_SRCTRL, instance->eye_src));
+> +
+> +	if (instance->eye_vrt)
+> +		clrsetbits_le32(pbase + XSP_USBPHYACR1, P2A1_RG_VRT_SEL,
+> +				FIELD_PREP(P2A1_RG_VRT_SEL, instance->eye_vrt));
+> +
+> +	if (instance->eye_term)
+> +		clrsetbits_le32(pbase + XSP_USBPHYACR1, P2A1_RG_TERM_SEL,
+> +				FIELD_PREP(P2A1_RG_TERM_SEL, instance->eye_term));
+> +}
+> +
+> +static void mtk_xsphy_u3_props_set(struct mtk_xsphy *xsphy,
+> +				   struct mtk_xsphy_instance *instance)
+> +{
+> +	void __iomem *pbase = instance->port_base;
+> +
+> +	if (instance->efuse_intr)
+> +		clrsetbits_le32(xsphy->sif_base + SSPXTP_PHYA_GLB_00,
+> +				RG_XTP_GLB_BIAS_INTR_CTRL,
+> +				FIELD_PREP(RG_XTP_GLB_BIAS_INTR_CTRL, instance->efuse_intr));
+> +
+> +	if (instance->efuse_tx_imp)
+> +		clrsetbits_le32(pbase + SSPXTP_PHYA_LN_04, RG_XTP_LN0_TX_IMPSEL,
+> +				FIELD_PREP(RG_XTP_LN0_TX_IMPSEL, instance->efuse_tx_imp));
+> +
+> +	if (instance->efuse_rx_imp)
+> +		clrsetbits_le32(pbase + SSPXTP_PHYA_LN_14, RG_XTP_LN0_RX_IMPSEL,
+> +				FIELD_PREP(RG_XTP_LN0_RX_IMPSEL, instance->efuse_rx_imp));
+> +}
+> +
+> +/* type switch for usb3/pcie/sgmii */
+> +static int mtk_xsphy_type_syscon_get(struct udevice *dev,
+> +				     struct mtk_xsphy_instance *instance,
+> +				     ofnode dn)
+> +{
+> +	struct ofnode_phandle_args args;
+> +	int ret;
+> +
+> +	if (!ofnode_read_bool(dn, "mediatek,syscon-type"))
+> +		return 0;
+> +
+> +	ret = ofnode_parse_phandle_with_args(dn, "mediatek,syscon-type",
+> +					     NULL, 2, 0, &args);
+> +	if (ret)
+> +		return ret;
+> +
+> +	instance->type_sw_reg = args.args[0];
+> +	instance->type_sw_index = args.args[1] & 0x3; /* <=3 */
+> +	instance->type_sw = syscon_node_to_regmap(args.node);
+> +	if (IS_ERR(instance->type_sw))
+> +		return PTR_ERR(instance->type_sw);
+> +
+> +	dev_dbg(dev, "phy-%s.%d: type_sw - reg %#x, index %d\n",
+> +		dev->name, instance->index, instance->type_sw_reg,
+> +		instance->type_sw_index);
+> +
+> +	return 0;
+> +}
+> +
+> +static int mtk_xsphy_type_set(struct mtk_xsphy_instance *instance)
+> +{
+> +	int type;
+> +	u32 offset;
+> +
+> +	if (!instance->type_sw)
+> +		return 0;
+> +
+> +	switch (instance->type) {
+> +	case PHY_TYPE_USB3:
+> +		type = RG_PHY_SW_USB3;
+> +		break;
+> +	case PHY_TYPE_PCIE:
+> +		type = RG_PHY_SW_PCIE;
+> +		break;
+> +	case PHY_TYPE_SGMII:
+> +		type = RG_PHY_SW_SGMII;
+> +		break;
+> +	case PHY_TYPE_USB2:
+> +	default:
+> +		return 0;
+> +	}
+> +
+> +	offset = instance->type_sw_index * BITS_PER_BYTE;
+> +	regmap_update_bits(instance->type_sw, instance->type_sw_reg,
+> +			   RG_PHY_SW_TYPE << offset, type << offset);
+> +
+> +	return 0;
+> +}
+> +
+> +static int mtk_xsphy_init(struct phy *phy)
+> +{
+> +	struct mtk_xsphy *xsphy = dev_get_priv(phy->dev);
+> +	struct mtk_xsphy_instance *instance = xsphy->phys[phy->id];
+> +	int ret;
+> +
+> +	ret = clk_enable(&instance->ref_clk);
+> +	if (ret) {
+> +		dev_err(xsphy->dev, "failed to enable ref_clk\n");
+> +		return ret;
+> +	}
+> +
+> +	switch (instance->type) {
+> +	case PHY_TYPE_USB2:
+> +		mtk_xsphy_u2_instance_init(xsphy, instance);
+> +		mtk_xsphy_u2_props_set(xsphy, instance);
+> +		break;
+> +	case PHY_TYPE_USB3:
+> +		mtk_xsphy_u3_props_set(xsphy, instance);
+> +		break;
+> +	case PHY_TYPE_PCIE:
+> +	case PHY_TYPE_SGMII:
+> +		/* nothing to do, only used to set type */
+> +		break;
+> +	default:
+> +		dev_err(xsphy->dev, "incompatible PHY type\n");
+> +		clk_disable(&instance->ref_clk);
+> +		return -EINVAL;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int mtk_xsphy_power_on(struct phy *phy)
+> +{
+> +	struct mtk_xsphy *xsphy = dev_get_priv(phy->dev);
+> +	struct mtk_xsphy_instance *instance = xsphy->phys[phy->id];
+> +
+> +	if (instance->type == PHY_TYPE_USB2) {
+> +		mtk_xsphy_u2_instance_power_on(xsphy, instance);
+> +		mtk_xsphy_u2_slew_rate_calibrate(xsphy, instance);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int mtk_xsphy_power_off(struct phy *phy)
+> +{
+> +	struct mtk_xsphy *xsphy = dev_get_priv(phy->dev);
+> +	struct mtk_xsphy_instance *instance = xsphy->phys[phy->id];
+> +
+> +	if (instance->type == PHY_TYPE_USB2)
+> +		mtk_xsphy_u2_instance_power_off(xsphy, instance);
+> +
+> +	return 0;
+> +}
+> +
+> +static int mtk_xsphy_exit(struct phy *phy)
+> +{
+> +	struct mtk_xsphy *xsphy = dev_get_priv(phy->dev);
+> +	struct mtk_xsphy_instance *instance = xsphy->phys[phy->id];
+> +
+> +	clk_disable(&instance->ref_clk);
+> +
+> +	return 0;
+> +}
+> +
+> +static int mtk_xsphy_set_mode(struct phy *phy, enum phy_mode mode, int submode)
+> +{
+> +	struct mtk_xsphy *xsphy = dev_get_priv(phy->dev);
+> +	struct mtk_xsphy_instance *instance = xsphy->phys[phy->id];
+> +
+> +	if (instance->type == PHY_TYPE_USB2)
+> +		mtk_xsphy_u2_instance_set_mode(xsphy, instance, mode);
+> +
+> +	return 0;
+> +}
+> +
+> +static int mtk_xsphy_xlate(struct phy *phy, struct ofnode_phandle_args *args)
+> +{
+> +	struct mtk_xsphy *xsphy = dev_get_priv(phy->dev);
+> +	struct mtk_xsphy_instance *instance = NULL;
+> +	const struct device_node *phy_np = ofnode_to_np(args->node);
+> +	u32 index;
+> +
+> +	if (!phy_np) {
+> +		dev_err(phy->dev, "null pointer phy node\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	if (args->args_count != 2) {
+> +		dev_err(phy->dev, "invalid number of cells in 'phy' property\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	for (index = 0; index < xsphy->nphys; index++)
+> +		if (phy_np == xsphy->phys[index]->np) {
+> +			instance = xsphy->phys[index];
+> +			break;
+> +		}
+> +
+> +	if (!instance) {
+> +		dev_err(phy->dev, "failed to find appropriate phy\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	phy->id = index;
+> +	instance->type = args->args[1];
+> +	if (!(instance->type == PHY_TYPE_USB2 ||
+> +	      instance->type == PHY_TYPE_USB3 ||
+> +	      instance->type == PHY_TYPE_PCIE ||
+> +	      instance->type == PHY_TYPE_SGMII)) {
+> +		dev_err(phy->dev, "unsupported PHY type\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	mtk_xsphy_parse_property(xsphy, instance);
+> +	mtk_xsphy_type_set(instance);
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct phy_ops mtk_xsphy_ops = {
+> +	.init		= mtk_xsphy_init,
+> +	.exit		= mtk_xsphy_exit,
+> +	.power_on	= mtk_xsphy_power_on,
+> +	.power_off	= mtk_xsphy_power_off,
+> +	.set_mode	= mtk_xsphy_set_mode,
+> +	.of_xlate	= mtk_xsphy_xlate,
+> +};
+> +
+> +static int mtk_xsphy_probe(struct udevice *dev)
+> +{
+> +	struct mtk_xsphy *xsphy = dev_get_priv(dev);
+> +	fdt_addr_t sif_addr;
+> +	ofnode subnode;
+> +	int index = 0;
+> +
+> +	xsphy->nphys = dev_get_child_count(dev);
+> +
+> +	xsphy->phys = devm_kcalloc(dev, xsphy->nphys, sizeof(*xsphy->phys),
+> +				   GFP_KERNEL);
+> +	if (!xsphy->phys)
+> +		return -ENOMEM;
+> +
+> +	xsphy->dev = dev;
+> +
+> +	sif_addr = ofnode_get_addr(dev_ofnode(dev));
+> +	/* optional, may not exist if no u3 phys */
+> +	if (sif_addr != FDT_ADDR_T_NONE)
+> +		xsphy->sif_base = map_sysmem(sif_addr, 0);
+> +
+> +	xsphy->src_ref_clk_mhz = XSP_REF_CLK_MHZ;
+> +	xsphy->src_coef = XSP_SLEW_RATE_COEF;
+> +	/* update parameters of slew rate calibrate if exist */
+> +	ofnode_read_u32(dev_ofnode(dev), "mediatek,src-ref-clk-mhz",
+> +			&xsphy->src_ref_clk_mhz);
+> +	ofnode_read_u32(dev_ofnode(dev), "mediatek,src-coef", &xsphy->src_coef);
+> +
+> +	dev_for_each_subnode(subnode, dev) {
+> +		struct mtk_xsphy_instance *inst;
+> +		fdt_addr_t addr;
+> +		int ret;
+> +
+> +		inst = devm_kzalloc(dev, sizeof(*inst), GFP_KERNEL);
+> +		if (!inst)
+> +			return -ENOMEM;
+> +
+> +		xsphy->phys[index] = inst;
+> +
+> +		addr = ofnode_get_addr(subnode);
+> +		if (addr == FDT_ADDR_T_NONE)
+> +			return -EADDRNOTAVAIL;
+> +
+> +		inst->port_base = map_sysmem(addr, 0);
+> +		inst->index = index;
+> +		inst->np = ofnode_to_np(subnode);
+> +
+> +		ret = clk_get_by_name_nodev(subnode, "ref", &inst->ref_clk);
+> +		if (ret) {
+> +			dev_err(dev, "failed to get ref_clk(id-%d)\n", index);
+> +			return ret;
+> +		}
+> +
+> +		ret = mtk_xsphy_type_syscon_get(dev, inst, subnode);
+> +		if (ret)
+> +			return ret;
+> +
+> +		index++;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct udevice_id mtk_xsphy_id_table[] = {
+> +	{ .compatible = "mediatek,xsphy" },
+> +	{ }
+> +};
+> +
+> +U_BOOT_DRIVER(mtk_xsphy) = {
+> +	.name		= "mtk-xsphy",
+> +	.id		= UCLASS_PHY,
+> +	.of_match	= mtk_xsphy_id_table,
+> +	.ops		= &mtk_xsphy_ops,
+> +	.probe		= mtk_xsphy_probe,
+> +	.priv_auto	= sizeof(struct mtk_xsphy),
+> +};
+> 
 
-diff --git a/arch/arm/dts/fsl-ls1012a-qds.dtsi b/arch/arm/dts/fsl-ls1012a-qds.dtsi
-index 910d2a5c778..194ab344350 100644
---- a/arch/arm/dts/fsl-ls1012a-qds.dtsi
-+++ b/arch/arm/dts/fsl-ls1012a-qds.dtsi
-@@ -17,7 +17,7 @@
- 	bus-num = <0>;
- 	status = "okay";
- 
--	dflash0: n25q128a {
-+	dflash0: n25q128a@0 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "jedec,spi-nor";
-@@ -25,7 +25,7 @@
- 		spi-max-frequency = <1000000>; /* input clock */
- 	};
- 
--	dflash1: sst25wf040b {
-+	dflash1: sst25wf040b@1 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "jedec,spi-nor";
-@@ -33,7 +33,7 @@
- 		reg = <1>;
- 	};
- 
--	dflash2: en25s64 {
-+	dflash2: en25s64@2 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "jedec,spi-nor";
-diff --git a/arch/arm/dts/fsl-ls1012a.dtsi b/arch/arm/dts/fsl-ls1012a.dtsi
-index 796d72fc9ed..b0f3fd79094 100644
---- a/arch/arm/dts/fsl-ls1012a.dtsi
-+++ b/arch/arm/dts/fsl-ls1012a.dtsi
-@@ -48,7 +48,7 @@
- 			clocks = <&sysclk>;
- 		};
- 
--		dspi0: dspi@2100000 {
-+		dspi0: spi@2100000 {
- 			compatible = "fsl,vf610-dspi";
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -178,7 +178,7 @@
- 			clocks = <&clockgen 4 0>;
- 		};
- 
--		qspi: quadspi@1550000 {
-+		qspi: spi@1550000 {
- 			compatible = "fsl,ls1021a-qspi";
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-diff --git a/arch/arm/dts/fsl-ls1028a-qds.dtsi b/arch/arm/dts/fsl-ls1028a-qds.dtsi
-index 3b063d0257d..6d3f08bd678 100644
---- a/arch/arm/dts/fsl-ls1028a-qds.dtsi
-+++ b/arch/arm/dts/fsl-ls1028a-qds.dtsi
-@@ -26,7 +26,7 @@
- 	bus-num = <0>;
- 	status = "okay";
- 
--	dflash0: sst25wf040b {
-+	dflash0: sst25wf040b@0 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -36,7 +36,7 @@
- 		reg = <0>;
- 	};
- 
--	dflash1: en25s64 {
-+	dflash1: en25s64@1 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -45,7 +45,7 @@
- 		spi-cpha;
- 		reg = <1>;
- 	};
--	dflash2: n25q128a {
-+	dflash2: n25q128a@2 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -60,7 +60,7 @@
- 	bus-num = <0>;
- 	status = "okay";
- 
--	dflash3: sst25wf040b {
-+	dflash3: sst25wf040b@0 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -70,7 +70,7 @@
- 		reg = <0>;
- 	};
- 
--	dflash4: en25s64 {
-+	dflash4: en25s64@1 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -79,7 +79,7 @@
- 		spi-cpha;
- 		reg = <1>;
- 	};
--	dflash5: n25q128a {
-+	dflash5: n25q128a@2 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -94,7 +94,7 @@
- 	bus-num = <0>;
- 	status = "okay";
- 
--	dflash8: en25s64 {
-+	dflash8: en25s64@0 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-diff --git a/arch/arm/dts/fsl-ls1043a-qds.dtsi b/arch/arm/dts/fsl-ls1043a-qds.dtsi
-index 5e02cd91d75..fa1bda51108 100644
---- a/arch/arm/dts/fsl-ls1043a-qds.dtsi
-+++ b/arch/arm/dts/fsl-ls1043a-qds.dtsi
-@@ -21,7 +21,7 @@
- 	bus-num = <0>;
- 	status = "okay";
- 
--	dflash0: n25q128a {
-+	dflash0: n25q128a@0 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "jedec,spi-nor";
-@@ -31,7 +31,7 @@
- 		reg = <0>;
- 	};
- 
--	dflash1: sst25wf040b {
-+	dflash1: sst25wf040b@1 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "jedec,spi-nor";
-@@ -41,7 +41,7 @@
- 		reg = <1>;
- 	};
- 
--	dflash2: en25s64 {
-+	dflash2: en25s64@2 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "jedec,spi-nor";
-diff --git a/arch/arm/dts/fsl-ls1043a-rdb.dts b/arch/arm/dts/fsl-ls1043a-rdb.dts
-index f5b3bb68b3d..80787907df6 100644
---- a/arch/arm/dts/fsl-ls1043a-rdb.dts
-+++ b/arch/arm/dts/fsl-ls1043a-rdb.dts
-@@ -28,7 +28,7 @@
- 	bus-num = <0>;
- 	status = "okay";
- 
--	dspiflash: n25q12a {
-+	dspiflash: n25q12a@0 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "jedec,spi-nor";
-diff --git a/arch/arm/dts/fsl-ls1043a.dtsi b/arch/arm/dts/fsl-ls1043a.dtsi
-index 21643a1d951..7337d3cecb6 100644
---- a/arch/arm/dts/fsl-ls1043a.dtsi
-+++ b/arch/arm/dts/fsl-ls1043a.dtsi
-@@ -54,7 +54,7 @@
- 			clocks = <&sysclk>;
- 		};
- 
--		dspi0: dspi@2100000 {
-+		dspi0: spi@2100000 {
- 			compatible = "fsl,vf610-dspi";
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -67,7 +67,7 @@
- 			status = "disabled";
- 		};
- 
--		dspi1: dspi@2110000 {
-+		dspi1: spi@2110000 {
- 			compatible = "fsl,vf610-dspi";
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -306,7 +306,7 @@
- 			clock-names = "ipg";
- 			status = "disabled";
- 		};
--		qspi: quadspi@1550000 {
-+		qspi: spi@1550000 {
- 			compatible = "fsl,ls1021a-qspi";
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-diff --git a/arch/arm/dts/fsl-ls1046a-qds.dtsi b/arch/arm/dts/fsl-ls1046a-qds.dtsi
-index d66824975c5..706405ba805 100644
---- a/arch/arm/dts/fsl-ls1046a-qds.dtsi
-+++ b/arch/arm/dts/fsl-ls1046a-qds.dtsi
-@@ -21,7 +21,7 @@
- 	bus-num = <0>;
- 	status = "okay";
- 
--	dflash0: n25q128a {
-+	dflash0: n25q128a@0 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "jedec,spi-nor";
-@@ -31,7 +31,7 @@
- 		reg = <0>;
- 	};
- 
--	dflash1: sst25wf040b {
-+	dflash1: sst25wf040b@1 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "jedec,spi-nor";
-@@ -41,7 +41,7 @@
- 		reg = <1>;
- 	};
- 
--	dflash2: en25s64 {
-+	dflash2: en25s64@2 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "jedec,spi-nor";
-diff --git a/arch/arm/dts/fsl-ls1046a.dtsi b/arch/arm/dts/fsl-ls1046a.dtsi
-index 44ee4c5808d..ceb5d6b3356 100644
---- a/arch/arm/dts/fsl-ls1046a.dtsi
-+++ b/arch/arm/dts/fsl-ls1046a.dtsi
-@@ -54,7 +54,7 @@
- 			clocks = <&sysclk>;
- 		};
- 
--		dspi0: dspi@2100000 {
-+		dspi0: spi@2100000 {
- 			compatible = "fsl,vf610-dspi";
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -67,7 +67,7 @@
- 			status = "disabled";
- 		};
- 
--		dspi1: dspi@2110000 {
-+		dspi1: spi@2110000 {
- 			compatible = "fsl,vf610-dspi";
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -311,7 +311,7 @@
- 			status = "disabled";
- 		};
- 
--		qspi: quadspi@1550000 {
-+		qspi: spi@1550000 {
- 			compatible = "fsl,ls1021a-qspi";
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-diff --git a/arch/arm/dts/fsl-ls1088a-qds.dtsi b/arch/arm/dts/fsl-ls1088a-qds.dtsi
-index 4d21d4fbd5e..83635a2e40d 100644
---- a/arch/arm/dts/fsl-ls1088a-qds.dtsi
-+++ b/arch/arm/dts/fsl-ls1088a-qds.dtsi
-@@ -144,7 +144,7 @@
- 	bus-num = <0>;
- 	status = "okay";
- 
--	dflash0: n25q128a {
-+	dflash0: n25q128a@0 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "jedec,spi-nor";
-@@ -152,7 +152,7 @@
- 		spi-max-frequency = <1000000>; /* input clock */
- 	};
- 
--	dflash1: sst25wf040b {
-+	dflash1: sst25wf040b@1 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "jedec,spi-nor";
-@@ -160,7 +160,7 @@
- 		reg = <1>;
- 	};
- 
--	dflash2: en25s64 {
-+	dflash2: en25s64@2 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "jedec,spi-nor";
-diff --git a/arch/arm/dts/fsl-ls2080a-qds.dtsi b/arch/arm/dts/fsl-ls2080a-qds.dtsi
-index cb7851f2cc0..f442baa8bfe 100644
---- a/arch/arm/dts/fsl-ls2080a-qds.dtsi
-+++ b/arch/arm/dts/fsl-ls2080a-qds.dtsi
-@@ -31,7 +31,7 @@
- 	bus-num = <0>;
- 	status = "okay";
- 
--	dflash0: n25q128a {
-+	dflash0: n25q128a@0 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "jedec,spi-nor";
-@@ -40,7 +40,7 @@
- 		spi-cpha;
- 		reg = <0>;
- 	};
--	dflash1: sst25wf040b {
-+	dflash1: sst25wf040b@1 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "jedec,spi-nor";
-@@ -49,7 +49,7 @@
- 		spi-cpha;
- 		reg = <1>;
- 	};
--	dflash2: en25s64 {
-+	dflash2: en25s64@2 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "jedec,spi-nor";
-diff --git a/arch/arm/dts/fsl-ls2080a-rdb.dts b/arch/arm/dts/fsl-ls2080a-rdb.dts
-index 0a87caeba96..5a9b5c06e23 100644
---- a/arch/arm/dts/fsl-ls2080a-rdb.dts
-+++ b/arch/arm/dts/fsl-ls2080a-rdb.dts
-@@ -22,7 +22,7 @@
- 	bus-num = <0>;
- 	status = "okay";
- 
--	dflash0: n25q512a {
-+	dflash0: n25q512a@0 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "jedec,spi-nor";
-diff --git a/arch/arm/dts/fsl-ls2080a.dtsi b/arch/arm/dts/fsl-ls2080a.dtsi
-index d754eb4d5cc..c1173a95f24 100644
---- a/arch/arm/dts/fsl-ls2080a.dtsi
-+++ b/arch/arm/dts/fsl-ls2080a.dtsi
-@@ -118,7 +118,7 @@
- 		interrupts = <0 35 0x4>; /* Level high type */
- 	};
- 
--	dspi: dspi@2100000 {
-+	dspi: spi@2100000 {
- 		compatible = "fsl,vf610-dspi";
- 		#address-cells = <1>;
- 		#size-cells = <0>;
-@@ -127,7 +127,7 @@
- 		spi-num-chipselects = <6>;
- 	};
- 
--	qspi: quadspi@1550000 {
-+	qspi: spi@1550000 {
- 		compatible = "fsl,ls2080a-qspi";
- 		#address-cells = <1>;
- 		#size-cells = <0>;
-diff --git a/arch/arm/dts/fsl-ls2081a-rdb.dts b/arch/arm/dts/fsl-ls2081a-rdb.dts
-index b0b7ef08a02..61f0ed9b821 100644
---- a/arch/arm/dts/fsl-ls2081a-rdb.dts
-+++ b/arch/arm/dts/fsl-ls2081a-rdb.dts
-@@ -25,7 +25,7 @@
- 	bus-num = <0>;
- 	status = "okay";
- 
--	dflash0: n25q512a {
-+	dflash0: n25q512a@0 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "jedec,spi-nor";
-diff --git a/arch/arm/dts/fsl-ls2088a-rdb-qspi.dts b/arch/arm/dts/fsl-ls2088a-rdb-qspi.dts
-index a609290000f..1884946cc7a 100644
---- a/arch/arm/dts/fsl-ls2088a-rdb-qspi.dts
-+++ b/arch/arm/dts/fsl-ls2088a-rdb-qspi.dts
-@@ -113,7 +113,7 @@
- 	bus-num = <0>;
- 	status = "okay";
- 
--	dflash0: n25q512a {
-+	dflash0: n25q512a@0 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "jedec,spi-nor";
-diff --git a/arch/arm/dts/fsl-lx2160a-qds.dtsi b/arch/arm/dts/fsl-lx2160a-qds.dtsi
-index e96605b1b4f..dfdad5fb31f 100644
---- a/arch/arm/dts/fsl-lx2160a-qds.dtsi
-+++ b/arch/arm/dts/fsl-lx2160a-qds.dtsi
-@@ -31,7 +31,7 @@
- 	bus-num = <0>;
- 	status = "okay";
- 
--	dflash0: n25q128a {
-+	dflash0: n25q128a@0 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -40,7 +40,7 @@
- 		spi-cpha;
- 		reg = <0>;
- 	};
--	dflash1: sst25wf040b {
-+	dflash1: sst25wf040b@1 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -49,7 +49,7 @@
- 		spi-cpha;
- 		reg = <1>;
- 	};
--	dflash2: en25s64 {
-+	dflash2: en25s64@2 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -64,7 +64,7 @@
- 	bus-num = <0>;
- 	status = "okay";
- 
--	dflash3: n25q128a {
-+	dflash3: n25q128a@0 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -73,7 +73,7 @@
- 		spi-cpha;
- 		reg = <0>;
- 	};
--	dflash4: sst25wf040b {
-+	dflash4: sst25wf040b@1 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -82,7 +82,7 @@
- 		spi-cpha;
- 		reg = <1>;
- 	};
--	dflash5: en25s64 {
-+	dflash5: en25s64@2 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -97,7 +97,7 @@
- 	bus-num = <0>;
- 	status = "okay";
- 
--	dflash6: n25q128a {
-+	dflash6: n25q128a@0 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -106,7 +106,7 @@
- 		spi-cpha;
- 		reg = <0>;
- 	};
--	dflash7: sst25wf040b {
-+	dflash7: sst25wf040b@1 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -115,7 +115,7 @@
- 		spi-cpha;
- 		reg = <1>;
- 	};
--	dflash8: en25s64 {
-+	dflash8: en25s64@2 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-diff --git a/arch/arm/dts/fsl-lx2160a.dtsi b/arch/arm/dts/fsl-lx2160a.dtsi
-index 680c69c7b73..4b4b1c100b8 100644
---- a/arch/arm/dts/fsl-lx2160a.dtsi
-+++ b/arch/arm/dts/fsl-lx2160a.dtsi
-@@ -134,7 +134,7 @@
- 			     <1 10 0x8>; /* Hypervisor PPI, active-low */
- 	};
- 
--	fspi: flexspi@20c0000 {
-+	fspi: spi@20c0000 {
- 		compatible = "nxp,lx2160a-fspi";
- 		#address-cells = <1>;
- 		#size-cells = <0>;
-@@ -221,7 +221,7 @@
- 		status = "disabled";
- 	};
- 
--	dspi0: dspi@2100000 {
-+	dspi0: spi@2100000 {
- 		compatible = "fsl,vf610-dspi";
- 		#address-cells = <1>;
- 		#size-cells = <0>;
-@@ -230,7 +230,7 @@
- 		spi-num-chipselects = <6>;
- 	};
- 
--	dspi1: dspi@2110000 {
-+	dspi1: spi@2110000 {
- 		compatible = "fsl,vf610-dspi";
- 		#address-cells = <1>;
- 		#size-cells = <0>;
-@@ -239,7 +239,7 @@
- 		spi-num-chipselects = <6>;
- 	};
- 
--	dspi2: dspi@2120000 {
-+	dspi2: spi@2120000 {
- 		compatible = "fsl,vf610-dspi";
- 		#address-cells = <1>;
- 		#size-cells = <0>;
-diff --git a/arch/arm/dts/fsl-lx2162a-qds.dts b/arch/arm/dts/fsl-lx2162a-qds.dts
-index 0ca30df8620..b333af6d63c 100644
---- a/arch/arm/dts/fsl-lx2162a-qds.dts
-+++ b/arch/arm/dts/fsl-lx2162a-qds.dts
-@@ -41,7 +41,7 @@
- 	bus-num = <0>;
- 	status = "okay";
- 
--	dflash0: n25q128a {
-+	dflash0: n25q128a@0 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -50,7 +50,7 @@
- 		spi-cpha;
- 		reg = <0>;
- 	};
--	dflash1: sst25wf040b {
-+	dflash1: sst25wf040b@1 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -59,7 +59,7 @@
- 		spi-cpha;
- 		reg = <1>;
- 	};
--	dflash2: en25s64 {
-+	dflash2: en25s64@2 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -74,7 +74,7 @@
- 	bus-num = <0>;
- 	status = "okay";
- 
--	dflash3: n25q128a {
-+	dflash3: n25q128a@0 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -83,7 +83,7 @@
- 		spi-cpha;
- 		reg = <0>;
- 	};
--	dflash4: sst25wf040b {
-+	dflash4: sst25wf040b@1 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -92,7 +92,7 @@
- 		spi-cpha;
- 		reg = <1>;
- 	};
--	dflash5: en25s64 {
-+	dflash5: en25s64@2 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -107,7 +107,7 @@
- 	bus-num = <0>;
- 	status = "okay";
- 
--	dflash6: n25q128a {
-+	dflash6: n25q128a@0 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -116,7 +116,7 @@
- 		spi-cpha;
- 		reg = <0>;
- 	};
--	dflash7: sst25wf040b {
-+	dflash7: sst25wf040b@1 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-@@ -125,7 +125,7 @@
- 		spi-cpha;
- 		reg = <1>;
- 	};
--	dflash8: en25s64 {
-+	dflash8: en25s64@2 {
- 		#address-cells = <1>;
- 		#size-cells = <1>;
- 		compatible = "spi-flash";
-diff --git a/arch/arm/dts/ls1021a.dtsi b/arch/arm/dts/ls1021a.dtsi
-index 4f65ee765e3..005a40eff23 100644
---- a/arch/arm/dts/ls1021a.dtsi
-+++ b/arch/arm/dts/ls1021a.dtsi
-@@ -205,7 +205,7 @@
- 			clocks = <&sysclk>;
- 		};
- 
--		dspi0: dspi@2100000 {
-+		dspi0: spi@2100000 {
- 			compatible = "fsl,vf610-dspi";
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -218,7 +218,7 @@
- 			status = "disabled";
- 		};
- 
--		dspi1: dspi@2110000 {
-+		dspi1: spi@2110000 {
- 			compatible = "fsl,vf610-dspi";
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -231,7 +231,7 @@
- 			status = "disabled";
- 		};
- 
--		qspi: quadspi@1550000 {
-+		qspi: spi@1550000 {
- 			compatible = "fsl,ls1021a-qspi";
- 			#address-cells = <1>;
- 			#size-cells = <0>;
--- 
-2.37.1
+I came up with a (very) similar driver for this phy, too bad for the 
+duplicated work. Anyway, successfully tested on Genio Pro and even a bit 
+better than my own version, so feel free to add
 
+Reviewed-by: Arnaud Ferraris <arnaud.ferraris@collabora.com>
+
+Regards,
+Arnaud
