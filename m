@@ -4,97 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16269F43698
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 12:11:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 179CBF43699
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 12:11:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70B4A8428C;
-	Fri, 17 Apr 2026 14:11:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AA125842C9;
+	Fri, 17 Apr 2026 14:11:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="o6GuMWhc";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CLgUpnw2";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="dmmGjOf4";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ai3IZA8D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EBAEC8428C; Fri, 17 Apr 2026 14:11:26 +0200 (CEST)
+ id 15112842D2; Fri, 17 Apr 2026 14:11:36 +0200 (CEST)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E92D842A4
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 14:11:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 27B0183B99
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 14:11:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 63H80L8t1872640
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 12:11:23 GMT
+ 63H80F0L667783
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 12:11:31 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=p2ECGlyWwxS
- gIvsL0wEOoDmQMzp6g2LREOsPUY/1mM4=; b=o6GuMWhcLnWqbd1uagfri421Mb5
- hbGi7BMHrqGXHUNXcf00wLy4JqTLq8PrLcpBW7JRON4jVJaCjR+kdQG3qNth8OQt
- oI+Z1M2PNSZWTzqAnlmAnQPvAWzr6c6wNm74gvz+t8mbNqlEEKxoFrnBKkebSr9A
- M5+r6yh3IU9SjUtBPebxPvWPvwkdDPwqAQ/jYdGr1VNDn27FDdXUOvyjk7Ef9P1T
- sP7CuFmQfdJ4fJTACKco2xd/+SEIQV3Usj7Cc9Si6rPJDpfv6ugx/GdJFc/KltC2
- dkWVdtblLjxMG6/kxZwB9RWSfTR5OPsx0lUTcX8CPNP4jpvhBDR1IoBVFkA==
-Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
- [209.85.210.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dk2knby0s-1
+ content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ ZaeAZN+8yaN6Re2s0FGb54d2eF09X5ZjmqYxsyhA7Ag=; b=dmmGjOf4eGrh9c10
+ MnO3JRxLTIlTQ3uyE9T85LfQnFv8NiiI3+LG+jz01TpW3ximSptJ5XmE+lPvbcvU
+ 6WZwBSCXprhJMAqiYHDscO8o6QoExBxFl26QV4ct1K9fHOh1bT4yzMDc45AYNYxB
+ hr9W24V0tzuv+IZYx9A3g7NK8owlSk5XO9AeF2I6iSGtsLgnoUBr7JCha3hlzEce
+ UwdQj5PuavzfWhDRlxYHUM6XjHK0EkQWfRwyCLAOhYIFzSic1/hEVb4iBTjYc1p2
+ jzJJMf/lYYTyK6MloaReO8+m+B1vtZIZ35QO4CF9TSnVMwIoQqobozikgl9WkxqG
+ 0IVHWA==
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
+ [209.85.210.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dkaxct61n-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 12:11:22 +0000 (GMT)
-Received: by mail-pf1-f199.google.com with SMTP id
- d2e1a72fcca58-82f0f2b2641so440942b3a.3
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 05:11:22 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 12:11:31 +0000 (GMT)
+Received: by mail-pf1-f198.google.com with SMTP id
+ d2e1a72fcca58-82f2138a9e0so434994b3a.3
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 05:11:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1776427882; x=1777032682; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1776427890; x=1777032690; darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=p2ECGlyWwxSgIvsL0wEOoDmQMzp6g2LREOsPUY/1mM4=;
- b=CLgUpnw2GdsPYhS/XDAltCL8cQ2xXohcHLms84KrrVdyj3QgQwLezmdIc5MVnH/ltR
- X/qbQuNwnnaCeIEtCHI3v8M4/pyvbszs96KF/JDcbLnjVWJwU3jfzPsOScblTiin8m05
- 0zhj+2FrBgwfIxnVjjGW31CLChxrYHu8aOJUTkjMmbYP2XUCoseFc/WTrjuo5tVLc+v8
- lOLAfAC/ok6oLz3gk0Cln3JJwfxrxdlDVCKqxBujvpqVNqCDCl7mc5LCQd2odUsD2bOG
- v+JSyHAYMfZFcKKbl4/68ohOXab70ZB0jU0LlwhD8Z7rAokrswkV8B4uyzP7PWYR9ZQH
- RewA==
+ :reply-to; bh=ZaeAZN+8yaN6Re2s0FGb54d2eF09X5ZjmqYxsyhA7Ag=;
+ b=ai3IZA8DtwfkdLQsTh/QKxKDemV5BgstaiMI5iXMSjPvnbNdx+uT9Rdk5bBji2IXUX
+ eMUpiJjkL/WnfRjT4zIbYBDvX71yn5ghdsmJ6tDPvXyeQzPBAMpYMRRqmXrBSDFucoZp
+ fpjb0Ft8z3Jo0LPV0L5O2nQvsIeb6t5tmeZcXKTrJu4m5p1bj6dtH1p0Ddjj3/CYk5vu
+ VprHHbF0a1NY8oCxwrRTiE+Wmf3xty/aZCjEKBC6CzQm8VFueYZ3K89DUythPFTKN5gi
+ 84Ie8ZXVamDjRjMy5XS71nGwYJmPpKryv11ddpu5Sp3eALCy2x6UH6AHcm2cXAS5IQd2
+ gRxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776427882; x=1777032682;
+ d=1e100.net; s=20251104; t=1776427890; x=1777032690;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=p2ECGlyWwxSgIvsL0wEOoDmQMzp6g2LREOsPUY/1mM4=;
- b=Tdv/Qqguo/NdFyz5SBf+SX3HQZjD1L6d5pTrE9hxl31YFlaA/c+Nfbh4xoKRzBUNav
- 1CTdpKZJAiCBaJ0NIvpRmfYHDHUsuDszdjactlqr+UTyvYSU/BPCO9liGh4syljlgUTC
- zgruPIpAGT3q9G4Jthoa4QlcK4OmPNKwPkk2K+l09bEYGZXk7JiLlCIupkjGMuHI2Ene
- jN6ebVJiBf7pEYM0c1WbDYSEPMASCrwB10ZmeGiEw3apvSxrV5g06yylfLzlJyHHd2WJ
- QCEZk2DgQd6E7TMcgqZXUGziCUGr4FVOKjJsYpiO/VN8YiFouKyeiAadz42HFoUxmkHZ
- qKhQ==
+ bh=ZaeAZN+8yaN6Re2s0FGb54d2eF09X5ZjmqYxsyhA7Ag=;
+ b=Jsl+YpclfGHnMcCJWtXq6HIyqKiNV+MzIX6DblpN9Tq/EuaZfL9O3FGUTRM+vPsNL0
+ ewdpy+lB63jMxM6qTRY5esMox+5D96pe4LP7YKpZBSS4rVTS5eDv3l+lly6zU57Xl951
+ +i8T1UvM+LU+626pky8h+g/aMpfMU/r3Mq73sDpQSlJTkvM2nZ16XWNbesmoz0MAcCmy
+ Dqhab2PvLIa6QHLPPo66Fen4+i7O8NeITHft1UDGAY5GcvZVcfSf7sEToR43uNyLh4mO
+ f40CaxgGv8IDUuY5tslH7LCSNiMUR62oTUvhLTleqJc5hIqQ2oYJLy9lr0byQU4f82P0
+ 3jCg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+ogBx9Sy3j5fIN0C3zOvR1JWx8NBSF/1ZbnzekmYvqrUdl/bJb2AZG0L+GfStRzms1Tywdgms=@lists.denx.de
-X-Gm-Message-State: AOJu0YxpTkmxU0+44G8nGu6xEZROOz6APUEEDnjges/SufbhMuqCsIJV
- WKWYLpees06iLrgkUfibzTDgGrLFTl8uR5zpZBK8I/ppB61HDxP2xgiouwNVhQwULFsb5rDzWa8
- gyVV+REXpzBOg9JMKdGvZTVTIOY+mHj8VvghZpeQ4VIHAI5vf6nBnvu4R
-X-Gm-Gg: AeBDieuufa8O2r0Xivo/tM0MfZiWqfFn6OOWH+/+eUvvAKHXjMphgg1BTcIZSFrqJeu
- o7sa9u4DuVGBvj1IW6XBoB1vlnLN6y7+cd6Li+/jYiRJMrBmKrE79rL0n7xhdMqctOKl2Aa2xqp
- i7ICYNA7xCKLmdez2pQjiNy9c3AuWs1V+30/S8H3NWFQef1rlB+fODO/mXdU8IYpwPvbsPqx5ib
- tXl5I8st8mcpB79qa6hI0myUAgEjXnysJnyK5vJF7oKAN2n1Dem3IrimImLAPZGTXSHl3FKhdzc
- AkQ3PEJHIwNPLHxvwoNv4y3RicjiRkCVxG4JNKQNF8lJ/bvKomwl/lmKQTi84wP2QmTaqnBiP/v
- ClWBT8SCfTbaBM073nPzF9CIN60Drun4pqHMsXvRRrKKz8FO1hkJMk3eO4DNQ5u8L4S3Veit3Nk
- KXNzGiKCM/l53uO8U9WORwsaGdasDGy577AuoVMFfpjto57q0hUIE=
-X-Received: by 2002:a05:6a00:90a8:b0:82c:7eb1:4d61 with SMTP id
- d2e1a72fcca58-82f8c8bb03amr2376597b3a.32.1776427881366; 
- Fri, 17 Apr 2026 05:11:21 -0700 (PDT)
-X-Received: by 2002:a05:6a00:90a8:b0:82c:7eb1:4d61 with SMTP id
- d2e1a72fcca58-82f8c8bb03amr2376549b3a.32.1776427880757; 
- Fri, 17 Apr 2026 05:11:20 -0700 (PDT)
+ AFNElJ8Sg2UObf7o0eHTdqe979fNTVFzrwPpxcBvktkTTgzB6AeAzb6sfhL5qHXiZkuSISp8aQOqFoM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzDXp69dS3rypXVhsVxgpaDTQ82ubIQeZWie6SMiskJHntbsWLH
+ rUsLNsr5aC0vbV/cij1ZeM3nlrObAEuYGdF0+LpQ4xmikrr65tf2nPQB1ZftGdkhROt/vojr95+
+ WZToifj8fYncmbYMyKGUrsrL97eD+5m28ztKsYffbRk8VebW8ju80W6CJ
+X-Gm-Gg: AeBDietF9v5Ladxmi+kEXXA18IkWKQTET2jpncWqz7nvV+DbFTr0qcNNK43jOkyBdO+
+ rpr/jncEuQi0Tidnezw67hJ61xrHsajX5YOkGag6L2wJluw7SjG3X+RgySHlzfyVypDA/e6+izo
+ DCCIinY5dwdsv2IkyLo+ClnTrU2PVmPQn5oSFgc5lAD/p+2QZmG3PRDzJvdyz4sfetRlpoSnehm
+ 80Kf+HBa10Ky9/6fB+FaXNnDHdUD7FLVC7gpvqAmNI6MECUXkB9CrHAQerTrmcZqHrHxwwU0aej
+ 49vOgVnbOSMBz48kmGMbfYUP4UtdHaiiImVHErjEiXecHYifIB5QJoVOJxlfs+vBMfxlK687VPn
+ TxB0sclRxz2FUZyAP+uXkGM4LadSgR0SD9xlxAn1g1gSkfGa9txuDZSDnm2trjCdmUyaI0g/rQk
+ LXcJACNuoaFlRuVfr48vVPb4+WPGVMJU3dT9rY3VttNTu6TYhn7mo=
+X-Received: by 2002:a05:6a00:a90d:b0:823:9e5:855e with SMTP id
+ d2e1a72fcca58-82f8c2c6390mr2550725b3a.0.1776427889937; 
+ Fri, 17 Apr 2026 05:11:29 -0700 (PDT)
+X-Received: by 2002:a05:6a00:a90d:b0:823:9e5:855e with SMTP id
+ d2e1a72fcca58-82f8c2c6390mr2550681b3a.0.1776427889258; 
+ Fri, 17 Apr 2026 05:11:29 -0700 (PDT)
 Received: from hu-aswinm-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-82f8e9cbb28sm1744641b3a.13.2026.04.17.05.11.12
+ d2e1a72fcca58-82f8e9cbb28sm1744641b3a.13.2026.04.17.05.11.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Apr 2026 05:11:20 -0700 (PDT)
+ Fri, 17 Apr 2026 05:11:28 -0700 (PDT)
 From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
  sumit.garg@kernel.org, aswin.murugan@oss.qualcomm.com,
@@ -106,37 +107,43 @@ To: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org,
  jan.kiszka@siemens.com, funderscore@postmarketos.org, hs@nabladev.com,
  kory.maincent@bootlin.com, jj251510319013@gmail.com,
  carlos.lopezr4096@gmail.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: [PATCH v3 5/7] mkimage: add fatfs image type for FAT partition images
-Date: Fri, 17 Apr 2026 17:39:49 +0530
-Message-Id: <20260417120951.3454249-6-aswin.murugan@oss.qualcomm.com>
+Subject: [PATCH v3 6/7] doc: document mkimage fatfs type and Qualcomm multi-DTB
+Date: Fri, 17 Apr 2026 17:39:50 +0530
+Message-Id: <20260417120951.3454249-7-aswin.murugan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260417120951.3454249-1-aswin.murugan@oss.qualcomm.com>
 References: <20260417120951.3454249-1-aswin.murugan@oss.qualcomm.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: 9guJCkTujK2BCnxjF4SsvTOKHv-X1EWC
-X-Authority-Analysis: v=2.4 cv=XNoAjwhE c=1 sm=1 tr=0 ts=69e2236a cx=c_pps
- a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8
- a=KD3lojeL17VxHfHb3aMA:9 a=OpyuDcXvxspvyRM73sMx:22
-X-Proofpoint-ORIG-GUID: 9guJCkTujK2BCnxjF4SsvTOKHv-X1EWC
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE3MDEyMiBTYWx0ZWRfX+PEoFuyWtjzt
- xlDdteVi7Xa2KPOlGMDgf5WSuD5g3aYHyIEsCGnzLTr7ZppzT7Tp/GdTtl4pLD0SDiibyfDzhaw
- 5UKbpgJgXa6v20mrGvUnM2sy3d+VbELCBLaYK0V5OsGLHYIqOzUqDvpvXx5vBVXKv/E4iEtnvIy
- ZaDHqgEr4zGVcZ08rA51RNWQwUS+gTqK4s/F3Qaz1GpvU563Sc6BDY+d+CVazsJof4jZD3aefmL
- bYU8K3zM2j5UXJck8cBE1ZMsf9t5FJqNQrDURD7gEyzEXecAstqLXjUV825xuJl0Np9YTkH532f
- Lc6D4kW3dwJKYoIX+xiv/BZy4MviODOUX8LwLhEW4xqIuF06ntIOKqjV7oaAP2MZZvnkYtLdqis
- mQVMCWuFLUjeBhhbyCXRM0Z911Ge93GaZlheNt9YlqbY/pL8uUfCiqRWprg8mgdwwZCgtXmxfNe
- ICjx6W69rv1r42ySfyw==
+X-Authority-Analysis: v=2.4 cv=JcqMa0KV c=1 sm=1 tr=0 ts=69e22373 cx=c_pps
+ a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=XpE1AkgCAAAA:8 a=3zqMThaUAAAA:8 a=cSziVDP4AAAA:20 a=NEAV23lmAAAA:8
+ a=EUspDBNiAAAA:8 a=RfRJOeisY0wqTn3sFHIA:9 a=ER5y7YfLcBVczURf:21
+ a=lqcHg5cX4UMA:10 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=z2U-W3hJrleVIN9YIjzO:22 a=IoOABgeZipijB_acs4fv:22 a=dpZMgbseYPk84XhQl7oQ:22
+ a=7DfZiAEMZEHNOMwpeQAY:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE3MDEyMiBTYWx0ZWRfX+3UTuf5Iqn5n
+ +E1Eo5JJp6AeT5KkhFrDs15Iwy4nqtBhBWE3+YcNyG8osf7X0NvM7N0zTB7iCnCudOv0sk3sk4T
+ nazKLrRb18peTu/sEdRzAMcSm24XTUbbdNVUuQbPPg6wWdln9Jf6g8fxJ0vu8qdLC/kkQ8Wf6Is
+ YLac3qvOndVhrtgbJo7EJ2wmud7+NKHUAMv6lBP9JJBTa2AXSKp0YLIjk0AOsPSGZCSeIFwSS+Z
+ d99HZ6XWqNlYREXAMYW6c5Ko4ix/qACV0zWPUj3IGDPejzJ5N1kYRfr1YrKLbiXn3ciQ+A+kf9w
+ POlUzaH90uhXpOLFvgmpN6dpqJFGiwnB2TVhtszkeEdQ77hGVI98E1y9vHytmGfsjT1dZhl8UWo
+ XHR0zQL33/HKFtvgFbEb26X3tkj1Dm6jqCGmFVmbdhMwFlyopn7FQ6ttdAcV12WaESoEJgrh0nK
+ L2FMZK0db1Sv0ZmgbHQ==
+X-Proofpoint-GUID: usHZp2MNsLGUr64Xo__MiKKvtHHZp-7A
+X-Proofpoint-ORIG-GUID: usHZp2MNsLGUr64Xo__MiKKvtHHZp-7A
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-04-17_01,2026-04-17_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 impostorscore=0 priorityscore=1501 suspectscore=0 spamscore=0
- phishscore=0 clxscore=1015 lowpriorityscore=0 adultscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2604070000 definitions=main-2604170122
+ spamscore=0 adultscore=0 clxscore=1015 malwarescore=0 phishscore=0
+ suspectscore=0 priorityscore=1501 impostorscore=0 lowpriorityscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2604070000
+ definitions=main-2604170122
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,652 +160,545 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new mkimage image type 'fatfs' that creates a raw FAT
-filesystem partition image from a directory of files.
+Update doc/mkimage.1 to document the new fatfs image type,
+the --fat-* long options, a fatfs entry in the CONFIGURATION
+section, and two usage examples.
 
-The image handler (fatimage.c) uses mkfs.vfat (dosfstools)
-to format the image and mcopy (mtools) to populate it. The
-image size is calculated automatically from the input
-directory size plus FAT metadata overhead.
+Add doc/board/qualcomm/multi_dtb.rst describing the
+Qualcomm FIT-based multi-DTB packaging workflow for
+Snapdragon platforms. The document covers:
+- FIT ITS configuration and compatible string matching
+- QCOM metadata binary format and identifier properties
+- Guidelines for adding new socver/boardrev entries
+- Step-by-step image creation using mkimage -T fatfs
 
-New long options added to mkimage:
-  --fat-extra-space <KB>  extra padding (default: 512 KB)
-  --fat-type <0|12|16|32> FAT type (0 = auto-detect)
-  --fat-volume-id <label> volume label (default: BOOT)
-  --fat-mkfs-opts <opts>  extra mkfs.vfat options
-
-Usage:
-  mkimage -T fatfs -d <input-dir> \
-      --fat-extra-space 512 \
-      --fat-volume-id "MYBOOT" \
-      --fat-mkfs-opts "-S 512 -a" \
-      output.img
+Update doc/board/qualcomm/index.rst to include the new
+multi_dtb page in the toctree.
 
 Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 ---
- tools/Makefile   |   1 +
- tools/fatimage.c | 495 +++++++++++++++++++++++++++++++++++++++++++++++
- tools/fatimage.h |  25 +++
- tools/mkimage.c  |  21 ++
- tools/mkimage.h  |  15 ++
- 5 files changed, 557 insertions(+)
- create mode 100644 tools/fatimage.c
- create mode 100644 tools/fatimage.h
+ doc/board/qualcomm/index.rst     |   1 +
+ doc/board/qualcomm/multi_dtb.rst | 352 +++++++++++++++++++++++++++++++
+ doc/mkimage.1                    | 103 +++++++++
+ 3 files changed, 456 insertions(+)
+ create mode 100644 doc/board/qualcomm/multi_dtb.rst
 
-diff --git a/tools/Makefile b/tools/Makefile
-index 1a5f425ecda..2f6c9363209 100644
---- a/tools/Makefile
-+++ b/tools/Makefile
-@@ -112,6 +112,7 @@ ROCKCHIP_OBS = generated/lib/rc4.o rkcommon.o rkimage.o rksd.o rkspi.o
- dumpimage-mkimage-objs := aisimage.o \
- 			amlimage.o \
- 			atmelimage.o \
-+			fatimage.o \
- 			$(FIT_OBJS-y) \
- 			$(FIT_SIG_OBJS-y) \
- 			$(FIT_CIPHER_OBJS-y) \
-diff --git a/tools/fatimage.c b/tools/fatimage.c
+diff --git a/doc/board/qualcomm/index.rst b/doc/board/qualcomm/index.rst
+index 3238a68e859..fe4a4aecd60 100644
+--- a/doc/board/qualcomm/index.rst
++++ b/doc/board/qualcomm/index.rst
+@@ -10,6 +10,7 @@ Qualcomm
+    debugging
+    dragonboard410c
+    dragonwing
++   multi_dtb
+    rb3gen2
+    iq8
+    phones
+diff --git a/doc/board/qualcomm/multi_dtb.rst b/doc/board/qualcomm/multi_dtb.rst
 new file mode 100644
-index 00000000000..6a199c70f5b
+index 00000000000..fa9252ce1c4
 --- /dev/null
-+++ b/tools/fatimage.c
-@@ -0,0 +1,495 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * FAT Filesystem Image support for mkimage
-+ *
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries
-+ *
-+ * This tool creates FAT filesystem images from a directory of files.
-+ * It uses system tools (mkfs.vfat and mcopy from mtools) to create
-+ * the filesystem image.
-+ */
-+
-+#include "imagetool.h"
-+#include "mkimage.h"
-+#include "fatimage.h"
-+#include <image.h>
-+#include <sys/stat.h>
-+#include <dirent.h>
-+#include <errno.h>
-+
-+static struct fatimage_params fatparams = {
-+	.input_dir = NULL,
-+	.extra_space = 512,
-+	.fat_type = 0,
-+	.volume_id = "BOOT",
-+	.mkfs_opts = "-S 512",
-+};
-+
-+/* Cached image size to avoid recalculation between vrec_header and set_header */
-+static int cached_image_size_kb = -1;
-+
-+/**
-+ * get_directory_size_kb() - Return the total disk usage of a directory in KB
-+ * @path: Path to the directory
-+ *
-+ * Runs 'du -sk' to measure the on-disk size of all files under @path.
-+ *
-+ * Return: size in KB on success, -1 on error
-+ */
-+static int get_directory_size_kb(const char *path)
-+{
-+	char cmd[1024];
-+	FILE *fp;
-+	int size_kb = 0;
-+
-+	snprintf(cmd, sizeof(cmd), "du -sk \"%s\" 2>/dev/null | cut -f1", path);
-+
-+	fp = popen(cmd, "r");
-+	if (!fp) {
-+		fprintf(stderr, "Error: Failed to execute du command\n");
-+		return -1;
-+	}
-+
-+	if (fscanf(fp, "%d", &size_kb) != 1) {
-+		fprintf(stderr, "Error: Failed to read directory size\n");
-+		pclose(fp);
-+		return -1;
-+	}
-+
-+	pclose(fp);
-+	return size_kb;
-+}
-+
-+/**
-+ * count_entries() - Recursively count files and subdirectories under a path
-+ * @path: Directory to scan
-+ * @files: Incremented for each regular file found
-+ * @dirs: Incremented for each subdirectory found
-+ *
-+ * Used to estimate FAT directory entry overhead when sizing the image.
-+ *
-+ * Return: 0 on success, -1 if the directory cannot be opened
-+ */
-+static int count_entries(const char *path, int *files, int *dirs)
-+{
-+	DIR *dir;
-+	struct dirent *entry;
-+	struct stat st;
-+	char full_path[1024];
-+
-+	dir = opendir(path);
-+	if (!dir) {
-+		fprintf(stderr, "Error: Cannot open directory %s: %s\n",
-+			path, strerror(errno));
-+		return -1;
-+	}
-+
-+	while ((entry = readdir(dir)) != NULL) {
-+		if (strcmp(entry->d_name, ".") == 0 ||
-+		    strcmp(entry->d_name, "..") == 0)
-+			continue;
-+
-+		snprintf(full_path, sizeof(full_path), "%s/%s", path, entry->d_name);
-+
-+		if (stat(full_path, &st) < 0) {
-+			fprintf(stderr, "Warning: Cannot stat %s: %s\n",
-+				full_path, strerror(errno));
-+			continue;
-+		}
-+
-+		if (S_ISDIR(st.st_mode)) {
-+			(*dirs)++;
-+			count_entries(full_path, files, dirs);
-+		} else {
-+			(*files)++;
-+		}
-+	}
-+
-+	closedir(dir);
-+	return 0;
-+}
-+
-+/**
-+ * calculate_image_size() - Compute the required FAT image size in KB
-+ * @input_dir: Directory whose contents will be packed into the image
-+ * @extra_space: Additional padding in KB to add beyond the data size
-+ * @fat_type: Requested FAT type (0=auto, 12, 16, 32)
-+ *
-+ * Calculates the minimum image size needed to hold all files in @input_dir
-+ * plus FAT metadata overhead (directory entries, two FAT copies) and
-+ * @extra_space KB of padding. The result is cached in cached_image_size_kb
-+ * so that vrec_header and set_header agree on the same value.
-+ *
-+ * Return: image size in KB on success, -1 on error
-+ */
-+static int calculate_image_size(const char *input_dir, int extra_space,
-+				 int fat_type)
-+{
-+	int data_kb;
-+	int sectors;
-+	int files = 0, dirs = 0;
-+	int dir_bytes, fat_bytes;
-+	int dir_sectors, fat_sectors;
-+	int fat_entry_size;
-+	int total_sectors;
-+	int blocks;
-+
-+	if (cached_image_size_kb > 0)
-+		return cached_image_size_kb;
-+
-+	data_kb = get_directory_size_kb(input_dir);
-+	if (data_kb < 0)
-+		return -1;
-+
-+	sectors = data_kb * 2;
-+
-+	if (count_entries(input_dir, &files, &dirs) < 0)
-+		return -1;
-+
-+	dir_bytes = (files + dirs) * DIR_ENTRY_SIZE;
-+	dir_bytes += dirs * DIR_ENTRY_SIZE;
-+
-+	if (fat_type == 32) {
-+		fat_entry_size = FAT_ENTRY_SIZE_FAT32;
-+		if ((sectors / 2 + extra_space) < 32 * 1024) {
-+			fprintf(stderr, "Warning: Image size %d KB may be too small for FAT32\n",
-+				(sectors / 2 + extra_space));
-+			fprintf(stderr, "         FAT32 works best with images >= 32 MB\n");
-+			fprintf(stderr, "         Consider using auto-detect or FAT16 instead\n");
-+		}
-+	} else if (fat_type == 0) {
-+		if ((sectors / 2 + extra_space) > 512 * 1024)
-+			fat_entry_size = FAT_ENTRY_SIZE_FAT32;
-+		else
-+			fat_entry_size = FAT_ENTRY_SIZE_FAT16;
-+	} else if (fat_type == 16) {
-+		fat_entry_size = FAT_ENTRY_SIZE_FAT16;
-+	} else if (fat_type == 12) {
-+		fat_entry_size = FAT_ENTRY_SIZE_FAT12;
-+	} else {
-+		fat_entry_size = FAT_ENTRY_SIZE_FAT16;
-+	}
-+
-+	fat_bytes = sectors * fat_entry_size;
-+	fat_bytes += dirs * fat_entry_size;
-+
-+	dir_sectors = (dir_bytes + SECTOR_SIZE - 1) / SECTOR_SIZE;
-+	fat_sectors = ((fat_bytes + SECTOR_SIZE - 1) / SECTOR_SIZE) * 2;
-+
-+	total_sectors = sectors + dir_sectors + fat_sectors;
-+	blocks = (total_sectors / 2) + extra_space;
-+
-+	printf("FAT image size calculation:\n");
-+	printf("  Data size: %d KB (%d sectors)\n", data_kb, sectors);
-+	printf("  Files: %d, Directories: %d\n", files, dirs);
-+	printf("  Directory overhead: %d sectors\n", dir_sectors);
-+	printf("  FAT overhead: %d sectors (2 FATs)\n", fat_sectors);
-+	printf("  Extra padding: %d KB\n", extra_space);
-+	printf("  Total image size: %d KB\n", blocks);
-+
-+	cached_image_size_kb = blocks;
-+
-+	return blocks;
-+}
-+
-+/**
-+ * create_fat_image() - Format a FAT image file and populate it with files
-+ * @input_dir: Source directory; all contents are copied into the image
-+ * @output_file: Path of the FAT image file to create
-+ * @blocks: Image size in KB (passed to mkfs.vfat as the block count)
-+ * @fat_type: FAT type to use (0=auto, 12, 16, 32)
-+ * @volume_id: FAT volume label string
-+ * @mkfs_opts: Additional options forwarded to mkfs.vfat
-+ *
-+ * Calls mkfs.vfat to format @output_file as a FAT filesystem, then uses
-+ * mcopy to copy all files from @input_dir into the image root.
-+ *
-+ * Return: 0 on success, -1 on error
-+ */
-+static int create_fat_image(const char *input_dir, const char *output_file,
-+			    int blocks, int fat_type, const char *volume_id,
-+			    const char *mkfs_opts)
-+{
-+	char cmd[2048];
-+	int ret;
-+
-+	unlink(output_file);
-+
-+	if (fat_type > 0) {
-+		snprintf(cmd, sizeof(cmd),
-+			 "mkfs.vfat -F %d %s -n \"%s\" -C \"%s\" %d",
-+			 fat_type, mkfs_opts ? mkfs_opts : "",
-+			 volume_id, output_file, blocks);
-+	} else {
-+		if (blocks > 512 * 1024) {
-+			snprintf(cmd, sizeof(cmd),
-+				 "mkfs.vfat -F 32 %s -n \"%s\" -C \"%s\" %d",
-+				 mkfs_opts ? mkfs_opts : "",
-+				 volume_id, output_file, blocks);
-+		} else {
-+			snprintf(cmd, sizeof(cmd),
-+				 "mkfs.vfat %s -n \"%s\" -C \"%s\" %d",
-+				 mkfs_opts ? mkfs_opts : "",
-+				 volume_id, output_file, blocks);
-+		}
-+	}
-+
-+	printf("Creating FAT filesystem: %s\n", cmd);
-+	ret = system(cmd);
-+	if (ret != 0) {
-+		fprintf(stderr, "Error: mkfs.vfat failed with code %d\n", ret);
-+		fprintf(stderr, "Make sure mkfs.vfat (dosfstools) is installed\n");
-+		return -1;
-+	}
-+
-+	snprintf(cmd, sizeof(cmd),
-+		 "MTOOLS_SKIP_CHECK=1 mcopy -i \"%s\" -s \"%s\"/* ::/",
-+		 output_file, input_dir);
-+
-+	printf("Copying files: %s\n", cmd);
-+	ret = system(cmd);
-+	if (ret != 0) {
-+		fprintf(stderr, "Error: mcopy failed with code %d\n", ret);
-+		fprintf(stderr, "Make sure mcopy (mtools) is installed\n");
-+		return -1;
-+	}
-+
-+	printf("FAT image created successfully: %s\n", output_file);
-+	return 0;
-+}
-+
-+/**
-+ * fatimage_check_params() - Validate mkimage parameters for the fatfs type
-+ * @params: mkimage tool parameters (unused; input dir is in fatparams)
-+ *
-+ * Verifies that an input directory has been specified via fatimage_set_dir()
-+ * and that it exists and is a directory.
-+ *
-+ * Return: 0 if parameters are valid, -1 on error
-+ */
-+static int fatimage_check_params(struct image_tool_params *params)
-+{
-+	if (!fatparams.input_dir) {
-+		fprintf(stderr, "Error: Input directory not specified\n");
-+		fprintf(stderr, "Use -d <directory> to specify input directory\n");
-+		return -1;
-+	}
-+
-+	struct stat st;
-+	if (stat(fatparams.input_dir, &st) < 0) {
-+		fprintf(stderr, "Error: Input directory '%s' does not exist: %s\n",
-+			fatparams.input_dir, strerror(errno));
-+		return -1;
-+	}
-+
-+	if (!S_ISDIR(st.st_mode)) {
-+		fprintf(stderr, "Error: '%s' is not a directory\n",
-+			fatparams.input_dir);
-+		return -1;
-+	}
-+
-+	return 0;
-+}
-+
-+/**
-+ * fatimage_check_image_type() - Report whether this handler owns a given type
-+ * @type: IH_TYPE_* value to check
-+ *
-+ * Return: EXIT_SUCCESS if @type == IH_TYPE_FATFS, EXIT_FAILURE otherwise
-+ */
-+static int fatimage_check_image_type(uint8_t type)
-+{
-+	if (type == IH_TYPE_FATFS)
-+		return EXIT_SUCCESS;
-+	return EXIT_FAILURE;
-+}
-+
-+/**
-+ * fatimage_verify_header() - Verify that a buffer contains a valid FAT image
-+ * @ptr: Pointer to the start of the image data
-+ * @image_size: Total size of the image in bytes
-+ * @params: mkimage tool parameters (unused)
-+ *
-+ * Checks for the FAT boot sector signature (0x55AA) at bytes 510-511.
-+ *
-+ * Return: 0 if the signature is present, -1 otherwise
-+ */
-+static int fatimage_verify_header(unsigned char *ptr, int image_size,
-+				  struct image_tool_params *params)
-+{
-+	if (image_size < 512)
-+		return -1;
-+
-+	if (ptr[510] != 0x55 || ptr[511] != 0xAA) {
-+		fprintf(stderr, "Error: Not a valid FAT filesystem image\n");
-+		return -1;
-+	}
-+
-+	return 0;
-+}
-+
-+/**
-+ * fatimage_print_header() - Print human-readable FAT image information
-+ * @ptr: Pointer to the start of the image data
-+ * @params: mkimage tool parameters (unused)
-+ *
-+ * Prints the boot signature, detected FAT type (FAT32 vs FAT12/16),
-+ * and volume label read from the BPB.
-+ */
-+static void fatimage_print_header(const void *ptr,
-+				  struct image_tool_params *params)
-+{
-+	const unsigned char *buf = ptr;
-+
-+	printf("FAT Filesystem Image\n");
-+	printf("  Boot signature: 0x%02X%02X\n", buf[511], buf[510]);
-+
-+	if (buf[82] == 'F' && buf[83] == 'A' && buf[84] == 'T' &&
-+	    buf[85] == '3' && buf[86] == '2') {
-+		printf("  Filesystem: FAT32\n");
-+		printf("  Volume label: %.11s\n", &buf[71]);
-+	} else {
-+		printf("  Filesystem: FAT12/FAT16\n");
-+		printf("  Volume label: %.11s\n", &buf[43]);
-+	}
-+}
-+
-+/**
-+ * fatimage_vrec_header() - Allocate the output buffer for the FAT image
-+ * @params: mkimage tool parameters
-+ * @tparams: image type parameters; hdr and header_size are set on success
-+ *
-+ * Called before set_header to pre-allocate a buffer large enough for the
-+ * complete FAT image. The size is calculated from the input directory and
-+ * cached for reuse by fatimage_set_header().
-+ *
-+ * Return: 0 on success, -1 on error
-+ */
-+static int fatimage_vrec_header(struct image_tool_params *params,
-+				struct image_type_params *tparams)
-+{
-+	int blocks;
-+	int image_size_bytes;
-+
-+	blocks = calculate_image_size(fatparams.input_dir,
-+				      fatparams.extra_space,
-+				      fatparams.fat_type);
-+	if (blocks < 0) {
-+		fprintf(stderr, "Error: Failed to calculate image size\n");
-+		return -1;
-+	}
-+
-+	image_size_bytes = blocks * 1024;
-+
-+	tparams->hdr = malloc(image_size_bytes);
-+	if (!tparams->hdr) {
-+		fprintf(stderr, "Error: Failed to allocate %d bytes for FAT image\n",
-+			image_size_bytes);
-+		return -1;
-+	}
-+
-+	tparams->header_size = image_size_bytes;
-+
-+	return 0;
-+}
-+
-+/**
-+ * fatimage_set_header() - Create the FAT image and load it into the buffer
-+ * @ptr: Output buffer (allocated by fatimage_vrec_header)
-+ * @sbuf: stat of the output file (unused)
-+ * @ifd: file descriptor of the output file (unused)
-+ * @params: mkimage tool parameters; imagefile is used for the temp file name
-+ *
-+ * Creates the FAT image in a temporary file using mkfs.vfat and mcopy,
-+ * reads the result into @ptr, then removes the temporary file.
-+ *
-+ * Return: 0 on success, -1 on error
-+ */
-+static int fatimage_set_header(void *ptr, struct stat *sbuf, int ifd,
-+			       struct image_tool_params *params)
-+{
-+	int blocks;
-+	int ret;
-+	char temp_file[256];
-+	FILE *fp;
-+	size_t bytes_read;
-+
-+	snprintf(temp_file, sizeof(temp_file), "%s.tmp", params->imagefile);
-+
-+	blocks = calculate_image_size(fatparams.input_dir,
-+				      fatparams.extra_space,
-+				      fatparams.fat_type);
-+	if (blocks < 0) {
-+		fprintf(stderr, "Error: Failed to calculate image size\n");
-+		return -1;
-+	}
-+
-+	ret = create_fat_image(fatparams.input_dir, temp_file,
-+			       blocks, fatparams.fat_type,
-+			       fatparams.volume_id, fatparams.mkfs_opts);
-+	if (ret < 0) {
-+		fprintf(stderr, "Error: Failed to create FAT image\n");
-+		return -1;
-+	}
-+
-+	fp = fopen(temp_file, "rb");
-+	if (!fp) {
-+		fprintf(stderr, "Error: Failed to open temporary file %s: %s\n",
-+			temp_file, strerror(errno));
-+		unlink(temp_file);
-+		return -1;
-+	}
-+
-+	bytes_read = fread(ptr, 1, blocks * 1024, fp);
-+	fclose(fp);
-+	unlink(temp_file);
-+
-+	if (bytes_read != (size_t)(blocks * 1024)) {
-+		fprintf(stderr, "Error: Failed to read FAT image (read %zu, expected %d)\n",
-+			bytes_read, blocks * 1024);
-+		return -1;
-+	}
-+
-+	printf("FAT image created successfully in buffer\n");
-+	return 0;
-+}
-+
-+U_BOOT_IMAGE_TYPE(
-+	fatfsimage,
-+	"FAT Filesystem Image",
-+	0,
-+	NULL,
-+	fatimage_check_params,
-+	fatimage_verify_header,
-+	fatimage_print_header,
-+	fatimage_set_header,
-+	NULL,
-+	fatimage_check_image_type,
-+	NULL,
-+	fatimage_vrec_header
-+);
-+
-+void fatimage_set_dir(const char *dir)
-+{
-+	fatparams.input_dir = strdup(dir);
-+}
-+
-+void fatimage_set_extra_space(int space_kb)
-+{
-+	fatparams.extra_space = space_kb;
-+}
-+
-+void fatimage_set_fat_type(int type)
-+{
-+	fatparams.fat_type = type;
-+}
-+
-+void fatimage_set_volume_id(const char *volid)
-+{
-+	fatparams.volume_id = strdup(volid);
-+}
-+
-+void fatimage_set_mkfs_opts(const char *opts)
-+{
-+	fatparams.mkfs_opts = strdup(opts);
-+}
-diff --git a/tools/fatimage.h b/tools/fatimage.h
-new file mode 100644
-index 00000000000..8822724925c
---- /dev/null
-+++ b/tools/fatimage.h
-@@ -0,0 +1,25 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * FAT Filesystem Image support for mkimage
-+ *
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries
-+ */
-+
-+#ifndef _FATIMAGE_H_
-+#define _FATIMAGE_H_
-+
-+#define SECTOR_SIZE 512
-+#define DIR_ENTRY_SIZE 32
-+#define FAT_ENTRY_SIZE_FAT32 4
-+#define FAT_ENTRY_SIZE_FAT16 2
-+#define FAT_ENTRY_SIZE_FAT12 2  /* Rounded up from 1.5 bytes */
-+
-+struct fatimage_params {
-+	char *input_dir;
-+	int extra_space;      /* Extra padding space in KB (default: 512) */
-+	int fat_type;         /* FAT type: 0=auto, 12/16/32 */
-+	char *volume_id;      /* Volume label (default: "BOOT") */
-+	char *mkfs_opts;      /* Extra mkfs.vfat options (default: "-S 512") */
-+};
-+
-+#endif /* _FATIMAGE_H_ */
-diff --git a/tools/mkimage.c b/tools/mkimage.c
-index 3c43962807d..9fbc9b52957 100644
---- a/tools/mkimage.c
-+++ b/tools/mkimage.c
-@@ -204,6 +204,10 @@ static const struct option longopts[] = {
- 	{ "tfa-bl31-addr", no_argument, NULL, 'Y' },
- 	{ "tee-file", no_argument, NULL, 'z' },
- 	{ "tee-addr", no_argument, NULL, 'Z' },
-+{ "fat-extra-space", required_argument, NULL, OPT_FAT_EXTRA },
-+	{ "fat-type", required_argument, NULL, OPT_FAT_TYPE },
-+	{ "fat-volume-id", required_argument, NULL, OPT_FAT_VOLID },
-+	{ "fat-mkfs-opts", required_argument, NULL, OPT_FAT_MKFS },
- 	{ /* sentinel */ },
- };
- 
-@@ -397,6 +401,18 @@ static void process_args(int argc, char **argv)
- 				exit(EXIT_FAILURE);
- 			}
- 			break;
-+		case OPT_FAT_EXTRA:
-+			fatimage_set_extra_space(atoi(optarg));
-+			break;
-+		case OPT_FAT_TYPE:
-+			fatimage_set_fat_type(atoi(optarg));
-+			break;
-+		case OPT_FAT_VOLID:
-+			fatimage_set_volume_id(optarg);
-+			break;
-+		case OPT_FAT_MKFS:
-+			fatimage_set_mkfs_opts(optarg);
-+			break;
- 		default:
- 			usage("Invalid option");
- 		}
-@@ -433,6 +449,11 @@ static void process_args(int argc, char **argv)
- 		params.type = type;
- 	}
- 
-+	if (params.type == IH_TYPE_FATFS && params.datafile) {
-+		fatimage_set_dir(params.datafile);
-+		params.skipcpy = 1;
-+	}
-+
- 	if (!params.imagefile)
- 		usage("Missing output filename");
- }
-diff --git a/tools/mkimage.h b/tools/mkimage.h
-index 5d6bcc9301a..599f92e617f 100644
---- a/tools/mkimage.h
-+++ b/tools/mkimage.h
-@@ -53,4 +53,19 @@ static inline ulong map_to_sysmem(const void *ptr)
- #define MKIMAGE_DEFAULT_DTC_OPTIONS	"-I dts -O dtb -p 500"
- #define MKIMAGE_MAX_DTC_CMDLINE_LEN	2 * MKIMAGE_MAX_TMPFILE_LEN + 35
- 
-+/* Long option values for mkimage */
-+enum {
-+	OPT_FAT_EXTRA = 512,
-+	OPT_FAT_TYPE,
-+	OPT_FAT_VOLID,
-+	OPT_FAT_MKFS,
-+};
-+
-+/* FAT image functions */
-+void fatimage_set_dir(const char *dir);
-+void fatimage_set_extra_space(int space_kb);
-+void fatimage_set_fat_type(int type);
-+void fatimage_set_volume_id(const char *volid);
-+void fatimage_set_mkfs_opts(const char *opts);
-+
- #endif /* _MKIIMAGE_H_ */
++++ b/doc/board/qualcomm/multi_dtb.rst
+@@ -0,0 +1,352 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++Qualcomm FIT-Based Multi-DTB Support
++=====================================
++
++Overview
++--------
++
++Qualcomm supports multiple SoCs and boards within a single software release
++binary, which requires packaging all corresponding Device Tree Blobs (DTBs)
++into a single image. To ensure the appropriate DTB(O)s are selected for each
++platform, a mechanism for dynamic device tree selection is necessary.
++
++The Flattened Image Tree (FIT) format is a standard file format for packaging
++images widely used in the community. U-Boot leverages this format to facilitate
++DTB selection and meet platform-specific requirements. The appropriate DTB
++selected for the platform by U-Boot is passed to the OS at boot time.
++
++Terminology
++-----------
++
++- **FIT**: Flattened Image Tree
++- **DT**: Device Tree
++- **FDT**: Flattened Device Tree
++- **.its**: Image Tree Source
++- **.dtb**: Device Tree Blob
++
++References:
++
++- https://docs.u-boot.org/en/latest/usage/fit/index.html
++- https://fitspec.osfw.foundation/
++
++Design
++------
++
++The FIT-based approach, commonly adopted within the U-Boot community, offers a
++standardized solution for multi-DTB packaging. This design is the first
++implementation utilizing FIT to facilitate DT selection from a multi-DTB
++binary.
++
++FIT provides a flexible and extensible format to support multiple components
++(device tree, kernel image, ramdisk). It also supports multiple configurations
++so that the same FIT can be used to boot multiple platforms, with some
++components in common (e.g., kernel) and some specific to that platform (e.g.,
++device tree). The Flattened Image Tree Specification (FITSpec) suggests the
++image selection mechanism.
++
++Detailed Description
++^^^^^^^^^^^^^^^^^^^^
++
++1. In the FIT ITS file, each configuration comprises a compatible string along
++   with a declaration for the base DT blob and the overlays in sequence. A few
++   such configuration node examples are provided in the .its tree format below.
++
++2. This implementation uses a metadata binary structured in DT format for
++   selecting the appropriate configuration. A node, named
++   ``fdt-qcom-metadata.dtb``, for the metadata binary is provided under the
++   ``images`` node in the FIT tree with type ``qcom_metadata``.
++
++3. The compatible string suffixes in the FIT tree can be put in any order, but
++   the node corresponding to each suffix must be present in the
++   ``qcom-dtb-metadata`` binary. If any new suffix is introduced, it must be
++   added to the metadata (refer to ``qcom-dtb-metadata.dts`` below this
++   section). The new suffix sub-node must be added under the relevant node.
++
++   Suggested pattern::
++
++       <soc>-<soc-sku>-<socver>-<board>-<boardrev>-<board-subtype-peripheral-subtype>-<board-subtype-storage-type>-<board-subtype-memory-size>-<softsku>-<oem>
++
++4. Each of the suffixes inside the compatible string must be an exact match for
++   a DTB to be selected. Upon any mismatch, a configuration is rejected and the
++   search moves ahead with other available configurations.
++
++5. The compatible string that gets matched has its corresponding DTB(O)s
++   selected for boot.
++
++FIT ITS Configuration
++^^^^^^^^^^^^^^^^^^^^^
++
++Each configuration in the FIT ITS file comprises a compatible string along
++with a declaration for the base DT blob and overlays in sequence. Example::
++
++    config-1 {
++        compatible = "qcom,soc";
++        fdt = "fdt-soc-v2.dtb";
++    };
++
++    config-2 {
++        compatible = "qcom,soc-socv1.0";
++        fdt = "fdt-soc-v1.dtb";
++    };
++
++Refer: https://github.com/qualcomm-linux/qcom-dtb-metadata/blob/main/qcom-fitimage.its
++
++DTB Metadata Description and Parsing
++--------------------------------------
++
++The QCOM metadata supports the following DT nodes: ``soc``, ``soc-sku``,
++``socver``, ``board``, ``boardrev``, ``board-subtype-peripheral-subtype``,
++``board-subtype-storage-type``, ``board-subtype-memory-size``, ``softsku``
++and ``oem``. Sub-nodes of the respective type can be added under each node.
++
++The SoC specific identifiers are encapsulated in DT properties named
++``msm-id`` and ``socver-id``.
++
++Identifier Properties
++^^^^^^^^^^^^^^^^^^^^^
++
++- **msm-id** ``<u32>``: Each sub-node under the ``soc`` node must contain an
++  ``msm-id`` property. Bits 0-15 of the 32-bit value represent the chip
++  identifier; the remaining bits are reserved.
++
++  Each sub-node under the ``soc-sku`` node should contain an ``msm-id``
++  property. Bits 20-21 represent the package-id, bits 16-19 represent the
++  foundry-id; the remaining bits are ignored.
++
++- **socver-id** ``<u32>``: Each sub-node under the ``socver`` node should
++  contain a ``socver-id`` property. Bits 0-3 represent the chip minor version,
++  bits 4-7 represent the chip major version; the remaining bits are reserved.
++
++- **board-id** ``<u32>``: Each sub-node under the ``board`` node must contain
++  a ``board-id`` property. Bits 0-7 represent the board type; the remaining
++  bits are reserved.
++
++- **boardrev-id** ``<u32>``: Each sub-node under the ``boardrev`` node must
++  contain a ``boardrev-id`` property. Bits 0-3 represent the board minor
++  version, bits 4-7 represent the board major version; the remaining bits are
++  reserved.
++
++- **board-subtype** ``<u32>``: Each sub-node under the
++  ``board-subtype-peripheral-subtype``, ``board-subtype-storage-type`` and
++  ``board-subtype-memory-size`` nodes should contain a ``board-subtype``
++  property.
++
++  - Under ``board-subtype-peripheral-subtype``: bits 0-7 represent the
++    peripheral-based subtype; the remaining bits are ignored.
++  - Under ``board-subtype-storage-type``: bits 12-14 represent the storage
++    type; the remaining bits are ignored.
++  - Under ``board-subtype-memory-size``: bits 8-11 represent the memory size;
++    the remaining bits are ignored.
++
++- **oem-id** ``<u32>``: Each sub-node under the ``oem`` node must contain an
++  ``oem-id`` property. The ``oem-id`` represents the OEM and is added by the
++  OEM for selection of their board-specific DT.
++
++- **softsku-id** ``<u32>``: Each sub-node under the ``softsku`` node must
++  contain a ``softsku-id`` property. The ``softsku-id`` represents the software
++  SKU and is added for soft SKU (license) based selection of DT.
++
++The ``msm-id`` and ``socver-id`` are compared with the chip identifier value
++read from the SoC.
++
++The ``board-id``, ``boardrev-id``, ``board-subtype-peripheral-subtype`` and
++``oem-id`` are compared with the hardware description values (Configuration
++Data Table - CDT) flashed on the board's persistent memory.
++
++The ``board-subtype-storage-type`` is compared with the board's boot device
++type detected by U-Boot.
++
++The ``board-subtype-memory-size`` is compared with the board's DDR size
++detected by U-Boot.
++
++Refer: https://github.com/qualcomm-linux/qcom-dtb-metadata/blob/main/qcom-metadata.dts
++
++Guidelines for socver and boardrev
++^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++
++- For any platform, the configuration entry with the shortest compatible string
++  (containing only the ``soc`` and ``board`` fields) must always reference the
++  latest hardware (SoC / board) version.
++
++- When adding support for a new hardware version that requires a separate DTB,
++  update the ``fdt`` property in the configuration with the shortest compatible
++  string so that it points to the DTB of the latest hardware version. If the
++  previously supported latest hardware version must continue to be used, add a
++  new ``socver``/``boardrev`` entry in the metadata DTS for the earlier
++  hardware. Additionally, add a new configuration entry in the FIT ITS that
++  corresponds to the platform compatible with the newly added
++  ``socver``/``boardrev``.
++
++- Consider the following example: The "soc" platform supports two chip versions
++  — socv1.0 and socv1.1 — and both versions share the same DTB (soc-v1.dtb).
++
++  FIT ITS::
++
++      config-1 {
++          compatible = "qcom,soc";
++          fdt = "fdt-soc-v1.dtb";
++      };
++
++  Now a new chip version socv2.0 is introduced, which requires a new DTB
++  (soc-v2.dtb). The older chip versions must continue to be supported.
++
++  Updated FIT ITS::
++
++      config-1 {
++          compatible = "qcom,soc";
++          fdt = "fdt-soc-v2.dtb";
++      };
++
++      config-2 {
++          compatible = "qcom,soc-socv1.0";
++          fdt = "fdt-soc-v1.dtb";
++      };
++
++      config-3 {
++          compatible = "qcom,soc-socv1.1";
++          fdt = "fdt-soc-v1.dtb";
++      };
++
++  Updated Metadata DTS::
++
++      socv1.0 {
++          socver-id = <0x10>;
++      };
++
++      socv1.1 {
++          socver-id = <0x11>;
++      };
++
++- If older hardware requires a separate DT and is not currently supported in
++  the FIT, add the required ``socver``/``boardrev`` entries in alphabetical
++  order.
++
++Image Building
++--------------
++
++FIT Image Properties
++^^^^^^^^^^^^^^^^^^^^
++
++- FIT is normally built with image data in the ``data`` property of each image
++  node. It is also possible for this data to reside outside the FIT itself
++  (external FIT). This allows the FDT part of the FIT to be quite small, so
++  that it can be loaded and scanned without loading a large amount of data.
++  Then when an image is needed it can be loaded from an external source.
++
++- External FITs use ``data-offset`` or ``data-position`` instead of ``data``.
++  The ``mkimage`` tool can convert a FIT to use external data using the ``-E``
++  argument.
++
++- The ``mkimage`` tool provides a ``-B`` argument to align each image to a
++  specific block size. Use ``-B 8`` to enforce 8-byte alignment.
++
++- The output FIT image must be named ``qclinux_fit.img`` so that U-Boot can
++  locate it in the FAT partition.
++
++Step-by-Step Workflow
++^^^^^^^^^^^^^^^^^^^^^
++
++1. **Install required tools**::
++
++       sudo apt-get install device-tree-compiler u-boot-tools mtools
++
++2. **Clone the qcom-dtb-metadata project**::
++
++       git clone https://github.com/qualcomm-linux/qcom-dtb-metadata.git
++       mkdir fit_image
++       cp -rap qcom-dtb-metadata/qcom-fitimage.its \
++               qcom-dtb-metadata/qcom-next-fitimage.its \
++               qcom-dtb-metadata/qcom-metadata.dts \
++               fit_image/
++
++3. **Copy compiled DTB/DTBO files from the kernel tree**
++
++   For steps on cloning and building the Qualcomm Linux Kernel Tree, refer to
++   https://github.com/qualcomm-linux/kmake-image/blob/main/README.md ::
++
++       mkdir -p fit_image/arch/arm64/boot/dts/qcom/
++       # Copy the compiled dtb/dtbo files from the kernel's kobj directory
++       cp -rap <u-boot build dir>/dts/upstream/src/arm64/qcom/*.dtb* \
++               fit_image/arch/arm64/boot/dts/qcom/
++
++4. **Compile the metadata DTS**::
++
++       cd fit_image
++       dtc -I dts -O dtb -o qcom-metadata.dtb qcom-metadata.dts
++
++5. **Generate the FIT image**
++
++   Use ``-E`` to place binary data outside the FIT structure and ``-B 8`` for
++   8-byte alignment::
++
++       mkdir out
++
++       # For kernel main branch
++       mkimage -f qcom-fitimage.its out/qclinux_fit.img -E -B 8
++
++       # For kernel qcom-next branch
++       mkimage -f qcom-next-fitimage.its out/qclinux_fit.img -E -B 8
++
++   The ``-E`` flag places binary data outside the FIT structure. However,
++   since ``/incbin/`` is used in the ``.its`` file, all binaries are appended
++   into the same image. The FIT structure contains the offset and size for each
++   appended binary.
++
++6. **Pack the FIT image into a FAT partition image using mkimage**
++
++   The ``mkimage`` tool supports creating FAT filesystem images directly via
++   the ``fatfs`` image type.
++
++       mkimage -T fatfs -d out/ fitimage.bin \
++           --fat-extra-space 512 \
++           --fat-volume-id "MYBOOT" \
++           --fat-mkfs-opts "-S 512 -a"
++
++   Available parameters:
++
++   - ``--fat-extra-space <KB>`` — extra padding in KB (default: 512 KB)
++   - ``--fat-type <12|16|32|0>`` — force FAT type (0 = auto-detect)
++   - ``--fat-volume-id <label>`` — volume label (default: ``BOOT``)
++   - ``--fat-mkfs-opts <opts>`` — extra ``mkfs.vfat`` options (default: ``-S 512``)
++
++   .. note::
++
++      This requires ``mkfs.vfat`` (from ``dosfstools``) and ``mcopy``
++      (from ``mtools``) to be installed on the build host.
++
++   The resulting ``fitimage.bin`` is a FAT partition image containing
++   ``qclinux_fit.img`` and is ready to be flashed to the ``dtb_a``
++   partition.
++
++7. **Flash the image**::
++
++       fastboot flash dtb_a fitimage.bin
++
++Boot Flow
++---------
++
++U-Boot reads ``qclinux_fit.img`` from the FAT partition image flashed to the
++``dtb_a`` partition. It uses the metadata binary and compatible strings in the
++FIT to select the correct DTB for the running hardware. The FIT image contains
++a configuration table FDT, metadata FDT, and DTB/DTBO binaries. The
++configuration table FDT contains the offset and size of each DTB/DTBO within
++the same buffer. U-Boot parses the metadata, matches the compatible strings
++against the hardware identifiers read from the SoC and CDT, and passes the
++selected DTB to the OS at boot time.
++
++Inspecting the Generated Image
++-------------------------------
++
++To verify the contents of the generated FIT image::
++
++    # Extract individual DTBs from the image
++    git clone https://github.com/PabloCastellano/extract-dtb.git
++    # Creates a "dtb/" folder containing each of the dtb/dtbo files
++    ./extract-dtb/extract_dtb/extract_dtb.py fitimage.bin
++
++    # Verify the ITS/FIT structure (configuration table FDT)
++    fdtdump dtb/01_dtbdump_*.dtb
++
++    # Verify the metadata DTB contents
++    fdtdump dtb/02_dtbdump_Image_with_compressed_metadata_blob.dtb
+diff --git a/doc/mkimage.1 b/doc/mkimage.1
+index 9a2d07cee75..ed6bd9f32d9 100644
+--- a/doc/mkimage.1
++++ b/doc/mkimage.1
+@@ -54,6 +54,14 @@ The new
+ (Flattened Image Tree) format allows for more flexibility in handling images of
+ various types and also enhances integrity protection of images with stronger
+ checksums. It also supports verified boot.
++.P
++The
++.I fatfs
++image type creates a FAT filesystem image from a directory of files. The
++directory is specified with
++.BR \-d .
++The resulting image is a raw FAT partition image suitable for flashing directly
++to a storage device partition.
+ .
+ .SH OPTIONS
+ .
+@@ -227,6 +235,11 @@ then multiple images may be specified, separated by colons:
+ .IP
+ .IR image-data-file [\fB:\fP image-data-file .\|.\|.]
+ .RE
++.IP
++For the
++.B fatfs
++image type, this argument specifies the input directory whose contents will be
++copied into the FAT filesystem image.
+ .
+ .TP
+ .B \-x
+@@ -496,6 +509,59 @@ using
+ But if the original input to mkimage is a binary file (already compiled), then
+ the timestamp is assumed to have been set previously.
+ .
++.SS Options for creating FAT filesystem images
++.
++These options are only used when
++.B \-T fatfs
++is specified. The input directory is provided via
++.BR \-d .
++The host tools
++.B mkfs.vfat
++(from
++.IR dosfstools )
++and
++.B mcopy
++(from
++.IR mtools )
++must be installed on the build host.
++.
++.TP
++.BI \-\-fat\-extra\-space " size-kb"
++Add
++.I size-kb
++kilobytes of extra padding space to the FAT image beyond the size of the input
++data. This reserves room for future additions. The default is
++.BR 512 .
++.
++.TP
++.BI \-\-fat\-type " type"
++Force the FAT filesystem type to
++.IR type ,
++which must be one of
++.BR 12 ,
++.BR 16 ,
++.BR 32 ,
++or
++.B 0
++(auto-detect based on image size). The default is
++.B 0
++(auto-detect). FAT32 is automatically selected for images larger than 512 MB.
++.
++.TP
++.BI \-\-fat\-volume\-id " label"
++Set the FAT volume label to
++.IR label .
++The default is
++.BR BOOT .
++.
++.TP
++.BI \-\-fat\-mkfs\-opts " options"
++Pass additional options to
++.BR mkfs.vfat (8)
++when formatting the FAT image. The default is
++.BR "\-S 512"
++(512-byte sector size).
++.
+ .SH CONFIGURATION
+ This section documents the formats of the primary and secondary configuration
+ options for each image type which supports them.
+@@ -544,6 +610,21 @@ and valid
+ are decimal numbers. See section 11.4.4.1 of the SAMA5D3 Series Data Sheet for
+ valid values for each parameter.
+ .
++.SS fatfs
++The
++.B fatfs
++image type creates a FAT filesystem image from a directory of files. The
++.B \-d
++option specifies the input directory; all files and subdirectories within it
++are copied into the FAT image using
++.BR mcopy .
++The image size is calculated automatically based on the total size of the input
++data plus the extra padding specified by
++.BR \-\-fat\-extra\-space .
++The FAT filesystem is formatted using
++.BR mkfs.vfat .
++No primary or secondary configuration is used.
++.
+ .SS imximage
+ The primary configuration is a file containing configuration commands, as
+ documented in doc/\:imx/\:mkimage/\:imximage.txt of the U-Boot source.
+@@ -903,10 +984,32 @@ of data storage.
+ \fBmkimage -F external_data-offset.itb
+ .EE
+ .RE
++.P
++Create a FAT filesystem image from a directory, with default settings:
++.RS
++.P
++.EX
++\fBmkimage \-T fatfs \-d out/ fitimage.bin
++.EE
++.RE
++.P
++Create a FAT filesystem image with custom volume label, extra space, and
++mkfs.vfat options:
++.RS
++.P
++.EX
++\fBmkimage \-T fatfs \-d out/ fitimage.bin \\
++	\-\-fat\-extra\-space 512 \\
++	\-\-fat\-volume\-id "MYBOOT" \\
++	\-\-fat\-mkfs\-opts "\-S 512 \-a"
++.EE
++.RE
+ .
+ .SH SEE ALSO
+ .BR dtc (1),
+ .BR dumpimage (1),
++.BR mkfs.vfat (8),
++.BR mcopy (1),
+ .BR openssl (1),
+ the\~
+ .UR https://\:u-boot\:.readthedocs\:.io/\:en/\:latest/\:index.html
 -- 
 2.34.1
 
