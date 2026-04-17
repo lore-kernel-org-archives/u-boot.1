@@ -4,100 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FDACF99C60
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 20:39:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74765F99C60
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 20:47:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81AAD84214;
-	Fri, 17 Apr 2026 22:39:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id AAE7484214;
+	Fri, 17 Apr 2026 22:47:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BmkuFXK1";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="g+gmMNjx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6315C84223; Fri, 17 Apr 2026 22:39:56 +0200 (CEST)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 488D98422D; Fri, 17 Apr 2026 22:47:48 +0200 (CEST)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3DC18420C
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 22:39:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C34C8420C
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 22:47:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-8d68bcf50fdso131563585a.2
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 13:39:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776458392; x=1777063192; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=GN3qKRgNqZ3Nx8dD225h1/mG+r9b6DMJ4u6PThO6oG8=;
- b=BmkuFXK1DXsZQMni/GPvq0J3oASIE3723br9bNWOWMzctcU+e7pwcWXwR/IJ1FUh90
- s8MKgu2jBgDI9bX9yvL4igs27xHLnFWgQfxy+ADKJtmJ+0LsGEvOMhzCgLc4W4h8iqx/
- vCP4yX2nKQ8ox0QhAQH2nWROxA6K8kWFCPiZPR8eS4iJ0ke9MxKUTh7WBh4etI63nUDj
- WpPaO1FCT4iSS5kfttj0c0DiPZcHbCXlajTnILL6KtAFKiz6l9zhdo/KGM9U4xHPs7kv
- MmJ4oCvWSvdFeBa4GM/jZrcqX6N7NNkjdX52iv3WwKIhEtrf52EawcR2xAbiO0JEOxMp
- B+JQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776458392; x=1777063192;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=GN3qKRgNqZ3Nx8dD225h1/mG+r9b6DMJ4u6PThO6oG8=;
- b=ZCtieQ9txSoqw/fJAebDFcqPIrn79NrWBVGBgCODvNe7WMaO+RJQDQ4xCx/kbfZWzG
- BX0HjfyacKfNfX/El55FVwm9Eci55sbzbFpSvt9zAmi6c+WRB0nN7O6xxbNlXw3iaboe
- 8J7fz1fPE7lb+fnts19pRhzg78yWQ5K865egd2eprY2CLM7x/T/DWhPgWNx3hCXjaVT+
- 6kdAQAvGcaBpIQgWWh6qG6sg/7U3gr1kX1Jt1ZwoU8cu1SmKMeykwZroqQTMDzuqwPAy
- ZVvz8V9XbXpwIaWiBVRSEIh48JzasOI8FfUCCmkoGlPbAA7utbXc4PonucYmk4/dRUNg
- TQtQ==
-X-Gm-Message-State: AOJu0Yx4V7IIUSVgrP9NJT0RWqWU/U6nGf2HFMablKXkkZZZAZtTXCYt
- DDV406DqPXWcgLRCcTAJHGVZ32WQ+8qGPUqJ0aOFjRMndnFomUPuZ4oWSi54UlIdZM0=
-X-Gm-Gg: AeBDieuKyRV9pKzDnazRbUTZvtBAkNFQciZSQ07r/72fJDDACmuFbBREugFmBqYZZEx
- ZlOeIjWmu4h6Xucc8JnWmLvjKZC5UuIUob6U30LydegfGkZ2b1Zk037zHBKbctvai+92Zct12bj
- r+kqNU6cGL95vHraJVHlYJx9R2GsQseVUwbkgmqVyfPNaELpPr3RBhL1bkQ4c2NLqHbWM+kwiHN
- 3VBDsUybcliipZ4jR0F+u5FDS7Hlj9NI5UNGaPPcxJW8OD9lrkBpFnyMBDqGMt8ZPj8qGMHmE6h
- 2M5KUExa5CWFy29aNNkuEK/KVN+pbT8jj0gj2jQ8n0sDbc4PCSfbZh7DIVElvPolAcpDOboFP3J
- DP0WzeQCRcclPVRLj0saju9hnyqDG5a4KpqWSf2ws2Xq4yf6r7JC0BZzjULtQy/4BkFJo1Srfhz
- XEANaBupy1vRQFB9xK/ey3GedTLFb2xgzOmHSNpM27co6QFzBwhcDfx6mVNq2FNjuGLInUtzSf5
- 32eD3KZTQdP72HQ6Gfx3DmFmRi0UQ==
-X-Received: by 2002:a05:620a:489b:b0:8d0:26db:4f9f with SMTP id
- af79cd13be357-8e79001504dmr622590785a.26.1776458392260; 
- Fri, 17 Apr 2026 13:39:52 -0700 (PDT)
-Received: from [192.168.68.100] (172-97-209-197.cpe.distributel.net.
- [172.97.209.197]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8e7d5fe8ed1sm198608785a.8.2026.04.17.13.39.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 17 Apr 2026 13:39:51 -0700 (PDT)
-Message-ID: <696b7f4d-e192-44e4-8652-e8db7f980507@gmail.com>
-Date: Fri, 17 Apr 2026 16:39:50 -0400
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=AikNLoaozuF02RNASsGI8AxyusKSziv7JQrWPy8YmbvOqAhOhEseap3UB6triUwR/HTiyzq+urXb29N2HCEMFe+g6vDA3vRkacD7yW9wxLphVu8fA9IvienYacolUhGYfp25+Zwem3uUnHIgDPHi9vqzz2cqmsyumfH9233Gj5ww1SWMW9M7BLYfSq7AY7/wF4RGAAlMd2JEk8xPCS7nejr368xGD/RRl9FKHVKPYZI7ddNtUGE18jVW4bNXpTDlVMCfzk3IoISu+HUwJtCj/C4NdNu9KCtPUs+G/d5BemmAmW0rPK2b77ln8VDZFPTPR6sw8I0RIsB1/dUegMaX9w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bY7A6sZe4tBJAIR2zqs8oy9tUKSAiIUT9vop5kzcbX0=;
+ b=dHWDgcn0Rn63H4/6J4OuoEnsLfISqB1LaLO0kBvWCrQ6GVizMIx1D71gzF6it11nGf0OKOSfAmvZRQbQZIP/TnAysbvSKcJ63JAghAJFdfQfhn8uo8GedrziZ0PDXoy5ft4SbDngb9ye1V5/+n7qI0+QiV24aNNF7AADao+N1FUYudzY03Tyk80pNaCLy6akEzYSXE99yR967CVCzDBLav0s5/bbZAgZrHPiSaU6H0R9Edlg3hMbARGUR+egVxlWDM7R7FIYDkcOLqOqX1catLuCdHcG5KD8bYwD1OXfKZjS8EmNBtooNqPtdB9aXV1RUjdMmXX6fpkClmZbQWMEMg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bY7A6sZe4tBJAIR2zqs8oy9tUKSAiIUT9vop5kzcbX0=;
+ b=g+gmMNjxRCQ6kyGiujVD6J0t7U8MT+lVBseamVEjSmategGL9TupYfnIO0ifgcJvubhUEtqb2ZoyQ6/cy0bvDof/vozjXWVSijziKCrlFLzFqz1/oUJ3QegBvbY1AQzmW+60PGe0+IWnm3H7MjGtdGP0WmSVRP0bStw+PQ90d5M=
+Received: from SJ0PR03CA0003.namprd03.prod.outlook.com (2603:10b6:a03:33a::8)
+ by MW5PR10MB5715.namprd10.prod.outlook.com (2603:10b6:303:19c::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.25; Fri, 17 Apr
+ 2026 20:47:41 +0000
+Received: from CO1PEPF000075ED.namprd03.prod.outlook.com
+ (2603:10b6:a03:33a:cafe::97) by SJ0PR03CA0003.outlook.office365.com
+ (2603:10b6:a03:33a::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.52 via Frontend Transport; Fri,
+ 17 Apr 2026 20:47:41 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ CO1PEPF000075ED.mail.protection.outlook.com (10.167.249.36) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9769.17 via Frontend Transport; Fri, 17 Apr 2026 20:47:40 +0000
+Received: from DLEE209.ent.ti.com (157.170.170.98) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 17 Apr
+ 2026 15:47:40 -0500
+Received: from DLEE203.ent.ti.com (157.170.170.78) by DLEE209.ent.ti.com
+ (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 17 Apr
+ 2026 15:47:39 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE203.ent.ti.com
+ (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Fri, 17 Apr 2026 15:47:39 -0500
+Received: from localhost (rs-desk.dhcp.ti.com [128.247.81.39])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63HKldF72378879;
+ Fri, 17 Apr 2026 15:47:39 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/6] Add support for DT overlays handoff
-To: u-boot@lists.denx.de
-Cc: michal.simek@amd.com, venkatesh.abbarapu@amd.com,
- Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Liviu Dudau <liviu.dudau@foss.arm.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Harrison Mutai <harrison.mutai@arm.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Matthias Brugger <mbrugger@suse.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- raymondmaoca@gmail.com
-References: <20250718141621.3147633-1-raymond.mao@linaro.org>
-Content-Language: en-CA
-From: Raymond Mao <raymondmaoca@gmail.com>
-In-Reply-To: <20250718141621.3147633-1-raymond.mao@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Fri, 17 Apr 2026 15:47:39 -0500
+Message-ID: <DHVQ3XX4U4OG.3T8QXYV5OHWFO@ti.com>
+Subject: Re: [PATCHv3 6/6] memory: reserve from start_addr_sp to end_addr_sp
+From: Randolph Sapp <rs@ti.com>
+To: Randolph Sapp <rs@ti.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+CC: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
+ <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
+ <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
+ <u-boot@lists.denx.de>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20260413203555.1990337-1-rs@ti.com>
+ <20260413203555.1990337-7-rs@ti.com>
+ <CAC_iWj+2=ajV0cXFT6a5Y2oqtTwcaPRcpkYqTbu4o+jbFmX+5w@mail.gmail.com>
+ <DHUT7XN85MRK.18B9QGYDHEPIB@ti.com>
+In-Reply-To: <DHUT7XN85MRK.18B9QGYDHEPIB@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000075ED:EE_|MW5PR10MB5715:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5d8c91c6-f8d6-463b-696a-08de9cc29155
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|36860700016|1800799024|82310400026|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: XMZfSy4Lkz1jYB4eT0CL1CWhe8SY6twQEXU6Mj/JBB77uKXEYYwtaanZkh3Pz4BSjFjjDkzRNv5MKHyvDjV5Q2IpPbojqVub4bZSee5tY8fVrr7lmElu/G78NKqthGTCBXn4kEqo/76J9bCWVnNq9ZrtyAtze4I4Ad+Jcq5l54rTN5Lz6DZ7Hxb8u0cuVAdnKh5mGLvV6k+GFGjNPY+BVd/hsPgWQmhK07O3oJYXc/GQIZ54eJLLD5mGIkNn4IH8ZqF7R36STa3FlAoh8f73w/gUHvg1AZNW06yCowH6wfRM3gIKeJqzGSBDGrNk5V5i1njOnKOBmi4NeuEZA4ieX9V6Uhw3dJy3W+CpKmwJDVE4Z0vVum64z5FJYWQRL1p1ISunqd3HqaXi57fvmCOzwPao/507t2ZqrRu6a8PFtFsLjHamNbaw8DLenmAvBrlw1tPcrP+EdqUYeGLTi7d2tPOB2/Ptc98Kr6ncw9i47ShX2kMUIR45GcNoeqkTNYkrWk0SsWf/nstIbp97WK7AF+CJmBIlY/uT5DvsiiW8w+Po5PdbgOVWUEjHHSd3ZDn9Kxll1Vk62ysJP2p5BIRGuUivGzdAR+aV2IS2iQG4yXeJqY/Aa9drAGyyMmOl2sughM6Iu3+fvejwgvI9HYXuGlJhcYU2vEMgnrkl0m7CH8MrXEkuqALfPhPObYGpB5gTfZBcH6yMfG0Ndg3FO9rxtG4+RRx5ubYfW4fZ0xGI2qd03tK2vg5pYUJHGuSHhyKIepNZclBEIDjKOgUrolU9vw==
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(376014)(36860700016)(1800799024)(82310400026)(56012099003)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: izIaO+Q3eLex71oj8U6CF+o1vi4RXEzlbcfHB1ISUmhZZDvzzomoY7O3dfdMnLP+04XlV5oe+g8nXmEMv0592WxhaQuGrpLGYz2DTzFz0FoldhApp/CgktjMSXW5zGjfZJ/FE/tB8/GEH9IcZKxk03l07c2/HUEcsRwWA1NUPKXlqNqziFTkY/8e6A7iO5O7rDTuXwaqHG3oeyZs34f+UQmFhoT181g2toaJZnVablIcl+HmbqkDHHdWEKutQLzhYUAGN4Hqf931ayCirWrxuhHAWTazi1TtjMbc9DAqZWaPm8kK9vwy0ZCPh/U0MoURvvX6URYpQoaobAcmBNGM3fAFzePor3nISsEZRgXbLdiMFRqsjRyHTydx5eXsszTV7xsNYmIM1C0EZv9YvL6irsqIEzvH9Ki/fiTzkxVWdSzHzEzp8ledlKpxLreQaqmB
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Apr 2026 20:47:40.7680 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5d8c91c6-f8d6-463b-696a-08de9cc29155
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000075ED.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW5PR10MB5715
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,59 +137,180 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-The Firmware Handoff spec changes required for this series is already accepted and merged at [1].
-
-Please review and merge this series.
-
-[1] Add Transfer Entry for Devicetree Overlay
-https://github.com/FirmwareHandoff/firmware_handoff/pull/74
-
-Thanks and regards,
-
-Raymond
-
-On 2025-07-18 10:16 a.m., Raymond Mao wrote:
-
-> The series include refactoring on bloblist and fdtdec to support handoff
-> of multiple DT overlays and applying them into the DT base during setup.
-> All changes are aligned to the spec update for supporting DT overlay
-> handoff[1].
+On Thu Apr 16, 2026 at 2:01 PM CDT, Randolph Sapp wrote:
+> On Thu Apr 16, 2026 at 9:37 AM CDT, Ilias Apalodimas wrote:
+>> Hi Randolph,
+>>
+>>
+>> On Mon, 13 Apr 2026 at 23:36, <rs@ti.com> wrote:
+>>>
+>>> From: Randolph Sapp <rs@ti.com>
+>>>
+>>> Add a new global data struct member called end_addr_sp. This stores the
+>>> original value of relocaddr, directly from setup_dest_addr. This is
+>>> specifically to avoid any adjustments made by other init functions.
+>>>
+>>> Reserve the memory from gd->start_addr_sp - CONFIG_STACK_SIZE to
+>>> gd->end_addr_sp instead of gd->ram_top. This allows platform specific
+>>> relocation addresses to work without unnecessarily painting over a larg=
+e
+>>> range.
+>>>
+>>
+>> Is there a platform we can test the changes? Running the in QEMU had
+>> no differences.
 >
-> Notes for testing:
+> Not yet. This is a mandatory requirement for pocketbeagle2, but otherwise=
+ the
+> default behavior is the same as it ever was.
 >
-> Currently DT overlay is not yet enabled in TF-A, but with the test patches
-> I provided for TF-A and OP-TEE build, importing a DT overlay blob file from
-> QEMU to TF-A reserved memory is supported.
-> Follow below instructions to build and run for test:
-> $ repo init -u https://github.com/OP-TEE/manifest.git -m qemu_v8.xml
-> Replace your local qemu_v8.xml with [2], which contains all necessary
-> changes in both TF-A and OP-TEE build.
-> $ repo sync
-> $ cd build
-> $ make toolchains
-> $ make ARM_FIRMWARE_HANDOFF=y all
-> Copy and rename your DT overlay blob as 'qemu_v8.dtb' into out/bin
-> $ make ARM_FIRMWARE_HANDOFF=y run-only
+> You can change the relocation address in the function you snipped out bel=
+ow to
+> an arbitrary value for testing.
 >
-> [1] Add Transfer Entry for Devicetree Overlay
-> https://github.com/FirmwareHandoff/firmware_handoff/pull/74
+>>> Signed-off-by: Randolph Sapp <rs@ti.com>
+>>> ---
+>>
+>> [...]
+>>
+>>>  #ifdef CFG_PRAM
+>>> diff --git a/include/asm-generic/global_data.h b/include/asm-generic/gl=
+obal_data.h
+>>> index 745d2c3a966..2f3ef26a17c 100644
+>>> --- a/include/asm-generic/global_data.h
+>>> +++ b/include/asm-generic/global_data.h
+>>> @@ -115,6 +115,12 @@ struct global_data {
+>>>          * @start_addr_sp: initial stack pointer address
+>>>          */
+>>>         unsigned long start_addr_sp;
+>>> +       /**
+>>> +        * @end_addr_sp: the end of memory currently in use by uboot,
+>>> +        *               should be the original value of the relocaddr =
+before
+>>> +        *               any other allocations shift it
+>>> +        */
+>>> +       unsigned long end_addr_sp;
+>>>         /**
+>>>          * @reloc_off: relocation offset
+>>>          */
+>>> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+>>> index b3b292ebf56..bd0d875a8cd 100644
+>>> --- a/lib/efi_loader/efi_memory.c
+>>> +++ b/lib/efi_loader/efi_memory.c
+>>> @@ -870,8 +870,8 @@ static void add_u_boot_and_runtime(void)
+>>>         /* Add U-Boot */
+>>>         uboot_start =3D ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
+>>>                        uboot_stack_size) & ~EFI_PAGE_MASK;
+>>> -       uboot_pages =3D ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
+>>> -                      uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
+>>> +       uboot_pages =3D ((gd->end_addr_sp - uboot_start) + EFI_PAGE_MAS=
+K) >>
+>>> +                     EFI_PAGE_SHIFT;
+>>
+>> The map_sysmem dance is still needed here for sandbox.
+>>
 >
-> [2] https://github.com/raymo200915/optee_manifest/blob/dt_overlay_handoff/qemu_v8.xml
+> Why? We're not using that address directly. We're just trying to figure o=
+ut how
+> large the carveout region is.
 >
-> Raymond Mao (6):
->    bloblist: add blob type for DT overlay
->    bloblist: add helper functions
->    bloblist: fix a potential negative size for memmove
->    bloblist: add API for applying blobs with specified tag
->    fdtdec: apply DT overlays from bloblist
->    configs: Select OF_LIBFDT_OVERLAY to hand over DTO via bloblist
+> There's not anything funky going on with the global data structure for sa=
+ndbox
+> functionality is there? LMB definitely didn't do anything to account for =
+that.
+
+Ah. Symmetry, to answer my own question. We *may* get a virtual address.
+
+That does bring up another issue though. What good does reserving a virtual
+region that simply maps to a physical region do? Shouldn't we reserve the
+physical region outright? Isn't that what LMB is tracking?
+
+Suppose I need to read up on this sandbox and architecture dependent virtua=
+l
+addressing scheme.
+
+>>>         efi_update_memory_map(uboot_start, uboot_pages, EFI_BOOT_SERVIC=
+ES_CODE,
+>>>                               false, false);
+>>>  #if defined(__aarch64__)
+>>> diff --git a/lib/lmb.c b/lib/lmb.c
+>>> index 7ecc548d831..da61b005154 100644
+>>> --- a/lib/lmb.c
+>>> +++ b/lib/lmb.c
+>>> @@ -534,46 +534,19 @@ static long lmb_reserve(phys_addr_t base, phys_si=
+ze_t size, u32 flags)
+>>>
+>>>  static void lmb_reserve_uboot_region(void)
+>>>  {
+>>> -       int bank;
+>>> -       ulong end, bank_end;
+>>> +       ulong size;
+>>>         phys_addr_t rsv_start;
+>>> -       ulong pram =3D 0;
+>>>
+>>>         rsv_start =3D gd->start_addr_sp - CONFIG_STACK_SIZE;
+>>> -       end =3D gd->ram_top;
+>>> +       size =3D gd->end_addr_sp - rsv_start;
+>>>
+>>> -       /*
+>>> -        * Reserve memory from aligned address below the bottom of U-Bo=
+ot stack
+>>> -        * until end of RAM area to prevent LMB from overwriting that m=
+emory.
+>>> -        */
+>>> -       debug("## Current stack ends at 0x%08lx ", (ulong)rsv_start);
+>>> -
+>>> -#ifdef CFG_PRAM
+>>> -       pram =3D env_get_ulong("pram", 10, CFG_PRAM);
+>>> -       pram =3D pram << 10; /* size is in kB */
+>>> -#endif
+>>
+>> This functionality is removed, but we still have boards defining CFG_PRA=
+M
 >
->   common/bloblist.c                       | 67 ++++++++++++++++++++-
->   configs/qemu_arm64_defconfig            |  1 +
->   configs/vexpress_fvp_bloblist_defconfig |  1 +
->   include/bloblist.h                      | 34 ++++++++++-
->   lib/fdtdec.c                            | 80 +++++++++++++++++++++++++
->   5 files changed, 181 insertions(+), 2 deletions(-)
+> The PRAM allocation occurs before this, and it is carved out of the regio=
+n
+> covered by start_addr_sp through end_addr_sp. It's actually part of the r=
+eason I
+> needed to add end_addr_sp, as it moves the relocation address pointer. We=
+ don't
+> need to account for it separately now.
 >
+>>> +       debug("## Current stack ends at 0x%08lx\n", (ulong)rsv_start);
+>>>
+>>> -       for (bank =3D 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+>>> -               if (!gd->bd->bi_dram[bank].size ||
+>>> -                   rsv_start < gd->bd->bi_dram[bank].start)
+>>> -                       continue;
+>>> -               /* Watch out for RAM at end of address space! */
+>>> -               bank_end =3D gd->bd->bi_dram[bank].start +
+>>> -                       gd->bd->bi_dram[bank].size - 1;
+>>> -               if (rsv_start > bank_end)
+>>> -                       continue;
+>>> -               if (bank_end > end)
+>>> -                       bank_end =3D end - 1;
+>>> -
+>>> -               lmb_reserve(rsv_start, bank_end - rsv_start - pram + 1,
+>>> +       if (gd->flags & GD_FLG_SKIP_RELOC)
+>>> +               lmb_reserve((phys_addr_t)(uintptr_t)_start, gd->mon_len=
+,
+>>>                             LMB_NOOVERWRITE);
+>>> -
+>>> -               if (gd->flags & GD_FLG_SKIP_RELOC)
+>>> -                       lmb_reserve((phys_addr_t)(uintptr_t)_start,
+>>> -                                   gd->mon_len, LMB_NOOVERWRITE);
+>>> -
+>>> -               break;
+>>> -       }
+>>> +       else
+>>> +               lmb_reserve(rsv_start, size, LMB_NOOVERWRITE);
+>>>  }
+>>>
+>>>  static void lmb_reserve_common(void *fdt_blob)
+>>> --
+>>> 2.53.0
+>>>
+>>
+>> Thanks
+>> /Ilias
+
