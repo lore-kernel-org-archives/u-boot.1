@@ -4,57 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D97B7F8E4B6
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 07:46:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5639F8E4B7
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 08:00:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 431ED83FC0;
-	Fri, 17 Apr 2026 09:46:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 0509383FC0;
+	Fri, 17 Apr 2026 10:00:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="PpMjhXwR";
+	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="HOeOP16P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9582284214; Fri, 17 Apr 2026 09:46:48 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BFE0C841C2; Fri, 17 Apr 2026 10:00:48 +0200 (CEST)
+Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DEFE83015
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 09:46:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 421CB83B99
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 10:00:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 3EF8C1FCB2;
- Fri, 17 Apr 2026 09:46:45 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1776412005;
- bh=jSxc3YyMARzIrjL/W5+p/kjqThglSRC9rcKlJfJoaQw=; h=From:To:Subject;
- b=PpMjhXwRM9rFOpqbZxZAJmuVg6MaHTavICquHBHfZcGyhxi73pxGWgcpzV8R6qrKm
- GZ1G1+OuwTnH4lw9iW4A6xIgF7Fh1WMgEXQqJoTxipgscySfIt9RmErSfA7dhSOPbj
- iDDYuMWE/4590z/KKSlikAJk+8h5xycAT2ZRV1k5XpRFoJ7XjJyrvdswUdLjnMC0t5
- 7u0o1/SDe9uxgIpmuS7SKljzY09JZspwdAegFHkGGjN6sDAyZOxHU8OMAtxgGrelbd
- 001fpJaAnqfXJSyestHp/2lcbYOGU6Yo6sGM4o6UgutVFENHb0+dZTxwu3lXBvh/ww
- 0U2r9WXmiKkAQ==
-Date: Fri, 17 Apr 2026 09:46:41 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@nabladev.com>,
- Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Peng Fan <peng.fan@nxp.com>, Alice Guo <alice.guo@nxp.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 0/3] add Toradex Verdin iMX95 support
-Message-ID: <20260417074641.GA22114@francesco-nb>
-References: <20260417071546.1610330-1-ghidoliemanuele@gmail.com>
+ dmarc=pass (p=none dis=none) header.from=gnu.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
+Received: from fencepost.gnu.org ([2001:470:142:3::e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
+ id 1wDe81-0003u8-Bg; Fri, 17 Apr 2026 04:00:41 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
+ s=fencepost-gnu-org; h=MIME-Version:Date:References:In-Reply-To:Subject:To:
+ From; bh=7y8w/RUwHUcnULW38yDVlJxMHR0wUx/VXJ/O88R9Fvk=; b=HOeOP16Pl/5It0sQHluv
+ cpGzTLqXpaGQ4uh4wljJNbI740NuBcuiajD1UqX3FmUWvW5J9xeVwHSgZaJKWjoE9WhSg9CChZG1n
+ bPCXuSbq2P9crfXHJp15PYpuOPWc5tg08BUTvo46rxSLhwdGNMEsFKnOJ6Cs0jmclUJBM6coWG3rE
+ nfZ+Q3mR4QARozgjp5ood+rOPF913m7srwiMr9F450P1ciaDuNBSzpnUEkAGRwkT2LEcdE/C3V3u0
+ iPTdT8GCO2fp5y+YI7huJYk9mbEcvsedaVPLfzHki8uKQO9xuaWP9KZGH8pT3FrDvaz9DSOxqGjtz
+ HZJEynwyARqsdQ==;
+From: Mathieu Othacehe <othacehe@gnu.org>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Tom Rini <trini@konsulko.com>,  Paul Barker <paul@pbarker.dev>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,  u-boot@lists.denx.de
+Subject: Re: [PATCH] misc: Add RZG2L OTP support
+In-Reply-To: <a0bb44a6-1805-4c0c-b7a5-0d9d31f9d6b7@mailbox.org>
+References: <20260414091422.16952-1-othacehe@gnu.org>
+ <a0bb44a6-1805-4c0c-b7a5-0d9d31f9d6b7@mailbox.org>
+Date: Fri, 17 Apr 2026 10:00:36 +0200
+Message-ID: <87wly6rp7f.fsf@gnu.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260417071546.1610330-1-ghidoliemanuele@gmail.com>
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,19 +65,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Apr 17, 2026 at 09:13:30AM +0200, Emanuele Ghidoli wrote:
-> From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
-> 
-> This series adds initial U-Boot support for the Toradex Verdin iMX95.
-> 
-> It also introduces a new RAM-size probing helper based on alias checks.
-> On Verdin iMX95, the first DDR region is reserved for Cortex-M7 firmware and
-> the get_ram_size() could not be used to detect the actual RAM size.
-> Using explicit probe/alias pairs provides reliable size detection for the
-> supported memory variants.
-> 
-> The board DT is currently aligned with linux-next. Once the board DTS is
-> in mainline Linux, we'll move to OF_UPSTREAM.
 
-Acked-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+Hello Marek,
 
+>> + * XXX: To enable direct fusing through U-Boot, the trusted-firmware must
+>> + * allow the non-secure world to perform fusing operations. This is controlled
+>> + * by the SYS_SLVACCCTL7 register.
+>
+> Is there some SMC call to perform the fusing via TFA ?
+
+No, there is a fusing driver in Renesas OP-TEE fork[1] but that's it.
+
+>> + */
+>> +#define RZG2L_OTP_BASE      0x11860000
+>> +#define RZG2L_SYSC_BASE     0x11020000
+>
+> Can this be parsed out of DT ?
+
+There is no entry for the OTP_BASE in the device-tree. There is one for
+the SYSC_BASE though.
+
+I took the rest of your comments into account and sent a v2.
+
+Thanks,
+
+Mathieu
+
+[1]: https://github.com/renesas-rz/rzg_optee-os
