@@ -4,95 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2012BF99C6E
-	for <u-boot@archiver.kernel.org>; Sat, 18 Apr 2026 00:47:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C932F436B1
+	for <u-boot@archiver.kernel.org>; Sat, 18 Apr 2026 05:55:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A73C583FF5;
-	Sat, 18 Apr 2026 02:47:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B01B083BC8;
+	Sat, 18 Apr 2026 07:55:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=elder-tomes.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="T+JIMEOP";
+	dkim=pass (2048-bit key; unprotected) header.d=elder-tomes-com.20251104.gappssmtp.com header.i=@elder-tomes-com.20251104.gappssmtp.com header.b="U/BbYlqq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF6F98405A; Sat, 18 Apr 2026 02:47:45 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 4F79484214; Sat, 18 Apr 2026 00:45:15 +0200 (CEST)
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
+ [IPv6:2607:f8b0:4864:20::c2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F436839D9
- for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 02:47:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 898C38405A
+ for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 00:45:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=elder-tomes.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b8d7f22d405so218239166b.0
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 17:47:41 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776473261; cv=none;
- d=google.com; s=arc-20240605;
- b=jkv7yMBCKJj9bXzsZTqt8d29/VO3BuvjPYPoqit5/AGmBW6byVFB9/3cimGCoxgLHl
- bVvTmc/55V5maHErmCvCsaJfGacedgjBn2drMWdYTsMudNCM82fWVhwEGvb8sFhwITSE
- HUtwxI2Ww23OmopWU1FhT3agpY8QS+atfUdh5HhtLNqF+SCBnHuIzicIZSuoxiIKZ/5E
- 6V6cyw/Bh0yFtilkFAL/jpjLPNvAbmXHpN2klgL1ytssAgYzurggFPwNa/ySh0JmjqqC
- LubHKEuVE9nOt3CM5xamwyjtiVhNq0BNi2pU/1nBvaQ12P+uAPkXWN3PtEw+RNGIytSE
- Dolg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=jrtBJ3WqVlEc9M9sm4W/o/UD7yQBZiEwt3l5bSu2agY=;
- fh=fJAGB8LvxCJalDRE+ziaXIW21+gD5jSCb0B1QEwHsvE=;
- b=ZzKixpUQooVRW9P2u+ESswhInWr1TEIYT/DzuONUXcnHKY6N/yFVupdy00RM0hmwWK
- RQTnGhxz9w+q8AIZ6/9776BgTX3e5YC2NaDqy2TfeOFS76o9dpY8hsOcbIISPpD+6ias
- XxXigTv78jjZ74O0ItIpDWxrELc4VZhU2GU6Zve/PyQjkq2Q8tHb2Sdt/xDcjVyiBmvT
- 7ojKVNTJOMCIOYgPq1rOz2gZrRLbjnole4m7LpFz4ptaBp0fknTpQ+kdYS7NMuMQKOG2
- ZnxbPOGUFPrqteXORU/Zhr3YvdVFHmNCdsTX8gNLsaan/f9ihpFPd6/Qdk5hf0fGgfW8
- pTVQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=levi.shafter@elder-tomes.com
+Received: by mail-oo1-xc2d.google.com with SMTP id
+ 006d021491bc7-679f6ee3fb0so490819eaf.2
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 15:45:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776473261; x=1777078061; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jrtBJ3WqVlEc9M9sm4W/o/UD7yQBZiEwt3l5bSu2agY=;
- b=T+JIMEOP0kldhRwYNilx6nXLzN/dEN+5XiLpTmKRYmwu+UjgfTLAI02Ep4/2IpF7RM
- bULc72JRblperlyt5wn4SCJ35lKqNNURjF4mHDEyfngAephtyQ/FBjmjpf2S6x+ymf4W
- ZK87swpNcOJEdzQ3wL1/+bX1yoJGPbm4ideBk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776473261; x=1777078061;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=elder-tomes-com.20251104.gappssmtp.com; s=20251104; t=1776465911;
+ x=1777070711; darn=lists.denx.de; 
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jrtBJ3WqVlEc9M9sm4W/o/UD7yQBZiEwt3l5bSu2agY=;
- b=AATcHlbnq9PEQYyePY3ldLA3Yt+8YQ5tXGrv1bBx4ls+lZ6sej+lF1SHmh+qEReQra
- JC2xFzVRJf3gBx5g80Ac+XXPlY294qFXmJbT/Ul6BjDF2T5CirABE3+EEapU7fqAcGqa
- sEUGMW0VwkczdNK7L1M89K9ExK1OaZpIr8ZrrdsUXO5BlD1D6ZiHl6/bJUFrnnLzkkLH
- shdUkjdtHfCsY8v0sHODSG1RS5O7ACDYdf9TsgtmME/ikyXZabl9dbkOYAbuD73BzRsQ
- wqGNhAh4XctzmktAD3LlULy4Kn6kIjwzApDKnm5zgkXFiuu0GMFOBwo3+0ATZvflaSIS
- /GbA==
-X-Gm-Message-State: AOJu0Yx5DLTKQJ3rf+RtPdEFdBZja0AmEjFXPPsgpDGU3E0hCye9h6qP
- T8orJ2USBOjxkWmgXGnMo2qbYoji5uItPO4RwKuwVfapLOrgLlziWcEzXNGrhP1PFfJ7ZeBrIVs
- zsjtoLrZW+2KFtivcFZ9Ptfm+l9VNrOr3szjgc3Pjh07gtZyFqkhsUg==
-X-Gm-Gg: AeBDietAo39PNbl8K2GxbkjijykmEo6zt/sdpzqoQJ7dotUsOPiWE0Ynqj0oS/9YpmU
- 7YalY0/U6y6CSjlqffTmOAdb1RM5jAX8cFLqQ2PO7KSHEX+DKrCh6URiR0gwrxo3MmkRnfCSMhL
- TyVcgiWna3Uqb8/09bmZTR+pN0pW+ZvGBDJhzlbCn6aC6F+5Lc6pSkRaQP5OVTAPuR0JRRMebKF
- RFrQDBnl4D0FO9WBVwZD2bqg1T/Nj04fqSKSHjAP7ETvhVPcjfi9lFfMd9NijwmKdmLOQ6CMPYK
- nuFQyhZ9l9pUZtxlNMtr
-X-Received: by 2002:a17:907:6e8d:b0:b9d:9a98:e664 with SMTP id
- a640c23a62f3a-ba41945a155mr304487366b.18.1776473261073; Fri, 17 Apr 2026
- 17:47:41 -0700 (PDT)
+ bh=MNOGT0mFemBN8Gg+35AJuygJtLtf2CfupDW7HlONzjw=;
+ b=U/BbYlqq7qv3mtHW3hrix4d5aKfxayXY8rOpWxHo8MHFBdZ/7zc9yJR1Y2B9R2fkU8
+ DOx0mVPgIW7Bxg2mVSlqZgLVt+/wA+hnQ5mSYxjHj3Ux5UjTRyVTBdjhTKx1GcIImAa8
+ s8mux9/b0D5IDwnC7/4ihJGRWxibu9y4cK+FPd32ERAcmedyZ4Iy2A+Q35lDUcw5b03E
+ h51+oTzieOKa+x3fg4V1FrhmOiRyXoaX2NIYewYkgtAoueAAsFwOGHAIrK+ZKcZvGpis
+ 1MxRxdq9A1cIn30B0jugQx18LnfWy9mD8pV0ErfhIGZfiySEqeXoS6AmYBhCPihw4G40
+ ntwQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776465911; x=1777070711;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=MNOGT0mFemBN8Gg+35AJuygJtLtf2CfupDW7HlONzjw=;
+ b=nG/wrJ61ArYnPOIRohjVSDOvlBHpAME2BmAKaHB7jZcIBcHG0wLEdWWn9xgJG7Lb7n
+ g9RnXjdXOBiwArICiC/C6Ki6dI55plTHDLy38pGzHTNjo53UGQvdL5NTDXPur+/bgNsZ
+ mAuAwI+PI3/ERcooQGjCRvg1jUmSN8TWNtPTHiTPAJCCz9wiFtcgpGY0OTjrOuxcTcM0
+ /0VOsQGljhQJ2o3G4WHwtWzH4Q5wgmbgs9K46RcKiV/fKpO12McwqQyM9Mm9fek0+07y
+ foAt4yEgJ8h+joeHHv7f3xhgAURpjVx0x61jCsDfOufpHoI5cEZWWYGyvexf/Idfkmub
+ jfPQ==
+X-Gm-Message-State: AOJu0YzjPQAyk70rZB5A/hJsatQh9VkxmMrp/x7H/5IdVtX+N7/P0qCf
+ aZclfRyvRAheeQA/vEtmo78kco2HZGTGPZm1IYY3Hfl1avlMSfExakNwchR33iCUX2sD0ihos50
+ Fco4v
+X-Gm-Gg: AeBDiev2FXtQ2FOpt2uBd2iEXmaQtAaR6CEmGy3/ZaR4eJ3XYuKdWH2LlQVAJtev0Zj
+ AhKhqczdYpBL6qFKNPdks7SYG6xQqrMXkjedxyQ1bpfr+UBb6x1UdaB9/qGi+jFqrOXPtTrM135
+ jyD6ZGu/glv+wZbc80Q3hejTDn4euGI7kTNoYTd8eG9jAtuCs/HdlGeSjpxvmOGmtNMe6RDFcDS
+ vrShE02/jZf1fu8EsEpQA/n3IiPNcQXLKyo4CnClo157rq68+7tK/QwFwSNWpOKHoKtCyNC/1ba
+ xadh4DAFZpZ5iHbMwUDJx0qqGexSiNnxyp4FpfavAIYo+S/TsMugXJpwiw/3K88ndBKO+UIYWCq
+ HVugCxx4xDMP6jC9X7nG9lri8HBKnJ5PJDCocFX6iaHoLpO9AFneZSWz532OqHRYtb4LXleuYtP
+ 2Jk42KQ1pxk4Y4RcQ1T4X+VUh339s7fOCbFCCUidUbkRiYJAMSQiIpzvCm38v0B1sM5Xbds/jQv
+ TVXcoPa2Dk=
+X-Received: by 2002:a05:6820:178a:b0:68b:f68f:86d6 with SMTP id
+ 006d021491bc7-69462e7f140mr2650224eaf.26.1776465910637; 
+ Fri, 17 Apr 2026 15:45:10 -0700 (PDT)
+Received: from [192.168.1.9] (c-73-169-9-114.hsd1.co.comcast.net.
+ [73.169.9.114]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-69464e5e752sm1764931eaf.2.2026.04.17.15.45.09
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 17 Apr 2026 15:45:10 -0700 (PDT)
+Message-ID: <732a4d19-0e19-47ed-9f8e-0f28b8c50f73@elder-tomes.com>
+Date: Fri, 17 Apr 2026 16:45:09 -0600
 MIME-Version: 1.0
-References: <cover.1776392312.git.weijie.gao@mediatek.com>
- <ba4fd0352a7e9a38c0cddaa3056a926cf9715631.1776392312.git.weijie.gao@mediatek.com>
-In-Reply-To: <ba4fd0352a7e9a38c0cddaa3056a926cf9715631.1776392312.git.weijie.gao@mediatek.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 18 Apr 2026 12:47:28 +1200
-X-Gm-Features: AQROBzBtDQo8EZHIYhM3PJhLV5X6dy33aMmStnpIKPLHl4Z1Lo5yzSyKS35rm0I
-Message-ID: <CAFLszTi3KR_juVymVmfpqw1NvvrPVipfa6-bZjsdX6NpxBFbyg@mail.gmail.com>
-Subject: Re: [PATCH 3/3] env: ubi: add support to create environment volume if
- it does not exist
-To: weijie.gao@mediatek.com
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: u-boot@lists.denx.de
+Cc: heinrich.schuchardt@canonical.com, sjg@chromium.org
+From: Levi Shafter <levi.shafter@elder-tomes.com>
+Subject: [PATCH] Makefile: fix host CPP pollution in cmd_gen_envp
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Sat, 18 Apr 2026 07:55:55 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,53 +101,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Weijie,
+Commit 2956a84 ("Makefile: don't use CFLAGS for environment text file")
+switched cmd_gen_envp to use $(cpp_flags) so that KCPPFLAGS would be
+honored when preprocessing the environment text file. However,
+cpp_flags also includes $(PLATFORM_CPPFLAGS), which carries
+architecture-specific flags such as -march=armv8-a+crc set by
+arch/arm/Makefile for CONFIG_ARM64_CRC32=y targets. These flags are
+appropriate for cross-compiled object files but cause the host CPP
+invocation to fail on x86 build machines:
 
-On 2026-04-17T02:35:14, Weijie Gao <weijie.gao@mediatek.com> wrote:
-> env: ubi: add support to create environment volume if it does not exist
->
-> Add an option to allow environment volume being auto created if not
-> exist.
->
-> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
->
-> env/Kconfig |  6 ++++++
->  env/ubi.c   | 20 ++++++++++++++++++++
->  2 files changed, 26 insertions(+)
+  cc1: error: bad value ('armv8-a+crc') for '-march=' switch
 
-Could you beef up the Kconfig help text for ENV_UBI_VOLUME_CREATE -
-e.g. mention when users might want to enable this, such as on first
-boot of a fresh device where the UBI partition exists but no volumes
-have been created yet.
+KBUILD_CPPFLAGS already accumulates the user-supplied KCPPFLAGS via
+"KBUILD_CPPFLAGS += $(KCPPFLAGS)", providing the behaviour 2956a84
+intended without pulling in target architecture flags. Use it directly.
 
-> diff --git a/env/ubi.c b/env/ubi.c
-> @@ -105,6 +105,18 @@ static int env_ubi_save(void)
-> +int __weak env_ubi_volume_create(const char *volume)
-> +{
-> +     struct ubi_volume *vol;
-> +
-> +     vol = ubi_find_volume((char *)volume);
+Fixes: 2956a84 ("Makefile: don't use CFLAGS for environment text file")
+Reported-by: Levi Shafter <levi.shafter@elder-tomes.com>
+Signed-off-by: Levi Shafter <levi.shafter@elder-tomes.com>
+---
+Sponsor: 21SoftWare LLC
 
-Does this function need to be weak?
+ Makefile | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-ubi_find_volume() prints "Volume %s not found!" when the volume does
-not exist. Since the whole point of this function is to handle missing
-volumes, this message will appear every time auto-creation is used.
-Please can you either add a quiet variant of ubi_find_volume(), or
-suppress the message here?
-
-> diff --git a/env/ubi.c b/env/ubi.c
-> @@ -134,6 +146,11 @@ static int env_ubi_load(void)
-> +     if (IS_ENABLED(CONFIG_ENV_UBI_VOLUME_CREATE)) {
-> +             env_ubi_volume_create(CONFIG_ENV_UBI_VOLUME);
-> +             env_ubi_volume_create(CONFIG_ENV_UBI_VOLUME_REDUND);
-> +     }
-
-The return value from env_ubi_volume_create() is not checked. If
-volume creation fails (e.g. no space left), the subsequent
-ubi_volume_read() will also fail, but the error message will not
-indicate the underlying problem. Please can you check the return value
-and print an appropriate message if creation fails?
-
-Regards,
-Simon
+diff --git a/Makefile b/Makefile
+index dfc95d314dd..e2b8e6a1915 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2147,7 +2147,8 @@ ENV_FILE := $(if
+$(ENV_SOURCE_FILE),$(ENV_FILE_CFG),$(wildcard $(ENV_FILE_BOARD)
+ quiet_cmd_gen_envp = ENVP    $@
+       cmd_gen_envp = \
+ 	if [ -s "$(ENV_FILE)" ]; then \
+-		$(CPP) -P $(cpp_flags) -x assembler-with-cpp -undef \
++		$(CPP) -P $(KBUILD_CPPFLAGS) $(UBOOTINCLUDE) \
++			-x assembler-with-cpp -undef \
+ 			-D__ASSEMBLY__ \
+ 			-D__UBOOT_CONFIG__ \
+ 			-DDEFAULT_DEVICE_TREE=$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE)) \
