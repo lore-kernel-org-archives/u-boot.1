@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64BE5F43697
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 13:02:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2186CF43697
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 13:03:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9742484337;
+	by phobos.denx.de (Postfix) with ESMTP id DC1A384368;
 	Fri, 17 Apr 2026 15:02:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="FAAE22Yx";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="peyXSivZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4523284297; Fri, 17 Apr 2026 15:02:17 +0200 (CEST)
-Received: from PAUP264CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170110002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::2])
+ id 5BFCE841C2; Fri, 17 Apr 2026 15:02:17 +0200 (CEST)
+Received: from MRZP264CU002.outbound.protection.outlook.com
+ (mail-francesouthazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5D11842B7
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 15:02:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 601EF842BF
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 15:02:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=softathome.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=philippe.reynes@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=j/z1vCumQxGQfX7Sx0DDQkBHrXCaVncnhVXG3jvGrR/l9xWt2POgJaLiOOxXI5jRxITN1bzwhngg/FykfpkCc11TYHpPDQIyU+cwTHY8q0gSTurzAKSL1hcCXp85VgwaJ2Zpe3ZF13lFYV6zcWSa8K0FxgnhH0qRKGUn3RJEoIF8GtwIoWW/kMqBckNZYY2Ir6mMyzFXYmmhLKup7buWNoKH9yUM/UZNMTc1JXtSx+l6Inq/9j9RJiKLCN0sdnje++8Og2MTyqhrT1Z9zypJp0DYnYNFEb4U9sV8GvhvGdRqDjcImCvwIh7xTNovBAmdC7sIEyvxP4WKnBSQVZaylQ==
+ b=EU3KuqY3gWf56aGHRa2qTZW4ZWR7SwJFK6LQXSHCxRbhjRy6iKwi4UyNgS7yjRIiUBvNcDzQww6uych0AAL9NKHY20zMRWwKOHhnA1VMvBKMfIfVRSK/d+vVaP4pe9Kmy1hSRUy8EtysmF94OrjKtSbCs3H8FSL5zmiXFICqRnPcIkm+jdaLGckiXHKj9CyCru4GZdvmpT+p66uJ9Tggb4QLD1kRFpNLV6gR2hCsKULosj2Vb6YQeUQTO6P/5UUbF4Vb9Mli6pgk3nqudYOvtbvvvA9HtFuCjH0IZHnDWJVt9dvrXn+mqpMROA0BoqISVk38hIfwY0ZGmNdc7cakNQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qSBmwgjRiqto6KMz7xblDuWCUq142qI+PcXefjSh4i4=;
- b=jPZCGEisDvMzq8E6OTUPnWbwzc/6rKKCZtR8SxMBjVNnft1Xurr9pBPJVhg8XwfGlS8rKdKA2lW4I0+YxA5YmXjkEvKusmk4gX4OankM6gXr4i5XZEyB+3TIn/AYbs8DVfmGSkEGUOXDkja/Ov2KryFsMtexsZylH6J8mCt/vA/Vzf9QMTNoD88Z/e8nMB5lJoKVjq3Db3acuOfTtSrEsHc0Wm/F97bN/Uc7u9xOvpIi7ps6N2PrijxLmlqFCBVnKMRtyA3d2sL0wNcEW9RhCPQ2XfGN4kPDyQ50MLKya/G19iWUKGJueU1BKMRFu9dsli/Z2jOhU2lrJYi9pQuxZA==
+ bh=Hv4zMAEGQK3DFFQc4W+9xhZbm/kS7mZnx06FPh3nQDk=;
+ b=VAGZFTu2TNaeid/y98zhks5ld+AHxOaXq8jxNa2CUTxvJ6MD6sLGPJ9SKh6fL0/xMHbkVvagol0j4DPEFwFEQPxzgZQgD6kQwx0rIZaHMcK5waja65XGQi4/wZLANmPxfGwtEXvKCziMMP/a0TP6aph7bkFP4C9RMd94oTsQeoC6aQx4GceAZmu5gwbCKMEAj3E/lqjZQrDiP8Jqd1G7vumAB6oUQ6KUvnwkdMjodqr3BBFGQM9JfVC7Vuy0mDbqJuAB+pyaAbMCAqCy4qewMJWLLlMAVCqJn1pO4kHOSTBBssW9xNRzf1a3K/dml/y4pRmtqRAeiaQle8bpsZttDA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=canonical.com smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -41,16 +41,16 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qSBmwgjRiqto6KMz7xblDuWCUq142qI+PcXefjSh4i4=;
- b=FAAE22YxwtLQe4MhCccwMb7bjcXiOheP3q3e3pShsNRYqu9RK/A00HbxINDVO2KRUU90k/Tgwi4xUSLmryIJjEYWixNjio0r0FQHYjb/7WBa54XFmcXGiiomY2nrI6DkICP5YubWaT4pjj8hC1iazd0aAG/qkPAPh78nKXFmXlyLF2uKLp9M+WcQ0e+F+wg0aTsScu56PBgIGex5g70avjjnFuTDesEAweYe7lvnscgtcSsypAZFMIX3YRIrSho+xv0BFNXlyq7bgLIIzCft01oHGWSoNMrwE7GChFRyuXkESu0YT5MY9keJfcfpdnHCvRqvGdn/yQFp/8XKgzhvuw==
-Received: from MR1P264CA0093.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:3f::21)
- by MR1P264MB3233.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:3a::17) with
+ bh=Hv4zMAEGQK3DFFQc4W+9xhZbm/kS7mZnx06FPh3nQDk=;
+ b=peyXSivZOoqv05vmSb8QsTlaWIzT+rKWJUqdjFjrNpmU6B2celSfGpu5r4MLZl9W0UdU/OkVLOk7pbIBdPNkuV7RZyu+aeXflK8cziK/l/PxEyQ5wGfhXQQfkF79zw9c7HsL90abr222OthRN0GYt1Odz5B7pHwUb872gF0BiYhsj4CNVB0msUhsNA9rgaCMMhJ9bbxvXxq7IKkcMy6NJhujI7gX+AHV+qZSaZg8T3EGHRpxlsuPRpKJUSQZsKrKfIhi4iKLoApXO2t7SU8G1RbkM0lQy6y/9Tcj6zn/zPdo3vnczYy522de3/i4/YZAqJ1kUfwBb0HUN40rOu0wjw==
+Received: from MR1P264CA0024.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:2f::11)
+ by MR0P264MB5446.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:4b::17) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.25; Fri, 17 Apr
  2026 13:02:10 +0000
-Received: from MR1PEPF00000D5A.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:501:3f:cafe::c) by MR1P264CA0093.outlook.office365.com
- (2603:10a6:501:3f::21) with Microsoft SMTP Server (version=TLS1_3,
+Received: from MR1PEPF00000D57.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:501:2f:cafe::c6) by MR1P264CA0024.outlook.office365.com
+ (2603:10a6:501:2f::11) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.52 via Frontend Transport; Fri,
  17 Apr 2026 13:02:10 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
@@ -61,51 +61,49 @@ Received-SPF: Pass (protection.outlook.com: domain of softathome.com
  receiver=protection.outlook.com; client-ip=149.6.166.170;
  helo=proxy.softathome.com; pr=C
 Received: from proxy.softathome.com (149.6.166.170) by
- MR1PEPF00000D5A.mail.protection.outlook.com (10.167.241.7) with Microsoft
+ MR1PEPF00000D57.mail.protection.outlook.com (10.167.241.4) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.17
- via Frontend Transport; Fri, 17 Apr 2026 13:02:10 +0000
+ via Frontend Transport; Fri, 17 Apr 2026 13:02:09 +0000
 Received: from sah1lpt726.home (unknown [192.168.72.39])
- by proxy.softathome.com (Postfix) with ESMTPSA id 37E0520EDA;
- Fri, 17 Apr 2026 15:02:10 +0200 (CEST)
+ by proxy.softathome.com (Postfix) with ESMTPSA id 8431B1FFF4;
+ Fri, 17 Apr 2026 15:02:09 +0200 (CEST)
 From: Philippe Reynes <philippe.reynes@softathome.com>
 To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
  trini@konsulko.com, simon.glass@canonical.com
-Cc: u-boot@lists.denx.de, Philippe Reynes <philippe.reynes@softathome.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4 08/14] test: vboot: add test for ecdsa
-Date: Fri, 17 Apr 2026 15:01:58 +0200
-Message-ID: <20260417130204.49896-9-philippe.reynes@softathome.com>
+Cc: u-boot@lists.denx.de,
+	Philippe Reynes <philippe.reynes@softathome.com>
+Subject: [PATCH v4 00/14] add software ecdsa support
+Date: Fri, 17 Apr 2026 15:01:50 +0200
+Message-ID: <20260417130204.49896-1-philippe.reynes@softathome.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260417130204.49896-1-philippe.reynes@softathome.com>
-References: <20260417130204.49896-1-philippe.reynes@softathome.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MR1PEPF00000D5A:EE_|MR1P264MB3233:EE_
+X-MS-TrafficTypeDiagnostic: MR1PEPF00000D57:EE_|MR0P264MB5446:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 4c28117b-ee08-4cda-5352-08de9c818990
+X-MS-Office365-Filtering-Correlation-Id: 20916d5b-8e15-40c2-daa8-08de9c818922
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|36860700016|1800799024|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: fGqY5BW5a5ZarbJpuZ7B5UreDj0B+kw4DOtJ+t9ziF8sMHT2LLM1RDHQ8UfD0evzQ93XZylV5uGFelpwrla7tjrW6Dh72wKXjb0aZqB9cRCDZzyCf8mOjCNvgrzY51jtJYlHlP7oIlVp08r4XX9shYxnSjNPi0lTI5Uw3+vuHeR0jU3Rhe4Z8Lb7a/xLHCl0Q7Z24iyAJSxGeSs8vFer5lssMlJvSRWD0wP7P4zqhXqoCLuQO12uKT1VCNa52Byr0aj3FsKCUnzx2472jRydKVpP3n9gPA47UUUT+Szi22F3YTngpSGS/bt1yome4cJVDj+Jbo7RfwAyDBHqW+nVioVJnWmXXkN8yGt8NWiQp9jpT0y1iyJOEaRpu/nkoujN1gv6gjbKpd+o5JfCL+qQ2VXKIWjLsbjPSNBt0NrWzf+sGJS3B13TiBxDVP9qlnkEMGfOmoW4DbjP3Di4h8fkwM+p9kik7efZ2+hdxRIoQpcJX0J2Al8gouidpqQDwvowSC0Gdx+qDdV7JSOFgsZlKRRE7c7jhMlMwr9kSPMHZ8vFrfNWEuHQdDRWefBUj/cMiY8D5KorIj579JRTsgVtTZ5UJy/rhjOkmkE6zWuOtHh+UShSceon1un6bklc6it7vz4fRKzMQsRcfboOxdg5X/+Zj6p8y16DKwv+8CPC2Sq8ftb5cdiezdv0JpZcuPnBw9wvbHi/JuyVQ7ivhH5zmZIw7f33tQ9ff9mixuhNK6hVUpPsyuqOFQibRIC6yTUJ5/nmofe6gczH+/X2YGy5Vg==
+ ARA:13230040|1800799024|82310400026|36860700016|376014|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: yELsczSeJkAI6ac1E2XbC6E5VRoXvgO++WrWxqkbKI1vKO7mdUVPA8Q847R9ruUTMH9tNqVdOKs3sS5ECdHWGwgrWYln75NNyHp8Q0ZhqjZHZy1QKvHnSCrYR5Xll++Iz7q82n8/grNVbmQ0ew65E/Q7/tACAZNWNvYk43A1h4KxV30fKZCd4MsBUDKQ0Va0N78yM7A2mPu5mD1sTLclohI6vt+zocbXjRxZsudnEItRDTzB/Ovz64vBiXxxtRniDz1/vudHWwcJlLDkqqYnoWT4emEK/Wea+AIY8F5ZhWlQk+vTBFc7Zf5Eq2ViQZqLr851aQMjHGvmejAFI3vhrgXCwSMvcje7p383uXlWnaDNkut8T3IaTSa7J7+L057HIpkGGYr5CBHsLfgz87jiITFjegKp8Lb5hpBXC6N2CzqK0nOTjz0jR1/JYrd/mJ5fNv9EN30sc4dgs7d0sTUu6i99blszRQOM4L6DyBtxtvD2R4e+hzWCPKFbRTHtGJIWi7EiHTBPme00xx04N45a6STanlytIWFmFcCpzaAsoSu3lduhWDg/8ETPkdfQru23/qETHwKxdwlPOCO1ptlG6d6MaIjufB7Q+XWfnwVe8CbjhkzYZvNdppNugnD6ce8673ztf82xr5VKKFznwfnsaglt5dGq/ZQ0OangYaeQbz42QKPP4bnMqYVx7DERW/5jmUpoONUvph1Ld9CMs4y7MLlcPHyAX3y7qTTwFbbPWBiFMtkclWA1IlULTl0V8CF2ecmhTNNZGpfUMdtd59p+Bw==
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(36860700016)(1800799024)(56012099003)(18002099003)(22082099003);
+ SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(56012099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: FFyTDZ4XWdzhJnxazxDCw8r9StE8lyIKrRYxjesOeMCmD33IEphwEcbYXxLgsXdvKNRwCx+rtUC84zPeYAerAdZQmHC4C/AlW9Cyv/+HVHw41AlNnteqax+yt/yGvGsdZ/clGBKOuArMexgTxEQzemfj/wVTE4flC52iuU2cUkZQ1s6YR0Uiuza3sTOSQoIXIK95ChTK16765tbyLk5FaPybt3KbbmOsxjPeZpcJW+TnAER+sq2DlqcxyHrJiS4ZL8/vIHsxNJYtwwgDq7Xr8hf5IIV3hbQIBGdsZa2WDXoUyf+DQXGLSgJ2M2pe4N+DT/4KBcHk4MLBHdtt9FDDhfuRIw1yKS3M0zylEZRAxECz4cOcxW7PpU6vzKY3f9hgSY1+laRN4oEH0SvA6s7wVeuchEywDallNTgaqyOpZQccvDKuNFfvTsV+1qPcI45t
+X-MS-Exchange-AntiSpam-MessageData-0: fIxKQ6Mc8jsV/sXjvGieyja/sQnXMIe1oMb08z38y4LV/NNHK7Ni8b6uwIwtBu2KVhgB8/dJE5Mmih+i+tTYriC/CvJ2+OKCPSutFhVNwpIdvOz1Ke8EAGVo8xPxTAeWrcyY6thO7XfM7B9K8qBe9nWAyPLkfj5U6nWfFXf+BBG5wOQTgGTTrCEjXXP3txpmgvuFDmiarvN+cBWmpf7RdETftjIL643p73t3t4LEHWM5vphXBMNeXh+3O5FyjBAL8S7VXHtgWmKMXx4akQeCbpGJ9c5mpEQ09drn4SxfqJlEpXALbSkx3nXuKUj+fwA5H7xv8MFQ//aRqROfePKHHdr5fm1J0qsc457pq80HZyPKHnV2gOiTD29hLo2GyjlEx+gDbtXP2E7breVFvdlEeTWqTUuNj5JEqK1+OT9aOvAM+gFWWYxUpfEapZ/k8Z5b
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Apr 2026 13:02:10.5115 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4c28117b-ee08-4cda-5352-08de9c818990
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Apr 2026 13:02:09.7944 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 20916d5b-8e15-40c2-daa8-08de9c818922
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: MR1PEPF00000D5A.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: MR1PEPF00000D57.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR1P264MB3233
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR0P264MB5446
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,386 +120,192 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This commit adds test case for ecdsa on fit, but not (yet) for
-the global image signature (preload).
+This serie adds the support of ecdsa with software
+using mbedtls. So boards without ecdsa hardware may
+also use signature with ecdsa.
 
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
----
-v2:
-- initial version
-v3:
-- no change
-v4:
-- no change
+To add the support of ecdsa with mbedtls, I have:
+- enabled ecdsa in mbedtls
+- add a function sw_ecdsa_verify that uses mbedtls
+- add a driver sw_ecdsa that call sw_ecdsa_verify
 
- test/py/tests/test_vboot.py                   | 29 ++++++++++++
- .../vboot/sign-configs-sha256-ecdsa256.its    | 45 +++++++++++++++++++
- .../vboot/sign-configs-sha256-ecdsa384.its    | 45 +++++++++++++++++++
- .../vboot/sign-configs-sha256-ecdsa521.its    | 45 +++++++++++++++++++
- .../vboot/sign-images-sha256-ecdsa256.its     | 42 +++++++++++++++++
- .../vboot/sign-images-sha256-ecdsa384.its     | 42 +++++++++++++++++
- .../vboot/sign-images-sha256-ecdsa521.its     | 42 +++++++++++++++++
- 7 files changed, 290 insertions(+)
+I have tested this code with sandbox, and I have
+followed those steps:
+
+0) build u-boot using sandbox_defconfig and adding those options:
+CONFIG_ECDSA_SW=y
+CONFIG_ECDSA_MBEDTLS=y
+CONFIG_ECDSA=y
+CONFIG_ECDSA_VERIFY=y
+
+1) add a signature node to an its file
+	signature-256 {
+		algo = "sha256,ecdsa256";
+		key-name-hint = "private-key-256";
+	};
+
+2) generate an ecdsa key
+openssl ecparam -name prime256v1 -genkey -noout -out private-key-256.pem
+
+3) create the itb file
+./tools/mkimage -f <file.its> -k . -K arch/sandbox/dts/test.dtb <file.itb>
+
+4) launch sandbox u-boot
+
+./u-boot -d arch/sandbox/dts/test.dtb
+
+5) on sandbox u-boot prompt, load the itb and launch bootm on it
+
+=> host load hostfs - 1000000 uboot-ecdsa.itb
+4628674 bytes read in 1 ms (4.3 GiB/s)
+=> bootm 1000000
+...
+...
+   Verifying Hash Integrity ... sha256,ecdsa256:private-key-256+ OK
+
+
+I have tested with success ecdsa256 and ecdsa384,
+but there is an issue with secp521r1. 
+
+Changes in v2:
+- move ECDSA_MBEDTLS to MBEDTLS_LIB_X509
+- rename lib/mbedtls/sw_ecdsa.c to lib/mbedtls/ecdsa.c
+- enhance dependancies for ECDSA_MBEDTLS
+- fix support of ecdsa521/secp521r1
+- add vboot test using ecdsa
+
+Changes in v3:
+- do not use _MBEDTLS in mbedtls_def_config.h
+- check returns and remove mem leak in lib/mbedtls/ecdsa.c
+- remove useless field  *k in struct ecdsa_test_vector_s
+- check returns in test/lib/ecdsa.c
+- fix third parameter when calling sha*_csum_wd()
+- add support of ecdsa in pre-load header
+
+Changes in v4:
+- change some dependencies to enable ecc
+- use ECDSA_MBEDTLS to build the ecdsa driver
+- support ecdsa521 and secp521r1
+- add a test calling ecdsa_verify for the ecdsa class
+- merge patch 10 and 11 (support ecdsa pre-load for binman and tests)
+- several code cleanup
+
+
+Philippe Reynes (14):
+  mbedtls: enable support of ecc
+  ecdsa: initial support of ecdsa using mbedtls
+  test: lib: ecdsa: add initial test
+  drivers: crypto: add software ecdsa support
+  ecdsa: fix support of secp521r1
+  test: dm: ecdsa.c: clean this test as software ecdsa is now
+    implemented
+  test: py: vboot: prepare integration test for ecdsa
+  test: vboot: add test for ecdsa
+  tools: mkimage: pre-load: add support of ecdsa
+  tools: binman: pre-load: add support of ecdsa
+  boot: pre-load: add support of ecdsa
+  tools: preload_check_sign: add support of ecdsa
+  test: py: vboot: prepare test for global signature with ecdsa
+  test: py: vboot: add test for global signature with ecdsa
+
+ boot/image-pre-load.c                         |  56 ++-
+ configs/sandbox_defconfig                     |   1 +
+ drivers/crypto/Makefile                       |   1 +
+ drivers/crypto/ecdsa/Makefile                 |   6 +
+ drivers/crypto/ecdsa/ecdsa-sw.c               |  33 ++
+ include/crypto/ecdsa-uclass.h                 |  15 +-
+ include/crypto/internal/ecdsa.h               |  28 ++
+ include/u-boot/sha256.h                       |   2 +
+ include/u-boot/sha512.h                       |   3 +
+ lib/ecdsa/Kconfig                             |   1 +
+ lib/ecdsa/ecdsa-libcrypto.c                   |  83 +++-
+ lib/ecdsa/ecdsa-verify.c                      |  64 ++-
+ lib/fdt-libcrypto.c                           |   2 +-
+ lib/mbedtls/Kconfig                           |  14 +
+ lib/mbedtls/Makefile                          |  20 +-
+ lib/mbedtls/ecdsa.c                           | 146 ++++++
+ lib/mbedtls/mbedtls_def_config.h              |  17 +
+ test/dm/ecdsa.c                               | 104 +++-
+ test/lib/Makefile                             |   1 +
+ test/lib/ecdsa.c                              | 453 ++++++++++++++++++
+ test/py/tests/test_fit_ecdsa.py               |   2 +-
+ test/py/tests/test_vboot.py                   | 143 +++---
+ .../tests/vboot/sandbox-binman-ecdsa256.dts   |  24 +
+ .../tests/vboot/sandbox-binman-ecdsa384.dts   |  24 +
+ .../tests/vboot/sandbox-binman-ecdsa521.dts   |  24 +
+ ...pss.dts => sandbox-binman-rsa2048-pss.dts} |   0
+ ...-binman.dts => sandbox-binman-rsa2048.dts} |   0
+ .../vboot/sandbox-u-boot-global-ecdsa256.dts  |  27 ++
+ .../vboot/sandbox-u-boot-global-ecdsa384.dts  |  27 ++
+ .../vboot/sandbox-u-boot-global-ecdsa521.dts  |  27 ++
+ ... => sandbox-u-boot-global-rsa2048-pss.dts} |   0
+ ....dts => sandbox-u-boot-global-rsa2048.dts} |   0
+ ....its => sign-configs-sha1-rsa2048-pss.its} |   0
+ ...sha1.its => sign-configs-sha1-rsa2048.its} |   0
+ .../vboot/sign-configs-sha256-ecdsa256.its    |  45 ++
+ .../vboot/sign-configs-sha256-ecdsa384.its    |  45 ++
+ .../vboot/sign-configs-sha256-ecdsa521.its    |  45 ++
+ ... sign-configs-sha256-rsa2048-pss-prod.its} |   0
+ ...ts => sign-configs-sha256-rsa2048-pss.its} |   0
+ ...56.its => sign-configs-sha256-rsa2048.its} |   0
+ ...84.its => sign-configs-sha384-rsa3072.its} |   0
+ ...s.its => sign-images-sha1-rsa2048-pss.its} |   0
+ ...-sha1.its => sign-images-sha1-rsa2048.its} |   0
+ .../vboot/sign-images-sha256-ecdsa256.its     |  42 ++
+ .../vboot/sign-images-sha256-ecdsa384.its     |  42 ++
+ .../vboot/sign-images-sha256-ecdsa521.its     |  42 ++
+ ...its => sign-images-sha256-rsa2048-pss.its} |   0
+ ...256.its => sign-images-sha256-rsa2048.its} |   0
+ ...384.its => sign-images-sha384-rsa3072.its} |   0
+ tools/binman/etype/pre_load.py                |  76 ++-
+ tools/binman/ftest.py                         |  50 ++
+ tools/binman/test/ecdsa521.pem                |   7 +
+ tools/binman/test/security/pre_load_ecdsa.dts |  22 +
+ .../security/pre_load_ecdsa_invalid_algo.dts  |  22 +
+ .../security/pre_load_ecdsa_invalid_key.dts   |  22 +
+ .../security/pre_load_ecdsa_invalid_sha.dts   |  22 +
+ tools/image-host.c                            |  79 ++-
+ tools/image-sig-host.c                        |   7 +
+ tools/preload_check_sign.c                    |  29 ++
+ 59 files changed, 1810 insertions(+), 135 deletions(-)
+ create mode 100644 drivers/crypto/ecdsa/Makefile
+ create mode 100644 drivers/crypto/ecdsa/ecdsa-sw.c
+ create mode 100644 include/crypto/internal/ecdsa.h
+ create mode 100644 lib/mbedtls/ecdsa.c
+ create mode 100644 test/lib/ecdsa.c
+ create mode 100644 test/py/tests/vboot/sandbox-binman-ecdsa256.dts
+ create mode 100644 test/py/tests/vboot/sandbox-binman-ecdsa384.dts
+ create mode 100644 test/py/tests/vboot/sandbox-binman-ecdsa521.dts
+ rename test/py/tests/vboot/{sandbox-binman-pss.dts => sandbox-binman-rsa2048-pss.dts} (100%)
+ rename test/py/tests/vboot/{sandbox-binman.dts => sandbox-binman-rsa2048.dts} (100%)
+ create mode 100644 test/py/tests/vboot/sandbox-u-boot-global-ecdsa256.dts
+ create mode 100644 test/py/tests/vboot/sandbox-u-boot-global-ecdsa384.dts
+ create mode 100644 test/py/tests/vboot/sandbox-u-boot-global-ecdsa521.dts
+ rename test/py/tests/vboot/{sandbox-u-boot-global-pss.dts => sandbox-u-boot-global-rsa2048-pss.dts} (100%)
+ rename test/py/tests/vboot/{sandbox-u-boot-global.dts => sandbox-u-boot-global-rsa2048.dts} (100%)
+ rename test/py/tests/vboot/{sign-configs-sha1-pss.its => sign-configs-sha1-rsa2048-pss.its} (100%)
+ rename test/py/tests/vboot/{sign-configs-sha1.its => sign-configs-sha1-rsa2048.its} (100%)
  create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa256.its
  create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa384.its
  create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa521.its
+ rename test/py/tests/vboot/{sign-configs-sha256-pss-prod.its => sign-configs-sha256-rsa2048-pss-prod.its} (100%)
+ rename test/py/tests/vboot/{sign-configs-sha256-pss.its => sign-configs-sha256-rsa2048-pss.its} (100%)
+ rename test/py/tests/vboot/{sign-configs-sha256.its => sign-configs-sha256-rsa2048.its} (100%)
+ rename test/py/tests/vboot/{sign-configs-sha384.its => sign-configs-sha384-rsa3072.its} (100%)
+ rename test/py/tests/vboot/{sign-images-sha1-pss.its => sign-images-sha1-rsa2048-pss.its} (100%)
+ rename test/py/tests/vboot/{sign-images-sha1.its => sign-images-sha1-rsa2048.its} (100%)
  create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa256.its
  create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa384.its
  create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa521.its
+ rename test/py/tests/vboot/{sign-images-sha256-pss.its => sign-images-sha256-rsa2048-pss.its} (100%)
+ rename test/py/tests/vboot/{sign-images-sha256.its => sign-images-sha256-rsa2048.its} (100%)
+ rename test/py/tests/vboot/{sign-images-sha384.its => sign-images-sha384-rsa3072.its} (100%)
+ create mode 100644 tools/binman/test/ecdsa521.pem
+ create mode 100644 tools/binman/test/security/pre_load_ecdsa.dts
+ create mode 100644 tools/binman/test/security/pre_load_ecdsa_invalid_algo.dts
+ create mode 100644 tools/binman/test/security/pre_load_ecdsa_invalid_key.dts
+ create mode 100644 tools/binman/test/security/pre_load_ecdsa_invalid_sha.dts
 
-diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
-index 496d314c649..4e4d9529031 100644
---- a/test/py/tests/test_vboot.py
-+++ b/test/py/tests/test_vboot.py
-@@ -94,6 +94,9 @@ TESTDATA_IN = [
-     ['sha256-pss-pad', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', False, False, False, False],
-     ['sha256-pss-required', 'sha256', '-rsa2048', '-pss', None, True, False, False, False],
-     ['sha256-pss-pad-required', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', True, True, False, False],
-+    ['sha256-basic-ecdsa256', 'sha256', '-ecdsa256', '', None, False, False, False, False],
-+    ['sha256-basic-ecdsa384', 'sha256', '-ecdsa384', '', None, False, False, False, False],
-+    ['sha256-basic-ecdsa521', 'sha256', '-ecdsa521', '', None, False, False, False, False],
-     ['sha384-basic', 'sha384', '-rsa3072', '', None, False, False, False, False],
-     ['sha384-pad', 'sha384', '-rsa3072', '', '-E -p 0x10000', False, False, False, False],
-     ['algo-arg', 'algo-arg', '', '', '-o sha256,rsa2048', False, False, True, False],
-@@ -287,6 +290,29 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
-         utils.run_and_log(ubman, 'openssl req -batch -new -x509 -key %s%s.key '
-                           '-out %s%s.crt' % (tmpdir, name, tmpdir, name))
- 
-+    def create_ecdsa_pair(name):
-+        """Generate a new ECDSA key pair
-+
-+        Args:
-+            name: Name of the key (e.g. 'dev')
-+        """
-+
-+        if sig_algo == "-ecdsa256":
-+            curve_name = "secp256r1"
-+        elif sig_algo == "-ecdsa384":
-+            curve_name = "secp384r1"
-+        elif sig_algo == "-ecdsa521":
-+            curve_name = "secp521r1"
-+        else:
-+            curve_name = "unknownCurve"
-+
-+        utils.run_and_log(ubman, 'openssl ecparam -name %s -genkey -noout -out %s%s.pem' %
-+                     (curve_name, tmpdir, name))
-+
-+        # Create a certificate containing the public key
-+        utils.run_and_log(ubman, 'openssl req -batch -new -x509 -key %s%s.pem '
-+                          '-out %s%s.crt' % (tmpdir, name, tmpdir, name))
-+
-     def test_with_algo(sha_algo, sig_algo, padding, sign_options):
-         """Test verified boot with the given hash algorithm.
- 
-@@ -537,6 +563,9 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
-     if sig_algo == "-rsa2048" or sig_algo == "-rsa3072" or sig_algo == "":
-         create_rsa_pair('dev')
-         create_rsa_pair('prod')
-+    elif sig_algo == "-ecdsa256" or sig_algo == "-ecdsa384" or sig_algo == "-ecdsa521":
-+        create_ecdsa_pair('dev')
-+        create_ecdsa_pair('prod')
- 
-     # Create a number kernel image with zeroes
-     with open('%stest-kernel.bin' % tmpdir, 'wb') as fd:
-diff --git a/test/py/tests/vboot/sign-configs-sha256-ecdsa256.its b/test/py/tests/vboot/sign-configs-sha256-ecdsa256.its
-new file mode 100644
-index 00000000000..4d0ef903a78
---- /dev/null
-+++ b/test/py/tests/vboot/sign-configs-sha256-ecdsa256.its
-@@ -0,0 +1,45 @@
-+/dts-v1/;
-+
-+/ {
-+	description = "Chrome OS kernel image with one or more FDT blobs";
-+	#address-cells = <1>;
-+
-+	images {
-+		kernel {
-+			data = /incbin/("test-kernel.bin");
-+			type = "kernel_noload";
-+			arch = "sandbox";
-+			os = "linux";
-+			compression = "none";
-+			load = <0x4>;
-+			entry = <0x8>;
-+			kernel-version = <1>;
-+			hash-1 {
-+				algo = "sha256";
-+			};
-+		};
-+		fdt-1 {
-+			description = "snow";
-+			data = /incbin/("sandbox-kernel.dtb");
-+			type = "flat_dt";
-+			arch = "sandbox";
-+			compression = "none";
-+			fdt-version = <1>;
-+			hash-1 {
-+				algo = "sha256";
-+			};
-+		};
-+	};
-+	configurations {
-+		default = "conf-1";
-+		conf-1 {
-+			kernel = "kernel";
-+			fdt = "fdt-1";
-+			signature {
-+				algo = "sha256,ecdsa256";
-+				key-name-hint = "dev";
-+				sign-images = "fdt", "kernel";
-+			};
-+		};
-+	};
-+};
-diff --git a/test/py/tests/vboot/sign-configs-sha256-ecdsa384.its b/test/py/tests/vboot/sign-configs-sha256-ecdsa384.its
-new file mode 100644
-index 00000000000..10427b43659
---- /dev/null
-+++ b/test/py/tests/vboot/sign-configs-sha256-ecdsa384.its
-@@ -0,0 +1,45 @@
-+/dts-v1/;
-+
-+/ {
-+	description = "Chrome OS kernel image with one or more FDT blobs";
-+	#address-cells = <1>;
-+
-+	images {
-+		kernel {
-+			data = /incbin/("test-kernel.bin");
-+			type = "kernel_noload";
-+			arch = "sandbox";
-+			os = "linux";
-+			compression = "none";
-+			load = <0x4>;
-+			entry = <0x8>;
-+			kernel-version = <1>;
-+			hash-1 {
-+				algo = "sha256";
-+			};
-+		};
-+		fdt-1 {
-+			description = "snow";
-+			data = /incbin/("sandbox-kernel.dtb");
-+			type = "flat_dt";
-+			arch = "sandbox";
-+			compression = "none";
-+			fdt-version = <1>;
-+			hash-1 {
-+				algo = "sha256";
-+			};
-+		};
-+	};
-+	configurations {
-+		default = "conf-1";
-+		conf-1 {
-+			kernel = "kernel";
-+			fdt = "fdt-1";
-+			signature {
-+				algo = "sha256,ecdsa384";
-+				key-name-hint = "dev";
-+				sign-images = "fdt", "kernel";
-+			};
-+		};
-+	};
-+};
-diff --git a/test/py/tests/vboot/sign-configs-sha256-ecdsa521.its b/test/py/tests/vboot/sign-configs-sha256-ecdsa521.its
-new file mode 100644
-index 00000000000..a65593ec64b
---- /dev/null
-+++ b/test/py/tests/vboot/sign-configs-sha256-ecdsa521.its
-@@ -0,0 +1,45 @@
-+/dts-v1/;
-+
-+/ {
-+	description = "Chrome OS kernel image with one or more FDT blobs";
-+	#address-cells = <1>;
-+
-+	images {
-+		kernel {
-+			data = /incbin/("test-kernel.bin");
-+			type = "kernel_noload";
-+			arch = "sandbox";
-+			os = "linux";
-+			compression = "none";
-+			load = <0x4>;
-+			entry = <0x8>;
-+			kernel-version = <1>;
-+			hash-1 {
-+				algo = "sha256";
-+			};
-+		};
-+		fdt-1 {
-+			description = "snow";
-+			data = /incbin/("sandbox-kernel.dtb");
-+			type = "flat_dt";
-+			arch = "sandbox";
-+			compression = "none";
-+			fdt-version = <1>;
-+			hash-1 {
-+				algo = "sha256";
-+			};
-+		};
-+	};
-+	configurations {
-+		default = "conf-1";
-+		conf-1 {
-+			kernel = "kernel";
-+			fdt = "fdt-1";
-+			signature {
-+				algo = "sha256,ecdsa521";
-+				key-name-hint = "dev";
-+				sign-images = "fdt", "kernel";
-+			};
-+		};
-+	};
-+};
-diff --git a/test/py/tests/vboot/sign-images-sha256-ecdsa256.its b/test/py/tests/vboot/sign-images-sha256-ecdsa256.its
-new file mode 100644
-index 00000000000..009003bb601
---- /dev/null
-+++ b/test/py/tests/vboot/sign-images-sha256-ecdsa256.its
-@@ -0,0 +1,42 @@
-+/dts-v1/;
-+
-+/ {
-+	description = "Chrome OS kernel image with one or more FDT blobs";
-+	#address-cells = <1>;
-+
-+	images {
-+		kernel {
-+			data = /incbin/("test-kernel.bin");
-+			type = "kernel_noload";
-+			arch = "sandbox";
-+			os = "linux";
-+			compression = "none";
-+			load = <0x4>;
-+			entry = <0x8>;
-+			kernel-version = <1>;
-+			signature {
-+				algo = "sha256,ecdsa256";
-+				key-name-hint = "dev";
-+			};
-+		};
-+		fdt-1 {
-+			description = "snow";
-+			data = /incbin/("sandbox-kernel.dtb");
-+			type = "flat_dt";
-+			arch = "sandbox";
-+			compression = "none";
-+			fdt-version = <1>;
-+			signature {
-+				algo = "sha256,ecdsa256";
-+				key-name-hint = "dev";
-+			};
-+		};
-+	};
-+	configurations {
-+		default = "conf-1";
-+		conf-1 {
-+			kernel = "kernel";
-+			fdt = "fdt-1";
-+		};
-+	};
-+};
-diff --git a/test/py/tests/vboot/sign-images-sha256-ecdsa384.its b/test/py/tests/vboot/sign-images-sha256-ecdsa384.its
-new file mode 100644
-index 00000000000..567de687a06
---- /dev/null
-+++ b/test/py/tests/vboot/sign-images-sha256-ecdsa384.its
-@@ -0,0 +1,42 @@
-+/dts-v1/;
-+
-+/ {
-+	description = "Chrome OS kernel image with one or more FDT blobs";
-+	#address-cells = <1>;
-+
-+	images {
-+		kernel {
-+			data = /incbin/("test-kernel.bin");
-+			type = "kernel_noload";
-+			arch = "sandbox";
-+			os = "linux";
-+			compression = "none";
-+			load = <0x4>;
-+			entry = <0x8>;
-+			kernel-version = <1>;
-+			signature {
-+				algo = "sha256,ecdsa384";
-+				key-name-hint = "dev";
-+			};
-+		};
-+		fdt-1 {
-+			description = "snow";
-+			data = /incbin/("sandbox-kernel.dtb");
-+			type = "flat_dt";
-+			arch = "sandbox";
-+			compression = "none";
-+			fdt-version = <1>;
-+			signature {
-+				algo = "sha256,ecdsa384";
-+				key-name-hint = "dev";
-+			};
-+		};
-+	};
-+	configurations {
-+		default = "conf-1";
-+		conf-1 {
-+			kernel = "kernel";
-+			fdt = "fdt-1";
-+		};
-+	};
-+};
-diff --git a/test/py/tests/vboot/sign-images-sha256-ecdsa521.its b/test/py/tests/vboot/sign-images-sha256-ecdsa521.its
-new file mode 100644
-index 00000000000..74ed45b21b8
---- /dev/null
-+++ b/test/py/tests/vboot/sign-images-sha256-ecdsa521.its
-@@ -0,0 +1,42 @@
-+/dts-v1/;
-+
-+/ {
-+	description = "Chrome OS kernel image with one or more FDT blobs";
-+	#address-cells = <1>;
-+
-+	images {
-+		kernel {
-+			data = /incbin/("test-kernel.bin");
-+			type = "kernel_noload";
-+			arch = "sandbox";
-+			os = "linux";
-+			compression = "none";
-+			load = <0x4>;
-+			entry = <0x8>;
-+			kernel-version = <1>;
-+			signature {
-+				algo = "sha256,ecdsa521";
-+				key-name-hint = "dev";
-+			};
-+		};
-+		fdt-1 {
-+			description = "snow";
-+			data = /incbin/("sandbox-kernel.dtb");
-+			type = "flat_dt";
-+			arch = "sandbox";
-+			compression = "none";
-+			fdt-version = <1>;
-+			signature {
-+				algo = "sha256,ecdsa521";
-+				key-name-hint = "dev";
-+			};
-+		};
-+	};
-+	configurations {
-+		default = "conf-1";
-+		conf-1 {
-+			kernel = "kernel";
-+			fdt = "fdt-1";
-+		};
-+	};
-+};
 -- 
 2.43.0
 
