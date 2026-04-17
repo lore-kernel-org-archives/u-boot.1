@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CAFBF4369A
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 13:03:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07ED8F43697
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 13:04:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C08984329;
+	by phobos.denx.de (Postfix) with ESMTP id 635A784378;
 	Fri, 17 Apr 2026 15:02:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="GFVKLi2y";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="YzjF1srm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2590784262; Fri, 17 Apr 2026 15:02:20 +0200 (CEST)
-Received: from PA5P264CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::])
+ id 78D1C84308; Fri, 17 Apr 2026 15:02:20 +0200 (CEST)
+Received: from MRZP264CU002.outbound.protection.outlook.com
+ (mail-francesouthazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21BF0842C9
+ by phobos.denx.de (Postfix) with ESMTPS id 3FCFD842B7
  for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 15:02:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=softathome.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=philippe.reynes@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QZZc8Vt6AugSzqLQB+kcu8cXD2NcMf9mkWeT8MkN+GmJlU4rRWBLC1U6fcPQts1DEp+NNzTK2GhiWrk2k3qtM3qHpEj8eu2UiX8keb7dDzf1H3OZX+mt/eI0an3vFn7khuloQl3Hd7DEeVKvSiZcamrYKGK31FwUu2IwifSTPDs7P5KS6Vww5YEdmwhQ+LGBWjRQuIKFV2bUgshd7Uedcb/R3pKP5WYzcSpvymvetmErBGX9dRxyrFb+YXsm9nPLN6Mh47299fGLW0qAdH+DkDgQOk5oFLs6idaQThvf4YuUq1G1obinKCHEw/aj8l8P/X4Rnqk1Pc50oxnx8zdF8A==
+ b=maIcvVxi+/p7RPXEGNhUhTIAhHTD8RymsGUfO1xvYza8mZUrG6SU55zF7Xbus+QC10a+LL9WEljVEPDO6Jym3s7UEgeclEcYB68XUkJxZesNJiXOpNvSdg/W+XVe6CK2YVGAfHboHhvhZWdeHMEe0FdnhhRfzvXY7FqB6V157Z24SHM91gS4VdMZpQN0R3vKjSmAxzLWO+b70p3vS05PfwxacUbO5oK6qlETJM+8lJRu02lTxso3VzqJI33b7LZ3+nn6CXzE7FbB56SvFyI/+2zRqTZfQ15saciIIA68D9caSiisomjxD6nVnVyrizHJ5jLQiY9nvU7A3LwA+aIs8g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=e+dsiUpY+xIMy3dX2yySZrgzLjxTheVc9mEpOl9n1zM=;
- b=Y26/KE5x6WLx+b8aA6pwSxft6xmhQ1ylkQzjDfaYyMXM5gHeRHa4ujmxvh7q++0hn/pegbJ/S0JVuKA1HdccagcnJHRsLVoUOifs8VVmmLqsNTeUMrAJRF90qDM1moeJxIFth8dlM2ohi+JUBf/DWEaLKiMKtufIe84pBiBXykrEfPfPG9KNHRnz8kjzNozkkemTHbhPre8RGqlauD+hZVJ9UD7ebBYJcyEOZmFlxzY5HbMEvCg8bfZiCkMszQG/Z0Gs5TUr+pwhofO64nGcSeB/aDd7JkTpuVXzatupxoj9uhA5gIPnSqT8WI8QEABIGW5UeIfkE/uXpvoKsMe5eQ==
+ bh=9tAm+AsaJ9SzxlPx4l6qbq2HBtfLgEHxHCIjPZfqRBs=;
+ b=zRtASZifGoDbJvs5tul8RVwtxbnLEUrFQVQmJMgFmwUYNuY31xZajcyAbcMS1zOY23mZJl7EKKffva8LcoE7RLSpC9dgzvpFBsEV2E5C9kQGJ1TQUbvOjoCfjw98EN5G0dhbounKP6nNLXthWxuHGdO9PjYz52/6tR7wmiRC9KJycKC56BJSR5J6sLETfXp5hrHKe9wXhuSmZPrhs/Ll4gpEeMvqgxJ0R7hD3sl8AJQPty2x4FeXSvYtiJUEtTR+H52xRc2PxO1dHtC3P4EzQw5tflVMLxrFXZtdw0qp/TxKaSJgE4Q0zK2AV3bsBgwEjEQadZKZ94VbweuxmO0qtw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=canonical.com smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -41,16 +41,16 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e+dsiUpY+xIMy3dX2yySZrgzLjxTheVc9mEpOl9n1zM=;
- b=GFVKLi2yrkDJ9ta7K3hcAg+RP++//YiKE631QIDrSrnJIiPsRKn64Xa0kQIqke/T02lsKjXNnj8X0HWkgc+ovJkt5AsuGklN1diW+jFxoXc9zpYxR1dggUswmcvZg+1+MudpFsDYOvHL1WQNap7I22wBmCdkBcthNh+S9sNHcSdNWGWw6blpjWa1lHyn/F65kQ+MR4YIBEunT09bPi0E1PJUtEjoJcYrN+yekX9UQ9feJUSd1hpEG9U2PltrJDjWnJrm9EPCItFynzHcq4gbNMoBZQ/xvUO+bxM32FFnkFVxhnWaYgr2TRXGrSpnoo7a1g3IYqdankQw3DOkwDPgLw==
-Received: from PR1P264CA0126.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:2cd::20)
- by MR1PPFAFCFF2AA2.FRAP264.PROD.OUTLOOK.COM (2603:10a6:508:1::2ca)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.45; Fri, 17 Apr
+ bh=9tAm+AsaJ9SzxlPx4l6qbq2HBtfLgEHxHCIjPZfqRBs=;
+ b=YzjF1srmZ9pwVwgOJ7r8dkGZ7d6av6h0QbBWrgccLKn4iWJ5W9gFEed8qYItHoJtbBTsL3awWze2yt9NE/akbLLCgKfgBQzJLK2q8M/+8BDmPhGhW80LwJqZG88p5xVsLNhx+jGW+/1eNqiH4yjOr+cO9TSFfq4K5jVBwAEyjE7vCU+kX2h34H5lUd+6frqF2MORsapzz4TtXxUZa/IOq72iVMQLYWksSYmITo3UfAg+QGWHd1HONKs4lWD2QB5Ts6vMVZ3G4PPs0q45pbwmIQE0O0u780uJ2vfQ4V2wcp/nL0vNj8ZQesvcCD0pR6WDOkQ7rRlm38tWNYdKfU8CDQ==
+Received: from PR1P264CA0178.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:344::16)
+ by MRYP264MB6139.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:70::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.21; Fri, 17 Apr
  2026 13:02:10 +0000
-Received: from PA1PEPF000CC3FB.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:2cd:cafe::77) by PR1P264CA0126.outlook.office365.com
- (2603:10a6:102:2cd::20) with Microsoft SMTP Server (version=TLS1_3,
+Received: from PA2PEPF00019231.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:344:cafe::73) by PR1P264CA0178.outlook.office365.com
+ (2603:10a6:102:344::16) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.52 via Frontend Transport; Fri,
  17 Apr 2026 13:02:10 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
@@ -61,21 +61,20 @@ Received-SPF: Pass (protection.outlook.com: domain of softathome.com
  receiver=protection.outlook.com; client-ip=149.6.166.170;
  helo=proxy.softathome.com; pr=C
 Received: from proxy.softathome.com (149.6.166.170) by
- PA1PEPF000CC3FB.mail.protection.outlook.com (10.167.242.6) with Microsoft
+ PA2PEPF00019231.mail.protection.outlook.com (10.167.242.37) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9769.17
  via Frontend Transport; Fri, 17 Apr 2026 13:02:10 +0000
 Received: from sah1lpt726.home (unknown [192.168.72.39])
- by proxy.softathome.com (Postfix) with ESMTPSA id 0BB0120EC3;
+ by proxy.softathome.com (Postfix) with ESMTPSA id 61C541FFF4;
  Fri, 17 Apr 2026 15:02:10 +0200 (CEST)
 From: Philippe Reynes <philippe.reynes@softathome.com>
 To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
  trini@konsulko.com, simon.glass@canonical.com
 Cc: u-boot@lists.denx.de,
 	Philippe Reynes <philippe.reynes@softathome.com>
-Subject: [PATCH v4 06/14] test: dm: ecdsa.c: clean this test as software ecdsa
- is now implemented
-Date: Fri, 17 Apr 2026 15:01:56 +0200
-Message-ID: <20260417130204.49896-7-philippe.reynes@softathome.com>
+Subject: [PATCH v4 10/14] tools: binman: pre-load: add support of ecdsa
+Date: Fri, 17 Apr 2026 15:02:00 +0200
+Message-ID: <20260417130204.49896-11-philippe.reynes@softathome.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260417130204.49896-1-philippe.reynes@softathome.com>
 References: <20260417130204.49896-1-philippe.reynes@softathome.com>
@@ -83,30 +82,30 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA1PEPF000CC3FB:EE_|MR1PPFAFCFF2AA2:EE_
+X-MS-TrafficTypeDiagnostic: PA2PEPF00019231:EE_|MRYP264MB6139:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 9d7c551f-0949-45b4-8b90-08de9c81896c
+X-MS-Office365-Filtering-Correlation-Id: ef959989-6904-4681-ba38-08de9c818994
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|36860700016|1800799024|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: 1tPEB3FU5aCvIW/DN1tOelydB6VkgFLi3rHR1RkNt5Cgd+xTD8SKycLAc09WPjk0P7P4ne33ztijbvW/gfH+qVXnPfEPN1otnm+6u2mUEmhvf151VhzclTW64rSOky4vbG9f/75vo91nl3zp+9dWU/PgFPtn84dN/DhBhto6ARBTqWOVriMuBxLgMjE6hwA4Osxjvy1h9KPecKKYva6aeKPxJ4p2KwA3oqiE+JJmWi+vFZd0ioDrbv0r9KrxDxq3g2MCBYaoUHKi6kbikm21Rd0IeAYMBNX1AfD9mVMwiB3rLZ5zSfzDfO7qWc2lNB01EjUrxN5HwmKak1VWSQ3yp2pxq7HSdWWZ1UMiwXUJm+fKOyXBc1ukNz59fRS2AGh3tOIQosreyF86sh/M4gLTZYBuoBQIRPy58KUiWSHmZlK09UGOon8MfHI+1q+lNZI8USqB88KfKlGgze5UTjnQ/UUlp1J0uC451t3AXvjUbtci+UaaUkroXd20f8zUbfkMmjijEE/ITGavG1dH4HStRLCH774WdowoEVFYjyoZLb165v11rKDE5o0uERIlUse7YeNpYNPKwgFCmr8AgNoalVARjUlrlKSsuIhJQ7ftctXbyKigqmrrh/jNuzD9xa18noLUerzD7voFs2vv5oYehJlCyNM2E8knKDpBvX+3ZUb88S/frclqHxOMlslYNEpbuwxcnPrHMCp7YSHknxpVmKdC5bBHbAGTrT/auQZWvGPH1siLsp8VVl/3e24FEuqpTWVdXz2wweCbxtlCnaQ1Bg==
+ ARA:13230040|1800799024|36860700016|376014|82310400026|56012099003|18002099003|17002099007|22082099003;
+X-Microsoft-Antispam-Message-Info: ytaWTEwPVaJQesUNUg3UNahm2FEmSN+lO7u6YRmzObnXbOuTpQsUNRjiuU7GAdJJOemUABG5l3vDNzknW1Fldk0DOwS1U9qExTyAQf6rjMjuMU6Onx/k90MGdZy9XEKyylg1fQHpzwStWMIIPuXmNnbUK+tG21FgNeiq4BVMEdIPIQMVILcCTd/o3RDIKuSxPWe+mBU+NzSblWa1E1zAEm/oTSFj9hVLhC2dU0tSm5Q0WtltfUUB+K++Ui0yYDSj07W2BY94U7nZyRDEp1s6u4yWrAsTAZ3Jjh7YUxEbbnMuE7/mfIYQldgus/Fyil3Md20cbRwNbaU3KqoSfWStgm22/CCue1yBGuM7XFcmjCr9+MRWH/urIqfE6L0kaZzXGEevQFfMsV8oNIol8E9WP0l9Zr6bVzBn35jRxqoTGwRrg0x95N29cB2GVw8gVyRrmjJeOnu8mu/bZFf8IFKWgoB4tj/hMJWkgQNP5vs4vWLaUBupMT4A982kbH8iK1pEPXagYMDrTXhiMeiQtODh8a8faFrftzj1nqBu3mtkm6B9DRHC2HhvOF98sgU+4XPKXpmpW88NKlalDhG3wBBD9tGaRVJLgWngkh5O1PS0fvMmMxVCQtoTXlRnEnKWlbt/uv2gqWvVro+YT0dXr8VeYQQcL6AznmGm3WiErk7Fngkz3sNwf6Gr1klq9e5YmvocO7yKuh/ljIFfyVilD2/qI1jQJB0/gRrnO2kzPXxQ1APHGmMVVKgHZAjBa57YEJXkEKpFoB2xkUkjQm/0yubbNA==
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(36860700016)(1800799024)(56012099003)(22082099003)(18002099003);
+ SFS:(13230040)(1800799024)(36860700016)(376014)(82310400026)(56012099003)(18002099003)(17002099007)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 8KPs05HQ9tWipqTMG9rqbcEPKA7io9A6z5MWcQhMbMijQXPGCfHHzHuaDxuaTS8jPz90+ATW+SehvZcp8H2GwhRcc3ejsZl7YmkoSHpPO75+mVT4R4Om9ZMswzZJIGYj7A7d0bgsmHSNNaTJNWPVGJWjgivbtI9aofg1XrMrv3yWi3YKqHrKVIr7ajgUyW1hDlwkPAqH+OHZTa2ipyaWlDikKR/uNKqBlB7sGoiOeQYxAXaCwRrbRBZ2gy1ioHKpHgxdCdLmJDM1LULN6z1R+AiDDGWeNxwaPGvxCvm150wmwsilz/dc6drbA1OcVcuuy9WyRJUuXkcQV66fg8sFvsE2BpGlmmE7QUawLm/rCTVXVT2ZbjeGpu6P/q+CLvsnBk/UD8xbmYjAaE7itarovRTzt8RhASINNvuV+xEl2cqewQ5iHuYh4Vlmxy5vWtAh
+X-MS-Exchange-AntiSpam-MessageData-0: pLf/OtRFOF1PHZH1URAXoMhza8SiLjjkwifv4aqFeszHGVhJA2ZvqUQ8V2dVSiQJ1tG+w0g6h5clVf7OFLPk4FuqhRmaRbgfaKEKEMNuaBo9J9FQ0d0Vr8afG1d/7X5S44nxGbPODSMmUAF/A2mpqczG6KgsV02111tLF1AtbXWaSN6fGsJ4qIR87sAgiU0a+qrzD+E8IeAOWDl3Q2OLclR6PD9ekAes5JXWDe38xGLeyWPkpeBv/tpfiWK9D4Z8OxMsRz5F5qUhfI3cwimbGRvMyDS34nd8vKtH0mUgjoMXJ4zYtAdtK6dAGsEFtMyVQQWgAFYnmOnnagH1Gg/ibMtmNK9c85+dP3yv9w5YMTPDKk5kvybuNVgyHa3VrgQphx7cwE57Rt9eyqyslJOqbdinhqM8QU+hkeAK8TXuzQW9dn6z1WN+NCJMfcHeG9jy
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Apr 2026 13:02:10.3404 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9d7c551f-0949-45b4-8b90-08de9c81896c
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Apr 2026 13:02:10.5642 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ef959989-6904-4681-ba38-08de9c818994
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: PA1PEPF000CC3FB.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: PA2PEPF00019231.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR1PPFAFCFF2AA2
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MRYP264MB6139
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,160 +122,333 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The test ecdsa was done when ecdsa was only supported by hardware.
-So it wasn't possible to test ecdsa on sandbox, and there is a test
-to check that ecdsa is not supported on sandbox.
-Now, there is a software implementation of ecdsa. So we remove
-this outdated test.
+Right now, binman can only create pre-load header
+using rsa. We add the support of ecdsa.
 
 Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 ---
-v2:
-- initial version
 v3:
-- no change
+- initial version
 v4:
-- add a test that use ecdsa_verify
+- merge patch 11 that was adding test for ecdsa pre-load
+- add key size check
+- use exc instead of simply e
+- rename dts filaneme
+- add a test to check key size
 
+ tools/binman/etype/pre_load.py                | 76 +++++++++++++++++--
+ tools/binman/ftest.py                         | 50 ++++++++++++
+ tools/binman/test/ecdsa521.pem                |  7 ++
+ tools/binman/test/security/pre_load_ecdsa.dts | 22 ++++++
+ .../security/pre_load_ecdsa_invalid_algo.dts  | 22 ++++++
+ .../security/pre_load_ecdsa_invalid_key.dts   | 22 ++++++
+ .../security/pre_load_ecdsa_invalid_sha.dts   | 22 ++++++
+ 7 files changed, 213 insertions(+), 8 deletions(-)
+ create mode 100644 tools/binman/test/ecdsa521.pem
+ create mode 100644 tools/binman/test/security/pre_load_ecdsa.dts
+ create mode 100644 tools/binman/test/security/pre_load_ecdsa_invalid_algo.dts
+ create mode 100644 tools/binman/test/security/pre_load_ecdsa_invalid_key.dts
+ create mode 100644 tools/binman/test/security/pre_load_ecdsa_invalid_sha.dts
 
- test/dm/ecdsa.c | 104 +++++++++++++++++++++++++++++++++++++++++++-----
- 1 file changed, 94 insertions(+), 10 deletions(-)
-
-diff --git a/test/dm/ecdsa.c b/test/dm/ecdsa.c
-index d7eac7115f7..946d5ab1d81 100644
---- a/test/dm/ecdsa.c
-+++ b/test/dm/ecdsa.c
-@@ -3,36 +3,120 @@
- #include <crypto/ecdsa-uclass.h>
- #include <dm.h>
- #include <dm/test.h>
-+#include <malloc.h>
- #include <test/ut.h>
- #include <u-boot/ecdsa.h>
+diff --git a/tools/binman/etype/pre_load.py b/tools/binman/etype/pre_load.py
+index 00f1a896767..057422ab0dc 100644
+--- a/tools/binman/etype/pre_load.py
++++ b/tools/binman/etype/pre_load.py
+@@ -16,8 +16,10 @@ from binman.entry import EntryArg
  
-+#define CHECK(op) ({							\
-+		int err = op;						\
-+		if (err < 0) {						\
-+			printf("%s: %s: %s\n", __func__, #op,		\
-+			       fdt_strerror(err));			\
-+			return err;					\
-+		}							\
-+									\
-+		err;							\
-+	})
-+
-+static int set_fdt_ecdsa_point(char *fdt, char *name, const char *data, size_t len)
-+{
-+	char *value = NULL;
-+	int ret = 0;
-+
-+	if (!fdt || !name || !data) {
-+		ret = -EINVAL;
-+		goto out;
-+	}
-+
-+	value = malloc(len / 2);
-+	if (!value) {
-+		ret = -EINVAL;
-+		goto out;
-+	}
-+
-+	ret = hex2bin(value, data, len / 2);
-+	if (ret)
-+		goto out;
-+
-+	ret = fdt_property(fdt, name, value, len / 2);
-+	if (ret)
-+		goto out;
-+
-+ out:
-+	free(value);
-+	return ret;
-+}
-+
-+static int create_fdt_with_ecdsa_key(char *fdt, size_t size,
-+				     const char *name, const char *curve,
-+				     const char *x, const char *y)
-+{
-+	CHECK(fdt_create(fdt, size));
-+	CHECK(fdt_finish_reservemap(fdt));
-+	CHECK(fdt_begin_node(fdt, ""));
-+	CHECK(fdt_begin_node(fdt, "signature"));
-+	CHECK(fdt_begin_node(fdt, name));
-+	CHECK(fdt_property_string(fdt, "algo", "sha256,ecdsa256"));
-+	CHECK(set_fdt_ecdsa_point(fdt, "ecdsa,y-point", y, strlen(y)));
-+	CHECK(set_fdt_ecdsa_point(fdt, "ecdsa,x-point", x, strlen(x)));
-+	CHECK(fdt_property_string(fdt, "ecdsa,curve", curve));
-+	CHECK(fdt_property_string(fdt, "key-name-hint", name));
-+	CHECK(fdt_end_node(fdt)); /* name */
-+	CHECK(fdt_end_node(fdt)); /* "signature" */
-+	CHECK(fdt_end_node(fdt)); /* "" */
-+	CHECK(fdt_finish(fdt));
-+	CHECK(fdt_pack(fdt));
-+
-+	return 0;
-+}
-+
- /*
-  * Basic test of the ECDSA uclass and ecdsa_verify()
-  *
-- * ECDSA implementations in u-boot are hardware-dependent. Until we have a
-- * software implementation that can be compiled into the sandbox, all we can
-- * test is the uclass support.
-+ * ECDSA software implementation is tested in another test,
-+ * so we only check that the class UCLASS_ECDSA may be used.
-  *
-- * The uclass_get() test is redundant since ecdsa_verify() would also fail. We
-- * run both functions in order to isolate the cause more clearly. i.e. is
-- * ecdsa_verify() failing because the UCLASS is absent/broken?
-+ * The data used in this test come from RFC6979
-  */
- static int dm_test_ecdsa_verify(struct unit_test_state *uts)
- {
- 	struct uclass *ucp;
-+	const char *full_name = "sha256,secp256r1";
-+	const char *name = "key-ecdsa-256";
-+	const char *curve = "prime256v1";
-+	const char *x = "60FED4BA255A9D31C961EB74C6356D68C049B8923B61FA6CE669622E60F29FB6";
-+	const char *y = "7903FE1008B8BC99A41AE9E95628BC64F2F1B20C2D7E9F5177A3C294D4462299";
-+	const char *r = "EFD48B2AACB6A8FD1140DD9CD45E81D69D2C877B56AAF991C34D0EA84EAF3716";
-+	const char *s = "F7CB1C942D657C41D436C7A1B6E29F65F3E900DBB9AFF4064DC4AB2F843ACDA8";
-+	uint8_t sig[64];
-+	size_t fdt_size = 512;
-+	char fdt[512];
+ from Cryptodome.Hash import SHA256, SHA384, SHA512
+ from Cryptodome.PublicKey import RSA
++from Cryptodome.PublicKey import ECC
+ from Cryptodome.Signature import pkcs1_15
+ from Cryptodome.Signature import pss
++from Cryptodome.Signature import DSS
  
--	struct checksum_algo algo = {
--		.checksum_len = 256,
-+	struct image_region region[] = {
-+		{
-+			.data = "sample",
-+			.size = strlen("sample"),
-+		},
- 	};
+ PRE_LOAD_MAGIC = b'UBSH'
  
- 	struct image_sign_info info = {
--		.checksum = &algo,
-+		.checksum = image_get_checksum_algo(full_name),
-+		.crypto = image_get_crypto_algo(full_name),
-+		.fdt_blob = fdt,
- 	};
- 
-+	/* create a fdt with the public key */
-+	ut_asserteq(0, create_fdt_with_ecdsa_key(fdt, fdt_size, name, curve, x, y));
-+
-+	/* prepare the signature */
-+	ut_asserteq(0, hex2bin(sig +  0, r, strlen(r) / 2));
-+	ut_asserteq(0, hex2bin(sig + 32, s, strlen(s) / 2));
-+
- 	ut_assertok(uclass_get(UCLASS_ECDSA, &ucp));
- 	ut_assertnonnull(ucp);
--	ut_asserteq(-ENODEV, ecdsa_verify(&info, NULL, 0, NULL, 0));
-+	ut_asserteq(0, ecdsa_verify(&info, region, 1, sig, sizeof(sig)));
- 
- 	return 0;
+@@ -27,6 +29,12 @@ RSAS = {
+     'rsa4096': 4096 / 8
  }
+ 
++ECDSAS = {
++    'ecdsa256': 256 / 8 * 2,
++    'ecdsa384': 384 / 8 * 2,
++    'ecdsa521': 132
++}
 +
- DM_TEST(dm_test_ecdsa_verify, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+ SHAS = {
+     'sha256': SHA256,
+     'sha384': SHA384,
+@@ -86,17 +94,10 @@ class Entry_pre_load(Entry_collection):
+         if self.key_path is None:
+             self.key_path = ''
+ 
+-    def _CreateHeader(self):
+-        """Create a pre load header"""
+-        hash_name, sign_name = self.algo_name.split(',')
+-        padding_name = self.padding_name
+-        key_name = os.path.join(self.key_path, self.key_name)
+-
++    def _CreateHeaderRsa(self, hash_name, sign_name, padding_name, key_name):
+         # Check hash and signature name/type
+         if hash_name not in SHAS:
+             self.Raise(hash_name + " is not supported")
+-        if sign_name not in RSAS:
+-            self.Raise(sign_name + " is not supported")
+ 
+         # Read the key
+         key = RSA.import_key(tools.read_file(key_name))
+@@ -151,6 +152,65 @@ class Entry_pre_load(Entry_collection):
+ 
+         return data + pad
+ 
++    def _CreateHeaderEcdsa(self, hash_name, sign_name, key_name):
++        # Check hash and signature name/type
++        if hash_name not in SHAS:
++            self.Raise(hash_name + " is not supported")
++
++        # Read the key
++        key = ECC.import_key(tools.read_file(key_name))
++
++        # Check if the key has the expected size
++        if key.pointQ.size_in_bytes() * 2 != ECDSAS[sign_name]:
++            self.Raise("The key " + self.key_name + " don't have the expected size")
++
++        # Compute the hash
++        hash_image = SHAS[hash_name].new()
++        hash_image.update(self.image)
++
++        # Compute the signature
++        signer = DSS.new(key, 'fips-186-3')
++        sig = signer.sign(hash_image)
++
++        hash_sig = SHA256.new()
++        hash_sig.update(sig)
++
++        version = self.version
++        header_size = self.header_size
++        image_size = len(self.image)
++        ofs_img_sig = 64 + len(sig)
++        flags = 0
++        reserved0 = 0
++        reserved1 = 0
++
++        first_header = struct.pack('>4sIIIIIII32s', PRE_LOAD_MAGIC,
++                                   version, header_size, image_size,
++                                   ofs_img_sig, flags, reserved0,
++                                   reserved1, hash_sig.digest())
++
++        hash_first_header = SHAS[hash_name].new()
++        hash_first_header.update(first_header)
++        sig_first_header = signer.sign(hash_first_header)
++
++        data = first_header + sig_first_header + sig
++        pad  = bytearray(self.header_size - len(data))
++
++        return data + pad
++
++    def _CreateHeader(self):
++        """Create a pre load header"""
++        hash_name, sign_name = self.algo_name.split(',')
++        padding_name = self.padding_name
++        key_name = os.path.join(self.key_path, self.key_name)
++
++        if sign_name in RSAS:
++            return self._CreateHeaderRsa(hash_name, sign_name, padding_name, key_name)
++
++        if sign_name in ECDSAS:
++            return self._CreateHeaderEcdsa(hash_name, sign_name, key_name)
++
++        self.Raise(sign_name + " is not supported")
++
+     def ObtainContents(self):
+         """Obtain a placeholder for the header contents"""
+         # wait that the image is available
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index ca5149ee654..bc0fc05a36d 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -5895,6 +5895,56 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+             data = self._DoReadFileDtb('security/pre_load_invalid_key.dts',
+                                        entry_args=entry_args)
+ 
++    def testPreLoadEcdsa(self):
++        """Test an image with a pre-load header using ecdsa key"""
++        entry_args = {
++            'pre-load-key-path': os.path.join(self._binman_dir, 'test'),
++        }
++        data = self._DoReadFileDtb(
++            'security/pre_load_ecdsa.dts', entry_args=entry_args,
++            extra_indirs=[os.path.join(self._binman_dir, 'test')])[0]
++
++        image_fname = tools.get_output_filename('image.bin')
++        is_signed = self._CheckPreload(image_fname, self.TestFile("ecdsa521.pem"), "sha256,ecdsa521")
++
++        self.assertEqual(PRE_LOAD_MAGIC, data[:len(PRE_LOAD_MAGIC)])
++        self.assertEqual(PRE_LOAD_VERSION, data[4:4 + len(PRE_LOAD_VERSION)])
++        self.assertEqual(PRE_LOAD_HDR_SIZE, data[8:8 + len(PRE_LOAD_HDR_SIZE)])
++        self.assertEqual(is_signed, True)
++
++    def testPreLoadEcdsaInvalidSha(self):
++        """Test an image with a pre-load ecdsa header with an invalid hash"""
++        entry_args = {
++            'pre-load-key-path': os.path.join(self._binman_dir, 'test'),
++        }
++        with self.assertRaises(ValueError) as exc:
++            self._DoReadFileDtb('security/pre_load_ecdsa_invalid_sha.dts',
++                                entry_args=entry_args)
++        self.assertIn("/binman/pre-load': sha2560 is not supported",
++                      str(exc.exception))
++
++    def testPreLoadEcdsaInvalidAlgo(self):
++        """Test an image with a pre-load header with an invalid algo"""
++        entry_args = {
++            'pre-load-key-path': os.path.join(self._binman_dir, 'test'),
++        }
++        with self.assertRaises(ValueError) as exc:
++            data = self._DoReadFileDtb('security/pre_load_ecdsa_invalid_algo.dts',
++                                       entry_args=entry_args)
++        self.assertIn("Node '/binman/pre-load': ecdsa5210 is not supported",
++                      str(exc.exception))
++
++    def testPreLoadEcdsaInvalidKey(self):
++        """Test an image with a pre-load header with an invalid key size"""
++        entry_args = {
++            'pre-load-key-path': os.path.join(self._binman_dir, 'test'),
++        }
++        with self.assertRaises(ValueError) as exc:
++            data = self._DoReadFileDtb('security/pre_load_ecdsa_invalid_key.dts',
++                                       entry_args=entry_args)
++        self.assertIn("Node '/binman/pre-load': The key ecdsa521.pem don't have the expected size",
++                      str(exc.exception))
++
+     def _CheckSafeUniqueNames(self, *images):
+         """Check all entries of given images for unsafe unique names"""
+         for image in images:
+diff --git a/tools/binman/test/ecdsa521.pem b/tools/binman/test/ecdsa521.pem
+new file mode 100644
+index 00000000000..ac1904d3955
+--- /dev/null
++++ b/tools/binman/test/ecdsa521.pem
+@@ -0,0 +1,7 @@
++-----BEGIN EC PRIVATE KEY-----
++MIHcAgEBBEIBM+CNnraGci2/mw1wPq44l2HccHnoBbdP3DiU6zqsBOq8IR8uegz2
++FLzWsjxcW7hwROCdEm6tW99wqsyPE25RZ3egBwYFK4EEACOhgYkDgYYABABu5bWV
++aQ4EgnXFjojX9df3gBEBipphEEFAoG87GuoWBdlimFC8UEEXiKNU37w0wlJn4bG0
++8uOKwDqBk3uF+DrmZwB45lCSKkjdRWsJeDt+iEuFe2O/mbXoL4p5D8MM2OsDV5GT
++srUbxhXq+T/i5lV7XXm2+tT/7zU8ZQce6WRufbd9KQ==
++-----END EC PRIVATE KEY-----
+diff --git a/tools/binman/test/security/pre_load_ecdsa.dts b/tools/binman/test/security/pre_load_ecdsa.dts
+new file mode 100644
+index 00000000000..247b85aad4c
+--- /dev/null
++++ b/tools/binman/test/security/pre_load_ecdsa.dts
+@@ -0,0 +1,22 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		pre-load {
++			content = <&image>;
++			algo-name = "sha256,ecdsa521";
++			key-name = "ecdsa521.pem";
++			header-size = <4096>;
++			version = <0x11223344>;
++		};
++
++		image: blob-ext {
++			filename = "refcode.bin";
++		};
++	};
++};
+diff --git a/tools/binman/test/security/pre_load_ecdsa_invalid_algo.dts b/tools/binman/test/security/pre_load_ecdsa_invalid_algo.dts
+new file mode 100644
+index 00000000000..be71edbbdcd
+--- /dev/null
++++ b/tools/binman/test/security/pre_load_ecdsa_invalid_algo.dts
+@@ -0,0 +1,22 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		pre-load {
++			content = <&image>;
++			algo-name = "sha256,ecdsa5210";
++			key-name = "ecdsa521.pem";
++			header-size = <4096>;
++			version = <0x11223344>;
++		};
++
++		image: blob-ext {
++			filename = "refcode.bin";
++		};
++	};
++};
+diff --git a/tools/binman/test/security/pre_load_ecdsa_invalid_key.dts b/tools/binman/test/security/pre_load_ecdsa_invalid_key.dts
+new file mode 100644
+index 00000000000..15d71cf0324
+--- /dev/null
++++ b/tools/binman/test/security/pre_load_ecdsa_invalid_key.dts
+@@ -0,0 +1,22 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		pre-load {
++			content = <&image>;
++			algo-name = "sha256,ecdsa384";
++			key-name = "ecdsa521.pem";
++			header-size = <4096>;
++			version = <0x11223344>;
++		};
++
++		image: blob-ext {
++			filename = "refcode.bin";
++		};
++	};
++};
+diff --git a/tools/binman/test/security/pre_load_ecdsa_invalid_sha.dts b/tools/binman/test/security/pre_load_ecdsa_invalid_sha.dts
+new file mode 100644
+index 00000000000..1017707375e
+--- /dev/null
++++ b/tools/binman/test/security/pre_load_ecdsa_invalid_sha.dts
+@@ -0,0 +1,22 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		pre-load {
++			content = <&image>;
++			algo-name = "sha2560,ecdsa521";
++			key-name = "ecdsa521.pem";
++			header-size = <4096>;
++			version = <0x11223344>;
++		};
++
++		image: blob-ext {
++			filename = "refcode.bin";
++		};
++	};
++};
 -- 
 2.43.0
 
