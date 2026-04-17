@@ -4,84 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11B24F8DFF9
-	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 18:29:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 458A1F436BF
+	for <u-boot@archiver.kernel.org>; Fri, 17 Apr 2026 18:29:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EDEB8422D;
+	by phobos.denx.de (Postfix) with ESMTP id 9A40084286;
 	Fri, 17 Apr 2026 20:29:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OXqquvP4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aCUwkFIH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77B1C8428C; Fri, 17 Apr 2026 20:29:42 +0200 (CEST)
-Received: from mail-oa1-x44.google.com (mail-oa1-x44.google.com
- [IPv6:2001:4860:4864:20::44])
+ id E042C839D9; Fri, 17 Apr 2026 20:29:42 +0200 (CEST)
+Received: from mail-oa1-x42.google.com (mail-oa1-x42.google.com
+ [IPv6:2001:4860:4864:20::42])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 134C2839D9
+ by phobos.denx.de (Postfix) with ESMTPS id C66058422D
  for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 20:29:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x44.google.com with SMTP id
- 586e51a60fabf-4043b27ddeaso610583fac.1
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 11:29:39 -0700 (PDT)
+Received: by mail-oa1-x42.google.com with SMTP id
+ 586e51a60fabf-415e568a7ecso473561fac.0
+ for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 11:29:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=konsulko.com; s=google; t=1776450579; x=1777055379; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1VoinpXJvCRNpuqRWKZmu3RHyqR6qUstV/uJ+yRzk20=;
- b=OXqquvP4y9ForJFGm7HB5xuHbyECO81l+ItvWLgVZsR/n/2pdL1UCnaiZoKRCTG5zz
- rjH58uULSeKOh2eQiQs0IlTeZ1u23cbfVgCl3lTM66i4TKV81iXVoJUCQRiLvtl6iLej
- w5VaHNs3JGy71A1uTpJ9Z36ye2LWzm/2Ncs38=
+ bh=QdJcRh4a/LlQUdIqvmidK1zv5fn5cDknr3G6tpk5uc4=;
+ b=aCUwkFIHP2Sf8jLHdBku0e61d0a9l9pYfxwA6PcQUvH+IHO9z/f3gtSAI2Z6arH7zk
+ QzgWoGXQ3SadS5uw1CjFvYN51a0TyKG+2GM1+yLwglqauDWsSRvBUici8rIW5YwhBXpX
+ RwVp+ztgQBdL16vSKo2EKp36gyg3Hrk7I6r80=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20251104; t=1776450579; x=1777055379;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=1VoinpXJvCRNpuqRWKZmu3RHyqR6qUstV/uJ+yRzk20=;
- b=RGlvvVJBFwdSOPWAM3nM2/BuWASCSgzOcmkHR7ep5Sqcn2WJjAAojASeoCKiJuqsiB
- ix4Ab58MPno76ed2wKWCAM5nIni3xpD1oTHT8qT04p5MHiWkyDR9C2M6rd744qA0VXJn
- 1BcQVh40Xhx9nm7VxfDnOlmR4hG8ze5sN0VBw7ffZpeRgBV3xuhri0GXNDjMCYHpKbnc
- nBqVmBqVGyKzURZT28VUO+ZV2RqDi7bbdb+a9CqhWsYKrJjPcXrPa+wisidxzXoSdcKW
- WSjQ25qP52Fg9cv5hlCBmPTGgHclbFwEmT8fuxlRAu0bVTkzNfdHcMK/IsK9D60KaVrD
- LPww==
-X-Gm-Message-State: AOJu0YwEyjjnVapEGiaKqlpIz3jG99Tit37+1DQZH2cYCaMe/mPylYYX
- nnFNUJINS/aRmdptxDLqb8CK/A/ksnqNxS49h8/ioik1e3pM3/sLp6JLpsnflsJZh7A=
-X-Gm-Gg: AeBDiev+WInLoFxNf1zyinSanZJlz6evWNOsE/YhYBiwu06mDB83iwWwLzT7Gzhzz0x
- KfB7K+vRaAWAEmNhZTq8vlFB0yrqREOwB10kqdqMepj3f4Wl8nHfupoI85L2VpETN2OlcxzChin
- WSB7iAUGKtpXmglHE/KykVU/NvdxKJyg5zqbcRZlr1lPmoRuktUMjJVX+tdzXdB9SokDkNu48M0
- pmSP7hLYvZx4WGQ6AMWlSTYobcNFEDhtrwHowZfmKw7Cq45ge5TervG6QrIS4MAVne2yPW0US5m
- mYkSpQZ5nrcqE6h/zm7eX+QlSwk/Iub03wP/ki/ltcEy3PepaiCBddByRG7ivzrq9BRR+aIib3N
- YYvY+bH23jzF72vnQZiBpTi8+S9ZOBJqEA4sJscKkLEC/QVlpwGe6X9Zh4W85RKeZd/SfmkUpeG
- LiExifOHaN0libJ9Fk/RsZohN8FYO1mHRbHXGK49x5IYlBzljrXsh1GFk5MPJdHzWKpw2VCVSbb
- QLoQx7anABSi8sWweZzenWRG6DzvjJHMHy52MUib/BH3kWxIzgYLE0ScrlS
-X-Received: by 2002:a05:6871:4b08:b0:409:bd2b:91a3 with SMTP id
- 586e51a60fabf-42adeda9e44mr2379678fac.32.1776450578641; 
- Fri, 17 Apr 2026 11:29:38 -0700 (PDT)
+ bh=QdJcRh4a/LlQUdIqvmidK1zv5fn5cDknr3G6tpk5uc4=;
+ b=UkkgFuGLLFj8XanvW5v7b2UuyHVf8/cPkhmqtWOSTTf73nz0rwmEk+JGeiSQsGMGVb
+ Fa4qHMMiDkTESLxq9XhSb3UYyski3j1wkeAnLQwfhNbL/dt1B1o5savAECTzYLL7GNim
+ cjI8DekhvnynLiHLMbsK2jAUf3DCV3Mxyck+3edcGK0uL0aXT/8IWw8N2ptnB8TEoAD3
+ u8+xuNRcEcd2GFcKjytR5U7VcXwJfEdddNM7Jl/fSODKriw0f9vJdKHGlIpXXhUn7EBy
+ IuoQB/NTDJEwlg5ROh4CAYir0h8bWqm8tp4X8xfCYQLe9HRoyjzI3IK0N8sn4mqNu2GY
+ Tcwg==
+X-Gm-Message-State: AOJu0Yx80qU0AZpRDlFOYGidFpLpxM/IS0so3Kp6tvG1SVpGTsdIPghy
+ tnGf1qBFUFXFToMoifR9tr1iiT9uhXvy55xlUK0/u0vwFGYvMxfASwy5umRqKCxGTeM=
+X-Gm-Gg: AeBDieuwL/mYEluuXk3++qhdxu594zhgTjkLZDZ1W/kOCfih1dSn3Tiqf2ASJoRlbJC
+ roB1lLruXv6Fw+Tqx9wILL/vMuq9fosa5g5i3MZdRkRvtgCnU7blDYjKRT38UVVXX6A8bwCxUrq
+ t5o1j1ie78FSoeKnAPiHCcaAzG7hv2r5ulSxgXWmrLEag+KVMYCtX8t1iHBQV29fdrxNMqWgR4L
+ ozchy1IdW9PGhSOj11SZkZFdZ2dabacJCXBrKEz0P9h5QJavJS9b1HQ6sew6cwP2bwM8YpOuGpB
+ c5dQRIKuVYKYrRzZ5Mch6Z/PkD/12sgWwigcHrUla0NReHUPKAI4kNPFTa3fctrVJqoWlTJENaA
+ hJF/Mm7s2VKQ98gY7prNqbQjJ81kxqdNGTPUmSYKNmiJ3JKoiWdqTxg1jVHhabqbxIztlTTV4bM
+ lYt16x78TEiBjJYT5uqX8xLERE/+Hm71BX0l1F1jH672K0W09KDtEe4I+op9RwAcpCNLc+nNOK7
+ zaW+F6fxxNNC0krAxiYSKGhvS0eRqvATti6Um5txSKdo/VVTBbWXHn/zpVj
+X-Received: by 2002:a05:6870:d185:b0:423:4788:d2ff with SMTP id
+ 586e51a60fabf-42abf233298mr2305176fac.5.1776450579482; 
+ Fri, 17 Apr 2026 11:29:39 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-42b9ac6f2a3sm2004954fac.16.2026.04.17.11.29.37
+ 586e51a60fabf-42b9ac6f2a3sm2004954fac.16.2026.04.17.11.29.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Apr 2026 11:29:38 -0700 (PDT)
+ Fri, 17 Apr 2026 11:29:39 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Siddharth Vadapalli <s-vadapalli@ti.com>, 
- Michael Opdenacker <michael.opdenacker@rootcommit.com>, 
- Simon Glass <sjg@chromium.org>, 
- "Matwey V. Kornilov" <matwey.kornilov@gmail.com>, 
- Michal Simek <michal.simek@amd.com>
-In-Reply-To: <3bde3ed6-6baa-4d52-a743-d9bb8de36382@gmx.de>
-References: <3bde3ed6-6baa-4d52-a743-d9bb8de36382@gmx.de>
-Subject: Re: Pull request for efi-2026-07-rc1
-Message-Id: <177645057709.805241.5253061263128526090.b4-ty@konsulko.com>
-Date: Fri, 17 Apr 2026 12:29:37 -0600
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+usb@mailbox.org>
+Cc: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
+In-Reply-To: <20260417160831.28486-1-marek.vasut+usb@mailbox.org>
+References: <20260417160831.28486-1-marek.vasut+usb@mailbox.org>
+Subject: Re: [PULL] u-boot-usb/master
+Message-Id: <177645057881.805241.1002011902096209780.b4-ty@konsulko.com>
+Date: Fri, 17 Apr 2026 12:29:38 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -102,17 +96,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 17 Apr 2026 10:01:58 +0200, Heinrich Schuchardt wrote:
+On Fri, 17 Apr 2026 18:08:23 +0200, Marek Vasut wrote:
 
 > The following changes since commit 70fd0c3bb7c26d42f24d10145dd5f3168ac92eac:
 > 
->    x86: there is no CONFIG_UBOOT_ROMSIZE_KB_12288 (2026-04-14 14:21:55
-> -0600)
+>   x86: there is no CONFIG_UBOOT_ROMSIZE_KB_12288 (2026-04-14 14:21:55 -0600)
 > 
 > are available in the Git repository at:
 > 
->    https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-2026-07-rc1
+>   git://source.denx.de/u-boot-usb.git master
 > 
 > [...]
 
