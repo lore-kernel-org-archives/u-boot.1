@@ -4,99 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80AD5F99C88
-	for <u-boot@archiver.kernel.org>; Sat, 18 Apr 2026 18:15:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DAFFF99C89
+	for <u-boot@archiver.kernel.org>; Sat, 18 Apr 2026 19:09:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69E8B84286;
-	Sat, 18 Apr 2026 20:15:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 8163383B99;
+	Sat, 18 Apr 2026 21:09:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Gn9v0Iot";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aXD4aYci";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 055A4836AC; Sat, 18 Apr 2026 20:15:42 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 4C15083BC8; Sat, 18 Apr 2026 21:09:28 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22BB084286
- for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 20:15:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 333BD839D9
+ for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 21:09:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-6739248020bso2588333a12.3
- for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 11:15:40 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776536139; cv=none;
- d=google.com; s=arc-20240605;
- b=iR5weLdYg5a5jt0sGQIsII44U7PVpRxpblfm5Xc1kAV/NrHWNiT0uXazA7Kt2ordkq
- G/V89O5/YUQEPemI5thFIHCYV6q71ZuvDyYQcJMdkz8pjzg/WvtqKyyU+DgQXEKUGRcq
- ZgevmdxpMAl56SnYWgb8VJxxJzXySBAnppxjRs892cSm05IEDsbMRpSgZ7e8jLmzj6LZ
- 0qnipnH2za3dGuYAt75m5DtruXLBEC+3hwZKnI0cLlZbN0Irof0+x+s8tRTk0YgKcIhv
- /+2K5DNjNqJpMiZReqgbQFhEufAv/uwdT6lr81Q6dcm5tUm/jJfNUmdMGJQIh1emrC/t
- EeOw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=v1d/sDo+km4vFj/YlwCTcbLKYQrWJEukUN0JSQxrGms=;
- fh=8IvGFgIQGpCK9lofyQ6MjKtFku6Qt40yCPz/fXotJak=;
- b=C/cscKvj4wgnMd49gJASLtHj1MjpILUIc0TK3ErJF1BZgFaqfmUwS692bGzHXvdhrB
- 8dLCv5AegOqCDvbNDhkxGaVyZx8kGWfH/lp+s5Rv830yPVjCM/8hLmfeT3YaJGsJpp5o
- A6qRaUukWUncUEHgkoFKS9ccWeql2KpadED4r/lZrQuJvGj8vLXSjH6MXqNg+h9PRoPO
- uOYR3b3HiuDuTSIxV+2ZE21Uuw826+1oUWhtQHd2ngtCgYEhZXHm2EX5328AMI2IGYoO
- DfO9192ItytWOVKEAjtl5+X8bHtf2Rm/aPcSxEBfWLVCx5g61s/c7yEcZNMzsS7ZzYlu
- h6gw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7d55b97f358so1030618a34.3
+ for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 12:09:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776536139; x=1777140939; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=v1d/sDo+km4vFj/YlwCTcbLKYQrWJEukUN0JSQxrGms=;
- b=Gn9v0IotY4ZRClwsPTOy4VP0ubI2FxsGEne22VxD/MOKYuTU5UqI9czC8/7B0bwCv+
- fIPmV5il3JfpdudfTuVDO8C9UX3uk/MU4HjwTfG1rA+Q8jUZIOmXxHUyB6h2Ax/FghuT
- w3LmQlTlk/KER3zAhJAb0PDLLmKV5xyJlivfY=
+ d=konsulko.com; s=google; t=1776539365; x=1777144165; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=XNQm+vmIghDhZYF54R6cMAjs1ePjRfEtabtc0VLzHwo=;
+ b=aXD4aYciFuXBQs5T/rFXZ7YGD27bm2GHIsnFARwzU+BvZ8ur/av+eHwx64ricqJQJ7
+ 9+0YV0G8FKTQnCnLK/wV4Ddhve604pTpbIKwVbZuZPzMzSs00Hb3zaTl1Z/iusJK+7cI
+ 8DZMuYWQ9bx7TJOop6xWM2NUFT+LMdNcJZrt8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776536139; x=1777140939;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=v1d/sDo+km4vFj/YlwCTcbLKYQrWJEukUN0JSQxrGms=;
- b=b+4phB5+dywuZXWYcM/Zq/7JqOkbJ7pZoCBl1Lg4exZPQeGTzYPzvNTKyUztsMPnHA
- 979ohFjXunUXxT0LElovAxtU2LmnwvzvuEOLbIUUfVhsK1rJ2hkgpagKOwUvBJ32M2BI
- YG51rQd1/XGiMfnUQgAlhenOMzL0z1Z+wV39UQ5SKnXgiCW7pVbEkOWxlSwFnRLdbjoa
- HCexSSjf8jkjD1x8VqM0MuZvXiQvBat1WrurUpzNwmHqbrTUUxMcTIqVRc2MDirYY857
- 98ClMcnwjanP6SdwOQHpaQhkrLjzRWElVHSTKPrEHaiTRk8KA5Fbce03bRCHm1B77gZ5
- d99w==
+ d=1e100.net; s=20251104; t=1776539365; x=1777144165;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=XNQm+vmIghDhZYF54R6cMAjs1ePjRfEtabtc0VLzHwo=;
+ b=YtBkyK4fV7I2b+luBbyHFrO4VN1D2EcHXVYB7H+MmWvQHqC+n9rwhz43x5pK18vmMh
+ 73ZqhYXMDK7tDnXSl+AMF9slHDb9Chise403D9MpyCbkpYd7dgz9knlsz+riKlv7mKil
+ BgBKQRLRgC1NZ6OQFTd6tBDDqlKS0tJlr9aVFh8Ge42RwMRklCIYagQl2ZlbjOreDctS
+ 5pWz14ROTeAc/rsD6eKss06uz/RbUuJhJvijtAHdGm9IPwjLuF/aY71T1e/wr4gU/GR6
+ /Qzkg4TRBxRc/0qBCuHSl3O2cnCK1leWcq6hRVbdem70uzkaCh1PyslT6gIo9aAxH03v
+ rPLw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8Zc3njc1v9Cy1gv/FzqRNL4gH6NwCU8k9qXdpznFiizZuLwIfEr21EZmg509PbEY4YxkaZ7bs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx3yWfDKV20ortoR0VUCX5uBZ7FS1tjpq9+QSkUSn17yjeEFb26
- qupYBbfaX98OBPHdogOPhIpkHOKbVjWTOT7gimsDw9/bt4fiB3MJFzh9GE7doQlvncYpXJVvdao
- 64wHSqh+oqsoqbOLplAA0iXKRHvYloQdWYM9sAUbW
-X-Gm-Gg: AeBDievqjKLOYcUDz0oSBBHTnacp/2TfVKgLVLo5iBcemo5rQnmLvch+6JoHC1MXkjw
- XvDk3KNyZrvs8cuyMaNwmujSCyxuJURtuiOg9oeu+sixNeFYFFPbBDCj3cov3jHmHdOJpBraCF0
- Z0E9qXDVyv5g9pdRCauNUR2NTfSFzzszDoK0Sxe0SxtBK3zZ4mZYS6PPtwMh2BFNhDqLEwOvBT/
- cNiLbtWt7+RyvQDRqDSqY+LWPyh9RpFuCxUH/anvUBDBIAm5pREZu4YzhGGroES69p0Fxlx9zD/
- D23E9wrLeZNjTIBC4iGQ
-X-Received: by 2002:a17:907:93c4:b0:b97:c684:57db with SMTP id
- a640c23a62f3a-ba4191702f4mr241074266b.12.1776536139570; Sat, 18 Apr 2026
- 11:15:39 -0700 (PDT)
+ AFNElJ9ghqgUjXnxPHjbJdXQJLjJrSiEIb29tKx/z84i2hRH1hgm2RVFSTqI6isEwPdOqhskVnunTto=@lists.denx.de
+X-Gm-Message-State: AOJu0YxMngt7X1HTZFXtg+LO56t8sJBvVnPU2vpC+o/Ge/dhuTN+FeRv
+ TQVfi0KjJ3eh7UyovX3Kj6ozK2WatvaKnOOAB++PnMEqVZM7F3i6mrnKtPq1/RkEcMY=
+X-Gm-Gg: AeBDiesk2tmK/aGXLdcyYeCBh2ER2luvuxAvD0BaWJUamZ5sNKdgPN3Y0xU9T8vS1QZ
+ fFoQTtS9VwSwi74MpdUWmspQ3GMmAXDVFE6cLTaMobbXYQwZ1y00rGv1oSOGGG/dMuK9/GjZcsL
+ Q6AGs72qTyXbjJES5FKJeIJBu5CCwkJ/sXLDk73B76oH+lJNqHf2CTcndpcdfhHEk7sGWo5xoIM
+ 648xgXKToB5YHg6GLpMhQmE5oAFMXBIIavPvy/qmHXQiLQUl9+8gKAbCAiRq9vMcj87sZC51VW+
+ ufWrZ15SQndQRE1uPRZqzLZst6pC/gRdTTOFDSlPCt/cOsznPhiI/qYSv2+veHy21K1h9N8IgA+
+ WjDKIEUhpqeqG4xcYjZsCogdht0tZux2r4MLtZt5RDCH1gqA19Ql3q5hP28X2fjIJ8nudFyvl1o
+ RvDhQQX3y2Jne4mqm0mmpNw5johOsneJJl7p9/z7ceL5v8ZsYbvB8XlYbu3upEHDcOwx4EXhH4r
+ nmJufqM6po3DljU+fpvdLbLQtHzbVVZ61Ctz93o+fBOeTJgJLGEeLP1MqqiKg==
+X-Received: by 2002:a05:6830:280a:b0:7dc:3db6:f02 with SMTP id
+ 46e09a7af769-7dc951175bdmr5233247a34.9.1776539364863; 
+ Sat, 18 Apr 2026 12:09:24 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7dc9759bf4esm4319903a34.18.2026.04.18.12.09.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 18 Apr 2026 12:09:23 -0700 (PDT)
+Date: Sat, 18 Apr 2026 13:09:21 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] scripts/dtc: avoid discarded qualifiers in
+ overlay_fixup_phandle
+Message-ID: <20260418190921.GS41863@bill-the-cat>
+References: <20260418181510.51490-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-References: <20260414131558.538656-3-yan.wang@softathome.com>
- <20260417083050.499955-1-yan.wang@softathome.com>
- <20260417083050.499955-4-yan.wang@softathome.com>
-In-Reply-To: <20260417083050.499955-4-yan.wang@softathome.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 19 Apr 2026 06:15:24 +1200
-X-Gm-Features: AQROBzBRdcoKdJRnStflnvj1PJb-6FJtaYBeN0jPQQicNpcxYpk_q7Dtlp2uCrI
-Message-ID: <CAFLszTghkxzka0MSXKfEYW1L_SA2vRJ=yhmLyi5DhBfKAPf+4A@mail.gmail.com>
-Subject: Re: [PATCH v7 3/3] tools: binman: Test signing an encrypted FIT with
- a preload header
-To: yan.wang@softathome.com
-Cc: trini@konsulko.com, sjg@chromium.org, alpernebiyasak@gmail.com, 
- paul.henrys_ext@softathome.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="CUzb8Px2/8HG4rbF"
+Content-Disposition: inline
+In-Reply-To: <20260418181510.51490-1-heinrich.schuchardt@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,17 +99,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-04-17T08:30:47, Yan WANG <yan.wang@softathome.com> wrote:
-> tools: binman: Test signing an encrypted FIT with a preload header
->
-> Add a test to verify the preload header correctly signs an encrypted
-> FIT. This test exercises the case where encryption uses random IVs that
-> would change between mkimage calls.
->
-> Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
->
-> tools/binman/ftest.py                              | 21 ++++++++
->  .../test/security/pre_load_fit_encrypted.dts       | 63 ++++++++++++++++++++++
->  2 files changed, 84 insertions(+)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+--CUzb8Px2/8HG4rbF
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sat, Apr 18, 2026 at 08:15:10PM +0200, Heinrich Schuchardt wrote:
+
+> When building with GCC 15.2 the following warning show up:
+>=20
+>     scripts/dtc/libfdt/fdt_overlay.c:422:21: warning:
+>     assignment discards =E2=80=98const=E2=80=99 qualifier from pointer ta=
+rget type
+>     [-Wdiscarded-qualifiers]
+>       422 |                 sep =3D memchr(fixup_str, ':', fixup_len);
+>           |                     ^
+>     scripts/dtc/libfdt/fdt_overlay.c:432:21: warning:
+>     assignment discards =E2=80=98const=E2=80=99 qualifier from pointer ta=
+rget type
+>     [-Wdiscarded-qualifiers]
+>       432 |                 sep =3D memchr(name, ':', fixup_len);
+>           |                     ^
+>=20
+> Define sep as const char *.
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  scripts/dtc/libfdt/fdt_overlay.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+
+Is this something already fixed in upstream dtc?
+
+--=20
+Tom
+
+--CUzb8Px2/8HG4rbF
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaePW2gAKCRAr4qD1Cr/k
+Ch/TAP0RbYG5SaeVyUOk9tPRBLOIJDOEi+Nnuusbn6PeLAGlbgEA30Zgs2OglXT0
+8iNklSfzo2Sf/LRmks9Cu50a+hFZRgY=
+=vTlI
+-----END PGP SIGNATURE-----
+
+--CUzb8Px2/8HG4rbF--
