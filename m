@@ -4,72 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F6C4F99C88
-	for <u-boot@archiver.kernel.org>; Sat, 18 Apr 2026 17:58:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 720E1F99C88
+	for <u-boot@archiver.kernel.org>; Sat, 18 Apr 2026 18:15:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95B158405A;
-	Sat, 18 Apr 2026 19:58:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id A8D6F83B99;
+	Sat, 18 Apr 2026 20:15:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="J3NG8zlw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KZzhrH2+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF7F184258; Sat, 18 Apr 2026 19:58:20 +0200 (CEST)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2810B83BC8; Sat, 18 Apr 2026 20:15:10 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 189508405A
- for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 19:58:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT03.fritz.box (ip-176-199-115-125.um44.pools.vodafone-ip.de
- [176.199.115.125])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 36D8F40D6F; 
- Sat, 18 Apr 2026 17:58:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1776535097;
- bh=rVbQ5gHt+VpXCHkT15t8IsoEym/DPMZsg2drAI5wNBU=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=J3NG8zlwFgVdYOFY52S+z7KMqb39dMxMAxUro3fe154mmKV5n4kbIM6k5Qbd4X73H
- X1757gxj9iq/2HErcBiHz1BX6oNJKRCNp7uUQONNqM010pAAEyYbilooki9ZQrZvIa
- +aRlu0TVRd1vPaRzqiRJnM2rv+0RgkZux5fcFbHZHO7aSkhUbvkhWyZI+4b0sCoUEn
- iYqtPWWh/neKQBhJVFdijh1Y2RExVP4gasWocDfMay1kMW3rYHpcI40t1Sy1gJcZLW
- 77ojhMYRlwhQ3fgv7E5pgYGbT5XLkqrgbcDUYGK7QDOq2547VeX8H85i5jvWYCC9/W
- 76gDFWXkruUytb9TmmE3t8funla+FH5asH+SXeuEkLPN+gjpJXCFPVJDNLS0LDZFmG
- XAKsbKBb8I1iAHC3cNQftKstWMpUsReVNOo37DH21ir5HDhQ4Qw0TPME+L6Gpz5b59
- 62JqC217b2ZahoR2jTtM+wVyfGMQ01Eg9XVNSM2m+zz7vwTquMG2jbE0qsnZRvG4RN
- ygAKT9LFWLTW5Sizvm+z8/qK9LZGNxWgO/Ty3hUpAzskJjyfkqhBqHYfBVRRNygAxv
- PJ93eCm8DNwQVsCP1mDAeQQv1IWOyT2NpXO+Jw/oUrLRNsbKMxYl281j55ef6QQ0lf
- jqOE6rc9/PqTzUWx+x73GsoY=
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Mark Kettenis <kettenis@openbsd.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
- Adriano Cordova <adrianox@gmail.com>, Javier Tia <floss@jetm.me>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Ying-Chun Liu <paul.liu@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 2/2] efi_loader: centralize messaging for efi_init_obj_list
-Date: Sat, 18 Apr 2026 19:58:14 +0200
-Message-ID: <20260418175814.5731-3-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260418175814.5731-1-heinrich.schuchardt@canonical.com>
-References: <20260418175814.5731-1-heinrich.schuchardt@canonical.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 26D7C836AC
+ for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 20:15:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-6749ed8ae14so61069a12.1
+ for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 11:15:07 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776536107; cv=none;
+ d=google.com; s=arc-20240605;
+ b=FZNq5nxJ0wWsH4WpmYAPZXkt0Bp6lc64p0aLVa3NRjHuBXBQ0SoEbnOORM6hfpAwhz
+ /omF6rPusLeBwD+9aMmTOqdUWLjEyUb9XhVN1+ocfDAqD02lleVvKS2eW6TqaTZEaCDj
+ e6JRMVEp73br0xKwJC4S1iwaeG2UdJK3ikLHtZj85+XrY28QhuNZ3xyH8BeVMSc1Kwkc
+ jjwNa/A5ZIpzFiJ9toE8WdgWUBV+I5Is0wDVMblKIICnaLx87mm/ODYy20Q3Gjj+jWGR
+ H+JdEmt4cPYPYYuGR4qTtG1GCe+gNZ7JUZnbTFAkzjVyWiWLcmQBdZDlvCp4Yt7/xyjw
+ lFAA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=UIgymoRU4YFXajvhhly2n+eWZwY470/L6WpkSTscJdk=;
+ fh=H/pFTetJxgvl5smPC+CG4DCKjCDD/kBZHQnVZcCd5cU=;
+ b=HY0sarurm2VmIhlHCMMn39xWIEgvYs0VZnOTVdQevX+YabFIGLl99n9V9oK+33nN0e
+ s2g3BD7s4bOpewGkJuM64tll+IFBOq57JcJ6jEr7VxBoQr8JVEjt0eqcU6w4xFwqyQr1
+ s/lL0CQ5LeaNEfbcT7/8UA5BusRYThhjY6kf/dEMfsY8r93YfiTTyQAfYe6+yAAgVSyH
+ OZPT1Sfpp8j17cNfoP7zYEyQsP1wNgF7b6GvjXsXR9p6XFlgUKkJ4nIj/MnrXp0g3ZTe
+ 4nN1k5Wanl1AFODqbTRa0jZ6p6V7UnettR1SVkhOHtkq2R7pNi55a/j8XiTFPffSD976
+ xF2g==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1776536107; x=1777140907; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=UIgymoRU4YFXajvhhly2n+eWZwY470/L6WpkSTscJdk=;
+ b=KZzhrH2+CHiccb5vkgO+3eDD577aal7eIlqzFJN4PRMRYx6YmchNL28P7jmi73k2ew
+ L1MRWqi5OAtmMHi3s6GEmHHANB+/lLkZhZqOh5OUhVSbD6kSLsvDExwrtTJd4oal/ml1
+ 94g7PfZbxtW1EjMcciP3HmgfXGZK2K827OuVo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776536107; x=1777140907;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UIgymoRU4YFXajvhhly2n+eWZwY470/L6WpkSTscJdk=;
+ b=nU8/31JyQ+cJRRRE3OEif+gnU0cnxQLuFQA9pBB9Bxjpi4uk2pBS0zQodPT2mm7PaQ
+ cm2QjwZHAYhLe1FoUn3NNxdsCnhUD7KpEo3HHDJZeUq85MNG4nASreNxQ8iO5ulavn8Y
+ sEnkG4HSI0h1Ykix7X8JW1hVZBQQjOw+AlAR/UiAGBHH3n/bz4o1z1E/kV5lGJAO5qTT
+ kTVoke+iKLeg+3SHcVFMgXybcLRHlGY6Y5vD0PtK0QRS5eMPB3KmMzZkWuPNRDahcv82
+ 3I8MXobR1XtdXMgJfDGJ9kKrNTmlBdKfcPhYbqj3pyvXTFvl8KWpGXq8MawWDvXczXG1
+ nQ8Q==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+QmibcG8UPCHCfiMrF041WG0raq8T2C2OXvnOIoe2GZ7jS0tiS0UC4xYw3ZmcL9q9FjCW9Msc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxz7mB52vJQFl9Mf3BM4vsmGOd/qmM1Xd29tk6+ABPBFwoLUdJt
+ TfqI6D2dMG60Z61eq2fvzNejHcLIByh2wwSysfo00orNE1tXlAApQ2TuFWke39IHBl34SncoPrc
+ h5X2iXdd0XOgC6X43a6Et6B3pf65WFRBKLxEwPqBeo8yyuL+4P4j67Q==
+X-Gm-Gg: AeBDieuqpBdJBxNSiIzTXIOSWYRu5CSqIjOoU9s+3UrSzW6mLrVZ60eRM+Th9aq/k9C
+ oWsTK42BDD84jolbe3k76YCQXHimyuhqFmRJWjKYBtYpkm1JNm8wB3lVhLmb1w1iW6p/k97PJn9
+ Ez4uVmpQ6qJDXe/c5zR1BJg3p25lODTPHyfH2LI0/6oarER0SykmtR98x04J3NRKFGH/WyLdffG
+ E3uG2cyd2WVBhYppc6HdTMNqimcZWekN7RprP08xbEDFPgN3oj1XHqCyQDwN1vJI2AH7AGbtZji
+ VvNz0GvIC9FHYysihRdt
+X-Received: by 2002:a17:907:6e89:b0:b94:cfd:f37b with SMTP id
+ a640c23a62f3a-ba41b1de83amr363845066b.45.1776536107331; Sat, 18 Apr 2026
+ 11:15:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260414131558.538656-3-yan.wang@softathome.com>
+ <20260417083050.499955-1-yan.wang@softathome.com>
+ <20260417083050.499955-2-yan.wang@softathome.com>
+In-Reply-To: <20260417083050.499955-2-yan.wang@softathome.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 19 Apr 2026 06:14:54 +1200
+X-Gm-Features: AQROBzD6q-hQWVkq53JAD_VpXBzmhjjbK1Jx2FgbcD6e-olWkKYkwisMh4AJF7I
+Message-ID: <CAFLszTgErg-LMnnNxGfDqUHT3eR1K_6kSOKicfvH_7AW6x+ekQ@mail.gmail.com>
+Subject: Re: [PATCH v7 1/3] binman: Generate preload header and sign data only
+ once
+To: yan.wang@softathome.com
+Cc: trini@konsulko.com, sjg@chromium.org, alpernebiyasak@gmail.com, 
+ paul.henrys_ext@softathome.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,189 +113,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If efi_init_obj_list() fails we cannot use the UEFI sub-system.
+On 2026-04-17T08:30:47, Yan WANG <yan.wang@softathome.com> wrote:
+> binman: Generate preload header and sign data only once
+>
+> To optimize preload generation, generate the header and signatures only
+> after all data has been collected in ProcessContentsUpdate(). This
+> avoids signing the data multiple times.
+>
+> Since header_size is known upfront (from __init__), create a placeholder
+> in ObtainContents() to avoid an extra packing pass when
+> ProcessContentsUpdate() detects a size change.
+>
+> This reduces unnecessary repacking and signing operations.
+>
+> Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
+>
+> tools/binman/etype/pre_load.py | 9 +++------
+>  1 file changed, 3 insertions(+), 6 deletions(-)
 
-* Instead of having messages for this everywhere write an error message
-  in efi_init_obj_list().
-* Always use (ret =! EFI_SUCCESS) when checking the return value of
-  efi_init_obj_list().
-* Remove the return code from the error message as it does not help
-  users to understand which initialization went wrong.
-
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- boot/bootmeth_efi_mgr.c      |  4 ++--
- cmd/bootefi.c                |  5 +----
- cmd/bootmenu.c               |  6 +-----
- cmd/eficonfig.c              |  6 +-----
- cmd/efidebug.c               |  5 +----
- cmd/nvedit_efi.c             | 10 ++--------
- lib/efi_loader/efi_bootbin.c |  5 +----
- lib/efi_loader/efi_bootmgr.c |  5 +----
- lib/efi_loader/efi_setup.c   |  2 ++
- 9 files changed, 12 insertions(+), 36 deletions(-)
-
-diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
-index 05fc35d01a9..6e70c36ad99 100644
---- a/boot/bootmeth_efi_mgr.c
-+++ b/boot/bootmeth_efi_mgr.c
-@@ -58,8 +58,8 @@ static int efi_mgr_read_bootflow(struct udevice *dev, struct bootflow *bflow)
- 	}
- 
- 	ret = efi_init_obj_list();
--	if (ret)
--		return log_msg_ret("init", ret);
-+	if (ret != EFI_SUCCESS)
-+		return ret;
- 
- 	/* Enable this method if the "BootOrder" UEFI exists. */
- 	bootorder = efi_get_var(u"BootOrder", &efi_global_variable_guid,
-diff --git a/cmd/bootefi.c b/cmd/bootefi.c
-index 6dab709e507..37165f1a7fd 100644
---- a/cmd/bootefi.c
-+++ b/cmd/bootefi.c
-@@ -144,11 +144,8 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
- 
- 	/* Initialize EFI drivers */
- 	ret = efi_init_obj_list();
--	if (ret != EFI_SUCCESS) {
--		log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
--			ret & ~EFI_ERROR_MASK);
-+	if (ret != EFI_SUCCESS)
- 		return CMD_RET_FAILURE;
--	}
- 
- 	if (argc > 2) {
- 		ulong rd_addr = 0;
-diff --git a/cmd/bootmenu.c b/cmd/bootmenu.c
-index d3108778c6f..528afd221d0 100644
---- a/cmd/bootmenu.c
-+++ b/cmd/bootmenu.c
-@@ -505,12 +505,8 @@ static void handle_uefi_bootnext(void)
- 
- 	/* Initialize EFI drivers */
- 	ret = efi_init_obj_list();
--	if (ret != EFI_SUCCESS) {
--		log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
--			ret & ~EFI_ERROR_MASK);
--
-+	if (ret != EFI_SUCCESS)
- 		return;
--	}
- 
- 	/* If UEFI BootNext variable is set, boot the BootNext load option */
- 	size = sizeof(u16);
-diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
-index d8d946c87ac..570d788cd5c 100644
---- a/cmd/eficonfig.c
-+++ b/cmd/eficonfig.c
-@@ -2466,12 +2466,8 @@ static int do_eficonfig(struct cmd_tbl *cmdtp, int flag, int argc, char *const a
- 		return CMD_RET_USAGE;
- 
- 	ret = efi_init_obj_list();
--	if (ret != EFI_SUCCESS) {
--		log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
--			ret & ~EFI_ERROR_MASK);
--
-+	if (ret != EFI_SUCCESS)
- 		return CMD_RET_FAILURE;
--	}
- 
- 	ret = eficonfig_init();
- 	if (ret != EFI_SUCCESS)
-diff --git a/cmd/efidebug.c b/cmd/efidebug.c
-index 7b733119c82..a6faa36b500 100644
---- a/cmd/efidebug.c
-+++ b/cmd/efidebug.c
-@@ -1669,11 +1669,8 @@ static int do_efidebug(struct cmd_tbl *cmdtp, int flag,
- 
- 	/* Initialize UEFI drivers */
- 	r = efi_init_obj_list();
--	if (r != EFI_SUCCESS) {
--		printf("Error: Cannot initialize UEFI sub-system, r = %lu\n",
--		       r & ~EFI_ERROR_MASK);
-+	if (r != EFI_SUCCESS)
- 		return CMD_RET_FAILURE;
--	}
- 
- 	cp = find_cmd_tbl(argv[0], cmd_efidebug_sub,
- 			  ARRAY_SIZE(cmd_efidebug_sub));
-diff --git a/cmd/nvedit_efi.c b/cmd/nvedit_efi.c
-index 351ae47e870..3a36f94775b 100644
---- a/cmd/nvedit_efi.c
-+++ b/cmd/nvedit_efi.c
-@@ -213,11 +213,8 @@ int do_env_print_efi(struct cmd_tbl *cmdtp, int flag, int argc,
- 
- 	/* Initialize EFI drivers */
- 	ret = efi_init_obj_list();
--	if (ret != EFI_SUCCESS) {
--		printf("Error: Cannot initialize UEFI sub-system, r = %lu\n",
--		       ret & ~EFI_ERROR_MASK);
-+	if (ret != EFI_SUCCESS)
- 		return CMD_RET_FAILURE;
--	}
- 
- 	for (argc--, argv++; argc > 0 && argv[0][0] == '-'; argc--, argv++) {
- 		if (!strcmp(argv[0], "-guid")) {
-@@ -389,11 +386,8 @@ int do_env_set_efi(struct cmd_tbl *cmdtp, int flag, int argc,
- 
- 	/* Initialize EFI drivers */
- 	ret = efi_init_obj_list();
--	if (ret != EFI_SUCCESS) {
--		printf("Error: Cannot initialize UEFI sub-system, r = %lu\n",
--		       ret & ~EFI_ERROR_MASK);
-+	if (ret != EFI_SUCCESS)
- 		return CMD_RET_FAILURE;
--	}
- 
- 	/*
- 	 * attributes = EFI_VARIABLE_BOOTSERVICE_ACCESS |
-diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-index b394f0d60ce..5f3c50ffae2 100644
---- a/lib/efi_loader/efi_bootbin.c
-+++ b/lib/efi_loader/efi_bootbin.c
-@@ -224,11 +224,8 @@ static efi_status_t efi_binary_run_dp(void *image, size_t size, void *fdt,
- 
- 	/* Initialize EFI drivers */
- 	ret = efi_init_obj_list();
--	if (ret != EFI_SUCCESS) {
--		log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
--			ret & ~EFI_ERROR_MASK);
-+	if (ret != EFI_SUCCESS)
- 		return -1;
--	}
- 
- 	ret = efi_install_fdt(fdt);
- 	if (ret != EFI_SUCCESS)
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index a687f4d8e85..4dda996d78e 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -1310,11 +1310,8 @@ efi_status_t efi_bootmgr_run(void *fdt)
- 
- 	/* Initialize EFI drivers */
- 	ret = efi_init_obj_list();
--	if (ret != EFI_SUCCESS) {
--		log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
--			ret & ~EFI_ERROR_MASK);
-+	if (ret != EFI_SUCCESS)
- 		return CMD_RET_FAILURE;
--	}
- 
- 	ret = efi_bootmgr_load(&handle, &load_options);
- 	if (ret != EFI_SUCCESS) {
-diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-index f06cf49e443..f302bb62ab9 100644
---- a/lib/efi_loader/efi_setup.c
-+++ b/lib/efi_loader/efi_setup.c
-@@ -392,5 +392,7 @@ efi_status_t efi_init_obj_list(void)
- 	ret = efi_start_obj_list();
- out:
- 	efi_obj_list_initialized = ret;
-+	if (ret != EFI_SUCCESS)
-+		log_err("Cannot initialize UEFI sub-system\n");
- 	return ret;
- }
--- 
-2.53.0
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
