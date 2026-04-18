@@ -4,62 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7852F99C88
-	for <u-boot@archiver.kernel.org>; Sat, 18 Apr 2026 18:15:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97693F99C89
+	for <u-boot@archiver.kernel.org>; Sat, 18 Apr 2026 18:15:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFE5F83FF5;
-	Sat, 18 Apr 2026 20:15:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 2D34B83B99;
+	Sat, 18 Apr 2026 20:15:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="dOWf401m";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UyUsBX3z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7F148405A; Sat, 18 Apr 2026 20:15:16 +0200 (CEST)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 877CF84258; Sat, 18 Apr 2026 20:15:37 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5560836AC
- for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 20:15:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT03.fritz.box (ip-176-199-115-125.um44.pools.vodafone-ip.de
- [176.199.115.125])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 4D53442001; 
- Sat, 18 Apr 2026 18:15:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1776536114;
- bh=nuHrwl8ds0JDf4waqOs0HBbSDogIfITFaPtum8Nm4Q8=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type;
- b=dOWf401mVSpmlOyC2JUxjkLzgdn8ffu+q4Y8dsTSju0yAc317fdPIbID43ZY8sD9r
- 4qRBamheg7P3JVbni/sNTLtgMwqbJ26/+08zwgVk7+n0L+6ktsuGjqtUQCJ9gJ70T7
- SILKxXVwdwZX8WTTHrzLShfSz1xOCWRP5ZMqIBKTKGJyp/RQzHeA4Srhe3Ca/2g8g2
- oLgssb2FX6L1p9PYoKJt02Uqo7HJybCi7tP9KivC46k3YG4a2HRmw5CK6QGUTTIWXM
- SkrpZNO/tVQ1Lm5jBuAHCVzVbbCiDczrbx81QKK4LHDRu4yUYPDVXt9LuybVaJvDfi
- YVGkTs+3JStfdKAO7/sUnzl8HtA6hRQCqIfclzjSoVoUKaouiKCl2o8hcvArgucSJw
- wFgN7o3sXHaip/STWY2piIbh7mvIWws/uq5v6fHwYjgw+rNWoKpbpRH5Oaw54swbd+
- C/eJMrDH/cARvsQ0Nm/ET41Jd5yrrOW3D4eMv06rIhkSZnGE3zRxM7EVuwqiksLoQz
- Pn7OzWJ63ZvPNvKtKHZ6ROJ6arNOQwv8W4W76AGFZjWjMF+IDTJmx080Wu4m76zVcG
- v8CbYmf4Q57OyOqg/XBoguTeB4pWPpgi0/Zv7WmZxbOHzHLPOliL5rz3B7KUBnU6mM
- Su1fmsrtDkBI6uY5hTTeRNdY=
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] scripts/dtc: avoid discarded qualifiers in
- overlay_fixup_phandle
-Date: Sat, 18 Apr 2026 20:15:10 +0200
-Message-ID: <20260418181510.51490-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.53.0
+ by phobos.denx.de (Postfix) with ESMTPS id A18CC836AC
+ for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 20:15:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-b9c6680aaf8so279069566b.3
+ for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 11:15:35 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776536135; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Mer5q/zslQJkKHXWICDW9inhAsh6DaYKCz6FxICNy/DWPcMc1rpTBArCg7dh5Qp8uF
+ 3rhUVCLND9NQNXEXKBtCVdxON0VT4hT2AxLdAP/VGPK874r1GaPgOMxbTehi/Bnq1qE3
+ IY72+4bU3Z9sXQ0Zw0vEG/OHIarZp4l0dbnv34yWAHO712yaGcrpssUT+ubFkc5YS0So
+ YM0Ho+awVOxkq31+IEns16/COJEo1VegISfmIUMvqyJkFrEvL0b5LSUxrjjz549Kfqxn
+ Ij2igN/UVcwxgL/XxAoyHpxZPYCfZEbW3RxeinoJ2HZl43txc6N1A7XJduYRTjpLvgh8
+ P1Qg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=vBXiGLxQPAq4KjtCVTjGRXaSCZsnJ4WGDmM0yvBzkDg=;
+ fh=Jb89/owTUo5GRHY4pQV+/8BOSBPV4Pv1XkkttbNWbm4=;
+ b=TRvH8a5hD3dINyYeFDEO85MC9utE7aaW9P2k4atDRGr81QcwC2NdbMTjK0HMc36+JB
+ I+wVl0y1Tjvp0rjRASTYG0qJnZyhCYKQEg9vDrHUaeVrQObsTRn9/u8iqVzT/7hRZNCb
+ 1meDiOQCfnVDpiTCAK+7pnaFwn4DsLJOW2bA3jufzm4bf0r57gO5C9c5FBFvg9aAHghW
+ 8X0Co/1XJPH+Evxhn5kW1QNDLrozzSHWnbu0nxsYUgG5mG7pOjbaavvlgtMOQOsvDgNY
+ bHBQCyap+ZDuN7SB7FJvI9SDgEz7lbEj+XFio5AoiHxVAZ/cu7wmJCpUbyNC67M5oz4o
+ z4Ug==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1776536135; x=1777140935; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vBXiGLxQPAq4KjtCVTjGRXaSCZsnJ4WGDmM0yvBzkDg=;
+ b=UyUsBX3zZOVVq0SUXole8PqSPwlAYb5N9OkBMwCGiYr8v4H/RlC2nrv5Gc8GtDPW6C
+ 9j7Lg/k/zCPPt+hHufCGPxPt3Po0kQqT2x8G+2XLMsBftpk3jktfss9e8Mq9TwSMbpbW
+ 3KJl4pSqIyuiL6C0KFOTOE1Wyv5hVxtqu28QE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776536135; x=1777140935;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vBXiGLxQPAq4KjtCVTjGRXaSCZsnJ4WGDmM0yvBzkDg=;
+ b=o+/PU0PPIphz5wgaVdeUwMGl8uaHQlTY04FMzlWXhMTaHRAoC9wflxc5Hft3Nl9aok
+ SUfDqHsTrer+CFnzTSPmsODlsgBNNu3jwn+FQSK687nhhkq0E5JyX8klX61aYIpdz8gj
+ QveX2kVq15g4TaDcUh2H3/y8Qkxo4++Mxx/H/r5q/SiB6cdssSgbx1Rrxvq3OQYWX+/A
+ MgVdqiXiknR+PP5xg7lFv+KGEshUFyqU+AOlCRoP4PwNWpPi8dzHeuqgy/Ba+WPR2uxs
+ Ybn9kZnqI86OGg8wsG0mEJXmELLRPwRyKpKMCkK2zWOvhZ8JuxNDlo79u+10/wpUKTBI
+ kA5A==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8UqHwzPX7xah1ogLcORhFKO5prdHw3RhW6DusIMMsbcGl6rQK/V5ukuzLpc8IBPlPylA3kTU4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwLTg6SqXHT2B1lje/knRbg47pfMlcHgtqQPaOFl8nLMB0Pr3pg
+ dGhLiXfs0BykJFrFrfg0gDK/W+dRp7RnDnVT8stegDgNCwA59/5CUXrvj5ZOC9VZZLJV0LgAZUy
+ ALPrv8trFX20mtdepX0/BluXKRbaCeQOn6i10YvvC
+X-Gm-Gg: AeBDieujNDk0DZWktH3UUV4KjVilVUpzZJLJ+1tXEAkL4eVVxHDF9gN6kJuYkM6CKK9
+ Z647D4IKcsA4GjMUuLWdFGw9kyL4nX3J96RNYn169bRWeB8q/xfTAmJwu2pUKnOQNgPiNzgqER2
+ lrBkgBvg/iNm/c78sKUoVq9ic2iq2buhupu37FmqhLg06xTTA1ul/uNofQaM+AEm9ZV5Wd/8Orh
+ 3kFFDPlM2uuk28tc6wlt98/avQfFTD9ykyCoT90kJzb0QZY4fnHSsCDAH9w8IZyEU5XZRoYf98X
+ Qm2/58toXuiLhSesJC1i
+X-Received: by 2002:a17:907:70a:b0:ba5:8976:5526 with SMTP id
+ a640c23a62f3a-ba589766788mr125484766b.28.1776536135024; Sat, 18 Apr 2026
+ 11:15:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20260414131558.538656-3-yan.wang@softathome.com>
+ <20260417083050.499955-1-yan.wang@softathome.com>
+ <20260417083050.499955-3-yan.wang@softathome.com>
+In-Reply-To: <20260417083050.499955-3-yan.wang@softathome.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 19 Apr 2026 06:15:21 +1200
+X-Gm-Features: AQROBzB2AX5jueuYg54zsKULTpNviOJgkI1G2-F7wXERJUqnZ76mOnsIXYgUzq0
+Message-ID: <CAFLszTiZthe+Mbi-+4BT0YDrEMSxdpp7kRovt1UXPuWd55fm1g@mail.gmail.com>
+Subject: Re: [PATCH v7 2/3] binman: collection: Set build_done on referenced
+ entries
+To: yan.wang@softathome.com
+Cc: trini@konsulko.com, sjg@chromium.org, alpernebiyasak@gmail.com, 
+ paul.henrys_ext@softathome.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,40 +113,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When building with GCC 15.2 the following warning show up:
+On 2026-04-17T08:30:47, Yan WANG <yan.wang@softathome.com> wrote:
+> binman: collection: Set build_done on referenced entries
+>
+> The collection etype uses phandles in the 'content' property to
+> reference other entries. Mark each referenced entry with build_done
+> to avoid rebuilding the same entry data multiple times.
+>
+> This is important for cases where rebuilding may change the data
+> content, e.g. due to timestamps or random IVs in encryption.
+>
+> Refactor GetContentsByPhandle() to return both the entry object and
+> its data.
+>
+> Signed-off-by: yan wang <yan.wang@softathome.com>
+>
+> tools/binman/etype/collection.py | 9 +++++++--
+>  tools/binman/etype/section.py    | 5 +++--
+>  2 files changed, 10 insertions(+), 4 deletions(-)
 
-    scripts/dtc/libfdt/fdt_overlay.c:422:21: warning:
-    assignment discards ‘const’ qualifier from pointer target type
-    [-Wdiscarded-qualifiers]
-      422 |                 sep = memchr(fixup_str, ':', fixup_len);
-          |                     ^
-    scripts/dtc/libfdt/fdt_overlay.c:432:21: warning:
-    assignment discards ‘const’ qualifier from pointer target type
-    [-Wdiscarded-qualifiers]
-      432 |                 sep = memchr(name, ':', fixup_len);
-          |                     ^
-
-Define sep as const char *.
-
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- scripts/dtc/libfdt/fdt_overlay.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/scripts/dtc/libfdt/fdt_overlay.c b/scripts/dtc/libfdt/fdt_overlay.c
-index ee64f0b8110..e40cfe8c3c7 100644
---- a/scripts/dtc/libfdt/fdt_overlay.c
-+++ b/scripts/dtc/libfdt/fdt_overlay.c
-@@ -407,7 +407,8 @@ static int overlay_fixup_phandle(void *fdt, void *fdto, int symbols_off,
- 		const char *fixup_str = value;
- 		uint32_t path_len, name_len;
- 		uint32_t fixup_len;
--		char *sep, *endptr;
-+		const char *sep;
-+		char *endptr;
- 		int poffset, ret;
- 
- 		fixup_end = memchr(value, '\0', len);
--- 
-2.53.0
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
