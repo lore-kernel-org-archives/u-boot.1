@@ -4,51 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DA9AF99C86
-	for <u-boot@archiver.kernel.org>; Sat, 18 Apr 2026 14:40:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D40BF99C86
+	for <u-boot@archiver.kernel.org>; Sat, 18 Apr 2026 15:02:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68C4383BC8;
-	Sat, 18 Apr 2026 16:40:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=proton.me
+	by phobos.denx.de (Postfix) with ESMTP id 91E1383BC8;
+	Sat, 18 Apr 2026 17:02:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=iki.fi
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="PKIzW4Dc";
+	dkim=pass (1024-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="x4LLddLW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBFD583FF5; Sat, 18 Apr 2026 16:40:10 +0200 (CEST)
-Received: from mail-43100.protonmail.ch (mail-43100.protonmail.ch
- [185.70.43.100])
+ id 6F27383B99; Sat, 18 Apr 2026 17:02:52 +0200 (CEST)
+Received: from meesny.iki.fi (meesny.iki.fi [IPv6:2001:67c:2b0:1c1::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24C7F83B99
- for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 16:40:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=proton.me
+ by phobos.denx.de (Postfix) with ESMTPS id F290D83B99
+ for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 17:02:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=krotti83@proton.me
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=protonmail; t=1776523207; x=1776782407;
- bh=tA5DOVZ6V3iv6Y3pUqycYquw+oEgfNjOMFaLIdYjNI8=;
- h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=PKIzW4DcO6ZmZNYRUlaBvDjYUcbdTA1I8actxdD3EGKqVu9EEcNm9RJPpdHmXyEMA
- 1II/WasAFMz1aL/m3l2eoPxgmYEFLMKfHW6S+klJF6ORhWPq5OkpMHOjqPjQZxuVmo
- 2TqjyLF7FKmBPn0UoTzHPbnheX6f5+pILkKHcW5CHw/EQkltWA69lUbPP3MA8j9QXg
- rrpdQrXQXug3FJqmiiLcOaIYPkaK1sn0CXFEySYSGDCCYFXsdOr2SP5Sm/Y+cL0zuu
- VcWki5O0r43RX2nACPk8PQ2r7xxr+2lfeeQLYfkJTMOfBeKwEswc1Yu2wHdRR05b2E
- Mm0BNnMlt+pow==
-Date: Sat, 18 Apr 2026 14:40:02 +0000
-To: u-boot@lists.denx.de
-From: Johannes Krottmayer <krotti83@proton.me>
-Subject: How to build U-Boot with a custom out-of-tree device tree
-Message-ID: <034a4ae4-b579-42b0-b6b0-3a204737156f@proton.me>
-Feedback-ID: 148511850:user:proton
-X-Pm-Message-ID: c51a3c5fa484284807495966838d67eb20680cd3
+ dmarc=none (p=none dis=none) header.from=iki.fi
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marko.makela@iki.fi
+Received: from kehys.lan (dsl-hkibng32-54fb5f-245.dhcp.inet.fi [84.251.95.245])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange secp256r1 server-signature RSA-PSS (2048 bits) server-digest
+ SHA256) (No client certificate requested)
+ (Authenticated sender: msmakela)
+ by meesny.iki.fi (Postfix) with ESMTPSA id 4fyZk03RjSzyQ6;
+ Sat, 18 Apr 2026 18:02:48 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=meesny;
+ t=1776524569;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=CxHUgldWFR+3oK1Os31ftjbL27S8pEaLXppruCFz9MQ=;
+ b=x4LLddLWRFqDBmMfKtCw3m6hG8LZIacb4Ke+7f3LGF8aOPlLzRtUmzUN4AS/yfvL1RpTXU
+ diEazSBBfmE0cbKKWWzH1nR11MEjBa1jN7AtdjPjk9L+XpBeNjTAtcOc3kBTFog9iNyPr4
+ 4YhFdgLYv6XZGwNydo1CCTgVIywhJNg=
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=meesny; cv=none; t=1776524569;
+ b=Jk6PGOoRBCM3Azhh16uoSFZ/5XGysHBV+XlHOaPUy2gxqAKTsIYGtb3IyK6hnSsCVCbmY9
+ a9VsQudfV24tdx5PzHzBil/GHv7vhWGHCNfRzaUqwZQl2icp///n8qx7FIPqJlB9aV3+ux
+ crQHt2uLeYOX0qqUt1YU8qjtBEdKnus=
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.auth=msmakela smtp.mailfrom=marko.makela@iki.fi
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+ s=meesny; t=1776524569;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=CxHUgldWFR+3oK1Os31ftjbL27S8pEaLXppruCFz9MQ=;
+ b=S1ubbwwH3lJ30OBJ0zKK48WfOhqLHosYbv3AWksuTGsbkijz3lB1tx9fOqSBwG+NTnZe5t
+ AWRIpXRntCuycxd5Sc0yEtB89WH9ug7OqDRxIAjdwtSKFsF8sx+n2xhHoQSwG+kyMV92P5
+ bLi2xEdgAp19VmAejsAWT+2hTN+0rzA=
+Date: Sat, 18 Apr 2026 18:02:47 +0300
+From: Marko =?iso-8859-1?B?TeRrZWzk?= <marko.makela@iki.fi>
+To: Robert Nelson <robertcnelson@gmail.com>
+Cc: Randolph Sapp <rs@ti.com>, Erik Welsh <Erik.Welsh@octavosystems.com>,
+ Anshul Dalal <anshuld@ti.com>, bb@ti.com, nm@ti.com,
+ trini@konsulko.com, afd@ti.com, u-boot@lists.denx.de
+Subject: Re: [PATCH 2/3] k3-am62-pocketbeagle2: add initial board support
+Message-ID: <aeOdF46Ny1AfNsMi@kehys.lan>
+References: <CAOCHtYhr50ywU_ar6qFPYrwJeUbjE+GQC_OYO_W4Pc5A9iJ5-w@mail.gmail.com>
+ <DHAEYEEVEBW7.304SKN4GDBP4B@ti.com>
+ <CAOCHtYgan-p8PiuwKCPmDY=xaKvnGc+F1OZXgyDHFGg4F9NJ1Q@mail.gmail.com>
+ <DHCAJ6L5XC77.9F2NK2OOEAT5@ti.com>
+ <DHD3N5DPHPVI.159WWX3H4U3Q3@ti.com> <acaTPyGbaUQj7hk3@kehys.lan>
+ <CAOCHtYidPpJMZeDj0KkLkuh6YYOFVAe80NMWWu5wbmV2ou+=UQ@mail.gmail.com>
+ <acbXV--BvxNuZxEa@kehys.lan> <aceOvTK4JGQvET11@kehys.lan>
+ <CAOCHtYhN42myMkq9zTUM2ETMP6oBA4mBAzPsYcOqVRG=ZskgfQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; protocol="application/pgp-signature";
- micalg=pgp-sha256;
- boundary="------f535e9f8430aeea7a9a5387c7eeaafd5b8f7ff6fb6ec23ac51f21e30c59e2e09";
- charset=utf-8
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <CAOCHtYhN42myMkq9zTUM2ETMP6oBA4mBAzPsYcOqVRG=ZskgfQ@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,89 +92,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------f535e9f8430aeea7a9a5387c7eeaafd5b8f7ff6fb6ec23ac51f21e30c59e2e09
-Content-Type: multipart/mixed;
- boundary=27e2447be0dfb9a5a89fac37b20818d68feeef8ebc06029376f62784f796
-Message-ID: <034a4ae4-b579-42b0-b6b0-3a204737156f@proton.me>
-Date: Sat, 18 Apr 2026 16:39:58 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: u-boot@lists.denx.de
-From: Johannes Krottmayer <krotti83@proton.me>
-Subject: How to build U-Boot with a custom out-of-tree device tree
+Hi Robert,
 
---27e2447be0dfb9a5a89fac37b20818d68feeef8ebc06029376f62784f796
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+I found some time to spend on this again.
 
-Hello,
+Sat, Mar 28, 2026 at 11:39:00AM -0500, Robert Nelson wrote:
+>Side note, here's my ci builder for u-boot.. :
+>https://github.com/beagleboard/u-boot-pocketbeagle2
 
-This question is generic and also valid for none RISC-V boards.
-I think it's maybe already asked, but didn't find any useful
-information this time. My question is, is it possible to pass
-a specific device tree blob to the build system from U-Boot?
+I got a little further by adopting a few changes from your 
+build_u-boot.sh script, namely the UART 0x6
+and the DRAM start address 0x80080000 for both OPTEE and TF-A.
 
-Example: RISC-V board Starfive VisionFive 2 8GiB variant
+Previously, the UART output stopped right after switching to a 64-bit 
+core. Now I am getting some further messages, but nothing for the 64-bit 
+U-boot itself:
 
-The default in-source-tree device tree from the VisionFive 2 has
-only 4GiB RAM. I own the 8GiB (RAM-IC BiWin BMWZCX32H2A-64G-X)
-variant. So therefore can I pass the device tree blob directly
-to U-Boot's build system without modifying CONFIG_DEFAULT_DEVICE_TREE
-in the device configuration? Exists there an environment variable?
+U-Boot SPL 2026.01 (Apr 18 2026 - 14:03:05 +0000)
+SYSFW ABI: 4.0 (firmware rev 0x000c '12.0.2--v12.00.02 (Clever Cat)')
+Changed A53 CPU frequency to 1400000000Hz (T grade) in DT
+SPL initial stack usage: 13416 bytes
+Trying to boot from MMC2
+Authentication passed
+Authentication passed
+Authentication passed
+Authentication passed
+Authentication passed
+Starting ATF on ARM64 core...
 
-Want to use U-Boot's EFI subsystem as loader for bare-metal
-environments. And I think when I want to get the memory map
-via EFI there will with the default device tree only <4GiB free
-usable memory shown, although there are 8GiB.
+I/TC: 
+I/TC: OP-TEE version: Unknown_4.10 (gcc version 14.2.0 (Debian 14.2.0-19)) #1 Sat Apr 18 14:03:00 UTC 2026 aarch64
+I/TC: WARNING: This OP-TEE configuration might be insecure!
+I/TC: WARNING: Please check https://optee.readthedocs.io/en/latest/architecture/porting_guidelines.html
+I/TC: Primary CPU initializing
+I/TC: GIC redistributor base address not provided
+I/TC: Assuming default GIC group status and modifier
+I/TC: SYSFW ABI: 4.0 (firmware rev 0x000c '12.0.2--v12.00.02 (Clever Cat)')
+I/TC: HUK Initialized
+I/TC: Disabling output console
 
-Thanks in advance!
+I am using the ti-linux-firmware branch (tag 12.00.00.07) of 
+https://git.ti.com/git/processor-firmware/ti-linux-firmware.git; I 
+couldn't access the repository in your script. I pointed both the 32-bit 
+and the 64-bit U-boot build to it via the BINMAN_INDIRS variable.
 
-Kind regards,
+I am using the most recent OPTEE (tag: 4.10.0) and TF-A (dated April 9).
 
-Johannes K.
+Initially I was copying the file tiboot3.bin from my build container. I 
+tried to mimic your script and switched to copying 
+tiboot3-am62x-hs-fs-evm.bin instead (named tiboot3.bin on the MicroSD 
+card), but it did not make any difference to the above output.
 
---27e2447be0dfb9a5a89fac37b20818d68feeef8ebc06029376f62784f796
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="publickey - krotti83@proton.me -
- 0x1A5D6E0E.asc"; name="publickey - krotti83@proton.me - 0x1A5D6E0E.asc"
-Content-Type: application/pgp-keys; filename="publickey - krotti83@proton.me
- - 0x1A5D6E0E.asc"; name="publickey - krotti83@proton.me - 0x1A5D6E0E.asc"
+The U-boot source I am trying to build is your clone 
+ef03e35488377a32cdd4f76d1a03ef7f60c798ef (January 30).
 
-LS0tLS1CRUdJTiBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0tCkNvbW1lbnQ6IGh0dHBzOi8vZ29w
-ZW5wZ3Aub3JnClZlcnNpb246IEdvcGVuUEdQIDIuOS4wCgp4ak1FYUZyS2dSWUpLd1lCQkFIYVJ3
-OEJBUWRBdm9MdzByd3hVZEZsMyszSytnTWhkTnlTK1p3WjU2Q0hlc2xBCndyKzhzalBOSjJ0eWIz
-UjBhVGd6UUhCeWIzUnZiaTV0WlNBOGEzSnZkSFJwT0ROQWNISnZkRzl1TG0xbFBzTEEKRVFRVEZn
-b0Fnd1dDYUZyS2dRTUxDUWNKa05aaG1aenF4TUNlUlJRQUFBQUFBQndBSUhOaGJIUkFibTkwWVhS
-cApiMjV6TG05d1pXNXdaM0JxY3k1dmNtZnQwODBDTndEN0laNnB0eVgvVzhucHhhRFlwT0x6Zm05
-Y21aK0hUUGJZCkN3TVZDZ2dFRmdBQ0FRSVpBUUtiQXdJZUFSWWhCQnBkYmc2UkVwSmNUMWFzaHRa
-aG1aenF4TUNlQUFCdy9RRUEKOVVkYTBubVA4Q1g4UW1PciswNEY5U3g0c1NSUHhza0NsdE5rWlRW
-RHROb0JBTjFlL3I5TnFZbUx1MjI4eHlVbQpmMHBkVXFlallJTytPT0lFZFFhMEZQd0V6amdFYUZy
-S2dSSUtLd1lCQkFHWFZRRUZBUUVIUUJjYVpHMlZxK1MxCmV0Q2NSWDVJaGZnSHJCTFhIcGV1SzJC
-VmZxZFNFVlltQXdFSUI4SytCQmdXQ2dCd0JZSm9Xc3FCQ1pEV1labWMKNnNUQW5rVVVBQUFBQUFB
-Y0FDQnpZV3gwUUc1dmRHRjBhVzl1Y3k1dmNHVnVjR2R3YW5NdWIzSm44bk5IbWtwbApTakU0b1pU
-WDVDZVlsamVGcmowd2pNWERNWENXZzdNNytnc0Ntd3dXSVFRYVhXNE9rUktTWEU5V3JJYldZWm1j
-CjZzVEFuZ0FBZGdBQkFMc2p0elBMYjBnVytUQkFzVXNGNjNZUW1BRXBsUm55RWwxQ20rclJNZXJv
-QVA5dVRkVFUKdThGL25ab0RUS3BxcGM4L1RqakhkU2JWMzMyUmhBdW1NSmQ4Q3c9PQo9TXJhaAot
-LS0tLUVORCBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0t
---27e2447be0dfb9a5a89fac37b20818d68feeef8ebc06029376f62784f796--
+Can you give any hint where it could be stuck or how to enable the UART 
+output in U-boot? As far as I can tell, my build is passing similar 
+options to the U-boot build as yours, with the main one being 
+am62_pocketbeagle2_*_defconfig. I'm editing a build script that was 
+working for the PHYTEC phyBOARD Lyra. I see that your script is setting 
+CONFIG_BOOTCOMMAND in the USB DFU version. I am attempting to build the 
+normal version.
 
---------f535e9f8430aeea7a9a5387c7eeaafd5b8f7ff6fb6ec23ac51f21e30c59e2e09
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+With best regards,
 
------BEGIN PGP SIGNATURE-----
-Version: ProtonMail
-
-wqsEARYIAF0Fgmnjl8EJENZhmZzqxMCeNRQAAAAAABwAEHNhbHRAbm90YXRp
-b25zLm9wZW5wZ3Bqcy5vcmdD6/HV27EuRCriXGETBJaJFiEEGl1uDpESklxP
-VqyG1mGZnOrEwJ4AAAfkAPsHJYn4zurqWPmYcitayQBkm5wPiv2rfkrVxKIQ
-AeBykAD/ThAvZwW/p1dvD5ZGdt+OeR/P+of1yokCROUGBows4Qc=
-=RJbE
------END PGP SIGNATURE-----
-
-
---------f535e9f8430aeea7a9a5387c7eeaafd5b8f7ff6fb6ec23ac51f21e30c59e2e09--
-
+	Marko
