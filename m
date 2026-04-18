@@ -4,78 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D40BF99C86
-	for <u-boot@archiver.kernel.org>; Sat, 18 Apr 2026 15:02:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6CB4F99C89
+	for <u-boot@archiver.kernel.org>; Sat, 18 Apr 2026 16:56:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91E1383BC8;
-	Sat, 18 Apr 2026 17:02:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=iki.fi
+	by phobos.denx.de (Postfix) with ESMTP id 0739583BC8;
+	Sat, 18 Apr 2026 18:56:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="x4LLddLW";
+	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="JoEsOyNm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F27383B99; Sat, 18 Apr 2026 17:02:52 +0200 (CEST)
-Received: from meesny.iki.fi (meesny.iki.fi [IPv6:2001:67c:2b0:1c1::201])
+ id 9B42783FC0; Sat, 18 Apr 2026 18:56:20 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [116.202.128.144])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F290D83B99
- for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 17:02:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=iki.fi
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marko.makela@iki.fi
-Received: from kehys.lan (dsl-hkibng32-54fb5f-245.dhcp.inet.fi [84.251.95.245])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange secp256r1 server-signature RSA-PSS (2048 bits) server-digest
- SHA256) (No client certificate requested)
- (Authenticated sender: msmakela)
- by meesny.iki.fi (Postfix) with ESMTPSA id 4fyZk03RjSzyQ6;
- Sat, 18 Apr 2026 18:02:48 +0300 (EEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=meesny;
- t=1776524569;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=CxHUgldWFR+3oK1Os31ftjbL27S8pEaLXppruCFz9MQ=;
- b=x4LLddLWRFqDBmMfKtCw3m6hG8LZIacb4Ke+7f3LGF8aOPlLzRtUmzUN4AS/yfvL1RpTXU
- diEazSBBfmE0cbKKWWzH1nR11MEjBa1jN7AtdjPjk9L+XpBeNjTAtcOc3kBTFog9iNyPr4
- 4YhFdgLYv6XZGwNydo1CCTgVIywhJNg=
-ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=meesny; cv=none; t=1776524569;
- b=Jk6PGOoRBCM3Azhh16uoSFZ/5XGysHBV+XlHOaPUy2gxqAKTsIYGtb3IyK6hnSsCVCbmY9
- a9VsQudfV24tdx5PzHzBil/GHv7vhWGHCNfRzaUqwZQl2icp///n8qx7FIPqJlB9aV3+ux
- crQHt2uLeYOX0qqUt1YU8qjtBEdKnus=
-ARC-Authentication-Results: i=1; ORIGINATING;
- auth=pass smtp.auth=msmakela smtp.mailfrom=marko.makela@iki.fi
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
- s=meesny; t=1776524569;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=CxHUgldWFR+3oK1Os31ftjbL27S8pEaLXppruCFz9MQ=;
- b=S1ubbwwH3lJ30OBJ0zKK48WfOhqLHosYbv3AWksuTGsbkijz3lB1tx9fOqSBwG+NTnZe5t
- AWRIpXRntCuycxd5Sc0yEtB89WH9ug7OqDRxIAjdwtSKFsF8sx+n2xhHoQSwG+kyMV92P5
- bLi2xEdgAp19VmAejsAWT+2hTN+0rzA=
-Date: Sat, 18 Apr 2026 18:02:47 +0300
-From: Marko =?iso-8859-1?B?TeRrZWzk?= <marko.makela@iki.fi>
-To: Robert Nelson <robertcnelson@gmail.com>
-Cc: Randolph Sapp <rs@ti.com>, Erik Welsh <Erik.Welsh@octavosystems.com>,
- Anshul Dalal <anshuld@ti.com>, bb@ti.com, nm@ti.com,
- trini@konsulko.com, afd@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/3] k3-am62-pocketbeagle2: add initial board support
-Message-ID: <aeOdF46Ny1AfNsMi@kehys.lan>
-References: <CAOCHtYhr50ywU_ar6qFPYrwJeUbjE+GQC_OYO_W4Pc5A9iJ5-w@mail.gmail.com>
- <DHAEYEEVEBW7.304SKN4GDBP4B@ti.com>
- <CAOCHtYgan-p8PiuwKCPmDY=xaKvnGc+F1OZXgyDHFGg4F9NJ1Q@mail.gmail.com>
- <DHCAJ6L5XC77.9F2NK2OOEAT5@ti.com>
- <DHD3N5DPHPVI.159WWX3H4U3Q3@ti.com> <acaTPyGbaUQj7hk3@kehys.lan>
- <CAOCHtYidPpJMZeDj0KkLkuh6YYOFVAe80NMWWu5wbmV2ou+=UQ@mail.gmail.com>
- <acbXV--BvxNuZxEa@kehys.lan> <aceOvTK4JGQvET11@kehys.lan>
- <CAOCHtYhN42myMkq9zTUM2ETMP6oBA4mBAzPsYcOqVRG=ZskgfQ@mail.gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 8D7CA83B99
+ for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 18:56:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
+ s=s2025; t=1776531377;
+ bh=iIRJlSyTzzEbkE0jcdzDMMGpiTUHMk7szxvgfV/OMnE=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=JoEsOyNmPOg0jaGsElfsZHCOOGTSL7UUGtW1ltea+VgTCUUhFiONpT4BmntWCO/Ar
+ aJmoITeRvPRh7afWpHIz8fuARzrVHaEnEsm8vREu/vBIG61TazSIwpDgM6DAQGI3o6
+ RgolAMK7e+Wkg6OyJm0pqRPOWgdDQZfcv/Sevz2naKO57J2xtCKq8o4bih214KuriD
+ mNHDv2QrCFr+Ckx95PvZunkH+vVfKtROqBbw/e9g1+f8B/XMZ2f+yAcwGMvRZJbBsH
+ hdFF2f1YOKZkIp4eWMg825KlNEvMoSZWQfVlmaBmdJCC+SPbjGSgoXK0e9M1U/vf/X
+ XpqPbGtIFixKQ==
+Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
+ [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id A7F54B2203BA;
+ Sat, 18 Apr 2026 18:56:16 +0200 (CEST)
+Message-ID: <4d549ae6-4dbb-472f-bacc-8f9ca7224a13@freeshell.de>
+Date: Sat, 18 Apr 2026 09:56:13 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <CAOCHtYhN42myMkq9zTUM2ETMP6oBA4mBAzPsYcOqVRG=ZskgfQ@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: How to build U-Boot with a custom out-of-tree device tree
+To: Johannes Krottmayer <krotti83@proton.me>, u-boot@lists.denx.de
+References: <034a4ae4-b579-42b0-b6b0-3a204737156f@proton.me>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <034a4ae4-b579-42b0-b6b0-3a204737156f@proton.me>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,68 +67,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Robert,
 
-I found some time to spend on this again.
+On 4/18/26 07:40, Johannes Krottmayer wrote:
+> Hello,
+> 
+> This question is generic and also valid for none RISC-V boards.
+> I think it's maybe already asked, but didn't find any useful
+> information this time. My question is, is it possible to pass
+> a specific device tree blob to the build system from U-Boot?
+> 
+> Example: RISC-V board Starfive VisionFive 2 8GiB variant
+> 
+> The default in-source-tree device tree from the VisionFive 2 has
+> only 4GiB RAM. I own the 8GiB (RAM-IC BiWin BMWZCX32H2A-64G-X)
+> variant. So therefore can I pass the device tree blob directly
+> to U-Boot's build system without modifying CONFIG_DEFAULT_DEVICE_TREE
+> in the device configuration? Exists there an environment variable?
+> 
+> Want to use U-Boot's EFI subsystem as loader for bare-metal
+> environments. And I think when I want to get the memory map
+> via EFI there will with the default device tree only <4GiB free
+> usable memory shown, although there are 8GiB.
+> 
+> Thanks in advance!
+> 
+> Kind regards,
+> 
+> Johannes K.
 
-Sat, Mar 28, 2026 at 11:39:00AM -0500, Robert Nelson wrote:
->Side note, here's my ci builder for u-boot.. :
->https://github.com/beagleboard/u-boot-pocketbeagle2
+What you're asking about VisionFive 2 can be done simply. It is arranged
+so that arch/riscv/dts/starfive-visionfive2-u-boot.dtsi is named in
+starfive_visionfive2_defconfig DEVICE_TREE_INCLUDES and then that acts
+with dts syntax to include the binman specific
+starfive_visionfive2-binman.dtsi
 
-I got a little further by adopting a few changes from your 
-build_u-boot.sh script, namely the UART 0x6
-and the DRAM start address 0x80080000 for both OPTEE and TF-A.
+Additionally there is the automatic dts inclusion mechanism from
+scripts/Makefile.lib approximately source line 230 you can see the
+precedence there; An example of this, look at some of my patch series
+when I posted before the necessary files to support the series had
+landed in devicetree-rebasing, my approach was to create empty
+directory/files as necessary in the devicetree-rebasing subtree but to
+create the special "<"
+whatever-we're-currently-doing-in-the-build-system-u-boot.dtsi which
+happens to be the board variant specific empty file I created in
+devicetree-rebasing subtree and with our -u-boot.dtsi automatic
+inclusion prefix.  It's simple, it just is not easy for me to explain
+clearly so I hope you may follow what I am describing.
 
-Previously, the UART output stopped right after switching to a 64-bit 
-core. Now I am getting some further messages, but nothing for the 64-bit 
-U-boot itself:
+As long as there is a directory and/or file (may be empty, cannot be
+missing entirely) in the subtree for devicetree-rebasing, and suitable
+variant board is named in the OF_LIST, then the build will recurse into
+the upstream-rebasing for those file targets.
 
-U-Boot SPL 2026.01 (Apr 18 2026 - 14:03:05 +0000)
-SYSFW ABI: 4.0 (firmware rev 0x000c '12.0.2--v12.00.02 (Clever Cat)')
-Changed A53 CPU frequency to 1400000000Hz (T grade) in DT
-SPL initial stack usage: 13416 bytes
-Trying to boot from MMC2
-Authentication passed
-Authentication passed
-Authentication passed
-Authentication passed
-Authentication passed
-Starting ATF on ARM64 core...
+For local testing one approach I've had good success with is to replace
+the dts/upstream/src/riscv/starfive directory with a symbolic link to a
+local checkout of the linux repository arch/riscv/boot/dts/starfive and
+I make my changes in linux repository, then simply recompile U-Boot. I
+wish this were a U-Boot compile time option to refer to a local Linux
+repository;  I looked into making this change but it's very specific to
+devicetree-rebasing with many hardcoded assumptions.
 
-I/TC: 
-I/TC: OP-TEE version: Unknown_4.10 (gcc version 14.2.0 (Debian 14.2.0-19)) #1 Sat Apr 18 14:03:00 UTC 2026 aarch64
-I/TC: WARNING: This OP-TEE configuration might be insecure!
-I/TC: WARNING: Please check https://optee.readthedocs.io/en/latest/architecture/porting_guidelines.html
-I/TC: Primary CPU initializing
-I/TC: GIC redistributor base address not provided
-I/TC: Assuming default GIC group status and modifier
-I/TC: SYSFW ABI: 4.0 (firmware rev 0x000c '12.0.2--v12.00.02 (Clever Cat)')
-I/TC: HUK Initialized
-I/TC: Disabling output console
-
-I am using the ti-linux-firmware branch (tag 12.00.00.07) of 
-https://git.ti.com/git/processor-firmware/ti-linux-firmware.git; I 
-couldn't access the repository in your script. I pointed both the 32-bit 
-and the 64-bit U-boot build to it via the BINMAN_INDIRS variable.
-
-I am using the most recent OPTEE (tag: 4.10.0) and TF-A (dated April 9).
-
-Initially I was copying the file tiboot3.bin from my build container. I 
-tried to mimic your script and switched to copying 
-tiboot3-am62x-hs-fs-evm.bin instead (named tiboot3.bin on the MicroSD 
-card), but it did not make any difference to the above output.
-
-The U-boot source I am trying to build is your clone 
-ef03e35488377a32cdd4f76d1a03ef7f60c798ef (January 30).
-
-Can you give any hint where it could be stuck or how to enable the UART 
-output in U-boot? As far as I can tell, my build is passing similar 
-options to the U-boot build as yours, with the main one being 
-am62_pocketbeagle2_*_defconfig. I'm editing a build script that was 
-working for the PHYTEC phyBOARD Lyra. I see that your script is setting 
-CONFIG_BOOTCOMMAND in the USB DFU version. I am attempting to build the 
-normal version.
-
-With best regards,
-
-	Marko
+-E
