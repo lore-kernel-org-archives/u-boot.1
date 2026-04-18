@@ -4,53 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6CB4F99C89
-	for <u-boot@archiver.kernel.org>; Sat, 18 Apr 2026 16:56:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEF5EF99C88
+	for <u-boot@archiver.kernel.org>; Sat, 18 Apr 2026 17:54:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0739583BC8;
-	Sat, 18 Apr 2026 18:56:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id F11E183B99;
+	Sat, 18 Apr 2026 19:54:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="JoEsOyNm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SW65SdqU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B42783FC0; Sat, 18 Apr 2026 18:56:20 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DFAB983BC8; Sat, 18 Apr 2026 19:54:30 +0200 (CEST)
+Received: from mail-dl1-x122c.google.com (mail-dl1-x122c.google.com
+ [IPv6:2607:f8b0:4864:20::122c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D7CA83B99
- for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 18:56:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1776531377;
- bh=iIRJlSyTzzEbkE0jcdzDMMGpiTUHMk7szxvgfV/OMnE=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=JoEsOyNmPOg0jaGsElfsZHCOOGTSL7UUGtW1ltea+VgTCUUhFiONpT4BmntWCO/Ar
- aJmoITeRvPRh7afWpHIz8fuARzrVHaEnEsm8vREu/vBIG61TazSIwpDgM6DAQGI3o6
- RgolAMK7e+Wkg6OyJm0pqRPOWgdDQZfcv/Sevz2naKO57J2xtCKq8o4bih214KuriD
- mNHDv2QrCFr+Ckx95PvZunkH+vVfKtROqBbw/e9g1+f8B/XMZ2f+yAcwGMvRZJbBsH
- hdFF2f1YOKZkIp4eWMg825KlNEvMoSZWQfVlmaBmdJCC+SPbjGSgoXK0e9M1U/vf/X
- XpqPbGtIFixKQ==
-Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
- [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id A7F54B2203BA;
- Sat, 18 Apr 2026 18:56:16 +0200 (CEST)
-Message-ID: <4d549ae6-4dbb-472f-bacc-8f9ca7224a13@freeshell.de>
-Date: Sat, 18 Apr 2026 09:56:13 -0700
+ by phobos.denx.de (Postfix) with ESMTPS id 5E75E836AC
+ for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 19:54:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=robertcnelson@gmail.com
+Received: by mail-dl1-x122c.google.com with SMTP id
+ a92af1059eb24-12c45281a06so2256197c88.1
+ for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 10:54:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776534867; cv=none;
+ d=google.com; s=arc-20240605;
+ b=DvYJRTq//ZcBYHQT3d2r9lKk/vnEB79jF7WuLKNwXG4bEfLYjxDJs81VWx63jCA+xb
+ e0w3WDZQTc1xLf5AT6ANq1UK85EOr8u2Lfm7U4vD/O3JEYfuxTOkKl1dr/zbQdARTnlg
+ RZCDCDrRruEPZ1ib/hcbfSvzH1Te6RyJXODol+VMFUImn8DVv8+QWScmDhgMqxm8mjks
+ MRhO2ZKSg7smKTayKTm4hjOZBaqpDs3VzfdjNEilBvJLQXv1VveR0fH3NRfJwyEoiO2c
+ gT158yUdpiw2aQy+aWrU7Hy7pbQwKkkb90O6NxpwnUoi/7CQajZEmkI7dFsKhGhk6UOZ
+ hL6A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=x52ISNxeEG6wUxeIk9KaZre5ZLW3C5eRCNdaEIHn1Jw=;
+ fh=i3ZzfB0TqT4ttlmahJKBcR0TFB/WALhhJT7Yax2YNOM=;
+ b=ktn1z3RirJf7sCvz6ZC0pJ/34PnFZ3QNMGYNvOhzSwKloKk3icxOYyFZPCzXG0dr8y
+ NMESqHM2UdgkrecGpYUqZxwTSVPZdF8a8/4C5TpXc7MVdQfCs8zuGN6bVo6AkpfVOmPn
+ vTKZ3JAd3OeGISUSfVNjDoGWbU5ZQR7dvlXmzlQg6KkS9rTQpZtSSUShvQBUXB/b2En9
+ k34/TbzjbovXEGOHP5JxKmyU0jeSTc9LBX+YSjc2cH4irML/fVcV8KhBOFEbuzOrLfMH
+ qojWtO0BLj5C1udEp6alxWU0UiXodqZwyEkeby2ev0+nJCbDUwbcq+JRIy/tHUw8VBJv
+ SNJQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1776534867; x=1777139667; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=x52ISNxeEG6wUxeIk9KaZre5ZLW3C5eRCNdaEIHn1Jw=;
+ b=SW65SdqUdpySF8Q6LMgoW9vgBh4YLjorBNo1Z2dz7FFWOUDEAXj92w36kPHmeu/lAO
+ VIadk4ImKpYmWrVSnsIsylifeJn8Vgi14aUqmrpTq9oELnc+ZbFRerLtQgu4ElIIuVea
+ syl8QutwpjwC960RX98P5ldQFNKK28b7N0C8aIkOB/5o4iaB8vEXWFwVOsJsJOcKinAA
+ 0lnWS6ifVqvpJwUgeSoE7opR3/nD9TTSK2061MdHTvwdfUm0Paz3SYWijVeND+paZwbB
+ aYPIcHrq4P3Ke0JK8lHLwE5nUA6+Hm7XB+Q04/t7LIBkpR8UEV2wSiGAKis1/HpABPg1
+ 6uSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776534867; x=1777139667;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=x52ISNxeEG6wUxeIk9KaZre5ZLW3C5eRCNdaEIHn1Jw=;
+ b=OIEm0bLzWOV1Tbd/irliGPzzz2Oxlk3yYoHshS7ICngWbuhDOF6+hntF04odXu9e6n
+ ouFGIuISGxTx6RILLpj+WEaxFhk0ry8a7sCEqjHR5sFzm5JUe/e+cN9lvNPtT2fAPobe
+ beQSxeK0bQOOLgjM+NHTlgKMtpcd3V2d4n58qwRc7Il0gFIWIJD9Ml0QZ8J/rteoixen
+ 50900bAQiWvksQcmV/AbdzPzYIYD//egt1+mGjdE1GQiyRdrmgx+pvXySej8SgNyDAbm
+ oVnn5a2Gq8jOjok3MdAE/VuCSpV3SkJ5BT5x3TD87h6qNcvX8T109AISOgaM03IhUrPT
+ Ml2g==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9IUFAInl5oaHt+FxL3qz1ZA75uVr59wynWvTNznGMdd0qlyYC3Vwmwg7nYWEiphwIn5OI6V2k=@lists.denx.de
+X-Gm-Message-State: AOJu0YxoBL0p5y7YCeUEC1fUB81sp+B1ETbW7GMZpsg8l9L7kwGa+hSn
+ OSk+sFhxlN5+AbRvdVwnMgfqmd7CNzbc16fYqhzQN8toupleYZugO401nVmd3/V+yFDXy4wv52l
+ S/sxE58yQkLdkupGMWeG3yr0AOw8LklU=
+X-Gm-Gg: AeBDiev5HeEzlrRjGeOpZtnCvT5l/1KEnDIRq1q9eAocXYLUjNkBQbqitY3cm4cJ5Of
+ R/SFpDPQRDc7QFFF9xKpHZXJYX7HhHULDD8iBX6srrCUz3/8SuyEtFFgAKYr29+4fcqWLrAY+fp
+ sE85P8LqC+3WPVQnViXnzqtuWNFJHGaeT3+fXaDMCRHOc0nroQpCpgIGCXZEQRjQ1xZrovV+UlP
+ H/DgYD4m2HzcDj9f72vHJSeCyWak8bffBXQd10zmCsQVUQCSWqw6S1jHAxIQYgJbDHM/qFVhI3t
+ WpSU2n8RjL7Lvgdw+kEmfa58EKWl/zHE25kL/HYcM/FH3iAtjTorPJgrUVYwGT8S10P5st/K62V
+ Ki3gulpfAmXuacXS90gbBqXNqRU09yHpyVtdSJaJmfLPQu8Ti
+X-Received: by 2002:a05:7022:2381:b0:12a:6c4b:9d01 with SMTP id
+ a92af1059eb24-12c73f6d5cdmr3390207c88.7.1776534866556; Sat, 18 Apr 2026
+ 10:54:26 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: How to build U-Boot with a custom out-of-tree device tree
-To: Johannes Krottmayer <krotti83@proton.me>, u-boot@lists.denx.de
-References: <034a4ae4-b579-42b0-b6b0-3a204737156f@proton.me>
-Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <034a4ae4-b579-42b0-b6b0-3a204737156f@proton.me>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <CAOCHtYhr50ywU_ar6qFPYrwJeUbjE+GQC_OYO_W4Pc5A9iJ5-w@mail.gmail.com>
+ <DHAEYEEVEBW7.304SKN4GDBP4B@ti.com>
+ <CAOCHtYgan-p8PiuwKCPmDY=xaKvnGc+F1OZXgyDHFGg4F9NJ1Q@mail.gmail.com>
+ <DHCAJ6L5XC77.9F2NK2OOEAT5@ti.com> <DHD3N5DPHPVI.159WWX3H4U3Q3@ti.com>
+ <acaTPyGbaUQj7hk3@kehys.lan>
+ <CAOCHtYidPpJMZeDj0KkLkuh6YYOFVAe80NMWWu5wbmV2ou+=UQ@mail.gmail.com>
+ <acbXV--BvxNuZxEa@kehys.lan> <aceOvTK4JGQvET11@kehys.lan>
+ <CAOCHtYhN42myMkq9zTUM2ETMP6oBA4mBAzPsYcOqVRG=ZskgfQ@mail.gmail.com>
+ <aeOdF46Ny1AfNsMi@kehys.lan>
+In-Reply-To: <aeOdF46Ny1AfNsMi@kehys.lan>
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Sat, 18 Apr 2026 12:53:59 -0500
+X-Gm-Features: AQROBzBKZEguLMhu1kqiawLWxUoj7-Vn6sqON2mqIJ3f99sfOJvxGUbkcZlK9SI
+Message-ID: <CAOCHtYguNVs+epQH8Lf80MXRJj-udsRfEuQO0LRO0cvG4HhKZw@mail.gmail.com>
+Subject: Re: [PATCH 2/3] k3-am62-pocketbeagle2: add initial board support
+To: =?UTF-8?B?TWFya28gTcOka2Vsw6Q=?= <marko.makela@iki.fi>
+Cc: Randolph Sapp <rs@ti.com>, Erik Welsh <Erik.Welsh@octavosystems.com>, 
+ Anshul Dalal <anshuld@ti.com>, bb@ti.com, nm@ti.com, trini@konsulko.com,
+ afd@ti.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,64 +126,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sat, Apr 18, 2026 at 10:02=E2=80=AFAM Marko M=C3=A4kel=C3=A4 <marko.make=
+la@iki.fi> wrote:
+>
+> Hi Robert,
+>
+> I found some time to spend on this again.
+>
+> Sat, Mar 28, 2026 at 11:39:00AM -0500, Robert Nelson wrote:
+> >Side note, here's my ci builder for u-boot.. :
+> >https://github.com/beagleboard/u-boot-pocketbeagle2
+>
+> I got a little further by adopting a few changes from your
+> build_u-boot.sh script, namely the UART 0x6
+> and the DRAM start address 0x80080000 for both OPTEE and TF-A.
+>
+> Previously, the UART output stopped right after switching to a 64-bit
+> core. Now I am getting some further messages, but nothing for the 64-bit
+> U-boot itself:
+>
+> U-Boot SPL 2026.01 (Apr 18 2026 - 14:03:05 +0000)
+> SYSFW ABI: 4.0 (firmware rev 0x000c '12.0.2--v12.00.02 (Clever Cat)')
+> Changed A53 CPU frequency to 1400000000Hz (T grade) in DT
+> SPL initial stack usage: 13416 bytes
+> Trying to boot from MMC2
+> Authentication passed
+> Authentication passed
+> Authentication passed
+> Authentication passed
+> Authentication passed
+> Starting ATF on ARM64 core...
+>
+> I/TC:
+> I/TC: OP-TEE version: Unknown_4.10 (gcc version 14.2.0 (Debian 14.2.0-19)=
+) #1 Sat Apr 18 14:03:00 UTC 2026 aarch64
+> I/TC: WARNING: This OP-TEE configuration might be insecure!
+> I/TC: WARNING: Please check https://optee.readthedocs.io/en/latest/archit=
+ecture/porting_guidelines.html
+> I/TC: Primary CPU initializing
+> I/TC: GIC redistributor base address not provided
+> I/TC: Assuming default GIC group status and modifier
+> I/TC: SYSFW ABI: 4.0 (firmware rev 0x000c '12.0.2--v12.00.02 (Clever Cat)=
+')
+> I/TC: HUK Initialized
+> I/TC: Disabling output console
+>
+> I am using the ti-linux-firmware branch (tag 12.00.00.07) of
+> https://git.ti.com/git/processor-firmware/ti-linux-firmware.git; I
+> couldn't access the repository in your script. I pointed both the 32-bit
+> and the 64-bit U-boot build to it via the BINMAN_INDIRS variable.
 
-On 4/18/26 07:40, Johannes Krottmayer wrote:
-> Hello,
-> 
-> This question is generic and also valid for none RISC-V boards.
-> I think it's maybe already asked, but didn't find any useful
-> information this time. My question is, is it possible to pass
-> a specific device tree blob to the build system from U-Boot?
-> 
-> Example: RISC-V board Starfive VisionFive 2 8GiB variant
-> 
-> The default in-source-tree device tree from the VisionFive 2 has
-> only 4GiB RAM. I own the 8GiB (RAM-IC BiWin BMWZCX32H2A-64G-X)
-> variant. So therefore can I pass the device tree blob directly
-> to U-Boot's build system without modifying CONFIG_DEFAULT_DEVICE_TREE
-> in the device configuration? Exists there an environment variable?
-> 
-> Want to use U-Boot's EFI subsystem as loader for bare-metal
-> environments. And I think when I want to get the memory map
-> via EFI there will with the default device tree only <4GiB free
-> usable memory shown, although there are 8GiB.
-> 
-> Thanks in advance!
-> 
-> Kind regards,
-> 
-> Johannes K.
+Hi Marko,
 
-What you're asking about VisionFive 2 can be done simply. It is arranged
-so that arch/riscv/dts/starfive-visionfive2-u-boot.dtsi is named in
-starfive_visionfive2_defconfig DEVICE_TREE_INCLUDES and then that acts
-with dts syntax to include the binman specific
-starfive_visionfive2-binman.dtsi
+My repo is just a mirror of:
 
-Additionally there is the automatic dts inclusion mechanism from
-scripts/Makefile.lib approximately source line 230 you can see the
-precedence there; An example of this, look at some of my patch series
-when I posted before the necessary files to support the series had
-landed in devicetree-rebasing, my approach was to create empty
-directory/files as necessary in the devicetree-rebasing subtree but to
-create the special "<"
-whatever-we're-currently-doing-in-the-build-system-u-boot.dtsi which
-happens to be the board variant specific empty file I created in
-devicetree-rebasing subtree and with our -u-boot.dtsi automatic
-inclusion prefix.  It's simple, it just is not easy for me to explain
-clearly so I hope you may follow what I am describing.
+https://github.com/TexasInstruments/ti-linux-firmware
 
-As long as there is a directory and/or file (may be empty, cannot be
-missing entirely) in the subtree for devicetree-rebasing, and suitable
-variant board is named in the OF_LIST, then the build will recurse into
-the upstream-rebasing for those file targets.
+Since my ci builders are inside the network they automatically use the
+local mirror:  https://github.com/beagleboard/u-boot-pocketbeagle2/blob/mai=
+n/build_u-boot.sh#L39
 
-For local testing one approach I've had good success with is to replace
-the dts/upstream/src/riscv/starfive directory with a symbolic link to a
-local checkout of the linux repository arch/riscv/boot/dts/starfive and
-I make my changes in linux repository, then simply recompile U-Boot. I
-wish this were a U-Boot compile time option to refer to a local Linux
-repository;  I looked into making this change but it's very specific to
-devicetree-rebasing with many hardcoded assumptions.
+Please don't upgrade to the 12.x.y.z0 branch of ti-linux-firmware
 
--E
+After this commit you can't even upgrade to `v11.02.09` without other chang=
+es!
+
+https://github.com/u-boot/u-boot/commit/7403d26bea36315f2008ed3ef80125b094c=
+0bafb
+
+I'm pretty sure OpTee 4.10.0 is safe, but otherwise this is my current
+stable branch:
+
+https://github.com/beagleboard/u-boot-pocketbeagle2/blob/main/version.sh
+
+i've been away hacking on other projects so i haven't been back yet to
+do my 'stable v2026.04' rebase yet, on Play, AI64, BeagleY-AI, and
+PocketBeagle 2 yet..
+
+Regards,
+
+--=20
+Robert Nelson
+https://rcn-ee.com/
