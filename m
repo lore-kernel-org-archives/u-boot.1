@@ -4,86 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C932F436B1
-	for <u-boot@archiver.kernel.org>; Sat, 18 Apr 2026 05:55:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA2D8F436B1
+	for <u-boot@archiver.kernel.org>; Sat, 18 Apr 2026 05:56:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B01B083BC8;
+	by phobos.denx.de (Postfix) with ESMTP id ED6D084214;
 	Sat, 18 Apr 2026 07:55:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=elder-tomes.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=elder-tomes-com.20251104.gappssmtp.com header.i=@elder-tomes-com.20251104.gappssmtp.com header.b="U/BbYlqq";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="BuZbQeCT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F79484214; Sat, 18 Apr 2026 00:45:15 +0200 (CEST)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B3B8E8405A; Sat, 18 Apr 2026 03:02:58 +0200 (CEST)
+Received: from mxd-1-a09.seznam.cz (mxd-1-a09.seznam.cz
+ [IPv6:2a02:598:128:8a00::1000:a09])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 898C38405A
- for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 00:45:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=elder-tomes.com
+ by phobos.denx.de (Postfix) with ESMTPS id 775D183B99
+ for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 03:02:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=levi.shafter@elder-tomes.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-679f6ee3fb0so490819eaf.2
- for <u-boot@lists.denx.de>; Fri, 17 Apr 2026 15:45:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=elder-tomes-com.20251104.gappssmtp.com; s=20251104; t=1776465911;
- x=1777070711; darn=lists.denx.de; 
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MNOGT0mFemBN8Gg+35AJuygJtLtf2CfupDW7HlONzjw=;
- b=U/BbYlqq7qv3mtHW3hrix4d5aKfxayXY8rOpWxHo8MHFBdZ/7zc9yJR1Y2B9R2fkU8
- DOx0mVPgIW7Bxg2mVSlqZgLVt+/wA+hnQ5mSYxjHj3Ux5UjTRyVTBdjhTKx1GcIImAa8
- s8mux9/b0D5IDwnC7/4ihJGRWxibu9y4cK+FPd32ERAcmedyZ4Iy2A+Q35lDUcw5b03E
- h51+oTzieOKa+x3fg4V1FrhmOiRyXoaX2NIYewYkgtAoueAAsFwOGHAIrK+ZKcZvGpis
- 1MxRxdq9A1cIn30B0jugQx18LnfWy9mD8pV0ErfhIGZfiySEqeXoS6AmYBhCPihw4G40
- ntwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776465911; x=1777070711;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=MNOGT0mFemBN8Gg+35AJuygJtLtf2CfupDW7HlONzjw=;
- b=nG/wrJ61ArYnPOIRohjVSDOvlBHpAME2BmAKaHB7jZcIBcHG0wLEdWWn9xgJG7Lb7n
- g9RnXjdXOBiwArICiC/C6Ki6dI55plTHDLy38pGzHTNjo53UGQvdL5NTDXPur+/bgNsZ
- mAuAwI+PI3/ERcooQGjCRvg1jUmSN8TWNtPTHiTPAJCCz9wiFtcgpGY0OTjrOuxcTcM0
- /0VOsQGljhQJ2o3G4WHwtWzH4Q5wgmbgs9K46RcKiV/fKpO12McwqQyM9Mm9fek0+07y
- foAt4yEgJ8h+joeHHv7f3xhgAURpjVx0x61jCsDfOufpHoI5cEZWWYGyvexf/Idfkmub
- jfPQ==
-X-Gm-Message-State: AOJu0YzjPQAyk70rZB5A/hJsatQh9VkxmMrp/x7H/5IdVtX+N7/P0qCf
- aZclfRyvRAheeQA/vEtmo78kco2HZGTGPZm1IYY3Hfl1avlMSfExakNwchR33iCUX2sD0ihos50
- Fco4v
-X-Gm-Gg: AeBDiev2FXtQ2FOpt2uBd2iEXmaQtAaR6CEmGy3/ZaR4eJ3XYuKdWH2LlQVAJtev0Zj
- AhKhqczdYpBL6qFKNPdks7SYG6xQqrMXkjedxyQ1bpfr+UBb6x1UdaB9/qGi+jFqrOXPtTrM135
- jyD6ZGu/glv+wZbc80Q3hejTDn4euGI7kTNoYTd8eG9jAtuCs/HdlGeSjpxvmOGmtNMe6RDFcDS
- vrShE02/jZf1fu8EsEpQA/n3IiPNcQXLKyo4CnClo157rq68+7tK/QwFwSNWpOKHoKtCyNC/1ba
- xadh4DAFZpZ5iHbMwUDJx0qqGexSiNnxyp4FpfavAIYo+S/TsMugXJpwiw/3K88ndBKO+UIYWCq
- HVugCxx4xDMP6jC9X7nG9lri8HBKnJ5PJDCocFX6iaHoLpO9AFneZSWz532OqHRYtb4LXleuYtP
- 2Jk42KQ1pxk4Y4RcQ1T4X+VUh339s7fOCbFCCUidUbkRiYJAMSQiIpzvCm38v0B1sM5Xbds/jQv
- TVXcoPa2Dk=
-X-Received: by 2002:a05:6820:178a:b0:68b:f68f:86d6 with SMTP id
- 006d021491bc7-69462e7f140mr2650224eaf.26.1776465910637; 
- Fri, 17 Apr 2026 15:45:10 -0700 (PDT)
-Received: from [192.168.1.9] (c-73-169-9-114.hsd1.co.comcast.net.
- [73.169.9.114]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69464e5e752sm1764931eaf.2.2026.04.17.15.45.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 17 Apr 2026 15:45:10 -0700 (PDT)
-Message-ID: <732a4d19-0e19-47ed-9f8e-0f28b8c50f73@elder-tomes.com>
-Date: Fri, 17 Apr 2026 16:45:09 -0600
+ dmarc=pass (p=none dis=none) header.from=seznam.cz
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=Michael.Srba@seznam.cz
+Received: from email.seznam.cz by smtpc-mxd-fd5c5cd95-bfmjc
+ (smtpc-mxd-fd5c5cd95-bfmjc [2a02:598:128:8a00::1000:a09])
+ id 1e963f3e45986b571f3ff360; Sat, 18 Apr 2026 03:02:01 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
+ t=1776474121; bh=wTKWtnk3lWwYgUfEC1Exyc41GL5E6C061ZT9VNGg1NA=;
+ h=Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+ Content-Language:From:Content-Type:Content-Transfer-Encoding;
+ b=BuZbQeCT/nSAwEezMnMsw8gR2qVYWCIoePAwOGGCAGMoR4FzZeumlRiKfmcAIREum
+ LR8DGYaixZ+cmikxI+nTlM42cBqKWsAf8S0fSC0OeuSXvOQVEPIuXMcUfhOHfYsVTS
+ 340pGfpXfVHJ/Mlw8ldriFMynQu7wo+kbsADe2Vta4m6fNPJbKCKr0HeQyKZyXkNyN
+ pSJdL+BEic7nEA5giNZPA3/SAd782Ogb/lTnH62iCm/8R5CK+vRp5NBEFmO4JZQ0A+
+ pU92HGaMXfpp7OSvLU4R1AbZvRvV2ygFxvOA+Y+6SxyOTcy2TLLuNUiLrF+b6v1/Ld
+ 9VTSChZVqB+MA==
+Received: from [192.168.0.240] (ip-111-27.static.ccinternet.cz
+ [147.161.27.111])
+ by smtpd-relay-7c7c659656-jspbn (szn-email-smtpd/2.0.72) with ESMTPA
+ id f4815e30-c1a1-4b87-b7af-78801f37e081;
+ Sat, 18 Apr 2026 03:01:24 +0200
+Message-ID: <596c73ef-b0ec-4543-bd06-ac3b18029edd@seznam.cz>
+Date: Sat, 18 Apr 2026 03:01:22 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 06/10] mach-snapdragon: Kconfig: changes / additions to
+ support SPL
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
+ Hrushikesh Salunke <h-salunke@ti.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Jerome Forissier <jerome.forissier@arm.com>, Heiko Schocher
+ <hs@nabladev.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Tingting Meng <tingting.meng@altera.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>,
+ George Chan <gchan9527@gmail.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>
+References: <20260411-qcom_spl-v2-0-9609557cf562@seznam.cz>
+ <20260411-qcom_spl-v2-6-9609557cf562@seznam.cz>
+ <20260413171717.GA41863@bill-the-cat>
 Content-Language: en-US
-To: u-boot@lists.denx.de
-Cc: heinrich.schuchardt@canonical.com, sjg@chromium.org
-From: Levi Shafter <levi.shafter@elder-tomes.com>
-Subject: [PATCH] Makefile: fix host CPP pollution in cmd_gen_envp
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: Michael Srba <Michael.Srba@seznam.cz>
+In-Reply-To: <20260413171717.GA41863@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sat, 18 Apr 2026 07:55:55 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,42 +107,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit 2956a84 ("Makefile: don't use CFLAGS for environment text file")
-switched cmd_gen_envp to use $(cpp_flags) so that KCPPFLAGS would be
-honored when preprocessing the environment text file. However,
-cpp_flags also includes $(PLATFORM_CPPFLAGS), which carries
-architecture-specific flags such as -march=armv8-a+crc set by
-arch/arm/Makefile for CONFIG_ARM64_CRC32=y targets. These flags are
-appropriate for cross-compiled object files but cause the host CPP
-invocation to fail on x86 build machines:
+Hi,
 
-  cc1: error: bad value ('armv8-a+crc') for '-march=' switch
+On 4/13/26 19:17, Tom Rini wrote:
+> On Sat, Apr 11, 2026 at 02:00:11AM +0200, michael.srba@seznam.cz wrote:
+>
+>> From: Michael Srba <Michael.Srba@seznam.cz>
+>>
+>> An SoC to target has to be selected, e.g. SPL_TARGET_SDM845.
+>> This will select reasonable defaults and enable per-SoC linker
+>> script (if required).
+>>
+>> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
+>> ---
+>>   arch/arm/Kconfig                 | 31 +++++++++++++++++++++++++++-
+>>   arch/arm/mach-snapdragon/Kconfig | 44 ++++++++++++++++++++++++++++++++++------
+>>   2 files changed, 68 insertions(+), 7 deletions(-)
+>>
+>> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+>> index 03416c55265..8490e336516 100644
+>> --- a/arch/arm/Kconfig
+>> +++ b/arch/arm/Kconfig
+>> @@ -1138,9 +1138,38 @@ config ARCH_SNAPDRAGON
+>>   	select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
+>>   	select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
+>>   	select SYSRESET
+>> -	select SYSRESET_PSCI
+>> +	select SYSRESET_PSCI if !SPL
+>>   	select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
+>>   	select MMU_PGPROT
+>> +	select SUPPORT_SPL
+>> +	select ARMV8_SPL_EXCEPTION_VECTORS if SPL
+>> +	select ENABLE_ARM_SOC_BOOT0_HOOK if SPL
+>> +	select SPL_DM if SPL
+>> +	select SPL_DM_GPIO if SPL
+>> +	select SPL_DM_PMIC if SPL
+>> +	select SPL_DM_USB_GADGET if SPL
+>> +	select SPL_ENV_SUPPORT if SPL
+>> +	select SPL_GPIO if SPL
+>> +	select SPL_HAS_BSS_LINKER_SECTION if SPL
+>> +	select SPL_LIBCOMMON_SUPPORT if SPL
+>> +	select SPL_LIBDISK_SUPPORT if SPL
+>> +	select SPL_LIBGENERIC_SUPPORT if SPL
+>> +	select SPL_MMC if SPL
+>> +	select SPL_OF_REAL if SPL
+>> +	select SPL_OF_CONTROL if SPL
+>> +	select SPL_PINCONF if SPL
+>> +	select SPL_PINCTRL if SPL
+>> +	select SPL_PINCTRL_FULL if SPL
+>> +	select SPL_PINCTRL_GENERIC if SPL
+>> +	select SPL_PINCONF_RECURSIVE if SPL
+>> +	select SPL_PINMUX if SPL
+>> +	select SPL_SPRINTF if SPL
+>> +	select SPL_STRTO if SPL
+>> +	select SPL_USB_GADGET if SPL
+>> +	imply DM_EVENT if USB_DWC3_GENERIC || SPL_USB_DWC3_GENERIC
+>> +	imply SPL_EVENT if SPL_USB_DWC3_GENERIC
+>> +	imply OF_LIVE if USB_DWC3_GENERIC
+>> +	imply SPL_OF_LIVE if SPL_USB_DWC3_GENERIC
+>>   	imply OF_UPSTREAM
+>>   	imply CMD_DM
+>>   	imply DM_USB_GADGET
+> This part looks good.
+>
+>> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+>> index 976c0e35fce..74d687ceee2 100644
+>> --- a/arch/arm/mach-snapdragon/Kconfig
+>> +++ b/arch/arm/mach-snapdragon/Kconfig
+>> @@ -11,18 +11,12 @@ config SYS_VENDOR
+>>   	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD>
+>>   	  will be used as the custom board directory.
+>>   
+>> -config SYS_MALLOC_LEN
+>> -	default 0x10000000
+>> -
+>>   config SYS_MALLOC_F_LEN
+>>   	default 0x2000
+>>   
+>>   config SPL_SYS_MALLOC_F
+>>   	default y
+>>   
+>> -config SPL_SYS_MALLOC_F_LEN
+>> -	default 0x2000
+>> -
+>>   config SYS_MALLOC_LEN
+>>   	default 0x800000
+>>   
+>> @@ -45,4 +39,42 @@ config SYS_CONFIG_NAME
+>>   	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
+>>   	  will be used for board configuration.
+>>   
+>> +config SPL_SHARES_INIT_SP_ADDR
+>> +	default n
+>> +
+>> +config SPL_HAVE_INIT_STACK
+>> +	default y
+>> +
+>> +# SPL targets
+>> +
+>> +config SPL_TARGET_SDM845
+>> +	bool "Set reasonable default values for running SPL in SRAM on sdm845 devices"
+> This namespace is confusing and so shouldn't be used. Does SDM845 get
+> used without SPL? We should probably follow the convention of adding a
+> new defconfig of <whatever board>_spl_defconfig, that enables the
+> options as needed.
+The rationale for this naming was that outside SPL, we don't currently
+discriminate between SoCs at compile time (there is some discrimination
+between legacy board support the and unified "board" which covers all
+non-legacy boards no matter the SoC, but for non-legacy boards there
+is just a single build of U-Boot proper, possibly with a board dtb
+appended if used as the primary bootloader). I suppose the SPL_ prefix
+may be confusing and isn't strictly necessary, and we may need a similar
+target option for msm8916 in the future which wouldn't be used in SPL
+but in u-boot proper, so it makes sense to get rid of the prefix.
 
-KBUILD_CPPFLAGS already accumulates the user-supplied KCPPFLAGS via
-"KBUILD_CPPFLAGS += $(KCPPFLAGS)", providing the behaviour 2956a84
-intended without pulling in target architecture flags. Use it directly.
+The reason we need this config option at all (even if we move all
+the Kconfig defaults that use it into the defconfig) is that the
+boot0.h is shared among all of mach-snapdragon, and we need a way
+to select which SoC-specific boot0.h we should include.
+Now, it does look like SYS_SOC is intended for stuff like this,
+however changing SYS_SOC from snapdragon seems to completely break
+the unified board support which isn't really worth it.
 
-Fixes: 2956a84 ("Makefile: don't use CFLAGS for environment text file")
-Reported-by: Levi Shafter <levi.shafter@elder-tomes.com>
-Signed-off-by: Levi Shafter <levi.shafter@elder-tomes.com>
----
-Sponsor: 21SoftWare LLC
+Admittedly, it does seem that I somehow completely forgot to mention that
+use of the config option in both the commit message and the Kconfig,
+but it is effectively the only use it has left after moving everything
+into the defconfig.
 
- Makefile | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+So, should I include an SoC selection menu similar to the board selection
+menus in e.g mach-exynos, which would now solely be used by the ifdef
+in boot0.h? Something like
+```
+choice
+     prompt "Qualcomm SoC select"
+     default TARGET_NONE if !SPL
+     help
+       While U-Boot on Qualcomm platforms doesn't generally need compile-time
+       adjustment based on the target SoC, there are a few exceptions to this.
+       Currently this concerns boot0.h discrimination.
 
-diff --git a/Makefile b/Makefile
-index dfc95d314dd..e2b8e6a1915 100644
---- a/Makefile
-+++ b/Makefile
-@@ -2147,7 +2147,8 @@ ENV_FILE := $(if
-$(ENV_SOURCE_FILE),$(ENV_FILE_CFG),$(wildcard $(ENV_FILE_BOARD)
- quiet_cmd_gen_envp = ENVP    $@
-       cmd_gen_envp = \
- 	if [ -s "$(ENV_FILE)" ]; then \
--		$(CPP) -P $(cpp_flags) -x assembler-with-cpp -undef \
-+		$(CPP) -P $(KBUILD_CPPFLAGS) $(UBOOTINCLUDE) \
-+			-x assembler-with-cpp -undef \
- 			-D__ASSEMBLY__ \
- 			-D__UBOOT_CONFIG__ \
- 			-DDEFAULT_DEVICE_TREE=$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE)) \
+config TARGET_NONE
+     bool "Generic build"
+     help
+       Select this if you're not building SPL. U-Boot proper builds are currently
+       generic across all SoCs.
+
+config TARGET_SDM845
+     bool "SPL targeting the sdm845 SoC"
+     help
+       Select this if you are bulding u-boot SPL for sdm845.
+       Currently this gates sdm845-specific boot0.h (only used in SPL).
+
+endchoice
+```
+
+... or do you have something else in mind? I'm not entirely sure if you're
+suggesting to get rid of TARGET_SDM845 completely (which I really don't see
+as possible at least without a lot of unnecessary pain) or just of it's
+use for the defaults.
+
+Regards,
+Michael
+>
+
