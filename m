@@ -4,109 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC3E7F99C89
-	for <u-boot@archiver.kernel.org>; Sat, 18 Apr 2026 20:01:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA936F99C95
+	for <u-boot@archiver.kernel.org>; Sat, 18 Apr 2026 22:53:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0221283B99;
-	Sat, 18 Apr 2026 22:01:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 8631683BC8;
+	Sun, 19 Apr 2026 00:53:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Nu8/EGiJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n2RmnFgZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C52383BC8; Sat, 18 Apr 2026 22:01:35 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 076A583E81; Sun, 19 Apr 2026 00:53:06 +0200 (CEST)
+Received: from mail-oa1-x43.google.com (mail-oa1-x43.google.com
+ [IPv6:2001:4860:4864:20::43])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 197B7839D9
- for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 22:01:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 99ABD3F181
- for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 20:01:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1776542492;
- bh=RV69wxL64o+/pBYx4Lf1zFpbyESNzL3MsofhIbaoWQI=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=Nu8/EGiJHfzQW4wWmEyk24pnNNvEkEOWaHMgFa7kVpLmmXPv1IiCdDm0EeZvd8Gbo
- w/S+3pkMpXcP7I4K5HOcrSqXf+4fMSDAUi9ZJceNAAwkABZHOgxh0sDOq4P/UlahkZ
- KjWw+EGCwFNs+huhpTFUHodAD5R3GTkLp6L9pzkmvts55c99eoK9M7OOpe9l4jAijK
- tZr7L8amOe9gvWX4VG3YTOK4l8YqREJY3AAcND87a9cYipZbQ+BEmu0t6MEgYvw+U/
- AickK0jkxRS9XMGbDn5TV3WxU3l+oMR2VOfbnpyf0aRRcdCYgDL6HS11FmHbnIHCWu
- d6ciYniMkj+byJHQaKLPMHS35VKGp1MQufixt9CD3SsNg11fO2InLDwJ/eSByKebCE
- GyvzREd+QgRmT2/5emnA4fhW7/TApxU7Xb5jC9GZqNcqnJ0KLRg/WxpWyd0F0aID2Z
- zgnNlS+/vG/wTgo1YLYjroDpdudv2GnPXf5cbqq0bO6a4CyvtI0kdmGM74TOc0MUbz
- e1B1xPSbA2SjF7sGOldH4FjdcJjv92snAtdJNpvgrvSWLv1tVCP7Cr2Wuyae+PXR/T
- TNMZcZFnXrM4qfQ8YLLaMt9gCioF+/6RTmp9WpQFFOEOkGXf5wHVaCq/Zp0fr2VZNK
- cc9blWQUHYhIfJ8qnuh1fR9k=
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-43d780601b7so1235844f8f.2
- for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 13:01:32 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CC6F839D9
+ for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 00:53:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x43.google.com with SMTP id
+ 586e51a60fabf-4152698e745so785735fac.1
+ for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 15:53:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1776552782; x=1777157582; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=WIYcgSsqEAFD/7576DYSGhmlkCKImBL08erbylrBTEI=;
+ b=n2RmnFgZDmmixIWCfR3XsEFcvphmjVdGu+MOgC+xq3TX9J8dp/ahQwbTozY3CsK5L4
+ nMCw6aMtBWoKx60RTLf/VPCxUFUqrD+FNhlqv2mTlcj6+K7D33K2ivBEIjEYoOmlMc35
+ 4EpbT+lxpVJgiSjiq7UpR4hKCaN7yiEqJUty4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776542492; x=1777147292;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RV69wxL64o+/pBYx4Lf1zFpbyESNzL3MsofhIbaoWQI=;
- b=mZuzjwOVRmCHrTSvZFqVefwAGmjAHsbp2RdEsZyY4c4um0BRfN/iqhm2wjqAWPdpix
- g5SzJB24EooPdKuaOOrfR4b2f0VOqaioUb0wID+9Py0bWZg0zvT52BUVXGFZ8PB7v/V2
- ZMFU3aoEry69WnNBe/m/juiaPvGqY/lb0xvuH7QoQAZEkqbGgcz/lJszH9arQ1N9Bpyk
- nnk1XPmPZ4nzGZ6fk0anF/CVEdicu78pRZ7e26YQlbAGRmGbdNFH+LswYQRBwvEaXvma
- F2f9pH8mEAJPthZSrzIL7+t2umTVVgJPXJH0XExrZvhuSQvKLjAgtlkkGfkL7v+tmCN/
- yMvQ==
+ d=1e100.net; s=20251104; t=1776552782; x=1777157582;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WIYcgSsqEAFD/7576DYSGhmlkCKImBL08erbylrBTEI=;
+ b=pM1KvxARFmsJBeGKrccWKwjpCPELiHYJKvF/HTV8Pf0P+AYi3+Vwu6WfuQSgAVWFbz
+ lJjP3u1FgTELyrsnolwHEABGozatgIersoGIDCyjqNdgbiwnSSSDH+kkkMttuFXYP/5m
+ P5xSQvjQL8IxOACyIVpk5gDT15jz2mhf5dxaVWiIm0QXRjWjoQV7N3fD+iDw08dM326Z
+ JgUgrq/YD1BHg3FsJbCWSKyQna1dzT2C9NnQYpd5aFoUul3zweJXzvNWZzyl/Xvu1h8I
+ +DjZLGCit8DXIReTFu+CP/KDnHFDFibsMCPK2fEl4W+KZkmlpC3N0gFIen4dqVwYhe3V
+ nc1Q==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/5ETvi2EAB+xv7ATLmXC6u3Px8I1XHcDy1eo17+Pi1hZdizMoBYbMvtZhzKcm5Wx2CRaDegL4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy+7lFN18x3lcCvycgWw74+DkVQDR5Z1P2zvUvU9zISChPYrS0N
- 7W/4Zz4C5/VP2eywxaLzfzLSbVxai3EJx2PLELNHKkRX3YFlIkr2+TfgYCmZIVS+8twH9fieQOt
- LpUy7wHrLLprCkl66rhn0wZxKDjo5gT3E7ivjwerllY6a9eyV+KAqHcRzzxyYwMMnoD5Ajy6hm8
- pWyRY=
-X-Gm-Gg: AeBDietoyRcKWA8Zuq31R18w+8UWCM1+Kc34ulSthBM4QV599B9vBXOG79p/PfEFD8U
- DzDd0oCJfbD7/IzBoaiX1QNWTJEPZDgoEHHYkSZuAmp2xnHy2AAsxSPqXSIE6z0KM9oKRmazn3j
- FbrmYNMKINRiyTurmKxF/eVoXcAMahUm8UpbogcR8EF4s8n4gqh5Jttn9SVrTsAYclF6Bus0guE
- RmpcIeK1vn39YWVK4NNphsuEYaaO60zHb/MBxFgcoroH0uX5d6kXDT7fo3nXzXBOtHsnsmTQeot
- rWYUgkypvRb7dVzEG5G7vYJXHNrveI7S9AwGD4gwjU1Dr1BAoKo9+JaUTKzocItRDom0yT6QBVE
- MdldQEzEibU24VqcFH9qLIraR4++r9x7fTEw6qYZr4HQSMcyXRiUy4b6UmG89WaZjRpoRNx4AAf
- 5Imu9fJDDLViNHR2fgLJLSUaBaTbiC5KTSE4ERWvB+Wm6kGZNzVMczYGVidc00Suut5Mw=
-X-Received: by 2002:a05:600d:8449:b0:488:869c:edaa with SMTP id
- 5b1f17b1804b1-488fb74e103mr95551925e9.7.1776542491960; 
- Sat, 18 Apr 2026 13:01:31 -0700 (PDT)
-X-Received: by 2002:a05:600d:8449:b0:488:869c:edaa with SMTP id
- 5b1f17b1804b1-488fb74e103mr95551755e9.7.1776542491516; 
- Sat, 18 Apr 2026 13:01:31 -0700 (PDT)
-Received: from [192.168.123.154]
- (ip-176-199-115-125.um44.pools.vodafone-ip.de. [176.199.115.125])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488fc100162sm163557485e9.5.2026.04.18.13.01.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 18 Apr 2026 13:01:31 -0700 (PDT)
-Message-ID: <9447010a-c660-4776-8d8c-4313f4c40ae4@canonical.com>
-Date: Sat, 18 Apr 2026 22:01:29 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ AFNElJ//mXZGDutu60IlFrf3WFmgz/aDwyr4tcKYzZKF1p3+/2nxhfkJJAdZ3qVhqq83Z4oZ687gj7g=@lists.denx.de
+X-Gm-Message-State: AOJu0YxiUg8zFqzQM+60c9x/aZIyDsUjmV+y2wOBQzlcSPyh6HSjWP3h
+ SIQuCiL4S8IpZ9qUc8IVxg1mgas2XOMehWrlVwO5+3tkGj7Mj2bmmc9Zht7viVTBS0w=
+X-Gm-Gg: AeBDiesiRbu9yp2FVnNvk/VNxsiPW7dHHoqOMOFie6nDRRfXNiObCVP9TcH1c5FAd0D
+ Zo7zWlOkGN65amJDk3puUp1md+KWMzrCfb27FaqY8t5A3Fb6nQKqRh5Mz2d2k/7BVrX2/GYbWnR
+ PBFxxhDBePxU/i9an5pIvtlbp5psOiEt/6GIQEo+Kp1djv0dD7PiCDg72EaVY3DBHccG8AmVHJe
+ MK8MPzNAGrF7Zn+4fr0/9ydNx56X67F+j1YLqllxMSjfiH5JbAaAIiHSE1j1M/RiZ7pe1LOwYR0
+ 5ZO4zZbzRQcP1IeKXd7wGXPK6LQp/5FGFYngHk05JJ7W+GjWXuLelGhGY7IZwb9WeaS6xe+bxRM
+ MAgAEXRJHpQp2joggWdG+Br1xa2u5/xRpGfnRAL0UoFGDRvNQuw6oRgKcvhNXunnaj3PvzHgA5s
+ RQ6TAoHuh8lpgq+yMjBV9ojti2Gs6KxM5F6ALlk04TjH4jTrvymbNHMFishISlaXjeOHGkkN+pT
+ CKLD9/EJCaP3aUgHm8bVBbcdzC2fZkWOZMoPKmrMb1ujUEAbidaDWPOsuVhRQ==
+X-Received: by 2002:a05:6808:1384:b0:466:eeac:bdda with SMTP id
+ 5614622812f47-4799c818beemr4528233b6e.5.1776552782160; 
+ Sat, 18 Apr 2026 15:53:02 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-42b930480bbsm4475670fac.4.2026.04.18.15.53.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 18 Apr 2026 15:53:01 -0700 (PDT)
+Date: Sat, 18 Apr 2026 16:52:58 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Subject: Re: [PATCH 1/1] scripts/dtc: avoid discarded qualifiers in
  overlay_fixup_phandle
-To: Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Message-ID: <20260418225258.GU41863@bill-the-cat>
 References: <20260418181510.51490-1-heinrich.schuchardt@canonical.com>
  <20260418190921.GS41863@bill-the-cat>
  <b67ed115-b040-48b0-b7d3-936dc8fb7dd6@canonical.com>
  <20260418194953.GT41863@bill-the-cat>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260418194953.GT41863@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ <9447010a-c660-4776-8d8c-4313f4c40ae4@canonical.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="XKkaDoZjm/v2TjEE"
+Content-Disposition: inline
+In-Reply-To: <9447010a-c660-4776-8d8c-4313f4c40ae4@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,62 +103,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/18/26 21:49, Tom Rini wrote:
-> On Sat, Apr 18, 2026 at 09:46:47PM +0200, Heinrich Schuchardt wrote:
->> On 4/18/26 21:09, Tom Rini wrote:
->>> On Sat, Apr 18, 2026 at 08:15:10PM +0200, Heinrich Schuchardt wrote:
->>>
->>>> When building with GCC 15.2 the following warning show up:
->>>>
->>>>       scripts/dtc/libfdt/fdt_overlay.c:422:21: warning:
->>>>       assignment discards ‘const’ qualifier from pointer target type
->>>>       [-Wdiscarded-qualifiers]
->>>>         422 |                 sep = memchr(fixup_str, ':', fixup_len);
->>>>             |                     ^
->>>>       scripts/dtc/libfdt/fdt_overlay.c:432:21: warning:
->>>>       assignment discards ‘const’ qualifier from pointer target type
->>>>       [-Wdiscarded-qualifiers]
->>>>         432 |                 sep = memchr(name, ':', fixup_len);
->>>>             |                     ^
->>>>
->>>> Define sep as const char *.
->>>>
->>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>>> ---
->>>>    scripts/dtc/libfdt/fdt_overlay.c | 3 ++-
->>>>    1 file changed, 2 insertions(+), 1 deletion(-)
->>>
->>> Is this something already fixed in upstream dtc?
->>>
->>
->> 9a1c801a1a3c ("Fix discarded const qualifiers")
->> in git://git.kernel.org/pub/scm/utils/dtc/dtc.git
->> implements a similar change.
->>
->> But the patch is not applicable:
->>
->> error: scripts/dtc/fdtput.c: does not exist in index
->> error: scripts/dtc/meson.build: does not exist in index
->>
->> The change in fdt_overlay.c is identical.
-> 
-> Yeah, we need to re-sync with the kernel again, and there's some other
-> issue to sort out. I don't recall what, just that someone else had
-> looked and it wasn't a "update, no changes required". So we should look
-> in to that I think. I don't know if gcc-15.2.x has released with a bug
-> fix for building all of our platforms or not yet:
-> https://gcc.gnu.org/bugzilla/show_bug.cgi?id=121588
-> 
 
-https://gcc.gnu.org/bugzilla/show_bug.cgi?id=121588 is marked as closed 
-and backported.
+--XKkaDoZjm/v2TjEE
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-releases/gcc-15.2.0-665-g4886dd899bb
-4886dd899bbb ("lto: Fix SegFault in ICF caused by missing body")
+On Sat, Apr 18, 2026 at 10:01:29PM +0200, Heinrich Schuchardt wrote:
+> On 4/18/26 21:49, Tom Rini wrote:
+> > On Sat, Apr 18, 2026 at 09:46:47PM +0200, Heinrich Schuchardt wrote:
+> > > On 4/18/26 21:09, Tom Rini wrote:
+> > > > On Sat, Apr 18, 2026 at 08:15:10PM +0200, Heinrich Schuchardt wrote:
+> > > >=20
+> > > > > When building with GCC 15.2 the following warning show up:
+> > > > >=20
+> > > > >       scripts/dtc/libfdt/fdt_overlay.c:422:21: warning:
+> > > > >       assignment discards =E2=80=98const=E2=80=99 qualifier from =
+pointer target type
+> > > > >       [-Wdiscarded-qualifiers]
+> > > > >         422 |                 sep =3D memchr(fixup_str, ':', fixu=
+p_len);
+> > > > >             |                     ^
+> > > > >       scripts/dtc/libfdt/fdt_overlay.c:432:21: warning:
+> > > > >       assignment discards =E2=80=98const=E2=80=99 qualifier from =
+pointer target type
+> > > > >       [-Wdiscarded-qualifiers]
+> > > > >         432 |                 sep =3D memchr(name, ':', fixup_len=
+);
+> > > > >             |                     ^
+> > > > >=20
+> > > > > Define sep as const char *.
+> > > > >=20
+> > > > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical=
+=2Ecom>
+> > > > > ---
+> > > > >    scripts/dtc/libfdt/fdt_overlay.c | 3 ++-
+> > > > >    1 file changed, 2 insertions(+), 1 deletion(-)
+> > > >=20
+> > > > Is this something already fixed in upstream dtc?
+> > > >=20
+> > >=20
+> > > 9a1c801a1a3c ("Fix discarded const qualifiers")
+> > > in git://git.kernel.org/pub/scm/utils/dtc/dtc.git
+> > > implements a similar change.
+> > >=20
+> > > But the patch is not applicable:
+> > >=20
+> > > error: scripts/dtc/fdtput.c: does not exist in index
+> > > error: scripts/dtc/meson.build: does not exist in index
+> > >=20
+> > > The change in fdt_overlay.c is identical.
+> >=20
+> > Yeah, we need to re-sync with the kernel again, and there's some other
+> > issue to sort out. I don't recall what, just that someone else had
+> > looked and it wasn't a "update, no changes required". So we should look
+> > in to that I think. I don't know if gcc-15.2.x has released with a bug
+> > fix for building all of our platforms or not yet:
+> > https://gcc.gnu.org/bugzilla/show_bug.cgi?id=3D121588
+> >=20
+>=20
+> https://gcc.gnu.org/bugzilla/show_bug.cgi?id=3D121588 is marked as closed=
+ and
+> backported.
+>=20
+> releases/gcc-15.2.0-665-g4886dd899bb
+> 4886dd899bbb ("lto: Fix SegFault in ICF caused by missing body")
+>=20
+> This is in Debian and Ubuntu since release 15.2.0-15.
+> Ubuntu 26.04 is at 15.2.0-16ubuntu1.
 
-This is in Debian and Ubuntu since release 15.2.0-15.
-Ubuntu 26.04 is at 15.2.0-16ubuntu1.
+And not in
+https://www.kernel.org/pub/tools/crosstool/files/bin/x86_64/15.2.0/ so
+not available to CI yet. So I would like to see if we can move up our
+dtc backport of the kernel backport, by the time there's new crosstools
+available.
 
-Best regards
+--=20
+Tom
 
-Heinrich
+--XKkaDoZjm/v2TjEE
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaeQLRwAKCRAr4qD1Cr/k
+CiIzAP4vu1rgORCzUTEnUfr48rsgF7pPF0iuTcL/ST+b++fXtQEA0JTev7dFp6CZ
+/XHoi3slqRxoKzeK07jTXFUW0ivIrws=
+=ADJT
+-----END PGP SIGNATURE-----
+
+--XKkaDoZjm/v2TjEE--
