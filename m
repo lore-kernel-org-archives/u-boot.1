@@ -4,106 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80166EA7195
-	for <u-boot@archiver.kernel.org>; Sun, 19 Apr 2026 10:24:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D00DDEA7194
+	for <u-boot@archiver.kernel.org>; Sun, 19 Apr 2026 10:24:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9B8283B99;
-	Sun, 19 Apr 2026 12:24:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1B0CA8425F;
+	Sun, 19 Apr 2026 12:24:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="GbsIrbMD";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="dm7Y5zL8";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Iof7hAHH";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Qfe+4nh6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F3E183E81; Sun, 19 Apr 2026 12:24:20 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id 834ED839D9; Sun, 19 Apr 2026 12:24:28 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB2F4839D9
- for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 12:24:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 42C09839D9
+ for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 12:24:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 63J1pw193982252
- for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 10:24:16 GMT
+ 63J9BFYb666626
+ for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 10:24:24 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=qcppdkim1; bh=RrgPRSqoXiDcyAGD5d2gJT
- dUKNQLdRsQ192u3JziwAk=; b=GbsIrbMDlPlJcr+JmBUGDZcgnel7/zSR23bFNN
- JRzlmBycwVYOjERc9l/Nmc+CQple0Iv+qJxKHcPvNPKt2x/JlNIOwR4sGnY1Nel0
- Fp0mIFVOBpAc/9YL1c002XzJTDFIofEaZs/nL+wFFYv/j9HSCEbljRqqFw7gAn59
- wSMm0LAP/UHT+V57cuw22tYJZ0GLhdpOca9/YI+vz38BvYpet3ZkHAEbMPUPsWz2
- yQk3LHZlvwYNw7MHgac+rPfLVWNJKSw7TAJZpulxsfMaoA+X16kI2kcjzTozqEgi
- UvFF4I7pxJAH1G3dBkpzGY3h4Ri4WS81gKhXVfrUyCztxvzg==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dm2qajbdu-1
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ 9lQlSzvzaw6yYePnqyIjySYiO3pwTvtRCF3nzG2qG9U=; b=Iof7hAHHOIdawqYA
+ CGBuvi97hT4eQ0A5OKt9ysJesh5qn48daXK3QewGO7KdgKRfFrgHhkGXdNHaF5XE
+ 5Zia1FqA4N3aYY7JFLY2PrQXTB70lvR9SANZI+S8cndVDveG2F9byKNymWHiD8uR
+ drK8/FdkHpYbspImZXW82odX/SQ+iLzHs7K5xGyEIp7aWilOx9YjiNv0fpVqOtxX
+ kfPvkBdYOvZ1ErKjeqea9b/bz/mVq3pykYSTJmYMzJZaBS81F/W3ihvxiNY+LIVS
+ miY/UPDhY3Mts29DTKDWOYoJgiYkFgrGfwq3rFZ4wUcWPYNpBfG9JT9czV0Qz3v7
+ Vgjbew==
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
+ [209.85.214.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dm21ujb3h-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 10:24:15 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-2b2e8bba2e6so28975075ad.1
- for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 03:24:15 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 10:24:24 +0000 (GMT)
+Received: by mail-pl1-f199.google.com with SMTP id
+ d9443c01a7336-2b24308165dso33089485ad.1
+ for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 03:24:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1776594255; x=1777199055; darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=RrgPRSqoXiDcyAGD5d2gJTdUKNQLdRsQ192u3JziwAk=;
- b=dm7Y5zL8vsQd8mope/5Jis4xEykw4C9nOQsDI9UQbF2kwyyfpiSwadGxHWtJy7L/jP
- X8vHLWyQuYMinro4GCVKb6VjVFgOlUPB78ZTW1gfTit02J5HPdrau5Sh6pVza0QWBicS
- KTQsza76zjLy8LjICypaeTuPHzmwfAEb7tm+y8cig3u8zBRoifkJD5CuC5vDtVDLVLQk
- /FD0PuMxUlndcx4vrUffMn4LY3O0QvaKn/EpFVvQ4iVvkr6+UYtKwrBFrk1LVp8Suaf4
- asEVUjweJ1qWa00zmbntk9JwavUnLNI4qUVyLQPCCFfZPxpOsdcgnCZ/3KEzgYG1KPaV
- 0aUQ==
+ d=oss.qualcomm.com; s=google; t=1776594264; x=1777199064; darn=lists.denx.de; 
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=9lQlSzvzaw6yYePnqyIjySYiO3pwTvtRCF3nzG2qG9U=;
+ b=Qfe+4nh6p1Ni+8gebXNRAbT2KgiPAQ1QxYioIsrWpqTK+3G7/CFoNPpJu72jts38XD
+ 1w+swN8fxdc6Jsq9iEYQvYkI8x8IEwHyYaD+1GUx624ZhjjML+KQFv9gutcARALLohfa
+ KqcC44gvxdVvPzydtxCJ2WP6PDrh4wfQd3wUZ04XLy/VIbhdG/UmZJYJKdfG+tskGTCK
+ LVEvrAgan5TG6KoSN66sYjXwRU2SqskOQgHRoujluxYBlnWdLUKGzNBdgR6hWSomw7+4
+ 5SDlSjgSlKgVj1/lekPFwx9r1fWbgEiZgCicXzbzxH3FnBo+DjJnJ3kbJFPBzuk09C4W
+ WONA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776594255; x=1777199055;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RrgPRSqoXiDcyAGD5d2gJTdUKNQLdRsQ192u3JziwAk=;
- b=ISpn8Syl6qg641wreMGdLC0P8LfVWKE8Wgogt6kEBASO6Alt5uh0thkMeS86RtmT7+
- bt93BaV4Kg2deeOnX07htYLcVqCIu+HHJM5D/EJw0UVaUyf2tg0pRCJNvQfb1fhnLE0c
- cvGoPAY7WUT1A9Xt5imU+h8uJN5oCpuiKTq7SYzNPLhLefVftRHQs8YGO5IOswicPu7F
- eqGJ9oew5vRO2rYu020MEW8h6KpukHygimh2qQUvsFI9+B5ZylsUizyNmloIJoSF46xh
- d5BcjkqdNEn/MnvuoQVtifTTZQ9GHgxKco77/Rc0hNfn7X3Pymwy009Q8R2zq0GiqZaF
- vTDw==
-X-Gm-Message-State: AOJu0YyPCqVVekhwO88xWwA0kRT0pfNqZV1nb6uumXgWtlqt3ccNpepI
- KDIgUN3ut3CpJdcfPtAmX7pEGpxn5FhEQ0xYkUgRyeH2OHYNeqsoAwpWKc6TuRDHIsnX/Mck60M
- eHyAAZW2V5gLbT7MTmZh3rNSGNwQHwNYiziHvsdaYEz+xyjFPt2Xyb45TdJsBfz6p
-X-Gm-Gg: AeBDiesNqgSbYx3tfoGeDBwoUKHJMeamCilNiVrms7nrMSlI0UARCmJpSwk46TtXFiS
- 024qCFCUqArsGg2fv/xtFL41E7EUsEm9dMcyyKCQFTZKRhhzFVRTv7DuNamTHyCzZLhrInrBBMK
- FSlrDCKw9fMGPcCy4Mcw1gJM3ukxGKTjscBbNFrp5v9K2zU0n7oM1uPS25yyKvqRrmahcHkny/s
- RcN6HhZ0WATY4JWcao9DYbujlEegHoA2MzdtmCYhuLcmDSlG97I/Mj3Mn2g8rqbXsWDTsyAjQ0m
- b4Q8W6zSVOvfzJ0zuVi/ErLtDyi/S7DcTMdCkFFbIEVvCfM5IXzYS9iw/eS9adSjE+kHkfGZ8vV
- vqJh8ub8DsSqCl/f25GKJjwgPvMHr+eF4c1gOu50N0Pv4CgRVST6T1be5kswYbxmNZB90a7ZhZ9
- btnD/cSV92+sNbXiZ/S8g7wvrKQ5GvBTzwKTAMVOB2E4bzV9NO9+Tt8KDagvpF
-X-Received: by 2002:a17:903:17cf:b0:2b0:52b7:e82 with SMTP id
- d9443c01a7336-2b5f9ed031amr97418835ad.16.1776594254936; 
- Sun, 19 Apr 2026 03:24:14 -0700 (PDT)
-X-Received: by 2002:a17:903:17cf:b0:2b0:52b7:e82 with SMTP id
- d9443c01a7336-2b5f9ed031amr97418575ad.16.1776594254401; 
- Sun, 19 Apr 2026 03:24:14 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1776594264; x=1777199064;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=9lQlSzvzaw6yYePnqyIjySYiO3pwTvtRCF3nzG2qG9U=;
+ b=kCA2+opkHBUcVLarXC0jIMrPqqaZkfh8LaXNItAvUVHX44VDOMM0Rc/71xbYnHiICK
+ DzW7VH+w6AvooYQE2wnOh9I5fC2FsuOenWsKW/rr64NrTmR2esg/wF+CMnig+JIREnOw
+ BWFYLoNbI0G12fIaOodSO1TN6CvcA1q/wqaWwR00oQ1XV52aHRMtJY3Tn4TmKToL90KL
+ y79udcPjaPtS2CCai4p6lDMiBoNaqWKfxcMbGFBxioOXfG/5MnuD+NG/N/2idMf6m4KM
+ dcWiVi2fGCnNDplDdMN4B0Q15CgW5gxBqDspGJgPiRfyaE7nfrAqK8bzXDzA6wFBRZl1
+ YmIA==
+X-Gm-Message-State: AOJu0YxhchXcYL+l9Pf2fnX6hDH64WbYvptNllDNrMz5MVXD3GtLyunA
+ MFXoJVLB5ydV3aVTuHlrdWBa/41fjHYVzhp1J1BeBORtNISXrrc3+C4+JHTvJXI2EHS3hrFl3k3
+ yPZ3q5bECsFmXvTqqz0LjlQaHBlKba92ITXD/tVwkaLkDxtJ4yrRAst/W
+X-Gm-Gg: AeBDievCqEX7T+rBxdG7i+3q4DXi1CofIrn5xkJzqHniZY9TayQb57d9KFe3QUjvpL+
+ V6snS8+6JYo24EfD6M03KGdqsQD/pZ+C6I5xNBkTb63Gr0a/c2LxSbWyMK3muI0I1IkLVcmzfEI
+ aQo7T/S6UDJgKtxiDZ6UsI6PARvubxxfDINBvPS12c2cZJ2Bs8mgWmMoJ/fYCOeY7BD4+rnLY1w
+ /N7NlHtNqBwTXHqac9IKBA1XGLIpIlepUmtiVFv7hwWl0Y8/smdXoBsIMwinmmpD692X0fIz+Li
+ sdVWM6h6vWaOFjhTzrSiJeRMgsisXMxZ/Rm9r6jyeVzoCKFXQjkPln3H0Q/i+ho7kC1Bykyvq04
+ LUOqS9GMky82AKj/01+ReG20pUTmY9wyjaeShBavPcJ4El5gzlGUNFRIpqwq+UJth6e1c4ZlyuV
+ MWnQ9RO1747d0DIzAwtxlf5GX3ccmQx/YkiNbMZXWf6bgOZtXcangn03MrlJhd
+X-Received: by 2002:a17:903:3c67:b0:2ae:8272:deb0 with SMTP id
+ d9443c01a7336-2b5f9ebd04amr105024795ad.15.1776594263628; 
+ Sun, 19 Apr 2026 03:24:23 -0700 (PDT)
+X-Received: by 2002:a17:903:3c67:b0:2ae:8272:deb0 with SMTP id
+ d9443c01a7336-2b5f9ebd04amr105024395ad.15.1776594263179; 
+ Sun, 19 Apr 2026 03:24:23 -0700 (PDT)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b5fab0caf1sm72754675ad.42.2026.04.19.03.24.06
+ d9443c01a7336-2b5fab0caf1sm72754675ad.42.2026.04.19.03.24.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Apr 2026 03:24:13 -0700 (PDT)
+ Sun, 19 Apr 2026 03:24:22 -0700 (PDT)
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Subject: [PATCH v3 0/5] Add partition type GUID support for environment
-Date: Sun, 19 Apr 2026 15:54:02 +0530
-Message-Id: <20260419-type-v3-0-ec49acd6870e@oss.qualcomm.com>
+Date: Sun, 19 Apr 2026 15:54:03 +0530
+Subject: [PATCH v3 1/5] disk: Add partition lookup by type GUID functionality
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAEOt5GkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyjHUUlJIzE
- vPSU3UzU4B8JSMDIzMDE0NL3ZLKglTdZLNEE4tEw2Qjc+MUJaDSgqLUtMwKsDHRsbW1AIu7Xtp
- WAAAA
-X-Change-ID: 20260419-type-c6a48a1c273d
+Message-Id: <20260419-type-v3-1-ec49acd6870e@oss.qualcomm.com>
+References: <20260419-type-v3-0-ec49acd6870e@oss.qualcomm.com>
+In-Reply-To: <20260419-type-v3-0-ec49acd6870e@oss.qualcomm.com>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  u-boot-qcom@groups.io
 Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
@@ -132,35 +131,35 @@ Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
  Jerome Forissier <jerome.forissier@arm.com>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1776594245; l=2671;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1776594245; l=3158;
  i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=9K90XtDd9BAJ38cEa2RGRHpXSRRJiqjVo2Skx1BAEog=;
- b=yZNEC+/YDMTxIpV3an/W2k/an4ej8OMt4xPZQTFR/jioHyxmHr5GpoVvabLqxVCkNtbMbXWAB
- 0JWDUMBhoQkDmZ3pianY8I5StSD+TMx/ZBjL+esGd4E2AuoyqTpjrr3
+ bh=K9Uz5A/dYsbW+QAAZG1CQ9/P/LbNVklDc8Xx1zR9kD8=;
+ b=8+4TdvKt4Ks+E2JLf/G7wiRzhou9dJVVh7QxRVlNtmCWOE9hbmz8Nm4SBtyEe51MXZB3UIYq2
+ HLGLz3ODMSTA4aPg/TgoKmUyKj8o6KONHemAn5Dg700eBDOQ2zCjJfC
 X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
  pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-GUID: Hio1N38ygChqCb6-TWlt1b0foROzNBR0
-X-Authority-Analysis: v=2.4 cv=KdDidwYD c=1 sm=1 tr=0 ts=69e4ad4f cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE5MDEwOCBTYWx0ZWRfXxwoOdYvX5gpa
+ 25WCfI8f86S0dS93u3KBPuntwVhb5rmcmvO3R6SDOI/laGYIZRlFFVPDodGG/KAFitC9jxvPOPk
+ WtFQLxJhllavVroV5mNfqp7Xs90/uLHb9xJsQ0/LH5tQM9z1hTo7QGNopng3Z5bw+Ovpyj7snCx
+ 6V1gLSXsYjpOujD1e5l3p9zQo94IwpuYZoDVH9GVbjBCd0Ox5NuIKPAx1PUxQTJi473mvwbSj3p
+ Ipe7aMXb5uXr3tHTb80WgSqSRaO0AbvJ8fXmHfZPGQY0TNBnmXsXmGffT1krVvVNwmYWJfXbvqZ
+ Soq2EEzz9s+WupGZ3TzpWqHzInKHSFnRQviLa22jcj1qkK1wt493QeeIYvX6cKjgqMuJfzbtL5C
+ cRhz6QK21kLkNNK/+pXKm3KwLE+wTFD43R7JycEe+W8+EVWDYeUx+UUAetFzZBwW1yaolb8RpEv
+ 2bOVCR6BoJnYzTddVgg==
+X-Proofpoint-GUID: f6QxD8EOxtNe0jLUcHN97tWipxkKNK3T
+X-Proofpoint-ORIG-GUID: f6QxD8EOxtNe0jLUcHN97tWipxkKNK3T
+X-Authority-Analysis: v=2.4 cv=WK1PmHsR c=1 sm=1 tr=0 ts=69e4ad58 cx=c_pps
+ a=JL+w9abYAAE89/QcEU+0QA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=MqmbOINMHaTB6spGDmEA:9 a=QEXdDO2ut3YA:10
- a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-ORIG-GUID: Hio1N38ygChqCb6-TWlt1b0foROzNBR0
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE5MDEwOCBTYWx0ZWRfX1hzg87GlCTBz
- 9uHsbHaygYrjtsamiq4ZfUUtWRejn673Cz8jv1aVdooB88SmcHhjegtoM1s0QVWdQKlNizEqJGD
- f99Iiynry76svNTEwcXsy9PM2HryHXTieb1PjJ2S4JKmh7d3/iQmS6nmPO5w10NdDtKvtuWbnuz
- g4D4ak+/Q7XEhcvMXXr3fXbellVrcnEBdxAS5wCvFC9iljK56lsUW9pE5u3zZTiDXDOqGs+gnvK
- 2pMfTH0cTms1zHTNhciP9ui71ud/S6MgR0cCbPom2retD8Vmy8qykortI36EPnMrk2tj+TZlTeT
- m34sN5zPRTfOVGEughTvOW0IdRJ08Xk8PQbcD/180A+XycGu7CKLqBwAEmIw+CHNqynYnDtpMnr
- 291ioxcn+R4/fnrKBk6p4ev2iLPKssZnRvJC4T9dNyQT4imUyg6+7paIBuRUa9o+jF5BO6FCYF4
- 6E35HSUgPZnZWakVSyg==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=CY1rhmfJiPzWGrbW8pEA:9 a=QEXdDO2ut3YA:10
+ a=324X-CrmTo6CU4MGRt3R:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-04-19_03,2026-04-17_04,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 spamscore=0 priorityscore=1501 malwarescore=0
- suspectscore=0 adultscore=0 phishscore=0 bulkscore=0 lowpriorityscore=0
+ lowpriorityscore=0 adultscore=0 spamscore=0 malwarescore=0 bulkscore=0
+ suspectscore=0 phishscore=0 clxscore=1015 priorityscore=1501 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2604070000 definitions=main-2604190108
 X-BeenThere: u-boot@lists.denx.de
@@ -179,57 +178,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds support for locating partitions using GPT partition
-type GUID instead of unique partition UUID. This enables the saveenv
-command to work with partitions identified by their type rather than
-unique identifiers, providing flexibility for systems where partition
-UUIDs may vary across devices but types remain constant.
-
-Patch 1 adds part_get_info_by_type_guid() function support
-Patch 2 adds scsi_get_blk_by_type_guid() function support
-Patch 3 adds support for partition type GUID based environment
-Patch 4 enables partition type GUID configs for QCM6490 and QCS615
-Patch 5 adds unit test for the partition type GUID lookup functionality
+Introduce part_get_info_by_type_guid() function to enable partition
+lookup using partition type GUID. This complements the existing UUID
+lookup functionality and provides more flexible partition discovery
+mechanisms.
 
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
 Changes in v3:
-- Addressed minor corrections in Patch 1 in part_get_info_by_type_guid function
-- Refactor env_scsi_get_part and env_scsi_load functions based
-  on the choice configs in Patch 3
-- Add unit test for the partition type GUID lookup functionality in Patch 5
-- Link to v2: https://lore.kernel.org/u-boot/20260109070912.4106466-1-balaji.selvanathan@oss.qualcomm.com/
+- Addressed minor corrections in part_get_info_by_type_guid function
 
 Changes in v2:
-- Compute blk_find_max_devnum(UCLASS_SCSI) only once in scsi_get_blk_by_type_guid()
-- Introduce a Kconfig choice config to select between UUID-based
-and type GUID-based partition lookup methods.
-- Enable above new config in qcom_qcs615_defconfig and qcm6490_defconfig
-- Link to v1: https://lore.kernel.org/u-boot/20260108064947.3237361-1-balaji.selvanathan@oss.qualcomm.com/
-
+- No changes
 ---
-Balaji Selvanathan (5):
-      disk: Add partition lookup by type GUID functionality
-      scsi: Add partition lookup by type GUID for SCSI devices
-      env: scsi: Add support for partition type GUID based environment
-      configs: Enable partition type GUID for QCM6490 and QCS615 boards
-      test: dm: Add partition type GUID lookup test
+ disk/part.c    | 37 +++++++++++++++++++++++++++++++++++++
+ include/part.h | 21 +++++++++++++++++++++
+ 2 files changed, 58 insertions(+)
 
- configs/qcm6490_defconfig     |  5 +++++
- configs/qcom_qcs615_defconfig |  5 +++++
- disk/part.c                   | 37 +++++++++++++++++++++++++++++++
- drivers/scsi/scsi-uclass.c    | 28 ++++++++++++++++++++++--
- env/Kconfig                   | 51 ++++++++++++++++++++++++++++++++++++-------
- env/scsi.c                    | 45 +++++++++++++++++++++++---------------
- include/part.h                | 21 ++++++++++++++++++
- include/scsi.h                | 11 ++++++++++
- test/dm/part.c                | 48 ++++++++++++++++++++++++++++++++++++++++
- 9 files changed, 223 insertions(+), 28 deletions(-)
----
-base-commit: e3405917a1806971d9e72a94186b299f05581e1a
-change-id: 20260419-type-c6a48a1c273d
+diff --git a/disk/part.c b/disk/part.c
+index 4923dc44593..4cb3204ac6e 100644
+--- a/disk/part.c
++++ b/disk/part.c
+@@ -731,6 +731,43 @@ int part_get_info_by_uuid(struct blk_desc *desc, const char *uuid,
+ 	return -ENOENT;
+ }
+ 
++int part_get_info_by_type_guid(struct blk_desc *desc, const char *type_guid,
++			       struct disk_partition *info)
++{
++	struct part_driver *part_drv;
++	int ret;
++	int i;
++
++	if (!CONFIG_IS_ENABLED(PARTITION_TYPE_GUID))
++		return -ENOENT;
++
++	part_drv = part_driver_lookup_type(desc);
++	if (!part_drv)
++		return -ENOENT;
++
++	for (i = 1; i <= part_drv->max_entries; i++) {
++		ret = part_driver_get_info(part_drv, desc, i, info);
++		if (ret) {
++			/* -ENOSYS means no ->get_info method. */
++			if (ret == -ENOSYS)
++				return ret;
++			/*
++			 * Partition with this index can't be obtained, but
++			 * further partitions might be, so keep checking.
++			 */
++			continue;
++		}
++
++		if (!strncasecmp(type_guid, disk_partition_type_guid(info),
++				 UUID_STR_LEN)) {
++			/* matched */
++			return i;
++		}
++	}
++
++	return -ENOENT;
++}
++
+ /**
+  * Get partition info from device number and partition name.
+  *
+diff --git a/include/part.h b/include/part.h
+index 15daacd7faa..32614bd085b 100644
+--- a/include/part.h
++++ b/include/part.h
+@@ -327,6 +327,20 @@ int part_get_info_by_name(struct blk_desc *desc, const char *name,
+ int part_get_info_by_uuid(struct blk_desc *desc, const char *uuid,
+ 			  struct disk_partition *info);
+ 
++/**
++ * part_get_info_by_type_guid() - Search for a partition by type GUID
++ *                                among all available registered partitions
++ *
++ * @desc:	block device descriptor
++ * @type_guid:	the specified partition type GUID
++ * @info:	the disk partition info
++ *
++ * Return: the partition number on match (starting on 1), -ENOENT on no match,
++ * otherwise error
++ */
++int part_get_info_by_type_guid(struct blk_desc *desc, const char *type_guid,
++			       struct disk_partition *info);
++
+ /**
+  * part_get_info_by_dev_and_name_or_num() - Get partition info from dev number
+  *					    and part name, or dev number and
+@@ -404,6 +418,13 @@ static inline int part_get_info_by_uuid(struct blk_desc *desc, const char *uuid,
+ 	return -ENOENT;
+ }
+ 
++static inline int part_get_info_by_type_guid(struct blk_desc *desc,
++					     const char *type_guid,
++					     struct disk_partition *info)
++{
++	return -ENOENT;
++}
++
+ static inline int
+ part_get_info_by_dev_and_name_or_num(const char *dev_iface,
+ 				     const char *dev_part_str,
 
-Best regards,
 -- 
-Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+2.34.1
 
