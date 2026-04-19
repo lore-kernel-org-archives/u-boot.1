@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42EC9EA7186
-	for <u-boot@archiver.kernel.org>; Sun, 19 Apr 2026 03:52:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A01CEA7186
+	for <u-boot@archiver.kernel.org>; Sun, 19 Apr 2026 03:53:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EFCD83B99;
-	Sun, 19 Apr 2026 05:52:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 12B50842B7;
+	Sun, 19 Apr 2026 05:53:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GsJ7FwtS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PID31q0y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BC9883B99; Sun, 19 Apr 2026 05:52:48 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 368E2842B7; Sun, 19 Apr 2026 05:52:57 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A9D7839D9
- for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 05:52:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 47705842C9
+ for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 05:52:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-671c24f23b1so3088565a12.0
- for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 20:52:46 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776570766; cv=none;
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-b941762394aso259443466b.1
+ for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 20:52:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776570774; cv=none;
  d=google.com; s=arc-20240605;
- b=ZkwZhldLwYSNvhn5oCQ6r8AmSEp7tpcdZak2kFBkmM8x0gCAGhwHB1TvxsrdlfTnnZ
- 59R3VYLNSLp/6Gs0Pfo6QVK2ZeSErdGDr5RwhXGTkQxCodpfnY8flXugcbNs+UhJHQz1
- LFD+D6dCGGpBwyMdiuPZXu16oa2DxUBm5o6du4BiVax+ca2Ig+IqHehtQq6DTBiyrpBY
- kzcF/oBBr3+jtFT4h+sl8rjnvA0nsrdsWqLOPRq5gSwwmnc+sVa5dVHUpcgNeLl26R4C
- vK+AwG/Dv1QpdubzELop6f9bHG0WnwktfMC3HvkmR0O2WiIsDv9ZR0OtuoB8q6GVCxl6
- yr0w==
+ b=T4Ty7SyHaA8U93HSsvP374xjbJSdsW5bTxfsAsAL9gA5gtuAqo2//klMd+1fJBNMlr
+ +OGfimYwq+lBdenWS4pGuP8BuNAig7pXki1+4FzeDg9Tk2QUy+htnRjuqyvimMNK1L7/
+ BJMVjnb7CChXoa0cfS53MVJFEy4PnQHFuVSIgJSAr1vG6ufF+IhvxgbzfjNjU6CDQGQg
+ B+QtHfYDy4JzH06GZJFU5XI3pe7FTueIZ1t3xRSURir0v3Nqv+n39I42P0W5FiFcABRi
+ fPqAKlrBsVVeQnnt39AqjjOBFj2DhyGx9WQI50Nk1j5rTmtfF/8L1BFU1qatPt/i5die
+ 8pbA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=FBTr5W+drS1OqOKCizRw26vkYTnuevgYPrJKgPL8m7o=;
- fh=mGCDOPabMRqyfWf0ItU0NZ/rBQDBRnekra9YVlArh6o=;
- b=P4RF6/ypLSeyM2/iN3VMfYBO5D9zzFmLmo1rfraIqte/CNILXZlBox0lDxDDgstq2Q
- fbSCf3Zvoxr0j626qndH3cEgwfw9WdKSGmeHFudJu8OgI9J5BJcZKZkfup679wpqZqcR
- E0DGK+hPfzbLY+yuer/GAvtQpvRUDcW/bByeS/QaWGiuYoQ2I3geSqHccWorwZTWTuib
- PEmdBPQiF6khTrbYwr4e1Hhhzu0zvS3aF2CvidtULtMSpTl9JzoCw29hZPNi/6qVeEA2
- 85fs4sc56K3GOnjtoKl24Sfl+EHcKl3IFladdpcEZ/GWOgQGTOfl/jvxf3hWcqbhQWB1
- A7bQ==; darn=lists.denx.de
+ bh=mRKimyzZxL/v+HygKoETyRIvBrfROyxzCEp9uLhrrBw=;
+ fh=EEhmfBUJMOmBzICnFyzxhvsS+db8LkKxz2AAf+ZajXE=;
+ b=EUIpzj+T1WB7uLAUGs0a8FJrTl1L8FHe9o1+bE7LY1k2iQymsCvTYLMWkRF3fnMEBB
+ 01EAhQM8dgk7wlULIu00S07m9CNRdToIfY4fhMjFzdS5yOQMGYPnOcS7D5/ul7WskEpA
+ BP2eY9Ot8hmsaZG+wH5K6KCjKBGKzxvw0gvqufSg1RGzkavqIBfD3qGtHb3yDWWB5dN7
+ WDAL8iWcIgLpUH0u04ee95trqhRqQmfa/vLAAyPQ5jmuQYQuOX29DAlscLJglCgqna/b
+ wlDy1RWVsV7G5Hl+ZoLrgLPQ9juAWpnuFktnkHpBdC5CUdg4DuCis5CKTZLMVeZ6+Et0
+ PJGQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776570766; x=1777175566; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776570774; x=1777175574; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FBTr5W+drS1OqOKCizRw26vkYTnuevgYPrJKgPL8m7o=;
- b=GsJ7FwtSwbRjebHonLsdI3KpjwVCqcYlVtKBEfc8J5D8EP/sKajMaxA0Qt2zkylqRl
- RVU/Lm2Dc/jBX2WFeZXeOVJkvXtPlx6Ag1D3Wkxz9XruYOSrrSPdt5a2xkUQd02Jn05Z
- RyT8YczPN9pOJHUZD7hWSt5AxCugQ0fh4vQO8=
+ bh=mRKimyzZxL/v+HygKoETyRIvBrfROyxzCEp9uLhrrBw=;
+ b=PID31q0yUoApKwOqS0YtOxbE511cg7oUSPtuNlqaY2lPC43sxpyHtDK0eDb+rzC07a
+ qg416neH18dwwNohsICH+lDrz1YBVRGiJEQ8xSexliZ/Or1Rn0ssClTNXQj1VgW/lrBE
+ H8twrf0zH9h5rAKIpZVZ9GgFMc3qPMt/EOVP8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776570766; x=1777175566;
+ d=1e100.net; s=20251104; t=1776570774; x=1777175574;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FBTr5W+drS1OqOKCizRw26vkYTnuevgYPrJKgPL8m7o=;
- b=YeMjqaHIO8OVJ7tDRCqIvcl/mJtN90OSUCmKdWAS7EpmVOz6ZCaKwfulaibsgG+hJ1
- mFo0kml+wgzcogQtLfkEMIx4g1E+LdvmSOHAMxGHO/tbUZcLny7eGEqyVTdBKTC9VJqn
- wSQG/F2b0DYuLZoiUXP/y6NWRdUh3hbLx3kNpIGpYTbNspq3a3tsG16LS61GVyaDd4Jg
- NLuWgdPrSXb58CHnbyAbY6H9cxMBQp+yH6SZ6+f5h++zpQMZu6x/o+mpHDd8e5wFkGVg
- PdihlGNAE4cUU+WvxL1g+FsGQA5qNE7sLBajNa/Fq7j1SRHmmzlFhv/Ko2QtTFeAW9Hr
- z5eg==
+ bh=mRKimyzZxL/v+HygKoETyRIvBrfROyxzCEp9uLhrrBw=;
+ b=oG7YmSyYnWB8eDkbV+ka+T+nk600P6NI6rVViLPcftPkJwi4IXK+/x51JTbCT4alOf
+ JUNVwv4JYjPWX/imB2svxx0vfM3VoZgEW9DDPTPBS7JijqV+W97lNoUut+JWvOzX0NVr
+ 9mvSdwkGaI5SEUJ+M67nt0NccoJlmnPNuetpsiAsntaNsS5P63ibXOVcsbYgbN6YKGj9
+ EZaJWsCM+F0kkmcywTWPQctJOESHGdJl7KqHQU5DMPuzL/beTEj6qLXMBQWelLpZq7W/
+ m73KF+c/5fNwvTseFLYCd8MqPlGZ4/nke/bMRn+cJHDYMSAAhCmLCS7uhxnb+CgZZ832
+ +Qfw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/duG5bJWGDf/GzUW3qd56HxJoGaoMlfLEHccL5cWZWiMwKQzgFbA+E9DBplTgRrju1emA56mY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzh47tcy+mbhe/3dWpSwpL1i6JGD1zGrk/2hiI50YgcwvRwfWuq
- HqrlwaHNKVspbK2C3xMq0GNRq+z8tPqTFUXrkLQ1UUuastlIOV+iafR9/HD9TwfFe0+P0sZ0MsH
- GZyVqfQISyYZTyNN9MfH4UIdIBNFNQ2XNrkCYHWjy
-X-Gm-Gg: AeBDievUt6pdwZlyC0dTiHmexdzZWmTINnVKylyHpJjbvsPThe+V2cUHhCBjqG60Cu1
- ewDDPjn0V+gf6xRfzcQWX7X5gsuPX19bZxScl2Sabp91gRkX6jrIfAJe5B1ZOFU2wWoPrSJFLfn
- gQh5RjdPCFkGfjzFSipmciJpsBKGEA7iP0ekgLtQCWV12GDohI2Ros68bwODAhB2wLcLMcqF7I1
- 3LMJcRDeahoekhgt1Rb/R2ZiTK+I3zDjeO81DSa+O3oA33kp3C5nsPuHi6B4OYLr6oH20Q5Kmq3
- oxi7EWgEZ+PdviQIimCz
-X-Received: by 2002:a17:907:26cc:b0:b9c:6ef1:ed13 with SMTP id
- a640c23a62f3a-ba41a0474c8mr389707666b.31.1776570765535; Sat, 18 Apr 2026
- 20:52:45 -0700 (PDT)
+ AFNElJ/4IXKpOizKmeYvyzcunrYIXzbZGHBoki5yh1WjaIIq75KZPhWV6BebTQaYMRsmYYazy1OV18Y=@lists.denx.de
+X-Gm-Message-State: AOJu0YyF8dMQ5co1VhzRQiw4VLt7yMQ2lNMELX2JXV7byLqouD16ZWop
+ vIjTGiC8JFtsZ40rTq0Ho+XZo6HlsnOSL+LEV9cZuRn+GcYt4LZdSEJ5IAUv43spv81LwOGNYy3
+ YrL660aYfpXl5AOuN51AyiG1yo0b1hb950K3Yi6lq
+X-Gm-Gg: AeBDieu7UJusQ4ej/W9p0WOF4NnASkk0f4EW6dse5tFgzBmF6M+koOmhkEiZch1Nx53
+ d3kwKLgqv9Nmx0PhjFwXCQ/fXosijC/DovlXlIEcWrYVeMPkvLOqf2l/9h0sgbv1ol+ImRncB2I
+ v3aWkK6s63zW3+3A0zxRPI2JmJTEjzvnfwrIDQSu/RWuXYD0ds/1Xa7Rtf/swP/3kiTe1kbSEmh
+ ndZRHjjzbyYdb6xGGRDwJuwFjm9ptEzq9A8H1AA32/yMl4258hzvnXR6D0x+NXDtzauCJhLgdGu
+ B7DPdx/6OX0kYi69tF1c
+X-Received: by 2002:a17:907:934c:b0:b9d:ecc5:5981 with SMTP id
+ a640c23a62f3a-ba418e86337mr398399366b.15.1776570773625; Sat, 18 Apr 2026
+ 20:52:53 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260413203555.1990337-1-rs@ti.com>
- <20260413203555.1990337-5-rs@ti.com>
-In-Reply-To: <20260413203555.1990337-5-rs@ti.com>
+ <20260413203555.1990337-6-rs@ti.com>
+In-Reply-To: <20260413203555.1990337-6-rs@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 19 Apr 2026 15:52:30 +1200
-X-Gm-Features: AQROBzAdeKtIfskbScsz3tY_WAMfcAfYVsh2V_2LSrX2CCV40TohNV4tSHGPQPc
-Message-ID: <CAFLszThZrWV0OOB1_fuwi0X=ipiYoJ6G9yjdkUCeN_puimnE+Q@mail.gmail.com>
-Subject: Re: [PATCHv3 4/6] efi_selftest_memory: check for duplicates first
+Date: Sun, 19 Apr 2026 15:52:36 +1200
+X-Gm-Features: AQROBzCTPCK6LROPM9thJsTabRR8B0OF4uVP9fuloIJMwEz9EleQ-4JVQrzfJiw
+Message-ID: <CAFLszTj6orczSi0FBvoZVZJuuxMnPYtsjEkMHgK4rG7kki_6Qw@mail.gmail.com>
+Subject: Re: [PATCHv3 5/6] efi_mem_sort: use list_for_each_entry_safe instead
 To: rs@ti.com
 Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
  Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
@@ -114,16 +114,17 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2026-04-13T20:35:52, Randolph Sapp <rs@ti.com> wrote:
-> efi_selftest_memory: check for duplicates first
+> efi_mem_sort: use list_for_each_entry_safe instead
 >
-> Check for duplicate memory mappings before reporting any incorrect
-> attributes. Could be that second allocation has the correct type while
-> the first doesn't. Knowing there is a duplicate in this scenario is
-> more helpful than just reporting the first mismatch.
+> Use list_for_each_entry_safe and comparisons against the current and
+> next efi_mem_desc. This reduces the computation required for merging
+> regions, prevents unnecessary additional iterations of the list, and
+> requires less temporary values.
 >
 > Signed-off-by: Randolph Sapp <rs@ti.com>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 >
-> lib/efi_selftest/efi_selftest_memory.c | 21 ++++++++++-----------
->  1 file changed, 10 insertions(+), 11 deletions(-)
+> lib/efi_loader/efi_memory.c | 48 ++++++++++++++++-----------------------------
+>  1 file changed, 17 insertions(+), 31 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
