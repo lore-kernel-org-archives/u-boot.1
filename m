@@ -4,91 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D3D7F99C95
-	for <u-boot@archiver.kernel.org>; Sun, 19 Apr 2026 03:06:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AD1BEA7188
+	for <u-boot@archiver.kernel.org>; Sun, 19 Apr 2026 03:52:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58B7E83B99;
-	Sun, 19 Apr 2026 05:06:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7A40183B99;
+	Sun, 19 Apr 2026 05:52:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VRWDJwJz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K5iQKMz9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B883A83BC8; Sun, 19 Apr 2026 05:06:19 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 634FE83BC8; Sun, 19 Apr 2026 05:52:22 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D83CE839D9
- for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 05:06:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B4A2839D9
+ for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 05:52:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4887f49ec5aso24733075e9.1
- for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 20:06:16 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-ba699316b42so46120166b.3
+ for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 20:52:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776570740; cv=none;
+ d=google.com; s=arc-20240605;
+ b=NAGSyKjVEl3e9OuFXXKtB8NmsbyMZqT5NsGP3+isdh2oesz42k0697gls1536BtF3a
+ kJZEihlS2SOBc3GZVpIHihKzfPgLaSsCllqejhIlPjXhRCtIY5umyfaIasUQ3ca7C7oe
+ s5EVob+z1O2C1to6ktW8cYSDylVNxDFAG6wfX5GXpZZlSgME6vpHOQlSlCukKYvZHAES
+ 0Wg9E+YPdOu7XkzKwOcRs9OtjYUpKeOrHTiKvYV7Ve/lc+F2ZiiB0yPotb0WKYADw9if
+ eARY29CZSSyJzKmulAVmKgVAk383MOYsiiIKO4mD5P6VumbUMCg5A2COCSu/6ZYPp8bj
+ x/pw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=5nlBR4SVNRdOMZBkZej1xo7bJ6p9cAkwBWBFIeWI9YY=;
+ fh=7mWJvHRO8nLQEZ6tApC8Xy+dl+nkSNd90hlylQleSmw=;
+ b=IoPeLZed0TRtkin8LSp6K9c1ywFutteF0ap4tj37Eiz1EMPdNgQ8zfP5VZBOk6DQ3w
+ eidiabr/TO0Iy8dJ9OSTA2X6FyXDkTQSEs/uv0FKG9mSBLM15mq/fqRbHKTF5JbeR6sU
+ U7wQjpLtzpNE+2JcTEcjVgdL+Ey51wNbsEhyVuyJ3ZmrHP8aTW2Tx8I7kNQG+DyMiTID
+ qjui7we4vU06dOgmLbNmZ/5ZLoCmh7nxCnOwXtnGsgip5gCD5o7uf9ZVcWQ+lhB9CWoU
+ 1eKKVrAuReoPZq2esgHZE0PMmlJ8WnrPDR5aaJFzKXDKKDF89AoAvpinBiQVb7RxYlI/
+ Lf7Q==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1776567976; x=1777172776; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=cy1e7Af/Lob58Ex9M8m/N6gOZ50YnYsk/W0/q+0FcFI=;
- b=VRWDJwJzCCajRZSskA3c4HJRcUY/VWNS4qZ++jFOiUEEsi8T+urKw8ZEhsBXOAQj4G
- bEZhf4gqaffR9Dcym+YBxCssdz7r6OudIoFCZB+PR60tbld/Qna7KnaXJ7hmVNR4d83V
- K9RTd/3idXOnNeMTQ6DbydYeSj48S7I7SG3UJnj6qVGQFJkTTZOMxpLixUtyJWGFDY8r
- NIje5kKuJsNPDWtuWHQkU0t899kF9Q4V0idqd8lSXJDVrY6yxkaPwgRAVgcguYlnF1Ns
- jCldzVDDdTOH0dsPL7PNnuzeYRSI7OgrS1k8vCoQ4peT/Mgg/amxdP2PYwf3zWTHQJ4s
- 0MAQ==
+ d=chromium.org; s=google; t=1776570740; x=1777175540; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=5nlBR4SVNRdOMZBkZej1xo7bJ6p9cAkwBWBFIeWI9YY=;
+ b=K5iQKMz9rWWAa0bwYQoODKn1qzBTJfT2lQwqiEzb6983470JAUpkWddyaG6/gJjdbF
+ CefZLWLSBfXghLNdxjA1KofgfrHJhAQFqFINu96/Dd2mYB+Ybq9AFiwlhH/PqIQecqsQ
+ 7Oovl76ChKAAQneKkjpI0x505h/rs7b5/RvN8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776567976; x=1777172776;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1776570740; x=1777175540;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cy1e7Af/Lob58Ex9M8m/N6gOZ50YnYsk/W0/q+0FcFI=;
- b=d2aSRXdkQobO5voNDSma9PTENvojlc19JdH2vVUKplu49NKK3ux2bj5duD115+MgUY
- Du4mra2n2ChWV3AmMRzQjLlPoHpvvdRfPy6ae0CgYDRksou7lZ+oUUCKBNtTdej86feC
- d1kDtv3shZT/UM9yf1Ul0GMYijml88uXhvTHAK/5Pbj1/aJBOfz7hsSYXyFEOPoC3jAq
- K2daOYr71JpfNLe5NK0pn3Csyjp+Xrr1SIAhc3TT/q92i6Xycjqv0LZDIAKCNukDLDOk
- CHWQsmZ5NQEQOoC3pRUMwDzx99i0BJlPfSby8DHym44S+Fl0tK18OJOnnG490bAdQh3+
- rTCQ==
+ bh=5nlBR4SVNRdOMZBkZej1xo7bJ6p9cAkwBWBFIeWI9YY=;
+ b=A76uQr0++OOE/dtmub0XJjDBt+mmS1xdNoVUnYSmiqkg75uR5zFe2KhF0dWgX3imYg
+ GdvFqVXGhT5qo4JxUGQFjlLsnerM6w3dL8qRVpnJbz5tVqDh1Qa8eV0/VUXlpvtisJKO
+ nYhtItf9a9ScYMDo4ivs0W9bXPB77Ae3k5Vgrefz2WmenAVtzyYH3cVxCn6JrRnp+Di1
+ 5nfCwmo47xbngBcKmgRvos7936VrpMw8ub18bl4g/bY4u5fsLPFLKcueP6Sv+m0330uZ
+ K8+QF+My75e6rtn24quntx7GIaF+APh4dd5uoUSRTb9vWVftGl1Y5JLmewLM2SkYPRis
+ fpRg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9JfmOL5x6G4qIkf2984V0IuszaoR11mie8y3D+R11ZDjMJsOD48eAVtAo67p43DnVRNXIL1NE=@lists.denx.de
-X-Gm-Message-State: AOJu0YygLnUIhf3GM1zlgwHj0IbAgVDUCByepsel42Wo/CFePPcNdyIO
- r0GMkgP8QW6jcXg5Eim6pqnhUfvhHkUSl1qF7aFS6KpgoU15q6QtrdJiVxEngkOUpAU=
-X-Gm-Gg: AeBDievAut6CZUThknUvXQYHMZQowmFus0UbwSx0w9bVYsktGMazRcWwkCM5gfOhyQH
- zH0cbXe7PVGGB0LkCoxdqyGj2mhhWPPRE3LzHpK+ZwHX3tHbWVuZuPGg06c+HGxSuQOAehQUoMV
- DHirDYuxDm1il0Vr3mwZ1O3l782IpchqWQ765o5pkuMVK2Ag3jCq87pwenLL62GZdgHBLhQ8NRx
- TsPfQYi08hdbVqOgBn/FjUCYmL2q35bmeHUgaKx0Jt0RLp4HW5c25ONfPqhsK2ArHeVl5leYA58
- TAnq4nxgRx+VK0yawzZ3ADYmNtmqybHxfPNC8XAjhiyy5RSr01VAM027P+z9IXh19D+p9q3xGum
- m+K2QcEnPQp8h6q1GYFsP69LdZj+Oxo4J35hZ9QN0qmCU8InQ4QcsntHLFeio1j9V/gcqumkxXs
- q5O38YwTDlfODYNmtrEchMCSs2RQd0xximZzlYdDq4IGMONjzRKn8NxRfzlLiV7m9AMUq3rkmwW
- qptssS8Dhb6jlk=
-X-Received: by 2002:a05:600c:4fc7:b0:488:dbcb:ca08 with SMTP id
- 5b1f17b1804b1-488fb787a62mr117463845e9.30.1776567976222; 
- Sat, 18 Apr 2026 20:06:16 -0700 (PDT)
-Received: from lion.tail248178.ts.net (p4fc3dd86.dip0.t-ipconnect.de.
- [79.195.221.134]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-488fb78becdsm81569905e9.5.2026.04.18.20.06.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 18 Apr 2026 20:06:15 -0700 (PDT)
-From: Casey Connolly <casey.connolly@linaro.org>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Cc: Sumit Garg <sumit.garg@kernel.org>, neil.armstrong@linaro.org,
- Ajit Singh <blfizzyy@gmail.com>,
- Antony Kurniawan Soemardi <linux@smankusors.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Luca Weiss <luca.weiss@fairphone.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Casey Connolly <casey.connolly@linaro.org>
-Subject: [PULL] Please pull casey/qcom-main-13Apr2026
-Date: Sun, 19 Apr 2026 05:03:16 +0200
-Message-ID: <20260419030602.2470577-1-casey.connolly@linaro.org>
-X-Mailer: git-send-email 2.51.0
+ AFNElJ9oPxMHA1RlNi6V65AQMnIlof4SysYWqIk917f0hiQGlZDBLWkvMzEPELqhpe4tqrydD+5f/lE=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywus/IEiIDMFRJ3/zF84FkzbofrM3WvTQD0nG+8xdeLLOca0Z1h
+ eEqSF0kA/kxZx6bP1Yr7wVdDANF2YGVGV6JNga2Yoyec25jOMysjpP9AtmRxSp41WfOxtiduhcC
+ 30xyfB8SsZu8J3MbKXtfNcCcWIS21Fblg+Y+nE8aU
+X-Gm-Gg: AeBDieupQnLwNSvROAF+lkMz1SAmtHAuwMoW+I3ZnkujdV/7+FNaJLL1lr0jAOuYvq7
+ bDtoIyN+Tgnqu58oUxSlwYRUkOtS2mkeXNKp4YUp0WTbEpR7jbSCFzygjsFQlpPr5O0fSyb0jmK
+ ZAp+qQu/Zhkmzo7n2QEhAcKjzaJ/0gP5v9VFhGLd1+kPnBTLKG/QopnOxoCfnFn7TO6RJF4ZXVK
+ Hldl5d9xwLDuEGep/GHg2ae8DL16uXHZkm11j0feBnwDHOuIxC+tuIymL5KBqdONRIiPz23f8+E
+ RUbal6vMyLu1vHpLBFLM
+X-Received: by 2002:a17:907:9446:b0:ba5:a3a0:4a5f with SMTP id
+ a640c23a62f3a-ba5a3a05c33mr170227066b.8.1776570739768; Sat, 18 Apr 2026
+ 20:52:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260413203555.1990337-1-rs@ti.com>
+ <20260413203555.1990337-2-rs@ti.com>
+In-Reply-To: <20260413203555.1990337-2-rs@ti.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 19 Apr 2026 15:52:08 +1200
+X-Gm-Features: AQROBzD7axnoUWbl3hFdVqHCBcn-mfxQlj8eZQzDTJJRzn7qUeZsX6z8HG9lrKQ
+Message-ID: <CAFLszTgr17fYy=21eX7rZzV_ihcc+ZDssRsWtF+LbH-jtCUCaw@mail.gmail.com>
+Subject: Re: [PATCHv3 1/6] lmb: allocation flags macro documentation
+To: rs@ti.com
+Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
+ Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
+ afd@ti.com, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,130 +113,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Randolph,
 
-Various Qualcomm additions this cycle:
-* USB superspeed support for 1 platform
-* Initial support for the Milos platform and the Fairphone Gen 6 (chainloaded from ABL)
-* Improved support for booting with OP-TEE on supported platforms
-* Initial basic power domain support
+On 2026-04-13T20:35:52, Randolph Sapp <rs@ti.com> wrote:
+> lmb: allocation flags macro documentation
+>
+> Update the allocation flags inline documentation to follow the kernel
+> object like macro documentation.
+>
+> Signed-off-by: Randolph Sapp <rs@ti.com>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>
+> include/lmb.h | 30 +++++++++++++++++++++++++-----
+>  1 file changed, 25 insertions(+), 5 deletions(-)
 
-Notably there is a generic change to the device core, missing power
-domains will no longer cause a device to fail probe and instead will
-just print a warning. This shouldn't affect any existing platforms.
+> diff --git a/include/lmb.h b/include/lmb.h
+> @@ -19,16 +19,36 @@
+> + * LMB Memory region attribute flag to indicate that there is no special
+> + * requests for this region. Normally used as a placeholder value.
 
-Kind regards,
+there are no special requests
 
-The following changes since commit e2fa3e570f83ab0f9ce667ddaec9dc738bcf05b9:
-
-  Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-sh (2026-04-09 16:34:38 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git casey/qcom-main-13Apr2026
-
-for you to fetch changes up to 7f531b27688d94f4ba8663b63bc3b5f82f83c97f:
-
-  qcom_defconfig: Disable EFI_HAVE_RUNTIME_RESET in qcom_defconfig (2026-04-13 15:06:46 +0200)
-
-----------------------------------------------------------------
-Ajit Singh (1):
-      clk: qcom: sc7280: add missing SDCC1 clocks
-
-Antony Kurniawan Soemardi (1):
-      mach-snapdragon: allocate memory for DT overlays
-
-Aswin Murugan (6):
-      pinctrl: qcom: Add pingroup definitions for SC7280
-      power-domain: Add warning when power-domain driver is missing
-      mach-snapdragon: Remove RPMH power domain DT fixup code
-      qcom_defconfig: Add QCOM_RPMH_POWER_DOMAIN config
-      efi_loader: make EFI_HAVE_RUNTIME_RESET a user-selectable option
-      qcom_defconfig: Disable EFI_HAVE_RUNTIME_RESET in qcom_defconfig
-
-Balaji Selvanathan (8):
-      power-domain: Add QCOM RPMH Power Domain Driver Support
-      drivers: clk: qcom: sc7280: Add USB3 PHY pipe clock
-      drivers: usb: dwc3: Add delay after core soft reset
-      drivers: phy: qcom: Add QMP USB3-DP Combo PHY driver
-      arch: arm: mach-snapdragon: Auto-detect USB SSPHY driver support
-      configs: qcm6490: Enable super-speed USB support
-      MAINTAINERS: Add entry for Qualcomm PHY drivers
-      dts: qcs6490-rb3gen2: Remove USB controller dr_mode override
-
-Luca Weiss (7):
-      drivers: pinctrl: Add Qualcomm Milos TLMM driver
-      clk/qcom: Add Milos clock driver
-      phy: qcom: Add Milos to QMP UFS PHY driver
-      regulator: qcom-rpmh-regulator: add support for PM7550 regulators
-      gpio: qcom: Support GPIOs on PM7550 PMIC
-      qcom_defconfig: Enable Milos clock driver
-      board/qualcomm: add debug config fragment for Milos
-
-Sumit Garg (3):
-      tee: optee: Export OP-TEE message UID check API
-      mach-snapdragon: of_fixup: Add OP-TEE DT fixup support
-      board/qualcomm: Introduce TF-A and OP-TEE config fragment
-
-Varadarajan Narayanan (5):
-      arm: psci: Add API to check for support of specific PSCI function
-      drivers: sysreset: Add sysreset op that can take arguments
-      sysreset: Implement PSCI based reset to EDL mode for QCOM SoCs
-      cmd: boot: Add '-edl' option to reset command documentation
-      qcom_defconfig: enable psci based sysreset
-
- MAINTAINERS                                   |   1 +
- arch/arm/cpu/armv8/fwcall.c                   |  15 +
- arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi      |   4 -
- arch/arm/include/asm/system.h                 |   1 +
- arch/arm/mach-snapdragon/board.c              |   5 +
- arch/arm/mach-snapdragon/of_fixup.c           | 178 +++++--
- board/qualcomm/debug-milos.config             |   5 +
- board/qualcomm/tfa-optee.config               |   4 +
- cmd/boot.c                                    |   3 +
- configs/qcm6490_defconfig                     |   1 +
- configs/qcom_defconfig                        |   5 +
- doc/usage/cmd/reset.rst                       |   2 +
- drivers/clk/qcom/Kconfig                      |   8 +
- drivers/clk/qcom/Makefile                     |   1 +
- drivers/clk/qcom/clock-milos.c                | 196 ++++++++
- drivers/clk/qcom/clock-sc7280.c               |   3 +
- drivers/firmware/psci.c                       |   4 +
- drivers/gpio/qcom_spmi_gpio.c                 |   1 +
- drivers/phy/qcom/Kconfig                      |   8 +
- drivers/phy/qcom/Makefile                     |   1 +
- drivers/phy/qcom/phy-qcom-qmp-combo.c         | 644 ++++++++++++++++++++++++++
- drivers/phy/qcom/phy-qcom-qmp-common.h        |  62 +++
- drivers/phy/qcom/phy-qcom-qmp-dp-com-v3.h     |  18 +
- drivers/phy/qcom/phy-qcom-qmp-pcs-usb-v4.h    |  34 ++
- drivers/phy/qcom/phy-qcom-qmp-ufs.c           |  88 ++++
- drivers/phy/qcom/phy-qcom-qmp.h               |  17 +
- drivers/pinctrl/qcom/Kconfig                  |   8 +
- drivers/pinctrl/qcom/Makefile                 |   1 +
- drivers/pinctrl/qcom/pinctrl-milos.c          | 103 ++++
- drivers/pinctrl/qcom/pinctrl-sc7280.c         | 522 ++++++++++++++++++++-
- drivers/power/domain/Kconfig                  |   8 +
- drivers/power/domain/Makefile                 |   1 +
- drivers/power/domain/power-domain-uclass.c    |   7 +
- drivers/power/domain/qcom-rpmhpd.c            | 278 +++++++++++
- drivers/power/regulator/qcom-rpmh-regulator.c |  33 ++
- drivers/sysreset/Kconfig                      |  15 +
- drivers/sysreset/Makefile                     |   1 +
- drivers/sysreset/sysreset-uclass.c            |  37 ++
- drivers/sysreset/sysreset_qcom-psci.c         |  45 ++
- drivers/tee/optee/core.c                      |   5 +
- drivers/usb/dwc3/core.c                       |   2 +
- include/sysreset.h                            |  18 +
- include/tee/optee.h                           |   9 +
- lib/efi_loader/Kconfig                        |   3 +-
- 44 files changed, 2353 insertions(+), 52 deletions(-)
- create mode 100644 board/qualcomm/debug-milos.config
- create mode 100644 board/qualcomm/tfa-optee.config
- create mode 100644 drivers/clk/qcom/clock-milos.c
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-combo.c
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-common.h
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-dp-com-v3.h
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-usb-v4.h
- create mode 100644 drivers/pinctrl/qcom/pinctrl-milos.c
- create mode 100644 drivers/power/domain/qcom-rpmhpd.c
- create mode 100644 drivers/sysreset/sysreset_qcom-psci.c
+Regards,
+Simon
