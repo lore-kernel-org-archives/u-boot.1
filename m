@@ -4,96 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9284AEA71AA
-	for <u-boot@archiver.kernel.org>; Sun, 19 Apr 2026 21:06:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10735EA71AD
+	for <u-boot@archiver.kernel.org>; Sun, 19 Apr 2026 23:23:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2E23839D9;
-	Sun, 19 Apr 2026 23:06:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 23899839D9;
+	Mon, 20 Apr 2026 01:23:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ofTaySnX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FcPGPBBD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 133DE8419E; Sun, 19 Apr 2026 16:05:18 +0200 (CEST)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id 41D1883B99; Mon, 20 Apr 2026 01:23:30 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B17F683B99
- for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 16:05:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 48062836AC
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 01:23:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=itsrecursion@gmail.com
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-38e7d983f91so24097351fa.2
- for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 07:05:15 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776607515; cv=none;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-b9c603ec2dfso313432766b.1
+ for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 16:23:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776641008; cv=none;
  d=google.com; s=arc-20240605;
- b=eHwoV0ggyf5apAC/EgPmFSoCHo13tbX2ALbsr/CjQc5Y34KgdMC+SXWpTfiNdpVfnP
- mkxCHNptTO5aNX+SP/nS2MlGPerF98DJMKbU5sl+7on42m1T4CP1SkdGgK1ELB/oTDkl
- ZM/MCnBvTDRJZ8tTmGm6ewEx/1BLTHVxXxOGotknu7Z77AUIrjhsR1DqwQP+gVoyRbu/
- 76H1Pjjeou8crUOMkaqmej0eCNnlTHBCe9K45ZD+Z/zLeBq6JHW3X7xUZnAeODNUrJFy
- 1/JiZzCqTsuK+pzOhQ1az6LCIw3bKfDUNuoFMrwle5M6Rpfzpseb64VzWBho+fxdzrUl
- o3BA==
+ b=jCZYS3tTPHNtXQ1njvHc8I6hIBrsgNw6vgx96b6AihvGaesoKudkntLu0eJTQxvJU1
+ a4hXH4S+HWwxoKyt/muBvLt+CQS3yqbvl9+9dhFYuRein+Fwz50/jVmBXSQ2NoPGbLii
+ 57ZlKMswGJ9gzgVoyCDzN9SD93aq+zqs2R0ONDHRDns30Smv2wdaXuGEk2W7DEBSDVCS
+ 5LuG13hWjD0usuebVVQ3W+ApOFIG5eOt7M6lyEZAK4mq0BuVezCpDXOIOri+t950bn+V
+ m7kzkFwE8L0dzmedd2GHAthQ+m7BYeh9nz+iPGIfvDmUa+1tcF4dQfLx5ewPHBrP7aYp
+ IJLA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=to:subject:message-id:date:from:mime-version:dkim-signature;
- bh=cElTdoGd5IzTyO7NAhBgfmlwvaNHoRKZ5O6Wl9oSUik=;
- fh=ea3Lb1kmqTyoSSOGd3r79PdCdfQHXBjS15GzGXd6hwE=;
- b=OxZr/T1jYhUI6+zw3dY7YdToWw4nZmDtk6IT5NlyKcuIoKRK08Tkat/7WSVn6HkfRZ
- 6bXc9JssOgpwRCOBzlZBAkHyRC+MjtHxZNUwcBO5/LU3DdOqaj6cGQqM6V4UZ/tlgEKf
- gFDfy+hJbd1nJr0+ZiPjNmKcsEVEbmA9LhsPngov1p8UVfqBTRfKAIi5JKVDLVej5ZgH
- fcZSMIPTi9HoCAA0hWPZGXV5YdRT5O7T1iousTHe93xgSAXPOg76owHhfQJulEGMkdn/
- uBmyVwed3hPesY/kiW/Ldyp2MPWTalmsm4wXcwM4Aoj6bFUCJIqYuliRHExfFL3uHDMV
- cAdQ==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=04GUQTFsL0bMlc5Kj/5hBTZ+s4VBYZijHBEK6WNfYVc=;
+ fh=u6NliCaUHpdmhtHQ7RN55ZaPuVxM36FJI+H9eXJCyU4=;
+ b=RM9J1hNFUrGJMh4Avp+qA10aZg8J+tiJh5xfUwcHFQSpzbKUOd4Lqn1CRi0HyRVFmK
+ D1s4k+sx9CkwjMkJAtFvOvFtiYB9lBv2fNsYeofHuvMY8AwfFb6Bz2NQu3nr/2Ib+cVR
+ pfj/wtTT7fBzJAXin/1czG7OLnV2U2qoojP/0OQEMGFSSDxgoy/C5wJ662azXwuT2zjd
+ hgPqQ1DrciGpMSbbfdhSZbsD7MEmyys7gKVxEwEbYkQWmgcAMxednL8xKrM6VkMUqWYP
+ LEh/M7ecJgTWYTfOQYt9lEdcw/HlTM3pFbYGuDC/Mmqg9HRAGU63MqsMMZMI23qgpQXt
+ LNiA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776607515; x=1777212315; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=cElTdoGd5IzTyO7NAhBgfmlwvaNHoRKZ5O6Wl9oSUik=;
- b=ofTaySnXLrL1M5Tn3huVI71bazMmJ1mYVxXh/9dyYCM9TcAeNU3pDhG1o0QY4WV0Tl
- nt7AWqrmg1iYof8epjr5f2Wp1fDVTPR38i4HQpoFCAUKusfkseRo3uJdJT0NorNtzE8o
- rNvIzUp4rzP3lIHXWJICzwgFQ/00vJnQ4pOetn/fWKooVolVxKi72bCY5kZ1Gd5zqnpx
- 5eFuY/9v2w12ZrNtHWoJreJ5BD6H76qsO/h5rWVJCplyBuEhepWT5NXTE2stgCLtsGZf
- rFEizMOBS+BNSZ/l2kRFd/W8jkZbBkXz2tGjZs7dYR0OBjzlCtNe3gP/GPeHy4iC6PHY
- yH3w==
+ d=chromium.org; s=google; t=1776641008; x=1777245808; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=04GUQTFsL0bMlc5Kj/5hBTZ+s4VBYZijHBEK6WNfYVc=;
+ b=FcPGPBBD/es2IrXBwl9EaMZLPbB8xZ5JcvC+svFbA2dXOmdbZe5f3laClWTqu7mpYx
+ 2a65/mLAiuBE1GgNiQMQuKl5T1LZC3IQN1yHfHPSCiiVbU4kKn1ml9ugQaUczq55dxt/
+ P3NSjK/MuTPc/P2ZvjmIb43f+ePIjfr42Xxws=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776607515; x=1777212315;
- h=to:subject:message-id:date:from:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=cElTdoGd5IzTyO7NAhBgfmlwvaNHoRKZ5O6Wl9oSUik=;
- b=oeczzPLigopmJh60uLBNJ6xGF+RVmicQCcsbmM94CZITrxRWD4leCSKDFHAp/F8nWE
- m4gw6an2h4GDRYLK93WHgwvkeLFOkFKYDn0cwKkWkqs/AuCCI2hqXaxtC1vbA152lAXf
- FGkghEDZRyYcwVFJxQ8CUcg1fMmgf498H0PNS+j8uGCtx0fv7YO9Ug1Vugpws3AVnoIZ
- J0NfyIAXCib20jXT2WWqtDYy/KA5G7XBtoFAq7BZIPNplEtOeNbozNlFk+bV4uxwHi6S
- N+k1vgxEVwCLUw7/o0pSvMjKipPjOUon628Gy9/4Ia/9+BQq/nhjZrpZG6od/ZyQmOOV
- SG5Q==
-X-Gm-Message-State: AOJu0Yzk+X8upSvqKG9JvdOh7kN6RE2kYkIr21JKbQypwQvm967vNyGg
- G+83iyW+P02S3zb6r2ZOfsxrt5ejEzoRZRurUTt8yjk8oOWelz/iiamBDQ9CVe38xTtGi/7LMRx
- yhQLz7w3FfIheJDJ1WJxDwaDvQSzDnj1qLG1X
-X-Gm-Gg: AeBDievGd0wmrqXSVT3dqRqRB+USGVPLuLyNGlnU48PirGmm9Klu9wWnSDo17NrIRiV
- esJV90g0O5rKeC9TSU0oB3dZ8wXmNEjqIH1DZXiLMR47ZUe6f1d/UBSJu+1fVVE26o87FWyROf0
- 9i2FOLb0otp5uu312SIWGJUiR5p0vYeu6cUbKRpb2CpoaeEYgvTtSH6XZQd23OsumaimNlx0luV
- eytH11i1RCNVWi2Tg5OywcszXchXtAY5yv/7wMfonVwbtRm58b4SnWWNpq8mY2/jSH3/DnZ0uNK
- PORbn7wYPQd66hzW
-X-Received: by 2002:a2e:8a94:0:b0:38a:45d6:c246 with SMTP id
- 38308e7fff4ca-38ec77fa93cmr26568811fa.8.1776607514314; Sun, 19 Apr 2026
- 07:05:14 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1776641008; x=1777245808;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=04GUQTFsL0bMlc5Kj/5hBTZ+s4VBYZijHBEK6WNfYVc=;
+ b=Nt5Vh3kP8NUNACJVckq1lDfIPz0Lmm3qeKjKWcMSU/CXdId0DwcpbSM8sMr6nT/P3y
+ YiO0oDa+jTFqU4c/YVgNW2tukbR+C8uI3rUrgB98/FiO8i41bk0bMJfrS3skqE8eZ39f
+ n42jWm9ULcJEe4nJqQjWaH5hpVEirVN/cin9moW+1704Ly6JlAHSf38pRLaJp0DFsiYE
+ 8dsP/r0CEZTRrqfL5MFDO2IJb0eE//XZyZe4WNLbZW3heEXFoUt0rnMroLd8bytif8CH
+ 8ncKtWNwAa3wKd0dQZzq1S4RZvzzwPVSnLlfQd5TYGZB8JxpgVbPCC6iztkn8tPWSoB5
+ 277g==
+X-Gm-Message-State: AOJu0Yzkbsv86g8oU5z1CfOqwpIUTDGXCsYkWhCy6PklMlcgWpvujk3h
+ 3+q+NwACbgti0rnBPw2B0KDL+/ckq9aaeWer6Mfbt0fvycCyFvu6QCGcKuboqrA+OeNGhBcmhfq
+ nxs795x4AW7XbhS+Ll2O+CnX1mrVaVp7Fu31aJ4GH
+X-Gm-Gg: AeBDietGTiRH56idbgl7jKdrSJdcvMysCdmw4iSCy1ovwowh44JQGLTHGolxqCZoJyG
+ hJs/k4Qr28mkkEWEqzZUXz94VtwaT97oV15PuWhqdY9lxnFAEKEz/PGP2aJ7MzJr33UwahRq7mW
+ nGUawuPzOVQ7Ism35Kf3g2RjTTxbqAzAK/1nUkz5MitC1sWdv3A+p3qzVs9DHkApw+KVwiNLORI
+ 7fzsg8IvLUNxBY77LUcPPXuSLuf43Mpe9gWoRnkOcDA9fH2nSQv/AB+Rl8m4w8GPw/pzK6TF5W0
+ FOTgRUFUfHPscTzxJmuy
+X-Received: by 2002:a17:907:806:b0:b9b:4519:7914 with SMTP id
+ a640c23a62f3a-ba41a82618emr500533966b.33.1776641007713; Sun, 19 Apr 2026
+ 16:23:27 -0700 (PDT)
 MIME-Version: 1.0
-From: its recursion <itsrecursion@gmail.com>
-Date: Sun, 19 Apr 2026 17:05:02 +0300
-X-Gm-Features: AQROBzDO899-rxUO-Fe211PYBbUQ2F8h05_FLCUjbk8CHDXyvouN9qEyGdgzb14
-Message-ID: <CA+TFwyyCkX73RUYBmPFTevFCiVFuS5WgqSdXhwu2e66hcdkNyQ@mail.gmail.com>
-Subject: [Report] ns16550: possible missing workaround for NXP erratum
- A-008006 on T1040/T1042 (DUART in FIFO mode)
-To: u-boot@lists.denx.de
-X-Mailman-Approved-At: Sun, 19 Apr 2026 23:06:41 +0200
+References: <a1cd73a2-582b-447b-bb3c-e88afcf99545@proton.me>
+ <20260224170908.GZ3233182@bill-the-cat>
+ <37429ec3-d174-44d3-b113-bf6ce6d71096@proton.me>
+ <20260224193312.GB3233182@bill-the-cat>
+ <02e49242-da72-4bcd-a428-f7e8c9aee742@proton.me>
+ <20260225004838.GA1593142@bill-the-cat>
+ <20260225020042.20823-1-krotti83@proton.me>
+ <20260225020042.20823-2-krotti83@proton.me>
+In-Reply-To: <20260225020042.20823-2-krotti83@proton.me>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 20 Apr 2026 11:23:16 +1200
+X-Gm-Features: AQROBzCGyCbLO2CeglxninHLwAQ1jV5JKPojtmwAvhwF7Mhk1KkjPiw6PGfA_TE
+Message-ID: <CAFLszTiH0T56YgWhjp6hiXMTswcgu-yp-ivSKS3u4JoPMJDBKA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] doc: emulation: qemu-arm: add secure state steps
+To: krotti83@proton.me
+Cc: u-boot@lists.denx.de, trini@konsulko.com, tuomas.tynkkynen@iki.fi
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,62 +114,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-  Hi,
+Hi Johannes,
 
-  I would like to report a potential issue
-in drivers/serial/ns16550.c concerning NXP QorIQ T1040/T1042  SoCs (e.g.
-the T1042D4RDB board).
+On 2026-02-25T02:01:39, Johannes Krottmayer <krotti83@proton.me> wrote:
+> doc: emulation: qemu-arm: add secure state steps
+>
+> Add build steps for building U-Boot in secure state with
+> TF-A and OP-TEE. It includes the full steps for building
+> OP-TEE and TF-A to use with U-Boot. Also a short
+> description how to invoke QEMU with enabled EL3 and EL2.
+> EL3 (machine option secure=on) is required to run TF-A.
+>
+> Signed-off-by: Johannes Krottmayer <krotti83@proton.me>
+> Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+> Cc: Tom Rini <trini@konsulko.com>
+>
+> doc/board/emulation/qemu-arm.rst | 86 ++++++++++++++++++++++++++++++++++++++--
+>  1 file changed, 82 insertions(+), 4 deletions(-)
 
- * Erratum (public reference)*
+> +OT-TEE
+> +^^^^^^
 
-  While browsing the NXP community forum, I came across a post discussing
-erratum A-008006 =E2=80=94 "DUART may miss characters during transmission i=
-n FIFO
-mode" =E2=80=94 and its applicability to T1040/T1042:
+Typo: OP-TEE.
 
-  https://community.nxp.com/t5/QorIQ/errata-A-008006-for-T1040/m-p/557567
+> +Building (none-secure)
+> +----------------------
 
-  The full erratum description is, to my knowledge, only available in NXP's
-NDA-protected chip errata document, so I cannot quote or propose the
-official workaround.
+I suspect this should be non-secure is the conventional spelling -
+same for 'Running U-Boot (none-secure)' below.
 
-  *Observation in U-Boot*
+> +The following file is at least created with TF-A v2.14.0 and can directly passed
+> +with the '-bios' option to QEMU::
 
-  On T1042D4RDB (board/nxp/t104xrdb/, configs/T1042D4RDB_defconfig), the
-console UART is driven by drivers/serial/ns16550.c. Relevant points:
+can be directly passed
 
-  - include/ns16550.h:154 defines
+> +If the single file doesn't exists 'bl1.bin' and 'fip.bin' can be concatenated with the
 
-  UART_FCR_DEFVAL =3D UART_FCR_FIFO_EN | UART_FCR_RXSR | UART_FCR_TXSR i.e.
-the default FCR value enables the FIFO.
+doesn't exist
 
-  - drivers/serial/ns16550.c:249 (ns16550_init) writes this default FCR
-into the hardware on init.
+> +    dd if=bl1.bin of=flash.bin bs=4096 conv=notrunc
+> +    dd if=fip.bin of=flash.bin seek=64 bs=4096 conv=notrunc
 
-  - drivers/serial/ns16550.c:275 (ns16550_putc) transmits through the FIFO
-(polls THRE, writes THR).
+Where does flash.bin come from?
 
-  A grep of the tree for *A-008006 / A008006 / ERRATUM_A008006* returns no
-matches, and no other
-
-  FIFO-related workaround appears to be present in the driver or the
-T104xRDB board code.
-
- * Conclusion*
-
-  The preconditions of erratum A-008006 (FIFO mode enabled, transmission
-through the DUART) appear to be met on T1042D4RDB under U-Boot, and no
-corresponding workaround seems to be in-tree. This may result in
-
-  occasional missed characters on the U-Boot console for T1040/T1042
-platforms.
-
-  I am reporting this for awareness only. I do not have access to the
-errata document and cannot propose
-
-  the official workaround. Someone with access to the NXP errata (or an NXP
-maintainer) would be better
-
-  placed to evaluate and, if appropriate, send a fix.
-
-  Thanks,
+Regards,
+Simon
