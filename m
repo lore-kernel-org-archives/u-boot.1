@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8552CEA7186
-	for <u-boot@archiver.kernel.org>; Sun, 19 Apr 2026 03:52:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6F6CEA7188
+	for <u-boot@archiver.kernel.org>; Sun, 19 Apr 2026 03:52:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8941841C8;
-	Sun, 19 Apr 2026 05:52:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 337AD8425F;
+	Sun, 19 Apr 2026 05:52:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dn546x4n";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="U9K2jktd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4813484258; Sun, 19 Apr 2026 05:52:35 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id E31A4839D9; Sun, 19 Apr 2026 05:52:40 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3FD1841C8
- for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 05:52:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F21784258
+ for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 05:52:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-b9910707d82so299609466b.1
- for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 20:52:32 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776570752; cv=none;
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-b9358dd7f79so352538866b.1
+ for <u-boot@lists.denx.de>; Sat, 18 Apr 2026 20:52:39 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776570758; cv=none;
  d=google.com; s=arc-20240605;
- b=TvgsdrzgfAxk5GT/rFq1n7XATIJ8b34xPUjbZhPYvGOzAMYF7FTFzzrF2JnqM9/sL1
- v7Sy71vCE85EjDifYxyIuHttEHKVf5K1bmxNKQczxaJ5HhG8r4MVe2QqYdtSYZH0Rz98
- XyDQ8vm+AyeI6flBPqvfYmssoFca5uzcnoOj1UzfOCyKASzi2YyuujER0cANbrCuPhkT
- FssTQa2H5+TRLaGH+QwAxFxuVD2fyg8dsgHWsTz1WAOL9iuRyHeKhIQnRVP3Hd7FWjcf
- woHmsQ5qQmnJFq7g+ekeRYWXVV+MTC3JBfw6m6uBrkev7k5Skb8qs+HD//TPleG/2zyS
- 6YMg==
+ b=hhKCBjJYPEXK1LAa2rHz0xyWixsoK4dmrBwDX9AU0ADUwJRBpSQeZ0nV/BzpgmKpj8
+ GiI3FH8YK1liKsd9FqmnZUJZR4Kro+oBRohDkJpkXH6pUryiwpSnpogiN8YDr2mIDRTx
+ JTNGf811cdu2xNCv/jbXryZ559WyZjiyQcN665vecI1kSruqJgxdj7c+JXIz0XSKYc7h
+ KVZPKEdxbcWHXcQoHGTxnJAK3FNNOPc8W0NgiNEvveARMLOBSt9ucU5033Uap1Vcc4k6
+ mGOIqtf4TN/TcGbXefNyf3qr26zh7J+mxBGY2VkRleYRz3LAJXHXOJHoTKJ8iWktHe+5
+ wodw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=tXEXdqTjlzeIRiv5ZZG1LCLaPOnMyrDIWClcwHksPcQ=;
- fh=+HDHgEKUjDUR12D+Vufl665Fw0oNeOV35Ov9ta0Mg8w=;
- b=Cn8BToXbvdRmMZ+xutwPailsf61SI8QMiwzjZ/3ER5vnG9ieSGK+Vh1oa2uXBPAGNM
- 7BWnC/of0flE5tsp1TKBiUnG4PV+KdLF7UFWR778MJIgxYhBxbyP9jDOmNdOnLmagu55
- KfDGWx1GLfnHeCZKB5sND60B3BS9zqz34TcciY4Fv9EgHQBspLHZqEy2Vjy0toDOpdL1
- HdvJHwF7oHjsI13LvElxg7r95bTSnWt5oOb0tsMpwQBp+CNU9lh+d3etl9LEaBu6VT2+
- lrIki0koZ8IuCOESAwe8FPtLud4WiYxMzwfNWETcG8Td6huluImTf0fxRuXjNU/3HIg+
- fCow==; darn=lists.denx.de
+ bh=W5ebACbgUkJEsZg3YOc/mqzm1o7okVJpL5M9P78hqxA=;
+ fh=W4FGA4PtBpAUc3kuNZe7JlIueODGNEvC0VCY7h2Ohks=;
+ b=a4KxOtXI0fnu1SvdN4RlupE6Dwv5fm/GibvnBj7ylnLkkA+bSeO/iVeeqmb+2f162a
+ MgTHNglgEZ7+D7bz9gP+Me86e3PdifubRusT9++wBhzFTE8q1D4/oiTruDbBJEuH+FVB
+ /dkOvn1rUddTgUhS7kzdQSRmQ+Pls8C86OtheBo2VAtyT/zKB1Y1jGYlDCQ2Z/DzamSr
+ OeIRGryW+nU4HUfI56InoTWuixbJtGceBaOvtzRNpNMpqpSj+SBvgp/RN8kcKeJ7OQNI
+ bQfZlt9MOyClQj4R/GlZdgKalyvzjc7FShrcD/p+Iu5/IHFF02I4e0Ern5aF0f6jzxxs
+ snyQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776570752; x=1777175552; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776570758; x=1777175558; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tXEXdqTjlzeIRiv5ZZG1LCLaPOnMyrDIWClcwHksPcQ=;
- b=dn546x4nBipHN7K47k4lD6Smjr58IFYtWNFTSPMqV0n41enQILnOeym+2cQObhPmlF
- 2+JqeAzcx0oisiVV1mbFSeR01ZOsf8wBPPWKCb+XjQlIburcwwCi1zKStg8+yWOZybnU
- Q6ZeudMsnLPjLoux8VSRsQWIYYX9LZGHQkxfs=
+ bh=W5ebACbgUkJEsZg3YOc/mqzm1o7okVJpL5M9P78hqxA=;
+ b=U9K2jktdpeJMks1fdhNJqmkUVjqSbPT0dvB8xSuAhJLwVzvvpuQuqmmpLUM2vvM4Ye
+ 2TXhpcvs8wHrihMWDKBqchBuXFMRaCAngXgWhP4VQVjKcY7/XH420+eaIu+rte5n3Duj
+ Jndu92hkVNHDr8+7MJqrw3YYNNIDejOC9fgHs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776570752; x=1777175552;
+ d=1e100.net; s=20251104; t=1776570758; x=1777175558;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tXEXdqTjlzeIRiv5ZZG1LCLaPOnMyrDIWClcwHksPcQ=;
- b=mmhx1n7sxyuCbdpGK+PeqLm/ZnG8ik3RlnkjOBj2zkK329BWUsUnBpryws31/Yf9VL
- bpNdvairS8FyK/buHJd4Cr5Uw+PKYOxjx7XVtyQbOszGKZ9P2VHc0zI3Jf3t4M1fuOLI
- vX86r4lU8AmMgofEF9a3KnaYr8Xfbj096K2/zLbuElxUZSbuXaiLSYjMJ2eQWdct1jQK
- CcEkj9BPjWIU50bbg9Jid38zUuCJ2pX39JqEznxcAw9483tcVS66s6mEHcnTQMU8kgDa
- B0lJv5Z5GAO7L0I0eZgaC3x47DlEJ59tcklaqf1XS444aloTDzs6KJlBebcmMXHAo/dB
- KOHw==
+ bh=W5ebACbgUkJEsZg3YOc/mqzm1o7okVJpL5M9P78hqxA=;
+ b=RooRsxa9mJrncGGLqci00TSDbHZyLlSdV59a+tWdFrQzJLa0oLW0T6SnV8fvE2KieQ
+ zNpUox28OB66uyC5IuiBKyx/E8mnQrLnMRWesz2BhkV6JA96p3MprOV5ykCZdeEyZDgV
+ VDPyCGi1V7V2ZwWTmc9jVEfBe8HutKQ/yd6wgV7MQea10S8KPOB5LooUrLQPex//NUFf
+ kDmHts/QYZT9UDIxVOVzu6gPKJsMd2BgK4/gQWvYHgnZu1qdkmnca4fMZfdpECXW9/FT
+ vUcGJeGFjOOCpiIMLI8vy4QA1J5eEL5sA0pFELlDrU41SUfX3V84XZejSSeMlcucBlcA
+ KQww==
 X-Forwarded-Encrypted: i=1;
- AFNElJ92M4mYvukouTHjv/oVgewcx6hOxOOirntuoMEam8INKrIsWIN65qu5T2Hnlg2Hbd8B61HT6mw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzFShMC0nTHG/6CYQ6IiWQMU1Bb03qDysZgHFdMY8XQ30k4SDbN
- eEe4NuE2O8CxR18s/LkKZXAKsLgpqpqVP+k6WR05g+1LBHJW9UYHtAlxpUbArJii2t7H632+dgp
- 7AQUI1tHm9jG4cgtuQ4SWdlJVJhIzP0v4yV4YqxyI
-X-Gm-Gg: AeBDies8mf7mV0KY4DNGTq+4EtzEMOaOf9VSVcvcsss4k5Fmc9uBTbZs1s7rNPrDCh3
- rMheIa1gXfbXB3wpY1dF1Vbjs+4SYq894fg/FXbS17kcA+ADVLiZ2rneYo00TWrSYH1bnZI3AUd
- 1QocVs0I/XOLuo/R38NNLnHEp62/2Q8r1oeqBWoALoPJEW1oyo8KmAa+1BL1uHSOdcQ757BheCn
- 3RCDP6OkGu9ulDAF+40IlRIAfW5sc3Tvm664yV+xxmkSADqHh5hh2rOhwBWw2KNOG/3J55+6GUH
- qENc4ngKTkIRktYV/iCa
-X-Received: by 2002:a17:906:c10d:b0:ba4:afcc:4a5 with SMTP id
- a640c23a62f3a-ba4afdb4aecmr363641666b.17.1776570751854; Sat, 18 Apr 2026
- 20:52:31 -0700 (PDT)
+ AFNElJ/tBlHEG92nFOSZV2zFpU/5tbhLcpc+/idwGiD33evwSH6FRLjVEwhCwviSD/Rg6w+yx4yHNEs=@lists.denx.de
+X-Gm-Message-State: AOJu0YyKxn1+qYgszzoRYu+U4Vb6tEbnRJqSKvJtzERCRRlKhPFzOBUK
+ lihI8nHgdTnJ0QsyXIRcDP0oa26mVdqIU5WpMGGhA+wJ+UajpaXeU2yPmt+di3S1tlj/jjh8BC6
+ POULDSfuZJHnCjzCR7EfN6Cao7QvLJwK4yhZehJ7s
+X-Gm-Gg: AeBDievydDbdg0aDYLtGcQwgatTtaj4oiNLR8WG1s53Nxl35rICv77KNC8xE0gWXS0L
+ +1YUJxCcOrxmsVedL0ssquwmUf2XaUe5cBjW+Flp5UeK0OjKbUGhz9FpnB7FBJzTdCxGKzq93J8
+ 0kv1oRuBHqoDL30/r4ntEwcNKGc/gE+HClWsIcDQdp+K19dZdwBZhNJwttQRIVJ7SI6Wu6JhkUF
+ y5KQCHXCVC8driMIDRiukmPJOfeqzig8TwmvyD4TSzO6Asn4UTVW+Dj6x5ExAWFFFykMOHTuTx5
+ e9D7+ULsH5NEb1aKgPZF
+X-Received: by 2002:a17:907:6e8d:b0:b98:32c1:246e with SMTP id
+ a640c23a62f3a-ba41916ee1fmr483730266b.8.1776570758480; Sat, 18 Apr 2026
+ 20:52:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260413203555.1990337-1-rs@ti.com>
- <20260413203555.1990337-3-rs@ti.com>
-In-Reply-To: <20260413203555.1990337-3-rs@ti.com>
+ <20260413203555.1990337-4-rs@ti.com>
+In-Reply-To: <20260413203555.1990337-4-rs@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 19 Apr 2026 15:52:18 +1200
-X-Gm-Features: AQROBzAW-LuaeHh05z6FThDiOCFXtk3WFokWEX5Xk1hG6asEWJh-C1COpW3PgXI
-Message-ID: <CAFLszTgXsz+=TBvx5+OMYneRuJVq8Jp3EMZPFkBHPjEfGwcVyA@mail.gmail.com>
-Subject: Re: [PATCHv3 2/6] lmb: add LMB_FDT for fdt reserved regions
+Date: Sun, 19 Apr 2026 15:52:22 +1200
+X-Gm-Features: AQROBzBt8Mn6HfNbsELyPpceipihyLbwBuBCf3sSKpEobPrp8INQDTX-WIDHO_I
+Message-ID: <CAFLszThPB-YVe_j4LJ_reEoC2D9uG2t-FF1W9aM+VGvE7ybwdA@mail.gmail.com>
+Subject: Re: [PATCHv3 3/6] efi_dt_fixup: use fdtdec_get_bool
 To: rs@ti.com
 Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
  Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
@@ -113,48 +113,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Randolph,
-
 On 2026-04-13T20:35:52, Randolph Sapp <rs@ti.com> wrote:
-> lmb: add LMB_FDT for fdt reserved regions
+> efi_dt_fixup: use fdtdec_get_bool
 >
-> Add an LMB_FDT bit for fdt reserved regions, so we can reclaim them when
-> parsing a new device tree and properly warn people when a reservation
-> overlaps with an existing allocation.
->
-> If we don't at least warn the user of these reservation failures,
-> there's a chance that this region could be freed and reallocated for
-> something important later.
->
-> This useful warning mechanism was broken in:
-> 5a6aa7d5913 ("boot: fdt: Handle already reserved memory in boot_fdt_reserve_region()")
+> Use the more straightforward fdtdec_get_bool instead of fdt_getprop and
+> a return code check.
 >
 > Signed-off-by: Randolph Sapp <rs@ti.com>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Reviewed-by: Anshul Dalal <anshuld@ti.com>
+> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 >
-> boot/image-fdt.c |  5 ++++-
->  include/lmb.h    | 14 ++++++++++++++
->  lib/lmb.c        | 33 +++++++++++++++++++++++++++++----
->  3 files changed, 47 insertions(+), 5 deletions(-)
+> lib/efi_loader/efi_dt_fixup.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
 
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> @@ -654,6 +654,31 @@ long lmb_free(phys_addr_t base, phys_size_t size, u32 flags)
-> +void lmb_free_fdt_regions(void)
-> +{
-> +     struct alist *lmb_rgn_lst = &lmb.used_mem;
-> +     struct lmb_region *rgn = lmb_rgn_lst->data;
-> +     long ret;
-
-Could you move 'ret' into the block which needs it?
-
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> @@ -654,6 +654,31 @@ long lmb_free(phys_addr_t base, phys_size_t size, u32 flags)
-> +void lmb_free_fdt_regions(void)
-> +{
-> +     struct alist *lmb_rgn_lst = &lmb.used_mem;
-> +     struct lmb_region *rgn = lmb_rgn_lst->data;
-
-Since you are adding a new exported function, please can you add a
-test for it in test/lib/lmb.c ?
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
