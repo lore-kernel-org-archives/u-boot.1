@@ -4,56 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 614ADF588C6
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 13:45:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BF76F588DF
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 14:28:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7EE884198;
-	Mon, 20 Apr 2026 15:45:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id AB353839D5;
+	Mon, 20 Apr 2026 16:28:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="umDXoarn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WS5NTvpU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F23E84394; Mon, 20 Apr 2026 15:45:24 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1EDB583BC4; Mon, 20 Apr 2026 16:28:26 +0200 (CEST)
+Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
+ [IPv6:2607:f8b0:4864:20::b129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 150DD839D9
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 15:45:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id CB284805D7
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 16:28:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 61B2540D52;
- Mon, 20 Apr 2026 13:45:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7738EC19425;
- Mon, 20 Apr 2026 13:45:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1776692719;
- bh=YQQyoG6IgODNgnviNFcqI40vWAX6lXsK23iK132zC5U=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=umDXoarnDr+XDhPuXzc0DGTAAx+pLIZJhUXTm+9tSEhQs5+7UjPscqCWTn9Xd4t+Y
- JOIFvkNx6phBNEavv1+3dBc9Ihr5t2HdDal9YLIiQqXnur2DKxlhnYTck39YBvZEQC
- 6Vq8PPD5mMMDabp3Cuv/dUHy1x+IHL1fsOYtrlMeO8b0ZER4c0Szq1g3PgJGv4Pe70
- y2FOdXQWleTsuhub/l9XsHeeegspOzKzoz+eNNaFFcs4mGjtqjbWa3pSFakcGi5rce
- T+R0aCpIp7+92z/dYjLNluYNJf0qAC2V5X7y66pkWyh721icFC+dRC2ci9yMtlQp0b
- 2K/Sg+NE1JdbA==
-Date: Mon, 20 Apr 2026 19:15:13 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Cc: trini@konsulko.com, casey.connolly@linaro.org,
- neil.armstrong@linaro.org, sughosh.ganu@arm.com,
- gchan9527@gmail.com, u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: Re: [PATCH v1] mach-snapdragon: Add KVM hypervisor support
-Message-ID: <aeYt6cz5AVXFc5m3@sumit-xelite>
-References: <20260419173829.1074404-1-aswin.murugan@oss.qualcomm.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb129.google.com with SMTP id
+ 956f58d0204a3-651b0eb2564so3229001d50.3
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 07:28:22 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776695301; cv=none;
+ d=google.com; s=arc-20240605;
+ b=ILVlOAt7cLQSerrpGpsFHbWsCg4Gu8eizH6tp0g/OLxnoQbKFlWtie+XfZ1AEjAvfy
+ NUCUaT2FRq4YjlOq/+xst6SFyDkCOaTz0SJxGmgk/SUIEda1UDYEHh4YHay+eCJGivmh
+ 6Z5A1VZ87v3dSnpEnjzaigMIC60G8HEUrHG9mmW4mcywmCAWhm2L2UybJJ5dz5hKDzSO
+ WEegesMW1wG2xxZd23tDc0164wokKEQvQug9Pwg+WICrAQhsHJBObD3Hu07NZFfPWAer
+ s4D1d0FuyTJZnTnXAlLZOGz6mEeNQibVmPCG2VvyRidd+f++Av5uwgljy9zV6QS6IMhu
+ GWzA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=w0Exsmakawlrpk9iO9N5PbEQVnljUehp+N8g6V37jZ8=;
+ fh=SzNPHZIeN+k6IeQInPOGtANz36ph+KMIKXuDTTHViNU=;
+ b=cHQyL0zuO06q6nVqQZOXY+AorFR079t+E/btYbqotYcs/6ysyH4SfXe5kgDpIKivzb
+ vvhxE/odK8NVXLrNwCCYOavGn6FNRpXhMPkQyE8SZ5wcv8tb6nv9Hop3jzioFRgFPzT0
+ RVG2JuGr1vmx6ZvMsC44MntCeE7+dlJsXv+lT2Jl/XP43rgwnjv/MVC1xurKT4yRAIF6
+ ivajT+aqN5rQ6fEs2TcDMXDFqONEdOlynzZbCDup9rmQkr5Zn+dnMkfiqLkivi38QG7i
+ z17gAgbxXVXsSaViHk5Rjd311MM6PU3Qm5ZzhdvuuuOgE4MgUFEkrw/joG1KnxUr1wJS
+ +kbA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1776695301; x=1777300101; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=w0Exsmakawlrpk9iO9N5PbEQVnljUehp+N8g6V37jZ8=;
+ b=WS5NTvpUpCX3AzAmL7lK2VRiD70yucZQTlNFddjD/Uq5bmR4IL/u7idAeTDYFkjtfz
+ sut4jF97D88O8LlYsc6s5IyelBuoTyRxxX0h5uK7NJzx3PJ363VDeqydDyIVjrP6CZAe
+ MRJupwGxEw3GhrFu8kplDcijF/oa656eEih3NIe06zXg0PEaNJ51sRNPb6y43rswHu27
+ Ip7Qs7JrkCOFlCfRmwDyzE+jnmfWasQ1vGClz1gJVN1eA+XpTRHIIw7Jrv+Auqx7kdwD
+ s2BbTelpMXAage7iZaIzDZFAucpltbXzEwOZhvrfeEiurpm5t33CzVWuGNO281U1cSoz
+ WXCg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776695301; x=1777300101;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=w0Exsmakawlrpk9iO9N5PbEQVnljUehp+N8g6V37jZ8=;
+ b=l3o8Gcdrz/d7Iiw01gBD9VhLLi2YchURoCC/u4Ar/G6qf1I4nNkosICnWjuarvzv2x
+ TVv8sGyQXw9ib4hWerT0nQg0D3KksDHJrHLj575JD+wbrtMjuck/+KiHO9N8I7qNmuQ3
+ w/wgh7aHtnxEjeVgR2vyH4a0ClFHc8X5yKgnqXoFRdbGy0AuKEx16xfEm0mXDgbMIXmw
+ DJVFGz4h8POdCAr+zmLxwNpgeNXpNMhkRjYmrD4M2Kyp7+Ray6QccmFMxN0YPx2YoZvz
+ WBh80x1KseiWJliPg+qTbpmXhH1sk51uCVe/3kLJBRdqjIpOcwPYTUlTdPvi6vqMpTcA
+ dBHQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8qjUT3kII5UXR7g0ydfZzPaExTA7+XUcVzo9IrpjlcEWjuv9d9vkXTZDoDMrurAEJO1Df/r1c=@lists.denx.de
+X-Gm-Message-State: AOJu0YxQgiaAt7WxcEGee+Z9htTCFvUtDlKN9Gpt8HxLIdSgfVguxxiU
+ 3iiY6dmJ48EnP3fBF6pGLWu792VfrLuo9JoUJQDUB05EsNEDQMl4JSBiyW0ysFumy+Fe4smONWP
+ 65k99BeuSGmpI8XRyx0SXjxlCJl4+Nqmwb2oy1AcrcL4DyzmaeYoY
+X-Gm-Gg: AeBDietMPQRux+ycfRB4xJNq9XR6CFryPuKxA1CtNvdEco3KQOrVU3D87LTofGYjDnW
+ 4GclRY3XWEVJE1Mu9zJG3GUxSkY/O9AEajGSgVqbyfIr7A11gNGKmZ1cudt4vhWBGhJQsl+k5iI
+ 5rZjr0E2T5QKK29ErdALdZgejr2XH9Fg8BFunuG5ep7u8m4pRM4URWoDFbCIKuc6WeY+tqlpgvC
+ wd2HytqFjCHhkODCDt6XxhiW6TSJ+f01+6ScXweP2JWZaFMpci3QKxNMxVLN0azxCEQvlSRUJ4m
+ e7BvDlpDnnkwaOsKUIdzibGXng48KKTekULIy7pnYlKFqX3eSGBuq7Q+d7NWlZxuKZ6WD59TouB
+ w2qBwEwUG3ZdEfzpRx8dZaLAVd3G8QqQgUnhPTxkYnAid4SpufeU5J9SujxGlVH75r9fSEsPD+u
+ NFh701zcYeLvYFmQ5QEcwGiFaWFRUrPhLOwVgPQGQ5vwFGE2JvOGv+Dj6W0jDeS14BD6L7hM62n
+ 4bfZu9p7NXwKMYioP2PzIFmidTfV86dWBRpiCzB++W4TAoQj6580NiBhWSXJ/MfEFvACwHijGNn
+ ivRk7QtDYTA58eSTnAxJEZ6CqqlxLWPhnJyJL73QbueMHBI60J18+Yw=
+X-Received: by 2002:a05:690e:4814:b0:651:e13d:21ef with SMTP id
+ 956f58d0204a3-6531080a7d4mr8642406d50.15.1776695301544; Mon, 20 Apr 2026
+ 07:28:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260419173829.1074404-1-aswin.murugan@oss.qualcomm.com>
+References: <20260413203555.1990337-1-rs@ti.com>
+ <20260413203555.1990337-7-rs@ti.com>
+ <CAC_iWj+2=ajV0cXFT6a5Y2oqtTwcaPRcpkYqTbu4o+jbFmX+5w@mail.gmail.com>
+ <DHUT7XN85MRK.18B9QGYDHEPIB@ti.com> <DHVQ3XX4U4OG.3T8QXYV5OHWFO@ti.com>
+In-Reply-To: <DHVQ3XX4U4OG.3T8QXYV5OHWFO@ti.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 20 Apr 2026 17:27:44 +0300
+X-Gm-Features: AQROBzDkK1UpD8HIekP6k_KcY1CIqQUN-gTL9t_NbFFf-q1jhrBv4SdecMtSOoY
+Message-ID: <CAC_iWjLWYOmbPNnOiUqNQBMYUsTAVxAVzka_Lo611RF-GbazmQ@mail.gmail.com>
+Subject: Re: [PATCHv3 6/6] memory: reserve from start_addr_sp to end_addr_sp
+To: Randolph Sapp <rs@ti.com>
+Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
+ Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
+ afd@ti.com, xypron.glpk@gmx.de, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,279 +122,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Apr 19, 2026 at 11:08:29PM +0530, Aswin Murugan wrote:
-> Enable Linux KVM virtualization on Snapdragon SoCs.
-> 
-> Introduce CONFIG_QCOM_KVM_SUPPORT to select KVM or Gunyah
-> hypervisor modes at build time.
-> 
-> qcom-priv.h:
->  - Add TrustZone SMC interface definitions and parameter IDs
->  - Define hypervisor boot types (GUNYAH=0, KVM=1)
->  - Add TCR_EL2 bit field definitions for memory config
-> 
-> board.c:
->  - Add qcom_configure_kvm_hypervisor() with EL-aware logic
->  - EL2: Perform direct SMC call for hypervisor setup
->  - EL1: Save context, disable caches, run SMC, restore state,
->    reconfigure TCR_EL2, re-enable caches
+[....]
 
-Please don't switch EL1 -> EL2 in the middle of U-Boot execution which
-just adds these expensive MMU operations during boot.
+> >>>          */
+> >>> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> >>> index b3b292ebf56..bd0d875a8cd 100644
+> >>> --- a/lib/efi_loader/efi_memory.c
+> >>> +++ b/lib/efi_loader/efi_memory.c
+> >>> @@ -870,8 +870,8 @@ static void add_u_boot_and_runtime(void)
+> >>>         /* Add U-Boot */
+> >>>         uboot_start = ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
+> >>>                        uboot_stack_size) & ~EFI_PAGE_MASK;
+> >>> -       uboot_pages = ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
+> >>> -                      uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
+> >>> +       uboot_pages = ((gd->end_addr_sp - uboot_start) + EFI_PAGE_MASK) >>
+> >>> +                     EFI_PAGE_SHIFT;
+> >>
+> >> The map_sysmem dance is still needed here for sandbox.
+> >>
+> >
+> > Why? We're not using that address directly. We're just trying to figure out how
+> > large the carveout region is.
+> >
+> > There's not anything funky going on with the global data structure for sandbox
+> > functionality is there? LMB definitely didn't do anything to account for that.
+>
+> Ah. Symmetry, to answer my own question. We *may* get a virtual address.
 
-Rather than that just follow the upstream edk2 example to switch from
-EL1 -> EL2 on the first platform specific init code code sequence. Have
-a look at this reference [1]. Surely you can keep the switch under a
-config option. This will make U-Boot to properly execute either in EL1
-or EL2.
+Yes.
 
-[1] https://github.com/tianocore/edk2-platforms/blob/master/Silicon/Qualcomm/KodiakPkg/Library/KodiakLib/KodiakHelper.S
+>
+> That does bring up another issue though. What good does reserving a virtual
+> region that simply maps to a physical region do? Shouldn't we reserve the
+> physical region outright? Isn't that what LMB is tracking?
+>
+> Suppose I need to read up on this sandbox and architecture dependent virtual
+> addressing scheme.
 
--Sumit
+Yea and arguably we havent done a great job documenting that :(.
+The tl;dr is that you are unaffected in the majority of the cases. I
+wanted to fix the map_sysmem parts for a while.
 
->  - Add qcom_configure_gunyah_hypervisor() for standard flow
->  - Add SCM service availability checks
-> 
-> Default mode remains Gunyah. Enable CONFIG_QCOM_KVM_SUPPORT to
-> select KVM for Linux.
-> 
-> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-> ---
->  arch/arm/mach-snapdragon/Kconfig     |   7 ++
->  arch/arm/mach-snapdragon/board.c     | 154 +++++++++++++++++++++++++++
->  arch/arm/mach-snapdragon/qcom-priv.h |  31 ++++++
->  3 files changed, 192 insertions(+)
-> 
-> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-> index d3de8693b5a..2e5676945ca 100644
-> --- a/arch/arm/mach-snapdragon/Kconfig
-> +++ b/arch/arm/mach-snapdragon/Kconfig
-> @@ -42,4 +42,11 @@ config SYS_CONFIG_NAME
->  	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
->  	  will be used for board configuration.
->  
-> +config QCOM_KVM_SUPPORT
-> +	bool "Enable KVM support for Qualcomm platforms"
-> +	depends on ARM64
-> +	help
-> +	  This configures the hypervisor interface during boot to support
-> +	  KVM virtualization instead of the default Gunyah hypervisor.
-> +
->  endif
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index 5fb3240acc5..2926dd8ccc0 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -510,6 +510,154 @@ void __weak qcom_late_init(void)
->  {
->  }
->  
-> +/**
-> + * qcom_configure_kvm_hypervisor() - Configure hypervisor for KVM guest mode
-> + *
-> + * Configures the hypervisor for KVM operation:
-> + * - EL2 path: Direct SMC call
-> + * - EL1 path: Save context, disable caches, SMC call, restore context
-> + *
-> + * Return: 0 on success, negative error code on failure
-> + */
-> +static int qcom_configure_kvm_hypervisor(void)
-> +{
-> +	struct arm_smccc_res res;
-> +	u64 current_el;
-> +
-> +	asm volatile("mrs %0, CurrentEL" : "=r" (current_el));
-> +	current_el = (current_el >> 2) & 0x3;
-> +
-> +	log_info("Configuring hypervisor for KVM (EL%llu)\n", current_el);
-> +
-> +	arm_smccc_smc(TZ_INFO_IS_SVC_AVAILABLE_ID,
-> +		      TZ_INFO_IS_SVC_AVAILABLE_ID_PARAM_ID,
-> +		      TZ_CONFIGURE_MILESTONE_SERVICE_ID,
-> +		      0, 0, 0, 0, 0, &res);
-> +
-> +	if (res.a0 != 0)
-> +		log_debug("KVM milestone service not available (0x%lx)\n", res.a0);
-> +
-> +	if (current_el == 2) {
-> +		log_debug("At EL2\n");
-> +
-> +		arm_smccc_smc(TZ_CONFIGURE_MILESTONE_SERVICE_ID,
-> +			      TZ_CONFIGURE_MILESTONE_SERVICE_PARAM_ID,
-> +			      0, 0, QCOM_HYP_BOOT_TYPE_KVM,
-> +			      0, 0, 0, &res);
-> +
-> +		if (res.a0 != 0) {
-> +			log_err("Hypervisor configuration failed: 0x%lx\n", res.a0);
-> +			return -EIO;
-> +		}
-> +
-> +		log_info("KVM hypervisor configured\n");
-> +		return 0;
-> +	}
-> +
-> +	log_debug("At EL1, saving register context\n");
-> +
-> +	u64 ttbr0_el1, tcr_el1, tcr_el2, mair_el1;
-> +	u64 t0sz, phys_addr_size;
-> +
-> +	/* Save EL1 system register context */
-> +	asm volatile("mrs %0, ttbr0_el1" : "=r" (ttbr0_el1));
-> +	asm volatile("mrs %0, tcr_el1" : "=r" (tcr_el1));
-> +	asm volatile("mrs %0, mair_el1" : "=r" (mair_el1));
-> +
-> +	t0sz = tcr_el1 & TCR_T0SZ_MASK;
-> +	phys_addr_size = tcr_el1 & TCR_PS_MASK;
-> +
-> +	log_debug("Saved context: TTBR0=0x%llx TCR=0x%llx MAIR=0x%llx\n",
-> +		  ttbr0_el1, tcr_el1, mair_el1);
-> +
-> +	icache_disable();
-> +	dcache_disable();
-> +
-> +	arm_smccc_smc(TZ_CONFIGURE_MILESTONE_SERVICE_ID,
-> +		      TZ_CONFIGURE_MILESTONE_SERVICE_PARAM_ID,
-> +		      0, 0, QCOM_HYP_BOOT_TYPE_KVM,
-> +		      0, 0, 0, &res);
-> +
-> +	if (res.a0 != 0) {
-> +		log_err("Hypervisor configuration failed: 0x%lx\n", res.a0);
-> +		icache_enable();
-> +		dcache_enable();
-> +		return -EIO;
-> +	}
-> +
-> +	asm volatile("mrs %0, CurrentEL" : "=r" (current_el));
-> +	current_el = (current_el >> 2) & 0x3;
-> +
-> +	asm volatile("msr ttbr0_el1, %0" : : "r" (ttbr0_el1));
-> +	asm volatile("isb");
-> +
-> +	if (current_el != 2) {
-> +		log_debug("No EL2 transition, skipping TCR_EL2 config\n");
-> +		icache_enable();
-> +		dcache_enable();
-> +		log_warning("KVM hypervisor configuration failed\n");
-> +		return 0;
-> +	}
-> +
-> +	/* Read current TCR_EL2 and reconfigure it */
-> +	asm volatile("mrs %0, tcr_el2" : "=r" (tcr_el2));
-> +
-> +	tcr_el2 &= ~(TCR_T0SZ_MASK | (0x7UL << 16));
-> +	tcr_el2 |= t0sz | (phys_addr_size >> TCR_PS_SHIFT);
-> +
-> +	tcr_el2 &= ~TCR_SH_ORGN_IRGN_MASK;
-> +	tcr_el2 |= TCR_SH_INNER_SHAREABLE |
-> +		   TCR_ORGN_WRITE_BACK_ALLOC |
-> +		   TCR_IRGN_WRITE_BACK_ALLOC;
-> +
-> +	asm volatile("msr tcr_el2, %0" : : "r" (tcr_el2));
-> +	asm volatile("msr mair_el1, %0" : : "r" (mair_el1));
-> +	asm volatile("isb");
-> +
-> +	icache_enable();
-> +	dcache_enable();
-> +
-> +	log_info("KVM hypervisor configured\n");
-> +	return 0;
-> +}
-> +
-> +/**
-> + * qcom_configure_gunyah_hypervisor() - Configure hypervisor for Gunyah mode
-> + *
-> + * Configures the hypervisor for standard Gunyah operation.
-> + *
-> + * Return: 0 on success, negative error code on failure
-> + */
-> +static int qcom_configure_gunyah_hypervisor(void)
-> +{
-> +	struct arm_smccc_res res;
-> +
-> +	log_info("Configuring hypervisor for Gunyah mode\n");
-> +
-> +	arm_smccc_smc(TZ_INFO_IS_SVC_AVAILABLE_ID,
-> +		      TZ_INFO_IS_SVC_AVAILABLE_ID_PARAM_ID,
-> +		      TZ_CONFIGURE_MILESTONE_SERVICE_ID,
-> +		      0, 0, 0, 0, 0, &res);
-> +
-> +	if (res.a0 != 0) {
-> +		log_debug("Hypervisor milestone service not available (0x%lx)\n", res.a0);
-> +		return 0;
-> +	}
-> +
-> +	arm_smccc_smc(TZ_CONFIGURE_MILESTONE_SERVICE_ID,
-> +		      TZ_CONFIGURE_MILESTONE_SERVICE_PARAM_ID,
-> +		      0, 0, QCOM_HYP_BOOT_TYPE_GUNYAH,
-> +		      0, 0, 0, &res);
-> +
-> +	if (res.a0 != 0) {
-> +		log_err("Hypervisor configuration failed: 0x%lx\n", res.a0);
-> +		return -EIO;
-> +	}
-> +
-> +	log_info("Gunyah hypervisor configured\n");
-> +	return 0;
-> +}
-> +
->  #define KERNEL_COMP_SIZE	SZ_64M
-> arch/arm/mach-snapdragon/Kconfig #ifdef CONFIG_FASTBOOT_BUF_SIZE
->  #define FASTBOOT_BUF_SIZE CONFIG_FASTBOOT_BUF_SIZE
-> @@ -570,6 +718,12 @@ int board_late_init(void)
->  	qcom_late_init();
->  
->  	qcom_show_boot_source();
-> +
-> +	if (IS_ENABLED(CONFIG_QCOM_KVM_SUPPORT))
-> +		qcom_configure_kvm_hypervisor();
-> +	else
-> +		qcom_configure_gunyah_hypervisor();
-> +
->  	/* Configure the dfu_string for capsule updates */
->  	qcom_configure_capsule_updates();
->  
-> diff --git a/arch/arm/mach-snapdragon/qcom-priv.h b/arch/arm/mach-snapdragon/qcom-priv.h
-> index b8bf574e8bb..a5d9dec6aa7 100644
-> --- a/arch/arm/mach-snapdragon/qcom-priv.h
-> +++ b/arch/arm/mach-snapdragon/qcom-priv.h
-> @@ -17,6 +17,37 @@ enum qcom_boot_source {
->  
->  extern enum qcom_boot_source qcom_boot_source;
->  
-> +/* TrustZone SMC definitions */
-> +#define TZ_SYSCALL_CREATE_SMC_ID(o, s, f) \
-> +	((u32)((((o) & 0x3f) << 24) | (((s) & 0xff) << 8) | ((f) & 0xff)))
-> +
-> +#define TZ_OWNER_SIP				2
-> +#define TZ_SVC_BOOT				1
-> +#define TZ_SVC_INFO				6
-> +#define TZ_BOOT_CMD_KVM_MILESTONE		0x21
-> +#define TZ_INFO_IS_SVC_AVAILABLE_CMD		0x01
-> +
-> +#define TZ_CONFIGURE_MILESTONE_SERVICE_ID \
-> +	TZ_SYSCALL_CREATE_SMC_ID(TZ_OWNER_SIP, TZ_SVC_BOOT, TZ_BOOT_CMD_KVM_MILESTONE)
-> +#define TZ_CONFIGURE_MILESTONE_SERVICE_PARAM_ID		0x23
-> +
-> +#define TZ_INFO_IS_SVC_AVAILABLE_ID \
-> +	TZ_SYSCALL_CREATE_SMC_ID(TZ_OWNER_SIP, TZ_SVC_INFO, TZ_INFO_IS_SVC_AVAILABLE_CMD)
-> +#define TZ_INFO_IS_SVC_AVAILABLE_ID_PARAM_ID		0x1
-> +
-> +/* Hypervisor boot types */
-> +#define QCOM_HYP_BOOT_TYPE_GUNYAH		0
-> +#define QCOM_HYP_BOOT_TYPE_KVM			1
-> +
-> +/* TCR_EL2 bit field definitions */
-> +#define TCR_T0SZ_MASK				0x1FUL
-> +#define TCR_PS_MASK				(0x7UL << 32)
-> +#define TCR_PS_SHIFT				16
-> +#define TCR_SH_ORGN_IRGN_MASK			0x3F00UL
-> +#define TCR_SH_INNER_SHAREABLE			(3UL << 12)
-> +#define TCR_ORGN_WRITE_BACK_ALLOC		BIT(10)
-> +#define TCR_IRGN_WRITE_BACK_ALLOC		BIT(8)
-> +
->  #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
->  void qcom_configure_capsule_updates(void);
->  #else
-> -- 
-> 2.34.1
-> 
+Thanks
+/Ilias
+>
+> >>>         efi_update_memory_map(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE,
+> >>>                               false, false);
+> >>>  #if defined(__aarch64__)
+> >>> diff --git a/lib/lmb.c b/lib/lmb.c
+> >>> index 7ecc548d831..da61b005154 100644
+> >>> --- a/lib/lmb.c
+> >>> +++ b/lib/lmb.c
+> >>> @@ -534,46 +534,19 @@ static long lmb_reserve(phys_addr_t base, phys_size_t size, u32 flags)
+> >>>
+> >>>  static void lmb_reserve_uboot_region(void)
+> >>>  {
+> >>> -       int bank;
+> >>> -       ulong end, bank_end;
+> >>> +       ulong size;
+> >>>         phys_addr_t rsv_start;
+> >>> -       ulong pram = 0;
+> >>>
+> >>>         rsv_start = gd->start_addr_sp - CONFIG_STACK_SIZE;
+> >>> -       end = gd->ram_top;
+> >>> +       size = gd->end_addr_sp - rsv_start;
+> >>>
+> >>> -       /*
+> >>> -        * Reserve memory from aligned address below the bottom of U-Boot stack
+> >>> -        * until end of RAM area to prevent LMB from overwriting that memory.
+> >>> -        */
+> >>> -       debug("## Current stack ends at 0x%08lx ", (ulong)rsv_start);
+> >>> -
+> >>> -#ifdef CFG_PRAM
+> >>> -       pram = env_get_ulong("pram", 10, CFG_PRAM);
+> >>> -       pram = pram << 10; /* size is in kB */
+> >>> -#endif
+> >>
+> >> This functionality is removed, but we still have boards defining CFG_PRAM
+> >
+> > The PRAM allocation occurs before this, and it is carved out of the region
+> > covered by start_addr_sp through end_addr_sp. It's actually part of the reason I
+> > needed to add end_addr_sp, as it moves the relocation address pointer. We don't
+> > need to account for it separately now.
+> >
+> >>> +       debug("## Current stack ends at 0x%08lx\n", (ulong)rsv_start);
+> >>>
+> >>> -       for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+> >>> -               if (!gd->bd->bi_dram[bank].size ||
+> >>> -                   rsv_start < gd->bd->bi_dram[bank].start)
+> >>> -                       continue;
+> >>> -               /* Watch out for RAM at end of address space! */
+> >>> -               bank_end = gd->bd->bi_dram[bank].start +
+> >>> -                       gd->bd->bi_dram[bank].size - 1;
+> >>> -               if (rsv_start > bank_end)
+> >>> -                       continue;
+> >>> -               if (bank_end > end)
+> >>> -                       bank_end = end - 1;
+> >>> -
+> >>> -               lmb_reserve(rsv_start, bank_end - rsv_start - pram + 1,
+> >>> +       if (gd->flags & GD_FLG_SKIP_RELOC)
+> >>> +               lmb_reserve((phys_addr_t)(uintptr_t)_start, gd->mon_len,
+> >>>                             LMB_NOOVERWRITE);
+> >>> -
+> >>> -               if (gd->flags & GD_FLG_SKIP_RELOC)
+> >>> -                       lmb_reserve((phys_addr_t)(uintptr_t)_start,
+> >>> -                                   gd->mon_len, LMB_NOOVERWRITE);
+> >>> -
+> >>> -               break;
+> >>> -       }
+> >>> +       else
+> >>> +               lmb_reserve(rsv_start, size, LMB_NOOVERWRITE);
+> >>>  }
+> >>>
+> >>>  static void lmb_reserve_common(void *fdt_blob)
+> >>> --
+> >>> 2.53.0
+> >>>
+> >>
+> >> Thanks
+> >> /Ilias
+>
