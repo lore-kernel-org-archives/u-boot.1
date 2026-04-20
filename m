@@ -4,91 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 460B3F5A8B8
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 20:35:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D3B6F5A8B8
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 20:35:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BD0084480;
+	by phobos.denx.de (Postfix) with ESMTP id B45228448F;
 	Mon, 20 Apr 2026 22:34:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WJapYNHj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QiR9ATuA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAA64843C0; Mon, 20 Apr 2026 21:42:45 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 2D2D2843C0; Mon, 20 Apr 2026 21:42:51 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8B11843AF
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 21:42:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B1708843AF
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 21:42:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-b9382e59c0eso542338766b.0
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 12:42:43 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776714163; cv=none;
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-ba60d78aff3so290877666b.2
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 12:42:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776714168; cv=none;
  d=google.com; s=arc-20240605;
- b=F19fC41w/Q3nGlXsEYWdDGl7IW9FGfZtop83teuJTY22s2apiGj7SN5VjE+8QWPUGb
- Ixmx7k2O/GlxVN//y7uN60bH+OKrBprnp2HmxYp2dugfVVxparEGBs7coMssp+iKRYPL
- vcN0fs5k24euic3EOnEG1H+Q0BKPJyVsmKt2CybGxJ0fO6b4CZYiTrcaycVmo1DtW/1w
- cNF6+WOesnl/AnOgqvA2O61YhdUsGwR7Ujzo0f5cPztqXwFnbN50qot+drb487Jn00FZ
- UZDzgtb8L7qEtUuhMfJWUPL2i4x+Zd52nx/LKQWPnomVz49hKuwrIt7XvxVidZnC1tFk
- GLRw==
+ b=HLFLrjDEvRLMPLhyacQpo4h3TzNN4IgLFi76OLplJrZ7cjaFF3XtVPfsgCD7wGDf2F
+ n76sbPJ+eCzQk5BbuN9S/s3GgkLN+gu6hZ+awPFw3PfWVfqCH+cza3osmJ0mS0Igmhvp
+ yfg7QzkfO+qwj2jQha2BPSacXJ4viWWp9CKc6oiBzwfnRUeJ68/YrdMnIDrGwbmb1QCZ
+ XOyNPiruE5yEZgv6juWFiPYxzB8VZhwl+CYM9lteFLatcPFY9Q80VC1Yyh4r6I2NPuwB
+ XEl3m7s68rbCUXiyt7HuvkWjnrSXmju7zDtkPVh53lg+vnVasTAI4OJggICuxwpmc7fS
+ p0oA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Ypuw9PF5xi/biZOPZRabWKAPeQ6GuFoWbITRVn4TTmI=;
+ bh=Ay8F/BTYwPDSV/SFkypuI/ltVZXRrxcnRaPDPv42+3E=;
  fh=B11T/ZyKvSxF0qhOl4M7rr4wqKWwkB2JbP3jqmHnKhk=;
- b=je+52nIxlAOtSypDWQ4ozBp2zDF1UAuDSnPXowEXNXQdCB4XmoM5NUfGPhjqRtultt
- /SRX5L6eqNVXkS5RlD/Eb86JJ4Tgk+K1+pdVzPTRhXyMC6eNoNXhTFaptl6Clbd+UGWq
- zzKDfG1341O55sCgb8+bO20DR5v+jOzc81Smr2NLu1zZloybOIsr9Q6kMOZORimjOt4I
- KVPSCq9jhZ3Cqz5BLMsA+hmHxMUhvPyIOZmFvwUaaSJYKhcDY3sx1D28zd8LYljeohys
- wxUhdPKryu+c40VJnj7ivYJ8Bd+Q0tw8Ne3/7nDYzYFooKKGG6CgXj69FFY7iVxTzppg
- tOLw==; darn=lists.denx.de
+ b=JZlp2XV0UcfH6E/JX3mtW5uzqA8XDVfLVuelIlgOKLqc/rdySatwa9EZHYrahY3bCM
+ I/79clZ14Xj2Il13/uIKQ9x3JowHUfMRxXryMx0MP7I1XVbDVufGKjbG5d+DqgDVX5Hs
+ BnOwtGSoaQDE1LxnqfGrAFy8hwTSQyFUl+De51CVszPwSOWbsVqP+Ek/d6GOL0WHRXcM
+ noCoIukSW+GKes8mEoyRg1ROvwN6rlxOFYwJ8UUqxzEigGGawijy91TH66Xa0b92FKWx
+ Qya17GFf2H16aMFHirVmk55HWSkgrJhE+ZD1AArwqnOYc9llMNg7peeRnFFUGIY9ZrvJ
+ sUkQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776714163; x=1777318963; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776714168; x=1777318968; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Ypuw9PF5xi/biZOPZRabWKAPeQ6GuFoWbITRVn4TTmI=;
- b=WJapYNHjweMwM7NC31wGNxA2QLzeMB0s+OihVBwV6E2rkOC6ivGGIDonKR7fyLi/rL
- NH65nDQRr75vOyoLpnVSGe4OWuJYkZz9u/j8blO2H1rrPK5PnvusVYQD3aSC80Augn54
- gR2SMBeVdDmFl2tg43OeRv37Bu564JZphRnWg=
+ bh=Ay8F/BTYwPDSV/SFkypuI/ltVZXRrxcnRaPDPv42+3E=;
+ b=QiR9ATuAPmN+FGGQupfSeij96tKeFqrFlvLzzH4DfDHoeXG+GHGg6Pd2Fmg8xXNmkt
+ Otg1EAsoxT4FJxOHjt5lfgvZB8qs4KcntlH26OokEhDGsNgeJK+Oy+3xgIbMMU4x37fk
+ EIXJOW3JjI2iTMfWWCTd/4rdb3WYjqUEoUtRI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776714163; x=1777318963;
+ d=1e100.net; s=20251104; t=1776714168; x=1777318968;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ypuw9PF5xi/biZOPZRabWKAPeQ6GuFoWbITRVn4TTmI=;
- b=p9qoCz42kH1BSjW5Q/20ofi36JI2pGlMduSuFyeF0NEX7msVwsGRGkAoyhsMz18yhF
- lk7igEg0fmIxy9a2g7AyqqRIxQxcOmKbqYfWYdIs8RofcL9r5FfH46hLgZmxDw/ZGFQ8
- B4VgFAipElnf6Xqkc7PSvkvaBvGfy9I9haprci3eyZlrjyQ4JPnUQaYQMpZD9dMx5tr1
- FZUa7WlcqLwWmeSANfyF2f2D/nfUbWlrFBk+CMxhCTiNFyXDlG7G1M9CPCFYyr36doqA
- kb3bYtwkZDTCbwN/peZFdMPph7K0vh46oq4YRRWkEj7vCwwuhj99JhfkmiX7VynxA8zJ
- n9uA==
-X-Gm-Message-State: AOJu0YzjETn3QCeqSJlVudq0mjQU4ORqLaFUBjTwxErUP56eeTaQF40+
- HlYIIU6D+dUWpmNhg82upNu3WswTx88VHoYaqAkIid2M67YeuyyZ3jIVJ4YJslchpkicZAkjgm8
- zJ7un66U415DSAqVh1YNToPZMv+ay3VMOFRMINRMqCibg5nW8iuGY6g==
-X-Gm-Gg: AeBDievbP4CqoXgN+vJvZl33Sw/Z8kapJ9+dvbYFITvGmrAlOcpOStdkl+uYoYVHSSi
- bGFs+WCrjVIeqoS+dvsGUAWrlJ5m0+qydiawszL68oWeswbLpEPr10SQJOFjeHtqku0Nb16OOrY
- Bquwl506K5B/1cIzTVoolrpN3ziRzY9w6bQZ1tSQ26JUIcfjkoJlgntz1iNseC6K1Zds44AAORk
- j77REUUuk+UZiDSignSi4gRKgMjbcO9cPtI9XSdZB5W8XD4oaDYEe4/0Izvm4ml6z0eLvqkGZOT
- lt6atrQBAoDRsDKDs2IpUviCC/SYR3g=
-X-Received: by 2002:a17:906:7946:b0:ba2:7010:c535 with SMTP id
- a640c23a62f3a-ba41c0bb9c2mr677898266b.47.1776714163159; Mon, 20 Apr 2026
- 12:42:43 -0700 (PDT)
+ bh=Ay8F/BTYwPDSV/SFkypuI/ltVZXRrxcnRaPDPv42+3E=;
+ b=RS7MlOgoeYphbYSow+UkcwT7jiO+4R5pzJWJgyMeMTkc+taviXXxUv4Vt8r6hVEtOe
+ eGGDu1I152EAtmP2NxdqYghH4TnhK2/5KzZTOR5uJC+Grf1nioQwVrVO5zNDV8E6RXEv
+ 5qvIX4ftzuAk+D+v2SqG3GQfMofzzn2V8Mz3sKgL4+CQlnhzXD6K3F+YE2noOqEfaYhl
+ 4dDVOAJzTtJvQDaC4hmNIZfZ2uKNoyDTGlc2pfHttcVcOLz05KvTOTR3ToV/aQWQfoKv
+ u2gqlZMwzNDvIDSuPDobSfBhzQlR/j8Ewuh4/bhzq6wB5tvKNFVwrPVHMjHCYP7bCAFQ
+ m1EQ==
+X-Gm-Message-State: AOJu0YwDymV0L0NWXAd1as7ZNjnzo+XVRi93Exg7SxOiTKfk0xwKap3x
+ FYtRTb/n/ihgo1xlD06wxxai1xvmi+x6wyeM1wjNn9et3LN38nvFW9bnbaEYilTx16Vxu5fAkqC
+ N6HazveXjy2quM1N9FqxrgnRp2prPZkKO1e52dbDL
+X-Gm-Gg: AeBDiesjxMp76Yh56XN8QMohwYFJeS7p6TejmhwciYopGa66+jdg7trQOGPPTyo52Pv
+ +6LFppedc7YdYlfe5BhxS5SBMrkW5v5X0xGH+fQvwa3BnmuAqvAypgUT+JOUCzjJA7Ku9+davxX
+ /XS2epQMgJZDSCpG0vPO5cw+7Oy7fb5q2Lwaf1B+QjXMkJvx5b6KjU3RbnNeAqtlu5FqzlUo2ns
+ WGk7V0/frdmXCx09pqByJ8CWP+b5FFVxWvU6gycavC8c22YNz+yMDrJxQgt4kE53LFkYLODp4Sr
+ 5thyfVphvAbiLnAT0MUu
+X-Received: by 2002:a17:907:3f9d:b0:ba5:20b1:c13b with SMTP id
+ a640c23a62f3a-ba520b1c177mr549344266b.28.1776714168006; Mon, 20 Apr 2026
+ 12:42:48 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
- <20260420-net-kconfig-v1-2-9900002d8e72@cherry.de>
-In-Reply-To: <20260420-net-kconfig-v1-2-9900002d8e72@cherry.de>
+ <20260420-net-kconfig-v1-3-9900002d8e72@cherry.de>
+In-Reply-To: <20260420-net-kconfig-v1-3-9900002d8e72@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 21 Apr 2026 07:42:29 +1200
-X-Gm-Features: AQROBzDznf7kDxkVeaGLIG0V-FmjUP2E_ft52nSwIy0O1aD65pjfMq1tnx7ViT8
-Message-ID: <CAFLszTgZC1FGy8965pHiG-u=FhrguftRv41ghQ_Qb_RRXx6tyg@mail.gmail.com>
-Subject: Re: [PATCH 2/6] rename NET to NET_LEGACY
+Date: Tue, 21 Apr 2026 07:42:33 +1200
+X-Gm-Features: AQROBzBBD6QWXgHXqsAjqUBUSofUJnydf3AlVzyEs0FPNUlgYAhIX3iqwKpVkiY
+Message-ID: <CAFLszTh3hYDBX1LbegMCGqOE4JPyNr2yBTkX87Av_qptXqLLZg@mail.gmail.com>
+Subject: Re: [PATCH 3/6] net: make NET a menuconfig (and downgrade NO_NET to a
+ simple config)
 To: foss+uboot@0leil.net
 Cc: u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com, 
  Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>, 
@@ -173,49 +174,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
-
 On 2026-04-20T11:36:06, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> rename NET to NET_LEGACY
+> net: make NET a menuconfig (and downgrade NO_NET to a simple config)
 >
-> Highlight that NET really is the legacy networking stack by renaming the
-> option to NET_LEGACY.
+> This will allow a bunch of simplifications across the code base.
+> Disabling NET is the equivalent of today's NO_NET choice. This means
+> that if NET is enabled, either the legacy or lwIP stack is necessarily
+> selected, which allows us to simplify if NET_LEGACY || NET_LWIP into
+> if NET in a later commit.
 >
-> This requires us to add an SPL_NET_LEGACY alias to SPL_NET as otherwise
-> CONFIG_IS_ENABLED(NET_LEGACY) will not work for SPL.
+> Config fragments - or defconfigs including other defconfigs - setting
+> the network stack (NET_LEGACY or NET_LWIP) must also set NET (or unset
+> NO_NET) if the config they apply to - or the included defconfigs -
+> unsets NET (or selects NO_NET) as otherwise the NET_LEGACY and NET_LWIP
+> symbols are unreachable. This is the case for the two defconfig modified
+> in this commit.
 >
-> The "depends on !NET_LWIP" for SPL_NET clearly highlights that it is
-> using the legacy networking app so this seems fine to do.
+> NO_NET is now a convenience symbol which hides NET entirely to avoid
+> modifying many defconfigs. If one selected NO_NET to disable the
+> networking stack in the past, this will still work for now. Technically,
+> we should be using the 'transitional' Kconfig attribute but that is only
+> available since Kconfig from Linux kernel v6.18 and we're on 6.1 right
+> now.
 >
-> This also has the benefit of removing potential confusion on NET being a
-> specific networking stack instead of 'any' network stack.
+> Note that this moves CONFIG_SYS_RX_ETH_BUFFER from under the Network
+> menu back into the main menu as it seems like it needs to be defined
+> even when there's no need for NET support at all and menuconfig option
+> doesn't work the same way as a menu.
 >
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+>
+> configs/am62px_evm_r5_ethboot_defconfig |  2 +-
+>  configs/j722s_evm_r5_ethboot_defconfig  |  2 +-
+>  net/Kconfig                             | 23 ++++++++++++-----------
+>  3 files changed, 14 insertions(+), 13 deletions(-)
 
-> diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
-> @@ -422,7 +422,7 @@ includes the full set of commands, more error messages when things go wrong and
-> -several filesystem and network features (if CONFIG_NET is enabled) so that
-> +several filesystem and network features (if CONFIG_NET_LEGACY is enabled) so that
-
-Shouldn't this be left alone? Or perhaps restored in patch 4?
-
-BOOTSTD_DEFAULTS selects BOOT_DEFAULTS which enables network commands
-conditionally on !NO_NET, meaning any network stack.
-
-> diff --git a/cmd/ufetch.c b/cmd/ufetch.c
-> @@ -159,7 +159,7 @@ static int do_ufetch(struct cmd_tbl *cmdtp, int flag, int argc,
-> -                     if (IS_ENABLED(CONFIG_NET))
-> +                     if (IS_ENABLED(CONFIG_NET_LEGACY))
->                               printf('Net');
-
-Similar question here.
-
-> diff --git a/board/siemens/iot2050/board.c b/board/siemens/iot2050/board.c
-> @@ -232,7 +232,7 @@ void set_board_info_env(void)
-> -     if (IS_ENABLED(CONFIG_NET)) {
-> +     if (IS_ENABLED(CONFIG_NET_LEGACY)) {
-
-and here
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
