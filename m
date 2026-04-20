@@ -4,73 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 266B6F5A8B8
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 20:33:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D25AF5A8BB
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 20:33:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C3A6843C0;
+	by phobos.denx.de (Postfix) with ESMTP id EB30F8440E;
 	Mon, 20 Apr 2026 22:33:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=couthit.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="cxqh5I/M";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=couthit.com header.i=@couthit.com header.b="hM6y8Q1B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B7C9843C7; Mon, 20 Apr 2026 15:25:45 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id DF48C843B7; Mon, 20 Apr 2026 15:27:57 +0200 (CEST)
+Received: from server.couthit.com (server.couthit.com [162.240.164.96])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 828DE84366
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 15:25:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 1393A84366
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 15:27:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 33E6960580;
- Mon, 20 Apr 2026 13:25:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E80AC2BCB9;
- Mon, 20 Apr 2026 13:25:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1776691541;
- bh=nUeDqqIqZThKOvtq1TG14lEDvu9YNvNLQwVNei7ZDwY=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=cxqh5I/MNGBO+GHOeTt2ar85NXBjdUDIeVxchtgkRvvJZDiLkvBdWLD6WTf0zuMK7
- 4Kg3nBZwwBGYA/Ug8F6OeB1B34HDR5QNXt+bRk0hjpf55FztpFlTtx/LJw0BWo5rY2
- +sxnz4VQxAIn/wgLbDefbPCkZz2shGajp0AeEsd7UJyPxjQS5/WaiLE0PbjxtBSTbw
- JFfXfm88b+5RZLo4v3QA8Tk4fY5aUNuy4KACpz+TPSEFjkPF66mkohUw8IzlTCCvzN
- Bmme4PEBachQcRvQG75jTbBxNy8GPpq9aCN9K1oGqj2nQ9QDtpUiLTru4BHWGwn2Lp
- HKQ3/c+Ky8Z7Q==
-Date: Mon, 20 Apr 2026 18:55:25 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
- casey.connolly@linaro.org, neil.armstrong@linaro.org,
- peng.fan@nxp.com, jh80.chung@samsung.com, lukma@denx.de,
- tien.fong.chee@altera.com, anshuld@ti.com,
- alif.zakuan.yuslaimi@altera.com, tingting.meng@altera.com,
- alice.guo@nxp.com, quentin.schulz@cherry.de,
- ilias.apalodimas@linaro.org, xypron.glpk@gmx.de,
- mkorpershoek@kernel.org, h-salunke@ti.com, alchark@gmail.com,
- dario.binacchi@amarulasolutions.com, ye.li@nxp.com,
- andre.przywara@arm.com, afd@ti.com, dinesh.maniyam@altera.com,
- balaji.selvanathan@oss.qualcomm.com, danila@jiaxyga.com,
- aswin.murugan@oss.qualcomm.com, luca.weiss@fairphone.com,
- adrian@mainlining.org, justin@tidylabs.net, n-francis@ti.com,
- wens@kernel.org, jamie.gibbons@microchip.com,
- david.wronek@mainlining.org, alexeymin@postmarketos.org,
- james.hilliard1@gmail.com, michael@amarulasolutions.com,
- richard.genoud@bootlin.com, philip.molloy@analog.com,
- sughosh.ganu@arm.com, u-boot@lists.denx.de, u-boot-qcom@groups.io,
- michael.srba@seznam.cz
-Subject: Re: [PATCH v2 2/9] doc: board/qualcomm: Update RDP build instructions
-Message-ID: <aeYpRSg2S6p8dNZt@sumit-xelite>
-References: <20260410091154.1001021-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260410091154.1001021-3-varadarajan.narayanan@oss.qualcomm.com>
+ dmarc=pass (p=none dis=none) header.from=couthit.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=parvathi@couthit.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=couthit.com
+ ; s=default;
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:
+ References:In-Reply-To:Message-ID:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=Pv4fra5ZklNYxfuS+JlKltgr7zDDP11NHMH1VOqzCDM=; b=hM6y8Q1BZHW08A759bPBumyr2f
+ QUJwYrUVdwjKn8F/PlXpPA8O1NwPoRjZt4tSCs7sAK9kGqJnDhUy6YjTSpsmwSrWlB4vEXgidhfyg
+ iQVFFpczgsptrja6SyhL4Rpao9bmorA5iHWfYg4y1uecDVvCC4uCQIq+YmSpZr15PNhsco4EF0Dao
+ IpX50Eu1Ouf/Q38uWfjFioHZYE6yKDDZ42GAbXc4InlisYSBa+K/8d6ccTQzyuX/8kggZZatK1rre
+ T8nwiezaT3wuimLLI06LIdc7EZQstCItdE3ogKdGwRmD/ss1XakMADvRNbUsJsLQYzbre7IaEFM8Q
+ 5lzRnGUw==;
+Received: from [115.246.246.98] (port=46933 helo=zimbra.couthit.local)
+ by server.couthit.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.98.1) (envelope-from <parvathi@couthit.com>)
+ id 1wEofG-00000008vul-2E7g; Mon, 20 Apr 2026 09:27:51 -0400
+Received: from localhost (localhost [127.0.0.1])
+ by zimbra.couthit.local (Postfix) with ESMTP id 5CD851A036D1;
+ Mon, 20 Apr 2026 18:57:43 +0530 (IST)
+Received: from zimbra.couthit.local ([127.0.0.1])
+ by localhost (zimbra.couthit.local [127.0.0.1]) (amavis, port 10032)
+ with ESMTP id 3WzhMkXJBlBA; Mon, 20 Apr 2026 18:57:41 +0530 (IST)
+Received: from localhost (localhost [127.0.0.1])
+ by zimbra.couthit.local (Postfix) with ESMTP id 946181A036D3;
+ Mon, 20 Apr 2026 18:57:41 +0530 (IST)
+Received: from zimbra.couthit.local ([127.0.0.1])
+ by localhost (zimbra.couthit.local [127.0.0.1]) (amavis, port 10026)
+ with ESMTP id vnNoMd_SyJme; Mon, 20 Apr 2026 18:57:41 +0530 (IST)
+Received: from zimbra.couthit.local (zimbra.couthit.local [10.10.10.103])
+ by zimbra.couthit.local (Postfix) with ESMTP id 7510F1A036D1;
+ Mon, 20 Apr 2026 18:57:41 +0530 (IST)
+Date: Mon, 20 Apr 2026 18:57:41 +0530 (IST)
+From: Parvathi Pudi <parvathi@couthit.com>
+To: Markus Schneider-Pargmann <msp@baylibre.com>
+Cc: Parvathi Pudi <parvathi@couthit.com>, u-boot <u-boot@lists.denx.de>, 
+ trini <trini@konsulko.com>, Maarten Brock <Maarten.Brock@sttls.nl>, 
+ kory maincent <kory.maincent@bootlin.com>, 
+ sbellary <sbellary@baylibre.com>, 
+ romain gantois <romain.gantois@bootlin.com>, 
+ pratheesh <pratheesh@ti.com>, j-rameshbabu <j-rameshbabu@ti.com>, 
+ praneeth <praneeth@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, 
+ srk <srk@ti.com>, rogerq <rogerq@ti.com>, 
+ danishanwar <danishanwar@ti.com>, m-malladi <m-malladi@ti.com>, 
+ krishna <krishna@couthit.com>, mohan <mohan@couthit.com>, 
+ pmohan <pmohan@couthit.com>, basharath <basharath@couthit.com>
+Message-ID: <492575571.963656.1776691661397.JavaMail.zimbra@couthit.local>
+In-Reply-To: <DHX8QE2PJQNL.227YQ1FK7JBGG@baylibre.com>
+References: <20260407082402.2311644-1-parvathi@couthit.com>
+ <DHUF0R06L66I.OSJLU3XXXRAJ@baylibre.com>
+ <1738882833.949820.1776427607139.JavaMail.zimbra@couthit.local>
+ <DHX8QE2PJQNL.227YQ1FK7JBGG@baylibre.com>
+Subject: Re: [PATCH] board: ti: am335x: Conditional MDIO PAD configuration
+ instead of static for AM335_ICE
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260410091154.1001021-3-varadarajan.narayanan@oss.qualcomm.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.10.10.233]
+X-Mailer: Zimbra 9.0.0_ZEXTRAS_20240927 (ZimbraWebClient - GC138
+ (Linux)/9.0.0_ZEXTRAS_20240927)
+Thread-Topic: board: ti: am335x: Conditional MDIO PAD configuration instead of
+ static for AM335_ICE
+Thread-Index: dgRCxmA6z9IvD3QQaIecxjLo+fyU/Q==
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - server.couthit.com
+X-AntiAbuse: Original Domain - lists.denx.de
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - couthit.com
+X-Get-Message-Sender-Via: server.couthit.com: authenticated_id:
+ smtp@couthit.com
+X-Authenticated-Sender: server.couthit.com: smtp@couthit.com
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 X-Mailman-Approved-At: Mon, 20 Apr 2026 22:33:40 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,114 +117,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adding Michael
+Hi Markus,
 
-On Fri, Apr 10, 2026 at 02:41:47PM +0530, Varadarajan Narayanan wrote:
-> Add details about the SPL & U-Boot proper build steps, converting to
-> flashable images, source URLs for the needed binaries and scripts.
+> Hi Parvathi,
 > 
-> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-> ---
->  doc/board/qualcomm/rdp.rst | 69 ++++++++++++++++++++++++++++++++++++++
->  1 file changed, 69 insertions(+)
+> On Fri Apr 17, 2026 at 2:06 PM CEST, Parvathi Pudi wrote:
+>> Hi Markus,
+>>  
+>>> On Tue Apr 7, 2026 at 10:22 AM CEST, Parvathi Pudi wrote:
+>>>> This patch removes the static MDIO pinmux configuration from
+>>>> rmii1_pin_mux[] and instead configures the MDIO pins conditionally
+>>>> during board_init(). Previously, the MDIO_CLK and MDIO_DATA pins
+>>>> were always configured for CPSW in mux.c, which could lead to
+>>>> unnecessary pin ownership and conflicts in scenarios where CPSW
+>>>> is not used.
+>>>>
+>>>> With this change, the MDIO pins are configured only when required,
+>>>> ensuring that CPSW Ethernet functionality in U-Boot remains unaffected.
+>>>> This approach keeps Ethernet boot behavior intact and provides cleaner
+>>>> separation between CPSW and other Ethernet use cases.
+>>> 
+>>> Do you have a specific use case here?
+>>> 
+>>
+>> We have an ICSSM PRUETH Ethernet use case. The existing static MDIO pinmux
+>> configuration has been hard-coded for CPSW. Based on the hardware jumper
+>> setting we configure the MDIO either for CPSW or for the ICSSM PRUETH use case.
+>>
+>>>>
+>>>> Signed-off-by: Parvathi Pudi <parvathi@couthit.com>
+>>>> ---
+>>>>  board/ti/am335x/board.c | 22 ++++++++++++++++++++++
+>>>>  board/ti/am335x/mux.c   |  2 --
+>>>>  2 files changed, 22 insertions(+), 2 deletions(-)
+>>>>
+>>>> diff --git a/board/ti/am335x/board.c b/board/ti/am335x/board.c
+>>>> index 90e37a8d913..abeab809387 100644
+>>>> --- a/board/ti/am335x/board.c
+>>>> +++ b/board/ti/am335x/board.c
+>>>> @@ -61,6 +61,18 @@ DECLARE_GLOBAL_DATA_PTR;
+>>>>  #define GPIO_ETH0_MODE		GPIO_TO_PIN(0, 11)
+>>>>  #define GPIO_ETH1_MODE		GPIO_TO_PIN(1, 26)
+>>>>  
+>>>> +#define AM335X_PIN_MDIO	0x948
+>>>> +#define AM335X_PIN_MDC		0x94c
+>>> 
+>>> These two are not aligned when applied.
+>>> 
+>>
+>> We will fix this in the next version.
+>>
+>>>> +
+>>>> +#define GPIO_MDIO_DATA		CTRL_BASE + AM335X_PIN_MDIO
+>>>> +#define GPIO_MDIO_CLK		CTRL_BASE + AM335X_PIN_MDC
+>>>> +
+>>>> +/* Enabling MDIO_DATA by setting MUX_MODE to 0, RXACTIVE, PULLUP_EN bits */
+>>>> +#define PAD_CONFIG_MDIO_DATA	0x30
+>>>> +
+>>>> +/* Enabling MDIO_CLK by setting MUX_MODE to 0, PULLUP_EN bit */
+>>>> +#define PAD_CONFIG_MDIO_CLK	0x10
+>>>> +
+>>>>  static struct ctrl_dev *cdev = (struct ctrl_dev *)CTRL_DEVICE_BASE;
+>>>>  
+>>>>  #define GPIO0_RISINGDETECT	(AM33XX_GPIO0_BASE + OMAP_GPIO_RISINGDETECT)
+>>>> @@ -779,6 +791,16 @@ int board_init(void)
+>>>>  			hang();
+>>>>  		}
+>>>>  
+>>>> +		if (!eth0_is_mii || !eth1_is_mii) {
+>>> 
+>>> eth0_is_mii and eth1_is_mii is the same, as it was checked in the
+>>> if condition above this one. You could make this an else if as well if
+>>> you like.
+>>> 
+>>
+>> Sure, we will clean it up in the next version.
+>>
+>>>> +			/* Set the Mux Mode to MDIO_DATA */
+>>>> +			reg = readl(GPIO_MDIO_DATA);
+>>>> +			writel(reg & PAD_CONFIG_MDIO_DATA, GPIO_MDIO_DATA);
+>>>> +
+>>>> +			/* Set the Mux Mode to MDIO_CLK */
+>>> 
+>>> Please remove comments for code that shows the same thing.
+>>> 
+>>
+>> We will fix this in the next version.
+>>
+>>>> +			reg = readl(GPIO_MDIO_CLK);
+>>>> +			writel(reg & PAD_CONFIG_MDIO_CLK, GPIO_MDIO_CLK);
+>>> 
+>>> Could you do the same thing in enable_board_pin_mux()? Or would it be
+>>> possible to reuse mux.h here to avoid redefining values etc.?
+>>> 
+>>> Why do you use reg & PAD_CONFIG_MDIO_CLK instead of writing
+>>> PAD_CONFIG_MDIO_CLK directly and skip the read?
+>>> 
+>>
+>> enable_board_pin_mux() runs before the jumper state is known, so we can't
+>> use it here. We'll reuse the existing macros from mux.h instead to avoid
+>> the redefinition's.
+>>
+>>>> +		}
+>>>> +
+>>> 
+>>> This snippet is in the section guarded by these:
+>>> 
+>>>  #if defined(CONFIG_CLOCK_SYNTHESIZER) && (!defined(CONFIG_XPL_BUILD) || \
+>>>    (defined(CONFIG_SPL_ETH) && defined(CONFIG_XPL_BUILD)))
+>>>    if (board_is_icev2()) {
+>>> 
+>>> Is this the same as for the original pinmux setup?
+>>> 
+>>
+>> We have not changed the original pinmux setup.
+>> Can you please elaborate bit more on this?
 > 
-> diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
-> index 99cf8eba57c..d09dba52044 100644
-> --- a/doc/board/qualcomm/rdp.rst
-> +++ b/doc/board/qualcomm/rdp.rst
-> @@ -42,6 +42,67 @@ on your device with::
->  
->  U-Boot should be running after a reboot (``reset``).
->  
-> +Build steps for IPQ5210 based Qualcomm Dragonwing F8 & N8 Platforms:
-> +====================================================================
-
-Rather than just the build steps, please describe the overall boot flow.
-And since you have created a common SPL file for all the Qcom platforms,
-can you ellaborate on how the boot flow is going to be reused across
-Qcom platforms. Maybe we just need a dedicated spl.rst document here.
-
-Also, how does this series align with one for SPL support on SDM845 here
-[1]? Are there things that both SPL ports can reuse from each other?
-
-[1] https://lore.kernel.org/all/20260411-qcom_spl-v2-0-9609557cf562@seznam.cz/
-
--Sumit
-
-> +
-> +Please refer to the following URLs for more details about the platforms.
-> +
-> +	F8: https://www.qualcomm.com/networking-infrastructure/products/f-series/f8-platform
-> +
-> +	N8: https://www.qualcomm.com/networking-infrastructure/products/n-series/n8-platform
-> +
-> +1. Since U-Boot SPL is enabled on these platforms, the build command generates
-> +   both the U-Boot SPL and U-Boot proper images. Assuming ${uboot_dir} is the
-> +   top of the U-Boot sources and ${out_dir} as the output directory,
-> +
-> +	$ cd ${uboot_dir}
-> +	$ export CROSS_COMPILE=<aarch64 toolchain prefix>
-> +	$ make -j8 O=${out_dir} qcom_ipq5210_mmc_defconfig
-> +	$ make -j8 O=${out_dir}
-> +
-> +   U-Boot SPL image:	${out_dir}/spl/u-boot-spl.wrap-elf
-> +   U-Boot image:	${out_dir}/u-boot.elf
-> +
-> +2. Convert the SPL image to multi ELF
-> +
-> +	$ cd ${out_dir}/spl
-> +	$ python elftombn.py -f u-boot-spl.wrap-elf -o u-boot-spl.mbn -v7
-> +	$ python create_multielf.py -f u-boot-spl.mbn,tmel-ipq52xx-patch.elf \
-> +					-o u-boot-spl.melf
-> +
-> +   This u-boot-spl.melf should be flashed into 0:SPL partition.
-> +   Please see below for the location of ``tmel-ipq52xx-patch.elf``
-> +
-> +3. Convert the U-Boot image to bootloader image
-> +
-> +	$ cd ${out_dir}
-> +	$ python elftombn.py -f u-boot.elf -o u-boot.mbn -v7
-> +
-> +   The u-boot.mbn has to be combined with qc_config.elf, QCLib.elf, TFA and
-> +   OPTEE. Please see below for the location for these ELFs. TFA and OPTEE can be
-> +   built from the sources using the following commands
-> +
-> +   TFA:
-> +	$ make PLAT=ipq52xx QTISECLIB_PATH=path/to/libqtisec_dbg.a SPD=opteed
-> +
-> +   OPTEE:
-> +	$ make PLATFORM=qcom-ipq52xx -j16
-> +
-> +   These binaries can be combined into a flashable image using ``gen_its.py``.
-> +
-> +	$ python gen_its.py --arch ipq5210		\
-> +		--qclib_path QCLib.elf			\
-> +		--qcconfig_path qc_config.elf		\
-> +		--tfa_bl31_path bl31.mbn		\
-> +		--uboot_path u-boot.mbn			\
-> +		--optee_path tee-raw.mbn		\
-> +		-p qcconfig qclib			\
-> +		-P tfa_bl31 uboot optee			\
-> +		-o output/hm_503_test_uboot.img		\
-> +		--template template.its
-> +
-> +   This should be flashed into 0:BOOTLDR partition.
-> +
->  .. WARNING
->  	Boards with newer software versions would automatically go the emergency
->  	download (EDL) mode if U-Boot is not functioning as expected. If its a
-> @@ -56,3 +117,11 @@ U-Boot should be running after a reboot (``reset``).
->  
->  .. _elftombn.py: https://git.codelinaro.org/clo/qsdk/oss/system/tools/meta/-/tree/NHSS.QSDK.13.0.5.r2/scripts?ref_type=heads
->  .. _edl: https://github.com/bkerler/edl
-> +.. _create_multielf.py: https://raw.githubusercontent.com/coreboot/coreboot/refs/heads/main/util/qualcomm/create_multielf.py
-> +.. _tmel-ipq52xx-patch.elf: https://softwarecenter.qualcomm.com/nexus/generic/product/chip/software-product/IPQ5210.NLQ.14.0/ipq5210.nlq.14.0-qca-oem-qartifact/r00036.1/TMEL.WNS.2.4/tmel-ipq52xx-patch.elf
-> +.. _libqtisec_dbg.a: https://softwarecenter.qualcomm.com/nexus/generic/product/chip/software-product/IPQ5210.NLQ.14.0/ipq5210.nlq.14.0-qca-oem-qartifact/r00036.1/WIN.TFA.1.0.R4/apss_proc/out/proprietary/qtiseclib/output/ipq52xx/release/libqtisec_dbg.a
-> +.. _qc_config.elf: https://softwarecenter.qualcomm.com/nexus/generic/product/chip/software-product/IPQ5210.NLQ.14.0/ipq5210.nlq.14.0-qca-oem-qartifact/r00036.1/BOOT.MXF.2.3.1.1/boot_images/boot/QcomPkg/SocPkg/Hermosa/Bin/LC/RELEASE/qc_config.elf
-> +.. _QCLib.elf: https://softwarecenter.qualcomm.com/nexus/generic/product/chip/software-product/IPQ5210.NLQ.14.0/ipq5210.nlq.14.0-qca-oem-qartifact/r00036.1/BOOT.MXF.2.3.1.1/boot_images/boot/QcomPkg/SocPkg/Hermosa/Bin/LC/RELEASE/QCLib.elf
-> +.. _gen_its.py: https://git.codelinaro.org/clo/qsdk/oss/system/tools/meta/-/tree/win.platform_tools.1.0.r34/scripts?ref_type=heads
-> +.. _TFA: https://git.codelinaro.org/clo/trusted-firmware/tf-a/trusted-firmware-a/-/tree/win.tfa.1.0.r4?ref_type=heads
-> +.. _OPTEE: https://git.codelinaro.org/clo/trusted-firmware/optee_os/optee_os/-/tree/win.optee.1.0?ref_type=heads
-> -- 
-> 2.34.1
+> Yes, I specifically meant the #if defined(...) conditions that are
+> present for the if block in which you added the new code. The MDIO
+> configuration is now only executed when CONFIG_CLOCK_SYNTHESIZER is set
+> (and CONFIG_SPL_ETH for SPL builds). Is this intentional and the same
+> condition as it was running in the pinmux code?
 > 
+
+CONFIG_CLOCK_SYNTHESIZER is needed for Ethernet functionality. Currently,
+this is the only place where the jumper settings are being read and the
+appropriate RMII/MII mode is set. If the jumper is set to CPSW (RMII) mode
+then the MDIO pin mux changes proposed in our patch will retain the existing
+Ethernet functionality.
+
+Thanks and Regards,
+Parvathi.
