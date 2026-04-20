@@ -4,113 +4,152 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D655F36C39
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 07:29:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9C0AF36C40
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 07:45:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C9BD839D5;
-	Mon, 20 Apr 2026 09:29:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 38D38839D5;
+	Mon, 20 Apr 2026 09:45:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="OHX7NSZv";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="WHUvx1ad";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="h9e+cLH/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 424F18421A; Mon, 20 Apr 2026 09:29:53 +0200 (CEST)
-Received: from BN8PR05CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::3])
+ id B1924839D9; Mon, 20 Apr 2026 08:40:58 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3FBF83693
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 09:29:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uHypQgxS/W2kM8HNVPcdpQAMKDWJUUedyCvqfWbH0AQgEsfivEzCdw0Ebwx1p/v0VIQcLNgIWgMFBiOWRHRwx9JsR+8vPZcUBlZE7wr+VztLuw7vlZ4bF5iXvwscQMA40TZEIeBktph+ZAd7++ZU/svHghCqPJNRnnWWf3OtXPAgALWCkLH+DXvW7R5eLpr8djLkijyIML7oB4HyMd9spKAjFOofEU51REsl9jheEC1UzX9xeM0vb515mhsSmpQD4OQ/8oQCqmd4PAXlSUYWtN98wGdpB1+/tlIhwfXkuBCv3toYf+gIXmPDoaIB7OR0IgTcOZ7PrXNd5RG3to8Rlg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0zGsJtz3s1b6Mh5ROHaIOsoKsweS9kTJkREfIekT+rw=;
- b=qqQaBAG2OuJasFUvv9Dd1op/K0Ssn1PPzppdYfg75fsdsm0/Dk9WTvYMn5b7qLIoJLNRhbIEmR3SBIMQ7uGqjtENPndgIN0OxalkJI/lp0vl4yDg81xK4lkpJ4rXtk6MWwSSYxtFxxJMoFYLk4QGhxAj/ls2692sA1gySVBc1ty5jCdJVC3RIyn/fXp/1g7WlnWjUFZVLUaIvH/oZ5tdTL6K0KUa4jGhhnU1NmSFFcDXWdWpBDW+ozaiRHoe9c11ZqR/iuX85euarY5+q7d3uXWAMVFWpc3chKW82hsOKj5QPwTHbUQa5ClZhUHm9OaOFTz2n0GWO2ifkfMmcKVvIQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0zGsJtz3s1b6Mh5ROHaIOsoKsweS9kTJkREfIekT+rw=;
- b=OHX7NSZvk3q1LyzoR5ywh4kxkT6/rHt/hPKE1hB7871t8WQfmf4cL6TSFXX/zp8CTDV0hvX3yYW9BnoHUjKrDBS5vYW0NWspukAkH3+LfDay0HxEaKuctCPQuDVf4oPXJCgMQEaQbiqqs8ydGb3gpLBtQ+DTXljUvWGpjFKYtBw=
-Received: from BN0PR08CA0022.namprd08.prod.outlook.com (2603:10b6:408:142::7)
- by CY8PR12MB7564.namprd12.prod.outlook.com (2603:10b6:930:97::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.15; Mon, 20 Apr
- 2026 07:29:46 +0000
-Received: from BN1PEPF00005FFD.namprd05.prod.outlook.com
- (2603:10b6:408:142:cafe::57) by BN0PR08CA0022.outlook.office365.com
- (2603:10b6:408:142::7) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Mon,
- 20 Apr 2026 07:29:45 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- BN1PEPF00005FFD.mail.protection.outlook.com (10.167.243.229) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9791.48 via Frontend Transport; Mon, 20 Apr 2026 07:29:45 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Mon, 20 Apr
- 2026 02:29:45 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Mon, 20 Apr
- 2026 02:29:44 -0500
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Mon, 20 Apr 2026 02:29:42 -0500
-From: Padmarao Begari <padmarao.begari@amd.com>
-To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
-CC: <git@amd.com>, <padmarao.begari@amd.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, "Tom
- Rini" <trini@konsulko.com>
-Subject: [PATCH] efi_loader: expand disk device names with drive details
-Date: Mon, 20 Apr 2026 12:58:41 +0530
-Message-ID: <20260420072935.3024696-1-padmarao.begari@amd.com>
-X-Mailer: git-send-email 2.34.1
+ by phobos.denx.de (Postfix) with ESMTPS id 625C2805D7
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 08:40:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 63JMUahd1341653
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 06:40:54 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=+mwXPahJVRvaLgPjoQXORJxj
+ 69nMBv4KBmjQmrXmEIk=; b=WHUvx1ad/Y25JoXwRcEsjihdMYDaoE31PYrWEDKV
+ PDH07lWIrt84qShpv/6BIAEFTkF4AQyj1rmU6RsJ1ZodJgeL/rxe7ZKd9VlK8GvU
+ v3nPc2VYd0vTTFBNjTo2xn7emlOUeRXRQIQvK4sefl6LkJBFVIEhxEtWP+y89N+T
+ Y5Vf9CnXANG+LuYClbavnKv95BGt85Q6SFyPoiWzj3vZ7+xFqkzJZeHONVgstbgd
+ VzUjSJMIeknPuk8t9XJY4u+WQlyWGZtDFlffimDgXpUcgkxM0Rhjn9kt4p+e6ZkS
+ D/kQL/yEB1/p8sM3sFALPLB/KkmYfB+b4gMBk3g25/O44A==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
+ [209.85.215.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dm34hcbx1-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 06:40:54 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id
+ 41be03b00d2f7-c76bb22a8ceso3070857a12.2
+ for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 23:40:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1776667254; x=1777272054; darn=lists.denx.de; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+mwXPahJVRvaLgPjoQXORJxj69nMBv4KBmjQmrXmEIk=;
+ b=h9e+cLH/U5q6Ab6o7OGbR14vlXeaJUip6vVPTGk9IZwzKTsZ8I07qo8T/rGFGat7e0
+ 6XqVgAkB9kyZc7tuAWUyImQX75Hc9V9kDNzAmAMd5HW4+QuhcpjV7Ru9kqvoLJd5BA23
+ jUueNkNyhW5wL8RF0GQIbV5g0sDEuoGouXSAiVG/lBRQOdF0gvN0/i4JDDBPD3JBMA2S
+ gqTklDKMydRP/ytTXe12Jm9K/wgbPtg+bYzR5ZViBHpkPdXc8wk79lWwG5IarNIdM1d2
+ wEtDX9mYU8YejCM5r7H3cQsO1UQZTEskT7TopLNc6L0o+xjQKrKm9EIbWdlSwj5PDaJm
+ vy0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776667254; x=1777272054;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+mwXPahJVRvaLgPjoQXORJxj69nMBv4KBmjQmrXmEIk=;
+ b=oxiB/xg9aNcc0gtyXD+q+Gem1bHaQqWx8eeMVAxTn+ch1Qse6QuqsdhW2HFLeZq3e/
+ krSiovo5Mx+vTSo1H5L9N4kWBBgzCIi+PxM8KD5NlvmDWMGNFHDakS7dKeHJkQloiMpw
+ PfhScXr0WDNrhFefZoL3eX7qLsP6SX6a4s39KW/i8jRtbA/T14SNaPV5LxZJU1I+gjWj
+ T5kBFOvpytpekSUayFOCEf3mF3pHlszdrKA2OkF5JVYSrZOggJVMtQC1lB66cwA3PRCy
+ sFKMtTp8RwGNa8So9wZRrrNYpiaKLN8CF8X42FFjJvpH+QSJNWQWpkzP9rqFVLt+PgwF
+ vX/A==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8kM6G000QUTYUGdE0YeiR1ztp4GX+MVPlITe6qd1cSmvvSlnv8tfyRecOURPL6g4QNK4BiS4I=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz2/65FmaLNCZN/MBlwpKwkaD0/3m/MEDt2BqSYAYbq06p84V/e
+ HQZijRrsMxD4eQGZVfneM/jEqDQfwePV0shBos2Hmj88RPFBUMAwzXNuIKyW5h8KSqxJ8bRJYxQ
+ sXRomKU/y8iEoQjSkfEJ83Ru14r5dlseBTlSRMbiRYShI1czNQPf7l4L5
+X-Gm-Gg: AeBDieuUoHszektpsFzhF2KTHir4pBmmA45xVvkc7KL9mLTwn1ZCSoy+u5CNbyhxR1e
+ WhAoMVJYsYZNAdMP3qQ4a4n3AVdcyb1ABGI5y2s3iIYWpB/+p+syyEOnHtgVPwmzWErTKwVnafp
+ fEKKDrosKCrPY9w/7svL0dL64QdCc4Wd9ptApN0bOldKZz7mrmMI/mUSI3bp08g3kZjAJvic4fO
+ wjG33NdsS5ayiM9LKWPTGqT7eZlnOcMnUntq+oT2w9+WlzUSNTCX2CAMJCl0HTE3wxagzd18kSs
+ /hnajPHPzdMpyqvUDjvGxJfo5uc3jXfqPvVLlLwmGTQPfv90+72sNf2nuKhiMXyd3+V701A3Tro
+ xB3JU6zMhsEdRyfmk8YxmnVGZa1wHnpBDUR6tpOb3tyALhp+2tzn875Hrox2AWMqCLdmP8DYUc8
+ 90xUIJ6gZRm9gYhgbrxDrCh3dKUhOGl1PyM2cHWezTI11j7ftsSdMlbYG5lNTlfA==
+X-Received: by 2002:a05:6a00:bb91:b0:81f:31c3:2e34 with SMTP id
+ d2e1a72fcca58-82f8c902072mr12338412b3a.25.1776667253591; 
+ Sun, 19 Apr 2026 23:40:53 -0700 (PDT)
+X-Received: by 2002:a05:6a00:bb91:b0:81f:31c3:2e34 with SMTP id
+ d2e1a72fcca58-82f8c902072mr12338379b3a.25.1776667253112; 
+ Sun, 19 Apr 2026 23:40:53 -0700 (PDT)
+Received: from hu-varada-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-82f8ebe6642sm11893057b3a.45.2026.04.19.23.40.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 19 Apr 2026 23:40:52 -0700 (PDT)
+Date: Mon, 20 Apr 2026 12:10:38 +0530
+From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
+ casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, peng.fan@nxp.com, jh80.chung@samsung.com,
+ lukma@denx.de, tien.fong.chee@altera.com, tingting.meng@altera.com,
+ anshuld@ti.com, alif.zakuan.yuslaimi@altera.com, alice.guo@nxp.com,
+ quentin.schulz@cherry.de, ilias.apalodimas@linaro.org,
+ mkorpershoek@kernel.org, h-salunke@ti.com, alchark@gmail.com,
+ dario.binacchi@amarulasolutions.com, ye.li@nxp.com,
+ andre.przywara@arm.com, dinesh.maniyam@altera.com,
+ luca.weiss@fairphone.com, danila@jiaxyga.com,
+ aswin.murugan@oss.qualcomm.com, balaji.selvanathan@oss.qualcomm.com,
+ adrian@mainlining.org, n-francis@ti.com, wens@kernel.org,
+ jamie.gibbons@microchip.com, justin@tidylabs.net,
+ ycliang@andestech.com, david.wronek@mainlining.org,
+ james.hilliard1@gmail.com, richard.genoud@bootlin.com,
+ michael@amarulasolutions.com, philip.molloy@analog.com,
+ sughosh.ganu@arm.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
+Subject: Re: [PATCH v3 02/10] clk/qcom: add initial clock driver for ipq5210
+Message-ID: <aeXKZvVE6ViBz0Az@hu-varada-blr.qualcomm.com>
+References: <20260416053928.2834699-1-varadarajan.narayanan@oss.qualcomm.com>
+ <20260416053928.2834699-3-varadarajan.narayanan@oss.qualcomm.com>
+ <CAFLszTj=iQO73XC8+d83Um8sw-QPd0ceTDLN6zU53GDD8B3aSQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00005FFD:EE_|CY8PR12MB7564:EE_
-X-MS-Office365-Filtering-Correlation-Id: e065016c-fec3-449c-6561-08de9eae98c5
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700016|376014|82310400026|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: 8t5FEvakbc51DK2z+a26Kh+xdTCXk0/wGqn4rom8g6wNQBIVQ5CcxJGywysis6ckZ6RUrI/KkeQcivpsyQD73nY8tqD4sykevtUn3KjXQlWbgZYtJ417qs9u6reOEhU4E5mFyTuMc3aNjzaqdqSfaeDfkoQhZ7iNjU672AupeZipz2AOzrcbjcWQA/gGDM79pwJdO2onGtqSW3xn57dRxYTiss52mUZRu92BT8WfwUbBFkK5qFR+5KmieJZ2K1QVlwVrLduks9Eu5H8S0JIGTV34pQaqf8noWcCa9cu12eph7fVBE007Axx79kYvPNxoRcOzkGyKj1g7ULrhrlmqjHiQ6Ujj0ORDhFOkjZYURbIdvmcjvAfwc1rkBb58CnnCfPTOq7fxLEFE9WgsQ+2GMH0DoLmAvkMT/rRhtC8dBZGbkTJkN9/6Ie96KsVsb2II46hScBO3inb0C1QQ3a64/uAckK2C519XBfwFO3PotjjhAXvExdCdrk2Vjwa6bhvEvG7gQRy+wz63ov9Qa5i27faVbvljBZTHJmpEitlAVpqZDBl7BTO9ETzeW7x9VGAYG0/IMg/NH+VqNr6SiT+BYALSkB1EKlJGHoL8Nj2D5isaWpbyOJji9Zv+4sqMpnjguFJJIq2vPwfSDJ82RdMyeappGfmOiVUjLWQZjLXT6fb6u4FrjGKxAjGtqpiaikCMM58Z4jt/HB537IOW+eyFC9PlorQ59iKFRoDOpYDSCZt23FQVty/TPctx9Vj/p0Jjk17IM2d57cb79WK4wrsHkw==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700016)(376014)(82310400026)(56012099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: bwI/epe2Cfxvx/h+XocUNtclqqH2+169yxiiyHr3Zz3vUdjRdkAoAqt+3K/kI93pjDUMQolABRQeVtHqB8So5QtzzInwzyG0IqDQDAz12qyxJTsIwmS38vBxcUfhv+B8s83uDGl30aN74dHPlZjSMCETTvvhxK9PwEZ1KaTlAZQ+OSdqpaLA1nS/P9Rlvtrrn1By1Q3bqb3o91NkEd6Id7DhM3NtNnm/WsJ2BOaO2ZfbQwDJaV/NPaXoBpaKjqDR/nU9GAG9kXHFXiTBwhVKtvZWa3Cszay4aiL3nH1dLK7eQGhXxu99lficajLcyYTzf4z/3rw9s75dhwaHMWNC7a3LR5TEl+sVviH7y9foTpE86LFpCV7HThWt5Xvcn7J8E0o4U4gdJSEP2QLRsR6klqZGrVlFvaOWcuPcb0T86A/ft/Jc+MGxJe0RJZOQyGj7
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2026 07:29:45.7308 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e065016c-fec3-449c-6561-08de9eae98c5
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00005FFD.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7564
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAFLszTj=iQO73XC8+d83Um8sw-QPd0ceTDLN6zU53GDD8B3aSQ@mail.gmail.com>
+X-Authority-Analysis: v=2.4 cv=J46aKgnS c=1 sm=1 tr=0 ts=69e5ca76 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=kj9zAlcOel0A:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=EUspDBNiAAAA:8 a=MWgSPYugQ9fGs0IJWzkA:9 a=CjuIK1q_8ugA:10
+ a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-GUID: 9dpVBPR99LoH-kS-716yM1mcjpnKYxJn
+X-Proofpoint-ORIG-GUID: 9dpVBPR99LoH-kS-716yM1mcjpnKYxJn
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDIwMDA2MyBTYWx0ZWRfX1vT/c8wWMEM4
+ xYaWtWopwRRs+9nYk56GcUJU2D1iIna9qs2mz027e795Bf0V2EVVHS56f298FtoJJKUDHk6pHqg
+ ItFBwiLWhiyabroso9KGiEOeDdQo8Nn4L9avsp+w5/7SnvP93pvtW/rSOj/y0xWnfxxhsoGV92P
+ zy/Sn0hUc5V30e82LCXvVeUKKHq7i/NBv+gZPUzaNyIUqGS/zjcN/TNk8nXOsVlzu7/nGa8tKMb
+ gHclxxw4mbTfizUIWVcbtxSQO2MMniHAKNYTAP3xTTa1KliAcpcY73IwTvVl7XM7GBCy5y1L/FO
+ uqdWwtGODBjhpX3LxgFxvNpuP9VU8VaZhhUfwuGWQkceoVyLCIAVX9Uoe65t8imljgnHyDpw5SP
+ hJfMraggfUDPh2ZK5Po8vTINg7rCOY0edYkVP/gulsAoZMsoVmL6SPyHsxTC+/bueEt0c3jHodd
+ tlMJ+KLfRrRLfWPYBdg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-20_01,2026-04-17_04,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 adultscore=0 phishscore=0 suspectscore=0 spamscore=0
+ malwarescore=0 priorityscore=1501 clxscore=1015 bulkscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2604070000
+ definitions=main-2604200063
+X-Mailman-Approved-At: Mon, 20 Apr 2026 09:45:05 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,160 +166,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Increase the boot menu device name buffer so we can append extra
-metadata. Append the disk capacity and trimmed vendor/product strings
-to the device name so users can differentiate drives in the EFI boot
-menu. Also tighten the parameter validation and pull in linux/string.h
-for strl* helpers.
+On Fri, Apr 17, 2026 at 08:52:10AM +1200, Simon Glass wrote:
+> Hi Varadarajan,
+>
+> On 2026-04-16T05:39:18, Varadarajan Narayanan
+> <varadarajan.narayanan@oss.qualcomm.com> wrote:
+> > clk/qcom: add initial clock driver for ipq5210
+> >
+> > Add initial set of clocks and resets for enabling U-Boot on ipq5210
+> > based RDP platforms.
+> >
+> > Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+> >
+> > drivers/clk/qcom/Kconfig         |  8 ++++
+> >  drivers/clk/qcom/Makefile        |  1 +
+> >  drivers/clk/qcom/clock-ipq5210.c | 97 ++++++++++++++++++++++++++++++++++++++++
+> >  3 files changed, 106 insertions(+)
+>
+> > +#include <dm/device-internal.h>
+>
+> Is this needed?
 
-For example, the U-Boot boot menu now shows entries such as:
+Will remove.
 
-    usb 0 (29.7 GiB, Generic Ultra HS-COMBO)
-    usb 1 (28.6 GiB, USB SanDisk 3.2Gen1)
-    scsi 0 (1 GiB, MICRON MT064GBCAV1U31AA)
+> > +static ulong ipq5210_set_rate(struct clk *clk, ulong rate)
+> > +{
+> > +     struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> > +
+> > +     switch (clk->id) {
+> > +     case GCC_QUPV3_WRAP_SE1_CLK:
+> > +             clk_rcg_set_rate_mnd(priv->base, priv->data->clks[clk->id].cbcr_reg,
+>
+> cbcr_reg is a bit confusing since that name suggests a CBCR register -
+> see the ipq5424 driver which uses 'reg'. What do you think about using
+> reg consistently, or maybe add a comment explaining this?
 
-Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
----
- include/efi_loader.h      |  2 +-
- lib/efi_loader/efi_disk.c | 86 ++++++++++++++++++++++++++++++++++++++-
- 2 files changed, 85 insertions(+), 3 deletions(-)
+ipq5424 used GATE_CLK (defined in drivers/clk/qcom/clock-qcom.h).
+That has been deprecated and ipq5210 uses GATE_CLK_POLLED. Hence
+the difference.
 
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 3a4d502631c..b6065cfdab7 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -290,7 +290,7 @@ const char *__efi_nesting_dec(void);
- #endif
- 
- /* max bootmenu title size for volume selection */
--#define BOOTMENU_DEVICE_NAME_MAX 16
-+#define BOOTMENU_DEVICE_NAME_MAX 128
- 
- /* Key identifying current memory map */
- extern efi_uintn_t efi_memory_map_key;
-diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-index f8a57539ec6..e0b613065d5 100644
---- a/lib/efi_loader/efi_disk.c
-+++ b/lib/efi_loader/efi_disk.c
-@@ -19,6 +19,8 @@
- #include <log.h>
- #include <part.h>
- #include <malloc.h>
-+#include <linux/sizes.h>
-+#include <linux/string.h>
- 
- struct efi_system_partition efi_system_partition = {
- 	.uclass_id = UCLASS_INVALID,
-@@ -813,9 +815,87 @@ int efi_disk_remove(void *ctx, struct event *event)
- 
- }
- 
-+#define EFI_DISK_SIZE_TENTHS		10
-+#define EFI_DISK_CAPACITY_STR_MAX	sizeof("17179869183.9 GiB")
-+#define EFI_DISK_DETAIL_MAX		(BLK_VEN_SIZE + BLK_PRD_SIZE + \
-+					 EFI_DISK_CAPACITY_STR_MAX + \
-+					 sizeof(" (, )"))
-+
-+/**
-+ * efi_disk_append_detail() - append capacity and vendor info to a device label
-+ *
-+ * Appends a " (size, vendor product)" suffix to @buf when the block
-+ * descriptor carries readable capacity or identification strings.
-+ *
-+ * @desc:	block device descriptor
-+ * @buf:	label buffer to append to (already contains base name)
-+ * @size:	total size of @buf in bytes
-+ */
-+static void efi_disk_append_detail(const struct blk_desc *desc,
-+				   char *buf, int size)
-+{
-+	u64 capacity = (u64)desc->lba * desc->blksz;
-+	char capacity_str[EFI_DISK_CAPACITY_STR_MAX];
-+	char vendor_buf[BLK_VEN_SIZE + 1];
-+	char product_buf[BLK_PRD_SIZE + 1];
-+	char detail[EFI_DISK_DETAIL_MAX];
-+	char *vendor, *product;
-+
-+	capacity_str[0] = '\0';
-+
-+	if (capacity >= SZ_1G) {
-+		u64 gib = capacity / SZ_1G;
-+		u64 tenths = ((capacity % SZ_1G) * EFI_DISK_SIZE_TENTHS) /
-+			     SZ_1G;
-+
-+		if (tenths)
-+			snprintf(capacity_str, sizeof(capacity_str),
-+				 "%llu.%u GiB", gib,
-+				 (unsigned int)tenths);
-+		else
-+			snprintf(capacity_str, sizeof(capacity_str),
-+				 "%llu GiB", gib);
-+	} else if (capacity >= SZ_1M) {
-+		snprintf(capacity_str, sizeof(capacity_str), "%llu MiB",
-+			 capacity / SZ_1M);
-+	} else if (capacity >= SZ_1K) {
-+		snprintf(capacity_str, sizeof(capacity_str), "%llu KiB",
-+			 capacity / SZ_1K);
-+	} else if (capacity) {
-+		snprintf(capacity_str, sizeof(capacity_str), "%llu B", capacity);
-+	}
-+
-+	strlcpy(vendor_buf, desc->vendor, sizeof(vendor_buf));
-+	strlcpy(product_buf, desc->product, sizeof(product_buf));
-+	vendor = strim(vendor_buf);
-+	product = strim(product_buf);
-+
-+	if (!capacity_str[0] && !vendor[0] && !product[0])
-+		return;
-+
-+	detail[0] = '\0';
-+	strlcat(detail, " (", sizeof(detail));
-+	if (capacity_str[0]) {
-+		strlcat(detail, capacity_str, sizeof(detail));
-+		if (vendor[0] || product[0])
-+			strlcat(detail, ", ", sizeof(detail));
-+	}
-+	strlcat(detail, vendor, sizeof(detail));
-+	if (vendor[0] && product[0])
-+		strlcat(detail, " ", sizeof(detail));
-+	strlcat(detail, product, sizeof(detail));
-+	strlcat(detail, ")", sizeof(detail));
-+
-+	strlcat(buf, detail, size);
-+}
-+
- /**
-  * efi_disk_get_device_name() - get U-Boot device name associated with EFI handle
-  *
-+ * Fills @buf with a human-readable label such as "mmc 0 (7.5 GiB, SanDisk
-+ * AJTD4R)". Capacity and trimmed vendor/product strings are appended when
-+ * available.
-+ *
-  * @handle:	pointer to the EFI handle
-  * @buf:	pointer to the buffer to store the string
-  * @size:	size of buffer
-@@ -833,7 +913,7 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
- 	bool is_partition = false;
- 	struct disk_part *part_data;
- 
--	if (!handle || !buf || !size)
-+	if (!handle || !buf || size <= 0)
- 		return EFI_INVALID_PARAMETER;
- 
- 	dev = handle->dev;
-@@ -858,9 +938,11 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
- 		count = snprintf(buf, size, "%s %d", if_typename, diskid);
- 	}
- 
--	if (count < 0 || (count + 1) > size)
-+	if (count < 0 || count >= size)
- 		return EFI_INVALID_PARAMETER;
- 
-+	efi_disk_append_detail(desc, buf, size);
-+
- 	return EFI_SUCCESS;
- }
- 
--- 
-2.34.1
+> > +static int ipq5210_enable(struct clk *clk)
+> > +{
+> > +     struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> > +
+> > +     if (priv->data->num_clks <= clk->id) {
+> > +             debug("%s: unknown clk id %lu\n", __func__, clk->id);
+> > +             return 0;
+> > +     }
+>
+> Shouldn't the comparison be <  ?
 
+No, this check is right. The clock id defines range from zero to the
+highest_id. So num_clks will get set to highest_id + 1. So a clock id of
+highest_id + 1 is invalid.
+
+> Also, should return an error, not 0.
+
+Ok.
+
+> > +     qcom_gate_clk_en(priv, clk->id);
+> > +
+> > +     return 0;
+>
+> Should return any error from qcom_gate_clk_en()
+
+Ok.
+
+Thanks
+Varada
