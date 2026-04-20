@@ -4,94 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1263FEA719F
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 04:07:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8251EEA719F
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 04:07:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E020C842C2;
-	Mon, 20 Apr 2026 06:07:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 26CA8842D7;
+	Mon, 20 Apr 2026 06:07:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MBfCh5X2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hkLu85bt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFBAD842E0; Mon, 20 Apr 2026 06:07:26 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 6EAB583B99; Mon, 20 Apr 2026 06:07:33 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D15E080087
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 06:07:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8457C80087
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 06:07:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ba388bc0a9dso464827266b.1
- for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 21:07:24 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776658044; cv=none;
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-6745a88eec7so2721595a12.2
+ for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 21:07:31 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776658051; cv=none;
  d=google.com; s=arc-20240605;
- b=ALk6nl1rUiK1KTeavHtIqvQhufl1ACC5HlKqAu+38aXtr1SHMAxIS5s8EmT9GCXiLn
- 8QcF8n7dVXOHZ/NkiASDA7TNmbgjIbtRRMadZoHhj5IjF2PfhWjMGa/t76OFoUUXJ0UH
- NVG+BO8gZlFHdMZvzjKjRe6hWuXFClAxLdRjvVy4rpsbDUEnnhVbak9UQT3WPUkygpbg
- 6ItfP7HbesMuoD5n4CdsVjwhePvIOroq69Icv7VQV86tB4w7ZXTYBOtbt27x6LwG1EBJ
- PUI8WO10kwwb5Ne14cfeGy9ChKCOYUvxJkuuJe09IbYMkkG/+2Nvf4jY/db8zrJ6Tytx
- +Gxw==
+ b=PQX1oPuHyPDRfnVY5Fhe2N57Q88a98Xn/wL/yXOXIMfrjjZVVVyh7Yqw2xzUlrz7Qo
+ UPNzBHgvOwvIBx+zmQU0tCbBxPV/hmaJGzjM2Y9a6WHwF2ewwfWJZv/HlCTCU5QW0Hiu
+ e0R8oV8vst8Vlc/qiijCVxEHLY0+SY3dhnzncYRUMp/Wm68oTo1a5fRxJ18nz8o33lTe
+ xJoUPsE4TRWx7N/GhlRVo+VmF8n7y7m8E+V2UBj8IVlOu29YYkh1bhjAHdJ5SzLf34UO
+ shdlrqrBQfK7xIasNSsrivp+uu1HiPH3YH7sHCbcfWjgUh8XTYDO/ejRAeJt0UUGZBl0
+ P34g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=ZM2Y3vQV04VyNsa4aTJBhLZ+YrYrTSd5u0Kmjct01As=;
- fh=KKR1m3rWr3Epw/ElaWa8fzDqDpgvAcH+LAnEOwNkDfI=;
- b=JnC0vO7BIubIr8E71kzGh82tMfAy5aOzywD6BrPIJQg9oo0MNpRrcD5AvlkW5QOWyD
- DBEHDg5i/krVnPHML7Y1DBb7d/2557nAT5HAd47rVPTj6EQTHLWe8LTlr4g8kU3FA8Bf
- AKDXu+UC/2bdMdqpEQ7kudHrTr5Uv1CDztRI2L9R88Ugi1Plg8ZAl9Dnx6tGq/5kvvoy
- uSgfICDSfBwaCJL4SsH9gqpc3vWH2rxDQ3GOHV3qtU/Uz3DE/Ss9c1E/g2y8TDgvCB0R
- qXBOuytkZ8Wgo0cswVvpkSd1Pv2UMnU8CGXsiRvZj6l+volSzqhJEjY70FBv5dAwYSGH
- MwnQ==; darn=lists.denx.de
+ bh=gQpge1VenZjg9r24OaCXmAI+coeH8rjeCceXMNKooYI=;
+ fh=iGfZZ08G6OXxn5V97DhRnYDMVwvryMqU0FIn7MZptoU=;
+ b=E1wdinO78VI4bryYZ+yl9BYLmQVX49VNdxGYzrSeCAnzEhMkHHlgQUcPYz2dt1/0hr
+ rTidaQqNTl0l/WV1KUMM/z4UenDQqnGfCq2EKE7ge3yl6atGzW5FLZVEx73Y/2TvC9/5
+ bAX6IJ3TttXonNhDLBvbFwmm7I4L//94rqQ6BJN07A7IDA+2hFxpHBSQPlsCeb5sA1EV
+ eoKabhLIzyfHK4r/DJUS1AoS2x4YfO6Urzf0WxCV9FKuk4jaPS723+JfLpq7oFDXKKf5
+ 64FZ0bYGiCQYnrBH8AX0teKh9VzQc9vdu0KUJ/fxim+ElczXntPTVceLJE3awNWl0aIC
+ PBUQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776658044; x=1777262844; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776658051; x=1777262851; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZM2Y3vQV04VyNsa4aTJBhLZ+YrYrTSd5u0Kmjct01As=;
- b=MBfCh5X2GcRHTCjr7HvQoUTNT8dufdlSPcSFM8IddlEeQ8wCvCbriL33OdIjBV5Xmd
- 16Xc02ALpr+mEt1rOkq+YlgS1BP9g5kh1VYEa9M9hxqIzfxh865WmOZz2HAJLl2C4p+R
- 4nbqLNzdadRlAHn+KYVTUwSISNSkYiX/CIg3M=
+ bh=gQpge1VenZjg9r24OaCXmAI+coeH8rjeCceXMNKooYI=;
+ b=hkLu85btR67fCGdrxp1VvwxnviXMoTTPIHCU0s2palnnFCMisMm2TojZ3f86/QoG38
+ +koD8diOdvbnwnQK4DrtGJ2OFXbFDtZJB5bg840wGeE0o762+IhYp6+ILy8woZxQIEP6
+ KgBBHbHqVu+1qLzRR1DpMW3JkW/DW1zdMfrEo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776658044; x=1777262844;
+ d=1e100.net; s=20251104; t=1776658051; x=1777262851;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZM2Y3vQV04VyNsa4aTJBhLZ+YrYrTSd5u0Kmjct01As=;
- b=SlfgtRFFwN1DB7VSbAlVueaXdR/YxKq+b82n9a6mrgHJVA64abeue35FYyUvdgorTu
- 9VWWFFATOSmWbDUrykk4l9SllNKg/CIFs3o9Od55jaPGsMJ/7C/MLZdjvVQ7DOT0rjQL
- gSdL1eFmpH4f++0nA/za47EpPNnfh5bwZQh0D20zImQcCiotF2V5T5VGtlaYcZRQ0f9L
- 5kKNwqUd3Q/pxe5ROZu+7+RsUTdUsjs1uMD5+zFVlH8+3I/paNQVYmUdyrYgOb0mKtMQ
- s67ehXaqSLWCw9jBvRKDdwUa8DDoyN3BVTklr9d6wnCzFne1UYI1mpvUUwtWYZqBDnT3
- xFfg==
+ bh=gQpge1VenZjg9r24OaCXmAI+coeH8rjeCceXMNKooYI=;
+ b=X2Jtgj+e+K5+4vMyK+iMf+qCt6QmHPVEBIHeNcM9R0jPqFfjrsxZBQktrP1oQXo862
+ 7idJ/+1VlEjkGhi71jMIbBSwdvHVvI33Wvddn0BhbBBdeQ1WgyYjbYIkLvuAxbiVz5Nt
+ QcVWK+AZHGGKJTvqZNG6/KKujZZKEirNNCLMVm1/7Hx0ALCLahY4PTNK6y6L1MQ4qJUj
+ khLJYjLJ+jd+o1PFTxAHhZZL/V+jeUE9TQ59wVJbXZkSWo1YFI1ZeFtJsQSBlKNL5SB0
+ P8wX2i1Aa9VF0gAoG+cHONLcVgz09lIXs/edagYZtMPCSwVvoL6ngNH3GO8a+1+nky/w
+ obUQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9a7hgs7tBW8C3dKi71lO4J1JaLY3VywmiVJYf9waDkCNZH/mXsCGycjqyAzIpyE9IbJH79Fl4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzPQrC48+2dNg6wpDcuA3R8Z0qMKJJw2W/aDDoVFQ1buqBgnxyo
- kkV1Bsh8Y5uv4X/sQca+pcJOeNZFfuvI0uxEbT50xl85coiDWBM2J13XwLDGo4SbC+XLpQfisOl
- KDde7lEPXWUGwKIqIN4gi9Ls3JZ0uX0ycth0Xt22p
-X-Gm-Gg: AeBDiesxhWRR7ZZZDGjdz8GMYoI153c5mt30tkNWJAwKUlKR9qZHZOCzCW8zm1rqaoN
- pBrxRCoca4v/70tpZtOBAVjPT1Z7HUoUYevxo/XwJcw7Icv9YaYj7yFGr2cW7+X926LcO2xpuO0
- W7CI5O3Au2sIS7ah7LH+AN9pQlBwbm8MuGZZXIoTdwkFJyJ580arz1AZ6lDEKIZIAv5FEhaLJsX
- gxK481Icw7PPVyjEOZxZRFW9dW4kTaIqP+iE3UeEQkYGpbGjbbht2WpC+XTzem4RfDiimSItNQW
- /Jhx7eZ1xZkEhf8MjtGC
-X-Received: by 2002:a17:907:e107:b0:ba3:cc7a:622b with SMTP id
- a640c23a62f3a-ba41aa130edmr391759366b.31.1776658044328; Sun, 19 Apr 2026
- 21:07:24 -0700 (PDT)
+ AFNElJ/etrJqWRRTi5Isq7/4jnUEpdONIl8Ez6WDIEWxeB3DDqXRC1Tw9o6GhNlxOAVI+hZlrN5FZfw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxCuBTKcsc5/KPQQaY6bdUwfWGtulxBHXYoJlSbN6dO8aBcGKJM
+ 5rsZ1T+1htn88hwZEpi+vjJ8gpWhKizgWe+MA2tGoMpEv7v8e1dSsEDDTObC4IjPGSanV3205lI
+ wMdyMXOsWG/TDN22vvTjoWueaUtl3fvxX1VuUEBCs
+X-Gm-Gg: AeBDieuQCAXnVEEq+DcidaxKVa26z1gq6i5UfpFESEjVSk55PvIxuT7qcubAasxBm9D
+ +FnyG0AO2avg0qGuWDhcuBef7MH7vG4bzQb/hk/xy5Bxu6E+ICYs6BUI8sIku9fQdqrTxZ7OIYC
+ 5yh3KgMdEp+kpUjsbnVLWILRr0GjcFgRHXccBLGfiIC3rI7VIH7oicz1C/L/YD5Tg3FQ3/9qHab
+ G79M5UlFpNAKpvm4gKPLA/qeG1uEhS8gtdHw2zz9XF582oqQIA+YwkfRXbqehd62dTI2P9Rb8Bq
+ K44CzrT4jtTIHNc0+CuVawDMfynp9KM=
+X-Received: by 2002:a17:907:6d2a:b0:ba7:9cf3:449d with SMTP id
+ a640c23a62f3a-ba79cf34e34mr104720666b.22.1776658050865; Sun, 19 Apr 2026
+ 21:07:30 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260417120951.3454249-1-aswin.murugan@oss.qualcomm.com>
- <20260417120951.3454249-7-aswin.murugan@oss.qualcomm.com>
-In-Reply-To: <20260417120951.3454249-7-aswin.murugan@oss.qualcomm.com>
+ <20260417120951.3454249-8-aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <20260417120951.3454249-8-aswin.murugan@oss.qualcomm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 20 Apr 2026 16:06:51 +1200
-X-Gm-Features: AQROBzATgJXOfGjaOtATLZxI8JbGLDfmtQlqtQEOXROP9qmpcgioaq9szxQjeJU
-Message-ID: <CAFLszTirJnE2Guyz541ebivyWWDeawT+nxLGO=-FWTefH4X2QQ@mail.gmail.com>
-Subject: Re: [PATCH v3 6/7] doc: document mkimage fatfs type and Qualcomm
- multi-DTB
+Date: Mon, 20 Apr 2026 16:06:54 +1200
+X-Gm-Features: AQROBzDDdHA5qxM8NyAFSATWO3SO9W___NQU_rmaHD9UZfAeCwTZSNGbH3qyYAQ
+Message-ID: <CAFLszTjddu8eiTq0zAnneW-mNp3aO267VaDMzwgX=sPT4jhkPQ@mail.gmail.com>
+Subject: Re: [PATCH v3 7/7] mach-snapdragon: Reorder header includes
 To: aswin.murugan@oss.qualcomm.com
 Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
  sumit.garg@kernel.org, sughosh.ganu@arm.com, ilias.apalodimas@linaro.org, 
@@ -120,70 +119,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aswin,
-
 On 2026-04-17T12:09:44, Aswin Murugan <aswin.murugan@oss.qualcomm.com> wrote:
-> doc: document mkimage fatfs type and Qualcomm multi-DTB
+> mach-snapdragon: Reorder header includes
 >
-> Update doc/mkimage.1 to document the new fatfs image type,
-> the --fat-* long options, a fatfs entry in the CONFIGURATION
-> section, and two usage examples.
->
-> Add doc/board/qualcomm/multi_dtb.rst describing the
-> Qualcomm FIT-based multi-DTB packaging workflow for
-> Snapdragon platforms. The document covers:
-> - FIT ITS configuration and compatible string matching
-> - QCOM metadata binary format and identifier properties
-> - Guidelines for adding new socver/boardrev entries
-> - Step-by-step image creation using mkimage -T fatfs
->
-> Update doc/board/qualcomm/index.rst to include the new
-> multi_dtb page in the toctree.
+> Rearrange the header include order for better readability and consistency.
+> No functional change intended.
 >
 > Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 >
-> doc/board/qualcomm/index.rst     |   1 +
->  doc/board/qualcomm/multi_dtb.rst | 352 +++++++++++++++++++++++++++++++++++++++
->  doc/mkimage.1                    | 103 ++++++++++++
->  3 files changed, 456 insertions(+)
+> arch/arm/mach-snapdragon/board.c | 25 ++++++++++++-------------
+>  1 file changed, 12 insertions(+), 13 deletions(-)
 
-> diff --git a/doc/board/qualcomm/multi_dtb.rst b/doc/board/qualcomm/multi_dtb.rst
-> @@ -0,0 +1,352 @@
-> +       cp -rap <u-boot build dir>/dts/upstream/src/arm64/qcom/*.dtb* \
-> +               fit_image/arch/arm64/boot/dts/qcom/
-
-The text above refers to "Qualcomm Linux Kernel Tree" but the
-placeholder says "u-boot build dir". Please change this to reference
-the kernel build directory.
-
-> diff --git a/doc/board/qualcomm/multi_dtb.rst b/doc/board/qualcomm/multi_dtb.rst
-> @@ -0,0 +1,352 @@
-> +1. **Install required tools**::
-> +
-> +       sudo apt-get install device-tree-compiler u-boot-tools mtools
-
-Step 6 notes that dosfstools is also required for mkfs.vfat - please
-add dosfstools to this install command.
-
-> diff --git a/doc/board/qualcomm/multi_dtb.rst b/doc/board/qualcomm/multi_dtb.rst
-> @@ -0,0 +1,352 @@
-> +6. **Pack the FIT image into a FAT partition image using mkimage**
-> +
-> +   The `mkimage tool supports creating FAT filesystem images directly via
-> +   the fatfs image type.
-> +
-> +       mkimage -T fatfs -d out/ fitimage.bin \
-
-This code block is missing the RST literal-block marker, i.e. the text
-before it should end with ::
-
-> diff --git a/doc/mkimage.1 b/doc/mkimage.1
-> @@ -903,10 +984,32 @@ of data storage.
-> +.BR mkfs.vfat (8),
-> +.BR mcopy (1),
-
-The SEE ALSO entries should be in alphabetical order. Please swap
-these two lines so mcopy comes before mkfs.vfat
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
