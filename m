@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 023A3F5A8C5
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 22:08:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28077F5A8C5
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 22:08:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21602844F4;
-	Tue, 21 Apr 2026 00:08:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0B6B784505;
+	Tue, 21 Apr 2026 00:08:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="K9Z67P2F";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="YcMcsLHu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE135844EC; Tue, 21 Apr 2026 00:08:12 +0200 (CEST)
+ id 8B73B844F4; Tue, 21 Apr 2026 00:08:14 +0200 (CEST)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4EE1844F4
+ by phobos.denx.de (Postfix) with ESMTPS id 704F5844E5
  for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 00:08:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
@@ -31,32 +31,32 @@ Received: from LT03.fritz.box (ip-176-199-115-125.um44.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 392A440D86; 
- Mon, 20 Apr 2026 22:08:07 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id DB4DB40D85; 
+ Mon, 20 Apr 2026 22:08:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
  s=20251003; t=1776722887;
- bh=rxIqISaqCtvCAlVi1tsmnO7fSoTkG2r1MefQ+mB84B0=;
+ bh=0/iQs213IY7C2t9c7xtR5FjFqFW06mSlSrpy5PTDLus=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=K9Z67P2FBgE93cro50d3/OW5ff1XIAQ0CxAUbgGbes7iJChHWRXkYGEfhNJt2B31D
- ejCgsmWcuhxSFvZ6QPzpQthL3H/NksMJ0KL2k1H4Jqx5XlyWdL1rQbegMXZr4in50p
- 3ZMk0EqmQtE5RQUVOFXYkA2U6PWyYpNxBZeYw/KqTm/nE4LzRMc3fWIV3l8yWg4yj7
- 08WYvJ2URkbwRBbiD4ETr7cU1uqPWZ3dv26+iViLItIf5DxUiTMYLM9c57/uWl8yjD
- Q+cVFxq6Sc/GxKsTjkHL2GCGFBK2MBeL9X6dYJyFUfEfsnd2w4IfRG27A38mYm8YSz
- kDbQo1lQo0orcK2S/YRFXhRIlPCZVtKn38LTQNNpF1dBlxo6S7UVrBzNgz/m4IqKa4
- bqjcD5teEvZ6lU7HEj2/bxanzdhSFYVXyX9saKA3vjOQd3H5vErF8X9NkDNoVjkVAk
- 63wMaEJPJTD4iathVgA5v1wdhbsvmfbU/wV69RkBJDKNEOab1TlLCUn+acbiRdFU/e
- OnljUt6k4gptsSIvcMyJtwLNhW2KxrhG9ZpX2i4rdIHYTG3lX+G7WkfEhV8MInh6A8
- bnolZ5iyDx1XufEu5AoBcLwRk4gf1s7VwFSOdbbQTUNaVgsbhav+7W2XfLakHi8i1W
- 6PaZ1svg51zjkGZ51ZPTIkN4=
+ b=YcMcsLHum9trxPKFdqDysl362ozpDLq4ujiIGo0B4Qgfn3FAB4vJ1m2/mGrEF4kJ3
+ j5HMPVPSgg2QSe7y2yn7jalsJoCn8BjrWcu4vr5tnnDoarXhqpYkycvQxOPyWA9ZMu
+ JD0wCAgs5IfiKzNxAX0hdK1tImy8gO8NurublLjYow8hly2+2/b8fOIo8ue2NHXpYa
+ n1Tny8Fil1xpPI+4bIk01ijKShpTjFEe7aE1LPDaNWPfEbvGU52zCqqMJy16yQ4b3R
+ 5My/X8rx3vz7fQjM5lFO01BQPLKLahH2CnKJaM1e2r5oZSMT69y6b+btRlZQq0jCib
+ nVigJJB0qsyhWIaiP2W8xxYPjIMe9jp4yK0l5ypQjewUWwi6nkIBsQhz/rOdhlrk3H
+ bPHWY5VgFzrlMQ2Q0hlD3m9/4/txdr4RIvy0GpsU5QPTFLBOW/DISKWevvxy45JcIr
+ wA4aEU8x+pCg9dNg4UyjgVZGyOHnmjiRfasdtVCPYd0oLLJlcmI/swoD/fN9dM+HG0
+ GzuitGa+qAbThquu1hExH8TCktVFqHQQu3Z2XTKA0NPOGz/hzkyFVdMrDjkdcqFRsP
+ mdduZjltbQOFj5cZSBmxtyjNAYKaIKSR2kIF9O9HjBUGNe3TBMN140sB4HXHa8Xhat
+ dKgNotj6xdNLXst7KJJUxKLs=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 3/4] test: consider index parameter in acpi_find_table test
-Date: Tue, 21 Apr 2026 00:08:03 +0200
-Message-ID: <20260420220804.71564-4-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 2/4] cmd/acpi: add optional index parameter to acpi dump
+Date: Tue, 21 Apr 2026 00:08:02 +0200
+Message-ID: <20260420220804.71564-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260420220804.71564-1-heinrich.schuchardt@canonical.com>
 References: <20260420220804.71564-1-heinrich.schuchardt@canonical.com>
@@ -78,70 +78,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-* Add a duplicate table.
-* Check that both instances can be found.
-* Verify index bound checks.
+Add an optional index parameter defaulting to the `acpi dump`
+sub-command.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- test/dm/acpi.c | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
+ cmd/acpi.c | 19 +++++++++++++------
+ 1 file changed, 13 insertions(+), 6 deletions(-)
 
-diff --git a/test/dm/acpi.c b/test/dm/acpi.c
-index 8bec09f4e44..ba533763d96 100644
---- a/test/dm/acpi.c
-+++ b/test/dm/acpi.c
-@@ -783,7 +783,7 @@ static int dm_test_acpi_find_table(struct unit_test_state *uts)
- 	struct acpi_ctx ctx;
- 	ulong acpi_start, addr;
- 	void *buf;
--	struct acpi_table_header *table, *table1, *table2, *table3;
-+	struct acpi_table_header *table, *table1, *table2, *table3, *table4;
- 	struct acpi_rsdp *rsdp;
- 	ulong rsdt;
- 	ulong xsdt;
-@@ -799,6 +799,7 @@ static int dm_test_acpi_find_table(struct unit_test_state *uts)
- 	table3 = dm_test_write_test_table(&ctx, 3);
- 	table1 = dm_test_write_test_table(&ctx, 1);
- 	table2 = dm_test_write_test_table(&ctx, 2);
-+	table4 = dm_test_write_test_table(&ctx, 1);
+diff --git a/cmd/acpi.c b/cmd/acpi.c
+index a88cd995460..3aba9ed7a16 100644
+--- a/cmd/acpi.c
++++ b/cmd/acpi.c
+@@ -12,6 +12,7 @@
+ #include <asm/acpi_table.h>
+ #include <asm/global_data.h>
+ #include <linux/errno.h>
++#include <limits.h>
+ #include <dm/acpi.h>
  
- 	/* Retrieve RSDP, RSDT, XSDT */
- 	rsdp = map_sysmem(gd_acpi_start(), 0);
-@@ -812,6 +813,11 @@ static int dm_test_acpi_find_table(struct unit_test_state *uts)
- 	table = acpi_find_table("TST1", 0);
- 	ut_asserteq_ptr(table1, table);
- 	ut_asserteq_strn("TST1", table->signature);
-+	table = acpi_find_table("TST1", 1);
-+	ut_asserteq_ptr(table4, table);
-+	ut_asserteq_strn("TST1", table->signature);
-+	table = acpi_find_table("TST1", 2);
-+	ut_assertnull(table);
- 	table = acpi_find_table("TST2", 0);
- 	ut_asserteq_ptr(table2, table);
- 	ut_asserteq_strn("TST2", table->signature);
-@@ -823,6 +829,10 @@ static int dm_test_acpi_find_table(struct unit_test_state *uts)
- 	rsdp->rsdt_address = 0;
- 	table = acpi_find_table("TST1", 0);
- 	ut_asserteq_ptr(table1, table);
-+	table = acpi_find_table("TST1", 1);
-+	ut_asserteq_ptr(table4, table);
-+	table = acpi_find_table("TST1", 2);
-+	ut_assertnull(table);
- 	table = acpi_find_table("TST2", 0);
- 	ut_asserteq_ptr(table2, table);
- 	table = acpi_find_table("TST3", 0);
-@@ -833,6 +843,10 @@ static int dm_test_acpi_find_table(struct unit_test_state *uts)
- 	rsdp->xsdt_address = 0;
- 	table = acpi_find_table("TST1", 0);
- 	ut_asserteq_ptr(table1, table);
-+	table = acpi_find_table("TST1", 1);
-+	ut_asserteq_ptr(table4, table);
-+	table = acpi_find_table("TST1", 2);
-+	ut_assertnull(table);
- 	table = acpi_find_table("TST2", 0);
- 	ut_asserteq_ptr(table2, table);
- 	table = acpi_find_table("TST3", 0);
+ DECLARE_GLOBAL_DATA_PTR;
+@@ -51,11 +52,11 @@ static void dump_hdr(struct acpi_table_header *hdr, bool chksums)
+ 	}
+ }
+ 
+-static int dump_table_name(const char *sig)
++static int dump_table_name(const char *sig, ulong idx)
+ {
+ 	struct acpi_table_header *hdr;
+ 
+-	hdr = acpi_find_table(sig, 0);
++	hdr = acpi_find_table(sig, idx);
+ 	if (!hdr)
+ 		return -ENOENT;
+ 	printf("%.*s @ %16lx\n", ACPI_NAME_LEN, hdr->signature,
+@@ -183,9 +184,11 @@ static int do_acpi_dump(struct cmd_tbl *cmdtp, int flag, int argc,
+ {
+ 	const char *name;
+ 	char sig[ACPI_NAME_LEN];
++	char *endp;
++	ulong idx = 0;
+ 	int ret;
+ 
+-	if (argc < 2)
++	if (argc < 2 || argc > 3)
+ 		return CMD_RET_USAGE;
+ 
+ 	name = argv[1];
+@@ -193,8 +196,12 @@ static int do_acpi_dump(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		printf("Table name '%s' must be four characters\n", name);
+ 		return CMD_RET_FAILURE;
+ 	}
++
++	if (argc >= 3)
++		idx = hextoul(argv[2], &endp);
++
+ 	str_to_upper(name, sig, ACPI_NAME_LEN);
+-	ret = dump_table_name(sig);
++	ret = dump_table_name(sig, idx);
+ 	if (ret) {
+ 		printf("Table '%.*s' not found\n", ACPI_NAME_LEN, sig);
+ 		return CMD_RET_FAILURE;
+@@ -207,10 +214,10 @@ U_BOOT_LONGHELP(acpi,
+ 	"list [-c] - list ACPI tables [check checksums]\n"
+ 	"acpi items [-d]   - List/dump each piece of ACPI data from devices\n"
+ 	"acpi set [<addr>] - Set or show address of ACPI tables\n"
+-	"acpi dump <name>  - Dump ACPI table");
++	"acpi dump <name> [<index>] - Dump ACPI table instance");
+ 
+ U_BOOT_CMD_WITH_SUBCMDS(acpi, "ACPI tables", acpi_help_text,
+ 	U_BOOT_SUBCMD_MKENT(list, 2, 1, do_acpi_list),
+ 	U_BOOT_SUBCMD_MKENT(items, 2, 1, do_acpi_items),
+ 	U_BOOT_SUBCMD_MKENT(set, 2, 1, do_acpi_set),
+-	U_BOOT_SUBCMD_MKENT(dump, 2, 1, do_acpi_dump));
++	U_BOOT_SUBCMD_MKENT(dump, 3, 1, do_acpi_dump));
 -- 
 2.53.0
 
