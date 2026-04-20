@@ -4,95 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 483BFEA71A4
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 02:58:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06E92EA71B7
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 02:59:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF7BE83BC8;
-	Mon, 20 Apr 2026 04:58:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5B39A83BC8;
+	Mon, 20 Apr 2026 04:59:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DvX+neUN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LmMjULZT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C920842BF; Mon, 20 Apr 2026 04:58:39 +0200 (CEST)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
+ id 1E30284286; Mon, 20 Apr 2026 04:59:50 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA92F83B99
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 04:58:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 30DD283B99
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 04:59:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-35d90833cacso1464013a91.2
- for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 19:58:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776653915; cv=none;
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ba8472c1613so26845666b.0
+ for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 19:59:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776653988; cv=none;
  d=google.com; s=arc-20240605;
- b=fZNRwNqXF9DfGXOUAwseWvUNZz6pb2PGqXt/xMj28M9AO35B96QToAyAe9rLgvCJk9
- vHc5a95tutFHPsooOjQVuazch/mSOyzs9OYSPVRb8kHCeKfZv9N1T3JIaZQWHsocB76u
- wu95GRkd1wPsU3FahnFrwOcS62cYRkfrqAhHi7BL9clMOlHLXIlqsD/oHIlWbCdbGXfd
- XtAgZaAuXfOB5gMm25WxR2f+KaNzNFXht6ZtqBzgLP6ZIHJMeAcoEcJG+hVBMubXO939
- t+w96VMdY3hoIe5USHz1mZBp82Vrd4LEWbckDGIWJB6gXxC/Iig+DGLGOq6CzteiT4Yc
- MRqw==
+ b=TVQmA2CNJowWysJFjQgBYqSYXciSZsBD2UE2z4prS2LwK55o7BV/Oc2ZtAr++D72Qa
+ 0baUzN83lwCAEI4IOP5CHUw3jqycMSo6Y3Hy/oQkFafkqjD7U5Xxh/vAOnUCnpVPf4SE
+ uMgefOiyaCx2VOlZ3DqbUeFIdRMjmaXLhigX1ifuee5K6bjk6RejaIrqKYjlw3uCAIfA
+ EWb/eWa0QidEpwnC3unPH6Y8e01DzxM72W9KCCRxlWQeuRcchcIXz8MhLTLPWKpOKIKQ
+ CmBiEx6g3sqiEWdIi4GGMuBGuwSsD8JXHTIoG3380c/CDmQMDcHzhpeRv5V1nfBx0v2B
+ HKfw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=rua5RVv4Lzv2gvPI3u7DiB4IY88d6lH6J3eK90h8xhQ=;
- fh=wNODYcYHwTK6I7LVNr8nSv47LrqCVVhAdKcSbKqeg08=;
- b=iLcaqMlAAN3SeXkJwhdvz3Q/iGEwxJ4x8P7O+AtSlRBjbBXuYjWF4pIdQ4ajBwsZbk
- 7LyyXsq++5npoG7WYKLUUtpjMrtszOxOLp88P0KcgU/vEhryatOIes/k9rcF4+SX7QR3
- HVwEub9mE13rlzYqOBhzNChOZIlqt0BCpBHjBzsAGNfW2Etzxwl2VPCbrTU2a8mjcT2d
- ur4GRx/Zv1waGQWMr+PqMEyoxCtNB4Fx8lgqjiCfmC9asjfC+zf27G8+no2kNLiCw73b
- tXwFHM1nTxZu9+qw/75K1AIjOWzr7bTAMiDLnEHEPN87r2FMPubT6qkHHGmKoYyX5WwI
- nkSQ==; darn=lists.denx.de
+ bh=S2p9YUJR0RwQmgNr6j1WD67MfdV0sz6Rh00ijNmu3II=;
+ fh=bAhO/2+dJLNIuyiSCWCsiQQck7gcMCfIwltRjKz8q4g=;
+ b=C6og/j2i4qKmvSvNeIs5vlBFihECiy+fp2MHzHou16/9s1l0Y1PkGm678I++dUvLr0
+ swhITHOP7Z8feXdbn1RIvQrU+s6BY14ZArDN1YYfDissy+dCsbR1W0o4CMReqNJKSfyx
+ 5efhG5N1wB58FHMCtjHoDRnhmrvIHvgUJwkC9e+DBDJIdYumdqM2tUZLjaRnZG1m54rg
+ EG8ir7bxrwewguXtjfPDofIAOvwmc852nQ1gtjQmv6Ty72jmIi4BolsCHi63qu58dgrw
+ HIyENkXx9Hdn52Lm0/BItwn4bKVQ/hUtmafzBuDb9d7fV1Gb5zfPJ2/lrMB6g0hjWhYk
+ gStw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776653915; x=1777258715; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776653988; x=1777258788; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rua5RVv4Lzv2gvPI3u7DiB4IY88d6lH6J3eK90h8xhQ=;
- b=DvX+neUNV/kIxPh8mvpAaVOZsWe+DP1TCLbNMPLgDB0a6Rnd65NRcLw2Sw4Tm3xGhy
- i0Qu8+GJJG4txa5d+86BIpILqBKWe18GOJKeNMR475v/V80vetIUt8XW8qxTOmjm7ssu
- LzGgDxMWvAfs0l0keymIOJosNCoS7pV55AYxQ=
+ bh=S2p9YUJR0RwQmgNr6j1WD67MfdV0sz6Rh00ijNmu3II=;
+ b=LmMjULZTOb47sPJItnYAzOCdVzFWhkQdk0wErcuYlhs1njI1RQhL3RNakmDHCPMRj+
+ oviGh50vd80G00+PkKWhKPHIVt4PuE2WNBuXKnSFszRAvjb1eOtmnAVb8CqpacafBB75
+ kjKX2rW+oabEhIXtdrzy5caShAyOJ5Q52K/Ys=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776653915; x=1777258715;
+ d=1e100.net; s=20251104; t=1776653988; x=1777258788;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rua5RVv4Lzv2gvPI3u7DiB4IY88d6lH6J3eK90h8xhQ=;
- b=oaF2Y/liiTLVcRdzoL+haCfyDitHtSGFCIGODfN55gD7dShkRxnByqXiYW2sTebOSF
- d7x75ov/wgbcgYDB1ZZLgT/tVD/Sv1/JffvY4P5TND8Qf8vN6D1dGc31RB1cApFBzeDb
- cxkMMo3BW0SfYK/hjXDgm31iaUV5WyJqSqMDN0Avh6Nr2X3ifQfoFnohJvOeB2iAKjZb
- B7NE/jYUAzdvxE3PdIe5Oq/UnMYnOCUGlzqYAx2OjM+doWBQKgl0WW5hTzqxO//G7D9z
- CqiJqM2f/coxAAZj+fLxJDKMUTXQvQkjwaH/TcUYGGP5+0zay9ZTunqEopF0+iWd/WDo
- ZXMg==
-X-Gm-Message-State: AOJu0YxwYH0wKKbkDaz8a/jLjX0O552FK//xxXZ2sc4F6zXMluy4XC1m
- UXC9SZ8i8pqpjJ5QIqFrY4dvOfmgIbFAZTF52G/kqYR2MpzTpR0DlsU9svxI0jxGSDw7uygOkBa
- Oy1FZDuripEr4pZTob/tqr5wQheB6vZjvRW3oqrsj
-X-Gm-Gg: AeBDievTf9OIbwlQQ/kGIe3GSqblwHNj52bWALaexw64PVLBUqRoBwpCG4HTC3WK801
- YXWiwlHo0mM3K+ZSfz+2WzrJ/SNJXQZfyhCOszsin8j/VxHzhReddCpzmhmChkq5gyPNjawwDd9
- 3h1MPPwB4cL9mG4ojm5z82n5q2wL937qSeAo3rSu3uk4V+1PvBGoPU9lfL6c6fGy9FODQ9n5b0z
- sK9UDugJsPh3/xGtgiXLnTJjbQfUCPHI9qYWDfA1/afxWTvlgx0PMN0UqpTY6ySXVDdR3vJ+ECL
- nCfyNH+fS2YDK5Tm1i0u
-X-Received: by 2002:a17:90b:5865:b0:35b:929f:7e8d with SMTP id
- 98e67ed59e1d1-3614046cdb7mr12341889a91.14.1776653915396; Sun, 19 Apr 2026
- 19:58:35 -0700 (PDT)
+ bh=S2p9YUJR0RwQmgNr6j1WD67MfdV0sz6Rh00ijNmu3II=;
+ b=pw16ifdZbHVMPb7KAh94UoSfSarrbQgRrHm0gQZhl88wAomgrmE+AmjbaYqA6RqGVY
+ ZtiaLPgtfVTeYZXGokEmyr+9o0rFEiyg0FIrZz968qW4CFrk4svFb37eXD4pZes8wliA
+ +/b04p7KsM2HFY1mFJWjbskdjUILnuKfg1dPil0wIHTmYS8czCWaM+7hLSEtHtxmBWRP
+ nju8Gq784WSsqwK3wqF9NV9v+qGXxU/2qwmDTa+dDwvQ1I/muiGHk9f+D+Nt19xLuN4f
+ skRYFc4FjpGu1oEpnbc9D/52B76DMUG4tPPsGDw0SefZs41S9JFKqpM3CM8ErDXc/8j0
+ m0uA==
+X-Gm-Message-State: AOJu0YzbJxhTn1/nyH+e4UiXZsC1dPwZyMYcqzUtlKAeYTsSsbvo6Q98
+ PIQFH/rtdCF+6ee8K1AI32+MgSFajBrzWL3Ao9l+nuhOl8dqa2AAac53K3XQ6lM7lyhTPMjpF+L
+ m7ElB+A3xiddOhwJWFOGdP/dYh7v0Q+AQT+JFogUW
+X-Gm-Gg: AeBDietKNyL35I0vrZD5U5LuX5g2tZpZ13dovKa7ESrjjAOq6bBPT/Qa/8STvu9rY6W
+ asA9YHpCeOUKzOmiMpqhxcQZgHzzyhIWXsM4h7jtMjcJ8ZeyCYgG8BukKkCbVH57CQ3AMNnbMGr
+ yjFyDu3khWVvf2G/z5uwm7B7HFTMaS8BCILxFwVBYfODoO18t5KsPiOaMi7l7NL7+UaJcOOiINm
+ 3dBqeQokRxox89ZAam/AbuJgg7XV8+aQBsVV+Hc8RljxsGA8pDOn6DpLugxiWz6Sz9q5k4akeRD
+ FxYuBf+ciSw+7Ve8TB4D
+X-Received: by 2002:a17:907:26c4:b0:ba6:1662:e7b3 with SMTP id
+ a640c23a62f3a-ba61662e81dmr234655866b.34.1776653987633; Sun, 19 Apr 2026
+ 19:59:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1776344788.git.jcethrid@gmail.com>
- <d92e6e885515ddc3c205623d6edc56ab7c53aa19.1776344788.git.jcethrid@gmail.com>
-In-Reply-To: <d92e6e885515ddc3c205623d6edc56ab7c53aa19.1776344788.git.jcethrid@gmail.com>
+ <4b5af507bd698752af52fd318273fb5fe40e53d4.1776344788.git.jcethrid@gmail.com>
+In-Reply-To: <4b5af507bd698752af52fd318273fb5fe40e53d4.1776344788.git.jcethrid@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 20 Apr 2026 14:58:06 +1200
-X-Gm-Features: AQROBzCVbV8t10iUpNkp5TkyN13tN2KXr_7iTBJ6vzrgHwPeqtgNNgcUbMASVt4
-Message-ID: <CAFLszThp+mUJNznn4cP35fsuVgnSrgUk-cLYpU2-BaJz2rWtqQ@mail.gmail.com>
-Subject: Re: [RESEND v4 13/14] arm: sc5xx: add missing boot env selectors
+Date: Mon, 20 Apr 2026 14:59:35 +1200
+X-Gm-Features: AQROBzC0KMzf-Ay8_rVqp6HkWVbHFvh-8S5MgquwJAk7xC6xpcHaF1KPDx7R2mk
+Message-ID: <CAFLszTj9nd+1N7U5DyQfmnx67F67OTdHFo0FSArpLMv0qSZgAg@mail.gmail.com>
+Subject: Re: [RESEND v4 14/14] arm: sc5xx: Add fdt_addr_r, kernel_addr_r,
+ and initrd_addr
 To: jcethrid@gmail.com
 Cc: u-boot@lists.denx.de, malysagreg@gmail.com, trini@konsulko.com, 
- linux@analog.com, philip@philipmolloy.com, Ozan Durgut <ozndrgt@gmail.com>, 
- Ozan Durgut <ozan.durgut@analog.com>
+ linux@analog.com, philip@philipmolloy.com, 
+ Caleb Ethridge <caleb.ethridge@analog.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,22 +111,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Caleb,
+
 On 2026-04-16T15:19:35, Caleb Ethridge <jcethrid@gmail.com> wrote:
-> arm: sc5xx: add missing boot env selectors
+> arm: sc5xx: Add fdt_addr_r, kernel_addr_r, and initrd_addr
 >
-> Define the boot options for SC598 SOM EZ-LITE so the shared ADI boot
-> environment includes the expected boot commands for this board.
+> Add fdt_addr_r, kernel_addr_r, and initrd_addr to the SC5xx boards,
+> to be used by the booti command.
 >
-> SC598 SOM EZ-LITE board environment utilizes the shared ADI boot
-> environment, but it does not define any of the USE_* boot mode selectors.
-> Without those selectors, the shared env does not generate the board boot
-> commands such as spiboot. This leaves the default bootcmd=run spiboot
-> without a matching environment command and breaks autoboot.
+> Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
 >
-> Fixes: c9e893d ("board: adi: Add support for SC598")
-> Signed-off-by: Ozan Durgut <ozan.durgut@analog.com>
->
-> board/adi/sc598-som-ezlite/sc598-som-ezlite.env | 6 ++++++
->  1 file changed, 6 insertions(+)
+> board/adi/sc573-ezlite/sc573-ezlite.env         | 4 ++++
+>  board/adi/sc584-ezkit/sc584-ezkit.env           | 4 ++++
+>  board/adi/sc589-ezkit/sc589-ezkit.env           | 4 ++++
+>  board/adi/sc589-mini/sc589-mini.env             | 4 ++++
+>  board/adi/sc594-som-ezkit/sc594-som-ezkit.env   | 4 ++++
+>  board/adi/sc594-som-ezlite/sc594-som-ezlite.env | 4 ++++
+>  board/adi/sc598-som-ezkit/sc598-som-ezkit.env   | 4 ++++
+>  board/adi/sc598-som-ezlite/sc598-som-ezlite.env | 4 ++++
+>  8 files changed, 32 insertions(+)
+
+> diff --git a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
+> @@ -3,6 +3,10 @@
+> +fdt_addr_r=CONFIG_SYS_LOAD_ADDR
+> +kernel_addr_r=0x80008000
+> +initrd_addr=0x85000000
+
+The kernel_addr_r value 0x80008000 looks incorrect for this board.
+CONFIG_SYS_LOAD_ADDR is a2000000, and sc594-som-ezkit uses
+kernel_addr_r=a3008000. I suspect this should be a3008000
+
+Similarly, initrd_addr=85000000 seems inconsistent when the load
+address is around Aa000000; sc594-som-ezkit uses A8000000. Please can
+you check?
+
+> diff --git a/board/adi/sc573-ezlite/sc573-ezlite.env b/board/adi/sc573-ezlite/sc573-ezlite.env
+> @@ -3,6 +3,10 @@
+> +initrd_addr=0x85000000
+
+The standard U-Boot naming convention is ramdisk_addr_r - would it
+make sense to use that name?
+
+> diff --git a/board/adi/sc573-ezlite/sc573-ezlite.env b/board/adi/sc573-ezlite/sc573-ezlite.env
+> @@ -3,6 +3,10 @@
+> +fdt_addr_r=CONFIG_SYS_LOAD_ADDR
+> +kernel_addr_r=0x84008000
+> +initrd_addr=0x85000000
+
+The commit message says these are for booti, but adi_boot.env uses
+bootm with fitImage and does not reference these variables. Is this
+preparatory work for a future patch? If so, please mention that in the
+commit message.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
