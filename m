@@ -4,94 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D45FEA71B3
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 02:12:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB80DEA71B5
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 02:12:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB30C8429E;
-	Mon, 20 Apr 2026 04:12:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1A814842B7;
+	Mon, 20 Apr 2026 04:12:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="amL+iZJj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aDNQu5NE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14708842C7; Mon, 20 Apr 2026 04:12:36 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 5D348842B7; Mon, 20 Apr 2026 04:12:43 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BE9E842A4
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 04:12:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 706828419E
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 04:12:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-b9c3a9fe80fso312018766b.3
- for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 19:12:34 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776651154; cv=none;
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b8f9568e074so464988266b.0
+ for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 19:12:41 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776651161; cv=none;
  d=google.com; s=arc-20240605;
- b=Wm71SRz956fIrA4j5M27kzfF10FfLEVsZF9aTq/mEWxQp/oc9S//ZAT0aIXcw/L5vb
- 9tLz8lNgeyDtjQSWYavaVUAE6LI+aPe5JUVj4EHd4sR6rEsg5hN6MbM+zaXUcjkiMjaZ
- /Pn82s7qG4G2A/1yNU3p+quByhDGW46BvygDohhNzsexqmsIciXETVEWP9Y6JyPOOi4G
- LtvPxJ4lEz7LE+1zgr0213Ag7yAfK9d4zA+XqEcw6Ishx2NSc13DHzav6hRYzelHFHhI
- p1ZMnyA1IQdVylD1jZ6N3iCan5fj1pJkiEUVUPsejUlAR1I7d83KzaUXkWI2Mnic3/+H
- zMmA==
+ b=OxxGufEPBwRYMBp7UfScVVuF9MMfnqZDvhIHRQq+999uu9/DYZaW2DAO46+ulR45+Y
+ nrpfo3/bgyOi2xwH48qQD0Sjd7v68s1VFrRVq1QaT2v7DaPgV23RqWnp1T6RCmKqHcHZ
+ XZCP5qjSZyB1UVPVHLq9jMO/ntG1F2nHw1sqJjwQZe4r/0eAOnNgEuOFSFKNNJwzXRRb
+ xEmjUbDD0JK8+CmTNLPb0CJO4ILu2yC2wmogX47vRTR+hDtkOxFq9Qh9UAcYBXprdcr2
+ AEMfnU3z+f6G0cg0fAkraDeQA7HtVt/tjj8SqRZW5JldAse+kAb/UmRc7/yEBdjFKNBT
+ uyrA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=P7j+41nACDJbYHW7DcJYsdikCwjI8i03mUClhpDUJwU=;
- fh=MARMZ3uT2jMt3s6dMYOO4Y5Qg4zEZXBBhj48MXTVEAU=;
- b=O8pnWS4aqdt/rUqkTExxI3rSI6immtwJCD3BMVGwUFYO8+wG51WUbgSO/7WDcUU5iG
- C3dL7LxDGABxEl13w2eknRDv4qHq8RW88ROlepNckEjARqQc8IPMXJbKvXp9fmxMKxfB
- Qd79razylFXvhJkiArlW7B+WPGL0MaV+NwQ9IcZXVokBVXddDpyOREJE3+sXu0a7rnAf
- fP8hjOhdPpo8v2Wbni1r+vjr6fEj2/J4t/+6/z2iVi7n2RoKiinZIXKtoJHyOmNGuciF
- 09SSYWwRxFaDvoxt33Ah/iyhur7ZhN7JJe0JaL4NnOGtGkd8BNLgLvyvMiW9JPaKcqDl
- 1KOg==; darn=lists.denx.de
+ bh=ikM3qHBtlD9FKmAMj9EVqrcua7yu+Hjuo5LlwrepzdQ=;
+ fh=axaieEKI1EPnKwzDhCT1NTUzAiELcbdCJIApDIYu7as=;
+ b=InD8lHp07UerGSRiNb6EXjlGU868bJ77v0sTPsuo8b2yYSScE3zjoYVQwe8j+kkTYy
+ y1VL3g6Ihta0qhk8XMIji/H7ZoTgCJdAPnJnTTIoTi0kCDQziXEsk+dqIJRZBeT6vW0u
+ 8O+rmAwQtb0v66kXsPPr7gQB9t3jKAZ5K8JVwsvl4KhfKJI5IEjSaTGh089qTzvfWBIo
+ xtrcL/QxAE+vjBF5J3ZfTwLJnip5X+1Dw8O7nAxxS96jLgBdRms6JXGVHzSW1uUdz07a
+ dDGbBTqmOJokjKDWBGYzulxrTEQ27vAhsht11D3oohs3lU2alZTGutdS22r276v1qRth
+ 5uZA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776651154; x=1777255954; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776651161; x=1777255961; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=P7j+41nACDJbYHW7DcJYsdikCwjI8i03mUClhpDUJwU=;
- b=amL+iZJju1zvv15O4448UvU/+0SrhR/ZhvK/sf1SYhnLDHFSXhboxrCj7iGuPMvSmh
- jk2msevNHbADuFU5MpAuZzH0OPN4RsxjsQ+1rG/+IaVV2zLGrB/p7vOiQ8c3mctnYlAM
- ElTW9rwcpYvC/Pxh9V+q+xEtet+oHomAmlGGk=
+ bh=ikM3qHBtlD9FKmAMj9EVqrcua7yu+Hjuo5LlwrepzdQ=;
+ b=aDNQu5NEMhT2Gaai8Ow+5iSuTLxbtZFl6sAU4JzDTyxUhFAVAIcW5iYQ5vgTf5OWJ8
+ E12fwEmewOBmcPtBF1Z1gTQQuwg4BT6VVXIfZ8rI2Ykf2yjq9qgvDXwAwzH2ARSa+Npo
+ Bk3srrlclur1lC+uEKX5rQCV4p+ANS73qbfK0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776651154; x=1777255954;
+ d=1e100.net; s=20251104; t=1776651161; x=1777255961;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P7j+41nACDJbYHW7DcJYsdikCwjI8i03mUClhpDUJwU=;
- b=MvodrdyvokBjoEaqynJw8YshZOEEW16Vr+8AacoVWdcSfU2dnvTPHf6yPA5l+yMPZH
- vp/5gFFHHcjuhte2UhDb5oR7olM1inbYIKDOeJSP5Wg8BdLNSow518ItkRehKMiYme4h
- jC6YztSmto3+yF8QOqXXr82gV16a0uhyOzO9l9k40Cbl8vO1QXOY0zLNFMgVEEZUsxAO
- sYLOxEZ75o7XdKNM3tlkREVGnBjFxGZRetnbaIHYADec8ggAZF2J//auuBkxmK10nQh9
- 0VeINRZbv+fkyqV5q/SAsjQGp/at7inZUWVEzQvt+MOisRDTPQwwvAYlpvdhP7ghRpQW
- 3Lbg==
+ bh=ikM3qHBtlD9FKmAMj9EVqrcua7yu+Hjuo5LlwrepzdQ=;
+ b=TR4FPzrzuJeBzQht8PbknYthfGOyRwtiwLDUVzLflKl7cxHVgkWfN+J/1vZxcjU0s7
+ tFD1cCcoPrd/rS/aMfvM5n5GGBcnVlbRkWqtclzfuoDgOeFqKB2Nmrz9gZG9bYIFu8C+
+ l3fwGnsaEVKtx3jRJTjeSSbQMhgsRD5OfZeFqpFZ5Wm0GzZJtEyuM9NQajVnS0+aqemV
+ kXIslyLS+yO86AJftzJv/6wKgOL1dF/zdleinlkcEB4V4lyKx5WxFTkxdFAk3jWy5kud
+ TncQc5qYMRFn9QYDHtXnkF4Q+J2n2I5mUBmogGT59DAyXV+MWMBCP7YikyTeysp/EDYp
+ 3m6Q==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/GHqQkcxqSIy4SILsqcAAeCg6Kw5UFoCv0x8Hzyo8CgvBlDamJ/aQ9slrrnBELxtiCrTngE3Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YwRtIJAxe4KafRjkwCQasRPIB1hgNjU5XRaGh53AbKfgY+WblX+
- t+2F6sniO9VDY+TAnMMqX1gFfFW4Rtitvkq0FJFZRtAY3bo5qdtZSBlyTJpBPHMawSoQMb7RJ8f
- PAyaQeHKjw6s1dvQqtvDl4I+LjVApyUR+YJx1DhT/
-X-Gm-Gg: AeBDietwKywE9uViCqIr9cemu+qRvIHAu0ReL2HD25h4G31a3jhneNlnt5wWhqNybRV
- MmbHs4hnMBNz7lU2D8Q/UupJPLnAan/4Z1v4xS9KfGn/G+xg26AvcuHhsEMfD9rqXixjOTUOzBS
- Joa9uZOERebQKrcJJGG4uAE5ETpw8coFRj3NLHgNBc5XZuiYhVum8sSsxXaHGH0m32CopaBWrkS
- cTlvDK72/LBkrLj1Y4eKx+e1sSC6fdGpxlQ5Si6pFQgW9s59MpfSX7EVKtVCyvzxs/rNh6PCcMA
- INKJzT+XoEcYWR3G6m3m
-X-Received: by 2002:a17:906:9fcb:b0:ba6:42ee:75f1 with SMTP id
- a640c23a62f3a-ba642ee77b3mr225339566b.2.1776651153554; Sun, 19 Apr 2026
- 19:12:33 -0700 (PDT)
+ AFNElJ/ndE0e1jS6X+4smJfFRf5zymExcQPHqo5GovA9Xe8WaaAL7X03xGTn6Sc5h086JiOMs8QZ8xw=@lists.denx.de
+X-Gm-Message-State: AOJu0YySY6GpD99C9O8gJVyL52M0N1SkMRohoq3xrt+ttPW0veBaScIp
+ qG5rAvSnOyPIpimySkbLZPybVTEt7ay0Fov4Vxu+Q9WVLpNpE7naT5FawIeXLYoAM2IEJO2Bo2n
+ r79T9//ooR+z8iNPmY/LUnBastMxq7P7+XG6TtlPp
+X-Gm-Gg: AeBDievXQDam9asBHReW4KmT1DEqRazjkgn1wOax93DSMU9Hi6coS7xzhmFckm0hAgy
+ +cWCPZaBii0l1A3Wctwexx4KmyhKtty+Du34F21yFWy0KrOzxYKe0uatHHY8WHkgQXc4KBDRUyQ
+ asH1e8wcC04Pmog3t9N3dfxBGE4RU72bfo2Bs5LndEJvCGJ3lOWk+i1rGiiGcn6VfXhJNsA6KUg
+ g7Zj2sZeJHSi/WADlOxUBzJD9uUcSEfbXMjwAO357D/CZMLYaJQFyT/detqEJwNV/lAJrQcRNCL
+ ZZWg/etPF2VqPlbZB887UmW0YEJzQ6c=
+X-Received: by 2002:a17:907:d641:b0:b9b:e619:a73a with SMTP id
+ a640c23a62f3a-ba41b3e2885mr539692666b.46.1776651160957; Sun, 19 Apr 2026
+ 19:12:40 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260417130204.49896-1-philippe.reynes@softathome.com>
- <20260417130204.49896-7-philippe.reynes@softathome.com>
-In-Reply-To: <20260417130204.49896-7-philippe.reynes@softathome.com>
+ <20260417130204.49896-10-philippe.reynes@softathome.com>
+In-Reply-To: <20260417130204.49896-10-philippe.reynes@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 20 Apr 2026 14:11:58 +1200
-X-Gm-Features: AQROBzC2vS-a0qWqUu-O39Pm-4b5BJv55DaS36MbPhr6eafjb9XdLNZ0f1dFJfE
-Message-ID: <CAFLszTh_zZT1P3nxH_4NbGhkYA8ws0tc_nVbU-1OcNjGJV8fKQ@mail.gmail.com>
-Subject: Re: [PATCH v4 06/14] test: dm: ecdsa.c: clean this test as software
- ecdsa is now implemented
+Date: Mon, 20 Apr 2026 14:12:17 +1200
+X-Gm-Features: AQROBzBBb1skThPaL0id8UbuaA8_IR38oy4Ea7ZRMBfKbmDs-E39y6oJV5XaZfM
+Message-ID: <CAFLszTiG50vp=YSYzY5uPGD0QXgTzmwnvWi=fCzA-csXqRO8VQ@mail.gmail.com>
+Subject: Re: [PATCH v4 09/14] tools: mkimage: pre-load: add support of ecdsa
 To: philippe.reynes@softathome.com
 Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com, 
  trini@konsulko.com, simon.glass@canonical.com, u-boot@lists.denx.de
@@ -115,30 +114,51 @@ X-Virus-Status: Clean
 Hi Philippe,
 
 On 2026-04-17T13:02:04, Philippe Reynes <philippe.reynes@softathome.com> wrote:
-> test: dm: ecdsa.c: clean this test as software ecdsa is now implemented
+> tools: mkimage: pre-load: add support of ecdsa
 >
-> The test ecdsa was done when ecdsa was only supported by hardware.
-> So it wasn't possible to test ecdsa on sandbox, and there is a test
-> to check that ecdsa is not supported on sandbox.
-> Now, there is a software implementation of ecdsa. So we remove
-> this outdated test.
+> Right now, mkimage can only create pre-load header
+> using rsa. We add the support of ecdsa.
 >
 > Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 >
-> test/dm/ecdsa.c | 104 ++++++++++++++++++++++++++++++++++++++++++++++++++------
->  1 file changed, 94 insertions(+), 10 deletions(-)
+> lib/ecdsa/ecdsa-libcrypto.c | 29 +++++++++++++----
+>  tools/image-host.c          | 79 ++++++++++++++++++++++++++++++++++++++-------
+>  2 files changed, 90 insertions(+), 18 deletions(-)
 
-> diff --git a/test/dm/ecdsa.c b/test/dm/ecdsa.c
-> @@ -3,36 +3,120 @@
-> +     struct image_sign_info info = {
-> +             .checksum = image_get_checksum_algo(full_name),
-> +             .crypto = image_get_crypto_algo(full_name),
-> +             .fdt_blob = fdt,
-> +     };
+> diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
+> @@ -538,6 +533,26 @@ static int do_add(struct signer *ctx, void *fdt, const char *key_node_name,
+> +     if (info->required_keynode > 0) {
+> +             key_node = info->required_keynode;
+> +     } else {
 
-If the crypto algo name is invalid, info.crypto will be NULL - please
-can you add ut_assertnonnull() checks for both checksum and crypto to
-catch this earlier?
+Strictly speaking the check should be >= 0
+
+> diff --git a/tools/image-host.c b/tools/image-host.c
+> @@ -1244,13 +1245,61 @@ err_cert:
+> +static int fit_pre_load_data_key_ecdsa(const char *keydir, void *keydest,
+> +                                    int pre_load_noffset, const void *key_name,
+> +                                    const void *algo_name)
+> +{
+> +     struct image_sign_info info;
+> +     int node, ret = 0;
+> +
+> +     memset(&info, 0, sizeof(info));
+> +     info.keydir = keydir;
+> +     info.keyname = strdup(key_name);
+> +     info.name = strdup(algo_name);
+> +     info.checksum = image_get_checksum_algo(algo_name);
+> +     info.crypto = image_get_crypto_algo(algo_name);
+> +     info.required_keynode = pre_load_noffset;
+> +
+> +     node = ecdsa_add_verify_data(&info, keydest);
+
+Please can you check for NULL returns from image_get_checksum_algo()
+and image_get_crypto_algo()? Otherwise ecdsa_add_verify_data() ->
+prepare_ctx() -> alloc_ctx() will dereference NULL
+
+See fit_image_setup_sig_info() for an example.
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
 Simon
