@@ -4,96 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBA03F5A8B6
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 19:32:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32166F5A8B6
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 19:33:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65EDC84374;
-	Mon, 20 Apr 2026 21:32:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BB655843DC;
+	Mon, 20 Apr 2026 21:32:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jm5fp4O3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D2y/l8O5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A40184347; Mon, 20 Apr 2026 21:32:35 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 8EB7F843F5; Mon, 20 Apr 2026 21:32:58 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E34284347
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 21:32:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E6BD843E0
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 21:32:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-ba36357195bso395483666b.0
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 12:32:33 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776713553; cv=none;
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-ba5b107eaa2so418517466b.3
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 12:32:56 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776713576; cv=none;
  d=google.com; s=arc-20240605;
- b=PJtJvSBxmUe/B9Axig+DwM4wSlDjeZXNkPKBAhJcAVTRkrvDCUs90vMiX3We0Dv3v9
- CE4EIvq7Do5IXfaKkPGPL48iZGRwLda15bCLpYqSqz8PMAJ0nYACO9BpxFdD0Srb5Uqp
- 1UVWlhoa1+y0cWA+DLeiwunBlb55zqT7La7H5qvgdNCLJ0jZ972NO4ef7u0kCTpiXD5h
- +OVBu9Wp350xNRMiIXol3bisaFbszBPlu0zGNLsUuJHj0SjEugx14ci8hxy6CdOSQ+E0
- IJZ61f5guzvKhTOeYaqzT4BHSJEPUIs4THrh57KPVCLLewfZI/AlqLqq2k9rM7WPEpUK
- /RDg==
+ b=A0oPFXXkTd0dpCD/DsDk9OF/Wye0mfJzOOyY9W86W3Z/hWianyfqm+vh6pKV9GDTeL
+ qPrDZg0uOmObTfuoGEIQETmhZMXVFuNY52ZPX4w3qGAVe8Ar+gdmcXTWO8jLXD82l1uA
+ nW04u+uR0spZybeD+O/u1AKjYAPz281NWK5nykKmCZSKnI16Dokhp71KwR6ByL0amxfX
+ RUVRkUOOCnD0zTbsH4B8mC+5mgywvcCAZFqJRgq6kl0idAEHvlpM44qwaqZZQBUXjH4k
+ EI6pozKfUO40tH4NJ5+OygTIagMDTM9tjGgbrvq/tjtteBBjszYJJ/cJ9gIdvbMnMF4I
+ sh9Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=nlDIVAiw/n1Q0/t0IVX+Wa+MF6T4VeU6akn34nNkNwU=;
- fh=QQJE3IaAeunPHumA5bQT00HUdZQapHaeCUQ1zQOCaEg=;
- b=Oas8ftjGXGk1wk0fJCLLTyMS8OUo8UMjRXX734GZJCmRta+NF7dif8kfz+RS8kB09W
- yUlJ7vxzaeHHuXCcla4V26SCoIar1nYQoWoOciNxgQU+AxVJ4sMu5nMdiSJuqUZAD7mK
- Mxohr9sjYexNYJXu+pqMWjMafLdp0kVvxtIvG+WgBCfO2b4dJaZ+6vSyqqSAba6l3DeQ
- 9tPzgd5ydNDwxVrUt+N4ggAjnV3G79wX85Z4lgvoYyppTILeDfvQiQaqfpcxwKC4SZqK
- vLtfwjmIn771fPrYFJBxL4WjgllgYor4LgVIN22iXy2GPmb8hlCFkigFRaiSFI7VnE1h
- lX8g==; darn=lists.denx.de
+ bh=u6yjFd6CcPfuuy0ynAvLAN7oDVZke3Gu5PjqKsDlQuo=;
+ fh=TL2Th1PXbQmTygp4zdHc2dPft0ExKDuqIBJjEY3UVdE=;
+ b=Vs7F2qC1jgs2DwFJUV2fgf09zB9OMoJlvTh7Ev7+956vv+O/JntTlWdspo+vkfO1Sh
+ 5YFOzuW5WOF1K8ZbOl41eUobzSvplzo8uhzkw8kCE0Ec3N48BKBldL5jG6s+F7YI6tBh
+ 8tBOoXUquPCarujIUsb2jV9dh8g0JQwsyHv+XGuDl0tQhJ6463LNhDEh4gXUKusmhBnZ
+ 1smM8/1ivFY0J71v1ZsNP/C7zKpcw0gcsQDNjiPf/a8ipL51rnIXuXKEAqC51bs9wN0W
+ xXZALliugAvJFF2p1IFsuaYaDa/bQhuNhFsbwMeHVVG4vaybklhsvfg/BObxIbsgFp3D
+ ps2A==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776713553; x=1777318353; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776713576; x=1777318376; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nlDIVAiw/n1Q0/t0IVX+Wa+MF6T4VeU6akn34nNkNwU=;
- b=jm5fp4O33zWt0nnxR6QmmneyjbgzJ4jTuGI3b9Qky2/Wr7PGED/V3D9BOAomOZ9IQL
- PTnHLRIEd0q7aiRWkasTxBXmo5prSx02oBbjBEFU+X+eJQFd48DbH8c3aID7Jw8YRVQM
- PDzSxRlhuQG7idbFSxUui4vk1kHScNBL22iVU=
+ bh=u6yjFd6CcPfuuy0ynAvLAN7oDVZke3Gu5PjqKsDlQuo=;
+ b=D2y/l8O5ATEA1cCi4TBLssxkd++DF+frrWwZ9oRi3kbmi0uSrBZF7QsVXhIMaxyUU4
+ mQh60ZxR6ESJZaMFXDWXlWEmBv950JPXrC14NFqJpfAor8WrUF1fbwVliONL+3VTzObb
+ lgPmMRMW9iBqogn4S+NEC1nW/VUthQwMWAkGA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776713553; x=1777318353;
+ d=1e100.net; s=20251104; t=1776713576; x=1777318376;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nlDIVAiw/n1Q0/t0IVX+Wa+MF6T4VeU6akn34nNkNwU=;
- b=OMm9BO8qnUWyAfGBuizypRiQSC1PRYGwAGHYgix02FeQvNIz0WQMZbifOLiYdBXRNR
- 2ZQ52HTYktzC5vjcPhkaGiJKHdmBns2z0+uluKxSUa5rjBpHRnv9TjpmHgnqA0GdRElS
- Jo54FeTra7zepxKzzJ1FPP8fQTgxNx+NkKr5xKwvyrw2i5YrBXyt4Mu/aWDMihJYELJj
- Raot2HCEDzWZt9BgVsZr17m61Rm0hLcVDYDZmBLTFYHshvwEmeos5kBKEpbNzdnhwAl5
- KDKrI+Eb84XPOmvLx2Ioj8HWX09+jkFoiUnEXUKGr6A7RvdRIPEm7jyfP/nDeZeK5biS
- LlrQ==
-X-Gm-Message-State: AOJu0YwymhlCkze0Ujrz9/Wd+EEFQbWnUNuAsa+RRNUJYEj5oI2dHf7+
- MgA+//16cnfiCVzeMI/Fsbeg+JFQy7pus5wQogjBUX47qKA+p8i3Fi3KBznCVoG6GibvbEgftN8
- DpJd4w7PfpDJTMaLDgPaU9gYJAiFEcMt5AxD98Xptqm30uK58MGk6UA==
-X-Gm-Gg: AeBDieu5O7K1qEaspnKTf7uYvZcc3s0YEJQpeby8TxGBaJ/bdXLtdJo2ruecZ5q1TFf
- 1A7cFaVZ4r8qRM2njqJqmMfsFhGryg+8E3D7KOlSHIrKVb7fYcU1MpYSiLlRMmIs8QNzDjoqX1Q
- +toeK88Scu3vSynbhkSrsDBzOzgU6zCrpO2if6SqxXnyYfS+tplF2d7FaUFcD+l0kBXGEG+8lpj
- 9GWL/ljloNfQb42QJRJBoDx3AuQIf3cJ5cL8c9ANS3Gzp/H55JQQEr4J7h5EtQx6CWmIsU76B4r
- ztanMG5VnlgPkNFkA8sJ
-X-Received: by 2002:a17:907:a604:b0:b96:eee1:bb66 with SMTP id
- a640c23a62f3a-ba41829279amr652324466b.10.1776713552565; Mon, 20 Apr 2026
- 12:32:32 -0700 (PDT)
+ bh=u6yjFd6CcPfuuy0ynAvLAN7oDVZke3Gu5PjqKsDlQuo=;
+ b=MayceM/dwda+owrzbj4tBBwzazBJvt8wdyNvk8NmOsaW2hR0kXa7hAyanyx/s1rrJX
+ 7jVjxjZMxE2oLftCN8Fm3MPIjvUjo4ikh9/oGJipwHsKM1Okesh7FET2+mS2MbqnOfwN
+ vmNXrJJyxQBYa3uNjekxbElw5uIvYi5dGNHhsAEnjXBofSZ6a0e3Ke/bXcvDyal3jvfx
+ 6XZV/CpiWfa+U+/k7jgzhgwcWGixzzeU0x2Kq5lhaZNvW7T+k1Wa86ocQ3GybxEkL1Ls
+ /UnQotxAaQhdMDp97DPUaSB7jEdfRs/ocifpEffL18YCUfgOszZF/WRC7KoQxsJ0emMi
+ DWyQ==
+X-Gm-Message-State: AOJu0Yy5ypaK2Uadh6mjq9jbht1WgakTKPmt6mLXUERGypaEkVegRaY6
+ n5RBs1PpIeJhpfO/V0diVgMnxY8YLfEXTKzspUx2IG2B04W0C/EWSpIBDICsD5LF/hf8p/M/tHY
+ 2OVL9QS6Czcizsz871HcHFX0zFRY0Z4arrlMmlzuzO6p0q5igjkg5Zg==
+X-Gm-Gg: AeBDievcRnSdYQFPK+wYl+2CYNp1xSIqGqQU0+3SZFnMjRj1XX/qeu8/ZcBdhq1Ph/3
+ xt1c12R1zoUqaoqwLqwmVpWPPgaKVOFmlzNJURvE2mUAyGDFSEgw0gkqd10/p+a5fuDzx8CxacG
+ 4NEsgXEI0Q1hb1GKnJ93L3SMvJqtDLfvqd3zOu0FdqIr5NpXQgYxiVXPf0cdaHO+77ZeHDja2FI
+ b+EqqiDhSRLr6NFhX41Yj2h7aeQ/2y94gbCHlIXN4lNoFrylbFoZXCws77XEMrED+FrlKmfrm2l
+ JlQpd2z6ZsXg0ggRTG0s
+X-Received: by 2002:a17:907:72cd:b0:ba8:ca25:e6ab with SMTP id
+ a640c23a62f3a-ba8ca25f0aemr160391366b.11.1776713576002; Mon, 20 Apr 2026
+ 12:32:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1776392312.git.weijie.gao@mediatek.com>
- <17d1fc9a1ecdd0a5d54907b8816ef62793387a42.1776392312.git.weijie.gao@mediatek.com>
- <CAFLszThHeX97x6Ebc_7TZiRs3ez2MC05Kf0ir+yo9=09NHThHg@mail.gmail.com>
- <1219110f4621405d5312a7376d35d1bc6638618f.camel@mediatek.com>
-In-Reply-To: <1219110f4621405d5312a7376d35d1bc6638618f.camel@mediatek.com>
+References: <20260420074601.24988-1-briansune@gmail.com>
+In-Reply-To: <20260420074601.24988-1-briansune@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 21 Apr 2026 07:32:18 +1200
-X-Gm-Features: AQROBzBxIs7dU5ceP1sMkd4xVgljQfTFBKMnpP5mf5zljcV0nrNHp6pb9GfCZiM
-Message-ID: <CAFLszTgWtDYuuscRheT0T8w5bUcbSrRU=7UBWgnGmZxCczp6ow@mail.gmail.com>
-Subject: Re: [PATCH 2/3] cmd: ubi: allow creating volume with all free spaces
- in ubi_create_vol
-To: Weijie Gao <weijie.gao@mediatek.com>
-Cc: u-boot@lists.denx.de
+Date: Tue, 21 Apr 2026 07:32:43 +1200
+X-Gm-Features: AQROBzBmVY07zP0APNgD_SARF6UU_fPFbIHaVTWHERZcIHViKEL6GxeFarTkRss
+Message-ID: <CAFLszThRNhVTMRpVPySFSComEhL_s0a1wY1BVnKKtV+K6OXnEQ@mail.gmail.com>
+Subject: Re: [PATCH v3] Improve handosff prepare on SoCFPGA
+To: briansune@gmail.com
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,46 +107,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Weijie,
+Hi Brian,
 
-On Mon, 20 Apr 2026 at 19:25, Weijie Gao <weijie.gao@mediatek.com> wrote:
+On 2026-04-20T07:46:01, Brian Sune <briansune@gmail.com> wrote:
+> Improve handosff prepare on SoCFPGA
 >
-> On Sat, 2026-04-18 at 12:47 +1200, Simon Glass wrote:
-> > Hi Weijie,
-> >
-> > On 2026-04-17T02:35:14, Weijie Gao <weijie.gao@mediatek.com> wrote:
-> > > cmd: ubi: allow creating volume with all free spaces in
-> > > ubi_create_vol
-> > >
-> > > Although the ubi command itself supports creating volume with all
-> > > free spaces, the api ubi_create_vol() does not.
-> > >
-> > > Since negative size in invalid, this patch replaces negative size
-> >
-> > is invalid
-> >
-> > > with all free space size in ubi_create_vol().
-> > >
-> > > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-> > >
-> > > cmd/ubi.c | 6 +++++-
-> > >  1 file changed, 5 insertions(+), 1 deletion(-)
-> > > diff --git a/cmd/ubi.c b/cmd/ubi.c
-> > > @@ -226,7 +226,11 @@ int ubi_create_vol(char *volume, int64_t size,
-> > > int dynamic, int vol_id,
-> > > +     if (size < 0)
-> > > +             req.bytes = ubi->avail_pebs * ubi->leb_size;
-> > > +     else
-> > > +             req.bytes = size;
-> >
-> > When size is negative, the printf() below still prints the original
-> > negative size rather than the computed req.bytes
+> There are some cases that the Python scripts
+> are run and the qts files are not replaced.
+> Make sure qts folder h files are removed before
+> handoff script runs.
 >
-> OK. As you mentioned in patch 3/3, I think maybe we can move these
-> printf logs to the command's main function to avoid logs being printed
-> every time these API functions are called.
+> Signed-off-by: Brian Sune <briansune@gmail.com>
+>
+> arch/arm/mach-socfpga/config.mk | 29 ++++++++++++++++++++++++++---
+>  1 file changed, 26 insertions(+), 3 deletions(-)
 
-Yes, good idea.
+Typo in commit message: "handosff" should be "handoff".
+
+> diff --git a/arch/arm/mach-socfpga/config.mk b/arch/arm/mach-socfpga/config.mk
+> @@ -8,6 +8,8 @@ else ifeq ($(CONFIG_ARCH_SOCFPGA_ARRIA5),y)
+> +HANDOFF_KEEP ?= 0
+
+> diff --git a/arch/arm/mach-socfpga/config.mk b/arch/arm/mach-socfpga/config.mk
+> @@ -43,6 +45,27 @@ socfpga_g5_handoff_prepare:
+> +             if [ -n "$$HANDOFF_KEEP" ]; then \
+
+HANDOFF_KEEP defaults to "0", so -n "0" is always true. I suspect you want:
+
+    if [ "$$HANDOFF_KEEP" != "0" ]; then \
+
+Otherwise the 'preserve' path is always taken and the 'clean' path is dead code.
+
+You could also have an empty variable meaning don't keep.
+
+> diff --git a/arch/arm/mach-socfpga/config.mk b/arch/arm/mach-socfpga/config.mk
+> @@ -43,6 +45,27 @@ socfpga_g5_handoff_prepare:
+> +             trap 'rm -rf "$$TEMP_DIR"' EXIT;
+
+The trap is set after TEMP_DIR has already been used. If the python
+script or mv fails partway through, the temporary directory won't be
+cleaned up. You could move the trap to immediately after mktemp
 
 Regards,
 Simon
