@@ -4,104 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF215F5A8AA
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 19:33:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D44EF5A8B6
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 19:33:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E70B843E8;
-	Mon, 20 Apr 2026 21:33:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E62AE84413;
+	Mon, 20 Apr 2026 21:33:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KmaGlCLe";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NtKk6rQY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71BCF843FB; Mon, 20 Apr 2026 21:33:18 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 10E8C843FF; Mon, 20 Apr 2026 21:33:30 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73C2C84376
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 21:33:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C690084376
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 21:33:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-b8f97c626aaso542842166b.2
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 12:33:16 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776713596; cv=none;
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-b9358bc9c50so457608766b.1
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 12:33:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776713607; cv=none;
  d=google.com; s=arc-20240605;
- b=LQbvJsWpFi0A74y0gq1Lgai8qi7N/tvz9GUjUB+Ps36tnUeXd2VsgMKFvcHE9S7dCK
- moahDtaVtA7qokXYAtzSFSxfH7CXWBfQFDo+W7V0BxQig0YXiy/5MLCqoNUzlxq5wTm7
- atuovvvYgKwN9KIPGFq2zUqr7pvin+Bx9OHdapYDj60WELdU5i9ejDIs2IHIhvl6HDZt
- /LsjsuxULA9/4gMI9mVV+LKSRESCXxG7hIHmmAuXN6Sjm2F+7IMbaD0cfw29FGpUXCTc
- rSvVVcwS+Y3/KYD055H48GvQKVuGOQwh4CFyPnGMeAO1mQK4ymSL2PjsOQLz/02b0xc6
- wFxQ==
+ b=hnHnU3Jvt6mN6EGqdbOb1D9ICdM4izfvB24Wo7B0FxLmK0I8HWjWuZa0imHpwZc5cC
+ oMkUZ1EdlZ3/YwKLm3JM0t1wb+2V0mXiz2bnMFmu8tKTlfZFOr4eBXgeDNjaT6tLaFoM
+ yaHTsxFY37/k6Y4TDQ/8F28HlfcbiVJA3E4boGx+uxEbxRGJkVG1k841oglZ4xtkuF+m
+ m0fVic76jtYOz6eriTMcVEzMn6vkEPS0b6mn0Y0bxf3gjSvIH21rKl9ya9j/MHUyTiEE
+ XLmf79VqVVnfc/eDXg0tB4iIlm5Jza999JRXdeVdMoctLD6nSYgDgq/IFnsFJamPRi6m
+ NTww==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=F0qlHXO6unjbTTT5FxCzGFalT0ARGbjBVpZeEppNxSc=;
- fh=afIVLVOhbzX4mWNbJEdy2Mzjb/g1FacYg8eVZsuwhDM=;
- b=Qye9MD608yJ/6sCZvnzHegRsDz5279RK64TugMy6EFkGVEKihIcTBQ/YxdgNCzwUkc
- WKWXPHjPFYE2s79X4u1IGWTDOMRRpzjRRA2blDDB346sGswqyuLJCnjEIKIVlfGKzCiy
- EZ2EwogQAfSesrL9UHs2Xe9otEpBrWgrY9DoZp9CoXeArEmICOW7mfZ+0XQhBtJrLViq
- Ce22NJdimrtwKzuM1vrivCzpPoPkTeoUspP160fhNFrK4FfVfdDCK0J8Lmk/1Q1A+oAp
- gJm5rsxF6C3e2Cne5K3mhtE57/gsYaVtHy1alZtGZEBSNQgOkpZiJrvlPXPapvomEhJb
- OiZQ==; darn=lists.denx.de
+ bh=0w5lhyE7lOLb/8C+bj7XsqgucYPTTjWibCRX2IlnABk=;
+ fh=hl+4EPCgakLOnk7XW3qrLoLdx2BF565tvPN7+O4zasE=;
+ b=EFh+WHmunQDnZrlTRPEG4PTpkWhgAoZsw3n/iyTf2QeJGN2KytAh3V4ti9MXGm912K
+ OCEdlelT7bMA+ykXUP6t7wKG2wRfYGcKw0sdERfZcgo9DrjxQn8V5GTm2Y69O9r6ArDN
+ S8NtCO6zZ9Fxpy81OlfZdsTw1Wuw/Fpnmj87SNOG1Ki0X5eyjr/av2Dd+H0w6ji+4s3f
+ Zr3/14lcFN1B01oBTrcp5wY6wAQDzVzGWQTL12RdHa2SvEXacPI/CLQ+iN0+eXe7F7rN
+ re8zU0z4IdJlAfCOZNfb4D8rpC+rVrX6WpCHd+dGN85SWcRafrg0GZBict+5rCr5I7EG
+ Fwsg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776713596; x=1777318396; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776713607; x=1777318407; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=F0qlHXO6unjbTTT5FxCzGFalT0ARGbjBVpZeEppNxSc=;
- b=KmaGlCLejfKYBnGX4na4HsP5s0REdZSdDzKiY7pHkXcCaVJjWvtv/3ngX9cUHqXF9Q
- beZ1X63NC0m7eX6xoZTnfiF1FmKLX9S25zW0rfI8T4EEL2Atdicn2256802vcGSUjYRN
- p12ivq82LDHFo+evcGjkbyMl96INu+H4J0ySE=
+ bh=0w5lhyE7lOLb/8C+bj7XsqgucYPTTjWibCRX2IlnABk=;
+ b=NtKk6rQYRa1y4SSeV9txNrc4D0dXxNWN+P4zDNuHG3lNu3L3ZPYfM7Po/SRsp//eZ3
+ 52ShtbJmGO3gO4dCmVEd10rW5OX+sxYa597JiG+VxbS1xHnSvjMNzpJ0vLhdL1nkuRCq
+ LweahlvAE+d1BWZrv+Ur4n15igwGHOkr77QKc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776713596; x=1777318396;
+ d=1e100.net; s=20251104; t=1776713607; x=1777318407;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=F0qlHXO6unjbTTT5FxCzGFalT0ARGbjBVpZeEppNxSc=;
- b=f7gstUI9YFlN0BMb+8NcOhkRcPsQ+VaoNz4qJNueQk87umZD1Kx86beketY4tkfzrT
- X9SAVSFdDO4JxSf7JBqvLwlfNARf9UK5mcvLVe0B9M4fo14gDfKJ6Hqfalt7gtCZocjd
- XKuq4eLaJvHhY9vhAiIgCJpnZBiob73r+/GJpC6MPyeqblN7Ge/zJeyrRMDaIIBeCF2G
- LFC4HEubn0NWRmVZVxP6xJwkfB1BbkaYbPfLz+VbsBtvGGFvt93OAKMQfoAyN00QLUrY
- cLWRAA6lrO2l/W2MvREh0+tn37tkdzrmrmxaWSqohln8/qGnQDHVJpJpQrdkS3Dtlo1N
- h7IQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8gExNIHa9fhJ0jr1OkdvSFKH2cakYxq+CNlCGABe47iogQdUQAq6Gu2dqUSRu6T4ecd7GHcWE=@lists.denx.de
-X-Gm-Message-State: AOJu0YzLk9iSgsxxY5QoALq4m81ifdGFp13F7kBK2lbmL02Bwb/yEfwP
- sI6SHIf+GLASVkNSIKb7ExGo9PS7h2Rc06GOUVp2oibJsQlFsHFJE65uqO3YQf6CJ5ArFmpX8Qf
- xlfOZnudxG0P/HI+A5gIlSYDvUOI4glJqfXUngTGG
-X-Gm-Gg: AeBDievn+60KLieW5T6+m09RnJuzxILBi0aosJJ9TOh2EBf6MQa2gEs4W+KnCojADub
- FYs62Gf5hlODbmgGQmGY5+Alb75AUqj/yJs51DSRrBNFnDOY9IxM/p+VBDr6DOe17pkS54dFSyB
- D3PIfuM9TyP5xCC5qMDomDbCxzEYx5NSmy4sRj+tSY7gMXMcL5Jrh4aLMnXyHBb6m5yOzw4So9e
- sJVo2lzTMp6u4Ee4rLsVaJRPUQYmQPrNRmVUVJreB/phpl9u5OwLS/YXjT5zBvHQ56nhQTuamG2
- 1g+6X4f6rfcASaXYkMxb
-X-Received: by 2002:a17:906:ba84:b0:ba4:8288:b464 with SMTP id
- a640c23a62f3a-ba48288b8demr690647866b.6.1776713595907; Mon, 20 Apr 2026
- 12:33:15 -0700 (PDT)
+ bh=0w5lhyE7lOLb/8C+bj7XsqgucYPTTjWibCRX2IlnABk=;
+ b=ZN6JiKm6d317QQUvHdgz3rJpAq8KUhprdDUG/x/FN2nIY96jzAlZRTvaiZJqqULkwT
+ eIVh11bIrf749oiLZ2kRicb+oXRFBMD/z/f1hZwRM0ENwpVoyMMf+DsQtn6pYjibIojg
+ /tZQh246QAHo4cZBD5ma3PMZ9NveZbnoU4iJJb2EFn66gPD1cQu9sdJ8oKuJXprm5r8V
+ ZPROLdvWBh2GQFCadMXu0LS8HSFqK0d9swM6s9GZPB0SRflSZNry3bNahNDeDyjAXh8u
+ T2G5LDO2FGzp1Z+CGAWKV6E8LnlDPkRaPGSGiQ7FQskAhMd9wmEDQJjS1lMoqnlnMxez
+ rakA==
+X-Gm-Message-State: AOJu0Yytxngjo1az9nEGos+cYFf91+twaDG3lBQfxzwx+22hsy3I8lZS
+ WbutkkV8m0HxW0x3yGqWLKjaCKS46gLFbBp9+xnDQJ4otpeoeLrHGvmOf//nNjHHa1H8tIsjgX8
+ r2Dmc/SYcxmowb4QYr7PX7ep9QLjx1RpvTV8IR7SEK5Yr+q8z5bIwrQ==
+X-Gm-Gg: AeBDieuPvo8DoyjjuGxC05luO+IuV75YETDhOgmwtAa6cAw1XbalpJ0CUHZh17mMISA
+ GABh2cG2w4KZAOIeiulYHR9VufeEAIBH2BQlu4R+NIUUpcPTSgE3+v9lrnzHDRQUiwVfTpq/SXG
+ l52C84wJFDNcre/3vJj16if/ot1YJvNiCJOelPlQA42bWyCZq/vO1LPNj3wxR2yOdup9KwQW86j
+ AllvpHptzPZQXRAgvh2C5/1HuRYW8KVKMWh0Fg/fzdtPCw7ZomO8QSrp0SnYKism8gFArLRP0cK
+ PCOYR4uvkyRZmikjPe4V
+X-Received: by 2002:a17:907:da7:b0:ba7:62f:9fa4 with SMTP id
+ a640c23a62f3a-ba7062fa21cmr321304066b.6.1776713607154; Mon, 20 Apr 2026
+ 12:33:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260418175814.5731-1-heinrich.schuchardt@canonical.com>
- <20260418175814.5731-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260418175814.5731-3-heinrich.schuchardt@canonical.com>
+References: <034a4ae4-b579-42b0-b6b0-3a204737156f@proton.me>
+ <CAFLszTgnGxLnEYdPyymLowq9jUTfRyneAPfBLu336MGQB__YDg@mail.gmail.com>
+ <48fd3747-7843-4d44-b31d-0ba6ed63c315@proton.me>
+In-Reply-To: <48fd3747-7843-4d44-b31d-0ba6ed63c315@proton.me>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 21 Apr 2026 07:33:02 +1200
-X-Gm-Features: AQROBzBEzyP0wkNgTdo4hbTKSJniQNT5wIKNH6WtyG-AW1C3tESbubqALMpsjS0
-Message-ID: <CAFLszTh0CsEVE6uhaLgZTuG4U=a=k-OTDaG1rjMX7OwKc5Ozcg@mail.gmail.com>
-Subject: Re: [PATCH 2/2] efi_loader: centralize messaging for efi_init_obj_list
-To: heinrich.schuchardt@canonical.com
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
- Christian Marangi <ansuelsmth@gmail.com>, Sughosh Ganu <sughosh.ganu@arm.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- Adriano Cordova <adrianox@gmail.com>, Javier Tia <floss@jetm.me>, 
- Jerome Forissier <jerome.forissier@arm.com>,
- Ying-Chun Liu <paul.liu@linaro.org>, u-boot@lists.denx.de
+Date: Tue, 21 Apr 2026 07:33:11 +1200
+X-Gm-Features: AQROBzD1VBtXdwBgVFkKtx481_jSbU3iO2qsMGj608s_-ZRaNwh17_HXAGkKQ-c
+Message-ID: <CAFLszTi7pk3+jjuEpdjP4Otk07r92hhGj5jxu7cq2wZ4dMrUUQ@mail.gmail.com>
+Subject: Re: How to build U-Boot with a custom out-of-tree device tree
+To: Johannes Krottmayer <krotti83@proton.me>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -119,54 +109,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Johannes,
 
-On 2026-04-18T17:58:12, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
-> efi_loader: centralize messaging for efi_init_obj_list
+On Tue, 21 Apr 2026 at 00:40, Johannes Krottmayer <krotti83@proton.me> wrote:
 >
-> If efi_init_obj_list() fails we cannot use the UEFI sub-system.
+> Hi Simon!
 >
-> * Instead of having messages for this everywhere write an error message
->   in efi_init_obj_list().
-> * Always use (ret =! EFI_SUCCESS) when checking the return value of
-
-should be !=
-
->   efi_init_obj_list().
-> * Remove the return code from the error message as it does not help
->   users to understand which initialization went wrong.
+> Thanks for your answer.
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> On 4/20/26 2:51 AM, Simon Glass wrote:
+> > Hi Johannes,
+> >
+> > On Sun, 19 Apr 2026 at 02:40, Johannes Krottmayer <krotti83@proton.me> wrote:
+> >>
+> >> Hello,
+> >>
+> >> This question is generic and also valid for none RISC-V boards.
+> >> I think it's maybe already asked, but didn't find any useful
+> >> information this time. My question is, is it possible to pass
+> >> a specific device tree blob to the build system from U-Boot?
+> >>
+> >> Example: RISC-V board Starfive VisionFive 2 8GiB variant
+> >>
+> >> The default in-source-tree device tree from the VisionFive 2 has
+> >> only 4GiB RAM. I own the 8GiB (RAM-IC BiWin BMWZCX32H2A-64G-X)
+> >> variant. So therefore can I pass the device tree blob directly
+> >> to U-Boot's build system without modifying CONFIG_DEFAULT_DEVICE_TREE
+> >> in the device configuration? Exists there an environment variable?
+> >>
+> >> Want to use U-Boot's EFI subsystem as loader for bare-metal
+> >> environments. And I think when I want to get the
+>  memory map
+> >> via EFI there will with the default device tree only <4GiB free
+> >> usable memory shown, although there are 8GiB.
+> >
+> > You can build with: make DEVICE_TREE=...
+> >
+> > See dts/Makefile for the logic.
+> >
 >
-> boot/bootmeth_efi_mgr.c      |  4 ++--
->  cmd/bootefi.c                |  5 +----
->  cmd/bootmenu.c               |  6 +-----
->  cmd/eficonfig.c              |  6 +-----
->  cmd/efidebug.c               |  5 +----
->  cmd/nvedit_efi.c             | 10 ++--------
->  lib/efi_loader/efi_bootbin.c |  5 +----
->  lib/efi_loader/efi_bootmgr.c |  5 +----
->  lib/efi_loader/efi_setup.c   |  2 ++
->  9 files changed, 12 insertions(+), 36 deletions(-)
+> Didn't figured out how it works with the variable DEVICE_TREE
+> yet.
+>
+> But I found the variable EXT_DTB in your described Makefile.
+> Have tried it now with a precompiled device tree and it works
+> fine.
+>
+> make EXT_DTB=/path/to/custom_board.dtb
 
-> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> @@ -1310,11 +1310,8 @@ efi_status_t efi_bootmgr_run(void *fdt)
-> +     if (ret != EFI_SUCCESS)
-> +             return CMD_RET_FAILURE;
+Oh yes, since it is not in the normal directory you need to use that.
+I should have pointed to the documentation:
 
-Pre-existing issue: efi_bootmgr_run() returns efi_status_t but
-CMD_RET_FAILURE is 1 - since you are touching this code, please can
-you fix it to return ret instead, if that is the intent?
-
-> diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-> @@ -224,11 +224,8 @@ static efi_status_t efi_binary_run_dp(void *image, size_t size, void *fdt,
-> +     if (ret != EFI_SUCCESS)
-> +             return -1;
-
-Similarly, efi_binary_run_dp() should return ret rather than -1
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
+https://docs.u-boot.org/en/latest/develop/devicetree/control.html#configuration
 
 Regards,
 Simon
