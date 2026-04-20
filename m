@@ -4,92 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AD58F5A8B8
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 20:35:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A52FF5A8B8
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 20:35:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1E0D844AE;
-	Mon, 20 Apr 2026 22:34:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 26F9A844BD;
+	Mon, 20 Apr 2026 22:34:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lCffw19o";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hygA7hvF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E24E7843C0; Mon, 20 Apr 2026 21:43:20 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 1A03A843C0; Mon, 20 Apr 2026 21:43:24 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E210D843AF
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 21:43:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 29F56843AF
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 21:43:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-b936331786dso439370366b.3
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 12:43:18 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776714198; cv=none;
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-671c24f23b1so5129627a12.0
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 12:43:22 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776714201; cv=none;
  d=google.com; s=arc-20240605;
- b=OExGLKACh75ykWAHXqlPl8E6dpHNtTi5oKJTkXPFPNlU3DwIbFMtg4lJ7NI50yUK6A
- p/ddEIeONabJkfjkf0mvE9XnYJ5S/tzYD1Hw4Ua8X+oeRpj8MAR1DV4rNYmoqMiqsPXY
- gRgWzag18YYyg4uzeouNMAx1lD3fi0uDho0hc61QDW2gxRk30oqrGIM71XFujvcyse4o
- oiAEsJtrJtmnicMWchT9N9tsKmt83tBJ03lzy3P6oaVZRxxb26BFHY8G1GnSciFfa0Na
- E4ezVA3rDamOmoP8gWnclA8LXMB9RMW3bZMlxrAu01wQ9ZOlT/WgInPLOZejtDfhCASM
- VAKQ==
+ b=cPonBq+dlmpdrYZGIwPsVYM9TzljUNBfB+oosdFdewgv3soZP3JeHUSqdXg8YcjhIH
+ J5YYlXgU+cFD4yyqsJdRM1zGW2qnbUTD741W5jLadJRWbIjb86KaPWPAEuM797rkhW3v
+ noA420OmXPYNp386I+sF3CF4pTHGHH12zttufVhIIQBFqjHJs8okvbsxEbQpwKAxSOhp
+ PBLKJS0T4riTT+GaRgQ6lIevyPsSINf4PdKyXShxMwGlkUt1qEy1Mp7QxchmLtCDEBmi
+ pVsPs089fbOXv+bIfQ+TNR6r7QaBUGATeGEcEVaf3BmuxLP+y3xNp7wEOXczijhlTyE/
+ FrHA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=0COehEj8osMi6SeSmatnPDaUACn0wAtDxKO5rh4YTV0=;
+ bh=TvsSZ2iDnrBEthugXTCOcDsVcM/2V40TqAQGMo39+ps=;
  fh=B11T/ZyKvSxF0qhOl4M7rr4wqKWwkB2JbP3jqmHnKhk=;
- b=bGQ4ZaAVwVvB6WB4ff1ARfCJk0d1azfbB1F74/V2R1oohyNpK/nD8y6ZdaKUtWcgx3
- lOBq0rjUJmuuWPVmMxhnDZ34YyLCBwpmh8+VQVEzM1KdyF0HdMazjeTwLJyhN1ZDeOBu
- xGyx9GHe6O3rXCDFupK39aoJXOnoPcWMpJPWCj6fEIr7BC3VF9QwTQ3nUmXS8F2QOwam
- 56h0/HzRc9QoY5j/LzlSL2slk6hYLF1kOBTcK2/bRZ4TSeHPMP0s/R1kiHTgzhQmD1N2
- iejluptV8DDcAoTBLfxC68F92U5Y4CxPy/B4+71jLGiIzA5HKNaAkLLXXGAeJEqQQbrs
- kLxg==; darn=lists.denx.de
+ b=eiF5WcUhnVfmzGOXpyb0X3oUmJHsKLWvoArAy2zoscS9oT+Psy2Lhngl7lC7TY0U+N
+ ZApIw3LwpakJP3SUYwtQfuE045ogFy656e3ZORRKuQ9iuB7RwlWkXh7Yzy1cs8KUii09
+ v66LaZhPSffPialskjkM+Isd1MEl4kDky6raSJ07t18SYEWFR0Qq6oNqgjhmt3f7uEA2
+ wRRHLCWW2h3HFGp/TyZemQhtn7f37GgTfuqky5JaytaGq0Vkdu0kHZK7hZ+T6MM8XKoH
+ TAZlq/EEnc+v5A/ATGNq5CqbnYvkfpY3mkP/jqMG6Q68dgfPYdW1YZthqkQbtXdp2vho
+ XYTA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776714198; x=1777318998; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776714201; x=1777319001; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0COehEj8osMi6SeSmatnPDaUACn0wAtDxKO5rh4YTV0=;
- b=lCffw19olli8EkuatYurj8bkAUESC432CoZrnVhQd0e2qVszD1bY9gY61qnbZ5Bk7Q
- e+iXm27LrGH2dxHA4zvjVR/N169CVLiLhsk58SrEb5q0zDAhbPDG99z0ALRQiKS/do+r
- 6Fk82X+iFt6niDhagC8T4VRhE2hopt/2Ybh+k=
+ bh=TvsSZ2iDnrBEthugXTCOcDsVcM/2V40TqAQGMo39+ps=;
+ b=hygA7hvFmQ84OxtxSjYX4XaU7MNom+T5h1kaOCtUz0IDSNi9adYJFHajWg5xUTyXML
+ zirVyA0Sklg8WbCyt332yArSlOdfvmumRbicMgLvJ9dRUE9NO1cy2uQPnaxLH89NyOA3
+ X26kpF0qfC/mtebNLXceYE5zrk/IwMN9MqjTQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776714198; x=1777318998;
+ d=1e100.net; s=20251104; t=1776714201; x=1777319001;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0COehEj8osMi6SeSmatnPDaUACn0wAtDxKO5rh4YTV0=;
- b=rf9I4SBhyTlz+SqCVCtHoHZbE9BPs2wQo1Sup+yCMZpYUgcGRD4suCK2IdhiW/dJzT
- 5ZI1lig1pkFUA1LvQbQIxOu1xfxbYAJbOSvNpnxcRa/HhVgOBUUBGZXYnjuAJ+fDZDM5
- uFzKRQ0BLRSsBPo0PAAie0CqmhUOBkGsZiGPtzsax9RSc5FnVTyEA799Xis4e4rTwgQA
- lHNPfSDuUpmzVOx01GvdTZExwVn/ObaYL3axZLc7zgxX5mlQ1MkMD+ESFdayxzBLgqFz
- flt56xmRMQjgBQKgZB2Gm/MNYRtxY0nccVLuYD8xPjLJzXhl0tMfbRaZY/UxQ/khmJ0C
- B5oQ==
-X-Gm-Message-State: AOJu0Yzmx+mYnQLtAhfwLPuCVFhtl4krXS4aMeQD9wLhqlgfMm8YkrFO
- kvqdditegpK5Cy8HQT72ZOT//QDweyAN698M0Jtx6C8z0rSHvqxNnH/CV/MGtfO79Nwy43XViME
- CgsofKQDA8omOHj9YPInG9uocZJ2vbrZZLPkSGCi4
-X-Gm-Gg: AeBDies4DXLWEDANZ9PZvw+AwDJ421U5YBp25Q3GAdgciXuNnH394z3uaXauhlLxciV
- R0DCQCqFFAGsXAKZeeG9r4M0BQq76wZtFfGs8fK4IiPoGvbWmmATE2PgSy48vxgZlwG01LENQj3
- safXnRKmmTuYBhahhJkUaU3ZnSIcB5GzRbHzRZO9z9fcN8Qv+GaD9CKnyCrUbkAeAs9eLv9Jo39
- ae7Wmrkv+SKbeWedG808b+R6U+OGZap/kUC/LwR7S9DQ7Noslvoyo7e/d/7qT62UmFbYyjChe6e
- ayK1c0Xh5P/aq/VntjFu
-X-Received: by 2002:a17:907:c9a2:b0:ba2:3f1b:1314 with SMTP id
- a640c23a62f3a-ba41ac0279cmr452040966b.33.1776714198180; Mon, 20 Apr 2026
- 12:43:18 -0700 (PDT)
+ bh=TvsSZ2iDnrBEthugXTCOcDsVcM/2V40TqAQGMo39+ps=;
+ b=Eswlu5v4LY2xi/maBlWvQhG0R1i1H1oqsbQ0GOtZlL9Kz53HfWO89IoLLzM7V3WYeB
+ wF5imRGvE78R6BjLimDnd4e3S80zSum5FIScWOjddI12/xPWPvXDgAcKJva4QE8tzeTE
+ fva8EirJCjdnGOcTNJXcZ8RlpGz8sEIAX2YNDYpEHugoxGfF5BZKYx0BZuQHGHweMcc4
+ YdvQll3uInt3FCphe1ZnWFaqKo9sIMadxNDtT3kYlRoYhRmxz98pv4NOtNESYER+SKqV
+ VU1aXAMQ5CgOVIMEziAR4rtZiQyoKFPD+qDbb+GDWFBnX/mlaNbxs1YgKjtkGw03LG5N
+ 16UA==
+X-Gm-Message-State: AOJu0Yw/67d6jy05XsHpvXMP1uFgExDcSURZo93/be3eU2erm+agIwSo
+ v5BRZZhILjXyav4IUS33b7U7CJ6D/FS370jeDDFqFIluY1SCr27gGwAKsOTEtdW5mjA4hk3i1I7
+ brA4MCShu5WVqJfua1bT+EPHDCz1RbJLs1HKC0paW
+X-Gm-Gg: AeBDievtKkO+On4DwgENOgOyTIs4H5wMoV25Yh1bVhvPnQgoRZB18U+9t09dwikkSM6
+ l0Tr8FIQcMaUgCZdMjGN2PXZd79B1dqpq3Htge/qfoEMwxh8F13INZJPKv3WFY25QW/4A3rm5Ll
+ g81d+FUvh71zzXIXFaPCZMaeVmUJTtxBugVMB14VKKZPYS3FsyiL+QIBoCTJ6vEaDqUTpmjycO7
+ wNJhmO4FE0+QnO9KUOgZBaBBEK3OBsvIQSuLvR/WWCOMLLO7krY0cMHmBNfpENsXDMhBOLp8Zu3
+ vkMeGcvHD7pq10xxC/Q0
+X-Received: by 2002:a17:907:2d92:b0:ba7:52f3:4645 with SMTP id
+ a640c23a62f3a-ba752f34e9dmr303322966b.33.1776714201422; Mon, 20 Apr 2026
+ 12:43:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
- <20260420-net-kconfig-v1-4-9900002d8e72@cherry.de>
-In-Reply-To: <20260420-net-kconfig-v1-4-9900002d8e72@cherry.de>
+ <20260420-net-kconfig-v1-6-9900002d8e72@cherry.de>
+In-Reply-To: <20260420-net-kconfig-v1-6-9900002d8e72@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 21 Apr 2026 07:42:47 +1200
-X-Gm-Features: AQROBzBYvgPmnQbd5S_FDsDhIFwEmbBXHNgkjUcnROJW46_PSae9JRvSy3giUNc
-Message-ID: <CAFLszTgnOb+QYAu4bgVC8pQJq6po-noDnrxNVxLX1126m-D=oQ@mail.gmail.com>
-Subject: Re: [PATCH 4/6] simplify NET_LEGACY || NET_LWIP condition with NET
- condition
+Date: Tue, 21 Apr 2026 07:43:03 +1200
+X-Gm-Features: AQROBzDRUPTTTr2QItTk6SnoJN7GgO8RiWKG7B5Qfn4quL70I8iLuflwAnbnGfM
+Message-ID: <CAFLszThvRZ-OQyx-JS3jOHBT3k3auB3TgdP=g_eyfj1EXqbcCg@mail.gmail.com>
+Subject: Re: [PATCH 6/6] boot: remove NO_NET use
 To: foss+uboot@0leil.net
 Cc: u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com, 
  Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>, 
@@ -175,40 +174,17 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2026-04-20T11:36:06, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> simplify NET_LEGACY || NET_LWIP condition with NET condition
+> boot: remove NO_NET use
 >
-> Since the move to make NET a menuconfig and NO_NET a synonym of NET=n,
-> when NET is enabled, NET_LEGACY || NET_LWIP is necessarily true, so
-> let's simplify the various checks across the codebase.
+> NO_NET is now a transitional symbol which may eventually be removed. Its
+> meaning is the opposite of the new meaning of NET (that is, any
+> networking stack).
 >
-> SPL_NET_LWIP doesn't exist but SPL_NET_LEGACY is an alias for SPL_NET so
-> the proper symbol is still defined in SPL whenever needed.
+> Update the symbol dependency by using NET instead of !NO_NET.
 >
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> Makefile                                                  |  2 +-
->  board/engicam/imx8mp/icore_mx8mp.c                        |  2 +-
->  board/polyhex/imx8mp_debix_model_a/imx8mp_debix_model_a.c |  2 +-
->  board/ti/am335x/board.c                                   |  2 +-
->  board/xilinx/common/board.c                               |  3 +--
->  cmd/Kconfig                                               |  4 ++--
->  cmd/bdinfo.c                                              |  7 +++----
->  common/Kconfig                                            |  2 +-
->  common/board_r.c                                          |  4 ++--
->  doc/usage/cmd/bdinfo.rst                                  |  7 +++----
->  drivers/net/Kconfig                                       |  2 +-
->  drivers/net/phy/Kconfig                                   |  2 +-
->  drivers/usb/gadget/Kconfig                                |  2 +-
->  env/flags.c                                               | 10 +++++-----
->  include/env_callback.h                                    |  2 +-
->  include/env_flags.h                                       |  6 +++---
->  include/net-common.h                                      |  2 +-
->  lib/efi_loader/Kconfig                                    |  4 ++--
->  net/Makefile                                              |  2 +-
->  test/cmd/bdinfo.c                                         |  6 +++---
->  test/py/tests/test_efi_loader.py                          |  2 +-
->  test/py/tests/test_fpga.py                                |  4 ++--
->  test/py/tests/test_net.py                                 |  2 +-
->  23 files changed, 39 insertions(+), 42 deletions(-)
+> boot/Kconfig | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
