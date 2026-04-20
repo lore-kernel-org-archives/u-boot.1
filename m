@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86BC9F5A8B1
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 19:26:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E47DF5A8B1
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 19:26:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 076B8843C1;
+	by phobos.denx.de (Postfix) with ESMTP id 45118843C7;
 	Mon, 20 Apr 2026 21:25:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="haI13bmO";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TIoNVT3r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2E8084376; Mon, 20 Apr 2026 21:25:34 +0200 (CEST)
-Received: from SN4PR2101CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::1])
+ id B965B84319; Mon, 20 Apr 2026 21:25:35 +0200 (CEST)
+Received: from PH7PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170100009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD86484319
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 21:25:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 901DE84390
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 21:25:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GdFXMZKQoorlIzUztn2LFNUrZsxM90XgzhdP38rkUEhRQ6VIUpE5+H+d3wUouWKTyTIxkv2qitV0LQ5cQeis2ErA0WriZyRGgMgZ6veVODQh0z7GxI5utsTlPXBLWtgRaJsJelbft+S9i3X/MpQvcN4Rj8taTpQPZXKw711VjEdYdU7d17m/bDLl48f0T85rOjJl/ux47CkM0Ctfv/jYIGqG7uILclCFE0aJTShy9pIBg0EyRsGQyTeqSbrtGHl1cKeBQySudA9hxTLHX+wYc9fkTicuqPv40SwSGeYgu0joj9iEmrj1bk9kr1Oh+qsa5wCKlTZSz4NrLeUTTGWyKA==
+ b=lX53xXF5AKONQb8Ewi3xnprKgO+DrDIbTSRVLPRxeagoQZrai5VP14ti0TU4qZ4NefvX5DWeXrEcSaPHm6+Rp/RMVys1H9BH1q52rA0ObrKLDWaB2nH8L5g8TD/2dPh6IfzR200Bs9R7dHd/x5aXO53WWr+u0N9xWiRZpmyKs2JC774S/r73n8dzqR4uGp1wIVYpc2i+lGmDULMyOboCkKT5vPVKerlJd8sGjK+MEyWSrwG2YBzyWc90yrIljcfr0jl5CEn93rdqkJXcyDyq1tpzdO6CllTfUPa0lX7TdFHxXYCgwjnmfU6QIaaXN1Bqk0LbcaCuxzwcMYby1FKbIw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MzfWyKzGpDVdxfU4o/9Jf0R7Um/C9JVxY8XZt3KJQd0=;
- b=T+SkmrLfQLem4kR7JFGNum2bz59dYim32rwap2BmlSxtjxjGh2s9oTfYxlMB+JjFh23g5DgaYwVAlS05/Cr7br2mVf2UHx9oTlUsw+vnxE3YVjRadI3twOXIimO55UJQjuNAIF7fglmg47UoeaYN8oSO5Cfg94DXscKmvHZ67q29bV/uuZxY1Hy8rbSJcY34EVyYVDkgjthVOiuchiZIeoto1ZxC7LKHVT+0pMr3WvOPQsK9SruZQMiTdHYoqhQMwTntmYvpXyrcYjVSOfg2yYc4CK6boqtX+PwJjT8+/S6aUEJRVkc1roUqAeAxjb6yt9DFGAxocYX7tNUCE5DwHA==
+ bh=zAVHUzxuYt4R5Mzk60HO+SBvO3WCjNtjdILPXrnaJDk=;
+ b=O4XIHDBf4xRztZT5p95FEDYsR+xrBrgUDfxlorVQwXt0GxzM0ImNhW361voPOC3Jz5IpmSjEvMyRW0M58s421kQTuMtK5wLETyJCylV2ZN7fm1eSRoqh4AOWJYWKtj8ilwwzpbnOAUAQ4f87NLci1ODZBAafT6I+HIKOx2y78UMavxjM0kBZkmVEUfGYXOidgBSIqAqJZndD8FS4/35q/FAxD6SLoLtsbGhS6vR0SeAhR65jNTtanJjle0YnJvEKxwX8DC6OAs+REKD9g7CKrI3Aag68/6Gu+ZcTprX5JSwNUV2nHt44dILa7a5jWXhasioQg/HzD+NG+Mt4spqqFg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MzfWyKzGpDVdxfU4o/9Jf0R7Um/C9JVxY8XZt3KJQd0=;
- b=haI13bmOKT4ExFVnORykTQ09IvcLQioVj+aKM14e2LyTI/N26AYgRCY4t0U+vra9JDFXmlPT/MtnLB1/id+ML/2xooxZWP/OjG/Ph0ipkKyK6KVE237/PVUSAAAjfgW5zi4OF6hE49crBquku0oe99EXWar6K6MU9UlEf5aIBwQ=
-Received: from SJ0PR03CA0066.namprd03.prod.outlook.com (2603:10b6:a03:331::11)
- by SA2PR10MB4713.namprd10.prod.outlook.com (2603:10b6:806:11d::24)
+ bh=zAVHUzxuYt4R5Mzk60HO+SBvO3WCjNtjdILPXrnaJDk=;
+ b=TIoNVT3rSkVbA1BEcxFdXsNz/3EDZCN2URroTvaWt5H/5QfBW1wj65MN06fRzTS/FYEF35X+zLT10ZHXaJw/u16pFF16dMlCgPo+Ty5p4cNmhAlYx02ZpOcKVkVbEwzV5/pV3ZqV8JS8kseLqn90WQuqytUC+QEpe2J4+LPfT2U=
+Received: from PH7P221CA0077.NAMP221.PROD.OUTLOOK.COM (2603:10b6:510:328::12)
+ by BY5PR10MB4180.namprd10.prod.outlook.com (2603:10b6:a03:211::9)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.33; Mon, 20 Apr
- 2026 19:25:27 +0000
-Received: from SJ1PEPF000023CB.namprd02.prod.outlook.com
- (2603:10b6:a03:331:cafe::c0) by SJ0PR03CA0066.outlook.office365.com
- (2603:10b6:a03:331::11) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 19:25:29 +0000
+Received: from MW1PEPF0001615C.namprd21.prod.outlook.com
+ (2603:10b6:510:328:cafe::ec) by PH7P221CA0077.outlook.office365.com
+ (2603:10b6:510:328::12) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Mon,
- 20 Apr 2026 19:25:27 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ 20 Apr 2026 19:25:29 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SJ1PEPF000023CB.mail.protection.outlook.com (10.167.244.5) with Microsoft
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ MW1PEPF0001615C.mail.protection.outlook.com (10.167.249.87) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9791.48 via Frontend Transport; Mon, 20 Apr 2026 19:25:26 +0000
-Received: from DFLE208.ent.ti.com (10.64.6.66) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9870.4 via Frontend Transport; Mon, 20 Apr 2026 19:25:28 +0000
+Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 20 Apr
  2026 14:25:23 -0500
-Received: from DFLE212.ent.ti.com (10.64.6.70) by DFLE208.ent.ti.com
- (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 20 Apr
- 2026 14:25:23 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE212.ent.ti.com
+Received: from DFLE203.ent.ti.com (10.64.6.61) by DFLE212.ent.ti.com
  (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 20 Apr
+ 2026 14:25:23 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE203.ent.ti.com
+ (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
  Transport; Mon, 20 Apr 2026 14:25:23 -0500
 Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.39])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63KJPNh53399024;
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63KJPNh93399024;
  Mon, 20 Apr 2026 14:25:23 -0500
 From: <rs@ti.com>
 To: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
@@ -82,9 +82,9 @@ To: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
  <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
  <ilias.apalodimas@linaro.org>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCHv4 2/6] boot_fdt_add_mem_rsv_regions: free old dtb reservations
-Date: Mon, 20 Apr 2026 14:25:16 -0500
-Message-ID: <20260420192520.1444749-3-rs@ti.com>
+Subject: [PATCHv4 6/6] memory: reserve from start_addr_sp to initial_relocaddr
+Date: Mon, 20 Apr 2026 14:25:20 -0500
+Message-ID: <20260420192520.1444749-7-rs@ti.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260420192520.1444749-1-rs@ti.com>
 References: <20260420192520.1444749-1-rs@ti.com>
@@ -94,29 +94,29 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000023CB:EE_|SA2PR10MB4713:EE_
-X-MS-Office365-Filtering-Correlation-Id: ee3d8f68-c9d9-45ac-963c-08de9f129393
+X-MS-TrafficTypeDiagnostic: MW1PEPF0001615C:EE_|BY5PR10MB4180:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4cc30fcb-fe8e-4891-58f2-08de9f1294b6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700016|1800799024|376014|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: gbEX1wXi4GpAfbjurYJjNBtkCVpn4Yla69+dyKFTBmJyJvD8221dexrh1f6UpsizqKwhFsKQqLdWF/0yMfTjAZ10HvVpbU5+UxYAB0LC4isteVkepv2kdOgxqdlvGWvUyFIee1kQLfo0OXWvL7MqBh2lPTzf+SB1J2rPH53eefjFuODePvHUoAxT712d2MZD7Zi+OL3ydpgPGFpUDouYLcbQgsQfZFFq1zVxsY1QaHYoOK/bQDm9x5jK8LlKfFNj7h5iYzaYkKCXy+NHxumQFFNDxn5qJZoXDc3mlCe1aunUGEAKgXQ/YLUEknsHc0AI0YEivoVhbz3WGoEFBiq8RrYn+nc8ucAflHFfcix/n6JJttPbgNAQm135HDuenb6fR5K7VITAjxlMNiPAiT01MHieaGBTXJHGgdMBdp1gtGTZvfGVm+RW4wTBAMk1RlAKCr4rcOEbxM22yd3d5NhfS2VzyutdTKYYtRhqtjH1ZVWnDGeaL+q9vpGg0ERnRfgHzuU1K3G/dWMTc8oAxcB2OxKs2h/sSrvlsP1j1BRe2IezikLE4e/PmjX7nUKmFCpz5Ai8aIHhrgJW1sY+jnAX0dd33pmytrDSPASQNgjkUzpig1cbBG0ZHQS8xfcZiJ1civ/+1CHRyu6Ir6SL7r/jBB3920CmEwi4SNYP/CPsU99nQZ1ixXmDcgbnREbV3HCTRAmWBEJ0gwL8kjpTPV+iueV36QMsxYj8bnF/I0xhxAtLQLEEY4wCW3yF/9r25cCzpLqJpZVIu/05+itawIi43w==
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700016)(1800799024)(376014)(56012099003)(22082099003)(18002099003);
+ ARA:13230040|376014|36860700016|82310400026|1800799024|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: VoP01dpnbx5rtnaszgzV29wVgq3Cor2U3diNOxdiDICGNsgdDi+cZKbLjSl7DQ97jkCqfZEsuetT89NaRgde2fYt6N7FIBLxD3Jl2jtkaV9aJwk3joGlunTwrmw6P+CqqxcF5H159+gKMMoAiX/mqkOuq6O1EbY29CgSHTZPRHw71/DWmmvbEUDMX/SHjPmLGJ09Ew1A9IcD7Y0BDMIQ5BtTAUsqwHP2xk7GHs231SWMVtXmx9NWV7+HSx0nrAXCT1qwSQBasHNeMvzugwdvAdKmcRFipBE+uDxbZEqQtFnmhGhsCbQZdca/uBCAp1I3YmS9AFJFiXKBfFsdcqZ4kmJl1F1oKhc9TJsM+fxrwgiZ86ZIL82qOlMj2HlHylhPX1+deKCFU1YK8yesvBDOS5ZW3lFzDpvDqzeqh0kEGnln8TfzX6M1/YiIz79TqXOBwGRYqP1+30De26wo31GInYvHmaDx3iP9s414AoEtc3YztEGPxE/r7s0mAoJrPi9WqH76FQndhetU8cSNFHUGPGEaE3RaDDuCX2N5n/ziSLKaM9pQ9tzSm2eJFpEjGfzzct/RCuElF1jiaMB6cT8BEYqM4pgGbOl03MrXw1iFYP+RhU+OAVlLUiWBR5oD0dpr93PkBm8VnBCQ+nMwglCygek1sHbxMbCSnouspFVc76dPaGRN3H/1L1+UOd+yXrr4y+ZcwdKPFPs9SSKpoIj2gJ991qJs2okpnN0LhsXZ4awlrrL0JGH+Egk3Rnh5AXSD0MCs7du6KLQn5VqX/K513w==
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(376014)(36860700016)(82310400026)(1800799024)(56012099003)(22082099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: wYL+choJb9a+67wAAIdK+lSrJhwumVjB+AeR2eSE2QestEK+lbO4QF4Fh8bL4UdSmjRSqKMpyvW6O0uv5aR71PDbJoGMHoF2RsSznvlH7+Jjb692xchggdiDFLVCjtzGrFAOyl2O1KSabwTR0OgdNQ318SmI9EDBAQm4lTbpGvGQ/FuBB5tqNi83yiGAoirHc7TP60/gM4rcXJs0UCcKJ5W9iw4Jfg968Z+2N/nAvujjpLB90491Gc2jPvZHFCDf2/eHPb4F3mR5PQsCST/y/Kax3gIaz46cwmx8P/hMOgDOPc/IwF0LcXVtad1wzP8RPRBjL3yGKwIQe56tS079t+seRuhSdeamxzVfah3pR/SnTywravCAq7XGukQUrDLwEkKBwkYCFhdJlhLXAYN8dKcXXe4adsazm60E8Z3B3eRjQIBX+sxxA7WfMl3cbP01
+X-MS-Exchange-AntiSpam-MessageData-0: /1Ms32n7YvjhHB3X5aOaqsCN0L2+3ZsK0w8+2wMW0Y47hX5ikrvw/LL0QaIdEB44ITQe4kPK22mrdD3CR60kbEnScVEBUdQTHR6sajfw7oAMsswy8Pw7eGr1w9Px9AzEzfJxBvrhOD/jAyI0Iu25z1cdWDYbilgAdzu7Y16DSOnp7nSIlgX2zvuamJA2yjqctYzt8SBM/9LS+7VLQSLXXBQlDdODCSV4QG8AnQGLOu+VPRmilsKrkLexCELl6yzqHDOMxrFHPRiRJISCZrJa+jZQBsiZJv91bzAYkh9gIc844FYj5mmlTiPGwYkN4yoXnaPPyQcaNiWEb21qbZQ2bn4J2VTvYO8N9BEmaSxjDssQqfl/TagOeq722CSP9xgl+rzlhM6B/zXRU+/mbXWFHAn6VRkHv7AqoFapxPzev0dAwgrfZmVNjXPPkJNhKf8Z
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2026 19:25:26.6089 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ee3d8f68-c9d9-45ac-963c-08de9f129393
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2026 19:25:28.5138 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4cc30fcb-fe8e-4891-58f2-08de9f1294b6
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000023CB.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: MW1PEPF0001615C.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR10MB4713
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR10MB4180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,207 +135,149 @@ X-Virus-Status: Clean
 
 From: Randolph Sapp <rs@ti.com>
 
-Add a free flag and an initial call to free allocations covered by the
-global FDT. This assumes that all calls to boot_fdt_add_mem_rsv_regions
-occur before the transition to the new device tree, thus we can access
-the currently active device tree through the global data pointer.
+Add a new global data struct member called initial_relocaddr. This
+stores the original value of relocaddr, directly from setup_dest_addr.
+This is specifically to avoid any adjustments made by other init
+functions.
 
-This allows us to clearly indicate to the user when a device tree
-reservation fails. How we handle this can still use some improvement.
-Right now we'll keep the default behavior and try to boot anyway.
+Reserve the memory from gd->start_addr_sp - CONFIG_STACK_SIZE to
+gd->initial_relocaddr instead of gd->ram_top. This allows platform
+specific relocation addresses to work without unnecessarily painting
+over a large range.
 
-This functionality was broken in:
-5a6aa7d ("boot: fdt: Handle already reserved memory in boot_fdt_reserve_region()")
+Since PRAM comes out of this initial area up to initial_relocaddr, we no
+longer need to account for it separately.
 
 Signed-off-by: Randolph Sapp <rs@ti.com>
 ---
- arch/mips/lib/bootm.c |  2 +-
- boot/bootm.c          |  2 +-
- boot/bootm_os.c       |  2 +-
- boot/image-board.c    |  2 +-
- boot/image-fdt.c      | 57 +++++++++++++++++++++++++++++--------------
- include/image.h       |  2 +-
- lib/lmb.c             |  2 +-
- 7 files changed, 45 insertions(+), 24 deletions(-)
+ common/board_f.c                  |  9 ++++++-
+ include/asm-generic/global_data.h |  7 ++++++
+ lib/efi_loader/efi_memory.c       |  9 ++++---
+ lib/lmb.c                         | 39 +++++--------------------------
+ 4 files changed, 27 insertions(+), 37 deletions(-)
 
-diff --git a/arch/mips/lib/bootm.c b/arch/mips/lib/bootm.c
-index 066c830f3fa..546e888630e 100644
---- a/arch/mips/lib/bootm.c
-+++ b/arch/mips/lib/bootm.c
-@@ -210,7 +210,7 @@ static int boot_reloc_fdt(struct bootm_headers *images)
- 	}
+diff --git a/common/board_f.c b/common/board_f.c
+index 11ad5779115..9943411ce7f 100644
+--- a/common/board_f.c
++++ b/common/board_f.c
+@@ -330,6 +330,8 @@ __weak int arch_setup_dest_addr(void)
  
- #if CONFIG_IS_ENABLED(MIPS_BOOT_FDT) && CONFIG_IS_ENABLED(OF_LIBFDT)
--	boot_fdt_add_mem_rsv_regions(images->ft_addr);
-+	boot_fdt_add_mem_rsv_regions(images->ft_addr, false);
- 	return boot_relocate_fdt(&images->ft_addr, &images->ft_len);
- #else
- 	return 0;
-diff --git a/boot/bootm.c b/boot/bootm.c
-index 4836d6b2d41..394a256e1ab 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -1040,7 +1040,7 @@ int bootm_run_states(struct bootm_info *bmi, int states)
- #endif
- #if CONFIG_IS_ENABLED(OF_LIBFDT) && CONFIG_IS_ENABLED(LMB)
- 	if (!ret && (states & BOOTM_STATE_FDT)) {
--		boot_fdt_add_mem_rsv_regions(images->ft_addr);
-+		boot_fdt_add_mem_rsv_regions(images->ft_addr, false);
- 		ret = boot_relocate_fdt(&images->ft_addr, &images->ft_len);
- 	}
- #endif
-diff --git a/boot/bootm_os.c b/boot/bootm_os.c
-index ae20b555f5c..48f68941ff8 100644
---- a/boot/bootm_os.c
-+++ b/boot/bootm_os.c
-@@ -262,7 +262,7 @@ static void do_bootvx_fdt(struct bootm_headers *images)
- 	char **of_flat_tree = &images->ft_addr;
- 
- 	if (*of_flat_tree) {
--		boot_fdt_add_mem_rsv_regions(*of_flat_tree);
-+		boot_fdt_add_mem_rsv_regions(*of_flat_tree, false);
- 
- 		ret = boot_relocate_fdt(of_flat_tree, &of_size);
- 		if (ret)
-diff --git a/boot/image-board.c b/boot/image-board.c
-index 005d60caf5c..55aaa741826 100644
---- a/boot/image-board.c
-+++ b/boot/image-board.c
-@@ -914,7 +914,7 @@ int image_setup_linux(struct bootm_headers *images)
- 	if (!CONFIG_IS_ENABLED(LMB))
- 		return -EFAULT;
- 	if (CONFIG_IS_ENABLED(OF_LIBFDT))
--		boot_fdt_add_mem_rsv_regions(*of_flat_tree);
-+		boot_fdt_add_mem_rsv_regions(*of_flat_tree, false);
- 
- 	if (IS_ENABLED(CONFIG_SYS_BOOT_GET_CMDLINE)) {
- 		ret = boot_get_cmdline(&images->cmdline_start,
-diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-index a3a4fb8b558..8dc4b4a682c 100644
---- a/boot/image-fdt.c
-+++ b/boot/image-fdt.c
-@@ -69,35 +69,51 @@ static const struct legacy_img_hdr *image_get_fdt(ulong fdt_addr)
- }
- #endif
- 
--static void boot_fdt_reserve_region(u64 addr, u64 size, u32 flags)
-+/**
-+ * boot_fdt_reserve_region - Reserve or free a given FDT region in LMB
-+ * @addr: Reservation base address
-+ * @size: Reservation size
-+ * @flags: Reservation flags
-+ * @free: Indicate if region is being freed or allocated
-+ *
-+ * Add or free a given reservation from LMB. This reports to the user if any
-+ * errors occurred during either operation.
-+ */
-+static void boot_fdt_reserve_region(u64 addr, u64 size, u32 flags, bool free)
+ static int setup_dest_addr(void)
  {
--	long ret;
 +	int ret;
- 	phys_addr_t rsv_addr;
- 
- 	rsv_addr = (phys_addr_t)addr;
--	ret = lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &rsv_addr, size, flags);
-+	if (free)
-+		ret = lmb_free(rsv_addr, size, flags);
-+	else
-+		ret = lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &rsv_addr, size,
-+				    flags);
 +
- 	if (!ret) {
--		debug("   reserving fdt memory region: addr=%llx size=%llx flags=%x\n",
--		      (unsigned long long)addr,
-+		debug("   %s fdt memory region: addr=%llx size=%llx flags=%x\n",
-+		      free ? "freed" : "reserved", (unsigned long long)addr,
- 		      (unsigned long long)size, flags);
--	} else if (ret != -EEXIST && ret != -EINVAL) {
--		puts("ERROR: reserving fdt memory region failed ");
--		printf("(addr=%llx size=%llx flags=%x)\n",
--		       (unsigned long long)addr,
--		       (unsigned long long)size, flags);
-+	} else {
-+		printf("ERROR: %s fdt memory region failed (addr=%llx size=%llx flags=%x): %i\n",
-+		       free ? "freeing" : "reserving", (unsigned long long)addr,
-+		       (unsigned long long)size, flags, ret);
- 	}
+ 	debug("Monitor len: %08x\n", gd->mon_len);
+ 	/*
+ 	 * Ram is setup, size stored in gd !!
+@@ -356,7 +358,12 @@ static int setup_dest_addr(void)
+ 	gd->relocaddr = gd->ram_top;
+ 	debug("Ram top: %08llX\n", (unsigned long long)gd->ram_top);
+ 
+-	return arch_setup_dest_addr();
++	ret = arch_setup_dest_addr();
++	if (ret != 0)
++		return ret;
++
++	gd->initial_relocaddr = gd->relocaddr;
++	return ret;
  }
  
- /**
-- * boot_fdt_add_mem_rsv_regions - Mark the memreserve and reserved-memory
-- * sections as unusable
-+ * boot_fdt_add_mem_rsv_regions - Handle FDT memreserve and reserved-memory
-+ * sections
-  * @fdt_blob: pointer to fdt blob base address
-+ * @free: indicate if regions are being freed
-  *
-- * Adds the and reserved-memorymemreserve regions in the dtb to the lmb block.
-- * Adding the memreserve regions prevents u-boot from using them to store the
-- * initrd or the fdt blob.
-+ * Adds or removes reserved-memory and memreserve regions in the dtb to the lmb
-+ * block. Adding the memreserve regions prevents u-boot from using them to store
-+ * the initrd or the fdt blob. This function will attempt to clean the currently
-+ * active reservations if a new device tree blob is given.
-  */
--void boot_fdt_add_mem_rsv_regions(void *fdt_blob)
-+void boot_fdt_add_mem_rsv_regions(void *fdt_blob, bool free)
- {
- 	uint64_t addr, size;
- 	int i, total, ret;
-@@ -108,12 +124,16 @@ void boot_fdt_add_mem_rsv_regions(void *fdt_blob)
- 	if (fdt_check_header(fdt_blob) != 0)
- 		return;
+ #ifdef CFG_PRAM
+diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
+index 745d2c3a966..6c60a79c2ab 100644
+--- a/include/asm-generic/global_data.h
++++ b/include/asm-generic/global_data.h
+@@ -107,6 +107,13 @@ struct global_data {
+ 	 * GDB using the 'add-symbol-file u-boot <relocaddr>' command.
+ 	 */
+ 	unsigned long relocaddr;
++	/**
++	 * @initial_relocaddr: end of memory currently in use by uboot
++	 *
++	 * This should be the original value of relocaddr before any other
++	 * allocations or reservations shift it.
++	 */
++	unsigned long initial_relocaddr;
+ 	/**
+ 	 * @irq_sp: IRQ stack pointer
+ 	 */
+diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+index 046a2bb4641..46a806aca61 100644
+--- a/lib/efi_loader/efi_memory.c
++++ b/lib/efi_loader/efi_memory.c
+@@ -868,9 +868,12 @@ static void add_u_boot_and_runtime(void)
  
-+	/* Remove old regions */
-+	if (gd->fdt_blob != fdt_blob)
-+		boot_fdt_add_mem_rsv_regions((void *)gd->fdt_blob, true);
-+
- 	/* process memreserve sections */
- 	total = fdt_num_mem_rsv(fdt_blob);
- 	for (i = 0; i < total; i++) {
- 		if (fdt_get_mem_rsv(fdt_blob, i, &addr, &size) != 0)
- 			continue;
--		boot_fdt_reserve_region(addr, size, LMB_NOOVERWRITE);
-+		boot_fdt_reserve_region(addr, size, LMB_NOOVERWRITE, free);
- 	}
- 
- 	/* process reserved-memory */
-@@ -131,7 +151,8 @@ void boot_fdt_add_mem_rsv_regions(void *fdt_blob)
- 					flags = LMB_NOMAP;
- 				addr = res.start;
- 				size = res.end - res.start + 1;
--				boot_fdt_reserve_region(addr, size, flags);
-+				boot_fdt_reserve_region(addr, size, flags,
-+							free);
- 			}
- 
- 			subnode = fdt_next_subnode(fdt_blob, subnode);
-diff --git a/include/image.h b/include/image.h
-index 34efac6056d..68dfa4716ab 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -827,7 +827,7 @@ int boot_get_fdt(void *buf, const char *select, uint arch,
- 		 struct bootm_headers *images, char **of_flat_tree,
- 		 ulong *of_size);
- 
--void boot_fdt_add_mem_rsv_regions(void *fdt_blob);
-+void boot_fdt_add_mem_rsv_regions(void *fdt_blob, bool free);
- int boot_relocate_fdt(char **of_flat_tree, ulong *of_size);
- 
- int boot_ramdisk_high(ulong rd_data, ulong rd_len, ulong *initrd_start,
+ 	/* Add U-Boot */
+ 	uboot_start = ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
+-		       uboot_stack_size) & ~EFI_PAGE_MASK;
+-	uboot_pages = ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
+-		       uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
++		       uboot_stack_size) &
++		      ~EFI_PAGE_MASK;
++	uboot_pages = (((uintptr_t)map_sysmem(gd->initial_relocaddr, 0) -
++			uboot_start) +
++		       EFI_PAGE_MASK) >>
++		      EFI_PAGE_SHIFT;
+ 	efi_update_memory_map(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE,
+ 			      false, false);
+ #if defined(__aarch64__)
 diff --git a/lib/lmb.c b/lib/lmb.c
-index 8f12c6ad8e5..9a8c70b778a 100644
+index 9a8c70b778a..e5d4d726ab1 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -581,7 +581,7 @@ static void lmb_reserve_common(void *fdt_blob)
- 	lmb_reserve_uboot_region();
+@@ -534,46 +534,19 @@ static long lmb_reserve(phys_addr_t base, phys_size_t size, u32 flags)
  
- 	if (CONFIG_IS_ENABLED(OF_LIBFDT) && fdt_blob)
--		boot_fdt_add_mem_rsv_regions(fdt_blob);
-+		boot_fdt_add_mem_rsv_regions(fdt_blob, false);
+ static void lmb_reserve_uboot_region(void)
+ {
+-	int bank;
+-	ulong end, bank_end;
++	ulong size;
+ 	phys_addr_t rsv_start;
+-	ulong pram = 0;
+ 
+ 	rsv_start = gd->start_addr_sp - CONFIG_STACK_SIZE;
+-	end = gd->ram_top;
++	size = gd->initial_relocaddr - rsv_start;
+ 
+-	/*
+-	 * Reserve memory from aligned address below the bottom of U-Boot stack
+-	 * until end of RAM area to prevent LMB from overwriting that memory.
+-	 */
+-	debug("## Current stack ends at 0x%08lx ", (ulong)rsv_start);
++	debug("## Current stack ends at 0x%08lx\n", (ulong)rsv_start);
+ 
+-#ifdef CFG_PRAM
+-	pram = env_get_ulong("pram", 10, CFG_PRAM);
+-	pram = pram << 10; /* size is in kB */
+-#endif
+-
+-	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+-		if (!gd->bd->bi_dram[bank].size ||
+-		    rsv_start < gd->bd->bi_dram[bank].start)
+-			continue;
+-		/* Watch out for RAM at end of address space! */
+-		bank_end = gd->bd->bi_dram[bank].start +
+-			gd->bd->bi_dram[bank].size - 1;
+-		if (rsv_start > bank_end)
+-			continue;
+-		if (bank_end > end)
+-			bank_end = end - 1;
++	lmb_reserve(rsv_start, size, LMB_NOOVERWRITE);
+ 
+-		lmb_reserve(rsv_start, bank_end - rsv_start - pram + 1,
++	if (gd->flags & GD_FLG_SKIP_RELOC)
++		lmb_reserve((phys_addr_t)(uintptr_t)_start, gd->mon_len,
+ 			    LMB_NOOVERWRITE);
+-
+-		if (gd->flags & GD_FLG_SKIP_RELOC)
+-			lmb_reserve((phys_addr_t)(uintptr_t)_start,
+-				    gd->mon_len, LMB_NOOVERWRITE);
+-
+-		break;
+-	}
  }
  
- static __maybe_unused void lmb_reserve_common_spl(void)
+ static void lmb_reserve_common(void *fdt_blob)
 -- 
 2.53.0
 
