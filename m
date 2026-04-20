@@ -4,103 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BF76F588DF
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 14:28:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE9AAF588CA
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 14:31:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB353839D5;
-	Mon, 20 Apr 2026 16:28:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 658E0840D8;
+	Mon, 20 Apr 2026 16:31:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WS5NTvpU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iXvvpFS2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1EDB583BC4; Mon, 20 Apr 2026 16:28:26 +0200 (CEST)
-Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
- [IPv6:2607:f8b0:4864:20::b129])
+ id BFAA28419E; Mon, 20 Apr 2026 16:31:36 +0200 (CEST)
+Received: from mail-yx1-xb132.google.com (mail-yx1-xb132.google.com
+ [IPv6:2607:f8b0:4864:20::b132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB284805D7
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 16:28:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 823D5840D8
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 16:31:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb129.google.com with SMTP id
- 956f58d0204a3-651b0eb2564so3229001d50.3
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 07:28:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776695301; cv=none;
+Received: by mail-yx1-xb132.google.com with SMTP id
+ 956f58d0204a3-6501547d7edso2744101d50.0
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 07:31:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776695492; cv=none;
  d=google.com; s=arc-20240605;
- b=ILVlOAt7cLQSerrpGpsFHbWsCg4Gu8eizH6tp0g/OLxnoQbKFlWtie+XfZ1AEjAvfy
- NUCUaT2FRq4YjlOq/+xst6SFyDkCOaTz0SJxGmgk/SUIEda1UDYEHh4YHay+eCJGivmh
- 6Z5A1VZ87v3dSnpEnjzaigMIC60G8HEUrHG9mmW4mcywmCAWhm2L2UybJJ5dz5hKDzSO
- WEegesMW1wG2xxZd23tDc0164wokKEQvQug9Pwg+WICrAQhsHJBObD3Hu07NZFfPWAer
- s4D1d0FuyTJZnTnXAlLZOGz6mEeNQibVmPCG2VvyRidd+f++Av5uwgljy9zV6QS6IMhu
- GWzA==
+ b=UqURWdzWA4b/KTW1wwdwBYTa+/ropQDgGu4gMzSN+YKs1TPwsN8OORYV9J9Pt47o0M
+ 4DEarnvQRstbFzqVXL1JuK+Hinqs1RA4A44KbdreKbBIdq14ZFKLxgj6SbkzQk/JearG
+ /xX1pgvIV+pf6+m6F0qhDdUqEADRGMQOtkZ5eAVZoFFfBxTFW+m4VMT7K8dtYoiIf+rp
+ QLBLh0AwW4yevM4y+3zFZkMhFFDt0Q1rSMkJaO3B9UlzfBJFikExSBwxwjL+TDO8eW9h
+ dqnVuHHZSb50KOhqovklGiCpTGqX3gRI1Wox7u1c8n/vMHx9rIB2h8BABlCzb+YXosX6
+ OE+w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=w0Exsmakawlrpk9iO9N5PbEQVnljUehp+N8g6V37jZ8=;
- fh=SzNPHZIeN+k6IeQInPOGtANz36ph+KMIKXuDTTHViNU=;
- b=cHQyL0zuO06q6nVqQZOXY+AorFR079t+E/btYbqotYcs/6ysyH4SfXe5kgDpIKivzb
- vvhxE/odK8NVXLrNwCCYOavGn6FNRpXhMPkQyE8SZ5wcv8tb6nv9Hop3jzioFRgFPzT0
- RVG2JuGr1vmx6ZvMsC44MntCeE7+dlJsXv+lT2Jl/XP43rgwnjv/MVC1xurKT4yRAIF6
- ivajT+aqN5rQ6fEs2TcDMXDFqONEdOlynzZbCDup9rmQkr5Zn+dnMkfiqLkivi38QG7i
- z17gAgbxXVXsSaViHk5Rjd311MM6PU3Qm5ZzhdvuuuOgE4MgUFEkrw/joG1KnxUr1wJS
- +kbA==; darn=lists.denx.de
+ bh=Q4t3TEeYKo40yCwYKnJ3DKSR6xqc0Fiwe6Z1KbcpljE=;
+ fh=oWj3PiEjG7jS2i0pAB+FO5SFLA4hnjOvsrKchIcQyV4=;
+ b=Z/LgknXGg3HmSeHCKHLJVyFxKQuBxZUcgppWgOzYybV+BWxH02aMEFIM54Ok9wE/ir
+ jz+LX6j044uT/+uHx7l8nLjnOY2rHzCMpG0ybShm+2fSJrBQ78CMmoDbMK33wrsnbvLN
+ abq9pcAznxf+FZXqQVQPqyHhZaIHHj/HjWTQmnwnID++aPa7U2aoxZxfkoCBFKUXJUga
+ hf/hUSQKAuzx10UlGnzXUhSjoLmOeX/hG6+Q45xAsXZ4+3pOjbJxFM1P9r6CdFjAI6PK
+ UYZOjcDbTexRWGVXRKcLGVkmCjPtQJlmFnjNZ4Pva4ye9VAuZkLPVn5PshsBCAdyW/dX
+ OpUQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1776695301; x=1777300101; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1776695492; x=1777300292; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=w0Exsmakawlrpk9iO9N5PbEQVnljUehp+N8g6V37jZ8=;
- b=WS5NTvpUpCX3AzAmL7lK2VRiD70yucZQTlNFddjD/Uq5bmR4IL/u7idAeTDYFkjtfz
- sut4jF97D88O8LlYsc6s5IyelBuoTyRxxX0h5uK7NJzx3PJ363VDeqydDyIVjrP6CZAe
- MRJupwGxEw3GhrFu8kplDcijF/oa656eEih3NIe06zXg0PEaNJ51sRNPb6y43rswHu27
- Ip7Qs7JrkCOFlCfRmwDyzE+jnmfWasQ1vGClz1gJVN1eA+XpTRHIIw7Jrv+Auqx7kdwD
- s2BbTelpMXAage7iZaIzDZFAucpltbXzEwOZhvrfeEiurpm5t33CzVWuGNO281U1cSoz
- WXCg==
+ bh=Q4t3TEeYKo40yCwYKnJ3DKSR6xqc0Fiwe6Z1KbcpljE=;
+ b=iXvvpFS2tmBesA80gyWfgfmgRIOIgyjP/fZxu7UliTNpoF6Y90aqqjdqmHKe8UfKbW
+ Ngm0A7LxK0ojJwqOXE7O0Pul6he0n3mnkwaC8PIG9R8BV4rf9+xM4kXQpBB8Nd1MxL69
+ mdyRWsHWMIZjPXGaJxU/o0dpnwrWa03WhzALszf+lSz11DHfS+J3kBl67anEPJv6QboT
+ eGEsNDwE2Usho3BmRRW8naYahxzmUrNk9AaAVHqaMZJ9CK0JcuHdX0RGgMJSbFy1Sxpa
+ r19xK4YxhFoQEsTa8d6Sb4scqKywtoMXq5sN9OBFEg1ORMz0IRxy2zFkGdDunWcpNh7H
+ KUqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776695301; x=1777300101;
+ d=1e100.net; s=20251104; t=1776695492; x=1777300292;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=w0Exsmakawlrpk9iO9N5PbEQVnljUehp+N8g6V37jZ8=;
- b=l3o8Gcdrz/d7Iiw01gBD9VhLLi2YchURoCC/u4Ar/G6qf1I4nNkosICnWjuarvzv2x
- TVv8sGyQXw9ib4hWerT0nQg0D3KksDHJrHLj575JD+wbrtMjuck/+KiHO9N8I7qNmuQ3
- w/wgh7aHtnxEjeVgR2vyH4a0ClFHc8X5yKgnqXoFRdbGy0AuKEx16xfEm0mXDgbMIXmw
- DJVFGz4h8POdCAr+zmLxwNpgeNXpNMhkRjYmrD4M2Kyp7+Ray6QccmFMxN0YPx2YoZvz
- WBh80x1KseiWJliPg+qTbpmXhH1sk51uCVe/3kLJBRdqjIpOcwPYTUlTdPvi6vqMpTcA
- dBHQ==
+ bh=Q4t3TEeYKo40yCwYKnJ3DKSR6xqc0Fiwe6Z1KbcpljE=;
+ b=PtvF4rXB/MMAv2RWoQ7cejA5ncHRNwFW7DZW7sP20InruWHDOsLf/TonW5dxis1RfD
+ +0Qc+kc2LSO5KiwBpudUR/DHc5u6c+eEHJ6ojieOJCzPlih4YLDNxz6wEOj4xsh+rdv2
+ v1pHh4GddIMIXyuODepNvV6FX8FEYN1T4/DhjMOP+h9nuB79CpwCxYfNyO561ha4mv8J
+ dTAU8A9N4NN6CslcKxxYVI7Aq8PlcG0oV1/dhpoaRPiXbXm/mXV1R87K6mIOhXOLGtUm
+ QC85Bxo2N7PaobV2dUQccO7BTC8MXqq0029ShFjScOf8lUJdmhSzHQwXSAatTuygqhmx
+ W32g==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8qjUT3kII5UXR7g0ydfZzPaExTA7+XUcVzo9IrpjlcEWjuv9d9vkXTZDoDMrurAEJO1Df/r1c=@lists.denx.de
-X-Gm-Message-State: AOJu0YxQgiaAt7WxcEGee+Z9htTCFvUtDlKN9Gpt8HxLIdSgfVguxxiU
- 3iiY6dmJ48EnP3fBF6pGLWu792VfrLuo9JoUJQDUB05EsNEDQMl4JSBiyW0ysFumy+Fe4smONWP
- 65k99BeuSGmpI8XRyx0SXjxlCJl4+Nqmwb2oy1AcrcL4DyzmaeYoY
-X-Gm-Gg: AeBDietMPQRux+ycfRB4xJNq9XR6CFryPuKxA1CtNvdEco3KQOrVU3D87LTofGYjDnW
- 4GclRY3XWEVJE1Mu9zJG3GUxSkY/O9AEajGSgVqbyfIr7A11gNGKmZ1cudt4vhWBGhJQsl+k5iI
- 5rZjr0E2T5QKK29ErdALdZgejr2XH9Fg8BFunuG5ep7u8m4pRM4URWoDFbCIKuc6WeY+tqlpgvC
- wd2HytqFjCHhkODCDt6XxhiW6TSJ+f01+6ScXweP2JWZaFMpci3QKxNMxVLN0azxCEQvlSRUJ4m
- e7BvDlpDnnkwaOsKUIdzibGXng48KKTekULIy7pnYlKFqX3eSGBuq7Q+d7NWlZxuKZ6WD59TouB
- w2qBwEwUG3ZdEfzpRx8dZaLAVd3G8QqQgUnhPTxkYnAid4SpufeU5J9SujxGlVH75r9fSEsPD+u
- NFh701zcYeLvYFmQ5QEcwGiFaWFRUrPhLOwVgPQGQ5vwFGE2JvOGv+Dj6W0jDeS14BD6L7hM62n
- 4bfZu9p7NXwKMYioP2PzIFmidTfV86dWBRpiCzB++W4TAoQj6580NiBhWSXJ/MfEFvACwHijGNn
- ivRk7QtDYTA58eSTnAxJEZ6CqqlxLWPhnJyJL73QbueMHBI60J18+Yw=
-X-Received: by 2002:a05:690e:4814:b0:651:e13d:21ef with SMTP id
- 956f58d0204a3-6531080a7d4mr8642406d50.15.1776695301544; Mon, 20 Apr 2026
- 07:28:21 -0700 (PDT)
+ AFNElJ/CibFkvv11wn3bWooml0dS2onrnNYG7VbhqAZy/JpzhSdUQXxRGYUUdK9Sf1JUmFCbYLpzZ/s=@lists.denx.de
+X-Gm-Message-State: AOJu0YyA4mSh1/PJc/x4kYe0y/9UCbtcYPsTrBGfWS20tCbHPm6luR/D
+ kvDJkWF7HTOdoRV/ADzhhXGlYuFNtW3gWKFUoFeuizZ6Z54hY9T+ClAeCJSKn+a7fCMUxE2duYb
+ PJ32mnuDAAa5brZHILkno+vWHvWpznD0Ej+HAzzcusCk/MqnysMIP
+X-Gm-Gg: AeBDieuwijQ94ACWQ2jOnH4DDycFgd1RfolWipCi/hW+nm4uq3oojxU7NzkTeNM/9Cu
+ J+5YvJE9u3aZ7lkdf3lJ9Vt2d5GLayMfuQT/YznFqwmBCUVLQ2DTzKprdThfqukMrL9mXSa5rn9
+ 0c0/O1LcTbP2L+ne/8bL+ZELvRC8fJ9kUGOenCWsq7IwpG0c+LzwtaS418wJMO5VP9I94cYNqQI
+ cLMsUjM1kRD75PcapIuYXJPLPigEfGdUzDkZvTgwze4EFX/1FKwR2iIQuk3q7bTQB7a4Kvp9qLo
+ DpEyNRvIdz4UqEcjXVVEIXR9ytKO2n0v7df3yuEVf876zG+S84BJbDZRCZsQuCJpn6WEbvuN3fM
+ oCZb+7s6hpRTqSUXfzzQbnxTNagtf9qLpOq4zWYbNpcSfYd/az4FByWTz6daNkhXhZgqX6BN+oE
+ 3Kc56jSBV4j400mc8KUyqn3ZM5f954gcw+KxUCIAr49060f342Zdnpr3yUE1fijCdVgOuwpGTJm
+ B9pnv0Q1aJyYJnFvqtWjx1bk3AUrt/gRTDeixtuzyKxPq1dd8RYaacMs0JM7DvGyqzXQYM/xzHV
+ qk+bL5oUyDAuUn962W4hGzd19xFP3DdDMVb+DDNMhpDW6G2cf73SzgE=
+X-Received: by 2002:a53:e945:0:b0:650:dbb:e79c with SMTP id
+ 956f58d0204a3-65310a278bdmr9424495d50.40.1776695491972; Mon, 20 Apr 2026
+ 07:31:31 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260413203555.1990337-1-rs@ti.com>
- <20260413203555.1990337-7-rs@ti.com>
- <CAC_iWj+2=ajV0cXFT6a5Y2oqtTwcaPRcpkYqTbu4o+jbFmX+5w@mail.gmail.com>
- <DHUT7XN85MRK.18B9QGYDHEPIB@ti.com> <DHVQ3XX4U4OG.3T8QXYV5OHWFO@ti.com>
-In-Reply-To: <DHVQ3XX4U4OG.3T8QXYV5OHWFO@ti.com>
+ <20260413203555.1990337-3-rs@ti.com>
+ <CAC_iWj+=ukmK+vXA=T8g7xnJpCb14=DHm7GF_su+ohYTpMCoGg@mail.gmail.com>
+ <DHUTP14B0Z8Q.64QEUIVV4YNB@ti.com>
+ <CAC_iWjJRoKuRiLNLYeNSo6P6Mszcn=vY11-U71_N=mS0A8P+-w@mail.gmail.com>
+ <DHUV5T2RE2EW.2QKJXXKF2Z3N@ti.com>
+ <CAC_iWj+irf7MajW9OELsx0t1SJ_4jxebbRF0D5Oe=OjMkD+4UQ@mail.gmail.com>
+ <DHVL4XXFM4DP.2NI6DUA729U5O@ti.com>
+In-Reply-To: <DHVL4XXFM4DP.2NI6DUA729U5O@ti.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 20 Apr 2026 17:27:44 +0300
-X-Gm-Features: AQROBzDkK1UpD8HIekP6k_KcY1CIqQUN-gTL9t_NbFFf-q1jhrBv4SdecMtSOoY
-Message-ID: <CAC_iWjLWYOmbPNnOiUqNQBMYUsTAVxAVzka_Lo611RF-GbazmQ@mail.gmail.com>
-Subject: Re: [PATCHv3 6/6] memory: reserve from start_addr_sp to end_addr_sp
+Date: Mon, 20 Apr 2026 17:30:55 +0300
+X-Gm-Features: AQROBzDBE7usUcyImJK9_ngEH-OMsftVSLg8vPJ_TAwXqsht2zn-L9KrcfasEqo
+Message-ID: <CAC_iWj+BGMYWvLCtfFzN+ngkW6UjSoJJMkGz0FHhyW6KmB=G7A@mail.gmail.com>
+Subject: Re: [PATCHv3 2/6] lmb: add LMB_FDT for fdt reserved regions
 To: Randolph Sapp <rs@ti.com>
 Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
  Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
@@ -122,123 +126,231 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-[....]
-
-> >>>          */
-> >>> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> >>> index b3b292ebf56..bd0d875a8cd 100644
-> >>> --- a/lib/efi_loader/efi_memory.c
-> >>> +++ b/lib/efi_loader/efi_memory.c
-> >>> @@ -870,8 +870,8 @@ static void add_u_boot_and_runtime(void)
-> >>>         /* Add U-Boot */
-> >>>         uboot_start = ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
-> >>>                        uboot_stack_size) & ~EFI_PAGE_MASK;
-> >>> -       uboot_pages = ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
-> >>> -                      uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
-> >>> +       uboot_pages = ((gd->end_addr_sp - uboot_start) + EFI_PAGE_MASK) >>
-> >>> +                     EFI_PAGE_SHIFT;
+On Fri, 17 Apr 2026 at 19:53, Randolph Sapp <rs@ti.com> wrote:
+>
+> On Fri Apr 17, 2026 at 3:12 AM CDT, Ilias Apalodimas wrote:
+> > On Thu, 16 Apr 2026 at 23:32, Randolph Sapp <rs@ti.com> wrote:
 > >>
-> >> The map_sysmem dance is still needed here for sandbox.
+> >> On Thu Apr 16, 2026 at 2:54 PM CDT, Ilias Apalodimas wrote:
+> >> > On Thu, 16 Apr 2026 at 22:23, Randolph Sapp <rs@ti.com> wrote:
+> >> >>
+> >> >> On Thu Apr 16, 2026 at 3:39 AM CDT, Ilias Apalodimas wrote:
+> >> >> > Hi Randolph.
+> >> >> >
+> >> >> > On Mon, 13 Apr 2026 at 23:36, <rs@ti.com> wrote:
+> >> >> >>
+> >> >> >> From: Randolph Sapp <rs@ti.com>
+> >> >> >>
+> >> >> >> Add an LMB_FDT bit for fdt reserved regions, so we can reclaim them when
+> >> >> >> parsing a new device tree and properly warn people when a reservation
+> >> >> >> overlaps with an existing allocation.
+> >> >> >
+> >> >> > The LMB has a set of regions that clearly describe memory in an
+> >> >> > abstact way, e.g reserved, no overwrite etc.
+> >> >> > I don't think adding we should open the door for treating reserved
+> >> >> > memory as special. Can't we apply the same fix without adding a new
+> >> >> > description?
+> >> >> >
+> >> >> > Thanks
+> >> >> > /Ilias
+> >> >>
+> >> >> I did have an initial implementation using a separate allocation list for fdt
+> >> >> regions in LMB. It works, but boy it's much more messy. All allocations and
+> >> >> frees had to check both the regular allocation list and the fdt allocation list.
+> >> >>
+> >> >> I thought about having the fdt helpers build their own local list separate from
+> >> >> LMB, but that's also a little messy in that it means we're either double
+> >> >> tracking regions or tying to reach into the guts of LMB to extract information
+> >> >> about that existing allocation region.
+> >> >>
+> >> >> Maybe that's fine considering LMB already reaches out to kick
+> >> >> boot_fdt_add_mem_rsv_regions. Just trying to keep things compartmentalized at
+> >> >> the moment.
+> >> >>
+> >> >> I'll revisit the localized reservation list for image-fdt. I'll just setup some
+> >> >> goofy linked list to track allocation start and size for the later free. I
+> >> >> assume we prefer a separate set of lmb_region structs for that list as it's a
+> >> >> little concerning to pass references to an active LMB region outside of the LMB
+> >> >> core.
+> >> >
+> >> > Can you explain a bit more when the problem happens? Is it because
+> >> > boot_fdt_add_mem_rsv_regions() get called twice in some boot flows? Or
+> >> > is there another reason?
+> >> >
+> >> > Thanks
+> >> > /Ilias
+> >>
+> >> The initial comment explicitly calls out that as the reason they disabled the
+> >> warning, but it should occur any time a device tree is loaded. Internal or
+> >> external.
 > >>
 > >
-> > Why? We're not using that address directly. We're just trying to figure out how
-> > large the carveout region is.
+> > Yes, but that's requesting to reserve specific address(es) which is
+> > always the same address ranges unless the DTB changes.  In which case
+> > you just have to find and free the reserved-ranges. Keeping in mind
+> > that's rare, you can re-parse the DT with minimal overhead and you
+> > dont have to keep any metadat stored in LMB or anywhere else. and the
+> > LMB subsystem is not the place to do that. The EEXIST basically means
+> > "I've already done that" here so I am trying to understand what can
+> > trigger this problem.
 > >
-> > There's not anything funky going on with the global data structure for sandbox
-> > functionality is there? LMB definitely didn't do anything to account for that.
+> >> That also lead me to believe if one were to load multiple external device trees
+> >> that you could theoretically trip an OOM with a bunch of non-overlapping
+> >> reserved regions. I have yet to test that, but culling old allocations seemed
+> >> practical enough without that PoC.
+> >
+> > Yea but that's a user error. You can also load a bigger binary that
+> > your entire DRAM and trigger an OOM
+> >
+> > Thanks
+> > /Ilias
 >
-> Ah. Symmetry, to answer my own question. We *may* get a virtual address.
+> The explicit case were I really wish we had this warning was when the u-boot
+> stack was creeping into a FDT reserved region. The FDT reservation naturally
+> failed with EEXIST. That error is overloaded as is. We have to track the
+> reservations we successfully create in order to clean them up properly.
 
-Yes.
+Ok, I think we might have a similar issue to the EFI subsystem then,
+were we can unload and replace the DT based on various config options.
+Why don't we just add a function that read the (existing loaded) DT
+and free the LMB regions based on the DT info?
 
->
-> That does bring up another issue though. What good does reserving a virtual
-> region that simply maps to a physical region do? Shouldn't we reserve the
-> physical region outright? Isn't that what LMB is tracking?
->
-> Suppose I need to read up on this sandbox and architecture dependent virtual
-> addressing scheme.
-
-Yea and arguably we havent done a great job documenting that :(.
-The tl;dr is that you are unaffected in the majority of the cases. I
-wanted to fix the map_sysmem parts for a while.
-
-Thanks
+Cheers
 /Ilias
 >
-> >>>         efi_update_memory_map(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE,
-> >>>                               false, false);
-> >>>  #if defined(__aarch64__)
-> >>> diff --git a/lib/lmb.c b/lib/lmb.c
-> >>> index 7ecc548d831..da61b005154 100644
-> >>> --- a/lib/lmb.c
-> >>> +++ b/lib/lmb.c
-> >>> @@ -534,46 +534,19 @@ static long lmb_reserve(phys_addr_t base, phys_size_t size, u32 flags)
-> >>>
-> >>>  static void lmb_reserve_uboot_region(void)
-> >>>  {
-> >>> -       int bank;
-> >>> -       ulong end, bank_end;
-> >>> +       ulong size;
-> >>>         phys_addr_t rsv_start;
-> >>> -       ulong pram = 0;
-> >>>
-> >>>         rsv_start = gd->start_addr_sp - CONFIG_STACK_SIZE;
-> >>> -       end = gd->ram_top;
-> >>> +       size = gd->end_addr_sp - rsv_start;
-> >>>
-> >>> -       /*
-> >>> -        * Reserve memory from aligned address below the bottom of U-Boot stack
-> >>> -        * until end of RAM area to prevent LMB from overwriting that memory.
-> >>> -        */
-> >>> -       debug("## Current stack ends at 0x%08lx ", (ulong)rsv_start);
-> >>> -
-> >>> -#ifdef CFG_PRAM
-> >>> -       pram = env_get_ulong("pram", 10, CFG_PRAM);
-> >>> -       pram = pram << 10; /* size is in kB */
-> >>> -#endif
 > >>
-> >> This functionality is removed, but we still have boards defining CFG_PRAM
-> >
-> > The PRAM allocation occurs before this, and it is carved out of the region
-> > covered by start_addr_sp through end_addr_sp. It's actually part of the reason I
-> > needed to add end_addr_sp, as it moves the relocation address pointer. We don't
-> > need to account for it separately now.
-> >
-> >>> +       debug("## Current stack ends at 0x%08lx\n", (ulong)rsv_start);
-> >>>
-> >>> -       for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-> >>> -               if (!gd->bd->bi_dram[bank].size ||
-> >>> -                   rsv_start < gd->bd->bi_dram[bank].start)
-> >>> -                       continue;
-> >>> -               /* Watch out for RAM at end of address space! */
-> >>> -               bank_end = gd->bd->bi_dram[bank].start +
-> >>> -                       gd->bd->bi_dram[bank].size - 1;
-> >>> -               if (rsv_start > bank_end)
-> >>> -                       continue;
-> >>> -               if (bank_end > end)
-> >>> -                       bank_end = end - 1;
-> >>> -
-> >>> -               lmb_reserve(rsv_start, bank_end - rsv_start - pram + 1,
-> >>> +       if (gd->flags & GD_FLG_SKIP_RELOC)
-> >>> +               lmb_reserve((phys_addr_t)(uintptr_t)_start, gd->mon_len,
-> >>>                             LMB_NOOVERWRITE);
-> >>> -
-> >>> -               if (gd->flags & GD_FLG_SKIP_RELOC)
-> >>> -                       lmb_reserve((phys_addr_t)(uintptr_t)_start,
-> >>> -                                   gd->mon_len, LMB_NOOVERWRITE);
-> >>> -
-> >>> -               break;
-> >>> -       }
-> >>> +       else
-> >>> +               lmb_reserve(rsv_start, size, LMB_NOOVERWRITE);
-> >>>  }
-> >>>
-> >>>  static void lmb_reserve_common(void *fdt_blob)
-> >>> --
-> >>> 2.53.0
-> >>>
+> >> >>
+> >> >> >>
+> >> >> >> If we don't at least warn the user of these reservation failures,
+> >> >> >> there's a chance that this region could be freed and reallocated for
+> >> >> >> something important later.
+> >> >> >>
+> >> >> >> This useful warning mechanism was broken in:
+> >> >> >> 5a6aa7d5913 ("boot: fdt: Handle already reserved memory in boot_fdt_reserve_region()")
+> >> >> >>
+> >> >> >> Signed-off-by: Randolph Sapp <rs@ti.com>
+> >> >> >> ---
+> >> >> >>  boot/image-fdt.c |  5 ++++-
+> >> >> >>  include/lmb.h    | 14 ++++++++++++++
+> >> >> >>  lib/lmb.c        | 33 +++++++++++++++++++++++++++++----
+> >> >> >>  3 files changed, 47 insertions(+), 5 deletions(-)
+> >> >> >>
+> >> >> >> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> >> >> >> index a3a4fb8b558..0f5857f24d2 100644
+> >> >> >> --- a/boot/image-fdt.c
+> >> >> >> +++ b/boot/image-fdt.c
+> >> >> >> @@ -73,6 +73,7 @@ static void boot_fdt_reserve_region(u64 addr, u64 size, u32 flags)
+> >> >> >>  {
+> >> >> >>         long ret;
+> >> >> >>         phys_addr_t rsv_addr;
+> >> >> >> +       flags |= LMB_FDT;
+> >> >> >>
+> >> >> >>         rsv_addr = (phys_addr_t)addr;
+> >> >> >>         ret = lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &rsv_addr, size, flags);
+> >> >> >> @@ -80,7 +81,7 @@ static void boot_fdt_reserve_region(u64 addr, u64 size, u32 flags)
+> >> >> >>                 debug("   reserving fdt memory region: addr=%llx size=%llx flags=%x\n",
+> >> >> >>                       (unsigned long long)addr,
+> >> >> >>                       (unsigned long long)size, flags);
+> >> >> >> -       } else if (ret != -EEXIST && ret != -EINVAL) {
+> >> >> >> +       } else if (ret != -EINVAL) {
+> >> >> >>                 puts("ERROR: reserving fdt memory region failed ");
+> >> >> >>                 printf("(addr=%llx size=%llx flags=%x)\n",
+> >> >> >>                        (unsigned long long)addr,
+> >> >> >> @@ -108,6 +109,8 @@ void boot_fdt_add_mem_rsv_regions(void *fdt_blob)
+> >> >> >>         if (fdt_check_header(fdt_blob) != 0)
+> >> >> >>                 return;
+> >> >> >>
+> >> >> >> +       lmb_free_fdt_regions();
+> >> >> >> +
+> >> >> >>         /* process memreserve sections */
+> >> >> >>         total = fdt_num_mem_rsv(fdt_blob);
+> >> >> >>         for (i = 0; i < total; i++) {
+> >> >> >> diff --git a/include/lmb.h b/include/lmb.h
+> >> >> >> index 427d701bc30..c6a1fc1ca47 100644
+> >> >> >> --- a/include/lmb.h
+> >> >> >> +++ b/include/lmb.h
+> >> >> >> @@ -51,6 +51,15 @@
+> >> >> >>   */
+> >> >> >>  #define LMB_NONOTIFY BIT(3)
+> >> >> >>
+> >> >> >> +/**
+> >> >> >> + * define LMB_FDT - reclaim this region with lmb_free_fdt_regions()
+> >> >> >> + *
+> >> >> >> + * LMB Memory region attribute flag to indicate that the region will be
+> >> >> >> + * reclaimed with lmb_free_fdt_regions(). This allows device tree reservations
+> >> >> >> + * to be cleaned up and tracked more granularly.
+> >> >> >> + */
+> >> >> >> +#define LMB_FDT BIT(4)
+> >> >> >> +
+> >> >> >>  /**
+> >> >> >>   * enum lmb_mem_type - type of memory allocation request
+> >> >> >>   * @LMB_MEM_ALLOC_ADDR:        request for a particular region of memory
+> >> >> >> @@ -235,6 +244,11 @@ phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_size_t size, ulong align);
+> >> >> >>   */
+> >> >> >>  long io_lmb_free(struct lmb *io_lmb, phys_addr_t base, phys_size_t size);
+> >> >> >>
+> >> >> >> +/**
+> >> >> >> + * lmb_free_fdt_regions() - Reclaim all %LMB_FDT tagged reserved regions
+> >> >> >> + */
+> >> >> >> +void lmb_free_fdt_regions(void);
+> >> >> >> +
+> >> >> >>  #endif /* __KERNEL__ */
+> >> >> >>
+> >> >> >>  #endif /* _LINUX_LMB_H */
+> >> >> >> diff --git a/lib/lmb.c b/lib/lmb.c
+> >> >> >> index 8f12c6ad8e5..7ecc548d831 100644
+> >> >> >> --- a/lib/lmb.c
+> >> >> >> +++ b/lib/lmb.c
+> >> >> >> @@ -463,10 +463,10 @@ static int lmb_map_update_notify(phys_addr_t addr, phys_size_t size,
+> >> >> >>
+> >> >> >>  static void lmb_print_region_flags(u32 flags)
+> >> >> >>  {
+> >> >> >> -       const char * const flag_str[] = { "none", "no-map", "no-overwrite",
+> >> >> >> -                                         "no-notify" };
+> >> >> >> -       unsigned int pflags = flags &
+> >> >> >> -                             (LMB_NOMAP | LMB_NOOVERWRITE | LMB_NONOTIFY);
+> >> >> >> +       const char *const flag_str[] = { "none", "no-map", "no-overwrite",
+> >> >> >> +                                        "no-notify", "fdt" };
+> >> >> >> +       unsigned int pflags =
+> >> >> >> +               flags & (LMB_NOMAP | LMB_NOOVERWRITE | LMB_NONOTIFY | LMB_FDT);
+> >> >> >>
+> >> >> >>         if (flags != pflags) {
+> >> >> >>                 printf("invalid %#x\n", flags);
+> >> >> >> @@ -654,6 +654,31 @@ long lmb_free(phys_addr_t base, phys_size_t size, u32 flags)
+> >> >> >>         return lmb_map_update_notify(base, size, LMB_MAP_OP_FREE, flags);
+> >> >> >>  }
+> >> >> >>
+> >> >> >> +void lmb_free_fdt_regions(void)
+> >> >> >> +{
+> >> >> >> +       struct alist *lmb_rgn_lst = &lmb.used_mem;
+> >> >> >> +       struct lmb_region *rgn = lmb_rgn_lst->data;
+> >> >> >> +       long ret;
+> >> >> >> +       int i = 0;
+> >> >> >> +
+> >> >> >> +       while (i < lmb_rgn_lst->count) {
+> >> >> >> +               phys_addr_t base = rgn[i].base;
+> >> >> >> +               phys_size_t size = rgn[i].size;
+> >> >> >> +               u32 flags = rgn[i].flags;
+> >> >> >> +
+> >> >> >> +               if (flags & LMB_FDT) {
+> >> >> >> +                       ret = lmb_free(base, size, flags);
+> >> >> >> +                       if (ret < 0) {
+> >> >> >> +                               printf("Unable to free FDT memory at 0x%08lx\n",
+> >> >> >> +                                      (ulong)base);
+> >> >> >> +                               i++;
+> >> >> >> +                       }
+> >> >> >> +               } else {
+> >> >> >> +                       i++;
+> >> >> >> +               }
+> >> >> >> +       }
+> >> >> >> +}
+> >> >> >> +
+> >> >> >>  static int _lmb_alloc_base(phys_size_t size, ulong align,
+> >> >> >>                            phys_addr_t *addr, u32 flags)
+> >> >> >>  {
+> >> >> >> --
+> >> >> >> 2.53.0
+> >> >> >>
+> >> >>
 > >>
-> >> Thanks
-> >> /Ilias
 >
