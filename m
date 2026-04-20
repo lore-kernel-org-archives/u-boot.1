@@ -4,99 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B30FFEA71B3
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 00:46:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C996EA71B3
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 00:47:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7267839D9;
-	Mon, 20 Apr 2026 02:46:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 82D9D839D9;
+	Mon, 20 Apr 2026 02:47:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OyRmqvhJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fb5lTFNi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C64DD83B99; Mon, 20 Apr 2026 02:46:23 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 867F484181; Mon, 20 Apr 2026 02:47:22 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB823836AC
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 02:46:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D3B9836AC
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 02:47:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-671ff4b716cso4129869a12.1
- for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 17:46:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776645981; cv=none;
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b8f9568e074so457827866b.0
+ for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 17:47:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776646040; cv=none;
  d=google.com; s=arc-20240605;
- b=kYW72iFya0tNCydBidEqla8dQOMVKyNQATLtCWFHEkPFtruO5rbyD9TTrkltbksirO
- eEes84LN5DzJLi6QxzrH6GpeE7iS7Mxpa8qFnLbB1Lrna+HNDq34eXjfVVzONiTIJfmQ
- y28d79W2ofh1TeyvvO6QgcgaWaHz1gut+KTea98rMPSBQazK9IYyQpb2sSlvoe/xEF9S
- F22cztsMxW7xgepe/3CP4f9NNX+J3QK/uXCrGU8sV6MwG+MzlIZ/R1/ddC8q1pA1RiJM
- bBHEKwB5asqETeNH9mZsjzSyXQfCVL7jW6eaJ8lzjDGGxLGncTMQ3f/h3uVeb695rcBh
- LKPg==
+ b=c3a3ojM3F/BCuMcYfeIuDIQ9Zh24WtejvFHqsdQ++SfkHVhoQvYfb83LOJ6PMDR/It
+ yxSGpDYDHdfytqevy0Di2Ej6jGvdOmnaJPpOp/OuZd3u1bEwZREBqiJz2bgXs/mxYHmQ
+ o1cynYLQtdjsO30dOR+1ssU3kng/e7cuNBLKXVTn4pZidVUGJxDuDD3fxVpCc0cRKGSe
+ 6EzhqIhRK+/erh4/2+I+60tc2mtPN+V/RNPvtWrskYy0NNZihrZePY/WpZwRMn1pxEQ/
+ I7MXZsGtAEFa7VPHlIX+0hoXZMBRojSYkjrSn7lZFr+43JltU51CidagvaecjoAFKofG
+ lUaQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=u78qjSebkeQfE5WHtLyH+CG3aVRjIWKR1zgEfyogfGQ=;
- fh=WOVsvKJBz/bhS6YncvwNdIQFC5VbL/nEBQ84w0ymC28=;
- b=EiFXfpV4p2AJVLlYmaXsTgALwFJBUKfUIjjNI9CWB2cymkxyZwB3EKX/05yd6/DsFU
- XEOHxYWZXBOubTcY0sjn94dFk70+I2FOhmXnggraqlwp8qdGdDRHq1OxoWOaygicuZ5m
- 93taz7mLmYXqwwZPCxQ4MtA0TDZ+9XMMAjNAiyM4RK4oyhXFKfWhStIJD/MwyfhARGSV
- j7l88443CX8dp6Tq2c77tCHFmE0FiL/5l1jnforBhfeiVoj8yRlhkLY2y+BJ0C/oUTdg
- weXUlmedueYWEghNFy9UIRfwtegW3bmjULcD2S5+mETOXG/UMe/bH0UO/SSOA6usTKut
- YAEg==; darn=lists.denx.de
+ bh=lmz30CSR2dMlBzKU4Jw5XcUwcpnZU+TP+msJthX6SFY=;
+ fh=myhvPHvhoh1eP7Lwc9AHbp2tPfCPgIWg9Pt4xdW4Ki4=;
+ b=T+8dJ9W3mCU1z39gc+6hn5//n53VawY4c2LKkHPrVdSDAOp6DcIYpTwwumHEoNmy35
+ 7bMxQkhd9rk3FDW/hVfR/YMK1GC7gp1jieRTTBX3PPq7GKhWmGO5IrU8xc6FpL9sRyks
+ NRsRHAPDymfz1PZWBN9DmOgKaeGU4hemiwDBU12oUcz2kdUCAeIc5VnM6lEAQC96JqdK
+ HQHzj2/IrNDhdSZ1HQR5CmDuQZU2IKnF7JDO1iCZasL4iiGE3HMPu+rLFG4+9QDkLTNh
+ 2sK3/h/WO2mwIZTt/d6E3HJGcyMS+pviUwLf7QoDLz+yA/PH79fV/HTedmt+LCcddSOi
+ LAQw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776645981; x=1777250781; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776646040; x=1777250840; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=u78qjSebkeQfE5WHtLyH+CG3aVRjIWKR1zgEfyogfGQ=;
- b=OyRmqvhJUD7kY2REMN7gf27mbPEu2meYVtw13MfunyXatsK2QD+OqEG0pnmYtnIPyO
- GR7+iwby/CQD7gX6dtIOAsbRseiartdoSXPT0ACogQ2oorqmVkP2o6izyrUAcSuJSu9k
- 6c7f0C3C/PpwHL6Q7mNWZPdYcIXkPYlkccNC8=
+ bh=lmz30CSR2dMlBzKU4Jw5XcUwcpnZU+TP+msJthX6SFY=;
+ b=Fb5lTFNiooh3GVFygHqpzu87/amv0QHRGWFsxdSBdZOS4oCh4uzYQ4fTCEVFTAjuEe
+ jvvAQ4XjLlzF93V19o0mtcz/rTParSeA0vPkjwGpD9dfHOOBLquQBQzdsjfhB3C11dF1
+ U67WJ2fbKqfnheQ9I2IftBwP1O4288izG4G1g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776645981; x=1777250781;
+ d=1e100.net; s=20251104; t=1776646040; x=1777250840;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=u78qjSebkeQfE5WHtLyH+CG3aVRjIWKR1zgEfyogfGQ=;
- b=EMuJ/YXo15+OncPoO1pOZmHvTJI5CPkWTjV5tfzwNu8YBTRKmBfMlsrJAv4oDVt+xO
- LTi+Py7Pbo22Yc0q1z+164c7htPkboCyiPPNUzLlua2MjbVP+d/YkO+KokdX4QrYuATo
- nmMOXeM2z3+pXRb2bbFxfjqpfDY/7Hv9Rzc/Ce85LaCs+6F0HlxcmxtIoLJYpHOkWdT4
- EU3c/lrA2CCe1e4GMals0yug48JCjycLxihBTrCzc+idKUFFHdhMfGrVbcajgSDJebuD
- dOzNz/scEQrpWatCxNcp/Stgfia2XN/2LjXOZApqRi2YD9E0BvwrzITeEwyRRF4OISfY
- UARA==
-X-Gm-Message-State: AOJu0Yz39TmyqQMiZhtIxmeho60pRW+riWE/UiPRgmVsAsCOTz3D3toc
- PcyagYUpx47DLZXuZ4PwjIPPxe7ZmseXsrPX9aGHLR7kLzjpPYTsFZzIIdIzXR9tjc/nOTo5hdo
- 4hsNxP/y36JLQxKeXeKpQh3iNBeKzXdGlpnsAmF6G
-X-Gm-Gg: AeBDievCno2x69WTOckyvhrgnsXgP3b9rRkpuCgCgKaMNEdV6F5YcU+nAKsyAwqqmm+
- 0SUz5bVqDFTQ+vpswvsVKDZFTqB8Q/Ul/8yox1Dt9XowDTShfAztnG6EbTPwWHbGghkRXlkwVpF
- 7A27bsvEFbcDFEX/O0v+B8dkXAdRSH8ufKIf2rO3txa5RY4eDYPFi+rplp5m9g1oczql3nhKZ04
- Ezrtd7ASGZ8ZrnY3pu2zdJ+5Hm0xMNd9McSa5/TrgKnikFL04qpDHZYfpUETPc9iUlWsE+w9PrN
- e3Hj0ty5mP3wKSRLKl3K
-X-Received: by 2002:a17:907:7ba6:b0:b8f:f08a:4b80 with SMTP id
- a640c23a62f3a-ba41828cc02mr529229466b.3.1776645980939; Sun, 19 Apr 2026
- 17:46:20 -0700 (PDT)
+ bh=lmz30CSR2dMlBzKU4Jw5XcUwcpnZU+TP+msJthX6SFY=;
+ b=dD3zI4z9XR64TWeVPaQfSCTy7McT9pqL1ft8HEbJrMRsdaCjPIJIY00F7RCuCCBEZr
+ 9ps6FLJWJqiQmugp3IZF3XF7BLHCpqflb4DoTcebhxcwsJDd8sxye89X03VB1XUHGSpw
+ 7uLZKAxMtjW/+jdbsS3MM2SZGSmfY3xvlX5uF3eBnr8E0ft7hueMsIcfMPQZN3bj6DLF
+ P6PJQi7zjqNQy6V9gWD+dKHWG+qZOhpPONkld2UaDBzYn7wi7ojKpGlMSmkbJazLa+nR
+ Elcs/HmaUyoyY3LmGvT/QrSH1vS1QOg83OANK4GACdsij/cAPfdz2xSRZCLiswfdyg+c
+ Nc+Q==
+X-Gm-Message-State: AOJu0YyZwEbpgsvr+uMdiRb1f3JFeufER8ZgaNCb7Gp61vI3Zpf1MYnv
+ CQYghiN+9O7qmDDaHsb83RsMpkNt6k+XzWwO/eTxBYfCvTdNw43ZwLwTA+47mveIXuEdyUKttiL
+ dvaVEZf76hRPHc7OSlkx4W6HKit31f4DuE73PBB2E
+X-Gm-Gg: AeBDiesLxRwFDiiYLh6JK+sBO6ntdYVor5tCVIdLf9UjpkxXc5WmYJjTblA3y8Vat7x
+ CVuty9zCvOi6isPljOQni16BWTFJPP0M0iBFF2IXBVyyj/EY4E3JmWIyUHmSQYaUh+mXjvTtEA6
+ 7Wm3Kd3gC4FxB4TMK+zatgdjb7kHIKzxJoluL/PzZgv0RBG0iJDlmJDL7M0Oc2JIDWMutPsOYpr
+ UGLDPzQ8amWbn6ZYxgfN194dYu0jw2mfDjU07AiXYvgmbhQrfbSkMn1xHucJajem936YgEBcCQ0
+ Qa+T2nKqViEiZFwdmPKP
+X-Received: by 2002:a17:907:803:b0:ba6:a05c:ac3f with SMTP id
+ a640c23a62f3a-ba6a05cb5b6mr191500566b.4.1776646040089; Sun, 19 Apr 2026
+ 17:47:20 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260419143247.437733-1-dario.binacchi@amarulasolutions.com>
- <20260419143247.437733-4-dario.binacchi@amarulasolutions.com>
-In-Reply-To: <20260419143247.437733-4-dario.binacchi@amarulasolutions.com>
+ <20260419143247.437733-8-dario.binacchi@amarulasolutions.com>
+In-Reply-To: <20260419143247.437733-8-dario.binacchi@amarulasolutions.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 20 Apr 2026 12:46:07 +1200
-X-Gm-Features: AQROBzCfo2LY0JYHy1BSObwy5gHseciNWbZSzT2plxYNYZ9gyzjnYHnnydvhAgc
-Message-ID: <CAFLszTgicZnHwqWOW-EQtf3CHg_9vY9wCseBei-mmxMeU0Y_WA@mail.gmail.com>
-Subject: Re: [PATCH v4 3/8] test: cmd: add unit tests for part command
+Date: Mon, 20 Apr 2026 12:47:08 +1200
+X-Gm-Features: AQROBzCi1rEEUNu_2G6DrKJoSUAAAhO_-KiflctEOO4VcXDBd0wPZ-jsb5lr2OE
+Message-ID: <CAFLszTiNC7yQk-bLhL+nobM+nED5t9e9+VnZcsvCe9egXH5hsQ@mail.gmail.com>
+Subject: Re: [PATCH v4 7/8] test: dm: fwu_mdata: add test for
+ fwu_mdata_get_image_guid
 To: dario.binacchi@amarulasolutions.com
 Cc: u-boot@lists.denx.de, linux-amarula@amarulasolutions.com, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@arm.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>
+ Michal Simek <michal.simek@amd.com>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -116,20 +114,17 @@ X-Virus-Status: Clean
 
 On 2026-04-19T14:31:40, Dario Binacchi
 <dario.binacchi@amarulasolutions.com> wrote:
-> test: cmd: add unit tests for part command
+> test: dm: fwu_mdata: add test for fwu_mdata_get_image_guid
 >
-> Add unit tests for the 'part' command, specifically for the 'number',
-> 'start', and 'size' subcommands.
->
-> These tests establish a baseline for the current partition lookup
-> functionality by name. This foundation will be used by subsequent
-> patches to extend the command, ensuring consistent behavior as new
-> features are introduced.
+> Add a new unit test for the fwu_mdata_get_image_guid() function.
 >
 > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 >
-> test/cmd/Makefile |   1 +
->  test/cmd/part.c   | 165 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 166 insertions(+)
+> test/dm/fwu_mdata.c | 48 ++++++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 48 insertions(+)
+
+> diff --git a/test/dm/fwu_mdata.c b/test/dm/fwu_mdata.c
+> @@ -143,3 +143,51 @@ static int dm_test_fwu_mdata_write(struct unit_test_state *uts)
+> +     ut_assertok(event_notify_null(EVT_POST_PREBOOT));
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
