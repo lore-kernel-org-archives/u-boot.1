@@ -4,96 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC864EA71B5
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 02:13:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90FC2EA71B7
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 02:49:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63876842E7;
-	Mon, 20 Apr 2026 04:13:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9E019839D9;
+	Mon, 20 Apr 2026 04:49:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e9gNeuhv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FS0xQzJ3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E393842E7; Mon, 20 Apr 2026 04:13:34 +0200 (CEST)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id 7162183B99; Mon, 20 Apr 2026 04:49:49 +0200 (CEST)
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
+ [IPv6:2607:f8b0:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1601583BC8
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 04:13:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 42E1283693
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 04:49:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-2b25cf1b5f0so14473645ad.3
- for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 19:13:32 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776651210; cv=none;
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-c7358a7a8d1so1591147a12.3
+ for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 19:49:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776653386; cv=none;
  d=google.com; s=arc-20240605;
- b=GUwMeec4OyM0a9XroJmeSchZLgOrh1lYyhwHy3e7qs4r8nI1iOHIYvN46IEmA5MZtv
- Amqzr+gn6c/AT3dEwJ1Zdz9c+2SIZAVYvv/Yedpi6oGreK3FqxNvJPxdNp5l43i+HmnF
- eiAl2RgnKLvzvlYedprH/ybw2kdYYLn0uK7CirPew4ZLTnrfdwsBYiL8PSRmMT8G0xkx
- gFzms0QA7HudPXlnu4x9ZJxgyCB2EFDbO603voUAOD38azP4ka+v82DS5/qt3tEplIFz
- JHo9mZTa9znfQHlAD2Z8iWlgq23stx4oHSqEugez67BRy1eclWoGw435DLAy/Wuer6e1
- i7Cw==
+ b=ejPbwETbRWzoVBM/6KOAnvYTKaSLXG2cbvRRdRcRElKFAVYQu7uyUyi/nDvqOBp4la
+ Bycqp8Rx+9AzeJIEJpBX4SX/SR+r6XvasyqDLPI6gCxA3BxcuXHZ4LrQ1GtQhhAOzV9U
+ UYPNl0uouh2DZvVIkxLG7Qq+AIa8EE49ZJg8cJLyftfx8Wim7nQG5Krw0TwRXbBcapLz
+ YNWeprwrQ7NSgz3eqxOnnKoOQstzSDddFviXD4e+aINIQ6mpfOoNZmccjpbUxnvLghLq
+ JgklggVwnbRZ2kFkuW5cMHBTHYdR+vSNiGIrPfEka934aVrE5AZMLItTPXhs9S56j0N4
+ rCzA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=x6OTa1/OAPvemAy5gvqSiNxuENbBixG7ta7G+B7xKcw=;
- fh=cYPNPW62ZtpubGVbdXxT2ZbTqj7KJRUp3ONAIYi7Y+0=;
- b=cndDXL3p2rur0P+/StvvRIXmVl5Pmvr6IitC4ra2IGwS6sZyUiVskxEIf4seU0dQkt
- zq3emOcAOd2T+WXhflygsXufhNDhamvlCSGqJhexeKu8Yjazk/Tgz7yaPwNRtehAy6t+
- ckH8F+hvyP/tAVR3KsnC9NO40w1lQNCE8xzW3bJ2+Fh7g1eMhe0YiqsedxgJaoArZ2DG
- ZoAp62+ZF8XU4XUr4VZE56ynC3niw4WpVkl16R+qj39KLx8I15a2+iI2Qn2WV8YuusrB
- Yp741KWwQabyw2bc1/xaSSpGtUc2P4ytC6PHFyeQ502yAXeMPw6pI0S4+ft5Tioao61U
- I3yg==; darn=lists.denx.de
+ bh=/5D6raRhEKwZLcrmQVoD9LzZw4kHPgBzy3EoJopOVWU=;
+ fh=bAhO/2+dJLNIuyiSCWCsiQQck7gcMCfIwltRjKz8q4g=;
+ b=Zd5wbkFSEQuJUTdgSKuszci9dHWytqHimxJXOgDnT8H7Sq0Ob2dbmkQFjlNFjxEk1s
+ FhZu1yWjiNAMmQuNpNLMG3UFgMqb5Bc+GGs6j3iuMMIdP/f0HW77N/jOiZpx/5wxSsDu
+ JY1x1FEMO+rsrThgGEXMd6k58XXx87OcHpZXTXO/nm+cEouCalEKpGSjYT336jSOypeS
+ kCPZYh5suPRXIveH4zDT5IPw7DhhTS6hbOeHrp4EMgfL7m2KlsnKE5lfCJowIlfJJ7zw
+ fji/Um6ePuw3Azr58Jd7h/Ltm+ZfFRwtox5IrNRgdO3UU1q8NuZayJ8O13abscjhLweF
+ Oj0Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776651210; x=1777256010; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776653386; x=1777258186; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=x6OTa1/OAPvemAy5gvqSiNxuENbBixG7ta7G+B7xKcw=;
- b=e9gNeuhvcVGL8gicFJJPtwbTn54ur3NaEFmqhspA8Aq76eOafDOqh7tRbSQKna5t1C
- Fb9oPWbDrFwGELvWaz9A25cFdFUAiNUTTCTHRM2VHITDJkRPaWWZSNL0uPCwum2X2aIb
- ryJJL4/NZk54oUDj68Bw9ruhAW+zUjW/Ja+VE=
+ bh=/5D6raRhEKwZLcrmQVoD9LzZw4kHPgBzy3EoJopOVWU=;
+ b=FS0xQzJ3Vdn+XJAJHUxgch3OoQTNrVUhyc0xhqX+s0Ky4I+RBGaVr3oeoOu+KureBN
+ u9olwDqcdQsCZfJ3znr799N76PrIFMCW8kQ+2o5e0IozI2LkjfBpZCX277kSp0ZLWQWh
+ TwlY1fqDYC6x44yc1Kh3AbyVGnAQ7IvrEk9/c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776651210; x=1777256010;
+ d=1e100.net; s=20251104; t=1776653386; x=1777258186;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=x6OTa1/OAPvemAy5gvqSiNxuENbBixG7ta7G+B7xKcw=;
- b=bivfsqnGvmgAGdOtd6eh8o7K6ZuEytlj8TR6jJD0JjApKjctqELI7WgGr7QOH0EL6z
- uhfqEGSCHqYdLolZfknp0guujILoAi9EGZyyUDujLUMFV7cQ2WaXZm7JegoRjmD9Jp8P
- 3z5WBNPURPRI6Cj0oKTOAnAmliV+DOYQPoiZ1KBVNqcCYOocmboFQTdeiUb5hN06QzXv
- ajiRpZG3ImAycoV395k0JunQBd3V8+01mRod0cDpRHDAJY6nKWqBMPkcrTeRTyy1gqyD
- HAPiPeNpIL1VCXsJrOJekqOUV821EPuYDnhZNOhA3F7klFLIEbUvm7SeBJyNxSdN+Anp
- QzkA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9IHzn5aCJh4+JnC1O5+i0f8o+0IHOTI71E0JnlK5NOKoCwzPQtl8JcG97HDXdYI/z6pRnQg3k=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz0ytq/ZHTWhlq9dZwkDy/qLui1YU61VOyLI5uzfK7lOSTlxWvw
- CN6CoENHn+cP0WqUIQsgts1DJhWrmtNAZF/t9HR1i9AFARSeLSlo0r+ktCSqGsyk3CT2pk+iYTY
- 8wSxf2c5kwiVwD9wU2KXFzKeLVr15eAMyVjAYN8OvEnmOs3F/GMNoIg==
-X-Gm-Gg: AeBDieunUGtoo01bZYMuhZQ0sup6TC2tMESP801kc91ukfmYZdMHgcBMXMyw1Ayg2oG
- Dtyid4y+w2rGQnX8FX5HN3eNGM8BkTq+YteQEHxBDcUTRjphF/UavdrzZiArev5tTuHaVlF4VQr
- 0HnX7CIrqXi8NZ56dzhula0C4SB4YI5+b2hicmfXpwtQXmBKfYizI9xCRNx123tJlCJuXaen7CC
- Q47mGHveK61swAw9cZpPRZLb8wnWk9Jlo2npswie4gdMDlByxUtfym/vZb7UAagJmOFsp5ElVgM
- dAKHwkMgeIc9ilxGK5Lf
-X-Received: by 2002:a17:902:db0d:b0:2b2:4fe3:7b89 with SMTP id
- d9443c01a7336-2b5f9f52879mr112233285ad.38.1776651210520; Sun, 19 Apr 2026
- 19:13:30 -0700 (PDT)
+ bh=/5D6raRhEKwZLcrmQVoD9LzZw4kHPgBzy3EoJopOVWU=;
+ b=HOFkEqt6ZABnT4wJtcvZF876oaD+Je8AQM5PtUz98rupXICCOZXoSIVooYrZ8WhU9+
+ XNK6VZeRQJo71ShULm82R/Ns/jcO3oPuK7d1d64PKfrAnDDSQQdoCKiEBwsaAXBJXD3/
+ m71kj8Vti4jr0jVKFt2Qp0AxOZ/FV4yH2bQBVnAIHoebGY1Huq5MHPwMrHHXkPHjrYNc
+ EaRM+ttCxYMX4X6rF/vPTRaW/I7eZFbgNYcyh704nlaF5JjZieLMacrDUioaHRsvxTRb
+ HzAXznj3ZCWacbshIvZweh5pYacT/CG9DM4QwLPuFeX1ME45rr80OQFE2Lt8mWMtg8td
+ r92g==
+X-Gm-Message-State: AOJu0Yz1nFSUMet3bD2nTj+Hej05obI7NT4StX+azKjKQ/w/3poT63Hd
+ 6MkqHVs7NryAhlJEWBI36iKOqk/ZOHVQkknCzMTejBPSSW03LjTqyx78zQUTq+eNc6zc2+ondbI
+ zro1ZpgIG0DdmtCAUJIi4RF9hb6N1J1bPRuEEhiVq
+X-Gm-Gg: AeBDiesvJ5DUYNM2j4LOhjOcFpQ9amxuK6wwZzj5FJ3hne4adBk8bdChcNBVbr2okjP
+ /STub8v7U96rfRaf2gvs6PZ81pZPQUJAM8Yx//EHw9Mq4zgLYGCJW8HTJfuC8dsFdm7dh2N/Ezk
+ 6X8BFr6YBm65GMMjiV+cKDKX7+eZwj3bkMQBlX8yAhOB8+RJotFPkXCW8Yzx3wB9HwZ6V9+FVN3
+ W5oGRV0UfyWCSsr15NLCdAN6fDutYH2nJmGlGQLZIMrmi2QA0Vpt6Q20dSab4fknukJNLuEmtlx
+ kQAvbFljr0AJwH83GNIb
+X-Received: by 2002:a05:6a21:e082:b0:3a0:c285:e51f with SMTP id
+ adf61e73a8af0-3a0c285f0bbmr4665828637.52.1776653385798; Sun, 19 Apr 2026
+ 19:49:45 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260417130204.49896-1-philippe.reynes@softathome.com>
- <20260417130204.49896-13-philippe.reynes@softathome.com>
-In-Reply-To: <20260417130204.49896-13-philippe.reynes@softathome.com>
+References: <cover.1776344788.git.jcethrid@gmail.com>
+ <fa6c603f6665c1da2fd84c027b7417e7bed1b180.1776344788.git.jcethrid@gmail.com>
+In-Reply-To: <fa6c603f6665c1da2fd84c027b7417e7bed1b180.1776344788.git.jcethrid@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 20 Apr 2026 14:12:41 +1200
-X-Gm-Features: AQROBzCNrNb1LPDNL6b14tYnD24uqymil6ER8YmihBCXgACCeliQMTCB5vcT7JM
-Message-ID: <CAFLszTiBscZPVs93mT8qXG1rt=vYxwohSKaPjctx+vVC0VjZEA@mail.gmail.com>
-Subject: Re: [PATCH v4 12/14] tools: preload_check_sign: add support of ecdsa
-To: philippe.reynes@softathome.com
-Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com, 
- trini@konsulko.com, simon.glass@canonical.com, u-boot@lists.denx.de
+Date: Mon, 20 Apr 2026 14:49:29 +1200
+X-Gm-Features: AQROBzCiez5JZbZm4Xp5n7dZ6YEqjXu4gFN68el1IxKIEuHSxuVx0LddVIJAx9k
+Message-ID: <CAFLszTg8uKY5gkoHOU_=xjdaDVWvQ-9-dGtUKwTeRciBhtBJ9g@mail.gmail.com>
+Subject: Re: [RESEND v4 01/14] configs: sc5xx: Do not store environment in SPI
+ flash
+To: jcethrid@gmail.com
+Cc: u-boot@lists.denx.de, malysagreg@gmail.com, trini@konsulko.com, 
+ linux@analog.com, philip@philipmolloy.com, 
+ Caleb Ethridge <caleb.ethridge@analog.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,29 +111,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Philippe,
-
-On 2026-04-17T13:02:04, Philippe Reynes <philippe.reynes@softathome.com> wrote:
-> tools: preload_check_sign: add support of ecdsa
+On 2026-04-16T15:19:35, Caleb Ethridge <jcethrid@gmail.com> wrote:
+> configs: sc5xx: Do not store environment in SPI flash
 >
-> right now, the tool preload_check_sign may only
-> checks an image with a pre-load header with rsa.
-> We add the support of pre-load header with ecdsa.
+> Remove config option enabling storage of the environment
+> in the SPI flash, to match shift of programming boot media
+> to Linux.
 >
-> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+> Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
 >
-> tools/preload_check_sign.c | 29 +++++++++++++++++++++++++++++
->  1 file changed, 29 insertions(+)
-
-> diff --git a/tools/preload_check_sign.c b/tools/preload_check_sign.c
-> @@ -8,6 +8,9 @@
-> +#define OPENSSL_API_COMPAT 0x10101000L
-> +
-> #include <stdio.h>
-
-This patch uses EC_KEY, EC_GROUP etc. so can you add <openssl/ec.h> ?
+> configs/sc573-ezkit_defconfig          | 4 ----
+>  configs/sc584-ezkit_defconfig          | 5 -----
+>  configs/sc589-ezkit_defconfig          | 5 -----
+>  configs/sc589-mini_defconfig           | 5 -----
+>  configs/sc594-som-ezkit-spl_defconfig  | 4 ----
+>  configs/sc594-som-ezlite-spl_defconfig | 4 ----
+>  configs/sc598-som-ezkit-spl_defconfig  | 4 ----
+>  configs/sc598-som-ezlite-spl_defconfig | 4 ----
+>  8 files changed, 35 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Regards,
-Simon
