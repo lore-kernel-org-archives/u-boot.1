@@ -4,92 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D3B6F5A8B8
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 20:35:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB5AFF5A8BB
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 20:35:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B45228448F;
-	Mon, 20 Apr 2026 22:34:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 211A3844A9;
+	Mon, 20 Apr 2026 22:34:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QiR9ATuA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HZEpFovV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D2D2843C0; Mon, 20 Apr 2026 21:42:51 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id C151E843C0; Mon, 20 Apr 2026 21:43:16 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1708843AF
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 21:42:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C67A9843AF
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 21:43:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-ba60d78aff3so290877666b.2
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 12:42:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776714168; cv=none;
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-b8f97c626aaso544389366b.2
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 12:43:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776714194; cv=none;
  d=google.com; s=arc-20240605;
- b=HLFLrjDEvRLMPLhyacQpo4h3TzNN4IgLFi76OLplJrZ7cjaFF3XtVPfsgCD7wGDf2F
- n76sbPJ+eCzQk5BbuN9S/s3GgkLN+gu6hZ+awPFw3PfWVfqCH+cza3osmJ0mS0Igmhvp
- yfg7QzkfO+qwj2jQha2BPSacXJ4viWWp9CKc6oiBzwfnRUeJ68/YrdMnIDrGwbmb1QCZ
- XOyNPiruE5yEZgv6juWFiPYxzB8VZhwl+CYM9lteFLatcPFY9Q80VC1Yyh4r6I2NPuwB
- XEl3m7s68rbCUXiyt7HuvkWjnrSXmju7zDtkPVh53lg+vnVasTAI4OJggICuxwpmc7fS
- p0oA==
+ b=HrVUlQAnS8XtJQXbo22t0/XyTdy+2zqsT+1zzNcJpa+PQf/T2fhvZSe6PTCYisIt8u
+ D2eabd304jNHOTDWHYeqaEW/6GIBsYxMX98SE33GbWaBKGAfkQ0FPebdn+e3HQaku/kQ
+ ihTLH0wVhOdu1cUySOnZCcmbSJDgrAFTdYyKMh2aE8xkFSWaNiF3cObxLyN+mReK0xFy
+ 7bIzLnds1V9CcLLPEpwb/rIg8I2gMpIWnjIkVj/aJk4Slu8zR1GYQIrhHt2AXVzRTIvv
+ IFyrnBGw+XF1Ps1nBeKZUPI0hmy/kJvE5qcTXgcnDjv8L5KD9VbbyJ3WsDxuaDH0QuPN
+ 7Mvg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Ay8F/BTYwPDSV/SFkypuI/ltVZXRrxcnRaPDPv42+3E=;
+ bh=MPQTnKrw7KOMiwluDMN4lXZLBDL2F6s/U3vxClxzFiw=;
  fh=B11T/ZyKvSxF0qhOl4M7rr4wqKWwkB2JbP3jqmHnKhk=;
- b=JZlp2XV0UcfH6E/JX3mtW5uzqA8XDVfLVuelIlgOKLqc/rdySatwa9EZHYrahY3bCM
- I/79clZ14Xj2Il13/uIKQ9x3JowHUfMRxXryMx0MP7I1XVbDVufGKjbG5d+DqgDVX5Hs
- BnOwtGSoaQDE1LxnqfGrAFy8hwTSQyFUl+De51CVszPwSOWbsVqP+Ek/d6GOL0WHRXcM
- noCoIukSW+GKes8mEoyRg1ROvwN6rlxOFYwJ8UUqxzEigGGawijy91TH66Xa0b92FKWx
- Qya17GFf2H16aMFHirVmk55HWSkgrJhE+ZD1AArwqnOYc9llMNg7peeRnFFUGIY9ZrvJ
- sUkQ==; darn=lists.denx.de
+ b=bDk1KpvQhqZKAin4L/n3iqbcY+GXxF1Q7M0BiKse5s+N0oRgl1bJdZ3b95qQ/PH4ll
+ efb6uV1hPxmkiTCgKM7QOvcQ8C57GoWSyORZjwTIgqx2juCyumUhMcVXqMwLhP1fr2Tj
+ KIV2m1hPi5frCYvE3zWlZtUWIvqW2ZV3gGPniwcpW+xtf6nOUh0cgHCKG/2f/ySpLwH2
+ 64MT+jajf7m6ZwpfS0EHDhIUaiZBDXmRImNdRc0qM7vlXIXDgTFPx3glrd5Jn7U5pLRo
+ /oNF2/mjMwriWHJ8gGXEJgG0GZAq2FOub6peVjgAAfe5LXLOPdvqPmhjDZmBX/7SvRTr
+ vDAA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776714168; x=1777318968; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776714194; x=1777318994; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Ay8F/BTYwPDSV/SFkypuI/ltVZXRrxcnRaPDPv42+3E=;
- b=QiR9ATuAPmN+FGGQupfSeij96tKeFqrFlvLzzH4DfDHoeXG+GHGg6Pd2Fmg8xXNmkt
- Otg1EAsoxT4FJxOHjt5lfgvZB8qs4KcntlH26OokEhDGsNgeJK+Oy+3xgIbMMU4x37fk
- EIXJOW3JjI2iTMfWWCTd/4rdb3WYjqUEoUtRI=
+ bh=MPQTnKrw7KOMiwluDMN4lXZLBDL2F6s/U3vxClxzFiw=;
+ b=HZEpFovVJiyMdNBXxhmkfJlI5HLOK4bM4GAoFzihLTWHSPTIqnkRrttyxJ/h7g56JH
+ RqRiQQCruVeDFXk5qnmpimP1eGmsptjnrs81QABSupddf3ubrqdDU4PEys5ZSQjrPVLA
+ aKCD/DWwSF/VNqcZPaKw5eSQFXppndi16jM38=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776714168; x=1777318968;
+ d=1e100.net; s=20251104; t=1776714194; x=1777318994;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ay8F/BTYwPDSV/SFkypuI/ltVZXRrxcnRaPDPv42+3E=;
- b=RS7MlOgoeYphbYSow+UkcwT7jiO+4R5pzJWJgyMeMTkc+taviXXxUv4Vt8r6hVEtOe
- eGGDu1I152EAtmP2NxdqYghH4TnhK2/5KzZTOR5uJC+Grf1nioQwVrVO5zNDV8E6RXEv
- 5qvIX4ftzuAk+D+v2SqG3GQfMofzzn2V8Mz3sKgL4+CQlnhzXD6K3F+YE2noOqEfaYhl
- 4dDVOAJzTtJvQDaC4hmNIZfZ2uKNoyDTGlc2pfHttcVcOLz05KvTOTR3ToV/aQWQfoKv
- u2gqlZMwzNDvIDSuPDobSfBhzQlR/j8Ewuh4/bhzq6wB5tvKNFVwrPVHMjHCYP7bCAFQ
- m1EQ==
-X-Gm-Message-State: AOJu0YwDymV0L0NWXAd1as7ZNjnzo+XVRi93Exg7SxOiTKfk0xwKap3x
- FYtRTb/n/ihgo1xlD06wxxai1xvmi+x6wyeM1wjNn9et3LN38nvFW9bnbaEYilTx16Vxu5fAkqC
- N6HazveXjy2quM1N9FqxrgnRp2prPZkKO1e52dbDL
-X-Gm-Gg: AeBDiesjxMp76Yh56XN8QMohwYFJeS7p6TejmhwciYopGa66+jdg7trQOGPPTyo52Pv
- +6LFppedc7YdYlfe5BhxS5SBMrkW5v5X0xGH+fQvwa3BnmuAqvAypgUT+JOUCzjJA7Ku9+davxX
- /XS2epQMgJZDSCpG0vPO5cw+7Oy7fb5q2Lwaf1B+QjXMkJvx5b6KjU3RbnNeAqtlu5FqzlUo2ns
- WGk7V0/frdmXCx09pqByJ8CWP+b5FFVxWvU6gycavC8c22YNz+yMDrJxQgt4kE53LFkYLODp4Sr
- 5thyfVphvAbiLnAT0MUu
-X-Received: by 2002:a17:907:3f9d:b0:ba5:20b1:c13b with SMTP id
- a640c23a62f3a-ba520b1c177mr549344266b.28.1776714168006; Mon, 20 Apr 2026
- 12:42:48 -0700 (PDT)
+ bh=MPQTnKrw7KOMiwluDMN4lXZLBDL2F6s/U3vxClxzFiw=;
+ b=Dqba7NonuOCUoZxqD3Lfg63HP9HfY11iLzh2DLBtT1cLFsNVCSF1Xa/8RZEe+UWiFy
+ tJzMZ+aL1bUTQryhUE45zDAqERvCOeY9k6qT8+/5LvRuwsv/YdFZbvoPABihQagJ95BR
+ mzJ6gjy7WimiYcOQRfjtiO5A7bUzm/NW0oofdmcUE08qYUcmtfqvCoLv7CfVB7tMGCyn
+ z7qqZfQ+832wxXbh10oNfaDp+/TGYDyJ5kPdcKBC0VwN4LAf0GTrBTM9i2Hrf8ciQZAE
+ 3ARWG2RrC0DDeCYy8oI6qHJ5U+0HHSYboykCKnAzzB59Q8iItQ5fw8ZJNTQDyt4nDT7s
+ Ukng==
+X-Gm-Message-State: AOJu0YwEz7D0WZN29M+gw9y13JDte+sVppHQ21obZLtfcYCk/QdHR/wQ
+ r7KIXAh63GTN+3a5nepmuClKm1G8fHj3WLAtas4IMtzypMZQ95etEiGq705s3zzNf/h1VwJTuVU
+ dH+4D8W09BF2uB4Y4xU+in0aRNKCLwb7IsSvmJe6j
+X-Gm-Gg: AeBDietvcOWx9/zQKQ6CuM5/ZfZj1Ck1L4iJ9mMmMYcr61x02X5cUrCQTp5D6lANFhI
+ Kn/dH2bi3g73t6TkV5aVdcY6hHKwMqsas+WIAP/F+qDbhoM8n7HoRcdzEZ/bdcpa9fennF0AirK
+ GrZK/X1CfkDHON4kooIx7UgpkTu9NsyGl7Hg2Dk2E7bIOyHBjORyP5SpkU8MC6UKCIscS4GA6Sy
+ 5uPaOAVVXrNdHEwXjlMj6G4EuT9lLHe/LlmT3EpdZ3EHNJUmwkgSrQWpwpAvVkT/Tk8Iwg0V8O5
+ mLxo8RhHv41WzXSztuIu
+X-Received: by 2002:a17:907:74b:b0:b9c:2a5f:41c4 with SMTP id
+ a640c23a62f3a-ba41e4fd92fmr726116566b.40.1776714194058; Mon, 20 Apr 2026
+ 12:43:14 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
- <20260420-net-kconfig-v1-3-9900002d8e72@cherry.de>
-In-Reply-To: <20260420-net-kconfig-v1-3-9900002d8e72@cherry.de>
+ <20260420-net-kconfig-v1-5-9900002d8e72@cherry.de>
+In-Reply-To: <20260420-net-kconfig-v1-5-9900002d8e72@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 21 Apr 2026 07:42:33 +1200
-X-Gm-Features: AQROBzBBD6QWXgHXqsAjqUBUSofUJnydf3AlVzyEs0FPNUlgYAhIX3iqwKpVkiY
-Message-ID: <CAFLszTh3hYDBX1LbegMCGqOE4JPyNr2yBTkX87Av_qptXqLLZg@mail.gmail.com>
-Subject: Re: [PATCH 3/6] net: make NET a menuconfig (and downgrade NO_NET to a
- simple config)
+Date: Tue, 21 Apr 2026 07:42:58 +1200
+X-Gm-Features: AQROBzDc_c4NOu8SWKf8MZOUlBGOK6J3WKsf0IZekifA_j1uSCNB-AAv0nKd-G0
+Message-ID: <CAFLszTgaU-UpCdnsF5XSZWxiAr5BwT2M6ZgSoFmqv4ExNmoGwQ@mail.gmail.com>
+Subject: Re: [PATCH 5/6] doc: remove mention to non-existing TPL_NET
 To: foss+uboot@0leil.net
 Cc: u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com, 
  Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>, 
@@ -175,38 +174,15 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2026-04-20T11:36:06, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> net: make NET a menuconfig (and downgrade NO_NET to a simple config)
+> doc: remove mention to non-existing TPL_NET
 >
-> This will allow a bunch of simplifications across the code base.
-> Disabling NET is the equivalent of today's NO_NET choice. This means
-> that if NET is enabled, either the legacy or lwIP stack is necessarily
-> selected, which allows us to simplify if NET_LEGACY || NET_LWIP into
-> if NET in a later commit.
+> TPL_NET symbol never existed in the first place, so let's remove this
+> misleading piece of documentation.
 >
-> Config fragments - or defconfigs including other defconfigs - setting
-> the network stack (NET_LEGACY or NET_LWIP) must also set NET (or unset
-> NO_NET) if the config they apply to - or the included defconfigs -
-> unsets NET (or selects NO_NET) as otherwise the NET_LEGACY and NET_LWIP
-> symbols are unreachable. This is the case for the two defconfig modified
-> in this commit.
->
-> NO_NET is now a convenience symbol which hides NET entirely to avoid
-> modifying many defconfigs. If one selected NO_NET to disable the
-> networking stack in the past, this will still work for now. Technically,
-> we should be using the 'transitional' Kconfig attribute but that is only
-> available since Kconfig from Linux kernel v6.18 and we're on 6.1 right
-> now.
->
-> Note that this moves CONFIG_SYS_RX_ETH_BUFFER from under the Network
-> menu back into the main menu as it seems like it needs to be defined
-> even when there's no need for NET support at all and menuconfig option
-> doesn't work the same way as a menu.
->
+> Fixes: 143c9a7e9d68 ("doc: describe TPL/VPL/SPL boot")
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> configs/am62px_evm_r5_ethboot_defconfig |  2 +-
->  configs/j722s_evm_r5_ethboot_defconfig  |  2 +-
->  net/Kconfig                             | 23 ++++++++++++-----------
->  3 files changed, 14 insertions(+), 13 deletions(-)
+> doc/usage/spl_boot.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
