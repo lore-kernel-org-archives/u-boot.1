@@ -4,51 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53150F36C51
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 08:08:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1832F36C51
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 08:08:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3CCB83E16;
-	Mon, 20 Apr 2026 10:08:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=secom.com.pl
+	by phobos.denx.de (Postfix) with ESMTP id 280FB842A4;
+	Mon, 20 Apr 2026 10:08:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=secom.com.pl header.i=@secom.com.pl header.b="QAJm11bN";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="f6zDL1Uu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C920C8426E; Mon, 20 Apr 2026 09:46:53 +0200 (CEST)
-Received: from mail.secom.com.pl (mail.secom.com.pl [213.216.87.26])
+ id 5A7A58426E; Mon, 20 Apr 2026 09:49:29 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91EF483693
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 09:46:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 474CC83693
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 09:49:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=secom.com.pl
+ header.from=canonical.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rafal.hibner@secom.com.pl
-From: =?UTF-8?q?Rafa=C5=82=20Hibner?= <rafal.hibner@secom.com.pl>
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.secom.com.pl 346A943FF65
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=secom.com.pl;
- s=default; t=1776671207;
- bh=xORqtN/eo/TCOMmpsDLyJPTyrFpsWAsaEf+WoOwUkxA=;
- h=From:To:Cc:Subject:Date;
- b=QAJm11bN/gFwFDPe9UlfJiNBAU6NXy2yLjO332Nqr5gy7cf5EF7gwKXKz4w1KYx7r
- jxrNVvduWna18Xqw2p7cNAwGZvS6wICqhtKOvTDExgNGrKcB6KSvBZUyO1gajNhM/3
- H10uQpgJxQesLiUZQ1Aul01ik9Zqdg+A6zbsILo0=
+ spf=pass smtp.mailfrom=aristo.chen@canonical.com
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
+ [209.85.210.197])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id DF83F3F129
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 07:49:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1776671366;
+ bh=8ZwmdDQep1SdIjUDi9MdmGUbTqoIvotlY/qyRLmOGzY=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=f6zDL1UuLtuP8u94cmOL63A23ea/ULQiJMkHWbpnOp4ah8tbu8XrKl99Q6NDlHgMg
+ KicIOxGLIs9xnK4ul0Zt/mQYo75f8A7dJZZDldrbDccYaGNCRZ+N5dLyurnwu7aCtI
+ zZ2quEgjwcylMqaj6/638Sgv5bF1xhFrbSSHEACDy+Dq4BBLAJD2Nppk9IrSGNsEs5
+ X0J9I97iNCCg/1drXPt/dU2gnm9Km5Cx9PkJCqArrF/G2fFzxXfG5Kpo8r1AJ+oewe
+ lHwdc9wju0oacrsPN3Yj/5ZgLTRbe78fjoQ17HVQ6qClGPBc79EEF1VBO+vwKG8xfb
+ iFKheUfvJ25RWIR1R2Mew3+U2u4w8rvtl9NjnBvIMKJHkOMmWptDY/5Omk6ag6+Dv6
+ e5LVBsXlYRSah4UR7ieBtAxZlfYJESajDHNJIL4bsvmHLuMkBIE/nuHbGv2v5Gyi46
+ rYZNPFMoHnigq+OsrDL6b/kTkxYglDkpOV+PyvC4UaRX17l8QGSDLL/86pz0ntJuGn
+ Q9dUQ6Us/LmILlifp3Pf6qe5oz3+07e7NOTioXTSpDKOpYhvzLjpQ6OK+N+zKn7RSK
+ fUbBtyu2eKcWmX/AAbGtu2Er+O0QE/Twj/6GyM49s7tlBHDRuJMhve8EHrouuHjWgN
+ 6KwYpmcrYWChwo9z+umR3qnE=
+Received: by mail-pf1-f197.google.com with SMTP id
+ d2e1a72fcca58-82f0f2b2641so2014417b3a.3
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 00:49:26 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776671365; x=1777276165;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8ZwmdDQep1SdIjUDi9MdmGUbTqoIvotlY/qyRLmOGzY=;
+ b=EGzeWM0D9ERNThTYXBIEUKRP8o4dIGk0KKFtcoemVrPvpeQ8UwTtnFeGWCkkakgVej
+ D/Lp/w5mAITrUskT2Km8xQ2FSNaZnF1gTdsHmrBMxmCreg8HCUa0Y96jmASfksx57dd8
+ ToHMHxoZsyppuwiKlNTFy5N74qMAO1qHCjnMjmvWKzIpF0ZhEiWs+ITbzhZEngIXy9SP
+ 5VeQvzf8EPt6g1oi2jfseSDtdWVHoJGtTYV0g0sh/cj7cAXqUSnxomqEpo8+Uxp/8sJt
+ ANatnXZPVA2nNaNF2e1oOwUIEDqZFiMLH/2QBWQMMov29vv+HQBjKqWD3evmR7Urb1Wz
+ XuQw==
+X-Gm-Message-State: AOJu0YyhdIuC5wOCaoYfxAp9RJ5pHzM5svJ832up1MOy4utHCtrhECIc
+ GIYKEhFR8ToxU5202p8zVH3KTsf9AzIZdqGuW0QLSY0oA1bHfO03GaVjhxOQ6gbbdfNXvXs7xOg
+ pvmPIt/WdTiAYlxfaJp+KuWxzipXv4nRqcYqOHtgPfSnhN5OOTXPUV7ILw80xY49iyNi6fc48fW
+ 8yvIM=
+X-Gm-Gg: AeBDietFKvvEM/wETyl6V4n++MLkAS8IvjRTdh45TMx7FMvuOEKqxOKFDROrWLbFBBT
+ A6+RfgtEh51Q1kh9lyKS7aWJDil0aBoJC6kxxB5BKnhx3DNu+L1aKRsFwN4lDqqVenivZTYHJCP
+ MCB7mxq1zQRQR72QcOD74cGIKmPL/Ay1H26yOVCg036RGnQfMyZpSOO8pTkv/hYHz3J5TVbuzRt
+ 3F8UcdltzwuFj6YxVVIQBUsjjSa/x8uwacnuZyoxEmNqMySI9YKdqCDWEVOqoae7oiGxJww5Eff
+ Vnb/LEkgNQFGTs20034lYFc16GpLZ7BkKeXQgbbc+aXWZXEmA/zjIrHJc01gpjuQ/UACs62u8Kq
+ l4SROqUVRGgG3HVwfE5HQ8W0MM77Y4UrTvPzw0rytzO/rppr6ojqRjrbGfZK7L7+zWDaPF0F1te
+ Sx3nVmxtc=
+X-Received: by 2002:a05:6a00:1956:b0:824:afe1:f7e3 with SMTP id
+ d2e1a72fcca58-82f8c82bc5fmr13716621b3a.15.1776671364962; 
+ Mon, 20 Apr 2026 00:49:24 -0700 (PDT)
+X-Received: by 2002:a05:6a00:1956:b0:824:afe1:f7e3 with SMTP id
+ d2e1a72fcca58-82f8c82bc5fmr13716586b3a.15.1776671364347; 
+ Mon, 20 Apr 2026 00:49:24 -0700 (PDT)
+Received: from noble-uboot.lxd (124-218-37-86.cm.dynamic.apol.com.tw.
+ [124.218.37.86]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-82f8e981a0asm10134077b3a.3.2026.04.20.00.49.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Apr 2026 00:49:23 -0700 (PDT)
+From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.denx.de
-Cc: michal.simek@amd.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
- jerome@forissier.org, trini@konsulko.com, venkatesh.abbarapu@amd.com,
- martin.kaistra@linutronix.de,
- =?UTF-8?q?Rafa=C5=82=20Hibner?= <rafal.hibner@secom.com.pl>
-Subject: [PATCH] net: zynq_gem: Clear stale speed bits in NWCFG before setting
- new ones
-Date: Mon, 20 Apr 2026 07:46:40 +0000
-Message-ID: <20260420074640.4036119-1-rafal.hibner@secom.com.pl>
+Cc: Aristo Chen <aristo.chen@canonical.com>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/1] test: fit: Use shared make_fname from fit_util
+Date: Mon, 20 Apr 2026 07:48:05 +0000
+Message-ID: <20260420074827.3917463-1-aristo.chen@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-MailScanner-ID: 346A943FF65.A1566
-X-MailScanner: Found to be clean
-X-MailScanner-From: rafal.hibner@secom.com.pl
 X-Mailman-Approved-At: Mon, 20 Apr 2026 10:08:02 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -66,38 +112,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit ecba4380ad26 ("net: zynq_gem: Update the MDC clock divisor in the
-probe function") changed zynq_gem_init() from a direct register write to
-a read-modify-write pattern in order to preserve MDC clock divider bits.
-However, the old speed selection bits (SPEED100/SPEED1000) are never
-cleared before OR-ing in the new value.
+test_fit.py declares a local make_fname closure that is byte-identical
+to fit_util.make_fname. Drop the local copy and call the shared helper
+at all seven call sites so there is one definition to maintain.
 
-When the PHY renegotiates at a different speed between successive calls
-to zynq_gem_init() (e.g. link flapping from 1 Gbps to 100 Mbps on a
-marginal cable), both SPEED100 and SPEED1000 end up set simultaneously
-in NWCFG. This confuses the GEM hardware and no frames are received.
+No behavioural change. Both implementations return
+os.path.join(ubman.config.build_dir, basename).
 
-Fix by explicitly clearing both speed bits before merging the new
-configuration, so only the currently negotiated speed is ever active.
-
-Fixes: ecba4380ad26 ("net: zynq_gem: Update the MDC clock divisor in the probe function")
-Signed-off-by: Rafał Hibner <rafal.hibner@secom.com.pl>
+Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 ---
- drivers/net/zynq_gem.c | 1 +
- 1 file changed, 1 insertion(+)
+ test/py/tests/test_fit.py | 24 +++++++-----------------
+ 1 file changed, 7 insertions(+), 17 deletions(-)
 
-diff --git a/drivers/net/zynq_gem.c b/drivers/net/zynq_gem.c
-index 407b022508c..f18458aee98 100644
---- a/drivers/net/zynq_gem.c
-+++ b/drivers/net/zynq_gem.c
-@@ -612,6 +612,7 @@ static int zynq_gem_init(struct udevice *dev)
- 		break;
- 	}
- 	nwcfg = readl(&regs->nwcfg);
-+	nwcfg &= ~(ZYNQ_GEM_NWCFG_SPEED100 | ZYNQ_GEM_NWCFG_SPEED1000);
- 	nwcfg |= nwconfig;
- 	if (nwcfg)
- 		writel(nwcfg, &regs->nwcfg);
+diff --git a/test/py/tests/test_fit.py b/test/py/tests/test_fit.py
+index 619f73153a0..3b60f814c85 100755
+--- a/test/py/tests/test_fit.py
++++ b/test/py/tests/test_fit.py
+@@ -119,16 +119,6 @@ host save hostfs 0 %(loadables2_addr)x %(loadables2_out)s %(loadables2_size)x
+ @pytest.mark.buildconfigspec('fit_signature')
+ @pytest.mark.requiredtool('dtc')
+ def test_fit(ubman):
+-    def make_fname(leaf):
+-        """Make a temporary filename
+-
+-        Args:
+-            leaf: Leaf name of file to create (within temporary directory)
+-        Return:
+-            Temporary filename
+-        """
+-        return os.path.join(ubman.config.build_dir, leaf)
+-
+     def filesize(fname):
+         """Get the size of a file
+ 
+@@ -156,7 +146,7 @@ def test_fit(ubman):
+         Returns:
+             Filename of ramdisk created
+         """
+-        fname = make_fname(filename)
++        fname = fit_util.make_fname(ubman, filename)
+         data = ''
+         for i in range(100):
+             data += '%s %d was seldom used in the middle ages\n' % (text, i)
+@@ -265,12 +255,12 @@ def test_fit(ubman):
+         ramdisk = make_ramdisk('test-ramdisk.bin', 'ramdisk')
+         loadables1 = fit_util.make_kernel(ubman, 'test-loadables1.bin', 'lenrek')
+         loadables2 = make_ramdisk('test-loadables2.bin', 'ksidmar')
+-        kernel_out = make_fname('kernel-out.bin')
+-        fdt = make_fname('u-boot.dtb')
+-        fdt_out = make_fname('fdt-out.dtb')
+-        ramdisk_out = make_fname('ramdisk-out.bin')
+-        loadables1_out = make_fname('loadables1-out.bin')
+-        loadables2_out = make_fname('loadables2-out.bin')
++        kernel_out = fit_util.make_fname(ubman, 'kernel-out.bin')
++        fdt = fit_util.make_fname(ubman, 'u-boot.dtb')
++        fdt_out = fit_util.make_fname(ubman, 'fdt-out.dtb')
++        ramdisk_out = fit_util.make_fname(ubman, 'ramdisk-out.bin')
++        loadables1_out = fit_util.make_fname(ubman, 'loadables1-out.bin')
++        loadables2_out = fit_util.make_fname(ubman, 'loadables2-out.bin')
+ 
+         # Set up basic parameters with default values
+         params = {
 -- 
 2.43.0
 
