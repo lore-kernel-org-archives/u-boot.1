@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DB7BF588C1
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 12:55:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BE30F588C6
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 12:55:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27E4C843A4;
+	by phobos.denx.de (Postfix) with ESMTP id 6696C843B8;
 	Mon, 20 Apr 2026 14:54:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="W27biTsp";
+	dkim=pass (2048-bit key; unprotected) header.d=0leil.net header.i=@0leil.net header.b="NNH4Ht+N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D79B484314; Mon, 20 Apr 2026 13:37:07 +0200 (CEST)
-Received: from smtp-8faf.mail.infomaniak.ch (smtp-8faf.mail.infomaniak.ch
- [83.166.143.175])
+ id DE7D1842F4; Mon, 20 Apr 2026 13:37:19 +0200 (CEST)
+Received: from smtp-8fa9.mail.infomaniak.ch (smtp-8fa9.mail.infomaniak.ch
+ [83.166.143.169])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1EBE83E16
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 13:37:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE93C842E6
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 13:37:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4fzk3j4Lgxz1C8S;
- Mon, 20 Apr 2026 13:37:05 +0200 (CEST)
+Received: from smtp-4-0000.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:7:10::a6b])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4fzk3x3vB4z1CVM;
+ Mon, 20 Apr 2026 13:37:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1776685024;
- bh=dMDVLAdSvV9BSwqv2zQX+ZmcGWxQsKYHWSsBm0i2RPg=;
+ s=20231125; t=1776685036;
+ bh=xhCNG2uVzJz/KV/kZ8NgnhgK9FozsrveIiXTHtIoS88=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=W27biTspq7QosE2ZYRbsQDaEbr5YSTut6AbhwmU8R/ehWykftAYKGeZMsXvh4ydLu
- A68DwAiIYdZKPU6GHXbJqJ8aaxSAJB+uuwEnk16qTAQd7UghE5JSnVwV5+h01MiAZJ
- 9m2QzNemvtsl0ICVCPP3nsmofbZcO3se/bBQ5gwxPD/0HDVP+laLHb2bpN7Coqs+Bo
- hZ1YIlNNci8VuOrMKwH3ERcl7/9Tc9KyycCbjXRGVRwo3fU9qlCmmPF8rsem5X79Ry
- gfGyAkmZYPCkfhxEToVyPpTLTstQamID/vRwhtZ8tYcZXi6pTGUN/eLVONPft2AJ+D
- bFABRvJY/ClZQ==
+ b=NNH4Ht+N32/PilarT4VGkRd/IN+JS0cbOs6XM5supXTaaN0aqNoDZ3DT+VsoEWwBr
+ hoQiQApA9o3oGW9WF55JUIMfv3xRv+JAid57PvamBAc9jm9AdVccboLHbB3Wnpj6vv
+ Bz12Tm37PaCfRLF1s056nne8B1a4xXRBugg3uG63axnsujDHOYgUVvLzpwJR3/OAd0
+ edLwezhJUHY7tJ8icegDPO4W78SLlxtkO3PGTp2keC7IhVGV+oe6bRtzqU38x2qK0t
+ fDhAxcJe+syEurIGfzSMHyKi8Ofxb0+tEgHtAa7E+sP4tzD7ia9tvE4me4ra5rQIaX
+ c1et2FcLzqKEQ==
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4fzk3Y3Tf4zWVl; Mon, 20 Apr 2026 13:36:57 +0200 (CEST)
+ id 4fzk3h2HpSzW4S; Mon, 20 Apr 2026 13:37:04 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 20 Apr 2026 13:36:11 +0200
-Subject: [PATCH 5/6] doc: remove mention to non-existing TPL_NET
+Date: Mon, 20 Apr 2026 13:36:12 +0200
+Subject: [PATCH 6/6] boot: remove NO_NET use
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260420-net-kconfig-v1-5-9900002d8e72@cherry.de>
+Message-Id: <20260420-net-kconfig-v1-6-9900002d8e72@cherry.de>
 References: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
 In-Reply-To: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
 To: u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com, 
@@ -142,28 +142,38 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-TPL_NET symbol never existed in the first place, so let's remove this
-misleading piece of documentation.
+NO_NET is now a transitional symbol which may eventually be removed. Its
+meaning is the opposite of the new meaning of NET (that is, any
+networking stack).
 
-Fixes: 143c9a7e9d68 ("doc: describe TPL/VPL/SPL boot")
+Update the symbol dependency by using NET instead of !NO_NET.
+
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- doc/usage/spl_boot.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ boot/Kconfig | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/doc/usage/spl_boot.rst b/doc/usage/spl_boot.rst
-index 93419f158af..64b8083e007 100644
---- a/doc/usage/spl_boot.rst
-+++ b/doc/usage/spl_boot.rst
-@@ -253,7 +253,7 @@ Ethernet
-     a TFTP server and binary name. The binary is downloaded via the TFTP
-     protocol. Required configuration settings include:
+diff --git a/boot/Kconfig b/boot/Kconfig
+index be6bb6d4535..ae6f09a6ede 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -431,12 +431,12 @@ config BOOT_DEFAULTS_CMDS
+ 	select CMD_FAT
+ 	select CMD_FS_GENERIC
+ 	select CMD_PART if PARTITIONS
+-	select CMD_DHCP if CMD_NET && !NO_NET
+-	select CMD_PING if CMD_NET && !NO_NET
+-	select CMD_PXE if CMD_NET && !NO_NET
++	select CMD_DHCP if CMD_NET && NET
++	select CMD_PING if CMD_NET && NET
++	select CMD_PXE if CMD_NET && NET
+ 	select CMD_BOOTI if ARM64 && LMB
+ 	select CMD_BOOTZ if ARM && !ARM64 && LMB
+-	imply CMD_MII if CMD_NET && !NO_NET
++	imply CMD_MII if CMD_NET && NET
  
--    * CONFIG_SPL_NET=y or CONFIG_TPL_NET=y
-+    * CONFIG_SPL_NET=y
- 
-     * CONFIG_SPL_ETH_DEVICE=y or CONFIG_DM_USB_GADGET=y
- 
+ config BOOT_DEFAULTS
+ 	bool  # Common defaults for standard boot and distroboot
 
 -- 
 2.53.0
