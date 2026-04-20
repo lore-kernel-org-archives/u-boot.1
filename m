@@ -4,84 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33634F588C2
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 12:55:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83F59F588C1
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 12:55:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43547843C4;
+	by phobos.denx.de (Postfix) with ESMTP id 8512B843D0;
 	Mon, 20 Apr 2026 14:54:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ee.vjti.ac.in
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=vjti.ac.in header.i=@vjti.ac.in header.b="aEgPoId6";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="QMALVH4n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AEC0384258; Mon, 20 Apr 2026 13:11:58 +0200 (CEST)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
+ id 9239D84315; Mon, 20 Apr 2026 14:00:48 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8813883E36
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 13:11:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 708FC8430F
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 14:00:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=9elements.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=ee.vjti.ac.in
-Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=ssrane_b23@ee.vjti.ac.in
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-2adff872068so13183615ad.1
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 04:11:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=maximilian.brune@9elements.com
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b886fc047d5so542229766b.3
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 05:00:46 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776686446; cv=none;
+ d=google.com; s=arc-20240605;
+ b=kvg9inAwGB/u51dyuxMjtriMLEy20p8V+Gjn0zBwNDry7ibbyNB8bLT2/Cxh2FLRmy
+ yfqzSM4ET196ugIzg083ty4pYdQld4sOJAT+AsI1mOZVYQRf1gNX9OB4p9tldEwHBQzx
+ twPV6CHvGu2Tps0LZkj89lKMokZaLqlp2J86Jt/omnF/FnMPVcsou+yqDl+UjtBxgabS
+ 2IeyxZL6SGFT/NBGdj1dfQDhwlquV/HQelybjMJ8QWzKy5QgoVPv9iv3CoHnSTR0Rdl0
+ bUcCm36JJA8umVsuiF7cRWsp1GQcp+xKbeRnDAn3cXodFYbmbZXGGppkEnVKya7H49t8
+ +THQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=+5HBIQRIriXlvOVBZ5WKfK8gWmBttM9F4dnYRh3wPSo=;
+ fh=dMdFMX2UbykiLaAWC9wn0drogMMZYE9vcx/dXwZQY4k=;
+ b=k334YzYoCgu+M2b4bnbNrlafvWhRUjgfchioYnU9FAtNQrpcRsToCMFBkOO4Z3NiF9
+ tw1RekwWxlweJsCcjdSz7OGApDYnVSwfrHkB9H4WANQ6cEM6ELKRrVC78q+/qNT7fgtW
+ lysVwiak4vZP/m8G0nQM+gbDwCyeK411jMGEu1t7RFP5hlDu4GZaPPr85s6CnqE3EBID
+ Bh/ig9UcBB0aSlzpr1H7bPLgxMtnmcWxuhUZtQ1AOwPtcdJYPSQ/d0Cc6JfuDsUPoKLn
+ 7KAo8xsHmNgS8+oZqwWtwQJe6U7f4p69ovDSYVtHaAkQ3ovUZNHmqsYkr9eoofUkVcpu
+ p/7Q==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=vjti.ac.in; s=google; t=1776683514; x=1777288314; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YJ2raXpVI6yfdStFZxc77dqeKykJmnlSTmCyX3O+ado=;
- b=aEgPoId6Ot2bZJA2OzroEXLMoTbXz8EYYZJ26PrX1cnbI+zW8K/C7iKM2gWiSQ4muy
- l1C5wopKtZXBNRvlM0SHpHUqvF32Ozuv0uUFBU1iUi/pzbwamRnwn5fz6f0C4gO7EjAc
- fd8dJiFiu4mhrPrmitKeaXafcL6V7JcxvxWFk=
+ d=9elements.com; s=google; t=1776686446; x=1777291246; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=+5HBIQRIriXlvOVBZ5WKfK8gWmBttM9F4dnYRh3wPSo=;
+ b=QMALVH4naDml9DTwTVgsMkQd8Ew0tjo/w6sf8X2gSiQSd1XGWchN28dYFhXsq9cs2K
+ 9GZ2MedcNSo/GmIhllKaNVvYgrT/UFFfeYGg1v2ys3jKDeWHBC++mU0ZV5MPzNlPNJP4
+ CAx783CTRmskMgo25D2o1GxqR/BMZ+OZkVotIxs/yat6K5CCB16oducUW55CVhRyi46e
+ scilGqmP0r8cyH3CNplIWoG0ttGjktcbCgN0OnF17QjD1OOUXm8tzDYGF17ivOGhf/F/
+ rBOvTySLHeWqNujirIL2MbDvFcgAHAKsgUivk8YP3oUUNJ+/6awx+gY59541E4FVlnlW
+ iDww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776683514; x=1777288314;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=YJ2raXpVI6yfdStFZxc77dqeKykJmnlSTmCyX3O+ado=;
- b=GesuikwF/iGMSbi3q0I/L/o0C0BaLRZMwxY8Bg1ZWXkRo+pmlsTYxIi1hZFhT1Ct4A
- ycQoVRc/AF9IS4KYBDaoR+lkA9euyfNeQGEnjku5oW/2HoQChPQONhhOwyOrY/vsmYjH
- k0obANmGXU1zXw6x91p3RSVtUnROU5crk7RhiBg7zF7TErwUMlt5qFW3WhCA8GbTYHUB
- 7yCfAzElURwPDLBInvzOfLcjJhIari9CbOgqeSZ3JL5dQdOwbOiYbMjW1DwuLoPnROB9
- 0i3OihGhWHqeEIkubX2PvzAS76oJFUT7D7B0YnaRdKVxGr/zuqN8vn9qZFmJm8yY6mJS
- btmA==
-X-Gm-Message-State: AOJu0YxGGK3NmBPfOsZ8wshGyzRUDK0GmbsVWnBelgYDF7k283gZZQax
- ffnw01KSp+Xzo1jD8WoeBfrECpcrgccTTweUvV3Vonl/Aun0Cnnu2oKFuoo9vIuV6dzN3UJv+L2
- J2kNIJfI=
-X-Gm-Gg: AeBDiesETHMCjuiVcUUmj9CuVRSQ4mVW7BpqWbZ+G4uwQFGc7vNGT/41aml9NtQOX2W
- z1HgzpZJ1BxzoORiZKGGLWtALsjJZHOQZpyqlb7P6kawiwLc6jKGIL8qDrsIGzYUlzB7kPAUA5h
- FfXqOYIHn2Q4jnNKjN6UgtGW+ZBBSI8sBN3I7g/JBy/45NbUmaOIlqzzWHNDYIS20aiEcMr8X7u
- tLG4NUgc5ugYnAKEt+EoDwfbFIMhux2lNtlfHdQVoy7/7Rz4Ytz3+UfkcyGwx9/7DCQlDhgU/1T
- lTfPw8yzr2GwxWgjq06nMZ25p5mAd4ZSbtawe0SRWHT0wcNiGBUsoeU8ZA7VJmwV0t9XZ5S7W2z
- jM5VhlwrFhSW0y/bf/vvrYqDZBbRbhvwclC2195qacQ84yVkAozylq8GO4SyG15iQQFdGmDxgKM
- UXwxGM6nGBVqa3b3VhpYGl6naIIAoN0krydrQx9dhq0jiz2y2+MsvgehaNRATtTqZiqT/saIyxK
- OvvfnzrN7EdwDU/TD80lGcGLcYFQyDs
-X-Received: by 2002:a17:903:17cf:b0:2b2:4d78:eec2 with SMTP id
- d9443c01a7336-2b5f9f1ab12mr132472165ad.18.1776683514573; 
- Mon, 20 Apr 2026 04:11:54 -0700 (PDT)
-Received: from ranegod-HP-ENVY-x360-Convertible-13-bd0xxx.www.tendawifi.com
- ([14.139.108.62]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b5fab30f29sm98792685ad.68.2026.04.20.04.11.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Apr 2026 04:11:54 -0700 (PDT)
-From: Shaurya Rane <ssrane_b23@ee.vjti.ac.in>
-To: u-boot@lists.denx.de
-Cc: jd@denx.de, tl@denx.de, trini@konsulko.com, sjg@chromium.org,
- Shaurya Rane <ssrane_b23@ee.vjti.ac.in>
-Subject: [PATCH v2 2/2] BeaglePlay: enable IT66121 HDMI bridge and video stack
-Date: Sun, 19 Apr 2026 23:05:40 +0530
-Message-ID: <20260419173541.31592-3-ssrane_b23@ee.vjti.ac.in>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260419173541.31592-1-ssrane_b23@ee.vjti.ac.in>
-References: <20260419173541.31592-1-ssrane_b23@ee.vjti.ac.in>
+ d=1e100.net; s=20251104; t=1776686446; x=1777291246;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+5HBIQRIriXlvOVBZ5WKfK8gWmBttM9F4dnYRh3wPSo=;
+ b=Iz9e0CsGuQaOboPbkB3cWEwBWVCY533xd5vBK23EBDzLlm2xGyi09AwkyOGTgx38bG
+ NBSk6Fc+MTGAY0h7LFEoer7T43+kqoZpbbKAjpzVx++lpbblDH+QC3Jd0fmgYsWnJhBe
+ 1zEBESxURq5QaK/+opUH7eMZg8e/xelwUA16v7t7nbIJU4VegZIteQyDSzNhbuUuON+P
+ 3fqClsMhk1nWk4nE8dE0oBpa2sCo+FUMkHnJYmaIqGxrrAnDeeR+oSaMPDeDP3U70gqO
+ 88oL8W9T7Q6R/qnU+Lu0ah2TFIrIkQAnDYPb08g7UL2c2cwVcv0+jnQ2uOpWT8Dd3dXe
+ jg8A==
+X-Gm-Message-State: AOJu0Yy0D7siM9lQKRVMdyjjtBAc44pV2DuqAIMMKNQ/0sjIPNn8zHvQ
+ 29+STqHAaF9dTg/JurWKbsrfwuQY05PdI1G0zznkYvb/u3l1w5Rk2pAMDI6P4c7FAyuTjKYlFaB
+ VZztUABOsfonKAkWZ7fHZlpcztrFCKZYuTQvkCl1E0A==
+X-Gm-Gg: AeBDieuOJPx3o0454h8baJr6D+9EIp96lAKaAX2RFaqwaUcatX3WAxULgXUs9bO/0jv
+ byR3WB2sB2Re8nJXRo0lVgK640eLsu6ZpkiToaPZHIKSo1OfiqHeThwzpx/352czjxBIxkQvOhn
+ OnNh2CDhnqDoYSKwfaJ7p9mt2ZXPjFssLgqfX9XjOIUP1rnm/W2tLB21BPE6Y5yGDZhIiqeY2Sc
+ IkN8Y4y+heGP1NLWE3OXUjX6rxb57J8DKkvI7t6PiT35/JN5GGvXEdP518Y/nfbPt7aWz7TlYhz
+ gaK9NH9F2fXr77F9/w==
+X-Received: by 2002:a17:907:3da9:b0:ba3:3091:e56c with SMTP id
+ a640c23a62f3a-ba41c1b68eemr585111166b.14.1776686445380; Mon, 20 Apr 2026
+ 05:00:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260416161305.24118-1-maximilian.brune@9elements.com>
+ <CAFLszThRDZ_6T09au1uzMO8pcHMDLGZGkF7hBzGtgRjRjC9s3Q@mail.gmail.com>
+In-Reply-To: <CAFLszThRDZ_6T09au1uzMO8pcHMDLGZGkF7hBzGtgRjRjC9s3Q@mail.gmail.com>
+From: Maximilian Brune <maximilian.brune@9elements.com>
+Date: Mon, 20 Apr 2026 12:00:34 +0000
+X-Gm-Features: AQROBzBfWG2AyiIi9pF9SAaVpsvc1YDqHMmCaih78rMJHy_gQzL44qflsqyYePM
+Message-ID: <CAGrcQaRB-jjHNFdJHnn3pUN=kfM_rZmrf8_tijvy-wKXChFb4Q@mail.gmail.com>
+Subject: Re: [PATCH] pci: correct PCI device enumeration to include all
+ functions on device 0
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, andrew.goodbody@linaro.org, 
+ george.mccollister@konsulko.com
 X-Mailman-Approved-At: Mon, 20 Apr 2026 14:54:39 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,90 +116,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Bring in DTS bootph-all tags for the DSS, I2C2, HDMI bridge and
-pinmux nodes, plus defconfig options for TIDSS, VIDEO_BRIDGE_ITE_IT66121,
-BMP and splash screen support.
+> Right, PCI_MASK_BUS() returns both device and function bits, so it
+> skipps any bdf where either device > 0 or function > 0. Using
+> PCI_DEV() extracts only the device number, matching the intent in
+> only_one_child().
 
-Signed-off-by: Shaurya Rane <ssrane_b23@ee.vjti.ac.in>
----
- arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 42 ++++++++++++++++++++
- configs/am62x_beagleplay_a53_defconfig       | 13 ++++++
- 2 files changed, 55 insertions(+)
+I will add this to the commit message. It is a helpful hint for the reader.
 
-diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-index 2a4f0e45365..b1ba62c20ad 100644
---- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-@@ -322,3 +322,45 @@
- &cpsw_port2 {
- 	status = "disabled";
- };
-+
-+/* ===== Display / HDMI support for U-Boot splash screen ===== */
-+
-+&main_pmx0 {
-+	bootph-all;
-+
-+	dss0_pins_default {
-+		bootph-all;
-+	};
-+
-+	hdmi_gpio_pins_default {
-+		bootph-all;
-+	};
-+
-+	i2c2_1v8_pins_default {
-+		bootph-all;
-+	};
-+};
-+
-+&dss {
-+	bootph-all;
-+};
-+
-+&dss_ports {
-+	bootph-all;
-+
-+	port@1 {
-+		bootph-all;
-+	};
-+};
-+
-+&main_i2c2 {
-+	bootph-all;
-+
-+	bridge-hdmi@4c {
-+		bootph-all;
-+	};
-+};
-+
-+&main_gpio0 {
-+	bootph-all;
-+};
-diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
-index c9bc7cd8d39..bb4be38537c 100644
---- a/configs/am62x_beagleplay_a53_defconfig
-+++ b/configs/am62x_beagleplay_a53_defconfig
-@@ -121,6 +121,19 @@ CONFIG_EXT4_WRITE=y
- CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
- CONFIG_LZO=y
- CONFIG_EFI_SET_TIME=y
-+CONFIG_DM_VIDEO=y
-+CONFIG_VIDEO=y
-+CONFIG_VIDEO_TIDSS=y
-+CONFIG_VIDEO_BRIDGE=y
-+CONFIG_VIDEO_BRIDGE_ITE_IT66121=y
-+CONFIG_BACKLIGHT_GPIO=y
-+CONFIG_SYS_WHITE_ON_BLACK=y
-+CONFIG_BMP=y
-+CONFIG_CMD_BMP=y
-+CONFIG_SPLASH_SCREEN=y
-+CONFIG_SPLASH_SCREEN_ALIGN=y
-+CONFIG_VIDEO_LOGO=y
-+CONFIG_I2C_EDID=y
- 
- #include <configs/k3_efi_capsule.config>
- #include <configs/am62x_a53_usbdfu.config>
--- 
-2.34.1
+> BTW, the TEST= format is non-standard for U-Boot - you could reword to
+prose or omit it.
 
+I will reword it.
+
+> I notice the mention of AMD - have you tried booting on a coreboot +
+OpenSIL platform?
+
+No AMD/crater is based on V2000A SOC which in turn only has a FSP
+implementation (as far as I know).
+I myself have never tried booting an OpenSIL platform with coreboot+u-boot.
+
+Am Mo., 20. Apr. 2026 um 04:30 Uhr schrieb Simon Glass <sjg@chromium.org>:
+
+> Hi Maximilian,
+>
+> On 2026-04-16T16:13:05, Maximilian Brune <maximilian.brune@9elements.com>
+> wrote:
+> > pci: correct PCI device enumeration to include all functions on device 0
+> >
+> > Currently the implementation does not just skip all devices beside
+> > device 0, it also skips all functions (besides 0) on device 0. This
+> > broke basically all AMD platforms, since they have a lot of internal SOC
+> > devices behind on these functions.
+> >
+> > This was detected, because the XHCI controller and therefore the USB
+> > devices were not found by u-boot on AMD/crater platform.
+> >
+> > Fix it by checking all functions on device 0 (Linux does the same).
+> >
+> > TEST=build u-boot as coreboot payload and run it on a recent x86 AMD
+> > platform. Devices like the XHCI controller are now found again.
+> >
+> > drivers/pci/pci-uclass.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> > diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
+> > @@ -927,7 +927,7 @@ int pci_bind_bus_devices(struct udevice *bus)
+>
+> Right, PCI_MASK_BUS() returns both device and function bits, so it
+> skipps any bdf where either device > 0 or function > 0. Using
+> PCI_DEV() extracts only the device number, matching the intent in
+> only_one_child().
+>
+> Fixes: fbde868ba4aa ("pci: skip unnecessary PCIe scanning")
+>
+> BTW, the TEST= format is non-standard for U-Boot - you could reword to
+> prose or omit it.
+>
+> I notice the mention of AMD - have you tried booting on a coreboot +
+> OpenSIL platform?
+>
+> Regards,
+> Simon
+>
