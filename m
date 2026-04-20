@@ -4,73 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78210F588C2
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 12:56:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B43DF588C3
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 13:15:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06090843F9;
-	Mon, 20 Apr 2026 14:54:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id D544184372;
+	Mon, 20 Apr 2026 15:15:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=proton.me
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="f3lWDmWf";
+	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="Lcwxz8Ox";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB870842F4; Mon, 20 Apr 2026 14:37:04 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 141618437C; Mon, 20 Apr 2026 15:15:31 +0200 (CEST)
+Received: from mail-106118.protonmail.ch (mail-106118.protonmail.ch
+ [79.135.106.118])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8987E83C51
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 14:37:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B2FF484366
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 15:15:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ header.from=proton.me
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id CBEC1409D5;
- Mon, 20 Apr 2026 12:36:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EC490C19425;
- Mon, 20 Apr 2026 12:36:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1776688619;
- bh=vrT1jZIn7CtBlgfzzUESVvAYUCJHQC/+qG5Y35AkolQ=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=f3lWDmWfTs38lqa8ktkVIUPdRhFGtd+uarDPrjURDRyyBnhfogrweocQ5yiTLVYyc
- LvN03Sojr8WVaQ/na0QsLsF2qZpf6fTzFNw6leDVrBIYJ3PrkFVic8lid2NADyPjvf
- E4HtxZ0+GyoCL1LeK3Lo20ZURTzLjVsB1n73l4TEsMp0HZJKpxGpF/LF1dDt56NCGM
- ictYDuA9NKh3rA/hPJF6nMOxSUMyamuNKm+LKJxa0vfofSVc7SQS0qqJnS9OViBHXQ
- N5YzjhrUuYew/hxqv5O0123ZiDybhepJ88krUCjGMBunION7yGXwvyyyIuULrSVcU0
- NRaR+XUDzlOnw==
-Date: Mon, 20 Apr 2026 18:06:44 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
- casey.connolly@linaro.org, neil.armstrong@linaro.org,
- peng.fan@nxp.com, jh80.chung@samsung.com, lukma@denx.de,
- tien.fong.chee@altera.com, anshuld@ti.com,
- alif.zakuan.yuslaimi@altera.com, tingting.meng@altera.com,
- alice.guo@nxp.com, quentin.schulz@cherry.de,
- ilias.apalodimas@linaro.org, xypron.glpk@gmx.de,
- mkorpershoek@kernel.org, h-salunke@ti.com, alchark@gmail.com,
- dario.binacchi@amarulasolutions.com, ye.li@nxp.com,
- andre.przywara@arm.com, afd@ti.com, dinesh.maniyam@altera.com,
- balaji.selvanathan@oss.qualcomm.com, danila@jiaxyga.com,
- aswin.murugan@oss.qualcomm.com, luca.weiss@fairphone.com,
- adrian@mainlining.org, justin@tidylabs.net, n-francis@ti.com,
- wens@kernel.org, jamie.gibbons@microchip.com,
- david.wronek@mainlining.org, alexeymin@postmarketos.org,
- james.hilliard1@gmail.com, michael@amarulasolutions.com,
- richard.genoud@bootlin.com, philip.molloy@analog.com,
- sughosh.ganu@arm.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: Re: [PATCH v2 1/9] dts: ipq5210-rdp504-u-boot: add override dtsi
-Message-ID: <aeYd3P4ZtsmBWZJ3@sumit-xelite>
-References: <20260410091154.1001021-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260410091154.1001021-2-varadarajan.narayanan@oss.qualcomm.com>
+ spf=pass smtp.mailfrom=krotti83@proton.me
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+ s=protonmail; t=1776690926; x=1776950126;
+ bh=fJOus6g0SvzBJNrFaaQFqChtAC69v/YpX03VTKArW84=;
+ h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+ Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=Lcwxz8Ox8SXnXkPAJHf/KQfaI2gGI64In7/wqf101ntNl4tU3FGCUphpxY3P5tPO1
+ FRwNpdhcFdL/JidgPwxz1c2xlC7QXVTuxvdvWavDPOm17Q/CLRTf/ENuP1p97dM0hv
+ ALVeQLTFhiKCEBv5JiSIExhXc0i3jSsfIQjJFc9A8LykjXWh/nPl+x2fkUKXgWt+nH
+ d65Z3KBQAD8b+HLVWMbFDsg6gjr4wWPrVYPRpduRXXTYv8RM4WR2eNUQdmQF04MMC4
+ fG+a+SigbSSeMfFVzkxlROrHctRYb4KiG9FvNUJ6QnoIC5vW+lYFoA4pydzwmx0+mX
+ nmGF1PHsVOV7w==
+Date: Mon, 20 Apr 2026 13:15:23 +0000
+To: u-boot@lists.denx.de
+From: Johannes Krottmayer <krotti83@proton.me>
+Subject: cmd: fatload: command doesn't update $filesize after next calls
+Message-ID: <904e82be-40df-45d1-afc9-bb658ac9be8c@proton.me>
+Feedback-ID: 148511850:user:proton
+X-Pm-Message-ID: 61bedf1917c07f99e73aadae47c04ec1a24edc8d
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260410091154.1001021-2-varadarajan.narayanan@oss.qualcomm.com>
-X-Mailman-Approved-At: Mon, 20 Apr 2026 14:54:39 +0200
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+ micalg=pgp-sha256;
+ boundary="------dc89c907ff7f479ab717576d317cd3bdbba623df354e08628a197f83a7cd60e0";
+ charset=utf-8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,51 +65,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Apr 10, 2026 at 02:41:46PM +0530, Varadarajan Narayanan wrote:
-> * Add initial support for the IPQ5210 MMC based RDP platforms.
-> * Define memory layout statically.
-> * Mark the nodes that would be needed for SPL.
-> 
-> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-> ---
-> v2: Remove sdhc as it is in kernel DT already
->     Move bootph-all to kernel DT - https://lore.kernel.org/linux-arm-msm/20260409-add_bootph-v1-1-cb2b5093f7d7@oss.qualcomm.com/T/#u
-> ---
->  arch/arm/dts/ipq5210-rdp504-u-boot.dtsi | 15 +++++++++++++++
->  1 file changed, 15 insertions(+)
->  create mode 100644 arch/arm/dts/ipq5210-rdp504-u-boot.dtsi
-> 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------dc89c907ff7f479ab717576d317cd3bdbba623df354e08628a197f83a7cd60e0
+Content-Type: multipart/mixed;
+ boundary=7a8f01e420cd5a1778694cf9cfd61fb4f6c5869799d2c1f0e84206eb75b3
+Message-ID: <904e82be-40df-45d1-afc9-bb658ac9be8c@proton.me>
+Date: Mon, 20 Apr 2026 15:15:21 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+From: Johannes Krottmayer <krotti83@proton.me>
+Content-Language: en-US, de-AT
+To: u-boot@lists.denx.de
+Subject: cmd: fatload: command doesn't update $filesize after next calls
 
-With below fixed:
+--7a8f01e420cd5a1778694cf9cfd61fb4f6c5869799d2c1f0e84206eb75b3
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+Hello,
 
--Sumit
+I'm figured out an issue with the command 'fatload':
 
-> diff --git a/arch/arm/dts/ipq5210-rdp504-u-boot.dtsi b/arch/arm/dts/ipq5210-rdp504-u-boot.dtsi
-> new file mode 100644
-> index 00000000000..5f0105d20de
-> --- /dev/null
-> +++ b/arch/arm/dts/ipq5210-rdp504-u-boot.dtsi
-> @@ -0,0 +1,15 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * IPQ5210 RDP504 board device tree source
-> + *
-> + * Copyright (c) 2025 The Linux Foundation. All rights reserved.
+Here the file list with the command 'fatls':
 
-nit: 2026?
+---
+StarFive # fatls mmc 1:3
+  3048997   firmware.itb
+   149225   u-boot-spl.bin.normal.out
+     3184   depp.efi
+    12318   hello.efi
+    44122   jh7110-starfive-visionfive-2-v1.3b-8G.dtb
 
-> + */
-> +
-> +/ {
-> +	/* Will be removed when SMEM parsing is updated */
-> +	memory@80000000 {
-> +		bootph-all;
-> +		device_type = "memory";
-> +		reg = <0x0 0x80000000 0x0 0x20000000>;
-> +	};
-> +};
-> -- 
-> 2.34.1
-> 
+5 file(s), 0 dir(s)
+---
+
+As you can see the files have different sizes.
+
+First invoke of the command 'fatload' saves the correct size in
+the variable $filesize:
+
+---
+StarFive # fatload mmc 1:3 $loadaddr u-boot-spl.bin.normal.out $filesize
+149225 bytes read in 9 ms (15.8 MiB/s)
+StarFive # echo $filesize
+246e9
+---
+
+When trying to load a new file with 'fatload', the variable $filesize
+still contains the old size from the previous call:
+
+---
+StarFive # fatload mmc 1:3 $loadaddr firmware.itb $filesize
+149225 bytes read in 9 ms (15.8 MiB/s)
+StarFive # echo $filesize
+246e9
+StarFive #
+---
+
+Has somebody noticed the same issue? Noticed in U-Boot version at least
+
+v2025.10 and v2026.05.
+
+Kind regards,
+
+Johannes K.
+
+--7a8f01e420cd5a1778694cf9cfd61fb4f6c5869799d2c1f0e84206eb75b3
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="publickey - krotti83@proton.me -
+ 0x1A5D6E0E.asc"; name="publickey - krotti83@proton.me - 0x1A5D6E0E.asc"
+Content-Type: application/pgp-keys; filename="publickey - krotti83@proton.me
+ - 0x1A5D6E0E.asc"; name="publickey - krotti83@proton.me - 0x1A5D6E0E.asc"
+
+LS0tLS1CRUdJTiBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0tCkNvbW1lbnQ6IGh0dHBzOi8vZ29w
+ZW5wZ3Aub3JnClZlcnNpb246IEdvcGVuUEdQIDIuOS4wCgp4ak1FYUZyS2dSWUpLd1lCQkFIYVJ3
+OEJBUWRBdm9MdzByd3hVZEZsMyszSytnTWhkTnlTK1p3WjU2Q0hlc2xBCndyKzhzalBOSjJ0eWIz
+UjBhVGd6UUhCeWIzUnZiaTV0WlNBOGEzSnZkSFJwT0ROQWNISnZkRzl1TG0xbFBzTEEKRVFRVEZn
+b0Fnd1dDYUZyS2dRTUxDUWNKa05aaG1aenF4TUNlUlJRQUFBQUFBQndBSUhOaGJIUkFibTkwWVhS
+cApiMjV6TG05d1pXNXdaM0JxY3k1dmNtZnQwODBDTndEN0laNnB0eVgvVzhucHhhRFlwT0x6Zm05
+Y21aK0hUUGJZCkN3TVZDZ2dFRmdBQ0FRSVpBUUtiQXdJZUFSWWhCQnBkYmc2UkVwSmNUMWFzaHRa
+aG1aenF4TUNlQUFCdy9RRUEKOVVkYTBubVA4Q1g4UW1PciswNEY5U3g0c1NSUHhza0NsdE5rWlRW
+RHROb0JBTjFlL3I5TnFZbUx1MjI4eHlVbQpmMHBkVXFlallJTytPT0lFZFFhMEZQd0V6amdFYUZy
+S2dSSUtLd1lCQkFHWFZRRUZBUUVIUUJjYVpHMlZxK1MxCmV0Q2NSWDVJaGZnSHJCTFhIcGV1SzJC
+VmZxZFNFVlltQXdFSUI4SytCQmdXQ2dCd0JZSm9Xc3FCQ1pEV1labWMKNnNUQW5rVVVBQUFBQUFB
+Y0FDQnpZV3gwUUc1dmRHRjBhVzl1Y3k1dmNHVnVjR2R3YW5NdWIzSm44bk5IbWtwbApTakU0b1pU
+WDVDZVlsamVGcmowd2pNWERNWENXZzdNNytnc0Ntd3dXSVFRYVhXNE9rUktTWEU5V3JJYldZWm1j
+CjZzVEFuZ0FBZGdBQkFMc2p0elBMYjBnVytUQkFzVXNGNjNZUW1BRXBsUm55RWwxQ20rclJNZXJv
+QVA5dVRkVFUKdThGL25ab0RUS3BxcGM4L1RqakhkU2JWMzMyUmhBdW1NSmQ4Q3c9PQo9TXJhaAot
+LS0tLUVORCBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0t
+--7a8f01e420cd5a1778694cf9cfd61fb4f6c5869799d2c1f0e84206eb75b3--
+
+--------dc89c907ff7f479ab717576d317cd3bdbba623df354e08628a197f83a7cd60e0
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: ProtonMail
+
+wqsEARYIAF0FgmnmJusJENZhmZzqxMCeNRQAAAAAABwAEHNhbHRAbm90YXRp
+b25zLm9wZW5wZ3Bqcy5vcme2J1FF8MEl24OAFN8yfslsFiEEGl1uDpESklxP
+VqyG1mGZnOrEwJ4AAE4YAQDnR5k/h4jxUUHb7W358RljprROJgdW8jt9lwlX
+7hmU2AEA9vWiEv04EvAfo8/NA0Y41s+1Y8DMgWEpEKhupAyvDwk=
+=Hg7P
+-----END PGP SIGNATURE-----
+
+
+--------dc89c907ff7f479ab717576d317cd3bdbba623df354e08628a197f83a7cd60e0--
+
