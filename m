@@ -4,87 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D70B1F5A8A6
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 18:20:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 827A4F5A8B1
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 19:25:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11B3284348;
-	Mon, 20 Apr 2026 20:20:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=iki.fi
+	by phobos.denx.de (Postfix) with ESMTP id B332A84394;
+	Mon, 20 Apr 2026 21:25:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="Eg9H4Vsq";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NT0m+ZMr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EAC884353; Mon, 20 Apr 2026 20:20:40 +0200 (CEST)
-Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [IPv6:2a0b:5c81:1c1::37])
+ id BA68A84376; Mon, 20 Apr 2026 21:25:31 +0200 (CEST)
+Received: from BN8PR05CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68C0F842BF
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 20:20:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E828E84319
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 21:25:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=iki.fi
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marko.makela@iki.fi
-Received: from kehys.lan (dsl-hkibng32-54fb5f-245.dhcp.inet.fi [84.251.95.245])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange secp256r1 server-signature RSA-PSS (2048 bits) server-digest
- SHA256) (No client certificate requested)
- (Authenticated sender: msmakela)
- by lahtoruutu.iki.fi (Postfix) with ESMTPSA id 4fzv1D0yzcz49Px3;
- Mon, 20 Apr 2026 21:20:32 +0300 (EEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu; 
- t=1776709232;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=bg8AdpsZ0iNHKGlup1N/dvqjJ+ruGmU4grRXk5zNa/w=;
- b=Eg9H4VsqnwkOvqlZIBjhg5Gt/Ng3wIsyNxrfB9b27MgZB4qQf1jAY5ZFTFoj8Zc9QOQ8Ux
- watIF6nwPWahChJbJz+b0yRbEDn65k+ZWzgYNT2uTSjzqrqOongiMG/OLhyPcDAyTCuosw
- OuaYoYN3q543F7GFtI8jMXq6UVKCecXOLgKbBrX2K732yj87KhD6ejATK2fHf5mVlF3gBk
- EO60kJA38hq0+7sTX5Db6OZKcO89+60rs6EpAS6QocrsGCC2dslkc4p4yfF2Xg/3lLGzWa
- ODLBEy7GNKl3S2yHfwVJA7OvUwbgzeFuMCCJF73isjjK/tyad4z8yt6+/p3HTg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
- s=lahtoruutu; t=1776709232;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=bg8AdpsZ0iNHKGlup1N/dvqjJ+ruGmU4grRXk5zNa/w=;
- b=ZTjoHnVkPV3RzOwtOR33bTNjKOVKDNQ+MGcwh0edzWlcQAwP+uoDBCUjlBElx5uK5om7vy
- Thfs6lwUG2UhJUUAtMpjGJICoZYOzVN4yYBTQ8hcBeBwO4OPtCsNyc5hWja5xLGLHnxd4h
- MORthKgZTweRYtXQ1qOqWIZgGRS9PYY3SCeqoDu2RuHXKaINgomxn7Mz+q9HvqLxL2EpAg
- t0dpxHQ5D4VFjbge50cTcAZZ8mWeee3sGOd2+isSwE6abRHvFn7Y/38o3DQpWe72F7LFYs
- riqPXzyhSdTl5ke43X3Y9CZlf20H9FrhGzKNwinEhPQ1dN036t9gndSP5nFCrw==
-ARC-Authentication-Results: i=1; ORIGINATING;
- auth=pass smtp.auth=msmakela smtp.mailfrom=marko.makela@iki.fi
-ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=lahtoruutu; cv=none; t=1776709232;
- b=ZzsyYq0I3FQb9PiBdnEHlYOW2hdR5ShkMqOqx/k7zwxex/N2cdch47xdS0SGGqqLYDT4Iz
- utZgLUqwaudgqNnBJsGjQWw+RLFFzA+gfNd+g7QvkjaGynFWU6a+ykkDHZd87BJHkFd1YF
- 5uNcXYZZYJRKLdggH0TBTxjJD80xkQOB/Qv6dQVxIY2yFcbIWuS7A+TJJSsOvUZhKxa3ph
- 3V/s3uKLmqa0Qm4hHt1RCwzglM+MWThbbcvQyliTF2RE6v1sRn03VKNFBtEElj0dDCfqta
- ibmp8bejdFFFPcFbY49GLdVwq5mfxw2nG0lvZoFmaxPSEp0LIcRrCVE9K/0ztA==
-Date: Mon, 20 Apr 2026 21:20:30 +0300
-From: Marko =?iso-8859-1?B?TeRrZWzk?= <marko.makela@iki.fi>
-To: Robert Nelson <robertcnelson@gmail.com>
-Cc: Randolph Sapp <rs@ti.com>, Erik Welsh <Erik.Welsh@octavosystems.com>,
- Anshul Dalal <anshuld@ti.com>, bb@ti.com, nm@ti.com,
- trini@konsulko.com, afd@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/3] k3-am62-pocketbeagle2: add initial board support
-Message-ID: <aeZubllYVLLpznWr@kehys.lan>
-References: <DHD3N5DPHPVI.159WWX3H4U3Q3@ti.com> <acaTPyGbaUQj7hk3@kehys.lan>
- <CAOCHtYidPpJMZeDj0KkLkuh6YYOFVAe80NMWWu5wbmV2ou+=UQ@mail.gmail.com>
- <acbXV--BvxNuZxEa@kehys.lan> <aceOvTK4JGQvET11@kehys.lan>
- <CAOCHtYhN42myMkq9zTUM2ETMP6oBA4mBAzPsYcOqVRG=ZskgfQ@mail.gmail.com>
- <aeOdF46Ny1AfNsMi@kehys.lan>
- <CAOCHtYguNVs+epQH8Lf80MXRJj-udsRfEuQO0LRO0cvG4HhKZw@mail.gmail.com>
- <aeTeiZER1IJar_w6@kehys.lan>
- <CAOCHtYin=6r86ThsagZrdFu5+_b2ACGmMZs3yK3tPd45PXJw4w@mail.gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Z6SA/U15tf5ETBpLFTHsc3fRQPYskuGURPgI7vtZGIty5yxIgdvWIH1xIKE0NNGqOHHkabUMeAUpW3SLQ71lSIOoq933JIIStRF4DIoKeX+OmOhCA1662mx23vLilcdZL36zzi0I6YVdb5p3/Xvw1lbisXvL6LB1BthTYeeF4ZstJSuolFxo6y8Z5DgAYbSEN4Qx1D42B1qgOPue3nWS+jb6YJTPFC/kIZdiXv73/2og9br5BUAXdlTAW+QN2IeypmDOQO6dBSD6mDEPlxOnpNohtWc652MTr+zcJrA5HO0bbyZCgQ7s/3XnzS0EKSWesVCs6eYDQDUaG2hLtZ4TAg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=l5cKaYWEXpJkj+DHzenphJ9FKgkoigICiqjvva2Nupk=;
+ b=Yi1SkXhLRn68Wo1+ZW3o78eNc6XUMgJzlARBDUgGfZhrPUAPD7JX0Rultx3N1lMO9aViJmg3xPOfg54kQXByKq3sGq9YbSUpGdNZLhQniXM7WFjp0wX/r+KtF+ukGQgu2A+FFK92z4I+zFBaHbK8dxrOp7VFK0vvSFkTHeI/mNuZ8g0wS9B69NwJm79E0XQBZg0IkqAgfPkRqYnVxyPmpixcQJba27b7TFAWkk6quPL7uwST5Tnw+gCG+CtKcJLHxm8kj/C5JEXWKvFfAFkaeOrC/FL36pHji3wst8CDScZGeBnAp435u+s+ixWtwdxXgnRLWjexDgbNodiu4Vu3fA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=l5cKaYWEXpJkj+DHzenphJ9FKgkoigICiqjvva2Nupk=;
+ b=NT0m+ZMr7Y4SG/6ipLpHZu7WwN3UXXSNuXde5kHJRq9IuC+r+JRJ0INL5QtWHuLHEupSHK5vqELBirTJJHZOImhSt5/tN3z6oZO5BV+ydzLozhRFFwmY1OkN0P8Igrd07vTTt/jHbBc49lfuLYxac55VS3fKQ3GRPc2zlLow/TI=
+Received: from MW4PR04CA0316.namprd04.prod.outlook.com (2603:10b6:303:82::21)
+ by CH0PR10MB5177.namprd10.prod.outlook.com (2603:10b6:610:df::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.33; Mon, 20 Apr
+ 2026 19:25:25 +0000
+Received: from MWH0EPF000C6193.namprd02.prod.outlook.com
+ (2603:10b6:303:82:cafe::b0) by MW4PR04CA0316.outlook.office365.com
+ (2603:10b6:303:82::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Mon,
+ 20 Apr 2026 19:25:25 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ MWH0EPF000C6193.mail.protection.outlook.com (10.167.249.107) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9791.48 via Frontend Transport; Mon, 20 Apr 2026 19:25:25 +0000
+Received: from DLEE215.ent.ti.com (157.170.170.118) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 20 Apr
+ 2026 14:25:23 -0500
+Received: from DLEE200.ent.ti.com (157.170.170.75) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 20 Apr
+ 2026 14:25:23 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE200.ent.ti.com
+ (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 20 Apr 2026 14:25:23 -0500
+Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.39])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63KJPNh73399024;
+ Mon, 20 Apr 2026 14:25:23 -0500
+From: <rs@ti.com>
+To: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
+ <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
+ <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
+ <ilias.apalodimas@linaro.org>
+CC: <u-boot@lists.denx.de>
+Subject: [PATCHv4 4/6] efi_selftest_memory: check for duplicates first
+Date: Mon, 20 Apr 2026 14:25:18 -0500
+Message-ID: <20260420192520.1444749-5-rs@ti.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260420192520.1444749-1-rs@ti.com>
+References: <20260420192520.1444749-1-rs@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAOCHtYin=6r86ThsagZrdFu5+_b2ACGmMZs3yK3tPd45PXJw4w@mail.gmail.com>
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000C6193:EE_|CH0PR10MB5177:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7db252f5-9fdb-49a1-3bf2-08de9f1292bc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|36860700016|1800799024|376014|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: GkakkK6cF49auu1lNNtwNJWeN0/jMOtOtARA9iveUnC/REK78CcgrxnnhJ4DlRC0S8kVr2P/Jj+w9AGy0LUpvzhF5f6Nr6yPrdtgpkFrnOk4ilreK76Po8GhXoZwOs1h9+ltNtGqeBw1T4LNaxURKOdmOb/9P5jrQ1V0aYxflBuK9dlay5N/h7cizR0d3rw6KA1SeWnPia2JhPi3JVb+0oXbQRAcxL21WromnOzHxkrq9HahXoZBahx/a//uP6fgnv6+hMXxjPsFva+6HpQAsgOJ+m7Q8jvCvPLzQeyfYGd0DFkSV+JXINyZrIhk0FnKHJD6PabiF9xvSZ/j/SBdPG4UEqZEA+XKx3KzZHxMTrgURYoTi1FHKn5A3/ReFU0Y7Os5d/eJkDaXu1ZWZzpmaM+NSXummP/TFQkr6s4NYEfwzscv+1pcexynL7yyyjtOH2HPqKB52uCefvJRFypj5JWrr1dRTTGEQywQ15nI4i695God82KjedYkdwvUuCpOwKRdQecl1IBmnouFVYuuRD9JCl6/wDOStkgy2WdQ9Zhv7CRV26OwABzfD+2JZT96kDN2Bvui9TlGu0eEYrrrgJgOEygIXXYcRINZ7w/ihwgjQ0benUiJzfTUTnGGgYCdcjUKIEaXuAYO6nhVDCl2F2rBau8dGL8ef8GzW+CBHK1fT+OEh1MqzVUVKQIoJboG139ovLeyAufIUj2p14e6N0IKNwB9nFmJdCEg2N7cvXQsSq6TmsunS+iEYjvc1tLaLNW8NcUvr2VCtHaytHvr6w==
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700016)(1800799024)(376014)(56012099003)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: DNr+iD2XjEnwuaUz8E8bFQwHFskjLj7liQ3U2OK7rneqlZ+LzDra/EN0KoYRDZHwuZwiJtwi4JGBIFn7kuhRUV38LMpLfDGX9S890t3PDsd0/ga43vcXsUQoFMsSRhjM0zAnJb02vFR7NuBRMHWO75adpe42DvXYsqgRZ5Q6dxH0YSxcQpBzhtzYdxO5eVzIbMLIecmb1r1AFhUzQyVZ2pTXssO6ueq8YZ+oJIQXBxlhdqKwBOgOZyDVzOoUA8kiFnEE+mAmv84Q0Xpk4FZ8HT54P2JOtRSt0uftVkUEkeHYMbzitWo4E4sNYmykUogNprOm2HwIWzD+MAwxYzXpA29sZ698NMl46O1K4FO2mRdIgm+O8RatSlA84qKRJobu6AAUu9Yp8NS6j84JmS9pa8pry/hS6LZRZsjc2en4DJv1vDsbqH7Gpi9fsAoCX9Mi
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2026 19:25:25.1881 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7db252f5-9fdb-49a1-3bf2-08de9f1292bc
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000C6193.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR10MB5177
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,46 +134,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sun, Apr 19, 2026 at 10:08:56AM -0500, Robert Nelson wrote:
->On Sun, Apr 19, 2026 at 8:54 AM Marko Mäkelä <marko.makela@iki.fi> wrote:
->>
->> Hi Robert,
->>
->> Sat, Apr 18, 2026 at 12:53:59PM -0500, Robert Nelson wrote:
->> >Please don't upgrade to the 12.x.y.z0 branch of ti-linux-firmware
->> >
->> >After this commit you can't even upgrade to `v11.02.09` without other changes!
->> >
->> >https://github.com/u-boot/u-boot/commit/7403d26bea36315f2008ed3ef80125b094c0bafb
->>
->> I downgraded to firmware 11.2.5 "Fancy Rat", but that didn't allow me to
->> see any further messages.
->>
->> >I'm pretty sure OpTee 4.10.0 is safe, but otherwise this is my current
->> >stable branch:
->> >
->> >https://github.com/beagleboard/u-boot-pocketbeagle2/blob/main/version.sh
->>
->> I tried to choose the same versions: OPTEE 4.9.0, TI-firmware 11.02.11
->> (strangely, also this one identifies as 11.2.5; I should always build
->> everything from the scratch), and TrustedFirmware-A v2.14.0 a.k.a.
->> lts-v2.14.0, because I did not find any tag for v2.14.1. The U-boot fork
->> that I'm trying to build is already the same one. The boot process would
->> seem to always hang at the same spot: before switching to the 64-bit
->> u-boot.
->
->it's showing up in this repo
->
->https://github.com/TrustedFirmware-A/trusted-firmware-a/tags
+From: Randolph Sapp <rs@ti.com>
 
-Thank you. Somehow I was missing the tag:
+Check for duplicate memory mappings before reporting any incorrect
+attributes. Could be that second allocation has the correct type while
+the first doesn't. Knowing there is a duplicate in this scenario is
+more helpful than just reporting the first mismatch.
 
-Fetching origin
- From https://git.trustedfirmware.org/TF-A/trusted-firmware-a
-  * [new tag]             lts-v2.14.1 -> lts-v2.14.1
+Signed-off-by: Randolph Sapp <rs@ti.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+ lib/efi_selftest/efi_selftest_memory.c | 21 ++++++++++-----------
+ 1 file changed, 10 insertions(+), 11 deletions(-)
 
-Replacing the TF-A didn't make a difference either. I guess I will 
-switch to another (non-trusted-firmware) development platform until a 
-revised update is available.
+diff --git a/lib/efi_selftest/efi_selftest_memory.c b/lib/efi_selftest/efi_selftest_memory.c
+index 4d32a280061..7320964c129 100644
+--- a/lib/efi_selftest/efi_selftest_memory.c
++++ b/lib/efi_selftest/efi_selftest_memory.c
+@@ -60,7 +60,7 @@ static int find_in_memory_map(efi_uintn_t map_size,
+ 			      u64 addr, int memory_type)
+ {
+ 	efi_uintn_t i;
+-	bool found = false;
++	struct efi_mem_desc *match = NULL;
+ 
+ 	for (i = 0; map_size; ++i, map_size -= desc_size) {
+ 		struct efi_mem_desc *entry = &memory_map[i];
+@@ -72,24 +72,23 @@ static int find_in_memory_map(efi_uintn_t map_size,
+ 
+ 		if (addr >= entry->physical_start &&
+ 		    addr < entry->physical_start +
+-			    (entry->num_pages << EFI_PAGE_SHIFT)) {
+-			if (found) {
++				    (entry->num_pages << EFI_PAGE_SHIFT)) {
++			if (match) {
+ 				efi_st_error("Duplicate memory map entry\n");
+ 				return EFI_ST_FAILURE;
+ 			}
+-			found = true;
+-			if (memory_type != entry->type) {
+-				efi_st_error
+-					("Wrong memory type %d, expected %d\n",
+-					 entry->type, memory_type);
+-				return EFI_ST_FAILURE;
+-			}
++			match = entry;
+ 		}
+ 	}
+-	if (!found) {
++	if (!match) {
+ 		efi_st_error("Missing memory map entry\n");
+ 		return EFI_ST_FAILURE;
+ 	}
++	if (memory_type != match->type) {
++		efi_st_error("Wrong memory type %d, expected %d\n", match->type,
++			     memory_type);
++		return EFI_ST_FAILURE;
++	}
+ 	return EFI_ST_SUCCESS;
+ }
+ 
+-- 
+2.53.0
 
-	Marko
