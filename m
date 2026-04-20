@@ -4,137 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E28BF588F7
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 16:36:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D92AFF588F7
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 16:36:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B990842E7;
-	Mon, 20 Apr 2026 18:36:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 6E76F84308;
+	Mon, 20 Apr 2026 18:36:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="juVIxNto";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ae5uFHNE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40A6284258; Mon, 20 Apr 2026 18:36:00 +0200 (CEST)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C303C8430F; Mon, 20 Apr 2026 18:36:38 +0200 (CEST)
+Received: from mail-vk1-xa2d.google.com (mail-vk1-xa2d.google.com
+ [IPv6:2607:f8b0:4864:20::a2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51113842FC
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 18:35:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
+ by phobos.denx.de (Postfix) with ESMTPS id 7FC4884258
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 18:36:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wNHck6PHcIeMSqbH/UO8KsBCXUw28j3kapxpZkxbxhgSnsoLrlxRYESU5ALB8hhPNKklGotVrjIlwEvkdt5m8CGkZvjWt5do0ZxeVz9B/4kEIO93H6mvFRMgGmZS+R2WMFI+cyxnrqtC2yKEfukGayjHndWe+cC70a7OJUnXwMu2v2axBy1A1ojoK4xix+fylP9g00Osob6MEkd/cXfbvKgPgAIs09n1TnhGHTIFgHLxce2zZciKlni26HfUb2vQxp16iLil5XoRurH22TWXWCVbQWaKh7+kopsqXbKI3IGk0IRZeTxbk7rnN1fCGHJMTqAnOrQS2ouPpBSIisOnWg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=W9ed+GiPgihfGCUqmmfIcdk+3BodpwZiBi+yV2jyzuk=;
- b=KYy0D877NeYkrAZRWYylmaO6jTXmZwwXH1AuFPXnqfKUe84cPzJDk7u3Zm1WuacEz13o7A0VTbq3vXrqmqNxff9hb86lgYySisAFdLCIKO56/NA5Kgd2sPrl4HeTM0Ee/rRxsWNm+2zwdoSP3DcAYRm+WZXr4eWXE1WzKcZaWynxYEaAadQwBwLwqlaGofqBfOUnHAv6QxsDSs1giIKqEDpfVvASzZl6xumg94Wd9GzFu1IoFnfsmbFJEeP5hXnDaqqZB/VO0kOMRSd3im1zoXf1rLarBTVOYKHTpK5dies0NETdTowsrDMi/I/5FSsHFjusnx3khDk138dOSYYcIw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
- dkim=pass header.d=phytec.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=W9ed+GiPgihfGCUqmmfIcdk+3BodpwZiBi+yV2jyzuk=;
- b=juVIxNto46btgDcGVEVniQoILiQcAI5R32jf10u4s33PYB5m1SVMuQrPCfCmwTGoXIitZI0cQVFlhgaGSuaLd/eDPAggSX9Ok06BV55PLxJ1nv77idF0G78bi6/i8Q3gIl8wUi6DitnkM0YgLyzTPLYb4hks35n0GWYXvRPhE/fQXDG9MiZwnMYGb4Ekf4Ozzaj2iLEBGjjRKy03tKmtvR5LEVVrGEaH+3ppXnUAUT15cqYETv2fpEQiJ7yF0YUn2lfXTGOiuBZ7f6V7D8HU+JQOtBOgEvGNZwxn1sEI3EB4UWZ/Xyoxhe59+7vrHfe4ufHu+geiRTxEcv+1D8ScYw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=phytec.de;
-Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:4b3::21)
- by GV1P195MB2613.EURP195.PROD.OUTLOOK.COM (2603:10a6:150:1f4::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.15; Mon, 20 Apr
- 2026 16:35:56 +0000
-Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
- ([fe80::295f:9a59:b66a:621a]) by AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
- ([fe80::295f:9a59:b66a:621a%6]) with mapi id 15.20.9846.014; Mon, 20 Apr 2026
- 16:35:56 +0000
-Message-ID: <df5d318f-7d30-4806-8ecc-3d6183fb2667@phytec.de>
-Date: Mon, 20 Apr 2026 19:35:54 +0300
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 3/3] configs: phycore_am62x_r5_ethboot: Drop duplicate
- CONFIG entries
-To: Aristo Chen <aristo.chen@canonical.com>, u-boot@lists.denx.de
-Cc: ggiordano@phytec.com, trini@konsulko.com,
- marek.vasut+renesas@mailbox.org, iwamatsu@nigauri.org, bb@ti.com,
- afd@ti.com, d.schultz@phytec.de, peng.fan@nxp.com,
- patrice.chotard@foss.st.com, hai.pham.ud@renesas.com, michal.simek@amd.com
-References: <20260420145353.3923395-1-aristo.chen@canonical.com>
- <20260420145353.3923395-3-aristo.chen@canonical.com>
-Content-Language: en-US
-From: Wadim Egorov <w.egorov@phytec.de>
-In-Reply-To: <20260420145353.3923395-3-aristo.chen@canonical.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VIZP296CA0022.AUTP296.PROD.OUTLOOK.COM
- (2603:10a6:800:2a8::14) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:20b:4b3::21)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-vk1-xa2d.google.com with SMTP id
+ 71dfb90a1353d-5637886c92aso1353084e0c.0
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 09:36:35 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776702995; cv=none;
+ d=google.com; s=arc-20240605;
+ b=hg/8alIvvPTGc5B1guaqxlJhfMVu6lly0CqwyFkQAYfVqbS8FqaTts8IDO5QvZfis/
+ DmWidT7BCAt+BW7M2Ejzy30njBFA35h+EVm6txtqutzseWW0nZcz6h1CeFX7Mze2DkIU
+ JiPCzBgSmU7D1PDUuU4b/nQV1f7aW0xN3gezh0zW+bign9wuBz8TqG2+XPHQuS/1e5Yi
+ IeFaCNIMYtfYFvug/Ean2FSDJiGOfGn82z1mEyZ/dEHR/eNYzRpX5y+u77xK9Z5OXSCA
+ OV3JdBEDdePcNuHTvfaPVkzluypZMjgxYhRPCldRfWaEHE1wV6pb/I9VCgEipOUB2QSK
+ QMjg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=AfD5hF4YxH2eRGPB0zmQocrKyWg+4CfE/9LB80/+Emw=;
+ fh=m0LWPSouLTW2Nv2lHxcgK7HjYIQ6ci0tuGAt8H2F+EM=;
+ b=cJrGk77EQ0gcLzyIfeW0gVNZ9/wJ8AxnMrKiiwjpH+rl00P25y0V9szQTjB1wVCb3C
+ V6cwGyFNeSWNaTArUC1k5OxNJtNZjt48o7sulxDTcwn1OUbh8VwuJZirQicWWU1QiXTc
+ LpBJtFFEixYR5JT/MkiK0tqh4iYiQq0BBZV/5IH65GtuLDqMxUSx6k8UEduAhbHeLh42
+ pN9QDsyRNuKXFfkm6hhzpgh4g7KFPNm+mCSIMwFHKRwXK3Jo9Y3i7o/JRHYmjffz346h
+ CXKyUqEPnNbcgAiv6xJrzwyLMQ8gzmV1oLnw5nuIyLTpCbX7VpW3ubKE55YCAf/9Nl4x
+ pbUw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1776702995; x=1777307795; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=AfD5hF4YxH2eRGPB0zmQocrKyWg+4CfE/9LB80/+Emw=;
+ b=Ae5uFHNEcE0bEYLBiUWG/tw+Q3iSZxbNZoSgUYFoadNzF4Gh67qgnCZKs7vGvYxCl9
+ zYFBmtaBxc7KMDTJMyQtQkEp4ceNgIDw9LwWIj0fwTRIJg2bWxBCwqLmcF+eCTNVUYSn
+ X3OHS3QfYB+dTfPt1ZZsEtQie7SuvPLOpSvz9wjVTipEk8AoaeIPRA6um+EMWoYyC65q
+ F9XMncCpqoh4PcKa0DGYLW28Doxx7VymReAH+ToHhMeW7JP4WBjK2MRcfT68ogcYVD9e
+ 5zkFCIOFV+lAXam4D4r6gSnIFb8GIw+OUp2dqnQdC4FW9pVD3Kez7X1wG1Zm4oli8/vx
+ TbSw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776702995; x=1777307795;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=AfD5hF4YxH2eRGPB0zmQocrKyWg+4CfE/9LB80/+Emw=;
+ b=Cr689uicph/ayk5vrgwI4Wnw55OP9C4EwNUaFL+Dk4OUtL4UtgMDtZDZlXGbUl+AS3
+ aC2VBihgUW+7xEa+K1xoikV+TWX93oveF1khgjZX2ccDsnOSrcP4hSL+rDX2uKou3M2s
+ u73jjlhOXR1run6ucoOWxNXu6Ko8VAPRI3EqG5hHTTJW7ZL4J3HPViy7yCvUflRIgbYM
+ zDJdaUcdNu/FLoomZCA/IH3F/DeQNyIm7Af6B+gQqlab3hWmkBNTfXgeUA+FmVpM9Pd0
+ VkHFgN/sFjzo1NkXwKxJasLRbqLsXLhYSptTse8SEs1Lc6Q4evNDj2jEQrOLiu4hn7mt
+ FNvA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9DKfFX3J9rTZEs0KAYkbgt4Ho5ElH13OlOzLddcGO2F6fU28wCu9t8/RNNfcjAuyZEfU5/a4o=@lists.denx.de
+X-Gm-Message-State: AOJu0YwefKyH9TKHUQzXMZhzRKDoNvQyWp4rLZaIFsT3vxzD1LBuPE7Y
+ dncWE0rZz1EowgbFab55QkhSKpbaLKLSqONW1nAXriMlaziB2A0ttVssOpJ1BZHxfaPcI8qnMVe
+ 9c44EjIm6IYld29rSlZlLkJPvGWexkoL3An3s65nB2w==
+X-Gm-Gg: AeBDievCwts76vvCsAkCnHbu+n24hjTLMJDaZtszkkdxs72lMxXtUmSQi4wE56/2ECC
+ X88jBnniBrhkrie1x51Ghw/yDfhNZ2hjI7INM/dI/2F0Icrsl7dQrnH64yMpdoKYySi34l+cuo6
+ 4A1HgIKyE617WqRvzW6aTUsuOINx+qXqz2LKEbzzmy8vh7v2rTpBnAPdTkE+8A1kFOIYCUaXcqj
+ QruFkW2fq1UkgSy79hHsEuzAIY5FkDvwrEXrec8bdXrR8Sm5qqbftNhdW2WYsfbwUPUU0hoPsbL
+ 5yfDeJkJ3WlYKvw8lUU=
+X-Received: by 2002:a05:6122:3a01:b0:56e:f262:9113 with SMTP id
+ 71dfb90a1353d-56fa5a31a60mr5710121e0c.14.1776702994485; Mon, 20 Apr 2026
+ 09:36:34 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|GV1P195MB2613:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5c3a18a9-89cf-484e-3452-08de9efae58c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|7416014|376014|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: GMrHMSo2afPwG5couF7F4C4rcHtu11D9HLNGVa7tqcEc+enpCxGGXbYg+dpRYwa71oFXpX+h9TRcm+71aaCsHZtc7+Abya/dGJtsiqpeHUT2KXz39b3mCM/1T+piEpvnxZr/qYb+DLeoWUuBREkisBP2m8YZo2vP7OhPDVrZzAbQNU2B0xVffyeuun9BthzDEpmDVfP82Id8hZPPL5vmjKoBMq0dgRfHx+Q/B2XifqCyDB/4qvZWoMulmnsTPR/PzMqmoaJR6GraT+xqZhm85p2kci3QOHg60OeyDbvS0vXkdIg34sBJAfke5SixdHCYJgJvLs5CMtXqGk/b+pee+mvusMwlwufayftXPbhCHFnuu9mXtlY4oHq0Q1NgtGL2LBh7jlqaMdH1wqpnG0aN+wlfWeSSQKPv3XYUWELI7tRDqnu238C3zrp7MwZ64Ic7fu8K/o/IIDQiDTSKccTWgIDoMV43NbYfNtbcxK8ftRubPAIvU+a8vpgfgbrma+qImkAQdMErr7nSvh+DnkKwCmH/wNn1UpfQhcc4oo4Q5CouJlm6ueyacIcHPDh3d0TRjtJZE44hoKyNC39RrnSPBqwmfb8UYXHIkYh+oH5RewC5aOJVXsoes9lfBrKIs3x2mViCEHvr/O1clTfgnu7l0/+eTpCI8qaluRU5ufAtnkVTBE0jcLms/rJOi6nJLLdyN56pMWbpY+ryxQMq+03QGMOuT9FSQqQOQv5nQ3jiSdI=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4P195MB1456.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(7416014)(376014)(56012099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?S1VabXdqWDRQRjkvQVZWYW44NmFXL3JLN1IxSy9vdkJpM2hZYXZ0Q1B6dFpu?=
- =?utf-8?B?R2JNVTVIa0J2eG5FT1VKRlhOcGplY2h1WlVGMUJCaDRmYmU1UWczS1hZdGhV?=
- =?utf-8?B?bCtGcnAzQmNla2hLZ0RxTzdWZXhyNDdTWnR0UGtGeTB5TW9hRzA5bG5xWHJ6?=
- =?utf-8?B?NThXOGFheVJNOXpWeDFKRWYyOUl3N0o3eW1lSVUyRFowK21QUUU1ZzNjZ3l5?=
- =?utf-8?B?b2xNbFVkeE8wbThQei9UU2dwaHU1Z3V3NlhXS1FLRng4czZEV0pWV2l3RWxW?=
- =?utf-8?B?MjUyWkUwYkh1VG9rR2dMcEpiT040MG9VY1ZFT2E2enp0WTQ1Zzk0V0NLUWJB?=
- =?utf-8?B?ZzhqUXBtWUdOQXpQOTVyZEpiVDhQRCt2ZUJLRTFwT0lrUHg5amdlRkZnQnNi?=
- =?utf-8?B?WWlBNFpFN3NCMmpXRmY0VCtVUmcva3V4cXZ2dzlUMDFmcVdnNUQxNlZLNXdk?=
- =?utf-8?B?SVdheTVEUDMvSzBOOG1uMDQ0cXpMaXROR0YvUksxbzMwZDJaMTNtZ3JheGxZ?=
- =?utf-8?B?Rm15dzhvbFZRVmpYdG9sYzZMOXRTZmhlTEJaQitKR3pkcFpTeWxkNzVZM3dV?=
- =?utf-8?B?SFRGdzlkMStxRC84TGRxdERSWk16UDA3d1drWVRNYXVONVYrRk5PdXJDZnV3?=
- =?utf-8?B?ZSt5SXVNMktrbzFwbFUwSm01L0dOUGUxaElSeUE0dy9lME1YWHJ5UWdyS3RR?=
- =?utf-8?B?NDRlMVpXY053RTI3ZXcrbyt5LzNhOWhNOEZPeGtlVVpWa2gyaFZIaXlkOTM4?=
- =?utf-8?B?U2JScHFIQ2FCYjdqL0Y4Uml3Qzk0di9oYjBSRUxYeWZsZStzYTQ2RjBvQjkv?=
- =?utf-8?B?YXNsS2lJbTZXMHBPcjhyOVpMbXp2SGRKZHJ1aFhNM0dnZGIxTW5NVVpKc1NQ?=
- =?utf-8?B?RVl1ZzFGRTRyVW9HcHZ0RWtEZWdhNGJ5eHB4QzNiT052Wllrb2tZYVkzWEpQ?=
- =?utf-8?B?RzFVL2k3OHkvclZlZkh1eWVNSTVXVjB6NmlDMzkyVkFEQUhlRkxYdkJVRnFD?=
- =?utf-8?B?UzlaVGZadzBXSVNhRlpoZTAvUFhIczFsKzlDbEc5bFFaTXg5eFhkSGsydTFP?=
- =?utf-8?B?QVlpWkxQMHF1NEQwZWhCVXYrSkNhOXo5T2h0ajdjLzY4ZW4vaiswVHJicCtY?=
- =?utf-8?B?SXBhVWhNRXplT0dKM2I4UzFmUzVwd25lVkU0TGk0YTVidzNmWXhvSWQ5YzZO?=
- =?utf-8?B?QXJjZW9UeVU1cjIzRVBKdEZ3cCtGOVVBSmFHMk1FSFdXS0Vqc2xBc3ZYdmhi?=
- =?utf-8?B?VnBGZ3UzaEI2aFBtdlJqTFdjWFBvNklKNTZJTFFFeDRSYWROYVlTOUdLNWt3?=
- =?utf-8?B?eFJNd0RkMmtLSGFPakdORGNMaDZ1b25JLytBOUdZdjI1Y2dGengxckRNdHdy?=
- =?utf-8?B?L0I0c0dmQmMrWTBmRWlkMHkyQ0tUNXdrM3VnS3FIV1c0OGl6RFMwdTdXc25k?=
- =?utf-8?B?alc5QlFGOXJaaDl1dXhKMXcxZ0R5VHFmZDgyemRhSC93MFQwTlBXM0JKcmpQ?=
- =?utf-8?B?KytCZHl1VTR1cWNnUXpoNVp1aENxM3N3bGJMdWMrZGVIYlVneC93TFp6bUZE?=
- =?utf-8?B?Rmc5ZkY3K3FFRHN3TmtqT3VoWVdxUXpkUXJWM05MMFdDa1BzeS9Ta1BMWGdT?=
- =?utf-8?B?UkZaV0ZoVVBQQXlUYUZSM2ExbHRzb050NnBVYnlxQ1NZU2ErYmlCVGYxZXo2?=
- =?utf-8?B?aVBNWUoxb2NqL1A2WE1qRXBOMDhEWGZJV3Ntb2RzbnRTUlRwU1ozbElTa09N?=
- =?utf-8?B?Tmo3TUM5Q2NXampndnpvMUczWWRXTkc0T2o1VTkraEwwTm5SV3FhOFZyZi8r?=
- =?utf-8?B?M0ExT1Uwelg5S2ZvNjVvTHNQRkVreU9JUG9zR1psMU9XeEkyNHYzNTRSTTF3?=
- =?utf-8?B?YXAxbWtKc0VwU05qQThrZ0dKYk5zRkpBeWQxOVFIYmV1Vm9INWNDVW1kQmFZ?=
- =?utf-8?B?aUZBY2JuUXl4T0NtcmN5MXVxdWE5MWhTYi9IMngyTWl2TFVSQzBTOTlLMFFv?=
- =?utf-8?B?cGhZdjZCR2JyK2lPUE91aW5OLzliTkJWRG1oRXlRMlo0Z3lsWnVsU0FxNkNY?=
- =?utf-8?B?Y0hsUmF2bzhZM00xMjZNL3BDR3dsKzdDZzZCZXJmdkNETGxKTTZuRWxGQXVT?=
- =?utf-8?B?b082YUg2UnNqOWRSVUhsQ3RaNWZDMFRRNXJkSVgxMXdTc0R6T1pHUHE1amFI?=
- =?utf-8?B?V3RZM1dZUTdhUzFkUW1DY3gwVkhWbmZrYm1yTXU0ZmE1YkMzYVRNcVdSZ3JL?=
- =?utf-8?B?VDJ2TTBNdk05QW1hUGZOOVcyYzdERG82bHdiTkdEUHpkUm1tMUpoODd2eG9F?=
- =?utf-8?B?dVlqTzJLNTVQeEE1WnE5SVkya2V1dTk4MTlOTENBamY0V05BNmhFZz09?=
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5c3a18a9-89cf-484e-3452-08de9efae58c
-X-MS-Exchange-CrossTenant-AuthSource: AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2026 16:35:56.4518 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: DGdy8L7VpWz/W9xbnX/BPDmu4HEaebajKDLClnH0lkQszFSmvLWkVCVaM5HFEziYXaZ4UOguZ5Bt+HrUNGCV9Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1P195MB2613
+References: <20260417130204.49896-1-philippe.reynes@softathome.com>
+ <20260417130204.49896-3-philippe.reynes@softathome.com>
+In-Reply-To: <20260417130204.49896-3-philippe.reynes@softathome.com>
+From: Raymond Mao <raymondmaoca@gmail.com>
+Date: Mon, 20 Apr 2026 12:36:23 -0400
+X-Gm-Features: AQROBzCAwPxLH1l17v7b0WKMNk-pK4LhU-3GOKnH7OlHFElH7Bto8CqhawlCX1k
+Message-ID: <CAMDkj5zr8LoTyZECbnAznvcYPga+S1otLAoqzPnkq4bon0n+Jg@mail.gmail.com>
+Subject: Re: [PATCH v4 02/14] ecdsa: initial support of ecdsa using mbedtls
+To: Philippe Reynes <philippe.reynes@softathome.com>
+Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com, 
+ simon.glass@canonical.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,35 +117,285 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Philippe,
 
-
-On 4/20/26 5:53 PM, Aristo Chen wrote:
-> CONFIG_SPL_MMC=n and CONFIG_SPL_DM_SPI=n are each listed twice in the
-> defconfig. Remove the redundant occurrences so each option appears only
-> once.
-> 
-> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
-Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
-
+On Fri, Apr 17, 2026 at 9:02=E2=80=AFAM Philippe Reynes
+<philippe.reynes@softathome.com> wrote:
+>
+> Adds an initial support of ecdsa verify using mbedtls.
+>
+> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 > ---
->  configs/phycore_am62x_r5_ethboot_defconfig | 2 --
->  1 file changed, 2 deletions(-)
-> 
-> diff --git a/configs/phycore_am62x_r5_ethboot_defconfig b/configs/phycore_am62x_r5_ethboot_defconfig
-> index a4434388ff8..b8a686afd39 100644
-> --- a/configs/phycore_am62x_r5_ethboot_defconfig
-> +++ b/configs/phycore_am62x_r5_ethboot_defconfig
-> @@ -23,7 +23,6 @@ CONFIG_PHY_TI_DP83867=y
->  CONFIG_TI_AM65_CPSW_NUSS=y
->  CONFIG_SPL_MMC=n
->  CONFIG_SPL_DM_SPI=n
-> -CONFIG_SPL_MMC=n
->  CONFIG_SPL_SPI_FLASH_SUPPORT=n
->  CONFIG_SPL_SPI=n
->  CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=n
-> @@ -38,4 +37,3 @@ CONFIG_SPI_FLASH_MT35XU=n
->  CONFIG_SPI=n
->  CONFIG_DM_SPI=n
->  CONFIG_CADENCE_QSPI=n
-> -CONFIG_SPL_DM_SPI=n
+> v2:
+> - rename sw_ecdsa.c to ecdsa.c
+> v3:
+> - rename sw_ecdsa_verify to ecdsa_hash_verify
+> - stop on first group found
+> - check signature len
+> - use debug instead of printf
+> - check function returns
+> - fix memleaks in ecdsa_hash_verify
+> v4:
+> - move struct ecdsa_public_key from ecdsa-u-class.h to internal/ecdsa.h
+> - use DIV_ROUND_UP
+> - some code cleanup
+>
+>  include/crypto/ecdsa-uclass.h   |  15 +---
+>  include/crypto/internal/ecdsa.h |  28 ++++++
+>  lib/mbedtls/Makefile            |   3 +
+>  lib/mbedtls/ecdsa.c             | 146 ++++++++++++++++++++++++++++++++
+>  4 files changed, 178 insertions(+), 14 deletions(-)
+>  create mode 100644 include/crypto/internal/ecdsa.h
+>  create mode 100644 lib/mbedtls/ecdsa.c
+>
+> diff --git a/include/crypto/ecdsa-uclass.h b/include/crypto/ecdsa-uclass.=
+h
+> index 189843820a0..047a5eda2fc 100644
+> --- a/include/crypto/ecdsa-uclass.h
+> +++ b/include/crypto/ecdsa-uclass.h
+> @@ -4,20 +4,7 @@
+>   */
+>
+>  #include <dm/device.h>
+> -
+> -/**
+> - * struct ecdsa_public_key - ECDSA public key properties
+> - *
+> - * The struct has pointers to the (x, y) curve coordinates to an ECDSA p=
+ublic
+> - * key, as well as the name of the ECDSA curve. The size of the key is i=
+nferred
+> - * from the 'curve_name'
+> - */
+> -struct ecdsa_public_key {
+> -       const char *curve_name; /* Name of curve, e.g. "prime256v1" */
+> -       const void *x;          /* x coordinate of public key */
+> -       const void *y;          /* y coordinate of public key */
+> -       unsigned int size_bits; /* key size in bits, derived from curve n=
+ame */
+> -};
+> +#include <crypto/internal/ecdsa.h>
+>
+>  struct ecdsa_ops {
+>         /**
+> diff --git a/include/crypto/internal/ecdsa.h b/include/crypto/internal/ec=
+dsa.h
+> new file mode 100644
+> index 00000000000..bfdc137091e
+> --- /dev/null
+> +++ b/include/crypto/internal/ecdsa.h
+> @@ -0,0 +1,28 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright (c) 2026, Philippe Reynes <philippe.reynes@softathome.com>
+> + */
+> +#ifndef _ECDSA_HELPER_
+> +#define _ECDSA_HELPER_
+> +
+> +#include <linux/types.h>
+> +
+> +/**
+> + * struct ecdsa_public_key - ECDSA public key properties
+> + *
+> + * The struct has pointers to the (x, y) curve coordinates to an ECDSA p=
+ublic
+> + * key, as well as the name of the ECDSA curve. The size of the key is i=
+nferred
+> + * from the 'curve_name'
+> + */
+> +struct ecdsa_public_key {
+> +       const char *curve_name; /* Name of curve, e.g. "prime256v1" */
+> +       const void *x;          /* x coordinate of public key */
+> +       const void *y;          /* y coordinate of public key */
+> +       unsigned int size_bits; /* key size in bits, derived from curve n=
+ame */
+> +};
+> +
+> +int ecdsa_hash_verify(const struct ecdsa_public_key *pubkey,
+> +                     const void *hash, size_t hash_len,
+> +                     const void *signature, size_t sig_len);
+> +
+> +#endif
+> diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
+> index aa1ca6d196b..d872c0eb788 100644
+> --- a/lib/mbedtls/Makefile
+> +++ b/lib/mbedtls/Makefile
+> @@ -11,6 +11,9 @@ obj-$(CONFIG_$(PHASE_)SHA1_MBEDTLS) +=3D sha1.o
+>  obj-$(CONFIG_$(PHASE_)SHA256_MBEDTLS) +=3D sha256.o
+>  obj-$(CONFIG_$(PHASE_)SHA512_MBEDTLS) +=3D sha512.o
+>
+> +# shim layer for ecdsa
+> +obj-$(CONFIG_$(PHASE_)ECDSA_MBEDTLS) +=3D ecdsa.o
+> +
+>  # x509 libraries
+>  obj-$(CONFIG_$(PHASE_)ASYMMETRIC_PUBLIC_KEY_MBEDTLS) +=3D \
+>         public_key.o
+> diff --git a/lib/mbedtls/ecdsa.c b/lib/mbedtls/ecdsa.c
+> new file mode 100644
+> index 00000000000..a87b0d0e17f
+> --- /dev/null
+> +++ b/lib/mbedtls/ecdsa.c
+> @@ -0,0 +1,146 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2026 Philippe Reynes <philippe.reynes@softathome.com>
+> + */
+> +
+> +#include <log.h>
+> +#include <linux/errno.h>
+> +#include <linux/string.h>
+> +#include <linux/types.h>
+> +
+> +#include <crypto/internal/ecdsa.h>
+> +
+> +#include "mbedtls_options.h" /* required to access private fields */
+> +#include <mbedtls/ecdsa.h>
+> +#include <mbedtls/ecp.h>
+> +
+> +static mbedtls_ecp_group_id ecdsa_search_group_id(const char *curve_name=
+)
+> +{
+> +       mbedtls_ecp_group_id grp_id =3D MBEDTLS_ECP_DP_NONE;
+> +       const mbedtls_ecp_curve_info *info;
+> +
+> +       if (!curve_name)
+> +               goto out;
+> +
+> +       if (!strcmp(curve_name, "prime256v1"))
+> +               return MBEDTLS_ECP_DP_SECP256R1;
+> +
+> +       info =3D mbedtls_ecp_curve_list();
+> +       while (info && info->name) {
+> +               if (!strcmp(curve_name, info->name)) {
+> +                       grp_id =3D info->grp_id;
+> +                       break;
+> +               }
+> +               info++;
+> +       }
+> +
+> + out:
+> +       return grp_id;
+> +}
+> +
+> +int ecdsa_hash_verify(const struct ecdsa_public_key *pubkey,
+> +                     const void *hash, size_t hash_len,
+> +                     const void *signature, size_t sig_len)
+> +{
+> +       mbedtls_ecp_group_id grp_id;
+> +       mbedtls_ecp_group grp;
+> +       mbedtls_ecp_point Q;
+> +       mbedtls_mpi r, s;
+> +       int key_len;
+> +       int err =3D -1;
+> +
+> +       key_len =3D DIV_ROUND_UP(pubkey->size_bits, 8);
+> +
+> +       /* check the signature len */
+> +       if (sig_len !=3D 2 * key_len) {
+> +               log_debug("sig len should be twice the key len (sig len =
+=3D %zu, key len =3D %d)\n",
+> +                         sig_len, key_len);
+> +               err =3D -EINVAL;
+> +               goto out;
+> +       }
+> +
+> +       /* search the group */
+> +       grp_id =3D ecdsa_search_group_id(pubkey->curve_name);
+> +       if (grp_id =3D=3D MBEDTLS_ECP_DP_NONE) {
+> +               log_debug("curve name %s not found\n", pubkey->curve_name=
+);
+> +               err =3D -EINVAL;
+> +               goto out;
+> +       }
+> +
+> +       /* init and load the group */
+> +       mbedtls_ecp_group_init(&grp);
+> +       err =3D mbedtls_ecp_group_load(&grp, grp_id);
+> +       if (err) {
+> +               err =3D -EINVAL;
+> +               goto out1;
+> +       }
+> +
+> +       /* prepare the pubkey */
+> +       mbedtls_ecp_point_init(&Q);
+> +       err =3D mbedtls_mpi_read_binary(&Q.X, pubkey->x, key_len);
+> +       if (err) {
+> +               log_debug("could not read value x of the public key (err =
+=3D %d)\n",
+> +                         err);
+> +               err =3D -EINVAL;
+> +               goto out2;
+> +       }
+> +       err =3D mbedtls_mpi_read_binary(&Q.Y, pubkey->y, key_len);
+> +       if (err) {
+> +               log_debug("could not read value y of the public key (err =
+=3D %d)\n",
+> +                         err);
+> +               err =3D -EINVAL;
+> +               goto out2;
+> +       }
+> +       mbedtls_mpi_lset(&Q.Z, 1);
 
+'err =3D ' is missing.
+
+Raymond
+
+> +       if (err) {
+> +               log_debug("could not set value z of the public key (err =
+=3D %d)\n",
+> +                         err);
+> +               err =3D -EINVAL;
+> +               goto out2;
+> +       }
+> +
+> +       /* check if the pubkey is valid */
+> +       err =3D mbedtls_ecp_check_pubkey(&grp, &Q);
+> +       if (err) {
+> +               log_debug("public key is invalid (err =3D %d)\n", err);
+> +               err =3D -EKEYREJECTED;
+> +               goto out2;
+> +       }
+> +
+> +       /* compute r */
+> +       mbedtls_mpi_init(&r);
+> +       err =3D mbedtls_mpi_read_binary(&r, signature, key_len);
+> +       if (err) {
+> +               log_debug("could not read value r of the signature (err =
+=3D %d)\n",
+> +                         err);
+> +               err =3D -EINVAL;
+> +               goto out3;
+> +       }
+> +
+> +       /* compute s */
+> +       mbedtls_mpi_init(&s);
+> +       err =3D mbedtls_mpi_read_binary(&s, signature + key_len, key_len)=
+;
+> +       if (err) {
+> +               log_debug("could not read value s of the signature (err =
+=3D %d)\n",
+> +                         err);
+> +               err =3D -EINVAL;
+> +               goto out4;
+> +       }
+> +
+> +       /* check the signature */
+> +       err =3D mbedtls_ecdsa_verify(&grp, hash, hash_len, &Q, &r, &s);
+> +       if (err)
+> +               err =3D -EINVAL;
+> +
+> + out4:
+> +       mbedtls_mpi_free(&s);
+> + out3:
+> +       mbedtls_mpi_free(&r);
+> + out2:
+> +       mbedtls_ecp_point_free(&Q);
+> + out1:
+> +       mbedtls_ecp_group_free(&grp);
+> + out:
+> +
+> +       return err;
+> +}
+> --
+> 2.43.0
+>
