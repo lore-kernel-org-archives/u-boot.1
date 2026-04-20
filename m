@@ -4,98 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1832F36C51
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 08:08:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1019CF36C53
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 08:15:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 280FB842A4;
-	Mon, 20 Apr 2026 10:08:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C13D839D5;
+	Mon, 20 Apr 2026 10:15:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mt.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="f6zDL1Uu";
+	dkim=pass (2048-bit key; unprotected) header.d=mt.com header.i=@mt.com header.b="mt1O6g0u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A7A58426E; Mon, 20 Apr 2026 09:49:29 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 1A3A283E16; Mon, 20 Apr 2026 10:15:01 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 474CC83693
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 09:49:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8888E83693
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 10:14:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aristo.chen@canonical.com
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
- [209.85.210.197])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id DF83F3F129
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 07:49:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1776671366;
- bh=8ZwmdDQep1SdIjUDi9MdmGUbTqoIvotlY/qyRLmOGzY=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=f6zDL1UuLtuP8u94cmOL63A23ea/ULQiJMkHWbpnOp4ah8tbu8XrKl99Q6NDlHgMg
- KicIOxGLIs9xnK4ul0Zt/mQYo75f8A7dJZZDldrbDccYaGNCRZ+N5dLyurnwu7aCtI
- zZ2quEgjwcylMqaj6/638Sgv5bF1xhFrbSSHEACDy+Dq4BBLAJD2Nppk9IrSGNsEs5
- X0J9I97iNCCg/1drXPt/dU2gnm9Km5Cx9PkJCqArrF/G2fFzxXfG5Kpo8r1AJ+oewe
- lHwdc9wju0oacrsPN3Yj/5ZgLTRbe78fjoQ17HVQ6qClGPBc79EEF1VBO+vwKG8xfb
- iFKheUfvJ25RWIR1R2Mew3+U2u4w8rvtl9NjnBvIMKJHkOMmWptDY/5Omk6ag6+Dv6
- e5LVBsXlYRSah4UR7ieBtAxZlfYJESajDHNJIL4bsvmHLuMkBIE/nuHbGv2v5Gyi46
- rYZNPFMoHnigq+OsrDL6b/kTkxYglDkpOV+PyvC4UaRX17l8QGSDLL/86pz0ntJuGn
- Q9dUQ6Us/LmILlifp3Pf6qe5oz3+07e7NOTioXTSpDKOpYhvzLjpQ6OK+N+zKn7RSK
- fUbBtyu2eKcWmX/AAbGtu2Er+O0QE/Twj/6GyM49s7tlBHDRuJMhve8EHrouuHjWgN
- 6KwYpmcrYWChwo9z+umR3qnE=
-Received: by mail-pf1-f197.google.com with SMTP id
- d2e1a72fcca58-82f0f2b2641so2014417b3a.3
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 00:49:26 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776671365; x=1777276165;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8ZwmdDQep1SdIjUDi9MdmGUbTqoIvotlY/qyRLmOGzY=;
- b=EGzeWM0D9ERNThTYXBIEUKRP8o4dIGk0KKFtcoemVrPvpeQ8UwTtnFeGWCkkakgVej
- D/Lp/w5mAITrUskT2Km8xQ2FSNaZnF1gTdsHmrBMxmCreg8HCUa0Y96jmASfksx57dd8
- ToHMHxoZsyppuwiKlNTFy5N74qMAO1qHCjnMjmvWKzIpF0ZhEiWs+ITbzhZEngIXy9SP
- 5VeQvzf8EPt6g1oi2jfseSDtdWVHoJGtTYV0g0sh/cj7cAXqUSnxomqEpo8+Uxp/8sJt
- ANatnXZPVA2nNaNF2e1oOwUIEDqZFiMLH/2QBWQMMov29vv+HQBjKqWD3evmR7Urb1Wz
- XuQw==
-X-Gm-Message-State: AOJu0YyhdIuC5wOCaoYfxAp9RJ5pHzM5svJ832up1MOy4utHCtrhECIc
- GIYKEhFR8ToxU5202p8zVH3KTsf9AzIZdqGuW0QLSY0oA1bHfO03GaVjhxOQ6gbbdfNXvXs7xOg
- pvmPIt/WdTiAYlxfaJp+KuWxzipXv4nRqcYqOHtgPfSnhN5OOTXPUV7ILw80xY49iyNi6fc48fW
- 8yvIM=
-X-Gm-Gg: AeBDietFKvvEM/wETyl6V4n++MLkAS8IvjRTdh45TMx7FMvuOEKqxOKFDROrWLbFBBT
- A6+RfgtEh51Q1kh9lyKS7aWJDil0aBoJC6kxxB5BKnhx3DNu+L1aKRsFwN4lDqqVenivZTYHJCP
- MCB7mxq1zQRQR72QcOD74cGIKmPL/Ay1H26yOVCg036RGnQfMyZpSOO8pTkv/hYHz3J5TVbuzRt
- 3F8UcdltzwuFj6YxVVIQBUsjjSa/x8uwacnuZyoxEmNqMySI9YKdqCDWEVOqoae7oiGxJww5Eff
- Vnb/LEkgNQFGTs20034lYFc16GpLZ7BkKeXQgbbc+aXWZXEmA/zjIrHJc01gpjuQ/UACs62u8Kq
- l4SROqUVRGgG3HVwfE5HQ8W0MM77Y4UrTvPzw0rytzO/rppr6ojqRjrbGfZK7L7+zWDaPF0F1te
- Sx3nVmxtc=
-X-Received: by 2002:a05:6a00:1956:b0:824:afe1:f7e3 with SMTP id
- d2e1a72fcca58-82f8c82bc5fmr13716621b3a.15.1776671364962; 
- Mon, 20 Apr 2026 00:49:24 -0700 (PDT)
-X-Received: by 2002:a05:6a00:1956:b0:824:afe1:f7e3 with SMTP id
- d2e1a72fcca58-82f8c82bc5fmr13716586b3a.15.1776671364347; 
- Mon, 20 Apr 2026 00:49:24 -0700 (PDT)
-Received: from noble-uboot.lxd (124-218-37-86.cm.dynamic.apol.com.tw.
- [124.218.37.86]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-82f8e981a0asm10134077b3a.3.2026.04.20.00.49.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Apr 2026 00:49:23 -0700 (PDT)
-From: Aristo Chen <aristo.chen@canonical.com>
-To: u-boot@lists.denx.de
-Cc: Aristo Chen <aristo.chen@canonical.com>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/1] test: fit: Use shared make_fname from fit_util
-Date: Mon, 20 Apr 2026 07:48:05 +0000
-Message-ID: <20260420074827.3917463-1-aristo.chen@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=reject dis=none) header.from=mt.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=Wojciech.Dubowik@mt.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EePaxZ226ZkdQwuLP/g7IoSRRakUryhu4ysgi/wh1XJQeOlf8CQseR3VnGWnC4GKTpYEpmf8hxxIcYCfxnMe4AqXpyNaRLA7eesZT5jSneNKCvFvEuWF+rU7bw8Dh4QlqtvCfKZ8K0IjCu6W6/16MZsO9fY3BW9sHBnQg1HlaFtpS3yK78IFkINIQjmDf9n06r2eQ9oNA7tkNxZDkD4vsTnhTy9Igs2+gIjxuBwkESEKcy9iITNiw6gfWVLRVKDyxM8YODRF1wM4jxifTNp5RRV4MmP6Bysz6ZhapvMAhuf2Oc0wEYLBiecgHRQ+VAiscF2yPErlxmlyNFc3hDL4ag==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MOF2YOjy2u5dAAeqfQwxzdS2RII4PDs/qOhadP/liiU=;
+ b=ogrTM7UMFmtyRvZPG+oVotV3Qjs53lK3JPWEoguwgY16u0dFJwJhPShDDGMBGJCKW7bIqSCSEIEyKpLamd/5FTmfP2QTsiyCVR0Lb+3wlUKfsJkWX1XijsviyagzC5gaS9lM6gIMhXuiBgSfehOD3jJYAAitIEJ2mHF9gyzPmUg5XlUkA0M4WWaXMoXqshwHdUdJz2WiC6cyMixu7XnYeYwn7VlefSf7ORrLNVD9kDotPuDLEwh7s9wfHQK3mhqrm/x6ywjoWkZyk8kHCJ6Aoq50YrN3jThJ8pn5GkgboNEdoBkezi6RzLqSN82WnVzELp94hvoOIAV0r9uG8tyapw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=mt.com; dmarc=pass action=none header.from=mt.com; dkim=pass
+ header.d=mt.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mt.com; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MOF2YOjy2u5dAAeqfQwxzdS2RII4PDs/qOhadP/liiU=;
+ b=mt1O6g0uKU4VE39ZNG9nuaE+aY1GeeI3e5tk8e8sC0HAyklnQ2/V7wjxVRXOYUKX9XojwtsW8aPf2Iu4U3JROscW/aFVe1cYVWTy7VPJT3ofBPovWG8PFgcY2R4eYE9cigWWrcNMg06fj70jU4Er2YKFlXkpmggpFC6KwKt2+om2sUHFZTOG5kZHcppVNzpxxn4Awoqbcs0j7id0buJpny0DLw86PPXdluNWuNzu+NRoYLnZZT05Jm8NihN0B5lxmpjU6kYsykTojAq1BC1mtJ0SZmFFazCGgF4Vs4SjYDKE3dKa1f3nVvaimEmB1Fv405K3/kZUax3ssu7Mx7mHbg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=mt.com;
+Received: from DB9PR03MB7180.eurprd03.prod.outlook.com (2603:10a6:10:22d::13)
+ by DU4PR03MB10744.eurprd03.prod.outlook.com (2603:10a6:10:585::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.32; Mon, 20 Apr
+ 2026 08:14:56 +0000
+Received: from DB9PR03MB7180.eurprd03.prod.outlook.com
+ ([fe80::6fd2:12a9:4423:8ddc]) by DB9PR03MB7180.eurprd03.prod.outlook.com
+ ([fe80::6fd2:12a9:4423:8ddc%6]) with mapi id 15.20.9818.032; Mon, 20 Apr 2026
+ 08:14:55 +0000
+Date: Mon, 20 Apr 2026 10:14:46 +0200
+From: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+To: Franz Schnyder <fra.schnyder@gmail.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com,
+ "openembedded-core @ lists . openembedded . org"
+ <openembedded-core@lists.openembedded.org>, 
+ Francesco Dolcini <francesco@dolcini.it>
+Subject: Re: [PATCH] tools: mkeficapsule: Add disable pkcs11 menu option
+Message-ID: <aeXgdkBin5uz0-OH@mt.com>
+References: <20260409074710.1322519-1-Wojciech.Dubowik@mt.com>
+ <7xe72m3tkzultqh3hw4cubfognfryjk5ababajoe6w6zt7jx4c@aaxa2kehv635>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <7xe72m3tkzultqh3hw4cubfognfryjk5ababajoe6w6zt7jx4c@aaxa2kehv635>
+X-ClientProxiedBy: MI0P293CA0011.ITAP293.PROD.OUTLOOK.COM
+ (2603:10a6:290:44::11) To DB9PR03MB7180.eurprd03.prod.outlook.com
+ (2603:10a6:10:22d::13)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 20 Apr 2026 10:08:02 +0200
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR03MB7180:EE_|DU4PR03MB10744:EE_
+X-MS-Office365-Filtering-Correlation-Id: c7fa49e5-de61-4411-b810-08de9eb4e78d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|376014|52116014|19092799006|38350700014|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: Cks3Lj7nkllExs0B1KUic3mcqtpg6xHaW1SJCg+Kgw0qPJgqP5jNZvebtEEnbfAxjAFb/OG92rAn/TA3H8d6ASwzAUx5crrn6SNPpX10XwcN/Und5LiiQqYg3fLel2Jg3apmqg5oalmmZFoaKmJFD+l5pa8SC8/IAlahN3I/L/wRyQyMb4IcyU4DTwkQpE3tfZ4U618yNdV8stSx4gdib9MZLZq45qqfIZL81TyFCIgRMnHYswgQy/Zp53/TnPMwZHfI1//STywPhriDxPBOWY+of/mYGWSLcN6YhFK/iUtWR0hfhaHWEjv85hhMbol0EZhnK1WAFypL8Apyzl9f3K1V5gip1R/PHAeUYTdjEtFk6OamVqiWAq8LUT8Zf8TkU47+kjfZSQfgSKV7ce7PW8L3rnWzceTnTTde5CWmAAdkn700cDrgC8+l9M4cCL44YEtrT1XrBexMwLqRfAj81oghyUtgKCi4yV0ErZgRYTgQltrqqaMJMZxWoxmJiO1ZANr+qrvspjyzwqgj2B52PMWqeKsH0M8/+svSr1M3tp+ojPPn55FKq823NUArzH6gZhkFHGKdOb0ZA8Zs6x4YVT9CXVWSDqc3IfM8JHiZ3LC5ApCpoXEuCsdLW9UH7S0jcJvghv4OHjQveBwi7ewslUogVE2heH8fpo8JViDD7I5kppcxIpIJu1jULG51PFQbgu2kFDiv2XiKjkJFt4blFKGQ9eiReq0SUExEioYGSWWJlNxJQEVqlNPIecdcFDJIIrf96HEH83h07cE+LhqPWCSax598OnV3cbnglGy1RWk=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR03MB7180.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(52116014)(19092799006)(38350700014)(56012099003)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?zhiJB9cNtMrWcS+uA7FXohTBoPJvVug9owpnhm9lvYSZJtb3uhbK2bxPu7r0?=
+ =?us-ascii?Q?KmwEqytm0v6dBNx9XncNvALtuIz/mJBNavFDP55grh/5wXRENITvKAAnv9Cz?=
+ =?us-ascii?Q?6M4mDXjH2kNdtqizZAg6B3ZtFz+7ZA4lLaXHfvrpp2merZCMCb2IyiGw3sf+?=
+ =?us-ascii?Q?Suhule6HEDlhXqXxy9nQ8+Ywq8bNaMdYbXHOdHBfdH+5//UQn9LsZAfof2PC?=
+ =?us-ascii?Q?lMVmhtKvzG/ij/LttwACt3McxTUsR7/H28lDOcCHgkhUlFIwH6flNq2Xhgt+?=
+ =?us-ascii?Q?SGvz8XlTScWsNuyg6+53X1TOVVm7Wc24ol5fXGmT4PY54TvlhE0chXr6DOkr?=
+ =?us-ascii?Q?h4A9Q+4evoR42GspD9efh2Oi70BRtLy62RT+NYghPc84auGpCoW8tNQhSyzZ?=
+ =?us-ascii?Q?0OTuv1uO/OQ/YCeGn8gXS+oGOBNhSDAMxc8f6YJdUQ4FgSs4eenraYMtbrk/?=
+ =?us-ascii?Q?XV0lW/bx2jIxd2uHLlkOD5ASUBA4x16TzE3Kjil+o0wwNo3xboG4VPbs+VMR?=
+ =?us-ascii?Q?8PvRlHZEvh5HeAdRdnclplmni25JpIL62xh9twXzyiFEtHoqAViYE9Cu4wRj?=
+ =?us-ascii?Q?9gRl/I16GeYHOQ6+oaZGlTudFa69ry2CcjJXvlMl0Wmu/CKgwIfsPe4z2+kc?=
+ =?us-ascii?Q?Ppo7M2zLFKSxOuyEPytd4KTMJ7tH34hQ5MGmqe71jDZPKi6lVplVXm+E/qdh?=
+ =?us-ascii?Q?DJ5w4t9z6BtJlKk7Fxn42WLS7Ps8c2PR2fbCBL0Vdq2oPHtE3ThlkmqVIewn?=
+ =?us-ascii?Q?5f7QLUJUZvW6mtBAQk5q6lAmglSTLFDLF6aldjA70ZhdlgOhews8TIUT9ynH?=
+ =?us-ascii?Q?z/7FvNK3S/a2wZZofs29qERuazlb68zSg39N7iLNotgibHG3nwnVA9aF6yo+?=
+ =?us-ascii?Q?4jVtYcsvgx14DlnmR9ZHUA/+ckWJdAaAhZ4EJwNlSbP1P7SRw5tG7wIMlEzB?=
+ =?us-ascii?Q?zXEHJrDhfxLP48ZCiZHP36UjEFQxjC4X/iitilh2ZUAdTi5usmRfoXj28Eaa?=
+ =?us-ascii?Q?uj1pK3ta0Ycg29vPW+AAnGC1Zwce9SpjyY9nFGVyadmn+TYJWkJxcKTL0X/Y?=
+ =?us-ascii?Q?G8GGknHXAL3zm8C8/3CeOflQwdHpvipS2FIwG102q39ZFP3TCUj975spOcfu?=
+ =?us-ascii?Q?c0g5/RD19wDXEarDP70lQJHH0GJtTtkhYgIGgH3Z9f4GkeCk95yc9ocueBhy?=
+ =?us-ascii?Q?G/mpNSY8CQmzI+RsBpppmkZDjFq5h6550hh4pikYm7C6g3GgUF1UGhabJkY1?=
+ =?us-ascii?Q?q9G7KEBXQ1NmjmwHk4JbAIBGQU2KgvruJac4TDcufky5ozYvwFKW/dXgM5n0?=
+ =?us-ascii?Q?3b2f6wCojL2sgib/r1+1T40v0ZVzsY2FSstXxEZPZNlHBeJhFldvD5mRIlr6?=
+ =?us-ascii?Q?snss4gtlLu7QGrbCIz1/BWMTXxpTk6VnmPyy8c4FaHdGCFOavBsWtyVkP3/q?=
+ =?us-ascii?Q?F80es94dsX5wvn8irTIn+/3lkTZ4EaQUaQoLBREHOKzUQegctbRD+je9epwQ?=
+ =?us-ascii?Q?E6CPYklMMPVX8YHzwivuz6vXrn/JeeVDkMENaoP8qruB/1f2U8EaDfQ0jHlc?=
+ =?us-ascii?Q?7zmqXFo/lnTce0X7QDxq4wAfo81TP0+CRotHX6gCOPCQmTKvwQHmmvNmB7uZ?=
+ =?us-ascii?Q?0sEelDTuW4BeVRHxRB3UdffPe9l5Wynaa5c6J+lL+3ueNG1HVzgAMnUJ7Eqp?=
+ =?us-ascii?Q?4K+pOhLdpNZ+IyLE7+2sxN1ey4kbdEd9SKtbsTR06wPHS4/J2TZQeDcIFo/G?=
+ =?us-ascii?Q?aFeURH78wA=3D=3D?=
+X-OriginatorOrg: mt.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c7fa49e5-de61-4411-b810-08de9eb4e78d
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR03MB7180.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2026 08:14:55.2544 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fb4c0aee-6cd2-482f-a1a5-717e7c02496b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: hwdsgJ78H/eFBhcCYrKREOQ2SgJua45+nuTgYpjmRPfL5LXMhAi9dDMj7B2a3aC4zPlKGOgdT+J2CN7fNNE1rg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR03MB10744
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,67 +139,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-test_fit.py declares a local make_fname closure that is byte-identical
-to fit_util.make_fname. Drop the local copy and call the shared helper
-at all seven call sites so there is one definition to maintain.
+On Thu, Apr 16, 2026 at 05:51:13PM +0200, Franz Schnyder wrote:
+Hello Franz,
+> On Thu, Apr 09, 2026 at 09:47:07AM +0200, Wojciech Dubowik wrote:
+> > Some distros are using gnutls library without pkcs11 support
+> > and linking of mkeficapsule will fail. Add disable pkcs11
+> > option with default set to no so distros can control this
+> > feature with config option.
+> > 
+> > Suggested-by: Tom Rini <trini@konsulko.com>
+> > Cc: Franz Schnyder <fra.schnyder@gmail.com>
+> > Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+> > ---
+> >  tools/Kconfig        |  8 ++++++++
+> >  tools/Makefile       |  3 +++
+> >  tools/mkeficapsule.c | 14 ++++++++++++++
+> >  3 files changed, 25 insertions(+)
+> > 
+> > diff --git a/tools/Kconfig b/tools/Kconfig
+> > index ef33295b8ecd..ccc878595d3b 100644
+> > --- a/tools/Kconfig
+> > +++ b/tools/Kconfig
+> > @@ -114,6 +114,14 @@ config TOOLS_MKEFICAPSULE
+> >  	  optionally sign that file. If you want to enable UEFI capsule
+> >  	  update feature on your target, you certainly need this.
+> >  
+> > +config MKEFICAPSULE_DISABLE_PKCS11
+> > +	bool "Disable pkcs11 support"
+> > +	depends on TOOLS_MKEFICAPSULE
+> > +	default n
+> > +	help
+> > +	  Disable pkcs11 support. Can be used in cases when host GnuTLS
+> > +	  library doesn't support it.
+> > +
+> >  menuconfig FSPI_CONF_HEADER
+> >  	bool "FlexSPI Header Configuration"
+> >  	help
+> > diff --git a/tools/Makefile b/tools/Makefile
+> > index 1a5f425ecdaa..60e84bfbf20d 100644
+> > --- a/tools/Makefile
+> > +++ b/tools/Makefile
+> > @@ -271,6 +271,9 @@ mkeficapsule-objs := generated/lib/uuid.o \
+> >  	$(LIBFDT_OBJS) \
+> >  	mkeficapsule.o
+> >  hostprogs-always-$(CONFIG_TOOLS_MKEFICAPSULE) += mkeficapsule
+> > +ifeq ($(CONFIG_MKEFICAPSULE_DISABLE_PKCS11),y)
+> > +HOSTCFLAGS_mkeficapsule.o += -DCONFIG_MKEFICAPSULE_DISABLE_PKCS11
+> > +endif
+> >  
+> >  include tools/fwumdata_src/fwumdata.mk
+> >  
+> > diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
+> > index ec640c57e8a5..ad1c46f0e909 100644
+> > --- a/tools/mkeficapsule.c
+> > +++ b/tools/mkeficapsule.c
+> > @@ -229,9 +229,11 @@ static int create_auth_data(struct auth_context *ctx)
+> >  	gnutls_pkcs7_t pkcs7;
+> >  	gnutls_datum_t data;
+> >  	gnutls_datum_t signature;
+> > +#ifndef CONFIG_MKEFICAPSULE_DISABLE_PKCS11
+> >  	gnutls_pkcs11_obj_t *obj_list;
+> >  	unsigned int obj_list_size = 0;
+> >  	const char *lib;
+> > +#endif
+> >  	int ret;
+> >  	bool pkcs11_cert = false;
+> >  	bool pkcs11_key = false;
+> > @@ -242,6 +244,7 @@ static int create_auth_data(struct auth_context *ctx)
+> >  	if (!strncmp(ctx->key_file, "pkcs11:", strlen("pkcs11:")))
+> >  		pkcs11_key = true;
+> >  
+> > +#ifndef CONFIG_MKEFICAPSULE_DISABLE_PKCS11
+> >  	if (pkcs11_cert || pkcs11_key) {
+> >  		lib = getenv("PKCS11_MODULE_PATH");
+> >  		if (!lib) {
+> > @@ -259,6 +262,7 @@ static int create_auth_data(struct auth_context *ctx)
+> >  			return -1;
+> >  		}
+> >  	}
+> > +#endif
+> >  
+> >  	if (!pkcs11_cert) {
+> >  		ret = read_bin_file(ctx->cert_file, &cert.data, &file_size);
+> > @@ -301,6 +305,7 @@ static int create_auth_data(struct auth_context *ctx)
+> >  
+> >  	/* load x509 certificate */
+> >  	if (pkcs11_cert) {
+> > +#ifndef CONFIG_MKEFICAPSULE_DISABLE_PKCS11
+> >  		ret = gnutls_pkcs11_obj_list_import_url4(&obj_list, &obj_list_size,
+> >  							 ctx->cert_file, 0);
+> >  		if (ret < 0 || obj_list_size == 0) {
+> > @@ -309,6 +314,10 @@ static int create_auth_data(struct auth_context *ctx)
+> >  		}
+> >  
+> >  		gnutls_x509_crt_import_pkcs11(x509, obj_list[0]);
+> > +#else
+> > +		fprintf(stdout, "Pkcs11 support is disabled\n");
+> > +		return -1;
+> > +#endif
+> >  	} else {
+> >  		ret = gnutls_x509_crt_import(x509, &cert, GNUTLS_X509_FMT_PEM);
+> >  		if (ret < 0) {
+> > @@ -320,12 +329,17 @@ static int create_auth_data(struct auth_context *ctx)
+> >  
+> >  	/* load a private key */
+> >  	if (pkcs11_key) {
+> > +#ifndef CONFIG_MKEFICAPSULE_DISABLE_PKCS11
+> >  		ret = gnutls_privkey_import_pkcs11_url(pkey, ctx->key_file);
+> >  		if (ret < 0) {
+> >  			fprintf(stderr, "error in %d: %s\n", __LINE__,
+> >  				gnutls_strerror(ret));
+> >  			return -1;
+> >  		}
+> > +#else
+> > +		fprintf(stdout, "Pkcs11 support is disabled\n");
+> > +		return -1;
+> > +#endif
+> >  	} else {
+> >  		ret = gnutls_privkey_import_x509_raw(pkey, &key, GNUTLS_X509_FMT_PEM,
+> >  						     0, 0);
+> > -- 
+> > 2.47.3
+> > 
+> 
+> Hi Wojciech,
+> 
+> Shouldn't it be the other way around? Use of pkcs11 should be disabled 
+> by default and enabled if required. As it is now, it would still depend
+> on the the gnutls library having pkcs11 support and therefore still 
+> would break our OE builds with mainline u-boot if we don't change our
+> modules defconfig.
 
-No behavioural change. Both implementations return
-os.path.join(ubman.config.build_dir, basename).
+As far as I understand, gnutls is built by default with pkcs11 support. So for
+most of the distribution it should be ok. Security by default.
+I don't have yn strong opinion for this but default enabled has been suggested
+by the maintainer.
 
-Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
----
- test/py/tests/test_fit.py | 24 +++++++-----------------
- 1 file changed, 7 insertions(+), 17 deletions(-)
+Regards,
+Wojtek
 
-diff --git a/test/py/tests/test_fit.py b/test/py/tests/test_fit.py
-index 619f73153a0..3b60f814c85 100755
---- a/test/py/tests/test_fit.py
-+++ b/test/py/tests/test_fit.py
-@@ -119,16 +119,6 @@ host save hostfs 0 %(loadables2_addr)x %(loadables2_out)s %(loadables2_size)x
- @pytest.mark.buildconfigspec('fit_signature')
- @pytest.mark.requiredtool('dtc')
- def test_fit(ubman):
--    def make_fname(leaf):
--        """Make a temporary filename
--
--        Args:
--            leaf: Leaf name of file to create (within temporary directory)
--        Return:
--            Temporary filename
--        """
--        return os.path.join(ubman.config.build_dir, leaf)
--
-     def filesize(fname):
-         """Get the size of a file
- 
-@@ -156,7 +146,7 @@ def test_fit(ubman):
-         Returns:
-             Filename of ramdisk created
-         """
--        fname = make_fname(filename)
-+        fname = fit_util.make_fname(ubman, filename)
-         data = ''
-         for i in range(100):
-             data += '%s %d was seldom used in the middle ages\n' % (text, i)
-@@ -265,12 +255,12 @@ def test_fit(ubman):
-         ramdisk = make_ramdisk('test-ramdisk.bin', 'ramdisk')
-         loadables1 = fit_util.make_kernel(ubman, 'test-loadables1.bin', 'lenrek')
-         loadables2 = make_ramdisk('test-loadables2.bin', 'ksidmar')
--        kernel_out = make_fname('kernel-out.bin')
--        fdt = make_fname('u-boot.dtb')
--        fdt_out = make_fname('fdt-out.dtb')
--        ramdisk_out = make_fname('ramdisk-out.bin')
--        loadables1_out = make_fname('loadables1-out.bin')
--        loadables2_out = make_fname('loadables2-out.bin')
-+        kernel_out = fit_util.make_fname(ubman, 'kernel-out.bin')
-+        fdt = fit_util.make_fname(ubman, 'u-boot.dtb')
-+        fdt_out = fit_util.make_fname(ubman, 'fdt-out.dtb')
-+        ramdisk_out = fit_util.make_fname(ubman, 'ramdisk-out.bin')
-+        loadables1_out = fit_util.make_fname(ubman, 'loadables1-out.bin')
-+        loadables2_out = fit_util.make_fname(ubman, 'loadables2-out.bin')
- 
-         # Set up basic parameters with default values
-         params = {
--- 
-2.43.0
-
+> 
+> kind regards
+> 
+> Franz
