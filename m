@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39ADEEA719F
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 04:06:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01651EA719F
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 04:07:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AC8680433;
-	Mon, 20 Apr 2026 06:06:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C4E6283FF5;
+	Mon, 20 Apr 2026 06:07:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KpzBfWQ9";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EEKkT9aj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D706983693; Mon, 20 Apr 2026 06:06:53 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 7862980087; Mon, 20 Apr 2026 06:07:00 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9ED7880087
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 06:06:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C305C83FF5
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 06:06:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ba8472c1613so33179566b.0
- for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 21:06:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776658011; cv=none;
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b9c745e18a0so438306866b.1
+ for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 21:06:57 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776658017; cv=none;
  d=google.com; s=arc-20240605;
- b=eQ7qmZ11O6iMeqwBuUgBLIxw2lfIMJzOfolY9jKr9im6Mrbh1t8Wqyztr2MshGmvld
- jDd9SRBmbi1yG0xvUldqi98oQaRe/7+Mh4e9VfP8jMweETwEpSKk8kFhEMzBpMnbI6gs
- ouyJg0iIDu5coE1vSLUtocT5kr+j5Wt2nLKQ5qrXiHbuXRUH3O+34ZFfI+gd+fqNuFFy
- 6MFn1tLALXXcPis6fkXE+qYfFm06kDp+Sg7+pE19XfS1uhKSWw+WY5c8OdsPhWWw/cA1
- zt1msuaTRqX+zazIkaFOIkrBMeKuORC/RteaRGB4VxlDTYWwQjsh23m9FD95L3zPiBjH
- NhAg==
+ b=cIP/DJ8BgdNmT3DZl4xQxnGapcwPTWsU/xp9SKYJVh1zi1LtrPD52vZ4Iq0eg/kwlo
+ rUucdOsBWsqbXXrvIUwnU0KCmakYoVPmrw+SWx3eos+ZszRsD9YAZP4f2Iu6LWYPgZ4f
+ 9bBBbw2jVPlrwu5Idm0FBXhpbi1RkUH7880mckznynu7lRjHRo0rCG8qFZN7FOQ0L1Er
+ bHVCXBGVCv3mG5gq/4pXHQtxw7EER/xbeEGGWkArT6rAX64yiyFmZAGWgjPE4Hyqg3cf
+ +FB7/NAJG83wRATJT/gVE2rAn4iJxdzm/N4EkppxKyNZNoWVSBHQz64H3YEQDRaF853W
+ x41g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=MQyD3OcJb77qFTYgVnQpQDoJcHeMYMXISq4rAStoDoY=;
- fh=BXL3Ebep6U/SPcdT8S12cNLOXJzhmXLerCkJOhu/iKU=;
- b=PmhPM/xDd8CnbkvHR7leTLeVjNoX/kkiwGfeyQbM5amGSZHLUXUxJnzwScV3XKZHrk
- Ys3MoGsG0nEquvpyRUZI7oC+kLEMMzsyK1knIj6B2eNS9ITsDr14xakgLL2LVWLEB3A9
- EJpQ7bnoC0M/wxSzOFjZEJFW9AUMeiVX2UV+PyyNn+5lJU4TOoE8AyKg091r0BMENooe
- AEuXlB1sPKYGhC6ztUYXePnfms3Q5di7miXZjHD0zO/GVsKQaiQTvCfYgdOUrS90ovc9
- +Gc8YDtg0wpynYfoISFQBqkV0iYruYBrX3TDK6qAiUP5w7nLVotL3CqlkH3Nzg7AyH0c
- yTqg==; darn=lists.denx.de
+ bh=jutW5CJA7Au8f5SRE9lGXcSXQZPeTahFwQVeKmGsSFw=;
+ fh=P+mPADOC4JY7F1QcPIf2jkotJUUo5seZt1UiNM0KlC0=;
+ b=jB8GmfbOdTUAKJ/Vvkrq/LbWBwPv5PTjiTGj21wz7ugbgb1Q7I46lYeil54nMLPtVs
+ peqSrwTvkZUpIlsbhwmP8u7OH2qke+3xB6aVGf2aarhLJCP9mYVH0IQdBJQX68hinP5u
+ kiGcwjey4kanCq1DWjgGJ6/pDB4x/FjmXmDlKSltBjV6ZxCUwHMhMP0qpBZzfjXaEeVL
+ ZN5SGtodly3dnpe0dE4c/vzAwiSDShGvChR2Tkc2vPcRE8SSAcASsTxoZ+HASz01xh6R
+ 6DjQZzWSw5FLNiewiGAWCULhouRrAUT26tWWbxc61/JDssiezPDWBJKTG0gRReyEbvvm
+ ghPw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776658011; x=1777262811; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776658017; x=1777262817; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MQyD3OcJb77qFTYgVnQpQDoJcHeMYMXISq4rAStoDoY=;
- b=KpzBfWQ9Uk7NDRXsmkyVsfUd3acbGYJg3JaV8O3XIrM7IsV16iIfPmC16jtum+px5s
- T5JSRUyRtdMer0DDe4QjH5SLBz3IL6ppzy9jz9ZI4w1pjy2/5jQD5y8+66BxtNY2E/w0
- pfi8ZtXGibtB1l7vipZhBkwFQuezdUVQzBubI=
+ bh=jutW5CJA7Au8f5SRE9lGXcSXQZPeTahFwQVeKmGsSFw=;
+ b=EEKkT9ajHVOqv9716bQND4bDPtrLfAJz0t93Oa/HCfcOoPbMNOu/NitqEnVFzPmATd
+ ALt9QRyi0nCdUktZu2yzLwK5X06KE8rArVExErgJ+FLJfeDSe2zJlZp+nYghjL0WMhNk
+ un5+mMvryQSm4TU346APAc0uXHENJPZDF8bak=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776658011; x=1777262811;
+ d=1e100.net; s=20251104; t=1776658017; x=1777262817;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MQyD3OcJb77qFTYgVnQpQDoJcHeMYMXISq4rAStoDoY=;
- b=IQrdAtfIHPlhJDsBt0NrlghCnhYQof+nj8ekKbZEWDUz8n7SVyP4UxmblsD0OhZnah
- Q2rp/OcI69ihCThEA44ymm0Nvtdj7vwOn/328/cWfdf9nzQMS/XiaCVJyA0A1RxSm9tJ
- LlQ/w23MzinESxKLcb7UB/nUfEng3fHFlX5BI19R2QDfFn3t7DiwKiCc0gJyI62Jn4xa
- 45EeWFbeUgykzycks41t0GK/CHiCGIITT/lW6TgC8dDOaYTxiA5IZ+/CUHBRGDOoNGak
- Cr3f6JGV3s8RO1WJn6asbq7Q8xRZf5gBGgSulP8rsEzqrnTqzLL5gUYlpR6ZtVYog2nf
- C53w==
+ bh=jutW5CJA7Au8f5SRE9lGXcSXQZPeTahFwQVeKmGsSFw=;
+ b=me9OH3l1lNV4Cz7d74Q/TZiIjsaXzeFbjBkLi/3G4Gqg3iLahT1VpITLSu+9LbqZa2
+ kII32evaEjSfnauYMLTNTh1ni0TxW3D9q6/mD10VSWFA105CxE6TFk52kPoDDsv3Q0Zi
+ r0P7SMxvMKrbcN94WdYDVIfx4gWwLbhTXpdDzeknQyisToW7t1SBBrTumH6vLOwDlEsZ
+ scMgpZ4VJTTv3llRzUPjh/zYIN++TfOHuU5U31J8osSwWKrXIy496/JtwQ4cIRpDff0R
+ ahSS2LSszQUYTz9hrmE19dsOOCo8SQdkLPgxvNLZo5ITAq3iKXcGrbjxL39/ZsH4oBvI
+ w8eg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/R5rEHFfiDV2wnwBEuY+lryqZQl3Y6sDxg+rrJiXBf0n4ElE20ORMRLxF/opjS1vcj3cvKoJw=@lists.denx.de
-X-Gm-Message-State: AOJu0YyGxVv8vjOwa34kmVHheqUZdjINt5LQ4houmydeZlyYK0y9xbWK
- Sy174q0lwCKe75Nc2C9Y5gzsEGAWtLYSiLvg4irX+JIhSze71x01ooD958OWSHBleMflzNH8zpv
- VJ2pMWLepS+8+ZqEeiA5FeUEzBhSKMKjTW8JyCbQL
-X-Gm-Gg: AeBDievtqvx7o+P/8CqzsK2KvYmuP3TmKFHxW6qNQ30YsY3wQ4yAqgVpOqlDP4ZEMd9
- toHf7gLXN8CXtALn4B9RLtyZ4XoNh5empKTXz0La9KeYFQudzsOezk/W2/sn4OaUrmyppM8YwYj
- V6weAEB+0DmtbSzYsG92DZNszTMIKEttF+Ne5IGN4Q9biUaX1vtTMNUMBcph3dyy8H2uyZ84doK
- /Nykp5Tq2Lm4y8WUZjumjheDkNsVaG2TEScvLuVohydKnqbDD3+8RV1VBrU8kcEuGNeUe4whJXI
- oE55sMZmLVfeiZ/5FfGogKVFa2zIH34=
-X-Received: by 2002:a17:906:fe45:b0:ba5:7cce:979f with SMTP id
- a640c23a62f3a-ba57cce99dbmr296401766b.40.1776658010626; Sun, 19 Apr 2026
- 21:06:50 -0700 (PDT)
+ AFNElJ8IFeSLHwwPEUtUmModUh4rI+bl0Z5pVSzxYKb1pGfs+vn5x2iXcj1GI23AaSpnYD7WarAtAYQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyBox+m9iIsoOfApnwseJWajWd8b9iK8+Ca0y//+Bx3uFij3mzo
+ DsjtNlY5ZtEyVTw+mmfQurJrOS4AKm79tutlt8U8xIY0BBCcwjA8YEEmkXISmjHWvvaqJnt++wH
+ p/86Dxecpcgrvr0EjBXWswQn7CuzyFd4c/WDSR+ZP
+X-Gm-Gg: AeBDieuAtIgQZXGaPZzVDMOuLRZEHsQHrpS42C9nHAkoG/5Y5CeKmJG9y4uRBnAXWAE
+ Yc6LVHDE3DxhCQyIZj9oYCn06o1IVSghbY8fVOvpOfbGlF18SK1pocKVeYxBI17e/JI/kc1WDxK
+ 1MT73n/1xTnBWwir+Lv7MKpOg35urzKWoFCqGHM8rPncUYFDRPfzOVttELd7lC2cJxtjVqMYzJP
+ HWiXejQFeGZXMf7gZUokurbPwfv13sAGTkBAk9cJfGILNo516qiEXHiZ8mtA6U0mNi4skU+3AOx
+ JKCmErQKgHEekZS4cTG0
+X-Received: by 2002:a17:906:7946:b0:ba3:bc3e:d5f3 with SMTP id
+ a640c23a62f3a-ba420066392mr433784666b.5.1776658017198; Sun, 19 Apr 2026
+ 21:06:57 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260417120951.3454249-1-aswin.murugan@oss.qualcomm.com>
- <20260417120951.3454249-2-aswin.murugan@oss.qualcomm.com>
-In-Reply-To: <20260417120951.3454249-2-aswin.murugan@oss.qualcomm.com>
+ <20260417120951.3454249-3-aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <20260417120951.3454249-3-aswin.murugan@oss.qualcomm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 20 Apr 2026 16:06:37 +1200
-X-Gm-Features: AQROBzCBDrRZAD21QgUwXdjbTqUTprEHzzogRTxyoZ9O244IbUTNhIdjKy-jOUw
-Message-ID: <CAFLszTgxHu9zbR_Q8sw_gYETqf3YBvPtAyg6kDeyCm6DM8aeJw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/7] mach-snapdragon: Add generic SMEM cache
- infrastructure
+Date: Mon, 20 Apr 2026 16:06:40 +1200
+X-Gm-Features: AQROBzC_09IVQTj7R1DMY3aAHDhvIat973gv1LssVGTqsC5yui73Ly14YPe3Cj4
+Message-ID: <CAFLszTimLSp8BFunaTzZszUhMXRtTE5vP=TpR3r2sCMBjQjtyA@mail.gmail.com>
+Subject: Re: [PATCH v3 2/7] mach-snapdragon: Add FIT multi-DTB selection
+ support
 To: aswin.murugan@oss.qualcomm.com
 Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
  sumit.garg@kernel.org, sughosh.ganu@arm.com, ilias.apalodimas@linaro.org, 
@@ -123,73 +123,78 @@ X-Virus-Status: Clean
 Hi Aswin,
 
 On 2026-04-17T12:09:44, Aswin Murugan <aswin.murugan@oss.qualcomm.com> wrote:
-> mach-snapdragon: Add generic SMEM cache infrastructure
+> mach-snapdragon: Add FIT multi-DTB selection support
 >
-> Add cached access functions for commonly used SMEM data to reduce
-> redundant SMEM lookups across the boot process.
+> Implement multi DTB selection from FIT images based on hardware
+> detection via SMEM.
 >
-> This patch introduces three generic caching functions:
-> - qcom_get_smem_device(): Cached SMEM device access
-> - qcom_get_socinfo(): Cached socinfo structure access
-> - qcom_get_ram_partitions(): Cached RAM partition table access
+> The implementation provides:
 >
-> The implementation includes new header files for data structures:
-> - include/soc/qcom/socinfo.h: Added socinfo header from Linux [1]
->   Provides socinfo structure definitions for SoC identification
->   and hardware parameters
-> - arch/arm/mach-snapdragon/rampart.h: Provides RAM partition table
->   structures for memory layout information
+> 1. Hardware Detection: Reads SoC parameters from SMEM including chip ID,
+>    version, platform ID, OEM variant, DDR size, and storage type from IMEM.
 >
-> The caching mechanism initializes SMEM data on first access and
-> returns cached pointers on subsequent calls, avoiding expensive
-> SMEM lookups during boot. This infrastructure is designed to be
+> 2. Metadata DTB Processing: Parses a metadata DTB (first image in FIT)
+>    to build a "bucket list" of hardware-specific node names that match
+>    the detected hardware parameters.
+>
+> 3. FIT Configuration Matching: Uses standard FIT mechanisms to find the
+>    configuration with the most matching tokens in its compatible string
+>    compared to the hardware-derived bucket list.
+>
+> 4. DTB Loading and Overlays: Loads the base DTB and applies any DTBOs
+>    specified in the selected configuration using standard FIT overlay
 > [...]
 >
-> arch/arm/mach-snapdragon/board.c     |  95 +++++++++++++++
->  arch/arm/mach-snapdragon/qcom-priv.h |  24 ++++
->  arch/arm/mach-snapdragon/rampart.h   | 225 +++++++++++++++++++++++++++++++++++
->  include/soc/qcom/socinfo.h           | 114 ++++++++++++++++++
->  4 files changed, 458 insertions(+)
-
-> diff --git a/arch/arm/mach-snapdragon/rampart.h b/arch/arm/mach-snapdragon/rampart.h
-> @@ -0,0 +1,225 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * RAM partition table definitions
-> + *
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + *
-> + */
-> +
-> +#define SMEM_USABLE_RAM_PARTITION_TABLE              402
-
-This header should have an include guard.
+> arch/arm/mach-snapdragon/Kconfig             |    8 +
+>  arch/arm/mach-snapdragon/Makefile            |    1 +
+>  arch/arm/mach-snapdragon/board.c             |    7 +
+>  arch/arm/mach-snapdragon/qcom_fit_multidtb.c | 1103 ++++++++++++++++++++++++++
+>  arch/arm/mach-snapdragon/qcom_fit_multidtb.h |  189 +++++
+>  5 files changed, 1308 insertions(+)
 
 > diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> @@ -749,3 +761,86 @@ void enable_caches(void)
-> +/**
-> + * qcom_get_smem_device() - Get cached SMEM device
-> + *
-> + * This function provides cached access to the SMEM device.
-> + * On first call, it initializes the SMEM device.
-> + * Subsequent calls return the cached pointer.
-> + *
-> + * Return: Pointer to SMEM device on success, NULL on failure
-> + */
-> +struct udevice *qcom_get_smem_device(void)
-> +{
-> +     struct udevice *dev;
-> +
-> +     if (uclass_first_device_err(UCLASS_SMEM, &dev)) {
-> +             log_err("Failed to get SMEM device\n");
-> +             return NULL;
+> @@ -585,6 +586,12 @@ int board_late_init(void)
+> +     /* Try FIT multi-DTB selection if enabled */
+> +     if (IS_ENABLED(CONFIG_QCOM_FIT_MULTIDTB)) {
+> +             if (!qcom_fit_multidtb_setup())
+> +                     log_debug("FIT multi-DTB selection not available or failed\n");
 > +     }
-> +
-> +     return dev;
-> +}
 
-Can you update the commit message and function documentation since
-this does not cache anything.
+The logic seems inverted, since qcom_fit_multidtb_setup() returns 0 on success.
+
+> diff --git a/arch/arm/mach-snapdragon/qcom_fit_multidtb.c b/arch/arm/mach-snapdragon/qcom_fit_multidtb.c
+> @@ -0,0 +1,1103 @@
+> +#define TCSR_SOC_HW_VERSION        0x01fc8000
+
+This address is hardcoded - does this mean the same TCSR base is used
+on all SoCs?
+
+> diff --git a/arch/arm/mach-snapdragon/qcom_fit_multidtb.c b/arch/arm/mach-snapdragon/qcom_fit_multidtb.c
+> @@ -0,0 +1,1103 @@
+> +     *ddr_type = 0;
+> +     if (total_ddr_size <= DDR_128MB)
+> +             *ddr_type = DDRTYPE_128MB;
+> +     else if (total_ddr_size <= DDR_256MB)
+> +             *ddr_type = DDRTYPE_256MB;
+> +     else if (total_ddr_size <= DDR_512MB)
+> +             *ddr_type = DDRTYPE_512MB;
+> +     else if (total_ddr_size <= DDR_1024MB)
+> +             *ddr_type = DDRTYPE_1024MB;
+> +     else if (total_ddr_size <= DDR_2048MB)
+> +             *ddr_type = DDRTYPE_2048MB;
+> +     else if (total_ddr_size <= DDR_3072MB)
+> +             *ddr_type = DDRTYPE_3072MB;
+> +     else if (total_ddr_size <= DDR_4096MB)
+> +             *ddr_type = DDRTYPE_4096MB;
+
+If total_ddr_size > 4 GB, ddr_type remains 0. Is that intentional, or
+should there be a final else clause for larger memory configurations?
+
+> diff --git a/arch/arm/mach-snapdragon/qcom_fit_multidtb.c b/arch/arm/mach-snapdragon/qcom_fit_multidtb.c
+> @@ -0,0 +1,1103 @@
+> +     printf("DTB: %s\n", fdt_name);
+
+Maybe use log_info() here for consistency with the rest of the file?
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
