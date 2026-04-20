@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6645DF5A8BB
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 20:34:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 910A4F5A8B8
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 20:34:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F223A84431;
-	Mon, 20 Apr 2026 22:33:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CB85D84445;
+	Mon, 20 Apr 2026 22:33:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="bNVZ9Syc";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="sYHtGR8z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 61BB98421A; Mon, 20 Apr 2026 16:56:02 +0200 (CEST)
+ id D58D384258; Mon, 20 Apr 2026 16:56:05 +0200 (CEST)
 Received: from smtp-relay-internal-1.canonical.com
  (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 057BA84258
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 16:56:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EFDC38421A
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 16:56:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aristo.chen@canonical.com
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
- [209.85.215.198])
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
+ [209.85.216.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id AAD9C3F610
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 14:55:59 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id A0E263F613
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 14:56:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1776696959;
- bh=TTL0s3Z9+EBgfKQOVqLB+z9nz9IgTR/W3NuU9/NQIf4=;
+ s=20251003; t=1776696963;
+ bh=ZV0l3BE7atFmKCJWc5gdn0l1eWhxGU7N0i9ZzuDfbwA=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=bNVZ9SycdZZliHVciHHUyse73YV3nnvK2so535BdKtSIaMXxA4vcVLJH1xVOD2EJi
- 0Qmp+iaddHipvlEvhVtMpS8+vuibP+I9F9JWyFb0389yml/5e7GW/bYZUbRSkPtrqA
- U3wMdKXb/Uv9p+9Qhe8W3sRohww9zRziacszNQRqNYlYJTPDP0DLFwKtkPz+AxfLfH
- hcsLgms5b6VG7jzSDy4Zz+WCCrTVC7Md8XVctOsd2Q8uoP2CAFrzlm5a1coHdyXvqO
- 1XpNT/n2clA5k9d/RCzVEKqLjyM8duE+SNfQloR7XjpVCgwfMr2oNE7f5wyDTj1wcz
- A1p9hu8wdktszGOd8EtMXEl/gfrUtx8up0nKcoenHXiotNG5ISbYj7l5QIzeQnTwX4
- uw6S0Avhk2zXWGZrzjtqqH2litxgKDif6cGtUSdNCuzYEgTgmDwqychrcAxPRCd0HD
- k0VPquRPlyEk4h+cOT7XJ3Oov/LF3iddN/UHlbhBIBdi7k/1qV+ubzRdt5JxD98AAQ
- wQvcYOjJft9Zlv34Yy8zfPvbiEVJeWDm5X3iS16xoW9R1xDNIkpMuk3C6GIa9/91jZ
- 6+jco4SDYpn0MlSj06TqXJPwDZjWZhGfCaSax1N8veKVSqHnZrki7rQPCz/Hd2cVq6
- zi2u5pz2bQTZhKpMQSoRrz3I=
-Received: by mail-pg1-f198.google.com with SMTP id
- 41be03b00d2f7-c7965975ed0so1097789a12.2
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 07:55:59 -0700 (PDT)
+ b=sYHtGR8zc9j+oYlKV5A2LMCF4pbV0x4qDUliyCNuarCGMhaA6+hPUjgSjbvay+/T7
+ zpD482GgDeJxxI3WXjqDnugTF8k4hi8CGIoj40YNzv8VSyJzxW6MSl/DRLRU7ocp9W
+ 3qsTUAYgs980E8TY4DS7wMxe9UomrkerBdXnSFkNrBOpP+7jmTNU3e5QJfB+nU+CTF
+ 9hog1ZIeqn4Usf6I4xzi1IwHXLBJKDh0AufXp9G6MqPL+hca7QCY6G77CWfMxCiRsG
+ joiYLiEZMcY4Ff1gGezpvgmxJLpqiBtgf4ZLlND9W7JMKPfGMUIEPrCq/Z6cFYSNwe
+ 8xltcPVm/1IuC81v+7p/rt1zOkE0euU2O4T1f9a9G29e0DvgnceNoxzqbVzZiinqXa
+ qIu4ScZdlNznablyS3Vq18PhGVxPr7Tzoqyfes9mGQE1tHi7LHhYWZrCteu05JbozM
+ 0t10y3zsmU/n0rogHvPjomC/2tQN30FHT/22w8JdAidCgybosrYp9lhW2OIF/n2gkJ
+ 1vl1mC1ieZXvJ8nRSbNWYKfSfsQHHb9M5c0XKylvro38pFYY5Z2zq53Nfh+i9VMbB8
+ 5JLxNJFFR15u3/d8MsS6E0B+8wo7gQUs3oMR2me2dyRMa3cE8eazdKBmHQ1S6k0XPO
+ uUHPKVZo+f6RQhx22bLbiBBo=
+Received: by mail-pj1-f71.google.com with SMTP id
+ 98e67ed59e1d1-35fbb5779e8so3661062a91.3
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 07:56:03 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776696957; x=1777301757;
+ d=1e100.net; s=20251104; t=1776696961; x=1777301761;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=TTL0s3Z9+EBgfKQOVqLB+z9nz9IgTR/W3NuU9/NQIf4=;
- b=ho7H3+ZtK5Y+PnCy63alaiVNwt5w4jpLFtD+MZQ8V2/6nxXp5qei/79ggTOaK7zHf6
- BESHR3mcIhClhfZilXqIEaEPwNVL4UsAGfCUM+2yZfsgyRMH1CGX/0ich9A4Sa9fI9Ub
- lG5JdJH/hwgwgKaEsyg1DQayAUBFLNwvv4I1UpPW4UlHNkcBR31vZw+rEyJy8v60h8rH
- oQwYXyrxVeVHYrfCdbCeKas4z96yvm7OJOc6+S7f2gsVG7/QW3DZ4zDoYNFEDiHq9yN2
- beIUV0K8VSBc6gVNdMso4ItJ0aQYo6O2ytKA6Whlym5FP6XxlWCB6lKIMR9pBqo23+uF
- q7vw==
-X-Gm-Message-State: AOJu0YwlwSY4F0DkxX3ANnlZcxKrEsYmwIIE+ZCBVsImv0zrtuhoun+d
- +opvqMXl8so4H1FxHqhjZuGWtikPMg54ddsb2Lg+Dpc317BFDOIiPj6hs+9RPk2FzYGx1Z9Cewv
- Jg25lYzIR2Sx1w8RyToP38t7cYac+TsQWXxHLJhgKdj1ERsTgis54AKvn0AxRgHxO4GqtnrWVZP
- MD1Cx67Q==
-X-Gm-Gg: AeBDieupkHzBrlcWsTaI3Tc6d+1dHZ/eUyD7i9wauHLvB9vIpkNkHO/0lgby9crhl34
- pmO4VlbCApJ7MfbCaknFKm6UkYxrncmUghh6MU5gBzI+le5sUhHuf/oF99TCUGbNIvD+AfYY93u
- c8x6nbFXoTxxtw2yUklnD7eoREMHN/pEfNHXw76+LEktAW1uPaBYegXyIXMK2I3gY3dru4i/HEq
- rstWpubiQSJlykPOrZus+okOShJHOYXWuJbQEV6w7mECX35kC7CdZrBCgoJB+UY9s4Jhw3z32Z5
- XvXxjy7svyTwZjEFvADtl0uuEb53nit4+nfnkr8ryDS7eP35UchvoG581mevpMGgNTjEPnovD4f
- DzmhVTmnRlTomSt9XbeIBIFxHwZtGFxyLr8SM02+hpQ/ozUCqR/c3QqnxWahqfeg7ZonBF0kVrC
- kEDqizZlA=
-X-Received: by 2002:a17:902:d592:b0:2b0:ccad:de1a with SMTP id
- d9443c01a7336-2b5f9f3aa58mr134083355ad.30.1776696957609; 
- Mon, 20 Apr 2026 07:55:57 -0700 (PDT)
-X-Received: by 2002:a17:902:d592:b0:2b0:ccad:de1a with SMTP id
- d9443c01a7336-2b5f9f3aa58mr134083095ad.30.1776696957166; 
- Mon, 20 Apr 2026 07:55:57 -0700 (PDT)
+ bh=ZV0l3BE7atFmKCJWc5gdn0l1eWhxGU7N0i9ZzuDfbwA=;
+ b=Mbph9Xn4Pjcm4Y6pbApuEVPz//4Pn1r9v5HywRbK5gx+S54hdjLj9AOJN9t6x2r1mP
+ JfEy9Pxyqc2yLV/FMFpZvNS0lqPFHZ225EtHwBjCROQ+ROp/yj8MW2N+ql4mUsQLu+/e
+ q+SZe99OWvCHYPCuh7NA3hcl+wDj6T0ujIEnJbc8rW1woBZFg6sg8FrNaj0FAjcrHGaR
+ i3brlpcOcF6NjPACO3VU6HCGHEJuzTm/8dQ9mG4H8ej+PjbOYJvs6m0O0t4UhjdPfkfE
+ l2PSwFI99Q/NSHCnRAhFv764kj27h+kzhuaCeF9E0kuJRd0p0sA+Ql9AxH2U1tB+Ai9r
+ sbVA==
+X-Gm-Message-State: AOJu0YxXQ3u9Hp0ooqLNtIHl+Z1V4K8tgeCLy6Ko7Y3/zY9W9x3QaPJo
+ KjCrDkLeq5eIDCfx/S0diI5lbQz964HGroFd3LFUrE6YFGDf04OdA1A5KkuDo2eSjDnkZtAqKyD
+ knaAOWFfuwzsHo9YdDyFTx1Cuf+XHA1HV/Q8Ol3rDbAQHGwjFlnmjHAxBTYrf8/kVH1/lj92K+D
+ sXEE1J3Q==
+X-Gm-Gg: AeBDiesqU4sx9slCsjcSy9suVKaNKrlh5f9P/52dOZazS866UmE5N9NyGC1LYdjjcKP
+ inr4NAAUkNA1ozUBji+KunQYW6xXXeF19M6pG09sB9nsSMZ3jV3K2b0ZesN9NZUUYFqrNBbigxK
+ zs4srWvvx9ZwV9/MGOolyop2CsReyaJAfqucolA2Rg9XqI4xcQzBKrnIt6CNV2qeEBUHlxXmmJQ
+ ggPHwXcG6G05BoPV6TDWee6yJre3rFQCoJqa5sMr6i424oWjdRtu0cGTU7NZOh/8JBM8iGDKtZ+
+ HeSfDJsQNv6HULpcUKbzgk8BpxveuFq+RR6QWY8uEeVd5UI8lUFNOovN1CDQjMQuRgFITV2fSys
+ rmFbGvB8M4vd3eHe6bD5CRny7Yaern+gRO+y1StwekfpWY5vyjtaRk4r9XfgzOBoLkdrdQdTLLM
+ KcscfAON8=
+X-Received: by 2002:a17:90b:4cca:b0:35d:93ff:2854 with SMTP id
+ 98e67ed59e1d1-361403f1311mr13765084a91.8.1776696961271; 
+ Mon, 20 Apr 2026 07:56:01 -0700 (PDT)
+X-Received: by 2002:a17:90b:4cca:b0:35d:93ff:2854 with SMTP id
+ 98e67ed59e1d1-361403f1311mr13765041a91.8.1776696960799; 
+ Mon, 20 Apr 2026 07:56:00 -0700 (PDT)
 Received: from noble-uboot.lxd (124-218-37-86.cm.dynamic.apol.com.tw.
  [124.218.37.86]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b5fa9ff918sm113118845ad.13.2026.04.20.07.55.54
+ d9443c01a7336-2b5fa9ff918sm113118845ad.13.2026.04.20.07.55.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Apr 2026 07:55:56 -0700 (PDT)
+ Mon, 20 Apr 2026 07:56:00 -0700 (PDT)
 From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.denx.de
 Cc: ggiordano@phytec.com, w.egorov@phytec.de, trini@konsulko.com,
@@ -93,10 +93,10 @@ Cc: ggiordano@phytec.com, w.egorov@phytec.de, trini@konsulko.com,
  afd@ti.com, d.schultz@phytec.de, peng.fan@nxp.com,
  patrice.chotard@foss.st.com, hai.pham.ud@renesas.com, michal.simek@amd.com,
  Aristo Chen <aristo.chen@canonical.com>
-Subject: [PATCH v1 2/3] configs: phycore_am62ax_r5_ethboot: Drop duplicate
- CONFIG_SPL_MMC
-Date: Mon, 20 Apr 2026 14:53:39 +0000
-Message-ID: <20260420145353.3923395-2-aristo.chen@canonical.com>
+Subject: [PATCH v1 3/3] configs: phycore_am62x_r5_ethboot: Drop duplicate
+ CONFIG entries
+Date: Mon, 20 Apr 2026 14:53:40 +0000
+Message-ID: <20260420145353.3923395-3-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260420145353.3923395-1-aristo.chen@canonical.com>
 References: <20260420145353.3923395-1-aristo.chen@canonical.com>
@@ -119,19 +119,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CONFIG_SPL_MMC=n is listed twice in the defconfig. Remove the redundant
-occurrence so each option appears only once.
+CONFIG_SPL_MMC=n and CONFIG_SPL_DM_SPI=n are each listed twice in the
+defconfig. Remove the redundant occurrences so each option appears only
+once.
 
 Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 ---
- configs/phycore_am62ax_r5_ethboot_defconfig | 1 -
- 1 file changed, 1 deletion(-)
+ configs/phycore_am62x_r5_ethboot_defconfig | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/configs/phycore_am62ax_r5_ethboot_defconfig b/configs/phycore_am62ax_r5_ethboot_defconfig
-index d597e9d92d9..db04706c739 100644
---- a/configs/phycore_am62ax_r5_ethboot_defconfig
-+++ b/configs/phycore_am62ax_r5_ethboot_defconfig
-@@ -24,7 +24,6 @@ CONFIG_PHY_TI_DP83867=y
+diff --git a/configs/phycore_am62x_r5_ethboot_defconfig b/configs/phycore_am62x_r5_ethboot_defconfig
+index a4434388ff8..b8a686afd39 100644
+--- a/configs/phycore_am62x_r5_ethboot_defconfig
++++ b/configs/phycore_am62x_r5_ethboot_defconfig
+@@ -23,7 +23,6 @@ CONFIG_PHY_TI_DP83867=y
  CONFIG_TI_AM65_CPSW_NUSS=y
  CONFIG_SPL_MMC=n
  CONFIG_SPL_DM_SPI=n
@@ -139,6 +140,11 @@ index d597e9d92d9..db04706c739 100644
  CONFIG_SPL_SPI_FLASH_SUPPORT=n
  CONFIG_SPL_SPI=n
  CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=n
+@@ -38,4 +37,3 @@ CONFIG_SPI_FLASH_MT35XU=n
+ CONFIG_SPI=n
+ CONFIG_DM_SPI=n
+ CONFIG_CADENCE_QSPI=n
+-CONFIG_SPL_DM_SPI=n
 -- 
 2.43.0
 
