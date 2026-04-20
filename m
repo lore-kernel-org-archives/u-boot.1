@@ -4,54 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96758F588C3
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 13:20:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53D2DF588C3
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 13:30:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D5B38439C;
-	Mon, 20 Apr 2026 15:20:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=proton.me
+	by phobos.denx.de (Postfix) with ESMTP id A559E8437C;
+	Mon, 20 Apr 2026 15:30:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="lSYO8qDI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GYew9QeJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 268E7843B7; Mon, 20 Apr 2026 15:20:34 +0200 (CEST)
-Received: from mail-4322.protonmail.ch (mail-4322.protonmail.ch [185.70.43.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 38B86843B7; Mon, 20 Apr 2026 15:30:55 +0200 (CEST)
+Received: from mail-yx1-xb12d.google.com (mail-yx1-xb12d.google.com
+ [IPv6:2607:f8b0:4864:20::b12d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE27284366
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 15:20:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=proton.me
+ by phobos.denx.de (Postfix) with ESMTPS id BD90384366
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 15:30:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=krotti83@proton.me
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=izncose2gncvhk2y3z5mqbm46m.protonmail; t=1776691231; x=1776950431;
- bh=RmdHsjZHZmzyT5aHgbdsdJ4WnubADXmJST5xwkavOLA=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=lSYO8qDISqvfZGzY+4btH8Yz8e40iyHd56mi1CmSMaWlUnAhnQ/lFuUOJ7mPIkAHb
- 3L5ebXF24LRQ7nCPGH8dCIdZPDAUFJVs7NK34sPL0oevGB96Ut96snjVwc+U973iLZ
- CvjzaP3qA0gD49c5Iu1KYrienqVwJq1BiFZDV6Xgq2H7ra8c6rBnUy1SX4dq/bTrXi
- C7pPmZWiiHUnlnhaW3EiT3L5Ofkj9JiJ11pAWlAtA1Q/DDUhrECha3uGzDsr8Rf2xV
- HGyhebYmEgUcFb7nhUQS9ncp8UoG3sOvjCFxRpxfQybfvZknuA+Lclkth59+Vnojko
- /17pfw0l8xiag==
-Date: Mon, 20 Apr 2026 13:20:27 +0000
-To: u-boot@lists.denx.de
-From: Johannes Krottmayer <krotti83@proton.me>
-Cc: krotti83@proton.me
-Subject: Re: cmd: fatload: command doesn't update $filesize after next calls
-Message-ID: <7ef8cbf4-9b58-42b3-b8dd-0dd337529ebb@proton.me>
-In-Reply-To: <904e82be-40df-45d1-afc9-bb658ac9be8c@proton.me>
-References: <904e82be-40df-45d1-afc9-bb658ac9be8c@proton.me>
-Feedback-ID: 148511850:user:proton
-X-Pm-Message-ID: 3d123f5fdef9f357f154d2146a0135e03a1bc03e
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12d.google.com with SMTP id
+ 956f58d0204a3-6501d242e2fso2658344d50.3
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 06:30:52 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776691851; cv=none;
+ d=google.com; s=arc-20240605;
+ b=EmUfW8j08IR2+xL8l+9O1aqhSYFXscjgS33pbkmg/P3rgTqTstb63C9i7847Mh9lbx
+ Ckep3NdnzNhg51WpXs3kR5GAlAbnz2GUkEudIlGI/pzu6Z3sbj980Wt5ukM+TOXdLdcp
+ taDdFRl5kpb7X7s/Y0TLCwSy4iUDjqyur8tcMIXD/VeuEmbX1xZyljtuybH76kuIqSTd
+ 6ytvXNuHVx5M0xegm746tK63oDvprpuFRPvrmErK9shHySGvVDJvc0Bi9k2Mhj1KvW6H
+ 9QLxeXwBbItj48AmyDvaCnrxzaBeiOI7tpvXam/Ch3FgRFoOA2m2oIkK8gOwH+cSe4Aq
+ 0amw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=UFvctR2FH5MJkBu1wH8Y67Ayzdm1wQrjksp74/j+HfU=;
+ fh=o87YjfsHObo1Cl6u5IhfEEVg9K9/GmFj88eZpmc2vZE=;
+ b=Ed9nJB1gvkXJKoXlW2Y6tQIcJgF+Jm/RaJXG5GcjjwGQUDLzUfnJ/Q58Pnzw9sNsts
+ z0CvcitB/xMhpmi5KIGgE7YCD6W6L7nPivzqjhAJr36l3k1hDBNymbWNatjcS3DibHca
+ 0gQx8My3gbiPDJO3Q96nhifYwg9E0NeExmajGJukmahGWhPeQaA/sa1tuoT8WZ+J5fmP
+ j7ph3ZztiXvGPKCTheGFn/MuIHazw+h9i7arNG49U7DX+Q0+f2c3ui/UTi1rUVr5IJLN
+ r3RiuFhVIUHQhi2d4WthGH6AqrcS2CnNFCElyT/aVZSYsDpFKiQpBMmWxmd8HT2h2LZc
+ iOHQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1776691851; x=1777296651; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=UFvctR2FH5MJkBu1wH8Y67Ayzdm1wQrjksp74/j+HfU=;
+ b=GYew9QeJ3rb8AdazPsPTokLG6z8N+DcSZ/ACg8lIAoaWSdEQr1qfvHMoalWiZeyMO2
+ hYf5B+NYZOnh7ziMPzV+2xbJaZh6bjYLWrpWQMr/En0UmZG+v6JuQZOG9gD3tEK4D+n6
+ RYdlEjPH1MqS3naShcNA3XhKeo4ugsrVt+XALSMiKXIWiqmOKqrGULze+b6PUtyDF9Y3
+ zwIQyXUGtzuvEt70uBFFA7+63jcttxTeTaAY4t1rJh/8P8uCru+bwZ5SHU0QU9jQtJ4j
+ 3kFigBJKHaoUAfJH7j8wtXmoQD2ZGUjo34TcmS/LWTypeQ3QMp7OQjsM14xwU4OW8G0F
+ YGxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776691851; x=1777296651;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UFvctR2FH5MJkBu1wH8Y67Ayzdm1wQrjksp74/j+HfU=;
+ b=deCupBgsAz32i4jJaYzm+cH5T/e+hTvZs0evzRn++mhjaP7GQVBCcYoYV8eektiSZ6
+ xqLhJZKLZ1FpTjmVZQx9V0rf/lSVGVI2jXOhMlGRDAkrXbWETXFmU1PiJsG5SRQwJr/p
+ buuqjsfkaEVtW55E8h6LlYuwusfYTge4mBa1KojfKPgoIgQqdCcTd1xb1otdP3l7GEj1
+ TYW9d0OITk+ejkvvTKrxDlJo6+986/7sVD63ZAARcVhfh1Ug54iHQPjrbMEHqE93Leiz
+ QIG/+6Ys7d7TsviGOKYyO5FwELH8OId3s6rOVQ2QZQWy89JPlgqvyZXjqgmHlmE/J8bC
+ TKmA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8phap35fnzroIe6WyOaY8p7wayysOk6EwFj1i9J+hJfrKNiUhZyAK17SlWy4ijKed2V20IzsA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzUQvlT+avJc5zuDY9UR3yXMNju8xp/OQN7/UTrut5Dn+9Sgls9
+ 9frGAqYwnG+lImqKM1YcYIh1dVpUGQcRP08SPbdDP1d7FAmGjQWIpIaqzZpwbo+Cy6D8MNk4ASC
+ +YoM3p0LCK0P1FhhrQwVJBXFlAaKZ+S7kBLlhlRqRNUlJZ1PIQS9huis=
+X-Gm-Gg: AeBDieu+/yJPuqGUe7CYCVkbsZbe9q3Xsuclv9334YBJWgsOuVpMi9LbHRpMr7jv9dM
+ YnxwqN+bMLsHNaOFskqh7j40ZkS6i807v/bGL9+ZWYyo8QXuHKW41pCkO+HpvfWRxxNuau/kb/o
+ trSYzEEFJFTwoK52bkdYqqqK8ykGeGwAcxgTV/Ku4LXa3kQzeMS72mN/moFHf2XXVg761ysCzd0
+ M/M5Xg8qZDe3+JXerYVRvgl+x4TaWFOydyWo5wg0AZ38TtXqmX6ukh9IIxQadW3zXbJV42IEi9H
+ sL5jevuMEng9x9+rgNXSNLvm64Us9dBEBUknma3ThiuMU2vLqrZF2DUeMUt+uOGrMYUch20x+EQ
+ 8JKVRkqHNhweCXR2mo/pH8IuWN5SHsuz+U7kWcNzbZuyee41rxnj7ZFDIq/gybrfGljkxh68wX4
+ TQNkwWnKirKEQJKgYKhST5QkgPYf9XOo7isNtMRm+JgEj+DbgLy7IFksXsXBdKS4Rp28w0JIbVH
+ wMH1Hn+ARIwNXsz1TlowoAgO3DuVnnMSpQ6A+QQjkp7qgxhxqC123jN6phkHDtuf4jZ1DZAIUfU
+ QsTXN2PvcbKtyFAWn8VMD8mZ8hgcVG4QvGeYXi23dGuTL5zMkb0jeRQ=
+X-Received: by 2002:a05:690e:418d:b0:654:1261:8b88 with SMTP id
+ 956f58d0204a3-6541261952dmr7879235d50.29.1776691851230; Mon, 20 Apr 2026
+ 06:30:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; protocol="application/pgp-signature";
- micalg=pgp-sha256;
- boundary="------b35067a9d1118fbfa4a49bc5f01b710b7f8f650f7571b11a2fe345c934aa403d";
- charset=utf-8
+References: <20260413203555.1990337-1-rs@ti.com>
+ <20260413203555.1990337-5-rs@ti.com>
+ <CAC_iWjJOzdFwAppsCKwFMf_uJ0TGi3JpSzcj+9iWegLryha5-A@mail.gmail.com>
+ <DHUV0ZQ8Y0KC.1HCMIW6TK4K9A@ti.com>
+ <CAC_iWjKtRMz1Vr7VXyw56cij=zhcSRfOdGO=XGui3uYGcp1x7Q@mail.gmail.com>
+ <DHVL32OQW0ON.F5MYYVTYU1JE@ti.com>
+In-Reply-To: <DHVL32OQW0ON.F5MYYVTYU1JE@ti.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 20 Apr 2026 16:30:15 +0300
+X-Gm-Features: AQROBzBsOMP1qF6a9p5wMbxCrHIpe_AmO2HMslHAum9TXOoBb8Mcz6Q0CAQX8DA
+Message-ID: <CAC_iWj+K6_MiUziEsVYQHatjMqu2Co_dxz_0J5F_Pz4_Cr9ZkQ@mail.gmail.com>
+Subject: Re: [PATCHv3 4/6] efi_selftest_memory: check for duplicates first
+To: Randolph Sapp <rs@ti.com>
+Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
+ Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
+ afd@ti.com, xypron.glpk@gmx.de, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,123 +124,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------b35067a9d1118fbfa4a49bc5f01b710b7f8f650f7571b11a2fe345c934aa403d
-Content-Type: multipart/mixed;
- boundary=bcd7efa6e6a46d3af5b7d943ad7e21c1999d5f252bbbfa0aef90836dd8bd
-Message-ID: <7ef8cbf4-9b58-42b3-b8dd-0dd337529ebb@proton.me>
-Date: Mon, 20 Apr 2026 15:20:22 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: cmd: fatload: command doesn't update $filesize after next calls
-To: u-boot@lists.denx.de
-References: <BYLWXkI0zZB7wsRGcTWaPADh7qqTZJw5UFPNRA6z2yExYdrmjzN-YGqdEhlLIxGYnQ2Wvr448Sb2TEuoI3ZzuQ==@protonmail.internalid>
- <904e82be-40df-45d1-afc9-bb658ac9be8c@proton.me>
-From: Johannes Krottmayer <krotti83@proton.me>
-Content-Language: en-US, de-AT
-Cc: krotti83@proton.me
-In-Reply-To: <904e82be-40df-45d1-afc9-bb658ac9be8c@proton.me>
+On Fri, 17 Apr 2026 at 19:51, Randolph Sapp <rs@ti.com> wrote:
+>
+> On Fri Apr 17, 2026 at 3:17 AM CDT, Ilias Apalodimas wrote:
+> > On Thu, 16 Apr 2026 at 23:26, Randolph Sapp <rs@ti.com> wrote:
+> >>
+> >> On Thu Apr 16, 2026 at 3:55 AM CDT, Ilias Apalodimas wrote:
+> >> > On Mon, 13 Apr 2026 at 23:36, <rs@ti.com> wrote:
+> >> >>
+> >> >> From: Randolph Sapp <rs@ti.com>
+> >> >>
+> >> >> Check for duplicate memory mappings before reporting any incorrect
+> >> >> attributes. Could be that second allocation has the correct type while
+> >> >> the first doesn't. Knowing there is a duplicate in this scenario is
+> >> >> more helpful than just reporting the first mismatch.
+> >> >>
+> >> >> Signed-off-by: Randolph Sapp <rs@ti.com>
+> >> >
+> >> > [...]
+> >> >
+> >> >>                         }
+> >> >> -                       found = true;
+> >> >> -                       if (memory_type != entry->type) {
+> >> >> -                               efi_st_error
+> >> >> -                                       ("Wrong memory type %d, expected %d\n",
+> >> >> -                                        entry->type, memory_type);
+> >> >> -                               return EFI_ST_FAILURE;
+> >> >> -                       }
+> >> >> +                       match = entry;
+> >> >>                 }
+> >> >>         }
+> >> >> -       if (!found) {
+> >> >> +       if (!match) {
+> >> >>                 efi_st_error("Missing memory map entry\n");
+> >> >>                 return EFI_ST_FAILURE;
+> >> >>         }
+> >> >> +       if (memory_type != match->type) {
+> >> >> +               efi_st_error("Wrong memory type %d, expected %d\n", match->type,
+> >> >> +                            memory_type);
+> >> >> +               return EFI_ST_FAILURE;
+> >> >
+> >> > This check is now outside the loop and only checks for the last entry.
+> >> > If you wan't to split the fucntionality, don't we need a loop over all
+> >> > memory areas and the type?
+> >> >
+> >> > Thanks
+> >> > /Ilias
+> >>
+> >> Not necessarily. At the end of the day we can only really raise one exception
+> >> anyway. I just think informing the user about a duplicate should take priority
+> >> above mismatched attributes. It hints at a bigger issue.
+> >
+> > I dont mind about the priority. We can swap that over. But with this
+> > patch we will check for less problems than we currently do.
+> >
+> > Thanks
+> > /Ilias
+>
+> In what regards? We're still checking for mismatched attributes, we just check
+> for duplicates first. If there's a dupe it doesn't really matter what the
+> attributes are on either allocation, good or bad something horrible has
+> occurred.
+>
+> The prior version of this would never report if there was a duplicate unless the
+> first allocation it saw had the correct attributes.
 
---bcd7efa6e6a46d3af5b7d943ad7e21c1999d5f252bbbfa0aef90836dd8bd
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Ah I misread the loop. I thought it was trying to do that for multiple
+addresses, but we only have a single address in 'addr'.
 
-I have forgotten:
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Also the content of the loaded file seems to be the
-same data from the previous call.
-
-On 4/20/26 3:15 PM, Johannes Krottmayer wrote:
-> Hello,
-> 
-> I'm figured out an issue with the command 'fatload':
-> 
-> Here the file list with the command 'fatls':
-> 
-> ---
-> StarFive # fatls mmc 1:3
->   3048997   firmware.itb
->    149225   u-boot-spl.bin.normal.out
->      3184   depp.efi
->     12318   hello.efi
->     44122   jh7110-starfive-visionfive-2-v1.3b-8G.dtb
-> 
-> 5 file(s), 0 dir(s)
-> ---
-> 
-> As you can see the files have different sizes.
-> 
-> First invoke of the command 'fatload' saves the correct size in
-> the variable $filesize:
-> 
-> ---
-> StarFive # fatload mmc 1:3 $loadaddr u-boot-spl.bin.normal.out $filesize
-> 149225 bytes read in 9 ms (15.8 MiB/s)
-> StarFive # echo $filesize
-> 246e9
-> ---
-> 
-> When trying to load a new file with 'fatload', the variable $filesize
-> still contains the old size from the previous call:
-> 
-> ---
-> 
-StarFive # fatload mmc 1:3 $loadaddr firmware.itb $filesize
-> 149225 bytes read in 9 ms (15.8 MiB/s)
-> StarFive # echo $filesize
-> 246e9
-> StarFive #
-> ---
-> 
-> Has somebody noticed the same issue? Noticed in U-Boot version at least
-> 
-> v2025.10 and v2026.05.
-> 
-> Kind regards,
-> 
-> Johannes K.
-
-
---bcd7efa6e6a46d3af5b7d943ad7e21c1999d5f252bbbfa0aef90836dd8bd
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="publickey - krotti83@proton.me -
- 0x1A5D6E0E.asc"; name="publickey - krotti83@proton.me - 0x1A5D6E0E.asc"
-Content-Type: application/pgp-keys; filename="publickey - krotti83@proton.me
- - 0x1A5D6E0E.asc"; name="publickey - krotti83@proton.me - 0x1A5D6E0E.asc"
-
-LS0tLS1CRUdJTiBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0tCkNvbW1lbnQ6IGh0dHBzOi8vZ29w
-ZW5wZ3Aub3JnClZlcnNpb246IEdvcGVuUEdQIDIuOS4wCgp4ak1FYUZyS2dSWUpLd1lCQkFIYVJ3
-OEJBUWRBdm9MdzByd3hVZEZsMyszSytnTWhkTnlTK1p3WjU2Q0hlc2xBCndyKzhzalBOSjJ0eWIz
-UjBhVGd6UUhCeWIzUnZiaTV0WlNBOGEzSnZkSFJwT0ROQWNISnZkRzl1TG0xbFBzTEEKRVFRVEZn
-b0Fnd1dDYUZyS2dRTUxDUWNKa05aaG1aenF4TUNlUlJRQUFBQUFBQndBSUhOaGJIUkFibTkwWVhS
-cApiMjV6TG05d1pXNXdaM0JxY3k1dmNtZnQwODBDTndEN0laNnB0eVgvVzhucHhhRFlwT0x6Zm05
-Y21aK0hUUGJZCkN3TVZDZ2dFRmdBQ0FRSVpBUUtiQXdJZUFSWWhCQnBkYmc2UkVwSmNUMWFzaHRa
-aG1aenF4TUNlQUFCdy9RRUEKOVVkYTBubVA4Q1g4UW1PciswNEY5U3g0c1NSUHhza0NsdE5rWlRW
-RHROb0JBTjFlL3I5TnFZbUx1MjI4eHlVbQpmMHBkVXFlallJTytPT0lFZFFhMEZQd0V6amdFYUZy
-S2dSSUtLd1lCQkFHWFZRRUZBUUVIUUJjYVpHMlZxK1MxCmV0Q2NSWDVJaGZnSHJCTFhIcGV1SzJC
-VmZxZFNFVlltQXdFSUI4SytCQmdXQ2dCd0JZSm9Xc3FCQ1pEV1labWMKNnNUQW5rVVVBQUFBQUFB
-Y0FDQnpZV3gwUUc1dmRHRjBhVzl1Y3k1dmNHVnVjR2R3YW5NdWIzSm44bk5IbWtwbApTakU0b1pU
-WDVDZVlsamVGcmowd2pNWERNWENXZzdNNytnc0Ntd3dXSVFRYVhXNE9rUktTWEU5V3JJYldZWm1j
-CjZzVEFuZ0FBZGdBQkFMc2p0elBMYjBnVytUQkFzVXNGNjNZUW1BRXBsUm55RWwxQ20rclJNZXJv
-QVA5dVRkVFUKdThGL25ab0RUS3BxcGM4L1RqakhkU2JWMzMyUmhBdW1NSmQ4Q3c9PQo9TXJhaAot
-LS0tLUVORCBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0t
---bcd7efa6e6a46d3af5b7d943ad7e21c1999d5f252bbbfa0aef90836dd8bd--
-
---------b35067a9d1118fbfa4a49bc5f01b710b7f8f650f7571b11a2fe345c934aa403d
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: ProtonMail
-
-wqsEARYIAF0FgmnmKBoJENZhmZzqxMCeNRQAAAAAABwAEHNhbHRAbm90YXRp
-b25zLm9wZW5wZ3Bqcy5vcmfKH2wD7MARTNVgPLCgIFY8FiEEGl1uDpESklxP
-VqyG1mGZnOrEwJ4AAEkdAQDzBPgPiICCS/deXfYJvdw7t+vjGG3hojVhY/Wf
-bE/lhAEApTzWu5n+3oWimIoE+VkztHu2tsYF5le6jz1PrNmn7wQ=
-=5DdS
------END PGP SIGNATURE-----
-
-
---------b35067a9d1118fbfa4a49bc5f01b710b7f8f650f7571b11a2fe345c934aa403d--
-
+>
+> >>
+> >> >> +       }
+> >> >>         return EFI_ST_SUCCESS;
+> >> >>  }
+> >> >>
+> >> >> --
+> >> >> 2.53.0
+> >> >>
+> >>
+>
