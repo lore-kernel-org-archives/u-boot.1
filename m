@@ -4,92 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90C14EA71B1
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 00:51:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5308EEA71B1
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 01:18:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11086839D9;
-	Mon, 20 Apr 2026 02:51:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 86B6380433;
+	Mon, 20 Apr 2026 03:18:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X9jQ0GvJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GFUW7Ucr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4AB88419E; Mon, 20 Apr 2026 02:51:23 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 824FB83B99; Mon, 20 Apr 2026 03:18:11 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79BDF836AC
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 02:51:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 943C480087
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 03:18:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-ba7a1cc0380so80261966b.2
- for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 17:51:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776646281; cv=none;
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-b9c3e2cf3c0so448362866b.1
+ for <u-boot@lists.denx.de>; Sun, 19 Apr 2026 18:18:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776647889; cv=none;
  d=google.com; s=arc-20240605;
- b=V0z0ugWeesHfPGgROfZSPGR6DUbilqGSf7qbrgKicu9tT9sJOa0skz5+6fheN3o9bb
- HsjaILvXV7asbnAk+FckD9Fd3xAQ/d1S8S5+tTYuKzxDHXSARO3HPyFRrHfF3IAcfvz7
- +7eyMs4ZQoCjbHfKZdANH1zoeFDry+SH3s5PK0FLHBKNd7uWNF+wHy7qL6gjGQPi2MbN
- bzSY+zEjBSfv2/yGmjRgWaN7AoJ61uG3GAeskrDh9pj87SDWs8sY26i7OLLyYCHluBs0
- 7BYetCmE07Jtc7iMTJRudOD2k+xRAHgrmV+c1v4DuyTR9HGonVS6Ae4WQvDkB4tEDq7u
- T2SA==
+ b=SIOCopb1M/IDihRSAFhV5hSPb5mIldtYXTYgQaqOqSzxE6j650iZa5haVlRSkLe+45
+ 2i8Fz8OeWQoozE8hA1Pd30SgHpz8/j2uBPWeBH+5OsDDSPTiokLLfEqqYNa9AAK4Dumo
+ iZHdrVsWBQnLunxTWHRy2SXRuYaoj8qeCsNYmoKbDRvD7vmsTvLdb36j2QeJJfuCVqR9
+ JIefq9FmMU8d7hOPIdaT1jZrMP83cBnKnL+YvDetIa3absI/8DXl/xjMi9lwq7hcX9A1
+ dv5EAU1jTsOVT6LNcwxRoPsLWAhDVZJd5PuO+7bvXSltpn5oHYVKsnXnXrLmvWV6djoH
+ h4wQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=evArLm4q2DGvFXUgWM9ZVvYCI+pPsYZpXHsObssqVO4=;
- fh=hl+4EPCgakLOnk7XW3qrLoLdx2BF565tvPN7+O4zasE=;
- b=Vikt1LgwE3orR+t6t9ySZREYA6/KRa+3iGUPKth+kIayOpgnnsHc3AMnfdxyiFjnet
- nfApXSOqf0iyQSrtSl5LN66Lw7mANHubEiu/err2wTQhP+VUFIC27+7za0EpdzsjbcfB
- feFkzL9oTaDX5JcsjNbzvdbeceTC4udI71rj2SlC3LfaftbdhcCoQQ2ilMgXQPoTeQgX
- URMpe/48AHG8m+q5jFeTrhNvSsXKb6oKQeDQPknpp5DVc7D8AJ/OzVd4Iz/KVweSuNuZ
- WnOvMFYttYpioHe/T/l1xQoGOGnK69khMhW8YSxvC5gvplAMBBmXZBaT9GEYCzc1S9X+
- hBiQ==; darn=lists.denx.de
+ bh=hC0UVkbef+qqs/ky7EqHlA1ApiJNE5oSnlg2XjnNdGA=;
+ fh=S8xjaNhDK5zkqclbPZi4D14oajyF+NpuR2kRzRAZ3EE=;
+ b=HVP3ctAWxWyGXS/UyzK7klyUWWQ15MNqM7ISefc+nzx8eQi8nCQ27yQSJMfwj0is3Y
+ EoduDcfjkhi9Oga5I+KNGkmsSmjtpRYLDIeUCs7idmh6sJ9vJcrJYC//GdPXx/TcV5AD
+ JEcPGW6G+Z+F1UN/24Md8MkjMWFHFgQ9tfLNAQQv2TcohU5LC7iF7iKR+xHbkZfMLsxi
+ NIgq2cEpIf87n1iIyVzwW5BqTg+uY5cIO13f3vPCUP3h1zKFhYz9rNt9Wxf/mKIwUnuP
+ +ImNvNDX1Li69akwqTLW5LmdyVXJcdL2gE76PL5qpTgY8co3ceI1aFppa/u7Zqv51Gzs
+ JPaQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776646281; x=1777251081; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776647889; x=1777252689; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=evArLm4q2DGvFXUgWM9ZVvYCI+pPsYZpXHsObssqVO4=;
- b=X9jQ0GvJXGu1XU0H22yXaWYtPTe60FQKL0jESp2ZKj3sbM47AhtgS2Ay1QYbCuDy87
- tTjGIDzACUKMYYtCbxusgqjhDB6MLSHcVWT84U0h7Bq4sbD1fNzXWg/N2HIq+95JqN+q
- wPc9dIHI2/o0Aa6g0rHnC+Uh5Ys5aAWcvrEOg=
+ bh=hC0UVkbef+qqs/ky7EqHlA1ApiJNE5oSnlg2XjnNdGA=;
+ b=GFUW7Ucr+d4ZeL/uWhBccYC1Pj700eYiwdgJlZR0dekRV2B1s6wb6tmUbIelL1hzej
+ NxSM8F+GSgjZwAJFpv4VqyzYvIpxcKaLVNAxADoiHjipSONZz3PdYTws+FYaCII+MJ68
+ FYqFXSopAKR1xXN7dKuLtSVkc3jS0w6sc+k48=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776646281; x=1777251081;
+ d=1e100.net; s=20251104; t=1776647889; x=1777252689;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=evArLm4q2DGvFXUgWM9ZVvYCI+pPsYZpXHsObssqVO4=;
- b=F7rky9Ru42CQIo1hsZA0bNYJLBIsgXiv6m2WpZViODs99AM5p6HQ4UiSGJKA1LkDxu
- CUaQ4F8Hvw8N41mG6x8nbyZGB4Qxi5HVX6KB0v4ShrxtGJbjy0T1/Ro30gSW9NQzmFt+
- 1QUstDU/5tJF59LPmWD8fkNPhvIKnS4cHInGESws9XzqrrC74rQVm1sONxU4W5NIDYT4
- 96vk0NBLvn4plmFcmNXlIM42Pta7w5/IkkQudtOPmoMnwfg6Y30BCeXKZuOi/KRSSaBF
- 7w5wSoke2O8CS0WnwJDe19nUd9c2oTQQDodrewBAQbu+Fzl/oV1gPHc7ogq6+wCeV6Lf
- z1yg==
-X-Gm-Message-State: AOJu0YzieYtd/zhG/qS3BiJRQDX9kusX6tB9r415S6zgxFN8M5zuLcBR
- JH0xX0YkOxmC05s2RTu/6b808VTYGBnRm3TfJ3rm/2LvVZX4abIXDeJ5zCm9SUrqc4gJvMweXlj
- VFEjjIFQKKJFb2Xilv5GvasBfHL5W0RteaqBRJjfQyT24gDmDotZAwzO4
-X-Gm-Gg: AeBDieuSezAenQtWgxorihWNqT8r7b6CXw7zGBPHOLF8PdgkONr9SSJPc2Dnjrt5Jh/
- ar0RtsMO/MSztmgCXlGqYVU1K/v3J2+zg6AgcQ1q0DbsBCjd03eRcAhFadxVameZQ0JdSf1GR0B
- VTzWKBCcfXmpLyEczMMP7JJtRWDNf3iBhCd9hqIoN8QLn0dRswIi+o7jaot7a7W/xOFdBSo6e35
- l5rEaccBlFsXQlLHqwTXGiSJ3JJFGOy2rUsQFYSXh8H2XdBLpo2LUGDf8EY1LngxPiFut43UmTE
- 79rrMh/JejOiwu6oKaI0
-X-Received: by 2002:a17:907:94c7:b0:ba8:422:6015 with SMTP id
- a640c23a62f3a-ba804226350mr38043666b.1.1776646280854; Sun, 19 Apr 2026
- 17:51:20 -0700 (PDT)
+ bh=hC0UVkbef+qqs/ky7EqHlA1ApiJNE5oSnlg2XjnNdGA=;
+ b=jzM8qE/I0FeB1syvEhvXXj2qePLW4rmLQxM2MKRrbjGj6rXjNjEW8vmI6Ea/3RL5XB
+ QgPosRvdTt9USXuVAPkRETp5USfBdRB2JtDHEmi49Q7sxli3FBhosEd17kJ2FNSwUzjF
+ 759qmMcuHL4NX0xfhNZ0nPxQRzJItnvFI54chqxcpfZ4eehYyuGBSxmeiCHBfRGrAIjR
+ 4Vs2WZ75XDm8kUBbIj/XAAZLwYq0x/d0kiA8xFxgwxp6ES/wAOVd1vknNHYE7jIIfdYW
+ NeA9pWZSHu+jzfRDvnkC5rdkqk7rTyGCbWSwISZBxsnwuxo0zD6W87OBC6moOrtc1AN5
+ 6Plg==
+X-Gm-Message-State: AOJu0YzFLcdO1mo99h/ER7xCUWlkxAFi9K3zP2ob+wwMvWsCrljlTUbH
+ e/fYHyxvbkT3W2PnzwpVw4Ek96hYbTlx/rzegkbyAmbIWFEMrLbgK7NCkegYq++Vipj0KemEIHV
+ hj1YHTcfnvJpAVGMzxyaFNJLBsgVqEnuaXO7h62eo
+X-Gm-Gg: AeBDiev6CqkmOSf6Y45kJbPFj5l3hgGQTNuC+EFOr9nHgjM3wLfMJSLNW9s52aTCXOI
+ EIxxqdsgY+kFHMyERXGsWLKzOM+BJwdmxdYm19PvougbBQdpyRRmUGBa22HtWN/jWZUYBG4EiNs
+ /qc38kwveorAxKuICW/rxU0PAoz6Bxtl/r7REeP+rJB1/d/jbWy0KJ1vPo35al983Kwqyqf/Kov
+ tWPkUn1QbkS6zzmz+ddh4iBRZrVQ8ddOgDGrFT7gJiGuELzJJnQp2Y5R97c2nzgmFtgKBKiWXRd
+ IWMkq4KJl40eCPRHTJcE
+X-Received: by 2002:a17:907:a68a:b0:b9c:1a5:acb4 with SMTP id
+ a640c23a62f3a-ba41ac02272mr515489766b.45.1776647889036; Sun, 19 Apr 2026
+ 18:18:09 -0700 (PDT)
 MIME-Version: 1.0
-References: <034a4ae4-b579-42b0-b6b0-3a204737156f@proton.me>
-In-Reply-To: <034a4ae4-b579-42b0-b6b0-3a204737156f@proton.me>
+References: <20260419-type-v3-0-ec49acd6870e@oss.qualcomm.com>
+ <20260419-type-v3-1-ec49acd6870e@oss.qualcomm.com>
+In-Reply-To: <20260419-type-v3-1-ec49acd6870e@oss.qualcomm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 20 Apr 2026 12:51:09 +1200
-X-Gm-Features: AQROBzB_ooP4-cZ6V_LXPEJFtFEHx3bqhR46FPAi_D4-18DVTIibAVaCxEpI6UQ
-Message-ID: <CAFLszTgnGxLnEYdPyymLowq9jUTfRyneAPfBLu336MGQB__YDg@mail.gmail.com>
-Subject: Re: How to build U-Boot with a custom out-of-tree device tree
-To: Johannes Krottmayer <krotti83@proton.me>
-Cc: u-boot@lists.denx.de
+Date: Mon, 20 Apr 2026 13:17:53 +1200
+X-Gm-Features: AQROBzB0vC20FiYmhD9-NyNFYCc5f8G0SuavZwymek9_nuS0W1GPLG1D1TEe9AA
+Message-ID: <CAFLszTgqYxSFZunDAed0t3-zxW+mUnmDQ5VpJ2hfzFjJ1hvvag@mail.gmail.com>
+Subject: Re: [PATCH v3 1/5] disk: Add partition lookup by type GUID
+ functionality
+To: balaji.selvanathan@oss.qualcomm.com
+Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io, 
+ Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, 
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Richard Genoud <richard.genoud@bootlin.com>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, David Lechner <dlechner@baylibre.com>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Simon Glass <simon.glass@canonical.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Michael Walle <mwalle@kernel.org>, Sumit Garg <sumit.garg@oss.qualcomm.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jerome Forissier <jerome.forissier@arm.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,40 +133,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Johannes,
+Hi Balaji,
 
-On Sun, 19 Apr 2026 at 02:40, Johannes Krottmayer <krotti83@proton.me> wrote:
+On 2026-04-19T10:24:02, Balaji Selvanathan
+<balaji.selvanathan@oss.qualcomm.com> wrote:
+> disk: Add partition lookup by type GUID functionality
 >
-> Hello,
+> Introduce part_get_info_by_type_guid() function to enable partition
+> lookup using partition type GUID. This complements the existing UUID
+> lookup functionality and provides more flexible partition discovery
+> mechanisms.
 >
-> This question is generic and also valid for none RISC-V boards.
-> I think it's maybe already asked, but didn't find any useful
-> information this time. My question is, is it possible to pass
-> a specific device tree blob to the build system from U-Boot?
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 >
-> Example: RISC-V board Starfive VisionFive 2 8GiB variant
->
-> The default in-source-tree device tree from the VisionFive 2 has
-> only 4GiB RAM. I own the 8GiB (RAM-IC BiWin BMWZCX32H2A-64G-X)
-> variant. So therefore can I pass the device tree blob directly
-> to U-Boot's build system without modifying CONFIG_DEFAULT_DEVICE_TREE
-> in the device configuration? Exists there an environment variable?
->
-> Want to use U-Boot's EFI subsystem as loader for bare-metal
-> environments. And I think when I want to get the memory map
-> via EFI there will with the default device tree only <4GiB free
-> usable memory shown, although there are 8GiB.
+> disk/part.c    | 37 +++++++++++++++++++++++++++++++++++++
+>  include/part.h | 21 +++++++++++++++++++++
+>  2 files changed, 58 insertions(+)
 
-You can build with: make DEVICE_TREE=...
-
-See dts/Makefile for the logic.
-
->
-> Thanks in advance!
->
-> Kind regards,
->
-> Johannes K.
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
 Simon
