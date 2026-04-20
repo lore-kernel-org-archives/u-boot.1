@@ -4,52 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08789F5A8C9
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 22:47:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55959F5A8BC
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 22:58:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 916F5842B7;
-	Tue, 21 Apr 2026 00:47:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=proton.me
+	by phobos.denx.de (Postfix) with ESMTP id DACDE83A91;
+	Tue, 21 Apr 2026 00:58:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="E1Z1BzsG";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="IdTok8Fp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43D50842E7; Tue, 21 Apr 2026 00:47:04 +0200 (CEST)
-Received: from mail-4316.protonmail.ch (mail-4316.protonmail.ch [185.70.43.16])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 76F1483BC4; Tue, 21 Apr 2026 00:58:50 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2DFA8425F
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 00:46:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=proton.me
+ by phobos.denx.de (Postfix) with ESMTPS id 22429839D5
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 00:58:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=krotti83@proton.me
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=ltl4tnn2fjhpbpfypo4sa3be4q.protonmail; t=1776725216; x=1776984416;
- bh=EpoImTI8KWlLelNZ9rbDeaMwEaPoboODjWbEG4D8pZ8=;
- h=Date:To:From:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=E1Z1BzsGxzChar7qSrRfYsxEpEccIf3FT9n26njQYxBmsxloEcGNZb2h8YzRMZkYy
- sCOoEToti571P5rWVOkjLxnXEwBJt1sZeWjF5Z3iUDCAxZge/ywQXp9ODpQhuzAML4
- 4O9ErB/9vDZSJpcE9TNf3DS+BR7pvzFuf9ob6Cnix/zQ5E6T3p8jzA8TUMZU1DaTgZ
- dP25U3ejUBy8nuYGE6Xh9smc1jdU/w3ufwmcitCS9EHpei/iYYOPbiKDr+S/+MB3uL
- w0mbkNjkl7fbReRKJ2GVXStOR0klJRAupKpdMZyHjE/VR2lrLOFhkEt4w4114/7cxm
- 57QPPv+emB9+g==
-Date: Mon, 20 Apr 2026 22:46:50 +0000
-To: u-boot@lists.denx.de
-From: Johannes Krottmayer <krotti83@proton.me>
-Subject: Re: cmd: fatload: command doesn't update $filesize after next calls
-Message-ID: <8a095db9-46a3-4d66-bec4-5901a1990a85@proton.me>
-In-Reply-To: <7ef8cbf4-9b58-42b3-b8dd-0dd337529ebb@proton.me>
-References: <904e82be-40df-45d1-afc9-bb658ac9be8c@proton.me>
- <7ef8cbf4-9b58-42b3-b8dd-0dd337529ebb@proton.me>
-Feedback-ID: 148511850:user:proton
-X-Pm-Message-ID: bac6505cce748774e80147ce5a7eb9a07dc56739
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-4756e74f8edso2527624b6e.1
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 15:58:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1776725927; x=1777330727;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=wBwb5DHnaw6Kqy1D5beE2OV+bmsjw/VjFy+XD1uTLM8=;
+ b=IdTok8FpK2UdQfcbx9KqRuwU5KFs03nY4PobEf5QLwyHgwP17dIcyNHXy+lj5Xm3ds
+ eVfCTzII+yyTXsEqfm3rQKJDbJC1UM+63jhrlB+2l2k0qv6N504AKSeaP/ZEl44Q5uYx
+ C5ja6MTuBtPZ/jPwjQ6aofJSqa6KRm9u4YCgCHFl7hFupnQXxstqaSG6+gbTfHW2+MA2
+ nfhZdzWMwu1zfWY4CXP8Nv3GNZWwn/5pgwE9dFvVsvI9Yq3+WCbgqVD/GxbXF0kMxPeH
+ +WBKA0Ty5eJdi50XNRbAM5I+Yh47mHW0QVbR/ge7eyciYAdI+GTP90MjB7mPtNDAB8AS
+ Cd3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776725927; x=1777330727;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:from:subject:user-agent:mime-version:date:message-id:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=wBwb5DHnaw6Kqy1D5beE2OV+bmsjw/VjFy+XD1uTLM8=;
+ b=AtDca91wfjSReSABO1HjBjoqXe0NnM8bfcvqoDxrm8gBjSKn9X1KavUwVv5ZN1UrON
+ NHhtT/8F/KEbC1Vh5pJIvDifZANy8vhAWguczTpiOciKNIlheaT3/4IbpdoAi9DKvBFb
+ BDqZuQ6oy2Ucpk7Vrs2+YTtF9UhlcbKy6ho6vji2yc7FUFH4TCrNB6M/1GhcmELDtSXn
+ coSwXslP1LluMRTvDFGd0HqijkmM9ddrECQJuUi5oIpaiSeOn6Ya8fr2O/5oeGB/Ebvn
+ oZCB2k5EazAXQpJ1MsuWUwcnwdm1M0J95ltDMvIipAdmbPxNF6AuPk7QxBIIIGys1pg9
+ IznA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/kkNXFj83ZoQwAqBWhtcgN0/X0hBKAaNTl+FFIdunbkwQTTVcAq2awEVGnalFojwz1Ix/5WY8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzi8Hz65lDwHVh1eqTPqp6H+uPvAsJWhzKD7djcaZPgo5/BZnZS
+ YjganwFwPvMdJ6j14TQhGizUU5r1RPeGSMxs90Th7OVmQlW5I6X/ZGIUAngh8fOn2hM=
+X-Gm-Gg: AeBDiet8JVBdnGrbOoHQ9jpwA9RYZ5mXtWQTTNBtSpF38bnn6UFkFZgSZUyp5oi63tN
+ q62QEIlhmbPj300n3m7jXY2rBriJZmRFNTkCxeoktoUG6A/8tgJAEB0U8G/JjNxNEJF6u55qtjr
+ GtOmdpcIg6wqSdIyElys1fcW+JHd3uCcsb/UcIS5uD++LYDAooFLxB7FlBAonQoBGuDlVdoZzXx
+ l38buraI4yZPowdHZ7my2I/suNCxKYKZuZjfZqKjmVkltdgK7C66kMzCc1/ZCpuiOkm6ghj0mNA
+ si2TLzkLYdLmQr6XD4H6Xl989dVFSGxG7BYQcApR6+nRzo2KNmXrvt/BDSx5MFchMbI+RRwCMZ8
+ TwpV3LULMk+UQnNalQ5kRfx0P/e3MlvocxhNgbBmcmyD52qLGwoHq0ILw70NMIGZioW4betL4mE
+ c187gwsxrceBeD/K/mLkbxhTf4ubn4l3aF1Ae22cP3AS6qZ4zqbf5HMLn/CjjL1SKz6AcntoMfc
+ UHYC8JEhkl4
+X-Received: by 2002:a05:6808:50a9:b0:463:faa3:8dda with SMTP id
+ 5614622812f47-4799c958f2fmr10259586b6e.13.1776725926821; 
+ Mon, 20 Apr 2026 15:58:46 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:49fb:b337:a968:94e7?
+ ([2600:8803:e7e4:500:49fb:b337:a968:94e7])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-479a02097b6sm7750684b6e.14.2026.04.20.15.58.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 20 Apr 2026 15:58:46 -0700 (PDT)
+Message-ID: <ec9b6639-00a0-4fc4-aee4-f57f9cb26a5b@baylibre.com>
+Date: Mon, 20 Apr 2026 17:58:45 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] tools: mkeficapsule: Add disable pkcs11 menu option
+From: David Lechner <dlechner@baylibre.com>
+To: Wojciech Dubowik <Wojciech.Dubowik@mt.com>, u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Franz Schnyder <fra.schnyder@gmail.com>,
+ trini@konsulko.com, "openembedded-core @ lists . openembedded . org"
+ <openembedded-core@lists.openembedded.org>,
+ Francesco Dolcini <francesco@dolcini.it>
+References: <20260420083850.8504-1-Wojciech.Dubowik@mt.com>
+ <61daa047-74f0-4a76-a61f-de54ca4b716e@baylibre.com>
+Content-Language: en-US
+In-Reply-To: <61daa047-74f0-4a76-a61f-de54ca4b716e@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,70 +108,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
-
-This thread can be discarded. Have misunderstood the command
-'fatload' fatally.
-
-'fatload' works as accepted. Have used a non-official U-Boot
-description from the command...
-
-Sorry, for wasting your time.
-
-On 4/20/26 3:20 PM, Johannes Krottmayer wrote:
-> I have forgotten:
->=20
-> Also the content of the loaded file seems to be the
-> same data from the previous call.
->=20
-> On 4/20/26 3:15 PM, Johannes Krottmayer wrote:
->> Hello,
+On 4/20/26 5:15 PM, David Lechner wrote:
+> On 4/20/26 3:38 AM, Wojciech Dubowik wrote:
+>> Some distros are using gnutls library without pkcs11 support
+>> and linking of mkeficapsule will fail. Add disable pkcs11
+>> option with default set to no so distros can control this
+>> feature with config option.
 >>
->> I'm figured out an issue with the command 'fatload':
->>
->> Here the file list with the command 'fatls':
->>
+>> Suggested-by: Tom Rini <trini@konsulko.com>
+>> Cc: Franz Schnyder <fra.schnyder@gmail.com>
+>> Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
 >> ---
->> StarFive # fatls mmc 1:3
->>   3048997   firmware.itb
->>    149225   u-boot-spl.bin.normal.out
->>      3184   depp.efi
->>     12318   hello.efi
->>     44122   jh7110-starfive-visionfive-2-v1.3b-8G.dtb
->>
->> 5 file(s), 0 dir(s)
+>> Changes in v2:
+>> - make use of stderr more consistent
+>> - add missing ifndef around pkcs11 deinit functions
 >> ---
+>>  tools/Kconfig        |  8 ++++++++
+>>  tools/Makefile       |  3 +++
+>>  tools/mkeficapsule.c | 17 ++++++++++++++++-
+>>  3 files changed, 27 insertions(+), 1 deletion(-)
 >>
->> As you can see the files have different sizes.
->>
->> First invoke of the command 'fatload' saves the correct size in
->> the variable $filesize:
->>
->> ---
->> StarFive # fatload mmc 1:3 $loadaddr u-boot-spl.bin.normal.out $filesize
->> 149225 bytes read in 9 ms (15.8 MiB/s)
->> StarFive # echo $filesize
->> 246e9
->> ---
->>
->> When trying to load a new file with 'fatload', the variable $filesize
->> still contains the old size from the previous call:
->>
->> ---
->> StarFive # fatload mmc 1:3 $loadaddr firmware.itb $filesize
->> 149225 bytes read in 9 ms (15.8 MiB/s)
->> StarFive # echo $filesize
->> 246e9
->> StarFive #
->> ---
->>
->> Has somebody noticed the same issue? Noticed in U-Boot version at least
->>
->> v2025.10 and v2026.05.
->>
->> Kind regards,
->>
->> Johannes K.
->=20
-
-
+>> diff --git a/tools/Kconfig b/tools/Kconfig
+>> index ef33295b8ecd..ccc878595d3b 100644
+>> --- a/tools/Kconfig
+>> +++ b/tools/Kconfig
+>> @@ -114,6 +114,14 @@ config TOOLS_MKEFICAPSULE
+>>  	  optionally sign that file. If you want to enable UEFI capsule
+>>  	  update feature on your target, you certainly need this.
+>>  
+>> +config MKEFICAPSULE_DISABLE_PKCS11
+> 
+> Options that disable something instead of enabling it are confusing.
+> Can we make this MKEFICAPSULE_PKCS11 instead and invert the logic?
+> 
+>> +	bool "Disable pkcs11 support"
+>> +	depends on TOOLS_MKEFICAPSULE
+>> +	default n
+> 
+> I think it would be more convenient if we did not require PKS11 by
+> default. Otherwise, everyone using Open Embedded that doesn't have
+> the "p11-kit" PACKAGECONFIG option set for GnuTLS set (which is the
+> default) is going to get a build failure and have to research this
+> and find the option and modify their config to fix the build.
+> 
+> It seems like it would be better to make people who actually need
+> PKCS11 possibly get an error by default instead and enable the
+> option. This is pure speculation on my part, but it seems like
+> this would be the smaller group.
+> 
+Or maybe we could avoid the config option altogether and do something
+with `pkg-config --libs gnutls --print-requires-private` at build time
+to detect if `p11-kit-1` is used by gnutls or not?
