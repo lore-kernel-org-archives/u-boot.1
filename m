@@ -4,121 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81910F588F7
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 16:32:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AAA7F588F9
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 16:35:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8469384297;
-	Mon, 20 Apr 2026 18:32:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id AF0BF842B7;
+	Mon, 20 Apr 2026 18:35:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dNe0KUvU";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Z26rdLn3";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CoTcccj3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2D6B842A4; Mon, 20 Apr 2026 18:31:59 +0200 (CEST)
-Received: from SA9PR02CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170130001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10c::1])
+ id E33AD842BF; Mon, 20 Apr 2026 18:35:17 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCA6584258
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 18:31:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uNZ3W7DSNgjqx0va7oZ7Oi5o/nLb3JE1iWSMYSaq6SdOQxaWYP5AmkA+vCa+nJVYMNYVfyTxeAXoMyxNTcZrtoct1L0ocEjNQLb/SzRoclb81THG1o67Ovp61AYVyX8z1nea2RofKho4xhY1aLXhrbzKmOftCM89t/IA3H5XmoBwc70b7L1ChNz8+s9oHIPeZC7a+eo2iRXqvK6Q98q+vx+DOTOOVSvswZgpBO5o7Fz43BmZdqP6Mvm+ZIbE9tivy6v1WrxeiUukFEy7C94To+Pb68vkQxdT89f47be1yE+gXo9QSOA1SN6Ick2Mr/pwP4lWa4pxkY9PRzG9noKq9g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=D33iInUjXrRdg+PDHYVvVtaZSyT0PKIKSKxPjC/SYf8=;
- b=Te12uYbiiIRyKlH1uid9/h1ujUxabakKFFG1K1TQozU6OC2jTkl8muq3g8ZR4HE6gUzzJx27KWGjeT3mIR72FlSin5ePuIqKmwoW8yw1ZP5hSOdM9RF5oxC8IyXtQ71BAdk7xtUAPjJxAGQbR209WZrolNBhIPyc0CI/+xstOZVp6FVJ9+2TBJxYC92ATS5koE+k1bj6PMS4w7lJiR1p2AdFJ7yitS7AbfYFbFQY3ahfVULvmwtRvpdTzjUdJTP+rnnZ2AMMEH3xtpL8PZy+LZTq6YVMUVUe1nMdAVBG3zXTEBrIHLl/pODMxq0S4gyj0TvZAi/Q1DGcmzTCYVhGxw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=D33iInUjXrRdg+PDHYVvVtaZSyT0PKIKSKxPjC/SYf8=;
- b=dNe0KUvUetrJR1SpfgOjEtePJ4jjdQyJlrEf6uZT1Sq/cvfYwObgoNtmJ1/78d44yco3KvVoNmIqeguCYYsn6eaPAKK2hPIDgiREqykdWLwU4PIN7lnPCBQJRWOytFyWwR2/jcDIonshdALaRPwsAUawm8ljOhY3VxjaznVtK6I=
-Received: from PH5P220CA0010.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:34a::13)
- by PH0PR10MB4552.namprd10.prod.outlook.com (2603:10b6:510:42::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.21; Mon, 20 Apr
- 2026 16:31:53 +0000
-Received: from CY4PEPF0000EE32.namprd05.prod.outlook.com
- (2603:10b6:510:34a:cafe::d) by PH5P220CA0010.outlook.office365.com
- (2603:10b6:510:34a::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Mon,
- 20 Apr 2026 16:31:53 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- CY4PEPF0000EE32.mail.protection.outlook.com (10.167.242.38) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9791.48 via Frontend Transport; Mon, 20 Apr 2026 16:31:51 +0000
-Received: from DFLE214.ent.ti.com (10.64.6.72) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 20 Apr
- 2026 11:31:48 -0500
-Received: from DFLE203.ent.ti.com (10.64.6.61) by DFLE214.ent.ti.com
- (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 20 Apr
- 2026 11:31:47 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE203.ent.ti.com
- (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 20 Apr 2026 11:31:47 -0500
-Received: from localhost (rs-desk.dhcp.ti.com [128.247.81.39])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63KGVlk52964155;
- Mon, 20 Apr 2026 11:31:47 -0500
+ by phobos.denx.de (Postfix) with ESMTPS id BE60784258
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 18:35:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=gurumoorthy.santhakumar@oss.qualcomm.com
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 63KCxJin3455879
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 16:35:11 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=cACC5b4ghg/lbmwNERUp37c4Zo6SBXH5xqw
+ YJ/Qtsx4=; b=Z26rdLn3SXhK+zxBfRYySQKD3mVi9h2rb6iYf5Bsa7tAbtJoVvX
+ IJVDxlgsSHnciT8kdFrJXML/7GvP2JlZtvZk/q41oqpmkm/ewcQouw8oGEUh19pi
+ 1KeVfG2CB+zLfb5odijme8CsYOWdKCPyPpPJfj644rir5RcZV6CmqnNvuzMCOQaW
+ S9pZcCTcGo/RmHBpTXGlt/e3g7yc/oJHdnJcAcZIfz4BsQn/sHexuZhedBsqj4Kh
+ jYFxbU4BgcwtJTSuPJXcuM7Jffig1bn2WShnqT0gO/3hcOms5+PWoIgpbcfJWZnn
+ XEzv6JYdLAzFVDyOAH66VIIJcR9XXWUxElQ==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
+ [209.85.214.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dnfvjt6xp-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 16:35:11 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id
+ d9443c01a7336-2b2e6ee9444so35492405ad.1
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 09:35:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1776702910; x=1777307710; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=cACC5b4ghg/lbmwNERUp37c4Zo6SBXH5xqwYJ/Qtsx4=;
+ b=CoTcccj3RcWN5T/8ORyV8o6FT2swLAHWKt3GvI+cynrkAaaR0ddDwWKP00hGGsagzr
+ +bi2bMhMR8QGqIkY6c7+atzpP9fvIcyBndq+XnxO38dbtvcsn1z3+zlv3DTOS4SMDQGo
+ PaBP32B/G6KZ0aaKWQRTAHP4rvY7f7nNF4VrHj4Nwu/u5MXS1w+Dzz7mtA0rAZInBfxT
+ 9xbL5ZY6F9pHkLPXfo6DGM2DieFJHVlQzfNGnCmqyURlFaMvs9PtKCEJjdFXv2RhoMv2
+ 9jjiDl9iNjYozs2kD1JQWhGgy+bthbyYPk3njv6cCmIwJxFyjyayIGaUF9nisJRz+oCn
+ 7yaA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776702910; x=1777307710;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=cACC5b4ghg/lbmwNERUp37c4Zo6SBXH5xqwYJ/Qtsx4=;
+ b=bxrIWC1j5fPp26pf4/rjmIXtCxsyLVkZV4waFXPyaUhWNsXTUmlDfpl4CQwwjLWmc2
+ FjQ9wLGv3SQ7HijMGN6030quJH+kT4bHtHievZJ46ydeRDSwnYTTtnw0Hmz29sByrXSo
+ MzyX1gr6o0UkEsBf9l+2CQTAynGNDuQB5kbM+8GBu3JYytXhmkHe9eevWXhjx+Nblmmz
+ nKXIhUzyu0tpPQfIH0G37VHXdyGXDVDSQSfGGbBrXOL8RpJ+CdNpYqplrq7FKAeGHyBD
+ si4hCZpTClaOvBa9WE/cP8dCleBVPPltY6vmE1sw87Ks2JFaKYocutV3ZV25SeHVcKg2
+ TQ/A==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+UyYCN0YcFX2S5XfS9iSI27NfqFKGTurohI5ZRnKmZUy0jfixxAYiXb9/Ei90Wa3UBWZqmSXE=@lists.denx.de
+X-Gm-Message-State: AOJu0YyywaiawBVIrhmKiXggpJq0ithxt21s4lcUPMTAShRu+pldfJ/P
+ sWKWcNFSd+mEdg4oVL4L67nnvrKXL2784rttBc0KIV2BeP1nV/JVKm/JGmqx+0EHhWLYK3blLJD
+ VZncgyqlDfGxhc2m81vJt8BKMm+KzeG6C6RpzZ8XPK2ajy0lgukiaLCr4
+X-Gm-Gg: AeBDieuXkSXGA1ePknK7wv6740kSlnCk6cf7Ie5bvmXogai1JBLYKE1l+OTje8w6Ljy
+ ZPr+20qV3haQmAdMQztjqE/O3OP6OUR4dIQctx1PFEK/QSgUQ4AsQT3b3fjQfROlRIYRI2JpUdB
+ UCeI6nYnTfWUOn8Qkku3mYnGQU0OYdsMmN1ovk4kmSJvBC6hE0UMV4EaoTWXTIfCrc/U1LeLJo+
+ 1E2LCdnAtClstAJZq2BH+eKw24rFScVDQMJOpU5aXvutPN3FeK6VAPeCyvWIBZ0NElO2oq7eX4d
+ lPe4+As1C+jnEbYsQFx6mvMpdV8NIUR85LsmN8bnS7IsvQq1Chi/eRk5pVaHlwQyfMJJ02ynzYa
+ v+C1n0nI3Yt7VEutJQOe6QEbnAy1a9wLOw8jhd0NV06hpl2MR4PY39XbhDWwkDklq0JqN4U+lPS
+ lBg6OA1tblyw1xIZwdGzLbhXZs0KNzgtmHiLEBAoqroSAF6KpLNec3LfN5K+y4mWCRKjc=
+X-Received: by 2002:a17:902:db11:b0:2b2:5070:8b with SMTP id
+ d9443c01a7336-2b5f9da50b3mr128466465ad.1.1776702910237; 
+ Mon, 20 Apr 2026 09:35:10 -0700 (PDT)
+X-Received: by 2002:a17:902:db11:b0:2b2:5070:8b with SMTP id
+ d9443c01a7336-2b5f9da50b3mr128466045ad.1.1776702909591; 
+ Mon, 20 Apr 2026 09:35:09 -0700 (PDT)
+Received: from hu-gsanthak-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2b5faa326f5sm102751225ad.32.2026.04.20.09.35.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Apr 2026 09:35:09 -0700 (PDT)
+From: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
+To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, trini@konsulko.com, andrew.goodbody@linaro.org,
+ swboyd@chromium.org, gurumoorthy.santhakumar@oss.qualcomm.com,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: [PATCH v1] serial: msm-geni: configure RX watermark register
+Date: Mon, 20 Apr 2026 22:05:00 +0530
+Message-Id: <20260420163500.4138411-1-gurumoorthy.santhakumar@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Mon, 20 Apr 2026 11:31:47 -0500
-Message-ID: <DHY4JO0JPJZK.AT7IQD6A36IE@ti.com>
-From: Randolph Sapp <rs@ti.com>
-To: Simon Glass <sjg@chromium.org>, <rs@ti.com>
-CC: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
- <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
- <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
- <ilias.apalodimas@linaro.org>, <u-boot@lists.denx.de>
-Subject: Re: [PATCHv3 6/6] memory: reserve from start_addr_sp to end_addr_sp
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260413203555.1990337-1-rs@ti.com>
- <20260413203555.1990337-7-rs@ti.com>
- <CAFLszTh0-1qCbN63_6Yr-jnmWQWYEa3epaLp95JhTJdMdVcPSg@mail.gmail.com>
-In-Reply-To: <CAFLszTh0-1qCbN63_6Yr-jnmWQWYEa3epaLp95JhTJdMdVcPSg@mail.gmail.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE32:EE_|PH0PR10MB4552:EE_
-X-MS-Office365-Filtering-Correlation-Id: f2056f92-c4e0-410e-d5c6-08de9efa53eb
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|1800799024|376014|82310400026|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: 0P00kkh5POro7hUmWYpk4X5st+Ws0+Ym6/vV57avHm2+yGmXsdeClTyIBe8bhfLSmCywHV1cRC7YeHzLqQtfHJmZZirBx57QECGsHK4yziV0YCZnukimOmBNbH2bAcCOz5G35Rws0Sjc7LrNZeEAGi4mpbQNL1RVZTYTr5XaMTAgdFxwRuzqMIkYkvCWVfD8RgJvxjv0cAA1FFXyH57+2ftyzX/ojb1Z+Y9BzKeajjca4efNTVHwG3lBotCBsWj0R1NxclPLylynJVK2WAMyB4MtfchcQLqaPj7PO8KTstYv0fDt0DCM25vx2uDE9MtkHO0LDpvp91WPlWAp9iEvHLW0EEd/VVNf8BNgEnPKcyGMPZjLHxMEe3QCP3pcm91qMWxePXvdBlSyQlUQlLnT9NLdkYofa3uR6JaUYJpvWqCN7RvsV2lDM0lEh2DLZ7JUCu6DSO3pztrdKY12Gl+c3glDtY9oxPKB02+Bs/PSO7QqVvElX+C57UVvxeSbZEUgn2tCorzDI751tS7kgSNzBKNUcQ2CMvMexThJg7AVMoiz/qhkWh3gn1g1sk+a/ov+ugZpD7gUuK1xkemusJyFtgD1p24QcDvSsEW1Mefx9AtRh2j+LQuMdOyc4ExC2onfdEbHkDd0e51gzER4p3UCHpt66TuNL1fBqnUh6wC9mrtsDW7SbzttQHyRpde8M5421frkggs6FNvTW+TQ6tP7s3pQuKKSeamF0wV3jh462JsWpRtYft04X3NCc0hCzGEKXhVaUZS9okTNYcL1t9yrlQ==
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(36860700016)(1800799024)(376014)(82310400026)(56012099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: d94bmZYozH6GjHZSzyxm3t68ebtGZrL4LYNiweZc0ScGqCngsVLgYeCP2Cpo37CRThgABccFT9nLwV5nWdVHt7eWTKNv69TOYSTRzNFvxD9LNfc+qxG9T5j2c2vCJNJKOto4oqJjSwAoi1lDsEEO5Z9EPDmJYcXYMk2XCmow3Uh9zaCPZrcgzfkyX2YrUhFFV1Wtk7O9I6mu2sBQB1OEZ8MsE7JId3Cfam/sCZRtMdSKm469Z4xuAnvi6OM2/rn4TPsuMZPrVg737j6uldQml93iEDR86cUDQH0spgC4WagCbYr+M2AhY85NJhA7AKVFAzdCPjNpyDQ8pbS7BMv+uOk0jnUxIA88tnXI6NL5KOLHGZtVAJyQDTeyuzXc0dPDnZJl8sRZ8JF8OvrLC34dBg4l1XmwOF91sVbyPlo++rQEE8oX4KCv5Qa/SnLfFYcg
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Apr 2026 16:31:51.9327 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f2056f92-c4e0-410e-d5c6-08de9efa53eb
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EE32.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB4552
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: J3wsziB5zB3fs-Q_ASphUzxE5qKCFJIE
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDIwMDE1OSBTYWx0ZWRfX8zphEsPmGn6j
+ 0lLSP+Cal372zUp3jFltJmRmvUqYFU4snSKvtvYaXUOzggu0nyo0loFBRTvT8OeF9b8Ia9udIPa
+ DTJvs4ZAiFgHT781B+OpYnpgf4KXWcULwDuK8Fls7K4TRvVIqSap4+A28sYTypaKvNgCnMKbp1O
+ wEdPor+9mdXILfyX8QES9ILQagPnIMDKtCbvmWec/ZgTOaV+YTRNFT02t+bjoxlCiHTvB5O2sly
+ Ca6e9DzJ4zdV6+ZPHLoqzVObW7MtH9fyzACfn1zW4Kt4pCMz59zqQ6/G7W4IMRwB8sGeBzJiFHu
+ wRpRognV4gAHD3BkB1EbbSUAGDKu9VXRv6yylaFZ409eqCaFbjnTFgYsQnANxpzbSCzDu3iVN8v
+ gdFQU5Dwe+v6pVoG+p82tB5m+9hUxEKXkL9zF60kfY1c1QHYYE2hKo8crj6W8c8XYSYhW21rOIU
+ iayi5lpi7v4lDxigBvw==
+X-Authority-Analysis: v=2.4 cv=XNMAjwhE c=1 sm=1 tr=0 ts=69e655bf cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=VwQbUJbxAAAA:8
+ a=ag1SF4gXAAAA:8 a=EUspDBNiAAAA:8 a=JQEU1KsGukfSeQCV5iwA:9
+ a=uG9DUKGECoFWVXl0Dc02:22 a=Yupwre4RP9_Eg_Bd0iYG:22
+X-Proofpoint-GUID: J3wsziB5zB3fs-Q_ASphUzxE5qKCFJIE
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-20_03,2026-04-20_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 adultscore=0 impostorscore=0 suspectscore=0 clxscore=1015
+ phishscore=0 malwarescore=0 lowpriorityscore=0 priorityscore=1501 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2604070000 definitions=main-2604200159
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,66 +146,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat Apr 18, 2026 at 10:52 PM CDT, Simon Glass wrote:
-> Hi Randolph,
->
-> On 2026-04-13T20:35:52, Randolph Sapp <rs@ti.com> wrote:
->> memory: reserve from start_addr_sp to end_addr_sp
->>
->> Add a new global data struct member called end_addr_sp. This stores the
->> original value of relocaddr, directly from setup_dest_addr. This is
->> specifically to avoid any adjustments made by other init functions.
->>
->> Reserve the memory from gd->start_addr_sp - CONFIG_STACK_SIZE to
->> gd->end_addr_sp instead of gd->ram_top. This allows platform specific
->> relocation addresses to work without unnecessarily painting over a large
->> range.
->>
->> Signed-off-by: Randolph Sapp <rs@ti.com>
->>
->> common/board_f.c                  |  9 ++++++++-
->>  include/asm-generic/global_data.h |  6 ++++++
->>  lib/efi_loader/efi_memory.c       |  4 ++--
->>  lib/lmb.c                         | 41 +++++++-------------------------=
--------
->>  4 files changed, 23 insertions(+), 37 deletions(-)
->
->> diff --git a/include/asm-generic/global_data.h b/include/asm-generic/glo=
-bal_data.h
->> @@ -115,6 +115,12 @@ struct global_data {
->> +     /**
->> +      * @end_addr_sp: the end of memory currently in use by uboot,
->> +      *               should be the original value of the relocaddr bef=
-ore
->> +      *               any other allocations shift it
->> +      */
->> +     unsigned long end_addr_sp;
->
-> The naming is confusing, although I realise where it comes from. This
-> is actually the top of the U-Boot reserved region - how above
-> reserve_top or initial_relocaddr ?
+The SE_GENI_RX_WATERMARK_REG was not being programmed in the RX
+setup paths. Set it to DEF_RX_WM (2) in qcom_geni_serial_start_rx(),
+msm_geni_serial_setup_rx() and _debug_uart_init() to align with the
+Linux kernel driver behaviour.
 
-Fair enough. I believe initial_relocaddr is more accurate to it's behavior,
-though reserve_top would be more accurate to it's intended use. I'll run wi=
-th
-initial_relocaddr as that kind of hints that it shouldn't be manipulated
-externally.
+Without this, the RX FIFO watermark interrupt threshold is left at
+its hardware reset value, which may differ from the expected value
+and can cause RX data loss or missed watermark interrupts.
 
->> diff --git a/lib/lmb.c b/lib/lmb.c
->> @@ -534,46 +534,19 @@ static long lmb_reserve(phys_addr_t base, phys_siz=
-e_t size, u32 flags)
->> +     if (gd->flags & GD_FLG_SKIP_RELOC)
->> +             lmb_reserve((phys_addr_t)(uintptr_t)_start, gd->mon_len,
->> +                         LMB_NOOVERWRITE);
->> +     else
->> +             lmb_reserve(rsv_start, size, LMB_NOOVERWRITE);
->
-> This changes behaviour for GD_FLG_SKIP_RELOC, doesn't it? At present
-> both the stack region and the monitor region are reserved, but with
-> this only the monitor region is reserved. Is this intentional?
->
-> Regards,
-> Simon
+Link: https://lore.kernel.org/all/20200227132223.864425794@linuxfoundation.org/
+Signed-off-by: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
+---
+ drivers/serial/serial_msm_geni.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-Ah, good catch. Forgot about that unconditional reservation in the old path=
-.
+diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
+index 3dca581f68f..ae4015e0fdc 100644
+--- a/drivers/serial/serial_msm_geni.c
++++ b/drivers/serial/serial_msm_geni.c
+@@ -55,6 +55,7 @@
+ #define SE_UART_RX_PARITY_CFG	0x2a8
+ 
+ #define DEF_TX_WM	2
++#define DEF_RX_WM	2
+ /* GENI_FORCE_DEFAULT_REG fields */
+ 
+ #define UART_START_READ	0x1
+@@ -345,6 +346,7 @@ static void qcom_geni_serial_start_rx(struct udevice *dev)
+ 
+ 	geni_se_setup_s_cmd(priv->base, UART_START_READ, 0);
+ 
++	writel(DEF_RX_WM, priv->base + SE_GENI_RX_WATERMARK_REG);
+ 	setbits_le32(priv->base + SE_GENI_S_IRQ_EN, S_RX_FIFO_WATERMARK_EN | S_RX_FIFO_LAST_EN);
+ 	setbits_le32(priv->base + SE_GENI_M_IRQ_EN, M_RX_FIFO_WATERMARK_EN | M_RX_FIFO_LAST_EN);
+ }
+@@ -373,6 +375,7 @@ static void msm_geni_serial_setup_rx(struct udevice *dev)
+ 
+ 	geni_se_setup_s_cmd(priv->base, UART_START_READ, 0);
+ 
++	writel(DEF_RX_WM, priv->base + SE_GENI_RX_WATERMARK_REG);
+ 	setbits_le32(priv->base + SE_GENI_S_IRQ_EN, S_RX_FIFO_WATERMARK_EN | S_RX_FIFO_LAST_EN);
+ 	setbits_le32(priv->base + SE_GENI_M_IRQ_EN, M_RX_FIFO_WATERMARK_EN | M_RX_FIFO_LAST_EN);
+ }
+@@ -616,6 +619,7 @@ static inline void _debug_uart_init(void)
+ 	phys_addr_t base = CONFIG_VAL(DEBUG_UART_BASE);
+ 
+ 	geni_serial_init(&init_dev);
++	writel(DEF_RX_WM, base + SE_GENI_RX_WATERMARK_REG);
+ 	geni_serial_baud(base, CLK_DIV, CONFIG_BAUDRATE);
+ 	qcom_geni_serial_start_tx(base);
+ }
+-- 
+2.34.1
+
