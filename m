@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83DA6F5A8BC
-	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 22:03:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC34DF5A8C5
+	for <u-boot@archiver.kernel.org>; Mon, 20 Apr 2026 22:03:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3AE884486;
-	Tue, 21 Apr 2026 00:03:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EEDE7844D3;
+	Tue, 21 Apr 2026 00:03:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="IHaShLCE";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SDucWUTW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B132844CF; Tue, 21 Apr 2026 00:03:29 +0200 (CEST)
+ id AEC03844D3; Tue, 21 Apr 2026 00:03:29 +0200 (CEST)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A17984485
+ by phobos.denx.de (Postfix) with ESMTPS id C02CB8448C
  for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 00:03:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
@@ -31,23 +31,24 @@ Received: from LT03.fritz.box (ip-176-199-115-125.um44.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 20A2A40912; 
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id C645E40A1B; 
  Mon, 20 Apr 2026 22:03:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1776722606;
- bh=hk1Sa6Kt1812TkO6ndUPWWKYwA+X9UC0ldfRU2SGQuk=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=IHaShLCENkMteOW6AS6OfV/0EmhZjTrHukowh4BKaU2l3cCUagwAU9RHODA4BpT3l
- KTACoirK0YhCQ6K/51QLORnakFy4JDPBudpC7Hd2E3Ag+SkRjK2aR9d1dZeF1DXhpq
- x0QziuQzagZxyIJ1BHckvXb4eFONsXZE8vDuJqXSY1BR0iSUGZTGZRXYiXoyQ/FDd2
- x4KN8u1JwoEW4odJp7taFI26HftTQpvsb/OzipsX9JdarUL2QXk8qnQecI+R0T4Zjv
- EatrZFA4M1EmQ9rxT6qlNwrSqhRZIjyw6nMyHRUcRy2P2K7kWgSADEDLE7m1CNn1Se
- bxqRXjliRdZAhdDtHSkbXApMKCKSJg2m718g9ImlJThCLDkp3FQiyANPZeRdPX7nmm
- CLdaSrPzE5YveIWR0ZUzI2uujY9pSFd3CCJk7Gn5FRj3iRBOPcUkki6RDH0+nRBtr8
- wEBJisyqq4OQpmZlOa/bRgW1kRn+0M4bS3qqaA5cCK2sVy0g19HJxkqBqM+TfeCh1x
- H81h0EwH8lbVrcgpYjymf1FymoLBT3GPUYYZkUL6y1xVZou4W3qluhE8hVgPIpu4+/
- ChZe8s5Q/w3qasDWGbrXmHs9mYebS+DYMSb9QlvWTZSQy2GrLHBl7msvNyglUyIteZ
- i3ZLMVpb5TjLIg4GO6r2Czt4=
+ s=20251003; t=1776722607;
+ bh=61HteiTE7kJ5RWc8vlJBZ3PRO5bgNDwO2Nn4ZUIknf4=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=SDucWUTWWvnc+RVNG7VoYG1xSgkgqO7i+R7oNW3mYpNNVWkwDX+vXL3RYyJNx7edA
+ 3DPzRWVFCfm2TuTFULb4cFZiZsKY8s1BtZPIzQheQcUzTbGvBFvwnp0CXFPAYKN76w
+ TX6rOg7hX8bEtrUGwQVQxfVr0VM6coaRehvat91AW563MOc8pc9cVY8Y9eRYwQhECr
+ QrUma7zrqylkngHp+7bO8ayTLl/mPqGlQN8wVV8Lp1MWrS40IUTf0jQftOB8LMbeYT
+ 3WGgjbCZZx+7jy1izqXuX2NSPFRG2uV6FJqaLIv7DT7wVlSJZH2eiTwzAUv/EObgCp
+ MfaAtKafoPNfFijw6ZnR9aMI7+nKA5UjJnYQKHSj3kdtnCysl16dMcGZz2268wUCZZ
+ e2CoG2rHLh+Ci9fQXdL5Uin765v2PQ1r+cAirOGRFXfUVZ712hvUIuyXfu6LcBjmsB
+ Kcw8IODMVuNnnPUB3/w6eY/C2fwCyNip7S3BH/b4i4/RYm8Au+qaqZXbGLZzRfK8ZB
+ Hh/Q5C59cZaPbb3mwbblTOy5ZqIGUJ8egEVVeVp55RBWJU5cT2aOzoCAVgKLkKHSvf
+ jQjEu42XYJem0aWV6Ur+S7tQQu/9K2jTyk8I9/0J54YpDLEYeol8M2cV577XzjtR4C
+ X9FSG8G+iT8/hG1iO+zqJfss=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
@@ -63,10 +64,13 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Ying-Chun Liu <paul.liu@linaro.org>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 0/4] efi_loader: centralize messaging for efi_init_obj_list
-Date: Tue, 21 Apr 2026 00:03:17 +0200
-Message-ID: <20260420220321.71147-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 1/4] cmd/bootefi: move efi_init_obj_list() to the start of
+ do_bootefi
+Date: Tue, 21 Apr 2026 00:03:18 +0200
+Message-ID: <20260420220321.71147-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260420220321.71147-1-heinrich.schuchardt@canonical.com>
+References: <20260420220321.71147-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -85,39 +89,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If efi_init_obj_list() fails we cannot use the UEFI sub-system.
+None of the bootefi commands can be executed if the EFI sub-system cannot
+be initialized.
 
-* Instead of having messages for this everywhere write an error message
-  in efi_init_obj_list().
-* Always use (ret != EFI_SUCCESS) when checking the return value of
-  efi_init_obj_list().
-* Remove the return code from the error message as it does not help
-  users to understand which initialization went wrong.
-
-In do_bootefi() move the check to the start of the function.
-
-Correct return values of efi_bootmgr_run() and efi_binary_run_dp().
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
 v2:
-	Correct return values of efi_bootmgr_run() and efi_binary_run_dp().
+	no change
+---
+ cmd/bootefi.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
-Heinrich Schuchardt (4):
-  cmd/bootefi: move efi_init_obj_list() to the start of do_bootefi
-  efi_loader: correct return value of efi_bootmgr_run()
-  efi_loader: correct efi_binary_run_dp() return value
-  efi_loader: centralize messaging for efi_init_obj_list
-
- boot/bootmeth_efi_mgr.c      |  4 ++--
- cmd/bootefi.c                | 13 +++++--------
- cmd/bootmenu.c               |  6 +-----
- cmd/eficonfig.c              |  6 +-----
- cmd/efidebug.c               |  5 +----
- cmd/nvedit_efi.c             | 10 ++--------
- lib/efi_loader/efi_bootbin.c |  7 ++-----
- lib/efi_loader/efi_bootmgr.c |  7 ++-----
- lib/efi_loader/efi_setup.c   |  2 ++
- 9 files changed, 18 insertions(+), 42 deletions(-)
-
+diff --git a/cmd/bootefi.c b/cmd/bootefi.c
+index 85f41c3b0a0..6dab709e507 100644
+--- a/cmd/bootefi.c
++++ b/cmd/bootefi.c
+@@ -142,6 +142,14 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	if (argc < 2)
+ 		return CMD_RET_USAGE;
+ 
++	/* Initialize EFI drivers */
++	ret = efi_init_obj_list();
++	if (ret != EFI_SUCCESS) {
++		log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
++			ret & ~EFI_ERROR_MASK);
++		return CMD_RET_FAILURE;
++	}
++
+ 	if (argc > 2) {
+ 		ulong rd_addr = 0;
+ 		char *end = strchr(argv[2], ':');
+@@ -179,14 +187,6 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_SELFTEST) &&
+ 	    !strcmp(argv[1], "selftest")) {
+-		/* Initialize EFI drivers */
+-		ret = efi_init_obj_list();
+-		if (ret != EFI_SUCCESS) {
+-			log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
+-				ret & ~EFI_ERROR_MASK);
+-			return CMD_RET_FAILURE;
+-		}
+-
+ 		ret = efi_install_fdt(fdt);
+ 		if (ret != EFI_SUCCESS)
+ 			return CMD_RET_FAILURE;
 -- 
 2.53.0
 
