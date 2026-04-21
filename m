@@ -4,108 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92E3EF8FA90
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 15:45:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9245BF8FA94
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 16:07:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19FFC83E76;
-	Tue, 21 Apr 2026 17:45:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id E9CBE840D8;
+	Tue, 21 Apr 2026 18:07:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="OlShOP4+";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="SHSIIwpN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98E9783FFA; Tue, 21 Apr 2026 17:45:35 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2D9E284198; Tue, 21 Apr 2026 18:07:26 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD63183C51
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 17:45:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B73CE83E76
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 18:07:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7dcd689829eso952526a34.3
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 08:45:32 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776786331; cv=none;
- d=google.com; s=arc-20240605;
- b=EA+4gZIpkWxlZxpmdZhQmP/xsFIgNjmviei00MKP9HlpPO257zG2nxQ7dD/aiQTwE+
- J+av8QRRomKjX76rn83pBMDryK1q2VBaYIklcBUQwNeLgJfPQs2QDFwqD9mx+oUgY3ah
- UgidBskX+gjQ98toDNUGwkBPy1glFVfYwdEjlFzoZkgTyhaXo4XN4c6+BtrRX3GErGar
- MJpSUleGNz52E3i44VvNhHIEjf0bzq4Wtts5lvH5/t7A7hksepVTsz1w7P1Sb5pZy7oZ
- RC5DBhYInx4o3dmHyBd+9l48dGj5jgyuMEbowJ5tjurwPeNrRqrFsF7ujZq0tcb9GmHP
- 1TPw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=zDKc/CJi2HVZYGDP54X1b6LgX1WDCZDpYt/zrhHelqI=;
- fh=sywm0Dt7nGVy+wCIvYl11+E/2xcivyt3wowUZqo3m2c=;
- b=CQVug1+MAJQk3FW1uQBr42tDI/658Nuvwy9BK5cPHUWtIaDqkoR7tJzCSw/fcRZqE2
- hToqKVjWXxJCLUXiRTQ8edlWrqaIOCmvf6M+9MxPmjN3Sq+1LtAsl70T1Ad7FyhI+bAw
- WD+oCebY8cekjdvX4W86FTjReNiDls3bsKz0FKmcTejHFKEl3tcG7jsg8rL0036oMzM4
- vvDy4LqM83JyXAzI8HAE3VmH5Vf5nmJdeUfFb02ue5bbXL5s9OrptWO2XU5o/laxbdP3
- yFGI76VI4zZEz49arR/mIgQsrIMrTGpB0m98Hqk0K0cHaB1iOabrC9dra4/B7vbGXdMJ
- cXFg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1776786331; x=1777391131; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zDKc/CJi2HVZYGDP54X1b6LgX1WDCZDpYt/zrhHelqI=;
- b=OlShOP4+zn+1HMjEWIt2lnfLDf0h0KywH2C+HWmyrNFCmCDPg9oSwLse0exJGld6st
- IiZSYGXxvV8UK+skP4V979eMhLUzu0YKUv/2Wn52bxYMdlP3yvoRzpuasgG8R5/l0WIq
- CbcrBCYjtxDpqQ8OUT40lVIZyxxuVLSXYtiuXAXVadAjsmmbp3bZ3yRBQNpbQ8ISxqIR
- GvCDlpgdcF6jAsZbhH8d/va9QiSGz4TqEd3i4YK5Xp1LbPQeH2Qwb+h+4xZhpAAT7462
- TG1M53oM7ob6gdAN0hiQWFnkYzU3gz+r4M9GNSAzQaP5qJyNn5qujk5E/v0uzU17Wja/
- PxnA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776786331; x=1777391131;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=zDKc/CJi2HVZYGDP54X1b6LgX1WDCZDpYt/zrhHelqI=;
- b=rEJCdjfl6NEg4l4aOAsnPqgm27kq/kZO2bHZvz5x8ywDLcoBrPMz+5dBwHtjTWzuGW
- RzIPmqFKH4YYC13O5VZa+zRktIMwT/b0iMln+byddoxqmHzGf97bW4yXT7kcVaje2xlB
- Lch9oTVB4W8600uC4BhSV9cKboeeytszlsOJ/Ml5PNB/5q7w8q7FI2yc/3VbQWg5nI68
- dyE0qfJLgYQq1Zvn2A735b4LKOwyowN/D9ShoBsQbI6/A4tdKW7d/BjICHPtkPxk2uYl
- gcxyeow7yEZmKW8o4oIIU9sLqjmFPvsBAIV+j+QlJe3Ygu0/BoJvaEejCvrzFoks0BNt
- IoNQ==
-X-Gm-Message-State: AOJu0YzMHgq5bytvgsr75RVn25fqBUdj4+HsH7Q1TjYf9931gNSI5SGd
- nv3yXJ/V+iClexdgbZTKgt7lmXqG6sezg6MB1mRRRnbsSxIifSsMQT7K4v45i7xayYV2nJktP1J
- Hb4BXNShcpwwsZvrfcBdaFhomNpUgXXinhjpxgo5C+g==
-X-Gm-Gg: AeBDiesxCIPi+u/6zok1SUdosFWo+rt0WA3vKXlyO2Lg61XQxVjBIyKy5YO3gOoSxVQ
- MtokVzt0fqZrKeZ7pSMw/DQH27zEcSCfEeOEio5uZUvsZYef1pCI1LgZgX5p4BZW+sCoZ+Bp/Ne
- n4Nj+D/M1jSYHrt4ZAggAgVad+ovSw7YfG5TZgk5Jkf02aV9eGxwB+gg53p+WYD8pSuUhqaEOVk
- U0gxFn2Z8c3gBRQQzpE8ruRQyL3F0tvZvM/wIJTIEd3gRBCxf6+uw7Lh7e1B0kMhz+oI5JQCKKO
- Y14O6NDSlYupAIXgnQ==
-X-Received: by 2002:a05:6820:f024:b0:694:9d60:99ab with SMTP id
- 006d021491bc7-6949d60a6d0mr947286eaf.6.1776786331417; Tue, 21 Apr 2026
- 08:45:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=x5WdjwmeGFGqZznB5EMesNr4SdUsemErgRt2E2U7zYpIAh6CwzPky575VQoTHV4veChDoI+h7HWWKAIliXXj13FbKPxbZ8/5KrETWyfRT15m7v5tUMHucXP3Rf8qMuNnOgJp4Mrft4/5qjDFUuZEblcbYhsBirsQCZ8CgNmubcwd+7KruU6AC5r4hrBnvWk/ZmfjBYxR+ey0Ck0P/++YnzHcTz5XihjAsq2IKd9/t6tSrxAeJ8yu+hi2HY8bK9g04auXfRinSNZ5VmPeUfwjO6FarAq4647WTeXtl7aVESayt7WNV764Ii+a2M49Tp7FOgJANbnwhhpzd6Ht+9oiIQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=An2VBIsWKSFMljehIBiS+CC+yyNk/HE/yRiyyjhTtKM=;
+ b=cReh2ro2+HyYmGDZHf7mlVo2Ce6183iBgNMGgmCCR2FVe2HMJmU1jBDKfsNnh6IitpH/bXpmbR+hybhDxcT8wt8WziGi6q021/HTNSWCb75gzPP7QTiYrEc5Ehv0TGocP19/6SQeuJt/ZSHFHd/cmyao481v8lI2qEO62imskJEqmJx7PRv15Mdjh8GOyOT35hITQM1np/Yqj2GCIbntY5XxBqXg8/2TU+LQII0r8fFSI175FLvQXi7x5HeKRuoIfwA02n73vyPBFy77B9CyAIyHUVBrPW4mAOh/LmaIAx72bopHwV+U1jG8cIjsR2uAVncjdg7S/yxbxDEXmrbkDg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=An2VBIsWKSFMljehIBiS+CC+yyNk/HE/yRiyyjhTtKM=;
+ b=SHSIIwpNhYoDOouGjzeIs8QWELiK8KiBI4jG8UeUxqBy3HbD5mV4Xu9Ua7STyHXJM/hkqaxdNGPFFv1Quv7Pf65noF55Mn1dSFa7IZvBac65d92eVSJpsuf/FocUaHiIO6Bt++hnU+t9KwNwgzIEd1XkmWvDhGqUqMwj1IMTRWM=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by AM9PR04MB8195.eurprd04.prod.outlook.com (2603:10a6:20b:3b7::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.30; Tue, 21 Apr
+ 2026 16:07:21 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%4]) with mapi id 15.20.9818.033; Tue, 21 Apr 2026
+ 16:07:21 +0000
+Message-ID: <ab44395a-dc24-4141-8211-16a16281d349@cherry.de>
+Date: Tue, 21 Apr 2026 18:07:18 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] usb: dwc2_udc_otg_phy: fix compilation on non-Exynos
+ patforms
+To: Marius Dinu <m95d+git@psihoexpert.ro>, u-boot@lists.denx.de
+References: <55f2f0aa-669f-4825-9673-419504e89780@cherry.de>
+ <20260316181551.2109-1-m95d+git@psihoexpert.ro>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260316181551.2109-1-m95d+git@psihoexpert.ro>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VIYP296CA0002.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:29d::7) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
-References: <20260415-10g-v1-0-f6809a31c2b2@nxp.com>
- <20260415-10g-v1-1-f6809a31c2b2@nxp.com>
-In-Reply-To: <20260415-10g-v1-1-f6809a31c2b2@nxp.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Tue, 21 Apr 2026 08:45:20 -0700
-X-Gm-Features: AQROBzA0AAYYIOe-dRGL9Q95xbSqbn1XnBHuoPT6XE_5_n8Q0a8NWNaeSRuQmhg
-Message-ID: <CAJ+vNU3+rN1hVZQRTHEQmi+uo5o1ak9epLL=VFqNRMGNT-iNSg@mail.gmail.com>
-Subject: Re: [PATCH v1 1/2] net: phy: aquantia: Increase timeout for out of
- reset
-To: alice.guo@oss.nxp.com
-Cc: u-boot@lists.denx.de, Marek Vasut <marex@nabladev.com>, 
- Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>, 
- Beiyan Yun <root@infi.wang>, Bo-Cun Chen <bc-bocun.chen@mediatek.com>, 
- Siddharth Vadapalli <s-vadapalli@ti.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Ye Li <ye.li@nxp.com>, 
- Vladimir Oltean <vladimir.oltean@nxp.com>, Michael Walle <mwalle@kernel.org>, 
- Thomas Schaefer <thomas.schaefer@kontron.com>, Marek Vasut <marex@denx.de>, 
- Alice Guo <alice.guo@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AM9PR04MB8195:EE_
+X-MS-Office365-Filtering-Correlation-Id: 54fc0b85-5609-40ef-d8cc-08de9fc011c3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|366016|10070799003|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: TqcsdTHH9KV1Jy9Y41ONFWbKbfp3SKYdQJiwik7shwb0vM7dBkCWbz2ZyO0pafOX/RQ3LmBVklJ1L9scBtwA8LF8JMZHdsQW9d+5UEY6gCLTKQbmTwvSLDD6KfE0OeDkGEPlNPtkDdvA+S/B2vzo9JsjohI2EVxMGjKiv8VwzNt73aoK730ZIA5aqvJGc6gJkDZ9Iwp6lwQYBAvbOMkI6LgQuymm13qaloJzxc4OBzekUNTwonsv1UciqdqHHc5zxdCE1Q7thoyRs9iDv6rkSUMHn6GfWLUIkinYRLpgbl+1t0Ocm8SpzDsuFIO4M1m7ocUbF/Py+FcMegMTT826lJY9LYmMULLDXQD6y0OSVjDJh19wFUWgY5+IEy5hcF0VzwyP7qrmjEQCciFpwUqIObjdwJqojvVCIAVTlv/YHwULk4GVms6QSz5oygY8XwNYJ1IUu4akyTsY5XDlZIPmJ/fMvv+SGzOyBIW8+X3/vYV4ftRWjCYwP9A5ioj5N8MufALXIzmyfJwDNRss2h4tx50ULW31EzeyjTJTgx3IxjoSTMr2nf1+nrMC2JlU1GEOSXn2PY/2XWue/gA3GTlv4dsmpW11D3nSXlexSWuogeWXf6xYyxNHZkX/lYSLjUBBXkE1erpVj0ya1Kdzz9smNQrD6PmErQs3CCrRypXUtbQgDhM5SNLxhnEsh8oXtYyV
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016)(10070799003)(56012099003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?di80UGdQZCtUc2E5Q3FxUkRkOWl1U3lJWkRBeDVkMDIwa084eEdrRkZCS0lG?=
+ =?utf-8?B?Qk14dXA0YkF5NTAvb0JDTDMxUm9hOThsUXlEWUI1OE1hTFAzYmJlOUIyc3lr?=
+ =?utf-8?B?QTFjSUtOM1JWUE1iYWhkbkVGZUpBZ00vQU42dVZpTGJMcUw1K0xlaS9oYSs0?=
+ =?utf-8?B?amN5QzdCTGNWSUtQd0VJcHZVWFluS3BHZFd2RFpZWGUzUHUxMC9Scjk2TndY?=
+ =?utf-8?B?cDVZTHd2UDNISGVtZHFMK3ZVS2lXSm5vVGFVaWYwZkFtMWJhR3lXcHN0VTFH?=
+ =?utf-8?B?eVdQQ3RQTnFLc3VGdDVLanZQTHJnQ2UvdTV6YUp2T2prRmsyZ3VacVo0ZDRu?=
+ =?utf-8?B?ekF2VWlIRDJ1a1VSQmczQUt3QVBrYnBrZmNjK3FKWnZ2OWJOdk5LWjU4Rmtm?=
+ =?utf-8?B?NDh0azBXV0hHKzFnZlF0aEFJQ1I0YmpzbS85cHRudnFQRnBtc2xNSThRekE0?=
+ =?utf-8?B?bEo2bWVOVTBLMWtoVU5VNWdFQ01KNHZxNEJaOExhNjVqbzlDallwRDBRUlFY?=
+ =?utf-8?B?Y3BUTVZpZXhDZ0VlamJHUTY0cSs0Ty9BR1dlOWFtVkJyRlYrRlg2YUY5RFhN?=
+ =?utf-8?B?UnVyMzJMYUdHZytRd1hkVXMydEE1dDlXdnhBRjM5VGIxSnpZOXNVUE5qTnMx?=
+ =?utf-8?B?ZmI1NXZxOElFN1ZxVm9sQjEvM3AzNFQxZGRLbEFRM0UrYzVrQWx4OEE5cGlo?=
+ =?utf-8?B?dkJab3hqYzQrZkoreGxOZkZRc3A2c2xTRTF4amdhSnhnY1MvVVppdGRReDlU?=
+ =?utf-8?B?ZDlvV01QN2RxbFlZQ0VILzZOdDlBa1B4eXc0VTAwL1BWdGF4bjFQYWJpSXZu?=
+ =?utf-8?B?eVlkR05QRWVSSElaL3FSSzB0bHlGU1BBVkVOVUNyTU1qZEZ5T2JyMHpkdVNP?=
+ =?utf-8?B?SWdYaXBqN2VaRG1ZYXJJOEY3TlRkOGRJL1NxVWUzU0l0cGVZZ2ZEaURDdEIr?=
+ =?utf-8?B?MHlHMGpYMXdCUStHR3dQRE81eE14QVQ4bk1LYzgzTVhtWGhKQUdKK1Bic0RH?=
+ =?utf-8?B?YXZZSUlMV0FIV2JxdmtIaFpYR0ZoMDVUSFJ5SHFaOUdlT3VQWHFTenB1M2t4?=
+ =?utf-8?B?Z1RPcE5ucW1aOGVUQkRiR2UxWWh3ZGJLM1dBUGZZTldxeFlHL0V5TGRpYVdx?=
+ =?utf-8?B?NTVaZVBSMXQvWThzaWpUU0xEdzk1YTd3WUpxSUVva3RzUERZUkx1UzJyc2ps?=
+ =?utf-8?B?d0dxcWl6QWJQamR2dG5zSkNuRkVyMzNudDEzT21DdzdDZjlyYnI1QkcySnJt?=
+ =?utf-8?B?VmVjdlgyS214NXRXSzU2WmxNNVhSMVBQRkExbElqY2hhT2twdUgrZmZhYWNq?=
+ =?utf-8?B?ZksrUXBFRHQ2VFl1bGZZZlYxQkIzK3NWQjJLd0xpaGMveXJCOWlucFlka3hG?=
+ =?utf-8?B?eGJndFhTUm5XNEpkS0hQUkYrSlJRSWRpSG1aR25xbjhrcjdxTjNhWEVaSzVB?=
+ =?utf-8?B?Zm9FVU1DNlFFRFVzbWJrWXVKMWZmb09vZ0NnbWZGRnYrMlhoc3RpRkp6Rm9t?=
+ =?utf-8?B?aHQxSCtjaXlDZUYveFdHRlZsUkhDUVNzWVNlQVl0RmUzVytveVNQb0YvbGt5?=
+ =?utf-8?B?UnNJQ1FocVN6WSs5aXp4SmVyWWlDZTNEd3R4TkhrUmNEcGlWTHhNTk1VQUVy?=
+ =?utf-8?B?S0E3VUxhRjAwM3NnRmVBbk9HdW1mMzV4UmxiOVpRcVkwekNyd3RnZ3NBa3Z4?=
+ =?utf-8?B?eWxNSnY4OGo0ZStGSTNZTFl0WjJZT2F0NWEwSy84dW9KU0pqUVdibnNKVHVl?=
+ =?utf-8?B?REZMUjNzckk3Smp0ZEZ0SFJxNmJ3dFQxQms4UzBnYzRWdUJGNmZmRHA3YzQr?=
+ =?utf-8?B?bkFwVGJ0VElYNHRFSy90MmZCTW9JajRodGVoZUZ4ZUNtOVRrS0V5VTMrd1Ix?=
+ =?utf-8?B?ekNyazVvcXhqUU1hTnUzN0NMOU1nSDRTTEZUQzEzdjdkcjVsdzdEeExGdk53?=
+ =?utf-8?B?RHdxT3Vhak5yQ0cySVpQK1B2WHhvTy9QWU5zbE5BYlJGdWkvQlZoRFJUcDhW?=
+ =?utf-8?B?YTRqL0hCeFdTbmxVOXI0azBDUmpoQ3NFckIzZXJITzEzakRJSVhNYnlyYkdy?=
+ =?utf-8?B?Z1VMaVZIb3NTT0svNXNCclR4VW4rU3ZMV0JaRW9XdDhPcittcW9UOVhOdjJw?=
+ =?utf-8?B?c3RQNnNaYkR1eEVrRXdjcG1WU2puWU5aeCs3Tm96clY2bWVGNGxYVDJzbnF4?=
+ =?utf-8?B?SGxYa2pkT2dBQm1uQ1J3NVY5bzZHM256YWNWRkQxSmhMZC8xY3N4ckFneGxW?=
+ =?utf-8?B?akY2VVczUXMyN2xkamhFR1lyTlhwclFuZWIyMGdicFV5ckdoVXFFdnVyYjRY?=
+ =?utf-8?B?MXBleVhudXUvL0twVGlydllzckljcFRhNkpoaHhLRW03NlhXbkZkbGU4cXVB?=
+ =?utf-8?Q?JhSvZpQrj9DmcG/e5/tlwJQZZGL+0BXO33A1k?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 54fc0b85-5609-40ef-d8cc-08de9fc011c3
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 16:07:21.4831 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: EEkGvvFBXkru5k+ZYDwyU5CDuOSXtl5YDQ3tEfH9jj6YlgQjN3HQN879T+kyOxa+62gqZL5KQXs5Rgo+jKjn4AL5dmWGeWXelmjMfR4Smvs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8195
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,44 +148,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Apr 15, 2026 at 1:54=E2=80=AFAM <alice.guo@oss.nxp.com> wrote:
->
-> From: Ye Li <ye.li@nxp.com>
->
-> Current timeout for PHY out of reset is 50ms which is too short.
-> Increase it to 2s to align with kernel.
->
-> Signed-off-by: Ye Li <ye.li@nxp.com>
-> Signed-off-by: Alice Guo <alice.guo@nxp.com>
-> ---
->  drivers/net/phy/aquantia.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/net/phy/aquantia.c b/drivers/net/phy/aquantia.c
-> index 10b87dfb8ab..83da3e1cc77 100644
-> --- a/drivers/net/phy/aquantia.c
-> +++ b/drivers/net/phy/aquantia.c
-> @@ -400,7 +400,7 @@ int aquantia_config(struct phy_device *phydev)
->         int interface =3D phydev->interface;
->         u32 val, id, rstatus, fault;
->         u32 reg_val1 =3D 0;
-> -       int num_retries =3D 5;
-> +       int num_retries =3D 200;
->         int usx_an =3D 0;
->
->         /*
->
-> --
-> 2.34.1
->
+Hi Marius,
 
-Hi Alice,
+On 3/16/26 7:15 PM, Marius Dinu wrote:
+> s5p_cpu_id used in drivers/usb/gadget/dwc2_udc_otg_phy.c is undefined on
+> platforms other than Exynos.
+> 
+> Signed-off-by: Marius Dinu <m95d+git@psihoexpert.ro>
 
-I ran into this as well on a new board I'm bringing up. I found I
-needed 100 retries in my situation.
+Acked-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-Acked-by: Tim Harvey <tharvey@gateworks.com>
+I believe the reason this was not picked-up so far is because you forgot 
+to add the right people in To: and Cc: recipients of your mail.
 
-Best Regards,
+$ ./scripts/get_maintainer.pl -f drivers/usb/gadget/dwc2_udc_otg_phy.c
+Lukasz Majewski <lukma@denx.de> (maintainer:DFU)
+Mattijs Korpershoek <mkorpershoek@kernel.org> 
+(maintainer:DFU,commit_signer:2/1=100%)
+Marek Vasut <marex@denx.de> (maintainer:USB,commit_signer:1/1=100%)
+Tom Rini <trini@konsulko.com> (maintainer:THE REST)
+Junhui Liu <junhui.liu@pigmoral.tech> 
+(commit_signer:1/1=100%,authored:1/1=100%,added_lines:13/13=100%,removed_lines:20/20=100%)
+u-boot@lists.denx.de (open list)
 
-Tim
+Try to send a v3 with that fixed. See 
+https://docs.u-boot.org/en/latest/develop/sending_patches.html. I 
+**highly** recommend trying out b4 (https://b4.docs.kernel.org). See 
+https://docs.u-boot.org/en/latest/develop/codingstyle.html as well.
+
+Thanks!
+Quentin
