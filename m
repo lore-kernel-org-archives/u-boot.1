@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7F5AF8FA6D
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 12:26:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE894F8FA66
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 12:26:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 877A0805D7;
-	Tue, 21 Apr 2026 14:25:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C62888419C;
+	Tue, 21 Apr 2026 14:25:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="NjMIKqiY";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="KJ1F5s/4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D99B7842E6; Tue, 21 Apr 2026 14:25:48 +0200 (CEST)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
+ id 84A94842E6; Tue, 21 Apr 2026 14:25:56 +0200 (CEST)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF7C4805D7
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 14:25:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 65DB683A91
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 14:25:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=pGjrEiWXPP8ofKV2waiRnfWlOjKh40kEzSHfktEPYfBwJE/zXvNRnE8G2biTOGV00eYnC4gsqv2G4rLk2fgtNb7R+KpNy5Ijj/H7nNu8iU1Q79ltCMazsGYjf/V3RBABCXniskobOhtlBLGu/y4dXfU7jkemd8Fs6MXAOGDiUSLDSNCMsDb47cDT+aVkbzOXlhgJcs1zstvs3GoT7TehhCRwdJQBVYucn7z75nQ9NXQ3M0X/EOgk/43WozYDAqxvtNFtCN55vkTlwzB+4RQUORmJtV4xKbfsGSHYmNkf79ysr5mKiLULfPAa8ZG/mT3zkCn2fqtelzYLxhj1S/3GGQ==
+ b=iagP6jPsC0WaGkThMaj8IiF2QmIbkf2sZNYVkGIZJair6zGBuHiC/xad4Sm6ClTrE3exs1u3E2lJyHHP7OX6wR7T3FCyD/uY4QOvk/Gx6uGMUk2f+nMUN8LZuAJEHHHxmeSsMl+VYk7tDG6Uo+l4oFnShf1j7wnOs+RLbP87B6PnXeN5sZB5sJNIX1zb51JbOb11EC9F1rDiNGwqDg9xuPI87qBZjaFQIHS1BnTsv1R9tKjTFZG38s3GlAXSUJBbpQny0GDIy4yEA2lyeYQ0ofiRLwTS/wrkZzh6ioRbfV1P3XzXOnFd2zBNjRqCbxXTpTMGM6J+6k3EDXHi2fDklA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VY2h1dDGTZWbLgmqCXnFxnA1jzyqyAcglXuNrOybRK4=;
- b=gGeKBDruQLQuz4lLDoP1+4z4j0t48skLH/682QUNoINMyLsYBIaEXxvSaQckRIyiIxkVi0O7O1r0xXx0w5iNaXkIuZYI1Ls8IXdrrbPLg8EarhSYgRIkFBbj+2OHDoliWwZBigsDo12h2EZJ29jP6Gi1ik5Hehl9q1LIK0pdmFp9OAnF8FfTIMS2XfzVPPgEWdhbiWReFLlzCeZk4OnGS//pBitmacVNO3LkJx5ykYmZEQy8qbS4QJwVO9ndqJj4Ie352anCFxtYOKqZHS7bBeRElMK+FqDoXfJH8OPKOCHNc1gLr/QKK9jT/BFiSbpahUIzVRa2RzIBObvepMiOow==
+ bh=/LFitiloXYhlj0WqUyr0RQXucTwZVRmGDvQtbwGcm9A=;
+ b=GAvG8VY7vBLpyA+F9rws8y1daQcXNEQwarNMfkDvRXn3ARmlkbacvbGrtmrlWMJF9BVsijoNE2mLZafJxNUZw7mw7Z+OYlMCNznN/eQkuz/IT6AjAsW83y6r4cma+2FYOuIOkFQdfPC5QVpEvnc78qV82EVV1FlLMUZLIcp9uWnMkQdzm1+E0zCjT+ynhZniyYTcbBuOkOfXTI8j6mDx7K4kqOEGM5Hsh+9H43lkrkDt2QVkpHI4cRqpwIv8EvApK9hAxMWjLFe0cFKtIiVR+U3yw3hUUYR5U0A+kqjKpVhIJUwsXJYMHn3MH52of566gAkQ6EhopjZzR12NIeMYGg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VY2h1dDGTZWbLgmqCXnFxnA1jzyqyAcglXuNrOybRK4=;
- b=NjMIKqiY+x8KrRGlDFjXhNaFhJIeJ8cNdirJci7/mA9mgiw7gkDN0BFW+9IpwNGGUaBPmIdJE3V5TpWcZgj9XOhSketq6F1Y5RVOs4tmLA3tJ9xegtLkcgRviWjoQ6Y2Xhmteb99PkTGWpdOgjMuCtrQWRyl2Kvui2OLJfkSVRNr6/GpFHEJ8PB7bjTblR98B3FigLPq//x7q9p1gkMkcnQ/LS5Hl4P2bCMQ77sE5rRWjO6LnihUHngcKa82dW/aGvsoo6VWcXo6nmhXaj/ov7zLrJpR3bXBysUkWJ2XTfH+sC316lIIyySi1Dtj/iF4+ZuEg+ELxihz/zSSAbwjPQ==
+ bh=/LFitiloXYhlj0WqUyr0RQXucTwZVRmGDvQtbwGcm9A=;
+ b=KJ1F5s/4GHV0XBr9+1KV3DbXRrOUfuNp8PL81mZoNmVUKXEDq6WKzWYZ3MZ90nXWHADPHcqVuCgdFHHYZEWjKnDDGeoUdvd389dzWe5Z4anlYYGDFvxbq2sTjCRigJzxSTY63LW/kCjzDH0DnAd5QX/t0lc/YOfz/r/fIHeyeEarjpV6QotkCIjPc6ykzxP01QFWDbryWCkE07e+yvhcHXzEIo55feyuGC8iuTn4fJDYVulFMRg10XuoAViKKJqlXjCHSfhacUAsGVghCqEijg6ngwdlZzlg+TuVX/DY6c6McfRGpEjAc/R8Xa8ocQgDuoISCgtfqUCcK0uJYon0vQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
  by PAXPR04MB9349.eurprd04.prod.outlook.com (2603:10a6:102:2b8::9)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.32; Tue, 21 Apr
- 2026 12:25:44 +0000
+ 2026 12:25:51 +0000
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::4972:7eaa:b9f6:7b5e%3]) with mapi id 15.20.9818.033; Tue, 21 Apr 2026
- 12:25:44 +0000
+ 12:25:51 +0000
 From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Tue, 21 Apr 2026 21:41:20 +0800
-Subject: [PATCH 08/15] mx6: sabreauto/sd: Exclude power_init_board from SPL
- build
+Date: Tue, 21 Apr 2026 21:41:21 +0800
+Subject: [PATCH 09/15] board: nxp: common: fix PFUZE100 DM build and unify
+ DM/non-DM handling
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260421-imx8mq-dm-pmic-v1-8-0e2b490542b1@nxp.com>
+Message-Id: <20260421-imx8mq-dm-pmic-v1-9-0e2b490542b1@nxp.com>
 References: <20260421-imx8mq-dm-pmic-v1-0-0e2b490542b1@nxp.com>
 In-Reply-To: <20260421-imx8mq-dm-pmic-v1-0-0e2b490542b1@nxp.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
@@ -82,67 +82,67 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|PAXPR04MB9349:EE_
-X-MS-Office365-Filtering-Correlation-Id: fb7a8369-0898-4567-6074-08de9fa11c16
+X-MS-Office365-Filtering-Correlation-Id: 782f51bd-4c2b-427b-d040-08de9fa12026
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|19092799006|366016|52116014|7416014|376014|1800799024|38350700014|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: AXdrrQfp/lDXppMPrFKfZbDRzaKXxr7wX97NrwNLsrI+YVJWYRI0WMrnB0AJKM7szF/JZv8wesV3n25kHZwFvk/I9loGQrGxlbJ22hUhqGsTkyoRrX4WmHYj265IXS1jmYmlFRwwwPSKuLv3WdU1VhTXGNgZkv/jtXLK7VO9gKuDsjoW4osE6jmc8WwE122+bpRCI6JP9qMFMi1rrfQgDe1b0JxaAUaLYBP0o4heleWBZwY32Xa3TIrXAkF5KaLFKVf8TfmM850E/Y/Xy9qAGU/DIaM/bhjVaweZdytvFLV3vjGVV7B5hIUyGlO+AtVbu/Wu3ELbAMeaUhDJXNJFVxnFElqBpLiHXSTP3aP2DgDgp2X/QScB2pc/n+V/x6LFRUUhve4sjRXXSNfzsZELt6hPrLh3UY314rAAl9IJ8j68zpPLQ+gMhO4fpDoVmJf8OUkLSAdu4c2N7IMGJIuyi/GqLFG60KyYar5Rj+8U6M6rMfqkhRDIZu/GoabaBjwHCW4Be1owmk6naXfVYWPbH0o+cylg2Ga+PDjd0/JSIGO72TW4yKxeEEwnU+zW8Crid11OU3dTfk8+naG/lVlERAJnyzqUZ6GOcJF8rKRC9uJXfA+Brv2V4laZIoAoZPmDzHn5xmjGN7SI5Yo9UBE4k+LwAFNOY7QbJc89zNVAPzWDNDDj8qrY9RYYNQsocDjRHiZcQA/H4YEprFbpc01uGGnfNeGKmUySS1Wektf+ZkexXPR5Y3UgM2pQPDQtP3YOGcAMrLqbtZ4f/+iuY2leH/kCF/fgyEO57pKn8PQHYJQ=
+ ARA:13230040|19092799006|366016|52116014|7416014|376014|1800799024|38350700014|56012099003|18002099003|22082099003|18092099006;
+X-Microsoft-Antispam-Message-Info: Ed5dUrZ9vwl8dotoTzYqiKvZUFXVexYyoELHjkZzbcTK9Civ1qw1Hb4IPLr0NJcyFM4/XUdnhtbH4chWx832Z79iNgqK5PGfYFGNYpLvpO0nD4SPLL9Lzn2MT6GP998Ya2SckNHo2SaXp5nRXWnyAaB9JaPWBdwi6mFQHRgNnbeA7RQ0nWxWuugVz/3k9ePmvDTB6PUOUjfoyRkX88ZPEGKzLFNSExuZQLfAYYnUh+nZolELtsCwWnrWJdnLfm8Cxm+KSaiqSSh8Z4TSb5MaT/ku8RAH0E+NfhF7+6dq15NrNYJwJjwaOgzk2DTkSCPUoOL0QFz06+ty23i9+/W4xjfr3BwOEn0K/yOlVmMsPE5fyvyLABfFrA4GLB5V5DBxyT61wUY4Sru6Ej4BZWxGi76c645R+ElR5u6TfusF3CEsQWt+Pnvc9Pq+4fbZsrQg4oeytaqrdMPNlpQwgZrx8ESs/h+5IVIF4cIfS8jx3uG4w3m8wtfo9ldKO8o8YHF0l1CMhWGYRY7SZftR3fcwiKsfFeMSboGc0M1o4A9fdD+Rgc838G/QCHsXB5+v6X9UNyeCftTmHxKobUQY8449AQxPKILH78BLAyUrMDzyT7tBRKazRmJz4dI3iTiAxC/zTPAyjzeEoNhLPqpsadz86Fe+VvB08QZk7uJnH1qyg0Yo/W6yl2uAnKZxfOHHw3OVnQLdF8B+FYiMPJQRcsSX2P1S9lU7uy6DliYDBUUFGVz6L/xS5jGvQSzjjCMkA4wh2LymnM3cHoJjsh6SdwqDMidu5/mLQpyKOg2zuVYpxMw=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(19092799006)(366016)(52116014)(7416014)(376014)(1800799024)(38350700014)(56012099003)(18002099003)(22082099003);
+ SFS:(13230040)(19092799006)(366016)(52116014)(7416014)(376014)(1800799024)(38350700014)(56012099003)(18002099003)(22082099003)(18092099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bUl3eEpNam5lUGJRWis1WFZvc3ZvbmFDU0xHRzlENHZiSXhiT2lZMW1Ncncw?=
- =?utf-8?B?K0hvSFJJMG0rdVdFZ1RMUjlZV2g2SThHVXBEOEphT05qVURDbFE5ZFpuanFB?=
- =?utf-8?B?K21jTnF3bHVoUXVUVnA0bGprNk1GTVZGWkcrTjczQk9KMUhUdHh1emcxbXVt?=
- =?utf-8?B?YnViaE9mYVJ4azVTMGtMYVp2VE1LUkxKOVprZ20zeHJHQ29kZ1psSVpCUklG?=
- =?utf-8?B?RjJCTzlxTUd0eGZXWC82ZzlBR2tFYTlrTERKUFVLdTFIckNzWTFmOG5SUHgz?=
- =?utf-8?B?RHp5cm1VWUFHbndDcUdLdXNWUTJma1pSeEFGY2pEVmxwbnlPQ2dJZGR6WU85?=
- =?utf-8?B?QlZ4aFVabkltbHZNSUlvS0h5eFNtazhmbnE5SHQ0emNPdk15S01MV0JzVVc2?=
- =?utf-8?B?ZWZCclhoSGRUUUREYTRtV3JicTRjeEFqbmN0Qmw3R3N6a0NaT2g3aWFmbjhK?=
- =?utf-8?B?K2lveDBFRG9yS3BLMGhNbENrMVE4cGNuUGJYZjFBWWg5OENGWm5ZVWQ4Ny9t?=
- =?utf-8?B?Ny84cS9vVXhZdXdYaVV5T2lJUGNiRlZvUERBZTJnOWxQS2dDL1dVNzFLUlho?=
- =?utf-8?B?Zk9jdWJaMXVTaE05Rml1eDMzMEhQeWd3QVQ4c291bXp5T3k2dFYzYkV6L1A1?=
- =?utf-8?B?US9WS0J0b0hiV0xCQU5wVTQwaytxYzNBZDF3bllmTjlsdHhPYU9XWHdpZWh0?=
- =?utf-8?B?SS9VaThLQTU1cVB6UngySFhCR05LOFJQcE5sOWZyWndWYjJnVEpET3l1OE5l?=
- =?utf-8?B?VEZwbG00WTNodVBWbDB2ZXVHdWV5eEZMdHkvNmZRdG5jRE82WmVNYmNKbzBX?=
- =?utf-8?B?ekhrbjdZV0FjM09FVEFkOWN5ZGppUzhYRVFEcklnRkJuMlg2d0p4ZTdxS0lw?=
- =?utf-8?B?MmJ5SjBTYklkR0IxbkVtczBhWGMxTTVKdXp4K0NwZVk2NDZndTB3eVJnM1U0?=
- =?utf-8?B?d25hckZJeVp0Ny9JRGZqZkkzd2VwSzhDSVF6Z1M5SE1ieEVNVE1Hblc5NFhp?=
- =?utf-8?B?Umx3UWlhYmFZNzJkTlh5blhGR1NoT2tNNHV4QXpxMjRzaWFoSjVabmZTbEJl?=
- =?utf-8?B?SWNJVnhWVVFvemJsdTk3djVsRXcwS3JyaEMza0tqb2hSaDNDR1hkczg3NXBE?=
- =?utf-8?B?KzExNmc1N2NBb0szRjlQRk4rakxrbnR2ZnkvdHVyZDBkOTN1WDdtb0ZmYjF1?=
- =?utf-8?B?RmRDYXRETGZ2U1BWaUhHUFVKQ0pPRGQyWWROYW1qTVlhS2lWY21YMjcrWC9V?=
- =?utf-8?B?OUJhQStTaERHZzFFWGY4Y2xoR1paZTc5dHRVeHBLRnBtZU1TOGpPVWp4em5q?=
- =?utf-8?B?RFpTbkhwYitvc0YzaTV2ZEJ4eE9maXhPNTlaK2IwSTV5eFQ4UXhlNVVvK05p?=
- =?utf-8?B?QjBMZ3c1aThmRkhQYXRGMkt5elVScGhTR2JNMzYyM2t6SUxBZ1NEN1dlWjdj?=
- =?utf-8?B?Q0hXa0wvUkZWbnhPWndGMGJRd0RXaURLZGUzZkxyS0FKYTZTZmhwbkF1aGpw?=
- =?utf-8?B?QXk1Q1cwRE43U0R1MHBrMGJlZWVmRmpmVzJYNzZ5M3VhOVg5YWJIWFllMFZX?=
- =?utf-8?B?SWZrUmRTK3UwY3JtVHBSSzNnbXV2STNkZ3pCZURiSUxFcWlkVm5pVCtmQlFR?=
- =?utf-8?B?UUhJU2RKWVRMdmxVQ1NJSnp4cXRna2VZWlBQU3ZwVndGUkgrNE0zdjFRemt4?=
- =?utf-8?B?S2hxVlZVUS95WkN6NG1yRmZwVW1iOUhQdVRTOHFYbE9uWjdXbFYzRjFPaVFB?=
- =?utf-8?B?cVk0QVNyRVRkbk1XWXNkdlRPOU12djNxR3RaTTh3QTBmcUdQTWwwNThoalQ4?=
- =?utf-8?B?QmcvTm1sNUdFZ3JwTlZkTmdTTSttTEdiZXlreng4djBrZ1AwNXE4ZkNUWEI1?=
- =?utf-8?B?clVUcE45TVgzckF0bXFscHVFRDdhNU1NZUYwTXN6VXVDdE8wS0hEaFU4bFIr?=
- =?utf-8?B?R0IyY3llcEo4VVJmbjBhNHduMGJqdHhuNktFOGxQK0pFbmt4REQ3aVVhbFBw?=
- =?utf-8?B?ZEFKcFp0WDdQQ2thSzlvZHJUZmpxOS80YmRBcG1pcTVXM2pLTTRITmNaSFFj?=
- =?utf-8?B?enE4VkorREM0N2NrZ3FPWXVLem9QL2ViSUVMMFYxMUI5VnJNcjRidVk3Zmxa?=
- =?utf-8?B?ZEdvVHN0UG1FTFRYSHFXTGxOSDliR29QUkRrZDliVnVVTy9lSHhCWkR5Rmor?=
- =?utf-8?B?WWs2YWQxNy9mY1ZtVUdHc1c1dFBJbVI0WTJLTS93MXRERElIVW5LS1h1SXMz?=
- =?utf-8?B?K2ZWbGJUUk9UYnVKalc5czF1aG4vbjFkMEtUa1lya3k1SXhZYmVWdnd1b3p3?=
- =?utf-8?B?YklwY2krOGR3dzRwYlBaRWR1QXk3WHM0SG5peitybktjNXZ0SzZIZz09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UXAwVTZ3L2dtYy80WTRubDR5QlcyVHdrWWRFa2VMRW9qT05OdFFnZmVpU29r?=
+ =?utf-8?B?VUkwRnd3UmIwTnpicFU4YUE5akp0SWdhc3lLb2ttdHNHTHVsaGxJSzVpWkJT?=
+ =?utf-8?B?OVhzTGtNTStkcWZjZVhaRENObFMwcFl3ZWxVZnNWZ2JkYlFQa3hvN3VpMWdH?=
+ =?utf-8?B?TmJuU2hPOXVWMmJDWFdwVVVsOWVXenh4R0F3cnkzYSswUDE4K2YyZVRtWHk4?=
+ =?utf-8?B?bVNyQ2hHNEpSYmV0UXZwMnlCM2ExSWZIc3FYTzN1eG4yRzJ6VzVTSWVsZjJJ?=
+ =?utf-8?B?Q0licERaMUdTM2dTVCtEaGU3OWtXMTI1VjlnMW11Ym9tWE1UUkF5bXBKQzBy?=
+ =?utf-8?B?N0IrM1JKUDkxeXdJVUpGNGhYZU5RZ05teFhDUzd4SGtvU3hpazlmSmVvamZV?=
+ =?utf-8?B?MnprSjRJUWJUOXJGRlNEbXBqTDRQTXo5aG5DY1dkbnIvL1J0ZlozUmRTaGIz?=
+ =?utf-8?B?SUM4bnc2SmtJZHIwL0Z6OHFBRFJ0V3NIZFN2di9pejRiRU1rWnNzNEptaThq?=
+ =?utf-8?B?YnppUk1OeU5PZ3RLaUs3dTMwaGdyUDNsdDQrd1pOUURnMmhIbHdXamxEWE9Y?=
+ =?utf-8?B?YWMrZ2Y4SHdjZFowRENZcXpTdk5sZ1gzb2k0SHNkSVJCc3FYU0srR25xKytw?=
+ =?utf-8?B?UUxlekRDU2Z4OHhSQ1lsQWhpQlZzMDVJbHNaVnV1Wjk0c1VrVUtzeWk2ckhS?=
+ =?utf-8?B?QUVZVnhJR24vOUczT211Z3FQVE05TEZzY1lCek44Rk5Na0VUcnlqR2pqNjJJ?=
+ =?utf-8?B?R1NSWGdzQlFhZlZiNWN2b0RteFNORXZnWjVRbWxLMlQxN2YyQkdxZlpOaHVr?=
+ =?utf-8?B?dGY2Mm9WMFQyUStHTS9XWncxVVkrbGZsZjVvTU1zcHFtZzRkbGlmZGFkd0sr?=
+ =?utf-8?B?WUNsKy9QaHNVT3diRFVJczJqQXpWeVdRVTV1LzJlMUcrNWFxZmpEOVVNL1lk?=
+ =?utf-8?B?d3ZnSFl2dW0zczB3cHAvV1plT1hCVHpTYXJ0WnN5U1lWa3E4anVzWGJsZ0xN?=
+ =?utf-8?B?Yzl5SUI4TXdqZnV4MGFDcWlTTTh0S1RSU2RJeDZVVGRhUXNHWGk4WjJ6RGJJ?=
+ =?utf-8?B?SFJXZFl5amhydTgyZ2lEY2h4Qnc3Y3VSUGJhQVdzU0dIVGw5TkhjQzIwK1Vx?=
+ =?utf-8?B?VkFqWVRNa0dsZmVNSzdrd0NjNnBCQTJmRXd5ZWUrV1J2c1BuVWFqcmdvSjc4?=
+ =?utf-8?B?MHhJOW0xMWNZYStVQnVkQ3dUd3lNOHY5MTBLaXk0OGJMSWVZZThoTFVrSi94?=
+ =?utf-8?B?eWdvYmVNRjNJSEd3a3ZFM25IRysyWUxVS3ZFMHBlUzg2QmJMNDVKZ1ltWW5m?=
+ =?utf-8?B?aURVZEFYTkNzVW11ZEQ3RWRhVml0MURjY1prenhPQlRSaFJOdTlRYU9ZSjEv?=
+ =?utf-8?B?YkdnMDlQK3dnUDNXNUZwRTM2R094aVNEbzVFNWlUSWQ2Yzd0cE51Q09tOTFX?=
+ =?utf-8?B?a0dYU1ZHcDJRQkR5NjQwU0FHUUNyL05VOG5QRW5zU0dweG1CL2JsYUtoTy9T?=
+ =?utf-8?B?NWM3Y0c2RW9QR3V5cjVhMUJ1RkFpdU1JVUl3NXA0M3JudEhZbGtQK0t6azUw?=
+ =?utf-8?B?ai9ycnQ3UWJ1K2VOYjJkaHd0MzZST241YmwranpSMWdSbEI1anlhSnhjb0FW?=
+ =?utf-8?B?VlZHM2p5c1JzalRLenpzUVlUQjJVelI1Y1hWZXhrQmVpbWRLdU1HYXA5Nkh3?=
+ =?utf-8?B?b1ZKT3JYMGtQMm1xM0FGcjc5WUZmTGpVTVYyQkR5UW9RUTRHVFZ0ZnBTdmVw?=
+ =?utf-8?B?OS8xRGZQelovdDhIdFptR3doOGNGd1NSQTVRaVFiOXF0OG43ZE1zeEN3c29O?=
+ =?utf-8?B?SmoxNDlVdTFWWldCNzdIdVZFVGlzcWdic0Y4alFCNzU3Y2sweW5NS0FoWmJ6?=
+ =?utf-8?B?Wnh6bXZ5a3ZidVhCQmEvd09leDJWbElCcmJMT1czTlAzS2dwNzRMR0NONnV3?=
+ =?utf-8?B?T21RL0FBMVBjc2RFeEQwTmhwamViOW83N24wMTQ4Y2VQSE1PQWVWKzBBYjM1?=
+ =?utf-8?B?cFNpZmhSNVZNZDNPMUt4c1Q5SVEzQWdvVDFnVDllbU1pQTJXc2tlRVI3TXJQ?=
+ =?utf-8?B?SVBBTUxST3JDZjBKS2tQWGNWMDd0Y0xMNHFrMU9VVXNLU0krTTd4eGY3bEFn?=
+ =?utf-8?B?TzFVRjN1WGhBcURFQ3NsdE9YMFpSTnFCeGtGSWJ2TlF1NnJjd1Rqa0ludWFO?=
+ =?utf-8?B?bUcyNXVIN3ZCVWFQYlQvSGJtUXJoczlmVWhIY3R4MEVPZ0dMOTk4ZE5VNzhD?=
+ =?utf-8?B?YnlKWFlUdmVyK1F6bFB1aHZjYmFxV2h1SGwzcDc0NGtPWllvUkFVOXd3WDc1?=
+ =?utf-8?B?MzNhMkNqdXh0RlZ2UFJDNmljT2FqVXR0QWlPK2orMmZIN2UzVWw2QT09?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fb7a8369-0898-4567-6074-08de9fa11c16
+X-MS-Exchange-CrossTenant-Network-Message-Id: 782f51bd-4c2b-427b-d040-08de9fa12026
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 12:25:44.4259 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 12:25:51.4865 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Mn2JluFkKi+rgssSbETNT6NjLQbtPJe/v72Iru+JR6HKlk7YV31v9DtfUs7DSQrjuaX1JYKyUSS7gDC1Ra/+iA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: Pi92BodvOU9u+GAAa77ghGt73+jww0Cn1AWt/9jPPdMcoER5rrPTb4pmGJoAn5YD4OLrC2UBZXc+1otidW2Iow==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB9349
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -162,56 +162,254 @@ X-Virus-Status: Clean
 
 From: Peng Fan <peng.fan@nxp.com>
 
-To mx6sabreauto and mx6sabresd, power_init_board is called in board_r phase.
-After CONFIG_SPL_DM_PMIC_PFUZE100 included, there will be build error to build
-power_init_board() when CONFIG_SPL_DM_PMIC_PFUZE100 is not enabled.
+Switch PFUZE100 object linkage to be phase-aware and fix build issues
+when using driver model PMIC support.
+
+The PFUZE100 helper code is reworked to:
+- Build pfuze.o only when CONFIG_(SPL_)DM_PMIC_PFUZE100 is enabled
+- Use CONFIG_IS_ENABLED(DM_PMIC_PFUZE100) for proper DM/non-DM selection
+- Align function signatures and implementations with DM PMIC APIs
+- Use udevice-based pmic access for DM and legacy pmic for non-DM
+- Avoid mixing struct pmic and struct udevice in the same build
+  configuration
+
+No functional change intended beyond fixing DM support and build
+consistency.
 
 Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
- board/nxp/mx6sabreauto/mx6sabreauto.c | 2 ++
- board/nxp/mx6sabresd/mx6sabresd.c     | 2 ++
- 2 files changed, 4 insertions(+)
+ board/nxp/common/Makefile |  2 +-
+ board/nxp/common/pfuze.c  | 96 +++++++++++++++++++++++------------------------
+ board/nxp/common/pfuze.h  |  2 +-
+ 3 files changed, 50 insertions(+), 50 deletions(-)
 
-diff --git a/board/nxp/mx6sabreauto/mx6sabreauto.c b/board/nxp/mx6sabreauto/mx6sabreauto.c
-index 8ca57e0b2ac..aef8bc0ad90 100644
---- a/board/nxp/mx6sabreauto/mx6sabreauto.c
-+++ b/board/nxp/mx6sabreauto/mx6sabreauto.c
-@@ -465,6 +465,7 @@ int board_spi_cs_gpio(unsigned bus, unsigned cs)
+diff --git a/board/nxp/common/Makefile b/board/nxp/common/Makefile
+index ed102ae7bf7..dafd3717948 100644
+--- a/board/nxp/common/Makefile
++++ b/board/nxp/common/Makefile
+@@ -57,7 +57,7 @@ obj-$(CONFIG_TARGET_P5040DS)		+= ics307_clk.o
+ ifeq ($(CONFIG_$(PHASE_)POWER_LEGACY),y)
+ obj-$(CONFIG_POWER_PFUZE100)	+= pfuze.o
+ endif
+-obj-$(CONFIG_DM_PMIC_PFUZE100)	+= pfuze.o
++obj-$(CONFIG_$(PHASE_)DM_PMIC_PFUZE100)	+= pfuze.o
+ obj-$(CONFIG_POWER_MC34VR500)	+= mc34vr500.o
+ ifneq (,$(filter $(SOC), imx8m imx8ulp imx9))
+ obj-y				+= mmc.o
+diff --git a/board/nxp/common/pfuze.c b/board/nxp/common/pfuze.c
+index 0d7a94fd232..179cc605da0 100644
+--- a/board/nxp/common/pfuze.c
++++ b/board/nxp/common/pfuze.c
+@@ -7,14 +7,14 @@
+ #include <power/pmic.h>
+ #include <power/pfuze100_pmic.h>
+ 
+-#ifndef CONFIG_DM_PMIC_PFUZE100
+-int pfuze_mode_init(struct pmic *p, u32 mode)
++#if CONFIG_IS_ENABLED(DM_PMIC_PFUZE100)
++int pfuze_mode_init(struct udevice *dev, u32 mode)
+ {
+ 	unsigned char offset, i, switch_num;
+ 	u32 id;
+ 	int ret;
+ 
+-	pmic_reg_read(p, PFUZE100_DEVICEID, &id);
++	id = pmic_reg_read(dev, PFUZE100_DEVICEID);
+ 	id = id & 0xf;
+ 
+ 	if (id == 0) {
+@@ -28,14 +28,14 @@ int pfuze_mode_init(struct pmic *p, u32 mode)
+ 		return -EINVAL;
+ 	}
+ 
+-	ret = pmic_reg_write(p, PFUZE100_SW1ABMODE, mode);
++	ret = pmic_reg_write(dev, PFUZE100_SW1ABMODE, mode);
+ 	if (ret < 0) {
+ 		printf("Set SW1AB mode error!\n");
+ 		return ret;
+ 	}
+ 
+ 	for (i = 0; i < switch_num - 1; i++) {
+-		ret = pmic_reg_write(p, offset + i * SWITCH_SIZE, mode);
++		ret = pmic_reg_write(dev, offset + i * SWITCH_SIZE, mode);
+ 		if (ret < 0) {
+ 			printf("Set switch 0x%x mode error!\n",
+ 			       offset + i * SWITCH_SIZE);
+@@ -46,58 +46,54 @@ int pfuze_mode_init(struct pmic *p, u32 mode)
+ 	return ret;
+ }
+ 
+-struct pmic *pfuze_common_init(unsigned char i2cbus)
++struct udevice *pfuze_common_init(void)
+ {
+-	struct pmic *p;
++	struct udevice *dev;
+ 	int ret;
+-	unsigned int reg;
+-
+-	ret = power_pfuze100_init(i2cbus);
+-	if (ret)
+-		return NULL;
++	unsigned int reg, dev_id, rev_id;
+ 
+-	p = pmic_get("PFUZE100");
+-	ret = pmic_probe(p);
+-	if (ret)
++	ret = pmic_get("pfuze100@8", &dev);
++	if (ret == -ENODEV)
+ 		return NULL;
+ 
+-	pmic_reg_read(p, PFUZE100_DEVICEID, &reg);
+-	printf("PMIC:  PFUZE100 ID=0x%02x\n", reg);
++	dev_id = pmic_reg_read(dev, PFUZE100_DEVICEID);
++	rev_id = pmic_reg_read(dev, PFUZE100_REVID);
++	printf("PMIC: PFUZE100! DEV_ID=0x%x REV_ID=0x%x\n", dev_id, rev_id);
+ 
+ 	/* Set SW1AB stanby volage to 0.975V */
+-	pmic_reg_read(p, PFUZE100_SW1ABSTBY, &reg);
++	reg = pmic_reg_read(dev, PFUZE100_SW1ABSTBY);
+ 	reg &= ~SW1x_STBY_MASK;
+ 	reg |= SW1x_0_975V;
+-	pmic_reg_write(p, PFUZE100_SW1ABSTBY, reg);
++	pmic_reg_write(dev, PFUZE100_SW1ABSTBY, reg);
+ 
+ 	/* Set SW1AB/VDDARM step ramp up time from 16us to 4us/25mV */
+-	pmic_reg_read(p, PFUZE100_SW1ABCONF, &reg);
++	reg = pmic_reg_read(dev, PFUZE100_SW1ABCONF);
+ 	reg &= ~SW1xCONF_DVSSPEED_MASK;
+ 	reg |= SW1xCONF_DVSSPEED_4US;
+-	pmic_reg_write(p, PFUZE100_SW1ABCONF, reg);
++	pmic_reg_write(dev, PFUZE100_SW1ABCONF, reg);
+ 
+ 	/* Set SW1C standby voltage to 0.975V */
+-	pmic_reg_read(p, PFUZE100_SW1CSTBY, &reg);
++	reg = pmic_reg_read(dev, PFUZE100_SW1CSTBY);
+ 	reg &= ~SW1x_STBY_MASK;
+ 	reg |= SW1x_0_975V;
+-	pmic_reg_write(p, PFUZE100_SW1CSTBY, reg);
++	pmic_reg_write(dev, PFUZE100_SW1CSTBY, reg);
+ 
+ 	/* Set SW1C/VDDSOC step ramp up time from 16us to 4us/25mV */
+-	pmic_reg_read(p, PFUZE100_SW1CCONF, &reg);
++	reg = pmic_reg_read(dev, PFUZE100_SW1CCONF);
+ 	reg &= ~SW1xCONF_DVSSPEED_MASK;
+ 	reg |= SW1xCONF_DVSSPEED_4US;
+-	pmic_reg_write(p, PFUZE100_SW1CCONF, reg);
++	pmic_reg_write(dev, PFUZE100_SW1CCONF, reg);
+ 
+-	return p;
++	return dev;
+ }
+-#elif defined(CONFIG_DM_PMIC)
+-int pfuze_mode_init(struct udevice *dev, u32 mode)
++#else
++int pfuze_mode_init(struct pmic *p, u32 mode)
+ {
+ 	unsigned char offset, i, switch_num;
+ 	u32 id;
+ 	int ret;
+ 
+-	id = pmic_reg_read(dev, PFUZE100_DEVICEID);
++	pmic_reg_read(p, PFUZE100_DEVICEID, &id);
+ 	id = id & 0xf;
+ 
+ 	if (id == 0) {
+@@ -111,14 +107,14 @@ int pfuze_mode_init(struct udevice *dev, u32 mode)
+ 		return -EINVAL;
+ 	}
+ 
+-	ret = pmic_reg_write(dev, PFUZE100_SW1ABMODE, mode);
++	ret = pmic_reg_write(p, PFUZE100_SW1ABMODE, mode);
+ 	if (ret < 0) {
+ 		printf("Set SW1AB mode error!\n");
+ 		return ret;
+ 	}
+ 
+ 	for (i = 0; i < switch_num - 1; i++) {
+-		ret = pmic_reg_write(dev, offset + i * SWITCH_SIZE, mode);
++		ret = pmic_reg_write(p, offset + i * SWITCH_SIZE, mode);
+ 		if (ret < 0) {
+ 			printf("Set switch 0x%x mode error!\n",
+ 			       offset + i * SWITCH_SIZE);
+@@ -129,44 +125,48 @@ int pfuze_mode_init(struct udevice *dev, u32 mode)
+ 	return ret;
+ }
+ 
+-struct udevice *pfuze_common_init(void)
++struct pmic *pfuze_common_init(unsigned char i2cbus)
+ {
+-	struct udevice *dev;
++	struct pmic *p;
+ 	int ret;
+-	unsigned int reg, dev_id, rev_id;
++	unsigned int reg;
+ 
+-	ret = pmic_get("pfuze100@8", &dev);
+-	if (ret == -ENODEV)
++	ret = power_pfuze100_init(i2cbus);
++	if (ret)
+ 		return NULL;
+ 
+-	dev_id = pmic_reg_read(dev, PFUZE100_DEVICEID);
+-	rev_id = pmic_reg_read(dev, PFUZE100_REVID);
+-	printf("PMIC: PFUZE100! DEV_ID=0x%x REV_ID=0x%x\n", dev_id, rev_id);
++	p = pmic_get("PFUZE100");
++	ret = pmic_probe(p);
++	if (ret)
++		return NULL;
++
++	pmic_reg_read(p, PFUZE100_DEVICEID, &reg);
++	printf("PMIC:  PFUZE100 ID=0x%02x\n", reg);
+ 
+ 	/* Set SW1AB stanby volage to 0.975V */
+-	reg = pmic_reg_read(dev, PFUZE100_SW1ABSTBY);
++	pmic_reg_read(p, PFUZE100_SW1ABSTBY, &reg);
+ 	reg &= ~SW1x_STBY_MASK;
+ 	reg |= SW1x_0_975V;
+-	pmic_reg_write(dev, PFUZE100_SW1ABSTBY, reg);
++	pmic_reg_write(p, PFUZE100_SW1ABSTBY, reg);
+ 
+ 	/* Set SW1AB/VDDARM step ramp up time from 16us to 4us/25mV */
+-	reg = pmic_reg_read(dev, PFUZE100_SW1ABCONF);
++	pmic_reg_read(p, PFUZE100_SW1ABCONF, &reg);
+ 	reg &= ~SW1xCONF_DVSSPEED_MASK;
+ 	reg |= SW1xCONF_DVSSPEED_4US;
+-	pmic_reg_write(dev, PFUZE100_SW1ABCONF, reg);
++	pmic_reg_write(p, PFUZE100_SW1ABCONF, reg);
+ 
+ 	/* Set SW1C standby voltage to 0.975V */
+-	reg = pmic_reg_read(dev, PFUZE100_SW1CSTBY);
++	pmic_reg_read(p, PFUZE100_SW1CSTBY, &reg);
+ 	reg &= ~SW1x_STBY_MASK;
+ 	reg |= SW1x_0_975V;
+-	pmic_reg_write(dev, PFUZE100_SW1CSTBY, reg);
++	pmic_reg_write(p, PFUZE100_SW1CSTBY, reg);
+ 
+ 	/* Set SW1C/VDDSOC step ramp up time from 16us to 4us/25mV */
+-	reg = pmic_reg_read(dev, PFUZE100_SW1CCONF);
++	pmic_reg_read(p, PFUZE100_SW1CCONF, &reg);
+ 	reg &= ~SW1xCONF_DVSSPEED_MASK;
+ 	reg |= SW1xCONF_DVSSPEED_4US;
+-	pmic_reg_write(dev, PFUZE100_SW1CCONF, reg);
++	pmic_reg_write(p, PFUZE100_SW1CCONF, reg);
+ 
+-	return dev;
++	return p;
  }
  #endif
+diff --git a/board/nxp/common/pfuze.h b/board/nxp/common/pfuze.h
+index 45b49afaeb7..da89853bd20 100644
+--- a/board/nxp/common/pfuze.h
++++ b/board/nxp/common/pfuze.h
+@@ -6,7 +6,7 @@
+ #ifndef __PFUZE_BOARD_HELPER__
+ #define __PFUZE_BOARD_HELPER__
  
-+#ifndef CONFIG_XPL_BUILD
- int power_init_board(void)
- {
- 	struct udevice *dev;
-@@ -488,6 +489,7 @@ int power_init_board(void)
- 
- 	return pfuze_mode_init(dev, APS_PFM);
- }
-+#endif
- 
- #ifdef CONFIG_CMD_BMODE
- static const struct boot_mode board_boot_modes[] = {
-diff --git a/board/nxp/mx6sabresd/mx6sabresd.c b/board/nxp/mx6sabresd/mx6sabresd.c
-index dff3a9c33bf..9404535104c 100644
---- a/board/nxp/mx6sabresd/mx6sabresd.c
-+++ b/board/nxp/mx6sabresd/mx6sabresd.c
-@@ -437,6 +437,7 @@ int board_init(void)
- 	return 0;
- }
- 
-+#ifndef CONFIG_XPL_BUILD
- int power_init_board(void)
- {
- 	struct udevice *dev;
-@@ -468,6 +469,7 @@ int power_init_board(void)
- 
- 	return 0;
- }
-+#endif
- 
- #ifdef CONFIG_MXC_SPI
- int board_spi_cs_gpio(unsigned bus, unsigned cs)
+-#ifdef CONFIG_DM_PMIC_PFUZE100
++#if CONFIG_IS_ENABLED(DM_PMIC_PFUZE100)
+ struct udevice *pfuze_common_init(void);
+ int pfuze_mode_init(struct udevice *dev, u32 mode);
+ #else
 
 -- 
 2.51.0
