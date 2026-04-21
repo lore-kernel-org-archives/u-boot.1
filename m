@@ -4,79 +4,163 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0DE2F94CBB
-	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 02:31:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3231EF94CBC
+	for <u-boot@archiver.kernel.org>; Wed, 22 Apr 2026 02:42:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 571F883936;
-	Wed, 22 Apr 2026 04:31:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8770583936;
+	Wed, 22 Apr 2026 04:42:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L9al/XU3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DtOp5uRW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACA91840D8; Wed, 22 Apr 2026 04:31:42 +0200 (CEST)
-Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
- [IPv6:2607:f8b0:4864:20::830])
+ id 788CA83FED; Wed, 22 Apr 2026 00:42:55 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B95F8352B
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 04:31:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D6479839D5
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 00:42:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-50e63771d91so28776481cf.0
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 19:31:40 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b886fc047d5so869838866b.3
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:42:51 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776811371; cv=none;
+ d=google.com; s=arc-20240605;
+ b=KILquRT7nUwgGFJVmyG8ejA8Lf1ypT4A0tlH81dnc6Tgti/muigGEx6mRU8RL7049g
+ TSwwwreK6ITF5LTIKEeNVgTbWJvRA1JfsTBjzumbYM+iVxPudkyWI/boSy4zhrwgqJ49
+ R3Q5wbEASRlRRLqhnrB0UAGJkvSmXvI9rgQ6Mlnd31G2aEDV2CV1y5YuEmethysy0gi9
+ QVnA4TvZwtkcZtvOEfIWLg3WSBSzulR+/xL+W5haJMrr0e3f5elDefGexpVOGO5WqY56
+ UPJXII7PZnHIoP+KLNM6Ijm8P0iZXn136yRgp04ATJvUg5U5DmS0h2LPMxch24a1O/3Q
+ mgiQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=9rmZpHh4Vh3tkU/FHj4lOq9bOGUiD7f6f6ViJT+F7pI=;
+ fh=y7nMaG+Z9eq5yB5CqAoZCLiMIM5ZLRxZQQigLqm0wnk=;
+ b=WTt8XBZiFC2OoAauWWg8Qr8/QvEfCWf06ErsM3B6jUJ0f2PkyK9dk0ftmO6biW4VIc
+ 2SONlrXKbyIZAF/jCOSeWZ11dZH3ztUIKajp/pNSAVsUFR6bN0H6vLXSIbiaD8g18OKO
+ 3lIBNW5EjtFrqFiBDETBauseLi2y/0XC2E52fkP7dtyMmHF/ixeqOaxWkTynyojqH6+s
+ YbOQLiwQWSiG1hWEfPXRw43dZjvUi8T8eIFEtM82rvzmm49Q7CjzVB9qSUXn0T4qSDzM
+ h76G3HDWjtM04udVQPxn4YRilEeS6akwNwK8gWECqsE+nGew7YMRn34drPTR5pd/zqrd
+ 5dvA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776825099; x=1777429899; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=72V43/6I50FrMbUfeORs6+trlQRH06niP+WrFi6EYgw=;
- b=L9al/XU38Zo+OmIQhTzNC/MgFdQ4NhAr6r8mEJhT56e+5zmbcfJdzj6mGNGI+l0VbK
- 5q/uwvvCRtGIgpo5aK7j+Z76XBJV8aJ6hK7BXuqfrN7UOnh05+nxeZ0r8YbrAbhuADpo
- z2jzHheF9XW5Y4Ys7QGCMkoKEQYYPyNWgkNpY=
+ d=chromium.org; s=google; t=1776811371; x=1777416171; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=9rmZpHh4Vh3tkU/FHj4lOq9bOGUiD7f6f6ViJT+F7pI=;
+ b=DtOp5uRWSWiadpAmAteJHexLYEFqhMyV0Jr6F74ALIlNLeJ9poJ7kE+vNmS87fH0ao
+ e9VTw5aSxHjKwQOtpl4IU40PmAyQDQjZISMLy9krCvjKi3D6iTpLhXdckrTGyiT8WpKz
+ +M5JXK2dpkfJFZUnbKGc6GWj7XFfvjzHDVams=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776825099; x=1777429899;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1776811371; x=1777416171;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=72V43/6I50FrMbUfeORs6+trlQRH06niP+WrFi6EYgw=;
- b=AgSkJ2iKP76/P06N0yBMKy9++LrtA1RElMyDtBI+F5eHLeSrAiJQBuEky4UQ0wUo12
- rfvR43BFA9E7lXlPcIOPWg3tXRU8RORemdmWmbhF48VI9Tzwt8il20fzfxTqW8B7Sy58
- 2Miu7ZRCPvKPVnprH62SLUNa5Xith3bW8Kwu+79axVp7PbmvIaecASEkrgzzm9djPB1I
- hKhyAsfAMDgrF8+/A8+SbZQo+kYIwSWsYuYPUk02hORYvOPdQOfutAJlpsLeBoq2ltmn
- 5bjMMu1GNvbYtnh+u7oL8rqsufuTS1D9EGPeQ6VVkN2o27GI9iIjKfN164l6axuoGwJQ
- oM3Q==
-X-Gm-Message-State: AOJu0Yye205KYIPnfOvHmzpzFnxq3FKmNSsfGjN8iMeesr7KTqpBdcjH
- SOOFCQ9vwGK9DRSIPVbejPOUep1+rEbyrWozOtcyLlFa7uPiLzwCpdfDB2Ula4zyUVmymHugiSR
- EIYaIpQ==
-X-Gm-Gg: AeBDievuYKt7HsL8WX+WVhsJMWlLunjJp4n6lwoY2U+YNRTTvmQjJRZT15wRZ53cPis
- X3q1prmJc8Kp1uX1hVUorPloMbcf7/kHBoI9uPKqmfuND9TAKabW1j14wAbAJVmjHGYesKjbupe
- uEh4UIY328douyr8EVi+xGnsXRqsuZYNh3XYUJCbvA8i/1KZIkb1ny6ZkLMG6/rKbTeqvru2C/L
- B/oNPILe5VHncHW/1cGdwzDoFi5aD+/aTJCoFYszwohpJRL3jhb2Wb6meYU/J4g3Oz/c/A8KFyo
- gjOBki6uHH3GjqnW+C8QPCs6lcoOUDsqB/zkI0wyZl3q00lMX0RiURiI2qqEL5p06fOJn1KIPgo
- Ha0X/7s21upHPU/SYfDEptNUPMdY7MRo/4KoKmNSDsribpAehbyOMPVqUPEvcMB0JrvZCcbTbpS
- GQOIrtHLQ9Db+7/bQVn/izc7V6mvKn
-X-Received: by 2002:a05:622a:1f99:b0:509:23ee:b9a5 with SMTP id
- d75a77b69052e-50e368372e2mr310893001cf.5.1776825098608; 
- Tue, 21 Apr 2026 19:31:38 -0700 (PDT)
-Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-50e39495192sm126614081cf.27.2026.04.21.19.31.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Apr 2026 19:31:37 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Marek Vasut <marek.vasut@mailbox.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] fdtgrep: Add option to reserve free space in the output FDT
-Date: Tue, 21 Apr 2026 20:31:23 -0600
-Message-ID: <20260422023131.2813748-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
+ bh=9rmZpHh4Vh3tkU/FHj4lOq9bOGUiD7f6f6ViJT+F7pI=;
+ b=lKGZc0mHAPkH10PPs8E2ndLDI5TbPZ8350/KT7hdlMlWB7iI4DBNKIUVsCoSx71D/G
+ GFMM/j3I2RLtDOcfXjEove6K1tfFWfdV1F5Ztc/vtb5yOEZ7kDtm5/mlPMOfmTTpbvpC
+ SUP6qOmW/mgvruRbYRevYRGr75cLY0KXZ/rMe3Jjqkq36DiJ+i4c2g3OudOfV3RZsosh
+ pJZvYlIeWiVSdxtUbPzJmqxDHWx79r6QAv3vDeSUwZHmO8NRS72Zfcg+SQMFeU2CYHYD
+ SKV9LQc3ZnMokmZRTb7EFz6shO6IYehP+a8PSSq8jF0thnYs2SulprWla07/Yv8jOR8Z
+ pAZA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+TjoKcFk536SaR81wCHWR+nyxbaoJNq/Ml2n/z1vCKUBKZ4QSChiHd885KYV9BDWE4hJNNV7A=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx5kklWTaxQYeeMywD4qXiTIVYAjAP7XIjtljn/ah9KOKZbTlmD
+ 35kJuNKx+1/CmM8paK9JELfiA4x7Kq+wpmOVMu6FJzF+0by7nvYAWKcnze7LKxOe3TyUnPt7ewt
+ NfCW+78CkXOeZXiNRMTS64wgKKbZFjj9t9oT/ZgiB
+X-Gm-Gg: AeBDiesN7gGD7WNmqlSMycUKiVnQupNO5qANhZFtw9xpZLKxRrw0Iokz8MmSwn2lGO4
+ 4uAQT/Cc3All5dxLppqp5moYvj4uYu1bjYhH3sAdBF15CRWLMjB/uHr9vgVoECv/vi2aR2kYUT2
+ gykKTs5xAXgjydhDlFgqyzp83l5QgBdK27ZJiSYu/kowj9iVLC6GrUWMwP05JxHin5o10pqNxy1
+ Ta2k6J4zJdhwSiIAWdmbGENhS1nUzTmvVi0nB2DipD3Bn6+ciSy3vPrHnTPp19eMuzh3D7YeI4P
+ RKFFWehgSalGE+z3bTgr
+X-Received: by 2002:a17:906:7950:b0:ba7:1191:6402 with SMTP id
+ a640c23a62f3a-ba711a0ae21mr625797966b.27.1776811370402; Tue, 21 Apr 2026
+ 15:42:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
+ <20260420-net-kconfig-v1-2-9900002d8e72@cherry.de>
+ <CAFLszTgZC1FGy8965pHiG-u=FhrguftRv41ghQ_Qb_RRXx6tyg@mail.gmail.com>
+ <9ced2644-d3ff-49d5-a524-5439f9ca4831@cherry.de>
+In-Reply-To: <9ced2644-d3ff-49d5-a524-5439f9ca4831@cherry.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 22 Apr 2026 10:42:37 +1200
+X-Gm-Features: AQROBzCz0okK9N5nAdgk3AOs3EhEwwxF9Pd_71s2RH_yPMfi0Na1OS6DnLqD8Oo
+Message-ID: <CAFLszTg4ZeeFWkqXoOcqpEmEFTx2Z1EEicgQUx0GbO4x7fu-bg@mail.gmail.com>
+Subject: Re: [PATCH 2/6] rename NET to NET_LEGACY
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: foss+uboot@0leil.net, u-boot@lists.denx.de, 
+ uboot-stm32@st-md-mailman.stormreply.com, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Udit Kumar <u-kumar1@ti.com>, =?UTF-8?Q?Alvin_=C5=A0ipraga?= <alvin@pqrs.dk>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, Adam Ford <aford173@gmail.com>, 
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>, 
+ Matteo Lisi <matteo.lisi@engicam.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Mingkai Hu <mingkai.hu@nxp.com>, Pramod Kumar <pramod.kumar_1@nxp.com>, 
+ Gilles Talis <gilles.talis@gmail.com>, Le Jin <le.jin@siemens.com>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, Kongyang Liu <seashell11234455@gmail.com>,
+ Stefan Roese <sr@denx.de>, Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>, 
+ Vaishnav Achath <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>,
+ Lukasz Majewski <lukma@denx.de>, 
+ Marek Vasut <marex@denx.de>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Yao Zi <me@ziyao.cc>, 
+ Fabio Estevam <festevam@gmail.com>, Alice Guo <alice.guo@nxp.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Martyn Welch <martyn.welch@collabora.com>, 
+ Maarten Brock <Maarten.Brock@sttls.nl>,
+ Kory Maincent <kory.maincent@bootlin.com>, 
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
+ Padmarao Begari <padmarao.begari@amd.com>, 
+ Matthias Brugger <mbrugger@suse.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Heiko Schocher <hs@nabladev.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>, Brian Sune <briansune@gmail.com>, 
+ Julien Stephan <jstephan@baylibre.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, 
+ Ben Dooks <ben.dooks@codethink.co.uk>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Anshul Dalal <anshuld@ti.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>, 
+ Hrushikesh Salunke <h-salunke@ti.com>, Alexey Charkov <alchark@gmail.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>, 
+ Andreas Dannenberg <dannenberg@ti.com>, Chintan Vankar <c-vankar@ti.com>,
+ Martin Schwan <m.schwan@phytec.de>, 
+ Benjamin Hahn <B.Hahn@phytec.de>, David Lechner <dlechner@baylibre.com>, 
+ "Ariel D'Alessandro" <ariel.dalessandro@collabora.com>,
+ Dmitrii Merkurev <dimorinny@google.com>, 
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Robert Marko <robert.marko@sartura.hr>, 
+ Beiyan Yun <root@infi.wang>, "Lucien.Jheng" <lucienzx159@gmail.com>, 
+ Romain Gantois <romain.gantois@bootlin.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, 
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ George Chan <gchan9527@gmail.com>, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Benjamin ROBIN <dev@benjarobin.fr>, 
+ Max Merchel <Max.Merchel@ew.tq-group.com>,
+ Sean Edmond <seanedmond@microsoft.com>, 
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Shantur Rathore <i@shantur.com>, 
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, 
+ Sky Huang <SkyLake.Huang@mediatek.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Wed, 22 Apr 2026 04:42:51 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,117 +177,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When producing a DTB from fdtgrep, there is no way to reserve extra
-space so that more nodes/properties can be added at runtime without
-growing totalsize first.
+Hi Quentin,
 
-Add a -B/--pad option that appends a caller-specified number of free
-bytes after the strings section and grows totalsize accordingly. The
-padding is applied after fdt_pack(), so it is not reclaimed when -r is
-used.
+On Tue, 21 Apr 2026 at 22:17, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>
+> Hi Simon,
+>
+> On 4/20/26 9:42 PM, Simon Glass wrote:
+> > Hi Quentin,
+> >
+> > On 2026-04-20T11:36:06, Quentin Schulz <foss+uboot@0leil.net> wrote:
+> >> rename NET to NET_LEGACY
+> >>
+> >> Highlight that NET really is the legacy networking stack by renaming the
+> >> option to NET_LEGACY.
+> >>
+> >> This requires us to add an SPL_NET_LEGACY alias to SPL_NET as otherwise
+> >> CONFIG_IS_ENABLED(NET_LEGACY) will not work for SPL.
+> >>
+> >> The "depends on !NET_LWIP" for SPL_NET clearly highlights that it is
+> >> using the legacy networking app so this seems fine to do.
+> >>
+> >> This also has the benefit of removing potential confusion on NET being a
+> >> specific networking stack instead of 'any' network stack.
+> >>
+> >> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> >
+> >> diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
+> >> @@ -422,7 +422,7 @@ includes the full set of commands, more error messages when things go wrong and
+> >> -several filesystem and network features (if CONFIG_NET is enabled) so that
+> >> +several filesystem and network features (if CONFIG_NET_LEGACY is enabled) so that
+> >
+> > Shouldn't this be left alone? Or perhaps restored in patch 4?
+> >
+> > BOOTSTD_DEFAULTS selects BOOT_DEFAULTS which enables network commands
+> > conditionally on !NO_NET, meaning any network stack.
+> >
+> This patch series is about renaming stuff, not fixing stuff (though you
+> can see some trivial "fixes" in patch 5 and 6).
 
-Suggested-by: Marek Vasut <marek.vasut@mailbox.org>
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+OK, fair enough. This is worth a follow-up though, as having
+NET_LEGACY about the place suggests that the code is old.
 
- tools/binman/btool/fdtgrep.py |  3 ++-
- tools/fdtgrep.c               | 31 ++++++++++++++++++++++++++++++-
- 2 files changed, 32 insertions(+), 2 deletions(-)
+>
+> I agree with you that this needs to be switched to (new) CONFIG_NET.
+> I'll try to not forget adding it to a v2 (as a separate patch) if
+> there's a need for one, or send a follow-up patch.
+>
+> >> diff --git a/cmd/ufetch.c b/cmd/ufetch.c
+> >> @@ -159,7 +159,7 @@ static int do_ufetch(struct cmd_tbl *cmdtp, int flag, int argc,
+> >> -                     if (IS_ENABLED(CONFIG_NET))
+> >> +                     if (IS_ENABLED(CONFIG_NET_LEGACY))
+> >>                                printf('Net');
+> >
+> > Similar question here.
+> >
+>
+> See above.
+>
+> >> diff --git a/board/siemens/iot2050/board.c b/board/siemens/iot2050/board.c
+> >> @@ -232,7 +232,7 @@ void set_board_info_env(void)
+> >> -     if (IS_ENABLED(CONFIG_NET)) {
+> >> +     if (IS_ENABLED(CONFIG_NET_LEGACY)) {
+> >
+> > and here
+> >
+>
+> See above. This one seems ok, but I am not really planning to modify
+> individual boards that I cannot test. This change would mean in a way
+> that CONFIG_NET_LWIP has been tested with that board, which possibly
+> isn't the case and I cannot guarantee that either.
 
-diff --git a/tools/binman/btool/fdtgrep.py b/tools/binman/btool/fdtgrep.py
-index 446b2f4144b..7b393241878 100644
---- a/tools/binman/btool/fdtgrep.py
-+++ b/tools/binman/btool/fdtgrep.py
-@@ -16,9 +16,10 @@ Output formats are:
- 	dtb - device tree blob (sets -Hmt automatically)
- 	bin - device tree fragment (may not be a valid .dtb)
- 
--Options: -[haAc:b:C:defg:G:HIlLmn:N:o:O:p:P:rRsStTvhV]
-+Options: -[haAB:c:b:C:defg:G:HIlLmn:N:o:O:p:P:rRsStTvhV]
-   -a, --show-address                 Display address
-   -A, --colour                       Show all nodes/tags, colour those that match
-+  -B, --pad <arg>                    Append free space to the output FDT, for later growth
-   -b, --include-node-with-prop <arg> Include contains containing property
-   -c, --include-compat <arg>         Compatible nodes to include in grep
-   -C, --exclude-compat <arg>         Compatible nodes to exclude in grep
-diff --git a/tools/fdtgrep.c b/tools/fdtgrep.c
-index b4c041070f5..83e3d0b9314 100644
---- a/tools/fdtgrep.c
-+++ b/tools/fdtgrep.c
-@@ -64,6 +64,7 @@ struct display_info {
- 	int types_exc;		/* Mask of types that we exclude (FDT_IS...) */
- 	int invert;		/* Invert polarity of match */
- 	int props_up;		/* Imply properties up to supernodes */
-+	int pad;		/* Free bytes to append after the strings section */
- 	struct value_node *value_head;	/* List of values to match */
- 	const char *output_fname;	/* Output filename */
- 	FILE *fout;		/* File to write dts/dtb output */
-@@ -913,6 +914,27 @@ static int do_fdtgrep(struct display_info *disp, const char *filename)
- 			size = fdt_totalsize(fdt);
- 		}
- 
-+		if (disp->pad) {
-+			int new_size = fdt_totalsize(fdt) + disp->pad;
-+			void *new_fdt = realloc(fdt, new_size);
-+
-+			if (!new_fdt) {
-+				fprintf(stderr, "Out_of_memory\n");
-+				ret = -1;
-+				goto err;
-+			}
-+			fdt = new_fdt;
-+			ret = fdt_open_into(fdt, fdt, new_size);
-+			if (ret < 0) {
-+				fprintf(stderr,
-+					"Failed to expand FDT: %s\n",
-+					fdt_strerror(ret));
-+				goto err;
-+			}
-+			memset((char *)fdt + size, '\0', new_size - size);
-+			size = new_size;
-+		}
-+
- 		if ((size_t)size != fwrite(fdt, 1, size, disp->fout)) {
- 			fprintf(stderr, "Write failure, %d bytes\n", size);
- 			free(fdt);
-@@ -965,11 +987,12 @@ static const char usage_synopsis[] =
- 	case '?': usage("unknown option");
- 
- static const char usage_short_opts[] =
--		"haAc:b:C:defg:G:HIlLmn:N:o:O:p:P:rRsStTuv"
-+		"haAB:c:b:C:defg:G:HIlLmn:N:o:O:p:P:rRsStTuv"
- 		USAGE_COMMON_SHORT_OPTS;
- static const struct option usage_long_opts[] = {
- 	{"show-address",	no_argument, NULL, 'a'},
- 	{"colour",		no_argument, NULL, 'A'},
-+	{"pad",			a_argument, NULL, 'B'},
- 	{"include-node-with-prop", a_argument, NULL, 'b'},
- 	{"include-compat",	a_argument, NULL, 'c'},
- 	{"exclude-compat",	a_argument, NULL, 'C'},
-@@ -1002,6 +1025,7 @@ static const struct option usage_long_opts[] = {
- static const char * const usage_opts_help[] = {
- 	"Display address",
- 	"Show all nodes/tags, colour those that match",
-+	"Append free space to the output FDT, for later growth",
- 	"Include contains containing property",
- 	"Compatible nodes to include in grep",
- 	"Compatible nodes to exclude in grep",
-@@ -1132,6 +1156,11 @@ static void scan_args(struct display_info *disp, int argc, char *argv[])
- 		case 'A':
- 			disp->all = 1;
- 			break;
-+		case 'B':
-+			disp->pad = atoi(optarg);
-+			if (disp->pad < 0)
-+				usage("Padding must be non-negative");
-+			break;
- 		case 'b':
- 			type = FDT_NODE_HAS_PROP;
- 			break;
----
-base-commit: 052988aa29bfd506d7ce207fbb3f5374a5dbecbb
-branch: fdtgrep
+OK
 
--- 
-2.43.0
-
+Regards,
+Simon
