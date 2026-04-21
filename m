@@ -4,119 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6A55F94CA7
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 21:13:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E0C1F94CB3
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 22:14:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6635F84348;
-	Tue, 21 Apr 2026 23:12:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 35C3F83AC5;
+	Wed, 22 Apr 2026 00:14:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uTQfWssW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="r+yCFbOR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED35384348; Tue, 21 Apr 2026 23:10:49 +0200 (CEST)
-Received: from mail-oa1-x42.google.com (mail-oa1-x42.google.com
- [IPv6:2001:4860:4864:20::42])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8E8BD83AC5; Wed, 22 Apr 2026 00:14:26 +0200 (CEST)
+Received: from SA9PR02CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170130001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10c::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4965A842FC
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 23:10:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3790B839D5
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 00:14:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x42.google.com with SMTP id
- 586e51a60fabf-40423dbe98bso1966431fac.2
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 14:10:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1776805846; x=1777410646; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=eUvw+zfPazrtwfR5e2f6A6yFJoZi1W0sLAi88OMtND4=;
- b=uTQfWssWJ3LCqcCt1JFGUMZw7/z92jHbxJXiMc4+eASDpg8toG+98BNOPbEo7Da+Ns
- bLl6RUtZU1gxByjYDic1y0+fD6CdSlJT7DIa5KhSRM4eqrk+chr79b1EGt7Hhz/Iq6gx
- /j8NL81KjEeGmO/tsm6t1s8xIwwqMzILM3VWc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776805846; x=1777410646;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=eUvw+zfPazrtwfR5e2f6A6yFJoZi1W0sLAi88OMtND4=;
- b=OE7MLqGFcPiz7ZSv9SzOEUaKaQlhH8G0IvPfm+CQ4WEaVRnrGd8u0INZi3mKJ96MmT
- fimfhSL+f3k/TRpSAnRPjYCWU6NdO9C5uc+sFaBz9Lt0XjMQfCwcReiMLfGO1rTETNB4
- iLQGi7YgRs6jb0HbqgxkbH2MwVV2L4PIIYFzZk2CTu7J5PhswmgsrNfE3HYt4ZplTdJK
- k9V3mrjK12+MUr0Z2Q/RiPJZQLDg8MTOpjhIgieiuFI1VdWW9z/ZK/c0KQSgryB3p4dR
- Q1zWdm7rRo2wb6LNErZDp7sM3YvMUXoMMkwxuHi1qqX7nnyEYlQHe6HtlfKGQh115hyk
- 8UZQ==
-X-Gm-Message-State: AOJu0Yy4gFh1hlR94CMCKH/HmiwoSas0BNVhn1jiDcC3ztjBXSm5j20p
- 78/kelN4Kte5Um8vfjg95fyf0yPK+Xs8npDazpSGl8BeWhZr0UeQ60Hb/XEC0gjv7FMmiwQayBR
- CMFC59ZLUc6lxMHY=
-X-Gm-Gg: AeBDieseaAFHm60dbkqVvKG+OYPn54qAWS6npYyPyN21hJLwG+xtvUBi3LU1jrgkwIC
- OTYDrHlL4ebUme7qYs4GPplltWO7DkmKj4zJyEn809KDxHoSkQXGM6vdabjvkGmaH47BaghlQAu
- 0fvoBoWf1+Q9mqYFAKepBKe32s86QivzT7/5LSaQybW63p0dxA2AcCiXLlKtuPnazwyKepHj1Uy
- 6WxiTcI65jRpXbHDC34j2s4h9/gEM8EBOidC+Pk25/2ulVg4Ycn+nIAqZZS30pCtC01qUjDq07l
- K5lly+2HOvWxI3UYoe8ToWKNcbv+vtZxI7xu38KP6XwV7lHU1ezH2zyt/mgsRDV3gVL1uWkLJZO
- TrSGskZTjUoFX/dF/KDAJ/0ogxd1Ac2BWlMnR1ARn1/RBJV+W6rBBIjFFkng7JEBEM8nTDOmlgB
- PIZ+YV3RUHhduOt4XPr4ruDB8m0qn7rylDphs7mkT+w880e1hScwsexBSwTL/MOrRCgx99Ggbqr
- O84MtIZAv6XDYJ+OFvMnJ7dZjzUD/QF0cU7bUauhF8SFDKdyUhaPWDFAyLM90Uw1KooVPw9
-X-Received: by 2002:a05:6870:8896:b0:42f:ba47:36f5 with SMTP id
- 586e51a60fabf-42fba47ba89mr1147587fac.17.1776805845895; 
- Tue, 21 Apr 2026 14:10:45 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-42bebc9cb33sm8519485fac.11.2026.04.21.14.10.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Apr 2026 14:10:45 -0700 (PDT)
-Date: Tue, 21 Apr 2026 15:10:41 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michael Srba <Michael.Srba@seznam.cz>
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Ye Li <ye.li@nxp.com>, Andre Przywara <andre.przywara@arm.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Heiko Schocher <hs@nabladev.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
- Peter Korsgaard <peter@korsgaard.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Tingting Meng <tingting.meng@altera.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Alice Guo <alice.guo@nxp.com>, George Chan <gchan9527@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Subject: Re: [PATCH v3 03/11] drivers: allow clk_stub and spmi in SPL
-Message-ID: <20260421211041.GC41863@bill-the-cat>
-References: <20260421-qcom_spl-v3-0-efee3f76754d@seznam.cz>
- <20260421-qcom_spl-v3-3-efee3f76754d@seznam.cz>
- <20260421204651.GB41863@bill-the-cat>
- <5958da60-b8b1-40bb-bc66-5589a3d5ba7f@seznam.cz>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=lCF9Mdx+d4SJpnu4LzJVa8CEL1gbQB67qj/xYfXXNs/sDUmpLQMV8hM60gzBCHw6Vd3qKu05T2+/V9vnLVNkgtglCccKSr5/0frM0Dx9uCzZOKU3CMmF6tU+LTFJr+Q70TLefHe6KKwoQedi9lOoyGQdyEbKeVXIGYhFR7mZSc1UnhyIIWB+905w7QTPG926puNnKxirz127KyugdSmPP5Ak6b6eaC+cI+f/vI3zCF1TZ+oH6B6yJQY/uD+jZyasRZCeDDBmaokieRRMcy5bAtC8uyNt86PawxLNLtHarW5XgojRa17srVhtlfau8moqJ8oOpZLfwdJO/4dJeuTMBw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xvAGlGNN4hFFq0bvboPMfN5jk3YGvPcdecEwMvbeBx4=;
+ b=U/a0NqliFOfDVro1PA+JBPjzyq+BuUdaJSSK1L7jWuI0TaOcrqyPbk8UENgWkuagoN/+g4SeNWeVPmomQaOanU0i3ctPI1ZOBsLjSRwoEy2qIMRPJ/1YNgyF6YvrKAOQYc0A2NB/voBtDXe+u7/YHSrO/0KsWicqICXkObCdVIoV1zOT+bEtCeRrSdZnFC9ph4sFzq80w5hZlnPUwJXa6lw/sMvMF1Z/bwq/cuZht5TSgWRqbVhcHXhAx7W6+NxdzG6K3KKloL/QC25z/yS8lhchaMIKPaB7mhNTJWC/DSZM7htYd38DSIj0qO1wr3yTtXgiIU/yP8jBnfXj+y2T5Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xvAGlGNN4hFFq0bvboPMfN5jk3YGvPcdecEwMvbeBx4=;
+ b=r+yCFbORjLBaz2/iCUQKN9bxZkjnrq9ilFNMBV6K5iqVUHUNfjiEyDZ3pBl7b0InpG056lswwhRoNpH4THAW0VftiQCVqHxCdnVO2f9kTGqh6ltKQDEioaoKE6ZACU8X2FIJt1wb0mmjmegNWVmNj2F9JWTjexgKCnO579dQQek=
+Received: from BN1PR13CA0020.namprd13.prod.outlook.com (2603:10b6:408:e2::25)
+ by IA1PR10MB5972.namprd10.prod.outlook.com (2603:10b6:208:3ec::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.17; Tue, 21 Apr
+ 2026 22:14:19 +0000
+Received: from BN2PEPF000055E0.namprd21.prod.outlook.com
+ (2603:10b6:408:e2:cafe::ae) by BN1PR13CA0020.outlook.office365.com
+ (2603:10b6:408:e2::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.15 via Frontend Transport; Tue,
+ 21 Apr 2026 22:14:18 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ BN2PEPF000055E0.mail.protection.outlook.com (10.167.245.10) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9870.4 via Frontend Transport; Tue, 21 Apr 2026 22:14:17 +0000
+Received: from DFLE208.ent.ti.com (10.64.6.66) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 21 Apr
+ 2026 17:14:14 -0500
+Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE208.ent.ti.com
+ (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 21 Apr
+ 2026 17:14:14 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE210.ent.ti.com
+ (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Tue, 21 Apr 2026 17:14:14 -0500
+Received: from localhost (rs-desk.dhcp.ti.com [128.247.81.39])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63LMEEYU1020442;
+ Tue, 21 Apr 2026 17:14:14 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="nt4vpleO8zan6CxY"
-Content-Disposition: inline
-In-Reply-To: <5958da60-b8b1-40bb-bc66-5589a3d5ba7f@seznam.cz>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Tue, 21 Apr 2026 23:12:41 +0200
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Tue, 21 Apr 2026 17:14:14 -0500
+Message-ID: <DHZ6GETQ2Z6C.2EZP9ISNJR0E7@ti.com>
+CC: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
+ <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
+ <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
+ <ilias.apalodimas@linaro.org>, <u-boot@lists.denx.de>
+Subject: Re: [PATCHv4 2/6] boot_fdt_add_mem_rsv_regions: free old dtb
+ reservations
+From: Randolph Sapp <rs@ti.com>
+To: Simon Glass <sjg@chromium.org>, <rs@ti.com>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20260420192520.1444749-1-rs@ti.com>
+ <20260420192520.1444749-3-rs@ti.com>
+ <CAFLszTggCLQPaJcRoxhjHOuRM10yW3pr8JjRj+LLA-ZupVOSjg@mail.gmail.com>
+In-Reply-To: <CAFLszTggCLQPaJcRoxhjHOuRM10yW3pr8JjRj+LLA-ZupVOSjg@mail.gmail.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF000055E0:EE_|IA1PR10MB5972:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3a2365cc-286f-48c4-0bc7-08de9ff35455
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|376014|36860700016|1800799024|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: qH57Cre0VtLtdlqjZIfCXhsARTmyFBZZJLC49TLHx0EYA4l5oePLi9VABNttdbSI6qWS8Gt+tOMcDBZj5hTPlazAI3Nc+6TjIZQ+0wNIdleU+SEnaazFWBL2vDZooV7/i7G1qV7ua1Cs7mAEnYUIvUmp6jN3ilPigrzGZqitwEF9l7m6P6dCl8ZJi5VLR6O5mF2FljLSzo7lUV8rQM3O3JauRUx+HoxqbUZCePVVuMMRriJARoSK8Dz2gNGqypgj8WKBoHhpipOxOH9jUKb9OBRvBsonMr48hsqz9sQwgnxU29eQ/A4jlJuyssKjNDAQozmJXglAwQAVGz5kBbwoHdbrCMOF0mT0lnGmG2hl21YL25T0WM/fZptcP4R4zaZ/+6uNtfIzjQCJxcjiKwrd6A2S1S9orUhwgLwP9KJvjipr9lCe7yBhDlcDar0X09jsfQfSKG9Wu34Fc2xhKxN4ujaq52M8FZRZNSc0jj/KwQCYDCudA4JQ927QBOwQylvMyjIrvLr0nCpSGyqeobTfUHBzv05ub6VUmfGgp5ixuHlUUvyMxfL5o/Jooae4YpFNSHjV/40Ke3kkn8cQLQkK9Oy3buRibYoDsHgqHwjWeCQITQGDhCy1+FCwsYE7+Df0pHFBaDWMsgk7azCrBF7bPI/LdCxbrSkzZUqTF6VT3TN5FhMj7tmSo6o6M5FdYlJbKYk5Xwc0cFdpM4XnOzxmPuAG8koCNjzgCI+QDPM/1Jzqti/it++EZ2LUl88931Mnq5vqBDCDQczDhJ4XEIe3XA==
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(36860700016)(1800799024)(56012099003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: HubBAUwnGdyQ2nTNC6eFfuDgzZpnWBrkjPz2ewy7H8GaUpXcoOl3sdOIiorb9hhvD3Z0ybGztctA/OxSOkngDLTTXBDwtQkZoNSK0+0yLVUMMgMQ8ejaL5N/n5xUAY0B7CuZnbl8PTcP/4mg7K9smfbjdEeiJU2OrDWLSS4DCNiicY3AIAb2NW7ZEJMQQd7OpoFsUrSOHgU1g2Pk9QUsx4cAO0bCRO2BpmlcpP01Wx0qjFHxcXKogIyDmnrFOIylvAsYKGjGeoGAOhDiGfAWxOrnJ/7aHt1HGZ5hYmReKANzGmzEu4Xl1rM7Yc+48SChT+X7AM4Kp8c/vz4016JzqhSYUSEq6ai3YFCmRfprITOYP2Oiv8+ZkiUDqnK9wiz4KnBObb/DXUuCd1J9OqOghaXQobNNwRBqec2arjIbTN48zEKsifPIzN/5jmZw6vo0
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 22:14:17.2700 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3a2365cc-286f-48c4-0bc7-08de9ff35455
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000055E0.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB5972
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,85 +136,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue Apr 21, 2026 at 3:40 PM CDT, Simon Glass wrote:
+> Hi Randolph,
+>
+> On 2026-04-20T19:25:18, Randolph Sapp <rs@ti.com> wrote:
+>> boot_fdt_add_mem_rsv_regions: free old dtb reservations
+>>
+>> Add a free flag and an initial call to free allocations covered by the
+>> global FDT. This assumes that all calls to boot_fdt_add_mem_rsv_regions
+>> occur before the transition to the new device tree, thus we can access
+>> the currently active device tree through the global data pointer.
+>>
+>> This allows us to clearly indicate to the user when a device tree
+>> reservation fails. How we handle this can still use some improvement.
+>> Right now we'll keep the default behavior and try to boot anyway.
+>>
+>> This functionality was broken in:
+>> 5a6aa7d ("boot: fdt: Handle already reserved memory in boot_fdt_reserve_=
+region()")
+>>
+>> Signed-off-by: Randolph Sapp <rs@ti.com>
+>>
+>> arch/mips/lib/bootm.c |  2 +-
+>>  boot/bootm.c          |  2 +-
+>>  boot/bootm_os.c       |  2 +-
+>>  boot/image-board.c    |  2 +-
+>>  boot/image-fdt.c      | 57 +++++++++++++++++++++++++++++++++++---------=
+-------
+>>  include/image.h       |  2 +-
+>>  lib/lmb.c             |  2 +-
+>>  7 files changed, 45 insertions(+), 24 deletions(-)
+>
+>> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+>> @@ -69,35 +69,51 @@ static const struct legacy_img_hdr *image_get_fdt(ul=
+ong fdt_addr)
+>> +static void boot_fdt_reserve_region(u64 addr, u64 size, u32 flags, bool=
+ free)
+>>  {
+>> -     long ret;
+>> +     int ret;
+>
+> nit: perhaps keep this one 'long' since lmb_free() returns long ?
+>
+> Regards,
+> Simon
 
---nt4vpleO8zan6CxY
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Apr 21, 2026 at 11:05:58PM +0200, Michael Srba wrote:
-> Hi,
->=20
-> On 4/21/26 22:46, Tom Rini wrote:
-> > On Tue, Apr 21, 2026 at 09:43:46PM +0200, michael.srba@seznam.cz wrote:
-> >=20
-> > > From: Michael Srba <Michael.Srba@seznam.cz>
-> > >=20
-> > > Only Makefile and Kconfig changes necessary.
-> > >=20
-> > > Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
-> > > ---
-> > >   drivers/Makefile      |  2 +-
-> > >   drivers/clk/Kconfig   |  7 +++++++
-> > >   drivers/spmi/Kconfig  | 13 +++++++++++++
-> > >   drivers/spmi/Makefile |  4 ++--
-> > >   4 files changed, 23 insertions(+), 3 deletions(-)
-> > >=20
-> > > diff --git a/drivers/Makefile b/drivers/Makefile
-> > > index 43d0ba33281..477718ce89a 100644
-> > > --- a/drivers/Makefile
-> > > +++ b/drivers/Makefile
-> > > @@ -35,6 +35,7 @@ obj-$(CONFIG_$(PHASE_)RAM) +=3D ram/
-> > >   obj-$(CONFIG_$(PHASE_)RTC) +=3D rtc/
-> > >   obj-$(CONFIG_$(PHASE_)SERIAL) +=3D serial/
-> > >   obj-$(CONFIG_$(PHASE_)SPI) +=3D spi/
-> > > +obj-$(CONFIG_$(PHASE_)SPMI) +=3D spmi/
-> > >   obj-$(CONFIG_$(PHASE_)TIMER) +=3D timer/
-> > >   obj-$(CONFIG_$(PHASE_)VIRTIO) +=3D virtio/
-> > >   obj-$(CONFIG_$(PHASE_)DM_MAILBOX) +=3D mailbox/
-> > > @@ -106,7 +107,6 @@ obj-$(CONFIG_DM_REBOOT_MODE) +=3D reboot-mode/
-> > >   obj-y +=3D rtc/
-> > >   obj-y +=3D scsi/
-> > >   obj-y +=3D sound/
-> > > -obj-y +=3D spmi/
-> > >   obj-y +=3D watchdog/
-> > >   obj-$(CONFIG_QE) +=3D qe/
-> > >   obj-$(CONFIG_U_QE) +=3D qe/
-> > Code-wise this is fine. But this reminds me, did you run this whole
-> > series through CI? Thanks.
-> I tried, but on gitlab.org it just didn't work at all, and locally it onl=
-y ran partially
-> before running out of disk space. I tried making an account
-> on https://source.denx.de but the anti-spam measure is blocking me
-> and I'm waiting to see if that gets resolved (since it's not clear to me =
-if
-> the unblocking is supposed to be automatic or not, and if it's manual
-> then just waiting is probably all I need to do) (fwiw not sure if that
-> instance allows random users to run the CI, the docs don't really
-> say *where* I'm supposed to run it, but I figured it was worth a try)
-
-The thing with source.denx.de is that then you also need (manually) a
-contributor tree, for CI (and user accounts are more for bug filing). We
-have how to run CI via Azure documented here:
-https://docs.u-boot.org/en/latest/develop/ci_testing.html
-
-And my concern is changing "always traverse this directory" to "traverse
-once CONFIG_SPMI is set" shouldn't cause a problem. But sometimes
-there's platforms with unexpected (and invalid needing to be fixed)
-configurations out there.
-
---=20
-Tom
-
---nt4vpleO8zan6CxY
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaefn0AAKCRAr4qD1Cr/k
-ClImAQCWBtHM8XcHUvZywKb1AcKMVRMOJJqB1bGSgmD9wpMWQwD9FR4nwL4DZX+u
-GpiwKDh3pvH8roRlqfg95B8Vdca6ggU=
-=yAw0
------END PGP SIGNATURE-----
-
---nt4vpleO8zan6CxY--
+Ugh, yeah though it should only return 0, -EEXIST, or -1 since that's all
+lmb_add_region_flags returns. I'm not going to ask why that's the case.
