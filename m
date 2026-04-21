@@ -4,139 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6104F8FA9A
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 16:37:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49F07F8FA9E
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 17:12:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C4D083A91;
-	Tue, 21 Apr 2026 18:37:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6BB4D839D5;
+	Tue, 21 Apr 2026 19:12:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="AfYaL444";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="TKmmwApM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5405283BC8; Tue, 21 Apr 2026 18:37:54 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
+ id 4698083A91; Tue, 21 Apr 2026 19:12:54 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16C3D805D7
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 18:37:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D8C580086
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 19:12:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mmXj+wdZrmvb73vaWL65wOIbWbE/Ou++InMzpENnE4BtuboTv5S3n/5FzJ7pCmnGaNdAz1IAxnRw3ENsRJqaMQnmgOUaza7Nngsg1dlXII/IsOLJziV+lxDxqzDlSJ2sP46mGhCl4q7xTzoMbaq15epujSaszGSSdEsF7T8b44ShtN34WrpEzW2QrFpLMv+g7g9jGBJXjQC01sRSzmiWMrPASIdAQTKiWvAI3W3rKwBygOCidbiwey13TNPRSHbyQ/sotcw8v4Uk6q8y8jkk5EmAOu+SmOXF5EtRghMZBTyNQ1aH/HM03zpPexOnKhY00ECFiO+y3sYuCBbhXSrcjg==
+ b=ujSOvtCfalU/1e6/4i1eLaCamAjguA6xt+mi9uFBi5+8X+JOK2fjZwIqbm8BLNboBboIYdp7HjlYz8L/TXX88zRLWEW6836p11baQfhu/+1ptdjVB7DnleWm8GXJWBDWTp3xoNP18Jlj9Pj7BlExP9iNQNNn28stfzl+KfQg+5nSq2Vxrf9zN1xfjFu/dIK9y//ZjfsXF0OVfk8+DA0/EXYqgE4+ZzN2DXlsz3X6ICRzhlMUaIrw5u/mB4Gckb3EwgVTqE5XzKejlk+bC3cS1sp4+A767eDNeNDvEAh0tDS14UZHOigUVV1z+Dqy3wfdq+Sh+WDuRKYb5MpnJDVwdQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VjvkblvHAkmlQNP0hUUUxVb6DZuuamxkaO9Q591Tp/g=;
- b=UwC29Dwzy9KyjMhOCmBi08IWiV9ISuQowFOAReL/dQHY7EKva2tWYtx6rK3k6g2d5cDCpAop5KvOaH1bfMqHDtmnz82ec+WL87vCQC5WhWqZScCFQaVyyTga+UZ3iol6VlIYGQByLB34R2LwgMj5ZOe5i3eT2N1cVJJbbwT8cDhH+YdUXu2egft3rzgHnOcQVNocEwFC7N08Mzqp3pgw6pBWC+rqX3ClnSv3XbkjkO1DL+2lxW0I/TzDHHXz/g3ApbL+8tpJld0jstBQyAVa2+E/5iF3XuSFpyS/SeHggEr+gfj11D5BBW3ByqaGvJBex+Jm6bLN6sC8CDc9pXvAcA==
+ bh=dSxvP75iLv1E5eJPNWywQHo6a4Zn/WGYNzOjkArOMSo=;
+ b=XN+Zxl8iEy2LzsYABz9rtbivlhGzRWIPX4s2TPEBS04nz/kBCzbJW6Dpt4HVLk7eJcQ64Qdz4lj1tvghw2daUYfZf3xJoTGfyQHvYxI4F/SpumR7DnABkQfZXbusxXOyaQXDCkuN4SnyVQIYu73y4pRyIURbri7CuFy8uFsDWRRuBVQp+1r4UElS7mlk8nnfap2pZQJdxFK+4NPHRaYe2q6BLj7nsta747drsP0XDGXC8VxR21lZN/wzHY6Ruen++SjEMOMrGN0MSi2/5pTszhYntr5dTsUUfZsyu5aKHIyJfztyNSCGcy3E3N1Yp9K7SbYaG3I9s3DJfU0W4UZ3nQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VjvkblvHAkmlQNP0hUUUxVb6DZuuamxkaO9Q591Tp/g=;
- b=AfYaL444wIcb+zWMzlIZFv9zeD6t8Vw3h3ib5TZ7JI63aseyMALmH8H8H+TAdSd2y/dVimZrkH0Bdsy0LqFuVTf01wn/X4NFLzv0nznh4P4exw8RmvV1ZnibtmcJbTNPSjfH2qKW8oVLxtJVbaLIq2DcVNaui5S9B7mMZoXYDds=
+ bh=dSxvP75iLv1E5eJPNWywQHo6a4Zn/WGYNzOjkArOMSo=;
+ b=TKmmwApMFcyMmleXOJ9HZcLiUqZAZcx/EoOyzgjbcbF7jKbapXVYIs33h5m2gv2YF4bfI9/QYbDckbYxlGnqLa88paaccJrZ+sETTNPaguCXiDTfwA4/NIw3di1W3R05URz8gpr8PNHIsaJ7mmARBHQAQPe3uN/BL48NxL3uHi8=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
- by DBAPR04MB7272.eurprd04.prod.outlook.com (2603:10a6:10:1ad::21)
+ by GV1PR04MB10774.eurprd04.prod.outlook.com (2603:10a6:150:205::16)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.16; Tue, 21 Apr
- 2026 16:37:49 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.33; Tue, 21 Apr
+ 2026 17:12:45 +0000
 Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
  ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
  ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.20.9846.016; Tue, 21 Apr 2026
- 16:37:49 +0000
-Message-ID: <83f03231-f05b-48cd-bf94-eb73398c55a0@cherry.de>
-Date: Tue, 21 Apr 2026 18:37:45 +0200
+ 17:12:45 +0000
+Message-ID: <cf689aa6-4852-41c1-9c49-3c208e40d76b@cherry.de>
+Date: Tue, 21 Apr 2026 19:12:43 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: renesas: Add Cortex-M33 build option to R-Car Gen5
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Anshul Dalal <anshuld@ti.com>, Hai Pham <hai.pham.ud@renesas.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jesse Taube <mr.bossman075@gmail.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
- Udit Kumar <u-kumar1@ti.com>
-References: <20260329232419.352743-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH 1/3] sunxi: spl: fix SPL_SUNXI_LED active low configuration
+To: Paul Kocialkowski <paulk@sys-base.io>,
+ Andre Przywara <andre.przywara@arm.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, linux-sunxi@lists.linux.dev
+References: <20260407223447.4956-1-andre.przywara@arm.com>
+ <20260407223447.4956-2-andre.przywara@arm.com> <adfMQBPdntWy1KIq@shepard>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260329232419.352743-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <adfMQBPdntWy1KIq@shepard>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1P190CA0004.EURP190.PROD.OUTLOOK.COM
- (2603:10a6:802:2b::17) To PA4PR04MB7743.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR4P281CA0144.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:b8::20) To PA4PR04MB7743.eurprd04.prod.outlook.com
  (2603:10a6:102:b8::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|DBAPR04MB7272:EE_
-X-MS-Office365-Filtering-Correlation-Id: c5366f3a-4496-4d67-d23e-08de9fc452c0
+X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|GV1PR04MB10774:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8953209e-b6dd-4c9e-b6d8-08de9fc93453
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|7416014|376014|10070799003|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: sqDEbczBArT3OJkiTqdgCUHi/2X2i6dbz/bMGbL9YvMws34IY9BpsrvuLb4GwauaGhZW7Y+c5KN+wlX3H/hPhypPucFmIDUAUXFHQhBDKxg0EOBLlcYDrIMRe0GyEj7O62RPW89h+nyBDOcz1PzgIVQzAuVA/a8GRoFznaPyaM7H48MutJ3MXasZ13CygkcqUEwIFP6mOQOnmxfqhHVtsVEHlNAuxcTyQOwHnQKF2pxOROKbNx8TRRO10mtojh56imlG241V+O7aoHbrG5YR6KL+dwBtR6kW4kqgjZWhYS63bTqnwlSeLmn6uDP46wpKjQL9tWIOjEj4g/2sRio+LP2iEcXC6Pn1er1YZ2eVpZbychjTxdcfGPowbH8hPYI3lEwUui7RXJYBQgW8sAvGN6/I0zEnGjNZ/tbhXn0/hwuuiiLZsMShrG96VXv/5wke1x8fxr/M6MwIRAz6RTPqLzZRE9ouspw2Pez/Nx1mBxDO2onRbI+2Xt2u68MYr18qG35C9xteBbzAUFEWLWbsV/txi9s2oTHy5tgq9aClMqQL0HrCgj3lz1nKAi1VSRA352C5gkR4aYizeWTFAlKuHwwWfwvU11ycwpy//TK2ltiqxzPwJP1pCrjOB9IDzY3ZyEWv0KilPkfX7PaWEh5tQ0lr7E6heG5hRRMqIUf2YAHANjQUk2xStbTUTJz3Wq71VrjViPSFpzNlhuMilXryTMNe95CTBXYCrkF71OxQLw8=
+ ARA:13230040|366016|1800799024|376014|10070799003|22082099003|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: Kl+MGEGYH5UFB/UvKNM5zKv040xvQom++/MZ0j7mftnc1V7DyM4rRMTR7Bw/NyyrSprFrn4AHIrQeeiUA1vfc79He8+v7igtKSz02Zmo6cg70s7RGzC5kBZB15R/t9PyNabZR53B+B97lDLER5bC4/YPcXGeNBLpWjFt7h8A7IOQCrTD2hX+lZ9peQQfYMaK8ciU1F+Ba/MR82fzDBxyJajW4xGzo9W0YDx1A63cRf111OrkOVnFDEJ3BcBZJ1PZh4dXDQJWW0q1HuzAXYNh0NoybVZLrRaI3zwik34dChZ+ym1970FNrXBFg3SdYdiJ4M6bl+QTYo47GB9e0bAdxo8Ybm1tvQrtEaCG9IaEy3qjtOCIr4yeMkK9tSKNJDQ94Hv+nDgGluCaE04j6QtfzIngM/uOnr82gf5eQfqUNEWfhpwazqOte2kCFJtLJ/AbkhH2M0R9+g1p/yV13loPMJu1j3HS23LWWIxcON9HUhrxnjd0TuFVFZUi/0twZjkglTBTBdWNdXYme6mJkS7Kkj1v4CIBVBVgAL7EoiBZf+qRfsZhEXQ26trKCMXATcyhTab0NU3n0H3zKjfGLLLdx4eqfOe801AqZOuea4i6+ZhBg9DxNbgLMsGbbnk+s24NkAI6/g+4G0xtrb0iRti0qWrNkJ9/3CjQtDJvHqwjvK5YeGM0RMbPBL8f9y26HNXcaFK52OsWc+jXEiHWhZK775iKx08mDeHXCjGb/MapAxA=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(7416014)(376014)(10070799003)(56012099003)(22082099003)(18002099003);
+ SFS:(13230040)(366016)(1800799024)(376014)(10070799003)(22082099003)(18002099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZUFaajRJR2hyZGpHQ3R1akplQ3V0TXBCbzBtcXBlOGxQcHZudWRhWGVGMHhB?=
- =?utf-8?B?cU1LRkZPVG0xbEUxUnNJUHVSaHRYYUd4bG9wSEhuVEpKNjRaTE9NNFV5RXVo?=
- =?utf-8?B?YU1kQ08xVjlHWEM5V0IwZ0ZiN0R3aWZDK1V5SVB0TmJkZkFTTjNYUmsxOUtE?=
- =?utf-8?B?T3hxTHdvdU9RZEZVaGtmYUN1NElGR2tsWG1pcnNOR05JN20vdDYvVFgwZ0Za?=
- =?utf-8?B?L05QU3BxSzVMd0luRCtmRTYwQkN6S0tYd3ZJd3lGUHVld0ZkNUZOdE1Yc3E2?=
- =?utf-8?B?azFzNU5VVXVOQi81OWszaU1KZGFyeThJTDM3QmcrY3lJRUpCSDBoWFdFNFVG?=
- =?utf-8?B?NFJMNjRyTFRNZTRZTzBKU3VXSTliMm9FVi9VQXJRb2szV2NNMjRVVnJMMU54?=
- =?utf-8?B?eTVBMWd4OUN5TG9rSjBTS0R6MnltTS9jbzN6TkRqdTJvWUdDUnRGTnU2SEox?=
- =?utf-8?B?WUlaYmxTdDFPb1huZXJFaEhCQVZKSjZhYUlGaFJHaXd3Zm5aK1BLOElTTFVq?=
- =?utf-8?B?bkpEVk5LQ2NnYndLeEc0dmJtS29rNXc3R2I3SDhhZjJrR1FzQWNKQlprOHVs?=
- =?utf-8?B?S1d0MngyZERNSCtkWms3a2ZYQ0I3RXE0Ymt0RzZOakh4KzRhSVhzNUJCK3hs?=
- =?utf-8?B?UG8vK2dIUEVzdUdWTmtCb2prcnpyNnkyTHBFYmJzaXpDclVVU1dCWFdwUTRJ?=
- =?utf-8?B?TVdBaTZZaUdaaDhtYzN2cTdjZDMyYnhJQ01Sc1J3VzJJSElrWDllSG5xakov?=
- =?utf-8?B?ek1TV1ZIcnRKK1FJTktBOHZTaXF3VnRLMmpBdzZMOHRDNGNQNk83Snh5anl4?=
- =?utf-8?B?WXlYOGppY1FWc04xRU9KVldYYkdsNzQ2UzBVWmpqMUtva1RpOWJ4MEdzZzRE?=
- =?utf-8?B?VTU4dlJKRnlTbGYvYThJODZhSm95cEl4MG9MRGg0R3dESExXeHFCUCtIYVNi?=
- =?utf-8?B?RkdLaTlkMTQ2NlYvS25ad2M0c2lwRHoyeEdibnB0eUZzN0RTYTh3ZklWbzMy?=
- =?utf-8?B?aXNocUcwV29kZTh0TlhMQTVra0tTSG9RM242UkRGajFicVZZTWtTNS9OYm9w?=
- =?utf-8?B?MGJ3KzZwS0NteEVONFdCL1grYnVJbGs1d1N1QWlTL1F4cjZCdG82TE1vWURV?=
- =?utf-8?B?dnNRZGxMaG90anF3dUVUWkl5RGdETS9UbzBDcVhvWmxjZkZTTG1xbGVTakcv?=
- =?utf-8?B?QlVzWFlxTndsamVzT0RScHN0SmEwaUZrTEMxZjVTa0ZvKzJzYXhIWmJSUUJV?=
- =?utf-8?B?ODI2WnJkQ2NwVHZWQVkrV3Q5bDJ4YktxUVd3djIrcndUc3RsTmdwZXd0OGh4?=
- =?utf-8?B?V2FsYjlYZEhOZmdBcy8xc05hR0NaOG50TSsvU0paMGNYdklob1B0TXF5ZDdo?=
- =?utf-8?B?QkJZNkQvZENKVW4wcFNWc3IybGJNTFZ2V1N5ZVNuQlRyQmRKMElHK0lRb0hF?=
- =?utf-8?B?SENEeXFoRVdraWpMTWg5QSt1cW9QbDRwcUZyS2JhUXNvWVJlWklhZExQd1Jy?=
- =?utf-8?B?MytqVU5GYU04SnhSSEE1bGVMMUVyYnNjMC9xNU0yZk9HTUc2T3U2Qkg3OHlp?=
- =?utf-8?B?TTUzSHErOFlxOGl3ZXBoK1J5Z3hlQ0lvL3Uwd0RHZ3pmU0V0dHJZSXdOeXRa?=
- =?utf-8?B?bFN4QkJlaHNYdnE2Z1Q5NVZvNEZQbkhSWlY0WS8xaUVqNXhWNVp4VDhGWFBU?=
- =?utf-8?B?TDBXR0s1LzhuTU9iNlZsOFpRQWhKZ3g3Q0wyNUxwdXpLK05DYzB1MGEyQTZq?=
- =?utf-8?B?Qzl3UmF5Zm5BNkZ0Z095RkJja3NzeWUxcFJ2aThQWUp1N1hqM2JzVTNGRXhQ?=
- =?utf-8?B?aVNjNTVjTkZBQXM1dGZPUEUxT2tOTVdnMGMyTFVWdDhYUEJSaENtaHJaRFNh?=
- =?utf-8?B?aDVvWnkwTEYzQnJiYndvWlBRcWFMNnFPK3hTZHRSRTF4YklIdGtDekxvdktS?=
- =?utf-8?B?aDUvK20xNUZwd2c3N3NPWFNnT05mKzdBa01peVhzU2hHNGptYStKWk5oN1V0?=
- =?utf-8?B?SGFtT2l5ckxlY3p6OWJvaG1tSnV1MXM5ZzlJZ1hhaEpubldkdHE0R1FGV3Nt?=
- =?utf-8?B?enZQRkhIS3l4VkdvVEJDdXJYRUJuZnIzZ3RQQ3d4Z0tuWGhZeUpLdEN6Vk9P?=
- =?utf-8?B?UXVrQ09JeU96OW12OStMSVlNT2FYSmgwRm1pcjdlUi9JcXBwQXFCWnhEY0Fv?=
- =?utf-8?B?TlQyR1JibWRMSzdzS1hxRExPZnA1YlRDbWRCdWdQeG1hOVdVV1hWc0Uxa1du?=
- =?utf-8?B?dzJDQjljUU1wM2k3T3JCd1gvblVCakVGcjJnMjNxL2JSTTd2SGVqRmhMOW9F?=
- =?utf-8?B?NlU2OEwzS0NvTDduK0pIOUVpblczMzVSem9ZQm9kRnFrRUpEb3gxVkpTS2hL?=
- =?utf-8?Q?bQ0Nwql49024wStNeZlnuVjnb4EJd2xAAWzo3?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dmVKOVptanp3MDdvTTBBUHBRWGtWMFYzOWV2ZUlMS204R0JJSGlHMVNneXAy?=
+ =?utf-8?B?YUk5c00rM3lRM05nNlJaZkFMT2dUcGNJdU9odjZDRm8rNGcrM1YvRUxnRVFN?=
+ =?utf-8?B?NTIrZ1UxWXF2NkF1Uk81cnNJTkNydkQ5WGhnSmRqdDBRcVRTd1BrcGtLbzFX?=
+ =?utf-8?B?djIyK0JXcUFpaElmQnF6MHdadlE0dmt0YkgxQjgvbURINUpUMmV4LzExNDZK?=
+ =?utf-8?B?MFhici8vQXR3aVpDU0VkVkVCcUNGbWhWMDZ4NlpYS2swVmRxU3kwNGFTUitY?=
+ =?utf-8?B?R1ZuTnhMbGtHK2ZDWXpvczkwdDB4aDdpOGlWZnRrelBVUlRCRmprNCt6cUtR?=
+ =?utf-8?B?QWxXaFZCNFJFM0FmMUUyL0VsT3JCMXVLT251V1E4NGtOYUZVRW5uNlpxMjBH?=
+ =?utf-8?B?V09Gd2ZuSVNwKzFMMnAwNXI5RzBOUDV6S2ZTdXFEMDdYZHlTdU05bGZUT3h1?=
+ =?utf-8?B?S3JwbGhwODM3dXhFdzl1cFFaQXdOMy9hQ1RMSzM0ZmhFeFFEb21JcllLOWN1?=
+ =?utf-8?B?OVlKTUhuOSswRVhBWUdyVFFNbThHQTN6VDQyenMvSGdkVWhSaVRXcVEwTDgw?=
+ =?utf-8?B?ZXBQWnNXYm43dDQ5SnUwYi9JcjZVKzBFUXdtNjVOL2pabHhqMHppazZIVmdU?=
+ =?utf-8?B?TGViS2ZqYnZrbUFmYm8vMzdHOSt3ZmJFQUo3N1NKMVZ2NEgzQVJmb1NYaUFZ?=
+ =?utf-8?B?T29sbFFEL1BYakJSa2xIWTRHTXZnaEFuYUg4Z2RnZXJZZy9Vcklyak9iMkor?=
+ =?utf-8?B?UWttVTI2b1d1RE1EL1FOQVNXdlRYaTN6SFoyc2ZRUEFNNEltQ0ZYUmRoMkNP?=
+ =?utf-8?B?SEtGOVJCVTBnMFpUSnFxbDA4S2pPdDBkZk9iNTF2OUJVZm1ibFFpWEVFbVJn?=
+ =?utf-8?B?ZWsybDJhQkhsM1FKdzY0a3FESEgrZmxCWWdHdENuUWxHYjZoSTAxMnVnQTRx?=
+ =?utf-8?B?ZHV4MDI1SkZpQWZhaVhYVWk0UVRpa1BkWVdqL1Urb1JadGVEVGhHQmtyQ2ZC?=
+ =?utf-8?B?ekZYVlFHK1M4MTB6NFRkb2ozU0wvVEJ4em05bVJOeXdiUWRyQVhvOVhubnRC?=
+ =?utf-8?B?bi9USjN2TTVXaGNNUTRnVnFRTWJPRHJja09LQjBKc0licVo2V3ozY05tV0FU?=
+ =?utf-8?B?Q1Yvdk9oc2ZabE1IQmI4WjFYMURlQ1JDQlFXa0x1VVRhenhpejdTb0VQcEw1?=
+ =?utf-8?B?blZiREdSVk1ZTG0xVW9VT3I3bE9rOUdDTzZkclVTNVhxam1yYlhzMWdWYjY2?=
+ =?utf-8?B?T1AxandpVTNIRXUyL0orbjRjZ082bFVPQ1dSbFZ6SHNORER1Z3I4SnErSld4?=
+ =?utf-8?B?NldBWW5qNnJxc2xsOVFkd1R5WDQyckpiK1RpYUVyRG40Q25yeFNnUUcwam8z?=
+ =?utf-8?B?ZEFPYWt0T3kvN0lXTlhMS00zWG1ZaDRxVGxaYmZJYU1vMkhVM1MzaVVrelpZ?=
+ =?utf-8?B?dkxBdGZmRkRHRjZUUmVoQnNNb1FhdWdFVEI1cDZEWDF0K3ExeVlQSXR4V3RE?=
+ =?utf-8?B?T3BJbFErVm9VU2ZEVHlObDQxcUIwMFUzRW9Ia3kwYzNVRWRxV3NHdi9BenRs?=
+ =?utf-8?B?MnMwWHpDYlVOY2MzTisvMDJSMVlIc3pubndOSmdEN2pTdkxoMHhKL0tSMGhN?=
+ =?utf-8?B?UVVpcEZISy80dXVhUFlpSlk3YVlxUHZxRjBaeWdjSHBlSU5mdk9vNXFDcG05?=
+ =?utf-8?B?TCtiK2NuWXBzYU1lVEpMZjRTMldnVVN0SVNrKzE5Qm5sNFhkZmFiQ1VyQU4x?=
+ =?utf-8?B?a0kxZnhDNW1mcjd3cHBSaUVVZGN1MGJCS3dVdU4wQ252NjRpNTYybUxrN1Zo?=
+ =?utf-8?B?L3ExR3RaR2ozcTRXdWJ5cmY0Q1QvQTg0SGFZclphampBMlozRVRVWXMvcHpv?=
+ =?utf-8?B?eXF5WThhOXBWMCtuelg1b21ya0oyRE5NTW5oK3VzVXcxQmlyZHNqQlJ5MEh4?=
+ =?utf-8?B?ZGVCWG4vci9qeiswOC9ZREpibFVBTGU3SU45UDJ0RE9jaDUxaTdjNi8zZ1Bz?=
+ =?utf-8?B?cXJEUEN4NFpXRUpTUE5URWc4cHNMbERmVW1tOTh4aklKekh3SHV5RndrY1hW?=
+ =?utf-8?B?cXEvTTRGTHZRN0xEVUkzbUFpc3JvUythNHFYME5jb3p1MDM5Z0kwZHllVHp3?=
+ =?utf-8?B?Tks0a1hFNE9uMjBzSmttNnpVWkZzTkZmQVYrdGZuUHlHcjdpZHlteVF1WTRm?=
+ =?utf-8?B?OWM2OWtqbGg4WUt5dW52MnBzMU9DUk5yMWdJMWxvQkN2TVJHa2JkbHpyNUMz?=
+ =?utf-8?B?OXdLaEtZeitRL0xZaVc5RkNqbUlBWWQ1dk8yeU5kMXdBU3YzMkx6WFRoSktN?=
+ =?utf-8?B?b3BDN1VHVWQyYk0rUGEwTnFvTUIxR3ozdFJWT0NyRkp0bHMrZFk4dWt2OWJs?=
+ =?utf-8?Q?2ApDXsI6ApIf3sn0IELOdKuH6ecvP1mhJ4qgE?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: c5366f3a-4496-4d67-d23e-08de9fc452c0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8953209e-b6dd-4c9e-b6d8-08de9fc93453
 X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 16:37:49.6168 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 17:12:45.1060 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: PkpM5+FTSI3Im3rwewK5J9KAI5n/6W+c0vyAEsYfxBke1vQaBTdfYJNL0qkGeopAwZpFsp8zC3Apl6I6nvlzA/eAp7pONGLGkWDsYA06n00=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR04MB7272
+X-MS-Exchange-CrossTenant-UserPrincipalName: JyxYeV95l7QRM/pScU5AgpKu+Dak2cY6STeHymNGrU/CfPxOegclwFQuylbX8foKqpbtFC9wVm+UvzPM7j9GPkyX05/AGdkfzI9jTlZN6Tg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB10774
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,157 +150,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Paul,
 
-On 3/30/26 1:23 AM, Marek Vasut wrote:
-> The R-Car Gen5 SoCs contains Cortex-M33, Cortex-R52 and Cortex-A720AE
-> cores. Add U-Boot build options for the Cortex-M33 core.
+On 4/9/26 5:56 PM, Paul Kocialkowski wrote:
+> Hi,
 > 
-> Since the Cortex-M33 core is a 32bit core, select V8M and ARM64 for
-> RCAR64 accordingly. Select TMU timer on the 32bit core, where it is
-> used instead of the ARMv8 timer. Adjust TMU timer base address to match
-> the address map of the Cortex-M33 core. Disable unused OF_BOARD_SETUP
-> as well as unavailable POSITION_INDEPENDENT configuration options.
+> On Wed 08 Apr 26, 00:34, Andre Przywara wrote:
+>> The newly introduced Allwinner SPL LED "framework" defined a
+>> SPL_SUNXI_LED_STATUS_STATE Kconfig symbol, that was supposed to denote
+>> the active-low vs. active-high polarity of the LED. However this is
+>> a bool symbol, so it will simply vanish if not defined, and we cannot use
+>> it directly inside a C statement.
+>>
+>> Filter the symbol through the IS_ENABLED() macro, which will return 0 if
+>> the symbol is not defined, which is the intended value here.
+>>
+>> This fixes configuring LEDs with active-low polarity.
+>>
+>> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+>> ---
+>>   board/sunxi/board.c | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/board/sunxi/board.c b/board/sunxi/board.c
+>> index d7722d1858a..80dcae9c1a4 100644
+>> --- a/board/sunxi/board.c
+>> +++ b/board/sunxi/board.c
+>> @@ -563,7 +563,7 @@ static void sunxi_spl_store_dram_size(phys_addr_t dram_size)
+>>   static void status_led_init(void)
+>>   {
+>>   #if CONFIG_IS_ENABLED(SUNXI_LED_STATUS)
+>> -	unsigned int state = CONFIG_SPL_SUNXI_LED_STATUS_STATE;
+>> +	unsigned int state = IS_ENABLED(CONFIG_SPL_SUNXI_LED_STATUS_STATE);
 > 
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Anshul Dalal <anshuld@ti.com>
-> Cc: Hai Pham <hai.pham.ud@renesas.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Jesse Taube <mr.bossman075@gmail.com>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Cc: Quentin Schulz <quentin.schulz@cherry.de>
-> Cc: Tien Fong Chee <tien.fong.chee@altera.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Udit Kumar <u-kumar1@ti.com>
-> Cc: u-boot@lists.denx.de
-> ---
->   Kconfig                                             |  2 ++
->   arch/arm/mach-renesas/Kconfig                       | 11 ++++++++---
->   arch/arm/mach-renesas/Kconfig.rcar5                 |  7 +++++++
->   arch/arm/mach-renesas/include/mach/rcar-gen5-base.h |  6 ++++++
->   include/configs/rcar-gen5-common.h                  |  6 ++++++
->   5 files changed, 29 insertions(+), 3 deletions(-)
+> Sorry I didn't react to the initial submission, but it feels like the
+> CONFIG_SPL_SUNXI_LED_STATUS_STATE symbol really means active-high if enabled
+> and active-low if disabled. The name would suggest that it's an int with a value
+> of either 0 or 1 instead.
 > 
-> diff --git a/Kconfig b/Kconfig
-> index 0bbdc0cbea6..7033a255675 100644
-> --- a/Kconfig
-> +++ b/Kconfig
-> @@ -476,6 +476,7 @@ config SKIP_RELOCATE
->   
->   config SKIP_RELOCATE_CODE
->   	bool
-> +	default y if RCAR_64_CM
->   	help
->   	  Skips relocation of U-Boot code to the end of RAM, but still does
->   	  relocate data to the end of RAM. This is mainly meant to relocate
-> @@ -485,6 +486,7 @@ config SKIP_RELOCATE_CODE
->   
->   config SKIP_RELOCATE_CODE_DATA_OFFSET
->   	hex
-> +	default 0xa0000000 if RCAR_64_CM
->   	default 0x0
->   	depends on SKIP_RELOCATE_CODE
->   	help
 
-Can't you set those in arch/arm/mach-renesas/Kconfig instead? e.g. in 
-arch/arm/mach-rockchip/Kconfig we have a few symbols we provide defaults 
-for. I think it would make more sense to have this in the arch-specific 
-file and avoid everyone polluting the main declaration of the symbol? 
-What do you think?
+Yeah, I lazily renamed the old CONFIG_LED_STATUS_STATE which used to be 
+an int range (0..2) and made it both specific for Allwinner as well as 
+changing it into a bool.
 
-> diff --git a/arch/arm/mach-renesas/Kconfig b/arch/arm/mach-renesas/Kconfig
-> index fa4e312a4dd..3f21755a226 100644
-> --- a/arch/arm/mach-renesas/Kconfig
-> +++ b/arch/arm/mach-renesas/Kconfig
-> @@ -1,15 +1,20 @@
->   if ARCH_RENESAS
->   
-> +config TMU_TIMER
-> +	bool
-> +
+> I think it would be less confusing to call the symbol
+> CONFIG_SPL_SUNXI_LED_STATUS_ACTIVE_LOW and reverse its meaning, so that we can
+> spare defining it in most configs (that will be active-high).
 
-def_bool y if RCAR_64_CM
+You can also have
+default y
+in your symbol to not have to reverse the meaning.
 
-?
+> Also the description currently mentions "initial state" which may be confusing
+> as it could refer to the state inherited after reset (e.g. due to some pull
+> resistor) or the state we do set in the SPL.
+> 
 
->   # Renesas ARM SoCs R-Car Gen3/Gen4 (64bit)
->   config RCAR_64
->   	bool
-> -	select ARM64
-> +	select CPU_V8M if RCAR_64_CM
-> +	select ARM64 if !RCAR_64_CM
-> +	select TMU_TIMER if RCAR_64_CM
->   	select CMD_CACHE
-> -	select OF_BOARD_SETUP
-> +	select OF_BOARD_SETUP if !RCAR_64_CM
->   	select PHY
->   	select PINCONF
->   	select PINCTRL
-> -	select POSITION_INDEPENDENT
-> +	select POSITION_INDEPENDENT if !RCAR_64_CM
->   	imply CMD_FS_UUID
->   	imply CMD_GPT
->   	imply CMD_MMC_SWRITE if MMC
+It was the prompt for the now removed LED_STATUS_STATE. What are you 
+suggesting instead?
 
-I don't understand this choice. RCAR_64 is clearly a 64b platform, but 
-here for some reason we add support for a 32b platform. Why not follow 
-the same implem as for RCAR_32 or RZN1? Add yet another choice for 
-RCAR_GEN34_CM for example?
+>>   	unsigned int gpio = CONFIG_SPL_SUNXI_LED_STATUS_BIT;
+> 
+> And while at it I would rename this to something like:
+> CONFIG_SPL_SUNXI_LED_STATUS_GPIO since it indicates the GPIO number, not a
+> specific bit in a sunxi-specific kind of register.
+> 
 
-The main issue I have with this is that RCAR_64 doesn't mean a 64b 
-machine anymore, and the naming doesn't help with that. I'm pretty sure 
-in the future someone's going to make the mistake of doing a simple 
-CONFIG_IS_ENABLED(RCAR_64) to check if it's a 64b machine or not.
-
-> diff --git a/arch/arm/mach-renesas/Kconfig.rcar5 b/arch/arm/mach-renesas/Kconfig.rcar5
-> index 528fc5aecc9..2e6d119a328 100644
-> --- a/arch/arm/mach-renesas/Kconfig.rcar5
-> +++ b/arch/arm/mach-renesas/Kconfig.rcar5
-> @@ -1,5 +1,12 @@
->   if RCAR_GEN5
->   
-> +config RCAR_64_CM
-> +	bool "Renesas ARM SoCs R-Car Gen5 (use Cortex-M33)"
-> +	default n
-
-default n
-is the default, no need to specify.
-
-I'm wondering why CM in the symbol name? *C*ortex-*M*? *C*ompanion 
-*M*icrocontroller? Would _M33 help making this clearer maybe?
-
-> +	help
-> +	  Build U-Boot for the Cortex-M33 core present on selected SoC.
-> +	  The default is n, meaning U-Boot is built for the Cortex-A core.
-> +
->   menu "Select Target SoC"
->   
->   config R8A78000
-> diff --git a/arch/arm/mach-renesas/include/mach/rcar-gen5-base.h b/arch/arm/mach-renesas/include/mach/rcar-gen5-base.h
-> index f9af3ef885a..4cb9a1fbc42 100644
-> --- a/arch/arm/mach-renesas/include/mach/rcar-gen5-base.h
-> +++ b/arch/arm/mach-renesas/include/mach/rcar-gen5-base.h
-> @@ -9,7 +9,13 @@
->   /*
->    * R-Car (R8A78000) I/O Addresses
->    */
-> +#if defined(CONFIG_RCAR_64_CM)
-> +/* Cortex-M33 address */
-> +#define TMU_BASE		0xC0680000
-> +#else
-> +/* Cortex-A720AE address */
->   #define TMU_BASE		0x1C030000
-> +#endif
->   
-
-Should that be a symbol instead? Then you can have
-
-default 0xC0680000 if RCAR_64_CM
-default 0x1C030000
-
-for example.
+Also a remnant of LED_STATUS_BIT* symbols. Either work for me.
 
 Cheers,
 Quentin
