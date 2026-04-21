@@ -4,88 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 327B8F327B4
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 07:29:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E9A2F327BD
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 07:55:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49E1983E36;
-	Tue, 21 Apr 2026 09:29:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 601AA84324;
+	Tue, 21 Apr 2026 09:55:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XeQO9bAA";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="j4C4Jmq3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B73FE83FFA; Tue, 21 Apr 2026 07:35:24 +0200 (CEST)
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
- [IPv6:2607:f8b0:4864:20::42c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B6D6E84309; Tue, 21 Apr 2026 09:55:00 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46BB083C51
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 07:35:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 88F4C84258
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 09:54:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ngotra27101996@gmail.com
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-82735a41920so1568385b3a.2
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 22:35:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776749719; x=1777354519; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=14sAsstZjrHVPsX3SJQ2nyvEHfaU34skXxYentPztHI=;
- b=XeQO9bAAu+HMQsgP1wW60iCHo0HejG9B7rP7v6tRXCwC/3LBJVOAdS0op5EndkBXkt
- 7w/PBY5JrACwZg4DHtpXrUeBuvMDmEhhTKgD1YPDNRDUdpjynFjdMm2wokviMobn0fBH
- xIEY2ZVpf692iLsGiM8yxfz0qoSYYUMpN16p5kJxtYM3pXmUrfHBw5VgFGjkWc1CW+OG
- zLF65gIEJeI84o4HZSltmyWCsb1adIu+FpjeRTRp3IiSK7XonQxCKLSTQq1o9s+2YYzt
- sg+rvWPHZsJ2va55r9obxIsLI9pBAAFbRcD4AJlUpGrNd8gljud9aWFw+GZJeB9emN81
- pXwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776749719; x=1777354519;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=14sAsstZjrHVPsX3SJQ2nyvEHfaU34skXxYentPztHI=;
- b=ei42+C+1jg+AEFardvfJfmGu9fEZteb/Igs9FoZcJ8avzwp8yaVGk3VtBi6mQNw6uz
- 7sHhaWRkGGMK5Mb38cEpy/vcjHOzAXyENRwUe0a7NQmEQ94PORX3QQBqW/5qWQl0tADe
- KtB0OvBlBYLwKpyeWWsyw/3+q/SGTRdayTrqtip/ny8VKSWacN7e/0s61IqCwVwqW/xH
- 8izpegBu6c3LvfwZ1eLXNuarS80ikSRhLgrDqAfUkHHMHEfjR9VNk/c1UfSYh7BvLyNT
- mSpOuX1AjAbb6n3o8UhN/Grp/zYNZY8ibAEMF6lNLN7+brBeHCgPYwZ6doUlb3LbUAAj
- huNQ==
-X-Gm-Message-State: AOJu0Yxxc6wgbftJfihIxUUzSnvcFp7DM1Leko3TPHBNXbxOhxh+TKu/
- nPOrxXRtaaKRfcIkqQB1KkhKacH2YcRPtLUUJIkR6BGmiA4KOTkX+k2Dd+9y7yPB
-X-Gm-Gg: AeBDieslu3251fMQWPg1NOHRX4WQfpro8eJHL8yz7m54OzQUazr/zjTO8piVREzhebC
- 9A4f2GCqmV1KcIl6cjxaP7ai0Pd+UxcxnnaN5szVOdJMJPyZ17a7LcfBmnESny7QLzsrwM6E04x
- YW7CSFjq7Mtg2BSNH7vZU41C8ecv8UpRlsiMCZR8Axrct2kRVbeUDCJyEbiDDg90AgSUubH5qLz
- upH7upLN+nrSJs1ehNtmBtM4GtOQCYwOQ8Fm8FhRkauN1TMT8hqu7VIT/K2elcJWrQ1C4s9LfSO
- Nx+3ABHxae4P23mqC1N7TBepjbhOpfHoR22JInkm6baiSmPjFERWEklULJF7HtVk+C6YQgYpX7C
- ZG7hr8IDezrAPBrU2ewR5K8kd3XoO4xiGcegseF7SM1EBEqdCItZejqdsj0GAtrLvM4VZE2RWkJ
- josNgydngyggikK2muCd6eXjgPhzUAaUiJmug+nxFd6P8YLUlztw5tPW75zVTedmeBk0PcfqXLl
- dclbymEc6E=
-X-Received: by 2002:a05:6a00:850b:b0:82f:948f:d1db with SMTP id
- d2e1a72fcca58-82f949f19f4mr9062373b3a.44.1776749719398; 
- Mon, 20 Apr 2026 22:35:19 -0700 (PDT)
-Received: from MacBookAir.STASGS.RMIT.EDU.VN ([103.253.89.46])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-82f94204ac8sm11476773b3a.0.2026.04.20.22.35.16
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 20 Apr 2026 22:35:19 -0700 (PDT)
-From: Ngo Luong Thanh Tra <ngotra27101996@gmail.com>
-X-Google-Original-From: Ngo Luong Thanh Tra <S4210155@student.rmit.edu.au>
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=BLLTDPGFGCR73dDteg2RzfX0jdQxmkonjxszx28cMz9xeRvIcKDnY0U8n8QE/s8gmKEeBcYBPTik9TzK3fAWoD4aqb8tY+wEOQ06oMk6A890qIQzh3b38zVyTKBqcMKXv5nJHXEDhCYjrIhqOPARPwDaf6j6ax3DVb09sDV1MFGxNgAjyCNM5Umv0o4ehRkICYBQuKE0sopSjYmiypflSZKzk3Sr5Qf9Z3kRN0vgH69ZFyQ6Ek4K4P4z6nuijjVRc+p2sJad/AomKEMED/+Q9By85jWM9Qk+/BDU9IzKQmF+2mQsIg0FKijkpDumfDyhYuNDpQucHBzsHSWF/2amtg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cw1UB8jAZrUoY/P8fTibjTfGajPajqL9QXgoZakzsvI=;
+ b=JvN1J5QKNl/iAy3O62DSctcJSCGWuOwuJ12t533GiBJo+9GTO3w7VhKLo03H9gcEXy2KxfVUHWHhGdRDM9qJ5uOAvrhM65700q9TqHkcUV3VAyNNaqHixKtk+1hx0XUV6ajHHhpm69HlUjpdTyYOJyJrJMbnEXIAP6uNLx2soghiE0BpMUleMXkBqgzQJyAGAPjFUoy745Na+6Ex1xIwB5yCC5NB2jiZX8hxlpX34sqTVZn1Yq7o/eMhAduMbltPYX2MV0riRodWh3Y3+iNg8W/3IgLEURPgc+tIHo1uxhYcGv/Lr0Mr+wIChL5wr0IUqoKP/9R7TvTDjr7SjzfZTA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cw1UB8jAZrUoY/P8fTibjTfGajPajqL9QXgoZakzsvI=;
+ b=j4C4Jmq3UW+LWCDOJegqDrtFNPXdrFLPG9mUfFjif7on2MC7j7PIhzrWAYdvQQx5WhWEtbRF0oq5Ku3nTKZZra8KXNu8xk165hfdbiI6WFQpEmj5K2FrsgkI34PdtCkv33tqCN3QIMvNV6TVdWPiPYJhUiWGqbcZEOuxb4GewhI=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
+ by GV2PR10MB6233.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:78::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.32; Tue, 21 Apr
+ 2026 07:54:54 +0000
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8%6]) with mapi id 15.20.9846.016; Tue, 21 Apr 2026
+ 07:54:54 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
 To: u-boot@lists.denx.de
-Cc: Ngo Luong Thanh Tra <S4210155@student.rmit.edu.au>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Yao Zi <me@ziyao.cc>
-Subject: [PATCH] common: cli_hush: fix console_buffer overflow on boot retry
-Date: Tue, 21 Apr 2026 12:35:08 +0700
-Message-ID: <20260421053511.84312-1-S4210155@student.rmit.edu.au>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Rasmus Villemoes <ravi@prevas.dk>
+Subject: [PATCH v2 2/9] stdio: drop stdio_clone
+Date: Tue, 21 Apr 2026 09:54:32 +0200
+Message-ID: <20260421075439.16696-3-ravi@prevas.dk>
 X-Mailer: git-send-email 2.53.0
-MIME-Version: 1.0
+In-Reply-To: <20260421075439.16696-1-ravi@prevas.dk>
+References: <20260421075439.16696-1-ravi@prevas.dk>
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 21 Apr 2026 09:29:26 +0200
+Content-Type: text/plain
+X-ClientProxiedBy: CPBP307CA0024.DNKP307.PROD.OUTLOOK.COM
+ (2603:10a6:380:2::10) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:681::18)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|GV2PR10MB6233:EE_
+X-MS-Office365-Filtering-Correlation-Id: 683e2bc2-edc6-4e9d-b315-08de9f7b460a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|52116014|376014|1800799024|38350700014|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: 9WcK9RLLxILoyP2JH282mJvydCzf6B3KGLdNjt50PkgZn5o0vBkoqh/1swIAdKDqk6E2A/UF29+oZQvaapSLKhaZxXmsX6MeaKul9LcNCqbU6WTLPJg2nMwxvTLtbhSOjWP/H/pvZCII0ks9SlkMYlP8C07LQ2V4cC67NIGSlgfeaiyW2F1Es+yGZipPNKXQZgcCve82Fgqx0/wqV6FgBwCqT5qtJyQdydj3PqRBCjJc64+/q7CHvPhD9xKmHYyAY/Sp8gYGMZXKglVM1BFeLdntgLc+FByMnP347HRmOZq0htLr4fyiv6GWvTpWTcOtYSmu7kzZCij2F9kzrEX0rw+Rg4oZaChcqPEmiV/yJddWduUjJszoW42YKGwv0zADDNsdE4KxdBwN/28Vozm+DONqEFu2YLjc/iDlhuu7IhR6/8mlZai2M/670yakocMyf6SUL+KkruXpYVxfPqskXecUKfySAz3acNMWbFniP2ODMtkkGHHSVChAaHEoqBDOD1rXSRnG6yjTUcnX46nZaRYnKdXqzBW+RzznaoW9DvSLBoyd1ybMY6Y8kq2pC7s8TSJlzbLGjcS7p1Kq1VnqFkhsq5zb0dreS/gWOiCMVG1UhGjiHTuFZ3mgcEaad2dv2PoNrSSkcvR/Ri6CsEi54nfjaN5wYZiBYgakUfajTw8vc15oV0phTiaKNku/ch+5pafPQJ+leLPNadXjhxvso49vVoNLyxqEZNbFELYF8IVi1lwlimTM5n5uojf3LS018HOxQsH4WEgeUstvKCT7PbCDuieWmNi09LXrmARVi5U=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(52116014)(376014)(1800799024)(38350700014)(56012099003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?+NSO/W4v6zbzZgXiaUNCDhv0+ztwq9mrmi8mqrEPoPVw0eXNpv+ZtVICPWoP?=
+ =?us-ascii?Q?G6JnfuyVRWNH4Dq/0Cg+mZYeCDTxL3yvb2hIYyTcIz6znmWBbIf5Mu27tlvZ?=
+ =?us-ascii?Q?0hB7ic2axSrWsv6oqS7wu5wcIquy+le0h6FezYc6g0aj3m3ueTxlfOK+bfxd?=
+ =?us-ascii?Q?yfYJy7veDkVZEksagWhwL113wjxitLaFIEN5cTu7Xk8rj0831oK2VHnSoTB5?=
+ =?us-ascii?Q?FYBA8Kb4JgRMsYMWjDRvYIz9o00Aae34UjWm/uoUHfzR3MWbesWSc1hv/DET?=
+ =?us-ascii?Q?ZQ3py8mbHiG51VhXr+fd9ygG6SwAllK12ZFkz+aBAW+/MdHhQuxwzTcAuLLT?=
+ =?us-ascii?Q?Jw54gnEbzMaJ7lpnYpw9Bt/EwBJl9OeS2WWxKHWrZbvEAgXzdftJ34SxiaH2?=
+ =?us-ascii?Q?uOxDNgcAlVVaKotZYDWA0p9DhHuWdmJV6/XRtyaNgGEsTCfFWXsHALdixA+Z?=
+ =?us-ascii?Q?uxJSuNzizDXiPxYiSJuFuR1oFD8cpNr43UgTnpz10rD21n62bF5+wDIr2oL6?=
+ =?us-ascii?Q?SGDFYBQKLAPdpryZ3SWojM/+jGSMDOH75HdzmAIh9DRLDM/rUOjUsOz5H+yp?=
+ =?us-ascii?Q?n6y8IEuiaf5C8vtEJbE6aAAeQmrxkUkDHYMDpj6hJl+iCHZBT4Z7t1Z9aAaN?=
+ =?us-ascii?Q?W/s9zJauKlk/nxZ8Cv+skA865P0iY1N0GeUFt1m5gizkikA2j3dmbNNCSl5X?=
+ =?us-ascii?Q?MMok/KqvnPmZq+GRizh37Nd1E25rhunYD3TWk+GWoSLDPXNrt/92ie2mmVAk?=
+ =?us-ascii?Q?Ob95i+8GE4juM+D6PL4CxtaMzsTgzBDdx33awu57VpRMD3oodPRufqSRng22?=
+ =?us-ascii?Q?F9iQwueK43Hxopm5i/NUx9tNXYp6AG838qY9KAgAkp4WEYt8iiUuQ/nDs2dv?=
+ =?us-ascii?Q?axjcGI8r5ez/8ctdUllQNeA/0BFUSiKg9GTnWnZLNAC77mZRnZ7gKnqA9KTv?=
+ =?us-ascii?Q?gkzM+ZsXhwebP2YtEIN+X7cPmFYIQqnuCnF2ds/EQ9Us2dupngh4Cw9nm8l8?=
+ =?us-ascii?Q?ekYcLgAPM4lyFJluFSqTGG+jGbkorZKVe2J9HX2GudDm9ft3Tq8Li5af2Ees?=
+ =?us-ascii?Q?21rrk7jKPE+KXn+VGVAomgkm3mSeDP63cPUhfsyjyl+lf3ArHIFpkNtXKizX?=
+ =?us-ascii?Q?lXkzRxAnk2iArRZCPSw8tHxR3fVTOBHBNUB6BHNW2UFWvSVoFUVJxpfRzZNx?=
+ =?us-ascii?Q?KhFD75bexeAfgFZPSWyj8d22bFt7ikMtq6ptfepTx4CROkIKMqHWCHLQ98I7?=
+ =?us-ascii?Q?pAp/4XMeSZa1A0tjYPp+5NBxd91j69rzLUJWzO126zmh1zx8kaPsc+IghHO6?=
+ =?us-ascii?Q?O1PbcsX3x2uWhFmoBZEDRyxvygW7GZOLbmWtjM9fWwXARRvxr1mL9xfrPsTy?=
+ =?us-ascii?Q?UC5kfY8Mxh7LZHzg+5ghnTHh+c1BUzwQnFLyYBxWNb9smuc1cxb8qqi+VR3M?=
+ =?us-ascii?Q?7AieiutI2wKFjNm8ga7UEMmqnbGWVSHMJMCKwGWkBQECETPKIC9GT0bJij6K?=
+ =?us-ascii?Q?D8PwDP/5HeSq9gsDmlw/3wyJr91G8RiBBDccCMgJy9QxIbD0GC449yNgx04F?=
+ =?us-ascii?Q?Tb7Yd9i5nSnH9GBPIFWC9ylU0FV1/HMZQKtbHX1tegfJGXU5enbCz4UDrHlk?=
+ =?us-ascii?Q?vfGIWXHBiGOlO4BBoL27xVRbB35zdBuUUt7CyDtZrptuvxPyHQ4M2rjzJuqt?=
+ =?us-ascii?Q?qjPSM9vpxmA0BufPgCrWCarfoTI6wEjUxYg3JlGYX3QsKkLRXJRHFE48sAuI?=
+ =?us-ascii?Q?tidh2nEDpGBNf7J/QLYGqBNaZ0IKi70=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 683e2bc2-edc6-4e9d-b315-08de9f7b460a
+X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 07:54:53.9843 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: F8p5g0KorEYuwk6glBstjGMGATc8/9uyTrkZgaS8eWdQpQ6UwmrhKY1/ZAAjze8gvc/q2GnQKSR8BUVe8WYw2gCk+0bYPnsVtU2N/Btg0LY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR10MB6233
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,103 +137,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add const_strcpy() macro to linux/build_bug.h that enforces at
-compile time that the destination is a writable char array (not char *
-or const char *), the source is a string literal, and the source fits
-in the destination including the NUL terminator.
+The helper stdio_clone only has a single caller, so it certainly
+doesn't need to be public. But in fact, it is merely an open-coded
+memdup() - which for some reason uses calloc() even if the whole
+allocation is obviously immediately overwritten.
 
-Fix the console_buffer extern declaration in console.h to include the
-array size so sizeof(console_buffer) is valid at call sites.
+Drop it and just use memdup() directly.
 
-Replace unbounded strcpy() in cli_hush.c with const_strcpy().
-
-Fixes: 657e19f8f2dd ("cli_hush: support running bootcmd on boot retry")
-
-Changes in v4:
-- Rebased on top of current master (as requested by Tom Rini)
-
-Changes in v3:
-- Reject const char * destinations in const_strcpy() (Simon Glass)
-
-Signed-off-by: Ngo Luong Thanh Tra <S4210155@student.rmit.edu.au>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 ---
+ common/stdio.c      | 18 +-----------------
+ include/stdio_dev.h |  1 -
+ 2 files changed, 1 insertion(+), 18 deletions(-)
 
- common/cli_hush.c         |  3 ++-
- include/console.h         |  3 ++-
- include/linux/build_bug.h | 24 ++++++++++++++++++++++++
- 3 files changed, 28 insertions(+), 2 deletions(-)
-
-diff --git a/common/cli_hush.c b/common/cli_hush.c
-index fe8fe93bd54..d7a584fea3f 100644
---- a/common/cli_hush.c
-+++ b/common/cli_hush.c
-@@ -84,6 +84,7 @@
- #include <cli_hush.h>
- #include <command.h>        /* find_cmd */
- #include <vsprintf.h>
-+#include <linux/build_bug.h>
- #endif
- #ifndef __U_BOOT__
- #include <ctype.h>     /* isalpha, isdigit */
-@@ -1027,7 +1028,7 @@ static void get_user_input(struct in_str *i)
- #  ifdef CONFIG_RESET_TO_RETRY
- 	  do_reset(NULL, 0, 0, NULL);
- #  elif IS_ENABLED(CONFIG_RETRY_BOOTCMD)
--	strcpy(console_buffer, "run bootcmd\n");
-+	const_strcpy(console_buffer, "run bootcmd\n");
- # else
- #	error "This only works with CONFIG_RESET_TO_RETRY or CONFIG_BOOT_RETRY_COMMAND enabled"
- #  endif
-diff --git a/include/console.h b/include/console.h
-index 8d0d7bb8a4c..97ccf5e5f6a 100644
---- a/include/console.h
-+++ b/include/console.h
-@@ -10,8 +10,9 @@
- #include <stdbool.h>
- #include <stdio_dev.h>
- #include <linux/errno.h>
-+#include <config.h>
+diff --git a/common/stdio.c b/common/stdio.c
+index fc965944209..038e576147b 100644
+--- a/common/stdio.c
++++ b/common/stdio.c
+@@ -217,27 +217,11 @@ struct stdio_dev *stdio_get_by_name(const char *name)
+ 	return NULL;
+ }
  
--extern char console_buffer[];
-+extern char console_buffer[CONFIG_SYS_CBSIZE + 1];
+-struct stdio_dev *stdio_clone(struct stdio_dev *dev)
+-{
+-	struct stdio_dev *_dev;
+-
+-	if (!dev)
+-		return NULL;
+-
+-	_dev = calloc(1, sizeof(struct stdio_dev));
+-	if (!_dev)
+-		return NULL;
+-
+-	memcpy(_dev, dev, sizeof(struct stdio_dev));
+-
+-	return _dev;
+-}
+-
+ int stdio_register_dev(struct stdio_dev *dev, struct stdio_dev **devp)
+ {
+ 	struct stdio_dev *_dev;
  
- /* common/console.c */
- int console_init_f(void);	/* Before relocation; uses the serial  stuff */
-diff --git a/include/linux/build_bug.h b/include/linux/build_bug.h
-index 20c2dc7f4bd..93f9e50a1c6 100644
---- a/include/linux/build_bug.h
-+++ b/include/linux/build_bug.h
-@@ -76,4 +76,28 @@
- #define static_assert(expr, ...) __static_assert(expr, ##__VA_ARGS__, #expr)
- #define __static_assert(expr, msg, ...) _Static_assert(expr, msg)
+-	_dev = stdio_clone(dev);
++	_dev = memdup(dev, sizeof(*dev));
+ 	if (!_dev)
+ 		return -ENODEV;
+ 	list_add_tail(&_dev->list, &devs.list);
+diff --git a/include/stdio_dev.h b/include/stdio_dev.h
+index f7f9c10199e..d93604331ff 100644
+--- a/include/stdio_dev.h
++++ b/include/stdio_dev.h
+@@ -96,7 +96,6 @@ int stdio_add_devices(void);
+ int stdio_deregister_dev(struct stdio_dev *dev, int force);
+ struct list_head *stdio_get_list(void);
+ struct stdio_dev *stdio_get_by_name(const char *name);
+-struct stdio_dev *stdio_clone(struct stdio_dev *dev);
  
-+/**
-+ * const_strcpy - Copy a string literal to a char array with compile-time checks
-+ * @d: destination char array (must be a char array, not a pointer)
-+ * @s: source string literal
-+ *
-+ * Enforces at compile time that:
-+ * (a) @d is a char array, not a pointer
-+ * (b) @s is a string literal (adjacent string concatenation trick)
-+ * (c) @s fits in @d including the NUL terminator
-+ *
-+ * Uses __builtin_strcpy() so the compiler can optimize the copy into
-+ * immediate stores rather than emitting a function call.
-+ *
-+ * Note: @s is used twice in the macro expansion but this is intentional
-+ * and safe: the ("" s "") trick enforces at compile time that @s is a
-+ * string literal, and string literals have no side effects.
-+ */
-+#define const_strcpy(d, s) ({						\
-+	BUILD_BUG_ON(__builtin_types_compatible_p(typeof(d), char *));	\
-+	BUILD_BUG_ON(__builtin_types_compatible_p(typeof(d), const char *));	\
-+	BUILD_BUG_ON(sizeof(d) < sizeof("" s ""));			\
-+	__builtin_strcpy(d, s);						\
-+})
-+
- #endif	/* _LINUX_BUILD_BUG_H */
+ int drv_lcd_init(void);
+ int drv_video_init(void);
 -- 
 2.53.0
 
-base-commit: e3405917a1806971d9e72a94186b299f05581e1a
-branch: cli-hush-patman-dryrun
