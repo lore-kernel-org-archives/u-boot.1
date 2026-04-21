@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 864A7F327BD
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 07:59:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 792A9F327BD
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 07:59:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 994EE83FFA;
-	Tue, 21 Apr 2026 09:59:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 102E184390;
+	Tue, 21 Apr 2026 09:59:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MyptfT1V";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SZk3ml1L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DDE684370; Tue, 21 Apr 2026 09:59:33 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 2C6738439F; Tue, 21 Apr 2026 09:59:56 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93BEC83C51
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 09:59:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E82984378
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 09:59:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-676a89de629so744150a12.1
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 00:59:31 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776758371; cv=none;
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b9358dd7f79so694436466b.1
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 00:59:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776758394; cv=none;
  d=google.com; s=arc-20240605;
- b=XY28NiaYvq6/UzWlWFGr1SvinlXEXGn8Zz17H4bI4K422pcMhz0o4uc9FpaebzS45p
- NVoaETaichIYuf2va3BwfepTf948vuWJV9u2mPJfI6ZvIxA7rqhTV4YpCYu2Z6K+pRzU
- 6zpuFptYAMm1XuyoLLiWCp+YmfPLIQj1MazIOUNw6c3FB04QibW1Pqm14PtzT5w4Jnbk
- K/7MCbpp1g8Fw8WhHC+xXl6POWYFADKDeclYhoIZrgKAJ1oT62Bz+dY2lHYpjX8f3fQu
- QrG3ZWcdOibElStJGUG4pGEPi0EqWUVjkqwIXmX3Nzx42L6tRKtc5kC+pQdo1HaMifOB
- /tUQ==
+ b=Zu4fbGiKqEcw4vx9CVDP6aUkcDJdZi35Op6HUlHuLR3ED8bmw0cXCucUhrnA5wvjJ2
+ 09z2qlBZTRVRNvg63seAmLB4jG9hVnSQx3Hp5POu9JRllOkENZnKI1XOlRZscNNPrtpC
+ Wef2RSHEc44Wve4NBc8XY8wTef//AdBcR3nl1/5r0Sx7JA0exQY8ar9ZxbaGs2pqMKwS
+ qYRg5Gezvpr6hOrTwvkfgHXqf4Ju34AyoS8Z7+h9luZV2QfBGKIPiyxkyT7KQEpn9Epq
+ mIn+8oNefGgLj6IWqsM6iSw2FBaMgRt13bxpO+DWf57t2HLqxYIZXJ2Jjrk3sAWyUTGI
+ 5FNg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=+edRsPYdUi00c0lMKRPG3S1izw5hTOaQhuY5t/7H40o=;
- fh=dMYkw2KzUVSijECylm0FgG0d3YJhop4TnuFXfdv1L8o=;
- b=GMmjhtAIncqQbL1v3ueh5EZhX8ZVYUe5Axr2gTXbCZVNPt4o105Ug3TD8mQS8nA4Uu
- ebCcHxazcQ19x2qxPRNdI136qJrMowvnvXq64V//laIZsFfzwl82XpIkpi/5jAxDkL7P
- 6PoGQLI+8MMI8pPHpk9Oy6CLNJv1to1ZeikaZD2hes6eINifLEA/0yx5TlPpjdb+Dvhp
- YiUJx+TkSLL+nmVWZFXLAfLhRF9TwbT9LQ7m8JXeAki74fpBmFSQvqyUqy+XlymBh8Q4
- DuTWXzLXqhSfOYFc19H4nUxm80hx5wwmuSi4Ux1sC+japDzW23aDAUqzi+FVmeDYZF2+
- 8iQg==; darn=lists.denx.de
+ bh=6/gz0kvBY/N2bbyG1adnGxhsYPtusN4lKNzrGzI6Oi0=;
+ fh=Oe9lwRzKCD/l6hCUJFguze7oQy/y4G6mlumC1KMfZJ4=;
+ b=adhgwOiVobWBbXW1c0ViGb886N9sl3PLoXMpJKPyf6UFafujdxlqxd3CdN+1KTRWVG
+ zqXm53xstdFdnNRV3HOnauCMqf/itowdmnNPsZlq47PhI8m4PtgNPflu0DZbkMYd8yFm
+ SuLDS7xQHvzRruwMbMLTYYSiX7LidyU71mxL8X6dg44WaT1jvQFINQyiTrJXuTjFFfQU
+ tXDG3mV/wP2Q+S69fGI94SjHuHGfyt5zJqlB3FIoNsEfduMPHL2SCN3ZY+SeK9vXG32K
+ fR1KCFlNZg3pCjCQJUrrzrtOG6o+FpGpTdh3p7WaBDPFnGTFHxGOEkkj2ZoPkVEqSdr2
+ fHOQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776758371; x=1777363171; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776758394; x=1777363194; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+edRsPYdUi00c0lMKRPG3S1izw5hTOaQhuY5t/7H40o=;
- b=MyptfT1VxUolD65IXOvg/w3CP6f8ZlKWRnO9Kq2eNn86ZWIJp5Fg3S/1347JRUvV5w
- aX5kbURVWRrE/zhwovH1GQkJth7l7mosZgWOsfHd0d+dVHKsLwcxpXSQPxwkpL7ioea9
- xcA8NahKCz8LKCAzVQhosMCqiQ6TB5wdaOXtQ=
+ bh=6/gz0kvBY/N2bbyG1adnGxhsYPtusN4lKNzrGzI6Oi0=;
+ b=SZk3ml1LE6PA0VO9guvUah8go6+Vf8dvINNWRIFXn1FLFC6SWVbZe37uT1c+Tot6l1
+ zMhOanT8fzychuGRakBYic3PyYgxV9eyVB1ujVhfzc7sqxlrA07leYufNvz4+r/UYCys
+ VjrImBr6aRFXiaSKYb8UbCt9Qj1l9Fhy+q+zM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776758371; x=1777363171;
+ d=1e100.net; s=20251104; t=1776758394; x=1777363194;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+edRsPYdUi00c0lMKRPG3S1izw5hTOaQhuY5t/7H40o=;
- b=HCjgZg/oVeXnjA1o3XmrnyuHyCvevE7PdM3ZAZkxuh7ycN5Jr8wrXnL4twU4E5rciU
- Rdo589G+wGIzf8K7NsE2s9p9Q0wugSCtUPHAWtnycYgZ5OpHutgh4NDNSjZjyi7bhAV0
- VWAL1NpW1fKCHYduQcyfOQuj+uKTHiPDAbRVh36VAa7MdO0Kr+2LFQAXtWK/miT050WE
- eQGMHDIboJbNsqVIhXHc9kF7aB4weXzJuPDbhwTfZRgT+dd9zYnytBpDYAbwksOvpfdc
- bM/VWsKVEW9oaxILaUlCkYWJusYeobiaExbyFqJFaCmMxU9UQ7TKDX8N4tEiZa6ObaTE
- dbMw==
+ bh=6/gz0kvBY/N2bbyG1adnGxhsYPtusN4lKNzrGzI6Oi0=;
+ b=iceT4ue38mHjhYWO9lfDScgteP6+pn/fFPliQdBcOVZCugxU/4LKgFLo359hS53Lwy
+ 4WlvHRuW0DLb0M0HOzQ3c0bDrpr+kHIH4/B/gY1NHUQjrEqrUEXVm1V8rYryqPGafUPx
+ owxJ4ukpwDsEXwxjf63w3bV4HVogBbWaMLO86Y5RM2SClj+e2fAQEZ25a4D+bDwMK01e
+ 6LtzzsISFnUwNRLQo5A8MksFumuycu7ipKRm7H0RmBlI2hUPqdCXk9IV6SbiL4GqZsQ3
+ 5cvsj9pWuAISw/D5HobnXHLHXXrkcwD5f1FdfjcJyL+w2kNDXu7fRvZyyXNHx6BWd/kL
+ l03g==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8kcxZS28gYvA6Vx99EpyxqnKvQIWSiBElZlmJpl7IWQ88Pdspu62snqRqR2x7gM9UXA+KNdA8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxSOOhfuLHwWhaE2TiHxFXG+b1R50KrTD5zvvdvQqjv1L/lRCb/
- azsmhAtAdBgOSq9SQWCvsSH2GNXeR/INkEdlYIizIFquoNaw3+EGcd48yUn+/lfG2+OMc7rdk7t
- wp795N7zJLkFk4st7zmU/vqtGSY/2w70mCs99QMpb
-X-Gm-Gg: AeBDievUci6M0ye7F2lfGboa9PTRloVxOZoOA9OFtACHyTbh1xe8KWHseA87y48yXPp
- le9VuLFXPQX96q0ZgBXXkqre0MOP4JgJuoN5I803/AoLzhLrTxMoWDQPKrlgPBip1c5DVmgjM0S
- BITFzURHatVE/7TI8llXOni1VVoxg0J4axONroOo/fN+KY5PMUuzevcMwUcHdvJtj7GuYfqui6y
- X3Qy56oQ79fIqvZZDIg2ZQF9FSTBODverxsqL9W1WVMQss4Nx3FcqJCyfNFarUFTTVSvzxlII2e
- 9QlppXJIFSVyx48nXlYg
-X-Received: by 2002:a17:906:4fc5:b0:b9b:ddb2:b1c1 with SMTP id
- a640c23a62f3a-ba418f7f625mr716548166b.21.1776758370820; Tue, 21 Apr 2026
- 00:59:30 -0700 (PDT)
+ AFNElJ8Oc6CLYfoN/3DPIDUZS/+Z7ZaYd9O3V5aGG7etLv6iNZmyYbAdTmrFECyt4HYB0z/WlXR4258=@lists.denx.de
+X-Gm-Message-State: AOJu0YzmxiL/kSmwpJUJzWSgZgizqExjww3LlKjPzJ+Po09aPadrwf3T
+ 3RHK6Tmjd8UQiS+1blX8Qr9F7bN4H9rklgFb3XmW5TH0qcz8+6kpumtyaceWtPV5MjJbeLmZucz
+ m6kxmf+PfluK+cK6ckigWrFxx0wAnf0UCvB0gPt/H
+X-Gm-Gg: AeBDievuL21YQC/s3j9eFP7wxTJmo2JZnwkPDOLgJHOzOuy0QFCNo/kFfoufejPC8Fo
+ y8DWFO1IG6wjQIKAQ7j5wMEtTayr1zcXobQIlwN32icyVO7hPpa095iY+3zMZT8IgjI2/xtVi2L
+ pFL/y/HPY14nGI6jKyWLSHN4szljywkwps85L0QPvJ3TqLcNkJAj15MMn2ik5ydmuF1xgc+7i61
+ Qf5r9V5OYYTScHqPi/GRo4A5bzLoMc8IxLyK2EPhNGoY1SK1BIwltRKiW9qzjQAMuRKZZxfJbxr
+ OTetYcxlrtVqXgbfbdBv
+X-Received: by 2002:a17:907:96a1:b0:ba9:2137:7165 with SMTP id
+ a640c23a62f3a-ba92146ccc2mr191453766b.1.1776758393549; Tue, 21 Apr 2026
+ 00:59:53 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260420220321.71147-1-heinrich.schuchardt@canonical.com>
- <20260420220321.71147-2-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260420220321.71147-2-heinrich.schuchardt@canonical.com>
+ <20260420220321.71147-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260420220321.71147-3-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 21 Apr 2026 19:59:19 +1200
-X-Gm-Features: AQROBzCBGSE0fCineV5N9_Pfm987zR78olef5ia8lkzDXcZyULwfU2up3TtdxkI
-Message-ID: <CAFLszTgeVUD81CdzhaL66ngdAY_pXkYaPoH-VTOUBvyc2WzUxA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/4] cmd/bootefi: move efi_init_obj_list() to the start
- of do_bootefi
+Date: Tue, 21 Apr 2026 19:59:40 +1200
+X-Gm-Features: AQROBzAkgD8DIWwEVbGqlI1iD6IfajMsfGMjDSWEXjIojGs2_S2lrVot2e0gq5U
+Message-ID: <CAFLszTjhcEtmCa3HN8SXniP_H6QFbhOHA0stVqVLuLe5jQ_RiA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/4] efi_loader: correct return value of
+ efi_bootmgr_run()
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, 
@@ -125,15 +125,16 @@ X-Virus-Status: Clean
 
 On 2026-04-20T22:03:17, Heinrich Schuchardt <
 heinrich.schuchardt@canonical.com> wrote:
-> cmd/bootefi: move efi_init_obj_list() to the start of do_bootefi
+> efi_loader: correct return value of efi_bootmgr_run()
 >
-> None of the bootefi commands can be executed if the EFI sub-system cannot
-> be initialized.
+> efi_bootmgr_run() is expected to return an efi_status_t value.
 >
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Reported-by: Simon Glass <sjg@chromium.org>
+> Fixes: 0bef4b0123f2 ("cmd: bootefi: move library interfaces under
+lib/efi_loader")
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 >
-> cmd/bootefi.c | 16 ++++++++--------
->  1 file changed, 8 insertions(+), 8 deletions(-)
+> lib/efi_loader/efi_bootmgr.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
