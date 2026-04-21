@@ -4,76 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D01AF94CA0
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 19:15:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3BB5F94CA9
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 19:39:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1EBC83FFA;
-	Tue, 21 Apr 2026 21:14:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 4C799839D5;
+	Tue, 21 Apr 2026 21:39:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="E3mCdmjU";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="YT8R0f9y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F3BA841C8; Tue, 21 Apr 2026 17:48:29 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ id A1D8683A91; Tue, 21 Apr 2026 21:39:40 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C3E883E76
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 17:48:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 631C583936
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 21:39:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-33-72-241.ip43.fastwebnet.it [93.33.72.241])
- by mail11.truemail.it (Postfix) with ESMTPA id 1EC031F910;
- Tue, 21 Apr 2026 17:48:22 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1776786506;
- bh=EotSNyddUJqWrGg72dsAwkoWEI2PzXsFVu4NpZ4eRl8=; h=From:To:Subject;
- b=E3mCdmjUDwMcCcD/+iobMfHBd1xZ6OLIpebzaWSJbGdMl6hc413PdVZYxbgawqjHK
- sdCteACx4gAXhTFdA4WPjFvUn/40olV/PtzM2Mx9Ucg5gFLhP99dU3qI/6H7ngCwVi
- Ge3lWmksm84SnH5Bl3H2MK/ttRzcdA45hXrbPLOqOerMBaYrmtN3DNHgoRlj8RtSAU
- 9CyuK2WiBoaIOrarTgFOyJofJAZfx66F43P27SGav9oU51JEot5W66ESApaq6URTYD
- 8wyG+IKW05xt6XDE1qklzwLDVKCZWWkNLcUQX0eW5NNQtfsmTyyYPNNGqtK3owgEa4
- DzpnPK+v8dg3g==
-Date: Tue, 21 Apr 2026 17:48:13 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: alice.guo@oss.nxp.com
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
- Christoph Stoidner <c.stoidner@phytec.de>, upstream@lists.phytec.de,
- Stefano Babic <sbabic@nabladev.com>,
- Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>,
- Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
- Simon Glass <sjg@chromium.org>, Fedor Ross <fedor.ross@ifm.com>,
- =?iso-8859-1?Q?S=E9bastien?= Szymanski <sebastien.szymanski@armadeus.com>,
- =?iso-8859-1?Q?Jo=E3o_Paulo_Gon=E7alves?= <joao.goncalves@toradex.com>,
- Primoz Fiser <primoz.fiser@norik.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- =?iso-8859-1?Q?J=E9r=E9mie_Dautheribes_=28Schneider_Electric=29?=
- <jeremie.dautheribes@bootlin.com>, Jacky Bai <ping.bai@nxp.com>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Mathieu Othacehe <m.othacehe@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Ernest Van Hoecke <ernest.vanhoecke@toradex.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
- Wadim Egorov <w.egorov@phytec.de>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>,
- Tim Harvey <tharvey@gateworks.com>, Anshul Dalal <anshuld@ti.com>,
- Franz Schnyder <franz.schnyder@toradex.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Joseph Guo <qijian.guo@nxp.com>, Ji Luo <ji.luo@nxp.com>,
- Marek Vasut <marex@nabladev.com>, Alice Guo <alice.guo@nxp.com>
-Subject: Re: [PATCH v2 0/5] imx: Switch watchdog addressing from macros to
- devicetree
-Message-ID: <20260421154813.GA95800@francesco-nb>
-References: <20260421-wdt-v1-0-0bd01ec6a7c4@nxp.com>
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 29717114817; Tue, 21 Apr 2026 21:39:36 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1776800377;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=8VFHljY4wb/MseQsKc6g/Q+9aWqR9Jl56AGwTB90Z2o=;
+ b=YT8R0f9yo7MuM1/g6qwNUhvQpAvk4KNKnDJTdIf7N6Oi6hYxuPMmkFEWU6VywqLqI98hFc
+ hm62khvb81ww4EHsru9ljLB5uYcVT4Uaoiza+Eynvai9eVaU8jyJZ7pBN9qgo0s7i53MPl
+ ik5Focxbtwb9sFwM44nvsoDbmTfYNAuECmEWp7zflFmC34Z/OdoQpijd/PU8RCrVty/Yn0
+ cr/KC8omz0KgcaTzWbvDXMrbgH2xkPBquVrPXqYLxIpG+5J/I21mqwDU81yIcuMvoIFqT1
+ mf5BEDcwudwsGOxmA/uNUos3UWyGfjskS1TqNr5S1tGnO8fbCTtdQLL3otBnsg==
+Message-ID: <8d8a649a-4cc3-4d88-9028-a8c4976beb12@nabladev.com>
+Date: Tue, 21 Apr 2026 21:39:34 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260421-wdt-v1-0-0bd01ec6a7c4@nxp.com>
-X-Mailman-Approved-At: Tue, 21 Apr 2026 21:14:52 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH V3] board: dhelectronics: imx: Use second Ethernet MAC
+ also from fuse
+To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ u-boot@lists.denx.de, Fabio Estevam <festevam@gmail.com>
+Cc: Peng Fan <peng.fan@nxp.com>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
+References: <20260415101257.23154-1-cniedermaier@dh-electronics.com>
+Content-Language: en-US
+From: Marek Vasut <marex@nabladev.com>
+In-Reply-To: <20260415101257.23154-1-cniedermaier@dh-electronics.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,19 +71,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Alice
+On 4/15/26 12:12 PM, Christoph Niedermaier wrote:
+> Currently, the board specific code evaluates only the first Ethernet
+> MAC address fuse, regardless of whether the first or second MAC
+> address is requested. When the function for determine the second
 
-On Tue, Apr 21, 2026 at 10:01:26PM +0800, alice.guo@oss.nxp.com wrote:
-> CI: https://github.com/u-boot/u-boot/pull/935/checks
-> 
-> Changes for v2:
-> - Iterate all watchdog nodes in device tree instead of wdog alias
-> - Delete non-DM implementation of the ULP watchdog driver
-> 
+"the function _to_ determine" ... can this be fixed when applying ?
 
-Please be aware of https://lore.kernel.org/all/20260416084535.1490476-1-ghidoliemanuele@gmail.com/
-
-In case it gets merged before this series.
-
-Francesco
-
+... and uh, odd, why is Fabio not on CC ? I don't think this patch will 
+be picked up with him not on Cc.
