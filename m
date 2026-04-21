@@ -4,102 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C9D3F8FA80
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 14:11:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAD3EF8FA83
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 14:12:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D8C4841D6;
-	Tue, 21 Apr 2026 16:10:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 71B12839D5;
+	Tue, 21 Apr 2026 16:12:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20251104.gappssmtp.com header.i=@baylibre-com.20251104.gappssmtp.com header.b="ny3YRmtP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="U1WBv4m0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F220842EF; Tue, 21 Apr 2026 16:10:25 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id C3A2E83BC8; Tue, 21 Apr 2026 16:12:04 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D43283C51
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 16:10:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 48C0B83693
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 16:12:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7d7ebe11bffso4036991a34.0
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 07:10:23 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-488d2079582so50063095e9.2
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 07:12:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1776780622; x=1777385422;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=r81xcV4hvMi5ST/aBLbp2F+dFWUUEOBZxRl1qgPe8bs=;
- b=ny3YRmtPV6dmujE1pOwqtaG7yPTz5Q9t6XU6hNm6FEEFtK11JU2jc9nUrnEwfMADOA
- mn/7F1WbZloRvQFRDJ0X5twUNhyUxKCVqw8RODPTK9llloKlCe7ZwY/SLor4LMDUpnz6
- yMbWSBuJ6u2NoN25WFUBUbwqmTIr3C+knqUXh/3+L/VPpJEIwU7+EjaMYYo+5VmDbY5B
- oSDeSOrCJxwX9UL1U2mUcf62j3kYEP2M4V2fkogH5JsZmw+BurwUICu9wkt9p1YqeK3f
- zBwq05H2FFkBphLFootWEkYJwxbSZbuXFpdrf4qFaNnpixEZktaZwHfTjn7Txyz/cFYx
- 5zNg==
+ d=gmail.com; s=20251104; t=1776780721; x=1777385521; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YWCOHMxxNhU+2vgxppk+0kpXkwXjTnkxI6EBfbV5sEQ=;
+ b=U1WBv4m0bUM0OOYoVT5NxNj2+fChXNZEe6laIJIxj9ytgN5Up86boVE/IO+N+YFFMP
+ aKp65+wt6GrETrPUkSRxuqujfejBkgAATH7pCLTXZrz3t8ueDfJL+TtcNX2Hn5eicWPH
+ mZZkTAMA1ER6I6iDjO4Npe7fau99CL9dD3y8/01fl+AtSRS7xBn83ti7RizfSBTAXqs5
+ WsvURBqxFuoSvpgbFgdaBTHTEsKx+lI6g3tejZcWcBxyl3ysDcOWR0OrCh/e/N5Edhq7
+ 8wnj0t32pBsULN5F08urr/5xhWpN7yuIbBTUbpiIvvX6iNmgG/DGvoZ/g6aT6bNy+6CT
+ 1X4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776780622; x=1777385422;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=r81xcV4hvMi5ST/aBLbp2F+dFWUUEOBZxRl1qgPe8bs=;
- b=hAeQmZ5tSpkrrX8M4rj42wUQOXD0v8SlMIQkYAIsfgxIiTgsIrLb57WY3t9dGCf/Ql
- SzVLJJQ7iBltgfvDIriqaeOzX7VdlzAemyM5QXbzKDFTfwVuLc4WI6Mzw8G33Xw2aKX3
- m0F5TZZSKUPxvw16+Uy4QYNP53JgVgpFG/avzfzIKLhFcxRVnKZTnIkeIgOVEfiqBdDU
- L+/8nZye3PCJ/zbtDbtKizNB3TKSW/LWu2G0hnzPttbJIoCDXx1vlgqE4QYk8n6NmzOe
- LXDK1BkY7wpH7FwQkgvU3VuogTnDG+frqwHyxVpYu3KVgwRHPP0+XUAFRsqrneIYGLC6
- +eMA==
+ d=1e100.net; s=20251104; t=1776780721; x=1777385521;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YWCOHMxxNhU+2vgxppk+0kpXkwXjTnkxI6EBfbV5sEQ=;
+ b=d8maERh4sgoxCSqdgxz9IghXuhyoIg5pizaZLSDhxQ3iv89nvW37JTT8vzG9nmaEnv
+ HKyHiDIjDPRjwnbm4Ni/lVX37HlMjYndrmc5TNoc7zRxO69vfhNmuAysAbWFt/tIjGe9
+ kjgFRJrA5uD5po+K+we9SHbHXwibf5UVw8aAucb78XaBfSuqmOobRnL7ZSSbsAjrR0GM
+ qgyD5vHtLeSAHAzoFK2tt/Rue4DAj/Bg5edQ/gzXc7s/Qi4n7Z0aKLPs/E6lPRrya7ZJ
+ 7AIzPfXXCgnLFzBAiZegARhm6ivrq/5yVJuAULZY+hhZk7vlgQRIrxXh83W6Chqo8l5u
+ KwIQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/r/KAauuQ06he5bznjM0kNFYO39R/taIvqvH5k2JMrayanD+ixpaB/aLhpD0VyUK30GPqwT9c=@lists.denx.de
-X-Gm-Message-State: AOJu0YzZO+mBN0gSp9ohyYol0ukqcrOhny+aP/DmFHU10FxNQVvX2LQQ
- IGoIp5FFtik5Kln4bxXXc+UPa/T0OaBbjJWzW1RHpGJ9VVAEvkj7hHSt3OwwHCyisOw=
-X-Gm-Gg: AeBDievgH8lpNwoMHWK7AqalmsSyPVI1R0wECeF23R6n1S1pJcUN8WOkGH4XHvv+yeY
- ngD5IpP4MKxpPtcKt9gy8IUK0eMKjEgkCJ37EeEAwwZOoGcMcLnlv/IJ6sphMZQg44Wfapt/d0S
- V92y0t+25FBVKK+3GIM7P6XQZDUoFMyqALPghH/Daeh69XLjHhnyxZus9SgriivEjfMk5iJ1JD1
- 80m4ePzQ5ly0Xi+/6GZnGwrFrgxyuS/6wEyb5lStV2lXwz/GB4eQMF7Nxpc5H6bX8x8lAdaUnna
- vFw4qxVoNnNadTtiBuGRjwEskTOqwYfc/o4XdweowdIiyYb8UxmJLWq0IHBsj8z6DrXuftDEWZF
- UzKARTIKXXT8qMFMvKnDt976IfchmOJEW82KTmYrgFcB48PttLSQz1Uz+pMRdc9FO/rUFnq3EK7
- Ho1Yv5r+3IHl7WpEFa7OBAG45BQb3uvpcfVhdfTZ0=
-X-Received: by 2002:a05:6820:1787:b0:694:9252:1992 with SMTP id
- 006d021491bc7-69492521c97mr3014869eaf.0.1776780622039; 
- Tue, 21 Apr 2026 07:10:22 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:dc5a:64e5:1cd3:94d5])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-694984114f5sm1248515eaf.7.2026.04.21.07.10.21
+ AFNElJ/zrhtY578LqvuYNf3F0i9stDkm87YjYaRerliJLrN9ZHu5keZ9uq2ZUR286fJ45A8QSwvropM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzOO+x60isjd1x3XQWhF3U9M7OoX2NbeOv+rzsn20W+5bqSO4et
+ nRvpXMn6HssOKSb3T0qRMzN4MZTu8a6eDlofLFkMkdlPmMt1uN2yDwsRT64szQ==
+X-Gm-Gg: AeBDiesNlc/Gt7kSqdX1Ohr66Jc87t4b645cFX9/dVgJdvg9kaHe5cUCaQOpyHE7V6F
+ imffKgBqddXJGgeqtNJxiSZXUTtlIl6nVYiYSjCgSc07ev1lpK7TPYk8ucyOVHhpYo1gL6k6T69
+ w0ZfKV+EpjbNrHAhNYFJwnItOzQnd54gvm1bmBTvexPxLEd5LBSrbuPQyHq1FLlpmz+HBjA4p4g
+ W/dnajua7NGEFxmi0Lsp5JQgc6K/mdsMDkfinC2szRxVtnmcFeb2EZaovAaZrJLqJ/fOVEVz8KR
+ eXZAmvrOxn9FNZQfg3CF329Hs5e7RZ/ZJQesEn7CL+zu1ozSZQUsLtWYOqAvSwStuja/osQEkTx
+ /rvgfmCDqhBh7X3J2Cf9s1YZlDyiXNQXQ0Oeck2y5Sl2mVSfcvb88LA6xgdM2ugxpHcH9HDfnBu
+ Uy0cMXCXP5Oun8UkDx3kb2j8qolBhC+LqJR6112JTZxZ5yfxcChEYzUZSdSoQur7YOjYW8He/E6
+ Iy0Dm7bBy3xHe0flEiTQQL8BdIcBk5ln5EJ5NpTrDN16abxvCTqSJPVDoxwNN1iaEmPsZw7SJSD
+ PfYTWhnrjsNZEl4w1D7/EnU97PJdtTdId9YfDhaz3rF1zNF3IkUSKUOtwz5O6iQ9sQmd+luavZK
+ 7XlmuK+M/mXgEVnJoXA46pHsifegxxf0D
+X-Received: by 2002:a05:600c:c177:b0:488:a82f:bba9 with SMTP id
+ 5b1f17b1804b1-488fb7804f3mr247744255e9.22.1776780720393; 
+ Tue, 21 Apr 2026 07:12:00 -0700 (PDT)
+Received: from cypher.home.roving-it.com
+ (7.9.7.f.b.1.3.0.b.8.f.0.9.e.0.0.1.8.6.2.1.1.b.f.0.b.8.0.1.0.0.2.ip6.arpa.
+ [2001:8b0:fb11:2681:e9:f8b:31b:f797])
+ by smtp.googlemail.com with ESMTPSA id
+ 5b1f17b1804b1-488ffc5e3f4sm181160215e9.2.2026.04.21.07.11.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Apr 2026 07:10:21 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-Date: Tue, 21 Apr 2026 09:09:38 -0500
-Subject: [PATCH 5/5] configs: mediatek: mt8395_genio_1200_evk_ufs: remove
- CONFIG_IDENT_STRING
+ Tue, 21 Apr 2026 07:11:59 -0700 (PDT)
+From: Peter Robinson <pbrobinson@gmail.com>
+To: Matthias Brugger <mbrugger@suse.com>,
+	u-boot@lists.denx.de
+Cc: Peter Robinson <pbrobinson@gmail.com>
+Subject: [PATCH] rpi_arm64: Enable MBEDTLS/LWIP/WGET and WGET_HTTPS
+Date: Tue, 21 Apr 2026 15:11:38 +0100
+Message-ID: <20260421141156.359690-1-pbrobinson@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260421-mtk-configs-remove-ident-string-v1-5-66d5fc3d67be@baylibre.com>
-References: <20260421-mtk-configs-remove-ident-string-v1-0-66d5fc3d67be@baylibre.com>
-In-Reply-To: <20260421-mtk-configs-remove-ident-string-v1-0-66d5fc3d67be@baylibre.com>
-To: Julien Masson <jmasson@baylibre.com>, Tom Rini <trini@konsulko.com>, 
- Macpaul Lin <Macpaul.Lin@mediatek.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=910; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=+EkegjoDbky4Gb7mUrDri5MbA/HM1rXAHjRxJJozd20=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBp54VCtHv5cSkpLcMCsafxqBlUuGxf0lGtOVucC
- iWEhxQ2TMeJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaeeFQhYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AmNcH/RCq6LJuuSYluBW7eWQskINV4ansoT4uTVk8AZo
- LzpDDMTXz2pS+WAfVKwcPi0iwUQ8cTGZi3VsStcvTf2AE0fFezl4oQkyKBcL+jWyJcT9hnOSWa/
- QDSuJl7EFh8iNHEe4xHXa1ZLgG3F6sQ5SPdiwBlgBN78ZUJBDbMOtaODldWfh4x3y6IcoT5Eymj
- Zsj3D6n0a+sxOyfl1mJr2NptvSwOpUS00v1TONLrscRsVlHv7kA1ju59XKnlR3RhGEqB+iyi3i8
- lNdROkZHf31YNl2S5VNCoM9jt/cPd3n/D8irLXxQa1VU/SF6P2bD9zdHgeqW6xJrCfBz3WiKM0t
- lPkA=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,29 +102,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove CONFIG_IDENT_STRING from the mt8395_genio_1200_evk_ufs defconfig.
-This makes it consistent with other mediatek defconfigs and frees the
-option for use by downstream users. This only affects the version string
-printed by U-Boot, so it doesn't have any functional impact.
+Enable LWIP and HTTPS on the Raspberry Pi arm64 platform to be able to
+use it in the boot process.
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
+Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
 ---
- configs/mt8395_genio_1200_evk_ufs_defconfig | 1 -
- 1 file changed, 1 deletion(-)
+ configs/rpi_arm64_defconfig | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/configs/mt8395_genio_1200_evk_ufs_defconfig b/configs/mt8395_genio_1200_evk_ufs_defconfig
-index e927365a03a..525638f5800 100644
---- a/configs/mt8395_genio_1200_evk_ufs_defconfig
-+++ b/configs/mt8395_genio_1200_evk_ufs_defconfig
-@@ -1,7 +1,6 @@
- #include <configs/mt8195.config>
- 
- CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt8395-genio-1200-evk-ufs"
--CONFIG_IDENT_STRING=" mt8395-genio-1200-evk-ufs"
- CONFIG_CMD_UFS=y
- CONFIG_PHY=y
- CONFIG_SCSI=y
-
+diff --git a/configs/rpi_arm64_defconfig b/configs/rpi_arm64_defconfig
+index 69e8e72c5d7..90048a418f6 100644
+--- a/configs/rpi_arm64_defconfig
++++ b/configs/rpi_arm64_defconfig
+@@ -11,6 +11,7 @@ CONFIG_SYS_LOAD_ADDR=0x1000000
+ CONFIG_PCI=y
+ CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+ CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
++CONFIG_EFI_HTTP_BOOT=y
+ CONFIG_BOOTSTD_DEFAULTS=y
+ CONFIG_OF_BOARD_SETUP=y
+ CONFIG_FDT_SIMPLEFB=y
+@@ -26,11 +27,13 @@ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_PCI=y
+ CONFIG_CMD_USB=y
++CONFIG_CMD_SNTP=y
++CONFIG_WGET_HTTPS=y
+ CONFIG_CMD_EFIDEBUG=y
+ CONFIG_CMD_FS_UUID=y
+ CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+-CONFIG_TFTP_TSIZE=y
++CONFIG_NET_LWIP=y
+ CONFIG_DM_DMA=y
+ CONFIG_DFU_MMC=y
+ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
+@@ -64,4 +67,5 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+ CONFIG_VIDEO_BCM2835=y
+ CONFIG_CONSOLE_SCROLL_LINES=10
+ CONFIG_PHYS_TO_BUS=y
++CONFIG_MBEDTLS_LIB=y
+ # CONFIG_HEXDUMP is not set
 -- 
-2.43.0
+2.53.0
 
