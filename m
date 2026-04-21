@@ -4,139 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40CEFF8924C
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 10:22:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEA5AF8925D
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 11:07:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86D5383C51;
-	Tue, 21 Apr 2026 12:22:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2578883BC4;
+	Tue, 21 Apr 2026 13:07:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="T/qD/wX4";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="PU24tPZ7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 496F7843D0; Tue, 21 Apr 2026 12:22:10 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id 7CAA583FFA; Tue, 21 Apr 2026 13:06:58 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF8E28439E
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 12:22:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B4F2180433
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 13:06:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=W2C5ZWf3yyD5rmELRayJg5iNmsCwmw0vrX3qtFVn422bWJTbO5Vw7ZMq7y9Rt/KACXBLMALVCCx+FdY2qD5al6HO3nJprpQbO/anMCjyxGgmn9+CIaZSSCwMeo3b2KmhDgHVPzSw7ADd+VJspNZ98YUDsMtmfoqYC91ubjRGB6VAiCLursJ3uzaWQn+Cx9mdxOg1FhsPa6RHxukvBQK28GP0ApGh7+RVDwGiGWNBFby3cIuOGvWXhs1B9WT28/yXnfGvKFbopjd1VBz8I7JB8lQTTPPO5mh287T/c6D4ptPmsdXkMXnuHt7ULv41P0/Az3PSA2D/oq35QJtiQm8PMQ==
+ b=zJ8wbIw2WFPVk8mh1pYmgDZrPUFYUgspSvDX2rQqvfCrbTsZpIwF+Sd1ZWVSxZYCRFNfg9VgSRdL6ikOBRMe2+Ziim1kEL2UsL69wkyc7cz/SqZvQnKfIWvvT09ljsXrr0pfSAHHR6rZeOQpoR6AbI9dpQZagU/uYXTl1h2d6iCHr3139VIoS4MBG40TeG0/3oEgM6UXreCmbr1csM3FgY5pQqbTmekxkZT1jvyDSVJkfqDpkkd+czOZvoXa/JIRoPSviHI+mOBKTVYM0HK5jFYLSPTrpHqhBB5qeMH9/1dEnDV0eij3MLWaq/M5LrtBtyfmQBQodx9iBjcQeuS4aw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jgZ12/LLzIrAe+qkRDiVpp+ZmcuyEjQGinRkjBnWmIs=;
- b=Q9kFGKSp3iEenxVGtn77/WUzMGssSvTYI/qkbQtQvEVQnpjgomXfU/eqKQv8a6othCkk0uYVR5lbKJi8VCoG6AokMuCthVsGAJ0aB4ZAGSpye6QEMJwbQjbL4zkoydDf8YZRCTjtFokyEqJBcpG+TjlXV2W3CpeHM6it/q2INZn8oPcg/MoeSMtuMlwb41Tt+HFWFho6xqeseFna9LYyMaivv41L6ISXJUTZe+9QlB4+eKKcxbGA8nHiLP5vN+jUFCrfERL3BZAdyOF19A2/UBGgI1Qp4Mz8kZCjs3KYu+j3bo1h7Z+/Q/1q96Y4AZ20bDzcZPEiwDX0HqUsXa1afg==
+ bh=jCEtK2mcewaOn2VgrlIsLwcOJ6aLXygK40enxvKrqmI=;
+ b=brKTkuef4qnd+nBv2GngmX+RV+oyd+GoUq3CCtGxOQzmzKJQueoJZTz9d6CCgGrQPgn2C5cKMOo7m+YF7dF27BtNtHrKbWvmJljmcWLkb9xKPNsF6OpEx9D9MS7X4UXKHMyXIK0XUF/Cxem5J4Hy5FKGZAos95eqr3GmK4EtsNlHCIwjFnLZSlQ413eSrdMFu6o5ovBMrM/dOOngmuvxw/7hKDYl4hMXdq35xr1EzKI3wlaBIhBOjvNfEOUTg3F2+lvdK1vsJtumur2MJmRbiyznEpBOgdsSInyC4SFnCXnHZTyf28QhvQz+NWB0Y9j5BHtk5Qt/+qOzLC2zNruH+g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jgZ12/LLzIrAe+qkRDiVpp+ZmcuyEjQGinRkjBnWmIs=;
- b=T/qD/wX4XG4MpRxGKuiHCOSrMeZlwckcdyN70f0ZwBWMZsIITB6GtS0Oub3z2oYvBoLlaYJamzNgqkN21JQyCPDDYm18X+zi/ZcncdouS4L/wEp7hbrI5kvbHEFEJT+K9z9NTk9nckc24ICNZ5+aLSGaL6lTys5qgojVN4d4oBI=
+ bh=jCEtK2mcewaOn2VgrlIsLwcOJ6aLXygK40enxvKrqmI=;
+ b=PU24tPZ7BpOTqqbxR4F7a4+huFNXKJ7IEBfcj4MCLDD0Q6V+wWbPQTqQAH32Zuucj54x51Mz4oYj579bAzkBV6etucNq2IOlwbdX6RtQKWL2IEII4Di9cbjwulPnb6Xh/AveBAhXUw9phQ4zKXDr9CBzZsM0HPQT8DkJJ9y3eGE=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by FRWPR04MB11222.eurprd04.prod.outlook.com (2603:10a6:d10:171::13)
+ by GVXPR04MB12289.eurprd04.prod.outlook.com (2603:10a6:150:30f::7)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.33; Tue, 21 Apr
- 2026 10:22:04 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.31; Tue, 21 Apr
+ 2026 11:06:50 +0000
 Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
  ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
  ([fe80::5960:fb4b:9313:2b00%4]) with mapi id 15.20.9818.033; Tue, 21 Apr 2026
- 10:22:03 +0000
-Message-ID: <e84195de-bbf6-4c3b-843b-87d83f4950fe@cherry.de>
-Date: Tue, 21 Apr 2026 12:22:02 +0200
+ 11:06:50 +0000
+Message-ID: <3462e9ac-e882-4145-88d2-a553cd1c3cb2@cherry.de>
+Date: Tue, 21 Apr 2026 13:06:48 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [OE-core] [PATCH] tools: mkeficapsule: Add disable pkcs11 menu
- option
-To: francesco@dolcini.it, Paul Barker <paul@pbarker.dev>
-Cc: Wojciech Dubowik <Wojciech.Dubowik@mt.com>, trini@konsulko.com,
- openembedded-core@lists.openembedded.org,
- Franz Schnyder <fra.schnyder@gmail.com>, u-boot@lists.denx.de
-References: <20260409074710.1322519-1-Wojciech.Dubowik@mt.com>
- <7xe72m3tkzultqh3hw4cubfognfryjk5ababajoe6w6zt7jx4c@aaxa2kehv635>
- <aeXgdkBin5uz0-OH@mt.com> <20260420085001.GA47182@francesco-nb>
- <e87d67ec12516ae9c62b1d7b19797ff0ec131b36.camel@pbarker.dev>
- <20260421101655.GD23508@francesco-nb>
+Subject: Re: [0/6] net: migrate NO_NET out of the networking stack choice
+To: Simon Glass <sjg@chromium.org>, foss+uboot@0leil.net
+Cc: u-boot@lists.denx.de
+References: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
+ <CAFLszTjTSUOy9=d5NpgsP63dQp7UXuhpqg4wFwnXgWJzD74_6w@mail.gmail.com>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260421101655.GD23508@francesco-nb>
+In-Reply-To: <CAFLszTjTSUOy9=d5NpgsP63dQp7UXuhpqg4wFwnXgWJzD74_6w@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-X-ClientProxiedBy: VI1PR04CA0084.eurprd04.prod.outlook.com
- (2603:10a6:803:64::19) To DBBPR04MB7737.eurprd04.prod.outlook.com
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1P195CA0066.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:802:59::19) To DBBPR04MB7737.eurprd04.prod.outlook.com
  (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|FRWPR04MB11222:EE_
-X-MS-Office365-Filtering-Correlation-Id: b8ff69c8-77c7-4f5e-c0ce-08de9f8fd516
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|GVXPR04MB12289:EE_
+X-MS-Office365-Filtering-Correlation-Id: ef9890c4-6e71-4ff4-6ed3-08de9f961651
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|10070799003|376014|1800799024|366016|18002099003|56012099003|22082099003;
-X-Microsoft-Antispam-Message-Info: 2aBnlZ327pFFrnlszKC584yRHoLT1wX/mRz7wGt/yNlwrFUSIoJrMtnTsSVwrpGzjeO422F5kpfEx6ptIw2OOVuRt6YwjNQMz2VfOzcGHDdrXSdVfbM1fr1GhayHfoXHQei06vcfNocrEuMeZXX3qWMOdYJUx5e8UEg00hrXmUTOgCgc9WL1z2GSEs7N1YxXT2b5WuHL6hsUC7iNHO8B5qWkBS0lh7CnL3uoHE3YxaZxtnG1BfAGFcDNZzeGyICcSEf0L5k7BMx1KbYLggcNgQwvvJ3bt/zuc5BUY3Iec0ATRqVyld11St+N3B3/4yh9amhV2JMr9KId/vcjMNVm0MTcZONz7i2Zhm/o0aqymfEe3w8ELBkAV/SkinBiLV36nP1DSC7370jateRy5VCi5EnaZSIvB49V9FbYNNVKTVdckj+LeKaZaQbTbDU7FpJEedFGofeFRbfAnC2TLYUr0DikFAkJUqi96XYm/fTcEtOAO297HnX2mofE1gwHyRnRG1bMibh2hzIpckMnr7W/pptftySvz5DaSQShzM6aWynl0cQeSL89RtIbIHOTxoeWphk+1CjkzLFmz/1uP+j2m3LxDXvB/IpTOcZQvzromGH6ivXLj/wYXRGQRDG/Z7n+DhEZBUipHVFoTr01zbqyuRiZ8RQEvRoy9YfVhIY6Kb4+rO/4bjgx9He/djBsugtgXapmqmyv6Pi5xQ1p3G+srzmnMqYXN3SjB+OfJ8cpJbk=
+ ARA:13230040|366016|376014|1800799024|10070799003|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: W2NQqX7h+RtFUGahf02Ir80JYbz4KyupovUO8cpaxxJ9UNx+n1K1QTUDsu9QZkALeTZh1QmhaVlO3Rkm/4rRLXQlrDTbnh+SopKeExjvn90JHZuw8CjWlV2QlPQHRRJxcKWXk0WULT5VokWA9ibf9yaFWuAmFdYiBKgPJspnY03ANSSf9e7AEinP3pzjKKBvpnG9uG2JQe6XbGMitw8fM2dGLBSCXILt3wOG3+qXsXz1yXRo39fDrZDh5Ha6GOB/2uQy8o0h1xthLPbLycJu081qLopkRmvmx2+qG5ghKl9ik5qS18cLI11uUnNMxC+AG17/giifWphwFPUY3VDyV6QNnSgedDvErO7QJPIOczvLzhEhPMFIVAwY5zIhSLfdEniN+0DMIp6VLbJIPYMKeLmBj5lcdUSC21is4GwFrkGifu3fgW1tYMuMXoLMVPH+LFLwzPY/7l42rQLYP8Yqt3GDj/4Iknc+NmjrqMdZ6hXCXtPZAKnvrunJM3ovjfw1XQtA1E56gyMmN6YdIt1oZ778eEhJ2SIogP3yaQ6tFePsYvtp7UxjcapJvyTuTmB9wm61g89ApE9KAlgIFjimdUtroNVtyuCOmDCCv5RUfx58cvTErijFy5a12kbgwdd3WXtjnIbZ7gupQ7nxlzQQ5ocEoAKvV01oMNK1LNlxbhxJYBNidRIEry19lL7IGgvV0PgQ3bZxPH1OVbrgdZU/6PRYCjtheQ9DF7aFzIp0ChA=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(10070799003)(376014)(1800799024)(366016)(18002099003)(56012099003)(22082099003);
+ SFS:(13230040)(366016)(376014)(1800799024)(10070799003)(56012099003)(22082099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WFU2YnFKQ0ZrR0M1UFhNaEdHMzk1dkt2WU5sMHJ3VEFxTE0zZDVib3g1YVg1?=
- =?utf-8?B?YTRNb2ZkWEVjWmlmaW1jMEVlRmZYMk95cmtOaXpsMnlFSmtqbjFwd005YUdu?=
- =?utf-8?B?R29mSnB0RVNaMm1nRWxVVFZZZm41K0hxZW85L1NNWnRHSVR6UUdrTUY1c2dP?=
- =?utf-8?B?L2RQVUdLSXFnRVdjVXRlNXNMR0tpWXZMTE5UZHNLWTRhQWJ1bFdlemxSV2Nj?=
- =?utf-8?B?VG16NWQ3QUZDTGgyeVRYZTVtVDJMU0w0UjVNMVdqdmphazlmZFRDc3ZhUkxP?=
- =?utf-8?B?SUNJMmUzcXp3di9QdmhCVVlzbDE3aXBEOVpiYTJ0Q3hVT3p2TDc1bnVrZWRG?=
- =?utf-8?B?cmIwZnFseDEyNlBFd201YU01Y1F0bmYraStHNDIvVHR3T3VIVTlKV3QyTmRh?=
- =?utf-8?B?Yk15MzBzRnR6RTJXd2NEUGZLd0phZ3N6eWcyWFRDdElydTVLWXQzRmNhS0cy?=
- =?utf-8?B?ekpVRnFoRkVQQUNVRGhHZElWNUY5WmVITFhqTW5ZQWpFYkkwU0JmL0JhSXBL?=
- =?utf-8?B?Y3JOTHBYUC9sNkFkb1BiZVZXYk5Qcm93K24xeFQ5aEd1Q3BxSFhRTTkySEov?=
- =?utf-8?B?NmY3WDA0SWlsazZTVUlzaU9Od2Q3NE5DdVBUbFhkMUFqeWNuL2wxVWIyK0V3?=
- =?utf-8?B?TCtYUGJXR1NsNGRPNlNSaUpMNGVTTlJJY3FOVHRLYk1CcE1zWWQ4ZHByWGhj?=
- =?utf-8?B?NXFwZmVjOG5XNkVPdHVlM3hwS1VKcFlBVStMN1Z1WUVOOWJ1QlBqYnFoUGhY?=
- =?utf-8?B?NEd5NGtHd2w5MTloeUZnWDlkN1lYZEtHTWNRYnh3ejJZeHBHVEVrOUFnNXVn?=
- =?utf-8?B?SEk2Znl0bjBGQW80K3g1S21WYUlVQ0Q5bVpXcGZ6dTZUWng0RjVoQkRjdGVQ?=
- =?utf-8?B?MWZkRXpITGFBTWVhQlo4K2grbGVkNmhkODZzNkNHUHIrTXZVMzEwdjM0Z1Nn?=
- =?utf-8?B?RitzMDlrR2xtYWRxQ0RLS3ppSDR0aGd5YjdwV0QzUFVEYkZUMEFYSnR0d1N4?=
- =?utf-8?B?WkVQdzRrcTBzM3JJSGFmUEhMVDk0TFlPSk51bFYvUDBHd09iUXcyTEZsUTAz?=
- =?utf-8?B?VDBWcmR6S0pwQUJlS25RUHR5TE1COUVnR3pnS1pndW1OSEpyRzNhOTBiYWtR?=
- =?utf-8?B?anhDbHdRYVE5NUV2ZHFKdm5qbTRuN0ZvS2pUOEhYQUVrTlhiakFmWGdueFU2?=
- =?utf-8?B?c2JzQlBLSmVHMk9JK3B0bFhMZndBK1VqSFFuUWNDSmExVDVRdm1CbGVUUjBQ?=
- =?utf-8?B?eHA5TzRYMEtLR0dKQ1pTRFFUYlNDbUhHaU1hQWF6SUlzMXk0UjhORmhxVEtC?=
- =?utf-8?B?RG43dlQyUXkyeDRZL21KMVlUTm5vWmZaSi9sZXNuTlA4U1lGTHhXZUNVMHhh?=
- =?utf-8?B?V3g4elFyQ0RHRHlUUVVvQjNOVk1zeEhFTkJDcUcrejZPZHFId2VnTDZ4cEpm?=
- =?utf-8?B?SGlsTzB4VjdGYUxpMTkzOGp2ZDVRMmk4QnMzNTlJcUVxK3ZOVjZTRnpWSExJ?=
- =?utf-8?B?OWRYbUJOMVVHaXJMUkI2QTZTZ3RGVFgxZ3FSdExnd1pEZnhJcFVEbzZ5cHNZ?=
- =?utf-8?B?M0hxaG1YMXd0ZmNpeVd3NGJJbEpFQnRYR2NzZTJzMWxzMzFITFluMDdlZzBO?=
- =?utf-8?B?WXpSMlNJSENIK2VVbklUTVVJcC9IalQwTmV0QlA5SWphL241U0Z0QW40L2pw?=
- =?utf-8?B?dDNEVk0rckphQmRZMGJCZWxtaE1YS1lNS2o3UGtmYVJCNGpYUjRYMWUzNEc4?=
- =?utf-8?B?VlM5a0ZETk8xQitXVjA1a1Z1d1dWTExGSy9NMTRwY1RBcE5xR2dLNFVVUnc3?=
- =?utf-8?B?UE1PNllmQUs1WjdhcjFmVUl3MVNCd2FzaEVhRk5McjQ4U0oxME9GTjJjQjdC?=
- =?utf-8?B?bzc5RXloeUNlSU5Sd1FpVmw5N2ZQTVQ3Z09MOERCaU1jVy9OWXViY0xFNkhP?=
- =?utf-8?B?RkJuamROR0NkT2JtRDNpNVg3Y1l4VGJjTHpKUjg4c2w5eDZEZHlmYnIzT1FM?=
- =?utf-8?B?bU4rWm9UNWZuT0FKZ2ttZ3MyNm1TUExDZmlUeUN6UUlxUGk1MkJnT0tsNHBn?=
- =?utf-8?B?UEtWQ2ZPYlo1SEZMcEJsRThxak9UdTBtWWduSVdIMFZEZFJwcExWejdOK0k5?=
- =?utf-8?B?bThUeVV2c1pEZTRMNUtMTE94Uy9COU9jTVNBekhtRzdxOTFnUEo0S1JCdEpv?=
- =?utf-8?B?a3FiWEZHVys2Tkp2Y1dLdTdqNkl3UVZZenZLMXN1dHpGWENJNk9ldTk5ZTVT?=
- =?utf-8?B?Q2FKRXRFQThGMEw1MDdRTVJjaFZ2K0R0aFh0eHFKSXYwczJOSjFGNFdTa1N1?=
- =?utf-8?B?SGh2UCtsbUZ0UmJLNmVaZ3N0RzNQRkQrNnI0UUNqUGVsd1VocEpldVl6aGZD?=
- =?utf-8?Q?F9aefmG/5zOFrgHurcHpiwahaMsikC7HJLfuG?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WTRmTUNhM0t6b1lOZUh0akQwNHVGOWcwdmtOZHY4eXdPY3c0YmpRZzBjRzI5?=
+ =?utf-8?B?WTRyL01sNHNvTm9HenFsZWxlemtYZlZMZENiQkJnUnRrSWEyQ0pVRU1NVzE0?=
+ =?utf-8?B?MVN2UlZ3NkZvT1NEQzhYR0FUaUw1Mnp3N0dxSllnNkd2dGN5RVdiZU94aFdD?=
+ =?utf-8?B?elNPallJa2hTc3hqRFdKVXM0ZTM1WjhtSUo5ZkNzd21XazdkYjFvNTZXeDBE?=
+ =?utf-8?B?UmV5K1A3RlpHV3BiUFJncXFwSXFsQk1paFE0VU4xeTNyazErNUVrYVBNcHhr?=
+ =?utf-8?B?ZWpldDVoK1BETXRWWExLMHpGczM2RThiaUpzSjBwSytWbkR3WkduaTYwVkJu?=
+ =?utf-8?B?VSs2ZldDcGVGS0RaYTNaSWlPSzgxQTZTWDJyZ2JXdTJDeGZjQXBZZ1FsZkl1?=
+ =?utf-8?B?TFFPWDNRSUN6cVRoY3NmQTdlMHd0RmlPUzdwMGVuZm9YSHBwQS9qWDdxZUs0?=
+ =?utf-8?B?NlgwNEhmbzhLdUdFNC8xWXBRT2xCdVc2cnNSQmEvY204RUlJYnkxRjd6TTNH?=
+ =?utf-8?B?Z0s1MmpFWkxhc3djenlSaE82a2VjWmZQRnlUU1VLVDBrM2ZxdjYyWk9Hd01H?=
+ =?utf-8?B?bG1ySEYzeU1SNXAyRlRNcFJFT0g5ekRXdFAydWN2SnNRYXRRekJnUFZXdDgz?=
+ =?utf-8?B?YUZrTy9QbTNxeXBOcGVURlpiY3ozYmx4WGRPeFlIZEUySjFaMlBpSGlSTWYz?=
+ =?utf-8?B?Q3pzamNQTmwrUTRIVWxUaE1VdUpZaDB6SkZ6TGVaWS96RW45TEE2S0lSVDJU?=
+ =?utf-8?B?MWtKbkFoZTR5dG5JWXdnZHdZSlFxekNTSjZYSzlJcXZ1L0tEVzQ3T0ZPdlZl?=
+ =?utf-8?B?VXAxdFVOSVI1V1RqVWhTaUFqd2NackVFaE9YZXpYWGp3clh2SmJDeG1GSkVa?=
+ =?utf-8?B?cTBJMXhyMTk0Qk5VZm5PanFNWi9iYWNqamE4c0xSWDBZaWhTcU44RGVJcDVC?=
+ =?utf-8?B?S1U2Smo5azVIY0lMZTY3T0VkdzdqOFExcUhnN0ZpaEhTWVV1WUJVQUFEeno1?=
+ =?utf-8?B?czZxcVdRL1IxbFZtbnZaV1hBRS9RQ1dEcFM0aUNXelVaei96MExUUVNJR3pa?=
+ =?utf-8?B?bFVYUklnbVJrdUV1TVI2UW0wc3ZLYi9TcnVKWUgwQVFOS0dzNllTMkxOVUM3?=
+ =?utf-8?B?dHMrTVZmY0pMUmx6d2lPQ2pZb0xFZHNNc1I3Yk15V0ExRDlQN1hVblJWcnh5?=
+ =?utf-8?B?cHVZZ21yRUVJcGpMN1I2TjRzSXJuRDQ1bStHc1NScUNqenZINVl2UGtybjZv?=
+ =?utf-8?B?cmFrcWRSUDZrT0w3dUdKVExmRzNBMnA0R21XUTJUdWN3ZEpud3hYUlloN3Y3?=
+ =?utf-8?B?bjVFcDZER2NyaXc4cW9PbUdqVXRKVTNiWFRlU1VGbzFoeUZZUFRNVXJQNGdj?=
+ =?utf-8?B?WUJ2dExjVVJCUlo3Nlc2aGc4U3NtSkpxbXl0d1VIa0F6SGpUc1pDWGVjQ2NG?=
+ =?utf-8?B?MDJrb3c1MFRwNnZrWElUcWpjZDdHbTBQYVJLL0lySFhSMFFJbkNvMWM5Ukwx?=
+ =?utf-8?B?RklOM2FlMEFqUXhXMGpmQTVrUTVnU2F1OUxlUGlsM2FMbExUUi90MUFiV2VS?=
+ =?utf-8?B?VUl1UWJKWWZUa2RYU0twa1gyaGVvRzBFNzlnczFLN3NJdmdTNVVIYjVXZHA1?=
+ =?utf-8?B?aDMyN1ZKUm01ajFiSmJma2tZNmo4YlhTM21LWWttc0h1Q04rVHV1c1d1ckhN?=
+ =?utf-8?B?aS9va2lUc29jcnNZWUUyUDR1OTRpRG5INy96bUFKNy80NmxPVDF1VlVnMmpX?=
+ =?utf-8?B?bEVzenJnZzZvRlRWQkxNaVY3TlR4ZnlZYTZ5VGhFdDlpYjl0ektYUkEzckJB?=
+ =?utf-8?B?T0tJVzROUnZpZkNsWGIvNVg3QnJxOGluc3A0U0toU0lXSDY2QVZKSXNCU1ZI?=
+ =?utf-8?B?ejdBeU9Pek9WNzVBMnJVOW1YdkRXVVdSUWNkS0NxaUM5MmYrMDlFeElDMEpC?=
+ =?utf-8?B?aUluTkZ1Uk02aitwcjNIamdsUEZUdURJS2VmUmlyU0F6OVd2NlF4ZksrV21s?=
+ =?utf-8?B?RnBmclR3RlRVcUVzUnpRSGZUQ1VwRnhCZE5XVDl4aFVIRTlLU0Z3WHEzS1Nh?=
+ =?utf-8?B?UWRGcFBVcmFDRGN1SUI5akxFMTMvUHZVSGNHeTdKWFozYXZrWVpzM0M0UTZL?=
+ =?utf-8?B?b0N3dCtNc3dWdEdqTGVjNkFRVWR6TGNReURXRTVlZ0xRNG9pRUM2a2lWS0to?=
+ =?utf-8?B?VWFiSnZPdG9ENUJxYStjdkdhMFJ1TDROZkJ1M2d2ckhhK0EvVy9mZ3dXdTg4?=
+ =?utf-8?B?QXJpTncwTVZZV0xOK29sSHcvMWc2cGY0MFV4Z05OZjZzdTh1c0xCWjA2UEIr?=
+ =?utf-8?B?b1I1MSsvV2p3YmE5dXE0NUgwQzRGUDM1SEJ1ek96OHFXZ25wMS9ta1haZ1V0?=
+ =?utf-8?Q?21IN9JWcD/7PRZMy/VQftQ643wagaXeXsli/v?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: b8ff69c8-77c7-4f5e-c0ce-08de9f8fd516
+X-MS-Exchange-CrossTenant-Network-Message-Id: ef9890c4-6e71-4ff4-6ed3-08de9f961651
 X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 10:22:03.8841 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 11:06:50.2696 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 5bUpVU9tLsLiIt9l2fIy/lhTbNXDB2csqbUcRWpmFrrdfHPXEslJh/UIUNIb7+2PacIBlf/vnQa4AiXk0F3bB60BdOm/+XF6IwwpmLk/pZY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: FRWPR04MB11222
+X-MS-Exchange-CrossTenant-UserPrincipalName: D56BCWJveLHSI85YpPGx8pXC7YRyhrWgieErAh7v5/GONNWOrOooo+/HXNCPIZJTPCuIfS2/S0XfQWKJ7dCR1RPO80T6vVX8Gk6PbzymH1M=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB12289
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,63 +148,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
-
-On 4/21/26 12:16 PM, Francesco Dolcini via lists.openembedded.org wrote:
-> [You don't often get email from francesco=dolcini.it@lists.openembedded.org. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+On 4/20/26 9:51 PM, Simon Glass wrote:
+> Hi Quentin,
 > 
-> On Tue, Apr 21, 2026 at 11:07:21AM +0100, Paul Barker wrote:
->> On Mon, 2026-04-20 at 10:50 +0200, Francesco Dolcini wrote:
->>> + Paul Barker
->>>
->>> Hello all,
->>>
->>> On Mon, Apr 20, 2026 at 10:14:46AM +0200, Wojciech Dubowik wrote:
->>>> On Thu, Apr 16, 2026 at 05:51:13PM +0200, Franz Schnyder wrote:
->>>>> On Thu, Apr 09, 2026 at 09:47:07AM +0200, Wojciech Dubowik wrote:
->>>>>> Some distros are using gnutls library without pkcs11 support
->>>>>> and linking of mkeficapsule will fail. Add disable pkcs11
->>>>>> option with default set to no so distros can control this
->>>>>> feature with config option.
->>>>> Shouldn't it be the other way around? Use of pkcs11 should be disabled
->>>>> by default and enabled if required. As it is now, it would still depend
->>>>> on the the gnutls library having pkcs11 support and therefore still
->>>>> would break our OE builds with mainline u-boot if we don't change our
->>>>> modules defconfig.
->>>>
->>>> As far as I understand, gnutls is built by default with pkcs11 support. So for
->>>> most of the distribution it should be ok. Security by default.
->>>> I don't have yn strong opinion for this but default enabled has been suggested
->>>> by the maintainer.
->>>
->>> We are in the very unfortunate situation in which we are not able to run
->>> any test at the moment in our CI and automated test infrastructure (not
->>> in U-Boot, not in OE), and the reason is that we have pcks11 enabled in
->>> U-Boot, and OE core is not picking up the patch to enable it [1].
->>>
->>> Any advise to have a way forward?
->>>
->>> Francesco
->>>
->>> [1] https://lore.kernel.org/all/20260408130553.819420-1-fra.schnyder@gmail.com/
->>
->> Which versions of U-Boot and openembedded-core are you trying to build?
+> On 2026-04-20T11:36:06, Quentin Schulz <foss+uboot@0leil.net> wrote:
 > 
-> U-Boot master + openembedded-core master.
+>> This series introduces a new NET umbrella symbol with NET_LEGACY and NET_LWIP underneath.
+> 
+> Thanks for this cleanup!
+> 
+> Re SYS_RX_ETH_BUFFER, how about moving the extern for net_rx_packets[]
+> to net-legacy.h ? (is it used with lwip?)
 > 
 
-I'm assuming something along the lines of:
+That's not the only thing making use of SYS_RX_ETH_BUFFER.
 
-your-layer/recipes-support/gnutls/gnutls_3.8.12.bbappend
+- drivers/net/fsl_enetc.h uses it as value for ENETC_BD_CNT which is 
+used in drivers/net/fsl_enetc.c,
+- drivers/net/rtl8169.c uses it (if defined, otherwise defaults to 4) to 
+create a static buffer, see NUM_RX_DESC,
+- include/net-common.h sets PKTBUFSRX to it, this in turn is used in 
+*many* places, including many network (assumed Ethernet controller) 
+drivers, net/lwip/net-lwip.c, net/net-common.c (with net_rx_packets 
+array, used all over the place), net/net.c, and net/tcp.c.
 
-PACKAGECONFIG:append:class-native = " p11-kit"
+So seems to be used for both NET_LEGACY and NET_LWIP.
 
-until the patch gets picked up in OE-Core. Even if we fix this in 
-U-Boot, enabling pkcs11 support in U-Boot (a target recipe) would 
-require enabling pkcs11 support in gnutls-native according to the patch 
-sent by Franz to the OE ML. This kind of dependency is pretty bad as you 
-generally do not want to have to modify a native recipe for a specific 
-target machine or configuration. So, I think OE should take that patch.
+Simply guarding the "#include <net-common.h>" with 
+CONFIG_IS_ENABLED(NET) won't do as many files currently expect some 
+functions/macros/constants from that header to be defined.
+
+Another option is to ifdef PKTBUFSRX contant and net_rx_packets array in 
+include/net-common.h. But it's used in arch/sandbox/include/asm/eth.h 
+and drivers/dma/ti/k3-udma.c which aren't clearly dpeending on NET being 
+set. All defconfigs enabling CONFIG_TI_K3_NAVSS_UDMA do not modify the 
+default CONFIG_SYS_RX_ETH_BUFFER which is 4 (according to 
+./tools/qconfig.py -l -f CONFIG_TI_K3_NAVSS_UDMA 
+'~CONFIG_SYS_RX_ETH_BUFFER=4') so it should be fine for this driver not 
+to have PKTBUFSRX defined (as UDMA_RX_DESC_NUM will then default to 4). 
+According to ./tools/qconfig.py -l -f CONFIG_SANDBOX CONFIG_NO_NET, all 
+sandbox defconfigs have network enabled so maybe 
+arch/sandbox/include/asm/eth.h is not an issue either (or rather, for 
+later :) ).
+
+With
+
+diff --git a/include/net-common.h b/include/net-common.h
+index 69b6316c1ec..0c260873c2c 100644
+--- a/include/net-common.h
++++ b/include/net-common.h
+@@ -20,7 +20,9 @@
+   *	alignment in memory.
+   *
+   */
++#if CONFIG_IS_ENABLED(NET)
+  #define PKTBUFSRX	CONFIG_SYS_RX_ETH_BUFFER
++#endif
+  #define PKTALIGN	ARCH_DMA_MINALIGN
+
+  /* IPv4 addresses are always 32 bits in size */
+@@ -132,7 +134,9 @@ static inline void net_set_state(enum net_loop_state 
+state)
+  }
+
+  extern int		net_restart_wrap;	/* Tried all network devices */
++#if CONFIG_IS_ENABLED(NET)
+  extern uchar		*net_rx_packets[PKTBUFSRX]; /* Receive packets */
++#endif
+  extern const u8		net_bcast_ethaddr[ARP_HLEN];	/* Ethernet broadcast 
+address */
+  extern struct in_addr	net_ip;		/* Our    IP addr (0 = unknown) */
+  /* Indicates whether the pxe path prefix / config file was specified 
+in dhcp option */
+diff --git a/net/Kconfig b/net/Kconfig
+index e712a0dd2ac..deab340f26b 100644
+--- a/net/Kconfig
++++ b/net/Kconfig
+@@ -279,8 +279,6 @@ config TFTP_BLOCKSIZE
+  	  almost-MTU block sizes.
+  	  You can also activate CONFIG_IP_DEFRAG to set a larger block.
+
+-endif   # if NET
+-
+  config SYS_RX_ETH_BUFFER
+          int "Number of receive packet buffers"
+          default 4
+@@ -289,3 +287,6 @@ config SYS_RX_ETH_BUFFER
+            controllers it is recommended to set this value to 8 or even 
+higher,
+            since all buffers can be full shortly after enabling the 
+interface on
+            high Ethernet traffic.
++
++endif   # if NET
++
+
+
+And building sandbox_defconfig with CONFIG_NO_NET=y, the build finishes 
+without any issue. So maybe that's the way forward? I think this would 
+be better as a separate series though, what do you think?
 
 Cheers,
 Quentin
