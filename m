@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25ADEF8FA94
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 15:13:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87668F8FA90
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 15:13:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7E4B8433B;
-	Tue, 21 Apr 2026 17:12:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 212AF84359;
+	Tue, 21 Apr 2026 17:12:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="hS0NTvwS";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="RAq0CJFU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12DE383A91; Tue, 21 Apr 2026 15:59:36 +0200 (CEST)
+ id 8DDCA83A91; Tue, 21 Apr 2026 15:59:42 +0200 (CEST)
 Received: from DUZPR83CU001.outbound.protection.outlook.com
  (mail-northeuropeazlp170120005.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c200::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B683E83693
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:59:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 922AB83693
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:59:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HZ403Gm8V+jcEZXF0dx9mpuQsexqw7u2UbiKuaDqmPv8tEY5rpKmnWK5xIBj06WFH41aguQ127Yjob630LHg6UvjbWku1aEBBeOdPMSO/6gCs1tGFQBvF0Bak/YMWfFHmRlXGa8prrV90nWcx0FROBuLDB7ppO7nqLEdMoSjcrQK/RFHE5QfrgOpdQkgTKYqAKM1wkZcRr1csMpAN9UwXHHyXvmoN9PKAlA77JCura1NKWQoqmtdGMpBX91/OI3yvIRgv3VZcgd6H4hMFnl46KloGQWvtFNc7274qbZAL77Q9HZRxc//BuNs+Rn/DCuVma8KDLPbPNsOaNmPvdddqw==
+ b=dV4X+8aOHwsi3e5laUeM/JLvT1hJqrAnc46Skh13IX3Eawb8ZGSL/iITDnv6bc8IR35l835YvniWHvIGdkB1Rim3JP0mxXGVg93/TgKMetQccWvliyRr1yfJuQsrTj9E3otSmJmEASZcs4qfYIPcVNJ/B8C4njTXA73ou4Agj/qtUt2UX9PjrlPYYpAQqu76VkV7SsubRASSbo6whob7SgPanITuy/0a15jD6TzS5Lxs1CC+EkPHg52HU1Gesm2Ug4vx73frlJbkSTJprY1DLnEDXDANXBT33wChor2GR/6QtWFXrFRBnmW8a/UXXktwSam3HkP86KB343JkNBvfqg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=apbMoBHBSgDegwIhKezwhWjZfa/gJdtg5+yNt4bVgpo=;
- b=ysSFoAWyswYozDFS4MgIqq+ILd8bjAUlx+omn/jYn9cXB0jvKIF5v7kNvEDl1FggY4jUr0XQJgIOxNJkzf1zqesIowt1r6raugvlgl0I+Xu+5361uUrSGlzAkEf+lg/udw7sTwlkped5/4ku+H7f4uikmgldnJJV2LGW7eTM9ifL67jT11USQKdfBSe4pxkRA6Qqs6unJoPZx+YMCrLfRFhTkeeov/DWvp8jnz+SNCpLlApCziq3HbTclCAUQJyhISRD7opXNfjb5yEjgtzBr9D/YNq4SV2GF5rnqKW/TywSB19Nn7AaPpVyc1OFOEPHVLP1HVNB0mq6mJnk5vnU0A==
+ bh=IJkttQ9OcJ8Guh8DO5cwD3fs9qE0b5S8pYBF9EGQN0o=;
+ b=sbx8wvyfkvzrPgLAqoMRk8MkF11c1XFl2WBB3yFeUzr0SeAWOGwcm0OwYNLz44SIqn7/dQPFyw82qFInmDLumqB7Kb1YeDmihxbvnMDXxKNeH+EacicuuhF6/KQhZa+aOsqXCW+67z5UUBkfxDhbXQaN91d8jlwmsm/egcjAQEe60qrtz+rtq3i3k5MXW6r/K88cU/I7YS7uzIcGSNt1Fi74wiuzwGPnViGEbVd/8+9tAcjzgwCAsgyc1WKt03MGvS8Zlm8u9yYNnR3dHj8NTTM2kFrW6tzGZuWDZym7CdOSGzMZ/Ffa0NNdD+N7v71wniIyyK/xlLUY3mPb9GucdQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=apbMoBHBSgDegwIhKezwhWjZfa/gJdtg5+yNt4bVgpo=;
- b=hS0NTvwSCW7x74c3S3h5/Md261qyO82C4nugX8n5Pq49vZ8Fm4bhfS5g4OYY4vUIXZNGjYtyDBcU9PYlIjvHWGQFmq54eyZkQN03d06nBSJ8AVYDXS5denZiBCy6mxH/TABwe3wOst6jzzV6EhpQMuv3HimW3NCstsCSxO8oezi3h3vYiSK74qOm5OxI4P5K17uVcuzdxiXA723Vn3y6rmvIOTmyFRh0pfgqbjnvi8ph7SziSZ4UWyEAMOBmOs8ZYEe5gATFUkTkYDpawyzEpWFZIWpdpBJBmgDJ5qHtKBwitWcCPrj9fF1T0W/v0NAQJ0HeyCMolqEKJGdSg1Gznw==
+ bh=IJkttQ9OcJ8Guh8DO5cwD3fs9qE0b5S8pYBF9EGQN0o=;
+ b=RAq0CJFUT3VQwyCC+DQSTFpcFPyjtsXR2B9egs87pvd1CljRmueb6T15Z0fQerxaNz2L38i9/hC/4K+ctgmZ7C8JUVWwUBYWOX4hH5IpzazQ/eG3P3MIN9/VEI5Fe/9vu8PVNLrSbRcEFMLkPalrG5smCM1CKR/W6/49egh84FZUb0Uop+VklZ7f/W9kyNUaZDjtoeI8+KPDjS5lcqXJxEaT0MSX3If4RD98txZJTHrEC8N19GTnjenZhq3fZsDZddbE6+7kVf4DvEm0LkWFwFFR82I3MXPJQV4WwjYbrRmpOjXZDMN8L/kEVwinSS0RAlEYCOxgLI0EsKx+kkPrcw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
  by GV1PR04MB10426.eurprd04.prod.outlook.com (2603:10a6:150:1cc::21)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.33; Tue, 21 Apr
- 2026 13:59:27 +0000
+ 2026 13:59:36 +0000
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::cf3:c5b0:7a0c:d11b]) by PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::cf3:c5b0:7a0c:d11b%5]) with mapi id 15.20.9818.031; Tue, 21 Apr 2026
- 13:59:27 +0000
+ 13:59:36 +0000
 From: alice.guo@oss.nxp.com
-Date: Tue, 21 Apr 2026 22:01:28 +0800
-Subject: [PATCH v2 2/5] arm: dts: imx: Update watchdog nodes for dynamic
- base address lookup
+Date: Tue, 21 Apr 2026 22:01:29 +0800
+Subject: [PATCH v2 3/5] watchdog: ulp_wdog: Use driver model for
+ reset_cpu()
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260421-wdt-v1-2-0bd01ec6a7c4@nxp.com>
+Message-Id: <20260421-wdt-v1-3-0bd01ec6a7c4@nxp.com>
 References: <20260421-wdt-v1-0-0bd01ec6a7c4@nxp.com>
 In-Reply-To: <20260421-wdt-v1-0-0bd01ec6a7c4@nxp.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
@@ -94,67 +94,67 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|GV1PR04MB10426:EE_
-X-MS-Office365-Filtering-Correlation-Id: e0025c02-ce3f-4cc6-c58d-08de9fae33aa
+X-MS-Office365-Filtering-Correlation-Id: 066f7344-3edf-49ac-1eed-08de9fae3915
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|19092799006|366016|7416014|52116014|376014|38350700014|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: vExTYC/GSft8T4AsmrMJIne9vMItCntS5vU4no+AH548XLHR6lFc5+FZMSmHdnoOOrhLcDOP2+4dwQnIdOPOkZyHT4IuIvr4veOWuWyFknM7aLeL3XgqbBb16yNIhbemmfUMHFZyflgz5QXkfQJGAFjQKctHcXsLv9FThfD/hplLgC7I7PEzcvSRqIr/50NwoLrbAZ8KPC4Z4ykQuPAuqJZhNoAIwFUnaWUyLZ5CYRnOZyUImo/3a2zvawbF93oV6VOyVvgZatSqJe2eDPR7WntOI8iTy0h8io2X4DA7pihSBK3mQdKumbryViTQDPkqE50L8zaMmfXkiEsUMrKLNohFVt2dkOum2nPDwG0/LCLAyMd7Mf3wjAk4LcMC0o9LytU+q1/sh0miMyk1bK4H4BDyc6DZIkUVdSD4MXxrHPiL47ybQGeWtR92CRdzw6/SFwlafYZbg4P9veHLEbTZSwH6zHnRiI+pMTHZ5l6WXUlCe120yrHJXgD7+uI6aTofHkIMMNlKSX/xP50sfocbWkOwjLUCyFw8kiuQTkD3g40lFZg84VFbSJsPryiRfP8sbbrsGHmUehsCQtJjsimZtuncKKBbWiCOKY6SPbvI5nTe4uouids98H6+D3/dn41nPMj3apP5a0EG9FtvCbXPJN8hwtWhOB7hhMx2AP5Tq6z5FFPUZMRFr5F7mzDaCCMNfeeTBr5k2KgQAAAXaqa5LxWSK6CJQ+I6Tfbv9/EImhjU6ZjSewJrlJ7/1cFOrwRpVZiqlUgr+0NfVWPTG++EooZnQrMbUGGEgtiZAniylRs=
+X-Microsoft-Antispam-Message-Info: b7mdmanYJoZ3bLClIFrNCgn1v3aVfY4CdgXsQdYeRqSNO6i+6bqUmgXTkhnRkZJuhkOLrtAUirqb6ZcqJFt7xMO7DQ+f4q5cA5nmyyl1JHbvgrtWXZiROABMfgPkkshu4RGUPwpHAtGw6ZdwYmQtXT8qORa3VqANCsA6RLdlJbChu0X5AWtS9n9eoZThsti1pUiCyMj2EkVFxxX7aCYCpV6DXmSr4hOcKtFcrGfWUXe4gVY0CDLlTKK41R9xNEt4EMZ6QEOSD1votq+QBved+aKrx+PsrY3KJsqh8k5tAPI6caQYY25ecpKnJPX7YnLuTaCAVC0PPyWCTkDImw2Un5f44NtpSNwb2KyXan5YfBMyHzb2E13DuugQjuhySO/E+sM5C2q7DrqeaeksDtmuC9GZTYwvISeuMBoJ49kepJzPFmRlYkPFAvm5TJ8xtM57leQRoKaiKwyknW+yEbDAiOGSvlvs3SFv4Ezdq8Sx9p128PnIsweP/n62JuD5HlZwR+mM0OEYt9uncuPxpYN6NBpx//rodAJuNw8HFLRWmZIvYqo0ONGH0IwSQA0unBl1Mc2CpC/fXowdDmcml3jEsyUMQL+struS8gwDqxWDwL5dVIxor0UZD+3fYJ64Iy9QZhncZkm74PK3sr5nrRjltjANyrdaI6n1jel17P4U/BB+89ZwcDRlXvwT1uC8ZEbmIlv0H1IhOghYPaaTH2Qr8onwNov2ZSb6HqyPUUKRs270sYo+4+LSaKPSQ/tLerkm0bBrS8pTSrC4YCxYNorT5MkD7SKjrJPTgTC0XbNp1TU=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(19092799006)(366016)(7416014)(52116014)(376014)(38350700014)(18002099003)(22082099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UldQc0JSQUNmTzd2U1VURExhTitqdmN5aHlyN054bnZNS29GU3ZzUm5mSGQr?=
- =?utf-8?B?OVVCYmh2dmxWVStpSW9wNURsaSs1emFIWU9rYUdhZGpsUVdDSVpWcGhVcHlG?=
- =?utf-8?B?REdsZC9hMDB0OXh0WUtoYmpUZW05OW94ZW5XVHZsckFJR2pnamhsQzFwd3Ju?=
- =?utf-8?B?a3dDQlVlaGVsU2syWDNSV1JkdmtveSsvZFpmR21VZG05OWdwOFNxSk42d0JC?=
- =?utf-8?B?UWNoN2xtaVpsYlVHbzZsVytleGJpRVdhdU9pRlduVnIyZHVlSG5xT1JlZUx4?=
- =?utf-8?B?OWFydmFBb01MUCtRcXJqTE8xdk41d296czJFKzNGYzRjWnZvMElETUtQZkh5?=
- =?utf-8?B?cldzT3hsSVRGUmJLMVIwWWZJbFh5WnorNGhBU0lkTnltcUdhbUVDR0poR1Yv?=
- =?utf-8?B?UG1MUFIvbzdNVWNUTVZFR0dRVDJ1bGx2c3pTUnoyeFBURlEvTlQySXpKQU9K?=
- =?utf-8?B?VmNSdHo0UzUwMzJ3LzJJUmNPWFFWS0xwZTZtSW9WTUpaeSs0TDZuUkd3VHhI?=
- =?utf-8?B?dU5scE9lWGdVdHluODJyOGRzTVczU0plSmZJMmlvWU5sK0RraHkwVSszYXVm?=
- =?utf-8?B?d3BWQXh6QmI4dU1yM2RNME1QUFZ0b2E3Ukg2Q3hKbDBINlFveUg2UGtWZnkr?=
- =?utf-8?B?VTBqelhCbklEWU9MbmdSRFlGYXJTR2pKM0VEVXU3enU1bFdIZFEzY1RQR1E2?=
- =?utf-8?B?RHJQRjJaa0k0ZUZlajhGQ0QxMEZTSUkwUW9YZlNVMit2WHBaQ0NoQjZtUCtv?=
- =?utf-8?B?VEpNQmwrdHdGQ09EaU54d2VqdDhhVFRvMk5XMXJzam9zb0l6bDE4R0RwTmlB?=
- =?utf-8?B?Tmo0QmxxNFRDRUhuMTZvRTVXNUEzRTIreW41c3BKRTZ3L3grU2czS3NtN2Zu?=
- =?utf-8?B?U2lSR1BobGVaWUVXMStrYkUyOUw0bk5LdXhuaWU1Y2VFQUlSc2VKSi9BL2hs?=
- =?utf-8?B?RTJqN09XaXUyWWZYejlSV2ZRdUhrOHhvbFR2Q292N2lLMmVxaTY4NGtlUWEx?=
- =?utf-8?B?Q1VhdTlyNkw1bytZYlUvVWEzSUIvLzhYYzZyeVlpcFZJaExPbXlTQzhKckRX?=
- =?utf-8?B?WkY4alVxV0h5WFg4LzB6bmZYTzRPTUFmK1psTktsc0E3NmhpdVJzTG1sTWhz?=
- =?utf-8?B?aEtQZGFhYnJoMU1zNmxuTjlDVjhZZURndTJFZFQ0MnAwbTUyeSsyekQ5bnlT?=
- =?utf-8?B?RlJnRnZuQk5kYjE3RDhVZFc1dzBoR29heFlHK2tUcksvSU5NdE1FbFVsc1BG?=
- =?utf-8?B?MXF4OXZ1eXpzSm9ZaHVubnVrRUZqNUJRRDI5UHZUQWsyQ0JDaE9ienlpbktF?=
- =?utf-8?B?VkV5WWxEOTZxcjNtdVhoenlKWThtcDI0aUhqWUtrWno5ZHZEaUYxSTFleno5?=
- =?utf-8?B?K3lhblFrTlkzUXJNTmNFSjVqcmpucndhK3lxNHk1WXo3QWhJOE9rVlRDMG1Q?=
- =?utf-8?B?Q0RpOWhLTStzWklOWFN3WFN6enBRb3VubFV6SVZZMFRjUTdUOTgyNENrc0Ju?=
- =?utf-8?B?bVJSOW41WGtrNE1RRWc5bGRLeTZja0lHMFRZcXNINUlzSzNnWDF3YkVDcG45?=
- =?utf-8?B?WXZMNEFXVHMrSlpDMlI3MFM3UlhzMkFpcUwrTml4UzZJYWhXZXBhblBvOFFj?=
- =?utf-8?B?ODNTMkw0NnJ5SE5BdjFSMVdRY3Y0ODV5NjBiZ2FyUTVZL1FBSEMvaTkvM3I5?=
- =?utf-8?B?d2NxM3VsenVmTjUyZGpLQ1B6dDhobTZ4TTZJMDUzUFlqYUl2UGdMbzZPWHUv?=
- =?utf-8?B?VUZPNytkdHEyWGlCQXZjTjIzUkVkc0cweWMrMld4NThIbjBBK1EySkNFMFBR?=
- =?utf-8?B?cFNqWXozVmpCWk5ScC9LTlU1eFcycnNmTm1WRVZpV0ZOdUU3dlBYcGtZR1pC?=
- =?utf-8?B?VmhyeWcyQm53aXliNjNKMURuSTl6R3RkWkJLaWd6aVNSa2ZxY0gwZ25xUEEy?=
- =?utf-8?B?aExpTDFkanRTZzJxZU5kUnpvMWFqcThmcjdqdGUxc2JtY1Y0S3EwcW00ZDU2?=
- =?utf-8?B?U1ZTNjZCMVByZ3FtcHM5V05WUkZVMEpUV09UY1ZGQ3dpa3d0WXhPL0FhbHdI?=
- =?utf-8?B?SStRYTUvN3NLZHdZSHRZSEJNdjVaMHhrSDVMallPdzczOW5Zd0pqNU5QRGRn?=
- =?utf-8?B?eXZFVmxZeDF4WVcxZFgwb1JZR2FzbFhibGFHL1VDQ290emZBamZPTlh2YUJh?=
- =?utf-8?B?bC9lRW5wdW0yc29SWFFOMlQwMXVLQU5uaFVHNEY0YVZGMmNUcjlMNjhmS2N0?=
- =?utf-8?B?V3ZqS3F1Y0VzaUl6Slo5cXV3ajNEaEgzQ3BLSmIvUmlCWlZwQ0JoZERsNktx?=
- =?utf-8?B?RE5ZZmpsT1lYUXN2T3VkWVk2V24vMnJ4NjBwTFhOVEZLU0F0RWlzUT09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?d2xRMFBicDllbUF4d1R3aWsyZGRodUoyVy96VDdPYytSVXJiYmFPY2RCNFVJ?=
+ =?utf-8?B?TjdsUGMvQ3ZjYXp3djdlQTVmWU4rU2UrVittV0lZNUdrOFZ6RUdqMEUwdzVi?=
+ =?utf-8?B?N2Q0cDBieVRyQ2RwWnRoRWJOVmE3Y1pmUjF0YjJpOU1WQTQwUUlCd1B5WEtw?=
+ =?utf-8?B?VE51TUg1S2JSNkQ3UzIreW5QZUN3UHBwY0ZLc1NwVTFHQ1dmZzlTeHRFU0Vv?=
+ =?utf-8?B?bFlKSE1aWmp4NkVIc1diSXdZTjdqd2pCZUpRN1V3VUdQMEZ0ZitjZkl6K0pS?=
+ =?utf-8?B?ZEJVVDFZRTJFVDZQSHRWR24yd0FOZ1hManpXaEo4V01MVE9RZUErRklFMUFw?=
+ =?utf-8?B?d0lYRjI5cERiZElRdStCUStWbE9lQU1wemZZOXkxQ2hCZmJ6cDdOdGdpdFZB?=
+ =?utf-8?B?T1h2YmN5Tjd5UUMvTUxQR1NSWVB4aDZCcHhCMFRhWUdsUmlvSmcyRGRMWnFk?=
+ =?utf-8?B?bFdjOWFwVDBJYlR2M3d0N2Ixd3lldktJYTFPOHpxek96Z3FCL1hnR1BtbDRz?=
+ =?utf-8?B?Tis1U3NnbU0zenlxVXRxckRTajVpRHVrVUJNaUVwbDY2Y2lPNDI2UDVleTJt?=
+ =?utf-8?B?eVNFSzBEd3BRRzVuYUoyWmwrTnBPa203dWpna04xYTVVMEh3N0R5RkFGSVk5?=
+ =?utf-8?B?by9hRmFZcjE1SGYrSDZEMHJVZEdsTGpaVFlaVVd6MXlCN3RkUzFjajAzMkdC?=
+ =?utf-8?B?WitxL2pSbUVCYnBJQjlkRTFrZXI1VVkwaEtLblBTdi9DZlhSRFk4bFdyU3Nl?=
+ =?utf-8?B?R3l0QnVPeGtpYlBXVGV3MHhURjE4TEN5YWdsRGJGWG0vd0UrTWlLcGxOYWFX?=
+ =?utf-8?B?Y3BQV1BHMDdhS2FpL2h0UW5hSmpIaTdUSGtBVXgxOWMwN2MwOXpTMmUxUlJP?=
+ =?utf-8?B?RFFES2lmczBac3FKaDZmSzhGbVY5M1V2d1E5KyszZVZneXdMNzQycG1uRVdI?=
+ =?utf-8?B?MGRjRDBCNTNWNmZUeWs0VWlxdFpTenZLazJCZ2FvTmt1cmMwNVBsRFJNTS9q?=
+ =?utf-8?B?S21zaC9vcU5OcUc1Y055LzlYM3lKbEI1V090bC9LUGdFaTBNd09KOVBRSGh2?=
+ =?utf-8?B?eFlUTkJXdnRzRjRFUkRNQ01FS1dUMG9QSG02TndMOVhyZ3c1dGc4cjdoQVp0?=
+ =?utf-8?B?b0cwdWFvTktzSDFJMEFMQ2c0UmRNdXBQRDRaRTN0eXVHOHVFYlJUeCs4VW1k?=
+ =?utf-8?B?UWNhNjV0eUQwL3NpanZtcVRLd3g0YnU5bGpUYWFIQ1JLbDBJaFpWSUgzWEtT?=
+ =?utf-8?B?Sm15c3NpbU15MzRQd3FsN0FCdm1TbmFrVkdsWmNIMlo1MzYrVTExWVV2UGNm?=
+ =?utf-8?B?ZEtmNDYzeSticUJkMkgvYU5WTFcwaEFRTDFmbFVVZ2lVVU41bHFtUnFlUUVv?=
+ =?utf-8?B?Qy9DUGhvazV3aTRscEhRUE83cFRxcnpEN1RJcmRaWXhnVEZmYkVoTnBsSUtN?=
+ =?utf-8?B?bDV4VWs3dndRVE5ZUmtxN2dORFRuZlYzdFBsR21QWWRyaTF3ODZPSWlzenVk?=
+ =?utf-8?B?d09lQURrTTZJTHJ4ZllLWlM4THJmSmROWkhmd1JMVTcweXNsYWg0dUUyeHZx?=
+ =?utf-8?B?SlVMRWV0aFhUWTlQcFgwdFhGc3NiWExzd2VjNmFXQUp2RndZdC8waUM5SlpW?=
+ =?utf-8?B?NU1IZXA3b1RYdWxyUnFtSFRUWGt4U0FabEVtZTZBV0pOT0dESHBBMS92bVNl?=
+ =?utf-8?B?TVpmNytzU2N0RjNPK0dKUDhVK2Z6dmlCOGZMWTNNMmszc2RaaGJVOElxbDB0?=
+ =?utf-8?B?QUVaZlphZktoWG5yVEQwSnlVL1VXV1Q4SDhwWjBSREdCVVNUazJ4elNpVjl4?=
+ =?utf-8?B?cDJMUzJzVXloYlFMRDdLNGtTZ1h3Ym96VkhTMnF3aDM3VGQwT0dMNVdXZHFG?=
+ =?utf-8?B?SWs4cVRlS05oQXFTaUMzQ0tiTy9iTjRpUkpHWWN1bmE0ekRsMGxhMks3WnVx?=
+ =?utf-8?B?VndncElOSlpTbmwwakJ0QzBsYUovcVlvU0JPcnpSMUhqMXFKUVFqeGhmZTNC?=
+ =?utf-8?B?UGVpeTR1MnpQOStHT1NDM25OK3czelQvSzl4RWFKRjcrc1NUWGZoblhUMys2?=
+ =?utf-8?B?RExyY0lHdDdmdmhlM0FyNlU2N3RMOUdOMFJxbkNBd2dPSnNnclFXcWQrV056?=
+ =?utf-8?B?R2JCWnprM2l4VmVtNmo1RFcvYzliSC9Hekl4S3FkNElQemc4dWQ3V2FRLzVB?=
+ =?utf-8?B?Z2t3NjNLSWdwVnJyMHNqVm1DaXN2NGdldlNnd1l6NVp5NnYweEFDY0xSWE9N?=
+ =?utf-8?B?NDR3UlhHT25zblU5NHFEMG83ZGx5dmdRZFNKSFlWRWJROEtsTTV6SjJpVkg2?=
+ =?utf-8?B?OHFJM0p4ek4wUHo1d1FicUNvSHlZN2xNeTJpc0pTditiMHI1c1BrZz09?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e0025c02-ce3f-4cc6-c58d-08de9fae33aa
+X-MS-Exchange-CrossTenant-Network-Message-Id: 066f7344-3edf-49ac-1eed-08de9fae3915
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 13:59:27.4588 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 13:59:36.5394 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: THjtRBTFZpC6U5Ui6x7r73z9owEtpUvtWfe8z8bQQ+wvruDcA95ZP+fbWi/5VHYfRyHAvSjC6ueNKMUXCc4ImA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: fYM99yZwIc8N7m/oQkhVon0KJ8nwQztMK+STptexY401Kssuslm9ROszL5oQMAZAlDOczuuYxPe3yb5rcESDwg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB10426
 X-Mailman-Approved-At: Tue, 21 Apr 2026 17:12:16 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -175,223 +175,150 @@ X-Virus-Status: Clean
 
 From: Alice Guo <alice.guo@nxp.com>
 
-Update watchdog device tree nodes to enable dynamic base address
-retrieval for i.MX7ULP, i.MX8ULP, i.MX91, i.MX93, i.MX943, i.MX95 and
-i.MX952. This allows the bootloader to obtain watchdog base addresses
-from the device tree instead of using hardcoded values.
+Replace hardcoded WDOG_BASE_ADDR with driver model based dynamic address
+lookup from device tree.
 
-- imx7ulp: Add wdog2 node
-- imx8ulp: Mark wdog3 available
-- imx91/imx93: Add wdog4 and wdog5 nodes
-	       Mark wdog3/wdog4/wdog5 available
-- imx943: Add wdog4 node and mark wdog3/wdog4 available
-- imx95/imx952: Add wdog4 node and mark wdog3/wdog4 available
-
-Watchdog nodes are marked with "bootph-all" to ensure availability
-during early boot stages when init_wdog() occurs.
+- Remove hardcoded WDOG_BASE_ADDR from hw_watchdog_* functions
+- Reimplement reset_cpu() using UCLASS_WDT device iteration
+- Add ulp_wdt_expire_now() callback for standard WDT interface
+- Pass wdog register pointer to hw_watchdog_set_timeout()
 
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
 ---
- arch/arm/dts/imx7ulp.dtsi        |  6 ++++++
- arch/arm/dts/imx8ulp-u-boot.dtsi |  4 ++++
- arch/arm/dts/imx91-u-boot.dtsi   | 12 ++++++++++++
- arch/arm/dts/imx93-u-boot.dtsi   | 12 ++++++++++++
- arch/arm/dts/imx93.dtsi          | 18 ++++++++++++++++++
- arch/arm/dts/imx943-u-boot.dtsi  | 16 ++++++++++++++++
- arch/arm/dts/imx95-u-boot.dtsi   | 14 ++++++++++++++
- arch/arm/dts/imx952-u-boot.dtsi  | 14 ++++++++++++++
- 8 files changed, 96 insertions(+)
+ drivers/watchdog/ulp_wdog.c | 79 ++++++++++++++++-----------------------------
+ 1 file changed, 28 insertions(+), 51 deletions(-)
 
-diff --git a/arch/arm/dts/imx7ulp.dtsi b/arch/arm/dts/imx7ulp.dtsi
-index bcec98b9641..45a69f06e20 100644
---- a/arch/arm/dts/imx7ulp.dtsi
-+++ b/arch/arm/dts/imx7ulp.dtsi
-@@ -295,6 +295,12 @@
- 			clock-names = "divcore", "hsrun_divcore";
- 		};
+diff --git a/drivers/watchdog/ulp_wdog.c b/drivers/watchdog/ulp_wdog.c
+index 83f19dc0e86..e3a89031c44 100644
+--- a/drivers/watchdog/ulp_wdog.c
++++ b/drivers/watchdog/ulp_wdog.c
+@@ -7,6 +7,7 @@
+ #include <asm/io.h>
+ #include <asm/arch/imx-regs.h>
+ #include <dm.h>
++#include <linux/delay.h>
+ #include <wdt.h>
  
-+		wdog2: watchdog@40430000 {
-+			compatible = "fsl,imx7ulp-wdt";
-+			reg = <0x40430000 0x10000>;
-+			timeout-sec = <40>;
-+		};
-+
- 		pcc3: clock-controller@40b30000 {
- 			compatible = "fsl,imx7ulp-pcc3";
- 			reg = <0x40b30000 0x10000>;
-diff --git a/arch/arm/dts/imx8ulp-u-boot.dtsi b/arch/arm/dts/imx8ulp-u-boot.dtsi
-index 30baaeff8ef..54ecbcf1795 100644
---- a/arch/arm/dts/imx8ulp-u-boot.dtsi
-+++ b/arch/arm/dts/imx8ulp-u-boot.dtsi
-@@ -61,3 +61,7 @@
- 	};
- };
+ /*
+@@ -51,11 +52,9 @@ struct ulp_wdt_priv {
+ #define CLK_RATE_1KHZ			1000
+ #define CLK_RATE_32KHZ			125
+ 
+-void hw_watchdog_set_timeout(u16 val)
++void hw_watchdog_set_timeout(struct wdog_regs *wdog, u16 val)
+ {
+ 	/* setting timeout value */
+-	struct wdog_regs *wdog = (struct wdog_regs *)WDOG_BASE_ADDR;
+-
+ 	writel(val, &wdog->toval);
+ }
+ 
+@@ -89,7 +88,7 @@ void ulp_watchdog_init(struct wdog_regs *wdog, u16 timeout)
+ 	while (!(readl(&wdog->cs) & WDGCS_ULK))
+ 		;
+ 
+-	hw_watchdog_set_timeout(timeout);
++	hw_watchdog_set_timeout(wdog, timeout);
+ 	writel(0, &wdog->win);
+ 
+ 	/* setting 1-kHz clock source, enable counter running, and clear interrupt */
+@@ -107,57 +106,20 @@ void ulp_watchdog_init(struct wdog_regs *wdog, u16 timeout)
+ 	ulp_watchdog_reset(wdog);
+ }
+ 
+-void hw_watchdog_reset(void)
+-{
+-	struct wdog_regs *wdog = (struct wdog_regs *)WDOG_BASE_ADDR;
+-
+-	ulp_watchdog_reset(wdog);
+-}
+-
+-void hw_watchdog_init(void)
+-{
+-	struct wdog_regs *wdog = (struct wdog_regs *)WDOG_BASE_ADDR;
+-
+-	ulp_watchdog_init(wdog, CONFIG_WATCHDOG_TIMEOUT_MSECS);
+-}
+-
+-#if !CONFIG_IS_ENABLED(SYSRESET)
++#if !CONFIG_IS_ENABLED(SYSRESET) && CONFIG_IS_ENABLED(WDT)
+ void reset_cpu(void)
+ {
+-	struct wdog_regs *wdog = (struct wdog_regs *)WDOG_BASE_ADDR;
+-	u32 cmd32 = 0;
+-
+-	if (readl(&wdog->cs) & WDGCS_CMD32EN) {
+-		writel(UNLOCK_WORD, &wdog->cnt);
+-		cmd32 = WDGCS_CMD32EN;
+-	} else {
+-		dmb();
+-		__raw_writel(UNLOCK_WORD0, &wdog->cnt);
+-		__raw_writel(UNLOCK_WORD1, &wdog->cnt);
+-		dmb();
+-	}
++	struct udevice *wdt;
+ 
+-	/* Wait WDOG Unlock */
+-	while (!(readl(&wdog->cs) & WDGCS_ULK))
+-		;
++	for (uclass_first_device(UCLASS_WDT, &wdt);
++	     wdt;
++	     uclass_next_device(&wdt)) {
++		if (!dev_read_enabled(wdt))
++			continue;
+ 
+-	hw_watchdog_set_timeout(5); /* 5ms timeout for general; 40ms timeout for imx93 */
+-	writel(0, &wdog->win);
+-
+-	/* enable counter running */
+-	if (IS_ENABLED(CONFIG_ARCH_IMX9))
+-		writel((cmd32 | WDGCS_WDGE | (WDG_LPO_CLK << 8) | WDOG_CS_PRES |
+-		       WDGCS_INT), &wdog->cs);
+-	else
+-		writel((cmd32 | WDGCS_WDGE | (WDG_LPO_CLK << 8)), &wdog->cs);
+-
+-	/* Wait WDOG reconfiguration */
+-	while (!(readl(&wdog->cs) & WDGCS_RCS))
+-		;
+-
+-	hw_watchdog_reset();
+-
+-	while (1);
++		wdt_expire_now(wdt, 0);
++		break;
++	}
+ }
  #endif
-+
-+&wdog3 {
-+	bootph-all;
-+};
-diff --git a/arch/arm/dts/imx91-u-boot.dtsi b/arch/arm/dts/imx91-u-boot.dtsi
-index 5b639c965d6..149f7bc685a 100644
---- a/arch/arm/dts/imx91-u-boot.dtsi
-+++ b/arch/arm/dts/imx91-u-boot.dtsi
-@@ -90,3 +90,15 @@
- 		};
- 	};
- };
-+
-+&wdog3 {
-+	bootph-all;
-+};
-+
-+&wdog4 {
-+	bootph-all;
-+};
-+
-+&wdog5 {
-+	bootph-all;
-+};
-diff --git a/arch/arm/dts/imx93-u-boot.dtsi b/arch/arm/dts/imx93-u-boot.dtsi
-index dc86746ac90..a84cdf2bc45 100644
---- a/arch/arm/dts/imx93-u-boot.dtsi
-+++ b/arch/arm/dts/imx93-u-boot.dtsi
-@@ -96,3 +96,15 @@
- 			       0x000001b2 0x800001b6>;
- 	#thermal-sensor-cells = <1>;
- };
-+
-+&wdog3 {
-+	bootph-all;
-+};
-+
-+&wdog4 {
-+	bootph-all;
-+};
-+
-+&wdog5 {
-+	bootph-all;
-+};
-diff --git a/arch/arm/dts/imx93.dtsi b/arch/arm/dts/imx93.dtsi
-index d6964714ea0..511e9594e37 100644
---- a/arch/arm/dts/imx93.dtsi
-+++ b/arch/arm/dts/imx93.dtsi
-@@ -414,6 +414,24 @@
- 				timeout-sec = <40>;
- 			};
  
-+			wdog4: watchdog@424a0000 {
-+				compatible = "fsl,imx93-wdt";
-+				reg = <0x424a0000 0x10000>;
-+				interrupts = <GIC_SPI 80 IRQ_TYPE_LEVEL_HIGH>;
-+				clocks = <&clk IMX93_CLK_WDOG4_GATE>;
-+				timeout-sec = <40>;
-+				status = "disabled";
-+			};
+@@ -184,6 +146,20 @@ static int ulp_wdt_reset(struct udevice *dev)
+ 	return 0;
+ }
+ 
++static int ulp_wdt_expire_now(struct udevice *dev, ulong flags)
++{
++	int ret;
 +
-+			wdog5: watchdog@424b0000 {
-+				compatible = "fsl,imx93-wdt";
-+				reg = <0x424b0000 0x10000>;
-+				interrupts = <GIC_SPI 81 IRQ_TYPE_LEVEL_HIGH>;
-+				clocks = <&clk IMX93_CLK_WDOG5_GATE>;
-+				timeout-sec = <40>;
-+				status = "disabled";
-+			};
++	/* 5ms timeout for all others; 40ms timeout for "fsl,imx93-wdt" */
++	ret = ulp_wdt_start(dev, 5, flags);
++	if (ret)
++		return ret;
 +
- 			tpm3: pwm@424e0000 {
- 				compatible = "fsl,imx7ulp-pwm";
- 				reg = <0x424e0000 0x1000>;
-diff --git a/arch/arm/dts/imx943-u-boot.dtsi b/arch/arm/dts/imx943-u-boot.dtsi
-index 3457442a3b0..fca0f10c865 100644
---- a/arch/arm/dts/imx943-u-boot.dtsi
-+++ b/arch/arm/dts/imx943-u-boot.dtsi
-@@ -159,6 +159,18 @@
- 	};
++	mdelay(50);
++
++	return 0;
++}
++
+ static int ulp_wdt_probe(struct udevice *dev)
+ {
+ 	struct ulp_wdt_priv *priv = dev_get_priv(dev);
+@@ -202,6 +178,7 @@ static int ulp_wdt_probe(struct udevice *dev)
+ static const struct wdt_ops ulp_wdt_ops = {
+ 	.start = ulp_wdt_start,
+ 	.reset = ulp_wdt_reset,
++	.expire_now = ulp_wdt_expire_now,
  };
  
-+&aips4 {
-+	bootph-all;
-+
-+	wdog4: watchdog@49230000 {
-+		bootph-all;
-+
-+		compatible = "fsl,imx94-wdt", "fsl,imx93-wdt";
-+		reg = <0x49230000 0x10000>;
-+		status = "disabled";
-+	};
-+};
-+
- &clk_ext1 {
- 	bootph-all;
- };
-@@ -460,3 +472,7 @@
- &sram0 {
- 	bootph-all;
- };
-+
-+&wdog3 {
-+	bootph-all;
-+};
-diff --git a/arch/arm/dts/imx95-u-boot.dtsi b/arch/arm/dts/imx95-u-boot.dtsi
-index 6dec159752b..2fdb7e331b6 100644
---- a/arch/arm/dts/imx95-u-boot.dtsi
-+++ b/arch/arm/dts/imx95-u-boot.dtsi
-@@ -138,6 +138,16 @@
- 
- &aips2 {
- 	bootph-all;
-+
-+	wdog4: watchdog@424a0000 {
-+		bootph-all;
-+
-+		compatible = "fsl,imx93-wdt";
-+		reg = <0x424a0000 0x10000>;
-+		clocks = <&scmi_clk IMX95_CLK_BUSWAKEUP>;
-+		timeout-sec = <40>;
-+		status = "disabled";
-+	};
- };
- 
- &aips3 {
-@@ -238,3 +248,7 @@
- &scmi_buf1 {
- 	bootph-all;
- };
-+
-+&wdog3 {
-+	bootph-all;
-+};
-diff --git a/arch/arm/dts/imx952-u-boot.dtsi b/arch/arm/dts/imx952-u-boot.dtsi
-index e977014992e..082dab75a18 100644
---- a/arch/arm/dts/imx952-u-boot.dtsi
-+++ b/arch/arm/dts/imx952-u-boot.dtsi
-@@ -115,6 +115,16 @@
- 
- &aips2 {
- 	bootph-all;
-+
-+	wdog4: watchdog@420c0000 {
-+		bootph-all;
-+
-+		compatible = "fsl,imx93-wdt";
-+		reg = <0x420c0000 0x10000>;
-+		clocks = <&scmi_clk IMX952_CLK_BUSWAKEUP>;
-+		timeout-sec = <40>;
-+		status = "disabled";
-+	};
- };
- 
- &aips3 {
-@@ -237,6 +247,10 @@
- 	bootph-pre-ram;
- };
- 
-+&wdog3 {
-+	bootph-all;
-+};
-+
- &scmi_iomuxc {
- 	pinctrl-names = "default";
- 	pinctrl-0 = <&pinctrl_hog>;
+ static const struct udevice_id ulp_wdt_ids[] = {
 
 -- 
 2.34.1
