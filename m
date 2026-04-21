@@ -4,83 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5C12F8FA97
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 15:12:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07D96F8FA90
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 15:13:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1482683C51;
+	by phobos.denx.de (Postfix) with ESMTP id 5B64884310;
 	Tue, 21 Apr 2026 17:12:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ee.vjti.ac.in
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=vjti.ac.in header.i=@vjti.ac.in header.b="BwLwIKYn";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="D0qRaAEb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B0A2840D8; Tue, 21 Apr 2026 15:21:35 +0200 (CEST)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8A13B83A91; Tue, 21 Apr 2026 15:59:15 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CD3C83BC8
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:21:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F15D83693
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:59:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=ee.vjti.ac.in
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=ssrane_b23@ee.vjti.ac.in
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-35e576110adso2842235a91.0
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 06:21:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=vjti.ac.in; s=google; t=1776777691; x=1777382491; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NX3FW6IRrpKF9DWh6OKl3b6BdlavEBRnsaf+iXB+OxE=;
- b=BwLwIKYnKYdVcETUZ5Vj4XzavhI24rYNxoYR99GnNdvjfMiWgEjV/ChHzwKhTR9zSU
- L8A8DzwbkOfOBJphkhrLerFTY3ingr/5LedN6VMQQjUccCR1r53P68GbW6cVZNFMrnxW
- PJTmVyMMKKAklKVy7gJ+rr0xzarni7hb7ZU1o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776777691; x=1777382491;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=NX3FW6IRrpKF9DWh6OKl3b6BdlavEBRnsaf+iXB+OxE=;
- b=FdgKZAmYAxv6aquvA+2949DguITpUOJw86w+pxqzdljK9JUi8KYBbC2wIpkdfa0K6T
- vLj2NWz4SHcmnlDfNHDZGG0haivzJIdhTycr9x7mVKH4VeNw1bMVXJfP8ZUo9f9/sEhQ
- Qp5EFeAhE2/wCSX4cEG1VDbGLJ2pPkLxETAb8RqAaR7euQaslxMoEdW0rxqftNB7jK6n
- AxtbfZ42UJiNBhaa4Q3Sp/Uf054cZWPYhGXL9yz4d5GFhn9bIpDFZ8e6/RHjUqeCJSna
- CHX621hFgkrNogzPfnb1DPMNpH0wiW3pL2IqiaVCAUYRHZVffKz9HT7kBJylE29tvRo9
- SU5w==
-X-Gm-Message-State: AOJu0YyBdUCNUZSU0uk8c3qMBhf/xCzMuIT9QhFx18AFMBDhWWJy8hPN
- ib5tIcYAfQJq1oz/kVWh1nuZK9xze4AwTtq2c/arW2nthWkXHE7pBFD1808CJUgnnM/+44Gv7Z9
- 66f1/TaE=
-X-Gm-Gg: AeBDietAmn+ytYyxMICxlNSrFJ+YZE03eduyyQLTBgMqhKzkqstW/dYFrsOe10p9PdQ
- qMsmAFhB/xyTj8oxX5kwOJ8tumoF+pKaPVfV8IhbUbv45M9r4Kb8OUI6m0bIxbmDkdxR8RwS92Q
- Lutdp/4XTMvnDNcntPAdYz65gh9obnbAtawbVglbMpUygQo9AeIk/PmxJf8HphWbTnzBQTiPjLS
- QZueD/7v+6Gpb9oIY54qLBvqcizK8hoTz6niCFFlc150pqaoi51MvbdAdwFRQCt8Cdk9k1zjnk6
- 4jjrd8kz0fFSfROCs/ZimTluKow8o5t8Kg/6MPF3o9O4DkmHP9ztHNttUD3EV/XIpBT5tRKtqj8
- HLIwLK2ndjAy0Bdn2UqIRFWEF+VtDz3Y+w+31Snz50sjvHuXBQ7qNA7/uUlfEEE0ZbjqoJKP1Hk
- Ai+QIYiaW90i2kCusSmx9CGRIPici99mXOMwz0zrP2bieu1nMgtXZj4YBjx3N3jlt8WK0652iMr
- 4Mc8MLUiswf3S8bTjlEofg9u9UyOJWb
-X-Received: by 2002:a17:90b:4b83:b0:356:21e9:73ff with SMTP id
- 98e67ed59e1d1-361402ebfebmr14252409a91.11.1776777690662; 
- Tue, 21 Apr 2026 06:21:30 -0700 (PDT)
-Received: from ranegod-HP-ENVY-x360-Convertible-13-bd0xxx.www.tendawifi.com
- ([14.139.108.62]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3613fb42e25sm6688376a91.3.2026.04.21.06.21.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Apr 2026 06:21:30 -0700 (PDT)
-From: Shaurya Rane <ssrane_b23@ee.vjti.ac.in>
-To: u-boot@lists.denx.de
-Cc: jd@ti.com, tl@ti.com, trini@konsulko.com, sjg@chromium.org,
- Shaurya Rane <ssrane_b23@ee.vjti.ac.in>
-Subject: [PATCH v3 2/2] BeaglePlay: enable IT66121 HDMI bridge and video stack
-Date: Tue, 21 Apr 2026 18:51:02 +0530
-Message-ID: <20260421132103.30033-3-ssrane_b23@ee.vjti.ac.in>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260421132103.30033-1-ssrane_b23@ee.vjti.ac.in>
-References: <20260421132103.30033-1-ssrane_b23@ee.vjti.ac.in>
+ spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ZtOpnV+AHUgHnJ2MANQVhki3cQUz8Am8PDSeVFbfZSNDt5kk+itzGit6Usm2P4Ul/i+P1pDep025Cqx90k3pi/CMLc0ZLdr+QVCu/bdDkZTD2xvU1XX97eYJEIsjrNrA0JKqT79v3404Y/DRC3wqM0YirYp1IlKjGbTI4ciDjTuoTYY582r8lweXE6brH/kqmiRnDzQyYNuNK++pSiE3VB7R2nmEIasJnVtaCzhGpZjZKO7uzDiEqg/mfJzqZBFvbu3I2rcfKWsrlvENEBzT1Zs8ylzDlpIn5zklo0QX1Dc+wjxPeCLBp1vdfjscTEKV3NYHnmD7VBur4ejcml8Kog==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wScT5vfe5yovcJBlm8JEaMBS98bgTebJGY653iWOCuM=;
+ b=WCW5oLv2y9gd7Z+EXlK0eJcAK31ddaO59S/n5f4EPuSiWiIhQSbCZmrM3KxM4IC+4D6v8IswZFZQLp4wvejZwYypo/HI36kUhhtlKSulUsQxXKxpDPOmA6VEHxnsBG0k4e/KO1AR9YZM4ZRWBk0AeOxCkN3s4fQyY7rWQUxM+xHAkk3KD5UEwt4KEvgJBbg2A8DnWubN8/fg/laBO9ndN9oAcpdVSttmUSKIX04l2qckjHnzw/oE4Vy2hadmcqIDBX/3JxlDUT21ZxlTO6tsBhkbrnD4R68YYn9S/ybXf83oymmwO5PcXhuoKfh+LXXu+0Afn8o+esXkd/J8pqEEvw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wScT5vfe5yovcJBlm8JEaMBS98bgTebJGY653iWOCuM=;
+ b=D0qRaAEbATOTVDEv0lHp/yqkVB/ASX1ejN4IJYF+PYLezrVDHvy7qWENZA1oMtXnQj2AaOvD1C3ETiN+5V3bTkwSIMSQb6pEBPf03+oJ+e2Y9Veh25Fl/Hx4ROgxPJdry9g4HkvEc/LQGaFeDCNpxwQws9EjR8CT6bLiUFQq+FmmVlR2Iw/OlfVDtiWIwJ1PL26cMeH7jZ+zqyCU62I/XBvBYgu+7p63dVysF8JI3xGK/LgKzrlSzFM5eFM3gebltEkTg0OVvI1ZUyjNBPREHZ2bBrMJDLLJ+MzNjUAMxd0XYG0L0WE74ohqVGLAvF/Dt4NCVy1SQmOGUj+3fILnFQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
+ by GV1PR04MB10426.eurprd04.prod.outlook.com (2603:10a6:150:1cc::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.33; Tue, 21 Apr
+ 2026 13:59:09 +0000
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::cf3:c5b0:7a0c:d11b]) by PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::cf3:c5b0:7a0c:d11b%5]) with mapi id 15.20.9818.031; Tue, 21 Apr 2026
+ 13:59:08 +0000
+From: alice.guo@oss.nxp.com
+Subject: [PATCH v2 0/5] imx: Switch watchdog addressing from macros to
+ devicetree
+Date: Tue, 21 Apr 2026 22:01:26 +0800
+Message-Id: <20260421-wdt-v1-0-0bd01ec6a7c4@nxp.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIADaD52kC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDEyND3fKUEl2DVEtTAwuDpFSTFBMloMqCotS0zAqwKdFKZUZKsRCx4tK
+ krNTkEpB2pdpaAA9AZXJrAAAA
+X-Change-ID: 20260421-wdt-0e95080be4d4
+To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
+ Christoph Stoidner <c.stoidner@phytec.de>, upstream@lists.phytec.de
+Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
+ Ye Li <ye.li@nxp.com>, Simon Glass <sjg@chromium.org>, 
+ Fedor Ross <fedor.ross@ifm.com>, 
+ =?utf-8?q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>, 
+ =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
+ Primoz Fiser <primoz.fiser@norik.com>, 
+ Frieder Schrempf <frieder.schrempf@kontron.de>, 
+ =?utf-8?q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
+ <jeremie.dautheribes@bootlin.com>, 
+ Jacky Bai <ping.bai@nxp.com>, Stefan Roese <stefan.roese@mailbox.org>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Mathieu Othacehe <m.othacehe@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
+ Ernest Van Hoecke <ernest.vanhoecke@toradex.com>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
+ Max Krummenacher <max.krummenacher@toradex.com>, 
+ Wadim Egorov <w.egorov@phytec.de>, Sumit Garg <sumit.garg@oss.qualcomm.com>, 
+ Tim Harvey <tharvey@gateworks.com>, Anshul Dalal <anshuld@ti.com>, 
+ Franz Schnyder <franz.schnyder@toradex.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Joseph Guo <qijian.guo@nxp.com>, 
+ Ji Luo <ji.luo@nxp.com>, Marek Vasut <marex@nabladev.com>, 
+ Alice Guo <alice.guo@nxp.com>
+X-Mailer: b4 0.15.2
+X-ClientProxiedBy: MA5P287CA0088.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:a01:1d8::9) To PAXPR04MB9644.eurprd04.prod.outlook.com
+ (2603:10a6:102:242::11)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|GV1PR04MB10426:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0adfefd2-2168-4161-7ec8-08de9fae2848
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|19092799006|366016|7416014|52116014|376014|38350700014|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: IqfIZEU87eY6tK73E/zZ1GTjCro5qjSSDbXcDlxTYYN51A+zvkjpkv4c+E9gky1PdbxRwnDY0olCcy4XIoHraTQxfiZN+XR87/JKW/Hd0rIbp3pEKe5HQfupdioa6nCHiuDM19hwR+kuKc+5++jA3gorZu+TYkArWrss0OKDZVdBg81Mqt2MuB6twAJG0PALu2zg5wDQMO5U8cfEoXUdziw5WWNLonvg8FvHwyouFpB5BsnZc8xtYS+qCpq/84C1jRs8chNQbHieUz5vL3tg63JmybLmr6N/iRXz0yPtC+HxEg2G+v4ZVCjxwBIuPcH0AZ3uz4c2QtgQ4KZfCNtCFZnmPdihGHX20rUA2jwaFyW8yOJ6rerqR1HKbD+l2X4IzDdQfxwbFOIRA9KiqxDBZn8DDZ05sC+ILEY9WwvU0Rlg6Oj/JXEyKYn+SepcxWTReczcHBmESRqo/W2YdayuK5YnC40gMss9cTnKl+fGOoCaRLmv5sbo1Qj6IrCPOtcm8FmafylWKFBjeVhTyXOxk+fiz2ks6Z3jLt/q4Ti4fzDDNLtpi6RZDKB00pz4F2Ath/OIku/gucSCDZhqLNM/v5SrKC/LRGQU4mc1VzbYD4KgV5kjCn+Fi9SSCEvB8FQ55dNN0XcyOMtXXE8JPb7hyK1dISo1sfW+2phegCawaR7mymyDIa36jysoUpAqXjw02VnpLXJBDxwVQCaZVhdAe48YvaZTkWIo2CaII1ycDjE3sBuW215rSklOlnhyN1M3rlK4N42Q7syKgN6sVIOHtL2937/uJGDy71++ovCXZek=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(19092799006)(366016)(7416014)(52116014)(376014)(38350700014)(18002099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?L3lYN292TUhHNzdpVm5vak5TMysraHJPa3FON2FnUTVMU2tNY3VHMTdubVJK?=
+ =?utf-8?B?NUt6UlhCcEV5YW9WZENLbU51Y28xU3J0OEk5alMyYldXTFIyN2NVdnlYQ2VI?=
+ =?utf-8?B?NmFDU3l6ZVRneTFQUDE1U1dTczdEV2pWWnBqQ3E4OS9PZ0xkZDZTdDJoYmh3?=
+ =?utf-8?B?TW5tZHdPTU5vY0dUaGlxWDRrYXRSbm5PSFRIaldnMjQybU1MRlRuWVBpUzhJ?=
+ =?utf-8?B?QXIrU3h2MC93VGlCWUhoYWhiMjJLbGNOckJhWENWN25MQVRIYWhVcWhXL3Ri?=
+ =?utf-8?B?MWNFS2pidUt4eElTMXFqQW9HNEE0WVpKUmo1MncrbkRKQ1lQck8vQXJLME9p?=
+ =?utf-8?B?VVZkMmpQSHpqS2o4TTZlaUUzRjZ2Ujlmc3ZOT1doa2NFdDE2NERJVDlYclZG?=
+ =?utf-8?B?bmNaT3VxQUFLYmpydnRmL0xPbDZTNXVLdEcvTnFJODlxenkzRW1IZzZOWFV1?=
+ =?utf-8?B?RUtudHM3RGlUKzZ2alBnMHJNV1dHTTNPZy9YdXFjYjRudFJpZzF5eHpOKzI3?=
+ =?utf-8?B?T1liSHpoMVFYVkRKQ1NGVHljdDRUeFhzNVJSNHlzc3d1Q3o3REhBMlRHZEtW?=
+ =?utf-8?B?dE9ZMm12WTYrRHF5TUVOZm1JekNZOGxlZElpK3dEZkM5TDgxYVJOSFpnRnZG?=
+ =?utf-8?B?NEhxRVpJb05oekpIb0dsa1RibWJ3UkN6cDhSUnhBbExJNGlGRjBaRit3VXBp?=
+ =?utf-8?B?NisyZ25hRllSQ3EzbTVLdkJnTHZEUmdqZkdDemxVSlVmN0ZEOGJDOXBVOFVF?=
+ =?utf-8?B?UTZCS0RIdUlRTEdLR09FWHc4UTVnbkxnQnYzZWl4Q0lhSHJOUXhXNTVISFVp?=
+ =?utf-8?B?NTAxNWowNVJJb3AzR25SeklaVWtMOHQySkFsUG1OUEMyKzNxOUUwSVIwU3Zo?=
+ =?utf-8?B?YU5yVGxsY3dRMnpUOUx0SEg5ZXhJc0ZHaUdhcXUyTWRPZERydW5OeXVVeDlL?=
+ =?utf-8?B?ZHNYNjdQaVg1VGJMQXgvZlViTHAwQ2ZudU1GdldtYmttQlAyVVlGL1hKakdN?=
+ =?utf-8?B?N3FWM2FOWlFranR6UU5WRXZ0TXVyOXdBYjJJTE1vNGpjaG9aRXdqZS94WEEw?=
+ =?utf-8?B?V1NscTlzdHA0L3Z1NmdZVWtuVWtuVlU5TzF3bWk3NEFQbE5CWHJjTlVOcGlk?=
+ =?utf-8?B?NTdpTzN5amd2eVJ1emMzYnlBbGFXVHNnajVrdklSR20rSXAwZTBPVGR4c2d5?=
+ =?utf-8?B?VldnS0tQeWIvTW8yT1RIMXJSa2x0WFVyV1RJRG5uditTdXRnL0xzdnBBRk1N?=
+ =?utf-8?B?YUFJM1dhQmdPNmRkTGRqdGdPeWFXVkN6SCsxaXpwOW93Q1BtUTZ2VlgwTFc4?=
+ =?utf-8?B?RTUxdkhRanBNUEVsaXZGUmNXanJxN0VhQ28ybGtaWkdIZkp4dEFkclVvZGhr?=
+ =?utf-8?B?UXRmbHVnTXhwWWI0L1BCZjVXSHNoR0NuUUZkWnFzZWU1VVpmbnU0VlNvOEF5?=
+ =?utf-8?B?OCtwTk1IdW5IT3pvSEx6enpORVVvUTBEN2t0Z3JVQ3JNUXpJMHMzcXhyTGV2?=
+ =?utf-8?B?STZ6ZkRsMjJMSmtJaGhwUHJMWWc1NDhLZDhVTDN6NTNQbEpLRzJObTJKV1NX?=
+ =?utf-8?B?QnFKLzE4bHQvVnFwWEhvckZ5VzRMcWhwZDhpa09sdm9pS09oRG94L3JZUEhH?=
+ =?utf-8?B?dGpwZFhNZHFxWjBldWo0bDdiU1I0TnJJYjBOcW5LVWF1Q1JLWVB1ZDJiWThl?=
+ =?utf-8?B?dFVCaG5tanJJNnlsVzNlZjY0RVpud0FxVlZBQ01qcEdrZnJNWjJzNUVLMXB6?=
+ =?utf-8?B?V0lSWlpSanpTQjFRVHF2MkV4QWRyY05iMnFDUStjWHFLWVVEYnhURVl6VFdM?=
+ =?utf-8?B?Nmd4L3hOKzJYZGhWOGFwYUkxVWNUSWd5TXMrWElJdUNzeWpMSGZTbWlrOFlT?=
+ =?utf-8?B?SGxlQWowMGttWUd4NzIraWIvdGtlMWZSeTdqcDdnSUN4dWEzNXpCSE95UFVt?=
+ =?utf-8?B?dUNZSDlNc0xHTzJjc0JwRG84K1hBb1NPT1dhaG5iZTd6aTR2OFBiZDRHOFh6?=
+ =?utf-8?B?Z1lJQStUb1Y5RUx4QXNWVlQ0WktVcDc1MGM3L1hJUzB6RUZEbGZGSVE3MWRR?=
+ =?utf-8?B?cWpqeXI5OTVLTnFQRTRHTVA0eCs2bm5GaFhmRjR6U3kyRkxXajVYMzYzUVA3?=
+ =?utf-8?B?VzZLTWhsRFhoQVRERFd3bWd5WnkraWdHcjlLSHhyQXRJTnhxK2F1ME55VFk1?=
+ =?utf-8?B?bzJ2Vm1YTFVGRjFCREFrc0VHcklTSUMwNllSWTllQ2VUellRQnpFbExEVC9s?=
+ =?utf-8?B?aWZFSGNaTDhUcno2ODhja0tNOGsrUlh0YXhkUVZRQU5MSHJaMEUra2Fic0x2?=
+ =?utf-8?B?TDRKRURNcUhTMkFPYTM2UkhudkhTc1dlV3N1V1VmYXAxdC9pdElUUT09?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0adfefd2-2168-4161-7ec8-08de9fae2848
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 13:59:08.5760 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: PNZvvWSUq4/5skZWqNRM9MghKpFG8m1fR04QhgaaCkeE9R3KqRhC1EqUd42EPQB4VF64G5kBw72QG9uL6tDIOA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB10426
 X-Mailman-Approved-At: Tue, 21 Apr 2026 17:12:16 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,99 +175,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Bring in DTS bootph-all tags for the DSS, I2C2, HDMI bridge and
-pinmux nodes, plus defconfig options for TIDSS, VIDEO_BRIDGE_ITE_IT66121,
-BMP and splash screen support.
+CI: https://github.com/u-boot/u-boot/pull/935/checks
 
-Signed-off-by: Shaurya Rane <ssrane_b23@ee.vjti.ac.in>
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Changes for v2:
+- Iterate all watchdog nodes in device tree instead of wdog alias
+- Delete non-DM implementation of the ULP watchdog driver
+
+Signed-off-by: Alice Guo <alice.guo@nxp.com>
 ---
-Changes in v3:
- - No functional changes; carry Reviewed-by tag from Simon Glass.
+Alice Guo (5):
+      imx: soc: Get watchdog base addresses from device tree
+      arm: dts: imx: Update watchdog nodes for dynamic base address lookup
+      watchdog: ulp_wdog: Use driver model for reset_cpu()
+      arm: dts: imx: Enable watchdog driver model support
+      imx: Remove hardcoded watchdog base address macros
 
-Changes in v2:
- - Split out of the original patch; add bootph-all DT fragments
-   alongside the defconfig options enabling TIDSS, the IT66121
-   bridge driver, and splash-screen/BMP support.
+ arch/arm/dts/imx7ulp.dtsi                        |  6 ++
+ arch/arm/dts/imx8ulp-evk-u-boot.dtsi             |  4 --
+ arch/arm/dts/imx8ulp-u-boot.dtsi                 |  4 ++
+ arch/arm/dts/imx91-u-boot.dtsi                   | 12 ++++
+ arch/arm/dts/imx93-u-boot.dtsi                   | 12 ++++
+ arch/arm/dts/imx93.dtsi                          | 18 ++++++
+ arch/arm/dts/imx943-evk-u-boot.dtsi              |  4 --
+ arch/arm/dts/imx943-u-boot.dtsi                  | 16 +++++
+ arch/arm/dts/imx95-15x15-evk-u-boot.dtsi         |  4 --
+ arch/arm/dts/imx95-19x19-evk-u-boot.dtsi         |  4 --
+ arch/arm/dts/imx95-toradex-smarc-dev-u-boot.dtsi |  4 --
+ arch/arm/dts/imx95-u-boot.dtsi                   | 14 +++++
+ arch/arm/dts/imx952-u-boot.dtsi                  | 14 +++++
+ arch/arm/include/asm/arch-imx8ulp/imx-regs.h     |  2 -
+ arch/arm/include/asm/arch-imx9/imx-regs.h        |  9 ---
+ arch/arm/mach-imx/imx8ulp/soc.c                  | 14 ++++-
+ arch/arm/mach-imx/imx9/scmi/soc.c                | 15 ++++-
+ arch/arm/mach-imx/imx9/soc.c                     | 16 ++++-
+ arch/arm/mach-imx/mx7ulp/soc.c                   | 24 +++++--
+ configs/imx8ulp_evk_defconfig                    |  1 +
+ configs/imx93-phycore_defconfig                  |  1 +
+ configs/imx943_evk_defconfig                     |  1 +
+ configs/imx95_15x15_evk_defconfig                |  1 +
+ configs/imx95_evk.config                         |  1 +
+ configs/mx7ulp_com_defconfig                     |  1 +
+ configs/toradex-smarc-imx95_defconfig            |  1 +
+ drivers/watchdog/ulp_wdog.c                      | 79 +++++++++---------------
+ include/configs/imx8ulp_evk.h                    |  2 -
+ include/configs/imx91_evk.h                      |  2 -
+ include/configs/imx91_frdm.h                     |  2 -
+ include/configs/imx93_evk.h                      |  3 -
+ include/configs/imx93_frdm.h                     |  3 -
+ include/configs/imx93_qsb.h                      |  2 -
+ include/configs/imx93_var_som.h                  |  3 -
+ include/configs/imx94_evk.h                      |  3 -
+ include/configs/imx95_evk.h                      |  2 -
+ include/configs/kontron-osm-s-mx93.h             |  2 -
+ include/configs/mx7ulp_com.h                     |  3 -
+ include/configs/mx7ulp_evk.h                     |  3 -
+ include/configs/phycore_imx91_93.h               |  3 -
+ include/configs/toradex-smarc-imx95.h            |  2 -
+ 41 files changed, 187 insertions(+), 130 deletions(-)
+---
+base-commit: e3405917a1806971d9e72a94186b299f05581e1a
+change-id: 20260421-wdt-0e95080be4d4
 
- arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 42 ++++++++++++++++++++
- configs/am62x_beagleplay_a53_defconfig       | 13 ++++++
- 2 files changed, 55 insertions(+)
-
-diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-index 2a4f0e45365..b1ba62c20ad 100644
---- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-@@ -322,3 +322,45 @@
- &cpsw_port2 {
- 	status = "disabled";
- };
-+
-+/* ===== Display / HDMI support for U-Boot splash screen ===== */
-+
-+&main_pmx0 {
-+	bootph-all;
-+
-+	dss0_pins_default {
-+		bootph-all;
-+	};
-+
-+	hdmi_gpio_pins_default {
-+		bootph-all;
-+	};
-+
-+	i2c2_1v8_pins_default {
-+		bootph-all;
-+	};
-+};
-+
-+&dss {
-+	bootph-all;
-+};
-+
-+&dss_ports {
-+	bootph-all;
-+
-+	port@1 {
-+		bootph-all;
-+	};
-+};
-+
-+&main_i2c2 {
-+	bootph-all;
-+
-+	bridge-hdmi@4c {
-+		bootph-all;
-+	};
-+};
-+
-+&main_gpio0 {
-+	bootph-all;
-+};
-diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
-index c9bc7cd8d39..bb4be38537c 100644
---- a/configs/am62x_beagleplay_a53_defconfig
-+++ b/configs/am62x_beagleplay_a53_defconfig
-@@ -121,6 +121,19 @@ CONFIG_EXT4_WRITE=y
- CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
- CONFIG_LZO=y
- CONFIG_EFI_SET_TIME=y
-+CONFIG_DM_VIDEO=y
-+CONFIG_VIDEO=y
-+CONFIG_VIDEO_TIDSS=y
-+CONFIG_VIDEO_BRIDGE=y
-+CONFIG_VIDEO_BRIDGE_ITE_IT66121=y
-+CONFIG_BACKLIGHT_GPIO=y
-+CONFIG_SYS_WHITE_ON_BLACK=y
-+CONFIG_BMP=y
-+CONFIG_CMD_BMP=y
-+CONFIG_SPLASH_SCREEN=y
-+CONFIG_SPLASH_SCREEN_ALIGN=y
-+CONFIG_VIDEO_LOGO=y
-+CONFIG_I2C_EDID=y
- 
- #include <configs/k3_efi_capsule.config>
- #include <configs/am62x_a53_usbdfu.config>
--- 
-2.43.0
+Best regards,
+--  
+Alice Guo <alice.guo@nxp.com>
 
