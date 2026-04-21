@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 792A9F327BD
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 07:59:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8D51F327BE
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 08:00:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 102E184390;
-	Tue, 21 Apr 2026 09:59:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 44AA48439F;
+	Tue, 21 Apr 2026 10:00:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SZk3ml1L";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JO3P126d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C6738439F; Tue, 21 Apr 2026 09:59:56 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id B477C843C0; Tue, 21 Apr 2026 10:00:07 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E82984378
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 09:59:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3921E843DC
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 10:00:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-b9358dd7f79so694436466b.1
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 00:59:54 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776758394; cv=none;
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-670f6ae9c7dso5366617a12.2
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 01:00:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776758401; cv=none;
  d=google.com; s=arc-20240605;
- b=Zu4fbGiKqEcw4vx9CVDP6aUkcDJdZi35Op6HUlHuLR3ED8bmw0cXCucUhrnA5wvjJ2
- 09z2qlBZTRVRNvg63seAmLB4jG9hVnSQx3Hp5POu9JRllOkENZnKI1XOlRZscNNPrtpC
- Wef2RSHEc44Wve4NBc8XY8wTef//AdBcR3nl1/5r0Sx7JA0exQY8ar9ZxbaGs2pqMKwS
- qYRg5Gezvpr6hOrTwvkfgHXqf4Ju34AyoS8Z7+h9luZV2QfBGKIPiyxkyT7KQEpn9Epq
- mIn+8oNefGgLj6IWqsM6iSw2FBaMgRt13bxpO+DWf57t2HLqxYIZXJ2Jjrk3sAWyUTGI
- 5FNg==
+ b=Om2cTJOBkbxT6VdiAkqpxCkZE5FH7t9bcL+DSHlEcQsfhZUXV/mJsCo8ydpwfAE5ZT
+ oEsoHmzO0GD/KIqg7ny/zjug1vfqugyb2ghPl2VYhK4hSIVyge24VlGsNelTQKD8wQyU
+ k3P7odojGhCJsVz+WsWeySK5e2R4INs6liGWUD+uAbP3abo33tAXO77S0jt9RofXtOLf
+ IoQtuokkW3Vlj1kfDK2I+KMGEr4Zl0pKcBekgitx3DQ3qgRDp6kdTtK6hMJDf/isked0
+ tqk8nNlOlMGG0qQbKhD4ZUBL8JscHNrFhymSxgJO8IOHCWpcSPa12nU72SdtmJFzVqf7
+ qzyA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=6/gz0kvBY/N2bbyG1adnGxhsYPtusN4lKNzrGzI6Oi0=;
- fh=Oe9lwRzKCD/l6hCUJFguze7oQy/y4G6mlumC1KMfZJ4=;
- b=adhgwOiVobWBbXW1c0ViGb886N9sl3PLoXMpJKPyf6UFafujdxlqxd3CdN+1KTRWVG
- zqXm53xstdFdnNRV3HOnauCMqf/itowdmnNPsZlq47PhI8m4PtgNPflu0DZbkMYd8yFm
- SuLDS7xQHvzRruwMbMLTYYSiX7LidyU71mxL8X6dg44WaT1jvQFINQyiTrJXuTjFFfQU
- tXDG3mV/wP2Q+S69fGI94SjHuHGfyt5zJqlB3FIoNsEfduMPHL2SCN3ZY+SeK9vXG32K
- fR1KCFlNZg3pCjCQJUrrzrtOG6o+FpGpTdh3p7WaBDPFnGTFHxGOEkkj2ZoPkVEqSdr2
- fHOQ==; darn=lists.denx.de
+ bh=yfI8mgVySPVQ9IKYsVMqn97P9pYx2CjPbJpMkkGQvuU=;
+ fh=4xiQLcln00hm7Bgtqq1oD4zOqB4mGPuT/8lVExx9kCg=;
+ b=KSAwghqqyPqxbh57PzuDnpYquP9QdIzHFsCuG8UqJN+sQv+u3LcnOC+8dVJxJg6Lb8
+ ErpJ6QtWWSkaILxDNj8k1XkDjRNgoTdjLTKZ8PRez2C6pCCchQuGU/BzZZmcqJKwnkDy
+ 1m6cLCMGUwTYWl6CPlHwl4H00LN4gj/isj8jrpiDNwlzs2Kf4bJ0ho8O/bjNmIMQu9Ci
+ 6bbme+Yhl7/OXlssADqYvdj5ThN7z9Q1uy4Z+5Ygp03jBkC2a6uOmjI4gx+yxpABN2Cw
+ ZEexECa0X88LOEA1aXNCTKghYmN1MbpxbwyZLs/TiN7ZOhZ/W4P4ytOHOPsl5D3px1AG
+ Ozrg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776758394; x=1777363194; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776758401; x=1777363201; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6/gz0kvBY/N2bbyG1adnGxhsYPtusN4lKNzrGzI6Oi0=;
- b=SZk3ml1LE6PA0VO9guvUah8go6+Vf8dvINNWRIFXn1FLFC6SWVbZe37uT1c+Tot6l1
- zMhOanT8fzychuGRakBYic3PyYgxV9eyVB1ujVhfzc7sqxlrA07leYufNvz4+r/UYCys
- VjrImBr6aRFXiaSKYb8UbCt9Qj1l9Fhy+q+zM=
+ bh=yfI8mgVySPVQ9IKYsVMqn97P9pYx2CjPbJpMkkGQvuU=;
+ b=JO3P126dBIF31K4QTXWHCWaZ+zKlkKojhwIbRQPFTRwx5EAddZ02pN3TP/78MdgPEq
+ Q/D5+qJ/BH1Qu9eDtc9V4MnNUiLZV2AvOY3BcUbpkxM/uH+pQkfK7P1Wz7oFO13LWtk3
+ l/Ah8wRsRD9dJO6SY+qgzElp7PrqZJacCtNTM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776758394; x=1777363194;
+ d=1e100.net; s=20251104; t=1776758401; x=1777363201;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6/gz0kvBY/N2bbyG1adnGxhsYPtusN4lKNzrGzI6Oi0=;
- b=iceT4ue38mHjhYWO9lfDScgteP6+pn/fFPliQdBcOVZCugxU/4LKgFLo359hS53Lwy
- 4WlvHRuW0DLb0M0HOzQ3c0bDrpr+kHIH4/B/gY1NHUQjrEqrUEXVm1V8rYryqPGafUPx
- owxJ4ukpwDsEXwxjf63w3bV4HVogBbWaMLO86Y5RM2SClj+e2fAQEZ25a4D+bDwMK01e
- 6LtzzsISFnUwNRLQo5A8MksFumuycu7ipKRm7H0RmBlI2hUPqdCXk9IV6SbiL4GqZsQ3
- 5cvsj9pWuAISw/D5HobnXHLHXXrkcwD5f1FdfjcJyL+w2kNDXu7fRvZyyXNHx6BWd/kL
- l03g==
+ bh=yfI8mgVySPVQ9IKYsVMqn97P9pYx2CjPbJpMkkGQvuU=;
+ b=YTZrBLi4/+eiPWcp8o9bpry5410eQOjXyGozHxZ4903+WL7z+9xN/zrzABpWzs3evC
+ N5HQ1Kqbo0NejwRUVK+gdBBTxg5x4PqsXETXJprBI0L8hgM4ZtGAX+fIK/sD3666XQcA
+ 7qb6Kc0ffyQtNZ6FJEhGji0sFzIYVttxtGrTZqv37bgf86uVvaIKzwvEYvrETIgyc0gO
+ NAoZWMwEGMNOeIP69DV1WUC17dslclCTBMj51/pdl5FTcPuq0TJGzqvjPWq5QZ58e4AM
+ vgqzp6r/eStQ9q6YyRpFSKe2muifAb8D1iplyWIwOM5XNwFCsSMYCQxAJvQJfOx/ofyM
+ jmUQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8Oc6CLYfoN/3DPIDUZS/+Z7ZaYd9O3V5aGG7etLv6iNZmyYbAdTmrFECyt4HYB0z/WlXR4258=@lists.denx.de
-X-Gm-Message-State: AOJu0YzmxiL/kSmwpJUJzWSgZgizqExjww3LlKjPzJ+Po09aPadrwf3T
- 3RHK6Tmjd8UQiS+1blX8Qr9F7bN4H9rklgFb3XmW5TH0qcz8+6kpumtyaceWtPV5MjJbeLmZucz
- m6kxmf+PfluK+cK6ckigWrFxx0wAnf0UCvB0gPt/H
-X-Gm-Gg: AeBDievuL21YQC/s3j9eFP7wxTJmo2JZnwkPDOLgJHOzOuy0QFCNo/kFfoufejPC8Fo
- y8DWFO1IG6wjQIKAQ7j5wMEtTayr1zcXobQIlwN32icyVO7hPpa095iY+3zMZT8IgjI2/xtVi2L
- pFL/y/HPY14nGI6jKyWLSHN4szljywkwps85L0QPvJ3TqLcNkJAj15MMn2ik5ydmuF1xgc+7i61
- Qf5r9V5OYYTScHqPi/GRo4A5bzLoMc8IxLyK2EPhNGoY1SK1BIwltRKiW9qzjQAMuRKZZxfJbxr
- OTetYcxlrtVqXgbfbdBv
-X-Received: by 2002:a17:907:96a1:b0:ba9:2137:7165 with SMTP id
- a640c23a62f3a-ba92146ccc2mr191453766b.1.1776758393549; Tue, 21 Apr 2026
- 00:59:53 -0700 (PDT)
+ AFNElJ+QRQxMbn8zsjzjSpI5QPO6jY6I30X1VcCTldwg8QRVO8VVeURQA2qixCcUQZqund9cXWkzeQY=@lists.denx.de
+X-Gm-Message-State: AOJu0YyFjI7Bn4F9AjQlVEJ0sON7oEIfDpvdbj6qLh+Lml1reVN6j8OK
+ 4QQ27vWa8KqCBZSDFWNL+TRSZuqYioJ1QK/bRroeOlAWQoISCloQeZ7guU8qewJ/zl0PzLZVz3V
+ +nywHI70+gvORFQlDWa+pp23cLjGlXYyYNJiQ1ZHp
+X-Gm-Gg: AeBDiettIyQw3SrSMRPqVLFDgxLZWHVdyE5UgbyeQyXoysaH4feUeqIijwYvh4Y/qfH
+ is3csF4pjLfGU08FrVpKFVmfjg/aawGj5VJg5LzcBlruOldL0OLvQJnxi3r85t0JqkVGv8wIOeL
+ bKSGtW1+eVDyo0ug5vWqglELH1O6HDh9oSnL9bElvqskNJZ1qPlt5KuRBGkKbRvbhzd4qDt5ykj
+ aev8wdJEF9s0FMOmu+Ymw/r81YiQXCrJxRdcpBZa6/ygXTSFMf0r+hjXxGGe3bNXwgxRAEGWZmW
+ JJUDDAdUBl3bVh4HHkpB
+X-Received: by 2002:a17:907:3e99:b0:b9c:9dcb:36c6 with SMTP id
+ a640c23a62f3a-ba41b2e4b11mr730300866b.47.1776758400915; Tue, 21 Apr 2026
+ 01:00:00 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260420220321.71147-1-heinrich.schuchardt@canonical.com>
- <20260420220321.71147-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260420220321.71147-3-heinrich.schuchardt@canonical.com>
+ <20260420220321.71147-4-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260420220321.71147-4-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 21 Apr 2026 19:59:40 +1200
-X-Gm-Features: AQROBzAkgD8DIWwEVbGqlI1iD6IfajMsfGMjDSWEXjIojGs2_S2lrVot2e0gq5U
-Message-ID: <CAFLszTjhcEtmCa3HN8SXniP_H6QFbhOHA0stVqVLuLe5jQ_RiA@mail.gmail.com>
-Subject: Re: [PATCH v2 2/4] efi_loader: correct return value of
- efi_bootmgr_run()
+Date: Tue, 21 Apr 2026 19:59:49 +1200
+X-Gm-Features: AQROBzBo8Km-pZZthLcvTyJpHaRLXAwBt6VW_4O52fsDHEP1hJdz6_Q_RoBKSCY
+Message-ID: <CAFLszTjdxjLb-BK5p9rdk55LxxYZCM11rED6n=Fta84RWKeJnQ@mail.gmail.com>
+Subject: Re: [PATCH v2 3/4] efi_loader: correct efi_binary_run_dp() return
+ value
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, 
@@ -125,16 +125,16 @@ X-Virus-Status: Clean
 
 On 2026-04-20T22:03:17, Heinrich Schuchardt <
 heinrich.schuchardt@canonical.com> wrote:
-> efi_loader: correct return value of efi_bootmgr_run()
+> efi_loader: correct efi_binary_run_dp() return value
 >
-> efi_bootmgr_run() is expected to return an efi_status_t value.
+> efi_binary_run_dp() is expected to return an efi_status_t value.
 >
 > Reported-by: Simon Glass <sjg@chromium.org>
-> Fixes: 0bef4b0123f2 ("cmd: bootefi: move library interfaces under
-lib/efi_loader")
+> Fixes: 6422820ac3e5 ("efi_loader: split unrelated code from
+efi_bootmgr.c")
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 >
-> lib/efi_loader/efi_bootmgr.c | 2 +-
+> lib/efi_loader/efi_bootbin.c | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
