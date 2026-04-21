@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAA79F8FA88
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 15:03:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2CC2F8FA8F
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 15:04:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F47A84198;
-	Tue, 21 Apr 2026 17:03:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9BEBD839D5;
+	Tue, 21 Apr 2026 17:03:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tkv6Ifhb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RNh3r0b7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD91780433; Tue, 21 Apr 2026 17:03:47 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 7068383E76; Tue, 21 Apr 2026 17:03:50 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC4DC83E76
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 17:03:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 56C5E80433
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 17:03:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7dcdaf06498so415223a34.2
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 08:03:45 -0700 (PDT)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7dcd9061b1aso696882a34.2
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 08:03:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1776783824; x=1777388624; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1776783827; x=1777388627; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gDt3wDEI4QRrAqu0/LiUc4ECjOKs19oPCPBsz1Ou8qw=;
- b=tkv6IfhbD6zPM5Y5DF2iRaplQYwiyVatjSJ4fkKeNWSK7/edMVjrjj/zxAwois4Tb0
- T9JrHtNjjB+Muwd28iutjFT2ugvkz0ofAFbxGehzKk5fd9VtbkH2NfiOTqND3wy+axiM
- bMLK6npG5eXB/SQJ+YP7ZuSkpucSATpmn/zSA=
+ bh=zNBzr1nHdMj9FF2CdIYAHvvtvVKOScfzUnkjXysysVk=;
+ b=RNh3r0b7l0UZ1BFxdWW81E60ZzIBAhLiFIINZ9oaglUoGS40/mGIqfKbrewooFZ/mn
+ UAfPVzzLzZSw7ejsCrKSk8F66Gmdr1wrF1ciiva9RBJw4FmLNFhW+RvTXM+DlF4FjUaW
+ bpDAScAo2H25AIz8nXsXzKWlEvBlWslOCEhSU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776783824; x=1777388624;
+ d=1e100.net; s=20251104; t=1776783827; x=1777388627;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gDt3wDEI4QRrAqu0/LiUc4ECjOKs19oPCPBsz1Ou8qw=;
- b=cAQeAkSTB2X011nZNfTFegB7hMvE9YG9mev1tMDrprvdebTZgmLl7en+nclRNV3N4V
- 6Jmla1tEOCXtg2vqbbbkZtwFxwFynRawST8HRCRBSeGfkbwxFZmHTuGrWIwHGQ5bj3TR
- XmvOARgW9Kd9SSVxBI9F/X+TjZ1V5tVvWKEVeKECBRJZ5YpsNevf0ByZV6T5ToHav7vY
- q9yI4fnczzMPq1ekJck95rZM+3ZQk+hzhQRviqT3rY98MaEDHaDpqWvF900PWuhtiJ58
- 9pi+1VOlWeMfnsKyEyPRJyzwQy8ev76DqPeYCEdqUdgsq0qrxLmyYVN52dhnFVpbQZKB
- tafQ==
-X-Gm-Message-State: AOJu0Yz3Tgay/FWinm14OWGfnMvYVrZUZACU3ry9/Z0O/1PmSrNqdkh6
- a2u63MowT6Uwf1B0c3zBH9buVhb0fGQ84S+5LrqNBa3QBlxUmigKvx94kbhOBcE5lzA=
-X-Gm-Gg: AeBDieu75kBE/tR0zIwcQZqQg96keW7dU7xVlQsF9nXHn5fGO8MkJeSmYLs/+9tFUm0
- WO3Uygiq138k2TBsggmIWEKgYyQ6OT30tX/KXyp2wIS0DnFjTW7NwNSyPl3YHhY+KWIFOBhUoRf
- 5sy4jOyFztnRAJ/z8VdCaFlna7f8G7JRp2BMwvydvVRVZmg54jG/CYJHH9gyXa6Z8/LIeHaOKlc
- KXGUkZReahZPl3wdmUG9QlPGD/369hhGINLjwWeMbxk0hPbMi+bed9cuoEV2qx/ESo1mgkOdif3
- TDzRE/K7kp7aVgNPQWWwUeAwpPfQLFiWpBN5OimbOu9+CSANKLwBDb37fkYad11JRgALyGqBEBP
- d9Yix4hqXeGY4njoyl6PEqh0QZ9OGqxOcqRbYgKKV3pm9rpF827iPYhp1sJDlL3D569mzGVmtjA
- flMpMmB3z+0GzHqEWwkIJPQD2tmu1zuMrGExbAM8NXQOOrrlPecdpfTdzK8fUhEI4chL/dCFXlj
- fIAMaXaCSI8J88B0aouQNPpkY7Y4RJ2alvcUZHwUQ92LhFum8UBHorpcEqJQg==
-X-Received: by 2002:a05:6830:6ad3:b0:7dc:dbe4:3f20 with SMTP id
- 46e09a7af769-7dcdbe44013mr1215216a34.11.1776783818006; 
- Tue, 21 Apr 2026 08:03:38 -0700 (PDT)
+ bh=zNBzr1nHdMj9FF2CdIYAHvvtvVKOScfzUnkjXysysVk=;
+ b=aXUn+6r4HCHqiDfHmO+pV9aUVGHGUS2AFlW4hsnoiNyEh1tpELQZRSPZ9wAzHWIsO6
+ VkgFDux8AH0m7ALvPBEuAm3uOEafgvVV4EanEHycZMeRlzNYPabfZUfIjwjiJ30jWaWL
+ zKNcMkeEvtgRr4epPczgIfqVLemBBQnLplN0wc1VfAGewL3DTptDzQpX9sUZMi8ogIJW
+ NKS+G9eL2kaatqzxlpXwHaCDSARlHh3ocvlWnpt+PkInzZkYLMism6/MSg/VpMO6NlN2
+ ybrlXZLxZNNb+DJGyitAyX9uswYZPxu0jRSeNZpw+PI2+XY8qdp+9UjcfRJnEnbUr0uy
+ JX9Q==
+X-Gm-Message-State: AOJu0Yxx1VVwGnDPF2w6zEg8hv2klLolJhWlxKbxpVqkE8nrtP3FmH9R
+ Edk9sgRuoebgLwO9IDEEeo2RB3XgXlhO0yGJbDHykwSD5ufzHawt4ozoqeOzVXY5t84=
+X-Gm-Gg: AeBDieuHoIy4+eIJ6RjQjig/5HCJrUL1PbTo8LKqhuR+080xBZ6iGa1fFzMIwOaK1W8
+ 0fRjhKlxiZuYdlMu0FZFYzPWOlU5HTtewfYuD0Z+DPQatc3jrWvqCBEEeso3j2lTqMitA8/z+r+
+ HkBb2NSx+cu+u8YLAg12h+J3KPAkR1Q1BwtVGTQjrs7DLaVZNdu+gXQnRkWX+MiXoihwxNnAgMw
+ /mbQJB8r3jBUhkaje3Gh/VcK1GF9rd+Q+iETtwyHbBl5i89rctP9OMhI59olSy5IOyjeU5SfPhq
+ u4p6JAFCxgrv03UH+Xwh0fDgk1QSHKYQxdhrN6C/jcM0f+0acD16b+Q5blwOG166NjjEs3fVOrb
+ +fyuGSPKsfWu9jOaJgS9G3M7BY3UvNy4dbPW9/O0fO0inMlnyNoj6/BhVsmmoT/Rot09IXaQGrf
+ h0iqmSgZnwpAFp2NZt3tAQWmOTzd9eS4IG3BOOwNxFuNtMdKElQxFKPIPFdOze8aOIwinre6D7X
+ zbYFdnmFjp/3It0DUlbkSd2siDYVnGQJ1F8falUmo+XepiBRflNYcUPBlloOA==
+X-Received: by 2002:a05:6830:3155:b0:7dc:da40:77d1 with SMTP id
+ 46e09a7af769-7dcda407a47mr1861345a34.26.1776783824307; 
+ Tue, 21 Apr 2026 08:03:44 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-42fb269f69bsm790237fac.12.2026.04.21.08.03.35
+ 46e09a7af769-7dcc892c515sm4496563a34.21.2026.04.21.08.03.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Apr 2026 08:03:36 -0700 (PDT)
-Date: Tue, 21 Apr 2026 09:03:33 -0600
+ Tue, 21 Apr 2026 08:03:43 -0700 (PDT)
+Date: Tue, 21 Apr 2026 09:03:40 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, michal.simek@amd.com, venkatesh.abbarapu@amd.com,
@@ -75,6 +75,7 @@ Cc: u-boot@lists.denx.de, michal.simek@amd.com, venkatesh.abbarapu@amd.com,
  Liviu Dudau <liviu.dudau@foss.arm.com>, Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
  Harrison Mutai <harrison.mutai@arm.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
@@ -83,15 +84,15 @@ Cc: u-boot@lists.denx.de, michal.simek@amd.com, venkatesh.abbarapu@amd.com,
  Matthias Brugger <mbrugger@suse.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Subject: Re: [PATCH v3 2/6] bloblist: add helper functions
-Message-ID: <20260421150333.GC3036003@bill-the-cat>
+Subject: Re: [PATCH v3 3/6] bloblist: fix a potential negative size for memmove
+Message-ID: <20260421150340.GD3036003@bill-the-cat>
 References: <20250718141621.3147633-1-raymond.mao@linaro.org>
- <20250718141621.3147633-3-raymond.mao@linaro.org>
+ <20250718141621.3147633-4-raymond.mao@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oqAal4sxuPbF2lX6"
+ protocol="application/pgp-signature"; boundary="ow5/coQfzD11lPIP"
 Content-Disposition: inline
-In-Reply-To: <20250718141621.3147633-3-raymond.mao@linaro.org>
+In-Reply-To: <20250718141621.3147633-4-raymond.mao@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,17 +111,18 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---oqAal4sxuPbF2lX6
+--ow5/coQfzD11lPIP
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jul 18, 2025 at 07:16:15AM -0700, Raymond Mao wrote:
+On Fri, Jul 18, 2025 at 07:16:16AM -0700, Raymond Mao wrote:
 
-> Add two helper functions for:
-> 1. marking a blob void
-> 2. getting blob record from a given blob data pointer.
+> It causes a panic when blob is shrunk and 'new_alloced' is less than
+> 'next_ofs'. The data area that needs to be moved should end up at
+> 'hdr->used_size'.
 >=20
+> Fixes: 1fe59375498f ("bloblist: Support resizing a blob")
 > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 
 Reviewed-by: Tom Rini <trini@konsulko.com>
@@ -128,15 +130,15 @@ Reviewed-by: Tom Rini <trini@konsulko.com>
 --=20
 Tom
 
---oqAal4sxuPbF2lX6
+--ow5/coQfzD11lPIP
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaeeRxAAKCRAr4qD1Cr/k
-CswPAP9chRPzRvdzW8y5WYfkE7b305L9uN9ReeJsIVSdNgnh6QD/QTa0mjfUO2mw
-x+NhybFkHyi22k2tAdGHC/Z8Yxx7HgQ=
-=TLDy
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaeeRzAAKCRAr4qD1Cr/k
+Cl+SAP0UpRqMbYrYijM3vSdYxU6U9udr8IoMwb1qB1YITf88iwD+KS0rUJKsNbZb
+2RHj7nCfpqI8yeD0qjibtZc9h1aRLAU=
+=G3ox
 -----END PGP SIGNATURE-----
 
---oqAal4sxuPbF2lX6--
+--ow5/coQfzD11lPIP--
