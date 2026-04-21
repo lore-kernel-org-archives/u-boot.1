@@ -4,122 +4,199 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86755F8FA6E
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 12:38:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 782ADF8FA6A
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 12:38:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEECB84348;
-	Tue, 21 Apr 2026 14:37:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 4539C8435B;
+	Tue, 21 Apr 2026 14:37:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hqR0BUHU";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="coddHdB/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F31F583FFA; Tue, 21 Apr 2026 10:37:12 +0200 (CEST)
-Received: from CY7PR03CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::5])
+ id 133C58441A; Tue, 21 Apr 2026 10:38:12 +0200 (CEST)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCD358441A
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 10:37:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 877918435C
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 10:38:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j-keerthy@ti.com
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=IwkicW5DjsgeBNoz9rkBkmudKFG3qdef4IVgE2fKIuAaEtSHsgGiLFH8RBoAk6TgoiXBsltXfFnzZA9x3AE1Idn16y5/5GidyVqxBGobc8eU/v759wEGVJTfdDB5yz9NkAGS+zNJ2OGKB/jxWM0Ybdfs/yg1q9kkl6qpZXhIOGUhTvvj5qeqEOoQ5IbDuguPCW41n+fpf8jWHipXKs3nK1NqEylNVZJvXMUqmEKzjqUA/7Zq4tyXp68j0y9FkDv7oSo1KsqIDthMD/htO8GRcCXtLXst1t7hLFbFDlJH3d6EQhu5cTNDE/SLiUFvichXZS9PpmxkNduGHWEobfNUiQ==
+ b=Eyvkob+NMvyZqlOkvvv8HxVMTY4radUZqzIo/sxWB9isPDgXC3pnb0PHCQTC9B5htCxNjzqYBu/7frodNdTWbvMuUbjxEdQUcxbgoOc+gshU78is3XzdRqeehRC06djrqRDJqP7EfLaFSt3/j8aimQ+bN73QmsphtFY2MfQHSPLw8qAIHZpKTmAyTzD8Q5WB6Qdit/gqBmZPL4g72SZY7zqDz9lttjLhik5KxkSlPr6GGKC28PmjynQs7CHyp+3L4qqeg3cBANmW576/o6D1UaOlDQqv/42v2nEtc1n/U42QC/Jr2bZK2fIHgnJNpQKBN3cZdZlJJXDW+W4+bTsovw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=R4WgQXV7Zoe5eQOWIdg3YGsvisdjdj4m31N1dbDcF/8=;
- b=QpptYC8RWmLLbHxpbTsniuSn/GY93GI9ZW61jKs1Hi1z2HVDch9RsIXBRNw7s+d4esiE1FCoXzKILiABVO7taQk0bAZ9gPV3teggT/TLpoiyfU7Er1QBGIt007sH9bY2LnuFGJZMP+KdpO3/FmFErHoN5324Nsvy2qxnImskWT+8lD+1/Hj7kafGqOjHcXeamcpcePN19g+OLrlhXabZme2+HysUIQnqFHPj2fLZehjU2V8HUo5+tA4WEjpdJS3JvEPa4wg0VrM5XovUsI2f3aQyZ3WznEdhkbR9HmONi7aoDU02C++GL5vEDXu9cja0NsI5dkwaRFbRMGyKmjIr8A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=CgE6KVtv4ajsvS5NMDzqltVWObkaJdOHe4kTfPxlF3o=;
+ b=E2/BD+99cAXlVt9PuOB6NgepAWoYOxMrDXyGzEaInhDqw7QmtVfjZ4kHcpTboYxGz8rsAQHnAYR3ecSSPyE3/yR1coxvwwUJa7uGo68eYXsFVFLBLG2L1Ep1xAekYEah5QHkXontlBSiDEYPG8afViMKaLJnsygl8uTtsTxdKP2A1J5LFdmhIBV/emHe9zo8VJz2q+AKT2G60t5cYVu7qJWsKIKu7USx6ZJ5+pPBiqAQs9s0qbODzQYuC3YgXiHiCNAXCAFzpOTxRBxSEvYe5coLRoQM8b7NCy8soMw0Mkzj1OLHJQE6cTB/ug8GesZ92Nj1GiFKxo/SBSLC55Yixg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=R4WgQXV7Zoe5eQOWIdg3YGsvisdjdj4m31N1dbDcF/8=;
- b=hqR0BUHUy6cRUhzCtsXgo1s6ARcmEQ0QQBFj5aD/8Ics53srSHsScLZT0VZDCNkilIGBnBMYq91+atoJof5L6PGuJJnfLNWjwSeD1QLMjAYb58yGusY4Uc8URJpD87ztNCVisfESPa6lLCrshsy8pHamgC6VxoJQRCLYRbKcxDA=
-Received: from SJ0PR13CA0078.namprd13.prod.outlook.com (2603:10b6:a03:2c4::23)
- by CO1PR10MB4530.namprd10.prod.outlook.com (2603:10b6:303:90::15)
+ bh=CgE6KVtv4ajsvS5NMDzqltVWObkaJdOHe4kTfPxlF3o=;
+ b=coddHdB/DWXKststDRG0RMlcchNuuuhTE68QSbIlnhyGsn3ttbtZUMP+JUstPkcQcDX/1MXQ7o2t9JL5fhCsquayn5QYVF3rbwP54FY70Chtt+MXltpArWoS4uC+HBaiSMoftCk1htQd/Ejthu1d8qObNzmbCucouqdqk/n0jwI=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by PA4PR04MB7550.eurprd04.prod.outlook.com (2603:10a6:102:f0::14)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.25; Tue, 21 Apr
- 2026 08:37:06 +0000
-Received: from SJ5PEPF000001F0.namprd05.prod.outlook.com
- (2603:10b6:a03:2c4:cafe::15) by SJ0PR13CA0078.outlook.office365.com
- (2603:10b6:a03:2c4::23) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.15 via Frontend Transport; Tue,
- 21 Apr 2026 08:37:06 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SJ5PEPF000001F0.mail.protection.outlook.com (10.167.242.68) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9791.48 via Frontend Transport; Tue, 21 Apr 2026 08:37:04 +0000
-Received: from DFLE207.ent.ti.com (10.64.6.65) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 21 Apr
- 2026 03:36:47 -0500
-Received: from DFLE200.ent.ti.com (10.64.6.58) by DFLE207.ent.ti.com
- (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 21 Apr
- 2026 03:36:47 -0500
-Received: from DFLE200.ent.ti.com ([fe80::196a:77c6:79dd:9856]) by
- DFLE200.ent.ti.com ([fe80::196a:77c6:79dd:9856%12]) with mapi id
- 15.02.2562.020; Tue, 21 Apr 2026 03:36:47 -0500
-From: "J, KEERTHY" <j-keerthy@ti.com>
-To: "Francis, Neha" <n-francis@ti.com>, "trini@konsulko.com"
- <trini@konsulko.com>, "jh80.chung@samsung.com" <jh80.chung@samsung.com>,
- "peng.fan@nxp.com" <peng.fan@nxp.com>
-CC: "Fujiwara, Takuma" <t-fujiwara1@ti.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, "Kumar, Udit" <u-kumar1@ti.com>, "Gujulan Elango,
- Hari Prasath" <gehariprasath@ti.com>
-Subject: RE: [PATCH v2] power: regulator: tps65941: Enable FPWM bits
-Thread-Topic: [PATCH v2] power: regulator: tps65941: Enable FPWM bits
-Thread-Index: AQHc0WfmVlic62VhiES0QT20pL5gs7XpMMQQ
-Date: Tue, 21 Apr 2026 08:36:47 +0000
-Message-ID: <258e3c7ea96443feaf33ade5ef072c3b@ti.com>
-References: <20260421082145.824453-1-n-francis@ti.com>
-In-Reply-To: <20260421082145.824453-1-n-francis@ti.com>
-Accept-Language: en-US
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.33; Tue, 21 Apr
+ 2026 08:38:05 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%4]) with mapi id 15.20.9818.033; Tue, 21 Apr 2026
+ 08:38:05 +0000
+Message-ID: <4bc9cdaf-38bc-4edf-b19f-d7301c84b49c@cherry.de>
+Date: Tue, 21 Apr 2026 10:37:54 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/6] net: make NET a menuconfig (and downgrade NO_NET to a
+ simple config)
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Tom Rini <trini@konsulko.com>, Jerome Forissier
+ <jerome.forissier@arm.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Udit Kumar <u-kumar1@ti.com>, =?UTF-8?Q?Alvin_=C5=A0ipraga?=
+ <alvin@pqrs.dk>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Adam Ford
+ <aford173@gmail.com>, Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Matteo Lisi <matteo.lisi@engicam.com>, Tim Harvey <tharvey@gateworks.com>,
+ Mingkai Hu <mingkai.hu@nxp.com>, Pramod Kumar <pramod.kumar_1@nxp.com>,
+ Gilles Talis <gilles.talis@gmail.com>, Le Jin <le.jin@siemens.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>,
+ Kongyang Liu <seashell11234455@gmail.com>, Stefan Roese <sr@denx.de>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Vaishnav Achath <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>,
+ Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marex@denx.de>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Yao Zi <me@ziyao.cc>, Fabio Estevam <festevam@gmail.com>,
+ Alice Guo <alice.guo@nxp.com>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Maarten Brock <Maarten.Brock@sttls.nl>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Matthias Brugger <mbrugger@suse.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Heiko Schocher <hs@nabladev.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>, Brian Sune <briansune@gmail.com>,
+ Julien Stephan <jstephan@baylibre.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Ben Dooks <ben.dooks@codethink.co.uk>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Weijie Gao <weijie.gao@mediatek.com>, Anshul Dalal <anshuld@ti.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>,
+ Hrushikesh Salunke <h-salunke@ti.com>, Alexey Charkov <alchark@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>,
+ Andreas Dannenberg <dannenberg@ti.com>, Chintan Vankar <c-vankar@ti.com>,
+ Martin Schwan <m.schwan@phytec.de>, Benjamin Hahn <B.Hahn@phytec.de>,
+ David Lechner <dlechner@baylibre.com>,
+ Ariel D'Alessandro <ariel.dalessandro@collabora.com>,
+ Dmitrii Merkurev <dimorinny@google.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Robert Marko <robert.marko@sartura.hr>, Beiyan Yun <root@infi.wang>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>,
+ Romain Gantois <romain.gantois@bootlin.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ George Chan <gchan9527@gmail.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Benjamin ROBIN <dev@benjarobin.fr>, Max Merchel
+ <Max.Merchel@ew.tq-group.com>, Sean Edmond <seanedmond@microsoft.com>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Shantur Rathore <i@shantur.com>,
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, Sky Huang <SkyLake.Huang@mediatek.com>
+References: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
+ <20260420-net-kconfig-v1-3-9900002d8e72@cherry.de>
+ <18031190-2B66-4DEF-8382-6CB9DCCFA3A1@gmx.de>
 Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.24.18.107]
-x-c2processedorg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <18031190-2B66-4DEF-8382-6CB9DCCFA3A1@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1P190CA0049.EURP190.PROD.OUTLOOK.COM
+ (2603:10a6:800:1bb::7) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001F0:EE_|CO1PR10MB4530:EE_
-X-MS-Office365-Filtering-Correlation-Id: 97be47f4-2785-49cd-6904-08de9f812a83
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|PA4PR04MB7550:EE_
+X-MS-Office365-Filtering-Correlation-Id: c3445b3b-5dd3-4bf2-1e2a-08de9f814eaf
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700016|376014|82310400026|18002099003|56012099003|22082099003;
-X-Microsoft-Antispam-Message-Info: B53tez34LiJo/kQ+P+bD4BxT9SelR+5ShcMnAcObh62/vBmHqObUJApZRcwfdVyAt8Y5xIiwS/6ZaC1ppbXlPRdExuhiMTqhmGCDyqofabiPm0vE6adck4M7ETNwo+SS0cQ7AmrXBUEINcz3Nv57UwslvUW8GapLGFzkkoUFc2slnx+fu3mrtNuNB9lIliulO17F4CXdgQeJDlqcprnpiMhsXe2ex86z1Fq11uzzkmr+kJRl5sz64iyuuy7NyOxfl7P+jV8IzaSjBGjn82twPt0Dj5A8oFx7k4R8ldO3x29OW5RLtCk1WxQoRugMpsJ4QnKfnvXDnu0cb9Cay5E3t3lwm+FHnxEg+3+fp7ARWLagyJQaPoSPUFVXCzSG45oDSRicvEln0RYh78X6UIuWHTJB1rQWU+O1jkk4WMFkqSgDemit4Cs35P192xsxK08pEVegrAi+4dlkT8JIVbnBcU8iUGjvgsa7fwYf/qPAgVYZUkFjzEl85eVA7/KwG+FbXmTiMJ1RZtRp7+tjDSdsdYmd6U20RVXTurvvOF6Sin4jmqhmGt5qTaGJh2j1/y13O9ehS1I6ZpyLjt7Hjp0BKRZhu4Os12mcfI5vU9UbfDrQkPySamgG0FyR00RxjH9OR+oFY1zfVZ6UdyYmHWnRIzGZ8UEnE1TPVYI+FvpfuizuTWZEJSg8eyv23ohNBqcZcj1ndtHeOkWHp7evnLcYkOkoUXdRm9GJ0+QNDGLtMok=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700016)(376014)(82310400026)(18002099003)(56012099003)(22082099003);
+ ARA:13230040|7416014|376014|1800799024|10070799003|366016|56012099003|18002099003|22082099003|18096099003;
+X-Microsoft-Antispam-Message-Info: qoGZGm/WdcnNtiw0ioutf0eVXc1kKp3aU41kyqDI1kCrQQ1RLVU327q5D7g7tMtqIiaW9zphhANSJhsQXcDRYctcBkV7mpAPIClGQua28SbHgxXgOUnyjGFTroK+CR07u27cj1md2AzD0Ep0NHYaCrUZ5pAJJ0vuwtxnypxGUAY+36Lnm2oQVVsbJoCC+dLUfROgD/rx8fjL0LJ04ZyjV6URw09X4DPeciNofn/XtSwVJRZAEqPbaRYpvKLQJNghgjcrOONsOh15jXmTe58cfcfzuMZMoXNvWwetJY92bs1E91WAUxYGxz6pzD1tu+OHNSyTqiDHkDnGrc1PplPlxk5yGHjOP32QR8+a0Ggyu3E8bwhKUptSrWtI3XSM9/0y3sYBstyIZSoEFzJxuhgh5Ty9fdfkHq3Ypx7mJguxibgXFq95Kod8yiiWeo7LsqUOa6FZGIDPH+k8ifKgyhbJJthArQfFXXnzURnEB3ceeKwJukXKc/9Mrm9bnVRhjka7YPt3ivD1kBLiQgyeUlE0mqYWgm7EW+A7fi72XHOT4gsBOMKvCNDi0ArlCx/9JiaruVPt7vwsLuMjPLBlsEKM6ShxZyMkC0S/sH7tKXcfDk0XIydEdjGizrW6CoD3IEHkoy9tYRsIIyUtB09k2gXtpTghtaNxCer6G5L3IEegowyjxwjLFBVLsVTh0lxPzvPD
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(376014)(1800799024)(10070799003)(366016)(56012099003)(18002099003)(22082099003)(18096099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: mDJpU//qAmCV6oFYm387tpG+IDNaTJtHFNwR7opP1ULGM0YKfSbIg3D8uBK+G4s1PVQo2NePYxj+DU8WJ3zYYMsvVheNnyqJ6BEA+sxuPdfpnKE8uSDvrk0vHK5ThxZwBvKzU2KjX/QlKo2VSUsgvea1GSvbhOPHnkbPYBxxa4X7fWsPQ/UZUj2dOhrXdAaJwQn7Gjq3VS4d9jF4i2iHfi0xzArRtq1T5gfWMk1zMwYUKTkYZMce6f6UPboyOgXZoXXw+DO5mq7j/L8554pfAUHaakXy5qhJXG3xg755+xYEXTzoBlEL9KNDd+cHCHrYXiAQG67MtzqAp/i7EX/RRAJNxS7d9/IL8UFLp3svKa17R7kwrDz26d6CMOpef7ac0I8iyaVGWOG3XZzXYYj+QrscAc/9FU6KCY473d0zsyM9ljQrnwU5KtW55+N/3g0U
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 08:37:04.4586 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 97be47f4-2785-49cd-6904-08de9f812a83
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001F0.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR10MB4530
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RWxtTFd1VmE3QTc5dW9vcHZXZUpLU2ROUTNiYTVOK0J3UmZlby9sT084eEJE?=
+ =?utf-8?B?UWxvdkJvUjhhbGNoeElYNEk3T2gydVpMNU1MYmU0cnRLazl3OHR3L1B2R01G?=
+ =?utf-8?B?NHpsVzN1WWlKREZMTW1DR2diRmNmQ1BYL2sxVlplWXAvOUUrMjIvSHpyMmYy?=
+ =?utf-8?B?NUNGM0VocVFORDZsZEJzdTFjekRIZUFDL3ErT256TnFNK1FpeFNQZi9HZEEr?=
+ =?utf-8?B?NXgvWkhYd2RBUlRLeEtLWkM4U3lURlpVQmhOQ1MremVTSFFpUHZ6dzdrQ2sz?=
+ =?utf-8?B?MlhMM2E1ek1iUTBTQ1dKUUZlcFdhWmg1ZXF5S2tLaS9hQUlTUkp4Zndzc21Z?=
+ =?utf-8?B?V1lZTnRXTTNoVFhYQTd4YmxKeVdTVjY0UFJvaTQxeXgzeDU4MEZwak9KaVRP?=
+ =?utf-8?B?cVhvRzJiYStYci9VR0tXdFR3RVBjZENlWC9sV2UvZzZhWWhaZWllUWxCMGZk?=
+ =?utf-8?B?RCtTZFJHK2dFRm9aVnpoN2N4ZFZvMnVEcVFDRUZ6YUlCeXplU3lsNXRoczh5?=
+ =?utf-8?B?K1hKTWFlOXk5M0pwY0ZHeWRXWCtrZU8wcUxlY0NHbHEvM0hzVUNuMGlhc3Iw?=
+ =?utf-8?B?aUZiK2FsSytoOEo5SWphd1pjUncwemtTRno2VytNbG5WYlBWelYwZGhZY2lN?=
+ =?utf-8?B?ZUJJYVBhdGU0QzVBVXN2R0F5VDkyL0VjZUw1YmdRZFpzNnVPdFdmdWo3OGtk?=
+ =?utf-8?B?dnFBbi9ZKzhlck12bTg5V2JXTlRTV0R1MEg2ZnEzdjBxVExObjNKQlFrRFY0?=
+ =?utf-8?B?RUtHdnMxMzBrUGtZQkNUMno1aFIwQ2ZsRTNJbk9xU1VJc0pnTnRydnVTYkVK?=
+ =?utf-8?B?NnFsSDA5S0Z6Vlp0dkYzNEFERGV1N3RVQkkwVXBNU0M0amNERnkvTTBhVU5L?=
+ =?utf-8?B?K1ZpQU1JdE1sdlBOZHhWWW5NNUlyMWhaRkFENnh4UmJtaWZadFVucGsvQitI?=
+ =?utf-8?B?NUE1SGZFZE45MFFjMjF3RnQ3OE9pWjc1L0E2Y0U0R2pzckFnMllEOE1lS2RV?=
+ =?utf-8?B?NEFvaVg5WlQzLzBlOGNpekpLWVhGeHlOVS9Kem9XcmZvYWFsdnVWc0FQVUs3?=
+ =?utf-8?B?Mmwyalg1b0RIL0VPTkN0SS9hc3VrK2tqazhWOTBvUnZ0UEowemoxVFlqd3Za?=
+ =?utf-8?B?K015YVFLbllYeHJUU0pKUU5nMVBWQWR1aE1iRXFIekdBMUVmNTlkZFRpYzkz?=
+ =?utf-8?B?KzFSTkVSbXlRQzVubEFWRHVoMXo0ekFnQ1pUY3h5YmV2VG1rd0dpT21GNENm?=
+ =?utf-8?B?SzRsNmpaTDgvSjl1TUVPaVVweEkwQ1RmNm9zTkdBdERkeHM4SllDRUFCRWhM?=
+ =?utf-8?B?NlAvcG1GOUwyQTVYNnZWeXFSUmdoQmNPQW90SXZGYWRscHgwQ2xMdm15dGZl?=
+ =?utf-8?B?bG9xR1ZYcnpJbUVLcTRkKy8wMHBHNEcvRFBkZGo2Qm1XWFN3VGI3aFEzSUY3?=
+ =?utf-8?B?UzFDOTZGSk1xUkFYdWxQaW1Hc1UvVlFVaTI0dFBGKzZNdlNMQWxWQ3UxbnBs?=
+ =?utf-8?B?cFhSOVIzWGplZXVRcFA3a0lsNVl0VHdadyt0WXlNbi92YnJxenhPMVR0NGFT?=
+ =?utf-8?B?cUVUSGNnUkFUdXpNNGFYRStoTjBISWJEdlNnUlFkS0IxUlZBL084VjN0VGhS?=
+ =?utf-8?B?SmFKMGZyV0trOFhmSDJuckZtWUE4anplWkF3N0dHMkpRdi93Ry8wUkMzS0w3?=
+ =?utf-8?B?WW9Eczh3bk4zODdTNkplZkJpQkRjeGVFZnJOSVVjNTAvcWZNU2FNNzNscmYw?=
+ =?utf-8?B?NThNSCtxUjNRNG5MU0Focm5OZXhQSHc5RU1LVlFaSHFWSXU2MTdQNDNEU25s?=
+ =?utf-8?B?OE1WcUc0REVVYmVmZmFLTzVYNDFUc3I3MENaVndGUUxXSC9UbVQzelhTWGhG?=
+ =?utf-8?B?L2JZSlA5ZStaWUsrRGNxRWY2MFdGNU9DS0QxL3JUSFlBb2E4azVlcDQxblRS?=
+ =?utf-8?B?QkJpZ015WkZPL05sNGZ5TXgyREE3N2tydXZNaXgwSVpIYmtnSTFYRDI3UExF?=
+ =?utf-8?B?bmJjY2o1SktyVytEMk02dHNTYUlGbXhLbTlGc2NpOURyckQ0ajFLaVpobW5s?=
+ =?utf-8?B?Ry9oeGhINUhYbjQyNzU3RDN4OXFHZkY5RHNacGZEMnFTTysxY3VIWXIzYW5p?=
+ =?utf-8?B?SVpUelYzMXVPcGZ2SHBNZDcyQU10Wm5BVnNsUUY5anNQSzJmYm5kdDBPa2FX?=
+ =?utf-8?B?YzErYi9oQlJCWlBsSmVBeDMwSXQyVU1yMnVJeWxIZy96M3k3dXVMblJiaFgy?=
+ =?utf-8?B?ZGdyUXNDUmlMSS9VSzY4T1RYbS8yY0srRFNNcUdnVmFtanJnbXVVV0RSbTYy?=
+ =?utf-8?B?eHYvMy9HWU05ZWVLLzhYdE1kMjFrSWVZRVZmUUl1aE9vYjVtQjBua0crUUpJ?=
+ =?utf-8?Q?7hrczJdGp+yi/vg4ENLXvtOj+rqYN8HMHopM0?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: c3445b3b-5dd3-4bf2-1e2a-08de9f814eaf
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 08:38:05.5286 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6Cp9f3WtfuOG9VyFO0eUXuEVMTzL1Kys4v52CgeikM6cpo4Iu2kuOwhS8nH3KSHii45F/59trEMuwZPgAte3qlKlKphy8JpmljoBOILNTAk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB7550
 X-Mailman-Approved-At: Tue, 21 Apr 2026 14:37:42 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -137,108 +214,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heinrich,
 
+On 4/20/26 10:24 PM, Heinrich Schuchardt wrote:
+> Am 20. April 2026 13:36:09 MESZ schrieb Quentin Schulz <foss+uboot@0leil.net>:
+>> From: Quentin Schulz <quentin.schulz@cherry.de>
+>>
+>> This will allow a bunch of simplifications across the code base.
+>> Disabling NET is the equivalent of today's NO_NET choice. This means
+>> that if NET is enabled, either the legacy or lwIP stack is necessarily
+>> selected, which allows us to simplify if NET_LEGACY || NET_LWIP into
+>> if NET in a later commit.
+>>
+>> Config fragments - or defconfigs including other defconfigs - setting
+>> the network stack (NET_LEGACY or NET_LWIP) must also set NET (or unset
+>> NO_NET) if the config they apply to - or the included defconfigs -
+>> unsets NET (or selects NO_NET) as otherwise the NET_LEGACY and NET_LWIP
+>> symbols are unreachable. This is the case for the two defconfig modified
+>> in this commit.
+>>
+>> NO_NET is now a convenience symbol which hides NET entirely to avoid
+>> modifying many defconfigs. If one selected NO_NET to disable the
+>> networking stack in the past, this will still work for now. Technically,
+>> we should be using the "transitional" Kconfig attribute but that is only
+>> available since Kconfig from Linux kernel v6.18 and we're on 6.1 right
+>> now.
+>>
+>> Note that this moves CONFIG_SYS_RX_ETH_BUFFER from under the Network
+>> menu back into the main menu as it seems like it needs to be defined
+>> even when there's no need for NET support at all and menuconfig option
+>> doesn't work the same way as a menu.
+>>
+>> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+>> ---
+>>
+>> I'd say we should have everything net-related depends on NET as well,
+>> so that disabling networking support with NET=n is also disabling
+>> anything related (e.g. Ethernet controller and PHY drivers, USB
+>> Ethernet, USB gadget CDC/RNDIS, network CLI commands, etc.).
+>> ---
+>> configs/am62px_evm_r5_ethboot_defconfig |  2 +-
+>> configs/j722s_evm_r5_ethboot_defconfig  |  2 +-
+>> net/Kconfig                             | 23 ++++++++++++-----------
+>> 3 files changed, 14 insertions(+), 13 deletions(-)
+>>
+>> diff --git a/configs/am62px_evm_r5_ethboot_defconfig b/configs/am62px_evm_r5_ethboot_defconfig
+>> index 8baec9d43ff..df49324b25a 100644
+>> --- a/configs/am62px_evm_r5_ethboot_defconfig
+>> +++ b/configs/am62px_evm_r5_ethboot_defconfig
+>> @@ -5,7 +5,7 @@ CONFIG_ARCH_K3=y
+>> CONFIG_SOC_K3_AM62P5=y
+>> CONFIG_TARGET_AM62P5_R5_EVM=y
+>> CONFIG_DEFAULT_DEVICE_TREE="k3-am62p5-r5-sk"
+>> -CONFIG_NET_LEGACY=y
+>> +# CONFIG_NO_NET is not set
+> 
+> Does this imply that NET_LEGACY is the default? Choosing LEGACY as default would not be plausible to me. We should use LWIP as default. Then every new board will use it, hopefully.
+> 
 
------Original Message-----
-From: Francis, Neha <n-francis@ti.com>=20
-Sent: Tuesday, April 21, 2026 1:52 PM
-To: trini@konsulko.com; jh80.chung@samsung.com; peng.fan@nxp.com
-Cc: J, KEERTHY <j-keerthy@ti.com>; Fujiwara, Takuma <t-fujiwara1@ti.com>; u=
--boot@lists.denx.de; Kumar, Udit <u-kumar1@ti.com>; Gujulan Elango, Hari Pr=
-asath <gehariprasath@ti.com>; Francis, Neha <n-francis@ti.com>
-Subject: [PATCH v2] power: regulator: tps65941: Enable FPWM bits
+(below, "current" means the value in master branch, so before this 
+series is applied).
 
-Depending on the phase selection (single or multi), the FPWM bits configure=
-d forces the regulator to operate in PWM mode. In case of multi-phase selec=
-tion, the FPWM_MP bits enforce the regulator to also operate in multi-phase=
-. This fixes correct multi-phase operation.
+(current) CONFIG_NET is the default already, see 
+https://source.denx.de/u-boot/u-boot/-/blob/master/Kconfig#L794-L824. 
+This series does not aim to change anything but the name of the symbols. 
+Yes, we could make NET_LWIP the new default stack, but not in this 
+series. Also, we have an issue that if you enable SPL_NET you need the 
+legacy stack, even in proper (according to 
+https://source.denx.de/u-boot/u-boot/-/blob/master/common/spl/Kconfig#L1152-L1154). 
+So we would need to tackle this first (we don't necessarily need to 
+support lwIP in SPL, just that the choice in SPL shouldn't impact the 
+choice in proper).
 
-While at this, correct incorrect macro alignment as well.
+If you're asking about this defconfig specifically, it's simply because 
+it is not a typical defconfig. It includes 
+configs/am62px_evm_r5_defconfig which sets CONFIG_NO_NET=y. Because 
+NO_NET used to (before this series) be a choice with (current) NET and 
+NET_LWIP, am62px_evm_r5_ethboot_defconfig needed to override it with 
+another choice, namely (current) NET. Because NET_LEGACY is 
+automatically selected when NO_NET is unset (due to NET default y), we 
+only need to unset NO_NET in configs/am62px_evm_r5_ethboot_defconfig to 
+restore the current state of enabling the legacy stack (current NET, now 
+NET_LEGACY). This is not changing anything, just moving things around.
 
-> FWIW Reviewed-by: Keerthy <j-keerthy@ti.com>
+Does this answer your question?
 
-Fixes: 065a452ae6a1 ("power: regulator: tps65941: add regulator support")
-Link: https://www.ti.com/lit/ds/symlink/tps6594-q1.pdf
-Signed-off-by: Keerthy <j-keerthy@ti.com>
-Signed-off-by: Takuma Fujiwara <t-fujiwara1@ti.com>
-Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
----
-Changes since v1:
-https://lore.kernel.org/u-boot/20260129072857.1437272-1-n-francis@ti.com/
-- alignment correction
-- used existing macros instead of 12, 123 etc.
-
-Tested on J721S2-EVM (same as v1, no logical changes)
-
-https://gist.github.com/nehamalcom/a74fb2a3b59421d0e04693c7d244fdb4
-
-Before the patch, the kernel TPS6594 regulator driver would warn about over=
-current on a buck, this was due to incorrect multi-phase configuration.
-This patch resolves it.
-
- drivers/power/regulator/tps65941_regulator.c | 15 ++++++++++++---
- include/power/tps65941.h                     |  4 +++-
- 2 files changed, 15 insertions(+), 4 deletions(-)
-
-diff --git a/drivers/power/regulator/tps65941_regulator.c b/drivers/power/r=
-egulator/tps65941_regulator.c
-index 2561d6f4c6c..209968b5718 100644
---- a/drivers/power/regulator/tps65941_regulator.c
-+++ b/drivers/power/regulator/tps65941_regulator.c
-@@ -63,13 +63,14 @@ static inline int tps65941_get_chip_id(struct udevice *=
-dev)
-=20
- static int tps65941_buck_enable(struct udevice *dev, int op, bool *enable)=
-  {
--	int ret;
-+	int ret, idx;
- 	unsigned int adr;
- 	struct dm_regulator_uclass_plat *uc_pdata;
-=20
- 	uc_pdata =3D dev_get_uclass_plat(dev);
- 	adr =3D uc_pdata->ctrl_reg;
-=20
-+	idx =3D dev->driver_data;
- 	ret =3D pmic_reg_read(dev->parent, adr);
- 	if (ret < 0)
- 		return ret;
-@@ -84,10 +85,18 @@ static int tps65941_buck_enable(struct udevice *dev, in=
-t op, bool *enable)
-=20
- 		return 0;
- 	} else if (op =3D=3D PMIC_OP_SET) {
--		if (*enable)
-+		if (*enable) {
- 			ret |=3D TPS65941_BUCK_MODE_MASK;
--		else
-+			/* Enable FPWM */
-+			ret |=3D TPS65941_BUCK_FPWM_MASK;
-+			/* If Multiphase enable FPWM_MP */
-+			if (idx =3D=3D TPS65941_BUCK_ID_12 ||
-+			    idx =3D=3D TPS65941_BUCK_ID_123 ||
-+			    idx =3D=3D TPS65941_BUCK_ID_1234)
-+				ret |=3D TPS65941_BUCK_FPWM_MP_MASK;
-+		} else {
- 			ret &=3D ~TPS65941_BUCK_MODE_MASK;
-+		}
- 		ret =3D pmic_reg_write(dev->parent, adr, ret);
- 		if (ret)
- 			return ret;
-diff --git a/include/power/tps65941.h b/include/power/tps65941.h index a026=
-ec56958..78e48a15972 100644
---- a/include/power/tps65941.h
-+++ b/include/power/tps65941.h
-@@ -19,7 +19,9 @@
- #define TPS65941_BUCK_VOLT_MASK		0xFF
- #define TPS65941_BUCK_VOLT_MAX_HEX	0xFF
- #define TPS65941_BUCK_VOLT_MAX		3340000
--#define TPS65941_BUCK_MODE_MASK		0x1
-+#define TPS65941_BUCK_MODE_MASK	0x1
-+#define TPS65941_BUCK_FPWM_MASK	0x2
-+#define TPS65941_BUCK_FPWM_MP_MASK	0x4
-=20
- #define TPS65941_LDO_VOLT_MASK		0x7E
- #define TPS65941_LDO_VOLT_MAX_HEX	0x3A
---
-2.34.1
-
+Cheers,
+Quentin
