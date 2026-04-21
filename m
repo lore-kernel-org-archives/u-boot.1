@@ -4,92 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12CFEF94CB3
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 22:51:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C2B5F94CB5
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 22:52:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D097184353;
-	Wed, 22 Apr 2026 00:51:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 330B184370;
+	Wed, 22 Apr 2026 00:51:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X8VoJsym";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eOCzklTs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74F0D84353; Wed, 22 Apr 2026 00:51:50 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id C11278437E; Wed, 22 Apr 2026 00:51:57 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9124084366
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 00:51:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E389083AC5
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 00:51:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-ba92146cc86so277197366b.1
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:51:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776811908; cv=none;
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-ba3b9601b97so682422066b.2
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:51:55 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776811915; cv=none;
  d=google.com; s=arc-20240605;
- b=DWUH27xdZ2YbpwKr3Jc0QOI1Ij3twBRdi0pP0LPgTUQImKM6QFE8SpjeI+rQgVLcM9
- EdwoBAIQMUqCuqz6lPTGMQGGEgYodErknevnCoBT5PPO4FNBypTl0H5msnmq539EDnNs
- MTKWv6pFO0bgP1iRVbfojyy0mxf9+Z6b/0ZZWraviiyLRjYFZqhE7BsK03YqEDSf+7fG
- oZEQKMXsB2o74vWcMNf5tVwAmvHJ809aAzmjH1PD8pw/RYcjM7xasWcvOgiJNXOgo/Vm
- vVslYTgavvcqldonyJGz86CEhcLi+QLeJE1LEtKd2J1qsb3qANdvHPuGkHiL4p6EiJ0A
- zZiQ==
+ b=hPOVrG/AhF9VUR1SysdQCUvbqvdStFXoKsj2dsC25RXGGPRn8zv9KVUNIrh0Ka258a
+ bTkvQyUXtnykiTToT6FhZaEIEwVZiM5vCXDPbOQAuzayajVOhiI/d+EcmVdvoGshIzi4
+ l2jLFAMnZ8SprUp7VstcMFbiy2gu+/OvJ96Vt5idih3LhePOBSBmUVVhDDFjQW0G5xe9
+ +TmE71gq/4XPNzvJ2nVzi9lBgGNKUDvgFuHhtoBbYrl7b2REEJREH82fWNn/KbLZynPK
+ ViHbCnZfmZA5lOJQLwvbXqQmnbvvsSCPHloeKnjUW4rhTJpGwZ+okz2SCbN/tEaR/0Kq
+ ykkg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=9bQeLSBqiC8K+iV+sxzTWTy6pJvAJZJSfIj0IDL1Qvw=;
+ bh=642IkVE2wQ8EzOzQ8JLH1Fez3QREvc98BKPt5Pytcio=;
  fh=T79q7iQaKgdBLSTuhvl3jRYD2v6g+8MB8Joags6q2NI=;
- b=T+3ZNXAJy5MrL/waDgYTy6Y0gqFYgScLnpUDmYvl83i+Ic58PqsJ/7p2uXQlf/Ofnm
- KW/h+hFlTszb2Gfiw6JMuiaVUE5ALKlF0f4aqifG30A5EeIpcfF3eRzAY9O2WzSXoIrc
- KNKO7OKEiq9QsHleaC1KXalel5jymDHgxM44q6PbHcKo7HviKpYeeaK8GDi7SahWTqaC
- BhttanmxGvg0HchRNn6rtji3gpDjHL3R4Qtttl9ilE1nkkt0A7wsGFgolaZrlsNu54NA
- 4nTgk+W5yzwJ+pTnJR5PlX+6+gcl/EC/Yq5ElmhKZzty8OpivL8xrlouP1XireCnwWLA
- wy6Q==; darn=lists.denx.de
+ b=KPQallSmQm849WjuNVfyjmorBAjTh/DFCWOdmh33J6Kj/iEIHAqDnirt41PJkz28g8
+ 3l4Riha7fnA0Mx3ChQAPD/QsC83/BcjhrA57tdT7RN9ZUy7g3O0XR0mJCcbnTbofYxY9
+ 4TRPmtXVmX6f0OM9P7to2N3VYTnT3wC/PeAzl4bemMHnpl/koRr71/32iWLqGKwsIgYj
+ DMoxsXT4zubeR40Y004z16fwnuaxgVXYs3NZ2iOPpH5PPawABNxGOMf/gJK5OdTqXC7x
+ uxpz66eEX8Jue/8KBLmAnKfiB2LBVe+xgHCe3KirKoEQivuHu0lDWsG+aCXgAkVW4i+O
+ wnrw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776811908; x=1777416708; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776811915; x=1777416715; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9bQeLSBqiC8K+iV+sxzTWTy6pJvAJZJSfIj0IDL1Qvw=;
- b=X8VoJsymtexUf0pwPQKU6tI3lmzwlvsqUZ4exQTbviZMek+Xl+lQ13ZA+E9/9bSDWw
- WEkaVmyZ8ZVWuAaKKw1elz6aON+PHLHUlDBcQPnJlORTh2hHqg3IH3WF8rrnIyNDhBwS
- 0+h0O2yEXVYgQD+0hr0X6rnWhh3tgLHAZCdw0=
+ bh=642IkVE2wQ8EzOzQ8JLH1Fez3QREvc98BKPt5Pytcio=;
+ b=eOCzklTssF1WzL0t+/ZSU+XMGgJ/3PwSktFNIBc7wNklc+gu7cbFP1pvz8rI2X1hms
+ WlzZ7zjQrSYVJaNGXXQcefutzSxN9FYfSppIuMTIeUP58NKN080f5SOG+kXaEx3IC3Qf
+ WWTJmVLHLqW3VnUHLJ9O+VQjFmOeJuNY4TQnc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776811908; x=1777416708;
+ d=1e100.net; s=20251104; t=1776811915; x=1777416715;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9bQeLSBqiC8K+iV+sxzTWTy6pJvAJZJSfIj0IDL1Qvw=;
- b=PjdZniIruVmu/BRyG4GcvsNpmWhEQZm7a8E+ZTuDzvrunRcKxm5cJ/xB1dB+2T7UGU
- yHGpNpuQNVpk8tSrss80RQCMhvDitts0EfuKFY4humxzAdGIa6KMM5wwh9egrO2VzYS6
- ZMQGAa9zRzB7ia5MyTgD16E5Zdtoey/IiYcjUoW7mJe94TSvS8t84CqdycbGHNTPYVqt
- InXOyKAIp9Lamp3l3UmJ3MmDkWp5E+4u6Gu10Y6GBQOvPY8mORCYgH53RZIuj4Nd1g/o
- FF4js8sFROi3vJiURIlLGBnMVIfo7kJvJZ/6gsgkd9kJCTD1g7RDXFGQIBFmLu80gSjU
- OSVw==
-X-Gm-Message-State: AOJu0YzttJYl/xUwagewjSzP6to0Q+W+DiuN4cMW6atmjO7cMULCtyML
- BIY74jZfq8VvlNjrmQknYe19TxNyGUtCGY3RtPBq43QZ92r39WPWxxFgevv+e/ueqzR3ZyUeQHt
- Os3iKRGoJtIv1ixjVjdZJs8PA31tusdkCw5CjE2cD
-X-Gm-Gg: AeBDieshWH+czOd1/ZpfAekGLdKWV/IP3LwLVA0sJCK8Mp+QGnIgSptf6odVQqsZP+R
- d52/pgIahUSb6vL+1wS+9JxBvA224IDnMNWgQOy5OfnYzI3i2gL4PU6Dt/YY5zCpKuUJA4y1uY4
- pgKgSpt9ZNGdyJIGF0gjLrXwsMiju56nNxh2bnui7dOEPpYgX0NjOkw1/0MYEU5SyPPSUzYLacs
- 42WBlxFCCVSo6skNfrUwVkpXgadimTFvHNJqBAze7hUKaW/g5da0yjLRGyhotwbwBLeuWIXYCrh
- YzQGdh9cZAwpU4snHoZc
-X-Received: by 2002:a17:907:7ba7:b0:b98:5648:e68a with SMTP id
- a640c23a62f3a-ba41adfb426mr969459166b.36.1776811908014; Tue, 21 Apr 2026
- 15:51:48 -0700 (PDT)
+ bh=642IkVE2wQ8EzOzQ8JLH1Fez3QREvc98BKPt5Pytcio=;
+ b=Pp7WPmVq2oCXfHWiF0UUc+wyb+eKoBydKaDBkTaXu2Te90xVUhvnExIhDbdgbcZAKC
+ wbQ1/nfYImFXQ5TZ0jzNPgc0+PeEsvI6q9d3CMzqthU5Asra7n3PesGd5O6DaoVOMrhN
+ NYsCOWhlwzwm4fP7EKI0HiIHhHP/huxUPOt32dmtm2vdJ/RxII2HQr/Kh6B4VKDHXNgw
+ oguoZUe1YRzoFupJKrP+uTjRPY3rz30jjTc6MLDQkY4dz/jj+RguYRGg7sBIc47p62qa
+ shlxX99XYSEIuBH7Ddq5rP7LWNAkJMyfXKN1xkqSGliKwRcuNdO1TEb7ObfiCpOfCAvN
+ SG5g==
+X-Gm-Message-State: AOJu0Yx3/vHePz3isuhMUjoEJYB89TTkF9nbujINVkxgY+l1uSCWdv0p
+ x4VohwrnWcRlfSGhbG4cL3M5LYQKyZSdfx6p1KHHLM27PBnGavfT09U3uUtJeV5zTIFftsVwtNi
+ vqg2eDg+TRiS/AKaA1WLY7lvTdDlq1MnN4rEi7EEbsSAfLOWZ3FTtaw==
+X-Gm-Gg: AeBDietaOC0Eu2bMp/ki/vqUE6O2yFjxGdsLxXRr3+J705FYGuGQMvEENuaw26g5W6W
+ zP22Mf/6hY6mVStDezMtJh2YReE/qDcVW2eU4AtEujI3CDS3XHlmwyO2r0kn1gL46fxpZlcTft6
+ UVjOpfpnhMoQJ6yLQeLozC8U2g1x7Kwp3tH5CxHqlOG9fagNWT78GU+xp7NwDVobAW8yCSdhMgd
+ O4CRCiMvy/vmVAV9C5fo1pEryRU7b88aTukWaEfv28F5XUk1/8uAwrkFoxnDb1w63C7ni5zK/rV
+ WJglF+FyII07EVBpAeDy
+X-Received: by 2002:a17:907:94d2:b0:b96:dec7:5209 with SMTP id
+ a640c23a62f3a-ba4197530b7mr1005834766b.17.1776811915288; Tue, 21 Apr 2026
+ 15:51:55 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260421-ten64-add-usb5744-v2-0-eaa81288e393@traverse.com.au>
- <20260421-ten64-add-usb5744-v2-5-eaa81288e393@traverse.com.au>
-In-Reply-To: <20260421-ten64-add-usb5744-v2-5-eaa81288e393@traverse.com.au>
+ <20260421-ten64-add-usb5744-v2-6-eaa81288e393@traverse.com.au>
+In-Reply-To: <20260421-ten64-add-usb5744-v2-6-eaa81288e393@traverse.com.au>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 22 Apr 2026 10:51:31 +1200
-X-Gm-Features: AQROBzB4V0pmVb07npKC7fTuO5wM30cbPxnzrHtNlkEkgTmkWTojU_y5uRUF00E
-Message-ID: <CAFLszTgfrx-7AdHLGAfP5WjUDYwMmLr3htYZ8kOSCPCfPW48pQ@mail.gmail.com>
-Subject: Re: [PATCH v2 5/8] configs: ten64: enable USB_ONBOARD_HUB (USB5744)
- option
+Date: Wed, 22 Apr 2026 10:51:36 +1200
+X-Gm-Features: AQROBzCTm_mZtWPQbmZbLF7YT-ynvHxqFzJ675fn5R5yCMtCEpa2XPl9sgG6Bf0
+Message-ID: <CAFLszTjDe+2StrD7QJ6-kV0yitRrNtsw=CFYH-f8pAgOuo9P+Q@mail.gmail.com>
+Subject: Re: [PATCH v2 6/8] configs: ten64: switch to OF_UPSTREAM
 To: matt@traverse.com.au
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
@@ -114,19 +113,23 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2026-04-21T00:04:33, Mathew McBride <matt@traverse.com.au> wrote:
-> configs: ten64: enable USB_ONBOARD_HUB (USB5744) option
+> configs: ten64: switch to OF_UPSTREAM
 >
-> Ten64 board revs A through C have a Microchip USB5744
-> hub on the board, which must be configured over I2C
-> at boot time to become usable.
+> Two recent additions to the mainline device tree allow us
+> to switch away from the local U-Boot copy:
 >
-> This function has not been part of the mainline
-> U-Boot for this board until now, as a mainline driver
-> and device-tree binding is now available for the USB5744.
+> * Board/embedded controller (traverse,ten64-controller)
+>   is now in the mainline device tree.
+> * USB Hub (USB5744) connections were also added to
+>   the mainline device tree but not in U-Boot.
+>
+> The LS1088A and Ten64 device trees in U-Boot were actually
+> 'synced' to mainline some time ago, so the content
+> (except for the changes mentioned above) is identical.
 >
 > Signed-off-by: Mathew McBride <matt@traverse.com.au>
 >
-> configs/ten64_tfa_defconfig | 1 +
->  1 file changed, 1 insertion(+)
+> configs/ten64_tfa_defconfig | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
