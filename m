@@ -4,123 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DFFBF327BE
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 07:56:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EA2DF327BE
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 07:58:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 059DF843C1;
-	Tue, 21 Apr 2026 09:55:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 1035983FFA;
+	Tue, 21 Apr 2026 09:58:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="jLJKwMkt";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JuZ6DabF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52C20843AF; Tue, 21 Apr 2026 09:55:16 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EC31784309; Tue, 21 Apr 2026 09:58:43 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95D0484348
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 09:55:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E200B83C51
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 09:58:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WJfm7JOlAVrqPUSuNiuZAqWUxvOZOcrDX/gj9RkSDC1+q95UNdCaQWYBVKO0Hwo5tIqn+mRyGl+qLqthBjWGuWedz38Gj20Gm5XN5F5KnMCheyHhLWFSghz8yxWqYz6L5Gu1oBOhTWPSyv6Hunrc+xCRwbEvDwWAptgFR7nmoGObKV9katVndAhSm9c11vOQGjxh1eBE42BvMzBiFIdfw/AWiREwFAcnZUkASVRqsBrqdTTbfKhieBsINaX/Jv2orLEBytbI6AVvi0eNxGQNPzKVfpq6+oihjz5K/Rk7xDnaIR4ZqwFVpqb3t8DzBGzkTZrta6y9wDZXn6k8uxhvTw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=K/keIx7z1F0B1drgwEm6OixQNe4eXUt15QKTDn9F6hk=;
- b=edyuAdP/9niFMaMdIdj6BZhOTvspb5DiUt3qjKJT9BUlepPsSIJNHpWA5i9FPi9dkPL7294ruvjuouHo15EcocuM3KlNJFHNahoiTaJAW6EK6PE+gaO2QHgbYG7JdYL/IK/AEYlHj/Qxy5vPkU0QUqqSRJ9OBBSIx7d6eAjEy3NPM3Djy5ZTHgEHVE2C1Kb6g7VIfktYL7ruNKXMJ5CoTXpxdW/XhHvc0inDgQMBCw7z9vPs4gT3yw8awK7sA8RLsfSCHKFf4iPY4irGToAHOpY150X36OE+pYC78GqBhUHFsX1Xvjy25+4+WUT5kBXMzaZoyeh8xf0moTsauI70oA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=K/keIx7z1F0B1drgwEm6OixQNe4eXUt15QKTDn9F6hk=;
- b=jLJKwMktFYJimJGWo+bMEsyNAP0xEhJCh5+ny30crdp9Sspg0ZB8gu/x5LyLp/JV/Jdg+A/0Ub9fCGuYp3FxGeaI31AOVYcx8/VKEBim1T91I6DMQM9AvPvicn6cdff/sJQpcU+w7GX39lH0szm3ZCTXGYAB8UuoF+fkdWQCMbo=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by DU0PR10MB5995.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:3b1::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.32; Tue, 21 Apr
- 2026 07:55:07 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8%6]) with mapi id 15.20.9846.016; Tue, 21 Apr 2026
- 07:55:07 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH v2 9/9] test: lib: add test of memdup_nul()
-Date: Tue, 21 Apr 2026 09:54:39 +0200
-Message-ID: <20260421075439.16696-10-ravi@prevas.dk>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260421075439.16696-1-ravi@prevas.dk>
-References: <20260421075439.16696-1-ravi@prevas.dk>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: GVX0EPF0005F67A.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:158:400::3b7) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-b9e00649769so551016866b.3
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 00:58:41 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776758321; cv=none;
+ d=google.com; s=arc-20240605;
+ b=G1WVrU8Q7zxkSz4XNv5gHabsPVwlyAW1pkotPyyy2EieZGu/5dz2DI/ynkcAqw3SWF
+ LPdJdGkSpJ5bAMnoKlcmus96D/grpj3cbfVEWrzbg4JDf6TzG0eQz3anXNMxJTFkX/CP
+ 0o+KCuaJuQnwlVhrBkFjZrNT2lMehZ/RcaMrbrZWCPpNJBIdgGDxcRwmkBVZsCi0EFKS
+ KUGJDme2StOAyWVXa25bDrhl45PjnRt2SRe4rWOlbeW5pz7oyM7NqG6N7CeuSI6yq3uE
+ AyVPZIYki+2SGWYfeIDW0LOULZnD79wtP5lEz39SNieqHAzyUz4Yusy5fQwlD7X3VHNX
+ 2T/Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=pty1oS1gX+eSLZIpdQTU1tSgzdwwRsshKxjyhB2SfpM=;
+ fh=b18uCgLv6wZxa0VDbhih661tjWnVZzC6sSbr5BOYWm4=;
+ b=OUpasw+XFXBJ6V8mFiHVQOShRRQSYdsSWVxynGD3Qx+qv80V/OTFfl2ASFn/fBr28X
+ hNZvkquuuNcLGV1Z5tppuDHsM9rWQf69j4aja8cyOzY5S64F2e/FUmwzmk01ozIJynpR
+ fA8Cs200NbHoIqgsVclfb6PQoGw1RLiX9r6e7jkIRUn1ieF9bW5xleHaUOLTkN7mMYKs
+ GQvA+Ejo17t5cBAlzzMXx0mF0oNvDillVplmM8WISc96NR2CNOl7WaD5Vrm21CWIiemY
+ Ha/dPJmKhuy2G3dKYVDiGg8f6imwENB5/2fgVyfVw6VrL9JnWQqxc7jJj81CzECD54vD
+ Z0Mw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1776758321; x=1777363121; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=pty1oS1gX+eSLZIpdQTU1tSgzdwwRsshKxjyhB2SfpM=;
+ b=JuZ6DabFQT4Oq66ap3cx2VOT6YLy6TXBj5bTr4kgx/Z3u/jKnoKiqyhzPLd88onMB1
+ QZNUOjDrhdhhkKq0llwLocRniEL800R79vhxHFr8n+WIrZFmAf+B99qyFuO/mwAh2W5O
+ Oc735Q2+q5Syl+8zaMeCzuxrArPs3UIrDV34U=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776758321; x=1777363121;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pty1oS1gX+eSLZIpdQTU1tSgzdwwRsshKxjyhB2SfpM=;
+ b=ekClZIH1cH8DhqccgaXtCJ50D3iWE1QOwoO33ay/SipRiB0BcBjwY6ncUhroWKpExy
+ AuSYh+feQk40Um8PJ+wxdztxdaS7V3dbr08fDouwyqxYCprMx5CQ4pBGKUKYFPqeICVI
+ R8a5vMHPE0EtZuV3e5ZDsI1EzHOgLPD59zaIS+7X6c8T4SV2IAHp0yhSMMFgwyt5tGVd
+ gJP5iGwWTpwrits/Php4BEUGIcyPp1k1Zme1yxsjuoCl4EBh1NUE613GiHmIuD2TlPkc
+ QudfiHTL0I4NnDoIe+L2U3bOzFmOF5K1h81FVv7dHc/m5JniO6PuhyxmovCguwoxMbSM
+ FHBQ==
+X-Gm-Message-State: AOJu0YxM4fxYgitXXSgTMQimgFrbKPbR6UM0/sTa6bNjFV+GqNHmwEj9
+ pJaqwUfw730giLJrWkuh6QcXwFuG6DNFzrL0yz+fmyJBWEWAUzjpPTo2b0EC6ZS8Ut2OXUJvM2w
+ 3PqJibTDO4frdcMwZVci6xrTUm63PaCQY0YsH8TwZ
+X-Gm-Gg: AeBDies7EsAOhwlDM27hFxOa4Bxu3Cux7mTeStTASC+E+tYq+Ky3JCX4HyI1etMBbHG
+ FNoB86hTmobhAsSwIwNdwWHJ/9eI6QXiyMw+N92zHHCCZmfrrwuE/zKwJ4m3YV+Ns6IZpPIlyAk
+ vI7Gwf6SCW+0kdaFlTD3Li7L1MgXq983ZIN+hvbaI5z4IQUDga55TrU9nSDrgTK9xeb3eWGGRct
+ A1uIp8ldGviNitS+BrTwO0nh985QpvnNkiSP2Zv2GQGPEyGEFCtMwkTccad2Rj5cPQK0CElSWda
+ Ht0hag9H/7AS9k4RdTHQ
+X-Received: by 2002:a17:906:c3a5:b0:ba9:2282:2897 with SMTP id
+ a640c23a62f3a-ba9228229b5mr118693766b.15.1776758321235; Tue, 21 Apr 2026
+ 00:58:41 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|DU0PR10MB5995:EE_
-X-MS-Office365-Filtering-Correlation-Id: 82d7328b-90b3-4fae-70ee-08de9f7b4df4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|376014|1800799024|366016|38350700014|22082099003|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: X4ZlggQqqLw+KjgZ0h+RDDxtB9Ez4AJeyqthv8gkKo7V90wKfw7v9uYLy8VpLC1veBNp+r3uxe8DFzA8sikvtmm6FQVIlTp6TYKZ3sqvCm+8z04WshgIdY26G1IuxDLrcpU8VodTmBXOlGAwivd4zKiOAAuhxLb7A7l04ePBVFY6xxQr2BX5jeLa8pkmWvYFh9FF5ylNFfw2kJ1NHN47pCI89TXy266ULOIkOuvg7E1IwDv/RZDy0A5F7KO7AmODXpKR5Wow3Chq0OHYEL3AfZzrnRGTA2vjpF7fTtYQRdMjd2/GhHJgdADApSi136a19/T/BZhRo9CMK4tXf/IvFi6k2YX2cHEaonPmzdzLD9endHw8E3JuAV2QQ009MU107uB5hvPkSEK3UsBHLM43NteM960KKfveoaO6rFvEcPID6JG0tnPkKeKU0OUSDEEbDHsj1ZllipeDKseJkGEsNUPlKRN3un+CTl3a+rRxwkH/mgUNB8px8rI+ybM5cs7XU2xMB1EYoisaxPO2G3G2uScQlyWfFuzAut6UReBQaC9H35TJoIhraN2bjgqk5aPtPRgQLeiyQevQ8JYl/2FiQMlbPwbIxt2YaO9DOsC8ntPgp3+3FvAalhJ8qhx56bVUcstcqxdyRarhSNNiuPG6DJmTxCrJwx2gsaFgp/OJSlFn9SvbwORbIXp8LIBYppZTRWrE005Wok7MkSsN+QceHm7qAjmJ3aohJ3q7t36it0RoAO2Om/g+MipTaw5HGejQwcynh1fp2wl4LPcRaszdDZ5qtgBUXxQiFgT4+7J60Qo=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(376014)(1800799024)(366016)(38350700014)(22082099003)(56012099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?xQeBh45N7rpxcH+UYmMZOKZj9Dl6EmrQ+eRpZLrWB/eyVsoS5NCigr9xi6h8?=
- =?us-ascii?Q?BiD9CL4UALVhwJidFbbWi7+fiUctJ/fHun5WYgr2Ch4cg7b5+bDjqmfDdFru?=
- =?us-ascii?Q?43Cc0L3TzuWjzjcyp6ttA0hgq3ojf7sbCXCA7YBPOPxPDyapxiq+BT9Aq+8x?=
- =?us-ascii?Q?qWr6rZpMUz2V2MwWS7CFTHH4E0rQ+paTzDlmOP3aX+v8+x0AA6DGP7Jm5PBr?=
- =?us-ascii?Q?FyhZHy0qjfca2t756Dibxr+1xqsCD1vk3NeD9qpaKndCC8YfgRQE9Gd2jbd4?=
- =?us-ascii?Q?A2VASCgdoO5wsf8d8gRu3RWJ5+zMtQCp6KX4eTotutL/vJHBFv2RZPtwnP49?=
- =?us-ascii?Q?GCsBqC49RP1V91n7bkuX1QbvGKsJW0rWgSVvqcR04IHsl2yFyhAo5MyJS5wN?=
- =?us-ascii?Q?WuY1i8nRrhdd6NJ0zEyDs+HZbtmjATtZmC/QkrdzUA2ZZvRR+jIu/CMsgvR5?=
- =?us-ascii?Q?Y8ErVVKV5IT355orAe7L+WpnZyx7kvSc1vXiN13EW110weAIYhHlru0v4eaL?=
- =?us-ascii?Q?KUx7MT3F9sRh83dTed7GpbF8E6I7aqzV7/CTpjfKC7gJiuqWqsUzBw4nbmrB?=
- =?us-ascii?Q?Kg+ERAMcvE3uCzkezCeMKaJfYxnkqOVaZIzVtFQZTo4ziVsqL5mmuAwrbCJu?=
- =?us-ascii?Q?LGslnA6ABPA3D3nHfpQ274mmaKbKkXvOiqUCBEGI5xlCw1sq3eAWjuXlbMAL?=
- =?us-ascii?Q?ySs9kfC6Ib1cgr9YA5c9O2FFCgzH4Lly2UPYYT+LtP1WT9kzaha2Wd2Fj9uc?=
- =?us-ascii?Q?TzWI6hbkQYgxeDCS/TZd3f4LTVTyxTSxydodcpGGd1BXexvD9WWJl59Xn9ys?=
- =?us-ascii?Q?T8bfe9qpgha1dpDvqhz9Jc3H16wlu4uLx3ETgeUXjOr0JmNukLxBUYVSKB5+?=
- =?us-ascii?Q?+M7xrzGdZDzO8vr4EZ5GuZVLImTJso62tpzAzT7GJjKw4W4t23AyUlUfU9Bs?=
- =?us-ascii?Q?yHd6RHhy7+69ixoSN/S7CGEvKa7LEFw+ZX2SnrTLv8zO8ROZW5awA6CldJZ5?=
- =?us-ascii?Q?QjQrMo30/7pdClKg2PJ547g/IbPebSPOvFFGXrwvsCaLWTdZXPYbJBkCKQV0?=
- =?us-ascii?Q?PVaNJPb2lq9M47XMscqgD5Yq70qLE118eUgd6yztbyUZH2yJ82A5jTY22VDs?=
- =?us-ascii?Q?xNeuwydl+GdPGQvELNp8rv2oOn0N1nM3fvA30rwfJGmHcpb+KnXYk+VGmfzX?=
- =?us-ascii?Q?JpltYy/ghLpBaMC7fIrtTzNSg4EDgUbeG5+z0uRjEvR9NSsy2QvGOApGshK/?=
- =?us-ascii?Q?jWRyWCrSKYwOe3fWLCMb3cJpG7q1u2Cet9UM4sy9y8UXrc9lJAWRvj1TT7NA?=
- =?us-ascii?Q?B+UehsUQ58JUGRD767W935fC8i125UPtCvRl/iaVTJMF8r1uwQVizZLz0Dyx?=
- =?us-ascii?Q?jw65RUyGkoKE9ntT4bR+BbPZ9K6dXCpLAG15vwwDdeETg6LI2DBkW4x70KrH?=
- =?us-ascii?Q?Eete7A8dyImdOcqNQFQW53b9Eh5jra5ijrpyUKrrPYmSucuVpcsXvlmTTGXT?=
- =?us-ascii?Q?hq+8B8/UG/Gh7kCNhDiaOtm26efKHURWr6Mr9Is4JYf1LQ3VxSfH7WRna18q?=
- =?us-ascii?Q?LbPpFv60eGrcAMn/XG4gVpc1IgsI1wLcM4JKnPTZZuqtuyTqbJUD4558nvTy?=
- =?us-ascii?Q?qrKBg7ZZDNsjraYWTX0pv3nZjl4z+s45lsc9dWB8t3EUjwtnBxvgW0kQCMJN?=
- =?us-ascii?Q?63joJohaE5VSKc5mGr7tLBnPdxFZ31K+A73vc5bOs9d4b5Gki4OwNcBA/Gzi?=
- =?us-ascii?Q?bWReJr8BJkrrBj/losD/MnKiXIGcju4=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 82d7328b-90b3-4fae-70ee-08de9f7b4df4
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 07:55:07.2147 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 4yex/LPHYK6NwOphaQyfkBOtNw4oByd/lzMh9kAcYHntL+CycOd+RYlJ4A/e1AunZ+f8ctZaWzvaMbNE/MnRBcW5ZhwNmjymK9rT57VPylw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB5995
+References: <20260420163551.515651-1-sigmaepsilon92@gmail.com>
+In-Reply-To: <20260420163551.515651-1-sigmaepsilon92@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 21 Apr 2026 19:58:19 +1200
+X-Gm-Features: AQROBzDLV53UYOQyTw3wpikaM2s5m9iJmJlKmuDQd_nCXcxi0Sn_WnLwdSwyZg8
+Message-ID: <CAFLszTiMj0-1_NN8bkGLh2D4CcPf2vHQ76yTP_WqouQOB=Boig@mail.gmail.com>
+Subject: Re: [PATCH] fs/squashfs: Set ret to 0 on successful read
+To: sigmaepsilon92@gmail.com
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Eric Kilmer <eric.kilmer@trailofbits.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Joao Marcos Costa <joaomarcos.costa@bootlin.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Richard Genoud <richard.genoud@bootlin.com>, 
+ Simon Glass <simon.glass@canonical.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ =?UTF-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,58 +119,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a very basic test of the new memdup_nul() helper.
+On 2026-04-20T16:35:31, Michael Zimmermann <sigmaepsilon92@gmail.com> wrote:
+> fs/squashfs: Set ret to 0 on successful read
+>
+> It might still be a positive number due to the call to sqfs_disk_read.
+> This only happens when reading a file from an uncompressed squashfs.
+>
+> I found this by trying to boot using the extlinux bootmethod, where
+> positive values are treated as errors.
+>
+> Signed-off-by: Michael Zimmermann <sigmaepsilon92@gmail.com>
+>
+> fs/squashfs/sqfs.c | 2 ++
+>  1 file changed, 2 insertions(+)
 
-Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
----
- test/lib/string.c | 34 ++++++++++++++++++++++++++++++++++
- 1 file changed, 34 insertions(+)
-
-diff --git a/test/lib/string.c b/test/lib/string.c
-index f56c2e4c946..db6f28dbfdf 100644
---- a/test/lib/string.c
-+++ b/test/lib/string.c
-@@ -223,6 +223,40 @@ static int lib_memdup(struct unit_test_state *uts)
- }
- LIB_TEST(lib_memdup, 0);
- 
-+/** lib_memdup_nul() - unit test for memdup_nul() */
-+static int lib_memdup_nul(struct unit_test_state *uts)
-+{
-+	char buf[BUFLEN];
-+	size_t len;
-+	char *p, *q;
-+
-+	/* Zero size should return a buffer containing a single nul byte */
-+	p = memdup_nul(NULL, 0);
-+	ut_assertnonnull(p);
-+	ut_assert(p[0] == '\0');
-+	free(p);
-+
-+	p = memdup_nul(buf, 0);
-+	ut_assertnonnull(p);
-+	ut_assert(p[0] == '\0');
-+	free(p);
-+
-+	strcpy(buf, TEST_STR);
-+	len = sizeof(TEST_STR);
-+	p = memdup_nul(buf, len);
-+	ut_asserteq_mem(p, buf, len);
-+	ut_assert(p[len] == '\0');
-+
-+	q = memdup_nul(p, len);
-+	ut_asserteq_mem(q, buf, len);
-+	ut_assert(q[len] == '\0');
-+	free(q);
-+	free(p);
-+
-+	return 0;
-+}
-+LIB_TEST(lib_memdup_nul, 0);
-+
- /** lib_strnstr() - unit test for strnstr() */
- static int lib_strnstr(struct unit_test_state *uts)
- {
--- 
-2.53.0
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
