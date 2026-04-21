@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50D94F94CB0
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 21:10:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37DE3F94CB0
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 21:10:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3313084319;
-	Tue, 21 Apr 2026 23:10:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EE309842FC;
+	Tue, 21 Apr 2026 23:10:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="qWfVRMsj";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="m2GACnT8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B839284258; Tue, 21 Apr 2026 23:10:05 +0200 (CEST)
-Received: from PR0P264CU014.outbound.protection.outlook.com
- (mail-francecentralazlp170120004.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::4])
+ id 16550842FC; Tue, 21 Apr 2026 23:10:09 +0200 (CEST)
+Received: from MRZP264CU002.outbound.protection.outlook.com
+ (mail-francesouthazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8F7F805D7
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 23:10:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9E4D8419C
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 23:10:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=softathome.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=philippe.reynes@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cvByqrzoArcVu9F+KvgF4PSw+V1LjTfQFVVr2g/nOANCP7zYC1MDeVt3G9gF48iTUzPznfEJROqpwxYRHFIytwvXyoUXOSdQ03ponfJBdAzOGIbjCcelRuY/Hbnnu1vU2nKEqeFB69pthgswX7YHd++qI0UPKaoLER9vS8K/4z8Yg4W8XqKFS2R8mgkzPT41rxBIfTfF0tyKV8BSxuUykXMg5KRpQfuxafwYLF3imm1yzwZrY+49oGW2wC1wn0zYN5DbtlOQ05Uy/xUlWcjeUySpK71oCck2swMkRLKbpbKbiuRx015ziTuxs3rNqBeUtI7mxHVat0ZAzVOLWvK5dw==
+ b=Wp5ks2N0IyhU0NMKKLMTlCMtri5j7QnHaikSnFmoKd/fm2acGkmQDZrkFbUK3EkG7S4DO4tLjmuzNQZAfYVQLHMPp4o9yDZLmjQUJ6TO5oH8EakISBoRJrUIERLE2HPDqNP+wSo+NKF3rPup+swLpvTr/iP+z/WY37RmPc9yQRjboIk0CP2wRZ72MGwSVNjkZLJC6RWyg21c6DmOdPEpN8gDjR20jWZezaOzq7bRvSvEG82iW6d/5FK/0Dfk4XVMZ0VEwqS45CmQ9WgFEq/WpYVYP8dht16bDaFfpVqr9fhFxQXfY0rk+fNyYSGsjxkv4DjSXLixobIk8GxqNs/HbA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ShMy03AgrJx239Y/CW9VhF5nFhctjXF+FfjburR+Uao=;
- b=yFJAldU4ZsWxDltXliX42sTW+zt45wmcvHqUkqOKnN+00WaRQ68COi+xZyiuE2Sn3sw48+ti9f0FgjLNyr4GtYrwe67Ac3TyvS2uLOue7wghKF0efewdH4RPbkHthTMWeQVYN1pNLUt5/WDW2GV1VZLPTv/hTiJYLTC2HFoJKvZQRWdEd7tZXYjML4yd5vGkm3i2OAUO5wjHuL4gGB3mAp/bVHpn3xsruMeYOTcCg0XDVEI6o3I1r85k/UzI464hY4u4B0OfVgXS2gUEq52UZo4ABy4WgVgue3GvVP94+Lxd0c5mtYFVmm3dExw6vn+DC3glPGC+55PxM16BjzRUdw==
+ bh=PvTJku6PMIRbxkq4cbaXX+4C09UoHKoAWQrp9fCXYxc=;
+ b=TS33DcpIdVIMGzWHpcvy5jBmGAJrDOunUgZMahhHbHb4oFggIQ5JQx4CH+IrcC7QFzvab+2rl22UbexyNn2gbOF+JquqQidrTg9YJH60gsStMrr/Slr1Sgtid3Yz2ihITK4z+aAvBQOgQkaNMhbEa75+t8PRk/iq1swXHuldOhATgkveONRjhspN+Azzw6ndtOZBlVidLpzOalBSIep/hW2Q9XvYQ2BnwlCN8cxCGDtNKCyXr2acNAP1cvg3PEievvjxSBc0Op/4fcmr+av7TMiD29rox3H14TrsubHxW7diOf1kD6Nfqm7sFh72QTkDat28crZ6wbweHT20A0azsg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=canonical.com smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -41,16 +41,16 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ShMy03AgrJx239Y/CW9VhF5nFhctjXF+FfjburR+Uao=;
- b=qWfVRMsjEk7OqoePdQM+kfNhZk8CmgDpmPPj4lhjihoT3UZ4132oeL4/BgHp4u0FXmj9AiapfMtv0w7rZ2PeuK9TiTQHv40RlJDySIeNDhFsABKhaO9HIKj0wKYL4vs64VaOoPCtP0djlb/rXzV6+/bFHZMIrIAqf6Jp9er8COvHoo5RsjQLK+uhFkuFi9hRwxhLvk4IDUq8tsgBUkRYj4HAiGc0hV7jmGB2xrD5CBE6CMVa5H/jfLYxeCpWnsKxHV5M5wpwnjHtfutriGnaS6oVkiAIpDStuCixF1S/RRqe+/8jzewt6LN7WJhlANgVUYLpHgWN8QNvhe3ixup5mA==
-Received: from MR1P264CA0144.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:51::8) by
- PATP264MB4835.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:429::5) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9818.33; Tue, 21 Apr 2026 21:09:57 +0000
-Received: from MR1PEPF00000D5A.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:501:51:cafe::29) by MR1P264CA0144.outlook.office365.com
- (2603:10a6:501:51::8) with Microsoft SMTP Server (version=TLS1_3,
+ bh=PvTJku6PMIRbxkq4cbaXX+4C09UoHKoAWQrp9fCXYxc=;
+ b=m2GACnT8QYKqYbYAb0Th/DKmziWERco+4X5q9XCCz7AOhfwhA9vIKpsuUB3EhnrhsHiXWNHNRNCXnPrF558dRri1XzpAVFJO9rW2iVwVsKtylPYQutgbJX46VqHqrW2Mnr16BnzHVr7nXrFPE4Ykhw9tUQddseORAt8PKj2c5R2Iky7qtpSuBRmnD3/Y4px1aP9OfYHF+bCqtHZjydW+2Ma6rRT+TgJvzlvCE9tTEYoHpuUbxFtu03QHvHD3VXT654YufB4+FQwkulmiqO/2NDVK3QN8I0+NHuolApQ1wBwdJt387ZpvLat7K163QXl7kbl1NojD4b8q+i+M7wpc2Q==
+Received: from PA7P264CA0357.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:37c::22)
+ by MRZP264MB3130.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:1b::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.18; Tue, 21 Apr
+ 2026 21:09:57 +0000
+Received: from PA1PEPF000CC3FB.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:37c:cafe::89) by PA7P264CA0357.outlook.office365.com
+ (2603:10a6:102:37c::22) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Tue,
  21 Apr 2026 21:09:57 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
@@ -61,20 +61,20 @@ Received-SPF: Pass (protection.outlook.com: domain of softathome.com
  receiver=protection.outlook.com; client-ip=149.6.166.170;
  helo=proxy.softathome.com; pr=C
 Received: from proxy.softathome.com (149.6.166.170) by
- MR1PEPF00000D5A.mail.protection.outlook.com (10.167.241.7) with Microsoft
+ PA1PEPF000CC3FB.mail.protection.outlook.com (10.167.242.6) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.18
- via Frontend Transport; Tue, 21 Apr 2026 21:09:57 +0000
+ via Frontend Transport; Tue, 21 Apr 2026 21:09:56 +0000
 Received: from sah1lpt726.softathome.com (unknown [192.168.72.32])
- by proxy.softathome.com (Postfix) with ESMTPSA id 3BC2B20E34;
- Tue, 21 Apr 2026 23:09:57 +0200 (CEST)
+ by proxy.softathome.com (Postfix) with ESMTPSA id BD06C20737;
+ Tue, 21 Apr 2026 23:09:56 +0200 (CEST)
 From: Philippe Reynes <philippe.reynes@softathome.com>
 To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
  trini@konsulko.com, simon.glass@canonical.com
 Cc: u-boot@lists.denx.de,
 	Philippe Reynes <philippe.reynes@softathome.com>
-Subject: [PATCH v5 05/15] drivers: crypto: add software ecdsa support
-Date: Tue, 21 Apr 2026 23:09:44 +0200
-Message-ID: <20260421210954.1170437-6-philippe.reynes@softathome.com>
+Subject: [PATCH v5 01/15] ecdsa: fix support of secp521r1
+Date: Tue, 21 Apr 2026 23:09:40 +0200
+Message-ID: <20260421210954.1170437-2-philippe.reynes@softathome.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260421210954.1170437-1-philippe.reynes@softathome.com>
 References: <20260421210954.1170437-1-philippe.reynes@softathome.com>
@@ -82,30 +82,30 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MR1PEPF00000D5A:EE_|PATP264MB4835:EE_
+X-MS-TrafficTypeDiagnostic: PA1PEPF000CC3FB:EE_|MRZP264MB3130:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: fd7a8e58-829a-4580-4b73-08de9fea57cd
+X-MS-Office365-Filtering-Correlation-Id: e618216d-1d1f-446c-4a75-08de9fea5759
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|36860700016|82310400026|30052699003|13003099007|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: h7OIVvT88qUDanMsZsuE02EPKozy1cjc6dX+U8KTwDtFkvz0j1KuvPVb+0XznGQtmJGLqWR+M/SCvQxO7hWoKPpFmO6pb5Q1zwfv+gMm743cCbm0KxEB2cbILF7S9g/MNMUYpsZCLFeI0zzTJaVipZ2nsDP3IZyWc8PwQCnlPOQOpRGnkuHAdRUHNZNic3k8+Q2HKB4KU5BbgnqrvbA3/jxGxn6j25BcXTIT/tPUeNaMZqROnrPkfEjCqJQU+KGinSm0Lm+KEKW845HMmby9UZLXf7r3zaMJ7mUPt0xq/yf4Qjh9xJGc8fs1niLeq4H0UZZRHxC2aFw4NZ3WGFxeTpYKhzDjEqPOrAOFTd9AiBsWAFYJH4bnBPvbqnNXI0QuHkk9ZbnRs/SgKOI3hpydDoLA7ZjeVSPatB7K4GVfTyfHYDUDtabP62W7/aR6k9W2pI884VTSChOO/gBuLS/NEZm26BwurV2NLxBEONhslNd0D7Se5BuSbN+MxnGlo3AfFTTAwoRZZGbW6QKlpKngWJ57ZA5plOERR2NGYX+q3CPIoyB7rREeuMdtl4vy/f87xNtFTldMtOp0Lc2lwVLF5loU9YU4wau61JRxz/mVg3tNB7V+723OlXH9Yv40l+2ZuMJ0mxT87dpHEu5UoFWSCPB1qeZU/oLyNfyidBxFGB2pRPW2W+58gPRFrGeacCO9RQOHCFIOOtmcFj2qmamSTqqNEKPWN4T/lMQuB6ofEBM=
+ ARA:13230040|82310400026|36860700016|1800799024|376014|18002099003|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info: C1UG7eCTDz4/kcBfFKExzpYAZnzjbL8/+dOilsRRWtywg6nYwRE4b4RKOcxCPTgDu/hxbSapBs/04yVVAnsErxjtYKfm6dFDjpGNYMTVuXzuqhjRI/bKPTgzhrMSUH1ewG/0uDT8qsF10tY36PUrHQcyrxn1Lp9NZtH25DaNeqQGPZ6SazaO4nHjSgI3eevAcbF25fXyh/SZDbpwtK8zvxwbSey6T1JKSkyLMDupp8yOBwF8VBeVYe+T/E8zWm93FmwUxNDvZMvfz28/ZJH16JngIgSbVibUfN3ZoMO2+EMikzgnw+oillbJI4Xr5mSvUyAp5gUQOxjWLM+DzIbbdXeB4iPbeV3Uh0vALUEfZMhPpvpae+oKsw77WECuPVoehRTHELdLkNqA0kMvz+JL5pgC5+1eIaOxStEIZy128J/DJZ4fk1FzihNCi1iSDljsyNYnFLRItLy2VihCwhR24Wy9+NicaS5z3HGLr1bPGr4bJG2XeCldwtF+v7hE0VMUoMwsY8qKGFgzUzxCYm2HRvSd2B0QbqZfIuoESrRIArl/jk3Py8TRQUUJ1ANSMb0lo6exen5tpxn3cN2mixyTd97MzXN7+9FZsj/z/bzE+Df5HGp4T2aiJ9gao/Y2y3laVKlLQfUG3vE3UPihP7LzbxorjGUCCF7xVPEaXnFGR6kt8d7sXpREcowxOtq8sjsCU3/EiS7Ijuyp5p/0ThmuMt0GcRXDHNX4LqAdU2N+JbPbOJVxxk0eSDIWcR8O/b0axVvOM97nFtBinJxnxeIx3w==
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(36860700016)(82310400026)(30052699003)(13003099007)(18002099003)(22082099003)(56012099003);
+ SFS:(13230040)(82310400026)(36860700016)(1800799024)(376014)(18002099003)(22082099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 1niWApkBsI44kzsHYuBICt34yuMTRXcsT9+rvLW28m5myLNpkDtb+Pv70l4MVhG9XOEV84m9fAskjIrN54fPSY2+FlmO4f9ypSoOmJ2eW5kDx+qA1oS7lRYROQ1jNcoHnv0JtgJUoaUT5Yzb1USkw1zie+eQ4bLGnWtfmBZJovPg4BO1N++SQP0gSQwNVgcF5TWWbdi7u0Ua0FjZNdVEcaFM+MqrYuf8XlG8g+hSGUqeNxW5L/M0kUpzy4Jx7BlywA4AwLLV9WeRcol2jW2l6hcZ2uzwv1+iNEo0XWQmLL3X8i3J6mmpjiDLEr2pE43T0HGwaw1HZH5uCDgvMh208VlcQSN583L6lxnjMqVzOpOoI6olIc0y4hg89w71GXNLKBVVZ5IXA0X5oiN4oAUH0Mr8mlpJbjamWNtMpPdgWM9c1qBZbIBmJI5u2CZhFZyw
+X-MS-Exchange-AntiSpam-MessageData-0: GEtUzWdo6CQ/3vDebMRy7cMnmaBpmrZcjRbybX1F+K0iV5nxT6kHYSell6VOcTs+Y95VYXQ0oa4uH+niGdzXcr1iz9rHKd/tLvQvsMvIF6/AMGg8ni4sUZdOcjBU2O0MmLLDpNE5cFJOkswGFgHuoNgsVtmS7fvHRJP9AKwls5GO3lEdTGxWPCF2WPfxr/p3OoVAo9/Y9JKu+EX1it9bPzXxXYi86pjH6wU9J7RvPxobo31WLIbCVbQNV0/q9u83LDnE/imouc+gHpZHEagctNGCx3WwTaGiYXrpysU38cNYAzUgv4swbKF6dcve0fcfA4lVRyE8B4h2l6W5Ynk90xSmuQ6qO/t9HN/CD/tG5yj/bAfCvsU8EXh9iHGbJjYMAFgtLMk3rg6Xt5sz0ZBwmW6Xze1FVkGHgQQ9W3K4Yraw2oprCwpF1fhWEN0xpaD0
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 21:09:57.6746 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fd7a8e58-829a-4580-4b73-08de9fea57cd
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 21:09:56.9294 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e618216d-1d1f-446c-4a75-08de9fea5759
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: MR1PEPF00000D5A.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: PA1PEPF000CC3FB.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PATP264MB4835
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MRZP264MB3130
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,94 +122,357 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a software ecdsa driver so it is
-now possible to use ecdsa signature on
-board without ecdsa hardware support.
+Current implementation of ecdsa only supports key len aligned on
+8 bits. But the curve secp521r1 uses a key of 521 bits which is not
+aligned on 8 bits. In this commit, we update the keys management
+for ecdsa to support keys that are not aligned on 8 bits.
 
-Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
 Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 ---
 v2:
-- no change
+- intitial version
 v3:
-- add depends on ECDSA_VERIFY to ECDSA_SW
-- change sw_ecdsa_verify to ecdsa_hash_verify
-- v4
-- use ECDSA_MBEDTLS to build the driver
-- clean include (change order)
+- fix typo in comments
+v4:
+- fix commit message
+- clean code with DIV_ROUND_UP-
+- duplicate data before shifting
+- support ecdsa521 and secp521r1
+- clean code
 v5:
-- use $(PHASE_) in the Makefile for the driver
+- check that x and y are not null before using them
+- free keys when keys not found
 
- drivers/crypto/Makefile         |  1 +
- drivers/crypto/ecdsa/Makefile   |  6 ++++++
- drivers/crypto/ecdsa/ecdsa-sw.c | 33 +++++++++++++++++++++++++++++++++
- 3 files changed, 40 insertions(+)
- create mode 100644 drivers/crypto/ecdsa/Makefile
- create mode 100644 drivers/crypto/ecdsa/ecdsa-sw.c
+ lib/ecdsa/ecdsa-libcrypto.c | 63 ++++++++++++++++++++++++++++++-
+ lib/ecdsa/ecdsa-verify.c    | 75 +++++++++++++++++++++++++++++++++----
+ lib/fdt-libcrypto.c         |  2 +-
+ tools/image-sig-host.c      |  7 ++++
+ 4 files changed, 137 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/crypto/Makefile b/drivers/crypto/Makefile
-index e4a4482b7f3..8170e4cae9c 100644
---- a/drivers/crypto/Makefile
-+++ b/drivers/crypto/Makefile
-@@ -4,6 +4,7 @@
- #	http://www.samsung.com
+diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
+index c4bfb2cec61..41590d22a51 100644
+--- a/lib/ecdsa/ecdsa-libcrypto.c
++++ b/lib/ecdsa/ecdsa-libcrypto.c
+@@ -26,6 +26,8 @@
+ #include <openssl/ec.h>
+ #include <openssl/bn.h>
  
- obj-$(CONFIG_EXYNOS_ACE_SHA)	+= ace_sha.o
-+obj-$(CONFIG_ECDSA) += ecdsa/
- obj-y += aes/
- obj-y += rsa_mod_exp/
- obj-y += fsl/
-diff --git a/drivers/crypto/ecdsa/Makefile b/drivers/crypto/ecdsa/Makefile
-new file mode 100644
-index 00000000000..1fd873980be
---- /dev/null
-+++ b/drivers/crypto/ecdsa/Makefile
-@@ -0,0 +1,6 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2026 Philippe Reynes <philippe.reynes@softathome.com>
-+#
++#define DIV_ROUND_UP(n, d) (((n) + (d) - 1) / (d))
 +
-+obj-$(CONFIG_$(PHASE_)ECDSA_MBEDTLS) += ecdsa-sw.o
-diff --git a/drivers/crypto/ecdsa/ecdsa-sw.c b/drivers/crypto/ecdsa/ecdsa-sw.c
-new file mode 100644
-index 00000000000..21dffeddf59
---- /dev/null
-+++ b/drivers/crypto/ecdsa/ecdsa-sw.c
-@@ -0,0 +1,33 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2026 Philippe Reynes <philippe.reynes@softathome.com>
-+ */
-+#include <crypto/ecdsa-uclass.h>
-+#include <crypto/internal/ecdsa.h>
-+#include <dm.h>
-+#include <linux/types.h>
-+#include <u-boot/ecdsa.h>
-+
-+static int ops_sw_ecdsa_verify(__always_unused struct udevice *dev,
-+			       const struct ecdsa_public_key *pubkey,
-+			       const void *hash, size_t hash_len,
-+			       const void *signature, size_t sig_len)
+ /* Image signing context for openssl-libcrypto */
+ struct signer {
+ 	EVP_PKEY *evp_key;	/* Pointer to EVP_PKEY object */
+@@ -41,10 +43,26 @@ struct ecdsa_public_key {
+ 	int size_bits;
+ };
+ 
++static char *memdup(char *buf, size_t size)
 +{
-+	return ecdsa_hash_verify(pubkey, hash, hash_len, signature, sig_len);
++	char *dup;
++
++	dup = malloc(size);
++	if (dup)
++		memcpy(dup, buf, size);
++
++	return dup;
 +}
 +
-+static const struct ecdsa_ops sw_ecdsa_ops = {
-+	.verify = ops_sw_ecdsa_verify,
+ static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
+ {
++	const char *x;
++	const char *y;
+ 	int x_len;
+ 	int y_len;
++	int expected_len;
++
++	memset(key, 0, sizeof(*key));
+ 
+ 	key->curve_name = fdt_getprop(fdt, node, "ecdsa,curve", NULL);
+ 	if (!key->curve_name)
+@@ -54,6 +72,8 @@ static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
+ 		key->size_bits = 256;
+ 	else if (!strcmp(key->curve_name, "secp384r1"))
+ 		key->size_bits = 384;
++	else if (!strcmp(key->curve_name, "secp521r1"))
++		key->size_bits = 521;
+ 	else
+ 		return -EINVAL;
+ 
+@@ -63,12 +83,43 @@ static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
+ 	if (!key->x || !key->y)
+ 		return -EINVAL;
+ 
+-	if (x_len != key->size_bits / 8 || y_len != key->size_bits / 8)
++	/*
++	 * The public key is stored as an array of u32, so if the key size is
++	 * not a multiple of 32 (for example 521), we may have extra bytes.
++	 * To avoid any issue later, we shift the x and y pointer to the first
++	 * useful byte.
++	 */
++	expected_len = DIV_ROUND_UP(key->size_bits, 8);
++
++	if (x_len < expected_len || y_len < expected_len)
+ 		return -EINVAL;
+ 
++	x = memdup((char *)key->x + (x_len - expected_len), expected_len);
++	if (!x) {
++		fprintf(stderr, "Cannot allocate memory for point X");
++		return -ENOMEM;
++	}
++	key->x = (const uint8_t *)x;
++
++	y = memdup((char *)key->y + (y_len - expected_len), expected_len);
++	if (!y) {
++		fprintf(stderr, "Cannot allocate memory for point Y");
++		free((char *)x);
++		return -ENOMEM;
++	}
++	key->y = (const uint8_t *)y;
++
+ 	return 0;
+ }
+ 
++static void fdt_free_key(struct ecdsa_public_key *key)
++{
++	if (!key)
++		return;
++	free((char *)key->x);
++	free((char *)key->y);
++}
++
+ static int read_key_from_fdt(struct signer *ctx, const void *fdt, int node)
+ {
+ 	struct ecdsa_public_key pubkey;
+@@ -89,8 +140,11 @@ static int read_key_from_fdt(struct signer *ctx, const void *fdt, int node)
+ 		nid = NID_X9_62_prime256v1;
+ 	} else if (!strcmp(pubkey.curve_name, "secp384r1")) {
+ 		nid = NID_secp384r1;
++	} else if (!strcmp(pubkey.curve_name, "secp521r1")) {
++		nid = NID_secp521r1;
+ 	} else {
+ 		fprintf(stderr, "Unsupported curve name: '%s'\n", pubkey.curve_name);
++		fdt_free_key(&pubkey);
+ 		return -EINVAL;
+ 	}
+ 
+@@ -100,6 +154,7 @@ static int read_key_from_fdt(struct signer *ctx, const void *fdt, int node)
+ 	ec_key = EC_KEY_new_by_curve_name(nid);
+ 	if (!ec_key) {
+ 		fprintf(stderr, "Failed to allocate EC_KEY for curve %s\n", pubkey.curve_name);
++		fdt_free_key(&pubkey);
+ 		return -ENOMEM;
+ 	}
+ 
+@@ -108,10 +163,11 @@ static int read_key_from_fdt(struct signer *ctx, const void *fdt, int node)
+ 	if (!point) {
+ 		fprintf(stderr, "Failed to allocate EC_POINT\n");
+ 		EC_KEY_free(ec_key);
++		fdt_free_key(&pubkey);
+ 		return -ENOMEM;
+ 	}
+ 
+-	len = pubkey.size_bits / 8;
++	len = DIV_ROUND_UP(pubkey.size_bits, 8);
+ 
+ 	uint8_t buf[1 + len * 2];
+ 
+@@ -123,6 +179,7 @@ static int read_key_from_fdt(struct signer *ctx, const void *fdt, int node)
+ 		fprintf(stderr, "Failed to convert (x,y) point to EC_POINT\n");
+ 		EC_POINT_free(point);
+ 		EC_KEY_free(ec_key);
++		fdt_free_key(&pubkey);
+ 		return -EINVAL;
+ 	}
+ 
+@@ -130,11 +187,13 @@ static int read_key_from_fdt(struct signer *ctx, const void *fdt, int node)
+ 		fprintf(stderr, "Failed to set EC_POINT as public key\n");
+ 		EC_POINT_free(point);
+ 		EC_KEY_free(ec_key);
++		fdt_free_key(&pubkey);
+ 		return -EINVAL;
+ 	}
+ 
+ 	fprintf(stderr, "Successfully loaded ECDSA key from FDT node %d\n", node);
+ 	EC_POINT_free(point);
++	fdt_free_key(&pubkey);
+ 	ctx->ecdsa_key = ec_key;
+ 
+ 	return 0;
+diff --git a/lib/ecdsa/ecdsa-verify.c b/lib/ecdsa/ecdsa-verify.c
+index 629b662cf6c..e503627f490 100644
+--- a/lib/ecdsa/ecdsa-verify.c
++++ b/lib/ecdsa/ecdsa-verify.c
+@@ -10,6 +10,7 @@
+ 
+ #include <crypto/ecdsa-uclass.h>
+ #include <dm/uclass.h>
++#include <malloc.h>
+ #include <u-boot/ecdsa.h>
+ 
+ /*
+@@ -24,13 +25,19 @@ static int ecdsa_key_size(const char *curve_name)
+ 		return 256;
+ 	else if (!strcmp(curve_name, "secp384r1"))
+ 		return 384;
++	else if (!strcmp(curve_name, "secp521r1"))
++		return 521;
+ 
+ 	return 0;
+ }
+ 
+ static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
+ {
+-	int x_len, y_len;
++	int expected_len, x_len, y_len;
++	const char *x;
++	const char *y;
++
++	memset(key, 0, sizeof(*key));
+ 
+ 	key->curve_name = fdt_getprop(fdt, node, "ecdsa,curve", NULL);
+ 	if (!key->curve_name) {
+@@ -50,15 +57,46 @@ static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
+ 	if (!key->x || !key->y)
+ 		return -EINVAL;
+ 
+-	if (x_len != (key->size_bits / 8) || y_len != (key->size_bits / 8)) {
++	/*
++	 * The public key is stored as an array of u32, so if the key size is
++	 * not a multiple of 32 (for example 521), we may have extra bytes.
++	 * To avoid any issue later, we shift the x and y pointer to the first
++	 * useful byte.
++	 */
++	expected_len = DIV_ROUND_UP(key->size_bits, 8);
++
++	if (x_len < expected_len || y_len < expected_len) {
+ 		printf("%s: node=%d, curve@%p x@%p+%i y@%p+%i\n", __func__,
+ 		       node, key->curve_name, key->x, x_len, key->y, y_len);
+ 		return -EINVAL;
+ 	}
+ 
++	x = memdup((char *)key->x + (x_len - expected_len), expected_len);
++	if (!x) {
++		debug("Cannot allocate memory for point X");
++		return -ENOMEM;
++	}
++	key->x = (const uint8_t *)x;
++
++	y = memdup((char *)key->y + (y_len - expected_len), expected_len);
++	if (!y) {
++		debug("Cannot allocate memory for point Y");
++		free((char *)x);
++		return -ENOMEM;
++	}
++	key->y = (const uint8_t *)y;
++
+ 	return 0;
+ }
+ 
++static void fdt_free_key(struct ecdsa_public_key *key)
++{
++	if (!key)
++		return;
++	free((char *)key->x);
++	free((char *)key->y);
++}
++
+ static int ecdsa_verify_hash(struct udevice *dev,
+ 			     const struct image_sign_info *info,
+ 			     const void *hash, const void *sig, uint sig_len)
+@@ -73,11 +111,16 @@ static int ecdsa_verify_hash(struct udevice *dev,
+ 
+ 	if (info->required_keynode > 0) {
+ 		ret = fdt_get_key(&key, info->fdt_blob, info->required_keynode);
+-		if (ret < 0)
++		if (ret < 0) {
++			fdt_free_key(&key);
+ 			return ret;
++		}
++
++		ret = ops->verify(dev, &key, hash, algo->checksum_len,
++				  sig, sig_len);
++		fdt_free_key(&key);
+ 
+-		return ops->verify(dev, &key, hash, algo->checksum_len,
+-				   sig, sig_len);
++		return ret;
+ 	}
+ 
+ 	sig_node = fdt_subnode_offset(info->fdt_blob, 0, FIT_SIG_NODENAME);
+@@ -87,15 +130,21 @@ static int ecdsa_verify_hash(struct udevice *dev,
+ 	/* Try all possible keys under the "/signature" node */
+ 	fdt_for_each_subnode(key_node, info->fdt_blob, sig_node) {
+ 		ret = fdt_get_key(&key, info->fdt_blob, key_node);
+-		if (ret < 0)
++		if (ret < 0) {
++			fdt_free_key(&key);
+ 			continue;
++		}
+ 
+ 		ret = ops->verify(dev, &key, hash, algo->checksum_len,
+ 				  sig, sig_len);
+ 
+ 		/* On success, don't worry about remaining keys */
+-		if (!ret)
++		if (!ret) {
++			fdt_free_key(&key);
+ 			return 0;
++		}
++
++		fdt_free_key(&key);
+ 	}
+ 
+ 	return -EPERM;
+@@ -135,6 +184,18 @@ U_BOOT_CRYPTO_ALGO(ecdsa384) = {
+ 	.verify = ecdsa_verify,
+ };
+ 
++U_BOOT_CRYPTO_ALGO(ecdsa521) = {
++	.name = "ecdsa521",
++	.key_len = ECDSA521_BYTES,
++	.verify = ecdsa_verify,
 +};
 +
-+U_BOOT_DRIVER(sw_ecdsa) = {
-+	.name	= "sw_ecdsa",
-+	.id	= UCLASS_ECDSA,
-+	.ops	= &sw_ecdsa_ops,
-+	.flags	= DM_FLAG_PRE_RELOC,
++U_BOOT_CRYPTO_ALGO(secp521r1) = {
++	.name = "secp521r1",
++	.key_len = ECDSA521_BYTES,
++	.verify = ecdsa_verify,
 +};
 +
-+U_BOOT_DRVINFO(sw_ecdsa) = {
-+	.name = "sw_ecdsa",
-+};
-+
+ /*
+  * uclass definition for ECDSA API
+  *
+diff --git a/lib/fdt-libcrypto.c b/lib/fdt-libcrypto.c
+index ecb0344c8f6..090246b44e9 100644
+--- a/lib/fdt-libcrypto.c
++++ b/lib/fdt-libcrypto.c
+@@ -10,7 +10,7 @@
+ int fdt_add_bignum(void *blob, int noffset, const char *prop_name,
+ 		   BIGNUM *num, int num_bits)
+ {
+-	int nwords = num_bits / 32;
++	int nwords = (num_bits + 31) / 32;
+ 	int size;
+ 	uint32_t *buf, *ptr;
+ 	BIGNUM *tmp, *big2, *big32, *big2_32;
+diff --git a/tools/image-sig-host.c b/tools/image-sig-host.c
+index 5285263c616..285547994ca 100644
+--- a/tools/image-sig-host.c
++++ b/tools/image-sig-host.c
+@@ -83,6 +83,13 @@ struct crypto_algo crypto_algos[] = {
+ 		.add_verify_data = ecdsa_add_verify_data,
+ 		.verify = ecdsa_verify,
+ 	},
++	{
++		.name = "ecdsa521",
++		.key_len = ECDSA521_BYTES,
++		.sign = ecdsa_sign,
++		.add_verify_data = ecdsa_add_verify_data,
++		.verify = ecdsa_verify,
++	},
+ 	{
+ 		.name = "secp521r1",
+ 		.key_len = ECDSA521_BYTES,
 -- 
 2.43.0
 
