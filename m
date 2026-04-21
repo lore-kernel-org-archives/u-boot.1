@@ -4,95 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1ED0F8FA90
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 15:04:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF506F8FA8F
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 15:04:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9B01842D7;
-	Tue, 21 Apr 2026 17:03:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6B4838422D;
+	Tue, 21 Apr 2026 17:04:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M3zY36/l";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bLTrENlK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73527842C7; Tue, 21 Apr 2026 17:03:56 +0200 (CEST)
-Received: from mail-oa1-x43.google.com (mail-oa1-x43.google.com
- [IPv6:2001:4860:4864:20::43])
+ id 699DC84258; Tue, 21 Apr 2026 17:04:04 +0200 (CEST)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E9B78426E
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 17:03:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E4558412A
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 17:04:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x43.google.com with SMTP id
- 586e51a60fabf-40974bf7781so4158930fac.0
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 08:03:54 -0700 (PDT)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7dcd9061b1aso697139a34.2
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 08:04:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1776783833; x=1777388633; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1776783841; x=1777388641; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=IMk81LFlf7FQjw6CT8/14s96Gie58P4uvxCE/fHWaqQ=;
- b=M3zY36/lLEWNNilWZrktdzuqj+c6a+kJdiXG82YqN0CZaENM+jKaAWxJEKpTXrp7MA
- KJnZ03kdS54ejgMDTLk8TNtzFqqa8oU9oSjCyGsXksOj4jOVFTO0ITGHrKKZ5JbWZ4qX
- pIXRHH3t09DWJ0d8nvte+oHadASUkWHFREm7g=
+ bh=fxL5s9mN1y5+FjQNA0lIeTvkB0pzYk1mG5mgAFs5ZMs=;
+ b=bLTrENlK25cu7yhPW6vUVk4oRCM5bEHiHEB7AuqPFNeVZZZ353bDh43mGplJSpvxaw
+ LCRjmKJhvHjf65O8Zvcfs2ecaCKbYGq4kilfAM3QrcZiK63bMDUs34bfan63SoHT+6tR
+ Hkm7QdsXCfqIbXz2FIaNb39TDp0Vjf5Yd6m1I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776783833; x=1777388633;
+ d=1e100.net; s=20251104; t=1776783841; x=1777388641;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IMk81LFlf7FQjw6CT8/14s96Gie58P4uvxCE/fHWaqQ=;
- b=dH983OA7udGC3BxHa5mBMTf+LvWeh8pzFjEfh6RSmQruec8ByAoUnqp5CazMbNP2CT
- 4NS5/d8OMCcr4X7wJtkt4nnNq6XsqREGjuX1XwFZEKt+OVieTrviOVlfw6O+4RcDEaWX
- P/D8Q/TKhqrAbixGI8QlLVxW0rJMbEK2Q6jEZbr1oyDIu1he0mJ2+9Q9sFH5axp51ce3
- 5L8xw4IUMflricnN60UHo7njG+oovL4xWmW5ouQmvoHxyJtMO8K5jKoEZ7zfO3SyVuUD
- s7GloVy9Y+Nrb8qI8Cvy7S+F3UxAzhqkk4H+xOS05DVxdhYNdqjQXLXYWICR/AJoTl0B
- g5yQ==
-X-Gm-Message-State: AOJu0YwdWjHPP6/7FBmYd4NVH/QfuR56IYY7M05gKDZjJFWkxsZU+NcW
- H9jcz6B8SYE+KoLICSDqcHnmf/UoYEa3IhkBruIygQB5kIqYsacyOajl1QBouzs6BfU=
-X-Gm-Gg: AeBDievkCoyE0amiokwOoH5uDj+rqzb5wd96YKx1ey4imBGfphY0ZebW1icjRkEPCTz
- 2gvwKlFMPlmnmguIiBncA7DCdgHvTijSXIIBBmGiwob7SY1afzBiz7FNwHgIObESHjBeBP1W5Dz
- z2pJCmpVPGZJuV90VkAkfWSGSJCFAVyUHrcqjFJ32wRG1Y2dI7WO9iNIRZQSzemRtIcik0r56U4
- JXUIfv7efdELWYZfaYlkgOcwOLA32GgPud7gxczyZ2+MazypcaFzxGTrJ2eei5F1jLGDlH4PTCL
- q2kZ0qph5VW0FlunsHtBapXkpDW+h3PBs/Ds8MX7H8Ij74NrNTqkByTzWdtPb5RDQ+By6VaZT8e
- zfy2KPyWBjI6OuCYlFZPtDTMHvxmbYdOWL38YDvwQdsIlwcVzf7MtiPLhkDNfP8hEa0pQDk1lqo
- x4MR3FkVK4m+pfWBvyjc9gJkip1koQmRdwzp8Tx/Ky8SF9D+rcOrxMDmpEyce4z7yJ5HPjZ4JRA
- TY/0pqZWJYqIKxv8kwgZltX2ZObiXXXcITr+mfSzR8+ycASvH8Sf0BEnoFqMA==
-X-Received: by 2002:a05:6871:68a:b0:404:2e44:18b6 with SMTP id
- 586e51a60fabf-42a99adb2cemr9570556fac.16.1776783832360; 
- Tue, 21 Apr 2026 08:03:52 -0700 (PDT)
+ bh=fxL5s9mN1y5+FjQNA0lIeTvkB0pzYk1mG5mgAFs5ZMs=;
+ b=JWDa/tELK7/DUXWoXV+bsgfe5S5cksGQxtIcLnF7nT02ZrpfpH8JEdS64cXkOB/pB5
+ Ipq9lJDZOdf/5OaNwwwBk0DLQico8ENtXBdKnJm07UXBy0I6F/3Jd+J6qWvXUec0rKzt
+ JTWfpI4SVVYtj3+MoRu6T228xRm2E918f6QrvnpJqKudmADjLtDISR9bem3WbwTGBDrf
+ tsUl5hE3IaMN1u9r+18G53wlDIStQiNIskgo7DMM7oBMBDnNrBq2auUGQ4+gXVfJVGtJ
+ 0LpATFld5ytb8UQUDHeEphpg3vgOw1C2/6WBJp8/PEz2VEKQamg9TzxMDEFkmIC20tAn
+ 9GNA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+J1i2h6sGChVSlFwBUMkQi8NPW86S12jmWSCuqW9fEftTQKaPwLNthgwlkMLZ6qxPQVkDxtP8=@lists.denx.de
+X-Gm-Message-State: AOJu0YyRgSppR3edcvgXoj8M6IiBrBA8NnLX0DOtdnQJUGM7+8qN5awN
+ uNGm1mZEFwJ9Z3ukv1hocmbK/Xcm8+Ha8GNkG3jDGUunwK45uDj0spBqfobuhVdv4Go=
+X-Gm-Gg: AeBDieuYWkrSTNFqfdaie0zQxvqhl8jMRQSVT2H/MWWchOutHVOt/HQW9CMg7dfKRs+
+ QwPDg/IsBXXeKV2QUJcQng8v9tv8ZuZUvF42d+oR/ScbfBS5tnT7wgi2lJlzU+AOdEo8zWGhElO
+ oKyEnAA2Fm+3IZrSU/73uNwqzeDGo4khpCGGszgIl63ps67cHgzbO/sYue1NUUf7mLgtNFtrOdT
+ 958P+CPbeQqEqB5TPw9X3+kcsvOhFLf+o1sElEI/F19ESK9y5Oyx2pkUXzXg+SccB3Cbdc6Eggk
+ AeFP7cRJIDtlY2Z1YsZVw/O/0i4avvkTXAj5SzXvOCRY8BPgKR60cQc1BUp98EZijO/w/zwwJ+k
+ kFGrF3KaK3+oJBu7fZNZeizuUKvzyw/tc0ib7YLQ+w10/5+7XpdbXYQCRwExmZNFEL8p5wM6ocn
+ KFnU5AO4rDgvnRI2iv5xB0jFr5yOZsJ8kE0og6hiV6m8LYajr4PaRoRiYAExwa0DJTeBK7XbFjA
+ VvuaT3xKRhUUCe6CfOd6/QcAKiGYKxoFjeCjAQdx3ogXfQNUFoB3QVjxHfjkw==
+X-Received: by 2002:a05:6830:8496:b0:7dc:c301:d0b7 with SMTP id
+ 46e09a7af769-7dcc301e1a6mr4561633a34.28.1776783839902; 
+ Tue, 21 Apr 2026 08:03:59 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-42b9304b7f6sm12161579fac.1.2026.04.21.08.03.50
+ 46e09a7af769-7dc975b057bsm12604766a34.20.2026.04.21.08.03.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Apr 2026 08:03:51 -0700 (PDT)
-Date: Tue, 21 Apr 2026 09:03:48 -0600
+ Tue, 21 Apr 2026 08:03:59 -0700 (PDT)
+Date: Tue, 21 Apr 2026 09:03:55 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, venkatesh.abbarapu@amd.com,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Liviu Dudau <liviu.dudau@foss.arm.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Harrison Mutai <harrison.mutai@arm.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
+To: Daniel Golle <daniel@makrotopia.org>
+Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Peng Fan <peng.fan@nxp.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Matthias Brugger <mbrugger@suse.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Subject: Re: [PATCH v3 4/6] bloblist: add API for applying blobs with
- specified tag
-Message-ID: <20260421150348.GE3036003@bill-the-cat>
-References: <20250718141621.3147633-1-raymond.mao@linaro.org>
- <20250718141621.3147633-5-raymond.mao@linaro.org>
+ Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Aristo Chen <jj251510319013@gmail.com>,
+ Ludwig Nussel <ludwig.nussel@siemens.com>,
+ Benjamin ROBIN <dev@benjarobin.fr>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ David Lechner <dlechner@baylibre.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Shiji Yang <yangshiji66@outlook.com>,
+ Rasmus Villemoes <ravi@prevas.dk>,
+ Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/7] image: fit: add dm-verity property name constants
+Message-ID: <20260421150355.GF3036003@bill-the-cat>
+References: <cover.1776302805.git.daniel@makrotopia.org>
+ <ae77f7b939ec6e1c2cc1b0fabc13cb3f8a68c2c0.1776302806.git.daniel@makrotopia.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Red5/wZGPR3Q5wYX"
+ protocol="application/pgp-signature"; boundary="pmvvKBmf90UNzf3h"
 Content-Disposition: inline
-In-Reply-To: <20250718141621.3147633-5-raymond.mao@linaro.org>
+In-Reply-To: <ae77f7b939ec6e1c2cc1b0fabc13cb3f8a68c2c0.1776302806.git.daniel@makrotopia.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,38 +119,35 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Red5/wZGPR3Q5wYX
+--pmvvKBmf90UNzf3h
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jul 18, 2025 at 07:16:17AM -0700, Raymond Mao wrote:
+On Thu, Apr 16, 2026 at 02:46:29AM +0100, Daniel Golle wrote:
 
-> Add an API to search for the blobs with specified tag and use the
-> hook function to apply the blob data.
-> Add a helper function to return the inline header size as according
-> to recent spec[1] updates, the actual data can be following an inline
-> header instead of following the TE header immediately.
+> Add FIT_VERITY_NODENAME and the complete set of FIT_VERITY_*_PROP
+> constants for the dm-verity child node of filesystem-type images, plus
+> the five optional boolean error-handling property names aligned with the
+> flat-image-tree specification.
 >=20
-> [1] Firmware Handoff spec:
-> https://github.com/FirmwareHandoff/firmware_handoff
->=20
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> Signed-off-by: Daniel Golle <daniel@makrotopia.org>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---Red5/wZGPR3Q5wYX
+--pmvvKBmf90UNzf3h
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaeeR1AAKCRAr4qD1Cr/k
-ChGHAQCqPGXDIVVIu5DFpXSQNcpWxoELcee4ToMRMm/wIQA7QQEA52L8ozW5Rr4k
-M8T9ZwuF8H8+6jQGKFpdpht7n83JsQQ=
-=zb6Y
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaeeR2wAKCRAr4qD1Cr/k
+ChjVAP9tmZF6cG3h19yANT77LZGxb9raawGLI4izXuyBob8l3wD/enXqF/KP8a4a
+Z3wUh6YgR70AaMBegIV9d9dyVH4vNAc=
+=uwXB
 -----END PGP SIGNATURE-----
 
---Red5/wZGPR3Q5wYX--
+--pmvvKBmf90UNzf3h--
