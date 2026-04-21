@@ -4,108 +4,165 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1CE3F94CB0
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 21:12:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 052CFF94CB0
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 21:12:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E01BE84326;
-	Tue, 21 Apr 2026 23:10:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
+	by phobos.denx.de (Postfix) with ESMTP id 9D17A805D7;
+	Tue, 21 Apr 2026 23:12:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="Q9nWOGiQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="rre0bEax";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DED8A839D5; Tue, 21 Apr 2026 23:10:23 +0200 (CEST)
-Received: from MRZP264CU002.outbound.protection.outlook.com
- (mail-francesouthazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7CFFA83E36; Tue, 21 Apr 2026 23:05:30 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12BD3842A4
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 23:10:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=softathome.com
+ by phobos.denx.de (Postfix) with ESMTPS id E66AE805D7
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 23:05:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=philippe.reynes@softathome.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=g0boIlx42IEM47XhnhFqUgQskwheJrRrJHNjiWdVB8xTB0W7VwZRzXnK20DwYbdCxX7wafGekdHDPtYvzzSFBQbu44f8vPVyB+DrDD2PeKw2eowYCGXCDBYbMAMQ+vr6KEIdOfMkKEVibbay/LhDGN3fmmqFoedh3qyt0AV5+wZFuMelE/Xcn7ucwzAKZPIlnYBfrSmnrEKV4uHt3Jg5+KhwmJ0QSPW3I6NlA1u8lYwyXCxdo/oXOslYHsoVyYnLaHefPaEgFnlDjprnQJtymkCfRw5CaQARQW1Fgiyv6pW6km+4Wj0aZnsov3BMXxqjBVWA1mmBC8a48U7O5p9OZQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yJT6iwwgLuUe0ntZpJjsU8gjPEQfvhlqP4SShduSKdU=;
- b=lmVlhk/tVeFOBAhMmhaxWIWE6esxeBUoMdzvayQdvrIGshXmywATUj3pO0vZvkM7gv/oFlYi8H8p0moB4skRRpAEzr7kJ1BjOFUVt4eCCS5eNXGCx2vaVA7+F7DLdpvoGe8yBf5W8aEfuLrRWteZclXHf0z8sinpZokDrHGrCWchizpu8nVIaKYpmoS47E2N+vjSbFomPEr6v+cE4srsa3sVAFBlOJFAFmMZODMPVp8yoyNL4ByK9LuN4YjOLmn8knHePlYm0tiB2r8/+erJ+/hmflvs8FzlEBGFXIEDkI8MhvLxjKWRSFgRCj4VD88agM59kLNpjBl7eZGUd5pQQw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 149.6.166.170) smtp.rcpttodomain=canonical.com smtp.mailfrom=softathome.com;
- dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
- (message not signed); arc=none (0)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-b9c745e18a0so772463666b.1
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 14:05:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776805527; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Puvdg3Yrhlpx3BKvpRqeD0OrVVPJusfwOEhXRhN1tVxPv/h26bchxuRaPlrX62jCfa
+ 7Ml55T6ooYoobqTBAMznkfIlc9aqy8mxvSTLqaq2zJcpCCoA75mpqvWpNZr5VYXu1MI2
+ LuH+Mj1RTthmrycxd4IEwwAKNjcMpEfvoOk/BYCN8MJlfSnw8Q3u3o26H2tSdPL6VibZ
+ 6TY4trUMUZhBc4NhNqseTyO/mHugGagU15B/WKMf3O/ODDTL2dxguk1cSqwplwz79glI
+ osvGXvtYcblz5hCXYX268NXWkxtD4uXANjTnAMy1J5GA6eC/AgZABcfimdvpIamDtNXz
+ c/3w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=3EYVp13GjMWBcR2CB2algyDuXgfqMzkWFOguUH5K/40=;
+ fh=fwHATDrBnJNz+V1s30UQvVP3UF4tUDN/MBo+ZDeAQhM=;
+ b=b63TW6wQnTK0D8FdwfMoqTIyTJmDA8De/cUCtIVOaskqJ2rggFBn/huN/fDya/tw90
+ k8gnAcoOaq5fHo5XHYjAgHQFOqaWqxZAnAA0fFahSsdYVwAKrfP94QkvMuAOCgEtqVWk
+ NuoPUYuYC4sahPC9uOgDzE1k34dUTVb0uIUjcwQS8hF6ofX7BzZ8dzQ7iH88jlCBbsGa
+ g15kIBMOi+QJfzNYGX2obqUMcl9Sq85Bq9iC3Z9D3T5xRat9c4o2W7tsvY1CXEaHwv1m
+ zUOfsuQvdpDWZJd2dVlKawAaOdY7EP4I8xOHngN4YbrELlpJ3W+QEFXUrRdjYzodEytd
+ QGkA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yJT6iwwgLuUe0ntZpJjsU8gjPEQfvhlqP4SShduSKdU=;
- b=Q9nWOGiQL+RJ5f65Vkd0j5NZ71qev+a2q4Dacu9xNzh3VnD7M++9T7QhoMBF1wYAfIritSzORWDpW1PU4IkECyOd5d/Jw4HAEYPNeyT0HO2Py+jMCKWtpye5vwUkZFad233nkxCzeCZtqXVgz0NIOq9zEBgvqPxmT8TDJ9qBgnZ/s5vbz8H7FdQLOT07th1UYd+pC/4xkOXg+HeLgWdkEwRY9p7jdCn7mHiJZhC9/oIdQ8lwpLB6CRabl62IfyC3cv0GdnlRhT8VJzjlnpeEtYAqF8PJpjRJyXqjbEvrvnn0XY4jkGgm/WNh8XadtBm5yWouFphoqJLa9P7IYhsBTw==
-Received: from PA7P264CA0286.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:370::13)
- by MR1P264MB2786.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:37::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.32; Tue, 21 Apr
- 2026 21:09:57 +0000
-Received: from PA2PEPF00019233.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:370:cafe::cc) by PA7P264CA0286.outlook.office365.com
- (2603:10a6:102:370::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Tue,
- 21 Apr 2026 21:09:57 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
- smtp.mailfrom=softathome.com; dkim=none (message not signed)
- header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
-Received-SPF: Pass (protection.outlook.com: domain of softathome.com
- designates 149.6.166.170 as permitted sender)
- receiver=protection.outlook.com; client-ip=149.6.166.170;
- helo=proxy.softathome.com; pr=C
-Received: from proxy.softathome.com (149.6.166.170) by
- PA2PEPF00019233.mail.protection.outlook.com (10.167.242.39) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.18
- via Frontend Transport; Tue, 21 Apr 2026 21:09:57 +0000
-Received: from sah1lpt726.softathome.com (unknown [192.168.72.32])
- by proxy.softathome.com (Postfix) with ESMTPSA id 890CA1FFF1;
- Tue, 21 Apr 2026 23:09:57 +0200 (CEST)
-From: Philippe Reynes <philippe.reynes@softathome.com>
-To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
- trini@konsulko.com, simon.glass@canonical.com
-Cc: u-boot@lists.denx.de, Philippe Reynes <philippe.reynes@softathome.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v5 08/15] test: vboot: add test for ecdsa
-Date: Tue, 21 Apr 2026 23:09:47 +0200
-Message-ID: <20260421210954.1170437-9-philippe.reynes@softathome.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260421210954.1170437-1-philippe.reynes@softathome.com>
-References: <20260421210954.1170437-1-philippe.reynes@softathome.com>
+ d=gmail.com; s=20251104; t=1776805527; x=1777410327; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=3EYVp13GjMWBcR2CB2algyDuXgfqMzkWFOguUH5K/40=;
+ b=rre0bEaxD6x7VRG6lL8any4ayuRjDKksnPRiG6GL7AqacESqNpbR2Df3fX1yWBNrdb
+ 2vYtlQZmOlBDmYpFYoIJRfvMHrg8ShIRxhxaB0LYbvE3NTENUKi1NMXiybEfOgEVrziB
+ 2HCBN53Y9G23PiEULIE11SLkUvqJVUwwub3RXAFyDx/3//+gYp+4jFUv61DOaLrvglg+
+ HTmaD4AY5UO3v740TfN8dlivQtfxzIJ8v7FpIhNXNJcliCwXjsuu0F/U8/hAiDAA4UvR
+ 0m2bQHcAfvJ6i5485bPKgeU+SYiMApmqTCAFA1WB4IUIkcLuovWzalwm71WkxRVSA1rD
+ RirA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776805527; x=1777410327;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3EYVp13GjMWBcR2CB2algyDuXgfqMzkWFOguUH5K/40=;
+ b=Ha6Q/lY4xW445KSFgEk7zDJI7j0nl2+IP3LJ3xXHsbATqSMOzS4q826tL3yvOGyN3I
+ /4dSDykOlBq36qB70XjCQ84PireNY7G2GVEeos+5pP0H1p73InTl0nZzz4MhFkRvYyMg
+ oSGrvosdBRUNSTLD/0R35ohKaZCcGl5y+gcxOoKTwUMVkiPeqhuwIqkvYd/a/A0cm/ii
+ 5PTXadbb+XUhpSOTw8ra1rwBraPxw7symr1O4Mfbqdu68XSrX/NlArmDHKh+Pxq8lS/L
+ y8SuYUBR/OKA+OxVQRpiAduPYCMiAufq+BYFetEb33DEXCIbwNpjGjKLKMJMdpcJuaCu
+ FC6w==
+X-Gm-Message-State: AOJu0YxYkijt4SEkV1GnVUQJQSkl6cFPXFXvN/QULl7hcPl85CC6a0xw
+ Fp6cwhLXbNfLP8hNyaQT+US5xVLxJyw8f6H2A50VT2tYfrt4jrZ5VZ9TcvKvGGsnqE2Wac/yQxQ
+ lOAlxaVG/bv6RyGwr70Kx3pYhCb8iCac=
+X-Gm-Gg: AeBDieu6z/Ym+5Mf1AftNdPunO8K0SvQsrjYpZ0DnnP2Yr5Z8ZCRDFOEDHL4UCgGU55
+ 45Jx/5fkSjYB6qFFUGRv9cR5i8Dh0zVDv5INRL5HmQ2lJaKdD14pbDUI6P/DaAS1fD5n6JoT5kN
+ YnXeQvBR1n6insJk9cN3u1wrj/d+9kzloL+xPuWiTNV3rw0zY42mFry6y1W+DvvvatKvuHg3LFz
+ DqNd5xxQFs8Wvl/ctp0hS0AKPuECdeL5D7eT3tjFj+Z7PgwVls5sKWEcZ25B0iylDJST2o3nOPl
+ UKP2k5/32z5ZG8l2TuwNe1YVYS548K7w3RlPZPWlHVpTeJXgw5+EgRsfo2b1HtMXndM3MxzC/S2
+ kOJiswfkTw5krHCUduyc56LvY+xx14zTEJWZ8iTFyUQHTNeqmoiwW2f20HHEVpOtFXYs2lolSOM
+ Sg8wYn2leLmWI=
+X-Received: by 2002:a17:907:1c09:b0:ba5:120d:64b0 with SMTP id
+ a640c23a62f3a-ba5120d6ac7mr764264766b.7.1776805526860; Tue, 21 Apr 2026
+ 14:05:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA2PEPF00019233:EE_|MR1P264MB2786:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: a6020129-aaf1-4777-ff4f-08de9fea57cc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700016|1800799024|82310400026|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: YaEJbs1iH48IB+weNe/DLbmpwFmd6DR7P3VUoZRyQus6SQejwDMZKOZWOMFLCTAUhkKSuBOJ2tUsSXJ6WSdolFblbGaiwdXVC7cHgVgKJpxjuAJnlws4JEOvG9IZCBJANyh06Qj9NYTlUg4g8s+4smgXqnYb7Vd/sAMSl4j1U0QHbwwb8ePQV6W2qB2NA+/yXgsWFmBIv+nlBAOTb9ZlpikFl5fk/INiPI0tOvhi8pJmqYhoTlO/jF6pM1W0Orm8tiKQR2c7TAsKYDy6afkBx+h4Hcq14TELviQ81KgXfk3VCrvNcXeSVMGX1Qn2ECG5S4U1S+HzFdwGQp1ZiAAukRGI6yBd5nIEDnV/76T5aBnDa584PMsLC0ewJqy+3MYgqylK9Xt2dHOj7ru7Kv0Pha6IQfibTdOFx5ti9TtU7yu9g9gBuev/ULU2tQB2OMqreJ4JhiTp5UQREBnkFJEVYekrRao2cCWG3JogBE+k5qbgqGPcMfNwFyrD13mioUAIrX/P0sVQYqQxWlUWx5f8XFSB/+pfdk6fSU/lD6WYDeJ/MmCbcv3ar9uWFueOXYZxJ0+aRv58Wce4mIrprUC0mjMs/lFgkjx7OpWRrD/QP+kjYsFMCIcQVnrcMmVlD4WU2WbFwnGBxlORDrHrnWKv6d1tNnCQ1BosSaH6/2vJaVC0Ch+9+gSk4mRM6P4abPqJ38XZkp49htTdkHTFNhiZrmPDh1/eHxPl0VYkI4W7rk4yYiCNI98HbJZJQBkl3Puvd0QPB3MS23SMm2/3LYckDA==
-X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700016)(1800799024)(82310400026)(18002099003)(22082099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: POuwu8k4ZbsDOon/h7UJhOYj7sVedUy16eWKbm+biZy1rSW7hzhDtU1Rp+yeyg2xbu8RzSloE06pYGd3cKhfidk4y/DuUUX39MpEUbn4T6D4JnkdVppEwV8BI5ZIurLAjxWYCLB/ifmFrM8LnUcUmVlr9VPjZ7vvfwN02/aNFRLNtytHs60uDUGNmXJcQ9ZNY4cbmxIipfKegPgF39CqNXZKlrTc2mVOZMVn19Kv4n41Vesdq/MRCCk6AsUTW6lX7YscAWBGe+ZW3WVp6j+43RvEdUMg8JIw+bPE5Do4SetT2rjVR+oNoYb9rYy2B6sIhSBYLzdCkSLDZcPPmxTZEh5W9N98VGGQNYRU6gzX/f7qYCM810R/ePZ669lM2k7eyYpMAd1lo2PQAz0jUsPMAoOL12FPwaVdbZ5Y3/8TpwZC3qvBGirNVhBaJzKG0mT6
-X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 21:09:57.6932 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a6020129-aaf1-4777-ff4f-08de9fea57cc
-X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
- Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: PA2PEPF00019233.FRAP264.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR1P264MB2786
+References: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
+In-Reply-To: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Tue, 21 Apr 2026 22:05:15 +0100
+X-Gm-Features: AQROBzAqG7cfv3oMhDO44cc6eUv177Ut5eXixQP4snOUKc5UfjYCAMktQuKhrFI
+Message-ID: <CALeDE9P9on-i4LPUZDnvLm5-b_n+pSg7jKbmVQ2NH_C-tUPixQ@mail.gmail.com>
+Subject: Re: [PATCH 0/6] net: migrate NO_NET out of the networking stack choice
+To: Quentin Schulz <foss+uboot@0leil.net>
+Cc: u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Udit Kumar <u-kumar1@ti.com>, =?UTF-8?Q?Alvin_=C5=A0ipraga?= <alvin@pqrs.dk>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, Adam Ford <aford173@gmail.com>, 
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>, 
+ Matteo Lisi <matteo.lisi@engicam.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Mingkai Hu <mingkai.hu@nxp.com>, Pramod Kumar <pramod.kumar_1@nxp.com>, 
+ Gilles Talis <gilles.talis@gmail.com>, Le Jin <le.jin@siemens.com>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, Kongyang Liu <seashell11234455@gmail.com>,
+ Stefan Roese <sr@denx.de>, Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>, 
+ Vaishnav Achath <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, 
+ Yao Zi <me@ziyao.cc>, Fabio Estevam <festevam@gmail.com>,
+ Alice Guo <alice.guo@nxp.com>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Martyn Welch <martyn.welch@collabora.com>, 
+ Maarten Brock <Maarten.Brock@sttls.nl>,
+ Kory Maincent <kory.maincent@bootlin.com>, 
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
+ Padmarao Begari <padmarao.begari@amd.com>, 
+ Matthias Brugger <mbrugger@suse.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Heiko Schocher <hs@nabladev.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Brian Sune <briansune@gmail.com>, Julien Stephan <jstephan@baylibre.com>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Ben Dooks <ben.dooks@codethink.co.uk>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, Anshul Dalal <anshuld@ti.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Andre Przywara <andre.przywara@arm.com>, 
+ Andrew Davis <afd@ti.com>, Hrushikesh Salunke <h-salunke@ti.com>,
+ Alexey Charkov <alchark@gmail.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>, 
+ Andreas Dannenberg <dannenberg@ti.com>, Chintan Vankar <c-vankar@ti.com>,
+ Martin Schwan <m.schwan@phytec.de>, 
+ Benjamin Hahn <B.Hahn@phytec.de>, David Lechner <dlechner@baylibre.com>, 
+ "Ariel D'Alessandro" <ariel.dalessandro@collabora.com>,
+ Dmitrii Merkurev <dimorinny@google.com>, 
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Robert Marko <robert.marko@sartura.hr>, 
+ Beiyan Yun <root@infi.wang>, "Lucien.Jheng" <lucienzx159@gmail.com>, 
+ Romain Gantois <romain.gantois@bootlin.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, 
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ George Chan <gchan9527@gmail.com>, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Benjamin ROBIN <dev@benjarobin.fr>, 
+ Max Merchel <Max.Merchel@ew.tq-group.com>,
+ Sean Edmond <seanedmond@microsoft.com>, 
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Shantur Rathore <i@shantur.com>, 
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, 
+ Sky Huang <SkyLake.Huang@mediatek.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Tue, 21 Apr 2026 23:12:41 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,388 +179,233 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This commit adds test case for ecdsa on fit, but not (yet) for
-the global image signature (preload).
+This is something I've been meaning to do for ages, thanks for ticking
+it off for me :)
 
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
----
-v2:
-- initial version
-v3:
-- no change
-v4:
-- no change
-v5:
-- no change
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 
- test/py/tests/test_vboot.py                   | 29 ++++++++++++
- .../vboot/sign-configs-sha256-ecdsa256.its    | 45 +++++++++++++++++++
- .../vboot/sign-configs-sha256-ecdsa384.its    | 45 +++++++++++++++++++
- .../vboot/sign-configs-sha256-ecdsa521.its    | 45 +++++++++++++++++++
- .../vboot/sign-images-sha256-ecdsa256.its     | 42 +++++++++++++++++
- .../vboot/sign-images-sha256-ecdsa384.its     | 42 +++++++++++++++++
- .../vboot/sign-images-sha256-ecdsa521.its     | 42 +++++++++++++++++
- 7 files changed, 290 insertions(+)
- create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa256.its
- create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa384.its
- create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa521.its
- create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa256.its
- create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa384.its
- create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa521.its
-
-diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
-index 496d314c649..4e4d9529031 100644
---- a/test/py/tests/test_vboot.py
-+++ b/test/py/tests/test_vboot.py
-@@ -94,6 +94,9 @@ TESTDATA_IN = [
-     ['sha256-pss-pad', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', False, False, False, False],
-     ['sha256-pss-required', 'sha256', '-rsa2048', '-pss', None, True, False, False, False],
-     ['sha256-pss-pad-required', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', True, True, False, False],
-+    ['sha256-basic-ecdsa256', 'sha256', '-ecdsa256', '', None, False, False, False, False],
-+    ['sha256-basic-ecdsa384', 'sha256', '-ecdsa384', '', None, False, False, False, False],
-+    ['sha256-basic-ecdsa521', 'sha256', '-ecdsa521', '', None, False, False, False, False],
-     ['sha384-basic', 'sha384', '-rsa3072', '', None, False, False, False, False],
-     ['sha384-pad', 'sha384', '-rsa3072', '', '-E -p 0x10000', False, False, False, False],
-     ['algo-arg', 'algo-arg', '', '', '-o sha256,rsa2048', False, False, True, False],
-@@ -287,6 +290,29 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
-         utils.run_and_log(ubman, 'openssl req -batch -new -x509 -key %s%s.key '
-                           '-out %s%s.crt' % (tmpdir, name, tmpdir, name))
- 
-+    def create_ecdsa_pair(name):
-+        """Generate a new ECDSA key pair
-+
-+        Args:
-+            name: Name of the key (e.g. 'dev')
-+        """
-+
-+        if sig_algo == "-ecdsa256":
-+            curve_name = "secp256r1"
-+        elif sig_algo == "-ecdsa384":
-+            curve_name = "secp384r1"
-+        elif sig_algo == "-ecdsa521":
-+            curve_name = "secp521r1"
-+        else:
-+            curve_name = "unknownCurve"
-+
-+        utils.run_and_log(ubman, 'openssl ecparam -name %s -genkey -noout -out %s%s.pem' %
-+                     (curve_name, tmpdir, name))
-+
-+        # Create a certificate containing the public key
-+        utils.run_and_log(ubman, 'openssl req -batch -new -x509 -key %s%s.pem '
-+                          '-out %s%s.crt' % (tmpdir, name, tmpdir, name))
-+
-     def test_with_algo(sha_algo, sig_algo, padding, sign_options):
-         """Test verified boot with the given hash algorithm.
- 
-@@ -537,6 +563,9 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
-     if sig_algo == "-rsa2048" or sig_algo == "-rsa3072" or sig_algo == "":
-         create_rsa_pair('dev')
-         create_rsa_pair('prod')
-+    elif sig_algo == "-ecdsa256" or sig_algo == "-ecdsa384" or sig_algo == "-ecdsa521":
-+        create_ecdsa_pair('dev')
-+        create_ecdsa_pair('prod')
- 
-     # Create a number kernel image with zeroes
-     with open('%stest-kernel.bin' % tmpdir, 'wb') as fd:
-diff --git a/test/py/tests/vboot/sign-configs-sha256-ecdsa256.its b/test/py/tests/vboot/sign-configs-sha256-ecdsa256.its
-new file mode 100644
-index 00000000000..4d0ef903a78
---- /dev/null
-+++ b/test/py/tests/vboot/sign-configs-sha256-ecdsa256.its
-@@ -0,0 +1,45 @@
-+/dts-v1/;
-+
-+/ {
-+	description = "Chrome OS kernel image with one or more FDT blobs";
-+	#address-cells = <1>;
-+
-+	images {
-+		kernel {
-+			data = /incbin/("test-kernel.bin");
-+			type = "kernel_noload";
-+			arch = "sandbox";
-+			os = "linux";
-+			compression = "none";
-+			load = <0x4>;
-+			entry = <0x8>;
-+			kernel-version = <1>;
-+			hash-1 {
-+				algo = "sha256";
-+			};
-+		};
-+		fdt-1 {
-+			description = "snow";
-+			data = /incbin/("sandbox-kernel.dtb");
-+			type = "flat_dt";
-+			arch = "sandbox";
-+			compression = "none";
-+			fdt-version = <1>;
-+			hash-1 {
-+				algo = "sha256";
-+			};
-+		};
-+	};
-+	configurations {
-+		default = "conf-1";
-+		conf-1 {
-+			kernel = "kernel";
-+			fdt = "fdt-1";
-+			signature {
-+				algo = "sha256,ecdsa256";
-+				key-name-hint = "dev";
-+				sign-images = "fdt", "kernel";
-+			};
-+		};
-+	};
-+};
-diff --git a/test/py/tests/vboot/sign-configs-sha256-ecdsa384.its b/test/py/tests/vboot/sign-configs-sha256-ecdsa384.its
-new file mode 100644
-index 00000000000..10427b43659
---- /dev/null
-+++ b/test/py/tests/vboot/sign-configs-sha256-ecdsa384.its
-@@ -0,0 +1,45 @@
-+/dts-v1/;
-+
-+/ {
-+	description = "Chrome OS kernel image with one or more FDT blobs";
-+	#address-cells = <1>;
-+
-+	images {
-+		kernel {
-+			data = /incbin/("test-kernel.bin");
-+			type = "kernel_noload";
-+			arch = "sandbox";
-+			os = "linux";
-+			compression = "none";
-+			load = <0x4>;
-+			entry = <0x8>;
-+			kernel-version = <1>;
-+			hash-1 {
-+				algo = "sha256";
-+			};
-+		};
-+		fdt-1 {
-+			description = "snow";
-+			data = /incbin/("sandbox-kernel.dtb");
-+			type = "flat_dt";
-+			arch = "sandbox";
-+			compression = "none";
-+			fdt-version = <1>;
-+			hash-1 {
-+				algo = "sha256";
-+			};
-+		};
-+	};
-+	configurations {
-+		default = "conf-1";
-+		conf-1 {
-+			kernel = "kernel";
-+			fdt = "fdt-1";
-+			signature {
-+				algo = "sha256,ecdsa384";
-+				key-name-hint = "dev";
-+				sign-images = "fdt", "kernel";
-+			};
-+		};
-+	};
-+};
-diff --git a/test/py/tests/vboot/sign-configs-sha256-ecdsa521.its b/test/py/tests/vboot/sign-configs-sha256-ecdsa521.its
-new file mode 100644
-index 00000000000..a65593ec64b
---- /dev/null
-+++ b/test/py/tests/vboot/sign-configs-sha256-ecdsa521.its
-@@ -0,0 +1,45 @@
-+/dts-v1/;
-+
-+/ {
-+	description = "Chrome OS kernel image with one or more FDT blobs";
-+	#address-cells = <1>;
-+
-+	images {
-+		kernel {
-+			data = /incbin/("test-kernel.bin");
-+			type = "kernel_noload";
-+			arch = "sandbox";
-+			os = "linux";
-+			compression = "none";
-+			load = <0x4>;
-+			entry = <0x8>;
-+			kernel-version = <1>;
-+			hash-1 {
-+				algo = "sha256";
-+			};
-+		};
-+		fdt-1 {
-+			description = "snow";
-+			data = /incbin/("sandbox-kernel.dtb");
-+			type = "flat_dt";
-+			arch = "sandbox";
-+			compression = "none";
-+			fdt-version = <1>;
-+			hash-1 {
-+				algo = "sha256";
-+			};
-+		};
-+	};
-+	configurations {
-+		default = "conf-1";
-+		conf-1 {
-+			kernel = "kernel";
-+			fdt = "fdt-1";
-+			signature {
-+				algo = "sha256,ecdsa521";
-+				key-name-hint = "dev";
-+				sign-images = "fdt", "kernel";
-+			};
-+		};
-+	};
-+};
-diff --git a/test/py/tests/vboot/sign-images-sha256-ecdsa256.its b/test/py/tests/vboot/sign-images-sha256-ecdsa256.its
-new file mode 100644
-index 00000000000..009003bb601
---- /dev/null
-+++ b/test/py/tests/vboot/sign-images-sha256-ecdsa256.its
-@@ -0,0 +1,42 @@
-+/dts-v1/;
-+
-+/ {
-+	description = "Chrome OS kernel image with one or more FDT blobs";
-+	#address-cells = <1>;
-+
-+	images {
-+		kernel {
-+			data = /incbin/("test-kernel.bin");
-+			type = "kernel_noload";
-+			arch = "sandbox";
-+			os = "linux";
-+			compression = "none";
-+			load = <0x4>;
-+			entry = <0x8>;
-+			kernel-version = <1>;
-+			signature {
-+				algo = "sha256,ecdsa256";
-+				key-name-hint = "dev";
-+			};
-+		};
-+		fdt-1 {
-+			description = "snow";
-+			data = /incbin/("sandbox-kernel.dtb");
-+			type = "flat_dt";
-+			arch = "sandbox";
-+			compression = "none";
-+			fdt-version = <1>;
-+			signature {
-+				algo = "sha256,ecdsa256";
-+				key-name-hint = "dev";
-+			};
-+		};
-+	};
-+	configurations {
-+		default = "conf-1";
-+		conf-1 {
-+			kernel = "kernel";
-+			fdt = "fdt-1";
-+		};
-+	};
-+};
-diff --git a/test/py/tests/vboot/sign-images-sha256-ecdsa384.its b/test/py/tests/vboot/sign-images-sha256-ecdsa384.its
-new file mode 100644
-index 00000000000..567de687a06
---- /dev/null
-+++ b/test/py/tests/vboot/sign-images-sha256-ecdsa384.its
-@@ -0,0 +1,42 @@
-+/dts-v1/;
-+
-+/ {
-+	description = "Chrome OS kernel image with one or more FDT blobs";
-+	#address-cells = <1>;
-+
-+	images {
-+		kernel {
-+			data = /incbin/("test-kernel.bin");
-+			type = "kernel_noload";
-+			arch = "sandbox";
-+			os = "linux";
-+			compression = "none";
-+			load = <0x4>;
-+			entry = <0x8>;
-+			kernel-version = <1>;
-+			signature {
-+				algo = "sha256,ecdsa384";
-+				key-name-hint = "dev";
-+			};
-+		};
-+		fdt-1 {
-+			description = "snow";
-+			data = /incbin/("sandbox-kernel.dtb");
-+			type = "flat_dt";
-+			arch = "sandbox";
-+			compression = "none";
-+			fdt-version = <1>;
-+			signature {
-+				algo = "sha256,ecdsa384";
-+				key-name-hint = "dev";
-+			};
-+		};
-+	};
-+	configurations {
-+		default = "conf-1";
-+		conf-1 {
-+			kernel = "kernel";
-+			fdt = "fdt-1";
-+		};
-+	};
-+};
-diff --git a/test/py/tests/vboot/sign-images-sha256-ecdsa521.its b/test/py/tests/vboot/sign-images-sha256-ecdsa521.its
-new file mode 100644
-index 00000000000..74ed45b21b8
---- /dev/null
-+++ b/test/py/tests/vboot/sign-images-sha256-ecdsa521.its
-@@ -0,0 +1,42 @@
-+/dts-v1/;
-+
-+/ {
-+	description = "Chrome OS kernel image with one or more FDT blobs";
-+	#address-cells = <1>;
-+
-+	images {
-+		kernel {
-+			data = /incbin/("test-kernel.bin");
-+			type = "kernel_noload";
-+			arch = "sandbox";
-+			os = "linux";
-+			compression = "none";
-+			load = <0x4>;
-+			entry = <0x8>;
-+			kernel-version = <1>;
-+			signature {
-+				algo = "sha256,ecdsa521";
-+				key-name-hint = "dev";
-+			};
-+		};
-+		fdt-1 {
-+			description = "snow";
-+			data = /incbin/("sandbox-kernel.dtb");
-+			type = "flat_dt";
-+			arch = "sandbox";
-+			compression = "none";
-+			fdt-version = <1>;
-+			signature {
-+				algo = "sha256,ecdsa521";
-+				key-name-hint = "dev";
-+			};
-+		};
-+	};
-+	configurations {
-+		default = "conf-1";
-+		conf-1 {
-+			kernel = "kernel";
-+			fdt = "fdt-1";
-+		};
-+	};
-+};
--- 
-2.43.0
-
+On Mon, 20 Apr 2026 at 12:36, Quentin Schulz <foss+uboot@0leil.net> wrote:
+>
+> This migrates the net options away from the main Kconfig to net/Kconfig,
+> rename the current NET option to NET_LEGACY to really highlight what it
+> is and hopefully encourage more people to use lwIP, add a new NET
+> menuconfig (but keep NO_NET as an alias to NET=n for now) which then
+> allows us to replace all the "if legacy_stack || lwip_stack" checks with
+> "if net_support" which is easier to read and maintain.
+>
+> The only doubt I have is wrt SYS_RX_ETH_BUFFER which seems to be needed
+> for now even when no network is configured? Likely due to
+> include/net-common.h with PKTBUFSRX?
+>
+> No change in behavior is intended. Only change in defconfig including
+> other defconfigs where NO_NET=y or NET is not set, in which case NO_NET
+> is not set or NET=y should be set in the top defconfig. Similar change
+> required for config fragments. See commit log in patch adding NET
+> menuconfig for details.
+>
+> This was tested based on 70fd0c3bb7c2 ("x86: there is no
+> CONFIG_UBOOT_ROMSIZE_KB_12288"), from within the GitLab CI container
+> trini/u-boot-gitlab-ci-runner:noble-20251013-23Jan2026 and set up
+> similarly as in "build all platforms in a single job" GitLab CI job.
+>
+>  #!/usr/bin/env bash
+>  set -o pipefail
+>  set -eux
+>
+>  ARGS="-BvelPEWM --reproducible-builds --step 0"
+>  ./tools/buildman/buildman -o ${O} --force-build $ARGS -CE $*
+>  ./tools/buildman/buildman -o ${O} $ARGS -Ssd $*
+>
+> O=../build/u-boot/ ../u-boot.sh -b master^..b4/net-kconfig |& tee ../log.txt
+>
+> I can't really decipher the log.txt, but there's no line starting with
+> + which would be an error according to tools/buildman/builder.py help
+> text. Additionally, because I started the script with set -e set and
+> because buildman has an exit code != 0 when it fails to build a board,
+> and I have the summary printed (which is the second buildman call), I
+> believe it means all builds passed.
+>
+> The summary is the following:
+>    aarch64: (for 537/537 boards) all +0.0 rodata +0.0
+>             uniphier_v8    : all +1 rodata +1
+>                u-boot: add: 0/0, grow: 1/0 bytes: 1/0 (1)
+>                  function                                   old     new   delta
+>                  data_gz                                  10640   10641      +1
+>        arm: (for 733/733 boards) all -0.0 rodata -0.0
+>             uniphier_v7    : all -1 rodata -1
+>                u-boot: add: 0/0, grow: 0/-1 bytes: 0/-1 (-1)
+>                  function                                   old     new   delta
+>                  data_gz                                  11919   11918      -1
+>             opos6uldev     : all -3 rodata -3
+>                u-boot: add: 0/0, grow: 0/-1 bytes: 0/-3 (-3)
+>                  function                                   old     new   delta
+>                  data_gz                                  18778   18775      -3
+>             uniphier_ld4_sld8: all -3 rodata -3
+>                u-boot: add: 0/0, grow: 0/-1 bytes: 0/-3 (-3)
+>                  function                                   old     new   delta
+>                  data_gz                                  11276   11273      -3
+>             stemmy         : all -20 rodata -20
+>                u-boot: add: 0/0, grow: 0/-1 bytes: 0/-20 (-20)
+>                  function                                   old     new   delta
+>                  data_gz                                  15783   15763     -20
+>
+> As far as I could tell this data_gz is an automatically generated array
+> when CONFIG_CMD_CONFIG is enabled. It is the compressed .config stored
+> in binary form. Because I'm changing the name of symbols, replacing a
+> menu with a menuconfig, additional text makes it to .config and the
+> "# Networking" section in .config disappears.
+>
+> Here is the diff for the 5 defconfigs listed above, generated with:
+>
+> for f in build/*-m; do
+>         diff --unified=0 $f/.config $(dirname $f)/$(basename -a -s '-m' $f)/.config
+> done
+>
+> (-m is the build directory for master, and without the suffix, it's the
+> top commit of this series)
+>
+> """
+>  --- build/opos6uldev-m/.config 2026-04-20 10:53:49.804528526 +0200
+>  +++ build/opos6uldev/.config   2026-04-20 11:03:37.430242767 +0200
+>  @@ -970,4 +969,0 @@
+>  -
+>  -#
+>  -# Networking
+>  -#
+>  @@ -975,0 +972 @@
+>  +CONFIG_NET_LEGACY=y
+>  --- build/stemmy-m/.config     2026-04-20 11:01:33.653698123 +0200
+>  +++ build/stemmy/.config       2026-04-20 11:04:53.452577311 +0200
+>  @@ -733,4 +732,0 @@
+>  -
+>  -#
+>  -# Networking
+>  -#
+>  @@ -738,2 +733,0 @@
+>  -# CONFIG_NET is not set
+>  -# CONFIG_NET_LWIP is not set
+>  --- build/uniphier_ld4_sld8-m/.config  2026-04-20 11:00:41.605469071 +0200
+>  +++ build/uniphier_ld4_sld8/.config    2026-04-20 11:04:22.226439899 +0200
+>  @@ -997,4 +996,0 @@
+>  -
+>  -#
+>  -# Networking
+>  -#
+>  @@ -1002,0 +999 @@
+>  +CONFIG_NET_LEGACY=y
+>  --- build/uniphier_v7-m/.config        2026-04-20 10:53:04.019307319 +0200
+>  +++ build/uniphier_v7/.config  2026-04-20 11:03:01.688085486 +0200
+>  @@ -1004,4 +1003,0 @@
+>  -
+>  -#
+>  -# Networking
+>  -#
+>  @@ -1009,0 +1006 @@
+>  +CONFIG_NET_LEGACY=y
+>  --- build/uniphier_v8-m/.config        2026-04-20 10:43:05.614441175 +0200
+>  +++ build/uniphier_v8/.config  2026-04-20 10:41:03.214852130 +0200
+>  @@ -875,4 +874,0 @@
+>  -
+>  -#
+>  -# Networking
+>  -#
+>  @@ -880,0 +877 @@
+>  +CONFIG_NET_LEGACY=y
+> """
+>
+> This is fine:
+> - Networking menu doesn't exist anymore so "#\n# Networking\n#\n" won't
+>   be in .config anymore.
+> - opos6uldev, uniphier_ld4_sld8, uniphier_v7 and uniphier_v8 all have
+>   (old) CONFIG_NET enabled, (new) CONFIG_NET will still be set but
+>   CONFIG_NET_LEGACY also needs to be defined now to reflect the stack
+>   choice (even if default),
+> - stemmy has CONFIG_NO_NET set, which means CONFIG_NET and
+>   CONFIG_NET_LWIP are not reachable anymore hence why they don't need to
+>   be part of .config,
+>
+> GitLab CI was run on this series (well, not exactly, but it's only
+> changes to the git logs that were made):
+> https://source.denx.de/u-boot/contributors/qschulz/u-boot/-/pipelines/29849
+>
+> It passes.
+>
+> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> ---
+> Quentin Schulz (6):
+>       move networking menu in net/Kconfig
+>       rename NET to NET_LEGACY
+>       net: make NET a menuconfig (and downgrade NO_NET to a simple config)
+>       simplify NET_LEGACY || NET_LWIP condition with NET condition
+>       doc: remove mention to non-existing TPL_NET
+>       boot: remove NO_NET use
+>
+>  Kconfig                                            | 34 ----------------
+>  Makefile                                           |  4 +-
+>  arch/arm/mach-stm32mp/soc.c                        |  2 +-
+>  board/beacon/imx8mp/imx8mp_beacon.c                |  2 +-
+>  board/engicam/imx8mp/icore_mx8mp.c                 |  2 +-
+>  board/gateworks/venice/venice.c                    |  4 +-
+>  board/nxp/ls1043ardb/Makefile                      |  2 +-
+>  board/nxp/ls1046afrwy/Makefile                     |  2 +-
+>  board/nxp/ls1046ardb/Makefile                      |  2 +-
+>  .../imx8mp_debix_model_a/imx8mp_debix_model_a.c    |  2 +-
+>  board/siemens/iot2050/board.c                      |  2 +-
+>  board/sophgo/milkv_duo/Makefile                    |  2 +-
+>  board/sophgo/milkv_duo/board.c                     |  2 +-
+>  board/theadorable/theadorable.c                    |  4 +-
+>  board/ti/am335x/board.c                            |  2 +-
+>  board/toradex/verdin-imx8mp/verdin-imx8mp.c        |  2 +-
+>  board/xilinx/common/board.c                        |  3 +-
+>  boot/Kconfig                                       |  8 ++--
+>  cmd/Kconfig                                        | 12 +++---
+>  cmd/Makefile                                       |  2 +-
+>  cmd/bdinfo.c                                       |  7 ++--
+>  cmd/fastboot.c                                     |  4 +-
+>  cmd/ufetch.c                                       |  2 +-
+>  common/Kconfig                                     |  2 +-
+>  common/board_r.c                                   |  4 +-
+>  common/spl/Kconfig                                 |  5 ++-
+>  configs/am62px_evm_r5_ethboot_defconfig            |  2 +-
+>  configs/j722s_evm_r5_ethboot_defconfig             |  2 +-
+>  doc/develop/bootstd/overview.rst                   |  2 +-
+>  doc/develop/pytest/usage.rst                       |  4 +-
+>  doc/usage/cmd/bdinfo.rst                           |  7 ++--
+>  doc/usage/cmd/sntp.rst                             |  2 +-
+>  doc/usage/cmd/wget.rst                             |  2 +-
+>  doc/usage/spl_boot.rst                             |  2 +-
+>  drivers/dfu/Kconfig                                |  2 +-
+>  drivers/fastboot/Kconfig                           |  4 +-
+>  drivers/fastboot/fb_common.c                       |  4 +-
+>  drivers/net/Kconfig                                |  6 +--
+>  drivers/net/phy/Kconfig                            |  4 +-
+>  drivers/net/sandbox.c                              |  2 +-
+>  drivers/usb/gadget/Kconfig                         |  2 +-
+>  env/flags.c                                        | 10 ++---
+>  include/configs/stm32mp15_common.h                 |  2 +-
+>  include/configs/stm32mp23_common.h                 |  2 +-
+>  include/configs/stm32mp25_common.h                 |  2 +-
+>  include/env_callback.h                             |  2 +-
+>  include/env_flags.h                                |  6 +--
+>  include/net-common.h                               |  4 +-
+>  include/net-legacy.h                               |  2 +-
+>  lib/Kconfig                                        |  2 +-
+>  lib/efi_loader/Kconfig                             |  4 +-
+>  net/Kconfig                                        | 45 +++++++++++++++++++---
+>  net/Makefile                                       |  6 +--
+>  test/cmd/Makefile                                  |  2 +-
+>  test/cmd/bdinfo.c                                  |  6 +--
+>  test/dm/eth.c                                      |  6 +--
+>  test/py/tests/test_efi_fit.py                      |  2 +-
+>  test/py/tests/test_efi_loader.py                   |  2 +-
+>  test/py/tests/test_fpga.py                         |  4 +-
+>  test/py/tests/test_net.py                          |  2 +-
+>  60 files changed, 139 insertions(+), 138 deletions(-)
+> ---
+> base-commit: 70fd0c3bb7c26d42f24d10145dd5f3168ac92eac
+> change-id: 20251216-net-kconfig-0f63d9de716b
+>
+> Best regards,
+> --
+> Quentin Schulz <quentin.schulz@cherry.de>
+>
