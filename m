@@ -4,89 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 652FDF94CA7
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 21:08:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26093F94CA7
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 21:10:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB99983936;
-	Tue, 21 Apr 2026 23:08:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A0291842E7;
+	Tue, 21 Apr 2026 23:10:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dD/mhDTI";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="cr1sIjDm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B468D805D7; Tue, 21 Apr 2026 23:08:04 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BDB8B84258; Tue, 21 Apr 2026 23:10:04 +0200 (CEST)
+Received: from PAUP264CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170110002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C53B83FFA
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 23:08:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2EFC6839D5
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 23:10:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=softathome.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-464bba3a9easo2468918b6e.0
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 14:08:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=philippe.reynes@softathome.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=DGcFjnzAu2GFGfxJi0WAyEvwkf8eRPqMfKDStMAkuv/yoj8fiLyjFx4fJ4O+2vpdi+HKPnExq19tFbWyTCXWR2+SUTZvsalDcDmxNzNwdIk74Lem5UixxwdSQ9IvK7HKkP79jevCn5aVV9Gl+XoZnEKCZeT4OxQ1EzO1M61jUNkYYqsiotAvYTvtmdBl3yX0Oj9ibizYPUahCZCGC6lktqhaskNv0OJb/XJ0cQYHj/8m9iesipXDrhAnIfDqWlb5cZSMGzs/Aik5ohnHy67ritqDN7GQoILDqiRyfoo3BUBvsGFOAeBox2t/Wc0Iq4T2Wm6LhcuUw2nxomrXU/aUqA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ZqRedFsExPMASo87YssmOhkYfTiC+JOWSCRi1s2/ug0=;
+ b=fKSWXQvHI01hsXFgMW/l6XDm+cL3ZVF4dqzcDSsiO0Wp+PHkbqOPIJApY1hSBFpIMePrtvKzYaX8NUmI8K7R/TBjkq+XixzFFLmpzpGRSKREocpcudLSQQY/h/Hbck7igXPfNZTUX5xFOdnocDZvhi7YaS9tPOTHYrg+QJB4d838hWypPIzBs81f6/abzKIfCQ4rwEa44z/v0SqChV4TdAvKiE58cw7k63peOsnGwSmpphcw2B4xXWw+2pgr5haxRv6s26MlNYr0TpdoguJkU4LaxtnJarydTeBS7YliuV4FRRJ60EAqvuZbfd11FdFec1ax9HbDPOH0mT4ijVAy9A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 149.6.166.170) smtp.rcpttodomain=canonical.com smtp.mailfrom=softathome.com;
+ dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
+ (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1776805680; x=1777410480; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TfiT474GCtoRdL9h9OWN+e0c/mgRZ3PdHqfHNbiojsc=;
- b=dD/mhDTITnfc+d20MECNrBiFzjf/B44YvLtb9rJGuniSVZQxca9ldGRNNrzF/LW4lz
- sy6a7jfT0RVCIiTGsNdW7CP2CPDEVNR0MqH6y1wgtldgzPw8BEfDSYGk+akdHkU/wQgl
- Ji9I5ZfpcbEBeK2lao/WOmDc5xQKAi2wPbwXY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776805680; x=1777410480;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=TfiT474GCtoRdL9h9OWN+e0c/mgRZ3PdHqfHNbiojsc=;
- b=GC/MKSToMiLvjoG/vcfgK8/dSxpD0fcj2EILDIYAvKS0OTzMne9tUwghUwxp4yS61K
- b+TT8BKDik8YZwn5NfrfXowlc8LRzhRcsypVEdfRHLBcevcA9KUuPn3Of8wky8WXTboO
- cIlQUN2Y8tgepD4PL6msAzFz0dPVOJRXrIvVJVvoMIq6H9jKwGgdzLJ5L9d/nXCxxco3
- D2fG/0YHYdnZak8hFWxf2pP/oMsAzbXkmsDJZ0On9YrFT+yVqOWjH5U+tyhHdTAo/fLF
- vh5frcQyuiDdQEDskEjy7v2JCBZ1vwnzNCo9tTbULjImok8LluEhji3r+sHqFBKmxW4S
- hF6w==
-X-Gm-Message-State: AOJu0YyNhexftf0zmfydZaENlgs9+4WEY1s5C7fcUr9X+W9DaSJFLm0v
- UW00BhDDwkQ8RF5RI55UjAoOV3cUL7hJkpvuyBrMRaSTxe9Hn1NcJvoz74rnCp6Yx78Wz9CDpa8
- j7ulxXMuOfSnA
-X-Gm-Gg: AeBDiesKtO2R/ElK1XDbYbOqT4K+Ghoeyon10LPkm5e/JxdKs5HFbDgYIOSyLr8OeUw
- IW7EoeOAKE17TJR+HBJzMBrAUVCm6eEQrcqCRmk4MooziKfyOQrAfdAVV/1Gehp2CIyvyQzmxEi
- YgOpDJIgf8wM4F2vTIIsFB6Arqp8tD+IKH84fe+5AXgwMj6hEcabYgrkFfqbagC25SkubHnVw/q
- AkVQnzLeyCpoFFlUuQxPBYuOqfKK1tdY2hC1soEjKDuz3gcyQ1vt/YYB7S7lgHmEZYyFuOBULzc
- YfQDluTTZZth/y1o8wdt6mj4M/Bb6cV1uaXXLCpKWykRVIhj3U3UVLas4o/87a2hje2wDQeAPR9
- ArbYvkTj3rJWeUvkVP+pEsuQZuAqh9nX9rrzgcYKqMS/053szi4Skmn+Rtmk2W+dLBnpNTWI48n
- ihVgK3h6YRYTh63Uk2h+OlxHmj+2XklJA3xlAU6gUnFBW92w2v2VxuKgMJVJXkhgs69jlP8EQj6
- p9ez1n2weT68xFmtDcNjEaCX3Jybw5K+x13b6sfz4ExJMfCUuQWVqLdmrNt65/J8/EKbPw=
-X-Received: by 2002:a05:6808:f06:b0:467:1462:a9a0 with SMTP id
- 5614622812f47-4799c8f26e1mr13168688b6e.15.1776805679806; 
- Tue, 21 Apr 2026 14:07:59 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4799fef6dd0sm9906474b6e.5.2026.04.21.14.07.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Apr 2026 14:07:59 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Casey Connolly <casey.connolly@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, 
- Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, 
- Romain Gantois <romain.gantois@bootlin.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Raymond Mao <raymondmaoca@gmail.com>, Peng Fan <peng.fan@nxp.com>
-In-Reply-To: <20260401-casey-ccf-compat-v2-0-414d5b7f040b@linaro.org>
-References: <20260401-casey-ccf-compat-v2-0-414d5b7f040b@linaro.org>
-Subject: Re: [PATCH v2 00/11] Linux compat improvements and CCF prep
-Message-Id: <177680567878.1614595.5749756722621920940.b4-ty@konsulko.com>
-Date: Tue, 21 Apr 2026 15:07:58 -0600
+ d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ZqRedFsExPMASo87YssmOhkYfTiC+JOWSCRi1s2/ug0=;
+ b=cr1sIjDmGmAs++sISHKIJUjuoFaqG0wS0rI649F5IZxWnRA89O1es9pTJsKdwrwVUdFdIazr6vZe14c1GfozVidbQd4oPWVytb4hPARJ6zaSmr4I0a0hszq6FDLuQ7EUo4djDvkSA/Unn6QP+49P/XQLZJR4kpIAo3OB8RcFDZRgCLzf3v9AiatedkFFu2KjEyIwX2qtosccmkx2sOlFFDXWaaA784xDx2epwnfxxOGgEb5I273yggP2SG/3vTYcy1eIIBWkj6uC+4jUMMr5T6GE8fY936ot780upCakJUVq02JjOUgGFU2gL6pmS7c1y7oZLdoUhMMmQxgfmmlqkg==
+Received: from PAYP264CA0035.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:11f::22)
+ by PARP264MB5881.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:4bd::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.16; Tue, 21 Apr
+ 2026 21:09:58 +0000
+Received: from PA3PEPF000089B9.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:11f:cafe::30) by PAYP264CA0035.outlook.office365.com
+ (2603:10a6:102:11f::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Tue,
+ 21 Apr 2026 21:09:58 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
+ smtp.mailfrom=softathome.com; dkim=none (message not signed)
+ header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
+Received-SPF: Pass (protection.outlook.com: domain of softathome.com
+ designates 149.6.166.170 as permitted sender)
+ receiver=protection.outlook.com; client-ip=149.6.166.170;
+ helo=proxy.softathome.com; pr=C
+Received: from proxy.softathome.com (149.6.166.170) by
+ PA3PEPF000089B9.mail.protection.outlook.com (10.167.242.21) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.18
+ via Frontend Transport; Tue, 21 Apr 2026 21:09:58 +0000
+Received: from sah1lpt726.softathome.com (unknown [192.168.72.32])
+ by proxy.softathome.com (Postfix) with ESMTPSA id F1CA720933;
+ Tue, 21 Apr 2026 23:09:57 +0200 (CEST)
+From: Philippe Reynes <philippe.reynes@softathome.com>
+To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
+ trini@konsulko.com, simon.glass@canonical.com
+Cc: u-boot@lists.denx.de, Philippe Reynes <philippe.reynes@softathome.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v5 12/15] boot: pre-load: add support of ecdsa
+Date: Tue, 21 Apr 2026 23:09:51 +0200
+Message-ID: <20260421210954.1170437-13-philippe.reynes@softathome.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260421210954.1170437-1-philippe.reynes@softathome.com>
+References: <20260421210954.1170437-1-philippe.reynes@softathome.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA3PEPF000089B9:EE_|PARP264MB5881:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: dfb80d6a-569d-4327-1c15-08de9fea580f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|82310400026|1800799024|376014|18002099003|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info: Xk/v2pPY0IlCoudRc8IQPNaQ/HuKC7IJ+P6cOfSLRCgFv3Z33AHPeN4JDocKbScZIxDTKIkLHZowYEEzv73hvPHkhUobBVg2fMZfVlMGWNKhMDXG2mg5jXeeUf6XeZxCIce9996i0y8vzzXwxLpPi9pzKI1kfHbfAsEc88pGTJzgEV9blLrc7u1gVZtrH0zN1WhgKUiU4WAU0Ewo2VwFSmE56P3GplG270MeOuLSX+f10Vuw/twu3eLaGGOOCfX9tGIoTJ/iLWFPAoaQTsrWRyyyF9fVCghUjMidzWyl9iPVLj3br3kaGsI+ddkjnIzLXSK3L5YHAPsyoS3Zm9+pxqDSe/VNPuLf1jAKf2L3JL04DMuPnxxf+Odqx9u93UuARFKt9JU+CvVNe5HlNiZdZzo62aB0g/10oGiJw8JV3bVgXkpXc0BvGPIe3P7LUb1qkyxZIlBdG0wDa+mQ4KfNR16vNXQgn3tSXDQRi1M3l0A8PfAO3Jr2v+q5l6TZ3+xZG6dhQvVuFxoB88XVYHFtDYGdbc9KSq7eRoLO9zixtk4pX7yTFLrHDF9ZOg+BV/EJbQFKQ7nWheeIKvuK9tKdgok7HnnIDdY5QD7wzxgI6TXqjdgAvGvxXgAFZzN54w3b47OKz6KNQKSZs+1D802sXs+uy5t70tDsQrrkyoC5OHHgMQNAaoJzs23cpcVfEa+qpDClWbHWhIH2I7dpynKMI1GydMQ1qAdCM5I/UYu2LAXHR2RzqyevZYdXICGgreDKdYrkQAH+iKR90b8m9LqKgA==
+X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700016)(82310400026)(1800799024)(376014)(18002099003)(22082099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: aTtsFCAFSe2PQg2VGWx2mWTDs4q5UWSte3ZuuLq4TbQm+4P7yHe7GAe9ObfzeD8sA/eWW7jXuQe3Jj31CPHgjblCcilQ5NBrK/kDOK8BWW5pqPY8peHD196qCdDNwrstaqqzCZKb4YTs/w6XT0pbV9R85P/rHun2Q2B7a2brGcSMYQoScXqmSANyC2l43E1sI9V07MTaNwFYYHp+h/5uu4/LKhU7DdvrXsNZkyR3+8k+pn1iOTLTk6/HgExNl0MJVqgq0Egj/6cZ3DZpACzHjmd724HLxvFOoNG3L14m/jw5wMXfdvi/BG3iSBktvt7r1rYXeBNx6Mq3zMO65Sf8PeL/q4eZMbpqcxHhdRL/OvkQEi+2u1hYf5gO7GWkWUULEes76a4jFlYsxvOqVma02T3meYSaRyafyeT8AaImK+KJP9FEhIQ7sghUF3cLmvXQ
+X-OriginatorOrg: softathome.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 21:09:58.1262 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: dfb80d6a-569d-4327-1c15-08de9fea580f
+X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
+ Helo=[proxy.softathome.com]
+X-MS-Exchange-CrossTenant-AuthSource: PA3PEPF000089B9.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PARP264MB5881
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,45 +122,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 01 Apr 2026 16:15:16 +0200, Casey Connolly wrote:
+Right now, u-boot can only boot image with a
+pre-load header with rsa. We add the support
+of ecdsa.
 
-> This series implements various improvements to Linux header
-> compatibility, largely in preparation for a full port of Linux CCF but
-> many of these changes would also be helpful when porting other drivers.
-> 
-> Beside the basic header/compat stuff there are a few larger patches:
-> 
-> Patch 1 adds the "%pOF" format specifier to vsprintf, this behaves the
-> same as it does in Linux printing the name of the ofnode, but notably it
-> expects an ofnode pointer rather than a device_node.
-> 
-> [...]
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+---
+v3:
+- initial version
+v4:
+- avoid calling image_get_crypto_algo several times
+v5:
+- simplify the function is_ecdsa
+- re-use already computed crypto in function image_pre_load_sig_setup
 
-Applied to u-boot/master, thanks!
+ boot/image-pre-load.c | 53 +++++++++++++++++++++++++++++++++----------
+ 1 file changed, 41 insertions(+), 12 deletions(-)
 
-[01/11] vsprintf: add %pOF
-        commit: 968164b6863e3a75fb0f5842f4f1cab9ac7c8c36
-[02/11] common: add an option to skip DM pre-relocation
-        commit: f5e96fdffc024552944776848bd5570e1b2caa9b
-[03/11] string: add strdup_const and kstrdup_const
-        commit: 139f5292e7985d0326a1d18eee88720255e423dc
-[04/11] ofnode: add read_u64_array and count_elems_of_size
-        commit: 45c610d718bd605a1b3bdf99ec0386620b54b559
-[05/11] compat: add PTR_ERR_OR_ZERO
-        commit: 3f6f674b4a5653eb7223645be00ddb82368ddb33
-[06/11] compat: add kref implementation
-        commit: 70b55377553403932cb37cc530433aaee6ee41e0
-[07/11] compat: add dev_name()
-        commit: 8e0ed228d8b062690365e439fbd40f1edd34780a
-[08/11] compat: add linux/regmap.h symlink
-        commit: fae701400dd040165d713993b06239f3b4dcd9b9
-[09/11] regmap: add regmap_assign_bits
-        commit: 6c11994b7e7b324ea41e6d62e9a73dc430ea0df8
-[10/11] compat: regulator: add enable/disable macros
-        commit: 076265b75e61f56490003639b3d0a6483a9f507f
-[11/11] compat: math64: add abs_diff()
-        commit: f1f4a1d1d8355b0fc6bfc82d9ca6741a8e92623b
+diff --git a/boot/image-pre-load.c b/boot/image-pre-load.c
+index 2f851ebb28c..af72ea6d547 100644
+--- a/boot/image-pre-load.c
++++ b/boot/image-pre-load.c
+@@ -70,6 +70,12 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
+ 	return 0;
+ }
+ #else
++
++static int is_ecdsa(struct crypto_algo *crypto)
++{
++	return crypto && !strncmp(crypto->name, "ecdsa", 5);
++}
++
+ /*
+  * This function gathers information about the signature check
+  * that could be done before launching the image.
+@@ -86,6 +92,7 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
+ 	int key_len;
+ 	int node, ret = 0;
+ 	char *sig_info_path = NULL;
++	struct crypto_algo *crypto;
+ 
+ 	if (!info) {
+ 		log_err("ERROR: info is NULL for image pre-load sig check\n");
+@@ -114,11 +121,24 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
+ 		goto out;
+ 	}
+ 
+-	padding_name = fdt_getprop(gd_fdt_blob(), node,
+-				   IMAGE_PRE_LOAD_PROP_PADDING_NAME, NULL);
+-	if (!padding_name) {
+-		log_info("INFO: no padding_name provided, so using pkcs-1.5\n");
+-		padding_name = "pkcs-1.5";
++	crypto = image_get_crypto_algo(algo_name);
++	if (!crypto) {
++		printf("ERROR: can't find a valid crypto algo from %s\n",
++		       (char *)algo_name);
++		ret = -EINVAL;
++		goto out;
++	}
++
++	if (is_ecdsa(crypto)) {
++		padding_name = NULL;
++	} else {
++		padding_name = fdt_getprop(gd_fdt_blob(), node,
++					   IMAGE_PRE_LOAD_PROP_PADDING_NAME,
++					   NULL);
++		if (!padding_name) {
++			log_info("INFO: no padding_name provided, so using pkcs-1.5\n");
++			padding_name = "pkcs-1.5";
++		}
+ 	}
+ 
+ 	sig_size = fdt_getprop(gd_fdt_blob(), node,
+@@ -129,12 +149,17 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
+ 		goto out;
+ 	}
+ 
+-	key = fdt_getprop(gd_fdt_blob(), node,
+-			  IMAGE_PRE_LOAD_PROP_PUBLIC_KEY, &key_len);
+-	if (!key) {
+-		log_err("ERROR: no key for image pre-load sig check\n");
+-		ret = -EINVAL;
+-		goto out;
++	if (is_ecdsa(crypto)) {
++		key = NULL;
++		key_len = 0;
++	} else {
++		key = fdt_getprop(gd_fdt_blob(), node,
++				  IMAGE_PRE_LOAD_PROP_PUBLIC_KEY, &key_len);
++		if (!key) {
++			log_err("ERROR: no key for image pre-load sig check\n");
++			ret = -EINVAL;
++			goto out;
++		}
+ 	}
+ 
+ 	info->algo_name		= (char *)algo_name;
+@@ -152,9 +177,13 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
+ 	info->sig_info.name     = info->algo_name;
+ 	info->sig_info.padding  = image_get_padding_algo(info->padding_name);
+ 	info->sig_info.checksum = image_get_checksum_algo(info->sig_info.name);
+-	info->sig_info.crypto   = image_get_crypto_algo(info->sig_info.name);
++	info->sig_info.crypto   = crypto;
+ 	info->sig_info.key      = info->key;
+ 	info->sig_info.keylen   = info->key_len;
++	if (is_ecdsa(crypto)) {
++		info->sig_info.required_keynode = node;
++		info->sig_info.fdt_blob = gd_fdt_blob();
++	}
+ 
+  out:
+ 	return ret;
 -- 
-Tom
-
+2.43.0
 
