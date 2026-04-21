@@ -4,128 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF287F327B9
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 08:06:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76E91F327B0
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 08:21:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 310778431E;
-	Tue, 21 Apr 2026 10:06:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id EDDB68433B;
+	Tue, 21 Apr 2026 10:21:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="T7NtOYWY";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="H5I21wIX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16B5A8433B; Tue, 21 Apr 2026 10:06:41 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id 2D29D8436C; Tue, 21 Apr 2026 10:21:55 +0200 (CEST)
+Received: from BL2PR02CU003.outbound.protection.outlook.com
+ (mail-eastusazlp17011000f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c100::f])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D58D683FFA
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 10:06:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0768F8431E
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 10:21:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=b4VpdRScGfSy8V3BUsVda27ASxm/40dzwcw8+hkfa9wvocwFrMRjxGEOpegpE+vHUNcuV2wjE67Ir4W0NJeytqPdLvdInFLR//2nf56tvpk6bsiUP8o1+ujgUNZT9mTjONgHq3g/nr7T9jmxW/gJ4MUeSwMZtcn04h44c43I70zZQZxAc1KwOtmh1jx+qIEAZXN7KC2++zgOUTy7y5zOIsYTUvcSvOBCjzLAqTtrodP01wM5VV3h3Bywg3wGJpnJKlPzVAGRvco4FKaAkX7i+QcCeeaImxXuk41snmihtx9UUH1nQKGoMLmy3dkOGoaFMFrjzbmPWo1IRrm9GZVAXA==
+ b=Jrx2+krcY3pjJfiysYpjNVP3qlzK2TFVFytUdA01ixeQkE5KgLd+INPqCxt2haFnHQb9yIkVHUQW6a+5mqnrH3iiylvmu60Y2AAoXHxuhQvH1o5EaxlrF9LwQ/r+yXR48MHIdSHYlyGF8egjVCXo4sC+0BM5wfmWDtJWIoNpioPHhyBaAqTyCM1v1yjE3uCH/HVZotFi7WZHswggwJx8uP6TljLAMjH2yd7fe0lfNInBCUjWLa/lYl7mNY+wqAzDTlIj665B0mUU1I4siAO9r7Fn8ft27ax54ezzWq3DioWOlEu+tiHHHDE6nhsspAwqD0h4fNORKkM9Efib1fAV0Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JOHS3mFsi0a4dJAzP0vCH0Q3OgeVKfzkbP9z1GW0WD4=;
- b=kpQo1FKSaY4i9ef3LwgDamQGj6SdRZVSUBv5/OZH6QcHgfrZf7YkTV3TkO4xFg3XSgJLRGqqyKJm4XjlJeNQAO/s/C4jaFE08JAi1+fk8xSsiVyuE0NVIrIG9YWi4TDfgQ1PIXHafRCIRfEMCSnTvxduodRwq9j7P2ZjjQQ/iTik8dxA2XnqUBh8iYptjsgk1cKV/3PX/VitKE0ax9IHbeBENqY9nLXEOX4x6kx/0njrgeppd4TT4/P9O4rRq3cbCJ6F9YtIW8LWVr+5ESM8cL6vYC3UtwfGnuP/EP67lxOalFG28wmHrk5sY3J5igRSJJGLeuJix442zE1OWnIjMQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ bh=WRj/jIZ6SzgIVAjjdbEqk2kUds1n57mWNfX96XDKHco=;
+ b=WWXS+5mgk3ylTkz/FY6qwvkBNjjPo6ZY0yT9sdHfQD5Kv3NqePr8wIXBwt7ivB2vCDS5lNRtKr8B9dN2IC6wTW1xc4wcXQOFpcIRJpaNhOiEE9+1+D/pNrPmmzHBNGvXaU0c7QWHlpm3Xqom94BbOwhHsAWHT454KaL6jhQ/UqVB/tSRW0UGD7kiu3l5SkAwElUJ//OUgvYA9W8NtyXUHHUVTeFZw0XFtZg9JsmqzjlZh+MQx2AwGV+zetBTFU9bKX1YWg1LZcKxas7WtBv98JYkUttXSe4dI6JVctxg6nuc+IceplqB3InVN00UBmC2APoTJlF+Cnn36CTLMI9kxQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JOHS3mFsi0a4dJAzP0vCH0Q3OgeVKfzkbP9z1GW0WD4=;
- b=T7NtOYWYRR9yJPWtNxS7b4klnABbG+Mw2Vf5l9+Vx/96KEr9r4x8N28Slbgse0mdMw9+bChzRRxL/fppfZ6t0j2h6cqjoduUPc4TOsnJZiVXbJHyqC+1bZPtySUKnDZiL4poEiw91ve4lRAlCcl068yYgMajddHQiCm7OrTWvP0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by AS4PR10MB5221.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:4b1::6)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=WRj/jIZ6SzgIVAjjdbEqk2kUds1n57mWNfX96XDKHco=;
+ b=H5I21wIXPvFETAng+o2IE5g8gplHxsxUjr6DAXbm4kvixgpCatceoPGRwJG/e4962I8YvNZO/1bIeq58QhW7BJJ7RzD1u8g4Fy0HTTF34VVuzgstalwM8yKCdVg6dqyf+5FBg3i4n3C+8dk6tO1AK+KGQkYAnct9iyKUjUPG9qU=
+Received: from BN9PR03CA0274.namprd03.prod.outlook.com (2603:10b6:408:f5::9)
+ by IA0PR10MB6915.namprd10.prod.outlook.com (2603:10b6:208:431::8) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.33; Tue, 21 Apr
- 2026 08:06:35 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8%6]) with mapi id 15.20.9846.016; Tue, 21 Apr 2026
- 08:06:35 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: Ngo Luong Thanh Tra <ngotra27101996@gmail.com>
-Cc: u-boot@lists.denx.de,  Ngo Luong Thanh Tra
- <S4210155@student.rmit.edu.au>,  Alexander Sverdlin
- <alexander.sverdlin@siemens.com>,  Casey Connolly
- <casey.connolly@linaro.org>,  Patrice Chotard
- <patrice.chotard@foss.st.com>,  Peng Fan <peng.fan@nxp.com>,  Simon Glass
- <sjg@chromium.org>,  Tom Rini <trini@konsulko.com>,  Yao Zi <me@ziyao.cc>
-Subject: Re: [PATCH] common: cli_hush: fix console_buffer overflow on boot
- retry
-In-Reply-To: <20260421053511.84312-1-S4210155@student.rmit.edu.au> (Ngo Luong
- Thanh Tra's message of "Tue, 21 Apr 2026 12:35:08 +0700")
-References: <20260421053511.84312-1-S4210155@student.rmit.edu.au>
-Date: Tue, 21 Apr 2026 10:06:34 +0200
-Message-ID: <87a4uwn3ed.fsf@prevas.dk>
-User-Agent: Gnus/5.13 (Gnus v5.13)
-Content-Type: text/plain
-X-ClientProxiedBy: GVYP280CA0014.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:150:fa::8) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+ 2026 08:21:49 +0000
+Received: from BN3PEPF0000B06A.namprd21.prod.outlook.com
+ (2603:10b6:408:f5:cafe::a5) by BN9PR03CA0274.outlook.office365.com
+ (2603:10b6:408:f5::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Tue,
+ 21 Apr 2026 08:21:49 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ BN3PEPF0000B06A.mail.protection.outlook.com (10.167.243.69) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9870.4 via Frontend Transport; Tue, 21 Apr 2026 08:21:49 +0000
+Received: from DLEE205.ent.ti.com (157.170.170.85) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 21 Apr
+ 2026 03:21:49 -0500
+Received: from DLEE212.ent.ti.com (157.170.170.114) by DLEE205.ent.ti.com
+ (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 21 Apr
+ 2026 03:21:48 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE212.ent.ti.com
+ (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Tue, 21 Apr 2026 03:21:48 -0500
+Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.50.71])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 63L8LjBI157498;
+ Tue, 21 Apr 2026 03:21:46 -0500
+From: Neha Malcom Francis <n-francis@ti.com>
+To: <trini@konsulko.com>, <jh80.chung@samsung.com>, <peng.fan@nxp.com>
+CC: <j-keerthy@ti.com>, <t-fujiwara1@ti.com>, <u-boot@lists.denx.de>,
+ <u-kumar1@ti.com>, <gehariprasath@ti.com>, <n-francis@ti.com>
+Subject: [PATCH v2] power: regulator: tps65941: Enable FPWM bits
+Date: Tue, 21 Apr 2026 13:51:45 +0530
+Message-ID: <20260421082145.824453-1-n-francis@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|AS4PR10MB5221:EE_
-X-MS-Office365-Filtering-Correlation-Id: e3937780-3850-4445-4b6d-08de9f7ce86e
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06A:EE_|IA0PR10MB6915:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8eb07929-4a22-427a-4dad-08de9f7f0924
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|376014|7416014|1800799024|366016|38350700014|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: nl6pCWhgu3n+p7v8stg+JF4Cl8+hzxoSHl8C/W20rHIwusz85k7rzuYX4k5ZI2xK+Fz/NxaO5k9RV++58gtnYkLNRAoIUbMwRzAvB1QMJYopjlZcEdLAJZ4K9u/77BVN4ZWGMU6yCO+FWRCtL6x1lrjIyxNVcLbubqF0jy2You+We5YsP0Pq+vrtRCGrxMt4NONfx6waLnfm1yf1PpoGhG2Vhu1Gb9dHiUGMVMrymAlvKyHhzn9GaWaoRDp30hLJQ2EyXJyn/BTS+MGX2tRIH7iAGH7B+FVrJWjwdlfK1951tb/Ovs7GJY7qb0akx7LOhLb5BJ0/W+TBWJPfE537lOp61qoWO3BHXm0HSkl1dIBUQQUs64BAqY0wX/UqwA6CNHi0trq7gcXf7zBe1vCXzOuG7k8DfVbWtiBkE7o3MIezvIGERDFGA0DG9fspX/7dLG9UphxqX9IhvBTPy0vJ2VcrMOymswtw+N3tnynzeMz9nhb1a1SlsObfYZaWXJfzRWgGG6xFr2nom5qliCaotMAiQytpEBA1D0441x5LmqV2cpxTOmDxxN6PwU0fWVleH4XRyv4PnaW8ww9qNaiRNDOtTBijeJ9nCelxIvi+TeytI1PH6UiVJ6pJRtDYKe6jJbB0YfnxzTBW8JWS4pDSav1QStkU/SYBMRJR+k4kzTy125j1+jKGfEwliyMfSaPGUQpE2G3WE9NlSTfhNmeJvFZVF+NKYgARD3neHuFhm8k=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(376014)(7416014)(1800799024)(366016)(38350700014)(18002099003)(22082099003)(56012099003);
+ ARA:13230040|36860700016|376014|82310400026|1800799024|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: eV9BJfmkNWMvp1pViv5c195zC+BEovfvwtl735tauC7Ng2fn4b3sHfjS3PBzfFKWjWfbc4Hxad7osC5nscKH16xnqvRIiDC6RGmtS56RZTIB7RpzNFrB5CU21anxKueoLtucp0keTESLY9+uGKRhy104S1nhFuNngBTABLTMldkMyZRO77glEzO4lZLovBAIn6s03N06+SI/QF/zdEZ+zt22QBpgLUbZjP3aCUitaF5I9OAeq0CjFXSJqvWAWNi/IaJk+Jbb+jj6lG17KrL0YqLTUO1VbOK9xWqPnwW2Tq44U9atYRRHXV1BIlbVKCqE7zz9Y/hOFzoBGi2ZmjD5UxIyBJL7lpHKToJWPpHizp361K/6zpFHEvIP0LlhF4dxu5khcNXN4WMsoFt9igCk9W1et2oPXoFusfU6TfbepZrP+R/oFRVyBiZlHQlJ8PNYuiG6TZknGIlD+f5oBueEVskj9L3kYzFxXC5i6ziIphd46/D+M9owtFKpakbszbP7WEIV9bQRr37UFIHlCGY7UCNybQkGSDY3yPRmH0kq/LSm+uRe8cdFLsw/0k11AINUzAecsushT2y9veLT58kxMhwLrQ7pWLJBfpVHgPTupjkLnp7XR7nRO3OAN6/+DQNcVpmoMsLZbOZUMrqVr9t/5Y9ot+AhU5DR2AdQbqPJB6jO3NGdaslQVPG0amImK2TKAgRK2CSqpikOh0MIPwWmHFYHT0B49SLGhxDSb2lnMKA=
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(36860700016)(376014)(82310400026)(1800799024)(56012099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?REVc1Ma34TLyoWDXWlp/IGn4sbRXFZ5YyS4pnBt1UcrNb3S8HDbSLc94urVj?=
- =?us-ascii?Q?CD0Xtm0/I32VyMjjzPaLOK5T884QZZHUhHya0UAF/XwzRyPZ//gVNJhHOCGF?=
- =?us-ascii?Q?mnnpft6vFy0mYlhL5C+tRxJ9yFrmQF+jRj7uqR4mhYps4Ehg8Mb2uHhaT0Mc?=
- =?us-ascii?Q?wfG+GxtAVcyzfo6VREWk5P1w/ZPFfPBzT30u5GNf3ZkgtdwYvDtiQMy30sY7?=
- =?us-ascii?Q?2CcXXJkJ6S8quI08y4oQFUCo2XGMxDj+8UhfpZ12SrfTQyoDLKRgz3lEIpVR?=
- =?us-ascii?Q?fj0plJUBKI2zelfbi7MQl8IAt/gGs+7yfM0ghVAhdcEbe2Q6HnoWtnq6oKP9?=
- =?us-ascii?Q?tk8kJ/DvfAChDQFxGXJf9qS75ZGUB1x8SJKQTRVVP0x5C/ISo5HRc1PJ9Aky?=
- =?us-ascii?Q?J2jgY3cxw9cu8CftWpoJO4QzT00NToabPbpr1F3Vgmhr0qnJMJCgjQ9L0GIo?=
- =?us-ascii?Q?j1dfNvTUKWIUBJuiX0XAYdPY50hmt0NkUap8VrRF9GW5EWno8xl4viidxTW9?=
- =?us-ascii?Q?c7cxBxQXxnFUQ471e+H7I1zecoaGFBw1pU+kpAowzyzKHoG2Nwm3m/ZXEVbq?=
- =?us-ascii?Q?Dls1k2IbWHiZz0BqvMGm6b2cRjlJpeM8RWELF/Ebd7XbHvdErKPrKBejhlxp?=
- =?us-ascii?Q?3W/9wRw4XTj8rJ05xs84rsaha9j7VY6DjVtldxVsrCzxwjDTC7Pcb0i15gkG?=
- =?us-ascii?Q?M03rOOzG4p84k4Qm/sD37LvzTgzXUSoOekKTjx9931ljJpIYl72s/jpMDXuS?=
- =?us-ascii?Q?FtHWLmmerXLhYHFIcht19U5impv3tNJ+Fh31JuXH8ET2z8b076CpHHC2m+b5?=
- =?us-ascii?Q?I7+YVpljntwwec4Qr7Px3FIIRe0hui5u3DQjhlIILJkGHGt3nk7FF2RJAkWM?=
- =?us-ascii?Q?oPtQqYrrmNf4/EXmyJYwfWTJ4W/kfODfxs/HoZlB6DyQSks5FQHsqQqnUik9?=
- =?us-ascii?Q?+wtWH5l0msMvm+QNXNhz+Xf7oV38niTLjf5h9dyKEvYzQ/MdR2nmJWMUMEyI?=
- =?us-ascii?Q?afZZhIKklvTT06pdj/4/5N53TbT7HHg0WKAeREwS2xZRRbGLS2QIHLFYvdJ0?=
- =?us-ascii?Q?enpkQvmGLLyrqgOPGOt8nTOSnwhVtB7+bH/dyMWOrwq7RZWD0rycgi3usHvS?=
- =?us-ascii?Q?XOU95cFlkQVFrbfc6FKuuNrSe1xUt+cia5dhDpuFhAKbB4g79ezRzTfgiGGH?=
- =?us-ascii?Q?WiLJggGcBBg5v5W615JflV2dFlo+dx54s6EJZz143uOdqvvGL1hxSaIIuFSg?=
- =?us-ascii?Q?amFppQB8+VR2tzQ6SG5WfxZkKGL4mwVKQqP2f4sBOpkVrMqTib0C1AhyJUf6?=
- =?us-ascii?Q?DZkAVFVJGV0XYSE51r21Td+iETJaHzv66Jyv2V4LeZrdJmO7EZ9y65m8gIcX?=
- =?us-ascii?Q?FcR5YZiL2Do8TTcNq0SFVxfsrHd4tYSm1UycBgVpQNIgl2/0RVoPzwv7oz/9?=
- =?us-ascii?Q?q03RJqD4EZ870lyBsphKP5QfGBqWNY5DOAtzIJynCCccl3iB/TXanzifMHlo?=
- =?us-ascii?Q?v9h1/lBc+/mSTRMBoedtkfFXRmEA8bLZ6+8ArDT7cWh04IrGb0gumw4F3dRA?=
- =?us-ascii?Q?++PD0yMIIJh8c3IdUlFb48+j/W551n8z8SEHj+cFgJS6g3g9pXjUzkNJtVBT?=
- =?us-ascii?Q?Dg0v9YNucN6Fh3m68PWIXkeszgVuZEgpnUVOsq8qcIKrlRnsq8c8OX/08Q74?=
- =?us-ascii?Q?tS4Pi+WGOABXObO7d2FR6ouXe3NOG8k5ooan/O8AjMHI/uthj/dPKJGCgjJy?=
- =?us-ascii?Q?+tYOt+ZfwoFKjmOSRM31oXqaFnjhvtw=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: e3937780-3850-4445-4b6d-08de9f7ce86e
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 08:06:35.8624 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: n9yDV8tDRYR1EA1/wh3I1/MVvzfQG4WTBS8dxlv+FAwUa/izs9xuN6YZxrxOeuFy0i8bD4jmY7Gr3yGJmgxVGg8l6hLi9ba6pzIWBywcDJ4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR10MB5221
+X-MS-Exchange-AntiSpam-MessageData-0: m575CftD3OSEXrC9a4Kb6UfoHbOxuJ/9iiphc+nE6tK8B1jHKCSTTlo0oM1+x6H0Ht/a4/9Y9M2ht3Xa2AZlO9caxe8RFJYHNjelXMu7x1NHUWkF89IYRNRKScOs39DpczSKFHSBx9m5t916KZErwa4M927snRmHwETmncYrArZo5bxE9uLyX8mk2Oluh5Ag793yr0TZIpzBwpETP4X1PHtaMINVpaD0n+OI0pA8chiIM5OpXi2wWooGWQBoC9+pNEWLN/YDd8w8y3gJdtOup06FJVw+WYtQVLh4POk25O8TH0DOll+BEfz1C6HC85VVhnhBqzBoXdp8UK/t4tJAGsrV9MCwXINMrFO9tRpMvLnsDSeW7nu1Fyv2goqNZU9F5tUqYlOYQCdM53ef+AjhoSkZDxmECG7TAK70NzPea/VhQbqJGYT3Csoo/4ATz232
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 08:21:49.4994 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8eb07929-4a22-427a-4dad-08de9f7f0924
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B06A.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR10MB6915
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -142,45 +131,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Apr 21 2026, Ngo Luong Thanh Tra <ngotra27101996@gmail.com> wrote:
+Depending on the phase selection (single or multi), the FPWM bits
+configured forces the regulator to operate in PWM mode. In case of
+multi-phase selection, the FPWM_MP bits enforce the regulator to also
+operate in multi-phase. This fixes correct multi-phase operation.
 
-> Add const_strcpy() macro to linux/build_bug.h that enforces at
-> compile time that the destination is a writable char array (not char *
-> or const char *), the source is a string literal, and the source fits
-> in the destination including the NUL terminator.
->
-> Fix the console_buffer extern declaration in console.h to include the
-> array size so sizeof(console_buffer) is valid at call sites.
->
-> Replace unbounded strcpy() in cli_hush.c with const_strcpy().
->
-> Fixes: 657e19f8f2dd ("cli_hush: support running bootcmd on boot retry")
->
-> Changes in v4:
-> - Rebased on top of current master (as requested by Tom Rini)
->
-> Changes in v3:
-> - Reject const char * destinations in const_strcpy() (Simon Glass)
->
-> Signed-off-by: Ngo Luong Thanh Tra <S4210155@student.rmit.edu.au>
-> ---
+While at this, correct incorrect macro alignment as well.
 
+Fixes: 065a452ae6a1 ("power: regulator: tps65941: add regulator support")
+Link: https://www.ti.com/lit/ds/symlink/tps6594-q1.pdf
+Signed-off-by: Keerthy <j-keerthy@ti.com>
+Signed-off-by: Takuma Fujiwara <t-fujiwara1@ti.com>
+Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+---
+Changes since v1:
+https://lore.kernel.org/u-boot/20260129072857.1437272-1-n-francis@ti.com/
+- alignment correction
+- used existing macros instead of 12, 123 etc.
 
-Hi Ngo
+Tested on J721S2-EVM (same as v1, no logical changes)
 
-Please address the feedback I gave in
-https://lore.kernel.org/u-boot/87zf3co6pz.fsf@prevas.dk/.
+https://gist.github.com/nehamalcom/a74fb2a3b59421d0e04693c7d244fdb4
 
-Also, two things on creating patches:
+Before the patch, the kernel TPS6594 regulator driver would warn about
+overcurrent on a buck, this was due to incorrect multi-phase configuration.
+This patch resolves it.
 
-When you create a new version of a patch (or patch series), please use
-"git format-patch -vX" where X is the version number. For the next one
-that would be "-v5". Then git will use the subject prefix "[PATCH v5]"
-instead of merely "[PATCH]", making it easier to distinguish the
-different ones in one's inbox or on lore.kernel.org/u-boot.
+ drivers/power/regulator/tps65941_regulator.c | 15 ++++++++++++---
+ include/power/tps65941.h                     |  4 +++-
+ 2 files changed, 15 insertions(+), 4 deletions(-)
 
-Second, the informative "Changes in vX:" stuff should go below the ---,
-as it is not part of the commit message and should not be part of the
-permanent git history once the patch is accepted.
+diff --git a/drivers/power/regulator/tps65941_regulator.c b/drivers/power/regulator/tps65941_regulator.c
+index 2561d6f4c6c..209968b5718 100644
+--- a/drivers/power/regulator/tps65941_regulator.c
++++ b/drivers/power/regulator/tps65941_regulator.c
+@@ -63,13 +63,14 @@ static inline int tps65941_get_chip_id(struct udevice *dev)
+ 
+ static int tps65941_buck_enable(struct udevice *dev, int op, bool *enable)
+ {
+-	int ret;
++	int ret, idx;
+ 	unsigned int adr;
+ 	struct dm_regulator_uclass_plat *uc_pdata;
+ 
+ 	uc_pdata = dev_get_uclass_plat(dev);
+ 	adr = uc_pdata->ctrl_reg;
+ 
++	idx = dev->driver_data;
+ 	ret = pmic_reg_read(dev->parent, adr);
+ 	if (ret < 0)
+ 		return ret;
+@@ -84,10 +85,18 @@ static int tps65941_buck_enable(struct udevice *dev, int op, bool *enable)
+ 
+ 		return 0;
+ 	} else if (op == PMIC_OP_SET) {
+-		if (*enable)
++		if (*enable) {
+ 			ret |= TPS65941_BUCK_MODE_MASK;
+-		else
++			/* Enable FPWM */
++			ret |= TPS65941_BUCK_FPWM_MASK;
++			/* If Multiphase enable FPWM_MP */
++			if (idx == TPS65941_BUCK_ID_12 ||
++			    idx == TPS65941_BUCK_ID_123 ||
++			    idx == TPS65941_BUCK_ID_1234)
++				ret |= TPS65941_BUCK_FPWM_MP_MASK;
++		} else {
+ 			ret &= ~TPS65941_BUCK_MODE_MASK;
++		}
+ 		ret = pmic_reg_write(dev->parent, adr, ret);
+ 		if (ret)
+ 			return ret;
+diff --git a/include/power/tps65941.h b/include/power/tps65941.h
+index a026ec56958..78e48a15972 100644
+--- a/include/power/tps65941.h
++++ b/include/power/tps65941.h
+@@ -19,7 +19,9 @@
+ #define TPS65941_BUCK_VOLT_MASK		0xFF
+ #define TPS65941_BUCK_VOLT_MAX_HEX	0xFF
+ #define TPS65941_BUCK_VOLT_MAX		3340000
+-#define TPS65941_BUCK_MODE_MASK		0x1
++#define TPS65941_BUCK_MODE_MASK	0x1
++#define TPS65941_BUCK_FPWM_MASK	0x2
++#define TPS65941_BUCK_FPWM_MP_MASK	0x4
+ 
+ #define TPS65941_LDO_VOLT_MASK		0x7E
+ #define TPS65941_LDO_VOLT_MAX_HEX	0x3A
+-- 
+2.34.1
 
-Rasmus
