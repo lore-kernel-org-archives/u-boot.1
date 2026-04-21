@@ -4,88 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9D6BF8FA78
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 14:28:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5A62F8FA86
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 14:47:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82E9F83E36;
-	Tue, 21 Apr 2026 16:28:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+	by phobos.denx.de (Postfix) with ESMTP id 37756839D5;
+	Tue, 21 Apr 2026 16:47:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="U5PhZQEZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L5d2cqOn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C69FC8412A; Tue, 21 Apr 2026 16:28:21 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 729A283A91; Tue, 21 Apr 2026 16:47:20 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDB2C83BC4
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 16:28:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=suse.com
+ by phobos.denx.de (Postfix) with ESMTPS id 43E20801A9
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 16:47:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mbrugger@suse.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4891e5b9c1fso22275535e9.2
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 07:28:19 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7dca4debedaso3083212a34.2
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 07:47:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1776781699; x=1777386499; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=konsulko.com; s=google; t=1776782837; x=1777387637; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
  :from:to:cc:subject:date:message-id:reply-to;
- bh=6o6s8AA6mTVHTv3k376gQhJVNyvXqilqi5GMsmwQelE=;
- b=U5PhZQEZ1cKGx+43qxVPynhhVyGDCh3QbecPF5XQ66A2MpE+KfaRPI8nSNgsEmtf3z
- 1O+K++oulZRNa2fMAbo8RDReqipKnRoZsx/4yajT+I3tIfFJAXrf6c9+x58JLnxJia+L
- 52I2NibkG7yjgePiixTCHOrvFVfFf64mgSYJWYlRO7HdFPRweE4v4mIQ0TjdAe3NO0ua
- K9ktDOhsZUXNu+lnqQwZPXVMYGHB83zHnO+PU4KQDSLJ4J+XjtZi8hirjrVapcRLV92f
- TgcLdhc9PeFQDmOMlLfPMA1KipeYO3OvRtuacOtNIiFXMuUNvtqJNDT9z/JzfAV+NfkM
- 6UXA==
+ bh=pz/9j0gh0uxD9p4wTH9bmHRifWoWoFDBRHPMAadB4Zg=;
+ b=L5d2cqOnbpnQbMUQ6do6BsCcGeIG6PrxrHrIrE1E3xEOSLC4lm3H1YhJsID33BiG0i
+ GF+jVe4W2Xt1uofyfJqAegcD4RorZ9vSKq0iCHz+LIVCZPlhdLa2dWyosgiaS8ZGd7rS
+ qB9HRmpuo3LJDk0ASstIO1CMJUuqUeCsb0Tio=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776781699; x=1777386499;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20251104; t=1776782837; x=1777387637;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6o6s8AA6mTVHTv3k376gQhJVNyvXqilqi5GMsmwQelE=;
- b=lDdn6TZZhspemgF7GBUK3TwyFRhDy1XyImIrwi33utf1Pmcd88dRbx4rrmOO8sedb8
- j+ay0kOLLILRZTZtY2YewfCeec/8lTM6XTSjWE8zZw1urJ6BPBARnclg+IH8sbhqq2gi
- KkWFgEGtDOg+ztOGoX3+Q7g/hmG2vc7CszbsED0f4wDocjvj2ZPBasNDoUaHy4sWNgbL
- FQOLPuiWZ6dsax5ddNZAD7FQbNsrOXNvO9L8BmrhRDlI/zw9jeafSXXCGkGZZ1VunXAq
- k7GubHNXjOFouXNO+Bdf/03B67vDtwiomKna3Msl1SrLLrJrYxfx9ewbvqUPbd85VyRF
- 28dw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+dAXq/WXABrfXsPQ8JchdoENQ//xZ8PC5TzehBcumfpWMqpF5CLYS/EFOoDxI16Kv+wdwNmlM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxWSZNKUODSJ9+EJzGePDpkq1367+0xtx+gpKiUdSjcrzQv3PpO
- +/Ni8WuZyodf302aNcI+3ezG7gFOUBdD62vHykoTqq0JnjHk+1ntxvursCklXjrH0QU=
-X-Gm-Gg: AeBDietDEyBeKNOfX9z67j25Z3XjmxkeVFnDQjNe4oFJzhWf8vfkREw6HWAiRyg1bGn
- K4zHBuJlP0ckMWaIF/eifD29uGFQs2Ib7HVJW2LgVX3eVglICBzuQhRo0pv7T+E2sLB6iDC8Uep
- 0ahrsjmsnllEU9vHk4Bx39C7QtLfG8QXjgXovNcuT+E8SDnghKbyvKH0aXsWPj8d0JZkSU7359X
- ZXswMhPiLaglT+QRkwnEG0gjWREx9S4lAd8+28LFauex2gC4/UBuYKXJTBVwLTy6/OVK/380szq
- yDikvGScHvwfMdiwZ1I8ScY00nTxh8ryzIHwnhNweIyi/KeUEwiMzTbZD4JSRXB6xtQ9YcaSBo/
- SUUyliIOznfW/QVbsXg8YWuhTSkYG4u3xMEnFzLfOc8FlGr/npcdfxPR+660XI8/kjVTXjCLDHe
- In/ZTPwFmMcQDei8PL1oHifnPIB8LtpFseklY81wqsF8PPIeCS6bZjpJMaIJhlwqOdMv0RKiHzL
- 0BR+J2U95hIhiwIGuaWy7Yy
-X-Received: by 2002:a05:600c:3b14:b0:48a:52d9:54ab with SMTP id
- 5b1f17b1804b1-48a52d95604mr89476725e9.30.1776781699202; 
- Tue, 21 Apr 2026 07:28:19 -0700 (PDT)
-Received: from [192.168.1.134] (59.85-85-174.dynamic.clientes.euskaltel.es.
- [85.85.174.59]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48a4b329542sm184970095e9.3.2026.04.21.07.28.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 21 Apr 2026 07:28:18 -0700 (PDT)
-Message-ID: <2d3b2f53-4e6e-4799-863c-fcf4c25b74a7@suse.com>
-Date: Tue, 21 Apr 2026 16:28:17 +0200
+ bh=pz/9j0gh0uxD9p4wTH9bmHRifWoWoFDBRHPMAadB4Zg=;
+ b=cslLjjLmUV2FTgdCIGudRwZ571+6LINwPHds7B3xahC9KnHOcQ+J0BJmGUNOxObrZn
+ x/w291sEJ+4IPzF0pADZoRbNAS9nkizf676qNtMAA8xxKaeYGec2iBui6CIw0jpeN2Gy
+ dLy1RDwInK3evu1GWeIAiHte24xn/A1C4RDcmPGbXCks+5Ao7mj4j9O327KA6JUYKxq/
+ wsalGEcnmbJxvDxc4n/EqJ2Pi/zQ8LIRzsRh10sEG+nfFx75tthazzxSn9FyM01nwUfm
+ oe5ev/QBddMDAAraGW9uCLRwChy9bFHAXiPFCa5LGwCM/dam4Lt9lif0rAKqnVk0w/0n
+ TBZQ==
+X-Gm-Message-State: AOJu0YzDDdXdQT4KI2Qwtkf+6PZraYMxg4HfEOTTmG5lEEkSEyWqrC4D
+ ypHxvF5oCIWPnpdbmnQsGu7guPSDZgCxeu+GzPUIQmjxmmDqVENp+6womqRv2ls7jZ8GtgZV4KL
+ Cs02tDH1MnQ==
+X-Gm-Gg: AeBDietQnYhfH/vJ4GsGaHJxw2Z5RdGZTX23/cfUZh4dm4bnZbmzdR/5/S5F4vMsalA
+ WSLIGx/nEZIzogTtoUH/boMYHlctOIUv6/lXhhtNIgh6Eebdo8VC6pMX1DIsaJQmb/d6iQio8JM
+ Dil4FgONzrpD2ezoy7DHw7kbwKzFmTVwSyhwlEAH8actBxLxaBXGOWxg3ZBmqkAfrvYhAUqFXY9
+ Ruy1vSv2v+oA2Paj9t87yw5yeOt+dQvl7DDJzofTf3X9iCn4riYYSpzeHrppVHKuGDOknl+Xm3j
+ mnZa+bgRYBvD2R6CKtwN+oMZtsM7CHo2gz0L75g9RL1cDA/Tkwc68xTw2XzxWOrMxgJ9atV5fx+
+ sWIrInln3adyQhyI6DfzmOc6GZlph7xHXQdzcX8e9rrB4Qqu4Js2poIOvUkq/PnCA2Koqru/JYQ
+ 5Yoz0uUC6LAy9CAc7XBoGmYiTVTpRvZQkRWCmaFUmnQaqLAhw2dNNG6i4nZX511kQgPJRXz70Ua
+ 9TFq0A8oTKzPKZkFh5YQZ1yB6VDRGQ1HR3j0NTQNXUXQnaW2G9rp+pAr/FrvQ==
+X-Received: by 2002:a05:6820:561c:b0:68e:6182:3eb2 with SMTP id
+ 006d021491bc7-69462f35472mr5737383eaf.47.1776782836934; 
+ Tue, 21 Apr 2026 07:47:16 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-42b9304b7f6sm12124130fac.1.2026.04.21.07.47.15
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 Apr 2026 07:47:16 -0700 (PDT)
+Date: Tue, 21 Apr 2026 08:47:14 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: Updated dts/upstream to v7.0-dts
+Message-ID: <20260421144714.GY41863@bill-the-cat>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] video: arm: rpi: Add brcm,bcm2712-hdmi0 compatible
-Content-Language: en-GB
-To: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
-References: <20260421085207.273703-1-pbrobinson@gmail.com>
-From: Matthias Brugger <mbrugger@suse.com>
-In-Reply-To: <20260421085207.273703-1-pbrobinson@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="4HcDVqjfkcrHwMKq"
+Content-Disposition: inline
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,30 +96,27 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--4HcDVqjfkcrHwMKq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 21/04/2026 10:51, Peter Robinson wrote:
-> The 'brcm,bcm2712-hdmi0' compatible string is used on RPi5.
-> There appears to be no change that impacts early boot output
-> on the display controller so add the RPi5 compatible string.
-> 
-> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+Hey all,
 
-Reviewed-by: Matthias Brugger <mbrugger@suse.com>
+I have updated the dts/upstream subtree to v7.0-dts now.
 
-> ---
->   drivers/video/bcm2835.c | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/drivers/video/bcm2835.c b/drivers/video/bcm2835.c
-> index 0c81e606622..0e0cc1979eb 100644
-> --- a/drivers/video/bcm2835.c
-> +++ b/drivers/video/bcm2835.c
-> @@ -66,6 +66,7 @@ static int bcm2835_video_probe(struct udevice *dev)
->   static const struct udevice_id bcm2835_video_ids[] = {
->   	{ .compatible = "brcm,bcm2835-hdmi" },
->   	{ .compatible = "brcm,bcm2711-hdmi0" },
-> +	{ .compatible = "brcm,bcm2712-hdmi0" },
->   	{ .compatible = "brcm,bcm2708-fb" },
->   #if !IS_ENABLED(CONFIG_VIDEO_DT_SIMPLEFB)
->   	{ .compatible = "simple-framebuffer" },
+--=20
+Tom
 
+--4HcDVqjfkcrHwMKq
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaeeN7gAKCRAr4qD1Cr/k
+CpM4AP9BBTV/1Y2d9tOmgtkxf7OphgyYe/IOD1fD4fOTm7/W1QEAq29AZ49yb0FH
+MrM3NgqlhquxYXS+PacPhXUBzuNrLQA=
+=h/g5
+-----END PGP SIGNATURE-----
+
+--4HcDVqjfkcrHwMKq--
