@@ -4,72 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE524F327C2
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 08:56:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E28CEF327C8
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 09:05:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 437798439E;
-	Tue, 21 Apr 2026 10:56:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id 35BA68439E;
+	Tue, 21 Apr 2026 11:05:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="Z5Ze5DuM";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="YB+uYMbT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 897BA843D0; Tue, 21 Apr 2026 10:56:42 +0200 (CEST)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+ id ADA56843DC; Tue, 21 Apr 2026 11:05:13 +0200 (CEST)
+Received: from smtp6-g21.free.fr (smtp6-g21.free.fr [212.27.42.6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FFEB84390
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 10:56:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id 4F51284390
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 11:05:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 003d80663d6011f19781c1a04af40193-20260421
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
- bh=6gjKRHbA6yZVoBqkaPphRqOTvUgRH5+Z9N3SclNwANw=; 
- b=Z5Ze5DuMq2x63iufjoriGJiUhamF2JCjZWniwcGryOGIcmN9GPa9qY9iiiBvQ0ODwfNeaM51aje5zhdhEp1d3TNrn5R9V4C+9PdVt2i7EK7MwncQtVSID5opK6/9A90oyEMYcdXcAdRxD/DWw3EsUh0t2EPf7vT0RiOKU9OwBZ0=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.12, REQID:f9d5c8c1-72f5-4e8f-a31b-05970af10ed9, IP:0,
- U
- RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
- :release,TS:-5
-X-CID-META: VersionHash:e7bac3a, CLOUDID:7708ad8f-6df4-4a3d-a7a4-fbdc42d669ce,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:102|836|865|888|898,TC:-5,Content:0|
- 15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0,OSI:0
- ,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 003d80663d6011f19781c1a04af40193-20260421
-Received: from mtkmbs09n1.mediatek.inc [(172.21.101.35)] by
- mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1769067800; Tue, 21 Apr 2026 16:56:35 +0800
-Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
- MTKMBS14N1.mediatek.inc (172.21.101.75) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Tue, 21 Apr 2026 16:56:34 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Tue, 21 Apr 2026 16:56:33 +0800
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: <u-boot@lists.denx.de>
-CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
- <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>, Julien Stephan
- <jstephan@baylibre.com>, Macpaul Lin <macpaul.lin@mediatek.com>, Julien
- Masson <jmasson@baylibre.com>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH] configs: mt7622: remove empty header file
-Date: Tue, 21 Apr 2026 16:56:27 +0800
-Message-ID: <20260421085627.78213-1-weijie.gao@mediatek.com>
-X-Mailer: git-send-email 2.17.0
+ dmarc=pass (p=quarantine dis=none) header.from=free.fr
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
+Received: from y14 (unknown [IPv6:2a01:e0a:2af:22b0:6ee8:ae48:54aa:4eff])
+ (Authenticated sender: vjardin@free.fr)
+ by smtp6-g21.free.fr (Postfix) with ESMTPSA id 9860878050F;
+ Tue, 21 Apr 2026 11:05:07 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
+ s=smtp-20201208; t=1776762311;
+ bh=PWBJiRxLPvC27rvM6AgllA1XucTXnRg11FY2u3d/Ojg=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=YB+uYMbTSH8izmq1areU95xbQbSJ8Z4sDtNHsaAadPe8vKUo/75ufhqMeIEHdx/OU
+ eg1PEJSDqZARb5PpsFnYopg/KcArZYA9DQ0MmpXdhA983IWAxmrL5gO/tCo7+dGs+q
+ pRlkx5vBnPJwm94xm8SsmJwhBcSCQ6zy/0HTUX1Yx6mDtHt3syOwYR/7gEEvWErwaC
+ 0+keuEQcKDFNk0RrDefBpwI6SjM9iPjeGxuEcDpDHNJVNUfnyr3hHLAM2RInDNBpaL
+ Ue14I+5XNt3xcfpGACWEA9UQjpSMD3KdGMqDQdr9TjOngLmRXoozHAAojDdE3ao9O5
+ nK/lZ6gOHkncw==
+From: Vincent Jardin <vjardin@free.fr>
+To: u-boot@lists.denx.de
+Cc: Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>,
+ Vincent Jardin <vjardin@free.fr>
+Subject: [PATCH v2 0/5] NBX10G: Marvell Armada 8040 Nodebox 10G board support
+Date: Tue, 21 Apr 2026 11:04:54 +0200
+Message-ID: <cover.1776762022.git.vjardin@free.fr>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <cover.1773151972.git.vjardin@free.fr>
+References: <cover.1773151972.git.vjardin@free.fr>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-MTK: N
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,46 +66,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove the empty include/configs/mt7622.h header file as it is not needed.
-The Kconfig entry that referenced it is also removed.
+This v2 addresses Stefan Roese's review feedback on v1:
+  https://lists.denx.de/pipermail/u-boot/2026-March/613625.html
 
-Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
----
- arch/arm/mach-mediatek/Kconfig |  1 -
- include/configs/mt7622.h       | 12 ------------
- 2 files changed, 13 deletions(-)
- delete mode 100644 include/configs/mt7622.h
+Changes since v1:
+ - Patch 1 (cpuinfo/SAR): added Reviewed-by Stefan
+ - Patch 2 (board support):
+     * dropped board_init() bi_boot_params assignment
+       (ARM64 uses FDT, ATAGS are !ARM64-only)
+     * dropped empty board_early_init_f()
+     * removed unused includes / DECLARE_GLOBAL_DATA_PTR
+     * added note on U-Boot vs Linux comphy DT bindings
+     * MAINTAINERS: armada-8040-nbx* wildcard covers the u-boot dtsi;
+       removed duplicate NBX BOARD entry from
+       board/Marvell/mvebu_armada-8k/MAINTAINERS
+     * added Reviewed-by Stefan
+ - Patch 3 (emmcboot): moved from cmd/mvebu/ to board/freebox/nbx10g/,
+     renamed Kconfig CMD_MVEBU_EMMCBOOT -> CMD_NBX_EMMCBOOT and
+     MVEBU_MMC_PART_* -> NBX_MMC_PART_*, replaced all `return -1`
+     with `return -EINVAL`, commit message now explains legacy format
+ - Patch 4 (fbxserial): moved from cmd/mvebu/ to board/freebox/nbx10g/,
+     replaced all `return -1` with proper errno codes
+     (-EINVAL for data validation, -ENODEV for missing MMC,
+      -EIO for MMC I/O failures)
+ - Patch 5 (U-Boot dtsi): added Reviewed-by Stefan
 
-diff --git a/arch/arm/mach-mediatek/Kconfig b/arch/arm/mach-mediatek/Kconfig
-index b5b06f4e5b2..80f7185e929 100644
---- a/arch/arm/mach-mediatek/Kconfig
-+++ b/arch/arm/mach-mediatek/Kconfig
-@@ -195,7 +195,6 @@ config SYS_BOARD
- 	  be used.
- 
- config SYS_CONFIG_NAME
--	default "mt7622" if TARGET_MT7622
- 	default "mt7623" if TARGET_MT7623
- 	default "mt7629" if TARGET_MT7629
- 	default "mt7981" if TARGET_MT7981
-diff --git a/include/configs/mt7622.h b/include/configs/mt7622.h
-deleted file mode 100644
-index 4a056954bf8..00000000000
---- a/include/configs/mt7622.h
-+++ /dev/null
-@@ -1,12 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * Configuration for MediaTek MT7629 SoC
-- *
-- * Copyright (C) 2019 MediaTek Inc.
-- * Author: Sam Shih <sam.shih@mediatek.com>
-- */
--
--#ifndef __MT7622_H
--#define __MT7622_H
--
--#endif
+Build tested on Nodebox 10G (ATF v2.14 + U-Boot 2026.04 + Linux 6.19),
+all functionality verified on hardware.
+
+Vincent Jardin (5):
+  arm: mach-mvebu: armada8k: cpuinfo and SAR
+  board: freebox: add Nodebox 10G board support
+  board: freebox: nbx10g: add emmcboot for dual-bank eMMC boot
+  board: freebox: nbx10g: add device serial and MAC address
+    initialization
+  arm: dts: armada-8040-nbx: add U-Boot dtsi for conditional OP-TEE
+
+ arch/arm/dts/Makefile                    |   1 +
+ arch/arm/dts/armada-8040-nbx-u-boot.dtsi |  15 +
+ arch/arm/dts/armada-8040-nbx.dts         | 259 ++++++++++++++++
+ arch/arm/mach-mvebu/Kconfig              |   9 +
+ arch/arm/mach-mvebu/armada8k/Makefile    |   2 +-
+ arch/arm/mach-mvebu/armada8k/cpu.c       |  12 +
+ arch/arm/mach-mvebu/armada8k/soc_info.c  | 194 ++++++++++++
+ arch/arm/mach-mvebu/armada8k/soc_info.h  |  14 +
+ board/freebox/nbx10g/Kconfig             |  94 ++++++
+ board/freebox/nbx10g/MAINTAINERS         |   6 +
+ board/freebox/nbx10g/Makefile            |   5 +
+ board/freebox/nbx10g/board.c             |  53 ++++
+ board/freebox/nbx10g/nbx_emmcboot.c      | 357 +++++++++++++++++++++++
+ board/freebox/nbx10g/nbx_fbxserial.c     | 286 ++++++++++++++++++
+ board/freebox/nbx10g/nbx_fbxserial.h     | 156 ++++++++++
+ board/freebox/nbx10g/nbx_imagetag.h      |  78 +++++
+ board/freebox/nbx10g/nbx_nrboot.h        |  34 +++
+ configs/mvebu_nbx_88f8040_defconfig      |  75 +++++
+ include/configs/nbx10g.h                 |  29 ++
+ 19 files changed, 1678 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/armada-8040-nbx-u-boot.dtsi
+ create mode 100644 arch/arm/dts/armada-8040-nbx.dts
+ create mode 100644 arch/arm/mach-mvebu/armada8k/soc_info.c
+ create mode 100644 arch/arm/mach-mvebu/armada8k/soc_info.h
+ create mode 100644 board/freebox/nbx10g/Kconfig
+ create mode 100644 board/freebox/nbx10g/MAINTAINERS
+ create mode 100644 board/freebox/nbx10g/Makefile
+ create mode 100644 board/freebox/nbx10g/board.c
+ create mode 100644 board/freebox/nbx10g/nbx_emmcboot.c
+ create mode 100644 board/freebox/nbx10g/nbx_fbxserial.c
+ create mode 100644 board/freebox/nbx10g/nbx_fbxserial.h
+ create mode 100644 board/freebox/nbx10g/nbx_imagetag.h
+ create mode 100644 board/freebox/nbx10g/nbx_nrboot.h
+ create mode 100644 configs/mvebu_nbx_88f8040_defconfig
+ create mode 100644 include/configs/nbx10g.h
+
 -- 
-2.45.2
+2.53.0
 
