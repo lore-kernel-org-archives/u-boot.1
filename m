@@ -4,85 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27592F8FA79
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 13:37:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2454EF8FA7A
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 13:42:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DA5283BC4;
-	Tue, 21 Apr 2026 15:37:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=e-labworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 97121839D5;
+	Tue, 21 Apr 2026 15:42:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=e-labworks-com.20251104.gappssmtp.com header.i=@e-labworks-com.20251104.gappssmtp.com header.b="YpTp/Xmt";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="ftXG/9XE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62B1A83E76; Tue, 21 Apr 2026 15:37:08 +0200 (CEST)
-Received: from mail-dy1-x1344.google.com (mail-dy1-x1344.google.com
- [IPv6:2607:f8b0:4864:20::1344])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5B48383BC4; Tue, 21 Apr 2026 15:42:38 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE46E83A91
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:37:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
- header.from=e-labworks.com
+ by phobos.denx.de (Postfix) with ESMTPS id D10C680433
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:42:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=sergio.prado@e-labworks.com
-Received: by mail-dy1-x1344.google.com with SMTP id
- 5a478bee46e88-2bd9a485bd6so2559131eec.1
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 06:37:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=e-labworks-com.20251104.gappssmtp.com; s=20251104; t=1776778623; x=1777383423;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=7f5Rs44Q0d6tHqIFJrOQxqowx6ytOo3hXNNy+qy+2ik=;
- b=YpTp/XmtImW/VMPFbuhJQHzTEmopgWimIBV1r6pZkh96apwqubvsrpYV6TNYkofiYD
- RVfpNxwYLNFu4F9M9hL1t7UvasTjA0qs/VtRd6ZEPRr5Nsy5Fb3T/f0l3jtzygKaCTqp
- hn8AsIuUhNQrUBHARyV6qjtJcDTZ/bUvxBcYZV84y7MwdIXkxv5hFD5H/XV3h4MJzKBo
- ESmjRys2Sw/1UMXXR0x8T/qldVvZ0NeUeMeFygXa6SmyZ2YNgY7Xrf3d4T6p/Cpof1x+
- kjgP0uUYS3l8xdjQfcE11OeXSaMLmIShABZ1RZMnu9U6D1jXDNlw9oeJKa8rEtOm0BzJ
- 6+FA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776778623; x=1777383423;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7f5Rs44Q0d6tHqIFJrOQxqowx6ytOo3hXNNy+qy+2ik=;
- b=lr/TwKrXfgKghw7vl0GmrWq7i4bD6jy//Wc7yfpKJccrlvTmKemiZAzxrrh/fbnh61
- rw0Tx9OBlgqlu9jSCypj4/B9h+MIWi4S17gyMKGvCLhVmvh6XPdXxJHgzD5kuQzOFHNS
- lhvsCtMSrh0pFjC4Wm+gyE1VaQAChPdxADhTZUYsKpdGxEnup6pjhDPXgO4w64hJk/nf
- TqeM8zFKTO3C2WRF1DmqHruEY7s1WpJAbMA/BFGREK17XAQmTEcWUmsVkWL+KIPzeawH
- Pg1dOcsCPboptgl3gXLd3vd7QdsjQVISQWIiMu/abjwO++RPhnADr7wf6LcyldJ//js7
- Ozug==
-X-Gm-Message-State: AOJu0YybKXluz8N2ilBtqLjyhtpa/4tDu4x2M6BXs1zdbCRw/jSDqCYM
- UTN47jL0vwdDyMDUVK4Gx0q52WgDQdmSKQJvqwuSQUZ8NJ/d5X5n2esQ1UKAlC6yrW76P8/IOeT
- MMEKUKddB8Q==
-X-Gm-Gg: AeBDieu4+FieSGmKnKuCHKxsSJ7a5BTxZBRZhul6gwAwKtEWvfiQcs0cKaGfKX1AbUb
- VboMC6kxvYChc8BgACLwTSJK5yBw2RHBCxW3Wou6Xx4nnbLKvNaLe969cfVPldEXJf2b//kYwMH
- JIZPhpASWWEFrOKmCwYNN7kyHqO8D2PJeCIGvGFNCdCM6LL5ZHKJLE6vTr5DEdapZsNxei/sijp
- +ifi5lNvIhuLRYbJs/57H9P2Y85+N7MbdWv4s6iq8OK7Ah5WZthdRNGjpEqskDnezNak0wDh7j9
- xTTv6scd2czus/kMPDGh3JnWN47manGDlInlVnU42sWA99zpQr5BZ361g1hYEn0vzrVdqk4aYnV
- L0owQFrO1XU81DwGgH5OOh7ws3T4rvykCUSZjypbqf+J3vxGRU98fXAKwf+8qgn9fYg2zr/iBel
- YqZVEl/VnxbnWNcF0y24KVzFkc9lC1R0RuSDLMu/ciyg==
-X-Received: by 2002:a05:7300:748a:b0:2c4:ec89:bd3 with SMTP id
- 5a478bee46e88-2e479419855mr11475150eec.24.1776778622758; 
- Tue, 21 Apr 2026 06:37:02 -0700 (PDT)
-Received: from desktop.. ([2804:7f0:6401:dc31:5cc3:33a1:5dce:4f49])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-2e539fa6134sm19467982eec.3.2026.04.21.06.36.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Apr 2026 06:37:02 -0700 (PDT)
-From: Sergio Prado <sergio.prado@e-labworks.com>
-To: u-boot@lists.denx.de
-Cc: sergio.prado@e-labworks.com, trini@konsulko.com, sjg@chromium.org,
- alpernebiyasak@gmail.com, ilias.apalodimas@linaro.org,
- marek.vasut+renesas@mailbox.org, sughosh.ganu@arm.com,
- wolfgang.wallner@at.abb.com, bb@ti.com, y.moog@phytec.de, afd@ti.com
-Subject: [PATCH v2] binman: x509_cert: add PKCS#11/HSM signing support
-Date: Tue, 21 Apr 2026 10:36:46 -0300
-Message-Id: <20260421133646.2826728-1-sergio.prado@e-labworks.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=cMdfHCHsXiY22jriyt9+omENP0S5OtOAgLio5RWkwGqunI07S0eQWPsnfZjz1PaRofpIuzIS7PX9oVkygaZylgdEkZHHHyhS5eKDmuG3e1XmH9Ip3qoNXkE0nxW6IQBI5LJkXhd9MWGmtXPg+MnmnWmwpMdVi4HCmUr1RoH+0n26do68L6SwtSENHRzsh4+3xHTLKhXGRm5cNhTdyv8I9RtQ+1P0+pP5/fN5Hxd1rhtYjsUyM7XALbX46R5x0phh7It6GF0fi245xr3fstt2ICzTbf8fZiLAxr8VwnR3XUP+NtpB0QW5ODqWC/B/dVkJE+NcSG76FmB8BhRyxJBRDQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=M6zrThstcB6EMKzk+AK7aXqRynkCVavDLqpzUivPALk=;
+ b=RkNoGN8rdv3NGugDAYHhif88a3WsCyxQmjRgmZZ6wqLg9rcvVBP/SwU0HvpsPwbEDxP2tXwcs6HWS6bNYOM/QS5oCvFdxsud1o4dD2uH+CJwKzcv20Ha953YQiICRFR/fz5/LJROUeeHefky5MQglBswm+1i74osqkLk9CEVMsK8B6NAdbWoImFhSmUbDu/GGN0m/njzepVuLg4LhztDHlQ6UBGeZ2AZvdcvKoJYG3z3W/9Syy/PpjFmQRDmZEicE5zBoxa4t1d4duqPFXunM2DGUul2nvmWtgcXdb23K9sAqul+wn7EjAiezyrbNe/ipzBIipE1eNjZFTCL1G2ENQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=M6zrThstcB6EMKzk+AK7aXqRynkCVavDLqpzUivPALk=;
+ b=ftXG/9XEQHOYUzPisnZIv5PVGzEp3J4SqOc7rMEjVelt0kyHNXlH+dt6hf6fMExVzXuc6Y6SmTGHmu5uP33PBhVDhFkpLsCc6S2NR51lwRp11mtxCSQlqhNZczGOFQ0kviW4s6Js1hqqt4kOwoqFijmd6tMmcGLJnmrvaikRM3E=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by AM7PR04MB6885.eurprd04.prod.outlook.com (2603:10a6:20b:10d::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.33; Tue, 21 Apr
+ 2026 13:42:32 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%4]) with mapi id 15.20.9818.033; Tue, 21 Apr 2026
+ 13:42:32 +0000
+Message-ID: <5016a59a-c2b8-4676-b18e-877aabdeec27@cherry.de>
+Date: Tue, 21 Apr 2026 15:42:30 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] tools: mkeficapsule: Rework pkcs11 support
+To: Wojciech Dubowik <Wojciech.Dubowik@mt.com>, u-boot@lists.denx.de
+Cc: Franz Schnyder <fra.schnyder@gmail.com>, trini@konsulko.com,
+ "openembedded-core @ lists . openembedded . org"
+ <openembedded-core@lists.openembedded.org>,
+ Francesco Dolcini <francesco@dolcini.it>, Simon Glass <sjg@chromium.org>,
+ David Lechner <dlechner@baylibre.com>
+References: <20260421121418.3257226-1-Wojciech.Dubowik@mt.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260421121418.3257226-1-Wojciech.Dubowik@mt.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0065.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:49::18) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AM7PR04MB6885:EE_
+X-MS-Office365-Filtering-Correlation-Id: d659bcdc-376e-471a-1fe1-08de9fabd68b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|10070799003|366016|376014|1800799024|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: 38NnA7fciVv0ya7t+ko2SMZyoRkEOr80TSrFF5tPnBUyO3f4AxNNy3J1dhABFuxS+4UMDdKOkla2diGBV2zW5z6T3vYYbqUYoyNAf5Qq/D03s8wgbaalJDkV37uzm0ih89l6a6sDFhVxhfMHVFY2ACBdwUT4qSM/pTTgpFSQ+bf3xVs7Cgr4HTqsyaszfDQx1+QxM8R+kvIL8c9+rSpkTv8rDFpMmhHau4DRefMBPnDPCdaLu+FRTIQfDnbF3FlCn9qHhK0kbZmiLrA7Y09mowjM9rV5mCct9F6yr51Lw8F0tqhfVAOXqG8qPHG4DQ3UTORS1BMBQHU3r4SFxXLKNTgf9fVAl4zPCj22CMQEYdgzljeYhsrITZGqpsVqsXdXT0dCjXYBi2vgePt+k0NnfiBTZ0817loArYRV2g2Cn+eSMHAzLLFQeHmWk+ed30WmcqJ2+K+VICQQj/Sp9p5gSGkXivGEaK9EnaPs5J8FYHCMp2inUplDw+94neWxayG6ommnGO2pf4bs8O3Ub/g+0atxqPNEm/vb/kAKd30GKJQolX2cW6QkLqT/dMMhTB3DyQW0mSpxv/r3ipXoH0SYK9fVlb0Q6/pt1vFPlfyOGzi9mW3dtYGJmEtEVfvJPF6iVMklUKPB4b6tKTvIZlFeYxHHpjgc6pnIDos8XwyyG47+QihOr3C+Toq4SFYDG4GMsz/zb8kdn76C+IFQTOtFURdanpkpltZ7sgkcoyJf+/I=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(10070799003)(366016)(376014)(1800799024)(56012099003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VklGZW85elVxeE9EdDJ6ZHVMTEFoTEllb3dkSjltYzRPM1RkdDdoS1NiTy9X?=
+ =?utf-8?B?N2taVHFwOXk5Y2c1SStKNzVpM3MrQWl0UUU3anY2VFA3RTRUbzNEYTB6Yk5K?=
+ =?utf-8?B?Z0ZQdTJ3b2VtcXhNRGJoWHEzYzFyTlEzVEowYTBCSURud0FmWktrU2hsR1U1?=
+ =?utf-8?B?RVgvOStRZnNmZzRrOXYybVMxSHRtUDRTYzhDSUhYdXJDUzVxNUlYalRsc01n?=
+ =?utf-8?B?bHVEY0wzRzkwOGpxamtVbU5hdW16bXJrRjlVWG9YbXRrVFNBMlN0TFBWeFI2?=
+ =?utf-8?B?Q3JSVnlaSjFEcWlwRnJ4bEpyZU5yN2hUQnNhWmx0ek5Zb0F3U0NMSkIxVDJU?=
+ =?utf-8?B?eFpzRkNiTDF3UlFlWkNXYjRCTVlpU1hSVUpPa040K3VxK1dWamJNbkxLa2tH?=
+ =?utf-8?B?eW9Ub2tOMjdkNm1JWE5XNjNGS0g5U2lZbERyMENCaktZZHRYSzlEa1BrNWN3?=
+ =?utf-8?B?c3Z2MHZNNnV6VlFYN3lRcnJQY2l0Tk8yaUVudjErbGVEVHhWTXE1dGx0UjFw?=
+ =?utf-8?B?VHFHcGtGS1IvUlUyQ05VY0dNTU44eVlLUm1ydGZvTVAwTzA2Z3R4Wlo0RVZS?=
+ =?utf-8?B?UDVRVlNIU2tWRFF0VlFEV29JSzB2YkRzN0ZyQ1NNR0IzdHdDVWRjZXVUMjI3?=
+ =?utf-8?B?aW9ERER2RlBBNHowdG5XY3RjYk5wT0k1elJpNTNqSHFpb1k5UVpiY0FOT0k2?=
+ =?utf-8?B?TCtDMW45elo5TS8vMXFpdEtXMktycTVZVmI5WWhYVXFOVm8rYVpoY1VpaVZQ?=
+ =?utf-8?B?M3QrZG8xNWRWUTNnc1hFbHNNODFma0ZjRGxMeHFPa2ZNWGhxT1VaSE5BbGIy?=
+ =?utf-8?B?dVNDWDJYaFhndGNpTzRkTjMxeTZyek4zZjJmaFUyODUvUkYrYWFRRzFPQW9V?=
+ =?utf-8?B?MW9kejdYTE1FZVRYd045bTJzUjU1S09KcnRNQzZQcGZhcXY4bVllc25kLytt?=
+ =?utf-8?B?ZEJvRVp0K1BNQTdXZWRjTzg4YVdQbGJJVE03M3I0TU16MkJXUlI2WHdmMDhG?=
+ =?utf-8?B?ZkdvSi8yNHlWTSs3cUhTbm5JZW56OXNZL2ZiTndKaFlMTHJMMFlRbFdPM21v?=
+ =?utf-8?B?eHczbUU2UjJ1eGxiTGpmbDkvMmxnSWVrNW82UmZ6L2NLVDBwRVhTOXpYcDFZ?=
+ =?utf-8?B?STBqaUdpc2hFdFFRVGZid2JhbDBMTzJrVTVGcWxRYUFEYTVoN3NXVkNXKzU4?=
+ =?utf-8?B?Zk1Oalg4T3ByQWx2OGRUQ3MwVXBmeklscUc4b2xMVHlLdmVCdThMeGVPblZ1?=
+ =?utf-8?B?L25HU3E4Q1R2eHBrcnFwSjFteTJsME80ZXZGS3dKR0xZcGJCbUxMQk0wbVpX?=
+ =?utf-8?B?eCt0c1R0RWRMTDIyRFU5ZzMwQ3BRb1hQd0VzMkRmMEVYdDZjTFZwNzlZZjdU?=
+ =?utf-8?B?aUY3QTFTWnUyMDhzaC9HMnNVbFJhYWRsSnBWZ1p1NEpJVGx6d0liU1lVa3hp?=
+ =?utf-8?B?WHdmcnVHWk01WE56RnRzVFZwWTdTTm4wZjdDeGJWbjJWajB5dEtGNzhleWg0?=
+ =?utf-8?B?elpaaWg2U0F0eXVXZkpIUkxlNVg0aEUrSjB5TWdlRmFDQ2VSeUJ2T1dvZ3ZU?=
+ =?utf-8?B?ZUNBa1poV2VYUFVNaWRsVU5rWWExU3BSOG9LZ0RVZ2lUNGtiQ000Skd4Ymdm?=
+ =?utf-8?B?bG8xc3NCc2w3RWJzYjRGU3liWm52Z1hHaktHcUpsUytiNnkzbHhCZVpyajRo?=
+ =?utf-8?B?YUdGazFkVkxKbG9KaFIzZDlUM2pzdUpINm5Sd21oNFFMVHhrbmJKbG04dlYr?=
+ =?utf-8?B?a1ViaThtY0d6bDdHVW96VStQb3VFUGsvWEpxNUZyekJEVUpLR3Z1NUUxZjZh?=
+ =?utf-8?B?dDBMUVRaYitDWkZpcUtCckViZkNVeit6ellBajlVdmhYbnBzTzR1dVM3WUYr?=
+ =?utf-8?B?UmIzT0VkUzJDS1JHN3UxUlVIYkZxM2xBblFwb0Z2S3hYMEdBN3R6dUtGSlNJ?=
+ =?utf-8?B?bGxhR0FLcWhQTWtMb0dwYVQxRVp2bG90YlBORzh6VWhWZDMzZ0piVHRoRkpw?=
+ =?utf-8?B?NWdpak1zbmduRUg1bHl2dXRTWlVBMmhoMGFjTFgyMTdEZWJvd1ZQQmNSK21J?=
+ =?utf-8?B?WC8vVU5rUFZxZk83dFIvY1dRT3hyTzR5dzI4VHFSVFlzWVdSVGRrSHAyOG0v?=
+ =?utf-8?B?Sy9WSlpsRTRqbkg3bWVGUmRwU04vczRmbVA5TFVkZ0loVm5iWmhrK1J5S2lu?=
+ =?utf-8?B?RVh2QVI3QXN2S0tTeUpkRGNKZ28zMkNIK1AxMnphYkFPSTdaeC9QZnFoSit6?=
+ =?utf-8?B?KzlhV0kzVEdUUjFkZEhQVVFhT3lZUHJpS3NIUkt6eDdZK3Bhd2NzZndVZTVj?=
+ =?utf-8?B?aVNGZmNwODhkQ202NE5KR0RtOUUrby8rU01PaWRmdXdYOHZyK2dEUVJOUEtR?=
+ =?utf-8?Q?kF2AVCq7vU5yH+Z+XMu18xcpO/k1WsSmokhiY?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: d659bcdc-376e-471a-1fe1-08de9fabd68b
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 13:42:32.2298 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: WnLqHp9t6E7xmpReqWLlWVRp1S3A8TV1M+WqSTzYQbdAK1BOf8rTjMMrEhPk/EgCOr/EoCpahPUePU1H35zGvStcxw9fsFvXbaC4lb0ti9A=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR04MB6885
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,532 +151,304 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allow X509 certificates used for K3/TI secure boot to be signed via an
-HSM using the PKCS#11 standard.
+Hi Wojciech,
 
-Two new make variables are introduced:
+On 4/21/26 2:14 PM, Wojciech Dubowik wrote:
+> Some distros like OpenEmbedded are using gnutls library
+> without pkcs11 support and linking of mkeficapsule will fail.
+> It would make maintenance of default configs a hurdle.
+> Add detection of pkcs11 support in gnutls so it's enabled
+> when available and doesn't need to be set explicitly.
+> 
+> Changes:
+> * remove config option for pkcs11 support and add auto
+>    detection in Makefile
+> * reduce amount of ifdefs by abstracting import pkcs11
+>    functions
+> * add missing free and deinit functions
+No, this must be a separate patch.
 
-- BINMAN_PKCS11_URI    PKCS#11 URI identifying the signing key on the HSM
-- BINMAN_PKCS11_MODULE Path to the PKCS#11 shared library (.so)
+We also don't need a changelog between patch versions in the commit log 
+(place it below the ---).
 
-When BINMAN_PKCS11_URI is set, it is passed to binman as the pkcs11-uri
-entry argument, which overrides the keyfile property at signing time.
+> 
+> Suggested-by: Tom Rini <trini@konsulko.com>
+> Cc: Franz Schnyder <fra.schnyder@gmail.com>
+> Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+> ---
+> Changes in v3:
+> - remove config option for pkcs11 support and add auto
+>    detection in Makefile
+> - reduce amount of ifdefs by abstracting import pkcs11
+>    functions
+> - add missing free and deinit functions
+> Changes in v2:
+> - make use of stderr more consistent
+> - add missing ifndef around pkcs11 deinit functions
+> ---
+>   tools/Makefile       |   5 ++
+>   tools/mkeficapsule.c | 117 ++++++++++++++++++++++++++++---------------
+>   2 files changed, 81 insertions(+), 41 deletions(-)
+> 
+> diff --git a/tools/Makefile b/tools/Makefile
+> index 1a5f425ecdaa..e85f5a354b81 100644
+> --- a/tools/Makefile
+> +++ b/tools/Makefile
+> @@ -271,6 +271,11 @@ mkeficapsule-objs := generated/lib/uuid.o \
+>   	$(LIBFDT_OBJS) \
+>   	mkeficapsule.o
+>   hostprogs-always-$(CONFIG_TOOLS_MKEFICAPSULE) += mkeficapsule
+> +GNUTLS_SUPPORTS_P11KIT = $(shell pkg-config --libs gnutls --print-requires-private \
+> +			 2> /dev/null | grep p11-kit-1)
+> +ifeq ($(GNUTLS_SUPPORTS_P11KIT),p11-kit-1)
+> +HOSTCFLAGS_mkeficapsule.o += -DMKEFICAPSULE_PKCS11
+> +endif
+>   
+>   include tools/fwumdata_src/fwumdata.mk
+>   
+> diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
+> index ec640c57e8a5..747431bce8fe 100644
+> --- a/tools/mkeficapsule.c
+> +++ b/tools/mkeficapsule.c
+> @@ -207,6 +207,45 @@ static int write_capsule_file(FILE *f, void *data, size_t size, const char *msg)
+>   	return 0;
+>   }
+>   
+> +#ifdef MKEFICAPSULE_PKCS11
+> +static int import_pkcs11_crt(gnutls_x509_crt_t *x509, struct auth_context *ctx)
+> +{
+> +	gnutls_pkcs11_obj_t *obj_list;
+> +	unsigned int obj_list_size = 0;
+> +	int i, ret;
+> +
+> +	ret = gnutls_pkcs11_obj_list_import_url4(&obj_list, &obj_list_size,
+> +						 ctx->cert_file, 0);
+> +	if (ret < 0 || obj_list_size == 0)
+> +		return ret;
+> +
+> +	ret = gnutls_x509_crt_import_pkcs11(*x509, obj_list[0]);
+> +
+> +	for (i = 0; i < obj_list_size; i++)
+> +                gnutls_pkcs11_obj_deinit(obj_list[i]);
+> +	gnutls_free(obj_list);
+> +
+> +	return ret;
+> +}
+> +
+> +static int import_pkcs11_key(gnutls_privkey_t *pkey, struct auth_context *ctx)
+> +{
+> +	return gnutls_privkey_import_pkcs11_url(*pkey, ctx->key_file);
+> +}
+> +#else
+> +static int import_pkcs11_crt(gnutls_x509_crt_t *x509, struct auth_context *ctx)
+> +{
+> +	fprintf(stderr, "Pkcs11 support is disabled\n");
+> +	return -1;
+> +}
+> +
+> +static int import_pkcs11_key(gnutls_privkey_t *pkey, struct auth_context *ctx)
+> +{
+> +	fprintf(stderr, "Pkcs11 support is disabled\n");
+> +	return -1;
+> +}
+> +#endif
+> +
+>   /**
+>    * create_auth_data - compose authentication data in capsule
+>    * @auth_context:	Pointer to authentication context
+> @@ -221,17 +260,14 @@ static int write_capsule_file(FILE *f, void *data, size_t size, const char *msg)
+>    */
+>   static int create_auth_data(struct auth_context *ctx)
+>   {
+> -	gnutls_datum_t cert;
+> -	gnutls_datum_t key;
+> +	gnutls_datum_t cert = { NULL, 0 };
+> +	gnutls_datum_t key = { NULL, 0 };
+>   	off_t file_size;
+> -	gnutls_privkey_t pkey;
+> +	gnutls_privkey_t pkey = NULL;
+>   	gnutls_x509_crt_t x509;
+>   	gnutls_pkcs7_t pkcs7;
+> -	gnutls_datum_t data;
+> -	gnutls_datum_t signature;
+> -	gnutls_pkcs11_obj_t *obj_list;
+> -	unsigned int obj_list_size = 0;
+> -	const char *lib;
+> +	gnutls_datum_t data = { NULL, 0 };
+> +	gnutls_datum_t signature = { NULL, 0 };
+>   	int ret;
+>   	bool pkcs11_cert = false;
+>   	bool pkcs11_key = false;
+> @@ -242,10 +278,12 @@ static int create_auth_data(struct auth_context *ctx)
+>   	if (!strncmp(ctx->key_file, "pkcs11:", strlen("pkcs11:")))
+>   		pkcs11_key = true;
+>   
+> +#ifdef MKEFICAPSULE_PKCS11
+>   	if (pkcs11_cert || pkcs11_key) {
 
-The openssl bintool gains three helper methods:
+This one also in a separate function. As far as I could tell, we should 
+return -1 here if PKCS11 support isn't available in gnutls. We shouldn't 
+continue if we already know we are going to fail. We do need the code 
+below to be ifdef'ed (in functions like you've done is fine), because 
+somehow the compiler isn't smart enough to build those out and thus 
+we'll fail to build if pkcs11 support is disabled, even if we can never 
+reach that part of the code.
 
-- _pkcs11_use_provider() detects whether the pkcs11 provider (OpenSSL
-  >= 3.1) or the legacy pkcs11 engine (libp11) is available.
+> +		const char *lib;
+>   		lib = getenv("PKCS11_MODULE_PATH");
+>   		if (!lib) {
+> -			fprintf(stdout,
+> +			fprintf(stderr,
+>   				"PKCS11_MODULE_PATH not set in the environment\n");
+>   			return -1;
+>   		}
+> @@ -255,10 +293,11 @@ static int create_auth_data(struct auth_context *ctx)
+>   
+>   		ret = gnutls_pkcs11_add_provider(lib, "trusted");
+>   		if (ret < 0) {
+> -			fprintf(stdout, "Failed to add pkcs11 provider\n");
+> +			fprintf(stderr, "Failed to add pkcs11 provider\n");
+>   			return -1;
+>   		}
+>   	}
+> +#endif
+>   
+>   	if (!pkcs11_cert) {
+>   		ret = read_bin_file(ctx->cert_file, &cert.data, &file_size);
+> @@ -296,35 +335,33 @@ static int create_auth_data(struct auth_context *ctx)
+>   	if (ret < 0) {
+>   		fprintf(stderr, "error in gnutls_x509_crt_init(): %s\n",
+>   			gnutls_strerror(ret));
+> -		return -1;
+> +		goto cleanup;
+>   	}
+>   
+>   	/* load x509 certificate */
+>   	if (pkcs11_cert) {
+> -		ret = gnutls_pkcs11_obj_list_import_url4(&obj_list, &obj_list_size,
+> -							 ctx->cert_file, 0);
+> -		if (ret < 0 || obj_list_size == 0) {
+> -			fprintf(stdout, "Failed to import crt_file URI objects\n");
+> -			return -1;
+> +		ret =  import_pkcs11_crt(&x509, ctx);
+> +		if (ret < 0) {
+> +			fprintf(stderr, "error in import_pkcs11_crt(): %s\n",
+> +				gnutls_strerror(ret));
+> +			goto cleanup;
+>   		}
+> -
+> -		gnutls_x509_crt_import_pkcs11(x509, obj_list[0]);
+>   	} else {
+>   		ret = gnutls_x509_crt_import(x509, &cert, GNUTLS_X509_FMT_PEM);
+>   		if (ret < 0) {
+>   			fprintf(stderr, "error in gnutls_x509_crt_import(): %s\n",
+>   				gnutls_strerror(ret));
+> -			return -1;
+> +			goto cleanup;
+>   		}
+>   	}
+>   
+>   	/* load a private key */
+>   	if (pkcs11_key) {
+> -		ret = gnutls_privkey_import_pkcs11_url(pkey, ctx->key_file);
+> +		ret = import_pkcs11_key(&pkey, ctx);
+>   		if (ret < 0) {
+> -			fprintf(stderr, "error in %d: %s\n", __LINE__,
+> +			fprintf(stderr,	"error in import_pkcs11_key(): %s\n",
+>   				gnutls_strerror(ret));
+> -			return -1;
+> +			goto cleanup;
+>   		}
+>   	} else {
+>   		ret = gnutls_privkey_import_x509_raw(pkey, &key, GNUTLS_X509_FMT_PEM,
+> @@ -333,7 +370,7 @@ static int create_auth_data(struct auth_context *ctx)
+>   			fprintf(stderr,
+>   				"error in gnutls_privkey_import_x509_raw(): %s\n",
+>   				gnutls_strerror(ret));
+> -			return -1;
+> +			goto cleanup;
+>   		}
+>   	}
+>   
+> @@ -342,7 +379,7 @@ static int create_auth_data(struct auth_context *ctx)
+>   	if (ret < 0) {
+>   		fprintf(stderr, "error in gnutls_pkcs7_init(): %s\n",
+>   			gnutls_strerror(ret));
+> -		return -1;
+> +		goto cleanup;
+>   	}
+>   
+>   	/* sign */
+> @@ -357,7 +394,7 @@ static int create_auth_data(struct auth_context *ctx)
+>   	data.data = malloc(data.size);
+>   	if (!data.data) {
+>   		fprintf(stderr, "allocating memory (0x%x) failed\n", data.size);
+> -		return -1;
+> +		goto cleanup;
+>   	}
+>   	memcpy(data.data, ctx->image_data, ctx->image_size);
+>   	memcpy(data.data + ctx->image_size, &ctx->auth.monotonic_count,
+> @@ -371,7 +408,7 @@ static int create_auth_data(struct auth_context *ctx)
+>   	if (ret < 0) {
+>   		fprintf(stderr, "error in gnutls_pkcs7)sign(): %s\n",
+>   			gnutls_strerror(ret));
+> -		return -1;
+> +		goto cleanup;
+>   	}
+>   
+>   	/* export */
+> @@ -379,7 +416,8 @@ static int create_auth_data(struct auth_context *ctx)
+>   	if (ret < 0) {
+>   		fprintf(stderr, "error in gnutls_pkcs7_export2: %s\n",
+>   			gnutls_strerror(ret));
+> -		return -1;
+> +		gnutls_free(signature.data);
+> +		goto cleanup;
+>   	}
+>   	ctx->sig_data = signature.data;
+>   	ctx->sig_size = signature.size;
+> @@ -391,24 +429,21 @@ static int create_auth_data(struct auth_context *ctx)
+>   	ctx->auth.auth_info.hdr.wCertificateType = WIN_CERT_TYPE_EFI_GUID;
+>   	memcpy(&ctx->auth.auth_info.cert_type, &efi_guid_cert_type_pkcs7,
+>   	       sizeof(efi_guid_cert_type_pkcs7));
+> -
+> -	/*
+> -	 * For better clean-ups,
+> -	 * gnutls_pkcs7_deinit(pkcs7);
+> -	 * gnutls_privkey_deinit(pkey);
+> -	 * gnutls_x509_crt_deinit(x509);
+> -	 * free(cert.data);
+> -	 * free(key.data);
+> -	 * if error
+> -	 *   gnutls_free(signature.data);
+> -	 */
+> -
+> +cleanup:
+> +	gnutls_x509_crt_deinit(x509);
+> +	if (pkey)
+> +                gnutls_privkey_deinit(pkey);
+> +	gnutls_pkcs7_deinit(pkcs7);
+> +	gnutls_free(cert.data);
+> +	gnutls_free(key.data);
+> +	gnutls_free(data.data);
 
-- _build_key_args() builds the appropriate -key/-provider/-engine
-  arguments for the openssl command line, appending ?pin-value=<pin>
-  from the PKCS11_PIN environment variable when set.
+No, this is unrelated to this pkcs11 fixup. Please have a separate patch 
+for this (same for all gotos and variables being assigned a default 
+value at the top). The idea is that we should be able to revert a patch 
+if something is broken, without reverting unrelated functionality (here, 
+either the ability to build without pkcs11 or correctly freeing things 
+on error).
 
-- _run_cmd_pkcs11() exports PKCS11_MODULE_PATH and PKCS11_PROVIDER_MODULE
-  before invoking openssl when a module path is provided.
-
-Existing behavior is unchanged when neither BINMAN_PKCS11_URI nor
-BINMAN_PKCS11_MODULE is set.
-
-Tested with SoftHSM2 and a Yubikey using the verdin-am62_a53_defconfig
-configuration.
-
-Signed-off-by: Sergio Prado <sergio.prado@e-labworks.com>
----
-Changes in v2:
-- Add tests for _build_key_args() (PEM path, PKCS#11 provider, PKCS#11 engine,
-  PIN appending), _pkcs11_use_provider() (caching), _run_cmd_pkcs11() (with and
-  without module path), and end-to-end x509_cert signing with a PKCS#11 URI
-  (testX509CertPkcs11), making sure btool/openssl.py and etype/x509_cert.py has
-  100% test coverage.
-
- Makefile                        |   2 +
- tools/binman/binman.rst         |  18 ++++++
- tools/binman/btool/openssl.py   | 106 +++++++++++++++++++++++++++-----
- tools/binman/etype/x509_cert.py |  47 ++++++++++++--
- tools/binman/ftest.py           |  96 +++++++++++++++++++++++++++++
- 5 files changed, 249 insertions(+), 20 deletions(-)
-
-diff --git a/Makefile b/Makefile
-index dfc95d314ddd..8d6c584b2731 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1701,6 +1701,8 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
- 		-a vpl-dtb=$(CONFIG_VPL_OF_REAL) \
- 		-a pre-load-key-path=${PRE_LOAD_KEY_PATH} \
- 		-a of-spl-remove-props=$(CONFIG_OF_SPL_REMOVE_PROPS) \
-+		$(if $(BINMAN_PKCS11_URI),-a pkcs11-uri="$(BINMAN_PKCS11_URI)") \
-+		$(if $(BINMAN_PKCS11_MODULE),-a pkcs11-module="$(BINMAN_PKCS11_MODULE)") \
- 		$(BINMAN_$(@F))
- 
- OBJCOPYFLAGS_u-boot.ldr.hex := -I binary -O ihex
-diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
-index 3f725868c8bb..ea91199b1e22 100644
---- a/tools/binman/binman.rst
-+++ b/tools/binman/binman.rst
-@@ -2165,6 +2165,24 @@ BINMAN_INDIRS
-     Sets the search path for input files used by binman by adding one or more
-     `-I` arguments. See :ref:`External blobs`.
- 
-+BINMAN_PKCS11_URI
-+    PKCS#11 URI used to sign boot artifacts via an HSM instead of a PEM key
-+    file on disk. When set, it is passed as ``-a pkcs11-uri=<uri>`` to binman,
-+    which overrides the ``keyfile`` entry argument for all signing operations.
-+    Example::
-+
-+        make BINMAN_PKCS11_URI="pkcs11:token=mytoken;object=mykey;type=private"
-+
-+BINMAN_PKCS11_MODULE
-+    Path to the PKCS#11 shared library (.so) for HSM signing. When set, it is
-+    passed as ``-a pkcs11-module=<path>`` to binman. Only needed when the
-+    module is not already configured via ``openssl.cnf`` or the
-+    ``PKCS11_MODULE_PATH`` environment variable. Typically used together with
-+    ``BINMAN_PKCS11_URI``::
-+
-+        make BINMAN_PKCS11_URI="pkcs11:token=mytoken;object=mykey;type=private" \
-+             BINMAN_PKCS11_MODULE="/usr/lib/pkcs11/libsofthsm2.so"
-+
- BINMAN_TOOLPATHS
-     Sets the search path for external tool used by binman by adding one or more
-     `--toolpath` arguments. See :ref:`External tools`.
-diff --git a/tools/binman/btool/openssl.py b/tools/binman/btool/openssl.py
-index b26f087c4470..550f318fade6 100644
---- a/tools/binman/btool/openssl.py
-+++ b/tools/binman/btool/openssl.py
-@@ -11,6 +11,7 @@ Source code is at https://www.openssl.org/
- """
- 
- import hashlib
-+import os
- 
- from binman import bintool
- from u_boot_pylib import tools
-@@ -35,18 +36,83 @@ class Bintoolopenssl(bintool.Bintool):
-         super().__init__(
-             name, 'openssl cryptography toolkit',
-             version_regex=r'OpenSSL (.*) \(', version_args='version')
-+        self._use_provider = None
-+
-+    def _pkcs11_use_provider(self):
-+        """Return True if the provider API should be used for PKCS#11 signing.
-+
-+        Checks whether the pkcs11 provider is available by running
-+        'openssl list -providers'. The result is cached after the first call
-+        to avoid spawning a subprocess on every signing operation.
-+
-+        Returns:
-+            bool: True if provider should be used, False if engine should be used
-+        """
-+        if self._use_provider is None:
-+            out = self.run_cmd('list', '-providers') or ''
-+            self._use_provider = 'pkcs11' in out
-+        return self._use_provider
-+
-+    def _build_key_args(self, key_fname):
-+        """Build openssl CLI arguments for the signing key.
-+
-+        Always add '-key key_fname', and for a PKCS#11 URI (pkcs11:...),
-+        prepends either '-provider default -provider pkcs11' (if provider API
-+        is available) or '-engine pkcs11 -keyform engine' (legacy fallback).
-+        If the PKCS11_PIN environment variable is set, appends ?pin-value=<pin>
-+        to the URI.
-+
-+        Args:
-+            key_fname (str): Filename of .pem file or PKCS#11 URI
-+
-+        Returns:
-+            list: openssl arguments for the key selection
-+        """
-+        if key_fname.startswith('pkcs11:'):
-+            pin = os.environ.get('PKCS11_PIN')
-+            if pin:
-+                key_fname = f'{key_fname}?pin-value={pin}'
-+            if self._pkcs11_use_provider():
-+                args = ['-provider', 'default', '-provider', 'pkcs11', '-key', key_fname]
-+            else:
-+                args = ['-engine', 'pkcs11', '-keyform', 'engine', '-key', key_fname]
-+        else:
-+            args = ['-key', key_fname]
-+        return args
-+
-+    def _run_cmd_pkcs11(self, pkcs11_module, *args):
-+        """Run an openssl command, optionally setting the PKCS#11 module env vars.
-+
-+        When pkcs11_module is set, both PKCS11_MODULE_PATH (engine) and
-+        PKCS11_PROVIDER_MODULE (provider) are exported before invoking openssl.
-+        If already configured via openssl.cnf or the calling environment,
-+        pkcs11_module can be None.
-+
-+        Args:
-+            pkcs11_module (str or None): Path to the PKCS#11 shared library
-+            *args: Arguments forwarded to run_cmd
-+
-+        Returns:
-+            str: openssl output
-+        """
-+        if pkcs11_module:
-+            os.environ['PKCS11_MODULE_PATH'] = pkcs11_module
-+            os.environ['PKCS11_PROVIDER_MODULE'] = pkcs11_module
-+        return self.run_cmd(*args)
- 
-     def x509_cert(self, cert_fname, input_fname, key_fname, cn, revision,
--                  config_fname):
-+                  config_fname, pkcs11_module=None):
-         """Create a certificate
- 
-         Args:
-             cert_fname (str): Filename of certificate to create
-             input_fname (str): Filename containing data to sign
--            key_fname (str): Filename of .pem file
-+            key_fname (str): Filename of .pem file or PKCS#11 URI
-             cn (str): Common name
-             revision (int): Revision number
-             config_fname (str): Filename to write fconfig into
-+            pkcs11_module (str or None): Path to PKCS#11 shared library, or
-+                None if already configured via openssl.cnf or the environment
- 
-         Returns:
-             str: Tool output
-@@ -76,19 +142,20 @@ shaType                = OID:2.16.840.1.101.3.4.2.3
- shaValue               = FORMAT:HEX,OCT:{hashval}
- imageSize              = INTEGER:{len(indata)}
- ''', file=outf)
--        args = ['req', '-new', '-x509', '-key', key_fname, '-nodes',
-+        args = ['req', '-new', '-x509', *self._build_key_args(key_fname), '-nodes',
-                 '-outform', 'DER', '-out', cert_fname, '-config', config_fname,
-                 '-sha512']
--        return self.run_cmd(*args)
-+        return self._run_cmd_pkcs11(pkcs11_module, *args)
- 
-     def x509_cert_sysfw(self, cert_fname, input_fname, key_fname, sw_rev,
--                  config_fname, req_dist_name_dict, firewall_cert_data):
-+                  config_fname, req_dist_name_dict, firewall_cert_data,
-+                  pkcs11_module=None):
-         """Create a certificate to be booted by system firmware
- 
-         Args:
-             cert_fname (str): Filename of certificate to create
-             input_fname (str): Filename containing data to sign
--            key_fname (str): Filename of .pem file
-+            key_fname (str): Filename of .pem file or PKCS#11 URI
-             sw_rev (int): Software revision
-             config_fname (str): Filename to write fconfig into
-             req_dist_name_dict (dict): Dictionary containing key-value pairs of
-@@ -101,6 +168,8 @@ imageSize              = INTEGER:{len(indata)}
-                 extended certificate
-               - certificate (str): Extended firewall certificate with
-                 the information for the firewall configurations.
-+            pkcs11_module (str or None): Path to PKCS#11 shared library, or
-+                None if already configured via openssl.cnf or the environment
- 
-         Returns:
-             str: Tool output
-@@ -146,20 +215,20 @@ authInPlace = INTEGER:{hex(firewall_cert_data['auth_in_place'])}
- numFirewallRegions = INTEGER:{firewall_cert_data['num_firewalls']}
- {firewall_cert_data['certificate']}
- ''', file=outf)
--        args = ['req', '-new', '-x509', '-key', key_fname, '-nodes',
-+        args = ['req', '-new', '-x509', *self._build_key_args(key_fname), '-nodes',
-                 '-outform', 'DER', '-out', cert_fname, '-config', config_fname,
-                 '-sha512']
--        return self.run_cmd(*args)
-+        return self._run_cmd_pkcs11(pkcs11_module, *args)
- 
-     def x509_cert_rom(self, cert_fname, input_fname, key_fname, sw_rev,
-                   config_fname, req_dist_name_dict, cert_type, bootcore,
--                  bootcore_opts, load_addr, sha, debug):
-+                  bootcore_opts, load_addr, sha, debug, pkcs11_module=None):
-         """Create a certificate
- 
-         Args:
-             cert_fname (str): Filename of certificate to create
-             input_fname (str): Filename containing data to sign
--            key_fname (str): Filename of .pem file
-+            key_fname (str): Filename of .pem file or PKCS#11 URI
-             sw_rev (int): Software revision
-             config_fname (str): Filename to write fconfig into
-             req_dist_name_dict (dict): Dictionary containing key-value pairs of
-@@ -170,6 +239,8 @@ numFirewallRegions = INTEGER:{firewall_cert_data['num_firewalls']}
-             bootcore_opts(int): Booting core option, lockstep (0) or split (2) mode
-             load_addr (int): Load address of image
-             sha (int): Hash function
-+            pkcs11_module (str or None): Path to PKCS#11 shared library, or
-+                None if already configured via openssl.cnf or the environment
- 
-         Returns:
-             str: Tool output
-@@ -231,10 +302,10 @@ emailAddress           = {req_dist_name_dict['emailAddress']}
-  coreDbgEn = INTEGER:0
-  coreDbgSecEn = INTEGER:0
- ''', file=outf)
--        args = ['req', '-new', '-x509', '-key', key_fname, '-nodes',
-+        args = ['req', '-new', '-x509', *self._build_key_args(key_fname), '-nodes',
-                 '-outform', 'DER', '-out', cert_fname, '-config', config_fname,
-                 '-sha512']
--        return self.run_cmd(*args)
-+        return self._run_cmd_pkcs11(pkcs11_module, *args)
- 
-     def x509_cert_rom_combined(self, cert_fname, input_fname, key_fname, sw_rev,
-                   config_fname, req_dist_name_dict, load_addr, sha, total_size, num_comps,
-@@ -242,13 +313,14 @@ emailAddress           = {req_dist_name_dict['emailAddress']}
-                   imagesize_sbl, hashval_sbl, load_addr_sysfw, imagesize_sysfw,
-                   hashval_sysfw, load_addr_sysfw_data, imagesize_sysfw_data,
-                   hashval_sysfw_data, sysfw_inner_cert_ext_boot_block,
--                  dm_data_ext_boot_block, bootcore_opts, debug):
-+                  dm_data_ext_boot_block, bootcore_opts, debug,
-+                  pkcs11_module=None):
-         """Create a certificate
- 
-         Args:
-             cert_fname (str): Filename of certificate to create
-             input_fname (str): Filename containing data to sign
--            key_fname (str): Filename of .pem file
-+            key_fname (str): Filename of .pem file or PKCS#11 URI
-             sw_rev (int): Software revision
-             config_fname (str): Filename to write fconfig into
-             req_dist_name_dict (dict): Dictionary containing key-value pairs of
-@@ -259,6 +331,8 @@ emailAddress           = {req_dist_name_dict['emailAddress']}
-             load_addr (int): Load address of image
-             sha (int): Hash function
-             bootcore_opts (int): Booting core option, lockstep (0) or split (2) mode
-+            pkcs11_module (str or None): Path to PKCS#11 shared library, or
-+                None if already configured via openssl.cnf or the environment
- 
-         Returns:
-             str: Tool output
-@@ -342,10 +416,10 @@ coreDbgSecEn = INTEGER:0
- 
- {dm_data_ext_boot_block}
-         ''', file=outf)
--        args = ['req', '-new', '-x509', '-key', key_fname, '-nodes',
-+        args = ['req', '-new', '-x509', *self._build_key_args(key_fname), '-nodes',
-                 '-outform', 'DER', '-out', cert_fname, '-config', config_fname,
-                 '-sha512']
--        return self.run_cmd(*args)
-+        return self._run_cmd_pkcs11(pkcs11_module, *args)
- 
-     def fetch(self, method):
-         """Fetch handler for openssl
-diff --git a/tools/binman/etype/x509_cert.py b/tools/binman/etype/x509_cert.py
-index b6e8b0b4fb09..cdeff1a227a1 100644
---- a/tools/binman/etype/x509_cert.py
-+++ b/tools/binman/etype/x509_cert.py
-@@ -19,6 +19,18 @@ class Entry_x509_cert(Entry_collection):
- 
-     Properties / Entry arguments:
-         - content: List of phandles to entries to sign
-+        - keyfile: Filename of the PEM key file used to sign the binary
-+        - pkcs11-uri: PKCS#11 URI for signing via an HSM, e.g.
-+            ``pkcs11:token=mytoken;object=mykey;type=private``. When provided
-+            via ``-a pkcs11-uri=...`` on the binman command line (or via the
-+            ``BINMAN_PKCS11_URI`` make variable), it overrides ``keyfile`` for
-+            the signing operation.
-+        - pkcs11-module: Path to the PKCS#11 shared library (.so), e.g.
-+            ``/usr/lib/pkcs11/libsofthsm2.so``. Only needed when signing via
-+            HSM and the module is not already configured via ``openssl.cnf`` or
-+            the ``PKCS11_MODULE_PATH`` environment variable. Provided via
-+            ``-a pkcs11-module=...`` or the ``BINMAN_PKCS11_MODULE`` make
-+            variable.
- 
-     Output files:
-         - input.<unique_name> - input file passed to openssl
-@@ -27,6 +39,16 @@ class Entry_x509_cert(Entry_collection):
- 
-     openssl signs the provided data, writing the signature in this entry. This
-     allows verification that the data is genuine
-+
-+    To sign with an HSM, pass the PKCS#11 URI and optionally the module path
-+    at build time::
-+
-+        make BINMAN_PKCS11_URI="pkcs11:token=mytoken;object=mykey;type=private" \\
-+             BINMAN_PKCS11_MODULE="/usr/lib/pkcs11/libsofthsm2.so" \\
-+             PKCS11_PIN="1234"
-+
-+    The ``PKCS11_PIN`` environment variable is used by the openssl bintool to
-+    append ``?pin-value=<pin>`` to the URI when required.
-     """
-     def __init__(self, section, etype, node):
-         super().__init__(section, etype, node)
-@@ -53,6 +75,8 @@ class Entry_x509_cert(Entry_collection):
-         self.dm_data_ext_boot_block = None
-         self.firewall_cert_data = None
-         self.debug = False
-+        self.pkcs11_uri = None
-+        self.pkcs11_module = None
- 
-     def ReadNode(self):
-         super().ReadNode()
-@@ -61,6 +85,10 @@ class Entry_x509_cert(Entry_collection):
-         self.key_fname = self.GetEntryArgsOrProps([
-             EntryArg('keyfile', str)], required=True)[0]
-         self.sw_rev = fdt_util.GetInt(self._node, 'sw-rev', 1)
-+        self.pkcs11_uri = self.GetEntryArgsOrProps([
-+            EntryArg('pkcs11-uri', str)], required=False)[0]
-+        self.pkcs11_module = self.GetEntryArgsOrProps([
-+            EntryArg('pkcs11-module', str)], required=False)[0]
- 
-     def GetCertificate(self, required, type='generic'):
-         """Get the contents of this entry
-@@ -80,6 +108,13 @@ class Entry_x509_cert(Entry_collection):
-         if input_data is None:
-             return None
- 
-+        # Override keyfile with the PKCS#11 URI if provided. This must be
-+        # done here rather than in ReadNode(), because subclasses (e.g.
-+        # ti_secure_rom, ti_secure) call super().ReadNode() and then
-+        # overwrite self.key_fname with the DTS 'keyfile' property.
-+        if self.pkcs11_uri:
-+            self.key_fname = self.pkcs11_uri
-+
-         uniq = self.GetUniqueName()
-         output_fname = tools.get_output_filename('cert.%s' % uniq)
-         input_fname = tools.get_output_filename('input.%s' % uniq)
-@@ -93,7 +128,8 @@ class Entry_x509_cert(Entry_collection):
-                 key_fname=self.key_fname,
-                 cn=self._cert_ca,
-                 revision=self._cert_rev,
--                config_fname=config_fname)
-+                config_fname=config_fname,
-+                pkcs11_module=self.pkcs11_module)
-         elif type == 'sysfw':
-             stdout = self.openssl.x509_cert_sysfw(
-                 cert_fname=output_fname,
-@@ -102,7 +138,8 @@ class Entry_x509_cert(Entry_collection):
-                 config_fname=config_fname,
-                 sw_rev=self.sw_rev,
-                 req_dist_name_dict=self.req_dist_name,
--                firewall_cert_data=self.firewall_cert_data)
-+                firewall_cert_data=self.firewall_cert_data,
-+                pkcs11_module=self.pkcs11_module)
-         elif type == 'rom':
-             stdout = self.openssl.x509_cert_rom(
-                 cert_fname=output_fname,
-@@ -116,7 +153,8 @@ class Entry_x509_cert(Entry_collection):
-                 bootcore_opts=self.bootcore_opts,
-                 load_addr=self.load_addr,
-                 sha=self.sha,
--                debug=self.debug
-+                debug=self.debug,
-+                pkcs11_module=self.pkcs11_module
-             )
-         elif type == 'rom-combined':
-             stdout = self.openssl.x509_cert_rom_combined(
-@@ -143,7 +181,8 @@ class Entry_x509_cert(Entry_collection):
-                 sysfw_inner_cert_ext_boot_block=self.sysfw_inner_cert_ext_boot_block,
-                 dm_data_ext_boot_block=self.dm_data_ext_boot_block,
-                 bootcore_opts=self.bootcore_opts,
--                debug=self.debug
-+                debug=self.debug,
-+                pkcs11_module=self.pkcs11_module
-             )
-         if stdout is not None:
-             data = tools.read_file(output_fname)
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index ca5149ee654a..e74120ba3f8f 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -6884,6 +6884,102 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         err = stderr.getvalue()
-         self.assertRegex(err, "Image 'image'.*missing bintools.*: openssl")
- 
-+    def testOpenSslBuildKeyArgsPem(self):
-+        """Test _build_key_args with a regular PEM key file"""
-+        openssl = bintool.Bintool.create('openssl')
-+        args = openssl._build_key_args('/path/to/key.pem')
-+        self.assertEqual(['-key', '/path/to/key.pem'], args)
-+
-+    def testOpenSslBuildKeyArgsPkcs11Provider(self):
-+        """Test _build_key_args with a PKCS#11 URI when provider API is available"""
-+        uri = 'pkcs11:token=mytoken;object=mykey'
-+        openssl = bintool.Bintool.create('openssl')
-+        with unittest.mock.patch.object(openssl, 'run_cmd',
-+                                        return_value='pkcs11 provider'):
-+            args = openssl._build_key_args(uri)
-+        self.assertEqual(['-provider', 'default', '-provider', 'pkcs11',
-+                          '-key', uri], args)
-+
-+    def testOpenSslBuildKeyArgsPkcs11Engine(self):
-+        """Test _build_key_args with a PKCS#11 URI when only engine API is available"""
-+        uri = 'pkcs11:token=mytoken;object=mykey'
-+        openssl = bintool.Bintool.create('openssl')
-+        with unittest.mock.patch.object(openssl, 'run_cmd', return_value=''):
-+            args = openssl._build_key_args(uri)
-+        self.assertEqual(['-engine', 'pkcs11', '-keyform', 'engine',
-+                          '-key', uri], args)
-+
-+    def testOpenSslBuildKeyArgsPkcs11Pin(self):
-+        """Test _build_key_args appends pin-value to URI when PKCS11_PIN is set"""
-+        uri = 'pkcs11:token=mytoken;object=mykey'
-+        openssl = bintool.Bintool.create('openssl')
-+        with unittest.mock.patch.dict('os.environ', {'PKCS11_PIN': '1234'}):
-+            with unittest.mock.patch.object(openssl, 'run_cmd',
-+                                            return_value='pkcs11'):
-+                args = openssl._build_key_args(uri)
-+        self.assertIn(f'{uri}?pin-value=1234', args)
-+
-+    def testOpenSslPkcs11UseProviderCached(self):
-+        """Test that _pkcs11_use_provider caches its result after the first call"""
-+        openssl = bintool.Bintool.create('openssl')
-+        with unittest.mock.patch.object(openssl, 'run_cmd',
-+                                        return_value='pkcs11') as mock_cmd:
-+            result1 = openssl._pkcs11_use_provider()
-+            result2 = openssl._pkcs11_use_provider()
-+        self.assertTrue(result1)
-+        self.assertTrue(result2)
-+        mock_cmd.assert_called_once_with('list', '-providers')
-+
-+    def testOpenSslRunCmdPkcs11NoModule(self):
-+        """Test _run_cmd_pkcs11 without a module just forwards to run_cmd"""
-+        openssl = bintool.Bintool.create('openssl')
-+        with unittest.mock.patch.object(openssl, 'run_cmd',
-+                                        return_value='output') as mock_cmd:
-+            result = openssl._run_cmd_pkcs11(None, 'version')
-+        mock_cmd.assert_called_once_with('version')
-+        self.assertEqual('output', result)
-+
-+    def testOpenSslRunCmdPkcs11WithModule(self):
-+        """Test _run_cmd_pkcs11 sets PKCS#11 module env vars when a path is given"""
-+        module = '/usr/lib/pkcs11/libsofthsm2.so'
-+        openssl = bintool.Bintool.create('openssl')
-+        with unittest.mock.patch.object(openssl, 'run_cmd',
-+                                        return_value='output'):
-+            with unittest.mock.patch.dict('os.environ', {}, clear=False):
-+                openssl._run_cmd_pkcs11(module, 'version')
-+                self.assertEqual(module, os.environ.get('PKCS11_MODULE_PATH'))
-+                self.assertEqual(module, os.environ.get('PKCS11_PROVIDER_MODULE'))
-+
-+    def testX509CertPkcs11(self):
-+        """Test X509 certificate creation using a PKCS#11 URI instead of a key file"""
-+        PKCS11_URI = 'pkcs11:token=test;object=mykey;type=private'
-+        PKCS11_MODULE = '/usr/lib/pkcs11/libsofthsm2.so'
-+        original = bintool.Bintool.run_cmd
-+
-+        def fake_openssl(self_tool, *args, binary=False):
-+            if self_tool.name != 'openssl':
-+                return original(self_tool, *args, binary=binary)
-+            arg_list = list(args)
-+            if arg_list == ['list', '-providers']:
-+                return 'pkcs11 provider'
-+            if '-out' in arg_list:
-+                tools.write_file(arg_list[arg_list.index('-out') + 1],
-+                                 b'\x00' * 32)
-+            return ''
-+
-+        entry_args = {
-+            'keyfile': self.TestFile('security/key.key'),
-+            'pkcs11-uri': PKCS11_URI,
-+            'pkcs11-module': PKCS11_MODULE,
-+        }
-+        with unittest.mock.patch.dict('os.environ', {}, clear=False):
-+            with unittest.mock.patch.object(bintool.Bintool, 'run_cmd',
-+                                            new=fake_openssl):
-+                data = self._DoReadFileDtb('security/x509_cert.dts',
-+                                           entry_args=entry_args)[0]
-+        self.assertGreater(len(data), len(U_BOOT_DATA))
-+        self.assertEqual(U_BOOT_DATA, data[-4:])
-+
-     def testPackRockchipTpl(self):
-         """Test that an image with a Rockchip TPL binary can be created"""
-         data = self._DoReadFile('vendor/rockchip_tpl.dts')
--- 
-2.34.1
+> +#ifdef MKEFICAPSULE_PKCS11
+>   	if (pkcs11_cert || pkcs11_key) {
+>   		gnutls_global_deinit();
+>   		gnutls_pkcs11_deinit();
+>   	}
+> -
+> -	return 0;
+> +#endif
+> +	return ret;
+>   }
+>   
+>   /**
 
