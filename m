@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 582A8F94CB3
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 22:49:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA8F2F94CB3
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 22:49:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED5F484319;
-	Wed, 22 Apr 2026 00:49:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3F11E842FD;
+	Wed, 22 Apr 2026 00:49:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MP+mclpo";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Pa6b4a6M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0AEE842FD; Wed, 22 Apr 2026 00:49:20 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 1DFE68419C; Wed, 22 Apr 2026 00:49:35 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 044B483936
- for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 00:49:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B55D83936
+ for <u-boot@lists.denx.de>; Wed, 22 Apr 2026 00:49:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-671ae79e617so6108523a12.3
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:49:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776811756; cv=none;
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-ba388bc0a9dso845394566b.1
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:49:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776811773; cv=none;
  d=google.com; s=arc-20240605;
- b=b1ADRY9u6gCmtU+0EG1T7stMrartnDYbAiG3YOk8cPvSVAuILLHS2exctR+Dli8lz5
- BBldRgYArN/sWlD23XUjc+G/EL+QFzEAzDzngvyMYaQwKZsEeW5eYmUv9F7j3kTWFyLX
- cf0Ty5/42wynThcZZPllcVWSemx4Fw6clhrYtpMaOkPGeNoiZo45+D+acOVH5UqsCQ+R
- Lo0nX3+ilWJBJhNfZn7j+pdNlLpFTCu1OizX3ij9fNiE8+jZ/w0IjPdAP9LUbetpJtzv
- AQSkudA/LdirG1QjQxOE9Xsz4awqTx1K2hlsXxfzjysNsvLEuZ+Ktofq1zqlpZn8xSkp
- w+/Q==
+ b=E3PzzEgxWZfaWFM49eJAtzFjw36Ze2XvWLZSc6vrQwsJqRZ7w9HKIjYUzcsaQ/8w01
+ j2kXu7zXtXMk5JhjE3da8XciLiYwSw77DUcJVk0N3YZ5SyTpJfjmEPmNlS8rlJNxI7Ry
+ vSPcSoVj06kODw1IjRzx35DAnSaWhW9JlCRRujd0awkHNwDEjhzUGpDCPBp/3SjTIv90
+ jFA1fr2S2HtQYa2ogekWTRMKV3pzOxF5V3LkuyiRJFHPZJHSdVk8Z9JNA6ENEYvL0M3A
+ iA+iO5mgv+TM3MZj+88LWQb50h4MS6ngx3xctCv8BJVKjcj6qAyDxdF3AGtpM1wVrLsq
+ gFvg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=ZRzqj+F/kgAqg7nO+HAZlpjlh1bPqWJsT4cDg4AY8Xg=;
- fh=pbCOP8hPpdi+r37R4azvlvc0fZkZayccZKdYXQY2i9k=;
- b=RZAB2t7mA8Jyeudwc9XKvHUZbPNV+XXTK1enGX9B/ye/1fjPm26dbheFrUGWuP/xeE
- WbMi38LwkV6fkgbakI8WsxxZ7pxluNpjmtqRR5mSEh6XZvSbNa/y13Ild7aGjuOQ5Gpi
- w49xprcf8cBMbQCKQMWUqA0dWFOht8+AwY9DXf0i548f22ZMeAt86PeGX59eAUeKr/zr
- 5sXBL4GmjXIOnx/m2iaOtns7UQwa1v3kYEiF7GpZgTky0ua4Yohi0Mq3qsiBsRGzxL+o
- xx3SaJLkJC12Vrav9EOQ1EsM+nMqUuhcbWWDLRSDYFwtLB1VIQI/XTWwRhnUeWOglRaw
- AYFg==; darn=lists.denx.de
+ bh=qZeYl1byV4sj7WXeyYiiD3MJq3RnIvxiup2XqDflAvw=;
+ fh=UJSFcnL+qFtgZwBT5ygkk9y+iYxU8voFUi5KTuzZZ3s=;
+ b=EaP15EYFRNw227TuLfXtLMAXcR9rP/919tbomdQeIEe0CoSHBaDZjt95lPh2CLJZtj
+ fgbKi/3izbJGqCw7i+0mP9SLa4CJUHOaLNeKkl90MzYCSHKzATNAJxT+ZerfULZxzrFv
+ Fxg6TSHsWPd5cIzt/hdUk5CJa6VGq08aKXrE6V3o37EHRIiimWs95rnJdZM3EmKtxRQp
+ wNzOJ63SiiiWlI5lfOi6K8BAWAp31w5nG2lIFpVJ4gC335qUPSAHX8GW2oRQmZgT0r/X
+ o8Fh3lunW1VFFjZF3BOf8LA8RlP30a81fHERZQF2DYmNzN2NyTw5QKIAE0ILFMrChVOc
+ MsWg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776811756; x=1777416556; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776811773; x=1777416573; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZRzqj+F/kgAqg7nO+HAZlpjlh1bPqWJsT4cDg4AY8Xg=;
- b=MP+mclpo/0eALYv27xXZgWOPkMyWQae6gS/3gxbVtkEjfpj4sufeOqMEeCxwcTTsJU
- ukUJny/bEexZbwGpRWChipO4Yih7jqHk7QJfE12uHjmbnr/puMJRLBuKI9xqwLC2xoG2
- k4Qr4uIiHfcr20jg0dBCgyEH0sXyagtGHXVK0=
+ bh=qZeYl1byV4sj7WXeyYiiD3MJq3RnIvxiup2XqDflAvw=;
+ b=Pa6b4a6MBGVxp8iBSGD/fqRiW4KbMeUpRD5Tz9WS9pT9molOaz7wccYmaCW0QA+LSZ
+ OtNUehTVkxgwJSLWHJCJrzJepi3j0HDPuDjWx4tYpBeNTJh5kp7irDKooNPj5zPZZCik
+ yjhoo23/fL+8bWgkrQTYyDPqt2gR4BNkTJCKM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776811756; x=1777416556;
+ d=1e100.net; s=20251104; t=1776811773; x=1777416573;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZRzqj+F/kgAqg7nO+HAZlpjlh1bPqWJsT4cDg4AY8Xg=;
- b=Wk1AhYS9A0xECMvG7nRBj23sb0MnV7+CqZUes9BeDGw9dGagW9oPX/Xlw3d/qW6gOr
- QrmSeFHCWYxvzWNQ8gO77Gt6KlAFwCMI29EZ3ttw+Juh+ywd+Ov69RBDB4g8hqf8FNss
- hyfAezE5AUTpGNLvjMm7tBvaPskwVzzDEYQEWFLTB4gLr08J65ZwDyIk42xe0GV1dkyB
- MCYNfUsThwyUVANDVhi8+xCqTBfp397EAZ2EDjj5lRzG3uBK0D0skyx+5IPY+Zox+Daw
- xFoTtDf0VeJVnMhXbB34j20vBADafXog6q8Yj9tO+Jgl4Dk8Y2nXaXY1mEiVG8o1bsqE
- D/Lw==
+ bh=qZeYl1byV4sj7WXeyYiiD3MJq3RnIvxiup2XqDflAvw=;
+ b=BY0CqMt745mHZ1rAWgKbp/2nAzhaNE3uSJMRg3GeymgnAeoQyZBg218TL98Ao8KkeS
+ OYPt13LIWoOLsqKBJbRWQfUFysqkaq7abY/l2JwY97m+TR8Yuh0Z+kAHmgTejwFYQdTe
+ vkJMfYmbr9W/R6o47TX79B9fs6D5G9hCRIcwOUMRvAjGY7Tw2b81eDthlffdRTi65r0e
+ BUX1lM4Kh9WxTuarVSwMhCE1UBCYY0Eq6Umd92I/JO7rByvdJgPO5giHNqljd/y4axN6
+ q2mqIHHBf/wwAR5Bd+NnfV+sFExnY4u/XKVgsbS6UDcKPyn3xijqhVLsg5q/mWRQIvpR
+ O4Qg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8JAbm5Js20zxXdGAXQR9r/se21LDX13/anTtLdEpxfjIj9cNIPG7MzY4wY9YnDhihrSMh4b58=@lists.denx.de
-X-Gm-Message-State: AOJu0YyF4RnK7vcJ9EK9xcmjPxItVNA6VuSIpVP5Vc3XmMhejuwmoOni
- bjSIFwS/trJek5q7GOs27GJvLmSyWyXxlhugyiEe8SbH5/1BOV+WbY0/9sNNWMYgtp0HPfI2vFX
- z3InMTwzEkF0jWxzqJrHf7djeUWfOCbLcJj8JUwyA
-X-Gm-Gg: AeBDiesLkZGFyApLDQ7hGNf/ZqBZ/xz9NPCuehnvR+08CZ8nPVOdCusnt9LJo++tykr
- pi4j/vhjq+hrTfT+tB9c4C/qeqTB1EuiDFq1C6Jvra7l+l0clT9xSZVh9Rj2gxmJCXOAqhYwRU5
- 9FiQEsOvemv5eNwUIeUybHXp+uCcN2GaPDI4Iy0Sz5yrB8jQUQozbGMw8l6uc/NoNGXwofriSlW
- Gy/SNn98/p27w8CGrtwwtv5Y7ssHa2vQCAx9SjBp4iyo0PiRZlOSQW+YKbusXgyJ+kboKvYNQhz
- TBOgtF5MpZdGs/AZKInKE8I+tDqXAh8=
-X-Received: by 2002:a17:907:d20:b0:ba4:bb78:b79a with SMTP id
- a640c23a62f3a-ba4bb78b9a9mr840491366b.44.1776811756196; Tue, 21 Apr 2026
- 15:49:16 -0700 (PDT)
+ AFNElJ/LnigFflLQWq142AKuZtjl3TgiY4/dL3YCG+pg4i1kHG5pU1SX3veRL74EKPpeVA58AdS6FTE=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywb9jO0C4Cla8bMXX0bY8hRvsjfQnVlOygHL5u2gmSFjpQ4lFmf
+ SRVnXG5yVxbA1mGEwdmZz4CGkNv/Nqq6dljTmVCrUgzBvq7RmAAhh+QJccTN3uMUEJn6iRqHcua
+ C6dkEYPtlXPYXOq+ShSsEtsxEWNYbWZF8wWTyFKat
+X-Gm-Gg: AeBDies5LrZ07o4doXkZi85qoLn12j7O59A6zYtdv0Emki1RQBUNCK3IvZoeYqsf1BX
+ hT61/S9L0D02mkWAP0tt6Bx93fTYxYYzj9Vsk65tt1Qm4B7uUssPIuZTwmc816CWRoKk/vM6wfK
+ ghTklBhyFipuMKpaOdjcXjGfIXReIyXftpSzPy64lzE+D2AaPp1FPWb2bDm214B7+dD4K1E/ggF
+ F6ZICMwQ7UnV0plo1WvY6kuSmQhkCZMxaELFgbIeG257gZNEfAy8a7qn84at9tCaPkb2ygDphnm
+ PklZFRowD5wlKfXyv6lHI2bW2qM/esM=
+X-Received: by 2002:a17:906:6a13:b0:ba7:9eae:18a9 with SMTP id
+ a640c23a62f3a-ba79eae1ab8mr557327166b.17.1776811772726; Tue, 21 Apr 2026
+ 15:49:32 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260420220804.71564-1-heinrich.schuchardt@canonical.com>
- <20260420220804.71564-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260420220804.71564-3-heinrich.schuchardt@canonical.com>
+ <20260420220804.71564-5-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260420220804.71564-5-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 22 Apr 2026 10:49:01 +1200
-X-Gm-Features: AQROBzC518i2L42JTQDjVKS2h3Vo41n_uNYAGBU5beXE8i3vWP3TflR09gejMDk
-Message-ID: <CAFLszTgLk_hpFqzbnBA2pt_nUWqJKr5Xj=L47QUSKQNRaPzX9A@mail.gmail.com>
-Subject: Re: [PATCH 2/4] cmd/acpi: add optional index parameter to acpi dump
+Date: Wed, 22 Apr 2026 10:49:15 +1200
+X-Gm-Features: AQROBzAwOu-Qiasq-rIfEiMpk4RBCp_f2zKGY2JnFP68lN1wfbdpuN8erTMRks8
+Message-ID: <CAFLszTgBvFjAkb86fBJfQ-8djpUkKHcV3+cHdbYk7HGe2_GCJQ@mail.gmail.com>
+Subject: Re: [PATCH 4/4] doc: document index parameter of `acpi dump`
 To: heinrich.schuchardt@canonical.com
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
@@ -115,29 +115,23 @@ Hi Heinrich,
 
 On 2026-04-20T22:08:00, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
-> cmd/acpi: add optional index parameter to acpi dump
+> doc: document index parameter of acpi dump
 >
-> Add an optional index parameter defaulting to the acpi dump
-> sub-command.
+> Describe the new index parameter.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 >
-> cmd/acpi.c | 19 +++++++++++++------
->  1 file changed, 13 insertions(+), 6 deletions(-)
+> doc/usage/cmd/acpi.rst | 8 +++++++-
+>  1 file changed, 7 insertions(+), 1 deletion(-)
 
-> diff --git a/cmd/acpi.c b/cmd/acpi.c
-> @@ -12,6 +12,7 @@
-> +#include <limits.h>
+> diff --git a/doc/usage/cmd/acpi.rst b/doc/usage/cmd/acpi.rst
+> @@ -125,6 +125,12 @@ acpi dump
+> +Index
+> +    Hexaecimal index starting (default 0)
 
-This include seems to be unused?
+Hexadecimal
 
-> diff --git a/cmd/acpi.c b/cmd/acpi.c
-> @@ -183,9 +184,11 @@ static int do_acpi_dump(struct cmd_tbl *cmdtp, int flag, int argc,
-> +     char *endp;
-> +     ulong idx = 0;
-
-endp is set but never checked. Please either check that the entire
-argument was parsed, or use hextoul(argv[2], NULL) and drop endp
+Seems incomplete, perhaps: "Hexadecimal zero-based index (default 0)" ?
 
 Regards,
 Simon
