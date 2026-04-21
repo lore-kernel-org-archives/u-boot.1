@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE894F8FA66
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 12:26:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9F68F8FA66
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 12:26:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C62888419C;
-	Tue, 21 Apr 2026 14:25:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1856983A91;
+	Tue, 21 Apr 2026 14:26:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="KJ1F5s/4";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="rWFg6dlw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84A94842E6; Tue, 21 Apr 2026 14:25:56 +0200 (CEST)
+ id DBEAB842EF; Tue, 21 Apr 2026 14:26:04 +0200 (CEST)
 Received: from DB3PR0202CU003.outbound.protection.outlook.com
  (mail-northeuropeazlp170100001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c200::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65DB683A91
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 14:25:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3A8B8425F
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 14:26:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iagP6jPsC0WaGkThMaj8IiF2QmIbkf2sZNYVkGIZJair6zGBuHiC/xad4Sm6ClTrE3exs1u3E2lJyHHP7OX6wR7T3FCyD/uY4QOvk/Gx6uGMUk2f+nMUN8LZuAJEHHHxmeSsMl+VYk7tDG6Uo+l4oFnShf1j7wnOs+RLbP87B6PnXeN5sZB5sJNIX1zb51JbOb11EC9F1rDiNGwqDg9xuPI87qBZjaFQIHS1BnTsv1R9tKjTFZG38s3GlAXSUJBbpQny0GDIy4yEA2lyeYQ0ofiRLwTS/wrkZzh6ioRbfV1P3XzXOnFd2zBNjRqCbxXTpTMGM6J+6k3EDXHi2fDklA==
+ b=td6AO0ijFg9XWIDDZkyLbxqvDOMuiQQwp9XrtdELMzUlrDyD2NYy99QTMmKsYMNMEego8+mtyzKc+jVXlVDAjtqWUXth0Py9u6m4Qc0K/EeMslTSZyoQDAH7eDZgUfnCphYFLqoWslo1GukAT6AoXtQ0g34fOZhn6B9rRzlkPG6V8vKn4q4n+iruI+fdAKmNJ5XvhwRJSdKO3NRirRu/RhDfqlD4zDe+WFaGBd2sGi6LUXtNXiZcT9jQYxrqNtW2Or4rP3cJnxYMoEwcp7KMtklyKJYqTmYFuxoievaLcx1esUivEdaTprXq8zMd7mVEeJUwewEizzObqFHRUyYKuQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/LFitiloXYhlj0WqUyr0RQXucTwZVRmGDvQtbwGcm9A=;
- b=GAvG8VY7vBLpyA+F9rws8y1daQcXNEQwarNMfkDvRXn3ARmlkbacvbGrtmrlWMJF9BVsijoNE2mLZafJxNUZw7mw7Z+OYlMCNznN/eQkuz/IT6AjAsW83y6r4cma+2FYOuIOkFQdfPC5QVpEvnc78qV82EVV1FlLMUZLIcp9uWnMkQdzm1+E0zCjT+ynhZniyYTcbBuOkOfXTI8j6mDx7K4kqOEGM5Hsh+9H43lkrkDt2QVkpHI4cRqpwIv8EvApK9hAxMWjLFe0cFKtIiVR+U3yw3hUUYR5U0A+kqjKpVhIJUwsXJYMHn3MH52of566gAkQ6EhopjZzR12NIeMYGg==
+ bh=ZH7f9yhWeZFm3YZvZr7DWSiwy9O4/el39TnZGM/o3xo=;
+ b=Il86WkSqT8kCBmv5vISmroxYmQSP/XMc8X/CRKBKSm0nSenslHIT6lN1060cN5poL+Z0fhAyeLUJvi0Oa6trL6w+rzZBEYIN1AzCAnI3c56YIk9AuFXCkmpUv2spOjt1sAAWkoWiEFVGunvPda3W+/n4GtBEVYqkvu4/wuQoICy+qxUXk2HGqR9u6TsizkFOpeeIWY+2wB3VAJtzmOUgJCWG4d9QAGCfW+YaIqU7PzmmQbJndFsyf9Keq4g08Dz9DgO63375dfKKBwumtLgTpCwMEpRUmp6bjMfD1+lTxQP0iLNaEPJ5yMdwoNU66+a72ZD8G7kd57yegy+F7Ru96w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/LFitiloXYhlj0WqUyr0RQXucTwZVRmGDvQtbwGcm9A=;
- b=KJ1F5s/4GHV0XBr9+1KV3DbXRrOUfuNp8PL81mZoNmVUKXEDq6WKzWYZ3MZ90nXWHADPHcqVuCgdFHHYZEWjKnDDGeoUdvd389dzWe5Z4anlYYGDFvxbq2sTjCRigJzxSTY63LW/kCjzDH0DnAd5QX/t0lc/YOfz/r/fIHeyeEarjpV6QotkCIjPc6ykzxP01QFWDbryWCkE07e+yvhcHXzEIo55feyuGC8iuTn4fJDYVulFMRg10XuoAViKKJqlXjCHSfhacUAsGVghCqEijg6ngwdlZzlg+TuVX/DY6c6McfRGpEjAc/R8Xa8ocQgDuoISCgtfqUCcK0uJYon0vQ==
+ bh=ZH7f9yhWeZFm3YZvZr7DWSiwy9O4/el39TnZGM/o3xo=;
+ b=rWFg6dlwEwIYxcalh8bxAStkd6MQP0XqHTfb7lsAG0evHYQehcHdp0u/N5xBcd+kwu46Fz/8pxu41BiHozTb9KWjn/YNkmQwts2linWkSnLF/FI8SafmRSP05L59Ef2xRRS7xqacBGFPoVrQm0Z/2L42HvQ9u08AN9ri71DT/z9oTeS5/2uZHDEIWMY0ERwiFS1D16Zy+wzQx38+jc9AaC5kjGSDmk/M0X6OcSjpjUkhawb0qtcUlrzt80bZ1Ui8Rize4Rr7g7RqwBvosqsULKWCyjbKHYjn6WF+g+x7tvff+DgdJQYl8zrwViWcvGT8lD2ufbz4JmQiP+BEkGChPA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
  by PAXPR04MB9349.eurprd04.prod.outlook.com (2603:10a6:102:2b8::9)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.32; Tue, 21 Apr
- 2026 12:25:51 +0000
+ 2026 12:25:58 +0000
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::4972:7eaa:b9f6:7b5e%3]) with mapi id 15.20.9818.033; Tue, 21 Apr 2026
- 12:25:51 +0000
+ 12:25:57 +0000
 From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Tue, 21 Apr 2026 21:41:21 +0800
-Subject: [PATCH 09/15] board: nxp: common: fix PFUZE100 DM build and unify
- DM/non-DM handling
+Date: Tue, 21 Apr 2026 21:41:22 +0800
+Subject: [PATCH 10/15] imx8mq: evk: Migrate to DM PMIC framework
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260421-imx8mq-dm-pmic-v1-9-0e2b490542b1@nxp.com>
+Message-Id: <20260421-imx8mq-dm-pmic-v1-10-0e2b490542b1@nxp.com>
 References: <20260421-imx8mq-dm-pmic-v1-0-0e2b490542b1@nxp.com>
 In-Reply-To: <20260421-imx8mq-dm-pmic-v1-0-0e2b490542b1@nxp.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
@@ -82,67 +81,67 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|PAXPR04MB9349:EE_
-X-MS-Office365-Filtering-Correlation-Id: 782f51bd-4c2b-427b-d040-08de9fa12026
+X-MS-Office365-Filtering-Correlation-Id: ee616c7f-133b-4182-2d33-08de9fa12412
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|19092799006|366016|52116014|7416014|376014|1800799024|38350700014|56012099003|18002099003|22082099003|18092099006;
-X-Microsoft-Antispam-Message-Info: Ed5dUrZ9vwl8dotoTzYqiKvZUFXVexYyoELHjkZzbcTK9Civ1qw1Hb4IPLr0NJcyFM4/XUdnhtbH4chWx832Z79iNgqK5PGfYFGNYpLvpO0nD4SPLL9Lzn2MT6GP998Ya2SckNHo2SaXp5nRXWnyAaB9JaPWBdwi6mFQHRgNnbeA7RQ0nWxWuugVz/3k9ePmvDTB6PUOUjfoyRkX88ZPEGKzLFNSExuZQLfAYYnUh+nZolELtsCwWnrWJdnLfm8Cxm+KSaiqSSh8Z4TSb5MaT/ku8RAH0E+NfhF7+6dq15NrNYJwJjwaOgzk2DTkSCPUoOL0QFz06+ty23i9+/W4xjfr3BwOEn0K/yOlVmMsPE5fyvyLABfFrA4GLB5V5DBxyT61wUY4Sru6Ej4BZWxGi76c645R+ElR5u6TfusF3CEsQWt+Pnvc9Pq+4fbZsrQg4oeytaqrdMPNlpQwgZrx8ESs/h+5IVIF4cIfS8jx3uG4w3m8wtfo9ldKO8o8YHF0l1CMhWGYRY7SZftR3fcwiKsfFeMSboGc0M1o4A9fdD+Rgc838G/QCHsXB5+v6X9UNyeCftTmHxKobUQY8449AQxPKILH78BLAyUrMDzyT7tBRKazRmJz4dI3iTiAxC/zTPAyjzeEoNhLPqpsadz86Fe+VvB08QZk7uJnH1qyg0Yo/W6yl2uAnKZxfOHHw3OVnQLdF8B+FYiMPJQRcsSX2P1S9lU7uy6DliYDBUUFGVz6L/xS5jGvQSzjjCMkA4wh2LymnM3cHoJjsh6SdwqDMidu5/mLQpyKOg2zuVYpxMw=
+X-Microsoft-Antispam-Message-Info: huuNcayi+O7mHG08Lz3FswqLa/qs5fako3GywbS9C6E9bBJYzjA+U680Gt15bAOaTGuPEkiO9vuvY/6Chm0+l8F/yA2PNY1gH+26n1CBkUKyaD7M265TQWoI+G2IDHmkvdN0cSTPezyXWxNo2vuxwdhfNDphVQyO2G5NHkbtQBoRMsu3y36D5OeyVKRDGEWeBm46smXVo5CyhG2Q3Ji6vbb2PjkrW+F/H/wCECdFSxQ7HB8kNSJoWhVmrGLRytfBpBmeaFG1IvdPOg7HtLYJk8O5qaFQ55567sALfx5UjNKcRlG5AHCfpE5oP5anGk0Y0/eBu77/jOBNugRyDzXhCE1qrncQ4KymLhqn8HX0DdSBHBg5s8FlNTx/cgrJYmELKVZnJGxT3T8MnivO5A3YhDFgs1LQL2Dhr0r8lUCxCot4fvqyngm6TbLVtGrN1BI+0rJoKl1RBWMdrQG8ZuOEdqL4MEk3TaJOG6yezZJmUxPpJELnegIS8YD7dHROD3rWgL7HkyjadzqM1TQBzAat1vwSm3TI9AvXmP/askplvFvWKk5UKjiFeg1ZtHvi0hol0KWsqnVg2m6cACBiZBwnzyThsBRXJa0pmFgCji+1PgP+AIe33f/fBvvmIq8aWn7ve8N6oxuQdiX3MRQXKLZjeZ61AZsjL8lEF2vdCWhP/nSVr+2cXALhBwUH2Q33L8L8Vy0A9JhTupykTwZsWXGOiBAUlWmGc5e9Q1gGvwoDj34Copie8/lTYY1NXZLHLTrho/jWJ8dSs3jzco21f3kEm3XhTgGMxm5UsVa3bMDMzdU=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(19092799006)(366016)(52116014)(7416014)(376014)(1800799024)(38350700014)(56012099003)(18002099003)(22082099003)(18092099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UXAwVTZ3L2dtYy80WTRubDR5QlcyVHdrWWRFa2VMRW9qT05OdFFnZmVpU29r?=
- =?utf-8?B?VUkwRnd3UmIwTnpicFU4YUE5akp0SWdhc3lLb2ttdHNHTHVsaGxJSzVpWkJT?=
- =?utf-8?B?OVhzTGtNTStkcWZjZVhaRENObFMwcFl3ZWxVZnNWZ2JkYlFQa3hvN3VpMWdH?=
- =?utf-8?B?TmJuU2hPOXVWMmJDWFdwVVVsOWVXenh4R0F3cnkzYSswUDE4K2YyZVRtWHk4?=
- =?utf-8?B?bVNyQ2hHNEpSYmV0UXZwMnlCM2ExSWZIc3FYTzN1eG4yRzJ6VzVTSWVsZjJJ?=
- =?utf-8?B?Q0licERaMUdTM2dTVCtEaGU3OWtXMTI1VjlnMW11Ym9tWE1UUkF5bXBKQzBy?=
- =?utf-8?B?N0IrM1JKUDkxeXdJVUpGNGhYZU5RZ05teFhDUzd4SGtvU3hpazlmSmVvamZV?=
- =?utf-8?B?MnprSjRJUWJUOXJGRlNEbXBqTDRQTXo5aG5DY1dkbnIvL1J0ZlozUmRTaGIz?=
- =?utf-8?B?SUM4bnc2SmtJZHIwL0Z6OHFBRFJ0V3NIZFN2di9pejRiRU1rWnNzNEptaThq?=
- =?utf-8?B?YnppUk1OeU5PZ3RLaUs3dTMwaGdyUDNsdDQrd1pOUURnMmhIbHdXamxEWE9Y?=
- =?utf-8?B?YWMrZ2Y4SHdjZFowRENZcXpTdk5sZ1gzb2k0SHNkSVJCc3FYU0srR25xKytw?=
- =?utf-8?B?UUxlekRDU2Z4OHhSQ1lsQWhpQlZzMDVJbHNaVnV1Wjk0c1VrVUtzeWk2ckhS?=
- =?utf-8?B?QUVZVnhJR24vOUczT211Z3FQVE05TEZzY1lCek44Rk5Na0VUcnlqR2pqNjJJ?=
- =?utf-8?B?R1NSWGdzQlFhZlZiNWN2b0RteFNORXZnWjVRbWxLMlQxN2YyQkdxZlpOaHVr?=
- =?utf-8?B?dGY2Mm9WMFQyUStHTS9XWncxVVkrbGZsZjVvTU1zcHFtZzRkbGlmZGFkd0sr?=
- =?utf-8?B?WUNsKy9QaHNVT3diRFVJczJqQXpWeVdRVTV1LzJlMUcrNWFxZmpEOVVNL1lk?=
- =?utf-8?B?d3ZnSFl2dW0zczB3cHAvV1plT1hCVHpTYXJ0WnN5U1lWa3E4anVzWGJsZ0xN?=
- =?utf-8?B?Yzl5SUI4TXdqZnV4MGFDcWlTTTh0S1RSU2RJeDZVVGRhUXNHWGk4WjJ6RGJJ?=
- =?utf-8?B?SFJXZFl5amhydTgyZ2lEY2h4Qnc3Y3VSUGJhQVdzU0dIVGw5TkhjQzIwK1Vx?=
- =?utf-8?B?VkFqWVRNa0dsZmVNSzdrd0NjNnBCQTJmRXd5ZWUrV1J2c1BuVWFqcmdvSjc4?=
- =?utf-8?B?MHhJOW0xMWNZYStVQnVkQ3dUd3lNOHY5MTBLaXk0OGJMSWVZZThoTFVrSi94?=
- =?utf-8?B?eWdvYmVNRjNJSEd3a3ZFM25IRysyWUxVS3ZFMHBlUzg2QmJMNDVKZ1ltWW5m?=
- =?utf-8?B?aURVZEFYTkNzVW11ZEQ3RWRhVml0MURjY1prenhPQlRSaFJOdTlRYU9ZSjEv?=
- =?utf-8?B?YkdnMDlQK3dnUDNXNUZwRTM2R094aVNEbzVFNWlUSWQ2Yzd0cE51Q09tOTFX?=
- =?utf-8?B?a0dYU1ZHcDJRQkR5NjQwU0FHUUNyL05VOG5QRW5zU0dweG1CL2JsYUtoTy9T?=
- =?utf-8?B?NWM3Y0c2RW9QR3V5cjVhMUJ1RkFpdU1JVUl3NXA0M3JudEhZbGtQK0t6azUw?=
- =?utf-8?B?ai9ycnQ3UWJ1K2VOYjJkaHd0MzZST241YmwranpSMWdSbEI1anlhSnhjb0FW?=
- =?utf-8?B?VlZHM2p5c1JzalRLenpzUVlUQjJVelI1Y1hWZXhrQmVpbWRLdU1HYXA5Nkh3?=
- =?utf-8?B?b1ZKT3JYMGtQMm1xM0FGcjc5WUZmTGpVTVYyQkR5UW9RUTRHVFZ0ZnBTdmVw?=
- =?utf-8?B?OS8xRGZQelovdDhIdFptR3doOGNGd1NSQTVRaVFiOXF0OG43ZE1zeEN3c29O?=
- =?utf-8?B?SmoxNDlVdTFWWldCNzdIdVZFVGlzcWdic0Y4alFCNzU3Y2sweW5NS0FoWmJ6?=
- =?utf-8?B?Wnh6bXZ5a3ZidVhCQmEvd09leDJWbElCcmJMT1czTlAzS2dwNzRMR0NONnV3?=
- =?utf-8?B?T21RL0FBMVBjc2RFeEQwTmhwamViOW83N24wMTQ4Y2VQSE1PQWVWKzBBYjM1?=
- =?utf-8?B?cFNpZmhSNVZNZDNPMUt4c1Q5SVEzQWdvVDFnVDllbU1pQTJXc2tlRVI3TXJQ?=
- =?utf-8?B?SVBBTUxST3JDZjBKS2tQWGNWMDd0Y0xMNHFrMU9VVXNLU0krTTd4eGY3bEFn?=
- =?utf-8?B?TzFVRjN1WGhBcURFQ3NsdE9YMFpSTnFCeGtGSWJ2TlF1NnJjd1Rqa0ludWFO?=
- =?utf-8?B?bUcyNXVIN3ZCVWFQYlQvSGJtUXJoczlmVWhIY3R4MEVPZ0dMOTk4ZE5VNzhD?=
- =?utf-8?B?YnlKWFlUdmVyK1F6bFB1aHZjYmFxV2h1SGwzcDc0NGtPWllvUkFVOXd3WDc1?=
- =?utf-8?B?MzNhMkNqdXh0RlZ2UFJDNmljT2FqVXR0QWlPK2orMmZIN2UzVWw2QT09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UkZQbkdZLzExa0dBT2ZMMk1wQTBvUmdITDc2RkM0VHNkdWxtZTdZcldHcGQx?=
+ =?utf-8?B?TzU0ZEpYby9VVDVrU3dvd3FoZG9ieStCVkZkdFBtdTBFTjQ5UGhUUWNQczJS?=
+ =?utf-8?B?WU95TFRxeXkyZWl5bkwrTVJNR0JqNFZnS2V6NjNKd2RvQ0NwUW56bWh3OG0w?=
+ =?utf-8?B?emhLTkI2K2F2bTN1Skx1V2R2WC9yc1g4dlpkRGVxZDJsTVBDRjgwL2FRVzV0?=
+ =?utf-8?B?NjdXRWVHUVJRdVpsU3RkTlFmbks3TTZpaU1ncWhBaVdlWmR2R0NmWnRzNHJw?=
+ =?utf-8?B?K2FHZFFlSmRiNkhJZDEyQklPQWJIbTRFN3JvS29IckRVMnRWS3BJZzJKQ1NG?=
+ =?utf-8?B?U3l5Ky80dlhiS3RDU2lSWmc5UHF6L1Q4eUNnZmU0MjY0UHNXaXhCdXJnN0c5?=
+ =?utf-8?B?WHdpK294VUlDMVFrSHMzUzBCQXpVRktkTEgvTWJqRXFDaDhHUkRpRFdIYVox?=
+ =?utf-8?B?QkM1dzRmaThjVXpPZjhZYVBKd2VadU9SUW9kUEZhMjl4N3lsYWlHMHhIOVpH?=
+ =?utf-8?B?NHBlZUQxTjZNVGJHZXpBNjRTWGFCRGdGYnFlM3k1N3J3WTNwRWlMT0JCbUky?=
+ =?utf-8?B?NG1FQThWWjNES01DY0pWNm1HRy9BdHAxdlplUkt4WVhCODdkWFFleXkzSHpT?=
+ =?utf-8?B?cGZHRVR0Sk8xdURkTnAvNFV5VkxJWE5tTUdKKytsSHNQM1FjMm1YR0QwV3NH?=
+ =?utf-8?B?WjBzbTRvK2hwNnJqVUVLNVd2KzZWS3ZtcXhnUmpFaFF4bnBZdU1BU3NwWmlj?=
+ =?utf-8?B?bEJBV2JYWE9IK3hkMnBOWjM2eXI4WTE3c3Zzb3lRNFRRbmQrODBSYkRRQUJY?=
+ =?utf-8?B?ZXNnQ2d6NFJ4VE1pdjU4c0FZaW1YaElqNG5uTXFFaDRxSzMwV1ZuL0hSNlpw?=
+ =?utf-8?B?eS9mN0FtZW5pdXR2bjFZUC9ZNjV1bTdXZmVCUFBKOFcxNUhXTFFSWFhFWG14?=
+ =?utf-8?B?RlpqT1c5d0ZNWXZtSFBuaEdKSUtRdHd0NkJ3bWEwMEdORGNlYW5LcmRFcHow?=
+ =?utf-8?B?ZzFsNlRxNzVBVGJTcERmanB5U3ptTk5HbjUyZFNlNkIrZmllNXlTcmNXWFVP?=
+ =?utf-8?B?QmlVWW85OWlLZWY4aVFCc0F6eUZSUVFxbzVnRCtiYzFQODRVeng1dElQYWE1?=
+ =?utf-8?B?bExBT09nZHU0OTdsSis1U0tMeFdyeGxZU05OK2Q0Ymx2TW5EaWFXQ2VhRkZZ?=
+ =?utf-8?B?UUUvbUw1NXNKUHlBVjgrOVJpZUtxS0Jyb2MxSFdtbU1UNUorWktzY0xCdUM3?=
+ =?utf-8?B?MkRGcFgyNDQvUzB0cktGQ2I3aHNoUTVWTXAzMXRqNEwwYUZNT1JhMVpTVm5L?=
+ =?utf-8?B?eSt4S2FZY1VmTGIveWRreUpOL1AyOGxPVmpzUUN5UjRRcTE4NWc2SUVybG1m?=
+ =?utf-8?B?WTFNL3BxNzJrOFkyR2N2MnVyMFRvQWFrNkZFZ1VSSFViYS9WS1VuTHhIb2RC?=
+ =?utf-8?B?ZU1VTXQ3TVpiMDZHaW1KUVQvV25zQjFjTm5NWkpWRzFpM3ZQb1piY2NTS0N4?=
+ =?utf-8?B?ZkJmL1FETXJRL21jREEreURobHlxMWVkYnR5anljV242Wi9SRHgzN0N3Z29T?=
+ =?utf-8?B?VnBtL0VHb2k2NWFjbFZxRk1FTWZrL3krSVNXa0crZCtBZVNVSmlUWktuY2Fl?=
+ =?utf-8?B?azRUclZpclBMeEZBNWJrVUtoWlVxM0NZRkpJL3lTa2t4Uys2dDhFdmRQeDJZ?=
+ =?utf-8?B?RCtqOTRmQW8xdmNhWVp1M09BblFUbEpZeGZhazZCZDE0bTZINmZWdGphTEFq?=
+ =?utf-8?B?cThVQ3BqWDhtTU5Ib041R2NOZ2dyTXB4bUljVXZkRW5nSUYxOWhvWXhhbWZC?=
+ =?utf-8?B?Yy9nendsWFVobWlURlFpUDZ4UmVlbHQ3ejNXdEJ2L0htR0xMR1BCc2g2ZlBE?=
+ =?utf-8?B?ZlBBTnU0SFFIOVVZY1RZbW9MR210bHFxdmZackgreTJEeHpMVDU4WFg2YXBa?=
+ =?utf-8?B?OXRlOVlubEdpc1FWbmUvcytSWHJpblBXNUJvMU5UQ1RUckVqVUg4ZWJ4MU12?=
+ =?utf-8?B?enFFRFJRT0dndzNJYmhydkpySkEzQTRDK0toS0F3S0c3b3ZnTUFuQU9tdUpO?=
+ =?utf-8?B?VmlPclJRNlMzTVhMS2ZkUlh6Q1lINDZlQnhiSHF6WTFwOURuS0MrM2lobm0w?=
+ =?utf-8?B?WENPbG9HRzZwN2duaUt6elBydVc3QUUxM1NxZ1JGMlc2MUs0MXBPbkZPOC9x?=
+ =?utf-8?B?Sm14c28va1krWmJ6U2paR3pkNWhXbTA4VkI0bkNHMFE1cXZDVXpWVzBobmVI?=
+ =?utf-8?B?RDNaYzZpd0ZaaGM3clRObWZXbVBsNUdRVmFqSEt4NFNTT2NwN2U5enhScEwy?=
+ =?utf-8?B?MHBETWZpbEQrQUtSZ0w3eU1TQjc2UkRwQk95WEY4aFRNaVB2eU1odz09?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 782f51bd-4c2b-427b-d040-08de9fa12026
+X-MS-Exchange-CrossTenant-Network-Message-Id: ee616c7f-133b-4182-2d33-08de9fa12412
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 12:25:51.4865 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 12:25:57.8909 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Pi92BodvOU9u+GAAa77ghGt73+jww0Cn1AWt/9jPPdMcoER5rrPTb4pmGJoAn5YD4OLrC2UBZXc+1otidW2Iow==
+X-MS-Exchange-CrossTenant-UserPrincipalName: v2fegZS07sd9h50smqWtSEekrWrACiSmXp2pmZbelUTBvTWKQkXmVBzQ83ZLSmkztvqQtxWrdkdYX3oTM8EZoA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB9349
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -162,254 +161,470 @@ X-Virus-Status: Clean
 
 From: Peng Fan <peng.fan@nxp.com>
 
-Switch PFUZE100 object linkage to be phase-aware and fix build issues
-when using driver model PMIC support.
+Migrate the i.MX8MQ EVK board to the Driver Model (DM) PMIC framework.
+This replaces legacy PMIC handling with DM_PMIC and enables proper
+device-model support during SPL.
 
-The PFUZE100 helper code is reworked to:
-- Build pfuze.o only when CONFIG_(SPL_)DM_PMIC_PFUZE100 is enabled
-- Use CONFIG_IS_ENABLED(DM_PMIC_PFUZE100) for proper DM/non-DM selection
-- Align function signatures and implementations with DM PMIC APIs
-- Use udevice-based pmic access for DM and legacy pmic for non-DM
-- Avoid mixing struct pmic and struct udevice in the same build
-  configuration
+As part of this transition, enable CONFIG_SPL_DM and the required
+DM subsystems such as I2C, PINCTRL, MMC, GPIO, and regulators so the
+SPL boot flow continues to work correctly.
 
-No functional change intended beyond fixing DM support and build
-consistency.
+Board-specific SPL code is simplified accordingly by removing legacy
+I2C, USDHC, and PMIC handling, relying instead on device tree
+descriptions and DM drivers.
 
 Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
- board/nxp/common/Makefile |  2 +-
- board/nxp/common/pfuze.c  | 96 +++++++++++++++++++++++------------------------
- board/nxp/common/pfuze.h  |  2 +-
- 3 files changed, 50 insertions(+), 50 deletions(-)
+ arch/arm/dts/imx8mq-evk-u-boot.dtsi |  88 ++++++++++++++++-
+ board/nxp/imx8mq_evk/spl.c          | 185 +++++++-----------------------------
+ configs/imx8mq_evk_defconfig        |  21 ++--
+ 3 files changed, 129 insertions(+), 165 deletions(-)
 
-diff --git a/board/nxp/common/Makefile b/board/nxp/common/Makefile
-index ed102ae7bf7..dafd3717948 100644
---- a/board/nxp/common/Makefile
-+++ b/board/nxp/common/Makefile
-@@ -57,7 +57,7 @@ obj-$(CONFIG_TARGET_P5040DS)		+= ics307_clk.o
- ifeq ($(CONFIG_$(PHASE_)POWER_LEGACY),y)
- obj-$(CONFIG_POWER_PFUZE100)	+= pfuze.o
- endif
--obj-$(CONFIG_DM_PMIC_PFUZE100)	+= pfuze.o
-+obj-$(CONFIG_$(PHASE_)DM_PMIC_PFUZE100)	+= pfuze.o
- obj-$(CONFIG_POWER_MC34VR500)	+= mc34vr500.o
- ifneq (,$(filter $(SOC), imx8m imx8ulp imx9))
- obj-y				+= mmc.o
-diff --git a/board/nxp/common/pfuze.c b/board/nxp/common/pfuze.c
-index 0d7a94fd232..179cc605da0 100644
---- a/board/nxp/common/pfuze.c
-+++ b/board/nxp/common/pfuze.c
-@@ -7,14 +7,14 @@
+diff --git a/arch/arm/dts/imx8mq-evk-u-boot.dtsi b/arch/arm/dts/imx8mq-evk-u-boot.dtsi
+index d987f68b6ba..ca80dc994b1 100644
+--- a/arch/arm/dts/imx8mq-evk-u-boot.dtsi
++++ b/arch/arm/dts/imx8mq-evk-u-boot.dtsi
+@@ -2,19 +2,105 @@
+ 
+ #include "imx8mq-u-boot.dtsi"
+ 
++&aips1 {
++	bootph-all;
++};
++
++&gpio2 {
++	bootph-pre-ram;
++};
++
++&pinctrl_i2c1 {
++	bootph-all;
++};
++
++&i2c1 {
++	bootph-all;
++};
++
++&soc {
++	bootph-all;
++	bootph-pre-ram;
++};
++
++&{/soc@0/bus@30800000/i2c@30a20000/pmic@8} {
++	bootph-all;
++};
++
++&{/soc@0/bus@30800000/i2c@30a20000/pmic@8/regulators} {
++	bootph-all;
++};
++
+ &pinctrl_uart1 {
+ 	bootph-pre-ram;
+ };
+ 
++&uart1 {
++	bootph-pre-ram;
++};
++
+ &usdhc1 {
++	bootph-pre-ram;
+ 	mmc-hs400-1_8v;
++	/delete-property/ vqmmc-supply;
++};
++
++&pinctrl_usdhc1 {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc1_100mhz {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc1_200mhz {
++	bootph-pre-ram;
+ };
+ 
+ &usdhc2 {
++	bootph-pre-ram;
+ 	sd-uhs-sdr104;
+ 	sd-uhs-ddr50;
+ };
+ 
+-&uart1 {
++&pinctrl_usdhc2 {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc2_100mhz {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc2_200mhz {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc2_gpio {
++	bootph-pre-ram;
++};
++
++&pinctrl_reg_usdhc2 {
++	bootph-pre-ram;
++};
++
++&reg_usdhc2_vmmc {
++	bootph-pre-ram;
++};
++
++#ifdef CONFIG_FSL_CAAM
++&crypto {
++	bootph-pre-ram;
++};
++
++&sec_jr0 {
++	bootph-pre-ram;
++};
++
++&sec_jr1 {
++	bootph-pre-ram;
++};
++
++&sec_jr2 {
+ 	bootph-pre-ram;
+ };
++#endif
+diff --git a/board/nxp/imx8mq_evk/spl.c b/board/nxp/imx8mq_evk/spl.c
+index 6686fe34126..80322a2ed19 100644
+--- a/board/nxp/imx8mq_evk/spl.c
++++ b/board/nxp/imx8mq_evk/spl.c
+@@ -9,23 +9,16 @@
+ #include <image.h>
+ #include <init.h>
+ #include <log.h>
+-#include <asm/io.h>
+ #include <errno.h>
+ #include <asm/io.h>
+ #include <asm/arch/ddr.h>
+-#include <asm/arch/imx8mq_pins.h>
+ #include <asm/arch/sys_proto.h>
+ #include <asm/arch/clock.h>
+-#include <asm/mach-imx/iomux-v3.h>
+-#include <asm/mach-imx/gpio.h>
+-#include <asm/mach-imx/mxc_i2c.h>
+ #include <asm/sections.h>
+-#include <fsl_esdhc_imx.h>
+-#include <fsl_sec.h>
+-#include <mmc.h>
+-#include <linux/delay.h>
  #include <power/pmic.h>
  #include <power/pfuze100_pmic.h>
++#include <dm/uclass.h>
++#include <dm/device.h>
+ #include <spl.h>
+ #include "../common/pfuze.h"
  
--#ifndef CONFIG_DM_PMIC_PFUZE100
--int pfuze_mode_init(struct pmic *p, u32 mode)
-+#if CONFIG_IS_ENABLED(DM_PMIC_PFUZE100)
-+int pfuze_mode_init(struct udevice *dev, u32 mode)
- {
- 	unsigned char offset, i, switch_num;
- 	u32 id;
- 	int ret;
- 
--	pmic_reg_read(p, PFUZE100_DEVICEID, &id);
-+	id = pmic_reg_read(dev, PFUZE100_DEVICEID);
- 	id = id & 0xf;
- 
- 	if (id == 0) {
-@@ -28,14 +28,14 @@ int pfuze_mode_init(struct pmic *p, u32 mode)
- 		return -EINVAL;
- 	}
- 
--	ret = pmic_reg_write(p, PFUZE100_SW1ABMODE, mode);
-+	ret = pmic_reg_write(dev, PFUZE100_SW1ABMODE, mode);
- 	if (ret < 0) {
- 		printf("Set SW1AB mode error!\n");
- 		return ret;
- 	}
- 
- 	for (i = 0; i < switch_num - 1; i++) {
--		ret = pmic_reg_write(p, offset + i * SWITCH_SIZE, mode);
-+		ret = pmic_reg_write(dev, offset + i * SWITCH_SIZE, mode);
- 		if (ret < 0) {
- 			printf("Set switch 0x%x mode error!\n",
- 			       offset + i * SWITCH_SIZE);
-@@ -46,58 +46,54 @@ int pfuze_mode_init(struct pmic *p, u32 mode)
- 	return ret;
+@@ -40,166 +33,52 @@ static void spl_dram_init(void)
+ 		ddr_init(&dram_timing_b0);
  }
  
--struct pmic *pfuze_common_init(unsigned char i2cbus)
-+struct udevice *pfuze_common_init(void)
+-#define I2C_PAD_CTRL	(PAD_CTL_DSE6 | PAD_CTL_HYS | PAD_CTL_PUE)
+-#define PC MUX_PAD_CTRL(I2C_PAD_CTRL)
+-static struct i2c_pads_info i2c_pad_info1 = {
+-	.scl = {
+-		.i2c_mode = IMX8MQ_PAD_I2C1_SCL__I2C1_SCL | PC,
+-		.gpio_mode = IMX8MQ_PAD_I2C1_SCL__GPIO5_IO14 | PC,
+-		.gp = IMX_GPIO_NR(5, 14),
+-	},
+-	.sda = {
+-		.i2c_mode = IMX8MQ_PAD_I2C1_SDA__I2C1_SDA | PC,
+-		.gpio_mode = IMX8MQ_PAD_I2C1_SDA__GPIO5_IO15 | PC,
+-		.gp = IMX_GPIO_NR(5, 15),
+-	},
+-};
+-
+-#define USDHC2_CD_GPIO	IMX_GPIO_NR(2, 12)
+-#define USDHC1_PWR_GPIO IMX_GPIO_NR(2, 10)
+-#define USDHC2_PWR_GPIO IMX_GPIO_NR(2, 19)
+-
+-int board_mmc_getcd(struct mmc *mmc)
+-{
+-	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
+-	int ret = 0;
+-
+-	switch (cfg->esdhc_base) {
+-	case USDHC1_BASE_ADDR:
+-		ret = 1;
+-		break;
+-	case USDHC2_BASE_ADDR:
+-		ret = !gpio_get_value(USDHC2_CD_GPIO);
+-		return ret;
+-	}
+-
+-	return 1;
+-}
+-
+-#define USDHC_PAD_CTRL	(PAD_CTL_DSE6 | PAD_CTL_HYS | PAD_CTL_PUE | \
+-			 PAD_CTL_FSEL2)
+-#define USDHC_GPIO_PAD_CTRL (PAD_CTL_PUE | PAD_CTL_DSE1)
+-
+-static iomux_v3_cfg_t const usdhc1_pads[] = {
+-	IMX8MQ_PAD_SD1_CLK__USDHC1_CLK | MUX_PAD_CTRL(USDHC_PAD_CTRL),
+-	IMX8MQ_PAD_SD1_CMD__USDHC1_CMD | MUX_PAD_CTRL(USDHC_PAD_CTRL),
+-	IMX8MQ_PAD_SD1_DATA0__USDHC1_DATA0 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
+-	IMX8MQ_PAD_SD1_DATA1__USDHC1_DATA1 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
+-	IMX8MQ_PAD_SD1_DATA2__USDHC1_DATA2 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
+-	IMX8MQ_PAD_SD1_DATA3__USDHC1_DATA3 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
+-	IMX8MQ_PAD_SD1_DATA4__USDHC1_DATA4 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
+-	IMX8MQ_PAD_SD1_DATA5__USDHC1_DATA5 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
+-	IMX8MQ_PAD_SD1_DATA6__USDHC1_DATA6 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
+-	IMX8MQ_PAD_SD1_DATA7__USDHC1_DATA7 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
+-	IMX8MQ_PAD_SD1_RESET_B__GPIO2_IO10 | MUX_PAD_CTRL(NO_PAD_CTRL),
+-};
+-
+-static iomux_v3_cfg_t const usdhc2_pads[] = {
+-	IMX8MQ_PAD_SD2_CLK__USDHC2_CLK | MUX_PAD_CTRL(USDHC_PAD_CTRL), /* 0xd6 */
+-	IMX8MQ_PAD_SD2_CMD__USDHC2_CMD | MUX_PAD_CTRL(USDHC_PAD_CTRL), /* 0xd6 */
+-	IMX8MQ_PAD_SD2_DATA0__USDHC2_DATA0 | MUX_PAD_CTRL(USDHC_PAD_CTRL), /* 0xd6 */
+-	IMX8MQ_PAD_SD2_DATA1__USDHC2_DATA1 | MUX_PAD_CTRL(USDHC_PAD_CTRL), /* 0xd6 */
+-	IMX8MQ_PAD_SD2_DATA2__USDHC2_DATA2 | MUX_PAD_CTRL(USDHC_PAD_CTRL), /* 0x16 */
+-	IMX8MQ_PAD_SD2_DATA3__USDHC2_DATA3 | MUX_PAD_CTRL(USDHC_PAD_CTRL), /* 0xd6 */
+-	IMX8MQ_PAD_SD2_CD_B__GPIO2_IO12 | MUX_PAD_CTRL(USDHC_GPIO_PAD_CTRL),
+-	IMX8MQ_PAD_SD2_RESET_B__GPIO2_IO19 | MUX_PAD_CTRL(USDHC_GPIO_PAD_CTRL),
+-};
+-
+-static struct fsl_esdhc_cfg usdhc_cfg[2] = {
+-	{USDHC1_BASE_ADDR, 0, 8},
+-	{USDHC2_BASE_ADDR, 0, 4},
+-};
+-
+-int board_mmc_init(struct bd_info *bis)
+-{
+-	int i, ret;
+-	/*
+-	 * According to the board_mmc_init() the following map is done:
+-	 * (U-Boot device node)    (Physical Port)
+-	 * mmc0                    USDHC1
+-	 * mmc1                    USDHC2
+-	 */
+-	for (i = 0; i < CFG_SYS_FSL_USDHC_NUM; i++) {
+-		switch (i) {
+-		case 0:
+-			init_clk_usdhc(0);
+-			usdhc_cfg[0].sdhc_clk = mxc_get_clock(USDHC1_CLK_ROOT);
+-			imx_iomux_v3_setup_multiple_pads(usdhc1_pads,
+-							 ARRAY_SIZE(usdhc1_pads));
+-			gpio_request(USDHC1_PWR_GPIO, "usdhc1_reset");
+-			gpio_direction_output(USDHC1_PWR_GPIO, 0);
+-			udelay(500);
+-			gpio_direction_output(USDHC1_PWR_GPIO, 1);
+-			break;
+-		case 1:
+-			init_clk_usdhc(1);
+-			usdhc_cfg[1].sdhc_clk = mxc_get_clock(USDHC2_CLK_ROOT);
+-			imx_iomux_v3_setup_multiple_pads(usdhc2_pads,
+-							 ARRAY_SIZE(usdhc2_pads));
+-			gpio_request(USDHC2_PWR_GPIO, "usdhc2_reset");
+-			gpio_direction_output(USDHC2_PWR_GPIO, 0);
+-			udelay(500);
+-			gpio_direction_output(USDHC2_PWR_GPIO, 1);
+-			break;
+-		default:
+-			printf("Warning: you configured more USDHC controllers(%d) than supported by the board\n", i + 1);
+-			return -EINVAL;
+-		}
+-
+-		ret = fsl_esdhc_initialize(bis, &usdhc_cfg[i]);
+-		if (ret)
+-			return ret;
+-	}
+-
+-	return 0;
+-}
+-
+-#if CONFIG_IS_ENABLED(POWER_LEGACY)
+-#define I2C_PMIC	0
+ int power_init_board(void)
  {
 -	struct pmic *p;
 +	struct udevice *dev;
++	int reg;
  	int ret;
 -	unsigned int reg;
--
--	ret = power_pfuze100_init(i2cbus);
--	if (ret)
--		return NULL;
-+	unsigned int reg, dev_id, rev_id;
  
+-	ret = power_pfuze100_init(I2C_PMIC);
+-	if (ret)
+-		return -ENODEV;
+-
 -	p = pmic_get("PFUZE100");
 -	ret = pmic_probe(p);
 -	if (ret)
-+	ret = pmic_get("pfuze100@8", &dev);
-+	if (ret == -ENODEV)
- 		return NULL;
+-		return -ENODEV;
++	ret = pmic_get("pmic@8", &dev);
++	if (ret == -ENODEV) {
++		puts("No pmic@8\n");
++		return 0;
++	}
++	if (ret < 0)
++		return ret;
  
 -	pmic_reg_read(p, PFUZE100_DEVICEID, &reg);
--	printf("PMIC:  PFUZE100 ID=0x%02x\n", reg);
-+	dev_id = pmic_reg_read(dev, PFUZE100_DEVICEID);
-+	rev_id = pmic_reg_read(dev, PFUZE100_REVID);
-+	printf("PMIC: PFUZE100! DEV_ID=0x%x REV_ID=0x%x\n", dev_id, rev_id);
++	reg = pmic_reg_read(dev, PFUZE100_DEVICEID);
+ 	printf("PMIC:  PFUZE100 ID=0x%02x\n", reg);
  
- 	/* Set SW1AB stanby volage to 0.975V */
--	pmic_reg_read(p, PFUZE100_SW1ABSTBY, &reg);
-+	reg = pmic_reg_read(dev, PFUZE100_SW1ABSTBY);
- 	reg &= ~SW1x_STBY_MASK;
- 	reg |= SW1x_0_975V;
--	pmic_reg_write(p, PFUZE100_SW1ABSTBY, reg);
-+	pmic_reg_write(dev, PFUZE100_SW1ABSTBY, reg);
- 
- 	/* Set SW1AB/VDDARM step ramp up time from 16us to 4us/25mV */
--	pmic_reg_read(p, PFUZE100_SW1ABCONF, &reg);
-+	reg = pmic_reg_read(dev, PFUZE100_SW1ABCONF);
- 	reg &= ~SW1xCONF_DVSSPEED_MASK;
- 	reg |= SW1xCONF_DVSSPEED_4US;
--	pmic_reg_write(p, PFUZE100_SW1ABCONF, reg);
-+	pmic_reg_write(dev, PFUZE100_SW1ABCONF, reg);
- 
- 	/* Set SW1C standby voltage to 0.975V */
--	pmic_reg_read(p, PFUZE100_SW1CSTBY, &reg);
-+	reg = pmic_reg_read(dev, PFUZE100_SW1CSTBY);
- 	reg &= ~SW1x_STBY_MASK;
- 	reg |= SW1x_0_975V;
--	pmic_reg_write(p, PFUZE100_SW1CSTBY, reg);
-+	pmic_reg_write(dev, PFUZE100_SW1CSTBY, reg);
- 
- 	/* Set SW1C/VDDSOC step ramp up time from 16us to 4us/25mV */
--	pmic_reg_read(p, PFUZE100_SW1CCONF, &reg);
-+	reg = pmic_reg_read(dev, PFUZE100_SW1CCONF);
- 	reg &= ~SW1xCONF_DVSSPEED_MASK;
- 	reg |= SW1xCONF_DVSSPEED_4US;
--	pmic_reg_write(p, PFUZE100_SW1CCONF, reg);
-+	pmic_reg_write(dev, PFUZE100_SW1CCONF, reg);
- 
--	return p;
-+	return dev;
- }
--#elif defined(CONFIG_DM_PMIC)
--int pfuze_mode_init(struct udevice *dev, u32 mode)
-+#else
-+int pfuze_mode_init(struct pmic *p, u32 mode)
- {
- 	unsigned char offset, i, switch_num;
- 	u32 id;
- 	int ret;
- 
--	id = pmic_reg_read(dev, PFUZE100_DEVICEID);
-+	pmic_reg_read(p, PFUZE100_DEVICEID, &id);
- 	id = id & 0xf;
- 
- 	if (id == 0) {
-@@ -111,14 +107,14 @@ int pfuze_mode_init(struct udevice *dev, u32 mode)
- 		return -EINVAL;
+-	pmic_reg_read(p, PFUZE100_SW3AVOL, &reg);
++	reg = pmic_reg_read(dev, PFUZE100_SW3AVOL);
+ 	if ((reg & 0x3f) != 0x18) {
+ 		reg &= ~0x3f;
+ 		reg |= 0x18;
+-		pmic_reg_write(p, PFUZE100_SW3AVOL, reg);
++		pmic_reg_write(dev, PFUZE100_SW3AVOL, reg);
  	}
  
--	ret = pmic_reg_write(dev, PFUZE100_SW1ABMODE, mode);
-+	ret = pmic_reg_write(p, PFUZE100_SW1ABMODE, mode);
- 	if (ret < 0) {
- 		printf("Set SW1AB mode error!\n");
+-	ret = pfuze_mode_init(p, APS_PFM);
++	ret = pfuze_mode_init(dev, APS_PFM);
+ 	if (ret < 0)
  		return ret;
- 	}
  
- 	for (i = 0; i < switch_num - 1; i++) {
--		ret = pmic_reg_write(dev, offset + i * SWITCH_SIZE, mode);
-+		ret = pmic_reg_write(p, offset + i * SWITCH_SIZE, mode);
- 		if (ret < 0) {
- 			printf("Set switch 0x%x mode error!\n",
- 			       offset + i * SWITCH_SIZE);
-@@ -129,44 +125,48 @@ int pfuze_mode_init(struct udevice *dev, u32 mode)
- 	return ret;
+ 	/* set SW3A standby mode to off */
+-	pmic_reg_read(p, PFUZE100_SW3AMODE, &reg);
++	reg = pmic_reg_read(dev, PFUZE100_SW3AMODE);
+ 	reg &= ~0xf;
+ 	reg |= APS_OFF;
+-	pmic_reg_write(p, PFUZE100_SW3AMODE, reg);
++	pmic_reg_write(dev, PFUZE100_SW3AMODE, reg);
+ 
+ 	return 0;
  }
+-#endif
  
--struct udevice *pfuze_common_init(void)
-+struct pmic *pfuze_common_init(unsigned char i2cbus)
+ void spl_board_init(void)
  {
--	struct udevice *dev;
-+	struct pmic *p;
- 	int ret;
--	unsigned int reg, dev_id, rev_id;
-+	unsigned int reg;
- 
--	ret = pmic_get("pfuze100@8", &dev);
--	if (ret == -ENODEV)
-+	ret = power_pfuze100_init(i2cbus);
-+	if (ret)
- 		return NULL;
- 
--	dev_id = pmic_reg_read(dev, PFUZE100_DEVICEID);
--	rev_id = pmic_reg_read(dev, PFUZE100_REVID);
--	printf("PMIC: PFUZE100! DEV_ID=0x%x REV_ID=0x%x\n", dev_id, rev_id);
-+	p = pmic_get("PFUZE100");
-+	ret = pmic_probe(p);
-+	if (ret)
-+		return NULL;
+ 	if (IS_ENABLED(CONFIG_FSL_CAAM)) {
+-		if (sec_init())
+-			printf("\nsec_init failed!\n");
++		struct udevice *dev;
++		int ret;
 +
-+	pmic_reg_read(p, PFUZE100_DEVICEID, &reg);
-+	printf("PMIC:  PFUZE100 ID=0x%02x\n", reg);
- 
- 	/* Set SW1AB stanby volage to 0.975V */
--	reg = pmic_reg_read(dev, PFUZE100_SW1ABSTBY);
-+	pmic_reg_read(p, PFUZE100_SW1ABSTBY, &reg);
- 	reg &= ~SW1x_STBY_MASK;
- 	reg |= SW1x_0_975V;
--	pmic_reg_write(dev, PFUZE100_SW1ABSTBY, reg);
-+	pmic_reg_write(p, PFUZE100_SW1ABSTBY, reg);
- 
- 	/* Set SW1AB/VDDARM step ramp up time from 16us to 4us/25mV */
--	reg = pmic_reg_read(dev, PFUZE100_SW1ABCONF);
-+	pmic_reg_read(p, PFUZE100_SW1ABCONF, &reg);
- 	reg &= ~SW1xCONF_DVSSPEED_MASK;
- 	reg |= SW1xCONF_DVSSPEED_4US;
--	pmic_reg_write(dev, PFUZE100_SW1ABCONF, reg);
-+	pmic_reg_write(p, PFUZE100_SW1ABCONF, reg);
- 
- 	/* Set SW1C standby voltage to 0.975V */
--	reg = pmic_reg_read(dev, PFUZE100_SW1CSTBY);
-+	pmic_reg_read(p, PFUZE100_SW1CSTBY, &reg);
- 	reg &= ~SW1x_STBY_MASK;
- 	reg |= SW1x_0_975V;
--	pmic_reg_write(dev, PFUZE100_SW1CSTBY, reg);
-+	pmic_reg_write(p, PFUZE100_SW1CSTBY, reg);
- 
- 	/* Set SW1C/VDDSOC step ramp up time from 16us to 4us/25mV */
--	reg = pmic_reg_read(dev, PFUZE100_SW1CCONF);
-+	pmic_reg_read(p, PFUZE100_SW1CCONF, &reg);
- 	reg &= ~SW1xCONF_DVSSPEED_MASK;
- 	reg |= SW1xCONF_DVSSPEED_4US;
--	pmic_reg_write(dev, PFUZE100_SW1CCONF, reg);
-+	pmic_reg_write(p, PFUZE100_SW1CCONF, reg);
- 
--	return dev;
-+	return p;
++		ret = uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(caam_jr), &dev);
++		if (ret)
++			printf("Failed to initialize caam_jr: %d\n", ret);
+ 	}
+ 	puts("Normal Boot\n");
  }
- #endif
-diff --git a/board/nxp/common/pfuze.h b/board/nxp/common/pfuze.h
-index 45b49afaeb7..da89853bd20 100644
---- a/board/nxp/common/pfuze.h
-+++ b/board/nxp/common/pfuze.h
-@@ -6,7 +6,7 @@
- #ifndef __PFUZE_BOARD_HELPER__
- #define __PFUZE_BOARD_HELPER__
+@@ -218,6 +97,9 @@ void board_init_f(ulong dummy)
+ {
+ 	int ret;
  
--#ifdef CONFIG_DM_PMIC_PFUZE100
-+#if CONFIG_IS_ENABLED(DM_PMIC_PFUZE100)
- struct udevice *pfuze_common_init(void);
- int pfuze_mode_init(struct udevice *dev, u32 mode);
- #else
++	/* Clear the BSS. */
++	memset(__bss_start, 0, __bss_end - __bss_start);
++
+ 	arch_cpu_init();
+ 
+ 	init_uart_clk(0);
+@@ -226,25 +108,22 @@ void board_init_f(ulong dummy)
+ 
+ 	timer_init();
+ 
+-	preloader_console_init();
+-
+-	/* Clear the BSS. */
+-	memset(__bss_start, 0, __bss_end - __bss_start);
+-
+-	ret = spl_init();
++	ret = spl_early_init();
+ 	if (ret) {
+-		debug("spl_init() failed: %d\n", ret);
++		debug("spl_early_init() failed: %d\n", ret);
+ 		hang();
+ 	}
++	preloader_console_init();
+ 
+ 	enable_tzc380();
+ 
+-	setup_i2c(0, CONFIG_SYS_I2C_SPEED, 0x7f, &i2c_pad_info1);
+-
+ 	power_init_board();
+ 
+ 	/* DDR initialization */
+ 	spl_dram_init();
+ 
++	init_clk_usdhc(0);
++	init_clk_usdhc(1);
++
+ 	board_init_r(NULL, 0);
+ }
+diff --git a/configs/imx8mq_evk_defconfig b/configs/imx8mq_evk_defconfig
+index 3dd6554733d..a03b241a72f 100644
+--- a/configs/imx8mq_evk_defconfig
++++ b/configs/imx8mq_evk_defconfig
+@@ -4,12 +4,8 @@ CONFIG_TEXT_BASE=0x40200000
+ CONFIG_SYS_MALLOC_LEN=0x600000
+ CONFIG_SPL_GPIO=y
+ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+ CONFIG_ENV_SIZE=0x4000
+ CONFIG_ENV_OFFSET=0x200000
+-CONFIG_SYS_I2C_MXC_I2C1=y
+-CONFIG_SYS_I2C_MXC_I2C2=y
+-CONFIG_SYS_I2C_MXC_I2C3=y
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="freescale/imx8mq-evk"
+ CONFIG_TARGET_IMX8MQ_EVK=y
+@@ -18,7 +14,7 @@ CONFIG_SYS_MONITOR_LEN=524288
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+-CONFIG_SPL_STACK=0x187ff0
++CONFIG_SPL_STACK=0x920000
+ CONFIG_SPL_TEXT_BASE=0x7E1000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x180000
+@@ -73,6 +69,7 @@ CONFIG_CMD_EFIDEBUG=y
+ CONFIG_CMD_REGULATOR=y
+ CONFIG_CMD_EXT4_WRITE=y
+ CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_ENV_REDUNDANT=y
+@@ -80,31 +77,33 @@ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+ CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="FEC"
++CONFIG_SPL_DM=y
+ CONFIG_SAVED_DRAM_TIMING_BASE=0x40000000
+ CONFIG_DFU_MMC=y
+ CONFIG_MXC_GPIO=y
+ CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+ CONFIG_SUPPORT_EMMC_RPMB=y
+ CONFIG_SUPPORT_EMMC_BOOT=y
+ CONFIG_FSL_USDHC=y
+-CONFIG_PHYLIB=y
+-CONFIG_PHY_ATHEROS=y
+ CONFIG_PHY_GIGE=y
+ CONFIG_FEC_MXC=y
+ CONFIG_MII=y
++CONFIG_PHYLIB=y
++CONFIG_PHY_ATHEROS=y
+ CONFIG_PHY=y
+ CONFIG_PHY_IMX8MQ_USB=y
+ CONFIG_PINCTRL=y
++CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_IMX8M=y
+-CONFIG_SPL_POWER_LEGACY=y
+ CONFIG_POWER_DOMAIN=y
+ CONFIG_IMX8M_POWER_DOMAIN=y
+-CONFIG_POWER_PFUZE100=y
++CONFIG_DM_PMIC=y
++CONFIG_DM_PMIC_PFUZE100=n
++CONFIG_SPL_DM_PMIC_PFUZE100=y
+ CONFIG_DM_REGULATOR=y
+ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_GPIO=y
+-CONFIG_SPL_POWER_I2C=y
++CONFIG_SPL_DM_REGULATOR_GPIO=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_MXC_UART=y
+ CONFIG_TEE=y
 
 -- 
 2.51.0
