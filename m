@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D09BF94CAA
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 20:41:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E63EF94CAA
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 20:42:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1529E805D7;
-	Tue, 21 Apr 2026 22:41:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B8AAD80433;
+	Tue, 21 Apr 2026 22:42:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d3Jgd+LQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aB/Mt/LY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3606483BC8; Tue, 21 Apr 2026 22:41:06 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id E60F383FED; Tue, 21 Apr 2026 22:42:48 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3843880433
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 22:41:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4668180433
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 22:42:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-ba67b332bbaso442521566b.0
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 13:41:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776804064; cv=none;
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-ba5b107eaa2so169633866b.3
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 13:42:46 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776804166; cv=none;
  d=google.com; s=arc-20240605;
- b=SI6wCt2dLSQrXaUbRGTkiogZ4I1Hfm+AI0f7/3igY2pWA/Iqy2XEWyMT99MfLTAMiT
- XVpg70lErp8/dgVMJP3EniQWHl3ZmGyeRmjZl64MrF+RAqueLDek+oCmPIJEb16Kxl2i
- MMMYrzgL6iZaIzIdrDgPN8sKa82NCE29FFdgeTXlNMqD+pP/6VHN6aqGBFCp2qzMMk30
- iFQH+2HHWcfkJYtkSnNksL63uOlNN0F5AmhYa4zXKBepFGgOJYvA+NsQ+2ikzY5CJTNk
- /QnkpaAEn7Ovu90F7pvK/1vOS43ZBi5pikMc3H956AbPZzEeQZ+C0Xp5AhQpjDPoPkLq
- 8XVg==
+ b=ZeMOdQ5mJRWFARUUCWyUHUdH8flKteFF5osyAmbDyMrg8EJfVrL1NG7Puy1F5Ipml5
+ qSb6LO27cNO/Lo/b5KB32ifkuZhAXH1L/qzJ4fn6u7I0FMPMdarOWS+kkH9o3gZ2k9re
+ +Ywz4cTwcIVdF8K/OnlKO6bmj/obX11v0h7UBscN0MfsRJlGW49lRW1ZoI/Uzr7w83xM
+ RPS9LDD1NWV5NhCFijlB8jx9M4ueQTdy7uamsdjrDzPnC9KSHu4BaGwP2gfd1eJJ5ShI
+ 8Nymdk0fv6/+VxhuSUTn9z23P6wL/oakK6/cA02PkoUdYwIGoBkLAJQBKl2qCAZ0X6yC
+ BbOw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=CCEI8tAeQvo/lqqRVV60IhtT/AMxKbC0CNuj37fqjxw=;
- fh=waS3EJk31RVDeGVicECCeqlXRchlLuFxWeT8ek9mn1g=;
- b=ACklDe6nj27yJ4cocdzzQsd+chiuEIjUFqIcXv7GRSR9C/6wtulk9xswKtVyKci9GQ
- ZGM6ZcfHNr6uw6hFk7AEV8nD4ma3AhXHFCOrX2UvD3i43IJdzoAAsm4JPN6+uZl+zizM
- 06AWTv2ea7P+Un73Iu5fIaCmjEwypOu4tgZe1OzwbDQceOsvrZvJbhwYcU045Jn0fAa+
- vvCppwnsOueQ4EEG/0b6e1xIro+XTEnw9+9cHqbmmEB1/OzKxOnpFcc/oP6VkxrUgd5y
- 5DqCZdZwUBaf3ZIdgbjd/J778g5rHlkPO/9U9aLLOC8jPCJyLO+z/VMhDsX0GQAOGYST
- yAGg==; darn=lists.denx.de
+ bh=tHXcsnRqmkE79jCcDEJaqbIaXZN7xllKDsIgM6CoRIc=;
+ fh=VotdAeOBTvm9DU94Rw6PBYjbvlHh0uHd97nnQV3+qtw=;
+ b=Y9yrZuWMLDqhpEIioamPv3BegdpYWRpC9lJutQci744qV0R8Jjnq6+bkIUHbaHdz+x
+ CyuRPpYSw/wXjWASk+U+RJrWdDqJsQzGD6J96YNYPfKsFbxC8vdDu156g3qs7ZoqtHVU
+ ZvMvRNsJurpG0jhvTWfYzGlkz221WfD1HGJoeNGwfSRKVd+JmPlXKBva+Drv61RY6Bfi
+ vFY3g34kXbx93J0rkHrZbdutps1eVMzhiISsfdBT9lv2SC36risaugpEcAcIfhsRgVSc
+ JaNtH0lGBrHCOz14WFCZq2ybFwYfz+GC9fDCGVTP0pqggRv9HfUXjWDmakIqv5wZGkQ6
+ j0IQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1776804064; x=1777408864; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1776804166; x=1777408966; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CCEI8tAeQvo/lqqRVV60IhtT/AMxKbC0CNuj37fqjxw=;
- b=d3Jgd+LQKP4l2CdpSnB2acrYNFinJmsdwzIr/PuFFEYLo2GXdJMiqA1gY5yLcYNftT
- m00ZkTkT7y2nt/FY00ivGrtXdvY5mJYipZIqy8oQn+hpm0jolsDh0UfhWPjOu5mjVbEa
- 28HTUVs9L+HzapiVV2g0UujZLznYxSJk2djQc=
+ bh=tHXcsnRqmkE79jCcDEJaqbIaXZN7xllKDsIgM6CoRIc=;
+ b=aB/Mt/LYoO5QkPrEhYtJ3qz99bc1eZGuyQ5V/tY18/vcOsJcAmg9ZzmpD1gu63BqOS
+ EfOQ2sgGycV1maMtPFwoybU0xL9jCUpkg9fy5d1TouIYozrQRPepRB2pui2fsWX/vd66
+ 5LfuVv6uJ5J6FaxjtMJyrD9SYjLvkDkBc9eRU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776804064; x=1777408864;
+ d=1e100.net; s=20251104; t=1776804166; x=1777408966;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CCEI8tAeQvo/lqqRVV60IhtT/AMxKbC0CNuj37fqjxw=;
- b=MjltXHATp/HbKkCOr7buNfF0pGfC4uZvHs6OAU1teiKci5mVVPipGWe9UdhD6NUI+h
- /FY9eDaxLC/Ugavf4b3JT8Qugw1YubulNnu1lx6ox8kjI5wQUBLfCq9gtpjpo2qQqSL7
- jnuwqe9WdiwhCh2sQ9WArk5Kk0GdCmaewBUtJjBHnp8+fO8+TgyQNt+czAjzF0QIQfA/
- 7lFVVu5VvlwiB5VkUggXiDwBAKc5rsaeqgJ/hf6WdOBmDtbbQs4Io1cWl4ovOkuO1zdx
- ys8NzJ1MXDgGgAXLrymvBQfg/RP2TeslIfygpji5c6xV9IA1IQLlfJrt3A8h8iLc2+qd
- nIGg==
+ bh=tHXcsnRqmkE79jCcDEJaqbIaXZN7xllKDsIgM6CoRIc=;
+ b=cOTymf4rvIhFE7T+XMOH20spfATUdiVYqEn2Q1HKwjHekjeln7md3tKKHSx5fPawyP
+ TDh9gkBu2bJtcA99x6OOJRqflHffNFaHTcmI9+XJ+Hp9LLSiSEEuaq7Bv9IInRkc3cEH
+ fgZBjm09SWSI4NIwe5gB6UzginK5ee+h9lWi49f+Kubgsd3ptWB5f/Wl2qXzmStETw2l
+ Gwri4wTL5iFX5Ot7Jg80jzUlJefLnz1sy1jY35NTft9lFfKUW+NlxUyeyKoyqsSCBBwB
+ zFRmmKdSa6Gzs6Fic/mEfI/tnrV8j5cp1dVvmB6htG/15DdGM+rC2OpyTG9KZI0U0frL
+ yOrw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/RRIk9nvKF1PqoOfboPMX0ieS51CDTlisfqL0OjKQ3x3Bh5TTRs1DSpELM/CThf1mwWQRA4Yo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy2G1EH3bzMNpez/1RESqTEjvzfe6zd8ebasqXqd7pyUT7Lsoww
- UsvIrjhpZrIFLfgGhPq13d3LR8NkdjeCbhef3rLGFcuWGqeAv+bBUBRh6GugxppMQcwYEe8bxkD
- OVOk9058MwQ8HWXKbtxSdtTJSAv9aRb37lRZooVItdyDpyRIQO/lhjw==
-X-Gm-Gg: AeBDiet1Nere8dlliQYO0mZ6prqYT+6oAKAwx5VaLk0uBANfdxCBvCSSi00GioWk5KV
- EWh2YCAVb6Cgk/lJJeZzgbSx9KDWc8CPyOxTS47MwaV3YCiODCQ6L1kJ/rrqHuaqWDrC0rkD55f
- Ji6qO1OAGjF17cN5z5bpOgXNUm77Z/dVo32yXAgAKDaeIXvZWqFWEeyDE6A1ky1hwhZPixkGkZT
- AjP6gr7OVRS8IL45Pm0jx4SL9NeyeldolEOyYIhM2bjnT8m2Czvp/aKLWHRGgro8z9i3fceqgvl
- F/qiq8RYIG/SXD396/nv
-X-Received: by 2002:a17:907:7f94:b0:baa:77ac:97a with SMTP id
- a640c23a62f3a-baa77ac0facmr102322666b.36.1776804063618; Tue, 21 Apr 2026
- 13:41:03 -0700 (PDT)
+ AFNElJ+ulIlTs+YKMJ8nIvAgeMkJSkNmaBtsSMkRLNeAyBImpidSd+DgXMuR4pswuDh0NPSh0P21O7s=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx3ON4QIubahJQVrJutxJv8ZMd5UNkMsYmCZnAwaxDl6Elrolb/
+ qegiofxuELZa41zSB9ltNTBkJ6g5fkSOm764pKavYU2QPG82txh8T1mMd9iMUjMVleQumhSYz/R
+ A25LlRn8TogxrPhQpS/VF0Z2SA1/xdEal0QWvIusn
+X-Gm-Gg: AeBDies3aK6mxwhHMzLloEd2m9/STyzM4Pd0wHEjwkJF36XT8pcJUCZNUOpLoyfHjOD
+ xjghdIwMJ4aNaRd6e2N4+22MzeEM6HOkEsWiWuG2AnTqdCtIPkRj92rNs2wACr734JICnX+LY0q
+ MCzaGaNVf2t6U1M6LR/zCBqN3mnAl0z37btJoRoM4smVviUBsbr5nnP5zY53RApzmIZ9i7Rg4cM
+ OZtys2N7YOzSnoSCEXVmOVLDKV77zT4m4IBPJGgGyCbEJt3UJJUWROrzhpVMBWrqB4+qErPT/DI
+ hR+LBHXxXDCR5X9ufpZ7
+X-Received: by 2002:a17:907:a607:b0:b9d:31c2:37f9 with SMTP id
+ a640c23a62f3a-ba41828cbe5mr1036681866b.2.1776804165690; Tue, 21 Apr 2026
+ 13:42:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260420192520.1444749-1-rs@ti.com>
- <20260420192520.1444749-3-rs@ti.com>
-In-Reply-To: <20260420192520.1444749-3-rs@ti.com>
+ <20260420192520.1444749-7-rs@ti.com>
+In-Reply-To: <20260420192520.1444749-7-rs@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 22 Apr 2026 08:40:51 +1200
-X-Gm-Features: AQROBzAUjeroKDli-DbiyaZviQPRrFL9rLle9PoHSJS73bheZ9_NDbJ0JqBGf0w
-Message-ID: <CAFLszTggCLQPaJcRoxhjHOuRM10yW3pr8JjRj+LLA-ZupVOSjg@mail.gmail.com>
-Subject: Re: [PATCHv4 2/6] boot_fdt_add_mem_rsv_regions: free old dtb
- reservations
+Date: Wed, 22 Apr 2026 08:42:33 +1200
+X-Gm-Features: AQROBzA5YXBx5syY2COc5zcLwe9WBPO8pgHCa0x2oEPsgB-qpuXHb3wGO573l24
+Message-ID: <CAFLszTgjKjDKeF4eX0-tWe6a_TCDMnVrpQQAhnKb=zhTR4OUdw@mail.gmail.com>
+Subject: Re: [PATCHv4 6/6] memory: reserve from start_addr_sp to
+ initial_relocaddr
 To: rs@ti.com
 Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
  Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
@@ -117,39 +117,45 @@ X-Virus-Status: Clean
 Hi Randolph,
 
 On 2026-04-20T19:25:18, Randolph Sapp <rs@ti.com> wrote:
-> boot_fdt_add_mem_rsv_regions: free old dtb reservations
+> memory: reserve from start_addr_sp to initial_relocaddr
 >
-> Add a free flag and an initial call to free allocations covered by the
-> global FDT. This assumes that all calls to boot_fdt_add_mem_rsv_regions
-> occur before the transition to the new device tree, thus we can access
-> the currently active device tree through the global data pointer.
+> Add a new global data struct member called initial_relocaddr. This
+> stores the original value of relocaddr, directly from setup_dest_addr.
+> This is specifically to avoid any adjustments made by other init
+> functions.
 >
-> This allows us to clearly indicate to the user when a device tree
-> reservation fails. How we handle this can still use some improvement.
-> Right now we'll keep the default behavior and try to boot anyway.
+> Reserve the memory from gd->start_addr_sp - CONFIG_STACK_SIZE to
+> gd->initial_relocaddr instead of gd->ram_top. This allows platform
+> specific relocation addresses to work without unnecessarily painting
+> over a large range.
 >
-> This functionality was broken in:
-> 5a6aa7d ("boot: fdt: Handle already reserved memory in boot_fdt_reserve_region()")
+> Since PRAM comes out of this initial area up to initial_relocaddr, we no
+> longer need to account for it separately.
 >
 > Signed-off-by: Randolph Sapp <rs@ti.com>
 >
-> arch/mips/lib/bootm.c |  2 +-
->  boot/bootm.c          |  2 +-
->  boot/bootm_os.c       |  2 +-
->  boot/image-board.c    |  2 +-
->  boot/image-fdt.c      | 57 +++++++++++++++++++++++++++++++++++----------------
->  include/image.h       |  2 +-
->  lib/lmb.c             |  2 +-
->  7 files changed, 45 insertions(+), 24 deletions(-)
+> common/board_f.c                  |  9 ++++++++-
+>  include/asm-generic/global_data.h |  7 +++++++
+>  lib/efi_loader/efi_memory.c       |  9 ++++++---
+>  lib/lmb.c                         | 39 ++++++---------------------------------
+>  4 files changed, 27 insertions(+), 37 deletions(-)
 
-> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-> @@ -69,35 +69,51 @@ static const struct legacy_img_hdr *image_get_fdt(ulong fdt_addr)
-> +static void boot_fdt_reserve_region(u64 addr, u64 size, u32 flags, bool free)
->  {
-> -     long ret;
-> +     int ret;
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> @@ -868,9 +868,12 @@ static void add_u_boot_and_runtime(void)
+> +     uboot_start = ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
+> +                    uboot_stack_size) &
+> +                   ~EFI_PAGE_MASK;
+> +     uboot_pages = (((uintptr_t)map_sysmem(gd->initial_relocaddr, 0) -
+> +                     uboot_start) +
+> +                    EFI_PAGE_MASK) >>
+> +                   EFI_PAGE_SHIFT;
 
-nit: perhaps keep this one 'long' since lmb_free() returns long ?
+The reformatting makes the code harder to read. Please can you keep
+the original formatting style and just change the variable reference?
+Something like:
+
+uboot_pages = ((uintptr_t)map_sysmem(gd->initial_relocaddr, 0) -
+               uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
 
 Regards,
 Simon
