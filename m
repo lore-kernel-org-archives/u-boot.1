@@ -4,122 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B68AF327BE
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 07:55:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32C04F327BE
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 07:55:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04D838431E;
+	by phobos.denx.de (Postfix) with ESMTP id 6008784372;
 	Tue, 21 Apr 2026 09:55:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="gACREga/";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="Ezh12DNb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAA818433B; Tue, 21 Apr 2026 09:55:02 +0200 (CEST)
+ id 4D9AC84374; Tue, 21 Apr 2026 09:55:05 +0200 (CEST)
 Received: from GVXPR05CU001.outbound.protection.outlook.com
  (mail-swedencentralazlp170130007.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B243842E1
+ by phobos.denx.de (Postfix) with ESMTPS id C865A84258
  for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 09:55:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=y9S/giVfoRab5YwPsGGrAXgA/k1rMP/YHWkFUFQEjM9hfVoEX8TmCkP8Lh4Nw/N2z8ZM8g5tdLwf7p5CrnGNgShgX5Kf9IuonQGscomu4LOxQbn2dlKdqUMTxQAIBbxTWaKp8WL14GfP8cYnekEoiHjk2HBfEaMO2+m/gHsTMUygB9oS2uKyXjUk9xxarTw9mZf0yzl74C6ktK0JOVYYGphKqmvqmGOA7UZb7bOilP9pTWlLRy0LrVrtnspMeJooMaYm8WKrnG2ClzjR1ehFvH9itBpY1Otn27RRFMUx459BUNhuMQKX4Y5fCcVo7B+1tfGfw5U5hkrcw0QFoQlvkA==
+ b=r33Z+XzCMcqBwTTxasapF+b1c823lPVjYWmVnD7ncldHUlr/8wh4o7rSQgInsWfTuL5YImXwvNa45FyzEIOWQThfxouqf+U+uUSpyO4yvkcodbm6qmSyUrEKy3XYkS/1PnhpGUwqiglrHBBnOB4cp/J+GG42qVEAyYzuMMPf2Oj99PFMT76FCVFebDWw3ktIh33U6x06GH40mXuowQkRHXogWlaA3vlmPZmdN/lOVxqrHfkpjohkQp8TQMs8/qxgaEZlvfu7rzYlY9+cawb72GjYSAEu2JlxRlaV8EVeiLQdFzdfj0LknJC2MVGa+BosEApZiDfh24OE2+OraHA+dg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EeZ7zmOl4YHVStP5aiZOv1lKBeF1PKR4GAhZ6vv6MdA=;
- b=EGOL4W1vW7hsMtcGBrkr2QzYD1H+K4WClp4zIJPr2uQXSWYFO47WqWqfZwQqj1but9IpkqwAts3rcrmXArbhRbOTAw1ePQTViBD68Z1KMHNiMpQtSCu/OmaEC+rS6lpgX+QwGsb5iuMd+NOgZra7L36c9sm9tKQ2A3Cq6/HfdEzeTQLSBr5rDxbEosSyIPITNAJHqgHcQivJC8co4+McOuchVNXtiCerPMH0tvXwlY3Zpg5JyHy57cXueIBGJ6Q6PKJDNKw2nvtvJOxfZ+0hcKQbO6OX18dcvrSOFFR6WqDbSGDxXfCELRL3cxDNSWhcksAWZIR4ym7LLGHaNIeoGw==
+ bh=GcIG5JjE0LoqGPJvCOcFjDnp0IANj3N15d1tEwQsv2E=;
+ b=eyUN5ZWIBZIpLO5fBc2Tl1fl5ZWbJVVG2hltYfEI1A2+HjhIfCXzqaS7Y4nMaS2oosOKdUXqIiXo2ZRfAaUYjyo1IhmpkMAiKiAAXB+zGDewGEeTh04BOuG8IBtyWB9SVSxb95hSrG9UJ9kbiFn0Sd1qqDWkeSQGWRi+NU7lmEGnqmh0X2DuaK3J3vhfWVZOLvr/Y90/QWhpvNJYmQs+5LBWg7cPGM5BC+DP3akJGdJb4/at5neBFmGvjs1H51BiGURkInh+5CDKwGOylrifUFZoEo75UsWBRdHNvW0R4zU7ICAYDisoEx1JYg9znnRMV78PlUFBdoFHrfvx20hQvw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
  dkim=pass header.d=prevas.dk; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EeZ7zmOl4YHVStP5aiZOv1lKBeF1PKR4GAhZ6vv6MdA=;
- b=gACREga/8Jr2GJSaAg2wmCLQvIkvsR5OR6CvMktXnsVQ53CZre93lKkE2OuIHUWMNZI8reuz9UG0uz0K7p6rTT84oGhztbt/oTh68LzYYRCOePLWWaLFcQoTl2hrSOyYBTrrgwvZ8YrEDXJ6SQCCIwx8oML/Zto8aH8TUlsTQCY=
+ bh=GcIG5JjE0LoqGPJvCOcFjDnp0IANj3N15d1tEwQsv2E=;
+ b=Ezh12DNbkNJS68VqS91lrDjoOaiqitoimwF1QTtI0Y66CbkUC0jyOYYGwzjsIkNNgLIV2Ki445TGuslai3JZByYvHdvwPu9qECkJ5RC08B8obgDV0XbZ+RsvTX/zkvgKgZKVR4bup8LpPnVGviunxHUZTUQdi7/UQs05YmK4XWk=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=prevas.dk;
 Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
  by GV2PR10MB6233.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:78::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.32; Tue, 21 Apr
- 2026 07:54:52 +0000
+ 2026 07:54:51 +0000
 Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::ebc6:4e0d:5d6b:95d8%6]) with mapi id 15.20.9846.016; Tue, 21 Apr 2026
- 07:54:52 +0000
+ 07:54:51 +0000
 From: Rasmus Villemoes <ravi@prevas.dk>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH v2 1/9] string: fix prototype of memdup()
-Date: Tue, 21 Apr 2026 09:54:31 +0200
-Message-ID: <20260421075439.16696-2-ravi@prevas.dk>
+Subject: [PATCH v2 0/9] add memdup_nul(), use it and memdup() in a few places
+Date: Tue, 21 Apr 2026 09:54:30 +0200
+Message-ID: <20260421075439.16696-1-ravi@prevas.dk>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260421075439.16696-1-ravi@prevas.dk>
-References: <20260421075439.16696-1-ravi@prevas.dk>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: CPAP307CA0007.DNKP307.PROD.OUTLOOK.COM
- (2603:10a6:380:3::12) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-ClientProxiedBy: GVX0EPF0005F697.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:158:400::12d) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  (2603:10a6:20b:681::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|GV2PR10MB6233:EE_
-X-MS-Office365-Filtering-Correlation-Id: c66bfd04-2b1a-41e7-7fd3-08de9f7b4540
+X-MS-Office365-Filtering-Correlation-Id: 91fe56c2-5c95-4ba4-f227-08de9f7b4443
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|52116014|376014|1800799024|38350700014|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: kZgA1zgMkNYmxTyKF2f1+USE4ZfjS0K57Nvd9jWR2NxTx1EbCLTJOMJrQh7OMsvJqpUcv37abG/te4O850TpvzFFXQRnsTSWWEEss8gUXHfdZrAiY8+XRW98o3Zw+0Q3FueMPGpj4XVDywwXhwtksGE07bRp+AB8qKYnGyTLxIGAJor1JXkWx2H6seab6O9ZsE09wn+y9srB68z75VJ7mGlYFBaUtUawP6q6yB0B+x2RXXijk8WpAXk7Dak9djEf6wsr6tZ875YeV9lmCh9EWnB2JSNjb8QwKTm0hhlkymUgKaf+qEuO/rVGWIZnL2BqXttor/WNzfhgZc/fGqZkGhDuJI4OajWg9QWU3xIqK4ouNBPfydDyfx/1rCRn/s7V+I/DanRxrkY5I+N02Lq2TLRuoe2gSvYlanE5CaT+bCYcj7E63iikF0SDcT69bDL0gMXLW5JLXMFE7A69xPaYYb6yJmkWtS2K/5RUe5UywdLiyHLC+ei6eRl251aE2DNLgh8kcw0g0CYgEO3XAvvj3E9repUJRv68DTB+QRhuOyqwEnSx+3rrnGfl6744z/gXONfA6jVN5UoOB9ujH/EjCbHwAYgSa4ENNhhxAG2EIrRFs5UUBA/ClQtH5Hcd8G2VK5TL/QhcalZ075fAFy7gnl2eu5Q1Z0UJzdo+olVer5B3Fbf/8Lya7UHHJ5lUOkKsDZ8aQ8ugaNNoC/hKKy4Up9YQb/dLkUdsuN0lyCvHpkLZ/4fPgmBYIK7fo2NsTc034JvhlXiojLKyVm03X33NC1Tkp1dTbpeNTaP8LsBAdPY=
+ ARA:13230040|366016|52116014|376014|1800799024|38350700014|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: gRQZ+j61PmYr+3i8fJl2U9VeYBAcCplCvG1y1EPgJJKVdqZq68Ig3kCnM7A6f6y59hlsFTBjd8hglbgfQbgLKn4OqaSJTqImfGpchKT2QjLEXLuGKeld59j/lEjApxv5UIaJr9hgVPCtC7Q+gaYwqbIgOS/C8P60yCoJ++jFoKqYfhs4ySOpbTekSyLQio1U4+FcKxIaO6YIAtxKHkQPelIV03Kgp4BPZO68RRNdniSlNXrJj1ismgxbSJoj7kxreSOTbQGyM5Zni739NNH1uJUMtOCcIwtY6659PCv+TkrinLbGub+fJ8bQU4HvzYCAw4Hp6xm0meZV9byyd60ajgjsFVkxXwwxosTc813mCe20f4m0wIeVIms9dnVoOtZFR91wAbE/JIytonuuxaJdGi2viFKaEtDb6ewdGhYIFtumA1HuH+j31N6IimfJ+BtL7Ir0SbTnV8zMDm6iKxgc/NDYiA86JR0W/B7DsJZmR0QU9Dse7QNS/xZZP/W+IO/fUFwgfBjUYgYbNDwu5JMvDTCz9DERYWj/63Ir3CI969kV6PBDgxbAnYmRja86NeJR7OZzPhOk52jmJrMR/UPYv3t8e0Js1SCWnmYy+9Ny4s97DqbDcl5PNPQ7EAfzAbSIJLv77bK9+SAe4IYfPxspXJmNxjyhj60wNaiHk/d8yondL70/9khwFBZhuGMp3rxO2k8hhPRQSAL/ZBPcPTl3Z60CZjB7iv13SVbUsXpZv1evoc1IMQMkU2OAqjXoW/m7rqCbONlkzZo7e2zmKd1UIAsAYEzDIr2dvzhcJp+TbHw=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(52116014)(376014)(1800799024)(38350700014)(56012099003)(18002099003)(22082099003);
+ SFS:(13230040)(366016)(52116014)(376014)(1800799024)(38350700014)(56012099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?B9FE5p/6HX9Zv6giH5DEV8+bj7ivF491Tkov3il7s7eJ1+IFkjgSpO3Vkeiz?=
- =?us-ascii?Q?7i+LybrS/74bY3jp2QAwBD26t6rIc0doeMbVYLUwjYf/1OQKpc361BUynZu1?=
- =?us-ascii?Q?76Ze3UK+o3ljlHq8Z17NlhzBBib2wB56rKzY5pl13Zkqg0GreQsEHAOgQYXd?=
- =?us-ascii?Q?zFOfPXjmypsWJVsDy4mngXdbRzSVz2Ftbh49dHRkeuQuHk0n6lVJTLRBPb5D?=
- =?us-ascii?Q?8wFMxetWrz0sJ6UuHO0x8qE/XN7DChUms0rtBWCvRkeIqgIUNAyNWMmgyj7Z?=
- =?us-ascii?Q?KBCRzKMV+9PriaARioHBXvdOT1+PfJ4MmSzEWTptYNrAyQpXtS9djto232Sy?=
- =?us-ascii?Q?cTa1XoQFYDw2qBb/nncGFu7d/rFyH3XPf2hr3N2EsBh//b2kQIyc7BK6tVWd?=
- =?us-ascii?Q?gPFJFNbZoFNf6KabHMntTUpGvaRvtrE0t6H7YZspx4jsJZ5BGJD0jnFUSgP/?=
- =?us-ascii?Q?yd3wEqyG3zCM8VIu3/cC3klXthV7Vz2CC2s2UAZ4IpvRYbKjBBbqLQASqfpp?=
- =?us-ascii?Q?RFvgTxaMBDCxIAolA/uSBz95TnYSy8b6VIbUJ0B1jmGcf7m2uEAy0nbxg+En?=
- =?us-ascii?Q?9oyfmLckiCY4RoqcpHhEAmdihyrJ34rtLPoP8OqjKeJNv4HvM+c1kxZNkSEk?=
- =?us-ascii?Q?L1Z3+NzKKuIVDbdfdLmfZ9C3o9GE9J5Vl34xxqPpwHISMdvHZRMpzVI8Z9LO?=
- =?us-ascii?Q?/jUDlo9fdbgtlJg2QK3BL19PE0gBrRWzSX3aDKXh8zHeA3rTjcqMn8yIRPPZ?=
- =?us-ascii?Q?jU5qctJ2iO+2SvteQNvIY+g/nwOCVg92e9lLn0gD1ywF9NQZUGZCMRytbX4r?=
- =?us-ascii?Q?yUkMANitya/nTiOPrM1ho9/bguawk+7rio7974KZ7lTYhrTejhX132EgXJqw?=
- =?us-ascii?Q?UDbmtei8eRqLJCtuN/B1agvRB7oP87UYfWrUntk4P8oohxy1GPi32RNTqR8O?=
- =?us-ascii?Q?t05mOORAT2ixb8b8aUDI9Trbafmk9bDnpVpk7QSqTnxwknttBlEGmK6aJAf2?=
- =?us-ascii?Q?GbFC5lAf5v7xnr2rnCGUwND3poQ+no9AohbcRpI775r046jy3KQmNqBbpvt6?=
- =?us-ascii?Q?PpvFNEYlIA8CubGSPFhK36lang6/ywhF6fFZ9gO572Ezw52PxvlAr1mj2MNs?=
- =?us-ascii?Q?7wFMv7gLQ6IQ9H5v3ebRGaT+jIoGOib9CjzAEpj+T0NncOKUUXmH2jmLfF0F?=
- =?us-ascii?Q?ar4vNCDKDsUBoxJIQpbe9OgX09cJ1tdwt/QdfVk/Powk38hxfJNEQpMt5I9K?=
- =?us-ascii?Q?6R08MQMJ5rqfhxtlUpMbD3nb7dRsVlNGB8mBKBDftQzQPqG94rPRZMm/WJoy?=
- =?us-ascii?Q?+xhrOG+rvdRmgbIJdkiQg0tLgFqe0dMCCQkC5nBybmRcse5Ez71MxpN28ZyB?=
- =?us-ascii?Q?ZIq95yRlQuonPikynWfglfdCByjTWtabiRf2pnB0hOzzLq0nn/kmtQuig4mB?=
- =?us-ascii?Q?yReZgHla1lEAgUend+j8hpeLTaKNuqC0AnfmR3m/45ZeIzOBD7cNalNNiZLU?=
- =?us-ascii?Q?I07KKlnnFCBCZ8wJEKDe5pi6Ar5zGWGynjnYITbO6f3L951gBXrw4a83/yAH?=
- =?us-ascii?Q?TXXek6EJIM8dMX84bNqgTRCRIajfmuHyFJLTChriyT0vuZxzaBpJMgobgLYZ?=
- =?us-ascii?Q?ZfDEaAHv/7A+KeKqyQMtD+27rFo7uWQcROSTlqMJM03GEtO64FdBraCrC/5u?=
- =?us-ascii?Q?fmKcVjJrIB+mc1/WGYrLPCPu+w+eRgNmpWrp7FyEGDpNkR/9EOJ5d7Ugtbms?=
- =?us-ascii?Q?Hmbg+eh1FA7PY3TFvbD7OCPkMjzAd1c=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?KDzhX5+S1XR+SVZGqLdJrjaYWPnRohdeFvGhijWzxCNq1GPXpucMmLusToMw?=
+ =?us-ascii?Q?ilc3HYVroaHe9Xp+p2TUNE4+xk9MOxlSfY6MGfHQxfYGeZOSsfCbOUoy7Ggb?=
+ =?us-ascii?Q?RypBR/aJdIOh48IfmYhjNE3OW3MXHsuWxVb/PTlyQSffSQPlDf7UqF9RQoQL?=
+ =?us-ascii?Q?HDg42OIzBN/lEqfd4ql+tpHF+intvDvKfnixvPJNJCTTD7Zep9lc26BRrwhl?=
+ =?us-ascii?Q?l9U0i3nPnrbABfEOQE1Re/bsk4UFv3BxJwed9eI66QOA1P78yYAd3Gr8EMTg?=
+ =?us-ascii?Q?yg+8+ea2J4wkAdfGKUT/uy1S+rJsfLTbkP7XUGk/r2Xu9hKBPyHSPcnxwaDk?=
+ =?us-ascii?Q?YreX/ngZo9TEfgQ3OxuhGiWRMi7IbqPKxSMgNa4dIRcC/veOy2FUj2PWN5zb?=
+ =?us-ascii?Q?UiFKLXf62gsOf25YHzeFm8xXfUZ6jTdE1cXDkNxhqEW4TMjcrf13pUpeaotH?=
+ =?us-ascii?Q?86WVMOuWmilFj+Nz2inntXNZSNlB7ikjhrJsBxpsuIqkXln7RVD+u/c1JcxS?=
+ =?us-ascii?Q?u+YDZ/mArqf6rpYkYRvKQiy+GQdHWt0QNOPf9bT7S92ZVF/pYdAzt/tL9ADx?=
+ =?us-ascii?Q?FQSjHQeG24860t2qJFM3B7enQH3KLr9ueYdUqR6l/XAqYH50JVXFCu3JSp3A?=
+ =?us-ascii?Q?i/TkfOYB5i1wwA4BU3AGXvzGYmpzVgy2SeKijsNWsYwE4XWLZr5roMLOBUXX?=
+ =?us-ascii?Q?+UXiEeopbtVv3p6E50PvKIU2unqbAvRS9frvkbapD9cXK8plkKrdZl9/p3HF?=
+ =?us-ascii?Q?ujziaIXR8YU5muV1RIh/L642S8kgYbZWdEXQcMy9KvC4yb+ZwsfA6l9TD1SZ?=
+ =?us-ascii?Q?kKElM2F64XNefIgOMoWwTZgrCoir+iR0yOqYgRTvNjoqQStNAtHmIhqZnC2Y?=
+ =?us-ascii?Q?Y6FM+KlNe/DgttU4oaTYWze12nxh2SYDszaKLYB82ybmcK9XSeXGhIdEWqZ0?=
+ =?us-ascii?Q?tlZlO0IUINTyY2mmsNCCdb5D+l9I5VXtSVXrvTo4gKq0on0Hlk67/07vCH8R?=
+ =?us-ascii?Q?ItzAzrn2We/8fZABfkAoMZQWOlDFz609sZFfjl6Hg2Zq2SxK5KRiK3MNebf0?=
+ =?us-ascii?Q?qpctNesEuTjYbwO9rVxxA250yrbspzo2yPxea/laox7VeMez0mgiaSczKEGc?=
+ =?us-ascii?Q?HKV8O2iEYRBanlqPcm9Ey1L+bJ9kB38Y/rE7KvqEIIrtlVG1Ux1pAfWWpcB6?=
+ =?us-ascii?Q?j0JQ/m8jwckKU4yMWWmAA/p+XzVoIHrVof4MC1iY7XdrTHpY10VFJjEvvx8R?=
+ =?us-ascii?Q?TBhO83yogdiS/6WE3E9bjAhVQJT7N8+HMPNPWxc/PRrSZYvjfjoTm55fJWjc?=
+ =?us-ascii?Q?tBljLxP1jBiAY0laKgGe0TP9AlVnSCEWv2aCtopSSPOm/kE2OgR3ucog9ZoZ?=
+ =?us-ascii?Q?KZyhn2dnxCVSHBHnTMyU4RPlkLB47JnICXtzKpUdVFrecU2RWeEHbzyMKYGF?=
+ =?us-ascii?Q?27yNg7QScYOe7y1SfnxKNzHigc4owB19IBMY86Y/6+9irjVPAJYcYHKjqsCv?=
+ =?us-ascii?Q?3l/onu7sgBYCl5W219xmiljSdwWiPTd12NA7d/LjS51ZTlgwq0OJkjCShTj6?=
+ =?us-ascii?Q?f0spdfS5dmvSM65jpKQ9UHF2y2+hGpls5MFvKAauU4OhLEXO0ZNILRNyZQ75?=
+ =?us-ascii?Q?+4P/wY5ASN1GW1DgglASJaEdTktKebVa7DX78NAlGKPc8WraLlhVWbvff5O7?=
+ =?us-ascii?Q?l0X+00lD3xYk+7Y1fGEXhQXPhIhOOLcTSBcK0mbOjo2LsB0EVv+h+uYCTTQC?=
+ =?us-ascii?Q?e3A4+CaFG8nIKYF5pxveK4fqVg7UgPc=3D?=
 X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: c66bfd04-2b1a-41e7-7fd3-08de9f7b4540
+X-MS-Exchange-CrossTenant-Network-Message-Id: 91fe56c2-5c95-4ba4-f227-08de9f7b4443
 X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 07:54:52.6208 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 07:54:51.0331 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: q1YHCim8h+OY2rbXC46Al0bGA/+HreQ0YBkIMzhPVdI2HJjPTUxcjBOCyFMpW+yYlV2rT5WCaa11NJQ0I7pk8905NqqTbM9b+tfuOi/c2/k=
+X-MS-Exchange-CrossTenant-UserPrincipalName: w8ebnQhUXH1Gihnf7xx2gmJ90re8K8DdIUfnrCVK2sxUtKeJma1tIJI1SAjJ/6SHr4uW0gosDLNc3+TqTehx3iF7q4ecn9mXkQgiTKR4SN4=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR10MB6233
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -137,62 +135,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It doesn't make sense to restrict memdup() to only return char*
-pointers, especially when it is already defined to accept void*. This
-makes it uglier to use to e.g. duplicate a struct.
+There are quite a few places where we allocate X+1 bytes, initialize
+the first X bytes via memcpy() and then set the last byte to 0.
 
-Make it return void*, just as kmemdup() does in the kernel (and which
-our kmemdup() in fact also does).
+The kernel has a helper for that, kmemdup_nul(). Introduce a similar
+one, and start making use of it in a few places. Also the existing
+memdup() helper can be put to more use.
 
-While in here, make a small optimization: memcpy() is defined to
-return the destination register, so we write this in a way that the
-compiler may do a tail call.
+There are lots more places one could modify. But for code shared with
+host tools, one would need to do some refactoring, putting memdup()
+and memdup_nul() in their own str-util.c TU which could then also be
+included in the tools build.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
----
- include/linux/string.h | 2 +-
- lib/string.c           | 8 +++-----
- 2 files changed, 4 insertions(+), 6 deletions(-)
+v2: Fix grammar in commit msg, add Simon's R-B to patches 1-8, add
+test (new patch 9).
 
-diff --git a/include/linux/string.h b/include/linux/string.h
-index d943fcce690..9e47fe01c16 100644
---- a/include/linux/string.h
-+++ b/include/linux/string.h
-@@ -142,7 +142,7 @@ void *memchr_inv(const void *, int, size_t);
-  *	memory is available
-  *
-  */
--char *memdup(const void *src, size_t len);
-+void *memdup(const void *src, size_t len);
- 
- unsigned long ustrtoul(const char *cp, char **endp, unsigned int base);
- unsigned long long ustrtoull(const char *cp, char **endp, unsigned int base);
-diff --git a/lib/string.c b/lib/string.c
-index d56f88d4a84..c2813e0f854 100644
---- a/lib/string.c
-+++ b/lib/string.c
-@@ -667,17 +667,15 @@ void * memscan(void * addr, int c, size_t size)
- }
- #endif
- 
--char *memdup(const void *src, size_t len)
-+void *memdup(const void *src, size_t len)
- {
--	char *p;
-+	void *p;
- 
- 	p = malloc(len);
- 	if (!p)
- 		return NULL;
- 
--	memcpy(p, src, len);
--
--	return p;
-+	return memcpy(p, src, len);
- }
- 
- #ifndef __HAVE_ARCH_STRNSTR
+v1: https://lore.kernel.org/u-boot/20260412195947.1982729-1-ravi@prevas.dk/
+
+Rasmus Villemoes (9):
+  string: fix prototype of memdup()
+  stdio: drop stdio_clone
+  lib/string.c: drop pointless __HAVE_ARCH_STRDUP
+  lib/string.c: introduce memdup_nul() helper
+  lib/string.c: implement strdup() and strndup() in terms of
+    memdup_nul()
+  lib/hashtable.c: use memdup_nul() in himport_r
+  common/cli.c: use memdup_nul() in run_command_list()
+  drivers/core: use memdup() instead of malloc()+memcpy()
+  test: lib: add test of memdup_nul()
+
+ common/cli.c           |  4 +---
+ common/stdio.c         | 18 +--------------
+ drivers/core/acpi.c    |  3 +--
+ drivers/core/ofnode.c  |  3 +--
+ drivers/core/root.c    |  3 +--
+ include/linux/string.h | 18 ++++++++++++---
+ include/stdio_dev.h    |  1 -
+ lib/hashtable.c        |  7 +++---
+ lib/string.c           | 51 +++++++++++++++---------------------------
+ test/lib/string.c      | 34 ++++++++++++++++++++++++++++
+ 10 files changed, 75 insertions(+), 67 deletions(-)
+
 -- 
 2.53.0
 
