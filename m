@@ -4,99 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CDF1F327B4
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 07:28:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBE59F327B4
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 07:28:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42A4083FFA;
+	by phobos.denx.de (Postfix) with ESMTP id 7D278842D2;
 	Tue, 21 Apr 2026 09:28:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bfS8bj9R";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Tu+gDehb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35A7484119; Tue, 21 Apr 2026 07:16:55 +0200 (CEST)
-Received: from mail-yx1-xb12a.google.com (mail-yx1-xb12a.google.com
- [IPv6:2607:f8b0:4864:20::b12a])
+ id 3096584119; Tue, 21 Apr 2026 07:17:41 +0200 (CEST)
+Received: from mail-yx1-xb12c.google.com (mail-yx1-xb12c.google.com
+ [IPv6:2607:f8b0:4864:20::b12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0073E83C51
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 07:16:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DADB83C51
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 07:17:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12a.google.com with SMTP id
- 956f58d0204a3-651cfaa21e6so3608451d50.0
- for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 22:16:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776748611; cv=none;
+Received: by mail-yx1-xb12c.google.com with SMTP id
+ 956f58d0204a3-651b4d09141so5003339d50.1
+ for <u-boot@lists.denx.de>; Mon, 20 Apr 2026 22:17:38 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776748657; cv=none;
  d=google.com; s=arc-20240605;
- b=jJ7jTkM5aTKejspxUPK4EC9TqSkRXnduJ18+k22yu2tg+LzeId7q+82KXQe1elTRGt
- Th9aE6u2cT9fhIF9l1iF01TuHYm3Lk5s1BU6Qh5ZDuHd6jn14c932k01M2PdKMMoNkDl
- R+zZN84/5Jy9QiF+tNBP3uo4xRCNnjnVfbwcFcxegeQWDACQfkSEBOq+65BQD38KRF74
- PBJco5yKOX0HYHOjYp4dKeMnJNyL0D5b+8DEkjs74F+Q45ZGLy4x0o9pdCyJ85S2aw4/
- i1+CKUJTfg5Uq70J3iyrr85xfzm6AoLtIFdfFq0QrxZwIHx8TEbvfrLnYOQFji4RAKbg
- akaQ==
+ b=kpxIDWa5KqT/jU7qckOD8kzmMcrE+Ja10VoWH66TV6Yl33QCLN8T2WMQbNgFKBvHTT
+ nbsMqy0hK51XSBdhAvZiruNfx2OHuQfpdtO2BcUBPoiffIVbY19Z9KOgBFy/VzrqLGOi
+ kQzWukzjOixHIho9NwDrE6ldMtnuaTqB9uLFrnk3E7oRdCBr5nafFPHSoOP5nSA73BJf
+ uslucpk6THfjlgztkLWF/684ZUxdbrTWVEBJfov3VaEn42zx4nqu/gooM29y2uNZRUsG
+ KgAe3UsFJ0M+Rlw1bdEXS/tgOILBNyy+iKhObchA8Z6mEtdyyoitERksmFwGgrsvYqb1
+ sHjw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=9YM0lSuDcsTuL/p+iqzLwAtpEQpntOG7+xeTv+n7+V0=;
+ bh=Yk5h6Gzf8QWvSKXTZlPvozGVtAG7c+Aw9YYTpIqN23E=;
  fh=vor+8SMF4v7ubiN9P3R6H+Zw0/9OGjgGN5wypefG4Qk=;
- b=aVaehEbX4rnrItmOIdVaA/9mOHJ9vERo5Xww8AzEjYSFwP0s8enOO+yHFY4RBiCCqB
- PMIodAgB5JN7lNNXLqu9mOwFedigyDIyV48YrZZMQ1oMsADCW7cd8GveGTUrhnHTBwtN
- HXc6rYEGkp/6fpFqcVpNEAXx1bQ27lQoPPmqmwChM+KusYq1dIWsU4fB6C4Hmc+khL/h
- KkIXub70rY6Pz1bSebEwn53yB4UhUBsz14vmgxMC1A+exy42kgRsfopY3PfB+U7SWOCb
- i/xyCzMMbTe8BuZy6gJeX0cSACZpxOKZJ3uf2n/0Yk/eogJCspyS7tRF3LRlCToqZs90
- d5CQ==; darn=lists.denx.de
+ b=VxNVNaixOginsGjJAHcnd4LiPGJD4jzH93VygSodfWPkPk28fyl61PlW8ulwEFUskm
+ W9NxysQKtjY/4PYzmCV9rcb/nwbMX5YXsPvVV+9UnPOuatOuWGw/HwFoBof5XukublWP
+ fogy5NseGB463iID7GyZY0cB7sKzQui2ZPy9nCMyeZveZkrf+YgHsO1K+CwjGzQ+phKh
+ p7++osP155ML2u2tZeLh7anXnM49XJezxWCIR1wdBeU0RZrcL5LjWFc2Y/v1m2o6sW/+
+ PXyQGM7HogBYbEQRPYomPRYsDFrB4GZ5r/Y6MtJvfq4mz8EAtv8lz5xfNASMn7XFGiW8
+ 8cuw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1776748611; x=1777353411; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1776748657; x=1777353457; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9YM0lSuDcsTuL/p+iqzLwAtpEQpntOG7+xeTv+n7+V0=;
- b=bfS8bj9RNap8wwYzD8mXD4PjMo7gwlF4sC/0IXwnRg7YgvI6bdHHwhK/w30juzbbsm
- Z6WYzohdXeXmCJJAEn6WOjftLtPT126RYTuUCc71sRAemYmejw8g+XJ4hmYX6hQkUNSW
- Vd7YPbeFlNL9bX3h3+wK8kSGwt9/zrkwB8dl2ZD114nrvPnBM4hTodC2bDUXyCj+X/9k
- 6lcdiMKe0dL1pD6eAYNYmfADchjTRkOSdGbA5J8QraQv6/6coaoF7zdrZ25gWKzAYfCn
- AZ4ERtMrCTiRVBJ38c6A7lnSAN6mE91A8nU0QYzziGvIx6O187xtjglI1Ibrsk30pyPI
- UYUA==
+ bh=Yk5h6Gzf8QWvSKXTZlPvozGVtAG7c+Aw9YYTpIqN23E=;
+ b=Tu+gDehbus5DGUlg/HsF235BJQ2UOsF5R9v28bFLeKU1sFxgyDwn9LZzkjObnX7ZZ5
+ 1TQiULDkdK/Gnz0QUyACpYxebMei/j5061l98hRn6PUGA8fSGzofhVpqDRR7GmMSbTTn
+ 6QzajqgBsghK5IpCZOYBe54Jo61L7P7kTRjBE8B8w3YhYAVTDscV6YHANPMWp260TLxx
+ G0gnvkA6CmNJpJC54pi6XSEdo3uBYChzoAf2RLGT7IwZY2su1XsVQktjwt4H7YRWJDK0
+ z/Up60tjl3Fqd0qoXu6l621BtPtrc7ELBwiZrm1vMbinSvRO/OfkkG6xR9F+Nd4NA0GI
+ 6ZrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776748611; x=1777353411;
+ d=1e100.net; s=20251104; t=1776748657; x=1777353457;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9YM0lSuDcsTuL/p+iqzLwAtpEQpntOG7+xeTv+n7+V0=;
- b=IJHqp27lFE9cQH+2cYfYTcepHR166vli0X8eDeldKJla5bNcUTNCNhYt4KmWbw0rQK
- 7hxmd4SPpAFdHu6VoaqUQtkFDvikkb1+SzY6cQrrp8m7rpqSil/WucE8BMzB1Mss4nga
- sw6ngTn5MXUCYJB1vU3D6ek5VDTPpclgm0Y+mbZBRZrLcPsjQ8npaq5LfrmSw8dZp9eL
- Hu2VC/JttEqdKbcL4CA+sJQP+pYW8YPihVqHlLFiTT0TjIvjsRHuCmc6MNrD04qiPqS7
- iQXLvrfBg+nUgjpoteC12IVC/kdssGpFu4FGqmdYrLuikYHFccF0rCP6EbNNBlXR44lf
- NwGw==
-X-Gm-Message-State: AOJu0Yy/MeHBbn1JGUJtWh2HW9riqHgi6W0gPd19gRlSSuY6VSybJfVW
- a4n3osHkMkRSurnGQ8SnJY3pDapNVpOX2xKyIAha8d6/ayE4vonWw5xW0ITUh2Prt4LsGool2WE
- UG8yoy8KNJynMGJN2tgkoHd6qbAPpDWPN8foYUEU4ug==
-X-Gm-Gg: AeBDievWscJPRZRX0iNkGaR3MAjAXF9qC3G0WwV9gaBUYbNn7zX0Aee8qd95N0+7EPm
- nYDk2SsDa8DPP157KVbun2x8WEcHZtaiva3G1LEOIxXdmAgFcwzF5eRGKrmqQ/KAakDoCaa/+8C
- fg3BYFr0nHcQ1DVABsBu6LHJ+rdW6qCij8R21i7aKP56fau6lIS2g4pJKV18V6HNaE6WH3u+Qel
- x7Xdy9bPq2CcjwqCsHnKzJlJ1p0TwUH9vqxH+FB2huFWP/j9U5Bhda80ojPGo1fFoQsAAHaEtlQ
- p4Jxsii7KQAofQDJ9znYhLJ32sF5BHBxZTFs/iDKdoTlWgCTforb2dBBCIqpevdrh+hmZDE5UR2
- WlryHNIR33AROk5cS+N6Li5YJRgEjeR8hts5U1bcFC+M0yNdgVU5xnirIBvjvQmdwVTxWBXW5i6
- wy1mo3d5DM60q7Slgmfla50l10rcpYrxuJMeqQM9LHAg2JkFairD+TRHREOJ979mV8aw6b4U7cy
- w0y0C/D25EQqNEc3ql4825VuHKnTP9dvfc13UP5hNjj3oExL5pTvWVBntrMmvGldnMvgcCq6Qui
- 4XvvgD9vyof6M7J7NKNjAZkhdwfhva6fBzS69l1f08UdBVEWdXcv73w=
-X-Received: by 2002:a05:690e:43db:b0:650:77c7:ae81 with SMTP id
- 956f58d0204a3-65311b3180cmr8155989d50.22.1776748610676; Mon, 20 Apr 2026
- 22:16:50 -0700 (PDT)
+ bh=Yk5h6Gzf8QWvSKXTZlPvozGVtAG7c+Aw9YYTpIqN23E=;
+ b=Rf54w9y3Pghq7Lzd+sCqEx4dKmd+K+uWJWntpPOHZSAZ9j4mcEsfcKUfN6h+4hk5Pk
+ IwUFzEjgD1dCbrIJv5xv4iYCa1xb/zj9M+iSHAF0smItB6OTTho5Jfi8MDn3Ox23xYV0
+ EksCd3t1MM6rWduvQ2WlE3Y68YMF4qSpc0t3yetk+ek8nAxxgxLeX3W9oX3u2hVxMe0O
+ Q1HHwCwZo/ZLYY98B5ZPkV3c4oWE4TMkHzihEHw60Xxsx2ir5lwql/K12/nmkRtggK4u
+ urtNIYWrgZZyRbPvC5FfS1oBI+yxLIH+Hc4s94taHnef9g+ObrIfWD1xJOzkqNIvLJCM
+ 4yiA==
+X-Gm-Message-State: AOJu0Yw30OyWn87LiPG0+uUXDY1ZoAE8otfsLxpipV829+t+p4YoU/px
+ f4SDvLHzjPDSRWeFSSBjMQ2MZbvKx9MRdHpXA4cmHajTrP9IiIV6utnrY+KvbPzipitvFR7nTUq
+ K09Rb+czkEsNmtbf29oazUpMSJuovjwul8lT/JmibYA==
+X-Gm-Gg: AeBDiesbFMOWRBd2Ax4P+spmd6Bu83cFHkh8jvqUgJIungHhx8TZNxWoF6J169xrr+6
+ bX5Zx/3P3Q63wIC18D7JVDtdl9I7DFt+3TY5qkk3YVAxIR2zRVfjdMkR6SQM7EMp1uKeTiQ4f9W
+ sihRqny/sPJmcz9XVqrfFujXrnhLNMWGbvCugAPA5TYhzPo2UjYg9CRHrcy8nlGUWkAbvfcByaf
+ tTL2BlmNsEy3lgPG1Ks1PlPTVTsuAWKRDmuqbnNbXuEc+72/z8Gm5J4TeAQbEx7ZEc/r59KnB3T
+ 7S1skAyVrtYXYMsgixjE9CFxG12B27MtQ0Va3Bgq1KSPIKqLETzu1bjWMZ1Go7bXUmvM6sComTZ
+ Dg4UezxO3NQB8YAM6zKFCXY/ovPR5wvzHzcqgv46xwCwJthcvWagLawnZi91VlJOrAIOPvhFjxS
+ Rj/MZuqEiCdSSgvIPKTUsWGxZIIO1BUL1UgjCelWrjNBjrZSSVarOwJDEtNzOw7hIJW5psxhuPw
+ JI4i5CbN4iWXMMSaenvQg9wL2gi1kag9UxlfeYHDiw7vdOQCMGZjcW7+hSrRXqrTjlfnUWdOmec
+ u/7XCT5dYwFbn2IcCXXJGJp61sU7J3+2UogP6sXLfh9xs71nYqtCeVk=
+X-Received: by 2002:a05:690e:1914:b0:651:c41c:80ce with SMTP id
+ 956f58d0204a3-653119894a8mr13072501d50.16.1776748656972; Mon, 20 Apr 2026
+ 22:17:36 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260420-net-kconfig-v1-0-9900002d8e72@cherry.de>
- <20260420-net-kconfig-v1-6-9900002d8e72@cherry.de>
-In-Reply-To: <20260420-net-kconfig-v1-6-9900002d8e72@cherry.de>
+ <20260420-net-kconfig-v1-1-9900002d8e72@cherry.de>
+In-Reply-To: <20260420-net-kconfig-v1-1-9900002d8e72@cherry.de>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 21 Apr 2026 08:16:14 +0300
-X-Gm-Features: AQROBzBFYblociOblAsqbs44QPUtzOksoHvm5GP2Bn_EKJmmo6kbIAU-ZgzJVv4
-Message-ID: <CAC_iWjLYYYHRV=1YfXLUL7Tbkms-EjOkv7UBLexQ-4YNPwowpA@mail.gmail.com>
-Subject: Re: [PATCH 6/6] boot: remove NO_NET use
+Date: Tue, 21 Apr 2026 08:17:00 +0300
+X-Gm-Features: AQROBzD8z4Gz2E8G-xiaDkBkb90xxLB-LL5yMQJ0MwU3EgkDyA26WX0jrIPaW8U
+Message-ID: <CAC_iWjKaVsyxCuKmO8LqR-sS4DN4DsEnfhf1mNEswT2PtVJhHg@mail.gmail.com>
+Subject: Re: [PATCH 1/6] move networking menu in net/Kconfig
 To: Quentin Schulz <foss+uboot@0leil.net>
 Cc: u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com, 
  Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>, 
@@ -180,45 +180,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 20 Apr 2026 at 14:37, Quentin Schulz <foss+uboot@0leil.net> wrote:
+On Mon, 20 Apr 2026 at 14:36, Quentin Schulz <foss+uboot@0leil.net> wrote:
 >
 > From: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> NO_NET is now a transitional symbol which may eventually be removed. Its
-> meaning is the opposite of the new meaning of NET (that is, any
-> networking stack).
+> In the main Kconfig, there are only two more menus, General Setup and
+> Expert, in addition to the net menu. Since the part in the main Kconfig
+> is mostly about selecting the network stack (legacy or lwIP), and that
+> we already have a net/Kconfig, let's move those to net/Kconfig to have
+> everything in the same place.
 >
-> Update the symbol dependency by using NET instead of !NO_NET.
+> No intended change in behavior.
 >
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
 > ---
->  boot/Kconfig | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
+>  Kconfig     | 34 ----------------------------------
+>  net/Kconfig | 34 ++++++++++++++++++++++++++++++++++
+>  2 files changed, 34 insertions(+), 34 deletions(-)
 >
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index be6bb6d4535..ae6f09a6ede 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -431,12 +431,12 @@ config BOOT_DEFAULTS_CMDS
->         select CMD_FAT
->         select CMD_FS_GENERIC
->         select CMD_PART if PARTITIONS
-> -       select CMD_DHCP if CMD_NET && !NO_NET
-> -       select CMD_PING if CMD_NET && !NO_NET
-> -       select CMD_PXE if CMD_NET && !NO_NET
-> +       select CMD_DHCP if CMD_NET && NET
-> +       select CMD_PING if CMD_NET && NET
-> +       select CMD_PXE if CMD_NET && NET
->         select CMD_BOOTI if ARM64 && LMB
->         select CMD_BOOTZ if ARM && !ARM64 && LMB
-> -       imply CMD_MII if CMD_NET && !NO_NET
-> +       imply CMD_MII if CMD_NET && NET
+> diff --git a/Kconfig b/Kconfig
+> index 7f00e76ba78..1fa31a4f5a8 100644
+> --- a/Kconfig
+> +++ b/Kconfig
+> @@ -791,42 +791,8 @@ source "dts/Kconfig"
 >
->  config BOOT_DEFAULTS
->         bool  # Common defaults for standard boot and distroboot
+>  source "env/Kconfig"
+>
+> -menu "Networking"
+> -
+> -choice
+> -       prompt "Networking stack"
+> -       default NET
+> -
+> -config NO_NET
+> -       bool "No networking support"
+> -       help
+> -         Do not include networking support
+> -
+> -config NET
+> -       bool "Legacy U-Boot networking stack"
+> -       select NETDEVICES
+> -       help
+> -         Include networking support with U-Boot's internal implementation of
+> -         the TCP/IP protocol stack.
+> -
+> -config NET_LWIP
+> -       bool "Use lwIP for networking stack"
+> -       select NETDEVICES
+> -       help
+> -         Include networking support based on the lwIP (lightweight IP)
+> -         TCP/IP stack (https://nongnu.org/lwip). This is a replacement for
+> -         the default U-Boot network stack and applications located in net/
+> -         and enabled via CONFIG_NET as well as other pieces of code that
+> -         depend on CONFIG_NET (such as cmd/net.c enabled via CONFIG_CMD_NET).
+> -         Therefore the two symbols CONFIG_NET and CONFIG_NET_LWIP are mutually
+> -         exclusive.
+> -
+> -endchoice
+> -
+>  source "net/Kconfig"
+>
+> -endmenu
+> -
+>  source "drivers/Kconfig"
+>
+>  source "fs/Kconfig"
+> diff --git a/net/Kconfig b/net/Kconfig
+> index e45ceb25106..249c27c115d 100644
+> --- a/net/Kconfig
+> +++ b/net/Kconfig
+> @@ -2,6 +2,38 @@
+>  # Network configuration
+>  #
+>
+> +menu "Networking"
+> +
+> +choice
+> +       prompt "Networking stack"
+> +       default NET
+> +
+> +config NO_NET
+> +       bool "No networking support"
+> +       help
+> +         Do not include networking support
+> +
+> +config NET
+> +       bool "Legacy U-Boot networking stack"
+> +       select NETDEVICES
+> +       help
+> +         Include networking support with U-Boot's internal implementation of
+> +         the TCP/IP protocol stack.
+> +
+> +config NET_LWIP
+> +       bool "Use lwIP for networking stack"
+> +       select NETDEVICES
+> +       help
+> +         Include networking support based on the lwIP (lightweight IP)
+> +         TCP/IP stack (https://nongnu.org/lwip). This is a replacement for
+> +         the default U-Boot network stack and applications located in net/
+> +         and enabled via CONFIG_NET as well as other pieces of code that
+> +         depend on CONFIG_NET (such as cmd/net.c enabled via CONFIG_CMD_NET).
+> +         Therefore the two symbols CONFIG_NET and CONFIG_NET_LWIP are mutually
+> +         exclusive.
+> +
+> +endchoice
+> +
+>  if NET
+>
+>  config ARP_TIMEOUT
+> @@ -254,3 +286,5 @@ config SYS_RX_ETH_BUFFER
+>            controllers it is recommended to set this value to 8 or even higher,
+>            since all buffers can be full shortly after enabling the interface on
+>            high Ethernet traffic.
+> +
+> +endmenu
 >
 > --
 > 2.53.0
