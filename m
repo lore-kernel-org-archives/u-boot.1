@@ -4,106 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DF21F8FA72
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 13:06:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9444F8FA72
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 13:07:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CBD883BC8;
-	Tue, 21 Apr 2026 15:06:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4544A83E36;
+	Tue, 21 Apr 2026 15:07:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="l7jdVPWk";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Zpz0PH4A";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="dSFPv/H5";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jE/mA36q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F46383C51; Tue, 21 Apr 2026 15:06:13 +0200 (CEST)
+ id 0AEE083E76; Tue, 21 Apr 2026 15:07:27 +0200 (CEST)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEEE8839D5
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:06:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F68283A91
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 15:07:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 63L7LELQ1128592
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 13:06:09 GMT
+ 63LAm4bS1511084
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 13:07:22 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- IBRbFduo0VKoQ5qzGnmtDz9bzQcfG0kM02th8aKhyng=; b=l7jdVPWk2hPpG1wW
- 1m5IL5//ry79rfh1VxwNt9Wcv9iUolkM1nuPoiGcoEMTzfoDIv3xxf3nPIl9cFRZ
- Lvgd5VwQsDqB3mwU0/+6fAPnaQ/W4M2u/22Z4/DjE53qISm2ZoAXlCAMXv2RFC9o
- /xbAAN8AhQJfS2EKV3vRJF4tWFfH69ggvY6FCxaxR1u3jW4ZThsrxebZevRm7fy1
- wymdqK93ZRJRBtGcphg7rxWuJXMnXRRHJKt9saohsCMBSXkiS3hbQ4jqyWxYeFvz
- 5B3NzVbMiKG5Y1KWA2EiFHUjsU/OJvs9LlFkVJ6hQKEs+ec8KUvOxAGHIlL3TBSV
- oLWIew==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
- [209.85.216.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dnw68tpnb-1
+ 6IJeLVc27K8/M0aN7u8utDbpeBeBEZ5LjYtl5f5NUNs=; b=dSFPv/H5ae/yPkAa
+ y0Crz/Flzxj6p0473hsYyyoI8zh8ssCB84fniDtDmlT7nWjAP5uqwsOZ+XPm/nNU
+ oUToxjoemVstanUrRq0/DCsMgp3DMl+RLMD1sJJLFNiMA7r3Eq1JpOJe9kLk0f73
+ Wf8z0h8bHWbV7qak///uQtNhve5FAVOMb4EiE+a/OOH3yt57rES0aMXsohKWSMsn
+ Zlyr2WDkp0T6nvTIBXgSmu8Tf6c4oQrZaew/96V4w2B7fIYEng+gxbhGVtyc6H2E
+ ooN4+uLfJFHuKbJrAHB+ndHDOtrdgzqBurmefqMCeoDN5sSFwLeMEBcvEeOjIzRT
+ pKNLcw==
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
+ [209.85.214.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dp2ak1u4n-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 13:06:09 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id
- 98e67ed59e1d1-35641c14663so5030035a91.2
- for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 06:06:08 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 13:07:21 +0000 (GMT)
+Received: by mail-pl1-f199.google.com with SMTP id
+ d9443c01a7336-2b2ec948174so39855705ad.0
+ for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 06:07:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1776776768; x=1777381568; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1776776840; x=1777381640; darn=lists.denx.de; 
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=IBRbFduo0VKoQ5qzGnmtDz9bzQcfG0kM02th8aKhyng=;
- b=Zpz0PH4A+f5twtjo+CLwizSxdh2Mp7t/Jwwlt1LsveaOfFBCQDiLvYvj/upOW2q/py
- txrDnnNRLN0oj4aMoYOZ3vq1q+UKhYPQT58CPkfR/9mQCw2iL0nGPN9psJDQeEgHhrvZ
- Y9IoPx9ohADR22sLt0sd6CXZecbZYPdVKnNMfJJVKj0OMXKG2CTMZtUh5cnK9WBm2heP
- JTYSdPKzq5p61+bX3EFGwYBXl0wmBJY09SLTsQjmo3KebCZz+8KdY6mnXztrA3eilL2y
- YI8Q+ZV4OUgHIcR00r3GTrzh2zjsOxQLyoNlJvP8cbzvNzfky7uKq9xVST0qj+7IE69w
- rStg==
+ bh=6IJeLVc27K8/M0aN7u8utDbpeBeBEZ5LjYtl5f5NUNs=;
+ b=jE/mA36qg3nRtUNxBLmayCULi3sD1KKXqQlibqDz34uTnoJMk2mS9xjOTIyfu/PvpP
+ NKLw8nq8nWqE6OAA++7Ltr/ZkpgG1gUk2qtyDY24LlBI+09PIEW8xpkHKCRIXi76VOld
+ 5km+LCfn9i2eLEF0i7ekcdo4z+a+prdF8y2BDxHpcGrNaOcgLntmq8ACAe5rys47MunN
+ fIrx+o1VoYfZM0moeIOy9JJgA41Izg5x45Fm1xot2+AIPU+j3AJK68TpBPu4VguYWXU9
+ VyXa8OtxQ9H3SlaFJyeJQV09dIa2ahjCBV4xtShZQRRM7RUFwmaBttIGdqtJQAXXrPCL
+ WsPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776776768; x=1777381568;
+ d=1e100.net; s=20251104; t=1776776840; x=1777381640;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=IBRbFduo0VKoQ5qzGnmtDz9bzQcfG0kM02th8aKhyng=;
- b=q0vb3lVM4o3Q1/6YKug2IpO1dRciL5Y5y6JSYYsJgyiC9qdEMCm1DnFqayzcuv5P5a
- tpUvIZhwzF1vLDTzxnsl7qhNctsDrJfO2aDe9pIQWs36MHzJzK6ZXkwP8zwip3wEDAXL
- /QRSy9Ijb5l0q1+FLXjGaCt9+5HM1itUDUuSaGmaFUU9eo7ZUV55jwWp7xvOhrbUpojR
- Hb2Vq7IXt2TjWYOD/hOp0Is1lxQo+LQgVX0KqgCZZUaE3MUYKj0Qq9ZLPytlAvntJW60
- lZ3DeaLy0NHrR+ISjDr7AQALLA35xoCXRSrtm5DGYic3my56VS/zR3K6Ba21FhzYBpaU
- 1BNg==
+ bh=6IJeLVc27K8/M0aN7u8utDbpeBeBEZ5LjYtl5f5NUNs=;
+ b=FG27iC4Jn26xWp3xZYhavmHc7PmvonSQ+uQVWLW+uElpKmYpsXLQ83D86DYWMH3zTT
+ MOGQI2DYKRdGOkmjSpZ98WBwVcsbvAxPC7MAl8zGGwkXup9Th0qjzb5+C1Ij26lJ7mKe
+ VKq6Wd0NX0J79Aa744JZJPflKzbQlsl0igMGHtFqgW32JmL6zonXeLWBGJDG6F09VS4v
+ 5oRenHEgIRT5/OxaJHMNtw+77akCdhml7ncY3GHq+oa5vCmUVh7P0xlBAGD7mwm1PkbX
+ I3chPiBBxw0DRrvBuBhRjVBHjQan3Mjd81kXIzvGG5mJiGB5xtpLNnwdWUct52iDWqrK
+ sJ/Q==
 X-Forwarded-Encrypted: i=1;
- AFNElJ88uLynIKWszOWfPC3saBJID9DHUBsOw2AfSFiIxKwV2NXAqEXoyCRHF9a1u1/ld3vnl6tg9ic=@lists.denx.de
-X-Gm-Message-State: AOJu0YxKkAENOSXKI+usS/LE1BOHCOJRrEFLpgicnKHlFd11oXw6JIqW
- qK5z7vJoP7zy/pedpRbkQMwVALf/lzic+pMvwMR5z7LlvIMb/AyGCVwSl+vIXRqQkpqnZOtiCBL
- ac75AVKuqe9xXSZ0SNt2P7Tx11qIZpfFzFlcAiGQeXiUGJXZkLJaSRAgQ
-X-Gm-Gg: AeBDiev7dMVGeljdBhzUTZ77iVCP0WrKROXQfj2o8jt8KTQuvN00dnom6poGlYq3ZEW
- BWiwN+9Eok136quKxVSpIcl0eyZMHgc51L6v9n/OxPl85sFBK2BOlbB/4s21RhtNzolgK4juJKC
- wnnAbtjVtFrVS21c1VDdNg6mkMtCTHVzTug0ZLj8VWzXfaVnV92Zn5u82RFKs3zq29qor2oZh65
- t5vhTNRVXRPnPvT6QgN3ITDiGPW6kObnpVtCGBCuSdrdXtNkvuwEY2GIVPTRXtNlOFUwbff1Iue
- Zeq+zOdZrcO/9+CmyXBXOC4zO5GYM9L4u52jBKLlE9/mKMA1Z8jh5GsKP0QuPy/I1d7QX1GXy14
- NF9gNVInUInkS2MTB1jy+P5jGJdBjzqFqqzZnDQe2kkydUAla9HPag4v5QwQlqb259mCY
-X-Received: by 2002:a17:90b:5185:b0:35c:29ba:bf92 with SMTP id
- 98e67ed59e1d1-361403d5988mr19194877a91.5.1776776768057; 
- Tue, 21 Apr 2026 06:06:08 -0700 (PDT)
-X-Received: by 2002:a17:90b:5185:b0:35c:29ba:bf92 with SMTP id
- 98e67ed59e1d1-361403d5988mr19194828a91.5.1776776767437; 
- Tue, 21 Apr 2026 06:06:07 -0700 (PDT)
+ AFNElJ83WPIBY2fJkrUdDJOH0nHShbzU0ih5m4ZZkPZI8FE8U4vArFywlM911QxKOjAebGPZFaJ9FGQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyMUzYr2btGNrV3VGPO6Tn3oUUjGAwHXLAh1Ky9ZaQPHZkeC0vb
+ 9Not7zRmkd8JpP6J5mYtITUaa+O9jhTl5I8WHUWNUHTieIFxMDKbiVTi31tFD8jWN4A4tpbD5x+
+ C+U9ymPnUBfQungDEOwKgStofbAWFPs+Ijqz5uItXxISdxzKTCsEXE/RA
+X-Gm-Gg: AeBDiev/6c6q1A/RZss4XSc4SzZGQjQeF8q4qOBN0RIo+9Ty42kc9vV7N02jTvk5nqd
+ 0Gi/kCF3qHxKzWHpJ1UzWbN1NnzfudN43FOisA4mTMSfQ+IKg098gDRjwiDL14rcjTfh4XjS1gV
+ ZwDB+Sy+bWcnorerKhAbhbQfE80W9n7JogAPxuNPuGbmDbYx3eslxNOFwLivKIDEZaDZSA+NsuH
+ x4HftaOXR0ymgWLbuZ+k/qkNodazw1sQ7JuCFCOJvaUW6jw/PqXbVKt1sHkk3PKthrZeHa5tD1B
+ hawQL7CQeV7H1W6HNzLNj+FqP7wqSRh6twnonl4K0FIQVdVEgm1Sq+YmmUjo5xQYT+A1AGRiFKr
+ lOX+3u0z9U7k8fmABaptvxvgKQZ4e75GSXz1ZUpezJVVwEgSEYrDpmWV6pb0ionsxOUPd
+X-Received: by 2002:a17:903:1663:b0:2b2:dca5:101b with SMTP id
+ d9443c01a7336-2b5f9efc3b7mr201917125ad.12.1776776839732; 
+ Tue, 21 Apr 2026 06:07:19 -0700 (PDT)
+X-Received: by 2002:a17:903:1663:b0:2b2:dca5:101b with SMTP id
+ d9443c01a7336-2b5f9efc3b7mr201916495ad.12.1776776839029; 
+ Tue, 21 Apr 2026 06:07:19 -0700 (PDT)
 Received: from [192.168.0.7] ([183.82.177.74])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3614195a9fbsm17796266a91.11.2026.04.21.06.06.01
+ d9443c01a7336-2b5fab3bd2bsm142520465ad.74.2026.04.21.06.07.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 21 Apr 2026 06:06:07 -0700 (PDT)
-Message-ID: <c87bb381-eccd-461c-a912-a84eb1407b6c@oss.qualcomm.com>
-Date: Tue, 21 Apr 2026 18:35:59 +0530
+ Tue, 21 Apr 2026 06:07:18 -0700 (PDT)
+Message-ID: <533e8a1c-e157-4e5c-837b-32858b44179e@oss.qualcomm.com>
+Date: Tue, 21 Apr 2026 18:37:10 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] drivers: mmc: uclass: Set removable flag based on
- device tree property
-To: Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de,
+Subject: Re: [PATCH 3/3] fs: fat: Limit transfer size to prevent SDHCI
+ controller timeout
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Sumit Garg <sumit.garg@kernel.org>,
+ "u-boot-qcom@groups.io" <u-boot-qcom@groups.io>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
  Lukasz Majewski <lukma@denx.de>,
  Casey Connolly <casey.connolly@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
@@ -115,37 +117,38 @@ Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de,
  Simon Glass <sjg@chromium.org>, Jean-Jacques Hiblot <jjhiblot@ti.com>,
  Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 References: <20260324-emmc_sd-v1-0-883a45538b6e@oss.qualcomm.com>
- <20260324-emmc_sd-v1-2-883a45538b6e@oss.qualcomm.com>
- <ady7Q-acflFr07v-@sumit-xelite>
+ <20260324-emmc_sd-v1-3-883a45538b6e@oss.qualcomm.com>
+ <6b16c87a-ef5d-4c5d-9268-f1c0c3884b05@kwiboo.se>
 Content-Language: en-US
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <ady7Q-acflFr07v-@sumit-xelite>
+In-Reply-To: <6b16c87a-ef5d-4c5d-9268-f1c0c3884b05@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: CSu4ejbi6LnOL1tM1jyWzeJlAk0lPEaO
-X-Authority-Analysis: v=2.4 cv=apyCzyZV c=1 sm=1 tr=0 ts=69e77641 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=wgjzkBLg20+cMgJN0zysmg==:17
+X-Authority-Analysis: v=2.4 cv=KItqylFo c=1 sm=1 tr=0 ts=69e77689 cx=c_pps
+ a=JL+w9abYAAE89/QcEU+0QA==:117 a=wgjzkBLg20+cMgJN0zysmg==:17
  a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=puaEKM2cYFzsJgEGcLwA:9 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDIxMDEzMCBTYWx0ZWRfX0BideJUCMCep
- XDMYpNIMui0R6WUQgLWEdiEQ/0hMdMSUpcFzVnzOYa505X1+hRzWOgAbtKQpt7iGhEVBUxkRA+J
- UrbpDfLSFeuzE5bNPPzhTeGHUuPY03rFLpgXS6Y1Fz3GYHz4BqpOzx9+xniJzrnZApktdu1fS12
- OpV+ygnE6/zuoqdrKDvrw7addl+DkBSY7c3AAI5r1TYVO3/2vYKKfFVaNNPLQ42JowKxOXH8SwW
- tFVNDM96xyT6M2WYQaNChK6UwKkA9FH0ZoLfBVQf8ROdzHr5Bv66Thu9cz7wegj2sE1ApbA5I9b
- fQupzN4v8FqV2Gl3o8YhHAsXsZBl6xO4k6ulyz+kqhHgeGXP/Jxn2aK2XSPX83tbRlDTL6qaU+s
- Y6x+OAxZh6NOWw0z8PdvrMSEKfqhi6jZjhtgTa4ZC+AC2t50sVwevYs3tx4ulFQ60DV+pFLLz5Q
- WRZ5gg9hA4j7cJ9ridw==
-X-Proofpoint-GUID: CSu4ejbi6LnOL1tM1jyWzeJlAk0lPEaO
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=qvZ195YzLHTVefmX5ZYA:9 a=QEXdDO2ut3YA:10
+ a=324X-CrmTo6CU4MGRt3R:22
+X-Proofpoint-GUID: _spj1XZeD_CFvH4-a-vl2REQc_TCGnMJ
+X-Proofpoint-ORIG-GUID: _spj1XZeD_CFvH4-a-vl2REQc_TCGnMJ
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDIxMDEzMCBTYWx0ZWRfX6oceElS4jolS
+ KUDmzd0mBrkWnAyuh6fzBuz19UJFjHey6Hj7k4vAxrMc2rSJ35byjURuGykSQnnBvo76LrdsfT3
+ BseYhJSpgIfUCMAtzoE5HzOweRrY9iuAx9nt2uuTGyy5Yk5AyNRIis0xie59EgMih36zsPcl8va
+ 2YBmE2jXAp05bynTTGDuOmerFFa5eGU8UPjrmLZrx9zD/KCLBrvYDe1hfAH6YB/FfCu9L9Z9Ec2
+ f/xTU5QFAG0FugUgkRhRJ/I0h+kVQnItZ9kAPLAcWlt5ZJxA6E7RVYearRdYsP1L7CjeiYh2drd
+ U6dEhAtbzMsyXTlMcuQSctDAD20/ygmOlK4btDECivDB0fqVVN0OUq8L/Em5kndLLXBnX5SZqOD
+ MGgXhw8JCYQYmPGcVrWXsisUjEVnd4qKWEZyT/fKuFP7Vep5VFGhlNfmwSV9AmQTUuYLKXdmkv0
+ zQCrBnFnzS0cchjZhLQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-04-21_02,2026-04-20_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 phishscore=0 clxscore=1015 spamscore=0 malwarescore=0
- bulkscore=0 suspectscore=0 impostorscore=0 adultscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2604070000 definitions=main-2604210130
+ clxscore=1015 priorityscore=1501 phishscore=0 malwarescore=0
+ lowpriorityscore=0 impostorscore=0 bulkscore=0 suspectscore=0 adultscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2604070000
+ definitions=main-2604210130
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -163,57 +166,92 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 4/13/2026 3:15 PM, Sumit Garg wrote:
-> On Tue, Mar 24, 2026 at 11:22:35AM +0530, Balaji Selvanathan wrote:
->> The block device removable flag should reflect whether the MMC
->> device is physically removable (SD card) or soldered (eMMC). This
->> information is specified in the device tree via the "non-removable"
->> property and stored in the MMC_CAP_NONREMOVABLE capability flag.
+On 3/24/2026 5:32 PM, Jonas Karlman wrote:
+> Hi,
+>
+> On 3/24/2026 6:52 AM, Balaji Selvanathan wrote:
+>> Some SDHCI controllers have limitations on maximum transfer sizes
+>> and can timeout on large block operations.
 >>
->> Update the removable flag in the block device descriptor after
->> successful MMC initialization to properly reflect the device's
->> removable status. This allows the block layer and upper layers to
->> distinguish between eMMC and SD cards for appropriate handling.
+>> Break large read and write operations into chunks of 16384 blocks
+>> to stay within controller limits. This prevents timeout errors during
+>> large file transfers on FAT filesystems while maintaining
+>> compatibility with all platforms.
 >>
->> The default removable=1 is set in mmc_bind(), and this change
->> overrides it only for non-removable devices after confirming
->> successful initialization.
+>> This patch builds on top of the work from:
+>> https://lore.kernel.org/u-boot/20260224035000.1617869-1-varadarajan.narayanan@oss.qualcomm.com/
 >>
 >> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 >> ---
->>   drivers/mmc/mmc-uclass.c | 5 +++++
->>   1 file changed, 5 insertions(+)
+>>   fs/fat/fat.c | 29 ++++++++++++++++++++---------
+>>   1 file changed, 20 insertions(+), 9 deletions(-)
 >>
->> diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
->> index 698530088fe..b218c69b494 100644
->> --- a/drivers/mmc/mmc-uclass.c
->> +++ b/drivers/mmc/mmc-uclass.c
->> @@ -507,6 +507,7 @@ static int mmc_blk_probe(struct udevice *dev)
->>   	struct udevice *mmc_dev = dev_get_parent(dev);
->>   	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(mmc_dev);
->>   	struct mmc *mmc = upriv->mmc;
->> +	struct blk_desc *bdesc = dev_get_uclass_plat(dev);
->>   	int ret;
+>> diff --git a/fs/fat/fat.c b/fs/fat/fat.c
+>> index 85b511f75af..6ec241af584 100644
+>> --- a/fs/fat/fat.c
+>> +++ b/fs/fat/fat.c
+>> @@ -30,6 +30,9 @@
+>>   /* maximum number of clusters for FAT12 */
+>>   #define MAX_FAT12	0xFF4
 >>   
->>   	ret = mmc_init(mmc);
->> @@ -515,6 +516,10 @@ static int mmc_blk_probe(struct udevice *dev)
->>   		return ret;
->>   	}
+>> +/* maximum blocks per read/write to avoid SDHCI timeout */
+>> +#define MAX_BLOCKS_PER_TRANSFER 16384
+>> +
+>>   /*
+>>    * Convert a string to lowercase.  Converts at most 'len' characters,
+>>    * 'len' may be larger than the length of 'str' if 'str' is NULL
+>> @@ -136,18 +139,26 @@ static int disk_rw(__u32 sect, __u32 nr_sect, void *buf, bool read)
+>>   	if (rem > blksz) {
+>>   		n = rem / blksz;
 >>   
->> +	/* Update removable flag based on device capabilities */
->> +	if (mmc->cfg->host_caps & MMC_CAP_NONREMOVABLE)
->> +		bdesc->removable = 0;
-> Looking at other MMC drivers, this update happens in platform specific
-> driver. Check if this rather belongs to msm_sdhci.c.
+>> -		if (read)
+>> -			ret = blk_dread(cur_dev, start + s, n, buf);
+>> -		else
+>> -			ret = blk_dwrite(cur_dev, start + s, n, buf);
+>> +		/* Break large reads/writes into chunks */
+>> +		while (n > 0) {
+>> +			__u32 transfer_count = (n > MAX_BLOCKS_PER_TRANSFER) ? MAX_BLOCKS_PER_TRANSFER : n;
+> Have you tried to configure SYS_MMC_MAX_BLK_COUNT=16384 for your
+> platform, or otherwise set b_max in your mmc driver?
 >
-> -Sumit
+> That should cause similar max blocks handling at a the mmc-uclass level.
+>
+> Regards,
+> Jonas
 
-Hi Sumit,
+Hi Jonas,
 
-Thanks for the feedback, moved the codes to msm specific codes in v2: 
-https://lore.kernel.org/u-boot/20260421-emmc-v2-0-0ebd3322b676@oss.qualcomm.com/
+Thanks for the feedback. Addressed this in v2: 
+https://lore.kernel.org/u-boot/20260421-emmc-v2-0-0ebd3322b676@oss.qualcomm.com/.
 
 Thanks,
 
 Balaji
 
+>
+>>   
+>> -		if (ret != n) {
+>> -			ret = -1;
+>> -			goto exit;
+>> +			if (read)
+>> +				ret = blk_dread(cur_dev, start + s, transfer_count, buf);
+>> +			else
+>> +				ret = blk_dwrite(cur_dev, start + s, transfer_count, buf);
+>> +
+>> +			if (ret != transfer_count) {
+>> +				ret = -1;
+>> +				goto exit;
+>> +			}
+>> +
+>> +			buf += transfer_count * blksz;
+>> +			s += transfer_count;
+>> +			n -= transfer_count;
+>>   		}
+>> -		buf += n * blksz;
+>> +
+>>   		rem = rem % blksz;
+>> -		s += n;
+>>   	}
+>>   
+>>   	/* Do part 3, read a block and copy the trailing sectors */
+>>
