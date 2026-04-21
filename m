@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8ECAF94CB0
-	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 21:11:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F857F94CA7
+	for <u-boot@archiver.kernel.org>; Tue, 21 Apr 2026 21:11:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43C9784366;
+	by phobos.denx.de (Postfix) with ESMTP id 8567784372;
 	Tue, 21 Apr 2026 23:10:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="EXZ5qXZT";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="G4srwqH2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E242839D5; Tue, 21 Apr 2026 23:10:19 +0200 (CEST)
-Received: from PAUP264CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170110002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::2])
+ id 1C510842BF; Tue, 21 Apr 2026 23:10:21 +0200 (CEST)
+Received: from MRZP264CU002.outbound.protection.outlook.com
+ (mail-francesouthazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D07E98429E
+ by phobos.denx.de (Postfix) with ESMTPS id 0BB5F84312
  for <u-boot@lists.denx.de>; Tue, 21 Apr 2026 23:10:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=softathome.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=philippe.reynes@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nWUELoyRVTvOjn6046+rkAF/od/qk8YBLDHECkK5AFqRM46uhUN2eWuNMJgf5O8gBkOQAc1SVDj4ddJILCvLxbUIXI6cYU+QufisRneppV9jkhJqRoW0cJKdsLT5RC3GBZdSpx/ZCYDXz3OeTj0eM8yNrXj4OIe3j1gV/7kVmR7Uiu/v3HGRhJuloGzDVMZqgaZEozLrDUYOLegkdeOAYAyTs5XwUDiOo2pbN5RcffA3A96CCAJOpNUilQ3zu4PEL/NuQqhCdqAg1sxkyIBGvJGUplbv8MIwoEfDJz3U8XaFtPVJqfuAuFoBRdYFKkVve6aec+5F9wQlRjityx7orA==
+ b=PGHe3TNhf2WLbKervcEzkzhaVgQtNrdEr5AnX+XpnZ3TW1zDNdRH12Kd+3dqh4WBqUZHf4telI2s+2m+wdGfNWrS5R3Dgcg7LYlXfkujc8bDyX8oZEy9UX4lZAy6EQbSRrl0k8u55rYAtAG6gKcrc+IDZqBuwEzDn3IM4PXKUeCQVBC8aVOKLo1c+p97vvCNk8hlehKu3i1PV0algf7Tm81j4MzfQ8xRGjYAj+4ZlZVgucM3yYOPTYRJh+yzTPM/zvWAtCVg88vPBepiytRKLX/GjS1SjfHX8W42bSww5Xv9TveKOup4Uu6tyZfdxqqsKTbBFrmQ3YQH9cmEWFGkXg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uxQjTm9TohyVkMDfkVgQzYNnyWmqmfMYEnoQXCk0vwQ=;
- b=J+/roPlNuE/OnzpuXQB4awJx9BF1hzKkKcBCoD1PqAF1ZLd1DFBdKshIXRKSTKHN0oCCm6tCTnE5YCQxEQ3Ha7frW5Lco1jghv4vx6DEwDpcOUIzlLGx93nq1QcFQwhwqd0S1tU/eCJU7oz0GSlOB+PExY7307rEyxohyPtn6NT/BkGasISEFQW4n2T3sZZG0JjddiKUZ8+J4vRA73dr/hrUi52WAify+zDGOJ6oLB5m1xNxAwIXmng7F5RfwWJP1BfWsDBgfo78ZuiVFSko6g3p+VaW9pgUffO4/kJjKtUB1j9oegaTvti0sKA3eNIz0iEoLiZ3PBaR5QWqkYU8GA==
+ bh=Dr/RJDlIwOgbzo2FuG2y32m9/VNZMixg3oZwyteZxBI=;
+ b=ntERADwf5OMUlFfP4J8VhxChdfcghPXuWouMBfNru+l9l14lU8Dnl6d6q6GRSfRNWy7soBtlj96NzY9GKFpOEnfkgsYwA3Gt9aCekD4Fxu4c6AuxNL6nAt+9y3ihZbz0wXvmKB6GFybIU3FCgdGsakbgzrZfWYdwcB8OS1OAWHsY7JLOeAtYNpim7EwKVtuFmbP/JRMauUaYNB6MzEdIcOcDUcEMEbJaNtpsk17O+WfY1IbDz2vjYj5T7+B+REz1Tpr1gQT3Nf8GYX5VPjFaho4DIGPt9kn5zeVKTIOwtY1ntCaVeMezVT73bgHQ1121WPpFzA06hF/dfU9L/AeQKA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=canonical.com smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -41,18 +41,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uxQjTm9TohyVkMDfkVgQzYNnyWmqmfMYEnoQXCk0vwQ=;
- b=EXZ5qXZT7HEtRxtHvnFwz0E56O9Za2YJ3LI7Y5Ra/UrcYrJY9kIMzFwKzCcaC9UFPKkwfMmld9ldbkbeLdij8rUq9XHIlEu3JUD7BEaK5G4lI0qz/m/lK7JO3AaCYfcko90m5kwzzrDLkpFLeX5gXKsYd8Sd1SkTtMrUI2uKOj2XlEWFUlO27aQTBGtp3g4EURMGehkKfSSWgGEbZYKV1+doD7OUPLDa42yksb91g/joSimT80hm4aDLq1Rt3WQSF/S9SrIff15aewyM7AJ6HkYAbXoDVtKqVgwgmg7QIOoqI6JByUvSnUxVjcZdelVHavEy0wl7fqWr1h8lK8rVLg==
-Received: from PA7P264CA0038.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:34b::14)
- by PAZP264MB2447.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1f1::21)
+ bh=Dr/RJDlIwOgbzo2FuG2y32m9/VNZMixg3oZwyteZxBI=;
+ b=G4srwqH2mwq/LMdfejGbAcQi+9adu9+bBZTunANg1fTsEYBDWQ/Ngpi7buYTpKyePgBrze6Y2KKGKrHFs3Oxt277hyKYR9LcEUkskIBNu3GZXII/Yhy9G0YE8nTqiVcY8lT28snEXiOvyVjoy9m8O700LY8LYibK4hqQTmfZu+01e0Sb3h8VWr4ffLuQfpH2ej9EvOmMeM8stu523rTuWEnOTStt8EtQBsC3KTSsRwuf4n96rY2RR6xBB8lrgHGJ31kMaK07fivsxwtIVu8I2cD3tYvdCnDEJctWnOh/1xqxw1CmPsGqHXVqLiXxNNMTyE7DAsNDMBv471Oez6AAHQ==
+Received: from PA7P264CA0025.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:2df::12)
+ by PAZP264MB2880.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1e5::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.16; Tue, 21 Apr
- 2026 21:09:57 +0000
-Received: from PA3PEPF000089BA.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:34b:cafe::43) by PA7P264CA0038.outlook.office365.com
- (2603:10a6:102:34b::14) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 21:09:58 +0000
+Received: from PA1PEPF000CC3F9.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:2df:cafe::2b) by PA7P264CA0025.outlook.office365.com
+ (2603:10a6:102:2df::12) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9791.48 via Frontend Transport; Tue,
- 21 Apr 2026 21:09:57 +0000
+ 21 Apr 2026 21:09:58 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
  smtp.mailfrom=softathome.com; dkim=none (message not signed)
  header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
@@ -61,21 +61,20 @@ Received-SPF: Pass (protection.outlook.com: domain of softathome.com
  receiver=protection.outlook.com; client-ip=149.6.166.170;
  helo=proxy.softathome.com; pr=C
 Received: from proxy.softathome.com (149.6.166.170) by
- PA3PEPF000089BA.mail.protection.outlook.com (10.167.242.22) with Microsoft
+ PA1PEPF000CC3F9.mail.protection.outlook.com (10.167.242.4) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9846.18
- via Frontend Transport; Tue, 21 Apr 2026 21:09:57 +0000
+ via Frontend Transport; Tue, 21 Apr 2026 21:09:58 +0000
 Received: from sah1lpt726.softathome.com (unknown [192.168.72.32])
- by proxy.softathome.com (Postfix) with ESMTPSA id 541E920EC2;
- Tue, 21 Apr 2026 23:09:57 +0200 (CEST)
+ by proxy.softathome.com (Postfix) with ESMTPSA id 17ABF20EC2;
+ Tue, 21 Apr 2026 23:09:58 +0200 (CEST)
 From: Philippe Reynes <philippe.reynes@softathome.com>
 To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
  trini@konsulko.com, simon.glass@canonical.com
-Cc: u-boot@lists.denx.de,
-	Philippe Reynes <philippe.reynes@softathome.com>
-Subject: [PATCH v5 06/15] test: dm: ecdsa.c: clean this test as software ecdsa
- is now implemented
-Date: Tue, 21 Apr 2026 23:09:45 +0200
-Message-ID: <20260421210954.1170437-7-philippe.reynes@softathome.com>
+Cc: u-boot@lists.denx.de, Philippe Reynes <philippe.reynes@softathome.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v5 13/15] tools: preload_check_sign: add support of ecdsa
+Date: Tue, 21 Apr 2026 23:09:52 +0200
+Message-ID: <20260421210954.1170437-14-philippe.reynes@softathome.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260421210954.1170437-1-philippe.reynes@softathome.com>
 References: <20260421210954.1170437-1-philippe.reynes@softathome.com>
@@ -83,30 +82,30 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PEPF000089BA:EE_|PAZP264MB2447:EE_
+X-MS-TrafficTypeDiagnostic: PA1PEPF000CC3F9:EE_|PAZP264MB2880:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 0a208658-3a65-48d9-79ec-08de9fea57b6
+X-MS-Office365-Filtering-Correlation-Id: d0bb8d74-fea4-4c69-d665-08de9fea581f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|36860700016|376014|82310400026|1800799024|18002099003|56012099003|22082099003;
-X-Microsoft-Antispam-Message-Info: g0h9aWGZwqaPGMGTnFrhwryd8FkuMYgPizKN0Uby8m4Rz/cDCG13+I+yFTo8rG9Wiwol01U5h7RuFbsAAhzrHUXNLTgOWu8vKyZMcg0zJtPaCnoNVLijB97VVPKcUgPZclQWxnpsqThNuV8MT0tArkkRppFmautBb8NMh5YLOn56cYUdY/J4T40VP577BK/DM66iRBpmKT8UAeyCYLaRF9KF7YweT6b793IeGXfZ44TqG3K519ZawvwHjDz/lTvRaPBtDh6Rgrw/jE+HOkfi4No/LHP5ZSviE60Dlse8NEvecTYsV7R0G3LjW0PxCKYGEum7vYMjJ8iEc9diJGHIy4Q/RWZU3rhyUwsNYwfgPgtY3+AXWPXWXGvBvuLPeB6EKNH6H/lfl3YTjorAlC2NkL0nK17HQleLhDMftJTUuD+r+UI50OoBfiXwr7qiYF30yEdN9FM49/MKQG8Bi8kZIEQldnkdFe/AGL1uvH8gAOsKVjR9YjW4fJn/c65p/G+O2MHXigJDaixbsI87lAa6xq8fFQiZauiOsolz81HDEKSf7QSB//fAOsMLqgzhkhoJTt58xluIyinDd7v4PUgBUv3jEaDqJdN+RyhMf5bN1OKg/YLSvfVAbNSvb9opDioBUwhSfvmkdyVRf6iQ8W9d/xqrrrWuAhMRWfQxFXTO1GntfTCKXDMC3USv1Nr7Cx7ISDFnwQ2q+9Mh7FQ3n9UI8hZdsy0Gcm8Z0prkZ0k2343hHleRdbsfwKWb3dUEIRUHAlQLS8lK2RfUoygo3+/g5A==
+X-Microsoft-Antispam-Message-Info: kCVGRW9l/bYpEqM+DCw1DaW2CHVmgaH9Ob9YnLbqGRhrAsdUcNhgiNfv+Q8YpBNY8Ok34C3pJjTbtrW643VrHkM9+ZGGKIqL+8wy7BOAJMgS9c2Fqlo+6zalopgvmvk8V6jlUloGYOIoprMVKnphJtowg7zj4/ncWBnX1ta3qN0XeX276lVBsIOIBjGHTSGsoYnQYVsc3IHQ7p4x0DLVwrr476XnrdwqARbshZ1y5CZlTHiMctPm+nSJhQ+aciOPu5hCP4sRg+ZbGWoMQmD/5dg9ZlpXwYLEshTZWIx4AJEtwobap32dbAI5rO+cKZLMuLtpzFGUetT3nEXfNLj8Abrlwww1EqJuxHX61JcWq5C0Uh7+39OGF23qWwF+ZnRrIV9S7/6fszLNbkm/QSjTOv6m0AfTPQv+5E1j8JQxG6s5t1MC96IXP7YsIk9cd+1lXWzxi5E0GtWpnAS6b7hDPvksYs41NZa4GxCBdkRcVCPD16nZooS/5dNrVFRsxFBWnssyLqPQnrjPAfrqyq6WvuqbaJndEXCKrQWDGHePfwWmCiIshm12m5ynDnyH9Iyvi2U8JIYNTAjRH6ofoVeBMitWuUkFs/bTrhKnWHaBay1RKf4bsSJEIS7i6Ibl9oXvnLie0h6c5lw78ym44MNDOw/U9ey/r5WoAtg1awXPHj7rChEEP2/RQGTJ4FVfH5/EmJNVDkJIrY1QHxV/3pmPJBkuXwQcR+gOExttbhoz+RzECvFKRUezHmQoxzTz2ug4dTUGhPHE+0/oOBX2FMEu6w==
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
  SFS:(13230040)(36860700016)(376014)(82310400026)(1800799024)(18002099003)(56012099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: dWzoAR4d0BT0kyLgjVbJ1VFl9ehNvQNV7IknFUVITQQS8Xioxh1YBib/N3kkJKNK1QBTePLILl5+67X1OgGXXrcS1gWZC5npMezsE6dtqdeNRIjOB8HvrF9TTWViI/3DOqGi3QyYSGHaeWPa0RKZdjoq/SHNHywy+vSc4DQStNBs/+fyMJ+NP57WH69uF+K+TqpIseZVqG9xo8Usdrch4rD9QGcjKc+weEuDUJihQvvvEUqgHe+3Ep06Q/GIxiXKu+FdHx0VL2L/eTQazKMl+OCLkDhzXxPM/eKhzQ5+38j/jGXdJCTwx7pOF4MyqatNbTShA1+ruYRT0l8sBGUDW37AzjY7MQGl0xVQbZKzcCc042928uTXxbbKBnsG8KpLIMkIfDpEKBKX7SQCNsE4VqaDdaGxYoPWcdJZyQPYDA5LJMdEYns0KJ3nIhrZP6cw
+X-MS-Exchange-AntiSpam-MessageData-0: 67keCjyUF4mL7zJk17zC5yh4qPISHwsAejtKCRsta83HJqiaRklkY6HpznHuWQSaY8GT9D5VdR9gcfDBcu67zu2wn+PGJgq9lfNtgEZedeH3brXAJEQYwGK9zf7d5DziO3maohkM1Ym6BmbMCYVV7BQUMPz9ps8Pk+Tig7NoFkBTjNOjZgAlftMHbtfYcPbCeDBfQmPLstC50TK2oPYtze9jntXnqB8qzDowzgfoKh+e4jFUHmtsOIh7Np/1Dc8cZLhsj2uYHJVeswqFDV+wJIl86eZ22i/bNkfm+uvyfA3NMbL2os71xgqELKbuKq5bXIWASS2Cg7DNjmVpd1lz/jXPWo6nyf8Yh0szD+vHzxsyF9yZICqEe6moIHFOXBMzczw3+jNSP+TVFfcJc+RkLykV6unRWhmCZr4d5NBTcTyKC3HcI8BZqUopGRyclIhN
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 21:09:57.5848 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0a208658-3a65-48d9-79ec-08de9fea57b6
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2026 21:09:58.2372 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d0bb8d74-fea4-4c69-d665-08de9fea581f
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: PA3PEPF000089BA.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: PA1PEPF000CC3F9.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAZP264MB2447
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAZP264MB2880
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,165 +122,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The test ecdsa was done when ecdsa was only supported by hardware.
-So it wasn't possible to test ecdsa on sandbox, and there is a test
-to check that ecdsa is not supported on sandbox.
-Now, there is a software implementation of ecdsa. So we remove
-this outdated test.
+right now, the tool preload_check_sign may only
+checks an image with a pre-load header with rsa.
+We add the support of pre-load header with ecdsa.
 
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 ---
-v2:
-- initial version
 v3:
-- no change
+- initial version
 v4:
-- add a test that use ecdsa_verify
+- free key to avoid mem leak
+- fix error management (set ret before goto out)
 v5:
-- change secp256r1 to ecdsa256
-- check that checksum and crypto are not null
+- add include ec.h, evp.h, err.h and image.h
 
- test/dm/ecdsa.c | 107 +++++++++++++++++++++++++++++++++++++++++++-----
- 1 file changed, 97 insertions(+), 10 deletions(-)
+ tools/preload_check_sign.c | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
 
-diff --git a/test/dm/ecdsa.c b/test/dm/ecdsa.c
-index d7eac7115f7..1e9d5148400 100644
---- a/test/dm/ecdsa.c
-+++ b/test/dm/ecdsa.c
-@@ -3,36 +3,123 @@
- #include <crypto/ecdsa-uclass.h>
- #include <dm.h>
- #include <dm/test.h>
-+#include <malloc.h>
- #include <test/ut.h>
- #include <u-boot/ecdsa.h>
- 
-+#define CHECK(op) ({							\
-+		int err = op;						\
-+		if (err < 0) {						\
-+			printf("%s: %s: %s\n", __func__, #op,		\
-+			       fdt_strerror(err));			\
-+			return err;					\
-+		}							\
-+									\
-+		err;							\
-+	})
-+
-+static int set_fdt_ecdsa_point(char *fdt, char *name, const char *data, size_t len)
-+{
-+	char *value = NULL;
-+	int ret = 0;
-+
-+	if (!fdt || !name || !data) {
-+		ret = -EINVAL;
-+		goto out;
-+	}
-+
-+	value = malloc(len / 2);
-+	if (!value) {
-+		ret = -EINVAL;
-+		goto out;
-+	}
-+
-+	ret = hex2bin(value, data, len / 2);
-+	if (ret)
-+		goto out;
-+
-+	ret = fdt_property(fdt, name, value, len / 2);
-+	if (ret)
-+		goto out;
-+
-+ out:
-+	free(value);
-+	return ret;
-+}
-+
-+static int create_fdt_with_ecdsa_key(char *fdt, size_t size,
-+				     const char *name, const char *curve,
-+				     const char *x, const char *y)
-+{
-+	CHECK(fdt_create(fdt, size));
-+	CHECK(fdt_finish_reservemap(fdt));
-+	CHECK(fdt_begin_node(fdt, ""));
-+	CHECK(fdt_begin_node(fdt, "signature"));
-+	CHECK(fdt_begin_node(fdt, name));
-+	CHECK(fdt_property_string(fdt, "algo", "sha256,ecdsa256"));
-+	CHECK(set_fdt_ecdsa_point(fdt, "ecdsa,y-point", y, strlen(y)));
-+	CHECK(set_fdt_ecdsa_point(fdt, "ecdsa,x-point", x, strlen(x)));
-+	CHECK(fdt_property_string(fdt, "ecdsa,curve", curve));
-+	CHECK(fdt_property_string(fdt, "key-name-hint", name));
-+	CHECK(fdt_end_node(fdt)); /* name */
-+	CHECK(fdt_end_node(fdt)); /* "signature" */
-+	CHECK(fdt_end_node(fdt)); /* "" */
-+	CHECK(fdt_finish(fdt));
-+	CHECK(fdt_pack(fdt));
-+
-+	return 0;
-+}
-+
- /*
-  * Basic test of the ECDSA uclass and ecdsa_verify()
-  *
-- * ECDSA implementations in u-boot are hardware-dependent. Until we have a
-- * software implementation that can be compiled into the sandbox, all we can
-- * test is the uclass support.
-+ * ECDSA software implementation is tested in another test,
-+ * so we only check that the class UCLASS_ECDSA may be used.
-  *
-- * The uclass_get() test is redundant since ecdsa_verify() would also fail. We
-- * run both functions in order to isolate the cause more clearly. i.e. is
-- * ecdsa_verify() failing because the UCLASS is absent/broken?
-+ * The data used in this test come from RFC6979
+diff --git a/tools/preload_check_sign.c b/tools/preload_check_sign.c
+index ebead459273..d94f0509e74 100644
+--- a/tools/preload_check_sign.c
++++ b/tools/preload_check_sign.c
+@@ -8,9 +8,13 @@
+  * complete file. The tool preload_check_sign allows to verify and authenticate
+  * a file starting with a preload header.
   */
- static int dm_test_ecdsa_verify(struct unit_test_state *uts)
- {
- 	struct uclass *ucp;
-+	const char *full_name = "sha256,ecdsa256";
-+	const char *name = "key-ecdsa-256";
-+	const char *curve = "prime256v1";
-+	const char *x = "60FED4BA255A9D31C961EB74C6356D68C049B8923B61FA6CE669622E60F29FB6";
-+	const char *y = "7903FE1008B8BC99A41AE9E95628BC64F2F1B20C2D7E9F5177A3C294D4462299";
-+	const char *r = "EFD48B2AACB6A8FD1140DD9CD45E81D69D2C877B56AAF991C34D0EA84EAF3716";
-+	const char *s = "F7CB1C942D657C41D436C7A1B6E29F65F3E900DBB9AFF4064DC4AB2F843ACDA8";
-+	uint8_t sig[64];
-+	size_t fdt_size = 512;
-+	char fdt[512];
- 
--	struct checksum_algo algo = {
--		.checksum_len = 256,
-+	struct image_region region[] = {
-+		{
-+			.data = "sample",
-+			.size = strlen("sample"),
-+		},
- 	};
- 
- 	struct image_sign_info info = {
--		.checksum = &algo,
-+		.checksum = image_get_checksum_algo(full_name),
-+		.crypto = image_get_crypto_algo(full_name),
-+		.fdt_blob = fdt,
- 	};
- 
-+	ut_assertnonnull(info.checksum);
-+	ut_assertnonnull(info.crypto);
 +
-+	/* create a fdt with the public key */
-+	ut_asserteq(0, create_fdt_with_ecdsa_key(fdt, fdt_size, name, curve, x, y));
++#define OPENSSL_API_COMPAT 0x10101000L
 +
-+	/* prepare the signature */
-+	ut_asserteq(0, hex2bin(sig +  0, r, strlen(r) / 2));
-+	ut_asserteq(0, hex2bin(sig + 32, s, strlen(s) / 2));
-+
- 	ut_assertok(uclass_get(UCLASS_ECDSA, &ucp));
- 	ut_assertnonnull(ucp);
--	ut_asserteq(-ENODEV, ecdsa_verify(&info, NULL, 0, NULL, 0));
-+	ut_asserteq(0, ecdsa_verify(&info, region, 1, sig, sizeof(sig)));
+ #include <stdio.h>
+ #include <unistd.h>
+ #include <openssl/pem.h>
++#include <openssl/ec.h>
+ #include <openssl/evp.h>
+ #include <openssl/err.h>
+ #include <image.h>
+@@ -144,6 +148,32 @@ int main(int argc, char **argv)
+ 	info.sig_info.key      = info.key;
+ 	info.sig_info.keylen   = info.key_len;
  
- 	return 0;
- }
++	/* For ecdsa key, we have to update some values */
++	if (EVP_PKEY_id(pkey) == EVP_PKEY_EC) {
++		EC_KEY *ecdsa_key;
++		const EC_GROUP *group;
 +
- DM_TEST(dm_test_ecdsa_verify, UTF_SCAN_PDATA | UTF_SCAN_FDT);
++		ecdsa_key = EVP_PKEY_get1_EC_KEY(pkey);
++		if (!ecdsa_key) {
++			fprintf(stderr, "Can not extract ECDSA key\n");
++			ret = EXIT_FAILURE;
++			goto out;
++		}
++
++		group = EC_KEY_get0_group(ecdsa_key);
++		if (!group) {
++			fprintf(stderr, "Can not extract ECDSA group\n");
++			EC_KEY_free(ecdsa_key);
++			ret = EXIT_FAILURE;
++			goto out;
++		}
++
++		info.sig_info.keyfile  = keyfile;
++		info.sig_size          = (EC_GROUP_order_bits(group) + 7) / 8 * 2;
++
++		EC_KEY_free(ecdsa_key);
++	}
++
+ 	/* Check the signature */
+ 	image_pre_load_sig_set_info(&info);
+ 	ret = image_pre_load_sig((ulong)buffer);
 -- 
 2.43.0
 
